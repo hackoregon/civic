@@ -35,6 +35,7 @@ const demoCode = () => {
     }
   }
 
+  // NOTE - ONLY return block will be documented as src - find out how to show above code
   return (<CustomSlider />);
 };
 
