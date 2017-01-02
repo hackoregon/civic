@@ -1,8 +1,8 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
-import { SliderBox } from '../components';
+import { Slider } from '../components';
 
-const displayName = SliderBox.displayName || 'SliderBox';
+const displayName = Slider.displayName || 'Slider';
 const title = 'Simple usage';
 const description = `
   This is some basic usage with the slider component as built for Raise Effect, updated with changes for latest rc-slider. Due to the nature of the component, a higher order component is required to contain local state.
@@ -24,7 +24,7 @@ const demoCode = () => {
     render() {
       return (
         <div className="slider-container">
-          <SliderBox
+          <Slider
             min={0}
             max={100}
             value={this.state.value}
@@ -38,7 +38,7 @@ const demoCode = () => {
   return (<CustomSlider />);
 };
 
-const propDocs = { inline: true, propTables: [SliderBox] };
+const propDocs = { inline: true, propTables: [Slider] };
 
 export default () => storiesOf(displayName, module)
   .addWithInfo(

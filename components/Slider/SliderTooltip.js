@@ -12,5 +12,6 @@ const SliderTooltip = ({ value }) => (
       </ul>
     </div>
   </div>
-    );
+);
+
 export default SliderTooltip;

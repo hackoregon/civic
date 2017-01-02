@@ -3,7 +3,7 @@ import StoryCard from './StoryCard/StoryCard';
 import Chart from './Chart/Chart';
 import ChartData from './ChartData/ChartData';
 import Pie from './Pie/Pie';
-import SliderBox from './Slider/SliderBox';
+import Slider from './Slider/Slider';
 
 export {
   Button,
@@ -11,5 +11,5 @@ export {
   Chart,
   ChartData,
   Pie,
-  SliderBox,
+  Slider,
 };
