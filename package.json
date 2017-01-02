@@ -29,6 +29,7 @@
   "dependencies": {
     "classnames": "2.2.5",
     "d3": "3.5.6",
+    "rc-slider": "^5.4.0",
     "react": "15.4.1",
     "react-addons-transition-group": "15.4.1",
     "react-dom": "15.4.1",

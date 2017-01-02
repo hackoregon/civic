@@ -4,6 +4,7 @@ import buttonStory from './Button.story';
 import storycardStory from './StoryCard.story';
 import editableStory from './Editable.story';
 import pieStory from './Pie.story';
+import sliderStory from './Slider.story';
 import Welcome from './Welcome';
 
 import '../components/global.styles.css';
@@ -19,3 +20,4 @@ editableStory();
 buttonStory();
 storycardStory();
 pieStory();
+sliderStory();
