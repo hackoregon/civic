@@ -1,0 +1,28 @@
+li a {
+    display: block;
+    /*padding: 1rem 0;*/
+}
+
+.NavRouterLink {
+    color: #000;
+    /*flex: 1;*/
+    font-family: 'Lato', 'OpenSans', sans-serif;
+    text-decoration: none;
+    padding: 1rem 0;
+    /*line-height: 2rem;*/
+}
+
+.NavRouterLink:focus {
+    color: #000;
+}
+
+.NavRouterLink:hover {
+    color: #fff;
+    background-color: #000;
+    text-decoration: none;
+}
+
+.NavRouterLink:active {
+    color: #000;
+    background-color: #fff;
+}
