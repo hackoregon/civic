@@ -12,8 +12,10 @@ const Button = ({ children, onClick }) => (
   </button>
 );
 
+Button.displayName = 'Button';
+
 Button.propTypes = {
-  children: React.PropTypes.string.isRequired,
+  children: React.PropTypes.string,
   onClick: React.PropTypes.func,
 };
 
