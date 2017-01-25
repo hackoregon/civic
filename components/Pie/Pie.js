@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { TransitionMotion, Motion, spring } from 'react-motion';
 import d3 from 'd3';
+import './Pie.css';
 
 const willLeaveStyle = ({ style }) => ({
   ...style,

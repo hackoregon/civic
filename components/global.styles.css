@@ -158,13 +158,22 @@ h6,
 }
 
 a {
+  color: #ee4950;
   text-decoration: none;
   cursor: pointer;
+  border-bottom: 2px solid;
+  opacity: 0.9;
+  transition: all .25s ease-in-out;
 }
 
-/* Typography */
+a:hover {
+  color: #ee4950;
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 1;
+}
 
-/* Global Styles */
+/* Global Styles from product_design */
 
 /* Typography */
 
