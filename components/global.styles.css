@@ -1,5 +1,7 @@
 @import 'https://fonts.googleapis.com/css?family=Lato:300,400|Raleway:300,400|Open+Sans:300,400,600,800';
 
+@import url('https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i,900,900i');
+
 html {
   font-size: 14px;
   line-height: 1.4;
@@ -35,6 +37,10 @@ html {
   text-decoration: underline;
 }
 
+.FilsonSoft {
+  font-family: "filson-soft", sans-serif;
+}
+
 .Lato, .panel {
   font-family: "Lato", sans-serif;
 }
@@ -43,6 +49,10 @@ html {
 }
 .OpenSans {
   font-family: "Open Sans", sans-serif;
+}
+
+.Merriweather {
+  font-family: "Merriweather", serif;
 }
 
 body {
@@ -148,6 +158,32 @@ h6,
 }
 
 a {
+  color: #ee4950;
   text-decoration: none;
   cursor: pointer;
+  border-bottom: 2px solid;
+  opacity: 0.9;
+  transition: all .25s ease-in-out;
+}
+
+a:hover {
+  color: #ee4950;
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 1;
+}
+
+/* Global Styles from product_design */
+
+/* Typography */
+
+h1 {
+  font-family: "filson-soft", sans-serif;
+  font-size: 2em;
+  font-weight: 700;
+}
+
+p {
+  font-family: "Merriweather", serif;
+  font-size: 1em;
 }

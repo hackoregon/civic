@@ -13,3 +13,15 @@ li {
 ul li {
   flex: 1 1 100%;
 }
+
+.Header a {
+  font-family: 'filson-soft', sans-serif;
+  font-size: 1.25em;
+  border: none;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.Header a:hover {
+  border: none;
+}
