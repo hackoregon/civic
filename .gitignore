@@ -4,6 +4,6 @@ coverage
 .lock-wscript
 node_modules
 reports
-dist
+build
 .idea
 .DS_Store
