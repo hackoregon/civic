@@ -16,7 +16,6 @@ export function checkStore(store) {
   ]);
 
   for (const [key, value] of source) { // eslint-disable-line
-    console.log(store[key]);
     if (!value(store[key])) {
       invariant(false,
         `(app/utils...) asyncInjectors: Expected a valid redux store. Check ${key}.`,

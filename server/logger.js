@@ -10,11 +10,11 @@ module.exports = {
     console.error(chalk.red(err));
   },
   appStarted: (port) => {
-    console.log(`Server up ${chalk.green('✓')}`);
+    console.log(`Server ready ${chalk.green('✓')}`);
     console.log(`
-${chalk.bold('Access URLs:')}
 ${divider}
-Localhost: ${chalk.magenta(`http://localhost:${port}`)}
+${chalk.bold('Access application at:')}
+${chalk.magenta(`http://localhost:${port}`)}
 ${divider}
 ${chalk.blue(`${chalk.italic('CTRL-C')} to exit the process`)}
     `);
