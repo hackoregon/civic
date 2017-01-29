@@ -6,6 +6,8 @@ const { resolve } = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
 
+const commitSha = require('child_process').execSync('git rev-parse --short HEAD').toString().trim();
+
 module.exports = {
   resolve: {
     extensions: ['', '.js', '.json'],
@@ -38,12 +40,11 @@ module.exports = {
         removeEmptyAttributes: true,
         removeStyleLinkTypeAttributes: true,
         keepClosingSlash: true,
-        minifyJS: true,
         minifyCSS: true,
         minifyURLs: true,
       },
       inject: true,
-      commitSha: 'a234dasd',
+      commitSha,
     }),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({

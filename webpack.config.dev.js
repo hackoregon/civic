@@ -4,6 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const { resolve } = require('path');
 
+const commitSha = require('child_process').execSync('git rev-parse --short HEAD').toString().trim();
+
 module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx', '.json'],
@@ -37,7 +39,7 @@ module.exports = {
         collapseWhitespace: true,
       },
       inject: true,
-      commitSha: 'a234dasd',
+      commitSha,
     }),
   ],
   babelQuery: {
