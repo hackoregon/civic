@@ -5,6 +5,8 @@ node_js:
 - '6.1'
 after_success:
 - npm run test:cover:travis
+script:
+- npm run build
 deploy:
   provider: s3
   access_key_id: AKIAI7GVDYTTK5M7PLYA
