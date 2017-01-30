@@ -1,7 +1,14 @@
 language: node_js
 cache: yarn
 node_js:
-  - "6"
-  - "6.1"
+- '6'
+- '6.1'
 after_success:
-  - npm run test:cover:travis
+- npm run test:cover:travis
+deploy:
+  provider: s3
+  access_key_id: AKIAI7GVDYTTK5M7PLYA
+  bucket: hackoregon-frontend-starter
+  region: us-west-2
+  secret_access_key:
+    secure: gkDMuTvJlxtdC6KJyGQnJaKL8u7Q/WqK1Y6f6kv38QLPBOJN7Nm2fMzA2lmWj+vhjIae8jH69iZmBUcq/2BGnMoxmFTaNu3n948EpRohEnnl4bjXzEVpRJi7f0q6GdCUls2ANcmziUUQvvPYLIX3I26UMeqY543cNKN//CMwY4iTMeV2uu0A2bbq/1mtR1yv/LJ4FBXpvceorC7X34ecdOSQ8NmLVPf3QHbRPMqgkQVZH7d0b3MHN1ZKa93i+fWrCJtWWHwi+Ne8qmtviX0kxk+BRBH1ZOI/Cxd9LDYVLDGqwLQhZuKFfBppvcYn5RcWsHBiGpk89s+fJr3JZVguyAmlZUsZdf6lxuz9GJI+KsA1ssVBNUuog5hDFf6q05kdkLuRIPdlvnlEo6HH6J3nUbtqSB90ERCaaq/UttrnflMyhnRp6roiKy5Y9iN8EYAbyoQAgNqboVZbJ7MNgULvGavCOzQEKzCqmK05JFSf1m7DqdJpbbCiqd4PA1hrFrhFd+tm5TgzouKW56mjqfjx0S36e6uOtSfv8a0Br4heVueYezDl+A/aeNogbNrkp6n2EQtXAMBsFwCCUiCCusvGOPbUgog5iptqmx0Tkt0mS90748+GTJM3LdtA7xRWj/xRaGXu8XM8iUMFD7IfvKIN2ZlKGIVDaJsyeLQR6kgUJwo=
