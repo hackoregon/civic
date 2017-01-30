@@ -8,7 +8,9 @@ after_success:
 deploy:
   provider: s3
   access_key_id: AKIAI7GVDYTTK5M7PLYA
-  bucket: hackoregon-frontend-starter
-  region: us-west-2
   secret_access_key:
     secure: ooHf95pBZn4veYimJHyHg2oKvBviGyxDUjE7w9tqcM4c+x3fuucSlbRjzXu5xzO+4Zbe+TJE9dJ6TlXuZHPQ9xGnVG3P3kFcsntS81oP8Q1nRZOWR9NGBUC0/hCK7hRo/7mIu1lSC53tNHymO3ixdecxp6xY9cWCxf37dKFlQHVWf5i5Gv4aH9v0rmsAWO8fCObODpGHraE/RpSrZo7P4EGX8VuW7fzC7bJ8HdXZ5oHXoUQ05MFat1u4oF+hi7G/E9OXiRB/e7f3vOUWxo14Ilsar7b9PijSyorJPYhf2SiJZ23Zoo9K/gJet4OIHXC0r9Os9AJ9+HdgkrKO7rvg3tEogdSliq4vCCdYy75NsMHey0YUvdFw0euK76tIOlRRoR3ITuzfEXwKbtg1GbguO7yX7FxwAjTpc0gE2k4GTRzP+lDHs5+cUy3V0ke3E6dQ+ZiUI21G/JLAaST5A+Wgc5yw92jWypRuHL1Q5EEtnwNSF4mIPpyILdgdgEzNY4NUu8nolgiH1I4yCCJDj8gqAtAs6FjyE2zbrBR8tOdIvGYt83V36DoT2/r68cZPXQhDZSIY20+L/RPjd3cCBFkHxfJ+D/l6ER+hJNlhWwB8+JO0DPojGAKDhu4v6fCOve+R+BRqZ7siO7rSP4CE3SLz7pWUniN6y0SHHow/pNshFtI=
+  region: us-west-2
+  bucket: hackoregon-frontend-starter
+  skip_cleanup: true
+  local_dir: build
