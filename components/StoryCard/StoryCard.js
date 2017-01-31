@@ -15,7 +15,7 @@ const str = `10/20/${year}`;
 const StoryCard = ({ title, description, children }) => (
   <div style={styles.base}>
     <h2 className={'Title FilsonSoft'}>{title}</h2>
-    <p className={'Merriweather'} >{description}</p>
+    <p className={'Description'}>{description}</p>
     <div style={{ width: '100%' }}>
       {children}
     </div>

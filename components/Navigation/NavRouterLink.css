@@ -3,26 +3,29 @@ li a {
     /*padding: 1rem 0;*/
 }
 
-.NavRouterLink {
-    color: #000;
+.NavRouterLink a {
+    color: rgba(0,0,0,.65);
     /*flex: 1;*/
-    font-family: 'Lato', 'OpenSans', sans-serif;
+    font-family: 'filson-soft', sans-serif;
+    font-size: 1.25em;
+    border: none;
+    font-weight: 900;
+    text-transform: uppercase;
     text-decoration: none;
     padding: 1rem 0;
     /*line-height: 2rem;*/
 }
 
-.NavRouterLink:focus {
-    color: #000;
+.NavRouterLink a:focus {
+    color: rgba(0,0,0,.85);
 }
 
-.NavRouterLink:hover {
-    color: #fff;
-    background-color: #000;
+.NavRouterLink a:hover {
+    color: rgba(0,0,0,.85);
     text-decoration: none;
 }
 
-.NavRouterLink:active {
-    color: #000;
+.NavRouterLink a:active {
+    color: rgba(0,0,0,.85);
     background-color: #fff;
 }

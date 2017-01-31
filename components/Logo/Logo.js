@@ -6,7 +6,7 @@ const Logo = () => {
   const svg = require.ensure([], require => require('../../assets/civic-logo.svg'));
   
   return (
-    <div>
+    <div className="logo">
     {svg}
     </div>
   );
