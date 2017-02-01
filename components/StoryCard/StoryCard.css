@@ -2,12 +2,14 @@
 
 
 .Description {
-  max-width: 800px;
+  max-width: 600px;
   margin: 0 auto;
+  text-align: left;
 }
 
 .Actions a {
-  padding-bottom: 3px;
+  padding: 5px 10px;
+  border-bottom: 2px solid rgba(238,73,80,1);
 }
 
 .Actions a:first-child {
@@ -16,4 +18,10 @@
 
 .Actions a i {
   margin-right: 5px;
+}
+
+.Actions a:hover {
+  background-color: rgba(238,73,80,1);
+  color: #fff;
+  border-bottom: 2px solid rgba(238,73,80,1);
 }
