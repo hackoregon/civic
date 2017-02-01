@@ -5,3 +5,15 @@
   max-width: 800px;
   margin: 0 auto;
 }
+
+.Actions a {
+  padding-bottom: 3px;
+}
+
+.Actions a:first-child {
+  margin-right: 30px; 
+}
+
+.Actions a i {
+  margin-right: 5px;
+}
