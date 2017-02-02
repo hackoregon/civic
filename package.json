@@ -13,6 +13,10 @@
   },
   "author": "David Daniel <davidedaniel@gmail.com> (http://davidedaniel.github.io)",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hackoregon/component-library"
+  },
   "devDependencies": {
     "@kadira/react-storybook-addon-info": "^3.3.0",
     "@kadira/storybook": "^2.21.0",
