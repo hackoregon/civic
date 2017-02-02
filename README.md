@@ -12,5 +12,7 @@ This repo should help get started and keep the different projects aligned.
 6. `npm run coverage` - run tests w/ coverage
 
 #### Next up
-[ ] Docs
-[ ] Ability to remove reference files
+[ ]  Docs
+[ ]  Ability to remove reference files
+
+[![Stories in Ready](https://badge.waffle.io/hackoregon/hackoregon-frontend-starter.png?label=ready&title=Ready)](http://waffle.io/hackoregon/hackoregon-frontend-starter)
