@@ -15,11 +15,15 @@ function configureStoreProd(initialState = {}, history) {
 
   const enhancers = [applyMiddleware(...middlewares)];
 
-  return createStore(
+  const store = createStore(
     createReducer(),
     initialState,
     compose(...enhancers),
   );
+
+  store.asyncReducers = {};
+
+  return store;
 }
 
 function configureStoreDev(initialState = {}, history) {
