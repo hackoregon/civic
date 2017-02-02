@@ -5,7 +5,7 @@ import './Header.css';
 
 const Header = ({ title = 'Civic', children }) => (
   <nav className={'Header'}>
-    <div className="title OpenSans font-bold">
+    <div className="logo">
       <Logo />
     </div>
     <Nav />
