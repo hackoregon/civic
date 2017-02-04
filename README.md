@@ -13,8 +13,8 @@ Documentation for usage of these components and visual examples will be availabl
 ### Contributing
 Our issues/requests are tracked on waffle.io **==>** [![Stories in Ready](https://badge.waffle.io/hackoregon/component-library.png?label=ready&title=Ready)](https://waffle.io/hackoregon/component-library)
 
-1. Get Node 6.5 + - I recommend using Node Version Manager.
-2. git clone https://github.com/hackoregon/hackor-frontend-starter.git.
+1. Get Node 6.5 + - I recommend using [Node Version Manager](https://github.com/creationix/nvm).
+2. `git clone https://github.com/hackoregon/component-library.git`
 3. `npm i` or `yarn` - install with either
 4. `npm start` - spin up the storybook dev environment with hot module replacement.
 5. `npm test` - run tests while coding
