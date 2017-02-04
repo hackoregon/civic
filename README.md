@@ -2,7 +2,13 @@
 ---
 
 
-Hack Oregon's [React](http://facebook.github.io/react/) Component Library is a work in progress that encompasses platform components, a style guide, as well as data visualization components to be shared across projects. For styling, we are using [CSS Modules](https://github.com/css-modules/css-modules). The components that end up here were either built using React Storybook or integrate with it and therefore should be portable across projects. Documentation for usage of these components and visual examples will be available on the [Hack Oregon's Storybook](https://hackoregon.github.io/component-library/).
+Hack Oregon's [React](http://facebook.github.io/react/) Component Library is a work in progress that encompasses platform components, a style guide, as well as data visualization components to be shared across projects.
+
+For styling, we are using [CSS Modules](https://github.com/css-modules/css-modules).
+
+The components that end up here are either built using [React Storybook](https://getstorybook.io) or were ported into the Storybook dev environment. We believe this will allow us to make cross project compatibile components.
+
+Documentation for usage of these components and visual examples will be available on the [Hack Oregon's Storybook](https://hackoregon.github.io/component-library/).
 
 ### Contributing
 Our issues/requests are tracked on waffle.io **==>** [![Stories in Ready](https://badge.waffle.io/hackoregon/component-library.png?label=ready&title=Ready)](https://waffle.io/hackoregon/component-library)
