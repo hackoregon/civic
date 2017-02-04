@@ -7,7 +7,7 @@
     "build": "",
     "test": "mocha --compilers js:babel-core/register --require ./mocha.conf.js --require ignore-styles --colors -w ./components/**/*.test.js",
     "start": "start-storybook -p 6006",
-    "lint": "eslint components stories",
+    "lint": "eslint components stories --fix",
     "deploy-storybook": "storybook-to-ghpages",
     "build-storybook": "build-storybook"
   },
@@ -43,15 +43,17 @@
     "react-addons-css-transition-group": "^15.4.1",
     "react-addons-shallow-compare": "^15.4.1",
     "react-addons-test-utils": "^15.4.1",
-    "sinon": "^1.17.7"
+    "sinon": "^1.17.7",
+    "webpack": "^1.13.1"
   },
   "dependencies": {
+    "@kadira/storybook-addons": "^1.6.1",
     "classnames": "2.2.5",
     "d3": "3.5.6",
     "rc-slider": "^5.4.0",
-    "react": "15.4.1",
+    "react": "^15.4.2",
     "react-addons-transition-group": "15.4.1",
-    "react-dom": "15.4.1",
+    "react-dom": "^15.4.2",
     "react-motion": "0.4.5",
     "react-router": "^3.0.0",
     "react-selectize": "^2.1.0",
