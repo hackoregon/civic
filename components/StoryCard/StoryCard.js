@@ -5,12 +5,9 @@ const styles = {
   base: {
     textAlign: 'center',
     maxWidth: '1200px',
-    margin: '0 auto'
+    margin: '0 auto',
   },
 };
-
-const year='1981';
-const str = `10/20/${year}`;
 
 const StoryCard = ({ title, description, children }) => (
   <div style={styles.base}>
@@ -20,8 +17,8 @@ const StoryCard = ({ title, description, children }) => (
       {children}
     </div>
     <div className={'Actions'}>
-      <a className={'Context'} href="#"><i className={'fa fa-eye'}></i> View Card</a>
-      <a className={'Share'} href="#"><i className={'fa fa-link'}></i> Share Link</a>
+      <a className={'Context'} href="#"><i className={'fa fa-eye'} /> View Card</a>
+      <a className={'Share'} href="#"><i className={'fa fa-link'} /> Share Link</a>
     </div>
   </div>
   );
