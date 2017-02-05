@@ -3,6 +3,7 @@ import { storiesOf, linkTo } from '@kadira/storybook'; // eslint-disable-line
 import buttonStory from './Button.story';
 import storycardStory from './StoryCard.story';
 import storyLinkStory from './StoryLink.story';
+import storyFooterStory from './StoryFooter.story';
 import editableStory from './Editable.story';
 import pieStory from './Pie.story';
 import sliderStory from './Slider.story';
@@ -23,8 +24,9 @@ storiesOf('Welcome', module)
 editableStory();
 headerStory();
 buttonStory();
-storycardStory();
 storyLinkStory();
+storyFooterStory();
+storycardStory();
 pieStory();
 barChartStory();
 sliderStory();
