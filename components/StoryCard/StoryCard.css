@@ -1,27 +1,13 @@
 /* StoryCard Styles */
 
+.Card {
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
 .Description {
   max-width: 600px;
   margin: 0 auto;
   text-align: left;
-}
-
-.Actions a {
-  padding: 5px 10px;
-  border-bottom: 2px solid rgba(238,73,80,1);
-}
-
-.Actions a:first-child {
-  margin-right: 30px; 
-}
-
-.Actions a i {
-  margin-right: 5px;
-}
-
-.Actions a:hover {
-  background-color: rgba(238,73,80,1);
-  color: #fff;
-  border-bottom: 2px solid rgba(238,73,80,1);
 }
