@@ -4,35 +4,6 @@
     justify-content: center;
 }
 
-.Actions>div {
-    border-bottom: 2px solid rgba(238, 73, 80, 1);
-}
-
 .Actions div:first-child {
     margin-right: 32px;
-}
-
-.Actions a {
-    display: flex;
-    padding: 6px 8px 6px 6px;
-    flex-wrap: nowrap;
-    align-items: center;
-    border-bottom: none;  /* this is only because our global styles assign a border-bottom that we need to override */
-}
-
-.Actions a i {
-    margin-right: 12px;
-}
-
-.Actions span {
-  flex-wrap: nowrap;
-}
-
-.Actions a:hover {
-    background-color: rgba(238, 73, 80, 1);
-    color: #fff;
-}
-
-.Actions a:focus {
-  outline: none;
 }
