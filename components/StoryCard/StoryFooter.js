@@ -40,10 +40,11 @@ export default class StoryFooter extends Component {
     require('./StoryFooter.css');
     const { collectionId, cardId } = this.props;
     const shareTxt = this.state.copied ? 'Link copied!' : 'Share card'; // if copied, show Link copied, otherwise, show Share card
+    const shareIcon = this.state.copied ? ICONS.check : ICONS.link;
     return (
       <div className={'Actions'}>
         <StoryLink className={'Context'} route={`/${collectionId}/${cardId}`} icon={ICONS.eye}>View card</StoryLink>
-        <StoryLink className={'Share'} action={this.handleCopy} icon={ICONS.link}>{shareTxt}</StoryLink>
+        <StoryLink className={'Share'} action={this.handleCopy} icon={shareIcon}>{shareTxt}</StoryLink>
       </div>
     );
   }
