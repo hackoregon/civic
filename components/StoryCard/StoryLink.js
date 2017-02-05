@@ -2,9 +2,12 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
 const StoryLink = ({ children, icon, route, action }) => (
-  route
-    ? <div><Link to={route}><i className={icon} /><span>{children}</span></Link></div>
-    : <div><a onClick={action}><i className={icon} /><span>{children}</span></a></div>
+  <div>
+    {route
+      ? <Link to={route}><i className={icon} /><span>{children}</span></Link>
+      : <a onClick={action}><i className={icon} /><span>{children}</span></a>
+      }
+  </div>
 );
 
 
