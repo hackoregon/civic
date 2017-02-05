@@ -1,7 +1,9 @@
 import React, { PropTypes } from 'react';
-import { BarChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Bar } from 'recharts';
+import {
+  BarChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Bar,
+} from 'recharts';
 
-const HBarChart = ({ data }) =>
+const HorizontalBarChart = ({ data }) =>
   <BarChart layout="horizontal" width={730} height={250} data={data}>
     <XAxis dataKey="name" />
     <YAxis />
@@ -12,4 +14,8 @@ const HBarChart = ({ data }) =>
     <Bar dataKey="y" fill="#82ca9d" />
   </BarChart>;
 
-export default HBarChart;
+HorizontalBarChart.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object),
+};
+
+export default HorizontalBarChart;
