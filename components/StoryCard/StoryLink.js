@@ -5,8 +5,8 @@ const StoryLink = ({ children, icon, route, action }) => (
   <div>
     {route
       ? <Link to={route}><i className={icon} /><span>{children}</span></Link>
-      : <a onClick={action}><i className={icon} /><span>{children}</span></a>
-      }
+      : <a tabIndex="0" onClick={action}><i className={icon} /><span>{children}</span></a>
+    }
   </div>
 );
 
