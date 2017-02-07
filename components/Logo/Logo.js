@@ -1,16 +1,12 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
-if (typeof require.ensure !== 'function') require.ensure = (d,c) => c(require);
+const Logo = ({ alt }) => (
+  <img src={require('../../assets/civic-logo.svg')} alt={alt} />
+);
 
-const Logo = () => {
-  const svg = require.ensure([], require => require('../../assets/civic-logo.svg'));
-  
-  return (
-    <div className="logo">
-    {svg}
-    </div>
-  );
-  
-}
-  
+Logo.displayName = 'Logo';
+Logo.propTypes = {
+  alt: PropTypes.string,
+};
+
 export default Logo;
