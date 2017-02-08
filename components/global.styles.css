@@ -1,6 +1,10 @@
+/* Import Google Fonts */
+
 @import 'https://fonts.googleapis.com/css?family=Lato:300,400|Raleway:300,400|Open+Sans:300,400,600,800';
 
 @import url('https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i,900,900i');
+
+/* Base */
 
 html {
   font-size: 14px;
@@ -194,4 +198,16 @@ p {
   font-size: 1em;
   color: #706371;
   
+}
+
+/* Color */
+
+.PrimaryColor { 
+  color: rgba(34,15,37,1);
+  fill: rgba(34,15,37,1);
+}
+
+.SecondaryColor {
+  color: rgba(238,73,92,1);
+  fill: rgba(238,73,92,1);
 }

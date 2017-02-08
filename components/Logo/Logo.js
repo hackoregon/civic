@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 
 const Logo = ({ alt }) => (
-  <img src={require('../../assets/civic-logo.svg')} alt={alt} />
+  <img src={require('../../assets/civic-logo-c-hackoregon.svg')} alt={alt} />
 );
 
 Logo.displayName = 'Logo';

@@ -1,15 +1,17 @@
 .Header {
   display: flex;
   align-items: center;
+  background-color: rgba(34,15,37,1);
+  padding: 1rem;
 }
 
 .Header .logo {
-  margin: 0 0 0 4rem;
+  margin: 1rem 0 0 4rem;
   font-size: 2rem;
   flex: 1 1 100%;
 }
 
-.logo {
-  height: 40px;
+.logo img {
+  height: 80px;
   width: auto;
 }
