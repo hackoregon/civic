@@ -1,6 +1,7 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
 import { Header } from '../components';
+import Hero from '../components/Hero/Hero';
 
 const displayName = Header.displayName || 'Header';
 const title = 'Simple usage';
@@ -11,6 +12,12 @@ const demoCode = () => (
   <Header title="Civic" />
 );
 
+const altTitle = 'with Hero section';
+
+const altDemo = () => (
+  <div><Hero /><Header title="Civic" /></div>
+);
+
 const propDocs = { inline: true, propTables: [Header] };
 
 export default () => storiesOf(displayName, module)
@@ -19,4 +26,5 @@ export default () => storiesOf(displayName, module)
     description,
     demoCode,
     propDocs,
-  );
+  )
+  .add(altTitle, altDemo);

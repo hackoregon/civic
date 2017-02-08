@@ -4,7 +4,7 @@ li a {
 }
 
 .NavRouterLink a {
-    color: rgba(255,255,255,.65);
+    color: rgba(0,0,0,.65);
     /*flex: 1;*/
     font-family: 'filson-soft', sans-serif;
     font-size: 1.25em;
@@ -17,14 +17,14 @@ li a {
 }
 
 .NavRouterLink a:focus {
-    color: rgba(255,255,255,.85);
+    color: rgba(0,0,0,.85);
 }
 
 .NavRouterLink a:hover {
-    color: rgba(255,255,255,.85);
+    color: rgba(0,0,0,.85);
     text-decoration: none;
 }
 
 .NavRouterLink a:active {
-    color: rgba(255,255,255,.85);
+    color: rgba(0,0,0,.85);
 }

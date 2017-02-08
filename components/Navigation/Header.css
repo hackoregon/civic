@@ -3,6 +3,7 @@
   align-items: center;
   background-color: rgba(34,15,37,1);
   padding: 1rem;
+  z-index: 1;
 }
 
 .Header .logo {

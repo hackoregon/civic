@@ -17,6 +17,7 @@
 
 .StoryLink span {
   flex-wrap: nowrap;
+  transition: all .2s ease-in-out;
 }
 
 .StoryLink a:hover {
@@ -25,5 +26,5 @@
 }
 
 .StoryLink a:focus {
-  outline: none;
+    outline: none;
 }

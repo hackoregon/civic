@@ -6,6 +6,7 @@ import './Header.css';
 const Header = ({ title = 'Civic', children }) => (
   <nav className={'Header'}>
     <div className="logo">
+
       <Logo alt={title} />
     </div>
     <Nav />

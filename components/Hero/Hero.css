@@ -1,0 +1,37 @@
+/* Hero Styles */
+
+.Hero {
+  display: flex;
+  position: absolute;
+  background-color: rgba(85,47,65,1);
+  height: 50vh;
+  min-height: 420px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  top: 0px;
+  background-size: cover;
+  background-position: center center;
+}
+
+.Hero .Container {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.Hero .Container .Content {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.Hero .Container .Content h1 { 
+  font-size: 3em;
+  line-height: 1.25em;
+  color: #fff;
+  font-weight: 100 !important;
+}
