@@ -9,10 +9,10 @@ script:
 - npm run build
 deploy:
   provider: s3
-  access_key_id: ACCESS_KEY_ID
+  access_key_id: AKIAJ3BXGWRIMZSIHD6Q
   secret_access_key:
-    secure: ENCRYPTED_SECRET_ACCESS_KEY
+    secure: p8ZhgpK9CT9dghR3qVfeXg8XujnsvBjTmKIcHqExbJWjoVAnn/nWM1esB4FpBQyK1EWtmQuvRH6Uj+TpVEHpBac13KZCXWomUXb1n/zB6ciwqrUqGxLQ/KDs0guqpY5HkYwzw58Ey6UFo6xYRNYryzD+zth5jsUE5IaUCSjSqmHNMPcwgo6U6XPV92XkQTsqZhSrH+ko4b4fYCoey2n4ZG/ebDfXAxfy3nZtjafTuUvwBQ+wIzlaOoctZxG/EHEOB6BGKe6UlOHe03CMd8ed2UVJ2WzLVciKdHcKB8LTKPL4s5oOYDaycqj9rwSLrfEq8Rcg6FdOrpQp2cfi7fo1Boj3LjY965OpkW6yOsz7rG4MXzjqPUNhXfDkMHa6PswsfLDIDCldluyKxZvUlgYXMXKhGllXbjU+9YHWgXp3CvfZVRnw8Q95MAEXchJAFAIThALXQYEfKn27eO1HfS9NeafABom12cGfYeb2hBhBUJJeQe8shQ+fXfa/+Qx6hE/yDTOk4p5rlo2yPqhdkG+yDz/cA0ujnHiDBl3Gfc86+sPzuOPZC8z1CGiK0vhTu0Pu9/vgmybIJf5hDhfSvZzDuaHa50sRDYyU2Sa8t4nfrhIunI3az9YVjuUXM4E6GtCGCv+e9V5hhSLb3BhmpN4ltRr0JhzQ6Lk4FgvlDwlABZ8=
   region: us-west-2
-  bucket: BUCKET
+  bucket: s3-staging-deploy-housing
   skip_cleanup: true
   local_dir: build
