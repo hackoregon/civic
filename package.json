@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "",
-    "test": "mocha --compilers js:babel-core/register --require ./mocha.conf.js --require ignore-styles --colors -w ./components/**/*.test.js",
+    "test": "mocha --compilers js:babel-core/register --require ./mocha.conf.js --require ignore-styles --colors -w ./src/**/*.test.js",
     "start": "start-storybook -p 6006",
-    "lint": "eslint components stories --fix",
+    "lint": "eslint src stories --fix",
     "deploy-storybook": "storybook-to-ghpages",
     "build-storybook": "build-storybook"
   },
