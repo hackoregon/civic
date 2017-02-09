@@ -12,7 +12,7 @@ import dropdownStory from './DropdownMenu.story';
 import headerStory from './Header.story';
 import Welcome from './Welcome';
 
-import '../components/global.styles.css';
+import '../src/global.styles.css';
 
 // stories can be added directly here
 storiesOf('Welcome', module)

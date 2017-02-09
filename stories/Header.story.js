@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
-import { Header } from '../components';
-import Hero from '../components/Hero/Hero';
+import { Header } from '../src';
+import Hero from '../src/Hero/Hero';
 
 const displayName = Header.displayName || 'Header';
 const title = 'Simple usage';

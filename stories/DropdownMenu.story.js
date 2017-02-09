@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
-import { DropdownMenu } from '../components';
+import { DropdownMenu } from '../src';
 
 const displayName = DropdownMenu.displayName || 'DropdownMenu';
 const title = 'Simple usage';

@@ -4,7 +4,7 @@ import {
   withKnobs,
   text, number, object, array,
 } from '@kadira/storybook-addon-knobs';
-import { Chart, ChartData, Pie } from '../components';
+import { Chart, ChartData, Pie } from '../src';
 import { colors, getRandomValuesArray, randomizer } from './shared';
 
 export default () => storiesOf('Pie/Donut visualization').addDecorator(withKnobs)
