@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
-import { Header } from '../components';
+import { Header } from '../src';
 
 const displayName = Header.displayName || 'Header';
 const title = 'Simple usage';

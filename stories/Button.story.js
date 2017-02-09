@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
-import { Button } from '../components';
+import { Button } from '../src';
 
 const displayName = Button.displayName || 'Button';
 const title = 'Simple usage';
