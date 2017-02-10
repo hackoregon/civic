@@ -12,9 +12,10 @@
   top: 0px;
   background-size: cover;
   background-position: center center;
+  z-index: -100;
 }
 
-.Hero .Container {
+.Hero > .Container {
   position: absolute;
   width: 100%;
   top: 50%;
@@ -23,13 +24,13 @@
   transform: translateY(-50%);
 }
 
-.Hero .Container .Content {
+.Hero > .Container > .Content {
   position: relative;
   max-width: 800px;
   margin: 0 auto;
 }
 
-.Hero .Container .Content h1 { 
+.Hero > .Container > .Content > h1 {
   font-size: 3em;
   line-height: 1.25em;
   color: #fff;

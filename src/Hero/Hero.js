@@ -1,11 +1,11 @@
 import React from 'react';
 import './Hero.css';
 
-const Hero = () => (
+const Hero = props => (
   <div className="Hero">
     <div className="Container">
       <div className="Content">
-        <h1>Data for the people,<br/>by the people.</h1>
+        <h1>Data for the people,<br />by the people.</h1>
       </div>
     </div>
   </div>
