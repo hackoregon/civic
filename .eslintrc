@@ -44,6 +44,7 @@
     "no-console": 1,
     "no-debugger": 1,
     "no-lone-blocks": 0,
+    "no-multi-spaces": 0,
     "no-trailing-spaces": 0,
     "no-underscore-dangle": 0,
     "no-unused-expressions": 0,
@@ -71,6 +72,7 @@
   "globals": {
     "__DEV__": true,
     "expect": true,
+    "assert": true,
     "enzyme": true,
     "sinon": true,
   }
