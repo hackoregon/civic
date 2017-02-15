@@ -1,0 +1,80 @@
+{
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "plugins": [
+    "babel",
+    "import",
+    "prefer-object-spread",
+    "react"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 6.5,
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true,
+      "spread": true,
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "settings": {
+    "import/parser": "babel-eslint",
+    "import/resolver": {
+      "webpack": {
+        "config": "webpack.config.dev.js"
+        },
+    }
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true,
+    "mocha": true
+  },
+  "rules": {
+    "no-console": 1,
+    "no-debugger": 1,
+    "no-var": 1,
+    "semi": [1, "always"],
+    "no-trailing-spaces": 0,
+    "eol-last": 0,
+    "no-underscore-dangle": 0,
+    "brace-style": [1, "1tbs", {"allowSingleLine": true}],
+    "no-unused-expressions": 0,
+    "global-require": 0,
+    "no-alert": 0,
+    "no-lone-blocks": 0,
+    "jsx-quotes": 1,
+    "import/default": 2,
+    "import/no-duplicates": 2,
+    "import/named": 2,
+    "import/namespace": 2,
+    "import/no-unresolved": 2,
+    "import/no-named-as-default": 2,
+    "import/prefer-default-export": 0,
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.js", "./tools/**/*"]}],
+    "no-multi-spaces": 0,
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/no-unused-prop-types": [2, { "skipShapeProps": true }],
+    "react/display-name": [ 1, {"ignoreTranspilerName": false }],
+    "react/forbid-prop-types": [1, {"forbid": ["any"]}],
+    "react/no-danger": 1,
+    "react/no-did-mount-set-state": 1,
+    "react/no-did-update-set-state": 1,
+    "react/no-direct-mutation-state": 1,
+    "react/no-multi-comp": 1,
+    "react/no-set-state": 0,
+    "react/no-unknown-property": 1,
+    "react/prefer-es6-class": 1,
+    "react/prop-types": 1,
+    "react/react-in-jsx-scope": 1,
+    "react/self-closing-comp": 1,
+    "react/sort-comp": 1,
+    "react/jsx-wrap-multilines": 1
+  },
+  "globals": {
+    "__DEV__": true,
+    "expect": true,
+    "enzyme": true,
+    "sinon": true,
+  }
+}
