@@ -11,7 +11,7 @@ deploy:
   provider: s3
   access_key_id: AKIAJ35YBGTGAISZ3KRA
   region: us-west-2
-  bucket: s3-staging-deploy-emergency-response
+  bucket: hacko-emergency-response-staging
   skip_cleanup: true
   local_dir: build
   secret_access_key:
