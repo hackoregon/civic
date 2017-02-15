@@ -9,10 +9,9 @@ script:
 - npm run build
 deploy:
   provider: s3
-  access_key_id: AKIAJ35YBGTGAISZ3KRA
+  access_key_id: "${AWS_ACCESS_KEY}"
+  secret_access_key: "${AWS_SECRET_KEY}"
   region: us-west-2
   bucket: hacko-emergency-response-staging
   skip_cleanup: true
   local_dir: build
-  secret_access_key:
-    secure: UQIM2I4pH0AsogSlJp6PP4UE9zmMvQfqTF0oUsOcW2YpWXHs2u+6fMhiBaqmNlcxOt3NGdLg3n8htw/naBcOUxPHmMCROmUpZ02Vitt14HXm6G2yfRxMWSaEZgv1K/BrktMxwR5OqEbQMZ1sSXgI1iK12trtRoyt+OgXlAz8SnLau60AL2KpqM103I+kraGzWxXlgJIhVNO1lY9iwSnsSPpyPclHoFJacePi7o/0u/CD5viCzpXAvKhWl+UWXuVc7LzkxtNQehlLNWlOcfXylQMq8BXWEMVqRG5QB6OL2fqc7DzyLp340OYo4qPjYvhRhqI4jWgC75aBekAxWyl6cFY5XlYfSNYZ2boLbzNBBx2Vkvtg/xvHBKPOqqp/+0AqxmESqpKTFCARfYCcFSuXe2GDD3nBRTCh0HBLErhwOogmgjJ4mOv5aPaZfpLlw+/mrYvndHkrj3CpU3CRTeurUfZr3bzQCTKWage4z7fvRDXZt0pIz2E16Kq8PsWfAI0JFsKAOVxGQbUk4LSUH3SspYJyvAjLi14iIFPgfspyO0hDdhMS/CB+MTrg4r4EAOM1ZQrF+ybthRmz9CUPq3N/FHcci6lED/2P99IWTkA2eptXJF1DuKrlfDHNnwt6/DvUFJ3aTPEI3OF/w5Azs2ffH94sasxAOJ7N/LjbecjZAn0=

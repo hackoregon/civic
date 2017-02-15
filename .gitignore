@@ -7,3 +7,4 @@ reports
 build
 .idea
 .DS_Store
+secrets.*
