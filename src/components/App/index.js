@@ -16,7 +16,7 @@ const Container = styled.div`
 function App(props) {
   return (
     <Container>
-      <nav>Some nav</nav>
+      <nav>Here you go budget team!</nav>
       {React.Children.toArray(props.children)}
     </Container>
   );
