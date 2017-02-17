@@ -12,5 +12,4 @@ const app = {
   ASSETS,
 };
 
-console.log(app);
 module.exports = app;
