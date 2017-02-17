@@ -16,4 +16,4 @@ deploy:
   skip_cleanup: true
   local_dir: build
   on:
-    condition: "$TRAVIS_PULL_REQUEST = false"
+    condition: $TRAVIS_PULL_REQUEST = false
