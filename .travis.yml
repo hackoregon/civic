@@ -9,10 +9,9 @@ script:
 - npm run build
 deploy:
   provider: s3
-  access_key_id: ACCESS_KEY_ID
-  secret_access_key:
-    secure: ENCRYPTED_SECRET_ACCESS_KEY
+  access_key_id: "${AWS_ACCESS_KEY_ID}"
+  secret_access_key: "${AWS_SECRET_ACCESS_KEY}"
   region: us-west-2
-  bucket: BUCKET
+  bucket: hacko-budget-staging
   skip_cleanup: true
   local_dir: build
