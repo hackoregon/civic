@@ -15,6 +15,7 @@
     "dev": "babel-node tools/dev",
     "lint": "eslint src",
     "start": "",
+    "start:server": "node build/server",
     "test": "mocha src/**/*.test.js"
   },
   "repository": {
