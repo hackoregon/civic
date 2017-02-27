@@ -48,7 +48,6 @@
     "sinon": "^1.17.7",
     "sinon-chai": "^2.8.0",
     "source-map-support": "^0.4.11",
-    "webpack": "^1.13.1"
   },
   "dependencies": {
     "@kadira/storybook-addons": "^1.6.1",
