@@ -1,8 +1,12 @@
 import React, { PropTypes } from 'react';
+import isClient from '../utils/isClient';
 
-const Logo = ({ alt }) => (
-  <img src={require('../../assets/civic-logo-animated-invert.svg')} alt={alt} />
-);
+const styles = {
+  height: '80px',
+  width: 'auto',
+};
+
+const Logo = ({ alt }) => (isClient && <img style={styles} src={require('../../assets/civic-logo-animated-invert.svg')} alt={alt} />);
 
 Logo.displayName = 'Logo';
 Logo.propTypes = {

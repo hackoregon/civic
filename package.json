@@ -1,10 +1,10 @@
 {
-  "name": "react-component-library",
+  "name": "@hackoregon/react-component-library",
   "version": "1.0.0",
   "description": "Official repo for Hack Oregon React component library",
   "main": "index.js",
   "scripts": {
-    "build": "",
+    "build": "babel src --out-dir lib --copy-files",
     "test": "mocha --opts ./mocha.options ./src/**/*.test.js",
     "test:watch": "npm run test -- -w",
     "start": "start-storybook -p 6006",
@@ -23,7 +23,6 @@
     "@kadira/storybook": "^2.21.0",
     "@kadira/storybook-addon-knobs": "^1.7.0",
     "@kadira/storybook-deployer": "^1.2.0",
-    "babel": "^6.5.2",
     "babel-eslint": "^7.1.1",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-stage-1": "^6.16.0",
@@ -53,6 +52,7 @@
   },
   "dependencies": {
     "@kadira/storybook-addons": "^1.6.1",
+    "babel-cli": "^6.23.0",
     "chai-enzyme": "^0.6.1",
     "cheerio": "^0.22.0",
     "classnames": "^2.2.5",
@@ -66,6 +66,7 @@
     "react-router": "^3.0.0",
     "react-selectize": "^2.1.0",
     "recharts": "^0.20.1",
-    "sinon-chai": "^2.8.0"
+    "sinon-chai": "^2.8.0",
+    "webpack": "1.13.3"
   }
 }
