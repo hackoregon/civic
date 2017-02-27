@@ -47,7 +47,7 @@
     "react-addons-test-utils": "^15.4.1",
     "sinon": "^1.17.7",
     "sinon-chai": "^2.8.0",
-    "source-map-support": "^0.4.11",
+    "source-map-support": "^0.4.11"
   },
   "dependencies": {
     "@kadira/storybook-addons": "^1.6.1",
