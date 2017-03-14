@@ -1,0 +1,35 @@
+.sankey-chart {
+  margin-bottom: 20px;
+}
+
+.sankey-node rect {
+  fill: #999;
+  shape-rendering: crispEdges;
+}
+
+.sankey-node {
+  fill-opacity: .6;
+}
+
+.sankey-node:hover {
+  cursor: pointer;
+  fill-opacity: 1;
+}
+
+.sankey-node text {
+  fill: #555;
+  stroke: none;
+  font-size: .75em;
+}
+
+.sankey-link {
+  stroke: #cccccc;
+  stroke-opacity: .4;
+  fill: none;
+}
+
+.sankey-link:hover {
+  stroke-opacity: .8;
+  cursor: pointer;
+}
+

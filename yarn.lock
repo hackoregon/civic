@@ -2197,7 +2197,7 @@ d3-scale@1.0.5:
     d3-time "1"
     d3-time-format "2"
 
-d3-selection, d3-selection@1, d3-selection@1.0.5:
+d3-selection@1, d3-selection@1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/d3-selection/-/d3-selection-1.0.5.tgz#948c73b41a44e28d1742ae2ff207c2aebca2734b"
 
