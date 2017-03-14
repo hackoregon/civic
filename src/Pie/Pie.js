@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { TransitionMotion, Motion, spring } from 'react-motion';
-import d3 from 'd3';
+import { arc, pie } from 'd3-shape';
 import './Pie.css';
 
 const willLeaveStyle = ({ style }) => ({
@@ -17,8 +17,8 @@ const Pie = (props, context) => {
   const { width, height, data } = context;
   const { style, onClick } = props;
 
-  const createPie = d3.layout.pie().sort(null);
-  const createArc = d3.svg.arc()
+  const createPie = pie().sort(null);
+  const createArc = arc()
     .outerRadius(props.outerRadius)
     .innerRadius(props.innerRadius);
   const pieData = createPie(data);

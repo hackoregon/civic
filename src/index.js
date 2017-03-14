@@ -1,4 +1,5 @@
 export BarChart from './BarChart/BarChart';
+export Sankey from './Sankey/Sankey';
 export Button from './Button/Button';
 export StoryCard from './StoryCard/StoryCard';
 export Chart from './Chart/Chart';
