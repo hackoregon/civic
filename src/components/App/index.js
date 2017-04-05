@@ -25,7 +25,7 @@ function App(props) {
       </StoryCard>
       <StoryCard title="Introduction to Fire Stuff">
         <p className="Description">
-          Here are all things you don't know yet.
+          Here are all things you don&apos;t know yet.
         </p>
       </StoryCard>
       <StoryCard title="Have a Map">
