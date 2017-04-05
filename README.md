@@ -6,6 +6,7 @@ This repo should help get started and keep the different projects aligned.
 #### Guide
 1. Get [Node 6.5 +](https://nodejs.org) - I recommend using [Node Version Manager](https://github.com/creationix/nvm#install-script):
 2. `git clone https://github.com/hackoregon/hackoregon-frontend-starter.git`.
+3. `nvm install 6.9.5` and `nvm use` (sets your node version)
 3. install [yarn](https://yarnpkg.com/en/docs/install) (using yarn instead of npm for installing dependencies will help keep versions in sync more easily), and run `yarn` from inside the repo to install dependencies.
 4. `npm start` - start dev mode (watching tests + linter)
 5. `npm test` - run tests
