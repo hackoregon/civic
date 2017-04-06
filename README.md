@@ -12,8 +12,12 @@ This repo should help get started and keep the different projects aligned.
 5. `npm test` - run tests
 6. `npm run coverage` - run tests w/ coverage
 
-#### Next up
-[ ]  Docs
-[ ]  Ability to remove reference files
 
-[![Stories in Ready](https://badge.waffle.io/hackoregon/hackoregon-frontend-starter.png?label=ready&title=Ready)](http://waffle.io/hackoregon/hackoregon-frontend-starter)
+#### Using the [Component Library](https://github.com/hackoregon/component-library) in your project
+The component libary has been installed as a dependency from the npm build version 0.0.6 (https://www.npmjs.com/package/@hackoregon/component-library)
+
+To use a component in your project, import the component from its source in the lib folder 
+Example:  importing the Header compoenent from the component library
+`import Header from '@hackoregon/component-library/lib/Navigation/Header';`
+
+
