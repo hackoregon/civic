@@ -12,10 +12,11 @@ This is a clone of the [Hack Oregon Starter kit](https://github.com/hackoregon/h
 
 
 #### Using the [Component Library](https://github.com/hackoregon/component-library) in your project
-The component libary has been installed as a dependency from the npm build version 0.0.6 (https://www.npmjs.com/package/@hackoregon/component-library)
+The component libary has been installed as a dependency from an npm build, make sure the version in package.json matches the latest version in the component library repo to have access to all the latest components.  
+(https://www.npmjs.com/package/@hackoregon/component-library)
 
-To use a component in your project, import the component from its source in the lib folder  
+To use a component in your project, import the precompiled component from the lib folder  
 
-Example:  importing the Header compoenent from the component library  
+Example:  importing the Header component from the component library  
 
 `import Header from '@hackoregon/component-library/lib/Navigation/Header';`
