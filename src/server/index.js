@@ -14,6 +14,4 @@ const config = {
   NotFoundComponent: require('../universal/NotFound').default,
 };
 
-console.log(config);
-
 server(config).startServer();
