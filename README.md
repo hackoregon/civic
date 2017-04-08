@@ -1,9 +1,39 @@
 ### Civic
 ---
 
-This is the core project for Hack Oregon's Civic Platform.
+**This is the core project for Hack Oregon's Civic Platform.**
 
- Built with:
+
+## Setup
+
+```bash
+nvm use
+yarn install
+yarn build
+yarn build:server
+```
+
+## Develop
+
+```bash
+yarn go
+# http://localhost:3000/civic
+```
+
+## Test
+
+```bash
+yarn test
+```
+
+## Deploy
+
+```bash
+# ???
+```
+
+ ## Built With
+
 - **React** - view engine / server side rendering
 - **React-Router** - client side routing
 - **Express** - server
