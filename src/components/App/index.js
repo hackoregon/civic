@@ -6,6 +6,9 @@ import styled from 'styled-components';
 import Header from '@hackoregon/component-library/lib/Navigation/Header';
 import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
 import BarChart from '@hackoregon/component-library/lib/BarChart/BarChart';
+import LeafletMap from '@hackoregon/component-library/lib/LeafletMap/LeafletMap';
+import { Marker, Popup } from 'react-leaflet';
+// import L from 'leaflet';
 
 const Container = styled.div`
   min-height: 100%;
@@ -13,6 +16,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
+const portland = [45.52, -122.67];
 
 function App(props) {
   return (
@@ -30,8 +35,15 @@ function App(props) {
       </StoryCard>
       <StoryCard title="Have a Map" collectionId="emergency-response" cardId="er-map">
         <p className="Description">
-          map
+          Here&apos;s a map!
         </p>
+        <LeafletMap>
+          <Marker position={portland}>
+            <Popup>
+              <span>A pretty CSS3 popup.<br />Easily customizable.</span>
+            </Popup>
+          </Marker>
+        </LeafletMap>
       </StoryCard>
       <StoryCard title="Have a Bar Chart" collectionId="emergency-response" cardId="er-scatter">
         <p className="Description">
