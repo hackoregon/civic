@@ -3,7 +3,7 @@ import { routerMiddleware } from 'react-router-redux';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 import rootReducer from '../state/reducers';
-import DevTools from '../views/DevTools';
+import DevTools from '../components/DevTools';
 
 const configureStore = (initialState = {}, history) => {
   console.log('inside store')

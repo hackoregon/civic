@@ -17,7 +17,7 @@ module.exports = {
     './src/webpack-public-path',
     'babel-polyfill',
     'webpack-hot-middleware/client?reload=true',
-    resolve(__dirname, 'src/client.js'),
+    resolve(__dirname, 'src/index.js'),
   ],
   target: 'web',
   output: {

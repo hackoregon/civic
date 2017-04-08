@@ -1,9 +1,11 @@
-import App from './App';
-import Example from './Example';
-import NotFoundPage from './NotFoundPage';
+import App from './App/index';
+import Example from './Example/index';
+import NotFoundPage from './NotFoundPage/index';
+import Root from './Root';
 
 export {
   App,
   Example,
-  NotFoundPage
+  NotFoundPage,
+  Root
 }
