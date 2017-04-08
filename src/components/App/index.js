@@ -35,14 +35,15 @@ function App(props) {
       </StoryCard>
       <StoryCard title="Have a Map" collectionId="emergency-response" cardId="er-map">
         <p className="Description">
-        // <LeafletMap>
-        //   <Marker position={portland}>
-        //     <Popup>
-        //       <span>A pretty CSS3 popup.<br />Easily customizable.</span>
-        //     </Popup>
-        //   </Marker>
-        // </LeafletMap>
+          Here's a map!
         </p>
+        <LeafletMap>
+          <Marker position={portland}>
+            <Popup>
+              <span>A pretty CSS3 popup.<br />Easily customizable.</span>
+            </Popup>
+          </Marker>
+        </LeafletMap>
       </StoryCard>
       <StoryCard title="Have a Bar Chart" collectionId="emergency-response" cardId="er-scatter">
         <p className="Description">
