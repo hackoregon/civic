@@ -114,11 +114,124 @@ export const getIncidents = (inputs = {}) => {
   return promiseToGet(url);
 }
 
+//without mutual aid id: This viewset will provide 'list' action.
+//with mutual aid id: This viewset will provide 'list' action.
+export const getMutualAid = (inputs = {}) => {
+  const { mutualaid_id } = inputs;
+  let url;
 
+  if(mutualaid_id) {
+    url = `${ROOT_URL}/mutualaid/${mutualaid_id}`;
+  } else {
+    url = `${ROOT_URL}/mutualaid/`;
+  }
+
+  return promiseToGet(url);
+}
+
+//without responder units id: This viewset will provide 'list' action.
+//with responder units id: This viewset will provide 'detail' action.
+export const getResponders = (inputs = {}) => {
+  const { incident_id } = inputs;
+  let url;
+
+  if(incident_id) {
+    url = `${ROOT_URL}/responders/${incident_id}`;
+  } else {
+    url = `${ROOT_URL}/responders/`;
+  }
+
+  return promiseToGet(url);
+}
+
+//without id: This viewset will provide 'list' action.
+//with id: This viewset will provide 'detail' action.
+export const getResponderUnits = (inputs = {}) => {
+  const { responderunit_id } = inputs;
+  let url;
+
+  if(responderunit_id) {
+    url = `${ROOT_URL}/responderunits/${responderunit_id}`;
+  } else {
+    url = `${ROOT_URL}/responderunits/`;
+  }
+
+  return promiseToGet(url);
+}
+
+//without situationfound_id: This viewset will provide 'list' action.
+//with situationfound_id: This viewset will provide the 'detail' action.
+export const getSituationFound = (inputs = {}) => {
+  const { situationfound_id } = inputs;
+  let url;
+
+  if(situationfound_id) {
+    url = `${ROOT_URL}/situationfound/${situationfound_id}`;
+  } else {
+    url = `${ROOT_URL}/situationfound/`;
+  }
+
+  return promiseToGet(url);
+}
+
+//without station id: This viewset will provide the 'list' action.
+//with station id: This viewset will provide the 'detail' action.
+export const getStations = (inputs = {}) => {
+  const { station_id } = inputs;
+  let url;
+
+  if(station_id) {
+    url = `${ROOT_URL}/station/${station_id}`;
+  } else {
+    url = `${ROOT_URL}/station/`;
+  }
+
+  return promiseToGet(url);
+}
+
+//without time description id: This viewset will provide 'list' action.
+//with time description id: This viewset will provide the 'detail' action.
+export const getTimeDescriptions = (inputs = {}) => {
+  const { timedesc_id } = inputs;
+  let url;
+
+  if(timedesc_id) {
+    url = `${ROOT_URL}/timedescriptions/${timedesc_id}`;
+  } else {
+    url = `${ROOT_URL}/timedescriptions/`;
+  }
+
+  return promiseToGet(url);
+}
+
+//without type nature code id: This viewset will provide the 'list' action.
+//with type nature code id: This viewset will provide the 'detail' action.
+export const getTypeNatureCodes = (inputs = {}) => {
+  const { typenaturecode_id } = inputs;
+  let url;
+
+  if(typenaturecode_id) {
+    url = `${ROOT_URL}/typenaturecodes/${typenaturecode_id}`;
+  } else {
+    url = `${ROOT_URL}/typenaturecodes/`;
+  }
+
+  return promiseToGet(url);
+}
 
 export const fireApi = {
   getAgencies,
   getAlarmLevels,
   getFireblock,
-  getFireblocks
+  getFireblocks,
+  getFma,
+  getFmas,
+  getIncidents,
+  getMutualAid,
+  getResponders,
+  getResponderUnits,
+  getSituationFound,
+  getStations,
+  getTimeDescriptions,
+  getTypeNatureCodes
 }
