@@ -15,7 +15,7 @@ module.exports = {
   debug: true,
   devtool: 'source-map',
   noInfo: true,
-  entry: resolve(__dirname, 'src/index'),
+  entry: resolve(__dirname, 'src/client'),
   target: 'web',
   output: {
     path: resolve(__dirname, 'build'),

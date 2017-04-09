@@ -1,25 +1,25 @@
-//imports
+// imports
 import {
   closeModal,
   openModal,
-  getAgenciesThunk
+  getAgenciesThunk,
 } from './reducers/app';
 
 import {
   getAgencyData,
-  getAppState,
-  getOpenModal,
-  getStories
+  // getAppState,
+  // getOpenModal,
+  // getStories,
 } from './selectors/app';
 
 
-//exports
+// exports
 export {
   closeModal,
   getAgenciesThunk,
   getAgencyData,
-  getAppState,
-  getOpenModal,
-  getStories,
-  openModal
+  // getAppState,
+  // getOpenModal,
+  // getStories,
+  openModal,
 };

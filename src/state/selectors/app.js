@@ -5,10 +5,10 @@ export const routeState = state => state.routing;
 
 export const getAgencyData = createSelector(
   appState,
-  ({ agencyData }) => agencyData
-)
+  ({ agencyData }) => agencyData,
+);
 
 export const getAgencyDataResults = createSelector(
   getAgencyData,
-  ({ results }) => results
-)
+  ({ results }) => results,
+);
