@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
 import Header from '@hackoregon/component-library/lib/Navigation/Header';
+import Footer from '@hackoregon/component-library/lib/Footer/Footer';
+import '@hackoregon/component-library/lib/global.styles.css';
 
 const Home = ({ children }) => {
   const navItems = [
@@ -11,6 +13,7 @@ const Home = ({ children }) => {
     <div>
       <Header title="Civic" menu={navItems} />
       {children}
+      <Footer />
     </div>);
 };
 

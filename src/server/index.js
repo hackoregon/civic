@@ -1,17 +1,9 @@
-require('babel-register')({});
+const extendRequire = require('isomorphic-loader/lib/extend-require');
 
-const server = require('@hackoregon/civic-server/lib/server/server').default;
-
-global.__DEV__ = process.env.NODE_ENV !== 'production';
-
-const config = {
-  port: 3000,
-  rootDir: require('app-root-dir').get(),
-  appName: require('../../package.json').name,
-  version: require('../../package.json').version,
-  renderer: require('../universal/renderer').default,
-  getRoutes: require('../routes').default,
-  NotFoundComponent: require('../universal/NotFound').default,
-};
-
-server(config).startServer();
+extendRequire((err) => {
+  if (err) {
+    console.log(err);
+  } else {
+    require('./server');
+  }
+});
