@@ -1,9 +1,25 @@
- import { combineReducers } from 'redux';
- import { routerReducer } from 'react-router-redux';
+//imports
+import {
+  closeModal,
+  openModal,
+  getAgenciesThunk
+} from './reducers/app';
 
- export default function createReducer(asyncReducers) {
-   return combineReducers({
-     routing: routerReducer,
-     ...asyncReducers,
-   });
- }
+import {
+  getAgencyData,
+  getAppState,
+  getOpenModal,
+  getStories
+} from './selectors/app';
+
+
+//exports
+export {
+  closeModal,
+  getAgenciesThunk,
+  getAgencyData,
+  getAppState,
+  getOpenModal,
+  getStories,
+  openModal
+};
