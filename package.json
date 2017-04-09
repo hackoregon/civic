@@ -1,5 +1,5 @@
 {
-  "name": "hackoregon-frontend-starter",
+  "name": "@hackoregon/emergency-response",
   "version": "0.1.0",
   "description": "Hack Oregon Front-end React + Redux Starter",
   "author": "David Daniel",
