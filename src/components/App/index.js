@@ -7,9 +7,10 @@ import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
 import BarChart from '@hackoregon/component-library/lib/BarChart/BarChart';
 import LeafletMap from '@hackoregon/component-library/lib/LeafletMap/LeafletMap';
 import { Marker, Popup } from 'react-leaflet';
+import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 // import L from 'leaflet';
 
-import { TestComponent } from '../index'
+import { TestComponent } from '../index';
 
 const Container = styled.div`
   min-height: 100%;
@@ -19,6 +20,10 @@ const Container = styled.div`
 `;
 
 const portland = [45.52, -122.67];
+
+const data = [{ x: 100, y: 200, z: 200 }, { x: 120, y: 100, z: 260 },
+        { x: 170, y: 300, z: 400 }, { x: 140, y: 250, z: 280 },
+        { x: 150, y: 400, z: 500 }, { x: 110, y: 280, z: 200 }];
 
 function App(props) {
   return (
@@ -51,6 +56,19 @@ function App(props) {
           Here is a chart with some fun data.
         </p>
         <BarChart data={[{ name: 'Fires', x: 200, y: 300 }]} />
+      </StoryCard>
+      <StoryCard title="Have a Scatterplot" collectionId="emergency-response" cardId="er-scatter">
+        <p className="Description">
+          A scatterplot straight from Recharts.
+        </p>
+        <ScatterChart width={400} height={400} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+          <XAxis dataKey={'x'} name='stature' unit='cm' />
+          <YAxis dataKey={'y'} name='weight' unit='kg' />
+          <Scatter name='A school' data={data} fill='#8884d8' />
+          <CartesianGrid />
+          <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+        </ScatterChart>
+
       </StoryCard>
 
       <TestComponent />
