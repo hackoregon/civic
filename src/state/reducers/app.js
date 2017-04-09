@@ -11,11 +11,8 @@ export const GET_AGENCIES = 'GET_AGENCIES';
 export const GET_AGENCIES_SUCCESS = 'GET_AGENCIES_SUCCESS';
 export const GET_AGENCIES_FAILURE = 'GET_AGENCIES_FAILURE';
 
-
 export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const OPEN_MODAL  = 'OPEN_MODAL';
-
-
 
 //initialize app actions
 export const initializeApp = () => ({ type: INIT_APP });
@@ -25,9 +22,20 @@ export const closeModal = payload => ({ type: CLOSE_MODAL, payload });
 export const openModal = payload => ({ type: OPEN_MODAL, payload });
 
 //fire api actions
-export const getAgencies =
+export const getAgencies = payload => ({ type: GET_AGENCIES, payload });
+export const getAgenciesSuccess = payload => ({ type: GET_AGENCIES_SUCCESS, payload });
+export const getAgenciesFailure = error => ({ type: GET_AGENCIES_FAILURE, error });
+
+
 
 //thunks
+export const getAgenciesThunk = (inputs) => dispatch => {
+  dispatch(getAgencies());
+  return fireApi.getAgencies(inputs).then(
+    data => dispatch(getAgenciesSuccess(data)),
+    err => dispatch(getAgenciesFailure(err))
+  )
+}
 
 export const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
