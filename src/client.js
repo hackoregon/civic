@@ -1,40 +1,16 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+import { browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-import { render } from 'react-dom';
-import { Provider } from 'react-redux';
-import { Router, browserHistory } from 'react-router';
-import configureStore from './configureStore';
-import App from './components/App';
-import createRoutes from './index';
+import configureStore from './store';
+import { Root } from './components';
+import getRoutes from './index';
 
-const locationStateSelector = () => {
-  let prevRoutingState;
+const store = configureStore({}, browserHistory);
+const history = syncHistoryWithStore(browserHistory, store);
+const routes = getRoutes(history);
 
-  return (state) => {
-    const routingState = state.routing;
-
-    if (routingState !== prevRoutingState) {
-      prevRoutingState = routingState;
-    }
-
-    return prevRoutingState;
-  };
-};
-
-const initialState = {};
-const store = configureStore(initialState, browserHistory);
-
-const history = syncHistoryWithStore(browserHistory, store, {
-  selectLocationState: locationStateSelector(),
-});
-
-const rootRoute = {
-  component: App,
-  childRoutes: createRoutes(store),
-};
-
-render(
-  <Provider store={store}>
-    <Router history={history} routes={rootRoute} />
-  </Provider>, document.getElementById('content'),
+ReactDOM.render(
+  <Root store={store} history={history} routes={routes} />,
+  document.getElementById('content'),
 );

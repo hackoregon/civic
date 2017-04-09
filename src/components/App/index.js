@@ -1,6 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
 // This should probably be the core component, containing, nav etc
-
 import React from 'react';
 import styled from 'styled-components';
 import Header from '@hackoregon/component-library/lib/Navigation/Header';
@@ -9,6 +8,8 @@ import BarChart from '@hackoregon/component-library/lib/BarChart/BarChart';
 import LeafletMap from '@hackoregon/component-library/lib/LeafletMap/LeafletMap';
 import { Marker, Popup } from 'react-leaflet';
 // import L from 'leaflet';
+
+import { TestComponent } from '../index'
 
 const Container = styled.div`
   min-height: 100%;
@@ -51,6 +52,8 @@ function App(props) {
         </p>
         <BarChart data={[{ name: 'Fires', x: 200, y: 300 }]} />
       </StoryCard>
+
+      <TestComponent />
 
       {React.Children.toArray(props.children)}
     </Container>
