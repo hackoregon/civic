@@ -2,7 +2,9 @@ import { fireApi } from '../../api'
 
 export const INITIAL_STATE = {
   stories: [],
+  isFetching: false,
   openModal: null,
+  agencyData: {},
 };
 
 export const INIT_APP    = 'INIT_APP';
@@ -26,8 +28,6 @@ export const getAgencies = payload => ({ type: GET_AGENCIES, payload });
 export const getAgenciesSuccess = payload => ({ type: GET_AGENCIES_SUCCESS, payload });
 export const getAgenciesFailure = error => ({ type: GET_AGENCIES_FAILURE, error });
 
-
-
 //thunks
 export const getAgenciesThunk = (inputs) => dispatch => {
   dispatch(getAgencies());
@@ -49,6 +49,25 @@ export const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         openModal: action.payload,
       };
+
+    case GET_AGENCIES:
+      return {
+        ...state,
+        isFetching: true
+      }
+    case GET_AGENCIES_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        agencyData: action.payload
+      }
+    case GET_AGENCIES_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.error
+      }
+      
     default:
       return state;
   }

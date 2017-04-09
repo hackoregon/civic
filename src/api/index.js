@@ -1,6 +1,6 @@
 import { promiseToGet } from './utils';
 
-const ROOT_URL = 'http://hacko-integration-658279555.us-west-2.elb.amazonaws.com/emergency/';
+const ROOT_URL = 'http://hacko-integration-658279555.us-west-2.elb.amazonaws.com/emergency';
 
 //without id: This viewset lists the agencies that respond to emergency incidents within Portland.
 //with id: This viewset retrievies a specific agency.
@@ -12,6 +12,7 @@ export const getAgencies = (inputs = {}) => {
   } else {
     url = `${ROOT_URL}/agencies/`;
   }
+  console.log('url', url);
   return promiseToGet(url);
 }
 

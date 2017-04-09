@@ -6,6 +6,8 @@ import Header from '@hackoregon/component-library/lib/Navigation/Header';
 import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
 import BarChart from '@hackoregon/component-library/lib/BarChart/BarChart';
 
+import { TestComponent } from '../index'
+
 const Container = styled.div`
   min-height: 100%;
   margin: 0 auto;
@@ -38,6 +40,8 @@ function App(props) {
         </p>
         <BarChart data={[{ name: 'Fires', x: 200, y: 300 }]} />
       </StoryCard>
+
+      <TestComponent />
 
       {React.Children.toArray(props.children)}
     </Container>
