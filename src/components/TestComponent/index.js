@@ -10,7 +10,7 @@ class TestComponent extends Component {
   renderData() {
     console.log('agencyData', this.props.agencyData)
   }
-  
+
   render() {
     return (
       <div>
