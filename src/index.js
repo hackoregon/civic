@@ -1,16 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { browserHistory } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
-import configureStore from './store';
-import { Root } from './components';
-import getRoutes from './routes.js';
+import { Route, Router } from 'react-router';
 
-const store = configureStore({}, browserHistory);
-const history = syncHistoryWithStore(browserHistory, store);
-const routes = getRoutes(history);
+import { App, Example, NotFoundPage } from './components/index';
 
-ReactDOM.render(
-  <Root store={store} history={history} routes={routes} />,
-  document.getElementById('content')
+const routes = history => (
+  <Router history={history}>
+    <Route path="/" component={App} />
+    <Route path="/example" component={Example} />
+    <Route path="/notfoundpage" component={NotFoundPage} />
+  </Router>
 );
+
+export default routes;

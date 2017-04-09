@@ -1,4 +1,4 @@
-import { fireApi } from '../../api'
+import { fireApi } from '../../api';
 
 export const INITIAL_STATE = {
   stories: [],
@@ -16,26 +16,26 @@ export const GET_AGENCIES_FAILURE = 'GET_AGENCIES_FAILURE';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const OPEN_MODAL  = 'OPEN_MODAL';
 
-//initialize app actions
+// initialize app actions
 export const initializeApp = () => ({ type: INIT_APP });
 
-//modal actions
+// modal actions
 export const closeModal = payload => ({ type: CLOSE_MODAL, payload });
 export const openModal = payload => ({ type: OPEN_MODAL, payload });
 
-//fire api actions
+// fire api actions
 export const getAgencies = payload => ({ type: GET_AGENCIES, payload });
 export const getAgenciesSuccess = payload => ({ type: GET_AGENCIES_SUCCESS, payload });
 export const getAgenciesFailure = error => ({ type: GET_AGENCIES_FAILURE, error });
 
-//thunks
-export const getAgenciesThunk = (inputs) => dispatch => {
+// thunks
+export const getAgenciesThunk = inputs => (dispatch) => {
   dispatch(getAgencies());
   return fireApi.getAgencies(inputs).then(
     data => dispatch(getAgenciesSuccess(data)),
-    err => dispatch(getAgenciesFailure(err))
-  )
-}
+    err => dispatch(getAgenciesFailure(err)),
+  );
+};
 
 export const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -53,21 +53,21 @@ export const reducer = (state = INITIAL_STATE, action) => {
     case GET_AGENCIES:
       return {
         ...state,
-        isFetching: true
-      }
+        isFetching: true,
+      };
     case GET_AGENCIES_SUCCESS:
       return {
         ...state,
         isFetching: false,
-        agencyData: action.payload
-      }
+        agencyData: action.payload,
+      };
     case GET_AGENCIES_FAILURE:
       return {
         ...state,
         isFetching: false,
-        error: action.error
-      }
-      
+        error: action.error,
+      };
+
     default:
       return state;
   }
