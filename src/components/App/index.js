@@ -9,7 +9,7 @@ import LeafletMap from '@hackoregon/component-library/lib/LeafletMap/LeafletMap'
 import { Marker, Popup } from 'react-leaflet';
 // import L from 'leaflet';
 
-import { TestComponent } from '../index'
+import { TestComponent } from '../index';
 
 const Container = styled.div`
   min-height: 100%;
