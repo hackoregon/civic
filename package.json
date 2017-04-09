@@ -55,7 +55,7 @@
     "style-loader": "^0.16.1",
     "url-loader": "^0.5.8",
     "webpack": "^2.3.3",
-    "webpack-partial": "1.1.2"
+    "webpack-partial": "^2.0.2"
   },
   "devDependencies": {
     "babel-cli": "^6.23.0",
