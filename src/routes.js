@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Router } from 'react-router';
 
 import { App, Example, NotFoundPage } from './components/index';
-console.log(App, Example, NotFoundPage)
+
 const routes = (history) => (
   <Router history={history}>
     <Route path="/" component={App} />
