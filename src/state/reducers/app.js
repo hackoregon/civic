@@ -313,6 +313,222 @@ export const reducer = (state = INITIAL_STATE, action) => {
         error: action.error,
       };
 
+    case GET_FIRE_BLOCK:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case GET_FIRE_BLOCK_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        fireblockData: action.payload,
+      };
+    case GET_FIRE_BLOCK_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.error,
+      };
+
+    case GET_FIRE_BLOCKS:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case GET_FIRE_BLOCKS_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        fireblocksData: action.payload,
+      };
+    case GET_FIRE_BLOCKS_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.error,
+      };
+
+    case GET_FMA:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case GET_FMA_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        fmaData: action.payload,
+      };
+    case GET_FMA_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.error,
+      };
+
+    case GET_FMAS:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case GET_FMAS_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        fmasData: action.payload,
+      };
+    case GET_FMAS_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.error,
+      };
+
+    case GET_INCIDENTS:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case GET_INCIDENTS_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        incidentsData: action.payload,
+      };
+    case GET_INCIDENTS_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.error,
+      };
+
+    case GET_MUTUAL_AID:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case GET_MUTUAL_AID_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        mutualAidData: action.payload,
+      };
+    case GET_MUTUAL_AID_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.error,
+      };
+
+    case GET_RESPONDERS:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case GET_RESPONDERS_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        respondersData: action.payload,
+      };
+    case GET_RESPONDERS_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.error,
+      };
+
+    case GET_RESPONDER_UNITS:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case GET_RESPONDER_UNITS_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        responderUnitsData: action.payload,
+      };
+    case GET_RESPONDER_UNITS_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.error,
+      };
+
+    case GET_SITUATION_FOUND:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case GET_SITUATION_FOUND_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        situationFoundData: action.payload,
+      };
+    case GET_SITUATION_FOUND_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.error,
+      };
+
+    case GET_STATIONS:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case GET_STATIONS_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        stationsData: action.payload,
+      };
+    case GET_STATIONS_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.error,
+      };
+
+    case GET_TIME_DESCRIPTIONS:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case GET_TIME_DESCRIPTIONS_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        timeDescriptionsData: action.payload,
+      };
+    case GET_TIME_DESCRIPTIONS_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.error,
+      };
+
+    case GET_TYPE_NATURE_CODES:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case GET_TYPE_NATURE_CODES_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        typeNatureCodesData: action.payload,
+      };
+    case GET_TYPE_NATURE_CODES_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.error,
+      };
+
     default:
       return state;
   }
