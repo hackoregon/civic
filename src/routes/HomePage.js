@@ -3,11 +3,20 @@ import Header from '@hackoregon/component-library/lib/Navigation/Header';
 import Footer from '@hackoregon/component-library/lib/Footer/Footer';
 import '@hackoregon/component-library/lib/global.styles.css';
 
-const Home = ({ children }) => {
+const App = ({ children }) => {
   const navItems = [
-    { name: 'Collections', path: '/civic/collections' },
-    { name: 'About', path: '/civic/about' },
-    { name: 'Explore', path: '/civic/explore' },
+    {
+      name: 'Collections',
+      path: '/collections',
+      nestedMenu: [
+      { name: 'Budget', path: '/collections/budget' },
+      { name: 'Emergency Response', path: '/collections/emergency' },
+      { name: 'Housing', path: '/collections/housing' },
+      { name: 'Homlessness', path: '/collections/homlessness' },
+      { name: 'Transportation', path: '/collections/transportation' },
+      ],
+    },
+  { name: 'About', path: '/about' },
   ];
   return (
     <div>
@@ -17,8 +26,12 @@ const Home = ({ children }) => {
     </div>);
 };
 
-Home.propTypes = {
+App.propTypes = {
   children: PropTypes.node,
 };
 
-export default Home;
+App.defaultProps = {
+  children: null,
+};
+
+export default App;

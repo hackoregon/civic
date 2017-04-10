@@ -14,7 +14,7 @@ module.exports = () => config => mergeWebpackConfig(config, {
       //   loader: urlLoader,
       // },
       // {
-      //   test: /\.(png|svg|jpg|jpeg|gif)$/,
+      //   test: /\.(svg)$/,
       //   loader: 'url-loader?name=img/[name].[ext]',
       //   query: {
       //     limit: 10000,

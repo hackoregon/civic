@@ -32,9 +32,15 @@ const routes = [
     getComponent(location, cb) {
       cb(null, require('./HomePage').default);
     },
-    // childRoutes: [
-    //
-    // ],
+    childRoutes: [
+      {
+        path: '/civic/collection/:id',
+        name: 'collection',
+        getComponent(location, cb) {
+          cb(null, require('./Collection').default);
+        },
+      },
+    ],
     // childRoutes: [
     //   { ...makePaths('collections'),
     //     // component: WithPaths,

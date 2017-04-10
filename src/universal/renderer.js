@@ -15,6 +15,7 @@ function htmlShell(serializedStore, innerHtml, { vendor, app }) {
     ${head.title ? head.title.toString() : ''}
     ${head.meta ? head.meta.toString() : ''}
     ${head.link ? head.link.toString() : ''}
+    <script src="https://use.fontawesome.com/031ebbe0c7.js"></script>
     <script id="initial-state">window.INITIAL_REDUX_STATE=${serializedStore}</script>
   `;
 

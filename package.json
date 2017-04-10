@@ -29,8 +29,8 @@
     "url": "https://github.com/hackoregon/civic-platform"
   },
   "dependencies": {
-    "@hackoregon/civic-server": "^0.0.2",
-    "@hackoregon/component-library": "^0.1.3",
+    "@hackoregon/civic-server": "^0.0.4",
+    "@hackoregon/component-library": "^0.1.5",
     "app-root-dir": "^1.0.2",
     "assets-webpack-plugin": "^3.5.1",
     "autoprefixer": "^6.7.7",
