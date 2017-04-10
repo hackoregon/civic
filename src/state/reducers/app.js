@@ -9,7 +9,6 @@ export const INITIAL_STATE = {
   stories: [],
   isFetching: false,
   openModal: null,
-  agencyData: {},
 };
 
 // *** ACTIONS: HOLDS ACTION PAYLOADS IN PLAIN JAVASCRIPT OBJECTS. MUST HAVE A TYPE
@@ -20,6 +19,58 @@ export const INIT_APP    = 'INIT_APP';
 export const GET_AGENCIES = 'GET_AGENCIES';
 export const GET_AGENCIES_SUCCESS = 'GET_AGENCIES_SUCCESS';
 export const GET_AGENCIES_FAILURE = 'GET_AGENCIES_FAILURE';
+
+export const GET_ALARM_LEVELS = 'GET_ALARM_LEVELS';
+export const GET_ALARM_LEVELS_SUCCESS = 'GET_ALARM_LEVELS_SUCCESS';
+export const GET_ALARM_LEVELS_FAILURE = 'GET_ALARM_LEVELS_FAILURE';
+
+export const GET_FIRE_BLOCK = 'GET_FIRE_BLOCK';
+export const GET_FIRE_BLOCK_SUCCESS = 'GET_FIRE_BLOCK_SUCCESS';
+export const GET_FIRE_BLOCK_FAILURE = 'GET_FIRE_BLOCK_FAILURE';
+
+export const GET_FIRE_BLOCKS = 'GET_FIRE_BLOCKS';
+export const GET_FIRE_BLOCKS_SUCCESS = 'GET_FIRE_BLOCKS_SUCCESS';
+export const GET_FIRE_BLOCKS_FAILURE = 'GET_FIRE_BLOCKS_FAILURE';
+
+export const GET_FMA = 'GET_FMA';
+export const GET_FMA_SUCCESS = 'GET_FMA_SUCCESS';
+export const GET_FMA_FAILURE = 'GET_FMA_FAILURE';
+
+export const GET_FMAS = 'GET_FMAS';
+export const GET_FMAS_SUCCESS = 'GET_FMAS_SUCCESS';
+export const GET_FMAS_FAILURE = 'GET_FMAS_FAILURE';
+
+export const GET_INCIDENTS = 'GET_INCIDENTS';
+export const GET_INCIDENTS_SUCCESS = 'GET_INCIDENTS_SUCCESS';
+export const GET_INCIDENTS_FAILURE = 'GET_INCIDENTS_FAILURE';
+
+export const GET_MUTUAL_AID = 'GET_MUTUAL_AID';
+export const GET_MUTUAL_AID_SUCCESS = 'GET_MUTUAL_AID_SUCCESS';
+export const GET_MUTUAL_AID_FAILURE = 'GET_MUTUAL_AID_FAILURE';
+
+export const GET_RESPONDERS = 'GET_RESPONDERS';
+export const GET_RESPONDERS_SUCCESS = 'GET_RESPONDERS_SUCCESS';
+export const GET_RESPONDERS_FAILURE = 'GET_RESPONDERS_FAILURE';
+
+export const GET_RESPONDER_UNITS = 'GET_RESPONDER_UNITS';
+export const GET_RESPONDER_UNITS_SUCCESS = 'GET_RESPONDER_UNITS_SUCCESS';
+export const GET_RESPONDER_UNITS_FAILURE = 'GET_RESPONDER_UNITS_FAILURE';
+
+export const GET_SITUATION_FOUND = 'GET_SITUATION_FOUND';
+export const GET_SITUATION_FOUND_SUCCESS = 'GET_SITUATION_FOUND_SUCCESS';
+export const GET_SITUATION_FOUND_FAILURE = 'GET_SITUATION_FOUND_FAILURE';
+
+export const GET_STATIONS = 'GET_STATIONS';
+export const GET_STATIONS_SUCCESS = 'GET_STATIONS_SUCCESS';
+export const GET_STATIONS_FAILURE = 'GET_STATIONS_FAILURE';
+
+export const GET_TIME_DESCRIPTIONS = 'GET_TIME_DESCRIPTIONS';
+export const GET_TIME_DESCRIPTIONS_SUCCESS = 'GET_TIME_DESCRIPTIONS_SUCCESS';
+export const GET_TIME_DESCRIPTIONS_FAILURE = 'GET_TIME_DESCRIPTIONS_FAILURE';
+
+export const GET_TYPE_NATURE_CODES = 'GET_TYPE_NATURE_CODES';
+export const GET_TYPE_NATURE_CODES_SUCCESS = 'GET_TYPE_NATURE_CODES_SUCCESS';
+export const GET_TYPE_NATURE_CODES_FAILURE = 'GET_TYPE_NATURE_CODES_FAILURE';
 
 export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const OPEN_MODAL  = 'OPEN_MODAL';
@@ -42,6 +93,11 @@ export const getAgenciesSuccess = payload => ({ type: GET_AGENCIES_SUCCESS, payl
 export const getAgenciesFailure = error => ({ type: GET_AGENCIES_FAILURE, error });
 
 
+export const getAlarmLevels = payload => ({ type: GET_ALARM_LEVELS, payload });
+export const getAlarmLevelsSuccess = payload => ({ type: GET_ALARM_LEVELS_SUCCESS, payload });
+export const getAlarmLevelsFailure = error => ({ type: GET_ALARM_LEVELS_FAILURE, error });
+
+
 // *** THUNKS: THE THUNK CAN BE USED TO DELAY THE DISPATCH OF AN ACTION, OR TO DISPATCH
 // ONLY IF A CERTAIN CONDITION IS MET. *** //
 export const getAgenciesThunk = inputs => (dispatch) => {
@@ -49,6 +105,14 @@ export const getAgenciesThunk = inputs => (dispatch) => {
   return fireApi.getAgencies(inputs).then(
     data => dispatch(getAgenciesSuccess(data)),
     err => dispatch(getAgenciesFailure(err)),
+  );
+};
+
+export const getAlarmLevelsThunk = () => (dispatch) => {
+  dispatch(getAlarmLevels());
+  return fireApi.getAlarmLevels().then(
+    data => dispatch(getAlarmLevelsSuccess(data)),
+    err => dispatch(getAlarmLevelsFailure(err)),
   );
 };
 
@@ -80,6 +144,24 @@ export const reducer = (state = INITIAL_STATE, action) => {
         agencyData: action.payload,
       };
     case GET_AGENCIES_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.error,
+      };
+
+    case GET_ALARM_LEVELS:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case GET_ALARM_LEVELS_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        alarmLevelData: action.payload,
+      };
+    case GET_ALARM_LEVELS_FAILURE:
       return {
         ...state,
         isFetching: false,
