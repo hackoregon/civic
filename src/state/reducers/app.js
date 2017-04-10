@@ -96,13 +96,13 @@ export const getAlarmLevels = payload => ({ type: GET_ALARM_LEVELS, payload });
 export const getAlarmLevelsSuccess = payload => ({ type: GET_ALARM_LEVELS_SUCCESS, payload });
 export const getAlarmLevelsFailure = error => ({ type: GET_ALARM_LEVELS_FAILURE, error });
 
-export const getFireBlock = payload => ({ type: GET_FIRE_BLOCK, payload });
-export const getFireBlockSuccess = payload => ({ type: GET_FIRE_BLOCK_SUCCESS, payload });
-export const getFireBlockFailure = error => ({ type: GET_FIRE_BLOCK_FAILURE, error });
+export const getFireblock = payload => ({ type: GET_FIRE_BLOCK, payload });
+export const getFireblockSuccess = payload => ({ type: GET_FIRE_BLOCK_SUCCESS, payload });
+export const getFireblockFailure = error => ({ type: GET_FIRE_BLOCK_FAILURE, error });
 
-export const getFireBlocks = payload => ({ type: GET_FIRE_BLOCKS, payload });
-export const getFireBlocksSuccess = payload => ({ type: GET_FIRE_BLOCKS_SUCCESS, payload });
-export const getFireBlocksFailure = error => ({ type: GET_FIRE_BLOCKS_FAILURE, error });
+export const getFireblocks = payload => ({ type: GET_FIRE_BLOCKS, payload });
+export const getFireblocksSuccess = payload => ({ type: GET_FIRE_BLOCKS_SUCCESS, payload });
+export const getFireblocksFailure = error => ({ type: GET_FIRE_BLOCKS_FAILURE, error });
 
 export const getFma = payload => ({ type: GET_FMA, payload });
 export const getFmaSuccess = payload => ({ type: GET_FMA_SUCCESS, payload });
@@ -162,6 +162,102 @@ export const getAlarmLevelsThunk = () => (dispatch) => {
   return fireApi.getAlarmLevels().then(
     data => dispatch(getAlarmLevelsSuccess(data)),
     err => dispatch(getAlarmLevelsFailure(err)),
+  );
+};
+
+export const getFireblockThunk = inputs => (dispatch) => {
+  dispatch(getFireblock());
+  return fireApi.getFireblock(inputs).then(
+    data => dispatch(getFireblockSuccess(data)),
+    err => dispatch(getFireblockFailure(err)),
+  );
+};
+
+export const getFireblocksThunk = () => (dispatch) => {
+  dispatch(getFireblocks());
+  return fireApi.getFireblocks().then(
+    data => dispatch(getFireblocksSuccess(data)),
+    err => dispatch(getFireblocksFailure(err)),
+  );
+};
+
+export const getFmaThunk = inputs => (dispatch) => {
+  dispatch(getFma());
+  return fireApi.getFma(inputs).then(
+    data => dispatch(getFmaSuccess(data)),
+    err => dispatch(getFmaFailure(err)),
+  );
+};
+
+export const getFmasThunk = inputs => (dispatch) => {
+  dispatch(getFmas());
+  return fireApi.getFmas(inputs).then(
+    data => dispatch(getFmasSuccess(data)),
+    err => dispatch(getFmasFailure(err)),
+  );
+};
+
+export const getIncidentsThunk = inputs => (dispatch) => {
+  dispatch(getIncidents());
+  return fireApi.getIncidents(inputs).then(
+    data => dispatch(getIncidentsSuccess(data)),
+    err => dispatch(getIncidentsFailure(err)),
+  );
+};
+
+export const getMutualAidThunk = inputs => (dispatch) => {
+  dispatch(getMutualAid());
+  return fireApi.getMutualAid(inputs).then(
+    data => dispatch(getMutualAidSuccess(data)),
+    err => dispatch(getMutualAidFailure(err)),
+  );
+};
+
+export const getRespondersThunk = inputs => (dispatch) => {
+  dispatch(getResponders());
+  return fireApi.getResponders(inputs).then(
+    data => dispatch(getRespondersSuccess(data)),
+    err => dispatch(getRespondersFailure(err)),
+  );
+};
+
+export const getResponderUnitsThunk = inputs => (dispatch) => {
+  dispatch(getResponderUnits());
+  return fireApi.getResponderUnits(inputs).then(
+    data => dispatch(getResponderUnitsSuccess(data)),
+    err => dispatch(getResponderUnitsFailure(err)),
+  );
+};
+
+export const getSituationFoundThunk = inputs => (dispatch) => {
+  dispatch(getSituationFound());
+  return fireApi.getSituationFound(inputs).then(
+    data => dispatch(getSituationFoundSuccess(data)),
+    err => dispatch(getSituationFoundFailure(err)),
+  );
+};
+
+export const getStationsThunk = inputs => (dispatch) => {
+  dispatch(getStations());
+  return fireApi.getStations(inputs).then(
+    data => dispatch(getStationsSuccess(data)),
+    err => dispatch(getStationsFailure(err)),
+  );
+};
+
+export const getTimeDescriptionsThunk = inputs => (dispatch) => {
+  dispatch(getTimeDescriptions());
+  return fireApi.getTimeDescriptions(inputs).then(
+    data => dispatch(getTimeDescriptionsSuccess(data)),
+    err => dispatch(getTimeDescriptionsFailure(err)),
+  );
+};
+
+export const getTypeNatureCodesThunk = inputs => (dispatch) => {
+  dispatch(getTypeNatureCodes());
+  return fireApi.getTypeNatureCodes(inputs).then(
+    data => dispatch(getTypeNatureCodesSuccess(data)),
+    err => dispatch(getTypeNatureCodesFailure(err)),
   );
 };
 
