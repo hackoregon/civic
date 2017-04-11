@@ -9,7 +9,7 @@ import LeafletMap from '@hackoregon/component-library/lib/LeafletMap/LeafletMap'
 import { Marker, Popup } from 'react-leaflet';
 // import L from 'leaflet';
 
-import { TestComponent } from '../index';
+import { TestComponent, FmaMap } from '../index';
 
 const Container = styled.div`
   min-height: 100%;
@@ -38,6 +38,7 @@ function App(props) {
         <p className="Description">
           Here&apos;s a map!
         </p>
+
         <LeafletMap>
           <Marker position={portland}>
             <Popup>
@@ -53,6 +54,7 @@ function App(props) {
         <BarChart data={[{ name: 'Fires', x: 200, y: 300 }]} />
       </StoryCard>
 
+      <FmaMap />
       <TestComponent />
 
       {React.Children.toArray(props.children)}
