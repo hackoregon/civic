@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
 import LeafletMap from '@hackoregon/component-library/lib/LeafletMap/LeafletMap';
 import { Marker, Popup, GeoJSON } from 'react-leaflet';
 import { connect } from 'react-redux';
@@ -13,19 +12,14 @@ class FmaMap extends Component {
   }
   render() {
     return (
-      <StoryCard title="Have a Map" collectionId="emergency-response" cardId="er-map">
-        <p className="Description">
-            Here&apos;s a map!
-        </p>
-        <LeafletMap center={portland} zoom={11} height={600} width={900}>
-          <Marker position={portland}>
-            <Popup>
-              <span>A pretty CSS3 popup.<br />Easily customizable.</span>
-            </Popup>
-          </Marker>
-          <GeoJSON data={this.props.fmasData} />
-        </LeafletMap>
-      </StoryCard>
+      <LeafletMap center={portland} zoom={11} height={600} width={900}>
+        <Marker position={portland}>
+          <Popup>
+            <span>A pretty CSS3 popup.<br />Easily customizable.</span>
+          </Popup>
+        </Marker>
+        <GeoJSON data={this.props.fmasData} />
+      </LeafletMap>
     );
   }
 }
