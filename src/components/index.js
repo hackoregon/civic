@@ -9,5 +9,5 @@ export {
   Example,
   NotFoundPage,
   Root,
-  TestComponent
-}
+  TestComponent,
+};
