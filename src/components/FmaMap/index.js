@@ -14,8 +14,8 @@ class FmaMap extends Component {
     console.log('layer', layer);
     console.log('feature', feature);
     console.log(this);
-    if (feature.properties && feature.properties.fireblocks) {
-      layer.bindPopup(`<span>${feature.properties.fireblocks[0].gid}</span>`);
+    if (feature.properties && feature.properties.fma_id) {
+      layer.bindPopup(`<span>This is totally FMA #${feature.properties.fma_id}!</span>`);
     }
   }
   render() {
