@@ -46,11 +46,11 @@ function App(props) {
           </Marker>
         </LeafletMap>
       </StoryCard>
-      <StoryCard title="Have a Bar Chart" collectionId="emergency-response" cardId="er-scatter">
+      <StoryCard title="Have a Scatter Plot" collectionId="emergency-response" cardId="er-scatter">
         <p className="Description">
-          Here is a chart with some fun data.
+          Here is a scatter plot with some fun data.
         </p>
-        <BarChart data={[{ name: 'Fires', x: 200, y: 300 }]} />
+        <FmaScatter />
       </StoryCard>
 
       <TestComponent />
