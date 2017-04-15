@@ -8,7 +8,6 @@ const data = [{ x: 100, y: 200, z: 200 }, { x: 120, y: 100, z: 260 },
 class FmaScatter extends Component {
   render() {
     return (
-
           <ScatterChart width={400} height={400} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
             <XAxis dataKey={'x'} name='stature' unit='cm' />
             <YAxis dataKey={'y'} name='weight' unit='kg' />

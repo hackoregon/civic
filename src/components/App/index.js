@@ -7,6 +7,7 @@ import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
 import BarChart from '@hackoregon/component-library/lib/BarChart/BarChart';
 import LeafletMap from '@hackoregon/component-library/lib/LeafletMap/LeafletMap';
 import { Marker, Popup } from 'react-leaflet';
+import FmaScatter from '../index';
 // import L from 'leaflet';
 
 import { TestComponent } from '../index';
