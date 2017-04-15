@@ -7,7 +7,7 @@ import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
 import BarChart from '@hackoregon/component-library/lib/BarChart/BarChart';
 import LeafletMap from '@hackoregon/component-library/lib/LeafletMap/LeafletMap';
 import { Marker, Popup } from 'react-leaflet';
-import FmaScatter from '../index';
+import { FmaScatter } from '../index';
 // import L from 'leaflet';
 
 import { TestComponent } from '../index';
@@ -36,7 +36,7 @@ function App(props) {
         </p>
       </StoryCard>
       <StoryCard title="Have a Map" collectionId="emergency-response" cardId="er-map">
-        <p className="Description">
+        <p className="Descriptison">
           Here&apos;s a map!
         </p>
         <LeafletMap>
