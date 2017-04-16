@@ -1,3 +1,8 @@
+import {
+  getSelectedDemographic,
+  getSelectedUnitSize,
+} from './selectors/app';
+
 export const NEIGHBORHOOD_START = 'NEIGHBORHOOD_START';
 export const NEIGHBORHOOD_FAIL = 'NEIGHBORHOOD_FAIL';
 export const NEIGHBORHOOD_SUCCESS = 'NEIGHBORHOOD_SUCCESS';
@@ -25,10 +30,11 @@ function format(queryParams) {
   return Object.keys(queryParams).map(key => `${key}=${queryParams[key]}`).join('&');
 }
 
-function api(endpoint, normalizer, start, success, fail) {
-  return function apiHandler(queryParams) {
-    return (dispatch) => {
+function api(endpoint, { buildParams, normalizer, start, success, fail }) {
+  return function apiHandler() {
+    return (dispatch, getState) => {
       dispatch(start());
+      const queryParams = buildParams(getState());
       return fetch(`${API_HOST}/housing_api${endpoint}?format=json&${format(queryParams)}`)
         .then(res => res.json())
         .then(normalizer)
@@ -42,13 +48,22 @@ function api(endpoint, normalizer, start, success, fail) {
   };
 }
 
-export const neighborhoodFetch = api('/affordable', json => json.map(demo => [
-  demo.affordable ? ':D' : ':C',
-  demo.demographic.name,
-  demo.demographic.income_median,
-  demo.neighborhood.name,
-  demo.neighborhood.report_year.year,
-]), neighborhoodStart, neighborhoodSuccess, neighborhoodFail);
+export const neighborhoodFetch = api('/affordable', {
+  start: neighborhoodStart,
+  success: neighborhoodSuccess,
+  fail: neighborhoodFail,
+  normalizer: json => json.map(demo => [
+    demo.affordable ? ':D' : ':C',
+    demo.demographic.name,
+    demo.demographic.income_median,
+    demo.neighborhood.name,
+    demo.neighborhood.report_year.year,
+  ]),
+  buildParams: state => ({
+    housing_size: getSelectedUnitSize(state),
+    demographic: getSelectedDemographic(state),
+  }),
+});
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {

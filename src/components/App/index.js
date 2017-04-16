@@ -8,6 +8,18 @@ import Header from '@hackoregon/component-library/lib/Navigation/Header';
 import Table from './table';
 import { getNeighborhoodRequest } from '../../state/selectors/api';
 import { neighborhoodFetch } from '../../state/api';
+import {
+  updateSelectedUnitSize,
+  updateSelectedDemographic,
+} from '../../state/app';
+import {
+  getSelectedDemographic,
+  getSelectedUnitSize,
+} from '../../state/selectors/app';
+import {
+  DEMOGRAPHICS,
+  UNIT_SIZES,
+} from '../../utils/data-constants';
 
 const Container = styled.div`
   min-height: 100%;
@@ -16,7 +28,15 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-export function App({ children, isLoading, neighborhoodData, onNeighborhoodRequest }) {
+export function App({
+  children,
+  isLoading,
+  neighborhoodData,
+  setUnitSize,
+  setDemographic,
+  demographic,
+  unitSize,
+}) {
   let content;
   if (isLoading) {
     content = <span>Loading...</span>;
@@ -29,14 +49,17 @@ export function App({ children, isLoading, neighborhoodData, onNeighborhoodReque
   return (
     <Container>
       <Header />
-      <button onClick={() => onNeighborhoodRequest()}>Fetch Data</button>
       # Bedrooms:
-      <select onChange={event => onNeighborhoodRequest(event.target.value)}>
-        <option value="Studio">Studio</option>
-        <option value="1-BR">1</option>
-        <option value="2-BR">2</option>
-        <option value="3-BR">3</option>
-        <option value="Homeownership">Owned</option>
+      <select value={unitSize} onChange={event => setUnitSize(event.target.value)}>
+        {UNIT_SIZES.map(size => (
+          <option value={size} key={size}>{size}</option>
+        ))}
+      </select>
+      # Demographic
+      <select value={demographic} onChange={event => setDemographic(event.target.value)}>
+        {DEMOGRAPHICS.map(demo => (
+          <option value={demo} key={demo}>{demo}</option>
+        ))}
       </select>
       {content}
       {React.Children.toArray(children)}
@@ -48,29 +71,40 @@ App.displayName = 'App';
 App.defaultProps = {
   children: <div />,
   neighborhoodData: [],
-  onNeighborhoodRequest: () => {},
+  demographic: DEMOGRAPHICS[0],
+  unitSize: UNIT_SIZES[0],
+  setDemographic: () => {},
+  setUnitSize: () => {},
   isLoading: false,
 };
 
 App.propTypes = {
   children: React.PropTypes.node,
   neighborhoodData: React.PropTypes.array,
-  onNeighborhoodRequest: React.PropTypes.func,
+  setDemographic: React.PropTypes.func,
+  setUnitSize: React.PropTypes.func,
   isLoading: React.PropTypes.bool,
+  demographic: React.PropTypes.string,
+  unitSize: React.PropTypes.string,
 };
 
 const mapDispatch = dispatch => ({
-  onNeighborhoodRequest: (size) => {
-    dispatch(neighborhoodFetch({
-      demographic: 'Couple+with+Family',
-      housing_size: size || 'Studio',
-    }));
+  setUnitSize: (size) => {
+    dispatch(updateSelectedUnitSize(size));
+    dispatch(neighborhoodFetch());
+  },
+
+  setDemographic: (demographic) => {
+    dispatch(updateSelectedDemographic(demographic));
+    dispatch(neighborhoodFetch());
   },
 });
 
 const mapProps = state => ({
   neighborhoodData: getNeighborhoodRequest(state).data,
   isLoading: getNeighborhoodRequest(state).pending,
+  demographic: getSelectedDemographic(state),
+  unitSize: getSelectedUnitSize(state),
 });
 
 export default connect(mapProps, mapDispatch)(App);
