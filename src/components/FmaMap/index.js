@@ -19,7 +19,6 @@ class FmaMap extends Component {
   }
 
   render() {
-    console.log('fmas', this.props.fmasData);
     return (
       <LeafletMap center={portland} zoom={11} height={600} width={900}>
         {
