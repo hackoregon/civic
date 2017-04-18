@@ -11,9 +11,10 @@ class FmaMap extends Component {
     this.props.getFmas();
   }
   onEachFeature(feature, layer) {
-    console.log('layer', layer);
-    console.log('feature', feature);
-    console.log(this);
+    // const gids = feature.properties.fireblocks.map(item => (
+    //   '<span>{item.gid}</span>'
+    // ));
+
     if (feature.properties && feature.properties.fireblocks) {
       layer.bindPopup(`<span>${feature.properties.fireblocks[0].gid}</span>`);
     }
