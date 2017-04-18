@@ -1,6 +1,6 @@
 import { promiseToGet } from './utils';
 
-const ROOT_URL = 'http://hacko-integration-658279555.us-west-2.elb.amazonaws.com/emergency';
+const ROOT_URL = 'http://service.civicpdx.org/emergency';
 
 // without id: This viewset lists the agencies that respond to emergency incidents within Portland.
 // with id: This viewset retrievies a specific agency.
