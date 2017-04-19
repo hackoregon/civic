@@ -75,6 +75,7 @@ export const GET_TYPE_NATURE_CODES_FAILURE = 'GET_TYPE_NATURE_CODES_FAILURE';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const OPEN_MODAL  = 'OPEN_MODAL';
 
+export const RENDER_PANEL = 'RENDER_PANEL';
 
 // *** ACTION CREATORS: CREATES AN ACTION WITH OPTIONAL PAYLOAD AND BOUND DISPATCH. *** //
 
@@ -86,6 +87,8 @@ export const initializeApp = () => ({ type: INIT_APP });
 export const closeModal = payload => ({ type: CLOSE_MODAL, payload });
 export const openModal = payload => ({ type: OPEN_MODAL, payload });
 
+// RENDER PANEL CREATOR //
+export const renderFmaPanelId = payload => ({ type: RENDER_PANEL, payload });
 
 // FIRE API ACTION CREATORS //
 export const getAgencies = payload => ({ type: GET_AGENCIES, payload });
@@ -276,7 +279,11 @@ export const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         openModal: action.payload,
       };
-
+    case RENDER_PANEL:
+      return {
+        ...state,
+        fmaPanelId: action.payload,
+      };
     case GET_AGENCIES:
       return {
         ...state,
