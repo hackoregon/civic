@@ -22,3 +22,8 @@ export const getFmasFeatures = createSelector(
   getFmasData,
   ({ features }) => features,
 );
+
+export const getFmaPanelId = createSelector(
+  appState,
+  ({ fmaPanelId }) => fmaPanelId,
+);

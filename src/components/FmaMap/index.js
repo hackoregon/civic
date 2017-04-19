@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import LeafletMap from '@hackoregon/component-library/lib/LeafletMap/LeafletMap';
 import { GeoJSON } from 'react-leaflet';
 import { connect } from 'react-redux';
-import { getFmasThunk, getFmasData } from '../../state';
+import { getFmasThunk, getFmasData, renderFmaPanelId, getFmaPanelId } from '../../state';
 import { MapPanel } from '../index';
 
 const portland = [45.52, -122.67];
@@ -17,18 +17,17 @@ class FmaMap extends Component {
     this.props.getFmas();
   }
 
-  renderPanel(fmaId) {
-    console.log('renderPanel');
-    return (
-      <MapPanel id={fmaId} />
-    );
-  }
+  // renderPanel(fmaId) {
+  //   console.log('renderPanel');
+  //   return (
+  //     <MapPanel id={fmaId} />
+  //   );
+  // }
 
   openPanel(e) {
     const layer = e.target;
     const fmaId = layer.feature.properties.fma_id;
-    // console.log('hi', layer.feature.properties.fma_id);
-    this.renderPanel(fmaId);
+    this.props.renderPanel(fmaId);
   }
 
   onEachFeature(feature, layer) {
@@ -39,13 +38,19 @@ class FmaMap extends Component {
 
   render() {
     return (
-      <LeafletMap center={portland} zoom={11} height={600} width={900}>
-        {
-          this.props.fmasData ?
-            <GeoJSON data={this.props.fmasData} onEachFeature={this.onEachFeature} /> :
-            null
+      <div>
+        <LeafletMap center={portland} zoom={11} height={600} width={900}>
+          {
+            this.props.fmasData ?
+              <GeoJSON data={this.props.fmasData} onEachFeature={this.onEachFeature} /> :
+              null
+          }
+        </LeafletMap>
+        { this.props.fmaPanelId ?
+          <MapPanel id={this.props.fmaPanelId} /> :
+          null
         }
-      </LeafletMap>
+      </div>
     );
   }
 }
@@ -53,8 +58,10 @@ class FmaMap extends Component {
 export default connect(
   state => ({
     fmasData: getFmasData(state),
+    fmaPanelId: getFmaPanelId(state),
   }),
   dispatch => ({
     getFmas: () => dispatch(getFmasThunk()),
+    renderPanel: fmaId => dispatch(renderFmaPanelId(fmaId)),
   }),
 )(FmaMap);
