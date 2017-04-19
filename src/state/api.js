@@ -1,3 +1,4 @@
+import qs from 'query-string';
 import {
   getSelectedDemographic,
   getSelectedUnitSize,
@@ -26,16 +27,12 @@ export const neighborhoodStart = actionEmitter(NEIGHBORHOOD_START);
 export const neighborhoodFail = actionEmitter(NEIGHBORHOOD_FAIL);
 export const neighborhoodSuccess = actionEmitter(NEIGHBORHOOD_SUCCESS);
 
-function format(queryParams) {
-  return Object.keys(queryParams).map(key => `${key}=${queryParams[key]}`).join('&');
-}
-
 function api(endpoint, { buildParams, normalizer, start, success, fail }) {
   return function apiHandler() {
     return (dispatch, getState) => {
       dispatch(start());
       const queryParams = buildParams(getState());
-      return fetch(`${API_HOST}/housing_api${endpoint}?format=json&${format(queryParams)}`)
+      return fetch(`${API_HOST}/housing_api${endpoint}?format=json&${qs.stringify(queryParams)}`)
         .then(res => res.json())
         .then(normalizer)
         .then((data) => {
