@@ -32,16 +32,6 @@ export default function createRoutes(store) {
       },
     },
     {
-      path: '/example',
-      name: 'examplepage',
-      getComponent(nextState, cb) {
-        const renderRoute = loadModule(cb);
-        require.ensure([], require => Promise.resolve(require('./components/Example'))
-          .then(renderRoute)
-          .catch(errorLoading));
-      },
-    },
-    {
       path: '*',
       name: 'notfoundpage',
       getComponent(nextState, cb) {
