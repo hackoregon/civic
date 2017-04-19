@@ -3,19 +3,38 @@ import LeafletMap from '@hackoregon/component-library/lib/LeafletMap/LeafletMap'
 import { GeoJSON } from 'react-leaflet';
 import { connect } from 'react-redux';
 import { getFmasThunk, getFmasData } from '../../state';
+import { MapPanel } from '../index';
 
 const portland = [45.52, -122.67];
 
 class FmaMap extends Component {
+  constructor() {
+    super();
+    this.onEachFeature = this.onEachFeature.bind(this);
+  }
+
   componentWillMount() {
     this.props.getFmas();
   }
 
+  renderPanel(fmaId) {
+    console.log('renderPanel');
+    return (
+      <MapPanel id={fmaId} />
+    );
+  }
+
+  openPanel(e) {
+    const layer = e.target;
+    const fmaId = layer.feature.properties.fma_id;
+    // console.log('hi', layer.feature.properties.fma_id);
+    this.renderPanel(fmaId);
+  }
+
   onEachFeature(feature, layer) {
-    console.log(this);
-    if (feature.properties && feature.properties.fma_id) {
-      layer.bindPopup(`<span>This is totally FMA #${feature.properties.fma_id}!</span>`);
-    }
+    layer.on({
+      click: this.openPanel.bind(this),
+    });
   }
 
   render() {
