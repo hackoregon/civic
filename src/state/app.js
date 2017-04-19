@@ -17,6 +17,11 @@ export const updateSelectedDemographic = demographic => ({
 
 export const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case UPDATE_UNIT_SIZE:
+      return {
+        ...state,
+        selectedUnitSize: action.unitSize,
+      };
     case UPDATE_DEMOGRAPHIC:
       return {
         ...state,
