@@ -10,14 +10,14 @@ describe('api selectors', () => {
 
   describe('getApiState', () => {
     it('handles no state without errors', () => {
-      selectors.getApiState().should.be.eql({});
+      selectors.getApiState().should.eql({});
     });
   });
 
   describe('getNeighborhoodRequest', () => {
     it('should return an empty object when unset', () => {
       state = { api: {} };
-      expect(selectors.getNeighborhoodRequest(state)).to.be.eql({});
+      expect(selectors.getNeighborhoodRequest(state)).to.eql({});
     });
 
     it('should return the neighborhood request object when set', () => {
