@@ -13,7 +13,12 @@ export const getAgencyData = createSelector(
   ({ agencyData }) => agencyData,
 );
 
-export const getAgencyDataResults = createSelector(
-  getAgencyData,
-  ({ results }) => results,
+export const getFmasData = createSelector(
+  appState,
+  ({ fmasData }) => fmasData,
+);
+
+export const getFmasFeatures = createSelector(
+  getFmasData,
+  ({ features }) => features,
 );
