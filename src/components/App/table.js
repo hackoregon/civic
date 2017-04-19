@@ -7,10 +7,10 @@ function Table({ rows }) {
   return (
     <table>
       <tbody>
-        {rows.map((row, rowIndex) => (
-          <tr key={rowIndex}>
-            {row.map((record, index) => (
-              <td key={index}>{record}</td>
+        {rows.map(row => (
+          <tr>
+            {row.map(record => (
+              <td>{record}</td>
             ))}
           </tr>
         ))}
