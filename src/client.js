@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import configureStore from './configureStore';
-import App from './components/App';
+import AppPage from './components/App';
 import createRoutes from './index';
 
 const locationStateSelector = () => {
@@ -29,7 +29,7 @@ const history = syncHistoryWithStore(browserHistory, store, {
 });
 
 const rootRoute = {
-  component: App,
+  component: AppPage,
   childRoutes: createRoutes(store),
 };
 
