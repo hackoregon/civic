@@ -8,6 +8,7 @@ import BarChart from '@hackoregon/component-library/lib/BarChart/BarChart';
 import LeafletMap from '@hackoregon/component-library/lib/LeafletMap/LeafletMap';
 import { Marker, Popup } from 'react-leaflet';
 import { FmaScatter } from '../index';
+import { BagelShop } from '../index';
 // import L from 'leaflet';
 
 import { FmaMap } from '../index';
@@ -27,6 +28,7 @@ function App(props) {
         <p className="Description">
           It blew up and now there are no bagels.
         </p>
+        <BagelShop />
       </StoryCard>
       <StoryCard title="Introduction to Fire Stuff" collectionId="emergency-response" cardId="domain-info">
         <p className="Description">

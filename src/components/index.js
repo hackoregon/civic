@@ -5,6 +5,7 @@ import NotFoundPage from './NotFoundPage/index';
 import Root from './Root';
 import TestComponent from './TestComponent';
 import FmaScatter from './FmaScatter';
+import BagelShop from './BagelShop';
 
 export {
   App,
@@ -13,5 +14,6 @@ export {
   NotFoundPage,
   Root,
   TestComponent,
-  FmaScatter
+  FmaScatter,
+  BagelShop
 };
