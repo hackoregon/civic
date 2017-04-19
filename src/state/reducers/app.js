@@ -193,9 +193,10 @@ export const getFireblocksThunk = () => (dispatch) => {
   );
 };
 
-export const getFmaThunk = (inputs, incidents) => (dispatch) => {
+export const getFmaThunk = inputs => (dispatch) => {
   dispatch(getFma());
-  return fireApi.getFma(inputs, incidents).then(
+  console.log('thunk', inputs);
+  return fireApi.getFma(inputs).then(
     data => dispatch(getFmaSuccess(data)),
     err => dispatch(getFmaFailure(err)),
   );
