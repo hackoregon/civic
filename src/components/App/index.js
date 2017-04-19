@@ -3,6 +3,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Header from '@hackoregon/component-library/lib/Navigation/Header';
+import Footer from '@hackoregon/component-library/lib/Footer/Footer';
 import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
 import BarChart from '@hackoregon/component-library/lib/BarChart/BarChart';
 import LeafletMap from '@hackoregon/component-library/lib/LeafletMap/LeafletMap';
@@ -48,6 +49,7 @@ function App(props) {
         </p>
         <FmaScatter />
       </StoryCard>
+      <Footer />
 
       {React.Children.toArray(props.children)}
     </Container>
