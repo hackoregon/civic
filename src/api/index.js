@@ -47,17 +47,16 @@ export const getFireblocks = () => {
 // It returns an id, the geom, and demographic stats about a FMA.
 // with incidents: This view returns all incidents for a FMA based on a latitude and
 // longitude.
-export const getFma = (inputs = {}) => {
-  const { incidents } = inputs;
+export const getFma = (inputs = {}, incidents = false) => {
   let url;
-
+  console.log('inputs', inputs, 'incidents', incidents);
   if (incidents) {
     url = `${ROOT_URL}/fma/${incidents}`;
   } else {
     url = `${ROOT_URL}/fma/`;
   }
 
-  return promiseToGet(url);
+  return promiseToGet(url, inputs);
 };
 
 // without fma: This endpoint provides the fma id and geoms for all FMAs (Fire Management Areas).

@@ -3,6 +3,7 @@ import {
   closeModal,
   openModal,
   getAgenciesThunk,
+  getFmaThunk,
   getFmasThunk,
   renderFmaPanelId,
 } from './reducers/app';
@@ -24,6 +25,7 @@ export {
   getAgenciesThunk,
   getAgencyData,
   renderFmaPanelId,
+  getFmaThunk,
   getFmasData,
   getFmaPanelId,
   getFmasFeatures,

@@ -47,7 +47,7 @@ class FmaMap extends Component {
           }
         </LeafletMap>
         { this.props.fmaPanelId ?
-          <MapPanel id={this.props.fmaPanelId} /> :
+          <MapPanel /> :
           null
         }
       </div>

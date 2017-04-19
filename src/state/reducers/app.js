@@ -77,6 +77,10 @@ export const OPEN_MODAL  = 'OPEN_MODAL';
 
 export const RENDER_PANEL = 'RENDER_PANEL';
 
+export const GET_FMA_ID_DATA = 'GET_FMA_ID_DATA';
+export const GET_FMA_ID_DATA_SUCCESS = 'GET_FMA_ID_DATA_SUCCESS';
+export const GET_FMA_ID_DATA_FAILURE = 'GET_FMA_ID_DATA_FAILURE';
+
 // *** ACTION CREATORS: CREATES AN ACTION WITH OPTIONAL PAYLOAD AND BOUND DISPATCH. *** //
 
 // INITIALIZE APP ACTION CREATORS //
@@ -149,6 +153,11 @@ export const getTypeNatureCodesSuccess = payload =>
 ({ type: GET_TYPE_NATURE_CODES_SUCCESS, payload });
 export const getTypeNatureCodesFailure = error => ({ type: GET_TYPE_NATURE_CODES_FAILURE, error });
 
+export const getFmaIdData = payload => ({ type: GET_FMA_ID_DATA, payload });
+export const getFmaIdDataSuccess = payload =>
+({ type: GET_FMA_ID_DATA_SUCCESS, payload });
+export const getFmaIdDataFailure = error => ({ type: GET_FMA_ID_DATA_FAILURE, error });
+
 
 // *** THUNKS: THE THUNK CAN BE USED TO DELAY THE DISPATCH OF AN ACTION, OR TO DISPATCH
 // ONLY IF A CERTAIN CONDITION IS MET. *** //
@@ -184,9 +193,9 @@ export const getFireblocksThunk = () => (dispatch) => {
   );
 };
 
-export const getFmaThunk = inputs => (dispatch) => {
+export const getFmaThunk = (inputs, incidents) => (dispatch) => {
   dispatch(getFma());
-  return fireApi.getFma(inputs).then(
+  return fireApi.getFma(inputs, incidents).then(
     data => dispatch(getFmaSuccess(data)),
     err => dispatch(getFmaFailure(err)),
   );
@@ -262,6 +271,12 @@ export const getTypeNatureCodesThunk = inputs => (dispatch) => {
     data => dispatch(getTypeNatureCodesSuccess(data)),
     err => dispatch(getTypeNatureCodesFailure(err)),
   );
+};
+
+
+export const getFmaIdDataThunk = inputs => (dispatch) => {
+  dispatch(getFmaIdData());
+  // figure out how to call multiple api calls—a series of thens?
 };
 
 
