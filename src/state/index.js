@@ -3,10 +3,13 @@ import {
   closeModal,
   openModal,
   getAgenciesThunk,
+  getFmasThunk,
 } from './reducers/app';
 
 import {
   getAgencyData,
+  getFmasData,
+  getFmasFeatures,
   // getAppState,
   // getOpenModal,
   // getStories,
@@ -18,6 +21,9 @@ export {
   closeModal,
   getAgenciesThunk,
   getAgencyData,
+  getFmasData,
+  getFmasFeatures,
+  getFmasThunk,
   // getAppState,
   // getOpenModal,
   // getStories,

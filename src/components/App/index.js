@@ -10,7 +10,7 @@ import { Marker, Popup } from 'react-leaflet';
 import { FmaScatter } from '../index';
 // import L from 'leaflet';
 
-import { TestComponent } from '../index';
+import { FmaMap } from '../index';
 
 const Container = styled.div`
   min-height: 100%;
@@ -18,8 +18,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
-const portland = [45.52, -122.67];
 
 function App(props) {
   return (
@@ -39,13 +37,8 @@ function App(props) {
         <p className="Descriptison">
           Here&apos;s a map!
         </p>
-        <LeafletMap>
-          <Marker position={portland}>
-            <Popup>
-              <span>A pretty CSS3 popup.<br />Easily customizable.</span>
-            </Popup>
-          </Marker>
-        </LeafletMap>
+
+        <FmaMap />
       </StoryCard>
       <StoryCard title="Have a Scatter Plot" collectionId="emergency-response" cardId="er-scatter">
         <p className="Description">
@@ -53,8 +46,6 @@ function App(props) {
         </p>
         <FmaScatter />
       </StoryCard>
-
-      <TestComponent />
 
       {React.Children.toArray(props.children)}
     </Container>
