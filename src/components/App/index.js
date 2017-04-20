@@ -8,7 +8,7 @@ import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
 import BarChart from '@hackoregon/component-library/lib/BarChart/BarChart';
 import LeafletMap from '@hackoregon/component-library/lib/LeafletMap/LeafletMap';
 import { Marker, Popup } from 'react-leaflet';
-import { FmaScatter } from '../index';
+import { ChartScatter } from '../index';
 import { BagelShop } from '../index';
 import { FmaMap } from '../index';
 import { PieHowBusy, PieWhatTheyDo } from '../index';
@@ -63,12 +63,12 @@ function App(props) {
           How Response Time Varies Across The City <br/> Scatter Plot <br/> Scatter Plot <br/> Scatter Plot <br/> Scatter Plot <br/> Scatter Plot <br/> Scatter Plot
         </p>
       </StoryCard>
-      {/*<StoryCard title="Have a Scatter Plot" collectionId="emergency-response" cardId="er-scatter">
+      <StoryCard title="Have a Scatter Plot" collectionId="emergency-response" cardId="er-scatter">
         <p className="Description">
           Here is a scatter plot with some fun data.
         </p>
-        <FmaScatter />
-      </StoryCard>*/}
+        <ChartScatter />
+      </StoryCard>
 
       <Footer />
 

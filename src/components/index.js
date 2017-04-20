@@ -5,7 +5,7 @@ import MapPanel from './MapPanel';
 import NotFoundPage from './NotFoundPage/index';
 import Root from './Root';
 import TestComponent from './TestComponent';
-import FmaScatter from './FmaScatter';
+import ChartScatter from './ChartScatter';
 import BagelShop from './BagelShop';
 import ErPieChart from './ErPieChart';
 import PieHowBusy from './PieHowBusy';
@@ -19,7 +19,7 @@ export {
   NotFoundPage,
   Root,
   TestComponent,
-  FmaScatter,
+  ChartScatter,
   BagelShop,
   ErPieChart,
   PieHowBusy,
