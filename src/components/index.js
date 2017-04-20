@@ -7,6 +7,7 @@ import Root from './Root';
 import TestComponent from './TestComponent';
 import FmaScatter from './FmaScatter';
 import BagelShop from './BagelShop';
+import ErPieChart from './ErPieChart'
 
 export {
   App,
@@ -17,5 +18,6 @@ export {
   Root,
   TestComponent,
   FmaScatter,
-  BagelShop
+  BagelShop,
+  ErPieChart
 };

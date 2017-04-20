@@ -10,9 +10,9 @@ import LeafletMap from '@hackoregon/component-library/lib/LeafletMap/LeafletMap'
 import { Marker, Popup } from 'react-leaflet';
 import { FmaScatter } from '../index';
 import { BagelShop } from '../index';
-// import L from 'leaflet';
-
 import { FmaMap } from '../index';
+
+import { ErPieChart } from '../index';
 
 const Container = styled.div`
   min-height: 100%;
@@ -25,6 +25,7 @@ function App(props) {
   return (
     <Container>
       <Header />
+      <ErPieChart />
       <StoryCard title="The First Five Minutes" collectionId="emergency-response" cardId="title">
         <p className="Description">
           The First Five Minutes
