@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import RechartsPie from '@hackoregon/component-library/lib/RechartsPie/RechartsPie';
 
-const data = [
-  { name: 'Group A', value: 400 }, { name: 'Group B', value: 300 },
-  { name: 'Group C', value: 300 }, { name: 'Group D', value: 200 },
-];
-
 // This base can be adjusted to scale up or down the chart and legend
 const proportionBase = 200;
 
@@ -58,7 +53,7 @@ class ErPieChart extends Component {
   render() {
     return (
       <RechartsPie
-        data={data}
+        data={this.props.data}
         chartProportions={chartProportions}
         colors={colors}
         styles={styles}
