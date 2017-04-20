@@ -11,8 +11,7 @@ import { Marker, Popup } from 'react-leaflet';
 import { FmaScatter } from '../index';
 import { BagelShop } from '../index';
 import { FmaMap } from '../index';
-
-import { ErPieChart } from '../index';
+import { PieHowBusy, PieWhatTheyDo } from '../index';
 
 const Container = styled.div`
   min-height: 100%;
@@ -21,16 +20,10 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-const data = [
-  { name: 'Group A', value: 400 }, { name: 'Group B', value: 300 },
-  { name: 'Group C', value: 300 }, { name: 'Group D', value: 200 },
-];
-
 function App(props) {
   return (
     <Container>
       <Header />
-      <ErPieChart data={data} />
       <StoryCard title="The First Five Minutes" collectionId="emergency-response" cardId="title">
         <p className="Description">
           The First Five Minutes
@@ -38,8 +31,9 @@ function App(props) {
       </StoryCard>
       <StoryCard title="What Does Portland Fire &amp; Rescue Do?" collectionId="emergency-response" cardId="what-they-do">
         <p className="Description">
-          What Does Portland Fire &amp; Rescue Do? <br/> Pie Chart
+          What Does Portland Fire &amp; Rescue Do?
         </p>
+        <PieWhatTheyDo />
       </StoryCard>
       <StoryCard title="Who Does Portland Fire &amp; Rescue Serve?" collectionId="emergency-response" cardId="er-map">
         <p className="Description">
@@ -49,8 +43,9 @@ function App(props) {
       </StoryCard>
       <StoryCard title="How Busy Is Portland Fire &amp; Rescue? When Are They Most Busy?" collectionId="emergency-response" cardId="when-theyre-busy">
         <p className="Description">
-          How Busy Is Portland Fire &amp; Rescue? When Are They Most Busy? <br/> Bar Chart <br/> Bar Chart
+          How Busy Is Portland Fire &amp; Rescue? When Are They Most Busy?
         </p>
+        <PieHowBusy />
       </StoryCard>
       <StoryCard title="The First Five Minutes" collectionId="emergency-response" cardId="first-five-minutes">
         <p className="Description">
