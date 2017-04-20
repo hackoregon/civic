@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import { ErPieChart } from '../index';
 
 const data = [
-  { name: 'Group A', value: 400 }, { name: 'Group B', value: 300 },
-  { name: 'Group C', value: 300 }, { name: 'Group D', value: 200 },
+  { name: 'Medical', value: 71.9 },
+  { name: 'Fire', value: 3.2 },
+  { name: 'False Alarms', value: 7.7 },
+  { name: 'Service Calls', value: 10},
+  { name: 'Good Intent', value: 4.9 },
+  { name: 'Other', value: 2.3 },
 ];
 
 class PieWhatTheyDo extends Component {
