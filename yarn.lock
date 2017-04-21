@@ -2003,13 +2003,13 @@ date-now@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
 
-debug@2.2.0, debug@~2.2.0:
+debug@2.2.0, debug@^2.1.1, debug@^2.2.0, debug@~2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.2.0.tgz#f87057e995b1a1f6ae6a4960664137bc56f039da"
   dependencies:
     ms "0.7.1"
 
-debug@^2.1.1, debug@^2.2.0, debug@^2.4.5:
+debug@^2.4.5:
   version "2.6.3"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.3.tgz#0f7eb8c30965ec08c72accfa0130c8b79984141d"
   dependencies:
@@ -2623,6 +2623,10 @@ fbjs@^0.8.1, fbjs@^0.8.4, fbjs@^0.8.5, fbjs@^0.8.7, fbjs@^0.8.8, fbjs@^0.8.9:
     promise "^7.1.1"
     setimmediate "^1.0.5"
     ua-parser-js "^0.7.9"
+
+fetch-jsonp@^1.0.2:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/fetch-jsonp/-/fetch-jsonp-1.0.6.tgz#8d2ae174ed14108292f025f43fa07d2078de6736"
 
 figures@^1.3.5:
   version "1.7.0"
@@ -3633,6 +3637,10 @@ load-json-file@^1.0.0:
     pify "^2.0.0"
     pinkie-promise "^2.0.0"
     strip-bom "^2.0.0"
+
+load-script@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/load-script/-/load-script-1.0.0.tgz#0491939e0bee5643ee494a7e3da3d2bac70c6ca4"
 
 loader-utils@0.2.x, loader-utils@^0.2.11, loader-utils@^0.2.16, loader-utils@^0.2.3, loader-utils@^0.2.7, loader-utils@~0.2.2, loader-utils@~0.2.5:
   version "0.2.17"
@@ -4772,7 +4780,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.4, prop-types@^15.5.7, prop-types@~15.5.7:
+prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.7, prop-types@~15.5.7:
   version "15.5.7"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.7.tgz#231c4f29cdd82e355011d4889386ca9059544dd1"
   dependencies:
@@ -4831,7 +4839,7 @@ query-selector@^1.0.9:
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/query-selector/-/query-selector-1.0.9.tgz#917fd31b7379b53fd441e536af647552e01e7e9e"
 
-query-string@^4.1.0, query-string@^4.2.2:
+query-string@^4.1.0, query-string@^4.2.2, query-string@^4.2.3:
   version "4.3.2"
   resolved "https://registry.yarnpkg.com/query-string/-/query-string-4.3.2.tgz#ec0fd765f58a50031a3968c2431386f8947a5cdd"
   dependencies:
@@ -5022,6 +5030,15 @@ react-motion@^0.4.7:
   dependencies:
     performance-now "^0.2.0"
     raf "^3.1.0"
+
+react-player@0.15.0:
+  version "0.15.0"
+  resolved "https://registry.yarnpkg.com/react-player/-/react-player-0.15.0.tgz#ce76415132ecd17c44e5495c5b558faba233107c"
+  dependencies:
+    fetch-jsonp "^1.0.2"
+    load-script "^1.0.0"
+    prop-types "^15.5.6"
+    query-string "^4.2.3"
 
 react-proxy@^1.1.7:
   version "1.1.8"
