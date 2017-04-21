@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getFmaPanelId, getFmaThunk } from '../../state';
+import { getFmaPanelId, getFmaThunk, getFmaData } from '../../state';
 
 class MapPanel extends Component {
   componentDidMount() {
@@ -21,14 +21,20 @@ class MapPanel extends Component {
   }
 
   render() {
-    let panelId;
-    if (this.props.fmaPanelId) {
-      panelId = this.props.fmaPanelId;
+    const panelId = this.props.fmaPanelId;
+    let fmaStats;
+    if (this.props.fmaData.stats) {
+      fmaStats = this.props.fmaData.stats.map((item, idx) => (
+        <li key={idx}>{item}</li>
+      ));
     }
-    console.log(this.props);
+
     return (
       <div>
         <h1>{panelId}</h1>
+        <ul>
+          {fmaStats}
+        </ul>
       </div>
     );
   }
@@ -38,6 +44,7 @@ class MapPanel extends Component {
 export default connect(
   state => ({
     fmaPanelId: getFmaPanelId(state),
+    fmaData: getFmaData(state),
   }),
   dispatch => ({
     getFmaData: inputs => dispatch(getFmaThunk(inputs)),

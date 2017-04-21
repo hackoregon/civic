@@ -10,6 +10,7 @@ import {
 
 import {
   getAgencyData,
+  getFmaData,
   getFmasData,
   getFmasFeatures,
   getFmaPanelId,
@@ -26,6 +27,7 @@ export {
   getAgencyData,
   renderFmaPanelId,
   getFmaThunk,
+  getFmaData,
   getFmasData,
   getFmaPanelId,
   getFmasFeatures,
