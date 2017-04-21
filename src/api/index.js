@@ -52,9 +52,9 @@ export const getFma = (inputs = {}) => {
   let url;
 
   if (incidents) {
-    url = `${ROOT_URL}/fma/${incidents}`;
+    url = `http://localhost:8000/transport/features?source_name=Grind and Pave`;
   } else {
-    url = `${ROOT_URL}/fma/`;
+    url = `http://localhost:8000/transport/features?source_name=Grind and Pave`;
   }
 
   return promiseToGet(url);
@@ -67,9 +67,9 @@ export const getFmas = (inputs = {}) => {
   let url;
 
   if (fma) {
-    url = `${ROOT_URL}/fmas/${fma}`;
+    url = `http://localhost:8000/transport/features?source_name=Grind and Pave`;
   } else {
-    url = `${ROOT_URL}/fmas/`;
+    url = `http://localhost:8000/transport/features?source_name=Grind and Pave`;
   }
 
   return promiseToGet(url);
