@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import LeafletMap from '@hackoregon/component-library/lib/LeafletMap/LeafletMap';
 import { GeoJSON } from 'react-leaflet';
-import { connect } from 'react-redux';
-import { getFmasThunk, getFmasData, renderFmaPanelId, getFmaPanelId } from '../../state';
 import { MapPanel } from '../index';
+import { Marker, Popup } from 'react-leaflet';
 
 const portland = [45.52, -122.67];
 
@@ -13,9 +12,9 @@ class TransportMap extends Component {
     this.onEachFeature = this.onEachFeature.bind(this);
   }
 
-  componentWillMount() {
-    this.props.getFmas();
-  }
+  // componentWillMount() {
+  //   this.props.getFmas();
+  // }
 
   // renderPanel(fmaId) {
   //   console.log('renderPanel');
@@ -55,13 +54,12 @@ class TransportMap extends Component {
   }
 }
 
-export default connect(
-  state => ({
-    fmasData: getFmasData(state),
-    fmaPanelId: getFmaPanelId(state),
-  }),
-  dispatch => ({
-    getFmas: () => dispatch(getFmasThunk()),
-    renderPanel: fmaId => dispatch(renderFmaPanelId(fmaId)),
-  }),
-)(FmaMap);
+TransportMap.defaultProps = {
+  children: <div />,
+};
+
+TransportMap.propTypes = {
+  children: React.PropTypes.node,
+};
+export default TransportMap
+

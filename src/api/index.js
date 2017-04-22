@@ -226,7 +226,7 @@ export const getTypeNatureCodes = (inputs = {}) => {
   return promiseToGet(url);
 };
 
-export const fireApi = {
+export const transportApi = {
   getAgencies,
   getAlarmLevels,
   getFireblock,

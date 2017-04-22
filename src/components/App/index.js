@@ -5,12 +5,8 @@ import styled from 'styled-components';
 import Header from '@hackoregon/component-library/lib/Navigation/Header';
 import Footer from '@hackoregon/component-library/lib/Footer/Footer';
 import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
-import BarChart from '@hackoregon/component-library/lib/BarChart/BarChart';
-import LeafletMap from '@hackoregon/component-library/lib/LeafletMap/LeafletMap';
-import { Marker, Popup } from 'react-leaflet';
+import ConstructionViews from '../ConstructionViews';
 // import L from 'leaflet';
-
-import { TransportMap } from '../index';
 
 const Container = styled.div`
   min-height: 100%;
@@ -25,14 +21,9 @@ function App(props) {
       <Header />
       
       <StoryCard title="Construction Projects Map" collectionId="transportation" cardId="trans-construction-maps">
-        <p className="Description">
-          Construction Project Exploration
-        </p>
-        <SelectorButtons />
-        <ControlBox />
-        <FmaMap />
+        <ConstructionViews />
       </StoryCard>
-      
+      <Footer />      
       {React.Children.toArray(props.children)}
     </Container>
   );
