@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import LeafletMap from '@hackoregon/component-library/lib/LeafletMap/LeafletMap';
 import { GeoJSON } from 'react-leaflet';
 import { MapPanel } from '../index';
-import { Marker, Popup } from 'react-leaflet';
+// import { GeoJSON, Marker, Popup } from 'react-leaflet';
 
 const portland = [45.52, -122.67];
 
@@ -58,8 +58,9 @@ TransportMap.defaultProps = {
   children: <div />,
 };
 
-TransportMap.propTypes = {
-  children: React.PropTypes.node,
-};
+// TransportMap.propTypes = {
+//   children: React.PropTypes.node,
+// };
+
 export default TransportMap
 

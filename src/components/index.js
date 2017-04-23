@@ -15,6 +15,7 @@ export {
   TransportMap,
   ControlBox,
   SelectorButtons,
+  ConstructionViews,
   MapPanel,
   NotFoundPage,
   Root,

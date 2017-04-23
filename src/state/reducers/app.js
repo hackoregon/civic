@@ -8,10 +8,29 @@ import { transportApi } from '../../api';
 export const INITIAL_STATE = {
   stories: [],
   isFetching: false,
-  openModal: null,
-  conflicts: null,
-  features: null,
-  nearby: null,
+  openModal: null,  
+  mapType: 'Features',
+  conflicts: {
+    distance: 3,
+    days: 2,
+    startDate: '',
+    endDate: '',
+    data: {},
+  },
+  features: {
+    showNulls: false,
+    sourceName: 'Grind and Pave',
+    startDate: '',
+    endDate: '',
+    data: {},
+  },
+  nearby: {
+    distance: 3,
+    address: '1120 SW 5th Ave, Portland, OR',
+    startDate: '',
+    endDate: '',
+    data: {},
+  },
 };
 
 // *** ACTIONS: HOLDS ACTION PAYLOADS IN PLAIN JAVASCRIPT OBJECTS. MUST HAVE A TYPE
@@ -61,6 +80,7 @@ export const getFmasThunk = inputs => (dispatch) => {
 // *** REDUCER: TAKES THE PREVIOUS STATE AND AN ACTION, AND RETURNS THE NEXT STATE. *** //
 // APP REDUCER //
 export const reducer = (state = INITIAL_STATE, action) => {
+  console.log(`reducer maptype = ${state.mapType}`);
   switch (action.type) {
     case CLOSE_MODAL:
       return {
