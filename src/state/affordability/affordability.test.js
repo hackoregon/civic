@@ -5,6 +5,7 @@ import { actionTypes } from './constants';
 import * as actions from './actions';
 import { API_HOST } from '../api';
 import reducer from './reducer';
+import * as selectors from './selectors';
 // import * as state from './api';
 
 const middlewares = [thunk];
@@ -122,7 +123,7 @@ describe('affordability actions', () => {
   });
 });
 
-describe('api reducer', () => {
+describe('affordability reducer', () => {
   const initialState = {
     neighborhood: {
       pending: false,
@@ -163,7 +164,7 @@ describe('api reducer', () => {
     });
   });
 
-  it('should handle NEIGHBORHOOD_FAIL', () => {
+  it('should handle CALL_FAIL', () => {
     const error = new Error('oops');
 
     expect(reducer(initialState, {
@@ -195,7 +196,7 @@ describe('api reducer', () => {
     });
   });
 
-  it('should handle NEIGHBORHOOD_SUCCESS', () => {
+  it('should handle CALL_SUCCESS', () => {
     const data = [
       [':D', 'Senior', 37469, 'Centennial-Glenfair-Wilkes', 2016],
       [':(', 'Senior', 37469, 'Sellwood-Moreland-Brooklyn', 2016],
@@ -227,6 +228,39 @@ describe('api reducer', () => {
         error: null,
         data,
       },
+    });
+  });
+});
+
+describe('affordability selectors', () => {
+  let state;
+  const affordability = {};
+
+  beforeEach(() => {
+    state = { affordability };
+  });
+
+  describe('getAffordabilityState', () => {
+    it('handles no state without errors', () => {
+      selectors.getAffordabilityState().should.eql({});
+    });
+  });
+
+  describe('getNeighborhoodRequest', () => {
+    it('should return an empty object when unset', () => {
+      state = { affordability: {} };
+      expect(selectors.getAffordabilityRequest(state)).to.eql({});
+    });
+
+    it('should return the neighborhood request object when set', () => {
+      state = { affordability: {
+        neighborhood: {
+          pending: true,
+          data: null,
+          error: null,
+        },
+      } };
+      expect(selectors.getAffordabilityRequest(state)).to.eql(state.api.neighborhood);
     });
   });
 });

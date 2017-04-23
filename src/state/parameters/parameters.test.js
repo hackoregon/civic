@@ -1,11 +1,11 @@
-import * as selectors from './app';
+import * as selectors from './selectors';
 import * as constants from '../../utils/data-constants';
 
 let state;
 const app = {};
 const ARBITRARY = 'Ron Burgundy';
 
-describe('app selectors', () => {
+describe('parameters selectors', () => {
   beforeEach(() => {
     state = { app };
   });

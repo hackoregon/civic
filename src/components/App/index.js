@@ -14,7 +14,7 @@ import {
 import {
   getSelectedDemographic,
   getSelectedUnitSize,
-} from '../../state/selectors/app';
+} from '../../state/parameters/selectors';
 import {
   DEMOGRAPHICS,
   UNIT_SIZES,

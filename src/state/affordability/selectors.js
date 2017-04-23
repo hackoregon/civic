@@ -2,10 +2,10 @@ import { createSelector } from 'reselect';
 import { propOr } from 'ramda';
 
 // api : State -> Obj
-const getAffordableState = state => propOr({}, 'affordability')(state);
+export const getAffordabilityState = state => propOr({}, 'affordability')(state);
 
 export const getAffordabilityRequest = createSelector(
-  getAffordableState,
+  getAffordabilityState,
   affordability => affordability,
 );
 

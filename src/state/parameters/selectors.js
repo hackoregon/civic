@@ -6,7 +6,7 @@ import {
 } from '../../utils/data-constants';
 
 // app : State -> Obj
-export const getAppState = state => propOr({}, 'app')(state);
+export const getAppState = state => propOr({}, 'parameters')(state);
 
 export const getSelectedUnitSize = createSelector(
   getAppState,
