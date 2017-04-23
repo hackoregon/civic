@@ -1,19 +1,37 @@
 import { createSelector } from 'reselect';
-import { propOr } from 'ramda';
-import {
-  DEMOGRAPHICS,
-  UNIT_SIZES,
-} from '../../utils/data-constants';
+import { propOr, path } from 'ramda';
+import { DEMOGRAPHICS, UNIT_SIZES, DEFAULT_INCOME } from '../../utils/data-constants';
 
-// app : State -> Obj
-export const getAppState = state => propOr({}, 'parameters')(state);
+const getUserState = state => path(['parameters', 'user'], state);
 
-export const getSelectedUnitSize = createSelector(
-  getAppState,
-  propOr(UNIT_SIZES[0], 'selectedUnitSize'),
+const getOtherState = state => path(['parameters', 'other'], state);
+
+export const getUserParameters = createSelector(
+  getUserState,
+  user => user,
 );
 
-export const getSelectedDemographic = createSelector(
-  getAppState,
-  propOr(DEMOGRAPHICS[0], 'selectedDemographic'),
+export const getOtherParameters = createSelector(
+  getOtherState,
+  other => other,
+);
+
+export const getUserIncome = createSelector(
+  getUserParameters,
+  propOr(DEFAULT_INCOME, 'income'),
+);
+
+export const getUserUnitSize = createSelector(
+  getUserParameters,
+  propOr(UNIT_SIZES[0], 'unitSize'),
+);
+
+export const getOtherDemographic = createSelector(
+  getOtherParameters,
+  propOr(DEMOGRAPHICS[0], 'demographic'),
+);
+
+export const getOtherUnitSize = createSelector(
+  getOtherParameters,
+  propOr(UNIT_SIZES[0], 'unitSize'),
 );

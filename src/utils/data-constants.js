@@ -15,10 +15,13 @@ export const DEMOGRAPHICS = [
 ];
 
 export const UNIT_SIZES = [
+  'Homeownership',
   'Studio',
   '1-BR',
   '2-BR',
   '3-BR',
-  'Overall',
 ];
 
+// making this up, should get income for 'average portlander' from data folks
+// also will need min / max
+export const DEFAULT_INCOME = 40000;

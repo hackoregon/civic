@@ -8,12 +8,12 @@ import Table from './table';
 import { getAffordabilityRequest, getAffordabilityData } from '../../state/affordability/selectors';
 import { fetchAffordabilityData } from '../../state/affordability/actions';
 import {
-  updateSelectedUnitSize,
-  updateSelectedDemographic,
+  updateOtherUnitSize,
+  updateOtherDemographic,
 } from '../../state/parameters/actions';
 import {
-  getSelectedDemographic,
-  getSelectedUnitSize,
+  getOtherDemographic,
+  getOtherUnitSize,
 } from '../../state/parameters/selectors';
 import {
   DEMOGRAPHICS,
@@ -88,12 +88,12 @@ App.propTypes = {
 
 const mapDispatch = dispatch => ({
   setUnitSize: (size) => {
-    dispatch(updateSelectedUnitSize(size));
+    dispatch(updateOtherUnitSize(size));
     dispatch(fetchAffordabilityData());
   },
 
   setDemographic: (demographic) => {
-    dispatch(updateSelectedDemographic(demographic));
+    dispatch(updateOtherDemographic(demographic));
     dispatch(fetchAffordabilityData());
   },
 });
@@ -101,8 +101,8 @@ const mapDispatch = dispatch => ({
 const mapProps = state => ({
   neighborhoodData: getAffordabilityData(state),
   isLoading: getAffordabilityRequest(state).pending,
-  demographic: getSelectedDemographic(state),
-  unitSize: getSelectedUnitSize(state),
+  demographic: getOtherDemographic(state),
+  unitSize: getOtherUnitSize(state),
 });
 
 export default connect(mapProps, mapDispatch)(App);
