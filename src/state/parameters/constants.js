@@ -1,13 +1,13 @@
-import { DEMOGRAPHICS, UNIT_SIZES, DEFAULT_INCOME } from '../../utils/data-constants';
+import { DEMOGRAPHICS, UNIT_SIZES_AFFORDABILITY, DEFAULT_INCOME } from '../../utils/data-constants';
 
 export const INITIAL_USER_STATE = {
   income: DEFAULT_INCOME,
-  unitSize: UNIT_SIZES[0],
+  unitSize: UNIT_SIZES_AFFORDABILITY[0],
 };
 
 export const INITIAL_OTHER_STATE = {
   demographic: DEMOGRAPHICS[0],
-  unitSize: UNIT_SIZES[0],
+  unitSize: UNIT_SIZES_AFFORDABILITY[0],
 };
 
 const UPDATE_USER_UNIT_SIZE = 'PARAMETERS/UPDATE_USER_UNIT_SIZE';
