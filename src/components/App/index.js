@@ -5,10 +5,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Table from './table';
-import { getAffordabilityRequest, getAffordabilityData } from '../../state/affordability/selectors';
+import { getAffordabilityData } from '../../state/affordability/selectors';
 import { fetchAffordabilityData } from '../../state/affordability/actions';
 import { fetchRentData } from '../../state/rent/actions';
 import { fetchNeighborhoods } from '../../state/neighborhoods/actions';
+import { isAnyCallPending } from '../../state/globalSelectors';
+
 import {
   updateOtherUnitSize,
   updateOtherDemographic,
@@ -148,7 +150,7 @@ const mapDispatch = (dispatch) => {
 
 const mapProps = state => ({
   neighborhoodData: getAffordabilityData(state),
-  isLoading: getAffordabilityRequest(state).pending,
+  isLoading: isAnyCallPending(state),
   userIncome: getUserIncome(state),
   userUnitSize: getUserUnitSize(state),
   otherDemographic: getOtherDemographic(state),

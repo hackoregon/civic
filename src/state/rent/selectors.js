@@ -13,3 +13,8 @@ export const getRentData = createSelector(
   getRentRequest,
   ({ data }) => data,
 );
+
+export const isRentPending = createSelector(
+  getRentRequest,
+  ({ pending }) => pending,
+);

@@ -13,3 +13,8 @@ export const getAffordabilityData = createSelector(
   getAffordabilityRequest,
   ({ data }) => data,
 );
+
+export const isAffordabilityPending = createSelector(
+  getAffordabilityRequest,
+  ({ pending }) => pending,
+);

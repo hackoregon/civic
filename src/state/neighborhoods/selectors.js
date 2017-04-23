@@ -13,3 +13,8 @@ export const getNeighborhoodsData = createSelector(
   getNeighborhoodsRequest,
   ({ data }) => data,
 );
+
+export const isNeighborhoodsPending = createSelector(
+  getNeighborhoodsRequest,
+  ({ pending }) => pending,
+);
