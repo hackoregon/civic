@@ -47,7 +47,7 @@ describe('affordability actions', () => {
   });
 
   describe('affordability fetch thunk', () => {
-    const commonNeighborhoodRequest = '/affordable?format=json&demographic=Avg.%20Portland%20Household&housing_size=1-BR';
+    const commonNeighborhoodRequest = '/affordable?format=json&demographic=Avg.%20Portland%20Household&housing_size=Homeownership';
     let store;
 
     beforeEach(() => {
@@ -64,16 +64,8 @@ describe('affordability actions', () => {
       const neighborhoods = [
         {
           affordable: true,
-          demographic: {
-            name: 'Senior',
-            income_median: 37469,
-            housing_budget: 937,
-            per_with_children: 3,
-            household_comp: '1.62',
-          },
-          housing_size: {
-            household_type: '1-BR',
-          },
+          demographic: 'Senior',
+          housing_size: '1-BR',
           neighborhood: {
             name: 'Centennial-Glenfair-Wilkes',
             report_year: {
@@ -93,7 +85,7 @@ describe('affordability actions', () => {
         {
           type: actionTypes.CALL_SUCCESS,
           payload: [
-            [':D', 'Senior', 37469, 'Centennial-Glenfair-Wilkes', 2016],
+            [':D', 'Senior', '1-BR'],
           ],
         },
       ];
@@ -125,42 +117,34 @@ describe('affordability actions', () => {
 
 describe('affordability reducer', () => {
   const initialState = {
-    neighborhood: {
-      pending: false,
-      data: null,
-      error: null,
-    },
+    pending: false,
+    data: null,
+    error: null,
   };
 
   it('should return the initial state', () => {
     expect(reducer(undefined, {})).to.eql(initialState);
   });
 
-  it('should handle NEIGHBORHOOD_START', () => {
+  it('should handle CALL_START', () => {
     expect(reducer(initialState, {
       type: actionTypes.CALL_START,
     })).to.eql({
-      neighborhood: {
-        pending: true,
-        data: null,
-        error: null,
-      },
+      pending: true,
+      data: null,
+      error: null,
     });
 
     expect(reducer({
-      neighborhood: {
-        pending: false,
-        data: ['stuff'],
-        error: { some: 'thing' },
-      },
+      pending: true,
+      data: null,
+      error: null,
     }, {
       type: actionTypes.CALL_START,
     })).to.eql({
-      neighborhood: {
-        pending: true,
-        data: null,
-        error: null,
-      },
+      pending: true,
+      data: null,
+      error: null,
     });
   });
 
@@ -171,28 +155,22 @@ describe('affordability reducer', () => {
       type: actionTypes.CALL_FAIL,
       payload: error,
     })).to.eql({
-      neighborhood: {
-        pending: false,
-        data: null,
-        error,
-      },
+      pending: false,
+      data: null,
+      error,
     });
 
     expect(reducer({
-      neighborhood: {
-        pending: true,
-        data: ['stuff'],
-        error: null,
-      },
+      pending: true,
+      data: ['stuff'],
+      error: null,
     }, {
       type: actionTypes.CALL_FAIL,
       payload: error,
     })).to.eql({
-      neighborhood: {
-        pending: false,
-        data: null,
-        error,
-      },
+      pending: false,
+      data: null,
+      error,
     });
   });
 
@@ -206,28 +184,22 @@ describe('affordability reducer', () => {
       type: actionTypes.CALL_SUCCESS,
       payload: data,
     })).to.eql({
-      neighborhood: {
-        pending: false,
-        error: null,
-        data,
-      },
+      pending: false,
+      error: null,
+      data,
     });
 
     expect(reducer({
-      neighborhood: {
-        pending: true,
-        error: new Error('oops'),
-        data: null,
-      },
+      pending: true,
+      error: new Error('oops'),
+      data: null,
     }, {
       type: actionTypes.CALL_SUCCESS,
       payload: data,
     })).to.eql({
-      neighborhood: {
-        pending: false,
-        error: null,
-        data,
-      },
+      pending: false,
+      error: null,
+      data,
     });
   });
 });
@@ -260,7 +232,7 @@ describe('affordability selectors', () => {
           error: null,
         },
       } };
-      expect(selectors.getAffordabilityRequest(state)).to.eql(state.api.neighborhood);
+      expect(selectors.getAffordabilityRequest(state)).to.eql(state.affordability);
     });
   });
 });

@@ -8,6 +8,7 @@ import Table from './table';
 import { getAffordabilityRequest, getAffordabilityData } from '../../state/affordability/selectors';
 import { fetchAffordabilityData } from '../../state/affordability/actions';
 import { fetchRentData } from '../../state/rent/actions';
+import { fetchNeighborhoods } from '../../state/neighborhoods/actions';
 import {
   updateOtherUnitSize,
   updateOtherDemographic,
@@ -120,6 +121,7 @@ const mapDispatch = (dispatch) => {
    */
   dispatch(fetchAffordabilityData());
   dispatch(fetchRentData());
+  dispatch(fetchNeighborhoods());
 
   return {
     setOtherUnitSize: (size) => {

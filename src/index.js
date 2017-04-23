@@ -26,6 +26,7 @@ export default function createRoutes(store) {
           .then((component) => {
             injectAsyncReducer('parameters', require('./state/parameters').default);
             injectAsyncReducer('affordability', require('./state/affordability').default);
+            injectAsyncReducer('neighborhoods', require('./state/neighborhoods').default);
             injectAsyncReducer('rent', require('./state/rent').default);
             renderRoute(component);
           })

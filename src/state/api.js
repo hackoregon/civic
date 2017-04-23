@@ -2,12 +2,12 @@ import qs from 'query-string';
 
 export const API_HOST = 'http://service.civicpdx.org/housing';
 
-function get(url, { buildParams, normalizer, start, success, fail }) {
+export function api(endpoint, { buildParams, normalizer, start, success, fail }) {
   return function apiHandler() {
     return (dispatch, getState) => {
       dispatch(start());
       const queryParams = buildParams(getState());
-      return fetch(`${url}?format=json&${qs.stringify(queryParams)}`)
+      return fetch(`${API_HOST}${endpoint}?format=json&${qs.stringify(queryParams)}`)
         .then((res) => {
           const json = res.json();
           if (res.ok) { return json; }
@@ -26,4 +26,22 @@ function get(url, { buildParams, normalizer, start, success, fail }) {
   };
 }
 
-export const api = (endpoint, options) => get(`${API_HOST}${endpoint}`, options);
+export const get = (url, { normalizer, start, success, fail }) =>
+  () => (dispatch) => {
+    dispatch(start());
+    return fetch(url)
+      .then((res) => {
+        const json = res.json();
+        if (res.ok) { return json; }
+        return json.then((err) => {
+          throw new Error(err);
+        });
+      })
+      .then(normalizer)
+      .then((data) => {
+        dispatch(success(data));
+      })
+      .catch((err) => {
+        dispatch(fail(err));
+      });
+  };

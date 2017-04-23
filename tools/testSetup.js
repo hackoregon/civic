@@ -3,7 +3,7 @@ process.env.NODE_ENV = 'test';
 
 const identity = require('ramda').identity;
 
-['.css', '.png', '.jpg', '.svg', '.gif'].forEach((ext) => {
+['.css', '.png', '.jpg', '.svg', '.gif', '.geojson'].forEach((ext) => {
   require.extensions[ext] = identity;
 });
 
