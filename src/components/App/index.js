@@ -10,7 +10,7 @@ import { fetchAffordabilityData } from '../../state/affordability/actions';
 import {
   updateSelectedUnitSize,
   updateSelectedDemographic,
-} from '../../state/app';
+} from '../../state/parameters/actions';
 import {
   getSelectedDemographic,
   getSelectedUnitSize,

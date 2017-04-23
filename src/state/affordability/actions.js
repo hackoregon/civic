@@ -1,7 +1,7 @@
 import { actionEmitter } from '../utils';
 import { actionTypes } from './constants';
 import { api } from '../api';
-import { getSelectedUnitSize, getSelectedDemographic } from '../selectors/app';
+import { getSelectedUnitSize, getSelectedDemographic } from '../parameters/selectors';
 
 export const affordabilityStart = actionEmitter(actionTypes.CALL_START);
 export const affordabilityFail = actionEmitter(actionTypes.CALL_FAIL);
