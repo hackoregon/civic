@@ -5,8 +5,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Table from './table';
-import { getNeighborhoodRequest } from '../../state/selectors/api';
-import { neighborhoodFetch } from '../../state/api';
+import { getAffordabilityRequest, getAffordabilityData } from '../../state/affordability/selectors';
+import { fetchAffordabilityData } from '../../state/affordability/actions';
 import {
   updateSelectedUnitSize,
   updateSelectedDemographic,
@@ -89,18 +89,18 @@ App.propTypes = {
 const mapDispatch = dispatch => ({
   setUnitSize: (size) => {
     dispatch(updateSelectedUnitSize(size));
-    dispatch(neighborhoodFetch());
+    dispatch(fetchAffordabilityData());
   },
 
   setDemographic: (demographic) => {
     dispatch(updateSelectedDemographic(demographic));
-    dispatch(neighborhoodFetch());
+    dispatch(fetchAffordabilityData());
   },
 });
 
 const mapProps = state => ({
-  neighborhoodData: getNeighborhoodRequest(state).data,
-  isLoading: getNeighborhoodRequest(state).pending,
+  neighborhoodData: getAffordabilityData(state),
+  isLoading: getAffordabilityRequest(state).pending,
   demographic: getSelectedDemographic(state),
   unitSize: getSelectedUnitSize(state),
 });

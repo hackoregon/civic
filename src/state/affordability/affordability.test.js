@@ -1,19 +1,23 @@
 import nock from 'nock';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import * as state from './api';
+import { actionTypes } from './constants';
+import * as actions from './actions';
+import { API_HOST } from '../api';
+import reducer from './reducer';
+// import * as state from './api';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-describe('api actions', () => {
-  describe('neighborhood fetch actions', () => {
+describe('affordability actions', () => {
+  describe('affordability fetch actions', () => {
     it('should have a start action', () => {
       const expectedAction = {
-        type: state.NEIGHBORHOOD_START,
+        type: actionTypes.CALL_START,
       };
 
-      expect(state.neighborhoodStart()).to.eql(expectedAction);
+      expect(actions.affordabilityStart()).to.eql(expectedAction);
     });
 
     it('should have a success action', () => {
@@ -23,25 +27,25 @@ describe('api actions', () => {
         },
       };
       const expectedAction = {
-        type: state.NEIGHBORHOOD_SUCCESS,
+        type: actionTypes.CALL_SUCCESS,
         payload,
       };
 
-      expect(state.neighborhoodSuccess(payload)).to.eql(expectedAction);
+      expect(actions.affordabilitySuccess(payload)).to.eql(expectedAction);
     });
 
     it('should have a fail action', () => {
       const payload = new Error('Hmm. This should not have happened');
       const expectedAction = {
-        type: state.NEIGHBORHOOD_FAIL,
+        type: actionTypes.CALL_FAIL,
         payload,
       };
 
-      expect(state.neighborhoodFail(payload)).to.eql(expectedAction);
+      expect(actions.affordabilityFail(payload)).to.eql(expectedAction);
     });
   });
 
-  describe('neighborhood fetch thunk', () => {
+  describe('affordability fetch thunk', () => {
     const commonNeighborhoodRequest = '/affordable?format=json&demographic=Avg.%20Portland%20Household&housing_size=1-BR';
     let store;
 
@@ -79,39 +83,39 @@ describe('api actions', () => {
         },
       ];
 
-      nock(state.API_HOST)
+      nock(API_HOST)
         .get(commonNeighborhoodRequest)
         .reply(200, neighborhoods);
 
       const expectedActions = [
-        { type: state.NEIGHBORHOOD_START },
+        { type: actionTypes.CALL_START },
         {
-          type: state.NEIGHBORHOOD_SUCCESS,
+          type: actionTypes.CALL_SUCCESS,
           payload: [
             [':D', 'Senior', 37469, 'Centennial-Glenfair-Wilkes', 2016],
           ],
         },
       ];
 
-      return store.dispatch(state.neighborhoodFetch()).then(() => {
+      return store.dispatch(actions.fetchAffordabilityData()).then(() => {
         expect(store.getActions()).to.eql(expectedActions);
       });
     });
 
     it('should dispatch fetch and fail when the fetch is unsuccessful', () => {
-      nock(state.API_HOST)
+      nock(API_HOST)
         .get(commonNeighborhoodRequest)
         .reply(500, { error: 'Request was just no good' });
 
       const expectedActions = [
-        { type: state.NEIGHBORHOOD_START },
+        { type: actionTypes.CALL_START },
         {
-          type: state.NEIGHBORHOOD_FAIL,
+          type: actionTypes.CALL_FAIL,
           payload: new Error({ error: 'Request was just no good' }),
         },
       ];
 
-      return store.dispatch(state.neighborhoodFetch()).then(() => {
+      return store.dispatch(actions.fetchAffordabilityData()).then(() => {
         expect(store.getActions()).to.eql(expectedActions);
       });
     });
@@ -119,7 +123,6 @@ describe('api actions', () => {
 });
 
 describe('api reducer', () => {
-  const reducer = state.default;
   const initialState = {
     neighborhood: {
       pending: false,
@@ -134,7 +137,7 @@ describe('api reducer', () => {
 
   it('should handle NEIGHBORHOOD_START', () => {
     expect(reducer(initialState, {
-      type: state.NEIGHBORHOOD_START,
+      type: actionTypes.CALL_START,
     })).to.eql({
       neighborhood: {
         pending: true,
@@ -150,7 +153,7 @@ describe('api reducer', () => {
         error: { some: 'thing' },
       },
     }, {
-      type: state.NEIGHBORHOOD_START,
+      type: actionTypes.CALL_START,
     })).to.eql({
       neighborhood: {
         pending: true,
@@ -164,7 +167,7 @@ describe('api reducer', () => {
     const error = new Error('oops');
 
     expect(reducer(initialState, {
-      type: state.NEIGHBORHOOD_FAIL,
+      type: actionTypes.CALL_FAIL,
       payload: error,
     })).to.eql({
       neighborhood: {
@@ -181,7 +184,7 @@ describe('api reducer', () => {
         error: null,
       },
     }, {
-      type: state.NEIGHBORHOOD_FAIL,
+      type: actionTypes.CALL_FAIL,
       payload: error,
     })).to.eql({
       neighborhood: {
@@ -199,7 +202,7 @@ describe('api reducer', () => {
     ];
 
     expect(reducer(initialState, {
-      type: state.NEIGHBORHOOD_SUCCESS,
+      type: actionTypes.CALL_SUCCESS,
       payload: data,
     })).to.eql({
       neighborhood: {
@@ -216,7 +219,7 @@ describe('api reducer', () => {
         data: null,
       },
     }, {
-      type: state.NEIGHBORHOOD_SUCCESS,
+      type: actionTypes.CALL_SUCCESS,
       payload: data,
     })).to.eql({
       neighborhood: {
