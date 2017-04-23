@@ -113,27 +113,36 @@ App.propTypes = {
   setUserUnitSize: React.PropTypes.func,
 };
 
-const mapDispatch = dispatch => ({
-  setOtherUnitSize: (size) => {
-    dispatch(updateOtherUnitSize(size));
-    dispatch(fetchAffordabilityData());
-  },
+const mapDispatch = (dispatch) => {
+  /**
+   * Not sure if this is really where we should be doing this,
+   * but doing it here for now since we already have access to dispatch
+   */
+  dispatch(fetchAffordabilityData());
+  dispatch(fetchRentData());
 
-  setOtherDemographic: (demographic) => {
-    dispatch(updateOtherDemographic(demographic));
-    dispatch(fetchAffordabilityData());
-  },
+  return {
+    setOtherUnitSize: (size) => {
+      dispatch(updateOtherUnitSize(size));
+      dispatch(fetchAffordabilityData());
+    },
 
-  setUserIncome: (income) => {
-    dispatch(updateUserIncome(income));
-    // no call here, will filter
-  },
+    setOtherDemographic: (demographic) => {
+      dispatch(updateOtherDemographic(demographic));
+      dispatch(fetchAffordabilityData());
+    },
 
-  setUserUnitSize: (size) => {
-    dispatch(updateUserUnitSize(size));
-    dispatch(fetchRentData());
-  },
-});
+    setUserIncome: (income) => {
+      dispatch(updateUserIncome(income));
+      // no call here, will filter
+    },
+
+    setUserUnitSize: (size) => {
+      dispatch(updateUserUnitSize(size));
+      dispatch(fetchRentData());
+    },
+  };
+};
 
 const mapProps = state => ({
   neighborhoodData: getAffordabilityData(state),
