@@ -117,3 +117,113 @@ describe('api actions', () => {
     });
   });
 });
+
+describe('api reducer', () => {
+  const reducer = state.default;
+  const initialState = {
+    neighborhood: {
+      pending: false,
+      data: null,
+      error: null,
+    },
+  };
+
+  it('should return the initial state', () => {
+    expect(reducer(undefined, {})).to.eql(initialState);
+  });
+
+  it('should handle NEIGHBORHOOD_START', () => {
+    expect(reducer(initialState, {
+      type: state.NEIGHBORHOOD_START,
+    })).to.eql({
+      neighborhood: {
+        pending: true,
+        data: null,
+        error: null,
+      },
+    });
+
+    expect(reducer({
+      neighborhood: {
+        pending: false,
+        data: ['stuff'],
+        error: { some: 'thing' },
+      },
+    }, {
+      type: state.NEIGHBORHOOD_START,
+    })).to.eql({
+      neighborhood: {
+        pending: true,
+        data: null,
+        error: null,
+      },
+    });
+  });
+
+  it('should handle NEIGHBORHOOD_FAIL', () => {
+    const error = new Error('oops');
+
+    expect(reducer(initialState, {
+      type: state.NEIGHBORHOOD_FAIL,
+      payload: error,
+    })).to.eql({
+      neighborhood: {
+        pending: false,
+        data: null,
+        error,
+      },
+    });
+
+    expect(reducer({
+      neighborhood: {
+        pending: true,
+        data: ['stuff'],
+        error: null,
+      },
+    }, {
+      type: state.NEIGHBORHOOD_FAIL,
+      payload: error,
+    })).to.eql({
+      neighborhood: {
+        pending: false,
+        data: null,
+        error,
+      },
+    });
+  });
+
+  it('should handle NEIGHBORHOOD_SUCCESS', () => {
+    const data = [
+      [':D', 'Senior', 37469, 'Centennial-Glenfair-Wilkes', 2016],
+      [':(', 'Senior', 37469, 'Sellwood-Moreland-Brooklyn', 2016],
+    ];
+
+    expect(reducer(initialState, {
+      type: state.NEIGHBORHOOD_SUCCESS,
+      payload: data,
+    })).to.eql({
+      neighborhood: {
+        pending: false,
+        error: null,
+        data,
+      },
+    });
+
+    expect(reducer({
+      neighborhood: {
+        pending: true,
+        error: new Error('oops'),
+        data: null,
+      },
+    }, {
+      type: state.NEIGHBORHOOD_SUCCESS,
+      payload: data,
+    })).to.eql({
+      neighborhood: {
+        pending: false,
+        error: null,
+        data,
+      },
+    });
+  });
+});
