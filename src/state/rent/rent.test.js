@@ -6,33 +6,28 @@ import * as actions from './actions';
 import { API_HOST } from '../api';
 import reducer from './reducer';
 import * as selectors from './selectors';
-// import * as state from './api';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-describe('affordability actions', () => {
-  describe('affordability fetch actions', () => {
+describe('rent actions', () => {
+  describe('rent fetch actions', () => {
     it('should have a start action', () => {
       const expectedAction = {
         type: actionTypes.CALL_START,
       };
 
-      expect(actions.affordabilityStart()).to.eql(expectedAction);
+      expect(actions.rentStart()).to.eql(expectedAction);
     });
 
     it('should have a success action', () => {
-      const payload = {
-        data: {
-          neighborhoods: [1, 2, 3],
-        },
-      };
+      const payload = 'Tacos';
       const expectedAction = {
         type: actionTypes.CALL_SUCCESS,
         payload,
       };
 
-      expect(actions.affordabilitySuccess(payload)).to.eql(expectedAction);
+      expect(actions.rentSuccess(payload)).to.eql(expectedAction);
     });
 
     it('should have a fail action', () => {
@@ -42,12 +37,12 @@ describe('affordability actions', () => {
         payload,
       };
 
-      expect(actions.affordabilityFail(payload)).to.eql(expectedAction);
+      expect(actions.rentFail(payload)).to.eql(expectedAction);
     });
   });
 
-  describe('affordability fetch thunk', () => {
-    const commonAffordabilityRequest = '/affordable?format=json&demographic=Avg.%20Portland%20Household&housing_size=Homeownership';
+  describe('rent fetch thunk', () => {
+    const commonRentRequest = '/rent?format=json&housing_size=Overall';
     let store;
 
     beforeEach(() => {
@@ -57,39 +52,39 @@ describe('affordability actions', () => {
     afterEach(() => { nock.cleanAll(); });
 
     it('should dispatch fetch and success when the fetch is successful', () => {
-      const mockAffordabilityResponse = [
+      const mockRentResponse = [
         {
-          affordable: true,
-          demographic: 'Senior',
-          housing_size: '1-BR',
-          neighborhood: 'Centennial-Glenfair-Wilkes',
-          NP_ID: 10,
+          housing_size: 'Overall',
+          nh_id: 1,
+          nh_name: '122nd-Division',
+          rent_amt: 917,
+          year: 2016,
         },
       ];
 
       nock(API_HOST)
-        .get(commonAffordabilityRequest)
-        .reply(200, mockAffordabilityResponse);
+        .get(commonRentRequest)
+        .reply(200, mockRentResponse);
 
       const expectedActions = [
         { type: actionTypes.CALL_START },
         {
           type: actionTypes.CALL_SUCCESS,
           payload: [{
-            affordable: true,
-            id: 10,
+            rent_amt: 917,
+            id: 1,
           }],
         },
       ];
 
-      return store.dispatch(actions.fetchAffordabilityData()).then(() => {
+      return store.dispatch(actions.fetchRentData()).then(() => {
         expect(store.getActions()).to.eql(expectedActions);
       });
     });
 
     it('should dispatch fetch and fail when the fetch is unsuccessful', () => {
       nock(API_HOST)
-        .get(commonAffordabilityRequest)
+        .get(commonRentRequest)
         .reply(500, { error: 'Request was just no good' });
 
       const expectedActions = [
@@ -100,14 +95,14 @@ describe('affordability actions', () => {
         },
       ];
 
-      return store.dispatch(actions.fetchAffordabilityData()).then(() => {
+      return store.dispatch(actions.fetchRentData()).then(() => {
         expect(store.getActions()).to.eql(expectedActions);
       });
     });
   });
 });
 
-describe('affordability reducer', () => {
+describe('rent reducer', () => {
   const initialState = {
     pending: false,
     data: null,
@@ -167,10 +162,7 @@ describe('affordability reducer', () => {
   });
 
   it('should handle CALL_SUCCESS', () => {
-    const data = [
-      [':D', 'Senior', 37469, 'Centennial-Glenfair-Wilkes', 2016],
-      [':(', 'Senior', 37469, 'Sellwood-Moreland-Brooklyn', 2016],
-    ];
+    const data = 'Really good tacos';
 
     expect(reducer(initialState, {
       type: actionTypes.CALL_SUCCESS,
@@ -196,46 +188,46 @@ describe('affordability reducer', () => {
   });
 });
 
-describe('affordability selectors', () => {
+describe('rent selectors', () => {
   let state;
-  const affordability = {};
+  const rent = {};
 
   beforeEach(() => {
-    state = { affordability };
+    state = { rent };
   });
 
-  describe('getAffordabilityState', () => {
+  describe('getRentState', () => {
     it('handles no state without errors', () => {
-      selectors.getAffordabilityState().should.eql({});
+      selectors.getRentState().should.eql({});
     });
   });
 
-  describe('getAffordabilityRequest', () => {
+  describe('getRentRequest', () => {
     it('should return an empty object when unset', () => {
       state = {};
-      expect(selectors.getAffordabilityRequest(state)).to.eql({});
+      expect(selectors.getRentRequest(state)).to.eql({});
     });
 
-    it('should return the affordability request object when set', () => {
-      state = { affordability: {
+    it('should return the rent request object when set', () => {
+      state = { rent: {
         pending: true,
         data: null,
         error: null,
       } };
-      expect(selectors.getAffordabilityRequest(state)).to.eql(state.affordability);
+      expect(selectors.getRentRequest(state)).to.eql(state.rent);
     });
   });
 
-  describe('getAffordabilityData', () => {
+  describe('getRentData', () => {
     it('should return undefined when unset', () => {
       state = {};
-      expect(selectors.getAffordabilityData(state)).to.be.undefined;
+      expect(selectors.getRentData(state)).to.be.undefined;
     });
 
-    it('should return affordability data when set', () => {
+    it('should return rent data when set', () => {
       const data = 'you found it!';
-      state = { affordability: { data } };
-      expect(selectors.getAffordabilityData(state)).to.eql(data);
+      state = { rent: { data } };
+      expect(selectors.getRentData(state)).to.eql(data);
     });
   });
 });
