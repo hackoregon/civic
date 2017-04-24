@@ -2,12 +2,12 @@
 import {
   closeModal,
   openModal,
-  getFmasThunk,
+  selectMapThunk,
   renderFmaPanelId,
 } from './reducers/app';
 
 import {
-  getFmasData,
+  getFeatureData,
   getFmasFeatures,
   getFmaPanelId,
   // getAppState,
@@ -20,10 +20,10 @@ import {
 export {
   closeModal,
   renderFmaPanelId,
-  getFmasData,
+  getFeatureData,
   getFmaPanelId,
   getFmasFeatures,
-  getFmasThunk,
+  selectMapThunk,
   // getAppState,
   // getOpenModal,
   // getStories,

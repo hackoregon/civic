@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import SelectorButtons from '../SelectorButtons';
 import ControlBox from '../ControlBox';
 import TransportMap from '../TransportMap';
-import { getFmasThunk, getFmasData, renderFmaPanelId, getFmaPanelId } from '../../state';
+import { selectMapThunk, getFeatureData, renderFmaPanelId, getFmaPanelId } from '../../state';
 import SELECTOR_META from './selectorMeta';
 
 
@@ -12,12 +12,13 @@ class ConstructionViews extends Component {
 
 
   componentWillMount() {
-    this.props.getFmas();
+    this.props.selectMap();
   }
 
   render() {
     console.log('maptype ' + this.props.mapType);
-    console.log('fmas ' + this.props.fmasData);
+    console.log('feature data');
+    console.log(this.props.getFeaturesData);
     return (
       <div>
         <p className="Description">
@@ -25,7 +26,7 @@ class ConstructionViews extends Component {
         </p>
         <SelectorButtons />
         <ControlBox />
-        <TransportMap fmasData={this.props.fmasData} />
+        <TransportMap featureData={this.props.featureData} />
       </div>
     );
   }
@@ -41,11 +42,11 @@ ConstructionViews.propTypes = {
 
 export default connect(
   state => ({
-    fmasData: getFmasData(state),
+    featureData: getFeatureData(state),
     fmaPanelId: getFmaPanelId(state),
   }),
   dispatch => ({
-    getFmas: () => dispatch(getFmasThunk()),
+    selectMap: (mapType) => dispatch(selectMapThunk(mapType)),
     renderPanel: fmaId => dispatch(renderFmaPanelId(fmaId)),
   }),
 )(ConstructionViews);

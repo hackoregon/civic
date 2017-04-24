@@ -8,19 +8,9 @@ import { createSelector } from 'reselect';
 export const appState = state =>  state.app;
 export const routeState = state => state.routing;
 
-export const getAgencyData = createSelector(
+export const getFeatureData = createSelector(
   appState,
-  ({ agencyData }) => agencyData,
-);
-
-export const getFmasData = createSelector(
-  appState,
-  ({ fmasData }) => fmasData,
-);
-
-export const getFmasFeatures = createSelector(
-  getFmasData,
-  ({ features }) => features,
+  ({ featureData }) => featureData,
 );
 
 export const getFmaPanelId = createSelector(

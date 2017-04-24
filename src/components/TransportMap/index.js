@@ -36,12 +36,13 @@ class TransportMap extends Component {
   }
 
   render() {
+    console.log('transport map render');
     return (
       <div>
         <LeafletMap center={portland} zoom={11} height={600} width={900}>
           {
-            this.props.fmasData ?
-              <GeoJSON data={this.props.fmasData} onEachFeature={this.onEachFeature} /> :
+            this.props.featureData ?
+              <GeoJSON data={this.props.featureData} onEachFeature={this.onEachFeature} /> :
               null
           }
         </LeafletMap>
