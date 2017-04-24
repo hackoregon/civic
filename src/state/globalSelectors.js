@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { and, update, adjust } from 'ramda';
+import { update, adjust, is, all } from 'ramda';
 import { isAffordabilityPending, getAffordabilityData } from './affordability/selectors';
 import { isRentPending, getRentData } from './rent/selectors';
 import { isNeighborhoodsPending, getNeighborhoodsData } from './neighborhoods/selectors';
@@ -10,12 +10,6 @@ import { getUserIncome } from './parameters/selectors';
  * data people
  */
 const isAffordable = (rent, income) => (rent * 12) < (0.3 * income);
-
-/**
- * Wraps a function with a truthyness check on every argument. If any is not truthy,
- * returns null, otherwise evaluates function
- */
-const wrapNullCheck = fn => (...args) => (args.reduce(and) ? fn(args) : null);
 
 /**
  * Makes an array where the index is one less than the neighborhood id (so that it starts at 0)
@@ -52,17 +46,27 @@ const associateYourAffordability = (neighborhoods, rent, income) => rent.reduce(
 );
 
 /**
- * Associates data from various apis to create full usable geojson. this can be made in to any
- * shape, whatever works best for the map
+ * Checks if all arguments are arrays
  */
-const associateAll = ([neighborhoods, affordability, rent, income]) => ({
-  type: 'FeatureCollection',
-  features: associateYourAffordability(
-    associateOtherAffordability(orderNeighborhoods(neighborhoods), affordability),
-    rent,
-    income,
-  ),
-});
+const allArrays = (...args) => all(arg => is(Array, arg), args);
+
+/**
+ * Associates data from various apis to create full usable geojson. this can be made in to any
+ * shape, whatever works best for the map. Returns null unless all data sources are arrays
+ */
+const associateAll = (neighborhoods, affordability, rent, income) => {
+  if (allArrays(neighborhoods, affordability, rent)) {
+    return {
+      type: 'FeatureCollection',
+      features: associateYourAffordability(
+        associateOtherAffordability(orderNeighborhoods(neighborhoods), affordability),
+        rent,
+        income,
+      ),
+    };
+  }
+  return null;
+};
 
 /**
  * Selector that returns truthy if any api call is pending
@@ -79,5 +83,5 @@ export const getCombinedNeighborhoodsData = createSelector(
   getAffordabilityData,
   getRentData,
   getUserIncome,
-  wrapNullCheck(associateAll),
+  associateAll,
 );
