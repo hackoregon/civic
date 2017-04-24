@@ -16,12 +16,13 @@ export const INITIAL_STATE = {
   },
 };
 
-const actionEmitter = type => payload => ({
-  type,
-  payload,
-});
+const actionEmitter = type => (payload) => {
+  const ret = { type };
+  if (payload != null) { ret.payload = payload; }
+  return ret;
+};
 
-const API_HOST = 'http://service.civicpdx.org/housing';
+export const API_HOST = 'http://service.civicpdx.org/housing';
 
 export const neighborhoodStart = actionEmitter(NEIGHBORHOOD_START);
 export const neighborhoodFail = actionEmitter(NEIGHBORHOOD_FAIL);
@@ -33,7 +34,13 @@ function api(endpoint, { buildParams, normalizer, start, success, fail }) {
       dispatch(start());
       const queryParams = buildParams(getState());
       return fetch(`${API_HOST}${endpoint}?format=json&${qs.stringify(queryParams)}`)
-        .then(res => res.json())
+        .then((res) => {
+          const json = res.json();
+          if (res.ok) { return json; }
+          return json.then((err) => {
+            throw new Error(err);
+          });
+        })
         .then(normalizer)
         .then((data) => {
           dispatch(success(data));
