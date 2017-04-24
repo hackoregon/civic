@@ -4,12 +4,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import Table from './table';
-import { getAffordabilityData } from '../../state/affordability/selectors';
 import { fetchAffordabilityData } from '../../state/affordability/actions';
 import { fetchRentData } from '../../state/rent/actions';
 import { fetchNeighborhoods } from '../../state/neighborhoods/actions';
-import { isAnyCallPending } from '../../state/globalSelectors';
+import { isAnyCallPending, getCombinedNeighborhoodsData } from '../../state/globalSelectors';
 
 import {
   updateOtherUnitSize,
@@ -56,7 +54,7 @@ export function App({
   } else if (!neighborhoodData) {
     content = <span>No data loaded!</span>;
   } else {
-    content = <Table rows={neighborhoodData} />;
+    content = <span><pre>{JSON.stringify(neighborhoodData, null, 2) }</pre></span>;
   }
 
   return (
@@ -90,7 +88,7 @@ export function App({
 App.displayName = 'App';
 App.defaultProps = {
   children: <div />,
-  neighborhoodData: [],
+  neighborhoodData: {},
   userIncome: DEFAULT_INCOME,
   userUnitSize: UNIT_SIZES_AFFORDABILITY[0],
   setUserIncome: () => {},
@@ -104,7 +102,7 @@ App.defaultProps = {
 
 App.propTypes = {
   children: React.PropTypes.node,
-  neighborhoodData: React.PropTypes.array,
+  neighborhoodData: React.PropTypes.object,
   setOtherDemographic: React.PropTypes.func,
   setOtherUnitSize: React.PropTypes.func,
   isLoading: React.PropTypes.bool,
@@ -149,7 +147,7 @@ const mapDispatch = (dispatch) => {
 };
 
 const mapProps = state => ({
-  neighborhoodData: getAffordabilityData(state),
+  neighborhoodData: getCombinedNeighborhoodsData(state),
   isLoading: isAnyCallPending(state),
   userIncome: getUserIncome(state),
   userUnitSize: getUserUnitSize(state),

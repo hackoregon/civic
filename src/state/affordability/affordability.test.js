@@ -73,6 +73,7 @@ describe('affordability actions', () => {
               year: 2016,
             },
           },
+          NP_ID: 10,
         },
       ];
 
@@ -84,9 +85,10 @@ describe('affordability actions', () => {
         { type: actionTypes.CALL_START },
         {
           type: actionTypes.CALL_SUCCESS,
-          payload: [
-            [':D', 'Senior', '1-BR'],
-          ],
+          payload: [{
+            affordable: true,
+            id: 10,
+          }],
         },
       ];
 

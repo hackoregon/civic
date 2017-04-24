@@ -20,6 +20,6 @@ export const fetchNeighborhoods = get(neighborhoodsUrl, {
   start: neighborhoodsStart,
   success: neighborhoodsSuccess,
   fail: neighborhoodsFail,
-  normalizer: json => json,
+  normalizer: ({ features }) => features,
   buildParams: () => {},
 });
