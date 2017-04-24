@@ -4,7 +4,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import Header from '@hackoregon/component-library/lib/Navigation/Header';
 import Table from './table';
 import { getNeighborhoodRequest } from '../../state/selectors/api';
 import { neighborhoodFetch } from '../../state/api';
@@ -48,7 +47,6 @@ export function App({
 
   return (
     <Container>
-      <Header />
       # Bedrooms:
       <select value={unitSize} onChange={event => setUnitSize(event.target.value)}>
         {UNIT_SIZES.map(size => (
