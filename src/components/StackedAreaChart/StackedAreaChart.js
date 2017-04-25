@@ -24,13 +24,13 @@ function StackedAreaChart() {
       <YAxis />
       <CartesianGrid strokeDasharray="3 3" />
       <Tooltip />
-      <Area type='monotone' dataKey='Public Safety' stackId="1" stroke='#329f7c' fill='#329f7c' />
-      <Area type='monotone' dataKey='Community Development' stackId="1" stroke='#3BBA92' fill='#3BBA92' />
-      <Area type='monotone' dataKey='Public Utilities' stackId="1" stroke='#54C9A4' fill='#54C9A4' />
-      <Area type='monotone' dataKey='Legislative and Administrative' stackId="1" stroke='#73D3B5' fill='#73D3B5' />
-      <Area type='monotone' dataKey='Transportation & Parking' stackId="1" stroke='#277C61' fill='#277C61' />
-      <Area type='monotone' dataKey='Parks, Recreation, & Culture' stackId="1" stroke='#1D5D49' fill='#1D5D49' />
-      <Area type='monotone' dataKey='Elected Officials' stackId="1" stroke='#143E31' fill='#143E31' />
+      <Area type='linear' dataKey='Public Safety' stackId="1" stroke='#329f7c' fill='#329f7c' />
+      <Area type='linear' dataKey='Community Development' stackId="1" stroke='#3BBA92' fill='#3BBA92' />
+      <Area type='linear' dataKey='Public Utilities' stackId="1" stroke='#54C9A4' fill='#54C9A4' />
+      <Area type='linear' dataKey='Legislative and Administrative' stackId="1" stroke='#73D3B5' fill='#73D3B5' />
+      <Area type='linear' dataKey='Transportation & Parking' stackId="1" stroke='#277C61' fill='#277C61' />
+      <Area type='linear' dataKey='Parks, Recreation, & Culture' stackId="1" stroke='#1D5D49' fill='#1D5D49' />
+      <Area type='linear' dataKey='Elected Officials' stackId="1" stroke='#143E31' fill='#143E31' />
     </AreaChart>
 
   );
