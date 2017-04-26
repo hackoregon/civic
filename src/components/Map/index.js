@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Map as ReactLeafletMap, TileLayer } from 'react-leaflet';
+import Neighborhood from '../Neighborhood';
 
 const portlandBounds = [
   [45.654527, -122.464291],
@@ -16,7 +17,7 @@ const reactLeafletMapStyle = {
   height: '70vh',
 };
 
-const Map = () => (
+const Map = ({ neighborhoods }) => (
   <ReactLeafletMap {...reactLeafletMapProps} style={reactLeafletMapStyle}>
     <TileLayer
       url="http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png"
@@ -24,7 +25,21 @@ const Map = () => (
       subdomains="abcd"
       maxZoom={19}
     />
+    {neighborhoods && neighborhoods.features.map(neighborhood =>
+      <Neighborhood
+        key={neighborhood.id.toString()}
+        data={neighborhood}
+      />,
+    )}
   </ReactLeafletMap>
 );
+
+Map.propTypes = {
+  neighborhoods: PropTypes.object,
+};
+
+Map.defaultProps = {
+  neighborhoods: null,
+};
 
 export default Map;
