@@ -13,23 +13,23 @@ export const INITIAL_STATE = {
   conflicts: {
     distance: 3,
     days: 2,
-    startDate: '',
-    endDate: '',
-    data: null,
+    startDate: '2017-04-29',
+    endDate: '2017-06-30',
+    features: null,
   },
   features: {
     showNulls: false,
     sourceName: 'Grind and Pave',
-    startDate: '',
-    endDate: '',
-    data: null,
+    startDate: '2017-04-29',
+    endDate: '2017-06-30',
+    features: null,
   },
   nearby: {
     distance: 3,
     address: '1120 SW 5th Ave, Portland, OR',
-    startDate: '',
-    endDate: '',
-    data: null,
+    startDate: '2017-04-29',
+    endDate: '2017-11-31',
+    features: null,
   },
 };
 
@@ -64,31 +64,34 @@ export const renderFmaPanelId = payload => ({ type: RENDER_PANEL, payload });
 
 // FIRE API ACTION CREATORS //
 export const getFeatures = payload => ({ type: GET_FEATURES, payload });
-export const getFeaturesSuccess = payload => ({ type: GET_FEATURES_SUCCESS, payload });
+export const getFeaturesSuccess = ({newMapType, geoData }) => ({ type: GET_FEATURES_SUCCESS, payload: {newMapType, geoData} });
 export const getFeaturesFailure = error => ({ type: GET_FEATURES_FAILURE, error });
 
-export const setMapType = mapType => ({type: SET_MAP_TYPE, mapType})
+export const setMapType = payload => ({type: SET_MAP_TYPE, payload})
 
 // *** THUNKS: THE THUNK CAN BE USED TO DELAY THE DISPATCH OF AN ACTION, OR TO DISPATCH
 // ONLY IF A CERTAIN CONDITION IS MET. *** //
 
 export const selectMapThunk = input => (dispatch, getState) => {
   const state = getState();
-  // console.log('reducers currentstate');
-  // console.log(state);
+  console.log('reducers currentstate');
+  console.log(state);
   // console.log(`inputs ${input}`);
   const newMapType = input || state.app.mapType;
-  // console.log(`reducers post set ${mapType}`)
+  console.log(`reducers post set ${newMapType}`)
   if (newMapType != state.app.mapType) {
+    console.log('diff')
     dispatch(setMapType(newMapType));
+  } else {
+    console.log('NOTHING HAPPENED')
   }
   // console.log('reducers key')
   // console.log(state['app'][mapType]['data']);
-  if (!state['app'][newMapType]['data']) {
+  if (!state['app'][`${newMapType}Data`]) {
     // console.log('reducers no input')
-    dispatch(getFeatures());
-    return transportApi.getFeatures(input).then(
-      data => dispatch(getFeaturesSuccess(data)),
+    dispatch(getFeatures(newMapType));
+    return transportApi.getFeatures(newMapType).then(
+      data => dispatch(getFeaturesSuccess({geoData: data, newMapType})),
       err => dispatch(getFeaturesFailure(err)),
     );
   }
@@ -99,6 +102,9 @@ export const selectMapThunk = input => (dispatch, getState) => {
 // APP REDUCER //
 export const reducer = (state = INITIAL_STATE, action) => {
   console.log(`reducer maptype = ${state.mapType}, action type=${action.type}`);
+  console.log(`reducer payload = ${state.payload}`);
+  console.log('action');
+  console.log(action);
   switch (action.type) {
     case CLOSE_MODAL:
       return {
@@ -121,11 +127,12 @@ export const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         isFetching: true,
       };
+
     case GET_FEATURES_SUCCESS:
       return {
         ...state,
-        isFetching: false,
-        featureData: action.payload,
+        geoData: action.payload.geoData
+        // [`${action.newMapType}Data`]: action.payload,
       };
     case GET_FEATURES_FAILURE:
       return {
@@ -136,7 +143,7 @@ export const reducer = (state = INITIAL_STATE, action) => {
     case SET_MAP_TYPE:
       return {
         ...state,
-        mapType: action.mapType,
+        mapType: action.payload,
       };
 
 

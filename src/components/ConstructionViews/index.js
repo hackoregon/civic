@@ -9,16 +9,18 @@ import SELECTOR_META from './selectorMeta';
 
 
 class ConstructionViews extends Component {
-
-
-  componentWillMount() {
-    this.props.selectMap();
+  componentDidMount() {
+    this.props.selectMap('features');
   }
 
   render() {
-    console.log('maptype ' + this.props.mapType);
-    console.log('feature data');
-    console.log(this.props.getFeaturesData);
+    console.log('rendering Construction')
+    // let features = this.props.appData[`${this.props.appData.mapType}Data`];
+    // console.log('cv features');
+    // console.log(features);
+    // console.log('cv appdata');
+    // console.log(this.props.appData);
+    
     return (
       <div>
         <p className="Description">
@@ -26,7 +28,7 @@ class ConstructionViews extends Component {
         </p>
         <SelectorButtons />
         <ControlBox />
-        <TransportMap featureData={this.props.featureData} />
+        <TransportMap geoData={this.props.geoData} />
       </div>
     );
   }
@@ -42,7 +44,8 @@ ConstructionViews.propTypes = {
 
 export default connect(
   state => ({
-    featureData: getFeatureData(state),
+    // featureData: getFeatureData(state),
+    geoData: state.app.geoData,
     fmaPanelId: getFmaPanelId(state),
   }),
   dispatch => ({
