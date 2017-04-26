@@ -8,8 +8,8 @@ import TestComponent from './TestComponent';
 import ChartScatter from './ChartScatter';
 import BagelShop from './BagelShop';
 import ErPieChart from './ErPieChart';
-import PieHowBusy from './PieHowBusy';
 import PieWhatTheyDo from './PieWhatTheyDo';
+import ErBarChart from './ErBarChart';
 
 export {
   App,
@@ -22,6 +22,6 @@ export {
   ChartScatter,
   BagelShop,
   ErPieChart,
-  PieHowBusy,
-  PieWhatTheyDo
+  PieWhatTheyDo,
+  ErBarChart,
 };
