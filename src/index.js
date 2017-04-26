@@ -24,8 +24,10 @@ export default function createRoutes(store) {
 
         getModule
           .then((component) => {
-            injectAsyncReducer('app', require('./state/app').default);
-            injectAsyncReducer('api', require('./state/api').default);
+            injectAsyncReducer('parameters', require('./state/parameters').default);
+            injectAsyncReducer('affordability', require('./state/affordability').default);
+            injectAsyncReducer('neighborhoods', require('./state/neighborhoods').default);
+            injectAsyncReducer('rent', require('./state/rent').default);
             renderRoute(component);
           })
           .catch(errorLoading);

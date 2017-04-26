@@ -14,11 +14,22 @@ export const DEMOGRAPHICS = [
   'Foreign-Born',
 ];
 
-export const UNIT_SIZES = [
+export const UNIT_SIZES_AFFORDABILITY = [
+  'Homeownership',
   'Studio',
   '1-BR',
   '2-BR',
   '3-BR',
-  'Overall',
 ];
 
+export const UNIT_SIZES_RENT = [
+  'Overall',
+  'Studio',
+  '1-BR',
+  '2-BR',
+  '3-BR',
+];
+
+// making this up, should get income for 'average portlander' from data folks
+// also will need min / max
+export const DEFAULT_INCOME = 40000;

@@ -1,7 +1,6 @@
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
-import sideEffectsMiddleware, { TEST_ACTION } from './sideEffectsMiddleware';
-import { OPEN_MODAL } from '../state/app';
+import sideEffectsMiddleware, { EXAMPLE_NEXT_ACTION, EXAMPLE_ACTION } from './sideEffectsMiddleware';
 
 const middlewares = [thunk, sideEffectsMiddleware];
 
@@ -24,15 +23,15 @@ describe('middleware', () => {
     const dispatchSpy = sinon.spy(store, 'dispatch');
 
     const payload = 'ARBITRARY';
-    const openModalAction = { type: OPEN_MODAL,
+    const exampleAction = { type: EXAMPLE_ACTION,
       payload,
     };
 
-    store.dispatch(openModalAction);
-    expect(dispatchSpy).to.have.been.calledWith(openModalAction);
+    store.dispatch(exampleAction);
+    expect(dispatchSpy).to.have.been.calledWith(exampleAction);
 
     const actions = store.getActions();
 
-    expect(actions[0]).to.eql(TEST_ACTION);
+    expect(actions[0]).to.eql(EXAMPLE_NEXT_ACTION);
   });
 });
