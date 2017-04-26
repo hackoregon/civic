@@ -1,3 +1,5 @@
+export const GEOJSON_STATIC_LOCATION = 'https://s3-us-west-2.amazonaws.com/hacko-housing-staging/neighborhoods.geojson';
+
 export const INITIAL_STATE = {
   pending: false,
   data: null,

@@ -1,13 +1,13 @@
-// import nock from 'nock';
-// import configureMockStore from 'redux-mock-store';
-// import thunk from 'redux-thunk';
+import nock from 'nock';
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
 import { actionTypes } from './constants';
 import * as actions from './actions';
 import reducer from './reducer';
 import * as selectors from './selectors';
 
-// const middlewares = [thunk];
-// const mockStore = configureMockStore(middlewares);
+const middlewares = [thunk];
+const mockStore = configureMockStore(middlewares);
 
 describe('neighborhoods actions', () => {
   describe('neighborhoods fetch actions', () => {
@@ -40,66 +40,61 @@ describe('neighborhoods actions', () => {
     });
   });
 
-/**
- * @NOTE: tests of fetch aren't working because file-loader
- *        is not configured in the test environment
- * @TODO: figure out how to configure test loaders, or figure out how to mock call
- */
-//   describe('neighborhoods fetch thunk', () => {
-//     let store;
-//
-//     beforeEach(() => {
-//       store = mockStore({});
-//     });
-//
-//     afterEach(() => { nock.cleanAll(); });
-//
-//     it('should dispatch fetch and success when the fetch is successful', () => {
-//       const mockNeighborhoodsResponse = {
-//         features: [{
-//           id: 1,
-//           geometry: [],
-//         }],
-//       };
-//
-//       nock('/')
-//         .get('neighborhoods.geojson')
-//         .reply(200, mockNeighborhoodsResponse);
-//
-//       const expectedActions = [
-//         { type: actionTypes.CALL_START },
-//         {
-//           type: actionTypes.CALL_SUCCESS,
-//           payload: [{
-//             rent_amt: 917,
-//             id: 1,
-//           }],
-//         },
-//       ];
-//
-//       return store.dispatch(actions.fetchNeighborhoods()).then(() => {
-//         expect(store.getActions()).to.eql(expectedActions);
-//       });
-//     });
-//
-//     it('should dispatch fetch and fail when the fetch is unsuccessful', () => {
-//       nock('/')
-//         .get('neighborhoods.geojson')
-//         .reply(500, { error: 'Request was just no good' });
-//
-//       const expectedActions = [
-//         { type: actionTypes.CALL_START },
-//         {
-//           type: actionTypes.CALL_FAIL,
-//           payload: new Error({ error: 'Request was just no good' }),
-//         },
-//       ];
-//
-//       return store.dispatch(actions.fetchNeighborhoods()).then(() => {
-//         expect(store.getActions()).to.eql(expectedActions);
-//       });
-//     });
-//   });
+  describe('neighborhoods fetch thunk', () => {
+    let store;
+
+    beforeEach(() => {
+      store = mockStore({});
+    });
+
+    afterEach(() => { nock.cleanAll(); });
+
+    it('should dispatch fetch and success when the fetch is successful', () => {
+      const mockNeighborhoodsResponse = {
+        features: [{
+          id: 1,
+          geometry: [],
+        }],
+      };
+
+      nock('https://s3-us-west-2.amazonaws.com/hacko-housing-staging/neighborhoods.geojson')
+        .get('')
+        .reply(200, mockNeighborhoodsResponse);
+
+      const expectedActions = [
+        { type: actionTypes.CALL_START },
+        {
+          type: actionTypes.CALL_SUCCESS,
+          payload: [{
+            geometry: [],
+            id: 1,
+          }],
+        },
+      ];
+
+      return store.dispatch(actions.fetchNeighborhoods()).then(() => {
+        expect(store.getActions()).to.eql(expectedActions);
+      });
+    });
+
+    it('should dispatch fetch and fail when the fetch is unsuccessful', () => {
+      nock('https://s3-us-west-2.amazonaws.com/hacko-housing-staging/neighborhoods.geojson')
+        .get('')
+        .reply(500, { error: 'Request was just no good' });
+
+      const expectedActions = [
+        { type: actionTypes.CALL_START },
+        {
+          type: actionTypes.CALL_FAIL,
+          payload: new Error({ error: 'Request was just no good' }),
+        },
+      ];
+
+      return store.dispatch(actions.fetchNeighborhoods()).then(() => {
+        expect(store.getActions()).to.eql(expectedActions);
+      });
+    });
+  });
 });
 
 describe('neighborhoods reducer', () => {
