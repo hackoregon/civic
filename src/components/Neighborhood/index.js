@@ -1,6 +1,10 @@
 import React, { PropTypes } from 'react';
 import { GeoJSON, Popup } from 'react-leaflet';
 
+/**
+ * This function is where we can style the geoJson based on data.
+ * We have available the properties described here: http://leafletjs.com/reference.html#path-options
+ */
 const setPathOptions = ({ affordableYou, affordableOther }) => ({
   opacity: affordableOther ? '1' : '0',
   fillOpacity: 0.7,
