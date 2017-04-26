@@ -41,6 +41,26 @@ export default function createRoutes(store) {
       },
     },
     {
+      path: '/stacked',
+      name: 'stackedareaepage',
+      getComponent(nextState, cb) {
+        const renderRoute = loadModule(cb);
+        require.ensure([], require => Promise.resolve(require('./components/StackedAreaChart'))
+          .then(renderRoute)
+          .catch(errorLoading));
+      },
+    },
+    {
+      path: '/slider',
+      name: 'mytestpage',
+      getComponent(nextState, cb) {
+        const renderRoute = loadModule(cb);
+        require.ensure([], require => Promise.resolve(require('./components/MyTest'))
+          .then(renderRoute)
+          .catch(errorLoading));
+      },
+    },
+    {
       path: '*',
       name: 'notfoundpage',
       getComponent(nextState, cb) {

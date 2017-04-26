@@ -1,0 +1,23 @@
+.tooltip {
+    position: absolute;
+    -moz-border-radius:5px;
+    border-radius: 5px;
+    border: 2px solid #000;
+    background: #fff;
+    opacity: .9;
+    color: black;
+    padding: 10px;
+    bottom: 10;
+    right: 10;
+    width: 100px;
+    font-size: 12px;
+    z-index: 10;
+}
+
+.tooltip .title {
+	font-size: 13px;
+}
+
+.tooltip .name {
+  font-weight:bold;
+}
