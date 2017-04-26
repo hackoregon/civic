@@ -8,6 +8,7 @@ import MapPanel from './MapPanel';
 import NotFoundPage from './NotFoundPage/index';
 import Root from './Root';
 import TestComponent from './TestComponent';
+import CrashData from './CrashData/CrashData';
 
 export {
   App,
@@ -20,4 +21,5 @@ export {
   NotFoundPage,
   Root,
   TestComponent,
+  CrashData,
 };
