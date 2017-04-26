@@ -9,9 +9,9 @@ const defineConfig     = require('./define');
 const fontsConfig      = require('./fonts');
 const imageConfig      = require('./images');
 const stylesConfig     = require('./styles');
-const REAL_ROOT        = require('app-root-dir').get();
 
 const PUBLIC_PARAM     = 'public';
+const REAL_ROOT        = resolve(__dirname, '..');
 const BUNDLE_PATH      = resolve(REAL_ROOT, 'build');
 const SRC_PATH         = resolve(REAL_ROOT, 'src');
 
@@ -31,9 +31,10 @@ const config = {
     extensions: ['.js', '.jsx'],
   },
   devtool: isDev ? 'source-map' : 'hidden-source-map',
-  target: 'web',
+  // target: 'web',
   entry: {
     app: [
+      // resolve(SRC_PATH, 'webpack-public-path'),
       resolve(SRC_PATH, 'client/index.js'),
     ],
     vendor: [
@@ -42,6 +43,7 @@ const config = {
       'react-helmet',
       'react-redux',
       'react-router',
+      'leaflet',
     ],
   },
   output: {
@@ -51,11 +53,24 @@ const config = {
     chunkFilename: 'js/[name].chunk.js',
   },
   plugins: removeEmpty([
-    new IsomorphicLoaderPlugin({ keepExistingConfig: true }),
+    new IsomorphicLoaderPlugin({
+      keepExistingConfig: false,
+      assetsFile: 'isomorphic-assets.json',
+      // webpackDev: {
+      //   url: `http://${archetype.webpack.devHostname}:${archetype.webpack.devPort}`,
+      //   addUrl: false,
+      // },
+    }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       chunks: ['app'],
       filename: 'js/[name].bundle.js',
+      minChunks: ({ resource }) => /node_modules/.test(resource),
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor-css',
+      chunks: ['app'],
+      filename: 'css/[name].[chunkHash].css',
       minChunks: ({ resource }) => /node_modules/.test(resource),
     }),
     new webpack.LoaderOptionsPlugin({ options: { postcss: [autoprefixer] } }),
@@ -80,7 +95,6 @@ const webpackConfig = compose(
   defineConfig(),
   fontsConfig(),
   imageConfig(),
-  // () => isProd && optimizeConfig(),
 )(config);
 
 export default webpackConfig;

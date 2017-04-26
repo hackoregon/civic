@@ -1,8 +1,7 @@
-const Require = require;
-const mergeWebpackConfig = Require('webpack-partial/partial').default;
-const optimize = Require('webpack').optimize;
+const mergeConfig  = require('./reduceConfig').default;
+const optimize = require('webpack').optimize;
 
-module.exports = () => config => mergeWebpackConfig(config, {
+module.exports = () => config => mergeConfig(config, {
   plugins: [
     new optimize.UglifyJsPlugin({
       sourceMap: true,

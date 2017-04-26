@@ -1,7 +1,7 @@
-const Require      = require;
-const webpack      = Require('webpack');
+const webpack      = require('webpack');
+const mergeConfig  = require('./reduceConfig').default;
+
 const DefinePlugin = webpack.DefinePlugin;
-const mergeConfig  = Require('webpack-partial/partial').default;
 const env          = process.env.NODE_ENV;
 const isDev        = env === 'development';
 

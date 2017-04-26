@@ -1,41 +1,66 @@
-const Require              = require;
-const mergeConfig          = Require('webpack-partial/partial').default;
-const styleLoader          = Require.resolve('style-loader');
-const cssLoader            = Require.resolve('css-loader');
-// const postcssLoader        = Require.resolve('postcss-loader');
+const mergeConfig          = require('./reduceConfig').default;
+const ExtractTextPlugin    = require('extract-text-webpack-plugin');
 
+const styleLoader          = require.resolve('style-loader');
+const cssLoader            = require.resolve('css-loader');
+const postcssLoader        = require.resolve('postcss-loader');
+
+const env        = process.env.NODE_ENV;
+const isProd     = env === 'production';
+const className  = isProd ? '[hash:base64:5]' : '[path][name]__[local]-[hash:base64:5]';
+const cssModules = `?modules&importLoaders=1&localIdentName=${className}`;
+
+const mainCss   = new ExtractTextPlugin('main.css');
+const globalCss = new ExtractTextPlugin('global.css');
+const vendorCss = new ExtractTextPlugin('vendor.css');
+
+const extractVendors = vendorCss.extract({
+  fallback: styleLoader,
+  use: [
+    `${cssLoader}`,
+  ],
+});
 // will want this for prod
-// loader: ExtractTextPlugin.extract({
-//        fallbackLoader: 'style-loader',
-//        loader: [
-//            'css-loader?modules&importLoaders=1&localIdentName=[hash:base64:5]',
-//            'postcss-loader'
-//        ]
-//     }),
+const extractLoader = mainCss.extract({
+  fallback: styleLoader,
+  use: [
+    `${cssLoader}${cssModules}`,
+    postcssLoader,
+  ],
+});
 
-const cssModuleSupport = '?modules&importLoaders=1&localIdentName=[hash:base64:5]';
-// const env           = process.env.NODE_ENV;
-// const isProd        = env === 'production';
+const extractGlobals = globalCss.extract({
+  fallback: styleLoader,
+  use: [
+    `${cssLoader}`,
+    postcssLoader,
+  ],
+});
+
+const vendorCssPattern = /assets\/.*\.css$/;
+const globalCssPattern = /global\.styles\.css$/;
+const allCssPattern = /\.css$/;
 
 module.exports = () => (config) => {
   const loaders = [
     {
-      test: /\.css$/,
-      exclude: /global\.styles\.css$/,
-      /* eslint-disable prefer-template */
-      loader: styleLoader + '!' + cssLoader + cssModuleSupport,
-      /* eslint-enable prefer-template */
+      test: allCssPattern,
+      exclude: [globalCssPattern, vendorCssPattern],
+      // loader: `${styleLoader}!${cssLoader}${cssModules}!${postcssLoader}`,
+      use: extractLoader,
     },
     {
-      test: /global\.styles\.css$/,
-      /* eslint-disable prefer-template */
-      loader: styleLoader + '!' + cssLoader,
-      /* eslint-enable prefer-template */
+      test: globalCssPattern,
+      use: extractGlobals,
     },
-
+    {
+      test: vendorCssPattern,
+      use: extractVendors,
+    },
   ];
 
   return mergeConfig(config, {
+    plugins: [mainCss, globalCss, vendorCss],
     module: {
       rules: loaders,
     },

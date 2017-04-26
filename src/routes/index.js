@@ -29,6 +29,7 @@ const makePaths = path => ({ path: `/civic/${path}`, name: path });
 const routes = [
   { path: '/civic',
     name: 'root',
+    // component: import('./HomePage'),
     getComponent(location, cb) {
       cb(null, require('./HomePage').default);
     },

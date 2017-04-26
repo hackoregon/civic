@@ -1,9 +1,9 @@
 const Require = require;
-const mergeWebpackConfig = Require('webpack-partial/partial').default;
+const mergeConfig  = require('./reduceConfig').default;
 const urlLoader = Require.resolve('url-loader');
 const fileLoader = Require.resolve('file-loader');
 
-module.exports = () => config => mergeWebpackConfig(config, {
+module.exports = () => config => mergeConfig(config, {
   module: {
     rules: [
       {

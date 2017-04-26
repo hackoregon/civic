@@ -1,8 +1,6 @@
-const Require = require;
-const mergeWebpackConfig = Require('webpack-partial/partial').default;
-// const urlLoader = Require.resolve('url-loader');
+const mergeConfig  = require('./reduceConfig').default;
 // const IsomorphicLoaderPlugin = Require('isomorphic-loader/lib/webpack-plugin');
-module.exports = () => config => mergeWebpackConfig(config, {
+module.exports = () => config => mergeConfig(config, {
   module: {
     rules: [
       {

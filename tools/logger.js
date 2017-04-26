@@ -5,8 +5,8 @@ import colors from 'colors/safe';
 
 export default function logger(msg) {
   const title = `${msg.title.toUpperCase()}`;
-  const txt = `==> ${title} -> ${msg.body}`;
-  const type = msg.type || 'info';
+  const txt   = `==> ${title} -> ${msg.body}`;
+  const type  = msg.type || 'info';
 
   if (msg.notify) {
     notifier.notify({
