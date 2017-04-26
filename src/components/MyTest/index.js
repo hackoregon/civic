@@ -1,7 +1,7 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import Slider from 'rc-slider';
 import BubbleChart from './BubbleChart';
-import { bubbleData, marks, style } from './utils';
+import { bubbleData, min, max, step, marks, style } from './utils';
 
 require('rc-slider/assets/index.css');
 
@@ -21,11 +21,10 @@ class StickySlider extends Component {
   componentWillMount() {
     const myData = [];
     bubbleData.forEach((t) => {
-      Object.keys(t).map((key) => {
-        myData.push(t[key]);
-        this.setState({ data: myData,
-        });
-      });
+      Object.keys(t).map(key =>
+        myData.push(t[key]),
+      );
+      this.setState({ data: myData });
     });
   }
 
@@ -45,8 +44,7 @@ class StickySlider extends Component {
   }
 
   delayState() {
-    // const { min, max, step } = this.props;
-    for (let i = 0; i <= 9; i += 1) {
+    for (let i = min; i <= max; i += step) {
       this.timer(i);
     }
   }
@@ -76,9 +74,5 @@ class StickySlider extends Component {
     );
   }
 }
-
-StickySlider.propTypes = {
-//  data: PropTypes.arrayOf(PropTypes.object.isRequired),
-};
 
 export default StickySlider;

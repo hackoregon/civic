@@ -4,7 +4,9 @@ import * as d3 from 'd3';
 export const width = 800;
 export const height = 400;
 export const center = { x: width / 1.25, y: height / 2 };
-
+export const min = 1;
+export const max = 10;
+export const step = 1;
 export const style = { width: 800, margin: 'auto', padding: 20, justifyContent: 'center' };
 export const marks = {
   1: '2007',

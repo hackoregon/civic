@@ -79,7 +79,7 @@ Bubbles.propTypes = {
   center: PropTypes.shape({
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired,
-  }),
+  }).isRequired,
   forceStrength: PropTypes.number.isRequired,
   data: PropTypes.arrayOf(PropTypes.shape({
     x: PropTypes.number.isRequired,
@@ -87,7 +87,7 @@ Bubbles.propTypes = {
     radius: PropTypes.number.isRequired,
     value: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-  })),
+  })).isRequired,
 };
 
 export default Bubbles;

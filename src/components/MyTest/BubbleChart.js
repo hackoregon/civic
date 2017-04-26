@@ -44,7 +44,7 @@ class BubleAreaChart extends Component {
 }
 
 BubleAreaChart.propTypes = {
-  data: PropTypes.array,
+  data: PropTypes.array.isRequired,
 };
 
 export default BubleAreaChart;
