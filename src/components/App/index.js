@@ -4,6 +4,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import Slider from '@hackoregon/component-library/lib/Slider/Slider';
 import { fetchAffordabilityData } from '../../state/affordability/actions';
 import { fetchRentData } from '../../state/rent/actions';
 import { fetchNeighborhoods } from '../../state/neighborhoods/actions';
@@ -26,6 +27,8 @@ import {
   UNIT_SIZES_AFFORDABILITY,
   UNIT_SIZES_RENT,
   DEFAULT_INCOME,
+  MIN_INCOME,
+  MAX_INCOME,
 } from '../../utils/data-constants';
 
 const Container = styled.div`
@@ -53,14 +56,25 @@ export function App({
     content = <span>Loading...</span>;
   } else if (!neighborhoodData) {
     content = <span>No data loaded!</span>;
+  } else if (!neighborhoodData.features) {
+    content = <span>Data is improperly formatted!</span>;
   } else {
-    content = <span><pre>{JSON.stringify(neighborhoodData, null, 2) }</pre></span>;
+    content = (<ul>
+      {neighborhoodData.features.map(neighborhood => (
+        <li key={neighborhood.id}>{neighborhood.name}: Them? {neighborhood.affordableOther ? '😀' : '😡'} You? {neighborhood.affordableYou ? '😀' : '😡'}</li>
+      ))}
+    </ul>);
   }
 
   return (
     <Container>
       # Your income
-      <input type="number" value={userIncome} onChange={event => setUserIncome(event.target.value)} />
+      <Slider
+        min={MIN_INCOME}
+        max={MAX_INCOME}
+        value={userIncome}
+        onChange={setUserIncome}
+      />
       # Your Housing Type
       <select value={userUnitSize} onChange={event => setUserUnitSize(event.target.value)}>
         {UNIT_SIZES_RENT.map(size => (

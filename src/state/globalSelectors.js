@@ -9,7 +9,7 @@ import { getUserIncome } from './parameters/selectors';
  * I believe less than 30 % of income is what is considered 'affordable'. Double check with
  * data people
  */
-const isAffordable = (rent, income) => (rent * 12) < (0.3 * income);
+const isAffordable = (rent, income) => (rent * 12) < (0.3 * income * 40 * 52);
 
 /**
  * Makes an array where the index is one less than the neighborhood id (so that it starts at 0)
