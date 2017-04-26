@@ -3,7 +3,7 @@ import * as d3 from 'd3';
 // constants
 export const width = 800;
 export const height = 400;
-export const center = { x: width / 1.5, y: height / 2 };
+export const center = { x: width / 1.25, y: height / 2 };
 
 // Bubble Data
 export const bubbleData = [
