@@ -6,7 +6,6 @@ import * as actions from './actions';
 import { API_HOST } from '../api';
 import reducer from './reducer';
 import * as selectors from './selectors';
-// import * as state from './api';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
