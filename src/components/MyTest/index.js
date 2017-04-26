@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Slider from 'rc-slider';
 import BubbleChart from './BubbleChart';
-import { bubbleData } from './utils';
+import { bubbleData, marks, style } from './utils';
 
 require('rc-slider/assets/index.css');
 
@@ -19,9 +19,8 @@ class StickySlider extends Component {
   }
 
   componentWillMount() {
-    const rawData = bubbleData;
     const myData = [];
-    rawData.forEach((t) => {
+    bubbleData.forEach((t) => {
       Object.keys(t).map((key) => {
         myData.push(t[key]);
         this.setState({ data: myData,
@@ -42,7 +41,7 @@ class StickySlider extends Component {
     setTimeout(() => {
       const newValue = j;
       this.setState({ value: newValue });
-    }, j * 2000);
+    }, j * 4000);
   }
 
   delayState() {
@@ -53,24 +52,6 @@ class StickySlider extends Component {
   }
 
   render() {
-    const style = { width: 800, margin: 'auto', padding: 20, justifyContent: 'center' };
-    const marks = {
-      1: {
-        label: <strong>2007</strong>,
-      },
-      2: '2008',
-      3: '2009',
-      4: '2010',
-      5: '2011',
-      6: '2012',
-      7: '2013',
-      8: '2014',
-      9: '2015',
-      10: {
-        label: <strong>2016</strong>,
-      },
-    };
-
     return (
       <div style={style}>
         <Slider

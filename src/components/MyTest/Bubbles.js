@@ -23,8 +23,6 @@ class Bubbles extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('this data', this.props);
-    console.log('next data', nextProps);
     if (nextProps.data !== this.props.data) {
       this.renderBubbles(nextProps.data);
     }
@@ -63,7 +61,7 @@ class Bubbles extends Component {
       .on('mouseover', showDetail)  // eslint-disable-line
       .on('mouseout', hideDetail) // eslint-disable-line
 
-    bubblesE.transition().duration(1000).attr('r', d => d.radius).on('end', () => {
+    bubblesE.transition().duration(2000).attr('r', d => d.radius).on('end', () => {
       this.simulation.nodes(data)
       .alpha(1)
       .restart();

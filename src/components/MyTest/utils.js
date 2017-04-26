@@ -5,6 +5,20 @@ export const width = 800;
 export const height = 400;
 export const center = { x: width / 1.25, y: height / 2 };
 
+export const style = { width: 800, margin: 'auto', padding: 20, justifyContent: 'center' };
+export const marks = {
+  1: '2007',
+  2: '2008',
+  3: '2009',
+  4: '2010',
+  5: '2011',
+  6: '2012',
+  7: '2013',
+  8: '2014',
+  9: '2015',
+  10: '2016',
+};
+
 // Bubble Data
 export const bubbleData = [
   { 2007: [
@@ -179,21 +193,20 @@ export const bubbleData = [
   ] },
 ];
 
-
 // create nodes
 export const createNodes = (rawData) => {
-    // Use the max total_amount in the data as the max in the scale's domain
-    // note we have to ensure the total_amount is a number.
+  // Use the max total_amount in the data as the max in the scale's domain
+  // note we have to ensure the total_amount is a number.
   const maxAmount = d3.max(rawData, d => +d.total_amount);
 
-    // Sizes bubbles based on area.
-    // @v4: new flattened scale names.
+  // Sizes bubbles based on area.
+  // @v4: new flattened scale names.
   const radiusScale = d3.scalePow()
       .exponent(0.5)
       .range([2, 85])
       .domain([0, maxAmount]);
 
-    // Use map() to convert raw data into node data.
+  // Use map() to convert raw data into node data.
   const myNodes = rawData.map(d => ({
     id: d.id,
     radius: radiusScale(+d.total_amount),
@@ -205,7 +218,7 @@ export const createNodes = (rawData) => {
     y: Math.random() * 800,
   }));
 
-    // sort them descending to prevent occlusion of smaller nodes.
+  // sort them descending to prevent occlusion of smaller nodes.
   myNodes.sort((a, b) => b.value - a.value);
 
   return myNodes;
