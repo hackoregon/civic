@@ -14,21 +14,25 @@ class ConstructionViews extends Component {
   }
 
   render() {
-    console.log('rendering Construction')
+    console.log('rendering Construction', this.props.appData)
     // let features = this.props.appData[`${this.props.appData.mapType}Data`];
     // console.log('cv features');
     // console.log(features);
     // console.log('cv appdata');
     // console.log(this.props.appData);
-    
+    const mapType = this.props.appData.mapType
+    console.log('cv maptype', mapType)
+    const geoData = this.props.appData[`${this.props.appData.mapType}Data`]
+    console.log('cv geodata', geoData)
     return (
+      
       <div>
         <p className="Description">
           Construction Project Exploration
         </p>
         <SelectorButtons />
         <ControlBox />
-        <TransportMap geoData={this.props.geoData} />
+        <TransportMap geoData={geoData} mapType={this.props.appData.mapType} />
       </div>
     );
   }
@@ -45,7 +49,8 @@ ConstructionViews.propTypes = {
 export default connect(
   state => ({
     // featureData: getFeatureData(state),
-    geoData: state.app.geoData,
+    appData: state.app,
+    // mapType: state.app.mapType,
     fmaPanelId: getFmaPanelId(state),
   }),
   dispatch => ({

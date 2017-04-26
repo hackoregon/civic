@@ -103,8 +103,7 @@ export const selectMapThunk = input => (dispatch, getState) => {
 export const reducer = (state = INITIAL_STATE, action) => {
   console.log(`reducer maptype = ${state.mapType}, action type=${action.type}`);
   console.log(`reducer payload = ${state.payload}`);
-  console.log('action');
-  console.log(action);
+  console.log('action', action);
   switch (action.type) {
     case CLOSE_MODAL:
       return {
@@ -129,10 +128,11 @@ export const reducer = (state = INITIAL_STATE, action) => {
       };
 
     case GET_FEATURES_SUCCESS:
+      console.log('success', action.payload)
       return {
         ...state,
-        geoData: action.payload.geoData
-        // [`${action.newMapType}Data`]: action.payload,
+        // geoData: action.payload.geoData
+        [`${action.payload.newMapType}Data`]: action.payload.geoData,
       };
     case GET_FEATURES_FAILURE:
       return {

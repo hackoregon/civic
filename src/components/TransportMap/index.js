@@ -75,9 +75,15 @@ class TransportMap extends Component {
   //   }
   // }
   renderMap(geoData)  {
-     console.log('rendering with', geoData);
+    console.log('rendering with', geoData);
+    
+    let key = 'tempkey';
+    if (this.props.geoData) {
+      key = `${this.props.mapType}_${this.props.geoData.features.length}` || 'tempkey';
+    }
+    console.log('key', key)
     return (
-      <LeafletMap center={portland} zoom={11} height={600} width={900}>
+      <LeafletMap key={key} center={portland} zoom={11} height={600} width={900}>
         <GeoJSON data={geoData} />
       </LeafletMap>
     );
@@ -111,5 +117,11 @@ TransportMap.propTypes = {
   appData: React.PropTypes.object,
 };
 
-export default connect(state => ({ geoData: state.app.geoData }))(TransportMap)
+export default TransportMap;
+// export default connect(
+//   state => ({
+//     geoData: state.app.geoData,
+//     featureType: state.app.mapType
+//   })
+// )(TransportMap)
 

@@ -20,9 +20,9 @@ function App(props) {
     <Container>
       <Header />
       
-      <StoryCard title="Construction Projects Map" collectionId="transportation" cardId="trans-construction-maps">
+        <StoryCard title="Construction Projects Map" collectionId="transportation" cardId="trans-construction-maps">
         <ConstructionViews />
-      </StoryCard>
+        </StoryCard>
       <Footer />      
       {React.Children.toArray(props.children)}
     </Container>
