@@ -4,8 +4,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import Header from '@hackoregon/component-library/lib/Navigation/Header';
-import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
-import StackedAreaChart from './../StackedAreaChart/StackedAreaChart';
 
 const Container = styled.div`
   min-height: 100%;
@@ -18,10 +16,6 @@ function App(props) {
   return (
     <Container>
       <Header />
-      <StoryCard>
-        <p>This is the Budget over time</p>
-        <StackedAreaChart />
-      </StoryCard>
       {React.Children.toArray(props.children)}
     </Container>
   );

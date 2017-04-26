@@ -1,9 +1,9 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import * as d3 from 'd3';
 import tooltip from './Tooltip';
 import styles from './Tooltip.css';
 
-export default class Bubbles extends React.Component {
+class Bubbles extends Component {
   constructor(props) {
     super(props);
     const { forceStrength, center } = props;
@@ -14,19 +14,23 @@ export default class Bubbles extends React.Component {
       .force('charge', d3.forceManyBody().strength(this.charge.bind(this)))
       .on('tick', this.ticked.bind(this))
       .stop();
+
+    this.onRef = this.onRef.bind(this);
+
+    this.state = {
+      g: null,
+    };
   }
 
-  state = {
-    g: null,
+  componentWillReceiveProps(nextProps) {
+    console.log('this data', this.props);
+    console.log('next data', nextProps);
+    if (nextProps.data !== this.props.data) {
+      this.renderBubbles(nextProps.data);
+    }
   }
 
-  shouldComponentUpdate() {
-    // we will handle moving the nodes on our own with d3.js
-    // make React ignore this component
-    return false;
-  }
-
-  onRef = (ref) => {
+  onRef(ref) {
     this.setState({ g: d3.select(ref) }, () => this.renderBubbles(this.props.data));
   }
 
@@ -59,7 +63,7 @@ export default class Bubbles extends React.Component {
       .on('mouseover', showDetail)  // eslint-disable-line
       .on('mouseout', hideDetail) // eslint-disable-line
 
-    bubblesE.transition().duration(2000).attr('r', d => d.radius).on('end', () => {
+    bubblesE.transition().duration(1000).attr('r', d => d.radius).on('end', () => {
       this.simulation.nodes(data)
       .alpha(1)
       .restart();
@@ -87,6 +91,8 @@ Bubbles.propTypes = {
     name: PropTypes.string.isRequired,
   })),
 };
+
+export default Bubbles;
 
 /*
 * Function called on mouseover to display the

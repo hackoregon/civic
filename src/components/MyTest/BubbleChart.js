@@ -3,16 +3,28 @@ import Bubbles from './Bubbles';
 
 import { createNodes, width, height, center } from './utils';
 
-export default class BubleAreaChart extends Component {
+class BubleAreaChart extends Component {
 
-  state = {
-    data: [],
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      data: [],
+    };
   }
 
   componentWillMount() {
     this.setState({
       data: createNodes(this.props.data),
     });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.data !== this.props.data) {
+      this.setState({
+        data: createNodes(this.props.data),
+      });
+    }
   }
 
   render() {
@@ -24,7 +36,6 @@ export default class BubleAreaChart extends Component {
             data={data}
             forceStrength={0.03}
             center={center}
-            color={this.props.colors}
           />
         </svg>
       </div>
@@ -33,6 +44,7 @@ export default class BubleAreaChart extends Component {
 }
 
 BubleAreaChart.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object.isRequired),
-  colors: PropTypes.arrayOf(PropTypes.string.isRequired),
+  data: PropTypes.array,
 };
+
+export default BubleAreaChart;
