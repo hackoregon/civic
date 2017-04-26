@@ -9,6 +9,7 @@ import { fetchAffordabilityData } from '../../state/affordability/actions';
 import { fetchRentData } from '../../state/rent/actions';
 import { fetchNeighborhoods } from '../../state/neighborhoods/actions';
 import { isAnyCallPending, getCombinedNeighborhoodsData } from '../../state/globalSelectors';
+import Map from '../Map';
 
 import {
   updateOtherUnitSize,
@@ -93,7 +94,7 @@ export function App({
           <option value={demo} key={demo}>{demo}</option>
         ))}
       </select>
-      {content}
+      <Map />
       {React.Children.toArray(children)}
     </Container>
   );
