@@ -32,4 +32,6 @@ export const UNIT_SIZES_RENT = [
 
 // making this up, should get income for 'average portlander' from data folks
 // also will need min / max
-export const DEFAULT_INCOME = 40000;
+export const DEFAULT_INCOME = 25;
+export const MIN_INCOME = 9.75;
+export const MAX_INCOME = 75;
