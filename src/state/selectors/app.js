@@ -33,7 +33,7 @@ export const getFmasFeatures = createSelector(
   ({ features }) => features,
 );
 
-export const getFmaPanelId = createSelector(
+export const getFmaPanelData = createSelector(
   appState,
-  ({ fmaPanelId }) => fmaPanelId,
+  ({ fmaPanelData }) => fmaPanelData,
 );

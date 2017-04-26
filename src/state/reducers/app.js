@@ -92,7 +92,7 @@ export const closeModal = payload => ({ type: CLOSE_MODAL, payload });
 export const openModal = payload => ({ type: OPEN_MODAL, payload });
 
 // RENDER PANEL CREATOR //
-export const renderFmaPanelId = payload => ({ type: RENDER_PANEL, payload });
+export const renderFmaPanelProperties = payload => ({ type: RENDER_PANEL, payload });
 
 // FIRE API ACTION CREATORS //
 export const getAgencies = payload => ({ type: GET_AGENCIES, payload });
@@ -275,12 +275,6 @@ export const getTypeNatureCodesThunk = inputs => (dispatch) => {
 };
 
 
-export const getFmaIdDataThunk = inputs => (dispatch) => {
-  dispatch(getFmaIdData());
-  // figure out how to call multiple api calls—a series of thens?
-};
-
-
 // *** REDUCER: TAKES THE PREVIOUS STATE AND AN ACTION, AND RETURNS THE NEXT STATE. *** //
 // APP REDUCER //
 export const reducer = (state = INITIAL_STATE, action) => {
@@ -298,7 +292,7 @@ export const reducer = (state = INITIAL_STATE, action) => {
     case RENDER_PANEL:
       return {
         ...state,
-        fmaPanelId: action.payload,
+        fmaPanelData: action.payload,
       };
     case GET_AGENCIES:
       return {
