@@ -13,8 +13,8 @@ export const apiReducer = ({ INITIAL_STATE, CALL_START, CALL_FAIL, CALL_SUCCESS 
     switch (action.type) {
       case CALL_START:
         return {
+          ...state,
           pending: true,
-          data: null,
           error: null,
         };
       case CALL_FAIL:
