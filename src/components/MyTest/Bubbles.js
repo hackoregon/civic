@@ -99,8 +99,7 @@ export default Bubbles;
 */
 export function showDetail(d) {
     // change outline to indicate hover state.
-  d3.select(this).attr('stroke', 'black')
-                  .attr('data', 'data-tip');
+  d3.select(this).attr('stroke', 'black');
 
   const content = `<span class="title">${d.name}</span>
                   <br/><hr>`
