@@ -13,7 +13,7 @@ class StickySlider extends Component {
     this.delayState = this.delayState.bind(this);
 
     this.state = {
-      value: 3,
+      value: max,
       data: [],
     };
   }
@@ -38,13 +38,14 @@ class StickySlider extends Component {
 
   timer(j) {
     setTimeout(() => {
-      const newValue = j;
+      const newValue = (j);
       this.setState({ value: newValue });
-    }, j * 4000);
+    }, (j - 1) * 4000);
   }
 
   delayState() {
-    for (let i = min; i <= max; i += step) {
+    this.setState({ value: min });
+    for (let i = min + 1; i <= max; i += step) {
       this.timer(i);
     }
   }
@@ -53,9 +54,9 @@ class StickySlider extends Component {
     return (
       <div style={style}>
         <Slider
-          min={1}
-          max={10}
-          step={1}
+          min={min}
+          max={max}
+          step={step}
           marks={marks}
           tipFormatter={null}
           onChange={this.handleClickChange}

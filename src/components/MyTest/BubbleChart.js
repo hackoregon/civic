@@ -22,7 +22,7 @@ class BubleAreaChart extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.data !== this.props.data) {
       this.setState({
-        data: createNodes(this.props.data),
+        data: createNodes(nextProps.data),
       });
     }
   }

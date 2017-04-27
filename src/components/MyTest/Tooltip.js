@@ -1,5 +1,6 @@
 import * as d3 from 'd3';
-import styles from './Tooltip.css';
+
+require('./Tooltip.css');
 
 /*
  * Creates tooltip with provided id that
@@ -7,12 +8,12 @@ import styles from './Tooltip.css';
  * Most styling is expected to come from CSS
  * so check out bubble_chart.css for more details.
  */
-const floatingTooltip = (tooltipId, width) => {
+const floatingTooltip = (tooltipId) => {
   // Local variable to hold tooltip div for
   // manipulation in other functions.
   const tt = d3.select('body')
     .append('div')
-    .attr('class', styles.tooltip)
+    .attr('class', 'tooltip')
     .attr('id', tooltipId)
     .style('pointer-events', 'none');
 
@@ -24,7 +25,7 @@ const floatingTooltip = (tooltipId, width) => {
     const xOffset = 20;
     const yOffset = 10;
 
-    const ttw = tt.style(width);
+    const ttw = tt.style('width');
     const tth = tt.style('height');
 
     const wscrY = window.scrollY;
@@ -48,8 +49,8 @@ const floatingTooltip = (tooltipId, width) => {
     }
 
     tt
-      .style('bottom', '10px')
-      .style('right', '10px');
+    .style('top', `${tttop}px`)
+    .style('left', `${ttleft}px`);
   };
 
   /*
@@ -81,5 +82,5 @@ const floatingTooltip = (tooltipId, width) => {
   };
 };
 
-const tooltip = floatingTooltip('myTooltip', 200);
+const tooltip = floatingTooltip('myTooltip');
 export default tooltip;
