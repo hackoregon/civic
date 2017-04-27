@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import LeafletMap from '@hackoregon/component-library/lib/LeafletMap/LeafletMap';
 import { GeoJSON } from 'react-leaflet';
 import { connect } from 'react-redux';
-import { getFmasThunk, getFmasData, renderFmaPanelId, getFmaPanelId } from '../../state';
+import { getFmasThunk, getFmasData, renderFmaPanelProperties, getFmaPanelData } from '../../state';
 import { MapPanel } from '../index';
 
 const portland = [45.52, -122.67];
@@ -17,17 +17,10 @@ class FmaMap extends Component {
     this.props.getFmas();
   }
 
-  // renderPanel(fmaId) {
-  //   console.log('renderPanel');
-  //   return (
-  //     <MapPanel id={fmaId} />
-  //   );
-  // }
-
   openPanel(e) {
     const layer = e.target;
-    const fmaId = layer.feature.properties.fma_id;
-    this.props.renderPanel(fmaId);
+    const fmaProperties = layer.feature.properties;
+    this.props.renderPanel(fmaProperties);
   }
 
   onEachFeature(feature, layer) {
@@ -46,8 +39,9 @@ class FmaMap extends Component {
               null
           }
         </LeafletMap>
-        { this.props.fmaPanelId ?
-          <MapPanel id={this.props.fmaPanelId} /> :
+        {
+          this.props.fmaPanelData ?
+            <MapPanel /> :
           null
         }
       </div>
@@ -58,10 +52,10 @@ class FmaMap extends Component {
 export default connect(
   state => ({
     fmasData: getFmasData(state),
-    fmaPanelId: getFmaPanelId(state),
+    fmaPanelData: getFmaPanelData(state),
   }),
   dispatch => ({
     getFmas: () => dispatch(getFmasThunk()),
-    renderPanel: fmaId => dispatch(renderFmaPanelId(fmaId)),
+    renderPanel: fmaProperties => dispatch(renderFmaPanelProperties(fmaProperties)),
   }),
 )(FmaMap);

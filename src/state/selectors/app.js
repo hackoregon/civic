@@ -13,6 +13,16 @@ export const getAgencyData = createSelector(
   ({ agencyData }) => agencyData,
 );
 
+export const getFmaData = createSelector(
+  appState,
+  ({ fmaData }) => fmaData,
+);
+
+// export const getFmaDataStats = createSelector(
+//   getFmaData,
+//   ({ stats }) => stats,
+// );
+
 export const getFmasData = createSelector(
   appState,
   ({ fmasData }) => fmasData,
@@ -23,7 +33,7 @@ export const getFmasFeatures = createSelector(
   ({ features }) => features,
 );
 
-export const getFmaPanelId = createSelector(
+export const getFmaPanelData = createSelector(
   appState,
-  ({ fmaPanelId }) => fmaPanelId,
+  ({ fmaPanelData }) => fmaPanelData,
 );

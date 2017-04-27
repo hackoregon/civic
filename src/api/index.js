@@ -47,16 +47,10 @@ export const getFireblocks = () => {
 // It returns an id, the geom, and demographic stats about a FMA.
 // with incidents: This view returns all incidents for a FMA based on a latitude and
 // longitude.
-export const getFma = (inputs = {}) => {
-  const { incidents } = inputs;
-  let url;
-
-  if (incidents) {
-    url = `${ROOT_URL}/fma/${incidents}`;
-  } else {
-    url = `${ROOT_URL}/fma/`;
-  }
-
+export const getFma = (inputs) => {
+  const { id } = inputs;
+  const url = `${ROOT_URL}/fma/?fma_id=${id}`;
+  console.log('fmaId', id, 'url', url);
   return promiseToGet(url);
 };
 
@@ -71,7 +65,7 @@ export const getFmas = (inputs = {}) => {
   } else {
     url = `${ROOT_URL}/fmas/`;
   }
-
+  console.log();
   return promiseToGet(url);
 };
 
