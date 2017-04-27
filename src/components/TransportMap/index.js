@@ -20,7 +20,7 @@ class TransportMap extends Component {
 
   
   openPanel(e) {
-    console.log('e', e)
+    // console.log('e', e)
     const properties = e.target.feature.properties;
     // const fmaId = layer.feature.properties.id;
     // this.renderPanel(fmaId);
@@ -29,16 +29,13 @@ class TransportMap extends Component {
   }
 
   onEachFeature(feature, layer) {
-    console.log("trans this", this)
+    // console.log("trans this", this)
     layer.on({
       click: this.openPanel.bind(this),
     });
   }
 
   
-  componentDidUpdate(){
-    console.log('updated', this.props.panelValues)
-  }
   render() {
     // console.log('transport map render');
     // console.log(this.props.appData)

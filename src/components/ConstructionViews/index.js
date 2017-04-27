@@ -5,7 +5,7 @@ import SelectorButtons from '../SelectorButtons';
 import ControlBox from '../ControlBox';
 import TransportMap from '../TransportMap';
 import { selectMapThunk, getFeatureData, renderFmaPanelId, getFmaPanelId } from '../../state';
-import SELECTOR_META from './selectorMeta';
+
 
 
 class ConstructionViews extends Component {
@@ -24,6 +24,8 @@ class ConstructionViews extends Component {
     console.log('cv maptype', mapType)
     const geoData = this.props.appData[`${this.props.appData.mapType}Data`]
     console.log('cv geodata', geoData)
+    const controls = this.props.appData[mapType]
+    console.log('cv controls', controls)
     return (
       
       <div>
@@ -31,7 +33,7 @@ class ConstructionViews extends Component {
           Construction Project Exploration
         </p>
         <SelectorButtons />
-        <ControlBox />
+        <ControlBox controls={controls} mapType={this.props.appData.mapType} />
         <TransportMap geoData={geoData} mapType={this.props.appData.mapType} />
       </div>
     );

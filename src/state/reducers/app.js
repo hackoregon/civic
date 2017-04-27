@@ -11,7 +11,7 @@ export const INITIAL_STATE = {
   openModal: null,  
   mapType: 'features',
   conflicts: {
-    distance: 3,
+    distance: 100,
     days: 2,
     startDate: '2017-04-29',
     endDate: '2017-06-30',
@@ -21,11 +21,11 @@ export const INITIAL_STATE = {
     showNulls: false,
     sourceName: 'Grind and Pave',
     startDate: '2017-04-29',
-    endDate: '2017-06-30',
+    endDate: '2020-01-01',
     features: null,
   },
   nearby: {
-    distance: 3,
+    distance: 200,
     address: '1120 SW 5th Ave, Portland, OR',
     startDate: '2017-04-29',
     endDate: '2017-11-31',

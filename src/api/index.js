@@ -11,7 +11,7 @@ export const getFeatures = (input) => {
   console.log(`api input ${input}`)
   switch (input) {
     case 'features':
-      url = `${ROOT_URL}features/?source_name=Grind and Pave`;
+      url = `${ROOT_URL}features/?source_name=Grind and Pave&startDate=2017-04-29&endDate=2020-01-01`;
       break;
 
     case 'conflicts':
