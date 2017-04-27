@@ -9,6 +9,7 @@ import { fetchAffordabilityData } from '../../state/affordability/actions';
 import { fetchRentData } from '../../state/rent/actions';
 import { fetchNeighborhoods } from '../../state/neighborhoods/actions';
 import { isAnyCallPending, getCombinedNeighborhoodsData } from '../../state/globalSelectors';
+import Map from '../Map';
 
 import {
   updateOtherUnitSize,
@@ -39,8 +40,6 @@ const Container = styled.div`
 `;
 
 export function App({
-  children,
-  isLoading,
   neighborhoodData,
   userIncome,
   userUnitSize,
@@ -51,21 +50,6 @@ export function App({
   setOtherUnitSize,
   setOtherDemographic,
 }) {
-  let content;
-  if (isLoading) {
-    content = <span>Loading...</span>;
-  } else if (!neighborhoodData) {
-    content = <span>No data loaded!</span>;
-  } else if (!neighborhoodData.features) {
-    content = <span>Data is improperly formatted!</span>;
-  } else {
-    content = (<ul>
-      {neighborhoodData.features.map(neighborhood => (
-        <li key={neighborhood.id}>{neighborhood.name}: Them? {neighborhood.affordableOther ? '😀' : '😡'} You? {neighborhood.affordableYou ? '😀' : '😡'}</li>
-      ))}
-    </ul>);
-  }
-
   return (
     <Container>
       # Your income
@@ -93,8 +77,7 @@ export function App({
           <option value={demo} key={demo}>{demo}</option>
         ))}
       </select>
-      {content}
-      {React.Children.toArray(children)}
+      <Map neighborhoods={neighborhoodData} />
     </Container>
   );
 }
@@ -115,11 +98,9 @@ App.defaultProps = {
 };
 
 App.propTypes = {
-  children: React.PropTypes.node,
   neighborhoodData: React.PropTypes.object,
   setOtherDemographic: React.PropTypes.func,
   setOtherUnitSize: React.PropTypes.func,
-  isLoading: React.PropTypes.bool,
   otherDemographic: React.PropTypes.string,
   otherUnitSize: React.PropTypes.string,
   userIncome: React.PropTypes.number,

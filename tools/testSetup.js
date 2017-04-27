@@ -27,6 +27,7 @@ chai.use(chaiAsPromised);
 
 global.navigator = {
   userAgent: 'node.js',
+  platform: [],
 };
 global.assert = chai.assert;
 global.expect = chai.expect;
