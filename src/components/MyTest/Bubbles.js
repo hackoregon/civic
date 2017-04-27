@@ -40,7 +40,7 @@ class Bubbles extends Component {
   }
 
   charge(d) {
-    return -this.props.forceStrength * (d.radius ** 2.0);
+    return -this.props.forceStrength * (d.radius ** 2.15);
   }
 
   renderBubbles(data) {

@@ -1,9 +1,11 @@
 import * as d3 from 'd3';
 
-// constants
+// constants used in BubbleChart.js
 export const width = 800;
 export const height = 400;
 export const center = { x: width / 1.25, y: height / 2 };
+
+// constants used in index.js for slider
 export const min = 1;
 export const max = 10;
 export const step = 1;
@@ -21,7 +23,7 @@ export const marks = {
   10: '2016',
 };
 
-// Bubble Data
+// Bubble Data used in index.js
 export const bubbleData = [
   { 2007: [
     { bureau_title: 'Bureau of Environmental Services',
@@ -193,9 +195,26 @@ export const bubbleData = [
       color: '#fb9a99',
       percentage: '20% of Total Budget' },
   ] },
+  { 2016: [
+    { bureau_title: 'Bureau of Environmental Services',
+      id: 1,
+      total_amount: 7468965,
+      color: '#b2df8a',
+      percentage: '5% of Total Budget' },
+    { bureau_title: 'City Budget Office',
+      id: 2,
+      total_amount: 115497,
+      color: '#b2df8a',
+      percentage: '10% of Total Budget' },
+    { bureau_title: 'Office of Management & Finance',
+      id: 3,
+      total_amount: 8398624,
+      color: '#fb9a99',
+      percentage: '20% of Total Budget' },
+  ] },
 ];
 
-// create nodes
+// create nodes used in BubbleChart.js
 export const createNodes = (rawData) => {
   // Use the max total_amount in the data as the max in the scale's domain
   // note we have to ensure the total_amount is a number.
