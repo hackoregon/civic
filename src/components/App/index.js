@@ -3,8 +3,11 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
+
+import Header from '@hackoregon/component-library/lib/Navigation/Header';
 import Slider from '@hackoregon/component-library/lib/Slider/Slider';
+import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
+
 import { fetchAffordabilityData } from '../../state/affordability/actions';
 import { fetchRentData } from '../../state/rent/actions';
 import { fetchNeighborhoods } from '../../state/neighborhoods/actions';
@@ -32,13 +35,6 @@ import {
   MAX_INCOME,
 } from '../../utils/data-constants';
 
-const Container = styled.div`
-  min-height: 100%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-`;
-
 export function App({
   neighborhoodData,
   userIncome,
@@ -51,34 +47,44 @@ export function App({
   setOtherDemographic,
 }) {
   return (
-    <Container>
-      # Your income
-      <Slider
-        min={MIN_INCOME}
-        max={MAX_INCOME}
-        value={userIncome}
-        onChange={setUserIncome}
-      />
-      # Your Housing Type
-      <select value={userUnitSize} onChange={event => setUserUnitSize(event.target.value)}>
-        {UNIT_SIZES_RENT.map(size => (
-          <option value={size} key={size}>{size}</option>
-        ))}
-      </select>
-      # Others Housing Type
-      <select value={otherUnitSize} onChange={event => setOtherUnitSize(event.target.value)}>
-        {UNIT_SIZES_AFFORDABILITY.map(size => (
-          <option value={size} key={size}>{size}</option>
-        ))}
-      </select>
-      # Others Demographic
-      <select value={otherDemographic} onChange={event => setOtherDemographic(event.target.value)}>
-        {DEMOGRAPHICS.map(demo => (
-          <option value={demo} key={demo}>{demo}</option>
-        ))}
-      </select>
-      <Map neighborhoods={neighborhoodData} />
-    </Container>
+    <div>
+      <Header />
+      <StoryCard title="Portland Neighborhood Affordability" collectionId="housing" cardId="affordability-map">
+        <p className="description">Compare your income to the average income of common demographics.</p>
+        <strong>Your income: ${userIncome.toFixed(2)}/hr</strong>
+        <Slider
+          min={MIN_INCOME}
+          max={MAX_INCOME}
+          value={userIncome}
+          onChange={setUserIncome}
+        />
+        <p className="description">
+          <strong>Your Housing Type: </strong>
+          <select value={userUnitSize} onChange={event => setUserUnitSize(event.target.value)}>
+            {UNIT_SIZES_RENT.map(size => (
+              <option value={size} key={size}>{size}</option>
+            ))}
+          </select>
+        </p>
+        <p className="description">
+          <strong>Others Housing Type: </strong>
+          <select value={otherUnitSize} onChange={event => setOtherUnitSize(event.target.value)}>
+            {UNIT_SIZES_AFFORDABILITY.map(size => (
+              <option value={size} key={size}>{size}</option>
+            ))}
+          </select>
+        </p>
+        <p className="description">
+          <strong>Others Demographic: </strong>
+          <select value={otherDemographic} onChange={event => setOtherDemographic(event.target.value)}>
+            {DEMOGRAPHICS.map(demo => (
+              <option value={demo} key={demo}>{demo}</option>
+            ))}
+          </select>
+        </p>
+        <Map neighborhoods={neighborhoodData} />
+      </StoryCard>
+    </div>
   );
 }
 
