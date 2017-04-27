@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import * as d3 from 'd3';
 import tooltip from './Tooltip';
-import styles from './Tooltip.css';
+
+require('./Tooltip.css');
 
 class Bubbles extends Component {
   constructor(props) {
@@ -70,7 +71,7 @@ class Bubbles extends Component {
 
   render() {
     return (
-      <g ref={this.onRef} className={styles.tooltip} />
+      <g ref={this.onRef} className="tooltip" />
     );
   }
 }
@@ -98,22 +99,14 @@ export default Bubbles;
 */
 export function showDetail(d) {
     // change outline to indicate hover state.
-  d3.select(this).attr('stroke', 'black');
+  d3.select(this).attr('stroke', 'black')
+                  .attr('data', 'data-tip');
 
-  const content = `<span class=${styles.name}>Title: </span>
-                   <span class="value">
-                    ${d.name}
-                   </span><br/>`
+  const content = `<span class="title">${d.name}</span>
+                  <br/><hr>`
                     +
-                  `<span class=${styles.name}>Amount: </span>
-                   <span class="value">
-                    ${d.value}
-                   </span><br/>`
-                    +
-                  `<span class=${styles.name}>Percentage: </span>
-                   <span class="value">
-                    ${d.percentage}
-                   </span><br/>`;
+                  `<span class="name"> $${d.value}</span>
+                  <br/>`;
   tooltip.showTooltip(content, d3.event);
 }
 
