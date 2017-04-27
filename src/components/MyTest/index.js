@@ -13,7 +13,7 @@ class StickySlider extends Component {
     this.delayState = this.delayState.bind(this);
 
     this.state = {
-      value: 3,
+      value: max,
       data: [],
     };
   }
@@ -44,7 +44,8 @@ class StickySlider extends Component {
   }
 
   delayState() {
-    for (let i = min - 1; i <= max; i += step) {
+    this.setState({ value: min });
+    for (let i = min; i <= max; i += step) {
       this.timer(i);
     }
   }
