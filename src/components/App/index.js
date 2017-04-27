@@ -5,13 +5,12 @@ import styled from 'styled-components';
 import Header from '@hackoregon/component-library/lib/Navigation/Header';
 import Footer from '@hackoregon/component-library/lib/Footer/Footer';
 import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
-import BarChart from '@hackoregon/component-library/lib/BarChart/BarChart';
-import LeafletMap from '@hackoregon/component-library/lib/LeafletMap/LeafletMap';
-import { Marker, Popup } from 'react-leaflet';
-import { ChartScatter } from '../index';
-import { BagelShop } from '../index';
-import { FmaMap } from '../index';
-import { PieHowBusy, PieWhatTheyDo } from '../index';
+import HowWhenBusy from '@hackoregon/component-library/lib/er-components/HowWhenBusy/HowWhenBusy';
+import ResponseTimeVaries from '@hackoregon/component-library/lib/er-components/ResponseTimeVaries/ResponseTimeVaries';
+// import BarChart from '@hackoregon/component-library/lib/BarChart/BarChart';
+// import LeafletMap from '@hackoregon/component-library/lib/LeafletMap/LeafletMap';
+// import { Marker, Popup } from 'react-leaflet';
+import { ChartScatter, BagelShop, FmaMap, PieWhatTheyDo, ErBarChart } from '../index';
 
 const Container = styled.div`
   min-height: 100%;
@@ -45,7 +44,7 @@ function App(props) {
         <p className="Description">
           How Busy Is Portland Fire &amp; Rescue? When Are They Most Busy?
         </p>
-        <PieHowBusy />
+        <HowWhenBusy />
       </StoryCard>
       <StoryCard title="The First Five Minutes" collectionId="emergency-response" cardId="first-five-minutes">
         <p className="Description">
@@ -62,12 +61,7 @@ function App(props) {
         <p className="Description">
           How Response Time Varies Across The City <br/> Scatter Plot <br/> Scatter Plot <br/> Scatter Plot <br/> Scatter Plot <br/> Scatter Plot <br/> Scatter Plot
         </p>
-      </StoryCard>
-      <StoryCard title="Have a Scatter Plot" collectionId="emergency-response" cardId="er-scatter">
-        <p className="Description">
-          Here is a scatter plot with some fun data.
-        </p>
-        <ChartScatter />
+        <ResponseTimeVaries />
       </StoryCard>
 
       <Footer />

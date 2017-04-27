@@ -1,3 +1,4 @@
+import '!style-loader!css-loader!@hackoregon/component-library/assets/leaflet.css';
 import React, { Component } from 'react';
 import LeafletMap from '@hackoregon/component-library/lib/LeafletMap/LeafletMap';
 import { GeoJSON } from 'react-leaflet';
