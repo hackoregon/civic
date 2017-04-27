@@ -33,7 +33,7 @@ class FmaMap extends Component {
   render() {
     return (
       <div>
-        <LeafletMap center={portland} zoom={11} height={600} width={900}>
+        <LeafletMap url="http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png" center={portland} zoom={11} height={600} width={900}>
           {
             this.props.fmasData ?
               <GeoJSON data={this.props.fmasData} onEachFeature={this.onEachFeature} /> :
