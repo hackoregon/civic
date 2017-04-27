@@ -40,12 +40,12 @@ class StickySlider extends Component {
     setTimeout(() => {
       const newValue = (j);
       this.setState({ value: newValue });
-    }, j * 4000);
+    }, (j - 1) * 4000);
   }
 
   delayState() {
     this.setState({ value: min });
-    for (let i = min; i <= max; i += step) {
+    for (let i = min + 1; i <= max; i += step) {
       this.timer(i);
     }
   }
