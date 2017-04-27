@@ -12,7 +12,7 @@ export const INITIAL_STATE = {
   mapType: 'features',
   conflicts: {
     distance: 100,
-    days: 2,
+    days: 14,
     startDate: '2017-04-29',
     endDate: '2017-06-30',
     features: null,
@@ -28,7 +28,7 @@ export const INITIAL_STATE = {
     distance: 200,
     address: '1120 SW 5th Ave, Portland, OR',
     startDate: '2017-04-29',
-    endDate: '2017-11-31',
+    endDate: '2017-12-31',
     features: null,
   },
 };

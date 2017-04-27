@@ -15,12 +15,12 @@ export const getFeatures = (input) => {
       break;
 
     case 'conflicts':
-      url = `${ROOT_URL}conflicts`;      
+      url = `${ROOT_URL}conflicts?distance=100&days=14&startDate=2017-04-29&endDate=2017-06-30`;      
       // url = `${ROOT_URL}features/?source_name=Grind and Pave`;
       break;
 
     case 'nearby':
-      url = `${ROOT_URL}nearby?address=1221 SW 4th Avenue, Portland, OR&distance=100`;
+      url = `${ROOT_URL}nearby?address=1221 SW 4th Avenue, Portland, OR&distance=200&startDate=2017-04-29&endDate=2017-12-31`;
       break;
       
   }
@@ -28,6 +28,8 @@ export const getFeatures = (input) => {
   return promiseToGet(url);
 };
 
+// TODO: load remaining data to AWS
+// TODO: eliminate map panel on change of maps
 
 export const transportApi = {
   getFeatures,
