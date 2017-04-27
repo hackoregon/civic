@@ -3,7 +3,7 @@ import {
   closeModal,
   openModal,
   selectMapThunk,
-  renderFmaPanelId,
+  setPanelValues,
 } from './reducers/app';
 
 import {
@@ -19,7 +19,7 @@ import {
 // exports
 export {
   closeModal,
-  renderFmaPanelId,
+  setPanelValues,
   getFeatureData,
   getFmaPanelId,
   getFmasFeatures,

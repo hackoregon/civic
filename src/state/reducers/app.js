@@ -45,7 +45,7 @@ export const GET_FEATURES_FAILURE = 'GET_FEATURES_FAILURE';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const OPEN_MODAL  = 'OPEN_MODAL';
 
-export const RENDER_PANEL = 'RENDER_PANEL';
+export const SET_PANEL_VALUES = 'SET_PANEL_VALUES';
 
 export const SET_MAP_TYPE = 'SET_MAP_TYPE';
 
@@ -60,7 +60,7 @@ export const closeModal = payload => ({ type: CLOSE_MODAL, payload });
 export const openModal = payload => ({ type: OPEN_MODAL, payload });
 
 // RENDER PANEL CREATOR //
-export const renderFmaPanelId = payload => ({ type: RENDER_PANEL, payload });
+export const setPanelValues = payload => ({ type: SET_PANEL_VALUES, payload });
 
 // FIRE API ACTION CREATORS //
 export const getFeatures = payload => ({ type: GET_FEATURES, payload });
@@ -115,10 +115,10 @@ export const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         openModal: action.payload,
       };
-    case RENDER_PANEL:
+    case SET_PANEL_VALUES:
       return {
         ...state,
-        fmaPanelId: action.payload,
+        panelValues: action.payload,
       };
 
     case GET_FEATURES:
