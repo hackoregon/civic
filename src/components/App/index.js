@@ -10,6 +10,7 @@ const Container = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  font-family: Arial, sans-serif;
 `;
 
 function App(props) {
