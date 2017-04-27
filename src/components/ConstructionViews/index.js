@@ -5,28 +5,36 @@ import SelectorButtons from '../SelectorButtons';
 import ControlBox from '../ControlBox';
 import TransportMap from '../TransportMap';
 import { selectMapThunk, getFeatureData, renderFmaPanelId, getFmaPanelId } from '../../state';
-import SELECTOR_META from './selectorMeta';
+
 
 
 class ConstructionViews extends Component {
-
-
-  componentWillMount() {
-    this.props.selectMap();
+  componentDidMount() {
+    this.props.selectMap('features');
   }
 
   render() {
-    console.log('maptype ' + this.props.mapType);
-    console.log('feature data');
-    console.log(this.props.getFeaturesData);
+    console.log('rendering Construction', this.props.appData)
+    // let features = this.props.appData[`${this.props.appData.mapType}Data`];
+    // console.log('cv features');
+    // console.log(features);
+    // console.log('cv appdata');
+    // console.log(this.props.appData);
+    const mapType = this.props.appData.mapType
+    console.log('cv maptype', mapType)
+    const geoData = this.props.appData[`${this.props.appData.mapType}Data`]
+    console.log('cv geodata', geoData)
+    const controls = this.props.appData[mapType]
+    console.log('cv controls', controls)
     return (
+      
       <div>
         <p className="Description">
           Construction Project Exploration
         </p>
         <SelectorButtons />
-        <ControlBox />
-        <TransportMap featureData={this.props.featureData} />
+        <ControlBox controls={controls} mapType={this.props.appData.mapType} />
+        <TransportMap geoData={geoData} mapType={this.props.appData.mapType} />
       </div>
     );
   }
@@ -42,7 +50,9 @@ ConstructionViews.propTypes = {
 
 export default connect(
   state => ({
-    featureData: getFeatureData(state),
+    // featureData: getFeatureData(state),
+    appData: state.app,
+    // mapType: state.app.mapType,
     fmaPanelId: getFmaPanelId(state),
   }),
   dispatch => ({

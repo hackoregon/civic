@@ -1,67 +1,91 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import LeafletMap from '@hackoregon/component-library/lib/LeafletMap/LeafletMap';
 import { GeoJSON } from 'react-leaflet';
 import { MapPanel } from '../index';
+import { isEmpty } from 'ramda';
+import { setPanelValues } from '../../state';
+
 // import { GeoJSON, Marker, Popup } from 'react-leaflet';
 
 const portland = [45.52, -122.67];
 
 class TransportMap extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
+    // this.renderMap = this.renderMap.bind(this);
     this.onEachFeature = this.onEachFeature.bind(this);
   }
 
-  // componentWillMount() {
-  //   this.props.getFmas();
-  // }
-
-  // renderPanel(fmaId) {
-  //   console.log('renderPanel');
-  //   return (
-  //     <MapPanel id={fmaId} />
-  //   );
-  // }
-
+  
   openPanel(e) {
-    const layer = e.target;
-    const fmaId = layer.feature.properties.fma_id;
-    this.props.renderPanel(fmaId);
+    // console.log('e', e)
+    const properties = e.target.feature.properties;
+    // const fmaId = layer.feature.properties.id;
+    // this.renderPanel(fmaId);
+    this.props.setPanelValues(properties);
+    
   }
 
   onEachFeature(feature, layer) {
+    // console.log("trans this", this)
     layer.on({
       click: this.openPanel.bind(this),
     });
   }
 
+  
   render() {
-    console.log('transport map render');
+    // console.log('transport map render');
+    // console.log(this.props.appData)
+    // const mapType = this.props.appData.mapType;
+    // const featureData = this.props.appData[`${mapType}Data`] || {};
+    // console.log('transport featureData')
+    // console.log('mapType', mapType);
+    // console.log(this.state.appData)
+    // console.log(this.state.appData[`${mapType}Data`]);
+    console.log('RENDERING')
+    console.log('GEODATA',this.props.geoData)
+    let key = 'tempkey';
+    if (this.props.geoData) {
+      key = `${this.props.mapType}_${this.props.geoData.features.length}` || 'tempkey';
+    }
+    console.log('key', key)
+    
     return (
       <div>
-        <LeafletMap center={portland} zoom={11} height={600} width={900}>
-          {
-            this.props.featureData ?
-              <GeoJSON data={this.props.featureData} onEachFeature={this.onEachFeature} /> :
-              null
+        <LeafletMap key={key} center={portland} zoom={11} height={600} width={900}>
+          {this.props.geoData ?
+            <GeoJSON data={this.props.geoData} onEachFeature={this.onEachFeature}/> :
+            null
           }
         </LeafletMap>
-        { this.props.fmaPanelId ?
-          <MapPanel id={this.props.fmaPanelId} /> :
+        { this.props.panelValues ?
+          <MapPanel panelValues={this.props.panelValues} /> :
           null
         }
+          
+        
       </div>
     );
   }
 }
 
 TransportMap.defaultProps = {
-  children: <div />,
+  appData: {},
 };
 
-// TransportMap.propTypes = {
-//   children: React.PropTypes.node,
-// };
+TransportMap.propTypes = {
+  appData: React.PropTypes.object,
+};
 
-export default TransportMap
+export default connect(
+  state => ({
+    panelValues: state.app.panelValues,
+  }),
+  dispatch => ({
+    setPanelValues: properties => dispatch(setPanelValues(properties)),
+  }),
+)(TransportMap);
 
