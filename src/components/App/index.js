@@ -59,7 +59,7 @@ function App(props) {
       </StoryCard>
       <StoryCard title="How Response Time Varies Across The City" collectionId="emergency-response" cardId="response-time-varies">
         <p className="Description">
-          How Response Time Varies Across The City <br/> Scatter Plot <br/> Scatter Plot <br/> Scatter Plot <br/> Scatter Plot <br/> Scatter Plot <br/> Scatter Plot
+          How Response Time Varies Across The City
         </p>
         <ResponseTimeVaries />
       </StoryCard>
