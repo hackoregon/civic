@@ -76,7 +76,10 @@ export function App({
         </p>
         <p className="description">
           <strong>Others Demographic: </strong>
-          <select value={otherDemographic} onChange={event => setOtherDemographic(event.target.value)}>
+          <select
+            value={otherDemographic}
+            onChange={event => setOtherDemographic(event.target.value)}
+          >
             {DEMOGRAPHICS.map(demo => (
               <option value={demo} key={demo}>{demo}</option>
             ))}
