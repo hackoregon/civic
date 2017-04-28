@@ -2,8 +2,6 @@ import React from 'react';
 import { AreaChart, XAxis, YAxis, Area, Tooltip } from 'recharts';
 import { data, colors } from './utils';
 
-require('./Tooltip.css');
-
 const StackedAreaChart = () => {
   // Maps data to create lines/areas
   const lines = [];
@@ -29,7 +27,11 @@ const StackedAreaChart = () => {
         <XAxis dataKey="name" />
         <YAxis />
         {lines}
-        <Tooltip itemStyle={{ color: 'black' }} />
+        <Tooltip
+          itemStyle={{ color: '#339963', textAlign: 'left' }}
+          labelStyle={{ color: 'black' }}
+          wrapperStyle={{ border: '2px solid #000',  borderRadius: '5px' }}
+        />
       </AreaChart>
     </div>
   );
