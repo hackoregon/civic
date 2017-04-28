@@ -1,5 +1,10 @@
 import { combineReducers } from 'redux';
-import { INITIAL_USER_STATE, INITIAL_OTHER_STATE, actionTypes } from './constants';
+import {
+  INITIAL_USER_STATE,
+  INITIAL_OTHER_STATE,
+  INITIAL_NEIGHBORHOOD_STATE,
+  actionTypes,
+} from './constants';
 
 const user = (state = INITIAL_USER_STATE, action) => {
   switch (action.type) {
@@ -35,4 +40,13 @@ const other = (state = INITIAL_OTHER_STATE, action) => {
   }
 };
 
-export default combineReducers({ user, other });
+const neighborhood = (state = INITIAL_NEIGHBORHOOD_STATE, action) => {
+  switch (action.type) {
+    case actionTypes.UPDATE_NEIGHBORHOOD:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
+export default combineReducers({ user, other, neighborhood });

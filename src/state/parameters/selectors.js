@@ -4,11 +4,14 @@ import {
   DEMOGRAPHICS,
   HOUSING_TYPES,
   DEFAULT_INCOME,
+  DEFAULT_NEIGHBORHOOD,
 } from '../../utils/data-constants';
 
 export const getUserState = state => path(['parameters', 'user'], state);
 
 export const getOtherState = state => path(['parameters', 'other'], state);
+
+export const getNeighborhoodState = state => path(['parameters', 'neighborhood'], state);
 
 export const getUserParameters = createSelector(
   getUserState,
@@ -38,4 +41,9 @@ export const getOtherDemographic = createSelector(
 export const getOtherUnitSize = createSelector(
   getOtherParameters,
   propOr(HOUSING_TYPES[0], 'unitSize'),
+);
+
+export const getNeighborhood = createSelector(
+  getNeighborhoodState,
+  neighborhood => neighborhood || DEFAULT_NEIGHBORHOOD,
 );
