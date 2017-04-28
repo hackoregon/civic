@@ -4,10 +4,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Header from '@hackoregon/component-library/lib/Navigation/Header';
 import Slider from '@hackoregon/component-library/lib/Slider/Slider';
 import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
-import StoryPage from '../StoryPage'
 
 import { fetchAffordabilityData } from '../../state/affordability/actions';
 import { fetchRentData } from '../../state/rent/actions';
@@ -38,7 +36,7 @@ import {
 
 export class App extends React.Component {
   componentDidMount() {
-    this.props.fetchAllData()
+    this.props.fetchAllData();
   }
 
   render() {
@@ -52,52 +50,51 @@ export class App extends React.Component {
       otherUnitSize,
       setOtherUnitSize,
       setOtherDemographic,
-    ...rest,
     } = this.props;
 
-  return (
-    <div>
-      <StoryCard title="Portland Neighborhood Affordability" collectionId="housing" cardId="affordability-map">
-        <p className="description">Compare your income to the average income of common demographics.</p>
-        <strong>Your income: ${userIncome.toFixed(2)}/hr</strong>
-        <Slider
-          min={MIN_INCOME}
-          max={MAX_INCOME}
-          value={userIncome}
-          onChange={setUserIncome}
-        />
-        <p className="description">
-          <strong>Your Housing Type: </strong>
-          <select value={userUnitSize} onChange={event => setUserUnitSize(event.target.value)}>
-            {UNIT_SIZES_RENT.map(size => (
-              <option value={size} key={size}>{size}</option>
-            ))}
-          </select>
-        </p>
-        <p className="description">
-          <strong>Others Housing Type: </strong>
-          <select value={otherUnitSize} onChange={event => setOtherUnitSize(event.target.value)}>
-            {UNIT_SIZES_AFFORDABILITY.map(size => (
-              <option value={size} key={size}>{size}</option>
-            ))}
-          </select>
-        </p>
-        <p className="description">
-          <strong>Others Demographic: </strong>
-          <select
-            value={otherDemographic}
-            onChange={event => setOtherDemographic(event.target.value)}
-          >
-            {DEMOGRAPHICS.map(demo => (
-              <option value={demo} key={demo}>{demo}</option>
-            ))}
-          </select>
-        </p>
-        <Map neighborhoods={neighborhoodData} />
-      </StoryCard>
-    </div>
-  );
-}
+    return (
+      <div>
+        <StoryCard title="Portland Neighborhood Affordability" collectionId="housing" cardId="affordability-map">
+          <p className="description">Compare your income to the average income of common demographics.</p>
+          <strong>Your income: ${userIncome.toFixed(2)}/hr</strong>
+          <Slider
+            min={MIN_INCOME}
+            max={MAX_INCOME}
+            value={userIncome}
+            onChange={setUserIncome}
+          />
+          <p className="description">
+            <strong>Your Housing Type: </strong>
+            <select value={userUnitSize} onChange={event => setUserUnitSize(event.target.value)}>
+              {UNIT_SIZES_RENT.map(size => (
+                <option value={size} key={size}>{size}</option>
+              ))}
+            </select>
+          </p>
+          <p className="description">
+            <strong>Others Housing Type: </strong>
+            <select value={otherUnitSize} onChange={event => setOtherUnitSize(event.target.value)}>
+              {UNIT_SIZES_AFFORDABILITY.map(size => (
+                <option value={size} key={size}>{size}</option>
+              ))}
+            </select>
+          </p>
+          <p className="description">
+            <strong>Others Demographic: </strong>
+            <select
+              value={otherDemographic}
+              onChange={event => setOtherDemographic(event.target.value)}
+            >
+              {DEMOGRAPHICS.map(demo => (
+                <option value={demo} key={demo}>{demo}</option>
+              ))}
+            </select>
+          </p>
+          <Map neighborhoods={neighborhoodData} />
+        </StoryCard>
+      </div>
+    );
+  }
 }
 
 App.displayName = 'App';
@@ -113,6 +110,7 @@ App.defaultProps = {
   setOtherDemographic: () => {},
   setOtherUnitSize: () => {},
   isLoading: false,
+  fetchAllData: () => {},
 };
 
 App.propTypes = {
@@ -125,18 +123,16 @@ App.propTypes = {
   userUnitSize: React.PropTypes.string,
   setUserIncome: React.PropTypes.func,
   setUserUnitSize: React.PropTypes.func,
+  fetchAllData: React.PropTypes.func,
 };
 
 const mapDispatch = (dispatch) => {
-  /**
-   * Not sure if this is really where we should be doing this,
-   * but doing it here for now since we already have access to dispatch
-   */
   const fetchAllData = () => {
     dispatch(fetchAffordabilityData());
     dispatch(fetchRentData());
     dispatch(fetchNeighborhoods());
-  }
+  };
+
   return {
     fetchAllData,
     setOtherUnitSize: (size) => {

@@ -10,9 +10,9 @@ const portlandBounds = [
 const reactLeafletMapProps = {
   bounds: portlandBounds,
   scrollWheelZoom: false,
-  url: "http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png",
+  url: 'http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',
   attribution: "&copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> &copy; <a href='http://cartodb.com/attributions'>CartoDB</a>",
-  subdomains: "abcd"
+  subdomains: 'abcd',
 };
 
 const reactLeafletMapStyle = {
@@ -21,18 +21,18 @@ const reactLeafletMapStyle = {
 };
 
 const Map = ({ neighborhoods }) => (
-<div style={reactLeafletMapStyle}>
-  {neighborhoods &&
-    <LeafletMap {...reactLeafletMapProps}>
-      {neighborhoods.features.map(neighborhood =>
-        <Neighborhood
-          key={neighborhood.id.toString()}
-          data={neighborhood}
-        />,
-      )}
-    </LeafletMap>
-  }
-</div>
+  <div style={reactLeafletMapStyle}>
+    {neighborhoods &&
+      <LeafletMap {...reactLeafletMapProps}>
+        {neighborhoods.features.map(neighborhood =>
+          <Neighborhood
+            key={neighborhood.id.toString()}
+            data={neighborhood}
+          />,
+        )}
+      </LeafletMap>
+    }
+  </div>
 );
 
 Map.propTypes = {

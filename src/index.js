@@ -1,5 +1,5 @@
-import { getAsyncReducer } from './utils/asyncInjectors';
 import createRoutes from '@hackoregon/civic-server/lib/router/createRoutes';
+import { getAsyncReducer } from './utils/asyncInjectors';
 
 const errorLoading = (err) => {
   console.error('Page load failed', err); // eslint-disable-line no-console
@@ -32,34 +32,35 @@ function collectionRoute(store) {
         .catch(errorLoading);
     },
     getChildRoutes(location, cb) {
-      require.ensure([], require => {
+      require.ensure([], (require) => {
         const storyChild = {
           path: ':storyId',
           getComponent(getChildLocation, getChildCb) {
-            getChildCb(null, require('./components/StoryPage'))
-          }
+            getChildCb(null, require('./components/StoryPage'));
+          },
         };
-      cb(null, [storyChild]);
+
+        cb(null, [storyChild]);
       }, 'story');
-    }
-  }
+    },
+  };
 }
 
 function notFoundRoute() {
   return {
-        path: '*',
-        name: 'notfoundpage',
-        getComponent(nextState, cb) {
-          const renderRoute = loadModule(cb);
-          require.ensure([], require => Promise.resolve(require('./components/NotFoundPage'))
-            .then(renderRoute)
-            .catch(errorLoading),
-          );
-        },
-      }
+    path: '*',
+    name: 'notfoundpage',
+    getComponent(nextState, cb) {
+      const renderRoute = loadModule(cb);
+      require.ensure([], require => Promise.resolve(require('./components/NotFoundPage'))
+        .then(renderRoute)
+        .catch(errorLoading),
+      );
+    },
+  };
 }
 
 export default createRoutes(
   collectionRoute,
-  notFoundRoute
+  notFoundRoute,
 );
