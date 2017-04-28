@@ -28,8 +28,6 @@ export const getFeatures = (input) => {
   return promiseToGet(url);
 };
 
-// TODO: load remaining data to AWS
-// TODO: eliminate map panel on change of maps
 // TODO: change base url to AWS
 export const transportApi = {
   getFeatures,
