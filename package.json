@@ -1,16 +1,22 @@
 {
-  "name": "hackoregon-frontend-starter",
+  "name": "@hackoregon/civic-housing",
   "version": "0.1.0",
-  "description": "Hack Oregon Front-end React + Redux Starter",
-  "author": "David Daniel",
+  "description": "Civic/Housing 2017",
+  "contributors": [
+    "Noah Muldavin",
+    "Michael Lange",
+    "John Tasto",
+    "David Daniel",
+    "Megan McKissack",
+    "Derek DeMaria",
+    "Pat",
+    "Schola Choi"
+  ],
   "license": "MIT",
   "keywords": [
     "react",
     "react-router",
-    "webpack",
     "redux",
-    "boilerplate",
-    "starter",
     "hackoregon"
   ],
   "repository": {
@@ -22,7 +28,7 @@
   },
   "scripts": {
     "clean": "rimraf ./build && mkdir build",
-    "start": "npm-run-all --parallel test:watch start:dev lint:watch",
+    "start": "npm-run-all --parallel test:watch start:dev",
     "lint": "esw src tools server webpack.config.* --color",
     "lint:watch": "npm run lint -- --watch",
     "prebuild": "npm run clean && npm run lint && npm run test",
@@ -38,7 +44,8 @@
     "show:coverage": "npm run test:cover && open coverage/index.html"
   },
   "dependencies": {
-    "@hackoregon/component-library": "0.0.6",
+    "@hackoregon/civic-server": "^0.0.5",
+    "@hackoregon/component-library": "0.2.1",
     "babel-polyfill": "6.22.0",
     "compression": "1.6.2",
     "cross-env": "3.1.3",
@@ -83,7 +90,7 @@
     "coveralls": "2.11.15",
     "css-loader": "0.26.1",
     "enzyme": "2.6.0",
-    "eslint": "3.14.1",
+    "eslint": "3.19.0",
     "eslint-config-airbnb": "14.0.0",
     "eslint-plugin-babel": "4.0.1",
     "eslint-plugin-import": "2.2.0",

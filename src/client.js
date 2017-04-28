@@ -1,5 +1,7 @@
 import '@hackoregon/component-library/src/global.styles.css';
-import '@hackoregon/component-library/assets/leaflet.css';
+
+// eslint-disable-next-line
+import '!style-loader!css-loader!@hackoregon/component-library/assets/leaflet.css';
 
 import React from 'react';
 import { syncHistoryWithStore } from 'react-router-redux';
@@ -31,9 +33,11 @@ const history = syncHistoryWithStore(browserHistory, store, {
   selectLocationState: locationStateSelector(),
 });
 
+const routes = createRoutes(store);
+
 const rootRoute = {
   component: AppPage,
-  childRoutes: createRoutes(store),
+  childRoutes: routes,
 };
 
 render(
