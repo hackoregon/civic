@@ -14,16 +14,8 @@ export const DEMOGRAPHICS = [
   'Foreign-Born',
 ];
 
-export const UNIT_SIZES_AFFORDABILITY = [
+export const HOUSING_TYPES = [
   'Homeownership',
-  'Studio',
-  '1-BR',
-  '2-BR',
-  '3-BR',
-];
-
-export const UNIT_SIZES_RENT = [
-  'Overall',
   'Studio',
   '1-BR',
   '2-BR',

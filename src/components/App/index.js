@@ -27,8 +27,7 @@ import {
 } from '../../state/parameters/selectors';
 import {
   DEMOGRAPHICS,
-  UNIT_SIZES_AFFORDABILITY,
-  UNIT_SIZES_RENT,
+  HOUSING_TYPES,
   DEFAULT_INCOME,
   MIN_INCOME,
   MAX_INCOME,
@@ -66,7 +65,7 @@ export class App extends React.Component {
           <p className="description">
             <strong>Your Housing Type: </strong>
             <select value={userUnitSize} onChange={event => setUserUnitSize(event.target.value)}>
-              {UNIT_SIZES_RENT.map(size => (
+              {HOUSING_TYPES.map(size => (
                 <option value={size} key={size}>{size}</option>
               ))}
             </select>
@@ -74,7 +73,7 @@ export class App extends React.Component {
           <p className="description">
             <strong>Others Housing Type: </strong>
             <select value={otherUnitSize} onChange={event => setOtherUnitSize(event.target.value)}>
-              {UNIT_SIZES_AFFORDABILITY.map(size => (
+              {HOUSING_TYPES.map(size => (
                 <option value={size} key={size}>{size}</option>
               ))}
             </select>
@@ -102,9 +101,9 @@ App.defaultProps = {
   children: <div />,
   neighborhoodData: {},
   userIncome: DEFAULT_INCOME,
-  userUnitSize: UNIT_SIZES_AFFORDABILITY[0],
+  userUnitSize: HOUSING_TYPES[0],
   otherDemographic: DEMOGRAPHICS[0],
-  otherUnitSize: UNIT_SIZES_AFFORDABILITY[0],
+  otherUnitSize: HOUSING_TYPES[0],
   isLoading: false,
   setUserIncome() {},
   setUserUnitSize() {},

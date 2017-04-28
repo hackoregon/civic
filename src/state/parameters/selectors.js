@@ -2,9 +2,8 @@ import { createSelector } from 'reselect';
 import { propOr, path } from 'ramda';
 import {
   DEMOGRAPHICS,
-  UNIT_SIZES_AFFORDABILITY,
+  HOUSING_TYPES,
   DEFAULT_INCOME,
-  UNIT_SIZES_RENT,
 } from '../../utils/data-constants';
 
 export const getUserState = state => path(['parameters', 'user'], state);
@@ -28,7 +27,7 @@ export const getUserIncome = createSelector(
 
 export const getUserUnitSize = createSelector(
   getUserParameters,
-  propOr(UNIT_SIZES_RENT[0], 'unitSize'),
+  propOr(HOUSING_TYPES[0], 'unitSize'),
 );
 
 export const getOtherDemographic = createSelector(
@@ -38,5 +37,5 @@ export const getOtherDemographic = createSelector(
 
 export const getOtherUnitSize = createSelector(
   getOtherParameters,
-  propOr(UNIT_SIZES_AFFORDABILITY[0], 'unitSize'),
+  propOr(HOUSING_TYPES[0], 'unitSize'),
 );

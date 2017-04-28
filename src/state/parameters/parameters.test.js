@@ -29,7 +29,7 @@ describe('parameters selectors', () => {
   describe('getUserUnitSize', () => {
     it('should return the first unit size when unset', () => {
       state = { parameters: {} };
-      expect(selectors.getUserUnitSize(state)).to.eql(constants.UNIT_SIZES_RENT[0]);
+      expect(selectors.getUserUnitSize(state)).to.eql(constants.HOUSING_TYPES[0]);
     });
 
     it('should return the set unit size when the state is set', () => {
@@ -53,7 +53,7 @@ describe('parameters selectors', () => {
   describe('getOtherUnitSize', () => {
     it('should return the first unit size when unset', () => {
       state = { parameters: {} };
-      expect(selectors.getOtherUnitSize(state)).to.eql(constants.UNIT_SIZES_AFFORDABILITY[0]);
+      expect(selectors.getOtherUnitSize(state)).to.eql(constants.HOUSING_TYPES[0]);
     });
 
     it('should return the set unit size when the state is set', () => {

@@ -11,8 +11,8 @@ export const fetchRentData = api('/rent', {
   start: rentStart,
   success: rentSuccess,
   fail: rentFail,
-  normalizer: json => json.map(({ nh_id, rent_amt }) => ({
-    id: nh_id,
+  normalizer: json => json.map(({ NP_ID, rent_amt }) => ({
+    id: NP_ID,
     rent_amt,
   })),
   buildParams: state => ({
