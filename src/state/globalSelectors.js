@@ -105,4 +105,4 @@ export const getCombinedDemographicData = createSelector(
   getHouseholdsData,
   getPopulationsData,
   associateDemographicData,
-)
+);
