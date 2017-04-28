@@ -33,9 +33,11 @@ const history = syncHistoryWithStore(browserHistory, store, {
   selectLocationState: locationStateSelector(),
 });
 
+const routes = createRoutes(store);
+
 const rootRoute = {
   component: AppPage,
-  childRoutes: createRoutes(store),
+  childRoutes: routes,
 };
 
 render(
