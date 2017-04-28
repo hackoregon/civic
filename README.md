@@ -1,5 +1,7 @@
 # Hack Oregon Housing Project 2016-2017 Season
 
+![Build Status](https://travis-ci.org/hackoregon/housing-frontend.svg?branch=master)
+
 This is a clone of the [Hack Oregon Starter kit](https://github.com/hackoregon/hackoregon-frontend-starter).
 
 #### Guide
