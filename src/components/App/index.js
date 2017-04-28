@@ -10,6 +10,7 @@ import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
 import { fetchAffordabilityData } from '../../state/affordability/actions';
 import { fetchRentData } from '../../state/rent/actions';
 import { fetchNeighborhoods } from '../../state/neighborhoods/actions';
+import { fetchHouseholdsData } from '../../state/households/actions';
 import { isAnyCallPending, getCombinedNeighborhoodsData } from '../../state/globalSelectors';
 import Map from '../Map';
 
@@ -130,6 +131,7 @@ const mapDispatch = dispatch => ({
     dispatch(fetchAffordabilityData());
     dispatch(fetchRentData());
     dispatch(fetchNeighborhoods());
+    dispatch(fetchHouseholdsData());
   },
 
   setOtherUnitSize(size) {
