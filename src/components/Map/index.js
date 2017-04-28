@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Map as ReactLeafletMap, TileLayer } from 'react-leaflet';
+import LeafletMap from '@hackoregon/component-library/lib/LeafletMap/LeafletMap';
 import Neighborhood from '../Neighborhood';
 
 const portlandBounds = [
@@ -10,28 +10,29 @@ const portlandBounds = [
 const reactLeafletMapProps = {
   bounds: portlandBounds,
   scrollWheelZoom: false,
+  url: "http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png",
+  attribution: "&copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> &copy; <a href='http://cartodb.com/attributions'>CartoDB</a>",
+  subdomains: "abcd"
 };
 
 const reactLeafletMapStyle = {
   width: '100%',
-  height: '70vh',
+  height: 'auto',
 };
 
 const Map = ({ neighborhoods }) => (
-  <ReactLeafletMap {...reactLeafletMapProps} style={reactLeafletMapStyle}>
-    <TileLayer
-      url="http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png"
-      attribution="&copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> &copy; <a href='http://cartodb.com/attributions'>CartoDB</a>"
-      subdomains="abcd"
-      maxZoom={19}
-    />
-    {neighborhoods && neighborhoods.features.map(neighborhood =>
-      <Neighborhood
-        key={neighborhood.id.toString()}
-        data={neighborhood}
-      />,
-    )}
-  </ReactLeafletMap>
+<div style={reactLeafletMapStyle}>
+  {neighborhoods &&
+    <LeafletMap {...reactLeafletMapProps}>
+      {neighborhoods.features.map(neighborhood =>
+        <Neighborhood
+          key={neighborhood.id.toString()}
+          data={neighborhood}
+        />,
+      )}
+    </LeafletMap>
+  }
+</div>
 );
 
 Map.propTypes = {

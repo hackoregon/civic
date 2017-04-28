@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import Header from '@hackoregon/component-library/lib/Navigation/Header';
 import Slider from '@hackoregon/component-library/lib/Slider/Slider';
 import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
+import StoryPage from '../StoryPage'
 
 import { fetchAffordabilityData } from '../../state/affordability/actions';
 import { fetchRentData } from '../../state/rent/actions';
@@ -35,20 +36,27 @@ import {
   MAX_INCOME,
 } from '../../utils/data-constants';
 
-export function App({
-  neighborhoodData,
-  userIncome,
-  userUnitSize,
-  setUserIncome,
-  setUserUnitSize,
-  otherDemographic,
-  otherUnitSize,
-  setOtherUnitSize,
-  setOtherDemographic,
-}) {
+export class App extends React.Component {
+  componentDidMount() {
+    this.props.fetchAllData()
+  }
+
+  render() {
+    const {
+      neighborhoodData,
+      userIncome,
+      userUnitSize,
+      setUserIncome,
+      setUserUnitSize,
+      otherDemographic,
+      otherUnitSize,
+      setOtherUnitSize,
+      setOtherDemographic,
+    ...rest,
+    } = this.props;
+
   return (
     <div>
-      <Header />
       <StoryCard title="Portland Neighborhood Affordability" collectionId="housing" cardId="affordability-map">
         <p className="description">Compare your income to the average income of common demographics.</p>
         <strong>Your income: ${userIncome.toFixed(2)}/hr</strong>
@@ -87,6 +95,7 @@ export function App({
     </div>
   );
 }
+}
 
 App.displayName = 'App';
 App.defaultProps = {
@@ -120,11 +129,13 @@ const mapDispatch = (dispatch) => {
    * Not sure if this is really where we should be doing this,
    * but doing it here for now since we already have access to dispatch
    */
-  dispatch(fetchAffordabilityData());
-  dispatch(fetchRentData());
-  dispatch(fetchNeighborhoods());
-
+  const fetchAllData = () => {
+    dispatch(fetchAffordabilityData());
+    dispatch(fetchRentData());
+    dispatch(fetchNeighborhoods());
+  }
   return {
+    fetchAllData,
     setOtherUnitSize: (size) => {
       dispatch(updateOtherUnitSize(size));
       dispatch(fetchAffordabilityData());
