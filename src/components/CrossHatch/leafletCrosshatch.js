@@ -13,7 +13,7 @@ L.CrossHatch = L.Pattern.extend({
    * to constructor
    */
   options: {
-    weight: 0.7,
+    weight: 0.5,
     color: 'white',
     opacity: 1.0,
     width: 10,

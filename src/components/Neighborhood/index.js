@@ -1,10 +1,11 @@
 import React, { PropTypes } from 'react';
 import { GeoJSON, LayerGroup } from 'react-leaflet';
 import { crossHatch } from '../CrossHatch';
+import { HOUSING_TEAM_PRIMARY_COLOR } from '../../utils/data-constants';
 
-const NEIGHBORHOOD_OPACITY = 0.7;
-const NOT_AFFORDABLE_COLOR = '#A5B8C7';
-const AFFORDABLE_COLOR = '#386598';
+const NEIGHBORHOOD_OPACITY = 0.8;
+const NOT_AFFORDABLE_COLOR = '#9A9D9F'; // color chosen from the style guide, was contrasted with our primary in a pie chart
+const AFFORDABLE_COLOR = HOUSING_TEAM_PRIMARY_COLOR;
 
 /**
  * These functions are where we can style the geoJson based on data.
