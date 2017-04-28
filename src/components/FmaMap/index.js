@@ -11,6 +11,9 @@ const portland = [45.52, -122.67];
 class FmaMap extends Component {
   constructor() {
     super();
+    this.state = {
+      opacity: '0',
+    };
     this.onEachFeature = this.onEachFeature.bind(this);
   }
 
@@ -21,12 +24,25 @@ class FmaMap extends Component {
   openPanel(e) {
     const layer = e.target;
     const fmaProperties = layer.feature.properties;
+    console.log(layer);
     this.props.renderPanel(fmaProperties);
+  }
+
+  setOpacity(e) {
+    const layer = e.target;
+    layer.setStyle({ color: '#EE495C', fillColor: '#EE495C', fillOpacity: '1' });
+  }
+
+  clearOpacity(e) {
+    const layer = e.target;
+    layer.setStyle({ color: '#EE495C', fillColor: '#EE495C', fillOpacity: '0' });
   }
 
   onEachFeature(feature, layer) {
     layer.on({
       click: this.openPanel.bind(this),
+      mouseover: this.setOpacity.bind(this),
+      mouseout: this.clearOpacity.bind(this),
     });
   }
 
@@ -36,7 +52,7 @@ class FmaMap extends Component {
         {
           this.props.fmasData ?
             <LeafletMap url="http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png" center={portland} zoom={11} height={600} width={900}>
-              <GeoJSON data={this.props.fmasData} onEachFeature={this.onEachFeature} />
+              <GeoJSON style={{ color: '#EE495C', fillColor: '#EE495C', fillOpacity: '0' }} data={this.props.fmasData} onEachFeature={this.onEachFeature} />
             </LeafletMap>
             :
             <h4>Waiting for map to load...</h4>
