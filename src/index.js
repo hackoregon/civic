@@ -28,6 +28,7 @@ function collectionRoute(store) {
           injectAsyncReducer('neighborhoods', require('./state/neighborhoods').default);
           injectAsyncReducer('rent', require('./state/rent').default);
           injectAsyncReducer('households', require('./state/households').default);
+          injectAsyncReducer('populations', require('./state/populations').default);
           renderRoute(component);
         })
         .catch(errorLoading);
