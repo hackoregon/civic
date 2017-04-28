@@ -46,6 +46,7 @@ export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const OPEN_MODAL  = 'OPEN_MODAL';
 
 export const SET_PANEL_VALUES = 'SET_PANEL_VALUES';
+export const CLEAR_PANEL_VALUES = 'CLEAR_PANEL_VALUES';
 
 export const SET_MAP_TYPE = 'SET_MAP_TYPE';
 
@@ -61,6 +62,7 @@ export const openModal = payload => ({ type: OPEN_MODAL, payload });
 
 // RENDER PANEL CREATOR //
 export const setPanelValues = payload => ({ type: SET_PANEL_VALUES, payload });
+export const clearPanelValues = payload => ({ type: CLEAR_PANEL_VALUES, payload });
 
 // FIRE API ACTION CREATORS //
 export const getFeatures = payload => ({ type: GET_FEATURES, payload });
@@ -82,6 +84,7 @@ export const selectMapThunk = input => (dispatch, getState) => {
   if (newMapType != state.app.mapType) {
     console.log('diff')
     dispatch(setMapType(newMapType));
+    dispatch(clearPanelValues());
   } else {
     console.log('NOTHING HAPPENED')
   }
@@ -119,6 +122,11 @@ export const reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         panelValues: action.payload,
+      };
+    case CLEAR_PANEL_VALUES:
+      return {
+        ...state,
+        panelValues: null,
       };
 
     case GET_FEATURES:

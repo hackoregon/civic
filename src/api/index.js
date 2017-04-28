@@ -1,6 +1,6 @@
 import { promiseToGet } from './utils';
 
-// const ROOT_URL = 'http://service.civicpdx.org/transport/';
+ // const ROOT_URL = 'http://service.civicpdx.org/transport/';
 const ROOT_URL = 'http://localhost:8000/transport/';
 
 // without fma: This endpoint provides the fma id and geoms for all FMAs (Fire Management Areas).
@@ -11,16 +11,16 @@ export const getFeatures = (input) => {
   console.log(`api input ${input}`)
   switch (input) {
     case 'features':
-      url = `${ROOT_URL}features/?source_name=Grind and Pave&startDate=2017-04-29&endDate=2020-01-01`;
+      url = `${ROOT_URL}features/?source_name=Grind and Pave&startDate=2017-04-29&endDate=2020-01-01&format=json`;
       break;
 
     case 'conflicts':
-      url = `${ROOT_URL}conflicts?distance=100&days=14&startDate=2017-04-29&endDate=2017-06-30`;      
+      url = `${ROOT_URL}conflicts?distance=100&days=14&startDate=2017-04-29&endDate=2017-06-30&format=json`;      
       // url = `${ROOT_URL}features/?source_name=Grind and Pave`;
       break;
 
     case 'nearby':
-      url = `${ROOT_URL}nearby?address=1221 SW 4th Avenue, Portland, OR&distance=200&startDate=2017-04-29&endDate=2017-12-31`;
+      url = `${ROOT_URL}nearby?address=1221 SW 4th Avenue, Portland, OR&distance=200&startDate=2017-04-29&endDate=2017-12-31&format=json`;
       break;
       
   }
@@ -30,7 +30,7 @@ export const getFeatures = (input) => {
 
 // TODO: load remaining data to AWS
 // TODO: eliminate map panel on change of maps
-
+// TODO: change base url to AWS
 export const transportApi = {
   getFeatures,
 };
