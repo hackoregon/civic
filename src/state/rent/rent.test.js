@@ -42,7 +42,7 @@ describe('rent actions', () => {
   });
 
   describe('rent fetch thunk', () => {
-    const commonRentRequest = '/rent?format=json&housing_size=Overall';
+    const commonRentRequest = '/rent?format=json&housing_size=Homeownership';
     let store;
 
     beforeEach(() => {
@@ -55,7 +55,7 @@ describe('rent actions', () => {
       const mockRentResponse = [
         {
           housing_size: 'Overall',
-          nh_id: 1,
+          NP_ID: 1,
           nh_name: '122nd-Division',
           rent_amt: 917,
           year: 2016,
