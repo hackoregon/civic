@@ -47,7 +47,7 @@ class TransportMap extends Component {
     // console.log(this.state.appData[`${mapType}Data`]);
     console.log('RENDERING')
     console.log('GEODATA',this.props.geoData)
-    // let key = 'tempkey';
+    let key = 'tempkey';
     if (this.props.geoData) {
       key = `${this.props.mapType}_${this.props.geoData.features.length}` || 'tempkey';
     }
