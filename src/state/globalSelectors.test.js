@@ -1,5 +1,10 @@
 import { assocPath } from 'ramda';
-import { getCombinedNeighborhoodsData, isAnyCallPending } from './globalSelectors';
+import {
+  getCombinedNeighborhoodsData,
+  getCombinedDemographicData,
+  isAnyCallPending,
+} from './globalSelectors';
+import { NEIGHBORHOODS } from '../utils/data-constants';
 
 describe('globalSelectors', () => {
   describe('isAnyCallPending', () => {
@@ -77,6 +82,47 @@ describe('globalSelectors', () => {
       };
 
       expect(getCombinedNeighborhoodsData(state)).to.eql(expectedResult);
+    });
+  });
+
+  describe('getCombinedDemographicData', () => {
+    const initialState = {
+      households: { data: null },
+      populations: { data: null },
+      parameters: { neighborhood: 25 },
+    };
+
+    it('should handle an unset store', () => {
+      expect(getCombinedDemographicData()).to.be.null;
+    });
+
+    it('should return null unless all data is present and arraylike', () => {
+      let state = initialState;
+      expect(getCombinedDemographicData(state)).to.be.null;
+
+      state = assocPath(['households', 'data'], [], state);
+
+      expect(getCombinedDemographicData(state)).to.be.null;
+
+      state = assocPath(['populations', 'data'], [], state);
+
+      expect(getCombinedDemographicData(state)).to.be.not.null;
+    });
+
+    it('should associate data by neighborhood id', () => {
+      const state = {
+        households: { data: [null, null, { someHousehold: 42 }, null] },
+        populations: { data: [null, null, { somePopulation: 1337 }, null] },
+        parameters: { neighborhood: 2 },
+      };
+
+      const expectedResult = {
+        name: NEIGHBORHOODS[2],
+        households: { someHousehold: 42 },
+        populations: { somePopulation: 1337 },
+      };
+
+      expect(getCombinedDemographicData(state)).to.eql(expectedResult);
     });
   });
 });
