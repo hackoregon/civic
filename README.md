@@ -1,4 +1,5 @@
-This is a starter kit for Hack Oregon front-end development using React + Redux.
+# Hack Oregon Housing Project 2016-2017 Season
+
 This is a clone of the [Hack Oregon Starter kit](https://github.com/hackoregon/hackoregon-frontend-starter).
 
 #### Guide
@@ -10,13 +11,14 @@ This is a clone of the [Hack Oregon Starter kit](https://github.com/hackoregon/h
 5. `npm test` - run tests
 6. `npm run coverage` - run tests w/ coverage
 
+**Note:** When developing, go to [http://localhost:3000/collection/housing](http://localhost:3000/collection/housing) in order to see the project's index route.
 
 #### Using the [Component Library](https://github.com/hackoregon/component-library) in your project
-The component libary has been installed as a dependency from an npm build, make sure the version in package.json matches the latest version in the component library repo to have access to all the latest components.  
+The component libary has been installed as a dependency from an npm build, make sure the version in package.json matches the latest version in the component library repo to have access to all the latest components.
 (https://www.npmjs.com/package/@hackoregon/component-library)
 
-To use a component in your project, import the precompiled component from the lib folder  
+To use a component in your project, import the precompiled component from the lib folder
 
-Example:  importing the Header component from the component library  
+Example:  importing the StoryCard component from the component library
 
-`import Header from '@hackoregon/component-library/lib/Navigation/Header';`
+`import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';`
