@@ -38,7 +38,7 @@ const Neighborhood = ({ data, onClick }) => (
 
 Neighborhood.propTypes = {
   data: PropTypes.object.isRequired,
-  onClick: PropTypes.function,
+  onClick: PropTypes.func.isRequired,
 };
 
 Neighborhood.defaultProps = {
