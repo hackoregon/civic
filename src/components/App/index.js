@@ -103,14 +103,14 @@ App.defaultProps = {
   neighborhoodData: {},
   userIncome: DEFAULT_INCOME,
   userUnitSize: UNIT_SIZES_AFFORDABILITY[0],
-  setUserIncome: () => {},
-  setUserUnitSize: () => {},
   otherDemographic: DEMOGRAPHICS[0],
   otherUnitSize: UNIT_SIZES_AFFORDABILITY[0],
-  setOtherDemographic: () => {},
-  setOtherUnitSize: () => {},
   isLoading: false,
-  fetchAllData: () => {},
+  setUserIncome() {},
+  setUserUnitSize() {},
+  setOtherDemographic() {},
+  setOtherUnitSize() {},
+  fetchAllData() {},
 };
 
 App.propTypes = {
@@ -126,36 +126,33 @@ App.propTypes = {
   fetchAllData: React.PropTypes.func,
 };
 
-const mapDispatch = (dispatch) => {
-  const fetchAllData = () => {
+const mapDispatch = dispatch => ({
+  fetchAllData() {
     dispatch(fetchAffordabilityData());
     dispatch(fetchRentData());
     dispatch(fetchNeighborhoods());
-  };
+  },
 
-  return {
-    fetchAllData,
-    setOtherUnitSize: (size) => {
-      dispatch(updateOtherUnitSize(size));
-      dispatch(fetchAffordabilityData());
-    },
+  setOtherUnitSize(size) {
+    dispatch(updateOtherUnitSize(size));
+    dispatch(fetchAffordabilityData());
+  },
 
-    setOtherDemographic: (demographic) => {
-      dispatch(updateOtherDemographic(demographic));
-      dispatch(fetchAffordabilityData());
-    },
+  setOtherDemographic(demographic) {
+    dispatch(updateOtherDemographic(demographic));
+    dispatch(fetchAffordabilityData());
+  },
 
-    setUserIncome: (income) => {
-      dispatch(updateUserIncome(income));
-      // no call here, will filter
-    },
+  setUserIncome(income) {
+    dispatch(updateUserIncome(income));
+    // no call here, will filter
+  },
 
-    setUserUnitSize: (size) => {
-      dispatch(updateUserUnitSize(size));
-      dispatch(fetchRentData());
-    },
-  };
-};
+  setUserUnitSize(size) {
+    dispatch(updateUserUnitSize(size));
+    dispatch(fetchRentData());
+  },
+});
 
 const mapProps = state => ({
   neighborhoodData: getCombinedNeighborhoodsData(state),
