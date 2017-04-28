@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import LeafletMap from '@hackoregon/component-library/lib/LeafletMap/LeafletMap';
 import Neighborhood from '../Neighborhood';
+import CrossHatch from '../CrossHatch';
 
 const portlandBounds = [
   [45.654527, -122.464291],
@@ -30,6 +31,7 @@ const Map = ({ neighborhoods }) => (
             data={neighborhood}
           />,
         )}
+        <CrossHatch />
       </LeafletMap>
     }
   </div>

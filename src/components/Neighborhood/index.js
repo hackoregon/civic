@@ -1,20 +1,18 @@
 import React, { PropTypes } from 'react';
 import { GeoJSON, Popup } from 'react-leaflet';
+import { crossHatch } from '../CrossHatch';
 
 /**
  * This function is where we can style the geoJson based on data.
  * We have available the properties described here: http://leafletjs.com/reference.html#path-options
  */
-const setPathOptions = ({ affordableYou, affordableOther }) => ({
-  opacity: affordableOther ? '1' : '0',
-  fillOpacity: 0.7,
-  fillColor: affordableYou ? '#386598' : '#CFE7F9',
-  color: 'black',
+const setOtherPathOptions = () => ({
+  fillPattern: crossHatch,
 });
 
 const Neighborhood = ({ data }) => (
-  <GeoJSON data={data} {...setPathOptions(data)} >
-    <Popup><div>{data.name}</div></Popup>
+  <GeoJSON data={data} {...setOtherPathOptions(data)}>
+    <Popup>{data.name}</Popup>
   </GeoJSON>
 );
 
