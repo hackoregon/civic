@@ -1,18 +1,50 @@
 import React, { Component } from 'react';
-import Button from '@hackoregon/component-library/lib/LeafletMap/LeafletMap';
-import { GeoJSON } from 'react-leaflet';
-import { connect } from 'react-redux';
-import { getFmasThunk, getFmasData, renderFmaPanelId, getFmaPanelId } from '../../state';
-import { MapPanel } from '../index';
-
-const portland = [45.52, -122.67];
+import { connect } from 'react-redux'
+import SELECTOR_META from './selectorMeta';
 
 class ControlBox extends Component {
+  // constructor() {
+  //   super();
+  //   this.buildControlList.bind(this);
+  // }
+
+  buildControlList (controls, mapType) {
+      // console.log('mappanel', features)
+      // console.log('canon', features.canonical_daterange)
+      const printOrder = ['startDate', 'endDate', 'address', 'distance', 'days', 'sourceName']
+      console.log('controlbbox selctormeta', SELECTOR_META[mapType])      
+      console.log('conrolbox values', controls);
+      var returnValues = [];
+      const meta = SELECTOR_META[mapType]
+      console.log('conrolbox meta', meta);
+      // returnValues[0] = `Start Date: ${controls.startDate} <br />`;
+      // returnValues[1] = `End Date: ${controls.endDate} <br />`;
+
+      for (let key of printOrder) {
+        console.log('cbox key', key)
+        console.log('cbox meta.key', meta[key])
+        if (controls[key]) {
+          const unitText = meta[key].units || '';
+          returnValues.push(`${meta[key].label}: ${controls[key]}`);
+          returnValues.push(unitText)
+          returnValues.push(<br/>)
+        }
+      }
+      console.log('cbox returns', returnValues)
+      
+      return (
+        <p>
+          {returnValues}
+        </p>
+      )
+
+  }
 
   render() {
     return (
       <div>
-        Control Buttons Here
+        Settings
+        {this.buildControlList(this.props.controls, this.props.mapType)}      
       </div>
     );
   }
