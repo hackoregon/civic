@@ -12,8 +12,13 @@ import { fetchRentData } from '../../state/rent/actions';
 import { fetchNeighborhoods } from '../../state/neighborhoods/actions';
 import { fetchHouseholdsData } from '../../state/households/actions';
 import { fetchPopulationsData } from '../../state/populations/actions';
-import { isAnyCallPending, getCombinedNeighborhoodsData } from '../../state/globalSelectors';
+import {
+  isAnyCallPending,
+  getCombinedNeighborhoodsData,
+  getCombinedDemographicData,
+} from '../../state/globalSelectors';
 import Map from '../Map';
+import DemographicDetailView from '../DemographicDetailView';
 
 import {
   updateOtherUnitSize,
@@ -44,6 +49,7 @@ export class App extends React.Component {
   render() {
     const {
       neighborhoodData,
+      demographicData,
       userIncome,
       userUnitSize,
       setUserIncome,
@@ -94,6 +100,7 @@ export class App extends React.Component {
             </select>
           </p>
           <Map neighborhoods={neighborhoodData} onSelect={id => setNeighborhood(id)} />
+          <DemographicDetailView demographics={demographicData} />
         </StoryCard>
       </div>
     );
@@ -104,6 +111,7 @@ App.displayName = 'App';
 App.defaultProps = {
   children: <div />,
   neighborhoodData: {},
+  demographicData: {},
   userIncome: DEFAULT_INCOME,
   userUnitSize: HOUSING_TYPES[0],
   otherDemographic: DEMOGRAPHICS[0],
@@ -119,6 +127,7 @@ App.defaultProps = {
 
 App.propTypes = {
   neighborhoodData: React.PropTypes.object,
+  demographicData: React.PropTypes.object,
   setOtherDemographic: React.PropTypes.func,
   setOtherUnitSize: React.PropTypes.func,
   otherDemographic: React.PropTypes.string,
@@ -167,6 +176,7 @@ const mapDispatch = dispatch => ({
 
 const mapProps = state => ({
   neighborhoodData: getCombinedNeighborhoodsData(state),
+  demographicData: getCombinedDemographicData(state),
   isLoading: isAnyCallPending(state),
   userIncome: getUserIncome(state),
   userUnitSize: getUserUnitSize(state),
