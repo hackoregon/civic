@@ -355,66 +355,90 @@ const dataHourFalse = [{
 
 const ErBarChart = () =>
   <div style={{ display: 'flex', flexFlow: 'row wrap' }}>
-    <ResponsiveContainer width="33.333%" aspect="1">
-      <BarChart layout="horizontal" data={dataMonthMedical}>
-        <XAxis dataKey="name" />
-        <YAxis />
-        <CartesianGrid strokeDasharray="3 3" />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="Average Daily Medical Incidents per Month, 2010-2016" fill="#D7075F" />
-      </BarChart>
-    </ResponsiveContainer>
-    <ResponsiveContainer width="33.333%" aspect="1">
-      <BarChart layout="horizontal" data={dataMonthFire}>
-        <XAxis dataKey="name" />
-        <YAxis />
-        <CartesianGrid strokeDasharray="3 3" />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="Average Daily Fire Incidents per Month, 2010-2016" fill="#e34d77" />
-      </BarChart>
-    </ResponsiveContainer>
-    <ResponsiveContainer width="33.333%" aspect="1">
-      <BarChart layout="horizontal" data={dataMonthFalse}>
-        <XAxis dataKey="name" />
-        <YAxis />
-        <CartesianGrid strokeDasharray="3 3" />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="Average Daily False Alarms per Month, 2010-2016" fill="#ed7690" />
-      </BarChart>
-    </ResponsiveContainer>
-    <ResponsiveContainer width="33.333%" aspect="1">
-      <BarChart layout="horizontal" data={dataHourMedical}>
-        <XAxis dataKey="name" />
-        <YAxis />
-        <CartesianGrid strokeDasharray="3 3" />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="Average Medical Incidents per Hour, 2010-2016" fill="#D7075F" />
-      </BarChart>
-    </ResponsiveContainer>
-    <ResponsiveContainer width="33.333%" aspect="1">
-      <BarChart layout="horizontal" data={dataHourFire}>
-        <XAxis dataKey="name" />
-        <YAxis />
-        <CartesianGrid strokeDasharray="3 3" />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="Average Fire Incidents per Hour, 2010-2016" fill="#e34d77" />
-      </BarChart>
-    </ResponsiveContainer>
-    <ResponsiveContainer width="33.333%" aspect="1">
-      <BarChart layout="horizontal" data={dataHourFalse}>
-        <XAxis dataKey="name" />
-        <YAxis />
-        <CartesianGrid strokeDasharray="3 3" />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="Average False Alarms per Hour, 2010-2016" fill="#ed7690" />
-      </BarChart>
-    </ResponsiveContainer>
+    <div style={{ width: '33.333%' }}>
+      <h4 style={{ color: '#d7075f' }}>
+        Average Daily Medical Incidents per Month
+      </h4>
+      <ResponsiveContainer aspect="1">
+        <BarChart layout="horizontal" data={dataMonthMedical}>
+          <XAxis dataKey="name" />
+          <YAxis />
+          <CartesianGrid strokeDasharray="3 3" />
+          <Tooltip />
+          <Bar dataKey="Average Daily Medical Incidents per Month, 2010-2016" fill="#D7075F" />
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+    <div style={{ width: '33.333%' }}>
+      <h4 style={{ color: '#d7075f' }}>
+        Average Daily Fire Incidents per Month
+      </h4>
+      <ResponsiveContainer aspect="1">
+        <BarChart layout="horizontal" data={dataMonthFire}>
+          <XAxis dataKey="name" />
+          <YAxis />
+          <CartesianGrid strokeDasharray="3 3" />
+          <Tooltip />
+          <Bar dataKey="Average Daily Fire Incidents per Month, 2010-2016" fill="#e34d77" />
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+    <div style={{ width: '33.333%' }}>
+      <h4 style={{ color: '#d7075f' }}>
+        Average Daily False Alarms per Month
+      </h4>
+      <ResponsiveContainer aspect="1">
+        <BarChart layout="horizontal" data={dataMonthFalse}>
+          <XAxis dataKey="name" />
+          <YAxis />
+          <CartesianGrid strokeDasharray="3 3" />
+          <Tooltip />
+          <Bar dataKey="Average Daily False Alarms per Month, 2010-2016" fill="#ed7690" />
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+    <div style={{ width: '33.333%' }}>
+      <h4 style={{ color: '#d7075f' }}>
+        Average Medical Incidents per Hour
+      </h4>
+      <ResponsiveContainer aspect="1">
+        <BarChart layout="horizontal" data={dataHourMedical}>
+          <XAxis dataKey="name" />
+          <YAxis />
+          <CartesianGrid strokeDasharray="3 3" />
+          <Tooltip />
+          <Bar dataKey="Average Medical Incidents per Hour, 2010-2016" fill="#D7075F" />
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+    <div style={{ width: '33.333%' }}>
+      <h4 style={{ color: '#d7075f' }}>
+        Average Fire Incidents per Hour
+      </h4>
+      <ResponsiveContainer aspect="1">
+        <BarChart layout="horizontal" data={dataHourFire}>
+          <XAxis dataKey="name" />
+          <YAxis />
+          <CartesianGrid strokeDasharray="3 3" />
+          <Tooltip />
+          <Bar dataKey="Average Fire Incidents per Hour, 2010-2016" fill="#e34d77" />
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+    <div style={{ width: '33.333%' }}>
+      <h4 style={{ color: '#d7075f' }}>
+        Average False Alarms per Hour
+      </h4>
+      <ResponsiveContainer aspect="1">
+        <BarChart layout="horizontal" data={dataHourFalse}>
+          <XAxis dataKey="name" />
+          <YAxis />
+          <CartesianGrid strokeDasharray="3 3" />
+          <Tooltip />
+          <Bar dataKey="Average False Alarms per Hour, 2010-2016" fill="#ed7690" />
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
   </div>;
 
 ErBarChart.propTypes = {
