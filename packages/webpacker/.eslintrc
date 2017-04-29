@@ -1,0 +1,56 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "plugins": [
+    "babel", "import", "prefer-object-spread"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 6.5,
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true,
+      "spread": true,
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "settings": {
+    "import/parser": "babel-eslint"
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true,
+    "mocha": true
+  },
+  "rules": {
+    "brace-style": [
+      1,
+      "1tbs", {
+        "allowSingleLine": true
+      }
+    ],
+    "eol-last": 0,
+    "global-require": 0,
+    "import/default": 2,
+    "import/named": 2,
+    "import/namespace": 2,
+    "import/no-duplicates": 2,
+    "import/no-extraneous-dependencies": [
+      "error", {
+        "devDependencies": ["**/*.story.js", "**/*.test.js", "./stories/index.js"]
+      }
+    ],
+    "import/no-named-as-default": 2,
+    "import/no-unresolved": 2,
+    "import/prefer-default-export": 0,
+    "no-multi-spaces": 0,
+    "semi": [1, "always"]
+  },
+  "globals": {
+    "__DEV__": true,
+    "expect": true,
+    "assert": true,
+    "enzyme": true,
+    "sinon": true
+  }
+}
