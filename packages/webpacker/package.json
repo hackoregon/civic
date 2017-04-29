@@ -1,6 +1,6 @@
 {
   "name": "@hackoregon/webpacker",
-  "version": "0.1.6",
+  "version": "0.1.7-beta.0",
   "description": "Compose your webpack configs - comes with a default",
   "author": "David Daniel <davidedaniel@gmail.com>",
   "license": "MIT",
@@ -36,7 +36,7 @@
     "ramda": "^0.23.0",
     "style-loader": "^0.16.1",
     "url-loader": "^0.5.8",
-    "webpack": "^2.4.1"
+    "webpack": "^2.3.3"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
