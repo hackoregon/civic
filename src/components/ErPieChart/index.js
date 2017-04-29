@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import RechartsPie from '@hackoregon/component-library/lib/RechartsPie/RechartsPie';
 
 // This base can be adjusted to scale up or down the chart and legend
-const proportionBase = 200;
+const proportionBase = 350;
 
 // These multipliers can be adjusted to modify the individual
 const chartProportions = {
-  chartWidth: proportionBase * 2,
+  chartWidth: proportionBase * 1,
   chartHeight: proportionBase * 1,
   iconSize: proportionBase * 0.075,
   pieInnerRadius: proportionBase * 0.2,
