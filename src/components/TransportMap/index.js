@@ -21,7 +21,7 @@ class TransportMap extends Component {
   
   openPanel(e) {
     // console.log('e', e)
-    const properties = e.target.feature.properties;
+    const properties = e.target.feature;
     // const fmaId = layer.feature.properties.id;
     // this.renderPanel(fmaId);
     this.props.setPanelValues(properties);
@@ -51,7 +51,7 @@ class TransportMap extends Component {
     if (this.props.geoData) {
       key = `${this.props.mapType}_${this.props.geoData.features.length}` || 'tempkey';
     }
-    console.log('key', key)
+    // console.log('key', key)
     
     return (
       <div>

@@ -6,15 +6,16 @@ class MapPanel extends Component {
   buildPanelList (features) {
       // console.log('mappanel', features)
       // console.log('canon', features.canonical_daterange)
-      const dates = JSON.parse(features.canonical_daterange)
-      let status = features.canonical_status || 'N/A'
+      const dates = JSON.parse(features.properties.canonical_daterange)
+      let status = features.properties.canonical_status || 'N/A'
       
       return (
         <p>
           Start Date: {dates.lower}<br />
           End Date: {dates.upper}<br />
           Status: {status}<br />
-          Data Source: {features.source_name}<br />
+          Data Source: {features.properties.source_name}<br />
+          System ID: {features.id}<br />
         </p>
       )
       
