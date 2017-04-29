@@ -1,0 +1,22 @@
+.publicIcons {
+  width: 75px;
+  height: 75px;
+}
+
+.breakdown {
+  width: 80%;
+  height: auto;
+}
+
+.arrows {
+  width: 50%;
+  height: auto;
+}
+
+#LearnAbout {
+  background: lightgray;
+}
+
+.budgetSquare {
+  background: lightgray;
+}
