@@ -22,14 +22,14 @@ const config = {
 
 const webpackConfig = composeConfig(
   config,
+  entryConfig,
+  outputConfig,
   babelConfig,
   stylesConfig,
   defineConfig,
   fontsConfig,
   imageConfig,
   pluginsConfig,
-  outputConfig,
-  entryConfig,
 );
 
 export default webpackConfig;
