@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs';
 
 // we'll be inside node_modules when called...
-const rootDir = path.resolve(__dirname, '../..');
+const cwd = process.cwd();
 
 export default function getPaths(prodDir = 'build') {
   const client    = 'client';
@@ -11,12 +11,12 @@ export default function getPaths(prodDir = 'build') {
   let srcDir      = '';
   let buildDir    = '';
 
-  const pathsRc = path.join(rootDir, prodDir, '.pathsrc');
+  const pathsRc = path.join(cwd, prodDir, '.pathsrc');
 
   const getRcData = () => {
     const pathsRcPath = path.resolve(pathsRc);
-    const srcClientPath = path.resolve(rootDir, 'src', client);
-    const srcServerPath = path.resolve(rootDir, 'src', server);
+    const srcClientPath = path.resolve(cwd, 'src', client);
+    const srcServerPath = path.resolve(cwd, 'src', server);
 
     if (fs.existsSync(srcClientPath) || fs.existsSync(srcServerPath)) {
       srcDir = 'src';
@@ -31,7 +31,7 @@ export default function getPaths(prodDir = 'build') {
   const rcData = getRcData();
 
   return {
-    rootDir,
+    cwd,
     pathsRc,
     src: {
       dir: srcDir,
