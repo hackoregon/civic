@@ -55,6 +55,6 @@ var config = {
   devtool: _utils.isDev ? 'source-map' : 'hidden-source-map'
 };
 
-var webpackConfig = (0, _composeConfig2.default)(config, _babel2.default, _styles2.default, _define2.default, _fonts2.default, _images2.default, _plugins2.default, _output2.default, _entry2.default);
+var webpackConfig = (0, _composeConfig2.default)(config, _entry2.default, _output2.default, _babel2.default, _styles2.default, _define2.default, _fonts2.default, _images2.default, _plugins2.default);
 
 exports.default = webpackConfig;
