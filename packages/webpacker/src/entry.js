@@ -30,5 +30,5 @@ export default {
       filename: 'css/[name].[chunkHash].css',
       minChunks: ({ resource }) => /node_modules/.test(resource),
     }),
-  ]
+  ],
 };

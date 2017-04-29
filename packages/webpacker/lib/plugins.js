@@ -33,24 +33,6 @@ exports.default = {
   plugins: (0, _utils.removeEmpty)([new _webpackPlugin2.default({
     keepExistingConfig: false,
     assetsFile: isomorphicAssetsFile
-  }), new _webpack2.default.optimize.CommonsChunkPlugin({
-    name: 'vendor',
-    chunks: ['app'],
-    filename: 'js/[name].bundle.js',
-    minChunks: function minChunks(_ref) {
-      var resource = _ref.resource;
-      return (/node_modules/.test(resource)
-      );
-    }
-  }), new _webpack2.default.optimize.CommonsChunkPlugin({
-    name: 'vendor-css',
-    chunks: ['app'],
-    filename: 'css/[name].[chunkHash].css',
-    minChunks: function minChunks(_ref2) {
-      var resource = _ref2.resource;
-      return (/node_modules/.test(resource)
-      );
-    }
   }), new _webpack2.default.LoaderOptionsPlugin({ options: { postcss: [_autoprefixer2.default] } }), _utils.isProd && new _webpack2.default.LoaderOptionsPlugin({
     minimize: true,
     debug: false
