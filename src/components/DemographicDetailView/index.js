@@ -60,7 +60,7 @@ const DemographicDetailView = ({ demographics }) => {
             <div style={chartStyle}>
               <RechartsPie
                 data={demographics.populations}
-                chartProportions={chartProportions}  // eslint-disable-line max-len
+                chartProportions={chartProportions}
                 colors={colors}
                 styles={RechartsPieStyles}
               />
