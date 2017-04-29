@@ -30,20 +30,25 @@ const setYouPathOptions = ({ affordableYou }) => ({
  * CrossHatch 'affordableOther' representation is rendered second, therefore it has precedence
  * and will receive mouse events. Click event is propagated up
  */
-const Neighborhood = ({ data, onClick }) => (
+const Neighborhood = ({ data, onSelect }) => (
   <LayerGroup>
-    <GeoJSON data={data} {...setYouPathOptions(data)} />
-    <GeoJSON data={data} {...setOtherPathOptions(data)} onClick={onClick} />
+    <GeoJSON
+      data={data} {...setYouPathOptions(data)}
+    />
+    <GeoJSON
+      data={data} {...setOtherPathOptions(data)}
+      onClick={e => onSelect(e.layer.feature.id)}
+    />
   </LayerGroup>
 );
 
 Neighborhood.propTypes = {
   data: PropTypes.object.isRequired,
-  onClick: PropTypes.func.isRequired,
+  onSelect: PropTypes.func,
 };
 
 Neighborhood.defaultProps = {
-  onClick: () => {},
+  onSelect() {},
 };
 
 export default Neighborhood;

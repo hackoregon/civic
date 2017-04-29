@@ -20,6 +20,7 @@ import {
   updateOtherDemographic,
   updateUserIncome,
   updateUserUnitSize,
+  updateNeighborhood,
 } from '../../state/parameters/actions';
 import {
   getUserIncome,
@@ -51,6 +52,7 @@ export class App extends React.Component {
       otherUnitSize,
       setOtherUnitSize,
       setOtherDemographic,
+      setNeighborhood,
     } = this.props;
 
     return (
@@ -91,7 +93,7 @@ export class App extends React.Component {
               ))}
             </select>
           </p>
-          <Map neighborhoods={neighborhoodData} />
+          <Map neighborhoods={neighborhoodData} onSelect={id => setNeighborhood(id)} />
         </StoryCard>
       </div>
     );
@@ -111,6 +113,7 @@ App.defaultProps = {
   setUserUnitSize() {},
   setOtherDemographic() {},
   setOtherUnitSize() {},
+  setNeighborhood() {},
   fetchAllData() {},
 };
 
@@ -124,6 +127,7 @@ App.propTypes = {
   userUnitSize: React.PropTypes.string,
   setUserIncome: React.PropTypes.func,
   setUserUnitSize: React.PropTypes.func,
+  setNeighborhood: React.PropTypes.func,
   fetchAllData: React.PropTypes.func,
 };
 
@@ -154,6 +158,10 @@ const mapDispatch = dispatch => ({
   setUserUnitSize(size) {
     dispatch(updateUserUnitSize(size));
     dispatch(fetchRentData());
+  },
+
+  setNeighborhood(id) {
+    dispatch(updateNeighborhood(id));
   },
 });
 
