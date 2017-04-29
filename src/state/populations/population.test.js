@@ -48,39 +48,45 @@ describe('populations actions', () => {
   /* eslint-disable no-sparse-arrays, comma-style */
   describe('data normalizer', () => {
     it('should normalize the data', () => {
-      expect(actions.normalizer([
-        {
-          NP_ID: 4,
-          neighborhood: 'Central City',
-          ethnicity: 'Total',
-          population: 31665,
-          year: '2014',
-        },
-        {
-          NP_ID: 4,
-          neighborhood: 'Central City',
-          ethnicity: 'An Ethnicity',
-          population: 1337,
-          year: '2014',
-        },
-        {
-          NP_ID: 1,
-          neighborhood: '122nd-Division',
-          ethnicity: 'Total',
-          population: 24433,
-          year: '2014',
-        },
-      ])).to.eql([
+      expect(actions.normalizer([{
+        NP_ID: 4,
+        neighborhood: 'Central City',
+        ethnicity: 'Total',
+        population: 1337,
+        year: '2014',
+      }, {
+        NP_ID: 4,
+        neighborhood: 'Central City',
+        ethnicity: 'Red',
+        population: 2.718281828459045,
+        year: '2014',
+      }, {
+        NP_ID: 1,
+        neighborhood: '122nd-Division',
+        ethnicity: 'Green',
+        population: 42,
+        year: '2014',
+      }, {
+        NP_ID: 1,
+        neighborhood: '122nd-Division',
+        ethnicity: 'Blue',
+        population: 3.141592653589793,
+        year: '2014',
+      }])).to.eql([
         ,
-        {
-          Total: 24433,
-        },
+        [{
+          name: 'Green',
+          value: 42,
+        }, {
+          name: 'Blue',
+          value: 3.141592653589793,
+        }],
         ,
         ,
-        {
-          Total: 31665,
-          'An Ethnicity': 1337,
-        },
+        [{
+          name: 'Red',
+          value: 2.718281828459045,
+        }],
       ]);
     });
   });
@@ -101,8 +107,8 @@ describe('populations actions', () => {
         {
           NP_ID: 1,
           neighborhood: '122nd-Division',
-          ethnicity: 'Total',
-          population: 24433,
+          ethnicity: 'Martian',
+          population: 1.414213562373095,
           year: '2014',
         },
       ];
@@ -118,9 +124,10 @@ describe('populations actions', () => {
           type: actionTypes.CALL_SUCCESS,
           payload: [
             ,
-            {
-              Total: 24433,
-            },
+            [{
+              name: 'Martian',
+              value: 1.414213562373095,
+            }],
           ],
         },
       ];
