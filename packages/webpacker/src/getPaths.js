@@ -1,7 +1,8 @@
 import path from 'path';
 import fs from 'fs';
 
-const rootDir = path.resolve(__dirname, '..');
+// we'll be inside node_modules when called...
+const rootDir = path.resolve(__dirname, '../..');
 
 export default function getPaths(prodDir = 'build') {
   const client    = 'client';
