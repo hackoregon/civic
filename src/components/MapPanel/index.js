@@ -4,6 +4,7 @@ import { getFmaThunk, getFmaData, getFmaPanelData } from '../../state';
 
 class MapPanel extends Component {
   render() {
+    console.log('rendered map panel');
     const stats = this.props.fmaPanelData.stats;
     return (
       <div>

@@ -92,7 +92,7 @@ export const closeModal = payload => ({ type: CLOSE_MODAL, payload });
 export const openModal = payload => ({ type: OPEN_MODAL, payload });
 
 // RENDER PANEL CREATOR //
-export const renderFmaPanelProperties = payload => ({ type: RENDER_PANEL, payload });
+export const renderFmaPanelProperties = payload => console.log(payload) || ({ type: RENDER_PANEL, payload });
 
 // FIRE API ACTION CREATORS //
 export const getAgencies = payload => ({ type: GET_AGENCIES, payload });
