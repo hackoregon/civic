@@ -1,3 +1,4 @@
+import webpack from 'webpack';
 import { join } from 'path';
 import { SRC_PATH } from './paths';
 
@@ -16,4 +17,18 @@ export default {
       'leaflet',
     ],
   },
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      chunks: ['app'],
+      filename: 'js/[name].bundle.js',
+      minChunks: ({ resource }) => /node_modules/.test(resource),
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor-css',
+      chunks: ['app'],
+      filename: 'css/[name].[chunkHash].css',
+      minChunks: ({ resource }) => /node_modules/.test(resource),
+    }),
+  ]
 };
