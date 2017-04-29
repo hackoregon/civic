@@ -25,9 +25,21 @@ class FmaMap extends Component {
     this.props.renderPanel(fmaProperties);
   }
 
+  setOpacity(e) {
+    const layer = e.target;
+    layer.setStyle({ color: '#EE495C', fillColor: '#EE495C', fillOpacity: '1' });
+  }
+
+  clearOpacity(e) {
+    const layer = e.target;
+    layer.setStyle({ color: '#EE495C', fillColor: '#EE495C', fillOpacity: '0.15' });
+  }
+
   onEachFeature(feature, layer) {
     layer.on({
       click: this.openPanel.bind(this),
+      mouseover: this.setOpacity.bind(this),
+      mouseout: this.clearOpacity.bind(this),
     });
   }
 
