@@ -2,10 +2,10 @@ import '!style-loader!css-loader!@hackoregon/component-library/assets/leaflet.cs
 import React, { Component } from 'react';
 import LeafletMap from '@hackoregon/component-library/lib/LeafletMap/LeafletMap';
 import { LayerGroup, GeoJSON } from 'react-leaflet';
+import { isEmpty } from 'ramda';
 import { connect } from 'react-redux';
 import { getFmasThunk, getFmasData, renderFmaPanelProperties, getFmaPanelData } from '../../state';
 import { MapPanel } from '../index';
-import { isEmpty } from 'ramda';
 
 const portland = [45.52, -122.67];
 
