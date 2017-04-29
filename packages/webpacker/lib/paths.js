@@ -23,6 +23,6 @@ var SERVER_DIR = exports.SERVER_DIR = src.server || 'server';
 var PUBLIC_DIR = exports.PUBLIC_DIR = 'public';
 
 // export absolute paths
-var ROOT_PATH = exports.ROOT_PATH = (0, _getPaths2.default)().rootDir;
+var ROOT_PATH = exports.ROOT_PATH = (0, _getPaths2.default)().cwd;
 var BUNDLE_PATH = exports.BUNDLE_PATH = (0, _path.resolve)(ROOT_PATH, BUILD_DIR);
 var SRC_PATH = exports.SRC_PATH = (0, _path.resolve)(ROOT_PATH, SRC_DIR);

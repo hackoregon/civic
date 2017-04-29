@@ -11,6 +11,6 @@ export const SERVER_DIR  = src.server || 'server';
 export const PUBLIC_DIR  = 'public';
 
 // export absolute paths
-export const ROOT_PATH   = getPaths().rootDir;
+export const ROOT_PATH   = getPaths().cwd;
 export const BUNDLE_PATH = resolve(ROOT_PATH, BUILD_DIR);
 export const SRC_PATH    = resolve(ROOT_PATH, SRC_DIR);
