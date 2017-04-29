@@ -21,16 +21,18 @@ class MapPanel extends Component {
           </ul>
         </div>
         <div className="panel-column-2">
-          <h3>Average number of incidents</h3>
+          <h3>Incidents</h3>
           <ul style={{ listStyleType: 'none' }}>
-            <li><span /> medical emergencies</li>
-            <li><span /> fire emergencies</li>
+            <li><span>{stats.total_incidents_2016}</span> emergencies</li>
+            <li><span> fire emergencies </span></li>
           </ul>
         </div>
         <div className="panel-column-3">
           <h3>Median Response Time</h3>
           <ul style={{ listStyleType: 'none' }}>
-            <li><span>{stats.median_response_time}</span> min</li>
+            <li><span>{stats.median_response_time} min</span> total</li>
+            <li><span>{stats.median_resp_time_med} min</span> medical</li>
+            <li><span>{stats.median_resp_time_fire} min</span> fire</li>
           </ul>
         </div>
       </div>
