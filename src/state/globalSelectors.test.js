@@ -58,7 +58,7 @@ describe('globalSelectors', () => {
     it('should associate data by neighborhood id', () => {
       const state = {
         neighborhoods: { data: [{ name: 'My hood', id: 1, type: 'Feature' }] },
-        affordability: { data: [{ id: 1, affordable: true }] },
+        affordability: { data: [{ id: 1, affordable: true, year: 2016 }] },
         rent: { data: [{ id: 1, rent_amt: 10000000 }] },
         parameters: { user: { income: 40000 } },
       };

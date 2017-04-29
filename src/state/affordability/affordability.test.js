@@ -63,6 +63,7 @@ describe('affordability actions', () => {
           housing_size: '1-BR',
           neighborhood: 'Centennial-Glenfair-Wilkes',
           NP_ID: 10,
+          year: 2016,
         },
       ];
 
@@ -77,6 +78,7 @@ describe('affordability actions', () => {
           payload: [{
             affordable: true,
             id: 10,
+            year: 2016,
           }],
         },
       ];
@@ -232,9 +234,23 @@ describe('affordability selectors', () => {
     });
 
     it('should return affordability data when set', () => {
-      const data = 'you found it!';
+      const data = [
+        { year: 2016, affordable: true, id: 1 },
+        { year: 2016, affordable: true, id: 2 },
+        { year: 2016, affordable: true, id: 3 },
+      ];
       state = { affordability: { data } };
       expect(selectors.getAffordabilityData(state)).to.eql(data);
+    });
+
+    it('should filter out any affordability data for years other than 2016', () => {
+      const data = [
+        { year: 2016, affordable: true, id: 1 },
+        { year: 2015, affordable: true, id: 2 },
+        { year: 2017, affordable: true, id: 3 },
+      ];
+      state = { affordability: { data } };
+      expect(selectors.getAffordabilityData(state)).to.eql([data[0]]);
     });
   });
 });
