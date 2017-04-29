@@ -1,0 +1,18 @@
+.budget-card-collection__intro-hero {
+  padding: 1rem;
+  background: #f0f0f0;
+  color: #999;
+}
+
+.budget-card-collection__sticky-controller {
+  padding: 0.5rem;
+  background: white;
+}
+
+.data-display {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid #999;
+  min-height: 5rem;
+}

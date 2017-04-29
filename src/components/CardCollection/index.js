@@ -1,0 +1,140 @@
+import React from 'react';
+import fetch from 'isomorphic-fetch';
+import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
+import StackedArea from '../AreaChart/AreaChart';
+import Example from '../Example';
+import { StickyContainer, Sticky } from 'react-sticky';
+import _ from 'lodash';
+import ReactSlider from 'rc-slider';
+import 'rc-slider/assets/index.css';
+import './CardCollection.css';
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
+
+
+const yearList = _.range(2006, 2018);
+const fiscalYearList = _.map(yearList, year => {
+  const yrPlus = _.toString(year + 1);
+  const yearString = _.toString(year);
+  return `${yearString}_${yrPlus.substring(yrPlus.length - 2)}`;
+});
+const API_ROOT = "http://service.civicpdx.org/budget/";
+const SACodeUrl = `${API_ROOT}code/?code_type=service_area_code&format=json`;
+const bureauCodeUrl = `${API_ROOT}code/?code_type=bureau_code&format=json`;
+const serviceAreaUrl =  `${API_ROOT}history/service_area/?format=json`;
+const bureausUrl = `${API_ROOT}history/bureau/?format=json`;
+const urlsAndNames = [
+  {name: "ServiceAreaCodes", SACodeUrl},
+  {name: "ServiceAreas", serviceAreaUrl},
+  {name: "BureauCodes", bureauCodeUrl},
+  {name: "bureaus", bureausUrl},
+]
+
+class CardCollection extends React.Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      isLoading: true,
+      data: {},
+      currentYear: 2006,
+      currentServiceArea: "",
+      currentBureau: "",
+      yearList: yearList,
+    }
+    this.getData = this.getData.bind(this);
+    this.getAllData = this.getAllData.bind(this);
+    this.onSliderChange.bind(this);
+  }
+
+  componentDidMount() {
+    this.getData(serviceAreaUrl, "serviceAreas");
+  }
+
+  getData (url, dataName) {
+    this.setState({ isLoading: true })
+    fetch(url)
+    .then(res => res.json())
+    .then(resData => {
+    this.setState({data: {
+      ...this.data,
+      [dataName]: resData.results
+    },  isLoading: false});
+    })
+    .catch(err => {
+      console.error(err)
+      this.setState({isLoading: false});
+    })
+  }
+
+  getAllData (urlsAndNames) {
+    _.each(urlsAndNames, obj => {
+      this.getData(obj.url, obj.name);
+    })
+  }
+
+  onSliderChange (value) {
+    this.setState({sliderValue: value})
+  }
+
+  getSaDataByFiscalYear() {
+    const saData = this.state.data.hasOwnProperty("serviceAreas") ?
+    this.state.data.serviceAreas : [];
+    const saByFiscalYear = saData.length && _.groupBy(saData, obj => obj.fiscal_year);
+    const saSumByYear = saData.length && _.map(
+      saByFiscalYear, year => ({ [year[0].fiscal_year]: _.sumBy(year, 'amount')}));
+    console.log('saData', saData);
+    console.log('saByFiscalYear', saByFiscalYear);
+    console.log('saSumByYear', saSumByYear);
+    return saSumByYear;
+  }
+
+  render () {
+    console.log('data', this.state.data);
+    const saData = this.getSaDataByFiscalYear();
+    const markObjects = _.map(yearList,
+      year => ({[year]: _.toString(year)})
+    );
+    const marks = Object.assign({}, ...markObjects);
+    return (
+      <div>
+        <StickyContainer>
+          <div className="budget-card-collection__intro-hero">
+            <h1>CardCollection here</h1>
+            <p className="collection__intro-hero-text">
+              Some intro text will go here. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </p>
+          </div>
+          <Sticky>
+            <div className="budget-card-collection__sticky-controller">
+              <p>Controller Section: Dropdown or slider by year (10 year time period available) Need: Determine interction point + consider that data might be added in at an additional time (next year). This will be sticky and will apply to all story sections below.</p>
+              <p> Slider is at: {this.state.currentYear}</p>
+              <ReactSlider
+                min={_.min(this.state.yearList)}
+                max={_.max(this.state.yearList)}
+                marks={marks}
+                step={1}
+                included={false}
+                onChange={this.onSliderChange}
+              />
+            </div>
+          </Sticky>
+          <div className="data-display">
+          <h3>10 Years</h3>
+          <h3>City of Portland Budget</h3>
+          {this.state.data.default === true ? "Error loading data. Sorry." : this.state.data.results }
+          </div>
+          <StoryCard title="Overall Budget">
+            <Select
+              name="overall-to-service-area"
+            />
+          </StoryCard>
+          <StoryCard title="Budget By Service Area">
+
+          </StoryCard>
+        </StickyContainer>
+      </div>
+    )
+  }
+}
+
+export default CardCollection;
