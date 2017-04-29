@@ -1,3 +1,4 @@
+import '@hackoregon/component-library/src/global.styles.css';
 import React from 'react';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { render } from 'react-dom';
