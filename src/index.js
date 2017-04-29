@@ -41,6 +41,16 @@ export default function createRoutes(store) {
       },
     },
     {
+      path: '/budget101',
+      name: 'examplepage',
+      getComponent(nextState, cb) {
+        const renderRoute = loadModule(cb);
+        require.ensure([], require => Promise.resolve(require('./components/Budget101'))
+          .then(renderRoute)
+          .catch(errorLoading));
+      },
+    },
+    {
       path: '/stacked',
       name: 'stackedareaepage',
       getComponent(nextState, cb) {
