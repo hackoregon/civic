@@ -1,19 +1,19 @@
 import webpack from 'webpack';
+import IsomorphicLoaderPlugin from 'isomorphic-loader/lib/webpack-plugin';
 import AssetsPlugin from 'assets-webpack-plugin';
 import autoprefixer from 'autoprefixer';
 
 import { removeEmpty, isProd } from './utils';
 import { BUNDLE_PATH } from './paths';
 
-const IsomorphicLoaderPlugin = require('isomorphic-loader/lib/webpack-plugin');
-
-const assetFileName       = 'civic-assets.json';
+const assetFileName = 'webpack-assets.json';
+const isomorphicAssetsFile = 'isomorphic-assets.json';
 
 export default {
   plugins: removeEmpty([
     new IsomorphicLoaderPlugin({
       keepExistingConfig: false,
-      assetsFile: 'isomorphic-assets.json',
+      assetsFile: isomorphicAssetsFile,
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
@@ -34,7 +34,6 @@ export default {
             debug: false,
           })
         ),
-    // isProd && (new webpack.optimize.AggressiveMergingPlugin({})),
     new AssetsPlugin({
       filename: assetFileName,
       prettyPrint: true,
