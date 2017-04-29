@@ -1,25 +1,49 @@
 import React, { PropTypes } from 'react';
-import { GeoJSON, Popup } from 'react-leaflet';
+import { GeoJSON, LayerGroup } from 'react-leaflet';
+import { crossHatch } from '../CrossHatch';
+import { HOUSING_TEAM_PRIMARY_COLOR } from '../../utils/data-constants';
+
+const NEIGHBORHOOD_OPACITY = 0.8;
+const NOT_AFFORDABLE_COLOR = '#9A9D9F'; // color chosen from the style guide, was contrasted with our primary in a pie chart
+const AFFORDABLE_COLOR = HOUSING_TEAM_PRIMARY_COLOR;
 
 /**
- * This function is where we can style the geoJson based on data.
+ * These functions are where we can style the geoJson based on data.
  * We have available the properties described here: http://leafletjs.com/reference.html#path-options
  */
-const setPathOptions = ({ affordableYou, affordableOther }) => ({
-  opacity: affordableOther ? '1' : '0',
-  fillOpacity: 0.7,
-  fillColor: affordableYou ? '#386598' : '#CFE7F9',
-  color: 'black',
+const setOtherPathOptions = ({ affordableOther }) => ({
+  fillOpacity: affordableOther ? 1 : 0,
+  opacity: 0,
+  fillPattern: crossHatch,
 });
 
-const Neighborhood = ({ data }) => (
-  <GeoJSON data={data} {...setPathOptions(data)} >
-    <Popup><div>{data.name}</div></Popup>
-  </GeoJSON>
+const setYouPathOptions = ({ affordableYou }) => ({
+  opacity: NEIGHBORHOOD_OPACITY,
+  weight: 1,
+  fillOpacity: NEIGHBORHOOD_OPACITY,
+  fillColor: affordableYou ? AFFORDABLE_COLOR : NOT_AFFORDABLE_COLOR,
+  color: affordableYou ? AFFORDABLE_COLOR : NOT_AFFORDABLE_COLOR,
+});
+
+/**
+ * Neighborhood component now renders two geojson layers superimposed on one another
+ * CrossHatch 'affordableOther' representation is rendered second, therefore it has precedence
+ * and will receive mouse events. Click event is propagated up
+ */
+const Neighborhood = ({ data, onClick }) => (
+  <LayerGroup>
+    <GeoJSON data={data} {...setYouPathOptions(data)} />
+    <GeoJSON data={data} {...setOtherPathOptions(data)} onClick={onClick} />
+  </LayerGroup>
 );
 
 Neighborhood.propTypes = {
   data: PropTypes.object.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
+
+Neighborhood.defaultProps = {
+  onClick: () => {},
 };
 
 export default Neighborhood;
