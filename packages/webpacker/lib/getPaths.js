@@ -18,7 +18,8 @@ var _fs2 = _interopRequireDefault(_fs);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var rootDir = _path2.default.resolve(__dirname, '..');
+// we'll be inside node_modules when called...
+var cwd = process.cwd();
 
 function getPaths() {
   var prodDir = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'build';
@@ -29,12 +30,12 @@ function getPaths() {
   var srcDir = '';
   var buildDir = '';
 
-  var pathsRc = _path2.default.join(rootDir, prodDir, '.pathsrc');
+  var pathsRc = _path2.default.join(cwd, prodDir, '.pathsrc');
 
   var getRcData = function getRcData() {
     var pathsRcPath = _path2.default.resolve(pathsRc);
-    var srcClientPath = _path2.default.resolve(rootDir, 'src', client);
-    var srcServerPath = _path2.default.resolve(rootDir, 'src', server);
+    var srcClientPath = _path2.default.resolve(cwd, 'src', client);
+    var srcServerPath = _path2.default.resolve(cwd, 'src', server);
 
     if (_fs2.default.existsSync(srcClientPath) || _fs2.default.existsSync(srcServerPath)) {
       srcDir = 'src';
@@ -49,7 +50,7 @@ function getPaths() {
   var rcData = getRcData();
 
   return _extends({
-    rootDir: rootDir,
+    cwd: cwd,
     pathsRc: pathsRc,
     src: {
       dir: srcDir,
