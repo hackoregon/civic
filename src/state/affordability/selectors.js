@@ -11,7 +11,7 @@ export const getAffordabilityRequest = createSelector(
 
 export const getAffordabilityData = createSelector(
   getAffordabilityRequest,
-  ({ data }) => data,
+  ({ data }) => data && data.filter(({ year }) => year === 2016),
 );
 
 export const isAffordabilityPending = createSelector(
