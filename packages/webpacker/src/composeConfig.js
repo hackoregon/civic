@@ -61,9 +61,9 @@ export const normalize = (config, val) => {
   return val;
 };
 
-const reduceConfig = (...args) => args.reduce(
+const composeConfig = (...args) => args.reduce(
   (config, val) => inherit(config, normalize(config, val)),
   {},
 );
 
-export default reduceConfig;
+export default composeConfig;

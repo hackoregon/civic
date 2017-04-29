@@ -1,4 +1,4 @@
-import reduceConfig from './reduceConfig';
+import composeConfig from './composeConfig';
 import { isDev } from './utils';
 import { ROOT_PATH } from './paths';
 
@@ -20,7 +20,7 @@ const config = {
   devtool: isDev ? 'source-map' : 'hidden-source-map',
 };
 
-const webpackConfig = reduceConfig(
+const webpackConfig = composeConfig(
   config,
   babelConfig,
   stylesConfig,
