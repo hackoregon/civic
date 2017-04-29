@@ -1,10 +1,10 @@
 import fs from 'fs';
 import path from 'path';
 import glob from 'glob';
-import { BUILD_DIR, PUBLIC_DIR, ROOT_PATH } from './paths';
+import { BUNDLE_PATH, PUBLIC_DIR } from './paths';
 
-const assetsPattern = path.resolve(ROOT_PATH, BUILD_DIR, 'isomorphic-assets.*');
-const assetsPath = path.resolve(ROOT_PATH, BUILD_DIR, PUBLIC_DIR, 'isomorphic-assets.json');
+const assetsPattern = path.resolve(BUNDLE_PATH, 'isomorphic-assets.*');
+const assetsPath = path.resolve(BUNDLE_PATH, PUBLIC_DIR, 'isomorphic-assets.json');
 
 glob(assetsPattern, (readErr, files) => {
   const assets = files.reduce((result, file) => {

@@ -16,8 +16,8 @@ var _paths = require('./paths');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var assetsPattern = _path2.default.resolve(_paths.ROOT_PATH, _paths.BUILD_DIR, 'isomorphic-assets.*');
-var assetsPath = _path2.default.resolve(_paths.ROOT_PATH, _paths.BUILD_DIR, _paths.PUBLIC_DIR, 'isomorphic-assets.json');
+var assetsPattern = _path2.default.resolve(_paths.BUNDLE_PATH, 'isomorphic-assets.*');
+var assetsPath = _path2.default.resolve(_paths.BUNDLE_PATH, _paths.PUBLIC_DIR, 'isomorphic-assets.json');
 
 (0, _glob2.default)(assetsPattern, function (readErr, files) {
   var assets = files.reduce(function (result, file) {
