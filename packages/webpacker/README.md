@@ -2,7 +2,9 @@
 ---
 ###### v 0.0.1
 
-Webpacker comes with a default config and some utilities. `Webpacker.reduceconfig` allows you to add to a config object so you can further modularize your webpack configs.
+Webpacker comes with a default config and some utilities.
+
+`Webpacker.composeConfig` allows you to add to a config object so you can further modularize your webpack configs.
 
 #### Install
 ```bash
@@ -11,14 +13,15 @@ $ npm install @hackoregon/webpacker --save-dev
 
 
 ```javascript
-import { reduceConfig, defaultConfig } from '@hackoregon/webpacker';
-import webpack from 'webpack';
-
-const entryConfig = {
+// entry.js
+export default {
   entry: 'src/index.js'
 }
 
-const pluginsConfig = {
+// plugins.js
+import webpack from 'webpack';
+
+export default {
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: true,
@@ -29,5 +32,14 @@ const pluginsConfig = {
   ]
 }
 
-const config = reduceConfig(defaultConfig, entryConfig, pluginsConfig);
+// webpack.config.js
+import { composeConfig, defaultConfig } from '@hackoregon/webpacker';
+import pluginsConfig from './plugins'
+import entryConfig from './entry'
+
+export default composeConfig(
+  defaultConfig,
+  entryConfig,
+  pluginsConfig
+);
 ```
