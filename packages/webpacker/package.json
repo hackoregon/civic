@@ -1,6 +1,6 @@
 {
   "name": "@hackoregon/webpacker",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Compose your webpack configs - comes with a default",
   "author": "David Daniel <davidedaniel@gmail.com>",
   "license": "MIT",
@@ -13,9 +13,9 @@
     "start": "npm install",
     "prebuild": "npm run lint",
     "build": "babel src --out-dir lib",
-    "postbuild": "npm prune --production",
+    "postbuild": "npm run bump",
     "bump": "bump --prompt --commit --push",
-    "postbump": "editme -w",
+    "postbump": "editme -w & npm prune --production",
     "lint": "eslint src"
   },
   "keywords": [
