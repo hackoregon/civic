@@ -15,8 +15,8 @@ export const getFeatures = (input) => {
       break;
 
     case 'conflicts':
-      url = `${ROOT_URL}conflicts?distance=100&days=14&startDate=2017-04-29&endDate=2017-06-30&format=json`;      
-      // url = `${ROOT_URL}features/?source_name=Grind and Pave`;
+      // url = `${ROOT_URL}conflicts?distance=100&days=14&startDate=2017-04-29&endDate=2017-06-30&format=json`;
+      url = `${ROOT_URL}conflicts?distance=100&days=14&startDate=2017-04-29&endDate=2017-06-30&format=json`;
       break;
 
     case 'nearby':
