@@ -10,6 +10,8 @@ import BagelShop from './BagelShop';
 import ErPieChart from './ErPieChart';
 import PieWhatTheyDo from './PieWhatTheyDo';
 import ErBarChart from './ErBarChart';
+import HowWhenBusy from './HowWhenBusy';
+import ResponseTimeVaries from './ResponseTimeVaries';
 
 export {
   App,
@@ -24,4 +26,6 @@ export {
   ErPieChart,
   PieWhatTheyDo,
   ErBarChart,
+  HowWhenBusy,
+  ResponseTimeVaries,
 };
