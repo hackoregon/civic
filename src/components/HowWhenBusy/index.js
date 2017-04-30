@@ -358,7 +358,7 @@ const ErBarChart = () =>
       <h4 style={{ color: '#d7075f', textAlign: 'right' }}>
         Average Daily Medical Incidents<br />per Month
       </h4>
-      <ResponsiveContainer aspect="1">
+      <ResponsiveContainer aspect={1}>
         <BarChart layout="horizontal" data={dataMonthMedical}>
           <XAxis dataKey="name" />
           <YAxis />
@@ -372,7 +372,7 @@ const ErBarChart = () =>
       <h4 style={{ color: '#d7075f', textAlign: 'right' }}>
         Average Daily Fire Incidents<br />per Month
       </h4>
-      <ResponsiveContainer aspect="1">
+      <ResponsiveContainer aspect={1}>
         <BarChart layout="horizontal" data={dataMonthFire}>
           <XAxis dataKey="name" />
           <YAxis />
@@ -386,7 +386,7 @@ const ErBarChart = () =>
       <h4 style={{ color: '#d7075f', textAlign: 'right' }}>
         Average Daily False Alarms<br />per Month
       </h4>
-      <ResponsiveContainer aspect="1">
+      <ResponsiveContainer aspect={1}>
         <BarChart layout="horizontal" data={dataMonthFalse}>
           <XAxis dataKey="name" />
           <YAxis />
@@ -400,7 +400,7 @@ const ErBarChart = () =>
       <h4 style={{ color: '#d7075f', textAlign: 'right' }}>
         Average Medical Incidents<br />per Hour
       </h4>
-      <ResponsiveContainer aspect="1">
+      <ResponsiveContainer aspect={1}>
         <BarChart layout="horizontal" data={dataHourMedical}>
           <XAxis dataKey="name" />
           <YAxis />
@@ -414,7 +414,7 @@ const ErBarChart = () =>
       <h4 style={{ color: '#d7075f', textAlign: 'right' }}>
         Average Fire Incidents<br />per Hour
       </h4>
-      <ResponsiveContainer aspect="1">
+      <ResponsiveContainer aspect={1}>
         <BarChart layout="horizontal" data={dataHourFire}>
           <XAxis dataKey="name" />
           <YAxis />
@@ -428,7 +428,7 @@ const ErBarChart = () =>
       <h4 style={{ color: '#d7075f', textAlign: 'right' }}>
         Average False Alarms<br />per Hour
       </h4>
-      <ResponsiveContainer aspect="1">
+      <ResponsiveContainer aspect={1}>
         <BarChart layout="horizontal" data={dataHourFalse}>
           <XAxis dataKey="name" />
           <YAxis />

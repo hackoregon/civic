@@ -23,7 +23,7 @@ const Scatterplot = () => (
       <h4 style={{ color: '#d7075f', textAlign: 'right' }}>
         Response Time<br />vs. FMA Population
       </h4>
-      <ResponsiveContainer aspect="1">
+      <ResponsiveContainer aspect={1}>
         <ScatterChart>
           <XAxis dataKey={'fma_population_total'} name="Population" />
           <YAxis dataKey={'median_response_time'} name="Response Time" unit="min" />
@@ -38,7 +38,7 @@ const Scatterplot = () => (
       <h4 style={{ color: '#d7075f', textAlign: 'right' }}>
         Response Time<br />vs FMA Median Income
       </h4>
-      <ResponsiveContainer aspect="1">
+      <ResponsiveContainer aspect={1}>
         <ScatterChart>
           <XAxis dataKey={'median_hh_income'} name="Median HH Income" unit="$" />
           <YAxis dataKey={'median_response_time'} name="Response Time" unit="min" />
@@ -53,7 +53,7 @@ const Scatterplot = () => (
       <h4 style={{ color: '#d7075f', textAlign: 'right' }}>
         Response Time<br />vs FMA % Non-White
       </h4>
-      <ResponsiveContainer aspect="1">
+      <ResponsiveContainer aspect={1}>
         <ScatterChart>
           <XAxis dataKey={'percent_non_white'} name="Non-White" unit="%" />
           <YAxis dataKey={'median_response_time'} name="Response Time" unit="min" />
@@ -68,7 +68,7 @@ const Scatterplot = () => (
       <h4 style={{ color: '#d7075f', textAlign: 'right' }}>
         Incidents Per Thousand<br />vs FMA Population
       </h4>
-      <ResponsiveContainer aspect="1">
+      <ResponsiveContainer aspect={1}>
         <ScatterChart>
           <XAxis dataKey={'fma_population_total'} name="Population" />
           <YAxis dataKey={'total_incidents_per_1000'} name="Incidents Per 1,000" />
@@ -83,7 +83,7 @@ const Scatterplot = () => (
       <h4 style={{ color: '#d7075f', textAlign: 'right' }}>
         Incidents Per Thousand<br />vs FMA Median Income
       </h4>
-      <ResponsiveContainer aspect="1">
+      <ResponsiveContainer aspect={1}>
         <ScatterChart>
           <XAxis dataKey={'median_hh_income'} name="Median HH Income" unit="$" />
           <YAxis dataKey={'total_incidents_per_1000'} name="Incidents Per 1,000" />
@@ -98,7 +98,7 @@ const Scatterplot = () => (
       <h4 style={{ color: '#d7075f', textAlign: 'right' }}>
         Incidents Per Thousand<br />vs FMA % Non-White
       </h4>
-      <ResponsiveContainer aspect="1">
+      <ResponsiveContainer aspect={1}>
         <ScatterChart>
           <XAxis dataKey={'percent_non_white'} name="Non-White" unit="%" />
           <YAxis dataKey={'total_incidents_per_1000'} name="Incidents Per 1,000" />
