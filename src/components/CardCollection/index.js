@@ -1,7 +1,11 @@
 import React from 'react';
 import fetch from 'isomorphic-fetch';
-import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
+import StoryCard from '../StoryCard/StoryCard';
+import '../StoryCard/StoryCard.css';
+import '../StoryCard/StoryFooter.css';
+import '../StoryCard/StoryLink.css';
 import StackedArea from '../StackedAreaChart';
+import BubbleChart from '../MyTest/BubbleChart';
 import Example from '../Example';
 import { StickyContainer, Sticky } from 'react-sticky';
 import _ from 'lodash';
@@ -10,6 +14,8 @@ import 'rc-slider/assets/index.css';
 import './CardCollection.css';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
+import { bubbleData } from '../MyTest/utils';
+import { data, colors } from '../StackedAreaChart/utils';
 
 
 const yearList = _.range(2006, 2018);
@@ -113,7 +119,9 @@ class CardCollection extends React.Component {
         [sa.code]: sa.description
       })
     )
-    // const AreaChartData = _.map(this.state.data.serviceAreas, ())
+
+    console.log("aejroig", bubbleData)
+
     return (
       <div>
         <StickyContainer>
@@ -142,13 +150,16 @@ class CardCollection extends React.Component {
           <h3>City of Portland Budget</h3>
           {this.state.data.default === true ? "Error loading data. Sorry." : this.state.data.results }
           </div>
-          <StoryCard title="Overall Budget">
+          <StackedArea />
+          <StoryCard title="Overall Budget" style={{
+            maxWidth: "800px",
+          }}>
             <Select
               name="overall-to-service-area"
             />
           </StoryCard>
           <StoryCard title="Budget By Service Area">
-
+            <BubbleChart data={bubbleData[0]['2007']} />
           </StoryCard>
         </StickyContainer>
       </div>
