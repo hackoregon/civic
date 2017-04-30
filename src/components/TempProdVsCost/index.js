@@ -1,5 +1,5 @@
 import React from 'react';
-import LineChart from '../LineChart';
+import LineChart from './LineChart';
 
 import eastData from './east.json';
 import northData from './north.json';
@@ -71,7 +71,7 @@ const ProdVsCost = () =>
       In contrast, areas that saw little new construction, like outer East Portland, saw steeper
       increases in both home prices and rental costs.
     </p>
-    <h3 style={headingStyle}>Far East Portland: Centennial, 122, Pleasant Valley, Parkrose</h3>
+    <h3 style={headingStyle}>Outer East Portland Housing Production and Costs</h3>
     <LineChart data={stackUnitGrowth(eastData)} colors={colors} />
     <p style={pStyle}>
       These charts suggest that greater amounts of new housing built in specific neighborhoods has

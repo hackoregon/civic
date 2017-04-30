@@ -19,7 +19,7 @@ import {
 } from '../../state/globalSelectors';
 import Map from '../Map';
 import DemographicDetailView from '../DemographicDetailView';
-import ProdVsCost from '../ProdVsCost';
+import TempProdVsCost from '../TempProdVsCost';
 
 import {
   updateOtherUnitSize,
@@ -103,7 +103,7 @@ export class App extends React.Component {
           <Map neighborhoods={neighborhoodData} onSelect={id => setNeighborhood(id)} />
           <DemographicDetailView demographics={demographicData} />
         </StoryCard>
-        <ProdVsCost />
+        <TempProdVsCost />
       </div>
     );
   }
