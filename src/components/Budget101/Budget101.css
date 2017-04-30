@@ -28,7 +28,9 @@
 }
 
 .resources li {
+  list-style-type: none;
   text-align: left;
+  margin-left: -40px;
   margin-bottom: 10px;
 }
 
@@ -42,6 +44,10 @@
 .col {
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.greenText {
+  color: #329F7c
 }
 
 #ServiceAreas {
