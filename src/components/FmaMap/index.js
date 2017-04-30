@@ -57,9 +57,9 @@ class FmaMap extends Component {
         }
 
         {
-          this.props.fmaPanelData ?
+          this.props.fmaPanelData && !isEmpty(this.props.fmaPanelData) ?
             <MapPanel /> :
-          null
+            <h6>Click on an FMA to view some statistics</h6>
         }
       </div>
     );

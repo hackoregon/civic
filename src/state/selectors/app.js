@@ -30,19 +30,19 @@ export const getFmaPanelData = createSelector(
   ({ fmaPanelData }) => fmaPanelData,
 );
 
-export const getFmasFeatures = createSelector(
-  getFmasData,
-  ({ features }) => features,
-);
+// export const getFmasFeatures = createSelector(
+//   getFmasData,
+//   ({ features }) => features,
+// );
 
-export const getFmaPanelId = createSelector(
-  getFmasFeatures,
-  // ({ fma_id }) => fma_id,
-  propOr(0, 'fma_id'),
-);
+// export const getFmaPanelId = createSelector(
+//   getFmasFeatures,
+//   // ({ fma_id }) => fma_id,
+//   propOr(0, 'fma_id'),
+// );
 
-export const getFmasFeaturesByPropertiesId = createSelector(
-  getFmaPanelId,
-  getFmasFeatures,
-  (_id, { properties }) => properties.filter(({ fma_id }) => _id === fma_id),
-);
+// export const getFmasFeaturesByPropertiesId = createSelector(
+//   getFmaPanelId,
+//   getFmasFeatures,
+//   (_id, { properties }) => properties.filter(({ fma_id }) => _id === fma_id),
+// );

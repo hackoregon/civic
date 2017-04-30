@@ -5023,6 +5023,12 @@ react-faux-dom@^3.0.1:
     query-selector "^1.0.9"
     style-attr "^1.0.1"
 
+react-fontawesome@^1.6.1:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/react-fontawesome/-/react-fontawesome-1.6.1.tgz#eddce17e7dc731aa09fd4a186688a61793a16c5c"
+  dependencies:
+    prop-types "^15.5.6"
+
 react-input-autosize@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/react-input-autosize/-/react-input-autosize-1.1.0.tgz#3fe1ac832387d8abab85f6051ceab1c9e5570853"
@@ -5207,7 +5213,7 @@ recharts-scale@0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/recharts-scale/-/recharts-scale-0.2.1.tgz#378f543ed17c3245e4d9afb10aaf6298240d2fcb"
 
-recharts@0.20.8, recharts@^0.20.1:
+recharts@^0.20.1:
   version "0.20.8"
   resolved "https://registry.yarnpkg.com/recharts/-/recharts-0.20.8.tgz#7675c6c75c4888a577063679273508bd79d007f4"
   dependencies:

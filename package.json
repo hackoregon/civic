@@ -50,6 +50,7 @@
     "ramda": "0.23.0",
     "react": "15.4.1",
     "react-dom": "15.4.1",
+    "react-fontawesome": "^1.6.1",
     "react-leaflet": "1.1.5",
     "react-player": "0.15.0",
     "react-redux": "5.0.1",
