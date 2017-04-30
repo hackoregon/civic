@@ -53,11 +53,9 @@ export class App extends React.Component {
       userIncome,
       userUnitSize,
       setUserIncome,
-      setUserUnitSize,
       otherDemographic,
-      otherUnitSize,
-      setOtherUnitSize,
       setOtherDemographic,
+      setUnitSize,
       setNeighborhood,
     } = this.props;
 
@@ -73,23 +71,15 @@ export class App extends React.Component {
             onChange={setUserIncome}
           />
           <p className="description">
-            <strong>Your Housing Type: </strong>
-            <select value={userUnitSize} onChange={event => setUserUnitSize(event.target.value)}>
+            <strong>Housing Type: </strong>
+            <select value={userUnitSize} onChange={event => setUnitSize(event.target.value)}>
               {HOUSING_TYPES.map(size => (
                 <option value={size} key={size}>{size}</option>
               ))}
             </select>
           </p>
           <p className="description">
-            <strong>Others Housing Type: </strong>
-            <select value={otherUnitSize} onChange={event => setOtherUnitSize(event.target.value)}>
-              {HOUSING_TYPES.map(size => (
-                <option value={size} key={size}>{size}</option>
-              ))}
-            </select>
-          </p>
-          <p className="description">
-            <strong>Others Demographic: </strong>
+            <strong>See How Other Portlanders Compare: </strong>
             <select
               value={otherDemographic}
               onChange={event => setOtherDemographic(event.target.value)}
@@ -115,27 +105,23 @@ App.defaultProps = {
   userIncome: DEFAULT_INCOME,
   userUnitSize: HOUSING_TYPES[0],
   otherDemographic: DEMOGRAPHICS[0],
-  otherUnitSize: HOUSING_TYPES[0],
   isLoading: false,
   setUserIncome() {},
-  setUserUnitSize() {},
   setOtherDemographic() {},
-  setOtherUnitSize() {},
   setNeighborhood() {},
   fetchAllData() {},
+  setUnitSize() {},
 };
 
 App.propTypes = {
   neighborhoodData: React.PropTypes.object,
   demographicData: React.PropTypes.object,
   setOtherDemographic: React.PropTypes.func,
-  setOtherUnitSize: React.PropTypes.func,
   otherDemographic: React.PropTypes.string,
-  otherUnitSize: React.PropTypes.string,
   userIncome: React.PropTypes.number,
   userUnitSize: React.PropTypes.string,
   setUserIncome: React.PropTypes.func,
-  setUserUnitSize: React.PropTypes.func,
+  setUnitSize: React.PropTypes.func,
   setNeighborhood: React.PropTypes.func,
   fetchAllData: React.PropTypes.func,
 };
@@ -149,9 +135,12 @@ const mapDispatch = dispatch => ({
     dispatch(fetchPopulationsData());
   },
 
-  setOtherUnitSize(size) {
+  setUnitSize(size) {
     dispatch(updateOtherUnitSize(size));
+    dispatch(updateUserUnitSize(size));
+
     dispatch(fetchAffordabilityData());
+    dispatch(fetchRentData());
   },
 
   setOtherDemographic(demographic) {
@@ -162,11 +151,6 @@ const mapDispatch = dispatch => ({
   setUserIncome(income) {
     dispatch(updateUserIncome(income));
     // no call here, will filter
-  },
-
-  setUserUnitSize(size) {
-    dispatch(updateUserUnitSize(size));
-    dispatch(fetchRentData());
   },
 
   setNeighborhood(id) {
