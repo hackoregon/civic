@@ -258,7 +258,7 @@ export const createNodes = (rawData) => {
     radius: radiusScale(+d.total_amount),
     value: +d.total_amount,
     percentage: d.percentage,
-    name: d.bureau_title,
+    name: d.title,
     color: d.color,
     x: Math.random() * 900,
     y: Math.random() * 800,

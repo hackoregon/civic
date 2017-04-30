@@ -3,7 +3,6 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import Header from '@hackoregon/component-library/lib/Navigation/Header';
 
 const Container = styled.div`
   min-height: 100%;
@@ -16,7 +15,6 @@ const Container = styled.div`
 function App(props) {
   return (
     <Container>
-      <Header />
       {React.Children.toArray(props.children)}
     </Container>
   );
