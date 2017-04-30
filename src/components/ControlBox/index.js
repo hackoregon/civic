@@ -11,7 +11,7 @@ class ControlBox extends Component {
   buildControlList (controls, mapType) {
       // console.log('mappanel', features)
       // console.log('canon', features.canonical_daterange)
-      const printOrder = ['startDate', 'endDate', 'address', 'distance', 'days', 'sourceName']
+      const printOrder = ['address', 'distance', 'days', 'sourceName']
       console.log('controlbbox selctormeta', SELECTOR_META[mapType])      
       console.log('conrolbox values', controls);
       var returnValues = [];
@@ -31,19 +31,44 @@ class ControlBox extends Component {
         }
       }
       console.log('cbox returns', returnValues)
-      
+      const topStyle = { 
+        display: 'flex', 
+        flexFlow: 'row wrap',   
+        justifyContent: 'center',
+      }
+      const divStyle = { 
+        marginLeft: '20px',
+        marginRight: '20px',
+      }
+
       return (
-        <p>
-          {returnValues}
-        </p>
+        <div style={topStyle}>
+          <div style={divStyle}>
+            Start Date: {controls.startDate} <br />
+            End Date: {controls.endDate}
+          </div>
+          <div style={divStyle}>
+            {returnValues}
+          </div>
+        </div>
       )
 
   }
 
   render() {
+    const headingStyle = { 
+      display: 'flex', 
+      flexFlow: 'row wrap', 
+      justifyContent: 'center',
+      marginBottom: '1em',
+    }
+
+
     return (
-      <div>
-        Settings
+      <div style={{marginBottom: '1em'}}>
+        <div style={headingStyle}>
+          <strong>Settings</strong>
+        </div>
         {this.buildControlList(this.props.controls, this.props.mapType)}      
       </div>
     );
