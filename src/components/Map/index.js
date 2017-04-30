@@ -21,7 +21,7 @@ const reactLeafletMapStyle = {
   height: 'auto',
 };
 
-const Map = ({ neighborhoods }) => (
+const Map = ({ neighborhoods, onSelect }) => (
   <div style={reactLeafletMapStyle}>
     {neighborhoods &&
       <LeafletMap {...reactLeafletMapProps}>
@@ -29,6 +29,7 @@ const Map = ({ neighborhoods }) => (
           <Neighborhood
             key={neighborhood.id.toString()}
             data={neighborhood}
+            onSelect={onSelect}
           />,
         )}
         <CrossHatch />
@@ -39,10 +40,12 @@ const Map = ({ neighborhoods }) => (
 
 Map.propTypes = {
   neighborhoods: PropTypes.object,
+  onSelect: PropTypes.func,
 };
 
 Map.defaultProps = {
   neighborhoods: null,
+  onSelect() {},
 };
 
 export default Map;

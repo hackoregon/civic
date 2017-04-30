@@ -10,14 +10,22 @@ import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
 import { fetchAffordabilityData } from '../../state/affordability/actions';
 import { fetchRentData } from '../../state/rent/actions';
 import { fetchNeighborhoods } from '../../state/neighborhoods/actions';
-import { isAnyCallPending, getCombinedNeighborhoodsData } from '../../state/globalSelectors';
+import { fetchHouseholdsData } from '../../state/households/actions';
+import { fetchPopulationsData } from '../../state/populations/actions';
+import {
+  isAnyCallPending,
+  getCombinedNeighborhoodsData,
+  getCombinedDemographicData,
+} from '../../state/globalSelectors';
 import Map from '../Map';
+import DemographicDetailView from '../DemographicDetailView';
 
 import {
   updateOtherUnitSize,
   updateOtherDemographic,
   updateUserIncome,
   updateUserUnitSize,
+  updateNeighborhood,
 } from '../../state/parameters/actions';
 import {
   getUserIncome,
@@ -41,6 +49,7 @@ export class App extends React.Component {
   render() {
     const {
       neighborhoodData,
+      demographicData,
       userIncome,
       userUnitSize,
       setUserIncome,
@@ -49,6 +58,7 @@ export class App extends React.Component {
       otherUnitSize,
       setOtherUnitSize,
       setOtherDemographic,
+      setNeighborhood,
     } = this.props;
 
     return (
@@ -89,7 +99,8 @@ export class App extends React.Component {
               ))}
             </select>
           </p>
-          <Map neighborhoods={neighborhoodData} />
+          <Map neighborhoods={neighborhoodData} onSelect={id => setNeighborhood(id)} />
+          <DemographicDetailView demographics={demographicData} />
         </StoryCard>
       </div>
     );
@@ -100,6 +111,7 @@ App.displayName = 'App';
 App.defaultProps = {
   children: <div />,
   neighborhoodData: {},
+  demographicData: {},
   userIncome: DEFAULT_INCOME,
   userUnitSize: HOUSING_TYPES[0],
   otherDemographic: DEMOGRAPHICS[0],
@@ -109,11 +121,13 @@ App.defaultProps = {
   setUserUnitSize() {},
   setOtherDemographic() {},
   setOtherUnitSize() {},
+  setNeighborhood() {},
   fetchAllData() {},
 };
 
 App.propTypes = {
   neighborhoodData: React.PropTypes.object,
+  demographicData: React.PropTypes.object,
   setOtherDemographic: React.PropTypes.func,
   setOtherUnitSize: React.PropTypes.func,
   otherDemographic: React.PropTypes.string,
@@ -122,6 +136,7 @@ App.propTypes = {
   userUnitSize: React.PropTypes.string,
   setUserIncome: React.PropTypes.func,
   setUserUnitSize: React.PropTypes.func,
+  setNeighborhood: React.PropTypes.func,
   fetchAllData: React.PropTypes.func,
 };
 
@@ -130,6 +145,8 @@ const mapDispatch = dispatch => ({
     dispatch(fetchAffordabilityData());
     dispatch(fetchRentData());
     dispatch(fetchNeighborhoods());
+    dispatch(fetchHouseholdsData());
+    dispatch(fetchPopulationsData());
   },
 
   setOtherUnitSize(size) {
@@ -151,10 +168,15 @@ const mapDispatch = dispatch => ({
     dispatch(updateUserUnitSize(size));
     dispatch(fetchRentData());
   },
+
+  setNeighborhood(id) {
+    dispatch(updateNeighborhood(id));
+  },
 });
 
 const mapProps = state => ({
   neighborhoodData: getCombinedNeighborhoodsData(state),
+  demographicData: getCombinedDemographicData(state),
   isLoading: isAnyCallPending(state),
   userIncome: getUserIncome(state),
   userUnitSize: getUserUnitSize(state),

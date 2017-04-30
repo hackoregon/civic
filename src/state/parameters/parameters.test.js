@@ -2,7 +2,12 @@ import { assocPath } from 'ramda';
 import * as selectors from './selectors';
 import * as constants from '../../utils/data-constants';
 import * as actions from './actions';
-import { actionTypes, INITIAL_USER_STATE, INITIAL_OTHER_STATE } from './constants';
+import {
+  actionTypes,
+  INITIAL_USER_STATE,
+  INITIAL_OTHER_STATE,
+  INITIAL_NEIGHBORHOOD_STATE,
+} from './constants';
 import reducer from './reducer';
 
 let state;
@@ -23,6 +28,12 @@ describe('parameters selectors', () => {
   describe('getOtherState', () => {
     it('handles no state without errors', () => {
       expect(selectors.getOtherState()).to.eql(undefined);
+    });
+  });
+
+  describe('getNeighborhoodState', () => {
+    it('handles no state without errors', () => {
+      expect(selectors.getNeighborhoodState()).to.eql(undefined);
     });
   });
 
@@ -64,13 +75,25 @@ describe('parameters selectors', () => {
 
   describe('getOtherDemographic', () => {
     it('should return the first demographic when unset', () => {
-      state = { app: {} };
+      state = { parameters: {} };
       expect(selectors.getOtherDemographic(state)).to.eql(constants.DEMOGRAPHICS[0]);
     });
 
     it('should return the set demographic when the state is set', () => {
       state = { parameters: { other: { demographic: ARBITRARY } } };
       expect(selectors.getOtherDemographic(state)).to.eql(ARBITRARY);
+    });
+  });
+
+  describe('getNeighborhood', () => {
+    it('should return the default neighborhood when unset', () => {
+      state = { parameters: {} };
+      expect(selectors.getNeighborhood(state)).to.eql(constants.DEFAULT_NEIGHBORHOOD);
+    });
+
+    it('should return the set neighborhood when the state is set', () => {
+      state = { parameters: { neighborhood: ARBITRARY } };
+      expect(selectors.getNeighborhood(state)).to.eql(ARBITRARY);
     });
   });
 });
@@ -115,12 +138,23 @@ describe('parameters actions', () => {
 
     expect(actions.updateUserIncome(income)).to.eql(expectedAction);
   });
+
+  it('should have an updateNeighborhood action', () => {
+    const neighborhood = 42;
+    const expectedAction = {
+      type: actionTypes.UPDATE_NEIGHBORHOOD,
+      payload: neighborhood,
+    };
+
+    expect(actions.updateNeighborhood(neighborhood)).to.eql(expectedAction);
+  });
 });
 
 describe('parameters reducer', () => {
   const initialState = {
     user: INITIAL_USER_STATE,
     other: INITIAL_OTHER_STATE,
+    neighborhood: INITIAL_NEIGHBORHOOD_STATE,
   };
 
   it('should return the initial state', () => {
@@ -138,7 +172,6 @@ describe('parameters reducer', () => {
         unitSize: '1-BR',
         demographic: 'Senior',
       },
-      other: INITIAL_OTHER_STATE,
     }, {
       type: actionTypes.UPDATE_USER_UNIT_SIZE,
       payload: 'Studio',
@@ -148,6 +181,7 @@ describe('parameters reducer', () => {
         demographic: 'Senior',
       },
       other: INITIAL_OTHER_STATE,
+      neighborhood: INITIAL_NEIGHBORHOOD_STATE,
     });
   });
 
@@ -162,7 +196,6 @@ describe('parameters reducer', () => {
         unitSize: '1-BR',
         income: 50000,
       },
-      user: INITIAL_USER_STATE,
     }, {
       type: actionTypes.UPDATE_OTHER_UNIT_SIZE,
       payload: 'Studio',
@@ -172,6 +205,7 @@ describe('parameters reducer', () => {
         income: 50000,
       },
       user: INITIAL_USER_STATE,
+      neighborhood: INITIAL_NEIGHBORHOOD_STATE,
     });
   });
 
@@ -187,5 +221,12 @@ describe('parameters reducer', () => {
       type: actionTypes.UPDATE_USER_INCOME,
       payload: 5000000000,
     })).to.eql(assocPath(['user', 'income'], 5000000000, initialState));
+  });
+
+  it('should handle UPDATE_NEIGHBORHOOD', () => {
+    expect(reducer(initialState, {
+      type: actionTypes.UPDATE_NEIGHBORHOOD,
+      payload: 42,
+    })).to.eql(assocPath(['neighborhood'], 42, initialState));
   });
 });

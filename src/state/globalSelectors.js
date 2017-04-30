@@ -3,7 +3,9 @@ import { update, adjust, is, all } from 'ramda';
 import { isAffordabilityPending, getAffordabilityData } from './affordability/selectors';
 import { isRentPending, getRentData } from './rent/selectors';
 import { isNeighborhoodsPending, getNeighborhoodsData } from './neighborhoods/selectors';
-import { getUserIncome } from './parameters/selectors';
+import { getHouseholdsData } from './households/selectors';
+import { getPopulationsData } from './populations/selectors';
+import { getUserIncome, getNeighborhood } from './parameters/selectors';
 
 /**
  * I believe less than 30 % of income is what is considered 'affordable'. Double check with
@@ -54,7 +56,7 @@ const allArrays = (...args) => all(arg => is(Array, arg), args);
  * Associates data from various apis to create full usable geojson. this can be made in to any
  * shape, whatever works best for the map. Returns null unless all data sources are arrays
  */
-const associateAll = (neighborhoods, affordability, rent, income) => {
+const associateNeighborhoodsData = (neighborhoods, affordability, rent, income) => {
   if (allArrays(neighborhoods, affordability, rent)) {
     return {
       type: 'FeatureCollection',
@@ -63,6 +65,17 @@ const associateAll = (neighborhoods, affordability, rent, income) => {
         rent,
         income,
       ),
+    };
+  }
+  return null;
+};
+
+const associateDemographicData = (neighborhood, households, populations) => {
+  if (allArrays(households, populations)) {
+    return {
+      name: neighborhood.name,
+      households: households[neighborhood.id],
+      populations: populations[neighborhood.id],
     };
   }
   return null;
@@ -83,5 +96,12 @@ export const getCombinedNeighborhoodsData = createSelector(
   getAffordabilityData,
   getRentData,
   getUserIncome,
-  associateAll,
+  associateNeighborhoodsData,
+);
+
+export const getCombinedDemographicData = createSelector(
+  getNeighborhood,
+  getHouseholdsData,
+  getPopulationsData,
+  associateDemographicData,
 );

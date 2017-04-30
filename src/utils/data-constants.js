@@ -28,4 +28,9 @@ export const DEFAULT_INCOME = 25;
 export const MIN_INCOME = 9.75;
 export const MAX_INCOME = 75;
 
+export const DEFAULT_NEIGHBORHOOD = {
+  id: 25,
+  name: 'Portland',
+};
+
 export const HOUSING_TEAM_PRIMARY_COLOR = '#3e75ac';

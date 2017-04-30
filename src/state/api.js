@@ -49,8 +49,9 @@ export const get = (partialUrl, {
   };
 
 export const api = (endpoint, { buildParams, ...rest }) => {
-  const buildUrl = (state, partialUrl) =>
-    `${API_HOST}${partialUrl}?format=json&${qs.stringify(buildParams(state))}`;
-
+  const buildUrl = (state, partialUrl) => {
+    const params = qs.stringify(buildParams(state));
+    return `${API_HOST}${partialUrl}?format=json${params ? `&${params}` : ''}`;
+  };
   return get(endpoint, { buildUrl, ...rest });
 };
