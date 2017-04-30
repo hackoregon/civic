@@ -5,8 +5,8 @@ import styled from 'styled-components';
 import Header from '@hackoregon/component-library/lib/Navigation/Header';
 import Footer from '@hackoregon/component-library/lib/Footer/Footer';
 import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
-// import HowWhenBusy from '@hackoregon/component-library/lib/er-components/HowWhenBusy/HowWhenBusy';
-// import ResponseTimeVaries from '@hackoregon/component-library/lib/er-components/ResponseTimeVaries/ResponseTimeVaries';
+import HowWhenBusy from '@hackoregon/component-library/lib/er-components/HowWhenBusy/HowWhenBusy';
+import ResponseTimeVaries from '@hackoregon/component-library/lib/er-components/ResponseTimeVaries/ResponseTimeVaries';
 // import BarChart from '@hackoregon/component-library/lib/BarChart/BarChart';
 // import LeafletMap from '@hackoregon/component-library/lib/LeafletMap/LeafletMap';
 // import { Marker, Popup } from 'react-leaflet';
@@ -44,7 +44,7 @@ function App(props) {
         <p className="Description">
           How Busy Is Portland Fire &amp; Rescue? When Are They Most Busy?
         </p>
-
+        <HowWhenBusy />
       </StoryCard>
       <StoryCard title="The First Five Minutes" collectionId="emergency-response" cardId="first-five-minutes">
         <p className="Description">
@@ -61,7 +61,7 @@ function App(props) {
         <p className="Description">
           How Response Time Varies Across The City
         </p>
-
+        <ResponseTimeVaries />
       </StoryCard>
 
       <Footer />

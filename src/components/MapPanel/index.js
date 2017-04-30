@@ -34,7 +34,7 @@ class MapPanel extends Component {
 
           <div style={{ display: 'flex' }}>
             <div className="panel-column-2" style={{ display: 'flex', flexDirection: 'column', textAlign: 'left' }}>
-              <h3>Area Demographics</h3>
+              <h3>Total Incidents</h3>
               <div style={{ display: 'flex' }}>
                 <ul style={{ listStyleType: 'none', margin: '0 15px 0 0', padding: '0', textAlign: 'left', color: '#D5135F' }}>
                   <li>{stats.total_incidents_2016}</li>
@@ -48,7 +48,7 @@ class MapPanel extends Component {
 
           <div style={{ display: 'flex' }}>
             <div className="panel-column-3" style={{ display: 'flex', flexDirection: 'column', textAlign: 'left' }}>
-              <h3>Area Demographics</h3>
+              <h3>Median Response Times</h3>
               <div style={{ display: 'flex' }}>
                 <ul style={{ listStyleType: 'none', margin: '0 15px 0 0', padding: '0', textAlign: 'left', color: '#D5135F' }}>
                   <li>{stats.median_response_time.toFixed(2)} min</li>
