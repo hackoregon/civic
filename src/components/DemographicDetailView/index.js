@@ -88,7 +88,7 @@ const DemographicDetailView = ({ demographics }) => {
             </div>
             <div style={labelColumnStyle}>
               <p>Foreign Born</p>
-              <p>Persons with Disabilities</p>
+              <p>Persons With Disabilities</p>
               <p>65 &amp; Older</p>
             </div>
           </div>
