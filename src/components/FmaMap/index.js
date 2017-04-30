@@ -48,7 +48,7 @@ class FmaMap extends Component {
       <div>
         {
           !isEmpty(this.props.fmasData) ?
-            <LeafletMap center={portland} zoom={11} height={600} width={900}>
+            <LeafletMap center={portland} zoom={11} height={'75vh'} width={'100%'}>
               <LayerGroup>
                 <GeoJSON style={{ color: '#EE495C', fillColor: '#EE495C', fillOpacity: '0.15' }} data={this.props.fmasData} onEachFeature={this.onEachFeature} />
               </LayerGroup>
