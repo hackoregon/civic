@@ -14,6 +14,7 @@ import outputConfig from './output';
 const config = {
   context: ROOT_PATH,
   cache: true,
+  // target: 'web',
   resolve: {
     extensions: ['.js', '.jsx'],
   },

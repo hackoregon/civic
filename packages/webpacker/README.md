@@ -1,6 +1,6 @@
 ### Webpacker
 ---
-###### v 0.1.6
+###### v 0.1.7-beta.0
 
 Webpacker comes with a default config and some utilities.
 
