@@ -13,8 +13,8 @@ const StackedAreaChart = () => {
         key={`${key} + ${Math.rand}`}
         dataKey={myKeys[index]}
         stroke={'#fff'}
-        strokeWidth={3}
-        stackId={index}
+        strokeWidth={5}
+        stackId={1}
         fillOpacity={1}
         fill={colors[index]}
       />);

@@ -3,19 +3,18 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import Header from '@hackoregon/component-library/lib/Navigation/Header';
 
 const Container = styled.div`
   min-height: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  font-family: Arial, sans-serif;
 `;
 
 function App(props) {
   return (
     <Container>
-      <Header />
       {React.Children.toArray(props.children)}
     </Container>
   );
