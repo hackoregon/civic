@@ -16,3 +16,7 @@
   border: 1px solid #999;
   min-height: 5rem;
 }
+
+.Card {
+  max-width: 800px;
+}
