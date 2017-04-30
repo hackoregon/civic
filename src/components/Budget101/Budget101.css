@@ -1,5 +1,7 @@
 .budget {
   text-align: left;
+  margin-left: 50px;
+  margin-right: 50px;
 }
 
 .publicIcons {
@@ -14,18 +16,50 @@
 }
 
 .arrows {
-  width: 50%;
-  height: auto;
+  width: 25%;
+  height: 25%;
 }
 
 #LearnAbout {
   text-align: left;
-  margin: 5px;
-  padding: 10px;
-  background: lightgray;
+  margin: 0 -50px;
+  padding: 50px;
+  background: #f3f2f3;
 }
 
 .resources li {
   text-align: left;
   margin-bottom: 10px;
+}
+
+.budgetlink {
+  border-width: 3px;
+  width: 400px;
+  border-color: black;
+  border-style: solid;
+}
+
+.col {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#ServiceAreas {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+#SevenAreas {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+#Breakdown {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+#GetInvolved {
+  margin-top: 50px;
+  margin-bottom: 50px;
 }

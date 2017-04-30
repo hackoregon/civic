@@ -16,7 +16,7 @@ function Budget101() {
         </div>
         <div id="ServiceAreas">
           <h1>City of Portland Service Areas <br /> Budget for 2016-2017</h1>
-          <div id="ServiceAreas" style={{ display: 'flex', justifyContent: 'space-around', margin: 'auto' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-around', margin: 'auto' }}>
             <div className="col">
               <PieChart />
             </div>
@@ -29,7 +29,8 @@ function Budget101() {
                 <li>30%  Beginning Fund Balance</li>
                 <li>21%  Service Charges and Fees</li>
                 <li>17%  Taxes</li>
-                <li>15%  Bond and Note Proceeds</li>
+                <li>15%  Bond and Note Proceeds
+                </li>
                 <li>8% Intergovernmental</li>
                 <li>8% Licences & Permits</li>
                 <li>1% Miscellaneous Sources</li>
@@ -40,7 +41,7 @@ function Budget101() {
           <p>Our budget breakdown reviews the Service Area component of the city budget.
           </p>
         </div>
-        <div id="7ServiceAreas">
+        <div id="SevenAreas">
           <h2>City Services are divided into 7 Service Areas</h2>
           <p>Service Areas are 48.35% of the 2016-2017 City of Portland’s total
             budget and is comprised of 7 categories further broken down into bureaus.
@@ -50,6 +51,7 @@ function Budget101() {
             of one or more bureaus. Continue reading for an example of how a service
             area is broken into bureaus.
           </p>
+          <p className="budgetlink">Explore the city budget by Service Area and Bureaus</p>
           <div style={{ display: 'flex', justifyContent: 'space-around', margin: 'auto' }} >
             <div className="col">
               <img alt="Public Safety icon" className="publicIcons" src={require('../../../assets/safety_budget101_icon.png')} />
@@ -93,8 +95,10 @@ function Budget101() {
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <img alt="Bureau Breakdown" className="arrows" src={require('../../../assets/arrow_budget101.png')} />
           </div>
-          <div>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
             <h2>Get Involved!</h2>
+          </div>
+          <div>
             <p>The Portland City Budget is not just a number. A Proposed Budget
                 is developed over six months, and a final Adopted Budget is approved
                 in June. At every stage, Portland’s citizens play an active role in
