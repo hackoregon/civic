@@ -5022,6 +5022,12 @@ react-smooth@0.1.20:
     raf "^3.2.0"
     react-addons-transition-group "^0.14.0 || ^15.0.0"
 
+react-sticky@^5.0.8:
+  version "5.0.8"
+  resolved "https://registry.yarnpkg.com/react-sticky/-/react-sticky-5.0.8.tgz#d5f85f96977f410081d792ab81886c622c5d8b14"
+  dependencies:
+    prop-types "^15.5.8"
+
 react-transform-catch-errors@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/react-transform-catch-errors/-/react-transform-catch-errors-1.0.2.tgz#1b4d4a76e97271896fc16fe3086c793ec88a9eeb"

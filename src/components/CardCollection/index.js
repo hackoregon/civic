@@ -16,19 +16,20 @@ const yearList = _.range(2006, 2018);
 const fiscalYearList = _.map(yearList, year => {
   const yrPlus = _.toString(year + 1);
   const yearString = _.toString(year);
-  return `${yearString}_${yrPlus.substring(yrPlus.length - 2)}`;
+  return `${yearString}-${yrPlus.substring(yrPlus.length - 2)}`;
 });
 const API_ROOT = "http://service.civicpdx.org/budget/";
 const SACodeUrl = `${API_ROOT}code/?code_type=service_area_code&format=json`;
 const bureauCodeUrl = `${API_ROOT}code/?code_type=bureau_code&format=json`;
 const serviceAreaUrl =  `${API_ROOT}history/service_area/?format=json`;
 const bureausUrl = `${API_ROOT}history/bureau/?format=json`;
+
 const urlsAndNames = [
   {name: "ServiceAreaCodes", SACodeUrl},
   {name: "ServiceAreas", serviceAreaUrl},
   {name: "BureauCodes", bureauCodeUrl},
   {name: "bureaus", bureausUrl},
-]
+];
 
 class CardCollection extends React.Component {
   constructor (props) {
@@ -43,11 +44,33 @@ class CardCollection extends React.Component {
     }
     this.getData = this.getData.bind(this);
     this.getAllData = this.getAllData.bind(this);
-    this.onSliderChange.bind(this);
+    this.onSliderChange = this.onSliderChange.bind(this);
+    this.getServiceAreaByFiscalYear = this.getServiceAreaByFiscalYear.bind(this);
+    this.getSaSumByFiscalYear = this.getSaSumByFiscalYear.bind(this);
+
   }
 
   componentDidMount() {
-    this.getData(serviceAreaUrl, "serviceAreas");
+    this.getAllData();
+  }
+
+
+  getServiceAreaByFiscalYear() {
+    const saData = this.state.data.hasOwnProperty("serviceAreas") ?
+    this.state.data.serviceAreas : [];
+    return saData.length && _.groupBy(saData, obj => obj.fiscal_year) || [];
+  }
+
+  getSaSumByFiscalYear() {
+    const saData = this.state.data.hasOwnProperty("serviceAreas") ?
+    this.state.data.serviceAreas : [];
+    const saByFiscalYear = saData.length && _.groupBy(saData, obj => obj.fiscal_year);
+    const saSumByYear = saData.length && _.map(
+      saByFiscalYear, year => ({ [year[0].fiscal_year]: _.sumBy(year, 'amount')}));
+      console.log('saData', saData);
+      console.log('saByFiscalYear', saByFiscalYear);
+      console.log('saSumByYear', saSumByYear);
+      return saSumByYear;
   }
 
   getData (url, dataName) {
@@ -56,7 +79,7 @@ class CardCollection extends React.Component {
     .then(res => res.json())
     .then(resData => {
     this.setState({data: {
-      ...this.data,
+      ...this.state.data,
       [dataName]: resData.results
     },  isLoading: false});
     })
@@ -66,35 +89,31 @@ class CardCollection extends React.Component {
     })
   }
 
-  getAllData (urlsAndNames) {
-    _.each(urlsAndNames, obj => {
-      this.getData(obj.url, obj.name);
-    })
+  getAllData () {
+    this.getData(SACodeUrl, "serviceAreaCodes");
+    this.getData(serviceAreaUrl, "serviceAreas");
+    this.getData(bureauCodeUrl, "bureauCodes");
+    this.getData(bureausUrl, "bureaus");
   }
 
   onSliderChange (value) {
-    this.setState({sliderValue: value})
+    this.setState({currentYear: value})
   }
 
-  getSaDataByFiscalYear() {
-    const saData = this.state.data.hasOwnProperty("serviceAreas") ?
-    this.state.data.serviceAreas : [];
-    const saByFiscalYear = saData.length && _.groupBy(saData, obj => obj.fiscal_year);
-    const saSumByYear = saData.length && _.map(
-      saByFiscalYear, year => ({ [year[0].fiscal_year]: _.sumBy(year, 'amount')}));
-    console.log('saData', saData);
-    console.log('saByFiscalYear', saByFiscalYear);
-    console.log('saSumByYear', saSumByYear);
-    return saSumByYear;
-  }
 
   render () {
-    console.log('data', this.state.data);
-    const saData = this.getSaDataByFiscalYear();
+    console.log('state', this.state);
     const markObjects = _.map(yearList,
       year => ({[year]: _.toString(year)})
     );
     const marks = Object.assign({}, ...markObjects);
+    const saDataByYear = this.getServiceAreaByFiscalYear()
+    const saNamesByCode = _.map(this.state.data.serviceAreaCodes,
+      sa => ({
+        [sa.code]: sa.description
+      })
+    )
+    // const AreaChartData = _.map(this.state.data.serviceAreas, ())
     return (
       <div>
         <StickyContainer>
