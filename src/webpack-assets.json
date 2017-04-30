@@ -1,0 +1,12 @@
+{
+  "story": {
+    "js": "http://localhost:3001/public/js/story.chunk.js"
+  },
+  "app": {
+    "js": "http://localhost:3001/public/js/app.bundle.js",
+    "css": "http://localhost:3001/public/vendor.css"
+  },
+  "vendor": {
+    "js": "http://localhost:3001/public/js/vendor.bundle.js"
+  }
+}

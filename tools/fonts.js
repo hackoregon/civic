@@ -1,7 +1,7 @@
-const Require = require;
 const mergeConfig  = require('./reduceConfig').default;
-const urlLoader = Require.resolve('url-loader');
-const fileLoader = Require.resolve('file-loader');
+
+const urlLoader = require.resolve('url-loader');
+const fileLoader = require.resolve('file-loader');
 
 module.exports = () => config => mergeConfig(config, {
   module: {

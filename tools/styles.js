@@ -1,18 +1,22 @@
-const mergeConfig          = require('./reduceConfig').default;
-const ExtractTextPlugin    = require('extract-text-webpack-plugin');
+// deps
+const mergeConfig       = require('./reduceConfig').default;
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const styleLoader          = require.resolve('style-loader');
-const cssLoader            = require.resolve('css-loader');
-const postcssLoader        = require.resolve('postcss-loader');
+// paths
+const styleLoader       = require.resolve('style-loader');
+const cssLoader         = require.resolve('css-loader');
+const postcssLoader     = require.resolve('postcss-loader');
 
-const env        = process.env.NODE_ENV;
-const isProd     = env === 'production';
-const className  = isProd ? '[hash:base64:5]' : '[path][name]__[local]-[hash:base64:5]';
-const cssModules = `?modules&importLoaders=1&localIdentName=${className}`;
+// consts
+const env               = process.env.NODE_ENV;
+const isProd            = env === 'production';
+const className         = isProd ? '[hash:base64:5]' : '[path][name]__[local]-[hash:base64:5]';
+const cssModules        = `?modules&importLoaders=1&localIdentName=${className}`;
 
-const mainCss   = new ExtractTextPlugin('main.css');
-const globalCss = new ExtractTextPlugin('global.css');
-const vendorCss = new ExtractTextPlugin('vendor.css');
+// instances
+const mainCss           = new ExtractTextPlugin('main.css');
+const globalCss         = new ExtractTextPlugin('global.css');
+const vendorCss         = new ExtractTextPlugin('vendor.css');
 
 const extractVendors = vendorCss.extract({
   fallback: styleLoader,

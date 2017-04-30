@@ -1,14 +1,10 @@
-import webpack from 'webpack';
-import AssetsPlugin from 'assets-webpack-plugin';
-import autoprefixer from 'autoprefixer';
-import { resolve } from 'path';
-import { compose } from 'ramda';
+const webpack          = require('webpack');
+const AssetsPlugin     = require('assets-webpack-plugin');
+const autoprefixer     = require('autoprefixer');
+const { resolve }      = require('path');
+// const { compose }      = require('ramda');
 
-const babelConfig      = require('./babel');
-const defineConfig     = require('./define');
-const fontsConfig      = require('./fonts');
-const imageConfig      = require('./images');
-const stylesConfig     = require('./styles');
+const { defaultConfig, composeConfig } = require('@hackoregon/webpacker'); // eslint-disable-line
 
 const PUBLIC_PARAM     = 'public';
 const REAL_ROOT        = resolve(__dirname, '..');
@@ -46,6 +42,29 @@ const config = {
       'leaflet',
     ],
   },
+  module: {
+    rules: [
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: {
+          presets: [
+            'react',
+            'stage-1',
+                  ['es2015', { modules: false }],
+          ],
+          plugins: [
+            'transform-regenerator',
+            'transform-object-rest-spread',
+            'transform-es2015-destructuring',
+            'transform-class-properties',
+            'syntax-dynamic-import',
+          ],
+        },
+      },
+    ],
+  },
   output: {
     path: `${BUNDLE_PATH}/${PUBLIC_PARAM}/`,
     publicPath: staticServerAddr,
@@ -56,10 +75,6 @@ const config = {
     new IsomorphicLoaderPlugin({
       keepExistingConfig: false,
       assetsFile: 'isomorphic-assets.json',
-      // webpackDev: {
-      //   url: `http://${archetype.webpack.devHostname}:${archetype.webpack.devPort}`,
-      //   addUrl: false,
-      // },
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
@@ -89,12 +104,9 @@ const config = {
   ]),
 };
 
-const webpackConfig = compose(
-  babelConfig(),
-  stylesConfig(),
-  defineConfig(),
-  fontsConfig(),
-  imageConfig(),
-)(config);
+const webpackConfig = composeConfig(
+  defaultConfig,
+  config,
+);
 
 export default webpackConfig;

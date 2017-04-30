@@ -1,5 +1,5 @@
 const extendRequire = require('isomorphic-loader/lib/extend-require');
-const settings = require('../../tools/app-settings.js');
+// const settings = require('../../tools/app-settings.js');
 
 require('css-modules-require-hook')({
   generateScopedName: '[path][name]__[local]___[hash:base64:5]',

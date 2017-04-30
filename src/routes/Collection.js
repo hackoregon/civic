@@ -25,8 +25,9 @@ const boundsMapProps = {
 // const portland = [45.54362, -122.676482];
 
 const Collection = (props) => {
-  const key = props.params.id;
-  // console.log('is it fun yet', isClient);
+  const key = props.params.name;
+  console.log('is it fun yet', isClient);
+  console.log(key);
   if (isClient) require('@hackoregon/component-library/assets/leaflet.css');
   return (
     <div>

@@ -4,7 +4,6 @@ const isArray = is(Array);
 const isFunction = is(Function);
 const isUndefined = value => value === undefined;
 
-// TODO: Why does `Symbol()` not work for this?
 const unique = '___uniq!';
 
 const entry = (dst, src) => {
