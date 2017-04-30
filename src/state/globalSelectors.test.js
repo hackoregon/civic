@@ -117,6 +117,7 @@ describe('globalSelectors', () => {
 
       const expectedResult = {
         name: 'Mr. Rogers',
+        id: 2,
         households: { someHousehold: 42 },
         populations: { somePopulation: 1337 },
       };

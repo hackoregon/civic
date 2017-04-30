@@ -73,6 +73,7 @@ const associateNeighborhoodsData = (neighborhoods, affordability, rent, income) 
 const associateDemographicData = (neighborhood, households, populations) => {
   if (allArrays(households, populations)) {
     return {
+      id: neighborhood.id,
       name: neighborhood.name,
       households: households[neighborhood.id],
       populations: populations[neighborhood.id],
