@@ -25,7 +25,7 @@ const pStyle = {
   padding: '0 1em',
 };
 
-const ProdVsCost = () =>
+const TempProdVsCost = () =>
   <div>
     <h2 style={headingStyle}>Housing Production and Cost</h2>
     <p style={pStyle}>
@@ -82,4 +82,4 @@ const ProdVsCost = () =>
     </p>
   </div>;
 
-export default ProdVsCost;
+export default TempProdVsCost;
