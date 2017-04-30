@@ -1,11 +1,16 @@
+.budget {
+  text-align: left;
+}
+
 .publicIcons {
   width: 75px;
   height: 75px;
 }
 
 .breakdown {
+  text-align: left;
   width: 80%;
-  height: auto;
+  height: 80%;
 }
 
 .arrows {
@@ -14,9 +19,13 @@
 }
 
 #LearnAbout {
+  text-align: left;
+  margin: 5px;
+  padding: 10px;
   background: lightgray;
 }
 
-.budgetSquare {
-  background: lightgray;
+.resources li {
+  text-align: left;
+  margin-bottom: 10px;
 }
