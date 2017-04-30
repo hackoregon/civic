@@ -24,11 +24,6 @@ function App(props) {
   return (
     <Container>
       <Header />
-      <StoryCard title="The First Five Minutes" collectionId="emergency-response" cardId="title">
-        <p className="Description">
-          The First Five Minutes
-        </p>
-      </StoryCard>
       <StoryCard title="What Does Portland Fire &amp; Rescue Do?" collectionId="emergency-response" cardId="what-they-do">
         <p className="Description">
           Surprisingly, the vast majority (71.9%) of calls Portland Fire & Rescue
@@ -39,23 +34,23 @@ function App(props) {
         <div style={{ display: 'flex', flexFlow: 'row wrap' }}>
           <PieWhatTheyDo style={{ width: '50%' }} />
           <div style={{ width: '50%' }}>
-            <p>
+            <p style={{ textAlign: 'left' }}>
               <strong style={{ color: '#EE495C' }}>Medical incidents</strong> include an even wider range of categories, as you might expect.
                 The Bureau of Emergency Communications (911) routes all calls to either PF&R,
                 the Police Bureau, or ambulance services (and often a combination). PF&R personnel
                 include trained paramedics who can respond to calls for any kind of
                 medical emergency.
             </p>
-            <p >
+            <p style={{ textAlign: 'left' }}>
               <strong style={{ color: '#EE495C' }}>Fire incidents</strong> cover a range of categories including explosions,
                 vehicle fires, and dumpster and trash fires.
             </p>
-            <p >
+            <p style={{ textAlign: 'left' }}>
               <strong style={{ color: '#EE495C' }}>Service calls</strong> are calls not related to fire, medical, rescue, or hazmat.
                 Think cats in trees, street flooding, and even stubborn rings that you
                 can’t get off that second knuckle!
             </p>
-            <p>
+            <p style={{ textAlign: 'left' }}>
               <strong style={{ color: '#EE495C' }}>Good intent</strong> calls occur when there’s not actually an emergency.
                 For example, steam or gas mistaken for smoke.
             </p>
@@ -91,7 +86,8 @@ function App(props) {
       </StoryCard>
       <StoryCard title="The First Five Minutes" collectionId="emergency-response" cardId="first-five-minutes">
         <img
-          src="https://s3-us-west-2.amazonaws.com/hacko-emergency-response-staging/emergency-response-5min.svg"
+          style={{ maxWidth: '100%' }}
+          src="https://s3-us-west-2.amazonaws.com/hacko-emergency-response-staging/emergency-response-5min-lg-01.png"
           alt="Timeline of a fire response"
         />
         <p className="Description">
@@ -102,7 +98,7 @@ function App(props) {
       <StoryCard title="The Anatomy Of A Four-Alarm Fire" collectionId="emergency-response" cardId="four-alarm-fire">
         <p className="Description">
           We looked at a specific event to better understand the comings and
-          goings of various responders during a five-alarm incident.
+          goings of various responders during a four-alarm incident.
         </p>
         <p className="Description">
           In this video, you’ll see the wide range of personnel who showed up over the
