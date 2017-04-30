@@ -7,8 +7,8 @@ class MapPanel extends Component {
     console.log('rendered map panel');
     const stats = this.props.fmaPanelData.stats;
     return (
-      <div style={{ backgroundColor: '#DEDCDC', padding: '50px 25px 50px 25px', textAlign: 'left' }}>
-        <h1>Fire Management Area {stats.fma}</h1>
+      <div style={{ backgroundColor: '#DEDCDC', padding: '25px', textAlign: 'left' }}>
+        <h1 style={{ margin: '0' }}>Fire Management Area {stats.fma}</h1>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <div className="panel-column-1" style={{ display: 'flex', flexDirection: 'column', textAlign: 'left' }}>
             <h3>Area Demographics</h3>
