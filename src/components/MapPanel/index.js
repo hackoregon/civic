@@ -38,14 +38,18 @@ class MapPanel extends Component {
                 <td>households below poverty line</td>
               </tr>
               <tr>
-                <td style={{ color: '#D5135F' }}>{((1 - stats.percent_renter_occ_hh) * 100).toFixed(2)}%</td>
-                <td>renter vs. owned</td>
+                <td style={{ color: '#D5135F' }}>{(stats.percent_renter_occ_hh * 100).toFixed(2)}%</td>
+                <td>percent renters</td>
+              </tr>
+              <tr>
+                <td style={{ color: '#D5135F' }}>{(stats.percent_owner_occ_hh * 100).toFixed(2)}%</td>
+                <td>percent owners</td>
               </tr>
             </table>
           </div>
 
           <div className="panel-column-2" style={{ display: 'flex', flexDirection: 'column', textAlign: 'left', width: '33%' }}>
-            <h3>Weekly Total Incidents</h3>
+            <h3>Incidents Per Week</h3>
             <table>
               <tr>
                 <td style={{ color: '#D5135F' }}>{stats.weekly_total_incs.toFixed(2)}</td>
