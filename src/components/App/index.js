@@ -102,8 +102,8 @@ export class App extends React.Component {
           </p>
           <Map neighborhoods={neighborhoodData} onSelect={id => setNeighborhood(id)} />
           <DemographicDetailView demographics={demographicData} />
-          <ProdVsCost />
         </StoryCard>
+        <ProdVsCost />
       </div>
     );
   }
