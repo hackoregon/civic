@@ -87,7 +87,7 @@ function App(props) {
       <StoryCard title="The First Five Minutes" collectionId="emergency-response" cardId="first-five-minutes">
         <img
           style={{ maxWidth: '100%' }}
-          src="https://s3-us-west-2.amazonaws.com/hacko-emergency-response-staging/emergency-response-5min-lg-01.png"
+          src="https://s3-us-west-2.amazonaws.com/hacko-emergency-response-staging/emergency-response-5min-lg.png"
           alt="Timeline of a fire response"
         />
         <p className="Description">
