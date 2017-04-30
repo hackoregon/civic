@@ -1,7 +1,7 @@
 import React from 'react';
 import fetch from 'isomorphic-fetch';
 import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
-import StackedArea from '../AreaChart/AreaChart';
+import StackedArea from '../StackedAreaChart';
 import Example from '../Example';
 import { StickyContainer, Sticky } from 'react-sticky';
 import _ from 'lodash';
