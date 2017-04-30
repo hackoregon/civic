@@ -13,8 +13,8 @@ const StackedAreaChart = () => {
         key={`${key} + ${Math.rand}`}
         dataKey={myKeys[index]}
         stroke={'#fff'}
-        strokeWidth={3}
-        stackId={index}
+        strokeWidth={5}
+        stackId={1}
         fillOpacity={1}
         fill={colors[index]}
       />);
@@ -25,7 +25,7 @@ const StackedAreaChart = () => {
     <div style={{ display: 'flex', justifyContent: 'space-around', margin: 'auto' }} >
       <AreaChart width={800} height={300} data={data}>
         <XAxis dataKey="name" />
-        <YAxis />
+        <YAxis width={90} />
         {lines}
         <Tooltip
           itemStyle={{ color: '#339963', textAlign: 'left' }}

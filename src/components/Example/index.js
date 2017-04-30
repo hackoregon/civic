@@ -1,5 +1,4 @@
 import React from 'react';
-import './Example.css';
 
 function Example() {
   return (
