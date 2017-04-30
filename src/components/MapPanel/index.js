@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getFmaThunk, getFmaData, getFmaPanelData } from '../../state';
+import { getFmaThunk, getFmaData, getFmaPanelData, renderFmaPanelProperties } from '../../state';
 
 class MapPanel extends Component {
   render() {
@@ -8,7 +8,11 @@ class MapPanel extends Component {
     const stats = this.props.fmaPanelData.stats;
     return (
       <div style={{ backgroundColor: '#DEDCDC', padding: '25px', textAlign: 'left' }}>
-        <h1 style={{ margin: '0' }}>Fire Management Area {stats.fma}</h1>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+          <h1 style={{ margin: '0' }}>Fire Management Area {stats.fma}</h1>
+          <button style={{ border: '3px solid #001732', color: '#001732', width: '20px', margin: '5px 0', textAlign: 'center', backgroundColor: 'none', textDecoration: 'none', fontWeight: 'bold' }} onClick={() => this.props.closePanel({})}>X</button>
+        </div>
+
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <div className="panel-column-1" style={{ display: 'flex', flexDirection: 'column', textAlign: 'left' }}>
             <h3>Area Demographics</h3>
@@ -77,5 +81,6 @@ export default connect(
   }),
   dispatch => ({
     getFmaData: inputs => dispatch(getFmaThunk(inputs)),
+    closePanel: fmaProperties => dispatch(renderFmaPanelProperties(fmaProperties)),
   }),
 )(MapPanel);
