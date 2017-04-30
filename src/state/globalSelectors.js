@@ -6,7 +6,6 @@ import { isNeighborhoodsPending, getNeighborhoodsData } from './neighborhoods/se
 import { getHouseholdsData } from './households/selectors';
 import { getPopulationsData } from './populations/selectors';
 import { getUserIncome, getNeighborhood } from './parameters/selectors';
-import { NEIGHBORHOODS } from '../utils/data-constants';
 
 /**
  * I believe less than 30 % of income is what is considered 'affordable'. Double check with
@@ -74,9 +73,9 @@ const associateNeighborhoodsData = (neighborhoods, affordability, rent, income) 
 const associateDemographicData = (neighborhood, households, populations) => {
   if (allArrays(households, populations)) {
     return {
-      name: NEIGHBORHOODS[neighborhood],
-      households: households[neighborhood],
-      populations: populations[neighborhood],
+      name: neighborhood.name,
+      households: households[neighborhood.id],
+      populations: populations[neighborhood.id],
     };
   }
   return null;

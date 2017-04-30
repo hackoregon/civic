@@ -4,7 +4,6 @@ import {
   getCombinedDemographicData,
   isAnyCallPending,
 } from './globalSelectors';
-import { NEIGHBORHOODS } from '../utils/data-constants';
 
 describe('globalSelectors', () => {
   describe('isAnyCallPending', () => {
@@ -113,11 +112,11 @@ describe('globalSelectors', () => {
       const state = {
         households: { data: [null, null, { someHousehold: 42 }, null] },
         populations: { data: [null, null, { somePopulation: 1337 }, null] },
-        parameters: { neighborhood: 2 },
+        parameters: { neighborhood: { id: 2, name: 'Mr. Rogers' } },
       };
 
       const expectedResult = {
-        name: NEIGHBORHOODS[2],
+        name: 'Mr. Rogers',
         households: { someHousehold: 42 },
         populations: { somePopulation: 1337 },
       };

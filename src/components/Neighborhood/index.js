@@ -32,13 +32,8 @@ const setYouPathOptions = ({ affordableYou }) => ({
  */
 const Neighborhood = ({ data, onSelect }) => (
   <LayerGroup>
-    <GeoJSON
-      data={data} {...setYouPathOptions(data)}
-    />
-    <GeoJSON
-      data={data} {...setOtherPathOptions(data)}
-      onClick={e => onSelect(e.layer.feature.id)}
-    />
+    <GeoJSON data={data} {...setYouPathOptions(data)} />
+    <GeoJSON data={data} {...setOtherPathOptions(data)} onClick={e => onSelect(e.layer.feature)} />
   </LayerGroup>
 );
 
