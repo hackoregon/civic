@@ -14,27 +14,27 @@ const Container = styled.div`
 `;
 
 const dataInc = [
-      { name: 'Vehicle Incidents', Amount: 49746 },
-      { name: 'Bike Incidents', Amount: 2844 },
-      { name: 'Pedestrian Incidents', Amount: 2327 },
+      { name: 'Vehicle Incidents', Incidents: 49746 },
+      { name: 'Bike Incidents', Incidents: 2844 },
+      { name: 'Pedestrian Incidents', Incidents: 2327 },
 ];
 const dataInj = [
-      { name: 'Vehicle Serious Injury', Amount: 4.42 },
-      { name: 'Bike Serious Injury', Amount: 8.12 },
-      { name: 'Pedestrian Serious Injury', Amount: 13.58 },
+      { name: 'Vehicle Serious Injury', Incidents: 4.42 },
+      { name: 'Bike Serious Injury', Incidents: 8.12 },
+      { name: 'Pedestrian Serious Injury', Incidents: 13.58 },
 ];
 const dataFat = [
-      { name: 'Vehicle Fatalities', Amount: 0.42 },
-      { name: 'Bike Fatalities', Amount: 0.60 },
-      { name: 'Pedestrian Fatalities', Amount: 4.51 },
+      { name: 'Vehicle Fatalities', Incidents: 0.42 },
+      { name: 'Bike Fatalities', Incidents: 0.60 },
+      { name: 'Pedestrian Fatalities', Incidents: 4.51 },
 ];
 const dataAge = [
-      { name: '0-15 years old', Amount: 8 },
-      { name: '16-30 years old', Amount: 18 },
-      { name: '31-45 years old', Amount: 27 },
-      { name: '46-60 years old', Amount: 26 },
-      { name: '61-75 years old', Amount: 14 },
-      { name: '75-100 years old', Amount: 12 },
+      { name: '0-15 years old', Incidents: 8 },
+      { name: '16-30 years old', Incidents: 18 },
+      { name: '31-45 years old', Incidents: 27 },
+      { name: '46-60 years old', Incidents: 26 },
+      { name: '61-75 years old', Incidents: 14 },
+      { name: '75-100 years old', Incidents: 12 },
 ];
 const dataTot = [
       //{ name: 'Incidents by serverity', 'Incidents across all modes': 2135, 'Serious injuries across all modes': 123, 'Pedestrian fatalities': 105 },
@@ -54,7 +54,7 @@ function CrashData(props) {
   };
 
   return (
-    
+
     <Container>
 
       <h1>How does the traffic fatality number breakdown across the different modes of transportation in Portland?</h1>
@@ -70,8 +70,7 @@ function CrashData(props) {
           <YAxis />
           <CartesianGrid strokeDasharray="3 3" />
           <Tooltip />
-          <Legend />
-          <Line type="monotone" dataKey="Amount" stroke="#E87220" activeDot={{ r: 8 }} />
+          <Line type="monotone" dataKey="Incidents" stroke="#E87220" activeDot={{ r: 8 }} />
         </LineChart>
         <p style={captionStyle}>This is a breakdown of the total number of incidents by mode of transportation for data from ODOT for the years 2004-2014</p>
       </StoryCard>
@@ -83,8 +82,7 @@ function CrashData(props) {
           <YAxis />
           <CartesianGrid strokeDasharray="3 3" />
           <Tooltip />
-          <Legend />
-          <Line type="monotone" dataKey="Amount" stroke="#E87220" activeDot={{ r: 8 }} />
+          <Line type="monotone" dataKey="Incidents" stroke="#E87220" activeDot={{ r: 8 }} />
         </LineChart>
         <p style={captionStyle}>This is the percentage of serious injury*** per mode of transportation</p>
       </StoryCard>
@@ -96,8 +94,7 @@ function CrashData(props) {
           <YAxis />
           <CartesianGrid strokeDasharray="3 3" />
           <Tooltip />
-          <Legend />
-          <Line type="monotone" dataKey="Amount" stroke="#E87220" activeDot={{ r: 8 }} />
+          <Line type="monotone" dataKey="Incidents" stroke="#E87220" activeDot={{ r: 8 }} />
         </LineChart>
         <p style={captionStyle}>This is the percentage of fatalities per mode of transportation</p>
       </StoryCard>
@@ -116,7 +113,6 @@ function CrashData(props) {
             <YAxis />
             <CartesianGrid strokeDasharray="3 3" />
             <Tooltip />
-            <Legend />
             <Bar barSize={75} dataKey="Pedestrian fatalities" fill="#aaa4ab" />
             <Bar barSize={75}  dataKey="Serious injuries across all modes" fill="#ed8f4e" />
             <Bar barSize={75}  dataKey="Incidents across all modes" fill="#E87220" />
@@ -126,15 +122,14 @@ function CrashData(props) {
 
 
       <StoryCard>
-        
+
         <p>Number of pedestrian fatalities by age distribution</p>
         <BarChart width={600} height={300} data={dataAge} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
           <XAxis dataKey="name" />
           <YAxis />
           <CartesianGrid strokeDasharray="3 3" />
           <Tooltip />
-          <Legend />
-          <Bar dataKey="Amount" fill="#E87220" />
+          <Bar dataKey="Incidents" fill="#E87220" />
         </BarChart>
       </StoryCard>
 
