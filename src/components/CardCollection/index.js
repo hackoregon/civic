@@ -57,11 +57,11 @@ class CardCollection extends React.Component {
       currentServiceArea: "",
       currentBureau: "",
     }
-    this.getData = this.getData.bind(this);
-    this.getAllData = this.getAllData.bind(this);
+    // this.getData = this.getData.bind(this);
+    // this.getAllData = this.getAllData.bind(this);
     this.onSliderChange = this.onSliderChange.bind(this);
-    this.getServiceAreaByFiscalYear = this.getServiceAreaByFiscalYear.bind(this);
-    this.getSaSumByFiscalYear = this.getSaSumByFiscalYear.bind(this);
+    // this.getServiceAreaByFiscalYear = this.getServiceAreaByFiscalYear.bind(this);
+    // this.getSaSumByFiscalYear = this.getSaSumByFiscalYear.bind(this);
     this.onServiceAreaSelect = this.onServiceAreaSelect.bind(this);
 
   }
@@ -71,45 +71,46 @@ class CardCollection extends React.Component {
   // }
 
 
-  getServiceAreaByFiscalYear() {
-    const saData = this.state.data.hasOwnProperty("serviceAreas") ?
-    this.state.data.serviceAreas : [];
-    return saData.length && _.groupBy(saData, obj => obj.fiscal_year) || [];
-  }
+  // getServiceAreaByFiscalYear() {
+  //   const saData = this.state.data.hasOwnProperty("serviceAreas") ?
+  //   this.state.data.serviceAreas : [];
+  //   return saData.length && _.groupBy(saData, obj => obj.fiscal_year) || [];
+  // }
 
-  getSaSumByFiscalYear() {
-    const saData = this.state.data.hasOwnProperty("serviceAreas") ?
-    this.state.data.serviceAreas : [];
-    const saByFiscalYear = saData.length && _.groupBy(saData, obj => obj.fiscal_year);
-    const saSumByYear = saData.length && _.map(
-      saByFiscalYear, year => ({ [year[0].fiscal_year]: _.sumBy(year, 'amount')}));
-      console.log('saData', saData);
-      console.log('saByFiscalYear', saByFiscalYear);
-      console.log('saSumByYear', saSumByYear);
-      return saSumByYear;
-  }
-
-  getData (url, dataName) {
-    this.setState({ isLoading: true })
-    fetch(url)
-    .then(res => res.json())
-    .then(resData => {
-    this.setState({data: {
-      ...this.state.data,
-      [dataName]: resData.results
-    },  isLoading: false});
-    })
-    .catch(err => {
-      console.error(err)
-      this.setState({isLoading: false});
-    })
-  }
-
-  getAllData () {
-    this.getData(SACodeUrl, "serviceAreaCodes");
-    this.getData(serviceAreaUrl, "serviceAreas");
-    this.getData(bureauCodeUrl, "bureauCodes");
-    this.getData(bureausUrl, "bureaus");
+  // getSaSumByFiscalYear() {
+  //   const saData = this.state.data.hasOwnProperty("serviceAreas") ?
+  //   this.state.data.serviceAreas : [];
+  //   const saByFiscalYear = saData.length && _.groupBy(saData, obj => obj.fiscal_year);
+  //   const saSumByYear = saData.length && _.map(
+  //     saByFiscalYear, year => ({ [year[0].fiscal_year]: _.sumBy(year, 'amount')}));
+  //     console.log('saData', saData);
+  //     console.log('saByFiscalYear', saByFiscalYear);
+  //     console.log('saSumByYear', saSumByYear);
+  //     return saSumByYear;
+  // }
+  //
+  // getData (url, dataName) {
+  //   this.setState({ isLoading: true })
+  //   fetch(url)
+  //   .then(res => res.json())
+  //   .then(resData => {
+  //   this.setState({data: {
+  //     ...this.state.data,
+  //     [dataName]: resData.results
+  //   },  isLoading: false});
+  //   })
+  //   .catch(err => {
+  //     console.error(err)
+  //     this.setState({isLoading: false});
+  //   })
+  // }
+  //
+  // getAllData () {
+  //   this.getData(SACodeUrl, "serviceAreaCodes");
+  //   this.getData(serviceAreaUrl, "serviceAreas");
+  //   this.getData(bureauCodeUrl, "bureauCodes");
+  //   this.getData(bureausUrl, "bureaus");
+  // }
   }
 
   onSliderChange (value) {
