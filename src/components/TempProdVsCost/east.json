@@ -1,0 +1,42 @@
+[
+  {
+    "name": 2011,
+    "Portland Metro Population Growth": 0.695122019,
+    "Single Family Unit Growth (Stacked)": 0.22174639,
+    "Multifamily Unit Growth (Stacked)": 0.054574947,
+    "Median Home Price Growth": -15.7641355,
+    "Rent Growth": 1.389010877
+  },
+  {
+    "name": 2012,
+    "Portland Metro Population Growth": 0.912250424,
+    "Single Family Unit Growth (Stacked)": 0.159926377,
+    "Multifamily Unit Growth (Stacked)": 0,
+    "Median Home Price Growth": 1.432131918,
+    "Rent Growth": 1.968313707
+  },
+  {
+    "name": 2013,
+    "Portland Metro Population Growth": 1.153832211,
+    "Single Family Unit Growth (Stacked)": 0.14266324,
+    "Multifamily Unit Growth (Stacked)": 0.231136241,
+    "Median Home Price Growth": 17.00658263,
+    "Rent Growth": 4.523846232
+  },
+  {
+    "name": 2014,
+    "Portland Metro Population Growth": 1.468620461,
+    "Single Family Unit Growth (Stacked)": 0.199550556,
+    "Multifamily Unit Growth (Stacked)": 0.382812939,
+    "Median Home Price Growth": 10.66958734,
+    "Rent Growth": 4.413338263
+  },
+  {
+    "name": 2015,
+    "Portland Metro Population Growth": 1.657370283,
+    "Single Family Unit Growth (Stacked)": 0.158186172,
+    "Multifamily Unit Growth (Stacked)": 0,
+    "Median Home Price Growth": 12.55700877,
+    "Rent Growth": 9.137286884
+  }
+]

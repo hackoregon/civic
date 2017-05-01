@@ -19,6 +19,7 @@ import {
 } from '../../state/globalSelectors';
 import Map from '../Map';
 import DemographicDetailView from '../DemographicDetailView';
+import TempProdVsCost from '../TempProdVsCost';
 
 import {
   updateOtherUnitSize,
@@ -96,6 +97,7 @@ export class App extends React.Component {
           />
           <DemographicDetailView demographics={demographicData} />
         </StoryCard>
+        <TempProdVsCost />
       </div>
     );
   }
