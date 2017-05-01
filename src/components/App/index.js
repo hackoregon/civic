@@ -3,6 +3,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import CardCollection from '../CardCollection';
 
 const Container = styled.div`
   min-height: 100%;
@@ -22,7 +23,7 @@ function App(props) {
 
 App.displayName = 'App';
 App.defaultProps = {
-  children: <div />,
+  children: <CardCollection />,
 };
 
 App.propTypes = {
