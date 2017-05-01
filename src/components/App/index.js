@@ -3,10 +3,10 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-
 import Slider from '@hackoregon/component-library/lib/Slider/Slider';
 import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
-
+import Dropdown from '@hackoregon/component-library/lib/Dropdown/Dropdown';
+import classNames from 'classnames/bind';
 import { fetchAffordabilityData } from '../../state/affordability/actions';
 import { fetchRentData } from '../../state/rent/actions';
 import { fetchNeighborhoods } from '../../state/neighborhoods/actions';
@@ -20,6 +20,7 @@ import {
 import Map from '../Map';
 import DemographicDetailView from '../DemographicDetailView';
 import TempProdVsCost from '../TempProdVsCost';
+import styles from './app.styles.css';
 
 import {
   updateOtherUnitSize,
@@ -41,6 +42,17 @@ import {
   MIN_INCOME,
   MAX_INCOME,
 } from '../../utils/data-constants';
+
+const cx = classNames.bind(styles);
+
+const dropdowns = cx({ dropdowns: true });
+
+const parameterGroupStyle = {
+  display: 'inline-block',
+  verticalAlign: 'top',
+  width: '50%',
+  minWidth: '340px',
+};
 
 export class App extends React.Component {
   componentDidMount() {
@@ -64,32 +76,31 @@ export class App extends React.Component {
       <div>
         <StoryCard title="Portland Neighborhood Affordability" collectionId="housing" cardId="affordability-map">
           <p className="description">Compare your income to the average income of common demographics.</p>
-          <strong>Your income: ${userIncome.toFixed(2)}/hr</strong>
-          <Slider
-            min={MIN_INCOME}
-            max={MAX_INCOME}
-            value={userIncome}
-            onChange={setUserIncome}
-          />
-          <p className="description">
-            <strong>Housing Type: </strong>
-            <select value={userUnitSize} onChange={event => setUnitSize(event.target.value)}>
-              {HOUSING_TYPES.map(size => (
-                <option value={size} key={size}>{size}</option>
-              ))}
-            </select>
-          </p>
-          <p className="description">
-            <strong>See How Other Portlanders Compare: </strong>
-            <select
-              value={otherDemographic}
-              onChange={event => setOtherDemographic(event.target.value)}
-            >
-              {DEMOGRAPHICS.map(demo => (
-                <option value={demo} key={demo}>{demo}</option>
-              ))}
-            </select>
-          </p>
+          <div>
+            <div style={parameterGroupStyle}>
+              <h3>Your income: ${userIncome.toFixed(2)}/hr</h3>
+              <Slider
+                min={MIN_INCOME}
+                max={MAX_INCOME}
+                value={userIncome}
+                onChange={setUserIncome}
+              />
+            </div>
+            <div className={dropdowns} style={parameterGroupStyle}>
+              <h3>Housing Type </h3>
+              <Dropdown
+                value={userUnitSize.value}
+                onChange={event => setUnitSize(event)}
+                options={HOUSING_TYPES}
+              />
+              <p className="description">See How Other Portlanders Compare</p>
+              <Dropdown
+                value={otherDemographic}
+                onChange={event => setOtherDemographic(event)}
+                options={DEMOGRAPHICS}
+              />
+            </div>
+          </div>
           <Map
             neighborhoods={neighborhoodData}
             onSelect={id => setNeighborhood(id)}
@@ -123,9 +134,9 @@ App.propTypes = {
   neighborhoodData: React.PropTypes.object,
   demographicData: React.PropTypes.object,
   setOtherDemographic: React.PropTypes.func,
-  otherDemographic: React.PropTypes.string,
+  otherDemographic: React.PropTypes.object,
   userIncome: React.PropTypes.number,
-  userUnitSize: React.PropTypes.string,
+  userUnitSize: React.PropTypes.object,
   setUserIncome: React.PropTypes.func,
   setUnitSize: React.PropTypes.func,
   setNeighborhood: React.PropTypes.func,
