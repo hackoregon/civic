@@ -53,9 +53,9 @@ class CardCollection extends React.Component {
     super(props);
     this.state = {
       currentYear: fiscalYearList[7],
-      currentBureau: "",
       data: null,
       currentServiceArea: "PS",
+      currentBureau: "FR",
     }
     // this.getData = this.getData.bind(this);
     // this.getAllData = this.getAllData.bind(this);
