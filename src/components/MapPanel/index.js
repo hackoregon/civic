@@ -15,14 +15,14 @@ class MapPanel extends Component {
 
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <div className="panel-column-1" style={{ display: 'flex', flexDirection: 'column', textAlign: 'left', width: '33%' }}>
-            <h3>Area Demographics</h3>
-            <table>
+            <h3 style={{ marginLeft: '10px' }}>Area Demographics</h3>
+            <table style={{ borderSpacing: '10px' }}>
               <tr>
                 <td style={{ color: '#D5135F' }}>{stats.fma_population_total}</td>
                 <td>population</td>
               </tr>
               <tr>
-                <td style={{ color: '#D5135F' }}>{stats.median_hh_income}</td>
+                <td style={{ color: '#D5135F' }}>${stats.median_hh_income}</td>
                 <td>median income</td>
               </tr>
               <tr>
@@ -49,8 +49,8 @@ class MapPanel extends Component {
           </div>
 
           <div className="panel-column-2" style={{ display: 'flex', flexDirection: 'column', textAlign: 'left', width: '33%' }}>
-            <h3>Incidents Per Week</h3>
-            <table>
+            <h3 style={{ marginLeft: '10px' }}>Incidents Per Week</h3>
+            <table style={{ borderSpacing: '10px' }}>
               <tr>
                 <td style={{ color: '#D5135F' }}>{stats.weekly_total_incs.toFixed(2)}</td>
                 <td>overall</td>
@@ -67,9 +67,9 @@ class MapPanel extends Component {
           </div>
 
           <div className="panel-column-3" style={{ display: 'flex', flexDirection: 'column', textAlign: 'left', width: '33%' }}>
-            <h3>Median Response Times</h3>
+            <h3 style={{ marginLeft: '10px' }}>Median Response Times</h3>
             <div style={{ display: 'flex' }}>
-              <table>
+              <table style={{ borderSpacing: '10px' }}>
                 <tr>
                   <td style={{ color: '#D5135F' }}>{stats.median_response_time.toFixed(2)} min</td>
                   <td>overall</td>
