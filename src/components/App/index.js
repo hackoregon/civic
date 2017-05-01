@@ -20,6 +20,7 @@ import {
 import Map from '../Map';
 import DemographicDetailView from '../DemographicDetailView';
 import TempProdVsCost from '../TempProdVsCost';
+import TempVoterRegistration from '../TempVoterRegistration';
 import styles from './app.styles.css';
 
 import {
@@ -109,6 +110,7 @@ export class App extends React.Component {
           <DemographicDetailView demographics={demographicData} />
         </StoryCard>
         <TempProdVsCost />
+        <TempVoterRegistration />
       </div>
     );
   }
