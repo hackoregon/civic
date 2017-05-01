@@ -1,8 +1,8 @@
 import * as d3 from 'd3';
 
 // constants used in BubbleChart.js
-export const width = 400;
-export const height = 400;
+export const width = 800;
+export const height = 500;
 export const center = { x: width / 2, y: height / 2 };
 
 // constants used in index.js for slider
