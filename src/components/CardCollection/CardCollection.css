@@ -1,15 +1,24 @@
+/* budget-heading green : #329f7c */
+
 .budget-card-collection__intro-hero {
   padding: 1rem;
   background: #f0f0f0;
   color: #999;
 }
 
-.budget-card-collection__sticky-controller {
-  padding: 0.5rem;
-  background: white;
+.budget-heading {
+  color: #329f7c;
+  font-weight: bold;
 }
 
-.data-display {
+.budget-card-collection__sticky-controller {
+  padding: 0.5rem;
+  padding-bottom: 2rem;
+  background: white;
+  z-index: 5000;
+}
+
+.ten-year__wrapper {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   padding: 0.5rem;
@@ -19,4 +28,12 @@
 
 .Card {
   max-width: 800px;
+}
+
+.Card .Title.Rubik {
+  color: #329f7c;
+}
+
+.budget-green {
+  color: #329f7c;
 }
