@@ -52,10 +52,10 @@ class CardCollection extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      data: {},
       currentYear: fiscalYearList[7],
       currentServiceArea: "",
       currentBureau: "",
+      data: null,
     }
     // this.getData = this.getData.bind(this);
     // this.getAllData = this.getAllData.bind(this);
