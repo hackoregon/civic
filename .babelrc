@@ -11,4 +11,5 @@
     "stage-1",
     "react"
   ],
+  "plugins": [ "dynamic-import-node" ]
 }
