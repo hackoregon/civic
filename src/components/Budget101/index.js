@@ -1,30 +1,33 @@
 import React from 'react';
-import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
+import StoryCard from '../StoryCard/StoryCard';
 import PieChart from './PieChart';
+import { BUDGET_101 } from '../constants';
 
 require('./Budget101.css');
 require('./stub.css');
 
 function Budget101() {
   return (
-    <StoryCard title="Budget101" collectionId="" cardId="">
+    <StoryCard title="Budget 101" collectionId="budget" cardId={BUDGET_101}>
       <div className="budget">
         <div id="LearnAbout">
           <h1 className="greenText">Learn about the budget</h1>
-          <p>The City of Portland’s budget is broken into seven service areas,
-          such as public safety or public utilities and are then further categorized by bureau.</p>
+          <p>
+          The City of Portland’s budget is broken into seven service areas,
+          such as public safety or public utilities and are further
+          categorized by bureau. Each bureau is then broken into a number of
+          specific programs.
+          </p>
         </div>
         <div id="ServiceAreas">
           <h1 className="greenText">City of Portland Service Areas <br /> Budget for 2016-2017</h1>
-          <div style={{ display: 'flex', justifyContent: 'space-around', margin: 'auto' }}>
-            <div className="col">
-              <PieChart />
-            </div>
-            <div className="col">
-              <h2>Budget Resources</h2>
-              <p>Where does the money come from?
-                The City of Portland’s budget is funded through seven resources:
-              </p>
+          <h2>Budget Resources</h2>
+          <p>Where does the money come from?
+          The City of Portland’s budget is funded through seven resources:
+          </p>
+          <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+            <PieChart />
+            <div className="xcol">
               <ul className="resources">
                 <li>30% Beginning Fund Balance</li>
                 <li>21% Service Charges and Fees</li>
@@ -50,23 +53,22 @@ function Budget101() {
             of one or more bureaus. Continue reading for an example of how a service
             area is broken into bureaus.
           </p>
-          <p className="budgetlink">Explore the city budget by Service Area and Bureaus</p>
-          <div style={{ display: 'flex', justifyContent: 'space-around', margin: 'auto' }} >
+          <div style={{ display: 'flex', justifyContent: 'space-around' }} >
             <div className="col">
               <img alt="Public Safety icon" className="publicIcons" src={require('../../../assets/safety_budget101_icon.png')} />
-              <p>Public <br /> Safety</p>
+              <p style={{ textAlign: 'center' }}>Public <br /> Safety</p>
             </div>
             <div className="col">
               <img alt="Community Development icon" className="publicIcons" src={require('../../../assets/community_budget101_icon.png')} />
-              <p>Community <br /> Development</p>
+              <p style={{ textAlign: 'center' }}>Community <br /> Development</p>
             </div>
             <div className="col">
               <img alt="Public Utilities icon" className="publicIcons" src={require('../../../assets/utilities_budget101_icon.png')} />
-              <p>Public <br /> Utilities</p>
+              <p style={{ textAlign: 'center' }}>Public <br /> Utilities</p>
             </div>
             <div className="col">
               <img alt="City Support Services icon" className="publicIcons" src={require('../../../assets/support_budget101_icon.png')} />
-              <p>City Support <br /> Services</p>
+              <p style={{ textAlign: 'center' }}>City Support <br /> Services</p>
             </div>
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-around', margin: 'auto' }} >
