@@ -11,7 +11,7 @@ export default {
           presets: [
             'react',
             'stage-1',
-                  ['es2015', { modules: false }],
+            ['es2015', { modules: false }],
           ],
           plugins: [
             'transform-regenerator',
@@ -19,6 +19,7 @@ export default {
             'transform-es2015-destructuring',
             'transform-class-properties',
             'syntax-dynamic-import',
+            'dynamic-import-node',
           ],
         },
       },

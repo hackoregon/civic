@@ -7,10 +7,8 @@ import { BUNDLE_PATH } from './paths';
 
 const assetFileName = 'webpack-assets.json';
 
-
 export default {
   plugins: removeEmpty([
-
     new webpack.LoaderOptionsPlugin({ options: { postcss: [autoprefixer] } }),
     isProd && (
           new webpack.LoaderOptionsPlugin({
