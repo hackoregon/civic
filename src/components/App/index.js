@@ -20,6 +20,7 @@ import {
 import Map from '../Map';
 import DemographicDetailView from '../DemographicDetailView';
 import TempProdVsCost from '../TempProdVsCost';
+import MapLegend from '../MapLegend';
 import styles from './app.styles.css';
 
 import {
@@ -54,6 +55,36 @@ const parameterGroupStyle = {
   minWidth: '340px',
 };
 
+const mapContainerStyles = {
+  background: '#f3f3f3',
+  borderBottom: '1px solid #ddd',
+  padding: '10px',
+};
+
+const mapStyles = {
+  border: '1px solid #ddd',
+};
+
+const tooltipStyles = {
+  background: '#f3f3f3',
+  padding: '30px',
+  position: 'relative',
+  zIndex: '1001',
+};
+
+const arrowHackStyles = {
+  background: '#f3f3f3',
+  width: '100px',
+  height: '100px',
+  transform: 'rotate(45deg) translate(-30%, -30%)',
+  margin: 'auto',
+  position: 'absolute',
+  zIndex: '1000',
+  left: '0',
+  right: '0',
+  border: '1px solid #ddd',
+};
+
 export class App extends React.Component {
   componentDidMount() {
     this.props.fetchAllData();
@@ -74,7 +105,7 @@ export class App extends React.Component {
 
     return (
       <div>
-        <StoryCard title="Portland Neighborhood Affordability" collectionId="housing" cardId="affordability-map">
+        <StoryCard title="Map Your Affordability" collectionId="housing" cardId="affordability-map">
           <p className="description">Compare your income to the average income of common demographics.</p>
           <div>
             <div style={parameterGroupStyle}>
@@ -93,7 +124,7 @@ export class App extends React.Component {
                 onChange={event => setUnitSize(event)}
                 options={HOUSING_TYPES}
               />
-              <p className="description">See How Other Portlanders Compare</p>
+              <h3>See How Other Portlanders Compare</h3>
               <Dropdown
                 value={otherDemographic}
                 onChange={event => setOtherDemographic(event)}
@@ -101,12 +132,20 @@ export class App extends React.Component {
               />
             </div>
           </div>
-          <Map
-            neighborhoods={neighborhoodData}
-            onSelect={id => setNeighborhood(id)}
-            activeNeighborhood={demographicData ? demographicData.id : 0}
-          />
-          <DemographicDetailView demographics={demographicData} />
+          <div style={mapContainerStyles}>
+            <MapLegend otherDemographicLabel={otherDemographic.label || ''} />
+            <div style={mapStyles}>
+              <Map
+                neighborhoods={neighborhoodData}
+                onSelect={id => setNeighborhood(id)}
+                activeNeighborhood={demographicData ? demographicData.id : 0}
+              />
+            </div>
+            <div style={arrowHackStyles} />
+            <div style={tooltipStyles}>
+              <DemographicDetailView demographics={demographicData} />
+            </div>
+          </div>
         </StoryCard>
         <TempProdVsCost />
       </div>
