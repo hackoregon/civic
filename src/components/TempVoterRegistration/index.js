@@ -53,7 +53,7 @@ const TempVoterRegistration = () =>
     />
     <p>
       Studies of all Portlanders (not just voters) see a similar trend. Using Census data,&nbsp;
-      <a href="https://www.forbes.com/sites/joelkotkin/2016/02/16/americas-senior-moment-the-most-rapidly-aging-cities/#516f4c9d53e5">
+      <a href="https://www.forbes.com/sites/joelkotkin/2016/02/16/americas-senior-moment-the-most-rapidly-aging-cities/">
         a 2016 Forbes article
       </a>
       &nbsp;ranks Portland as the fourth most rapidly aging city in the country. That is, while
@@ -64,10 +64,13 @@ const TempVoterRegistration = () =>
         Charles Rynerson
       </a>
       &nbsp;of the <a href="https://www.pdx.edu/prc/home">Population Research Center</a> at
-      Portland State University, &quot;There&apos;s a lot of young, well-educated people who have
-      been coming here since the &apos;90s, but they were coming here in the &apos;70s, too.&quot;
-      Seniors who have moved to Portland more recently may also be following their children and
-      grandchildren.
+      Portland State University, “There’s a lot of young, well-educated people who have been coming
+      here since the ’90s, but they were coming here in the ’70s, too.” Seniors who have moved to
+      Portland more recently may also be&nbsp;
+      <a href="https://www.mayflower.com/about-us/news/boomerang-press-release">
+        following their children and grandchildren
+      </a>
+      .
     </p>
 
     <h3 style={headingStyle}>Trend Toward Shared Households</h3>
@@ -118,21 +121,21 @@ const TempVoterRegistration = () =>
       households for longer. Over the last ten years, as the previous graph demonstrated, the
       median age of a young person living in shared housing increased from early to late 20s, even
       as the median age of an older person living in shared housing increased from early to late
-      50s. At the same time, the average age of people living in any one shared household&msdash;a
+      50s. At the same time, the average age of people living in any one shared household&mdash;a
       number that lands squarely between these two age cohorts&mdash;has increased from 37.4 to
       41.7.
     </p>
     <p>
       One of the drivers of this trend is young adults living at home longer. According to the&nbsp;
-      <a href="http://www.pewsocialtrends.org/2016/05/24/for-first-time-in-modern-era-living-with-parents-edges-out-other-living-arrangements-for-18-to-34-year-olds/#fn-21647-1">
+      <a href="http://www.pewsocialtrends.org/2016/05/24/for-first-time-in-modern-era-living-with-parents-edges-out-other-living-arrangements-for-18-to-34-year-olds/">
         Pew Research Center
       </a>
       , in 2014, for the first time since the 1940s, 32.1% of adults ages 18 to 34 were living in a
-      parents&apos; home. However, the past 15 years have also seen an increase in young adults
-      adopting many different ways of living, &quot;with the decline of romantic coupling pushing
-      living at home to the top of a much less uniform list of living arrangements,&quot; including
-      that of young people living longer with other family members and other non-family shared
-      household arrangements.
+      parents’ home. However, the past 15 years have also seen an increase in young adults adapting
+      many different ways of living, “with the decline of romantic coupling pushing living at home
+      to the top of a much less uniform list of living arrangements,” including that of young
+      people living longer with other family members and other non-family shared household
+      arrangements.
     </p>
     <img
       style={imgStyle}
@@ -145,7 +148,7 @@ const TempVoterRegistration = () =>
       The average age of voters living in shared housing is increasing citywide. When we look at
       the average age of shared households by neighborhood, however, we can see that the age of
       registered voters living in shared housing is not distributed evenly throughout the city.
-      Instead, the aging of shared households moves over the last ten years from the city&apos;s
+      Instead, the aging of shared households moves over the last ten years from the city’s
       periphery towards its center. While the reasons for this growth pattern remain unclear, one
       possibility is that as the cost of housing has rapidly increased, more adult children from
       middle and upper middle class families located closer to the city center are choosing to live
@@ -168,9 +171,9 @@ const TempVoterRegistration = () =>
       for the last ten years, the neighborhood a 21 year old lived in in 2008 appears to have had
       no discernable effect on where in Portland they live ten years later. Because we have access
       only to Multnomah County data, we cannot track the movements of those who move beyond the
-      county&apos;s borders. A state-wide Voter Registration data set would help us to better
-      understand where young people leaving Portland go: do they leave Oregon? Or do they move to
-      suburbs further away from the city center?
+      county’s borders. A state-wide Voter Registration data set would help us to better understand
+      where young people leaving Portland go: do they leave Oregon? Or do they move to suburbs
+      further away from the city center?
     </p>
     <h4 style={imgHeadingStyle}>
       Voters From Four Neighborhoods Who Were 21 in 2006 Have Dispersed Across the City
