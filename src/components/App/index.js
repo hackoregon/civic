@@ -3,10 +3,9 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-
 import Slider from '@hackoregon/component-library/lib/Slider/Slider';
 import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
-
+import Dropdown from '@hackoregon/component-library/lib/Dropdown/Dropdown';
 import { fetchAffordabilityData } from '../../state/affordability/actions';
 import { fetchRentData } from '../../state/rent/actions';
 import { fetchNeighborhoods } from '../../state/neighborhoods/actions';
@@ -71,25 +70,20 @@ export class App extends React.Component {
             value={userIncome}
             onChange={setUserIncome}
           />
-          <p className="description">
-            <strong>Housing Type: </strong>
-            <select value={userUnitSize} onChange={event => setUnitSize(event.target.value)}>
-              {HOUSING_TYPES.map(size => (
-                <option value={size} key={size}>{size}</option>
-              ))}
-            </select>
-          </p>
+          <strong>Housing Type: </strong>
+          <Dropdown
+            value={userUnitSize.value}
+            onChange={event => setUnitSize(event)}
+            options={HOUSING_TYPES}
+          />
           <p className="description">
             <strong>See How Other Portlanders Compare: </strong>
-            <select
-              value={otherDemographic}
-              onChange={event => setOtherDemographic(event.target.value)}
-            >
-              {DEMOGRAPHICS.map(demo => (
-                <option value={demo} key={demo}>{demo}</option>
-              ))}
-            </select>
           </p>
+          <Dropdown
+            value={otherDemographic}
+            onChange={event => setOtherDemographic(event)}
+            options={DEMOGRAPHICS}
+          />
           <Map
             neighborhoods={neighborhoodData}
             onSelect={id => setNeighborhood(id)}
@@ -123,9 +117,9 @@ App.propTypes = {
   neighborhoodData: React.PropTypes.object,
   demographicData: React.PropTypes.object,
   setOtherDemographic: React.PropTypes.func,
-  otherDemographic: React.PropTypes.string,
+  otherDemographic: React.PropTypes.object,
   userIncome: React.PropTypes.number,
-  userUnitSize: React.PropTypes.string,
+  userUnitSize: React.PropTypes.object,
   setUserIncome: React.PropTypes.func,
   setUnitSize: React.PropTypes.func,
   setNeighborhood: React.PropTypes.func,

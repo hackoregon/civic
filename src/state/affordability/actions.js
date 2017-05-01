@@ -17,7 +17,7 @@ export const fetchAffordabilityData = api('/affordable', {
     year,
   })),
   buildParams: state => ({
-    housing_size: getOtherUnitSize(state),
-    demographic: getOtherDemographic(state),
+    housing_size: getOtherUnitSize(state).value,
+    demographic: getOtherDemographic(state).value,
   }),
 });
