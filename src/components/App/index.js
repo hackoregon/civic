@@ -89,7 +89,11 @@ export class App extends React.Component {
               ))}
             </select>
           </p>
-          <Map neighborhoods={neighborhoodData} onSelect={id => setNeighborhood(id)} />
+          <Map
+            neighborhoods={neighborhoodData}
+            onSelect={id => setNeighborhood(id)}
+            activeNeighborhood={demographicData ? demographicData.id : 0}
+          />
           <DemographicDetailView demographics={demographicData} />
         </StoryCard>
       </div>

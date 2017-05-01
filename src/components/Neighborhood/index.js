@@ -13,8 +13,8 @@ const AFFORDABLE_COLOR = HOUSING_TEAM_PRIMARY_COLOR;
  */
 const setOtherPathOptions = ({ affordableOther }) => ({
   fillOpacity: affordableOther ? 1 : 0,
-  opacity: 0,
   fillPattern: crossHatch,
+  stroke: false,
 });
 
 const setYouPathOptions = ({ affordableYou }) => ({
