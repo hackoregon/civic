@@ -37,7 +37,10 @@ const dataAge = [
       { name: '75-100 years old', Amount: 12 },
 ];
 const dataTot = [
-      { name: 'Incidents by serverity', 'Incidents across all modes': 2135, 'Serious injuries across all modes': 123, 'Pedestrian fatalities': 105 },
+      //{ name: 'Incidents by serverity', 'Incidents across all modes': 2135, 'Serious injuries across all modes': 123, 'Pedestrian fatalities': 105 },
+      { name: 'Incidents by serverity', 'Incidents across all modes': 2135}, 
+      { name: 'Serious injuries across all modes', 'Serious injuries across all modes': 123}, 
+      { name: 'Pedestrian fatalities', 'Pedestrian fatalities': 105 },
 ];
 
 function CrashData(props) {
@@ -53,7 +56,7 @@ function CrashData(props) {
   return (
     
     <Container>
-      
+
       <h1>How does the traffic fatality number breakdown across the different modes of transportation in Portland?</h1>
 
       <p>Hack Oregon partnered with the Portland Bureau of Transportation (PBOT) in support of the Vision Zero project. The mission of Vision Zero is to move Portland toward achieving zero traffic-related fatalities and serious injuries while providing safe and affordable transportation options and multiple opportunities for daily physical activity.
@@ -114,9 +117,9 @@ function CrashData(props) {
             <CartesianGrid strokeDasharray="3 3" />
             <Tooltip />
             <Legend />
-            <Bar dataKey="Pedestrian fatalities" stackId="a" fill="#aaa4ab" />
-            <Bar dataKey="Serious injuries across all modes" stackId="a" fill="#ed8f4e" />
-            <Bar dataKey="Incidents across all modes" stackId="a" fill="#E87220" />
+            <Bar barSize={75} dataKey="Pedestrian fatalities" fill="#aaa4ab" />
+            <Bar barSize={75}  dataKey="Serious injuries across all modes" fill="#ed8f4e" />
+            <Bar barSize={75}  dataKey="Incidents across all modes" fill="#E87220" />
           </BarChart>
           <p style={{marginBottom: '2em'}}>This is how many total incidents by severity were reported at the 97 intersections</p>
       </StoryCard>
