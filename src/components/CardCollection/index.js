@@ -139,7 +139,7 @@ class CardCollection extends React.Component {
           <div className="budget-card-collection__intro-hero">
             <h1 className="budget-heading Rubik">Run the Numbers</h1>
             <p className="budget_card_collection__intro-hero-text">
-              Some intro text will go here. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              Portland's city budget is arguably the city's most important policy document. The budget contains the plan for spending our collective resources across city programs and services. Yet, annual budget decisions often receive far less attention than other questions considered at City Hall. Explore 10 years worth of budget data, learn where Portland spends its money, and get involved in the decision-making!
             </p>
           </div>
           <div className="ten-year__wrapper">
@@ -151,7 +151,8 @@ class CardCollection extends React.Component {
           </div>
           <Sticky>
           <div className="budget-card-collection__sticky-controller">
-          <p>Controller Section: Dropdown or slider by year (10 year time period available) Need: Determine interction point + consider that data might be added in at an additional time (next year). This will be sticky and will apply to all story sections below.</p>
+          <p>Interact with the data by using the slider to see how the
+city of Portland's budget has changed over the last ten years.</p>
           <p> Current year: <span className="budget-current-year">{this.state.currentYear}</span></p>
           <ReactSlider
           min={sliderMin}
@@ -168,18 +169,51 @@ class CardCollection extends React.Component {
             title="Budget By Service Area"
             collectionId="budget"
             cardId={BUDGET_BY_SERVICE_AREA}>
-            <BubbleChart data={serviceAreaBubbleDataFTW[this.state.currentYear]} />
+            <div style={{ display: 'flex', flexDirection: 'column', }}>
+            <p>The circles demonstrate spending for each Service Area
+              in the City of Portland's budget.
+            <br /><br />
+              Explore the circles for more information about each
+              Service Area.
+            </p>
+              <BubbleChart data={serviceAreaBubbleDataFTW[this.state.currentYear]} />
+            </div>
           </StoryCard>
-          <StoryCard title="Budget By Service Area">
-            <Select
-            name="service-area-to-bureau"
-            options={serviceAreaOptions}
-            onChange={this.onServiceAreaSelect}
+          <StoryCard
+            title="Bureau Budgets within Service Areas"
             cardId={BUDGET_BY_BUREAU}
             collectionId="budget"
+          >
+          <p>The circles demonstrate spending for each bureau within the selected service area.
+          <br /><br />
+          Explore the circles for more information about each bureau.
+          </p>
+            <Select
+              options={serviceAreaOptions}
+              onChange={this.onServiceAreaSelect}
+              value={this.state.currentServiceArea}
+              clearable={false}
             />
+            <BubbleChart data={bureauDataByYear[this.state.currentServiceArea][this.state.currentYear]} />
           </StoryCard>
-        </StickyContainer>
+          <StoryCard
+            title="Program Budgets within Bureaus"
+            cardId={BUDGET_BY_PROGRAM}
+            collectionId="budget"
+          >
+          <p>The circles demonstrate spending for each program within the selected bureau.
+          <br /><br />
+          Explore the circles for more information about each program.
+          </p>
+            <Select
+              options={bureauOptions}
+              onChange={this.onBureauSelect}
+              value={this.state.currentBureau}
+              clearable={false}
+            />
+            <BubbleChart data={psProgramData[this.state.currentServiceArea]["FR"][this.state.currentYear]} />
+          </StoryCard>
+          </StickyContainer>
           <Budget101 />
       </div>
     )
