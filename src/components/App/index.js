@@ -88,6 +88,10 @@ const arrowHackStyles = {
   border: '1px solid #ddd',
 };
 
+const textAlignCenter = {
+  textAlign: 'center',
+};
+
 export class App extends React.Component {
   componentDidMount() {
     this.props.fetchAllData();
@@ -109,10 +113,10 @@ export class App extends React.Component {
     return (
       <div>
         <StoryCard title="Map Your Affordability" collectionId="housing" cardId="affordability-map">
-          <p className="description">Compare your income to the average income of common demographics.</p>
+          <p className="description" style={textAlignCenter}>Compare your income to the average income of common demographics.</p>
           <div>
             <div style={parameterGroupStyle}>
-              <h3>Your income: ${userIncome.toFixed(2)}/hr</h3>
+              <h3 style={textAlignCenter}>Your income: ${userIncome.toFixed(2)}/hr</h3>
               <Slider
                 min={MIN_INCOME}
                 max={MAX_INCOME}
@@ -121,13 +125,13 @@ export class App extends React.Component {
               />
             </div>
             <div className={dropdowns} style={parameterGroupStyle}>
-              <h3>Housing Type </h3>
+              <h3 style={textAlignCenter}>Housing Type </h3>
               <Dropdown
                 value={userUnitSize.value}
                 onChange={event => setUnitSize(event)}
                 options={HOUSING_TYPES}
               />
-              <h3>See How Other Portlanders Compare</h3>
+              <h3 style={textAlignCenter}>See How Other Portlanders Compare</h3>
               <Dropdown
                 value={otherDemographic}
                 onChange={event => setOtherDemographic(event)}

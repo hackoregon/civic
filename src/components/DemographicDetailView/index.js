@@ -47,16 +47,20 @@ const RechartsPieStyles = {
   fontSize: '.8em',
 };
 
+const textAlignCenter = {
+  textAlign: 'center',
+};
+
 /* eslint-disable dot-notation */
 const DemographicDetailView = ({ demographics }) => {
   if (!demographics) return <div />;
   return (
     <div>
       {demographics &&
-        <div>
+        <div style={textAlignCenter}>
           <h2>{demographics.name}</h2>
           <div style={contentBlockStyle}>
-            <h3>Race/Ethnicity</h3>
+            <h3 style={textAlignCenter}>Race/Ethnicity</h3>
             <div style={chartStyle}>
               <RechartsPie
                 data={demographics.populations}
@@ -67,7 +71,7 @@ const DemographicDetailView = ({ demographics }) => {
             </div>
           </div>
           <div style={contentBlockStyle}>
-            <h3 >Household Totals</h3>
+            <h3 style={textAlignCenter}>Household Totals</h3>
             <div style={numberColumnStyle}>
               <p style={numberStyle}>{demographics.households['Households']}</p>
               <p style={numberStyle}>{demographics.households['Single-Person']}</p>
@@ -80,7 +84,7 @@ const DemographicDetailView = ({ demographics }) => {
             </div>
           </div>
           <div style={contentBlockStyle}>
-            <h3>Vulnerable Populations</h3>
+            <h3 style={textAlignCenter}>Vulnerable Populations</h3>
             <div style={numberColumnStyle}>
               <p style={numberStyle}>{demographics.households['Foreign-Born Individuals']}</p>
               <p style={numberStyle}>{demographics.households['Persons Exp-Disabilities']}</p>
