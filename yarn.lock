@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@hackoregon/component-library@^0.2.1":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@hackoregon/component-library/-/component-library-0.2.1.tgz#c030673c5beed41cc6c1b57948e97fb3206e02ea"
+"@hackoregon/component-library@^0.2.5":
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/@hackoregon/component-library/-/component-library-0.2.5.tgz#498d48271fd4cd63ce9dd75cca47324fc35b170d"
   dependencies:
     classnames "^2.2.5"
     copy-to-clipboard "^3.0.5"
