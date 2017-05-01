@@ -104,7 +104,7 @@ export function showDetail(d) {
   const content = `<span class="title">${d.name}</span>
                   <br/><hr>`
                     +
-                  `<span class="name"> $${d.value}</span>
+                  `<span class="name"> ${d.color.trim() === '#F06D63' ? '-' : ''}$${d.value}</span>
                   <br/>`;
   tooltip.showTooltip(content, d3.event);
 }

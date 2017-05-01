@@ -34,7 +34,7 @@ class BubleAreaChart extends Component {
         <svg className="bubbleChart" width={width} height={height}>
           <Bubbles
             data={data}
-            forceStrength={0.03}
+            forceStrength={0.02}
             center={center}
           />
         </svg>
