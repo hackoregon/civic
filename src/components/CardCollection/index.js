@@ -21,9 +21,11 @@ import {
   OVERALL_BUDGET,
   BUDGET_BY_SERVICE_AREA,
   BUDGET_BY_BUREAU,
+  BUDGET_BY_PROGRAM,
   BUDGET_101,
 } from '../constants';
-import { serviceAreaOptions, FY14Total, FY15Total, serviceAreaBubbleDataFTW } from '../../data';
+import { serviceAreaOptions, bureauOptions, serviceAreaBubbleDataFTW,
+bureauDataByYear, psProgramData } from '../../data';
 
 
 const yearList = _.range(2006, 2016);
