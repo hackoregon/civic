@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@hackoregon/component-library@^0.2.1":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@hackoregon/component-library/-/component-library-0.2.1.tgz#c030673c5beed41cc6c1b57948e97fb3206e02ea"
+"@hackoregon/component-library@^0.2.5":
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/@hackoregon/component-library/-/component-library-0.2.5.tgz#498d48271fd4cd63ce9dd75cca47324fc35b170d"
   dependencies:
     classnames "^2.2.5"
     copy-to-clipboard "^3.0.5"
@@ -5207,7 +5207,7 @@ recharts-scale@0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/recharts-scale/-/recharts-scale-0.2.1.tgz#378f543ed17c3245e4d9afb10aaf6298240d2fcb"
 
-recharts@0.20.8, recharts@^0.20.1:
+recharts@^0.20.1:
   version "0.20.8"
   resolved "https://registry.yarnpkg.com/recharts/-/recharts-0.20.8.tgz#7675c6c75c4888a577063679273508bd79d007f4"
   dependencies:
