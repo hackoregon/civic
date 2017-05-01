@@ -6,6 +6,7 @@ import Header from '@hackoregon/component-library/lib/Navigation/Header';
 import Footer from '@hackoregon/component-library/lib/Footer/Footer';
 import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
 import ConstructionViews from '../ConstructionViews';
+import CrashData from '../CrashData/CrashData';
 // import L from 'leaflet';
 
 const Container = styled.div`
@@ -20,9 +21,13 @@ function App(props) {
     <Container>
       <Header />
       
-        <StoryCard title="Construction Projects Map" collectionId="transportation" cardId="trans-construction-maps">
-        <ConstructionViews />
+        <StoryCard title="Road Works Explorer" collectionId="transportation" cardId="trans-construction-maps">
+          <ConstructionViews />
         </StoryCard>
+        
+        <CrashData />
+        
+        
       <Footer />      
       {React.Children.toArray(props.children)}
     </Container>

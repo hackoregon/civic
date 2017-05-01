@@ -37,8 +37,8 @@ class ControlBox extends Component {
         justifyContent: 'center',
       }
       const divStyle = { 
-        marginLeft: '20px',
-        marginRight: '20px',
+        marginLeft: '40px',
+        marginRight: '40px',
       }
 
       return (
@@ -62,10 +62,14 @@ class ControlBox extends Component {
       justifyContent: 'center',
       marginBottom: '1em',
     }
-
+    const topStyle = {
+      marginBottom: '1em', 
+      backgroundColor: '#F3F2F3',
+      padding: '1em'
+    }
 
     return (
-      <div style={{marginBottom: '1em'}}>
+      <div style={topStyle}>
         <div style={headingStyle}>
           <strong>Settings</strong>
         </div>
