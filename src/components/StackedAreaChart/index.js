@@ -2,7 +2,7 @@ import React from 'react';
 import { AreaChart, XAxis, YAxis, Area, Tooltip } from 'recharts';
 import { data, colors } from './utils';
 
-const StackedAreaChart = () => {
+const StackedAreaChart = (props) => {
   // Maps data to create lines/areas
   const lines = [];
   const myKeys = Object.keys(data[0]);
@@ -23,7 +23,12 @@ const StackedAreaChart = () => {
 
   return (
     <div style={{ display: 'flex', justifyContent: 'space-around', margin: 'auto' }} >
-      <AreaChart width={800} height={300} data={data}>
+      <AreaChart
+        width={props.width}
+        height={props.height}
+        data={props.data}
+        colors={props.colors}
+      >
         <XAxis dataKey="name" />
         <YAxis width={90} />
         {lines}
@@ -41,5 +46,12 @@ const StackedAreaChart = () => {
 //   data: PropTypes.arrayOf(PropTypes.object).isRequired,
 //   colors: PropTypes.arrayOf(PropTypes.string).isRequired,
 // };
+
+StackedAreaChart.defaultProps = {
+  width: 800,
+  height: 300,
+  data: data,
+  colors: colors,
+}
 
 export default StackedAreaChart;

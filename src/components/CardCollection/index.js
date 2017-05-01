@@ -1,7 +1,11 @@
 import React from 'react';
 import fetch from 'isomorphic-fetch';
-import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
+import StoryCard from '../StoryCard/StoryCard';
+import '../StoryCard/StoryCard.css';
+import '../StoryCard/StoryFooter.css';
+import '../StoryCard/StoryLink.css';
 import StackedArea from '../StackedAreaChart';
+import BubbleChart from '../MyTest/BubbleChart';
 import Example from '../Example';
 import { StickyContainer, Sticky } from 'react-sticky';
 import _ from 'lodash';
@@ -10,13 +14,23 @@ import 'rc-slider/assets/index.css';
 import './CardCollection.css';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
+import { saBubbleData } from '../MyTest/utils';
+import { data, colors } from '../StackedAreaChart/utils';
+import {
+  OVERALL_BUDGET,
+  BUDGET_BY_SERVICE_AREA,
+  BUDGET_BY_BUREAU,
+  BUDGET_101,
+} from '../constants';
+import { serviceAreaOptions, FY14Total, FY15Total, serviceAreaBubbleDataFTW } from '../../data';
 
 
-const yearList = _.range(2006, 2018);
+const yearList = _.range(2006, 2016);
+const sliderMin = _.min(yearList);
+const sliderMax = _.max(yearList);
 const fiscalYearList = _.map(yearList, year => {
-  const yrPlus = _.toString(year + 1);
   const yearString = _.toString(year);
-  return `${yearString}-${yrPlus.substring(yrPlus.length - 2)}`;
+  return `FY${yearString}`;
 });
 const API_ROOT = "http://service.civicpdx.org/budget/";
 const SACodeUrl = `${API_ROOT}code/?code_type=service_area_code&format=json`;
@@ -35,24 +49,23 @@ class CardCollection extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      isLoading: true,
       data: {},
-      currentYear: 2006,
+      currentYear: fiscalYearList[7],
       currentServiceArea: "",
       currentBureau: "",
-      yearList: yearList,
     }
     this.getData = this.getData.bind(this);
     this.getAllData = this.getAllData.bind(this);
     this.onSliderChange = this.onSliderChange.bind(this);
     this.getServiceAreaByFiscalYear = this.getServiceAreaByFiscalYear.bind(this);
     this.getSaSumByFiscalYear = this.getSaSumByFiscalYear.bind(this);
+    this.onServiceAreaSelect = this.onServiceAreaSelect.bind(this);
 
   }
 
-  componentDidMount() {
-    this.getAllData();
-  }
+  // componentDidMount() {
+  //   this.getAllData();
+  // }
 
 
   getServiceAreaByFiscalYear() {
@@ -97,58 +110,67 @@ class CardCollection extends React.Component {
   }
 
   onSliderChange (value) {
-    this.setState({currentYear: value})
+    this.setState({currentYear: `FY${value}`})
   }
 
+  onServiceAreaSelect (value) {
+    this.setState({ currentServiceArea: value});
+  }
 
   render () {
     console.log('state', this.state);
+    console.log('saBubbleData', saBubbleData);
+
     const markObjects = _.map(yearList,
-      year => ({[year]: _.toString(year)})
+      (year, i) => ({[year]: fiscalYearList[i]})
     );
     const marks = Object.assign({}, ...markObjects);
-    const saDataByYear = this.getServiceAreaByFiscalYear()
-    const saNamesByCode = _.map(this.state.data.serviceAreaCodes,
-      sa => ({
-        [sa.code]: sa.description
-      })
-    )
-    // const AreaChartData = _.map(this.state.data.serviceAreas, ())
+
     return (
       <div>
         <StickyContainer>
           <div className="budget-card-collection__intro-hero">
-            <h1>CardCollection here</h1>
-            <p className="collection__intro-hero-text">
+            <h1 className="budget-heading Rubik">Run the Numbers</h1>
+            <p className="budget_card_collection__intro-hero-text">
               Some intro text will go here. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </p>
           </div>
-          <Sticky>
-            <div className="budget-card-collection__sticky-controller">
-              <p>Controller Section: Dropdown or slider by year (10 year time period available) Need: Determine interction point + consider that data might be added in at an additional time (next year). This will be sticky and will apply to all story sections below.</p>
-              <p> Slider is at: {this.state.currentYear}</p>
-              <ReactSlider
-                min={_.min(this.state.yearList)}
-                max={_.max(this.state.yearList)}
-                marks={marks}
-                step={1}
-                included={false}
-                onChange={this.onSliderChange}
-              />
+          <div className="ten-year__wrapper">
+            <h3 className="budget-heading Rubik">10 Years</h3>
+            <h3>City of Portland Service Area Budget</h3>
+            <div className="ten-year__stacked-area-wrapper">
+              <StackedArea width={800} />
             </div>
-          </Sticky>
-          <div className="data-display">
-          <h3>10 Years</h3>
-          <h3>City of Portland Budget</h3>
-          {this.state.data.default === true ? "Error loading data. Sorry." : this.state.data.results }
           </div>
-          <StoryCard title="Overall Budget">
-            <Select
-              name="overall-to-service-area"
-            />
+          <Sticky>
+          <div className="budget-card-collection__sticky-controller">
+          <p>Controller Section: Dropdown or slider by year (10 year time period available) Need: Determine interction point + consider that data might be added in at an additional time (next year). This will be sticky and will apply to all story sections below.</p>
+          <p> Current year: <span className="budget-current-year">{this.state.currentYear}</span></p>
+          <ReactSlider
+          min={sliderMin}
+          max={sliderMax}
+          marks={marks}
+          step={1}
+          included={false}
+          onChange={this.onSliderChange}
+          value={Number(this.state.currentYear.replace('FY', ''))}
+          />
+          </div>
+          </Sticky>
+          <StoryCard
+            title="Budget By Service Area"
+            collectionId="budget"
+            cardId={BUDGET_BY_SERVICE_AREA}>
+            <BubbleChart data={serviceAreaBubbleDataFTW[this.state.currentYear]} />
           </StoryCard>
           <StoryCard title="Budget By Service Area">
-
+            <Select
+            name="service-area-to-bureau"
+            options={serviceAreaOptions}
+            onChange={this.onServiceAreaSelect}
+            cardId={BUDGET_BY_BUREAU}
+            collectionId="budget"
+            />
           </StoryCard>
         </StickyContainer>
       </div>
