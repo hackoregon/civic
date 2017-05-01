@@ -52,8 +52,8 @@ class CardCollection extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      currentYear: fiscalYearList[7],
       data: null,
+      currentYear: fiscalYearList[7], // FY2013
       currentServiceArea: "PS",
       currentBureau: "FR",
     }
