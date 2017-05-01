@@ -12,9 +12,6 @@ const headingStyle = {
   textAlign: 'center',
 };
 
-const pStyle = {
-};
-
 const imgHeadingStyle = {
   backgroundColor: '#eeeeee',
   textAlign: 'center',
@@ -32,11 +29,11 @@ const imgStyle = {
 const TempVoterRegistration = () =>
   <div style={wrapperStyle}>
     <h2 style={headingStyle}>Voter Registration Data</h2>
-    <p style={pStyle}>
+    <p>
       Using 10 years of Multnomah Coount voter registration data, what can we learn about how
       Portland is growing and changing?
     </p>
-    <p style={pStyle}>
+    <p>
       Changes in voter age and location offer surprising insights into how and where Portlanders
       live: Portland is aging, but the age at which citizens register to vote for the first time is
       growing younger. Perhaps in response to rising housing costs, more adults are living in
@@ -45,7 +42,7 @@ const TempVoterRegistration = () =>
     </p>
 
     <h3 style={headingStyle}>An Aging City</h3>
-    <p style={pStyle}>
+    <p>
       For the last ten years, Portland area voters&mdash;like Portlanders as a whole&mdash;have
       been growing older.
     </p>
@@ -54,7 +51,7 @@ const TempVoterRegistration = () =>
       src={`${s3}PortlandAverageAge.png`}
       alt="Average Age of Registered Voters"
     />
-    <p style={pStyle}>
+    <p>
       Studies of all Portlanders (not just voters) see a similar trend. Using Census data,&nbsp;
       <a href="https://www.forbes.com/sites/joelkotkin/2016/02/16/americas-senior-moment-the-most-rapidly-aging-cities/#516f4c9d53e5">
         a 2016 Forbes article
@@ -74,7 +71,7 @@ const TempVoterRegistration = () =>
     </p>
 
     <h3 style={headingStyle}>Trend Toward Shared Households</h3>
-    <p style={pStyle}>
+    <p>
       Perhaps in response to increases in the cost of housing, the percentage of voters sharing a
       household has steadily increased over the last ten years. We define a shared household here
       as four or more registered voters&mdash;by definition, all adults 18 or older&mdash;at the
@@ -87,7 +84,7 @@ const TempVoterRegistration = () =>
     />
 
     <h3 style={headingStyle}>Aging and Sharing</h3>
-    <p style={pStyle}>
+    <p>
       As the number of shared households has increased, so has the age of voters sharing
       households. As this graph shows, the average age of voters sharing households has followed
       the same upward trajectory as the average age of all Portland voters.
@@ -99,7 +96,7 @@ const TempVoterRegistration = () =>
     />
 
     <h3 style={headingStyle}>People Sharing Households are Getting Older</h3>
-    <p style={pStyle}>
+    <p>
       Voters living in shared households, unlike the general population, are more likely to be in
       either their 20s or their 50s. From this we can infer that some of these shared households
       are adult children living with their parents or extended family. Others may be aging parents
@@ -115,7 +112,7 @@ const TempVoterRegistration = () =>
     />
 
     <h3 style={headingStyle}>Intergenerational Households</h3>
-    <p style={pStyle}>
+    <p>
       A review of the average age of each shared household suggests that an increasing number of
       shared households are intergenerational family units, possibly because families are sharing
       households for longer. Over the last ten years, as the previous graph demonstrated, the
@@ -125,7 +122,7 @@ const TempVoterRegistration = () =>
       number that lands squarely between these two age cohorts&mdash;has increased from 37.4 to
       41.7.
     </p>
-    <p style={pStyle}>
+    <p>
       One of the drivers of this trend is young adults living at home longer. According to the&nbsp;
       <a href="http://www.pewsocialtrends.org/2016/05/24/for-first-time-in-modern-era-living-with-parents-edges-out-other-living-arrangements-for-18-to-34-year-olds/#fn-21647-1">
         Pew Research Center
@@ -144,7 +141,7 @@ const TempVoterRegistration = () =>
     />
 
     <h3 style={headingStyle}>The Inner Portland Squeeze</h3>
-    <p style={pStyle}>
+    <p>
       The average age of voters living in shared housing is increasing citywide. When we look at
       the average age of shared households by neighborhood, however, we can see that the age of
       registered voters living in shared housing is not distributed evenly throughout the city.
@@ -164,7 +161,7 @@ const TempVoterRegistration = () =>
     />
 
     <h3 style={headingStyle}>Traveling Youth</h3>
-    <p style={pStyle}>
+    <p>
       Despite rising housing costs many young people are staying in Portland, though they are
       dispersing across the city, whether in search of affordable rentals or because they are
       purchasing a home with suburban amenities. For those young voters who have lived in Portland
@@ -183,7 +180,7 @@ const TempVoterRegistration = () =>
       src={`${s3}YoungPersonMigration.gif`}
       alt="Voters From Four Neighborhoods Who Were 21 in 2006 Have Dispersed Across the City"
     />
-    <p style={pStyle}>
+    <p>
       Even 10 years later, a majority of voters who were 21 in 2006 have remained in Portland.
     </p>
     <img
@@ -193,7 +190,7 @@ const TempVoterRegistration = () =>
     />
 
     <h3 style={headingStyle}>New Voters</h3>
-    <p style={pStyle}>
+    <p>
       An analysis of only new voters shows that in 2008 there were many new voters across all age
       groups. In 2016, by contrast, newly registered voters are overwhelmingly slanted towards
       younger age groups. Further analysis of voting records across Oregon and other states might
