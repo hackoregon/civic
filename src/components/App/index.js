@@ -20,6 +20,7 @@ import {
 import Map from '../Map';
 import DemographicDetailView from '../DemographicDetailView';
 import TempProdVsCost from '../TempProdVsCost';
+import MapLegend from '../MapLegend';
 import styles from './app.styles.css';
 
 import {
@@ -132,6 +133,7 @@ export class App extends React.Component {
             </div>
           </div>
           <div style={mapContainerStyles}>
+            <MapLegend otherDemographicLabel={otherDemographic.label || ''} />
             <div style={mapStyles}>
               <Map
                 neighborhoods={neighborhoodData}
@@ -139,7 +141,7 @@ export class App extends React.Component {
                 activeNeighborhood={demographicData ? demographicData.id : 0}
               />
             </div>
-            <div style={arrowHackStyles}></div>
+            <div style={arrowHackStyles} />
             <div style={tooltipStyles}>
               <DemographicDetailView demographics={demographicData} />
             </div>
