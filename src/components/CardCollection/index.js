@@ -63,6 +63,7 @@ class CardCollection extends React.Component {
     // this.getServiceAreaByFiscalYear = this.getServiceAreaByFiscalYear.bind(this);
     // this.getSaSumByFiscalYear = this.getSaSumByFiscalYear.bind(this);
     this.onServiceAreaSelect = this.onServiceAreaSelect.bind(this);
+    this.onBureauSelect = this.onBureauSelect.bind(this);
 
   }
 
@@ -111,14 +112,16 @@ class CardCollection extends React.Component {
   //   this.getData(bureauCodeUrl, "bureauCodes");
   //   this.getData(bureausUrl, "bureaus");
   // }
+  onBureauSelect (obj) {
+    this.setState({ currentBureau: obj.value})
   }
 
   onSliderChange (value) {
     this.setState({currentYear: `FY${value}`})
   }
 
-  onServiceAreaSelect (value) {
-    this.setState({ currentServiceArea: value});
+  onServiceAreaSelect (obj) {
+    this.setState({ currentServiceArea: obj.value});
   }
 
   render () {
