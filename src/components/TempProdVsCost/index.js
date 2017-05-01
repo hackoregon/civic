@@ -1,4 +1,6 @@
 import React from 'react';
+import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
+
 import LineChart from './LineChart';
 
 import eastData from './east.json';
@@ -23,11 +25,11 @@ const pStyle = {
   marginLeft: 'auto',
   marginRight: 'auto',
   padding: '0 1em',
+  textAlign: 'left',
 };
 
 const TempProdVsCost = () =>
-  <div>
-    <h2 style={headingStyle}>Housing Production and Cost</h2>
+  <StoryCard title="Housing Production and Cost" collectionId="housing" cardId="production-and-cost">
     <p style={pStyle}>
       Over the last ten years, the Portland region has&nbsp;
       <a href="http://www.oregonmetro.gov/news/you-are-here-snapshot-how-were-growing">gained</a>
@@ -80,6 +82,6 @@ const TempProdVsCost = () =>
       data, and consider its implications for our city&nbsp;
       <a href="https://github.com/hackoregon/housing-backend/wiki">here</a>.
     </p>
-  </div>;
+  </StoryCard>;
 
 export default TempProdVsCost;

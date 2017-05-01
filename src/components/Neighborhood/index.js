@@ -3,9 +3,14 @@ import { GeoJSON, LayerGroup } from 'react-leaflet';
 import { crossHatch } from '../CrossHatch';
 import { HOUSING_TEAM_PRIMARY_COLOR } from '../../utils/data-constants';
 
-const NEIGHBORHOOD_OPACITY = 0.8;
-const NOT_AFFORDABLE_COLOR = '#9A9D9F'; // color chosen from the style guide, was contrasted with our primary in a pie chart
-const AFFORDABLE_COLOR = HOUSING_TEAM_PRIMARY_COLOR;
+const NEIGHBORHOOD_OPACITY = 0.6;
+
+/**
+ * The goal is to get affordable to appear like the primary color, but since the layers are
+ * translucent, the colors need to be project to counteract that lightening effect.
+ */
+const NOT_AFFORDABLE_COLOR = HOUSING_TEAM_PRIMARY_COLOR;
+const AFFORDABLE_COLOR = '#05478A';
 
 /**
  * These functions are where we can style the geoJson based on data.
@@ -14,15 +19,15 @@ const AFFORDABLE_COLOR = HOUSING_TEAM_PRIMARY_COLOR;
 const setOtherPathOptions = ({ affordableOther }) => ({
   fillOpacity: affordableOther ? 1 : 0,
   fillPattern: crossHatch,
-  stroke: false,
+  weight: 2,
+  color: '#FFFFFF',
 });
 
 const setYouPathOptions = ({ affordableYou }) => ({
-  opacity: NEIGHBORHOOD_OPACITY,
-  weight: 1,
-  fillOpacity: NEIGHBORHOOD_OPACITY,
+  weight: 2,
+  color: '#FFFFFF',
+  fillOpacity: NEIGHBORHOOD_OPACITY * (affordableYou ? 1 : 0.5),
   fillColor: affordableYou ? AFFORDABLE_COLOR : NOT_AFFORDABLE_COLOR,
-  color: affordableYou ? AFFORDABLE_COLOR : NOT_AFFORDABLE_COLOR,
 });
 
 /**

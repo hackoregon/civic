@@ -7,7 +7,10 @@ import './leafletCrosshatch';
  * Needs to be exported so that the object itself can be used when specifying
  * fillPattern in leaflet Path options (I guess it selects it by some internal id system?)
  */
-export const crossHatch = new L.CrossHatch();
+export const crossHatch = new L.CrossHatch({
+  width: 20,
+  height: 20,
+});
 
 /**
  * React-Leaflet exposes the raw-leaflet map object as context to all child components
