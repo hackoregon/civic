@@ -20,6 +20,7 @@ import {
 import Map from '../Map';
 import DemographicDetailView from '../DemographicDetailView';
 import TempProdVsCost from '../TempProdVsCost';
+import TempVoterRegistration from '../TempVoterRegistration';
 import MapLegend from '../MapLegend';
 import styles from './app.styles.css';
 
@@ -148,6 +149,7 @@ export class App extends React.Component {
           </div>
         </StoryCard>
         <TempProdVsCost />
+        <TempVoterRegistration />
       </div>
     );
   }
