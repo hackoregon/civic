@@ -23,13 +23,13 @@ class SelectorButtons extends Component {
           </Button>
         </div>
         <div style={{ padding: '10px'}}>
-          <Button onClick={() => this.props.selectMap('conflicts')}>
-            Project Conflicts
+          <Button onClick={() => this.props.selectMap('nearby')}>
+            Nearby Projects
           </Button>
         </div>
         <div style={{ padding: '10px'}}>
-          <Button onClick={() => this.props.selectMap('nearby')}>
-            Nearby Projects
+          <Button onClick={() => this.props.selectMap('conflicts')}>
+            Project Conflicts
           </Button>
         </div>
       </div>

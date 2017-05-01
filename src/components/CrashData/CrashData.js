@@ -37,7 +37,7 @@ const dataAge = [
       { name: '75-100 years old', Amount: 12 },
 ];
 const dataTot = [
-      { name: 'Incidents by serverity', 'incidents across all modes': 2135, 'serious injuries across all modes': 123, 'pedestrian fatalities': 105 },
+      { name: 'Incidents by serverity', 'Incidents across all modes': 2135, 'Serious injuries across all modes': 123, 'Pedestrian fatalities': 105 },
 ];
 
 function CrashData(props) {
@@ -51,13 +51,14 @@ function CrashData(props) {
   };
 
   return (
+    
     <Container>
-      <p>
-        How does the traffic fatality number breakdown across the different modes of transportation in Portland?
+      
+      <h1>How does the traffic fatality number breakdown across the different modes of transportation in Portland?</h1>
 
-Hack Oregon partnered with the Portland Bureau of Transportation (PBOT) in support of the Vision Zero project. The mission of Vision Zero is to move Portland toward achieving zero traffic-related fatalities and serious injuries while providing safe and affordable transportation options and multiple opportunities for daily physical activity.
-</p>
-<p>In addition to our partnership with PBOT, we reached out to the Oregon Department of Transportation (ODOT) for the raw crash data* they have for the City of Portland (COP). They gave us a decade of crash data from 2004 through 2014, from which we were able to analyze how many traffic fatalities occurred in Portland across three modes of transportation - vehicle**, bike, and pedestrian. Here’s an overview of what we saw.
+      <p>Hack Oregon partnered with the Portland Bureau of Transportation (PBOT) in support of the Vision Zero project. The mission of Vision Zero is to move Portland toward achieving zero traffic-related fatalities and serious injuries while providing safe and affordable transportation options and multiple opportunities for daily physical activity.
+      </p>
+      <p>In addition to our partnership with PBOT, we reached out to the Oregon Department of Transportation (ODOT) for the raw crash data* they have for the City of Portland (COP). They gave us a decade of crash data from 2004 through 2014, from which we were able to analyze how many traffic fatalities occurred in Portland across three modes of transportation - vehicle**, bike, and pedestrian. Here’s an overview of what we saw.
       </p>
       <StoryCard>
         <p style={{marginTop: "2em"}}>Total number of incidents by mode of transportation for data from ODOT for the years 2004-2014</p>
@@ -117,11 +118,12 @@ Hack Oregon partnered with the Portland Bureau of Transportation (PBOT) in suppo
             <Bar dataKey="Serious injuries across all modes" stackId="a" fill="#ed8f4e" />
             <Bar dataKey="Incidents across all modes" stackId="a" fill="#E87220" />
           </BarChart>
+          <p style={{marginBottom: '2em'}}>This is how many total incidents by severity were reported at the 97 intersections</p>
       </StoryCard>
 
+
       <StoryCard>
-        <img alt={'Bar Chart'} width={500} height={300} src={require('./../Transportation-Assets/barchart.svg')} />
-        <p>This is how many total incidents by severity were reported at the 97 intersections</p>
+        
         <p>Number of pedestrian fatalities by age distribution</p>
         <BarChart width={600} height={300} data={dataAge} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
           <XAxis dataKey="name" />
