@@ -15,11 +15,11 @@ const headingStyle = {
 };
 
 const imgHeadingStyle = {
-  backgroundColor: '#eeeeee',
+  backgroundColor: '#f3f3f3',
   textAlign: 'center',
   fontWeight: 'normal',
   marginBottom: '0',
-  paddingBottom: '2px',
+  padding: '15px 0 2px',
 };
 
 const imgStyle = {
