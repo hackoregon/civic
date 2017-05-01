@@ -55,7 +55,7 @@
     "leaflet": "^1.0.3",
     "query-string": "^4.3.3",
     "ramda": "0.23.0",
-    "react": "15.4.1",
+    "react": "15.5.4",
     "react-dom": "15.4.1",
     "react-leaflet": "^1.1.6",
     "react-redux": "5.0.1",
