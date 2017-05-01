@@ -129,7 +129,7 @@ class CardCollection extends React.Component {
     console.log('saBubbleData', saBubbleData);
 
     const markObjects = _.map(yearList,
-      (year, i) => ({[year]: fiscalYearList[i]})
+      (year, i) => ({[year]: `FY${year}`})
     );
     const marks = Object.assign({}, ...markObjects);
 
