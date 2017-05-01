@@ -4,6 +4,7 @@ import StoryCard from '../StoryCard/StoryCard';
 import '../StoryCard/StoryCard.css';
 import '../StoryCard/StoryFooter.css';
 import '../StoryCard/StoryLink.css';
+import Budget101 from '../Budget101';
 import StackedArea from '../StackedAreaChart';
 import BubbleChart from '../MyTest/BubbleChart';
 import Example from '../Example';
@@ -173,6 +174,7 @@ class CardCollection extends React.Component {
             />
           </StoryCard>
         </StickyContainer>
+          <Budget101 />
       </div>
     )
   }
