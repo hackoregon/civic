@@ -1,11 +1,13 @@
 import React from 'react';
 import isClient from '@hackoregon/civic-server/lib/utils/isClient';
+import { createAsyncComponent } from 'react-async-component';
 // import emergencyRoutes from 'hackoregon-frontend-starter/src/index';
 // import housingRoutes from '@hackoregon/civic-housing';
 // import HousingApp from '@hackoregon/civic-housing';
 import consumeRoutes from '@hackoregon/civic-server/lib/router/consumeRoutes';
 import Shell from '../client/Shell';
 import Collection from './Collection';
+
 // import configureStore from './configureStore';
 
 // import About from './pages/About';
@@ -23,6 +25,13 @@ const NotFoundRoute = {
   path: isClient ? '*' : '.*',
   getComponent(location, cb) {
     cb(null, require('../universal/NotFound').default);
+  },
+};
+
+const HousingRoute = {
+  path: 'collection/housing',
+  getComponent(location, cb) {
+    cb(null, require('@hackoregon/civic-housing').default);
   },
 };
 
@@ -44,13 +53,14 @@ const makePaths = path => ({ path: `/collections/${path}`, name: path });
 const routes = [
   { path: '/',
     name: 'root',
-    // component: createAsyncComponent({ resolve: () => import('./HomePage') }),
+    component: createAsyncComponent({ resolve: () => import('./Home') }),
     // component: import('./HomePage'),
-    getComponent(location, cb) {
-      require.ensure([], (require) => {
-        cb(null, require('./Home').default);
-      });
-    },
+    // component:
+    // getComponent(location, cb) {
+    //   require.ensure([], (require) => {
+    //     cb(null, require('./Home').default);
+    //   });
+    // },
     childRoutes: [
       {
         path: '/collections/:name',
@@ -125,6 +135,7 @@ const civicRoutes = [
   {
     path: 'collections/:name',
     component: Collection,
+    childRoutes: [HousingRoute],
     // },
     // childRoutes: [
     //   { ...makePaths('collections'),
@@ -148,7 +159,7 @@ export default consumeRoutes({
   childRoutes: [
     // routes,
     civicRoutes,
-    // housingRoute,
+    HousingRoute,
     NotFoundRoute,
   ],
 });

@@ -2,7 +2,6 @@ const webpack          = require('webpack');
 const AssetsPlugin     = require('assets-webpack-plugin');
 const autoprefixer     = require('autoprefixer');
 const { resolve }      = require('path');
-// const { compose }      = require('ramda');
 
 const { defaultConfig, composeConfig } = require('@hackoregon/webpacker'); // eslint-disable-line
 
@@ -95,7 +94,6 @@ const config = {
             debug: false,
           })
         ),
-    // isProd && (new webpack.optimize.AggressiveMergingPlugin({})),
     new AssetsPlugin({
       filename: assetFileName,
       prettyPrint: true,

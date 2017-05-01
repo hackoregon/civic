@@ -24,10 +24,6 @@ function getAppSettings(prodDir = 'build', reactLib = 'react') {
   };
 
   const saved = loadSavedAppMode();
-  console.log(saved);
-  if (!srcDir) {
-    console.info('There\'s a new src/build mode that doesn\'t need babel-register.');
-  }
 
   const envKey = 'APP_SRC_DIR';
   return Object.assign({
