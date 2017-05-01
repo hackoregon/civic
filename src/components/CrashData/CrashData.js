@@ -36,6 +36,9 @@ const dataAge = [
       { name: '61-75 years old', Amount: 14 },
       { name: '75-100 years old', Amount: 12 },
 ];
+const dataTot = [
+      { name: 'Incidents by serverity', 'incidents across all modes': 2135, 'serious injuries across all modes': 123, 'pedestrian fatalities': 105 },
+];
 
 function CrashData(props) {
   const captionStyle = {
@@ -94,7 +97,7 @@ Hack Oregon partnered with the Portland Bureau of Transportation (PBOT) in suppo
         </LineChart>
         <p style={captionStyle}>This is the percentage of fatalities per mode of transportation</p>
       </StoryCard>
-      
+
       <div>
         <p>Data Set Notes:</p>
         <p>* When an accident occurs, the police create an accident report which is submitted to the Department of Motor Vehicles (DMV), which is then collected and submitted to the Oregon Department of Transportation (ODOT) - Crash Analysis and Reporting Unit where it is recorded and stored in their crash database for the entire state of Oregon.</p>
@@ -103,6 +106,19 @@ Hack Oregon partnered with the Portland Bureau of Transportation (PBOT) in suppo
       </div>
 
       <h1>97 Intersections</h1>
+      <StoryCard>
+          <BarChart width={600} height={300} data={dataTot} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+            <XAxis dataKey="name" />
+            <YAxis />
+            <CartesianGrid strokeDasharray="3 3" />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="Pedestrian fatalities" stackId="a" fill="#aaa4ab" />
+            <Bar dataKey="Serious injuries across all modes" stackId="a" fill="#ed8f4e" />
+            <Bar dataKey="Incidents across all modes" stackId="a" fill="#E87220" />
+          </BarChart>
+      </StoryCard>
+
       <StoryCard>
         <img alt={'Bar Chart'} width={500} height={300} src={require('./../Transportation-Assets/barchart.svg')} />
         <p>This is how many total incidents by severity were reported at the 97 intersections</p>
