@@ -1,8 +1,10 @@
 import '@hackoregon/component-library/src/global.styles.css';
 
-// eslint-disable-next-line
+/* eslint-disable */
 import '!style-loader!css-loader!@hackoregon/component-library/assets/leaflet.css';
+import '!style-loader!css-loader!@hackoregon/component-library/assets/react-select.min.css';
 
+/* eslint-enable */
 import React from 'react';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { render } from 'react-dom';

@@ -16,6 +16,6 @@ export const fetchRentData = api('/rent', {
     rent_amt,
   })),
   buildParams: state => ({
-    housing_size: getUserUnitSize(state),
+    housing_size: getUserUnitSize(state).value,
   }),
 });

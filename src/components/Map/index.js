@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import LeafletMap from '@hackoregon/component-library/lib/LeafletMap/LeafletMap';
+import { GeoJSON, LayerGroup } from 'react-leaflet';
 import Neighborhood from '../Neighborhood';
 import CrossHatch from '../CrossHatch';
 
@@ -11,7 +12,7 @@ const portlandBounds = [
 const reactLeafletMapProps = {
   bounds: portlandBounds,
   scrollWheelZoom: false,
-  url: 'http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',
+  url: 'http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png',
   attribution: "&copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> &copy; <a href='http://cartodb.com/attributions'>CartoDB</a>",
   subdomains: 'abcd',
 };
@@ -21,8 +22,19 @@ const reactLeafletMapStyle = {
   height: 'auto',
 };
 
-const Map = ({ neighborhoods, onSelect }) => (
-  <div style={reactLeafletMapStyle}>
+const activePathOptions = {
+  fill: false,
+  stroke: true,
+  color: '#ee495c',
+  weight: 3,
+};
+
+const Map = ({ neighborhoods, onSelect, activeNeighborhood }) => {
+  const activeDatum = neighborhoods && activeNeighborhood && neighborhoods.features.find(
+    neighborhood => neighborhood.id === activeNeighborhood,
+  );
+
+  return (<div style={reactLeafletMapStyle}>
     {neighborhoods &&
       <LeafletMap {...reactLeafletMapProps}>
         {neighborhoods.features.map(neighborhood =>
@@ -32,20 +44,27 @@ const Map = ({ neighborhoods, onSelect }) => (
             onSelect={onSelect}
           />,
         )}
+        {activeDatum && (
+          <LayerGroup key={activeDatum.id}>
+            <GeoJSON data={({ features: [activeDatum], type: 'FeatureCollection' })} {...activePathOptions} />
+          </LayerGroup>
+        )}
         <CrossHatch />
       </LeafletMap>
     }
-  </div>
-);
+  </div>);
+};
 
 Map.propTypes = {
   neighborhoods: PropTypes.object,
   onSelect: PropTypes.func,
+  activeNeighborhood: PropTypes.number,
 };
 
 Map.defaultProps = {
   neighborhoods: null,
   onSelect() {},
+  activeNeighborhood: 0,
 };
 
 export default Map;
