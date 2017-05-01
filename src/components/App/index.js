@@ -3,6 +3,8 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import Header from '@hackoregon/component-library/lib/Navigation/Header';
+import Footer from '@hackoregon/component-library/lib/Footer/Footer';
 
 const Container = styled.div`
   min-height: 100%;
@@ -15,6 +17,8 @@ const Container = styled.div`
 function App(props) {
   return (
     <Container>
+      <Header />
+      <Footer />
       {React.Children.toArray(props.children)}
     </Container>
   );
