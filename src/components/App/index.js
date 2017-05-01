@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import Slider from '@hackoregon/component-library/lib/Slider/Slider';
 import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
 import Dropdown from '@hackoregon/component-library/lib/Dropdown/Dropdown';
+import classNames from 'classnames/bind';
 import { fetchAffordabilityData } from '../../state/affordability/actions';
 import { fetchRentData } from '../../state/rent/actions';
 import { fetchNeighborhoods } from '../../state/neighborhoods/actions';
@@ -19,7 +20,7 @@ import {
 import Map from '../Map';
 import DemographicDetailView from '../DemographicDetailView';
 import TempProdVsCost from '../TempProdVsCost';
-import './app.styles.css';
+import styles from './app.styles.css';
 
 import {
   updateOtherUnitSize,
@@ -41,6 +42,10 @@ import {
   MIN_INCOME,
   MAX_INCOME,
 } from '../../utils/data-constants';
+
+const cx = classNames.bind(styles);
+
+const dropdowns = cx({ dropdowns: true });
 
 const parameterGroupStyle = {
   display: 'inline-block',
@@ -81,7 +86,7 @@ export class App extends React.Component {
                 onChange={setUserIncome}
               />
             </div>
-            <div style={parameterGroupStyle}>
+            <div className={dropdowns} style={parameterGroupStyle}>
               <h3>Housing Type </h3>
               <Dropdown
                 value={userUnitSize.value}
