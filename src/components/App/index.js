@@ -19,6 +19,7 @@ import {
 import Map from '../Map';
 import DemographicDetailView from '../DemographicDetailView';
 import TempProdVsCost from '../TempProdVsCost';
+import './app.styles.css';
 
 import {
   updateOtherUnitSize,
@@ -40,6 +41,13 @@ import {
   MIN_INCOME,
   MAX_INCOME,
 } from '../../utils/data-constants';
+
+const parameterGroupStyle = {
+  display: 'inline-block',
+  verticalAlign: 'top',
+  width: '50%',
+  minWidth: '340px',
+};
 
 export class App extends React.Component {
   componentDidMount() {
@@ -63,27 +71,31 @@ export class App extends React.Component {
       <div>
         <StoryCard title="Portland Neighborhood Affordability" collectionId="housing" cardId="affordability-map">
           <p className="description">Compare your income to the average income of common demographics.</p>
-          <strong>Your income: ${userIncome.toFixed(2)}/hr</strong>
-          <Slider
-            min={MIN_INCOME}
-            max={MAX_INCOME}
-            value={userIncome}
-            onChange={setUserIncome}
-          />
-          <strong>Housing Type: </strong>
-          <Dropdown
-            value={userUnitSize.value}
-            onChange={event => setUnitSize(event)}
-            options={HOUSING_TYPES}
-          />
-          <p className="description">
-            <strong>See How Other Portlanders Compare: </strong>
-          </p>
-          <Dropdown
-            value={otherDemographic}
-            onChange={event => setOtherDemographic(event)}
-            options={DEMOGRAPHICS}
-          />
+          <div>
+            <div style={parameterGroupStyle}>
+              <h3>Your income: ${userIncome.toFixed(2)}/hr</h3>
+              <Slider
+                min={MIN_INCOME}
+                max={MAX_INCOME}
+                value={userIncome}
+                onChange={setUserIncome}
+              />
+            </div>
+            <div style={parameterGroupStyle}>
+              <h3>Housing Type </h3>
+              <Dropdown
+                value={userUnitSize.value}
+                onChange={event => setUnitSize(event)}
+                options={HOUSING_TYPES}
+              />
+              <p className="description">See How Other Portlanders Compare</p>
+              <Dropdown
+                value={otherDemographic}
+                onChange={event => setOtherDemographic(event)}
+                options={DEMOGRAPHICS}
+              />
+            </div>
+          </div>
           <Map
             neighborhoods={neighborhoodData}
             onSelect={id => setNeighborhood(id)}

@@ -1,0 +1,4 @@
+/* This is to make sure the dropdown menu appears on top of the leaflet map pane (z-index 400)*/
+div:global(.Select-menu-outer) {
+  z-index: 404;
+}
