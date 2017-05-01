@@ -12,7 +12,7 @@ const portlandBounds = [
 const reactLeafletMapProps = {
   bounds: portlandBounds,
   scrollWheelZoom: false,
-  url: 'http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',
+  url: 'http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png',
   attribution: "&copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> &copy; <a href='http://cartodb.com/attributions'>CartoDB</a>",
   subdomains: 'abcd',
 };
