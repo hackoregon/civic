@@ -3,6 +3,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+// import { withRouter } from 'react-router-dom';
 import Slider from '@hackoregon/component-library/lib/Slider/Slider';
 import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
 import Dropdown from '@hackoregon/component-library/lib/Dropdown/Dropdown';
@@ -23,6 +24,7 @@ import TempProdVsCost from '../TempProdVsCost';
 import TempVoterRegistration from '../TempVoterRegistration';
 import MapLegend from '../MapLegend';
 import styles from './app.styles.css';
+
 
 import {
   updateOtherUnitSize,
@@ -216,14 +218,17 @@ const mapDispatch = dispatch => ({
   },
 });
 
-const mapProps = state => ({
-  neighborhoodData: getCombinedNeighborhoodsData(state),
-  demographicData: getCombinedDemographicData(state),
-  isLoading: isAnyCallPending(state),
-  userIncome: getUserIncome(state),
-  userUnitSize: getUserUnitSize(state),
-  otherDemographic: getOtherDemographic(state),
-  otherUnitSize: getOtherUnitSize(state),
-});
+const mapProps = (state) => {
+  const fromState = state.housing || state;
+  return {
+    neighborhoodData: getCombinedNeighborhoodsData(fromState),
+    demographicData: getCombinedDemographicData(fromState),
+    isLoading: isAnyCallPending(fromState),
+    userIncome: getUserIncome(fromState),
+    userUnitSize: getUserUnitSize(fromState),
+    otherDemographic: getOtherDemographic(fromState),
+    otherUnitSize: getOtherUnitSize(fromState),
+  };
+};
 
 export default connect(mapProps, mapDispatch)(App);
