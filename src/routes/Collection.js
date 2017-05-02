@@ -26,11 +26,12 @@ class Collection extends React.Component {
   }
 
   componentDidMount() {
-    require.ensure([], (require) => {
-      const module = require('@hackoregon/civic-housing/src/components/App').default;
-      this.setState({ rendered: true, module });
-      // return require('@hackoregon/civic-housing/src/components/App');
-    });
+    // require.ensure([], (require) => {
+    //   // const
+    //   // const module = require('@hackoregon/civic-housing/src/components/App').default;
+    //   this.setState({ rendered: true, module });
+    //   // return require('@hackoregon/civic-housing/src/components/App');
+    // });
   }
 
   render() {
