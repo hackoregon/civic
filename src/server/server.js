@@ -4,8 +4,9 @@ const server = require('@hackoregon/civic-server/lib/server/server').default;
 
 global.__DEV__ = process.env.NODE_ENV !== 'production';
 
+const port = __DEV__ ? 3000 : 80;
 const config = {
-  port: 3000,
+  port: 80,
   ssrDisabled: true,
   rootDir: require('app-root-dir').get(),
   appName: require('../../package.json').name,
