@@ -40,6 +40,10 @@ class Collection extends React.Component {
     console.log('isClient', isClient, key);
 
     let HousingApp = () => <div>Loading</div>;
+
+    import('@hackoregon/civic-housing/src/components/App').then((c, v) => {
+      console.log(c, v);
+    });
     if (isClient) {
       require('@hackoregon/component-library/assets/leaflet.css');
       HousingApp = require.ensure([], (require) => {
@@ -47,7 +51,6 @@ class Collection extends React.Component {
         return require('@hackoregon/civic-housing/src/components/App').default;
       });
     }
-    console.log(HousingApp);
     return (
       <div>
         <CollectionHero
@@ -55,8 +58,6 @@ class Collection extends React.Component {
           title={currentProjects[key].title}
           featuredTag={currentProjects[key].featuredTag}
         />
-
-        <div> An app for {key}</div>
         {isClient ?
           <BrowserRouter>
             <div>
@@ -66,13 +67,10 @@ class Collection extends React.Component {
                 <Route path={`${this.props.location.pathname}/home`} component={this.state.module} />
               </Switch>
             </div>
-          </BrowserRouter> : <div>Loading...</div>}
-        {/* {this.props.children} */}
+          </BrowserRouter> : <div>Loading...</div>
+        }
       </div>
     );
   }
 }
-export default connect((state) => {
-  console.log(state);
-  return { housing: state.housing };
-})(Collection);
+export default connect(state => ({ housing: state.housing }))(Collection);
