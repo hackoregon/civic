@@ -1,21 +1,21 @@
 import React from 'react';
 import path from 'path';
 import Helmet from 'react-helmet';
-import fs from 'fs';
+// import fs from 'fs';
 import checkForClient from '@hackoregon/civic-server/lib/utils/checkForClient';
 
 const ROOT = process.cwd();
 // const pathToCss = require.resolve('@hackoregon/component-library/lib/global.styles.css');
-const pathToCss = require.resolve('./ssrCSS.css');
-
-function ssrCSS(p) {
-  try {
-    const cssForHead = fs.readFileSync(p).toString();
-    return `<style>${cssForHead}</style>`;
-  } catch (err) {
-    return '';
-  }
-}
+// const pathToCss = require.resolve('./ssrCSS.css');
+//
+// function ssrCSS(p) {
+//   try {
+//     const cssForHead = fs.readFileSync(p).toString();
+//     return `<style>${cssForHead}</style>`;
+//   } catch (err) {
+//     return '';
+//   }
+// }
 
 const staticServerAddr = 'http://localhost:3001/public';
 const makeScript = js => `<script src="${staticServerAddr}/${js}"></script>`;
@@ -24,7 +24,7 @@ const makeLink = css => `<link rel="stylesheet" href="${staticServerAddr}/${css}
 function htmlShell(serializedStore, innerHtml, assets) {
   // console.log(vendor, app, main);
 
-  const hideUnstyledContent = ssrCSS(pathToCss);
+  // const hideUnstyledContent = ssrCSS(pathToCss);
 
   const head = Helmet.rewind();
 
@@ -41,7 +41,6 @@ function htmlShell(serializedStore, innerHtml, assets) {
     ${head.title ? head.title.toString() : ''}
     ${head.meta ? head.meta.toString() : ''}
     ${head.link ? head.link.toString() : ''}
-    ${hideUnstyledContent}
     ${csses}
     <script src="https://use.fontawesome.com/031ebbe0c7.js"></script>
     <script id="initial-state">window.INITIAL_REDUX_STATE=${serializedStore}</script>
