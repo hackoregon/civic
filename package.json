@@ -38,7 +38,7 @@
     "show:coverage": "npm run test:cover && open coverage/index.html"
   },
   "dependencies": {
-    "@hackoregon/component-library": "^0.2.1",
+    "@hackoregon/component-library": "^0.2.5",
     "babel-polyfill": "6.22.0",
     "compression": "1.6.2",
     "cross-env": "3.1.3",

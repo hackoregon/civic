@@ -3,6 +3,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import CardCollection from '../CardCollection';
 import Header from '@hackoregon/component-library/lib/Navigation/Header';
 import Footer from '@hackoregon/component-library/lib/Footer/Footer';
 
@@ -18,15 +19,15 @@ function App(props) {
   return (
     <Container>
       <Header />
-      <Footer />
       {React.Children.toArray(props.children)}
+      <Footer />
     </Container>
   );
 }
 
 App.displayName = 'App';
 App.defaultProps = {
-  children: <div />,
+  children: <CardCollection />,
 };
 
 App.propTypes = {

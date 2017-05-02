@@ -35,7 +35,7 @@ const StackedAreaChart = (props) => {
         <Tooltip
           itemStyle={{ color: '#339963', textAlign: 'left' }}
           labelStyle={{ color: 'black' }}
-          wrapperStyle={{ border: '2px solid #000',  borderRadius: '5px' }}
+          wrapperStyle={{ border: '1px solid #706371',  borderRadius: '5px' }}
         />
       </AreaChart>
     </div>

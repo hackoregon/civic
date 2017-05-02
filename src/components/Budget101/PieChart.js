@@ -16,7 +16,7 @@ const BudgetPie = () => {
   const COLORS = ['#d7ece5', '#afd8cb', '#73bba4', '#73bba4', '#4ba78a', '#4ba78a', '#389E7D'];
 
   return (
-    <PieChart width={800} height={400}>
+    <PieChart width={500} height={400}>
       <Pie
         data={data}
         cx={300}
