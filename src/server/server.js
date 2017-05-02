@@ -6,6 +6,7 @@ global.__DEV__ = process.env.NODE_ENV !== 'production';
 
 const config = {
   port: 3000,
+  ssrDisabled: true,
   rootDir: require('app-root-dir').get(),
   appName: require('../../package.json').name,
   version: require('../../package.json').version,

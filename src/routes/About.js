@@ -1,9 +1,11 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import Header from '@hackoregon/component-library/lib/Navigation/Header';
 import Footer from '@hackoregon/component-library/lib/Footer/Footer';
 import '@hackoregon/component-library/lib/global.styles.css';
 
-const App = ({ children }) => {
+import AboutPage from '../client/views/AboutPage';
+
+const About = () => {
   const navItems = [
     {
       name: 'Collections',
@@ -21,17 +23,9 @@ const App = ({ children }) => {
   return (
     <div>
       <Header title="Civic" menu={navItems} />
-      {children}
+      <AboutPage />
       <Footer />
     </div>);
 };
 
-App.propTypes = {
-  children: PropTypes.node,
-};
-
-App.defaultProps = {
-  children: null,
-};
-
-export default App;
+export default About;

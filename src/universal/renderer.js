@@ -45,7 +45,6 @@ function htmlShell(serializedStore, innerHtml, assets) {
     ${csses}
     <script src="https://use.fontawesome.com/031ebbe0c7.js"></script>
     <script id="initial-state">window.INITIAL_REDUX_STATE=${serializedStore}</script>
-    ${makeScript(assets.chunks.vendor[0])}
   `;
 
   return (`

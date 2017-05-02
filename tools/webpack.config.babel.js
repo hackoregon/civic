@@ -1,14 +1,9 @@
-import webpack from 'webpack';
-import AssetsPlugin from 'assets-webpack-plugin';
-import autoprefixer from 'autoprefixer';
-import { resolve } from 'path';
-import { compose } from 'ramda';
+const webpack          = require('webpack');
+const AssetsPlugin     = require('assets-webpack-plugin');
+const autoprefixer     = require('autoprefixer');
+const { resolve }      = require('path');
 
-const babelConfig      = require('./babel');
-const defineConfig     = require('./define');
-const fontsConfig      = require('./fonts');
-const imageConfig      = require('./images');
-const stylesConfig     = require('./styles');
+const { defaultConfig, composeConfig } = require('@hackoregon/webpacker'); // eslint-disable-line
 
 const PUBLIC_PARAM     = 'public';
 const REAL_ROOT        = resolve(__dirname, '..');
@@ -37,13 +32,36 @@ const config = {
       // resolve(SRC_PATH, 'webpack-public-path'),
       resolve(SRC_PATH, 'client/index.js'),
     ],
-    vendor: [
-      'react',
-      'react-dom',
-      'react-helmet',
-      'react-redux',
-      'react-router',
-      'leaflet',
+    // vendor: [
+    //   'react',
+    //   'react-dom',
+    //   'react-helmet',
+    //   'react-redux',
+    //   'react-router',
+    //   'leaflet',
+    // ],
+  },
+  module: {
+    rules: [
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: {
+          presets: [
+            'react',
+            'stage-1',
+                  ['es2015', { modules: false }],
+          ],
+          plugins: [
+            'transform-regenerator',
+            'transform-object-rest-spread',
+            'transform-es2015-destructuring',
+            'transform-class-properties',
+            'syntax-dynamic-import',
+          ],
+        },
+      },
     ],
   },
   output: {
@@ -56,23 +74,19 @@ const config = {
     new IsomorphicLoaderPlugin({
       keepExistingConfig: false,
       assetsFile: 'isomorphic-assets.json',
-      // webpackDev: {
-      //   url: `http://${archetype.webpack.devHostname}:${archetype.webpack.devPort}`,
-      //   addUrl: false,
-      // },
     }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      chunks: ['app'],
-      filename: 'js/[name].bundle.js',
-      minChunks: ({ resource }) => /node_modules/.test(resource),
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor-css',
-      chunks: ['app'],
-      filename: 'css/[name].[chunkHash].css',
-      minChunks: ({ resource }) => /node_modules/.test(resource),
-    }),
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   name: 'vendor',
+    //   chunks: ['app'],
+    //   filename: 'js/[name].bundle.js',
+    //   minChunks: ({ resource }) => /node_modules/.test(resource),
+    // }),
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   name: 'vendor-css',
+    //   chunks: ['app'],
+    //   filename: 'css/[name].[chunkHash].css',
+    //   minChunks: ({ resource }) => /node_modules/.test(resource),
+    // }),
     new webpack.LoaderOptionsPlugin({ options: { postcss: [autoprefixer] } }),
     isProd && (
           new webpack.LoaderOptionsPlugin({
@@ -80,7 +94,6 @@ const config = {
             debug: false,
           })
         ),
-    // isProd && (new webpack.optimize.AggressiveMergingPlugin({})),
     new AssetsPlugin({
       filename: assetFileName,
       prettyPrint: true,
@@ -89,12 +102,9 @@ const config = {
   ]),
 };
 
-const webpackConfig = compose(
-  babelConfig(),
-  stylesConfig(),
-  defineConfig(),
-  fontsConfig(),
-  imageConfig(),
-)(config);
+const webpackConfig = composeConfig(
+  defaultConfig,
+  config,
+);
 
 export default webpackConfig;
