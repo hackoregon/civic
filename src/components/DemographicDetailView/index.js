@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import RechartsPie from '@hackoregon/component-library/lib/RechartsPie/RechartsPie';
+import commaSeparate from '../../utils/comma-separate';
 
 const colors = ['#3e75ac', '#4c8ccd', '#68a3df', '#87baed', '#abd1f7', '#d3e8fd'];
 
@@ -73,9 +74,9 @@ const DemographicDetailView = ({ demographics }) => {
           <div style={contentBlockStyle}>
             <h3 style={textAlignCenter}>Household Totals</h3>
             <div style={numberColumnStyle}>
-              <p style={numberStyle}>{demographics.households['Households']}</p>
-              <p style={numberStyle}>{demographics.households['Single-Person']}</p>
-              <p style={numberStyle}>{demographics.households['Households with Children']}</p>
+              <p style={numberStyle}>{commaSeparate(demographics.households['Households'])}</p>
+              <p style={numberStyle}>{commaSeparate(demographics.households['Single-Person'])}</p>
+              <p style={numberStyle}>{commaSeparate(demographics.households['Households with Children'])}</p>
             </div>
             <div style={labelColumnStyle}>
               <p>Total Households</p>
@@ -86,9 +87,9 @@ const DemographicDetailView = ({ demographics }) => {
           <div style={contentBlockStyle}>
             <h3 style={textAlignCenter}>Vulnerable Populations</h3>
             <div style={numberColumnStyle}>
-              <p style={numberStyle}>{demographics.households['Foreign-Born Individuals']}</p>
-              <p style={numberStyle}>{demographics.households['Persons Exp-Disabilities']}</p>
-              <p style={numberStyle}>{demographics.households['Persons 65 and Older']}</p>
+              <p style={numberStyle}>{commaSeparate(demographics.households['Foreign-Born Individuals'])}</p>
+              <p style={numberStyle}>{commaSeparate(demographics.households['Persons Exp-Disabilities'])}</p>
+              <p style={numberStyle}>{commaSeparate(demographics.households['Persons 65 and Older'])}</p>
             </div>
             <div style={labelColumnStyle}>
               <p>Foreign Born</p>
