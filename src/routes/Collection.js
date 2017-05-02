@@ -34,15 +34,15 @@ class Collection extends React.Component {
   }
 
   render() {
-    let HousingApp = () => <div>Loading</div>;
+    const HousingApp = () => <div>Loading</div>;
 
     import('@hackoregon/civic-housing/src/components/App').then((c, v) => {
       console.log(c, v);
     });
-    if (isClient) {
-      require('@hackoregon/component-library/assets/leaflet.css');
-      HousingApp = require.ensure([], require => require('@hackoregon/civic-housing/src/components/App').default);
-    }
+    // if (isClient) {
+    //   require('@hackoregon/component-library/assets/leaflet.css');
+    //   HousingApp = require.ensure([], require => require('@hackoregon/civic-housing/src/components/App').default);
+    // }
     return (
       <div>
         <CollectionHero
@@ -50,7 +50,7 @@ class Collection extends React.Component {
           title={currentProjects[key].title}
           featuredTag={currentProjects[key].featuredTag}
         />
-        {isClient ?
+        {/* {isClient ?
           <BrowserRouter>
             <div>
               <h1>HOUSING</h1>
@@ -60,7 +60,7 @@ class Collection extends React.Component {
               </Switch>
             </div>
           </BrowserRouter> : <div>Loading...</div>
-        }
+        } */}
       </div>
     );
   }

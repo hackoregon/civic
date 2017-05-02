@@ -28,12 +28,12 @@ const NotFoundRoute = {
   },
 };
 
-const HousingRoute = {
-  path: 'collection/housing',
-  getComponent(location, cb) {
-    cb(null, require('@hackoregon/civic-housing').default);
-  },
-};
+// const HousingRoute = {
+//   path: 'collection/housing',
+//   getComponent(location, cb) {
+//     cb(null, require('@hackoregon/civic-housing').default);
+//   },
+// };
 
 // const housingRoute = require('@hackoregon/civic-housing').default;
 // const HousingRoutes = {
@@ -135,7 +135,6 @@ const civicRoutes = [
   {
     path: 'collections/:name',
     component: Collection,
-    childRoutes: [HousingRoute],
     // },
     // childRoutes: [
     //   { ...makePaths('collections'),
@@ -159,7 +158,7 @@ export default consumeRoutes({
   childRoutes: [
     // routes,
     civicRoutes,
-    HousingRoute,
+    // HousingRoute,
     NotFoundRoute,
   ],
 });
