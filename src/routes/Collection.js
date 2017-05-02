@@ -27,7 +27,6 @@ class Collection extends React.Component {
 
   componentDidMount() {
     require.ensure([], (require) => {
-      console.log('consoled', this.props.location.pathname);
       const module = require('@hackoregon/civic-housing/src/components/App').default;
       this.setState({ rendered: true, module });
       // return require('@hackoregon/civic-housing/src/components/App');
@@ -35,10 +34,6 @@ class Collection extends React.Component {
   }
 
   render() {
-    console.log(this.props, this.state, this.context);
-    const key = this.props.params.name;
-    console.log('isClient', isClient, key);
-
     let HousingApp = () => <div>Loading</div>;
 
     import('@hackoregon/civic-housing/src/components/App').then((c, v) => {
@@ -46,10 +41,7 @@ class Collection extends React.Component {
     });
     if (isClient) {
       require('@hackoregon/component-library/assets/leaflet.css');
-      HousingApp = require.ensure([], (require) => {
-        console.log('consoled', this.props.location.pathname);
-        return require('@hackoregon/civic-housing/src/components/App').default;
-      });
+      HousingApp = require.ensure([], require => require('@hackoregon/civic-housing/src/components/App').default);
     }
     return (
       <div>
