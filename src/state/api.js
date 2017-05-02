@@ -1,6 +1,6 @@
 import qs from 'query-string';
 
-export const API_HOST = 'http://service.civicpdx.org/housing';
+export const API_HOST = 'http://service.civicpdx.com/housing';
 
 // const makeCall = (url, dispatch, { normalizer, start, success, fail }) => fetch(url)
 //   .then((res) => {
