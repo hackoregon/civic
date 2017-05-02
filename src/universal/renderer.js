@@ -17,7 +17,7 @@ const ROOT = process.cwd();
 //   }
 // }
 
-const staticServerAddr = 'http://localhost:3001/public';
+const staticServerAddr = 'http://civicpdx.org:8080/public';
 const makeScript = js => `<script src="${staticServerAddr}/${js}"></script>`;
 const makeLink = css => `<link rel="stylesheet" href="${staticServerAddr}/${css}">`;
 
