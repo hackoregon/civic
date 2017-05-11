@@ -106,12 +106,12 @@ class CardCollection extends React.Component {
   //   })
   // }
   //
-  // getAllData () {
-  //   this.getData(SACodeUrl, "serviceAreaCodes");
-  //   this.getData(serviceAreaUrl, "serviceAreas");
-  //   this.getData(bureauCodeUrl, "bureauCodes");
-  //   this.getData(bureausUrl, "bureaus");
-  // }
+  getAllData () {
+    this.getData(SACodeUrl, "serviceAreaCodes");
+    this.getData(serviceAreaUrl, "serviceAreas");
+    this.getData(bureauCodeUrl, "bureauCodes");
+    this.getData(bureausUrl, "bureaus");
+  }
   onBureauSelect (obj) {
     this.setState({ currentBureau: obj.value})
   }
