@@ -1,4 +1,6 @@
-## Hack OR Front-End Starter
+## Emergency Response Front-end
+
+[![Build Status](https://travis-ci.org/hackoregon/emergency-response-frontend.svg?branch=master)](https://travis-ci.org/hackoregon/emergency-response-frontend)
 
 This is a starter kit for Hack Oregon front-end development using React + Redux.
 This repo should help get started and keep the different projects aligned.
