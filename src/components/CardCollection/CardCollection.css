@@ -45,3 +45,9 @@
 .budget-current-year {
   font-weight: bold;
 }
+
+.rc-slider {
+  width: 93%;
+  display: block;
+  margin: 0 auto;
+}
