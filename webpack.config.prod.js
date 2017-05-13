@@ -4,6 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const { resolve } = require('path');
 const WebpackMd5Hash = require('webpack-md5-hash');
+// need to require.resolve to get absolute path
+const babelLoader = require.resolve('babel-loader');
 
 const commitSha = require('child_process').execSync('git rev-parse --short HEAD').toString().trim();
 const { defaultConfig, composeConfig } = require('@hackoregon/webpacker');
@@ -54,8 +56,9 @@ const config = {
     rules: [
       {
         test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
+        // exclude: /node_modules/,
+        include: resolve(__dirname, 'src'),
+        loader: babelLoader,
         query: {
           presets: [
             'react',
@@ -68,13 +71,11 @@ const config = {
           ],
           plugins: ['transform-regenerator', 'transform-object-rest-spread', 'transform-es2015-destructuring', 'transform-class-properties', 'syntax-dynamic-import'],
         },
-      }, {
-        test: /\.svg(\?v=\d+.\d+.\d+)?$/,
-        loader: 'url-loader?limit=10000&mimetype=image/svg+xml&name=[name].[ext]',
-      }, {
-        test: /\.json$/,
-        loader: 'json-loader',
       },
+// {
+//         test: /\.svg(\?v=\d+.\d+.\d+)?$/,
+//         loader: 'url-loader?limit=10000&mimetype=image/svg+xml&name=[name].[ext]',
+//       }
     ],
   },
 };
