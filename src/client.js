@@ -1,5 +1,4 @@
 import '@hackoregon/component-library/src/global.styles.css';
-
 /* eslint-disable */
 import '!style-loader!css-loader!@hackoregon/component-library/assets/leaflet.css';
 import '!style-loader!css-loader!@hackoregon/component-library/assets/react-select.min.css';
