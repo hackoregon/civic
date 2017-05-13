@@ -25,7 +25,6 @@
     "start": "npm-run-all --parallel test:watch start:dev lint:watch",
     "lint": "esw src tools server webpack.config.* --color",
     "lint:watch": "npm run lint -- --watch",
-    "prebuild": "npm run clean && npm run lint && npm run test",
     "build": "babel-node tools/build.js",
     "jinn": "jinn",
     "analyze": "babel-node ./tools/analyzeBundle.js",
