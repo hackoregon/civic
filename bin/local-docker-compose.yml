@@ -1,0 +1,13 @@
+version: "2"
+services:
+  civic-service:
+    environment:
+    - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+    - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+    - DEPLOY_TARGET=${DEPLOY_TARGET}
+    build: .
+    command: /code/bin/docker-entrypoint.sh
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
