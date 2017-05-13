@@ -1,0 +1,9 @@
+sudo: required
+services:
+  - docker
+install:
+  - pip install --upgrade --user awscli
+script:
+  - './bin/test-proj.sh -t'
+after_success:
+  - ./bin/docker-push.sh
