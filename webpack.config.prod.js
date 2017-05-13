@@ -42,7 +42,6 @@ const config = {
       commitSha,
     }),
     new webpack.LoaderOptionsPlugin({ options: { postcss: [autoprefixer] } }),
-    // new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         drop_console: true,
