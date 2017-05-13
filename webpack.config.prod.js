@@ -17,7 +17,7 @@ const config = {
   output: {
     path: resolve(__dirname, 'build'),
     publicPath: '/',
-    filename: '[name].[chunkhash].js',
+    filename: '[name].js',
   },
   plugins: [
     new WebpackMd5Hash(),
