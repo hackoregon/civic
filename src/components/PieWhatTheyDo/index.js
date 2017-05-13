@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ErPieChart } from '../index';
+import ErPieChart from '../ErPieChart/index';
 
 const data = [
   { name: 'Medical', value: 71.9 },
