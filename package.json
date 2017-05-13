@@ -1,6 +1,6 @@
 {
   "name": "@hackoregon/civic-housing",
-  "version": "0.1.5-beta-0",
+  "version": "0.1.5-beta-1",
   "description": "Civic/Housing 2017",
   "main": "src/index.js",
   "contributors": [
