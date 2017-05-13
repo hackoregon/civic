@@ -1,0 +1,14 @@
+*.log*
+lib-cov
+coverage
+.lock-wscript
+
+reports
+src
+.idea
+.DS_Store
+*.yml
+*.pdf
+webpack.config.dev.js
+yarn.lock
+*.md
