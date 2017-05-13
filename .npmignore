@@ -4,7 +4,7 @@ coverage
 .lock-wscript
 
 reports
-src
+tools
 .idea
 .DS_Store
 *.yml
@@ -12,3 +12,4 @@ src
 webpack.config.dev.js
 yarn.lock
 *.md
+*.opts
