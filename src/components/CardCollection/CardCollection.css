@@ -31,6 +31,7 @@
   margin-top: 2rem;
   max-width: 800px;
   border: 2px solid #aaa4ab;
+  z-index: -1; /* puts card children behind sticky controller */
 }
 
 .Card .Title.Rubik {
