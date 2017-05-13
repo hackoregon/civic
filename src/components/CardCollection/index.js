@@ -134,8 +134,8 @@ class CardCollection extends React.Component {
     const marks = Object.assign({}, ...markObjects);
 
     return (
-      <div>
-        <StickyContainer>
+      <div className="budget-card-collection">
+        <StickyContainer className="budget-card-collection__sticky-container">
           <div className="budget-card-collection__intro-hero">
             <h1 className="budget-heading Rubik">Run the Numbers</h1>
             <p className="budget_card_collection__intro-hero-text">
