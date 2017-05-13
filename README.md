@@ -1,5 +1,7 @@
 ## Team Budget Front-End
 
+[![Build Status](https://travis-ci.org/hackoregon/team-budget-frontend.svg?branch=master)](https://travis-ci.org/hackoregon/team-budget-frontend)
+
 ### Guide
 1. Get [Node 6.5 +](https://nodejs.org) - We recommend using [Node Version Manager](https://github.com/creationix/nvm#install-script).
 2. `git clone https://github.com/hackoregon/team-budget-frontend.git`.
