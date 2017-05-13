@@ -28,6 +28,7 @@ const NotFoundRoute = {
   },
 };
 
+const getHousingRoute = () => import('@hackoregon/civic-housing');
 // const HousingRoute = {
 //   path: 'collection/housing',
 //   getComponent(location, cb) {

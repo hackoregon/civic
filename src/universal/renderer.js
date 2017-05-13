@@ -5,6 +5,13 @@ import Helmet from 'react-helmet';
 import checkForClient from '@hackoregon/civic-server/lib/utils/checkForClient';
 
 const ROOT = process.cwd();
+// const staticServerAddr = process.env.NODE_ENV !== 'production'
+//   ? 'http://localhost:3000/public'
+//   : 'http://civicpdx.org:8080/public';
+const staticServerAddr = 'http://localhost:3001/public';
+  // ? 'http://localhost:3001/public'
+  // : 'http://civicpdx.org:8080/public';
+
 // const pathToCss = require.resolve('@hackoregon/component-library/lib/global.styles.css');
 // const pathToCss = require.resolve('./ssrCSS.css');
 //
@@ -17,15 +24,11 @@ const ROOT = process.cwd();
 //   }
 // }
 
-const staticServerAddr = 'http://civicpdx.org:8080/public';
+
 const makeScript = js => `<script src="${staticServerAddr}/${js}"></script>`;
 const makeLink = css => `<link rel="stylesheet" href="${staticServerAddr}/${css}">`;
 
 function htmlShell(serializedStore, innerHtml, assets) {
-  // console.log(vendor, app, main);
-
-  // const hideUnstyledContent = ssrCSS(pathToCss);
-
   const head = Helmet.rewind();
 
   const javascripts = `

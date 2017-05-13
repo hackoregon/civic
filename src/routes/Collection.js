@@ -40,6 +40,8 @@ class Collection extends React.Component {
     // import('@hackoregon/civic-housing/src/components/App').then((c, v) => {
     //   console.log(c, v);
     // });
+    console.log(this.props);
+    const key = this.props.params.name;
     // if (isClient) {
     //   require('@hackoregon/component-library/assets/leaflet.css');
     //   HousingApp = require.ensure([], require => require('@hackoregon/civic-housing/src/components/App').default);

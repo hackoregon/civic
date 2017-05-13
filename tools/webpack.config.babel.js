@@ -14,7 +14,10 @@ const env              = process.env.NODE_ENV;
 const isDev            = env === 'development';
 const isProd           = env === 'production';
 const assetFileName    = 'civic-assets.json';
-const staticServerAddr = `http://civicpdx.org:8080/${PUBLIC_PARAM}/`;
+
+const staticServerAddr = process.env.NODE_ENV !== 'production'
+  ? `http://localhost:3000/${PUBLIC_PARAM}/`
+  : `http://civicpdx.org:8080/${PUBLIC_PARAM}/`;
 
 const removeEmpty = arr => arr.filter(item => !!item);
 const IsomorphicLoaderPlugin = require('isomorphic-loader/lib/webpack-plugin');

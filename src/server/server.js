@@ -4,7 +4,7 @@ const server = require('@hackoregon/civic-server/lib/server/server').default;
 
 global.__DEV__ = process.env.NODE_ENV !== 'production';
 
-const port = __DEV__ ? 3000 : 80;
+const port = 3000;
 const config = {
   port,
   ssrDisabled: true,
@@ -16,4 +16,4 @@ const config = {
   NotFoundComponent: require('../universal/NotFound').default,
 };
 
-server(config).startServer();
+// server(config).startServer();
