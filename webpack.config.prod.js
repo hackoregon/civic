@@ -4,7 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const { resolve } = require('path');
 const WebpackMd5Hash = require('webpack-md5-hash');
-// need to require.resolve to get absolute path
+
+// NOTE: need to require.resolve to get absolute path
 const babelLoader = require.resolve('babel-loader');
 
 const commitSha = require('child_process').execSync('git rev-parse --short HEAD').toString().trim();
@@ -17,7 +18,7 @@ const config = {
   devtool: 'source-map',
   target: 'web',
   output: {
-    path: resolve(__dirname, 'build'),
+    path: resolve(__dirname, 'dist'),
     publicPath: '/housing/',
     filename: '[name].js',
   },
@@ -28,7 +29,6 @@ const config = {
       template: 'src/template.ejs',
       minify: {
         removeComments: true,
-        collapseWhitespace: true,
         removeRedundantAttributes: true,
         useShortDoctype: true,
         removeEmptyAttributes: true,
@@ -46,17 +46,11 @@ const config = {
       },
     }),
     new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', minChunks: Infinity }),
-    // new ManifestPlugin(),
-    // new ChunkManifestPlugin({
-    //   filename: 'chunk-manifest.json',
-    //   manifestVariable: 'webpackManifest',
-    // }),
   ],
   module: {
     rules: [
       {
         test: /\.jsx?$/,
-        // exclude: /node_modules/,
         include: resolve(__dirname, 'src'),
         loader: babelLoader,
         query: {
@@ -72,10 +66,6 @@ const config = {
           plugins: ['transform-regenerator', 'transform-object-rest-spread', 'transform-es2015-destructuring', 'transform-class-properties', 'syntax-dynamic-import'],
         },
       },
-// {
-//         test: /\.svg(\?v=\d+.\d+.\d+)?$/,
-//         loader: 'url-loader?limit=10000&mimetype=image/svg+xml&name=[name].[ext]',
-//       }
     ],
   },
 };
