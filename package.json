@@ -1,6 +1,6 @@
 {
   "name": "@hackoregon/civic-housing",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Civic/Housing 2017",
   "main": "src/index.js",
   "contributors": [
@@ -92,7 +92,6 @@
     "postcss-loader": "1.2.1",
     "webpack": "^2.5.1",
     "json-loader": "0.5.4",
-    "css-loader": "0.26.1",
     "webpack-md5-hash": "0.0.5"
   },
   "devDependencies": {
