@@ -61,11 +61,7 @@ module.exports = {
       { test: /\.ico$/, loader: 'file?name=[name].[ext]' },
       // { test: /(\.css|\.scss)$/, loaders: ['style', 'css?sourceMap', 'postcss'] },
       { test: /\.json$/, loader: 'json' },
-      {
-        test: /\.css$/,
-        // exclude: [path.resolve(__dirname, 'node_modules'), /assets\/.*\.css$/],
-        loader: `style-loader!css-loader?modules&importLoaders=1&localIdentName=${className}!postcss-loader`,
-      },
+      { test: /(\.css|\.scss)$/, loaders: ['style', 'css?sourceMap', 'postcss'] },
       {
         test: /leaflet\.css$/,
         // exclude: [path.resolve(__dirname, 'node_modules'), path.resolve(__dirname, '../src/assets')],
