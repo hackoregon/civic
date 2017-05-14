@@ -12,6 +12,6 @@ deploy:
   access_key_id: "${AWS_ACCESS_KEY}"
   secret_access_key: "${AWS_SECRET_KEY}"
   region: us-west-2
-  bucket: hacko-emergency-response-staging
+  bucket: emergency-response.civicpdx.org
   skip_cleanup: true
   local_dir: build
