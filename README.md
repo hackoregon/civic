@@ -1,5 +1,7 @@
 ## Hack OR Front-End Starter
 
+[![Build Status](https://travis-ci.org/hackoregon/transportation-frontend2.svg?branch=master)](https://travis-ci.org/hackoregon/transportation-frontend2)
+
 This is a starter kit for Hack Oregon front-end development using React + Redux.
 This repo should help get started and keep the different projects aligned.
 
