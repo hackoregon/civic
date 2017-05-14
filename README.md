@@ -8,22 +8,22 @@
 
 ```bash
 nvm use
-yarn install
-yarn build
-yarn build:server
+npm install
+npm run build
+npm run build:server
 ```
 
 ## Develop
 
 ```bash
-yarn go
+npm run go
 # http://localhost:3000/civic
 ```
 
 ## Test
 
 ```bash
-yarn test
+npm test
 ```
 
 ## Deploy
