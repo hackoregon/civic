@@ -16,7 +16,7 @@ const isProd           = env === 'production';
 const assetFileName    = 'civic-assets.json';
 
 const staticServerAddr = process.env.NODE_ENV !== 'production'
-  ? `http://localhost:3000/${PUBLIC_PARAM}/`
+  ? `http://localhost:3001/${PUBLIC_PARAM}/`
   : `http://civicpdx.org:8080/${PUBLIC_PARAM}/`;
 
 const removeEmpty = arr => arr.filter(item => !!item);
