@@ -4,7 +4,7 @@ import { LayerGroup, GeoJSON } from 'react-leaflet';
 import { isEmpty } from 'ramda';
 import { connect } from 'react-redux';
 import { getFmasThunk, getFmasData, renderFmaPanelProperties, getFmaPanelData } from '../../state';
-import { MapPanel } from '../index';
+import MapPanel from '../MapPanel/index';
 
 const portland = [45.52, -122.67];
 

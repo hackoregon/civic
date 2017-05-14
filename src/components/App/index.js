@@ -2,7 +2,7 @@
 // This should probably be the core component, containing, nav etc
 import React from 'react';
 import styled from 'styled-components';
-import Header from '@hackoregon/component-library/lib/Navigation/Header';
+// import Header from '@hackoregon/component-library/lib/Navigation/Header';
 import Footer from '@hackoregon/component-library/lib/Footer/Footer';
 import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
 // import HowWhenBusy from '@hackoregon/component-library/lib/er-components/HowWhenBusy/HowWhenBusy';
@@ -10,8 +10,11 @@ import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
 // import BarChart from '@hackoregon/component-library/lib/BarChart/BarChart';
 // import LeafletMap from '@hackoregon/component-library/lib/LeafletMap/LeafletMap';
 // import { Marker, Popup } from 'react-leaflet';
-import { BagelShop, FmaMap, PieWhatTheyDo } from '../index';
-import { HowWhenBusy, ResponseTimeVaries } from '../index';
+import BagelShop from '../BagelShop/index';
+import FmaMap from '../FmaMap/index';
+import PieWhatTheyDo from '../PieWhatTheyDo/index';
+import HowWhenBusy from '../HowWhenBusy/index';
+import ResponseTimeVaries from '../ResponseTimeVaries/index';
 
 const Container = styled.div`
   min-height: 100%;
@@ -23,7 +26,6 @@ const Container = styled.div`
 function App(props) {
   return (
     <Container>
-      <Header />
       <StoryCard title="What Does Portland Fire &amp; Rescue Do?" collectionId="emergency-response" cardId="what-they-do">
         <p className="Description">
           Surprisingly, the vast majority (71.9%) of calls Portland Fire & Rescue
