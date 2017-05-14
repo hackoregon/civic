@@ -1,15 +1,12 @@
 FROM node:boron
 
-RUN mkdir -p /usr/src/civic
-WORKDIR /usr/src/civic
+ADD package.json /tmp/package.json
+RUN cd /tmp && npm install
+RUN mkdir -p /opt/app && cp -a /tmp/node_modules /opt/app/
 
-COPY package.json /usr/src/civic/
-RUN npm install
+WORKDIR /opt/app
+ADD . /opt/app
 
-COPY . /usr/src/civic
+EXPOSE 8000
 
-RUN npm run build
-
-EXPOSE 4000
-
-CMD [ "npm", "run", "start:server" ]
+CMD [ "npm", "run", "go" ]

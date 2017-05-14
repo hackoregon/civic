@@ -2,4 +2,4 @@
  * exports from /App
  */
 
- export default from './reducer'
+ export default from './reducer';

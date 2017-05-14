@@ -1,6 +1,5 @@
-import React from 'react';
+// import React from 'react';
 import isClient from '@hackoregon/civic-server/lib/utils/isClient';
-import { createAsyncComponent } from 'react-async-component';
 // import emergencyRoutes from 'hackoregon-frontend-starter/src/index';
 // import housingRoutes from '@hackoregon/civic-housing';
 // import HousingApp from '@hackoregon/civic-housing';
@@ -28,7 +27,7 @@ const NotFoundRoute = {
   },
 };
 
-const getHousingRoute = () => import('@hackoregon/civic-housing');
+// const getHousingRoute = () => import('@hackoregon/civic-housing');
 // const HousingRoute = {
 //   path: 'collection/housing',
 //   getComponent(location, cb) {
@@ -45,84 +44,86 @@ const getHousingRoute = () => import('@hackoregon/civic-housing');
 //   // },
 // };
 
-const items = [{ collectionId: 'emergency' }, { collectionId: 'housing' }];
-const makePaths = path => ({ path: `/collections/${path}`, name: path });
-// const WithPaths = () => <Collections items={items.map(({ collectionId }) => makePaths(collectionId))} />;
+// const items = [{ collectionId: 'emergency' }, { collectionId: 'housing' }];
+// const makePaths = path => ({ path: `/collections/${path}`, name: path });
+// const WithPaths = () =>
+// (<Collections items={items.map(({ collectionId }) => makePaths(collectionId))} />);
 
 // console.log(emergencyRoutes);
-
-const routes = [
-  { path: '/',
-    name: 'root',
-    component: createAsyncComponent({ resolve: () => import('./Home') }),
-    // component: import('./HomePage'),
-    // component:
-    // getComponent(location, cb) {
-    //   require.ensure([], (require) => {
-    //     cb(null, require('./Home').default);
-    //   });
-    // },
-    childRoutes: [
-      {
-        path: '/collections/:name',
-        getComponent(location, cb) {
-          cb(null, require('./Collection').default);
-        },
-      },
-      // {
-      //   path: '/collection/housing',
-      //   getComponent(location, cb) {
-      //     cb(null, require('@hackoregon/civic-housing').default);
-      //   },
-      // },
-      {
-        path: '/story/:id',
-        name: 'story',
-        getComponent(location, cb) {
-          cb(null, require('./Collection').default);
-        },
-      },
-        // ],
-      // },
-        // getChildRoutes(location, cb) {
-        //   require.ensure([], (require) => {
-        //     const storyChild = {
-        //       path: ':storyId',
-        //       getComponent(getChildLocation, getChildCb) {
-        //         // getChildCb(null, require('../assets/StoryPage'));
-        //       },
-        //     };
-        //
-        //     cb(null, [storyChild]);
-        //   }, 'story');
-        // },
-      // },
-    ],
-    // childRoutes: [
-    //   { ...makePaths('collections'),
-    //     // component: WithPaths,
-    //   },
-    //   { ...makePaths('about'),
-    //     component: About,
-    //   },
-    //   { ...makePaths('explore'),
-    //     component: Explore,
-    //   },
-    //   { ...makePaths('emergency'),
-    //     component: AppB,
-    //   },
-    //   { ...makePaths('housing'),
-    //     component: AppA,
-    //   },
-    // ],
-  },
-];
+//
+// const routes = [
+//   { path: '/',
+//     name: 'root',
+//     component: createAsyncComponent({ resolve: () => import('./Home') }),
+//     // component: import('./HomePage'),
+//     // component:
+//     // getComponent(location, cb) {
+//     //   require.ensure([], (require) => {
+//     //     cb(null, require('./Home').default);
+//     //   });
+//     // },
+//     childRoutes: [
+//       {
+//         path: '/collections/:name',
+//         getComponent(location, cb) {
+//           cb(null, require('./Collection').default);
+//         },
+//       },
+//       // {
+//       //   path: '/collection/housing',
+//       //   getComponent(location, cb) {
+//       //     cb(null, require('@hackoregon/civic-housing').default);
+//       //   },
+//       // },
+//       {
+//         path: '/story/:id',
+//         name: 'story',
+//         getComponent(location, cb) {
+//           cb(null, require('./Collection').default);
+//         },
+//       },
+//         // ],
+//       // },
+//         // getChildRoutes(location, cb) {
+//         //   require.ensure([], (require) => {
+//         //     const storyChild = {
+//         //       path: ':storyId',
+//         //       getComponent(getChildLocation, getChildCb) {
+//         //         // getChildCb(null, require('../assets/StoryPage'));
+//         //       },
+//         //     };
+//         //
+//         //     cb(null, [storyChild]);
+//         //   }, 'story');
+//         // },
+//       // },
+//     ],
+//     // childRoutes: [
+//     //   { ...makePaths('collections'),
+//     //     // component: WithPaths,
+//     //   },
+//     //   { ...makePaths('about'),
+//     //     component: About,
+//     //   },
+//     //   { ...makePaths('explore'),
+//     //     component: Explore,
+//     //   },
+//     //   { ...makePaths('emergency'),
+//     //     component: AppB,
+//     //   },
+//     //   { ...makePaths('housing'),
+//     //     component: AppA,
+//     //   },
+//     // ],
+//   },
+// ];
 
 
 // console.log();
 // const items = [{ collectionId: 'emergency' }, { collectionId: 'housing' }];
 // const makePaths = path => ({ path: `/civic/${path}`, name: path });
-const WithPaths = () => <Collection items={items.map(({ collectionId }) => makePaths(collectionId))} />;
+// const WithPaths = () =>
+// (<Collection items={items.map(({ collectionId }) => makePaths(collectionId))} />);
 // const routes = createRoutes(store);
 // const rootRoute = {
 //   component: AppPage,

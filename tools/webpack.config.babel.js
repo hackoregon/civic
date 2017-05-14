@@ -29,7 +29,6 @@ const config = {
     extensions: ['.js', '.jsx'],
   },
   devtool: isDev ? 'source-map' : 'hidden-source-map',
-  // target: 'web',
   entry: {
     app: [
       // resolve(SRC_PATH, 'webpack-public-path'),

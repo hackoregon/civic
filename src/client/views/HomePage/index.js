@@ -2,4 +2,4 @@
  * exports from /HomePage
  */
 
- export default from './component'
+ export default from './component';

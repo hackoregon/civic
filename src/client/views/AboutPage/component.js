@@ -198,7 +198,7 @@ const AboutPage = () => (
               <li>Joe Hand</li>
               <li>Matthew Gantz</li>
               <li>Tom Wikle</li>
-              <li>Reid Beels></li>
+              <li>Reid Beels</li>
               <li>Nathan Miller</li>
               <li>Taylor Bixby</li>
               <li>Alex Kachlik</li>
@@ -217,7 +217,7 @@ const AboutPage = () => (
               <li>Tom Rodrigues</li>
               <li>Emily Zhang</li>
               <li>Schuyler Klaassen</li>
-              <li>Willard "Trey" Hucks</li>
+              <li>Willard Trey Hucks</li>
               <li>Karla Arianne Reyes</li>
               <li>Andy Cunningham</li>
               <li>James Maynard</li>

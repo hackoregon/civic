@@ -26,16 +26,18 @@
    error,
  });
 
- export const fetchData = payload => (dispatch) => {
-   dispatch(getData());
-   return api.products.threads(payload)
-     .then(
-       d => dispatch(getDataSuccess(d)),
-       e => dispatch(getDataFailure(e)),
-     );
- };
+ // export const fetchData = payload => (dispatch) => {
+ //   dispatch(getData());
+ //   return api.products.threads(payload)
+ //     .then(
+ //       d => dispatch(getDataSuccess(d)),
+ //       e => dispatch(getDataFailure(e)),
+ //     );
+ // };
 
  export default {
-   fetchData,
+   getData,
+   getDataSuccess,
+   getDataFailure,
    someSyncAction,
  };
