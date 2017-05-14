@@ -12,6 +12,6 @@ deploy:
   access_key_id: "${AWS_ACCESS_KEY_ID}"
   secret_access_key: "${AWS_SECRET_ACCESS_KEY}"
   region: us-west-2
-  bucket: hacko-budget-staging
+  bucket: budget.civicpdx.org
   skip_cleanup: true
   local_dir: build
