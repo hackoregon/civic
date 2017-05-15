@@ -76937,7 +76937,7 @@ function syncHistoryWithStore(history, store) {
   };
   unsubscribeFromHistory = history.listen(handleLocationChange);
 
-  // support history 3.x
+  // History 3.x doesn't call listen synchronously, so fire the initial location change ourselves
   if (history.getCurrentLocation) {
     handleLocationChange(history.getCurrentLocation());
   }
@@ -76963,10 +76963,12 @@ function syncHistoryWithStore(history, store) {
         }
       });
 
-      // History listeners expect a synchronous call. Make the first call to the
+      // History 2.x listeners expect a synchronous call. Make the first call to the
       // listener after subscribing to the store, in case the listener causes a
       // location change (e.g. when it redirects)
-      listener(lastPublishedLocation);
+      if (!history.getCurrentLocation) {
+        listener(lastPublishedLocation);
+      }
 
       // Let user unsubscribe later
       return function () {

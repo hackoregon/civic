@@ -32,9 +32,10 @@
     "start": "npm-run-all --parallel test:watch start:dev",
     "lint": "esw src tools server webpack.config.* --color",
     "lint:watch": "npm run lint -- --watch",
-    "prebuild": "npm run clean && npm run lint && npm run test",
+    "prebuild": "npm run lint && npm run test",
     "build": "rimraf dist && babel-node tools/build.js",
     "analyze": "babel-node ./tools/analyzeBundle.js",
+    "prestart:dev": "npm run clean",
     "start:dev": "cross-env NODE_ENV=development babel-node server",
     "start:prod": "cross-env NODE_ENV=production node server",
     "test": "mocha --opts ./mocha.opts 'src/**/*.test.js'",
@@ -44,7 +45,7 @@
     "show:coverage": "npm run test:cover && open coverage/index.html",
     "prebump": "NODE_ENV=production npm run build",
     "bump": "bump --prompt --commit --push",
-    "postbump": "editme -w",
+    "postbump": "editme -w"
   },
   "dependencies": {
     "@hackoregon/civic-server": "0.0.8",
@@ -128,7 +129,6 @@
     "sinon": "1.17.6",
     "sinon-chai": "2.8.0",
     "version-bump-prompt": "^3.1.0",
-    "webpack": "1.14.0",
     "webpack-bundle-analyzer": "2.1.1",
     "webpack-dev-middleware": "1.9.0",
     "webpack-hot-middleware": "2.13.2"
