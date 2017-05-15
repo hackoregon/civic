@@ -1,10 +1,10 @@
 /* eslint-disable global-require */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-console */
-// const express = require('express');
+const express = require('express');
 const path = require('path');
 const webpack = require('webpack');
-// const compression = require('compression');
+const compression = require('compression');
 
 const setupDev = (app, webpackConfig) => {
   const devMiddleware = require('webpack-dev-middleware');
@@ -33,18 +33,17 @@ const setupDev = (app, webpackConfig) => {
   });
 };
 
-// NOTE - this should stay for now - if in future you need to prod deploy independently, use this
-// const setupProd = (app, options, config) => {
-//   console.log(options, config); // eslint-disable-line
-//   const publicPath = options.publicPath || '/';
-//   const outputPath = options.outputPath || path.resolve(process.cwd(), 'build');
-//
-//   app.use(compression());
-//   app.use(publicPath, express.static(outputPath));
-//
-//   app.get('/housing/*', (req, res) => res.sendFile(path.resolve(outputPath, 'index.html')));
-//   // app.get('*', (req, res) => res.sendFile(path.resolve(outputPath, 'index.html')));
-// };
+
+const setupProd = (app, options) => {
+  const publicPath = options.publicPath || '/';
+  const outputPath = options.outputPath || path.resolve(process.cwd(), 'build');
+
+  app.use(compression());
+  app.use(publicPath, express.static(outputPath));
+
+  app.get('/housing/*', (req, res) => res.sendFile(path.resolve(outputPath, 'index.html')));
+  // app.get('*', (req, res) => res.sendFile(path.resolve(outputPath, 'index.html')));
+};
 
 module.exports = (app, options) => {
   const isProd = process.env.NODE_ENV === 'production';
@@ -55,13 +54,12 @@ module.exports = (app, options) => {
     prodConfig.output.publicPath = options.publicPath;
 
     webpack(prodConfig, (err) => {
-      console.log('housing output => ', prodConfig.output);
       if (err) {
         console.log('Error during housing compile', err);
       }
     });
 
-    // setupProd(app, options, prodConfig);
+    setupProd(app, options);
   } else {
     const webpackConfig = require('../webpack.config.dev.js');
     setupDev(app, webpackConfig);

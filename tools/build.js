@@ -31,7 +31,7 @@ webpack(config).run((error, stats) => {
   }
 
   console.log(`Webpack stats: ${stats}`);
-  console.log(successMsg('Production bundle available in /build.'));
+  console.log(successMsg('Production bundle available in /dist.'));
 
   return 0;
 });

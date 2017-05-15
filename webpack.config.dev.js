@@ -1,23 +1,18 @@
-/* eslint-disable import/no-extraneous-dependencies */
 const webpack = require('webpack'); //
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const autoprefixer = require('autoprefixer');
 const { resolve } = require('path');
 
 const commitSha = require('child_process').execSync('git rev-parse --short HEAD').toString().trim();
 
 module.exports = {
   resolve: {
-    extensions: ['', '.js', '.jsx', '.json'],
+    extensions: ['.js', '.jsx', '.json'],
   },
-  debug: true,
-  devtool: 'source-map',
-  noInfo: true,
+  devtool: 'eval',
   entry: [
-    './src/webpack-public-path',
-    'babel-polyfill',
+    'react-hot-loader/patch', './src/webpack-public-path',
     'webpack-hot-middleware/client?reload=true',
-    resolve(__dirname, 'src/client.js'),
+    resolve(__dirname, 'src/client.dev'),
   ],
   target: 'web',
   output: {
@@ -26,12 +21,10 @@ module.exports = {
     filename: 'bundle.js',
   },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development'),
-      __DEV__: true,
-    }),
+    new webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify('development'), __DEV__: true }),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
+    new webpack.NamedModulesPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
       template: 'src/template.ejs',
       minify: {
@@ -42,21 +35,45 @@ module.exports = {
       commitSha,
     }),
   ],
-  babelQuery: {
-    presets: ['babel-preset-react-hmre'].map(require.resolve),
+  devServer: {
+    hot: true,
+    contentBase: resolve(__dirname, 'build'),
+    publicPath: '/',
   },
   module: {
     loaders: [
-      { test: /\.js$/, exclude: /node_modules/, loaders: ['babel?presets[]=es2015'] },
-      { test: /\.eot(\?v=\d+.\d+.\d+)?$/, loader: 'file' },
-      { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url-loader?limit=10000&mimetype=application/font-woff' },
-      { test: /\.[ot]tf(\?v=\d+.\d+.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=application/octet-stream' },
-      { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=image/svg+xml' },
-      { test: /\.(jpe?g|png|gif)$/i, loader: 'file?name=[name].[ext]' },
-      { test: /\.ico$/, loader: 'file?name=[name].[ext]' },
-      { test: /(\.css|\.scss)$/, loaders: ['style', 'css?sourceMap&modules', 'postcss'] },
-      { test: /\.json$/, loader: 'json' },
+      {
+        test: /\.jsx?$/,
+        include: resolve(__dirname, 'src'),
+        loader: 'babel-loader',
+        query: {
+          presets: [
+            [
+              'es2015', {
+                modules: false,
+              },
+            ],
+            'stage-1',
+            'react',
+          ],
+          plugins: ['transform-object-rest-spread', 'transform-es2015-destructuring', 'transform-class-properties', 'syntax-dynamic-import'],
+        },
+      }, {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader?limit=10000&mimetype=image/svg+xml',
+      }, {
+        test: /\.(jpe?g|png|gif)$/i,
+        loader: 'file-loader?name=[name].[ext]',
+      }, {
+        test: /\.ico$/,
+        loader: 'file-loader?name=[name].[ext]',
+      }, {
+        test: /(\.css|\.scss)$/,
+        loaders: ['style-loader', 'css-loader?sourceMap&modules'],
+      }, {
+        test: /\.json$/,
+        loader: 'json-loader',
+      },
     ],
   },
-  postcss: () => [autoprefixer],
 };
