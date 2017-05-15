@@ -30,7 +30,7 @@
     "url": "https://github.com/hackoregon/civic-platform"
   },
   "dependencies": {
-    "@hackoregon/civic-housing": "^0.1.7",
+    "@hackoregon/civic-housing": "^0.1.8",
     "@hackoregon/civic-server": "^0.0.10",
     "@hackoregon/component-library": "^0.2.5",
     "app-root-dir": "^1.0.2",
