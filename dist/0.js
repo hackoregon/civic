@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 1696:
+/***/ 1416:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11,11 +11,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.StoryPage = StoryPage;
 
-var _react = __webpack_require__(0);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(165);
+var _reactRedux = __webpack_require__(151);
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : { default: obj };

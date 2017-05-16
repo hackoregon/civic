@@ -18,7 +18,7 @@ const config = {
   target: 'web',
   output: {
     path: resolve(__dirname, 'dist'),
-    publicPath: '/housing/',
+    publicPath: '/',
     filename: '[name].js',
   },
   plugins: [
