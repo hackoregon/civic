@@ -14,4 +14,4 @@ deploy:
   region: us-west-2
   bucket: housing.civicpdx.org
   skip_cleanup: true
-  local_dir: build
+  local_dir: dist
