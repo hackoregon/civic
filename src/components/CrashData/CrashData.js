@@ -160,7 +160,7 @@ function CrashData(props) {
         <p style={captionStyle}>At the SE Foster & SE 80th intersection there is a lighted pedestrian crosswalk, and is surrounded by businesses, restaurants, bus stops, and a major grocery store - making it a highly trafficked area. The posted speed limit is 35 mph and is well lit. From 2004-2014 there were a total of 36 reported crash incidents across all modes of transportation*, resulting 58 injuries, two being serious injuries, and two pedestrian fatalities. In one of the pedestrian fatality incidents the pedestrian had a BAC level** of  0.01%.</p>
         <br/>
         <p>*For the purposes of this project, all modes of transportation include vehicle, bike, and pedestrian.</p>
-        <p>** In the U.S. it is illegal to drive with a BAC level of 0.8% or more nationwide.</p>
+        <p>** In the U.S. it is illegal to drive with a BAC level of 0.08% or more nationwide.</p>
 
 
       </StoryCard>
