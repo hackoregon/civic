@@ -39,7 +39,7 @@ function Budget101() {
               </ul>
             </div>
           </div>
-          <h2 className="greenText">Total Budget: 4,283,586,753.00</h2>
+          <h2 className="greenText">Total Budget: $4,283,586,753</h2>
           <p>Our budget breakdown reviews the Service Area component of the city budget.
           </p>
         </div>
