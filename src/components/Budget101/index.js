@@ -103,7 +103,7 @@ function Budget101() {
             <p>The Portland City Budget is not just a number. A Proposed Budget
                 is developed over six months, and a final Adopted Budget is approved
                 in June. At every stage, Portland’s citizens play an active role in
-                shaping the budget. Learn how you can get invovled by visiting the
+                shaping the budget. Learn how you can get involved by visiting the
                 City of Portland’s website.
             </p>
           </div>
