@@ -1,6 +1,6 @@
 
 export const data = [
-      { name: 2006, 'Public Safety': 367538784, 'Community Development': 132639339, 'Public Utilities': 1472330509, 'Legislative and Administrative': 860798287, 'Transportation & Parking': 245837540, 'Parks, Recreation, & Culture': 120774817, 'Elected Officials': 131231988 },
+      { name: '2006', 'Public Safety': 367538784, 'Community Development': 132639339, 'Public Utilities': 1472330509, 'Legislative and Administrative': 860798287, 'Transportation & Parking': 245837540, 'Parks, Recreation, & Culture': 120774817, 'Elected Officials': 131231988 },
       { name: '2007', 'Public Safety': 393363736, 'Community Development': 162056670, 'Public Utilities': 1609400176, 'Legislative and Administrative': 919206847, 'Transportation & Parking': 195349882, 'Parks, Recreation, & Culture': 139493202, 'Elected Officials': 75543413 },
       { name: '2008', 'Public Safety': 402922556, 'Community Development': 137288542, 'Public Utilities': 1250874767, 'Legislative and Administrative': 949987848, 'Transportation & Parking': 145428564, 'Parks, Recreation, & Culture': 128833625, 'Elected Officials': 64839044 },
       { name: '2009', 'Public Safety': 419931002, 'Community Development': 130924416, 'Public Utilities': 1303193281, 'Legislative and Administrative': 956930822, 'Transportation & Parking': 240283972, 'Parks, Recreation, & Culture': 104431037, 'Elected Officials': 117305690 },
@@ -20,4 +20,5 @@ export const colors = [
   '#66cc96',
   '#339963',
   '#b3e6cb',
+  '#66cc96'
 ];
