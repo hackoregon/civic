@@ -24,13 +24,13 @@ const StackedAreaChart = (props) => {
   return (
     <div style={{ display: 'flex', justifyContent: 'space-around', margin: 'auto' }} >
       <AreaChart
-        width={props.width}
-        height={props.height}
+        width={780}
+        height={300}
         data={props.data}
         colors={props.colors}
       >
-        <XAxis dataKey="name" />
-        <YAxis width={90} />
+        <XAxis tick={{ transform: 'translate(-2, 5)' }} dataKey="name" />
+        <YAxis tick={{ transform: 'translate(0, -2)' }} width={90} />
         {lines}
         <Tooltip
           itemStyle={{ color: '#339963', textAlign: 'left' }}
@@ -48,7 +48,7 @@ const StackedAreaChart = (props) => {
 // };
 
 StackedAreaChart.defaultProps = {
-  width: 800,
+  width: 780,
   height: 300,
   data: data,
   colors: colors,
