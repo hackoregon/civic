@@ -49,7 +49,7 @@ class MapPanel extends Component {
           </div>
 
           <div className="panel-column-2" style={{ display: 'flex', flexDirection: 'column', textAlign: 'left', width: '33%' }}>
-            <h3 style={{ marginLeft: '10px' }}>Incidents Per Week</h3>
+            <h3 style={{ marginLeft: '10px' }}>Incidents Per Month</h3>
             <table style={{ borderSpacing: '10px' }}>
               <tr>
                 <td style={{ color: '#D5135F' }}>{stats.weekly_total_incs.toFixed(2)}</td>
