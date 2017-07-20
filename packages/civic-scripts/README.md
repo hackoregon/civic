@@ -5,7 +5,7 @@ Configurations and utilities for harnessing civic through archetypal patterns.
 ## Installation
 
 ```
-npm install -S @hackoregon/civic-archetype @hackoregon/civic
+npm install -S @hackoregon/civic-scripts @hackoregon/civic
 ```
 
 In your package.json you can add scripts thus:
@@ -112,7 +112,7 @@ export default {
 
 ### webpack
 
-Your application can either extend the default webpack configuration or replace it entirely. By default, `@hackoregon/civic-archetype` ships with a well-balanced flavor of webpack that includes a common, vendor, and app bundle. The vendor bundle includes React, React-Router, Redux, React-Redux, and Immutable and can be easily cached across applications. In the future, the vendor bundle will become a DLL-like file available and cached on an S3 instance.
+Your application can either extend the default webpack configuration or replace it entirely. By default, `@hackoregon/civic-scripts` ships with a well-balanced flavor of webpack that includes a common, vendor, and app bundle. The vendor bundle includes React, React-Router, Redux, React-Redux, and Immutable and can be easily cached across applications. In the future, the vendor bundle will become a DLL-like file available and cached on an S3 instance.
 
 To make changes to the archetypal configuration, place the following files in your `.civic` configuration directory:
 
@@ -130,15 +130,15 @@ module.exports = function alternateConfig(civicWebpackConfig: object, environmen
 }
 ```
 
-Extending and/or altering the aforementioned forbidden entries within the archetype's configuration may void your warranty.
+Extending and/or altering the aforementioned forbidden entries within the core's configuration may void your warranty.
 
 ### ESLint
 
-`@hackoregon/civic-archetype` uses [Airbnb's](https://github.com/airbnb/javascript) mostly-sane ESLint configurations. In your project, simply extend your `.eslintrc` with the archetype configs and throw on any configurations your team particularly likes. In this example, we're throwing out a few arrow-function rules and declaring safe globals.
+`@hackoregon/civic-scripts` uses [Airbnb's](https://github.com/airbnb/javascript) mostly-sane ESLint configurations. In your project, simply extend your `.eslintrc` with the core configs and throw on any configurations your team particularly likes. In this example, we're throwing out a few arrow-function rules and declaring safe globals.
 
 ```
 {
-  "extends": "./node_modules/@hackoregon/civic-archetype/configs/eslint/.eslintrc",
+  "extends": "./node_modules/@hackoregon/civic-scripts/configs/eslint/.eslintrc",
   "rules": {
     "prefer-arrow-callback": 0,
     "arrow-body-style": 0
@@ -156,18 +156,18 @@ Extending and/or altering the aforementioned forbidden entries within the archet
 
 ### Babel
 
-Extending or even including a `.babelrc` file or configuration for Babel is optional as the archetype supplied utilities will take care of any transpilation that needs to happen. As most of the client-side configuration for transpiling code is handled by webpack, there's little need to extend your application's `.babelrc` past the archetype's which include the plugins `react`, `stage-1`, and `es2015`. If needed, however, you can extend it thus:
+Extending or even including a `.babelrc` file or configuration for Babel is optional as the core supplied utilities will take care of any transpilation that needs to happen. As most of the client-side configuration for transpiling code is handled by webpack, there's little need to extend your application's `.babelrc` past the core's which include the plugins `react`, `stage-1`, and `es2015`. If needed, however, you can extend it thus:
 
 ```
 {
-  "extends": "./node_modules/@hackoregon/civic-archetype/configs/babel/.babelrc",
+  "extends": "./node_modules/@hackoregon/civic-scripts/configs/babel/.babelrc",
   "presets": [ ... ]
 }
 ```
 
 ### Mocha
 
-The archetype is ready for server-side unit tests with a standard suite of [Mocha](https://mochajs.org/), [Sinon](http://sinonjs.org/docs/), [Chai (expect)](http://chaijs.com/api/bdd/), and [Enzyme](http://airbnb.io/enzyme/). Chai includes extra assertion styles for Sinon ([`sinon-chai`](https://github.com/domenic/sinon-chai)) and Immutable ([`chai-immutable`](https://github.com/astorije/chai-immutable)).
+The core is ready for server-side unit tests with a standard suite of [Mocha](https://mochajs.org/), [Sinon](http://sinonjs.org/docs/), [Chai (expect)](http://chaijs.com/api/bdd/), and [Enzyme](http://airbnb.io/enzyme/). Chai includes extra assertion styles for Sinon ([`sinon-chai`](https://github.com/domenic/sinon-chai)) and Immutable ([`chai-immutable`](https://github.com/astorije/chai-immutable)).
 
 `chai`, `expect`, `enzyme`, and `sinon` are placed within the global scope for tests to reduce a bit of boilerplate in your tests and you can extend configuration as needed. In your civic configuration directory, place a file named `mocha.conf.js` with the following signature:
 
@@ -192,7 +192,7 @@ Command | Purpose
 `civic module` | Runs your application through Babel and exports it to your `./dist` folder. Configured correctly, you'll now be able to `npm publish` your application as a module for consumption by other applications. Optionally pass a `--watch` flag to watch your application files and incrementally build them
 `civic build` | Run webpack to build your client-side JavaScript bundles, flag with `--watch` for continual new builds and `--hot` for for a hot-reloading webpackDevServer
 `civic coverage` | Runs unit tests and outputs an lcov report, if your application needs advanced reporting from `nyc`/`istanbul`, your application should include `nyc` as a dev dependency and run `nyc npm test` where `npm test` is an extended configuration of Mocha
-`civic lint` | Lints your project against rules specified in your application's `.eslintrc` or against the archetype's if none is present
+`civic lint` | Lints your project against rules specified in your application's `.eslintrc` or against the core's if none is present
 `civic burnside` | (coming soon) Runs client-side functional tests
 `civic link` | (coming soon) Runs `npm link <packageName>` on all modules specified in the application's module registry
 `civic publish` | (coming soon) Compiles your module, tags the release, and uploads it to npm or any private variation thereof

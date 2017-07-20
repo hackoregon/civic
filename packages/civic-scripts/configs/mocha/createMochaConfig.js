@@ -38,7 +38,7 @@ function createMochaConfig(cliOpts, civicPaths) {
   const compilerArgs = ['--compilers', `js:${babelRegister}`];
 
   // predicated use upon an application not supplying its own .babelrc, this script registers babel
-  // with the archetype's own .babelrc file
+  // with the core's own .babelrc file
   const babelRegisterConf = join(archRoot, 'mocha/mocha.babel.js');
 
   // predicate value

@@ -21,7 +21,7 @@ const blackFlagsString = [
   '__tests__',
   'lib',
   'dist',
-  'civic-archetype',
+  'civic-scripts',
   'civic-logger',
   '.test.',
   '.story.',

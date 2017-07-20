@@ -25,7 +25,7 @@ function createBabelArgs(civicPaths, cliOptions, srcDir, destDir) {
     log.info('using application\'s .babelrc located at:');
     log.padLeft(babelrc);
   } else {
-    log.info('using archetype .babelrc located at:');
+    log.info('using core .babelrc located at:');
     log.padLeft(babelrc);
   }
 

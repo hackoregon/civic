@@ -3,12 +3,12 @@ const { resolve, join } = require('path');
 
 const logger = require('@hackoregon/civic-logger');
 
-const archetypeRoot = resolve(__dirname, '..');
+const coreRoot = resolve(__dirname, '..');
 const applicationPath = realpathSync(process.cwd());
 
-// resolve configurations to this module, civic-archetype/configs
+// resolve configurations to this module, civic-scripts/configs
 function resolveArch(relativePath) {
-  return resolve(archetypeRoot, relativePath);
+  return resolve(coreRoot, relativePath);
 }
 
 // resolve configurations to the application
@@ -68,7 +68,7 @@ function civicArchetypePaths({
   appRoot = applicationPath,
   appPublicPath = resolveApp('./public'),
   appServerPath = '',
-  archRoot = archetypeRoot,
+  archRoot = coreRoot,
   archNodeModules = resolveArch('../node_modules'),
   webpackDevPort = 3001,
   portOverride,

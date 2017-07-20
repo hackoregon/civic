@@ -2,7 +2,7 @@
 const { join } = require('path');
 
 const minimist = require('minimist');
-const archetypePaths = require('../configs/archetype/paths');
+const scriptsPaths = require('../configs/core/paths');
 const log = require('@hackoregon/civic-logger');
 const { version } = require('../package.json');
 
@@ -10,7 +10,7 @@ const cwd = process.cwd();
 const givenCommand = process.argv[2];
 
 const cliDocs = `
-    civic-archetype v${version} 🌟
+    civic-scripts v${version} 🌟
 
 
     Usage
@@ -60,7 +60,7 @@ function validateCommand(command) {
     log.plain(cliDocs);
     process.exit(1);
   } else {
-    log.padLeft(`\n         civic-archetype v${version} 🌟`);
+    log.padLeft(`\n         civic-scripts v${version} 🌟`);
   }
 
   return command;
@@ -96,7 +96,7 @@ const civicPathConfig = Object.assign(
 
 const validCommand = validateCommand(givenCommand);
 
-const civicPaths = archetypePaths(civicPathConfig);
+const civicPaths = scriptsPaths(civicPathConfig);
 
 log.info(commandsHash[validCommand]);
 

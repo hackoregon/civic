@@ -1,6 +1,6 @@
 const { existsSync } = require('fs');
 const { join } = require('path');
-const archetypeRenderer = require('./civicRenderer');
+const coreRenderer = require('./civicRenderer');
 const log = require('@hackoregon/civic-logger');
 
 // at this point we might be getting either ESM or CJS
@@ -46,7 +46,7 @@ function createServerConfig(cliOptions, civicPaths) {
   if (existsSync(maybeRenderer)) {
     appRenderer = interOpRequire(maybeRenderer);
   } else {
-    appRenderer = archetypeRenderer(civicPaths);
+    appRenderer = coreRenderer(civicPaths);
   }
 
   // eslint-disable-next-line prefer-object-spread/prefer-object-spread
