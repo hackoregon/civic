@@ -1,0 +1,28 @@
+{
+  "name": "@hackoregon/civic-logger",
+  "version": "0.0.1",
+  "description": "just a logger",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "scripts": {
+    "test": "echo \"tests are run in the parent repository vs. this child-module\" && exit 1"
+  },
+  "authors": [
+    "David Daniel <David.Daniel@hackoregon.com>"
+  ],
+  "license": "ISC",
+  "engines": {
+    "node": ">=6.7.0"
+  },
+  "dependencies": {
+    "colors": "^1.1.2",
+    "console.table": "^0.8.0"
+  },
+  "publishConfig": {
+    "tag": "",
+    "registry": ""
+  }
+}
