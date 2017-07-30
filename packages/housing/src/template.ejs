@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <% if (htmlWebpackPlugin.options.commitSha) { %>
+  <meta commitSha='<%= htmlWebpackPlugin.options.commitSha %>'/>
+  <% } %>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8"/>
+  <title>Civic: A Hack Oregon Project</title>
+  <style>html, body { padding:0; margin:0; }</style>
+</head>
+<body>
+<div id="content"></div>
+</body>
+</html>
