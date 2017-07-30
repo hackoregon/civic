@@ -6,7 +6,7 @@ const { transformFileSync }                = require('babel-core');
 const colors                               = require('colors/safe');
 
 // resolves
-const DAS_PACKAGES                         = resolve(__dirname, '../packages');
+const PKGS                                 = resolve(__dirname, '../packages');
 const babelrc                              = resolve(__dirname, '..', '.babelrc');
 
 // consts
@@ -78,8 +78,8 @@ const options = {
   },
 };
 
-walk(DAS_PACKAGES, options, initialWalkCallback);
+walk(PKGS, options, initialWalkCallback);
 
 if (watchFlag) {
-  createMonitor(DAS_PACKAGES, options, watchCallback);
+  createMonitor(PKGS, options, watchCallback);
 }
