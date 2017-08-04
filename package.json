@@ -89,6 +89,7 @@
     "bump": "lerna publish --skip-git --skip-npm",
     "clean": "lerna clean",
     "deploy-storybook": "storybook-to-ghpages",
+    "link": "lerna exec npm link",
     "lint": "lerna run lint -- --fix",
     "postinstall": "npm run bootstrap",
     "storybook": "BABEL_ENV=cjs start-storybook -p 6006",
