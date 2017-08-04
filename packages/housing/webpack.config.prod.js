@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
@@ -8,7 +9,7 @@ const WebpackMd5Hash = require('webpack-md5-hash');
 const babelLoader = require.resolve('babel-loader');
 
 const commitSha = require('child_process').execSync('git rev-parse --short HEAD').toString().trim();
-const { defaultConfig, composeConfig } = require('@hackoregon/webpacker');
+const { defaultConfig, composeConfig } = require('@hackoregon/webpacker'); // eslint-disable-line
 
 const config = {
   resolve: {
@@ -72,7 +73,7 @@ const config = {
 const entry = {
   entry: {
     main: resolve(__dirname, 'src/client'),
-    vendor: ['react', 'react-dom', 'react-helmet', 'react-redux', 'react-router'],
+    vendor: ['react', 'react-dom', 'react-helmet', 'react-redux', 'react-router', 'leaflet'],
   },
 };
 

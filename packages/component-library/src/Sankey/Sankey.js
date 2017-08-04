@@ -5,7 +5,7 @@ import { clone, max } from 'ramda';
 import './Sankey.css';
 
 const formatNumber = format(',.0f');
-const formatNum    = num => formatNumber(num);
+const formatNum = num => formatNumber(num);
 
 const colors = [
   '#a6cee3', '#1f78b4', '#b2df8a', '#33a02c', '#fb9a99', '#e31a1c', '#fdbf6f',

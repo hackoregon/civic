@@ -28,8 +28,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var MS_TO_SWITCH_TEXT = 3000; // 3 seconds
-
+var MS_TO_SWITCH_TEXT = 3000;
 var StoryFooter = function (_Component) {
   _inherits(StoryFooter, _Component);
 
@@ -50,7 +49,6 @@ var StoryFooter = function (_Component) {
       var _this$props = _this.props,
           collectionId = _this$props.collectionId,
           cardId = _this$props.cardId;
-      // NOTE: we need to make sure this will work on all browsers
 
       (0, _copyToClipboard2.default)(window.location.origin + '/' + collectionId + '/' + cardId);
       _this.switchState(MS_TO_SWITCH_TEXT);
@@ -71,7 +69,7 @@ var StoryFooter = function (_Component) {
           collectionId = _props.collectionId,
           cardId = _props.cardId;
 
-      var shareTxt = this.state.copied ? 'Link copied!' : 'Share card'; // if copied, show Link copied, otherwise, show Share card
+      var shareTxt = this.state.copied ? 'Link copied!' : 'Share card';
       var shareIcon = this.state.copied ? _styleConstants.ICONS.check : _styleConstants.ICONS.link;
       return _react2.default.createElement(
         'div',

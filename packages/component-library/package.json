@@ -1,6 +1,6 @@
 {
   "name": "@hackoregon/react-component-library",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.e7d4647a",
   "description": "Official repo for Hack Oregon React component library",
   "main": "lib/index.js",
   "modules": "es/index.js",

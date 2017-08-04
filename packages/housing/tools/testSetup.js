@@ -7,13 +7,13 @@ const identity = require('ramda').identity;
   require.extensions[ext] = identity;
 });
 
-require('babel-register')();
+require('babel-register')({});
 
-const chai           = require('chai');
-const sinon          = require('sinon');
-const jsdom          = require('jsdom').jsdom;
-const sinonChai      = require('sinon-chai');
-const chaiEnzyme     = require('chai-enzyme');
+const chai = require('chai');
+const sinon = require('sinon');
+const jsdom = require('jsdom').jsdom;
+const sinonChai = require('sinon-chai');
+const chaiEnzyme = require('chai-enzyme');
 const chaiAsPromised = require('chai-as-promised');
 
 const exposedProperties = ['window', 'navigator', 'document'];
@@ -31,8 +31,8 @@ global.navigator = {
 };
 global.assert = chai.assert;
 global.expect = chai.expect;
-global.chai   = chai;
-global.sinon  = sinon;
+global.chai = chai;
+global.sinon = sinon;
 global.window = document.defaultView;
 
 Object.keys(document.defaultView).forEach((property) => {
