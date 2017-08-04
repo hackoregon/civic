@@ -1,6 +1,6 @@
 {
   "name": "@hackoregon/civic-emergency-response",
-  "version": "1.0.0-alpha.6bd7b1b5",
+  "version": "1.0.0-alpha.eadf9ac2",
   "description": "Hack Oregon Front-end React + Redux Starter",
   "author": "David Daniel",
   "license": "MIT",
@@ -38,7 +38,7 @@
     "show:coverage": "npm run test:cover && open coverage/index.html"
   },
   "dependencies": {
-    "@hackoregon/component-library": "^1.0.0-alpha.6bd7b1b5",
+    "@hackoregon/component-library": "^1.0.0-alpha.eadf9ac2",
     "axios": "^0.16.1",
     "babel-polyfill": "^6.23.0",
     "compression": "^1.6.2",
@@ -67,7 +67,7 @@
     "styled-components": "^1.4.2"
   },
   "devDependencies": {
-    "@hackoregon/webpacker": "^0.1.7",
+    "@hackoregon/webpacker": "^1.0.0-alpha.eadf9ac2",
     "autoprefixer": "^6.7.7",
     "babel-cli": "^6.23.0",
     "babel-core": "^6.23.1",

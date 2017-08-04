@@ -1,6 +1,6 @@
 {
   "name": "@hackoregon/webpacker",
-  "version": "0.1.7",
+  "version": "1.0.0-alpha.eadf9ac2",
   "description": "Compose your webpack configs - comes with a default",
   "author": "David Daniel <davidedaniel@gmail.com>",
   "license": "MIT",
