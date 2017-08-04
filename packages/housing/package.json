@@ -48,7 +48,6 @@
     "postbump": "editme -w"
   },
   "dependencies": {
-    "@hackoregon/civic-logger": "^1.0.0-alpha.e7d4647a",
     "@hackoregon/civic-server": "^0.0.10",
     "@hackoregon/component-library": "^0.2.5",
     "@hackoregon/webpacker": "^0.1.7",

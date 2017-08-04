@@ -1,22 +1,22 @@
 /* eslint-disable no-console */
 /* eslint-disable import/no-extraneous-dependencies */
 
-const log = require('@hackoregon/civic-logger');
+const chalk = require('chalk');
 
-const divider = log.info('\n=====================================\n');
+const divider = chalk.gray('\n=====================================\n');
 
 module.exports = {
   error: (err) => {
-    log.error(err);
+    console.error(chalk.red(err));
   },
   appStarted: (port) => {
-    log.info(`Server ready ${('✓')}`);
-    log.success(`
+    console.log(`Server ready ${chalk.green('✓')}`);
+    console.log(`
 ${divider}
-'Access application at:'}
-${`http://localhost:${port}`}
+${chalk.bold('Access application at:')}
+${chalk.magenta(`http://localhost:${port}`)}
 ${divider}
-${`${('CTRL-C')} to exit the process`}
+${chalk.blue(`${chalk.italic('CTRL-C')} to exit the process`)}
     `);
   },
 };
