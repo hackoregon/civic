@@ -2,7 +2,7 @@ import createRoutes from '@hackoregon/civic-server/lib/router/createRoutes';
 import isClient from '@hackoregon/civic-server/lib/utils/isClient';
 import { getAsyncReducer } from './utils/asyncInjectors';
 
-if (typeof require.ensure !== 'function')  { require.ensure = (d, c) => c(require); }
+if (typeof require.ensure !== 'function') { require.ensure = (d, c) => c(require); }
 
 function collectionRoute(store) {
   const { injectAsyncReducer } = getAsyncReducer(store);
