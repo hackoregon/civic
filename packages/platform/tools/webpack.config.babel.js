@@ -22,26 +22,28 @@ const staticServerAddr = process.env.NODE_ENV !== 'production'
 const removeEmpty = arr => arr.filter(item => !!item);
 const IsomorphicLoaderPlugin = require('isomorphic-loader/lib/webpack-plugin');
 
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 const config = {
   context: REAL_ROOT,
   cache: true,
   resolve: {
     extensions: ['.js', '.jsx'],
   },
-  devtool: isDev ? 'source-map' : 'hidden-source-map',
+  devtool: null,
   entry: {
     app: [
       // resolve(SRC_PATH, 'webpack-public-path'),
       resolve(SRC_PATH, 'client/index.js'),
     ],
-    // vendor: [
-    //   'react',
-    //   'react-dom',
-    //   'react-helmet',
-    //   'react-redux',
-    //   'react-router',
-    //   'leaflet',
-    // ],
+    vendor: [
+      'react',
+      'react-dom',
+      'react-helmet',
+      'react-redux',
+      'react-router',
+      // 'leaflet',
+    ],
   },
   module: {
     rules: [
@@ -109,4 +111,18 @@ const webpackConfig = composeConfig(
   config,
 );
 
+// webpackConfig.plugins.push(new ExtractTextPlugin('styles.css'));
+// webpackConfig.module.rules[1] = {
+//   test: /\.css$/,
+//   exclude: /node_modules/,
+//   loader: ExtractTextPlugin.extract({
+//     fallback: 'style-loader',
+//     loader: [
+//       'css-loader?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]',
+//       'postcss-loader',
+//     ],
+//   }),
+// };
+
+console.log(webpackConfig);
 export default webpackConfig;
