@@ -3,6 +3,7 @@
   "packages": [
     "packages/*"
   ],
-  "version": "1.0.0-alpha.1",
-  "hoist": true
+  "version": "1.0.0-alpha.2",
+  "hoist": true,
+  "private": true
 }

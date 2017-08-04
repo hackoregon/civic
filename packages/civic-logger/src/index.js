@@ -36,7 +36,6 @@ module.exports = {
     console.log(msg);
   },
   padLeft(msg) {
-    // oh god
     // eslint-disable-next-line no-console
     console.log(`         ${msg}`);
   },
@@ -51,7 +50,7 @@ module.exports = {
       ┊┊☆┊╰┳┳━━━━┳┳╯┊ ┊ ☆ ┊
     `;
 
-      this.plain(colors.rainbow(nyan));
+    this.plain(colors.rainbow(nyan));
   },
   table(table) {
     // eslint-disable-next-line no-console
