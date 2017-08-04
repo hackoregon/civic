@@ -1,12 +1,12 @@
-const extendRequire = require('isomorphic-loader/lib/extend-require');
+// const extendRequire = require('isomorphic-loader/lib/extend-require');
 // const settings = require('../../tools/app-settings.js');
 
 require('css-modules-require-hook')({
   generateScopedName: '[path][name]__[local]___[hash:base64:5]',
 });
 
-extendRequire({
-  startDelay: 1000,
+// extendRequire({
+  // startDelay: 1000,
   // processAssets: (assets) => {
   //   const appSrcDir = (settings.getEnv() || settings.build.dir).split('/')[0];
   //   if (appSrcDir !== settings.src.dir && assets.marked) {
@@ -21,8 +21,8 @@ extendRequire({
 
     // return assets;
   // },
-}).then(() => {
-  require('./server');
-}).catch((err) => {
-  console.log('Error in isomorphic-loader', err); // eslint-disable-line
-});
+// }).then(() => {
+require('./server');
+// }).catch((err) => {
+  // console.log('Error in isomorphic-loader', err); // eslint-disable-line
+// });
