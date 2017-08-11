@@ -1,6 +1,6 @@
 {
   "name": "@hackoregon/webpacker",
-  "version": "1.0.0-alpha.eadf9ac2",
+  "version": "1.0.0-alpha.be5b7ddd",
   "description": "Compose your webpack configs - comes with a default",
   "author": "David Daniel <davidedaniel@gmail.com>",
   "license": "MIT",
@@ -24,37 +24,26 @@
     "modular"
   ],
   "dependencies": {
+    "@hackoregon/civic-babel-presets": "^1.0.0-alpha.be5b7ddd",
     "assets-webpack-plugin": "^3.5.1",
     "autoprefixer": "^6.7.7",
-    "babel-loader": "^7.0.0",
+    "babel-loader": "^7.1.1",
     "babel-plugin-dynamic-import-node": "^1.0.1",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-es2015-destructuring": "^6.23.0",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-plugin-transform-regenerator": "^6.24.1",
+    "babel-plugin-transform-regenerator": "^6.23.0",
     "babel-preset-env": "^1.4.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-1": "^6.24.1",
     "css-loader": "^0.28.0",
-    "extract-text-webpack-plugin": "^2.1.2",
+    "extract-text-webpack-plugin": "2.1.2",
     "file-loader": "^0.11.1",
     "postcss-loader": "^1.3.3",
     "ramda": "^0.23.0",
     "style-loader": "^0.16.1",
-    "url-loader": "^0.5.8",
+    "url-loader": "^0.5.7",
     "webpack": "^2.5.1"
-  },
-  "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-core": "^6.24.1",
-    "eslint": "^3.19.0",
-    "eslint-config-airbnb": "^14.1.0",
-    "eslint-plugin-babel": "^4.1.1",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^4.0.0",
-    "eslint-plugin-prefer-object-spread": "^1.2.1",
-    "eslint-plugin-react": "^6.10.3",
-    "version-bump-prompt": "^3.1.0"
   }
 }

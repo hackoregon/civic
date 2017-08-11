@@ -1,4 +1,7 @@
 const babelLoader = require.resolve('babel-loader');
+const babelQuery = require('@hackoregon/civic-babel-presets');
+
+console.log(babelQuery);
 
 export default {
   module: {
