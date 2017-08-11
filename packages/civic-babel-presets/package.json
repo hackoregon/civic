@@ -1,0 +1,16 @@
+{
+  "name": "@hackoregon/civic-babel-presets",
+  "version": "1.0.0-alpha.e7d4647a",
+  "description": "Unified babel presets for civic",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "babel",
+    "presets",
+    "civic"
+  ],
+  "author": "David Daniel <davidedaniel@gmail.com> (http://davidedaniel.github.io)",
+  "license": "MIT"
+}
