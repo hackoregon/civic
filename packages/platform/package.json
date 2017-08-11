@@ -1,5 +1,5 @@
 {
-  "name": "civic-platform",
+  "name": "@hackoregon/civic-platform",
   "version": "1.0.0-alpha.a7c078a1",
   "description": "Civic - A Hack Oregon Project",
   "engines": {
