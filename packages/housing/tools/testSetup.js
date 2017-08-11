@@ -42,4 +42,6 @@ Object.keys(document.defaultView).forEach((property) => {
   }
 });
 
+global.L = require('leaflet'); // requiring in this way to pass tests
+
 documentRef = document;  // eslint-disable-line no-undef
