@@ -10,26 +10,26 @@ function formatMyMessage(msg) {
   return `${civicMsg} ${msg}`;
 }
 
-function starLogger(logLevel, msg) {
+function civicLogger(logLevel, msg) {
   // eslint-disable-next-line no-console
   console[logLevel](formatMyMessage(msg));
 }
 
 module.exports = {
   success(msg) {
-    starLogger('info', colors.green(msg));
+    civicLogger('info', colors.green(msg));
   },
   log(msg) {
-    starLogger('log', msg);
+    civicLogger('log', msg);
   },
   info(msg) {
-    starLogger('info', msg);
+    civicLogger('info', msg);
   },
   warn(msg) {
-    starLogger('warn', colors.yellow(msg));
+    civicLogger('warn', colors.yellow(msg));
   },
   error(msg) {
-    starLogger('error', colors.red(msg));
+    civicLogger('error', colors.red(msg));
   },
   plain(msg) {
     // eslint-disable-next-line no-console
