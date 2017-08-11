@@ -1,3 +1,5 @@
+/* eslint-disable no-global-require */
+
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 

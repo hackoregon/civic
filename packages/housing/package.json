@@ -1,6 +1,6 @@
 {
   "name": "@hackoregon/civic-housing",
-  "version": "1.0.0-alpha.a7c078a1",
+  "version": "1.0.0-alpha.be5b7ddd",
   "description": "Civic/Housing 2017",
   "main": "src/index.js",
   "contributors": [
@@ -50,7 +50,7 @@
   "dependencies": {
     "@hackoregon/civic-server": "^0.0.10",
     "@hackoregon/component-library": "^0.2.5",
-    "@hackoregon/webpacker": "^1.0.0-alpha.a7c078a1",
+    "@hackoregon/webpacker": "^1.0.0-alpha.be5b7ddd",
     "compression": "^1.6.2",
     "cross-env": "^3.1.3",
     "d3-format": "^1.2.0",
@@ -74,7 +74,7 @@
     "styled-components": "^1.4.2"
   },
   "devDependencies": {
-    "@hackoregon/webpacker": "^1.0.0-alpha.eadf9ac2",
+    "@hackoregon/webpacker": "^1.0.0-alpha.be5b7ddd",
     "autoprefixer": "^6.7.7",
     "babel-cli": "^6.23.0",
     "babel-core": "^6.23.1",

@@ -1,6 +1,6 @@
 {
   "name": "@hackoregon/civic-platform",
-  "version": "1.0.0-alpha.a7c078a1",
+  "version": "1.0.0-alpha.be5b7ddd",
   "description": "Civic - A Hack Oregon Project",
   "engines": {
     "node": ">=6"
@@ -30,8 +30,8 @@
     "url": "https://github.com/hackoregon/civic-platform"
   },
   "dependencies": {
-    "@hackoregon/civic-emergency-response": "^1.0.0-alpha.a7c078a1",
-    "@hackoregon/civic-housing": "^1.0.0-alpha.a7c078a1",
+    "@hackoregon/civic-emergency-response": "^1.0.0-alpha.be5b7ddd",
+    "@hackoregon/civic-housing": "^1.0.0-alpha.be5b7ddd",
     "@hackoregon/civic-server": "^0.0.10",
     "@hackoregon/component-library": "^0.2.5",
     "app-root-dir": "^1.0.2",

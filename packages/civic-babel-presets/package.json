@@ -1,6 +1,6 @@
 {
   "name": "@hackoregon/civic-babel-presets",
-  "version": "0.0.1",
+  "version": "1.0.0-alpha.be5b7ddd",
   "private": true,
   "description": "Unified babel presets for civic",
   "main": "index.js",
