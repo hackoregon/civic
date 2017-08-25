@@ -11,7 +11,7 @@ const BUNDLE_PATH      = resolve(REAL_ROOT, 'build');
 const SRC_PATH         = resolve(REAL_ROOT, 'src');
 
 const env              = process.env.NODE_ENV;
-const isDev            = env === 'development';
+// const isDev            = env === 'development';
 const isProd           = env === 'production';
 const assetFileName    = 'civic-assets.json';
 
@@ -45,65 +45,65 @@ const config = {
       // 'leaflet',
     ],
   },
-  module: {
-    rules: [
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-          presets: [
-            'react',
-            'stage-1',
-                  ['es2015', { modules: false }],
-          ],
-          plugins: [
-            'transform-regenerator',
-            'transform-object-rest-spread',
-            'transform-es2015-destructuring',
-            'transform-class-properties',
-            'syntax-dynamic-import',
-          ],
-        },
-      },
-    ],
-  },
+  // module: {
+  //   rules: [
+  //     {
+  //       test: /\.jsx?$/,
+  //       exclude: /node_modules/,
+  //       loader: 'babel-loader',
+  //       query: {
+  //         presets: [
+  //           'react',
+  //           'stage-1',
+  //                 ['es2015', { modules: false }],
+  //         ],
+  //         plugins: [
+  //           'transform-regenerator',
+  //           'transform-object-rest-spread',
+  //           'transform-es2015-destructuring',
+  //           'transform-class-properties',
+  //           'syntax-dynamic-import',
+  //         ],
+  //       },
+  //     },
+  //   ],
+  // },
   output: {
     path: `${BUNDLE_PATH}/${PUBLIC_PARAM}/`,
     publicPath: staticServerAddr,
     filename: 'js/[name].bundle.js',
     chunkFilename: 'js/[name].chunk.js',
   },
-  plugins: removeEmpty([
-    new IsomorphicLoaderPlugin({
-      keepExistingConfig: false,
-      assetsFile: 'isomorphic-assets.json',
-    }),
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   name: 'vendor',
-    //   chunks: ['app'],
-    //   filename: 'js/[name].bundle.js',
-    //   minChunks: ({ resource }) => /node_modules/.test(resource),
-    // }),
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   name: 'vendor-css',
-    //   chunks: ['app'],
-    //   filename: 'css/[name].[chunkHash].css',
-    //   minChunks: ({ resource }) => /node_modules/.test(resource),
-    // }),
-    new webpack.LoaderOptionsPlugin({ options: { postcss: [autoprefixer] } }),
-    isProd && (
-          new webpack.LoaderOptionsPlugin({
-            minimize: true,
-            debug: false,
-          })
-        ),
-    new AssetsPlugin({
-      filename: assetFileName,
-      prettyPrint: true,
-      path: BUNDLE_PATH,
-    }),
-  ]),
+  // plugins: removeEmpty([
+  //   // new IsomorphicLoaderPlugin({
+  //   //   keepExistingConfig: false,
+  //   //   assetsFile: 'isomorphic-assets.json',
+  //   // }),
+  //   // new webpack.optimize.CommonsChunkPlugin({
+  //   //   name: 'vendor',
+  //   //   chunks: ['app'],
+  //   //   filename: 'js/[name].bundle.js',
+  //   //   minChunks: ({ resource }) => /node_modules/.test(resource),
+  //   // }),
+  //   // new webpack.optimize.CommonsChunkPlugin({
+  //   //   name: 'vendor-css',
+  //   //   chunks: ['app'],
+  //   //   filename: 'css/[name].[chunkHash].css',
+  //   //   minChunks: ({ resource }) => /node_modules/.test(resource),
+  //   // }),
+  //   // new webpack.LoaderOptionsPlugin({ options: { postcss: [autoprefixer] } }),
+  //   // isProd && (
+  //   //       new webpack.LoaderOptionsPlugin({
+  //   //         minimize: true,
+  //   //         debug: false,
+  //   //       })
+  //   //     ),
+  //   // new AssetsPlugin({
+  //   //   filename: assetFileName,
+  //   //   prettyPrint: true,
+  //   //   path: BUNDLE_PATH,
+  //   // }),
+  // ]),
 };
 
 const webpackConfig = composeConfig(
@@ -124,5 +124,5 @@ const webpackConfig = composeConfig(
 //   }),
 // };
 
-console.log(webpackConfig);
+
 export default webpackConfig;

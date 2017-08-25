@@ -2,7 +2,7 @@
 import { createStore, compose, applyMiddleware } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
 import thunk from 'redux-thunk';
-import createReducer from '../client/state';
+import createReducer from '../state';
 // import { sideEffectsMiddleware } from './middleware';
 
 function configureStoreProd(initialState = {}, history) {
@@ -28,6 +28,7 @@ function configureStoreProd(initialState = {}, history) {
 function configureStoreDev(initialState = {}, history) {
   const middlewares = [
     thunk,
+    // sideEffectsMiddleware,
     routerMiddleware(history),
   ];
 
@@ -44,7 +45,7 @@ function configureStoreDev(initialState = {}, history) {
   /* istanbul ignore next */
   if (module.hot) {
     module.hot.accept('./state', () => {
-      Promise.resolve(require.ensure([], require => require('../client/state')))
+      Promise.resolve(require.ensure([], require => require('../state')))
       .then((reducerModule) => {
         const createReducers = reducerModule.default;
         const nextReducers = createReducers(store.asyncReducers);

@@ -32,6 +32,7 @@
   "dependencies": {
     "@hackoregon/civic-emergency-response": "^1.0.0-alpha.be5b7ddd",
     "@hackoregon/civic-housing": "^1.0.0-alpha.be5b7ddd",
+    "@hackoregon/webpacker": "^1.0.0-alpha.be5b7ddd",
     "@hackoregon/civic-server": "^0.0.10",
     "@hackoregon/component-library": "^0.2.5",
     "app-root-dir": "^1.0.2",

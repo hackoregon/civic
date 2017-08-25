@@ -3,7 +3,8 @@ import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 
 const Shell = ({ children, metaTags }) => (
-  <div><Helmet {...metaTags} />
+  <div>
+    <Helmet {...metaTags} />
     {children}
   </div>
 );

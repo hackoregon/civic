@@ -1,28 +1,23 @@
-// const extendRequire = require('isomorphic-loader/lib/extend-require');
-// const settings = require('../../tools/app-settings.js');
+/* eslint-disable consistent-return */
 
-require('css-modules-require-hook')({
-  generateScopedName: '[path][name]__[local]___[hash:base64:5]',
+const express = require('express');
+const logger = require('./logger');
+const setup = require('./middleware');
+const resolve = require('path').resolve;
+
+const app = express();
+
+// NOTE: for later -> app.use('/api', someApi);
+
+setup(app, {
+  outputPath: resolve(process.cwd(), 'build'),
+  publicPath: '/',
 });
 
-// extendRequire({
-  // startDelay: 1000,
-  // processAssets: (assets) => {
-  //   const appSrcDir = (settings.getEnv() || settings.build.dir).split('/')[0];
-  //   if (appSrcDir !== settings.src.dir && assets.marked) {
-  //     const marked = assets.marked;
-  //     Object.keys(marked).forEach((k) => {
-  //       if (k.startsWith(settings.src.client) || k.startsWith(settings.src.server)) {
-  //         const nk = k.replace(settings.src.dir, appSrcDir);
-  //         marked[nk] = marked[k];
-  //       }
-  //     });
-  //   }
+const port = process.env.PORT || 3000;
 
-    // return assets;
-  // },
-// }).then(() => {
-require('./server');
-// }).catch((err) => {
-  // console.log('Error in isomorphic-loader', err); // eslint-disable-line
-// });
+app.listen(port, (err) => {
+  if (err) return logger.error(err.message);
+
+  logger.appStarted(port);
+});

@@ -1,21 +1,22 @@
+/* eslint-disable import/no-extraneous-dependencies */
 // requires
-const { resolve }                          = require('path');
+const { resolve } = require('path');
 const { writeFile, existsSync, mkdirSync } = require('fs');
-const { createMonitor, walk }              = require('watch');
-const { transformFileSync }                = require('babel-core');
-const colors                               = require('colors/safe');
+const { createMonitor, walk } = require('watch');
+const { transformFileSync } = require('babel-core');
+const colors = require('colors/safe');
 
 // resolves
-const PKGS                                 = resolve(__dirname, '../packages');
-const babelrc                              = resolve(__dirname, '..', '.babelrc');
+const PKGS = resolve(__dirname, '../packages');
+const babelrc = resolve(__dirname, '..', '.babelrc');
 
 // consts
 const watchFlag = process.argv[2] === '--watch';
 
 // patterns
 const jsFileReg = /.js/;
-const srcReg    = /\/src\//;
-const pathReg   = /(\/.*\/)/;
+const srcReg = /\/src\//;
+const pathReg = /(\/.*\/)/;
 const blackFlagsString = [
   'node_modules',
   '__tests__',

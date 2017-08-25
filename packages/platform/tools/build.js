@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 import webpack from 'webpack';
 import chalk from 'chalk';
-import config from '../webpack.config.prod';
+import config from '../webpack.config.babel';
 
 const errMsg = chalk.red;
 const successMsg = chalk.green;
