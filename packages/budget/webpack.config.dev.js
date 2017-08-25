@@ -1,42 +1,42 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const webpack = require('webpack'); //
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const autoprefixer = require('autoprefixer');
 const { resolve } = require('path');
-
-const path = require('path');
-
-const isProd = process.env.NODE_ENV === 'production';
-const className = isProd ? '[hash:base64:5]' : '[name]__[local]-[hash:base64:5]';
 
 const commitSha = require('child_process').execSync('git rev-parse --short HEAD').toString().trim();
 
 module.exports = {
   resolve: {
-    extensions: ['', '.js', '.jsx', '.json'],
+    extensions: ['.js', '.jsx', '.json'],
   },
-  debug: true,
-  devtool: 'source-map',
-  noInfo: true,
-  entry: [
-    './src/webpack-public-path',
-    'babel-polyfill',
-    'webpack-hot-middleware/client?reload=true',
-    resolve(__dirname, 'src/client.js'),
-  ],
+  devtool: 'eval',
+  entry: {
+    main: [
+      'react-hot-loader/patch',
+      './src/webpack-public-path',
+      'webpack-hot-middleware/client?reload=true',
+      resolve(__dirname, './src/client.dev'),
+    ],
+    vendor: [
+      'react',
+      'react-dom',
+      'react-helmet',
+      'react-redux',
+      'react-router',
+      'leaflet',
+    ],
+  },
   target: 'web',
   output: {
     path: resolve(__dirname, 'build'),
     publicPath: '/',
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
   },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development'),
-      __DEV__: true,
-    }),
+    new webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify('development'), __DEV__: true }),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
+    new webpack.NamedModulesPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
       template: 'src/template.ejs',
       minify: {
@@ -47,32 +47,45 @@ module.exports = {
       commitSha,
     }),
   ],
-  babelQuery: {
-    presets: ['babel-preset-react-hmre'].map(require.resolve),
+  devServer: {
+    hot: true,
+    contentBase: resolve(__dirname, 'build'),
+    publicPath: '/',
   },
   module: {
     loaders: [
-      { test: /\.js$/, exclude: /node_modules/, loaders: ['babel?presets[]=es2015'] },
-      { test: /\.eot(\?v=\d+.\d+.\d+)?$/, loader: 'file' },
-      { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url-loader?limit=10000&mimetype=application/font-woff' },
-      { test: /\.[ot]tf(\?v=\d+.\d+.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=application/octet-stream' },
-      { test: /\.ico$/, loader: 'file?name=[name].[ext]' },
-      { test: /\.json$/, loader: 'json' },
-      { test: /(\.css|\.scss)$/, loaders: ['style', 'css?sourceMap', 'postcss'] },
       {
-        test: /leaflet\.css$/,
-        loader: 'style-loader!css-loader',
-      },
-
-      {
-        test: /\.(png|svg|jpg|jpeg|gif)$/,
-        loader: 'url-loader',
+        test: /\.jsx?$/,
+        include: resolve(__dirname, 'src'),
+        loader: 'babel-loader',
         query: {
-          limit: 10000,
-          emitFile: true,
+          presets: [
+            [
+              'es2015', {
+                modules: false,
+              },
+            ],
+            'stage-1',
+            'react',
+          ],
+          plugins: ['transform-object-rest-spread', 'transform-es2015-destructuring', 'transform-class-properties', 'syntax-dynamic-import'],
         },
+      }, {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader?limit=10000&mimetype=image/svg+xml',
+      }, {
+        test: /\.(jpe?g|png|gif)$/i,
+        loader: 'file-loader?name=[name].[ext]',
+      }, {
+        test: /\.ico$/,
+        loader: 'file-loader?name=[name].[ext]',
+      }, {
+        test: /(\.css|\.scss)$/,
+        loaders: ['style-loader', 'css-loader?sourceMap&modules'],
+      }, {
+        test: /\.json$/,
+        loader: 'json-loader',
       },
     ],
   },
-  postcss: () => [autoprefixer],
 };
