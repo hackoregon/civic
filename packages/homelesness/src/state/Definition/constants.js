@@ -1,0 +1,22 @@
+/*
+ *
+ * Definition constants
+ *
+ */
+
+export const NAME = 'definition';
+export const NON_ACTION_TYPE = '30px';
+
+export const INITIAL_STATE = {
+};
+
+const GET_SHELTER_TYPE = 'HOMELESSNESS/DEFINITION/SHELTER/GET';
+const GET_SHELTER_TYPE_SUCCESS = 'HOMELESSNESS/DEFINITION/SHELTER/GET/SUCCESS';
+const GET_SHELTER_TYPE_FAILURE = 'HOMELESSNESS/DEFINITION/SHELTER/GET/FAILURE';
+
+
+export const actionTypes = {
+  GET_SHELTER_TYPE,
+  GET_SHELTER_TYPE_SUCCESS,
+  GET_SHELTER_TYPE_FAILURE,
+};
