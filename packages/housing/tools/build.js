@@ -4,9 +4,9 @@ import webpack from 'webpack';
 import chalk from 'chalk';
 import config from '../webpack.config.prod';
 
-const errMsg     = chalk.red;
+const errMsg = chalk.red;
 const successMsg = chalk.green;
-const warnMsg    = chalk.yellow;
+const warnMsg = chalk.yellow;
 const loadingMsg = chalk.blue;
 
 process.env.NODE_ENV = 'production';

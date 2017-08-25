@@ -2,9 +2,9 @@
 import isClient from '@hackoregon/civic-server/lib/utils/isClient';
 // import emergencyRoutes from 'hackoregon-frontend-starter/src/index';
 // import housingRoutes from '@hackoregon/civic-housing';
-// import HousingApp from '@hackoregon/civic-housing';
+import HousingApp from '@hackoregon/civic-housing';
 import consumeRoutes from '@hackoregon/civic-server/lib/router/consumeRoutes';
-import Shell from '../client/Shell';
+import Shell from '../universal/Shell';
 import Collection from './Collection';
 
 // import configureStore from './configureStore';
@@ -147,6 +147,10 @@ const civicRoutes = [
     //   // },
     //
     // ],
+  },
+  {
+    path: 'collections/housing',
+    component: HousingApp,
   },
   {
     path: '/about',

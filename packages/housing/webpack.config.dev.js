@@ -13,7 +13,6 @@ module.exports = {
   entry: {
     main: [
       'react-hot-loader/patch',
-      './src/webpack-public-path',
       'webpack-hot-middleware/client?reload=true',
       'leaflet',
       resolve(__dirname, 'src/client.dev'),

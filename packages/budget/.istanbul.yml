@@ -1,0 +1,4 @@
+instrumentation:
+  excludes: ['*.test.js']
+  extensions: ['.js']
+  include-all-sources: true
