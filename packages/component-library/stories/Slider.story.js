@@ -1,5 +1,7 @@
 import React from 'react';
-import { storiesOf } from '@kadira/storybook';
+/* eslint-disable import/no-extraneous-dependencies */
+import { storiesOf } from '@storybook/react';
+import { withInfo } from '@storybook/addon-info';
 import { Slider } from '../src';
 
 const displayName = Slider.displayName || 'Slider';
@@ -39,12 +41,7 @@ const demoCode = () => {
   return (<CustomSlider />);
 };
 
-const propDocs = { inline: true, propTables: [Slider] };
+// const propDocs = { inline: true, propTables: [Slider] };
 
 export default () => storiesOf(displayName, module)
-  .addWithInfo(
-    title,
-    description,
-    demoCode,
-    propDocs,
-  );
+  .add(title, demoCode);

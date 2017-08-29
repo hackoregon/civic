@@ -1,5 +1,5 @@
 import React from 'react';
-import { storiesOf, linkTo } from '@kadira/storybook'; // eslint-disable-line
+import { storiesOf, linkTo } from '@storybook/react'; // eslint-disable-line
 import buttonStory from './Button.story';
 import storycardStory from './StoryCard.story';
 import storyLinkStory from './StoryLink.story';

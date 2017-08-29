@@ -1,5 +1,8 @@
 import React from 'react';
-import { storiesOf, action } from '@kadira/storybook';
+/* eslint-disable import/no-extraneous-dependencies */
+import { storiesOf } from '@storybook/react';
+import { withInfo } from '@storybook/addon-info';
+
 import { Header } from '../src';
 import Hero from '../src/Hero/Hero';
 
@@ -18,13 +21,8 @@ const altDemo = () => (
   <div><Hero /><Header title="Civic" /></div>
 );
 
-const propDocs = { inline: true, propTables: [Header] };
+// const propDocs = { inline: true, propTables: [Header] };
 
 export default () => storiesOf(displayName, module)
-  .addWithInfo(
-    title,
-    description,
-    demoCode,
-    propDocs,
-  )
+  .add(title, demoCode)
   .add(altTitle, altDemo);

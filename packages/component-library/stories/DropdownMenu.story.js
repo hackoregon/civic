@@ -1,5 +1,8 @@
 import React from 'react';
-import { storiesOf } from '@kadira/storybook';
+/* eslint-disable import/no-extraneous-dependencies */
+import { storiesOf } from '@storybook/react';
+import { withInfo } from '@storybook/addon-info';
+
 import { DropdownMenu } from '../src';
 
 const displayName = DropdownMenu.displayName || 'DropdownMenu';
@@ -21,12 +24,10 @@ const demoCode = () => (
   />
 );
 
-const propDocs = { inline: true, propTables: [DropdownMenu] };
+// const propDocs = { inline: true, propTables: [DropdownMenu] };
 
 export default () => storiesOf(displayName, module)
-  .addWithInfo(
+  .add(
     title,
-    description,
-    demoCode,
-    propDocs,
+    (demoCode)
   );

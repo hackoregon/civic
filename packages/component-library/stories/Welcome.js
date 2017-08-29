@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+// import { storiesOf } from '@storybook/react';
 
 const styles = {
   main: {
@@ -75,3 +76,8 @@ export default class Welcome extends React.Component {
     );
   }
 }
+//
+// storiesOf('Welcome', module)
+//   .add('to Storybook', () => (
+//     <Welcome showApp={linkTo('Button')} />
+//   ));

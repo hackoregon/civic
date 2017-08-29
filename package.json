@@ -2,6 +2,12 @@
   "name": "civic",
   "devDependencies": {
     "@hackoregon/webpacker": "^0.1.7",
+    "@storybook/addon-actions": "^3.2.6",
+    "@storybook/addon-info": "^3.2.9",
+    "@storybook/addon-knobs": "^3.2.8",
+    "@storybook/addon-links": "^3.2.6",
+    "@storybook/addon-notes": "^3.2.7",
+    "@storybook/react": "^3.2.8",
     "autoprefixer": "^6.7.7",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
@@ -78,7 +84,7 @@
     "link": "lerna exec npm link",
     "lint": "lerna run lint -- --fix",
     "postinstall": "npm run bootstrap",
-    "storybook": "BABEL_ENV=cjs start-storybook -p 6006",
+    "storybook": "BABEL_ENV=esm start-storybook -p 6006",
     "test": "lerna run test"
   },
   "dependencies": {

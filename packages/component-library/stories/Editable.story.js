@@ -1,6 +1,7 @@
 import React from 'react';
-import { storiesOf } from '@kadira/storybook';
-import { withKnobs, text, boolean, number, object } from '@kadira/storybook-addon-knobs';
+/* eslint-disable import/no-extraneous-dependencies */
+import { storiesOf } from '@storybook/react';
+import { withKnobs, text, boolean, number, object } from '@storybook/addon-knobs';
 
 export default () => storiesOf('Editable UI components', module)
   .addDecorator(withKnobs)
