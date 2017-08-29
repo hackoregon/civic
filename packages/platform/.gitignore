@@ -1,6 +1,0 @@
-node_modules
-build
-*.log
-.DS_Store
-.dev
-.isomorphic-loader-config.json

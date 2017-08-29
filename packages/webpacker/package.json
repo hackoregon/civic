@@ -1,6 +1,6 @@
 {
   "name": "@hackoregon/webpacker",
-  "version": "1.0.0-alpha.1c62c05f",
+  "version": "1.0.1-alpha.0",
   "description": "Compose your webpack configs - comes with a default",
   "author": "David Daniel <davidedaniel@gmail.com>",
   "license": "MIT",
@@ -24,7 +24,7 @@
     "modular"
   ],
   "dependencies": {
-    "@hackoregon/civic-babel-presets": "^1.0.0-alpha.1c62c05f",
+    "@hackoregon/civic-babel-presets": "^1.0.1-alpha.0",
     "assets-webpack-plugin": "^3.5.1",
     "autoprefixer": "^6.7.7",
     "babel-loader": "^7.1.1",
