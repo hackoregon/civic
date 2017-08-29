@@ -16,7 +16,7 @@
       "arrow-body-style": 0,
       "import/no-extraneous-dependencies": [
         "error", {
-          "devDependencies": ["**/**/*.story.js", "**/**/*.test.js", "**/**/stories/index.js"]
+          "devDependencies": ["packages/**/*.story.js", "packages/**/*.test.js", "packages/**/stories/index.js"]
         }
       ],
       "comma-dangle": [
