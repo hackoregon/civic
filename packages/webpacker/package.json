@@ -1,6 +1,6 @@
 {
   "name": "@hackoregon/webpacker",
-  "version": "1.0.0-alpha.be5b7ddd",
+  "version": "1.0.0-alpha.1c62c05f",
   "description": "Compose your webpack configs - comes with a default",
   "author": "David Daniel <davidedaniel@gmail.com>",
   "license": "MIT",
@@ -24,7 +24,7 @@
     "modular"
   ],
   "dependencies": {
-    "@hackoregon/civic-babel-presets": "^1.0.0-alpha.be5b7ddd",
+    "@hackoregon/civic-babel-presets": "^1.0.0-alpha.1c62c05f",
     "assets-webpack-plugin": "^3.5.1",
     "autoprefixer": "^6.7.7",
     "babel-loader": "^7.1.1",
@@ -33,7 +33,7 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-es2015-destructuring": "^6.23.0",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-plugin-transform-regenerator": "^6.23.0",
+    "babel-plugin-transform-regenerator": "^6.26.0",
     "babel-preset-env": "^1.4.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-1": "^6.24.1",
