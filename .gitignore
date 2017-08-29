@@ -2,7 +2,8 @@ node_modules
 coverage
 reports
 build
-dist
+dist/
+es/
 lib-cov
 
 *.log*
