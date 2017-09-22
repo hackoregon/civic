@@ -85,5 +85,8 @@
     "postinstall": "npm run bootstrap",
     "storybook": "BABEL_ENV=esm start-storybook -p 6006",
     "test": "lerna run test"
+  },
+  "dependencies": {
+    "@hackoregon/civic-server": "0.0.10"
   }
 }
