@@ -1,6 +1,6 @@
 {
   "name": "@hackoregon/civic-logger",
-  "version": "1.0.1-alpha.1",
+  "version": "1.0.0-alpha.1c62c05f",
   "description": "just a logger",
   "main": "src/index.js",
   "private": true,

@@ -1,7 +1,6 @@
 {
   "name": "civic",
   "devDependencies": {
-    "@hackoregon/webpacker": "^0.1.7",
     "@storybook/addon-actions": "^3.2.6",
     "@storybook/addon-info": "^3.2.9",
     "@storybook/addon-knobs": "^3.2.8",
@@ -86,8 +85,5 @@
     "postinstall": "npm run bootstrap",
     "storybook": "BABEL_ENV=esm start-storybook -p 6006",
     "test": "lerna run test"
-  },
-  "dependencies": {
-    "babel-cli": "^6.24.1"
   }
 }
