@@ -32,7 +32,7 @@
   "dependencies": {
     "@hackoregon/civic-emergency-response": "^1.0.0-alpha.1c62c05f",
     "@hackoregon/civic-housing": "^1.0.0-alpha.1c62c05f",
-    "@hackoregon/civic-server": "^0.0.10",
+    "@hackoregon/civic-server": "0.0.10",
     "@hackoregon/component-library": "^1.0.0-alpha.1c62c05f",
     "@hackoregon/webpacker": "^1.0.0-alpha.1c62c05f",
     "app-root-dir": "^1.0.2",
@@ -44,7 +44,7 @@
     "css-loader": "^0.28.0",
     "css-modules-require-hook": "^4.0.6",
     "express": "^4.14.1",
-    "extract-text-webpack-plugin": "2.1.2",
+    "extract-text-webpack-plugin": "^2.1.2",
     "file-loader": "^0.11.1",
     "isomorphic-loader": "^1.6.2",
     "lodash": "^4.17.4",

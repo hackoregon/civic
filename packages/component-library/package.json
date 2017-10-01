@@ -30,11 +30,11 @@
     "eslint-config-airbnb-base": "^11.0.0",
     "eslint-import-resolver-webpack": "^0.7.1",
     "eslint-loader": "^1.6.1",
-    "eslint-plugin-babel": "^4.1.1",
+    "eslint-plugin-babel": "^4.0.1",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
-    "eslint-plugin-prefer-object-spread": "^1.2.1",
-    "eslint-plugin-react": "^6.10.3",
+    "eslint-plugin-prefer-object-spread": "^1.1.0",
+    "eslint-plugin-react": "^6.10.0",
     "ignore-styles": "^5.0.1",
     "mocha": "^3.2.0",
     "mocha-clean": "^1.0.0",
@@ -50,12 +50,12 @@
     "cheerio": "^0.22.0",
     "classnames": "^2.2.5",
     "copy-to-clipboard": "^3.0.5",
-    "d3": "^4.7.3",
+    "d3": "^4.8.0",
     "d3-format": "^1.2.0",
     "d3-sankey": "^0.4.2",
     "d3-shape": "^1.0.6",
     "ramda": "^0.23.0",
-    "rc-slider": "^5.4.0",
+    "rc-slider": "^7.0.2",
     "react": "^15.5.3",
     "react-addons-transition-group": "^15.5.3",
     "react-dom": "^15.5.3",
@@ -63,6 +63,6 @@
     "react-motion": "^0.4.7",
     "react-router": "^3.0.0",
     "react-selectize": "^2.1.0",
-    "recharts": "^0.20.1"
+    "recharts": "^0.22.1"
   }
 }
