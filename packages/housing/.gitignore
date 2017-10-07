@@ -1,9 +1,0 @@
-*.log*
-lib-cov
-coverage
-.lock-wscript
-node_modules
-reports
-build
-.idea
-.DS_Store

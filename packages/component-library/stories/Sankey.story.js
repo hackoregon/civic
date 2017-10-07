@@ -1,6 +1,8 @@
 import React from 'react';
 import { take } from 'ramda';
-import { storiesOf } from '@kadira/storybook';
+/* eslint-disable import/no-extraneous-dependencies */
+import { storiesOf } from '@storybook/react';
+import { withInfo } from '@storybook/addon-info';
 import { Sankey } from '../src';
 
 const displayName = Sankey.displayName || 'Sankey';
@@ -21,13 +23,8 @@ const demoCode = () => (
   </div>
 );
 
-const propDocs = { inline: true, propTables: [Sankey] };
+// const propDocs = { inline: true, propTables: [Sankey] };
 
 export default () => storiesOf(displayName, module)
-  .addWithInfo(
-    title,
-    description,
-    demoCode,
-    propDocs,
-  );
+.add(title, demoCode);
 

@@ -1,16 +1,21 @@
 import React from 'react';
-import { storiesOf, action } from '@kadira/storybook';
+/* eslint-disable import/no-extraneous-dependencies */
+import { storiesOf } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
+import { withInfo } from '@storybook/addon-info';
+
 import {
   withKnobs,
   text, number, object, array,
-} from '@kadira/storybook-addon-knobs';
+} from '@storybook/addon-knobs';
 import { Chart, ChartData, Pie } from '../src';
 import { colors, getRandomValuesArray, randomizer } from './shared';
 
 export default () => storiesOf('Pie/Donut visualization').addDecorator(withKnobs)
-.addWithInfo(
+
+.add(
   'simple usage',
-  'edit this visual in the knobs tab below and check click events in the actions tab',
+  // 'edit this visual in the knobs tab below and check click events in the actions tab',
   () => {
     const labels = ['A', 'B', 'C', 'D', 'E', 'F'];
     const numberOfData = number('Amount of data values', 3);

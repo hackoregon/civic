@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const webpack = require('webpack'); //
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { resolve } = require('path');
@@ -9,16 +10,27 @@ module.exports = {
     extensions: ['.js', '.jsx', '.json'],
   },
   devtool: 'eval',
-  entry: [
-    'react-hot-loader/patch', './src/webpack-public-path',
-    'webpack-hot-middleware/client?reload=true',
-    resolve(__dirname, 'src/client.dev'),
-  ],
+  entry: {
+    main: [
+      'react-hot-loader/patch',
+      'webpack-hot-middleware/client?reload=true',
+      'leaflet',
+      resolve(__dirname, 'src/client.dev'),
+    ],
+    vendor: [
+      'react',
+      'react-dom',
+      'react-helmet',
+      'react-redux',
+      'react-router',
+      'leaflet',
+    ],
+  },
   target: 'web',
   output: {
     path: resolve(__dirname, 'build'),
     publicPath: '/',
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
   },
   plugins: [
     new webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify('development'), __DEV__: true }),

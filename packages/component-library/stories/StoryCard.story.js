@@ -1,6 +1,8 @@
 /* eslint-disable no-console */
 import React from 'react';
-import { storiesOf } from '@kadira/storybook';
+/* eslint-disable import/no-extraneous-dependencies */
+import { storiesOf } from '@storybook/react';
+import { withInfo } from '@storybook/addon-info';
 import { StoryCard, Chart, ChartData, Pie } from '../src';
 import { getRandomValuesArray, getColors, randomizer, wallOfRichText } from './shared';
 
@@ -61,11 +63,9 @@ const tdvDemo = () => (
 );
 
 export default () => storiesOf('StoryCard', module)
-.addWithInfo(
+.add(
   'Simple usage',
-  'This is some basic usage with the StoryCard with just a title and descriptions',
-  () => <StoryCard title={'Some title'}><p className="Description">some descriptions go here</p></StoryCard>,
-  { inline: true, propTables: [StoryCard] },
-  )
-  .addWithInfo('with title & description', 'this time with title & desc', tdDemo)
-  .addWithInfo('with title, description & visualization', 'this time with title, desc & vis', tdvDemo);
+  // 'This is some basic usage with the StoryCard with just a title and descriptions')(
+  () => <StoryCard title={'Some title'}><p className="Description">some descriptions go here</p></StoryCard>)
+  .add('with title & description', tdDemo)
+  .add('with title, description & visualization', tdvDemo);

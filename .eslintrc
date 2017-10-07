@@ -1,46 +1,49 @@
 {
-    "parser": "babel-eslint",
-    "extends": "airbnb",
-    "env": {
-      "mocha": true
-    },
-    "plugins": [
-      "react"
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "env": {
+    "mocha": true
+  },
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "jsx-a11y/img-has-alt": 0,
+    "prefer-arrow-callback": 0,
+    "func-names": 2,
+    "react/jsx-filename-extension": 0,
+    "react/require-default-props": 0,
+    "arrow-body-style": 0,
+    "import/no-extraneous-dependencies": [
+      "error", {
+        "devDependencies": [
+          "packages/**/*.story.js",
+          "packages/**/*.test.js"
+          ]
+      }
     ],
-    "rules": {
-      "jsx-a11y/img-has-alt": 0,
-      "prefer-arrow-callback": 0,
-      "func-names": 2,
-      "react/jsx-filename-extension": 0,
-      "react/require-default-props": 0,
-      "arrow-body-style": 0,
-      "import/no-extraneous-dependencies": [
-        "error", {
-          "devDependencies": ["**/**/*.story.js", "**/**/*.test.js", "**/**/stories/index.js"]
-        }
-      ],
-      "comma-dangle": [
-        "error",
-        {
-          "arrays": "always-multiline",
-          "objects": "always-multiline",
-          "imports": "always-multiline",
-          "exports": "always-multiline",
-          "functions": "ignore"
-        }
-      ]
-    },
-    "globals": {
-      "__DEV__": true,
-      "window": true,
-      "document": true,
-      "describe": true,
-      "it": true,
-      "jest": true,
-      "expect": true,
-      "beforeEach": true,
-      "afterEach": true,
-      "before": true,
-      "after": true
-    }
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "ignore"
+      }
+    ]
+  },
+  "globals": {
+    "__DEV__": true,
+    "window": true,
+    "document": true,
+    "describe": true,
+    "it": true,
+    "jest": true,
+    "expect": true,
+    "beforeEach": true,
+    "afterEach": true,
+    "before": true,
+    "after": true
   }
+}
