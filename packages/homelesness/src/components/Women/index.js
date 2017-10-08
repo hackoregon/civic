@@ -7,15 +7,15 @@ import shared from '../shared.styles';
 import ArcPieChart from './ArcPieChart';
 
 const propsData2 = [
-  { name: 'Percent of homeless women who were affected by domestic violence', Homeless: 45  },
-  { name: 'Percent of homeless women who reported having a disability', Homeless: 67  },
+  { name: 'Percent of homeless women who were affected by domestic violence', Homeless: 45 },
+  { name: 'Percent of homeless women who reported having a disability', Homeless: 67 },
 ];
 
 const pieData = [
   {
     data: [
-      { name: 'Percent of homeless who were women', value: 35  },
-      { name: 'WontLabelMe', value: 65  },
+      { name: 'Percent of homeless who were women', value: 35 },
+      { name: 'WontLabelMe', value: 65 },
     ],
     name: 2015,
   },
