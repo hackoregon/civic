@@ -13,7 +13,7 @@ const combineAdultChild = data => data.reduce((acc, cur) => {
     element.year === cur.year && element.name === cur.sheltertype
   ));
 
-  multiple.length 
+  multiple.length
   ? acc[acc.indexOf(multiple[0])].value += cur.count
   : acc.push({
     name: cur.sheltertype,

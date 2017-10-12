@@ -101,7 +101,7 @@ export const compareServiceCallsApi = () => homelessGet('/service211')
       otherChart,
       data: [
         { name: 'Housing assistance', value: Math.round(percentage(sum, housing)) },
-        { name: 'Other services', value: Math.round(percentage(sum, other))  },
+        { name: 'Other services', value: Math.round(percentage(sum, other)) },
       ],
     };
   });

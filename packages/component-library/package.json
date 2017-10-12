@@ -10,7 +10,7 @@
     "build": "BABEL_ENV=esm npm run build:esm && BABEL_ENV=cjs npm run build:cjs",
     "test": "BABEL_ENV=test mocha --opts ./mocha.options ./src/**/*.test.js",
     "test:watch": "npm run test -- -w",
-    "lint": "eslint src stories"
+    "lint": "eslint --fix src stories"
   },
   "author": "David Daniel <davidedaniel@gmail.com> (http://davidedaniel.github.io)",
   "license": "MIT",

@@ -1,15 +1,15 @@
 /* eslint-disable global-require */
 /* eslint-disable import/no-extraneous-dependencies */
-const express     = require('express');
-const path        = require('path');
+const express = require('express');
+const path = require('path');
 const compression = require('compression');
 
 const setupDev = (app, webpackConfig) => {
-  const webpack       = require('webpack');
+  const webpack = require('webpack');
   const devMiddleware = require('webpack-dev-middleware');
   const hotMiddleware = require('webpack-hot-middleware');
-  const compiler      = webpack(webpackConfig);
-  const middleware    = devMiddleware(compiler, {
+  const compiler = webpack(webpackConfig);
+  const middleware = devMiddleware(compiler, {
     noInfo: true,
     publicPath: webpackConfig.output.publicPath,
     silent: true,

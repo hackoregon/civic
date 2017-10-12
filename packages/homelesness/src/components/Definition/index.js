@@ -57,7 +57,7 @@ class Definition extends React.Component {
             colors={colors}
             categories={this.state.shelterCategories}
             content={{
-              'Transitional Housing': <TransitionalHousing  data={this.props.shelterTypeData} />,
+              'Transitional Housing': <TransitionalHousing data={this.props.shelterTypeData} />,
               Unsheltered: <Unsheltered />,
               'Emergency Shelter': <EmergencyShelter />,
             }}
