@@ -9,7 +9,7 @@ This is a lerna based monorepo. Check out lernajs.io for any in-depth docs if yo
 
 ```bash
 nvm use
-npm install
+npm install #don't use npm 5
 npm run bootstrap # install external deps and link all packages
 npm run build # build all the packages
 npm run storybook # starts storybook for component-library
