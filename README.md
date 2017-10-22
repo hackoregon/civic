@@ -1,5 +1,4 @@
 # Civic
----
 
 Welcome to Civic's platform monorepo.
 
