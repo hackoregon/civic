@@ -16,7 +16,7 @@
     "bump": "bump --prompt --commit --push",
     "postbump": "editme -w & npm prune --production",
     "postpublish": "npm start",
-    "lint": "eslint src"
+    "lint": "eslint --fix src"
   },
   "keywords": [
     "webpack",

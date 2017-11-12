@@ -3,8 +3,8 @@ import invariant from 'invariant';
 import createReducer from '../state';
 
 const isFunc = is(Function);
-const isStr  = is(String);
-const isObj  = is(Object);
+const isStr = is(String);
+const isObj = is(Object);
 
 export function checkStore(store) {
   const source = new Map([

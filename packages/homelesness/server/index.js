@@ -1,8 +1,8 @@
 /* eslint-disable consistent-return */
 
 const express = require('express');
-const logger  = require('./logger');
-const setup   = require('./middleware');
+const logger = require('./logger');
+const setup = require('./middleware');
 const resolve = require('path').resolve;
 
 const app = express();
