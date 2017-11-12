@@ -5,7 +5,7 @@
   ],
   "private": true,
   "scripts": {
-    "bootstrap": "lerna bootstrap",
+    "bootstrap": "yarn install --frozen-lockfile && lerna bootstrap",
     "build-storybook": "build-storybook",
     "build": "lerna run build",
     "tag": "lerna publish --skip-npm",
@@ -14,7 +14,7 @@
     "watch": "node scripts/watch",
     "deploy-storybook": "storybook-to-ghpages",
     "in": "lerna run --scope",
-    "link": "lerna exec npm link",
+    "link:all": "lerna link",
     "lint": "lerna run lint -- --fix",
     "storybook": "BABEL_ENV=esm start-storybook -p 6006",
     "test": "lerna run test"
