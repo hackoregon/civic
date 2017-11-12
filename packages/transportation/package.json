@@ -22,7 +22,7 @@
   },
   "scripts": {
     "clean": "rimraf ./build && mkdir build",
-    "start": "npm-run-all --parallel test:watch start:dev lint:watch",
+    "start": "npm run start:dev",
     "lint": "esw src tools server webpack.config.* --color",
     "lint:watch": "npm run lint -- --watch",
     "build": "babel-node tools/build.js",
@@ -69,6 +69,7 @@
   "devDependencies": {
     "@hackoregon/webpacker": "^1.0.0-alpha.1c62c05f",
     "autoprefixer": "^6.7.7",
+    "babel-cli": "^6.24.1",
     "chai": "^3.5.0",
     "chai-as-promised": "^6.0.0",
     "chai-enzyme": "^0.6.1",

@@ -49,7 +49,7 @@ module.exports = (app, options) => {
   const isProd = process.env.NODE_ENV === 'production';
 
   if (isProd) {
-    const prodConfig = require('../webpack.config.prod.js');
+    const prodConfig = require('../../webpack.config.babel.js');
     prodConfig.output.path = options.outputPath;
     prodConfig.output.publicPath = options.publicPath;
 
@@ -61,7 +61,7 @@ module.exports = (app, options) => {
 
     setupProd(app, options);
   } else {
-    const webpackConfig = require('../webpack.config.dev.js');
+    const webpackConfig = require('../../webpack.config.babel.js');
     setupDev(app, webpackConfig);
   }
 

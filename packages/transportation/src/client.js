@@ -8,7 +8,7 @@ import { Root } from './components';
 import getRoutes from './index';
 
 // eslint-disable-next-line
-import '!style-loader!css-loader!@hackoregon/component-library/assets/leaflet.css';
+// import '@hackoregon/component-library/assets/leaflet.css';
 
 const store = configureStore({}, browserHistory);
 const history = syncHistoryWithStore(browserHistory, store);

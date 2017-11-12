@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Header from '@hackoregon/component-library/lib/Navigation/Header';
-import Footer from '@hackoregon/component-library/lib/Footer/Footer';
-import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
+import { Header, Footer, StoryCard } from '@hackoregon/component-library';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 
@@ -37,20 +35,20 @@ const dataAge = [
       { name: '75-100 years old', Incidents: 12 },
 ];
 const dataTot = [
-      //{ name: 'Incidents by serverity', 'Incidents across all modes': 2135, 'Serious injuries across all modes': 123, 'Pedestrian fatalities': 105 },
-      { name: 'Incidents by serverity', 'Incidents across all modes': 2135}, 
-      { name: 'Serious injuries across all modes', 'Serious injuries across all modes': 123}, 
+      // { name: 'Incidents by serverity', 'Incidents across all modes': 2135, 'Serious injuries across all modes': 123, 'Pedestrian fatalities': 105 },
+      { name: 'Incidents by serverity', 'Incidents across all modes': 2135 },
+      { name: 'Serious injuries across all modes', 'Serious injuries across all modes': 123 },
       { name: 'Pedestrian fatalities', 'Pedestrian fatalities': 105 },
 ];
 
 function CrashData(props) {
   const captionStyle = {
-    paddingLeft: "15%",
-    paddingRight: "15%",
-    marginBottom: "3em",
+    paddingLeft: '15%',
+    paddingRight: '15%',
+    marginBottom: '3em',
   };
   const chartCaption = {
-    marginBottom: "3em",
+    marginBottom: '3em',
   };
 
   return (
@@ -64,8 +62,8 @@ function CrashData(props) {
       <p>In addition to our partnership with PBOT, we reached out to the Oregon Department of Transportation (ODOT) for the raw crash data* they have for the City of Portland (COP). They gave us a decade of crash data from 2004 through 2014, from which we were able to analyze how many traffic fatalities occurred in Portland across three modes of transportation - vehicle**, bike, and pedestrian. Here’s an overview of what we saw.
       </p>
       <StoryCard>
-        <p style={{marginTop: "2em"}}>Total number of incidents by mode of transportation for data from ODOT for the years 2004-2014</p>
-        <LineChart width={600} height={300} data={dataInc} margin={{top: 5, right: 30, left: 20, bottom: 5}}>
+        <p style={{ marginTop: '2em' }}>Total number of incidents by mode of transportation for data from ODOT for the years 2004-2014</p>
+        <LineChart width={600} height={300} data={dataInc} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
           <XAxis dataKey="name" />
           <YAxis />
           <CartesianGrid strokeDasharray="3 3" />
@@ -76,7 +74,7 @@ function CrashData(props) {
       </StoryCard>
 
       <StoryCard>
-        <p style={{marginTop: "2em"}}>Total number of serious injuries per mode of transportation</p>
+        <p style={{ marginTop: '2em' }}>Total number of serious injuries per mode of transportation</p>
         <LineChart width={600} height={300} data={dataInj} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
           <XAxis dataKey="name" />
           <YAxis />
@@ -88,7 +86,7 @@ function CrashData(props) {
       </StoryCard>
 
       <StoryCard>
-        <p style={{marginTop: "2em"}}>Percentage of fatalities per mode of transportation</p>
+        <p style={{ marginTop: '2em' }}>Percentage of fatalities per mode of transportation</p>
         <LineChart width={600} height={300} data={dataFat} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
           <XAxis dataKey="name" />
           <YAxis />
@@ -108,16 +106,16 @@ function CrashData(props) {
 
       <h1>97 Intersections</h1>
       <StoryCard>
-          <BarChart width={600} height={300} data={dataTot} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-            <XAxis dataKey="name" />
-            <YAxis />
-            <CartesianGrid strokeDasharray="3 3" />
-            <Tooltip />
-            <Bar barSize={75} dataKey="Pedestrian fatalities" fill="#aaa4ab" />
-            <Bar barSize={75}  dataKey="Serious injuries across all modes" fill="#ed8f4e" />
-            <Bar barSize={75}  dataKey="Incidents across all modes" fill="#E87220" />
-          </BarChart>
-          <p style={{marginBottom: '2em'}}>This is how many total incidents by severity were reported at the 97 intersections</p>
+        <BarChart width={600} height={300} data={dataTot} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+          <XAxis dataKey="name" />
+          <YAxis />
+          <CartesianGrid strokeDasharray="3 3" />
+          <Tooltip />
+          <Bar barSize={75} dataKey="Pedestrian fatalities" fill="#aaa4ab" />
+          <Bar barSize={75} dataKey="Serious injuries across all modes" fill="#ed8f4e" />
+          <Bar barSize={75} dataKey="Incidents across all modes" fill="#E87220" />
+        </BarChart>
+        <p style={{ marginBottom: '2em' }}>This is how many total incidents by severity were reported at the 97 intersections</p>
       </StoryCard>
 
 
@@ -158,7 +156,7 @@ function CrashData(props) {
         <h2>Intersection: SE Foster + SE 80th</h2>
         <img alt={'South East Foster and 80th Intersection'} width={500} height={300} src={require('./../Transportation-Assets/SEFoster-SE80th.JPG')} />
         <p style={captionStyle}>At the SE Foster & SE 80th intersection there is a lighted pedestrian crosswalk, and is surrounded by businesses, restaurants, bus stops, and a major grocery store - making it a highly trafficked area. The posted speed limit is 35 mph and is well lit. From 2004-2014 there were a total of 36 reported crash incidents across all modes of transportation*, resulting 58 injuries, two being serious injuries, and two pedestrian fatalities. In one of the pedestrian fatality incidents the pedestrian had a BAC level** of  0.01%.</p>
-        <br/>
+        <br />
         <p>*For the purposes of this project, all modes of transportation include vehicle, bike, and pedestrian.</p>
         <p>** In the U.S. it is illegal to drive with a BAC level of 0.08% or more nationwide.</p>
 

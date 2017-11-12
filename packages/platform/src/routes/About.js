@@ -1,9 +1,8 @@
 import React from 'react';
-import Header from '@hackoregon/component-library/lib/Navigation/Header';
-import Footer from '@hackoregon/component-library/lib/Footer/Footer';
+import { Header, Footer } from '@hackoregon/component-library';
 import '@hackoregon/component-library/lib/global.styles.css';
 
-import AboutPage from '../client/views/AboutPage';
+import AboutPage from '../views/AboutPage';
 
 const About = () => {
   const navItems = [

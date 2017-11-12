@@ -2,9 +2,7 @@
 // This should probably be the core component, containing, nav etc
 import React from 'react';
 import styled from 'styled-components';
-import Header from '@hackoregon/component-library/lib/Navigation/Header';
-import Footer from '@hackoregon/component-library/lib/Footer/Footer';
-import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
+import { Header, Footer, StoryCard } from '@hackoregon/component-library';
 import ConstructionViews from '../ConstructionViews';
 import CrashData from '../CrashData/CrashData';
 // import L from 'leaflet';
@@ -20,16 +18,16 @@ function App(props) {
   return (
     <Container>
       <Header />
-      
-        <StoryCard title="Portland Road Works Explorer" collectionId="transportation" cardId="trans-construction-maps">
-          <ConstructionViews />
-          
-        </StoryCard>
-        <div style={{height: '3em', width: '100%', backgroundColor: '#E87220', marginTop: '6em', marginBottom: '4em'}}></div>
-        <CrashData />
-        
-        
-      <Footer />      
+
+      <StoryCard title="Portland Road Works Explorer" collectionId="transportation" cardId="trans-construction-maps">
+        <ConstructionViews />
+
+      </StoryCard>
+      <div style={{ height: '3em', width: '100%', backgroundColor: '#E87220', marginTop: '6em', marginBottom: '4em' }} />
+      <CrashData />
+
+
+      <Footer />
       {React.Children.toArray(props.children)}
     </Container>
   );
