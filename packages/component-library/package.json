@@ -2,11 +2,11 @@
   "name": "@hackoregon/component-library",
   "version": "1.0.0-alpha.1c62c05f",
   "description": "Official repo for Hack Oregon React component library",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "modules": "es/index.js",
   "scripts": {
     "build:esm": "babel src --out-dir es --copy-files --no-comments",
-    "build:cjs": "babel src --out-dir lib --copy-files --no-comments",
+    "build:cjs": "babel src --out-dir dist --copy-files --no-comments",
     "build": "BABEL_ENV=esm npm run build:esm && BABEL_ENV=cjs npm run build:cjs",
     "test": "BABEL_ENV=test mocha --opts ./mocha.options ./src/**/*.test.js",
     "test:watch": "npm run test -- -w",
