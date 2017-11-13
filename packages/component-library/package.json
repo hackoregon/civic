@@ -57,6 +57,7 @@
     "ramda": "^0.23.0",
     "rc-slider": "^7.0.2",
     "react": "^15.5.3",
+    "prop-types": "^15.5.3",
     "react-addons-transition-group": "^15.5.3",
     "react-dom": "^15.5.3",
     "react-faux-dom": "^3.0.1",

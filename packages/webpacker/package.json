@@ -11,12 +11,11 @@
   },
   "scripts": {
     "start": "npm install",
-    "prebuild": "npm run lint",
-    "build": "babel src --out-dir lib",
-    "bump": "bump --prompt --commit --push",
-    "postbump": "editme -w & npm prune --production",
+    "build": "npx babel src --out-dir lib",
+    "bump": "npx bump --prompt --commit --push",
+    "postbump": "npx editme -w & npm prune --production",
     "postpublish": "npm start",
-    "lint": "eslint --fix src"
+    "lint": "npx eslint --fix src"
   },
   "keywords": [
     "webpack",

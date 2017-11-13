@@ -3,8 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { BarChart, Bar, XAxis, YAxis, Text, Legend, ResponsiveContainer } from 'recharts';
-import { StoryCard } from '@hackoregon/component-library/lib';
-import Dropdown from '@hackoregon/component-library/lib/Dropdown/Dropdown';
+import { Dropdown, StoryCard } from '@hackoregon/component-library';
 import styles from './styles.css';
 import shared from '../shared.styles';
 

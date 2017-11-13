@@ -1,4 +1,4 @@
-import '@hackoregon/component-library/src/global.styles.css'; // FOR DEV ONLY
+import '@hackoregon/component-library/assets/global.styles.css'; // FOR DEV ONLY
 import React from 'react';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { render } from 'react-dom';

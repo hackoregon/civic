@@ -22,7 +22,7 @@ const preset = {
 };
 
 
-if (env !== 'development' && env !== 'test' && env !== 'production') {
+if (env !== 'development' && env !== 'test' && env !== 'production' && env !== 'esm') {
   throw new Error(`${'Using `civic-babel-presets` requires that you specify `NODE_ENV` or ' +
     '`BABEL_ENV` environment variables. Valid values are "development", ' +
     '"test", and "production". Instead, received: '}${JSON.stringify(env)}.`);

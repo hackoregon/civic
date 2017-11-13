@@ -4,3 +4,7 @@ export var ICONS = {
   check: 'fa fa-check',
   download: 'fa fa-cloud-download'
 };
+
+export default {
+  ICONS: ICONS
+};

@@ -1,40 +1,55 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react';
 import Nav from './Nav';
-import Logo from '../Logo/Logo';
-import isClient from '../utils/isClient';
+import Logo from '../Logo/LogoAnimated';
+import styles from './Header.css';
+import Icon from '../Icon/Icon';
+import { ICONS } from '../styleConstants';
 
-const styles = {
-  header: {
-    display: 'flex',
-    alignItems: 'center',
-    backgroundColor: 'rgba(34,15,37,1)',
-    padding: '1rem',
-    zIndex: '1',
-  },
+class Header extends Component {
+  constructor() {
+    super();
+    this.state = {
+      menuActive: false,
+    };
+  }
 
-  logo: {
-    margin: '1rem 0 0 4rem',
-    fontSize: '2rem',
-    flex: '1 1 100%',
-  },
+  togglesNestedMenu = () => this.setState({ menuActive: !this.state.menuActive })
 
-};
-const Header = ({ title = 'Civic', children, menu }) => {
-  if (isClient) require('./Header.css');
-  return (
-    <nav style={styles.header}>
-      <div style={styles.logo}>
+  render() {
+    const { children, menu, title } = this.props;
+    return (
+      <div className={styles.container}>
+        <nav className={styles.header}>
+          <div className={styles.logo}>
+            <Logo alt={title} />
+          </div>
+          <div className={`${styles.nav} ${this.state.menuActive ? styles.active : styles.inactive}`}>
+            <Nav
+              menu={menu}
+              toggleSubNav={this.togglesNestedMenu}
+              showNestedMenu={this.state.nestedMenu}
+              togglesNestedMenu={this.togglesNestedMenu}
+            />
 
-        <Logo alt={title} />
+            { children }
+          </div>
+          <a className={styles.burger}>
+            <Icon
+              key="nav-burger"
+              className={`${ICONS.hamburger}`}
+              handleClick={this.togglesNestedMenu}
+            />
+          </a>
+        </nav>
       </div>
-      <Nav menu={menu} />
-      { children }
-    </nav>
-  );
-};
+    );
+  }
+
+}
 
 Header.displayName = 'Header';
 Header.propTypes = {
+  menu: PropTypes.arrayOf(PropTypes.shape({})),
   title: PropTypes.string,
   children: PropTypes.node,
 };
