@@ -1,0 +1,24 @@
+
+.base {
+  border: 1px solid #eee;
+  border-radius: 3px;
+  background-color: #FFFFFF;
+  cursor: pointer;
+  font-size: 15px;
+  padding: 3px 10px;
+  margin: 10px;
+}
+
+.content {
+  background-color: rgba(44, 45, 85, 1);
+}
+
+/* Have to add div selector to bump up specificity */
+div:global(.Select-control) {
+  border-radius: 0px;
+}
+
+/*
+span:global(.Select-arrow) {
+  border-color: rgba(238,73,92,1) transparent transparent;
+}*/

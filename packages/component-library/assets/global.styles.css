@@ -1,0 +1,212 @@
+/* Import Google Fonts */
+
+@import 'https://fonts.googleapis.com/css?family=Lato:300,400|Raleway:300,400|Open+Sans:300,400,600,800';
+
+@import url('https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i,900,900i');
+
+/* Base */
+
+html {
+  font-size: 14px;
+  line-height: 1.4;
+  background-color: #fffefe;
+  font-family: 'Open Sans';
+  font-weight: 400;
+  color: #001732;
+  min-height: 100% /* [3] */;
+  -webkit-text-size-adjust: 100% /* [4] */;
+  -ms-text-size-adjust: 100% /* [4] */;
+  -moz-osx-font-smoothing: grayscale /* [5] */;
+  -webkit-font-smoothing: antialiased /* [5] */;
+  -webkit-overflow-scrolling: touch;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.font-extra-light {
+  font-weight: 100;
+}
+.font-light {
+  font-weight: 300;
+}
+.font-normal {
+  font-weight: 400;
+}
+.font-bold {
+  font-weight: 600;
+}
+.font-extra-bold {
+  font-weight: 800;
+}
+
+.text-underline {
+  text-decoration: underline;
+}
+
+.FilsonSoft {
+  font-family: "filson-soft", sans-serif;
+}
+
+.Lato, .panel {
+  font-family: "Lato", sans-serif;
+}
+.Raleway {
+  font-family: "Raleway", sans-serif;
+}
+.OpenSans {
+  font-family: "Open Sans", sans-serif;
+}
+
+.Merriweather {
+  font-family: "Merriweather", serif;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.btc-text-onyx {
+  color: #001732 !important;
+  fill: #001732 !important;
+}
+
+.btc-text-light {
+  color: #f7f7f7 !important;
+  fill: #f7f7f7 !important;
+}
+
+.btc-text-warn {
+  color: #DE0050!important;
+  fill: #DE0050 !important
+}
+
+.btc-bg-onyx {
+  background-color: #001732;
+  border-color: #001732;
+}
+.btc-bg-yellow {
+  background: #ffb45a;
+}
+.btc-bg-action {
+  background-color: #e91e63;
+}
+.btc-bg-white {
+  background-color: #fff;
+}
+.btc-bg-black {
+  background-color: #000;
+}
+.btc-text-uppercase {
+  text-transform: uppercase;
+}
+.btc-text-black {
+  color: #000 !important;
+  fill: #000 !important;
+}
+.btc-text-white {
+  color: #fff !important;
+  fill: #fff !important;
+}
+
+/* utitlity */
+.btc-rounded {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+}
+.btc-circle {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+}
+
+a {
+  color: rgba(238,73,80,1);
+  text-decoration: none;
+  cursor: pointer;
+  border-bottom: 2px solid;
+  opacity: 0.9;
+  transition: all .25s ease-in-out;
+}
+
+a:hover {
+  color: rgba(238,73,80,1);
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 1;
+}
+
+/* Global Styles from product_design */
+
+/* Typography */
+
+h1,
+.h1 {
+  font-size: 36px;
+  font-size: 2.25rem;
+  line-height: 2.625rem;
+  font-family: "filson-soft", sans-serif;
+  font-weight: 900;
+}
+h2,
+.h2 {
+  font-size: 26px;
+  font-size: 1.625rem;
+  line-height: 2.125rem;
+  font-family: "filson-soft", sans-serif;
+  font-weight: 900;
+}
+h3,
+.h3 {
+  font-size: 18px;
+  font-size: 1.125rem;
+  line-height: 1.625rem;
+  font-family: "filson-soft", sans-serif;
+  font-weight: 900;
+}
+h4,
+.h4 {
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 1.375rem;
+  font-family: "filson-soft", sans-serif;
+  font-weight: 900;
+}
+h5,
+.h5 {
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 1.125rem;
+  font-family: "filson-soft", sans-serif;
+  font-weight: 900;
+}
+h6,
+.h6 {
+  font-size: 12px;
+  font-size: 0.75rem;
+  line-height: 0.9375rem;
+  font-family: "filson-soft", sans-serif;
+  font-weight: 900;
+}
+
+p {
+  font-family: "Merriweather", serif;
+  font-size: 1em;
+  color: #706371;
+}
+
+/* Color */
+
+.PrimaryColor {
+  color: rgba(34,15,37,1);
+  fill: rgba(34,15,37,1);
+}
+
+.SecondaryColor {
+  color: rgba(238,73,92,1);
+  fill: rgba(238,73,92,1);
+}

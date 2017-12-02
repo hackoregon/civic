@@ -1,19 +1,15 @@
-li a {
-    display: block;
-    /*padding: 1rem 0;*/
-}
-
 .NavRouterLink a {
-    color: rgba(255,255,255,.65);
-    /*flex: 1;*/
-    font-family: 'filson-soft', sans-serif;
-    font-size: 1.25em;
-    border: none;
-    font-weight: 900;
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 1rem;
-    /*line-height: 2rem;*/
+  color: rgba(255,255,255,.65);
+  flex: 1;
+  display: block;
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.25rem;
+  border: none;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 1rem;
+  text-align: center;
 }
 
 .NavRouterLink a:focus {

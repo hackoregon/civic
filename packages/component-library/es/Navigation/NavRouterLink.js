@@ -2,20 +2,24 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import isClient from '../utils/isClient';
+import styles from './NavRouterLink.css';
+
+var pathOrName = function pathOrName(p, n) {
+  return p || '/' + n.toLowerCase();
+};
 
 var NavRouterLink = function NavRouterLink(_ref) {
   var path = _ref.path,
       customStyles = _ref.customStyles,
       name = _ref.name;
 
-  if (isClient) require('./NavRouterLink.css');
   var boxStyle = customStyles ? customStyles.box : null;
   var linkStyle = customStyles ? customStyles.link : null;
-  var pathTo = path || '/' + name.toLowerCase();
+  var pathTo = pathOrName(path, name);
+
   return React.createElement(
     'li',
-    { className: 'NavRouterLink', style: _extends({ display: 'block' }, boxStyle) },
+    { className: styles.NavRouterLink, style: _extends({}, boxStyle) },
     React.createElement(
       Link,
       { to: pathTo },

@@ -37,11 +37,32 @@ var extractGlobals = globalCss.extract({
   use: ['' + cssLoader, postcssLoader]
 });
 
-var vendorCssPattern = /assets\/.*\.css$/;
-var globalCssPattern = /global\.styles\.css$/;
+var vendorCssPattern = /assets\/vendor\/.*\.css$/;
+var globalCssPattern = /assets\/global\.styles\.css$/;
 var allCssPattern = /\.css$/;
 
-var loaders = [{
+var devLoaders = [{
+  test: allCssPattern,
+  exclude: [globalCssPattern, vendorCssPattern],
+  // loader: `${styleLoader}!${cssLoader}`,
+  use: [{ loader: styleLoader }, {
+    loader: cssLoader,
+    options: {
+      modules: true,
+      localIdentName: '[path][name]__[local]-[hash:base64:5]'
+    }
+  }]
+}, {
+  test: globalCssPattern,
+  // loader: `${styleLoader}!${cssLoader}`,
+  use: [{ loader: styleLoader }, { loader: cssLoader }]
+}, {
+  test: vendorCssPattern,
+  // loader: `${styleLoader}!${cssLoader}`,
+  use: [{ loader: styleLoader }, { loader: cssLoader }]
+}];
+
+var prodLoaders = [{
   test: allCssPattern,
   exclude: [globalCssPattern, vendorCssPattern],
   use: extractLoader
@@ -53,9 +74,15 @@ var loaders = [{
   use: extractVendors
 }];
 
-exports.default = {
-  plugins: [mainCss, globalCss, vendorCss],
+var config = {
   module: {
-    rules: loaders
+    rules: devLoaders
   }
 };
+
+if (process.env.NODE_ENV === 'production') {
+  config.plugins = [mainCss, globalCss, vendorCss];
+  config.module.rules = prodLoaders;
+}
+
+exports.default = config;

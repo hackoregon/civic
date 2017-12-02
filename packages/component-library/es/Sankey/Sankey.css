@@ -1,35 +1,34 @@
-.sankey-chart {
+.sankeyChart {
   margin-bottom: 20px;
 }
 
-.sankey-node rect {
+.sankeyNode rect {
   fill: #999;
   shape-rendering: crispEdges;
 }
 
-.sankey-node {
+.sankeyNode {
   fill-opacity: .6;
 }
 
-.sankey-node:hover {
+.sankeyNode:hover {
   cursor: pointer;
   fill-opacity: 1;
 }
 
-.sankey-node text {
+.sankeyNode text {
   fill: #555;
-  stroke: none;
   font-size: .75em;
+  stroke: none;
 }
 
-.sankey-link {
+.sankeyLink {
+  fill: none;
   stroke: #cccccc;
   stroke-opacity: .4;
-  fill: none;
 }
 
-.sankey-link:hover {
-  stroke-opacity: .8;
+.sankeyLink:hover {
   cursor: pointer;
+  stroke-opacity: .8;
 }
-

@@ -1,0 +1,53 @@
+/* footer Styles */
+
+.footer {
+  width: 100%;
+  background: #fff;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: row;
+   align-content: center;
+}
+
+.copyright {
+  color: #726371;
+  font-family: 'Rubik';
+  font-weight: 500;
+  margin: 12px 8px;
+}
+
+.logo {
+  flex: 2 auto;
+  display: flex;
+  align-items: center;
+  height: auto;
+}
+
+.logo > img {
+  flex: 1;
+  padding: 12px;
+}
+
+.scrollToTop {
+  color: #EE495C;
+  font-family: 'Rubik';
+  font-weight: 500;
+  margin: 12px 8px;
+}
+
+.scrollToTop > div {
+  margin-left: auto;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column-reverse;
+  }
+}
+
+@media (min-width: 768px) {
+  .scrollToTop {
+    margin-left: 0;
+  }
+}

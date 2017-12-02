@@ -27,7 +27,7 @@ const Content = (options) => {
       />
       <foreignObject x={x + 10} y={y - 5} width={width - 10}>
         <p xmlns="http://www.w3.org/1999/xhtml" style={textStyle} >
-          {name}<b>            {value}%</b>
+          {name}<b>                                                                                  {value}%</b>
         </p>
       </foreignObject>
 

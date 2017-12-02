@@ -40,11 +40,45 @@ const extractGlobals = globalCss.extract({
   ],
 });
 
-const vendorCssPattern = /assets\/.*\.css$/;
-const globalCssPattern = /global\.styles\.css$/;
+const vendorCssPattern = /assets\/vendor\/.*\.css$/;
+const globalCssPattern = /assets\/global\.styles\.css$/;
 const allCssPattern = /\.css$/;
 
-const loaders = [
+const devLoaders = [
+  {
+    test: allCssPattern,
+    exclude: [globalCssPattern, vendorCssPattern],
+    // loader: `${styleLoader}!${cssLoader}`,
+    use: [
+      { loader: styleLoader },
+      {
+        loader: cssLoader,
+        options: {
+          modules: true,
+          localIdentName: '[path][name]__[local]-[hash:base64:5]',
+        },
+      },
+    ],
+  },
+  {
+    test: globalCssPattern,
+    // loader: `${styleLoader}!${cssLoader}`,
+    use: [
+      { loader: styleLoader },
+      { loader: cssLoader },
+    ],
+  },
+  {
+    test: vendorCssPattern,
+    // loader: `${styleLoader}!${cssLoader}`,
+    use: [
+      { loader: styleLoader },
+      { loader: cssLoader },
+    ],
+  },
+];
+
+const prodLoaders = [
   {
     test: allCssPattern,
     exclude: [globalCssPattern, vendorCssPattern],
@@ -60,9 +94,15 @@ const loaders = [
   },
 ];
 
-export default {
-  plugins: [mainCss, globalCss, vendorCss],
+const config = {
   module: {
-    rules: loaders,
+    rules: devLoaders,
   },
 };
+
+if (process.env.NODE_ENV === 'production') {
+  config.plugins = [mainCss, globalCss, vendorCss];
+  config.module.rules = prodLoaders;
+}
+
+export default config;

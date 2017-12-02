@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import RechartsPie from '@hackoregon/component-library/lib/RechartsPie/RechartsPie';
+import { RechartsPie } from '@hackoregon/component-library';
 
 // This base can be adjusted to scale up or down the chart and legend
 const proportionBase = 400;

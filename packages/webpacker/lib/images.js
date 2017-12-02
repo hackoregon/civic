@@ -6,8 +6,12 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {
   module: {
     rules: [{
-      test: /\.(jpe?g|png|gif|svg)$/i,
-      loader: 'file-loader!isomorphic-loader'
+      test: /\.(png|svg|jpg|jpeg|gif)$/,
+      loader: 'url-loader',
+      query: {
+        limit: 10000,
+        emitFile: true
+      }
     }]
   }
 };

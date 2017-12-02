@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import RechartsPie from '@hackoregon/component-library/lib/RechartsPie/RechartsPie';
+import { RechartsPie } from '@hackoregon/component-library';
 import commaSeparate from '../../utils/comma-separate';
 
 const colors = ['#3e75ac', '#4c8ccd', '#68a3df', '#87baed', '#abd1f7', '#d3e8fd'];

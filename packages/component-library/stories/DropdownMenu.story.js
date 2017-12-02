@@ -3,16 +3,16 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
-import { DropdownMenu } from '../src';
+import { Dropdown } from '../src';
 
-const displayName = DropdownMenu.displayName || 'DropdownMenu';
+const displayName = Dropdown.displayName || 'Dropdown';
 const title = 'Simple usage';
 const description = `
   This is some basic usage with the button with providing a label to show the text.
   Clicking should trigger an action.`;
 
 const demoCode = () => (
-  <DropdownMenu
+  <Dropdown
     dispatch={dispatch => action => dispatch(action)}
     reduxAction={payload => console.log({ type: 'ACTION', payload })}
     options={[
@@ -24,7 +24,7 @@ const demoCode = () => (
   />
 );
 
-// const propDocs = { inline: true, propTables: [DropdownMenu] };
+// const propDocs = { inline: true, propTables: [Dropdown] };
 
 export default () => storiesOf(displayName, module)
   .add(

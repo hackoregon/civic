@@ -1,5 +1,5 @@
 import React from 'react';
-import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
+import { StoryCard } from '@hackoregon/component-library';
 
 import LineChart from './LineChart';
 
