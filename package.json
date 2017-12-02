@@ -1,5 +1,24 @@
 {
   "name": "civic",
+  "workspaces": [
+    "packages/*"
+  ],
+  "private": true,
+  "scripts": {
+    "bootstrap": "yarn install --frozen-lockfile && lerna bootstrap",
+    "build-storybook": "build-storybook",
+    "build": "lerna run build",
+    "tag": "lerna publish --skip-npm",
+    "canary": "lerna publish --skip-git --skip-npm --canary",
+    "clean": "lerna clean && rimraf node_modules",
+    "watch": "node scripts/watch",
+    "deploy-storybook": "storybook-to-ghpages",
+    "in": "lerna run --scope",
+    "link:all": "lerna link",
+    "lint": "lerna run lint -- --fix",
+    "storybook": "BABEL_ENV=esm start-storybook -p 6006",
+    "test": "lerna run test"
+  },
   "devDependencies": {
     "@storybook/addon-actions": "^3.2.6",
     "@storybook/addon-info": "^3.2.9",
@@ -40,7 +59,7 @@
     "jsdom": "^9.8.3",
     "jsdom-global": "^2.1.0",
     "json-loader": "^0.5.4",
-    "lerna": "^2.0.0",
+    "lerna": "^2.5.1",
     "lodash-webpack-plugin": "^0.11.2",
     "mocha": "^3.2.0",
     "mocha-clean": "^1.0.0",
@@ -55,7 +74,7 @@
     "redux-immutable-state-invariant": "^1.2.4",
     "redux-mock-store": "^1.2.1",
     "regenerator-runtime": "^0.10.1",
-    "rimraf": "^2.5.4",
+    "rimraf": "^2.6.2",
     "sinon": "^1.17.7",
     "sinon-chai": "^2.8.0",
     "style-loader": "^0.16.1",
@@ -69,22 +88,6 @@
     "webpack-hot-middleware": "^2.17.0",
     "webpack-md5-hash": "^0.0.5",
     "webpack-node-externals": "^1.5.4"
-  },
-  "scripts": {
-    "bootstrap": "lerna bootstrap",
-    "build-storybook": "build-storybook",
-    "build": "lerna run build",
-    "tag": "lerna publish --skip-npm",
-    "canary": "lerna publish --skip-git --skip-npm --canary",
-    "clean": "lerna clean",
-    "watch": "node scripts/watch",
-    "deploy-storybook": "storybook-to-ghpages",
-    "in": "lerna run --scope",
-    "link": "lerna exec npm link",
-    "lint": "lerna run lint -- --fix",
-    "postinstall": "npm run bootstrap",
-    "storybook": "BABEL_ENV=esm start-storybook -p 6006",
-    "test": "lerna run test"
   },
   "dependencies": {
     "@hackoregon/civic-server": "0.0.10"

@@ -1,0 +1,12 @@
+node_modules
+coverage
+reports
+build
+dist/
+es/
+lib-cov
+
+*.log*
+.lock-wscript
+.idea
+.DS_Store
