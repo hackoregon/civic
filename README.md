@@ -4,11 +4,10 @@ Welcome to Civic's platform monorepo.
 
 This is a lerna based monorepo. Check out lernajs.io for any in-depth docs if you need to debug. Otherwise follow along:
 
-## Setup
+## Project-wide Setup
 
 #### Use yarn & nvm for cross-platform uniformity
 ```bash
-
 # install nvm -- https://github.com/creationix/nvm
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash
 
@@ -54,7 +53,7 @@ Please set those in scripts that need to run them and not set them in your .bash
 
 ## Working on a Package
 At this point, Lerna has prepared all packages in the monorepo. To now work on one, `cd` into the package directory,
-and work on it as if it were a standalone project.
+and launch it as if it were a standalone project.
 
 ```bash
 cd packages/{package-dir} # for example: cd packages/housing
