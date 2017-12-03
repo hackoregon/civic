@@ -3,8 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 // import { LeafletMap } from '@hackoregon/component-library';
 import { CollectionHero } from '@hackoregon/component-library';
-// import isClient from '@hackoregon/component-library/lib/utils/isClient';
-import '@hackoregon/component-library/src/global.styles.css';
+import '@hackoregon/component-library/assets/global.styles.css';
 // import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 
 if (typeof require.ensure !== 'function') require.ensure = (d, c) => c(require);
@@ -44,7 +43,7 @@ class Collection extends React.Component {
     console.log(this.props);
     const key = this.props.params.name;
     // if (isClient) {
-    //   require('@hackoregon/component-library/assets/leaflet.css');
+    //   require('@hackoregon/component-library/assets/vendor/leaflet.css');
     //   HousingApp = require.ensure([], require => require('@hackoregon/civic-housing/src/components/App').default);
     // }
     return (

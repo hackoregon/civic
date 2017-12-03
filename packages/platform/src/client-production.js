@@ -1,7 +1,7 @@
-import '@hackoregon/component-library/src/global.styles.css';
+import '@hackoregon/component-library/assets/global.styles.css';
 /* eslint-disable */
-import '@hackoregon/component-library/assets/leaflet.css';
-import '!style-loader!css-loader!@hackoregon/component-library/assets/react-select.min.css';
+import '!style-loader!css-loader!@hackoregon/component-library/assets/vendor/leaflet.css';
+import '!style-loader!css-loader!@hackoregon/component-library/assets/vendor/react-select.min.css';
 /* eslint-enable */
 import React from 'react';
 import { render } from 'react-dom';

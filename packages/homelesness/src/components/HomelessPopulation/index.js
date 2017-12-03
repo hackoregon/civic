@@ -1,9 +1,16 @@
-/* eslint-disable react/jsx-boolean-value, react/no-unused-prop-types */
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { BarChart, Bar, XAxis, YAxis, Text, Legend, ResponsiveContainer } from 'recharts';
-import { StoryCard, Dropdown } from '@hackoregon/component-library';
+import PropTypes from 'prop-types'; // eslint-disable-line
+import {
+BarChart,
+Bar,
+XAxis,
+YAxis,
+Text,
+Legend,
+ResponsiveContainer,
+} from 'recharts';
+import { Dropdown, StoryCard } from '@hackoregon/component-library';
 import styles from './styles.css';
 import shared from '../shared.styles';
 
@@ -136,11 +143,11 @@ class HomelessPopulation extends React.Component {
 
 HomelessPopulation.propTypes = {
   loadData: PropTypes.function,
-  ethnicity: PropTypes.array,
-  veteranStatus: PropTypes.array,
-  disability: PropTypes.array,
-  age: PropTypes.array,
-  gender: PropTypes.array,
+  // ethnicity: PropTypes.arrayOf(PropTypes.shapeOf({})),
+  // veteranStatus: PropTypes.arrayOf(PropTypes.shapeOf({})),
+  // disability: PropTypes.arrayOf(PropTypes.shapeOf({})),
+  // age: PropTypes.arrayOf(PropTypes.shapeOf({})),
+  // gender: PropTypes.arrayOf(PropTypes.shapeOf({})),
 };
 
 const mapDispatchToProps = dispatch => ({

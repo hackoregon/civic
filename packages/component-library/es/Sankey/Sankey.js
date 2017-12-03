@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { sankey } from 'd3-sankey';
 import { format } from 'd3-format';
 import { clone, max } from 'ramda';
-import './Sankey.css';
+import styles from './Sankey.css';
 
 var formatNumber = format(',.0f');
 var formatNum = function formatNum(num) {
@@ -40,10 +40,10 @@ var Sankey = function Sankey(_ref) {
   var chartLinks = chart.links.map(function (link, idx) {
     return React.createElement(
       'g',
-      { key: 'sankey-link-' + idx },
+      { key: styles.sankeyLink + '-' + idx },
       React.createElement(
         'path',
-        { className: 'sankey-link', d: path(link), style: { strokeWidth: max(1, link.dy) } },
+        { className: styles.sankeyLink, d: path(link), style: { strokeWidth: max(1, link.dy) } },
         React.createElement(
           'title',
           null,
@@ -56,7 +56,7 @@ var Sankey = function Sankey(_ref) {
   var chartNodes = chart.nodes.map(function (node, idx) {
     return React.createElement(
       'g',
-      { key: 'sankey-node-' + idx, className: 'sankey-node', transform: 'translate(' + node.x + ',' + node.y + ')' },
+      { key: styles.sankeyNode + '-' + idx, className: styles.sankeyNode, transform: 'translate(' + node.x + ',' + node.y + ')' },
       React.createElement(
         'rect',
         { style: { fill: colors[idx] }, height: node.dy, width: sankeyChart.nodeWidth() },
@@ -80,7 +80,7 @@ var Sankey = function Sankey(_ref) {
 
   return React.createElement(
     'svg',
-    { className: 'sankey-chart', width: w + margin.left + margin.right, height: h + margin.top + margin.bottom },
+    { className: styles.sankeyChart, width: w + margin.left + margin.right, height: h + margin.top + margin.bottom },
     React.createElement(
       'g',
       { transform: 'translate(' + margin.left + ',' + margin.top + ')' },

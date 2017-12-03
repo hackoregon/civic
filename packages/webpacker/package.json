@@ -12,11 +12,11 @@
   },
   "scripts": {
     "start": "npm install",
-    "build:esm": "BABEL_ENV=esm npx babel src --out-dir es --copy-files --no-comments",
-    "build:cjs": "BABEL_ENV=cjs npx babel src --out-dir lib --copy-files --no-comments",
-    "build": "npm run build:esm && npm run build:cjs",
-    "bump": "bump --prompt --commit --push",
-    "lint": "eslint --fix src"
+    "build": "npx babel src --out-dir lib",
+    "bump": "npx bump --prompt --commit --push",
+    "postbump": "npx editme -w & npm prune --production",
+    "postpublish": "npm start",
+    "lint": "npx eslint --fix src"
   },
   "keywords": [
     "webpack",

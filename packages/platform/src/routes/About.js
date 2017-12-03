@@ -1,6 +1,6 @@
 import React from 'react';
 import { Header, Footer } from '@hackoregon/component-library';
-import '@hackoregon/component-library/src/global.styles.css';
+import '@hackoregon/component-library/assets/global.styles.css';
 
 import AboutPage from '../views/AboutPage';
 

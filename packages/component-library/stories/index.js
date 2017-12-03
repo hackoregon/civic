@@ -13,7 +13,7 @@ import dropdownStory from './DropdownMenu.story';
 import headerStory from './Header.story';
 import Welcome from './Welcome';
 
-import '../src/global.styles.css';
+import '../assets/global.styles.css';
 
 // stories can be added directly here
 storiesOf('Welcome', module)

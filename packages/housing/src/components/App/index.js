@@ -4,7 +4,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 // import { withRouter } from 'react-router-dom';
-import { Slider, StoryCard, Dropdown } from '@hackoregon/component-library';
+import { StoryCard, Slider, Dropdown } from '@hackoregon/component-library';
 import classNames from 'classnames/bind';
 import { fetchAffordabilityData } from '../../state/affordability/actions';
 import { fetchRentData } from '../../state/rent/actions';

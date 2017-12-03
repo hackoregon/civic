@@ -1,13 +1,35 @@
-.base {
-    border: 1px solid #eee;
-    border-radius: 3px;
-    background-color: #FFFFFF;
-    cursor: pointer;
-    font-size: 15px;
-    padding: 3px 10px;
-    margin: 10px;
+button.base {
+  display: flex;
+  padding: 6px 6px 6px 6px;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  transition: all .2s ease-in-out;
+  font-size: 1em;
+  font-weight: 500;
+  color: rgba(238, 73, 80, 1);
+  cursor: pointer;
+  font-weight: 600;
 }
 
-.content {
-  background-color: rgba(44, 45, 85, 1);
+.base {
+    border: 2px solid rgba(238, 73, 80, 1);
+}
+
+.base i {
+    margin-right: 12px;
+}
+
+.base span {
+  flex-wrap: nowrap;
+  transition: all .2s ease-in-out;
+}
+
+.base:hover {
+    background-color: rgba(238, 73, 80, 1);
+    color: #fff;
+}
+
+.base:focus {
+    outline: none;
 }

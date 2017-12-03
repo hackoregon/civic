@@ -1,4 +1,4 @@
-import '@hackoregon/component-library/src/global.styles.css';
+import '@hackoregon/component-library/assets/global.styles.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { browserHistory } from 'react-router';
@@ -8,7 +8,7 @@ import { Root } from './components';
 import getRoutes from './index';
 
 // eslint-disable-next-line
-import '@hackoregon/component-library/assets/leaflet.css';
+// import '@hackoregon/component-library/assets/leaflet.css';
 
 const store = configureStore({}, browserHistory);
 const history = syncHistoryWithStore(browserHistory, store);

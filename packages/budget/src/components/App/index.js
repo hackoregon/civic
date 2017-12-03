@@ -4,8 +4,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import CardCollection from '../CardCollection';
-// import Header from '@hackoregon/component-library/lib/Navigation/Header';
-// import { Footer } from '@hackoregon/component-library';
 
 const Container = styled.div`
   min-height: 100%;

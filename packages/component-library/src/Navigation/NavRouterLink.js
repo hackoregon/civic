@@ -1,17 +1,20 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import isClient from '../utils/isClient';
+import styles from './NavRouterLink.css';
+
+const pathOrName = (p, n) => p || `/${n.toLowerCase()}`;
 
 const NavRouterLink = ({ path, customStyles, name }) => {
-  if (isClient) require('./NavRouterLink.css');
   const boxStyle = customStyles ? customStyles.box : null;
   const linkStyle = customStyles ? customStyles.link : null;
-  const pathTo = path || `/${name.toLowerCase()}`;
+  const pathTo = pathOrName(path, name);
+
   return (
-    <li className={'NavRouterLink'} style={{ display: 'block', ...boxStyle }} >
+    <li className={styles.NavRouterLink} style={{ ...boxStyle }} >
       <Link to={pathTo} >
         <span style={{ ...linkStyle }}>{name}</span>
       </Link>
+
     </li>
   );
 };

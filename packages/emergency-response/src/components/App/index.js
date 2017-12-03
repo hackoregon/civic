@@ -2,13 +2,9 @@
 // This should probably be the core component, containing, nav etc
 import React from 'react';
 import styled from 'styled-components';
-// import Header from '@hackoregon/component-library/lib/Navigation/Header';
+
 import { Footer, StoryCard } from '@hackoregon/component-library';
-// import HowWhenBusy from '@hackoregon/component-library/lib/er-components/HowWhenBusy/HowWhenBusy';
-// import ResponseTimeVaries from '@hackoregon/component-library/lib/er-components/ResponseTimeVaries/ResponseTimeVaries';
-// import BarChart from '@hackoregon/component-library/lib/BarChart/BarChart';
-// import { LeafletMap } from '@hackoregon/component-library';
-// import { Marker, Popup } from 'react-leaflet';
+
 import BagelShop from '../BagelShop/index';
 import FmaMap from '../FmaMap/index';
 import PieWhatTheyDo from '../PieWhatTheyDo/index';
