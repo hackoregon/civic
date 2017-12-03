@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
+import { StoryCard } from '@hackoregon/component-library';
 import { HalfDonutChart, ListBarChart } from '../Reuseable';
 import { fetchServiceCallsData } from '../../state/Services211/actions';
 import shared from '../shared.styles';

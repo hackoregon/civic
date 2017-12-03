@@ -2,7 +2,7 @@
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, Text, ResponsiveContainer } from 'recharts';
 
-import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
+import { StoryCard } from '@hackoregon/component-library';
 import shared from '../shared.styles';
 import ArcPieChart from './ArcPieChart';
 

@@ -9,7 +9,7 @@ const loadModule = cb => (componentModule) => {
 export default function createRoutes() {
   return [
     {
-      path: '/',
+      path: '/home',
       name: 'home',
       getComponent(nextState, cb) {
         const renderRoute = loadModule(cb);

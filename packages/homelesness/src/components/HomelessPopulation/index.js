@@ -3,8 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { BarChart, Bar, XAxis, YAxis, Text, Legend, ResponsiveContainer } from 'recharts';
-import { StoryCard } from '@hackoregon/component-library/lib';
-import Dropdown from '@hackoregon/component-library/lib/Dropdown/Dropdown';
+import { StoryCard, Dropdown } from '@hackoregon/component-library';
 import styles from './styles.css';
 import shared from '../shared.styles';
 
@@ -69,13 +68,13 @@ class HomelessPopulation extends React.Component {
       <StoryCard title="Homeless Population">
         <div className={styles.container}>
           <p style={shared.text}>
-              The graph below displays the percent of each type of homeless demographic against the
-              same demographic for the general population.
+            The graph below displays the percent of each type of homeless demographic against the
+            same demographic for the general population.
           </p>
 
           <p style={shared.text}>
-              People experiencing homelessness are more likely to be people of color, male, and more
-              likely to have a disabling condition than Multnomah County residents as a whole.
+            People experiencing homelessness are more likely to be people of color, male, and more
+            likely to have a disabling condition than Multnomah County residents as a whole.
           </p>
           <div className={styles.selectContainer}>
             <Dropdown
