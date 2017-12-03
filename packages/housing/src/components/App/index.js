@@ -4,9 +4,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 // import { withRouter } from 'react-router-dom';
-import Slider from '@hackoregon/component-library/lib/Slider/Slider';
-import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
-import Dropdown from '@hackoregon/component-library/lib/Dropdown/Dropdown';
+import { Slider, StoryCard, Dropdown } from '@hackoregon/component-library';
 import classNames from 'classnames/bind';
 import { fetchAffordabilityData } from '../../state/affordability/actions';
 import { fetchRentData } from '../../state/rent/actions';
@@ -23,7 +21,7 @@ import DemographicDetailView from '../DemographicDetailView';
 import TempProdVsCost from '../TempProdVsCost';
 import TempVoterRegistration from '../TempVoterRegistration';
 import MapLegend from '../MapLegend';
-import styles from './app.styles.css';
+// import styles from './app.styles.css';
 
 
 import {
@@ -47,7 +45,7 @@ import {
   MAX_INCOME,
 } from '../../utils/data-constants';
 
-const cx = classNames.bind(styles);
+const cx = classNames.bind({});
 
 const dropdowns = cx({ dropdowns: true });
 
@@ -109,7 +107,7 @@ export class App extends React.Component {
       setUnitSize,
       setNeighborhood,
     } = this.props;
-
+    console.log(this.props);
     return (
       <div>
         <StoryCard title="Map Your Affordability" collectionId="housing" cardId="affordability-map">
@@ -178,12 +176,12 @@ App.defaultProps = {
 };
 
 App.propTypes = {
-  neighborhoodData: React.PropTypes.object,
-  demographicData: React.PropTypes.object,
+  neighborhoodData: React.PropTypes.shape({}),
+  demographicData: React.PropTypes.shape({}),
   setOtherDemographic: React.PropTypes.func,
-  otherDemographic: React.PropTypes.object,
+  otherDemographic: React.PropTypes.shape({}),
   userIncome: React.PropTypes.number,
-  userUnitSize: React.PropTypes.object,
+  userUnitSize: React.PropTypes.shape({}),
   setUserIncome: React.PropTypes.func,
   setUnitSize: React.PropTypes.func,
   setNeighborhood: React.PropTypes.func,

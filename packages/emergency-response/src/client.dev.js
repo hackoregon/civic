@@ -1,7 +1,7 @@
 import '@hackoregon/component-library/src/global.styles.css';
 
 // eslint-disable-next-line
-import '!style-loader!css-loader!@hackoregon/component-library/assets/leaflet.css';
+// import '!style-loader!css-loader!@hackoregon/component-library/assets/leaflet.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';

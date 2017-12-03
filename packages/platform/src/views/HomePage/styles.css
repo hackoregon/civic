@@ -315,23 +315,23 @@
 }
 
 .Collection.Hero.Housing {
-  background-image: url('../../../assets/collection-hero-housing.jpg');
+  background-image:assets/collection-hero-housing.jpg');
 }
 
 .Collection.Hero.Budget {
-  background-image: url('../../../assets/collection-hero-budget.jpg');
+  background-image: url('../../assets/collection-hero-budget.jpg');
 }
 
 .Collection.Hero.Transportation {
-  background-image: url('../../../assets/collection-hero-transportation.jpg');
+  background-image: url('../../assets/collection-hero-transportation.jpg');
 }
 
 .Collection.Hero.EmergencyResponse {
-  background-image: url('../../../assets/collection-hero-emergency-response.jpg');
+  background-image: url('../../assets/collection-hero-emergency-response.jpg');
 }
 
 .Collection.Hero.Homelessness {
-  background-image: url('../../../assets/collection-hero-homelessness.jpg');
+  background-image: url('../../assets/collection-hero-homelessness.jpg');
 }
 
 .Page.Hero {

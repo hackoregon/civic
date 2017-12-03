@@ -1,40 +1,34 @@
 /* eslint-disable import/no-extraneous-dependencies */
-const webpack = require('webpack'); //
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const { resolve } = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
 
-const commitSha = require('child_process').execSync('git rev-parse --short HEAD').toString().trim();
+// NOTE: need to require.resolve to get absolute path
+const babelLoader = require.resolve('babel-loader');
 
-module.exports = {
+const commitSha = require('child_process').execSync('git rev-parse --short HEAD').toString().trim();
+const { defaultConfig, composeConfig } = require('@hackoregon/webpacker'); // eslint-disable-line
+
+const config = {
   resolve: {
     extensions: ['', '.js', '.json'],
   },
-  debug: true,
   devtool: 'source-map',
-  noInfo: true,
-  entry: resolve(__dirname, 'src/client'),
   target: 'web',
   output: {
-    path: resolve(__dirname, 'build'),
+    path: resolve(__dirname, 'dist'),
     publicPath: '/',
-    filename: '[name].[chunkhash].js',
+    filename: '[name].js',
   },
   plugins: [
     new WebpackMd5Hash(),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production'),
-      __DEV__: false,
-    }),
-    new ExtractTextPlugin('[name].[contenthash].css'),
+    new webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify('production'), __DEV__: false }),
     new HtmlWebpackPlugin({
       template: 'src/template.ejs',
       minify: {
         removeComments: true,
-        collapseWhitespace: true,
         removeRedundantAttributes: true,
         useShortDoctype: true,
         removeEmptyAttributes: true,
@@ -46,49 +40,41 @@ module.exports = {
       inject: true,
       commitSha,
     }),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        drop_console: true,
-        screw_ie8: true,
-        sequences: true,
-        properties: true,
-        dead_code: true,
-        drop_debugger: true,
-        conditionals: true,
-        comparisons: true,
-        evaluate: true,
-        booleans: true,
-        loops: true,
-        unused: true,
-        if_return: true,
-        join_vars: true,
-        cascade: true,
-        negate_iife: true,
-        hoist_funs: true,
-        warnings: false,
-      },
-      mangle: {
-        screw_ie8: true,
-        except: ['exports', 'require'],
-      },
-      output: {
-        screw_ie8: true,
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        postcss: [autoprefixer],
       },
     }),
+    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', minChunks: Infinity }),
   ],
   module: {
-    loaders: [
-    { test: /\.js$/, exclude: /node_modules/, loaders: ['babel?presets[]=es2015'] },
-    { test: /\.eot(\?v=\d+.\d+.\d+)?$/, loader: 'url?name=[name].[ext]' },
-    { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url-loader?limit=10000&mimetype=application/font-woff&name=[name].[ext]' },
-    { test: /\.[ot]tf(\?v=\d+.\d+.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=application/octet-stream&name=[name].[ext]' },
-    { test: /\.svg(\?v=\d+.\d+.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=image/svg+xml&name=[name].[ext]' },
-    { test: /\.(jpe?g|png|gif)$/i, loader: 'file?name=[name].[ext]' },
-    { test: /\.ico$/, loader: 'file?name=[name].[ext]' },
-    { test: /(\.css|\.scss)$/, loaders: ['style', 'css?sourceMap', 'postcss'] },
-    { test: /\.json$/, loader: 'json' },
+    rules: [
+      {
+        test: /\.jsx?$/,
+        include: resolve(__dirname, 'src'),
+        loader: babelLoader,
+        query: {
+          presets: [
+            'react',
+            'stage-1',
+            [
+              'es2015', {
+                modules: false,
+              },
+            ],
+          ],
+          plugins: ['transform-regenerator', 'transform-object-rest-spread', 'transform-es2015-destructuring', 'transform-class-properties', 'syntax-dynamic-import'],
+        },
+      },
     ],
   },
-  postcss: () => [autoprefixer],
 };
+
+const entry = {
+  entry: {
+    main: resolve(__dirname, 'src/client'),
+    vendor: ['react', 'react-dom', 'react-helmet', 'react-redux', 'react-router', 'leaflet'],
+  },
+};
+
+module.exports = composeConfig(defaultConfig, config, entry);

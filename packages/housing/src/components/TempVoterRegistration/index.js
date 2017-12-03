@@ -1,5 +1,5 @@
 import React from 'react';
-import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
+import { StoryCard } from '@hackoregon/component-library';
 
 const s3 = 'https://s3-us-west-2.amazonaws.com/hacko-housing-staging/';
 

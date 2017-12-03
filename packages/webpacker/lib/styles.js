@@ -3,21 +3,18 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-// deps
+
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-// paths
 var styleLoader = require.resolve('style-loader');
 var cssLoader = require.resolve('css-loader');
 var postcssLoader = require.resolve('postcss-loader');
 
-// consts
 var env = process.env.NODE_ENV;
 var isProd = env === 'production';
 var className = isProd ? '[hash:base64:5]' : '[path][name]__[local]-[hash:base64:5]';
 var cssModules = '?modules&importLoaders=1&localIdentName=' + className;
 
-// instances
 var mainCss = new ExtractTextPlugin('main.css');
 var globalCss = new ExtractTextPlugin('global.css');
 var vendorCss = new ExtractTextPlugin('vendor.css');
@@ -26,7 +23,7 @@ var extractVendors = vendorCss.extract({
   fallback: styleLoader,
   use: ['' + cssLoader]
 });
-// will want this for prod
+
 var extractLoader = mainCss.extract({
   fallback: styleLoader,
   use: ['' + cssLoader + cssModules, postcssLoader]

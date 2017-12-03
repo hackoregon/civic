@@ -49,7 +49,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var config = {
   context: _paths.ROOT_PATH,
   cache: true,
-  // target: 'web',
+
   resolve: {
     extensions: ['.js', '.jsx']
   },

@@ -1,10 +1,10 @@
 /* eslint-disable */
 import React from 'react';
 import { connect } from 'react-redux';
-// import LeafletMap from '@hackoregon/component-library/lib/LeafletMap/LeafletMap';
+// import { LeafletMap } from '@hackoregon/component-library';
 import { CollectionHero } from '@hackoregon/component-library';
 // import isClient from '@hackoregon/component-library/lib/utils/isClient';
-import '@hackoregon/component-library/lib/global.styles.css';
+import '@hackoregon/component-library/src/global.styles.css';
 // import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 
 if (typeof require.ensure !== 'function') require.ensure = (d, c) => c(require);
