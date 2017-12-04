@@ -13,8 +13,8 @@ export default function createRoutes(store) {
 
   return [
     {
-      path: '/',
-      name: 'homepage',
+      path: '/budget',
+      name: 'budget',
       getComponent(nextState, cb) {
         const getModule = Promise.resolve(require.ensure([], (require) => {
           cb(null, require('./components/App'));
