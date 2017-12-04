@@ -25,7 +25,7 @@
     "start": "npm run start:dev",
     "lint": "esw src tools server webpack.config.* --color",
     "lint:watch": "npm run lint -- --watch",
-    "build": "../../node_modules/.bin/babel-node tools/build.js",
+    "build": " cross-env NODE_ENV=production ../../node_modules/.bin/babel-node tools/build.js",
     "jinn": "jinn",
     "analyze": "../../node_modules/.bin/babel-node ./tools/analyzeBundle.js",
     "start:dev": "npx -p babel-cli cross-env NODE_ENV=development ../../node_modules/.bin/babel-node server",
