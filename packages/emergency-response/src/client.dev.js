@@ -1,7 +1,7 @@
-import '@hackoregon/component-library/assets/global.styles.css';
-
-// eslint-disable-next-line
+// NOTE - because the routes are not resolved async we have to do this - routes need to be fixed
+import '!style-loader!css-loader!@hackoregon/component-library/assets/global.styles.css';
 import '!style-loader!css-loader!@hackoregon/component-library/assets/vendor/leaflet.css';
+import '!style-loader!css-loader!@hackoregon/component-library/assets/vendor/react-select.min.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
