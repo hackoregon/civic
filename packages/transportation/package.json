@@ -28,7 +28,7 @@
     "build": "babel-node tools/build.js",
     "jinn": "jinn",
     "analyze": "babel-node ./tools/analyzeBundle.js",
-    "start:dev": "cross-env NODE_ENV=development babel-node server",
+    "start:dev": "npx -p babel-cli cross-env NODE_ENV=development babel-node server",
     "start:production": "npm run build && npm run start:prod:server",
     "start:prod:server": "cross-env NODE_ENV=production babel-node server",
     "test": "mocha --opts ./mocha.opts 'src/**/*.test.js'",
