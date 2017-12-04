@@ -1,6 +1,6 @@
 {
   "name": "@hackoregon/civic-platform",
-  "version": "1.0.0-alpha.1c62c05f",
+  "version": "1.0.0-alpha.f1b97411",
   "description": "Civic - A Hack Oregon Project",
   "engines": {
     "node": ">=6"
@@ -30,11 +30,11 @@
     "url": "https://github.com/hackoregon/civic-platform"
   },
   "dependencies": {
-    "@hackoregon/civic-emergency-response": "^1.0.0-alpha.1c62c05f",
-    "@hackoregon/civic-housing": "^1.0.0-alpha.1c62c05f",
+    "@hackoregon/civic-emergency-response": "^1.0.0-alpha.f1b97411",
+    "@hackoregon/civic-housing": "^1.0.0-alpha.f1b97411",
     "@hackoregon/civic-server": "0.0.10",
-    "@hackoregon/component-library": "^1.0.0-alpha.1c62c05f",
-    "@hackoregon/webpacker": "^1.0.0-alpha.1c62c05f",
+    "@hackoregon/component-library": "^1.0.0-alpha.f1b97411",
+    "@hackoregon/webpacker": "^1.0.0-alpha.f1b97411",
     "app-root-dir": "^1.0.2",
     "assets-webpack-plugin": "^3.5.1",
     "autoprefixer": "^6.7.7",
