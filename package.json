@@ -9,7 +9,7 @@
     "build-storybook": "build-storybook",
     "build": "lerna run build",
     "tag": "lerna publish --skip-npm",
-    "canary": "lerna publish --skip-git --skip-npm --canary",
+    "canary": "lerna publish --skip-npm --canary",
     "clean": "lerna clean && rimraf node_modules",
     "watch": "node scripts/watch",
     "deploy-storybook": "storybook-to-ghpages",
