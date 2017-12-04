@@ -20,6 +20,7 @@ $ brew install yarn --without-node # you should be using nvm -- this installs ya
 ## Install
 ```bash
 nvm use # sets your node to match project
+# We will always be on the latest node LTS version, so 8.9.1 currently - https://github.com/nodejs/Release
 
 # This will bootstrap the project by installing all package dependencies and linking cross-dependencies.
 $ yarn bootstrap
@@ -61,7 +62,7 @@ cd packages/{package-dir} # for example: cd packages/housing
 npm start
 ```
 
-## Using storybook 
+## Using storybook
 
 We are committed to a shared component library. This is achieved using the `component-library` package and React Storybook.
 Run Storybook with the following command:
