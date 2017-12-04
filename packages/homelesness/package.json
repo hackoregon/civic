@@ -1,6 +1,6 @@
 {
   "name": "@hackoregon/civic-homelessness",
-  "version": "1.0.0-alpha.f1b97411",
+  "version": "1.0.0-alpha.fe716b58",
   "description": "Civic/Homelessness 2017",
   "main": "src/index.js",
   "contributors": [
@@ -25,13 +25,13 @@
   },
   "scripts": {
     "clean": "rimraf build && mkdir build",
-    "start": "npm-run-all --parallel test:watch start:dev",
+    "start": "yarn start:dev",
     "lint": "eslint --fix src tools server webpack.config.* --color",
     "lint:watch": "npm run lint -- --watch",
-    "build": "rimraf dist && babel-node tools/build.js",
-    "analyze": "babel-node ./tools/analyzeBundle.js",
+    "build": "rimraf dist && ../../node_modules/.bin/babel-node tools/build.js",
+    "analyze": "../../node_modules/.bin/babel-node ./tools/analyzeBundle.js",
     "prestart:dev": "npm run clean",
-    "start:dev": "cross-env NODE_ENV=development babel-node server",
+    "start:dev": "cross-env NODE_ENV=development ../../node_modules/.bin/babel-node server",
     "start:prod": "cross-env NODE_ENV=production node server",
     "test": "mocha --opts ./mocha.opts 'src/**/*.test.js'",
     "test:watch": "npm run test -- --watch",
@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "@hackoregon/civic-server": "0.0.10",
-    "@hackoregon/component-library": "^1.0.0-alpha.f1b97411",
+    "@hackoregon/component-library": "^1.0.0-alpha.fe716b58",
     "compression": "^1.6.2",
     "cross-env": "^3.1.3",
     "d3-format": "^1.2.0",
@@ -69,8 +69,8 @@
     "styled-components": "^1.4.2"
   },
   "devDependencies": {
-    "@hackoregon/civic-babel-presets": "^1.0.0-alpha.f1b97411",
-    "@hackoregon/webpacker": "^1.0.0-alpha.f1b97411",
+    "@hackoregon/civic-babel-presets": "^1.0.0-alpha.fe716b58",
+    "@hackoregon/webpacker": "^1.0.0-alpha.fe716b58",
     "autoprefixer": "^6.7.7",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
