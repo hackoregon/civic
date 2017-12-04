@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "bootstrap": "yarn install --frozen-lockfile && lerna bootstrap",
+    "postbootstrap": "yarn build",
     "build-storybook": "build-storybook",
     "build": "lerna run build",
     "tag": "lerna publish --skip-npm",
