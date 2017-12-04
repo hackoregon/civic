@@ -11,12 +11,8 @@
     "url": "https://github.com/hackoregon/webpacker"
   },
   "scripts": {
-    "start": "npm install",
-    "build": "npx babel src --out-dir lib",
-    "bump": "npx bump --prompt --commit --push",
-    "postbump": "npx editme -w & npm prune --production",
-    "postpublish": "npm start",
-    "lint": "npx eslint --fix src"
+    "build": "BABEL_ENV=cjs ../../node_modules/.bin/babel src --out-dir lib",
+    "lint": "eslint --fix src"
   },
   "keywords": [
     "webpack",
