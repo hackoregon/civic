@@ -1,8 +1,9 @@
 language: node_js
 cache: yarn
 node_js:
-- '6.11.4'
-# after_success:
-# - npm run test:cover:travis
-script:
+- '8'
+- '8.9.1'
+after_success:
 - npm run test
+script:
+- npm run build

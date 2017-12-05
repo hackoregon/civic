@@ -9,8 +9,8 @@ const loadModule = cb => (componentModule) => {
 export default function createRoutes() {
   return [
     {
-      path: '/',
-      name: 'home',
+      path: '/homelessness',
+      name: 'homelessness',
       getComponent(nextState, cb) {
         const renderRoute = loadModule(cb);
         require.ensure([], require => Promise.resolve(require('./components/CardCollection'))

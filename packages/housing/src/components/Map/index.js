@@ -35,7 +35,7 @@ const Map = ({ neighborhoods, onSelect, activeNeighborhood }) => {
   );
 
   return (<div style={reactLeafletMapStyle}>
-    {neighborhoods &&
+    {Object.keys(neighborhoods).length &&
       <LeafletMap {...reactLeafletMapProps}>
         {neighborhoods.features.map(neighborhood =>
           <Neighborhood
@@ -56,7 +56,7 @@ const Map = ({ neighborhoods, onSelect, activeNeighborhood }) => {
 };
 
 Map.propTypes = {
-  neighborhoods: PropTypes.object,
+  neighborhoods: PropTypes.shape({}),
   onSelect: PropTypes.func,
   activeNeighborhood: PropTypes.number,
 };

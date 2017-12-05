@@ -1,128 +1,80 @@
-const webpack          = require('webpack');
-const AssetsPlugin     = require('assets-webpack-plugin');
-const autoprefixer     = require('autoprefixer');
-const { resolve }      = require('path');
+/* eslint-disable import/no-extraneous-dependencies */
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const autoprefixer = require('autoprefixer');
+const { resolve } = require('path');
+const WebpackMd5Hash = require('webpack-md5-hash');
 
+// NOTE: need to require.resolve to get absolute path
+const babelLoader = require.resolve('babel-loader');
+
+const commitSha = require('child_process').execSync('git rev-parse --short HEAD').toString().trim();
 const { defaultConfig, composeConfig } = require('@hackoregon/webpacker'); // eslint-disable-line
 
-const PUBLIC_PARAM     = 'public';
-const REAL_ROOT        = resolve(__dirname, '..');
-const BUNDLE_PATH      = resolve(REAL_ROOT, 'build');
-const SRC_PATH         = resolve(REAL_ROOT, 'src');
-
-const env              = process.env.NODE_ENV;
-// const isDev            = env === 'development';
-const isProd           = env === 'production';
-const assetFileName    = 'civic-assets.json';
-
-const staticServerAddr = process.env.NODE_ENV !== 'production'
-  ? `http://localhost:3001/${PUBLIC_PARAM}/`
-  : `http://civicpdx.org:8080/${PUBLIC_PARAM}/`;
-
-const removeEmpty = arr => arr.filter(item => !!item);
-const IsomorphicLoaderPlugin = require('isomorphic-loader/lib/webpack-plugin');
-
-// const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
 const config = {
-  context: REAL_ROOT,
-  cache: true,
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['', '.js', '.json'],
   },
-  devtool: null,
-  entry: {
-    app: [
-      // resolve(SRC_PATH, 'webpack-public-path'),
-      resolve(SRC_PATH, 'client/index.js'),
-    ],
-    vendor: [
-      'react',
-      'react-dom',
-      'react-helmet',
-      'react-redux',
-      'react-router',
-      // 'leaflet',
-    ],
-  },
-  // module: {
-  //   rules: [
-  //     {
-  //       test: /\.jsx?$/,
-  //       exclude: /node_modules/,
-  //       loader: 'babel-loader',
-  //       query: {
-  //         presets: [
-  //           'react',
-  //           'stage-1',
-  //                 ['es2015', { modules: false }],
-  //         ],
-  //         plugins: [
-  //           'transform-regenerator',
-  //           'transform-object-rest-spread',
-  //           'transform-es2015-destructuring',
-  //           'transform-class-properties',
-  //           'syntax-dynamic-import',
-  //         ],
-  //       },
-  //     },
-  //   ],
-  // },
+  devtool: 'source-map',
+  target: 'web',
   output: {
-    path: `${BUNDLE_PATH}/${PUBLIC_PARAM}/`,
-    publicPath: staticServerAddr,
-    filename: 'js/[name].bundle.js',
-    chunkFilename: 'js/[name].chunk.js',
+    path: resolve(__dirname, 'dist'),
+    publicPath: '/',
+    filename: '[name].js',
   },
-  // plugins: removeEmpty([
-  //   // new IsomorphicLoaderPlugin({
-  //   //   keepExistingConfig: false,
-  //   //   assetsFile: 'isomorphic-assets.json',
-  //   // }),
-  //   // new webpack.optimize.CommonsChunkPlugin({
-  //   //   name: 'vendor',
-  //   //   chunks: ['app'],
-  //   //   filename: 'js/[name].bundle.js',
-  //   //   minChunks: ({ resource }) => /node_modules/.test(resource),
-  //   // }),
-  //   // new webpack.optimize.CommonsChunkPlugin({
-  //   //   name: 'vendor-css',
-  //   //   chunks: ['app'],
-  //   //   filename: 'css/[name].[chunkHash].css',
-  //   //   minChunks: ({ resource }) => /node_modules/.test(resource),
-  //   // }),
-  //   // new webpack.LoaderOptionsPlugin({ options: { postcss: [autoprefixer] } }),
-  //   // isProd && (
-  //   //       new webpack.LoaderOptionsPlugin({
-  //   //         minimize: true,
-  //   //         debug: false,
-  //   //       })
-  //   //     ),
-  //   // new AssetsPlugin({
-  //   //   filename: assetFileName,
-  //   //   prettyPrint: true,
-  //   //   path: BUNDLE_PATH,
-  //   // }),
-  // ]),
+  plugins: [
+    new WebpackMd5Hash(),
+    new webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify('production'), __DEV__: false }),
+    new HtmlWebpackPlugin({
+      template: 'src/template.ejs',
+      minify: {
+        removeComments: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyCSS: true,
+        minifyURLs: true,
+      },
+      inject: true,
+      commitSha,
+    }),
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        postcss: [autoprefixer],
+      },
+    }),
+    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', minChunks: Infinity }),
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.jsx?$/,
+        include: resolve(__dirname, 'src'),
+        loader: babelLoader,
+        query: {
+          presets: [
+            'react',
+            'stage-1',
+            [
+              'es2015', {
+                modules: false,
+              },
+            ],
+          ],
+          plugins: ['transform-regenerator', 'transform-object-rest-spread', 'transform-es2015-destructuring', 'transform-class-properties', 'syntax-dynamic-import'],
+        },
+      },
+    ],
+  },
 };
 
-const webpackConfig = composeConfig(
-  defaultConfig,
-  config,
-);
+const entry = {
+  entry: {
+    main: resolve(__dirname, 'src/client-production'),
+    vendor: ['react', 'react-dom', 'react-helmet', 'react-redux', 'react-router', 'leaflet'],
+  },
+};
 
-// webpackConfig.plugins.push(new ExtractTextPlugin('styles.css'));
-// webpackConfig.module.rules[1] = {
-//   test: /\.css$/,
-//   exclude: /node_modules/,
-//   loader: ExtractTextPlugin.extract({
-//     fallback: 'style-loader',
-//     loader: [
-//       'css-loader?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]',
-//       'postcss-loader',
-//     ],
-//   }),
-// };
-
-
-export default webpackConfig;
+module.exports = composeConfig(defaultConfig, config, entry);

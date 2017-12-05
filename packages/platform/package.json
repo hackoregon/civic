@@ -1,6 +1,6 @@
 {
   "name": "@hackoregon/civic-platform",
-  "version": "1.0.0-alpha.1c62c05f",
+  "version": "1.0.0-alpha.fe716b58",
   "description": "Civic - A Hack Oregon Project",
   "engines": {
     "node": ">=6"
@@ -12,15 +12,15 @@
   "license": "MIT",
   "scripts": {
     "clean": "rimraf ./build",
-    "dev": "babel-node tools/dev",
-    "build": "webpack --config tools/webpack.config.babel.js --colors",
+    "dev": "../../node_modules/.bin/babel-node tools/dev",
+    "build": "NODE_ENV=production webpack --config webpack.config.babel.js --colors",
     "build:server": "babel src --out-dir build --copy-files",
     "build:prod": "NODE_ENV=production run-s build build:server",
     "build:all": "BABEL_ENV=production run-s clean build build:server",
     "lint": "eslint --fix src",
     "start": "NODE_ENV=production npm run go",
-    "serve:app": "babel-node build/server/index.js",
-    "serve:static": "BABEL_ENV=production babel-node staticServer/index.js",
+    "serve:app": "../../node_modules/.bin/babel-node build/server/index.js",
+    "serve:static": "BABEL_ENV=production ../../node_modules/.bin/babel-node staticServer/index.js",
     "preserve:server": "npm run build:server",
     "go": "BABEL_ENV=production run-p serve:static serve:app",
     "test": "eslint src"
@@ -30,11 +30,11 @@
     "url": "https://github.com/hackoregon/civic-platform"
   },
   "dependencies": {
-    "@hackoregon/civic-emergency-response": "^1.0.0-alpha.1c62c05f",
-    "@hackoregon/civic-housing": "^1.0.0-alpha.1c62c05f",
+    "@hackoregon/civic-emergency-response": "^1.0.0-alpha.fe716b58",
+    "@hackoregon/civic-housing": "^1.0.0-alpha.f1b97411",
     "@hackoregon/civic-server": "0.0.10",
-    "@hackoregon/component-library": "^1.0.0-alpha.1c62c05f",
-    "@hackoregon/webpacker": "^1.0.0-alpha.1c62c05f",
+    "@hackoregon/component-library": "^1.0.0-alpha.fe716b58",
+    "@hackoregon/webpacker": "^1.0.0-alpha.fe716b58",
     "app-root-dir": "^1.0.2",
     "assets-webpack-plugin": "^3.5.1",
     "autoprefixer": "^6.7.7",

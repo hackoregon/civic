@@ -19,7 +19,7 @@ export const crossHatch = new L.CrossHatch({
  * used, this should be included within leaflet map component
  */
 class CrossHatch extends Component {
-  componentWillMount() {
+  componentDidMount() {
     crossHatch.addTo(this.context.map);
   }
 

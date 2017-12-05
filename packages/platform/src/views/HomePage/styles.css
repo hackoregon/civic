@@ -51,7 +51,7 @@
 }
 
 .Platform.Hero .Explore {
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   width: 100%;
   margin: 0 auto;
   font-weight: 500;
@@ -315,23 +315,23 @@
 }
 
 .Collection.Hero.Housing {
-  background-image: url('../../../assets/collection-hero-housing.jpg');
+  background-image:('assets/collection-hero-housing.jpg');
 }
 
 .Collection.Hero.Budget {
-  background-image: url('../../../assets/collection-hero-budget.jpg');
+  background-image: url('../../assets/collection-hero-budget.jpg');
 }
 
 .Collection.Hero.Transportation {
-  background-image: url('../../../assets/collection-hero-transportation.jpg');
+  background-image: url('../../assets/collection-hero-transportation.jpg');
 }
 
 .Collection.Hero.EmergencyResponse {
-  background-image: url('../../../assets/collection-hero-emergency-response.jpg');
+  background-image: url('../../assets/collection-hero-emergency-response.jpg');
 }
 
 .Collection.Hero.Homelessness {
-  background-image: url('../../../assets/collection-hero-homelessness.jpg');
+  background-image: url('../../assets/collection-hero-homelessness.jpg');
 }
 
 .Page.Hero {
@@ -378,7 +378,7 @@
 a.Tag {
   border: 2px solid rgba(255,255,255,0.85);
   padding: 10px;
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   font-weight: 400;
   color: rgba(255,255,255,0.85);
   font-size: 1.25em;
@@ -405,7 +405,7 @@ a.Link {
 a.Link {
   color: rgba(255,255,255,0.85);
     padding: 6px 6px 6px 6px;
-    font-family: 'Rubik', sans-serif;
+    font-family: "Rubik", sans-serif;
     font-weight: 500;
 }
 

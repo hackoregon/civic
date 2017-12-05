@@ -5,6 +5,10 @@ const { resolve } = require('path');
 
 const commitSha = require('child_process').execSync('git rev-parse --short HEAD').toString().trim();
 
+const vendorCssPattern = /assets\/.*\.css$/;
+const globalCssPattern = /global\.styles\.css$/;
+const allCssPattern = /\.css$/;
+
 module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
@@ -80,7 +84,14 @@ module.exports = {
         test: /\.ico$/,
         loader: 'file-loader?name=[name].[ext]',
       }, {
-        test: /(\.css|\.scss)$/,
+        test: globalCssPattern,
+        loaders: ['style-loader', 'css-loader'],
+      }, {
+        test: vendorCssPattern,
+        loaders: ['style-loader', 'css-loader'],
+      }, {
+        test: allCssPattern,
+        exclude: [globalCssPattern, vendorCssPattern],
         loaders: ['style-loader', 'css-loader?sourceMap&modules'],
       }, {
         test: /\.json$/,

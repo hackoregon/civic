@@ -54,7 +54,7 @@ const textAlignCenter = {
 
 /* eslint-disable dot-notation */
 const DemographicDetailView = ({ demographics }) => {
-  if (!demographics) return <div />;
+  if (!Object.keys(demographics).length) return <div />;
   return (
     <div>
       {demographics &&

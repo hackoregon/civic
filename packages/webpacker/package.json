@@ -1,21 +1,20 @@
 {
   "name": "@hackoregon/webpacker",
-  "version": "1.0.0-alpha.1c62c05f",
+  "version": "1.0.0-alpha.fe716b58",
   "description": "Compose your webpack configs - comes with a default",
   "author": "David Daniel <davidedaniel@gmail.com>",
   "license": "MIT",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "module": "es/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/hackoregon/webpacker"
   },
   "scripts": {
-    "start": "npm install",
-    "build": "npx babel src --out-dir lib",
-    "bump": "npx bump --prompt --commit --push",
-    "postbump": "npx editme -w & npm prune --production",
-    "postpublish": "npm start",
-    "lint": "npx eslint --fix src"
+    "build:esm": "BABEL_ENV=esm ../../node_modules/.bin/babel src --out-dir es",
+    "build:cjs": "BABEL_ENV=cjs ../../node_modules/.bin/babel src --out-dir dist",
+    "build": "yarn build:cjs && yarn build:esm",
+    "lint": "eslint --fix src"
   },
   "keywords": [
     "webpack",
@@ -23,9 +22,10 @@
     "modular"
   ],
   "dependencies": {
-    "@hackoregon/civic-babel-presets": "^1.0.0-alpha.1c62c05f",
+    "@hackoregon/civic-babel-presets": "^1.0.0-alpha.fe716b58",
     "assets-webpack-plugin": "^3.5.1",
     "autoprefixer": "^6.7.7",
+    "babel-cli": "^6.24.1",
     "babel-loader": "^7.1.1",
     "babel-plugin-dynamic-import-node": "1.0.2",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",

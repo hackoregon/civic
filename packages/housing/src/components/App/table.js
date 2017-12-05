@@ -24,7 +24,7 @@ Table.defaultProps = {
 };
 
 Table.propTypes = {
-  rows: React.PropTypes.array,
+  rows: React.PropTypes.arrayOf(),
 };
 
 export default Table;
