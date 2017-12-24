@@ -8,7 +8,7 @@ const { defaultConfig, composeConfig } = require('@hackoregon/webpacker'); // es
 const PUBLIC_PARAM     = 'public';
 const REAL_ROOT        = resolve(__dirname, '..');
 const BUNDLE_PATH      = resolve(REAL_ROOT, 'build');
-const SRC_PATH         = resolve(REAL_ROOT, 'src');
+const SRC_PATH         = resolve(REAL_ROOT, 'platform/src');
 
 const env              = process.env.NODE_ENV;
 // const isDev            = env === 'development';
