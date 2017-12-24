@@ -11,10 +11,8 @@ import Example from '../Example';
 import { StickyContainer, Sticky } from 'react-sticky';
 import _ from 'lodash';
 import ReactSlider from 'rc-slider';
-import 'rc-slider/assets/index.css';
-import './CardCollection.css';
+import '!style-loader!css-loader!./CardCollection.css';
 import Select from 'react-select';
-import 'react-select/dist/react-select.css';
 import { saBubbleData } from '../MyTest/utils';
 import { data, colors } from '../StackedAreaChart/utils';
 import {

@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 
-require('./Tooltip.css');
+import '!style-loader!css-loader!./Tooltip.css';
 
 /*
  * Creates tooltip with provided id that

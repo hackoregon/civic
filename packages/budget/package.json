@@ -22,7 +22,7 @@
   },
   "scripts": {
     "clean": "rimraf ./build && mkdir build",
-    "start": "npm-run-all --parallel test:watch start:dev",
+    "start": "yarn start:dev",
     "lint": "eslint --fix src tools server webpack.config.* --color",
     "lint:watch": "npm run lint -- --watch",
     "build": "babel-node tools/build.js",

@@ -1,4 +1,10 @@
 import '@hackoregon/component-library/assets/global.styles.css'; // FOR DEV ONLY
+
+/* eslint-disable */
+import '!style-loader!css-loader!rc-slider/assets/index.css';
+import '!style-loader!css-loader!react-select/dist/react-select.css';
+/* eslint-enable */
+
 import React from 'react';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { render } from 'react-dom';
