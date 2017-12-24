@@ -1,4 +1,8 @@
 import '@hackoregon/component-library/assets/global.styles.css';
+
+/* eslint-disable */
+import '!style-loader!css-loader!@hackoregon/component-library/assets/vendor/leaflet.css';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { browserHistory } from 'react-router';

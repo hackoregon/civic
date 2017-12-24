@@ -21,8 +21,8 @@ function App(props) {
 
       <StoryCard title="Portland Road Works Explorer" collectionId="transportation" cardId="trans-construction-maps">
         <ConstructionViews />
-
       </StoryCard>
+
       <div style={{ height: '3em', width: '100%', backgroundColor: '#E87220', marginTop: '6em', marginBottom: '4em' }} />
       <CrashData />
 

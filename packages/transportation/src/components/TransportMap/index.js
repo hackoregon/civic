@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { LeafletMap } from '@hackoregon/component-library';
-import { GeoJSON } from 'react-leaflet';
+import { GeoJSON, LayerGroup } from 'react-leaflet';
 import { MapPanel } from '../index';
 import { isEmpty } from 'ramda';
 import { setPanelValues } from '../../state';
@@ -64,11 +64,12 @@ class TransportMap extends Component {
         <div style={{ textAlign: 'left', marginBottom: '1em' }}>
           {blurb[this.props.mapType]}
         </div>
-        <LeafletMap key={key} center={portland} zoom={11} height={600} width={900}>
-          {this.props.geoData ?
-            <GeoJSON data={this.props.geoData} onEachFeature={this.onEachFeature} /> :
-            null
-          }
+        <LeafletMap center={portland} zoom={11} height={600} width={900}>
+          {this.props.geoData && (
+            <LayerGroup key={key}>
+              <GeoJSON data={this.props.geoData} onEachFeature={this.onEachFeature} />
+            </LayerGroup>
+          )}
         </LeafletMap>
         { this.props.panelValues ?
           <MapPanel panelValues={this.props.panelValues} /> :

@@ -27,9 +27,9 @@ class ConstructionViews extends Component {
     const controls = this.props.appData[mapType]
     console.log('cv controls', controls)
     return (
-      
+
       <div style={{textAlign: 'left'}}>
-        
+
         <p>
           These maps provide the ability to explore road work data provided by the City of Portland.  Road word data is a loose term that currently includes Right of Way closures, pavement moratoriums, repaving plans, and several other types of project types that can affect access to our streets.  The maps below represent a proof of concept for how this data can be used and they demonstrate the ability to:</p>
         <p>
