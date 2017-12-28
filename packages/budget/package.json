@@ -22,18 +22,18 @@
   },
   "scripts": {
     "clean": "rimraf ./build && mkdir build",
-    "start": "npm-run-all --parallel test:watch start:dev",
+    "start": "yarn start:dev",
     "lint": "eslint --fix src tools server webpack.config.* --color",
     "lint:watch": "npm run lint -- --watch",
-    "build": "babel-node tools/build.js",
-    "analyze": "babel-node ./tools/analyzeBundle.js",
+    "build": "cross-env NODE_ENV=production babel-node tools/build.js",
+    "analyze": "cross-env NODE_ENV=production babel-node ./tools/analyzeBundle.js",
     "start:dev": "cross-env NODE_ENV=development babel-node server",
     "start:production": "npm run build && npm run start:prod:server",
     "start:prod:server": "cross-env NODE_ENV=production babel-node server",
     "test": "mocha --opts ./mocha.opts 'src/**/*.test.js'",
     "test:watch": "npm run test -- --watch",
-    "coverage": "babel-node node_modules/isparta/bin/isparta cover --root src --report html npm run test --reporter progress",
-    "test:cover:travis": "babel-node node_modules/isparta/bin/isparta cover --root src --report lcovonly _mocha -- --require ./tools/testSetup.js src/**/*.test.js && cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js",
+    "coverage": "cross-env NODE_ENV=test babel-node node_modules/isparta/bin/isparta cover --root src --report html npm run test --reporter progress",
+    "test:cover:travis": "cross-env NODE_ENV=test babel-node node_modules/isparta/bin/isparta cover --root src --report lcovonly _mocha -- --require ./tools/testSetup.js src/**/*.test.js && cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js",
     "show:coverage": "npm run test:cover && open coverage/index.html"
   },
   "dependencies": {

@@ -3,7 +3,7 @@ import Slider from 'rc-slider';
 import BubbleChart from './BubbleChart';
 import { bubbleData, min, max, step, marks, style } from './utils';
 
-require('rc-slider/assets/index.css');
+import '!style-loader!css-loader!rc-slider/assets/index.css';
 
 class StickySlider extends Component {
 
