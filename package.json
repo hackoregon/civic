@@ -1,5 +1,22 @@
 {
-  "name": "civic",
+  "name": "@hackoregon/civic",
+  "description": "Civic is an open source project of Hack Oregon, built entirely by volunteers committed to neutral, nonpartisan exploration of civic analytics.",
+  "author": "Hack Oregon",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hackoregon/civic"
+  },
+  "keywords": [
+    "react",
+    "react-router",
+    "webpack",
+    "redux",
+    "boilerplate",
+    "monorepo",
+    "lerna",
+    "hackoregon"
+  ],
   "workspaces": [
     "packages/*"
   ],
