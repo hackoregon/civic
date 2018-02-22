@@ -4,7 +4,7 @@ Welcome to Civic's platform monorepo.
 
 This is a lerna based monorepo. Check out lernajs.io for any in-depth docs if you need to debug. Otherwise follow along:
 
-## Setup
+## Step 1: Setup
 
 Non-standard prerequisites you'll need in your development environment to use and/or contribute to this project.
 
@@ -21,7 +21,7 @@ $ brew install yarn --without-node # you should be using nvm -- this installs ya
 # For windows: https://yarnpkg.com/en/docs/install#windows-tab
 ```
 
-## Install and build
+### Install and build
 
 ```bash
 nvm use # sets your Node.js version to match what the project uses
@@ -34,7 +34,7 @@ $ yarn bootstrap
 $ yarn build
 ```
 
-## Typical workflow - working on a package
+## Step 2: working on a single package
 
 At this point, Lerna has prepared all packages in the monorepo.
 
@@ -53,7 +53,9 @@ $ cd packages/{package-name} # e.g. cd package/housing
 $ yarn start
 ```
 
-## Building packages
+## Other Issues
+
+### Building packages
 
 ```bash
 yarn build
@@ -62,7 +64,7 @@ yarn build
 Note: certain packages require an env set using the `BABEL_ENV` or `NODE_ENV` environment variables to run.
 Please set those in scripts that need to run them and not set them in your `.bashrc` or global shell setting.
 
-## Using storybook
+### Using storybook
 
 We are committed to a shared component library. This is achieved using the `component-library` package and React Storybook.
 Run Storybook with the following command:
