@@ -33,7 +33,7 @@ if (!isProd) {
 module.exports = createConfig([
   entryPoint(entryPoints),
   setOutput({
-    path: path('build'),
+    path: path(isProd ? 'dist' : 'build'),
     publicPath: '/',
     filename: '[name].bundle.js',
   }),
