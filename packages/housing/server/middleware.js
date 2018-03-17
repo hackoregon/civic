@@ -49,7 +49,7 @@ module.exports = (app, options) => {
   const isProd = process.env.NODE_ENV === 'production';
 
   if (isProd) {
-    const prodConfig = require('../webpack.config.prod.js');
+    const prodConfig = require('../webpack.config.js');
     prodConfig.output.path = options.outputPath;
     prodConfig.output.publicPath = options.publicPath;
 

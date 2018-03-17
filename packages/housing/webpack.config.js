@@ -24,12 +24,14 @@ const path = filePath => resolve(__dirname, filePath);
 
 const commitSha = require('child_process').execSync('git rev-parse --short HEAD').toString().trim();
 
+const isProd = process.env.NODE_ENV === 'production';
+const entryPoints = [ path('src/client') ];
+if (!isProd) {
+  entryPoints.unshift('webpack-hot-middleware/client?reload=true');
+}
+
 module.exports = createConfig([
-  entryPoint([
-    'react-hot-loader/patch',
-    'webpack-hot-middleware/client?reload=true',
-    path('src/client.dev'),
-  ]),
+  entryPoint(entryPoints),
   setOutput({
     path: path('build'),
     publicPath: '/',

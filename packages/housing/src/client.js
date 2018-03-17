@@ -1,12 +1,10 @@
 import '@hackoregon/component-library/assets/global.styles.css';
-/* eslint-disable */
-import '!style-loader!css-loader!@hackoregon/component-library/assets/vendor/leaflet.css';
-import '!style-loader!css-loader!@hackoregon/component-library/assets/vendor/react-select.min.css';
-
-/* eslint-enable */
+import '@hackoregon/component-library/assets/vendor/leaflet.css';
+import '@hackoregon/component-library/assets/vendor/react-select.min.css';
+import { hot } from 'react-hot-loader';
 import React from 'react';
-import { syncHistoryWithStore } from 'react-router-redux';
 import { render } from 'react-dom';
+import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import configureStore from './configureStore';
@@ -41,8 +39,12 @@ const rootRoute = {
   childRoutes: routes,
 };
 
-render(
+const App = () => (
   <Provider store={store}>
     <Router history={history} routes={rootRoute} />
-  </Provider>, document.getElementById('content'),
+  </Provider>
 );
+
+const HotApp = hot(module)(App);
+
+render(<HotApp/>, document.getElementById('content'));
