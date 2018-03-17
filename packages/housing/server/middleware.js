@@ -61,7 +61,7 @@ module.exports = (app, options) => {
 
     setupProd(app, options);
   } else {
-    const webpackConfig = require('../webpack.config.dev.js');
+    const webpackConfig = require('../webpack.config.js');
     setupDev(app, webpackConfig);
   }
 

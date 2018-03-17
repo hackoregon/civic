@@ -1,9 +1,7 @@
 import '@hackoregon/component-library/assets/global.styles.css';
-/* eslint-disable */
-import '!style-loader!css-loader!@hackoregon/component-library/assets/vendor/leaflet.css';
-import '!style-loader!css-loader!@hackoregon/component-library/assets/vendor/react-select.min.css';
+import '@hackoregon/component-library/assets/vendor/leaflet.css';
+import '@hackoregon/component-library/assets/vendor/react-select.min.css';
 import { AppContainer } from 'react-hot-loader';
-/* eslint-enable */
 import React from 'react';
 import { render } from 'react-dom';
 import { syncHistoryWithStore } from 'react-router-redux';
