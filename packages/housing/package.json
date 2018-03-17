@@ -148,7 +148,7 @@
     "version-bump-prompt": "^3.1.0",
     "webpack": "^2.5.1",
     "webpack-blocks": "^1.0.0-rc.2",
-    "webpack-blocks-utils": "2.0.0-alpha4",
+    "webpack-blocks-utils": "2.0.0-alpha.4",
     "webpack-bundle-analyzer": "^2.1.1",
     "webpack-dev-middleware": "^1.10.0",
     "webpack-dev-server": "^2.4.1",
