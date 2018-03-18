@@ -1,0 +1,41 @@
+{
+  "name": "2017",
+  "version": "0.0.1",
+  "description": "All 2017 projects assembled",
+  "main": "index.js",
+  "scripts": {
+    "start": "yarn start:dev",
+    "start:dev": "cross-env NODE_ENV=development babel-node server",
+    "start:prod": "yarn run build && cross-env NODE_ENV=production node server",
+    "build": "rimraf dist && cross-env NODE_ENV=production npx webpack --config ./webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hackoregon/civic.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hackoregon/civic/issues"
+  },
+  "homepage": "https://github.com/hackoregon/civic#readme",
+  "dependencies": {
+    "@hackoregon/civic-housing": "^1.0.0-alpha.1c62c05f",
+    "express": "^4.14.1",
+    "react": "^15.5.3",
+    "react-dom": "^15.5.3",
+    "react-redux": "^5.0.3",
+    "react-router": "^3.0.0",
+    "react-router-redux": "^4.0.8",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.1.0"
+  },
+  "devDependencies": {
+    "@hackoregon/civic-babel-presets": "^1.0.0-alpha.1c62c05f",
+    "react-hot-loader": "^4.0.0",
+    "autoprefixer": "^6.7.7",
+    "webpack": "^2.5.1",
+    "webpack-blocks": "^1.0.0-rc.2",
+    "webpack-blocks-utils": "2.0.0-alpha.4"
+  }
+}
