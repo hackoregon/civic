@@ -5,27 +5,7 @@ import thunk from 'redux-thunk';
 import createReducer from './state';
 import { sideEffectsMiddleware } from './middleware';
 
-function configureStoreProd(initialState = {}, history) {
-  const middlewares = [
-    thunk,
-    sideEffectsMiddleware,
-    routerMiddleware(history),
-  ];
-
-  const enhancers = [applyMiddleware(...middlewares)];
-
-  const store = createStore(
-    createReducer(),
-    initialState,
-    compose(...enhancers),
-  );
-
-  store.asyncReducers = {};
-
-  return store;
-}
-
-function configureStoreDev(initialState = {}, history) {
+export default function configureStore(initialState = {}, history) {
   const middlewares = [
     thunk,
     sideEffectsMiddleware,
@@ -33,17 +13,16 @@ function configureStoreDev(initialState = {}, history) {
   ];
 
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-  const enhancers = applyMiddleware(...middlewares);
   const store = createStore(
     createReducer(),
     initialState,
-    composeEnhancers(enhancers),
+    composeEnhancers(applyMiddleware(...middlewares)),
   );
 
   store.asyncReducers = {};
 
   /* istanbul ignore next */
-  if (module.hot) {
+  if (module && module.hot) {
     module.hot.accept('./state', () => {
       Promise.resolve(require.ensure([], require => require('./state')))
       .then((reducerModule) => {
@@ -56,7 +35,3 @@ function configureStoreDev(initialState = {}, history) {
 
   return store;
 }
-
-const configureStore = process.env.NODE_ENV === 'production' ? configureStoreProd : configureStoreDev;
-
-export default configureStore;

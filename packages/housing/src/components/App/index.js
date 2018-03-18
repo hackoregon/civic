@@ -6,6 +6,11 @@ import { connect } from 'react-redux';
 // import { withRouter } from 'react-router-dom';
 import { StoryCard, Slider, Dropdown } from '@hackoregon/component-library';
 import classNames from 'classnames/bind';
+
+import '@hackoregon/component-library/assets/global.styles.css';
+import '@hackoregon/component-library/assets/vendor/leaflet.css';
+import '@hackoregon/component-library/assets/vendor/react-select.min.css';
+
 import { fetchAffordabilityData } from '../../state/affordability/actions';
 import { fetchRentData } from '../../state/rent/actions';
 import { fetchNeighborhoods } from '../../state/neighborhoods/actions';

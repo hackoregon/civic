@@ -1,6 +1,3 @@
-import '@hackoregon/component-library/assets/global.styles.css';
-import '@hackoregon/component-library/assets/vendor/leaflet.css';
-import '@hackoregon/component-library/assets/vendor/react-select.min.css';
 import { hot } from 'react-hot-loader';
 import React from 'react';
 import { render } from 'react-dom';
@@ -8,8 +5,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import configureStore from './configureStore';
-import AppPage from './components/App';
-import createRoutes from './index';
+import { Routes as createRoutes, App as AppPage } from './index';
 
 const locationStateSelector = () => {
   let prevRoutingState;
@@ -47,4 +43,4 @@ const App = () => (
 
 const HotApp = hot(module)(App);
 
-render(<HotApp/>, document.getElementById('content'));
+render(<HotApp />, document.getElementById('content'));

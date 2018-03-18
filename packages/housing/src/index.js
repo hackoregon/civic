@@ -1,13 +1,15 @@
 import createRoutes from '@hackoregon/civic-server/lib/router/createRoutes';
 import isClient from '@hackoregon/civic-server/lib/utils/isClient';
 import { getAsyncReducer } from './utils/asyncInjectors';
+import createReducer from './state';
+import AppPage from './components/App';
 
 if (typeof require.ensure !== 'function') { require.ensure = (d, c) => c(require); }
 
 function collectionRoute(store) {
   const { injectAsyncReducer } = getAsyncReducer(store);
   return {
-    path: 'collections/housing',
+    path: 'housing',
     name: 'housing',
     getComponent(nextState, cb) {
       require.ensure([], (require) => {
@@ -49,4 +51,6 @@ function notFoundRoute() {
   };
 }
 
-export default createRoutes(collectionRoute, notFoundRoute);
+export const Routes = createRoutes(collectionRoute, notFoundRoute);
+export const Reducers = createReducer;
+export const App = AppPage;
