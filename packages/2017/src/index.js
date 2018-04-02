@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import { routerReducer, routerMiddleware, syncHistoryWithStore } from 'react-router-redux';
 
+// Import routes, reducers, and root component from each project
 import {
   Routes as HousingRoutes,
   Reducers as HousingReducers,
@@ -15,6 +16,7 @@ import {
 
 import RootPage from './components/RootPage';
 
+// Create a store by combining all project reducers and the routing reducer
 const configureStore = (initialState, history) => {
   const middlewares = [
     thunk,
@@ -33,6 +35,7 @@ const configureStore = (initialState, history) => {
 
   store.asyncReducers = {};
 
+  // Allow for hot module replacement when applicable (dev mode)
   if (module.hot) {
     module.hot.accept(['@hackoregon/civic-housing'], () => {
       const nextRootReducer = combineReducers({
@@ -48,12 +51,14 @@ const configureStore = (initialState, history) => {
 
 const store = configureStore({}, browserHistory);
 
+// Connect browser history with the routing-enabled redux store
 const history = syncHistoryWithStore(browserHistory, store, {
   selectLocationState(state) {
     return state.routing;
   },
 });
 
+// Compose a route hierarchy using each project's routes and root component
 const routes = {
   path: '/',
   component: RootPage,
@@ -62,10 +67,11 @@ const routes = {
       path: 'housing',
       component: HousingApp,
       childRoutes: HousingRoutes(store),
-    }
+    },
   ],
 };
 
+// Finally create the application component and render it into the #content element
 const App = () => (
   <Provider store={store}>
     <Router history={history} routes={routes} />
