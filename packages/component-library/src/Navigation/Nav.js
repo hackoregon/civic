@@ -7,17 +7,15 @@ import Icon from '../Icon/Icon';
 const defaultMenu = [
   {
     name: 'Collections',
-    path: '/collections',
+    path: '/',
     nestedMenu: [
-      { name: 'Budget', path: '/collections/budget' },
-      { name: 'Emergency Response', path: '/collections/emergency' },
-      { name: 'Housing', path: '/collections/housing' },
-      { name: 'Homelessness', path: '/collections/homlessness' },
-      { name: 'Transportation', path: '/collections/transportation' },
-      { name: 'Past Projects', path: '/collections/past-projects' },
+      { name: 'Budget', path: '/budget' },
+      { name: 'Emergency Response', path: '/emergency' },
+      { name: 'Housing', path: '/housing' },
+      { name: 'Homelessness', path: '/homlessness' },
+      { name: 'Transportation', path: '/transportation' },
     ],
   },
-  { name: 'About', path: '/about' },
 ];
 
 class Nav extends Component {
