@@ -1,6 +1,6 @@
 {
-  "name": "2017",
-  "version": "0.0.1",
+  "name": "@hackoregon/2017",
+  "version": "1.0.0-alpha.1c62c05f",
   "description": "All 2017 projects assembled",
   "main": "index.js",
   "scripts": {
