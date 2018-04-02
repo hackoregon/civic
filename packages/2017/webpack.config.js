@@ -1,4 +1,3 @@
-const webpack = require('webpack');
 const {
   createConfig,
   entryPoint,
@@ -17,12 +16,13 @@ const {
 } = require('webpack-blocks');
 
 const autoprefixer = require('autoprefixer');
-
 const { resolve } = require('path');
+
 const path = filePath => resolve(__dirname, filePath);
 
 const isProd = process.env.NODE_ENV === 'production';
-const entryPoints = [ path('src/index') ];
+const entryPoints = [path('src/index')];
+
 if (!isProd) {
   entryPoints.unshift('webpack-hot-middleware/client?reload=true');
 }
@@ -35,19 +35,19 @@ module.exports = createConfig([
     filename: '[name].bundle.js',
   }),
   babel(),
-  match([ /.+?assets.*?\.css$/ ], [
+  match([/.+?assets.*?\.css$/], [
     css(),
     postcss({
-      plugins: [ autoprefixer({ browsers: [ 'last 2 versions' ] }) ],
+      plugins: [autoprefixer({ browsers: ['last 2 versions'] })],
     }),
   ]),
-  match([ '*.css' ], [
+  match(['*.css'], [
     css({ modules: true, exclude: /.+?assets.*?\.css$/ }),
     postcss({
-      plugins: [ autoprefixer({ browsers: [ 'last 2 versions' ] }) ],
+      plugins: [autoprefixer({ browsers: ['last 2 versions'] })],
     }),
   ]),
-  match([ '*.svg', '*.png', '*.gif', '*.jpg', '*.jpeg' ], [
+  match(['*.svg', '*.png', '*.gif', '*.jpg', '*.jpeg'], [
     file(),
   ]),
   setEnv({
@@ -58,7 +58,7 @@ module.exports = createConfig([
     sourceMaps(),
   ]),
   env('production', [
-    // uglify(),
+    uglify(),
     addPlugins([
       // new webpack.LoaderOptionsPlugin({ minimize: true }),
     ]),

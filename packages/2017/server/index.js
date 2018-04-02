@@ -1,11 +1,39 @@
 const express = require('express');
+const webpack = require('webpack');
 const resolve = require('path').resolve;
+const compression = require('compression');
 
 const app = express();
-const outputPath = resolve(process.cwd(), 'dist');
+const isProd = process.env.NODE_ENV === 'production';
+const outputPath = resolve(process.cwd(), isProd ? 'dist' : 'build');
+const config = require('../webpack.config.js');
 
+const devMiddleware = require('webpack-dev-middleware');
+const hotMiddleware = require('webpack-hot-middleware');
+
+if (isProd) {
+  // Enable gzip compression and serve assets as they build when prod
+  app.use(compression());
+  webpack(config);
+} else {
+  // Start a webpack dev server with hot module reloading when dev
+  const compiler = webpack(config);
+  const middleware = devMiddleware(compiler, {
+    noInfo: true,
+    publicPath: config.output.publicPath,
+    silent: true,
+    stats: 'errors-only',
+  });
+
+  app.use(middleware);
+  app.use(hotMiddleware(compiler));
+}
+
+// Respond with static files when they exist
 app.use('/', express.static(outputPath));
-app.get('/*', (req, res) => console.log("Servicing request for", req.url) || res.send(`
+
+// Redirect all other routes to index.html to let React handle routing client-side
+app.get('/*', (req, res) => console.log('Servicing request for', req.url) || res.send(`
 <!DOCTYPE html>
 <html>
   <head>
@@ -21,4 +49,8 @@ app.get('/*', (req, res) => console.log("Servicing request for", req.url) || res
 </html>
 `));
 
-app.listen(process.env.PORT || 3000);
+// Start the server
+const port = process.env.PORT || 3000;
+app.listen(port);
+
+console.log(`Server up at http://localhost:${port}`);

@@ -33,6 +33,16 @@ const configureStore = (initialState, history) => {
 
   store.asyncReducers = {};
 
+  if (module.hot) {
+    module.hot.accept(['@hackoregon/civic-housing'], () => {
+      const nextRootReducer = combineReducers({
+        routing: routerReducer,
+        housing: require('@hackoregon/civic-housing').Reducers,
+      });
+      store.replaceReducer(nextRootReducer);
+    });
+  }
+
   return store;
 };
 
