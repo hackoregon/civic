@@ -41,6 +41,7 @@
   },
   "devDependencies": {
     "@hackoregon/civic-babel-presets": "^1.0.0-alpha.1c62c05f",
+    "@hackoregon/civic-dev-server": "^1.0.0-alpha.1c62c05f",
     "react-hot-loader": "^4.0.0"
   }
 }
