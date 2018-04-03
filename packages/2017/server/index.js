@@ -1,38 +1,23 @@
+const chalk = require('chalk');
 const express = require('express');
-const webpack = require('webpack');
 const resolve = require('path').resolve;
 const compression = require('compression');
 
 const app = express();
 const isProd = process.env.NODE_ENV === 'production';
 const outputPath = resolve(process.cwd(), isProd ? 'dist' : 'build');
-const config = require('../webpack.config.js');
 
-const devMiddleware = require('webpack-dev-middleware');
-const hotMiddleware = require('webpack-hot-middleware');
+console.log(chalk.gray('\nStarting the production server...'));
 
-if (isProd) {
-  // Enable gzip compression and serve assets as they build when prod
-  app.use(compression());
-  webpack(config);
-} else {
-  // Start a webpack dev server with hot module reloading when dev
-  const compiler = webpack(config);
-  const middleware = devMiddleware(compiler, {
-    noInfo: true,
-    publicPath: config.output.publicPath,
-    silent: true,
-    stats: 'errors-only',
-  });
-
-  app.use(middleware);
-  app.use(hotMiddleware(compiler));
-}
+// Enable gzip compression and serve assets as they build when prod
+app.use(compression());
 
 // Respond with static files when they exist
 app.use('/', express.static(outputPath));
 
 // Redirect all other routes to index.html to let React handle routing client-side
+// The production server expects the static assets to already be built. This eliminates
+// the need to have webpack in production.
 app.get('/*', (req, res) => console.log('Servicing request for', req.url) || res.send(`
 <!DOCTYPE html>
 <html>
@@ -53,4 +38,4 @@ app.get('/*', (req, res) => console.log('Servicing request for', req.url) || res
 const port = process.env.PORT || 3000;
 app.listen(port);
 
-console.log(`Server up at http://localhost:${port}`);
+console.log(chalk.green(`Server is up at http://localhost:${port}`));
