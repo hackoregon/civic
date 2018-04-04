@@ -1,16 +1,16 @@
 import React, { PropTypes } from 'react';
 import StoryFooter from './StoryFooter';
-import './StoryCard.css';
+import styles from './StoryCard.css';
 
 const StoryCard = ({ cardId, collectionId, title, children }) => (
-  <div className={'Card'}>
+  <div className={styles.Card}>
     <h2 className={'Title FilsonSoft'}>{title}</h2>
-    <div style={{ width: '100%' }}>
+    <div className={styles.Description}>
       {children}
     </div>
     <StoryFooter cardId={cardId} collectionId={collectionId} />
   </div>
-  );
+);
 
 StoryCard.displayName = 'StoryCard';
 
