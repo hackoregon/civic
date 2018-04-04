@@ -1,9 +1,60 @@
 import React, { PropTypes, Component } from 'react';
+import { css } from 'emotion';
 import Nav from './Nav';
 import Logo from '../Logo/LogoAnimated';
-import styles from './Header.css';
 import Icon from '../Icon/Icon';
 import { ICONS } from '../styleConstants';
+
+const primaryColor = 'rgb(34, 15, 37)';
+
+const containerClass = css`
+  background-color: ${primaryColor};
+  width: 100%;
+  min-width: 320px;
+`;
+
+const headerClass = css`
+  background-color: ${primaryColor};
+  display: flex;
+  z-index: 1;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-width: 320px;
+  margin: 0 auto;
+  padding: 1rem 0;
+`;
+
+const navClass = css`
+  margin: 0 30px 0 0;
+  display:block;
+
+  @media (max-width: 640px) {
+    &.active {
+      display:block;
+    }
+
+    &.inactive {
+      display:none;
+    }
+  }
+`;
+
+const logoClass = css`
+  margin: 1rem 0 0 2rem;
+  flex: 2;
+`;
+
+const burgerClass = css`
+  a& {
+    display: none;
+    padding: 2rem;
+
+    @media (max-width: 640px) {
+      display:block;
+    }
+  }
+`;
 
 class Header extends Component {
   constructor() {
@@ -18,12 +69,12 @@ class Header extends Component {
   render() {
     const { children, menu, title } = this.props;
     return (
-      <div className={styles.container}>
-        <nav className={styles.header}>
-          <div className={styles.logo}>
+      <div className={containerClass}>
+        <nav className={headerClass}>
+          <div className={logoClass}>
             <Logo alt={title} />
           </div>
-          <div className={`${styles.nav} ${this.state.menuActive ? styles.active : styles.inactive}`}>
+          <div className={`${navClass} ${this.state.menuActive ? 'active' : 'inactive'}`}>
             <Nav
               menu={menu}
               toggleSubNav={this.togglesNestedMenu}
@@ -33,7 +84,7 @@ class Header extends Component {
 
             { children }
           </div>
-          <a className={styles.burger}>
+          <a className={burgerClass}>
             <Icon
               key="nav-burger"
               className={`${ICONS.hamburger}`}
