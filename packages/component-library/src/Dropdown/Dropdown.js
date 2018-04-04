@@ -1,20 +1,20 @@
 import React, { PropTypes } from 'react';
-import classNames from 'classnames/bind';
 import Select from 'react-select';
-import isClient from '../utils/isClient';
-import styles from './Dropdown.styles.css';
+import { css } from 'emotion';
 
-// NOTE: temporary fix until webpack 2 comes to storybook - otherwise don't use ! syntax for webpack loaders
-// if (isClient) require('!style-loader!css-loader!react-select/dist/react-select.css'); // eslint-disable-line
-if (isClient) require('../../assets/vendor/react-select.min.css'); // eslint-disable-line
-
-const cx = classNames.bind(styles);
-
-const className = cx({ base: true });
+const dropdownClass = css`
+  border: 1px solid #EEE;
+  border-radius: 3px;
+  background-color: #FFF;
+  cursor: pointer;
+  font-size: 15px;
+  padding: 3px 10px;
+  margin: 10px;
+`;
 
 const Dropdown = ({ options, onChange, value, clearable, searchable, disabled }) => (
   <Select
-    className={className}
+    className={dropdownClass}
     options={options}
     onChange={onChange}
     value={value}
