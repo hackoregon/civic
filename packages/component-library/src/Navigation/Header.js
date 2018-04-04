@@ -49,6 +49,7 @@ const burgerClass = css`
   a& {
     display: none;
     padding: 2rem;
+    border: none;
 
     @media (max-width: 640px) {
       display:block;
