@@ -21,7 +21,7 @@ const containerClass = css`
   width: 100%;
   max-width: 800px;
 
-  @media small {
+  @media (max-width: 640px) {
     padding: 0 15px;
   }
 `;
