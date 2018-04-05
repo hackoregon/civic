@@ -14,6 +14,12 @@ import {
   App as HousingApp,
 } from '@hackoregon/civic-housing';
 
+import {
+  Routes as EmergencyRoutes,
+  Reducers as EmergencyReducers,
+  App as EmergencyApp,
+} from '@hackoregon/civic-emergency-response';
+
 import RootPage from './components/RootPage';
 
 // Create a store by combining all project reducers and the routing reducer
@@ -28,6 +34,7 @@ const configureStore = (initialState, history) => {
     combineReducers({
       routing: routerReducer,
       housing: HousingReducers(),
+      emergency: EmergencyReducers(),
     }),
     initialState,
     composeEnhancers(applyMiddleware(...middlewares))
@@ -37,10 +44,11 @@ const configureStore = (initialState, history) => {
 
   // Allow for hot module replacement when applicable (dev mode)
   if (module.hot) {
-    module.hot.accept(['@hackoregon/civic-housing'], () => {
+    module.hot.accept(['@hackoregon/civic-housing', '@hackoregon/civic-emergency-response'], () => {
       const nextRootReducer = combineReducers({
         routing: routerReducer,
         housing: require('@hackoregon/civic-housing').Reducers(),
+        emergency: require('@hackoregon/civic-emergency-response').Reducers(),
       });
       store.replaceReducer(nextRootReducer);
     });
@@ -68,6 +76,11 @@ const routes = {
       component: HousingApp,
       childRoutes: HousingRoutes(store),
     },
+    {
+      path: 'emergency',
+      component: EmergencyApp,
+      childRoutes: EmergencyRoutes(store),
+    }
   ],
 };
 
