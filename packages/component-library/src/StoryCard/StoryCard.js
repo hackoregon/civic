@@ -1,11 +1,23 @@
 import React, { PropTypes } from 'react';
+import { css } from 'emotion';
 import StoryFooter from './StoryFooter';
-import styles from './StoryCard.css';
+
+const cardClass = css`
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+`;
+
+const descriptionClass = css`
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+`;
 
 const StoryCard = ({ cardId, collectionId, title, children }) => (
-  <div className={styles.Card}>
+  <div className={cardClass}>
     <h2 className={'Title FilsonSoft'}>{title}</h2>
-    <div className={styles.Description}>
+    <div className={descriptionClass}>
       {children}
     </div>
     <StoryFooter cardId={cardId} collectionId={collectionId} />
