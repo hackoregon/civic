@@ -1,14 +1,5 @@
-import React from 'react';
-import { Route, Router } from 'react-router';
+import { App } from './components/index';
+import Routes from './routes';
+import Reducers from './state/reducers';
 
-import { App, Example, NotFoundPage } from './components/index';
-
-const routes = history => (
-  <Router history={history}>
-    <Route path="/" component={App} />
-    <Route path="/example" component={Example} />
-    <Route path="/notfoundpage" component={NotFoundPage} />
-  </Router>
-);
-
-export default routes;
+export { App, Routes, Reducers };
