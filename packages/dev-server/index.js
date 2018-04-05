@@ -67,6 +67,8 @@ app.get('/*', (req, res) => console.log('Servicing request for', req.url) || res
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8"/>
     <style>html, body { padding: 0; margin: 0; }</style>
+    <!-- FontAwesome -->
+    <script src="https://use.fontawesome.com/031ebbe0c7.js"></script>
   </head>
   <body style="margin:0">
     <div id="content"></div>
