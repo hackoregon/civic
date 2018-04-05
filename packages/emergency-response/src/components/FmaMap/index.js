@@ -68,8 +68,8 @@ class FmaMap extends Component {
 
 export default connect(
   state => ({
-    fmasData: getFmasData(state),
-    fmaPanelData: getFmaPanelData(state),
+    fmasData: getFmasData(state.emergency || state),
+    fmaPanelData: getFmaPanelData(state.emergency || state),
   }),
   dispatch => ({
     getFmas: () => dispatch(getFmasThunk()),

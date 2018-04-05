@@ -24,7 +24,7 @@ class TestComponent extends Component {
 
 export default connect(
   state => ({
-    agencyData: getAgencyData(state),
+    agencyData: getAgencyData(state.emergency || state),
   }),
   dispatch => ({
     getAgencies: () => dispatch(getAgenciesThunk()),
