@@ -5,7 +5,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 // import { withRouter } from 'react-router-dom';
 import { StoryCard, Slider, Dropdown } from '@hackoregon/component-library';
-import classNames from 'classnames/bind';
 
 import '@hackoregon/component-library/assets/global.styles.css';
 import '@hackoregon/component-library/assets/vendor/leaflet.css';
@@ -26,7 +25,7 @@ import DemographicDetailView from '../DemographicDetailView';
 import TempProdVsCost from '../TempProdVsCost';
 import TempVoterRegistration from '../TempVoterRegistration';
 import MapLegend from '../MapLegend';
-import styles from './app.styles.css';
+import './app.styles.css';
 
 
 import {
@@ -49,10 +48,6 @@ import {
   MIN_INCOME,
   MAX_INCOME,
 } from '../../utils/data-constants';
-
-const cx = classNames.bind(styles);
-
-const dropdowns = cx({ dropdowns: true });
 
 const parameterGroupStyle = {
   display: 'inline-block',
@@ -127,7 +122,7 @@ export class App extends React.Component {
                 onChange={setUserIncome}
               />
             </div>
-            <div className={dropdowns} style={parameterGroupStyle}>
+            <div style={parameterGroupStyle}>
               <h3 style={textAlignCenter}>Housing Type </h3>
               <Dropdown
                 value={userUnitSize.value}
