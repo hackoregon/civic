@@ -35,14 +35,8 @@ module.exports = createConfig([
     filename: '[name].bundle.js',
   }),
   babel(),
-  match([/.+?assets.*?\.css$/], [
-    css(),
-    postcss({
-      plugins: [autoprefixer({ browsers: ['last 2 versions'] })],
-    }),
-  ]),
   match(['*.css'], [
-    css({ modules: true, exclude: /.+?assets.*?\.css$/ }),
+    css(),
     postcss({
       plugins: [autoprefixer({ browsers: ['last 2 versions'] })],
     }),
