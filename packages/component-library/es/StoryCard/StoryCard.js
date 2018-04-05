@@ -1,6 +1,15 @@
+var _templateObject = _taggedTemplateLiteral(['\n  text-align: center;\n  max-width: 1200px;\n  margin: 0 auto;\n'], ['\n  text-align: center;\n  max-width: 1200px;\n  margin: 0 auto;\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n  margin: 0 auto;\n  text-align: left;\n'], ['\n  margin: 0 auto;\n  text-align: left;\n']);
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
 import React, { PropTypes } from 'react';
+import { css } from 'emotion';
 import StoryFooter from './StoryFooter';
-import './StoryCard.css';
+
+var cardClass = css(_templateObject);
+
+var descriptionClass = css(_templateObject2);
 
 var StoryCard = function StoryCard(_ref) {
   var cardId = _ref.cardId,
@@ -9,7 +18,7 @@ var StoryCard = function StoryCard(_ref) {
       children = _ref.children;
   return React.createElement(
     'div',
-    { className: 'Card' },
+    { className: cardClass },
     React.createElement(
       'h2',
       { className: 'Title FilsonSoft' },
@@ -17,7 +26,7 @@ var StoryCard = function StoryCard(_ref) {
     ),
     React.createElement(
       'div',
-      { style: { width: '100%' } },
+      { className: descriptionClass },
       children
     ),
     React.createElement(StoryFooter, { cardId: cardId, collectionId: collectionId })
