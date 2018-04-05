@@ -40,7 +40,7 @@ const configureStore = (initialState, history) => {
     module.hot.accept(['@hackoregon/civic-housing'], () => {
       const nextRootReducer = combineReducers({
         routing: routerReducer,
-        housing: require('@hackoregon/civic-housing').Reducers,
+        housing: require('@hackoregon/civic-housing').Reducers(),
       });
       store.replaceReducer(nextRootReducer);
     });
