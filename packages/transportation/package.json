@@ -2,6 +2,7 @@
   "name": "@hackoregon/transportation",
   "version": "0.1.0",
   "description": "Hack Oregon Front-end React + Redux Starter",
+  "main": "src/index.js",
   "author": "David Daniel",
   "license": "MIT",
   "keywords": [
@@ -23,19 +24,10 @@
   "scripts": {
     "clean": "rimraf ./build && mkdir build",
     "start": "npm run start:dev",
-    "lint": "esw src tools server webpack.config.* --color",
-    "lint:watch": "npm run lint -- --watch",
-    "build": "cross-env NODE_ENV=production babel-node tools/build.js",
-    "jinn": "jinn",
-    "analyze": "cross-env NODE_ENV=production babel-node ./tools/analyzeBundle.js",
-    "start:dev": "cross-env NODE_ENV=development babel-node server",
-    "start:production": "npm run build && npm run start:prod:server",
-    "start:prod:server": "cross-env NODE_ENV=production babel-node server",
-    "test": "mocha --opts ./mocha.opts 'src/**/*.test.js'",
-    "test:watch": "npm run test -- --watch",
-    "coverage": "cross-env NODE_ENV=test babel-node node_modules/isparta/bin/isparta cover --root src --report html npm run test --reporter progress",
-    "test:cover:travis": "cross-env NODE_ENV=test babel-node node_modules/isparta/bin/isparta cover --root src --report lcovonly _mocha -- --require ./tools/testSetup.js src/**/*.test.js && cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js",
-    "show:coverage": "npm run test:cover && open coverage/index.html"
+    "build": "rimraf dist && cross-env NODE_ENV=production npx webpack --config ./webpack.config.js",
+    "start:dev": "cross-env NODE_ENV=development npx babel-node server",
+    "start:prod": "cross-env NODE_ENV=production node server",
+    "test": "cross-env BABEL_ENV=test mocha --opts ./mocha.opts 'src/**/*.test.js'"
   },
   "dependencies": {
     "@hackoregon/component-library": "^1.0.0-alpha.1c62c05f",
@@ -68,6 +60,8 @@
   },
   "devDependencies": {
     "@hackoregon/webpacker": "^1.0.0-alpha.1c62c05f",
+    "@hackoregon/civic-babel-presets": "^1.0.0-alpha.1c62c05f",
+    "@hackoregon/mock-wrapper": "^1.0.0-alpha.1c62c05f",
     "autoprefixer": "^6.7.7",
     "babel-cli": "^6.24.1",
     "chai": "^3.5.0",
@@ -81,16 +75,7 @@
     "css-loader": "^0.28.0",
     "enzyme": "^2.7.1",
     "eslint": "^3.19.0",
-    "eslint-config-airbnb": "^14.1.0",
-    "eslint-plugin-babel": "^4.0.1",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^4.0.0",
-    "eslint-plugin-prefer-object-spread": "^1.1.0",
-    "eslint-plugin-react": "^6.10.0",
-    "eslint-watch": "^2.1.14",
     "extract-text-webpack-plugin": "^2.1.2",
-    "file-loader": "^0.11.1",
-    "html-webpack-plugin": "^2.28.0",
     "isparta": "^4.0.0",
     "istanbul": "^0.4.4",
     "jest": "^20.0.4",
@@ -119,11 +104,6 @@
     "url-loader": "^0.5.7",
     "version-bump-prompt": "^3.1.0",
     "webpack": "^2.5.1",
-    "webpack-bundle-analyzer": "^2.1.1",
-    "webpack-dev-middleware": "^1.10.0",
-    "webpack-dev-server": "^2.4.1",
-    "webpack-hot-middleware": "^2.17.0",
-    "webpack-md5-hash": "^0.0.5",
-    "webpack-node-externals": "^1.5.4"
+    "webpack-blocks": "^1.0.0-rc.2"
   }
 }
