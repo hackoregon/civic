@@ -34,7 +34,9 @@ module.exports = createConfig([
     publicPath: '/',
     filename: '[name].bundle.js',
   }),
-  babel(),
+  match(['*.js'], [
+    babel(),
+  ]),
   match(['*.css'], [
     css(),
     postcss({
