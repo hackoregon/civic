@@ -91,9 +91,10 @@ TransportMap.propTypes = {
 };
 
 export default connect(
-  state => ({
-    panelValues: state.app.panelValues,
-  }),
+  (allState) => {
+    const state = allState.transportation || allState;
+    return { panelValues: state.app.panelValues };
+  },
   dispatch => ({
     setPanelValues: properties => dispatch(setPanelValues(properties)),
   }),

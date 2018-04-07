@@ -3,10 +3,11 @@ import { routerReducer } from 'react-router-redux';
 import { reducer as formReducer } from 'redux-form';
 import app from './app';
 
-const rootReducer = combineReducers({
-  routing: routerReducer,
-  form: formReducer,
-  app,
-});
-
-export default rootReducer;
+export default function createReducer(asyncReducers) {
+  return combineReducers({
+    routing: routerReducer,
+    form: formReducer,
+    app,
+    ...asyncReducers,
+  });
+}

@@ -2,20 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class MapPanel extends Component {
-  
+
   buildPanelList (features) {
       // console.log('mappanel', features)
       // console.log('canon', features.canonical_daterange)
       const dates = JSON.parse(features.properties.canonical_daterange)
       let status = features.properties.canonical_status || 'N/A'
-      
-      const topStyle = { 
-        display: 'flex', 
-        flexFlow: 'row wrap',   
+
+      const topStyle = {
+        display: 'flex',
+        flexFlow: 'row wrap',
         justifyContent: 'center',
         paddingBottom: '.5em',
       };
-      const divStyle = { 
+      const divStyle = {
         marginLeft: '3em',
         marginRight: '3em',
       };
@@ -32,15 +32,15 @@ class MapPanel extends Component {
           </div>
         </div>
       )
-      
-        
+
+
 
   }
 
   render() {
-    const headingStyle = { 
-      display: 'flex', 
-      flexFlow: 'row wrap', 
+    const headingStyle = {
+      display: 'flex',
+      flexFlow: 'row wrap',
       justifyContent: 'center',
       marginBottom: '1em',
       paddingTop: '.5em',
@@ -59,7 +59,8 @@ class MapPanel extends Component {
 
 
 export default connect(
-  store => ({
-    panelValues: store.app.panelValues,
-  }),
+  (allState) => {
+    const state = allState.transportation || allState;
+    return { panelValues: state.app.panelValues };
+  },
 )(MapPanel);
