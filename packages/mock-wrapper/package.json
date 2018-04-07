@@ -2,10 +2,16 @@
   "name": "@hackoregon/mock-wrapper",
   "version": "1.0.0-alpha.1c62c05f",
   "description": "A simple way to wrap a project as if it is in a year package",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "modules": "es/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hackoregon/civic.git"
+  },
+  "scripts": {
+    "build:esm": "babel src --out-dir es --copy-files --no-comments",
+    "build:cjs": "babel src --out-dir dist --copy-files --no-comments",
+    "build": "BABEL_ENV=esm npm run build:esm && BABEL_ENV=cjs npm run build:cjs"
   },
   "license": "MIT",
   "devDependencies": {
