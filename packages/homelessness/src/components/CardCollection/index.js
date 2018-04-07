@@ -1,3 +1,5 @@
+import '@hackoregon/component-library/assets/global.styles.css';
+
 import React from 'react';
 import Definition from '../Definition';
 import HomelessPopulation from '../HomelessPopulation';
