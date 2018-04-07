@@ -4,13 +4,6 @@ import { Header, Footer, StoryCard } from '@hackoregon/component-library';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 
-const Container = styled.div`
-  min-height: 100%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-`;
-
 const dataInc = [
       { name: 'Vehicle Incidents', Incidents: 49746 },
       { name: 'Bike Incidents', Incidents: 2844 },
@@ -52,16 +45,12 @@ function CrashData(props) {
   };
 
   return (
-
-    <Container>
-
-      <h1>How does the traffic fatality number breakdown across the different modes of transportation in Portland?</h1>
-
-      <p>Hack Oregon partnered with the Portland Bureau of Transportation (PBOT) in support of the Vision Zero project. The mission of Vision Zero is to move Portland toward achieving zero traffic-related fatalities and serious injuries while providing safe and affordable transportation options and multiple opportunities for daily physical activity.
-      </p>
-      <p>In addition to our partnership with PBOT, we reached out to the Oregon Department of Transportation (ODOT) for the raw crash data* they have for the City of Portland (COP). They gave us a decade of crash data from 2004 through 2014, from which we were able to analyze how many traffic fatalities occurred in Portland across three modes of transportation - vehicle**, bike, and pedestrian. Here’s an overview of what we saw.
-      </p>
-      <StoryCard>
+    <div>
+      <StoryCard title="How does the traffic fatality number breakdown across the different modes of transportation in Portland?">
+        <p>Hack Oregon partnered with the Portland Bureau of Transportation (PBOT) in support of the Vision Zero project. The mission of Vision Zero is to move Portland toward achieving zero traffic-related fatalities and serious injuries while providing safe and affordable transportation options and multiple opportunities for daily physical activity.
+        </p>
+        <p>In addition to our partnership with PBOT, we reached out to the Oregon Department of Transportation (ODOT) for the raw crash data* they have for the City of Portland (COP). They gave us a decade of crash data from 2004 through 2014, from which we were able to analyze how many traffic fatalities occurred in Portland across three modes of transportation - vehicle**, bike, and pedestrian. Here’s an overview of what we saw.
+        </p>
         <p style={{ marginTop: '2em' }}>Total number of incidents by mode of transportation for data from ODOT for the years 2004-2014</p>
         <LineChart width={600} height={300} data={dataInc} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
           <XAxis dataKey="name" />
@@ -71,10 +60,6 @@ function CrashData(props) {
           <Line type="monotone" dataKey="Incidents" stroke="#E87220" activeDot={{ r: 8 }} />
         </LineChart>
         <p style={captionStyle}>This is a breakdown of the total number of incidents by mode of transportation for data from ODOT for the years 2004-2014</p>
-      </StoryCard>
-
-      <StoryCard>
-        <p style={{ marginTop: '2em' }}>Total number of serious injuries per mode of transportation</p>
         <LineChart width={600} height={300} data={dataInj} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
           <XAxis dataKey="name" />
           <YAxis />
@@ -83,10 +68,6 @@ function CrashData(props) {
           <Line type="monotone" dataKey="Incidents" stroke="#E87220" activeDot={{ r: 8 }} />
         </LineChart>
         <p style={captionStyle}>This is the percentage of serious injury*** per mode of transportation</p>
-      </StoryCard>
-
-      <StoryCard>
-        <p style={{ marginTop: '2em' }}>Percentage of fatalities per mode of transportation</p>
         <LineChart width={600} height={300} data={dataFat} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
           <XAxis dataKey="name" />
           <YAxis />
@@ -95,17 +76,15 @@ function CrashData(props) {
           <Line type="monotone" dataKey="Incidents" stroke="#E87220" activeDot={{ r: 8 }} />
         </LineChart>
         <p style={captionStyle}>This is the percentage of fatalities per mode of transportation</p>
+        <div>
+          <p>Data Set Notes:</p>
+          <p>* When an accident occurs, the police create an accident report which is submitted to the Department of Motor Vehicles (DMV), which is then collected and submitted to the Oregon Department of Transportation (ODOT) - Crash Analysis and Reporting Unit where it is recorded and stored in their crash database for the entire state of Oregon.</p>
+          <p>** “Motorcycles” are a separate category from “vehicles”, and are not included as a part of the  vehicle crash analysis numbers.</p>
+          <p>***The serious injury category does not include fatalities.</p>
+        </div>
       </StoryCard>
 
-      <div>
-        <p>Data Set Notes:</p>
-        <p>* When an accident occurs, the police create an accident report which is submitted to the Department of Motor Vehicles (DMV), which is then collected and submitted to the Oregon Department of Transportation (ODOT) - Crash Analysis and Reporting Unit where it is recorded and stored in their crash database for the entire state of Oregon.</p>
-        <p>** “Motorcycles” are a separate category from “vehicles”, and are not included as a part of the  vehicle crash analysis numbers.</p>
-        <p>***The serious injury category does not include fatalities.</p>
-      </div>
-
-      <h1>97 Intersections</h1>
-      <StoryCard>
+      <StoryCard title="97 Intersections">
         <BarChart width={600} height={300} data={dataTot} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
           <XAxis dataKey="name" />
           <YAxis />
@@ -116,12 +95,7 @@ function CrashData(props) {
           <Bar barSize={75} dataKey="Incidents across all modes" fill="#E87220" />
         </BarChart>
         <p style={{ marginBottom: '2em' }}>This is how many total incidents by severity were reported at the 97 intersections</p>
-      </StoryCard>
 
-
-      <StoryCard>
-
-        <p>Number of pedestrian fatalities by age distribution</p>
         <BarChart width={600} height={300} data={dataAge} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
           <XAxis dataKey="name" />
           <YAxis />
@@ -129,10 +103,10 @@ function CrashData(props) {
           <Tooltip />
           <Bar dataKey="Incidents" fill="#E87220" />
         </BarChart>
+        <p>Number of pedestrian fatalities by age distribution</p>
       </StoryCard>
 
-      <StoryCard>
-        <h1>6 Repeat Offenders of Pedestrian Fatalities</h1>
+      <StoryCard title="6 Repeat Offenders of Pedestrian Fatalities">
         <p>Of the the 97 intersections where there were 105 pedestrian fatalities, there are 6 that have more than one reported incident of a pedestrian fatality.</p>
         <h2>Intersection: N Interstate + N Lombard</h2>
         <img alt={'Noth Intertate and North Lombard Intersection'} width={500} height={300} src={require('./../Transportation-Assets/NInterstate-NLombard.jpg')} />
@@ -159,12 +133,10 @@ function CrashData(props) {
         <br />
         <p>*For the purposes of this project, all modes of transportation include vehicle, bike, and pedestrian.</p>
         <p>** In the U.S. it is illegal to drive with a BAC level of 0.08% or more nationwide.</p>
-
-
       </StoryCard>
 
       {React.Children.toArray(props.children)}
-    </Container>
+    </div>
   );
 }
 
