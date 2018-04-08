@@ -1,4 +1,4 @@
-# Civic
+# Civic [![Build Status](https://travis-ci.org/hackoregon/civic.svg?branch=master)](https://travis-ci.org/hackoregon/civic)
 
 Welcome to Civic's platform monorepo.
 
