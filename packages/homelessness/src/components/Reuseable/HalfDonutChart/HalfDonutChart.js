@@ -1,7 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { PieChart, Pie, ResponsiveContainer, Text, Cell, Legend } from 'recharts';
-import styles from './HalfDonutChart.styles.css';
+import { css } from 'emotion';
+
+const containerClass = css`
+  color:#726371;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 35px;
+`;
 
 class HalfDonutChart extends React.Component {
   constructor(props) {
@@ -53,7 +63,7 @@ class HalfDonutChart extends React.Component {
   }
   render() {
     return (
-      <div className={styles.container} >
+      <div className={containerClass} >
         <ResponsiveContainer width={'100%'} height={225}>
           <PieChart
             margin={{ top: 0, right: 5, bottom: 100, left: 5 }}

@@ -1,4 +1,5 @@
 import '@hackoregon/component-library/assets/global.styles.css';
+import '@hackoregon/component-library/assets/vendor/react-select.min.css';
 
 import React from 'react';
 import Definition from '../Definition';

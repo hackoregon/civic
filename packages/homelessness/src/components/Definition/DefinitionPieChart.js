@@ -1,8 +1,49 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { PieChart, Pie, ResponsiveContainer, Text, Cell, Legend } from 'recharts';
+import { css } from 'emotion';
 import CustomPieLegend from './CustomPieLegend';
-import styles from '../Reuseable/HalfDonutChart/HalfDonutChart.styles.css';
+
+const containerClass = css`
+  color:#726371;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 35px;
+`;
+
+const yearsContainerClass = css`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const listItemClass = css`
+  display: inline;
+  padding: 10px;
+  color: #AAA4AB;
+  flex: inherit;
+`;
+
+const linkClass = css`
+  display: inline-block;
+  padding:5px;
+  font-size: 1.3em;
+  border: 0;
+  font-family: inherit;
+
+  &:hover {
+    color: black;
+    cursor: pointer;
+  }
+`;
+
+const linkActiveClass = css`
+  font-weight: bold;
+  color: black;
+  border-bottom: 3px solid black;
+`;
 
 const findPercentage = (val, arr) => {
   const total = arr.reduce((acc, cur) => acc + cur.value, 0);
@@ -88,21 +129,21 @@ class DefinitionPieChart extends React.Component {
                 .filter(item => item.name === this.state.activeValue)[0] })
           }
         </div>
-        <div className={styles.container}>
-          <div className={styles.yearsContainer}>
-            <ul className={styles.years}>
+        <div className={containerClass}>
+          <div className={yearsContainerClass}>
+            <ul>
               {
               getUniqueYears(this.props.data)
               .map((item) => {
-                const active = item === this.state.year ? styles.linkActive : '';
+                const active = item === this.state.year ? linkActiveClass : '';
                 return (
-                  <li className={styles.listItem} key={item} >
-                    <button
-                      className={`${styles.link} ${active}`}
+                  <li className={listItemClass} key={item} >
+                    <a
+                      className={`${linkClass} ${active}`}
                       onClick={() => this.setState({ year: item })}
                     >
                       {item}
-                    </button>
+                    </a>
                   </li>
                 );
               })

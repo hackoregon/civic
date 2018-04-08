@@ -2,9 +2,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { css } from 'emotion';
 import { BarChart, Bar, XAxis, YAxis, Text, Legend, ResponsiveContainer } from 'recharts';
 import { Dropdown, StoryCard } from '@hackoregon/component-library';
-import styles from './styles.css';
 import shared from '../shared.styles';
 
 import { fetchPopulationData } from '../../state/Population/actions';
@@ -25,6 +25,19 @@ const axisLabel = options => (
     {options.payload.value}
   </Text>
 );
+
+const containerClass = css`
+  text-align: center;
+  max-width: 95%;
+  margin: auto;
+`;
+
+const selectContainerClass = css`
+  margin-top: 50px;
+  margin: 0 30px;
+  padding-bottom:13px;
+  width: 300px;
+`;
 
 class HomelessPopulation extends React.Component {
   constructor() {
@@ -66,7 +79,7 @@ class HomelessPopulation extends React.Component {
   render() {
     return (
       <StoryCard title="Homeless Population">
-        <div className={styles.container}>
+        <div className={containerClass}>
           <p style={shared.text}>
               The graph below displays the percent of each type of homeless demographic against the
               same demographic for the general population.
@@ -76,7 +89,7 @@ class HomelessPopulation extends React.Component {
               People experiencing homelessness are more likely to be people of color, male, and more
               likely to have a disabling condition than Multnomah County residents as a whole.
           </p>
-          <div className={styles.selectContainer}>
+          <div className={selectContainerClass}>
             <Dropdown
               options={this.state.options}
               onChange={option => this.handleChange(option)}
