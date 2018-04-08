@@ -1,4 +1,5 @@
 import React, { PropTypes, Component } from 'react';
+import { Link } from 'react-router';
 import { css } from 'emotion';
 import Nav from './Nav';
 import Logo from '../Logo/LogoAnimated';
@@ -45,6 +46,12 @@ const logoClass = css`
   flex: 2;
 `;
 
+const logoLinkClass = css`
+  border: none;
+  opacity: 1;
+  transition: none;
+`;
+
 const burgerClass = css`
   a& {
     display: none;
@@ -73,7 +80,7 @@ class Header extends Component {
       <div className={containerClass}>
         <nav className={headerClass}>
           <div className={logoClass}>
-            <Logo alt={title} />
+            <Link className={logoLinkClass} to="/"><Logo alt={title} /></Link>
           </div>
           <div className={`${navClass} ${this.state.menuActive ? 'active' : 'inactive'}`}>
             <Nav

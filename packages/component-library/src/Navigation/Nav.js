@@ -12,7 +12,7 @@ const defaultMenu = [
       { name: 'Budget', path: '/budget' },
       { name: 'Emergency Response', path: '/emergency' },
       { name: 'Housing', path: '/housing' },
-      { name: 'Homelessness', path: '/homlessness' },
+      { name: 'Homelessness', path: '/homelessness' },
       { name: 'Transportation', path: '/transportation' },
     ],
   },

@@ -4,7 +4,8 @@ var _templateObject = _taggedTemplateLiteral(['\n  background-color: ', ';\n  wi
     _templateObject2 = _taggedTemplateLiteral(['\n  background-color: ', ';\n  display: flex;\n  z-index: 1;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n  min-width: 320px;\n  margin: 0 auto;\n  padding: 1rem 0;\n'], ['\n  background-color: ', ';\n  display: flex;\n  z-index: 1;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n  min-width: 320px;\n  margin: 0 auto;\n  padding: 1rem 0;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n  margin: 0 30px 0 0;\n  display:block;\n\n  @media (max-width: 640px) {\n    &.active {\n      display:block;\n    }\n\n    &.inactive {\n      display:none;\n    }\n  }\n'], ['\n  margin: 0 30px 0 0;\n  display:block;\n\n  @media (max-width: 640px) {\n    &.active {\n      display:block;\n    }\n\n    &.inactive {\n      display:none;\n    }\n  }\n']),
     _templateObject4 = _taggedTemplateLiteral(['\n  margin: 1rem 0 0 2rem;\n  flex: 2;\n'], ['\n  margin: 1rem 0 0 2rem;\n  flex: 2;\n']),
-    _templateObject5 = _taggedTemplateLiteral(['\n  a& {\n    display: none;\n    padding: 2rem;\n    border: none;\n\n    @media (max-width: 640px) {\n      display:block;\n    }\n  }\n'], ['\n  a& {\n    display: none;\n    padding: 2rem;\n    border: none;\n\n    @media (max-width: 640px) {\n      display:block;\n    }\n  }\n']);
+    _templateObject5 = _taggedTemplateLiteral(['\n  border: none;\n  opacity: 1;\n  transition: none;\n'], ['\n  border: none;\n  opacity: 1;\n  transition: none;\n']),
+    _templateObject6 = _taggedTemplateLiteral(['\n  a& {\n    display: none;\n    padding: 2rem;\n    border: none;\n\n    @media (max-width: 640px) {\n      display:block;\n    }\n  }\n'], ['\n  a& {\n    display: none;\n    padding: 2rem;\n    border: none;\n\n    @media (max-width: 640px) {\n      display:block;\n    }\n  }\n']);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -15,6 +16,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 import React, { PropTypes, Component } from 'react';
+import { Link } from 'react-router';
 import { css } from 'emotion';
 import Nav from './Nav';
 import Logo from '../Logo/LogoAnimated';
@@ -31,7 +33,9 @@ var navClass = css(_templateObject3);
 
 var logoClass = css(_templateObject4);
 
-var burgerClass = css(_templateObject5);
+var logoLinkClass = css(_templateObject5);
+
+var burgerClass = css(_templateObject6);
 
 var Header = function (_Component) {
   _inherits(Header, _Component);
@@ -68,7 +72,11 @@ var Header = function (_Component) {
           React.createElement(
             'div',
             { className: logoClass },
-            React.createElement(Logo, { alt: title })
+            React.createElement(
+              Link,
+              { className: logoLinkClass, to: '/' },
+              React.createElement(Logo, { alt: title })
+            )
           ),
           React.createElement(
             'div',

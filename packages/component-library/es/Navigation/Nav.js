@@ -20,7 +20,7 @@ import Icon from '../Icon/Icon';
 var defaultMenu = [{
   name: 'Collections',
   path: '/',
-  nestedMenu: [{ name: 'Budget', path: '/budget' }, { name: 'Emergency Response', path: '/emergency' }, { name: 'Housing', path: '/housing' }, { name: 'Homelessness', path: '/homlessness' }, { name: 'Transportation', path: '/transportation' }]
+  nestedMenu: [{ name: 'Budget', path: '/budget' }, { name: 'Emergency Response', path: '/emergency' }, { name: 'Housing', path: '/housing' }, { name: 'Homelessness', path: '/homelessness' }, { name: 'Transportation', path: '/transportation' }]
 }];
 
 var navClass = css(_templateObject);
