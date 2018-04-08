@@ -3,9 +3,6 @@
   "version": "1.0.0-alpha.1c62c05f",
   "description": "Common webpack blocks and patterns",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hackoregon/civic.git"
