@@ -30,17 +30,10 @@
   "scripts": {
     "clean": "rimraf build && mkdir build",
     "start": "yarn start:dev",
-    "lint": "eslint --fix src tools server webpack.config.* --color",
-    "build": "rimraf dist && cross-env NODE_ENV=production npx webpack --config ./webpack.config.js",
-    "analyze": "cross-env NODE_ENV=production babel-node ./tools/analyzeBundle.js",
-    "prestart:dev": "npm run clean",
+    "build": "rimraf dist && cross-env NODE_ENV=production webpack --config ./webpack.config.js",
     "start:dev": "cross-env NODE_ENV=development babel-node server",
     "start:prod": "cross-env NODE_ENV=production node server",
-    "test": "cross-env BABEL_ENV=test mocha --opts ./mocha.opts 'src/**/*.test.js'",
-    "test:watch": "npm run test -- --watch",
-    "prebump": "NODE_ENV=production npm run build",
-    "bump": "bump --prompt --commit",
-    "postbump": "editme -w"
+    "test": "cross-env BABEL_ENV=test mocha --opts ./mocha.opts 'src/**/*.test.js'"
   },
   "dependencies": {
     "@hackoregon/component-library": "^1.0.0-alpha.1c62c05f",
