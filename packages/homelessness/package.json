@@ -59,6 +59,7 @@
   "devDependencies": {
     "@hackoregon/civic-babel-presets": "^1.0.0-alpha.1c62c05f",
     "@hackoregon/mock-wrapper": "^1.0.0-alpha.1c62c05f",
+    "@hackoregon/webpack-common": "^1.0.0-alpha.1c62c05f",
     "autoprefixer": "^6.7.7",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",

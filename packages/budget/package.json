@@ -25,7 +25,7 @@
     "clean": "rimraf ./build && mkdir build",
     "start": "yarn start:dev",
     "build": "rimraf dist && cross-env NODE_ENV=production webpack --config ./webpack.config.js",
-    "start:dev": "cross-env NODE_ENV=development babel-node server",
+    "start:dev": "cross-env NODE_ENV=development node server",
     "start:prod": "cross-env NODE_ENV=production node server",
     "test": "cross-env BABEL_ENV=test mocha --opts ./mocha.opts 'src/**/*.test.js'"
   },
@@ -58,6 +58,7 @@
   "devDependencies": {
     "@hackoregon/civic-babel-presets": "^1.0.0-alpha.1c62c05f",
     "@hackoregon/mock-wrapper": "^1.0.0-alpha.1c62c05f",
+    "@hackoregon/webpack-common": "^1.0.0-alpha.1c62c05f",
     "autoprefixer": "^6.7.7",
     "babel-cli": "^6.24.1",
     "chai": "^3.5.0",
