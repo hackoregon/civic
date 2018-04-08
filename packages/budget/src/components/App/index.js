@@ -1,5 +1,6 @@
-/* eslint-disable import/no-extraneous-dependencies */
-// This should probably be the core component, containing, nav etc
+import '@hackoregon/component-library/assets/global.styles.css';
+import 'rc-slider/assets/index.css';
+import 'react-select/dist/react-select.css';
 
 import React from 'react';
 import styled from 'styled-components';
@@ -13,21 +14,14 @@ const Container = styled.div`
   font-family: Arial, sans-serif;
 `;
 
-function App(props) {
+function App() {
   return (
     <Container>
-      {React.Children.toArray(props.children)}
+      <CardCollection />
     </Container>
   );
 }
 
 App.displayName = 'App';
-App.defaultProps = {
-  children: <CardCollection />,
-};
-
-App.propTypes = {
-  children: React.PropTypes.node,
-};
 
 export default App;
