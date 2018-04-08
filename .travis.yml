@@ -1,8 +1,11 @@
 language: node_js
 cache: yarn
 node_js:
-- '6.11.4'
+  - '6.11.4'
+install:
+  - npm i -g npx
+  - yarn
+  - yarn bootstrap
+  - yarn build
 script:
-- yarn bootstrap
-- yarn build
-- yarn test
+  - yarn test
