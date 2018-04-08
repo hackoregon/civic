@@ -56,9 +56,12 @@ const mapDispatchToProps = dispatch => ({
   loadData: () => dispatch(fetchServiceCallsData()),
 });
 
-const mapStateToProps = state => ({
-  pieData: [state.services211.serviceCallsData],
-});
+const mapStateToProps = (allState) => {
+  const state = allState.homelessness || allState;
+  return {
+    pieData: [state.services211.serviceCallsData],
+  };
+};
 
 export default connect(
   mapStateToProps, mapDispatchToProps,

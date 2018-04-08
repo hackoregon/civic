@@ -160,13 +160,16 @@ const mapDispatchToProps = dispatch => ({
   loadData: () => fetchPopulationData(dispatch),
 });
 
-const mapStateToProps = state => ({
-  ethnicity: ethnicity(state),
-  veteranStatus: veteranStatus(state),
-  disability: disability(state),
-  age: age(state),
-  gender: gender(state),
-});
+const mapStateToProps = (allState) => {
+  const state = allState.homelessness || allState;
+  return {
+    ethnicity: ethnicity(state),
+    veteranStatus: veteranStatus(state),
+    disability: disability(state),
+    age: age(state),
+    gender: gender(state),
+  };
+};
 
 export default connect(
   mapStateToProps, mapDispatchToProps,

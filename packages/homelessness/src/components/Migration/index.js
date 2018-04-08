@@ -81,9 +81,12 @@ const mapDispatchToProps = dispatch => ({
   loadData: () => dispatch(fetchMigrationDemoData()),
 });
 
-const mapStateToProps = state => ({
-  migrationData: [state.migration.migrationDemoData],
-});
+const mapStateToProps = (allState) => {
+  const state = allState.homelessness || allState;
+  return {
+    migrationData: [state.migration.migrationDemoData],
+  };
+};
 
 export default connect(
   mapStateToProps, mapDispatchToProps,

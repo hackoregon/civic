@@ -101,7 +101,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  shelterTypeData: shelterType(state),
+  shelterTypeData: shelterType(state.homelessness || state),
 });
 
 export default connect(
