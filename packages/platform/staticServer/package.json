@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "babel-register": "^6.24.1",
-    "express": "^4.14.1",
-    "serve-static": "^1.12.0"
-  }
-}
