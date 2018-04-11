@@ -7,5 +7,9 @@ install:
   - yarn
   - yarn bootstrap
   - yarn build
+matrix:
+  include:
+    - env: SUITE=2017
+    - env: SUITE=COMPONENT_LIBRARY
 script:
-  - yarn test
+  - yarn run travis
