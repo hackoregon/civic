@@ -21,6 +21,9 @@ var defaultMenu = [{
   name: 'Collections',
   path: '/',
   nestedMenu: [{ name: 'Budget', path: '/budget' }, { name: 'Emergency Response', path: '/emergency' }, { name: 'Housing', path: '/housing' }, { name: 'Homelessness', path: '/homelessness' }, { name: 'Transportation', path: '/transportation' }]
+}, {
+  name: 'About',
+  path: '/about'
 }];
 
 var navClass = css(_templateObject);

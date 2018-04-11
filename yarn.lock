@@ -17,6 +17,10 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
+"@emotion/is-prop-valid@^0.5.2":
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/@emotion/is-prop-valid/-/is-prop-valid-0.5.2.tgz#4f47717c2bcce8759e11997520e6bcb14326f54a"
+
 "@hackoregon/civic-server@0.0.10":
   version "0.0.10"
   resolved "https://registry.yarnpkg.com/@hackoregon/civic-server/-/civic-server-0.0.10.tgz#d7b8a14b8e75fc836aa24a7b6a74b838d5cc7330"
@@ -3353,6 +3357,13 @@ create-ecdh@^4.0.0:
   dependencies:
     bn.js "^4.1.0"
     elliptic "^6.0.0"
+
+create-emotion-styled@^9.1.1:
+  version "9.1.1"
+  resolved "https://registry.yarnpkg.com/create-emotion-styled/-/create-emotion-styled-9.1.1.tgz#872911dde3d38871703be632580becd05e636f10"
+  dependencies:
+    "@emotion/is-prop-valid" "^0.5.2"
+    emotion-utils "^9.1.0"
 
 create-emotion@^9.1.1:
   version "9.1.1"
@@ -9678,6 +9689,13 @@ react-element-to-jsx-string@^5.0.0:
     sortobject "^1.0.0"
     stringify-object "2.4.0"
     traverse "^0.6.6"
+
+react-emotion@^9.1.1:
+  version "9.1.1"
+  resolved "https://registry.yarnpkg.com/react-emotion/-/react-emotion-9.1.1.tgz#0b92fc9f5e5984cf35c3abf3f4ef2430bb57f3d9"
+  dependencies:
+    babel-plugin-emotion "^9.1.0"
+    create-emotion-styled "^9.1.1"
 
 react-faux-dom@^3.0.1:
   version "3.1.0"

@@ -38,7 +38,10 @@ import {
   App as BudgetApp,
 } from '@hackoregon/civic-budget';
 
+import './fonts.css';
 import RootPage from './components/RootPage';
+import HomePage from './components/HomePage';
+import AboutPage from './components/AboutPage';
 
 // Create a store by combining all project reducers and the routing reducer
 const configureStore = (initialState, history) => {
@@ -100,7 +103,14 @@ const history = syncHistoryWithStore(browserHistory, store, {
 const routes = {
   path: '/',
   component: RootPage,
+  indexRoute: {
+    component: HomePage,
+  },
   childRoutes: [
+    {
+      path: 'about',
+      component: AboutPage,
+    },
     {
       path: 'housing',
       component: HousingApp,
@@ -132,7 +142,7 @@ const routes = {
 // Finally create the application component and render it into the #content element
 const App = () => (
   <Provider store={store}>
-    <Router history={history} routes={routes} />
+    <Router onUpdate={() => window.scrollTo(0, 0)} history={history} routes={routes} />
   </Provider>
 );
 

@@ -16,6 +16,10 @@ const defaultMenu = [
       { name: 'Transportation', path: '/transportation' },
     ],
   },
+  {
+    name: 'About',
+    path: '/about',
+  },
 ];
 
 const navClass = css`
