@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 import Typekit from 'react-typekit';
 import { Header } from '@hackoregon/component-library';
 
+const isRoot = ({ pathname }) => pathname === '/';
+
 export const RootPage = props => (
   <div>
     <Typekit kitId="mbf2sam" />
-    <Header title="Civic" />
+    <Header title="Civic" overlay={isRoot(props.location)} />
     {props.children}
   </div>
 );

@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from '../PlatformStyles';
 import { Link } from 'react-router';
+import styles from '../PlatformStyles';
 
 const HomePage = () => (
   <div>

@@ -17,7 +17,7 @@ const AboutPage = () => (
         <div className={`${styles.Content} Content`}>
           <div className={styles.row}>
             <p className="large">{staticContent}</p>
-            <p>For more information, visit us at <a href="//hackoregon.org.">hackoregon.org</a></p>
+            <p>For more information, visit us at <a href="//hackoregon.org">hackoregon.org</a></p>
           </div>
           <div className={styles.row}>
             <h2>Platform Team</h2>
