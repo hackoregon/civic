@@ -9,9 +9,13 @@ import { ICONS } from '../styleConstants';
 const primaryColor = 'rgb(34, 15, 37)';
 
 const containerClass = css`
-  background-color: ${primaryColor};
   width: 100%;
   min-width: 320px;
+`;
+
+const overlayContainerClass = css`
+  ${containerClass};
+  position: fixed;
 `;
 
 const headerClass = css`
@@ -24,6 +28,11 @@ const headerClass = css`
   min-width: 320px;
   margin: 0 auto;
   padding: 1rem 0;
+`;
+
+const overlayHeaderClass = css`
+  ${headerClass};
+  background-color: transparent;
 `;
 
 const navClass = css`
@@ -75,10 +84,10 @@ class Header extends Component {
   togglesNestedMenu = () => this.setState({ menuActive: !this.state.menuActive })
 
   render() {
-    const { children, menu, title } = this.props;
+    const { children, menu, title, overlay } = this.props;
     return (
-      <div className={containerClass}>
-        <nav className={headerClass}>
+      <div className={overlay ? overlayContainerClass : containerClass}>
+        <nav className={overlay ? overlayHeaderClass : headerClass}>
           <div className={logoClass}>
             <Link className={logoLinkClass} to="/"><Logo alt={title} /></Link>
           </div>
@@ -111,6 +120,7 @@ Header.propTypes = {
   menu: PropTypes.arrayOf(PropTypes.shape({})),
   title: PropTypes.string,
   children: PropTypes.node,
+  overlay: PropTypes.bool,
 };
 
 export default Header;

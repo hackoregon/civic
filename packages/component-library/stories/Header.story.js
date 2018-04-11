@@ -21,8 +21,18 @@ const altDemo = () => (
   <div><Hero /><Header title="Civic" /></div>
 );
 
+const overlayDemo = () => (
+  <div>
+    <Header title="Civic" overlay />
+    <div style={{ background: '#7CD', height: '50vh', display: 'flex', alignItems: 'center' }}>
+      <h1 style={{ padding: '3em' }}>Impressive words here</h1>
+    </div>
+  </div>
+);
+
 // const propDocs = { inline: true, propTables: [Header] };
 
 export default () => storiesOf(displayName, module)
   .add(title, demoCode)
-  .add(altTitle, altDemo);
+  .add(altTitle, altDemo)
+  .add('in overlay mode', overlayDemo);

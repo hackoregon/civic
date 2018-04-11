@@ -8,7 +8,7 @@ var styles = {
 
 var Logo = function Logo(_ref) {
   var alt = _ref.alt;
-  return isClient && React.createElement('img', { style: styles, src: require('../../assets/civic-logo-animated-invert.svg'), alt: alt });
+  return isClient && React.createElement('img', { style: styles, src: require('../../assets/civic-logo-invert-animated.svg'), alt: alt });
 };
 
 Logo.displayName = 'Logo';

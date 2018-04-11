@@ -10,7 +10,6 @@ const linkClass = css`
     font-family: 'Rubik', sans-serif;
     font-size: 1.25rem;
     border: none;
-    font-weight: 500;
     text-transform: uppercase;
     text-decoration: none;
     padding: 1rem;

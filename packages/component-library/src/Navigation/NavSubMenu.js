@@ -20,7 +20,6 @@ const nestedMenuClass = css`
     display: block;
     font-family: 'Rubik', sans-serif;
     font-size: 1.25rem;
-    font-weight: 500;
     border: none;
     text-transform: uppercase;
     text-decoration: none;

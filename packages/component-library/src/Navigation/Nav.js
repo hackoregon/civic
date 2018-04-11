@@ -42,12 +42,11 @@ const navClass = css`
   }
 
   & .nav-item {
-    color: rgba(255, 255, 255, 0.65);
+    color: white;
     flex: 1;
     display: block;
     font-family: 'Rubik', sans-serif;
     font-size: 1.25rem;
-    font-weight: 500;
     border: none;
     text-transform: uppercase;
     text-decoration: none;
