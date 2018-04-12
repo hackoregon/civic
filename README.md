@@ -1,46 +1,42 @@
 # Civic [![Build Status](https://travis-ci.org/hackoregon/civic.svg?branch=master)](https://travis-ci.org/hackoregon/civic)
 
-Welcome to Civic's platform monorepo.
+Home of the Civic Platform frontend code.
 
 This is a lerna based monorepo. Check out lernajs.io for any in-depth docs if you need to debug. Otherwise follow along:
 
-## Step 1: Setup
+## Setup
 
-Non-standard prerequisites you'll need in your development environment to use and/or contribute to this project.
+Prerequisites you'll need in your development environment to use and contribute to this project.
 
 ### Use yarn & nvm for cross-platform uniformity
 
-These tools minimize the opportunity for individual developers to have non-uniform results when building from this repo.
+These tools make sure every contributor has identical dependency versions, include node and node packages.
 
-```bash
-# install nvm -- https://github.com/creationix/nvm
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash
-
-# install yarn -- https://yarnpkg.com/en/docs/install
-$ brew install yarn --without-node # you should be using nvm -- this installs yarn for usage with nvm
-# For windows: https://yarnpkg.com/en/docs/install#windows-tab
-```
+1. [nvm](https://github.com/creationix/nvm)
+2. [yarn](https://yarnpkg.com/)
 
 ### Install and build
 
 ```bash
-nvm use # sets your Node.js version to match what the project uses
+# Sets your Node.js version to match what the project uses (should also happen on clone)
+$ nvm use
 
-# This will bootstrap the project by installing all package dependencies and linking cross-dependencies
+# Installs all package dependencies and links cross-dependencies
 $ yarn bootstrap
 
-# This will build all shared components such as component-library that are used by other packages in this monorepo
-# Without this, many packages will throw runtime errors when launched from a development environment
+# This will build all packages. Since some packages are used internally, they need to
+# be built before the dependent packages are worked on
 $ yarn build
 ```
 
-## Step 2: working on a single package
+## Working on a single package
 
 At this point, Lerna has prepared all packages in the monorepo.
 
-Most developers working in this project will be using and/or contributing to one package at a time.
+Most developers working in this project will be contributing to one package at a time.
 
-This is the command sequence that will allow you to build/run/test an individual package every time (for example, the `housing` package) and work on it as if it was a standalone project:
+This is the command sequence that will allow you to build/run/test an individual package every time (for example, the `housing` package)
+and work on it as if it was a standalone project:
 
 ```bash
 # you can open a separate shell &
@@ -53,27 +49,45 @@ $ cd packages/{package-name} # e.g. cd package/housing
 $ yarn start
 ```
 
-## Other Issues
-
-### Building packages
-
-```bash
-yarn build
-```
-
-Note: certain packages require an env set using the `BABEL_ENV` or `NODE_ENV` environment variables to run.
-Please set those in scripts that need to run them and not set them in your `.bashrc` or global shell setting.
-
-### Using storybook
+## Using storybook
 
 We are committed to a shared component library. This is achieved using the `component-library` package and React Storybook.
 Run Storybook with the following command:
 
 ```bash
-yarn storybook
+$ yarn storybook
 ```
 
-### Testing across all packages
+## Project Layout
+
+There are three types of packages right now:
+
+1. **Project packages**: A React/Redux codebase that holds a collection of stories and API interactions for a single
+   project in a Hack Oregon project cycle.
+2. **Year package bundles**: A React/Redux codebase that bundles together all project packages for a given year. This
+   is a unit that gets deployed to production.
+4. **Utilities**: Common code that other projects depend on.
+
+### Packages
+
+Every package has its own README with further details on what the package is for and how it works.
+
+  - Year Packages
+    - [2017](packages/2017/README.md)
+  - Project Packages
+    - [budget](packages/budget/README.md)
+    - [emergency-response](packages/emergency-response/README.md)
+    - [homelessness](packages/homelessness/README.md)
+    - [housing](packages/housing/README.md)
+    - [transportation](packages/transportation/README.md)
+  - Utilities
+    - [civic-babel-presets](packages/civic-babel-presets/README.md)
+    - [component-library](packages/component-library/README.md)
+    - [dev-server](packages/dev-server/README.md)
+    - [mock-wrapper](packages/mock-wrapper/README.md)
+    - [webpack-common](packages/webpack-common/README.md)
+
+## Testing across all packages
 
 To run all tests for all packages, use the following command:
 
@@ -83,4 +97,14 @@ yarn test
 
 Tests for individual packages can be run from within the individual package's directory. Running all tests is useful for continuous integration environments as well as verifying changes to common dependencies does not break packages.
 
-For example, run the above command at the root of the project after making changes to a component in the component library, to ensure that others packages are compatible with the changes made.
+For example, run the above command at the root of the project after making changes to a component in the component library to ensure that others packages are compatible with the changes made.
+
+## Continuous Integration
+
+Travis CI is configured to have a build pipeline for the component library and one for each project year. Although most
+commands are run using yarn scripts attached to a `package.json` file, due to the many steps required to run tests for
+a specific set of packages, a Makefile is used instead.
+
+## Continuous Delivery
+
+Travis CI will deploy docker containers to ECS for each project year whenever the `master` branch builds successfully.
