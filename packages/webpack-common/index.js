@@ -19,6 +19,10 @@ const {
 const autoprefixer = require('autoprefixer');
 const { resolve } = require('path');
 
+// When calling css as a function, the emotion babel plugin injects
+// a sourceMap parameter that ruins everything.
+const cssLoader = css;
+
 const path = filePath => resolve(__dirname, filePath);
 
 const isProd = process.env.NODE_ENV === 'production';
@@ -43,7 +47,7 @@ module.exports = {
       }),
       babel(),
       match(['*.css'], [
-        css(),
+        cssLoader({ sourceMap: true }),
         postcss({
           plugins: [autoprefixer({ browsers: ['last 2 versions'] })],
         }),

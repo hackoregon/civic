@@ -6,13 +6,18 @@
   ],
   "env": {
     "development": {
-      "plugins": ["react-hot-loader/babel", "transform-class-properties"]
+      "plugins": [
+        "react-hot-loader/babel",
+        "transform-class-properties",
+        [ "emotion", { "sourceMap": true, "inline": true, "autoLabel": true }]
+      ]
     },
     "production": {
       "plugins": [
         "transform-class-properties",
         "transform-react-constant-elements",
-        "transform-react-remove-prop-types"
+        "transform-react-remove-prop-types",
+        [ "emotion", { "hoist": true }]
       ]
     },
     "test": {
