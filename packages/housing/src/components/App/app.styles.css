@@ -3,5 +3,5 @@
  * leaflet map pane (z-index 404).
  */
 .Select-menu-outer {
-  z-index: 404;
+  z-index: 1404 !important;
 }

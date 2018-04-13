@@ -6,11 +6,13 @@ import thunk from 'redux-thunk';
 import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux';
 import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
+import { createLogger } from 'redux-logger';
 
 export default function MockWrapper(App, Reducers, Routes) {
   const middlewares = [
     thunk,
     routerMiddleware(browserHistory),
+    createLogger(),
   ];
 
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE_ || compose;

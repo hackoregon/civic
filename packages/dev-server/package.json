@@ -8,5 +8,9 @@
     "url": "git+https://github.com/hackoregon/civic.git"
   },
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "redux-logger": "^3.0.6",
+    "webpack-hot-middleware": "^2.21.2"
+  }
 }
