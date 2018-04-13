@@ -6,7 +6,7 @@
   ],
   "env": {
     "development": {
-      "plugins": ["react-hot-loader/babel", "transform-class-properties"],
+      "plugins": ["react-hot-loader/babel", "transform-class-properties"]
     },
     "production": {
       "plugins": [
