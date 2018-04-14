@@ -45,7 +45,9 @@ module.exports = {
         publicPath: '/',
         filename: '[name].bundle.js',
       }),
-      babel(),
+      match(['*.js', 'node_modules/lodash-es/**/*.js'], [
+        babel(),
+      ]),
       match(['*.css'], [
         cssLoader({ sourceMap: true }),
         postcss({
