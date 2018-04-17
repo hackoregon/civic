@@ -12,5 +12,4 @@ const config = require('../webpack.config.js');
 const devMiddleware = require('webpack-dev-middleware');
 const hotMiddleware = require('webpack-hot-middleware');
 
-import Server from '@hackoregon/dev-server';
-Server();
+require('@hackoregon/dev-server')();
