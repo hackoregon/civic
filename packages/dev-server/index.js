@@ -16,6 +16,8 @@ const hotMiddleware = require('webpack-hot-middleware');
 module.exports = function() {
   console.log(chalk.yellow('\nStarting the DEVELOPMENT server...'));
 
+  let middleware;
+
   if (isProd) {
     // Enable gzip compression and serve assets as they build when prod
     app.use(compression());
@@ -40,7 +42,7 @@ module.exports = function() {
       }
 
       if (stats.hasWarnings()) {
-        console.log(chalk.orange(info.warnings));
+        console.log(chalk.yellow(info.warnings));
       }
 
       console.log(stats.toString({ colors: true }));
@@ -49,12 +51,19 @@ module.exports = function() {
       console.log(chalk.green(`\nServer up at http://localhost:${port}`));
       console.log(chalk.gray('\nCtrl+C to stop the server'));
       console.log(chalk.yellow('\nLogging requests...'));
+
+      if (middleware) {
+        // Workaround to the mysterious multi-bundle undefined modules bug
+        middleware.invalidate();
+      }
     });
-    const middleware = devMiddleware(compiler, {
+
+    middleware = devMiddleware(compiler, {
       noInfo: true,
       publicPath: config.output.publicPath,
       silent: true,
       stats: 'errors-only',
+      clientLogLevel: 'error',
     });
 
     app.use(middleware);
@@ -65,7 +74,7 @@ module.exports = function() {
   app.use('/', express.static(outputPath));
 
   // Redirect all other routes to index.html to let React handle routing client-side
-  app.get('/*', (req, res) => console.log('Servicing request for', req.url) || res.send(`
+  app.get('/', (req, res) => console.log('Servicing request for', req.url) || res.send(`
   <!DOCTYPE html>
   <html>
     <head>
