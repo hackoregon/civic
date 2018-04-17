@@ -11,6 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "autoprefixer": "^6.7.7",
+    "lodash-webpack-plugin": "^0.11.5",
     "webpack": "^2.5.1",
     "webpack-blocks": "^1.0.0-rc.2",
     "webpack-dev-middleware": "^1.10.0",

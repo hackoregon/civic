@@ -11,6 +11,7 @@
   "license": "MIT",
   "devDependencies": {
     "redux-logger": "^3.0.6",
-    "webpack-hot-middleware": "^2.21.2"
+    "webpack-hot-middleware": "^2.22.0",
+    "webpack-dev-middleware": "^2.0.6"
   }
 }

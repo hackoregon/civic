@@ -59,8 +59,11 @@ module.exports = {
         NODE_ENV: process.env.NODE_ENV,
       }),
       env('development', [
-        devServer(),
         sourceMaps(),
+        addPlugins([
+          new webpack.NamedModulesPlugin(),
+          new webpack.HotModuleReplacementPlugin(),
+        ]),
       ]),
       env('production', [
         uglify(),
