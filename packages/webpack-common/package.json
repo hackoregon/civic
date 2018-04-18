@@ -1,0 +1,20 @@
+{
+  "name": "@hackoregon/webpack-common",
+  "version": "1.0.0-alpha.1c62c05f",
+  "description": "Common webpack blocks and patterns",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hackoregon/civic.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "autoprefixer": "^6.7.7",
+    "lodash-webpack-plugin": "^0.11.5",
+    "webpack": "^2.5.1",
+    "webpack-blocks": "^1.0.0-rc.2",
+    "webpack-dev-middleware": "^1.10.0",
+    "webpack-hot-middleware": "^2.17.0"
+  }
+}

@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import copy from 'copy-to-clipboard';
 import StoryLink from './StoryLink';
 import { ICONS } from '../styleConstants';
-import '!style-loader!css-loader!./StoryFooter.css';
+import './StoryFooter.css';
 
 const MS_TO_SWITCH_TEXT = 3000; // 3 seconds
 

@@ -3,6 +3,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import '@hackoregon/component-library/assets/global.styles.css';
+import '@hackoregon/component-library/assets/vendor/leaflet.css';
+
 import { Footer, StoryCard } from '@hackoregon/component-library';
 
 import BagelShop from '../BagelShop/index';
@@ -125,8 +128,6 @@ function App(props) {
           Please see our Github repo for detailed methodology and documentation.
         </p>
       </StoryCard>
-
-      <Footer />
 
       {React.Children.toArray(props.children)}
     </Container>

@@ -1,22 +1,34 @@
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _templateObject = _taggedTemplateLiteral(['\n  position: relative;\n  min-width: 320px;\n\n  & ul {\n    display: flex;\n    list-style: none;\n    align-items: center;\n    justify-content: center;\n\n    & > li {\n      flex: 1 1 100%;\n\n      & span i {\n        margin-left: 10px;\n      }\n    }\n  }\n\n  & .nav-item {\n    color: white;\n    flex: 1;\n    display: block;\n    font-family: \'Rubik\', sans-serif;\n    font-size: 1.25rem;\n    border: none;\n    text-transform: uppercase;\n    text-decoration: none;\n    padding: 1rem;\n    text-align: center;\n\n    &:hover {\n      color: rgba(255, 255, 255, 0.85);\n      text-decoration: none;\n    }\n  }\n\n  @media (max-width: 640px) {\n    position: absolute;\n    z-index: 1;\n    height: 100%;\n    width: 100%;\n    margin: 0 !important;\n    padding: 0 !important;\n    top: 0;\n    left: 0;\n    background-color: rgb(34, 15, 37);\n\n    & ul {\n      display: block;position: relative;\n      margin: 0;\n      padding-top: 80px;\n\n      & > li {\n        color: #FFF;\n        display: block;\n        text-align: center;\n        text-decoration: none;\n        transition: all .25s ease-in-out;\n        margin: 0;\n        padding: 0;\n        flex: none;\n      }\n    }\n  }\n'], ['\n  position: relative;\n  min-width: 320px;\n\n  & ul {\n    display: flex;\n    list-style: none;\n    align-items: center;\n    justify-content: center;\n\n    & > li {\n      flex: 1 1 100%;\n\n      & span i {\n        margin-left: 10px;\n      }\n    }\n  }\n\n  & .nav-item {\n    color: white;\n    flex: 1;\n    display: block;\n    font-family: \'Rubik\', sans-serif;\n    font-size: 1.25rem;\n    border: none;\n    text-transform: uppercase;\n    text-decoration: none;\n    padding: 1rem;\n    text-align: center;\n\n    &:hover {\n      color: rgba(255, 255, 255, 0.85);\n      text-decoration: none;\n    }\n  }\n\n  @media (max-width: 640px) {\n    position: absolute;\n    z-index: 1;\n    height: 100%;\n    width: 100%;\n    margin: 0 !important;\n    padding: 0 !important;\n    top: 0;\n    left: 0;\n    background-color: rgb(34, 15, 37);\n\n    & ul {\n      display: block;position: relative;\n      margin: 0;\n      padding-top: 80px;\n\n      & > li {\n        color: #FFF;\n        display: block;\n        text-align: center;\n        text-decoration: none;\n        transition: all .25s ease-in-out;\n        margin: 0;\n        padding: 0;\n        flex: none;\n      }\n    }\n  }\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n    display: none;\n    position: absolute;\n    right: 1rem;\n    width: auto;\n    z-index: 999;\n\n    @media (max-width: 640px) {\n      display: block;\n      color: rgba(255, 255, 255, 0.65);\n      border: none;\n      font-family: \'Rubik\', sans-serif;\n      font-size: 1.25rem;\n      font-weight: 500;\n      padding: 1rem;\n    }\n'], ['\n    display: none;\n    position: absolute;\n    right: 1rem;\n    width: auto;\n    z-index: 999;\n\n    @media (max-width: 640px) {\n      display: block;\n      color: rgba(255, 255, 255, 0.65);\n      border: none;\n      font-family: \'Rubik\', sans-serif;\n      font-size: 1.25rem;\n      font-weight: 500;\n      padding: 1rem;\n    }\n']);
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
 import React, { PropTypes, Component } from 'react';
+import { css } from 'emotion';
 import NavSubMenu from './NavSubMenu';
 import NavLink from './NavRouterLink';
-import styles from './Nav.css';
 import Icon from '../Icon/Icon';
 
 var defaultMenu = [{
   name: 'Collections',
-  path: '/collections',
-  nestedMenu: [{ name: 'Budget', path: '/collections/budget' }, { name: 'Emergency Response', path: '/collections/emergency' }, { name: 'Housing', path: '/collections/housing' }, { name: 'Homelessness', path: '/collections/homlessness' }, { name: 'Transportation', path: '/collections/transportation' }, { name: 'Past Projects', path: '/collections/past-projects' }]
-}, { name: 'About', path: '/about' }];
+  path: '/',
+  nestedMenu: [{ name: 'Budget', path: '/budget' }, { name: 'Emergency Response', path: '/emergency' }, { name: 'Housing', path: '/housing' }, { name: 'Homelessness', path: '/homelessness' }, { name: 'Transportation', path: '/transportation' }]
+}, {
+  name: 'About',
+  path: '/about'
+}];
+
+var navClass = css(_templateObject);
+
+var exClass = css(_templateObject2);
 
 var Nav = function (_Component) {
   _inherits(Nav, _Component);
@@ -53,10 +65,10 @@ var Nav = function (_Component) {
 
       return React.createElement(
         'div',
-        { className: styles.Nav },
+        { className: navClass },
         React.createElement(
           'a',
-          { className: styles.ex },
+          { className: exClass },
           React.createElement(Icon, { key: 'nav-ex', className: 'fa fa-times', handleClick: this.props.toggleSubNav })
         ),
         React.createElement(
@@ -70,7 +82,7 @@ var Nav = function (_Component) {
                 } },
               React.createElement(
                 'a',
-                null,
+                { className: 'nav-item' },
                 item.name,
                 React.createElement(Icon, { className: 'fa fa-angle-down' })
               )

@@ -3,8 +3,8 @@ import StoryCard from '../StoryCard/StoryCard';
 import PieChart from './PieChart';
 import { BUDGET_101 } from '../constants';
 
-import '!style-loader!css-loader!./Budget101.css';
-import '!style-loader!css-loader!./stub.css';
+import './Budget101.css';
+import './stub.css';
 
 function Budget101() {
   return (

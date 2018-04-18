@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import * as d3 from 'd3';
 import tooltip from './Tooltip';
 
-import '!style-loader!css-loader!./Tooltip.css';
+import './Tooltip.css';
 
 class Bubbles extends Component {
   constructor(props) {

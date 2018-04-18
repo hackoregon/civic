@@ -1,6 +1,29 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import styles from './NavRouterLink.css';
+import { css } from 'emotion';
+
+const linkClass = css`
+  & > a {
+    color: rgba(255, 255, 255, 0.65);
+    flex: 1;
+    display: block;
+    font-family: 'Rubik', sans-serif;
+    font-size: 1.25rem;
+    border: none;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1rem;
+    text-align: center;
+
+    &:focus, &:hover, &:active {
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+`;
 
 const pathOrName = (p, n) => p || `/${n.toLowerCase()}`;
 
@@ -10,8 +33,8 @@ const NavRouterLink = ({ path, customStyles, name }) => {
   const pathTo = pathOrName(path, name);
 
   return (
-    <li className={styles.NavRouterLink} style={{ ...boxStyle }} >
-      <Link to={pathTo} >
+    <li className={linkClass} style={{ ...boxStyle }} >
+      <Link className={'nav-item'} to={pathTo} >
         <span style={{ ...linkStyle }}>{name}</span>
       </Link>
 

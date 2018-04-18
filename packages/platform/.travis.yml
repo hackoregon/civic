@@ -1,9 +1,0 @@
-sudo: required
-services:
-  - docker
-install:
-  - pip install --upgrade --user awscli
-script:
-  - 'npm run test'
-after_success:
-  - ./bin/docker-push.sh

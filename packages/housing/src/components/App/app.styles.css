@@ -1,8 +1,7 @@
 /*
- * This is to make srue the dropdown menu appears on top of the
- * leaflet map pane (z-index 404). The dropdowns class is only so that rule applies
- * to these dropdowns, not to all react-select menu dropdowns
+ * This is to make sure the dropdown menu appears on top of the
+ * leaflet map pane (z-index 404).
  */
-.dropdowns div:global(.Select-menu-outer) {
-  z-index: 404;
+.Select-menu-outer {
+  z-index: 1404 !important;
 }

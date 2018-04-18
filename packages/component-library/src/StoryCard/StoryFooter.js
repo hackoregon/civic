@@ -1,9 +1,20 @@
 import React, { Component, PropTypes } from 'react';
 import copy from 'copy-to-clipboard';
+import { css } from 'emotion';
 import StoryLink from './StoryLink';
 import { ICONS } from '../styleConstants';
 
 const MS_TO_SWITCH_TEXT = 3000; // 3 seconds
+
+const actionsClass = css`
+  padding: 24px;
+  display: flex;
+  justify-content: center;
+
+  & > div:first-child {
+    margin-right: 32px;
+  }
+`;
 
 export default class StoryFooter extends Component {
 
@@ -37,12 +48,11 @@ export default class StoryFooter extends Component {
   }
 
   render() {
-    require('./StoryFooter.css');
     const { collectionId, cardId } = this.props;
     const shareTxt = this.state.copied ? 'Link copied!' : 'Share card'; // if copied, show Link copied, otherwise, show Share card
     const shareIcon = this.state.copied ? ICONS.check : ICONS.link;
     return (
-      <div className={'Actions'}>
+      <div className={actionsClass}>
         <StoryLink className={'Context'} route={`/${collectionId}/${cardId}`} icon={ICONS.eye}>View card</StoryLink>
         <StoryLink className={'Share'} action={this.handleCopy} icon={shareIcon}>{shareTxt}</StoryLink>
       </div>

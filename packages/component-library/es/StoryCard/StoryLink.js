@@ -1,6 +1,13 @@
+var _templateObject = _taggedTemplateLiteral(['\n  border-bottom: 2px solid ', ';\n\n  & a {\n    display: flex;\n    padding: 6px 8px 6px 6px;\n    flex-wrap: nowrap;\n    align-items: center;\n    justify-content: space-between;\n    border-bottom: none;\n\n    &:hover {\n      background-color: ', ';\n      color: #FFF;\n    }\n\n    &:focus {\n      outline: none;\n    }\n\n    & i {\n      margin-right: 12px;\n    }\n  }\n\n  & span {\n    flex-wrap: nowrap;\n    transition: all 0.2s ease-in-out;\n  }\n'], ['\n  border-bottom: 2px solid ', ';\n\n  & a {\n    display: flex;\n    padding: 6px 8px 6px 6px;\n    flex-wrap: nowrap;\n    align-items: center;\n    justify-content: space-between;\n    border-bottom: none;\n\n    &:hover {\n      background-color: ', ';\n      color: #FFF;\n    }\n\n    &:focus {\n      outline: none;\n    }\n\n    & i {\n      margin-right: 12px;\n    }\n  }\n\n  & span {\n    flex-wrap: nowrap;\n    transition: all 0.2s ease-in-out;\n  }\n']);
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import './StoryLink.css';
+import { css } from 'emotion';
+
+var primaryColor = 'rgb(238, 73, 80)';
+var storyLinkClass = css(_templateObject, primaryColor, primaryColor);
 
 var StoryLink = function StoryLink(_ref) {
   var children = _ref.children,
@@ -9,7 +16,7 @@ var StoryLink = function StoryLink(_ref) {
       action = _ref.action;
   return React.createElement(
     'div',
-    { className: 'StoryLink' },
+    { className: storyLinkClass },
     route ? React.createElement(
       Link,
       { to: route },

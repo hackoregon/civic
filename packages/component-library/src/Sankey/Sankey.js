@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { sankey } from 'd3-sankey';
 import { format } from 'd3-format';
 import { clone, max } from 'ramda';
-import styles from './Sankey.css';
+import { css } from 'emotion';
 
 const formatNumber = format(',.0f');
 const formatNum = num => formatNumber(num);
@@ -15,6 +15,36 @@ const colors = [
 ];
 
 const defaultMargin = { top: 20, right: 0, bottom: 20, left: 0 };
+
+const sankeyChartClass = css`
+  margin-bottom: 20px;
+`;
+
+const sankeyNodeClass = css`
+  fill-opacity: 0.6;
+
+  &:hover {
+    cursor: pointer;
+    fill-opacity: 1;
+  }
+
+  & text {
+    fill: #555;
+    font-size: 0.75em;
+    stroke: none;
+  }
+`;
+
+const sankeyLinkClass = css`
+  fill: none;
+  stroke: #CCC;
+  stroke-opacity: 0.4;
+
+  &:hover {
+    cursor: pointer;
+    stroke-opacity: 0.8;
+  }
+`;
 
 const Sankey = ({ margin = defaultMargin, width = 650, height = 450, nodes, links }) => {
   const w = width - margin.left - margin.right;
@@ -37,15 +67,15 @@ const Sankey = ({ margin = defaultMargin, width = 650, height = 450, nodes, link
     .layout(32);
 
   const chartLinks = chart.links.map((link, idx) => (
-    <g key={`${styles.sankeyLink}-${idx}`}>
-      <path className={styles.sankeyLink} d={path(link)} style={{ strokeWidth: max(1, link.dy) }}>
+    <g key={`${sankeyLinkClass}-${idx}`}>
+      <path className={sankeyLinkClass} d={path(link)} style={{ strokeWidth: max(1, link.dy) }}>
         <title>{`${link.source.name} → ${link.target.name}\n Value: ${formatNum(link.value)}`}</title>
       </path>
     </g>
       ));
 
   const chartNodes = chart.nodes.map((node, idx) => (
-    <g key={`${styles.sankeyNode}-${idx}`} className={styles.sankeyNode} transform={`translate(${node.x},${node.y})`}>
+    <g key={`${sankeyNodeClass}-${idx}`} className={sankeyNodeClass} transform={`translate(${node.x},${node.y})`}>
       <rect style={{ fill: colors[idx] }} height={node.dy} width={sankeyChart.nodeWidth()}>
         <title>{`${node.name}\n${formatNum(node.value)}`}</title>
       </rect>
@@ -57,7 +87,7 @@ const Sankey = ({ margin = defaultMargin, width = 650, height = 450, nodes, link
       ));
 
   return (
-    <svg className={styles.sankeyChart} width={w + margin.left + margin.right} height={h + margin.top + margin.bottom}>
+    <svg className={sankeyChartClass} width={w + margin.left + margin.right} height={h + margin.top + margin.bottom}>
       <g transform={`translate(${margin.left},${margin.top})`}>
         {chartLinks}
         {chartNodes}

@@ -12,9 +12,6 @@ describe('Button', function () {
   it('should render a button', function () {
     expect(wrapper.find('button')).to.have.length(1);
   });
-  it('should render with class base', function () {
-    expect(wrapper.props().className).to.contain('base');
-  });
   it('should have the appropriate child text', function () {
     expect(wrapper.text()).to.eql(testString);
   });

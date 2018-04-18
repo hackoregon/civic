@@ -60,10 +60,8 @@ ConstructionViews.propTypes = {
 
 export default connect(
   state => ({
-    // featureData: getFeatureData(state),
-    appData: state.app,
-    // mapType: state.app.mapType,
-    fmaPanelId: getFmaPanelId(state),
+    appData: state.transportation ? state.transportation.app : state.app,
+    fmaPanelId: getFmaPanelId(state.transportation || state),
   }),
   dispatch => ({
     selectMap: (mapType) => dispatch(selectMapThunk(mapType)),

@@ -94,8 +94,8 @@ class MapPanel extends Component {
 
 export default connect(
   state => ({
-    fmaData: getFmaData(state),
-    fmaPanelData: getFmaPanelData(state),
+    fmaData: getFmaData(state.emergency || state),
+    fmaPanelData: getFmaPanelData(state.emergency || state),
   }),
   dispatch => ({
     getFmaData: inputs => dispatch(getFmaThunk(inputs)),

@@ -1,9 +1,0 @@
-{
-  "vendor": {
-    "js": "http://localhost:3001/public/js/vendor.bundle.js"
-  },
-  "app": {
-    "js": "http://localhost:3001/public/js/app.bundle.js",
-    "css": "http://localhost:3001/public/vendor.css"
-  }
-}

@@ -1,7 +1,21 @@
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
-const { composeConfig, } = require('../packages/webpacker');
-const styles = require('../packages/webpacker/lib/styles').default;
-const images = require('../packages/webpacker/lib/images').default;
+const {
+  createConfig,
+  match,
+  css,
+  postcss,
+  file,
+} = require('webpack-blocks');
 
-module.exports = composeConfig(images,styles);
+module.exports = createConfig([
+  match(['*.css'], [
+    css(),
+    postcss({
+      plugins: [autoprefixer({ browsers: ['last 2 versions'] })],
+    }),
+  ]),
+  match(['*.svg', '*.png', '*.gif', '*.jpg', '*.jpeg'], [
+    file(),
+  ]),
+])

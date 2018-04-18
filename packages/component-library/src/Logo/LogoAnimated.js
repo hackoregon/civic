@@ -6,7 +6,7 @@ const styles = {
   width: 'auto',
 };
 
-const Logo = ({ alt }) => (isClient && <img style={styles} src={require('../../assets/civic-logo-animated-invert.svg')} alt={alt} />);
+const Logo = ({ alt }) => (isClient && <img style={styles} src={require('../../assets/civic-logo-invert-animated.svg')} alt={alt} />);
 
 Logo.displayName = 'Logo';
 Logo.propTypes = {

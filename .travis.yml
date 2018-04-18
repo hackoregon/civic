@@ -1,8 +1,15 @@
 language: node_js
 cache: yarn
 node_js:
-- '6.11.4'
-# after_success:
-# - npm run test:cover:travis
+  - '6.11.4'
+install:
+  - npm i -g npx
+  - yarn
+  - yarn bootstrap
+  - yarn build
+matrix:
+  include:
+    - env: SUITE=2017
+    - env: SUITE=COMPONENT_LIBRARY
 script:
-- npm run test
+  - yarn run travis
