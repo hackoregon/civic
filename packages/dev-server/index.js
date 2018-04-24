@@ -18,45 +18,49 @@ module.exports = function() {
 
   let middleware;
 
+  const afterWebpack = (err, stats) => {
+    if (err) {
+      console.log(chalk.red(err.stack || err));
+      if (err.details) {
+        console.log(chalk.red(err.details));
+      }
+      return;
+    }
+
+    const info = stats.toJson();
+
+    if (stats.hasErrors()) {
+      console.log(chalk.red('WEBPACK FAILED TO COMPILE!\n'));
+      console.log(chalk.red(info.errors));
+    }
+
+    if (stats.hasWarnings()) {
+      console.log(chalk.yellow(info.warnings));
+    }
+
+    console.log(stats.toString({ colors: true }));
+
+    // Announce the server after the webpack config has compiled
+    console.log(chalk.green(`\nServer up at http://localhost:${port}`));
+    console.log(chalk.gray('\nCtrl+C to stop the server'));
+    console.log(chalk.yellow('\nLogging requests...'));
+
+    if (middleware) {
+      // Workaround to the mysterious multi-bundle undefined modules bug
+      middleware.invalidate();
+    }
+  };
+
   if (isProd) {
     // Enable gzip compression and serve assets as they build when prod
     app.use(compression());
-    webpack(config);
+
+    console.log(chalk.gray('Compiling production webpack config'));
+    webpack(config, afterWebpack);
   } else {
     // Start a webpack dev server with hot module reloading when dev
     console.log(chalk.gray('Compiling webpack config'));
-    const compiler = webpack(config, (err, stats) => {
-      if (err) {
-        console.log(chalk.red(err.stack || err));
-        if (err.details) {
-          console.log(chalk.red(err.details));
-        }
-        return;
-      }
-
-      const info = stats.toJson();
-
-      if (stats.hasErrors()) {
-        console.log(chalk.red('WEBPACK FAILED TO COMPILE!\n'));
-        console.log(chalk.red(info.errors));
-      }
-
-      if (stats.hasWarnings()) {
-        console.log(chalk.yellow(info.warnings));
-      }
-
-      console.log(stats.toString({ colors: true }));
-
-      // Announce the server after the webpack config has compiled
-      console.log(chalk.green(`\nServer up at http://localhost:${port}`));
-      console.log(chalk.gray('\nCtrl+C to stop the server'));
-      console.log(chalk.yellow('\nLogging requests...'));
-
-      if (middleware) {
-        // Workaround to the mysterious multi-bundle undefined modules bug
-        middleware.invalidate();
-      }
-    });
+    const compiler = webpack(config, afterWebpack);
 
     middleware = devMiddleware(compiler, {
       noInfo: true,
