@@ -3,7 +3,22 @@
 **Project:**
 **Card Title:**
 
-## API Details
+## Description / Wireframe
+
+> Include a detailed description and/or image that describes your story or visualization using
+> the data described above. This can be as detailed as a wireframe, or as simple as a description
+> such as a bar chart that shows variable A on the X-axis and variable B on the Y-axis.
+
+> If you have a wireframe, include an embedded image of the card design by pasting an image from
+> your clipboard or using the image uploader tool under this text box. This is mandatory before a
+> front-end developer works on this ticket.
+
+> Also include a link to a Figma design if you have one.
+
+## Context
+> Why is this important? This information will be used to prioritize and contextualize story cards.
+
+## Data Details (APIs)
 
 > Include all API calls that will need to be made, including all params and the possible
 > values for the params. The more specific the better! This will help prevent back and forth
@@ -19,17 +34,5 @@
 
 ## Data Sources
 
-> All cards should trace back to their data origins. Include public links to those origins
-> So card developers can embed the links in the card.
-
-## Wireframes
-
-> Include a detailed description and/or image that describes your story or visualization using
-> the data described above. This can be as detailed as a wireframe, or as simple as a description
-> such as a bar chart that shows variable A on the X-axis and variable B on the Y-axis.
-
-> Once you have a wireframe, Include an embedded image of the card design by pasting an image from
-> your clipboard or using the image uploader tool under this text box. This is mandatory before a
-> front-end developer works on this ticket.
-
-> Also include a link to a Figma design if you have one.
+> All cards should trace back to their data origins. Include public links to those origins.
+> In addition, any calculations on the source data should be described.
