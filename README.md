@@ -35,18 +35,20 @@ At this point, Lerna has prepared all packages in the monorepo.
 
 Most developers working in this project will be contributing to one package at a time.
 
-This is the command sequence that will allow you to build/run/test an individual package every time (for example, the `housing` package)
+This is the command sequence that will allow you to build/run an individual package every time (for example, the `housing` package)
 and work on it as if it was a standalone project:
 
 ```bash
-# you can open a separate shell &
-$ yarn watch # this will watch all packages and update builds
-
-# back in your original shell, switch to the package you want to work with
 $ cd packages/{package-name} # e.g. cd package/housing
 
 # run local project
 $ yarn start
+
+# test local project
+$ yarn test
+
+# watch tests while working on them
+$ yarn test --watch
 ```
 
 ## Using storybook
@@ -55,7 +57,7 @@ We are committed to a shared component library. This is achieved using the `comp
 Run Storybook with the following command:
 
 ```bash
-$ yarn storybook
+$ yarn run storybook
 ```
 
 ## Project Layout
