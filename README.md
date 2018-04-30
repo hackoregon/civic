@@ -13,7 +13,7 @@ Prerequisites you'll need in your development environment to use and contribute 
 These tools make sure every contributor has identical dependency versions, include node and node packages.
 
 1. [nvm](https://github.com/creationix/nvm)
-2. [yarn](https://yarnpkg.com/)
+2. [yarn](https://yarnpkg.com/) > 1.0
 
 ### Install and build
 
