@@ -1,6 +1,13 @@
 import React from 'react';
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
+import { withInfo } from '@storybook/addon-info';
+
+import {
+  withKnobs,
+  text, number, object, array,
+} from '@storybook/addon-knobs';
 import { BarChart } from '../src';
 
 const displayName = BarChart.displayName || 'BarChart';
@@ -11,7 +18,36 @@ const description = `
 
 // const propDocs = { inline: true, propTables: [BarChart] };
 
-export default () => storiesOf(displayName, module)
-  .add(title, (() => (
-    <BarChart data={[{ name: 'David', x: 200, y: 300 }]} />
-  )));
+// const data = [
+//   {sortOrder: 1, population: 9000, label: 'Labrador Retriever'},
+//   {sortOrder: 2, population: 8000, label: 'Standard Poodle'},
+//   {sortOrder: 3, population: 6000, label: 'French Bulldog'},
+//   {sortOrder: 4, population: 3000, label: 'Afghan Hound'},
+//   {sortOrder: 5, population: 1000, label: 'Jack Russell Terrier'}
+// ];
+
+// var result = objArray.map(a => a.foo);
+
+export default () => storiesOf(displayName, module).addDecorator(withKnobs)
+  .add('Basic Usage', (() => {
+    const data = array('Data',[
+      {sortOrder: 1, population: 9000, label: 'Labrador Retriever'},
+      {sortOrder: 2, population: 8000, label: 'Standard Poodle'},
+      {sortOrder: 3, population: 6000, label: 'French Bulldog'},
+      {sortOrder: 4, population: 3000, label: 'Afghan Hound'},
+      {sortOrder: 5, population: 1000, label: 'Jack Russell Terrier'}
+    ]);
+    const dataKey = text('Data key', 'sortOrder');
+    const dataValue = text('Data values', 'population');
+    const dataKeyLabel = text('Data key labels', 'label');
+
+    return (<BarChart 
+      data={data}
+      dataKey={dataKey}
+      dataValue={dataValue}
+      dataKeyLabel={dataKeyLabel}
+    />);
+  }))
+  .add('no props', (() => (
+    <BarChart />
+  )))
