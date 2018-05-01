@@ -10,3 +10,4 @@ lib-cov
 .lock-wscript
 .idea
 .DS_Store
+*.sw[onp]
