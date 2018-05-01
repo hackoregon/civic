@@ -19,6 +19,7 @@
     "url": "https://github.com/hackoregon/component-library"
   },
   "devDependencies": {
+    "babel-cli": "^6.24.1",
     "babel-eslint": "^7.1.1",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-stage-1": "^6.24.1",
