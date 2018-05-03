@@ -6,9 +6,15 @@ import {
 } from 'victory';
 
 import { VictorySharedEvents, VictoryContainer, VictoryTheme, VictoryLabel } from "victory-core";
-import { Civic } from '../index';
+import { CivicVictoryTheme } from '../index';
 import { assign } from "lodash";
 import { css } from 'emotion';
+
+const barchartWrapper = css`
+  margin: 0 auto;
+  max-width: 900px;
+  width: 100%;
+`;
 
 const titleStyle = css`
   font-family: 'filson-soft', sans-serif;
@@ -29,28 +35,30 @@ const HorizontalBarChart = ({ data, dataKey, dataValue, dataKeyLabel, dataValueL
   <div>
     <div className={titleStyle}>{title}</div>
     <span className={subtitleStyle}>{subtitle}</span>
-    <VictoryChart
-      domainPadding={20}
-      animate={{duration: 400}}
-      theme={Civic.civic}
-    >
-      <VictoryAxis
-        // tickValues specifies both the number of ticks and where
-        // they are placed on the axis
-        tickValues={data.map(a => a[dataKey])}
-        tickFormat={data.map(a => a[dataKeyLabel])}
-      />
-      <VictoryAxis
-        dependentAxis
-        // tickFormat specifies how ticks should be displayed
-        tickFormat={(x) => (`$${x / 1000}k`)}
-      />
-      <VictoryBar
-        data={data.map(a => ({ dataKey: a[dataKey], dataValue: a[dataValue] }))}
-        x={'dataKey'}
-        y={'dataValue'}
-      />
-    </VictoryChart>
+    <div className={barchartWrapper}>
+      <VictoryChart
+        domainPadding={20}
+        animate={{duration: 300}}
+        theme={CivicVictoryTheme.civic}
+      >
+        <VictoryAxis
+          // tickValues specifies both the number of ticks and where
+          // they are placed on the axis
+          tickValues={data.map(a => a[dataKey])}
+          tickFormat={data.map(a => a[dataKeyLabel])}
+        />
+        <VictoryAxis
+          dependentAxis
+          // tickFormat specifies how ticks should be displayed
+          tickFormat={(x) => (`$${x / 1000}k`)}
+        />
+        <VictoryBar
+          data={data.map(a => ({ dataKey: a[dataKey], dataValue: a[dataValue] }))}
+          x={'dataKey'}
+          y={'dataValue'}
+        />
+      </VictoryChart>
+    </div>
   </div>
 
 HorizontalBarChart.propTypes = {

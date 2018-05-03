@@ -23,6 +23,6 @@ export { default as Media } from './Media/Media';
 export { default as Logo } from './Logo/Logo';
 export { default as ShareCollection } from './Share/ShareCollection';
 export { default as isClient } from './utils/isClient';
-export { default as Civic } from "./VictoryThemeIndex";
+export { default as CivicVictoryTheme } from "./VictoryThemeIndex";
 
 import './fonts.css';

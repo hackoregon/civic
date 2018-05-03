@@ -27,13 +27,13 @@ const black = "000000"
 // *
 const sansSerif = "'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif";
 const letterSpacing = "normal";
-const fontSize = 6;
+const fontSize = 12;
 // *
 // * Layout
 // *
 const padding = 8;
 const baseProps = {
-  width: 350,
+  width: 650,
   height: 350,
   padding: 50
 };
@@ -107,7 +107,7 @@ export default {
         padding,
         stroke: "transparent",
         strokeWidth: 0,
-        width: 24
+        width: 40
       },
       labels: baseLabelStyles
     }
