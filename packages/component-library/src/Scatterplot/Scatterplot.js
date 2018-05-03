@@ -1,18 +1,41 @@
-import React from 'react';
-import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
+import React, { PropTypes } from 'react';
+import {
+  VictoryChart,
+  VictoryLabel,
+  VictoryScatter,
+  VictoryTheme,
+} from 'victory';
 
-const data = [{ x: 100, y: 200, z: 200 }, { x: 120, y: 100, z: 260 },
-                { x: 170, y: 300, z: 400 }, { x: 140, y: 250, z: 280 },
-                { x: 150, y: 400, z: 500 }, { x: 110, y: 280, z: 200 }];
+const ScatterPlot = ({ data, domain, style, theme, title }) => {
+  const chartDomain = domain || {
+    x: [0, Math.max(...data.map(value => value.x))],
+    y: [0, Math.max(...data.map(value => value.y))],
+  };
 
-const Scatterplot = () => (
-  <ScatterChart width={400} height={400} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
-    <XAxis dataKey={'x'} name="stature" unit="cm" />
-    <YAxis dataKey={'y'} name="weight" unit="kg" />
-    <Scatter name="A school" data={data} fill="#8884d8" />
-    <CartesianGrid />
-    <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-  </ScatterChart>
-);
+  return (
+    <VictoryChart theme={theme} domain={chartDomain}>
+      <VictoryLabel x={20} y={20} text={title} />
+      <VictoryScatter style={style} size={7} data={data} />
+    </VictoryChart>
+  );
+};
 
-export default Scatterplot;
+ScatterPlot.propTypes = {
+  data: PropTypes.arrayOf(
+    PropTypes.shape({ x: PropTypes.number, y: PropTypes.number }),
+  ),
+  domain: PropTypes.objectOf(PropTypes.array),
+  style: PropTypes.objectOf(PropTypes.object),
+  theme: PropTypes.objectOf(),
+  title: PropTypes.string,
+};
+
+ScatterPlot.defaultProps = {
+  data: null,
+  domain: null,
+  style: { data: { fill: d => d.fill } },
+  theme: VictoryTheme.material,
+  title: null,
+};
+
+export default ScatterPlot;
