@@ -8,6 +8,7 @@ import editableStory from './Editable.story';
 import pieStory from './Pie.story';
 import sliderStory from './Slider.story';
 import barChartStory from './BarChart.story';
+import ScatterPlotStory from './ScatterPlot.story';
 import sankeyStory from './Sankey.story';
 import placeholderStory from './Placeholder.story';
 import dropdownStory from './DropdownMenu.story';
@@ -17,10 +18,9 @@ import Welcome from './Welcome';
 import '../assets/global.styles.css';
 
 // stories can be added directly here
-storiesOf('Welcome', module)
-  .add('to Storybook', () => (
-    <Welcome showApp={linkTo('Button')} />
-  ));
+storiesOf('Welcome', module).add('to Storybook', () => (
+  <Welcome showApp={linkTo('Button')} />
+));
 
 // or imported as functions from files then composed in the order you invoke them
 editableStory();
@@ -31,6 +31,7 @@ storyFooterStory();
 storycardStory();
 pieStory();
 barChartStory();
+ScatterPlotStory();
 placeholderStory();
 sankeyStory();
 sliderStory();
