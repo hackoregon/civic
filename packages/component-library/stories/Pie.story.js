@@ -31,11 +31,19 @@ export default () => storiesOf('Pie/Donut visualization').addDecorator(withKnobs
     const subtitleText = text('Subtitle text', 'Some subtitle');
     const titleFontSize = number('Title font size', 24);
     const subtitleFontSize = number('Subtitle font size', 14);
-    const innerRadius = number('Inner Radius', 75);
+    const innerRadius = number('Inner Radius', 35);
 
     return (
       <div style={{ display: 'flex', justifyContent: 'space-around', margin: '10% auto' }} >
-        <Chart width={style.width} height={style.height}>
+        <Pie
+          data={values}
+          colors={getRandomColors}
+          width={style.width}
+          height={style.height}
+          innerRadius={innerRadius}
+          outerRadius={110}
+        />
+        {/*<Chart width={style.width} height={style.height}>
           <ChartData data={values}>
             <Pie
               innerRadius={innerRadius} outerRadius={110}
@@ -56,7 +64,7 @@ export default () => storiesOf('Pie/Donut visualization').addDecorator(withKnobs
               </text>
             </Pie>
           </ChartData>
-        </Chart>
+    </Chart>*/}
       </div>
     );
   });

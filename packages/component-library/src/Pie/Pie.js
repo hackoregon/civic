@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { TransitionMotion, Motion, spring } from 'react-motion';
 import { arc, pie } from 'd3-shape';
 import './Pie.css';
+import { VictoryPie } from 'victory';
 
 const willLeaveStyle = ({ style }) => ({
   ...style,
@@ -101,4 +102,12 @@ Pie.contextTypes = {
   }),
 };
 
-export default Pie;
+export default (props) => (
+  <VictoryPie
+    data={props.data}
+    colorScale={props.colors}
+    width={props.width}
+    height={props.height}
+    innerRadius={props.innerRadius}
+  />
+);
