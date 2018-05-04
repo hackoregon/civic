@@ -21,7 +21,7 @@ const blueGrey50 = "#ECEFF1";
 const blueGrey300 = "#90A4AE";
 const blueGrey700 = "#455A64";
 const grey900 = "#212121";
-const black = "000000"
+const black = "#000000"
 // *
 // * Typography
 // *

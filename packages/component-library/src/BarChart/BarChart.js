@@ -6,7 +6,7 @@ import {
 } from 'victory';
 
 import { VictorySharedEvents, VictoryContainer, VictoryTheme, VictoryLabel } from "victory-core";
-import { CivicVictoryTheme } from '../index';
+import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
 import { assign } from "lodash";
 import { css } from 'emotion';
 
@@ -33,8 +33,8 @@ const subtitleStyle = css`
 
 const HorizontalBarChart = ({ data, dataKey, dataValue, dataKeyLabel, dataValueLabel, title, subtitle }) =>
   <div>
-    <div className={titleStyle}>{title}</div>
-    <span className={subtitleStyle}>{subtitle}</span>
+    { title ? <h3 className={titleStyle}>{title}</h3> : null}
+    { subtitle ? <span className={subtitleStyle}>{subtitle}</span> : null}
     <div className={barchartWrapper}>
       <VictoryChart
         domainPadding={20}
