@@ -40,22 +40,24 @@ const HorizontalBarChart = ({ data, dataKey, dataValue, dataKeyLabel, dataValueL
     { subtitle ? <span className={subtitleStyle}>{subtitle}</span> : null}
     <div className={barchartWrapper}>
       <VictoryChart
+        padding={{left: 115, right: 50, bottom: 50, top: 50}}
         domainPadding={20}
         animate={{duration: 300}}
         theme={CivicVictoryTheme.civic}
       >
         <VictoryAxis
+          dependentAxis
           // tickValues specifies both the number of ticks and where
           // they are placed on the axis
           tickValues={data.map(a => a[dataKey])}
           tickFormat={data.map(a => a[dataKeyLabel])}
         />
         <VictoryAxis
-          dependentAxis
           // tickFormat specifies how ticks should be displayed
           tickFormat={(x) => (`$${x / 1000}k`)}
         />
         <VictoryBar
+          horizontal
           data={data.map(a => ({ dataKey: a[dataKey], dataValue: a[dataValue] }))}
           x={'dataKey'}
           y={'dataValue'}
