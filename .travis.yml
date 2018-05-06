@@ -4,9 +4,8 @@ node_js:
   - '6.11.4'
 install:
   - npm i -g npx
-  - yarn
   - yarn bootstrap
-  - yarn build
+  - yarn run configure
 matrix:
   include:
     - env: SUITE=2017
