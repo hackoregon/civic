@@ -1,5 +1,5 @@
 export { default as AreaChart } from './AreaChart/AreaChart';
-export { default as BarChart } from './BarChart/BarChart';
+export { default as HorizontalBarChart } from './HorizontalBarChart/HorizontalBarChart';
 export { default as Sankey } from './Sankey/Sankey';
 export { default as Button } from './Button/Button';
 export { default as StoryCard } from './StoryCard/StoryCard';
@@ -23,3 +23,6 @@ export { default as Media } from './Media/Media';
 export { default as Logo } from './Logo/Logo';
 export { default as ShareCollection } from './Share/ShareCollection';
 export { default as isClient } from './utils/isClient';
+export { default as CivicVictoryTheme } from "./VictoryTheme/VictoryThemeIndex";
+
+import './fonts.css';
