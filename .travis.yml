@@ -13,3 +13,5 @@ matrix:
     - env: SUITE=COMPONENT_LIBRARY
 script:
   - yarn run travis
+after_success:
+  - make deploy
