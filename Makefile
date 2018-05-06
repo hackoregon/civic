@@ -67,4 +67,5 @@ deploy-2018:
 	echo "2018 build and deploy stub"
 
 deploy-component-library:
-	echo "Deploying the component library";
+	@echo "Deploying the component library";
+	yarn run deploy-storybook -- --ci;
