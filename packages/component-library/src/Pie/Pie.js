@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
 import { TransitionMotion, Motion, spring } from 'react-motion';
 import { arc, pie } from 'd3-shape';
+import { VictoryLegend, VictoryPie } from 'victory';
 import './Pie.css';
-import { VictoryPie } from 'victory';
+import { civic as civicTheme } from '../VictoryTheme/VictoryThemeIndex';
 
 const willLeaveStyle = ({ style }) => ({
   ...style,
@@ -102,12 +103,44 @@ Pie.contextTypes = {
   }),
 };
 
-export default (props) => (
-  <VictoryPie
-    data={props.data}
-    colorScale={props.colors}
-    width={props.width}
-    height={props.height}
-    innerRadius={props.innerRadius}
-  />
+const formatLegendDataObject = (value, labelProp) => (
+  { name: value[labelProp ? labelProp : 'x'] }
 );
+
+const PieChart = (props) => {
+  const {
+    colors,
+    data,
+    height,
+    innerRadius,
+    width,
+  } = props;
+
+  return (
+    <svg
+      width={width}
+      height={height}
+    >
+      <VictoryPie
+        data={data}
+        innerRadius={innerRadius}
+        colorScale={colors}
+        theme={civicTheme}
+        standalone={false}
+        width={width}
+        height={height}
+        animate={{
+          duration: 1000
+        }}
+      />
+      <VictoryLegend    
+        data={data.map(x => formatLegendDataObject(x))}
+        orientation="vertical"
+        standalone={false}
+        colorScale={colors}
+      />
+    </svg>
+  )
+}
+
+export default PieChart;
