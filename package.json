@@ -110,6 +110,8 @@
     "webpack-node-externals": "^1.5.4"
   },
   "dependencies": {
-    "@hackoregon/civic-server": "0.0.10"
+    "@hackoregon/civic-server": "0.0.10",
+    "victory": "^0.26.0",
+    "webpack-blocks": "^1.0.0"
   }
 }
