@@ -3,7 +3,6 @@ import { css } from 'emotion';
 import {
   VictoryChart,
   VictoryLine,
-  VictoryTheme,
   VictoryAxis,
 } from 'victory';
 
@@ -55,7 +54,6 @@ const LineChart = ({
         />
         <VictoryAxis
           dependentAxis
-          tickFormat={x => `${x}`}
           tickValues={data.map(d => d[dataValue])}
         />
         <VictoryLine
@@ -71,13 +69,11 @@ const LineChart = ({
 LineChart.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
   xLabel: PropTypes.string,
-  yLabel: PropTypes.string,
   title: PropTypes.string,
   subtitle: PropTypes.string,
   dataKey: PropTypes.string.isRequired,
   dataValue: PropTypes.string.isRequired,
   dataKeyLabel: PropTypes.string,
-  dataValueLabel: PropTypes.string,
 };
 
 LineChart.defaultProps = {
