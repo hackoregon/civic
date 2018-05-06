@@ -23,8 +23,8 @@ export default () => storiesOf('Pie/Donut visualization').addDecorator(withKnobs
     const getColors = (datum, idx) =>
     (arguments.length === 2 ? getRandomColors[idx] : getRandomColors[datum]);
     const values = getRandomValuesArray(numberOfData, objectRandomizer);
-    const chartHeight = number('Chart Height', 250);
-    const chartWidth = number('Chart width', 600);
+    const chartHeight = number('Chart Height');
+    const chartWidth = number('Chart width');
     const innerRadius = number('Inner Radius', 100);
 
     const optionalProps = {
