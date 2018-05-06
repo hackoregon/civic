@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { css } from 'emotion';
 import {
+  VictoryScatter,
   VictoryChart,
   VictoryLine,
   VictoryAxis,
@@ -57,6 +58,11 @@ const LineChart = ({
           tickValues={data.map(d => d[dataValue])}
         />
         <VictoryLine
+          data={data.map(d => ({ dataKey: d[dataKey], dataValue: d[dataValue] }))}
+          x="dataKey"
+          y="dataValue"
+        />
+        <VictoryScatter
           data={data.map(d => ({ dataKey: d[dataKey], dataValue: d[dataValue] }))}
           x="dataKey"
           y="dataValue"
