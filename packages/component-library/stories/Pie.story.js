@@ -23,47 +23,23 @@ export default () => storiesOf('Pie/Donut visualization').addDecorator(withKnobs
     const getColors = (datum, idx) =>
     (arguments.length === 2 ? getRandomColors[idx] : getRandomColors[datum]);
     const values = getRandomValuesArray(numberOfData, objectRandomizer);
-    const style = object('Chart Width and Height', {
-      width: 600,
-      height: 250,
-    });
-    const titleText = text('Title text', 'Some title');
-    const subtitleText = text('Subtitle text', 'Some subtitle');
-    const titleFontSize = number('Title font size', 24);
-    const subtitleFontSize = number('Subtitle font size', 14);
-    const innerRadius = number('Inner Radius', 35);
+    const chartHeight = number('Chart Height', 250);
+    const chartWidth = number('Chart width', 600);
+    const innerRadius = number('Inner Radius', 100);
+
+    const optionalProps = {
+
+    }
 
     return (
-      <div style={{ display: 'flex', justifyContent: 'space-around', margin: '10% auto' }} >
+      <div style={{ display: 'flex', justifyContent: 'space-around'}} >
         <Pie
           data={values}
           colors={getRandomColors}
-          width={style.width}
-          height={style.height}
+          width={chartWidth}
+          height={chartHeight}
           innerRadius={innerRadius}
         />
-        {/*<Chart width={style.width} height={style.height}>
-          <ChartData data={values}>
-            <Pie
-              innerRadius={innerRadius} outerRadius={110}
-              onClick={action((e, v, i) => console.log(`${labels[i]} clicked`))}
-              style={(d, i) => ({ fill: getColors(i) })}
-            >
-              <text
-                className="donut-title" textAnchor="middle"
-                x={0} y={0} fontSize={titleFontSize}
-              >
-                {titleText}
-              </text>
-              <text
-                className="donut-subtitle" textAnchor="middle"
-                x={0} y={18} fontSize={subtitleFontSize}
-              >
-                {subtitleText}
-              </text>
-            </Pie>
-          </ChartData>
-    </Chart>*/}
       </div>
     );
   });
