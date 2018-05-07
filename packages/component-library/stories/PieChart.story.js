@@ -8,7 +8,7 @@ import {
   withKnobs,
   text, number, object, array,
 } from '@storybook/addon-knobs';
-import { Chart, ChartData, Pie } from '../src';
+import { PieChart } from '../src';
 import { colors, getRandomValuesArray, objectRandomizer } from './shared';
 
 export default () => storiesOf('Pie/Donut visualization').addDecorator(withKnobs)
@@ -20,8 +20,6 @@ export default () => storiesOf('Pie/Donut visualization').addDecorator(withKnobs
     const labels = ['A', 'B', 'C', 'D', 'E', 'F'];
     const numberOfData = number('Amount of data values', 3);
     const getRandomColors = array('Array of colors', colors.slice(0, numberOfData));
-    const getColors = (datum, idx) =>
-    (arguments.length === 2 ? getRandomColors[idx] : getRandomColors[datum]);
     const values = getRandomValuesArray(numberOfData, objectRandomizer);
     const chartHeight = number('Chart Height');
     const chartWidth = number('Chart width');
@@ -33,7 +31,7 @@ export default () => storiesOf('Pie/Donut visualization').addDecorator(withKnobs
 
     return (
       <div style={{ display: 'flex', justifyContent: 'space-around'}} >
-        <Pie
+        <PieChart
           data={values}
           colors={getRandomColors}
           width={chartWidth}

@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import { VictoryLegend, VictoryPie } from 'victory';
-import './Pie.css';
 import { civic as civicTheme } from '../VictoryTheme/VictoryThemeIndex';
 
 const formatLegendDataObject = (value, labelProp) => (

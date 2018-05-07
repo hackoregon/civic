@@ -3,8 +3,8 @@ import React from 'react';
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
-import { StoryCard, Chart, ChartData, Pie } from '../src';
-import { getRandomValuesArray, getColors, randomizer, wallOfRichText } from './shared';
+import { StoryCard, Chart, ChartData, PieChart } from '../src';
+import { getRandomValuesArray, colors, objectRandomizer, wallOfRichText } from './shared';
 
 const labels = ['A', 'B', 'C', 'D', 'E', 'F'];
 const width = 300;
@@ -14,50 +14,20 @@ const tdvDemo = () => (
   <StoryCard title={'A title goes here'}>
     <p className="Description">{wallOfRichText}</p>
     <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-      <Chart style={{ flex: 1 }} width={(width)} height={height}>
-        <ChartData data={getRandomValuesArray(5, randomizer)}>
-          <Pie
-            innerRadius={75} outerRadius={110}
-            onClick={(e, v, i) => console.log(`${labels[i]} clicked`)}
-            style={(d, i) => ({ fill: getColors(i) })}
-          >
-            <text
-              className="donut-title" textAnchor="middle"
-              x={0} y={0} fontSize={'2em'}
-            >
-              {'Dataset A'}
-            </text>
-            <text
-              className="donut-subtitle" textAnchor="middle"
-              x={0} y={18} fontSize={'1em'}
-            >
-              {'subtitle'}
-            </text>
-          </Pie>
-        </ChartData>
-      </Chart>
-      <Chart style={{ flex: 1 }} width={(width)} height={height}>
-        <ChartData data={getRandomValuesArray(10, randomizer)}>
-          <Pie
-            innerRadius={75} outerRadius={110}
-            onClick={(e, v, i) => console.log(`${labels[i]} clicked`)}
-            style={(d, i) => ({ fill: getColors(i) })}
-          >
-            <text
-              className="donut-title" textAnchor="middle"
-              x={0} y={0} fontSize={'2em'}
-            >
-              {'Dataset B'}
-            </text>
-            <text
-              className="donut-subtitle" textAnchor="middle"
-              x={0} y={18} fontSize={'1em'}
-            >
-              {'subtitle'}
-            </text>
-          </Pie>
-        </ChartData>
-      </Chart>
+      <PieChart
+        data={getRandomValuesArray(5, objectRandomizer)}
+        innerRadius={100}
+        colors={colors}
+        height={200}
+        width={200}
+      />
+      <PieChart
+        data={getRandomValuesArray(5, objectRandomizer)}
+        innerRadius={100}
+        colors={colors}
+        height={200}
+        width={200}
+      />
     </div>
   </StoryCard>
 );
