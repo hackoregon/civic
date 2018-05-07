@@ -63,7 +63,7 @@ const chartEvents = [
       },
     },
   },
-],
+];
 
 const HorizontalBarChart = ({ data, dataKey, dataValue, dataKeyLabel, dataValueLabel, title, subtitle }) =>
   <div>
