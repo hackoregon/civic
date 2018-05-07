@@ -144,6 +144,15 @@ a:hover {
 
 /* Typography */
 
+
+.Title {
+  font-size: 50px;
+  line-height: 1.5;
+  font-weight: 500;
+  font-family: "filson-soft", sans-serif;
+  margin-bottom: 12px;
+}
+
 h1,
 .h1 {
   font-size: 36px;
@@ -158,7 +167,7 @@ h2,
   font-size: 1.625rem;
   line-height: 2.125rem;
   font-family: "filson-soft", sans-serif;
-  font-weight: 900;
+  font-weight: 500;
 }
 h3,
 .h3 {
@@ -197,6 +206,11 @@ p {
   font-family: "Merriweather", serif;
   font-size: 1em;
   color: #706371;
+}
+
+.Pullquote {
+  font-family: "Merriweather", serif;
+  font-size: 40px;
 }
 
 /* Color */

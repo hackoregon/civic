@@ -2,7 +2,7 @@ import React from 'react';
 import isClient from '../utils/isClient';
 
 const styles = {
-  height: '80px',
+  height: '60px',
   width: 'auto',
 };
 
