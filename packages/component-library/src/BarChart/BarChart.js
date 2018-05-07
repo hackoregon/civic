@@ -3,15 +3,11 @@ import {
   VictoryAxis,
   VictoryBar,
   VictoryChart,
-  VictorySharedEvents,
-  VictoryContainer,
-  VictoryTheme,
-  VictoryLabel
 } from 'victory';
 
-import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
 import { assign } from "lodash";
 import { css } from 'emotion';
+import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
 
 const barchartWrapper = css`
   margin: 0 auto;
@@ -34,7 +30,7 @@ const subtitleStyle = css`
   text-align: center;
 `;
 
-const BarChart = ({ data, dataKey, dataValue, dataKeyLabel, dataValueLabel, title, subtitle }) =>
+const BarChart = ({ data, dataKey, dataValue, dataKeyLabel, title, subtitle }) =>
   <div>
     {title ? <h3 className={titleStyle}>{title}</h3> : null}
     {subtitle ? <span className={subtitleStyle}>{subtitle}</span> : null}
@@ -53,7 +49,7 @@ const BarChart = ({ data, dataKey, dataValue, dataKeyLabel, dataValueLabel, titl
         <VictoryAxis
           dependentAxis
           // tickFormat specifies how ticks should be displayed
-          tickFormat={(x) => (`$${x / 1000}k`)}
+          tickFormat={x => (`$${x / 1000}k`)}
         />
         <VictoryBar
           data={data.map(a => ({ dataKey: a[dataKey], dataValue: a[dataValue] }))}
@@ -62,16 +58,15 @@ const BarChart = ({ data, dataKey, dataValue, dataKeyLabel, dataValueLabel, titl
         />
       </VictoryChart>
     </div>
-  </div>
+  </div>;
 
 BarChart.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
   dataKey: PropTypes.string.isRequired,
   dataValue: PropTypes.string.isRequired,
   dataKeyLabel: PropTypes.string,
-  dataValueLabel: PropTypes.string,
   title: PropTypes.string,
-  subtitle: PropTypes.string
+  subtitle: PropTypes.string,
 };
 
 export default BarChart;

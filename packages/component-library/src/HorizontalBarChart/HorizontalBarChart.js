@@ -3,16 +3,11 @@ import {
   VictoryAxis,
   VictoryBar,
   VictoryChart,
-  VictorySharedEvents,
-  VictoryContainer,
-  VictoryTheme,
-  VictoryLabel,
-  VictoryTooltip
+  VictoryTooltip,
 } from 'victory';
-
-import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
-import { assign } from "lodash";
 import { css } from 'emotion';
+import { assign } from "lodash";
+import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
 
 const barchartWrapper = css`
   margin: 0 auto;
@@ -65,7 +60,7 @@ const chartEvents = [
   },
 ];
 
-const HorizontalBarChart = ({ data, dataKey, dataValue, dataKeyLabel, dataValueLabel, title, subtitle }) =>
+const HorizontalBarChart = ({ data, dataKey, dataValue, dataKeyLabel, title, subtitle }) =>
   <div>
     { title ? <h3 className={titleStyle}>{title}</h3> : null}
     { subtitle ? <span className={subtitleStyle}>{subtitle}</span> : null}
@@ -89,13 +84,15 @@ const HorizontalBarChart = ({ data, dataKey, dataValue, dataKeyLabel, dataValueL
         />
         <VictoryBar
           horizontal
-          labelComponent={<VictoryTooltip
-                            x={325}
-                            y={0}
-                            orientation="bottom"
-                            pointerLength={0}
-                            cornerRadius={0}
-                          />}
+          labelComponent={
+            <VictoryTooltip
+              x={325}
+              y={0}
+              orientation="bottom"
+              pointerLength={0}
+              cornerRadius={0}
+            />
+          }
           data={data.map(a => ({ dataKey: a[dataKey], dataValue: a[dataValue], label: `${a[dataKeyLabel]}: ${a[dataValue]}` }))}
           events={chartEvents}
           x={'dataKey'}
@@ -103,7 +100,7 @@ const HorizontalBarChart = ({ data, dataKey, dataValue, dataKeyLabel, dataValueL
         />
       </VictoryChart>
     </div>
-  </div>
+  </div>;
 
 HorizontalBarChart.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -112,7 +109,7 @@ HorizontalBarChart.propTypes = {
   dataKeyLabel: PropTypes.string,
   dataValueLabel: PropTypes.string,
   title: PropTypes.string,
-  subtitle: PropTypes.string
+  subtitle: PropTypes.string,
 };
 
 export default HorizontalBarChart;
