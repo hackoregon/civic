@@ -24,5 +24,6 @@ export { default as Logo } from './Logo/Logo';
 export { default as ShareCollection } from './Share/ShareCollection';
 export { default as isClient } from './utils/isClient';
 export { default as CivicVictoryTheme } from "./VictoryTheme/VictoryThemeIndex";
+export { default as ReactMap } from "./ReactMap/ReactMap";
 
 import './fonts.css';

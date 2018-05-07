@@ -63,6 +63,7 @@
     "react-addons-transition-group": "^15.5.3",
     "react-dom": "^15.5.3",
     "react-faux-dom": "^3.0.1",
+    "react-map-gl": "^3.2.7",
     "react-motion": "^0.4.7",
     "react-router": "^3.0.0",
     "react-selectize": "^2.1.0",
