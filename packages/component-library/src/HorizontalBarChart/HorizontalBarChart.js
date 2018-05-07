@@ -6,7 +6,8 @@ import {
   VictorySharedEvents,
   VictoryContainer,
   VictoryTheme,
-  VictoryLabel
+  VictoryLabel,
+  VictoryTooltip
 } from 'victory';
 
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
@@ -34,15 +35,45 @@ const subtitleStyle = css`
   text-align: center;
 `;
 
+const chartEvents = [
+  {
+    target: 'data',
+    eventHandlers: {
+      onMouseOver: () => {
+        return [
+          {
+            target: 'data',
+            mutation: () => ({ style: { fill: 'tomato', width: 40 } }),
+          }, {
+            target: 'labels',
+            mutation: () => ({ active: true }),
+          },
+        ];
+      },
+      onMouseOut: () => {
+        return [
+          {
+            target: 'data',
+            mutation: () => { },
+          }, {
+            target: 'labels',
+            mutation: () => ({ active: false }),
+          },
+        ];
+      },
+    },
+  },
+],
+
 const HorizontalBarChart = ({ data, dataKey, dataValue, dataKeyLabel, dataValueLabel, title, subtitle }) =>
   <div>
     { title ? <h3 className={titleStyle}>{title}</h3> : null}
     { subtitle ? <span className={subtitleStyle}>{subtitle}</span> : null}
     <div className={barchartWrapper}>
       <VictoryChart
-        padding={{left: 115, right: 50, bottom: 50, top: 50}}
+        padding={{ left: 115, right: 50, bottom: 50, top: 50 }}
         domainPadding={20}
-        animate={{duration: 300}}
+        animate={{ duration: 300 }}
         theme={CivicVictoryTheme.civic}
       >
         <VictoryAxis
@@ -54,11 +85,19 @@ const HorizontalBarChart = ({ data, dataKey, dataValue, dataKeyLabel, dataValueL
         />
         <VictoryAxis
           // tickFormat specifies how ticks should be displayed
-          tickFormat={(x) => (`$${x / 1000}k`)}
+          tickFormat={x => (`$${x / 1000}k`)}
         />
         <VictoryBar
           horizontal
-          data={data.map(a => ({ dataKey: a[dataKey], dataValue: a[dataValue] }))}
+          labelComponent={<VictoryTooltip
+                            x={325}
+                            y={0}
+                            orientation="bottom"
+                            pointerLength={0}
+                            cornerRadius={0}
+                          />}
+          data={data.map(a => ({ dataKey: a[dataKey], dataValue: a[dataValue], label: `${a[dataKeyLabel]}: ${a[dataValue]}` }))}
+          events={chartEvents}
           x={'dataKey'}
           y={'dataValue'}
         />
