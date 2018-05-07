@@ -18,11 +18,11 @@ export { default as Dropdown } from './Dropdown/Dropdown';
 export { default as Icon } from './Icon/Icon';
 export { default as Placeholder } from './Placeholder/Placeholder';
 export { default as Tag } from './Tag/Tag';
-export { default as Scatterplot } from './Scatterplot/Scatterplot';
+export { default as ScatterPlot } from './ScatterPlot/ScatterPlot';
 export { default as Media } from './Media/Media';
 export { default as Logo } from './Logo/Logo';
 export { default as ShareCollection } from './Share/ShareCollection';
 export { default as isClient } from './utils/isClient';
-export { default as CivicVictoryTheme } from "./VictoryTheme/VictoryThemeIndex";
+export { default as CivicVictoryTheme } from './VictoryTheme/VictoryThemeIndex';
 
 import './fonts.css';
