@@ -12,9 +12,19 @@ import {
 } from 'victory';
 import { css } from 'emotion';
 
+import ChartHeader from './ChartHeader';
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
 
-const ScatterPlot = ({ data, domain, style, title }) => {
+const ScatterPlot = ({
+  data,
+  dataSeries,
+  domain,
+  style,
+  subtitle,
+  title,
+  xLabel,
+  yLabel,
+}) => {
   const xValues = data.map(value => value.x);
   const yValues = data.map(value => value.y);
 
@@ -29,138 +39,55 @@ const ScatterPlot = ({ data, domain, style, title }) => {
     ],
   };
 
-  const titleStyle = css`
-    display: block;
-    font-family: 'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif;
-    font-size: 21px;
-    font-weight: bold;
-    text-align: center;
-    margin: 0;
-  `;
-
-  const subtitleStyle = css`
-    display: block;
-    font-family: 'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif;
-    font-size: 14px;
-    text-align: center;
-    margin: 0;
-  `;
-
-  const legendStyle = css`
-    font-family: 'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif;
-    font-size: 14px;
-    font-weight: bold;
-    text-align: center;
-    margin: 10px 0 -40px 0;
-  `;
-
   const axisLabelStyle = {
     fontFamily: "'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif",
     fontSize: '14px',
     fontWeight: 'bold',
   };
 
-  const subtitle = 'This is a description.';
-  const xLabel = 'X Label';
-  const yLabel = 'Y Label';
-
   const CustomFlyout = flyoutProps => {
-    const { datum, x, y, orientation } = flyoutProps;
-    console.log('🐋🐋', CivicVictoryTheme.civic.legend);
-    const newY = y - 25;
-    // const newY = orientation === 'top' ? y - 25 : y + 25;
+    const { datum, x, y } = flyoutProps;
+
     return (
-      <g transform={`translate(${x}, ${y})`} style={{ backgroundColor: 'red' }}>
-        <text textAnchor="middle">test</text>
+      <g
+        transform={`translate(${x}, ${y - 10})`}
+        style={{ backgroundColor: 'red' }}
+      >
         <rect
-          x={x}
-          y={y}
-          width="50px"
-          height="50px"
-          stroke="tomato"
-          fill="red"
+          x={0 - 75}
+          y={0 - 20}
+          width="150px"
+          height="30px"
+          fill="lightgray"
         />
-        <circle r="25" stroke="orange" fill="none" />
-        <circle r="30" stroke="gold" fill="none" />
+        <text textAnchor="middle">
+          {`${xLabel}: ${datum.x} ${yLabel}: ${datum.y}`}
+        </text>
       </g>
     );
   };
 
-  const CustomLegend = data => {
-    const test = ['one', 'two', 'three', 'four', 'five', 'six', 'seven'];
-    return (
-      <legend className={legendStyle}>
-        {test.map((group, idx) => (
-          <span
-            key={group}
-            className={css`
-              margin-left: 10px;
-            `}
-          >
-            <svg viewBox="0 0 10 10" width="10px">
-              <circle
-                cx="5"
-                cy="5"
-                r="5"
-                fill={CivicVictoryTheme.civic.group.colorScale[idx]}
-              />
-            </svg>
-            <span
-              className={css`
-                margin-left: 5px;
-              `}
-            >
-              {group}
-            </span>
-          </span>
-        ))}
-      </legend>
-    );
+  // Set the style based on the dataSeries index
+  const defaultStyle = {
+    data: {
+      fill: d => {
+        const idx = dataSeries.findIndex(series => series === d.series);
+        return CivicVictoryTheme.civic.group.colorScale[idx];
+      },
+    },
   };
+
+  const legend = dataSeries.map(series => ({ name: series }));
 
   return (
     <div>
-      {title ? <span className={titleStyle}>{title}</span> : null}
-      {subtitle ? <span className={subtitleStyle}>{subtitle}</span> : null}
-      <CustomLegend />
-
+      <ChartHeader
+        title={title}
+        subtitle={subtitle}
+        theme={CivicVictoryTheme.civic}
+        legendData={legend}
+      />
       <VictoryChart domain={chartDomain} theme={CivicVictoryTheme.civic}>
-        {/* <VictoryLegend
-          {...CivicVictoryTheme.civic.legend}
-          title="banana"
-          height={50}
-          // x={650 / 2 - 450 / 2}
-          containerComponent={
-            // Center the Legend
-            <VictoryContainer
-              style={{
-                width: 'fit-content',
-                margin: '0 auto',
-              }}
-            />
-          }
-          // width="auto"
-          centerTitle
-          orientation="horizontal"
-          symbolSpacer={7}
-          gutter={15}
-          data={[
-            { name: 'One' },
-            { name: 'Two' },
-            { name: 'Three' },
-            { name: 'Three' },
-          ]}
-          style={{
-            border: { stroke: 'black' },
-            margin: '0 auto',
-            labels: {
-              fontSize: 14,
-              fontWeight: 'bold',
-              fontFamily:
-                "'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif",
-            },
-          }}
-        /> */}
         <VictoryAxis
           style={{ grid: { stroke: 'none' } }}
           animate={{ onEnter: { duration: 500 } }}
@@ -168,6 +95,7 @@ const ScatterPlot = ({ data, domain, style, title }) => {
         <VictoryAxis
           dependentAxis
           style={{
+            // Don't render the top y-axis grid line
             grid: {
               ...CivicVictoryTheme.civic.axis.style.grid,
               stroke: t =>
@@ -180,29 +108,30 @@ const ScatterPlot = ({ data, domain, style, title }) => {
           animate={{ onEnter: { duration: 500 } }}
         />
         <VictoryLabel
-          title="X Axis Label"
+          title="Y Axis Label"
           textAnchor="middle"
           verticalAnchor="end"
           x={50}
           y={45}
           style={axisLabelStyle}
-          text={xLabel}
+          text={yLabel}
         />
         <VictoryLabel
-          title="Y Axis Label"
+          title="X Axis Label"
           textAnchor="end"
           verticalAnchor="end"
           x={600}
           y={295}
           style={axisLabelStyle}
-          text={yLabel}
+          text={xLabel}
         />
         {/* TODO: Pull this into it's own component */}
         <VictoryScatter
-          style={style}
+          name="scatter"
+          style={style || defaultStyle}
           size={4}
           data={data}
-          labels={datum => `${xLabel}: ${datum.x} ${yLabel}: ${datum.y}`}
+          labels={() => ''}
           labelComponent={
             <VictoryTooltip
               x={325}
@@ -210,7 +139,26 @@ const ScatterPlot = ({ data, domain, style, title }) => {
               flyoutComponent={<CustomFlyout style={{ background: 'red' }} />}
             />
           }
-          animate={{ onEnter: { duration: 500 }, onLoad: { duration: 500 } }}
+          animate={{ onEnter: { duration: 500 } }}
+          events={[
+            {
+              target: 'data',
+              eventHandlers: {
+                onMouseOver: () => {
+                  return [
+                    {
+                      target: 'labels',
+                      mutation: () => ({ active: true }),
+                      callback: () => {
+                        // TODO: Trigger legend change
+                        console.log('tooltip callback');
+                      },
+                    },
+                  ];
+                },
+              },
+            },
+          ]}
           // categories={{ x: ['x name', 'y name'] }}
         />
       </VictoryChart>
@@ -224,14 +172,20 @@ ScatterPlot.propTypes = {
   ),
   domain: PropTypes.objectOf(PropTypes.array),
   style: PropTypes.objectOf(PropTypes.object),
+  subtitle: PropTypes.string,
   title: PropTypes.string,
+  xLabel: PropTypes.string,
+  yLabel: PropTypes.string,
 };
 
 ScatterPlot.defaultProps = {
   data: null,
   domain: null,
-  style: { data: { fill: d => d.fill } },
+  style: null,
+  subtitle: null,
   title: null,
+  xLabel: null,
+  yLabel: null,
 };
 
 export default ScatterPlot;
