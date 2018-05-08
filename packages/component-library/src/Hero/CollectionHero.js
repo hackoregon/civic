@@ -3,7 +3,7 @@ import Hero from './Hero';
 
 const CollectionHero = ({ heroTitle, heroSubtitle, mainProjectColor }) => (
   <Hero mainProjectColor={mainProjectColor}>
-    <div style={{marginLeft: '5vw'}} >
+    <div>
       <h1 className={'Title'}>{heroTitle}</h1>
       <h2>{heroSubtitle}</h2>
     </div>
