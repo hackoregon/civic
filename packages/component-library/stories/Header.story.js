@@ -18,7 +18,7 @@ const demoCode = () => (
 const altTitle = 'with Hero section';
 
 const altDemo = () => (
-  <div><Hero /><Header title="Civic" /></div>
+  <div><Header title="Civic" /><Hero /></div>
 );
 
 const overlayDemo = () => (

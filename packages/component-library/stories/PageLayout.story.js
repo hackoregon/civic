@@ -3,16 +3,9 @@ import React from 'react';
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
-import {
-  withKnobs,
-  text, number, object, array,
-} from '@storybook/addon-knobs';
+import { withKnobs, text, number, object, array } from '@storybook/addon-knobs';
 import { CivicStoryCard, Chart, ChartData, Pie, HorizontalBarChart, PageLayout } from '../src';
 import { getRandomValuesArray, getColors, randomizer, wallOfRichText } from './shared';
-
-const labels = ['A', 'B', 'C', 'D', 'E', 'F'];
-const width = 300;
-const height = 300;
 
 const data = array('Data',[
 {sortOrder: 1, population: 2000, label: 'Labrador Retriever'},
