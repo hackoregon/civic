@@ -17,17 +17,12 @@ export default () => storiesOf('Pie/Donut visualization').addDecorator(withKnobs
   'simple usage',
   // 'edit this visual in the knobs tab below and check click events in the actions tab',
   () => {
-    const labels = ['A', 'B', 'C', 'D', 'E', 'F'];
     const numberOfData = number('Amount of data values', 3);
     const getRandomColors = array('Array of colors', colors.slice(0, numberOfData));
     const values = getRandomValuesArray(numberOfData, objectRandomizer);
-    const chartHeight = number('Chart Height');
+    const chartHeight = number('Chart height');
     const chartWidth = number('Chart width');
-    const innerRadius = number('Inner Radius', 100);
-
-    const optionalProps = {
-
-    }
+    const innerRadius = number('Inner radius', 100);
 
     return (
       <div style={{ display: 'flex', justifyContent: 'space-around'}} >

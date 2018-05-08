@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
-import { VictoryLegend, VictoryPie } from 'victory';
-import { civic as civicTheme } from '../VictoryTheme/VictoryThemeIndex';
+import { VictoryPie } from 'victory';
+import civicTheme from '../VictoryTheme/CivicVictoryTheme.js';
 
-const formatLegendDataObject = (value, labelProp) => (
-  { name: value[labelProp ? labelProp : 'x'] }
+const getOrElse = (possibleValue, defaultValue) => (
+  possibleValue == null ? defaultValue : possibleValue
 );
 
 const PieChart = (props) => {
@@ -15,11 +15,18 @@ const PieChart = (props) => {
     innerRadius,
   } = props;
 
-  const height = props.height == null ? '100vh' : props.height;
-  const width = props.width == null ? '100vw' : props.width;
+  const height = getOrElse(props.height, '100vh');
+  const width = getOrElse(props.width, '100vw');
+  const x = getOrElse(labelKey, 'x');
+  const y = getOrElse(dataKey, 'y');
+
+  const containerStyle = {
+    width,
+    height,
+  };
 
   return (
-    <div className="pie-chart" style={{ width, height }}>
+    <div className="pie-chart-container" style={containerStyle}>
       <VictoryPie
         data={data}
         innerRadius={innerRadius}
@@ -28,8 +35,8 @@ const PieChart = (props) => {
         animate={{
           duration: 1000
         }}
-        x={labelKey}
-        y={dataKey}
+        x={x}
+        y={y}
       />
     </div>
   )
@@ -41,10 +48,10 @@ PieChart.defaultProps = {
 };
 
 PieChart.propTypes = {
-  data: PropTypes.object.isRequired,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
   innerRadius: PropTypes.number,
   colorScale: PropTypes.array,
-  height: PropTypes.oneOf([PropTypes.number, PropTypes.string]),
+  height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
 export default PieChart;
