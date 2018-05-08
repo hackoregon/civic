@@ -26,5 +26,6 @@ export { default as Logo } from './Logo/Logo';
 export { default as ShareCollection } from './Share/ShareCollection';
 export { default as isClient } from './utils/isClient';
 export { default as CivicVictoryTheme } from "./VictoryTheme/VictoryThemeIndex";
+export { default as CollectionHero } from './Hero/CollectionHero'
 
 import './fonts.css';

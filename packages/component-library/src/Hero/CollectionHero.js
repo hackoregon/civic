@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import Hero from './Hero';
-import Tag from '../Tag/Tag';
-import Share from '../Share/ShareCollection';
 
-const CollectionHero = props => (
-  <Hero>
-    <Tag name={props.featuredTag} />
-    <h1>{props.title}</h1>
-    <Share collectionId={props.collectionId} />
+const CollectionHero = ({ heroTitle, heroSubtitle, mainProjectColor }) => (
+  <Hero mainProjectColor={mainProjectColor}>
+    <div style={{marginLeft: '5vw'}} >
+      <h1 className={'Title'}>{heroTitle}</h1>
+      <h2>{heroSubtitle}</h2>
+    </div>
   </Hero>
 );
+
+CollectionHero.propTypes = {
+  heroTitle: PropTypes.string,
+  heroSubtitle: PropTypes.string,
+  mainProjectColor: PropTypes.string,
+};
 
 export default CollectionHero;

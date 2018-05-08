@@ -22,13 +22,14 @@ const dataKeyLabel = text('Data key labels', 'label');
 const housingExample = () => (
   <PageLayout heroTitle='Housing' heroSubtitle='A look into the housing rental income disparity.' mainProjectColor='#7CD' >
     <section style={{ margin: '80px 0' }} id='chart-1' >
-      <CivicStoryCard title={'Dogs x Income'}>
+      <CivicStoryCard>
         <div style={{ display: 'flex', justifyContent: 'space-around' }}>
           <HorizontalBarChart
             data={data}
             dataKey={dataKey}
             dataValue={dataValue}
             dataKeyLabel={dataKeyLabel}
+            title={'Dogs x Income'}
           />
         </div>
         <p className="Description">{wallOfRichText}</p>
@@ -41,13 +42,14 @@ const housingExample = () => (
       <img width="100%" src="https://images.unsplash.com/photo-1500331882646-91f0854732b3?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=b4c11afc54567512b21bbb4be177da8a&auto=format&fit=crop&w=2978&q=80" />
     </section>
     <section style={{ margin: '80px 0' }} id='chart-2' >
-      <CivicStoryCard title={'Dogs x Income'}>
+      <CivicStoryCard>
         <div style={{ display: 'flex', justifyContent: 'space-around' }}>
           <HorizontalBarChart
             data={data}
             dataKey={dataKey}
             dataValue={dataValue}
             dataKeyLabel={dataKeyLabel}
+            title={'Dogs x Income'}
           />
         </div>
         <p className="Description">{wallOfRichText}</p>

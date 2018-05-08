@@ -2,17 +2,17 @@ import React, { PropTypes } from 'react';
 import { css } from 'emotion';
 import CivicStoryCard from '../CivicStoryCard/CivicStoryCard';
 import Header from '../Navigation/Header'
+import CollectionHero from '../Hero/CollectionHero'
 
 
 const PageLayout = ({ cardId, collectionId, heroTitle, heroSubtitle, title, mainProjectColor, children }) => (
   <div>
     <Header title="Civic" mainProjectColor={mainProjectColor} overlay />
-    <div style={{ background: mainProjectColor, height: '600px', display: 'flex', alignItems: 'center' }}>
-      <div style={{marginLeft: '5vw'}} >
-        <h1 className={'Title'}>{heroTitle}</h1>
-        <h2>{heroSubtitle}</h2>
-      </div>
-    </div>
+    <CollectionHero
+      heroTitle={heroTitle}
+      heroSubtitle={heroSubtitle}
+      mainProjectColor={mainProjectColor}
+    />
     <div style={{padding: '0px 24px'}} >
       {children}
     </div>
