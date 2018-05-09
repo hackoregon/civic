@@ -13,7 +13,7 @@ import placeholderStory from './Placeholder.story';
 import dropdownStory from './DropdownMenu.story';
 import headerStory from './Header.story';
 import Welcome from './Welcome';
-import reactMapStory from './ReactMap.story';
+import baseMapStory from './BaseMap.story';
 
 import '../assets/global.styles.css';
 
@@ -36,4 +36,4 @@ placeholderStory();
 sankeyStory();
 sliderStory();
 dropdownStory();
-reactMapStory();
+baseMapStory();
