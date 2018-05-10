@@ -8,10 +8,13 @@ import {
 } from '@storybook/addon-knobs';
 
 import { LineChart } from '../src';
+import { checkA11y } from '@storybook/addon-a11y';
 
 const displayName = LineChart.displayName || 'Line Chart';
 
-export default () => storiesOf(displayName, module).addDecorator(withKnobs)
+export default () => storiesOf(displayName, module)
+  .addDecorator(checkA11y)
+  .addDecorator(withKnobs)
   .add('Basic Usage', (() => {
     const data = object('Data', [
       { year: 2015, population: 120000 },
