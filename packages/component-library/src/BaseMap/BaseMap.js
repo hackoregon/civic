@@ -22,7 +22,7 @@ export default class BaseMap extends Component {
         maxZoom: 20,
         pitch: 0,
         bearing: 0,
-      }
+      },
     };
     this.onViewportChange = this.onViewportChange.bind(this);
     this.resize = this.resize.bind(this);
@@ -61,6 +61,7 @@ export default class BaseMap extends Component {
     return (
       <div className={mapWrapper}>
         <MapGL
+         className={'MapGL'}
           {...viewport}
           mapStyle={mapboxStyle}
           mapboxApiAccessToken={mapboxToken}
