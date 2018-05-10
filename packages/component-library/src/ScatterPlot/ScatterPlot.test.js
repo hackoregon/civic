@@ -27,10 +27,10 @@ describe('ScatterPlot', () => {
     const wrapper = shallow(<ScatterPlot data={simpleData} />);
     expect(wrapper.find({ title: 'Scatter Plot' }).length).to.eql(1);
     expect(wrapper.find({ title: 'Scatter Plot' }).props().data).to.eql([
-      { dataKey: 100, dataValue: 1, series: undefined },
-      { dataKey: 200, dataValue: 2, series: undefined },
-      { dataKey: 300, dataValue: 3, series: undefined },
-      { dataKey: 400, dataValue: 4, series: undefined },
+      { dataKey: 100, dataValue: 1, series: undefined, size: 3 },
+      { dataKey: 200, dataValue: 2, series: undefined, size: 3 },
+      { dataKey: 300, dataValue: 3, series: undefined, size: 3 },
+      { dataKey: 400, dataValue: 4, series: undefined, size: 3 },
     ]);
   });
 
@@ -65,10 +65,10 @@ describe('ScatterPlot', () => {
     };
     const wrapper = shallow(<ScatterPlot {...props} />);
     expect(wrapper.find({ title: 'Scatter Plot' }).props().data).to.eql([
-      { dataKey: 100, dataValue: 1, series: 'first' },
-      { dataKey: 200, dataValue: 2, series: 'first' },
-      { dataKey: 100, dataValue: 3, series: 'second' },
-      { dataKey: 200, dataValue: 3, series: 'second' },
+      { dataKey: 100, dataValue: 1, series: 'first', size: 3 },
+      { dataKey: 200, dataValue: 2, series: 'first', size: 3 },
+      { dataKey: 100, dataValue: 3, series: 'second', size: 3 },
+      { dataKey: 200, dataValue: 3, series: 'second', size: 3 },
     ]);
   });
 
@@ -86,6 +86,28 @@ describe('ScatterPlot', () => {
     expect(wrapper.find('.legend').props().legendData).to.eql([
       { name: 'first' },
       { name: 'second' },
+    ]);
+  });
+
+  it('sets the data point size if size key is specified', () => {
+    const props = {
+      data: simpleData,
+    };
+    const wrapper = shallow(<ScatterPlot {...props} />);
+    expect(wrapper.find({ title: 'Scatter Plot' }).props().data).to.eql([
+      { dataKey: 100, dataValue: 1, series: undefined, size: 3 },
+      { dataKey: 200, dataValue: 2, series: undefined, size: 3 },
+      { dataKey: 300, dataValue: 3, series: undefined, size: 3 },
+      { dataKey: 400, dataValue: 4, series: undefined, size: 3 },
+    ]);
+
+    wrapper.setProps({ size: { key: 'y' } });
+
+    expect(wrapper.find({ title: 'Scatter Plot' }).props().data).to.eql([
+      { dataKey: 100, dataValue: 1, series: undefined, size: 1 },
+      { dataKey: 200, dataValue: 2, series: undefined, size: 2 },
+      { dataKey: 300, dataValue: 3, series: undefined, size: 3 },
+      { dataKey: 400, dataValue: 4, series: undefined, size: 4 },
     ]);
   });
 });

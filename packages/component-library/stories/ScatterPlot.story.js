@@ -14,14 +14,15 @@ const sampleData = [
   { x: 1, y: 3, series: 'dog' },
   { x: 3, y: 3, series: 'dog' },
 ];
+const sampleDataSeries = ['cat', 'dog', 'fish'];
 const sampleDomain = { x: [0, 6], y: [0, 8] };
-const sampleTitle = 'Some title';
+const sampleSize = { key: 'y' };
 const sampleSubtitle = 'A description of this chart.';
+const sampleTitle = 'Some title';
 const sampleXKey = 'x';
 const sampleXLabel = 'Number';
 const sampleYKey = 'y';
 const sampleYLabel = 'Rating';
-const sampleDataSeries = ['cat', 'dog', 'fish'];
 
 export default () =>
   storiesOf(displayName, module)
@@ -33,6 +34,7 @@ export default () =>
       const dataSeries = object('Data Series', sampleDataSeries);
       const dataValue = text('dataValue', sampleYKey);
       const domain = object('Domain', sampleDomain);
+      const size = object('Size', sampleSize);
       const subtitle = text('Subtitle', sampleSubtitle);
       const title = text('Title', sampleTitle);
       const xLabel = text('xLabel', sampleXLabel);
@@ -45,6 +47,7 @@ export default () =>
           dataSeries={dataSeries}
           dataValue={dataValue}
           domain={domain}
+          size={size}
           subtitle={subtitle}
           title={title}
           xLabel={xLabel}

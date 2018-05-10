@@ -5,32 +5,9 @@ import {
   VictoryChart,
   VictoryLabel,
   VictoryScatter,
-  VictoryTooltip,
 } from 'victory';
 
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
-
-const CustomFlyout = flyoutProps => {
-  const { datum, x, y, xLabel, yLabel } = flyoutProps;
-
-  return (
-    <g
-      transform={`translate(${x}, ${y - 10})`}
-      style={{ backgroundColor: 'red' }}
-    >
-      <rect
-        x={0 - 75}
-        y={0 - 20}
-        width="150px"
-        height="30px"
-        fill="lightgray"
-      />
-      <text textAnchor="middle">
-        {`${xLabel}: ${datum.x} ${yLabel}: ${datum.y}`}
-      </text>
-    </g>
-  );
-};
 
 const SimpleLegend = ({ legendData }) => {
   const legendStyle = css`
@@ -111,6 +88,7 @@ const getDefaultStyle = dataSeries => {
  * @param  {String}    dataValue    Y key in `data`
  * @param  {Array}     dataSeries   Series options for multiseries data
  * @param  {Object}    domain       Scaling for chart axes (defaults to data range)
+ * @param  {Object}    size         Data `key` or exact `value` to use for data point size
  * @param  {Object}    style        Optional overrides for point rendering
  * @param  {String}    subtitle     Chart subtitle
  * @param  {String}    title        Chart title
@@ -124,6 +102,7 @@ const ScatterPlot = ({
   dataValue,
   dataSeries,
   domain,
+  size,
   style,
   subtitle,
   title,
@@ -137,26 +116,6 @@ const ScatterPlot = ({
     dataSeries && dataSeries.length
       ? dataSeries.map(series => ({ name: series }))
       : null;
-
-  const scatterPlotEvents = [
-    {
-      target: 'data',
-      eventHandlers: {
-        onMouseOver: () => {
-          return [
-            {
-              target: 'labels',
-              mutation: () => ({ active: true }),
-              callback: () => {
-                // TODO: Trigger legend change
-                console.log('tooltip callback');
-              },
-            },
-          ];
-        },
-      },
-    },
-  ];
 
   const axisLabelStyle = {
     fontFamily: "'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif",
@@ -236,23 +195,9 @@ const ScatterPlot = ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],
             series: d.series,
+            size: size ? d[size.key] || size.value : 3,
           }))}
-          events={scatterPlotEvents}
-          labels={() => ''}
-          labelComponent={
-            <VictoryTooltip
-              x={325}
-              y={50}
-              flyoutComponent={
-                <CustomFlyout
-                  style={{ background: 'red' }}
-                  xLabel={xLabel}
-                  yLabel={yLabel}
-                />
-              }
-            />
-          }
-          size={4}
+          size={d => d.size}
           style={scatterPlotStyle}
           title="Scatter Plot"
           x="dataKey"
@@ -272,6 +217,7 @@ ScatterPlot.propTypes = {
   dataValue: PropTypes.string,
   dataSeries: PropTypes.arrayOf(PropTypes.string),
   domain: PropTypes.objectOf(PropTypes.array),
+  size: PropTypes.shape({ key: PropTypes.string, value: PropTypes.string }),
   style: PropTypes.objectOf(PropTypes.object),
   subtitle: PropTypes.string,
   title: PropTypes.string,
@@ -286,6 +232,7 @@ ScatterPlot.defaultProps = {
   dataValue: 'y',
   dataSeries: null,
   domain: null,
+  size: null,
   style: null,
   subtitle: null,
   title: null,
