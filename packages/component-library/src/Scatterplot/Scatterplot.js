@@ -185,12 +185,15 @@ const ScatterPlot = ({
     <div>
       {title && <span className={titleStyle}>{title}</span>}
       {subtitle && <span className={subtitleStyle}>{subtitle}</span>}
-      {legendData && <SimpleLegend legendData={legendData} />}
+      {legendData && (
+        <SimpleLegend className="legend" legendData={legendData} />
+      )}
 
       <VictoryChart domain={chartDomain} theme={CivicVictoryTheme.civic}>
         <VictoryAxis
           animate={{ onEnter: { duration: 500 } }}
           style={{ grid: { stroke: 'none' } }}
+          title="X Axis"
         />
         <VictoryAxis
           dependentAxis
@@ -206,35 +209,35 @@ const ScatterPlot = ({
                   : 'none',
             },
           }}
+          title="Y Axis"
         />
         <VictoryLabel
-          title="Y Axis Label"
+          style={axisLabelStyle}
+          text={yLabel}
           textAnchor="middle"
+          title="Y Axis Label"
           verticalAnchor="end"
           x={50}
           y={45}
-          style={axisLabelStyle}
-          text={yLabel}
         />
         <VictoryLabel
-          title="X Axis Label"
+          style={axisLabelStyle}
+          text={xLabel}
           textAnchor="end"
+          title="X Axis Label"
           verticalAnchor="end"
           x={600}
           y={295}
-          style={axisLabelStyle}
-          text={xLabel}
         />
         <VictoryScatter
           animate={{ onEnter: { duration: 500 } }}
           categories={{ x: dataKeyLabel }}
           data={data.map(d => ({
-            ...d,
             dataKey: d[dataKey],
             dataValue: d[dataValue],
+            series: d.series,
           }))}
-          x="dataKey"
-          y="dataValue"
+          events={scatterPlotEvents}
           labels={() => ''}
           labelComponent={
             <VictoryTooltip
@@ -251,7 +254,9 @@ const ScatterPlot = ({
           }
           size={4}
           style={scatterPlotStyle}
-          events={scatterPlotEvents}
+          title="Scatter Plot"
+          x="dataKey"
+          y="dataValue"
         />
       </VictoryChart>
     </div>
