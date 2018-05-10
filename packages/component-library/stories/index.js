@@ -14,11 +14,12 @@ import placeholderStory from './Placeholder.story';
 import dropdownStory from './DropdownMenu.story';
 import headerStory from './Header.story';
 import Welcome from './Welcome';
-
+import { checkA11y } from '@storybook/addon-a11y';
 import '../assets/global.styles.css';
 
 // stories can be added directly here
 storiesOf('Welcome', module)
+  .addDecorator(checkA11y)
   .add('to Storybook', () => (
     <Welcome showApp={linkTo('Button')} />
   ));
