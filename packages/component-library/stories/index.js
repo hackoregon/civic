@@ -5,7 +5,7 @@ import storycardStory from './StoryCard.story';
 import storyLinkStory from './StoryLink.story';
 import storyFooterStory from './StoryFooter.story';
 import editableStory from './Editable.story';
-import pieStory from './Pie.story';
+import pieStory from './PieChart.story';
 import sliderStory from './Slider.story';
 import horizontalBarChartStory from './HorizontalBarChart.story';
 import lineChartStory from './LineChart.story';

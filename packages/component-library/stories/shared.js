@@ -15,6 +15,16 @@ export const wallOfRichText = (
     proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
   </div>
 );
+const firstRepeatInWallOfText = wallOfText
+  .split(' ')
+  .reduce((p, n, i) => {
+    if (typeof p === 'number') return p;
+    if (p[n]) return i;
+    p[n] = true;
+    return p;
+  }, {});
+export const randomLorem = () => wallOfText
+  .split(' ')[Math.floor((Math.random() * 100) % firstRepeatInWallOfText)];
 
 export const colors = [
   '#a6cee3',
@@ -45,3 +55,4 @@ export const colors = [
 export const randomizer = () => Math.random() * 100;
 export const getColors = (datum, idx) => (arguments.length === 2 ? colors[idx] : colors[datum]);
 export const getRandomValuesArray = (numsOf, func) => [...new Array(numsOf)].map(func);
+export const objectRandomizer = () => ({ x: randomLorem(), y: randomizer() });
