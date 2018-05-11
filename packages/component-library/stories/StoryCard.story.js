@@ -5,6 +5,7 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import { StoryCard, Chart, ChartData, Pie } from '../src';
 import { getRandomValuesArray, getColors, randomizer, wallOfRichText } from './shared';
+import { checkA11y } from '@storybook/addon-a11y';
 
 const labels = ['A', 'B', 'C', 'D', 'E', 'F'];
 const width = 300;
@@ -63,9 +64,10 @@ const tdvDemo = () => (
 );
 
 export default () => storiesOf('StoryCard', module)
-.add(
-  'Simple usage',
-  // 'This is some basic usage with the StoryCard with just a title and descriptions')(
-  () => <StoryCard title={'Some title'}><p className="Description">some descriptions go here</p></StoryCard>)
+  .addDecorator(checkA11y)
+  .add(
+    'Simple usage',
+    // 'This is some basic usage with the StoryCard with just a title and descriptions')(
+    () => <StoryCard title={'Some title'}><p className="Description">some descriptions go here</p></StoryCard>)
   .add('with title & description', tdDemo)
   .add('with title, description & visualization', tdvDemo);

@@ -1,8 +1,10 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Placeholder } from '../src';
+import { checkA11y } from '@storybook/addon-a11y';
 
 export default () => storiesOf('Placeholder')
+  .addDecorator(checkA11y)
   .add('default', () => <Placeholder />)
   .add('with a custom message', () => (
     <Placeholder>
