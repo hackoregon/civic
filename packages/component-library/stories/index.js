@@ -2,6 +2,8 @@ import React from 'react';
 import { storiesOf, linkTo } from '@storybook/react'; // eslint-disable-line
 import buttonStory from './Button.story';
 import storycardStory from './StoryCard.story';
+import civicStorycardStory from './CivicStoryCard.story';
+import pageLayoutStory from './PageLayout.story';
 import storyLinkStory from './StoryLink.story';
 import storyFooterStory from './StoryFooter.story';
 import editableStory from './Editable.story';
@@ -34,6 +36,8 @@ buttonStory();
 storyLinkStory();
 storyFooterStory();
 storycardStory();
+civicStorycardStory();
+pageLayoutStory();
 pieStory();
 horizontalBarChartStory();
 BarChartStory();

@@ -16,6 +16,7 @@ const containerClass = css`
 const overlayContainerClass = css`
   ${containerClass};
   position: fixed;
+  z-index: 100;
 `;
 
 const headerClass = css`
@@ -84,10 +85,10 @@ class Header extends Component {
   togglesNestedMenu = () => this.setState({ menuActive: !this.state.menuActive })
 
   render() {
-    const { children, menu, title, overlay } = this.props;
+    const { children, menu, title, overlay, mainProjectColor } = this.props;
     return (
       <div className={overlay ? overlayContainerClass : containerClass}>
-        <nav className={overlay ? overlayHeaderClass : headerClass}>
+        <nav className={overlay ? overlayHeaderClass : headerClass} style={{ backgroundColor: mainProjectColor }}>
           <div className={logoClass}>
             <Link className={logoLinkClass} to="/"><Logo alt={title} /></Link>
           </div>
@@ -121,6 +122,7 @@ Header.propTypes = {
   title: PropTypes.string,
   children: PropTypes.node,
   overlay: PropTypes.bool,
+  mainProjectColor: PropTypes.string
 };
 
 export default Header;
