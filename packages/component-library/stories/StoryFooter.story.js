@@ -6,6 +6,7 @@ import { storiesOf } from '@storybook/react';
 import { withKnobs, text } from '@storybook/addon-knobs';
 import StoryFooter from '../src/StoryCard/StoryFooter';
 // import { ICONS } from '../src/styleConstants';
+import { checkA11y } from '@storybook/addon-a11y';
 
 const collectionId = 'collection-id';
 const cardId = 'cardId';
@@ -17,6 +18,7 @@ const cardId = 'cardId';
  // copy via the link then try pasting from your clipboard.
 // `
 export default () => storiesOf('StoryFooter', module)
+  .addDecorator(checkA11y)
   .addDecorator(withKnobs)
   .add(
     'default usage', () => (

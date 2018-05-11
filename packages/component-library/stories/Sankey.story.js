@@ -4,6 +4,7 @@ import { take } from 'ramda';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import { Sankey } from '../src';
+import { checkA11y } from '@storybook/addon-a11y';
 
 const displayName = Sankey.displayName || 'Sankey';
 const title = 'Simple usage';
@@ -26,5 +27,5 @@ const demoCode = () => (
 // const propDocs = { inline: true, propTables: [Sankey] };
 
 export default () => storiesOf(displayName, module)
-.add(title, demoCode);
-
+  .addDecorator(checkA11y)
+  .add(title, demoCode);

@@ -20,6 +20,7 @@
     "url": "https://github.com/hackoregon/component-library"
   },
   "devDependencies": {
+    "babel-cli": "^6.24.1",
     "babel-eslint": "^7.1.1",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-stage-1": "^6.24.1",
@@ -68,6 +69,7 @@
     "react-router": "^3.0.0",
     "react-selectize": "^2.1.0",
     "recharts": "^0.22.1",
-    "victory": "^0.26.0"
+    "victory": "^0.26.0",
+    "webpack-blocks": "^1.0.0"
   }
 }
