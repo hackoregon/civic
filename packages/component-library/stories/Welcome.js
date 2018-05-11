@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 // import { storiesOf } from '@storybook/react';
+// import { checkA11y } from '@storybook/addon-a11y';
 
 const styles = {
   main: {
@@ -78,6 +79,7 @@ export default class Welcome extends React.Component {
 }
 //
 // storiesOf('Welcome', module)
+//   .addDecorator(checkA11y)
 //   .add('to Storybook', () => (
 //     <Welcome showApp={linkTo('Button')} />
 //   ));

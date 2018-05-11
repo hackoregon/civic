@@ -2,8 +2,10 @@ import React from 'react';
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from '@storybook/react';
 import { withKnobs, text, boolean, number, object } from '@storybook/addon-knobs';
+import { checkA11y } from '@storybook/addon-a11y';
 
 export default () => storiesOf('Editable UI components', module)
+  .addDecorator(checkA11y)
   .addDecorator(withKnobs)
   .add('with a button', () => {
     const style = {

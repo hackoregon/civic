@@ -38,6 +38,7 @@
     "travis": "make travis"
   },
   "devDependencies": {
+    "@storybook/addon-a11y": "^3.4.3",
     "@storybook/addon-actions": "^3.4.2",
     "@storybook/addon-info": "^3.4.2",
     "@storybook/addon-knobs": "^3.4.2",

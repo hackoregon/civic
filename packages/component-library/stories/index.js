@@ -8,16 +8,20 @@ import editableStory from './Editable.story';
 import pieStory from './PieChart.story';
 import sliderStory from './Slider.story';
 import horizontalBarChartStory from './HorizontalBarChart.story';
+import lineChartStory from './LineChart.story';
 import sankeyStory from './Sankey.story';
 import placeholderStory from './Placeholder.story';
 import dropdownStory from './DropdownMenu.story';
 import headerStory from './Header.story';
 import Welcome from './Welcome';
+import baseMapStory from './BaseMap.story';
 
+import { checkA11y } from '@storybook/addon-a11y';
 import '../assets/global.styles.css';
 
 // stories can be added directly here
 storiesOf('Welcome', module)
+  .addDecorator(checkA11y)
   .add('to Storybook', () => (
     <Welcome showApp={linkTo('Button')} />
   ));
@@ -31,7 +35,9 @@ storyFooterStory();
 storycardStory();
 pieStory();
 horizontalBarChartStory();
+lineChartStory();
 placeholderStory();
 sankeyStory();
 sliderStory();
 dropdownStory();
+baseMapStory();
