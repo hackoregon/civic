@@ -42,3 +42,30 @@ travis:
 	@if [ "$$SUITE" = "COMPONENT_LIBRARY" ]; then \
 		cd packages/component-library && yarn test && cd -; \
 	fi
+
+deploy:
+	@if [ -z "$$TRAVIS_PULL_REQUEST" ] || [ "$$TRAVIS_PULL_REQUEST" = "false" ]; then \
+		echo "Not a PR..."; \
+		if [ "$$TRAVIS_BRANCH" = "master" ]; then \
+			echo "On the master branch..."; \
+			if [ "$$SUITE" = "2017" ]; then \
+				make deploy-2017; \
+			fi; \
+			if [ "$$SUITE" = "2018" ]; then \
+				make deploy-2018; \
+			fi; \
+			if [ "$$SUITE" = "COMPONENT_LIBRARY" ]; then \
+				make deploy-component-library; \
+			fi \
+		fi \
+	fi
+
+deploy-2017:
+	echo "2017 build and deploy stub"
+
+deploy-2018:
+	echo "2018 build and deploy stub"
+
+deploy-component-library:
+	@echo "Deploying the component library";
+	yarn run deploy-storybook -- --ci;

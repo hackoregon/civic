@@ -3,10 +3,10 @@ import {
   VictoryAxis,
   VictoryBar,
   VictoryChart,
-  VictoryTooltip,
 } from 'victory';
-import { css } from 'emotion';
+
 import { assign } from "lodash";
+import { css } from 'emotion';
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
 
 const barchartWrapper = css`
@@ -30,71 +30,29 @@ const subtitleStyle = css`
   text-align: center;
 `;
 
-const chartEvents = [
-  {
-    target: 'data',
-    eventHandlers: {
-      onMouseOver: () => {
-        return [
-          {
-            target: 'data',
-            mutation: () => ({ style: { fill: 'tomato', width: 40 } }),
-          }, {
-            target: 'labels',
-            mutation: () => ({ active: true }),
-          },
-        ];
-      },
-      onMouseOut: () => {
-        return [
-          {
-            target: 'data',
-            mutation: () => { },
-          }, {
-            target: 'labels',
-            mutation: () => ({ active: false }),
-          },
-        ];
-      },
-    },
-  },
-];
-
-const HorizontalBarChart = ({ data, dataKey, dataValue, dataKeyLabel, title, subtitle }) =>
+const BarChart = ({ data, dataKey, dataValue, dataKeyLabel, title, subtitle }) =>
   <div>
-    { title ? <h3 className={titleStyle}>{title}</h3> : null}
-    { subtitle ? <span className={subtitleStyle}>{subtitle}</span> : null}
+    {title ? <h3 className={titleStyle}>{title}</h3> : null}
+    {subtitle ? <span className={subtitleStyle}>{subtitle}</span> : null}
     <div className={barchartWrapper}>
       <VictoryChart
-        padding={{ left: 115, right: 50, bottom: 50, top: 50 }}
         domainPadding={20}
         animate={{ duration: 300 }}
         theme={CivicVictoryTheme.civic}
       >
         <VictoryAxis
-          dependentAxis
           // tickValues specifies both the number of ticks and where
           // they are placed on the axis
           tickValues={data.map(a => a[dataKey])}
           tickFormat={data.map(a => a[dataKeyLabel])}
         />
         <VictoryAxis
+          dependentAxis
           // tickFormat specifies how ticks should be displayed
           tickFormat={x => (`$${x / 1000}k`)}
         />
         <VictoryBar
-          horizontal
-          labelComponent={
-            <VictoryTooltip
-              x={325}
-              y={0}
-              orientation="bottom"
-              pointerLength={0}
-              cornerRadius={0}
-            />
-          }
-          data={data.map(a => ({ dataKey: a[dataKey], dataValue: a[dataValue], label: `${a[dataKeyLabel]}: ${a[dataValue]}` }))}
-          events={chartEvents}
+          data={data.map(a => ({ dataKey: a[dataKey], dataValue: a[dataValue] }))}
           x={'dataKey'}
           y={'dataValue'}
         />
@@ -102,14 +60,13 @@ const HorizontalBarChart = ({ data, dataKey, dataValue, dataKeyLabel, title, sub
     </div>
   </div>;
 
-HorizontalBarChart.propTypes = {
+BarChart.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
   dataKey: PropTypes.string.isRequired,
   dataValue: PropTypes.string.isRequired,
   dataKeyLabel: PropTypes.string,
-  dataValueLabel: PropTypes.string,
   title: PropTypes.string,
   subtitle: PropTypes.string,
 };
 
-export default HorizontalBarChart;
+export default BarChart;
