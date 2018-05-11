@@ -10,6 +10,7 @@ const cardClass = css`
 
 const descriptionClass = css`
   margin: 0 auto;
+  padding: 24px;
   text-align: left;
 `;
 
