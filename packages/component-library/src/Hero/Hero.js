@@ -29,6 +29,8 @@ const containerClass = css`
 const contentClass = css`
   position: relative;
   padding-top: 0px;
+  display: flex;
+  align-items: center;
 
   & > h1 {
     font-size: 3em;
@@ -42,8 +44,8 @@ const DefaultChildren = () => (
   <h1>Data for the people,<br />by the people.</h1>
 );
 
-const Hero = ({ children }) => (
-  <div className={heroClass}>
+const Hero = ({ children, mainProjectColor }) => (
+  <div className={heroClass} style={{ backgroundColor: mainProjectColor }}>
     <div className={containerClass}>
       <div className={contentClass}>
         {children || <DefaultChildren />}
@@ -55,6 +57,7 @@ const Hero = ({ children }) => (
 Hero.displayName = 'Hero';
 
 Hero.propTypes = {
+  mainProjectColor: React.PropTypes.string,
   children: React.PropTypes.node,
 };
 

@@ -1,13 +1,15 @@
 export { default as AreaChart } from './AreaChart/AreaChart';
-export {
-  default as HorizontalBarChart,
-} from './HorizontalBarChart/HorizontalBarChart';
+export { default as HorizontalBarChart } from './HorizontalBarChart/HorizontalBarChart';
+export { default as BarChart } from './BarChart/BarChart';
+export { default as LineChart } from './LineChart/LineChart';
 export { default as Sankey } from './Sankey/Sankey';
 export { default as Button } from './Button/Button';
 export { default as StoryCard } from './StoryCard/StoryCard';
+export { default as CivicStoryCard } from './CivicStoryCard/CivicStoryCard';
+export { default as PageLayout } from './PageLayout/PageLayout';
 export { default as Chart } from './Chart/Chart';
 export { default as ChartData } from './ChartData/ChartData';
-export { default as Pie } from './Pie/Pie';
+export { default as PieChart } from './PieChart/PieChart';
 export { default as Slider } from './Slider/Slider';
 export { default as Footer } from './Footer/Footer';
 export { default as ScrollToTop } from './ScrollToTop/ScrollToTop';
@@ -25,6 +27,8 @@ export { default as Media } from './Media/Media';
 export { default as Logo } from './Logo/Logo';
 export { default as ShareCollection } from './Share/ShareCollection';
 export { default as isClient } from './utils/isClient';
-export { default as CivicVictoryTheme } from './VictoryTheme/VictoryThemeIndex';
+export { default as CivicVictoryTheme } from "./VictoryTheme/VictoryThemeIndex";
+export { default as CollectionHero } from './Hero/CollectionHero'
+export { default as BaseMap } from './BaseMap/BaseMap';
 
 import './fonts.css';

@@ -2,7 +2,7 @@ import React from 'react';
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-
+import { checkA11y } from '@storybook/addon-a11y';
 import { Button } from '../src';
 
 const displayName = Button.displayName || 'Button';
@@ -22,6 +22,7 @@ const altDemo = () => (
 const altTitle = 'with some emoji';
 
 export default () => storiesOf(displayName, module)
+  .addDecorator(checkA11y)
   .add(
     title,
     demoCode
