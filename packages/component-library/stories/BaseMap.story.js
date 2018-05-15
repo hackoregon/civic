@@ -19,7 +19,7 @@ const demoMap = () => {
     'Odyssey': 'mapbox://styles/themendozaline/cjgq6rklb000d2so1b8myaait',
     'Scenic': 'mapbox://styles/themendozaline/cj8rrlv4tbtgs2rqnyhckuqva',
   };
-  const mapboxStyle = selectV2('Mapbox Style', optionsStyle, optionsStyle['Label Maker']);
+  const mapboxStyle = selectV2('Mapbox Style', optionsStyle, optionsStyle['Lè Shine']);
 
   return (
     <BaseMap
@@ -29,7 +29,7 @@ const demoMap = () => {
   );
 };
 
-export default () => storiesOf(displayName)
+export default () => storiesOf(displayName, module)
   .addDecorator(withKnobs)
   .add(
     'Simple usage',
