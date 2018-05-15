@@ -3,6 +3,7 @@ import MapGL from 'react-map-gl';
 import { css } from 'emotion';
 import './mapbox-gl.css';
 import DeckGLOverlay from './../../deckgl-overlay.js';
+// import './test.geojson'
 
 const mapWrapper = css`
   margin: auto;
@@ -12,10 +13,9 @@ const mapWrapper = css`
 const colorScale = r => [r * 255, 140, 200 * (1 - r)];
 
 // Source data GeoJSON (currently only Vancouver BC)
-const DATA_URL =
-  'https://raw.githubusercontent.com/uber-common/deck.gl-data/master/examples/geojson/vancouver-blocks.json'; // eslint-disable-line
+const DATA_URL = 'https://raw.githubusercontent.com/uber-common/deck.gl-data/master/examples/geojson/vancouver-blocks.json'; // eslint-disable-line
 
-export default class BaseMap extends Component {
+export default class MapOverlay extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -89,11 +89,11 @@ export default class BaseMap extends Component {
   };
 };
 
-BaseMap.propTypes = {
+MapOverlay.propTypes = {
   mapboxStyle: PropTypes.string,
   mapboxToken: PropTypes.string.isRequired,
 };
 
-BaseMap.defaultProps = {
+MapOverlay.defaultProps = {
   mapboxStyle: "mapbox://styles/themendozaline/cjg6296ub04ot2sqv9izku3qq",
 };
