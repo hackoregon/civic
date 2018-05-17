@@ -2,12 +2,12 @@ import React from 'react';
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from '@storybook/react';
 import { withKnobs, selectV2 } from '@storybook/addon-knobs';
-import { MapOverlay } from '../src';
-import DeckGLOverlay from '../src/MapOverlay/map-deckgl-overlay';
+import { HexOverlay } from '../src';
+import DeckGLOverlay from '../src/HexOverlay/hex-deckgl-overlay';
 import MapGL from 'react-map-gl';
 import { checkA11y } from '@storybook/addon-a11y';
 
-const displayName = MapOverlay.displayName || 'MapOverlay';
+const displayName = HexOverlay.displayName || 'HexOverlay';
 
 // hard coded for ease for now:
 const mapboxToken = 'pk.eyJ1IjoidGhlbWVuZG96YWxpbmUiLCJhIjoiY2o1aXdoem1vMWtpNDJ3bnpqaGF1bnlhNSJ9.sjTrNKLW9daDBIGvP3_W0w';
@@ -28,7 +28,7 @@ const optionsStyle = {
 const demoMap = () => { optionsStyle
   const mapboxStyle = selectV2('Mapbox Style', optionsStyle, optionsStyle['Label Maker']);
   return (
-    <MapOverlay
+    <HexOverlay
       mapboxToken={mapboxToken}
       mapboxStyle={mapboxStyle}
     />
