@@ -81,7 +81,7 @@ const getDefaultStyle = dataSeries => {
 };
 
 /**
- * @method ScatterPlot
+ * @method Scatterplot
  * @param  {Array}     data         X & Y coordinates for scatterplot points
  * @param  {String}    dataKey      X key in `data`
  * @param  {Array}     dataKeyLabel Optional overrides for x-axis tick labels
@@ -95,7 +95,7 @@ const getDefaultStyle = dataSeries => {
  * @param  {String}    xLabel       X-axis label
  * @param  {String}    yLabel       Y-axis label
  */
-const ScatterPlot = ({
+const Scatterplot = ({
   data,
   dataKey,
   dataKeyLabel,
@@ -208,7 +208,7 @@ const ScatterPlot = ({
   );
 };
 
-ScatterPlot.propTypes = {
+Scatterplot.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({ x: PropTypes.number, y: PropTypes.number }),
   ),
@@ -225,7 +225,7 @@ ScatterPlot.propTypes = {
   yLabel: PropTypes.string,
 };
 
-ScatterPlot.defaultProps = {
+Scatterplot.defaultProps = {
   data: null,
   dataKey: 'x',
   dataKeyLabel: null,
@@ -240,4 +240,4 @@ ScatterPlot.defaultProps = {
   yLabel: null,
 };
 
-export default ScatterPlot;
+export default Scatterplot;

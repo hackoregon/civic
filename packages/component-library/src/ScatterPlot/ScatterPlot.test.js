@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import ScatterPlot from './ScatterPlot';
+import Scatterplot from './Scatterplot';
 
 const simpleData = [
   { x: 100, y: 1 },
@@ -17,14 +17,14 @@ const multiSeriesData = [
   { amount: 200, rate: 3, series: 'second' },
 ];
 
-describe('ScatterPlot', () => {
+describe('Scatterplot', () => {
   it('renders a VictoryChart', () => {
-    const wrapper = shallow(<ScatterPlot data={simpleData} />);
+    const wrapper = shallow(<Scatterplot data={simpleData} />);
     expect(wrapper.find('VictoryChart').length).to.eql(1);
   });
 
-  it('renders a ScatterPlot with simple data', () => {
-    const wrapper = shallow(<ScatterPlot data={simpleData} />);
+  it('renders a Scatterplot with simple data', () => {
+    const wrapper = shallow(<Scatterplot data={simpleData} />);
     expect(wrapper.find({ title: 'Scatter Plot' }).length).to.eql(1);
     expect(wrapper.find({ title: 'Scatter Plot' }).props().data).to.eql([
       { dataKey: 100, dataValue: 1, series: undefined, size: 3 },
@@ -35,7 +35,7 @@ describe('ScatterPlot', () => {
   });
 
   it('renders both axes', () => {
-    const wrapper = shallow(<ScatterPlot data={simpleData} />);
+    const wrapper = shallow(<Scatterplot data={simpleData} />);
 
     const axes = wrapper.find('VictoryAxis');
     const xAxis = wrapper.find({ title: 'X Axis' });
@@ -47,7 +47,7 @@ describe('ScatterPlot', () => {
   });
 
   it('renders categories for x-axis ticks if dataKeyLabel is specified', () => {
-    const wrapper = shallow(<ScatterPlot data={simpleData} />);
+    const wrapper = shallow(<Scatterplot data={simpleData} />);
     expect(wrapper.find({ title: 'Scatter Plot' }).props().categories).to.eql({
       x: null,
     });
@@ -63,7 +63,7 @@ describe('ScatterPlot', () => {
       dataKey: 'amount',
       dataValue: 'rate',
     };
-    const wrapper = shallow(<ScatterPlot {...props} />);
+    const wrapper = shallow(<Scatterplot {...props} />);
     expect(wrapper.find({ title: 'Scatter Plot' }).props().data).to.eql([
       { dataKey: 100, dataValue: 1, series: 'first', size: 3 },
       { dataKey: 200, dataValue: 2, series: 'first', size: 3 },
@@ -78,7 +78,7 @@ describe('ScatterPlot', () => {
       dataKey: 'amount',
       dataValue: 'rate',
     };
-    const wrapper = shallow(<ScatterPlot {...props} />);
+    const wrapper = shallow(<Scatterplot {...props} />);
     expect(wrapper.find('.legend').length).to.eql(0);
 
     wrapper.setProps({ dataSeries: ['first', 'second'] });
@@ -93,7 +93,7 @@ describe('ScatterPlot', () => {
     const props = {
       data: simpleData,
     };
-    const wrapper = shallow(<ScatterPlot {...props} />);
+    const wrapper = shallow(<Scatterplot {...props} />);
     expect(wrapper.find({ title: 'Scatter Plot' }).props().data).to.eql([
       { dataKey: 100, dataValue: 1, series: undefined, size: 3 },
       { dataKey: 200, dataValue: 2, series: undefined, size: 3 },

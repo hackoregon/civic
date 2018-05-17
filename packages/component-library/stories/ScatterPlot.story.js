@@ -2,9 +2,9 @@ import React from 'react';
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from '@storybook/react';
 import { object, text, withKnobs } from '@storybook/addon-knobs';
-import { ScatterPlot } from '../src';
+import { Scatterplot } from '../src';
 
-const displayName = ScatterPlot.displayName || 'ScatterPlot';
+const displayName = Scatterplot.displayName || 'Scatterplot';
 const sampleData = [
   { x: 1, y: 2, series: 'cat' },
   { x: 2, y: 3, series: 'cat' },
@@ -27,7 +27,7 @@ const sampleYLabel = 'Rating';
 export default () =>
   storiesOf(displayName, module)
     .addDecorator(withKnobs)
-    .add('Simple usage', () => <ScatterPlot data={sampleData} />)
+    .add('Simple usage', () => <Scatterplot data={sampleData} />)
     .add('with props', () => {
       const data = object('Data', sampleData);
       const dataKey = text('dataKey', sampleXKey);
@@ -41,7 +41,7 @@ export default () =>
       const yLabel = text('yLabel', sampleYLabel);
 
       return (
-        <ScatterPlot
+        <Scatterplot
           data={data}
           dataKey={dataKey}
           dataSeries={dataSeries}
