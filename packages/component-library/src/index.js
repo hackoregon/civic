@@ -30,5 +30,7 @@ export { default as isClient } from './utils/isClient';
 export { default as CivicVictoryTheme } from "./VictoryTheme/VictoryThemeIndex";
 export { default as CollectionHero } from './Hero/CollectionHero'
 export { default as BaseMap } from './BaseMap/BaseMap';
+export { default as MapOverlay } from './MapOverlay/MapOverlay';
+export { default as HexOverlay } from './HexOverlay/HexOverlay';
 export { default as ScatterPlotMap } from './ScatterPlotMap/ScatterPlotMap';
 import './fonts.css';

@@ -13,7 +13,6 @@ const displayName = MapOverlay.displayName || 'MapOverlay';
 const mapboxToken = 'pk.eyJ1IjoidGhlbWVuZG96YWxpbmUiLCJhIjoiY2o1aXdoem1vMWtpNDJ3bnpqaGF1bnlhNSJ9.sjTrNKLW9daDBIGvP3_W0w';
 // TODO: best practice to use env vars from .env named REACT_APP_...
 // const MAPBOX_TOKEN = process.env.MapboxAccessToken; // eslint-disable-line
-// Get your mapbox token here: https://www.mapbox.com/help/how-access-tokens-work/#creating-and-managing-access-tokens
 
 const optionsStyle = {
   'Lè Shine': 'mapbox://styles/themendozaline/cjg6296ub04ot2sqv9izku3qq',

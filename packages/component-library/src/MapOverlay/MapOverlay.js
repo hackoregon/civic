@@ -17,7 +17,7 @@ const DATA_URL = 'https://raw.githubusercontent.com/uber-common/deck.gl-data/mas
 
 // const DATA_URL = 'https://raw.githubusercontent.com/hackoregon/transportation-systems/master/test.geojson'
 
-export default class MapOverlay extends Component {
+class MapOverlay extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -100,3 +100,5 @@ MapOverlay.propTypes = {
 MapOverlay.defaultProps = {
   mapboxStyle: "mapbox://styles/themendozaline/cjg6296ub04ot2sqv9izku3qq",
 };
+
+export default MapOverlay
