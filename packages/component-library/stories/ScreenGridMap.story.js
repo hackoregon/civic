@@ -25,8 +25,6 @@ const demoMap = () => {
   };
   const mapboxStyle = selectV2('Mapbox Style', mapStylesOptions, mapStylesOptions['Navigation Guidance Night']);
 
-  const position = f => f.geometry.coordinates;
-
   const opacityOptions = {
      range: true,
      min: 0,
@@ -53,9 +51,7 @@ const demoMap = () => {
   };
   const cellSize = number('Cell Size:', 10, cellSizeOptions);
 
-  const autoHighlight = boolean('Auto Highlight?', false);
-
-  const onLayerClick = info => action('Layer clicked:')(info.object);
+  const autoHighlight = boolean('Auto Highlight:', false);
 
   return (
     <BaseMap
@@ -64,12 +60,12 @@ const demoMap = () => {
     >
       <ScreenGridMap
         data={fireHydrants.features}
-        getPosition={position}
+        getPosition={f => f.geometry.coordinates}
         opacity={opacity}
         colorRange={colorSchemeArray}
         cellSizePixels={cellSize}
         autoHighlight={autoHighlight}
-        onLayerClick={onLayerClick}
+        onLayerClick={info => action('Layer clicked:', { depth: 2 })(info, info.object)}
       />
     </BaseMap>
   );
