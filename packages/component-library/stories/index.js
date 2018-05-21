@@ -19,7 +19,7 @@ import dropdownStory from './DropdownMenu.story';
 import headerStory from './Header.story';
 import Welcome from './Welcome';
 import baseMapStory from './BaseMap.story';
-
+import scatterPlotMapStory from './ScatterPlotMap.story';
 import { checkA11y } from '@storybook/addon-a11y';
 import '../assets/global.styles.css';
 
@@ -49,3 +49,4 @@ sankeyStory();
 sliderStory();
 dropdownStory();
 baseMapStory();
+scatterPlotMapStory();
