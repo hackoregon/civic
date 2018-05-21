@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import isClient from '../utils/isClient';
 
 var styles = {
-  height: '60px',
+  height: '80px',
   width: 'auto'
 };
 

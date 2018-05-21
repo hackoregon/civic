@@ -1,7 +1,7 @@
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _templateObject = _taggedTemplateLiteral(['\n  width: 100%;\n  min-width: 320px;\n'], ['\n  width: 100%;\n  min-width: 320px;\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  ', ';\n  position: fixed;\n  z-index: 100;\n'], ['\n  ', ';\n  position: fixed;\n  z-index: 100;\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n  ', ';\n  position: fixed;\n'], ['\n  ', ';\n  position: fixed;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n  background-color: ', ';\n  display: flex;\n  z-index: 1;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n  min-width: 320px;\n  margin: 0 auto;\n  padding: 1rem 0;\n'], ['\n  background-color: ', ';\n  display: flex;\n  z-index: 1;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n  min-width: 320px;\n  margin: 0 auto;\n  padding: 1rem 0;\n']),
     _templateObject4 = _taggedTemplateLiteral(['\n  ', ';\n  background-color: transparent;\n'], ['\n  ', ';\n  background-color: transparent;\n']),
     _templateObject5 = _taggedTemplateLiteral(['\n  margin: 0 30px 0 0;\n  display:block;\n\n  @media (max-width: 640px) {\n    &.active {\n      display:block;\n    }\n\n    &.inactive {\n      display:none;\n    }\n  }\n'], ['\n  margin: 0 30px 0 0;\n  display:block;\n\n  @media (max-width: 640px) {\n    &.active {\n      display:block;\n    }\n\n    &.inactive {\n      display:none;\n    }\n  }\n']),
@@ -68,15 +68,14 @@ var Header = function (_Component) {
           children = _props.children,
           menu = _props.menu,
           title = _props.title,
-          overlay = _props.overlay,
-          mainProjectColor = _props.mainProjectColor;
+          overlay = _props.overlay;
 
       return React.createElement(
         'div',
         { className: overlay ? overlayContainerClass : containerClass },
         React.createElement(
           'nav',
-          { className: overlay ? overlayHeaderClass : headerClass, style: { backgroundColor: mainProjectColor } },
+          { className: overlay ? overlayHeaderClass : headerClass },
           React.createElement(
             'div',
             { className: logoClass },
@@ -119,8 +118,7 @@ Header.propTypes = {
   menu: PropTypes.arrayOf(PropTypes.shape({})),
   title: PropTypes.string,
   children: PropTypes.node,
-  overlay: PropTypes.bool,
-  mainProjectColor: PropTypes.string
+  overlay: PropTypes.bool
 };
 
 export default Header;
