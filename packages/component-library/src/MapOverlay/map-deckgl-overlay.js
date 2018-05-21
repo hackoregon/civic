@@ -13,18 +13,18 @@ const LIGHT_SETTINGS = {
 export default class DeckGLOverlay extends Component {
   static get defaultViewport() {
     return {
-      latitude: 49.254,
-      longitude: -123.13,
+      longitude: -122.6765,  // portland
+      latitude: 45.5231,     // portland
       zoom: 11,
-      maxZoom: 16,
+      minZoom: 1,
+      maxZoom: 20,
       pitch: 45,
-      bearing: 0
+      bearing: 0,
     };
   }
 
   render() {
-    const {viewport, data, colorScale} = this.props;
-
+    const {viewport, data, colorScale, opacity, filled, wireframe, extruded, elevation } = this.props;
     if (!data) {
       return null;
     }
@@ -32,13 +32,13 @@ export default class DeckGLOverlay extends Component {
     const layer = new GeoJsonLayer({
       id: 'geojson',
       data,
-      opacity: 0.8,
+      opacity: opacity,
       stroked: false,
-      filled: true,
-      extruded: true,
-      wireframe: true,
+      filled: filled,
+      extruded: extruded,
+      wireframe: wireframe,
       fp64: true,
-      getElevation: f => Math.sqrt(f.properties.valuePerSqm) * 10,
+      getElevation: f => Math.sqrt(f.properties.valuePerSqm) * elevation,
       getFillColor: f => colorScale(f.properties.growth),
       getLineColor: f => [255, 255, 255],
       lightSettings: LIGHT_SETTINGS,
