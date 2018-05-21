@@ -1,14 +1,13 @@
-import React from 'react';
 /* eslint-disable import/no-extraneous-dependencies */
+import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { withKnobs, selectV2 } from '@storybook/addon-knobs';
+import { withKnobs, boolean, number, selectV2 } from '@storybook/addon-knobs';
 import { MapOverlay } from '../src';
 import DeckGLOverlay from '../src/MapOverlay/map-deckgl-overlay';
 import MapGL from 'react-map-gl';
 import { checkA11y } from '@storybook/addon-a11y';
 
 const displayName = MapOverlay.displayName || 'MapOverlay';
-
 // hard coded for ease for now:
 const mapboxToken = 'pk.eyJ1IjoidGhlbWVuZG96YWxpbmUiLCJhIjoiY2o1aXdoem1vMWtpNDJ3bnpqaGF1bnlhNSJ9.sjTrNKLW9daDBIGvP3_W0w';
 // TODO: best practice to use env vars from .env named REACT_APP_...
@@ -24,17 +23,43 @@ const optionsStyle = {
   'Scenic': 'mapbox://styles/themendozaline/cj8rrlv4tbtgs2rqnyhckuqva',
 }
 
-const demoMap = () => { optionsStyle
+const opacityOptions = {
+   range: true,
+   min: 0,
+   max: 1,
+   step: 0.05,
+};
+
+const elevationOptions = {
+   range: true,
+   min: 1,
+   max: 100,
+   step: 1,
+};
+
+const demoMap = () => {
+  const opacity = number('Opacity:', 0.8, opacityOptions);
+  const elevation = number('Elevation:', 10, elevationOptions);
+  const filled = boolean('Filled:', true);
+  const wireframe = boolean('Wireframe:', true);
+  const extruded = boolean('Extruded:', true);
+
   const mapboxStyle = selectV2('Mapbox Style', optionsStyle, optionsStyle['Label Maker']);
+
   return (
     <MapOverlay
       mapboxToken={mapboxToken}
       mapboxStyle={mapboxStyle}
+      opacity={opacity}
+      filled={filled}
+      wireframe={wireframe}
+      extruded={extruded}
+      elevation={elevation}
     />
   );
 };
 
-export default () => storiesOf(displayName)
+export default () => storiesOf(displayName, module)
   .addDecorator(checkA11y)
   .addDecorator(withKnobs)
   .add('Simple usage',(demoMap))
