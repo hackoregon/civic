@@ -11,7 +11,7 @@ import {
 import { PieChart } from '../src';
 import { colors, getRandomValuesArray, objectRandomizer } from './shared';
 
-export default () => storiesOf('Pie/Donut visualization').addDecorator(withKnobs)
+export default () => storiesOf('Pie/Donut visualization', module).addDecorator(withKnobs)
 
 .add(
   'simple usage',

@@ -34,7 +34,7 @@ const demoMap = () => { optionsStyle
   );
 };
 
-export default () => storiesOf(displayName)
+export default () => storiesOf(displayName, module)
   .addDecorator(checkA11y)
   .addDecorator(withKnobs)
   .add('Simple usage',(demoMap))
