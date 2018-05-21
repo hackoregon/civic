@@ -3,7 +3,8 @@ import MapGL from 'react-map-gl';
 import { css } from 'emotion';
 import './mapbox-gl.css';
 import DeckGLOverlay from './map-deckgl-overlay.js';
-// import './test.geojson'
+// TODO: use  Use the latest available v15.* prop-types package
+// import PropTypes from 'prop-types'
 
 const mapWrapper = css`
   margin: auto;
@@ -12,10 +13,7 @@ const mapWrapper = css`
 
 const colorScale = r => [r * 255, 140, 200 * (1 - r)];
 
-// Source data GeoJSON (currently only Vancouver BC)
 const DATA_URL = 'https://raw.githubusercontent.com/uber-common/deck.gl-data/master/examples/geojson/vancouver-blocks.json'; // eslint-disable-line
-
-// const DATA_URL = 'https://raw.githubusercontent.com/hackoregon/transportation-systems/master/test.geojson'
 
 class MapOverlay extends Component {
   constructor(props) {
@@ -25,15 +23,10 @@ class MapOverlay extends Component {
         ...DeckGLOverlay.defaultViewport,
         width: window.innerWidth > 900 ? 898 : window.innerWidth,
         height: 400,
-      // portland
-        // longitude: -122.6765,
-        // latitude: 45.5231,
-        zoom: 11,
-        minZoom: 1,
-        maxZoom: 20,
-        pitch: 0,
+        pitch: 45,
         bearing: 0,
-        radius: 10,
+        latitude: 49.254,   // vancouver bc
+        longitude: -123.13, // vancouver bc
       },
       data: null
     };
@@ -68,9 +61,8 @@ class MapOverlay extends Component {
   }
 
   render() {
-    // const { viewport } = this.state;
     const {viewport, data} = this.state;
-    const { mapboxStyle, mapboxToken } = this.props;
+    const { mapboxStyle, mapboxToken, opacity, filled, wireframe, extruded, elevation } = this.props;
 
     return (
       <div className={mapWrapper}>
@@ -85,7 +77,13 @@ class MapOverlay extends Component {
           <DeckGLOverlay
             viewport={viewport}
             data={data}
-            colorScale={colorScale} />
+            colorScale={colorScale}
+            opacity={opacity}
+            filled={filled}
+            wireframe={wireframe}
+            extruded={extruded}
+            elevation={elevation}
+          />
         </MapGL>
       </div>
     );
@@ -95,6 +93,10 @@ class MapOverlay extends Component {
 MapOverlay.propTypes = {
   mapboxStyle: PropTypes.string,
   mapboxToken: PropTypes.string.isRequired,
+  opacity: PropTypes.number,
+  elevation: PropTypes.number,
+  filled: PropTypes.bool,
+  extruded: PropTypes.bool,
 };
 
 MapOverlay.defaultProps = {
