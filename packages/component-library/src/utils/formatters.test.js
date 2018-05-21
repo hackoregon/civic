@@ -1,6 +1,6 @@
 import { numeric, percentage, dollars } from './formatters';
 
-describe.only('formatters', () => {
+describe('formatters', () => {
   it('should format numbers correctly', () => {
     expect(numeric(0.1)).to.eql('0');
     expect(numeric(0.5)).to.eql('1');
