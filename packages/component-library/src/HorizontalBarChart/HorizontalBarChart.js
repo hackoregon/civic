@@ -7,6 +7,7 @@ import {
 } from 'victory';
 
 import ChartContainer from '../ChartContainer';
+import { dollars, numeric } from '../utils/formatters';
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
 
 const chartEvents = [
@@ -56,7 +57,7 @@ const HorizontalBarChart = ({ data, dataKey, dataValue, dataKeyLabel, title, sub
       />
       <VictoryAxis
         // tickFormat specifies how ticks should be displayed
-        tickFormat={x => (`$${x / 1000}k`)}
+        tickFormat={x => dollars(numeric(x))}
       />
       <VictoryBar
         horizontal
