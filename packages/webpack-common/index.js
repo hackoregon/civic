@@ -66,7 +66,15 @@ module.exports = {
         ]),
       ]),
       env('production', [
-        uglify(),
+        uglify({
+          parallel: true,
+          cache: true,
+          uglifyOptions: {
+            compress: {
+              warnings: false,
+            },
+          },
+        }),
         addPlugins([
           new webpack.LoaderOptionsPlugin({ minimize: true }),
         ]),
