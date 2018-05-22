@@ -122,6 +122,6 @@
     "url-loader": "^0.5.7",
     "version-bump-prompt": "^3.1.0",
     "webpack": "^2.5.1",
-    "webpack-blocks": "^1.0.0-rc.2"
+    "webpack-blocks": "^1.0.0"
   }
 }
