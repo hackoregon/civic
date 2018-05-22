@@ -24,10 +24,11 @@ export default class DeckGLOverlay extends Component {
   }
 
   render() {
-    const {viewport, data, colorScale, opacity, filled, wireframe, extruded, elevation } = this.props;
+    const {viewport, data, colorScale, opacity, filled, wireframe, extruded, elevation, onLayerClick, getPosition } = this.props;
     if (!data) {
       return null;
     }
+    // console.log('onClick', onLayerClick);
 
     const layer = new GeoJsonLayer({
       id: 'geojson',
@@ -43,7 +44,11 @@ export default class DeckGLOverlay extends Component {
       getLineColor: f => [255, 255, 255],
       lightSettings: LIGHT_SETTINGS,
       pickable: Boolean(this.props.onHover),
-      onHover: this.props.onHover
+      onHover: this.props.onHover,
+      getPosition: getPosition,
+      onClick: onLayerClick,
+      onHover: ({object}) => setTooltip(object.properties.name || object.properties.station)
+
     });
 
     return <DeckGL {...viewport} layers={[layer]} />;

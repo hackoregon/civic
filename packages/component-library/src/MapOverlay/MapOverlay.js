@@ -1,10 +1,9 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import MapGL from 'react-map-gl';
 import { css } from 'emotion';
 import './mapbox-gl.css';
 import DeckGLOverlay from './map-deckgl-overlay.js';
-// TODO: use  Use the latest available v15.* prop-types package
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 const mapWrapper = css`
   margin: auto;
@@ -62,10 +61,10 @@ class MapOverlay extends Component {
 
   render() {
     const {viewport, data} = this.state;
-    const { mapboxStyle, mapboxToken, opacity, filled, wireframe, extruded, elevation } = this.props;
+    const { mapboxStyle, mapboxToken, opacity, filled, wireframe, extruded, elevation, onLayerClick, getPosition } = this.props;
 
     return (
-      <div className={mapWrapper}>
+      /*<div className={mapWrapper}>
         <MapGL
           className={'MapGL'}
           {...viewport}
@@ -73,7 +72,7 @@ class MapOverlay extends Component {
              onViewportChange={this.onViewportChange.bind(this)}
              mapboxApiAccessToken={mapboxToken}
              onViewportChange={ viewport => this.onViewportChange(viewport)}
-        >
+        >*/
           <DeckGLOverlay
             viewport={viewport}
             data={data}
@@ -83,9 +82,11 @@ class MapOverlay extends Component {
             wireframe={wireframe}
             extruded={extruded}
             elevation={elevation}
+            getPosition={getPosition}
+            onLayerClick={onLayerClick}
           />
-        </MapGL>
-      </div>
+       /* </MapGL>
+      </div>*/
     );
   };
 };

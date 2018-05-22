@@ -4,7 +4,9 @@ var _templateObject = _taggedTemplateLiteral(['\n  margin: 0 auto;\n  max-width:
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+
 import { VictoryAxis, VictoryBar, VictoryChart } from 'victory';
 
 import { assign } from "lodash";

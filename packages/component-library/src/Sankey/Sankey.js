@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { sankey } from 'd3-sankey';
 import { format } from 'd3-format';
 import { clone, max } from 'ramda';

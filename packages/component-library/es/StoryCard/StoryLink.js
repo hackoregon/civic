@@ -2,7 +2,8 @@ var _templateObject = _taggedTemplateLiteral(['\n  border-bottom: 2px solid ', '
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { css } from 'emotion';
 

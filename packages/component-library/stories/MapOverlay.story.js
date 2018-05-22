@@ -2,8 +2,10 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, boolean, number, selectV2 } from '@storybook/addon-knobs';
+import { action } from '@storybook/addon-actions';
 import { MapOverlay } from '../src';
 import DeckGLOverlay from '../src/MapOverlay/map-deckgl-overlay';
+import { BaseMap } from '../src';
 import MapGL from 'react-map-gl';
 import { checkA11y } from '@storybook/addon-a11y';
 
@@ -47,16 +49,23 @@ const demoMap = () => {
   const mapboxStyle = selectV2('Mapbox Style', optionsStyle, optionsStyle['Label Maker']);
 
   return (
-    <MapOverlay
+    <BaseMap
       mapboxToken={mapboxToken}
       mapboxStyle={mapboxStyle}
-      opacity={opacity}
-      filled={filled}
-      wireframe={wireframe}
-      extruded={extruded}
-      elevation={elevation}
-    />
-  );
+    >
+      <MapOverlay
+        mapboxToken={mapboxToken}
+        mapboxStyle={mapboxStyle}
+        opacity={opacity}
+        filled={filled}
+        wireframe={wireframe}
+        extruded={extruded}
+        elevation={elevation}
+        getPosition={f => f.geometry.coordinates}
+        onLayerClick={info => action('Layer clicked:', { depth: 2 })(info)}
+      />
+    </BaseMap>
+);
 };
 
 export default () => storiesOf(displayName, module)

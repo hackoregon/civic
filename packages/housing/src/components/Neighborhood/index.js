@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react'; 
+import PropTypes from 'prop-types';
 import { GeoJSON, LayerGroup } from 'react-leaflet';
 import { crossHatch } from '../CrossHatch';
 import { HOUSING_TEAM_PRIMARY_COLOR } from '../../utils/data-constants';
