@@ -1,11 +1,17 @@
 import React, { PropTypes, Component } from 'react';
-import MapGL from 'react-map-gl';
+import MapGL, { NavigationControl } from 'react-map-gl';
 import { css } from 'emotion';
 import './mapbox-gl.css';
 
 const mapWrapper = css`
-  margin: auto;
-  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2.5%;
+`;
+
+const navControl = css`
+  position: absolute;
+  right: 0;
+  z-index: 9;
 `;
 
 export default class BaseMap extends Component {
@@ -13,13 +19,13 @@ export default class BaseMap extends Component {
     super(props);
     this.state = {
       viewport:{
-        width: window.innerWidth > 900 ? 898 : window.innerWidth,
-        height: 400,
+        width: window.innerWidth * 0.95,
+        height: 500,
         longitude: -122.6765,
         latitude: 45.5231,
-        zoom: 10,
-        minZoom: 1,
-        maxZoom: 20,
+        zoom: 9.5,
+        minZoom: 6,
+        maxZoom: 16,
         pitch: 0,
         bearing: 0,
       },
@@ -45,8 +51,8 @@ export default class BaseMap extends Component {
 
   resize() {
     this.onViewportChange({
-      width: window.innerWidth > 900 ? 898 : window.innerWidth,
-      height: 450,
+      width: window.innerWidth * 0.95,
+      height: 500,
     });
   }
 
@@ -56,6 +62,7 @@ export default class BaseMap extends Component {
     const {
       mapboxStyle,
       mapboxToken,
+      children,
     } = this.props;
 
     return (
@@ -65,16 +72,30 @@ export default class BaseMap extends Component {
           {...viewport}
           mapStyle={mapboxStyle}
           mapboxApiAccessToken={mapboxToken}
-          onViewportChange={ viewport => this.onViewportChange(viewport)}
-        />
+          onViewportChange={viewport => this.onViewportChange(viewport)}
+        >
+          <div className={navControl}>
+            <NavigationControl
+              onViewportChange={viewport => this.onViewportChange(viewport)}
+            />
+          </div>
+          {
+            children ?
+            React.cloneElement(children, {
+              viewport: viewport,
+            }) :
+            null
+          }
+        </MapGL>
       </div>
     );
-  };
-};
+  }
+}
 
 BaseMap.propTypes = {
-  mapboxStyle: PropTypes.string,
   mapboxToken: PropTypes.string.isRequired,
+  mapboxStyle: PropTypes.string,
+  children: PropTypes.node,
 };
 
 BaseMap.defaultProps = {
