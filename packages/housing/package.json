@@ -97,7 +97,7 @@
     "sinon-chai": "^2.8.0",
     "version-bump-prompt": "^3.1.0",
     "webpack": "^2.5.1",
-    "webpack-blocks": "^1.0.0-rc.2",
+    "webpack-blocks": "^1.0.0",
     "webpack-blocks-utils": "2.0.0-alpha.4"
   }
 }
