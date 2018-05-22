@@ -118,7 +118,7 @@ class Nav extends Component {
 
   handleClick = (name, menu, e) => {
     e.preventDefault();
-    const items = !this.state.menuActive ? menu : [];
+    const items = menu;
 
     this.setState(() => ({ menuActive: !this.state.menuActive, items }));
   }
