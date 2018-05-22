@@ -1,10 +1,9 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import MapGL from 'react-map-gl';
 import { css } from 'emotion';
 import './mapbox-gl.css';
 import DeckGLOverlay from './map-deckgl-overlay.js';
-// TODO: use  Use the latest available v15.* prop-types package
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 const mapWrapper = css`
   margin: auto;

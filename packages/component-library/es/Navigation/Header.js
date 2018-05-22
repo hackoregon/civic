@@ -17,13 +17,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { css } from 'emotion';
 import Nav from './Nav';
 import Logo from '../Logo/LogoAnimated';
 import Icon from '../Icon/Icon';
 import { ICONS } from '../styleConstants';
+import PropTypes from 'prop-types';
 
 var primaryColor = 'rgb(34, 15, 37)';
 
