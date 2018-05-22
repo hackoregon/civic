@@ -31,5 +31,4 @@ export { default as CivicVictoryTheme } from "./VictoryTheme/VictoryThemeIndex";
 export { default as CollectionHero } from './Hero/CollectionHero'
 export { default as BaseMap } from './BaseMap/BaseMap';
 export { default as ScatterPlotMap } from './ScatterPlotMap/ScatterPlotMap';
-
 import './fonts.css';

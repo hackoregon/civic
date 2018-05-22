@@ -7,10 +7,9 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 import React, { PropTypes } from 'react';
 import { VictoryAxis, VictoryBar, VictoryChart } from 'victory';
 
-import { VictorySharedEvents, VictoryContainer, VictoryTheme, VictoryLabel } from "victory-core";
-import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
 import { assign } from "lodash";
 import { css } from 'emotion';
+import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
 
 var barchartWrapper = css(_templateObject);
 
@@ -18,12 +17,11 @@ var titleStyle = css(_templateObject2);
 
 var subtitleStyle = css(_templateObject3);
 
-var HorizontalBarChart = function HorizontalBarChart(_ref) {
+var BarChart = function BarChart(_ref) {
   var data = _ref.data,
       dataKey = _ref.dataKey,
       dataValue = _ref.dataValue,
       dataKeyLabel = _ref.dataKeyLabel,
-      dataValueLabel = _ref.dataValueLabel,
       title = _ref.title,
       subtitle = _ref.subtitle;
   return React.createElement(
@@ -76,14 +74,13 @@ var HorizontalBarChart = function HorizontalBarChart(_ref) {
   );
 };
 
-HorizontalBarChart.propTypes = {
+BarChart.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
   dataKey: PropTypes.string.isRequired,
   dataValue: PropTypes.string.isRequired,
   dataKeyLabel: PropTypes.string,
-  dataValueLabel: PropTypes.string,
   title: PropTypes.string,
   subtitle: PropTypes.string
 };
 
-export default HorizontalBarChart;
+export default BarChart;
