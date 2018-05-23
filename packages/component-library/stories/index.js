@@ -19,6 +19,8 @@ import headerStory from './Header.story';
 import Welcome from './Welcome';
 import baseMapStory from './BaseMap.story';
 import scatterPlotMapStory from './ScatterPlotMap.story';
+import screenGridMap from './ScreenGridMap.story';
+
 import { checkA11y } from '@storybook/addon-a11y';
 import '../assets/global.styles.css';
 
@@ -48,3 +50,4 @@ sliderStory();
 dropdownStory();
 baseMapStory();
 scatterPlotMapStory();
+screenGridMap();
