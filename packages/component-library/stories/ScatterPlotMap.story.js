@@ -1,7 +1,7 @@
 import React from 'react';
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from '@storybook/react';
-import { withKnobs, number, selectV2, boolean, color } from '@storybook/addon-knobs';
+import { withKnobs, number, selectV2, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { checkA11y } from '@storybook/addon-a11y';
 import { BaseMap } from '../src';
@@ -25,13 +25,6 @@ const demoMap = () => {
   };
   const mapboxStyle = selectV2('Mapbox Style', mapStylesOptions, mapStylesOptions['Lè Shine']);
 
-  const getFillColor = f => f.properties.TYPE === 'MAX' && f.properties.LINE === 'R' ? [255,0,0] :
-                            f.properties.TYPE === 'MAX' && f.properties.LINE === 'B' ? [0,0,255] :
-                            f.properties.TYPE === 'MAX' && f.properties.LINE === 'G' ? [0,255,0] :
-                            f.properties.TYPE === 'MAX' && f.properties.LINE === 'Y' ? [255,215,0] :
-                            f.properties.TYPE === 'MAX' && f.properties.LINE === 'O' ? [255,69,0] :
-                            [148,0,211];
-
   const opacityOptions = {
      range: true,
      min: 0,
@@ -40,13 +33,18 @@ const demoMap = () => {
   };
   const opacity = number('Opacity:', 0.1, opacityOptions);
 
-  const radius = f => Math.floor(Math.random() * (500 - 50 + 1) + 50);
+  const getCircleColor = f => f.properties.TYPE === 'MAX' && f.properties.LINE === 'R' ? [255,0,0] :
+    f.properties.TYPE === 'MAX' && f.properties.LINE === 'B' ? [0,0,255] :
+    f.properties.TYPE === 'MAX' && f.properties.LINE === 'G' ? [0,255,0] :
+    f.properties.TYPE === 'MAX' && f.properties.LINE === 'Y' ? [255,215,0] :
+    f.properties.TYPE === 'MAX' && f.properties.LINE === 'O' ? [255,69,0] :
+    [148,0,211];
 
   const radiusScaleOptions = {
      range: true,
      min: 0,
-     max: 10,
-     step: 0.25,
+     max: 15,
+     step: 0.5,
   };
   const radiusScale = number('Radius Scale:', 1, radiusScaleOptions);
 
@@ -60,7 +58,7 @@ const demoMap = () => {
   };
   const strokeWidth = number('Stroke Width:', 1, strokeWidthOptions);
 
-  const autoHighlight = boolean('Auto Highlight?', false);
+  const autoHighlight = boolean('Auto Highlight:', false);
 
   return (
     <BaseMap
@@ -70,14 +68,14 @@ const demoMap = () => {
       <ScatterPlotMap
         data={trimet.features}
         getPosition={f => f.geometry.coordinates}
-        getFillColor={getFillColor}
         opacity={opacity}
-        getRadius={radius}
+        getColor={getCircleColor}
+        getRadius={f => Math.floor(Math.random() * (250 - 50 + 1) + 50)}
         radiusScale={radiusScale}
         outline={outline}
         strokeWidth={strokeWidth}
         autoHighlight={autoHighlight}
-        onLayerClick={info => action('Layer clicked:', { depth: 2 })(info)}
+        onLayerClick={info => action('Layer clicked:', { depth: 2 })(info, info.object)}
       />
     </BaseMap>
   );
@@ -86,7 +84,6 @@ const demoMap = () => {
 export default () => storiesOf(displayName, module)
   .addDecorator(withKnobs)
   .addDecorator(checkA11y)
-  .add(
-    'Simple usage',
+  .add('Simple usage',
     (demoMap)
   );
