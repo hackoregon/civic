@@ -32,5 +32,6 @@ export { default as CollectionHero } from './Hero/CollectionHero'
 export { default as BaseMap } from './BaseMap/BaseMap';
 export { default as ScatterPlotMap } from './ScatterPlotMap/ScatterPlotMap';
 export { default as PullQuote } from './PullQuote/PullQuote';
+export { default as ScreenGridMap } from './ScreenGridMap/ScreenGridMap';
 
 import './fonts.css';
