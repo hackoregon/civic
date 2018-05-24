@@ -6,6 +6,7 @@ import { MapOverlay } from '../src';
 import DeckGLOverlay from '../src/MapOverlay/map-deckgl-overlay';
 import MapGL from 'react-map-gl';
 import { checkA11y } from '@storybook/addon-a11y';
+// import mapoverlay from '../src/MapOverlay/mapoverlay.json';
 
 const displayName = MapOverlay.displayName || 'MapOverlay';
 // hard coded for ease for now:
@@ -55,6 +56,7 @@ const demoMap = () => {
       wireframe={wireframe}
       extruded={extruded}
       elevation={elevation}
+      // data={mapoverlay}
     />
   );
 };
