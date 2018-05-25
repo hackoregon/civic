@@ -20,6 +20,7 @@ import Welcome from './Welcome';
 import baseMapStory from './BaseMap.story';
 import scatterPlotMapStory from './ScatterPlotMap.story';
 import screenGridMap from './ScreenGridMap.story';
+import pathMap from './PathMap.story';
 
 import { checkA11y } from '@storybook/addon-a11y';
 import '../assets/global.styles.css';
@@ -51,3 +52,4 @@ dropdownStory();
 baseMapStory();
 scatterPlotMapStory();
 screenGridMap();
+pathMap();
