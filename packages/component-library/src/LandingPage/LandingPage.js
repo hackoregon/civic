@@ -9,6 +9,46 @@ const buttonClass = css`
   flex-wrap: nowrap;
 `;
 
+const cardsWrapper = css`
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 48px;
+  margin: 100px 0px;
+`;
+const card = css`
+  flex: 0 0 auto;
+  width: 400px;
+  border: 2px solid black;
+  box-shadow: 0px 6px 40px 40px pink;
+  padding: 24px;
+  box-sizing: border-box;
+`;
+
+const searchForm = css`
+  display: block;
+  width: 100%;
+  margin: 30px auto;
+  max-width: 420px;
+`;
+
+const searchInput = css`
+  width: 100%;
+  padding: 10px 20px;
+  border-radius: 100px;
+  border: 2px solid black;
+  font-size: 24px;
+`;
+
+const searchTitle = css`
+  text-align: center;
+  font-size: 34px;
+`;
+const logoWrapper = css`
+  position: relative;
+  margin: 70px auto;
+  width: 250px;
+`;
+
 class LandingPage extends React.Component {
 
   constructor(props){
@@ -32,7 +72,10 @@ class LandingPage extends React.Component {
   render(){
     return (
       <div className="app-container">
-        <h3>Look for Civic data in your area</h3>
+        <div className={logoWrapper}>
+          <img src={require(`../../assets/civic-logo.svg`)} />
+        </div>
+        <h3 className={searchTitle}>Look for Civic data in your area</h3>
         <SearchBar handleSubmit={this.handleSearch} />
         <RepoList repos={this.state.repos}/>
       </div>
@@ -54,10 +97,10 @@ class SearchBar extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form className={searchForm} onSubmit={this.handleSubmit}>
         <input
           name="text"
-          className="form-control"
+          className={searchInput}
           type="text"
           placeholder="Enter Zip Code"
         />
@@ -68,13 +111,35 @@ class SearchBar extends React.Component {
 
 
 class RepoList extends React.Component {
-
   render(){
+
+    function slugify(text)
+      {
+        return text.toString().toLowerCase()
+          .replace(/\s+/g, '-')           // Replace spaces with -
+          .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+          .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+          .replace(/^-+/, '')             // Trim - from start of text
+          .replace(/-+$/, '');            // Trim - from end of text
+      }
+
+    const cityImage = this.props.repos.city && <img src={require(`../../assets/cities/${slugify(this.props.repos.city)}.png`)} width="200" />
+
     return (
-      <div className="list-group">
-        <h1>{this.props.repos.country}</h1>
-        <h1>{this.props.repos.state}</h1>
-        <h1>{this.props.repos.city}</h1>
+      <div>
+        {this.props.repos.country &&
+        <div className={cardsWrapper}>
+          <div className={card}>
+            <h1>{this.props.repos.country}</h1>
+          </div>
+          <div className={card}>
+            <h1>{this.props.repos.state}</h1>
+          </div>
+          <div className={card}>
+            <h1>{this.props.repos.city}</h1>
+            { cityImage }
+          </div>
+        </div>}
       </div>
     )
   }
