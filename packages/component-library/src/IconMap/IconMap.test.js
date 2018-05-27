@@ -5,14 +5,18 @@ import IconMap from './IconMap';
 describe('IconMap', () => {
   const data = [
     {
+      "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [0, 0],
+        "coordinates": [
+          0,
+          0
+        ]
       },
-      "property": {
-        "name": "Null Island",
-      },
-    },
+      "properties": {
+        "name": "Null Island"
+      }
+    }
   ];
 
   const defaultProps = { data };

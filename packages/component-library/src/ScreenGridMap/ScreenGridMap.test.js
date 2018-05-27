@@ -5,14 +5,18 @@ import ScreenGridMap from './ScreenGridMap';
 describe('ScreenGridMap', () => {
   const data = [
     {
+      "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [0, 0],
+        "coordinates": [
+          0,
+          0
+        ]
       },
-      "property": {
-        "name": "Null Island",
-      },
-    },
+      "properties": {
+        "name": "Null Island"
+      }
+    }
   ];
 
   const defaultProps = { data };

@@ -5,14 +5,24 @@ import PathMap from './PathMap';
 describe('PathMap', () => {
   const data = [
     {
+      "type": "Feature",
       "geometry": {
-        "type": "Point",
-        "coordinates": [0, 0],
+        "type": "LineString",
+        "coordinates": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            1
+          ]
+        ]
       },
-      "property": {
-        "name": "Null Island",
-      },
-    },
+      "properties": {
+        "name": "Null Island"
+      }
+    }
   ];
 
   const defaultProps = { data };
