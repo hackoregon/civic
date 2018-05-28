@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import ScatterPlotMap from './ScatterPlotMap';
+import IconMap from './IconMap';
 
-describe('ScatterPlotMap', () => {
+describe('IconMap', () => {
   const data = [
     {
       "type": "Feature",
@@ -22,15 +22,15 @@ describe('ScatterPlotMap', () => {
   const defaultProps = { data };
 
   it('should render a DeckGL component', () => {
-    const wrapper = shallow(<ScatterPlotMap {...defaultProps} />);
+    const wrapper = shallow(<IconMap {...defaultProps} />);
 
     expect(wrapper.find('.DeckGL')).to.have.length(1);
   });
 
-  it('should render child ScatterPlotMap component', () => {
-    const wrapper = shallow(<ScatterPlotMap {...defaultProps} />);
+  it('should render child IconMap component', () => {
+    const wrapper = shallow(<IconMap {...defaultProps} />);
 
     expect(wrapper.find('.DeckGL').children()).to.have.length(1);
-    expect(wrapper.find('.ScatterPlotMap')).to.have.length(1);
+    expect(wrapper.find('.IconMap')).to.have.length(1);
   });
 });
