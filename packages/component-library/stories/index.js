@@ -21,6 +21,8 @@ import Welcome from './Welcome';
 import baseMapStory from './BaseMap.story';
 import scatterPlotMapStory from './ScatterPlotMap.story';
 import screenGridMap from './ScreenGridMap.story';
+import packageSelectorBoxStory from './PackageSelectorBox.story';
+import selectMenuStory from './Select.story';
 
 import { checkA11y } from '@storybook/addon-a11y';
 import '../assets/global.styles.css';
@@ -53,3 +55,5 @@ dropdownStory();
 baseMapStory();
 scatterPlotMapStory();
 screenGridMap();
+packageSelectorBoxStory();
+selectMenuStory();
