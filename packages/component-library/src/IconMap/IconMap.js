@@ -15,7 +15,10 @@ const IconMap = (props) => {
     getColor,
     autoHighlight,
     onLayerClick,
+    visible,
   } = props;
+
+  const size = getSize(viewport.zoom);
 
   return (
     <div>
@@ -34,10 +37,12 @@ const IconMap = (props) => {
           sizeScale={iconSizeScale}
           getPosition={getPosition}
           getIcon={getIcon}
-          getSize={getSize}
+          getSize={f => size}
           getColor={getColor}
           autoHighlight={autoHighlight}
           onClick={onLayerClick}
+          visible={visible}
+          updateTriggers={{getSize: size}}
         />
       </DeckGL>
     </div>
@@ -57,6 +62,7 @@ IconMap.propTypes = {
   getColor: PropTypes.func,
   autoHighlight: PropTypes.bool,
   onClick: PropTypes.func,
+  visible: PropTypes.bool,
 };
 
 IconMap.defaultProps = {
@@ -65,6 +71,7 @@ IconMap.defaultProps = {
   getPosition: d => d.geometry.coordinates,
   getSize: d => 10,
   getColor: d => [0,0,0],
+  visible: true,
 };
 
 export default IconMap;

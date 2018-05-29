@@ -68,9 +68,9 @@ const demoMap = () => {
 
   const iconSizeScaleOptions = {
      range: true,
-     min: 1,
-     max: 15,
-     step: 1,
+     min: 0.5,
+     max: 10,
+     step: 0.5,
   };
   const iconSizeScale = number('Icon Size Scale:', 1, iconSizeScaleOptions);
 
@@ -78,7 +78,16 @@ const demoMap = () => {
 
   const getIcon = d => d.properties.ICON;
 
-  const getSize = d => 100;
+  const getSize = zoom => zoom > 15.5 ? 300 :
+    zoom > 14.5 ? 250 :
+    zoom > 13.5 ? 200 :
+    zoom > 12.5 ? 150 :
+    zoom > 11.5 ? 125 :
+    zoom > 10.5 ? 100 :
+    zoom > 9.5 ? 75 :
+    zoom > 8.5 ? 50 :
+    zoom > 7.5 ? 25 :
+    10;
 
   const getColor = d => d.properties.ICON === 'Hospital' ? [30,144,255] :
     d.properties.ICON === 'School' ? [255,165,0] :
