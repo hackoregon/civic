@@ -15,6 +15,10 @@ const menu = [
       { name: 'Transportation Systems', path: '/transportation' },
     ],
   },
+  {
+    name: 'Sandbox',
+    path: '/sandbox',
+  },
 ];
 
 const isRoot = ({ pathname }) => pathname === '/';
