@@ -6,7 +6,7 @@ import { MapOverlay } from '../src';
 import DeckGLOverlay from '../src/MapOverlay/map-deckgl-overlay';
 import MapGL from 'react-map-gl';
 import { checkA11y } from '@storybook/addon-a11y';
-// import mapoverlay from '../src/MapOverlay/mapoverlay.json';
+import mapoverlay from '../src/MapOverlay/mapoverlay.json';
 
 const displayName = MapOverlay.displayName || 'MapOverlay';
 // hard coded for ease for now:
@@ -38,6 +38,14 @@ const elevationOptions = {
    step: 1,
 };
 
+// const DATA_URL = 'https://raw.githubusercontent.com/uber-common/deck.gl-data/master/examples/geojson/vancouver-blocks.json'; // eslint-disable-line
+//
+// fetch(DATA_URL)
+//   .then(resp => resp.json())
+//   .then(data => this.setState({data}));
+// this.onViewportChange = this.onViewportChange.bind(this);
+// this.resize = this.resize.bind(this);
+
 const demoMap = () => {
   const opacity = number('Opacity:', 0.8, opacityOptions);
   const elevation = number('Elevation:', 10, elevationOptions);
@@ -56,7 +64,7 @@ const demoMap = () => {
       wireframe={wireframe}
       extruded={extruded}
       elevation={elevation}
-      // data={mapoverlay}
+      data={mapoverlay}
     />
   );
 };
