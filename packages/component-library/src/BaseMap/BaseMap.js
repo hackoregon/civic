@@ -22,12 +22,12 @@ export default class BaseMap extends Component {
       viewport:{
         width: window.innerWidth * 0.95,
         height: 500,
-        longitude: -122.6765,
-        latitude: 45.5231,
-        zoom: 9.5,
+        longitude: props.initialLongitude || -122.6765,
+        latitude: props.initialLatitude || 45.5231,
+        zoom: props.initialZoom || 9.5,
         minZoom: 6,
         maxZoom: 16,
-        pitch: 0,
+        pitch: props.initialPitch || 0,
         bearing: 0,
       },
     };
@@ -66,10 +66,16 @@ export default class BaseMap extends Component {
       children,
     } = this.props;
 
+    const childrenLayers = React.Children.map(children, child => {
+      return React.cloneElement(child, {
+        viewport: viewport,
+      });
+    });
+
     return (
       <div className={mapWrapper}>
         <MapGL
-         className={'MapGL'}
+          className={'MapGL'}
           {...viewport}
           mapStyle={mapboxStyle}
           mapboxApiAccessToken={mapboxToken}
@@ -77,16 +83,11 @@ export default class BaseMap extends Component {
         >
           <div className={navControl}>
             <NavigationControl
+              className={'NavigationControl'}
               onViewportChange={viewport => this.onViewportChange(viewport)}
             />
           </div>
-          {
-            children ?
-            React.cloneElement(children, {
-              viewport: viewport,
-            }) :
-            null
-          }
+          { childrenLayers }
         </MapGL>
       </div>
     );

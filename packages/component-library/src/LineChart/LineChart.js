@@ -8,6 +8,7 @@ import {
 } from 'victory';
 
 import ChartContainer from '../ChartContainer';
+import { numeric } from '../utils/formatters';
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
 
 const LineChart = ({
@@ -21,6 +22,7 @@ const LineChart = ({
 }) => (
   <ChartContainer title={title} subtitle={subtitle}>
     <VictoryChart
+      padding={{ left: 75, right: 50, bottom: 50, top: 50 }}
       domainPadding={20}
       animate={{ duration: 300 }}
       theme={CivicVictoryTheme.civic}
@@ -33,6 +35,7 @@ const LineChart = ({
       <VictoryAxis
         dependentAxis
         tickValues={data.map(d => d[dataValue])}
+        tickFormat={data.map(d => numeric(d[dataValue]))}
       />
       <VictoryLine
         data={data.map(d => ({ dataKey: d[dataKey], dataValue: d[dataValue] }))}

@@ -5,16 +5,16 @@ import { withKnobs, number, selectV2, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { checkA11y } from '@storybook/addon-a11y';
 import { BaseMap } from '../src';
-import { ScatterPlotMap } from '../src';
+import { IconMap } from '../src';
 
-import trimet from '../src/ScatterPlotMap/trimet.json';
+import data from '../src/IconMap/data.json';
 
-const displayName = ScatterPlotMap.displayName || 'ScatterPlotMap';
+const displayName = IconMap.displayName || 'IconMap';
 
 const mapboxToken = 'pk.eyJ1IjoidGhlbWVuZG96YWxpbmUiLCJhIjoiY2o1aXdoem1vMWtpNDJ3bnpqaGF1bnlhNSJ9.sjTrNKLW9daDBIGvP3_W0w';
 
 const demoMap = () => {
-  const mapStylesOptions = {
+  const optionsStyle = {
     'Lè Shine': 'mapbox://styles/themendozaline/cjg6296ub04ot2sqv9izku3qq',
     'Label Maker': 'mapbox://styles/themendozaline/cjg627xuw08mk2spjsb8jmho7',
     'Moonlight': 'mapbox://styles/themendozaline/cjgq6r2lg00072rmqj1wocgdq',
@@ -23,40 +23,67 @@ const demoMap = () => {
     'Odyssey': 'mapbox://styles/themendozaline/cjgq6rklb000d2so1b8myaait',
     'Scenic': 'mapbox://styles/themendozaline/cj8rrlv4tbtgs2rqnyhckuqva',
   };
-  const mapboxStyle = selectV2('Mapbox Style', mapStylesOptions, mapStylesOptions['Lè Shine']);
+  const mapboxStyle = selectV2('Mapbox Style', optionsStyle, optionsStyle['Scenic']);
 
   const opacityOptions = {
      range: true,
      min: 0,
      max: 1,
-     step: 0.05,
+     step: 0.1,
   };
-  const opacity = number('Opacity:', 0.1, opacityOptions);
+  const opacity = number('Opacity:', 1, opacityOptions);
 
-  const getCircleColor = f => f.properties.TYPE === 'MAX' && f.properties.LINE === 'R' ? [255,0,0] :
-    f.properties.TYPE === 'MAX' && f.properties.LINE === 'B' ? [0,0,255] :
-    f.properties.TYPE === 'MAX' && f.properties.LINE === 'G' ? [0,255,0] :
-    f.properties.TYPE === 'MAX' && f.properties.LINE === 'Y' ? [255,215,0] :
-    f.properties.TYPE === 'MAX' && f.properties.LINE === 'O' ? [255,69,0] :
-    [148,0,211];
+  const iconAtlas = 'https://i.imgur.com/29Kt7Ii.png';
 
-  const radiusScaleOptions = {
+  const iconMapping = {
+    "School": {
+      "x": 0,
+      "y": 0,
+      "width": 250,
+      "height": 250,
+      "mask": true,
+    },
+    "Hospital": {
+      "x": 250,
+      "y": 0,
+      "width": 250,
+      "height": 250,
+      "mask": true,
+    },
+    "Fire Station": {
+      "x": 0,
+      "y": 250,
+      "width": 250,
+      "height": 250,
+      "mask": true,
+    },
+    "Pin": {
+      "x": 250,
+      "y": 250,
+      "width": 250,
+      "height": 250,
+      "mask": true,
+    },
+  };
+
+  const iconSizeScaleOptions = {
      range: true,
-     min: 0,
+     min: 1,
      max: 15,
-     step: 0.5,
+     step: 1,
   };
-  const radiusScale = number('Radius Scale:', 1, radiusScaleOptions);
+  const iconSizeScale = number('Icon Size Scale:', 1, iconSizeScaleOptions);
 
-  const outline = boolean('Stroke Only:', false);
+  const getPosition = d => d.geometry.coordinates;
 
-  const strokeWidthOptions = {
-     range: true,
-     min: 0,
-     max: 20,
-     step: 0.5,
-  };
-  const strokeWidth = number('Stroke Width:', 1, strokeWidthOptions);
+  const getIcon = d => d.properties.ICON;
+
+  const getSize = d => 100;
+
+  const getColor = d => d.properties.ICON === 'Hospital' ? [30,144,255] :
+    d.properties.ICON === 'School' ? [255,165,0] :
+    d.properties.ICON === 'Fire Station' ? [220,20,60] :
+    [50, 205, 50];
 
   const autoHighlight = boolean('Auto Highlight:', false);
 
@@ -65,15 +92,16 @@ const demoMap = () => {
       mapboxToken={mapboxToken}
       mapboxStyle={mapboxStyle}
     >
-      <ScatterPlotMap
-        data={trimet.features}
-        getPosition={f => f.geometry.coordinates}
+      <IconMap
+        data={data.features}
         opacity={opacity}
-        getColor={getCircleColor}
-        getRadius={f => Math.floor(Math.random() * (250 - 50 + 1) + 50)}
-        radiusScale={radiusScale}
-        outline={outline}
-        strokeWidth={strokeWidth}
+        iconAtlas={iconAtlas}
+        iconMapping={iconMapping}
+        iconSizeScale={iconSizeScale}
+        getPosition={getPosition}
+        getIcon={getIcon}
+        getSize={getSize}
+        getColor={getColor}
         autoHighlight={autoHighlight}
         onLayerClick={info => action('Layer clicked:', { depth: 2 })(info, info.object)}
       />
@@ -84,6 +112,7 @@ const demoMap = () => {
 export default () => storiesOf(displayName, module)
   .addDecorator(withKnobs)
   .addDecorator(checkA11y)
-  .add('Simple usage',
+  .add(
+    'Simple usage',
     (demoMap)
   );
