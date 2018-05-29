@@ -8,6 +8,7 @@ import DeckGLOverlay from '../src/MapOverlay/map-deckgl-overlay';
 import { BaseMap } from '../src';
 import MapGL from 'react-map-gl';
 import { checkA11y } from '@storybook/addon-a11y';
+import data from '../src/MapOverlay/mapoverlaydata.json'
 
 const displayName = MapOverlay.displayName || 'MapOverlay';
 // hard coded for ease for now:
@@ -54,6 +55,7 @@ const demoMap = () => {
       mapboxStyle={mapboxStyle}
     >
       <MapOverlay
+        data={data.features}
         mapboxToken={mapboxToken}
         mapboxStyle={mapboxStyle}
         opacity={opacity}
