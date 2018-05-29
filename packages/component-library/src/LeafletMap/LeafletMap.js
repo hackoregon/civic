@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Map, TileLayer } from 'react-leaflet';
 import isClient from '../utils/isClient';
 

@@ -3,7 +3,8 @@ export var ICONS = {
   link: 'fa fa-link',
   check: 'fa fa-check',
   download: 'fa fa-cloud-download',
-  hamburger: 'fa fa-bars'
+  hamburger: 'fa fa-bars',
+  info: 'fa fa-info-circle'
 };
 
 export default {

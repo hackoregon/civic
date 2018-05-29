@@ -1,6 +1,7 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import MapGL, { NavigationControl } from 'react-map-gl';
 import { css } from 'emotion';
+import PropTypes from 'prop-types';
 import './mapbox-gl.css';
 
 const mapWrapper = css`

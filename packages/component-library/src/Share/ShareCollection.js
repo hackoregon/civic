@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import copy from 'copy-to-clipboard';
 import StoryLink from '../StoryCard/StoryLink';
 import { ICONS } from '../styleConstants';
