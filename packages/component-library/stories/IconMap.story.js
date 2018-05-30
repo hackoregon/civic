@@ -98,6 +98,8 @@ const demoMap = () => {
 
   const autoHighlight = boolean('Auto Highlight:', false);
 
+  const visible = boolean('Visible:', true);
+
   return (
     <BaseMap
       mapboxToken={mapboxToken}
@@ -115,6 +117,7 @@ const demoMap = () => {
         getColor={getColor}
         autoHighlight={autoHighlight}
         onLayerClick={info => action('Layer clicked:', { depth: 2 })(info, info.object)}
+        visible={visible}
       />
     </BaseMap>
   );
