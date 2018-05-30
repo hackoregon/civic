@@ -41,6 +41,7 @@ import {
 import './fonts.css';
 import RootPage from './components/RootPage';
 import HomePage from './components/HomePage';
+import SandboxPage from './components/SandboxPage';
 
 // Create a store by combining all project reducers and the routing reducer
 const configureStore = (initialState, history) => {
@@ -130,6 +131,10 @@ const routes = {
       path: 'transportation',
       component: TransportationApp,
       childRoutes: TransportationRoutes(store),
+    },
+    {
+      path: 'sandbox',
+      component: SandboxPage,
     },
   ],
 };
