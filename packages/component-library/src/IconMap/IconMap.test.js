@@ -23,7 +23,11 @@ describe('IconMap', () => {
 
   const iconSizeScale = zoom => zoom > 9.5 ? 25 : 5;
 
-  const defaultProps = { data, viewport, iconSizeScale };
+  const defaultProps = {
+    data,
+    viewport,
+    iconSizeScale,
+  };
 
   it('should render a DeckGL component', () => {
     const wrapper = shallow(<IconMap {...defaultProps} />);

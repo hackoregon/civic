@@ -84,7 +84,7 @@ const demoMap = () => {
   const iconSizeOptions = {
      range: true,
      min: 1,
-     max: 15,
+     max: 10,
      step: 1,
   };
   const iconSize = number('Icon Size:', 5, iconSizeOptions);

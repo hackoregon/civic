@@ -18,7 +18,8 @@ const IconMap = (props) => {
     visible,
   } = props;
 
-  const sizeScale = iconSizeScale(viewport.zoom);
+  const zoom = viewport.zoom;
+  const sizeScale = iconSizeScale(zoom);
 
   return (
     <div>
