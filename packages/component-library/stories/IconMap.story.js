@@ -66,28 +66,30 @@ const demoMap = () => {
     },
   };
 
-  const iconSizeScaleOptions = {
-     range: true,
-     min: 0.5,
-     max: 10,
-     step: 0.5,
-  };
-  const iconSizeScale = number('Icon Size Scale:', 1, iconSizeScaleOptions);
+  const zoomScale = zoom => zoom > 15.5 ? 65 :
+    zoom > 14.5 ? 55 :
+    zoom > 13.5 ? 45 :
+    zoom > 12.5 ? 35 :
+    zoom > 11.5 ? 25 :
+    zoom > 10.5 ? 15 :
+    zoom > 9.5 ? 10 :
+    zoom > 8.5 ? 5 :
+    zoom > 7.5 ? 2.5 :
+    1;
 
   const getPosition = d => d.geometry.coordinates;
 
   const getIcon = d => d.properties.ICON;
 
-  const getSize = zoom => zoom > 15.5 ? 300 :
-    zoom > 14.5 ? 250 :
-    zoom > 13.5 ? 200 :
-    zoom > 12.5 ? 150 :
-    zoom > 11.5 ? 125 :
-    zoom > 10.5 ? 100 :
-    zoom > 9.5 ? 75 :
-    zoom > 8.5 ? 50 :
-    zoom > 7.5 ? 25 :
-    10;
+  const iconSizeOptions = {
+     range: true,
+     min: 1,
+     max: 15,
+     step: 1,
+  };
+  const iconSize = number('Icon Size:', 5, iconSizeOptions);
+
+  const getSize = f => iconSize;
 
   const getColor = d => d.properties.ICON === 'Hospital' ? [30,144,255] :
     d.properties.ICON === 'School' ? [255,165,0] :
@@ -106,7 +108,7 @@ const demoMap = () => {
         opacity={opacity}
         iconAtlas={iconAtlas}
         iconMapping={iconMapping}
-        iconSizeScale={iconSizeScale}
+        iconSizeScale={zoomScale}
         getPosition={getPosition}
         getIcon={getIcon}
         getSize={getSize}
