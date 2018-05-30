@@ -55,7 +55,7 @@ IconMap.propTypes = {
   opacity: PropTypes.number,
   iconAtlas: PropTypes.string,
   iconMapping: PropTypes.object,
-  iconSizeScale: PropTypes.func,
+  sizeScale: PropTypes.number,
   getPosition: PropTypes.func,
   getIcon: PropTypes.func,
   getSize: PropTypes.func,
@@ -67,7 +67,7 @@ IconMap.propTypes = {
 
 IconMap.defaultProps = {
   opacity: 1,
-  iconSizeScale: 1,
+  sizeScale: 1,
   getPosition: d => d.geometry.coordinates,
   getSize: d => 10,
   getColor: d => [0,0,0],
