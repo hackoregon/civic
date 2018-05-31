@@ -1,27 +1,42 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { css } from 'emotion';
-
-const accentColor = 'rgb(238, 73, 80)';
-const commonTransition = 'all .2s ease-in-out';
-const buttonClass = css`
-  display: flex;
-  padding: 6px;
-  flex-wrap: nowrap;
-`;
 
 const cardsWrapper = css`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   padding: 0px 48px;
-  margin: 100px 0px;
+  margin: 80px 0px;
+  flex-wrap: wrap;
 `;
 const card = css`
+  position: relative;
+  font-size: 2vw;
   flex: 0 0 auto;
-  width: 400px;
-  border: 2px solid black;
-  box-shadow: 0px 6px 40px 40px pink;
+  width: calc(33.333% - 24px);
   padding: 24px;
   box-sizing: border-box;
+  text-align: center;
+  margin: 6px 0px;
+  min-height: 300px;
+  max-height: 300px;
+  transition: all .5s ease-in-out;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+
+  :after {
+    display: block;
+    content: "";
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border-top: 4px solid #ef4a5d;
+    border-left: 4px solid #240f27;
+  }
 `;
 
 const searchForm = css`
@@ -36,17 +51,33 @@ const searchInput = css`
   padding: 10px 20px;
   border-radius: 100px;
   border: 2px solid black;
-  font-size: 24px;
+  font-size: 20px;
 `;
 
 const searchTitle = css`
   text-align: center;
-  font-size: 34px;
+  font-size: 18px;
 `;
 const logoWrapper = css`
   position: relative;
   margin: 70px auto;
   width: 250px;
+`;
+const missionStatement = css`
+  font-size: 18px;
+  letter-spacing: -1px;
+  line-height: 1.8;
+  font-family: "Merriweather", serif;
+  width: 80%;
+  margin: 48px auto;
+  max-width: 1000px;
+  text-align: center;
+`;
+const appWrapper = css`
+  background-color: #f3f1f3;
+  padding: 24px;
+  height: auto;
+  box-sizing: border-box;
 `;
 
 class LandingPage extends React.Component {
@@ -58,26 +89,50 @@ class LandingPage extends React.Component {
     };
   }
 
-  handleSearch = (user) =>{
-    let url = 'https://ZiptasticAPI.com/'+user;
- fetch(url).
-  then(response => response.json()).then((repos) => {
-      console.log(repos);
-      this.setState({
-        repos: repos
+  handleSearch = (user) => {
+    if (!/\D/.test(user)) {
+      let url = 'https://ZiptasticAPI.com/'+user;
+      fetch(url).
+      then(response => response.json()).then((repos) => {
+        console.log(repos);
+        this.setState({
+          repos: repos
+        });
       });
-    });
+    } else {
+      console.log('hellooo!')
+      this.setState({
+        repos: {
+          country: "US",
+          state: "OR",
+          city: user.toUpperCase()
+        }
+      })
+    }
   };
+
+  componentDidMount() {
+    // Used to fade in the page
+  	var elem = ReactDOM.findDOMNode(this);
+  	elem.style.opacity = 0;
+  	window.requestAnimationFrame(function() {
+  		elem.style.transition = "opacity 2500ms";
+  		elem.style.opacity = 1;
+  	});
+  }
 
   render(){
     return (
-      <div className="app-container">
-        <div className={logoWrapper}>
-          <img src={require(`../../assets/civic-logo.svg`)} />
+      <div className={appWrapper}>
+        <div className="app-container">
+          <div className={logoWrapper}>
+            <img src={require(`../../assets/civic-logo-animated.svg`)} />
+          </div>
+          <div className={missionStatement}>{`Here's a short mission statement section. It talks about what values we stand for and what the purpose of this project is. Short blurb about data visualization and civic politics.`}</div>
+          <h3 className={searchTitle}>Look for Civic data in your area</h3>
+          <SearchBar handleSubmit={this.handleSearch} />
+          <DataList repos={this.state.repos}/>
         </div>
-        <h3 className={searchTitle}>Look for Civic data in your area</h3>
-        <SearchBar handleSubmit={this.handleSearch} />
-        <RepoList repos={this.state.repos}/>
       </div>
     )
   }
@@ -110,41 +165,46 @@ class SearchBar extends React.Component {
 }
 
 
-class RepoList extends React.Component {
+class DataList extends React.Component {
   render(){
 
-    function slugify(text)
-      {
-        return text.toString().toLowerCase()
-          .replace(/\s+/g, '-')           // Replace spaces with -
-          .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
-          .replace(/\-\-+/g, '-')         // Replace multiple - with single -
-          .replace(/^-+/, '')             // Trim - from start of text
-          .replace(/-+$/, '');            // Trim - from end of text
-      }
+    const slugify = (text) => {
+      return text.toString().toLowerCase()
+        .replace(/\s+/g, '-')           // Replace spaces with -
+        .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+        .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+        .replace(/^-+/, '')             // Trim - from start of text
+        .replace(/-+$/, '');            // Trim - from end of text
+    }
 
-    const cityImage = this.props.repos.city && <img src={require(`../../assets/cities/${slugify(this.props.repos.city)}.png`)} width="200" />
+    const cityImage = this.props.repos.city && <img src={require(`../../assets/cities/${slugify(this.props.repos.city)}.png`)} width="100%" />
+
+    const ctaMessage = this.props.repos.city === 'PORTLAND' ? (<div>
+    Looks like we have data in your area. Click on a collection to get started ↑
+    </div>) : (<div>
+    We dont see any data in your area. View Portland data or contribute to your region here.
+    </div>)
+
+    console.log(`${this.props.repos.city}`)
 
     return (
-      <div>
-        {this.props.repos.country &&
         <div className={cardsWrapper}>
           <div className={card}>
-            <h1>{this.props.repos.country}</h1>
+            <div>{this.props.repos.country ? this.props.repos.country : "?"}</div>
           </div>
           <div className={card}>
-            <h1>{this.props.repos.state}</h1>
+            <div>{this.props.repos.state ? this.props.repos.state : "?"}</div>
           </div>
           <div className={card}>
-            <h1>{this.props.repos.city}</h1>
+            <div>{this.props.repos.city ? this.props.repos.city : "?"}</div>
             { cityImage }
           </div>
-        </div>}
-      </div>
+          { this.props.repos.city && ctaMessage }
+        </div>
     )
   }
 }
-RepoList.defaultProps = {
+DataList.defaultProps = {
   repos: {}
 };
 
