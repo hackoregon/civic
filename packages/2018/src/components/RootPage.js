@@ -21,8 +21,6 @@ const isRoot = ({ pathname }) => pathname === '/';
 
 export const RootPage = props => (
   <div>
-    <Typekit kitId="mbf2sam" />
-    <Header title="Civic" menu={menu} />
     {props.children}
   </div>
 );
