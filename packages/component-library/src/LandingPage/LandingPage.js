@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { css } from 'emotion';
+import CanvasParticles from './CanvasParticles'
 
 const cardsWrapper = css`
   display: flex;
@@ -60,7 +61,8 @@ const searchTitle = css`
 `;
 const logoWrapper = css`
   position: relative;
-  margin: 70px auto;
+  margin: 0 auto;
+  padding: 80px 0px;
   width: 250px;
 `;
 const missionStatement = css`
@@ -75,9 +77,12 @@ const missionStatement = css`
 `;
 const appWrapper = css`
   background-color: #f3f1f3;
-  padding: 24px;
+  padding: 0px;
   height: auto;
   box-sizing: border-box;
+`;
+const contentWrapper = css`
+  position: relative;
 `;
 
 class LandingPage extends React.Component {
@@ -124,7 +129,8 @@ class LandingPage extends React.Component {
   render(){
     return (
       <div className={appWrapper}>
-        <div className="app-container">
+        <CanvasParticles />
+        <div className={contentWrapper}>
           <div className={logoWrapper}>
             <img src={require(`../../assets/civic-logo-animated.svg`)} />
           </div>
