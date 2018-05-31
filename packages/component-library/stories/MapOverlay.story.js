@@ -4,7 +4,6 @@ import { storiesOf } from '@storybook/react';
 import { withKnobs, boolean, number, selectV2 } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { MapOverlay } from '../src';
-import DeckGLOverlay from '../src/MapOverlay/map-deckgl-overlay';
 import { BaseMap } from '../src';
 import MapGL from 'react-map-gl';
 import { checkA11y } from '@storybook/addon-a11y';
