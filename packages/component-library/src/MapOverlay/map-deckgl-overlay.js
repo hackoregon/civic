@@ -28,6 +28,7 @@ export default class DeckGLOverlay extends Component {
     if (!data) {
       return null;
     }
+    // console.log('onClick', onLayerClick);
 
     const layer = new GeoJsonLayer({
       id: 'geojson',

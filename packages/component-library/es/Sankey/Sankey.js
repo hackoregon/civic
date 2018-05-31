@@ -4,7 +4,8 @@ var _templateObject = _taggedTemplateLiteral(['\n  margin-bottom: 20px;\n'], ['\
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { sankey } from 'd3-sankey';
 import { format } from 'd3-format';
 import { clone, max } from 'ramda';

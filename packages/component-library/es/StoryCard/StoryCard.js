@@ -3,7 +3,8 @@ var _templateObject = _taggedTemplateLiteral(['\n  text-align: center;\n  max-wi
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { css } from 'emotion';
 import StoryFooter from './StoryFooter';
 
