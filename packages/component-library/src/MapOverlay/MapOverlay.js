@@ -5,10 +5,9 @@ import './mapbox-gl.css';
 import PropTypes from 'prop-types';
 import DeckGL, {GeoJsonLayer} from 'deck.gl';
 
-
 const MapOverlay = (props) => {
   const { viewport, data, mapboxStyle, mapboxToken, opacity, filled, wireframe, extruded, elevation, onLayerClick, getPosition } = props;
-  
+
   const mapWrapper = css`
   margin: auto;
   max-width: 900px;
@@ -26,7 +25,7 @@ const MapOverlay = (props) => {
       lightsStrength: [1.0, 0.0, 2.0, 0.0],
       numberOfLights: 2
     };
-  
+
   const layer = new GeoJsonLayer({
     id: 'geojson',
     data,
@@ -40,14 +39,12 @@ const MapOverlay = (props) => {
     getFillColor: f => colorScale(f.properties.Shape_Length),
     getLineColor: f => [255, 255, 255],
     lightSettings: LIGHT_SETTINGS,
-    pickable: true, // Boolean(this.props.onHover),
+    pickable: true,
     autoHighlight: true,
-    // onHover: this.props.onHover,
     getPosition: getPosition,
     onClick: onLayerClick,
-    // onHover: ({object}) => setTooltip(object.properties.name || object.properties.station)
   });
-  
+
   return (
     <DeckGL {...viewport} layers={[layer]} />
   );
