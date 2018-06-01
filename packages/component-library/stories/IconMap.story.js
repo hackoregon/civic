@@ -66,13 +66,9 @@ const demoMap = () => {
     },
   };
 
-  const zoomScale = zoom => zoom > 15.5 ? 65 :
-    zoom > 14.5 ? 55 :
-    zoom > 13.5 ? 45 :
-    zoom > 12.5 ? 35 :
-    zoom > 11.5 ? 25 :
-    zoom > 10.5 ? 15 :
-    zoom > 9.5 ? 10 :
+  const zoomScale = zoom => zoom > 11.5 ? 12.5 :
+    zoom > 10.5 ? 10 :
+    zoom > 9.5 ? 7.5 :
     zoom > 8.5 ? 5 :
     zoom > 7.5 ? 2.5 :
     1;
@@ -84,10 +80,10 @@ const demoMap = () => {
   const iconSizeOptions = {
      range: true,
      min: 1,
-     max: 10,
+     max: 15,
      step: 1,
   };
-  const iconSize = number('Icon Size:', 5, iconSizeOptions);
+  const iconSize = number('Icon Size:', 10, iconSizeOptions);
 
   const getSize = f => iconSize;
 
