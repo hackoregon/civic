@@ -44,14 +44,35 @@ const radiusOptions = {
 const elevationOptions = {
   range: true,
   min: 1,
-  max: 100,
+  max: 50,
   step: 1,
 };
+
+const colorRange = [
+  [1, 152, 189],
+  [73, 227, 206],
+  [216, 254, 181],
+  [254, 237, 177],
+  [254, 173, 84],
+  [209, 55, 78]
+];
+
+const lightSettings = {
+  lightsPosition: [-0.144528, 49.739968, 8000, -3.807751, 54.104682, 8000],
+  ambientRatio: 0.4,
+  diffuseRatio: 0.6,
+  specularRatio: 0.2,
+  lightsStrength: [0.8, 0.0, 0.8, 0.0],
+  numberOfLights: 2
+};
+
+
+// const elevationScale = {min: 1, max: 50};
 
 
 const demoMap = () => {
   const opacity = number('Opacity:', 0.8, opacityOptions);
-  const radius = number('Inner radius', 100, radiusOptions);
+  const radius = number('Inner radius', 500, radiusOptions);
   const elevation = number('Elevation:', 10, elevationOptions);
 
 
@@ -66,6 +87,8 @@ const demoMap = () => {
         opacity={opacity}
         radius={radius}
         elevation={elevation}
+        colorRange={colorRange}
+        lightSettings={lightSettings}
       />
     </BaseMap>
   );
