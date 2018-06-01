@@ -23,6 +23,8 @@ import scatterPlotMapStory from './ScatterPlotMap.story';
 import screenGridMapStory from './ScreenGridMap.story';
 import pathMapStory from './PathMap.story';
 import iconMapStory from './IconMap.story';
+import mapOverlayStory from './MapOverlay.story';
+import hexOverlayStory from './HexOverlay.story';
 
 import { checkA11y } from '@storybook/addon-a11y';
 import '../assets/global.styles.css';
@@ -57,3 +59,5 @@ scatterPlotMapStory();
 screenGridMapStory();
 pathMapStory();
 iconMapStory();
+mapOverlayStory();
+hexOverlayStory();

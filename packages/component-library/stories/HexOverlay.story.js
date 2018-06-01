@@ -5,7 +5,9 @@ import { withKnobs, selectV2 } from '@storybook/addon-knobs';
 import { HexOverlay } from '../src';
 import DeckGLOverlay from '../src/HexOverlay/hex-deckgl-overlay';
 import MapGL from 'react-map-gl';
+import { BaseMap } from '../src';
 import { checkA11y } from '@storybook/addon-a11y';
+import data from '../src/HexOverlay/bikeParkingAreaPoints.json';
 
 const displayName = HexOverlay.displayName || 'HexOverlay';
 
@@ -28,10 +30,16 @@ const optionsStyle = {
 const demoMap = () => { optionsStyle
   const mapboxStyle = selectV2('Mapbox Style', optionsStyle, optionsStyle['Label Maker']);
   return (
-    <HexOverlay
+    <BaseMap
       mapboxToken={mapboxToken}
       mapboxStyle={mapboxStyle}
-    />
+    >
+      <HexOverlay
+        mapboxToken={mapboxToken}
+        mapboxStyle={mapboxStyle}
+        data={data.features}
+      />
+    </BaseMap>
   );
 };
 

@@ -34,5 +34,7 @@ export { default as ScatterPlotMap } from './ScatterPlotMap/ScatterPlotMap';
 export { default as ScreenGridMap } from './ScreenGridMap/ScreenGridMap';
 export { default as PathMap } from './PathMap/PathMap';
 export { default as IconMap } from './IconMap/IconMap';
+export { default as MapOverlay } from './MapOverlay/MapOverlay';
+export { default as HexOverlay } from './HexOverlay/HexOverlay';
 
 import './fonts.css';
