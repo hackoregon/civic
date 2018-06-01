@@ -66,19 +66,26 @@ const demoMap = () => {
     },
   };
 
-  const iconSizeScaleOptions = {
-     range: true,
-     min: 1,
-     max: 15,
-     step: 1,
-  };
-  const iconSizeScale = number('Icon Size Scale:', 1, iconSizeScaleOptions);
+  const zoomScale = zoom => zoom > 11.5 ? 12.5 :
+    zoom > 10.5 ? 10 :
+    zoom > 9.5 ? 7.5 :
+    zoom > 8.5 ? 5 :
+    zoom > 7.5 ? 2.5 :
+    1;
 
   const getPosition = d => d.geometry.coordinates;
 
   const getIcon = d => d.properties.ICON;
 
-  const getSize = d => 100;
+  const iconSizeOptions = {
+     range: true,
+     min: 1,
+     max: 15,
+     step: 1,
+  };
+  const iconSize = number('Icon Size:', 10, iconSizeOptions);
+
+  const getSize = f => iconSize;
 
   const getColor = d => d.properties.ICON === 'Hospital' ? [30,144,255] :
     d.properties.ICON === 'School' ? [255,165,0] :
@@ -86,6 +93,8 @@ const demoMap = () => {
     [50, 205, 50];
 
   const autoHighlight = boolean('Auto Highlight:', false);
+
+  const visible = boolean('Visible:', true);
 
   return (
     <BaseMap
@@ -97,13 +106,14 @@ const demoMap = () => {
         opacity={opacity}
         iconAtlas={iconAtlas}
         iconMapping={iconMapping}
-        iconSizeScale={iconSizeScale}
+        iconSizeScale={zoomScale}
         getPosition={getPosition}
         getIcon={getIcon}
         getSize={getSize}
         getColor={getColor}
         autoHighlight={autoHighlight}
         onLayerClick={info => action('Layer clicked:', { depth: 2 })(info, info.object)}
+        visible={visible}
       />
     </BaseMap>
   );

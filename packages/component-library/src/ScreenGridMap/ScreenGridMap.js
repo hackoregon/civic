@@ -11,6 +11,7 @@ const ScreenGridMap = (props) => {
     cellSizePixels,
     autoHighlight,
     onLayerClick,
+    visible,
   } = props;
 
   return (
@@ -31,6 +32,7 @@ const ScreenGridMap = (props) => {
           autoHighlight={autoHighlight}
           onClick={onLayerClick}
           updateTriggers={{instanceColors: colorRange}}
+          visible={visible}
         />
       </DeckGL>
     </div>
@@ -46,6 +48,7 @@ ScreenGridMap.propTypes = {
   cellSizePixels: PropTypes.number,
   autoHighlight: PropTypes.bool,
   onLayerClick: PropTypes.func,
+  visible: PropTypes.bool,
 };
 
 ScreenGridMap.defaultProps = {
@@ -54,6 +57,7 @@ ScreenGridMap.defaultProps = {
   colorRange: [[255,255,204],[161,218,180],[65,182,196],[34,94,168]],
   cellSizePixels: 25,
   autoHighlight: true,
+  visible: true,
 };
 
 export default ScreenGridMap;
