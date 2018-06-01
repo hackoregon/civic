@@ -1,7 +1,7 @@
 import React from 'react';
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from '@storybook/react';
-import { withKnobs, selectV2 } from '@storybook/addon-knobs';
+import { withKnobs, selectV2, number } from '@storybook/addon-knobs';
 import { HexOverlay } from '../src';
 import DeckGLOverlay from '../src/HexOverlay/hex-deckgl-overlay';
 import MapGL from 'react-map-gl';
@@ -27,7 +27,34 @@ const optionsStyle = {
   'Scenic': 'mapbox://styles/themendozaline/cj8rrlv4tbtgs2rqnyhckuqva',
 }
 
-const demoMap = () => { optionsStyle
+const opacityOptions = {
+  range: true,
+  min: 0,
+  max: 1,
+  step: 0.05,
+};
+
+const radiusOptions = {
+  range: true,
+  min: 1,
+  max: 1000,
+  step: 0.1,
+}
+
+const elevationOptions = {
+  range: true,
+  min: 1,
+  max: 100,
+  step: 1,
+};
+
+
+const demoMap = () => {
+  const opacity = number('Opacity:', 0.8, opacityOptions);
+  const radius = number('Inner radius', 100, radiusOptions);
+  const elevation = number('Elevation:', 10, elevationOptions);
+
+
   const mapboxStyle = selectV2('Mapbox Style', optionsStyle, optionsStyle['Label Maker']);
   return (
     <BaseMap
@@ -35,15 +62,16 @@ const demoMap = () => { optionsStyle
       mapboxStyle={mapboxStyle}
     >
       <HexOverlay
-        mapboxToken={mapboxToken}
-        mapboxStyle={mapboxStyle}
         data={data.features}
+        opacity={opacity}
+        radius={radius}
+        elevation={elevation}
       />
     </BaseMap>
   );
 };
 
-export default () => storiesOf(displayName)
+export default () => storiesOf(displayName, module)
   .addDecorator(checkA11y)
   .addDecorator(withKnobs)
   .add('Simple usage',(demoMap))
