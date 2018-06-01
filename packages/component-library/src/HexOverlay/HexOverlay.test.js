@@ -11,11 +11,6 @@ describe('HexOverlay', () => {
     mapboxToken,
   };
 
-  it('should render a container div', () => {
-    const wrapper = shallow(<HexOverlay {...defaultProps} />);
-    expect(wrapper.find('div')).to.have.length(1);
-  });
-
   it('should render a DeckGLOverlay component', () => {
     const wrapper = shallow(<HexOverlay {...defaultProps} />);
     expect(wrapper.find('.DeckGLOverlay')).to.have.length(0);
