@@ -38,6 +38,12 @@ import {
   App as TransportationApp,
 } from '@hackoregon/2018-transportation-systems';
 
+import {
+  Routes as FarmersMarketsRoutes,
+  Reducers as FarmersMarketsReducers,
+  App as FarmersMarketsApp,
+} from '@hackoregon/2018-example-farmers-markets';
+
 import './fonts.css';
 import RootPage from './components/RootPage';
 import HomePage from './components/HomePage';
@@ -45,10 +51,7 @@ import SandboxPage from './components/SandboxPage';
 
 // Create a store by combining all project reducers and the routing reducer
 const configureStore = (initialState, history) => {
-  const middlewares = [
-    thunk,
-    routerMiddleware(history),
-  ];
+  const middlewares = [thunk, routerMiddleware(history)];
 
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE_ || compose;
   const store = createStore(
@@ -59,6 +62,7 @@ const configureStore = (initialState, history) => {
       elections: ElectionsReducers(),
       neighborhood: NeighborhoodReducers(),
       transportation: TransportationReducers(),
+      farmersMarkets: FarmersMarketsReducers(),
     }),
     initialState,
     composeEnhancers(applyMiddleware(...middlewares))
@@ -68,23 +72,28 @@ const configureStore = (initialState, history) => {
 
   // Allow for hot module replacement when applicable (dev mode)
   if (module.hot) {
-    module.hot.accept([
-      '@hackoregon/2018-disaster-resilience',
-      '@hackoregon/2018-housing-affordability',
-      '@hackoregon/2018-local-elections',
-      '@hackoregon/2018-neighborhood-development',
-      '@hackoregon/2018-transportation-systems',
-    ], () => {
-      const nextRootReducer = combineReducers({
-        routing: routerReducer,
-        disaster: require('@hackoregon/2018-disaster-resilience').Reducers(),
-        housing: require('@hackoregon/2018-housing-affordability').Reducers(),
-        elections: require('@hackoregon/2018-local-elections').Reducers(),
-        neighborhood: require('@hackoregon/2018-neighborhood-development').Reducers(),
-        transportation: require('@hackoregon/2018-transportation-systems').Reducers(),
-      });
-      store.replaceReducer(nextRootReducer);
-    });
+    module.hot.accept(
+      [
+        '@hackoregon/2018-disaster-resilience',
+        '@hackoregon/2018-housing-affordability',
+        '@hackoregon/2018-local-elections',
+        '@hackoregon/2018-neighborhood-development',
+        '@hackoregon/2018-transportation-systems',
+        '@hackoregon/2018-example-farmers-markets',
+      ],
+      () => {
+        const nextRootReducer = combineReducers({
+          routing: routerReducer,
+          disaster: require('@hackoregon/2018-disaster-resilience').Reducers(),
+          housing: require('@hackoregon/2018-housing-affordability').Reducers(),
+          elections: require('@hackoregon/2018-local-elections').Reducers(),
+          neighborhood: require('@hackoregon/2018-neighborhood-development').Reducers(),
+          transportation: require('@hackoregon/2018-transportation-systems').Reducers(),
+          farmersMarkets: require('@hackoregon/2018-example-farmers-markets').Reducers(),
+        });
+        store.replaceReducer(nextRootReducer);
+      }
+    );
   }
 
   return store;
@@ -131,6 +140,11 @@ const routes = {
       path: 'transportation',
       component: TransportationApp,
       childRoutes: TransportationRoutes(store),
+    },
+    {
+      path: 'farmers-markets',
+      component: FarmersMarketsApp,
+      childRoutes: FarmersMarketsRoutes(store),
     },
     {
       path: 'sandbox',

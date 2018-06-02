@@ -13,6 +13,7 @@ const menu = [
       { name: 'Local Elections', path: '/elections' },
       { name: 'Neighborhood Development', path: '/neighborhood' },
       { name: 'Transportation Systems', path: '/transportation' },
+      { name: 'EXAMPLE Farmers Markets', path: '/farmers-markets' },
     ],
   },
   {
