@@ -57,6 +57,12 @@ export class FarmersMarketsOverTime extends React.Component {
               dataKeyLabel="Year"
             />
           </div>
+          <p>
+            Farmers' markets saw steady growth through the 1990s into the mid-2000s. The recession
+            correlates with abnormal growth in the total number of Farmers' Markets. The last two
+            years have shown no growth. Is this plateau expected to continue? What causes
+            growth or decline in Farmers' Markets?
+          </p>
         </CivicStoryCard>
       </div>
     );
