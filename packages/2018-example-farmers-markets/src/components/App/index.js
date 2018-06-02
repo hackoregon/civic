@@ -1,12 +1,13 @@
 import React from 'react';
 
+import FarmersMarketsOverTime from '../FarmersMarketsOverTime';
+
 import '@hackoregon/component-library/assets/global.styles.css';
-import { StoryCard, Placeholder } from '@hackoregon/component-library';
 
 const App = () => (
-  <StoryCard title="An example elections Story Card">
-    <Placeholder />
-  </StoryCard>
+  <div>
+    <FarmersMarketsOverTime />
+  </div>
 );
 
 App.displayName = 'App';
