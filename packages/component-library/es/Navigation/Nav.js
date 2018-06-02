@@ -11,11 +11,12 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import { css } from 'emotion';
 import NavSubMenu from './NavSubMenu';
 import NavLink from './NavRouterLink';
 import Icon from '../Icon/Icon';
+import PropTypes from 'prop-types';
 
 var defaultMenu = [{
   name: 'Collections',
@@ -40,7 +41,7 @@ var Nav = function (_Component) {
 
     _this.handleClick = function (name, menu, e) {
       e.preventDefault();
-      var items = !_this.state.menuActive ? menu : [];
+      var items = menu;
 
       _this.setState(function () {
         return { menuActive: !_this.state.menuActive, items: items };

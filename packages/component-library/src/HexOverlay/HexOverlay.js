@@ -1,14 +1,12 @@
 /* global window,document */
-import React, { PropTypes, Component } from 'react';
-// import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {render} from 'react-dom';
 import MapGL from 'react-map-gl';
 import DeckGLOverlay from './hex-deckgl-overlay.js';
-
+import PropTypes from 'prop-types';
 import {csv as requestCsv} from 'd3-request';
-
-// import './mapbox-gl.css'; // optional
 import { css } from 'emotion';
+// import './mapbox-gl.css'; // optional
 
 const mapWrapper = css`
   margin: auto;

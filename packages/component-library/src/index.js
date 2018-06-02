@@ -33,5 +33,8 @@ export { default as BaseMap } from './BaseMap/BaseMap';
 export { default as ScatterPlotMap } from './ScatterPlotMap/ScatterPlotMap';
 export { default as PullQuote } from './PullQuote/PullQuote';
 export { default as ScreenGridMap } from './ScreenGridMap/ScreenGridMap';
+export { default as PathMap } from './PathMap/PathMap';
+export { default as IconMap } from './IconMap/IconMap';
+export { default as BoundaryMap } from './BoundaryMap/BoundaryMap';
 
 import './fonts.css';

@@ -1,8 +1,9 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import isClient from '../utils/isClient';
 
 var styles = {
-  height: '80px',
+  height: '60px',
   width: 'auto'
 };
 

@@ -2,8 +2,12 @@ language: node_js
 cache: yarn
 node_js:
   - '8.11.1'
+services:
+  - docker
 install:
   - npm i -g npx
+  - npm i -g rimraf
+  - npm i -g cross-env
   - yarn bootstrap
   - yarn run configure
 matrix:

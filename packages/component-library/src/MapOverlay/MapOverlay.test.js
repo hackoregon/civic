@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import MapOverlay from './MapOverlay';
+require('isomorphic-fetch');
 
 describe('MapOverlay', () => {
   // const mapboxStyle = 'mapbox://styles/themendozaline/cjg6296ub04ot2sqv9izku3qq';
@@ -10,7 +11,7 @@ describe('MapOverlay', () => {
   //   mapboxStyle,
   //   mapboxToken,
   // };
-
+  //
   // it('should render a container div', () => {
   //   const wrapper = shallow( <MapOverlay {...defaultProps} />);
   //
