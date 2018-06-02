@@ -1,5 +1,5 @@
 {
-  "name": "@hackoregon/2018-local-elections",
+  "name": "@hackoregon/2018-example-farmers-markets",
   "version": "1.0.0-alpha.1c62c05f",
   "description": "Hack Oregon Front-end React + Redux Starter",
   "main": "src/index.js",
