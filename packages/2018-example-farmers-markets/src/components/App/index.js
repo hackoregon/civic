@@ -1,11 +1,17 @@
 import React from 'react';
 
+import { PageLayout, PullQuote } from '@hackoregon/component-library';
+
 import FarmersMarketsOverTime from '../FarmersMarketsOverTime';
 
 import '@hackoregon/component-library/assets/global.styles.css';
 
 const App = () => (
-  <div>
+  <PageLayout
+    heroTitle="Shopping Local, Farmers' Markets"
+    heroSubtitle="A look at Farmers' Markets in Portland and nationally"
+    mainProjectColor="#5F9B4A"
+  >
     <h1>We’ve Hit Peak Farmers Market</h1>
 
     <p>
@@ -17,13 +23,15 @@ const App = () => (
       There were 8,268 farmers’ markets operating in 2014, up 180 percent since 2006.
     </p>
 
+    <PullQuote quoteText="There were 8,268 farmers' markets operating in 2014, up 180% since 2006"/>
+
     <p>
       “In densely populated urban areas, farmers’ markets often compete with each other
       for vendors and consumers,” the report reads. “In other areas, newer, more strategically
       located farmers’ markets may lead to the decline of previously established markets.”
     </p>
 
-    <p>The Local Food Economy Is Maturing</p>
+    <h2>The Local Food Economy Is Maturing</h2>
 
     <p>
       Farmers markets may be a good marketing tool for a small farm, but they can be onerous
@@ -37,7 +45,7 @@ const App = () => (
       meat going to those channels, some farmers may choose to forgo the farmers market.
     </p>
     <FarmersMarketsOverTime />
-  </div>
+  </PageLayout>
 );
 
 App.displayName = 'App';
