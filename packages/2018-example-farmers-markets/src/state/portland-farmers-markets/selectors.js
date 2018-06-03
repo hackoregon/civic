@@ -1,22 +1,22 @@
 import { createSelector } from 'reselect';
 import { rootState } from '../selectors';
 
-export const getPortlandFarmersMarkersRequest = createSelector(
+export const getPortlandFarmersMarketsRequest = createSelector(
   rootState,
   ({ portlandFarmersMarkets }) => portlandFarmersMarkets,
 );
 
 export const getPortlandFarmersMarketsData = createSelector(
-  getPortlandFarmersMarkersRequest,
+  getPortlandFarmersMarketsRequest,
   ({ data }) => data,
 );
 
 export const isPortlandFarmersMarketsPending = createSelector(
-  getPortlandFarmersMarkersRequest,
-  ({ pending }) => pending,
+  getPortlandFarmersMarketsRequest,
+  ({ pending }) => !!pending,
 );
 
 export const getActiveFarmersMarket = createSelector(
-  getPortlandFarmersMarkersRequest,
+  getPortlandFarmersMarketsRequest,
   ({ selectedMarket }) => selectedMarket && selectedMarket.properties,
 );

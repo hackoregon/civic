@@ -13,5 +13,5 @@ export const getFarmersMarketsOverTimeData = createSelector(
 
 export const isFarmersMarketsOverTimePending = createSelector(
   getFarmersMarketsOverTimeRequest,
-  ({ pending }) => pending,
+  ({ pending }) => !!pending,
 );
