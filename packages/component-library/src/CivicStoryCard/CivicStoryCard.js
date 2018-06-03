@@ -17,7 +17,7 @@ const descriptionClass = css`
 
 const CivicStoryCard = ({ cardId, collectionId, title, children }) => (
   <div className={cardClass}>
-    { title ? <h2 className={'Title FilsonSoft'}>{title}</h2> : null}
+    { title ? <h2 className="Title">{title}</h2> : null}
     <div className={descriptionClass}>
       {children}
     </div>
