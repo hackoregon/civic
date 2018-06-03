@@ -8,8 +8,10 @@ export const SET_FARMERS_MARKET = 'PORTLAND_FARMERS_MARKETS/SET';
 export const portlandFarmersMarketsStart = actionEmitter(IMPORT_START);
 export const portlandFarmersMarketsSuccess = actionEmitter(IMPORT_SUCCESS);
 
+const importPromise = import('../../assets/farmers-markets.json');
+
 export const fetchPortlandFarmersMarkets = importAdapter(
-  import('../../assets/farmers-markets.json'),
+  importPromise,
   {
     start: portlandFarmersMarketsStart,
     success: portlandFarmersMarketsSuccess,
