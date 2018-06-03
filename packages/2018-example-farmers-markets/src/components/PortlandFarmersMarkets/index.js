@@ -59,7 +59,7 @@ export class PortlandFarmersMarkets extends React.Component {
             data={portlandFarmersMarkets.features}
             autoHighlight={false}
             getColor={() => [109, 222, 69]}
-            getRadius={() => 350}
+            getRadius={() => 550}
             onLayerClick={event => selectFarmersMarket(event.object)}
           />
         </BaseMap>
@@ -80,6 +80,15 @@ export class PortlandFarmersMarkets extends React.Component {
             </dl>
           </div>
         )}
+        <h3>Neighborhood Friendly</h3>
+        <p>
+          Portland has many farmers' markets and they are well-distributed throughout
+          the inner-city, extending through the westside as well as St. Johns.
+        </p>
+        <p>
+          East of I-205 is a notable Farmers' Market desert. What could be the
+          explanation for this?
+        </p>
       </CivicStoryCard>
     );
   }
