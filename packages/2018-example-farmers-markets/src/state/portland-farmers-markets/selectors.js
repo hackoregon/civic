@@ -15,3 +15,8 @@ export const isPortlandFarmersMarketsPending = createSelector(
   getPortlandFarmersMarkersRequest,
   ({ pending }) => pending,
 );
+
+export const getActiveFarmersMarket = createSelector(
+  getPortlandFarmersMarkersRequest,
+  ({ selectedMarket }) => selectedMarket && selectedMarket.properties,
+);

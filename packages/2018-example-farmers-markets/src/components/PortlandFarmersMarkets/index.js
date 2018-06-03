@@ -5,10 +5,14 @@ import { css } from 'emotion';
 
 import { CivicStoryCard, BaseMap, ScatterPlotMap } from '@hackoregon/component-library';
 
-import { fetchPortlandFarmersMarkets } from '../../state/portland-farmers-markets/actions';
+import {
+  fetchPortlandFarmersMarkets,
+  setFarmersMarket,
+} from '../../state/portland-farmers-markets/actions';
 import {
   isPortlandFarmersMarketsPending,
   getPortlandFarmersMarketsData,
+  getActiveFarmersMarket,
 } from '../../state/portland-farmers-markets/selectors';
 
 const cardLoading = css`
@@ -38,6 +42,8 @@ export class PortlandFarmersMarkets extends React.Component {
     const {
       isLoading,
       portlandFarmersMarkets,
+      selectFarmersMarket,
+      activeMarket,
     } = this.props;
 
     if (isLoading) {
@@ -53,10 +59,27 @@ export class PortlandFarmersMarkets extends React.Component {
             data={portlandFarmersMarkets.features}
             autoHighlight={false}
             getColor={() => [109, 222, 69]}
-            getRadius={() => 300}
-            onLayerClick={info => info}
+            getRadius={() => 350}
+            onLayerClick={event => selectFarmersMarket(event.object)}
           />
         </BaseMap>
+        {activeMarket && (
+          <div>
+            <h3>{activeMarket.Market} ({activeMarket.status})</h3>
+            <dl>
+              <dt>When to visit</dt>
+              <dd>{activeMarket.Day}, {activeMarket.Open_Times}</dd>
+              <dt>Address</dt>
+              <dd>{activeMarket.Location}</dd>
+              <dt>Time of the year</dt>
+              <dd>{activeMarket.Open_Dates}</dd>
+              <dt>Payment options</dt>
+              <dd>{activeMarket.Accepts}</dd>
+              <dt>Website</dt>
+              <dd><a href={activeMarket.Website}>{activeMarket.Website}</a></dd>
+            </dl>
+          </div>
+        )}
       </CivicStoryCard>
     );
   }
@@ -65,18 +88,24 @@ export class PortlandFarmersMarkets extends React.Component {
 PortlandFarmersMarkets.displayName = 'PortlandFarmersMarkets';
 PortlandFarmersMarkets.propTypes = {
   init: PropTypes.func,
+  selectFarmersMarket: PropTypes.func,
   isLoading: PropTypes.bool,
   portlandFarmersMarkets: PropTypes.object,
+  activeMarket: PropTypes.object,
 };
 
 export default connect(
   state => ({
     isLoading: isPortlandFarmersMarketsPending(state),
     portlandFarmersMarkets: getPortlandFarmersMarketsData(state),
+    activeMarket: getActiveFarmersMarket(state),
   }),
   dispatch => ({
     init() {
       dispatch(fetchPortlandFarmersMarkets());
+    },
+    selectFarmersMarket(market) {
+      dispatch(setFarmersMarket(market));
     },
   })
 )(PortlandFarmersMarkets);
