@@ -1,5 +1,5 @@
 import React from 'react';
-import { hot } from 'react-hot-loader';
+// import { hot } from 'react-hot-loader';
 import { render } from 'react-dom';
 import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
@@ -160,5 +160,5 @@ const App = () => (
   </Provider>
 );
 
-const HotApp = hot(module)(App);
-render(<HotApp />, document.getElementById('content'));
+// const HotApp = hot(module)(App);
+render(<App />, document.getElementById('content'));
