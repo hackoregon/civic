@@ -3,6 +3,7 @@ import React from 'react';
 import { PageLayout, PullQuote } from '@hackoregon/component-library';
 
 import FarmersMarketsOverTime from '../FarmersMarketsOverTime';
+import PortlandFarmersMarkets from '../PortlandFarmersMarkets';
 
 import '@hackoregon/component-library/assets/global.styles.css';
 
@@ -44,7 +45,13 @@ const App = () => (
       grocery stores and distributors. With an increasing share of their produce, dairy or
       meat going to those channels, some farmers may choose to forgo the farmers market.
     </p>
+
     <FarmersMarketsOverTime />
+
+    <h2>How does Portland look today?</h2>
+
+    <PortlandFarmersMarkets />
+
   </PageLayout>
 );
 
