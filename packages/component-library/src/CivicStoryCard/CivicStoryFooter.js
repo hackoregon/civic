@@ -8,13 +8,17 @@ import { ICONS } from '../styleConstants';
 const MS_TO_SWITCH_TEXT = 3000; // 3 seconds
 
 const actionsClass = css`
-  padding: 24px;
+  background: #EEE;
   display: flex;
-  justify-content: center;
+  justify-content:space-between;
+  margin: -3em;
+  margin-top:2em;
+  padding:0 3em;
+`;
 
-  & > div {
-    margin-right: 32px;
-  }
+const alignRight = css`
+  margin-left:0;
+  display: flex;
 `;
 
 export default class StoryFooter extends Component {
@@ -54,9 +58,11 @@ export default class StoryFooter extends Component {
     const shareIcon = this.state.copied ? ICONS.check : ICONS.link;
     return (
       <div className={actionsClass}>
-        <CivicStoryLink className={'Context'} route={`/${collectionId}/${cardId}`} icon={ICONS.info}>Source</CivicStoryLink>
-        <CivicStoryLink className={'Context'} route={`/${collectionId}/${cardId}`} icon={ICONS.eye}>View card</CivicStoryLink>
-        <CivicStoryLink className={'Share'} action={this.handleCopy} icon={shareIcon}>{shareTxt}</CivicStoryLink>
+        <CivicStoryLink route={`/${collectionId}/${cardId}`} icon={ICONS.info}>Source</CivicStoryLink>
+        <div className={alignRight}>
+          <CivicStoryLink additionalClassName={alignRight} route={`/${collectionId}/${cardId}`} icon={ICONS.eye}>View card</CivicStoryLink>
+          <CivicStoryLink additionalClassName={alignRight} action={this.handleCopy} icon={shareIcon}>{shareTxt}</CivicStoryLink>
+        </div>
       </div>
     );
   }
