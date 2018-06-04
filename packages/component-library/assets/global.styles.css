@@ -140,7 +140,7 @@ h1,
   font-size: 2.25rem;
   line-height: 2.625rem;
   font-family: "Rubik", sans-serif;
-  font-weight: 900;
+  font-weight: 500;
 }
 h2,
 .h2 {
@@ -156,7 +156,7 @@ h3,
   font-size: 1.125rem;
   line-height: 1.625rem;
   font-family: "Rubik", sans-serif;
-  font-weight: 900;
+  font-weight: 500;
 }
 h4,
 .h4 {
@@ -164,7 +164,7 @@ h4,
   font-size: 1rem;
   line-height: 1.375rem;
   font-family: "Rubik", sans-serif;
-  font-weight: 900;
+  font-weight: 500;
 }
 h5,
 .h5 {
@@ -172,7 +172,7 @@ h5,
   font-size: 0.875rem;
   line-height: 1.125rem;
   font-family: "Rubik", sans-serif;
-  font-weight: 900;
+  font-weight: 500;
 }
 h6,
 .h6 {
@@ -180,7 +180,7 @@ h6,
   font-size: 0.75rem;
   line-height: 0.9375rem;
   font-family: "Rubik", sans-serif;
-  font-weight: 900;
+  font-weight: 500;
 }
 
 p {
