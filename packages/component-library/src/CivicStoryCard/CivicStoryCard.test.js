@@ -18,7 +18,6 @@ describe('CivicStoryCard', () => {
       const h2 = wrapper.find('h2');
 
       expect(h2.text()).to.contain(title);
-      expect(h2.props().className).to.contain('Title');
     });
 
     it('should include a StoryFooter that references this CivicStoryCard', () => {
@@ -40,7 +39,7 @@ describe('CivicStoryCard', () => {
     );
 
     it('should render children into a container div under the title', () => {
-      expect(wrapper.children()).to.have.length(3);
+      expect(wrapper.children()).to.have.length(4);
       expect(wrapper.find('h2 + div').children()).to.have.length(2);
     });
   });
