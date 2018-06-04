@@ -9,8 +9,8 @@ const MapOverlay = (props) => {
   const { viewport, data, mapboxStyle, mapboxToken, opacity, filled, wireframe, extruded, elevation, onLayerClick, getPosition } = props;
 
   const mapWrapper = css`
-  margin: auto;
-  max-width: 900px;
+    margin: auto;
+    max-width: 900px;
   `;
 
   const colorScale = r => [r * 255, 140, 200 * (1 - r)];
@@ -46,13 +46,12 @@ const MapOverlay = (props) => {
   });
 
   return (
-    <DeckGL {...viewport} layers={[layer]} />
+    <DeckGL {...viewport} layers={[layer]} className={'MapOverlay'} />
   );
 };
 
 MapOverlay.propTypes = {
   mapboxStyle: PropTypes.string,
-  mapboxToken: PropTypes.string.isRequired,
   opacity: PropTypes.number,
   elevation: PropTypes.number,
   filled: PropTypes.bool,
