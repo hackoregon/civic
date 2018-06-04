@@ -35,5 +35,6 @@ export { default as ScreenGridMap } from './ScreenGridMap/ScreenGridMap';
 export { default as PathMap } from './PathMap/PathMap';
 export { default as IconMap } from './IconMap/IconMap';
 export { default as BoundaryMap } from './BoundaryMap/BoundaryMap';
+export { default as MapTooltip } from './MapTooltip/MapTooltip';
 
 import './fonts.css';
