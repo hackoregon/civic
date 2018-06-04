@@ -16,7 +16,7 @@ const descriptionClass = css`
 
 const StoryCard = ({ cardId, collectionId, title, children }) => (
   <div className={cardClass}>
-    <h2 className={'Title FilsonSoft'}>{title}</h2>
+    <h2 className="Title">{title}</h2>
     <div className={descriptionClass}>
       {children}
     </div>

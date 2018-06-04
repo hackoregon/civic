@@ -19,7 +19,6 @@ describe('StoryCard', () => {
 
       expect(h2.text()).to.contain(title);
       expect(h2.props().className).to.contain('Title');
-      expect(h2.props().className).to.contain('FilsonSoft');
     });
 
     it('should include a StoryFooter that references this StoryCard', () => {
