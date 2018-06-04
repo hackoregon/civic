@@ -1,16 +1,10 @@
-/* Import Google Fonts */
-
-@import 'https://fonts.googleapis.com/css?family=Lato:300,400|Raleway:300,400|Open+Sans:300,400,600,800';
-
-@import url('https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i,900,900i');
-
 /* Base */
 
 html {
   font-size: 14px;
   line-height: 1.4;
   background-color: #fffefe;
-  font-family: 'Open Sans';
+  font-family: 'Merriweather';
   font-weight: 400;
   color: #001732;
   min-height: 100% /* [3] */;
@@ -39,24 +33,6 @@ html {
 
 .text-underline {
   text-decoration: underline;
-}
-
-.FilsonSoft {
-  font-family: "filson-soft", sans-serif;
-}
-
-.Lato, .panel {
-  font-family: "Lato", sans-serif;
-}
-.Raleway {
-  font-family: "Raleway", sans-serif;
-}
-.OpenSans {
-  font-family: "Open Sans", sans-serif;
-}
-
-.Merriweather {
-  font-family: "Merriweather", serif;
 }
 
 body {
@@ -153,8 +129,8 @@ a:hover {
 .Title {
   font-size: 50px;
   line-height: 1.2;
-  font-weight: 500;
-  font-family: "filson-soft", sans-serif;
+  font-weight: 300;
+  font-family: "Rubik", sans-serif;
   margin-bottom: 12px;
 }
 
@@ -163,15 +139,15 @@ h1,
   font-size: 36px;
   font-size: 2.25rem;
   line-height: 2.625rem;
-  font-family: "filson-soft", sans-serif;
-  font-weight: 900;
+  font-family: "Rubik", sans-serif;
+  font-weight: 500;
 }
 h2,
 .h2 {
   font-size: 26px;
   font-size: 1.625rem;
   line-height: 2.125rem;
-  font-family: "filson-soft", sans-serif;
+  font-family: "Rubik", sans-serif;
   font-weight: 500;
 }
 h3,
@@ -179,42 +155,40 @@ h3,
   font-size: 18px;
   font-size: 1.125rem;
   line-height: 1.625rem;
-  font-family: "filson-soft", sans-serif;
-  font-weight: 900;
+  font-family: "Rubik", sans-serif;
+  font-weight: 500;
 }
 h4,
 .h4 {
   font-size: 16px;
   font-size: 1rem;
   line-height: 1.375rem;
-  font-family: "filson-soft", sans-serif;
-  font-weight: 900;
+  font-family: "Rubik", sans-serif;
+  font-weight: 500;
 }
 h5,
 .h5 {
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 1.125rem;
-  font-family: "filson-soft", sans-serif;
-  font-weight: 900;
+  font-family: "Rubik", sans-serif;
+  font-weight: 500;
 }
 h6,
 .h6 {
   font-size: 12px;
   font-size: 0.75rem;
   line-height: 0.9375rem;
-  font-family: "filson-soft", sans-serif;
-  font-weight: 900;
+  font-family: "Rubik", sans-serif;
+  font-weight: 500;
 }
 
 p {
-  font-family: "Merriweather", serif;
   font-size: 1em;
   color: #706371;
 }
 
 .Pullquote {
-  font-family: "Merriweather", serif;
   font-size: 40px;
 }
 
