@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import DeckGL, {GeoJsonLayer} from 'deck.gl';
 
 const MapOverlay = (props) => {
-  const { viewport, data, mapboxStyle, mapboxToken, opacity, filled, wireframe, extruded, elevation, onLayerClick, getPosition } = props;
+  const { viewport, data, mapboxStyle, mapboxToken, opacity, filled, wireframe, extruded, elevation, onLayerClick, getPosition, onLayerHover } = props;
 
   const mapWrapper = css`
     margin: auto;
@@ -43,6 +43,7 @@ const MapOverlay = (props) => {
     autoHighlight: true,
     getPosition: getPosition,
     onClick: onLayerClick,
+    onHover: onLayerHover,
   });
 
   return (

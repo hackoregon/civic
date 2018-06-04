@@ -54,7 +54,7 @@ describe('MapOverlay', () => {
     expect(wrapper.props().layers[0].props.extruded).to.equal(true)
   });
 
-  it('should render with an extrusion', () => {
+  it('should render with data', () => {
     expect(wrapper.props().layers[0].props.data).to.equal(data)
   });
 

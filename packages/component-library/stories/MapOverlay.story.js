@@ -63,7 +63,8 @@ const demoMap = () => {
         extruded={extruded}
         elevation={elevation}
         getPosition={f => f.geometry.coordinates}
-        onLayerClick={info => action('Layer clicked:', { depth: 2 })(info)}
+        onLayerClick={info => action('Layer clicked:')(info)}
+        onLayerHover={info => action('Layer')(info.layer.props.data[info.index].properties.NAME)}
       />
     </BaseMap>
 );
