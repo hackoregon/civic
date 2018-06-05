@@ -6,7 +6,7 @@ import CivicStoryFooter from './CivicStoryFooter';
 const cardClass = css`
   text-align: center;
   max-width: 1000px;
-  margin: 0 auto;
+  margin: 1.5em auto;
   position: relative;
   border: 1px solid #DDD;
   border-radius: 2px;
