@@ -24,7 +24,7 @@ class CanvasParticles extends React.Component {
     const H = window.innerHeight;
     canvas.width = W;
     canvas.height = H;
-    const particleCount = 100;
+    const particleCount = 40;
     const particles = [];
     const minDist = 100;
     // const dist;
@@ -53,7 +53,7 @@ class CanvasParticles extends React.Component {
     	this.radius = 4;
 
     	this.draw = function() {
-    		ctx.fillStyle = "black";
+    		ctx.fillStyle = "lightgrey";
     		ctx.beginPath();
     		ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
 
@@ -127,7 +127,7 @@ class CanvasParticles extends React.Component {
 
     		// Draw the line
     		ctx.beginPath();
-    		ctx.strokeStyle = "rgba(0,0,0,"+ (1.2-dist/minDist) +")";
+    		ctx.strokeStyle = "rgba(0,0,0,"+ (1.0-dist/minDist) +")";
     		ctx.moveTo(p1.x, p1.y);
     		ctx.lineTo(p2.x, p2.y);
     		ctx.stroke();

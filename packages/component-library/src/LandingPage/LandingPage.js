@@ -12,16 +12,20 @@ const cardsWrapper = css`
 `;
 const card = css`
   position: relative;
+  background-color: white;
   font-size: 2vw;
   flex: 0 0 auto;
-  width: calc(33.333% - 24px);
+  width: calc(25% - 24px);
   padding: 24px;
   box-sizing: border-box;
   text-align: center;
   margin: 6px 0px;
   min-height: 300px;
-  max-height: 300px;
   transition: all .5s ease-in-out;
+
+  @media (max-width: 990px) {
+    width: calc(50% - 24px);
+  }
 
   @media (max-width: 768px) {
     width: 100%;
@@ -62,8 +66,16 @@ const searchTitle = css`
 const logoWrapper = css`
   position: relative;
   margin: 0 auto;
-  padding: 80px 0px;
-  width: 250px;
+  padding: 50px 0px;
+  width: 180px;
+`;
+const missionStatementTitle = css`
+  font-family: 'Roboto Mono',monospaced;
+  text-align: center;
+  font-size: 40px;
+  width: 50%;
+  letter-spacing: -2px;
+  margin: 22px auto;
 `;
 const missionStatement = css`
   font-size: 18px;
@@ -71,7 +83,7 @@ const missionStatement = css`
   line-height: 1.8;
   font-family: "Merriweather", serif;
   width: 80%;
-  margin: 48px auto;
+  margin: 24px auto;
   max-width: 1000px;
   text-align: center;
 `;
@@ -105,7 +117,6 @@ class LandingPage extends React.Component {
         });
       });
     } else {
-      console.log('hellooo!')
       this.setState({
         repos: {
           country: "US",
@@ -134,7 +145,8 @@ class LandingPage extends React.Component {
           <div className={logoWrapper}>
             <img src={require(`../../assets/civic-logo-animated.svg`)} />
           </div>
-          <div className={missionStatement}>{`Here's a short mission statement section. It talks about what values we stand for and what the purpose of this project is. Short blurb about data visualization and civic politics.`}</div>
+          <div className={missionStatementTitle}>{'Making data human, means making data intelligent.'}</div>
+          <div className={missionStatement}>{`CIVIC is a platform for evolving powerful data technology, in a way that’s fundamentally built to serve people.`}</div>
           <h3 className={searchTitle}>Look for Civic data in your area</h3>
           <SearchBar handleSubmit={this.handleSearch} />
           <DataList repos={this.state.repos}/>
@@ -183,7 +195,10 @@ class DataList extends React.Component {
         .replace(/-+$/, '');            // Trim - from end of text
     }
 
+    const countryImage = this.props.repos.city && <img src={require(`../../assets/country/usa.svg`)} width="100%" />
+    const stateImage = this.props.repos.state && <img src={require(`../../assets/state/${slugify(this.props.repos.state)}.svg`)} width="100%" />
     const cityImage = this.props.repos.city && <img src={require(`../../assets/cities/${slugify(this.props.repos.city)}.png`)} width="100%" />
+    const localImage = this.props.repos.city && <img src={require(`../../assets/local/local.svg`)} width="100%" />
 
     const ctaMessage = this.props.repos.city === 'PORTLAND' ? (<div>
     Looks like we have data in your area. Click on a collection to get started ↑
@@ -197,13 +212,19 @@ class DataList extends React.Component {
         <div className={cardsWrapper}>
           <div className={card}>
             <div>{this.props.repos.country ? this.props.repos.country : "?"}</div>
+            { countryImage }
           </div>
           <div className={card}>
             <div>{this.props.repos.state ? this.props.repos.state : "?"}</div>
+            {stateImage}
           </div>
           <div className={card}>
             <div>{this.props.repos.city ? this.props.repos.city : "?"}</div>
             { cityImage }
+          </div>
+          <div className={card}>
+            <div>{this.props.repos.city ? "Local" : "?"}</div>
+            { localImage }
           </div>
           { this.props.repos.city && ctaMessage }
         </div>

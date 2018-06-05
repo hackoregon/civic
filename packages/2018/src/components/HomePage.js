@@ -89,7 +89,6 @@ class HomePage extends React.Component {
         });
       });
     } else {
-      console.log('hellooo!')
       this.setState({
         repos: {
           country: "US",
