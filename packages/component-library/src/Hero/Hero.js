@@ -5,7 +5,7 @@ const heroClass = css`
   display: flex;
   background: rgb(34, 15, 37);
   height: 75vh;
-  min-height: 420px;
+  min-height: 600px;
   width: 100%;
   margin: 0;
   padding: 0;
