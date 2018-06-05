@@ -25,7 +25,6 @@ const isRoot = ({ pathname }) => pathname === '/';
 
 export const RootPage = props => (
   <div>
-    <Header title="Civic" menu={menu} />
     {props.children}
   </div>
 );

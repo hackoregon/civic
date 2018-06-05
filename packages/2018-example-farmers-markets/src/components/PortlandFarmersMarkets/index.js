@@ -29,6 +29,11 @@ const cardError = css`
   background: #FDD;
   border: 1px solid #C99;
 `;
+const mapWrapper = css`
+  width: 100%;
+  overflow: hidden;
+  display: block;
+`;
 
 // Use Hack Oregon official mapbox token eventually
 const mapboxToken = 'pk.eyJ1IjoidGhlbWVuZG96YWxpbmUiLCJhIjoiY2o1aXdoem1vMWtpNDJ3bnpqaGF1bnlhNSJ9.sjTrNKLW9daDBIGvP3_W0w';
@@ -54,15 +59,17 @@ export class PortlandFarmersMarkets extends React.Component {
 
     return (
       <CivicStoryCard title="Where are Portland's Farmers' Markets?">
-        <BaseMap mapboxToken={mapboxToken} mapboxStyle="mapbox://styles/themendozaline/cj8rrlv4tbtgs2rqnyhckuqva">
-          <ScatterPlotMap
-            data={portlandFarmersMarkets.features}
-            autoHighlight={false}
-            getColor={() => [109, 222, 69]}
-            getRadius={() => 550}
-            onLayerClick={event => selectFarmersMarket(event.object)}
-          />
-        </BaseMap>
+        <div className={mapWrapper}>
+          <BaseMap mapboxToken={mapboxToken} mapboxStyle="mapbox://styles/themendozaline/cj8rrlv4tbtgs2rqnyhckuqva">
+            <ScatterPlotMap
+              data={portlandFarmersMarkets.features}
+              autoHighlight={false}
+              getColor={() => [109, 222, 69]}
+              getRadius={() => 550}
+              onLayerClick={event => selectFarmersMarket(event.object)}
+            />
+          </BaseMap>
+        </div>
         {activeMarket && (
           <div>
             <h3>{activeMarket.Market} ({activeMarket.status})</h3>
