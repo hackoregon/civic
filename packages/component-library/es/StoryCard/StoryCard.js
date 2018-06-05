@@ -22,7 +22,7 @@ var StoryCard = function StoryCard(_ref) {
     { className: cardClass },
     React.createElement(
       'h2',
-      { className: 'Title FilsonSoft' },
+      { className: 'Title' },
       title
     ),
     React.createElement(
