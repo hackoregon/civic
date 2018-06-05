@@ -4,6 +4,7 @@ import {
   VictoryAxis,
   VictoryChart,
   VictoryLabel,
+  VictoryPortal,
   VictoryScatter,
 } from 'victory';
 
@@ -170,24 +171,28 @@ const Scatterplot = ({
           }}
           title="Y Axis"
         />
-        <VictoryLabel
-          style={axisLabelStyle}
-          text={yLabel}
-          textAnchor="middle"
-          title="Y Axis Label"
-          verticalAnchor="end"
-          x={50}
-          y={45}
-        />
-        <VictoryLabel
-          style={axisLabelStyle}
-          text={xLabel}
-          textAnchor="end"
-          title="X Axis Label"
-          verticalAnchor="end"
-          x={600}
-          y={295}
-        />
+        <VictoryPortal>
+          <VictoryLabel
+            style={axisLabelStyle}
+            text={yLabel}
+            textAnchor="middle"
+            title="Y Axis Label"
+            verticalAnchor="end"
+            x={50}
+            y={45}
+          />
+        </VictoryPortal>
+        <VictoryPortal>
+          <VictoryLabel
+            style={axisLabelStyle}
+            text={xLabel}
+            textAnchor="end"
+            title="X Axis Label"
+            verticalAnchor="end"
+            x={600}
+            y={295}
+          />
+        </VictoryPortal>
         <VictoryScatter
           animate={{ onEnter: { duration: 500 } }}
           categories={{ x: dataKeyLabel }}

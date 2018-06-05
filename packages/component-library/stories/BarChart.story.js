@@ -37,6 +37,8 @@ export default () => storiesOf(displayName, module).addDecorator(withKnobs)
         dataKeyLabel={dataKeyLabel}
         title={'Dogs and their Money'}
         subtitle={'As of January 2017'}
+        xLabel={'Dogs'}
+        yLabel={'Dollars'}
       />
     );
   }));
