@@ -25,7 +25,7 @@ class HexOverlay extends Component {
     this._startAnimate = this._startAnimate.bind(this);
     this._animateHeight = this._animateHeight.bind(this);
   }
-  
+
   componentDidMount() {
     this._animate();
   }
@@ -66,7 +66,7 @@ class HexOverlay extends Component {
 
   render() {
     const {viewport, data, opacity, radius, elevation, colorRange, lightSettings, coverage, upperPercentile} = this.props;
-    
+
     if (!data) {
       return null;
     }
@@ -96,7 +96,7 @@ class HexOverlay extends Component {
       })
     ];
 
-    return <DeckGL {...viewport} layers={layers} />;
+    return <DeckGL {...viewport} layers={layers} className={'HexOverlay'}/>;
   }
 }
 export default HexOverlay;
