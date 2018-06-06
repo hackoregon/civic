@@ -27,10 +27,10 @@ describe('Scatterplot', () => {
     const wrapper = shallow(<Scatterplot data={simpleData} />);
     expect(wrapper.find({ title: 'Scatter Plot' }).length).to.eql(1);
     expect(wrapper.find({ title: 'Scatter Plot' }).props().data).to.eql([
-      { dataKey: 100, dataValue: 1, series: undefined, size: 3 },
-      { dataKey: 200, dataValue: 2, series: undefined, size: 3 },
-      { dataKey: 300, dataValue: 3, series: undefined, size: 3 },
-      { dataKey: 400, dataValue: 4, series: undefined, size: 3 },
+      { dataKey: 100, dataValue: 1, label: "X: 100 | Y: 1", series: undefined, size: 3 },
+      { dataKey: 200, dataValue: 2, label: "X: 200 | Y: 2", series: undefined, size: 3 },
+      { dataKey: 300, dataValue: 3, label: "X: 300 | Y: 3", series: undefined, size: 3 },
+      { dataKey: 400, dataValue: 4, label: "X: 400 | Y: 4", series: undefined, size: 3 },
     ]);
   });
 
@@ -65,10 +65,10 @@ describe('Scatterplot', () => {
     };
     const wrapper = shallow(<Scatterplot {...props} />);
     expect(wrapper.find({ title: 'Scatter Plot' }).props().data).to.eql([
-      { dataKey: 100, dataValue: 1, series: 'first', size: 3 },
-      { dataKey: 200, dataValue: 2, series: 'first', size: 3 },
-      { dataKey: 100, dataValue: 3, series: 'second', size: 3 },
-      { dataKey: 200, dataValue: 3, series: 'second', size: 3 },
+      { dataKey: 100, dataValue: 1, label: "X: 100 | Y: 1", series: 'first', size: 3 },
+      { dataKey: 200, dataValue: 2, label: "X: 200 | Y: 2", series: 'first', size: 3 },
+      { dataKey: 100, dataValue: 3, label: "X: 100 | Y: 3", series: 'second', size: 3 },
+      { dataKey: 200, dataValue: 3, label: "X: 200 | Y: 3", series: 'second', size: 3 },
     ]);
   });
 
@@ -95,19 +95,19 @@ describe('Scatterplot', () => {
     };
     const wrapper = shallow(<Scatterplot {...props} />);
     expect(wrapper.find({ title: 'Scatter Plot' }).props().data).to.eql([
-      { dataKey: 100, dataValue: 1, series: undefined, size: 3 },
-      { dataKey: 200, dataValue: 2, series: undefined, size: 3 },
-      { dataKey: 300, dataValue: 3, series: undefined, size: 3 },
-      { dataKey: 400, dataValue: 4, series: undefined, size: 3 },
+      { dataKey: 100, dataValue: 1, label: "X: 100 | Y: 1", series: undefined, size: 3 },
+      { dataKey: 200, dataValue: 2, label: "X: 200 | Y: 2", series: undefined, size: 3 },
+      { dataKey: 300, dataValue: 3, label: "X: 300 | Y: 3", series: undefined, size: 3 },
+      { dataKey: 400, dataValue: 4, label: "X: 400 | Y: 4", series: undefined, size: 3 },
     ]);
 
     wrapper.setProps({ size: { key: 'y' } });
 
     expect(wrapper.find({ title: 'Scatter Plot' }).props().data).to.eql([
-      { dataKey: 100, dataValue: 1, series: undefined, size: 1 },
-      { dataKey: 200, dataValue: 2, series: undefined, size: 2 },
-      { dataKey: 300, dataValue: 3, series: undefined, size: 3 },
-      { dataKey: 400, dataValue: 4, series: undefined, size: 4 },
+      { dataKey: 100, dataValue: 1, label: "X: 100 | Y: 1", series: undefined, size: 1 },
+      { dataKey: 200, dataValue: 2, label: "X: 200 | Y: 2", series: undefined, size: 2 },
+      { dataKey: 300, dataValue: 3, label: "X: 300 | Y: 3", series: undefined, size: 3 },
+      { dataKey: 400, dataValue: 4, label: "X: 400 | Y: 4", series: undefined, size: 4 },
     ]);
   });
 });
