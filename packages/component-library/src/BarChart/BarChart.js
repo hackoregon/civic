@@ -6,7 +6,8 @@ import {
   VictoryBar,
   VictoryChart,
   VictoryLabel,
-  VictoryPortal
+  VictoryPortal,
+  VictoryTooltip
 } from 'victory';
 
 import ChartContainer from '../ChartContainer';
@@ -14,6 +15,36 @@ import { dollars, numeric } from '../utils/formatters';
 import { assign } from "lodash";
 import { css } from 'emotion';
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
+
+const chartEvents = [
+  {
+    target: 'data',
+    eventHandlers: {
+      onMouseOver: () => {
+        return [
+          {
+            target: 'data',
+            mutation: () => ({ style: { fill: 'tomato', width: 40 } }),
+          }, {
+            target: 'labels',
+            mutation: () => ({ active: true }),
+          },
+        ];
+      },
+      onMouseOut: () => {
+        return [
+          {
+            target: 'data',
+            mutation: () => { },
+          }, {
+            target: 'labels',
+            mutation: () => ({ active: false }),
+          },
+        ];
+      },
+    },
+  },
+];
 
 const BarChart = ({ data, dataKey, dataValue, dataKeyLabel, domain, title, subtitle, xLabel, yLabel }) => {
 
@@ -65,7 +96,17 @@ const BarChart = ({ data, dataKey, dataValue, dataKeyLabel, domain, title, subti
           />
         </VictoryPortal>
         <VictoryBar
-          data={data.map(a => ({ dataKey: a[dataKey], dataValue: a[dataValue] }))}
+          labelComponent={
+            <VictoryTooltip
+              x={325}
+              y={0}
+              orientation="bottom"
+              pointerLength={0}
+              cornerRadius={0}
+            />
+          }
+          data={data.map(d => ({ dataKey: d[dataKey], dataValue: d[dataValue], label: `${d[dataKeyLabel]}: ${numeric(d[dataValue])}` }))}
+          events={chartEvents}
           x={'dataKey'}
           y={'dataValue'}
         />

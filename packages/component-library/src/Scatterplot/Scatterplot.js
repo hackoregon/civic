@@ -6,9 +6,41 @@ import {
   VictoryLabel,
   VictoryPortal,
   VictoryScatter,
+  VictoryTooltip
 } from 'victory';
 
+import { dollars, numeric } from '../utils/formatters';
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
+
+const chartEvents = [
+  {
+    target: 'data',
+    eventHandlers: {
+      onMouseOver: () => {
+        return [
+          {
+            target: 'data',
+            mutation: () => ({ style: { fill: 'tomato', width: 40 } }),
+          }, {
+            target: 'labels',
+            mutation: () => ({ active: true }),
+          },
+        ];
+      },
+      onMouseOut: () => {
+        return [
+          {
+            target: 'data',
+            mutation: () => { },
+          }, {
+            target: 'labels',
+            mutation: () => ({ active: false }),
+          },
+        ];
+      },
+    },
+  },
+];
 
 const SimpleLegend = ({ legendData }) => {
   const legendStyle = css`
@@ -199,9 +231,20 @@ const Scatterplot = ({
           data={data.map(d => ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],
+            label: `${d[dataKeyLabel]}: ${numeric(d[dataValue])}`,
             series: d.series,
             size: size ? d[size.key] || size.value : 3,
           }))}
+          events={chartEvents}
+          labelComponent={
+            <VictoryTooltip
+              x={325}
+              y={0}
+              orientation="bottom"
+              pointerLength={0}
+              cornerRadius={0}
+            />
+          }
           size={d => d.size}
           style={scatterPlotStyle}
           title="Scatter Plot"

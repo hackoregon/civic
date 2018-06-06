@@ -6,12 +6,43 @@ import {
   VictoryLine,
   VictoryAxis,
   VictoryPortal,
-  VictoryLabel
+  VictoryLabel,
+  VictoryTooltip
 } from 'victory';
 
 import ChartContainer from '../ChartContainer';
-import { numeric } from '../utils/formatters';
+import { dollars, numeric } from '../utils/formatters';
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
+
+const chartEvents = [
+  {
+    target: 'data',
+    eventHandlers: {
+      onMouseOver: () => {
+        return [
+          {
+            target: 'data',
+            mutation: () => ({ style: { fill: 'tomato', width: 40 } }),
+          }, {
+            target: 'labels',
+            mutation: () => ({ active: true }),
+          },
+        ];
+      },
+      onMouseOut: () => {
+        return [
+          {
+            target: 'data',
+            mutation: () => { },
+          }, {
+            target: 'labels',
+            mutation: () => ({ active: false }),
+          },
+        ];
+      },
+    },
+  },
+];
 
 const LineChart = ({
   title,
@@ -77,7 +108,17 @@ const LineChart = ({
           y="dataValue"
         />
         <VictoryScatter
-          data={data.map(d => ({ dataKey: d[dataKey], dataValue: d[dataValue] }))}
+          data={data.map(d => ({ dataKey: d[dataKey], dataValue: d[dataValue], label: `${d[dataKeyLabel]}: ${numeric(d[dataValue])}` }))}
+          events={chartEvents}
+          labelComponent={
+            <VictoryTooltip
+              x={325}
+              y={0}
+              orientation="bottom"
+              pointerLength={0}
+              cornerRadius={0}
+            />
+          }
           x="dataKey"
           y="dataValue"
         />

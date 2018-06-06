@@ -103,7 +103,7 @@ const HorizontalBarChart = ({ data, dataKey, dataValue, dataKeyLabel, domain, ti
               cornerRadius={0}
             />
           }
-          data={data.map(a => ({ dataKey: a[dataKey], dataValue: a[dataValue], label: `${a[dataKeyLabel]}: ${numeric(a[dataValue])}` }))}
+          data={data.map(d => ({ dataKey: d[dataKey], dataValue: d[dataValue], label: `${d[dataKeyLabel]}: ${numeric(d[dataValue])}` }))}
           x="dataKey"
           y="dataValue"
           events={chartEvents}
