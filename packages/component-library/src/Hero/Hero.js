@@ -7,7 +7,7 @@ const heroClass = css`
   height: 75vh;
   min-height: 600px;
   width: 100%;
-  margin: 0;
+  margin: 0 0 120px;
   padding: 0;
   background-size: cover;
   background-position: center center;

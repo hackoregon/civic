@@ -29,7 +29,7 @@ const headerClass = css`
   width: 100%;
   min-width: 320px;
   margin: 0 auto;
-  padding: 1rem 0;
+  padding: 0;
 `;
 
 const overlayHeaderClass = css`
@@ -53,7 +53,7 @@ const navClass = css`
 `;
 
 const logoClass = css`
-  margin: 1rem 0 0 2rem;
+  margin: 12px 24px;
   flex: 2;
 `;
 
