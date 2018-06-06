@@ -79,6 +79,7 @@ BarChart.propTypes = {
   dataKey: PropTypes.string.isRequired,
   dataValue: PropTypes.string.isRequired,
   dataKeyLabel: PropTypes.string,
+  domain: PropTypes.objectOf(PropTypes.array),  
   title: PropTypes.string,
   subtitle: PropTypes.string,
   xLabel: PropTypes.string,
