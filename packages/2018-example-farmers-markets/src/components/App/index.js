@@ -36,6 +36,7 @@ const App = () => (
     heroTitle="Shopping Local, Farmers' Markets"
     heroSubtitle="A look at Farmers' Markets in Portland and nationally"
     mainProjectColor="#5F9B4A"
+    overlay
   >
     <section className={cx(sectionMarginMedium, sectionMaxWidthSmall)}>
       <h1>{"Have We Hit Peak Farmers' Market?"}</h1>
