@@ -287,8 +287,8 @@ Scatterplot.defaultProps = {
   style: null,
   subtitle: null,
   title: null,
-  xLabel: null,
-  yLabel: null,
+  xLabel: "X",
+  yLabel: "Y",
 };
 
 export default Scatterplot;
