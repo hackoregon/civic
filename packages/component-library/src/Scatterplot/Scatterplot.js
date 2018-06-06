@@ -9,6 +9,7 @@ import {
   VictoryTooltip
 } from 'victory';
 
+import ChartContainer from '../ChartContainer';
 import { dollars, numeric } from '../utils/formatters';
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
 
@@ -48,7 +49,7 @@ const SimpleLegend = ({ legendData }) => {
     font-size: 14px;
     font-weight: bold;
     text-align: center;
-    margin: 10px 0 -40px 0;
+    margin: 10px 0 0 0;
   `;
 
   if (legendData.length) {
@@ -119,6 +120,7 @@ const getDefaultStyle = dataSeries => {
  * @param  {String}    dataKey      X key in `data`
  * @param  {Array}     dataKeyLabel Optional overrides for x-axis tick labels
  * @param  {String}    dataValue    Y key in `data`
+ * @param  {Array}     dataValueLabel Optional overrides for y-axis tick labels
  * @param  {Array}     dataSeries   Series options for multiseries data
  * @param  {Object}    domain       Scaling for chart axes (defaults to data range)
  * @param  {Object}    size         Data `key` or exact `value` to use for data point size
@@ -133,6 +135,7 @@ const Scatterplot = ({
   dataKey,
   dataKeyLabel,
   dataValue,
+  dataValueLabel,
   dataSeries,
   domain,
   size,
@@ -174,9 +177,7 @@ const Scatterplot = ({
   `;
 
   return (
-    <div>
-      {title && <span className={titleStyle}>{title}</span>}
-      {subtitle && <span className={subtitleStyle}>{subtitle}</span>}
+    <ChartContainer title={title} subtitle={subtitle}>
       {legendData && (
         <SimpleLegend className="legend" legendData={legendData} />
       )}
@@ -231,7 +232,7 @@ const Scatterplot = ({
           data={data.map(d => ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],
-            label: `${d[dataKeyLabel]}: ${numeric(d[dataValue])}`,
+            label: `${dataKeyLabel ? d[dataKeyLabel] : xLabel}: ${numeric(d[dataKey])} | ${dataValueLabel ? d[dataValueLabel] : yLabel}: ${numeric(d[dataValue])}`,
             series: d.series,
             size: size ? d[size.key] || size.value : 3,
           }))}
@@ -252,7 +253,7 @@ const Scatterplot = ({
           y="dataValue"
         />
       </VictoryChart>
-    </div>
+    </ChartContainer>
   );
 };
 
@@ -263,6 +264,7 @@ Scatterplot.propTypes = {
   dataKey: PropTypes.string,
   dataKeyLabel: PropTypes.arrayOf(PropTypes.string),
   dataValue: PropTypes.string,
+  dataValueLabel: PropTypes.arrayOf(PropTypes.string),
   dataSeries: PropTypes.arrayOf(PropTypes.string),
   domain: PropTypes.objectOf(PropTypes.array),
   size: PropTypes.shape({ key: PropTypes.string, value: PropTypes.string }),
@@ -278,6 +280,7 @@ Scatterplot.defaultProps = {
   dataKey: 'x',
   dataKeyLabel: null,
   dataValue: 'y',
+  dataValueLabel: null,
   dataSeries: null,
   domain: null,
   size: null,
