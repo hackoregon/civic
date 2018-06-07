@@ -10,7 +10,7 @@ export class WhatDoesAffordabilityMean extends React.Component {
   render() {
     return (
       <CivicStoryCard title="What Does Affordability Mean?">
-        <Placeholder />
+        <Placeholder issue="211" />
       </CivicStoryCard>
     );
   }

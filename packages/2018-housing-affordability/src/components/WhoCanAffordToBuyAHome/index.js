@@ -10,7 +10,7 @@ export class WhoCanAffordToBuyAHome extends React.Component {
   render() {
     return (
       <CivicStoryCard title="Who Can Afford to Buy a Home in America?">
-        <Placeholder />
+        <Placeholder issue="57" />
       </CivicStoryCard>
     );
   }
