@@ -70,7 +70,6 @@ const logoWrapper = css`
   width: 180px;
 `;
 const missionStatementTitle = css`
-  font-family: 'Roboto Mono',monospaced;
   text-align: center;
   font-size: 40px;
   width: 50%;
@@ -96,6 +95,9 @@ const appWrapper = css`
 const contentWrapper = css`
   position: relative;
 `;
+const lookupWrapper = css`
+  margin-top: 100px;
+`;
 
 class LandingPage extends React.Component {
 
@@ -111,6 +113,7 @@ class LandingPage extends React.Component {
       let url = 'https://ZiptasticAPI.com/'+user;
       fetch(url).
       then(response => response.json()).then((repos) => {
+        console.log('hi');
         console.log(repos);
         this.setState({
           repos: repos
@@ -147,9 +150,11 @@ class LandingPage extends React.Component {
           </div>
           <div className={missionStatementTitle}>{'Making data human, means making data intelligent.'}</div>
           <div className={missionStatement}>{`CIVIC is a platform for evolving powerful data technology, in a way that’s fundamentally built to serve people.`}</div>
-          <h3 className={searchTitle}>Look for Civic data in your area</h3>
-          <SearchBar handleSubmit={this.handleSearch} />
-          <DataList repos={this.state.repos}/>
+          <div className={lookupWrapper}>
+            <h3 className={searchTitle}>Look for Civic data in your area</h3>
+            <SearchBar handleSubmit={this.handleSearch} />
+            <DataList repos={this.state.repos}/>
+          </div>
         </div>
       </div>
     )
