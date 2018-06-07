@@ -14,6 +14,7 @@ const PathMap = (props) => {
     autoHighlight,
     highlightColor,
     onLayerClick,
+    visible,
   } = props;
 
   return (
@@ -39,6 +40,7 @@ const PathMap = (props) => {
           onClick={onLayerClick}
           parameters={{depthTest: false}}
           updateTriggers={{instanceColors: getColor}}
+          visible={visible}
         />
       </DeckGL>
     </div>
@@ -57,6 +59,7 @@ PathMap.propTypes = {
   autoHighlight: PropTypes.bool,
   highlightColor: PropTypes.array,
   onLayerClick: PropTypes.func,
+  visible: PropTypes.bool,
 };
 
 PathMap.defaultProps = {
@@ -65,7 +68,9 @@ PathMap.defaultProps = {
   getPath: d => d.geometry.coordinates,
   getWidth: d => 10,
   widthScale: 1,
-  rounded: true,
+  rounded: false,
+  autoHighlight: true,
+  visible: true,
 };
 
 export default PathMap;

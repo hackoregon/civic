@@ -4,10 +4,44 @@ import {
   VictoryAxis,
   VictoryChart,
   VictoryLabel,
+  VictoryPortal,
   VictoryScatter,
+  VictoryTooltip
 } from 'victory';
 
+import ChartContainer from '../ChartContainer';
+import { dollars, numeric } from '../utils/formatters';
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
+
+const chartEvents = [
+  {
+    target: 'data',
+    eventHandlers: {
+      onMouseOver: () => {
+        return [
+          {
+            target: 'data',
+            mutation: () => ({ style: { fill: 'tomato', width: 40 } }),
+          }, {
+            target: 'labels',
+            mutation: () => ({ active: true }),
+          },
+        ];
+      },
+      onMouseOut: () => {
+        return [
+          {
+            target: 'data',
+            mutation: () => { },
+          }, {
+            target: 'labels',
+            mutation: () => ({ active: false }),
+          },
+        ];
+      },
+    },
+  },
+];
 
 const SimpleLegend = ({ legendData }) => {
   const legendStyle = css`
@@ -15,7 +49,7 @@ const SimpleLegend = ({ legendData }) => {
     font-size: 14px;
     font-weight: bold;
     text-align: center;
-    margin: 10px 0 -40px 0;
+    margin: 10px 0 0 0;
   `;
 
   if (legendData.length) {
@@ -86,6 +120,7 @@ const getDefaultStyle = dataSeries => {
  * @param  {String}    dataKey      X key in `data`
  * @param  {Array}     dataKeyLabel Optional overrides for x-axis tick labels
  * @param  {String}    dataValue    Y key in `data`
+ * @param  {Array}     dataValueLabel Optional overrides for y-axis tick labels
  * @param  {Array}     dataSeries   Series options for multiseries data
  * @param  {Object}    domain       Scaling for chart axes (defaults to data range)
  * @param  {Object}    size         Data `key` or exact `value` to use for data point size
@@ -100,6 +135,7 @@ const Scatterplot = ({
   dataKey,
   dataKeyLabel,
   dataValue,
+  dataValueLabel,
   dataSeries,
   domain,
   size,
@@ -141,9 +177,7 @@ const Scatterplot = ({
   `;
 
   return (
-    <div>
-      {title && <span className={titleStyle}>{title}</span>}
-      {subtitle && <span className={subtitleStyle}>{subtitle}</span>}
+    <ChartContainer title={title} subtitle={subtitle}>
       {legendData && (
         <SimpleLegend className="legend" legendData={legendData} />
       )}
@@ -170,33 +204,48 @@ const Scatterplot = ({
           }}
           title="Y Axis"
         />
-        <VictoryLabel
-          style={axisLabelStyle}
-          text={yLabel}
-          textAnchor="middle"
-          title="Y Axis Label"
-          verticalAnchor="end"
-          x={50}
-          y={45}
-        />
-        <VictoryLabel
-          style={axisLabelStyle}
-          text={xLabel}
-          textAnchor="end"
-          title="X Axis Label"
-          verticalAnchor="end"
-          x={600}
-          y={295}
-        />
+        <VictoryPortal>
+          <VictoryLabel
+            style={axisLabelStyle}
+            text={yLabel}
+            textAnchor="middle"
+            title="Y Axis Label"
+            verticalAnchor="end"
+            x={50}
+            y={45}
+          />
+        </VictoryPortal>
+        <VictoryPortal>
+          <VictoryLabel
+            style={axisLabelStyle}
+            text={xLabel}
+            textAnchor="end"
+            title="X Axis Label"
+            verticalAnchor="end"
+            x={600}
+            y={295}
+          />
+        </VictoryPortal>
         <VictoryScatter
           animate={{ onEnter: { duration: 500 } }}
           categories={{ x: dataKeyLabel }}
           data={data.map(d => ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],
+            label: `${dataKeyLabel ? d[dataKeyLabel] : xLabel}: ${numeric(d[dataKey])} | ${dataValueLabel ? d[dataValueLabel] : yLabel}: ${numeric(d[dataValue])}`,
             series: d.series,
             size: size ? d[size.key] || size.value : 3,
           }))}
+          events={chartEvents}
+          labelComponent={
+            <VictoryTooltip
+              x={325}
+              y={0}
+              orientation="bottom"
+              pointerLength={0}
+              cornerRadius={0}
+            />
+          }
           size={d => d.size}
           style={scatterPlotStyle}
           title="Scatter Plot"
@@ -204,7 +253,7 @@ const Scatterplot = ({
           y="dataValue"
         />
       </VictoryChart>
-    </div>
+    </ChartContainer>
   );
 };
 
@@ -215,6 +264,7 @@ Scatterplot.propTypes = {
   dataKey: PropTypes.string,
   dataKeyLabel: PropTypes.arrayOf(PropTypes.string),
   dataValue: PropTypes.string,
+  dataValueLabel: PropTypes.arrayOf(PropTypes.string),
   dataSeries: PropTypes.arrayOf(PropTypes.string),
   domain: PropTypes.objectOf(PropTypes.array),
   size: PropTypes.shape({ key: PropTypes.string, value: PropTypes.string }),
@@ -230,14 +280,15 @@ Scatterplot.defaultProps = {
   dataKey: 'x',
   dataKeyLabel: null,
   dataValue: 'y',
+  dataValueLabel: null,
   dataSeries: null,
   domain: null,
   size: null,
   style: null,
   subtitle: null,
   title: null,
-  xLabel: null,
-  yLabel: null,
+  xLabel: "X",
+  yLabel: "Y",
 };
 
 export default Scatterplot;

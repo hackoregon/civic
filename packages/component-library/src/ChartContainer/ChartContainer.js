@@ -2,7 +2,6 @@ import React from 'react';
 import { css } from 'emotion';
 
 const titleStyle = css`
-  font-family: 'filson-soft', sans-serif;
   font-size: 40px;
   font-weight: 500;
   text-align: center;
@@ -11,7 +10,6 @@ const titleStyle = css`
 
 const subtitleStyle = css`
   display: block;
-  font-family: 'filson-soft', sans-serif;
   font-size: 18px;
   text-align: center;
 `;

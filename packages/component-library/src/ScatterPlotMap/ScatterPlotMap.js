@@ -15,6 +15,7 @@ const ScatterPlotMap = (props) => {
     strokeWidth,
     autoHighlight,
     onLayerClick,
+    visible,
   } = props;
 
   return (
@@ -40,6 +41,8 @@ const ScatterPlotMap = (props) => {
           autoHighlight={autoHighlight}
           onClick={onLayerClick}
           parameters={{depthTest: false}}
+          visible={visible}
+          updateTriggers={{instanceColors: getColor}}
         />
       </DeckGL>
     </div>
@@ -58,6 +61,7 @@ ScatterPlotMap.propTypes = {
   strokeWidth: PropTypes.number,
   autoHighlight: PropTypes.bool,
   onLayerClick: PropTypes.func,
+  visible: PropTypes.bool,
 };
 
 ScatterPlotMap.defaultProps = {
@@ -68,6 +72,7 @@ ScatterPlotMap.defaultProps = {
   radiusScale: 1,
   outline: false,
   strokeWidth: 1,
+  visible: true,
 };
 
 export default ScatterPlotMap;

@@ -35,6 +35,9 @@ travis:
 		echo "\n--- Transportation Tests\n"; \
 		cd packages/2018-transportation-systems && yarn test; cd -; \
 		\
+		echo "\n--- Example Farmers Markets\n"; \
+		cd packages/2018-example-farmers-markets && yarn test; cd -; \
+		\
 		echo "\n--- 2018 Tests\n"; \
 		cd packages/2018 && yarn test; cd -; \
 	fi

@@ -1,12 +1,24 @@
 import React from 'react';
 
 import '@hackoregon/component-library/assets/global.styles.css';
-import { StoryCard, Placeholder } from '@hackoregon/component-library';
+import LifeAlteringEvent from '../LifeAlteringEvent';
+import ViolentShakingAndGroundDeformation from '../ViolentShakingAndGroundDeformation';
+import SignificantStructuralDamage from '../SignificantStructuralDamage';
+import YouAndYourNeighbors from '../YouAndYourNeighbors';
+import WhatYouCanDoToPrepare from '../WhatYouCanDoToPrepare';
+import IncreasingSocialCapital from '../IncreasingSocialCapital';
+import ProactivePlanning from '../ProactivePlanning';
 
 const App = () => (
-  <StoryCard title="An example disaster Story Card">
-    <Placeholder />
-  </StoryCard>
+  <div style={{ marginTop: '30px' }}>
+    <LifeAlteringEvent />
+    <ViolentShakingAndGroundDeformation />
+    <SignificantStructuralDamage />
+    <YouAndYourNeighbors />
+    <WhatYouCanDoToPrepare />
+    <IncreasingSocialCapital />
+    <ProactivePlanning />
+  </div>
 );
 
 App.displayName = 'App';
