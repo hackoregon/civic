@@ -72,7 +72,7 @@ describe('Scatterplot', () => {
     ]);
   });
 
-  it('renders a legend if dataSeries is specified', () => {
+  it('renders a legend if dataSeriesLabel is specified', () => {
     const props = {
       data: multiSeriesData,
       dataKey: 'amount',
@@ -81,7 +81,7 @@ describe('Scatterplot', () => {
     const wrapper = shallow(<Scatterplot {...props} />);
     expect(wrapper.find('.legend').length).to.eql(0);
 
-    wrapper.setProps({ dataSeries: ['first', 'second'] });
+    wrapper.setProps({ dataSeriesLabel: ['first', 'second'] });
     expect(wrapper.find('.legend').length).to.eql(1);
     expect(wrapper.find('.legend').props().legendData).to.eql([
       { name: 'first' },

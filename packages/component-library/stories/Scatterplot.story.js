@@ -14,7 +14,7 @@ const sampleData = [
   { x: 1, y: 3, series: 'dog' },
   { x: 3, y: 3, series: 'dog' },
 ];
-const sampleDataSeries = ['cat', 'dog', 'fish'];
+const sampledataSeriesLabel = ['cat', 'dog', 'fish'];
 const sampleDomain = { x: [0, 6], y: [0, 8] };
 const sampleSize = { key: 'y' };
 const sampleSubtitle = 'A description of this chart.';
@@ -31,7 +31,7 @@ export default () =>
     .add('with props', () => {
       const data = object('Data', sampleData);
       const dataKey = text('dataKey', sampleXKey);
-      const dataSeries = object('Data Series', sampleDataSeries);
+      const dataSeriesLabel = object('Data Series', sampledataSeriesLabel);
       const dataValue = text('dataValue', sampleYKey);
       const domain = object('Domain', sampleDomain);
       const size = object('Size', sampleSize);
@@ -44,7 +44,7 @@ export default () =>
         <Scatterplot
           data={data}
           dataKey={dataKey}
-          dataSeries={dataSeries}
+          dataSeriesLabel={dataSeriesLabel}
           dataValue={dataValue}
           domain={domain}
           size={size}
