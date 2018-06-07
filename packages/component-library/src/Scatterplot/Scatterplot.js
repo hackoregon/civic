@@ -101,13 +101,13 @@ const getDefaultDomain = data => {
   };
 };
 
-const getDefaultStyle = dataSeries => {
-  // Set the style based on the dataSeries index
+const getDefaultStyle = dataSeriesLabel => {
+  // Set the style based on the dataSeriesLabel index
   return {
     data: {
       fill: d => {
-        if (!dataSeries) return CivicVictoryTheme.civic.group.colorScale[0];
-        const idx = dataSeries.findIndex(series => series === d.series);
+        if (!dataSeriesLabel) return CivicVictoryTheme.civic.group.colorScale[0];
+        const idx = dataSeriesLabel.findIndex(series => series === d.series);
         return CivicVictoryTheme.civic.group.colorScale[idx];
       },
     },
@@ -121,7 +121,7 @@ const getDefaultStyle = dataSeries => {
  * @param  {Array}     dataKeyLabel Optional overrides for x-axis tick labels
  * @param  {String}    dataValue    Y key in `data`
  * @param  {Array}     dataValueLabel Optional overrides for y-axis tick labels
- * @param  {Array}     dataSeries   Series options for multiseries data
+ * @param  {Array}     dataSeriesLabel   Series options for multiseries data
  * @param  {Object}    domain       Scaling for chart axes (defaults to data range)
  * @param  {Object}    size         Data `key` or exact `value` to use for data point size
  * @param  {Object}    style        Optional overrides for point rendering
@@ -136,7 +136,7 @@ const Scatterplot = ({
   dataKeyLabel,
   dataValue,
   dataValueLabel,
-  dataSeries,
+  dataSeriesLabel,
   domain,
   size,
   style,
@@ -146,11 +146,11 @@ const Scatterplot = ({
   yLabel,
 }) => {
   const chartDomain = domain || getDefaultDomain(data);
-  const scatterPlotStyle = style || getDefaultStyle(dataSeries);
+  const scatterPlotStyle = style || getDefaultStyle(dataSeriesLabel);
 
   const legendData =
-    dataSeries && dataSeries.length
-      ? dataSeries.map(series => ({ name: series }))
+    dataSeriesLabel && dataSeriesLabel.length
+      ? dataSeriesLabel.map(series => ({ name: series }))
       : null;
 
   const axisLabelStyle = {
@@ -265,7 +265,7 @@ Scatterplot.propTypes = {
   dataKeyLabel: PropTypes.arrayOf(PropTypes.string),
   dataValue: PropTypes.string,
   dataValueLabel: PropTypes.arrayOf(PropTypes.string),
-  dataSeries: PropTypes.arrayOf(PropTypes.string),
+  dataSeriesLabel: PropTypes.arrayOf(PropTypes.string),
   domain: PropTypes.objectOf(PropTypes.array),
   size: PropTypes.shape({ key: PropTypes.string, value: PropTypes.string }),
   style: PropTypes.objectOf(PropTypes.object),
@@ -281,7 +281,7 @@ Scatterplot.defaultProps = {
   dataKeyLabel: null,
   dataValue: 'y',
   dataValueLabel: null,
-  dataSeries: null,
+  dataSeriesLabel: null,
   domain: null,
   size: null,
   style: null,
