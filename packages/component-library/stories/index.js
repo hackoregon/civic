@@ -19,13 +19,15 @@ import dropdownStory from './DropdownMenu.story';
 import headerStory from './Header.story';
 import Welcome from './Welcome';
 import baseMapStory from './BaseMap.story';
+import mapOverlayStory from './MapOverlay.story';
+import hexOverlayStory from './HexOverlay.story';
 import scatterPlotMapStory from './ScatterPlotMap.story';
 import packageSelectorBoxStory from './PackageSelectorBox.story';
 import selectMenuStory from './Select.story';
+import pullQuoteStory from './PullQuote.story';
 import screenGridMapStory from './ScreenGridMap.story';
 import pathMapStory from './PathMap.story';
 import iconMapStory from './IconMap.story';
-
 import { checkA11y } from '@storybook/addon-a11y';
 import '../assets/global.styles.css';
 
@@ -58,6 +60,9 @@ baseMapStory();
 scatterPlotMapStory();
 packageSelectorBoxStory();
 selectMenuStory();
+pullQuoteStory();
 screenGridMapStory();
 pathMapStory();
 iconMapStory();
+mapOverlayStory();
+hexOverlayStory();

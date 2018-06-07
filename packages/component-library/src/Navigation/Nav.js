@@ -1,8 +1,9 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import { css } from 'emotion';
 import NavSubMenu from './NavSubMenu';
 import NavLink from './NavRouterLink';
 import Icon from '../Icon/Icon';
+import PropTypes from 'prop-types';
 
 const defaultMenu = [
   {

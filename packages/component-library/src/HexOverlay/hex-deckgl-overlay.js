@@ -96,7 +96,7 @@ export default class DeckGLOverlay extends Component {
   }
 
   render() {
-    const {viewport, data, radius, coverage, upperPercentile} = this.props;
+    const {viewport, data, opacity, radius, elevation, coverage, upperPercentile} = this.props;
 
     if (!data) {
       return null;
@@ -109,12 +109,12 @@ export default class DeckGLOverlay extends Component {
         coverage,
         data,
         elevationRange: [0, 3000],
-        elevationScale: this.state.elevationScale,
+        elevationScale: elevation,
         extruded: true,
         getPosition: d => d,
         lightSettings: LIGHT_SETTINGS,
         onHover: this.props.onHover,
-        opacity: 1,
+        opacity,
         pickable: Boolean(this.props.onHover),
         radius,
         upperPercentile

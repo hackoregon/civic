@@ -1,102 +1,66 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import MapGL from 'react-map-gl';
 import { css } from 'emotion';
 import './mapbox-gl.css';
-import DeckGLOverlay from './map-deckgl-overlay.js';
-// import './test.geojson'
+import PropTypes from 'prop-types';
+import DeckGL, {GeoJsonLayer} from 'deck.gl';
 
-const mapWrapper = css`
-  margin: auto;
-  max-width: 900px;
-`;
+const MapOverlay = (props) => {
+  const { viewport, data, mapboxStyle, mapboxToken, opacity, filled, wireframe, extruded, elevation, onLayerClick, getPosition, onLayerHover } = props;
 
-const colorScale = r => [r * 255, 140, 200 * (1 - r)];
+  const mapWrapper = css`
+    margin: auto;
+    max-width: 900px;
+  `;
 
-// Source data GeoJSON (currently only Vancouver BC)
-const DATA_URL = 'https://raw.githubusercontent.com/uber-common/deck.gl-data/master/examples/geojson/vancouver-blocks.json'; // eslint-disable-line
+  const colorScale = r => [r * 255, 140, 200 * (1 - r)];
 
-// const DATA_URL = 'https://raw.githubusercontent.com/hackoregon/transportation-systems/master/test.geojson'
+  const DATA_URL = 'https://raw.githubusercontent.com/uber-common/deck.gl-data/master/examples/geojson/vancouver-blocks.json'; // eslint-disable-line
 
-export default class MapOverlay extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      viewport:{
-        ...DeckGLOverlay.defaultViewport,
-        width: window.innerWidth > 900 ? 898 : window.innerWidth,
-        height: 400,
-      // portland
-        // longitude: -122.6765,
-        // latitude: 45.5231,
-        zoom: 11,
-        minZoom: 1,
-        maxZoom: 20,
-        pitch: 0,
-        bearing: 0,
-        radius: 10,
-      },
-      data: null
+  const LIGHT_SETTINGS = {
+      lightsPosition: [-125, 50.5, 5000, -122.8, 48.5, 8000],
+      ambientRatio: 0.2,
+      diffuseRatio: 0.5,
+      specularRatio: 0.3,
+      lightsStrength: [1.0, 0.0, 2.0, 0.0],
+      numberOfLights: 2
     };
 
-    fetch(DATA_URL)
-      .then(resp => resp.json())
-      .then(data => this.setState({data}));
-    this.onViewportChange = this.onViewportChange.bind(this);
-    this.resize = this.resize.bind(this);
-  }
+  const layer = new GeoJsonLayer({
+    id: 'geojson',
+    data,
+    opacity: opacity,
+    stroked: false,
+    filled: filled,
+    extruded: extruded,
+    wireframe: wireframe,
+    fp64: true,
+    getElevation: f => Math.sqrt(f.properties.Shape_Length) * elevation,
+    getFillColor: f => colorScale(f.properties.Shape_Length),
+    getLineColor: f => [255, 255, 255],
+    lightSettings: LIGHT_SETTINGS,
+    pickable: true,
+    autoHighlight: true,
+    getPosition: getPosition,
+    onClick: onLayerClick,
+    onHover: onLayerHover,
+  });
 
-  componentDidMount() {
-    window.addEventListener('resize', this.resize);
-    this.resize();
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.resize);
-  }
-
-  onViewportChange(viewport) {
-    this.setState({
-      viewport: {...this.state.viewport, ...viewport},
-    });
-  }
-
-  resize() {
-    this.onViewportChange({
-      width: window.innerWidth > 900 ? 898 : window.innerWidth,
-      height: 450,
-    });
-  }
-
-  render() {
-    // const { viewport } = this.state;
-    const {viewport, data} = this.state;
-    const { mapboxStyle, mapboxToken } = this.props;
-
-    return (
-      <div className={mapWrapper}>
-        <MapGL
-          className={'MapGL'}
-          {...viewport}
-             mapStyle={mapboxStyle}
-             onViewportChange={this.onViewportChange.bind(this)}
-             mapboxApiAccessToken={mapboxToken}
-             onViewportChange={ viewport => this.onViewportChange(viewport)}
-        >
-          <DeckGLOverlay
-            viewport={viewport}
-            data={data}
-            colorScale={colorScale} />
-        </MapGL>
-      </div>
-    );
-  };
+  return (
+    <DeckGL {...viewport} layers={[layer]} className={'MapOverlay'} />
+  );
 };
 
 MapOverlay.propTypes = {
   mapboxStyle: PropTypes.string,
-  mapboxToken: PropTypes.string.isRequired,
+  opacity: PropTypes.number,
+  elevation: PropTypes.number,
+  filled: PropTypes.bool,
+  extruded: PropTypes.bool,
 };
 
 MapOverlay.defaultProps = {
   mapboxStyle: "mapbox://styles/themendozaline/cjg6296ub04ot2sqv9izku3qq",
 };
+
+export default MapOverlay;

@@ -1,3 +1,5 @@
+import './fonts.css';
+
 export { default as AreaChart } from './AreaChart/AreaChart';
 export { default as HorizontalBarChart } from './HorizontalBarChart/HorizontalBarChart';
 export { default as BarChart } from './BarChart/BarChart';
@@ -5,6 +7,8 @@ export { default as LineChart } from './LineChart/LineChart';
 export { default as Sankey } from './Sankey/Sankey';
 export { default as Button } from './Button/Button';
 export { default as StoryCard } from './StoryCard/StoryCard';
+export { default as CivicStoryCard } from './CivicStoryCard/CivicStoryCard';
+export { default as PageLayout } from './PageLayout/PageLayout';
 export { default as Chart } from './Chart/Chart';
 export { default as ChartData } from './ChartData/ChartData';
 export { default as PieChart } from './PieChart/PieChart';
@@ -25,8 +29,17 @@ export { default as Media } from './Media/Media';
 export { default as Logo } from './Logo/Logo';
 export { default as ShareCollection } from './Share/ShareCollection';
 export { default as isClient } from './utils/isClient';
-export { default as CivicVictoryTheme } from "./VictoryTheme/VictoryThemeIndex";
+export { default as CivicVictoryTheme } from './VictoryTheme/VictoryThemeIndex';
+export { default as CollectionHero } from './Hero/CollectionHero';
 export { default as BaseMap } from './BaseMap/BaseMap';
+export { default as ScatterPlotMap } from './ScatterPlotMap/ScatterPlotMap';
+export { default as PullQuote } from './PullQuote/PullQuote';
+export { default as ScreenGridMap } from './ScreenGridMap/ScreenGridMap';
+export { default as PackageSelectorBox } from './PackageSelectorBox/PackageSelectorBox';
+export { default as SelectMenu } from './Select/Select';
+export { default as PathMap } from './PathMap/PathMap';
+export { default as IconMap } from './IconMap/IconMap';
 export { default as MapOverlay } from './MapOverlay/MapOverlay';
-
-import './fonts.css';
+export { default as HexOverlay } from './HexOverlay/HexOverlay';
+export { default as BoundaryMap } from './BoundaryMap/BoundaryMap';
+export { default as MapTooltip } from './MapTooltip/MapTooltip';

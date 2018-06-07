@@ -58,7 +58,7 @@
     "d3-shape": "^1.0.6",
     "deck.gl": "^5.2.5",
     "emotion": "^9.1.1",
-    "prop-types": "^15.5.3",
+    "prop-types": "^15.6.1",
     "ramda": "^0.23.0",
     "rc-slider": "^7.0.2",
     "react": "^15.5.3",

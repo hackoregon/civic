@@ -6,7 +6,7 @@ import { action } from '@storybook/addon-actions';
 import { checkA11y } from '@storybook/addon-a11y';
 import { BaseMap } from '../src';
 import { PathMap } from '../src';
-
+import { MapTooltip } from '../src';
 import data from '../src/PathMap/data.json';
 
 const displayName = PathMap.displayName || 'PathMap';
@@ -45,10 +45,10 @@ const demoMap = () => {
   };
 
   const opacityOptions = {
-     range: true,
-     min: 0,
-     max: 1,
-     step: 0.1,
+    range: true,
+    min: 0,
+    max: 1,
+    step: 0.1,
   };
   const opacity = number('Opacity:', 0.9, opacityOptions);
 
@@ -57,10 +57,10 @@ const demoMap = () => {
   const getWidth = f => 45;
 
   const widthScaleOptions = {
-     range: true,
-     min: 1,
-     max: 10,
-     step: 0.5,
+    range: true,
+    min: 1,
+    max: 10,
+    step: 0.5,
   };
   const widthScale = number('Width Scale:', 1, widthScaleOptions);
 
@@ -69,6 +69,8 @@ const demoMap = () => {
   const autoHighlight = boolean('Auto Highlight:', true);
 
   const highlightColor = [125,125,125,125];
+
+  const visible = boolean('Visible:', true);
 
   return (
     <BaseMap
@@ -89,7 +91,48 @@ const demoMap = () => {
         autoHighlight={autoHighlight}
         highlightColor={highlightColor}
         onLayerClick={info => action('Layer clicked:', { depth: 2 })(info, info.object)}
+        visible={visible}
       />
+    </BaseMap>
+  );
+};
+
+const tooltipMap = () => {
+  const colors = [[215,25,28],[253,174,97],[255,255,191],[171,217,233],[44,123,182]];
+
+  const getColor = f => {
+    const speedString = f.properties.avg_bike_speed.split('m')[0];
+    const speed = parseFloat(speedString);
+    return speed < 8 ? colors[0] :
+      speed < 9 ? colors[1] :
+      speed < 10 ? colors[2] :
+      speed < 11 ? colors[3] : colors[4];
+  };
+
+  return (
+    <BaseMap
+      mapboxToken={mapboxToken}
+      mapboxStyle={"mapbox://styles/themendozaline/cj6y6f5m006ar2sobpimm7ay7"}
+      initialZoom={11.5}
+      initialLatitude={45.5683}
+      initialLongitude={-122.6712}
+    >
+      <PathMap
+        data={data.slide_data.features}
+        getColor={getColor}
+        opacity={1}
+        getPath={f => f.geometry.coordinates}
+        getWidth={f => 80}
+        widthScale={1}
+        onLayerClick={info => action('Layer clicked:', { depth: 2 })(info, info.object)}
+      >
+        <MapTooltip
+          primaryName={"average bike speed"}
+          primaryField={"avg_bike_speed"}
+          secondaryName={"length of lane"}
+          secondaryField={"shape_leng"}
+        />
+      </PathMap>
     </BaseMap>
   );
 };
@@ -99,4 +142,7 @@ export default () => storiesOf(displayName, module)
   .addDecorator(checkA11y)
   .add('Simple usage',
     (demoMap)
+  )
+  .add('With tooltip',
+    (tooltipMap)
   );
