@@ -5,9 +5,9 @@ const heroClass = css`
   display: flex;
   background: rgb(34, 15, 37);
   height: 75vh;
-  min-height: 420px;
+  min-height: 600px;
   width: 100%;
-  margin: 0;
+  margin: 0 0 120px;
   padding: 0;
   background-size: cover;
   background-position: center center;
