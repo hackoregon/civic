@@ -64,3 +64,4 @@ pathMapStory();
 iconMapStory();
 mapOverlayStory();
 hexOverlayStory();
+boundaryMapStory();
