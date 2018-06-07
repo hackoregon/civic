@@ -1,7 +1,8 @@
 import React from 'react';
+import { App as Sandbox } from '@hackoregon/civic-sandbox';
 
 const SandboxPage = () => (
-  <h1>Sandbox coming soon!</h1>
+  <Sandbox />
 );
 
 SandboxPage.displayName = 'SandboxPage';
