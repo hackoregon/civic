@@ -71,12 +71,6 @@ class HexOverlay extends Component {
       return null;
     }
 
-    // const defaultProps = {
-    //   radius: 1000,
-    //   upperPercentile: 100,
-    //   coverage: 1
-    // };
-
     const layers = [
       new HexagonLayer({
         id: 'heatmap',
@@ -88,9 +82,7 @@ class HexOverlay extends Component {
         extruded: true,
         getPosition: d => d,
         lightSettings: lightSettings,
-        // onHover: this.props.onHover,
         opacity,
-        // pickable: Boolean(this.props.onHover),
         radius,
         upperPercentile:100
       })
