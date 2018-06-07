@@ -11,6 +11,7 @@ const cardsWrapper = css`
   flex-wrap: wrap;
 `;
 const card = css`
+  font-family: 'Rubik';
   position: relative;
   background-color: white;
   font-size: 2vw;
@@ -20,7 +21,7 @@ const card = css`
   box-sizing: border-box;
   text-align: center;
   margin: 6px 0px;
-  min-height: 300px;
+  min-height: 260px;
   transition: all .5s ease-in-out;
 
   @media (max-width: 990px) {
@@ -70,17 +71,17 @@ const logoWrapper = css`
   width: 180px;
 `;
 const missionStatementTitle = css`
+  font-family: 'Rubik', sans-serif;
   text-align: center;
-  font-size: 40px;
+  font-size: 50px;
   width: 50%;
   letter-spacing: -2px;
   margin: 22px auto;
 `;
 const missionStatement = css`
-  font-size: 18px;
-  letter-spacing: -1px;
+  font-size: 20px;
   line-height: 1.8;
-  font-family: "Merriweather", serif;
+  font-family: "Rubik", sans-serif;
   width: 80%;
   margin: 24px auto;
   max-width: 1000px;
@@ -97,6 +98,10 @@ const contentWrapper = css`
 `;
 const lookupWrapper = css`
   margin-top: 100px;
+`;
+const iconWrapper = css`
+  width: 180px;
+  margin: 20px auto 0;
 `;
 
 class LandingPage extends React.Component {
@@ -151,7 +156,7 @@ class LandingPage extends React.Component {
           <div className={missionStatementTitle}>{'Making data human, means making data intelligent.'}</div>
           <div className={missionStatement}>{`CIVIC is a platform for evolving powerful data technology, in a way that’s fundamentally built to serve people.`}</div>
           <div className={lookupWrapper}>
-            <h3 className={searchTitle}>Look for Civic data in your area</h3>
+            <h3 className={searchTitle}>Look for CIVIC data in your area</h3>
             <SearchBar handleSubmit={this.handleSearch} />
             <DataList repos={this.state.repos}/>
           </div>
@@ -217,19 +222,27 @@ class DataList extends React.Component {
         <div className={cardsWrapper}>
           <div className={card}>
             <div>{this.props.repos.country ? this.props.repos.country : "?"}</div>
-            { countryImage }
+            <div className={iconWrapper}>
+              { countryImage }
+            </div>
           </div>
           <div className={card}>
             <div>{this.props.repos.state ? this.props.repos.state : "?"}</div>
-            {stateImage}
+            <div className={iconWrapper}>
+              {stateImage}
+            </div>
           </div>
           <div className={card}>
             <div>{this.props.repos.city ? this.props.repos.city : "?"}</div>
-            { cityImage }
+            <div className={iconWrapper}>
+              { cityImage }
+            </div>
           </div>
           <div className={card}>
             <div>{this.props.repos.city ? "Local" : "?"}</div>
-            { localImage }
+            <div className={iconWrapper}>
+              { localImage }
+            </div>
           </div>
           { this.props.repos.city && ctaMessage }
         </div>
