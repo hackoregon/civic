@@ -57,8 +57,6 @@ sankeyStory();
 sliderStory();
 dropdownStory();
 baseMapStory();
-mapOverlayStory();
-hexOverlayStory();
 scatterPlotMapStory();
 pullQuoteStory();
 screenGridMapStory();
