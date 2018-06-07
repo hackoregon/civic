@@ -22,7 +22,7 @@ const card = css`
   text-align: center;
   margin: 6px 0px;
   min-height: 260px;
-  transition: all .5s ease-in-out;
+  transition: all .3s ease-in-out;
 
   @media (max-width: 990px) {
     width: calc(50% - 24px);
@@ -30,6 +30,11 @@ const card = css`
 
   @media (max-width: 768px) {
     width: 100%;
+  }
+
+  :hover {
+    transform: translateY(-25px);
+    cursor: pointer;
   }
 
   :after {
@@ -48,7 +53,7 @@ const card = css`
 const searchForm = css`
   display: block;
   width: 100%;
-  margin: 30px auto;
+  margin: 80px auto;
   max-width: 420px;
 `;
 
@@ -56,18 +61,30 @@ const searchInput = css`
   width: 100%;
   padding: 10px 20px;
   border-radius: 100px;
-  border: 2px solid black;
+  border: 2px solid white;
+  background-color: #250f28;
   font-size: 20px;
+  color: white;
+
+  ::placeholder {
+    color: white;
+  }
 `;
 
 const searchTitle = css`
+  font-family: 'Rubik', sans-serif;
   text-align: center;
-  font-size: 18px;
+  font-size: 50px;
+  width: 50%;
+  letter-spacing: -2px;
+  margin: 22px auto;
+  font-weight: 400;
+  color: white;
 `;
 const logoWrapper = css`
   position: relative;
   margin: 0 auto;
-  padding: 50px 0px;
+  padding: 120px 0px 50px;
   width: 180px;
 `;
 const missionStatementTitle = css`
@@ -97,7 +114,9 @@ const contentWrapper = css`
   position: relative;
 `;
 const lookupWrapper = css`
-  margin-top: 100px;
+  margin-top: 125px;
+  background-color: #240f27;
+  padding: 100px 0px;
 `;
 const iconWrapper = css`
   width: 180px;
@@ -185,7 +204,7 @@ class SearchBar extends React.Component {
           name="text"
           className={searchInput}
           type="text"
-          placeholder="Enter Zip Code"
+          placeholder="Enter City or Zip Code"
         />
       </form>
     );

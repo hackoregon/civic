@@ -30,7 +30,7 @@ class CanvasParticles extends React.Component {
     // const dist;
 
     function paintCanvas() {
-    	ctx.fillStyle = "rgba(242, 242, 242, 1)";
+    	ctx.fillStyle = "rgba(255, 255, 255, 1)";
     	ctx.fillRect(0,0,W,H);
     }
 
@@ -127,7 +127,7 @@ class CanvasParticles extends React.Component {
 
     		// Draw the line
     		ctx.beginPath();
-    		ctx.strokeStyle = "rgba(0,0,0,"+ (1.0-dist/minDist) +")";
+    		ctx.strokeStyle = "rgba(239,74,93,"+ (1.0-dist/minDist) +")";
     		ctx.moveTo(p1.x, p1.y);
     		ctx.lineTo(p2.x, p2.y);
     		ctx.stroke();
