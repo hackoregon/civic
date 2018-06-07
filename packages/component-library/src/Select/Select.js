@@ -13,11 +13,11 @@ class SelectMenu extends React.Component {
   }
   handleChange(selectedOption) {
     this.setState({ selectedOption });
-    console.log(`Selected: ${selectedOption.label}`);
+    this.props.onChangeCallback(selectedOption);
   }
   render() {
     const { selectedOption } = this.state;
-    const { options } = this.props;
+    const { options, multi, value } = this.props;
     const baseStyles = css(`
       max-width: 250px;
 
@@ -33,11 +33,12 @@ class SelectMenu extends React.Component {
     return (
       <Select
         name="form-field-name"
-        value={selectedOption}
+        value={selectedOption || value}
         onChange={this.handleChange}
         className={baseStyles}
-        multi
+        multi={multi}
         options={options}
+        simpleValue
       />
     );
   }
@@ -45,6 +46,9 @@ class SelectMenu extends React.Component {
 
 SelectMenu.propTypes = {
   options: React.PropTypes.array,
+  multi: React.PropTypes.bool,
+  value: React.PropTypes.string,
+  onChangeCallback: React.PropTypes.func,
 };
 
 export default SelectMenu;
