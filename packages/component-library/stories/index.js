@@ -26,8 +26,8 @@ import pullQuoteStory from './PullQuote.story';
 import screenGridMapStory from './ScreenGridMap.story';
 import pathMapStory from './PathMap.story';
 import iconMapStory from './IconMap.story';
-import boundaryMapStory from './BoundaryMap.story';
-
+import mapOverlayStory from './MapOverlay.story';
+import hexOverlayStory from './HexOverlay.story';
 import { checkA11y } from '@storybook/addon-a11y';
 import '../assets/global.styles.css';
 
@@ -57,11 +57,11 @@ sankeyStory();
 sliderStory();
 dropdownStory();
 baseMapStory();
-mapOverlayStory();
-hexOverlayStory();
 scatterPlotMapStory();
 pullQuoteStory();
 screenGridMapStory();
 pathMapStory();
 iconMapStory();
+mapOverlayStory();
+hexOverlayStory();
 boundaryMapStory();

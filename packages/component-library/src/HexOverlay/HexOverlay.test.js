@@ -1,31 +1,71 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import HexOverlay from './HexOverlay';
+import DeckGL from 'deck.gl';
 
 describe('HexOverlay', () => {
-  const mapboxStyle = 'mapbox://styles/themendozaline/cjg6296ub04ot2sqv9izku3qq';
-  const mapboxToken = 'pk.eyJ1IjoidGhlbWVuZG96YWxpbmUiLCJhIjoiY2o1aXdoem1vMWtpNDJ3bnpqaGF1bnlhNSJ9.sjTrNKLW9daDBIGvP3_W0w';
+  const data = [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0,
+          0
+        ]
+      },
+      "properties": {
+        "name": "Null Island"
+      }
+    }
+  ];
+  const extruded = true;
+  const opacity = 0.8;
+  const radius = 200;
 
   const defaultProps = {
-    mapboxStyle,
-    mapboxToken,
+    data,
+    extruded,
+    opacity,
+    radius,
   };
 
-  it('should render a container div', () => {
-    const wrapper = shallow( <HexOverlay {...defaultProps} />);
+  const wrapper = shallow( <HexOverlay {...defaultProps} />);
 
-    expect(wrapper.find('div')).to.have.length(1);
+  it('should render a DeckGLOverlay component', () => {
+    const wrapper = shallow(<HexOverlay {...defaultProps} />);
+    expect(wrapper.find('.HexOverlay')).to.have.length(1);
   });
 
-  it('should render a MapGL component', () => {
-    const wrapper = shallow(<HexOverlay {...defaultProps} />);
-
-    expect(wrapper.find('.MapGL')).to.have.length(1);
+  it('should render a DeckGL component', () => {
+    expect(wrapper.find(DeckGL)).length(1)
   });
 
-  it('should have required prop mapboxApiAccessToken', () => {
-    const wrapper = shallow(<HexOverlay {...defaultProps} />);
+  it('should render with the same class name', () => {
+    expect(wrapper.find('.HexOverlay')).length(1)
+  });
 
-    expect(wrapper.find('.MapGL').prop('mapboxApiAccessToken')).to.eql(defaultProps.mapboxToken);
+  it('should render with extruded', () => {
+    expect(wrapper.props().layers[0].props.extruded).to.equal(true)
+  });
+
+  it('should render with radius', () => {
+    expect(wrapper.props().layers[0].props.radius).to.equal(200)
+  });
+
+  it('should render with opacity of 0.8', () => {
+    expect(wrapper.props().layers[0].props.opacity).to.equal(0.8)
+  });
+
+  it('should render with an extrusion', () => {
+    expect(wrapper.props().layers[0].props.extruded).to.equal(true)
+  });
+
+  it('should render with data', () => {
+    expect(wrapper.props().layers[0].props.data).to.equal(data)
+  });
+
+  it('should render with an type string', () => {
+    expect(wrapper.props().layers[0].props.data[0].type).to.equal("Feature")
   });
 });
