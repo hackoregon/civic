@@ -16,8 +16,8 @@ import { chartEvents } from '../utils/chartHelpers';
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
 
 const getDefaultDomain = (data, x, y) => {
-  const xValues = data.map(value => value.x);
-  const yValues = data.map(value => value.y);
+  const xValues = data.map(value => value[x]);
+  const yValues = data.map(value => value[y]);
 
   return {
     x: [
