@@ -85,7 +85,7 @@ const SimpleLegend = ({ legendData }) => {
   return null;
 };
 
-const getDefaultDomain = data => {
+const getDefaultDomain = (data, x, y) => {
   const xValues = data.map(value => value.x);
   const yValues = data.map(value => value.y);
 
@@ -155,7 +155,7 @@ const Scatterplot = ({
   xLabel,
   yLabel,
 }) => {
-  const chartDomain = domain || getDefaultDomain(data);
+  const chartDomain = domain || getDefaultDomain(data, dataKey, dataValue);
   const dataSeriesLabels = dataSeries
     ? dataSeriesLabel || getDefaultDataSeriesLabels(data)
     : null;
