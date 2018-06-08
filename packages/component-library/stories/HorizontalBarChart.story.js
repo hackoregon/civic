@@ -21,7 +21,7 @@ export default () => storiesOf(displayName, module)
   .addDecorator(checkA11y)
   .addDecorator(withKnobs)
   .add('Basic Usage', (() => {
-    const data = array('Data',[
+    const data = object('Data',[
       {sortOrder: 1, population: 2000, label: 'Labrador Retriever'},
       {sortOrder: 2, population: 8000, label: 'Standard Poodle'},
       {sortOrder: 3, population: 6000, label: 'French Bulldog'},
@@ -31,6 +31,9 @@ export default () => storiesOf(displayName, module)
       const dataKey = text('Data key', 'sortOrder');
       const dataValue = text('Data values', 'population');
       const dataKeyLabel = text('Data key labels', 'label');
+      const xLabel = text('xLabel', 'Dollars');
+      const yLabel = text('yLabel', 'Dogs');
+
     return (
       <HorizontalBarChart
         data={data}
@@ -40,6 +43,8 @@ export default () => storiesOf(displayName, module)
         horizontalFormatter={x => dollars(numeric(x))}
         title={'Dogs and their Money'}
         subtitle={'As of January 2017'}
+        xLabel={xLabel}
+        yLabel={yLabel}
       />
     );
   }))
@@ -49,5 +54,6 @@ export default () => storiesOf(displayName, module)
     dataKey={dataKey}
     dataValue={dataValue}
     dataKeyLabel={dataKeyLabel}
+    
   />
 )))

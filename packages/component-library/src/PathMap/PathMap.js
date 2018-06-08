@@ -1,5 +1,10 @@
 import React, { PropTypes } from 'react';
 import DeckGL, { PathLayer } from 'deck.gl';
+import { css } from 'emotion';
+
+const crosshair = css`
+  cursor: crosshair;
+`;
 
 const PathMap = (props) => {
   const {
@@ -15,10 +20,25 @@ const PathMap = (props) => {
     highlightColor,
     onLayerClick,
     visible,
+    tooltipInfo,
+    x,
+    y,
+    onHover,
+    children,
   } = props;
 
+  const tooltip = React.Children.map(children, child => {
+    return React.cloneElement(child, {
+      tooltipInfo: tooltipInfo,
+      x: x,
+      y: y,
+    });
+  });
+
+  const tooltipRender = tooltipInfo ? tooltip : null;
+
   return (
-    <div>
+    <div className={crosshair}>
       <DeckGL
         className={'DeckGL'}
         {...viewport}
@@ -38,10 +58,12 @@ const PathMap = (props) => {
           autoHighlight={autoHighlight}
           highlightColor={highlightColor}
           onClick={onLayerClick}
+          onHover={onHover}
           parameters={{depthTest: false}}
           updateTriggers={{instanceColors: getColor}}
           visible={visible}
         />
+        { tooltipRender }
       </DeckGL>
     </div>
   );
@@ -60,6 +82,11 @@ PathMap.propTypes = {
   highlightColor: PropTypes.array,
   onLayerClick: PropTypes.func,
   visible: PropTypes.bool,
+  tooltipInfo: PropTypes.object,
+  x: PropTypes.number,
+  y: PropTypes.number,
+  onHover: PropTypes.func,
+  children: PropTypes.node,
 };
 
 PathMap.defaultProps = {
@@ -70,6 +97,7 @@ PathMap.defaultProps = {
   widthScale: 1,
   rounded: false,
   autoHighlight: true,
+  highlightColor: [0,0,128,191],
   visible: true,
 };
 

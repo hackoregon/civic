@@ -18,7 +18,7 @@ const description = `
 
 export default () => storiesOf(displayName, module).addDecorator(withKnobs)
   .add('Basic Usage', (() => {
-    const data = array('Data', [
+    const data = object('Data', [
       { sortOrder: 1, population: 2000, label: 'Labrador Retriever' },
       { sortOrder: 2, population: 8000, label: 'Standard Poodle' },
       { sortOrder: 3, population: 6000, label: 'French Bulldog' },
@@ -28,6 +28,8 @@ export default () => storiesOf(displayName, module).addDecorator(withKnobs)
     const dataKey = text('Data key', 'sortOrder');
     const dataValue = text('Data values', 'population');
     const dataKeyLabel = text('Data key labels', 'label');
+    const xLabel = text('xLabel', 'Dogs');
+    const yLabel = text('yLabel', 'Dollars');
     
     return (
       <BarChart
@@ -37,6 +39,8 @@ export default () => storiesOf(displayName, module).addDecorator(withKnobs)
         dataKeyLabel={dataKeyLabel}
         title={'Dogs and their Money'}
         subtitle={'As of January 2017'}
+        xLabel={xLabel}
+        yLabel={yLabel}
       />
     );
   }));

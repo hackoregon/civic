@@ -4,6 +4,8 @@ import {
   VictoryAxis,
   VictoryBar,
   VictoryChart,
+  VictoryLabel,
+  VictoryPortal,
   VictoryTooltip,
 } from 'victory';
 
@@ -40,6 +42,12 @@ const chartEvents = [
   },
 ];
 
+const axisLabelStyle = {
+  fontFamily: "'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif",
+  fontSize: '14px',
+  fontWeight: 'bold',
+};
+
 const HorizontalBarChart = ({
   data,
   dataKey,
@@ -47,6 +55,8 @@ const HorizontalBarChart = ({
   dataKeyLabel,
   title,
   subtitle,
+  xLabel,
+  yLabel,
   horizontalFormatter,
   labelFormatter,
 }) => {
@@ -72,6 +82,28 @@ const HorizontalBarChart = ({
           // tickFormat specifies how ticks should be displayed
           tickFormat={horizontalFormatter}
         />
+        <VictoryPortal>
+          <VictoryLabel
+            style={axisLabelStyle}
+            text={yLabel}
+            textAnchor="middle"
+            title="Y Axis Label"
+            verticalAnchor="end"
+            x={50}
+            y={45}
+          />
+        </VictoryPortal>
+        <VictoryPortal>
+          <VictoryLabel
+            style={axisLabelStyle}
+            text={xLabel}
+            textAnchor="end"
+            title="X Axis Label"
+            verticalAnchor="end"
+            x={600}
+            y={295}
+          />
+        </VictoryPortal>
         <VictoryBar
           horizontal
           labelComponent={
@@ -103,6 +135,8 @@ HorizontalBarChart.propTypes = {
   title: PropTypes.string,
   subtitle: PropTypes.string,
   horizontalFormatter: PropTypes.func,
+  xLabel: PropTypes.string,
+  yLabel: PropTypes.string,
 };
 
 export default HorizontalBarChart;

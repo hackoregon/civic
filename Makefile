@@ -38,6 +38,9 @@ travis:
 		echo "\n--- Example Farmers Markets\n"; \
 		cd packages/2018-example-farmers-markets && yarn test; cd -; \
 		\
+		echo "\n--- Civic Sandbox Tests\n"; \
+		cd packages/civic-sandbox && yarn test; cd -; \
+		\
 		echo "\n--- 2018 Tests\n"; \
 		cd packages/2018 && yarn test; cd -; \
 	fi

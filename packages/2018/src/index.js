@@ -44,6 +44,10 @@ import {
   App as FarmersMarketsApp,
 } from '@hackoregon/2018-example-farmers-markets';
 
+import {
+  Reducers as SandboxReducers,
+} from '@hackoregon/civic-sandbox';
+
 import './fonts.css';
 import RootPage from './components/RootPage';
 import HomePage from './components/HomePage';
@@ -80,6 +84,7 @@ const configureStore = (initialState, history) => {
         '@hackoregon/2018-neighborhood-development',
         '@hackoregon/2018-transportation-systems',
         '@hackoregon/2018-example-farmers-markets',
+        '@hackoregon/civic-sandbox',
       ],
       () => {
         const nextRootReducer = combineReducers({
@@ -90,6 +95,7 @@ const configureStore = (initialState, history) => {
           neighborhood: require('@hackoregon/2018-neighborhood-development').Reducers(),
           transportation: require('@hackoregon/2018-transportation-systems').Reducers(),
           farmersMarkets: require('@hackoregon/2018-example-farmers-markets').Reducers(),
+          sandbox: require('@hackoregon/civic-sandbox').Reducers(),
         });
         store.replaceReducer(nextRootReducer);
       }
