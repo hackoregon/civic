@@ -1,24 +1,26 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import { css } from 'emotion';
 import NavSubMenu from './NavSubMenu';
 import NavLink from './NavRouterLink';
 import Icon from '../Icon/Icon';
+import PropTypes from 'prop-types';
 
 const defaultMenu = [
   {
     name: 'Collections',
     path: '/',
     nestedMenu: [
-      { name: 'Budget', path: '/budget' },
-      { name: 'Emergency Response', path: '/emergency' },
-      { name: 'Housing', path: '/housing' },
-      { name: 'Homelessness', path: '/homelessness' },
-      { name: 'Transportation', path: '/transportation' },
+      { name: 'Disaster Resilience', path: '/cities/portland/disaster' },
+      { name: 'Housing Affordability', path: '/cities/portland/housing' },
+      { name: 'Local Elections', path: '/cities/portland/elections' },
+      { name: 'Neighborhood Development', path: '/cities/portland/neighborhood' },
+      { name: 'Transportation Systems', path: '/cities/portland/transportation' },
+      { name: 'EXAMPLE Farmers Markets', path: '/cities/portland/farmers-markets' },
     ],
   },
   {
-    name: 'About',
-    path: '/about',
+    name: 'Sandbox',
+    path: '/sandbox',
   },
 ];
 
@@ -118,7 +120,7 @@ class Nav extends Component {
 
   handleClick = (name, menu, e) => {
     e.preventDefault();
-    const items = !this.state.menuActive ? menu : [];
+    const items = menu;
 
     this.setState(() => ({ menuActive: !this.state.menuActive, items }));
   }

@@ -45,7 +45,7 @@
     "redux": "^3.6.0",
     "redux-thunk": "^2.1.0",
     "webpack": "^2.5.1",
-    "webpack-blocks": "^1.0.0-rc.2",
+    "webpack-blocks": "^1.0.0",
     "webpack-blocks-utils": "2.0.0-alpha.4",
     "webpack-dev-middleware": "^1.10.0",
     "webpack-hot-middleware": "^2.17.0"

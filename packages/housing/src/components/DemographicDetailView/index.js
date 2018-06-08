@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { RechartsPie } from '@hackoregon/component-library';
 import commaSeparate from '../../utils/comma-separate';
 

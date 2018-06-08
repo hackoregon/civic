@@ -1,6 +1,7 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import MapGL, { NavigationControl } from 'react-map-gl';
 import { css } from 'emotion';
+import PropTypes from 'prop-types';
 import './mapbox-gl.css';
 
 const mapWrapper = css`
@@ -21,17 +22,21 @@ export default class BaseMap extends Component {
       viewport:{
         width: window.innerWidth * 0.95,
         height: 500,
-        longitude: -122.6765,
-        latitude: 45.5231,
-        zoom: 9.5,
+        longitude: props.initialLongitude || -122.6765,
+        latitude: props.initialLatitude || 45.5231,
+        zoom: props.initialZoom || 9.5,
         minZoom: 6,
         maxZoom: 16,
-        pitch: 0,
+        pitch: props.initialPitch || 0,
         bearing: 0,
       },
+      tooltipInfo: null,
+      x: null,
+      y: null,
     };
     this.onViewportChange = this.onViewportChange.bind(this);
     this.resize = this.resize.bind(this);
+    this.onHover = this.onHover.bind(this);
   }
 
   componentDidMount() {
@@ -56,8 +61,21 @@ export default class BaseMap extends Component {
     });
   }
 
+  onHover({object, x, y}) {
+    this.setState({
+      tooltipInfo: object,
+      x,
+      y,
+    });
+  }
+
   render() {
-    const { viewport } = this.state;
+    const {
+      viewport,
+      tooltipInfo,
+      x,
+      y,
+    } = this.state;
 
     const {
       mapboxStyle,
@@ -65,10 +83,20 @@ export default class BaseMap extends Component {
       children,
     } = this.props;
 
+    const childrenLayers = React.Children.map(children, child => {
+      return React.cloneElement(child, {
+        viewport,
+        tooltipInfo,
+        x,
+        y,
+        onHover: info => this.onHover(info),
+      });
+    });
+
     return (
       <div className={mapWrapper}>
         <MapGL
-         className={'MapGL'}
+          className={'MapGL'}
           {...viewport}
           mapStyle={mapboxStyle}
           mapboxApiAccessToken={mapboxToken}
@@ -76,16 +104,11 @@ export default class BaseMap extends Component {
         >
           <div className={navControl}>
             <NavigationControl
+              className={'NavigationControl'}
               onViewportChange={viewport => this.onViewportChange(viewport)}
             />
           </div>
-          {
-            children ?
-            React.cloneElement(children, {
-              viewport: viewport,
-            }) :
-            null
-          }
+          { childrenLayers }
         </MapGL>
       </div>
     );
