@@ -38,5 +38,3 @@ export { default as IconMap } from './IconMap/IconMap';
 export { default as MapOverlay } from './MapOverlay/MapOverlay';
 export { default as HexOverlay } from './HexOverlay/HexOverlay';
 export { default as BoundaryMap } from './BoundaryMap/BoundaryMap';
-
-import './fonts.css';
