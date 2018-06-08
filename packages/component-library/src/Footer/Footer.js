@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import { css } from 'emotion';
 import LogoStandard from '../Logo/LogoStandard';
 import ScrollToTop from '../ScrollToTop/ScrollToTop';
@@ -18,6 +19,12 @@ const footerClass = css`
   justify-content: center;
   align-content: center;
   flex-direction: row;
+  margin-left: 0;
+  margin-top: 200px;
+  padding: 32px 40px;
+  position: relative;
+  box-sizing: border-box;
+  border-top: 1px solid lightgrey;
 
   @media (min-width: 768px) {
     margin-left: 0;
@@ -42,6 +49,11 @@ const logoClass = css`
   }
 `;
 
+const logoLinkStyle = css`
+  margin: 0 auto;
+  border-bottom: none;
+`;
+
 const scrollToTopClass = css`
   color: #EE495C;
   ${commonFont}
@@ -59,7 +71,7 @@ const scrollToTopClass = css`
 const Footer = () => (
   <div className={footerClass}>
     <div className={copyrightClass}>&copy; Copyright {(new Date()).getFullYear()}</div>
-    <div className={logoClass}><LogoStandard /></div>
+    <div className={logoClass}><Link to="/" className={logoLinkStyle}><LogoStandard /></Link></div>
     <div className={scrollToTopClass}><ScrollToTop iconStyle="fa fa-angle-up" /></div>
   </div>
 

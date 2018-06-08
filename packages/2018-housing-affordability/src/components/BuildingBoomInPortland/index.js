@@ -9,8 +9,8 @@ export class BuildingBoomInPortland extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="A Builidng Boom in Portland">
-        <Placeholder />
+      <CivicStoryCard title="A Building Boom in Portland">
+        <Placeholder issue="166" />
       </CivicStoryCard>
     );
   }

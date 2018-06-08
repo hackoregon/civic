@@ -11,9 +11,9 @@ import ProactivePlanning from '../ProactivePlanning';
 
 const App = () => (
   <div style={{ marginTop: '30px' }}>
-    <LifeAlteringEvent />
     <ViolentShakingAndGroundDeformation />
     <SignificantStructuralDamage />
+    <LifeAlteringEvent />
     <YouAndYourNeighbors />
     <WhatYouCanDoToPrepare />
     <IncreasingSocialCapital />

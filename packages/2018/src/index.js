@@ -44,10 +44,17 @@ import {
   App as FarmersMarketsApp,
 } from '@hackoregon/2018-example-farmers-markets';
 
+import {
+  Reducers as SandboxReducers,
+} from '@hackoregon/civic-sandbox';
+
 import './fonts.css';
 import RootPage from './components/RootPage';
 import HomePage from './components/HomePage';
 import SandboxPage from './components/SandboxPage';
+import PortlandCollectionPage from './components/PortlandCollectionPage';
+import CityNotFoundPage from './components/CityNotFoundPage';
+import StateNotFoundPage from './components/StateNotFoundPage';
 
 // Create a store by combining all project reducers and the routing reducer
 const configureStore = (initialState, history) => {
@@ -80,6 +87,7 @@ const configureStore = (initialState, history) => {
         '@hackoregon/2018-neighborhood-development',
         '@hackoregon/2018-transportation-systems',
         '@hackoregon/2018-example-farmers-markets',
+        '@hackoregon/civic-sandbox',
       ],
       () => {
         const nextRootReducer = combineReducers({
@@ -90,6 +98,7 @@ const configureStore = (initialState, history) => {
           neighborhood: require('@hackoregon/2018-neighborhood-development').Reducers(),
           transportation: require('@hackoregon/2018-transportation-systems').Reducers(),
           farmersMarkets: require('@hackoregon/2018-example-farmers-markets').Reducers(),
+          sandbox: require('@hackoregon/civic-sandbox').Reducers(),
         });
         store.replaceReducer(nextRootReducer);
       }
@@ -117,34 +126,54 @@ const routes = {
   },
   childRoutes: [
     {
-      path: 'disaster',
-      component: DisasterApp,
-      childRoutes: DisasterRoutes(store),
+      path: 'cities/portland',
+      indexRoute: {
+        component: PortlandCollectionPage,
+      },
+      childRoutes: [
+        {
+          path: 'disaster',
+          component: DisasterApp,
+          childRoutes: DisasterRoutes(store),
+        },
+        {
+          path: 'housing',
+          component: HousingApp,
+          childRoutes: HousingRoutes(store),
+        },
+        {
+          path: 'elections',
+          component: ElectionsApp,
+          childRoutes: ElectionsRoutes(store),
+        },
+        {
+          path: 'neighborhood',
+          component: NeighborhoodApp,
+          childRoutes: NeighborhoodRoutes(store),
+        },
+        {
+          path: 'transportation',
+          component: TransportationApp,
+          childRoutes: TransportationRoutes(store),
+        },
+        {
+          path: 'farmers-markets',
+          component: FarmersMarketsApp,
+          childRoutes: FarmersMarketsRoutes(store),
+        },
+      ],
     },
     {
-      path: 'housing',
-      component: HousingApp,
-      childRoutes: HousingRoutes(store),
+      path: 'cities/:city',
+      component: CityNotFoundPage,
     },
     {
-      path: 'elections',
-      component: ElectionsApp,
-      childRoutes: ElectionsRoutes(store),
+      path: 'states/oregon',
+      component: PortlandCollectionPage,
     },
     {
-      path: 'neighborhood',
-      component: NeighborhoodApp,
-      childRoutes: NeighborhoodRoutes(store),
-    },
-    {
-      path: 'transportation',
-      component: TransportationApp,
-      childRoutes: TransportationRoutes(store),
-    },
-    {
-      path: 'farmers-markets',
-      component: FarmersMarketsApp,
-      childRoutes: FarmersMarketsRoutes(store),
+      path: 'states/:state',
+      component: StateNotFoundPage,
     },
     {
       path: 'sandbox',

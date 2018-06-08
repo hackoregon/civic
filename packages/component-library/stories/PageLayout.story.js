@@ -21,6 +21,7 @@ const dataKeyLabel = text('Data key labels', 'label');
 
 const housingExample = () => (
   <PageLayout
+    teamTitle='Transportation'
     heroTitle='Housing'
     heroSubtitle='A look into the housing rental income disparity.'
     mainProjectColor='#7CD'

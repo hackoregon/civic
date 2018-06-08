@@ -10,7 +10,7 @@ export class PacificNorthwestTopsNationInSurgingHomePrices extends React.Compone
   render() {
     return (
       <CivicStoryCard title="Pacific Northwest Tops the Nation in Surging Home Prices">
-        <Placeholder />
+        <Placeholder issue="58" />
       </CivicStoryCard>
     );
   }

@@ -21,10 +21,10 @@ import PropTypes from 'prop-types';
 var defaultMenu = [{
   name: 'Collections',
   path: '/',
-  nestedMenu: [{ name: 'Budget', path: '/budget' }, { name: 'Emergency Response', path: '/emergency' }, { name: 'Housing', path: '/housing' }, { name: 'Homelessness', path: '/homelessness' }, { name: 'Transportation', path: '/transportation' }]
+  nestedMenu: [{ name: 'Disaster Resilience', path: '/cities/portland/disaster' }, { name: 'Housing Affordability', path: '/cities/portland/housing' }, { name: 'Local Elections', path: '/cities/portland/elections' }, { name: 'Neighborhood Development', path: '/cities/portland/neighborhood' }, { name: 'Transportation Systems', path: '/cities/portland/transportation' }, { name: 'EXAMPLE Farmers Markets', path: '/cities/portland/farmers-markets' }]
 }, {
-  name: 'About',
-  path: '/about'
+  name: 'Sandbox',
+  path: '/sandbox'
 }];
 
 var navClass = css(_templateObject);
