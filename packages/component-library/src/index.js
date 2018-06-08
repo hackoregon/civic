@@ -1,3 +1,5 @@
+import './fonts.css';
+
 export { default as AreaChart } from './AreaChart/AreaChart';
 export { default as HorizontalBarChart } from './HorizontalBarChart/HorizontalBarChart';
 export { default as BarChart } from './BarChart/BarChart';
@@ -27,8 +29,8 @@ export { default as Media } from './Media/Media';
 export { default as Logo } from './Logo/Logo';
 export { default as ShareCollection } from './Share/ShareCollection';
 export { default as isClient } from './utils/isClient';
-export { default as CivicVictoryTheme } from "./VictoryTheme/VictoryThemeIndex";
-export { default as CollectionHero } from './Hero/CollectionHero'
+export { default as CivicVictoryTheme } from './VictoryTheme/VictoryThemeIndex';
+export { default as CollectionHero } from './Hero/CollectionHero';
 export { default as BaseMap } from './BaseMap/BaseMap';
 export { default as ScatterPlotMap } from './ScatterPlotMap/ScatterPlotMap';
-import './fonts.css';
+export { default as DataTable } from './DataTable/DataTable';
