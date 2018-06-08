@@ -84,31 +84,14 @@ describe('Scatterplot', () => {
 
     expect(chart.props().domain).to.eql(simpleDataDomain);
   });
-/* TODO: make this test pass
-  it('should update a domain a based on updated data', () => {
-    const wrapper = shallow(<Scatterplot data={simpleData} />);
-    const chart = wrapper.find('VictoryChart');
-    expect(chart.props().domain).to.eql(simpleDataDomain);
 
-    wrapper.setProps({ data: customData });
-    expect(chart.props().domain).to.eql(customDataDomain);
-  });
-*/
   it('should properly set a domain if provided with one', () => {
     const wrapper = shallow(<Scatterplot data={simpleData} domain={customDataDomain} />);
     const chart = wrapper.find('VictoryChart');
 
     expect(chart.props().domain).to.eql(customDataDomain);
   });
-/* TODO: make this test pass
-  it('should properly update a domain', () => {
-    const wrapper = shallow(<Scatterplot data={simpleData} domain={simpleDataDomain} />);
-    const chart = wrapper.find('VictoryChart');
 
-    wrapper.setProps({ domain: customDataDomain });
-    expect(chart.props().domain).to.eql(customDataDomain);
-  });
-*/
   it('renders multi-series data', () => {
     const props = {
       data: multiSeriesData,
@@ -196,5 +179,24 @@ describe('Scatterplot', () => {
       { dataKey: 400, dataValue: 4, label: "X: 400 | Y: 4", series: undefined, size: 4 },
     ]);
   });
+  // TODO: make this test pass
+  // it('should properly update a domain', () => {
+  //   const wrapper = shallow(<Scatterplot data={simpleData} domain={simpleDataDomain} />);
+  //   const chart = wrapper.find('VictoryChart');
 
+  //   wrapper.setProps({ domain: customDataDomain });
+  //   expect(chart.props().domain).to.eql(customDataDomain);
+  // });
+
+  // TODO: make this test pass
+  // it('should update a domain a based on updated data', () => {
+  //   const wrapper = shallow(<Scatterplot data={simpleData} />);
+  //   const chart = wrapper.find('VictoryChart');
+  //   expect(chart.props().domain).to.eql(simpleDataDomain);
+
+  //   wrapper.setProps({ data: customData });
+  //   expect(chart.props().domain).to.eql(customDataDomain);
+  // });
+  //
+  // TODO: add test around number formatting
 });
