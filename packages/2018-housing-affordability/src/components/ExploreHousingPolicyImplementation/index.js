@@ -10,7 +10,7 @@ export class ExploreHousingPolicyImplementation extends React.Component {
   render() {
     return (
       <CivicStoryCard title="Explore Housing Policy Implementation in the Portland Metro Area">
-        <Placeholder />
+        <Placeholder issue="106" />
       </CivicStoryCard>
     );
   }

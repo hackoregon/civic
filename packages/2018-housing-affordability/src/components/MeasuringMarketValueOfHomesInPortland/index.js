@@ -10,7 +10,7 @@ export class MeasuringMarketValueOfHomesInPortland extends React.Component {
   render() {
     return (
       <CivicStoryCard title="Measuring Market Value of Homes in Portland">
-        <Placeholder />
+        <Placeholder issue="215" />
       </CivicStoryCard>
     );
   }

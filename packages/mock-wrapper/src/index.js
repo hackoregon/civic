@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import { createLogger } from 'redux-logger';
 
-export default function MockWrapper(App, Reducers, Routes) {
+export default function MockWrapper(App, Reducers, Routes = () => []) {
   const middlewares = [
     thunk,
     routerMiddleware(browserHistory),
