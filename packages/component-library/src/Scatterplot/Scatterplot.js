@@ -12,37 +12,8 @@ import {
 import ChartContainer from '../ChartContainer';
 import SimpleLegend from '../SimpleLegend';
 import { dollars, numeric } from '../utils/formatters';
+import { chartEvents } from '../utils/chartHelpers';
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
-
-const chartEvents = [
-  {
-    target: 'data',
-    eventHandlers: {
-      onMouseOver: () => {
-        return [
-          {
-            target: 'data',
-            mutation: () => ({ style: { fill: 'tomato', width: 40 } }),
-          }, {
-            target: 'labels',
-            mutation: () => ({ active: true }),
-          },
-        ];
-      },
-      onMouseOut: () => {
-        return [
-          {
-            target: 'data',
-            mutation: () => { },
-          }, {
-            target: 'labels',
-            mutation: () => ({ active: false }),
-          },
-        ];
-      },
-    },
-  },
-];
 
 const getDefaultDomain = (data, x, y) => {
   const xValues = data.map(value => value.x);
@@ -82,7 +53,7 @@ const getDefaultStyle = dataSeriesLabel => {
   };
 };
 
-/**
+/*
  * @method Scatterplot
  * @param  {Array}     data         X & Y coordinates for scatterplot points
  * @param  {String}    dataKey      X key in `data`
@@ -98,6 +69,7 @@ const getDefaultStyle = dataSeriesLabel => {
  * @param  {String}    xLabel       X-axis label
  * @param  {String}    yLabel       Y-axis label
  */
+
 const Scatterplot = ({
   data,
   dataKey,
