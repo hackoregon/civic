@@ -12,46 +12,8 @@ import {
 import ChartContainer from '../ChartContainer';
 import SimpleLegend from '../SimpleLegend';
 import { dollars, numeric } from '../utils/formatters';
-import { chartEvents } from '../utils/chartHelpers';
+import { chartEvents, getDefaultDomain, getDefaultDataSeriesLabels, getDefaultStyle } from '../utils/chartHelpers';
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
-
-const getDefaultDomain = (data, x, y) => {
-  const xValues = data.map(value => value[x]);
-  const yValues = data.map(value => value[y]);
-
-  return {
-    x: [
-      Math.min(...xValues) < 0 ? Math.min(...xValues) : 0,
-      Math.max(...xValues),
-    ],
-    y: [
-      Math.min(...yValues) < 0 ? Math.min(...yValues) : 0,
-      Math.max(...yValues),
-    ],
-  };
-};
-
-const getDefaultDataSeriesLabels = data => {
-  const categories = data.map(value => value.series);
-  const uniqueCategories = [...new Set(categories)];
-  return uniqueCategories.map(cat => ({ category: cat, label: cat }));
-};
-
-const getDefaultStyle = dataSeriesLabel => {
-  const dataSeriesCategories =
-    dataSeriesLabel && dataSeriesLabel.length
-      ? dataSeriesLabel.map(series => (series.category))
-      : null;
-  return {
-    data: {
-      fill: d => {
-        if (!dataSeriesCategories) return CivicVictoryTheme.civic.group.colorScale[0];
-        const idx = dataSeriesCategories.findIndex(series => series === d.series);
-        return CivicVictoryTheme.civic.group.colorScale[idx];
-      },
-    },
-  };
-};
 
 /*
  * @method Scatterplot
@@ -87,9 +49,11 @@ const Scatterplot = ({
   yLabel,
 }) => {
   const chartDomain = domain || getDefaultDomain(data, dataKey, dataValue);
+
   const dataSeriesLabels = dataSeries
-    ? dataSeriesLabel || getDefaultDataSeriesLabels(data)
+    ? dataSeriesLabel || getDefaultDataSeriesLabels(data, dataSeries)
     : null;
+
   const scatterPlotStyle = style || getDefaultStyle(dataSeriesLabels);
 
   const legendData =
@@ -107,23 +71,6 @@ const Scatterplot = ({
     fontSize: '14px',
     fontWeight: 'bold',
   };
-
-  const titleStyle = css`
-    display: block;
-    font-family: 'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif;
-    font-size: 21px;
-    font-weight: bold;
-    text-align: center;
-    margin: 0;
-  `;
-
-  const subtitleStyle = css`
-    display: block;
-    font-family: 'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif;
-    font-size: 14px;
-    text-align: center;
-    margin: 0;
-  `;
 
   return (
     <ChartContainer title={title} subtitle={subtitle}>
@@ -177,7 +124,7 @@ const Scatterplot = ({
         </VictoryPortal>
         <VictoryScatter
           animate={{ onEnter: { duration: 500 } }}
-          categories={{ x: categoryData }}
+//        categories={{ x: categoryData }}
           data={data.map(d => ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],
@@ -215,7 +162,9 @@ Scatterplot.propTypes = {
   dataValue: PropTypes.string,
   dataValueLabel: PropTypes.arrayOf(PropTypes.string),
   dataSeries: PropTypes.string,
-  dataSeriesLabel: PropTypes.arrayOf(PropTypes.string),
+  dataSeriesLabel: PropTypes.arrayOf(
+    PropTypes.shape({ category: PropTypes.string, label: PropTypes.string }),
+  ),
   domain: PropTypes.objectOf(PropTypes.array),
   size: PropTypes.shape({ key: PropTypes.string, value: PropTypes.string }),
   style: PropTypes.objectOf(PropTypes.object),
