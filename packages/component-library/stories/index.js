@@ -27,6 +27,8 @@ import screenGridMapStory from './ScreenGridMap.story';
 import pathMapStory from './PathMap.story';
 import iconMapStory from './IconMap.story';
 import boundaryMapStory from './BoundaryMap.story';
+import civicSandboxMapStory from './CivicSandboxMap.story';
+
 import { checkA11y } from '@storybook/addon-a11y';
 import '../assets/global.styles.css';
 
@@ -64,3 +66,4 @@ iconMapStory();
 mapOverlayStory();
 hexOverlayStory();
 boundaryMapStory();
+civicSandboxMapStory();
