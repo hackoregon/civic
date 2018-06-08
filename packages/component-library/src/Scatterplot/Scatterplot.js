@@ -11,7 +11,7 @@ import {
 
 import ChartContainer from '../ChartContainer';
 import SimpleLegend from '../SimpleLegend';
-import { dollars, numeric } from '../utils/formatters';
+import { numeric } from '../utils/formatters';
 import { chartEvents, getDefaultDomain, getDefaultDataSeriesLabels, getDefaultStyle } from '../utils/chartHelpers';
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
 
@@ -47,6 +47,8 @@ const Scatterplot = ({
   title,
   xLabel,
   yLabel,
+  xNumberFormatter,
+  yNumberFormatter,
 }) => {
   const chartDomain = domain || getDefaultDomain(data, dataKey, dataValue);
 
@@ -82,6 +84,7 @@ const Scatterplot = ({
         <VictoryAxis
           animate={{ onEnter: { duration: 500 } }}
           style={{ grid: { stroke: 'none' } }}
+          tickFormat={x => xNumberFormatter(x)}
           title="X Axis"
         />
         <VictoryAxis
@@ -98,6 +101,7 @@ const Scatterplot = ({
                   : 'none',
             },
           }}
+          tickFormat={y => yNumberFormatter(y)}
           title="Y Axis"
         />
         <VictoryPortal>
@@ -172,6 +176,8 @@ Scatterplot.propTypes = {
   title: PropTypes.string,
   xLabel: PropTypes.string,
   yLabel: PropTypes.string,
+  xNumberFormatter: PropTypes.func,
+  yNumberFormatter: PropTypes.func,
 };
 
 Scatterplot.defaultProps = {
@@ -189,6 +195,8 @@ Scatterplot.defaultProps = {
   title: null,
   xLabel: "X",
   yLabel: "Y",
+  xNumberFormatter: numeric,
+  yNumberFormatter: numeric,
 };
 
 export default Scatterplot;
