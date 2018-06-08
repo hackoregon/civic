@@ -10,7 +10,7 @@ export class StudentEnrollmentTrends extends React.Component {
   render() {
     return (
       <CivicStoryCard title="Student Enrollment Trends">
-        <Placeholder />
+        <Placeholder issue="197"/>
       </CivicStoryCard>
     );
   }

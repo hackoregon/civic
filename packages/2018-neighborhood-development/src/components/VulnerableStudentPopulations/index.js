@@ -10,7 +10,7 @@ export class VulnerableStudentPopulations extends React.Component {
   render() {
     return (
       <CivicStoryCard title="Vulnerable Student Populations">
-        <Placeholder />
+        <Placeholder issue="228"/>
       </CivicStoryCard>
     );
   }

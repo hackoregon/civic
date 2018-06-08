@@ -10,7 +10,7 @@ export class TheShapeOfANeighborhood extends React.Component {
   render() {
     return (
       <CivicStoryCard title="The Shape of a Neighborhood">
-        <Placeholder />
+        <Placeholder issue="79"/>
       </CivicStoryCard>
     );
   }
