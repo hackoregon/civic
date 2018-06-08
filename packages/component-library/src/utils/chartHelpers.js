@@ -1,4 +1,6 @@
-export const chartEvents = [
+import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
+
+const chartEvents = [
   {
     target: 'data',
     eventHandlers: {
@@ -27,3 +29,44 @@ export const chartEvents = [
     },
   },
 ];
+
+function getDefaultDomain(data, dataKey, dataLabel) {
+  const xValues = data.map(value => value[dataKey]);
+  const yValues = data.map(value => value[dataLabel]);
+
+  return {
+    x: [
+      Math.min(...xValues) < 0 ? Math.min(...xValues) : 0,
+      Math.max(...xValues),
+    ],
+    y: [
+      Math.min(...yValues) < 0 ? Math.min(...yValues) : 0,
+      Math.max(...yValues),
+    ],
+  };
+}
+
+function getDefaultDataSeriesLabels(data, series) {
+  const categories = data.map(value => value[series]);
+  const uniqueCategories = [...new Set(categories)];
+  return uniqueCategories.map(cat => ({ category: cat, label: cat }));
+}
+
+function getDefaultStyle(dataSeriesLabel) {
+  const dataSeriesCategories =
+    dataSeriesLabel && dataSeriesLabel.length
+      ? dataSeriesLabel.map(series => (series.category))
+      : null;
+  return {
+    data: {
+      fill: d => {
+        if (!dataSeriesCategories) return CivicVictoryTheme.civic.group.colorScale[0];
+        const idx = dataSeriesCategories.findIndex(series => series === d.series);
+        return CivicVictoryTheme.civic.group.colorScale[idx];
+      },
+    },
+  };
+}
+
+export { chartEvents, getDefaultDomain, getDefaultDataSeriesLabels, getDefaultStyle };
+

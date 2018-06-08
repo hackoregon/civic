@@ -28,6 +28,13 @@ const multiSeriesData = [
   { amount: 200, rate: 3, series: 'second' },
 ];
 
+const unstructuredMultiSeriesData = [
+  { amount: 100, rate: 1, type: 'first' },
+  { amount: 200, rate: 2, type: 'first' },
+  { amount: 100, rate: 3, type: 'second' },
+  { amount: 200, rate: 3, type: 'second' },
+];
+
 describe('Scatterplot', () => {
   it('renders a VictoryChart', () => {
     const wrapper = shallow(<Scatterplot data={simpleData} />);
@@ -128,6 +135,39 @@ describe('Scatterplot', () => {
     expect(wrapper.find('.legend').length).to.eql(0);
 
     wrapper.setProps({ dataSeries: 'series' });
+    expect(wrapper.find('.legend').length).to.eql(1);
+    expect(wrapper.find('.legend').props().legendData).to.eql([
+      { name: 'first' },
+      { name: 'second' },
+    ]);
+  });
+
+  it('renders unstructured multi-series data', () => {
+    const props = {
+      data: unstructuredMultiSeriesData,
+      dataKey: 'amount',
+      dataValue: 'rate',
+      dataSeries: 'type',
+    };
+    const wrapper = shallow(<Scatterplot {...props} />);
+    expect(wrapper.find({ title: 'Scatter Plot' }).props().data).to.eql([
+      { dataKey: 100, dataValue: 1, label: "X: 100 | Y: 1", series: 'first', size: 3 },
+      { dataKey: 200, dataValue: 2, label: "X: 200 | Y: 2", series: 'first', size: 3 },
+      { dataKey: 100, dataValue: 3, label: "X: 100 | Y: 3", series: 'second', size: 3 },
+      { dataKey: 200, dataValue: 3, label: "X: 200 | Y: 3", series: 'second', size: 3 },
+    ]);
+  });
+
+  it('renders a legend from unstructured multi-series data if dataSeries is specified', () => {
+    const props = {
+      data: unstructuredMultiSeriesData,
+      dataKey: 'amount',
+      dataValue: 'rate',
+    };
+    const wrapper = shallow(<Scatterplot {...props} />);
+    expect(wrapper.find('.legend').length).to.eql(0);
+
+    wrapper.setProps({ dataSeries: 'type' });
     expect(wrapper.find('.legend').length).to.eql(1);
     expect(wrapper.find('.legend').props().legendData).to.eql([
       { name: 'first' },
