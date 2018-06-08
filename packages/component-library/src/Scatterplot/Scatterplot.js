@@ -101,13 +101,22 @@ const getDefaultDomain = data => {
   };
 };
 
+const getDefaultDataSeriesLabels = data => {
+  const categories = data.map(value => value.series);
+  const uniqueCategories = [...new Set(categories)];
+  return uniqueCategories.map(cat => ({ category: cat, label: cat }));
+};
+
 const getDefaultStyle = dataSeriesLabel => {
-  // Set the style based on the dataSeriesLabel index
+  const dataSeriesCategories =
+    dataSeriesLabel && dataSeriesLabel.length
+      ? dataSeriesLabel.map(series => (series.category))
+      : null;
   return {
     data: {
       fill: d => {
-        if (!dataSeriesLabel) return CivicVictoryTheme.civic.group.colorScale[0];
-        const idx = dataSeriesLabel.findIndex(series => series === d.series);
+        if (!dataSeriesCategories) return CivicVictoryTheme.civic.group.colorScale[0];
+        const idx = dataSeriesCategories.findIndex(series => series === d.series);
         return CivicVictoryTheme.civic.group.colorScale[idx];
       },
     },
@@ -136,6 +145,7 @@ const Scatterplot = ({
   dataKeyLabel,
   dataValue,
   dataValueLabel,
+  dataSeries,
   dataSeriesLabel,
   domain,
   size,
@@ -146,11 +156,19 @@ const Scatterplot = ({
   yLabel,
 }) => {
   const chartDomain = domain || getDefaultDomain(data);
-  const scatterPlotStyle = style || getDefaultStyle(dataSeriesLabel);
+  const dataSeriesLabels = dataSeries
+    ? dataSeriesLabel || getDefaultDataSeriesLabels(data)
+    : null;
+  const scatterPlotStyle = style || getDefaultStyle(dataSeriesLabels);
 
   const legendData =
-    dataSeriesLabel && dataSeriesLabel.length
-      ? dataSeriesLabel.map(series => ({ name: series }))
+    dataSeriesLabels && dataSeriesLabels.length
+      ? dataSeriesLabels.map(series => ({ name: series.label }))
+      : null;
+
+  const categoryData =
+    dataSeriesLabels && dataSeriesLabels.length
+      ? dataSeriesLabels.map(series => ({ name: series.category }))
       : null;
 
   const axisLabelStyle = {
@@ -228,12 +246,12 @@ const Scatterplot = ({
         </VictoryPortal>
         <VictoryScatter
           animate={{ onEnter: { duration: 500 } }}
-          categories={{ x: dataKeyLabel }}
+          categories={{ x: categoryData }}
           data={data.map(d => ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],
             label: `${dataKeyLabel ? d[dataKeyLabel] : xLabel}: ${numeric(d[dataKey])} | ${dataValueLabel ? d[dataValueLabel] : yLabel}: ${numeric(d[dataValue])}`,
-            series: d.series,
+            series: d[dataSeries],
             size: size ? d[size.key] || size.value : 3,
           }))}
           events={chartEvents}
@@ -265,6 +283,7 @@ Scatterplot.propTypes = {
   dataKeyLabel: PropTypes.arrayOf(PropTypes.string),
   dataValue: PropTypes.string,
   dataValueLabel: PropTypes.arrayOf(PropTypes.string),
+  dataSeries: PropTypes.string,
   dataSeriesLabel: PropTypes.arrayOf(PropTypes.string),
   domain: PropTypes.objectOf(PropTypes.array),
   size: PropTypes.shape({ key: PropTypes.string, value: PropTypes.string }),
@@ -281,6 +300,7 @@ Scatterplot.defaultProps = {
   dataKeyLabel: null,
   dataValue: 'y',
   dataValueLabel: null,
+  dataSeries: null,
   dataSeriesLabel: null,
   domain: null,
   size: null,

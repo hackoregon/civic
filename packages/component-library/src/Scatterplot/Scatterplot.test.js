@@ -46,22 +46,12 @@ describe('Scatterplot', () => {
     expect(yAxis.length).to.eql(1);
   });
 
-  it('renders categories for x-axis ticks if dataKeyLabel is specified', () => {
-    const wrapper = shallow(<Scatterplot data={simpleData} />);
-    expect(wrapper.find({ title: 'Scatter Plot' }).props().categories).to.eql({
-      x: null,
-    });
-    wrapper.setProps({ dataKeyLabel: ['a', 'b', 'c', 'd'] });
-    expect(wrapper.find({ title: 'Scatter Plot' }).props().categories).to.eql({
-      x: ['a', 'b', 'c', 'd'],
-    });
-  });
-
   it('renders multi-series data', () => {
     const props = {
       data: multiSeriesData,
       dataKey: 'amount',
       dataValue: 'rate',
+      dataSeries: 'series',
     };
     const wrapper = shallow(<Scatterplot {...props} />);
     expect(wrapper.find({ title: 'Scatter Plot' }).props().data).to.eql([
@@ -72,7 +62,7 @@ describe('Scatterplot', () => {
     ]);
   });
 
-  it('renders a legend if dataSeriesLabel is specified', () => {
+  it('renders a legend if dataSeries is specified', () => {
     const props = {
       data: multiSeriesData,
       dataKey: 'amount',
@@ -81,7 +71,7 @@ describe('Scatterplot', () => {
     const wrapper = shallow(<Scatterplot {...props} />);
     expect(wrapper.find('.legend').length).to.eql(0);
 
-    wrapper.setProps({ dataSeriesLabel: ['first', 'second'] });
+    wrapper.setProps({ dataSeries: 'series' });
     expect(wrapper.find('.legend').length).to.eql(1);
     expect(wrapper.find('.legend').props().legendData).to.eql([
       { name: 'first' },

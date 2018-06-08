@@ -14,7 +14,12 @@ const sampleData = [
   { x: 1, y: 3, series: 'dog' },
   { x: 3, y: 3, series: 'dog' },
 ];
-const sampledataSeriesLabel = ['cat', 'dog', 'fish'];
+const sampleDataSeries = 'series';
+const sampledataSeriesLabel = [
+  { category: 'cat', label: 'Cat' },
+  { category: 'dog', label: 'Dog' },
+  { category: 'fish', label: 'Fish' },
+];
 const sampleDomain = { x: [0, 6], y: [0, 8] };
 const sampleSize = { key: 'y' };
 const sampleSubtitle = 'A description of this chart.';
@@ -24,15 +29,40 @@ const sampleXLabel = 'Number';
 const sampleYKey = 'y';
 const sampleYLabel = 'Rating';
 
+
 export default () =>
   storiesOf(displayName, module)
     .addDecorator(withKnobs)
     .add('Simple usage', () => <Scatterplot data={sampleData} />)
-    .add('with props', () => {
+    .add('with some props', () => {
       const data = object('Data', sampleData);
       const dataKey = text('dataKey', sampleXKey);
-      const dataSeriesLabel = object('Data Series', sampledataSeriesLabel);
       const dataValue = text('dataValue', sampleYKey);
+      const dataSeries = text('dataSeries', sampleDataSeries);
+      const subtitle = text('Subtitle', sampleSubtitle);
+      const title = text('Title', sampleTitle);
+      const xLabel = text('xLabel', sampleXLabel);
+      const yLabel = text('yLabel', sampleYLabel);
+
+      return (
+        <Scatterplot
+          data={data}
+          dataKey={dataKey}
+          dataValue={dataValue}
+          dataSeries={dataSeries}
+          subtitle={subtitle}
+          title={title}
+          xLabel={xLabel}
+          yLabel={yLabel}
+        />
+      );
+    })
+    .add('with more optional props', () => {
+      const data = object('Data', sampleData);
+      const dataKey = text('dataKey', sampleXKey);
+      const dataValue = text('dataValue', sampleYKey);
+      const dataSeries = text('dataSeries', sampleDataSeries);
+      const dataSeriesLabel = object('Data Series Labels', sampledataSeriesLabel);
       const domain = object('Domain', sampleDomain);
       const size = object('Size', sampleSize);
       const subtitle = text('Subtitle', sampleSubtitle);
@@ -44,8 +74,9 @@ export default () =>
         <Scatterplot
           data={data}
           dataKey={dataKey}
-          dataSeriesLabel={dataSeriesLabel}
           dataValue={dataValue}
+          dataSeries={dataSeries}
+          dataSeriesLabel={dataSeriesLabel}
           domain={domain}
           size={size}
           subtitle={subtitle}
@@ -55,3 +86,4 @@ export default () =>
         />
       );
     });
+
