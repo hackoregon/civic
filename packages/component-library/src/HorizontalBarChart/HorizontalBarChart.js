@@ -14,7 +14,7 @@ import { dollars, numeric } from '../utils/formatters';
 import { chartEvents } from '../utils/chartHelpers';
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
 
-const HorizontalBarChart = ({ data, sortOrder, dataValues, dataLabel, domain, title, subtitle, xLabel, yLabel, xNumberFormatter }) => {
+const HorizontalBarChart = ({ data, sortOrder, dataValue, dataLabel, domain, title, subtitle, xLabel, yLabel, xNumberFormatter }) => {
 
   const axisLabelStyle = {
     fontFamily: "'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif",
@@ -39,7 +39,9 @@ const HorizontalBarChart = ({ data, sortOrder, dataValues, dataLabel, domain, ti
   return (
     <ChartContainer title={title} subtitle={subtitle}>
       <VictoryChart
-        padding={{ left: 115, right: 50, bottom: 50, top: 50 }}
+        domain={domain}
+        padding={{ left: 115, right: 50, bottom: 50, top: 70 }}
+        domainPadding={0}
         theme={CivicVictoryTheme.civic}
       >
         <VictoryAxis
@@ -48,10 +50,13 @@ const HorizontalBarChart = ({ data, sortOrder, dataValues, dataLabel, domain, ti
           // they are placed on the axis
           tickValues={barData.map(a => a[sortOrderKey])}
           tickFormat={barData.map(a => a[dataLabel])}
+          title="Y Axis"
         />
         <VictoryAxis
           // tickFormat specifies how ticks should be displayed
-          tickFormat={x => dollars(numeric(x))}
+          orientation="top"
+          tickFormat={xNumberFormatter}
+          title="X Axis"
         />
         <VictoryPortal>
           <VictoryLabel
@@ -61,7 +66,7 @@ const HorizontalBarChart = ({ data, sortOrder, dataValues, dataLabel, domain, ti
             title="Y Axis Label"
             verticalAnchor="end"
             x={50}
-            y={45}
+            y={65}
           />
         </VictoryPortal>
         <VictoryPortal>
@@ -72,7 +77,7 @@ const HorizontalBarChart = ({ data, sortOrder, dataValues, dataLabel, domain, ti
             title="X Axis Label"
             verticalAnchor="end"
             x={600}
-            y={295}
+            y={85}
           />
         </VictoryPortal>
         <VictoryBar
@@ -86,9 +91,10 @@ const HorizontalBarChart = ({ data, sortOrder, dataValues, dataLabel, domain, ti
               cornerRadius={0}
             />
           }
-          data={barData.map(d => ({ sortOrder: d[sortOrderKey], dataValues: d[dataValues], label: `${d[dataLabel]}: ${numeric(d[dataValues])}` }))}
+          data={barData.map(d => ({ sortOrder: d[sortOrderKey], dataValue: d[dataValue], label: `${d[dataLabel]}: ${xNumberFormatter(d[dataValue])}` }))}
+          title="Horizontal Bar Chart"
           x="sortOrder"
-          y="dataValues"
+          y="dataValue"
           events={chartEvents}
         />
       </VictoryChart>
@@ -101,7 +107,7 @@ HorizontalBarChart.propTypes = {
     PropTypes.shape({ x: PropTypes.number, y: PropTypes.number }),
   ),
   sortOrder: PropTypes.string,
-  dataValues: PropTypes.string,
+  dataValue: PropTypes.string,
   dataLabel: PropTypes.string,
   domain: PropTypes.objectOf(PropTypes.array),
   title: PropTypes.string,
@@ -109,6 +115,19 @@ HorizontalBarChart.propTypes = {
   xLabel: PropTypes.string,
   yLabel: PropTypes.string,
   xNumberFormatter: PropTypes.func,
+};
+
+HorizontalBarChart.defaultProps = {
+  data: null,
+  sortOrder: null,
+  dataValue: 'x',
+  dataLabel: 'y',
+  domain: null,
+  title: null,
+  subtitle: null,
+  xLabel: "X",
+  yLabel: "Y",
+  xNumberFormatter: numeric,
 };
 
 export default HorizontalBarChart;

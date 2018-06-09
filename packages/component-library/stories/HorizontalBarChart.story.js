@@ -37,7 +37,7 @@ export default () => storiesOf(displayName, module)
   .add('Basic Usage', () => {
     const data = object('Data', sampleData);
     const sortOrder = text('Data series', 'sortOrder');
-    const dataValues = text('Data values', 'population');
+    const dataValue = text('Data value', 'population');
     const dataLabel = text('Data series labels', 'label');
     const xLabel = text('xLabel', 'Dollars');
     const yLabel = text('yLabel', 'Dogs');
@@ -46,7 +46,7 @@ export default () => storiesOf(displayName, module)
       <HorizontalBarChart
         data={data}
         sortOrder={sortOrder}
-        dataValues={dataValues}
+        dataValue={dataValue}
         dataLabel={dataLabel}
         title={'Dogs and their Money'}
         subtitle={'As of January 2017'}
@@ -57,13 +57,13 @@ export default () => storiesOf(displayName, module)
   })
   .add('Default sort order', () => {
     const data = object('Data', sampleUnsortedData);
-    const dataValues = text('Data values', 'population');
+    const dataValue = text('Data values', 'population');
     const dataLabel = text('Data series labels', 'label');
 
     return (
         <HorizontalBarChart
           data={data}
-          dataValues={dataValues}
+          dataValue={dataValue}
           dataLabel={dataLabel}
         />
       );
@@ -71,14 +71,14 @@ export default () => storiesOf(displayName, module)
   .add('No title', () => {
     const data = object('Data', sampleData);
     const sortOrder = text('Data series', 'sortOrder');
-    const dataValues = text('Data values', 'population');
+    const dataValue = text('Data values', 'population');
     const dataLabel = text('Data series labels', 'label');
 
     return (
         <HorizontalBarChart
           data={data}
           sortOrder={sortOrder}
-          dataValues={dataValues}
+          dataValue={dataValue}
           dataLabel={dataLabel}
         />
       );
