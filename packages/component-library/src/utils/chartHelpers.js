@@ -36,7 +36,7 @@ function getDefaultDomain(data, dataKey, dataLabel) {
 
   return {
     x: [
-      Math.min(...xValues) < 0 ? Math.min(...xValues) : 0,
+      Math.min(...xValues) < 0 ? Math.min(...xValues) : Math.min(...xValues),
       Math.max(...xValues),
     ],
     y: [
