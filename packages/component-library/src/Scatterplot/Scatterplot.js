@@ -95,8 +95,6 @@ const Scatterplot = ({
           dependentAxis
           animate={{ onEnter: { duration: 500 } }}
           style={{
-            // Don't render the top y-axis grid line
-            // TODO: Possibly move this to theme
             grid: {
               ...CivicVictoryTheme.civic.axis.style.grid,
               stroke: t =>
