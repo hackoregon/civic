@@ -12,7 +12,7 @@ import {
 import ChartContainer from '../ChartContainer';
 import SimpleLegend from '../SimpleLegend';
 import { numeric } from '../utils/formatters';
-import { chartEvents, getDefaultDomain, getDefaultDataSeriesLabels, getDefaultStyle } from '../utils/chartHelpers';
+import { chartEvents, getDefaultDomain, getDefaultDataSeriesLabels, getDefaultFillStyle } from '../utils/chartHelpers';
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
 
 /*
@@ -56,7 +56,7 @@ const Scatterplot = ({
     ? dataSeriesLabel || getDefaultDataSeriesLabels(data, dataSeries)
     : null;
 
-  const scatterPlotStyle = style || getDefaultStyle(dataSeriesLabels);
+  const scatterPlotStyle = style || getDefaultFillStyle(dataSeriesLabels);
 
   const legendData =
     dataSeriesLabels && dataSeriesLabels.length
@@ -80,7 +80,11 @@ const Scatterplot = ({
         <SimpleLegend className="legend" legendData={legendData} />
       )}
 
-      <VictoryChart domain={chartDomain} theme={CivicVictoryTheme.civic}>
+      <VictoryChart
+        domain={chartDomain}
+        theme={CivicVictoryTheme.civic}
+        animate={{ duration: 200 }}
+      >
         <VictoryAxis
           animate={{ onEnter: { duration: 500 } }}
           style={{ grid: { stroke: 'none' } }}

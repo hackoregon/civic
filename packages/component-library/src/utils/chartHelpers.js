@@ -52,7 +52,7 @@ function getDefaultDataSeriesLabels(data, series) {
   return uniqueCategories.map(cat => ({ category: cat, label: cat }));
 }
 
-function getDefaultStyle(dataSeriesLabel) {
+function getDefaultFillStyle(dataSeriesLabel) {
   const dataSeriesCategories =
     dataSeriesLabel && dataSeriesLabel.length
       ? dataSeriesLabel.map(series => (series.category))
@@ -68,5 +68,11 @@ function getDefaultStyle(dataSeriesLabel) {
   };
 }
 
-export { chartEvents, getDefaultDomain, getDefaultDataSeriesLabels, getDefaultStyle };
+function getDefaultLineStyle(idx) {
+  return {
+    data: { stroke: CivicVictoryTheme.civic.group.colorScale[idx] },
+  };
+}
+
+export { chartEvents, getDefaultDomain, getDefaultDataSeriesLabels, getDefaultFillStyle, getDefaultLineStyle };
 
