@@ -136,7 +136,7 @@ const Scatterplot = ({
           data={data.map(d => ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],
-            label: `${dataKeyLabel ? d[dataKeyLabel] : xLabel}: ${numeric(d[dataKey])} | ${dataValueLabel ? d[dataValueLabel] : yLabel}: ${numeric(d[dataValue])}`,
+            label: `${dataKeyLabel ? d[dataKeyLabel] : xLabel}: ${xNumberFormatter(d[dataKey])} | ${dataValueLabel ? d[dataValueLabel] : yLabel}: ${yNumberFormatter(d[dataValue])}`,
             series: d[dataSeries],
             size: size ? d[size.key] || size.value : 3,
           }))}

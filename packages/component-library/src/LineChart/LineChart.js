@@ -88,7 +88,6 @@ const LineChart = ({
       <VictoryChart
         domain={chartDomain}
         theme={CivicVictoryTheme.civic}
-        animate={{ duration: 200 }}
       >
         <VictoryAxis
           animate={{ onEnter: { duration: 500 } }}

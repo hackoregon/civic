@@ -3,20 +3,28 @@ import { assign } from "lodash";
 // *
 // * Colors
 // *
+const civicCategoricalColor1 = "#DC4556";
+const civicCategoricalColor2 = "#19B7AA";
+const civicCategoricalColor3 = "#1E62BD";
+const civicCategoricalColor4 = "#721D7C";
+const civicCategoricalColor5 = "#FFB226";
+const civicCategoricalColor6 = "#DC4556";
+
+const colors = [
+  civicCategoricalColor1,
+  civicCategoricalColor2,
+  civicCategoricalColor3,
+  civicCategoricalColor4,
+  civicCategoricalColor5,
+  civicCategoricalColor6
+];
+
 const yellow200 = "#FFF59D";
 const deepOrange600 = "#F4511E";
 const lime300 = "#DCE775";
 const lightGreen500 = "#8BC34A";
 const teal700 = "#00796B";
 const cyan900 = "#006064";
-const colors = [
-  deepOrange600,
-  yellow200,
-  lime300,
-  lightGreen500,
-  teal700,
-  cyan900
-];
 const blueGrey50 = "#ECEFF1";
 const blueGrey300 = "#90A4AE";
 const blueGrey700 = "#455A64";
@@ -35,7 +43,9 @@ const padding = 8;
 const baseProps = {
   width: 650,
   height: 350,
-  padding: 50
+  padding: 50,
+  domainPadding: 20,
+  animate: 100,
 };
 // *
 // * Labels
