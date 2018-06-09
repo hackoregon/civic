@@ -34,5 +34,6 @@ export const numeric = (d) => {
   return formatted;
 };
 
+export const year = format('.0f');
 export const percentage = format('.0%');
 export const dollars = d => `$${d}`;

@@ -11,42 +11,14 @@ import {
 } from 'victory';
 
 import ChartContainer from '../ChartContainer';
-import { dollars, numeric } from '../utils/formatters';
+import { numeric, year } from '../utils/formatters';
 import { assign } from "lodash";
 import { css } from 'emotion';
+import { chartEvents, getDefaultDomain } from '../utils/chartHelpers';
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
 
-const chartEvents = [
-  {
-    target: 'data',
-    eventHandlers: {
-      onMouseOver: () => {
-        return [
-          {
-            target: 'data',
-            mutation: () => ({ style: { fill: 'tomato', width: 40 } }),
-          }, {
-            target: 'labels',
-            mutation: () => ({ active: true }),
-          },
-        ];
-      },
-      onMouseOut: () => {
-        return [
-          {
-            target: 'data',
-            mutation: () => { },
-          }, {
-            target: 'labels',
-            mutation: () => ({ active: false }),
-          },
-        ];
-      },
-    },
-  },
-];
-
-const BarChart = ({ data, dataKey, dataValue, dataKeyLabel, domain, title, subtitle, xLabel, yLabel }) => {
+const BarChart = ({ data, dataKey, dataValue, domain, title, subtitle, xLabel, yLabel, xNumberFormatter, yNumberFormatter }) => {
+  const chartDomain = domain || getDefaultDomain(data, dataKey, dataValue);
 
   const axisLabelStyle = {
     fontFamily: "'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif",
@@ -57,21 +29,20 @@ const BarChart = ({ data, dataKey, dataValue, dataKeyLabel, domain, title, subti
   return (
     <ChartContainer title={title} subtitle={subtitle}>
       <VictoryChart
-        padding={{ left: 75, right: 50, bottom: 50, top: 50 }}
-        domainPadding={20}
-        animate={{ duration: 300 }}
+        padding={{ left: 90, right: 50, bottom: 50, top: 50 }}
+        domainPadding={{ x: [40, 40], y: [0, 0] }}
+        animate={{ duration: 200 }}
         theme={CivicVictoryTheme.civic}
+        domain={chartDomain}
       >
         <VictoryAxis
-          // tickValues specifies both the number of ticks and where
-          // they are placed on the axis
-          tickValues={data.map(a => a[dataKey])}
-          tickFormat={data.map(a => a[dataKeyLabel])}
+          tickFormat={xNumberFormatter}
+          title="X Axis"
         />
         <VictoryAxis
           dependentAxis
-          // tickFormat specifies how ticks should be displayed
-          tickFormat={x => dollars(numeric(x))}
+          tickFormat={yNumberFormatter}
+          title="Y Axis"
         />
         <VictoryPortal>
           <VictoryLabel
@@ -80,7 +51,7 @@ const BarChart = ({ data, dataKey, dataValue, dataKeyLabel, domain, title, subti
             textAnchor="middle"
             title="Y Axis Label"
             verticalAnchor="end"
-            x={50}
+            x={85}
             y={45}
           />
         </VictoryPortal>
@@ -96,6 +67,7 @@ const BarChart = ({ data, dataKey, dataValue, dataKeyLabel, domain, title, subti
           />
         </VictoryPortal>
         <VictoryBar
+          alignment="middle"
           labelComponent={
             <VictoryTooltip
               x={325}
@@ -105,10 +77,11 @@ const BarChart = ({ data, dataKey, dataValue, dataKeyLabel, domain, title, subti
               cornerRadius={0}
             />
           }
-          data={data.map(d => ({ dataKey: d[dataKey], dataValue: d[dataValue], label: `${d[dataKeyLabel]}: ${numeric(d[dataValue])}` }))}
+          data={data.map(d => ({ dataKey: d[dataKey], dataValue: d[dataValue], label: `${xLabel}: ${xNumberFormatter(d[dataKey])} | ${yLabel}: ${yNumberFormatter(d[dataValue])}` }))}
           events={chartEvents}
           x={'dataKey'}
           y={'dataValue'}
+          title="Bar Chart"
         />
       </VictoryChart>
     </ChartContainer>
@@ -116,15 +89,29 @@ const BarChart = ({ data, dataKey, dataValue, dataKeyLabel, domain, title, subti
 };
 
 BarChart.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
-  dataKey: PropTypes.string.isRequired,
-  dataValue: PropTypes.string.isRequired,
-  dataKeyLabel: PropTypes.string,
-  domain: PropTypes.objectOf(PropTypes.array),  
+  data: PropTypes.arrayOf(PropTypes.object),
+  dataKey: PropTypes.string,
+  dataValue: PropTypes.string,
+  domain: PropTypes.objectOf(PropTypes.array),
   title: PropTypes.string,
   subtitle: PropTypes.string,
   xLabel: PropTypes.string,
-  yLabel: PropTypes.string
+  yLabel: PropTypes.string,
+  xNumberFormatter: PropTypes.func,
+  yNumberFormatter: PropTypes.func,
+};
+
+BarChart.defaultProps = {
+  data: null,
+  dataKey: 'x',
+  dataValue: 'y',
+  domain: null,
+  title: null,
+  subtitle: null,
+  xLabel: "X",
+  yLabel: "Y",
+  xNumberFormatter: year,
+  yNumberFormatter: numeric,
 };
 
 export default BarChart;

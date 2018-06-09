@@ -34,27 +34,6 @@ const sampleUnsortedData = [
 export default () => storiesOf(displayName, module)
   .addDecorator(checkA11y)
   .addDecorator(withKnobs)
-  .add('Basic Usage', () => {
-    const data = object('Data', sampleData);
-    const sortOrder = text('Data series', 'sortOrder');
-    const dataValue = text('Data value', 'population');
-    const dataLabel = text('Data series labels', 'label');
-    const xLabel = text('xLabel', 'Dollars');
-    const yLabel = text('yLabel', 'Dogs');
-
-    return (
-      <HorizontalBarChart
-        data={data}
-        sortOrder={sortOrder}
-        dataValue={dataValue}
-        dataLabel={dataLabel}
-        title={'Dogs and their Money'}
-        subtitle={'As of January 2017'}
-        xLabel={xLabel}
-        yLabel={yLabel}
-      />
-    );
-  })
   .add('Default sort order', () => {
     const data = object('Data', sampleUnsortedData);
     const dataValue = text('Data values', 'population');
@@ -82,4 +61,25 @@ export default () => storiesOf(displayName, module)
           dataLabel={dataLabel}
         />
       );
+  })
+  .add('Basic Usage', () => {
+    const data = object('Data', sampleData);
+    const sortOrder = text('Data series', 'sortOrder');
+    const dataValue = text('Data value', 'population');
+    const dataLabel = text('Data series labels', 'label');
+    const xLabel = text('xLabel', 'Dollars');
+    const yLabel = text('yLabel', 'Dogs');
+
+    return (
+      <HorizontalBarChart
+        data={data}
+        sortOrder={sortOrder}
+        dataValue={dataValue}
+        dataLabel={dataLabel}
+        title={'Dogs and their Money'}
+        subtitle={'As of January 2017'}
+        xLabel={xLabel}
+        yLabel={yLabel}
+      />
+    );
   });
