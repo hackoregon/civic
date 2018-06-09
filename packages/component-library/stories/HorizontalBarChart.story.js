@@ -23,6 +23,14 @@ const sampleData = [
       {sortOrder: 5, population: 1000, label: 'Jack Russell Terrier'},
     ];
 
+const sampleUnsortedData = [
+      {population: 2000, label: 'Labrador Retriever'},
+      {population: 8000, label: 'Standard Poodle'},
+      {population: 6000, label: 'French Bulldog'},
+      {population: 3000, label: 'Afghan Hound'},
+      {population: 1000, label: 'Jack Russell Terrier'},
+    ];
+
 export default () => storiesOf(displayName, module)
   .addDecorator(checkA11y)
   .addDecorator(withKnobs)
@@ -46,6 +54,19 @@ export default () => storiesOf(displayName, module)
         yLabel={yLabel}
       />
     );
+  })
+  .add('Default sort order', () => {
+    const data = object('Data', sampleUnsortedData);
+    const dataValues = text('Data values', 'population');
+    const dataLabel = text('Data series labels', 'label');
+
+    return (
+        <HorizontalBarChart
+          data={data}
+          dataValues={dataValues}
+          dataLabel={dataLabel}
+        />
+      );
   })
   .add('No title', () => {
     const data = object('Data', sampleData);

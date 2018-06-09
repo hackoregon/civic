@@ -22,6 +22,20 @@ const HorizontalBarChart = ({ data, sortOrder, dataValues, dataLabel, domain, ti
     fontWeight: 'bold',
   };
 
+  const barData =
+    sortOrder && sortOrder.length
+      ? data
+      : data.map((d, index) => {
+        const e = d;
+        e.defaultSort = index + 1;
+        return e;
+      });
+
+  const sortOrderKey =
+    sortOrder && sortOrder.length
+      ? sortOrder
+      : 'defaultSort';
+
   return (
     <ChartContainer title={title} subtitle={subtitle}>
       <VictoryChart
@@ -32,8 +46,8 @@ const HorizontalBarChart = ({ data, sortOrder, dataValues, dataLabel, domain, ti
           dependentAxis
           // tickValues specifies both the number of ticks and where
           // they are placed on the axis
-          tickValues={data.map(a => a[sortOrder])}
-          tickFormat={data.map(a => a[dataLabel])}
+          tickValues={barData.map(a => a[sortOrderKey])}
+          tickFormat={barData.map(a => a[dataLabel])}
         />
         <VictoryAxis
           // tickFormat specifies how ticks should be displayed
@@ -72,7 +86,7 @@ const HorizontalBarChart = ({ data, sortOrder, dataValues, dataLabel, domain, ti
               cornerRadius={0}
             />
           }
-          data={data.map(d => ({ sortOrder: d[sortOrder], dataValues: d[dataValues], label: `${d[dataLabel]}: ${numeric(d[dataValues])}` }))}
+          data={barData.map(d => ({ sortOrder: d[sortOrderKey], dataValues: d[dataValues], label: `${d[dataLabel]}: ${numeric(d[dataValues])}` }))}
           x="sortOrder"
           y="dataValues"
           events={chartEvents}
@@ -83,7 +97,9 @@ const HorizontalBarChart = ({ data, sortOrder, dataValues, dataLabel, domain, ti
 };
 
 HorizontalBarChart.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object),
+  data: PropTypes.arrayOf(
+    PropTypes.shape({ x: PropTypes.number, y: PropTypes.number }),
+  ),
   sortOrder: PropTypes.string,
   dataValues: PropTypes.string,
   dataLabel: PropTypes.string,
