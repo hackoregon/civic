@@ -18,8 +18,8 @@ const customData = [
   { x: 500, y: 5 },
 ];
 
-const simpleDataDomain = { x: [0, 400], y: [0, 4] };
-const customDataDomain = { x: [0, 500], y: [0, 5] };
+const simpleDataDomain = { x: [100, 400], y: [0, 4] };
+const customDataDomain = { x: [100, 500], y: [0, 5] };
 
 const multiSeriesData = [
   { amount: 100, rate: 1, series: 'first' },
