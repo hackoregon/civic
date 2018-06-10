@@ -12,6 +12,8 @@ const mapWrapper = css`
   max-width: 900px;
 `;
 
+const elevationScale = {min: 1, max: 50};
+
 const MapOverlay = (props) => {
   const {
     viewport,
@@ -36,9 +38,6 @@ const MapOverlay = (props) => {
     onHover,
     children,
   } = props;
-
-  // console.log(props.layers)
-  console.log(props.filled)
 
   const tooltip = React.Children.map(children, child => {
     return React.cloneElement(child, {

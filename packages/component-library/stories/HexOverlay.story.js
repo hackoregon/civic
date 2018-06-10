@@ -73,6 +73,7 @@ const demoMap = () => {
   const opacity = number('Opacity:', 0.8, opacityOptions);
   const radius = number('Inner radius', 500, radiusOptions);
   const elevation = number('Elevation:', 10, elevationOptions);
+  const extruded = boolean('Extruded:', true);
 
 
   const mapboxStyle = selectV2('Mapbox Style', optionsStyle, optionsStyle['Label Maker']);
@@ -86,6 +87,7 @@ const demoMap = () => {
         opacity={opacity}
         radius={radius}
         elevation={elevation}
+        extruded={extruded}
         colorRange={colorRange}
         lightSettings={lightSettings}
       />
