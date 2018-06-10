@@ -10,7 +10,8 @@ export class NeighborhoodsThroughTheAges extends React.Component {
   render() {
     return (
       <CivicStoryCard title="Neighborhoods Through the Ages">
-        <Placeholder />
+        <Placeholder issue="192"/>
+        <Placeholder issue="201"/>
       </CivicStoryCard>
     );
   }

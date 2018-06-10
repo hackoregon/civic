@@ -10,12 +10,12 @@ const defaultMenu = [
     name: 'Collections',
     path: '/',
     nestedMenu: [
-      { name: 'Disaster Resilience', path: '/disaster' },
-      { name: 'Housing Affordability', path: '/housing' },
-      { name: 'Local Elections', path: '/elections' },
-      { name: 'Neighborhood Development', path: '/neighborhood' },
-      { name: 'Transportation Systems', path: '/transportation' },
-      { name: 'EXAMPLE Farmers Markets', path: '/farmers-markets' },
+      { name: 'Disaster Resilience', path: '/cities/portland/disaster' },
+      { name: 'Housing Affordability', path: '/cities/portland/housing' },
+      { name: 'Local Elections', path: '/cities/portland/elections' },
+      { name: 'Neighborhood Development', path: '/cities/portland/neighborhood' },
+      { name: 'Transportation Systems', path: '/cities/portland/transportation' },
+      { name: 'EXAMPLE Farmers Markets', path: '/cities/portland/farmers-markets' },
     ],
   },
   {
