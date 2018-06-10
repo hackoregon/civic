@@ -6,54 +6,50 @@ import CanvasParticles from './CanvasParticles'
 const cardsWrapper = css`
   display: flex;
   justify-content: space-around;
-  padding: 0px 48px;
-  margin: 80px 0px;
+  padding: 0;
+  margin: 0;
   flex-wrap: wrap;
 `;
 const card = css`
   font-family: 'Rubik';
   position: relative;
-  background-color: white;
+  background-color: transparent;
   font-size: 2vw;
   flex: 0 0 auto;
-  width: calc(25% - 24px);
-  padding: 24px;
+  width: 100%;
+  padding: 12px 0;
   box-sizing: border-box;
-  text-align: center;
+  text-align: left;
   margin: 6px 0px;
-  min-height: 260px;
   transition: all .3s ease-in-out;
 
-  @media (max-width: 990px) {
-    width: calc(50% - 24px);
-  }
-
-  @media (max-width: 768px) {
-    width: 100%;
-  }
-
   :hover {
-    transform: translateY(-25px);
+    transform: translateY(-3px);
     cursor: pointer;
   }
-
-  :after {
-    display: block;
-    content: "";
-    width: 50px;
-    height: 50px;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    border-top: 4px solid #ef4a5d;
-    border-left: 4px solid #240f27;
-  }
+`;
+const cardTextWrapper = css`
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+`;
+const eyebrowStyle = css`
+  display: block;
+  font-family: 'Rubik';
+  font-size: 14px;
+  color: #EE495C;
+`;
+const locationTitle = css`
+  display: block;
+  font-family: 'Rubik';
+  font-size: 18px;
+  color: white;
 `;
 
 const searchForm = css`
   display: block;
   width: 100%;
-  margin: 80px auto;
+  margin: 24px auto;
   max-width: 420px;
 `;
 
@@ -65,6 +61,7 @@ const searchInput = css`
   background-color: #250f28;
   font-size: 20px;
   color: white;
+  box-sizing: border-box;
 
   ::placeholder {
     color: white;
@@ -73,36 +70,34 @@ const searchInput = css`
 
 const searchTitle = css`
   font-family: 'Rubik', sans-serif;
-  text-align: center;
-  font-size: 50px;
-  width: 50%;
-  letter-spacing: -2px;
-  margin: 22px auto;
+  text-align: left;
+  font-size: 16px;
+  margin: 0 auto;
   font-weight: 400;
   color: white;
 `;
 const logoWrapper = css`
   position: relative;
-  margin: 0 auto;
-  padding: 120px 0px 50px;
+  margin: 0;
+  padding: 50px 0px 50px;
   width: 180px;
 `;
 const missionStatementTitle = css`
   font-family: 'Rubik', sans-serif;
-  text-align: center;
+  text-align: left;
   font-size: 50px;
-  width: 50%;
+  width: 100%;
   letter-spacing: -2px;
-  margin: 22px auto;
+  margin: 0;
 `;
 const missionStatement = css`
   font-size: 20px;
   line-height: 1.8;
-  font-family: "Rubik", sans-serif;
-  width: 80%;
-  margin: 24px auto;
+  font-family: "Rubik",sans-serif;
+  width: 100%;
+  margin: 20px 0;
   max-width: 1000px;
-  text-align: center;
+  text-align: left;
 `;
 const appWrapper = css`
   background-color: #f3f1f3;
@@ -116,11 +111,33 @@ const contentWrapper = css`
 const lookupWrapper = css`
   margin-top: 125px;
   background-color: #240f27;
-  padding: 100px 0px;
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+  position: absolute;
+  top: 0;
+  right: 9%;
+  box-shadow: 14px 30px 60px 9px #0f18287a;
 `;
 const iconWrapper = css`
-  width: 180px;
-  margin: 20px auto 0;
+  display: inline-block;
+  width: 100px;
+  margin: 0;
+  margin-right: 24px;
+`;
+const collectionsLink = css`
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 24px;
+`;
+const leftContainer = css`
+  display: block;
+  box-sizing: border-box;
+  position: relative;
+  padding-left: 50px;
+  width: 50%;
 `;
 
 class LandingPage extends React.Component {
@@ -169,13 +186,18 @@ class LandingPage extends React.Component {
       <div className={appWrapper}>
         <CanvasParticles />
         <div className={contentWrapper}>
-          <div className={logoWrapper}>
-            <img src={require(`../../assets/civic-logo-animated.svg`)} />
+          <div className={leftContainer}>
+            <div className={logoWrapper}>
+              <img src={require(`../../assets/civic-logo-animated.svg`)} />
+            </div>
+            <div className={missionStatementTitle}>{'Making data human, means making data intelligent.'}</div>
+            <div className={missionStatement}>{`CIVIC is a platform to empower data in a way that’s fundementally built to serve people.  We’re reimagining how to make information actionable through visual models, open standards, and creative frameworks that harness human collaboration at scale.`}</div>
           </div>
-          <div className={missionStatementTitle}>{'Making data human, means making data intelligent.'}</div>
-          <div className={missionStatement}>{`CIVIC is a platform for evolving powerful data technology, in a way that’s fundamentally built to serve people.`}</div>
+          <div className={collectionsLink}>
+            View Collections
+          </div>
           <div className={lookupWrapper}>
-            <h3 className={searchTitle}>Look for CIVIC data in your area</h3>
+            <h3 className={searchTitle}>Discover data near you</h3>
             <SearchBar handleSubmit={this.handleSearch} />
             <DataList repos={this.state.repos}/>
           </div>
@@ -224,10 +246,10 @@ class DataList extends React.Component {
         .replace(/-+$/, '');            // Trim - from end of text
     }
 
-    const countryImage = this.props.repos.city && <img src={require(`../../assets/country/usa.svg`)} width="100%" />
-    const stateImage = this.props.repos.state && <img src={require(`../../assets/state/${slugify(this.props.repos.state)}.svg`)} width="100%" />
-    const cityImage = this.props.repos.city && <img src={require(`../../assets/cities/${slugify(this.props.repos.city)}.png`)} width="100%" />
-    const localImage = this.props.repos.city && <img src={require(`../../assets/local/local.svg`)} width="100%" />
+    const countryImage = this.props.repos.city ? <img src={require(`../../assets/country/usa.svg`)} width="100%" /> : <img src={require(`../../assets/country/usa.svg`)} width="100%" />
+    const stateImage = this.props.repos.state ? <img src={require(`../../assets/state/${slugify(this.props.repos.state)}.svg`)} width="100%" /> : <img src={require(`../../assets/state/or.svg`)} width="100%" />
+    const cityImage = this.props.repos.city ? <img src={require(`../../assets/cities/${slugify(this.props.repos.city)}.png`)} width="100%" /> : <img src={require(`../../assets/cities/portland.png`)} width="100%" />
+    const localImage = this.props.repos.city ? <img src={require(`../../assets/local/local.svg`)} width="100%" /> : <img src={require(`../../assets/local/local.svg`)} width="100%" />
 
     const ctaMessage = this.props.repos.city === 'PORTLAND' ? (<div>
     Looks like we have data in your area. Click on a collection to get started ↑
@@ -240,27 +262,38 @@ class DataList extends React.Component {
     return (
         <div className={cardsWrapper}>
           <div className={card}>
-            <div>{this.props.repos.country ? this.props.repos.country : "?"}</div>
             <div className={iconWrapper}>
               { countryImage }
             </div>
+            <div className={cardTextWrapper}>
+              <span className={eyebrowStyle}>National</span>
+              <div className={locationTitle}>{this.props.repos.country ? this.props.repos.country : "?"}</div>
+            </div>
           </div>
           <div className={card}>
-            <div>{this.props.repos.state ? this.props.repos.state : "?"}</div>
             <div className={iconWrapper}>
               {stateImage}
             </div>
-          </div>
-          <div className={card}>
-            <div>{this.props.repos.city ? this.props.repos.city : "?"}</div>
-            <div className={iconWrapper}>
-              { cityImage }
+            <div className={cardTextWrapper}>
+              <span className={eyebrowStyle}>State</span>
+              <div className={locationTitle}>{this.props.repos.state ? this.props.repos.state : "?"}</div>
             </div>
           </div>
           <div className={card}>
-            <div>{this.props.repos.city ? "Local" : "?"}</div>
+            <div className={iconWrapper}>
+              { cityImage }
+            </div>
+            <div className={cardTextWrapper}>
+              <div className={locationTitle}>{this.props.repos.city ? this.props.repos.city : "?"}</div>
+            </div>
+          </div>
+          <div className={card}>
             <div className={iconWrapper}>
               { localImage }
+            </div>
+            <div className={cardTextWrapper}>
+              <span className={eyebrowStyle}>Local</span>
+              <div className={locationTitle}>{this.props.repos.city ? "Local" : "?"}</div>
             </div>
           </div>
           { this.props.repos.city && ctaMessage }
