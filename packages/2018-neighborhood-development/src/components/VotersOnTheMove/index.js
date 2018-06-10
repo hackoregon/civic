@@ -10,7 +10,7 @@ export class VotersOnTheMove extends React.Component {
   render() {
     return (
       <CivicStoryCard title="Voters on the Move">
-        <Placeholder />
+        <Placeholder issue="201"/>
       </CivicStoryCard>
     );
   }

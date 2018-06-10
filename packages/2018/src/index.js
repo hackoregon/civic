@@ -52,6 +52,9 @@ import './fonts.css';
 import RootPage from './components/RootPage';
 import HomePage from './components/HomePage';
 import SandboxPage from './components/SandboxPage';
+import PortlandCollectionPage from './components/PortlandCollectionPage';
+import CityNotFoundPage from './components/CityNotFoundPage';
+import StateNotFoundPage from './components/StateNotFoundPage';
 
 // Create a store by combining all project reducers and the routing reducer
 const configureStore = (initialState, history) => {
@@ -123,34 +126,54 @@ const routes = {
   },
   childRoutes: [
     {
-      path: 'disaster',
-      component: DisasterApp,
-      childRoutes: DisasterRoutes(store),
+      path: 'cities/portland',
+      indexRoute: {
+        component: PortlandCollectionPage,
+      },
+      childRoutes: [
+        {
+          path: 'disaster',
+          component: DisasterApp,
+          childRoutes: DisasterRoutes(store),
+        },
+        {
+          path: 'housing',
+          component: HousingApp,
+          childRoutes: HousingRoutes(store),
+        },
+        {
+          path: 'elections',
+          component: ElectionsApp,
+          childRoutes: ElectionsRoutes(store),
+        },
+        {
+          path: 'neighborhood',
+          component: NeighborhoodApp,
+          childRoutes: NeighborhoodRoutes(store),
+        },
+        {
+          path: 'transportation',
+          component: TransportationApp,
+          childRoutes: TransportationRoutes(store),
+        },
+        {
+          path: 'farmers-markets',
+          component: FarmersMarketsApp,
+          childRoutes: FarmersMarketsRoutes(store),
+        },
+      ],
     },
     {
-      path: 'housing',
-      component: HousingApp,
-      childRoutes: HousingRoutes(store),
+      path: 'cities/:city',
+      component: CityNotFoundPage,
     },
     {
-      path: 'elections',
-      component: ElectionsApp,
-      childRoutes: ElectionsRoutes(store),
+      path: 'states/oregon',
+      component: PortlandCollectionPage,
     },
     {
-      path: 'neighborhood',
-      component: NeighborhoodApp,
-      childRoutes: NeighborhoodRoutes(store),
-    },
-    {
-      path: 'transportation',
-      component: TransportationApp,
-      childRoutes: TransportationRoutes(store),
-    },
-    {
-      path: 'farmers-markets',
-      component: FarmersMarketsApp,
-      childRoutes: FarmersMarketsRoutes(store),
+      path: 'states/:state',
+      component: StateNotFoundPage,
     },
     {
       path: 'sandbox',
