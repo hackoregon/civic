@@ -55,16 +55,16 @@ const searchForm = css`
 
 const searchInput = css`
   width: 100%;
-  padding: 10px 20px;
-  border-radius: 100px;
-  border: 2px solid white;
+  padding: 6px 0px;
+  border: none;
+  border-bottom: 1px solid white;
   background-color: #250f28;
-  font-size: 20px;
+  font-size: 24px;
   color: white;
   box-sizing: border-box;
 
   ::placeholder {
-    color: white;
+    color: #ffffffa1;
   }
 `;
 
@@ -79,8 +79,8 @@ const searchTitle = css`
 const logoWrapper = css`
   position: relative;
   margin: 0;
-  padding: 50px 0px 50px;
-  width: 180px;
+  padding: 30px 0px 20px;
+  width: 160px;
 `;
 const missionStatementTitle = css`
   font-family: 'Rubik', sans-serif;
@@ -95,7 +95,7 @@ const missionStatement = css`
   line-height: 1.8;
   font-family: "Rubik",sans-serif;
   width: 100%;
-  margin: 20px 0;
+  margin: 40px 0 60px;
   max-width: 1000px;
   text-align: left;
 `;
@@ -109,11 +109,11 @@ const contentWrapper = css`
   position: relative;
 `;
 const lookupWrapper = css`
-  margin-top: 125px;
+  margin-top: 148px;
   background-color: #240f27;
   padding: 40px;
   width: 100%;
-  max-width: 400px;
+  max-width: 320px;
   position: absolute;
   top: 0;
   right: 9%;
@@ -124,19 +124,22 @@ const iconWrapper = css`
   width: 100px;
   margin: 0;
   margin-right: 24px;
+  text-align: center;
 `;
 const collectionsLink = css`
   display: block;
+  font-family: 'Rubik';
+  font-size: 16px;
   position: absolute;
-  top: 0;
-  right: 0;
-  margin: 24px;
+  top: 70px;
+  right: 9%;
+  margin: 0;
 `;
 const leftContainer = css`
   display: block;
   box-sizing: border-box;
   position: relative;
-  padding-left: 50px;
+  padding-left: 70px;
   width: 50%;
 `;
 
@@ -192,9 +195,10 @@ class LandingPage extends React.Component {
             </div>
             <div className={missionStatementTitle}>{'Making data human, means making data intelligent.'}</div>
             <div className={missionStatement}>{`CIVIC is a platform to empower data in a way that’s fundementally built to serve people.  We’re reimagining how to make information actionable through visual models, open standards, and creative frameworks that harness human collaboration at scale.`}</div>
+            <img src={require(`../../assets/cities/portland.png`)} width="100%" />
           </div>
           <div className={collectionsLink}>
-            View Collections
+            View all Collections
           </div>
           <div className={lookupWrapper}>
             <h3 className={searchTitle}>Discover data near you</h3>
@@ -249,7 +253,7 @@ class DataList extends React.Component {
     const countryImage = this.props.repos.city ? <img src={require(`../../assets/country/usa.svg`)} width="100%" /> : <img src={require(`../../assets/country/usa.svg`)} width="100%" />
     const stateImage = this.props.repos.state ? <img src={require(`../../assets/state/${slugify(this.props.repos.state)}.svg`)} width="100%" /> : <img src={require(`../../assets/state/or.svg`)} width="100%" />
     const cityImage = this.props.repos.city ? <img src={require(`../../assets/cities/${slugify(this.props.repos.city)}.png`)} width="100%" /> : <img src={require(`../../assets/cities/portland.png`)} width="100%" />
-    const localImage = this.props.repos.city ? <img src={require(`../../assets/local/local.svg`)} width="100%" /> : <img src={require(`../../assets/local/local.svg`)} width="100%" />
+    const localImage = this.props.repos.city ? <img src={require(`../../assets/local/local.svg`)} width="70%" /> : <img src={require(`../../assets/local/local.svg`)} width="70%" />
 
     const ctaMessage = this.props.repos.city === 'PORTLAND' ? (<div>
     Looks like we have data in your area. Click on a collection to get started ↑
