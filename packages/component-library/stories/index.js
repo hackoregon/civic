@@ -1,5 +1,6 @@
 import React from 'react';
 import { storiesOf, linkTo } from '@storybook/react'; // eslint-disable-line
+import { checkA11y } from '@storybook/addon-a11y';
 import buttonStory from './Button.story';
 import storycardStory from './StoryCard.story';
 import civicStorycardStory from './CivicStoryCard.story';
@@ -17,6 +18,7 @@ import sankeyStory from './Sankey.story';
 import placeholderStory from './Placeholder.story';
 import dropdownStory from './DropdownMenu.story';
 import headerStory from './Header.story';
+import dataTable from './DataTable.story';
 import Welcome from './Welcome';
 import baseMapStory from './BaseMap.story';
 import mapOverlayStory from './MapOverlay.story';
@@ -58,6 +60,7 @@ sliderStory();
 dropdownStory();
 baseMapStory();
 scatterPlotMapStory();
+dataTable();
 pullQuoteStory();
 screenGridMapStory();
 pathMapStory();
