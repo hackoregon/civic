@@ -38,10 +38,10 @@ describe('BarChart', () => {
     const wrapper = shallow(<BarChart data={simpleData} />);
     expect(wrapper.find({ title: 'Bar Chart' }).length).to.eql(1);
     expect(wrapper.find({ title: 'Bar Chart' }).props().data).to.eql([
-      { dataKey: 100, dataValue: 1, label: "X: 100 | Y: 1" },
-      { dataKey: 200, dataValue: 2, label: "X: 200 | Y: 2" },
-      { dataKey: 300, dataValue: 3, label: "X: 300 | Y: 3" },
-      { dataKey: 400, dataValue: 4, label: "X: 400 | Y: 4" },
+      { dataKey: 100, dataValue: 1, label: "X: 100 • Y: 1" },
+      { dataKey: 200, dataValue: 2, label: "X: 200 • Y: 2" },
+      { dataKey: 300, dataValue: 3, label: "X: 300 • Y: 3" },
+      { dataKey: 400, dataValue: 4, label: "X: 400 • Y: 4" },
     ]);
   });
 
@@ -51,11 +51,11 @@ describe('BarChart', () => {
     wrapper.setProps({ data: customData });
 
     expect(wrapper.find({ title: 'Bar Chart' }).props().data).to.eql([
-      { dataKey: 100, dataValue: 1, label: "X: 100 | Y: 1" },
-      { dataKey: 200, dataValue: 2, label: "X: 200 | Y: 2" },
-      { dataKey: 300, dataValue: 3, label: "X: 300 | Y: 3" },
-      { dataKey: 400, dataValue: 4, label: "X: 400 | Y: 4" },
-      { dataKey: 500, dataValue: 5, label: "X: 500 | Y: 5" },
+      { dataKey: 100, dataValue: 1, label: "X: 100 • Y: 1" },
+      { dataKey: 200, dataValue: 2, label: "X: 200 • Y: 2" },
+      { dataKey: 300, dataValue: 3, label: "X: 300 • Y: 3" },
+      { dataKey: 400, dataValue: 4, label: "X: 400 • Y: 4" },
+      { dataKey: 500, dataValue: 5, label: "X: 500 • Y: 5" },
     ]);
   });
 

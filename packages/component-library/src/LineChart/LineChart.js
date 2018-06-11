@@ -73,12 +73,6 @@ const LineChart = ({
       )
     : null;
 
-  const axisLabelStyle = {
-    fontFamily: "'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif",
-    fontSize: '14px',
-    fontWeight: 'bold',
-  };
-
   return (
     <ChartContainer title={title} subtitle={subtitle}>
       {legendData && (
@@ -115,7 +109,7 @@ const LineChart = ({
         />
         <VictoryPortal>
           <VictoryLabel
-            style={axisLabelStyle}
+            style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
             text={yLabel}
             textAnchor="middle"
             title="Y Axis Label"
@@ -126,7 +120,7 @@ const LineChart = ({
         </VictoryPortal>
         <VictoryPortal>
           <VictoryLabel
-            style={axisLabelStyle}
+            style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
             text={xLabel}
             textAnchor="end"
             title="X Axis Label"
@@ -142,7 +136,7 @@ const LineChart = ({
           data={data.map(d => ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],
-            label: `${dataKeyLabel ? dataKeyLabel : xLabel}: ${xNumberFormatter(d[dataKey])} | ${dataValueLabel ? dataValueLabel : yLabel}: ${yNumberFormatter(d[dataValue])}`,
+            label: `${dataKeyLabel ? dataKeyLabel : xLabel}: ${xNumberFormatter(d[dataKey])} • ${dataValueLabel ? dataValueLabel : yLabel}: ${yNumberFormatter(d[dataValue])}`,
             series: d[dataSeries],
             size: size ? d[size.key] || size.value : 3,
           }))}
@@ -154,6 +148,7 @@ const LineChart = ({
               orientation="bottom"
               pointerLength={0}
               cornerRadius={0}
+              theme={CivicVictoryTheme.civic}
             />
           }
           size={d => d.size}
