@@ -10,7 +10,7 @@ export class MagnitudeOfUrbanCampsiteSweeps extends React.Component {
   render() {
     return (
       <CivicStoryCard title="Magnitude of Urban Campsite Sweeps in Portland">
-        <Placeholder />
+        <Placeholder issue="85"/>
       </CivicStoryCard>
     );
   }

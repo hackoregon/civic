@@ -1,17 +1,53 @@
 import React, { Component } from 'react';
-import MapGL from 'react-map-gl';
-import { css } from 'emotion';
-import './mapbox-gl.css';
 import PropTypes from 'prop-types';
-import DeckGL, {GeoJsonLayer} from 'deck.gl';
+import DeckGL, { GeoJsonLayer } from 'deck.gl';
+import { css } from 'emotion';
+
+const crosshair = css`
+  cursor: crosshair;
+`;
+
+const mapWrapper = css`
+  margin: auto;
+  max-width: 900px;
+`;
+
+const elevationScale = {min: 1, max: 50};
 
 const MapOverlay = (props) => {
-  const { viewport, data, mapboxStyle, mapboxToken, opacity, filled, wireframe, extruded, elevation, onLayerClick, getPosition, onLayerHover } = props;
+  const {
+    viewport,
+    data,
+    getPosition,
+    opacity,
+    filled,
+    wireframe,
+    extruded,
+    elevation,
+    onLayerClick,
+    getColor,
+    getRadius,
+    radiusScale,
+    outline,
+    strokeWidth,
+    autoHighlight,
+    visible,
+    tooltipInfo,
+    x,
+    y,
+    onHover,
+    children,
+  } = props;
 
-  const mapWrapper = css`
-    margin: auto;
-    max-width: 900px;
-  `;
+  const tooltip = React.Children.map(children, child => {
+    return React.cloneElement(child, {
+      tooltipInfo: tooltipInfo,
+      x: x,
+      y: y,
+    });
+  });
+
+  const tooltipRender = tooltipInfo ? tooltip : null;
 
   const colorScale = r => [r * 255, 140, 200 * (1 - r)];
 
@@ -43,11 +79,15 @@ const MapOverlay = (props) => {
     autoHighlight: true,
     getPosition: getPosition,
     onClick: onLayerClick,
-    onHover: onLayerHover,
+    onHover: onHover,
   });
 
   return (
-    <DeckGL {...viewport} layers={[layer]} className={'MapOverlay'} />
+    <div className={crosshair}>
+      <DeckGL {...viewport} layers={[layer]} className={'MapOverlay'} >
+        { tooltipRender }
+      </DeckGL>
+    </div>
   );
 };
 

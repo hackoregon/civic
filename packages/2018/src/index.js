@@ -6,6 +6,7 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import { routerReducer, routerMiddleware, syncHistoryWithStore } from 'react-router-redux';
+import { createLogger } from 'redux-logger';
 
 // Import routes, reducers, and root component from each project
 import {
@@ -59,6 +60,9 @@ import StateNotFoundPage from './components/StateNotFoundPage';
 // Create a store by combining all project reducers and the routing reducer
 const configureStore = (initialState, history) => {
   const middlewares = [thunk, routerMiddleware(history)];
+  if (process.env.NODE_ENV !== 'production') {
+    middlewares.push(createLogger());
+  }
 
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE_ || compose;
   const store = createStore(

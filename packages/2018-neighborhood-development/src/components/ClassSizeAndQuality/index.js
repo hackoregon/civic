@@ -10,7 +10,7 @@ export class ClassSizeAndQuality extends React.Component {
   render() {
     return (
       <CivicStoryCard title="Class Size and Quality">
-        <Placeholder />
+        <Placeholder issue="227"/>
       </CivicStoryCard>
     );
   }
