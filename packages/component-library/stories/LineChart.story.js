@@ -35,20 +35,22 @@ const sampleSize = { key: 'y' };
 const sampleSubtitle = 'A description of this chart.';
 const sampleTitle = 'Some title';
 const sampleXKey = 'x';
-const sampleXLabel = 'Number';
+const sampleXLabel = 'Number of animals';
 const sampleYKey = 'y';
-const sampleYLabel = 'Rating';
+const sampleYLabel = 'Cuteness rating';
+const sampleDataKeyLabel = 'Animals';
+const sampleDataValueLabel = 'Cuteness';
 
 const sampleUnstructuredData = [
-  { size: 0, age: 2, type: 'cat' },
-  { size: 5, age: 3, type: 'cat' },
-  { size: 10, age: 7, type: 'cat' },
-  { size: 0, age: 5, type: 'fish' },
-  { size: 5, age: 4, type: 'fish' },
-  { size: 10, age: 5, type: 'fish' },
-  { size: 0, age: 3, type: 'dog' },
-  { size: 5, age: 3, type: 'dog' },
-  { size: 10, age: 3, type: 'dog' },
+  { size: 0, age: 2000000, type: 'cat' },
+  { size: 5, age: 3000000, type: 'cat' },
+  { size: 10, age: 7000000, type: 'cat' },
+  { size: 0, age: 5000320, type: 'fish' },
+  { size: 5, age: 40002300, type: 'fish' },
+  { size: 10, age: 5007000, type: 'fish' },
+  { size: 0, age: 3000000, type: 'dog' },
+  { size: 5, age: 3000500, type: 'dog' },
+  { size: 10, age: 3000000.5, type: 'dog' },
 ];
 const sampleUnstructuredXKey = 'size';
 const sampleUnstructuredYKey = 'age';
@@ -109,7 +111,9 @@ export default () =>
     .add('with more optional props', () => {
       const data = object('Data', sampleData);
       const dataKey = text('dataKey', sampleXKey);
+      const dataKeyLabel = text('dataKeyLabel', sampleDataKeyLabel);
       const dataValue = text('dataValue', sampleYKey);
+      const dataValueLabel = text('dataValueLabel', sampleDataValueLabel);
       const dataSeries = text('dataSeries', sampleDataSeries);
       const dataSeriesLabel = object('Data Series Labels', sampledataSeriesLabel);
       const domain = object('Domain', sampleDomain);
@@ -123,7 +127,9 @@ export default () =>
         <LineChart
           data={data}
           dataKey={dataKey}
+          dataKeyLabel={dataKeyLabel}
           dataValue={dataValue}
+          dataValueLabel={dataValueLabel}
           dataSeries={dataSeries}
           dataSeriesLabel={dataSeriesLabel}
           domain={domain}

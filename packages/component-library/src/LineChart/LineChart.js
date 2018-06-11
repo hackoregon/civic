@@ -87,6 +87,7 @@ const LineChart = ({
 
       <VictoryChart
         domain={chartDomain}
+        padding={{ left: 75, right: 50, bottom: 50, top: 50 }}
         theme={CivicVictoryTheme.civic}
       >
         <VictoryAxis
@@ -119,7 +120,7 @@ const LineChart = ({
             textAnchor="middle"
             title="Y Axis Label"
             verticalAnchor="end"
-            x={50}
+            x={75}
             y={45}
           />
         </VictoryPortal>
@@ -141,7 +142,7 @@ const LineChart = ({
           data={data.map(d => ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],
-            label: `${dataKeyLabel ? d[dataKeyLabel] : xLabel}: ${numeric(d[dataKey])} | ${dataValueLabel ? d[dataValueLabel] : yLabel}: ${numeric(d[dataValue])}`,
+            label: `${dataKeyLabel ? dataKeyLabel : xLabel}: ${xNumberFormatter(d[dataKey])} | ${dataValueLabel ? dataValueLabel : yLabel}: ${yNumberFormatter(d[dataValue])}`,
             series: d[dataSeries],
             size: size ? d[size.key] || size.value : 3,
           }))}
