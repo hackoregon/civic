@@ -10,7 +10,6 @@ import {
 } from 'victory';
 
 import ChartContainer from '../ChartContainer';
-import { dollars, numeric } from '../utils/formatters';
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
 
 const chartEvents = [
@@ -43,14 +42,31 @@ const chartEvents = [
   },
 ];
 
-const HorizontalBarChart = ({ data, dataKey, dataValue, dataKeyLabel, domain, title, subtitle, xLabel, yLabel }) => {
+const axisLabelStyle = {
+  fontFamily: "'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif",
+  fontSize: '14px',
+  fontWeight: 'bold',
+};
 
-  const axisLabelStyle = {
-    fontFamily: "'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif",
-    fontSize: '14px',
-    fontWeight: 'bold',
-  };
-
+const HorizontalBarChart = ({
+  data,
+  dataKey,
+  dataValue,
+  dataKeyLabel,
+  title,
+  subtitle,
+  xLabel,
+  yLabel,
+  horizontalFormatter,
+  labelFormatter,
+}) => {
+  const yFormatter = x => horizontalFormatter(x[dataValue]);
+  const defaultLabelFormatter = labelFormatter || (x => `${x[dataKeyLabel]}: ${yFormatter(x)}`);
+  const formattedData = data.map(x => ({
+    x: x[dataKeyLabel],
+    y: x[dataValue],
+    label: defaultLabelFormatter(x),
+  })).reverse();
   return (
     <ChartContainer title={title} subtitle={subtitle}>
       <VictoryChart
@@ -61,14 +77,10 @@ const HorizontalBarChart = ({ data, dataKey, dataValue, dataKeyLabel, domain, ti
       >
         <VictoryAxis
           dependentAxis
-          // tickValues specifies both the number of ticks and where
-          // they are placed on the axis
-          tickValues={data.map(a => a[dataKey])}
-          tickFormat={data.map(a => a[dataKeyLabel])}
         />
         <VictoryAxis
           // tickFormat specifies how ticks should be displayed
-          tickFormat={x => dollars(numeric(x))}
+          tickFormat={horizontalFormatter}
         />
         <VictoryPortal>
           <VictoryLabel
@@ -103,14 +115,16 @@ const HorizontalBarChart = ({ data, dataKey, dataValue, dataKeyLabel, domain, ti
               cornerRadius={0}
             />
           }
-          data={data.map(d => ({ dataKey: d[dataKey], dataValue: d[dataValue], label: `${d[dataKeyLabel]}: ${numeric(d[dataValue])}` }))}
-          x="dataKey"
-          y="dataValue"
+          data={formattedData}
           events={chartEvents}
         />
       </VictoryChart>
     </ChartContainer>
-  );
+  )
+};
+
+HorizontalBarChart.defaultProps = {
+  horizontalFormatter: x => x,
 };
 
 HorizontalBarChart.propTypes = {
@@ -118,11 +132,11 @@ HorizontalBarChart.propTypes = {
   dataKey: PropTypes.string.isRequired,
   dataValue: PropTypes.string.isRequired,
   dataKeyLabel: PropTypes.string,
-  domain: PropTypes.objectOf(PropTypes.array),  
   title: PropTypes.string,
   subtitle: PropTypes.string,
+  horizontalFormatter: PropTypes.func,
   xLabel: PropTypes.string,
-  yLabel: PropTypes.string
+  yLabel: PropTypes.string,
 };
 
 export default HorizontalBarChart;

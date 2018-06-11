@@ -8,6 +8,7 @@ import {
   withKnobs,
   text, number, object, array,
 } from '@storybook/addon-knobs';
+import { dollars, numeric } from '../src/utils/formatters';
 import { HorizontalBarChart } from '../src';
 
 const displayName = HorizontalBarChart.displayName || 'HorizontalBarChart';
@@ -39,6 +40,7 @@ export default () => storiesOf(displayName, module)
         dataKey={dataKey}
         dataValue={dataValue}
         dataKeyLabel={dataKeyLabel}
+        horizontalFormatter={x => dollars(numeric(x))}
         title={'Dogs and their Money'}
         subtitle={'As of January 2017'}
         xLabel={xLabel}
