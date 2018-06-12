@@ -1,9 +1,9 @@
-import importReducer from '../import-adapter-reducer';
-import { IMPORT_START, IMPORT_SUCCESS } from './actions';
+import apiReducer from '../api-adapter-reducer';
+import { API_START, API_SUCCESS } from './actions';
 
 const INITIAL_STATE = {
   pending: false,
   data: null,
 };
 
-export default importReducer({ INITIAL_STATE, IMPORT_START, IMPORT_SUCCESS });
+export default apiReducer({ INITIAL_STATE, API_START, API_SUCCESS });

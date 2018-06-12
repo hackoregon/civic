@@ -30,8 +30,3 @@ export const isRidershipOverTimePending = createSelector(
   getRidershipOverTimeRequest,
   ({ pending }) => !!pending,
 );
-
-const calculateChangeSince2002 = data => {
-  let ret;
-
-}
