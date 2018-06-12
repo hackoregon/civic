@@ -24,6 +24,8 @@ const MapTooltip = (props) => {
     primaryField,
     secondaryName,
     secondaryField,
+    isHex
+
   } = props;
 
   const xPosition = x < window.innerWidth * 0.66 ? x : x - (window.innerWidth * 0.1);
@@ -47,11 +49,11 @@ const MapTooltip = (props) => {
           {secondaryName}: {tooltipInfo.properties[secondaryField]}
         </div> : null
       }
-      {
+      { isHex ?
         <div>
           <div>elevation: {tooltipInfo.elevationValue}</div>
           <div>coordinates: {tooltipInfo.centroid.join(', ')}</div>
-        </div>
+        </div> : null
       }
     </div>
   );
