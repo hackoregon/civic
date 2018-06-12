@@ -9,7 +9,10 @@ export class RentBurdenedHouseholds extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Rent Burdened Households">
+      <CivicStoryCard
+        title="Rent Burdened Households"
+        slug="rent-burdened-households"
+      >
         <Placeholder issue = "194"/>
       </CivicStoryCard>
     );

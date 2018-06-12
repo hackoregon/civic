@@ -9,7 +9,10 @@ export class PortlandNeedsAffordableRentalUnits extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Portland Needs Affordable Rental Units">
+      <CivicStoryCard
+        title="Portland Needs Affordable Rental Units"
+        slug="portland-needs-affordable-rental-units"
+      >
         <Placeholder issue="55" />
       </CivicStoryCard>
     );
