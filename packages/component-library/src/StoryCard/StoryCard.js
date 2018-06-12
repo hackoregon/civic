@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { css } from 'emotion';
 import StoryFooter from './StoryFooter';
 
@@ -15,7 +16,7 @@ const descriptionClass = css`
 
 const StoryCard = ({ cardId, collectionId, title, children }) => (
   <div className={cardClass}>
-    <h2 className={'Title FilsonSoft'}>{title}</h2>
+    <h2 className="Title">{title}</h2>
     <div className={descriptionClass}>
       {children}
     </div>

@@ -35,6 +35,12 @@ travis:
 		echo "\n--- Transportation Tests\n"; \
 		cd packages/2018-transportation-systems && yarn test; cd -; \
 		\
+		echo "\n--- Example Farmers Markets\n"; \
+		cd packages/2018-example-farmers-markets && yarn test; cd -; \
+		\
+		echo "\n--- Civic Sandbox Tests\n"; \
+		cd packages/civic-sandbox && yarn test; cd -; \
+		\
 		echo "\n--- 2018 Tests\n"; \
 		cd packages/2018 && yarn test; cd -; \
 	fi
@@ -45,9 +51,7 @@ travis:
 
 deploy:
 	@if [ -z "$$TRAVIS_PULL_REQUEST" ] || [ "$$TRAVIS_PULL_REQUEST" = "false" ]; then \
-		echo "Not a PR..."; \
 		if [ "$$TRAVIS_BRANCH" = "master" ]; then \
-			echo "On the master branch..."; \
 			if [ "$$SUITE" = "2017" ]; then \
 				make deploy-2017; \
 			fi; \
@@ -57,14 +61,44 @@ deploy:
 			if [ "$$SUITE" = "COMPONENT_LIBRARY" ]; then \
 				make deploy-component-library; \
 			fi \
+		else \
+			echo "No deploys on branches other than 'master'"; \
 		fi \
+	else \
+		echo "No deploys on PRs"; \
 	fi
 
-deploy-2017:
-	echo "2017 build and deploy stub"
+setup-aws:
+	@echo "Setting up AWS access"
+	pip install --user awscli
+	export PATH=$$PATH:$$HOME/.local/bin
 
-deploy-2018:
-	echo "2018 build and deploy stub"
+access-ecr:
+	@echo "Accessing ECR"
+	eval $$(aws ecr get-login --no-include-email --region $$AWS_DEFAULT_REGION)
+
+deploy-2017: setup-aws access-ecr
+	@echo "Deploying the 2017 Container"
+	cd packages/2017 && yarn run build
+	cd packages/2017 && docker build -t civic-2017 .
+	@echo "Pushing civic-2017:latest"
+	cd packages/2017 && docker tag civic-2017:latest "$$REMOTE_IMAGE_URL/civic-2017:latest"
+	cd packages/2017 && docker push "$$REMOTE_IMAGE_URL/civic-2017:latest"
+	@echo "Pushed civic-2017:latest"
+	@echo "Deploying latest for $$ECS_SERVICE_2017"
+	./bin/ecs-deploy.sh --cluster $$ECS_CLUSTER --service-name $$ECS_SERVICE_2017 --image $$REMOTE_IMAGE_URL/civic-2017:latest --timeout 10
+
+deploy-2018: setup-aws access-ecr
+	@echo "Deploying the 2018 Container"
+	cd packages/2018 && yarn run build
+	cd packages/2018 && docker build -t civic-2018 .
+	@echo "Pushing civic-2018:latest"
+	cd packages/2018 && docker tag civic-2018:latest "$$REMOTE_IMAGE_URL/civic-2018:latest"
+	cd packages/2018 && docker push "$$REMOTE_IMAGE_URL/civic-2018:latest"
+	@echo "Pushed civic-2018:latest"
+	@echo "Deploying latest for $$ECS_SERVICE_2018"
+	docker push $$REMOTE_IMAGE_URL/civic-2018:latest
+	./bin/ecs-deploy.sh --cluster $$ECS_CLUSTER --service-name $$ECS_SERVICE_2018 --image $$REMOTE_IMAGE_URL/civic-2018:latest --timeout 10
 
 deploy-component-library:
 	@echo "Deploying the component library";

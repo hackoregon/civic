@@ -1,30 +1,26 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { css } from 'emotion';
 
-const primaryColor = 'rgb(238, 73, 80)';
 const storyLinkClass = css`
-  border-bottom: 2px solid ${primaryColor};
-
   & a {
     display: flex;
-    padding: 12px 16px 12px 16px;
     flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
+    padding: 8px 12px;
     border-bottom: none;
+    color: #000;
 
     &:hover {
-      background-color: ${primaryColor};
-      color: #FFF;
-    }
-
-    &:focus {
-      outline: none;
+      background-color: rgba(0,0,0,0.1);
+      color: #000;
     }
 
     & i {
       margin-right: 12px;
+      opacity: 0.8;
     }
   }
 

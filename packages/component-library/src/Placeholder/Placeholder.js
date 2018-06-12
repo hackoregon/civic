@@ -22,15 +22,27 @@ const DefaultText = () => (
   </div>
 );
 
-const Placeholder = ({ children }) => (
+const IssueText = ({ issue }) => (
+  <div>
+    <h1>Card In Progress</h1>
+    <a href={'https://github.com/hackoregon/civic/issues/' + issue}>View progress on GitHub</a>
+  </div>
+);
+
+const Placeholder = ({ issue, children }) => (
   <div className={placeholderClass}>
-    {children || <DefaultText />}
+    {issue ? <IssueText issue={issue} /> : children || <DefaultText />}
   </div>
 );
 
 Placeholder.displayName = 'Placeholder';
 Placeholder.propTypes = {
   children: React.PropTypes.node,
+  issue: React.PropTypes.string,
+};
+
+IssueText.propTypes = {
+  issue: React.PropTypes.string,
 };
 
 export default Placeholder;

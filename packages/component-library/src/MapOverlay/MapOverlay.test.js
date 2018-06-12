@@ -1,31 +1,49 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import MapOverlay from './MapOverlay';
+import DeckGL from 'deck.gl';
 
 describe('MapOverlay', () => {
-  // const mapboxStyle = 'mapbox://styles/themendozaline/cjg6296ub04ot2sqv9izku3qq';
-  // const mapboxToken = 'pk.eyJ1IjoidGhlbWVuZG96YWxpbmUiLCJhIjoiY2o1aXdoem1vMWtpNDJ3bnpqaGF1bnlhNSJ9.sjTrNKLW9daDBIGvP3_W0w';
-  //
-  // const defaultProps = {
-  //   mapboxStyle,
-  //   mapboxToken,
-  // };
+  const data = [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [0, 0]
+      },
+      "properties": {
+        "name": "Null Island"
+      }
+    }
+  ];
+  const extruded = true;
+  const opacity = 0.8;
 
-  // it('should render a container div', () => {
-  //   const wrapper = shallow( <MapOverlay {...defaultProps} />);
-  //
-  //   expect(wrapper.find('div')).to.have.length(1);
-  // });
-  //
-  // it('should render a MapGL component', () => {
-  //   const wrapper = shallow(<MapOverlay {...defaultProps} />);
-  //
-  //   expect(wrapper.find('.MapGL')).to.have.length(1);
-  // });
-  //
-  // it('should have required prop mapboxApiAccessToken', () => {
-  //   const wrapper = shallow(<MapOverlay {...defaultProps} />);
-  //
-  //   expect(wrapper.find('.MapGL').prop('mapboxApiAccessToken')).to.eql(defaultProps.mapboxToken);
-  // });
+  const defaultProps = {
+    data,
+    opacity,
+    extruded
+  };
+
+  const wrapper = shallow(<MapOverlay {...defaultProps}/>);
+
+  it('should render a div wrapper', () => {
+    expect(wrapper.find('div')).length(1)
+  });
+
+  it('should render with the same class name', () => {
+    expect(wrapper.find('.MapOverlay')).length(1)
+  });
+
+  it('should render a DeckGL component', () => {
+    expect(wrapper.find(DeckGL)).length(1)
+  });
+
+  it('should render without stroked', () => {
+    expect(wrapper.props().layers)
+  });
+
+  it('should render without stroked', () => {
+    expect(wrapper.props().filled)
+  });
 });

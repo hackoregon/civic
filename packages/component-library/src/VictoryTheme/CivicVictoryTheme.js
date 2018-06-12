@@ -142,6 +142,19 @@ export default {
   group: assign({
     colorScale: colors
   }, baseProps),
+  legend: {
+    colorScale: colors,
+    gutter: 10,
+    orientation: 'vertical',
+    titleOrientation: 'top',
+    style: {
+      data: {
+        type: 'circle',
+      },
+      labels: baseLabelStyles,
+      title: assign({}, baseLabelStyles, { padding: 5 }),
+    },
+  },
   line: assign({
     style: {
       data: {

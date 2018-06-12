@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
   AreaChart, XAxis, YAxis, CartesianGrid, Area, Legend, Tooltip,
 } from 'recharts';
