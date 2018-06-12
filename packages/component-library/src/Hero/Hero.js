@@ -32,13 +32,6 @@ const contentClass = css`
   display: flex;
   align-items: center;
   color: #fff;
-
-  & > h1 {
-    font-size: 3em;
-    line-height: 1.25em;
-    color: #FFF;
-    font-weight: 100;
-  }
 `;
 
 const DefaultChildren = () => (
