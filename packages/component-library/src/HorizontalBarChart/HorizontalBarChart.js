@@ -81,6 +81,7 @@ const HorizontalBarChart = ({ data, sortOrder, dataValue, dataLabel, domain, tit
               orientation="bottom"
               pointerLength={0}
               cornerRadius={0}
+              theme={CivicVictoryTheme.civic}
             />
           }
           data={barData.map(d => ({ sortOrder: d[sortOrderKey], dataValue: d[dataValue], label: `${d[dataLabel]}: ${xNumberFormatter(d[dataValue])}` }))}
