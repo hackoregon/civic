@@ -9,7 +9,10 @@ export class LifeAlteringEvent extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="A Life-Altering Event for Portlanders">
+      <CivicStoryCard
+        title="A Life-Altering Event for Portlanders"
+        slug="life-altering-event"
+      >
         <Placeholder />
       </CivicStoryCard>
     );

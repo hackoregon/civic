@@ -9,7 +9,10 @@ export class YouAndYourNeighbors extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="You and Your Neighbors in the Earthquake">
+      <CivicStoryCard
+        title="You and Your Neighbors in the Earthquake"
+        slug="you-and-your-neighbors-in-the-earthquake"
+      >
         <Placeholder />
       </CivicStoryCard>
     );

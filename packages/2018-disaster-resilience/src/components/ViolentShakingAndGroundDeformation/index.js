@@ -9,7 +9,10 @@ export class ViolentShakingAndGroundDeformation extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Violent Shaking and Ground Deformation">
+      <CivicStoryCard
+        title="Violent Shaking and Ground Deformation"
+        slug="violent-shaking-and-ground-deformation"
+      >
         <Placeholder />
       </CivicStoryCard>
     );

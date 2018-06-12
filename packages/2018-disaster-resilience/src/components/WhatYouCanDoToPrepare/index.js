@@ -9,7 +9,10 @@ export class WhatYouCanDoToPrepare extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="What You Can Do to Prepare for an Earthquake">
+      <CivicStoryCard
+        title="What You Can Do to Prepare for an Earthquake"
+        slug="what-you-can-do-to-prepare-for-an-earthquake"
+      >
         <Placeholder />
       </CivicStoryCard>
     );

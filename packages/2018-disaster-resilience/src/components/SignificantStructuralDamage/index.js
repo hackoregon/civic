@@ -9,7 +9,10 @@ export class SignificantStructuralDamage extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Significant Structural Damage">
+      <CivicStoryCard
+        title="Significant Structural Damage"
+        slug="significant-structural-damage"
+      >
         <Placeholder />
       </CivicStoryCard>
     );
