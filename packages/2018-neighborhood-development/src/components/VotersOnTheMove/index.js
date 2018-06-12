@@ -19,5 +19,7 @@ export class VotersOnTheMove extends React.Component {
   }
 }
 
+VotersOnTheMove.displayName = 'VotersOnTheMove';
+
 // Connect this to the redux store when necessary
 export default VotersOnTheMove;

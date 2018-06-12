@@ -19,5 +19,7 @@ export class ReducedServiceReducedRidership extends React.Component {
   }
 }
 
+ReducedServiceReducedRidership.displayName = 'ReducedServiceReducedRidership';
+
 // Connect this to the redux store when necessary
 export default ReducedServiceReducedRidership;

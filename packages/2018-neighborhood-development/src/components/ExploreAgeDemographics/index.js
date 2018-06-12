@@ -22,5 +22,7 @@ export class ExploreAgeDemographics extends React.Component {
   }
 }
 
+ExploreAgeDemographics.displayName = 'ExploreAgeDemographics';
+
 // Connect this to the redux store when necessary
 export default ExploreAgeDemographics;

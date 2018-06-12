@@ -19,5 +19,7 @@ export class UnderstandingStaffCuts extends React.Component {
   }
 }
 
+UnderstandingStaffCuts.displayName = 'UnderstandingStaffCuts';
+
 // Connect this to the redux store when necessary
 export default UnderstandingStaffCuts;

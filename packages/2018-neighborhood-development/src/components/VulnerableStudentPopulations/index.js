@@ -19,5 +19,7 @@ export class VulnerableStudentPopulations extends React.Component {
   }
 }
 
+VulnerableStudentPopulations.displayName = 'VulnerableStudentPopulations';
+
 // Connect this to the redux store when necessary
 export default VulnerableStudentPopulations;

@@ -19,5 +19,7 @@ export class InfluentialContributorCohorts extends React.Component {
   }
 }
 
+InfluentialContributorCohorts.displayName = 'InfluentialContributorCohorts';
+
 // Connect this to the redux store when necessary
 export default InfluentialContributorCohorts;

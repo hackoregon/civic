@@ -22,5 +22,7 @@ export class DiveDeeperIntoNeighborhoodData extends React.Component {
   }
 }
 
+DiveDeeperIntoNeighborhoodData.displayName = 'DiveDeeperIntoNeighborhoodData';
+
 // Connect this to the redux store when necessary
 export default DiveDeeperIntoNeighborhoodData;

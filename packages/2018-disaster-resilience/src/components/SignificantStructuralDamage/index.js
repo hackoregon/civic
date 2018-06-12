@@ -19,5 +19,7 @@ export class SignificantStructuralDamage extends React.Component {
   }
 }
 
+SignificantStructuralDamage.displayName = 'SignificantStructuralDamage';
+
 // Connect this to the redux store when necessary
 export default SignificantStructuralDamage;

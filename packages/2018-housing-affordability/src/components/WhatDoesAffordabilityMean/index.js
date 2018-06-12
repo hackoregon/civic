@@ -19,5 +19,7 @@ export class WhatDoesAffordabilityMean extends React.Component {
   }
 }
 
+WhatDoesAffordabilityMean.displayName = 'WhatDoesAffordabilityMean';
+
 // Connect this to the redux store when necessary
 export default WhatDoesAffordabilityMean;

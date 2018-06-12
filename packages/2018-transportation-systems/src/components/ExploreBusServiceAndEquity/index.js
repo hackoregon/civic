@@ -22,5 +22,7 @@ export class ExploreBusServiceAndEquity extends React.Component {
   }
 }
 
+ExploreBusServiceAndEquity.displayName = 'ExploreBusServiceAndEquity';
+
 // Connect this to the redux store when necessary
 export default ExploreBusServiceAndEquity;

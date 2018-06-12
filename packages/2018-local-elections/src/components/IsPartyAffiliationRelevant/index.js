@@ -19,5 +19,7 @@ export class IsPartyAffiliationRelevant extends React.Component {
   }
 }
 
+IsPartyAffiliationRelevant.displayName = 'IsPartyAffiliationRelevant';
+
 // Connect this to the redux store when necessary
 export default IsPartyAffiliationRelevant;

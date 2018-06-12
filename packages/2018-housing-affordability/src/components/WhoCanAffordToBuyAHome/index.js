@@ -19,5 +19,7 @@ export class WhoCanAffordToBuyAHome extends React.Component {
   }
 }
 
+WhoCanAffordToBuyAHome.displayName = 'WhoCanAffordToBuyAHome';
+
 // Connect this to the redux store when necessary
 export default WhoCanAffordToBuyAHome;

@@ -19,5 +19,7 @@ export class PacificNorthwestTopsNationInSurgingHomePrices extends React.Compone
   }
 }
 
+PacificNorthwestTopsNationInSurgingHomePrices.displayName = 'PacificNorthwestTopsNationInSurgingHomePrices';
+
 // Connect this to the redux store when necessary
 export default PacificNorthwestTopsNationInSurgingHomePrices;

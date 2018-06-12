@@ -19,5 +19,7 @@ export class HowMuchDoesMoneyMatterInElections extends React.Component {
   }
 }
 
+HowMuchDoesMoneyMatterInElections.displayName = 'HowMuchDoesMoneyMatterInElections';
+
 // Connect this to the redux store when necessary
 export default HowMuchDoesMoneyMatterInElections;

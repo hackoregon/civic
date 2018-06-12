@@ -19,5 +19,7 @@ export class LifeAlteringEvent extends React.Component {
   }
 }
 
+LifeAlteringEvent.displayName = 'LifeAlteringEvent';
+
 // Connect this to the redux store when necessary
 export default LifeAlteringEvent;

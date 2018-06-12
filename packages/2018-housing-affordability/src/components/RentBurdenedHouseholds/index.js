@@ -19,5 +19,7 @@ export class RentBurdenedHouseholds extends React.Component {
   }
 }
 
+RentBurdenedHouseholds.displayName = 'RentBurdenedHouseholds';
+
 // Connect this to the redux store when necessary
 export default RentBurdenedHouseholds;

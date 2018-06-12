@@ -19,5 +19,7 @@ export class OutraisingYourOpponent extends React.Component {
   }
 }
 
+OutraisingYourOpponent.displayName = 'OutraisingYourOpponent';
+
 // Connect this to the redux store when necessary
 export default OutraisingYourOpponent;

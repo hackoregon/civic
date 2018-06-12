@@ -19,5 +19,7 @@ export class ClassSizeAndQuality extends React.Component {
   }
 }
 
+ClassSizeAndQuality.displayName = 'ClassSizeAndQuality';
+
 // Connect this to the redux store when necessary
 export default ClassSizeAndQuality;

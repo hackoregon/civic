@@ -19,5 +19,7 @@ export class YourVoteHasAPriceTag extends React.Component {
   }
 }
 
+YourVoteHasAPriceTag.displayName = 'YourVoteHasAPriceTag';
+
 // Connect this to the redux store when necessary
 export default YourVoteHasAPriceTag;

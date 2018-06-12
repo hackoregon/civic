@@ -19,5 +19,7 @@ export class ProactivePlanning extends React.Component {
   }
 }
 
+ProactivePlanning.displayName = 'ProactivePlanning';
+
 // Connect this to the redux store when necessary
 export default ProactivePlanning;

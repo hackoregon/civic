@@ -19,5 +19,7 @@ export class DeclineInRidership extends React.Component {
   }
 }
 
+DeclineInRidership.displayName = 'DeclineInRidership';
+
 // Connect this to the redux store when necessary
 export default DeclineInRidership;

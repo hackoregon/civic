@@ -19,5 +19,7 @@ export class SuccessfulSpendingPatterns extends React.Component {
   }
 }
 
+SuccessfulSpendingPatterns.displayName = 'SuccessfulSpendingPatterns';
+
 // Connect this to the redux store when necessary
 export default SuccessfulSpendingPatterns;

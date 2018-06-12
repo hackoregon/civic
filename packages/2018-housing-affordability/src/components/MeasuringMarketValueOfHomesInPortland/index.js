@@ -19,5 +19,7 @@ export class MeasuringMarketValueOfHomesInPortland extends React.Component {
   }
 }
 
+MeasuringMarketValueOfHomesInPortland.displayName = 'MeasuringMarketValueOfHomesInPortland';
+
 // Connect this to the redux store when necessary
 export default MeasuringMarketValueOfHomesInPortland;

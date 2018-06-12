@@ -19,5 +19,7 @@ export class MagnitudeOfUrbanCampsiteSweeps extends React.Component {
   }
 }
 
+MagnitudeOfUrbanCampsiteSweeps.displayName = 'MagnitudeOfUrbanCampsiteSweeps';
+
 // Connect this to the redux store when necessary
 export default MagnitudeOfUrbanCampsiteSweeps;

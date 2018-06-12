@@ -19,5 +19,7 @@ export class MeasuringThePowerOfGrassroots extends React.Component {
   }
 }
 
+MeasuringThePowerOfGrassroots.displayName = 'MeasuringThePowerOfGrassroots';
+
 // Connect this to the redux store when necessary
 export default MeasuringThePowerOfGrassroots;

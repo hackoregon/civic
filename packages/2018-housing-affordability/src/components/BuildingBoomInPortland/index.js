@@ -19,5 +19,7 @@ export class BuildingBoomInPortland extends React.Component {
   }
 }
 
+BuildingBoomInPortland.displayName = 'BuildingBoomInPortland';
+
 // Connect this to the redux store when necessary
 export default BuildingBoomInPortland;

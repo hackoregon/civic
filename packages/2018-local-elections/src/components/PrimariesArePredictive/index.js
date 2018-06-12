@@ -19,5 +19,7 @@ export class PrimariesArePredictive extends React.Component {
   }
 }
 
+PrimariesArePredictive.displayName = 'PrimariesArePredictive';
+
 // Connect this to the redux store when necessary
 export default PrimariesArePredictive;

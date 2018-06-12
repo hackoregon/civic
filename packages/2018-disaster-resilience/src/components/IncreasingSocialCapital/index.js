@@ -19,5 +19,7 @@ export class IncreasingSocialCapital extends React.Component {
   }
 }
 
+IncreasingSocialCapital.displayName = 'IncreasingSocialCapital';
+
 // Connect this to the redux store when necessary
 export default IncreasingSocialCapital;

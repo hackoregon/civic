@@ -19,5 +19,7 @@ export class TheShapeOfANeighborhood extends React.Component {
   }
 }
 
+TheShapeOfANeighborhood.displayName = 'TheShapeOfANeighborhood';
+
 // Connect this to the redux store when necessary
 export default TheShapeOfANeighborhood;

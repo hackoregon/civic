@@ -19,5 +19,7 @@ export class TheSecretIsInTheSensors extends React.Component {
   }
 }
 
+TheSecretIsInTheSensors.displayName = 'TheSecretIsInTheSensors';
+
 // Connect this to the redux store when necessary
 export default TheSecretIsInTheSensors;

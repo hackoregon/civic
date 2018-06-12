@@ -19,5 +19,7 @@ export class HistoricalChangesToBusService extends React.Component {
   }
 }
 
+HistoricalChangesToBusService.displayName = 'HistoricalChangesToBusService';
+
 // Connect this to the redux store when necessary
 export default HistoricalChangesToBusService;

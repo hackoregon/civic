@@ -19,5 +19,7 @@ export class YouAndYourNeighbors extends React.Component {
   }
 }
 
+YouAndYourNeighbors.displayName = 'YouAndYourNeighbors';
+
 // Connect this to the redux store when necessary
 export default YouAndYourNeighbors;

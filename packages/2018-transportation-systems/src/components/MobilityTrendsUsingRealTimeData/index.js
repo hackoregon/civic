@@ -19,5 +19,7 @@ export class MobilityTrendsUsingRealTimeData extends React.Component {
   }
 }
 
+MobilityTrendsUsingRealTimeData.displayName = 'MobilityTrendsUsingRealTimeData';
+
 // Connect this to the redux store when necessary
 export default MobilityTrendsUsingRealTimeData;

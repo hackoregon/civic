@@ -19,5 +19,7 @@ export class StudentEnrollmentTrends extends React.Component {
   }
 }
 
+StudentEnrollmentTrends.displayName = 'StudentEnrollmentTrends';
+
 // Connect this to the redux store when necessary
 export default StudentEnrollmentTrends;

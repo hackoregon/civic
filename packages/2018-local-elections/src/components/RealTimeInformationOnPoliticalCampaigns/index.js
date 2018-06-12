@@ -19,5 +19,7 @@ export class RealTimeInformationOnPoliticalCampaigns extends React.Component {
   }
 }
 
+RealTimeInformationOnPoliticalCampaigns.displayName = 'RealTimeInformationOnPoliticalCampaigns';
+
 // Connect this to the redux store when necessary
 export default RealTimeInformationOnPoliticalCampaigns;

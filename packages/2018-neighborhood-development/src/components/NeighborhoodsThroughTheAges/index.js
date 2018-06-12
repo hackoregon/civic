@@ -20,5 +20,7 @@ export class NeighborhoodsThroughTheAges extends React.Component {
   }
 }
 
+NeighborhoodsThroughTheAges.displayName = 'NeighborhoodsThroughTheAges';
+
 // Connect this to the redux store when necessary
 export default NeighborhoodsThroughTheAges;

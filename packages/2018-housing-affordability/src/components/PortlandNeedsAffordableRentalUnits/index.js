@@ -19,5 +19,7 @@ export class PortlandNeedsAffordableRentalUnits extends React.Component {
   }
 }
 
+PortlandNeedsAffordableRentalUnits.displayName = 'PortlandNeedsAffordableRentalUnits';
+
 // Connect this to the redux store when necessary
 export default PortlandNeedsAffordableRentalUnits;

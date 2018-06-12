@@ -19,5 +19,7 @@ export class DriversOfPublicTransitParticipation extends React.Component {
   }
 }
 
+DriversOfPublicTransitParticipation.displayName = 'DriversOfPublicTransitParticipation';
+
 // Connect this to the redux store when necessary
 export default DriversOfPublicTransitParticipation;

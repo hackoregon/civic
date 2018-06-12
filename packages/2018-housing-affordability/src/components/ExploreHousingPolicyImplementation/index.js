@@ -19,5 +19,7 @@ export class ExploreHousingPolicyImplementation extends React.Component {
   }
 }
 
+ExploreHousingPolicyImplementation.displayName = 'ExploreHousingPolicyImplementation';
+
 // Connect this to the redux store when necessary
 export default ExploreHousingPolicyImplementation;

@@ -22,5 +22,7 @@ export class ExploreUrbanCampsiteSweeps extends React.Component {
   }
 }
 
+ExploreUrbanCampsiteSweeps.displayName = 'ExploreUrbanCampsiteSweeps';
+
 // Connect this to the redux store when necessary
 export default ExploreUrbanCampsiteSweeps;

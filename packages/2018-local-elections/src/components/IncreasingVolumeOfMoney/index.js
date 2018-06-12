@@ -19,5 +19,7 @@ export class IncreasingVolumeOfMoney extends React.Component {
   }
 }
 
+IncreasingVolumeOfMoney.displayName = 'IncreasingVolumeOfMoney';
+
 // Connect this to the redux store when necessary
 export default IncreasingVolumeOfMoney;

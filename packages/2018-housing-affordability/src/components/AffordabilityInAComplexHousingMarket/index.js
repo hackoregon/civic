@@ -19,5 +19,7 @@ export class AffordabilityInAComplexHousingMarket extends React.Component {
   }
 }
 
+AffordabilityInAComplexHousingMarket.displayName = 'AffordabilityInAComplexHousingMarket';
+
 // Connect this to the redux store when necessary
 export default AffordabilityInAComplexHousingMarket;

@@ -19,5 +19,7 @@ export class WhatYouCanDoToPrepare extends React.Component {
   }
 }
 
+WhatYouCanDoToPrepare.displayName = 'WhatYouCanDoToPrepare';
+
 // Connect this to the redux store when necessary
 export default WhatYouCanDoToPrepare;

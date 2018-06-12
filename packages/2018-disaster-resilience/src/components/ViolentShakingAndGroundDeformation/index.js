@@ -19,5 +19,7 @@ export class ViolentShakingAndGroundDeformation extends React.Component {
   }
 }
 
+ViolentShakingAndGroundDeformation.displayName = 'ViolentShakingAndGroundDeformation';
+
 // Connect this to the redux store when necessary
 export default ViolentShakingAndGroundDeformation;

@@ -20,5 +20,7 @@ export class HumanImpactOfSweepingUrbanCampsites extends React.Component {
   }
 }
 
+HumanImpactOfSweepingUrbanCampsites.displayName = 'HumanImpactOfSweepingUrbanCampsites';
+
 // Connect this to the redux store when necessary
 export default HumanImpactOfSweepingUrbanCampsites;
