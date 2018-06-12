@@ -11,34 +11,36 @@ import {
 import { BarChart } from '../src';
 
 const displayName = BarChart.displayName || 'BarChart';
-const title = 'Simple usage';
-const description = `
-  This is some basic usage with the button with providing a label to show the text.
-  Clicking should trigger an action.`;
+
+const sampleSimpleData = [
+  { x: 5, y: 20 },
+  { x: 10, y: 30 },
+  { x: 15, y: 50 },
+  { x: 20, y: 40 },
+];
 
 export default () => storiesOf(displayName, module).addDecorator(withKnobs)
+  .add('Simple usage', () => <BarChart data={sampleSimpleData} />)
   .add('Basic Usage', (() => {
     const data = object('Data', [
-      { sortOrder: 1, population: 2000, label: 'Labrador Retriever' },
-      { sortOrder: 2, population: 8000, label: 'Standard Poodle' },
-      { sortOrder: 3, population: 6000, label: 'French Bulldog' },
-      { sortOrder: 4, population: 3000, label: 'Afghan Hound' },
-      { sortOrder: 5, population: 1000, label: 'Jack Russell Terrier' }
+      { ye: 1994, population: 2000 },
+      { ye: 1995, population: 8000 },
+      { ye: 1996, population: 6000 },
+      { ye: 1997, population: 3000 },
+      { ye: 1998, population: 1000 }
     ]);
-    const dataKey = text('Data key', 'sortOrder');
+    const dataKey = text('Data key', 'ye');
     const dataValue = text('Data values', 'population');
-    const dataKeyLabel = text('Data key labels', 'label');
-    const xLabel = text('xLabel', 'Dogs');
-    const yLabel = text('yLabel', 'Dollars');
-    
+    const xLabel = text('xLabel', 'Year');
+    const yLabel = text('yLabel', 'Dogs');
+
     return (
       <BarChart
         data={data}
         dataKey={dataKey}
         dataValue={dataValue}
-        dataKeyLabel={dataKeyLabel}
-        title={'Dogs and their Money'}
-        subtitle={'As of January 2017'}
+        title={'Dogs with Money'}
+        subtitle={'Dogs in Portland with a net worth greater than $1,000'}
         xLabel={xLabel}
         yLabel={yLabel}
       />
