@@ -9,7 +9,10 @@ export class HowMuchDoesMoneyMatterInElections extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="How Much Does Money Really Matter in Elections?">
+      <CivicStoryCard
+        title="How Much Does Money Really Matter in Elections?"
+        slug="how-much-does-money-matter-in-elections"
+      >
         <Placeholder />
       </CivicStoryCard>
     );

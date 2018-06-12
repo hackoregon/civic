@@ -9,7 +9,10 @@ export class MeasuringThePowerOfGrassroots extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Measuring the Power of Grassroots">
+      <CivicStoryCard
+        title="Measuring the Power of Grassroots"
+        slug="measuring-the-power-of-grassroots"
+      >
         <Placeholder />
       </CivicStoryCard>
     );

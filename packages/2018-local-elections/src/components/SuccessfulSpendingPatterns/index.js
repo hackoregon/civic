@@ -9,7 +9,10 @@ export class SuccessfulSpendingPatterns extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Successful Spending Patterns">
+      <CivicStoryCard
+        title="Successful Spending Patterns"
+        slug="successful-spending-patterns"
+      >
         <Placeholder />
       </CivicStoryCard>
     );

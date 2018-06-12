@@ -9,7 +9,10 @@ export class YourVoteHasAPriceTag extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Your Vote has a Price Tag">
+      <CivicStoryCard
+        title="Your Vote has a Price Tag"
+        slug="your-vote-has-a-price-tag"
+      >
         <Placeholder />
       </CivicStoryCard>
     );

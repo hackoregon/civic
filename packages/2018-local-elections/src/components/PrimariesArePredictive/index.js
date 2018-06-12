@@ -9,7 +9,10 @@ export class PrimariesArePredictive extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Primaries are Predictive">
+      <CivicStoryCard
+        title="Primaries are Predictive"
+        slug="primaries-are-predictive"
+      >
         <Placeholder />
       </CivicStoryCard>
     );

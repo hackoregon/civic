@@ -9,7 +9,10 @@ export class InfluentialContributorCohorts extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Influential Contributor Cohorts">
+      <CivicStoryCard
+        title="Influential Contributor Cohorts"
+        slug="influential-contributor-cohorts"
+      >
         <Placeholder />
       </CivicStoryCard>
     );

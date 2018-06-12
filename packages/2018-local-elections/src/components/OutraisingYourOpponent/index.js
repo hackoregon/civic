@@ -9,7 +9,10 @@ export class OutraisingYourOpponent extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Outraising Your Opponent">
+      <CivicStoryCard
+        title="Outraising Your Opponent"
+        slug="outraising-your-opponent"
+      >
         <Placeholder />
       </CivicStoryCard>
     );
