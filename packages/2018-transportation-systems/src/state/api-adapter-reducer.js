@@ -1,13 +1,13 @@
 // Factory for creating a reducer to match the file import pattern
-const importAdapterReducer = ({ INITIAL_STATE, IMPORT_START, IMPORT_SUCCESS }) =>
+const apiAdapterReducer = ({ INITIAL_STATE, API_START, API_SUCCESS }) =>
   (state = INITIAL_STATE, action) => {
     switch (action.type) {
-      case IMPORT_START:
+      case API_START:
         return {
           ...state,
           pending: true,
         };
-      case IMPORT_SUCCESS:
+      case API_SUCCESS:
         return {
           pending: false,
           data: action.payload,
@@ -17,4 +17,4 @@ const importAdapterReducer = ({ INITIAL_STATE, IMPORT_START, IMPORT_SUCCESS }) =
     }
   };
 
-export default importAdapterReducer;
+export default apiAdapterReducer;

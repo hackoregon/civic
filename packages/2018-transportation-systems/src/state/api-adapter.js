@@ -1,11 +1,14 @@
 // A redux action utility for making a thunk based on an async file import
 // ex. const someJsonInRepo = importAdapter('../assets/some.json', { start, success });
 //     dispatch(someJsonInRepo())
-const importAdapter = (importPromise, { start, success }) => () => (dispatch) => {
+import axios from 'axios';
+
+const apiAdapter = (url, { start, success }) => () => (dispatch) => {
   dispatch(start());
-  return importPromise.then((res) => {
+  const apiPromise = axios.get(url);
+  return apiPromise.then((res) => {
     dispatch(success(res));
   });
 };
 
-export default importAdapter;
+export default apiAdapter;
