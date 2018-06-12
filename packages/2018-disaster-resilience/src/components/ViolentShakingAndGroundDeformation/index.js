@@ -9,12 +9,17 @@ export class ViolentShakingAndGroundDeformation extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Violent Shaking and Ground Deformation">
+      <CivicStoryCard
+        title="Violent Shaking and Ground Deformation"
+        slug="violent-shaking-and-ground-deformation"
+      >
         <Placeholder />
       </CivicStoryCard>
     );
   }
 }
+
+ViolentShakingAndGroundDeformation.displayName = 'ViolentShakingAndGroundDeformation';
 
 // Connect this to the redux store when necessary
 export default ViolentShakingAndGroundDeformation;

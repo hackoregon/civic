@@ -8,7 +8,7 @@
     "start:dev": "cross-env NODE_ENV=development babel-node server/dev.js",
     "start:prod": "yarn run build && cross-env NODE_ENV=production node server",
     "build": "rimraf dist && cross-env NODE_ENV=production webpack --progress --config ./webpack.config.js",
-    "test": "echo 'No tests!'"
+    "test": "cross-env BABEL_ENV=test mocha --opts ./mocha.opts 'src/**/*.test.js'"
   },
   "repository": {
     "type": "git",
