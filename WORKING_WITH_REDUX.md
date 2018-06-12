@@ -246,20 +246,29 @@ APIs don't always return data in the expect form we need it for the UI. It is un
 If you recall, selectors are pure functions that take state and return substate or derived state. This makes selectors the perfect primitive for this work.
 
 ```js
-const highSchoolClasses = [
-  { name: 'English', passing: 25, failing: 5 },
-  { name: 'Math', passing: 20, failing: 7 },
-  { name: 'Band', passing: 40, failing: 0 },
-  { name: 'Chemistry', passing: 15, failing: 10 },
-];
+const highSchoolData = {
+  classes: [
+    { name: 'English', passing: 25, failing: 5 },
+    { name: 'Math', passing: 20, failing: 7 },
+    { name: 'Band', passing: 40, failing: 0 },
+    { name: 'Chemistry', passing: 15, failing: 10 },
+  ],
+};
 
-const getClassInformation = state => state.map(classObj => ({
-  name: classObj.name,
-  totalStudents: classObj.passing + classObj.failing,
-  percentPassing: classObj.passing / (classObj.passing + classObj.failing),
-}));
+// A simple selector that works directly off of state
+const getClasses = state => state.classes;
 
-getClassInformation(highSchoolClasses);
+// A selector that builds off of the getClasses selector
+const getClassStats = createSelector(
+  getClasses,
+  classes => state.map(classObj => ({
+    name: classObj.name,
+    totalStudents: classObj.passing + classObj.failing,
+    percentPassing: classObj.passing / (classObj.passing + classObj.failing),
+  }))
+);
+
+getClassStats(highSchoolData);
 // [
 //   { name: 'English', totalStudents: 30, percentPassing: 0.8333 },
 //   { name: 'Math', totalStudents: 27, percentPassing: 0.7407 },
@@ -267,6 +276,67 @@ getClassInformation(highSchoolClasses);
 //   { name: 'Chemistry', totalStudents: 25, percentPassing: 0.6 }
 // ]
 ```
+
+By using `createSelector`, the task of finding classes within in state and calculating class statistics are separated.
+
+`createSelector` can take any number of selectors as arguments. The last argument to `createSelector` will always be the new selector with the return value of all selectors passed in as arguments.
+
+Here is an example that requires two selectors:
+
+```js
+const highSchoolData = {
+  classes: [
+    { name: 'English', passing: 25, failing: 5 },
+    { name: 'Math', passing: 20, failing: 7 },
+    { name: 'Band', passing: 40, failing: 0 },
+    { name: 'Chemistry', passing: 15, failing: 10 },
+  ],
+  students: [
+    { name: 'Alice', classes: [ 'English', 'Band' ] },
+    { name: 'Bob', classes: [ 'Chemistry', 'Math' ] },
+    { name: 'Carol', classes: [ 'Band', 'Chemistry' ] },
+  ],
+};
+
+// Get classes from state
+const getClasses = state => state.classes;
+
+// Get students from state
+const getStudents = state = state.students;
+
+// createSelector result functions don't get props
+const forwardStudentName = (state, name) => name;
+
+// Combine selectors to get a single student
+// Any arguments passed to this selector will be passed down
+// to each dependent selector.
+const getStudentByName = createSelector(
+  getStudents,
+  forwardStudentName,
+  (students, name) => students.find(student => student.name === name)
+);
+
+// Combine selectors again to get student's classes
+const getClassesForStudent = createSelector(
+  getClasses,
+  getStudentByName,
+  (classes, student) => {
+    // Get all classes
+    return classes.filter(c => {
+      // Where the class name is in the student's class list
+      return student.classes.includes(c.name);
+    });
+  }
+);
+
+getClassesForStudent(highSchoolData, 'Carol');
+// [
+//   { name: 'Band', passing: 40, failing: 0 },
+//   { name: 'Chemistry', passing: 15, failing: 10 },
+// ]
+```
+
+[Read more about the selector library, Reselect](https://github.com/reduxjs/reselect).
 
 ### Managing a global store across projects
 
