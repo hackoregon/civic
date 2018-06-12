@@ -1,7 +1,11 @@
 export default class Registry {
   constructor(entries) {
-    this.entries = entries;
+    this.entries = entries.slice();
     this.validateEntries();
+  }
+
+  get length() {
+    return this.entries.length;
   }
 
   // Ensure that there are no duplicate entries in the registry
@@ -17,16 +21,22 @@ export default class Registry {
       slugs.add(entry.slug);
     });
 
-    // Throw errors for every duplicate
+    // Throw an error that lists all duplicates
+    const errors = [];
+
     duplicates.forEach((duplicate) => {
       const labels = this.entries
         .filter(entry => entry.slug === duplicate)
         .map(entry => `${entry.slug}\n\t(${entry.component.displayName}) in ${entry.project}`);
 
-      throw new Error(
-        `Duplicate slugs found. All card slugs must be unique\n\n${labels.join('\n')}\n`
-      );
+      errors.push(labels.join('\n'));
     });
+
+    if (errors.length) {
+      throw new Error(
+        `Duplicate slugs found. All card slugs must be unique\n\n${errors.join('\n\n')}\n`
+      );
+    }
   }
 
   // Add a new entry to the registry and validate the set
