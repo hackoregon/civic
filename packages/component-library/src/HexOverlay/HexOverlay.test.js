@@ -44,28 +44,4 @@ describe('HexOverlay', () => {
   it('should render with the same class name', () => {
     expect(wrapper.find('.HexOverlay')).length(1)
   });
-
-  it('should render with extruded', () => {
-    expect(wrapper.props().layers[0].props.extruded).to.equal(true)
-  });
-
-  it('should render with radius', () => {
-    expect(wrapper.props().layers[0].props.radius).to.equal(200)
-  });
-
-  it('should render with opacity of 0.8', () => {
-    expect(wrapper.props().layers[0].props.opacity).to.equal(0.8)
-  });
-
-  it('should render with an extrusion', () => {
-    expect(wrapper.props().layers[0].props.extruded).to.equal(true)
-  });
-
-  it('should render with data', () => {
-    expect(wrapper.props().layers[0].props.data).to.equal(data)
-  });
-
-  it('should render with an type string', () => {
-    expect(wrapper.props().layers[0].props.data[0].type).to.equal("Feature")
-  });
 });

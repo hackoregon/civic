@@ -37,8 +37,22 @@ const MapTooltip = (props) => {
         top: yPostition,
       }}
     >
-      <div>{primaryName}: {tooltipInfo.properties[primaryField]}</div>
-      <div>{secondaryName}: {tooltipInfo.properties[secondaryField]}</div>
+      { primaryName ?
+        <div>
+          {primaryName}: {tooltipInfo.properties[primaryField]}
+        </div> : null
+      }
+      { secondaryName ?
+        <div>
+          {secondaryName}: {tooltipInfo.properties[secondaryField]}
+        </div> : null
+      }
+      {
+        <div>
+          <div>elevation: {tooltipInfo.elevationValue}</div>
+          <div>coordinates: {tooltipInfo.centroid.join(', ')}</div>
+        </div>
+      }
     </div>
   );
 };

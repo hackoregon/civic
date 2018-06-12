@@ -4,6 +4,10 @@ import PropTypes from 'prop-types';
 import { css } from 'emotion';
 import DeckGL, {HexagonLayer} from 'deck.gl';
 
+const crosshair = css`
+  cursor: crosshair;
+`;
+
 const mapWrapper = css`
   margin: auto;
   max-width: 900px;
@@ -65,11 +69,36 @@ class HexOverlay extends Component {
   }
 
   render() {
-    const {viewport, data, opacity, radius, elevation, colorRange, lightSettings, coverage, upperPercentile} = this.props;
+    const {
+      viewport,
+      data,
+      opacity,
+      radius,
+      elevation,
+      colorRange,
+      lightSettings,
+      coverage,
+      upperPercentile,
+      tooltipInfo,
+      x,
+      y,
+      onHover,
+      onLayerHover,
+      children,
+    } = this.props;
 
     if (!data) {
       return null;
     }
+
+    const tooltip = React.Children.map(children, child => {
+      return React.cloneElement(child, {
+        tooltipInfo: tooltipInfo,
+        x: x,
+        y: y,
+      });
+    });
+    const tooltipRender = tooltipInfo ? tooltip : null;
 
     const layers = [
       new HexagonLayer({
@@ -80,15 +109,23 @@ class HexOverlay extends Component {
         elevationRange: [0, 3000],
         elevationScale: elevation,
         extruded: true,
-        getPosition: d => d,
-        lightSettings: lightSettings,
+        getPosition: d => d.geometry.coordinates,
+        lightSettings,
         opacity,
         radius,
-        upperPercentile:100
+        upperPercentile: 100,
+        pickable: true,
+        onHover,
       })
     ];
 
-    return <DeckGL {...viewport} layers={layers} className={'HexOverlay'}/>;
+    return (
+      <div className={crosshair}>
+        <DeckGL {...viewport} layers={layers} className={'HexOverlay'} >
+          { tooltipRender }
+        </DeckGL>
+      </div>
+    );
   }
 }
 export default HexOverlay;
