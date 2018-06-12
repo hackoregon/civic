@@ -26,9 +26,7 @@ const HorizontalBarChart = ({ data, sortOrder, dataValue, dataLabel, domain, tit
     sortOrder && sortOrder.length
       ? data
       : data.map((d, index) => {
-        const e = d;
-        e.defaultSort = index + 1;
-        return e;
+        return { ...d, defaultSort: index + 1 };
       });
 
   const sortOrderKey =
