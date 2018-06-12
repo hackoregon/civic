@@ -58,7 +58,10 @@ export class PortlandFarmersMarkets extends React.Component {
     }
 
     return (
-      <CivicStoryCard title="Where are Portland's Farmers' Markets?">
+      <CivicStoryCard
+        title="Where are Portland's Farmers' Markets?"
+        slug="portland-farmers-markets"
+      >
         <div className={mapWrapper}>
           <BaseMap mapboxToken={mapboxToken} mapboxStyle="mapbox://styles/themendozaline/cj8rrlv4tbtgs2rqnyhckuqva">
             <ScatterPlotMap

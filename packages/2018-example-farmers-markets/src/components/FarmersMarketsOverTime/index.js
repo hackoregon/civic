@@ -45,7 +45,10 @@ export class FarmersMarketsOverTime extends React.Component {
 
     return (
       <div>
-        <CivicStoryCard title="Farmers Markets Trending Upward">
+        <CivicStoryCard
+          title="Farmers Markets Trending Upward"
+          slug="farmers-markets-over-time"
+        >
           <p>
             Farmers' markets saw steady growth through the 1990s into the mid-2000s. The recession
             correlates with abnormal growth in the total number of Farmers' Markets. The last two
