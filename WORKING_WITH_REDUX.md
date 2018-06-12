@@ -113,6 +113,24 @@ Beyond that, Civic uses a loose riff on the [Ducks](https://medium.freecodecamp.
 
 Common utilities can still be kept outside of the feature directory and imported. A great aspect of Redux is how simple all the data structures are. It makes writing new features ripe with opportunities for extracting reusable code or importing general solutions to common problems from npm.
 
+Writing all the code for a feature in its own directory isn't quite enough to get things working. Recall that the `index.js` file in `src/state` is just there to combine reducers. The reducers that file combines are the reducers defined in each duck's `index.js` file.
+
+This ends up looking something like this:
+
+```js
+import { combineReducers } from 'redux';
+import duckOne from './duck-one';
+import duckTwo from './duck-two';
+
+export default function createReducer(asyncReducers) {
+  return combineReducers({
+    duckOne,
+    duckTwo,
+    ...asyncReducers,
+  });
+}
+```
+
 [See this in action](https://github.com/hackoregon/civic/tree/master/packages/2018-example-farmers-markets/src/state/portland-farmers-markets).
 
 ### Fetching data from an API
