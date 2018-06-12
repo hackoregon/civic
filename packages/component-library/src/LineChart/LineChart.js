@@ -73,12 +73,6 @@ const LineChart = ({
       )
     : null;
 
-  const axisLabelStyle = {
-    fontFamily: "'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif",
-    fontSize: '14px',
-    fontWeight: 'bold',
-  };
-
   return (
     <ChartContainer title={title} subtitle={subtitle}>
       {legendData && (
@@ -87,6 +81,7 @@ const LineChart = ({
 
       <VictoryChart
         domain={chartDomain}
+        padding={{ left: 75, right: 50, bottom: 50, top: 50 }}
         theme={CivicVictoryTheme.civic}
       >
         <VictoryAxis
@@ -114,18 +109,18 @@ const LineChart = ({
         />
         <VictoryPortal>
           <VictoryLabel
-            style={axisLabelStyle}
+            style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
             text={yLabel}
             textAnchor="middle"
             title="Y Axis Label"
             verticalAnchor="end"
-            x={50}
+            x={75}
             y={45}
           />
         </VictoryPortal>
         <VictoryPortal>
           <VictoryLabel
-            style={axisLabelStyle}
+            style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
             text={xLabel}
             textAnchor="end"
             title="X Axis Label"
@@ -141,7 +136,7 @@ const LineChart = ({
           data={data.map(d => ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],
-            label: `${dataKeyLabel ? d[dataKeyLabel] : xLabel}: ${numeric(d[dataKey])} | ${dataValueLabel ? d[dataValueLabel] : yLabel}: ${numeric(d[dataValue])}`,
+            label: `${dataKeyLabel ? dataKeyLabel : xLabel}: ${xNumberFormatter(d[dataKey])} • ${dataValueLabel ? dataValueLabel : yLabel}: ${yNumberFormatter(d[dataValue])}`,
             series: d[dataSeries],
             size: size ? d[size.key] || size.value : 3,
           }))}
@@ -153,6 +148,7 @@ const LineChart = ({
               orientation="bottom"
               pointerLength={0}
               cornerRadius={0}
+              theme={CivicVictoryTheme.civic}
             />
           }
           size={d => d.size}

@@ -16,12 +16,6 @@ import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
 
 const HorizontalBarChart = ({ data, sortOrder, dataValue, dataLabel, domain, title, subtitle, xLabel, yLabel, xNumberFormatter }) => {
 
-  const axisLabelStyle = {
-    fontFamily: "'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif",
-    fontSize: '14px',
-    fontWeight: 'bold',
-  };
-
   const barData =
     sortOrder && sortOrder.length
       ? data
@@ -58,7 +52,7 @@ const HorizontalBarChart = ({ data, sortOrder, dataValue, dataLabel, domain, tit
         />
         <VictoryPortal>
           <VictoryLabel
-            style={axisLabelStyle}
+            style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
             text={yLabel}
             textAnchor="middle"
             title="Y Axis Label"
@@ -69,7 +63,7 @@ const HorizontalBarChart = ({ data, sortOrder, dataValue, dataLabel, domain, tit
         </VictoryPortal>
         <VictoryPortal>
           <VictoryLabel
-            style={axisLabelStyle}
+            style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
             text={xLabel}
             textAnchor="end"
             title="X Axis Label"
@@ -87,6 +81,7 @@ const HorizontalBarChart = ({ data, sortOrder, dataValue, dataLabel, domain, tit
               orientation="bottom"
               pointerLength={0}
               cornerRadius={0}
+              theme={CivicVictoryTheme.civic}
             />
           }
           data={barData.map(d => ({ sortOrder: d[sortOrderKey], dataValue: d[dataValue], label: `${d[dataLabel]}: ${xNumberFormatter(d[dataValue])}` }))}
