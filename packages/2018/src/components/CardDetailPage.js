@@ -4,7 +4,7 @@ import CardRegistry from '../card-registry';
 import { PageLayout } from '@hackoregon/component-library';
 
 const CardDetailPage = ({ params }) => {
-  const card = CardRegistry.find(c => c.slug === params.slug);
+  const card = CardRegistry.find(params.slug);
 
   if (card && card.component) {
     const CardComponent = card.component;
