@@ -9,7 +9,10 @@ export class UnderstandingStaffCuts extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Understanding Staff Cuts in Portland Public Schools">
+      <CivicStoryCard
+        title="Understanding Staff Cuts in Portland Public Schools"
+        slug="understanding-staff-cuts"
+      >
         <Placeholder issue="201" />
       </CivicStoryCard>
     );

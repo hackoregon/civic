@@ -9,7 +9,10 @@ export class ExploreUrbanCampsiteSweeps extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Explore Urban Campsite Sweeps by Neighborhood">
+      <CivicStoryCard
+        title="Explore Urban Campsite Sweeps by Neighborhood"
+        slug="explore-urban-campsite-sweeps"
+      >
         <Placeholder>
           <h1>Sandbox Card</h1>
           <p>Don't worry about this one</p>

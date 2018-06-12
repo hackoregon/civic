@@ -9,7 +9,10 @@ export class HumanImpactOfSweepingUrbanCampsites extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Human Impact of Sweeping Urban Campsites">
+      <CivicStoryCard
+        title="Human Impact of Sweeping Urban Campsites"
+        slug="human-impact-of-sweeping-urban-campsites"
+      >
         <Placeholder issue="100"/>
         <Placeholder issue="102"/>
       </CivicStoryCard>

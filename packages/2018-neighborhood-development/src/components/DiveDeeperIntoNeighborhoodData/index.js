@@ -9,7 +9,10 @@ export class DiveDeeperIntoNeighborhoodData extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Dive Deeper into Neighborhood Data">
+      <CivicStoryCard
+        title="Dive Deeper into Neighborhood Data"
+        slug="dive-deeper-into-neighborhood-data"
+      >
         <Placeholder>
           <h1>Sandbox Card</h1>
           <p>Don't worry about this one</p>

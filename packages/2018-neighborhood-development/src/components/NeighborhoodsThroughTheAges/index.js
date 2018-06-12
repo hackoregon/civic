@@ -9,7 +9,10 @@ export class NeighborhoodsThroughTheAges extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Neighborhoods Through the Ages">
+      <CivicStoryCard
+        title="Neighborhoods Through the Ages"
+        slug="neighborhoods-through-the-ages"
+      >
         <Placeholder issue="192"/>
         <Placeholder issue="201"/>
       </CivicStoryCard>
