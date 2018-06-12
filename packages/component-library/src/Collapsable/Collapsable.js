@@ -1,4 +1,16 @@
 import React, { Children } from 'react';
+import { css } from 'emotion';
+
+const toggleStyle = css`
+  padding: 10px;
+  border-bottom: none;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  display: block;
+  text-align: center;
+  background: rgba(238,73,80,0.4);
+`;
 
 class Collapsable extends React.Component {
   constructor(props) {
@@ -14,10 +26,17 @@ class Collapsable extends React.Component {
   }
 
   renderToggle() {
-    const cta = (this.state.expanded ? 'Show less' : 'Show more');
+    const cta = (this.state.expanded ? 'Less' : 'More');
+    const arrow = (this.state.expanded ? 'up' : 'down');
 
     return (
-      <a onClick={ this.onToggle }>{ cta }</a>
+      <a className={ toggleStyle } onClick={ this.onToggle }>
+       { cta }
+       <span
+        style={{ display: 'block' }}
+        className={ `fa fa-arrow-${arrow}` }>
+      </span>
+      </a>
     );
   }
 
