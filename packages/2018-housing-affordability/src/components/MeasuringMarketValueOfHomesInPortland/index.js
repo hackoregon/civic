@@ -9,12 +9,17 @@ export class MeasuringMarketValueOfHomesInPortland extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Measuring Market Value of Homes in Portland">
+      <CivicStoryCard
+        title="Measuring Market Value of Homes in Portland"
+        slug="measuring-market-value-of-homes-in-portland"
+      >
         <Placeholder issue="215" />
       </CivicStoryCard>
     );
   }
 }
+
+MeasuringMarketValueOfHomesInPortland.displayName = 'MeasuringMarketValueOfHomesInPortland';
 
 // Connect this to the redux store when necessary
 export default MeasuringMarketValueOfHomesInPortland;

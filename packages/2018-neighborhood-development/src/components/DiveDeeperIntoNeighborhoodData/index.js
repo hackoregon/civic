@@ -9,7 +9,10 @@ export class DiveDeeperIntoNeighborhoodData extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Dive Deeper into Neighborhood Data">
+      <CivicStoryCard
+        title="Dive Deeper into Neighborhood Data"
+        slug="dive-deeper-into-neighborhood-data"
+      >
         <Placeholder>
           <h1>Sandbox Card</h1>
           <p>Don't worry about this one</p>
@@ -18,6 +21,8 @@ export class DiveDeeperIntoNeighborhoodData extends React.Component {
     );
   }
 }
+
+DiveDeeperIntoNeighborhoodData.displayName = 'DiveDeeperIntoNeighborhoodData';
 
 // Connect this to the redux store when necessary
 export default DiveDeeperIntoNeighborhoodData;

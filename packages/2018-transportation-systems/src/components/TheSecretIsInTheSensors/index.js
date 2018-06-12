@@ -9,12 +9,17 @@ export class TheSecretIsInTheSensors extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="The Secret is in the Sensors">
+      <CivicStoryCard
+        title="The Secret is in the Sensors"
+        slug="the-secret-is-in-the-sensors"
+      >
         <Placeholder />
       </CivicStoryCard>
     );
   }
 }
+
+TheSecretIsInTheSensors.displayName = 'TheSecretIsInTheSensors';
 
 // Connect this to the redux store when necessary
 export default TheSecretIsInTheSensors;

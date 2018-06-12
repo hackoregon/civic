@@ -9,12 +9,17 @@ export class IsPartyAffiliationRelevant extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Is Party Affiliation Relevant?">
+      <CivicStoryCard
+        title="Is Party Affiliation Relevant?"
+        slug="is-party-affiliation-relevant"
+      >
         <Placeholder />
       </CivicStoryCard>
     );
   }
 }
+
+IsPartyAffiliationRelevant.displayName = 'IsPartyAffiliationRelevant';
 
 // Connect this to the redux store when necessary
 export default IsPartyAffiliationRelevant;

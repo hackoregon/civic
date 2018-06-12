@@ -9,12 +9,17 @@ export class RentBurdenedHouseholds extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Rent Burdened Households">
+      <CivicStoryCard
+        title="Rent Burdened Households"
+        slug="rent-burdened-households"
+      >
         <Placeholder issue = "194"/>
       </CivicStoryCard>
     );
   }
 }
+
+RentBurdenedHouseholds.displayName = 'RentBurdenedHouseholds';
 
 // Connect this to the redux store when necessary
 export default RentBurdenedHouseholds;

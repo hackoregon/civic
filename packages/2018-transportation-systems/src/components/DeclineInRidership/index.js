@@ -9,12 +9,17 @@ export class DeclineInRidership extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Decline in Ridership">
+      <CivicStoryCard
+        title="Decline in Ridership"
+        slug="decline-in-ridership"
+      >
         <Placeholder />
       </CivicStoryCard>
     );
   }
 }
+
+DeclineInRidership.displayName = 'DeclineInRidership';
 
 // Connect this to the redux store when necessary
 export default DeclineInRidership;

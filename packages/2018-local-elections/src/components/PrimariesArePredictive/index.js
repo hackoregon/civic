@@ -9,12 +9,17 @@ export class PrimariesArePredictive extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Primaries are Predictive">
+      <CivicStoryCard
+        title="Primaries are Predictive"
+        slug="primaries-are-predictive"
+      >
         <Placeholder />
       </CivicStoryCard>
     );
   }
 }
+
+PrimariesArePredictive.displayName = 'PrimariesArePredictive';
 
 // Connect this to the redux store when necessary
 export default PrimariesArePredictive;
