@@ -9,7 +9,10 @@ export class MobilityTrendsUsingRealTimeData extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Mobility Trends Using Real-Time Data">
+      <CivicStoryCard
+        title="Mobility Trends Using Real-Time Data"
+        slug="mobility-trends-using-real-time-data"
+      >
         <Placeholder />
       </CivicStoryCard>
     );

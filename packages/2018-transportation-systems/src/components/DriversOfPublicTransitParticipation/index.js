@@ -9,7 +9,10 @@ export class DriversOfPublicTransitParticipation extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Drivers of Public Transit Participation">
+      <CivicStoryCard
+        title="Drivers of Public Transit Participation"
+        slug="drivers-of-public-transit-participation"
+      >
         <Placeholder />
       </CivicStoryCard>
     );

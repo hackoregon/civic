@@ -9,7 +9,10 @@ export class DeclineInRidership extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Decline in Ridership">
+      <CivicStoryCard
+        title="Decline in Ridership"
+        slug="decline-in-ridership"
+      >
         <Placeholder />
       </CivicStoryCard>
     );

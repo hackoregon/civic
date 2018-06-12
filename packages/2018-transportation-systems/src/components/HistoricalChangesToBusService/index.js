@@ -9,7 +9,10 @@ export class HistoricalChangesToBusService extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Historical Changes to Bus Service">
+      <CivicStoryCard
+        title="Historical Changes to Bus Service"
+        slug="historical-changes-to-bus-service"
+      >
         <Placeholder />
       </CivicStoryCard>
     );

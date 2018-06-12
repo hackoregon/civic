@@ -9,7 +9,10 @@ export class TheSecretIsInTheSensors extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="The Secret is in the Sensors">
+      <CivicStoryCard
+        title="The Secret is in the Sensors"
+        slug="the-secret-is-in-the-sensors"
+      >
         <Placeholder />
       </CivicStoryCard>
     );

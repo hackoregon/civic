@@ -9,7 +9,10 @@ export class ExploreBusServiceAndEquity extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Explore Bus Service and Equity">
+      <CivicStoryCard
+        title="Explore Bus Service and Equity"
+        slug="explore-bus-service-and-equity"
+      >
         <Placeholder>
           <h1>Sandbox Card</h1>
           <p>Don't worry about this one</p>
