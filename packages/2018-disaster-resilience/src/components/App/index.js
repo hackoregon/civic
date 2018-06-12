@@ -1,6 +1,7 @@
 import React from 'react';
 
 import '@hackoregon/component-library/assets/global.styles.css';
+import { PageLayout } from '@hackoregon/component-library';
 import LifeAlteringEvent from '../LifeAlteringEvent';
 import ViolentShakingAndGroundDeformation from '../ViolentShakingAndGroundDeformation';
 import SignificantStructuralDamage from '../SignificantStructuralDamage';
@@ -10,7 +11,7 @@ import IncreasingSocialCapital from '../IncreasingSocialCapital';
 import ProactivePlanning from '../ProactivePlanning';
 
 const App = () => (
-  <div style={{ marginTop: '30px' }}>
+  <PageLayout>
     <ViolentShakingAndGroundDeformation />
     <SignificantStructuralDamage />
     <LifeAlteringEvent />
@@ -18,7 +19,7 @@ const App = () => (
     <WhatYouCanDoToPrepare />
     <IncreasingSocialCapital />
     <ProactivePlanning />
-  </div>
+  </PageLayout>
 );
 
 App.displayName = 'App';

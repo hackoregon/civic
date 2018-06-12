@@ -31,6 +31,7 @@ const contentClass = css`
   padding-top: 0px;
   display: flex;
   align-items: center;
+  color: #fff;
 
   & > h1 {
     font-size: 3em;
