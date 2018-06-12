@@ -1,47 +1,137 @@
 import React from 'react';
+/* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import { withInfo } from '@storybook/addon-info';
-import {
-  withKnobs,
-  text, object, array,
-} from '@storybook/addon-knobs';
-
+import { object, text, withKnobs } from '@storybook/addon-knobs';
 import { LineChart } from '../src';
-import { checkA11y } from '@storybook/addon-a11y';
 
-const displayName = LineChart.displayName || 'Line Chart';
+const displayName = LineChart.displayName || 'LineChart';
 
-export default () => storiesOf(displayName, module)
-  .addDecorator(checkA11y)
-  .addDecorator(withKnobs)
-  .add('Basic Usage', (() => {
-    const data = object('Data', [
-      { year: 2015, population: 120000 },
-      { year: 2016, population: 130000 },
-      { year: 2017, population: 200000 },
-    ]);
-    const dataKey = text('Data key', 'year');
-    const xLabel = text('Data key', 'Year');
-    const yLabel = text('Data key', 'Population');
-    const dataValue = text('Data values', 'population');
-    const dataKeyLabel = text('Data key labels', 'year');
-    const title = text('Title', 'Population');
-    const subtitle = text('Subtitle', 'I\'m a subtitle');
+const sampleSimpleData = [
+  { x: 0, y: 20 },
+  { x: 10, y: 30 },
+  { x: 20, y: 50 },
+  { x: 30, y: 40 },
+];
 
-    return (
-      <LineChart
-        title={title}
-        subtitle={subtitle}
-        data={data}
-        xLabel={xLabel}
-        yLabel={yLabel}
-        dataKey={dataKey}
-        dataValue={dataValue}
-        dataKeyLabel={dataKeyLabel}
-      />
-    );
-  }))
-  .add('no props', (() => (
-    <LineChart />
-  )));
+const sampleData = [
+  { x: 0, y: 2, series: 'cat' },
+  { x: 1, y: 3, series: 'cat' },
+  { x: 2, y: 5, series: 'cat' },
+  { x: 3, y: 4, series: 'cat' },
+  { x: 4, y: 7, series: 'cat' },
+  { x: 0, y: 4, series: 'dog' },
+  { x: 1, y: 5, series: 'dog' },
+  { x: 2, y: 2, series: 'dog' },
+  { x: 3, y: 3, series: 'dog' },
+  { x: 4, y: 4, series: 'dog' },
+];
+const sampleDataSeries = 'series';
+const sampledataSeriesLabel = [
+  { category: 'cat', label: 'Cat' },
+  { category: 'dog', label: 'Dog' },
+];
+const sampleDomain = { x: [0, 6], y: [0, 8] };
+const sampleSize = { key: 'y' };
+const sampleSubtitle = 'A description of this chart.';
+const sampleTitle = 'Some title';
+const sampleXKey = 'x';
+const sampleXLabel = 'Number';
+const sampleYKey = 'y';
+const sampleYLabel = 'Rating';
+
+const sampleUnstructuredData = [
+  { size: 0, age: 2, type: 'cat' },
+  { size: 5, age: 3, type: 'cat' },
+  { size: 10, age: 7, type: 'cat' },
+  { size: 0, age: 5, type: 'fish' },
+  { size: 5, age: 4, type: 'fish' },
+  { size: 10, age: 5, type: 'fish' },
+  { size: 0, age: 3, type: 'dog' },
+  { size: 5, age: 3, type: 'dog' },
+  { size: 10, age: 3, type: 'dog' },
+];
+const sampleUnstructuredXKey = 'size';
+const sampleUnstructuredYKey = 'age';
+const sampleUnstructuredDataSeries = 'type';
+const sampleUnstructuredXLabel = 'Size (ft)';
+const sampleUnstructuredYLabel = 'Age (yrs)';
+
+export default () =>
+  storiesOf(displayName, module)
+    .addDecorator(withKnobs)
+    .add('Simple usage', () => <LineChart data={sampleSimpleData} />)
+    .add('with some props', () => {
+      const data = object('Data', sampleData);
+      const dataKey = text('dataKey', sampleXKey);
+      const dataValue = text('dataValue', sampleYKey);
+      const dataSeries = text('dataSeries', sampleDataSeries);
+      const subtitle = text('Subtitle', sampleSubtitle);
+      const title = text('Title', sampleTitle);
+      const xLabel = text('xLabel', sampleXLabel);
+      const yLabel = text('yLabel', sampleYLabel);
+
+      return (
+        <LineChart
+          data={data}
+          dataKey={dataKey}
+          dataValue={dataValue}
+          dataSeries={dataSeries}
+          subtitle={subtitle}
+          title={title}
+          xLabel={xLabel}
+          yLabel={yLabel}
+        />
+      );
+    })
+    .add('with some props and unstructured data', () => {
+      const data = object('Data', sampleUnstructuredData);
+      const dataKey = text('dataKey', sampleUnstructuredXKey);
+      const dataValue = text('dataValue', sampleUnstructuredYKey);
+      const dataSeries = text('dataSeries', sampleUnstructuredDataSeries);
+      const subtitle = text('Subtitle', sampleSubtitle);
+      const title = text('Title', sampleTitle);
+      const xLabel = text('xLabel', sampleUnstructuredXLabel);
+      const yLabel = text('yLabel', sampleUnstructuredYLabel);
+
+      return (
+        <LineChart
+          data={data}
+          dataKey={dataKey}
+          dataValue={dataValue}
+          dataSeries={dataSeries}
+          subtitle={subtitle}
+          title={title}
+          xLabel={xLabel}
+          yLabel={yLabel}
+        />
+      );
+    })
+    .add('with more optional props', () => {
+      const data = object('Data', sampleData);
+      const dataKey = text('dataKey', sampleXKey);
+      const dataValue = text('dataValue', sampleYKey);
+      const dataSeries = text('dataSeries', sampleDataSeries);
+      const dataSeriesLabel = object('Data Series Labels', sampledataSeriesLabel);
+      const domain = object('Domain', sampleDomain);
+      const size = object('Size', sampleSize);
+      const subtitle = text('Subtitle', sampleSubtitle);
+      const title = text('Title', sampleTitle);
+      const xLabel = text('xLabel', sampleXLabel);
+      const yLabel = text('yLabel', sampleYLabel);
+
+      return (
+        <LineChart
+          data={data}
+          dataKey={dataKey}
+          dataValue={dataValue}
+          dataSeries={dataSeries}
+          dataSeriesLabel={dataSeriesLabel}
+          domain={domain}
+          size={size}
+          subtitle={subtitle}
+          title={title}
+          xLabel={xLabel}
+          yLabel={yLabel}
+        />
+      );
+    });

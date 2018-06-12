@@ -1,84 +1,116 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { PropTypes } from 'react';
+import { css } from 'emotion';
+import { groupBy } from 'lodash';
 import {
-  VictoryScatter,
-  VictoryChart,
-  VictoryLine,
   VictoryAxis,
-  VictoryPortal,
+  VictoryChart,
   VictoryLabel,
-  VictoryTooltip
+  VictoryPortal,
+  VictoryScatter,
+  VictoryTooltip,
+  VictoryLine,
 } from 'victory';
 
 import ChartContainer from '../ChartContainer';
-import { dollars, numeric } from '../utils/formatters';
+import SimpleLegend from '../SimpleLegend';
+import { numeric } from '../utils/formatters';
+import { chartEvents, getDefaultDomain, getDefaultDataSeriesLabels, getDefaultFillStyle, getDefaultLineStyle } from '../utils/chartHelpers';
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
 
-const chartEvents = [
-  {
-    target: 'data',
-    eventHandlers: {
-      onMouseOver: () => {
-        return [
-          {
-            target: 'data',
-            mutation: () => ({ style: { fill: 'tomato', width: 40 } }),
-          }, {
-            target: 'labels',
-            mutation: () => ({ active: true }),
-          },
-        ];
-      },
-      onMouseOut: () => {
-        return [
-          {
-            target: 'data',
-            mutation: () => { },
-          }, {
-            target: 'labels',
-            mutation: () => ({ active: false }),
-          },
-        ];
-      },
-    },
-  },
-];
-
 const LineChart = ({
-  title,
-  subtitle,
   data,
+  dataKey,
+  dataKeyLabel,
+  dataValue,
+  dataValueLabel,
+  dataSeries,
+  dataSeriesLabel,
   domain,
+  size,
+  style,
+  subtitle,
+  title,
   xLabel,
   yLabel,
-  dataKey,
-  dataValue,
-  dataKeyLabel,
+  xNumberFormatter,
+  yNumberFormatter,
 }) => {
+  const chartDomain = domain || getDefaultDomain(data, dataKey, dataValue);
+
+  const dataSeriesLabels = dataSeries
+    ? dataSeriesLabel || getDefaultDataSeriesLabels(data, dataSeries)
+    : null;
+
+  const scatterPlotStyle = style || getDefaultFillStyle(dataSeriesLabels);
+
+  const legendData =
+    dataSeriesLabels && dataSeriesLabels.length
+      ? dataSeriesLabels.map(series => ({ name: series.label }))
+      : null;
+
+  const categoryData =
+    dataSeriesLabels && dataSeriesLabels.length
+      ? dataSeriesLabels.map(series => ({ name: series.category }))
+      : null;
+
+  const lineData = dataSeries
+    ? groupBy(data, dataSeries)
+    : { category: data };
+
+  const lines = lineData
+    ? Object.keys(lineData).map((category, index) =>
+      <VictoryLine
+        data={lineData[category].map(d => ({
+          dataKey: d[dataKey],
+          dataValue: d[dataValue],
+          series: d[dataSeries],
+        }))}
+        x="dataKey"
+        y="dataValue"
+        style={getDefaultLineStyle(index)}
+        standalone={false}
+      />
+      )
+    : null;
 
   const axisLabelStyle = {
     fontFamily: "'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif",
     fontSize: '14px',
     fontWeight: 'bold',
   };
-  
+
   return (
     <ChartContainer title={title} subtitle={subtitle}>
+      {legendData && (
+        <SimpleLegend className="legend" legendData={legendData} />
+      )}
+
       <VictoryChart
-        padding={{ left: 75, right: 50, bottom: 50, top: 50 }}
-        domainPadding={20}
-        animate={{ duration: 300 }}
+        domain={chartDomain}
         theme={CivicVictoryTheme.civic}
       >
         <VictoryAxis
-          label={xLabel}
-          tickValues={data.map(d => d[dataKey])}
-          tickFormat={data.map(d => d[dataKeyLabel])}
+          animate={{ onEnter: { duration: 500 } }}
+          style={{ grid: { stroke: 'none' } }}
+          tickFormat={x => xNumberFormatter(x)}
+          title="X Axis"
         />
         <VictoryAxis
           dependentAxis
-          tickValues={data.map(d => d[dataValue])}
-          tickFormat={data.map(d => numeric(d[dataValue]))}
+          animate={{ onEnter: { duration: 500 } }}
+          style={{
+            // Don't render the top y-axis grid line
+            // TODO: Possibly move this to theme
+            grid: {
+              ...CivicVictoryTheme.civic.axis.style.grid,
+              stroke: t =>
+                t < chartDomain.y[1]
+                  ? CivicVictoryTheme.civic.axis.style.grid.stroke
+                  : 'none',
+            },
+          }}
+          tickFormat={y => yNumberFormatter(y)}
+          title="Y Axis"
         />
         <VictoryPortal>
           <VictoryLabel
@@ -102,13 +134,17 @@ const LineChart = ({
             y={295}
           />
         </VictoryPortal>
-        <VictoryLine
-          data={data.map(d => ({ dataKey: d[dataKey], dataValue: d[dataValue] }))}
-          x="dataKey"
-          y="dataValue"
-        />
+        { lines }
         <VictoryScatter
-          data={data.map(d => ({ dataKey: d[dataKey], dataValue: d[dataValue], label: `${d[dataKeyLabel]}: ${numeric(d[dataValue])}` }))}
+          animate={{ onEnter: { duration: 500 } }}
+//        categories={{ x: categoryData }}
+          data={data.map(d => ({
+            dataKey: d[dataKey],
+            dataValue: d[dataValue],
+            label: `${dataKeyLabel ? d[dataKeyLabel] : xLabel}: ${numeric(d[dataKey])} | ${dataValueLabel ? d[dataValueLabel] : yLabel}: ${numeric(d[dataValue])}`,
+            series: d[dataSeries],
+            size: size ? d[size.key] || size.value : 3,
+          }))}
           events={chartEvents}
           labelComponent={
             <VictoryTooltip
@@ -119,6 +155,9 @@ const LineChart = ({
               cornerRadius={0}
             />
           }
+          size={d => d.size}
+          style={scatterPlotStyle}
+          title="Scatter Plot"
           x="dataKey"
           y="dataValue"
         />
@@ -128,19 +167,45 @@ const LineChart = ({
 };
 
 LineChart.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  data: PropTypes.arrayOf(
+    PropTypes.shape({ x: PropTypes.number, y: PropTypes.number }),
+  ),
+  dataKey: PropTypes.string,
+  dataKeyLabel: PropTypes.arrayOf(PropTypes.string),
+  dataValue: PropTypes.string,
+  dataValueLabel: PropTypes.arrayOf(PropTypes.string),
+  dataSeries: PropTypes.string,
+  dataSeriesLabel: PropTypes.arrayOf(
+    PropTypes.shape({ category: PropTypes.string, label: PropTypes.string }),
+  ),
+  domain: PropTypes.objectOf(PropTypes.array),
+  size: PropTypes.shape({ key: PropTypes.string, value: PropTypes.string }),
+  style: PropTypes.objectOf(PropTypes.object),
+  subtitle: PropTypes.string,
+  title: PropTypes.string,
   xLabel: PropTypes.string,
   yLabel: PropTypes.string,
-  title: PropTypes.string,
-  subtitle: PropTypes.string,
-  dataKey: PropTypes.string.isRequired,
-  dataValue: PropTypes.string.isRequired,
-  dataKeyLabel: PropTypes.string,
-  domain: PropTypes.objectOf(PropTypes.array),
+  xNumberFormatter: PropTypes.func,
+  yNumberFormatter: PropTypes.func,
 };
 
 LineChart.defaultProps = {
-  data: [],
+  data: null,
+  dataKey: 'x',
+  dataKeyLabel: null,
+  dataValue: 'y',
+  dataValueLabel: null,
+  dataSeries: null,
+  dataSeriesLabel: null,
+  domain: null,
+  size: null,
+  style: null,
+  subtitle: null,
+  title: null,
+  xLabel: "X",
+  yLabel: "Y",
+  xNumberFormatter: numeric,
+  yNumberFormatter: numeric,
 };
 
 export default LineChart;
