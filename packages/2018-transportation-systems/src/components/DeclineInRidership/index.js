@@ -8,6 +8,7 @@ import { CivicStoryCard, LineChart } from '@hackoregon/component-library';
 import { fetchRidershipOverTime } from '../../state/decline-in-ridership/actions';
 import {
   isRidershipOverTimePending,
+  catchRidershipOverTimeErrors,
   getRidershipOverTimeData,
 } from '../../state/decline-in-ridership/selectors';
 
@@ -34,13 +35,14 @@ export class DeclineInRidership extends React.Component {
   render() {
     const {
       isLoading,
+      error,
       ridershipOverTime,
     } = this.props;
 
     if (isLoading) {
       return <div className={cardLoading}>Loading...</div>;
     } else if (!ridershipOverTime) {
-      return <div className={cardError}>Could not render Plateau in Ridership</div>;
+      return <div className={cardError}>{error ? `API ${error}` : 'Could not render Plateau in Ridership.'}</div>;
     }
 
     return (
@@ -70,12 +72,14 @@ DeclineInRidership.displayName = 'ridershipOverTime';
 DeclineInRidership.propTypes = {
   init: PropTypes.func,
   isLoading: PropTypes.bool,
+  error: PropTypes.string,
   ridershipOverTime: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default connect(
   state => ({
     isLoading: isRidershipOverTimePending(state),
+    error: catchRidershipOverTimeErrors(state),
     ridershipOverTime: getRidershipOverTimeData(state),
   }),
   dispatch => ({

@@ -30,3 +30,8 @@ export const isRidershipOverTimePending = createSelector(
   getRidershipOverTimeRequest,
   ({ pending }) => !!pending,
 );
+
+export const catchRidershipOverTimeErrors = createSelector(
+  getRidershipOverTimeRequest,
+  ({ error }) => error || error,
+);
