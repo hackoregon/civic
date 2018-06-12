@@ -51,7 +51,10 @@ export class DeclineInRidership extends React.Component {
     }
 
     return (
-      <CivicStoryCard title="Plateau in Ridership">
+      <CivicStoryCard
+        title="Plateau in Ridership"
+        slug="decline-in-ridership"
+      >
           <p>
 Newly released findings from TriMet shows a slow decline in public transit ridership relative to population growth over the last 10 years, a pattern which appears to be consistent across the nation.  While the cause of decline in ridership doesn't point to a single variable, it's been suggested that housing affordability and economic displacement may play a role in this phenomenon.
           </p>
