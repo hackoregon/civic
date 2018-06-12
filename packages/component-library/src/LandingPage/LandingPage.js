@@ -142,6 +142,12 @@ const leftContainer = css`
   padding-left: 70px;
   width: 50%;
 `;
+const topBar = css`
+  position: relative;
+  width: 100%;
+  height: 25px;
+  background-color: #240f27;
+`;
 
 class LandingPage extends React.Component {
 
@@ -189,16 +195,17 @@ class LandingPage extends React.Component {
       <div className={appWrapper}>
         <CanvasParticles />
         <div className={contentWrapper}>
+          <div className={topBar} />
           <div className={leftContainer}>
             <div className={logoWrapper}>
               <img src={require(`../../assets/civic-logo-animated.svg`)} />
             </div>
-            <div className={missionStatementTitle}>{'Making data human, means making data intelligent.'}</div>
+            <div className={missionStatementTitle}>{'Making Data Human'}</div>
             <div className={missionStatement}>{`CIVIC is a platform to empower data in a way that’s fundementally built to serve people.  We’re reimagining how to make information actionable through visual models, open standards, and creative frameworks that harness human collaboration at scale.`}</div>
             <img src={require(`../../assets/cities/portland.png`)} width="100%" />
           </div>
           <div className={collectionsLink}>
-            View all Collections
+            View all Collections &rsaquo;
           </div>
           <div className={lookupWrapper}>
             <h3 className={searchTitle}>Discover data near you</h3>
@@ -285,19 +292,11 @@ class DataList extends React.Component {
           </div>
           <div className={card}>
             <div className={iconWrapper}>
-              { cityImage }
-            </div>
-            <div className={cardTextWrapper}>
-              <div className={locationTitle}>{this.props.repos.city ? this.props.repos.city : "?"}</div>
-            </div>
-          </div>
-          <div className={card}>
-            <div className={iconWrapper}>
               { localImage }
             </div>
             <div className={cardTextWrapper}>
               <span className={eyebrowStyle}>Local</span>
-              <div className={locationTitle}>{this.props.repos.city ? "Local" : "?"}</div>
+              <div className={locationTitle}>{this.props.repos.city ? this.props.repos.city : "?"}</div>
             </div>
           </div>
           { this.props.repos.city && ctaMessage }
