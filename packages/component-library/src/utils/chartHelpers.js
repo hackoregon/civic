@@ -95,11 +95,7 @@ function getDefaultLineStyle(idx) {
 
 function getDefaultAreaStyle(idx) {
   return {
-    data: {
-      fill: CivicVictoryTheme.civic.group.colorScale[idx],
-      stroke: 'black',
-      strokeWidth: 1
-    },
+    data: { fill: CivicVictoryTheme.civic.group.colorScale[idx] },
   };
 }
 

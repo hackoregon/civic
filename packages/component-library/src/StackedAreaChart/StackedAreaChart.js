@@ -46,7 +46,7 @@ const StackedAreaChart = ({
     ? dataSeriesLabel || getDefaultDataSeriesLabels(data, dataSeries)
     : null;
 
-  const scatterPlotStyle = style || { data: { fill: 'white', fillOpacity: 0.7, stroke: 'black', strokeWidth: 1 }};
+  const scatterPlotStyle = style || {...CivicVictoryTheme.civic.areaScatter.style};
 
   const legendData =
     dataSeriesLabels && dataSeriesLabels.length
