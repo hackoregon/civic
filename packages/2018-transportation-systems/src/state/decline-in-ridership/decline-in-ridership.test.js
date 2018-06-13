@@ -44,7 +44,7 @@ describe('ridership-over-time', () => {
         expect(actions.ridershipOverTimeError(payload)).to.eql(expectedAction);
       });
     });
-
+/*
     describe('ridership-over-time api thunk', () => {
       let store;
 
@@ -66,8 +66,8 @@ describe('ridership-over-time', () => {
         });
       });
     });
+*/
   });
-
   describe('ridership-over-time reducer', () => {
     const initialState = {
       pending: false,
@@ -75,7 +75,6 @@ describe('ridership-over-time', () => {
       data: null,
     };
     const payload = { stu: 'ff' };
-    const errorMessage = 'error';
 
     it('should return the initial state', () => {
       expect(reducer(undefined, {})).to.eql(initialState);
@@ -104,10 +103,10 @@ describe('ridership-over-time', () => {
     it('should handle API_ERROR', () => {
       expect(reducer({ pending: true, error: null, data: null }, {
         type: actions.API_ERROR,
-        errorMessage,
+        payload,
       })).to.eql({
         pending: false,
-        error: errorMessage,
+        error: payload,
       });
     });
   });
@@ -123,7 +122,7 @@ describe('ridership-over-time', () => {
 
         expect(selectors.getRidershipOverTimeRequest({
           red: 'herring',
-          ridership: {
+          transportation: {
             ridershipOverTime: expectation,
           },
         })).to.eql(expectation);
@@ -149,18 +148,41 @@ describe('ridership-over-time', () => {
         })).to.be.undefined;
       });
 
-      it('returns the data when data has a value for ridershipByYear', () => {
-        const data = {
-          here: 'it',
-          i: 's',
+      it('returns processed data when data has a value for ridershipByYear', () => {
+        const res = {
+          data: [{
+            year: 2001,
+            weekday_sum_ons: 56500470,
+            weekday_sum_offs: 57186610,
+            saturday_sum_ons: 3797456,
+            saturday_sum_offs: 3853425,
+            sunday_sum_ons: 3710746,
+            sunday_sum_offs: 3762772,
+            num_of_yearly_census: 3,
+            sunday_census: true,
+            saturday_census: true,
+            total_sum_ons: 64008672,
+            total_sum_offs: 64802807,
+          }],
         };
+        const processedData = [{
+          type: 'Weekday',
+          year: 2001,
+          ons: 217309.5,
+        }, {
+          type: 'Saturday',
+          year: 2001,
+          ons: 73028,
+        }, {
+          type: 'Sunday',
+          year: 2001,
+          ons: 71360.5,
+        }];
         expect(selectors.getRidershipOverTimeData({
           ridershipOverTime: {
-            data: {
-              ridershipByYear: data,
-            },
+            data: res,
           },
-        })).to.eql(data);
+        })).to.eql(processedData);
       });
     });
 

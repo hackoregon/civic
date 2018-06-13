@@ -8,7 +8,7 @@ export const getRidershipOverTimeRequest = createSelector(
 
 export const getRidershipOverTimeData = createSelector(
   getRidershipOverTimeRequest,
-  ({ data }) => data && data.data.map(yearObj => ({
+  ({ data }) => ((data || {}).data) && data.data.map(yearObj => ({
     type: 'Weekday',
     year: yearObj.year,
     ons: yearObj.weekday_sum_ons / 5 / 52,
