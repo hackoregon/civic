@@ -93,5 +93,15 @@ function getDefaultLineStyle(idx) {
   };
 }
 
-export { chartEvents, getDefaultDomain, getDefaultDataSeriesLabels, getDefaultFillStyle, getDefaultLineStyle, getDefaultStackedDomain };
+function getDefaultAreaStyle(idx) {
+  return {
+    data: {
+      fill: CivicVictoryTheme.civic.group.colorScale[idx],
+      stroke: 'black',
+      strokeWidth: 1
+    },
+  };
+}
+
+export { chartEvents, getDefaultDomain, getDefaultDataSeriesLabels, getDefaultFillStyle, getDefaultLineStyle, getDefaultAreaStyle, getDefaultStackedDomain };
 

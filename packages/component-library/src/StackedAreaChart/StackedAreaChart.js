@@ -15,7 +15,7 @@ import {
 import ChartContainer from '../ChartContainer';
 import SimpleLegend from '../SimpleLegend';
 import { numeric } from '../utils/formatters';
-import { chartEvents, getDefaultStackedDomain, getDefaultDataSeriesLabels, getDefaultFillStyle, getDefaultLineStyle } from '../utils/chartHelpers';
+import { chartEvents, getDefaultStackedDomain, getDefaultDataSeriesLabels, getDefaultFillStyle, getDefaultAreaStyle } from '../utils/chartHelpers';
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
 
 const StackedAreaChart = ({
@@ -46,7 +46,7 @@ const StackedAreaChart = ({
     ? dataSeriesLabel || getDefaultDataSeriesLabels(data, dataSeries)
     : null;
 
-  const scatterPlotStyle = style || getDefaultFillStyle(dataSeriesLabels);
+  const scatterPlotStyle = style || { data: { fill: 'white', fillOpacity: 0.7, stroke: 'black', strokeWidth: 1 }};
 
   const legendData =
     dataSeriesLabels && dataSeriesLabels.length
@@ -62,7 +62,7 @@ const StackedAreaChart = ({
     ? groupBy(data, dataSeries)
     : { category: data };
 
-  const lines = lineData
+  const areas = lineData
     ? Object.keys(lineData).map((category, index) =>
       <VictoryArea
         data={lineData[category].map(d => ({
@@ -72,7 +72,7 @@ const StackedAreaChart = ({
         }))}
         x="dataKey"
         y="dataValue"
-        style={getDefaultLineStyle(index)}
+        style={getDefaultAreaStyle(index)}
         standalone={false}
       />
       )
@@ -172,7 +172,7 @@ const StackedAreaChart = ({
           />
         </VictoryPortal>
         <VictoryStack>
-          { lines }
+          { areas }
         </VictoryStack>
         <VictoryStack>
           { dots }
