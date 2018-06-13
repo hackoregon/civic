@@ -9,7 +9,7 @@ import DiveDeeperIntoTransportationData from './components/DiveDeeperIntoTranspo
 
 export default [
   {
-    slug: 'decline-in-ridership',
+    slug: 'plateau-in-ridership',
     component: DeclineInRidership,
   },
   {
