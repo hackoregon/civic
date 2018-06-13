@@ -20,12 +20,6 @@ import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
 const BarChart = ({ data, dataKey, dataValue, domain, title, subtitle, xLabel, yLabel, xNumberFormatter, yNumberFormatter }) => {
   const chartDomain = domain || getDefaultDomain(data, dataKey, dataValue);
 
-  const axisLabelStyle = {
-    fontFamily: "'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif",
-    fontSize: '14px',
-    fontWeight: 'bold',
-  };
-
   return (
     <ChartContainer title={title} subtitle={subtitle}>
       <VictoryChart
@@ -46,7 +40,7 @@ const BarChart = ({ data, dataKey, dataValue, domain, title, subtitle, xLabel, y
         />
         <VictoryPortal>
           <VictoryLabel
-            style={axisLabelStyle}
+            style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
             text={yLabel}
             textAnchor="middle"
             title="Y Axis Label"
@@ -57,7 +51,7 @@ const BarChart = ({ data, dataKey, dataValue, domain, title, subtitle, xLabel, y
         </VictoryPortal>
         <VictoryPortal>
           <VictoryLabel
-            style={axisLabelStyle}
+            style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
             text={xLabel}
             textAnchor="end"
             title="X Axis Label"
@@ -75,9 +69,10 @@ const BarChart = ({ data, dataKey, dataValue, domain, title, subtitle, xLabel, y
               orientation="bottom"
               pointerLength={0}
               cornerRadius={0}
+              theme={CivicVictoryTheme.civic}
             />
           }
-          data={data.map(d => ({ dataKey: d[dataKey], dataValue: d[dataValue], label: `${xLabel}: ${xNumberFormatter(d[dataKey])} | ${yLabel}: ${yNumberFormatter(d[dataValue])}` }))}
+          data={data.map(d => ({ dataKey: d[dataKey], dataValue: d[dataValue], label: `${xLabel}: ${xNumberFormatter(d[dataKey])} • ${yLabel}: ${yNumberFormatter(d[dataValue])}` }))}
           events={chartEvents}
           x={'dataKey'}
           y={'dataValue'}
