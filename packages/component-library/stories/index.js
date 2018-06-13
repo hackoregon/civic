@@ -30,6 +30,7 @@ import pathMapStory from './PathMap.story';
 import iconMapStory from './IconMap.story';
 import boundaryMapStory from './BoundaryMap.story';
 import civicSandboxMapStory from './CivicSandboxMap.story';
+import stackedAreaChart from './StackedAreaChart.story';
 import '../assets/global.styles.css';
 
 // stories can be added directly here
@@ -53,6 +54,7 @@ horizontalBarChartStory();
 ScatterplotStory();
 BarChartStory();
 lineChartStory();
+stackedAreaChart();
 placeholderStory();
 sankeyStory();
 sliderStory();

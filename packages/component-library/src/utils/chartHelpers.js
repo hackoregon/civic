@@ -46,6 +46,25 @@ function getDefaultDomain(data, dataKey, dataLabel) {
   };
 }
 
+// If we want to generate default domains ourselves, this needs to be finished:
+function getDefaultStackedDomain(data, dataKey, dataLabel) {
+  const xValues = data.map(value => value[dataKey]);
+  const yValues = data.map(value => value[dataLabel]);
+  console.log(data, dataKey, dataLabel);
+  console.log(xValues, yValues);
+
+  return {
+    x: [
+      Math.min(...xValues) < 0 ? Math.min(...xValues) : Math.min(...xValues),
+      Math.max(...xValues),
+    ],
+    y: [
+      Math.min(...yValues) < 0 ? Math.min(...yValues) : 0,
+      Math.max(...yValues),
+    ],
+  };
+}
+
 function getDefaultDataSeriesLabels(data, series) {
   const categories = data.map(value => value[series]);
   const uniqueCategories = [...new Set(categories)];
@@ -74,5 +93,5 @@ function getDefaultLineStyle(idx) {
   };
 }
 
-export { chartEvents, getDefaultDomain, getDefaultDataSeriesLabels, getDefaultFillStyle, getDefaultLineStyle };
+export { chartEvents, getDefaultDomain, getDefaultDataSeriesLabels, getDefaultFillStyle, getDefaultLineStyle, getDefaultStackedDomain };
 

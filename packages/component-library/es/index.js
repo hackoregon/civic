@@ -43,3 +43,5 @@ export { default as HexOverlay } from './HexOverlay/HexOverlay';
 export { default as BoundaryMap } from './BoundaryMap/BoundaryMap';
 export { default as MapTooltip } from './MapTooltip/MapTooltip';
 export { default as CivicSandboxMap } from './CivicSandboxMap/CivicSandboxMap';
+export { default as Collapsable } from './Collapsable/Collapsable';
+export { default as StackedAreaChart } from './StackedAreaChart/StackedAreaChart';
