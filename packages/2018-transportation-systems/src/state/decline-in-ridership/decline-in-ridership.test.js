@@ -8,10 +8,10 @@ const mockStore = configureMockStore([thunk]);
 
 describe('ridership-over-time', () => {
   describe('ridership-over-time actions', () => {
-    describe('ridership-over-time import actions', () => {
+    describe('ridership-over-time api actions', () => {
       it('should have a start action', () => {
         const expectedAction = {
-          type: actions.IMPORT_START,
+          type: actions.API_START,
         };
 
         expect(actions.ridershipOverTimeStart()).to.eql(expectedAction);
@@ -24,15 +24,28 @@ describe('ridership-over-time', () => {
           },
         };
         const expectedAction = {
-          type: actions.IMPORT_SUCCESS,
+          type: actions.API_SUCCESS,
+          payload,
+        };
+        expect(actions.ridershipOverTimeSuccess(payload)).to.eql(expectedAction);
+      });
+
+      it('should have an error action', () => {
+        const payload = {
+          some: {
+            test: ['d', 'a', 't', 'a'],
+          },
+        };
+        const expectedAction = {
+          type: actions.API_ERROR,
           payload,
         };
 
-        expect(actions.ridershipOverTimeSuccess(payload)).to.eql(expectedAction);
+        expect(actions.ridershipOverTimeError(payload)).to.eql(expectedAction);
       });
     });
 
-    describe('ridership-over-time import thunk', () => {
+    describe('ridership-over-time api thunk', () => {
       let store;
 
       beforeEach(() => {
@@ -40,8 +53,8 @@ describe('ridership-over-time', () => {
       });
 
       it('should dispatch start and success actions when successful', () => {
-        const action1 = { type: actions.IMPORT_START };
-        const action2 = { type: actions.IMPORT_SUCCESS };
+        const action1 = { type: actions.API_START };
+        const action2 = { type: actions.API_SUCCESS };
 
         return store.dispatch(actions.fetchRidershipOverTime()).then(() => {
           const actionHistory = store.getActions();
@@ -58,31 +71,43 @@ describe('ridership-over-time', () => {
   describe('ridership-over-time reducer', () => {
     const initialState = {
       pending: false,
+      error: null,
       data: null,
     };
+    const payload = { stu: 'ff' };
+    const errorMessage = 'error';
 
     it('should return the initial state', () => {
       expect(reducer(undefined, {})).to.eql(initialState);
     });
 
-    it('should handle IMPORT_START', () => {
+    it('should handle API_START', () => {
       expect(reducer(initialState, {
-        type: actions.IMPORT_START,
+        type: actions.API_START,
       })).to.eql({
         pending: true,
+        error: null,
         data: null,
       });
     });
 
-    const payload = { stu: 'ff' };
-
-    it('should handle IMPORT_SUCCESS', () => {
-      expect(reducer({ pending: true, data: null }, {
-        type: actions.IMPORT_SUCCESS,
+    it('should handle API_SUCCESS', () => {
+      expect(reducer({ pending: true, error: null, data: null }, {
+        type: actions.API_SUCCESS,
         payload,
       })).to.eql({
         pending: false,
         data: payload,
+      });
+    });
+
+    it('should handle API_ERROR', () => {
+      expect(reducer({ pending: true, error: null, data: null }, {
+        type: actions.API_ERROR,
+        errorMessage,
+      })).to.eql({
+        pending: false,
+        error: errorMessage,
       });
     });
   });
