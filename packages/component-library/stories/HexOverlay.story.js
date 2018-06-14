@@ -28,6 +28,13 @@ const optionsStyle = {
   'Scenic': 'mapbox://styles/themendozaline/cj8rrlv4tbtgs2rqnyhckuqva',
 }
 
+const coverageOptions = {
+  range: true,
+  min: 0,
+  max: 1,
+  step: 0.05,
+};
+
 const opacityOptions = {
   range: true,
   min: 0,
@@ -68,8 +75,9 @@ const lightSettings = {
 };
 
 const demoMap = () => {
+  const coverage = number('Coverage:', 0.8, coverageOptions);
   const opacity = number('Opacity:', 0.8, opacityOptions);
-  const radius = number('Inner radius', 500, radiusOptions);
+  const radius = number('Radius', 500, radiusOptions);
   const elevation = number('Elevation:', 10, elevationOptions);
   const extruded = boolean('Extruded:', true);
   const filled = boolean('Filled:', true);
@@ -84,6 +92,7 @@ const demoMap = () => {
       <HexOverlay
         data={data.features}
         opacity={opacity}
+        coverage={coverage}
         radius={radius}
         elevation={elevation}
         colorRange={colorRange}
@@ -97,8 +106,9 @@ const demoMap = () => {
 
 // with tooltip version
 const tooltipMap = () => {
+  const coverage = number('Coverage:', 0.8, coverageOptions);
   const opacity = number('Opacity:', 0.8, opacityOptions);
-  const radius = number('Inner radius', 500, radiusOptions);
+  const radius = number('Radius', 500, radiusOptions);
   const elevation = number('Elevation:', 10, elevationOptions);
   const extruded = boolean('Extruded:', true);
   const filled = boolean('Filled:', true);
@@ -113,6 +123,7 @@ const tooltipMap = () => {
       <HexOverlay
         data={data.features}
         opacity={opacity}
+        coverage={coverage}
         radius={radius}
         elevation={elevation}
         colorRange={colorRange}
