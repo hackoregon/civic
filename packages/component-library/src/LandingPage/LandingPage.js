@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { css } from 'emotion';
 
 import CanvasParticles from './CanvasParticles';
@@ -90,11 +89,10 @@ class LandingPage extends React.Component {
 
   componentDidMount() {
     // Used to fade in the page
-    const elem = ReactDOM.findDOMNode(this);
-    elem.style.opacity = 0;
+    this.node.style.opacity = 0;
     window.requestAnimationFrame(() => {
-      elem.style.transition = 'opacity 2500ms';
-      elem.style.opacity = 1;
+      this.node.style.transition = 'opacity 2500ms';
+      this.node.style.opacity = 1;
     });
   }
 
@@ -126,9 +124,10 @@ class LandingPage extends React.Component {
       'New York': 'new-york',
       Seattle: 'seattle',
     };
+    const cityPath = require(`../../assets/cities/${cityImageMap[city] || 'portland'}.png`); // eslint-disable-line global-require, import/no-dynamic-require
 
     return (
-      <div className={appWrapper}>
+      <div className={appWrapper} ref={(node) => { this.node = node; }}>
         <CanvasParticles />
         <div className={contentWrapper}>
           <div className={topBar} />
@@ -138,9 +137,12 @@ class LandingPage extends React.Component {
             </div>
             <div className={missionStatementTitle}>Making Data Human</div>
             <div className={missionStatement}>
-              CIVIC is a platform to empower data in a way that’s fundementally built to serve people.  We’re reimagining how to make information actionable through visual models, open standards, and creative frameworks that harness human collaboration at scale.
+              CIVIC is a platform to empower data in a way that’s fundementally built
+              to serve people. We’re reimagining how to make information actionable
+              through visual models, open standards, and creative frameworks that harness
+              human collaboration at scale.
             </div>
-            <img src={require(`../../assets/cities/${cityImageMap[city] || 'portland'}.png`)} width="100%" />
+            <img src={cityPath} width="100%" />
           </div>
           <div className={collectionsLink}>
             View all Collections &rsaquo;

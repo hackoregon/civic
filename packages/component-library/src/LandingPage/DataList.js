@@ -63,7 +63,7 @@ const DataList = ({ city, state }) => {
 
   const missingStates = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE'];
   const fileName = state && !missingStates.includes(state) ? state : 'OR';
-  const statePath = require(`../../assets/state/${fileName}.svg`);
+  const statePath = require(`../../assets/state/${fileName}.svg`); // eslint-disable-line global-require, import/no-dynamic-require
 
   return (
     <div className={cardsWrapper}>
