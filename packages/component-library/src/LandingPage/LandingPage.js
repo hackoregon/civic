@@ -4,31 +4,12 @@ import { css } from 'emotion';
 
 import CanvasParticles from './CanvasParticles';
 import DataList from './DataList';
+import SearchBar from './SearchBar';
+
+import logo from '../../assets/civic-logo-animated.svg';
 
 import cities from './cities';
 import zipCodes from './zipCodes.json';
-
-const searchForm = css`
-  display: block;
-  width: 100%;
-  margin: 24px auto;
-  max-width: 420px;
-`;
-
-const searchInput = css`
-  width: 100%;
-  padding: 6px 0px;
-  border: none;
-  border-bottom: 1px solid white;
-  background-color: #250f28;
-  font-size: 24px;
-  color: white;
-  box-sizing: border-box;
-
-  ::placeholder {
-    color: #ffffffa1;
-  }
-`;
 
 const searchTitle = css`
   font-family: 'Rubik', sans-serif;
@@ -81,7 +62,6 @@ const lookupWrapper = css`
   right: 9%;
   box-shadow: 14px 30px 60px 9px #0f18287a;
 `;
-
 const collectionsLink = css`
   display: block;
   font-family: 'Rubik';
@@ -105,31 +85,17 @@ const topBar = css`
   background-color: #240f27;
 `;
 
-const slugify = (text) => {
-  return text.toString().toLowerCase()
-    .replace(/\s+/g, '-')           // Replace spaces with -
-    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
-    .replace(/\-\-+/g, '-')         // Replace multiple - with single -
-    .replace(/^-+/, '')             // Trim - from start of text
-    .replace(/-+$/, '');            // Trim - from end of text
-};
-
 class LandingPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      repos: {},
-    };
-  }
+  state = {};
 
   componentDidMount() {
     // Used to fade in the page
-  	var elem = ReactDOM.findDOMNode(this);
-  	elem.style.opacity = 0;
-  	window.requestAnimationFrame(function() {
-  		elem.style.transition = "opacity 2500ms";
-  		elem.style.opacity = 1;
-  	});
+    const elem = ReactDOM.findDOMNode(this);
+    elem.style.opacity = 0;
+    window.requestAnimationFrame(() => {
+      elem.style.transition = 'opacity 2500ms';
+      elem.style.opacity = 1;
+    });
   }
 
   handleSearch = (input) => {
@@ -138,19 +104,15 @@ class LandingPage extends React.Component {
 
     if (zipResult) {
       return this.setState({
-        repos: {
-          city: zipResult.city,
-          state: zipResult.state,
-        },
+        city: zipResult.city,
+        state: zipResult.state,
       });
     }
 
     if (cityResult) {
       return this.setState({
-        repos: {
-          city: cityResult.name,
-          state: cityResult.state,
-        },
+        city: cityResult.name,
+        state: cityResult.state,
       });
     }
 
@@ -158,6 +120,13 @@ class LandingPage extends React.Component {
   };
 
   render() {
+    const { city, state } = this.state;
+    const cityImageMap = {
+      Austin: 'austin',
+      'New York': 'new-york',
+      Seattle: 'seattle',
+    };
+
     return (
       <div className={appWrapper}>
         <CanvasParticles />
@@ -165,11 +134,13 @@ class LandingPage extends React.Component {
           <div className={topBar} />
           <div className={leftContainer}>
             <div className={logoWrapper}>
-              <img src={require(`../../assets/civic-logo-animated.svg`)} />
+              <img src={logo} />
             </div>
-            <div className={missionStatementTitle}>{'Making Data Human'}</div>
-            <div className={missionStatement}>{`CIVIC is a platform to empower data in a way that’s fundementally built to serve people.  We’re reimagining how to make information actionable through visual models, open standards, and creative frameworks that harness human collaboration at scale.`}</div>
-            <img src={require('../../assets/cities/portland.png')} width="100%" />
+            <div className={missionStatementTitle}>Making Data Human</div>
+            <div className={missionStatement}>
+              CIVIC is a platform to empower data in a way that’s fundementally built to serve people.  We’re reimagining how to make information actionable through visual models, open standards, and creative frameworks that harness human collaboration at scale.
+            </div>
+            <img src={require(`../../assets/cities/${cityImageMap[city] || 'portland'}.png`)} width="100%" />
           </div>
           <div className={collectionsLink}>
             View all Collections &rsaquo;
@@ -177,39 +148,10 @@ class LandingPage extends React.Component {
           <div className={lookupWrapper}>
             <h3 className={searchTitle}>Discover data near you</h3>
             <SearchBar handleSubmit={this.handleSearch} />
-            <DataList
-              city={this.state.repos.city}
-              state={this.state.repos.state}
-            />
+            <DataList city={city} state={state} />
           </div>
         </div>
       </div>
-    )
-  }
-}
-
-
-class SearchBar extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  handleSubmit = (event) => {
-    event.preventDefault();
-    const text = event.target.text.value;
-    this.props.handleSubmit(text);
-  };
-
-  render() {
-    return (
-      <form className={searchForm} onSubmit={this.handleSubmit}>
-        <input
-          name="text"
-          className={searchInput}
-          type="text"
-          placeholder="Enter City or Zip Code"
-        />
-      </form>
     );
   }
 }

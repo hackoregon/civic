@@ -13,7 +13,6 @@ const cardsWrapper = css`
   margin: 0;
   flex-wrap: wrap;
 `;
-
 const card = css`
   font-family: 'Rubik';
   position: relative;
@@ -32,27 +31,23 @@ const card = css`
     cursor: pointer;
   }
 `;
-
 const cardTextWrapper = css`
   display: inline-block;
   position: relative;
   vertical-align: top;
 `;
-
 const eyebrowStyle = css`
   display: block;
   font-family: 'Rubik';
   font-size: 14px;
   color: #EE495C;
 `;
-
 const locationTitle = css`
   display: block;
   font-family: 'Rubik';
   font-size: 18px;
   color: white;
 `;
-
 const iconWrapper = css`
   display: inline-block;
   width: 100px;
