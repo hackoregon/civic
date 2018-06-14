@@ -3,51 +3,10 @@ import ReactDOM from 'react-dom';
 import { css } from 'emotion';
 
 import CanvasParticles from './CanvasParticles';
+import DataList from './DataList';
+
 import cities from './cities';
 import zipCodes from './zipCodes.json';
-
-const cardsWrapper = css`
-  display: flex;
-  justify-content: space-around;
-  padding: 0;
-  margin: 0;
-  flex-wrap: wrap;
-`;
-const card = css`
-  font-family: 'Rubik';
-  position: relative;
-  background-color: transparent;
-  font-size: 2vw;
-  flex: 0 0 auto;
-  width: 100%;
-  padding: 12px 0;
-  box-sizing: border-box;
-  text-align: left;
-  margin: 6px 0px;
-  transition: all .3s ease-in-out;
-
-  :hover {
-    transform: translateY(-3px);
-    cursor: pointer;
-  }
-`;
-const cardTextWrapper = css`
-  display: inline-block;
-  position: relative;
-  vertical-align: top;
-`;
-const eyebrowStyle = css`
-  display: block;
-  font-family: 'Rubik';
-  font-size: 14px;
-  color: #EE495C;
-`;
-const locationTitle = css`
-  display: block;
-  font-family: 'Rubik';
-  font-size: 18px;
-  color: white;
-`;
 
 const searchForm = css`
   display: block;
@@ -122,13 +81,7 @@ const lookupWrapper = css`
   right: 9%;
   box-shadow: 14px 30px 60px 9px #0f18287a;
 `;
-const iconWrapper = css`
-  display: inline-block;
-  width: 100px;
-  margin: 0;
-  margin-right: 24px;
-  text-align: center;
-`;
+
 const collectionsLink = css`
   display: block;
   font-family: 'Rubik';
@@ -224,7 +177,10 @@ class LandingPage extends React.Component {
           <div className={lookupWrapper}>
             <h3 className={searchTitle}>Discover data near you</h3>
             <SearchBar handleSubmit={this.handleSearch} />
-            <DataList repos={this.state.repos} />
+            <DataList
+              city={this.state.repos.city}
+              state={this.state.repos.state}
+            />
           </div>
         </div>
       </div>
@@ -257,59 +213,5 @@ class SearchBar extends React.Component {
     );
   }
 }
-
-
-class DataList extends React.Component {
-  render() {
-    const countryImage = this.props.repos.city ? <img src={require(`../../assets/country/usa.svg`)} width="100%" /> : <img src={require(`../../assets/country/usa.svg`)} width="100%" />
-    // const stateImage = this.props.repos.state ? <img src={require(`../../assets/state/${slugify(this.props.repos.state)}.svg`)} width="100%" /> : <img src={require(`../../assets/state/or.svg`)} width="100%" />
-    const stateImage = this.props.repos.state ? <img src={require(`../../assets/state/or.svg`)} width="100%" /> : <img src={require(`../../assets/state/or.svg`)} width="100%" />
-    const localImage = this.props.repos.city ? <img src={require(`../../assets/local/local.svg`)} width="70%" /> : <img src={require(`../../assets/local/local.svg`)} width="70%" />
-
-    const ctaMessage = this.props.repos.city === 'PORTLAND' ? (<div>
-    Looks like we have data in your area. Click on a collection to get started ↑
-    </div>) : (<div>
-    We dont see any data in your area. View Portland data or contribute to your region here.
-    </div>)
-
-    console.log(`${this.props.repos.city}`)
-
-    return (
-        <div className={cardsWrapper}>
-          <div className={card}>
-            <div className={iconWrapper}>
-              { countryImage }
-            </div>
-            <div className={cardTextWrapper}>
-              <span className={eyebrowStyle}>National</span>
-              <div className={locationTitle}>{this.props.repos.country ? this.props.repos.country : "?"}</div>
-            </div>
-          </div>
-          <div className={card}>
-            <div className={iconWrapper}>
-              {stateImage}
-            </div>
-            <div className={cardTextWrapper}>
-              <span className={eyebrowStyle}>State</span>
-              <div className={locationTitle}>{this.props.repos.state ? this.props.repos.state : "?"}</div>
-            </div>
-          </div>
-          <div className={card}>
-            <div className={iconWrapper}>
-              { localImage }
-            </div>
-            <div className={cardTextWrapper}>
-              <span className={eyebrowStyle}>Local</span>
-              <div className={locationTitle}>{this.props.repos.city ? this.props.repos.city : "?"}</div>
-            </div>
-          </div>
-          { this.props.repos.city && ctaMessage }
-        </div>
-    )
-  }
-}
-DataList.defaultProps = {
-  repos: {}
-};
 
 export default LandingPage;
