@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { css } from 'emotion';
-import CanvasParticles from './CanvasParticles'
+
+import CanvasParticles from './CanvasParticles';
+import cities from './cities';
+import zipCodes from './zipCodes.json';
 
 const cardsWrapper = css`
   display: flex;
@@ -149,36 +152,22 @@ const topBar = css`
   background-color: #240f27;
 `;
 
-class LandingPage extends React.Component {
+const slugify = (text) => {
+  return text.toString().toLowerCase()
+    .replace(/\s+/g, '-')           // Replace spaces with -
+    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+    .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+    .replace(/^-+/, '')             // Trim - from start of text
+    .replace(/-+$/, '');            // Trim - from end of text
+};
 
-  constructor(props){
+class LandingPage extends React.Component {
+  constructor(props) {
     super(props);
     this.state = {
-      repos: {}
+      repos: {},
     };
   }
-
-  handleSearch = (user) => {
-    if (!/\D/.test(user)) {
-      let url = 'https://ZiptasticAPI.com/'+user;
-      fetch(url).
-      then(response => response.json()).then((repos) => {
-        console.log('hi');
-        console.log(repos);
-        this.setState({
-          repos: repos
-        });
-      });
-    } else {
-      this.setState({
-        repos: {
-          country: "US",
-          state: "OR",
-          city: user.toUpperCase()
-        }
-      })
-    }
-  };
 
   componentDidMount() {
     // Used to fade in the page
@@ -190,7 +179,32 @@ class LandingPage extends React.Component {
   	});
   }
 
-  render(){
+  handleSearch = (input) => {
+    const zipResult = zipCodes[input];
+    const cityResult = cities[input];
+
+    if (zipResult) {
+      return this.setState({
+        repos: {
+          city: zipResult.city,
+          state: zipResult.state,
+        },
+      });
+    }
+
+    if (cityResult) {
+      return this.setState({
+        repos: {
+          city: cityResult.name,
+          state: cityResult.state,
+        },
+      });
+    }
+
+    return null;
+  };
+
+  render() {
     return (
       <div className={appWrapper}>
         <CanvasParticles />
@@ -202,7 +216,7 @@ class LandingPage extends React.Component {
             </div>
             <div className={missionStatementTitle}>{'Making Data Human'}</div>
             <div className={missionStatement}>{`CIVIC is a platform to empower data in a way that’s fundementally built to serve people.  We’re reimagining how to make information actionable through visual models, open standards, and creative frameworks that harness human collaboration at scale.`}</div>
-            <img src={require(`../../assets/cities/portland.png`)} width="100%" />
+            <img src={require('../../assets/cities/portland.png')} width="100%" />
           </div>
           <div className={collectionsLink}>
             View all Collections &rsaquo;
@@ -210,7 +224,7 @@ class LandingPage extends React.Component {
           <div className={lookupWrapper}>
             <h3 className={searchTitle}>Discover data near you</h3>
             <SearchBar handleSubmit={this.handleSearch} />
-            <DataList repos={this.state.repos}/>
+            <DataList repos={this.state.repos} />
           </div>
         </div>
       </div>
@@ -246,20 +260,10 @@ class SearchBar extends React.Component {
 
 
 class DataList extends React.Component {
-  render(){
-
-    const slugify = (text) => {
-      return text.toString().toLowerCase()
-        .replace(/\s+/g, '-')           // Replace spaces with -
-        .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
-        .replace(/\-\-+/g, '-')         // Replace multiple - with single -
-        .replace(/^-+/, '')             // Trim - from start of text
-        .replace(/-+$/, '');            // Trim - from end of text
-    }
-
+  render() {
     const countryImage = this.props.repos.city ? <img src={require(`../../assets/country/usa.svg`)} width="100%" /> : <img src={require(`../../assets/country/usa.svg`)} width="100%" />
-    const stateImage = this.props.repos.state ? <img src={require(`../../assets/state/${slugify(this.props.repos.state)}.svg`)} width="100%" /> : <img src={require(`../../assets/state/or.svg`)} width="100%" />
-    const cityImage = this.props.repos.city ? <img src={require(`../../assets/cities/${slugify(this.props.repos.city)}.png`)} width="100%" /> : <img src={require(`../../assets/cities/portland.png`)} width="100%" />
+    // const stateImage = this.props.repos.state ? <img src={require(`../../assets/state/${slugify(this.props.repos.state)}.svg`)} width="100%" /> : <img src={require(`../../assets/state/or.svg`)} width="100%" />
+    const stateImage = this.props.repos.state ? <img src={require(`../../assets/state/or.svg`)} width="100%" /> : <img src={require(`../../assets/state/or.svg`)} width="100%" />
     const localImage = this.props.repos.city ? <img src={require(`../../assets/local/local.svg`)} width="70%" /> : <img src={require(`../../assets/local/local.svg`)} width="70%" />
 
     const ctaMessage = this.props.repos.city === 'PORTLAND' ? (<div>
