@@ -23,6 +23,13 @@ const optionsStyle = {
   'Scenic': 'mapbox://styles/themendozaline/cj8rrlv4tbtgs2rqnyhckuqva',
 }
 
+const strokeWidthOptions = {
+   range: true,
+   min: 0,
+   max: 100,
+   step: 1,
+};
+
 const opacityOptions = {
    range: true,
    min: 0,
@@ -33,15 +40,18 @@ const opacityOptions = {
 const elevationOptions = {
    range: true,
    min: 1,
-   max: 100,
+   max: 50,
    step: 1,
 };
 
 const opacity = number('Opacity:', 0.8, opacityOptions);
-const filled = boolean('Filled:', true);
-const wireframe = boolean('Wireframe:', true);
+const strokeWidth = number('Stroke Width:', 1, strokeWidthOptions);
 const elevation = number('Elevation:', 10, elevationOptions);
 const extruded = boolean('Extruded:', true);
+const filled = boolean('Filled:', true);
+const pickable = boolean('Pickble:', true);
+const stroked = boolean('Stroked:', true);
+const wireframe = boolean('Wireframe:', true);
 
 const mapboxStyle = selectV2('Mapbox Style', optionsStyle, optionsStyle['Label Maker']);
 
@@ -54,11 +64,12 @@ const demoMap = () => {
     >
       <MapOverlay
         data={data.features}
-        opacity={opacity}
-        filled={filled}
-        wireframe={wireframe}
         elevation={elevation}
         extruded={extruded}
+        filled={filled}
+        opacity={opacity}
+        pickable={pickable}
+        wireframe={wireframe}
         getPosition={f => f.geometry.coordinates}
         onLayerClick={info => action('Layer clicked:')(info)}
       />
@@ -70,9 +81,11 @@ const demoMap = () => {
 const tooltipMap = () => {
   const opacity = number('Opacity:', 0.8, opacityOptions);
   const elevation = number('Elevation:', 10, elevationOptions);
-  const filled = boolean('Filled:', true);
-  const wireframe = boolean('Wireframe:', true);
   const extruded = boolean('Extruded:', true);
+  const filled = boolean('Filled:', true);
+  const pickable = boolean('Pickble:', true);
+  const wireframe = boolean('Wireframe:', true);
+
   const mapboxStyle = selectV2('Mapbox Style', optionsStyle, optionsStyle['Label Maker']);
 
   return (
@@ -83,15 +96,15 @@ const tooltipMap = () => {
       <MapOverlay
         data={data.features}
         getPosition={f => f.geometry.coordinates}
-        opacity={opacity}
-        filled={filled}
-        wireframe={wireframe}
-        extruded={extruded}
         elevation={elevation}
+        extruded={extruded}
+        filled={filled}
+        opacity={opacity}
+        pickable={pickable}
+        wireframe={wireframe}
         onLayerHover={info => action('Layer')(info.layer.props.data[info.index].properties.NAME)}
-
-        outline={false}
         autoHighlight={true}
+        outline={false}
         visible={true}
       >
         <MapTooltip
@@ -117,8 +130,6 @@ export default () => storiesOf(displayName, module)
 
 TODO: hard coded mapboxToken for ease for now: best practice to use env vars from .env named REACT_APP_...
 const MAPBOX_TOKEN = process.env.MapboxAccessToken; // eslint-disable-line
-
-TODO: currently extrusion and elevation are interconnected, if you change the slider for elevation you must change extruded to false then true to see changes, ideal behavior would be to simply use the slider
 
 TODO: In the process of adding tooltip info onHover I noticed having opacityOptions, elevationOptions, opacity, filled, etc outside of each const would not allow storybooks knobs to function. Ideally this repeated code would be DRYed up, and likely pulled out of
 
