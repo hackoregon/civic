@@ -25,7 +25,6 @@ const MapTooltip = (props) => {
     secondaryName,
     secondaryField,
     isHex
-
   } = props;
 
   const xPosition = x < window.innerWidth * 0.66 ? x : x - (window.innerWidth * 0.1);

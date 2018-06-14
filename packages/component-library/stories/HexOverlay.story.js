@@ -67,37 +67,10 @@ const lightSettings = {
   numberOfLights: 2
 };
 
-// const elevationScale = {min: 1, max: 50};
-
 const demoMap = () => {
   const opacity = number('Opacity:', 0.8, opacityOptions);
   const radius = number('Inner radius', 500, radiusOptions);
   const elevation = number('Elevation:', 10, elevationOptions);
-
-  const mapboxStyle = selectV2('Mapbox Style', optionsStyle, optionsStyle['Label Maker']);
-  return (
-    <BaseMap
-      mapboxToken={mapboxToken}
-      mapboxStyle={mapboxStyle}
-    >
-      <HexOverlay
-        data={data.features}
-        opacity={opacity}
-        radius={radius}
-        elevation={elevation}
-        colorRange={colorRange}
-        lightSettings={lightSettings}
-      />
-    </BaseMap>
-  );
-};
-
-// with tooltip version
-const tooltipMap = () => {
-  const opacity = number('Opacity:', 0.8, opacityOptions);
-  const radius = number('Inner radius', 500, radiusOptions);
-  const elevation = number('Elevation:', 10, elevationOptions);
-
   const extruded = boolean('Extruded:', true);
   const filled = boolean('Filled:', true);
   const wireframe = boolean('Wireframe:', true);
@@ -115,8 +88,39 @@ const tooltipMap = () => {
         elevation={elevation}
         colorRange={colorRange}
         lightSettings={lightSettings}
+        filled={filled}
+        wireframe={wireframe}
+      />
+    </BaseMap>
+  );
+};
+
+// with tooltip version
+const tooltipMap = () => {
+  const opacity = number('Opacity:', 0.8, opacityOptions);
+  const radius = number('Inner radius', 500, radiusOptions);
+  const elevation = number('Elevation:', 10, elevationOptions);
+  const extruded = boolean('Extruded:', true);
+  const filled = boolean('Filled:', true);
+  const wireframe = boolean('Wireframe:', true);
+
+  const mapboxStyle = selectV2('Mapbox Style', optionsStyle, optionsStyle['Label Maker']);
+  return (
+    <BaseMap
+      mapboxToken={mapboxToken}
+      mapboxStyle={mapboxStyle}
+    >
+      <HexOverlay
+        data={data.features}
+        opacity={opacity}
+        radius={radius}
+        elevation={elevation}
+        colorRange={colorRange}
+        lightSettings={lightSettings}
+        filled={filled}
+        wireframe={wireframe}
       >
-        <MapTooltip />
+        <MapTooltip isHex={true} />
       </HexOverlay>
     </BaseMap>
   );
