@@ -2,16 +2,20 @@ import React from 'react';
 import { css } from 'emotion';
 
 const titleStyle = css`
-  font-size: 40px;
-  font-weight: 500;
+  display: block;
+  font-family: 'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif;
+  font-size: 21px;
+  font-weight: bold;
   text-align: center;
-  margin: 40px 0 12px 0;
+  margin: 0;
 `;
 
 const subtitleStyle = css`
   display: block;
-  font-size: 18px;
+  font-family: 'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif;
+  font-size: 14px;
   text-align: center;
+  margin: 0;
 `;
 
 /**

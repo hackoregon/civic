@@ -9,12 +9,17 @@ export class AffordableRentalUnitsDwindling extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Affordable Rental Units are Dwindling">
+      <CivicStoryCard
+        title="Affordable Rental Units are Dwindling"
+        slug="affordable-rental-units-are-dwindling"
+      >
         <Placeholder issue="56"/>
       </CivicStoryCard>
     );
   }
 }
+
+AffordableRentalUnitsDwindling.displayName = 'AffordableRentalUnitsDwindling';
 
 // Connect this to the redux store when necessary
 export default AffordableRentalUnitsDwindling;

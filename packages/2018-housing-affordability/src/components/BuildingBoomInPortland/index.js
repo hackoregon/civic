@@ -9,12 +9,17 @@ export class BuildingBoomInPortland extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="A Building Boom in Portland">
+      <CivicStoryCard
+        title="A Building Boom in Portland"
+        slug="building-boom-in-portland"
+      >
         <Placeholder issue="166" />
       </CivicStoryCard>
     );
   }
 }
+
+BuildingBoomInPortland.displayName = 'BuildingBoomInPortland';
 
 // Connect this to the redux store when necessary
 export default BuildingBoomInPortland;
