@@ -10,12 +10,23 @@ import {
 } from 'victory';
 
 import ChartContainer from '../ChartContainer';
-import { dollars, numeric } from '../utils/formatters';
+import { numeric, unformatted } from '../utils/formatters';
 import { chartEvents } from '../utils/chartHelpers';
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
 
-const HorizontalBarChart = ({ data, sortOrder, dataValue, dataLabel, domain, title, subtitle, xLabel, yLabel, xNumberFormatter }) => {
-
+const HorizontalBarChart = ({
+    data,
+    sortOrder,
+    dataValue,
+    dataLabel,
+    domain,
+    title,
+    subtitle,
+    xLabel,
+    yLabel,
+    dataValueFormatter,
+    dataLabelFormatter,
+}) => {
   const barData =
     sortOrder && sortOrder.length
       ? data
@@ -41,13 +52,13 @@ const HorizontalBarChart = ({ data, sortOrder, dataValue, dataLabel, domain, tit
           // tickValues specifies both the number of ticks and where
           // they are placed on the axis
           tickValues={barData.map(a => a[sortOrderKey])}
-          tickFormat={barData.map(a => a[dataLabel])}
+          tickFormat={barData.map(a => dataLabelFormatter(a[dataLabel]))}
           title="Y Axis"
         />
         <VictoryAxis
           // tickFormat specifies how ticks should be displayed
           orientation="top"
-          tickFormat={xNumberFormatter}
+          tickFormat={dataValueFormatter}
           title="X Axis"
         />
         <VictoryPortal>
@@ -84,7 +95,7 @@ const HorizontalBarChart = ({ data, sortOrder, dataValue, dataLabel, domain, tit
               theme={CivicVictoryTheme.civic}
             />
           }
-          data={barData.map(d => ({ sortOrder: d[sortOrderKey], dataValue: d[dataValue], label: `${d[dataLabel]}: ${xNumberFormatter(d[dataValue])}` }))}
+          data={barData.map(d => ({ sortOrder: d[sortOrderKey], dataValue: d[dataValue], label: `${d[dataLabel]}: ${dataValueFormatter(d[dataValue])}` }))}
           title="Horizontal Bar Chart"
           x="sortOrder"
           y="dataValue"
@@ -107,7 +118,8 @@ HorizontalBarChart.propTypes = {
   subtitle: PropTypes.string,
   xLabel: PropTypes.string,
   yLabel: PropTypes.string,
-  xNumberFormatter: PropTypes.func,
+  dataValueFormatter: PropTypes.func,
+  dataLabelFormatter: PropTypes.func,
 };
 
 HorizontalBarChart.defaultProps = {
@@ -120,7 +132,8 @@ HorizontalBarChart.defaultProps = {
   subtitle: null,
   xLabel: "X",
   yLabel: "Y",
-  xNumberFormatter: numeric,
+  dataValueFormatter: numeric,
+  dataLabelFormatter: unformatted,
 };
 
 export default HorizontalBarChart;
