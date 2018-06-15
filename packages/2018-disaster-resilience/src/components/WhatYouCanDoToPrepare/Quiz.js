@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Button } from '@hackoregon/component-library';
 import { Questions, Recommendations } from './Questions'
+import Question from './Question'
+import Recommendation from './Recommendation'
+import Answer from './Answer'
 
 class Quiz extends Component {
 
@@ -49,34 +52,9 @@ class Quiz extends Component {
   render() {
     return (
       <div>
-        <div>{this.getQuestion()}</div>
-
-        <form>
-          <div className="radio">
-            <label>
-              <input
-                type="radio"
-                value="yes"
-                checked={this.state.answer === 'yes'}
-                onChange={e => this.selectAnswer(e)}
-              />
-              Yes
-            </label>
-          </div>
-          <div className="radio">
-            <label>
-              <input
-                type="radio"
-                value="no"
-                checked={this.state.answer === 'no'}
-                onChange={e => this.selectAnswer(e)}
-              />
-              No
-            </label>
-          </div>
-        </form>
-
-        <div>{this.getRecommendation()}</div>
+        <Question question={this.getQuestion()}/>
+        <Answer answer={this.state.answer} selectAnswer={(e) => this.selectAnswer(e)}/>
+        <Recommendation recommendation={this.getRecommendation()}/>
 
         <Button onClick={e => this.back(e)}>
           Back
