@@ -11,8 +11,8 @@ const mapWrapper = css`
 
 const navControl = css`
   position: absolute;
-  right: 0;
-  z-index: 9;
+  left: 0;
+  z-index: 1;
 `;
 
 export default class BaseMap extends Component {
