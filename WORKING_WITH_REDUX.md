@@ -60,7 +60,7 @@ The answer is `connect`.
 The function returned by `connect` needs to be called with a component as the only argument, which yields a new component that is connected to the redux store. The whole thing looks like this:
 
 ```js
-import { setSelectedOpion } from './actions';
+import { setSelectedOption } from './actions';
 import { getAvailableRadioOptions, getSelectedRadioOption } from './selectors';
 
 const RadioGroup = ({ selectOption, allOptions, selectedOption }) => (
