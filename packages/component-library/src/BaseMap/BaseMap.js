@@ -122,5 +122,5 @@ BaseMap.propTypes = {
 };
 
 BaseMap.defaultProps = {
-  mapboxStyle: "mapbox://styles/themendozaline/cjg6296ub04ot2sqv9izku3qq",
+  mapboxStyle: "mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg",
 };
