@@ -40,5 +40,6 @@ export { default as HexOverlay } from './HexOverlay/HexOverlay';
 export { default as BoundaryMap } from './BoundaryMap/BoundaryMap';
 export { default as MapTooltip } from './MapTooltip/MapTooltip';
 export { default as CivicSandboxMap } from './CivicSandboxMap/CivicSandboxMap';
+export { default as CivicDashboard } from './CivicDashboard/CivicDashboard';
 
 import './fonts.css';
