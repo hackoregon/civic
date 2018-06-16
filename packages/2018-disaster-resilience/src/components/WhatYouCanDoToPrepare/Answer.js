@@ -29,7 +29,7 @@ const Answer = ({ answer, selectAnswer }) => (
 
 Answer.propTypes = {
   answer: PropTypes.string,
-  selectAnswer: PropTypes.Function,
+  selectAnswer: PropTypes.func.isRequired,
 };
 
 export default Answer;

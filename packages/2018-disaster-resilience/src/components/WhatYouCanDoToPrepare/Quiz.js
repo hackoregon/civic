@@ -1,29 +1,30 @@
 import React, { Component } from 'react';
 import { Button } from '@hackoregon/component-library';
-import { Questions, Recommendations } from './Questions'
-import Question from './Question'
-import Recommendation from './Recommendation'
-import Answer from './Answer'
+import QRMap from './QR';
+import Question from './Question';
+import Recommendation from './Recommendation';
+import Answer from './Answer';
+import Footer from './Footer';
 
 class Quiz extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      step: 0,
+      questionId: 1,
       answer: '',
       score: 0,
     };
 
-    this.Pages = Questions.length;
+    this.totalQuestions = QRMap.length;
   }
 
   next(e) {
     e.preventDefault();
     e.stopPropagation();
 
-    if (this.state.step < this.Pages - 1) {
-      this.setState({ step: this.state.step + 1 });
+    if (this.state.questionId < this.totalQuestions) {
+      this.setState({ questionId: this.state.questionId + 1 });
     }
   }
 
@@ -31,8 +32,8 @@ class Quiz extends Component {
     e.preventDefault();
     e.stopPropagation();
 
-    if (this.state.step > 0 && this.state.step <= this.Pages) {
-      this.setState({ step: this.state.step - 1 });
+    if (this.state.questionId > 1 && this.state.questionId <= this.totalQuestions) {
+      this.setState({ questionId: this.state.questionId - 1 });
     }
   }
 
@@ -41,28 +42,18 @@ class Quiz extends Component {
     this.setState({ answer });
   }
 
-  getQuestion() {
-    return Questions[this.state.step].question;
-  }
-
-  getRecommendation() {
-    return Recommendations[this.state.step].recommendation;
-  }
-
   render() {
-    return (
-      <div>
-        <Question question={this.getQuestion()}/>
-        <Answer answer={this.state.answer} selectAnswer={(e) => this.selectAnswer(e)}/>
-        <Recommendation recommendation={this.getRecommendation()}/>
+    const QR = QRMap.find(d => d.questionId === this.state.questionId);
+    const question = QR.question;
+    const recommendation = QR.recommendation;
 
-        <Button onClick={e => this.back(e)}>
-          Back
-        </Button>
-        <Button onClick={e => this.next(e)}>
-          Next
-        </Button>
-      </div>
+    return (
+      <section>
+        <Question question={question} questionId={this.state.questionId} />
+        <Answer answer={this.state.answer} selectAnswer={e => this.selectAnswer(e)} />
+        <Recommendation recommendation={recommendation} />
+        <Footer back={e => this.back(e)} next={e => this.next(e)} />
+      </section>
     );
   }
 }
