@@ -12,7 +12,7 @@ const dashboard = css`
   max-width: 350px;
   max-height: 475px;
   position: absolute;
-  right: 2.5%;
+  right: 4%;
   top: 1%;
   overflow-y: auto;
   pointer-events: auto;
@@ -136,11 +136,9 @@ class CivicDashboard extends React.Component {
             </svg>
           </div>
         </div>
-        
         <div>
           { content }
         </div>
-
         <div className={buttonContainer}>
           <div className={this.state.show === "info" ? iconActive : icon} onClick={this.showInfo}>
             <span className={"fa fa-info-circle"}></span>
@@ -149,13 +147,14 @@ class CivicDashboard extends React.Component {
             <span className={"fa fa-eye"}></span>
           </div>
         </div>
-
       </div>
     );
   }
 }
 
 CivicDashboard.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object),
+  children: PropTypes.node,
 };
 
 export default CivicDashboard;
