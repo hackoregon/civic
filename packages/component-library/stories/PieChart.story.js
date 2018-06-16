@@ -36,8 +36,8 @@ export default () => storiesOf('Pie/Donut visualization', module).addDecorator(w
     const numberOfData = number('Amount of data values', 3);
     const getRandomColors = array('Array of colors', colors.slice(0, numberOfData));
     const values = getRandomValuesArray(numberOfData, objectRandomizer);
-    const chartHeight = number('Chart height');
-    const chartWidth = number('Chart width');
+    const chartHeight = number('Chart height', 450);
+    const chartWidth = number('Chart width', 450);
     const innerRadius = number('Inner radius', 100);
     const halfDoughnut = boolean('halfDoughnut', true);
 
