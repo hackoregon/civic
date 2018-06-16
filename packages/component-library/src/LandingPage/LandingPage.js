@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { css } from 'emotion';
+import { Link } from 'react-router';
 import CanvasParticles from './CanvasParticles'
 
 const cardsWrapper = css`
@@ -55,16 +56,17 @@ const searchForm = css`
 
 const searchInput = css`
   width: 100%;
-  padding: 6px 0px;
+  padding: 12px 16px;
   border: none;
-  border-bottom: 1px solid white;
-  background-color: #250f28;
-  font-size: 24px;
-  color: white;
+  background-color: #ffffff;
+  font-size: 15px;
+  letter-spacing: 0;
+  color: #001832;
   box-sizing: border-box;
+  font-weight: 500;
 
   ::placeholder {
-    color: #ffffffa1;
+    color: #001732;
   }
 `;
 
@@ -74,6 +76,14 @@ const searchTitle = css`
   font-size: 16px;
   margin: 0 auto;
   font-weight: 400;
+  color: white;
+`;
+const searchSubTitle = css`
+  font-family: 'Rubik', sans-serif;
+  text-align: left;
+  font-size: 16px;
+  margin: 0 auto;
+  font-weight: 300;
   color: white;
 `;
 const logoWrapper = css`
@@ -95,9 +105,10 @@ const missionStatement = css`
   line-height: 1.8;
   font-family: "Rubik",sans-serif;
   width: 100%;
-  margin: 40px 0 60px;
+  margin: 25px 0;
   max-width: 1000px;
   text-align: left;
+  color: #001732;
 `;
 const appWrapper = css`
   background-color: #f3f1f3;
@@ -118,6 +129,16 @@ const lookupWrapper = css`
   top: 0;
   right: 9%;
   box-shadow: 14px 30px 60px 9px #0f18287a;
+
+  ::before {
+    content: '';
+    width: 100%;
+    border-bottom: solid 8px #ef495c;
+    position: absolute;
+    left: 0;
+    top: 0px;
+    z-index: 1;
+  }
 `;
 const iconWrapper = css`
   display: inline-block;
@@ -134,6 +155,17 @@ const collectionsLink = css`
   top: 70px;
   right: 9%;
   margin: 0;
+
+  a {
+    color: #240f27;
+    text-decoration: none;
+    border-bottom: none;
+    :hover {
+      color: #240f27;
+      text-decoration: underline;
+    }
+  }
+
 `;
 const leftContainer = css`
   display: block;
@@ -147,6 +179,58 @@ const topBar = css`
   width: 100%;
   height: 25px;
   background-color: #240f27;
+`;
+const ctaStyle = css`
+  color: #ed485b;
+  font-family: 'Rubik';
+  font-size: 18px;
+  font-style: italic;
+
+  a {
+    text-decoration: none;
+    border: none;
+
+    :hover {
+      text-decoration: underline;
+    }
+  }
+`;
+const aboutCivicWrapper = css`
+  background-color: #240f27;
+  margin-top: 120px;
+  height: 90vh;
+  color: white;
+`;
+const aboutTitle = css`
+  color: white;
+  font-family: 'Rubik',sans-serif;
+  font-size: 40px;
+  text-align: center;
+  padding: 100px 0;
+  display: block;
+  position: relative;
+  box-sizing: border-box;
+`;
+const locationResult = css`
+  color: white;
+  font-family: 'Rubik',sans-serif;
+  font-size: 14px;
+  width: 180px;
+`;
+const whyStyle = css`
+  color: #ef495c;
+
+  a {
+    border: none;
+    text-decoration: none;
+
+    :hover {
+      text-decoration: underline;
+    }
+  }
+`;
+const citySkyline = css`
+  margin-top: 20px;
 `;
 
 class LandingPage extends React.Component {
@@ -201,16 +285,22 @@ class LandingPage extends React.Component {
               <img src={require(`../../assets/civic-logo-animated.svg`)} />
             </div>
             <div className={missionStatementTitle}>{'Making Data Human'}</div>
-            <div className={missionStatement}>{`CIVIC is a platform to empower data in a way that’s fundementally built to serve people.  We’re reimagining how to make information actionable through visual models, open standards, and creative frameworks that harness human collaboration at scale.`}</div>
-            <img src={require(`../../assets/cities/portland.png`)} width="100%" />
+            <p className={missionStatement}>{`CIVIC is a powerful open platform using data in way that’s fundamentally built to serve people.`}</p>
+            <p className={missionStatement}>{`We’re reimagining how to make information actionable through visual models, open standards, and creative frameworks that harness human collaboration at scale.`}</p>
+            <div className={ctaStyle}><a href="#aboutCivic">Get started with your city &rsaquo;</a></div>
+            <div className={citySkyline}><img src={require(`../../assets/cities/portland.png`)} width="100%" /></div>
           </div>
           <div className={collectionsLink}>
-            View all Collections &rsaquo;
+            <Link to="/cities/portland">View all Collections &rsaquo;</Link>
           </div>
           <div className={lookupWrapper}>
-            <h3 className={searchTitle}>Discover data near you</h3>
+            <div className={searchTitle}><strong>Explore CIVIC stories</strong></div>
+            <div className={searchSubTitle}><em>Discover data near you.</em></div>
             <SearchBar handleSubmit={this.handleSearch} />
             <DataList repos={this.state.repos}/>
+          </div>
+          <div className={aboutCivicWrapper} id="aboutCivic">
+          <div className={aboutTitle}>Under Construction ⚠️</div>
           </div>
         </div>
       </div>
@@ -262,10 +352,10 @@ class DataList extends React.Component {
     const cityImage = this.props.repos.city ? <img src={require(`../../assets/cities/${slugify(this.props.repos.city)}.png`)} width="100%" /> : <img src={require(`../../assets/cities/portland.png`)} width="100%" />
     const localImage = this.props.repos.city ? <img src={require(`../../assets/local/local.svg`)} width="70%" /> : <img src={require(`../../assets/local/local.svg`)} width="70%" />
 
-    const ctaMessage = this.props.repos.city === 'PORTLAND' ? (<div>
-    Looks like we have data in your area. Click on a collection to get started ↑
-    </div>) : (<div>
-    We dont see any data in your area. View Portland data or contribute to your region here.
+    const ctaMessage = this.props.repos.city === 'PORTLAND' ? (<div className={locationResult}>
+    Looks like we have data in your area. Click on a collection to get started.
+    </div>) : (<div className={locationResult}>
+    {`There's no CIVIC data for ${this.props.repos.city} yet! `}<span className={whyStyle}><a href="#aboutCivic">Why?</a></span>
     </div>)
 
     console.log(`${this.props.repos.city}`)
@@ -296,10 +386,9 @@ class DataList extends React.Component {
             </div>
             <div className={cardTextWrapper}>
               <span className={eyebrowStyle}>Local</span>
-              <div className={locationTitle}>{this.props.repos.city ? this.props.repos.city : "?"}</div>
+              <div className={locationTitle}>{this.props.repos.city ? ctaMessage : "Portland Data"}</div>
             </div>
           </div>
-          { this.props.repos.city && ctaMessage }
         </div>
     )
   }
