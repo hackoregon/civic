@@ -9,12 +9,17 @@ export class RealTimeInformationOnPoliticalCampaigns extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Real-Time Information on Political Campaigns">
+      <CivicStoryCard
+        title="Real-Time Information on Political Campaigns"
+        slug="real-time-information-on-political-campaigns"
+      >
         <Placeholder />
       </CivicStoryCard>
     );
   }
 }
+
+RealTimeInformationOnPoliticalCampaigns.displayName = 'RealTimeInformationOnPoliticalCampaigns';
 
 // Connect this to the redux store when necessary
 export default RealTimeInformationOnPoliticalCampaigns;

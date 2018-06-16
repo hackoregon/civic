@@ -1,7 +1,7 @@
 import React from 'react';
 
 import '@hackoregon/component-library/assets/global.styles.css';
-
+import { PageLayout } from '@hackoregon/component-library';
 import TheShapeOfANeighborhood from '../TheShapeOfANeighborhood';
 import MagnitudeOfUrbanCampsiteSweeps from '../MagnitudeOfUrbanCampsiteSweeps';
 import HumanImpactOfSweepingUrbanCampsites from '../HumanImpactOfSweepingUrbanCampsites';
@@ -16,7 +16,7 @@ import VotersOnTheMove from '../VotersOnTheMove';
 import DiveDeeperIntoNeighborhoodData from '../DiveDeeperIntoNeighborhoodData';
 
 const App = () => (
-  <div style={{ marginTop: '30px' }}>
+  <PageLayout>
     <TheShapeOfANeighborhood />
     <MagnitudeOfUrbanCampsiteSweeps />
     <HumanImpactOfSweepingUrbanCampsites />
@@ -29,7 +29,7 @@ const App = () => (
     <ExploreAgeDemographics />
     <VotersOnTheMove />
     <DiveDeeperIntoNeighborhoodData />
-  </div>
+  </PageLayout>
 );
 
 App.displayName = 'App';

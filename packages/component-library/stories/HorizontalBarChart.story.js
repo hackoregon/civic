@@ -15,43 +15,71 @@ const title = 'Simple usage';
 const description = `
   This is some basic usage with the button with providing a label to show the text.
   Clicking should trigger an action.`;
-
-export default () => storiesOf(displayName, module)
-  .addDecorator(checkA11y)
-  .addDecorator(withKnobs)
-  .add('Basic Usage', (() => {
-    const data = object('Data',[
+const sampleData = [
       {sortOrder: 1, population: 2000, label: 'Labrador Retriever'},
       {sortOrder: 2, population: 8000, label: 'Standard Poodle'},
       {sortOrder: 3, population: 6000, label: 'French Bulldog'},
       {sortOrder: 4, population: 3000, label: 'Afghan Hound'},
-      {sortOrder: 5, population: 1000, label: 'Jack Russell Terrier'}
-      ]);
-      const dataKey = text('Data key', 'sortOrder');
-      const dataValue = text('Data values', 'population');
-      const dataKeyLabel = text('Data key labels', 'label');
-      const xLabel = text('xLabel', 'Dollars');
-      const yLabel = text('yLabel', 'Dogs');
+      {sortOrder: 5, population: 1000, label: 'Jack Russell Terrier'},
+    ];
+
+const sampleUnsortedData = [
+      {population: 2000, label: 'Labrador Retriever'},
+      {population: 8000, label: 'Standard Poodle'},
+      {population: 6000, label: 'French Bulldog'},
+      {population: 3000, label: 'Afghan Hound'},
+      {population: 1000, label: 'Jack Russell Terrier'},
+    ];
+
+export default () => storiesOf(displayName, module)
+  .addDecorator(checkA11y)
+  .addDecorator(withKnobs)
+  .add('Default sort order', () => {
+    const data = object('Data', sampleUnsortedData);
+    const dataValue = text('Data values', 'population');
+    const dataLabel = text('Data series labels', 'label');
+
+    return (
+        <HorizontalBarChart
+          data={data}
+          dataValue={dataValue}
+          dataLabel={dataLabel}
+        />
+      );
+  })
+  .add('No title', () => {
+    const data = object('Data', sampleData);
+    const sortOrder = text('Data series', 'sortOrder');
+    const dataValue = text('Data values', 'population');
+    const dataLabel = text('Data series labels', 'label');
+
+    return (
+        <HorizontalBarChart
+          data={data}
+          sortOrder={sortOrder}
+          dataValue={dataValue}
+          dataLabel={dataLabel}
+        />
+      );
+  })
+  .add('Basic Usage', () => {
+    const data = object('Data', sampleData);
+    const sortOrder = text('Data series', 'sortOrder');
+    const dataValue = text('Data value', 'population');
+    const dataLabel = text('Data series labels', 'label');
+    const xLabel = text('xLabel', 'Dollars');
+    const yLabel = text('yLabel', 'Dogs');
 
     return (
       <HorizontalBarChart
         data={data}
-        dataKey={dataKey}
+        sortOrder={sortOrder}
         dataValue={dataValue}
-        dataKeyLabel={dataKeyLabel}
+        dataLabel={dataLabel}
         title={'Dogs and their Money'}
         subtitle={'As of January 2017'}
         xLabel={xLabel}
         yLabel={yLabel}
       />
     );
-  }))
-.add('No title', (() => (
-  <HorizontalBarChart
-    data={data}
-    dataKey={dataKey}
-    dataValue={dataValue}
-    dataKeyLabel={dataKeyLabel}
-    
-  />
-)))
+  });

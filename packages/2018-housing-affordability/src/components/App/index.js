@@ -1,7 +1,7 @@
 import React from 'react';
 
 import '@hackoregon/component-library/assets/global.styles.css';
-
+import { PageLayout } from '@hackoregon/component-library';
 import BuildingBoomInPortland from '../BuildingBoomInPortland';
 import WhatDoesAffordabilityMean from '../WhatDoesAffordabilityMean';
 import AffordableRentalUnitsDwindling from '../AffordableRentalUnitsDwindling';
@@ -14,7 +14,7 @@ import AffordabilityInAComplexHousingMarket from '../AffordabilityInAComplexHous
 import ExploreHousingPolicyImplementation from '../ExploreHousingPolicyImplementation';
 
 const App = () => (
-  <div style={{ marginTop: '30px' }}>
+  <PageLayout>
     <BuildingBoomInPortland />
     <WhatDoesAffordabilityMean />
     <AffordableRentalUnitsDwindling />
@@ -25,7 +25,7 @@ const App = () => (
     <MeasuringMarketValueOfHomesInPortland />
     <AffordabilityInAComplexHousingMarket />
     <ExploreHousingPolicyImplementation />
-  </div>
+  </PageLayout>
 );
 
 App.displayName = 'App';

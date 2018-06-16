@@ -89,7 +89,7 @@ class Header extends Component {
     const { children, menu, title, overlay, mainProjectColor } = this.props;
     return (
       <div className={overlay ? overlayContainerClass : containerClass}>
-        <nav className={overlay ? overlayHeaderClass : headerClass} style={{ backgroundColor: mainProjectColor }}>
+        <nav className={overlay ? overlayHeaderClass : headerClass} style={{ backgroundColor: mainProjectColor || primaryColor }}>
           <div className={logoClass}>
             <Link className={logoLinkClass} to="/"><Logo alt={title} /></Link>
           </div>

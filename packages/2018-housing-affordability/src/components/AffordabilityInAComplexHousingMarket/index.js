@@ -9,12 +9,17 @@ export class AffordabilityInAComplexHousingMarket extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="The Challenge of Affordability in a Complex Housing Market">
+      <CivicStoryCard
+        title="The Challenge of Affordability in a Complex Housing Market"
+        slug="affordability-in-a-complex-housing-market"
+      >
         <Placeholder issue="212" />
       </CivicStoryCard>
     );
   }
 }
+
+AffordabilityInAComplexHousingMarket.displayName = 'AffordabilityInAComplexHousingMarket';
 
 // Connect this to the redux store when necessary
 export default AffordabilityInAComplexHousingMarket;

@@ -9,12 +9,17 @@ export class IncreasingSocialCapital extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Increasing Social Capital Leads to Increased Resilience">
+      <CivicStoryCard
+        title="Increasing Social Capital Leads to Increased Resilience"
+        slug="increasing-social-capital"
+      >
         <Placeholder />
       </CivicStoryCard>
     );
   }
 }
+
+IncreasingSocialCapital.displayName = 'IncreasingSocialCapital';
 
 // Connect this to the redux store when necessary
 export default IncreasingSocialCapital;
