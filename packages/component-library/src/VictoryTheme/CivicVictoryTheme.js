@@ -9,14 +9,11 @@ const civicTertiary = "#EE495C";
 const civicSecondaryLighter = "AAA4AB";
 const civicSecondaryLightest = "F3F2F3";
 
-
-
 const civicCategoricalColor1 = "#DC4556";
 const civicCategoricalColor2 = "#19B7AA";
 const civicCategoricalColor3 = "#1E62BD";
 const civicCategoricalColor4 = "#721D7C";
 const civicCategoricalColor5 = "#FFB226";
-const civicCategoricalColor6 = "#DC4556";
 
 const colors = [
   civicCategoricalColor1,
@@ -24,7 +21,6 @@ const colors = [
   civicCategoricalColor3,
   civicCategoricalColor4,
   civicCategoricalColor5,
-  civicCategoricalColor6
 ];
 
 const yellow200 = "#FFF59D";
@@ -77,8 +73,13 @@ const baseLabelStyles = {
 
 const centeredLabelStyles = assign({ textAnchor: "middle" }, baseLabelStyles);
 
+const pieLabelStyles = {
+  fontFamily: sansSerif,
+  fontSize: '18px',
+}
+
 const axisLabelStyles = {
-  fontFamily: "'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif",
+  fontFamily: sansSerif,
   fontSize: '14px',
   fontWeight: 'bold',
 };
@@ -213,8 +214,8 @@ export default {
     style: {
       data: {
         padding,
-        stroke: blueGrey50,
-        strokeWidth: 1
+        stroke: "white",
+        strokeWidth: 2
       },
       labels: assign({}, baseLabelStyles, {
         padding: 20,
@@ -222,6 +223,9 @@ export default {
         strokeWidth: 0
       })
     }
+  }, baseProps),
+  pieLabel: assign({
+    style: pieLabelStyles,
   }, baseProps),
   scatter: assign({
     style: {
