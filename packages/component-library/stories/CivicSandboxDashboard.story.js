@@ -368,7 +368,7 @@ export default () => storiesOf(displayName, module)
           ];
 
           return (
-            <div style={{border: "2.5px solid crimson", position:"relative"}}>
+            <div style={{position:"relative"}}>
               <BaseMap
                 mapboxToken={mapboxToken}
                 mapboxStyle={mapboxStyle}
