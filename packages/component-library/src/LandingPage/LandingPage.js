@@ -85,7 +85,11 @@ const topBar = css`
 `;
 
 class LandingPage extends React.Component {
-  state = {};
+  state = {
+    city: 'Austin',
+    state: 'TX',
+    imgPath: 'austin',
+  };
 
   componentDidMount() {
     // Used to fade in the page
@@ -97,20 +101,26 @@ class LandingPage extends React.Component {
   }
 
   handleSearch = (input) => {
-    const zipResult = zipCodes[input];
-    const cityResult = cities[input];
-
-    if (zipResult) {
-      return this.setState({
-        city: zipResult.city,
-        state: zipResult.state,
-      });
-    }
+    const key = input ? input.toLowerCase() : '';
+    const cityResult = cities[key];
 
     if (cityResult) {
       return this.setState({
         city: cityResult.name,
         state: cityResult.state,
+        imgPath: cityResult.path,
+      });
+    }
+
+    const zipResult = zipCodes[key];
+
+    if (zipResult) {
+      const cityData = zipResult.city ? cities[zipResult.city.toLowerCase()] : {};
+
+      return this.setState({
+        city: cityData ? cityData.city : zipResult.city,
+        state: zipResult.state,
+        imgPath: cityData ? cityData.imgPath : 'portland',
       });
     }
 
@@ -118,13 +128,8 @@ class LandingPage extends React.Component {
   };
 
   render() {
-    const { city, state } = this.state;
-    const cityImageMap = {
-      Austin: 'austin',
-      'New York': 'new-york',
-      Seattle: 'seattle',
-    };
-    const cityPath = require(`../../assets/cities/${cityImageMap[city] || 'portland'}.png`); // eslint-disable-line global-require, import/no-dynamic-require
+    const { city, state, imgPath } = this.state;
+    const cityPath = require(`../../assets/cities/${imgPath || 'portland'}.png`);
 
     return (
       <div className={appWrapper} ref={(node) => { this.node = node; }}>

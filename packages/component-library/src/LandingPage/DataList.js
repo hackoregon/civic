@@ -62,8 +62,8 @@ const DataList = ({ city, state }) => {
     : 'We dont see any data in your area. View Portland data or contribute to your region here';
 
   const missingStates = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE'];
-  const fileName = state && !missingStates.includes(state) ? state : 'OR';
-  const statePath = require(`../../assets/state/${fileName}.svg`); // eslint-disable-line global-require, import/no-dynamic-require
+  const fileName = state && !missingStates.includes(state) ? `state/${state}` : 'local/local';
+  const statePath = require(`../../assets/${fileName}.svg`); // eslint-disable-line global-require, import/no-dynamic-require
 
   return (
     <div className={cardsWrapper}>
