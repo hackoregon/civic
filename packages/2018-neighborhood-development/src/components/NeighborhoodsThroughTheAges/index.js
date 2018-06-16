@@ -14,7 +14,6 @@ export class NeighborhoodsThroughTheAges extends React.Component {
         slug="neighborhoods-through-the-ages"
       >
         <Placeholder issue="192"/>
-        <Placeholder issue="201"/>
       </CivicStoryCard>
     );
   }
