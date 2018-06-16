@@ -31,8 +31,8 @@ export default () => storiesOf('Pie/Donut visualization', module).addDecorator(w
   'simple usage',
   // 'edit this visual in the knobs tab below and check click events in the actions tab',
   () => {
-    const sampleTitle = text('Subtitle', 'Sample Title');
-    const sampleSubtitle = text('Title', 'Sample Subtitle');
+    const sampleTitle = text('Title', 'Sample Title');
+    const sampleSubtitle = text('Subtitle', 'Sample Subtitle');
     const numberOfData = number('Amount of data values', 3);
     const getRandomColors = array('Array of colors', colors.slice(0, numberOfData));
     const values = getRandomValuesArray(numberOfData, objectRandomizer);

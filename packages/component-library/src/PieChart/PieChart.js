@@ -18,6 +18,8 @@ const PieChart = (props) => {
     dataLabel,
     innerRadius,
     halfDoughnut,
+    width,
+    height,
   } = props;
 
   const x = getOrElse(dataLabel, 'x');
@@ -28,6 +30,8 @@ const PieChart = (props) => {
   return (
     <ChartContainer title={title} subtitle={subtitle}>
       <VictoryPie
+        width={width}
+        height={height}
         data={data}
         innerRadius={innerRadius}
         colorScale={colors}
