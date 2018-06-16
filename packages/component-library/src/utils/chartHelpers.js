@@ -1,5 +1,7 @@
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
 
+const tooltipColor = CivicVictoryTheme.civic.tooltip.style.customHoverColor;
+
 const chartEvents = [
   {
     target: 'data',
@@ -8,7 +10,7 @@ const chartEvents = [
         return [
           {
             target: 'data',
-            mutation: () => ({ style: { fill: 'tomato', width: 40 } }),
+            mutation: () => ({ style: { fill: tooltipColor, width: 40 } }),
           }, {
             target: 'labels',
             mutation: () => ({ active: true }),
