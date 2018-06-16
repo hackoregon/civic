@@ -19,7 +19,7 @@ const CivicSandboxMap = (props) => {
   } = props;
 
   const renderMaps = mapLayers.map((layer, index) => {
-    return layer.data.mapType === "PathMap" ? (
+    return layer.data.mapType === 'PathMap' ? (
       <PathLayer
         key={index}
         id={layer.data.id}
@@ -34,11 +34,10 @@ const CivicSandboxMap = (props) => {
         rounded={layer.data.rounded}
         autoHighlight={layer.data.autoHighlight}
         highlightColor={layer.data.highlightColor}
-        onClick={layer.data.onClick}
         onHover={onHover}
         parameters={{depthTest: false}}
       />
-      ) : layer.data.mapType === "ScatterPlotMap" ? (
+      ) : layer.data.mapType === 'ScatterPlotMap' ? (
       <ScatterplotLayer
         key={index}
         id={layer.data.id}
@@ -49,14 +48,12 @@ const CivicSandboxMap = (props) => {
         getColor={layer.data.getColor}
         getRadius={layer.data.getRadius}
         radiusScale={layer.data.radiusScale}
-        radiusMinPixels={layer.data.radiusMinPixels}
         autoHighlight={layer.data.autoHighlight}
-        onClick={layer.data.onClick}
+        highlightColor={layer.data.highlightColor}
         onHover={onHover}
         parameters={{depthTest: false}}
-        highlightColor={layer.data.highlightColor}
       />
-      ) : layer.data.mapType === "IconMap" ? (
+      ) : layer.data.mapType === 'IconMap' ? (
       <IconLayer
         key={index}
         id={layer.data.id}
@@ -71,11 +68,11 @@ const CivicSandboxMap = (props) => {
         getSize={layer.data.getSize}
         getColor={layer.data.getColor}
         autoHighlight={layer.data.autoHighlight}
-        onClick={layer.data.onClick}
+        highlightColor={layer.data.highlightColor}
         onHover={onHover}
         updateTriggers={layer.data.updateTriggers}
       />
-      ) : layer.data.mapType === "ScreenGridMap" ? (
+      ) : layer.data.mapType === 'ScreenGridMap' ? (
       <ScreenGridLayer
         key={index}
         id={layer.data.id}
@@ -86,11 +83,30 @@ const CivicSandboxMap = (props) => {
         colorRange={layer.data.colorRange}
         cellSizePixels={layer.data.cellSizePixels}
         autoHighlight={layer.data.autoHighlight}
-        onClick={layer.data.onClick}
+        highlightColor={layer.data.highlightColor}
+        updateTriggers={{instanceColors: layer.data}}
       />
-      ) : layer.data.mapType === "ChoroplethMap" || 
-          layer.data.mapType === "PolygonPlotMap" || 
-          layer.data.mapType === "SmallPolygonMap" ? (
+      ) : layer.data.mapType === 'PolygonPlotMap' ||
+          layer.data.mapType === 'SmallPolygonMap' ? (
+      <PolygonLayer
+        key={index}
+        id={layer.data.id}
+        pickable={layer.data.pickable}
+        data={layer.data.data}
+        opacity={layer.data.opacity}
+        getPolygon={layer.data.getPolygon}
+        getLineColor={layer.data.getLineColor}
+        getLineWidth={layer.data.getLineWidth}
+        lineWidthMinPixels={1}
+        stroked={layer.data.stroked}
+        getFillColor={layer.data.getFillColor}
+        filled={layer.data.filled}
+        onHover={onHover}
+        autoHighlight={layer.data.autoHighlight}
+        highlightColor={layer.data.highlightColor}
+        parameters={{depthTest: false}}
+      />
+      ) : layer.data.mapType === 'ChoroplethMap' ? (
       <PolygonLayer
         key={index}
         id={layer.data.id}
@@ -109,6 +125,7 @@ const CivicSandboxMap = (props) => {
         autoHighlight={layer.data.autoHighlight}
         highlightColor={layer.data.highlightColor}
         parameters={{depthTest: false}}
+        updateTriggers={layer.data.updateTriggers}
       />
       ) : null;
   });
@@ -121,7 +138,7 @@ const CivicSandboxMap = (props) => {
     });
   });
 
-  const tooltipRender = tooltipInfo ? tooltip : null;
+  const renderTooltip = tooltipInfo ? tooltip : null;
 
   return (
     <div className={crosshair}>
@@ -130,7 +147,7 @@ const CivicSandboxMap = (props) => {
         {...viewport}
       >
         { renderMaps }
-        { tooltipRender }
+        { renderTooltip }
       </DeckGL>
     </div>
   );
