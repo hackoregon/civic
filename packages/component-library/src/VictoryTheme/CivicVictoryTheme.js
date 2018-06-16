@@ -140,7 +140,7 @@ export default {
   bar: assign({
     style: {
       data: {
-        fill: civicPrimary,
+        fill: civicTertiary,
         padding: horizontalBarPadding,
         stroke: "transparent",
         strokeWidth: 0,
