@@ -36,12 +36,12 @@ const MapTooltip = (props) => {
 
     return (
       <div key={i}>
-        {name + ': ' + d[1]}
+        {name + ': ' + d[1].toLocaleString()}
       </div>
     );
   });
 
-  return (
+  const tooltipWrapper = (
     <div
       className={tooltip}
       style={{
@@ -50,6 +50,14 @@ const MapTooltip = (props) => {
       }}
     >
       { tooltipContent }
+    </div>
+  );
+
+  const tooltipRender = keyValuePairs.length > 0 ? tooltipWrapper : null;
+
+  return (
+    <div>
+      { tooltipRender }
     </div>
   );
 };
