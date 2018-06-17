@@ -78,12 +78,13 @@ module.exports = function() {
   app.use('/', express.static(outputPath));
 
   // Redirect all other routes to index.html to let React handle routing client-side
-  app.get('/', (req, res) => console.log('Servicing request for', req.url) || res.send(`
+  app.get('/*', (req, res) => console.log('Servicing request for', req.url) || res.send(`
   <!DOCTYPE html>
   <html>
     <head>
       <title>Civic 2017 - A Hack Oregon Project</title>
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
       <meta charset="utf-8"/>
       <style>html, body { padding: 0; margin: 0; }</style>
       <!-- FontAwesome -->

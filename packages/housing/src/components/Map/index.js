@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { LeafletMap } from '@hackoregon/component-library';
 import { GeoJSON, LayerGroup } from 'react-leaflet';
 import Neighborhood from '../Neighborhood';

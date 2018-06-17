@@ -1,7 +1,7 @@
 # Contributing to Civic
 
 Hello! Whether you have met with the Hack Oregon organization or not, you are welcome to contribute to the Civic Platform!
-Bare in mind that this repo only encompasses the front-end web assets. There are many backend repos as well where data
+Bear in mind that this repo only encompasses the front-end web assets. There are many backend repos as well where data
 is cleaned, analyzed, converted into databases, and made available through APIs. See the whole landscape in the
 [Civic Platform Info repository](https://github.com/hackoregon/Civic-platform-info).
 
@@ -43,7 +43,7 @@ as imagined under a variety of inputs.
 ### What all is required from a component?
 
 We strive for [stateless](https://code.tutsplus.com/tutorials/stateful-vs-stateless-functional-components-in-react--cms-29541),
-resusable components that have been tested under a variety of conditions. These components are best for using as building blocks.
+reusable components that have been tested under a variety of conditions. These components are best for using as building blocks.
 
 ### Implementation
 

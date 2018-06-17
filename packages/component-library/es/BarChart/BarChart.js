@@ -1,86 +1,124 @@
-var _templateObject = _taggedTemplateLiteral(['\n  margin: 0 auto;\n  max-width: 900px;\n  width: 100%;\n'], ['\n  margin: 0 auto;\n  max-width: 900px;\n  width: 100%;\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  font-family: \'filson-soft\', sans-serif;\n  font-size: 40px;\n  font-weight: 500;\n  text-align: center;\n  margin: 40px 0 12px 0;\n'], ['\n  font-family: \'filson-soft\', sans-serif;\n  font-size: 40px;\n  font-weight: 500;\n  text-align: center;\n  margin: 40px 0 12px 0;\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n  display: block;\n  font-family: \'filson-soft\', sans-serif;\n  font-size: 18px;\n  text-align: center;\n'], ['\n  display: block;\n  font-family: \'filson-soft\', sans-serif;\n  font-size: 18px;\n  text-align: center;\n']);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import React, { PropTypes } from 'react';
-import { VictoryAxis, VictoryBar, VictoryChart } from 'victory';
+import { VictoryAxis, VictoryBar, VictoryChart, VictoryLabel, VictoryPortal, VictoryTooltip } from 'victory';
 
+import ChartContainer from '../ChartContainer';
+import { numeric, year } from '../utils/formatters';
 import { assign } from "lodash";
 import { css } from 'emotion';
+import { chartEvents, getDefaultDomain } from '../utils/chartHelpers';
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
-
-var barchartWrapper = css(_templateObject);
-
-var titleStyle = css(_templateObject2);
-
-var subtitleStyle = css(_templateObject3);
 
 var BarChart = function BarChart(_ref) {
   var data = _ref.data,
       dataKey = _ref.dataKey,
       dataValue = _ref.dataValue,
-      dataKeyLabel = _ref.dataKeyLabel,
+      domain = _ref.domain,
       title = _ref.title,
-      subtitle = _ref.subtitle;
-  return React.createElement(
-    'div',
-    null,
-    title ? React.createElement(
-      'h3',
-      { className: titleStyle },
-      title
-    ) : null,
-    subtitle ? React.createElement(
-      'span',
-      { className: subtitleStyle },
-      subtitle
-    ) : null,
-    React.createElement(
-      'div',
-      { className: barchartWrapper },
-      React.createElement(
-        VictoryChart,
-        {
-          domainPadding: 20,
-          animate: { duration: 300 },
-          theme: CivicVictoryTheme.civic
-        },
-        React.createElement(VictoryAxis, {
-          tickValues: data.map(function (a) {
-            return a[dataKey];
-          }),
-          tickFormat: data.map(function (a) {
-            return a[dataKeyLabel];
-          })
-        }),
-        React.createElement(VictoryAxis, {
-          dependentAxis: true,
+      subtitle = _ref.subtitle,
+      xLabel = _ref.xLabel,
+      yLabel = _ref.yLabel,
+      xNumberFormatter = _ref.xNumberFormatter,
+      yNumberFormatter = _ref.yNumberFormatter;
 
-          tickFormat: function tickFormat(x) {
-            return '$' + x / 1000 + 'k';
-          }
-        }),
-        React.createElement(VictoryBar, {
-          data: data.map(function (a) {
-            return { dataKey: a[dataKey], dataValue: a[dataValue] };
-          }),
-          x: 'dataKey',
-          y: 'dataValue'
+  var chartDomain = domain || getDefaultDomain(data, dataKey, dataValue);
+
+  return React.createElement(
+    ChartContainer,
+    { title: title, subtitle: subtitle },
+    React.createElement(
+      VictoryChart,
+      {
+        padding: { left: 90, right: 50, bottom: 50, top: 50 },
+        domainPadding: { x: [40, 40], y: [0, 0] },
+        animate: { duration: 200 },
+        theme: CivicVictoryTheme.civic,
+        domain: chartDomain
+      },
+      React.createElement(VictoryAxis, {
+        tickFormat: xNumberFormatter,
+        title: 'X Axis'
+      }),
+      React.createElement(VictoryAxis, {
+        dependentAxis: true,
+        tickFormat: yNumberFormatter,
+        title: 'Y Axis'
+      }),
+      React.createElement(
+        VictoryPortal,
+        null,
+        React.createElement(VictoryLabel, {
+          style: _extends({}, CivicVictoryTheme.civic.axisLabel.style),
+          text: yLabel,
+          textAnchor: 'middle',
+          title: 'Y Axis Label',
+          verticalAnchor: 'end',
+          x: 85,
+          y: 45
         })
-      )
+      ),
+      React.createElement(
+        VictoryPortal,
+        null,
+        React.createElement(VictoryLabel, {
+          style: _extends({}, CivicVictoryTheme.civic.axisLabel.style),
+          text: xLabel,
+          textAnchor: 'end',
+          title: 'X Axis Label',
+          verticalAnchor: 'end',
+          x: 600,
+          y: 295
+        })
+      ),
+      React.createElement(VictoryBar, {
+        alignment: 'middle',
+        labelComponent: React.createElement(VictoryTooltip, {
+          x: 325,
+          y: 0,
+          orientation: 'bottom',
+          pointerLength: 0,
+          cornerRadius: 0,
+          theme: CivicVictoryTheme.civic
+        }),
+        data: data.map(function (d) {
+          return { dataKey: d[dataKey], dataValue: d[dataValue], label: xLabel + ': ' + xNumberFormatter(d[dataKey]) + ' \u2022 ' + yLabel + ': ' + yNumberFormatter(d[dataValue]) };
+        }),
+        events: chartEvents,
+        x: 'dataKey',
+        y: 'dataValue',
+        title: 'Bar Chart'
+      })
     )
   );
 };
 
 BarChart.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
-  dataKey: PropTypes.string.isRequired,
-  dataValue: PropTypes.string.isRequired,
-  dataKeyLabel: PropTypes.string,
+  data: PropTypes.arrayOf(PropTypes.object),
+  dataKey: PropTypes.string,
+  dataValue: PropTypes.string,
+  domain: PropTypes.objectOf(PropTypes.array),
   title: PropTypes.string,
-  subtitle: PropTypes.string
+  subtitle: PropTypes.string,
+  xLabel: PropTypes.string,
+  yLabel: PropTypes.string,
+  xNumberFormatter: PropTypes.func,
+  yNumberFormatter: PropTypes.func
+};
+
+BarChart.defaultProps = {
+  data: null,
+  dataKey: 'x',
+  dataValue: 'y',
+  domain: null,
+  title: null,
+  subtitle: null,
+  xLabel: "X",
+  yLabel: "Y",
+  xNumberFormatter: year,
+  yNumberFormatter: numeric
 };
 
 export default BarChart;

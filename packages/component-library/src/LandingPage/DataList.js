@@ -35,13 +35,12 @@ const cardTextWrapper = css`
   display: inline-block;
   position: relative;
   vertical-align: top;
+  width: 50%;
 `;
 const eyebrowStyle = css`
   display: block;
   font-family: 'Rubik';
-  font-size: 16px;
-  font-style: italic;
-  text-transform: uppercase;
+  font-size: 14px;
   color: #EE495C;
 `;
 const locationTitle = css`
@@ -50,6 +49,7 @@ const locationTitle = css`
   font-size: 18px;
   color: white;
 `;
+
 const iconWrapper = css`
   display: inline-block;
   width: 100px;
@@ -57,15 +57,32 @@ const iconWrapper = css`
   margin-right: 24px;
   text-align: center;
 `;
+const locationResult = css`
+  color: white;
+  font-family: 'Rubik',sans-serif;
+  font-size: 14px;
+  width: 180px;
+`;
+const whyStyle = css`
+  color: #ef495c;
+
+  a {
+    border: none;
+    text-decoration: none;
+
+    :hover {
+      text-decoration: underline;
+    }
+  }
+`;
 
 const DataList = ({ city, state }) => {
-  const ctaMessage = city === 'Portland'
-    ? 'Looks like we have data in your area. Click on a collection to get started ↑'
-    : 'We dont see any data in your area. View Portland data or contribute to your region here';
-
   const missingStates = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE'];
   const fileName = state && !missingStates.includes(state) ? `state/${state}` : 'local/local';
   const statePath = require(`../../assets/${fileName}.svg`); // eslint-disable-line global-require, import/no-dynamic-require
+  const cityResult = city === 'Portland'
+    ? 'Portland'
+    : <span>{`There's no CIVIC data for ${city} yet!`} <span className={whyStyle}><a href="#aboutCivic">Why?</a></span></span>;
 
   return (
     <div className={cardsWrapper}>
@@ -93,12 +110,11 @@ const DataList = ({ city, state }) => {
         </div>
         <div className={cardTextWrapper}>
           <span className={eyebrowStyle}>Local</span>
-          <div className={locationTitle}>{ city || '?' }</div>
+          <div className={locationTitle}>
+            <div className={locationResult}>{cityResult}</div>
+          </div>
         </div>
       </div>
-      { city &&
-        <div>{ ctaMessage }</div>
-      }
     </div>
   );
 };

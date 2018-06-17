@@ -1,5 +1,11 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import DeckGL, { ScatterplotLayer } from 'deck.gl';
+import { css } from 'emotion';
+
+const crosshair = css`
+  cursor: crosshair;
+`;
 
 const ScatterPlotMap = (props) => {
   const {
@@ -14,10 +20,26 @@ const ScatterPlotMap = (props) => {
     strokeWidth,
     autoHighlight,
     onLayerClick,
+    visible,
+    tooltipInfo,
+    x,
+    y,
+    onHover,
+    children,
   } = props;
 
+  const tooltip = React.Children.map(children, child => {
+    return React.cloneElement(child, {
+      tooltipInfo: tooltipInfo,
+      x: x,
+      y: y,
+    });
+  });
+
+  const tooltipRender = tooltipInfo ? tooltip : null;
+
   return (
-    <div>
+    <div className={crosshair}>
       <DeckGL
         className={'DeckGL'}
         {...viewport}
@@ -33,13 +55,16 @@ const ScatterPlotMap = (props) => {
           getRadius={getRadius}
           radiusScale={radiusScale}
           radiusMinPixels={1}
-          radiusMaxPixels={500}
           outline={outline}
           strokeWidth={strokeWidth}
           autoHighlight={autoHighlight}
           onClick={onLayerClick}
           parameters={{depthTest: false}}
+          visible={visible}
+          updateTriggers={{instanceColors: getColor}}
+          onHover={onHover}
         />
+        { tooltipRender }
       </DeckGL>
     </div>
   );
@@ -57,6 +82,12 @@ ScatterPlotMap.propTypes = {
   strokeWidth: PropTypes.number,
   autoHighlight: PropTypes.bool,
   onLayerClick: PropTypes.func,
+  visible: PropTypes.bool,
+  tooltipInfo: PropTypes.object,
+  x: PropTypes.number,
+  y: PropTypes.number,
+  onHover: PropTypes.func,
+  children: PropTypes.node,
 };
 
 ScatterPlotMap.defaultProps = {
@@ -67,6 +98,7 @@ ScatterPlotMap.defaultProps = {
   radiusScale: 1,
   outline: false,
   strokeWidth: 1,
+  visible: true,
 };
 
 export default ScatterPlotMap;

@@ -1,10 +1,11 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { css } from 'emotion';
 import Nav from './Nav';
 import Logo from '../Logo/LogoAnimated';
 import Icon from '../Icon/Icon';
 import { ICONS } from '../styleConstants';
+import PropTypes from 'prop-types';
 
 const primaryColor = 'rgb(34, 15, 37)';
 
@@ -28,7 +29,7 @@ const headerClass = css`
   width: 100%;
   min-width: 320px;
   margin: 0 auto;
-  padding: 1rem 0;
+  padding: 0;
 `;
 
 const overlayHeaderClass = css`
@@ -52,7 +53,7 @@ const navClass = css`
 `;
 
 const logoClass = css`
-  margin: 1rem 0 0 2rem;
+  margin: 12px 24px;
   flex: 2;
 `;
 
@@ -88,7 +89,7 @@ class Header extends Component {
     const { children, menu, title, overlay, mainProjectColor } = this.props;
     return (
       <div className={overlay ? overlayContainerClass : containerClass}>
-        <nav className={overlay ? overlayHeaderClass : headerClass} style={{ backgroundColor: mainProjectColor }}>
+        <nav className={overlay ? overlayHeaderClass : headerClass} style={{ backgroundColor: mainProjectColor || primaryColor }}>
           <div className={logoClass}>
             <Link className={logoLinkClass} to="/"><Logo alt={title} /></Link>
           </div>

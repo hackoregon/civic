@@ -1,6 +1,7 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import MapGL, { NavigationControl } from 'react-map-gl';
 import { css } from 'emotion';
+import PropTypes from 'prop-types';
 import './mapbox-gl.css';
 
 const mapWrapper = css`
@@ -29,9 +30,13 @@ export default class BaseMap extends Component {
         pitch: props.initialPitch || 0,
         bearing: 0,
       },
+      tooltipInfo: null,
+      x: null,
+      y: null,
     };
     this.onViewportChange = this.onViewportChange.bind(this);
     this.resize = this.resize.bind(this);
+    this.onHover = this.onHover.bind(this);
   }
 
   componentDidMount() {
@@ -56,8 +61,21 @@ export default class BaseMap extends Component {
     });
   }
 
+  onHover({object, x, y}) {
+    this.setState({
+      tooltipInfo: object,
+      x,
+      y,
+    });
+  }
+
   render() {
-    const { viewport } = this.state;
+    const {
+      viewport,
+      tooltipInfo,
+      x,
+      y,
+    } = this.state;
 
     const {
       mapboxStyle,
@@ -67,7 +85,11 @@ export default class BaseMap extends Component {
 
     const childrenLayers = React.Children.map(children, child => {
       return React.cloneElement(child, {
-        viewport: viewport,
+        viewport,
+        tooltipInfo,
+        x,
+        y,
+        onHover: info => this.onHover(info),
       });
     });
 

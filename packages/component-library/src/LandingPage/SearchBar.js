@@ -10,16 +10,21 @@ const searchForm = css`
 `;
 const searchInput = css`
   width: 100%;
-  padding: 6px 0px;
+  padding: 12px 16px;
   border: none;
-  border-bottom: 1px solid white;
-  background-color: #250f28;
-  font-size: 24px;
-  color: white;
+  background-color: #ffffff;
+  font-size: 15px;
+  letter-spacing: 0;
+  color: #001832;
   box-sizing: border-box;
+  font-weight: 500;
 
   ::placeholder {
-    color: #ffffffa1;
+    color: #001732;
+  }
+
+  @media (max-width: 850px) {
+    font-size: 16px;
   }
 `;
 

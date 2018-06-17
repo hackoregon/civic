@@ -1,5 +1,7 @@
-import React, { PropTypes } from 'react';
-import { VictoryPie } from 'victory';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { VictoryPie, VictoryLabel } from 'victory';
+import ChartContainer from '../ChartContainer';
 import civicTheme from '../VictoryTheme/CivicVictoryTheme.js';
 
 const getOrElse = (possibleValue, defaultValue) => (
@@ -8,50 +10,55 @@ const getOrElse = (possibleValue, defaultValue) => (
 
 const PieChart = (props) => {
   const {
+    title,
+    subtitle,
     colors,
     data,
-    labelKey,
-    dataKey,
+    dataValue,
+    dataLabel,
     innerRadius,
-  } = props;
-
-  const height = getOrElse(props.height, '100vh');
-  const width = getOrElse(props.width, '100vw');
-  const x = getOrElse(labelKey, 'x');
-  const y = getOrElse(dataKey, 'y');
-
-  const containerStyle = {
+    halfDoughnut,
     width,
     height,
-  };
+  } = props;
+
+  const x = getOrElse(dataLabel, 'x');
+  const y = getOrElse(dataValue, 'y');
+  const startAngle = halfDoughnut ? -90 : 0;
+  const endAngle = halfDoughnut ? 90 : 360;
 
   return (
-    <div className="pie-chart-container" style={containerStyle}>
+    <ChartContainer title={title} subtitle={subtitle}>
       <VictoryPie
+        width={width}
+        height={height}
         data={data}
         innerRadius={innerRadius}
         colorScale={colors}
         theme={civicTheme}
         animate={{
-          duration: 1000
+          duration: 1000,
         }}
         x={x}
         y={y}
+        startAngle={startAngle}
+        endAngle={endAngle}
+        labelComponent={<VictoryLabel style={{ ...civicTheme.pieLabel.style }} />}
       />
-    </div>
-  )
+    </ChartContainer>
+  );
 };
 
 PieChart.defaultProps = {
-  height: '100vh',
-  width: '100vw',
 };
 
 PieChart.propTypes = {
+  title: PropTypes.string,
+  subtitle: PropTypes.string,
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
   innerRadius: PropTypes.number,
-  colorScale: PropTypes.array,
-  height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  colors: PropTypes.arrayOf(PropTypes.string),
+  halfDoughnut: PropTypes.boolean,
 };
 
 export default PieChart;

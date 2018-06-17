@@ -22,8 +22,9 @@ app.get('/*', (req, res) => console.log('Servicing request for', req.url) || res
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Civic 2017 - A Hack Oregon Project</title>
+    <title>Civic 2018 - A Hack Oregon Project</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta charset="utf-8"/>
     <style>html, body { padding: 0; margin: 0; }</style>
     <!-- FontAwesome -->

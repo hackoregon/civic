@@ -1,90 +1,126 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
   VictoryAxis,
   VictoryBar,
   VictoryChart,
+  VictoryLabel,
+  VictoryPortal,
   VictoryTooltip,
 } from 'victory';
 
 import ChartContainer from '../ChartContainer';
 import { dollars, numeric } from '../utils/formatters';
+import { chartEvents } from '../utils/chartHelpers';
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
 
-const chartEvents = [
-  {
-    target: 'data',
-    eventHandlers: {
-      onMouseOver: () => {
-        return [
-          {
-            target: 'data',
-            mutation: () => ({ style: { fill: 'tomato', width: 40 } }),
-          }, {
-            target: 'labels',
-            mutation: () => ({ active: true }),
-          },
-        ];
-      },
-      onMouseOut: () => {
-        return [
-          {
-            target: 'data',
-            mutation: () => { },
-          }, {
-            target: 'labels',
-            mutation: () => ({ active: false }),
-          },
-        ];
-      },
-    },
-  },
-];
+const HorizontalBarChart = ({ data, sortOrder, dataValue, dataLabel, domain, title, subtitle, xLabel, yLabel, xNumberFormatter }) => {
 
-const HorizontalBarChart = ({ data, dataKey, dataValue, dataKeyLabel, title, subtitle }) =>
-  <ChartContainer title={title} subtitle={subtitle}>
-    <VictoryChart
-      padding={{ left: 115, right: 50, bottom: 50, top: 50 }}
-      domainPadding={20}
-      animate={{ duration: 300 }}
-      theme={CivicVictoryTheme.civic}
-    >
-      <VictoryAxis
-        dependentAxis
-        // tickValues specifies both the number of ticks and where
-        // they are placed on the axis
-        tickValues={data.map(a => a[dataKey])}
-        tickFormat={data.map(a => a[dataKeyLabel])}
-      />
-      <VictoryAxis
-        // tickFormat specifies how ticks should be displayed
-        tickFormat={x => dollars(numeric(x))}
-      />
-      <VictoryBar
-        horizontal
-        labelComponent={
-          <VictoryTooltip
-            x={325}
-            y={0}
-            orientation="bottom"
-            pointerLength={0}
-            cornerRadius={0}
+  const barData =
+    sortOrder && sortOrder.length
+      ? data
+      : data.map((d, index) => {
+        return { ...d, defaultSort: index + 1 };
+      });
+
+  const sortOrderKey =
+    sortOrder && sortOrder.length
+      ? sortOrder
+      : 'defaultSort';
+
+  return (
+    <ChartContainer title={title} subtitle={subtitle}>
+      <VictoryChart
+        domain={domain}
+        padding={{ left: 115, right: 50, bottom: 50, top: 70 }}
+        domainPadding={0}
+        theme={CivicVictoryTheme.civic}
+      >
+        <VictoryAxis
+          dependentAxis
+          // tickValues specifies both the number of ticks and where
+          // they are placed on the axis
+          tickValues={barData.map(a => a[sortOrderKey])}
+          tickFormat={barData.map(a => a[dataLabel])}
+          title="Y Axis"
+        />
+        <VictoryAxis
+          // tickFormat specifies how ticks should be displayed
+          orientation="top"
+          tickFormat={xNumberFormatter}
+          title="X Axis"
+        />
+        <VictoryPortal>
+          <VictoryLabel
+            style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
+            text={yLabel}
+            textAnchor="middle"
+            title="Y Axis Label"
+            verticalAnchor="end"
+            x={50}
+            y={65}
           />
-        }
-        data={data.map(a => ({ dataKey: a[dataKey], dataValue: a[dataValue], label: `${a[dataKeyLabel]}: ${numeric(a[dataValue])}` }))}
-        x="dataKey"
-        y="dataValue"
-        events={chartEvents}
-      />
-    </VictoryChart>
-  </ChartContainer>;
+        </VictoryPortal>
+        <VictoryPortal>
+          <VictoryLabel
+            style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
+            text={xLabel}
+            textAnchor="end"
+            title="X Axis Label"
+            verticalAnchor="end"
+            x={600}
+            y={85}
+          />
+        </VictoryPortal>
+        <VictoryBar
+          horizontal
+          labelComponent={
+            <VictoryTooltip
+              x={325}
+              y={0}
+              orientation="bottom"
+              pointerLength={0}
+              cornerRadius={0}
+              theme={CivicVictoryTheme.civic}
+            />
+          }
+          data={barData.map(d => ({ sortOrder: d[sortOrderKey], dataValue: d[dataValue], label: `${d[dataLabel]}: ${xNumberFormatter(d[dataValue])}` }))}
+          title="Horizontal Bar Chart"
+          x="sortOrder"
+          y="dataValue"
+          events={chartEvents}
+        />
+      </VictoryChart>
+    </ChartContainer>
+  );
+};
 
 HorizontalBarChart.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
-  dataKey: PropTypes.string.isRequired,
-  dataValue: PropTypes.string.isRequired,
-  dataKeyLabel: PropTypes.string,
+  data: PropTypes.arrayOf(
+    PropTypes.shape({ x: PropTypes.number, y: PropTypes.number }),
+  ),
+  sortOrder: PropTypes.string,
+  dataValue: PropTypes.string,
+  dataLabel: PropTypes.string,
+  domain: PropTypes.objectOf(PropTypes.array),
   title: PropTypes.string,
   subtitle: PropTypes.string,
+  xLabel: PropTypes.string,
+  yLabel: PropTypes.string,
+  xNumberFormatter: PropTypes.func,
+};
+
+HorizontalBarChart.defaultProps = {
+  data: null,
+  sortOrder: null,
+  dataValue: 'x',
+  dataLabel: 'y',
+  domain: null,
+  title: null,
+  subtitle: null,
+  xLabel: "X",
+  yLabel: "Y",
+  xNumberFormatter: numeric,
 };
 
 export default HorizontalBarChart;

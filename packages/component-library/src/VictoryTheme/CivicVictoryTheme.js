@@ -3,20 +3,32 @@ import { assign } from "lodash";
 // *
 // * Colors
 // *
+const civicPrimary = "#201024";
+const civicSecondary = "#706371";
+const civicTertiary = "#EE495C";
+const civicSecondaryLighter = "AAA4AB";
+const civicSecondaryLightest = "F3F2F3";
+
+const civicCategoricalColor1 = "#DC4556";
+const civicCategoricalColor2 = "#19B7AA";
+const civicCategoricalColor3 = "#1E62BD";
+const civicCategoricalColor4 = "#721D7C";
+const civicCategoricalColor5 = "#FFB226";
+
+const colors = [
+  civicCategoricalColor1,
+  civicCategoricalColor2,
+  civicCategoricalColor3,
+  civicCategoricalColor4,
+  civicCategoricalColor5,
+];
+
 const yellow200 = "#FFF59D";
 const deepOrange600 = "#F4511E";
 const lime300 = "#DCE775";
 const lightGreen500 = "#8BC34A";
 const teal700 = "#00796B";
 const cyan900 = "#006064";
-const colors = [
-  deepOrange600,
-  yellow200,
-  lime300,
-  lightGreen500,
-  teal700,
-  cyan900
-];
 const blueGrey50 = "#ECEFF1";
 const blueGrey300 = "#90A4AE";
 const blueGrey700 = "#455A64";
@@ -28,6 +40,7 @@ const black = "#000000"
 const sansSerif = "'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif";
 const letterSpacing = "normal";
 const fontSize = 12;
+const fontWeight = "normal";
 // *
 // * Layout
 // *
@@ -35,7 +48,16 @@ const padding = 8;
 const baseProps = {
   width: 650,
   height: 350,
-  padding: 50
+  padding: 50,
+  domainPadding: 20,
+  animate: 100,
+};
+const tooltipProps = {
+  x: 325,
+  y: 0,
+  orientation: "bottom",
+  pointerLength: 0,
+  cornerRadius: 0
 };
 // *
 // * Labels
@@ -43,12 +65,25 @@ const baseProps = {
 const baseLabelStyles = {
   fontFamily: sansSerif,
   fontSize,
+  fontWeight,
   letterSpacing,
   padding,
-  fill: black
+  fill: black,
 };
 
 const centeredLabelStyles = assign({ textAnchor: "middle" }, baseLabelStyles);
+
+const pieLabelStyles = {
+  fontFamily: sansSerif,
+  fontSize: '18px',
+}
+
+const axisLabelStyles = {
+  fontFamily: sansSerif,
+  fontSize: '14px',
+  fontWeight: 'bold',
+};
+
 // *
 // * Strokes
 // *
@@ -100,6 +135,10 @@ export default {
       })
     }
   }, baseProps),
+  axisLabel: assign({
+    style: axisLabelStyles
+  }
+  , baseProps),
   bar: assign({
     style: {
       data: {
@@ -142,6 +181,19 @@ export default {
   group: assign({
     colorScale: colors
   }, baseProps),
+  legend: {
+    colorScale: colors,
+    gutter: 10,
+    orientation: 'vertical',
+    titleOrientation: 'top',
+    style: {
+      data: {
+        type: 'circle',
+      },
+      labels: baseLabelStyles,
+      title: assign({}, baseLabelStyles, { padding: 5 }),
+    },
+  },
   line: assign({
     style: {
       data: {
@@ -162,8 +214,8 @@ export default {
     style: {
       data: {
         padding,
-        stroke: blueGrey50,
-        strokeWidth: 1
+        stroke: "white",
+        strokeWidth: 2
       },
       labels: assign({}, baseLabelStyles, {
         padding: 20,
@@ -171,6 +223,9 @@ export default {
         strokeWidth: 0
       })
     }
+  }, baseProps),
+  pieLabel: assign({
+    style: pieLabelStyles,
   }, baseProps),
   scatter: assign({
     style: {
@@ -196,17 +251,17 @@ export default {
         strokeWidth: 0
       },
       labels: centeredLabelStyles,
-      flyout: {
-        stroke: blueGrey700,
-        strokeWidth: 1,
-        fill: "#f0f0f0"
-      }
+    },
+    flyoutStyle: {
+      stroke: "transparent",
+      strokeWidth: 1,
+      fill: civicSecondaryLightest,
     },
     flyoutProps: {
       cornerRadius: 10,
       pointerLength: 10
     }
-  }, baseProps),
+  }, tooltipProps),
   voronoi: assign({
     style: {
       data: {

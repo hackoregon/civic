@@ -5,9 +5,9 @@ const heroClass = css`
   display: flex;
   background: rgb(34, 15, 37);
   height: 75vh;
-  min-height: 420px;
+  min-height: 600px;
   width: 100%;
-  margin: 0;
+  margin: 0 0 120px;
   padding: 0;
   background-size: cover;
   background-position: center center;
@@ -31,13 +31,7 @@ const contentClass = css`
   padding-top: 0px;
   display: flex;
   align-items: center;
-
-  & > h1 {
-    font-size: 3em;
-    line-height: 1.25em;
-    color: #FFF;
-    font-weight: 100;
-  }
+  color: #fff;
 `;
 
 const DefaultChildren = () => (

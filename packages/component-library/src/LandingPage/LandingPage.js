@@ -1,5 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
+import { Link } from 'react-router';
 
 import CanvasParticles from './CanvasParticles';
 import DataList from './DataList';
@@ -35,6 +36,7 @@ const missionStatementTitle = css`
   font-family: 'Rubik', sans-serif;
   text-align: left;
   font-size: 50px;
+  line-height: 1.2;
   width: 100%;
   letter-spacing: -2px;
   margin: 0;
@@ -44,9 +46,14 @@ const missionStatement = css`
   line-height: 1.8;
   font-family: "Rubik",sans-serif;
   width: 100%;
-  margin: 40px 0 60px;
+  margin: 25px 0;
   max-width: 1000px;
   text-align: left;
+  color: #001732;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
 `;
 const appWrapper = css`
   background-color: #f3f1f3;
@@ -67,9 +74,30 @@ const lookupWrapper = css`
   top: 0;
   right: 9%;
   box-shadow: 14px 30px 60px 9px #0f18287a;
-  border-top: 15px;
-  border-top-style: solid;
-  border-top-color: #EE495C;
+
+  ::before {
+    content: '';
+    width: 100%;
+    border-bottom: solid 8px #ef495c;
+    position: absolute;
+    left: 0;
+    top: 0px;
+    z-index: 1;
+  }
+
+  @media (max-width: 1024px) {
+    max-width: 270px;
+    right: 6%;
+  }
+
+  @media (max-width: 850px) {
+    position: relative;
+    max-width: none;
+    width: 100%;
+    top: 0;
+    right: 0;
+    box-sizing: border-box;
+  }
 `;
 const collectionsLink = css`
   display: block;
@@ -79,6 +107,17 @@ const collectionsLink = css`
   top: 70px;
   right: 9%;
   margin: 0;
+
+  a {
+    color: #240f27;
+    text-decoration: none;
+    border-bottom: none;
+    :hover {
+      color: #240f27;
+      text-decoration: underline;
+    }
+  }
+
 `;
 const leftContainer = css`
   display: block;
@@ -86,6 +125,11 @@ const leftContainer = css`
   position: relative;
   padding-left: 70px;
   width: 50%;
+
+  @media (max-width: 850px) {
+    width: 100%;
+    padding: 0 36px;
+  }
 `;
 const topBar = css`
   position: relative;
@@ -93,12 +137,47 @@ const topBar = css`
   height: 25px;
   background-color: #240f27;
 `;
+const ctaStyle = css`
+  color: #ed485b;
+  font-family: 'Rubik';
+  font-size: 18px;
+  font-style: italic;
+
+  a {
+    text-decoration: none;
+    border: none;
+
+    :hover {
+      text-decoration: underline;
+    }
+  }
+`;
+const aboutCivicWrapper = css`
+  background-color: #240f27;
+  margin-top: 120px;
+  height: 90vh;
+  color: white;
+`;
+const aboutTitle = css`
+  color: white;
+  font-family: 'Rubik',sans-serif;
+  font-size: 40px;
+  text-align: center;
+  padding: 100px 0;
+  display: block;
+  position: relative;
+  box-sizing: border-box;
+`;
+
+const citySkyline = css`
+  margin-top: 20px;
+`;
 
 class LandingPage extends React.Component {
   state = {
-    city: 'Austin',
-    state: 'TX',
-    imgPath: 'austin',
+    city: 'Portland',
+    state: 'OR',
+    imgPath: 'portland',
   };
 
   componentDidMount() {
@@ -126,9 +205,8 @@ class LandingPage extends React.Component {
 
     if (zipResult) {
       const cityData = zipResult.city ? cities[zipResult.city.toLowerCase()] : {};
-
       return this.setState({
-        city: cityData ? cityData.city : zipResult.city,
+        city: cityData ? cityData.name : zipResult.city,
         state: zipResult.state,
         imgPath: cityData ? cityData.imgPath : 'portland',
       });
@@ -150,24 +228,24 @@ class LandingPage extends React.Component {
             <div className={logoWrapper}>
               <img src={logo} />
             </div>
-            <div className={missionStatementTitle}>Making Data Human</div>
-            <div className={missionStatement}>
-              CIVIC is a platform to empower data in a way that’s fundementally built
-              to serve people. We’re reimagining how to make information actionable
-              through visual models, open standards, and creative frameworks that harness
-              human collaboration at scale.
-            </div>
-            <img src={cityPath} width="100%" />
+            <div className={missionStatementTitle}>{'Making Data Human'}</div>
+            <p className={missionStatement}>{`CIVIC is a powerful open platform using data in way that’s fundamentally built to serve people.`}</p>
+            <p className={missionStatement}>{`We’re reimagining how to make information actionable through visual models, open standards, and creative frameworks that harness human collaboration at scale.`}</p>
+            <div className={ctaStyle}><a href="#aboutCivic">Get started with your city &rsaquo;</a></div>
+            <div className={citySkyline}><img src={ cityPath} width="100%" /></div>
           </div>
           <div className={collectionsLink}>
-            View all Collections &rsaquo;
+            <Link to="/cities/portland">View all Collections &rsaquo;</Link>
           </div>
 
           <div className={lookupWrapper}>
-            <h2 className={searchTitle}>Explore CIVIC Stories</h2>
-            <h3 className={searchSubTitle}>Discover data near you</h3>
+            <div className={searchTitle}><strong>Explore CIVIC stories</strong></div>
+            <div className={searchSubTitle}><em>Discover data near you.</em></div>
             <SearchBar handleSubmit={this.handleSearch} />
             <DataList city={city} state={state} />
+          </div>
+          <div className={aboutCivicWrapper} id="aboutCivic">
+            <div className={aboutTitle}>Under Construction ⚠️</div>
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { PieChart, Pie, ResponsiveContainer, Text, Cell, Legend } from 'recharts';
 
 class ArcPieChart extends React.Component {

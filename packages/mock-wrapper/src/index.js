@@ -1,4 +1,4 @@
-import { hot } from 'react-hot-loader';
+// import { hot } from 'react-hot-loader';
 import React from 'react';
 import { render } from 'react-dom';
 import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import { createLogger } from 'redux-logger';
 
-export default function MockWrapper(App, Reducers, Routes) {
+export default function MockWrapper(App, Reducers, Routes = () => []) {
   const middlewares = [
     thunk,
     routerMiddleware(browserHistory),
@@ -50,7 +50,7 @@ export default function MockWrapper(App, Reducers, Routes) {
     </Provider>
   );
 
-  const HotWrapper = hot(module)(Wrapper);
+  // const HotWrapper = hot(module)(Wrapper);
 
-  render(<HotWrapper />, document.getElementById('content'));
+  render(<Wrapper />, document.getElementById('content'));
 };
