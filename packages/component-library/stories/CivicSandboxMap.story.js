@@ -13,13 +13,7 @@ class LoadData extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      foundation1: null,
-      foundation2: null,
-      foundation3: null,
-      slide1: null,
-      slide2: null,
-      slide3: null,
-      slide4: null,
+      data: null,
       error: null,
     };
   }
@@ -34,16 +28,16 @@ class LoadData extends React.Component {
       .defer(d3.json, this.props.urls[4])
       .defer(d3.json, this.props.urls[5])
       .defer(d3.json, this.props.urls[6])
-      .await((error, foundation1, foundation2, foundation3, slide1, slide2, slide3, slide4) => {
+      .defer(d3.json, this.props.urls[7])
+      .await((error, foundation1, foundation2, foundation3, slide1, slide2, slide3, slide4, slide5) => {
         if (error) { return this.setState({error: error}) }
-        cmp.setState({foundation1, foundation2, foundation3, slide1, slide2, slide3, slide4});
+        cmp.setState({ data:{foundation1, foundation2, foundation3, slide1, slide2, slide3, slide4, slide5} });
       });
   }
 
   render() {
-    if (this.state.data1 === null) { return null }
-    const { foundation1, foundation2, foundation3, slide1, slide2, slide3, slide4 } = this.state;
-    return this.props.children(foundation1, foundation2, foundation3, slide1, slide2, slide3, slide4);
+    if (this.state.data === null) { return null }
+    return this.props.children(this.state.data);
   }
 }
 
@@ -57,6 +51,7 @@ const dataURLs = [
   'https://gist.githubusercontent.com/mendozaline/b3a75b40c9a60781b6adc77cebb9b400/raw/fa0aa13c75bfcc2fd92ccf1f3cc612af83d5d704/002-bike-lanes.json',
   'https://gist.githubusercontent.com/mendozaline/b3a75b40c9a60781b6adc77cebb9b400/raw/fa0aa13c75bfcc2fd92ccf1f3cc612af83d5d704/010-grocery.json',
   'https://gist.githubusercontent.com/mendozaline/b3a75b40c9a60781b6adc77cebb9b400/raw/fa0aa13c75bfcc2fd92ccf1f3cc612af83d5d704/017-building-permits.json',
+  'https://gist.githubusercontent.com/mendozaline/b3a75b40c9a60781b6adc77cebb9b400/raw/11dd037d964b0b444cafdc060691a219deebdf21/016-points-interest.json',
 ];
 
 export default () => storiesOf(displayName, module)
@@ -65,10 +60,13 @@ export default () => storiesOf(displayName, module)
   .add('Simple usage', () => (
     <LoadData urls={dataURLs}>
       {
-        (foundation1, foundation2, foundation3, slide1, slide2, slide3, slide4) => {
-          if (foundation1 === null) { return null }
+        (data) => {
+          if (data === null) { return null }
 
-          const mapboxToken = 'pk.eyJ1IjoidGhlbWVuZG96YWxpbmUiLCJhIjoiY2o1aXdoem1vMWtpNDJ3bnpqaGF1bnlhNSJ9.sjTrNKLW9daDBIGvP3_W0w';
+          const { foundation1, foundation2, foundation3, slide1, slide2, slide3, slide4, slide5 } = data;
+
+          const mapboxToken = 'pk.eyJ1IjoiaGFja29yZWdvbiIsImEiOiJjamk0MGZhc2cwNDl4M3FsdHAwaG54a3BnIn0.Fq1KA0IUwpeKQlFIoaEn_Q';
+
           const mapStyleOptions = {
             'Hack Oregon Light': 'mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg',
             'Hack Oregon Dark': 'mapbox://styles/hackoregon/cjie02elo1vyw2rohd24kbtbd',
@@ -149,7 +147,7 @@ export default () => storiesOf(displayName, module)
               opacity: opacity,
               getPolygon: f => f.geometry.coordinates,
               getLineColor: f => [0,0,0,255],
-              getLineWidth: f => 50,
+              getLineWidth: f => 40,
               stroked: true,
               getFillColor: propertyValueGetColor,
               filled: true,
@@ -166,7 +164,7 @@ export default () => storiesOf(displayName, module)
               opacity: opacity,
               getPolygon: f => f.geometry.coordinates,
               getLineColor: f => [0,0,0,255],
-              getLineWidth: f => 50,
+              getLineWidth: f => 40,
               stroked: true,
               getFillColor: populationGetColor,
               filled: true,
@@ -183,7 +181,7 @@ export default () => storiesOf(displayName, module)
               opacity: opacity,
               getPolygon: f => f.geometry.coordinates,
               getLineColor: f => [255,255,255,255],
-              getLineWidth: f => 50,
+              getLineWidth: f => 40,
               stroked: true,
               getFillColor: householdChildrenGetColor,
               filled: true,
@@ -248,7 +246,7 @@ export default () => storiesOf(displayName, module)
             getWidth: f => 40,
             rounded: false,
             autoHighlight: true,
-            highlightColor: [200,200,200,100],
+            highlightColor: [100,100,100,255],
           };
 
           //010 Grocery Stores
@@ -272,12 +270,12 @@ export default () => storiesOf(displayName, module)
             getPosition: f => f.geometry.coordinates,
             opacity: 0.9,
             getColor: f => [138,43,226,255],
-            getRadius: f => 75,
+            getRadius: f => 50,
             radiusScale: 1,
             radiusMinPixels: 1,
             autoHighlight: true,
+            highlightColor: [100,100,100,100],
             parameters: { depthTest: false },
-            highlightColor: [200,200,200,255],
           };
 
           //017 Building Permits
@@ -291,8 +289,98 @@ export default () => storiesOf(displayName, module)
             colorRange: screenGridcolorSchemeArray,
             cellSizePixels: 40,
             autoHighlight: true,
-            highlightColor: [200,200,200,150],
+            highlightColor: [100,100,100,255],
             updateTriggers: {instanceColors: screenGridcolorSchemeArray},
+          };
+
+          //016 Points of Interest
+          const poiBoundary = {
+            mapType: 'PolygonPlotMap',
+            id: 'boundary-layer-poi',
+            data: slide5.slide_meta.boundary,
+            opacity: 1,
+            filled: false,
+            getPolygon: f => f.coordinates,
+            getLineColor: f => [0,0,0,255],
+            getLineWidth: f => 45,
+            lineWidthScale: 1,
+            lineJointRounded: false,
+          };
+
+          const iconMapping = {
+            'School': {
+              'x': 0,
+              'y': 0,
+              'width': 250,
+              'height': 250,
+              'mask': true,
+            },
+            'Hospital': {
+              'x': 250,
+              'y': 0,
+              'width': 250,
+              'height': 250,
+              'mask': true,
+            },
+            'BEECN': {
+              'x': 500,
+              'y': 0,
+              'width': 250,
+              'height': 250,
+              'mask': true,
+            },
+            'Fire Station': {
+              'x': 0,
+              'y': 250,
+              'width': 250,
+              'height': 250,
+              'mask': true,
+            },
+            'Pin': {
+              'x': 250,
+              'y': 250,
+              'width': 250,
+              'height': 250,
+              'mask': true,
+            },
+            'COMMCTR': {
+              'x': 500,
+              'y': 250,
+              'width': 250,
+              'height': 250,
+              'mask': true,
+            },
+          };
+
+          const iconZoomScale = zoom => zoom > 11.5 ? 10 :
+            zoom > 10.5 ? 8 :
+            zoom > 9.5 ? 6 :
+            zoom > 8.5 ? 4 :
+            zoom > 7.5 ? 2 :
+            1;
+
+          const getIconColor = f => f.properties.type === 'BEECN' ? [25,183,170,255] :
+            f.properties.type === 'COMMCTR' ? [114,29,124,255] :
+            f.properties.type === 'Fire Station' ? [220,69,86,255] :
+            f.properties.type === 'School' ? [255,178,38,255] :
+            f.properties.type === 'Hospital' ? [30,98,189,255] :
+            [0,0,0,255];
+
+          const poiMap = {
+            mapType: 'IconMap',
+            id: 'icon-layer-poi',
+            pickable: true,
+            data: slide5.slide_data.features,
+            opacity: 1,
+            iconAtlas: 'https://i.imgur.com/l9URQ58.png',
+            iconMapping: iconMapping,
+            sizeScale: iconZoomScale,
+            getPosition: f => f.geometry.coordinates,
+            getIcon: f => f.properties.type,
+            getSize: f => 10,
+            getColor: getIconColor,
+            autoHighlight: true,
+            highlightColor: [0,0,0,255],
           };
 
           const foundationOptions = {
@@ -302,10 +390,11 @@ export default () => storiesOf(displayName, module)
           };
           const foundationSelected = selectV2("Foundations:", foundationOptions, foundationOptions["Population"]);
 
-          const buildingPermitsSlideVisible = boolean('Building Permits:', false);
           const bikeLanesSlideVisible = boolean('Bike Lanes:', true);
-          const gardensSlideVisible = boolean('Community Gardens:', true);
-          const grocerySlideVisible = boolean('Grocery Stores:', true);
+          const gardensSlideVisible = boolean('Community Gardens:', false);
+          const grocerySlideVisible = boolean('Grocery Stores:', false);
+          const poiSlideVisible = boolean('Points of Interest:', true);
+          const buildingPermitsSlideVisible = boolean('Building Permits:', false);
 
           const allMapLayers = [
             {
@@ -339,6 +428,14 @@ export default () => storiesOf(displayName, module)
             {
               "data": groceryMap,
               "visible": grocerySlideVisible,
+            },
+            {
+              "data": poiBoundary,
+              "visible": poiSlideVisible,
+            },
+            {
+              "data": poiMap,
+              "visible": poiSlideVisible,
             },
           ];
 
