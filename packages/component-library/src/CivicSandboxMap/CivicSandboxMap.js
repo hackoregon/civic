@@ -62,7 +62,7 @@ const CivicSandboxMap = (props) => {
         opacity={layer.data.opacity}
         iconAtlas={layer.data.iconAtlas}
         iconMapping={layer.data.iconMapping}
-        sizeScale={layer.data.sizeScale}
+        sizeScale={layer.data.sizeScale(viewport.zoom)}
         getPosition={layer.data.getPosition}
         getIcon={layer.data.getIcon}
         getSize={layer.data.getSize}
@@ -70,7 +70,7 @@ const CivicSandboxMap = (props) => {
         autoHighlight={layer.data.autoHighlight}
         highlightColor={layer.data.highlightColor}
         onHover={onHover}
-        updateTriggers={layer.data.updateTriggers}
+        parameters={{depthTest: false}}
       />
       ) : layer.data.mapType === 'ScreenGridMap' ? (
       <ScreenGridLayer
