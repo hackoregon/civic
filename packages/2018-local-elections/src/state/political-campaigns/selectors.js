@@ -20,3 +20,8 @@ export const isContributorBreakdownErrors = createSelector(
   getContributorBreakdownRequest,
   ({ error }) => error || error,
 );
+
+export const getCampaign = createSelector(
+  rootState,
+  ({ politicalCampaigns }) => politicalCampaigns.meta.campaign,
+);
