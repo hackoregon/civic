@@ -23,7 +23,7 @@ export const catchNeighborhoodAgesErrors = createSelector(
   ({ error }) => error || error,
 );
 
-const getSelectedNeighborhood = state => state.neighborhoodAges.selectedNeighborhood && state.neighborhoodAges.selectedNeighborhood.value;
+export const getSelectedNeighborhood = state => state.neighborhoodAges.selectedNeighborhood && state.neighborhoodAges.selectedNeighborhood.value;
 
 const getDataFromResponse = ({ data }) => ((data || {}).results) && data.results;
 const getNeighborhoodsFromData = data => data.map(obj => obj.neighborhood);
@@ -41,9 +41,9 @@ const dataForNeighborhood = (data, nbhd) => getSelectedNeighborhoodData(getDataF
 
 const formatData = data => [].concat(
   data.map(obj => ({ type: '18-25', year: obj.year, pct: obj.pct_18_25 })),
-  data.map(obj => ({ type: '26-25', year: obj.year, pct: obj.pct_26_32 })),
-  data.map(obj => ({ type: '33-25', year: obj.year, pct: obj.pct_33_39 })),
-  data.map(obj => ({ type: '40-25', year: obj.year, pct: obj.pct_40_49 })),
+  data.map(obj => ({ type: '26-32', year: obj.year, pct: obj.pct_26_32 })),
+  data.map(obj => ({ type: '33-39', year: obj.year, pct: obj.pct_33_39 })),
+  data.map(obj => ({ type: '40-49', year: obj.year, pct: obj.pct_40_49 })),
   data.map(obj => ({ type: '50+', year: obj.year, pct: obj.pct_50_plus })),
 );
 

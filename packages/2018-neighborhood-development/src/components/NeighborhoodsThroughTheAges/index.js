@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { css } from 'emotion';
 
-import { CivicStoryCard, LineChart, Dropdown } from '@hackoregon/component-library';
+import { year, percentage, titleCase } from '@hackoregon/component-library/src/utils/formatters';
+import '@hackoregon/component-library/assets/vendor/react-select.min.css';
+
+
+import { CivicStoryCard, LineChart, StackedAreaChart, Dropdown } from '@hackoregon/component-library';
 
 import { fetchNeighborhoodAges, updateUserNeighborhood } from '../../state/neighborhoods-through-the-ages/actions';
 import {
@@ -11,6 +15,7 @@ import {
   catchNeighborhoodAgesErrors,
   getNeighborhoodAgesData,
   getListOfNeighborhoods,
+  getSelectedNeighborhood,
   getDataForSelectedNeighborhood,
 } from '../../state/neighborhoods-through-the-ages/selectors';
 
@@ -45,6 +50,7 @@ export class NeighborhoodsThroughTheAges extends React.Component {
       error,
       data,
       neighborhoods,
+      selectedNeighborhood,
       selectedNeighborhoodData,
     } = this.props;
 
@@ -53,6 +59,8 @@ export class NeighborhoodsThroughTheAges extends React.Component {
     } else if (!data) {
       return <div className={cardError}>{error ? `API ${error}` : 'Could not render Neighborhoods Through The Ages.'}</div>;
     }
+
+    const neighborhoodSubtitle = !!selectedNeighborhood && ` - ${titleCase(selectedNeighborhood)}`;
 
     return (
       <CivicStoryCard
@@ -66,16 +74,17 @@ export class NeighborhoodsThroughTheAges extends React.Component {
         />
 
         { !!selectedNeighborhoodData &&
-          <LineChart
+          <StackedAreaChart
             title="Registered Voters by Age"
-            subtitle="Registered voters in Portland by age group"
+            subtitle={`Registered voters in Portland by age group${neighborhoodSubtitle}`}
             data={selectedNeighborhoodData}
             xLabel="Year"
             yLabel="Percent"
             dataKey="year"
             dataValue="pct"
             dataSeries="type"
-            xNumberFormatter={d => `${d}`}
+            xNumberFormatter={year}
+            yNumberFormatter={percentage}
           />
         }
 
@@ -102,6 +111,7 @@ export default connect(
     error: catchNeighborhoodAgesErrors(state),
     data: getNeighborhoodAgesData(state),
     neighborhoods: getListOfNeighborhoods(state),
+    selectedNeighborhood: getSelectedNeighborhood(state),
     selectedNeighborhoodData: getDataForSelectedNeighborhood(state),
   }),
   dispatch => ({
