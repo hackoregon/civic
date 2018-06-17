@@ -24,6 +24,15 @@ const card = css`
   margin: 6px 0px;
   transition: all .3s ease-in-out;
 
+  :not(:last-child):before {
+    content: '';
+    height: 40px;
+    border-right: 1px solid #ec485b;
+    top: 82%;
+    left: 50px;
+    position: absolute;
+  }
+
   :hover {
     transform: translateY(-3px);
     cursor: pointer;
