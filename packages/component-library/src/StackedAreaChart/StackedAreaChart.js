@@ -36,10 +36,7 @@ const StackedAreaChart = ({
   xNumberFormatter,
   yNumberFormatter,
 }) => {
-  // const chartDomain = domain ? domain : null;
 
-  // Right now we're letting VictoryCharts determine the default domain if none is passed in.
-  // To use custom default domain function (not currently finished), use this instead:
   const chartDomain = domain || getDefaultStackedDomain(data, dataKey, dataValue);
 
   const dataSeriesLabels = dataSeries
@@ -135,15 +132,10 @@ const StackedAreaChart = ({
             // TODO: Possibly move this to theme
             grid: {
               ...CivicVictoryTheme.civic.axis.style.grid,
-
-              // I don't know why we're omitting the top grid line. It doesn't make sense to me from a data viz perspective.
-              // If we do want to go back to omitting the top line, use this code.
-              // Keep in mind it relies on chartDomain, for which the helper function is not done yet.
               stroke: t =>
                 t < chartDomain.y[1]
                   ? CivicVictoryTheme.civic.axis.style.grid.stroke
                   : 'none',
-              // stroke: CivicVictoryTheme.civic.axis.style.grid.stroke,
             },
           }}
           tickFormat={y => yNumberFormatter(y)}

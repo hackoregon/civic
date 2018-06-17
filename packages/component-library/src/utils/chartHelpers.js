@@ -46,11 +46,7 @@ function getDefaultDomain(data, dataKey, dataLabel) {
   };
 }
 
-// If we want to generate default domains ourselves, this needs to be finished:
 function getDefaultStackedDomain(data, dataKey, dataLabel) {
-  const xValues = data.map(value => value[dataKey]);
-  console.log(data, dataKey, dataLabel);
-
   function groupBy(objectArray, property) {
     return objectArray.reduce(function (acc, obj) {
       var key = obj[property];
@@ -62,16 +58,10 @@ function getDefaultStackedDomain(data, dataKey, dataLabel) {
     }, []);
   }
 
-  const groupedData = groupBy(data, dataKey);
-  console.log(groupedData);
-
-  const reducedY = groupedData.map(value => value.reduce((acc, obj) => acc + obj[dataLabel], 0));
-  console.log(reducedY);
-
-  const yValues = Object.values(reducedY);
-  console.log(yValues);
-
-
+  const xValues = data.map(value => value[dataKey]);
+  const yValues = Object.values(
+    groupBy(data, dataKey).map(value => value.reduce((acc, obj) => acc + obj[dataLabel], 0))
+  );
 
   return {
     x: [
