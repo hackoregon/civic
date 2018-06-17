@@ -23,6 +23,11 @@ const sampleData = [
       {sortOrder: 5, population: 1000, label: 'Jack Russell Terrier'},
     ];
 
+const sampleMinimalistData = [
+      {sortOrder: 1, population: 2000, label: 'Labrador Retriever'},
+      {sortOrder: 2, population: 8000, label: 'Standard Poodle'},
+    ];
+
 const sampleUnsortedData = [
       {population: 2000, label: 'Labrador Retriever'},
       {population: 8000, label: 'Standard Poodle'},
@@ -40,12 +45,12 @@ export default () => storiesOf(displayName, module)
     const dataLabel = text('Data series labels', 'label');
 
     return (
-        <HorizontalBarChart
-          data={data}
-          dataValue={dataValue}
-          dataLabel={dataLabel}
-        />
-      );
+      <HorizontalBarChart
+        data={data}
+        dataValue={dataValue}
+        dataLabel={dataLabel}
+      />
+    );
   })
   .add('No title', () => {
     const data = object('Data', sampleData);
@@ -54,13 +59,29 @@ export default () => storiesOf(displayName, module)
     const dataLabel = text('Data series labels', 'label');
 
     return (
-        <HorizontalBarChart
-          data={data}
-          sortOrder={sortOrder}
-          dataValue={dataValue}
-          dataLabel={dataLabel}
-        />
-      );
+      <HorizontalBarChart
+        data={data}
+        sortOrder={sortOrder}
+        dataValue={dataValue}
+        dataLabel={dataLabel}
+      />
+    );
+  })
+  .add('minimalist', () => {
+    const data = object('Data', sampleMinimalistData);
+    const sortOrder = text('Data series', 'sortOrder');
+    const dataValue = text('Data values', 'population');
+    const dataLabel = text('Data series labels', 'label');
+
+    return (
+      <HorizontalBarChart
+        data={data}
+        sortOrder={sortOrder}
+        dataValue={dataValue}
+        dataLabel={dataLabel}
+        minimalist
+      />
+    );
   })
   .add('Basic Usage', () => {
     const data = object('Data', sampleData);
