@@ -3,6 +3,7 @@ import { assign } from "lodash";
 // *
 // * Colors
 // *
+
 const civicPrimary = "#1f1123";
 const civicSecondary = "#eb4d5f";
 const civicTertiary = "#716470";
@@ -14,7 +15,6 @@ const civicCategoricalColor2 = "#19B7AA";
 const civicCategoricalColor3 = "#1E62BD";
 const civicCategoricalColor4 = "#721D7C";
 const civicCategoricalColor5 = "#FFB226";
-const civicCategoricalColor6 = "#DC4556";
 
 const colors = [
   civicCategoricalColor1,
@@ -22,7 +22,6 @@ const colors = [
   civicCategoricalColor3,
   civicCategoricalColor4,
   civicCategoricalColor5,
-  civicCategoricalColor6
 ];
 
 const yellow200 = "#FFF59D";
@@ -76,8 +75,13 @@ const baseLabelStyles = {
 
 const centeredLabelStyles = assign({ textAnchor: "middle" }, baseLabelStyles);
 
+const pieLabelStyles = {
+  fontFamily: sansSerif,
+  fontSize: '18px',
+}
+
 const axisLabelStyles = {
-  fontFamily: "'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif",
+  fontFamily: sansSerif,
   fontSize: '14px',
   fontWeight: 'bold',
 };
@@ -212,8 +216,8 @@ export default {
     style: {
       data: {
         padding,
-        stroke: blueGrey50,
-        strokeWidth: 1
+        stroke: "white",
+        strokeWidth: 2
       },
       labels: assign({}, baseLabelStyles, {
         padding: 20,
@@ -221,6 +225,9 @@ export default {
         strokeWidth: 0
       })
     }
+  }, baseProps),
+  pieLabel: assign({
+    style: pieLabelStyles,
   }, baseProps),
   scatter: assign({
     style: {
