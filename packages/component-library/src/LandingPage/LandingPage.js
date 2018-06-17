@@ -14,7 +14,7 @@ import zipCodes from './zipCodes.json';
 const searchTitle = css`
   font-family: 'Rubik', sans-serif;
   text-align: left;
-  font-size: 21px;
+  font-size: 18px;
   color: white;
   margin: 0 auto;
 `;
@@ -170,7 +170,7 @@ const aboutTitle = css`
 `;
 
 const citySkyline = css`
-  margin-top: 20px;
+  margin-top: 40px;
 `;
 
 class LandingPage extends React.Component {

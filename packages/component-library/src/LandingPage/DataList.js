@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router';
 
 import { css } from 'emotion';
 
@@ -26,9 +27,13 @@ const card = css`
   margin: 6px 0px;
   transition: all .3s ease-in-out;
 
-  :hover {
-    transform: translateY(-3px);
-    cursor: pointer;
+  :not(:last-child):before {
+    content: '';
+    height: 40px;
+    border-right: 1px solid #ec485b;
+    top: 82%;
+    left: 50px;
+    position: absolute;
   }
 `;
 const cardTextWrapper = css`
@@ -81,7 +86,7 @@ const DataList = ({ city, state }) => {
   const fileName = state && !missingStates.includes(state) ? `state/${state}` : 'local/local';
   const statePath = require(`../../assets/${fileName}.svg`); // eslint-disable-line global-require, import/no-dynamic-require
   const cityResult = city === 'Portland'
-    ? 'Portland'
+    ? <span>We have Portland data!<br/><span className={whyStyle}><Link to="/cities/portland">View here</Link></span></span>
     : <span>{`There's no CIVIC data for ${city} yet!`} <span className={whyStyle}><a href="#aboutCivic">Why?</a></span></span>;
 
   return (
