@@ -33,6 +33,7 @@ const cardTextWrapper = css`
   display: inline-block;
   position: relative;
   vertical-align: top;
+  width: 50%;
 `;
 const eyebrowStyle = css`
   display: block;
@@ -68,6 +69,10 @@ const searchInput = css`
   ::placeholder {
     color: #001732;
   }
+
+  @media (max-width: 850px) {
+    font-size: 16px;
+  }
 `;
 
 const searchTitle = css`
@@ -96,6 +101,7 @@ const missionStatementTitle = css`
   font-family: 'Rubik', sans-serif;
   text-align: left;
   font-size: 50px;
+  line-height: 1.2;
   width: 100%;
   letter-spacing: -2px;
   margin: 0;
@@ -109,6 +115,10 @@ const missionStatement = css`
   max-width: 1000px;
   text-align: left;
   color: #001732;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
 `;
 const appWrapper = css`
   background-color: #f3f1f3;
@@ -138,6 +148,20 @@ const lookupWrapper = css`
     left: 0;
     top: 0px;
     z-index: 1;
+  }
+
+  @media (max-width: 1024px) {
+    max-width: 270px;
+    right: 6%;
+  }
+
+  @media (max-width: 850px) {
+    position: relative;
+    max-width: none;
+    width: 100%;
+    top: 0;
+    right: 0;
+    box-sizing: border-box;
   }
 `;
 const iconWrapper = css`
@@ -173,6 +197,11 @@ const leftContainer = css`
   position: relative;
   padding-left: 70px;
   width: 50%;
+
+  @media (max-width: 850px) {
+    width: 100%;
+    padding: 0 36px;
+  }
 `;
 const topBar = css`
   position: relative;
@@ -353,7 +382,7 @@ class DataList extends React.Component {
     const localImage = this.props.repos.city ? <img src={require(`../../assets/local/local.svg`)} width="70%" /> : <img src={require(`../../assets/local/local.svg`)} width="70%" />
 
     const ctaMessage = this.props.repos.city === 'PORTLAND' ? (<div className={locationResult}>
-    Looks like we have data in your area. Click on a collection to get started.
+    {`${this.props.repos.city}`}
     </div>) : (<div className={locationResult}>
     {`There's no CIVIC data for ${this.props.repos.city} yet! `}<span className={whyStyle}><a href="#aboutCivic">Why?</a></span>
     </div>)
