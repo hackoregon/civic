@@ -39,7 +39,9 @@ const cardTextWrapper = css`
 const eyebrowStyle = css`
   display: block;
   font-family: 'Rubik';
-  font-size: 14px;
+  font-size: 16px;
+  font-style: italic;
+  text-transform: uppercase;
   color: #EE495C;
 `;
 const locationTitle = css`

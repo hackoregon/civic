@@ -13,10 +13,17 @@ import zipCodes from './zipCodes.json';
 const searchTitle = css`
   font-family: 'Rubik', sans-serif;
   text-align: left;
-  font-size: 16px;
-  margin: 0 auto;
-  font-weight: 400;
+  font-size: 21px;
   color: white;
+  margin: 0 auto;
+`;
+const searchSubTitle = css`
+  font-family: 'Rubik', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  font-style: italic;
+  color: #AAA4AB;
+  margin: 0;
 `;
 const logoWrapper = css`
   position: relative;
@@ -60,6 +67,9 @@ const lookupWrapper = css`
   top: 0;
   right: 9%;
   box-shadow: 14px 30px 60px 9px #0f18287a;
+  border-top: 15px;
+  border-top-style: solid;
+  border-top-color: #EE495C;
 `;
 const collectionsLink = css`
   display: block;
@@ -152,8 +162,10 @@ class LandingPage extends React.Component {
           <div className={collectionsLink}>
             View all Collections &rsaquo;
           </div>
+
           <div className={lookupWrapper}>
-            <h3 className={searchTitle}>Discover data near you</h3>
+            <h2 className={searchTitle}>Explore CIVIC Stories</h2>
+            <h3 className={searchSubTitle}>Discover data near you</h3>
             <SearchBar handleSubmit={this.handleSearch} />
             <DataList city={city} state={state} />
           </div>
