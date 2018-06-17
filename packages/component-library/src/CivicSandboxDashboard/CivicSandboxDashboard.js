@@ -98,9 +98,10 @@ class CivicDashboard extends React.Component {
               <PieChart
                 data={object.data}
                 colors={['#19b7aa','#a9a9a9']}
-                width={"100%"}
-                height={"100%"}
-                innerRadius={50}
+                width={450}
+                height={350}
+                innerRadius={90}
+                halfDoughnut={true}
               />
             </div>
           </div>

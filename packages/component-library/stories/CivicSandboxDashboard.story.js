@@ -214,14 +214,14 @@ export default () => storiesOf(displayName, module)
           //dashboard data
           const mockData = [
             {
-              visualizationType: "Text",
-              title: "Population",
+              visualizationType: 'Text',
+              title: 'Population',
               data: 245450,
             },
             {
-              visualizationType: "PieChart",
-              title: "Percentage White/Non-White",
-              data: [{x: 1, y: 25}, {x: 1, y: 75}],
+              visualizationType: 'PieChart',
+              title: 'Percentage White/Non-White',
+              data: [{'x': 1, 'y': 40}, {'x': 2, 'y': 60}],
             },
           ];
 
