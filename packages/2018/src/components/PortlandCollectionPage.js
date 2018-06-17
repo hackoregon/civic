@@ -50,6 +50,22 @@ const subCopy = css`
   }
 `;
 
+const disasterStyle = css`
+  background-color: #DC4556;
+`;
+const electionsStyle = css`
+  background-color: #19B7AA;
+`;
+const housingStyle = css`
+  background-color: #1E62BD;
+`;
+const neighborhoodStyle = css`
+  background-color: #721D72;
+`;
+const transporationStyle = css`
+  background-color: #FFB226;
+`;
+
 const sideListWrapper = css`
   display: block;
   position: relative;
@@ -74,27 +90,10 @@ const sideListWrapper = css`
       overflow-y: auto;
       height: auto;
     }
-
-    a:nth-child(1) > li {
-      background-color: #DC4556;
-    }
-    a:nth-child(2) > li {
-      background-color: #19B7AA;
-    }
-    a:nth-child(3) > li {
-      background-color: #1E62BD;
-    }
-    a:nth-child(4) > li {
-      background-color: #721D72;
-    }
-    a:nth-child(5) > li {
-      background-color: #FFB226;
-    }
   }
 
   li {
     width: 100%;
-    background-color: cadetblue;
     height: 180px;
     padding: 20px 20px;
     box-sizing: border-box;
@@ -111,6 +110,7 @@ const sideListWrapper = css`
     }
   }
 `;
+
 
 const homeLink = css`
   width: 100px;
@@ -133,14 +133,17 @@ const PortlandCollectionPage = () => (
       <div className={ subCopy }>
         Portland Collections are built by teams of volunteers who are passionate about showing the visual side of data to impact community awareness.
       </div>
+      <div className={ subCopy }>
+        <Link to="/sandbox">View Sandbox</Link>
+      </div>
     </div>
     <div className={ sideListWrapper }>
       <ul>
-        <Link to="/cities/portland/disaster"><li>Disaster Resilience</li></Link>
-        <Link to="/cities/portland/elections"><li>Local Elections</li></Link>
-        <Link to="/cities/portland/housing"><li>Housing Affordability</li></Link>
-        <Link to="/cities/portland/neighborhood"><li>Neighborhood Development</li></Link>
-        <Link to="/cities/portland/transportation"><li>Transportation Systems</li></Link>
+        <Link to="/cities/portland/disaster"><li className={disasterStyle}>Disaster Resilience</li></Link>
+        <Link to="/cities/portland/elections"><li className={electionsStyle}>Local Elections</li></Link>
+        <Link to="/cities/portland/housing"><li className={housingStyle}>Housing Affordability</li></Link>
+        <Link to="/cities/portland/neighborhood"><li className={neighborhoodStyle}>Neighborhood Development</li></Link>
+        <Link to="/cities/portland/transportation"><li className={transporationStyle}>Transportation Systems</li></Link>
       </ul>
     </div>
   </div>
