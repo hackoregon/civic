@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 import { compose } from 'redux';
-import { propOr } from 'ramda';
+import { titleCase } from '@hackoregon/component-library/src/utils/formatters';
+
 import { rootState } from '../selectors';
 
 export const getNeighborhoodAgesRequest = createSelector(
@@ -24,12 +25,13 @@ export const catchNeighborhoodAgesErrors = createSelector(
 );
 
 export const getSelectedNeighborhood = state => state.neighborhoodAges.selectedNeighborhood && state.neighborhoodAges.selectedNeighborhood.value;
+export const getFormattedNeighborhood = state => getSelectedNeighborhood(state);
 
 const getDataFromResponse = ({ data }) => ((data || {}).results) && data.results;
 const getNeighborhoodsFromData = data => data.map(obj => obj.neighborhood);
 const getSelectedNeighborhoodData = (data, nbhd) => data.filter(({ neighborhood }) => neighborhood === nbhd);
 const getUnique = obj => [...new Set(obj)];
-const formatForDropdown = arr => arr.map(obj => ({ value: obj, label: obj }));
+const formatForDropdown = arr => arr.map(obj => ({ value: obj, label: titleCase(obj) }));
 const neighborhoodDropdown = compose(
   formatForDropdown,
   getUnique,

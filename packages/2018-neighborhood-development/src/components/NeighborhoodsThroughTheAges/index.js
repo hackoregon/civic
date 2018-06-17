@@ -4,10 +4,8 @@ import { connect } from 'react-redux';
 import { css } from 'emotion';
 
 import { year, percentage, titleCase } from '@hackoregon/component-library/src/utils/formatters';
-import '@hackoregon/component-library/assets/vendor/react-select.min.css';
 
-
-import { CivicStoryCard, LineChart, StackedAreaChart, Dropdown } from '@hackoregon/component-library';
+import { CivicStoryCard, LineChart, Dropdown } from '@hackoregon/component-library';
 
 import { fetchNeighborhoodAges, updateUserNeighborhood } from '../../state/neighborhoods-through-the-ages/actions';
 import {
@@ -19,9 +17,8 @@ import {
   getDataForSelectedNeighborhood,
 } from '../../state/neighborhoods-through-the-ages/selectors';
 
-const options = [
-  { value: 'one', label: 'One' },
-  { value: 'two', label: 'Two' },
+const DEFAULT_NEIGHBORHOOD = [
+  { value: 'ROSE CITY PARK', label: 'ROSE CITY' },
 ];
 
 const cardLoading = css`
@@ -67,14 +64,17 @@ export class NeighborhoodsThroughTheAges extends React.Component {
         title="Neighborhoods Through the Ages"
         slug="neighborhoods-through-the-ages"
       >
+        <p>
+        Between the years of 2006 to 2016, for each neighborhood in Portland, Oregon, registered voters have been grouped into the age categories, 18- 25, 26-32, 33-39, 40-49, and 50+. Their residencies are plotted over time to gain insight into the age range and movement of registered voters in Portland neighborhoods.
+        </p>
         <Dropdown
-          value={''}
+          value={selectedNeighborhood || DEFAULT_NEIGHBORHOOD}
           onChange={event => this.props.setNeighborhood(event)}
-          options={neighborhoods || options}
+          options={neighborhoods}
         />
 
         { !!selectedNeighborhoodData &&
-          <StackedAreaChart
+          <LineChart
             title="Registered Voters by Age"
             subtitle={`Registered voters in Portland by age group${neighborhoodSubtitle}`}
             data={selectedNeighborhoodData}
@@ -88,9 +88,6 @@ export class NeighborhoodsThroughTheAges extends React.Component {
           />
         }
 
-        <p>
-Here is some relevant text about ages.
-        </p>
       </CivicStoryCard>
     );
   }
