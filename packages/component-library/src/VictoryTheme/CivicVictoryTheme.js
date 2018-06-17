@@ -97,9 +97,20 @@ export default {
   area: assign({
     style: {
       data: {
-        fill: grey900
+        fill: grey900,
+        stroke: 'black',
+        strokeWidth: 1
       },
       labels: centeredLabelStyles
+    }
+  }, baseProps),
+  areaScatter: assign({
+    style: {
+      data: {
+        fill: 'white',
+        stroke: 'black',
+        strokeWidth: 1
+      }
     }
   }, baseProps),
   axis: assign({
