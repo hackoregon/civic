@@ -17,10 +17,6 @@ import {
   getDataForSelectedNeighborhood,
 } from '../../state/neighborhoods-through-the-ages/selectors';
 
-const DEFAULT_NEIGHBORHOOD = [
-  { value: 'ROSE CITY PARK', label: 'ROSE CITY' },
-];
-
 const cardLoading = css`
   width: 100%;
   padding: 50px;
@@ -45,7 +41,6 @@ export class NeighborhoodsThroughTheAges extends React.Component {
     const {
       isLoading,
       error,
-      data,
       neighborhoods,
       selectedNeighborhood,
       selectedNeighborhoodData,
@@ -53,7 +48,7 @@ export class NeighborhoodsThroughTheAges extends React.Component {
 
     if (isLoading) {
       return <div className={cardLoading}>Loading...</div>;
-    } else if (!data) {
+    } else if (!neighborhoods) {
       return <div className={cardError}>{error ? `API ${error}` : 'Could not render Neighborhoods Through The Ages.'}</div>;
     }
 
@@ -68,7 +63,7 @@ export class NeighborhoodsThroughTheAges extends React.Component {
         Between the years of 2006 to 2016, for each neighborhood in Portland, Oregon, registered voters have been grouped into the age categories, 18- 25, 26-32, 33-39, 40-49, and 50+. Their residencies are plotted over time to gain insight into the age range and movement of registered voters in Portland neighborhoods.
         </p>
         <Dropdown
-          value={selectedNeighborhood || DEFAULT_NEIGHBORHOOD}
+          value={selectedNeighborhood}
           onChange={event => this.props.setNeighborhood(event)}
           options={neighborhoods}
         />
@@ -99,7 +94,9 @@ NeighborhoodsThroughTheAges.propTypes = {
   setNeighborhood: PropTypes.func,
   isLoading: PropTypes.bool,
   error: PropTypes.string,
-  neighborhoods: PropTypes.arrayOf(PropTypes.string),
+  neighborhoods: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
+  selectedNeighborhood: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  selectedNeighborhoodData: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
 };
 
 export default connect(

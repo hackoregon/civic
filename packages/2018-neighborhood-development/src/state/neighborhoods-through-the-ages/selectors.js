@@ -25,7 +25,6 @@ export const catchNeighborhoodAgesErrors = createSelector(
 );
 
 export const getSelectedNeighborhood = state => state.neighborhoodAges.selectedNeighborhood && state.neighborhoodAges.selectedNeighborhood.value;
-export const getFormattedNeighborhood = state => getSelectedNeighborhood(state);
 
 const getDataFromResponse = ({ data }) => ((data || {}).results) && data.results;
 const getNeighborhoodsFromData = data => data.map(obj => obj.neighborhood);

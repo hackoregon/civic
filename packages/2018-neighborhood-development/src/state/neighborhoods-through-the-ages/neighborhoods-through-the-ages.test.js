@@ -6,6 +6,28 @@ import reducer from './index';
 
 const mockStore = configureMockStore([thunk]);
 
+const DEFAULT_NEIGHBORHOOD = { value: 'ROSE CITY PARK', label: 'Rose City Park' };
+const SAMPLE_DATA = [{
+  id: 1,
+  neighborhood: 'ROSE CITY PARK',
+  pct_18_25: 0.11,
+  pct_26_32: 0.27,
+  pct_33_39: 0.23,
+  pct_40_49: 0.18,
+  pct_50_plus: 0.21,
+  year: 2006,
+},
+{
+  id: 2,
+  neighborhood: 'ROSE CITY PARK',
+  pct_18_25: 0.12,
+  pct_26_32: 0.27,
+  pct_33_39: 0.21,
+  pct_40_49: 0.17,
+  pct_50_plus: 0.23,
+  year: 2007,
+}];
+
 describe('neighborhood-ages', () => {
   describe('neighborhood-ages actions', () => {
     describe('neighborhood-ages api actions', () => {
@@ -99,6 +121,7 @@ describe('neighborhood-ages', () => {
       })).to.eql({
         pending: false,
         data: payload,
+        selectedNeighborhood: DEFAULT_NEIGHBORHOOD,
       });
     });
 
@@ -140,51 +163,14 @@ describe('neighborhood-ages', () => {
         })).to.be.undefined;
       });
 
-      it('returns undefined when data has no value for ridershipByYear', () => {
+      it('returns undefined when data has no data', () => {
         expect(selectors.getNeighborhoodAgesData({
           neighborhoodAges: {
-            data: {
-              NotridershipByYear: {},
+            notdata: {
+              alsonotdata: {},
             },
           },
         })).to.be.undefined;
-      });
-
-      it('returns processed data when data has a value for ridershipByYear', () => {
-        const res = {
-          data: [{
-            year: 2001,
-            weekday_sum_ons: 56500470,
-            weekday_sum_offs: 57186610,
-            saturday_sum_ons: 3797456,
-            saturday_sum_offs: 3853425,
-            sunday_sum_ons: 3710746,
-            sunday_sum_offs: 3762772,
-            num_of_yearly_census: 3,
-            sunday_census: true,
-            saturday_census: true,
-            total_sum_ons: 64008672,
-            total_sum_offs: 64802807,
-          }],
-        };
-        const processedData = [{
-          type: 'Weekday',
-          year: 2001,
-          ons: 217309.5,
-        }, {
-          type: 'Saturday',
-          year: 2001,
-          ons: 73028,
-        }, {
-          type: 'Sunday',
-          year: 2001,
-          ons: 71360.5,
-        }];
-        expect(selectors.getNeighborhoodAgesData({
-          neighborhoodAges: {
-            data: res,
-          },
-        })).to.eql(processedData);
       });
     });
 
@@ -211,6 +197,73 @@ describe('neighborhood-ages', () => {
             pending: true,
           },
         })).to.be.true;
+      });
+    });
+
+    describe('getSelectedNeighborhood', () => {
+      it('returns undefined when there is no selectedNeighborhood', () => {
+        expect(selectors.getSelectedNeighborhood({
+          neighborhoodAges: {
+            no: 'data to be seen',
+          },
+        })).to.be.undefined;
+      });
+
+      it('returns a selectedNeighborhood when one exists', () => {
+        expect(selectors.getSelectedNeighborhood({
+          neighborhoodAges: {
+            selectedNeighborhood: DEFAULT_NEIGHBORHOOD,
+          },
+        })).to.eql(DEFAULT_NEIGHBORHOOD.value);
+      });
+    });
+
+    describe('getListOfNeighborhoods', () => {
+      it('returns undefined when there is no data', () => {
+        expect(selectors.getListOfNeighborhoods({
+          neighborhoodAges: {
+            no: 'data to be seen',
+          },
+        })).to.be.undefined;
+      });
+
+      it('returns a listOfNeighborhoods when there is data', () => {
+        expect(selectors.getListOfNeighborhoods({
+          neighborhoodAges: {
+            data: { data: { results: SAMPLE_DATA } },
+          },
+        })).to.eql([DEFAULT_NEIGHBORHOOD]);
+      });
+    });
+
+    describe('getDataForSelectedNeighborhood', () => {
+      const FORMATTED_DATA = [
+        { type: '18-25', year: 2006, pct: 0.11 },
+        { type: '18-25', year: 2007, pct: 0.12 },
+        { type: '26-32', year: 2006, pct: 0.27 },
+        { type: '26-32', year: 2007, pct: 0.27 },
+        { type: '33-39', year: 2006, pct: 0.23 },
+        { type: '33-39', year: 2007, pct: 0.21 },
+        { type: '40-49', year: 2006, pct: 0.18 },
+        { type: '40-49', year: 2007, pct: 0.17 },
+        { type: '50+', year: 2006, pct: 0.21 },
+        { type: '50+', year: 2007, pct: 0.23 },
+      ];
+      it('returns false when there is no data', () => {
+        expect(selectors.getDataForSelectedNeighborhood({
+          neighborhoodAges: {
+            no: 'data to be seen',
+          },
+        })).to.be.false;
+      });
+
+      it('returns data for a selectedNeighborhood when there is data', () => {
+        expect(selectors.getDataForSelectedNeighborhood({
+          neighborhoodAges: {
+            data: { data: { results: SAMPLE_DATA } },
+            selectedNeighborhood: DEFAULT_NEIGHBORHOOD,
+          },
+        })).to.eql(FORMATTED_DATA);
       });
     });
   });
