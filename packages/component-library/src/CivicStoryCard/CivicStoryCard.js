@@ -12,6 +12,11 @@ const cardClass = css`
   border-radius: 2px;
   box-shadow: 5px 5px 15px -3px rgba(0,0,0,0.2);
   padding:3em;
+
+  p {
+    margin: 40px 0;
+    line-height: 1.6;
+  }
 `;
 
 const descriptionClass = css`
