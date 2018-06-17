@@ -5,15 +5,13 @@ import { css } from 'emotion';
 
 import { CivicStoryCard, LineChart, Dropdown } from '@hackoregon/component-library';
 
-import { fetchNeighborhoodAges } from '../../state/neighborhoods-through-the-ages/actions';
+import { fetchNeighborhoodAges, updateUserNeighborhood } from '../../state/neighborhoods-through-the-ages/actions';
 import {
   isNeighborhoodAgesPending,
   catchNeighborhoodAgesErrors,
   getNeighborhoodAgesData,
   getListOfNeighborhoods,
 } from '../../state/neighborhoods-through-the-ages/selectors';
-
-const doSomething = event => console.log(event);
 
 const options = [
   { value: 'one', label: 'One' },
@@ -61,7 +59,7 @@ export class NeighborhoodsThroughTheAges extends React.Component {
       >
         <Dropdown
           value={''}
-          onChange={event => doSomething(data)}
+          onChange={event => this.props.setNeighborhood(event)}
           options={neighborhoods || options}
         />
         <p>
@@ -75,6 +73,7 @@ Here is some relevant text about ages.
 NeighborhoodsThroughTheAges.displayName = 'NeighborhoodsThroughTheAges';
 NeighborhoodsThroughTheAges.propTypes = {
   init: PropTypes.func,
+  setNeighborhood: PropTypes.func,
   isLoading: PropTypes.bool,
   error: PropTypes.string,
   neighborhoods: PropTypes.arrayOf(PropTypes.string),
@@ -90,6 +89,9 @@ export default connect(
   dispatch => ({
     init() {
       dispatch(fetchNeighborhoodAges());
+    },
+    setNeighborhood(neighborhood) {
+      dispatch(updateUserNeighborhood(neighborhood));
     },
   }),
 )(NeighborhoodsThroughTheAges);

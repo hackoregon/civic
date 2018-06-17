@@ -73,6 +73,7 @@ describe('neighborhood-ages', () => {
       pending: false,
       error: null,
       data: null,
+      selectedNeighborhood: null,
     };
     const payload = { stu: 'ff' };
 
@@ -87,6 +88,7 @@ describe('neighborhood-ages', () => {
         pending: true,
         error: null,
         data: null,
+        selectedNeighborhood: null,
       });
     });
 

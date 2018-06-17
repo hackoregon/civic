@@ -5,6 +5,8 @@ export const API_START = 'NEIGHBORHOODS_THROUGH_THE_AGES/START';
 export const API_SUCCESS = 'NEIGHBORHOODS_THROUGH_THE_AGES/SUCCESS';
 export const API_ERROR = 'NEIGHBORHOODS_THROUGH_THE_AGES/ERROR';
 
+export const UPDATE_NEIGHBORHOOD = 'NEIGHBORHOODS_THROUGH_THE_AGES/UPDATE_NEIGHBORHOOD';
+
 export const neighborhoodAgesStart = actionEmitter(API_START);
 export const neighborhoodAgesSuccess = actionEmitter(API_SUCCESS);
 export const neighborhoodAgesError = actionEmitter(API_ERROR);
@@ -19,3 +21,10 @@ export const fetchNeighborhoodAges = apiAdapter(
     error: neighborhoodAgesError,
   }
 );
+
+export const updateUserNeighborhood = (neighborhood) => {
+  return {
+    type: UPDATE_NEIGHBORHOOD,
+    selectedNeighborhood: neighborhood,
+  };
+};
