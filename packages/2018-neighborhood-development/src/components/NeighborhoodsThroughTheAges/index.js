@@ -3,14 +3,22 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { css } from 'emotion';
 
-import { CivicStoryCard, LineChart } from '@hackoregon/component-library';
+import { CivicStoryCard, LineChart, Dropdown } from '@hackoregon/component-library';
 
 import { fetchNeighborhoodAges } from '../../state/neighborhoods-through-the-ages/actions';
 import {
   isNeighborhoodAgesPending,
   catchNeighborhoodAgesErrors,
   getNeighborhoodAgesData,
+  getListOfNeighborhoods,
 } from '../../state/neighborhoods-through-the-ages/selectors';
+
+const doSomething = event => console.log(event);
+
+const options = [
+  { value: 'one', label: 'One' },
+  { value: 'two', label: 'Two' },
+];
 
 const cardLoading = css`
   width: 100%;
@@ -36,12 +44,13 @@ export class NeighborhoodsThroughTheAges extends React.Component {
     const {
       isLoading,
       error,
-      neighborhoodAges,
+      data,
+      neighborhoods,
     } = this.props;
 
     if (isLoading) {
       return <div className={cardLoading}>Loading...</div>;
-    } else if (!neighborhoodAges) {
+    } else if (!data) {
       return <div className={cardError}>{error ? `API ${error}` : 'Could not render Neighborhoods Through The Ages.'}</div>;
     }
 
@@ -50,8 +59,13 @@ export class NeighborhoodsThroughTheAges extends React.Component {
         title="Neighborhoods Through the Ages"
         slug="neighborhoods-through-the-ages"
       >
+        <Dropdown
+          value={''}
+          onChange={event => doSomething(data)}
+          options={neighborhoods || options}
+        />
         <p>
-Newly released findings from TriMet shows a slow decline in public transit ridership relative to population growth over the last 10 years, a pattern which appears to be consistent across the nation.  While the cause of decline in ridership doesn't point to a single variable, it's been suggested that housing affordability and economic displacement may play a role in this phenomenon.
+Here is some relevant text about ages.
         </p>
       </CivicStoryCard>
     );
@@ -63,14 +77,15 @@ NeighborhoodsThroughTheAges.propTypes = {
   init: PropTypes.func,
   isLoading: PropTypes.bool,
   error: PropTypes.string,
-  neighborhoodAges: PropTypes.arrayOf(PropTypes.object),
+  neighborhoods: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default connect(
   state => ({
     isLoading: isNeighborhoodAgesPending(state),
     error: catchNeighborhoodAgesErrors(state),
-    neighborhoodAges: getNeighborhoodAgesData(state),
+    data: getNeighborhoodAgesData(state),
+    neighborhoods: getListOfNeighborhoods(state),
   }),
   dispatch => ({
     init() {
