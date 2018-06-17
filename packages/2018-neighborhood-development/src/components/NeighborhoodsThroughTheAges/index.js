@@ -11,6 +11,7 @@ import {
   catchNeighborhoodAgesErrors,
   getNeighborhoodAgesData,
   getListOfNeighborhoods,
+  getDataForSelectedNeighborhood,
 } from '../../state/neighborhoods-through-the-ages/selectors';
 
 const options = [
@@ -44,6 +45,7 @@ export class NeighborhoodsThroughTheAges extends React.Component {
       error,
       data,
       neighborhoods,
+      selectedNeighborhoodData,
     } = this.props;
 
     if (isLoading) {
@@ -62,6 +64,21 @@ export class NeighborhoodsThroughTheAges extends React.Component {
           onChange={event => this.props.setNeighborhood(event)}
           options={neighborhoods || options}
         />
+
+        { !!selectedNeighborhoodData &&
+          <LineChart
+            title="Registered Voters by Age"
+            subtitle="Registered voters in Portland by age group"
+            data={selectedNeighborhoodData}
+            xLabel="Year"
+            yLabel="Percent"
+            dataKey="year"
+            dataValue="pct"
+            dataSeries="type"
+            xNumberFormatter={d => `${d}`}
+          />
+        }
+
         <p>
 Here is some relevant text about ages.
         </p>
@@ -85,6 +102,7 @@ export default connect(
     error: catchNeighborhoodAgesErrors(state),
     data: getNeighborhoodAgesData(state),
     neighborhoods: getListOfNeighborhoods(state),
+    selectedNeighborhoodData: getDataForSelectedNeighborhood(state),
   }),
   dispatch => ({
     init() {
