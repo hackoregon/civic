@@ -9,12 +9,17 @@ export class IncreasingVolumeOfMoney extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="The Increasing Volume of Money in Oregon Elections">
-        <Placeholder />
+      <CivicStoryCard
+        title="The Increasing Volume of Money in Oregon Elections"
+        slug="increasing-volume-of-money"
+      >
+        <Placeholder issue="173" />
       </CivicStoryCard>
     );
   }
 }
+
+IncreasingVolumeOfMoney.displayName = 'IncreasingVolumeOfMoney';
 
 // Connect this to the redux store when necessary
 export default IncreasingVolumeOfMoney;

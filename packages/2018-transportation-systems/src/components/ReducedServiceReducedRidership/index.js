@@ -9,12 +9,17 @@ export class ReducedServiceReducedRidership extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Reduced Service, Reduced Ridership">
+      <CivicStoryCard
+        title="Reduced Service, Reduced Ridership"
+        slug="reduced-service-reduced-ridership"
+      >
         <Placeholder />
       </CivicStoryCard>
     );
   }
 }
+
+ReducedServiceReducedRidership.displayName = 'ReducedServiceReducedRidership';
 
 // Connect this to the redux store when necessary
 export default ReducedServiceReducedRidership;

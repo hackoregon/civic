@@ -9,12 +9,17 @@ export class LifeAlteringEvent extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="A Life-Altering Event for Portlanders">
-        <Placeholder />
+      <CivicStoryCard
+        title="A Life-Altering Event for Portlanders"
+        slug="life-altering-event"
+      >
+        <Placeholder issue="154" />
       </CivicStoryCard>
     );
   }
 }
+
+LifeAlteringEvent.displayName = 'LifeAlteringEvent';
 
 // Connect this to the redux store when necessary
 export default LifeAlteringEvent;

@@ -9,12 +9,17 @@ export class SuccessfulSpendingPatterns extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Successful Spending Patterns">
+      <CivicStoryCard
+        title="Successful Spending Patterns"
+        slug="successful-spending-patterns"
+      >
         <Placeholder />
       </CivicStoryCard>
     );
   }
 }
+
+SuccessfulSpendingPatterns.displayName = 'SuccessfulSpendingPatterns';
 
 // Connect this to the redux store when necessary
 export default SuccessfulSpendingPatterns;

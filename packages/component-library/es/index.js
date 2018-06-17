@@ -44,4 +44,9 @@ export { default as HexOverlay } from './HexOverlay/HexOverlay';
 export { default as BoundaryMap } from './BoundaryMap/BoundaryMap';
 export { default as MapTooltip } from './MapTooltip/MapTooltip';
 export { default as CivicSandboxMap } from './CivicSandboxMap/CivicSandboxMap';
+<<<<<<< HEAD
 export { default as CanvasParticles } from './LandingPage/CanvasParticles';
+=======
+export { default as Collapsable } from './Collapsable/Collapsable';
+export { default as StackedAreaChart } from './StackedAreaChart/StackedAreaChart';
+>>>>>>> 51ab9947a18c149864bc7de15546e36b157e1d87
