@@ -13,7 +13,7 @@ export class ViolentShakingAndGroundDeformation extends React.Component {
         title="Violent Shaking and Ground Deformation"
         slug="violent-shaking-and-ground-deformation"
       >
-        <Placeholder />
+        <Placeholder issue="217" />
       </CivicStoryCard>
     );
   }

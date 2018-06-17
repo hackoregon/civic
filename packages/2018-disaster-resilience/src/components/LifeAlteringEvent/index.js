@@ -13,7 +13,7 @@ export class LifeAlteringEvent extends React.Component {
         title="A Life-Altering Event for Portlanders"
         slug="life-altering-event"
       >
-        <Placeholder />
+        <Placeholder issue="154" />
       </CivicStoryCard>
     );
   }

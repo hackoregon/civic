@@ -13,7 +13,7 @@ export class IncreasingVolumeOfMoney extends React.Component {
         title="The Increasing Volume of Money in Oregon Elections"
         slug="increasing-volume-of-money"
       >
-        <Placeholder />
+        <Placeholder issue="173" />
       </CivicStoryCard>
     );
   }

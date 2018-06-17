@@ -13,7 +13,7 @@ export class WhatYouCanDoToPrepare extends React.Component {
         title="What You Can Do to Prepare for an Earthquake"
         slug="what-you-can-do-to-prepare-for-an-earthquake"
       >
-        <Placeholder />
+        <Placeholder issue="185" />
       </CivicStoryCard>
     );
   }

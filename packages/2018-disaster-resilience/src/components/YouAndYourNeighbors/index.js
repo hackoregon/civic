@@ -13,7 +13,7 @@ export class YouAndYourNeighbors extends React.Component {
         title="You and Your Neighbors in the Earthquake"
         slug="you-and-your-neighbors-in-the-earthquake"
       >
-        <Placeholder />
+        <Placeholder issue="153" />
       </CivicStoryCard>
     );
   }
