@@ -1,7 +1,7 @@
 import React from 'react';
 
 import '@hackoregon/component-library/assets/global.styles.css';
-
+import { PageLayout } from '@hackoregon/component-library';
 import DeclineInRidership from '../DeclineInRidership';
 import HistoricalChangesToBusService from '../HistoricalChangesToBusService';
 import ReducedServiceReducedRidership from '../ReducedServiceReducedRidership';
@@ -12,7 +12,7 @@ import TheSecretIsInTheSensors from '../TheSecretIsInTheSensors';
 import DiveDeeperIntoTransportationData from '../DiveDeeperIntoTransportationData';
 
 const App = () => (
-  <div style={{ marginTop: '30px' }}>
+  <PageLayout>
     <DeclineInRidership />
     <HistoricalChangesToBusService />
     <ReducedServiceReducedRidership />
@@ -21,7 +21,7 @@ const App = () => (
     <MobilityTrendsUsingRealTimeData />
     <TheSecretIsInTheSensors />
     <DiveDeeperIntoTransportationData />
-  </div>
+  </PageLayout>
 );
 
 App.displayName = 'App';

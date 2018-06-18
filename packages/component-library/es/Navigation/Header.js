@@ -77,7 +77,7 @@ var Header = function (_Component) {
         { className: overlay ? overlayContainerClass : containerClass },
         React.createElement(
           'nav',
-          { className: overlay ? overlayHeaderClass : headerClass, style: { backgroundColor: mainProjectColor } },
+          { className: overlay ? overlayHeaderClass : headerClass, style: { backgroundColor: mainProjectColor || primaryColor } },
           React.createElement(
             'div',
             { className: logoClass },

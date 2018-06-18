@@ -9,12 +9,17 @@ export class YourVoteHasAPriceTag extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Your Vote has a Price Tag">
+      <CivicStoryCard
+        title="Your Vote has a Price Tag"
+        slug="your-vote-has-a-price-tag"
+      >
         <Placeholder />
       </CivicStoryCard>
     );
   }
 }
+
+YourVoteHasAPriceTag.displayName = 'YourVoteHasAPriceTag';
 
 // Connect this to the redux store when necessary
 export default YourVoteHasAPriceTag;

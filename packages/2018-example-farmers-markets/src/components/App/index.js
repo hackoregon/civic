@@ -35,7 +35,6 @@ const App = () => (
     teamTitle="Agriculture"
     heroTitle="Shopping Local, Farmers' Markets"
     heroSubtitle="A look at Farmers' Markets in Portland and nationally"
-    mainProjectColor="#5F9B4A"
     overlay
   >
     <section className={cx(sectionMarginMedium, sectionMaxWidthSmall)}>
