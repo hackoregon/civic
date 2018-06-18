@@ -27,8 +27,8 @@ const endpoint = (type) => {
   return `${API_BASE}${endpoints[type]}/`;
 };
 
-export const fetchContributorBreakdown = (params = {}) =>
-  apiAdapter(endpoint(CONTRIBUTOR_BREAKDOWN), params, {
+export const fetchContributorBreakdown = (committeeID, params = {}) =>
+  apiAdapter(`${endpoint(CONTRIBUTOR_BREAKDOWN)}${committeeID}/`, params, {
     start: requestStart(CONTRIBUTOR_BREAKDOWN),
     success: requestSuccess(CONTRIBUTOR_BREAKDOWN),
     error: requestError(CONTRIBUTOR_BREAKDOWN),

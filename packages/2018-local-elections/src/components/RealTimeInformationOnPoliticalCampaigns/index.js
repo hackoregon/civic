@@ -29,6 +29,7 @@ const propTypes = {
 };
 
 const defaultProps = {
+  campaign: {},
   committees: {
     results: [],
   },
@@ -38,6 +39,12 @@ class RealTimeInformationOnPoliticalCampaigns extends React.Component {
   componentDidMount() {
     this.props.setCampaign(campaign);
     this.props.query()
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (newProps.campaign.id !== this.props.campaign.id) {
+      this.props.fetchContributorBreakdown(newProps.campaign.id);
+    }
   }
 
   render() {
@@ -77,10 +84,8 @@ export default connect(
     committees: getCommittees(state),
   }),
   dispatch => ({
-    query: () => {
-      dispatch(fetchCommittees({ limit: 3000 }));
-      //dispatch(fetchContributorBreakdown())
-    },
-    setCampaign: campaign => dispatch(setCampaign(campaign)),
+    fetchContributorBreakdown: committeeID => dispatch(fetchContributorBreakdown(committeeID)),
+    query: () => dispatch(fetchCommittees({ limit: 3000 })),
+    setCampaign: c => dispatch(setCampaign(c)),
   }),
 )(RealTimeInformationOnPoliticalCampaigns);
