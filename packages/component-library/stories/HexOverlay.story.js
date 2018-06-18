@@ -1,12 +1,14 @@
-import React from 'react';
 /* eslint-disable import/no-extraneous-dependencies */
+import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { withKnobs, selectV2, number } from '@storybook/addon-knobs';
+import { withKnobs, selectV2, number, boolean } from '@storybook/addon-knobs';
+import { action } from '@storybook/addon-actions';
 import { HexOverlay } from '../src';
 import DeckGLOverlay from '../src/HexOverlay/hex-deckgl-overlay';
 import MapGL from 'react-map-gl';
 import { BaseMap } from '../src';
 import { checkA11y } from '@storybook/addon-a11y';
+import { MapTooltip } from '../src';
 import data from '../src/HexOverlay/bikeParkingAreaPoints.json';
 
 const displayName = HexOverlay.displayName || 'HexOverlay';
@@ -25,6 +27,13 @@ const optionsStyle = {
   'Odyssey': 'mapbox://styles/themendozaline/cjgq6rklb000d2so1b8myaait',
   'Scenic': 'mapbox://styles/themendozaline/cj8rrlv4tbtgs2rqnyhckuqva',
 }
+
+const coverageOptions = {
+  range: true,
+  min: 0,
+  max: 1,
+  step: 0.05,
+};
 
 const opacityOptions = {
   range: true,
@@ -65,16 +74,14 @@ const lightSettings = {
   numberOfLights: 2
 };
 
-
-// const elevationScale = {min: 1, max: 50};
-
-
 const demoMap = () => {
+  const coverage = number('Coverage:', 0.8, coverageOptions);
   const opacity = number('Opacity:', 0.8, opacityOptions);
-  const radius = number('Inner radius', 500, radiusOptions);
+  const radius = number('Radius', 500, radiusOptions);
   const elevation = number('Elevation:', 10, elevationOptions);
   const extruded = boolean('Extruded:', true);
-
+  const filled = boolean('Filled:', true);
+  const wireframe = boolean('Wireframe:', true);
 
   const mapboxStyle = selectV2('Mapbox Style', optionsStyle, optionsStyle['Label Maker']);
   return (
@@ -85,12 +92,47 @@ const demoMap = () => {
       <HexOverlay
         data={data.features}
         opacity={opacity}
+        coverage={coverage}
         radius={radius}
         elevation={elevation}
-        extruded={extruded}
         colorRange={colorRange}
         lightSettings={lightSettings}
+        filled={filled}
+        wireframe={wireframe}
       />
+    </BaseMap>
+  );
+};
+
+// with tooltip version
+const tooltipMap = () => {
+  const coverage = number('Coverage:', 0.8, coverageOptions);
+  const opacity = number('Opacity:', 0.8, opacityOptions);
+  const radius = number('Radius', 500, radiusOptions);
+  const elevation = number('Elevation:', 10, elevationOptions);
+  const extruded = boolean('Extruded:', true);
+  const filled = boolean('Filled:', true);
+  const wireframe = boolean('Wireframe:', true);
+
+  const mapboxStyle = selectV2('Mapbox Style', optionsStyle, optionsStyle['Label Maker']);
+  return (
+    <BaseMap
+      mapboxToken={mapboxToken}
+      mapboxStyle={mapboxStyle}
+    >
+      <HexOverlay
+        data={data.features}
+        opacity={opacity}
+        coverage={coverage}
+        radius={radius}
+        elevation={elevation}
+        colorRange={colorRange}
+        lightSettings={lightSettings}
+        filled={filled}
+        wireframe={wireframe}
+      >
+        <MapTooltip isHex={true} />
+      </HexOverlay>
     </BaseMap>
   );
 };
@@ -99,3 +141,6 @@ export default () => storiesOf(displayName, module)
   .addDecorator(checkA11y)
   .addDecorator(withKnobs)
   .add('Simple usage',(demoMap))
+  .add('With tooltip',
+    (tooltipMap)
+  );

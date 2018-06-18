@@ -16,27 +16,27 @@ const elevationScale = {min: 1, max: 50};
 
 const MapOverlay = (props) => {
   const {
-    viewport,
     data,
-    getPosition,
-    opacity,
-    filled,
-    wireframe,
-    extruded,
-    elevation,
-    onLayerClick,
-    getColor,
-    getRadius,
-    radiusScale,
-    outline,
-    strokeWidth,
-    autoHighlight,
-    visible,
-    tooltipInfo,
-    x,
-    y,
     onHover,
     children,
+    viewport,
+    autoHighlight,
+    extruded,
+    elevation,
+    filled,
+    getColor,
+    getRadius,
+    opacity,
+    outline,
+    pickable,
+    radiusScale,
+    strokeWidth,
+    stroked,
+    tooltipInfo,
+    visible,
+    wireframe,
+    x,
+    y,
   } = props;
 
   const tooltip = React.Children.map(children, child => {
@@ -51,8 +51,6 @@ const MapOverlay = (props) => {
 
   const colorScale = r => [r * 255, 140, 200 * (1 - r)];
 
-  const DATA_URL = 'https://raw.githubusercontent.com/uber-common/deck.gl-data/master/examples/geojson/vancouver-blocks.json'; // eslint-disable-line
-
   const LIGHT_SETTINGS = {
       lightsPosition: [-125, 50.5, 5000, -122.8, 48.5, 8000],
       ambientRatio: 0.2,
@@ -63,23 +61,26 @@ const MapOverlay = (props) => {
     };
 
   const layer = new GeoJsonLayer({
-    id: 'geojson',
     data,
-    opacity: opacity,
-    stroked: false,
-    filled: filled,
-    extruded: extruded,
-    wireframe: wireframe,
+    onHover,
+    extruded,
+    filled,
+    opacity,
+    pickable,
+    radiusScale,
+    strokeWidth,
+    stroked,
+    wireframe,
+    autoHighlight: true,
     fp64: true,
-    getElevation: f => Math.sqrt(f.properties.Shape_Length) * elevation,
+    id: 'geojson',
+    lightSettings: LIGHT_SETTINGS,
+    outline: true,
+    elevationRange: [0, 3000],
+    elevationScale: elevation,
+    getElevation: f => Math.sqrt(f.properties.Shape_Length) * elevation/10,
     getFillColor: f => colorScale(f.properties.Shape_Length),
     getLineColor: f => [255, 255, 255],
-    lightSettings: LIGHT_SETTINGS,
-    pickable: true,
-    autoHighlight: true,
-    getPosition: getPosition,
-    onClick: onLayerClick,
-    onHover: onHover,
   });
 
   return (
