@@ -63,15 +63,14 @@ const HorizontalBarChart = ({
         height={dataHeight + additionalHeight}
         domain={domain}
         padding={padding}
-        domainPadding={0}
         theme={CivicVictoryTheme.civic}
       >
         <VictoryAxis
           dependentAxis
+          domainPadding={{ x: 20 }}
           style={{
             tickLabels: { fill: 'none' },
           }}
-          padding={{ left: 0, right: 0 }}
           title="Y Axis"
         />
       {!minimalist && (
@@ -114,8 +113,8 @@ const HorizontalBarChart = ({
               theme={CivicVictoryTheme.civic}
             />
           }
-          padding={{ left: 0, right: 0 }}
-          data={barData.map(d => ({ sortOrder: d[sortOrderKey], dataValue: d[dataValue], label: d[dataLabel] }))}
+          domainPadding={0}
+          data={barData.map(d => ({ sortOrder: d[sortOrderKey], dataValue: d[dataValue], label: dataLabelFormatter(d[dataLabel]) }))}
           title="Horizontal Bar Chart"
           x="sortOrder"
           y="dataValue"

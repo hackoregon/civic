@@ -127,8 +127,7 @@ export default () => storiesOf(displayName, module)
         subtitle={'As of January 2017'}
         xLabel={xLabel}
         yLabel={yLabel}
-        // xNumberFormatter={x => `${Math.round(x * 100)}%`}
-        xNumberFormatter={percentage}
+        dataValueFormatter={percentage}
       />
     );
   });
