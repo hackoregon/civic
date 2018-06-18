@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 import { compose } from 'redux';
 import { titleCase } from '@hackoregon/component-library/src/utils/formatters';
+import { ungroupBy } from '@hackoregon/component-library/src/utils/dataHelpers';
 
 import { rootState } from '../selectors';
 
@@ -40,13 +41,10 @@ const neighborhoodDropdown = compose(
 
 const dataForNeighborhood = (data, nbhd) => getSelectedNeighborhoodData(getDataFromResponse(data), nbhd);
 
-const formatData = data => [].concat(
-  data.map(obj => ({ type: '18-25', year: obj.year, pct: obj.pct_18_25 })),
-  data.map(obj => ({ type: '26-32', year: obj.year, pct: obj.pct_26_32 })),
-  data.map(obj => ({ type: '33-39', year: obj.year, pct: obj.pct_33_39 })),
-  data.map(obj => ({ type: '40-49', year: obj.year, pct: obj.pct_40_49 })),
-  data.map(obj => ({ type: '50+', year: obj.year, pct: obj.pct_50_plus })),
-);
+const TYPES = ['pct_18_25', 'pct_26_32', 'pct_33_39', 'pct_40_49', 'pct_50_plus'];
+const LABELS = ['18-25', '26-32', '33-39', '40-49', '50+'];
+
+const formatData = data => ungroupBy(data, TYPES, LABELS);
 
 export const getListOfNeighborhoods = createSelector(
   getNeighborhoodAgesRequest,

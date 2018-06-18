@@ -78,7 +78,7 @@ export class NeighborhoodsThroughTheAges extends React.Component {
             xLabel="Year"
             yLabel="Percent"
             dataKey="year"
-            dataValue="pct"
+            dataValue="value"
             dataSeries="type"
             xNumberFormatter={year}
             yNumberFormatter={percentage}

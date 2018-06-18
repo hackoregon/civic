@@ -238,16 +238,16 @@ describe('neighborhood-ages', () => {
 
     describe('getDataForSelectedNeighborhood', () => {
       const FORMATTED_DATA = [
-        { type: '18-25', year: 2006, pct: 0.11 },
-        { type: '18-25', year: 2007, pct: 0.12 },
-        { type: '26-32', year: 2006, pct: 0.27 },
-        { type: '26-32', year: 2007, pct: 0.27 },
-        { type: '33-39', year: 2006, pct: 0.23 },
-        { type: '33-39', year: 2007, pct: 0.21 },
-        { type: '40-49', year: 2006, pct: 0.18 },
-        { type: '40-49', year: 2007, pct: 0.17 },
-        { type: '50+', year: 2006, pct: 0.21 },
-        { type: '50+', year: 2007, pct: 0.23 },
+        { id: 1, neighborhood: 'ROSE CITY PARK', type: '18-25', year: 2006, value: 0.11 },
+        { id: 2, neighborhood: 'ROSE CITY PARK', type: '18-25', year: 2007, value: 0.12 },
+        { id: 1, neighborhood: 'ROSE CITY PARK', type: '26-32', year: 2006, value: 0.27 },
+        { id: 2, neighborhood: 'ROSE CITY PARK', type: '26-32', year: 2007, value: 0.27 },
+        { id: 1, neighborhood: 'ROSE CITY PARK', type: '33-39', year: 2006, value: 0.23 },
+        { id: 2, neighborhood: 'ROSE CITY PARK', type: '33-39', year: 2007, value: 0.21 },
+        { id: 1, neighborhood: 'ROSE CITY PARK', type: '40-49', year: 2006, value: 0.18 },
+        { id: 2, neighborhood: 'ROSE CITY PARK', type: '40-49', year: 2007, value: 0.17 },
+        { id: 1, neighborhood: 'ROSE CITY PARK', type: '50+', year: 2006, value: 0.21 },
+        { id: 2, neighborhood: 'ROSE CITY PARK', type: '50+', year: 2007, value: 0.23 },
       ];
       it('returns false when there is no data', () => {
         expect(selectors.getDataForSelectedNeighborhood({
