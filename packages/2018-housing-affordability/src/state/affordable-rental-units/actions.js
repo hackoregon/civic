@@ -35,7 +35,7 @@ export const fetchAllARUCities = fetchAdapter(
 export const fetchARUCity = fetchAdapter(
   `/api/harvardjchs/?datatype=${detailDatatype}`,
   {
-    encodeParams: (url, city = 'portland') => `${url}&datapoint=${city}`,
+    encodeParams: (url, city = 'portland') => `${url}&limit=20&datapoint=${city}`,
     start: ARUStart,
     success: ARUSuccess,
     failure: ARUFailure,
