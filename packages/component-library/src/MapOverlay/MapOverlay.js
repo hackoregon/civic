@@ -1,3 +1,4 @@
+// MapOverlay.js
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import DeckGL, { GeoJsonLayer } from 'deck.gl';
@@ -16,8 +17,9 @@ const elevationScale = {min: 1, max: 50};
 
 const MapOverlay = (props) => {
   const {
-    children,
     data,
+    onHover,
+    children,
     viewport,
     autoHighlight,
     extruded,
@@ -25,14 +27,12 @@ const MapOverlay = (props) => {
     filled,
     getColor,
     getRadius,
-    onHover,
-    onLayerClick,
     opacity,
     outline,
     pickable,
     radiusScale,
-    stroked,
     strokeWidth,
+    stroked,
     tooltipInfo,
     visible,
     wireframe,
@@ -52,8 +52,6 @@ const MapOverlay = (props) => {
 
   const colorScale = r => [r * 255, 140, 200 * (1 - r)];
 
-  // const DATA_URL = 'https://raw.githubusercontent.com/uber-common/deck.gl-data/master/examples/geojson/vancouver-blocks.json'; // eslint-disable-line
-
   const LIGHT_SETTINGS = {
       lightsPosition: [-125, 50.5, 5000, -122.8, 48.5, 8000],
       ambientRatio: 0.2,
@@ -65,20 +63,20 @@ const MapOverlay = (props) => {
 
   const layer = new GeoJsonLayer({
     data,
-    extruded,
-    opacity,
-    filled,
     onHover,
+    extruded,
+    filled,
+    opacity,
     pickable,
+    radiusScale,
+    strokeWidth,
+    stroked,
     wireframe,
     autoHighlight: true,
     fp64: true,
     id: 'geojson',
     lightSettings: LIGHT_SETTINGS,
-    onClick: onLayerClick,
-    stroked: false,
     outline: true,
-
     elevationRange: [0, 3000],
     elevationScale: elevation,
     getElevation: f => Math.sqrt(f.properties.Shape_Length) * elevation/10,
