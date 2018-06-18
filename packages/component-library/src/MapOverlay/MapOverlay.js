@@ -1,4 +1,3 @@
-// MapOverlay.js
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import DeckGL, { GeoJsonLayer } from 'deck.gl';
