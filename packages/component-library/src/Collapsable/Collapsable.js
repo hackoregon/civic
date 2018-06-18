@@ -72,6 +72,6 @@ class Collapsable extends React.Component {
 
 const Section = ({ children }) => children;
 
-Collapsable.Section = Section
+Collapsable.Section = Section;
 
 export default Collapsable;
