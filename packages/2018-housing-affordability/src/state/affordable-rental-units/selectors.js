@@ -6,7 +6,25 @@ export const getARU = createSelector(
   ({ affordableRentalUnits }) => affordableRentalUnits,
 );
 
+const allTypes = [
+  '$2,400 or more',
+  '$2,200 to $2,399',
+  '$2,000 to $2,199',
+  '$2,000 or More',
+  '$1,800 to $1,999',
+  '$1,600 to $1,799',
+  '$1,400 to $1,599',
+  '$1,200 to $1,399',
+  '$1,000 to $1,199',
+  '$800 to $999',
+  'Under $800',
+  '$600 to $799',
+  '$400 to $599',
+  'Less than 400',
+];
+
 const getProperty = key => createSelector(getARU, state => state[key]);
+const orderFor = type => allTypes.indexOf(allTypes.find(t => type.endsWith(t)));
 
 export const isAllCitiesLoading = getProperty('allCitiesPending');
 export const isCityDetailLoading = getProperty('cityPending');
@@ -19,12 +37,14 @@ export const getSelectedCityData = createSelector(
   ({ selectedCityData }) => selectedCityData && selectedCityData.map(datum => ({
     ...datum,
     value: +datum.value,
-  }))
+    datatype: allTypes.find(t => datum.datatype.endsWith(t)),
+    sortOrder: orderFor(datum.datatype),
+  })).sort((a, b) => a.sortOrder - b.sortOrder)
 );
 
 
-const lowKey = 'Change in Share of Units by Real Rent Level, 2005-2015, Real Gross Rents Under $800';
-const highKey = 'Change in Share of Units by Real Rent Level, 2005-2015, Real Gross Rents $2,000 or More';
+const lowKey = 'Under $800';
+const highKey = '$2,000 or More';
 
 export const getSelectedCityLowRank = createSelector(
   getSelectedCityData,
