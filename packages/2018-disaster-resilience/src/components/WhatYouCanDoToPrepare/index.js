@@ -2,6 +2,7 @@ import React from 'react';
 
 import { CivicStoryCard } from '@hackoregon/component-library';
 import Quiz from './Quiz/Quiz';
+import Summary from './Summary/Summary';
 
 export class WhatYouCanDoToPrepare extends React.Component {
 
@@ -12,17 +13,19 @@ export class WhatYouCanDoToPrepare extends React.Component {
     };
   }
 
-
-  componentDidMount() {
-    // initialize data here
-      // load question
-  }
-
   done(e) {
     e.preventDefault();
     e.stopPropagation();
 
     this.setState({ quizFinished: true });
+  }
+
+  renderSection() {
+    return !this.state.quizFinished ? (
+      <Quiz done={e => this.done(e)} />
+    ) : (
+      <Summary quizFinished={this.state.quizFinished} />
+    );
   }
 
   render() {
@@ -31,7 +34,7 @@ export class WhatYouCanDoToPrepare extends React.Component {
         title="What You Can Do to Prepare for an Earthquake"
         slug="what-you-can-do-to-prepare-for-an-earthquake"
       >
-        <Quiz done={e => this.done(e)} />
+        {this.renderSection()}
       </CivicStoryCard>
     );
   }

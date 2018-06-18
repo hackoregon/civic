@@ -8,6 +8,9 @@ import Recommendation from './Recommendation';
 
 const QuestionForm = ({ back, next, done, questionId }) => (
   <div>
+    {questionId === 1 ?
+      <h2>Create your individual check list by answering the following questions:</h2> :
+    null}
     <Question
       question={QRMap[questionId - 1].question}
       questionId={questionId}
@@ -40,21 +43,34 @@ const QuestionForm = ({ back, next, done, questionId }) => (
         </label>
       </div>
     </form>
+    <Recommendation recommendation={QRMap[questionId - 1].note} />
     <div className="button-container">
-      <Button onClick={e => back(e)}>
-        Back
-      </Button>
-      {questionId === QRMap.length ? (
-        <Button onClick={e => done(e)}>
-          Done
-        </Button>
-      ) : (
+      {questionId === 1 &&
         <Button onClick={e => next(e)}>
           Next
         </Button>
-      ) }
+      }
+      {questionId !== 1 && questionId < QRMap.length &&
+      <div>
+        <Button onClick={e => back(e)}>
+          Back
+        </Button>
+        <Button onClick={e => next(e)}>
+          Next
+        </Button>
+      </div>
+      }
+      {questionId === QRMap.length &&
+      <div>
+        <Button onClick={e => back(e)}>
+          Back
+        </Button>
+        <Button onClick={e => done(e)}>
+          Done
+        </Button>
+      </div>
+      }
     </div>
-    <Recommendation recommendation={QRMap[questionId - 1].recommendation} />
   </div>
 );
 
