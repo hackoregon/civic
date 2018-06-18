@@ -302,7 +302,7 @@ const highSchoolData = {
 const getClasses = state => state.classes;
 
 // Get students from state
-const getStudents = state = state.students;
+const getStudents = state => state.students;
 
 // createSelector result functions don't get props
 const forwardStudentName = (state, name) => name;

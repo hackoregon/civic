@@ -41,3 +41,4 @@ export const percentage = format('.0%');
 export const dollars = d => `$${d}`;
 
 export const titleCase = str => startCase(toLower(str));
+export const unformatted = d => d;
