@@ -3,20 +3,18 @@ import { assign } from "lodash";
 // *
 // * Colors
 // *
-const civicPrimary = "#201024";
-const civicSecondary = "#706371";
-const civicTertiary = "#EE495C";
-const civicSecondaryLighter = "AAA4AB";
-const civicSecondaryLightest = "F3F2F3";
 
-
+const civicPrimary = "#1f1123";
+const civicSecondary = "#eb4d5f";
+const civicTertiary = "#716470";
+const civicSecondaryLighter = "aaa4ab";
+const civicSecondaryLightest = "f3f2f3";
 
 const civicCategoricalColor1 = "#DC4556";
 const civicCategoricalColor2 = "#19B7AA";
 const civicCategoricalColor3 = "#1E62BD";
 const civicCategoricalColor4 = "#721D7C";
 const civicCategoricalColor5 = "#FFB226";
-const civicCategoricalColor6 = "#DC4556";
 
 const colors = [
   civicCategoricalColor1,
@@ -24,7 +22,6 @@ const colors = [
   civicCategoricalColor3,
   civicCategoricalColor4,
   civicCategoricalColor5,
-  civicCategoricalColor6
 ];
 
 const yellow200 = "#FFF59D";
@@ -49,6 +46,7 @@ const fontWeight = "normal";
 // * Layout
 // *
 const padding = 8;
+const horizontalBarPadding = 2;
 const baseProps = {
   width: 650,
   height: 350,
@@ -77,8 +75,13 @@ const baseLabelStyles = {
 
 const centeredLabelStyles = assign({ textAnchor: "middle" }, baseLabelStyles);
 
+const pieLabelStyles = {
+  fontFamily: sansSerif,
+  fontSize: '18px',
+}
+
 const axisLabelStyles = {
-  fontFamily: "'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif",
+  fontFamily: sansSerif,
   fontSize: '14px',
   fontWeight: 'bold',
 };
@@ -94,9 +97,20 @@ export default {
   area: assign({
     style: {
       data: {
-        fill: grey900
+        fill: grey900,
+        stroke: 'black',
+        strokeWidth: 1
       },
       labels: centeredLabelStyles
+    }
+  }, baseProps),
+  areaScatter: assign({
+    style: {
+      data: {
+        fill: 'white',
+        stroke: 'black',
+        strokeWidth: 1
+      }
     }
   }, baseProps),
   axis: assign({
@@ -141,11 +155,11 @@ export default {
   bar: assign({
     style: {
       data: {
-        fill: "#756172",
-        padding,
+        fill: civicTertiary,
+        padding: horizontalBarPadding,
         stroke: "transparent",
         strokeWidth: 0,
-        width: 40
+        width: 40,
       },
       labels: baseLabelStyles
     }
@@ -213,8 +227,8 @@ export default {
     style: {
       data: {
         padding,
-        stroke: blueGrey50,
-        strokeWidth: 1
+        stroke: "white",
+        strokeWidth: 2
       },
       labels: assign({}, baseLabelStyles, {
         padding: 20,
@@ -222,6 +236,9 @@ export default {
         strokeWidth: 0
       })
     }
+  }, baseProps),
+  pieLabel: assign({
+    style: pieLabelStyles,
   }, baseProps),
   scatter: assign({
     style: {
@@ -247,6 +264,7 @@ export default {
         strokeWidth: 0
       },
       labels: centeredLabelStyles,
+      customHoverColor: civicSecondary,
     },
     flyoutStyle: {
       stroke: "transparent",
@@ -256,7 +274,7 @@ export default {
     flyoutProps: {
       cornerRadius: 10,
       pointerLength: 10
-    }
+    },
   }, tooltipProps),
   voronoi: assign({
     style: {

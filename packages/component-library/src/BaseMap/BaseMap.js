@@ -11,8 +11,8 @@ const mapWrapper = css`
 
 const navControl = css`
   position: absolute;
-  right: 0;
-  z-index: 9;
+  left: 0;
+  z-index: 1;
 `;
 
 export default class BaseMap extends Component {
@@ -122,5 +122,5 @@ BaseMap.propTypes = {
 };
 
 BaseMap.defaultProps = {
-  mapboxStyle: "mapbox://styles/themendozaline/cjg6296ub04ot2sqv9izku3qq",
+  mapboxStyle: "mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg",
 };
