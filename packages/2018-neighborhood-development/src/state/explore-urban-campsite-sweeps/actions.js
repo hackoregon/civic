@@ -22,7 +22,7 @@ export const fetchCampsiteSweeps = apiAdapter(
   }
 );
 
-export const updateDateRange = (amount) => {
+export const incrementTimer = (amount) => {
   return {
     type: INCREMENT_TIMER,
     payload: amount,

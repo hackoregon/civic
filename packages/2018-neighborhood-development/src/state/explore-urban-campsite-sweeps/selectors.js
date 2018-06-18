@@ -1,3 +1,5 @@
+import { path } from 'ramda';
+
 import { createSelector } from 'reselect';
 import { rootState } from '../selectors';
 
@@ -6,11 +8,11 @@ export const getCampsiteSweepsRequest = createSelector(
   ({ exploreUrbanCampsiteSweeps }) => exploreUrbanCampsiteSweeps,
 );
 
+const getFeatures = path(['data', 'results', 'features']);
+
 export const getCampsiteSweepsData = createSelector(
   getCampsiteSweepsRequest,
-  ({ data }) => (!data
-  ? null
-  : data.data.results.features),
+  ({ data }) => getFeatures(data),
 );
 
 export const isCampsiteSweepsPending = createSelector(

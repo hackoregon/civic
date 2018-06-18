@@ -5,7 +5,7 @@ const INITIAL_STATE = {
   pending: false,
   error: null,
   data: null,
-  dateRange: 0,
+  timer: null,
 };
 
 const apiReducers = apiReducer({ INITIAL_STATE, API_START, API_SUCCESS, API_ERROR });
@@ -15,7 +15,7 @@ const allReducers = (state = INITIAL_STATE, action) => {
     case INCREMENT_TIMER:
       return {
         ...state,
-        dateRange: action.payload,
+        timer: action.payload,
       };
     default:
       return apiReducers(state, action);

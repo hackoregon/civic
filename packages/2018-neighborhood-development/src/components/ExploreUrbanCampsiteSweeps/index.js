@@ -6,7 +6,7 @@ import { css } from 'emotion';
 import { CivicStoryCard, Collapsable, BaseMap, ScatterPlotMap, ChartContainer } from '@hackoregon/component-library';
 import { contextualDesc, belowFoldOne, belowFoldTwo } from './text';
 
-import { fetchCampsiteSweeps, updateDateRange } from '../../state/explore-urban-campsite-sweeps/actions';
+import { fetchCampsiteSweeps, incrementTimer } from '../../state/explore-urban-campsite-sweeps/actions';
 import {
   isCampsiteSweepsPending,
   catchCampsiteSweepsErrors,
@@ -43,9 +43,8 @@ export class ExploreUrbanCampsiteSweeps extends React.Component {
       <ScatterPlotMap
         data={data}
         autoHighlight={false}
-        getColor={() => [109, 222, 69]}
-        getRadius={() => 550}
-        onLayerClick={event => this.props.blah()}
+        getColor={() => [220, 69, 86]}
+        getRadius={() => 100}
       />
     );
 
@@ -101,8 +100,8 @@ export default connect(
     init() {
       dispatch(fetchCampsiteSweeps());
     },
-    blah() {
-      dispatch(updateDateRange(60));
+    incrementTimer() {
+      dispatch(incrementTimer(5));
     },
   }),
 )(ExploreUrbanCampsiteSweeps);
