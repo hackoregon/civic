@@ -38,6 +38,10 @@ const inputClass = css`
   width: 100%;
 `;
 
+const emphasis = css`
+  color: #000;
+`;
+
 const capitalize = str => str.length && str.split(' ')
   .reduce((full, word) => `${full} ${word[0].toUpperCase() + word.substring(1)}`, '')
   .trim();
@@ -63,8 +67,6 @@ export class AffordableRentalUnitsDwindling extends React.Component {
 
     const cityOptions = allCities && allCities.map(c => ({ value: c, label: capitalize(c) }));
 
-    console.log(selectedCityData);
-
     const Loader = () => <div className={loader}>Loading...</div>;
     const ErrorMessage = () => <div className={error}>Could not load data for this city.</div>;
 
@@ -84,8 +86,12 @@ export class AffordableRentalUnitsDwindling extends React.Component {
         <section>
           {isLoading && <Loader />}
           {selectedCityData && (<div>
-            <p>How {capitalize(selectedCity)} ranks for new units that cost &lt;$800/mo</p>
+            <p>
+              {capitalize(selectedCity)} ranks <strong className={emphasis}>{selectedCityLowRank.rank}/{selectedCityLowRank.total} </strong>
+              for new units that cost <strong className={emphasis}>&lt;$800/mo</strong>
+            </p>
             <input
+              disabled
               className={inputClass}
               type="range"
               min="1"
@@ -94,8 +100,12 @@ export class AffordableRentalUnitsDwindling extends React.Component {
             />
           </div>)}
           {selectedCityData && (<div>
-            <p>How {capitalize(selectedCity)} ranks for new units that cost &gt;$2,000/mo</p>
+            <p>
+              {capitalize(selectedCity)} ranks <strong className={emphasis}>{selectedCityHighRank.rank}/{selectedCityHighRank.total} </strong>
+              for new units that cost <strong className={emphasis}>&gt;$2,000/mo</strong>
+            </p>
             <input
+              disabled
               className={inputClass}
               type="range"
               min="1"
@@ -106,13 +116,12 @@ export class AffordableRentalUnitsDwindling extends React.Component {
         </section>
         <section>
           {selectedCityData && (<div>
-            <h3>{capitalize(selectedCity)}</h3>
             <HorizontalBarChart
               data={selectedCityData}
               dataLabel="datatype"
               dataValue="value"
-              xNumberFormatter={percentage}
-              title="Change in Total Units By Cost Per Month"
+              dataValueFormatter={percentage}
+              title={`${capitalize(selectedCity)} Change in Total Units By Cost Per Month`}
               yLabel="Cost Per Month Brackets"
               xLabel="Percent Change in Total Units"
             />
