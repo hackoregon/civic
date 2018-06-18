@@ -9,6 +9,7 @@ import {
   text, number, object, array,
 } from '@storybook/addon-knobs';
 import { HorizontalBarChart } from '../src';
+import { percentage } from '../src/utils/formatters';
 
 const displayName = HorizontalBarChart.displayName || 'HorizontalBarChart';
 const title = 'Simple usage';
@@ -101,6 +102,33 @@ export default () => storiesOf(displayName, module)
         subtitle={'As of January 2017'}
         xLabel={xLabel}
         yLabel={yLabel}
+      />
+    );
+  })
+  .add('With Negative Values', () => {
+    const data = object('Data', [
+      {delta: 0.1, label: 'Labrador Retriever'},
+      {delta: 0.3, label: 'Standard Poodle'},
+      {delta: -0.1, label: 'French Bulldog'},
+      {delta: -0.2, label: 'Afghan Hound'},
+      {delta: 0.0, label: 'Jack Russell Terrier'},
+    ]);
+    const dataValue = text('Data value', 'delta');
+    const dataLabel = text('Data series labels', 'label');
+    const xLabel = text('xLabel', '% Change in Population');
+    const yLabel = text('yLabel', 'Breed');
+
+    return (
+      <HorizontalBarChart
+        data={data}
+        dataValue={dataValue}
+        dataLabel={dataLabel}
+        title={'Dogs and their Money'}
+        subtitle={'As of January 2017'}
+        xLabel={xLabel}
+        yLabel={yLabel}
+        // xNumberFormatter={x => `${Math.round(x * 100)}%`}
+        xNumberFormatter={percentage}
       />
     );
   });
