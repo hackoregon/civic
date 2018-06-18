@@ -208,7 +208,7 @@ class LandingPage extends React.Component {
       return this.setState({
         city: cityData ? cityData.name : zipResult.city,
         state: zipResult.state,
-        imgPath: cityData ? cityData.imgPath : 'portland',
+        imgPath: cityData ? cityData.path : 'portland',
       });
     }
 
