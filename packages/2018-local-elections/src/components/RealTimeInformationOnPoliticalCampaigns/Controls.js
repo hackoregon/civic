@@ -7,27 +7,33 @@ import { Dropdown } from '@hackoregon/component-library';
 
 const propTypes = {
   campaign: PropTypes.object,
+  campaigns: PropTypes.array,
   setCampaign: PropTypes.func,
 };
 
 const defaultProps = {
   campaign: {},
+  committees: [],
 };
 
 class Controls extends React.Component {
   renderCampaignDropdown() {
-    const options = [
-      { value: 'Campaign 1', label: 'Campaign 1' },
-      { value: 'Campaign 2', label: 'Campaign 2' },
-      { value: 'Campaign 3', label: 'Campaign 3' },
-    ];
-    const value = options.find(o => o.value === this.props.campaign.value);
+    const options = this.props.campaigns.map(campaign => ({
+      value: campaign.filer_name, label: campaign.filer_name,
+    }));
+    const value = options.find(o => o.value === this.props.campaign.filer_name);
+
+    const onChange = (option) => {
+      const committee = this.props.campaigns.find(c => c.filer_name === option.value);
+
+      this.props.setCampaign(committee);
+    };
 
     return (
       <Dropdown
         options={options}
         value={value}
-        onChange={option => this.props.setCampaign(option)}
+        onChange={onChange}
         searchable
       />
     );

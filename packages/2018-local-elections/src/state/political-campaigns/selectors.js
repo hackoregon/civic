@@ -1,6 +1,11 @@
 import { createSelector } from 'reselect';
 import { rootState } from '../selectors';
 
+const politicalCampaignsSelector = createSelector(
+  rootState,
+  ({ politicalCampaigns }) => politicalCampaigns,
+);
+
 export const getContributorBreakdownRequest = createSelector(
   rootState,
   ({ politicalCampaigns }) => politicalCampaigns,
@@ -22,6 +27,11 @@ export const isContributorBreakdownErrors = createSelector(
 );
 
 export const getCampaign = createSelector(
-  rootState,
-  ({ politicalCampaigns }) => politicalCampaigns.meta.campaign,
+  politicalCampaignsSelector,
+  ({ meta }) => meta.campaign,
+);
+
+export const getCommittees = createSelector(
+  politicalCampaignsSelector,
+  ({ data }) => data.committees && data.committees.data ? data.committees.data : data.committees,
 );
