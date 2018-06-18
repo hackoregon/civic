@@ -30,7 +30,9 @@ import pathMapStory from './PathMap.story';
 import iconMapStory from './IconMap.story';
 import boundaryMapStory from './BoundaryMap.story';
 import civicSandboxMapStory from './CivicSandboxMap.story';
+import sandboxStory from './Sandbox.story';
 import '../assets/global.styles.css';
+
 
 // stories can be added directly here
 storiesOf('Welcome', module)
@@ -68,3 +70,4 @@ mapOverlayStory();
 hexOverlayStory();
 boundaryMapStory();
 civicSandboxMapStory();
+sandboxStory();
