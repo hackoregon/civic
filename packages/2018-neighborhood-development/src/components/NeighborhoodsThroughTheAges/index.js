@@ -17,6 +17,8 @@ import {
   getDataForSelectedNeighborhood,
 } from '../../state/neighborhoods-through-the-ages/selectors';
 
+const DEFAULT_NEIGHBORHOOD = { value: 'ROSE CITY PARK', label: 'Rose City Park' };
+
 const cardLoading = css`
   width: 100%;
   padding: 50px;
@@ -110,7 +112,9 @@ export default connect(
   }),
   dispatch => ({
     init() {
-      dispatch(fetchNeighborhoodAges());
+      dispatch(fetchNeighborhoodAges()).then(() => {
+        dispatch(updateUserNeighborhood(DEFAULT_NEIGHBORHOOD));
+      });
     },
     setNeighborhood(neighborhood) {
       dispatch(updateUserNeighborhood(neighborhood));

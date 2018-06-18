@@ -50,7 +50,7 @@ const formatData = data => [].concat(
 
 export const getListOfNeighborhoods = createSelector(
   getNeighborhoodAgesRequest,
-  ({ data }) => !!data && neighborhoodDropdown(data),
+  ({ data }) => data && neighborhoodDropdown(data),
 );
 
 export const getDataForSelectedNeighborhood = createSelector(
