@@ -121,7 +121,6 @@ describe('neighborhood-ages', () => {
       })).to.eql({
         pending: false,
         data: payload,
-        selectedNeighborhood: DEFAULT_NEIGHBORHOOD,
       });
     });
 
