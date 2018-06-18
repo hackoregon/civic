@@ -1,12 +1,14 @@
 import React from 'react';
-import { css } from 'emotion';
+import { cx, css } from 'emotion';
 import { Link } from 'react-router';
 
 import CanvasParticles from './CanvasParticles';
 import DataList from './DataList';
 import SearchBar from './SearchBar';
+import { Footer } from '@hackoregon/component-library';
 
 import logo from '../../assets/civic-logo-animated.svg';
+import smallLogo from '../../assets/civic-logo-c.svg'
 
 import cities from './cities';
 import zipCodes from './zipCodes.json';
@@ -152,25 +154,60 @@ const ctaStyle = css`
     }
   }
 `;
+const citySkyline = css`
+  margin-top: 40px;
+`;
 const aboutCivicWrapper = css`
-  background-color: #240f27;
+  background-color: white;
   margin-top: 120px;
   height: 90vh;
   color: white;
 `;
-const aboutTitle = css`
+const sectionHeaderWrapper = css`
+  width: 100%
+  display: block;
+  position: relative;
+  background-color: #250f28;
+  padding: 60px 20%;
+`;
+const sectionRightContainer = css`
+  width: 90%;
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+  padding: 0 20px;
+  box-sizing: border-box;
+`;
+const sectionHeaderTitle = css`
   color: white;
   font-family: 'Rubik',sans-serif;
-  font-size: 40px;
-  text-align: center;
-  padding: 100px 0;
+  font-size: 50px;
+  letter-spacing: -1px;
+  text-align: left;
+  line-height: 1.2;
+  padding: 0px;
   display: block;
   position: relative;
   box-sizing: border-box;
 `;
-
-const citySkyline = css`
-  margin-top: 40px;
+const sectionHeaderSubtitle = css`
+  font-family: 'Rubik', sans-serif;
+  font-size: 24px;
+  color: white;
+  display: inline-block;
+`;
+const sectionContentWrapper = css`
+  background-color: white;
+  color: black;
+`;
+const smallLogoWrapper = css`
+  display: inline-block;
+  position: relative;
+  width: 10%;
+  min-width: 40px;
+  img {
+    width: 100%;
+  }
 `;
 
 class LandingPage extends React.Component {
@@ -244,10 +281,62 @@ class LandingPage extends React.Component {
             <SearchBar handleSubmit={this.handleSearch} />
             <DataList city={city} state={state} />
           </div>
+
           <div className={aboutCivicWrapper} id="aboutCivic">
-            <div className={aboutTitle}>Under Construction ⚠️</div>
+            <div className={sectionHeaderWrapper}>
+              <div className={smallLogoWrapper}>
+                <img src={smallLogo} />
+              </div>
+              <div className={sectionRightContainer}>
+                <div className={sectionHeaderTitle}>
+                  CIVIC Software Foundation
+                </div>
+                <div className={sectionHeaderSubtitle}>
+                  Lorem ipsum dolor
+                </div>
+              </div>
+            </div>
+            <div className={sectionContentWrapper}>
+              Hello
+            </div>
           </div>
+
+          <div className={aboutCivicWrapper} id="aboutCivic">
+            <div className={sectionHeaderWrapper}>
+              <div className={smallLogoWrapper}>
+                <img src={smallLogo} />
+              </div>
+              <div className={sectionHeaderTitle}>
+                CIVIC is made by people.
+              </div>
+              <div className={sectionHeaderSubtitle}>
+                Lorem ipsum dolor
+              </div>
+            </div>
+            <div className={sectionContentWrapper}>
+              Hello
+            </div>
+          </div>
+
+          <div className={aboutCivicWrapper} id="aboutCivic">
+            <div className={sectionHeaderWrapper}>
+              <div className={smallLogoWrapper}>
+                <img src={smallLogo} />
+              </div>
+              <div className={sectionHeaderTitle}>
+                Hack Oregon
+              </div>
+              <div className={sectionHeaderSubtitle}>
+                Lorem ipsum dolor
+              </div>
+            </div>
+            <div className={sectionContentWrapper}>
+              Hello
+            </div>
+          </div>
+
         </div>
+        <Footer />
       </div>
     );
   }
