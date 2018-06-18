@@ -8,7 +8,9 @@ export const getCampsiteSweepsRequest = createSelector(
 
 export const getCampsiteSweepsData = createSelector(
   getCampsiteSweepsRequest,
-  ({ data }) => data,
+  ({ data }) => (!data
+  ? null
+  : data.data.results.features),
 );
 
 export const isCampsiteSweepsPending = createSelector(

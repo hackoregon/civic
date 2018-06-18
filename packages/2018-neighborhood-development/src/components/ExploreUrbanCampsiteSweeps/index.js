@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { css } from 'emotion';
 
-import { CivicStoryCard, Collapsable, BaseMap, ScatterPlotMap } from '@hackoregon/component-library';
+import { CivicStoryCard, Collapsable, BaseMap, ScatterPlotMap, ChartContainer } from '@hackoregon/component-library';
 import { contextualDesc, belowFoldOne, belowFoldTwo } from './text';
 
-import { fetchCampsiteSweeps } from '../../state/explore-urban-campsite-sweeps/actions';
+import { fetchCampsiteSweeps, updateDateRange } from '../../state/explore-urban-campsite-sweeps/actions';
 import {
   isCampsiteSweepsPending,
   catchCampsiteSweepsErrors,
@@ -37,44 +37,47 @@ export class ExploreUrbanCampsiteSweeps extends React.Component {
       data,
     } = this.props;
 
-  const content = !data
+    const scatterplot = !data
     ? null
-    : (<Collapsable>
-      <Collapsable.Section>
-        <div className={mapWrapper}>
-          <p>{contextualDesc}</p>
-          <BaseMap
-            mapboxToken={mapboxToken}
-            initialLongitude={LONG}
-            initialLatitude={LAT}
-            initialZoom={ZOOM}
-          >
-            <ScatterPlotMap
-              data={data.data.results.features}
-              autoHighlight={false}
-              getColor={() => [109, 222, 69]}
-              getRadius={() => 550}
-            />
-          </BaseMap>
-        </div>
-      </Collapsable.Section>
-      <Collapsable.Section hidden>
-        <div>
-          <p>{belowFoldOne}</p>
-          <p>{belowFoldTwo}</p>
-        </div>
-      </Collapsable.Section>
-    </Collapsable>);
+    : (
+      <ScatterPlotMap
+        data={data}
+        autoHighlight={false}
+        getColor={() => [109, 222, 69]}
+        getRadius={() => 550}
+        onLayerClick={event => this.props.blah()}
+      />
+    );
 
     return (
-        <CivicStoryCard
-          title="Explore Urban Campsite Sweeps by Neighborhood"
-          slug="explore-urban-campsite-sweeps"
-          loading={isLoading}
-          error={error}
-        >
-          {content}
-        </CivicStoryCard>
+      <CivicStoryCard
+        title="Explore Urban Campsite Sweeps by Neighborhood"
+        slug="explore-urban-campsite-sweeps"
+        loading={isLoading}
+        error={error}
+      >
+        <Collapsable>
+          <Collapsable.Section>
+            <div className={mapWrapper}>
+              <p>{contextualDesc}</p>
+              <BaseMap
+                mapboxToken={mapboxToken}
+                initialLongitude={LONG}
+                initialLatitude={LAT}
+                initialZoom={ZOOM}
+              >
+                {scatterplot}
+              </BaseMap>
+            </div>
+          </Collapsable.Section>
+          <Collapsable.Section hidden>
+            <div>
+              <p>{belowFoldOne}</p>
+              <p>{belowFoldTwo}</p>
+            </div>
+          </Collapsable.Section>
+        </Collapsable>
+      </CivicStoryCard>
     );
   }
 }
@@ -97,6 +100,9 @@ export default connect(
   dispatch => ({
     init() {
       dispatch(fetchCampsiteSweeps());
+    },
+    blah() {
+      dispatch(updateDateRange(60));
     },
   }),
 )(ExploreUrbanCampsiteSweeps);

@@ -5,6 +5,8 @@ export const API_START = 'EXPLORE_URBAN_CAMPSITE_SWEEPS/START';
 export const API_SUCCESS = 'EXPLORE_URBAN_CAMPSITE_SWEEPS/SUCCESS';
 export const API_ERROR = 'EXPLORE_URBAN_CAMPSITE_SWEEPS/ERROR';
 
+export const INCREMENT_TIMER = 'EXPLORE_URBAN_CAMPSITE_SWEEPS/INCREMENT_TIMER';
+
 export const exploreUrbanCampsiteSweepsStart = actionEmitter(API_START);
 export const exploreUrbanCampsiteSweepsSuccess = actionEmitter(API_SUCCESS);
 export const exploreUrbanCampsiteSweepsError = actionEmitter(API_ERROR);
@@ -19,3 +21,10 @@ export const fetchCampsiteSweeps = apiAdapter(
     error: exploreUrbanCampsiteSweepsError,
   }
 );
+
+export const updateDateRange = (amount) => {
+  return {
+    type: INCREMENT_TIMER,
+    payload: amount,
+  };
+};
