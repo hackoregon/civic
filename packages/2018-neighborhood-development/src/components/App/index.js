@@ -17,15 +17,15 @@ import DiveDeeperIntoNeighborhoodData from '../DiveDeeperIntoNeighborhoodData';
 
 const App = () => (
   <PageLayout>
+    <ClassSizeAndQuality />
+    <NeighborhoodsThroughTheAges />
     <TheShapeOfANeighborhood />
     <MagnitudeOfUrbanCampsiteSweeps />
     <HumanImpactOfSweepingUrbanCampsites />
     <ExploreUrbanCampsiteSweeps />
     <StudentEnrollmentTrends />
     <VulnerableStudentPopulations />
-    <ClassSizeAndQuality />
     <UnderstandingStaffCuts />
-    <NeighborhoodsThroughTheAges />
     <ExploreAgeDemographics />
     <VotersOnTheMove />
     <DiveDeeperIntoNeighborhoodData />

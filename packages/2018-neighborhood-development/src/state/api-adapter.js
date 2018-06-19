@@ -5,8 +5,8 @@ import axios from 'axios';
 
 const apiAdapter = (url, { start, success, error }) => () => (dispatch) => {
   dispatch(start());
-  return axios.get(url).then((res) => {
-    dispatch(success(res));
+  return axios.get(url).then(({ data }) => {
+    dispatch(success(data.results));
   }).catch((err) => {
     dispatch(error(err));
   });
