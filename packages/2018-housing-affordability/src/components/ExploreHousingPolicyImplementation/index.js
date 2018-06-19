@@ -24,7 +24,7 @@ export class ExploreHousingPolicyImplementation extends React.Component {
           <br />
           <br />
           In the spring and summer of 2018,<a href="http://www.hackoregon.org/">Hack Oregon</a> volunteers surveyed local governments to understand what
-          policies were being implemented. Taking inspiration from the Housing <a href="http://www.hackoregon.org/">Consortium in Seattle, WA,</a>
+          policies were being implemented. Taking inspiration from the <a href="http://www.hackoregon.org/">Housing Consortium in Seattle, WA,</a>
           the Hack Oregon project team created a framework of 22 policies impacting housing affordability in the region.
           To get the most accurate representation of policies being implemented, government websites were reviewed and 
           interviews with government employees were conducted in order to verify our findings. 
