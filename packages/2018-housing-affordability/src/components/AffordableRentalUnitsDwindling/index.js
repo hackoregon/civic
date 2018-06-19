@@ -136,7 +136,6 @@ export class AffordableRentalUnitsDwindling extends React.Component {
 
 AffordableRentalUnitsDwindling.displayName = 'AffordableRentalUnitsDwindling';
 
-// Connect this to the redux store when necessary
 export default connect(
   state => ({
     isLoadingAllCities: isAllCitiesLoading(state),
