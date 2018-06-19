@@ -9,12 +9,17 @@ export class InfluentialContributorCohorts extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Influential Contributor Cohorts">
+      <CivicStoryCard
+        title="Influential Contributor Cohorts"
+        slug="influential-contributor-cohorts"
+      >
         <Placeholder />
       </CivicStoryCard>
     );
   }
 }
+
+InfluentialContributorCohorts.displayName = 'InfluentialContributorCohorts';
 
 // Connect this to the redux store when necessary
 export default InfluentialContributorCohorts;

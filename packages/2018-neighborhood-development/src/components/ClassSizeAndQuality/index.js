@@ -9,12 +9,17 @@ export class ClassSizeAndQuality extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Class Size and Quality">
+      <CivicStoryCard
+        title="Class Size and Quality"
+        slug="class-size-and-quality"
+      >
         <Placeholder issue="227"/>
       </CivicStoryCard>
     );
   }
 }
+
+ClassSizeAndQuality.displayName = 'ClassSizeAndQuality';
 
 // Connect this to the redux store when necessary
 export default ClassSizeAndQuality;

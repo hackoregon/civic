@@ -9,7 +9,10 @@ export class DiveDeeperIntoTransportationData extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Dive Deeper into Transportation Data">
+      <CivicStoryCard
+        title="Dive Deeper into Transportation Data"
+        slug="dive-deeper-into-transportation-data"
+      >
         <Placeholder>
           <h1>Sandbox Card</h1>
           <p>Don't worry about this one</p>
@@ -18,6 +21,8 @@ export class DiveDeeperIntoTransportationData extends React.Component {
     );
   }
 }
+
+DiveDeeperIntoTransportationData.displayName = 'DiveDeeperIntoTransportationData';
 
 // Connect this to the redux store when necessary
 export default DiveDeeperIntoTransportationData;

@@ -87,6 +87,20 @@ const collapsableDemo = () => (
     </CivicStoryCard>
   </Container>
 );
+const loadingDemo = () => (
+  <Container>
+    <CivicStoryCard loading title="Dogs x Income">
+      <span>Im some random content</span>
+    </CivicStoryCard>
+  </Container>
+);
+const errorDemo = () => (
+  <Container>
+    <CivicStoryCard error="Could not load dogs" title="Dogs x Income">
+      <span>Im some random content</span>
+    </CivicStoryCard>
+  </Container>
+);
 
 export default () => storiesOf('CivicStoryCard', module)
   .add(
@@ -100,6 +114,8 @@ export default () => storiesOf('CivicStoryCard', module)
       </Container>
     )
   )
+  .add('loading', loadingDemo)
+  .add('with error', errorDemo)
   .add('with title & description', tdDemo)
   .add('with title, description & visualization', tdvDemo)
   .add('with collapsable sections', collapsableDemo);
