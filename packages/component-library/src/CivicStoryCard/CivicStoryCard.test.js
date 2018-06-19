@@ -26,6 +26,38 @@ describe('CivicStoryCard', () => {
     });
   });
 
+  describe('loading state', () => {
+    const wrapper = shallow(
+      <CivicStoryCard loading>
+        <h1>blah</h1>
+      </CivicStoryCard>
+    );
+
+    it('should render loading message', () => {
+      expect(wrapper.text().indexOf('Loading...')).to.eql(0);
+    });
+
+    it('should not render children', () => {
+      expect(wrapper.find('h1').length).to.eql(0);
+    });
+  });
+
+  describe('error state', () => {
+    const wrapper = shallow(
+      <CivicStoryCard error="Could not load data">
+        <h1>blah</h1>
+      </CivicStoryCard>
+    );
+
+    it('should render loading message', () => {
+      expect(wrapper.text().indexOf('Could not load data')).to.eql(0);
+    });
+
+    it('should not render children', () => {
+      expect(wrapper.find('h1').length).to.eql(0);
+    });
+  });
+
   describe('card children', () => {
     const wrapper = shallow(
       <CivicStoryCard slug={slug} title={title}>

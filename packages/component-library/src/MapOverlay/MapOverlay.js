@@ -16,27 +16,26 @@ const elevationScale = {min: 1, max: 50};
 
 const MapOverlay = (props) => {
   const {
-    viewport,
+    children,
     data,
-    getPosition,
-    opacity,
-    filled,
-    wireframe,
+    viewport,
+    autoHighlight,
     extruded,
     elevation,
-    onLayerClick,
+    filled,
     getColor,
     getRadius,
-    radiusScale,
+    onHover,
+    onLayerClick,
+    opacity,
     outline,
+    radiusScale,
     strokeWidth,
-    autoHighlight,
-    visible,
     tooltipInfo,
+    visible,
+    wireframe,
     x,
     y,
-    onHover,
-    children,
   } = props;
 
   const tooltip = React.Children.map(children, child => {
@@ -51,7 +50,7 @@ const MapOverlay = (props) => {
 
   const colorScale = r => [r * 255, 140, 200 * (1 - r)];
 
-  const DATA_URL = 'https://raw.githubusercontent.com/uber-common/deck.gl-data/master/examples/geojson/vancouver-blocks.json'; // eslint-disable-line
+  // const DATA_URL = 'https://raw.githubusercontent.com/uber-common/deck.gl-data/master/examples/geojson/vancouver-blocks.json'; // eslint-disable-line
 
   const LIGHT_SETTINGS = {
       lightsPosition: [-125, 50.5, 5000, -122.8, 48.5, 8000],
@@ -63,23 +62,22 @@ const MapOverlay = (props) => {
     };
 
   const layer = new GeoJsonLayer({
-    id: 'geojson',
     data,
-    opacity: opacity,
-    stroked: false,
-    filled: filled,
-    extruded: extruded,
-    wireframe: wireframe,
+    extruded,
+    opacity,
+    filled,
+    onHover,
+    wireframe,
+    autoHighlight: true,
     fp64: true,
+    id: 'geojson',
+    lightSettings: LIGHT_SETTINGS,
+    onClick: onLayerClick,
+    pickable: true,
+    stroked: false,
     getElevation: f => Math.sqrt(f.properties.Shape_Length) * elevation,
     getFillColor: f => colorScale(f.properties.Shape_Length),
     getLineColor: f => [255, 255, 255],
-    lightSettings: LIGHT_SETTINGS,
-    pickable: true,
-    autoHighlight: true,
-    getPosition: getPosition,
-    onClick: onLayerClick,
-    onHover: onHover,
   });
 
   return (
