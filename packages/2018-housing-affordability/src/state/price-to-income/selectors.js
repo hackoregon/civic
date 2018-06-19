@@ -8,7 +8,7 @@ export const getPTI = createSelector(
 
 const getProperty = key => createSelector(getPTI, state => state[key]);
 
-const transformPTIResponse = data => console.log('WUT', data) || data ? data
+const transformPTIResponse = data => data ? data
   .map(datum => ({
     ...datum,
     value: +datum.value,
@@ -56,7 +56,7 @@ export const getCityCountryChartData = createSelector(
   isAnyLoading,
   getSelectedCityData,
   getCountryData,
-  (isLoading, city, country) => console.log('ping', isLoading, city, country) || isLoading || (city || []).map(c => ({
+  (isLoading, city, country) => isLoading || (city || []).map(c => ({
     ...c,
     series: c.datapoint,
   })).concat((country || []).map(c => ({
