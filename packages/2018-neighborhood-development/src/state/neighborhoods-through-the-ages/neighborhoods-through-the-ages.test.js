@@ -121,6 +121,7 @@ describe('neighborhood-ages', () => {
       })).to.eql({
         pending: false,
         data: payload,
+        error: null,
       });
     });
 
@@ -131,6 +132,7 @@ describe('neighborhood-ages', () => {
       })).to.eql({
         pending: false,
         error: payload,
+        data: null,
       });
     });
   });

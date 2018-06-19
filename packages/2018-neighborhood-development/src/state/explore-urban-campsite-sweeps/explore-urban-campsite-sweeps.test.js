@@ -77,6 +77,7 @@ describe('explore-urban-campsite-sweeps', () => {
       })).to.eql({
         pending: false,
         data: payload,
+        error: null,
       });
     });
 
@@ -85,6 +86,7 @@ describe('explore-urban-campsite-sweeps', () => {
         type: actions.API_ERROR,
         payload,
       })).to.eql({
+        data: null,
         pending: false,
         error: payload,
       });
