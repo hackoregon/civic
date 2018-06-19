@@ -10,10 +10,10 @@ import { year, titleCase } from '@hackoregon/component-library/src/utils/formatt
 import { fetchSchoolList, fetchSchoolData, setSchool } from '../../state/student-enrollment-trends/actions';
 import {
   isSchoolListPending,
-  catchSchoolListErrors,
+  catchSchoolListFailure,
   getSchoolList,
   isSchoolDataPending,
-  catchSchoolDataErrors,
+  catchSchoolDataFailure,
   getSchoolData,
   getSelectedSchool,
   getProcessedSchoolData,
@@ -52,15 +52,16 @@ const formatForChartB = d => ungroupBy(d, CHARTB_CATEGORIES, CHARTB_LABELS);
 export class StudentEnrollmentTrends extends React.Component {
   componentDidMount() {
     this.props.init();
+    this.props.setSchool(DEFAULT_SCHOOL);
   }
 
   render() {
     const {
       schoolListLoading,
-      schoolListError,
+      schoolListFailure,
       schoolList,
       schoolDataLoading,
-      schoolDataError,
+      schoolDataFailure,
       schoolData,
       processedSchoolData,
       selectedSchool,
@@ -71,7 +72,7 @@ export class StudentEnrollmentTrends extends React.Component {
         title="Student Enrollment Trends"
         slug="student-enrollment-trends"
         loading={schoolListLoading || schoolDataLoading}
-        error={schoolListError || schoolDataError}
+        error={(schoolListFailure || schoolDataFailure) && 'Could not load school data'}
       >
         { (schoolList && selectedSchool && processedSchoolData) &&
           <div>
@@ -118,10 +119,10 @@ export default connect(
 
   state => ({
     schoolListLoading: isSchoolListPending(state),
-    schoolListError: catchSchoolListErrors(state),
+    schoolListFailure: catchSchoolListFailure(state),
     schoolList: getSchoolList(state),
     schoolDataLoading: isSchoolDataPending(state),
-    schoolDataError: catchSchoolDataErrors(state),
+    schoolDataFailure: catchSchoolDataFailure(state),
     schoolData: getSchoolData(state),
     selectedSchool: getSelectedSchool(state),
     processedSchoolData: getProcessedSchoolData(state),
@@ -129,11 +130,9 @@ export default connect(
   dispatch => ({
     init() {
       dispatch(fetchSchoolList());
-      dispatch(setSchool(DEFAULT_SCHOOL));
-      dispatch(fetchSchoolData());
     },
-    setSchool(school) {
-      dispatch(fetchSchoolData());
+    setSchool(school = {}) {
+      dispatch(fetchSchoolData(school));
       dispatch(setSchool(school));
     },
   }),

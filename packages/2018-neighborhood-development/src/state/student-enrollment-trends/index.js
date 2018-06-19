@@ -1,19 +1,19 @@
 import {
   SCHOOL_LIST_START,
   SCHOOL_LIST_SUCCESS,
-  SCHOOL_LIST_ERROR,
+  SCHOOL_LIST_FAILURE,
   SCHOOL_DATA_START,
   SCHOOL_DATA_SUCCESS,
-  SCHOOL_DATA_ERROR,
+  SCHOOL_DATA_FAILURE,
   SET_SCHOOL,
 } from './actions';
 
 const INITIAL_STATE = {
   schoolListPending: false,
-  schoolListError: null,
+  schoolListFailure: null,
   schoolList: null,
   schoolDataPending: false,
-  schoolDataError: null,
+  schoolDataFailure: null,
   schoolData: null,
   selectedSchool: null,
 };
@@ -24,42 +24,42 @@ const reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         schoolListPending: true,
-        schoolListError: null,
+        schoolListFailure: null,
         schoolList: null,
       };
     case SCHOOL_LIST_SUCCESS:
       return {
         ...state,
         schoolListPending: false,
-        schoolListError: null,
-        schoolList: action.payload.data,
+        schoolListFailure: null,
+        schoolList: action.payload,
       };
-    case SCHOOL_LIST_ERROR:
+    case SCHOOL_LIST_FAILURE:
       return {
         ...state,
         schoolListPending: false,
-        schoolListError: action.payload,
+        schoolListFailure: action.payload,
         schoolList: null,
       };
     case SCHOOL_DATA_START:
       return {
         ...state,
         schoolDataPending: true,
-        schoolDataError: null,
+        schoolDataFailure: null,
         schoolData: null,
       };
     case SCHOOL_DATA_SUCCESS:
       return {
         ...state,
         schoolDataPending: false,
-        schoolDataError: null,
-        schoolData: action.payload.data.results,
+        schoolDataFailure: null,
+        schoolData: action.payload.results,
       };
-    case SCHOOL_DATA_ERROR:
+    case SCHOOL_DATA_FAILURE:
       return {
         ...state,
         schoolDataPending: false,
-        schoolDataError: action.payload,
+        schoolDataFailure: action.payload,
         schoolData: null,
       };
     case SET_SCHOOL:

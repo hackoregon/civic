@@ -24,8 +24,8 @@ const getProperty = key => createSelector(getStudentEnrollmentTrendsRequest, sta
 
 export const isSchoolListPending = getProperty('schoolListPending');
 export const isSchoolDataPending = getProperty('schoolDataPending');
-export const catchSchoolListErrors = getProperty('schoolListError');
-export const catchSchoolDataErrors = getProperty('schoolDataError');
+export const catchSchoolListFailure = getProperty('schoolListFailure');
+export const catchSchoolDataFailure = getProperty('schoolDataFailure');
 export const getSchoolList = getProperty('schoolList');
 export const getSchoolData = getProperty('schoolData');
 export const getSelectedSchool = getProperty('selectedSchool');
