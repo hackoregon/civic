@@ -6,11 +6,6 @@ const politicalCampaignsSelector = createSelector(
   ({ politicalCampaigns }) => politicalCampaigns,
 );
 
-export const getContributorBreakdownRequest = createSelector(
-  rootState,
-  ({ politicalCampaigns }) => politicalCampaigns,
-);
-
 export const getContributorBreakdownData = createSelector(
   politicalCampaignsSelector,
   ({ data }) => data.contributorBreakdown && data.contributorBreakdown.data ? data.contributorBreakdown.data : data.contributorBreakdown,
@@ -22,14 +17,19 @@ export const isPoliticalCampaignsLoading = createSelector(
     .reduce((acc, key) => acc || data[key].pending, false),
 );
 
-export const isContributorBreakdownErrors = createSelector(
-  getContributorBreakdownRequest,
-  ({ error }) => error || error,
-);
-
 export const getCampaign = createSelector(
   politicalCampaignsSelector,
   ({ meta }) => meta.campaign,
+);
+
+export const getElectionCycle = createSelector(
+  politicalCampaignsSelector,
+  ({ meta }) => meta.electionCycle,
+);
+
+export const getElectionCycles = createSelector(
+  politicalCampaignsSelector,
+  ({ data }) => data.electionCycles && data.electionCycles.data ? data.electionCycles.data : data.electionCycles,
 );
 
 export const getCommittees = createSelector(

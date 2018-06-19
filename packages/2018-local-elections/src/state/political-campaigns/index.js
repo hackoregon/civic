@@ -5,6 +5,7 @@ import {
   REQUEST_SUCCESS,
   REQUEST_ERROR,
   SET_CAMPAIGN,
+  SET_ELECTION_CYCLE,
 } from './actions';
 
 const INITIAL_REQUEST_STATE = {};
@@ -40,6 +41,11 @@ const metaReducer = (state = INITIAL_META_STATE, action) => {
       return {
         ...state,
         campaign: action.payload.campaign,
+      };
+    case SET_ELECTION_CYCLE:
+      return {
+        ...state,
+        electionCycle: action.payload.electionCycle,
       };
     default:
       return state;

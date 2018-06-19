@@ -6,18 +6,21 @@ import { CivicStoryCard } from '@hackoregon/component-library';
 
 import {
   fetchContributorBreakdown,
+  fetchElectionCycles,
   fetchCommittees,
+  setElectionCycle,
   setCampaign,
 } from '../../state/political-campaigns/actions';
 import {
   isPoliticalCampaignsLoading,
-  isContributorBreakdownErrors,
   getContributorBreakdownData,
+  getElectionCycles,
+  getElectionCycle,
   getCommittees,
   getCampaign,
 } from '../../state/political-campaigns/selectors';
 
-import { campaign } from './defaults';
+import { campaign, electionCycle } from './defaults';
 import ContributorBreakdown from './ContributorBreakdown';
 import Controls from './Controls';
 
@@ -27,6 +30,10 @@ const propTypes = {
   campaign: PropTypes.object,
   committees: PropTypes.object,
   setCampaign: PropTypes.func,
+  electionCycle: PropTypes.object,
+  electionCycles: PropTypes.func,
+  setElectionCycle: PropTypes.func,
+  fetchContributorBreakdown: PropTypes.func,
 };
 
 const defaultProps = {
@@ -39,18 +46,25 @@ const defaultProps = {
 class RealTimeInformationOnPoliticalCampaigns extends React.Component {
   componentDidMount() {
     this.props.setCampaign(campaign);
-    this.props.query()
+    this.props.setElectionCycle(electionCycle);
+    this.props.query();
   }
 
   componentWillReceiveProps(newProps) {
-    if (newProps.campaign.id !== this.props.campaign.id) {
-      this.props.fetchContributorBreakdown(newProps.campaign.id);
+    if (
+      (newProps.electionCycle && newProps.campaign) &&
+      (
+        (newProps.campaign.id !== this.props.campaign.id) ||
+        (newProps.electionCycle.id !== this.props.electionCycle.id)
+      )) {
+      this.props.fetchContributorBreakdown(newProps.campaign.id, newProps.electionCycle.id);
     }
   }
 
   render() {
     let committees = [];
     let contributors = [];
+    let electionCycles = [];
 
     if (this.props.committees && this.props.committees.results) {
       committees = this.props.committees.results;
@@ -58,6 +72,10 @@ class RealTimeInformationOnPoliticalCampaigns extends React.Component {
 
     if (this.props.contributorBreakdown && this.props.contributorBreakdown.results) {
       contributors = this.props.contributorBreakdown.results;
+    }
+
+    if (this.props.electionCycles && this.props.electionCycles.results) {
+      electionCycles = this.props.electionCycles.results;
     }
 
     return (
@@ -70,6 +88,9 @@ class RealTimeInformationOnPoliticalCampaigns extends React.Component {
           campaign={this.props.campaign}
           campaigns={committees}
           setCampaign={this.props.setCampaign}
+          electionCycle={this.props.electionCycle}
+          electionCycles={electionCycles}
+          setElectionCycle={this.props.setElectionCycle}
         />
         <ContributorBreakdown contributors={contributors} />
       </CivicStoryCard>
@@ -85,14 +106,18 @@ RealTimeInformationOnPoliticalCampaigns.defaultProps = defaultProps;
 export default connect(
   state => ({
     loading: isPoliticalCampaignsLoading(state),
-    error: isContributorBreakdownErrors(state),
     contributorBreakdown: getContributorBreakdownData(state),
     campaign: getCampaign(state),
     committees: getCommittees(state),
+    electionCycle: getElectionCycle(state),
+    electionCycles: getElectionCycles(state),
   }),
   dispatch => ({
-    fetchContributorBreakdown: committeeID => dispatch(fetchContributorBreakdown(committeeID)),
+    fetchContributorBreakdown: (committeeID, electionCycleID) =>
+      dispatch(fetchContributorBreakdown(committeeID, electionCycleID)),
+    fetchElectionCycles: dispatch(fetchElectionCycles({ limit: 30 })),
     query: () => dispatch(fetchCommittees({ limit: 3000 })),
+    setElectionCycle: c => dispatch(setElectionCycle(c)),
     setCampaign: c => dispatch(setCampaign(c)),
   }),
 )(RealTimeInformationOnPoliticalCampaigns);
