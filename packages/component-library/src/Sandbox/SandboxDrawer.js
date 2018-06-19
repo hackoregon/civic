@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
-import { Dropdown } from '../../src';
+import Dropdown from '../Dropdown/Dropdown';
 import SandboxDateSelector from './SandboxDateSelector';
 
 const SandboxDrawer = ({
