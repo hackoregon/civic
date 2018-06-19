@@ -114,7 +114,36 @@ const HorizontalBarChart = ({
             />
           }
           domainPadding={0}
-          data={barData.map(d => ({ sortOrder: d[sortOrderKey], dataValue: d[dataValue], label: dataLabelFormatter(d[dataLabel]) }))}
+          data={barData.map(d => ({
+            sortOrder: d[sortOrderKey],
+            dataValue: d[dataValue],
+            label: dataLabelFormatter(d[dataLabel])
+          }))}
+          x="sortOrder"
+          y="dataValue"
+          events={chartEvents}
+        />
+        <VictoryBar
+          horizontal
+          labelComponent={
+            <VictoryTooltip
+              x={325}
+              y={0}
+              orientation="bottom"
+              pointerLength={0}
+              cornerRadius={0}
+              theme={CivicVictoryTheme.civic}
+            />
+          }
+          domainPadding={0}
+          data={barData.map(d => ({
+            sortOrder: d[sortOrderKey],
+            dataValue: d[dataValue],
+            label: `${dataLabelFormatter(d[dataLabel])}: ${dataValueFormatter(d[dataValue])}`
+          }))}
+          style={{
+            data: { fill: 'none' },
+          }}
           title="Horizontal Bar Chart"
           x="sortOrder"
           y="dataValue"
