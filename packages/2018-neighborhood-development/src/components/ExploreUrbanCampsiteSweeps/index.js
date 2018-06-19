@@ -13,8 +13,6 @@ import {
   getCampsiteSweepsData,
 } from '../../state/explore-urban-campsite-sweeps/selectors';
 
-// Use Hack Oregon official mapbox token eventually
-const mapboxToken = 'pk.eyJ1IjoidGhlbWVuZG96YWxpbmUiLCJhIjoiY2o1aXdoem1vMWtpNDJ3bnpqaGF1bnlhNSJ9.sjTrNKLW9daDBIGvP3_W0w';
 const LAT = 45.5231;
 const LONG = -122.6765;
 const ZOOM = 9.5;
@@ -60,7 +58,6 @@ export class ExploreUrbanCampsiteSweeps extends React.Component {
             <div className={mapWrapper}>
               <p>{contextualDesc}</p>
               <BaseMap
-                mapboxToken={mapboxToken}
                 initialLongitude={LONG}
                 initialLatitude={LAT}
                 initialZoom={ZOOM}
