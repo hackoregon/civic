@@ -12,8 +12,8 @@ export const getContributorBreakdownRequest = createSelector(
 );
 
 export const getContributorBreakdownData = createSelector(
-  getContributorBreakdownRequest,
-  ({ data }) => data
+  politicalCampaignsSelector,
+  ({ data }) => data.contributorBreakdown && data.contributorBreakdown.data ? data.contributorBreakdown.data : data.contributorBreakdown,
 );
 
 export const isContributorBreakdownPending = createSelector(

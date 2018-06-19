@@ -11,6 +11,7 @@ export default ({ INITIAL_STATE, API_START, API_SUCCESS, API_ERROR }) =>
         return {
           ...state.data,
           [type]: {
+            data: {},
             pending: true,
           },
         };
@@ -19,6 +20,7 @@ export default ({ INITIAL_STATE, API_START, API_SUCCESS, API_ERROR }) =>
           ...state.data,
           [type]: {
             pending: false,
+            data: {},
             error: action.payload,
           },
         };

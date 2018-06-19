@@ -28,11 +28,16 @@ const endpoint = (type) => {
 };
 
 export const fetchContributorBreakdown = (committeeID, params = {}) =>
-  apiAdapter(`${endpoint(CONTRIBUTOR_BREAKDOWN)}${committeeID}/`, params, {
-    start: requestStart(CONTRIBUTOR_BREAKDOWN),
-    success: requestSuccess(CONTRIBUTOR_BREAKDOWN),
-    error: requestError(CONTRIBUTOR_BREAKDOWN),
-  })();
+  apiAdapter(`${endpoint(CONTRIBUTOR_BREAKDOWN)}`,
+    {
+      ...params,
+      committee_id: committeeID,
+    },
+    {
+      start: requestStart(CONTRIBUTOR_BREAKDOWN),
+      success: requestSuccess(CONTRIBUTOR_BREAKDOWN),
+      error: requestError(CONTRIBUTOR_BREAKDOWN),
+    })();
 
 export const fetchCommittees = (params = {}) =>
   apiAdapter(endpoint(COMMITTEES), params, {

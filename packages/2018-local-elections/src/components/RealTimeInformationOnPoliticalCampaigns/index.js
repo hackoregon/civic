@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { CivicStoryCard, Placeholder } from '@hackoregon/component-library';
+import { CivicStoryCard } from '@hackoregon/component-library';
 
 import {
   fetchContributorBreakdown,
@@ -18,7 +18,7 @@ import {
 } from '../../state/political-campaigns/selectors';
 
 import { campaign } from './defaults';
-
+import ContributorBreakdown from './ContributorBreakdown';
 import Controls from './Controls';
 
 const propTypes = {
@@ -49,9 +49,14 @@ class RealTimeInformationOnPoliticalCampaigns extends React.Component {
 
   render() {
     let committees = [];
+    let contributors = [];
 
     if (this.props.committees && this.props.committees.results) {
       committees = this.props.committees.results;
+    }
+
+    if (this.props.contributorBreakdown && this.props.contributorBreakdown.results) {
+      contributors = this.props.contributorBreakdown.results;
     }
 
     return (
@@ -64,7 +69,7 @@ class RealTimeInformationOnPoliticalCampaigns extends React.Component {
           campaigns={committees}
           setCampaign={this.props.setCampaign}
         />
-        <Placeholder />
+        <ContributorBreakdown contributors={contributors} />
       </CivicStoryCard>
     );
   }
