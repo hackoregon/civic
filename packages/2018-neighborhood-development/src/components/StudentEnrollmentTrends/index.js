@@ -38,11 +38,11 @@ const CHARTB_CATEGORIES = [
   'pacific',
 ];
 const CHARTB_LABELS = [
-  'black',
-  'hispanic',
-  'multi_ethnic',
-  'native',
-  'pacific',
+  'Black/African American',
+  'Hispanic/Latino',
+  'Multi-Ethnic',
+  'American Indian/Alaska Native',
+  'Native Hawaiian/Pacific Islander',
 ];
 
 const formatForSelector = arr => arr.map(name => ({ value: name, label: name }));
@@ -77,11 +77,11 @@ export class StudentEnrollmentTrends extends React.Component {
           <div>
             <Dropdown
               value={selectedSchool}
-              onChange={event => setSchool(event)}
+              onChange={event => this.props.setSchool(event.value)}
               options={formatForSelector(schoolList)}
             />
             <StackedAreaChart
-              title="Student Enrollment"
+              title="All Students"
               subtitle={`Fall enrollment in Portland Public Schools - ${titleCase(selectedSchool)}`}
               data={formatForChartA(processedSchoolData)}
               xLabel="Year"
@@ -93,7 +93,7 @@ export class StudentEnrollmentTrends extends React.Component {
               yNumberFormatter={year}
             />
             <StackedAreaChart
-              title="Historically Underrepresented Groups"
+              title="Students From Historically Underrepresented Groups"
               subtitle={`Fall enrollment in Portland Public Schools - ${titleCase(selectedSchool)}`}
               data={formatForChartB(processedSchoolData)}
               xLabel="Year"
