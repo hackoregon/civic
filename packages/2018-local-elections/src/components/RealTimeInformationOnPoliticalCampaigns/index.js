@@ -10,7 +10,7 @@ import {
   setCampaign,
 } from '../../state/political-campaigns/actions';
 import {
-  isContributorBreakdownPending,
+  isPoliticalCampaignsLoading,
   isContributorBreakdownErrors,
   getContributorBreakdownData,
   getCommittees,
@@ -23,6 +23,7 @@ import Controls from './Controls';
 
 const propTypes = {
   query: PropTypes.func,
+  loading: PropTypes.bool,
   campaign: PropTypes.object,
   committees: PropTypes.object,
   setCampaign: PropTypes.func,
@@ -63,6 +64,7 @@ class RealTimeInformationOnPoliticalCampaigns extends React.Component {
       <CivicStoryCard
         title="Real-Time Information on Political Campaigns"
         slug="real-time-information-on-political-campaigns"
+        loading={this.props.loading}
       >
         <Controls
           campaign={this.props.campaign}
@@ -82,7 +84,7 @@ RealTimeInformationOnPoliticalCampaigns.defaultProps = defaultProps;
 // Connect this to the redux store when necessary
 export default connect(
   state => ({
-    isLoading: isContributorBreakdownPending(state),
+    loading: isPoliticalCampaignsLoading(state),
     error: isContributorBreakdownErrors(state),
     contributorBreakdown: getContributorBreakdownData(state),
     campaign: getCampaign(state),

@@ -7,9 +7,7 @@ import {
   SET_CAMPAIGN,
 } from './actions';
 
-const INITIAL_REQUEST_STATE = {
-  data: {},
-};
+const INITIAL_REQUEST_STATE = {};
 
 const INITIAL_META_STATE = {
   campaign: {},

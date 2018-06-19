@@ -16,9 +16,10 @@ export const getContributorBreakdownData = createSelector(
   ({ data }) => data.contributorBreakdown && data.contributorBreakdown.data ? data.contributorBreakdown.data : data.contributorBreakdown,
 );
 
-export const isContributorBreakdownPending = createSelector(
-  getContributorBreakdownRequest,
-  ({ pending }) => !!pending,
+export const isPoliticalCampaignsLoading = createSelector(
+  politicalCampaignsSelector,
+  ({ data }) => Object.keys(data)
+    .reduce((acc, key) => acc || data[key].pending, false),
 );
 
 export const isContributorBreakdownErrors = createSelector(

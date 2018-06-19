@@ -9,7 +9,7 @@ export default ({ INITIAL_STATE, API_START, API_SUCCESS, API_ERROR }) =>
     switch (subtype) {
       case API_START:
         return {
-          ...state.data,
+          ...state,
           [type]: {
             data: {},
             pending: true,
@@ -17,7 +17,7 @@ export default ({ INITIAL_STATE, API_START, API_SUCCESS, API_ERROR }) =>
         };
       case API_ERROR:
         return {
-          ...state.data,
+          ...state,
           [type]: {
             pending: false,
             data: {},
@@ -26,7 +26,7 @@ export default ({ INITIAL_STATE, API_START, API_SUCCESS, API_ERROR }) =>
         };
       case API_SUCCESS:
         return {
-          ...state.data,
+          ...state,
           [type]: {
             pending: false,
             data: action.payload.data,
