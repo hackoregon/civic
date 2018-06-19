@@ -37,7 +37,7 @@ export class PortlandNeedsAffordableRentalUnits extends React.Component {
           <br />
           <br />
           The National Low Income Housing Coalition reported in March 2017 that the region needs 25,958 rental
-           units for families making 50% of median family income, and 52,848 for those making 30%.</p>
+          units for families making 50% of median family income, and 52,848 for those making 30%.</p>
 
       </CivicStoryCard>
     );
