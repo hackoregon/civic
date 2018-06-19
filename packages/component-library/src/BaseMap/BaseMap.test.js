@@ -3,9 +3,10 @@ import { shallow } from 'enzyme';
 import BaseMap from './BaseMap';
 import ScatterPlotMap from '../ScatterPlotMap/ScatterPlotMap';
 
+const MAPBOX_TOKEN = 'pk.eyJ1IjoiaGFja29yZWdvbiIsImEiOiJjamk0MGZhc2cwNDl4M3FsdHAwaG54a3BnIn0.Fq1KA0IUwpeKQlFIoaEn_Q';
+
 describe('BaseMap', () => {
-  const mapboxToken = 'pk.testmapboxtoken.sjTrNKLW9daDBIGvP3_W0w';
-  const defaultProps = { mapboxToken };
+  const defaultProps = { };
 
   it('should render a MapGL component', () => {
     const wrapper = shallow(<BaseMap {...defaultProps} />);
@@ -16,7 +17,7 @@ describe('BaseMap', () => {
   it('should include required prop mapboxApiAccessToken', () => {
     const wrapper = shallow(<BaseMap {...defaultProps} />);
 
-    expect(wrapper.find('.MapGL').prop('mapboxApiAccessToken')).to.eql(defaultProps.mapboxToken);
+    expect(wrapper.find('.MapGL').prop('mapboxApiAccessToken')).to.eql(MAPBOX_TOKEN);
   });
 
   it('should render child NavigationControl component', () => {
