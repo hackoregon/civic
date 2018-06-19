@@ -64,7 +64,7 @@ export class NeighborhoodsThroughTheAges extends React.Component {
         { !!selectedNeighborhood &&
           <Dropdown
           value={selectedNeighborhood}
-          onChange={event => this.props.setNeighborhood(event)}
+          onChange={event => event && this.props.setNeighborhood(event)}
           options={neighborhoods}
           />
         }
