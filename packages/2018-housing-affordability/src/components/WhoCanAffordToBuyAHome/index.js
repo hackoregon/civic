@@ -122,7 +122,7 @@ export class WhoCanAffordToBuyAHome extends React.Component {
             />
           </div>)}
           {isError && <ErrorMessage />} 
-          <p>In the early 1990s, the Portland Metropolitan ratio was ~2.5%. This number steadily increased up
+          <p>In the early 1990's, the Portland Metropolitan ratio was ~2.5%. This number steadily increased up
            until 2006, reaching a high of 5.4%. Following the recession, the ratio showed a downturn; however starting
             in 2011, it started to bounce back, and recent values are on par with the previous maximum. 
             In 2016, Portland ranked 349 out of 381 Metropolitan areas with regards to affordability.
