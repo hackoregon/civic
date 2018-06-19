@@ -48,6 +48,5 @@ export { default as PackageSelectorBox } from './PackageSelectorBox/PackageSelec
 export { default as CanvasParticles } from './LandingPage/CanvasParticles';
 export { default as CivicSandboxDashboard } from './CivicSandboxDashboard/CivicSandboxDashboard';
 export { default as Collapsable } from './Collapsable/Collapsable';
+export { default as Sandbox } from './Sandbox/Sandbox';
 export { default as StackedAreaChart } from './StackedAreaChart/StackedAreaChart';
-
-import './fonts.css';
