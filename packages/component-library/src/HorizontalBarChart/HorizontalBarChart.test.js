@@ -66,7 +66,7 @@ describe('HorizontalBarChart', () => {
   it('should render a VictoryBar inside a ChartContainer', () => {
     const wrapper = shallow(<HorizontalBarChart data={simpleData} />);
     expect(wrapper.find('ChartContainer')).to.have.length(1);
-    expect(wrapper.find('ChartContainer').children().find('VictoryBar')).to.have.length(1);
+    expect(wrapper.find('ChartContainer').children().find('VictoryBar')).to.have.length(2);
   });
 
   it('conditionally passes title to ChartContainer', () => {
@@ -101,7 +101,7 @@ describe('HorizontalBarChart', () => {
     const wrapper = shallow(<HorizontalBarChart data={simpleData} />);
     const victoryComponents = wrapper.find('VictoryChart').children();
     expect(victoryComponents.find('VictoryAxis')).to.have.length(2);
-    expect(victoryComponents.find('VictoryBar')).to.have.length(1);
+    expect(victoryComponents.find('VictoryBar')).to.have.length(2);
   });
 
   it('should properly set a domain if provided with one', () => {
@@ -127,14 +127,14 @@ describe('HorizontalBarChart', () => {
 
   it('sends in data in usable format', () => {
     const wrapper = shallow(<HorizontalBarChart data={simpleData} />);
-    const dataProp = wrapper.find('VictoryBar').prop('data');
+    const dataProp = wrapper.find('VictoryBar').first().prop('data');
     expect(dataProp).to.have.length(4);
     const firstDataProp = dataProp[0];
     expect(firstDataProp).to.have.property('sortOrder');
     expect(firstDataProp).to.have.property('dataValue');
     expect(firstDataProp).to.have.property('label');
-    const xProp = wrapper.find('VictoryBar').prop('x');
-    const yProp = wrapper.find('VictoryBar').prop('y');
+    const xProp = wrapper.find('VictoryBar').first().prop('x');
+    const yProp = wrapper.find('VictoryBar').first().prop('y');
     expect(xProp).to.eql('sortOrder');
     expect(yProp).to.eql('dataValue');
   });
