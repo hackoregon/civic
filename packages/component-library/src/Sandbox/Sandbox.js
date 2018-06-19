@@ -1,8 +1,10 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Dropdown, BaseMap, CivicSandboxMap } from '../../src';
-import CivicSandboxTooltip from '../../src/CivicSandboxMap/CivicSandboxTooltip';
+import Dropdown from '../Dropdown/Dropdown';
+import BaseMap from '../BaseMap/BaseMap';
+import CivicSandboxMap from '../CivicSandboxMap/CivicSandboxMap';
+import CivicSandboxTooltip from '../CivicSandboxMap/CivicSandboxTooltip';
 import SandboxDrawer from './SandboxDrawer';
 
 const Sandbox = ({
