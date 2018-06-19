@@ -9,6 +9,9 @@ import { Footer } from '@hackoregon/component-library';
 
 import logo from '../../assets/civic-logo-animated.svg';
 import smallLogo from '../../assets/civic-logo-c.svg'
+import brain from '../../assets/brain.svg'
+import trees from '../../assets/trees.png'
+import hackOregonLogo from '../../assets/hack-oregon-logo.png'
 
 import cities from './cities';
 import zipCodes from './zipCodes.json';
@@ -160,7 +163,7 @@ const citySkyline = css`
 const aboutCivicWrapper = css`
   background-color: white;
   margin-top: 120px;
-  height: 90vh;
+  height: 100%;
   color: white;
 `;
 const sectionHeaderWrapper = css`
@@ -199,6 +202,7 @@ const sectionHeaderSubtitle = css`
 const sectionContentWrapper = css`
   background-color: white;
   color: black;
+  position: relative;
 `;
 const smallLogoWrapper = css`
   display: inline-block;
@@ -209,6 +213,81 @@ const smallLogoWrapper = css`
     width: 100%;
   }
 `;
+const contentLeftContainer = css`
+  display: inline-block;
+  width: 50%;
+  height: 100%;
+  position: relative;
+  box-sizing: border-box;
+  vertical-align: top;
+  padding: 80px 6%;
+`;
+const contentRightContainer = css`
+  display: inline-block;
+  width: 50%;
+  height: 100%;
+  position: relative;
+  box-sizing: border-box;
+  vertical-align: top;
+  padding: 80px 6%;
+`;
+const listTitle = css`
+  display: block;
+  font-family: 'Rubik', sans-serif;
+  font-size: 35px;
+  margin: 40px 0;
+  text-align: center;
+`;
+const listSubTitle = css`
+  display: block;
+  font-family: 'Rubik', sans-serif;
+  font-size: 24px;
+  margin: 12px 0;
+`;
+const listText = css`
+  display: block;
+  font-family: 'Rubik', sans-serif;
+  font-size: 16px;
+  color: black;
+`;
+const brainWrapper = css`
+  display: block;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  z-index: 10;
+`;
+const centered = css`
+  text-align: center;
+`;
+const salmonBackground = css`
+  background-color: #ef495c;
+`;
+const leftThirdWrapper = css`
+  display: inline-block;
+  width: 33.3333333%;
+  height: 100%;
+  position: relative;
+  box-sizing: border-box;
+  vertical-align: top;
+  padding: 10px;
+  background-color: pink;
+`;
+const rightThirdWrapper = css`
+  display: inline-block;
+  width: 66.66666666%;
+  height: 100%;
+  position: relative;
+  box-sizing: border-box;
+  vertical-align: top;
+  padding: 10px;
+  background-color: blue;
+`;
+const treesBackground = css`
+  background: url(${trees}) center no-repeat;
+`;
+
 
 class LandingPage extends React.Component {
   state = {
@@ -297,41 +376,83 @@ class LandingPage extends React.Component {
               </div>
             </div>
             <div className={sectionContentWrapper}>
-              Hello
+              <div className={contentLeftContainer}>
+                <div className={listTitle}>Supporting People</div>
+                <div className={listSubTitle}>Vision</div>
+                <p className={listText}>We’re reimagining how to make information actionable through visual models, open.</p>
+                <div className={listSubTitle}>Workflow</div>
+                <p className={listText}>We’re reimagining how to make information actionable through visual models, open.</p>
+                <div className={listSubTitle}>Tactics</div>
+                <p className={listText}>We’re reimagining how to make information actionable through visual models, open.</p>
+              </div>
+              <div className={brainWrapper}>
+                <img src={brain} />
+              </div>
+              <div className={contentRightContainer}>
+                <div className={listTitle}>Supporting People</div>
+                <div className={listSubTitle}>Vision</div>
+                <p className={listText}>We’re reimagining how to make information actionable through visual models, open.</p>
+                <div className={listSubTitle}>Workflow</div>
+                <p className={listText}>We’re reimagining how to make information actionable through visual models, open.</p>
+                <div className={listSubTitle}>Tactics</div>
+                <p className={listText}>We’re reimagining how to make information actionable through visual models, open.</p>
+              </div>
             </div>
           </div>
 
           <div className={aboutCivicWrapper} id="aboutCivic">
-            <div className={sectionHeaderWrapper}>
-              <div className={smallLogoWrapper}>
-                <img src={smallLogo} />
-              </div>
-              <div className={sectionHeaderTitle}>
+            <div className={cx(sectionHeaderWrapper, salmonBackground)}>
+              <div className={cx(sectionHeaderTitle, centered)}>
                 CIVIC is made by people.
               </div>
-              <div className={sectionHeaderSubtitle}>
-                Lorem ipsum dolor
-              </div>
             </div>
             <div className={sectionContentWrapper}>
-              Hello
+              <div className={leftThirdWrapper}>
+                <div className={listTitle}>Supporting People</div>
+                <div className={listSubTitle}>Vision</div>
+                <p className={listText}>We’re reimagining how to make information actionable through visual models, open.</p>
+                <div className={listSubTitle}>Workflow</div>
+                <p className={listText}>We’re reimagining how to make information actionable through visual models, open.</p>
+                <div className={listSubTitle}>Tactics</div>
+                <p className={listText}>We’re reimagining how to make information actionable through visual models, open.</p>
+              </div>
+              <div className={rightThirdWrapper}>
+                <div className={listTitle}>Get Involved</div>
+                <div className={listSubTitle}>Vision</div>
+                <p className={listText}>We’re reimagining how to make information actionable through visual models, open.</p>
+                <div className={listSubTitle}>Workflow</div>
+                <p className={listText}>We’re reimagining how to make information actionable through visual models, open.</p>
+                <div className={listSubTitle}>Tactics</div>
+                <p className={listText}>We’re reimagining how to make information actionable through visual models, open.</p>
+              </div>
             </div>
           </div>
 
           <div className={aboutCivicWrapper} id="aboutCivic">
-            <div className={sectionHeaderWrapper}>
-              <div className={smallLogoWrapper}>
-                <img src={smallLogo} />
-              </div>
+            <div className={cx(sectionHeaderWrapper, treesBackground)}>
               <div className={sectionHeaderTitle}>
-                Hack Oregon
-              </div>
-              <div className={sectionHeaderSubtitle}>
-                Lorem ipsum dolor
+                <img src={hackOregonLogo} />
               </div>
             </div>
             <div className={sectionContentWrapper}>
-              Hello
+              <div className={rightThirdWrapper}>
+                <div className={listTitle}>Supporting People</div>
+                <div className={listSubTitle}>Vision</div>
+                <p className={listText}>We’re reimagining how to make information actionable through visual models, open.</p>
+                <div className={listSubTitle}>Workflow</div>
+                <p className={listText}>We’re reimagining how to make information actionable through visual models, open.</p>
+                <div className={listSubTitle}>Tactics</div>
+                <p className={listText}>We’re reimagining how to make information actionable through visual models, open.</p>
+              </div>
+              <div className={leftThirdWrapper}>
+                <div className={listTitle}>Supporting People</div>
+                <div className={listSubTitle}>Vision</div>
+                <p className={listText}>We’re reimagining how to make information actionable through visual models, open.</p>
+                <div className={listSubTitle}>Workflow</div>
+                <p className={listText}>We’re reimagining how to make information actionable through visual models, open.</p>
+                <div className={listSubTitle}>Tactics</div>
+                <p className={listText}>We’re reimagining how to make information actionable through visual models, open.</p>
+              </div>
             </div>
           </div>
 
