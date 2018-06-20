@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { withKnobs, number, array } from '@storybook/addon-knobs';
+import { withKnobs, number, array, select } from '@storybook/addon-knobs';
 import { GradientScale } from '../src';
 
 const displayName = 'GradientScale';
@@ -12,6 +12,14 @@ export default () =>
     .add('Basic Usage', () => {
       const domain = array('domain', [50, 90]);
       const primary = number('primary', 63);
+      const colorScales = [
+        'thermal',
+        'space',
+        'ocean',
+        'planet',
+        'earth',
+      ];
+      const colorScale = select('colorScale', colorScales, 'thermal');
 
-      return <GradientScale domain={domain} primary={primary} />;
+      return <GradientScale domain={domain} primary={primary} colorScale={colorScale} />;
     });
