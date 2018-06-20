@@ -52,20 +52,20 @@ const QuestionForm = ({ back, next, done, questionId }) => (
       }
       {questionId !== 1 && questionId < QRMap.length &&
       <div>
-        <Button onClick={e => back(e)}>
+        <Button display="inline" margin="0px 10px" onClick={e => back(e)}>
           Back
         </Button>
-        <Button onClick={e => next(e)}>
+        <Button display="inline" margin="0px 10px" onClick={e => next(e)}>
           Next
         </Button>
       </div>
       }
       {questionId === QRMap.length &&
       <div>
-        <Button onClick={e => back(e)}>
+        <Button display="inline" margin="0px 10px" onClick={e => back(e)}>
           Back
         </Button>
-        <Button onClick={e => done(e)}>
+        <Button display="inline" margin="0px 10px" onClick={e => done(e)}>
           Done
         </Button>
       </div>

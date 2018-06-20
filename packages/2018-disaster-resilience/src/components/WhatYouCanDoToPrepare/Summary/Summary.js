@@ -23,7 +23,7 @@ class Summary extends Component {
 }
 
 Summary.propTypes = {
-  quizResults: PropTypes.arrayOf().isRequired,
+  quizResults: PropTypes.objectOf(PropTypes.string),
 };
 
 const mapStateToProps = ({ form }) => ({ quizResults: form.Quiz.values });
