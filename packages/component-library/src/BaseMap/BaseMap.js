@@ -4,6 +4,8 @@ import { css } from 'emotion';
 import PropTypes from 'prop-types';
 import './mapbox-gl.css';
 
+const MAPBOX_TOKEN = 'pk.eyJ1IjoiaGFja29yZWdvbiIsImEiOiJjamk0MGZhc2cwNDl4M3FsdHAwaG54a3BnIn0.Fq1KA0IUwpeKQlFIoaEn_Q';
+
 const mapWrapper = css`
   margin: 0 auto;
   padding: 0 2.5%;
@@ -11,8 +13,8 @@ const mapWrapper = css`
 
 const navControl = css`
   position: absolute;
-  right: 0;
-  z-index: 9;
+  left: 0;
+  z-index: 1;
 `;
 
 export default class BaseMap extends Component {
@@ -122,5 +124,6 @@ BaseMap.propTypes = {
 };
 
 BaseMap.defaultProps = {
-  mapboxStyle: "mapbox://styles/themendozaline/cjg6296ub04ot2sqv9izku3qq",
+  mapboxStyle: "mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg",
+  mapboxToken: "pk.eyJ1IjoiaGFja29yZWdvbiIsImEiOiJjamk0MGZhc2cwNDl4M3FsdHAwaG54a3BnIn0.Fq1KA0IUwpeKQlFIoaEn_Q",
 };

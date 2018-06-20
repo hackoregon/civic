@@ -15,7 +15,7 @@ const subtitleStyle = css`
   font-family: 'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif;
   font-size: 14px;
   text-align: center;
-  margin: 0;
+  margin: 10px 0;
 `;
 
 /**

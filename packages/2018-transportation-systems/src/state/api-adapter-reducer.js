@@ -9,11 +9,13 @@ const apiAdapterReducer = ({ INITIAL_STATE, API_START, API_SUCCESS, API_ERROR })
         };
       case API_ERROR:
         return {
+          ...state,
           pending: false,
           error: action.payload,
         };
       case API_SUCCESS:
         return {
+          ...state,
           pending: false,
           data: action.payload,
         };

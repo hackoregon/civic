@@ -63,6 +63,28 @@ describe('HorizontalBarChart', () => {
     ]);
   });
 
+  it('should render a VictoryBar inside a ChartContainer', () => {
+    const wrapper = shallow(<HorizontalBarChart data={simpleData} />);
+    expect(wrapper.find('ChartContainer')).to.have.length(1);
+    expect(wrapper.find('ChartContainer').children().find('VictoryBar')).to.have.length(2);
+  });
+
+  it('conditionally passes title to ChartContainer', () => {
+    const sampleTitle = 'Hey there';
+    const titlelessWrapper = shallow(<HorizontalBarChart data={simpleData} />);
+    const titledWrapper = shallow(<HorizontalBarChart data={simpleData} title={sampleTitle} />);
+    expect(titlelessWrapper.find('ChartContainer').prop('title')).to.equal(null);
+    expect(titledWrapper.find('ChartContainer').prop('title')).to.equal(sampleTitle);
+  });
+
+  it('conditionally passes subtitle to ChartContainer', () => {
+    const sampleSubtitle = 'Almost as good as a title!';
+    const noSubtitleWrapper = shallow(<HorizontalBarChart data={simpleData} />);
+    const subtitleWrapper = shallow(<HorizontalBarChart data={simpleData} subtitle={sampleSubtitle} />);
+    expect(noSubtitleWrapper.find('ChartContainer').prop('subtitle')).to.equal(null);
+    expect(subtitleWrapper.find('ChartContainer').prop('subtitle')).to.equal(sampleSubtitle);
+  });
+
   it('renders both axes', () => {
     const wrapper = shallow(<HorizontalBarChart data={simpleData} />);
 
@@ -73,6 +95,13 @@ describe('HorizontalBarChart', () => {
     expect(axes.length).to.eql(2);
     expect(xAxis.length).to.eql(1);
     expect(yAxis.length).to.eql(1);
+  });
+
+  it('renders two axis and a VictoryBar within VictoryChart', () => {
+    const wrapper = shallow(<HorizontalBarChart data={simpleData} />);
+    const victoryComponents = wrapper.find('VictoryChart').children();
+    expect(victoryComponents.find('VictoryAxis')).to.have.length(2);
+    expect(victoryComponents.find('VictoryBar')).to.have.length(2);
   });
 
   it('should properly set a domain if provided with one', () => {
@@ -94,5 +123,19 @@ describe('HorizontalBarChart', () => {
       { sortOrder: 2, dataValue: 8000, label: "Standard Poodle: 8,000" },
       { sortOrder: 3, dataValue: 6000, label: "French Bulldog: 6,000" },
     ]);
+  });
+
+  it('sends in data in usable format', () => {
+    const wrapper = shallow(<HorizontalBarChart data={simpleData} />);
+    const dataProp = wrapper.find('VictoryBar').first().prop('data');
+    expect(dataProp).to.have.length(4);
+    const firstDataProp = dataProp[0];
+    expect(firstDataProp).to.have.property('sortOrder');
+    expect(firstDataProp).to.have.property('dataValue');
+    expect(firstDataProp).to.have.property('label');
+    const xProp = wrapper.find('VictoryBar').first().prop('x');
+    const yProp = wrapper.find('VictoryBar').first().prop('y');
+    expect(xProp).to.eql('sortOrder');
+    expect(yProp).to.eql('dataValue');
   });
 });

@@ -24,13 +24,19 @@ import baseMapStory from './BaseMap.story';
 import mapOverlayStory from './MapOverlay.story';
 import hexOverlayStory from './HexOverlay.story';
 import scatterPlotMapStory from './ScatterPlotMap.story';
+import landingPage from './LandingPage.story';
 import pullQuoteStory from './PullQuote.story';
 import screenGridMapStory from './ScreenGridMap.story';
 import pathMapStory from './PathMap.story';
 import iconMapStory from './IconMap.story';
 import boundaryMapStory from './BoundaryMap.story';
 import civicSandboxMapStory from './CivicSandboxMap.story';
+import sandboxStory from './Sandbox.story';
+import packageSelectorBox from './PackageSelectorBox.story';
+import civicSandboxDashboardStory from './CivicSandboxDashboard.story';
+import stackedAreaChart from './StackedAreaChart.story';
 import '../assets/global.styles.css';
+
 
 // stories can be added directly here
 storiesOf('Welcome', module)
@@ -53,12 +59,14 @@ horizontalBarChartStory();
 ScatterplotStory();
 BarChartStory();
 lineChartStory();
+stackedAreaChart();
 placeholderStory();
 sankeyStory();
 sliderStory();
 dropdownStory();
 baseMapStory();
 scatterPlotMapStory();
+landingPage();
 dataTable();
 pullQuoteStory();
 screenGridMapStory();
@@ -68,3 +76,6 @@ mapOverlayStory();
 hexOverlayStory();
 boundaryMapStory();
 civicSandboxMapStory();
+sandboxStory();
+packageSelectorBox();
+civicSandboxDashboardStory();
