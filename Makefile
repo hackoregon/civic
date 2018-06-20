@@ -19,7 +19,7 @@ travis:
 		cd packages/2017 && yarn test && cd -; \
 		\
 		echo "\n--- Build 2017\n"; \
-		cd packages/2017 && yarn build; cd -; \
+		cd packages/2017 && yarn build --bail && cd -; \
 	fi
 
 	@if [ "$$SUITE" = "2018" ]; then \
@@ -46,6 +46,9 @@ travis:
 		\
 		echo "\n--- 2018 Tests\n"; \
 		cd packages/2018 && yarn test && cd -; \
+		\
+		echo "\n--- Build 2018\n"; \
+		cd packages/2018 && yarn build --bail && cd -; \
 	fi
 
 	@if [ "$$SUITE" = "COMPONENT_LIBRARY" ]; then \
