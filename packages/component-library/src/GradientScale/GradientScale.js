@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { VictoryChart, VictoryScatter } from 'victory';
 
+import GradientLine from './GradientLine';
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
 
 const colorScale = [
@@ -16,6 +17,7 @@ const colorScale = [
   '#c51f40',
 ];
 
+
 const GradientScale = ({ domain, primary, secondary = [] }) => {
   const height = 200;
   const width = 600;
@@ -23,6 +25,7 @@ const GradientScale = ({ domain, primary, secondary = [] }) => {
     { x: primary, y: 0, type: 'primary' },
     ...secondary.map(num => ({ x: num, y: 0, type: 'secondary' })),
   ];
+
   return (
     <VictoryChart
       theme={CivicVictoryTheme.civic}
@@ -30,7 +33,7 @@ const GradientScale = ({ domain, primary, secondary = [] }) => {
       height={height}
       width={width}
     >
-      <VictoryScatter data={data} />
+      <VictoryScatter data={data} dataComponent={<GradientLine />} />
     </VictoryChart>
   );
 };
