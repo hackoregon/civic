@@ -272,7 +272,8 @@ const leftThirdWrapper = css`
   box-sizing: border-box;
   vertical-align: top;
   padding: 10px;
-  background-color: pink;
+  background-color: #250f28;
+  color: white;
 `;
 const rightThirdWrapper = css`
   display: inline-block;
@@ -282,10 +283,13 @@ const rightThirdWrapper = css`
   box-sizing: border-box;
   vertical-align: top;
   padding: 10px;
-  background-color: blue;
+  background-color: white;
 `;
 const treesBackground = css`
   background: url(${trees}) center no-repeat;
+`;
+const hackOregonLogoWrapper = css`
+  text-align: right;
 `;
 
 
@@ -408,21 +412,16 @@ class LandingPage extends React.Component {
             </div>
             <div className={sectionContentWrapper}>
               <div className={leftThirdWrapper}>
-                <div className={listTitle}>Supporting People</div>
-                <div className={listSubTitle}>Vision</div>
+                <div className={listTitle}>Membership Model for Cities</div>
                 <p className={listText}>We’re reimagining how to make information actionable through visual models, open.</p>
-                <div className={listSubTitle}>Workflow</div>
                 <p className={listText}>We’re reimagining how to make information actionable through visual models, open.</p>
-                <div className={listSubTitle}>Tactics</div>
                 <p className={listText}>We’re reimagining how to make information actionable through visual models, open.</p>
               </div>
               <div className={rightThirdWrapper}>
-                <div className={listTitle}>Get Involved</div>
-                <div className={listSubTitle}>Vision</div>
+                <div className={listTitle}>Get Involved ✨</div>
+                <div className={listSubTitle}>Teamwork and building on CIVIC</div>
                 <p className={listText}>We’re reimagining how to make information actionable through visual models, open.</p>
-                <div className={listSubTitle}>Workflow</div>
-                <p className={listText}>We’re reimagining how to make information actionable through visual models, open.</p>
-                <div className={listSubTitle}>Tactics</div>
+                <div className={listSubTitle}>Collaborate as an industry partner</div>
                 <p className={listText}>We’re reimagining how to make information actionable through visual models, open.</p>
               </div>
             </div>
@@ -430,7 +429,7 @@ class LandingPage extends React.Component {
 
           <div className={aboutCivicWrapper} id="aboutCivic">
             <div className={cx(sectionHeaderWrapper, treesBackground)}>
-              <div className={sectionHeaderTitle}>
+              <div className={cx(sectionHeaderTitle, hackOregonLogoWrapper)}>
                 <img src={hackOregonLogo} />
               </div>
             </div>
@@ -445,13 +444,10 @@ class LandingPage extends React.Component {
                 <p className={listText}>We’re reimagining how to make information actionable through visual models, open.</p>
               </div>
               <div className={leftThirdWrapper}>
-                <div className={listTitle}>Supporting People</div>
-                <div className={listSubTitle}>Vision</div>
-                <p className={listText}>We’re reimagining how to make information actionable through visual models, open.</p>
-                <div className={listSubTitle}>Workflow</div>
-                <p className={listText}>We’re reimagining how to make information actionable through visual models, open.</p>
-                <div className={listSubTitle}>Tactics</div>
-                <p className={listText}>We’re reimagining how to make information actionable through visual models, open.</p>
+                <div className={listTitle}>CIVIC was developed by Hack Oregon.</div>
+                <p className={listText}>The original concept, design, and source code for the CIVIC platform was developed by volunteer teams at Hack Oregon, a rapid-prototyping lab dedicated to creating open data projects that bring insight to local information challenges.</p>
+                <p className={listText}>Hack Oregon is a non-profit program of the CIVIC Software Foundation.</p>
+                <p className={listText}>If you live in Portland, you can volunteer to join a team for our next cycle.</p>
               </div>
             </div>
           </div>
