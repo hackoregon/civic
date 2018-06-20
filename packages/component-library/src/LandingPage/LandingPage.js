@@ -12,6 +12,8 @@ import smallLogo from '../../assets/civic-logo-c.svg'
 import brain from '../../assets/brain.svg'
 import trees from '../../assets/trees.png'
 import hackOregonLogo from '../../assets/hack-oregon-logo.png'
+import heartMail from '../../assets/heartmail.png'
+import twitterLogo from '../../assets/twitter-logo.png'
 
 import cities from './cities';
 import zipCodes from './zipCodes.json';
@@ -102,6 +104,7 @@ const lookupWrapper = css`
     top: 0;
     right: 0;
     box-sizing: border-box;
+    margin-bottom: 100px;
   }
 `;
 const collectionsLink = css`
@@ -121,6 +124,10 @@ const collectionsLink = css`
       color: #240f27;
       text-decoration: underline;
     }
+  }
+
+  @media (max-width: 850px) {
+    right: 3%;
   }
 
 `;
@@ -159,19 +166,24 @@ const ctaStyle = css`
 `;
 const citySkyline = css`
   margin-top: 40px;
+  margin-bottom: 120px;
 `;
 const aboutCivicWrapper = css`
   background-color: white;
-  margin-top: 120px;
   height: 100%;
   color: white;
 `;
 const sectionHeaderWrapper = css`
-  width: 100%
+  width: 100%;
   display: block;
   position: relative;
   background-color: #250f28;
   padding: 60px 20%;
+  box-sizing: border-box;
+
+  @media (max-width: 850px) {
+    padding: 60px 10%;
+  }
 `;
 const sectionRightContainer = css`
   width: 90%;
@@ -221,6 +233,10 @@ const contentLeftContainer = css`
   box-sizing: border-box;
   vertical-align: top;
   padding: 80px 6%;
+
+  @media (max-width: 850px) {
+    width: 100%;
+  }
 `;
 const contentRightContainer = css`
   display: inline-block;
@@ -230,6 +246,10 @@ const contentRightContainer = css`
   box-sizing: border-box;
   vertical-align: top;
   padding: 80px 6%;
+
+  @media (max-width: 850px) {
+    width: 100%;
+  }
 `;
 const listTitle = css`
   display: block;
@@ -257,6 +277,12 @@ const brainWrapper = css`
   top: 50%;
   left: 50%;
   z-index: 10;
+
+  @media (max-width: 850px) {
+    img {
+      height: 182px;
+    }
+  }
 `;
 const centered = css`
   text-align: center;
@@ -271,9 +297,18 @@ const leftThirdWrapper = css`
   position: relative;
   box-sizing: border-box;
   vertical-align: top;
-  padding: 10px;
+  padding: 100px 3%;
   background-color: #250f28;
   color: white;
+  min-height: 100vh;
+
+  p {
+      color: white;
+  }
+
+  @media (max-width: 850px) {
+    width: 100%;
+  }
 `;
 const rightThirdWrapper = css`
   display: inline-block;
@@ -282,14 +317,58 @@ const rightThirdWrapper = css`
   position: relative;
   box-sizing: border-box;
   vertical-align: top;
-  padding: 10px;
+  padding: 100px 3%;
   background-color: white;
+
+  @media (max-width: 850px) {
+    width: 100%;
+  }
 `;
 const treesBackground = css`
   background: url(${trees}) center no-repeat;
+  background-size: cover;
 `;
 const hackOregonLogoWrapper = css`
   text-align: right;
+`;
+const buttonStyle = css`
+  border: 2px solid #ef495c;
+  padding: 10px 20px;
+  font-family: 'Rubik',sans-serif;
+  font-size: 16px;
+  color: #ef495c;
+  background-color: transparent;
+  margin: 10px 0px 50px;
+`;
+const talkToUs = css`
+  & > div {
+    text-align: left;
+  }
+`;
+const iconAndTextWrapper = css`
+  box-sizing: border-box;
+  display: inline-block;
+  width: 33.333333%;
+  height: 200px;
+  vertical-align: top;
+  margin-top: 60px;
+
+  @media (max-width: 850px) {
+    width: 100%;
+    text-align: center;
+    height: auto;
+    text-align: center !important;
+  }
+
+  span {
+    font-family: 'Rubik',sans-serif;
+    font-size: 16px;
+    display: block;
+    margin-top: 20px;
+  }
+`;
+const donateButton = css`
+  margin: 0;
 `;
 
 
@@ -416,13 +495,16 @@ class LandingPage extends React.Component {
                 <p className={listText}>We’re reimagining how to make information actionable through visual models, open.</p>
                 <p className={listText}>We’re reimagining how to make information actionable through visual models, open.</p>
                 <p className={listText}>We’re reimagining how to make information actionable through visual models, open.</p>
+                <button className={buttonStyle}>Start the conversation</button>
               </div>
               <div className={rightThirdWrapper}>
                 <div className={listTitle}>Get Involved ✨</div>
                 <div className={listSubTitle}>Teamwork and building on CIVIC</div>
                 <p className={listText}>We’re reimagining how to make information actionable through visual models, open.</p>
+                <button className={buttonStyle}>Apply now</button>
                 <div className={listSubTitle}>Collaborate as an industry partner</div>
                 <p className={listText}>We’re reimagining how to make information actionable through visual models, open.</p>
+                <button className={buttonStyle}>Apply now</button>
               </div>
             </div>
           </div>
@@ -430,24 +512,34 @@ class LandingPage extends React.Component {
           <div className={aboutCivicWrapper} id="aboutCivic">
             <div className={cx(sectionHeaderWrapper, treesBackground)}>
               <div className={cx(sectionHeaderTitle, hackOregonLogoWrapper)}>
-                <img src={hackOregonLogo} />
+                <img src={hackOregonLogo} width="300" />
               </div>
             </div>
             <div className={sectionContentWrapper}>
-              <div className={rightThirdWrapper}>
-                <div className={listTitle}>Supporting People</div>
-                <div className={listSubTitle}>Vision</div>
-                <p className={listText}>We’re reimagining how to make information actionable through visual models, open.</p>
-                <div className={listSubTitle}>Workflow</div>
-                <p className={listText}>We’re reimagining how to make information actionable through visual models, open.</p>
-                <div className={listSubTitle}>Tactics</div>
-                <p className={listText}>We’re reimagining how to make information actionable through visual models, open.</p>
+              <div className={cx(rightThirdWrapper, talkToUs)}>
+                <div className={listTitle}>Talk to us</div>
+                <div className={listSubTitle}>hi@civicsoftwarefoundation.org</div>
+                <div className={listTitle}>CIVIC launched to the world June 21st, 2018 at Hack Oregon’s live Demo Day in Portland, Oregon.</div>
+                <div className={listSubTitle}>Please be patient while our website is under construction and stay tuned as we are able to share new things from the CIVIC Software Foundation.</div>
+                <div className={iconAndTextWrapper}>
+                  <img src={heartMail} width="60" />
+                  <span>Subscribe for updates!</span>
+                </div>
+                <div className={iconAndTextWrapper}>
+                  <button className={cx(buttonStyle, donateButton)}>Donate</button>
+                  <span>Help us continue to maintain and develop CIVIC.</span>
+                </div>
+                <div className={iconAndTextWrapper}>
+                  <img src={twitterLogo} width="40" />
+                  <span>@civicsoftwarefoundation #CIVIC4Lyfe</span>
+                </div>
               </div>
               <div className={leftThirdWrapper}>
                 <div className={listTitle}>CIVIC was developed by Hack Oregon.</div>
                 <p className={listText}>The original concept, design, and source code for the CIVIC platform was developed by volunteer teams at Hack Oregon, a rapid-prototyping lab dedicated to creating open data projects that bring insight to local information challenges.</p>
                 <p className={listText}>Hack Oregon is a non-profit program of the CIVIC Software Foundation.</p>
                 <p className={listText}>If you live in Portland, you can volunteer to join a team for our next cycle.</p>
+                <button className={buttonStyle}>Learn more</button>
               </div>
             </div>
           </div>
