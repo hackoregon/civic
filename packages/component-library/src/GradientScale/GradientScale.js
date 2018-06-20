@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { VictoryChart, VictoryScatter } from 'victory';
+import { VictoryGroup, VictoryScatter } from 'victory';
 
 import GradientLine from './GradientLine';
+import GradientBox from './GradientBox';
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
 
 const colorScale = [
@@ -27,14 +28,15 @@ const GradientScale = ({ domain, primary, secondary = [] }) => {
   ];
 
   return (
-    <VictoryChart
+    <VictoryGroup
       theme={CivicVictoryTheme.civic}
       domain={{ x: domain, y: [0, 1] }}
       height={height}
       width={width}
     >
+      <GradientBox />
       <VictoryScatter data={data} dataComponent={<GradientLine />} />
-    </VictoryChart>
+    </VictoryGroup>
   );
 };
 
