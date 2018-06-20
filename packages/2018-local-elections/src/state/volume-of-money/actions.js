@@ -19,11 +19,9 @@ export const RaceStart = actionEmitter(RACE_START);
 export const RaceSuccess = actionEmitter(RACE_SUCCESS);
 export const RaceFailure = actionEmitter(RACE_FAILURE);
 
-const datatype = 'median-home-price-to-median-income-ratio';
-
 // Thunk actions
 export const fetchAllRaces = fetchAdapter(
-  `/api/harvardjchs/meta/?datatype=${datatype}&fields=geography`,
+  `/totalcontributionsrawmonthtotal/?limit=300`,
   {
     start: AllRacesStart,
     success: AllRacesSuccess,
@@ -31,16 +29,17 @@ export const fetchAllRaces = fetchAdapter(
   }
 );
 
-// Adapted from the django implementation:
-// https://docs.djangoproject.com/en/2.0/_modules/django/utils/text/#slugify
-const slugify = str => str.replace(/[^\w\s-]/g, '').trim().toLowerCase().replace(/[-\s]+/g, '-');
-
 export const fetchRace = fetchAdapter(
-  `/api/harvardjchs/?datatype=${datatype}`,
+  `/totalcontributionsrawmonthracetype/`,
   {
-    encodeParams: (url, city = 'Portland-Vancouver-Hillsboro, OR-WA') => `${url}&limit=50&datapoint=${slugify(city)}`,
+    encodeParams: (url, race) => `${url}?limit=300&race_type=${race}`,
     start: RaceStart,
     success: RaceSuccess,
     failure: RaceFailure,
   }
 );
+
+export const setRace = (race) => ({
+  type: SET_RACE,
+  selectedRace: race,
+});

@@ -31,7 +31,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         allRacesPending: false,
         allRacesError: null,
-        allRaces: action.payload.results.geography,
+        allRaces: action.payload.results,
       };
     case ALL_RACES_FAILURE:
       return {
