@@ -1,7 +1,6 @@
 import React from 'react';
 import { rangeRight } from 'lodash';
-import { Dropdown } from '../../src';
-
+import Dropdown from '../Dropdown/Dropdown';
 
 const dateHelper = (meta) => {
   let dates = [];
