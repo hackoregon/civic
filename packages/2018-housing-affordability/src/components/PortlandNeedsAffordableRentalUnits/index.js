@@ -1,13 +1,53 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { loader, error, inputClass, emphasis } from '../css-utils';
 
-import { CivicStoryCard, Placeholder, Collapsable } from '@hackoregon/component-library';
+import '@hackoregon/component-library/assets/vendor/react-select.min.css';
+
+import {
+  Dropdown,
+  CivicStoryCard,
+  Collapsable,
+  LineChart,
+  BarChart
+} from '@hackoregon/component-library';
+
+import {
+  fetchAllRentalCrisisCities,
+  fetchRentalCrisisCity,
+  setRentalCrisisCity,
+} from '../../state/rental-crisis/actions';
+import {
+  isCityLoading,
+  getCityError,
+  getSelectedCity,
+  getSelectedCityData,
+  getSelectedCityRank,
+  getAllCities,
+} from '../../state/rental-crisis/selectors';
 
 export class PortlandNeedsAffordableRentalUnits extends React.Component {
   componentDidMount() {
-    // initialize data here
+    this.props.fetchAllCities();
+    this.props.setCity();
   }
 
   render() {
+    const {
+      isLoading,
+      isError,
+      allCities,
+      selectedCity,
+      selectedCityData,
+      selectedCityRank,
+      setCity,
+    } = this.props;
+
+    const cityOptions = allCities && allCities.map(c => ({ value: c, label: c }));
+
+    const Loader = () => <div className={loader}>Loading...</div>;
+    const ErrorMessage = () => <div className={error}>Could not load data for this city.</div>;
+
     return (
       <CivicStoryCard
         title="Portland Needs Affordable Rental Units"
@@ -20,7 +60,53 @@ export class PortlandNeedsAffordableRentalUnits extends React.Component {
                units from 2005 to 2015. During that same time, the region’s
                need for affordable units also grew.</p>
 
-              <Placeholder issue="55" />
+              <div>
+                <strong>Search An Area</strong>
+                {allCities && allCities.length && <Dropdown
+                  value={cityOptions.find(c => c.value === selectedCity)}
+                  onChange={setCity}
+                  options={cityOptions}
+                />}
+              </div>
+              <section>
+                {isLoading && <Loader />}
+                {isError && <ErrorMessage />}
+                {selectedCityRank && (<div>
+                  <p>
+                    {selectedCity} ranks <strong className={emphasis}>{selectedCityRank.rank}/{selectedCityRank.total} </strong>
+                    for the median home price to median income ratio in <strong className={emphasis}>2014</strong>
+                  </p>
+                  <input
+                    disabled
+                    className={inputClass}
+                    type="range"
+                    min="1"
+                    value={selectedCityRank.rank}
+                    max={selectedCityRank.total}
+                  />
+                </div>)}
+                {selectedCityData && (<div>
+                  <LineChart
+                    data={selectedCityData}
+                    dataKey="year"
+                    dataValue="eli_renters"
+                    title={`Extremely Low-Income Renter Households, ${selectedCity}`}
+                    yLabel="# of Households"
+                    xLabel="Year"
+                    xNumberFormatter={year => year}
+                  />
+                  <BarChart
+                    domain={{ x: [2000, 2014], y: [0, 100] }}
+                    data={selectedCityData}
+                    dataKey="year"
+                    dataValue="aaa_units_per_100"
+                    title={`Adequate, Affordable, and Available Units, ${selectedCity}`}
+                    yLabel="Units per 100 ELI Households"
+                    xLabel="Year"
+                    xNumberFormatter={year => year}
+                  />
+                </div>)}
+              </section>
             </div>
           </Collapsable.Section>
           <Collapsable.Section hidden>
@@ -59,4 +145,22 @@ export class PortlandNeedsAffordableRentalUnits extends React.Component {
 PortlandNeedsAffordableRentalUnits.displayName = 'PortlandNeedsAffordableRentalUnits';
 
 // Connect this to the redux store when necessary
-export default PortlandNeedsAffordableRentalUnits;
+export default connect(
+  state => ({
+    isLoading: isCityLoading(state),
+    allCities: getAllCities(state),
+    selectedCity: getSelectedCity(state),
+    selectedCityData: getSelectedCityData(state),
+    selectedCityRank: getSelectedCityRank(state),
+    isError: getCityError(state),
+  }),
+  dispatch => ({
+    fetchAllCities() {
+      dispatch(fetchAllRentalCrisisCities());
+    },
+    setCity(city = {}) {
+      dispatch(fetchRentalCrisisCity(city.value));
+      dispatch(setRentalCrisisCity(city.value));
+    },
+  })
+)(PortlandNeedsAffordableRentalUnits);
