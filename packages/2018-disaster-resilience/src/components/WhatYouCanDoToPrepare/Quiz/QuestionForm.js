@@ -19,7 +19,7 @@ const QuestionForm = ({ back, next, done, questionId }) => (
       <div className="radio">
         <label>
           <Field
-            name={questionId}
+            name={`${questionId}`}
             component="input"
             type="radio"
             value="yes"
@@ -32,7 +32,7 @@ const QuestionForm = ({ back, next, done, questionId }) => (
       <div className="radio">
         <label>
           <Field
-            name={questionId}
+            name={`${questionId}`}
             component="input"
             type="radio"
             value="no"
@@ -52,20 +52,34 @@ const QuestionForm = ({ back, next, done, questionId }) => (
       }
       {questionId !== 1 && questionId < QRMap.length &&
       <div>
-        <Button display="inline" margin="0px 10px" onClick={e => back(e)}>
+        <Button
+          display="inline"
+          margin="0px 10px 0px 0px"
+          onClick={e => back(e)}
+        >
           Back
         </Button>
-        <Button display="inline" margin="0px 10px" onClick={e => next(e)}>
+        <Button
+          display="inline"
+          onClick={e => next(e)}
+        >
           Next
         </Button>
       </div>
       }
       {questionId === QRMap.length &&
       <div>
-        <Button display="inline" margin="0px 10px" onClick={e => back(e)}>
+        <Button
+          display="inline"
+          margin="0px 10px 0px 0px"
+          onClick={e => back(e)}
+        >
           Back
         </Button>
-        <Button display="inline" margin="0px 10px" onClick={e => done(e)}>
+        <Button
+          display="inline"
+          onClick={e => done(e)}
+        >
           Done
         </Button>
       </div>
@@ -78,7 +92,7 @@ QuestionForm.propTypes = {
   back: PropTypes.func.isRequired,
   next: PropTypes.func.isRequired,
   done: PropTypes.func.isRequired,
-  questionId: PropTypes.number.isRequired,
+  questionId: PropTypes.number,
 };
 
 export default reduxForm({
