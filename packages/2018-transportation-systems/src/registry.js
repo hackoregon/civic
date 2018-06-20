@@ -1,6 +1,6 @@
 import DeclineInRidership from './components/DeclineInRidership';
 import HistoricalChangesToBusService from './components/HistoricalChangesToBusService';
-import ReducedServiceReducedRidership from './components/ReducedServiceReducedRidership';
+import ServiceAndRidership from './components/ServiceAndRidership';
 import DriversOfPublicTransitParticipation from './components/DriversOfPublicTransitParticipation';
 import ExploreBusServiceAndEquity from './components/ExploreBusServiceAndEquity';
 import MobilityTrendsUsingRealTimeData from './components/MobilityTrendsUsingRealTimeData';
@@ -17,8 +17,8 @@ export default [
     component: HistoricalChangesToBusService,
   },
   {
-    slug: 'reduced-service-reduced-ridership',
-    component: ReducedServiceReducedRidership,
+    slug: 'service-and-ridership',
+    component: ServiceAndRidership,
   },
   {
     slug: 'drivers-of-public-transit-participation',
