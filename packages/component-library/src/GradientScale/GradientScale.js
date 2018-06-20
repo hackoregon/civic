@@ -37,7 +37,6 @@ const GradientScale = ({ domain, primary, secondary = [], colorScale = 'thermal'
         </defs>
       </svg>
       <VictoryGroup
-        theme={CivicVictoryTheme.civic}
         domain={{ x: domain, y: [0, 1] }}
         height={height}
         width={width}
