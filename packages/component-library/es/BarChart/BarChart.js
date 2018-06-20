@@ -22,7 +22,8 @@ var BarChart = function BarChart(_ref) {
       xLabel = _ref.xLabel,
       yLabel = _ref.yLabel,
       xNumberFormatter = _ref.xNumberFormatter,
-      yNumberFormatter = _ref.yNumberFormatter;
+      yNumberFormatter = _ref.yNumberFormatter,
+      barWidth = _ref.barWidth;
 
   var chartDomain = domain || getDefaultDomain(data, dataKey, dataValue);
 
@@ -89,7 +90,8 @@ var BarChart = function BarChart(_ref) {
         events: chartEvents,
         x: 'dataKey',
         y: 'dataValue',
-        title: 'Bar Chart'
+        title: 'Bar Chart',
+        style: { data: { width: barWidth } }
       })
     )
   );
@@ -105,7 +107,8 @@ BarChart.propTypes = {
   xLabel: PropTypes.string,
   yLabel: PropTypes.string,
   xNumberFormatter: PropTypes.func,
-  yNumberFormatter: PropTypes.func
+  yNumberFormatter: PropTypes.func,
+  barWidth: PropTypes.number
 };
 
 BarChart.defaultProps = {
@@ -118,7 +121,8 @@ BarChart.defaultProps = {
   xLabel: "X",
   yLabel: "Y",
   xNumberFormatter: year,
-  yNumberFormatter: numeric
+  yNumberFormatter: numeric,
+  barWidth: null
 };
 
 export default BarChart;
