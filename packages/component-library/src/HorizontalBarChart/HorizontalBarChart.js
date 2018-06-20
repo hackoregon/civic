@@ -7,91 +7,122 @@ import {
   VictoryLabel,
   VictoryPortal,
   VictoryTooltip,
+  Bar,
 } from 'victory';
 
 import ChartContainer from '../ChartContainer';
-import { dollars, numeric } from '../utils/formatters';
+import { numeric, unformatted } from '../utils/formatters';
+import { chartEvents } from '../utils/chartHelpers';
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
 
-const chartEvents = [
-  {
-    target: 'data',
-    eventHandlers: {
-      onMouseOver: () => {
-        return [
-          {
-            target: 'data',
-            mutation: () => ({ style: { fill: 'tomato', width: 40 } }),
-          }, {
-            target: 'labels',
-            mutation: () => ({ active: true }),
-          },
-        ];
-      },
-      onMouseOut: () => {
-        return [
-          {
-            target: 'data',
-            mutation: () => { },
-          }, {
-            target: 'labels',
-            mutation: () => ({ active: false }),
-          },
-        ];
-      },
-    },
-  },
-];
+const HorizontalBarChart = ({
+    data,
+    sortOrder,
+    dataValue,
+    dataLabel,
+    domain,
+    title,
+    subtitle,
+    xLabel,
+    yLabel,
+    dataValueFormatter,
+    dataLabelFormatter,
+    minimalist,
+}) => {
+  const barData =
+    sortOrder && sortOrder.length
+      ? data
+      : data.map((d, index) => {
+        return { ...d, defaultSort: index + 1 };
+      });
+  const sortOrderKey =
+    sortOrder && sortOrder.length
+      ? sortOrder
+      : 'defaultSort';
+  const padding =
+    minimalist
+      ? { left: 115, right: 50, bottom: 25, top: 40 }
+      : { left: 115, right: 50, bottom: 50, top: 70 };
+  const bars = data.length;
+  const spaces = bars - 1;
+  const barHeight = CivicVictoryTheme.civic.bar.style.data.width;
+  const spaceHeight = CivicVictoryTheme.civic.bar.style.data.padding * 2;
+  const dataHeight = (bars * barHeight) + (spaces * spaceHeight);
+  const additionalHeight = padding.bottom + padding.top;
 
-const HorizontalBarChart = ({ data, dataKey, dataValue, dataKeyLabel, domain, title, subtitle, xLabel, yLabel }) => {
+  const minValue = Math.min(0, ...data.map(d => d[dataValue]));
 
-  const axisLabelStyle = {
-    fontFamily: "'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif",
-    fontSize: '14px',
-    fontWeight: 'bold',
-  };
+
+  const NegativeAwareTickLabel = props => (
+    <VictoryLabel dx={props.scale.y(minValue) - 20} {...props} textAnchor="end" />
+  );
 
   return (
     <ChartContainer title={title} subtitle={subtitle}>
       <VictoryChart
-        padding={{ left: 115, right: 50, bottom: 50, top: 50 }}
-        domainPadding={20}
-        animate={{ duration: 300 }}
+        height={dataHeight + additionalHeight}
+        domain={domain}
+        padding={padding}
         theme={CivicVictoryTheme.civic}
       >
         <VictoryAxis
           dependentAxis
-          // tickValues specifies both the number of ticks and where
-          // they are placed on the axis
-          tickValues={data.map(a => a[dataKey])}
-          tickFormat={data.map(a => a[dataKeyLabel])}
+          domainPadding={{ x: 20 }}
+          style={{
+            tickLabels: { fill: 'none' },
+          }}
+          title="Y Axis"
         />
+      {!minimalist && (
         <VictoryAxis
-          // tickFormat specifies how ticks should be displayed
-          tickFormat={x => dollars(numeric(x))}
+          orientation="top"
+          tickFormat={dataValueFormatter}
+          title="X Axis"
         />
+      )}
+      {!minimalist && (
         <VictoryPortal>
           <VictoryLabel
-            style={axisLabelStyle}
+            style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
             text={yLabel}
             textAnchor="middle"
             title="Y Axis Label"
             verticalAnchor="end"
             x={50}
-            y={45}
+            y={65}
           />
         </VictoryPortal>
+      )}
         <VictoryPortal>
           <VictoryLabel
-            style={axisLabelStyle}
+            style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
             text={xLabel}
-            textAnchor="end"
+            textAnchor={minimalist ? 'middle' : 'end'}
             title="X Axis Label"
-            verticalAnchor="end"
-            x={600}
-            y={295}
+            verticalAnchor={minimalist ? 'middle' : 'end'}
+            x={minimalist ? 325 : 600}
+            y={minimalist ? 20 : 85}
           />
         </VictoryPortal>
+        <VictoryBar
+          horizontal
+          labelComponent={
+            <NegativeAwareTickLabel
+              x={0}
+              orientation="left"
+              theme={CivicVictoryTheme.civic}
+            />
+          }
+          domainPadding={0}
+          data={barData.map(d => ({
+            sortOrder: d[sortOrderKey],
+            dataValue: d[dataValue],
+            label: dataLabelFormatter(d[dataLabel])
+          }))}
+          x="sortOrder"
+          y="dataValue"
+          events={chartEvents}
+        />
         <VictoryBar
           horizontal
           labelComponent={
@@ -101,10 +132,20 @@ const HorizontalBarChart = ({ data, dataKey, dataValue, dataKeyLabel, domain, ti
               orientation="bottom"
               pointerLength={0}
               cornerRadius={0}
+              theme={CivicVictoryTheme.civic}
             />
           }
-          data={data.map(d => ({ dataKey: d[dataKey], dataValue: d[dataValue], label: `${d[dataKeyLabel]}: ${numeric(d[dataValue])}` }))}
-          x="dataKey"
+          domainPadding={0}
+          data={barData.map(d => ({
+            sortOrder: d[sortOrderKey],
+            dataValue: d[dataValue],
+            label: `${dataLabelFormatter(d[dataLabel])}: ${dataValueFormatter(d[dataValue])}`
+          }))}
+          style={{
+            data: { fill: 'none' },
+          }}
+          title="Horizontal Bar Chart"
+          x="sortOrder"
           y="dataValue"
           events={chartEvents}
         />
@@ -114,15 +155,35 @@ const HorizontalBarChart = ({ data, dataKey, dataValue, dataKeyLabel, domain, ti
 };
 
 HorizontalBarChart.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
-  dataKey: PropTypes.string.isRequired,
-  dataValue: PropTypes.string.isRequired,
-  dataKeyLabel: PropTypes.string,
-  domain: PropTypes.objectOf(PropTypes.array),  
+  data: PropTypes.arrayOf(
+    PropTypes.shape({ x: PropTypes.number, y: PropTypes.number }),
+  ),
+  sortOrder: PropTypes.string,
+  dataValue: PropTypes.string,
+  dataLabel: PropTypes.string,
+  domain: PropTypes.objectOf(PropTypes.array),
   title: PropTypes.string,
   subtitle: PropTypes.string,
   xLabel: PropTypes.string,
-  yLabel: PropTypes.string
+  yLabel: PropTypes.string,
+  dataValueFormatter: PropTypes.func,
+  dataLabelFormatter: PropTypes.func,
+  minimalist: PropTypes.boolean,
+};
+
+HorizontalBarChart.defaultProps = {
+  data: null,
+  sortOrder: null,
+  dataValue: 'x',
+  dataLabel: 'y',
+  domain: null,
+  title: null,
+  subtitle: null,
+  xLabel: "X",
+  yLabel: "Y",
+  dataValueFormatter: numeric,
+  dataLabelFormatter: unformatted,
+  minimalist: false,
 };
 
 export default HorizontalBarChart;

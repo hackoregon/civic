@@ -9,12 +9,17 @@ export class UnderstandingStaffCuts extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Understanding Staff Cuts in Portland Public Schools">
-        <Placeholder />
+      <CivicStoryCard
+        title="Understanding Staff Cuts in Portland Public Schools"
+        slug="understanding-staff-cuts"
+      >
+        <Placeholder issue="201" />
       </CivicStoryCard>
     );
   }
 }
+
+UnderstandingStaffCuts.displayName = 'UnderstandingStaffCuts';
 
 // Connect this to the redux store when necessary
 export default UnderstandingStaffCuts;

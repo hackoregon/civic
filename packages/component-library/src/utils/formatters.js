@@ -1,4 +1,6 @@
 import { format } from 'd3-format';
+import { startCase, toLower } from 'lodash';
+
 
 const scales = [
   [1000000000000, 'trillion'],
@@ -34,5 +36,9 @@ export const numeric = (d) => {
   return formatted;
 };
 
+export const year = format('.0f');
 export const percentage = format('.0%');
 export const dollars = d => `$${d}`;
+
+export const titleCase = str => startCase(toLower(str));
+export const unformatted = d => d;

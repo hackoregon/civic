@@ -10,118 +10,19 @@ import {
 } from 'victory';
 
 import ChartContainer from '../ChartContainer';
-import { dollars, numeric } from '../utils/formatters';
+import SimpleLegend from '../SimpleLegend';
+import { numeric } from '../utils/formatters';
+import { chartEvents, getDefaultDomain, getDefaultDataSeriesLabels, getDefaultFillStyle } from '../utils/chartHelpers';
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
 
-const chartEvents = [
-  {
-    target: 'data',
-    eventHandlers: {
-      onMouseOver: () => {
-        return [
-          {
-            target: 'data',
-            mutation: () => ({ style: { fill: 'tomato', width: 40 } }),
-          }, {
-            target: 'labels',
-            mutation: () => ({ active: true }),
-          },
-        ];
-      },
-      onMouseOut: () => {
-        return [
-          {
-            target: 'data',
-            mutation: () => { },
-          }, {
-            target: 'labels',
-            mutation: () => ({ active: false }),
-          },
-        ];
-      },
-    },
-  },
-];
-
-const SimpleLegend = ({ legendData }) => {
-  const legendStyle = css`
-    font-family: 'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif;
-    font-size: 14px;
-    font-weight: bold;
-    text-align: center;
-    margin: 10px 0 0 0;
-  `;
-
-  if (legendData.length) {
-    return (
-      <legend className={legendStyle}>
-        {legendData.map((group, idx) => (
-          <span
-            key={group.name}
-            className={css`
-              margin-left: 10px;
-            `}
-          >
-            <svg viewBox="0 0 10 10" width="10px">
-              <circle
-                cx="5"
-                cy="5"
-                r="5"
-                fill={CivicVictoryTheme.civic.group.colorScale[idx]}
-              />
-            </svg>
-            <span
-              className={css`
-                margin-left: 5px;
-              `}
-            >
-              {group.name}
-            </span>
-          </span>
-        ))}
-      </legend>
-    );
-  }
-  return null;
-};
-
-const getDefaultDomain = data => {
-  const xValues = data.map(value => value.x);
-  const yValues = data.map(value => value.y);
-
-  return {
-    x: [
-      Math.min(...xValues) < 0 ? Math.min(...xValues) : 0,
-      Math.max(...xValues),
-    ],
-    y: [
-      Math.min(...yValues) < 0 ? Math.min(...yValues) : 0,
-      Math.max(...yValues),
-    ],
-  };
-};
-
-const getDefaultStyle = dataSeries => {
-  // Set the style based on the dataSeries index
-  return {
-    data: {
-      fill: d => {
-        if (!dataSeries) return CivicVictoryTheme.civic.group.colorScale[0];
-        const idx = dataSeries.findIndex(series => series === d.series);
-        return CivicVictoryTheme.civic.group.colorScale[idx];
-      },
-    },
-  };
-};
-
-/**
+/*
  * @method Scatterplot
  * @param  {Array}     data         X & Y coordinates for scatterplot points
  * @param  {String}    dataKey      X key in `data`
  * @param  {Array}     dataKeyLabel Optional overrides for x-axis tick labels
  * @param  {String}    dataValue    Y key in `data`
  * @param  {Array}     dataValueLabel Optional overrides for y-axis tick labels
- * @param  {Array}     dataSeries   Series options for multiseries data
+ * @param  {Array}     dataSeriesLabel   Series options for multiseries data
  * @param  {Object}    domain       Scaling for chart axes (defaults to data range)
  * @param  {Object}    size         Data `key` or exact `value` to use for data point size
  * @param  {Object}    style        Optional overrides for point rendering
@@ -130,6 +31,7 @@ const getDefaultStyle = dataSeries => {
  * @param  {String}    xLabel       X-axis label
  * @param  {String}    yLabel       Y-axis label
  */
+
 const Scatterplot = ({
   data,
   dataKey,
@@ -137,6 +39,7 @@ const Scatterplot = ({
   dataValue,
   dataValueLabel,
   dataSeries,
+  dataSeriesLabel,
   domain,
   size,
   style,
@@ -144,37 +47,26 @@ const Scatterplot = ({
   title,
   xLabel,
   yLabel,
+  xNumberFormatter,
+  yNumberFormatter,
 }) => {
-  const chartDomain = domain || getDefaultDomain(data);
-  const scatterPlotStyle = style || getDefaultStyle(dataSeries);
+  const chartDomain = domain || getDefaultDomain(data, dataKey, dataValue);
+
+  const dataSeriesLabels = dataSeries
+    ? dataSeriesLabel || getDefaultDataSeriesLabels(data, dataSeries)
+    : null;
+
+  const scatterPlotStyle = style || getDefaultFillStyle(dataSeriesLabels);
 
   const legendData =
-    dataSeries && dataSeries.length
-      ? dataSeries.map(series => ({ name: series }))
+    dataSeriesLabels && dataSeriesLabels.length
+      ? dataSeriesLabels.map(series => ({ name: series.label }))
       : null;
 
-  const axisLabelStyle = {
-    fontFamily: "'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif",
-    fontSize: '14px',
-    fontWeight: 'bold',
-  };
-
-  const titleStyle = css`
-    display: block;
-    font-family: 'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif;
-    font-size: 21px;
-    font-weight: bold;
-    text-align: center;
-    margin: 0;
-  `;
-
-  const subtitleStyle = css`
-    display: block;
-    font-family: 'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif;
-    font-size: 14px;
-    text-align: center;
-    margin: 0;
-  `;
+  const categoryData =
+    dataSeriesLabels && dataSeriesLabels.length
+      ? dataSeriesLabels.map(series => ({ name: series.category }))
+      : null;
 
   return (
     <ChartContainer title={title} subtitle={subtitle}>
@@ -182,18 +74,21 @@ const Scatterplot = ({
         <SimpleLegend className="legend" legendData={legendData} />
       )}
 
-      <VictoryChart domain={chartDomain} theme={CivicVictoryTheme.civic}>
+      <VictoryChart
+        domain={chartDomain}
+        theme={CivicVictoryTheme.civic}
+        animate={{ duration: 200 }}
+      >
         <VictoryAxis
           animate={{ onEnter: { duration: 500 } }}
           style={{ grid: { stroke: 'none' } }}
+          tickFormat={x => xNumberFormatter(x)}
           title="X Axis"
         />
         <VictoryAxis
           dependentAxis
           animate={{ onEnter: { duration: 500 } }}
           style={{
-            // Don't render the top y-axis grid line
-            // TODO: Possibly move this to theme
             grid: {
               ...CivicVictoryTheme.civic.axis.style.grid,
               stroke: t =>
@@ -202,11 +97,12 @@ const Scatterplot = ({
                   : 'none',
             },
           }}
+          tickFormat={y => yNumberFormatter(y)}
           title="Y Axis"
         />
         <VictoryPortal>
           <VictoryLabel
-            style={axisLabelStyle}
+            style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
             text={yLabel}
             textAnchor="middle"
             title="Y Axis Label"
@@ -217,7 +113,7 @@ const Scatterplot = ({
         </VictoryPortal>
         <VictoryPortal>
           <VictoryLabel
-            style={axisLabelStyle}
+            style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
             text={xLabel}
             textAnchor="end"
             title="X Axis Label"
@@ -228,12 +124,12 @@ const Scatterplot = ({
         </VictoryPortal>
         <VictoryScatter
           animate={{ onEnter: { duration: 500 } }}
-          categories={{ x: dataKeyLabel }}
+//        categories={{ x: categoryData }}
           data={data.map(d => ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],
-            label: `${dataKeyLabel ? d[dataKeyLabel] : xLabel}: ${numeric(d[dataKey])} | ${dataValueLabel ? d[dataValueLabel] : yLabel}: ${numeric(d[dataValue])}`,
-            series: d.series,
+            label: `${dataKeyLabel ? d[dataKeyLabel] : xLabel}: ${xNumberFormatter(d[dataKey])} • ${dataValueLabel ? d[dataValueLabel] : yLabel}: ${yNumberFormatter(d[dataValue])}`,
+            series: d[dataSeries],
             size: size ? d[size.key] || size.value : 3,
           }))}
           events={chartEvents}
@@ -244,6 +140,7 @@ const Scatterplot = ({
               orientation="bottom"
               pointerLength={0}
               cornerRadius={0}
+              theme={CivicVictoryTheme.civic}
             />
           }
           size={d => d.size}
@@ -265,14 +162,19 @@ Scatterplot.propTypes = {
   dataKeyLabel: PropTypes.arrayOf(PropTypes.string),
   dataValue: PropTypes.string,
   dataValueLabel: PropTypes.arrayOf(PropTypes.string),
-  dataSeries: PropTypes.arrayOf(PropTypes.string),
+  dataSeries: PropTypes.string,
+  dataSeriesLabel: PropTypes.arrayOf(
+    PropTypes.shape({ category: PropTypes.string, label: PropTypes.string }),
+  ),
   domain: PropTypes.objectOf(PropTypes.array),
   size: PropTypes.shape({ key: PropTypes.string, value: PropTypes.string }),
   style: PropTypes.objectOf(PropTypes.object),
-  subtitle: PropTypes.string,
   title: PropTypes.string,
+  subtitle: PropTypes.string,
   xLabel: PropTypes.string,
   yLabel: PropTypes.string,
+  xNumberFormatter: PropTypes.func,
+  yNumberFormatter: PropTypes.func,
 };
 
 Scatterplot.defaultProps = {
@@ -282,13 +184,16 @@ Scatterplot.defaultProps = {
   dataValue: 'y',
   dataValueLabel: null,
   dataSeries: null,
+  dataSeriesLabel: null,
   domain: null,
   size: null,
   style: null,
-  subtitle: null,
   title: null,
+  subtitle: null,
   xLabel: "X",
   yLabel: "Y",
+  xNumberFormatter: numeric,
+  yNumberFormatter: numeric,
 };
 
 export default Scatterplot;

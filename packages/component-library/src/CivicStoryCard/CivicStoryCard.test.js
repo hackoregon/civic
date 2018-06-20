@@ -3,15 +3,14 @@ import { shallow } from 'enzyme';
 import CivicStoryCard from './CivicStoryCard';
 
 describe('CivicStoryCard', () => {
-  const { title, cardId, collectionId } = {
+  const { title, slug } = {
     title: 'Test Story Card Title',
-    cardId: 'card1',
-    collectionId: 'collection1',
+    slug: 'card1',
   };
 
   describe('common properties', () => {
     const wrapper = shallow(
-      <CivicStoryCard cardId={cardId} collectionId={collectionId} title={title} />,
+      <CivicStoryCard slug={slug} title={title} />,
     );
 
     it('should render the title as an h2', () => {
@@ -23,14 +22,45 @@ describe('CivicStoryCard', () => {
     it('should include a StoryFooter that references this CivicStoryCard', () => {
       const footer = wrapper.find('StoryFooter');
 
-      expect(footer.props().cardId).to.equal(cardId);
-      expect(footer.props().collectionId).to.equal(collectionId);
+      expect(footer.props().slug).to.equal(slug);
+    });
+  });
+
+  describe('loading state', () => {
+    const wrapper = shallow(
+      <CivicStoryCard loading>
+        <h1>blah</h1>
+      </CivicStoryCard>
+    );
+
+    it('should render loading message', () => {
+      expect(wrapper.text().indexOf('Loading...')).to.eql(0);
+    });
+
+    it('should not render children', () => {
+      expect(wrapper.find('h1').length).to.eql(0);
+    });
+  });
+
+  describe('error state', () => {
+    const wrapper = shallow(
+      <CivicStoryCard error="Could not load data">
+        <h1>blah</h1>
+      </CivicStoryCard>
+    );
+
+    it('should render loading message', () => {
+      expect(wrapper.text().indexOf('Could not load data')).to.eql(0);
+    });
+
+    it('should not render children', () => {
+      expect(wrapper.find('h1').length).to.eql(0);
     });
   });
 
   describe('card children', () => {
     const wrapper = shallow(
-      <CivicStoryCard cardId={cardId} collectionId={collectionId} title={title}>
+      <CivicStoryCard slug={slug} title={title}>
         <div className="Description">Some content</div>
         <div>
           Some other stuff

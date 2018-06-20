@@ -7,8 +7,21 @@ import {
   withKnobs,
   text, number, object, array,
 } from '@storybook/addon-knobs';
-import { CivicStoryCard, Chart, ChartData, Pie, HorizontalBarChart } from '../src';
-import { getRandomValuesArray, getColors, randomizer, wallOfRichText, wallOfText } from './shared';
+import {
+  CivicStoryCard,
+  Chart,
+  ChartData,
+  Pie,
+  HorizontalBarChart,
+  Collapsable,
+} from '../src';
+import {
+  getRandomValuesArray,
+  getColors,
+  randomizer,
+  wallOfRichText,
+  wallOfText,
+} from './shared';
 
 const labels = ['A', 'B', 'C', 'D', 'E', 'F'];
 const width = 300;
@@ -53,6 +66,41 @@ const tdvDemo = () => (
     </CivicStoryCard>
   </Container>
 );
+const collapsableDemo = () => (
+  <Container>
+    <CivicStoryCard title={'Dogs x Income'}>
+      <Collapsable>
+        <Collapsable.Section>
+          <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+            <HorizontalBarChart
+              data={data}
+              dataKey={dataKey}
+              dataValue={dataValue}
+              dataKeyLabel={dataKeyLabel}
+            />
+          </div>
+        </Collapsable.Section>
+        <Collapsable.Section hidden>
+          <p className="Description">{wallOfRichText}</p>
+        </Collapsable.Section>
+      </Collapsable>
+    </CivicStoryCard>
+  </Container>
+);
+const loadingDemo = () => (
+  <Container>
+    <CivicStoryCard loading title="Dogs x Income">
+      <span>Im some random content</span>
+    </CivicStoryCard>
+  </Container>
+);
+const errorDemo = () => (
+  <Container>
+    <CivicStoryCard error="Could not load dogs" title="Dogs x Income">
+      <span>Im some random content</span>
+    </CivicStoryCard>
+  </Container>
+);
 
 export default () => storiesOf('CivicStoryCard', module)
   .add(
@@ -66,5 +114,8 @@ export default () => storiesOf('CivicStoryCard', module)
       </Container>
     )
   )
+  .add('loading', loadingDemo)
+  .add('with error', errorDemo)
   .add('with title & description', tdDemo)
-  .add('with title, description & visualization', tdvDemo);
+  .add('with title, description & visualization', tdvDemo)
+  .add('with collapsable sections', collapsableDemo);

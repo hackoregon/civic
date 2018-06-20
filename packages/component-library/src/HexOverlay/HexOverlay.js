@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
-import {render} from 'react-dom';
+import { render } from 'react-dom';
 import PropTypes from 'prop-types';
 import { css } from 'emotion';
-import DeckGL, {HexagonLayer} from 'deck.gl';
+import DeckGL, { HexagonLayer } from 'deck.gl';
+
+const crosshair = css`
+  cursor: crosshair;
+`;
 
 const mapWrapper = css`
   margin: auto;
@@ -11,7 +15,7 @@ const mapWrapper = css`
 
 const colorScale = r => [r * 255, 140, 200 * (1 - r)];
 
-const elevationScale = {min: 1, max: 50};
+const elevationScale = { min: 1, max: 50 };
 
 class HexOverlay extends Component {
   constructor(props) {
@@ -65,30 +69,71 @@ class HexOverlay extends Component {
   }
 
   render() {
-    const {viewport, data, opacity, radius, elevation, colorRange, lightSettings, coverage, upperPercentile} = this.props;
+    const {
+      viewport,
+      data,
+      opacity,
+      radius,
+      coverage,
+      elevation,
+      colorRange,
+      filled,
+      wireframe,
+      lightSettings,
+      upperPercentile,
+      tooltipInfo,
+      x,
+      y,
+      onHover,
+      onLayerHover,
+      children,
+    } = this.props;
 
     if (!data) {
       return null;
     }
 
+    const tooltip = React.Children.map(children, child => {
+      return React.cloneElement(child, {
+        tooltipInfo: tooltipInfo,
+        x: x,
+        y: y,
+      });
+    });
+    const tooltipRender = tooltipInfo ? tooltip : null;
+
     const layers = [
       new HexagonLayer({
-        id: 'heatmap',
-        colorRange,
-        coverage: 1,
         data,
+        colorRange,
+        lightSettings,
+        opacity,
+        onHover,
+        radius,
+        coverage,
+        filled,
+        wireframe,
+        id: 'heatmap',
         elevationRange: [0, 3000],
         elevationScale: elevation,
         extruded: true,
-        getPosition: d => d,
-        lightSettings: lightSettings,
-        opacity,
-        radius,
-        upperPercentile:100
+        pickable: true,
+        upperPercentile: 100,
+        getPosition: d => d.geometry.coordinates,
       })
     ];
 
-    return <DeckGL {...viewport} layers={layers} className={'HexOverlay'}/>;
+    return (
+      <div className={ crosshair }>
+        <DeckGL { ...viewport }
+                layers={ layers } className={ 'HexOverlay' }
+        >
+          { tooltipRender }
+        </DeckGL>
+      </div>
+    );
   }
 }
 export default HexOverlay;
+
+// TODO: after implimenting tooltip the booleans knobs are no longer work.... filled, wireframe, extruded.... extruded has to be set as true currently in layers... fix it

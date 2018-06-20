@@ -35,9 +35,6 @@ const mapWrapper = css`
   display: block;
 `;
 
-// Use Hack Oregon official mapbox token eventually
-const mapboxToken = 'pk.eyJ1IjoidGhlbWVuZG96YWxpbmUiLCJhIjoiY2o1aXdoem1vMWtpNDJ3bnpqaGF1bnlhNSJ9.sjTrNKLW9daDBIGvP3_W0w';
-
 export class PortlandFarmersMarkets extends React.Component {
   componentDidMount() {
     this.props.init();
@@ -58,9 +55,12 @@ export class PortlandFarmersMarkets extends React.Component {
     }
 
     return (
-      <CivicStoryCard title="Where are Portland's Farmers' Markets?">
+      <CivicStoryCard
+        title="Where are Portland's Farmers' Markets?"
+        slug="portland-farmers-markets"
+      >
         <div className={mapWrapper}>
-          <BaseMap mapboxToken={mapboxToken} mapboxStyle="mapbox://styles/themendozaline/cj8rrlv4tbtgs2rqnyhckuqva">
+          <BaseMap>
             <ScatterPlotMap
               data={portlandFarmersMarkets.features}
               autoHighlight={false}

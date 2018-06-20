@@ -9,12 +9,17 @@ export class HistoricalChangesToBusService extends React.Component {
 
   render() {
     return (
-      <CivicStoryCard title="Historical Changes to Bus Service">
+      <CivicStoryCard
+        title="Historical Changes to Bus Service"
+        slug="historical-changes-to-bus-service"
+      >
         <Placeholder />
       </CivicStoryCard>
     );
   }
 }
+
+HistoricalChangesToBusService.displayName = 'HistoricalChangesToBusService';
 
 // Connect this to the redux store when necessary
 export default HistoricalChangesToBusService;
