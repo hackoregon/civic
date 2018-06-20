@@ -36,7 +36,6 @@ import sandboxStory from './Sandbox.story';
 import packageSelectorBox from './PackageSelectorBox.story';
 import civicSandboxDashboardStory from './CivicSandboxDashboard.story';
 import stackedAreaChart from './StackedAreaChart.story';
-import { checkA11y } from '@storybook/addon-a11y';
 
 import '../assets/global.styles.css';
 

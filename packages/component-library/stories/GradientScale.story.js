@@ -22,7 +22,11 @@ export default () =>
       const primary = number('primary', 63);
       const colorScale = select('colorScale', colorScales, 'thermal');
 
-      return <GradientScale domain={domain} primary={primary} colorScale={colorScale} />;
+      return (<GradientScale
+        domain={domain}
+        primary={primary}
+        colorScale={colorScale}
+      />);
     })
     .add('With Secondary', () => {
       const domain = array('domain', [100, 600]);
@@ -30,5 +34,10 @@ export default () =>
       const secondary = array('secondary', [150, 400]);
       const colorScale = select('colorScale', colorScales, 'space');
 
-      return <GradientScale domain={domain} primary={primary} secondary={secondary} colorScale={colorScale} />;
+      return (<GradientScale
+        domain={domain}
+        primary={primary}
+        secondary={secondary}
+        colorScale={colorScale}
+      />);
     });
