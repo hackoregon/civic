@@ -45,7 +45,9 @@ export class IncreasingVolumeOfMoney extends React.Component {
       selectedRaceData,
     } = this.props;
 
-    const raceSubtitle = !!selectedRace && ` - ${selectedRace}`;
+    const raceSubtitle = selectedRace
+     ? `Monthly total for all contributions reported in ORESTAR - ${selectedRace}`
+     : `Monthly total for all contributions reported in ORESTAR`
 
     return (
       <CivicStoryCard
@@ -69,7 +71,7 @@ export class IncreasingVolumeOfMoney extends React.Component {
               dataKey="date"
               dataValue="sum"
               title="Money Raised For Oregon Elections"
-              subtitle={`Monthly total for all contributions reported in ORESTAR${raceSubtitle}`}
+              subtitle={raceSubtitle}
               yLabel="Money Raised"
               xLabel="Year"
               xNumberFormatter={x => year(x)}
