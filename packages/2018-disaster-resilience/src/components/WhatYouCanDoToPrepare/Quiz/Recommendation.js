@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 
 const Recommendation = ({ recommendation }) => (
-  <h2 className="recommendation">
+  <h3 className="recommendation">
     {recommendation}
-  </h2>
+  </h3>
 );
 
 Recommendation.propTypes = {

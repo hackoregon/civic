@@ -19,7 +19,7 @@ const QuestionForm = ({ back, next, done, questionId }) => (
       <div className="radio">
         <label>
           <Field
-            name={`Q${questionId}answer`}
+            name={questionId}
             component="input"
             type="radio"
             value="yes"
@@ -32,7 +32,7 @@ const QuestionForm = ({ back, next, done, questionId }) => (
       <div className="radio">
         <label>
           <Field
-            name={`Q${questionId}answer`}
+            name={questionId}
             component="input"
             type="radio"
             value="no"
