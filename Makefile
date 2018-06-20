@@ -1,22 +1,22 @@
 travis:
 	@if [ "$$SUITE" = "2017" ]; then \
 		echo "\n--- Budget Tests\n"; \
-		cd packages/budget && yarn test; cd -; \
+		cd packages/budget && yarn test && cd -; \
 		\
 		echo "\n--- Emergency Response Tests\n"; \
-		cd packages/emergency-response && yarn test; cd -; \
+		cd packages/emergency-response && yarn test && cd -; \
 		\
 		echo "\n--- Homelessness Tests\n"; \
-		cd packages/homelessness && yarn test; cd -; \
+		cd packages/homelessness && yarn test && cd -; \
 		\
 		echo "\n--- Housing Tests\n"; \
-		cd packages/housing && yarn test; cd -; \
+		cd packages/housing && yarn test && cd -; \
 		\
 		echo "\n--- Transportation Tests\n"; \
-		cd packages/transportation && yarn test; cd -; \
+		cd packages/transportation && yarn test && cd -; \
 		\
 		echo "\n--- 2017 Tests\n"; \
-		cd packages/2017 && yarn test; cd -; \
+		cd packages/2017 && yarn test && cd -; \
 		\
 		echo "\n--- Build 2017\n"; \
 		cd packages/2017 && yarn build; cd -; \
@@ -24,28 +24,28 @@ travis:
 
 	@if [ "$$SUITE" = "2018" ]; then \
 		echo "\n--- Disaster Tests\n"; \
-		cd packages/2018-disaster-resilience && yarn test; cd -; \
+		cd packages/2018-disaster-resilience && yarn test && cd -; \
 		\
 		echo "\n--- Housing Tests\n"; \
-		cd packages/2018-housing-affordability && yarn test; cd -; \
+		cd packages/2018-housing-affordability && yarn test && cd -; \
 		\
 		echo "\n--- Elections Tests\n"; \
-		cd packages/2018-local-elections && yarn test; cd -; \
+		cd packages/2018-local-elections && yarn test && cd -; \
 		\
 		echo "\n--- Neighborhood Tests\n"; \
-		cd packages/2018-neighborhood-development && yarn test; cd -; \
+		cd packages/2018-neighborhood-development && yarn test && cd -; \
 		\
 		echo "\n--- Transportation Tests\n"; \
-		cd packages/2018-transportation-systems && yarn test; cd -; \
+		cd packages/2018-transportation-systems && yarn test && cd -; \
 		\
 		echo "\n--- Example Farmers Markets\n"; \
-		cd packages/2018-example-farmers-markets && yarn test; cd -; \
+		cd packages/2018-example-farmers-markets && yarn test && cd -; \
 		\
 		echo "\n--- Civic Sandbox Tests\n"; \
-		cd packages/civic-sandbox && yarn test; cd -; \
+		cd packages/civic-sandbox && yarn test && cd -; \
 		\
 		echo "\n--- 2018 Tests\n"; \
-		cd packages/2018 && yarn test; cd -; \
+		cd packages/2018 && yarn test && cd -; \
 	fi
 
 	@if [ "$$SUITE" = "COMPONENT_LIBRARY" ]; then \
