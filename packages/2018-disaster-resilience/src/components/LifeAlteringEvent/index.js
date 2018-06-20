@@ -13,33 +13,18 @@ export class LifeAlteringEvent extends React.Component {
         title="A Life-Altering Event for Portlanders"
         slug="life-altering-event"
       >
-        <p>
-        Based on developed models, scientists can estimate
-        what will happen to the ground in a 9.0 Cascadia Subduction Zone
-        earthquake. The below maps apply these models to Portland based on 
-        a calculated average for each neighborhood. 
+        <p>A 9.0 Cascadia Subduction Zone earthquake will be a life-altering for Portlanders. 
+          Should the earthquake happen at 2am, most Portlanders would be home and in bed, one of
+           the safest places to be during an earthquake; should it occur at 2p, many residents would 
+           be at work where collapsed unreinforced masonry buildings would drastically increase fatalities. 
+           Ground shaking and related effects, building structure types, and building occupancy, all impact 
+           the model used to estimate the impact on the city, by neighborhood.
         </p>
-
-        <p>
-        Shaking intensity is how much the surface of the earth moves during
-        an earthquake, this is represented using a 
-        <a href="https://earthquake.usgs.gov/learn/topics/mercalli.php"> Modified Mercalli (MM) Intensity </a> scale. 
-        </p>
-
-        <p>
-        Total Deformation (average of liquefaction/landslide combined) during a wet season 
-        is impacted by both landslide potential and liquefaction potential. Landslide potential is based on topography
-        and soil conditions. Liquefaction potential estimates the potential for saturated (wet), unconsolidated/loose
-        ground materials to liquefy or give way during an earthquake.
-        </p>
-
-        <p>
-        Total Deformation (average of landslide - there’s no liquefaction) during a dry season season is impacted by
-        landslide potential based on topography. The lack of moisture in the ground will lessen the impact of the event.
-        </p>
-
-
+        
         <Placeholder issue="154" />
+        <p>The below table presents estimated outcomes based on the selected neighborhood, split
+          by time of earthquake (2a v 2p): Fatalities, Injuries, Displaced Population, and damage in dollars. 
+        </p>
       </CivicStoryCard>
     );
   }
