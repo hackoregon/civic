@@ -1,17 +1,24 @@
 import axios from 'axios';
 
-const HOST = 'https://sandbox.civicpdx.org/civic-sandbox';
 const echo = a => a;
 
-const apiAdapter = (url, { encodeParams, start, success, failure }) => params => (dispatch) => {
+const apiAdapter = (url, { start, success, failure }) => () => (dispatch) => {
   dispatch(start());
-
-  const encode = encodeParams || echo;
-  const fullURL = encode(HOST + url, params);
-  return axios.get(fullURL).then((res) => {
+  return axios.get(url).then((res) => {
     dispatch(success(res.data));
     return res;
   }).catch((err) => {
+    dispatch(failure(err));
+  });
+};
+
+export const fetchAllAdapter = (urls, { start, success, failure }) => () => (dispatch) => {
+  dispatch(start());
+  const fullUrls = urls.map(url => axios.get(url));
+  return axios.all(fullUrls).then(axios.spread((...res) => {
+    dispatch(success(res.map(r => r.data)));
+    return res;
+  })).catch((err) => {
     dispatch(failure(err));
   });
 };

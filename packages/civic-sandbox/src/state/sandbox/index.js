@@ -6,6 +6,9 @@ import {
   FOUNDATION_SUCCESS,
   FOUNDATION_FAILURE,
   SET_PACKAGE,
+  SLIDES_START,
+  SLIDES_FAILURE,
+  SLIDES_SUCCESS,
 } from './actions';
 
 const INITIAL_STATE = {
@@ -13,8 +16,12 @@ const INITIAL_STATE = {
   sandboxError: null,
   foundationPending: false,
   foundationError: null,
-  selectedPackage: null,
+  slidesPending: false,
+  slidesError: null,
+  selectedPackage: '',
   sandbox: {},
+  foundationData: {},
+  slidesData: [],
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -52,7 +59,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         foundationPending: false,
         foundationError: null,
-        foundationData: action.payload.body,
+        foundationData: action.payload,
       };
     case FOUNDATION_FAILURE:
       return {
@@ -60,6 +67,26 @@ const reducer = (state = INITIAL_STATE, action) => {
         foundationPending: false,
         foundationError: action.payload,
         foundationData: null,
+      };
+    case SLIDES_START:
+      return {
+        ...state,
+        slidesPending: true,
+        slidesError: null,
+      };
+    case SLIDES_SUCCESS:
+      return {
+        ...state,
+        slidesPending: false,
+        slidesError: null,
+        slidesData: action.payload,
+      };
+    case SLIDES_FAILURE:
+      return {
+        ...state,
+        slidesPending: false,
+        slidesError: action.payload,
+        slidesData: null,
       };
     case SET_PACKAGE:
       return {
