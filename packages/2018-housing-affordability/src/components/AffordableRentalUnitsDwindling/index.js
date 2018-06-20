@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { css } from 'emotion';
+import { loader, error, inputClass, emphasis } from '../css-utils';
 
 import '@hackoregon/component-library/assets/vendor/react-select.min.css';
 
@@ -22,25 +23,6 @@ import {
   getSelectedCityHighRank,
   getAllCities,
 } from '../../state/affordable-rental-units/selectors';
-
-const loader = css`
-  background: #EEE;
-  padding: 30px;
-`;
-
-const error = css`
-  background: #FEE;
-  color: #C00;
-  padding: 30px;
-`;
-
-const inputClass = css`
-  width: 100%;
-`;
-
-const emphasis = css`
-  color: #000;
-`;
 
 const capitalize = str => str.length && str.split(' ')
   .reduce((full, word) => `${full} ${word[0].toUpperCase() + word.substring(1)}`, '')

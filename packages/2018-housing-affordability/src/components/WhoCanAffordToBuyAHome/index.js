@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { css } from 'emotion';
+import { loader, error, inputClass, emphasis } from '../css-utils';
 
 import '@hackoregon/component-library/assets/vendor/react-select.min.css';
 
@@ -22,25 +22,6 @@ import {
   getAllCities,
   isAnyLoading,
 } from '../../state/price-to-income/selectors';
-
-const loader = css`
-  background: #EEE;
-  padding: 30px;
-`;
-
-const error = css`
-  background: #FEE;
-  color: #C00;
-  padding: 30px;
-`;
-
-const inputClass = css`
-  width: 100%;
-`;
-
-const emphasis = css`
-  color: #000;
-`;
 
 export class WhoCanAffordToBuyAHome extends React.Component {
   componentDidMount() {
