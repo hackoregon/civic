@@ -17,7 +17,7 @@ import { css } from 'emotion';
 import { chartEvents, getDefaultDomain } from '../utils/chartHelpers';
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
 
-const BarChart = ({ data, dataKey, dataValue, domain, title, subtitle, xLabel, yLabel, xNumberFormatter, yNumberFormatter }) => {
+const BarChart = ({ data, dataKey, dataValue, domain, title, subtitle, xLabel, yLabel, xNumberFormatter, yNumberFormatter, barWidth }) => {
   const chartDomain = domain || getDefaultDomain(data, dataKey, dataValue);
 
   return (
@@ -77,6 +77,7 @@ const BarChart = ({ data, dataKey, dataValue, domain, title, subtitle, xLabel, y
           x={'dataKey'}
           y={'dataValue'}
           title="Bar Chart"
+          style={{ data: { width: barWidth } }}
         />
       </VictoryChart>
     </ChartContainer>
@@ -94,6 +95,7 @@ BarChart.propTypes = {
   yLabel: PropTypes.string,
   xNumberFormatter: PropTypes.func,
   yNumberFormatter: PropTypes.func,
+  barWidth: PropTypes.number,
 };
 
 BarChart.defaultProps = {
@@ -107,6 +109,7 @@ BarChart.defaultProps = {
   yLabel: "Y",
   xNumberFormatter: year,
   yNumberFormatter: numeric,
+  barWidth: null,
 };
 
 export default BarChart;
