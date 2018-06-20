@@ -46,9 +46,6 @@ travis:
 		\
 		echo "\n--- 2018 Tests\n"; \
 		cd packages/2018 && yarn test; cd -; \
-		\
-		echo "\n--- Build 2018\n"; \
-		cd packages/2018 && yarn build; cd -; \
 	fi
 
 	@if [ "$$SUITE" = "COMPONENT_LIBRARY" ]; then \
