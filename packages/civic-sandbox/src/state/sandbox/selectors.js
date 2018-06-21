@@ -94,5 +94,51 @@ export const getLayerFoundation = createSelector(
     };
     return foundationLayerData;
   }
-)
-;
+);
+
+const makeVisFor = (spec, data) => {
+  const type = spec.visualization.type;
+  if (type === 'PercentDonut') {
+    const val = data.properties[spec.field];
+    return {
+      visualizationType: 'PercentDonut',
+      title: spec.name,
+      data: [
+        { x: spec.name, y: val },
+        { x: spec.visualization.comparison_name, y: val < 1 ? (1 - val) : (100 - val) },
+      ],
+    };
+  }
+  if (type === 'Text') {
+    console.log('TYPE', spec.name, spec.field, data.properties[spec.field]);
+    return {
+      visualizationType: 'Text',
+      title: spec.name,
+      data: data.properties[spec.field],
+    };
+  }
+};
+
+export const getSelectedFoundationDatum = createSelector(
+  getSandbox,
+  getSelectedFoundationData,
+  ({ selectedFoundationDatum }, foundation) => {
+    if (!foundation || !selectedFoundationDatum) return;
+
+    const attrs = foundation.slide_meta.attributes;
+    const visualizations = [];
+
+    if (attrs.primary && attrs.primary.field) {
+      visualizations.push(
+        makeVisFor(attrs.primary, selectedFoundationDatum.object),
+      );
+    }
+    if (attrs.secondary && attrs.secondary.field) {
+      visualizations.push(
+        makeVisFor(attrs.secondary, selectedFoundationDatum.object),
+      );
+    }
+
+    return visualizations;
+  }
+);

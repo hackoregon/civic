@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { css } from 'emotion';
-import Modal from 'react-modal';
 
-import { PackageSelectorBox } from '@hackoregon/component-library';
+import { PackageSelectorBox, Button, CivicSandboxDashboard } from '@hackoregon/component-library';
 import SandboxComponent from '../Sandbox';
 import {
   fetchSandbox,
@@ -13,6 +12,7 @@ import {
   isSandboxLoading,
   getSandboxData,
   getSandboxError,
+  getSelectedFoundationDatum,
 } from '../../state/sandbox/selectors';
 
 const loader = css`
@@ -35,20 +35,20 @@ export class Packages extends React.Component {
   constructor() {
     super();
     this.state = {
-      modalIsOpen: false,
+      mapIsOpen: false,
     };
   }
   componentDidMount() {
     this.props.fetchSandbox();
   }
 
-  closeModal = () => {
-    this.setState({ modalIsOpen: false });
+  closeMap = () => {
+    this.setState({ mapIsOpen: false });
   }
 
   handlePackageSelection = (selectedPackage) => {
     this.props.setPackage(selectedPackage);
-    this.setState({ modalIsOpen: true });
+    this.setState({ mapIsOpen: true });
   }
 
   render() {
@@ -56,6 +56,7 @@ export class Packages extends React.Component {
       isLoading,
       isError,
       sandbox,
+      selectedFoundationDatum,
     } = this.props;
 
     const packages = sandbox.packages ? Object.keys(sandbox.packages).map(p => ({ description: sandbox.packages[p].description, title: capitalize(p) })) : [];
@@ -69,78 +70,58 @@ export class Packages extends React.Component {
         font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
       `)}
       >
-        <div
-          className={css(`
-          padding: 1.5rem;
-          text-align: center;
-          font-size: 1.2rem;
-        `)}
-        >Select a data collection</div>
-        <section
-          className={css(`@media(min-width: 600px){
-            display:flex;
-            flex-wrap: wrap;
-          }`)}
-        >
-          {isLoading && <Loader />}
-          {packages && (packages.map(p => (<div
-            key={p.title}
-            className={css(`@media(min-width: 600px) {
-            width: 33%;
-          }`)}
+        {!this.state.mapIsOpen && (<div>
+          <div
+            className={css(`
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 1.2rem;
+          `)}
           >
-            <PackageSelectorBox
-              title={p.title}
-              description={p.description}
-              onClick={() => this.handlePackageSelection(p.title)}
-            />
-          </div>)))
-          }
-        </section>
-        <section>
+            Select a data collection
+          </div>
+          <section
+            className={css(`@media(min-width: 600px){
+              display:flex;
+              flex-wrap: wrap;
+            }`)}
+          >
+            {isLoading && <Loader />}
+            {packages && (packages.map(p => (<div
+              key={p.title}
+              className={css(`@media(min-width: 600px) {
+              width: 33%;
+            }`)}
+            >
+              <PackageSelectorBox
+                title={p.title}
+                description={p.description}
+                onClick={() => this.handlePackageSelection(p.title)}
+              />
+            </div>)))
+            }
+          </section>
+        </div>)}
 
+        <section>
           {isError && <ErrorMessage />}
         </section>
-        <section>
-          <Modal
-            isOpen={this.state.modalIsOpen}
-            onAfterOpen={this.afterOpenModal}
-            onRequestClose={this.closeModal}
+
+        {this.state.mapIsOpen && (<section style={{ position: 'relative' }}>
+          <p>
+            <a onClick={this.closeMap}>&lt; Back to Packages</a>
+          </p>
+          <SandboxComponent />
+          {selectedFoundationDatum && <div
             style={{
-              content: {
-                top: '50%',
-                left: '50%',
-                right: 'auto',
-                bottom: 'auto',
-                marginRight: '-50%',
-                transform: 'translate(-50%, -50%)',
-                width: '90%',
-              },
+              top: '175px',
+              position: 'absolute',
+              width: '100%',
             }}
-            contentLabel="Civic Sandbox"
           >
-            <div
-              className={css(`
-              position: absolute;
-              right: 0;
-              top: 5px;
-            `)}
-            >
-              <button
-                onClick={this.closeModal}
-                className={css(`background: #fff;
-                font-size: 1.5rem;
-                border: 0;
-                cursor: pointer;
-                &:hover {
-                  color: rgb(237,73,91);
-                }
-                `)}
-              >x</button>
-            </div>
-            <SandboxComponent />
-          </Modal>
-        </section>
+            <CivicSandboxDashboard data={selectedFoundationDatum} />
+          </div>}
+        </section>)}
       </div>
     );
   }
@@ -154,6 +135,7 @@ export default connect(
     isLoading: isSandboxLoading(state),
     isError: getSandboxError(state),
     sandbox: getSandboxData(state),
+    selectedFoundationDatum: getSelectedFoundationDatum(state),
   }),
   dispatch => ({
     fetchSandbox() {

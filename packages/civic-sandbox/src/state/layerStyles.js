@@ -1087,7 +1087,7 @@ export const slides = data => ({
       getPosition: f => f.geometry.coordinates,
       opacity: 0.66,
       colorRange: thermal,
-      cellSizePixels: 50,
+      cellSizePixels: 15,
       autoHighlight: true,
       highlightColor: [100, 100, 100, 255],
     },

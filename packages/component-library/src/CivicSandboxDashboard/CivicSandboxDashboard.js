@@ -59,7 +59,7 @@ class CivicDashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      show: "info",
+      show: "viz",
     };
 
     this.showInfo = this.showInfo.bind(this);
@@ -67,13 +67,13 @@ class CivicDashboard extends React.Component {
   }
 
   showInfo() {
-    this.setState({ 
+    this.setState({
       show: "info",
     });
   }
 
   showViz() {
-    this.setState({ 
+    this.setState({
       show: "viz",
     });
   }
@@ -89,9 +89,9 @@ class CivicDashboard extends React.Component {
         object.visualizationType === "Text" ? (
           <div className={dashboardViz} key={index}>
             <h2>{ object.title }</h2>
-            <h1>{ object.data.toLocaleString() }</h1>
+            <p>{ object.data.toLocaleString() }</p>
           </div>
-        ) : object.visualizationType === "PieChart" ? (
+        ) : ["PieChart", "PercentDonut"].includes(object.visualizationType) ? (
           <div className={dashboardViz} key={index}>
             <h2>{ object.title }</h2>
             <div style={{ display: 'flex', justifyContent: 'space-around'}} >

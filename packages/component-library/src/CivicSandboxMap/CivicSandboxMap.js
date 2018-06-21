@@ -16,7 +16,13 @@ const CivicSandboxMap = (props) => {
     y,
     onHover,
     children,
+    onClick,
   } = props;
+
+  // Call multiple functions with supplied arguments
+  const mapClick = (...fns) => (...args) => {
+    fns.forEach(fn => fn(...args));
+  };
 
   const renderMaps = mapLayers.map((layer, index) => {
     return layer.data.mapType === 'PathMap' ? (
@@ -120,7 +126,7 @@ const CivicSandboxMap = (props) => {
           stroked={layer.data.stroked}
           getFillColor={layer.data.getFillColor}
           filled={layer.data.filled}
-          onClick={layer.data.onClick}
+          onClick={mapClick(onClick, layer.data.onClick)}
           onHover={onHover}
           autoHighlight={layer.data.autoHighlight}
           highlightColor={layer.data.highlightColor}
@@ -160,6 +166,7 @@ CivicSandboxMap.propTypes = {
   x: PropTypes.number,
   y: PropTypes.number,
   onHover: PropTypes.func,
+  onClick: PropTypes.func,
   children: PropTypes.node,
 };
 
