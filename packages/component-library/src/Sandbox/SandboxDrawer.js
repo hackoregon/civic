@@ -33,6 +33,7 @@ const SandboxDrawer = ({
       className={css(`
     flex-grow: 0;
     width: 20%;
+    position:relative;
   `)}
     >
       <div onClick={toggleDrawer}>
@@ -52,11 +53,11 @@ const SandboxDrawer = ({
         className={css(`
         position: absolute;
         display: block;
-        height: 100%;
-        width: 20%;
+        width: 250px;
         z-index: 100;
         right: 0;
-        top: 120px;
+        top: 80px;
+        right: 15px;
         background: white;
 
         .Select.is-open { position: relative; z-index: 1000; }

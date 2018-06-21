@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { css } from 'emotion';
 
-import { PackageSelectorBox } from '@hackoregon/component-library';
+import { PackageSelectorBox, Button } from '@hackoregon/component-library';
 import SandboxComponent from '../Sandbox';
 import {
   fetchSandbox,
