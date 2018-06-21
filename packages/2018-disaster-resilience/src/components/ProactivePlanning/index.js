@@ -35,9 +35,9 @@ export class ProactivePlanning extends React.Component {
           { proactivePlanning &&
             <Scatterplot
               title="Resilience and Displacement"
-              subtitle="Resilience as measured by census response rate and expected displacement in a 9.0 earthquake by neighborhood"
+              subtitle="Resilience as measured by census non-response rate and expected displacement in a 9.0 earthquake by neighborhood"
               data={proactivePlanning}
-              xLabel="Census Response Rate"
+              xLabel="Census Non-Response Rate"
               yLabel="Per Capita Displacement"
               dataKey="census_response_rate"
               dataKeyLabel="resilienceLabel"
