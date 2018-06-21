@@ -8,12 +8,13 @@ import SearchBar from './SearchBar';
 import { Footer } from '@hackoregon/component-library';
 
 import logo from '../../assets/civic-logo-animated.svg';
-import smallLogo from '../../assets/civic-logo-c.svg'
-import brain from '../../assets/brain.svg'
-import trees from '../../assets/trees.png'
-import hackOregonLogo from '../../assets/hack-oregon-logo.png'
-import heartMail from '../../assets/heartmail.png'
-import twitterLogo from '../../assets/twitter-logo.png'
+import smallLogo from '../../assets/civic-logo-c.svg';
+import brain from '../../assets/brain.svg';
+import brainMobile from '../../assets/brain-mobile.svg';
+import trees from '../../assets/trees.png';
+import hackOregonLogo from '../../assets/hack-oregon-logo.png';
+import heartMail from '../../assets/heartmail.png';
+import twitterLogo from '../../assets/twitter-logo.png';
 
 import cities from './cities';
 import zipCodes from './zipCodes.json';
@@ -63,7 +64,7 @@ const missionStatement = css`
   }
 `;
 const appWrapper = css`
-  background-color: #f3f1f3;
+  background-color: #ffffff;
   padding: 0px;
   height: auto;
   box-sizing: border-box;
@@ -283,8 +284,22 @@ const brainWrapper = css`
   z-index: 10;
 
   @media (max-width: 850px) {
+    display: none;
+  }
+`;
+const brainWrapperMobile = css`
+  display: none;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  z-index: 10;
+
+  @media (max-width: 850px) {
+    display: block;
     img {
-      height: 182px;
+      width: 78vw;
+      max-width: 500px;
     }
   }
 `;
@@ -490,6 +505,9 @@ class LandingPage extends React.Component {
               </div>
               <div className={brainWrapper}>
                 <img src={brain} />
+              </div>
+              <div className={brainWrapperMobile}>
+                <img src={brainMobile} />
               </div>
               <div className={contentRightContainer}>
                 <div className={listTitle}>Supporting People</div>

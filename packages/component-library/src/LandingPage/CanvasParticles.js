@@ -22,8 +22,8 @@ class CanvasParticles extends React.Component {
     const img = this.refs.image
     const W = window.innerWidth;
     const H = window.innerHeight;
-    canvas.width = W;
-    canvas.height = H;
+    canvas.width = W * 1.2;
+    canvas.height = H * 1.2;
     const particleCount = 40;
     const particles = [];
     const minDist = 100;
