@@ -22,6 +22,16 @@ export const isPoliticalCampaignsLoading = createSelector(
     .reduce((acc, key) => acc || data[key].pending, false),
 );
 
+export const isContributorBreakdownLoading = createSelector(
+  politicalCampaignsSelector,
+  ({ data }) => data.contributorBreakdown && data.contributorBreakdown.pending,
+);
+
+export const isSpendingBreakdownLoading = createSelector(
+  politicalCampaignsSelector,
+  ({ data }) => data.spendingBreakdown && data.spendingBreakdown.pending,
+);
+
 export const getCampaign = createSelector(
   politicalCampaignsSelector,
   ({ meta }) => meta.campaign,

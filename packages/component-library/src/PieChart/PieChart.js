@@ -17,6 +17,8 @@ const PieChart = (props) => {
     dataValue,
     dataLabel,
     innerRadius,
+    loading,
+    error,
     halfDoughnut,
     width,
     height,
@@ -28,7 +30,7 @@ const PieChart = (props) => {
   const endAngle = halfDoughnut ? 90 : 360;
 
   return (
-    <ChartContainer title={title} subtitle={subtitle}>
+    <ChartContainer title={title} subtitle={subtitle} loading={loading} error={error}>
       <VictoryPie
         width={width}
         height={height}

@@ -72,8 +72,8 @@ class Controls extends React.Component {
 
     return (
       <div>
-        <div>Select campaign: {campaignDropdown}</div>
-        <div>Select election cycle: {electionCycleDropdown}</div>
+        <div style={{ float: 'left', width: '50%' }}>{campaignDropdown}</div>
+        <div style={{ float: 'right', width: '50%' }}>{electionCycleDropdown}</div>
       </div>
     );
   }

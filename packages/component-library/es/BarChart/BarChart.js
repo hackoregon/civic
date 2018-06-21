@@ -23,13 +23,15 @@ var BarChart = function BarChart(_ref) {
       yLabel = _ref.yLabel,
       xNumberFormatter = _ref.xNumberFormatter,
       yNumberFormatter = _ref.yNumberFormatter,
-      barWidth = _ref.barWidth;
+      barWidth = _ref.barWidth,
+      loading = _ref.loading,
+      error = _ref.error;
 
   var chartDomain = domain || getDefaultDomain(data, dataKey, dataValue);
 
   return React.createElement(
     ChartContainer,
-    { title: title, subtitle: subtitle },
+    { title: title, subtitle: subtitle, loading: loading, error: error },
     React.createElement(
       VictoryChart,
       {
@@ -99,6 +101,8 @@ var BarChart = function BarChart(_ref) {
 
 BarChart.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object),
+  loading: PropTypes.bool,
+  error: PropTypes.bool,
   dataKey: PropTypes.string,
   dataValue: PropTypes.string,
   domain: PropTypes.objectOf(PropTypes.array),

@@ -5,28 +5,28 @@ import { PieChart } from '@hackoregon/component-library';
 
 const propTypes = {
   contributors: PropTypes.array,
+  loading: PropTypes.bool,
 };
 
 const defaultProps = {
   contributors: [],
 };
 
-const ContributorBreakdown = ({ contributors }) => {
+const ContributorBreakdown = ({ contributors, loading }) => {
   const data = contributors.map(c => ({
     x: c.donor_category,
     y: c.sum,
   }));
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-      <PieChart
-        data={data}
-        title="Contributor breakdown"
-        subtitle="Breakdown of contributors..."
-        innerRadius={20}
-        height={400}
-      />
-    </div>
+    <PieChart
+      loading={loading}
+      data={data}
+      title="Contributor breakdown"
+      subtitle="Breakdown of contributors..."
+      innerRadius={50}
+      height={400}
+    />
   );
 };
 

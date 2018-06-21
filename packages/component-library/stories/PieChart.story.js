@@ -11,8 +11,11 @@ import {
 import { PieChart } from '../src';
 import { colors, getRandomValuesArray, objectRandomizer } from './shared';
 
-export default () => storiesOf('Pie/Donut visualization', module).addDecorator(withKnobs)
+const loading = () => (
+  <PieChart loading />
+);
 
+export default () => storiesOf('Pie/Donut visualization', module).addDecorator(withKnobs)
 .add(
   'basic usage',
   // 'edit this visual in the knobs tab below and check click events in the actions tab',
@@ -55,4 +58,5 @@ export default () => storiesOf('Pie/Donut visualization', module).addDecorator(w
         />
       </div>
     );
-  });
+  })
+  .add('Loading', loading);

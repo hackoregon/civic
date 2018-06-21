@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { css } from 'emotion'
 import { connect } from 'react-redux';
 
-import { CivicStoryCard } from '@hackoregon/component-library';
+import {
+  CivicStoryCard,
+} from '@hackoregon/component-library';
 
 import {
   fetchContributorBreakdown,
@@ -13,9 +16,14 @@ import {
   setCampaign,
 } from '../../state/political-campaigns/actions';
 import {
-  isPoliticalCampaignsLoading,
+  isContributorBreakdownLoading,
   getContributorBreakdownData,
+
+  isSpendingBreakdownLoading,
   getSpendingBreakdownData,
+
+  isPoliticalCampaignsLoading,
+
   getElectionCycles,
   getElectionCycle,
   getCommittees,
@@ -24,7 +32,22 @@ import {
 
 import { campaign, electionCycle } from './defaults';
 import ContributorBreakdown from './ContributorBreakdown';
+import SpendingBreakdown from './SpendingBreakdown';
 import Controls from './Controls';
+
+const descriptionClass = css`
+`;
+
+const missionClass = css`
+`;
+
+const chartGrid = css`
+  display: flex;
+`;
+
+const chartCol = css`
+  flex: 1;
+`;
 
 const propTypes = {
   query: PropTypes.func,
@@ -37,7 +60,10 @@ const propTypes = {
   spendingBreakdown: PropTypes.object,
   setElectionCycle: PropTypes.func,
   fetchContributorBreakdown: PropTypes.func,
+  contributorBreakdown: PropTypes.object,
   fetchSpendingBreakdown: PropTypes.func,
+
+  loadingContributorBreakdown: PropTypes.bool,
 };
 
 const defaultProps = {
@@ -68,6 +94,7 @@ class RealTimeInformationOnPoliticalCampaigns extends React.Component {
   render() {
     let committees = [];
     let contributors = [];
+    let spending = [];
     let electionCycles = [];
 
     if (this.props.committees && this.props.committees.results) {
@@ -82,12 +109,16 @@ class RealTimeInformationOnPoliticalCampaigns extends React.Component {
       electionCycles = this.props.electionCycles.results;
     }
 
+    if (this.props.spendingBreakdown && this.props.spendingBreakdown.results) {
+      spending = this.props.spendingBreakdown.results;
+    }
+
     return (
       <CivicStoryCard
         title="Real-Time Information on Political Campaigns"
         slug="real-time-information-on-political-campaigns"
-        loading={this.props.loading}
       >
+        <h2 className={descriptionClass}>This is a one line sentence to explain the card</h2>
         <Controls
           campaign={this.props.campaign}
           campaigns={committees}
@@ -96,7 +127,32 @@ class RealTimeInformationOnPoliticalCampaigns extends React.Component {
           electionCycles={electionCycles}
           setElectionCycle={this.props.setElectionCycle}
         />
-        <ContributorBreakdown contributors={contributors} />
+        <p className={missionClass}>This is our mission. This is why we wake up in the morning. Lorem
+          ipsum thats all i remember</p>
+        <div className={chartGrid}>
+          <div className={chartCol}>
+            <div style={{ padding: 20 }}>
+              <ContributorBreakdown
+                contributors={contributors}
+                loading={this.props.loadingContributorBreakdown}
+              />
+            </div>
+            <div style={{ padding: 20 }}>
+              <SpendingBreakdown
+                spending={spending}
+                loading={this.props.loadingSpendingBreakdown}
+              />
+            </div>
+          </div>
+          <div className={chartCol}>
+            <div style={{ padding: 20 }}>
+              <ContributorBreakdown
+                contributors={contributors}
+                loading={this.props.loadingContributorBreakdown}
+              />
+            </div>
+          </div>
+        </div>
       </CivicStoryCard>
     );
   }
@@ -110,6 +166,8 @@ RealTimeInformationOnPoliticalCampaigns.defaultProps = defaultProps;
 export default connect(
   state => ({
     loading: isPoliticalCampaignsLoading(state),
+    loadingContributorBreakdown: isContributorBreakdownLoading(state),
+    loadingSpendingBreakdown: isSpendingBreakdownLoading(state),
     contributorBreakdown: getContributorBreakdownData(state),
     spendingBreakdown: getSpendingBreakdownData(state),
     campaign: getCampaign(state),
