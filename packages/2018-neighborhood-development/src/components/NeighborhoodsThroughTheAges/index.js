@@ -58,7 +58,9 @@ export class NeighborhoodsThroughTheAges extends React.Component {
         error={error}
       >
         <p>
-        Between the years of 2006 to 2016, for each neighborhood in Portland, Oregon, registered voters have been grouped into the age categories, 18- 25, 26-32, 33-39, 40-49, and 50+. Their residencies are plotted over time to gain insight into the age range and movement of registered voters in Portland neighborhoods.
+        For each neighborhood registered voters have been grouped into age categories, the proportion
+        of residents in different age groups are plotted over time. This allows visualization of the 
+        age range and movement of registered voters in Portland neighborhoods
         </p>
 
         { !!selectedNeighborhood &&
@@ -83,8 +85,37 @@ export class NeighborhoodsThroughTheAges extends React.Component {
             yNumberFormatter={percentage}
           />
         }
+        <p>Individuals who have lived in different neighborhoods in the same year are counted multiple times.
+        </p>
+        <p>
+          Example: Hillside/Northwest district is a good example of a neighborhood where young people have been 
+          moving into this neighborhood from 2006 to 2016.
+        </p>
+        <p>
+          Below are the list of neighborhoods with the largest changes for each age group:
+          Neighborhoods with the largest decrease for each age group
+        </p>
+        <p> 
+        <dl>
+          <dt>Ages 18-25: WOODLAND PARK</dt>
+          <dt>Ages 26-32: ARDENWALD-JOHNSON CREEK/WOODSTOCK</dt>
+          <dt>Ages 33-39: GRANT PARK/HOLLYWOOD</dt>
+          <dt>Ages 40-29: BEAVER CREEK</dt>
+          <dt>Ages 50+: GOOSE HOLLOW/SOUTHWEST HILL</dt>
+        </dl>
+        </p>
+        <p>
+          Neighborhoods with the largest increase for each age group
+        <dl>
+          <dt>Ages 18-25: HILLSIDE/NORTHWEST DISTRICT</dt>
+          <dt>Ages 26-32: GLENFAIR</dt>
+          <dt>Ages 33-39: MARSHALL PARK</dt>
+          <dt>Ages 40-49: MARKHAM</dt>
+          <dt>Ages 50+: 'WOODLAND PARK'</dt>
+        </dl>
+        </p>
 
-      </CivicStoryCard>
+      </ CivicStoryCard>
     );
   }
 }
