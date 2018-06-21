@@ -6,6 +6,25 @@ import Header from '../Navigation/Header'
 import Footer from '../Footer/Footer'
 import CollectionHero from '../Hero/CollectionHero'
 
+const defaultStyles = css`
+  padding: 0px 24px;
+
+  p, h1, h2, h3, h4, h5, h6 {
+    margin: auto;
+  }
+
+  > p {
+    width: 100%;
+    max-width: 700px;
+    font-size: 18px;
+    margin-bottom: 1.5em;
+    line-height:1.8;
+
+    &.transition {
+      margin: 80px auto;
+    }
+  }
+`;
 
 const PageLayout = ({ cardId, collectionId, heroTitle, heroSubtitle, title, mainProjectColor, teamTitle, overlay, children }) => (
   <div>
@@ -16,7 +35,7 @@ const PageLayout = ({ cardId, collectionId, heroTitle, heroSubtitle, title, main
       heroSubtitle={heroSubtitle}
       mainProjectColor={mainProjectColor}
     /> }
-    <div style={{padding: '0px 24px'}} >
+    <div className={defaultStyles}>
       {children}
     </div>
     <Footer />
