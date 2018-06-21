@@ -18,3 +18,9 @@ export const inputClass = css`
 export const emphasis = css`
   color: #000;
 `;
+
+export const gradientLabel = css`
+  ${emphasis}
+  position: relative;
+  bottom: -10px;
+`;
