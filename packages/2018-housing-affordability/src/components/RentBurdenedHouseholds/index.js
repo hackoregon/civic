@@ -68,7 +68,8 @@ export class RentBurdenedHouseholds extends React.Component {
           {selectedCityRank && (<div>
             <p>
               {selectedCity} ranks <strong className={emphasis}>{selectedCityRank.rank}/{selectedCityRank.total} </strong>
-              for the median home price to median income ratio in <strong className={emphasis}>2014</strong>
+              metropolitan areas with regards to the percentage of renter households that are severely burdened <strong className={emphasis}>2015</strong>.
+              A rank of 1 is the smallest percentage of burdened households, while a rank of 100 is the greatest percentage of burdened households.
             </p>
             <p>
               <strong className={gradientLabel}>Less severely burdened</strong>
