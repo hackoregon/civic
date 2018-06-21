@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import MapGL, { NavigationControl } from 'react-map-gl';
+import Dimensions from 'react-dimensions';
 import { css } from 'emotion';
 import PropTypes from 'prop-types';
 import './mapbox-gl.css';
@@ -8,7 +9,9 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiaGFja29yZWdvbiIsImEiOiJjamk0MGZhc2cwNDl4M3FsdHA
 
 const mapWrapper = css`
   margin: 0 auto;
-  padding: 0 2.5%;
+  padding: 0;
+  width: 100%;
+  height: 500px;
 `;
 
 const navControl = css`
@@ -17,13 +20,11 @@ const navControl = css`
   z-index: 1;
 `;
 
-export default class BaseMap extends Component {
+class BaseMap extends Component {
   constructor(props) {
     super(props);
     this.state = {
       viewport:{
-        width: window.innerWidth * 0.95,
-        height: 500,
         longitude: props.initialLongitude || -122.6765,
         latitude: props.initialLatitude || 45.5231,
         zoom: props.initialZoom || 9.5,
@@ -37,29 +38,12 @@ export default class BaseMap extends Component {
       y: null,
     };
     this.onViewportChange = this.onViewportChange.bind(this);
-    this.resize = this.resize.bind(this);
     this.onHover = this.onHover.bind(this);
-  }
-
-  componentDidMount() {
-    window.addEventListener('resize', this.resize);
-    this.resize();
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.resize);
   }
 
   onViewportChange(viewport) {
     this.setState({
       viewport: {...this.state.viewport, ...viewport},
-    });
-  }
-
-  resize() {
-    this.onViewportChange({
-      width: window.innerWidth * 0.95,
-      height: 500,
     });
   }
 
@@ -78,6 +62,9 @@ export default class BaseMap extends Component {
       x,
       y,
     } = this.state;
+
+    viewport.width = this.props.containerWidth;
+    viewport.height = 500;
 
     const {
       mapboxStyle,
@@ -127,3 +114,4 @@ BaseMap.defaultProps = {
   mapboxStyle: "mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg",
   mapboxToken: "pk.eyJ1IjoiaGFja29yZWdvbiIsImEiOiJjamk0MGZhc2cwNDl4M3FsdHAwaG54a3BnIn0.Fq1KA0IUwpeKQlFIoaEn_Q",
 };
+export default Dimensions()(BaseMap)
