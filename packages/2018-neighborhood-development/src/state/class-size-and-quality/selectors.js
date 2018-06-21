@@ -38,7 +38,10 @@ export const getErrors = createSelector(
   ({ error }) => error,
 );
 
-export const getSelectedYear = state => state.classSizeAndQuality.selectedYear;
+export const getSelectedYear = createSelector(
+  getClassSizeAndQualityDomain,
+  ({ selectedYear }) => selectedYear,
+);
 
 export const getDataForSelectedYear = createSelector(
   getClassSizeAndQualityData,
