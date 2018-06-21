@@ -673,7 +673,7 @@ export const foundations = data => ({
     id: 'choropleth-layer-foundation-042-change-ridership',
     pickable: true,
     data: data.slide_data.features,
-    opacity: 0.5,
+    opacity: 1,
     getPolygon: f => f.geometry.coordinates,
     getLineColor: f => [112, 122, 122, 255],
     getLineWidth: f => 0.2,
@@ -796,7 +796,6 @@ const poiGetIconColor = f => f.properties.type === 'BEECN' ? [0, 0, 0, 255] :
   [0, 0, 0, 255];
 
 // Slide 015 - Change in Ridership by Route
-// const divigerentColors = [[231,212,232],[247,247,247],[217,240,211],[166,219,160],[90,174,97],[27,120,55],[0,68,27]];
 const ridershipRouteGetColor = (f) => {
   const value = f.properties.pct_change;
   return value <= -100 ? redGreenDivergent[0] :
@@ -1169,7 +1168,7 @@ export const slides = data => ({
       id: 'path-layer-slide-015-change-ridership-route',
       pickable: true,
       data: data.slide_data.features,
-      opacity: 0.66,
+      opacity: 0.33,
       getColor: ridershipRouteGetColor,
       getPath: f => f.geometry.coordinates,
       getWidth: f => 80,
