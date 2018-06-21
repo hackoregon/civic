@@ -4,6 +4,7 @@ import affordableRentalUnits from './affordable-rental-units';
 import priceToIncome from './price-to-income';
 import rentalCrisis from './rental-crisis';
 import pnwSurge from './pnw-surge';
+import rentBurden from './rent-burden';
 
 export default function createReducer(asyncReducers) {
   return combineReducers({
@@ -12,6 +13,7 @@ export default function createReducer(asyncReducers) {
     priceToIncome,
     rentalCrisis,
     pnwSurge,
+    rentBurden,
     ...asyncReducers,
   });
 }
