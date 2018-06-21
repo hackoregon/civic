@@ -1,5 +1,7 @@
 import { createSelector } from 'reselect';
+import { isArray } from 'lodash';
 import { rootState } from '../selectors';
+
 import { slides, foundations } from '../layerStyles';
 import { select } from 'glamor';
 
@@ -26,7 +28,10 @@ export const getFoundations = getProperty('foundations');
 export const getFoundationError = getProperty('foundationError');
 export const getSelectedPackage = getProperty('selectedPackage');
 export const getPackages = getSandboxProperty('packages');
+export const getSlidesSuccess = getProperty('slidesSuccess');
 export const isAnyError = getProperty('foundationError') || getProperty('slidesError');
+export const getSelectedFoundation = getProperty('selectedFoundation');
+export const getSelectedSlides = getProperty('selectedSlide');
 export const isAllSandboxLoading = isFoundationLoading || areSlidesLoading;
 
 
@@ -34,16 +39,16 @@ export const getSelectedPackageData = createSelector(
   getState,
   state => state.sandbox.packages && state.sandbox.packages[state.selectedPackage]
 );
-export const getDefaultFoundationData = createSelector(
+export const getFoundationData = createSelector(
   getSandbox,
-  getSelectedPackageData,
-  (sandbox, data) => sandbox.foundations[data.default_foundation]
+  getSelectedFoundation,
+  (sandbox, foundation) => sandbox.foundations[foundation]
 );
 
-export const getDefaultSlidesData = createSelector(
+export const getSlidesData = createSelector(
   getSandbox,
-  getSelectedPackageData,
-  (sandbox, data) => data.default_slide.map(slide => sandbox.slides[slide])
+  getSelectedSlides,
+  (sandbox, slides) => isArray(slides) ? slides.map(slide => sandbox.slides[slide]) : [sandbox.slides[slides]]
 );
 
 export const getSelectedFoundationData = createSelector(
@@ -56,30 +61,37 @@ export const getSelectedSlidesData = createSelector(
   state => state.slidesData
 );
 
-export const getLayerData = createSelector(
-  [getDefaultFoundationData,
-    getDefaultSlidesData,
-    getSelectedFoundationData,
-    getSelectedSlidesData],
-  (defaultFn, defaultSlides, selectedFn, selectedSlides) => {
-    // const formatSlideData = defaultSlides.map((slide) => {
-    //   const data = selectedSlides.find((slideData) => {
-    //     return slideData[slide.name];
-    //   });
-    //   const slideObj = data ? slides(data)[slide.name] : null;
-    //   return [{
-    //     data: slideObj ? slideObj.boundary : {},
-    //   }, {
-    //     data: slideObj ? slideObj.map : {},
-    //   }];
-    // }).reduce((a, b) => a.concat(b), []);
-    // return [{
-    //   data: selectedFn.slide_data ? foundations(selectedFn)[defaultFn.name] : {},
-    // },
-    //   ...formatSlideData,
-    // ];
-    console.log(defaultFn, defaultSlides, selectedFn, selectedSlides);
-    return [];
+
+export const getLayerSlides = createSelector(
+  getSlidesData,
+  getSelectedSlidesData,
+  (defaultSlides, selectedSlides) => {
+    if (defaultSlides && defaultSlides.length && selectedSlides && selectedSlides.length) {
+      const formatSlideData = selectedSlides && selectedSlides.length && defaultSlides.map((slide) => {
+        const data = selectedSlides && selectedSlides.find((slideData) => {
+          return slideData[slide.name];
+        })[slide.name];
+        const slideObj = data ? slides(data)[slide.name] : null;
+        return [{
+          data: slideObj ? slideObj.boundary : {},
+        }, {
+          data: slideObj ? slideObj.map : {},
+        }];
+      }).reduce((a, b) => a.concat(b), []);
+      return formatSlideData;
+    }
+    return [{ data: {} }];
+  });
+
+export const getLayerFoundation = createSelector(
+  getFoundationData,
+  getSelectedFoundationData,
+  (defaultFn, selectedFn = {}) => {
+    const selectedFoundation = selectedFn || {};
+    const foundationLayerData = {
+      data: selectedFoundation.slide_data ? foundations(selectedFn)[defaultFn.name] : {},
+    };
+    return foundationLayerData;
   }
 )
 ;

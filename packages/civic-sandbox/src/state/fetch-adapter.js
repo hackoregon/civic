@@ -12,11 +12,31 @@ const apiAdapter = (url, { start, success, failure }) => () => (dispatch) => {
   });
 };
 
-export const fetchAllAdapter = (urls, { start, success, failure }) => () => (dispatch) => {
+export const fetchByDateAdapter = (slide, date, type, { start, success, failure }) => () => (dispatch) => {
   dispatch(start());
-  const fullUrls = urls.map(url => axios.get(url));
+  return axios.get(`${slide.endpoint}${date}`).then((res) => {
+    dispatch(success({
+      name: slide.name,
+      data: res.data,
+      type,
+    }));
+    return res;
+  }).catch((err) => {
+    dispatch(failure(err));
+  });
+};
+
+export const fetchAllSlidesAdapter = (slides, { start, success, failure }) => () => (dispatch) => {
+  dispatch(start());
+  const fullUrls = slides.map(slide => axios.get(slide.endpoint));
   return axios.all(fullUrls).then(axios.spread((...res) => {
-    dispatch(success(res.map(r => r.data)));
+    dispatch(
+      success(
+        res.map((r, i) => ({
+          [slides[i].name]: r.data,
+        }))
+      )
+    );
     return res;
   })).catch((err) => {
     dispatch(failure(err));

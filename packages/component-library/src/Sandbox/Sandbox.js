@@ -16,6 +16,7 @@ const Sandbox = ({
   mapboxStyle,
   mapboxToken,
   selectedFoundation,
+  foundationData,
   selectedPackage,
   selectedSlide,
   slideData,
@@ -24,6 +25,7 @@ const Sandbox = ({
   updateFoundation,
   updatePackage,
   updateSlide,
+  defaultFoundation,
 }) => {
   return (
     <div
@@ -69,6 +71,9 @@ const Sandbox = ({
           defaultSlides={defaultSlides}
           slideData={slideData}
           fetchSlideByDate={fetchSlideDataByDate}
+          selectedFoundation={selectedFoundation}
+          foundationData={foundationData}
+          defaultFoundation={defaultFoundation}
         />
 
       </div>
@@ -106,7 +111,8 @@ Sandbox.propTypes = {
   updateFoundation: React.PropTypes.func,
   updatePackage: React.PropTypes.func,
   updateSlide: React.PropTypes.func,
-
+  defaultFoundation: React.PropTypes.object,
+  foundationData: React.PropTypes.object,
 };
 
 export default Sandbox;

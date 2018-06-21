@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { css } from 'emotion';
+import Modal from 'react-modal';
 
 import { PackageSelectorBox } from '@hackoregon/component-library';
 import SandboxComponent from '../Sandbox';
@@ -15,7 +16,6 @@ import {
   getSelectedPackage,
   getSelectedPackageData,
 } from '../../state/sandbox/selectors';
-import { select } from '@storybook/addon-knobs/dist/vue';
 
 const loader = css`
   background: #EEE;
@@ -32,22 +32,32 @@ const capitalize = str => str.length && str.split(' ')
   .reduce((full, word) => `${full} ${word[0].toUpperCase() + word.substring(1)}`, '')
   .trim();
 
+
 export class Packages extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      modalIsOpen: false,
+    };
+  }
   componentDidMount() {
     this.props.fetchSandbox();
   }
 
+  closeModal = () => {
+    this.setState({ modalIsOpen: false });
+  }
+
   handlePackageSelection = (selectedPackage) => {
     this.props.setPackage(selectedPackage);
+    this.setState({ modalIsOpen: true });
   }
 
   render() {
     const {
       isLoading,
       isError,
-      selectedPackage,
       sandbox,
-      selectedPackageData,
     } = this.props;
 
     const packages = sandbox.packages ? Object.keys(sandbox.packages).map(p => ({ description: sandbox.packages[p].description, title: capitalize(p) })) : [];
@@ -57,7 +67,7 @@ export class Packages extends React.Component {
 
     return (
       <div>
-        <div>Select a package</div>
+        <div>Select a data collection</div>
         <section
           className={css(`@media(min-width: 600px){
             display:flex;
@@ -84,7 +94,26 @@ export class Packages extends React.Component {
           {isError && <ErrorMessage />}
         </section>
         <section>
-          {selectedPackageData && <SandboxComponent />}
+          <Modal
+            isOpen={this.state.modalIsOpen}
+            onAfterOpen={this.afterOpenModal}
+            onRequestClose={this.closeModal}
+            style={{
+              content: {
+                top: '50%',
+                left: '50%',
+                right: 'auto',
+                bottom: 'auto',
+                marginRight: '-50%',
+                transform: 'translate(-50%, -50%)',
+                width: '90%',
+              },
+            }}
+            contentLabel="Civic Sandbox"
+          >
+            <button onClick={this.closeModal}>close</button>
+            <SandboxComponent />
+          </Modal>
         </section>
       </div>
     );
