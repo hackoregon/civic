@@ -44,6 +44,7 @@ const missionClass = css`
 
 const chartGrid = css`
   display: flex;
+  width: 100%;
 `;
 
 const chartCol = css`
@@ -93,7 +94,7 @@ class RealTimeInformationOnPoliticalCampaigns extends React.Component {
         (newProps.campaign.id !== this.props.campaign.id) ||
         (newProps.electionCycle.id !== this.props.electionCycle.id)
       )) {
-      this.props.fetchContributorBreakdown(newProps.campaign.id, newProps.electionCycle.id);
+      this.props.fetchChartData(newProps.campaign.id, newProps.electionCycle);
       this.props.fetchElectionCycles(newProps.campaign.id);
     }
   }
@@ -124,8 +125,9 @@ class RealTimeInformationOnPoliticalCampaigns extends React.Component {
       <CivicStoryCard
         title="Real-Time Information on Political Campaigns"
         slug="real-time-information-on-political-campaigns"
+        loading={this.props.loadingControls}
       >
-        <h2 className={descriptionClass}>This is a one line sentence to explain the card</h2>
+        <h2 className={descriptionClass}>Data on contributions and spending from ORSTAR</h2>
         <Controls
           campaign={this.props.campaign}
           campaigns={committees}
@@ -134,16 +136,9 @@ class RealTimeInformationOnPoliticalCampaigns extends React.Component {
           electionCycles={electionCycles}
           setElectionCycle={this.props.setElectionCycle}
         />
-        <p className={missionClass}>This is our mission. This is why we wake up in the morning. Lorem
-          ipsum thats all i remember</p>
+        <p className={missionClass}></p>
         <div className={chartGrid}>
           <div className={chartCol}>
-            <div className={chartStyle}>
-              <ContributorBreakdown
-                contributors={contributors}
-                loading={this.props.loadingContributorBreakdown}
-              />
-            </div>
             <div className={chartStyle}>
               <SpendingBreakdown
                 spending={spending}
@@ -152,13 +147,6 @@ class RealTimeInformationOnPoliticalCampaigns extends React.Component {
             </div>
           </div>
           <div className={chartCol}>
-            <div className={chartStyle}>
-              <MoneyRaisedKPI
-                total={"500m"}
-                inState={"50m"}
-                loading={this.props.loadingContributorBreakdown}
-              />
-            </div>
             <div className={chartStyle}>
               <ContributorBreakdown
                 contributors={contributors}
@@ -179,9 +167,9 @@ RealTimeInformationOnPoliticalCampaigns.defaultProps = defaultProps;
 // Connect this to the redux store when necessary
 export default connect(
   state => ({
-    loading: isPoliticalCampaignsLoading(state),
     loadingContributorBreakdown: isContributorBreakdownLoading(state),
     loadingSpendingBreakdown: isSpendingBreakdownLoading(state),
+    loadingControls: isPoliticalCampaignsLoading(state),
     contributorBreakdown: getContributorBreakdownData(state),
     spendingBreakdown: getSpendingBreakdownData(state),
     campaign: getCampaign(state),
@@ -190,9 +178,9 @@ export default connect(
     electionCycles: getElectionCycles(state),
   }),
   dispatch => ({
-    fetchContributorBreakdown: (committeeID, electionCycleID) => {
-      dispatch(fetchContributorBreakdown(committeeID, electionCycleID, { ordering: 'sum' }));
-      dispatch(fetchSpendingBreakdown(committeeID, electionCycleID, { ordering: 'sum' }));
+    fetchChartData: (committeeID, electionCycle) => {
+      dispatch(fetchContributorBreakdown(committeeID, electionCycle.id, { ordering: 'sum' }));
+      dispatch(fetchSpendingBreakdown(committeeID, electionCycle.name, { ordering: 'sum', limit: 8 }));
     },
     fetchElectionCycles: committeeID =>
       dispatch(fetchElectionCycles(committeeID, { limit: 30 })),

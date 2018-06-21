@@ -5,9 +5,9 @@ export const campaign = {
 };
 
 export const electionCycle = {
-  id: 79,
-  name: 'November 6, 2018 General Election',
-  type: 'General Election',
+  id: 125,
+  name: '2018 Primary Election',
+  type: 'Primary Election',
   start_date: '2016-11-09',
-  end_date: '2018-11-06',
+  end_date: '2018-05-15',
 };

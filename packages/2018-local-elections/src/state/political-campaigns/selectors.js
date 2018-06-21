@@ -18,8 +18,7 @@ export const getSpendingBreakdownData = createSelector(
 
 export const isPoliticalCampaignsLoading = createSelector(
   politicalCampaignsSelector,
-  ({ data }) => Object.keys(data)
-    .reduce((acc, key) => acc || data[key].pending, false),
+  ({ data }) => !!((data.committees && data.committees.pending) || (data.electionCycles && data.electionCycles.pending)),
 );
 
 export const isContributorBreakdownLoading = createSelector(
