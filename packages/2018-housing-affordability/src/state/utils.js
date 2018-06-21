@@ -11,3 +11,7 @@ export const spaceEncode = str => str
   .trim()
   .toLowerCase()
   .replace(/\s+/g, '+');
+
+export const HOST = 'http://service.civicpdx.org/housing-affordability';
+
+export const echo = a => a;

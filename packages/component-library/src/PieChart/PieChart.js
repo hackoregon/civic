@@ -58,7 +58,7 @@ PieChart.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
   innerRadius: PropTypes.number,
   colors: PropTypes.arrayOf(PropTypes.string),
-  halfDoughnut: PropTypes.boolean,
+  halfDoughnut: PropTypes.bool,
 };
 
 export default PieChart;

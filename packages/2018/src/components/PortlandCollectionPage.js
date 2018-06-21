@@ -105,9 +105,18 @@ const sideListWrapper = css`
     border: none;
     transition: opacity .4s ease-in-out;
 
+    p {
+      color: white;
+      font-family: 'Rubik', sans-serif;
+      font-size: 30px;
+      text-align: center;
+    }
+
     :hover {
       opacity: 0.8;
     }
+
+
   }
 `;
 
@@ -128,9 +137,6 @@ const PortlandCollectionPage = () => (
       <div className={ homeLink }><Link to="/"><img src={require(`../assets/civic-logo-animated.svg`)} /></Link></div>
       <h1>Portland Collections</h1>
       <div className={ subCopy }>
-        Powder cookie sweet roll chupa chups marzipan jelly dessert. Jelly-o ice cream wafer. Pudding marshmallow sweet apple pie biscuit cheesecake powder. Jelly toffee macaroon lemon drops sweet roll candy canes.
-      </div>
-      <div className={ subCopy }>
         Portland Collections are built by teams of volunteers who are passionate about showing the visual side of data to impact community awareness.
       </div>
       <div className={ subCopy }>
@@ -139,11 +145,11 @@ const PortlandCollectionPage = () => (
     </div>
     <div className={ sideListWrapper }>
       <ul>
-        <Link to="/cities/portland/disaster"><li className={disasterStyle}>Disaster Resilience</li></Link>
-        <Link to="/cities/portland/elections"><li className={electionsStyle}>Local Elections</li></Link>
-        <Link to="/cities/portland/housing"><li className={housingStyle}>Housing Affordability</li></Link>
-        <Link to="/cities/portland/neighborhood"><li className={neighborhoodStyle}>Neighborhood Development</li></Link>
-        <Link to="/cities/portland/transportation"><li className={transporationStyle}>Transportation Systems</li></Link>
+        <Link to="/cities/portland/disaster"><li className={disasterStyle}><p>Disaster Resilience</p></li></Link>
+        <Link to="/cities/portland/elections"><li className={electionsStyle}><p>Local Elections</p></li></Link>
+        <Link to="/cities/portland/housing"><li className={housingStyle}><p>Housing Affordability</p></li></Link>
+        <Link to="/cities/portland/neighborhood"><li className={neighborhoodStyle}><p>Neighborhood Development</p></li></Link>
+        <Link to="/cities/portland/transportation"><li className={transporationStyle}><p>Transportation Systems</p></li></Link>
       </ul>
     </div>
   </div>
