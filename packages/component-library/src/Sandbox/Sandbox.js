@@ -7,6 +7,12 @@ import CivicSandboxMap from '../CivicSandboxMap/CivicSandboxMap';
 import CivicSandboxTooltip from '../CivicSandboxMap/CivicSandboxTooltip';
 import SandboxDrawer from './SandboxDrawer';
 
+
+const drops = css(`
+  flex-grow: 1;
+  width: 40%;
+`);
+
 const Sandbox = ({
   data,
   defaultSlides,
@@ -16,6 +22,7 @@ const Sandbox = ({
   mapboxStyle,
   mapboxToken,
   selectedFoundation,
+  foundationData,
   selectedPackage,
   selectedSlide,
   slideData,
@@ -24,6 +31,7 @@ const Sandbox = ({
   updateFoundation,
   updatePackage,
   updateSlide,
+  defaultFoundation,
 }) => {
   return (
     <div
@@ -35,9 +43,20 @@ const Sandbox = ({
           align-items: center;
           justify-content: space-between;
           padding: 1rem;
+
+          .Select-menu-outer {
+            z-index: 100;
+          }
           `)}
       >
-        <div style={{ flexGrow: 1 }}>
+        <div className={drops}>
+          <span
+            className={css(`
+            color: #555;
+            text-transform: uppercase;
+            margin: 0 10px;
+          `)}
+          >Data Collection</span>
           <Dropdown
             value={selectedPackage}
             options={Object.keys(data.packages).map(p => ({
@@ -48,7 +67,14 @@ const Sandbox = ({
             simpleValue
           />
         </div>
-        <div style={{ flexGrow: 1 }}>
+        <div className={drops}>
+          <span
+            className={css(`
+            color: #555;
+            text-transform: uppercase;
+            margin: 0 10px;
+          `)}
+          >Base Map</span>
           <Dropdown
             value={selectedFoundation}
             options={data.packages[selectedPackage].foundations.map(foundation => ({
@@ -69,6 +95,9 @@ const Sandbox = ({
           defaultSlides={defaultSlides}
           slideData={slideData}
           fetchSlideByDate={fetchSlideDataByDate}
+          selectedFoundation={selectedFoundation}
+          foundationData={foundationData}
+          defaultFoundation={defaultFoundation}
         />
 
       </div>
@@ -106,7 +135,8 @@ Sandbox.propTypes = {
   updateFoundation: React.PropTypes.func,
   updatePackage: React.PropTypes.func,
   updateSlide: React.PropTypes.func,
-
+  defaultFoundation: React.PropTypes.object,
+  foundationData: React.PropTypes.object,
 };
 
 export default Sandbox;

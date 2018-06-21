@@ -1,11 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { css } from 'emotion';
-import { loader, error, inputClass, emphasis } from '../css-utils';
+import { loader, error, gradientLabel, emphasis } from '../css-utils';
 
 import '@hackoregon/component-library/assets/vendor/react-select.min.css';
 
-import { HorizontalBarChart, CivicStoryCard, Dropdown } from '@hackoregon/component-library';
+import { HorizontalBarChart, CivicStoryCard, Dropdown, GradientScale } from '@hackoregon/component-library';
 import { percentage } from '@hackoregon/component-library/src/utils/formatters';
 
 import {
@@ -22,6 +21,7 @@ import {
   getSelectedCityLowRank,
   getSelectedCityHighRank,
   getAllCities,
+  getChartData,
 } from '../../state/affordable-rental-units/selectors';
 
 const capitalize = str => str.length && str.split(' ')
@@ -45,6 +45,7 @@ export class AffordableRentalUnitsDwindling extends React.Component {
       selectedCityLowRank,
       selectedCityHighRank,
       setCity,
+      chartData,
     } = this.props;
 
     const cityOptions = allCities && allCities.map(c => ({ value: c, label: capitalize(c) }));
@@ -72,34 +73,36 @@ export class AffordableRentalUnitsDwindling extends React.Component {
               {capitalize(selectedCity)} ranks <strong className={emphasis}>{selectedCityLowRank.rank}/{selectedCityLowRank.total} </strong>
               for new units that cost <strong className={emphasis}>&lt;$800/mo</strong>
             </p>
-            <input
-              disabled
-              className={inputClass}
-              type="range"
-              min="1"
-              value={selectedCityLowRank.rank}
-              max={selectedCityLowRank.total}
-            />
+            <p>
+              <strong className={gradientLabel}>More Units Added</strong>
+              <GradientScale
+                domain={[1, selectedCityLowRank.total]}
+                primary={selectedCityLowRank.rank}
+                height={50}
+                colorScale="ocean"
+              />
+            </p>
           </div>)}
           {selectedCityData && (<div>
             <p>
               {capitalize(selectedCity)} ranks <strong className={emphasis}>{selectedCityHighRank.rank}/{selectedCityHighRank.total} </strong>
               for new units that cost <strong className={emphasis}>&gt;$2,000/mo</strong>
             </p>
-            <input
-              disabled
-              className={inputClass}
-              type="range"
-              min="1"
-              value={selectedCityHighRank.rank}
-              max={selectedCityHighRank.total}
-            />
+            <p>
+              <strong className={gradientLabel}>Less Units Added</strong>
+              <GradientScale
+                domain={[1, selectedCityHighRank.total]}
+                primary={selectedCityHighRank.rank}
+                height={50}
+                colorScale="ocean"
+              />
+            </p>
           </div>)}
         </section>
         <section>
-          {selectedCityData && (<div>
+          {chartData && (<div>
             <HorizontalBarChart
-              data={selectedCityData}
+              data={chartData}
               dataLabel="datatype"
               dataValue="value"
               dataValueFormatter={percentage}
@@ -128,6 +131,7 @@ export default connect(
     selectedCityData: getSelectedCityData(state),
     selectedCityLowRank: getSelectedCityLowRank(state),
     selectedCityHighRank: getSelectedCityHighRank(state),
+    chartData: getChartData(state),
   }),
   dispatch => ({
     fetchAllCities() {

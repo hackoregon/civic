@@ -23,6 +23,11 @@ const allTypes = [
   'Less than 400',
 ];
 
+const chartExclusions = [
+  '$2,000 or More',
+  'Under $800',
+];
+
 const getProperty = key => createSelector(getARU, state => state[key]);
 const orderFor = type => allTypes.indexOf(allTypes.find(t => type.endsWith(t)));
 
@@ -34,14 +39,20 @@ export const getCityError = getProperty('cityError');
 export const getSelectedCity = getProperty('selectedCity');
 export const getSelectedCityData = createSelector(
   getARU,
-  ({ selectedCityData }) => selectedCityData && selectedCityData.map(datum => ({
-    ...datum,
-    value: +datum.value,
-    datatype: allTypes.find(t => datum.datatype.endsWith(t)),
-    sortOrder: orderFor(datum.datatype),
-  })).sort((a, b) => a.sortOrder - b.sortOrder)
+  ({ selectedCityData }) => selectedCityData && selectedCityData
+    .map(datum => ({
+      ...datum,
+      value: +datum.value,
+      datatype: allTypes.find(t => datum.datatype.endsWith(t)),
+      sortOrder: orderFor(datum.datatype),
+    }))
+    .sort((a, b) => a.sortOrder - b.sortOrder)
 );
 
+export const getChartData = createSelector(
+  getSelectedCityData,
+  data => data && data.filter(datum => !chartExclusions.includes(datum.datatype))
+);
 
 const lowKey = 'Under $800';
 const highKey = '$2,000 or More';

@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { loader, error, inputClass, emphasis } from '../css-utils';
+import { loader, error, gradientLabel, emphasis } from '../css-utils';
 
 import '@hackoregon/component-library/assets/vendor/react-select.min.css';
 
-import { CivicStoryCard, Dropdown, Scatterplot } from '@hackoregon/component-library';
+import { CivicStoryCard, Dropdown, Scatterplot, GradientScale } from '@hackoregon/component-library';
 
 import {
   fetchAllPNWSurgeData,
@@ -63,14 +63,15 @@ export class PacificNorthwestTopsNationInSurgingHomePrices extends React.Compone
               {selectedCity} ranks <strong className={emphasis}>{selectedCityRank.rank}/{selectedCityRank.total} </strong>
               for home price changes between <strong className={emphasis}>2015 and 2016</strong>
             </p>
-            <input
-              disabled
-              className={inputClass}
-              type="range"
-              min="1"
-              value={selectedCityRank.rank}
-              max={selectedCityRank.total}
-            />
+            <p>
+              <strong className={gradientLabel}>Less percent change</strong>
+              <GradientScale
+                domain={[1, selectedCityRank.total]}
+                primary={selectedCityRank.rank}
+                height={50}
+                colorScale="ocean"
+              />
+            </p>
           </div>)}
         </section>
 
