@@ -44,6 +44,7 @@ export { default as HexOverlay } from './HexOverlay/HexOverlay';
 export { default as BoundaryMap } from './BoundaryMap/BoundaryMap';
 export { default as MapTooltip } from './MapTooltip/MapTooltip';
 export { default as CivicSandboxMap } from './CivicSandboxMap/CivicSandboxMap';
+export { default as GradientScale } from './GradientScale/GradientScale';
 export { default as PackageSelectorBox } from './PackageSelectorBox/PackageSelectorBox';
 export { default as CanvasParticles } from './LandingPage/CanvasParticles';
 export { default as CivicSandboxDashboard } from './CivicSandboxDashboard/CivicSandboxDashboard';

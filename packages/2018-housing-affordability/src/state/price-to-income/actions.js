@@ -1,5 +1,6 @@
 import fetchAdapter from '../fetch-adapter';
 import actionEmitter from '../common-action-emitter';
+import { slugify } from '../utils';
 
 // Types
 export const ALL_CITIES_START = 'PRICE_TO_INCOME/ALL_CITIES_START';
@@ -37,10 +38,6 @@ export const fetchAllPTICities = fetchAdapter(
     failure: AllPTIFailure,
   }
 );
-
-// Adapted from the django implementation:
-// https://docs.djangoproject.com/en/2.0/_modules/django/utils/text/#slugify
-const slugify = str => str.replace(/[^\w\s-]/g, '').trim().toLowerCase().replace(/[-\s]+/g, '-');
 
 export const fetchPTICity = fetchAdapter(
   `/api/harvardjchs/?datatype=${datatype}`,

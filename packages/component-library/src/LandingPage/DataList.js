@@ -82,12 +82,12 @@ const whyStyle = css`
 `;
 
 const DataList = ({ city, state }) => {
-  const missingStates = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE'];
+  const missingStates = [];
   const fileName = state && !missingStates.includes(state) ? `state/${state}` : 'local/local';
   const statePath = require(`../../assets/${fileName}.svg`); // eslint-disable-line global-require, import/no-dynamic-require
   const cityResult = city === 'Portland'
     ? <span>We have Portland data!<br/><span className={whyStyle}><Link to="/cities/portland">View here</Link></span></span>
-    : <span>{`There's no CIVIC data for ${city} yet!`} <span className={whyStyle}><a href="#aboutCivic">Why?</a></span></span>;
+    : <span>{`There's no CIVIC data for ${city} yet!`} <span className={whyStyle}><a href="#getStarted">Why?</a></span></span>;
 
   return (
     <div className={cardsWrapper}>

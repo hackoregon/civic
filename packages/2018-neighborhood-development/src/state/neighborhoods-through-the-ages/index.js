@@ -4,7 +4,7 @@ import { API_START, API_SUCCESS, API_ERROR, UPDATE_NEIGHBORHOOD } from './action
 const INITIAL_STATE = {
   pending: false,
   error: null,
-  data: null,
+  data: [],
   selectedNeighborhood: null,
 };
 

@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import Select from 'react-select';
 import { css } from 'emotion';
 
+import '@hackoregon/component-library/assets/vendor/react-select.min.css';
+
 const dropdownClass = css`
-  border: 1px solid #EEE;
-  border-radius: 3px;
   background-color: #FFF;
   cursor: pointer;
   font-size: 15px;
-  padding: 3px 10px;
   margin: 10px;
+  z-index: 1404 !important;
 `;
 
 const Dropdown = ({ options, onChange, value, clearable, searchable, disabled, simpleValue, multi }) => (
