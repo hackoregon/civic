@@ -16,7 +16,10 @@ import VotersOnTheMove from '../VotersOnTheMove';
 import DiveDeeperIntoNeighborhoodData from '../DiveDeeperIntoNeighborhoodData';
 
 const App = () => (
-  <PageLayout>
+  <PageLayout
+    teamTitle="Neighborhood Development"
+    heroTitle="Examining Local Patterns, Movement, and Our Sense of Place"
+  >
     <TheShapeOfANeighborhood />
     <MagnitudeOfUrbanCampsiteSweeps />
     <HumanImpactOfSweepingUrbanCampsites />

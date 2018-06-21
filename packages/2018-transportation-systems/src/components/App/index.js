@@ -12,7 +12,10 @@ import TheSecretIsInTheSensors from '../TheSecretIsInTheSensors';
 import DiveDeeperIntoTransportationData from '../DiveDeeperIntoTransportationData';
 
 const App = () => (
-  <PageLayout>
+  <PageLayout
+    teamTitle="Transportation Systems"
+    heroTitle="Identifying Opportunities for Equitable Mobility in Cities"
+  >
     <DeclineInRidership />
     <HistoricalChangesToBusService />
     <ServiceAndRidership />
