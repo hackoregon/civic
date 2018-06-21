@@ -34,11 +34,11 @@ componentDidMount() {
 The Relationship between Service Availability and the Change in Ridership is complex, and while we cannot claim to understand it completely, we can start looking at the data. To help facilitate future discussion about this potential relationship, we have plotted year-over-year changes in Scheduled Service vs Ridership.        </p>
         { driversOfParticipation &&
           <Scatterplot
-            title="Ridership and Service Availability Changes"
-            subtitle="Annual change in ridership and service availability by line between 2009 and 2017"
+            title="TriMet Ridership and Service Availability Changes"
+            subtitle="Annual changes in ridership and service availability by line between 2013 and 2017"
             data={driversOfParticipation}
-            xLabel="Year"
-            yLabel="Ridership"
+            xLabel="Frequency Change"
+            yLabel="Ridership Change"
             dataKey="frequency_change"
             dataValue="ridership_change"
             dataSeries="year"
