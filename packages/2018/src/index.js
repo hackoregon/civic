@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import { routerReducer, routerMiddleware, syncHistoryWithStore } from 'react-router-redux';
 import { createLogger } from 'redux-logger';
+import { reducer as reduxFormReducer } from 'redux-form';
 
 // Import routes, reducers, and root component from each project
 import {
@@ -69,6 +70,7 @@ const configureStore = (initialState, history) => {
   const store = createStore(
     combineReducers({
       routing: routerReducer,
+      form: reduxFormReducer,
       disaster: DisasterReducers(),
       housing: HousingReducers(),
       elections: ElectionsReducers(),
