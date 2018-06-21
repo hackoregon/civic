@@ -33,17 +33,15 @@ export const getChartData = createSelector(
     const moderateBurden = +(data.find(d => d.datatype === 'Moderately Burdened Renters, Share of All Households') || _).value;
     const noBurden = 100 - severeBurden - moderateBurden;
 
-    const ret = [
+    return [
       { label: 'Severe Burden', value: severeBurden },
       { label: 'Moderate Burden', value: moderateBurden },
       { label: 'No Burden', value: noBurden },
     ];
-    console.log(ret);
-    return ret;
   }
 );
 
-const rankKey = 'Severely Burdened Renters, Share of All Households';
+const rankKey = 'Total Burdened Renters, Share of All Households';
 
 export const getSelectedCityRank = createSelector(
   getSelectedCityData,

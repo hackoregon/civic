@@ -72,7 +72,7 @@ export class RentBurdenedHouseholds extends React.Component {
               A rank of 1 is the smallest percentage of burdened households, while a rank of 100 is the greatest percentage of burdened households.
             </p>
             <p>
-              <strong className={gradientLabel}>Less severely burdened</strong>
+              <strong className={gradientLabel}>Less burdened</strong>
               <GradientScale
                 domain={[1, selectedCityRank.total]}
                 primary={selectedCityRank.rank}
