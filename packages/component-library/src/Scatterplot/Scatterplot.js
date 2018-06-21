@@ -6,7 +6,7 @@ import {
   VictoryLabel,
   VictoryPortal,
   VictoryScatter,
-  VictoryTooltip
+  VictoryTooltip,
 } from 'victory';
 
 import ChartContainer from '../ChartContainer';
@@ -49,6 +49,8 @@ const Scatterplot = ({
   yLabel,
   xNumberFormatter,
   yNumberFormatter,
+  invertX,
+  invertY,
 }) => {
   const chartDomain = domain || getDefaultDomain(data, dataKey, dataValue);
 
@@ -84,6 +86,7 @@ const Scatterplot = ({
           style={{ grid: { stroke: 'none' } }}
           tickFormat={x => xNumberFormatter(x)}
           title="X Axis"
+          invertAxis={invertX}
         />
         <VictoryAxis
           dependentAxis
@@ -99,6 +102,7 @@ const Scatterplot = ({
           }}
           tickFormat={y => yNumberFormatter(y)}
           title="Y Axis"
+          invertAxis={invertY}
         />
         <VictoryPortal>
           <VictoryLabel
@@ -125,15 +129,15 @@ const Scatterplot = ({
         <VictoryScatter
           animate={{ onEnter: { duration: 500 } }}
           bubbleProperty="bubbleSize"
-          minBubbleSize={size.minSize}
-          maxBubbleSize={size.maxSize}
+          minBubbleSize={size && size.minSize}
+          maxBubbleSize={size && size.maxSize}
 //        categories={{ x: categoryData }}
           data={data.map(d => ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],
             label: `${dataKeyLabel ? d[dataKeyLabel] : xLabel}: ${xNumberFormatter(d[dataKey])} • ${dataValueLabel ? d[dataValueLabel] : yLabel}: ${yNumberFormatter(d[dataValue])}`,
             series: d[dataSeries],
-            bubbleSize: size ? d[size.key] : {},
+            ...(size && { bubbleSize: d[size.key] }),
           }))}
           events={chartEvents}
           labelComponent={
@@ -146,6 +150,7 @@ const Scatterplot = ({
               theme={CivicVictoryTheme.civic}
             />
           }
+          size={3} // overridden by bubbleProperty
           style={scatterPlotStyle}
           title="Scatter Plot"
           x="dataKey"
@@ -161,15 +166,15 @@ Scatterplot.propTypes = {
     PropTypes.shape({ x: PropTypes.number, y: PropTypes.number }),
   ),
   dataKey: PropTypes.string,
-  dataKeyLabel: PropTypes.arrayOf(PropTypes.string),
+  dataKeyLabel: PropTypes.string,
   dataValue: PropTypes.string,
-  dataValueLabel: PropTypes.arrayOf(PropTypes.string),
+  dataValueLabel: PropTypes.string,
   dataSeries: PropTypes.string,
   dataSeriesLabel: PropTypes.arrayOf(
     PropTypes.shape({ category: PropTypes.string, label: PropTypes.string }),
   ),
   domain: PropTypes.objectOf(PropTypes.array),
-  size: PropTypes.shape({ key: PropTypes.string, minSize: PropTypes.number, maxSize: PropTypes.number}),
+  size: PropTypes.shape({ key: PropTypes.string, minSize: PropTypes.number, maxSize: PropTypes.number }),
   style: PropTypes.objectOf(PropTypes.object),
   title: PropTypes.string,
   subtitle: PropTypes.string,
@@ -177,6 +182,8 @@ Scatterplot.propTypes = {
   yLabel: PropTypes.string,
   xNumberFormatter: PropTypes.func,
   yNumberFormatter: PropTypes.func,
+  invertX: PropTypes.bool,
+  invertY: PropTypes.bool,
 };
 
 Scatterplot.defaultProps = {
@@ -196,6 +203,8 @@ Scatterplot.defaultProps = {
   yLabel: "Y",
   xNumberFormatter: numeric,
   yNumberFormatter: numeric,
+  invertX: false,
+  invertY: false,
 };
 
 export default Scatterplot;

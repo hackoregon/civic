@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { css } from 'emotion';
 
-import { CivicStoryCard, LineChart } from '@hackoregon/component-library';
+import { CivicStoryCard, Scatterplot } from '@hackoregon/component-library';
+import { percentage } from '@hackoregon/component-library/src/utils/formatters';
 
 import { fetchProactivePlanning } from '../../state/proactive-planning/actions';
 import {
@@ -26,27 +27,29 @@ export class ProactivePlanning extends React.Component {
 
     return (
       <CivicStoryCard
-        title="Proactive Planning for Citywide Resiliance"
+        title="Proactive Planning for Citywide Resilience"
         slug="proactive-planning"
         loading={isLoading}
         error={error && 'Error loading data'}
       >
-          <p>
-Newly released findings from TriMet shows a slow decline in public transit ridership relative to population growth over the last 10 years, a pattern which appears to be consistent across the nation.  While the cause of decline in ridership doesn't point to a single variable, it's been suggested that housing affordability and economic displacement may play a role in this phenomenon.
-          </p>
           { proactivePlanning &&
-            <LineChart
-              title="Public Transit Ridership"
-              subtitle="Average daily ridership for TriMet bus and rail (unlinked trips)"
+            <Scatterplot
+              title="Resilience and Displacement"
+              subtitle="Resilience as measured by census response rate and expected displacement in a 9.0 earthquake by neighborhood"
               data={proactivePlanning}
-              xLabel="Year"
-              yLabel="Ridership"
-              dataKey="year"
-              dataValue="ons"
-              dataSeries="type"
-              xNumberFormatter={d => `${d}`}
+              xLabel="Census Response Rate"
+              yLabel="Per Capita Displacement"
+              dataKey="census_response_rate"
+              dataKeyLabel="resilienceLabel"
+              dataValue="displaced_percap"
+              dataValueLabel="displacementLabel"
+              dataSeries="quadrant"
+              size={{ key: 'total_population', minSize: 2, maxSize: 10 }}
+              xNumberFormatter={percentage}
+              yNumberFormatter={percentage}
             />
           }
+          { console.log(proactivePlanning) }
       </CivicStoryCard>
     );
   }
@@ -55,7 +58,7 @@ ProactivePlanning.displayName = 'proactivePlanning';
 ProactivePlanning.propTypes = {
   init: PropTypes.func,
   isLoading: PropTypes.bool,
-  error: PropTypes.string,
+  error: PropTypes.object,
   proactivePlanning: PropTypes.arrayOf(PropTypes.object),
 };
 

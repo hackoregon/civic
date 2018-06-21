@@ -1,7 +1,7 @@
 import React from 'react';
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from '@storybook/react';
-import { object, text, withKnobs } from '@storybook/addon-knobs';
+import { object, text, boolean, withKnobs } from '@storybook/addon-knobs';
 import { Scatterplot } from '../src';
 
 const displayName = Scatterplot.displayName || 'Scatterplot';
@@ -21,7 +21,7 @@ const sampledataSeriesLabel = [
   { category: 'fish', label: 'Fish' },
 ];
 const sampleDomain = { x: [0, 6], y: [0, 8] };
-const sampleSize = { key: 'y' };
+const sampleSize = { key: 'y', minSize: 3, maxSize: 10 };
 const sampleSubtitle = 'A description of this chart.';
 const sampleTitle = 'Some title';
 const sampleXKey = 'x';
@@ -100,12 +100,13 @@ export default () =>
       const dataValue = text('dataValue', sampleYKey);
       const dataSeries = text('dataSeries', sampleDataSeries);
       const dataSeriesLabel = object('Data Series Labels', sampledataSeriesLabel);
-      const domain = object('Domain', sampleDomain);
       const size = object('Size', sampleSize);
       const subtitle = text('Subtitle', sampleSubtitle);
       const title = text('Title', sampleTitle);
       const xLabel = text('xLabel', sampleXLabel);
       const yLabel = text('yLabel', sampleYLabel);
+      const invertX = boolean('invertX', false);
+      const invertY = boolean('invertY', false);
 
       return (
         <Scatterplot
@@ -114,12 +115,14 @@ export default () =>
           dataValue={dataValue}
           dataSeries={dataSeries}
           dataSeriesLabel={dataSeriesLabel}
-          domain={domain}
+          domain={sampleDomain}
           size={size}
           subtitle={subtitle}
           title={title}
           xLabel={xLabel}
           yLabel={yLabel}
+          invertX={invertX}
+          invertY={invertY}
         />
       );
     });
