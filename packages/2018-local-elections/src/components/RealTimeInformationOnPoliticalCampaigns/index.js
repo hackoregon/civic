@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from 'emotion'
 import { connect } from 'react-redux';
+import { uniqBy } from 'lodash';
 
 import {
   CivicStoryCard,
@@ -110,7 +111,7 @@ class RealTimeInformationOnPoliticalCampaigns extends React.Component {
     }
 
     if (this.props.contributorBreakdown && this.props.contributorBreakdown.results) {
-      contributors = this.props.contributorBreakdown.results;
+      contributors = uniqBy(this.props.contributorBreakdown.results, 'donor_category');
     }
 
     if (this.props.electionCycles && this.props.electionCycles.results) {
@@ -118,7 +119,7 @@ class RealTimeInformationOnPoliticalCampaigns extends React.Component {
     }
 
     if (this.props.spendingBreakdown && this.props.spendingBreakdown.results) {
-      spending = this.props.spendingBreakdown.results;
+      spending = uniqBy(this.props.spendingBreakdown.results, 'spending_category');
     }
 
     return (
