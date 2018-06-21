@@ -13,20 +13,20 @@ import {
 } from '../../state/class-size-and-quality/selectors';
 
 const YEARS = [
-  '2007',
-  '2008',
-  '2009',
-  '2010',
-  '2011',
-  '2012',
-  '2013',
-  '2014',
-  '2015',
-  '2016',
-  '2017',
+  2007,
+  2008,
+  2009,
+  2010,
+  2011,
+  2012,
+  2013,
+  2014,
+  2015,
+  2016,
+  2017,
 ];
 
-const dropdownOptions = YEARS.map(year => ({ value: year, label: year }));
+const dropdownOptions = YEARS.map(year => ({ value: year, label: year.toString() }));
 
 export class ClassSizeAndQuality extends React.Component {
   componentDidMount() {
@@ -91,7 +91,7 @@ ClassSizeAndQuality.propTypes = {
   error: PropTypes.string,
   fetchData: PropTypes.func,
   isLoading: PropTypes.bool,
-  selectedYear: PropTypes.string,
+  selectedYear: PropTypes.number,
   selectedYearData: PropTypes.arrayOf(PropTypes.object),
   setYear: PropTypes.func,
 };

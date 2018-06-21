@@ -1,10 +1,6 @@
-import configureMockStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
 import * as actions from './actions';
 import * as selectors from './selectors';
 import reducer from './index';
-
-const mockStore = configureMockStore([thunk]);
 
 const DEFAULT_NEIGHBORHOOD = { value: 'ROSE CITY PARK', label: 'Rose City Park' };
 const SAMPLE_DATA = [{

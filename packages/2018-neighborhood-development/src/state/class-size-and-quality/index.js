@@ -1,11 +1,11 @@
 import apiReducer from '../api-adapter-reducer';
 import { API_START, API_SUCCESS, API_ERROR, UPDATE_YEAR } from './actions';
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
   pending: false,
   error: null,
   data: [],
-  selectedYear: '2017',
+  selectedYear: 2017,
 };
 
 const apiReducers = apiReducer({ INITIAL_STATE, API_START, API_SUCCESS, API_ERROR });

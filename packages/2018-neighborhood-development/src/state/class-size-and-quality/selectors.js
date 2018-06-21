@@ -10,7 +10,7 @@ const typeMap = {
 };
 
 const getFormattedData = (data, selectedYear) => (
-  data.filter(({ year }) => year && year.toString() === selectedYear)
+  data.filter(({ year }) => year === selectedYear)
     .map(item => ({
       classSize: item.class_size,
       teacherExperience: item.teacher_experience,
@@ -35,7 +35,7 @@ export const isDataPending = createSelector(
 
 export const getErrors = createSelector(
   getClassSizeAndQualityDomain,
-  ({ error }) => error || error,
+  ({ error }) => error,
 );
 
 export const getSelectedYear = state => state.classSizeAndQuality.selectedYear;
