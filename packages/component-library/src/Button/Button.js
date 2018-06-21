@@ -3,8 +3,9 @@ import { css } from 'emotion';
 
 const accentColor = 'rgb(238, 73, 80)';
 const commonTransition = 'all .2s ease-in-out';
-const buttonClass = css`
-  display: flex;
+const buttonClass = props => css`
+  display: ${props.display || 'block'};
+  margin: ${props.margin};
   padding: 6px;
   flex-wrap: nowrap;
   align-items: center;
@@ -36,8 +37,8 @@ const buttonClass = css`
   }
 `;
 
-const Button = ({ children, onClick }) => (
-  <button className={buttonClass} onClick={onClick}>
+const Button = ({ children, onClick, ...props }) => (
+  <button className={buttonClass(props)} onClick={onClick}>
     {children}
   </button>
 );
