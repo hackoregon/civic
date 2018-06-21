@@ -1,17 +1,44 @@
 import axios from 'axios';
 
-const HOST = 'https://sandbox.civicpdx.org/civic-sandbox';
 const echo = a => a;
 
-const apiAdapter = (url, { encodeParams, start, success, failure }) => params => (dispatch) => {
+const apiAdapter = (url, { start, success, failure }) => () => (dispatch) => {
   dispatch(start());
-
-  const encode = encodeParams || echo;
-  const fullURL = encode(HOST + url, params);
-  return axios.get(fullURL).then((res) => {
+  return axios.get(url).then((res) => {
     dispatch(success(res.data));
     return res;
   }).catch((err) => {
+    dispatch(failure(err));
+  });
+};
+
+export const fetchByDateAdapter = (slide, date, type, { start, success, failure }) => () => (dispatch) => {
+  dispatch(start());
+  return axios.get(`${slide.endpoint}${date}`).then((res) => {
+    dispatch(success({
+      name: slide.name,
+      data: res.data,
+      type,
+    }));
+    return res;
+  }).catch((err) => {
+    dispatch(failure(err));
+  });
+};
+
+export const fetchAllSlidesAdapter = (slides, { start, success, failure }) => () => (dispatch) => {
+  dispatch(start());
+  const fullUrls = slides.map(slide => axios.get(slide.endpoint));
+  return axios.all(fullUrls).then(axios.spread((...res) => {
+    dispatch(
+      success(
+        res.map((r, i) => ({
+          [slides[i].name]: r.data,
+        }))
+      )
+    );
+    return res;
+  })).catch((err) => {
     dispatch(failure(err));
   });
 };

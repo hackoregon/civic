@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { css } from 'emotion';
+import Modal from 'react-modal';
 
 import { PackageSelectorBox } from '@hackoregon/component-library';
-
+import SandboxComponent from '../Sandbox';
 import {
   fetchSandbox,
   setPackage,
@@ -12,6 +13,8 @@ import {
   isSandboxLoading,
   getSandboxData,
   getSandboxError,
+  getSelectedPackage,
+  getSelectedPackageData,
 } from '../../state/sandbox/selectors';
 
 const loader = css`
@@ -29,30 +32,42 @@ const capitalize = str => str.length && str.split(' ')
   .reduce((full, word) => `${full} ${word[0].toUpperCase() + word.substring(1)}`, '')
   .trim();
 
+
 export class Packages extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      modalIsOpen: false,
+    };
+  }
   componentDidMount() {
     this.props.fetchSandbox();
-    this.props.setPackage();
+  }
+
+  closeModal = () => {
+    this.setState({ modalIsOpen: false });
+  }
+
+  handlePackageSelection = (selectedPackage) => {
+    this.props.setPackage(selectedPackage);
+    this.setState({ modalIsOpen: true });
   }
 
   render() {
     const {
       isLoading,
       isError,
-      selectedPackage,
       sandbox,
-      setPackage,
     } = this.props;
 
     const packages = sandbox.packages ? Object.keys(sandbox.packages).map(p => ({ description: sandbox.packages[p].description, title: capitalize(p) })) : [];
-    console.log(packages);
 
     const Loader = () => <div className={loader}>Loading...</div>;
     const ErrorMessage = () => <div className={error}>Could not load data for the sandbox.</div>;
 
     return (
       <div>
-        <div>Select a package</div>
+        <div>Select a data collection</div>
         <section
           className={css(`@media(min-width: 600px){
             display:flex;
@@ -66,12 +81,39 @@ export class Packages extends React.Component {
             width: 33%;
           }`)}
           >
-            <PackageSelectorBox title={p.title} description={p.description} /></div>)))
+            <PackageSelectorBox
+              title={p.title}
+              description={p.description}
+              onClick={() => this.handlePackageSelection(p.title)}
+            />
+          </div>)))
           }
         </section>
         <section>
 
           {isError && <ErrorMessage />}
+        </section>
+        <section>
+          <Modal
+            isOpen={this.state.modalIsOpen}
+            onAfterOpen={this.afterOpenModal}
+            onRequestClose={this.closeModal}
+            style={{
+              content: {
+                top: '50%',
+                left: '50%',
+                right: 'auto',
+                bottom: 'auto',
+                marginRight: '-50%',
+                transform: 'translate(-50%, -50%)',
+                width: '90%',
+              },
+            }}
+            contentLabel="Civic Sandbox"
+          >
+            <button onClick={this.closeModal}>close</button>
+            <SandboxComponent />
+          </Modal>
         </section>
       </div>
     );
@@ -86,6 +128,8 @@ export default connect(
     isLoading: isSandboxLoading(state),
     isError: getSandboxError(state),
     sandbox: getSandboxData(state),
+    selectedPackage: getSelectedPackage(state),
+    selectedPackageData: getSelectedPackageData(state),
   }),
   dispatch => ({
     fetchSandbox() {

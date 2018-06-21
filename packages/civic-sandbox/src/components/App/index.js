@@ -1,20 +1,13 @@
 import React from 'react';
-import { css } from 'emotion';
 import Packages from '../Packages';
-
 import '@hackoregon/component-library/assets/global.styles.css';
+import { PageLayout } from '@hackoregon/component-library';
 
-const placeholderClass = css`
-  margin: 30px auto;
-  border: 2px solid #EEE;
-  max-width: 800px;
-`;
 
 const App = () => (
-  <div className={placeholderClass}>
-    <h1>Civic Sandbox</h1>
+  <PageLayout>
     <Packages />
-  </div>
+  </PageLayout>
 );
 
 App.displayName = 'App';

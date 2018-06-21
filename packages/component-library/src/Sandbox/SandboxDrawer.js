@@ -13,6 +13,8 @@ const SandboxDrawer = ({
   defaultSlides,
   slideData,
   fetchSlideByDate,
+  foundationData,
+  defaultFoundation,
 }) => {
   const options = data.packages[selectedPackage].slides.map(slide => ({
     value: slide,
@@ -42,6 +44,15 @@ const SandboxDrawer = ({
           multi
           simpleValue
         />
+        {foundationData && <div>
+          <div className={css('background: gray;')}>{defaultFoundation.name}</div>
+          <div>
+            Date info driven by dropdown
+            <SandboxDateSelector slide={defaultFoundation} selectedSlideData={foundationData} fetchSlideByDate={fetchSlideByDate} type="foundation" />
+          </div>
+        </div>
+        }
+
         {defaultSlides.map((slide) => {
           let selectedSlideData = {};
           if (slideData.length) {
@@ -52,12 +63,10 @@ const SandboxDrawer = ({
           return (
             <div>
               <div className={css('background: gray;')}>{slide.name}</div>
-              {selectedSlideData.slide_meta.dates.date_granularity ? <div>
+              <div>
                 Date info driven by dropdown
-                <SandboxDateSelector selectedSlideData={selectedSlideData} slide={slide} fetchSlideByDate={fetchSlideByDate} />
-              </div> :
-              <div>Default date data (Date granularity = null)</div>
-              }
+                <SandboxDateSelector selectedSlideData={selectedSlideData} slide={slide} fetchSlideByDate={fetchSlideByDate} type="slide" />
+              </div>
             </div>);
         }) }
       </div>
