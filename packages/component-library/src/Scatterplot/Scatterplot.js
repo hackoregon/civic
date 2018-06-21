@@ -124,13 +124,16 @@ const Scatterplot = ({
         </VictoryPortal>
         <VictoryScatter
           animate={{ onEnter: { duration: 500 } }}
+          bubbleProperty="bubbleSize"
+          minBubbleSize={size.minSize}
+          maxBubbleSize={size.maxSize}
 //        categories={{ x: categoryData }}
           data={data.map(d => ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],
             label: `${dataKeyLabel ? d[dataKeyLabel] : xLabel}: ${xNumberFormatter(d[dataKey])} • ${dataValueLabel ? d[dataValueLabel] : yLabel}: ${yNumberFormatter(d[dataValue])}`,
             series: d[dataSeries],
-            size: size ? d[size.key] || size.value : 3,
+            bubbleSize: size ? d[size.key] : {},
           }))}
           events={chartEvents}
           labelComponent={
@@ -143,7 +146,6 @@ const Scatterplot = ({
               theme={CivicVictoryTheme.civic}
             />
           }
-          size={d => d.size}
           style={scatterPlotStyle}
           title="Scatter Plot"
           x="dataKey"
@@ -167,7 +169,7 @@ Scatterplot.propTypes = {
     PropTypes.shape({ category: PropTypes.string, label: PropTypes.string }),
   ),
   domain: PropTypes.objectOf(PropTypes.array),
-  size: PropTypes.shape({ key: PropTypes.string, value: PropTypes.string }),
+  size: PropTypes.shape({ key: PropTypes.string, minSize: PropTypes.number, maxSize: PropTypes.number}),
   style: PropTypes.objectOf(PropTypes.object),
   title: PropTypes.string,
   subtitle: PropTypes.string,
