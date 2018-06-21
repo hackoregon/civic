@@ -1,7 +1,5 @@
 import axios from 'axios';
-
-const HOST = 'http://service.civicpdx.org/neighborhood-development/';
-const echo = a => a;
+import { HOST, echo } from './utils';
 
 const apiAdapter = (url, { encodeParams, start, success, failure }) => params => (dispatch) => {
   dispatch(start());
