@@ -170,15 +170,15 @@ describe('ridership-over-time', () => {
         const processedData = [{
           type: 'Weekday',
           year: 2001,
-          ons: 217309.5,
+          ons: 56500470,
         }, {
           type: 'Saturday',
           year: 2001,
-          ons: 73028,
+          ons: 3797456,
         }, {
           type: 'Sunday',
           year: 2001,
-          ons: 71360.5,
+          ons: 3710746,
         }];
         expect(selectors.getRidershipOverTimeData({
           ridershipOverTime: {

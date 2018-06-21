@@ -11,17 +11,17 @@ export const getRidershipOverTimeData = createSelector(
   ({ data }) => ((data || {}).data) && data.data.map(yearObj => ({
     type: 'Weekday',
     year: yearObj.year,
-    ons: yearObj.weekday_sum_ons / 5 / 52,
+    ons: yearObj.weekday_sum_ons,
   }
   )).concat(data.data.map(yearObj => ({
     type: 'Saturday',
     year: yearObj.year,
-    ons: yearObj.saturday_sum_ons / 52,
+    ons: yearObj.saturday_sum_ons,
   }
   ))).concat(data.data.map(yearObj => ({
     type: 'Sunday',
     year: yearObj.year,
-    ons: yearObj.sunday_sum_ons / 52,
+    ons: yearObj.sunday_sum_ons,
   }
   )))
 );
