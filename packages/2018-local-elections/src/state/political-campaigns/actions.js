@@ -43,11 +43,11 @@ export const fetchContributorBreakdown = (committeeID, electionCycleID, params =
     })();
 
 export const fetchElectionCycles = (params = {}) =>
-apiAdapter(endpoint(ELECTION_CYCLES), params, {
-  start: requestStart(ELECTION_CYCLES),
-  success: requestSuccess(ELECTION_CYCLES),
-  error: requestError(ELECTION_CYCLES),
-})();
+  apiAdapter(endpoint(ELECTION_CYCLES), params, {
+    start: requestStart(ELECTION_CYCLES),
+    success: requestSuccess(ELECTION_CYCLES),
+    error: requestError(ELECTION_CYCLES),
+  })();
 
 export const fetchCommittees = (params = {}) =>
   apiAdapter(endpoint(COMMITTEES), params, {

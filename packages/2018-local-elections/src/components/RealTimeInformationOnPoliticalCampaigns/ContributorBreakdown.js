@@ -19,12 +19,16 @@ class ContributorBreakdown extends React.Component {
     }));
 
     return (
-      <PieChart
-        data={data}
-        title="Contributor breakdown"
-        subtitle="Breakdown of contributors..."
-        innerRadius={150}
-      />
+      <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+        <PieChart
+          data={data}
+          title="Contributor breakdown"
+          subtitle="Breakdown of contributors..."
+          innerRadius={20}
+          width={200}
+          height={200}
+        />
+      </div>
     );
   }
 }
