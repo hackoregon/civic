@@ -11,8 +11,8 @@ import {
 } from '../../state/sandbox/actions';
 import {
   isSandboxLoading,
+  getSandboxData,
   getSandboxError,
-  getPackages,
 } from '../../state/sandbox/selectors';
 
 const loader = css`
@@ -55,10 +55,10 @@ export class Packages extends React.Component {
     const {
       isLoading,
       isError,
-      packages,
+      sandbox,
     } = this.props;
 
-    const packageList = packages ? Object.keys(packages).map(p => ({ description: packages[p].description, title: capitalize(p) })) : [];
+    const packages = sandbox.packages ? Object.keys(sandbox.packages).map(p => ({ description: sandbox.packages[p].description, title: capitalize(p) })) : [];
 
     const Loader = () => <div className={loader}>Loading...</div>;
     const ErrorMessage = () => <div className={error}>Could not load data for the sandbox.</div>;
@@ -83,7 +83,7 @@ export class Packages extends React.Component {
           }`)}
         >
           {isLoading && <Loader />}
-          {packageList && (packageList.map(p => (<div
+          {packages && (packages.map(p => (<div
             key={p.title}
             className={css(`@media(min-width: 600px) {
             width: 33%;
@@ -153,7 +153,7 @@ export default connect(
   state => ({
     isLoading: isSandboxLoading(state),
     isError: getSandboxError(state),
-    packages: getPackages(state),
+    sandbox: getSandboxData(state),
   }),
   dispatch => ({
     fetchSandbox() {
