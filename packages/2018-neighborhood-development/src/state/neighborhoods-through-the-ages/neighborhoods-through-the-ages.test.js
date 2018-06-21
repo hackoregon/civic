@@ -94,7 +94,7 @@ describe('neighborhood-ages', () => {
     const initialState = {
       pending: false,
       error: null,
-      data: null,
+      data: [],
       selectedNeighborhood: null,
     };
     const payload = { stu: 'ff' };
@@ -109,7 +109,7 @@ describe('neighborhood-ages', () => {
       })).to.eql({
         pending: true,
         error: null,
-        data: null,
+        data: [],
         selectedNeighborhood: null,
       });
     });
@@ -231,7 +231,7 @@ describe('neighborhood-ages', () => {
       it('returns a listOfNeighborhoods when there is data', () => {
         expect(selectors.getListOfNeighborhoods({
           neighborhoodAges: {
-            data: { data: { results: SAMPLE_DATA } },
+            data: SAMPLE_DATA,
           },
         })).to.eql([DEFAULT_NEIGHBORHOOD]);
       });
@@ -261,7 +261,7 @@ describe('neighborhood-ages', () => {
       it('returns data for a selectedNeighborhood when there is data', () => {
         expect(selectors.getDataForSelectedNeighborhood({
           neighborhoodAges: {
-            data: { data: { results: SAMPLE_DATA } },
+            data: SAMPLE_DATA,
             selectedNeighborhood: DEFAULT_NEIGHBORHOOD,
           },
         })).to.eql(FORMATTED_DATA);
