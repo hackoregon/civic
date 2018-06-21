@@ -11,6 +11,11 @@ export const getContributorBreakdownData = createSelector(
   ({ data }) => data.contributorBreakdown && data.contributorBreakdown.data ? data.contributorBreakdown.data : data.contributorBreakdown,
 );
 
+export const getSpendingBreakdownData = createSelector(
+  politicalCampaignsSelector,
+  ({ data }) => data.spendingBreakdown && data.spendingBreakdown.data ? data.spendingBreakdown.data : data.spendingBreakdown,
+);
+
 export const isPoliticalCampaignsLoading = createSelector(
   politicalCampaignsSelector,
   ({ data }) => Object.keys(data)

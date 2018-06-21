@@ -3,6 +3,7 @@ import apiAdapter from '../api-adapter';
 import actionEmitter from '../api-adapter-action-emitter';
 
 export const CONTRIBUTOR_BREAKDOWN = 'contributorBreakdown';
+export const SPENDING_BREAKDOWN = 'spendingBreakdown';
 export const ELECTION_CYCLES = 'electionCycles';
 export const COMMITTEES = 'committees';
 
@@ -22,6 +23,7 @@ const API_BASE = 'http://service.civicpdx.org/local-elections/';
 const endpoint = (type) => {
   const endpoints = {
     [CONTRIBUTOR_BREAKDOWN]: 'contributorbreakdown',
+    [SPENDING_BREAKDOWN]: 'spendingbreakdown',
     [ELECTION_CYCLES]: 'electioncycles',
     [COMMITTEES]: 'committeeslist',
   };
@@ -33,13 +35,26 @@ export const fetchContributorBreakdown = (committeeID, electionCycleID, params =
   apiAdapter(`${endpoint(CONTRIBUTOR_BREAKDOWN)}`,
     {
       ...params,
-      election_cycle_id: electionCycleID,
+      //election_cycle: electionCycleID,
       committee_id: committeeID,
     },
     {
       start: requestStart(CONTRIBUTOR_BREAKDOWN),
       success: requestSuccess(CONTRIBUTOR_BREAKDOWN),
       error: requestError(CONTRIBUTOR_BREAKDOWN),
+    })();
+
+export const fetchSpendingBreakdown = (committeeID, electionCycleID, params = {}) =>
+  apiAdapter(`${endpoint(SPENDING_BREAKDOWN)}`,
+    {
+      ...params,
+      //election_cycle: electionCycleID,
+      committee_id: committeeID,
+    },
+    {
+      start: requestStart(SPENDING_BREAKDOWN),
+      success: requestSuccess(SPENDING_BREAKDOWN),
+      error: requestError(SPENDING_BREAKDOWN),
     })();
 
 export const fetchElectionCycles = (params = {}) =>

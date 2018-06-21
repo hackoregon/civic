@@ -6,6 +6,7 @@ import { CivicStoryCard } from '@hackoregon/component-library';
 
 import {
   fetchContributorBreakdown,
+  fetchSpendingBreakdown,
   fetchElectionCycles,
   fetchCommittees,
   setElectionCycle,
@@ -14,6 +15,7 @@ import {
 import {
   isPoliticalCampaignsLoading,
   getContributorBreakdownData,
+  getSpendingBreakdownData,
   getElectionCycles,
   getElectionCycle,
   getCommittees,
@@ -32,8 +34,10 @@ const propTypes = {
   setCampaign: PropTypes.func,
   electionCycle: PropTypes.object,
   electionCycles: PropTypes.func,
+  spendingBreakdown: PropTypes.object,
   setElectionCycle: PropTypes.func,
   fetchContributorBreakdown: PropTypes.func,
+  fetchSpendingBreakdown: PropTypes.func,
 };
 
 const defaultProps = {
@@ -107,14 +111,17 @@ export default connect(
   state => ({
     loading: isPoliticalCampaignsLoading(state),
     contributorBreakdown: getContributorBreakdownData(state),
+    spendingBreakdown: getSpendingBreakdownData(state),
     campaign: getCampaign(state),
     committees: getCommittees(state),
     electionCycle: getElectionCycle(state),
     electionCycles: getElectionCycles(state),
   }),
   dispatch => ({
-    fetchContributorBreakdown: (committeeID, electionCycleID) =>
-      dispatch(fetchContributorBreakdown(committeeID, electionCycleID)),
+    fetchContributorBreakdown: (committeeID, electionCycleID) => {
+      dispatch(fetchContributorBreakdown(committeeID, electionCycleID));
+      dispatch(fetchSpendingBreakdown(committeeID, electionCycleID));
+    },
     fetchElectionCycles: dispatch(fetchElectionCycles({ limit: 30 })),
     query: () => dispatch(fetchCommittees({ limit: 3000 })),
     setElectionCycle: c => dispatch(setElectionCycle(c)),
