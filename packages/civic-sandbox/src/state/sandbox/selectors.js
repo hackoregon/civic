@@ -12,12 +12,12 @@ export const getState = createSelector(
 
 export const getSandbox = createSelector(
   rootState,
-  ({ sandbox }) => sandbox
+  ({ sandbox = {} }) => sandbox
 );
 
 const getProperty = key => createSelector(getState, state => state[key]);
 
-const getSandboxProperty = key => createSelector(getSandbox, state => state[key]);
+const getSandboxProperty = key => createSelector(getSandbox, sandbox => sandbox[key]);
 
 export const isSandboxLoading = getProperty('sandboxPending');
 export const isFoundationLoading = getProperty('foundationPending');
