@@ -29,11 +29,6 @@ const cardError = css`
   background: #FDD;
   border: 1px solid #C99;
 `;
-const mapWrapper = css`
-  width: 100%;
-  overflow: hidden;
-  display: block;
-`;
 
 export class PortlandFarmersMarkets extends React.Component {
   componentDidMount() {
@@ -59,17 +54,15 @@ export class PortlandFarmersMarkets extends React.Component {
         title="Where are Portland's Farmers' Markets?"
         slug="portland-farmers-markets"
       >
-        <div className={mapWrapper}>
-          <BaseMap>
-            <ScatterPlotMap
-              data={portlandFarmersMarkets.features}
-              autoHighlight={false}
-              getColor={() => [109, 222, 69]}
-              getRadius={() => 550}
-              onLayerClick={event => selectFarmersMarket(event.object)}
-            />
-          </BaseMap>
-        </div>
+        <BaseMap>
+          <ScatterPlotMap
+            data={portlandFarmersMarkets.features}
+            autoHighlight={false}
+            getColor={() => [109, 222, 69]}
+            getRadius={() => 550}
+            onLayerClick={event => selectFarmersMarket(event.object)}
+          />
+        </BaseMap>
         {activeMarket && (
           <div>
             <h3>{activeMarket.Market} ({activeMarket.status})</h3>

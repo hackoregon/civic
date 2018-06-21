@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { loader, error, inputClass, emphasis } from '../css-utils';
+import { loader, error, gradientLabel, emphasis } from '../css-utils';
 
 import '@hackoregon/component-library/assets/vendor/react-select.min.css';
 
@@ -9,7 +9,8 @@ import {
   CivicStoryCard,
   Collapsable,
   LineChart,
-  BarChart
+  BarChart,
+  GradientScale,
 } from '@hackoregon/component-library';
 
 import {
@@ -74,15 +75,16 @@ export class PortlandNeedsAffordableRentalUnits extends React.Component {
                 {selectedCityRank && (<div>
                   <p>
                     {selectedCity} ranks <strong className={emphasis}>{selectedCityRank.rank}/{selectedCityRank.total} </strong>
-                    for the median home price to median income ratio in <strong className={emphasis}>2014</strong>
+                    This ranking is based on the number of AAA (adequate, affordable, and available) units per 100 ELI
+                    (extremely low income) renters. A ranking of 1 indicates there are a lot of AAA units per 100 ELI
+                    households, and a ranking of 3142 represents the least number of AAA units per 100 ELI households.
                   </p>
-                  <input
-                    disabled
-                    className={inputClass}
-                    type="range"
-                    min="1"
-                    value={selectedCityRank.rank}
-                    max={selectedCityRank.total}
+                  <strong className={gradientLabel}>More units available</strong>
+                  <GradientScale
+                    domain={[1, selectedCityRank.total]}
+                    primary={selectedCityRank.rank}
+                    height={50}
+                    colorScale="ocean"
                   />
                 </div>)}
                 {selectedCityData && (<div>

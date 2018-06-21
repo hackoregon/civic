@@ -1,10 +1,24 @@
 import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Button } from '@hackoregon/component-library';
+import { css } from 'emotion';
 
 import QRMap from '../QR';
 import Question from './Question';
 import Recommendation from './Recommendation';
+
+const radio = css`
+  font-size: 18px;
+  margin: 10px 20px;
+
+  input {
+    margin-right: 1em;
+  }
+`;
+
+const formClass = css`
+  margin: 40px 0;
+`;
 
 const QuestionForm = ({ back, next, done, questionId }) => (
   <div>
@@ -15,8 +29,8 @@ const QuestionForm = ({ back, next, done, questionId }) => (
       question={QRMap[questionId - 1].question}
       questionId={questionId}
     />
-    <form>
-      <div className="radio">
+    <form className={formClass}>
+      <div className={radio}>
         <label>
           <Field
             name={`${questionId}`}
@@ -29,7 +43,7 @@ const QuestionForm = ({ back, next, done, questionId }) => (
           Yes
         </label>
       </div>
-      <div className="radio">
+      <div className={radio}>
         <label>
           <Field
             name={`${questionId}`}

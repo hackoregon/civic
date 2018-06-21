@@ -34,6 +34,7 @@ const packageSelectorClass = css`
 
   h2 {
     margin: 0;
+    text-align: center;
   }
 
   p {

@@ -10,7 +10,7 @@ const chartEvents = [
         return [
           {
             target: 'data',
-            mutation: () => ({ style: { fill: tooltipColor } }),
+            mutation: props => ({ style: Object.assign(props.style, { fill: tooltipColor }) }),
           }, {
             target: 'labels',
             mutation: () => ({ active: true }),

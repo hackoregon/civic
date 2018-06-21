@@ -4,6 +4,7 @@ const planet = [[247, 244, 249, 255], [231, 225, 239, 255], [212, 185, 218, 255]
 const space = [[247, 252, 253, 255], [224, 236, 244, 255], [191, 211, 230, 255], [158, 188, 218, 255], [140, 150, 198, 255], [140, 107, 177, 255], [136, 65, 157, 255], [129, 15, 124, 255], [77, 0, 75, 255]];
 const earth = [[255, 247, 251, 255], [236, 226, 240, 255], [208, 209, 230, 255], [166, 189, 219, 255], [103, 169, 207, 255], [54, 144, 192, 255], [2, 129, 138, 255], [1, 108, 89, 255], [1, 70, 54, 255]];
 const ocean = [[255, 255, 217, 255], [237, 248, 177, 255], [199, 233, 180, 255], [127, 205, 187, 255], [65, 182, 196, 255], [29, 145, 192, 255], [34, 94, 168, 255], [37, 52, 148, 255], [8, 29, 88, 255]];
+const redGreenDivergent = [[222, 75, 88, 255], [228, 118, 128, 255], [234, 161, 168, 255], [240, 204, 209, 255], [247, 247, 247, 255], [195, 220, 221, 255], [143, 192, 194, 255], [90, 164, 167, 255], [38, 136, 140, 255]];
 
 // FOUNDATION 007 - Total Population
 const foundation007GetColor = (f) => {
@@ -181,7 +182,7 @@ const foundation029GetColor = (f) => {
 // FOUNDATION 030 - Wet Season Mean Deformation Intensity
 const foundation030GetColor = (f) => {
   const value = f.properties.pgd_total_wet_mean_di;
-return value === 'Low' ? [254, 226, 150, 255] :
+  return value === 'Low' ? [254, 226, 150, 255] :
   	value === 'Moderate' ? [253, 155, 84, 255] :
     value === 'High' ? [230, 54, 56, 255] :
     value === 'Very High' ? [143, 31, 64, 255] :
@@ -287,19 +288,19 @@ const foundation041GetColor = (f) => {
 };
 
 // FOUNDATION 042 - Change in Ridership by Census Block
-// const foundation042GetColor = f => {
-//   const value = f.properties.pct_change;
-//   return value < 0 ? space[0] :
-//     value <= 200 ? space[1] :
-//     value <= 400 ? space[2] :
-//     value <= 600 ? space[3] :
-//     value <= 800 ? space[4] :
-//     value <= 1000 ? space[5] :
-//     value <= 1200 ? space[6] :
-//     value <= 1400 ? space[7] :
-//     value <= 1600 ? space[8] :
-//     [0,0,0,100];
-// };
+const foundation042GetColor = (f) => {
+  const value = f.properties.stops_pct_change;
+  return value <= -100 ? redGreenDivergent[0] :
+    value <= -75 ? redGreenDivergent[1] :
+    value <= -50 ? redGreenDivergent[2] :
+    value <= -25 ? redGreenDivergent[3] :
+    value <= 25 ? redGreenDivergent[4] :
+    value <= 50 ? redGreenDivergent[5] :
+    value <= 75 ? redGreenDivergent[6] :
+    value <= 100 ? redGreenDivergent[7] :
+    value <= 1500 ? redGreenDivergent[8] :
+    [0, 0, 0, 100];
+};
 
 // FOUNDATION 043 - Eviction Rate
 const foundation043GetColor = (f) => {
@@ -328,6 +329,21 @@ const foundation044GetColor = (f) => {
     value <= 49 ? ocean[6] :
     value <= 56 ? ocean[7] :
     value <= 100 ? ocean[8] :
+    [0, 0, 0, 100];
+};
+
+// FOUNDATION 045 - Camp Reports
+const foundation045GetColor = (f) => {
+  const value = f.properties.count;
+  return value >= 200 ? ocean[8] :
+    value >= 170 ? ocean[7] :
+    value >= 150 ? ocean[6] :
+    value >= 125 ? ocean[5] :
+    value >= 100 ? ocean[4] :
+    value >= 75 ? ocean[3] :
+    value >= 50 ? ocean[2] :
+    value >= 25 ? ocean[1] :
+    value >= 0 ? ocean[0] :
     [0, 0, 0, 100];
 };
 
@@ -657,12 +673,12 @@ export const foundations = data => ({
     id: 'choropleth-layer-foundation-042-change-ridership',
     pickable: true,
     data: data.slide_data.features,
-    opacity: 0.5,
+    opacity: 1,
     getPolygon: f => f.geometry.coordinates,
-    getLineColor: f => [255, 255, 255, 255],
+    getLineColor: f => [112, 122, 122, 255],
     getLineWidth: f => 0.2,
     stroked: true,
-    getFillColor: f => [200, 200, 200, 150],
+    getFillColor: foundation042GetColor,
     filled: true,
     onClick: info => console.log('Layer clicked:', info.object),
     autoHighlight: true,
@@ -675,7 +691,7 @@ export const foundations = data => ({
     data: data.slide_data.features,
     opacity: 0.5,
     getPolygon: f => f.geometry.coordinates,
-    getLineColor: f => [255, 255, 255, 255],
+    getLineColor: f => [112, 122, 122, 255],
     getLineWidth: f => 0.2,
     stroked: true,
     getFillColor: foundation043GetColor,
@@ -695,6 +711,22 @@ export const foundations = data => ({
     getLineWidth: f => 0.2,
     stroked: true,
     getFillColor: foundation044GetColor,
+    filled: true,
+    onClick: info => console.log('Layer clicked:', info.object),
+    autoHighlight: true,
+    highlightColor: [200, 200, 200, 150],
+  },
+  'Camp Reports': {
+    mapType: 'ChoroplethMap',
+    id: 'choropleth-layer-foundation-045-camp-reports',
+    pickable: true,
+    data: data.slide_data.features,
+    opacity: 0.5,
+    getPolygon: f => f.geometry.coordinates,
+    getLineColor: f => [112, 112, 112, 255],
+    getLineWidth: f => 0.2,
+    stroked: true,
+    getFillColor: foundation045GetColor,
     filled: true,
     onClick: info => console.log('Layer clicked:', info.object),
     autoHighlight: true,
@@ -764,16 +796,17 @@ const poiGetIconColor = f => f.properties.type === 'BEECN' ? [0, 0, 0, 255] :
   [0, 0, 0, 255];
 
 // Slide 015 - Change in Ridership by Route
-const divigerentColors = [[231, 212, 232], [247, 247, 247], [217, 240, 211], [166, 219, 160], [90, 174, 97], [27, 120, 55], [0, 68, 27]];
 const ridershipRouteGetColor = (f) => {
   const value = f.properties.pct_change;
-  return value <= 0 ? divigerentColors[0] :
-    value <= 100 ? thermal[1] :
-    value <= 200 ? thermal[2] :
-    value <= 300 ? thermal[3] :
-    value <= 400 ? thermal[4] :
-    value <= 500 ? thermal[5] :
-    value < 9999 ? thermal[6] :
+  return value <= -100 ? redGreenDivergent[0] :
+    value <= -75 ? redGreenDivergent[1] :
+    value <= -50 ? redGreenDivergent[2] :
+    value <= -25 ? redGreenDivergent[3] :
+    value <= 25 ? redGreenDivergent[4] :
+    value <= 50 ? redGreenDivergent[5] :
+    value <= 75 ? redGreenDivergent[6] :
+    value <= 100 ? redGreenDivergent[7] :
+    value < 9999 ? redGreenDivergent[8] :
     [255, 255, 255, 0];
 };
 
@@ -1052,9 +1085,9 @@ export const slides = data => ({
       pickable: true,
       data: data.slide_data.features,
       getPosition: f => f.geometry.coordinates,
-      opacity: 0.5,
-      colorRange: ocean,
-      cellSizePixels: 50,
+      opacity: 0.66,
+      colorRange: thermal,
+      cellSizePixels: 15,
       autoHighlight: true,
       highlightColor: [100, 100, 100, 255],
     },
@@ -1122,7 +1155,7 @@ export const slides = data => ({
       mapType: 'PolygonPlotMap',
       id: 'boundary-layer-slide-015-change-ridership-route',
       data: data.slide_meta.boundary,
-      opacity: 1,
+      opacity: 0,
       filled: false,
       getPolygon: f => f.coordinates,
       getLineColor: f => [0, 0, 0, 0],
@@ -1135,10 +1168,10 @@ export const slides = data => ({
       id: 'path-layer-slide-015-change-ridership-route',
       pickable: true,
       data: data.slide_data.features,
-      opacity: 1,
+      opacity: 0.33,
       getColor: ridershipRouteGetColor,
       getPath: f => f.geometry.coordinates,
-      getWidth: f => 40,
+      getWidth: f => 80,
       rounded: false,
       autoHighlight: true,
       highlightColor: [100, 100, 100, 255],

@@ -17,12 +17,6 @@ const LAT = 45.5231;
 const LONG = -122.6765;
 const ZOOM = 9.5;
 
-const mapWrapper = css`
-  width: 100%;
-  overflow: hidden;
-  display: block;
-`;
-
 export class ExploreUrbanCampsiteSweeps extends React.Component {
   componentDidMount() {
     this.props.init();
@@ -34,6 +28,8 @@ export class ExploreUrbanCampsiteSweeps extends React.Component {
       error,
       data,
     } = this.props;
+
+    console.log('DATA???', data);
 
     const scatterplot = !data
     ? null
@@ -55,7 +51,7 @@ export class ExploreUrbanCampsiteSweeps extends React.Component {
       >
         <Collapsable>
           <Collapsable.Section>
-            <div className={mapWrapper}>
+            <div>
               <p>{contextualDesc}</p>
               <BaseMap
                 initialLongitude={LONG}

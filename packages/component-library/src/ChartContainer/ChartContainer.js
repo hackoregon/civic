@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { css } from 'emotion';
 
 const titleStyle = css`
@@ -18,6 +19,18 @@ const subtitleStyle = css`
   margin: 10px 0;
 `;
 
+const chartLoading = css`
+  text-align: center;
+  background: #EEE;
+  height: 100%;
+`;
+
+const chartError = css`
+  text-align: center;
+  background: #FDD;
+  height: 100%;
+`;
+
 /**
   ChartContainer renders titles, subtitles, and provides some default styling for charts.
   It is designed to render a VictoryChart as children.
@@ -27,6 +40,8 @@ const subtitleStyle = css`
 
 const ChartContainer = ({
   title,
+  error,
+  loading,
   subtitle,
   children,
   className,
@@ -38,7 +53,7 @@ const ChartContainer = ({
     ${className};
   `;
 
-  return (
+  let content = (
     <div>
       { title ? <h3 className={titleStyle}>{title}</h3> : null}
       { subtitle ? <span className={subtitleStyle}>{subtitle}</span> : null}
@@ -47,13 +62,23 @@ const ChartContainer = ({
       </div>
     </div>
   );
+
+  if (loading) {
+    content = <div className={chartLoading}>Loading...</div>;
+  } else if (error) {
+    content = <div className={chartError}>{error}</div>;
+  }
+
+  return content;
 };
 
 ChartContainer.propTypes = {
-  title: React.PropTypes.string,
-  children: React.PropTypes.node,
-  subtitle: React.PropTypes.string,
-  className: React.PropTypes.string,
+  title: PropTypes.string,
+  error: PropTypes.string,
+  loading: PropTypes.bool,
+  children: PropTypes.node,
+  subtitle: PropTypes.string,
+  className: PropTypes.string,
 };
 
 ChartContainer.defaultProps = {
