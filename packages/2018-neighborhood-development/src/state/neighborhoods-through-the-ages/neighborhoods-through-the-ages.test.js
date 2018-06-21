@@ -121,6 +121,7 @@ describe('neighborhood-ages', () => {
       })).to.eql({
         pending: false,
         data: payload,
+        error: null,
       });
     });
 
@@ -131,6 +132,7 @@ describe('neighborhood-ages', () => {
       })).to.eql({
         pending: false,
         error: payload,
+        data: null,
       });
     });
   });
@@ -174,12 +176,12 @@ describe('neighborhood-ages', () => {
     });
 
     describe('isNeighborhoodAgesPending', () => {
-      it('returns false when there is no value for pending', () => {
+      it('returns undefined when there is no value for pending', () => {
         expect(selectors.isNeighborhoodAgesPending({
           neighborhoodAges: {
             no: 'pending property',
           },
-        })).to.be.false;
+        })).to.be.undefined;
       });
 
       it('returns false when the value for pending is false', () => {

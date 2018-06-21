@@ -13,7 +13,7 @@ const dropdownClass = css`
   margin: 10px;
 `;
 
-const Dropdown = ({ options, onChange, value, clearable, searchable, disabled }) => (
+const Dropdown = ({ options, onChange, value, clearable, searchable, disabled, simpleValue, multi }) => (
   <Select
     className={dropdownClass}
     options={options}
@@ -22,6 +22,8 @@ const Dropdown = ({ options, onChange, value, clearable, searchable, disabled })
     clearable={clearable}
     searchable={searchable}
     disabled={disabled}
+    simpleValue={simpleValue}
+    multi={multi}
   />
   );
 
@@ -34,6 +36,8 @@ Dropdown.propTypes = {
   clearable: PropTypes.bool,
   searchable: PropTypes.bool,
   disabled: PropTypes.bool,
+  simpleValue: PropTypes.bool,
+  multi: PropTypes.bool,
 };
 
 Dropdown.defaultProps = {

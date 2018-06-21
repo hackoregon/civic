@@ -31,9 +31,12 @@ import pathMapStory from './PathMap.story';
 import iconMapStory from './IconMap.story';
 import boundaryMapStory from './BoundaryMap.story';
 import civicSandboxMapStory from './CivicSandboxMap.story';
+import gradientScaleStory from './GradientScale.story';
+import sandboxStory from './Sandbox.story';
 import packageSelectorBox from './PackageSelectorBox.story';
 import civicSandboxDashboardStory from './CivicSandboxDashboard.story';
 import stackedAreaChart from './StackedAreaChart.story';
+
 import '../assets/global.styles.css';
 
 // stories can be added directly here
@@ -74,5 +77,7 @@ mapOverlayStory();
 hexOverlayStory();
 boundaryMapStory();
 civicSandboxMapStory();
+gradientScaleStory();
+sandboxStory();
 packageSelectorBox();
 civicSandboxDashboardStory();

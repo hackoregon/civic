@@ -10,22 +10,16 @@ export const getNeighborhoodAgesRequest = createSelector(
   ({ neighborhoodAges }) => neighborhoodAges,
 );
 
-export const getNeighborhoodAgesData = createSelector(
-  getNeighborhoodAgesRequest,
-  ({ data }) => data,
-);
+const getProperty = key => createSelector(getNeighborhoodAgesRequest, state => state[key]);
 
-export const isNeighborhoodAgesPending = createSelector(
-  getNeighborhoodAgesRequest,
-  ({ pending }) => !!pending,
-);
+export const getNeighborhoodAgesData = getProperty('data');
+export const isNeighborhoodAgesPending = getProperty('pending');
+export const catchNeighborhoodAgesErrors = getProperty('error');
 
-export const catchNeighborhoodAgesErrors = createSelector(
+export const getSelectedNeighborhood = createSelector(
   getNeighborhoodAgesRequest,
-  ({ error }) => error || error,
-);
-
-export const getSelectedNeighborhood = state => state.neighborhoodAges.selectedNeighborhood && state.neighborhoodAges.selectedNeighborhood.value;
+  ({ selectedNeighborhood }) => selectedNeighborhood && selectedNeighborhood.value,
+)
 
 const getNeighborhoodsFromData = data => data.map(obj => obj.neighborhood);
 const getSelectedNeighborhoodData = (data, nbhd) => data.filter(({ neighborhood }) => neighborhood === nbhd);
