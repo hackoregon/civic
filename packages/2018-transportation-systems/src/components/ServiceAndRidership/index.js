@@ -122,6 +122,8 @@ const labels = [
 
 const CHART_DATA = ungroupBy(percentageSince(TC_REPORT_DATA), categories, labels);
 
+const combineData = (a, b) => [...a, ...b];
+
 export class ServiceAndRidership extends React.Component {
   componentDidMount() {
     this.props.init();
@@ -133,8 +135,6 @@ export class ServiceAndRidership extends React.Component {
       error,
       serviceAndRidership,
     } = this.props;
-
-    console.log(CHART_DATA)
 
     return (
       <CivicStoryCard
@@ -151,7 +151,7 @@ Ridership and Transit Service trends arise in Portland for many complicated reas
             <LineChart
               title="Public Transit Ridership and Operations"
               subtitle="Percentage change since 2002 in ridership (unlinked trips) and transit miles driven (VRK)"
-              data={CHART_DATA}
+              data={combineData(CHART_DATA, serviceAndRidership)}
               xLabel="Year"
               yLabel="Ridership"
               dataKey="year"

@@ -6,24 +6,28 @@ export const getServiceAndRidershipRequest = createSelector(
   ({ serviceAndRidership }) => serviceAndRidership,
 );
 
+const filterData = data => data.filter(obj => obj.year > 2001);
+const getOriginYear = data => data.filter(obj => obj.year === 2002);
+const getValue = data => data[0].value;
+const getOrigin = data => getValue(getOriginYear(getData(data)));
+
+const getCalculatedData = (data, divisor) => data.data.map(yearObj => ({
+    type: 'TriMet Ridership',
+    year: yearObj.year,
+    value: (yearObj.total_sum_ons / divisor) - 1,
+  }
+));
+
+const getData = data => data.data.map(yearObj => ({
+    type: 'TriMet Ridership',
+    year: yearObj.year,
+    value: yearObj.total_sum_ons,
+  }
+));
+
 export const getServiceAndRidershipData = createSelector(
   getServiceAndRidershipRequest,
-  ({ data }) => ((data || {}).data) && data.data.map(yearObj => ({
-    type: 'Weekday',
-    year: yearObj.year,
-    ons: yearObj.weekday_sum_ons / 5 / 52,
-  }
-  )).concat(data.data.map(yearObj => ({
-    type: 'Saturday',
-    year: yearObj.year,
-    ons: yearObj.saturday_sum_ons / 52,
-  }
-  ))).concat(data.data.map(yearObj => ({
-    type: 'Sunday',
-    year: yearObj.year,
-    ons: yearObj.sunday_sum_ons / 52,
-  }
-  )))
+  ({ data }) => ((data || {}).data) && filterData(getCalculatedData(data, getOrigin(data))),
 );
 
 export const isServiceAndRidershipPending = createSelector(
