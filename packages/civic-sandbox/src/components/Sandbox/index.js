@@ -15,6 +15,7 @@ import {
   setSlides,
   setPackage,
   fetchSlideByDate,
+  setSelectedFoundationDatum,
 } from '../../state/sandbox/actions';
 import {
   isAllSandboxLoading,
@@ -95,6 +96,7 @@ class SandboxComponent extends React.Component {
       defaultSlides={this.props.slidesData}
       foundationData={this.props.selectedFoundationData}
       defaultFoundation={this.props.foundationData}
+      onFoundationClick={this.props.foundationClick}
     />;
   }
 }
@@ -136,6 +138,9 @@ export default connect(
     },
     setSlides(selectedSlides = []) {
       dispatch(setSlides(selectedSlides));
+    },
+    foundationClick(feature) {
+      dispatch(setSelectedFoundationDatum(feature));
     },
   })
 )(SandboxComponent);

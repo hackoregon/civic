@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { css } from 'emotion';
 
-import { PackageSelectorBox, Button } from '@hackoregon/component-library';
+import { PackageSelectorBox, Button, CivicSandboxDashboard } from '@hackoregon/component-library';
 import SandboxComponent from '../Sandbox';
 import {
   fetchSandbox,
@@ -12,6 +12,7 @@ import {
   isSandboxLoading,
   getSandboxData,
   getSandboxError,
+  getSelectedFoundationDatum,
 } from '../../state/sandbox/selectors';
 
 const loader = css`
@@ -55,6 +56,7 @@ export class Packages extends React.Component {
       isLoading,
       isError,
       sandbox,
+      selectedFoundationDatum,
     } = this.props;
 
     const packages = sandbox.packages ? Object.keys(sandbox.packages).map(p => ({ description: sandbox.packages[p].description, title: capitalize(p) })) : [];
@@ -105,11 +107,20 @@ export class Packages extends React.Component {
           {isError && <ErrorMessage />}
         </section>
 
-        {this.state.mapIsOpen && (<section>
+        {this.state.mapIsOpen && (<section style={{ position: 'relative' }}>
           <p>
             <a onClick={this.closeMap}>&lt; Back to Packages</a>
           </p>
           <SandboxComponent />
+          {selectedFoundationDatum && <div
+            style={{
+              top: '175px',
+              position: 'absolute',
+              width: '100%',
+            }}
+          >
+            <CivicSandboxDashboard data={selectedFoundationDatum} />
+          </div>}
         </section>)}
       </div>
     );
@@ -124,6 +135,7 @@ export default connect(
     isLoading: isSandboxLoading(state),
     isError: getSandboxError(state),
     sandbox: getSandboxData(state),
+    selectedFoundationDatum: getSelectedFoundationDatum(state),
   }),
   dispatch => ({
     fetchSandbox() {
