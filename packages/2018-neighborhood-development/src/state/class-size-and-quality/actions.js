@@ -11,10 +11,10 @@ export const classAndSizeQualityStart = actionEmitter(API_START);
 export const classAndSizeQualitySuccess = actionEmitter(API_SUCCESS);
 export const classAndSizeQualityError = actionEmitter(API_ERROR);
 
-const ENDPOINT_BASE = 'http://service.civicpdx.org/neighborhood-development/api/school_class_size?format=json&limit=100';
+const ENDPOINT = 'http://service.civicpdx.org/neighborhood-development/api/school_class_size?format=json&limit=1000';
 
-export const fetchclassAndSizeQuality = year => apiAdapter(
-  `${ENDPOINT_BASE}&year=${year}`,
+export const fetchclassAndSizeQuality = apiAdapter(
+  ENDPOINT,
   {
     start: classAndSizeQualityStart,
     success: classAndSizeQualitySuccess,

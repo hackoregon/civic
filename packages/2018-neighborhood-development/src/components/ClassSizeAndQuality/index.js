@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { CivicStoryCard, Scatterplot } from '@hackoregon/component-library';
+import { CivicStoryCard, Dropdown, Scatterplot } from '@hackoregon/component-library';
 
 import { fetchclassAndSizeQuality, updateYear } from '../../state/class-size-and-quality/actions';
 import {
@@ -12,14 +12,29 @@ import {
   isDataPending,
 } from '../../state/class-size-and-quality/selectors';
 
+const YEARS = [
+  '2007',
+  '2008',
+  '2009',
+  '2010',
+  '2011',
+  '2012',
+  '2013',
+  '2014',
+  '2015',
+  '2016',
+  '2017',
+];
+
+const dropdownOptions = YEARS.map(year => ({ value: year, label: year }));
+
 export class ClassSizeAndQuality extends React.Component {
   componentDidMount() {
-    const {
-      selectedYear,
-      fetchData,
-    } = this.props;
+    this.props.fetchData(this.props.selectedYear);
+  }
 
-    fetchData(selectedYear);
+  onYearChange = ({ value }) => {
+    this.props.setYear(value);
   }
 
   render() {
@@ -44,7 +59,17 @@ export class ClassSizeAndQuality extends React.Component {
           to teacher experience, provides the end user with context to understand a staffing model.
         </p>
 
-        {selectedYearData.length > 0 &&
+        <Dropdown
+          value={selectedYear}
+          onChange={this.onYearChange}
+          options={dropdownOptions}
+        />
+
+        {selectedYearData && selectedYearData.length === 0 &&
+          <div>Loading...</div>
+        }
+
+        {selectedYearData && selectedYearData.length > 0 &&
           <Scatterplot
             data={selectedYearData}
             dataKey="teacherExperience"
@@ -68,6 +93,7 @@ ClassSizeAndQuality.propTypes = {
   isLoading: PropTypes.bool,
   selectedYear: PropTypes.string,
   selectedYearData: PropTypes.arrayOf(PropTypes.object),
+  setYear: PropTypes.func,
 };
 
 export default connect(
@@ -78,9 +104,8 @@ export default connect(
     selectedYearData: getDataForSelectedYear(state),
   }),
   dispatch => ({
-    fetchData(year) {
-      const fetchDataForYear = fetchclassAndSizeQuality(year);
-      dispatch(fetchDataForYear());
+    fetchData() {
+      dispatch(fetchclassAndSizeQuality());
     },
     setYear(year) {
       dispatch(updateYear(year));
