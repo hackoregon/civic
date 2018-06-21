@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { loader, error, inputClass, emphasis } from '../css-utils';
+import { loader, error, gradientLabel, emphasis } from '../css-utils';
 
 import '@hackoregon/component-library/assets/vendor/react-select.min.css';
 
-import { CivicStoryCard, LineChart, Dropdown, Collapsable } from '@hackoregon/component-library';
+import { CivicStoryCard, LineChart, Dropdown, Collapsable, GradientScale } from '@hackoregon/component-library';
 
 import {
   fetchAllPTICities,
@@ -77,14 +77,15 @@ export class WhoCanAffordToBuyAHome extends React.Component {
               {selectedCity} ranks <strong className={emphasis}>{selectedCityRank.rank}/{selectedCityRank.total} </strong>
               for the median home price to median income ratio in <strong className={emphasis}>2016</strong>
             </p>
-            <input
-              disabled
-              className={inputClass}
-              type="range"
-              min="1"
-              value={selectedCityRank.rank}
-              max={selectedCityRank.total}
-            />
+            <p>
+              <strong className={gradientLabel}>More affordable</strong>
+              <GradientScale
+                domain={[1, selectedCityRank.total]}
+                primary={selectedCityRank.rank}
+                height={50}
+                colorScale="ocean"
+              />
+            </p>
           </div>)}
         </section>
         <section>
