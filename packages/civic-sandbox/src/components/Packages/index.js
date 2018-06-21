@@ -13,8 +13,6 @@ import {
   isSandboxLoading,
   getSandboxData,
   getSandboxError,
-  getSelectedPackage,
-  getSelectedPackageData,
 } from '../../state/sandbox/selectors';
 
 const loader = css`
@@ -66,8 +64,18 @@ export class Packages extends React.Component {
     const ErrorMessage = () => <div className={error}>Could not load data for the sandbox.</div>;
 
     return (
-      <div>
-        <div>Select a data collection</div>
+      <div
+        className={css(`
+        font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
+      `)}
+      >
+        <div
+          className={css(`
+          padding: 1.5rem;
+          text-align: center;
+          font-size: 1.2rem;
+        `)}
+        >Select a data collection</div>
         <section
           className={css(`@media(min-width: 600px){
             display:flex;
@@ -111,7 +119,25 @@ export class Packages extends React.Component {
             }}
             contentLabel="Civic Sandbox"
           >
-            <button onClick={this.closeModal}>close</button>
+            <div
+              className={css(`
+              position: absolute;
+              right: 0;
+              top: 5px;
+            `)}
+            >
+              <button
+                onClick={this.closeModal}
+                className={css(`background: #fff;
+                font-size: 1.5rem;
+                border: 0;
+                cursor: pointer;
+                &:hover {
+                  color: rgb(237,73,91);
+                }
+                `)}
+              >x</button>
+            </div>
             <SandboxComponent />
           </Modal>
         </section>
@@ -128,8 +154,6 @@ export default connect(
     isLoading: isSandboxLoading(state),
     isError: getSandboxError(state),
     sandbox: getSandboxData(state),
-    selectedPackage: getSelectedPackage(state),
-    selectedPackageData: getSelectedPackageData(state),
   }),
   dispatch => ({
     fetchSandbox() {

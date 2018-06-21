@@ -66,16 +66,18 @@ class SandboxComponent extends React.Component {
   }
   render() {
     const styles = css(`
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
+    font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
     `);
 
+    const loading = css`
+      font-size: 1.5rem;
+      width: 100%;
+      text-align: center;
+      font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
+    `;
+
     const layerData = [this.props.layerFoundation, ...this.props.layerSlides];
-    return this.props.isLoading ? <div>...Loading</div> :
+    return this.props.isLoading ? <div className={loading}>Loading...</div> :
     <Sandbox
       layerData={layerData}
       updateFoundation={this.props.setFoundation}
@@ -83,7 +85,7 @@ class SandboxComponent extends React.Component {
       toggleDrawer={this.toggleDrawer}
       fetchSlideDataByDate={this.props.fetchSlideByDate}
       updatePackage={this.props.setPackage}
-      css={styles}
+      styles={styles}
       data={this.props.sandboxData}
       selectedPackage={this.props.selectedPackage}
       selectedFoundation={this.props.selectedFoundation}
