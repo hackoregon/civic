@@ -29,6 +29,10 @@ const footerClass = css`
   @media (min-width: 768px) {
     margin-left: 0;
   }
+
+  @media (max-width: 850px) {
+    padding: 32px 20px;
+  }
 `;
 
 const copyrightClass = css`
