@@ -63,7 +63,7 @@ class BaseMap extends Component {
       y,
     } = this.state;
 
-    viewport.width = this.props.containerWidth;
+    viewport.width = this.props.containerWidth ? this.props.containerWidth : 500;
     viewport.height = 500;
 
     const {
