@@ -1,5 +1,6 @@
 import fetchAdapter from '../fetch-adapter';
 import actionEmitter from '../common-action-emitter';
+import { slugify } from '../utils';
 
 // Types
 export const ALL_CITIES_START = 'AFFORDABLE_RENTAL_UNITS/ALL_CITIES_START';
@@ -35,7 +36,7 @@ export const fetchAllARUCities = fetchAdapter(
 export const fetchARUCity = fetchAdapter(
   `/api/harvardjchs/?datatype=${detailDatatype}`,
   {
-    encodeParams: (url, city = 'portland') => `${url}&limit=20&datapoint=${city}`,
+    encodeParams: (url, city = 'portland') => `${url}&limit=20&datapoint=${slugify(city)}`,
     start: ARUStart,
     success: ARUSuccess,
     failure: ARUFailure,
