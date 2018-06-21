@@ -57,12 +57,16 @@ export const fetchSpendingBreakdown = (committeeID, electionCycleID, params = {}
       error: requestError(SPENDING_BREAKDOWN),
     })();
 
-export const fetchElectionCycles = (params = {}) =>
-  apiAdapter(endpoint(ELECTION_CYCLES), params, {
-    start: requestStart(ELECTION_CYCLES),
-    success: requestSuccess(ELECTION_CYCLES),
-    error: requestError(ELECTION_CYCLES),
-  })();
+export const fetchElectionCycles = (committeeID, params = {}) =>
+  apiAdapter(endpoint(ELECTION_CYCLES),
+    {
+      ...params,
+      committee: committeeID,
+    }, {
+      start: requestStart(ELECTION_CYCLES),
+      success: requestSuccess(ELECTION_CYCLES),
+      error: requestError(ELECTION_CYCLES),
+    })();
 
 export const fetchCommittees = (params = {}) =>
   apiAdapter(endpoint(COMMITTEES), params, {

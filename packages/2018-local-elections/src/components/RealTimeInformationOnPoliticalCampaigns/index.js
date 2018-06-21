@@ -33,6 +33,7 @@ import {
 import { campaign, electionCycle } from './defaults';
 import ContributorBreakdown from './ContributorBreakdown';
 import SpendingBreakdown from './SpendingBreakdown';
+import MoneyRaisedKPI from './MoneyRaisedKPI';
 import Controls from './Controls';
 
 const descriptionClass = css`
@@ -47,6 +48,11 @@ const chartGrid = css`
 
 const chartCol = css`
   flex: 1;
+`;
+
+const chartStyle = css`
+  padding: 20px;
+  height: 350px;
 `;
 
 const propTypes = {
@@ -88,6 +94,7 @@ class RealTimeInformationOnPoliticalCampaigns extends React.Component {
         (newProps.electionCycle.id !== this.props.electionCycle.id)
       )) {
       this.props.fetchContributorBreakdown(newProps.campaign.id, newProps.electionCycle.id);
+      this.props.fetchElectionCycles(newProps.campaign.id);
     }
   }
 
@@ -131,13 +138,13 @@ class RealTimeInformationOnPoliticalCampaigns extends React.Component {
           ipsum thats all i remember</p>
         <div className={chartGrid}>
           <div className={chartCol}>
-            <div style={{ padding: 20 }}>
+            <div className={chartStyle}>
               <ContributorBreakdown
                 contributors={contributors}
                 loading={this.props.loadingContributorBreakdown}
               />
             </div>
-            <div style={{ padding: 20 }}>
+            <div className={chartStyle}>
               <SpendingBreakdown
                 spending={spending}
                 loading={this.props.loadingSpendingBreakdown}
@@ -145,7 +152,14 @@ class RealTimeInformationOnPoliticalCampaigns extends React.Component {
             </div>
           </div>
           <div className={chartCol}>
-            <div style={{ padding: 20 }}>
+            <div className={chartStyle}>
+              <MoneyRaisedKPI
+                total={"500m"}
+                inState={"50m"}
+                loading={this.props.loadingContributorBreakdown}
+              />
+            </div>
+            <div className={chartStyle}>
               <ContributorBreakdown
                 contributors={contributors}
                 loading={this.props.loadingContributorBreakdown}
@@ -177,10 +191,11 @@ export default connect(
   }),
   dispatch => ({
     fetchContributorBreakdown: (committeeID, electionCycleID) => {
-      dispatch(fetchContributorBreakdown(committeeID, electionCycleID));
-      dispatch(fetchSpendingBreakdown(committeeID, electionCycleID));
+      dispatch(fetchContributorBreakdown(committeeID, electionCycleID, { ordering: 'sum' }));
+      dispatch(fetchSpendingBreakdown(committeeID, electionCycleID, { ordering: 'sum' }));
     },
-    fetchElectionCycles: dispatch(fetchElectionCycles({ limit: 30 })),
+    fetchElectionCycles: committeeID =>
+      dispatch(fetchElectionCycles(committeeID, { limit: 30 })),
     query: () => dispatch(fetchCommittees({ limit: 3000 })),
     setElectionCycle: c => dispatch(setElectionCycle(c)),
     setCampaign: c => dispatch(setCampaign(c)),

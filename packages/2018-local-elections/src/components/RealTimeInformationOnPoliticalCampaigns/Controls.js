@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import '@hackoregon/component-library/assets/vendor/react-select.min.css';
-
 import { Dropdown } from '@hackoregon/component-library';
 
 const propTypes = {

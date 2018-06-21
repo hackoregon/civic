@@ -29,7 +29,7 @@ const SpendingBreakdown = ({ spending, loading }) => {
       title="Spending breakdown"
       subtitle="Breakdown of spending..."
       dataValueFormatter={dollars}
-      height={400}
+      height={300}
     />
   );
 };
