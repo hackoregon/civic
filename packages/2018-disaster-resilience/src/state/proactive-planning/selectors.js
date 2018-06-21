@@ -12,7 +12,7 @@ const processData = data => (data && data.length) && data.map(nbhd => ({
   census_response_rate: (100 - parseFloat(nbhd.census_response_rate)) / 100,
   total_population: parseFloat(nbhd.total_population),
   quadrant: nbhd.quadrant,
-  resilienceLabel: titleCase(nbhd.name) + ' • Resilience',
+  resilienceLabel: titleCase(nbhd.name) + ' • Census Non-Response Rate',
   displacementLabel: 'Displacement',
 }));
 
