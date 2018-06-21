@@ -16,16 +16,14 @@ const colorScales = {
 };
 
 
-const GradientScale = ({ domain, primary, secondary = [], colorScale = 'thermal' }) => {
-  const height = 200;
-  const width = 600;
+const GradientScale = ({ width, height, domain, primary, secondary = [], colorScale = 'thermal' }) => {
   const data = [
     { x: primary, y: 0, type: 'primary' },
     ...secondary.map(num => ({ x: num, y: 0, type: 'secondary' })),
   ];
   return (
     <div>
-      <svg style={{ height: 0 }}>
+      <svg style={{position:'absolute'}} height="0" width="0">
         <defs>
           <linearGradient id="myGradient">
             <stop offset="0%" stopColor="white" />
@@ -37,11 +35,12 @@ const GradientScale = ({ domain, primary, secondary = [], colorScale = 'thermal'
         </defs>
       </svg>
       <VictoryGroup
+        padding={{ top: 10, bottom: 10 }}
         domain={{ x: domain, y: [0, 1] }}
         height={height}
         width={width}
       >
-        <GradientBox fill="url(#myGradient)" />
+        <GradientBox padding={0} fill="url(#myGradient)" />
         <VictoryScatter data={data} dataComponent={<GradientLine />} />
       </VictoryGroup>
     </div>
@@ -49,10 +48,17 @@ const GradientScale = ({ domain, primary, secondary = [], colorScale = 'thermal'
 };
 
 GradientScale.propTypes = {
+  width: PropTypes.number,
+  height: PropTypes.number,
   domain: PropTypes.arrayOf(PropTypes.number).isRequired,
   primary: PropTypes.number.isRequired,
   secondary: PropTypes.arrayOf(PropTypes.number),
   colorScale: PropTypes.oneOf(Object.keys(colorScales)),
+};
+
+GradientScale.defaultProps = {
+  width: 500,
+  height: 100,
 };
 
 export default GradientScale;
