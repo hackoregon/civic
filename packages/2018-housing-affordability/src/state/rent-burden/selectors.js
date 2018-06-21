@@ -22,6 +22,27 @@ export const getSelectedCityData = createSelector(
   }))
 );
 
+export const getChartData = createSelector(
+  getSelectedCityData,
+  (data) => {
+    if (!data) return;
+
+    const _ = { value: 0 };
+
+    const severeBurden = +(data.find(d => d.datatype === 'Severely Burdened Renters, Share of All Households') || _).value;
+    const moderateBurden = +(data.find(d => d.datatype === 'Moderately Burdened Renters, Share of All Households') || _).value;
+    const noBurden = 100 - severeBurden - moderateBurden;
+
+    const ret = [
+      { label: 'Severe Burden', value: severeBurden },
+      { label: 'Moderate Burden', value: moderateBurden },
+      { label: 'No Burden', value: noBurden },
+    ];
+    console.log(ret);
+    return ret;
+  }
+);
+
 const rankKey = 'Severely Burdened Renters, Share of All Households';
 
 export const getSelectedCityRank = createSelector(

@@ -105,16 +105,18 @@ export class WhoCanAffordToBuyAHome extends React.Component {
           {isError && <ErrorMessage />}
           <Collapsable>
             <Collapsable.Section>
-              <p>In the early 1990s, the Portland Metropolitan ratio was ~2.5. This number steadily increased up
-               until 2006, reaching a high of 5.25. Following the recession, the ratio showed a downturn; however starting
-                in 2011, it started to bounce back, and recent values are on par with the previous maximum.
-                In 2016, Portland ranked 349 out of 381 Metropolitan areas with regards to affordability.
-              </p>
-              <p>
-                While the rising cost of home ownership is clearly evident in Portland, this is happening
-                throughout the state. Several other areas are also experiencing challenges with regards to
-                increasing home prices, including Grants Pass, Corvallis, Medford, Bend-Redmond, Eugene, Albany, and Salem.
-              </p>
+              <div>
+                <p>In the early 1990s, the Portland Metropolitan ratio was ~2.5. This number steadily increased up
+                 until 2006, reaching a high of 5.25. Following the recession, the ratio showed a downturn; however starting
+                  in 2011, it started to bounce back, and recent values are on par with the previous maximum.
+                  In 2016, Portland ranked 349 out of 381 Metropolitan areas with regards to affordability.
+                </p>
+                <p>
+                  While the rising cost of home ownership is clearly evident in Portland, this is happening
+                  throughout the state. Several other areas are also experiencing challenges with regards to
+                  increasing home prices, including Grants Pass, Corvallis, Medford, Bend-Redmond, Eugene, Albany, and Salem.
+                </p>
+              </div>
             </Collapsable.Section>
           </Collapsable>
         </section>

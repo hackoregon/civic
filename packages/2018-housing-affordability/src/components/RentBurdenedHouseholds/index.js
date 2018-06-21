@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { loader, error, inputClass, emphasis } from '../css-utils';
 
-import { CivicStoryCard, Dropdown, Collapsable } from '@hackoregon/component-library';
+import { CivicStoryCard, Dropdown, Collapsable, PieChart } from '@hackoregon/component-library';
 
 import {
   fetchAllRentBurdenCities,
@@ -16,6 +16,7 @@ import {
   getSelectedCityData,
   getSelectedCityRank,
   getAllCities,
+  getChartData
 } from '../../state/rent-burden/selectors';
 
 export class RentBurdenedHouseholds extends React.Component {
@@ -33,6 +34,7 @@ export class RentBurdenedHouseholds extends React.Component {
       selectedCityData,
       selectedCityRank,
       setCity,
+      chartData,
     } = this.props;
 
     const cityOptions = allCities && allCities.map(c => ({ value: c, label: c }));
@@ -78,6 +80,15 @@ export class RentBurdenedHouseholds extends React.Component {
             />
           </div>)}
         </section>
+        {chartData && (<section>
+          <PieChart
+            title="Cost Burden Rates for Renters in 2015"
+            data={chartData}
+            innerRadius={100}
+            dataLabel="label"
+            dataValue="value"
+          />
+        </section>)}
         <Collapsable>
           <Collapsable.Section hidden>
             <p>
@@ -103,6 +114,7 @@ export default connect(
     selectedCity: getSelectedCity(state),
     selectedCityData: getSelectedCityData(state),
     selectedCityRank: getSelectedCityRank(state),
+    chartData: getChartData(state),
     isError: getCityError(state),
   }),
   dispatch => ({
