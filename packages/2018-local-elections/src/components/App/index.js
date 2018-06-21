@@ -14,7 +14,10 @@ import IsPartyAffiliationRelevant from '../IsPartyAffiliationRelevant';
 import RealTimeInformationOnPoliticalCampaigns from '../RealTimeInformationOnPoliticalCampaigns';
 
 const App = () => (
-  <PageLayout>
+  <PageLayout
+    teamTitle="Local Elections"
+    heroTitle="Quantifying Influence and Understanding the Impact of Money in our Political System"
+  >
     <IncreasingVolumeOfMoney />
     <HowMuchDoesMoneyMatterInElections />
     <OutraisingYourOpponent />

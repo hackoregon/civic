@@ -14,7 +14,10 @@ import AffordabilityInAComplexHousingMarket from '../AffordabilityInAComplexHous
 import ExploreHousingPolicyImplementation from '../ExploreHousingPolicyImplementation';
 
 const App = () => (
-  <PageLayout>
+  <PageLayout
+    teamTitle="Housing Affordability"
+    heroTitle="Synthesizing Complex Information to Better Understand Affordable Housing Trends and Policy Dynamics"
+  >
     <BuildingBoomInPortland />
     <WhatDoesAffordabilityMean />
     <AffordableRentalUnitsDwindling />
