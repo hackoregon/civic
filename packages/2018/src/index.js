@@ -75,6 +75,7 @@ const configureStore = (initialState, history) => {
       neighborhood: NeighborhoodReducers(),
       transportation: TransportationReducers(),
       farmersMarkets: FarmersMarketsReducers(),
+      sandbox: SandboxReducers(),
     }),
     initialState,
     composeEnhancers(applyMiddleware(...middlewares))

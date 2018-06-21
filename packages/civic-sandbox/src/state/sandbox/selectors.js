@@ -12,53 +12,54 @@ export const getState = createSelector(
 
 export const getSandbox = createSelector(
   rootState,
-  ({ sandbox }) => sandbox
+  ({ sandbox = {} }) => sandbox
 );
 
 const getProperty = key => createSelector(getState, state => state[key]);
 
 const getSandboxProperty = key => createSelector(getSandbox, state => state[key]);
 
-export const isSandboxLoading = getProperty('sandboxPending');
-export const isFoundationLoading = getProperty('foundationPending');
-export const areSlidesLoading = getProperty('slidesPending');
-export const getSandboxError = getProperty('sandboxError');
-export const getSandboxData = getProperty('sandbox');
-export const getFoundations = getProperty('foundations');
-export const getFoundationError = getProperty('foundationError');
-export const getSelectedPackage = getProperty('selectedPackage');
+export const isSandboxLoading = getSandboxProperty('sandboxPending');
+export const isFoundationLoading = getSandboxProperty('foundationPending');
+export const areSlidesLoading = getSandboxProperty('slidesPending');
+export const getSandboxError = getSandboxProperty('sandboxError');
+export const getSandboxData = getSandboxProperty('sandbox');
+export const getFoundations = getSandboxProperty('foundations');
+export const getFoundationError = getSandboxProperty('foundationError');
+export const getSelectedPackage = getSandboxProperty('selectedPackage');
 export const getPackages = getSandboxProperty('packages');
-export const getSlidesSuccess = getProperty('slidesSuccess');
-export const isAnyError = getProperty('foundationError') || getProperty('slidesError');
-export const getSelectedFoundation = getProperty('selectedFoundation');
-export const getSelectedSlides = getProperty('selectedSlide');
+export const getSlidesSuccess = getSandboxProperty('slidesSuccess');
+export const isAnyError = getSandboxProperty('foundationError') || getSandboxProperty('slidesError');
+export const getSelectedFoundation = getSandboxProperty('selectedFoundation');
+export const getSelectedSlides = getSandboxProperty('selectedSlide');
 export const isAllSandboxLoading = isFoundationLoading || areSlidesLoading;
 
 
 export const getSelectedPackageData = createSelector(
-  getState,
-  state => state.sandbox.packages && state.sandbox.packages[state.selectedPackage]
+  getSandboxData,
+  getSelectedPackage,
+  (data, selectedPackage) => data.packages && data.packages[selectedPackage]
 );
 export const getFoundationData = createSelector(
-  getSandbox,
+  getSandboxData,
   getSelectedFoundation,
   (sandbox, foundation) => sandbox.foundations[foundation]
 );
 
 export const getSlidesData = createSelector(
-  getSandbox,
+  getSandboxData,
   getSelectedSlides,
   (sandbox, slides) => isArray(slides) ? slides.map(slide => sandbox.slides[slide]) : [sandbox.slides[slides]]
 );
 
 export const getSelectedFoundationData = createSelector(
-  getState,
-  state => state.foundationData
+  getSandbox,
+  sandbox => sandbox.foundationData
 );
 
 export const getSelectedSlidesData = createSelector(
-  getState,
-  state => state.slidesData
+  getSandbox,
+  sandbox => sandbox.slidesData
 );
 
 
