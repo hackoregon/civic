@@ -48,27 +48,26 @@ export class NeighborhoodsThroughTheAges extends React.Component {
       selectedNeighborhoodData,
     } = this.props;
 
-    if (isLoading) {
-      return <div className={cardLoading}>Loading...</div>;
-    } else if (!neighborhoods) {
-      return <div className={cardError}>{error ? `API ${error}` : 'Could not render Neighborhoods Through The Ages.'}</div>;
-    }
-
     const neighborhoodSubtitle = !!selectedNeighborhood && ` - ${titleCase(selectedNeighborhood)}`;
 
     return (
       <CivicStoryCard
         title="Neighborhoods Through the Ages"
         slug="neighborhoods-through-the-ages"
+        loading={isLoading}
+        error={error}
       >
         <p>
         Between the years of 2006 to 2016, for each neighborhood in Portland, Oregon, registered voters have been grouped into the age categories, 18- 25, 26-32, 33-39, 40-49, and 50+. Their residencies are plotted over time to gain insight into the age range and movement of registered voters in Portland neighborhoods.
         </p>
-        <Dropdown
+
+        { !!selectedNeighborhood &&
+          <Dropdown
           value={selectedNeighborhood}
-          onChange={event => this.props.setNeighborhood(event)}
+          onChange={event => event && this.props.setNeighborhood(event)}
           options={neighborhoods}
-        />
+          />
+        }
 
         { !!selectedNeighborhoodData &&
           <LineChart

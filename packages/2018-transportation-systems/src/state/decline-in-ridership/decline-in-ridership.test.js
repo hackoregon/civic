@@ -95,6 +95,7 @@ describe('ridership-over-time', () => {
         type: actions.API_SUCCESS,
         payload,
       })).to.eql({
+        error: null,
         pending: false,
         data: payload,
       });
@@ -107,6 +108,7 @@ describe('ridership-over-time', () => {
       })).to.eql({
         pending: false,
         error: payload,
+        data: null,
       });
     });
   });

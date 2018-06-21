@@ -50,19 +50,27 @@ const HorizontalBarChart = ({
   const dataHeight = (bars * barHeight) + (spaces * spaceHeight);
   const additionalHeight = padding.bottom + padding.top;
 
+  const minValue = Math.min(0, ...data.map(d => d[dataValue]));
+
+
+  const NegativeAwareTickLabel = props => (
+    <VictoryLabel dx={props.scale.y(minValue) - 20} {...props} textAnchor="end" />
+  );
+
   return (
     <ChartContainer title={title} subtitle={subtitle}>
       <VictoryChart
         height={dataHeight + additionalHeight}
         domain={domain}
         padding={padding}
-        domainPadding={0}
         theme={CivicVictoryTheme.civic}
       >
         <VictoryAxis
           dependentAxis
-          tickValues={barData.map(a => a[sortOrderKey])}
-          tickFormat={barData.map(a => dataLabelFormatter(a[dataLabel]))}
+          domainPadding={{ x: 20 }}
+          style={{
+            tickLabels: { fill: 'none' },
+          }}
           title="Y Axis"
         />
       {!minimalist && (
@@ -99,6 +107,25 @@ const HorizontalBarChart = ({
         <VictoryBar
           horizontal
           labelComponent={
+            <NegativeAwareTickLabel
+              x={0}
+              orientation="left"
+              theme={CivicVictoryTheme.civic}
+            />
+          }
+          domainPadding={0}
+          data={barData.map(d => ({
+            sortOrder: d[sortOrderKey],
+            dataValue: d[dataValue],
+            label: dataLabelFormatter(d[dataLabel])
+          }))}
+          x="sortOrder"
+          y="dataValue"
+          events={chartEvents}
+        />
+        <VictoryBar
+          horizontal
+          labelComponent={
             <VictoryTooltip
               x={325}
               y={0}
@@ -108,7 +135,15 @@ const HorizontalBarChart = ({
               theme={CivicVictoryTheme.civic}
             />
           }
-          data={barData.map(d => ({ sortOrder: d[sortOrderKey], dataValue: d[dataValue], label: `${d[dataLabel]}: ${dataValueFormatter(d[dataValue])}` }))}
+          domainPadding={0}
+          data={barData.map(d => ({
+            sortOrder: d[sortOrderKey],
+            dataValue: d[dataValue],
+            label: `${dataLabelFormatter(d[dataLabel])}: ${dataValueFormatter(d[dataValue])}`
+          }))}
+          style={{
+            data: { fill: 'none' },
+          }}
           title="Horizontal Bar Chart"
           x="sortOrder"
           y="dataValue"

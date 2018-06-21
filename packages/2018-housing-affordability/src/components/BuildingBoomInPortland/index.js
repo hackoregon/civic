@@ -13,7 +13,10 @@ export class BuildingBoomInPortland extends React.Component {
         title="A Building Boom in Portland"
         slug="building-boom-in-portland"
       >
-        <Placeholder issue="166" />
+        <p>The Portland Metro Area is experiencing a building boom as evidenced by building 
+          permits for new construction and ADUs. </p>
+    
+          <Placeholder issue="166" />
       </CivicStoryCard>
     );
   }

@@ -61,7 +61,6 @@ const demoMap = () => {
         extruded={extruded}
         getPosition={f => f.geometry.coordinates}
         onLayerClick={info => action('Layer clicked:')(info)}
-        onLayerHover={info => action('Layer')(info.layer.props.data[info.index].properties.NAME)}
       />
     </BaseMap>
   );
@@ -74,7 +73,6 @@ const tooltipMap = () => {
   const filled = boolean('Filled:', true);
   const wireframe = boolean('Wireframe:', true);
   const extruded = boolean('Extruded:', true);
-
   const mapboxStyle = selectV2('Mapbox Style', optionsStyle, optionsStyle['Label Maker']);
 
   return (
@@ -106,7 +104,6 @@ const tooltipMap = () => {
     </BaseMap>
   );
 };
-
 
 export default () => storiesOf(displayName, module)
   .addDecorator(checkA11y)
