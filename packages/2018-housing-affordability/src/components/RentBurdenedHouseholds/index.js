@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { loader, error, inputClass, emphasis } from '../css-utils';
 
-import { CivicStoryCard, Dropdown } from '@hackoregon/component-library';
+import { CivicStoryCard, Dropdown, Collapsable } from '@hackoregon/component-library';
 
 import {
   fetchAllRentBurdenCities,
@@ -78,6 +78,16 @@ export class RentBurdenedHouseholds extends React.Component {
             />
           </div>)}
         </section>
+        <Collapsable>
+          <Collapsable.Section hidden>
+            <p>
+              Moderately burdened renters have housing costs of more than 30% and up to 50% of household income,
+              and severely burdened renters have housing costs greater than 50%. In 2015, 24% of households were
+              severely burdened, and 23% were moderately burdened, meaning that 47% of all renter households were
+              burdened by housing costs.
+            </p>
+          </Collapsable.Section>
+        </Collapsable>
       </CivicStoryCard>
     );
   }

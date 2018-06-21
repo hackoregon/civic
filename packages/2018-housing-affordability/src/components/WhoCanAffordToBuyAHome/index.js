@@ -4,7 +4,7 @@ import { loader, error, inputClass, emphasis } from '../css-utils';
 
 import '@hackoregon/component-library/assets/vendor/react-select.min.css';
 
-import { CivicStoryCard, LineChart, Dropdown } from '@hackoregon/component-library';
+import { CivicStoryCard, LineChart, Dropdown, Collapsable } from '@hackoregon/component-library';
 
 import {
   fetchAllPTICities,
@@ -55,7 +55,7 @@ export class WhoCanAffordToBuyAHome extends React.Component {
       >
         <p>
           One metric that tracks housing affordability is the median home price-to-median
-          income ratio. This measure takes the median home price and divides by the median income ratio.
+          income ratio. This measure takes the median home price and divides by the median income.
           The idea is, how long will it take to pay off a home if 100% of the owner’s income was used.
           Higher ratios indicate that home prices are less affordable, while smaller ratios are indicative of
           greater affordability. For example, if your home cost $100,000 and your income is $50,000, the ratio
@@ -103,16 +103,20 @@ export class WhoCanAffordToBuyAHome extends React.Component {
             />
           </div>)}
           {isError && <ErrorMessage />}
-          <p>In the early 1990s, the Portland Metropolitan ratio was ~2.5%. This number steadily increased up
-           until 2006, reaching a high of 5.4%. Following the recession, the ratio showed a downturn; however starting
-            in 2011, it started to bounce back, and recent values are on par with the previous maximum.
-            In 2016, Portland ranked 349 out of 381 Metropolitan areas with regards to affordability.
-          </p>
-          <p>
-            While the rising cost of home ownership is clearly evident in Portland, this is happening
-            throughout the state. Several other areas are also experiencing challenges with regards to
-            increasing home prices, including Grants Pass, Corvallis, Medford, Bend-Redmond, Eugene, Albany, and Salem.
-          </p>
+          <Collapsable>
+            <Collapsable.Section>
+              <p>In the early 1990s, the Portland Metropolitan ratio was ~2.5. This number steadily increased up
+               until 2006, reaching a high of 5.25. Following the recession, the ratio showed a downturn; however starting
+                in 2011, it started to bounce back, and recent values are on par with the previous maximum.
+                In 2016, Portland ranked 349 out of 381 Metropolitan areas with regards to affordability.
+              </p>
+              <p>
+                While the rising cost of home ownership is clearly evident in Portland, this is happening
+                throughout the state. Several other areas are also experiencing challenges with regards to
+                increasing home prices, including Grants Pass, Corvallis, Medford, Bend-Redmond, Eugene, Albany, and Salem.
+              </p>
+            </Collapsable.Section>
+          </Collapsable>
         </section>
 
 
