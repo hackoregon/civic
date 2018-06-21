@@ -32,6 +32,7 @@ const Sandbox = ({
   updatePackage,
   updateSlide,
   defaultFoundation,
+  onFoundationClick,
 }) => {
   return (
     <div
@@ -109,6 +110,7 @@ const Sandbox = ({
         >
           <CivicSandboxMap
             mapLayers={layerData}
+            onClick={onFoundationClick}
           >
             <CivicSandboxTooltip />
           </CivicSandboxMap>
@@ -135,6 +137,7 @@ Sandbox.propTypes = {
   updateFoundation: React.PropTypes.func,
   updatePackage: React.PropTypes.func,
   updateSlide: React.PropTypes.func,
+  onFoundationClick: React.PropTypes.func,
   defaultFoundation: React.PropTypes.object,
   foundationData: React.PropTypes.object,
 };
