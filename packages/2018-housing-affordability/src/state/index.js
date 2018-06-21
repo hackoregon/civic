@@ -3,6 +3,7 @@ import { routerReducer } from 'react-router-redux';
 import affordableRentalUnits from './affordable-rental-units';
 import priceToIncome from './price-to-income';
 import rentalCrisis from './rental-crisis';
+import pnwSurge from './pnw-surge';
 
 export default function createReducer(asyncReducers) {
   return combineReducers({
@@ -10,6 +11,7 @@ export default function createReducer(asyncReducers) {
     affordableRentalUnits,
     priceToIncome,
     rentalCrisis,
+    pnwSurge,
     ...asyncReducers,
   });
 }
