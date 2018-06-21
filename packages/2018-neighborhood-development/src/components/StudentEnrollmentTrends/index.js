@@ -74,6 +74,11 @@ export class StudentEnrollmentTrends extends React.Component {
         loading={schoolListLoading || schoolDataLoading}
         error={(schoolListFailure || schoolDataFailure) && 'Could not load school data'}
       >
+        <p>Shifts in neighborhood demographics are mirrored in school populations. Portland
+           Public Schools (PPS) reports the total number of students enrolled at each school as well as 
+           race/ethnicity subgroups. Use this visualization to explore changes in subgroups of Portland 
+           Public School students.
+        </p>
         { (schoolList && selectedSchool && processedSchoolData) &&
           <div>
             <Dropdown
@@ -107,6 +112,23 @@ export class StudentEnrollmentTrends extends React.Component {
             />
           </div>
         }
+
+        <p>PPS assigns each student served 
+          one of  the race/ethnicity subgroups (shown above) using federal
+          guidelines. These guidelines indicate that student designated with
+          Hispanic ethnicity will be counted as Hispanic (regardless of whether 
+          the student also has a race designation). 
+        </p>
+        <p>Non-Hispanic students with more than one race designation are
+           counted as multiracial. Non-Hispanic students with a single race designation are counted as that racial subgroup. 
+        </p>
+        <p>Data collected prior to 2009-2010 was not included. Prior to the 2009-2010
+           school year, Asian and Native Hawaiian/Pacific Islander populations were not counted separately.
+        </p>
+        <p>Check out Peninsula, King or Bridger to see some schools that have had some noticeable 
+          changes in student subgroups. 
+        </p>
+
       </CivicStoryCard>
     );
   }

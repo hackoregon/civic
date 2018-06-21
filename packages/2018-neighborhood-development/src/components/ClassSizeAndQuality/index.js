@@ -10,9 +10,13 @@ export class ClassSizeAndQuality extends React.Component {
   render() {
     return (
       <CivicStoryCard
-        title="Class Size and Quality"
+        title="Classroom Experience"
         slug="class-size-and-quality"
       >
+        <p>
+        Teacher experience and classroom size impact a student’s learning experience. 
+        Below you can see how these two factors change over time in Portland Public Schools.
+        </p>
         <Placeholder issue="227"/>
       </CivicStoryCard>
     );
