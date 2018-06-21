@@ -9,7 +9,7 @@ export const getProactivePlanningRequest = createSelector(
 
 const processData = data => (data && data.length) && data.map(nbhd => ({
   displaced_percap: parseFloat(nbhd.displaced_percap),
-  census_response_rate: parseFloat(nbhd.census_response_rate) / 100,
+  census_response_rate: (100 - parseFloat(nbhd.census_response_rate)) / 100,
   total_population: parseFloat(nbhd.total_population),
   quadrant: nbhd.quadrant,
   resilienceLabel: titleCase(nbhd.name) + ' • Resilience',
