@@ -447,7 +447,7 @@ class LandingPage extends React.Component {
             <div className={logoWrapper}>
               <img src={logo} />
             </div>
-            <div className={missionStatementTitle}>{'Making Data Human'}</div>
+            <div className={missionStatementTitle}>{'Making public information public knowledge'}</div>
             <p className={missionStatement}>{`CIVIC is a powerful open platform using data in way that’s fundamentally built to serve people.`}</p>
             <p className={missionStatement}>{`We’re reimagining how to make information actionable through visual models, open standards, and creative frameworks that harness human collaboration at scale.`}</p>
             <div className={ctaStyle}><a href="#getStarted">Get started with your city &rsaquo;</a></div>
