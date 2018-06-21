@@ -11,7 +11,10 @@ import IncreasingSocialCapital from '../IncreasingSocialCapital';
 import ProactivePlanning from '../ProactivePlanning';
 
 const App = () => (
-  <PageLayout>
+  <PageLayout
+    teamTitle="Disaster Resiliance"
+    heroTitle="Assessing Risk and Prioritizing Action to Strengthen Resilience in the Face of a Natural Disaster"
+  >
     <ViolentShakingAndGroundDeformation />
     <SignificantStructuralDamage />
     <LifeAlteringEvent />
