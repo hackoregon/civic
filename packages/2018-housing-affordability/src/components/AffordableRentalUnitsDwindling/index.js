@@ -4,7 +4,7 @@ import { loader, error, gradientLabel, emphasis } from '../css-utils';
 
 import '@hackoregon/component-library/assets/vendor/react-select.min.css';
 
-import { HorizontalBarChart, CivicStoryCard, Dropdown, GradientScale } from '@hackoregon/component-library';
+import { HorizontalBarChart, CivicStoryCard, Dropdown, GradientScale, Collapsable } from '@hackoregon/component-library';
 import { percentage } from '@hackoregon/component-library/src/utils/formatters';
 
 import {
@@ -114,6 +114,21 @@ export class AffordableRentalUnitsDwindling extends React.Component {
           </div>)}
           {isError && <ErrorMessage />}
         </section>
+        <Collapsable>
+          <Collapsable.Section hidden>
+            <p>Every year, Harvard Joint Center on Housing publishes a report on the number of rental units available
+            at different price points. In the Portland metropolitan area, there has been a decrease in affordable units
+            and an increase in more expensive units. From 2005 to 2015, Portland added 53,847 rental units. Despite this
+            increase in rental housing, the area lost 39,645 units below $1000/month during this time. Units costing more
+            than $1000 saw an increase, and the number of rentals costing more than $1400 increased by 52,374.</p>
+
+            <p>If you are making near 100% of the median income in Portland, your family is likely able to find affordable
+            housing. However, if you make less than 100%, you’ll have a much harder time today than in 2005 finding an
+            affordable rent.</p>
+
+            <p>From 2005 to 2015, the Portland Metro lost 39,645 units below $1000/month.</p>
+          </Collapsable.Section>
+        </Collapsable>
       </CivicStoryCard>
     );
   }
