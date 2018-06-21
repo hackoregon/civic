@@ -10,11 +10,6 @@ background: #eee;
 text-transform: capitalize;
 font-weight: bold;
 `);
-const section = css(`
-padding: .5rem;
-font-size: .75rem;
-color: #333;
-`);
 
 const SandboxDrawer = ({
   data,
@@ -64,30 +59,41 @@ const SandboxDrawer = ({
         top: 120px;
         background: white;
 
+        .Select.is-open { position: relative; z-index: 1000; }
         .Select-menu-outer {
-          z-index: 2000;
+          z-index: 9999;
         }
       `)}
       >
-        <Dropdown
-          value={selectedSlide.join(',')}
-          options={options}
-          onChange={onChange}
-          multi
-          simpleValue
-        />
+        <div className={css('position: relative; z-index: 5000;')}>
+          <Dropdown
+            value={selectedSlide.join(',')}
+            options={options}
+            onChange={onChange}
+            multi
+            simpleValue
+          />
+        </div>
         {foundationData && <div>
           <div
             className={title}
           >{defaultFoundation.name}</div>
-          <div className={section}>
+          <div
+            className={css(`
+              padding: .5rem;
+              font-size: .75rem;
+              color: #333;
+              position: relative;
+              z-index: 5
+              `)}
+          >
             Date info driven by dropdown
             <SandboxDateSelector slide={defaultFoundation} selectedSlideData={foundationData} fetchSlideByDate={fetchSlideByDate} type="foundation" />
           </div>
         </div>
         }
 
-        {defaultSlides.map((slide) => {
+        {defaultSlides.map((slide, index) => {
           let selectedSlideData = {};
           if (slideData.length) {
             selectedSlideData = slideData.find((sData) => {
@@ -99,7 +105,15 @@ const SandboxDrawer = ({
               <div
                 className={title}
               >{slide.name}</div>
-              <div className={section}>
+              <div
+                className={css(`
+                  padding: .5rem;
+                  font-size: .75rem;
+                  color: #333;
+                  position: relative;
+                  z-index: ${5 - index}
+                  `)}
+              >
                 Date info driven by dropdown
                 <SandboxDateSelector selectedSlideData={selectedSlideData} slide={slide} fetchSlideByDate={fetchSlideByDate} type="slide" />
               </div>
