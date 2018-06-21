@@ -138,7 +138,7 @@ export class ServiceAndRidership extends React.Component {
 
     return (
       <CivicStoryCard
-        title="ServiceAndRidership"
+        title="Changing Service, Changing Ridership"
         slug="service-and-ridership"
         loading={isLoading}
         error={error}
