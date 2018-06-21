@@ -22,6 +22,8 @@ const HorizontalBarChart = ({
     dataLabel,
     domain,
     title,
+    loading,
+    error,
     subtitle,
     xLabel,
     yLabel,
@@ -58,7 +60,7 @@ const HorizontalBarChart = ({
   );
 
   return (
-    <ChartContainer title={title} subtitle={subtitle}>
+    <ChartContainer title={title} subtitle={subtitle} loading={loading} error={error}>
       <VictoryChart
         height={dataHeight + additionalHeight}
         domain={domain}
@@ -162,6 +164,8 @@ HorizontalBarChart.propTypes = {
   dataValue: PropTypes.string,
   dataLabel: PropTypes.string,
   domain: PropTypes.objectOf(PropTypes.array),
+  loading: PropTypes.bool,
+  error: PropTypes.string,
   title: PropTypes.string,
   subtitle: PropTypes.string,
   xLabel: PropTypes.string,

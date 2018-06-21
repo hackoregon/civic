@@ -22,6 +22,7 @@ const colors = [
   civicCategoricalColor3,
   civicCategoricalColor4,
   civicCategoricalColor5,
+  civicTertiary,
 ];
 
 const yellow200 = "#FFF59D";

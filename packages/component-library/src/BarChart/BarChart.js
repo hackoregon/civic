@@ -17,11 +17,11 @@ import { css } from 'emotion';
 import { chartEvents, getDefaultDomain } from '../utils/chartHelpers';
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
 
-const BarChart = ({ data, dataKey, dataValue, domain, title, subtitle, xLabel, yLabel, xNumberFormatter, yNumberFormatter, barWidth }) => {
+const BarChart = ({ data, dataKey, dataValue, domain, title, subtitle, xLabel, yLabel, xNumberFormatter, yNumberFormatter, barWidth, loading, error }) => {
   const chartDomain = domain || getDefaultDomain(data, dataKey, dataValue);
 
   return (
-    <ChartContainer title={title} subtitle={subtitle}>
+    <ChartContainer title={title} subtitle={subtitle} loading={loading} error={error}>
       <VictoryChart
         padding={{ left: 90, right: 50, bottom: 50, top: 50 }}
         domainPadding={{ x: [40, 40], y: [0, 0] }}
@@ -86,6 +86,8 @@ const BarChart = ({ data, dataKey, dataValue, domain, title, subtitle, xLabel, y
 
 BarChart.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object),
+  loading: PropTypes.bool,
+  error: PropTypes.bool,
   dataKey: PropTypes.string,
   dataValue: PropTypes.string,
   domain: PropTypes.objectOf(PropTypes.array),
