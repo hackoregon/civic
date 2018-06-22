@@ -569,7 +569,7 @@ class LandingPage extends React.Component {
                 </div>
                 <div className={iconAndTextWrapper}>
                   <img src={twitterLogo} width="40" />
-                  <span>@civicsoftwarefoundation<br/> #CIVIC4Lyfe</span>
+                  <span><a href="https://twitter.com/civicsoftware">@civicsoftware</a><br/> #CIVIC4Lyfe</span>
                 </div>
               </div>
               <div className={leftThirdWrapper}>
