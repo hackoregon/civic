@@ -72,7 +72,7 @@ class Summary extends Component {
         </div>
 
         <div style={summaryFormat}>
-          Constact City Council members:
+          Contact City Council members:
         </div>
 
         <div style={summaryFormat}>
