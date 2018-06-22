@@ -9,7 +9,7 @@ import CollectionHero from '../Hero/CollectionHero'
 const defaultStyles = css`
   padding: 0px 24px;
 
-  p, h1, h2, h3, h4, h5, h6 {
+  & > p, & > h1, & > h2, & > h3, & > h4, & > h5, & > h6 {
     margin: auto;
   }
 
