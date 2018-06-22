@@ -556,7 +556,7 @@ class LandingPage extends React.Component {
             <div className={sectionContentWrapper}>
               <div className={cx(rightThirdWrapper, talkToUs)}>
                 <div className={listTitle}>Talk to us</div>
-                <div className={listSubTitle}><a href="mailto:hi@civicsoftwarefoundation.org">hi@civicsoftwarefoundation.org</a></div>
+                <div className={listSubTitle}><a href="mailto:hello@hackoregon.org">hello@hackoregon.org</a></div>
                 <div className={listTitle}>CIVIC launched to the world June 21st, 2018 at Hack Oregon’s live Demo Day in Portland, Oregon.</div>
                 <div className={listText}>Please be patient while our website is under construction and stay tuned as we are able to share new things from the CIVIC Software Foundation.</div>
                 <div className={iconAndTextWrapper}>
