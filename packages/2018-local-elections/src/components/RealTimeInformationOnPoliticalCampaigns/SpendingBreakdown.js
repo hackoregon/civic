@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { dollars } from '@hackoregon/component-library/src/utils/formatters';
+import { dollars, numeric } from '@hackoregon/component-library/src/utils/formatters';
 
 import { HorizontalBarChart } from '@hackoregon/component-library';
 
@@ -28,8 +28,9 @@ const SpendingBreakdown = ({ spending, loading }) => {
       yLabel="Spending"
       title="Spending breakdown"
       subtitle="Breakdown of spending..."
-      dataValueFormatter={dollars}
+      dataValueFormatter={numeric}
       height={300}
+      minimalist
     />
   );
 };
