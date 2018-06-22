@@ -15,7 +15,6 @@ const defaultMenu = [
       { name: 'Local Elections', path: '/cities/portland/elections' },
       { name: 'Neighborhood Development', path: '/cities/portland/neighborhood' },
       { name: 'Transportation Systems', path: '/cities/portland/transportation' },
-      { name: 'EXAMPLE Farmers Markets', path: '/cities/portland/farmers-markets' },
     ],
   },
   {
