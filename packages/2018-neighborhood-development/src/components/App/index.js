@@ -20,18 +20,18 @@ const App = () => (
     teamTitle="Neighborhood Development"
     heroTitle="Examining Local Patterns, Movement, and Our Sense of Place"
   >
-    <TheShapeOfANeighborhood />
-    <MagnitudeOfUrbanCampsiteSweeps />
-    <HumanImpactOfSweepingUrbanCampsites />
+    {/* <TheShapeOfANeighborhood /> */}
+    {/* <MagnitudeOfUrbanCampsiteSweeps /> */}
+    {/* <HumanImpactOfSweepingUrbanCampsites /> */}
     <ExploreUrbanCampsiteSweeps />
     <StudentEnrollmentTrends />
-    <VulnerableStudentPopulations />
+    {/* <VulnerableStudentPopulations /> */}
     <ClassSizeAndQuality />
-    <UnderstandingStaffCuts />
+    {/* <UnderstandingStaffCuts /> */}
     <NeighborhoodsThroughTheAges />
-    <ExploreAgeDemographics />
-    <VotersOnTheMove />
-    <DiveDeeperIntoNeighborhoodData />
+    {/* <ExploreAgeDemographics /> */}
+    {/* <VotersOnTheMove /> */}
+    {/* <DiveDeeperIntoNeighborhoodData /> */}
   </PageLayout>
 );
 
