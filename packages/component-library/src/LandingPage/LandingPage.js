@@ -510,7 +510,7 @@ class LandingPage extends React.Component {
                 <img src={brainMobile} />
               </div>
               <div className={contentRightContainer}>
-                <div className={listTitle}>Supporting People</div>
+                <div className={listTitle}>Supporting Technology</div>
                 <div className={listSubTitle}>Open Data</div>
                 <p className={listText}>Lowering the barrier to entry for information to be accessible and secure from the internet so data can be actionable in many ways.</p>
                 <div className={listSubTitle}>Open Code</div>
