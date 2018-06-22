@@ -564,7 +564,7 @@ class LandingPage extends React.Component {
                   <span>Subscribe for updates!</span>
                 </div>
                 <div className={iconAndTextWrapper}>
-                  <a href="http://hackoregon.org/civicpdx"><button className={cx(buttonStyle, donateButton)}>Donate</button></a>
+                  <a href="https://secure.squarespace.com/checkout/donate?donatePageId=551721b2e4b057e153f5c1cc"><button className={cx(buttonStyle, donateButton)}>Donate</button></a>
                   <span>Help us continue to maintain and develop CIVIC.</span>
                 </div>
                 <div className={iconAndTextWrapper}>
