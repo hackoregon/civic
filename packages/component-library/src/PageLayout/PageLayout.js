@@ -23,6 +23,10 @@ const defaultStyles = css`
     &.transition {
       margin: 80px auto;
     }
+
+    &.small {
+      font-size: 14px;
+    }
   }
 `;
 
