@@ -1,4 +1,4 @@
-import apiAdapter from '../api-adapter';
+import apiAdapter from '../fetch-adapter';
 import actionEmitter from '../api-adapter-action-emitter';
 
 export const API_START =
@@ -12,7 +12,7 @@ export const UrbanCampsiteSweepsByWeekStart = actionEmitter(API_START);
 export const UrbanCampsiteSweepsByWeekSuccess = actionEmitter(API_SUCCESS);
 export const UrbanCampsiteSweepsByWeekError = actionEmitter(API_ERROR);
 
-const endpoint = 'http://service.civicpdx.org/neighborhood-development/api/camp_sweeps/bytime?timeframe=week';
+const endpoint = 'api/camp_sweeps/bytime?timeframe=month';
 
 export const fetchUrbanCampsiteSweepsByWeek = apiAdapter(
   endpoint,

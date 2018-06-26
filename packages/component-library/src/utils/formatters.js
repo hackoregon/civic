@@ -1,4 +1,5 @@
 import { format } from 'd3-format';
+import { timeFormat } from 'd3-time-format';
 import { startCase, toLower } from 'lodash';
 
 
@@ -42,3 +43,4 @@ export const dollars = d => `$${d}`;
 
 export const titleCase = str => startCase(toLower(str));
 export const unformatted = d => d;
+export const monthYear = timeFormat("%B %Y");
