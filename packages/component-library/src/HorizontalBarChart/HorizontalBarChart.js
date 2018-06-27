@@ -72,6 +72,7 @@ const HorizontalBarChart = ({
           domainPadding={{ x: 20 }}
           style={{
             tickLabels: { fill: 'none' },
+            grid: { stroke: 'none' },
           }}
           title="Y Axis"
         />

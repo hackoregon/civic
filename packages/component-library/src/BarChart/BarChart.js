@@ -31,6 +31,7 @@ const BarChart = ({ data, dataKey, dataValue, domain, title, subtitle, xLabel, y
       >
         <VictoryAxis
           tickFormat={xNumberFormatter}
+          style={{ grid: { stroke: 'none' } }}
           title="X Axis"
         />
         <VictoryAxis

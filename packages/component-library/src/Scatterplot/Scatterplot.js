@@ -91,15 +91,6 @@ const Scatterplot = ({
         <VictoryAxis
           dependentAxis
           animate={{ onEnter: { duration: 500 } }}
-          style={{
-            grid: {
-              ...CivicVictoryTheme.civic.axis.style.grid,
-              stroke: t =>
-                t < chartDomain.y[1]
-                  ? CivicVictoryTheme.civic.axis.style.grid.stroke
-                  : 'none',
-            },
-          }}
           tickFormat={y => yNumberFormatter(y)}
           title="Y Axis"
           invertAxis={invertY}
