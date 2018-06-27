@@ -15,21 +15,6 @@ import {
   formatDateData,
 } from '../../state/magnitude-of-urban-campsite-sweeps/selectors';
 
-const cardLoading = css`
-  width: 100%;
-  padding: 50px;
-  text-align: center;
-  background: #EEE;
-`;
-
-const cardError = css`
-  width: 100%;
-  padding: 50px;
-  text-align: center;
-  background: #FDD;
-  border: 1px solid #C99;
-`;
-
 export class MagnitudeOfUrbanCampsiteSweeps extends React.Component {
   componentDidMount() {
     this.props.init();
@@ -40,19 +25,14 @@ export class MagnitudeOfUrbanCampsiteSweeps extends React.Component {
       isLoading,
       error,
       magnitudeOfUrbanCampsiteSweeps,
-      // formattedDateData,
     } = this.props;
-
-    if (isLoading) {
-      return <div className={cardLoading}>Loading...</div>;
-    } else if (!magnitudeOfUrbanCampsiteSweeps) {
-      return <div className={cardError}>{error ? `API ${error}` : 'Could not render Magnitude of Urban Campsite Sweeps.'}</div>;
-    }
 
     return (
       <CivicStoryCard
         title="Magnitude of Urban Campsite Sweeps"
         slug="magnitude-of-urban-campsite-sweeps"
+        loading={isLoading}
+        error={error}
       >
         <Collapsable>
           <Collapsable.Section>
