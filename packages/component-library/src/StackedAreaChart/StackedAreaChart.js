@@ -127,17 +127,6 @@ const StackedAreaChart = ({
         <VictoryAxis
           dependentAxis
           animate={{ onEnter: { duration: 500 } }}
-          style={{
-            // Don't render the top y-axis grid line
-            // TODO: Possibly move this to theme
-            grid: {
-              ...CivicVictoryTheme.civic.axis.style.grid,
-              stroke: t =>
-                t < chartDomain.y[1]
-                  ? CivicVictoryTheme.civic.axis.style.grid.stroke
-                  : 'none',
-            },
-          }}
           tickFormat={y => yNumberFormatter(y)}
           title="Y Axis"
         />
