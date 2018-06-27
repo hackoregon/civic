@@ -21,8 +21,8 @@ const App = () => (
     heroTitle="Examining Local Patterns, Movement, and Our Sense of Place"
   >
     {/* <TheShapeOfANeighborhood /> */}
-    {/* <MagnitudeOfUrbanCampsiteSweeps /> */}
-    {/* <HumanImpactOfSweepingUrbanCampsites /> */}
+    <MagnitudeOfUrbanCampsiteSweeps />
+    <HumanImpactOfSweepingUrbanCampsites />
     <ExploreUrbanCampsiteSweeps />
     <StudentEnrollmentTrends />
     {/* <VulnerableStudentPopulations /> */}
