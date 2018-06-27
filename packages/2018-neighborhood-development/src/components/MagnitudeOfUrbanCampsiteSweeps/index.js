@@ -12,7 +12,6 @@ import {
   isMagnitudeOfUrbanCampsiteSweepsPending,
   catchMagnitudeOfUrbanCampsiteSweepsErrors,
   getMagnitudeOfUrbanCampsiteSweepsData,
-  formatDateData,
 } from '../../state/magnitude-of-urban-campsite-sweeps/selectors';
 
 export class MagnitudeOfUrbanCampsiteSweeps extends React.Component {
@@ -78,7 +77,6 @@ export default connect(
     isLoading: isMagnitudeOfUrbanCampsiteSweepsPending(state),
     error: catchMagnitudeOfUrbanCampsiteSweepsErrors(state),
     magnitudeOfUrbanCampsiteSweeps: getMagnitudeOfUrbanCampsiteSweepsData(state),
-    // formattedDateData: formatDateData(state),
   }),
   dispatch => ({
     init() {
