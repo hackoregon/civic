@@ -1,6 +1,5 @@
 import { createSelector } from 'reselect';
 import { rootState } from '../selectors';
-import shortDate from '@hackoregon/component-library/src/utils/formatters';
 
 export const getMagnitudeOfUrbanCampsiteSweepsRequest = createSelector(
   rootState,
