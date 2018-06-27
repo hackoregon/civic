@@ -32,7 +32,7 @@ export class MagnitudeOfUrbanCampsiteSweeps extends React.Component {
         title="Magnitude of Urban Campsite Sweeps"
         slug="magnitude-of-urban-campsite-sweeps"
         loading={isLoading}
-        error={error}
+        error={error && 'Could not load sweeps data'}
       >
         <Collapsable>
           <Collapsable.Section>

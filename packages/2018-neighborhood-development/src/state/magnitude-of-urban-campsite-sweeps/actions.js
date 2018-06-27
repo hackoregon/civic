@@ -19,6 +19,6 @@ export const fetchUrbanCampsiteSweepsByWeek = apiAdapter(
   {
     start: UrbanCampsiteSweepsByWeekStart,
     success: UrbanCampsiteSweepsByWeekSuccess,
-    error: UrbanCampsiteSweepsByWeekError,
+    failure: UrbanCampsiteSweepsByWeekError,
   }
 );
