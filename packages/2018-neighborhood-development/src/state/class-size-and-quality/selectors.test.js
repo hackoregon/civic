@@ -8,8 +8,8 @@ import {
 describe('class-size-and-quality selectors', () => {
   describe('getDataForSelectedYear', () => {
     it('returns the data for the selected year', () => {
-      const dataFor2017 = { class_size: 1, teacher_experience: 1, type: 'E', year: 2017 };
-      const dataFor2018 = { class_size: 1, teacher_experience: 1, type: 'E', year: 2018 };
+      const dataFor2017 = { name: 'Edison', class_size: 1, teacher_experience: 1, type: 'E', year: 2017 };
+      const dataFor2018 = { name: 'Edison', class_size: 1, teacher_experience: 1, type: 'E', year: 2018 };
 
       const result = getDataForSelectedYear({
         classSizeAndQuality: {
@@ -26,6 +26,7 @@ describe('class-size-and-quality selectors', () => {
           classSize: 1,
           teacherExperience: 1,
           type: 'Elementary School',
+          combinedLabel: 'Edison • Experience',
         },
       ]);
     });
