@@ -20,3 +20,8 @@ export const catchCampsiteSweepsErrors = createSelector(
   getCampsiteSweepsRequest,
   ({ error }) => error || error,
 );
+
+export const getCampsiteSweepsTimer = createSelector(
+  getCampsiteSweepsRequest,
+  ({ timer }) => timer,
+);
