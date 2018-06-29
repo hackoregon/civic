@@ -27,7 +27,7 @@ const App = () => (
     <StudentEnrollmentTrends />
     {/* <VulnerableStudentPopulations /> */}
     <ClassSizeAndQuality />
-    {/* <UnderstandingStaffCuts /> */}
+    <UnderstandingStaffCuts />
     <NeighborhoodsThroughTheAges />
     {/* <ExploreAgeDemographics /> */}
     {/* <VotersOnTheMove /> */}
