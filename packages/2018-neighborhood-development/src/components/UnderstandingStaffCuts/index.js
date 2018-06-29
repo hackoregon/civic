@@ -33,6 +33,7 @@ export class UnderstandingStaffCuts extends React.Component {
       },
       {
         header: 'Students per FTE Staff',
+        key: 'student-staff',
         columns:
         [
           {
@@ -59,6 +60,7 @@ export class UnderstandingStaffCuts extends React.Component {
       },
       {
         header: 'Student Demographics',
+        key: 'students-demo',
         columns:
         [
           {

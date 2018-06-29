@@ -16,9 +16,11 @@ const formatData = data => data.map(obj => ({
   free_meals_direct_cert_pct: (obj.free_meals_direct_cert_pct * 100).toFixed(1),
 }));
 
+const arrToObj = arr => arr.reduce((obj, cur, i) => { return { ...obj, [i]: cur }; }, {});
+
 export const getUnderstandingStaffCutsData = createSelector(
   getUnderstandingStaffCutsRequest,
-  ({ data }) => data && formatData(data.results),
+  ({ data }) => data && arrToObj(formatData(data.results)),
 );
 
 export const isUnderstandingStaffCutsPending = createSelector(
