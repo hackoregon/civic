@@ -6,25 +6,14 @@ export const getDriversOfParticipationRequest = createSelector(
   ({ driversOfParticipation }) => driversOfParticipation,
 );
 
+const calcLabels = arr => arr.map(obj => ({
+  ...obj,
+  combinedLabel: `Line ${obj.route_id} - ${obj.year} • Frequency Change`,
+}));
+
 export const getDriversOfParticipationData = createSelector(
   getDriversOfParticipationRequest,
-  ({ data }) => data && data.data.results.filter(obj => obj.year > 2012),
-  // ({ data }) => ((data || {}).data) && data.data.map(yearObj => ({
-  //   type: 'Weekday',
-  //   year: yearObj.year,
-  //   ons: yearObj.weekday_sum_ons / 5 / 52,
-  // }
-  // )).concat(data.data.map(yearObj => ({
-  //   type: 'Saturday',
-  //   year: yearObj.year,
-  //   ons: yearObj.saturday_sum_ons / 52,
-  // }
-  // ))).concat(data.data.map(yearObj => ({
-  //   type: 'Sunday',
-  //   year: yearObj.year,
-  //   ons: yearObj.sunday_sum_ons / 52,
-  // }
-  // )))
+  ({ data }) => data && calcLabels(data.data.results.filter(obj => obj.year > 2012)),
 );
 
 export const isDriversOfParticipationPending = createSelector(
