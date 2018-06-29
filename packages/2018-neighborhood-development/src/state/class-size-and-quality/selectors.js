@@ -15,6 +15,7 @@ const getFormattedData = (data, selectedYear) => (
       classSize: item.class_size,
       teacherExperience: item.teacher_experience,
       type: typeMap[item.type],
+      combinedLabel: `${item.name} • Experience`,
     }))
   );
 
