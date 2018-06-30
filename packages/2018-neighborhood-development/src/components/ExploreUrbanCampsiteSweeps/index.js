@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { css } from 'emotion';
+import { min, max } from 'lodash';
 
 import { CivicStoryCard, Collapsable, BaseMap, ScatterPlotMap, Button, ChartContainer } from '@hackoregon/component-library';
 import { contextualDesc, belowFoldOne, belowFoldTwo } from './text';
@@ -10,13 +11,13 @@ import { fetchCampsiteSweeps, incrementTimer } from '../../state/explore-urban-c
 import {
   isCampsiteSweepsPending,
   catchCampsiteSweepsErrors,
-  getCampsiteSweepsData,
-  getCampsiteSweepsTimer,
+  getCampsiteSweepsDataByTime,
+  getCampsiteSweepsDateRange,
 } from '../../state/explore-urban-campsite-sweeps/selectors';
 
 const LAT = 45.5231;
 const LONG = -122.6765;
-const ZOOM = 9.5;
+const ZOOM = 10.5;
 
 export class ExploreUrbanCampsiteSweeps extends React.Component {
   componentDidMount() {
@@ -29,7 +30,6 @@ export class ExploreUrbanCampsiteSweeps extends React.Component {
       error,
       data,
       timer,
-      play,
     } = this.props;
 
     const scatterplot = !data
@@ -54,8 +54,7 @@ export class ExploreUrbanCampsiteSweeps extends React.Component {
           <Collapsable.Section>
             <div>
               <p>{contextualDesc}</p>
-              <Button onClick={play}>Play</Button>
-              <p>{timer}</p>
+              <h2>{timer}</h2>
               <BaseMap
                 initialLongitude={LONG}
                 initialLatitude={LAT}
@@ -92,15 +91,13 @@ export default connect(
   state => ({
     isLoading: isCampsiteSweepsPending(state),
     error: catchCampsiteSweepsErrors(state),
-    data: getCampsiteSweepsData(state),
-    timer: getCampsiteSweepsTimer(state),
+    data: getCampsiteSweepsDataByTime(state),
+    timer: getCampsiteSweepsDateRange(state),
   }),
   dispatch => ({
     init() {
       dispatch(fetchCampsiteSweeps());
-    },
-    play() {
-      setInterval(() => dispatch(incrementTimer(1)), 1000);
+      setInterval(() => dispatch(incrementTimer(1)), 800);
     },
   }),
 )(ExploreUrbanCampsiteSweeps);
