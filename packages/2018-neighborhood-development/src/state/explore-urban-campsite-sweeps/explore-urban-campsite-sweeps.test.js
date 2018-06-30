@@ -51,7 +51,8 @@ describe('explore-urban-campsite-sweeps', () => {
       pending: false,
       error: null,
       data: null,
-      timer: null,
+      timer: 0,
+      max_timer: 18,
     };
     const payload = { stu: 'ff' };
 
@@ -66,7 +67,6 @@ describe('explore-urban-campsite-sweeps', () => {
         pending: true,
         error: null,
         data: null,
-        timer: null,
       });
     });
 
