@@ -1,7 +1,13 @@
 import React from 'react';
+import { css } from 'emotion';
+
+const pdfClass = css`
+  width: 100%;
+  height:calc(100vh - 70px);
+`;
 
 const PDF = ({ url }) => (
-  <object data={url} type="application/pdf" width="600" height="500">
+  <object className={pdfClass} data={url} type="application/pdf">
     <a href={url}>{url}</a>
   </object>
 );
