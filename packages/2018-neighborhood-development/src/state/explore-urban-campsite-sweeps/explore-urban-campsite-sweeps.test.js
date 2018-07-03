@@ -67,28 +67,34 @@ describe('explore-urban-campsite-sweeps', () => {
         pending: true,
         error: null,
         data: null,
+        timer: 0,
+        max_timer: 18,
       });
     });
 
     it('should handle API_SUCCESS', () => {
-      expect(reducer({ pending: true, error: null, data: null }, {
+      expect(reducer({ pending: true, error: null, data: null, timer: 0, max_timer: 18 }, {
         type: actions.API_SUCCESS,
         payload,
       })).to.eql({
         pending: false,
         data: payload,
         error: null,
+        timer: 0,
+        max_timer: 18,
       });
     });
 
     it('should handle API_ERROR', () => {
-      expect(reducer({ pending: true, error: null, data: null }, {
+      expect(reducer({ pending: true, error: null, data: null, timer: 0, max_timer: 18 }, {
         type: actions.API_ERROR,
         payload,
       })).to.eql({
         data: null,
         pending: false,
         error: payload,
+        timer: 0,
+        max_timer: 18,
       });
     });
   });
