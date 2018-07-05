@@ -27,7 +27,7 @@ const App = () => (
     <RentBurdenedHouseholds />
     <p className="transition">24% of all Portland Metro households were severely burdened in 2015</p>
     <PortlandNeedsAffordableRentalUnits />
-    <PullQuote quoteText="The Portland region needs 78,806 NEW affordable units" />
+    <PullQuote quoteText="The Portland region needs 78,806 new affordable units" />
     <WhoCanAffordToBuyAHome />
     <p className="transition">In 2016, Portland metro ranked in the bottom 10% of metropolitan areas in regards to home ownership affordability.</p>
     <PacificNorthwestTopsNationInSurgingHomePrices />
