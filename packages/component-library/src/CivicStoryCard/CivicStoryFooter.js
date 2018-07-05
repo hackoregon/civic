@@ -51,13 +51,6 @@ export default class StoryFooter extends Component {
     this.setState({ copied: true });
   }
 
-  routeOrUndefined = () => {
-    const slug = this.props.slug;
-    return `${window.location.origin}/cards/${slug}` === window.location.href
-    ? ''
-    : `/cards/${slug}`;
-  }
-
   render() {
     const slug = this.props.slug;
     const source = this.props.source;
