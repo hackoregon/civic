@@ -73,6 +73,7 @@ export class ClassSizeAndQuality extends React.Component {
           <Scatterplot
             data={selectedYearData}
             dataKey="teacherExperience"
+            dataKeyLabel="combinedLabel"
             dataValue="classSize"
             dataSeries="type"
             xLabel="Experience"

@@ -40,6 +40,7 @@ The Relationship between Service Availability and the Change in Ridership is com
             xLabel="Frequency Change"
             yLabel="Ridership Change"
             dataKey="frequency_change"
+            dataKeyLabel="combinedLabel"
             dataValue="ridership_change"
             dataSeries="year"
             xNumberFormatter={percentage}
