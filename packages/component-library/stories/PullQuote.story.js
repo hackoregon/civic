@@ -27,11 +27,21 @@ const altDemo = () => (
   />
 );
 
+const urlDemo = () => (
+  <PullQuote
+    quoteText={quoteText}
+    url={'http://www.hackoregon.org'}
+  />
+);
+
 const altTitle = 'without attribution';
+const urlTitle = 'with custom url';
 
 export default () => storiesOf(displayName, module)
   .add(
     title,
     demoCode
   )
-  .add(altTitle, altDemo);
+  .add(altTitle, altDemo)
+  .add(urlTitle, urlDemo);
+
