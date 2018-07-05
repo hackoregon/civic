@@ -27,9 +27,9 @@ const wrapperClass = css`
   margin: 1.5em auto;
 `;
 
-const PullQuote = ({ quoteText, quoteAttribution }) => (
+const PullQuote = ({ quoteText, quoteAttribution, url }) => (
   <div className={wrapperClass}>
-    <TwitterShareButton url={window.location.href} title={quoteText}>
+    <TwitterShareButton url={url || window.location.href} title={quoteText}>
       <blockquote className={quoteClass} >
           &#8220;{ quoteText }&#8221;<br />
         { quoteAttribution ? <span className={attributionClass}>&#8212; { quoteAttribution }</span> : null }
@@ -46,6 +46,7 @@ PullQuote.displayName = 'PullQuote';
 PullQuote.propTypes = {
   quoteText: React.PropTypes.string,
   quoteAttribution: React.PropTypes.string,
+  url: React.PropTypes.string,
 };
 
 export default PullQuote;
