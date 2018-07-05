@@ -4,9 +4,9 @@ import { TwitterShareButton, TwitterIcon } from 'react-share';
 
 const quoteClass = css`
   font-family: 'Merriweather', serif;
-  font-size: 40px;
+  font-size: 24px;
   color: #eb4d5f;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 `;
 
 const attributionClass = css`
@@ -22,9 +22,9 @@ const iconClass = css`
 `;
 
 const wrapperClass = css`
-  max-width: 1000px;
+  max-width: 700px;
   text-align: center;
-  margin: 1.5em auto;
+  margin: 80px auto;
 `;
 
 const PullQuote = ({ quoteText, quoteAttribution, url }) => (
@@ -35,7 +35,7 @@ const PullQuote = ({ quoteText, quoteAttribution, url }) => (
         { quoteAttribution ? <span className={attributionClass}>&#8212; { quoteAttribution }</span> : null }
       </blockquote>
       <div className={iconClass}>
-        <TwitterIcon size={40} round iconBgStyle={{ fill: '#eb4d5f' }} />
+        <TwitterIcon size={24} round iconBgStyle={{ fill: '#eb4d5f' }} />
       </div>
     </TwitterShareButton>
   </div>
