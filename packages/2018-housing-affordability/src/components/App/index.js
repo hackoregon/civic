@@ -1,7 +1,7 @@
 import React from 'react';
 
 import '@hackoregon/component-library/assets/global.styles.css';
-import { PageLayout } from '@hackoregon/component-library';
+import { PageLayout, PullQuote } from '@hackoregon/component-library';
 import BuildingBoomInPortland from '../BuildingBoomInPortland';
 import WhatDoesAffordabilityMean from '../WhatDoesAffordabilityMean';
 import AffordableRentalUnitsDwindling from '../AffordableRentalUnitsDwindling';
@@ -23,15 +23,15 @@ const App = () => (
     {/* <WhatDoesAffordabilityMean /> */}
     <p className="transition">In the Portland Region, affordable means a monthly housing budget of $1,375 for a family of four.</p>
     <AffordableRentalUnitsDwindling />
-    <p className="transition">From 2005 to 2015, the Portland Metro lost 39,645 units below $1000/month.</p>
+    <PullQuote quoteText="From 2005 to 2015, the Portland Metro lost 39,645 units below $1000/month." />
     <RentBurdenedHouseholds />
     <p className="transition">24% of all Portland Metro households were severely burdened in 2015</p>
     <PortlandNeedsAffordableRentalUnits />
-    <p className="transition">The Portland region needs 78,806 NEW affordable units</p>
+    <PullQuote quoteText="The Portland region needs 78,806 NEW affordable units" />
     <WhoCanAffordToBuyAHome />
     <p className="transition">In 2016, Portland metro ranked in the bottom 10% of metropolitan areas in regards to home ownership affordability.</p>
     <PacificNorthwestTopsNationInSurgingHomePrices />
-    <p className="transition">Portland had the second highest growth rate in home prices out of 120 U.S metro-areas in 2016, exceeded only by Seattle</p>
+    <PullQuote quoteText="Portland had the second highest growth rate in home prices out of 120 U.S metro-areas in 2016, exceeded only by Seattle" />
     <MeasuringMarketValueOfHomesInPortland />
     {/* <AffordabilityInAComplexHousingMarket /> */}
     {/* <ExploreHousingPolicyImplementation /> */}

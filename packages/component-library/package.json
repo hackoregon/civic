@@ -70,6 +70,7 @@
     "react-motion": "^0.4.7",
     "react-router": "^3.0.0",
     "react-selectize": "^2.1.0",
+    "react-share": "^2.2.0",
     "recharts": "^0.22.1",
     "victory": "^0.26.0",
     "webpack-blocks": "^1.0.0"
