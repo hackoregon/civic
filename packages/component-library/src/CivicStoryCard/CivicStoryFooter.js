@@ -50,16 +50,26 @@ export default class StoryFooter extends Component {
     this.setState({ copied: true });
   }
 
+  routeOrUndefined = () => {
+    const { slug } = this.props;
+    return `${window.location.origin}/cards/${slug}` === window.location.href
+    ? ''
+    : `/cards/${slug}`;
+  }
+
   render() {
     const { slug } = this.props;
     const shareTxt = this.state.copied ? 'Link copied!' : 'Share card'; // if copied, show Link copied, otherwise, show Share card
     const shareIcon = this.state.copied ? ICONS.check : ICONS.link;
+    const routeOrUndefined = `${window.location.origin}/cards/${slug}` === window.location.href
+      ? undefined
+      : `/cards/${slug}`;
+
     return (
       <div className={actionsClass}>
         <CivicStoryLink route={`/cards/${slug}`} icon={ICONS.info}>Source</CivicStoryLink>
         <div className={alignRight}>
-          <CivicStoryLink additionalClassName={alignRight} route={`/cards/${slug}`} icon={ICONS.eye}>View card</CivicStoryLink>
-          <CivicStoryLink additionalClassName={alignRight} action={this.handleCopy} icon={shareIcon}>{shareTxt}</CivicStoryLink>
+          <CivicStoryLink additionalClassName={alignRight} route={routeOrUndefined} action={this.handleCopy} icon={shareIcon}>{shareTxt}</CivicStoryLink>
         </div>
       </div>
     );
