@@ -160,7 +160,7 @@ export default {
         padding: horizontalBarPadding,
         stroke: "transparent",
         strokeWidth: 0,
-        width: 40,
+        width: 20,
       },
       labels: baseLabelStyles
     }

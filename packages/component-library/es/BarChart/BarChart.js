@@ -43,6 +43,7 @@ var BarChart = function BarChart(_ref) {
       },
       React.createElement(VictoryAxis, {
         tickFormat: xNumberFormatter,
+        style: { grid: { stroke: 'none' } },
         title: 'X Axis'
       }),
       React.createElement(VictoryAxis, {
