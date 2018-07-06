@@ -21,7 +21,7 @@ const App = () => (
     <p>Over the past 10 years, the United States housing market has been dominated by two major trends: a surging demand in the rental market and a crash in the rate of homeownership.  The 2017 State of the Nation's Housing Report by the Joint Center of Housing Studies at Harvard University shows these trends are particularly evident in Portland.</p>
     {/* <BuildingBoomInPortland /> */}
     {/* <WhatDoesAffordabilityMean /> */}
-    <PullQuote quoteText="In the Portland Region, affordable means a monthly housing budget of $1,375 for a family of four." />
+    {/* <PullQuote quoteText="In the Portland Region, affordable means a monthly housing budget of $1,375 for a family of four." /> */}
     <AffordableRentalUnitsDwindling />
     <PullQuote quoteText="From 2005 to 2015, the Portland Metro lost 39,645 units below $1000/month." />
     <RentBurdenedHouseholds />
