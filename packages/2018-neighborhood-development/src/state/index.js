@@ -5,6 +5,7 @@ import classSizeAndQuality from './class-size-and-quality';
 import magnitudeCampsiteSweeps from './magnitude-of-urban-campsite-sweeps';
 import exploreUrbanCampsiteSweeps from './explore-urban-campsite-sweeps';
 import studentEnrollmentTrends from './student-enrollment-trends';
+import understandingStaffCuts from './understanding-staff-cuts';
 
 export default function createReducer(asyncReducers) {
   return combineReducers({
@@ -14,6 +15,7 @@ export default function createReducer(asyncReducers) {
     neighborhoodAges,
     classSizeAndQuality,
     studentEnrollmentTrends,
+    understandingStaffCuts,
     ...asyncReducers,
   });
 }
