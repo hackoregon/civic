@@ -3,7 +3,7 @@ import { css } from 'emotion';
 
 const pdfClass = css`
   width: 100%;
-  height:calc(100vh - 70px);
+  height: 700px;
 `;
 
 const PDF = ({ url }) => (
