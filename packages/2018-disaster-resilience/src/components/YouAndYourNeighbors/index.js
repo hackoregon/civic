@@ -1,8 +1,13 @@
 import React from 'react';
 
-import { CivicStoryCard, Placeholder } from '@hackoregon/component-library';
+import { CivicStoryCard, Placeholder, BaseMap } from '@hackoregon/component-library';
+
+const LAT = 45.5231;
+const LONG = -122.6765;
+const ZOOM = 9.5;
 
 export class YouAndYourNeighbors extends React.Component {
+
   componentDidMount() {
     // initialize data here
   }
@@ -13,6 +18,14 @@ export class YouAndYourNeighbors extends React.Component {
         title="You and Your Neighbors in the Earthquake"
         slug="you-and-your-neighbors-in-the-earthquake"
       >
+        <div>
+          <BaseMap
+            initialLongitude={LONG}
+            initialLatitude={LAT}
+            initialZoom={ZOOM}
+          >
+          </BaseMap>
+        </div>
         <Placeholder issue="153" />
       </CivicStoryCard>
     );

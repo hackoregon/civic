@@ -21,7 +21,7 @@ const App = () => (
     {/* <SignificantStructuralDamage /> */}
     {/* <LifeAlteringEvent /> */}
     {/* <p classname="transition">The first step in increasing disaster resiliency for most Portlanders will be to understand what the estimated impact is within their immediate vicinity.</p> */}
-    {/* <YouAndYourNeighbors /> */}
+    <YouAndYourNeighbors />
     {/* <p className="transition">Preparedness and disaster resiliency go hand-in-hand.</p> */}
     <PullQuote
       quoteText="Does your family have a plan for earthquake preparedness? Here are the steps to help you get started."
