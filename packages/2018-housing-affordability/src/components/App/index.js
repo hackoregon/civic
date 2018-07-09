@@ -33,7 +33,7 @@ const App = () => (
     <PacificNorthwestTopsNationInSurgingHomePrices />
     <PullQuote quoteText="Portland had the second highest growth rate in home prices out of 120 U.S metro-areas in 2016, exceeded only by Seattle" />
     <MeasuringMarketValueOfHomesInPortland />
-    {/* <AffordabilityInAComplexHousingMarket /> */}
+    <AffordabilityInAComplexHousingMarket />
     {/* <ExploreHousingPolicyImplementation /> */}
   </PageLayout>
 );
