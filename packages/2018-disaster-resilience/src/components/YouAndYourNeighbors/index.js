@@ -6,6 +6,12 @@ const LAT = 45.5231;
 const LONG = -122.6765;
 const ZOOM = 9.5;
 
+const geocoderOptions = {
+  zoom: 18,
+  trackProximity: true,
+  placeholder: 'Enter your address',
+};
+
 export class YouAndYourNeighbors extends React.Component {
 
   componentDidMount() {
@@ -24,6 +30,7 @@ export class YouAndYourNeighbors extends React.Component {
             initialLatitude={LAT}
             initialZoom={ZOOM}
             geocoder
+            geocoderOptions={geocoderOptions}
           >
           </BaseMap>
         </div>

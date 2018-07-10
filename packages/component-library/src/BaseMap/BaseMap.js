@@ -80,6 +80,7 @@ class BaseMap extends Component {
       mapboxToken,
       geocoder,
       geocoderOptions,
+      mapGLOptions,
       children,
     } = this.props;
 
@@ -102,6 +103,7 @@ class BaseMap extends Component {
           mapboxApiAccessToken={mapboxToken}
           onViewportChange={viewport => this.onViewportChange(viewport)}
           ref={this.mapRef}
+          {...mapGLOptions}
         >
           <div className={navControl}>
             <NavigationControl
@@ -122,6 +124,7 @@ BaseMap.propTypes = {
   mapboxStyle: PropTypes.string,
   geocoder: PropTypes.bool,
   geocoderOptions: PropTypes.object,
+  mapGLOptions: PropTypes.object,
   children: PropTypes.node,
 };
 

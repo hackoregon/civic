@@ -33,7 +33,8 @@ const geocoderMap = () => {
     <BaseMap
       mapboxStyle={mapboxStyle}
       geocoder
-      geocoderOptions={{ placeholder: '🚀search to blast off✨', zoom: 18 }} // https://github.com/mapbox/mapbox-gl-geocoder/blob/master/API.md
+      geocoderOptions={{ placeholder: '🚀search to blast off✨', zoom: 18 }} // additional geocoder options https://github.com/mapbox/mapbox-gl-geocoder/blob/master/API.md
+      mapGLOptions={{ dragPan: false }} // additional react-map-gl options https://github.com/uber/react-map-gl/blob/master/src/components/interactive-map.js
     />
   );
 };
