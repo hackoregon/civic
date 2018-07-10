@@ -3,6 +3,8 @@ import MapGL, { NavigationControl } from 'react-map-gl';
 import Dimensions from 'react-dimensions';
 import { css } from 'emotion';
 import PropTypes from 'prop-types';
+import createRef from 'create-react-ref/lib/createRef';
+import Geocoder from 'react-map-gl-geocoder';
 import './mapbox-gl.css';
 
 const MAPBOX_TOKEN = 'pk.eyJ1IjoiaGFja29yZWdvbiIsImEiOiJjamk0MGZhc2cwNDl4M3FsdHAwaG54a3BnIn0.Fq1KA0IUwpeKQlFIoaEn_Q';
@@ -36,9 +38,11 @@ class BaseMap extends Component {
       tooltipInfo: null,
       x: null,
       y: null,
+      mounted: false,
     };
     this.onViewportChange = this.onViewportChange.bind(this);
     this.onHover = this.onHover.bind(this);
+    this.mapRef = createRef();
   }
 
   onViewportChange(viewport) {
@@ -55,12 +59,17 @@ class BaseMap extends Component {
     });
   }
 
+  componentDidMount() {
+    this.setState({ mounted: true }); // This may make sense here. Geocoder requires a valid ref to the MapGL component.
+  }
+
   render() {
     const {
       viewport,
       tooltipInfo,
       x,
       y,
+      mounted,
     } = this.state;
 
     viewport.width = this.props.containerWidth ? this.props.containerWidth : 500;
@@ -69,6 +78,7 @@ class BaseMap extends Component {
     const {
       mapboxStyle,
       mapboxToken,
+      geocoder,
       children,
     } = this.props;
 
@@ -90,6 +100,7 @@ class BaseMap extends Component {
           mapStyle={mapboxStyle}
           mapboxApiAccessToken={mapboxToken}
           onViewportChange={viewport => this.onViewportChange(viewport)}
+          ref={this.mapRef}
         >
           <div className={navControl}>
             <NavigationControl
@@ -97,6 +108,7 @@ class BaseMap extends Component {
               onViewportChange={viewport => this.onViewportChange(viewport)}
             />
           </div>
+          { (geocoder && mounted) && <Geocoder mapRef={{ current: this.mapRef.current }} mapboxApiAccessToken={mapboxToken} /> }
           { childrenLayers }
         </MapGL>
       </div>
@@ -107,11 +119,13 @@ class BaseMap extends Component {
 BaseMap.propTypes = {
   mapboxToken: PropTypes.string.isRequired,
   mapboxStyle: PropTypes.string,
+  geocoder: PropTypes.bool,
   children: PropTypes.node,
 };
 
 BaseMap.defaultProps = {
   mapboxStyle: "mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg",
   mapboxToken: "pk.eyJ1IjoiaGFja29yZWdvbiIsImEiOiJjamk0MGZhc2cwNDl4M3FsdHAwaG54a3BnIn0.Fq1KA0IUwpeKQlFIoaEn_Q",
+  geocoder: false,
 };
 export default Dimensions()(BaseMap)
