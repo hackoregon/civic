@@ -64,14 +64,15 @@ const HorizontalBarChart = ({
       <VictoryChart
         height={dataHeight + additionalHeight}
         domain={domain}
+        domainPadding={{ x: 20, y: 11 }}
         padding={padding}
         theme={CivicVictoryTheme.civic}
       >
         <VictoryAxis
           dependentAxis
-          domainPadding={{ x: 20 }}
           style={{
             tickLabels: { fill: 'none' },
+            ticks: { stroke: 'none' },
             grid: { stroke: 'none' },
           }}
           title="Y Axis"

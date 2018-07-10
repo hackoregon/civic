@@ -75,7 +75,7 @@ const App = () => (
         meat going to those channels, some farmers may choose to forgo the farmers market.
       </p>
     </section>
-    <section className={cx(sectionMarginMedium, sectionMaxWidthSmall)}>
+    <section className={sectionMarginMedium}>
       <FarmersMarketsOverTime />
     </section>
     <section className={cx(sectionBodyHeading, sectionMaxWidthSmall)}>

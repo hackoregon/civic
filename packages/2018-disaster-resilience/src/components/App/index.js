@@ -1,7 +1,7 @@
 import React from 'react';
 
 import '@hackoregon/component-library/assets/global.styles.css';
-import { PageLayout } from '@hackoregon/component-library';
+import { PageLayout, PullQuote } from '@hackoregon/component-library';
 import LifeAlteringEvent from '../LifeAlteringEvent';
 import ViolentShakingAndGroundDeformation from '../ViolentShakingAndGroundDeformation';
 import SignificantStructuralDamage from '../SignificantStructuralDamage';
@@ -20,11 +20,17 @@ const App = () => (
     {/* <ViolentShakingAndGroundDeformation /> */}
     {/* <SignificantStructuralDamage /> */}
     {/* <LifeAlteringEvent /> */}
-    <p>The first step in increasing disaster resiliency for most Portlanders will be to understand what the estimated impact is within their immediate vicinity.</p>
+    {/* <p classname="transition">The first step in increasing disaster resiliency for most Portlanders will be to understand what the estimated impact is within their immediate vicinity.</p> */}
     {/* <YouAndYourNeighbors /> */}
+    {/* <p className="transition">Preparedness and disaster resiliency go hand-in-hand.</p> */}
+    <PullQuote
+      quoteText="Does your family have a plan for earthquake preparedness? Here are the steps to help you get started."
+      url="http://civicplatform.org/cards/what-you-can-do-to-prepare-for-an-earthquake"
+    />
     <WhatYouCanDoToPrepare />
+    <p className="transition">Social capital is a statistic derived from measuring community engagement. Disaster resilience, measuring the ability for an entity to bounce back from a crisis and learn from it, increases dramatically when community members engage.</p>
     {/* <IncreasingSocialCapital /> */}
-    <p className="transition">Preparedness and disaster resiliency go hand-in-hand.</p>
+    <PullQuote quoteText="The #1 thing you can do to increase social capital is to meet your neighbors. Do you know 3 people within a 3 block radius of your house?" />
     <ProactivePlanning />
   </PageLayout>
 );

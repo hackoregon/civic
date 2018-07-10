@@ -36,6 +36,7 @@ import sandboxStory from './Sandbox.story';
 import packageSelectorBox from './PackageSelectorBox.story';
 import civicSandboxDashboardStory from './CivicSandboxDashboard.story';
 import stackedAreaChart from './StackedAreaChart.story';
+import pdfStory from './PDF.story';
 
 import '../assets/global.styles.css';
 
@@ -70,6 +71,7 @@ scatterPlotMapStory();
 landingPage();
 dataTable();
 pullQuoteStory();
+pdfStory();
 screenGridMapStory();
 pathMapStory();
 iconMapStory();
