@@ -59,8 +59,8 @@ class BaseMap extends Component {
     });
   }
 
-  componentDidMount() {
-    this.setState({ mounted: true }); // This may make sense here. Geocoder requires a valid ref to the MapGL component.
+  componentDidMount() { //Geocoder requires a ref to the map component
+    this.setState({ mounted: true });
   }
 
   render() {
