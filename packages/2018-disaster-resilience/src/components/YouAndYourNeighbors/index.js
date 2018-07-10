@@ -23,6 +23,7 @@ export class YouAndYourNeighbors extends React.Component {
             initialLongitude={LONG}
             initialLatitude={LAT}
             initialZoom={ZOOM}
+            geocoder
           >
           </BaseMap>
         </div>
