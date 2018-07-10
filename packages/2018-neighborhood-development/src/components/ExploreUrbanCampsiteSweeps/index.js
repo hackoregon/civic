@@ -29,8 +29,6 @@ export class ExploreUrbanCampsiteSweeps extends React.Component {
       data,
     } = this.props;
 
-    console.log('DATA???', data);
-
     const scatterplot = !data
     ? null
     : (

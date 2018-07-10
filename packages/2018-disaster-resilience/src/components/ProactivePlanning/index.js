@@ -49,7 +49,6 @@ export class ProactivePlanning extends React.Component {
               yNumberFormatter={percentage}
             />
           }
-          { console.log(proactivePlanning) }
       </CivicStoryCard>
     );
   }
