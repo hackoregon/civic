@@ -33,6 +33,7 @@ const geocoderMap = () => {
     <BaseMap
       mapboxStyle={mapboxStyle}
       geocoder
+      geocoderOptions={{ placeholder: '🚀search to blast off✨', zoom: 18 }} // https://github.com/mapbox/mapbox-gl-geocoder/blob/master/API.md
     />
   );
 };

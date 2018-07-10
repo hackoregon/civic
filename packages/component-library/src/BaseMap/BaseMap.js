@@ -79,6 +79,7 @@ class BaseMap extends Component {
       mapboxStyle,
       mapboxToken,
       geocoder,
+      geocoderOptions,
       children,
     } = this.props;
 
@@ -108,7 +109,7 @@ class BaseMap extends Component {
               onViewportChange={viewport => this.onViewportChange(viewport)}
             />
           </div>
-          { (geocoder && mounted) && <Geocoder mapRef={{ current: this.mapRef.current }} mapboxApiAccessToken={mapboxToken} /> }
+          { (geocoder && mounted) && <Geocoder mapRef={{ current: this.mapRef.current }} mapboxApiAccessToken={mapboxToken} options={{ ...geocoderOptions }} /> }
           { childrenLayers }
         </MapGL>
       </div>
@@ -120,6 +121,7 @@ BaseMap.propTypes = {
   mapboxToken: PropTypes.string.isRequired,
   mapboxStyle: PropTypes.string,
   geocoder: PropTypes.bool,
+  geocoderOptions: PropTypes.object,
   children: PropTypes.node,
 };
 
