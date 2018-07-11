@@ -22,7 +22,7 @@ const App = () => (
   >
     {/* <TheShapeOfANeighborhood /> */}
     <MagnitudeOfUrbanCampsiteSweeps />
-    {/* <HumanImpactOfSweepingUrbanCampsites /> */}
+    <HumanImpactOfSweepingUrbanCampsites />
     <ExploreUrbanCampsiteSweeps />
     <StudentEnrollmentTrends />
     {/* <VulnerableStudentPopulations /> */}
