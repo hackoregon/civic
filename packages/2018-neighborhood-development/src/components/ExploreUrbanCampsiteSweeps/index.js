@@ -22,6 +22,12 @@ const ZOOM = 10.5;
 export class ExploreUrbanCampsiteSweeps extends React.Component {
   componentDidMount() {
     this.props.init();
+    const timerID = this.props.startTimer();
+    this.setState({ timerID });
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.state.timerID);
   }
 
   render() {
@@ -79,7 +85,7 @@ export class ExploreUrbanCampsiteSweeps extends React.Component {
 ExploreUrbanCampsiteSweeps.displayName = 'ExploreUrbanCampsiteSweeps';
 ExploreUrbanCampsiteSweeps.propTypes = {
   init: PropTypes.func,
-  play: PropTypes.func,
+  startTimer: PropTypes.func,
   isLoading: PropTypes.bool,
   error: PropTypes.string,
   data: PropTypes.arrayOf(PropTypes.object),
@@ -97,7 +103,9 @@ export default connect(
   dispatch => ({
     init() {
       dispatch(fetchCampsiteSweeps());
-      setInterval(() => dispatch(incrementTimer(1)), 800);
+    },
+    startTimer() {
+      return setInterval(() => dispatch(incrementTimer(1)), 800);
     },
   }),
 )(ExploreUrbanCampsiteSweeps);
