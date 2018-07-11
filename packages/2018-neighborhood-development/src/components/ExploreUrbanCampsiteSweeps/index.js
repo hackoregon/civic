@@ -2,24 +2,32 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { css } from 'emotion';
+import { min, max } from 'lodash';
 
-import { CivicStoryCard, Collapsable, BaseMap, ScatterPlotMap, ChartContainer } from '@hackoregon/component-library';
+import { CivicStoryCard, Collapsable, BaseMap, ScatterPlotMap, Button, ChartContainer } from '@hackoregon/component-library';
 import { contextualDesc, belowFoldOne, belowFoldTwo } from './text';
 
 import { fetchCampsiteSweeps, incrementTimer } from '../../state/explore-urban-campsite-sweeps/actions';
 import {
   isCampsiteSweepsPending,
   catchCampsiteSweepsErrors,
-  getCampsiteSweepsData,
+  getCampsiteSweepsDataByTime,
+  getCampsiteSweepsDateRange,
 } from '../../state/explore-urban-campsite-sweeps/selectors';
 
 const LAT = 45.5231;
 const LONG = -122.6765;
-const ZOOM = 9.5;
+const ZOOM = 10.5;
 
 export class ExploreUrbanCampsiteSweeps extends React.Component {
   componentDidMount() {
     this.props.init();
+    const timerID = this.props.startTimer();
+    this.setState({ timerID });
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.state.timerID);
   }
 
   render() {
@@ -27,6 +35,7 @@ export class ExploreUrbanCampsiteSweeps extends React.Component {
       isLoading,
       error,
       data,
+      timer,
     } = this.props;
 
     const scatterplot = !data
@@ -51,6 +60,7 @@ export class ExploreUrbanCampsiteSweeps extends React.Component {
           <Collapsable.Section>
             <div>
               <p>{contextualDesc}</p>
+              <h2>{timer}</h2>
               <BaseMap
                 initialLongitude={LONG}
                 initialLatitude={LAT}
@@ -75,9 +85,11 @@ export class ExploreUrbanCampsiteSweeps extends React.Component {
 ExploreUrbanCampsiteSweeps.displayName = 'ExploreUrbanCampsiteSweeps';
 ExploreUrbanCampsiteSweeps.propTypes = {
   init: PropTypes.func,
+  startTimer: PropTypes.func,
   isLoading: PropTypes.bool,
   error: PropTypes.string,
   data: PropTypes.arrayOf(PropTypes.object),
+  timer: PropTypes.int,
 };
 
 export default connect(
@@ -85,14 +97,15 @@ export default connect(
   state => ({
     isLoading: isCampsiteSweepsPending(state),
     error: catchCampsiteSweepsErrors(state),
-    data: getCampsiteSweepsData(state),
+    data: getCampsiteSweepsDataByTime(state),
+    timer: getCampsiteSweepsDateRange(state),
   }),
   dispatch => ({
     init() {
       dispatch(fetchCampsiteSweeps());
     },
-    incrementTimer() {
-      dispatch(incrementTimer(5));
+    startTimer() {
+      return setInterval(() => dispatch(incrementTimer(1)), 800);
     },
   }),
 )(ExploreUrbanCampsiteSweeps);
