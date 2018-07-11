@@ -3,13 +3,21 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { css } from 'emotion';
 
-import { CivicStoryCard, Placeholder, BaseMap, IconMap } from '@hackoregon/component-library';
+import { CivicStoryCard, BaseMap, IconMap } from '@hackoregon/component-library';
 
-import { fetchYouAndYourNeighbors } from '../../state/you-and-your-neighbors/actions';
+import {
+  fetchYouAndYourNeighbors,
+  fetchYouAndYourNeighborsCoords,
+  youAndYourNeighborsSetCoords,
+} from '../../state/you-and-your-neighbors/actions';
 import {
   isYouAndYourNeighborsPending,
   catchYouAndYourNeighborsErrors,
   getYouAndYourNeighborsData,
+  isYouAndYourNeighborsCoordsPending,
+  catchYouAndYourNeighborsCoordsErrors,
+  getYouAndYourNeighborsCoordsData,
+  getSelectedCoords,
 } from '../../state/you-and-your-neighbors/selectors';
 
 const mapContainer = css`
@@ -37,7 +45,7 @@ const mapGLOptions = {
   touchZoom: false,
   touchRotate: false,
   keyboard: false,
-}
+};
 
 // Slide 016 - points of interest
 const poiIconMapping = {
@@ -99,8 +107,6 @@ const poiGetIconColor = f => f.properties.type === 'BEECN' ? [0, 0, 0, 255] :
   f.properties.type === 'Hospital' ? [30, 98, 189, 255] :
   [0, 0, 0, 255];
 
-const geocoderChange = viewport => console.log({ latitude: viewport.latitude, longitude: viewport.longitude });
-
 export class YouAndYourNeighbors extends React.Component {
 
   componentDidMount() {
@@ -111,14 +117,21 @@ export class YouAndYourNeighbors extends React.Component {
     const {
       isLoading,
       error,
-      youAndYourNeighbors,
+      data,
+      isCoordsLoading,
+      coordsError,
+      coordsData,
+      selectedCoords,
+      setCoordinates,
     } = this.props;
 
-    const overlay = !youAndYourNeighbors
+    const geocoderChange = viewport => setCoordinates({ latitude: viewport.latitude, longitude: viewport.longitude });
+
+    const overlay = !data
     ? null
     : (
       <IconMap
-        data={youAndYourNeighbors.features}
+        data={data.features}
         pickable
         opacity={0.5}
         iconAtlas="https://i.imgur.com/xgTAROe.png"
@@ -167,18 +180,30 @@ YouAndYourNeighbors.propTypes = {
   init: PropTypes.func,
   isLoading: PropTypes.bool,
   error: PropTypes.object,
-  youAndYourNeighbors: PropTypes.object,
+  data: PropTypes.object,
+  isCoordsLoading: PropTypes.bool,
+  coordsError: PropTypes.object,
+  coordsData: PropTypes.object,
+  setCoordinates: PropTypes.func,
 };
 // Connect this to the redux store when necessary
 export default connect(
   state => ({
     isLoading: isYouAndYourNeighborsPending(state),
     error: catchYouAndYourNeighborsErrors(state),
-    youAndYourNeighbors: getYouAndYourNeighborsData(state),
+    data: getYouAndYourNeighborsData(state),
+    isCoordsLoading: isYouAndYourNeighborsCoordsPending(state),
+    CoordsError: catchYouAndYourNeighborsCoordsErrors(state),
+    coordsData: getYouAndYourNeighborsCoordsData(state),
+    selectedCoords: getSelectedCoords(state),
   }),
   dispatch => ({
     init() {
       dispatch(fetchYouAndYourNeighbors());
+    },
+    setCoordinates(coordinates = {}) {
+      dispatch(fetchYouAndYourNeighborsCoords(coordinates));
+      dispatch(youAndYourNeighborsSetCoords(coordinates));
     },
   }),
 )(YouAndYourNeighbors);

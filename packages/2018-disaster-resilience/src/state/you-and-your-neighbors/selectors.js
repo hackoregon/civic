@@ -20,3 +20,23 @@ export const catchYouAndYourNeighborsErrors = createSelector(
   getYouAndYourNeighborsRequest,
   ({ error }) => error || error,
 );
+
+export const getYouAndYourNeighborsCoordsData = createSelector(
+  getYouAndYourNeighborsRequest,
+  ({ coordsData }) => coordsData,
+);
+
+export const isYouAndYourNeighborsCoordsPending = createSelector(
+  getYouAndYourNeighborsRequest,
+  ({ coordsPending }) => !!coordsPending,
+);
+
+export const catchYouAndYourNeighborsCoordsErrors = createSelector(
+  getYouAndYourNeighborsRequest,
+  ({ coordsError }) => coordsError || coordsError,
+);
+
+export const getSelectedCoords = createSelector(
+  getYouAndYourNeighborsRequest,
+  ({ selectedCoords }) => selectedCoords,
+);
