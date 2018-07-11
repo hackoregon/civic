@@ -30,7 +30,7 @@ const App = () => (
     <UnderstandingStaffCuts />
     <NeighborhoodsThroughTheAges />
     {/* <ExploreAgeDemographics /> */}
-    {/* <VotersOnTheMove /> */}
+    <VotersOnTheMove />
     {/* <DiveDeeperIntoNeighborhoodData /> */}
   </PageLayout>
 );
