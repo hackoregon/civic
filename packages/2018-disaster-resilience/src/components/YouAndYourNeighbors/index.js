@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { css } from 'emotion';
 
 import { CivicStoryCard, Placeholder, BaseMap, IconMap } from '@hackoregon/component-library';
 
@@ -11,15 +12,32 @@ import {
   getYouAndYourNeighborsData,
 } from '../../state/you-and-your-neighbors/selectors';
 
+const mapContainer = css`
+  display: flex;
+  justifyContent: center;
+  width: 500px;
+  margin: 0 auto;
+`;
+
 const LAT = 45.5231;
 const LONG = -122.6765;
-const ZOOM = 9.5;
+const ZOOM = 13.5;
 
 const geocoderOptions = {
-  zoom: 18,
+  zoom: 13.5,
   trackProximity: true,
   placeholder: 'Enter your address',
 };
+
+const mapGLOptions = {
+  scrollZoom: false,
+  dragPan: false,
+  dragRotate: false,
+  doubleClickZoom: false,
+  touchZoom: false,
+  touchRotate: false,
+  keyboard: false,
+}
 
 // Slide 016 - points of interest
 const poiIconMapping = {
@@ -81,6 +99,8 @@ const poiGetIconColor = f => f.properties.type === 'BEECN' ? [0, 0, 0, 255] :
   f.properties.type === 'Hospital' ? [30, 98, 189, 255] :
   [0, 0, 0, 255];
 
+const geocoderChange = viewport => console.log({ latitude: viewport.latitude, longitude: viewport.longitude });
+
 export class YouAndYourNeighbors extends React.Component {
 
   componentDidMount() {
@@ -103,7 +123,6 @@ export class YouAndYourNeighbors extends React.Component {
         opacity={0.5}
         iconAtlas="https://i.imgur.com/xgTAROe.png"
         iconMapping={poiIconMapping}
-        // sizeScale={poiIconZoomScale}
         iconSizeScale={poiIconZoomScale}
         getPosition={f => f.geometry === null ? [0, 0] : f.geometry.coordinates}
         getIcon={f => f.properties.type}
@@ -123,17 +142,21 @@ export class YouAndYourNeighbors extends React.Component {
       >
         <div>
         <p>It will be critical for individuals to understand their location relative to key resources immediately following an earthquake. The <a href="https://www.portlandoregon.gov/pbem/59630" target="_blank" rel="noopener noreferrer">BEECN site</a> is a place to go in Portland after a major earthquake to ask for emergency assistance or report severe damage/injury. Places like hospitals, fire stations and schools will be rallying areas for the community and crucial for recovery efforts. Input your address, or a friend/family member’s address below to generate a personalized map.</p>
-          <BaseMap
-            initialLongitude={LONG}
-            initialLatitude={LAT}
-            initialZoom={ZOOM}
-            geocoder
-            geocoderOptions={geocoderOptions}
-          >
-            {overlay}
-          </BaseMap>
+          <div className={mapContainer}>
+            <BaseMap
+              initialLongitude={LONG}
+              initialLatitude={LAT}
+              initialZoom={ZOOM}
+              navigation={false}
+              geocoder
+              geocoderOptions={geocoderOptions}
+              geocoderOnChange={geocoderChange}
+              mapGLOptions={mapGLOptions}
+            >
+              {overlay}
+            </BaseMap>
+          </div>
         </div>
-        <Placeholder issue="153" />
       </CivicStoryCard>
     );
   }

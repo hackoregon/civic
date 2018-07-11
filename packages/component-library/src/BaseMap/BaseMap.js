@@ -79,7 +79,9 @@ class BaseMap extends Component {
       mapboxStyle,
       mapboxToken,
       geocoder,
+      navigation,
       geocoderOptions,
+      geocoderOnChange,
       mapGLOptions,
       children,
     } = this.props;
@@ -106,12 +108,24 @@ class BaseMap extends Component {
           {...mapGLOptions}
         >
           <div className={navControl}>
+          { navigation &&
             <NavigationControl
               className={'NavigationControl'}
               onViewportChange={viewport => this.onViewportChange(viewport)}
             />
+          }
           </div>
-          { (geocoder && mounted) && <Geocoder mapRef={{ current: this.mapRef.current }} mapboxApiAccessToken={mapboxToken} options={{ ...geocoderOptions }} /> }
+          { (geocoder && mounted) &&
+            <Geocoder
+              mapRef={{ current: this.mapRef.current }}
+              mapboxApiAccessToken={mapboxToken}
+              onViewportChange={(viewport) => {
+                this.onViewportChange(viewport);
+                geocoderOnChange(viewport);
+              }}
+              options={{ ...geocoderOptions }}
+            />
+          }
           { childrenLayers }
         </MapGL>
       </div>
@@ -123,7 +137,9 @@ BaseMap.propTypes = {
   mapboxToken: PropTypes.string.isRequired,
   mapboxStyle: PropTypes.string,
   geocoder: PropTypes.bool,
+  navigation: PropTypes.bool,
   geocoderOptions: PropTypes.object,
+  geocoderOnChange: PropTypes.function,
   mapGLOptions: PropTypes.object,
   children: PropTypes.node,
 };
@@ -131,6 +147,7 @@ BaseMap.propTypes = {
 BaseMap.defaultProps = {
   mapboxStyle: "mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg",
   mapboxToken: "pk.eyJ1IjoiaGFja29yZWdvbiIsImEiOiJjamk0MGZhc2cwNDl4M3FsdHAwaG54a3BnIn0.Fq1KA0IUwpeKQlFIoaEn_Q",
+  navigation: true,
   geocoder: false,
 };
 export default Dimensions()(BaseMap)

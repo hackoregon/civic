@@ -33,8 +33,29 @@ const geocoderMap = () => {
     <BaseMap
       mapboxStyle={mapboxStyle}
       geocoder
-      geocoderOptions={{ placeholder: '🚀search to blast off✨', zoom: 18 }} // additional geocoder options https://github.com/mapbox/mapbox-gl-geocoder/blob/master/API.md
+      geocoderOptions={{ placeholder: '🚀search to blast off✨', zoom: 9.5 }} // additional geocoder options https://github.com/mapbox/mapbox-gl-geocoder/blob/master/API.md
+      geocoderOnChange={viewport => console.log(viewport)}
       mapGLOptions={{ dragPan: false }} // additional react-map-gl options https://github.com/uber/react-map-gl/blob/master/src/components/interactive-map.js
+    />
+  );
+};
+
+const staticMap = () => {
+  const mapboxStyle = selectV2('Mapbox Style', optionsStyle, optionsStyle['Hack Oregon Light']);
+
+  return (
+    <BaseMap
+      mapboxStyle={mapboxStyle}
+      navigation={false}
+      mapGLOptions={{
+        scrollZoom: false,
+        dragPan: false,
+        dragRotate: false,
+        doubleClickZoom: false,
+        touchZoom: false,
+        touchRotate: false,
+        keyboard: false,
+      }}
     />
   );
 };
@@ -48,4 +69,8 @@ export default () => storiesOf(displayName, module)
   .add(
     'With geocoder usage',
     (geocoderMap)
+  )
+  .add(
+    'No interactivity',
+    (staticMap)
   );
