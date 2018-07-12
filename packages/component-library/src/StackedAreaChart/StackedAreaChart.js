@@ -35,6 +35,7 @@ const StackedAreaChart = ({
   yLabel,
   xNumberFormatter,
   yNumberFormatter,
+  legendComponent,
 }) => {
 
   const chartDomain = domain || getDefaultStackedDomain(data, dataKey, dataValue);
@@ -110,6 +111,8 @@ const StackedAreaChart = ({
   return (
     <ChartContainer title={title} subtitle={subtitle}>
       {legendData && (
+        legendComponent ?
+        legendComponent(legendData) :
         <SimpleLegend className="legend" legendData={legendData} />
       )}
 
@@ -184,6 +187,7 @@ StackedAreaChart.propTypes = {
   yLabel: PropTypes.string,
   xNumberFormatter: PropTypes.func,
   yNumberFormatter: PropTypes.func,
+  legendComponent: PropTypes.func,
 };
 
 StackedAreaChart.defaultProps = {
@@ -203,6 +207,7 @@ StackedAreaChart.defaultProps = {
   yLabel: "Y",
   xNumberFormatter: numeric,
   yNumberFormatter: numeric,
+  legendComponent: null,
 };
 
 export default StackedAreaChart;

@@ -4,7 +4,6 @@ import { css } from 'emotion';
 import { storiesOf } from '@storybook/react';
 import { object, text, boolean, withKnobs } from '@storybook/addon-knobs';
 import { Scatterplot, SimpleLegend } from '../src';
-import CivicVictoryTheme from '../src/VictoryTheme/VictoryThemeIndex';
 
 const displayName = Scatterplot.displayName || 'Scatterplot';
 const sampleData = [
