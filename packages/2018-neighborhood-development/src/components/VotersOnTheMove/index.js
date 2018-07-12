@@ -22,6 +22,10 @@ const smallMultiples = css`
   width: 100%;
 `;
 
+const chartColumn = css`
+  width: 100%
+`;
+
 const ageGroupLabels = [
   { category: 18, label: '18-25' },
   { category: 26, label: '26-32' },
@@ -69,7 +73,7 @@ export class VotersOnTheMove extends React.Component {
       >
         { (votersOnTheMove && awayVotersOnTheMove) &&
           <div className={smallMultiples}>
-            <div>
+            <div className={chartColumn}>
               <h2>Towards City Center</h2>
               {voterScatterplot(18, 'center')}
               {voterScatterplot(26, 'center')}
@@ -77,7 +81,7 @@ export class VotersOnTheMove extends React.Component {
               {voterScatterplot(40, 'center')}
               {voterScatterplot(50, 'center')}
             </div>
-            <div>
+            <div className={chartColumn}>
               <h2>Away From City Center</h2>
               {voterScatterplot(18, 'away')}
               {voterScatterplot(26, 'away')}
