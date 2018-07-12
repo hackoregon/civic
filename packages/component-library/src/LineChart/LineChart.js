@@ -34,6 +34,7 @@ const LineChart = ({
   yLabel,
   xNumberFormatter,
   yNumberFormatter,
+  legendComponent,
 }) => {
   const chartDomain = domain || getDefaultDomain(data, dataKey, dataValue);
 
@@ -76,6 +77,8 @@ const LineChart = ({
   return (
     <ChartContainer title={title} subtitle={subtitle}>
       {legendData && (
+        legendComponent ?
+        legendComponent(legendData) :
         <SimpleLegend className="legend" legendData={legendData} />
       )}
 
@@ -172,6 +175,7 @@ LineChart.propTypes = {
   yLabel: PropTypes.string,
   xNumberFormatter: PropTypes.func,
   yNumberFormatter: PropTypes.func,
+  legendComponent: PropTypes.func,
 };
 
 LineChart.defaultProps = {
@@ -191,6 +195,7 @@ LineChart.defaultProps = {
   yLabel: "Y",
   xNumberFormatter: numeric,
   yNumberFormatter: numeric,
+  legendComponent: null,
 };
 
 export default LineChart;

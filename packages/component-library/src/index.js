@@ -52,4 +52,5 @@ export { default as Collapsable } from './Collapsable/Collapsable';
 export { default as Sandbox } from './Sandbox/Sandbox';
 export { default as StackedAreaChart } from './StackedAreaChart/StackedAreaChart';
 export { default as PDF } from './PDF/PDF';
+export { default as SimpleLegend } from './SimpleLegend/SimpleLegend';
 
