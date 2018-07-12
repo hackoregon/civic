@@ -1,8 +1,10 @@
 import React from 'react';
+import { css } from 'emotion';
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from '@storybook/react';
 import { object, text, boolean, withKnobs } from '@storybook/addon-knobs';
-import { Scatterplot } from '../src';
+import { Scatterplot, SimpleLegend } from '../src';
+import CivicVictoryTheme from '../src/VictoryTheme/VictoryThemeIndex';
 
 const displayName = Scatterplot.displayName || 'Scatterplot';
 const sampleData = [
@@ -43,6 +45,70 @@ const sampleUnstructuredYKey = 'age';
 const sampleUnstructuredDataSeries = 'type';
 const sampleUnstructuredXLabel = 'Size (ft)';
 const sampleUnstructuredYLabel = 'Age (yrs)';
+
+const customLegend = (legendData) => {
+  const legendStyle = css`
+    font-family: 'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    margin: 10px 0 0 0;
+  `;
+
+  const legendContainer = css`
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  `;
+
+  return (
+    <div className={legendContainer}>
+      <SimpleLegend legendData={legendData} />
+      <legend className={legendStyle}>
+        <span
+          className={css`
+            margin-left: 5px;
+          `}
+        >
+          <svg viewBox="0 0 50 10" width="50px">
+            <circle
+              cx="5"
+              cy="5"
+              r="1"
+            />
+            <circle
+              cx="15"
+              cy="5"
+              r="2"
+            />
+            <circle
+              cx="25"
+              cy="5"
+              r="3"
+            />
+            <circle
+              cx="35"
+              cy="5"
+              r="4"
+            />
+            <circle
+              cx="45"
+              cy="5"
+              r="5"
+            />
+          </svg>
+          <span
+            className={css`
+              margin-left: 5px;
+            `}
+          >
+            Population
+          </span>
+        </span>
+      </legend>
+    </div>
+  );
+};
 
 export default () =>
   storiesOf(displayName, module)
@@ -123,6 +189,7 @@ export default () =>
           yLabel={yLabel}
           invertX={invertX}
           invertY={invertY}
+          legendComponent={customLegend}
         />
       );
     });
