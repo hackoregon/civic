@@ -1262,7 +1262,7 @@ export const slides = data => ({
       data: data.slide_data.features,
       getPosition: f => f.geometry.coordinates,
       opacity: 0.15,
-      getColor: f => [114, 29, 124, 255],
+      getColor: f => [220, 69, 86, 255],
       getRadius: f => 30,
       radiusScale: 1,
       radiusMinPixels: 1,
