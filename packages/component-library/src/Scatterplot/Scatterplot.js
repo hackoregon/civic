@@ -51,6 +51,7 @@ const Scatterplot = ({
   yNumberFormatter,
   invertX,
   invertY,
+  legendComponent,
 }) => {
   const chartDomain = domain || getDefaultDomain(data, dataKey, dataValue);
 
@@ -73,6 +74,8 @@ const Scatterplot = ({
   return (
     <ChartContainer title={title} subtitle={subtitle}>
       {legendData && (
+        legendComponent ?
+        legendComponent(legendData) :
         <SimpleLegend className="legend" legendData={legendData} />
       )}
 
@@ -175,6 +178,7 @@ Scatterplot.propTypes = {
   yNumberFormatter: PropTypes.func,
   invertX: PropTypes.bool,
   invertY: PropTypes.bool,
+  legendComponent: PropTypes.func,
 };
 
 Scatterplot.defaultProps = {
@@ -196,6 +200,7 @@ Scatterplot.defaultProps = {
   yNumberFormatter: numeric,
   invertX: false,
   invertY: false,
+  legendComponent: null,
 };
 
 export default Scatterplot;
