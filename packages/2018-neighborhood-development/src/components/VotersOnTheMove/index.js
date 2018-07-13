@@ -122,7 +122,7 @@ export class VotersOnTheMove extends React.Component {
         <Collapsable>
           <Collapsable.Section>
             <div>
-            <p>For moves within Portland, these visualizations look at the distance and directeion towards or away from the city center that voters are moving, broken up by age group.</p>
+            <p>For voters relocating within Portland during 2006 - 2016, the visualizations below show movement distance and direction by age group.</p>
             { (votersOnTheMove && awayVotersOnTheMove) &&
               <div className={smallMultiples}>
                 <div className={chartColumn}>
@@ -155,7 +155,7 @@ export class VotersOnTheMove extends React.Component {
                 </div>
               </div>
             }
-            <p>Age is calculated at the time of relocation. Portland city center is defined as the center of the Burnside Bridge. Change in distance from Portland city center is calculated by taking the displacement from the individual’s previous address. The scatterplots show when people relocate from their previous address, the direction and the distance moved either toward or away from the city center.</p>
+            <p>Age is calculated at the time of relocation. Portland city center is defined as the center of the Burnside Bridge. Change in distance from Portland city center is calculated by taking the displacement from the individual’s previous address. The scatterplots show when people relocate from their previous address, the direction and the distance moved either toward or away from the city center. The scatterplots are generated based on a random sampling of 2000 voter movements within Portland (1000 movements towards the city center, 1000 movements away from the city center).</p>
             </div>
           </Collapsable.Section>
         </Collapsable>
