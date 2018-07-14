@@ -7,8 +7,8 @@ import { assign } from "lodash";
 const civicPrimary = "#1f1123";
 const civicSecondary = "#eb4d5f";
 const civicTertiary = "#716470";
-const civicSecondaryLighter = "aaa4ab";
-const civicSecondaryLightest = "f3f2f3";
+const civicSecondaryLighter = "#aaa4ab";
+const civicSecondaryLightest = "#f3f2f3";
 
 const civicCategoricalColor1 = "#DC4556";
 const civicCategoricalColor2 = "#19B7AA";
