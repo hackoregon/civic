@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { css } from 'emotion';
 
-import { CivicStoryCard, Scatterplot, Collapsable, CivicVictoryTheme } from '@hackoregon/component-library';
+import { CivicStoryCard, Scatterplot, Collapsable, CivicVictoryTheme, DataTable } from '@hackoregon/component-library';
 
 import { fetchVotersOnTheMove, fetchAwayVotersOnTheMove } from '../../state/voters-on-the-move/actions';
 
@@ -49,6 +49,46 @@ const legendStyle = css`
   text-align: center;
   margin: 10px 0 0 0;
 `;
+
+const emphasis = css`
+  color: #000;
+`;
+
+const tableRows = [
+  { age_group: '18-25', towards: '50.3%', away: '49.7%', moves: '1.93' },
+  { age_group: '26-32', towards: '43.3%', away: '56.7%', moves: '1.97' },
+  { age_group: '33-39', towards: '41.1%', away: '58.9%', moves: '1.72' },
+  { age_group: '40-49', towards: '44.1%', away: '55.9%', moves: '1.52' },
+  { age_group: '55+', towards: '45.7%', away: '54.3%', moves: '1.40' },
+];
+
+const tableCols = [
+  {
+    align: 'left',
+    header: 'Age Group',
+    key: 'age_group',
+  },
+  {
+    align: 'left',
+    header: 'Average Number of Moves',
+    key: 'moves',
+  },
+  {
+    align: 'left',
+    header: 'Moves Towards City Center',
+    key: 'towards',
+  },
+  {
+    align: 'left',
+    header: 'Moves Away From City Center',
+    key: 'away',
+  },
+];
+
+const tableData = {
+  columns: tableCols,
+  data: tableRows,
+};
 
 export class VotersOnTheMove extends React.Component {
   componentDidMount() {
@@ -122,21 +162,22 @@ export class VotersOnTheMove extends React.Component {
         <Collapsable>
           <Collapsable.Section>
             <div>
-            <p>For voters relocating within Portland during 2006 - 2016, the visualizations below show movement distance and direction by age group.</p>
-            { (votersOnTheMove && awayVotersOnTheMove) &&
-              <div className={smallMultiples}>
-                <div className={chartColumn}>
-                  <h2>Moves Towards City Center</h2>
-                  {voterScatterplot(18, 'center')}
-                  {voterScatterplot(26, 'center')}
+              <p>For voters relocating within Portland during 2006 - 2016, the visualizations below show movement distance and direction by age group.</p>
+              <DataTable data={tableData} />
+              { (votersOnTheMove && awayVotersOnTheMove) &&
+                <div className={smallMultiples}>
+                  <div className={chartColumn}>
+                    <h2>Moves Towards City Center</h2>
+                    {voterScatterplot(18, 'center')}
+                    {voterScatterplot(26, 'center')}
+                  </div>
+                  <div className={chartColumn}>
+                    <h2>Moves Away From City Center</h2>
+                    {voterScatterplot(18, 'away')}
+                    {voterScatterplot(26, 'away')}
+                  </div>
                 </div>
-                <div className={chartColumn}>
-                  <h2>Moves Away From City Center</h2>
-                  {voterScatterplot(18, 'away')}
-                  {voterScatterplot(26, 'away')}
-                </div>
-              </div>
-            }
+              }
             </div>
           </Collapsable.Section>
           <Collapsable.Section hidden>
