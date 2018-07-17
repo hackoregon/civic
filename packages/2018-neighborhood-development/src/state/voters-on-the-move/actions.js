@@ -21,8 +21,8 @@ export const AwayVotersOnTheMoveStart = actionEmitter(AWAY_API_START);
 export const AwayVotersOnTheMoveSuccess = actionEmitter(AWAY_API_SUCCESS);
 export const AwayVotersOnTheMoveError = actionEmitter(AWAY_API_ERROR);
 
-const endpoint = 'api/voter_movement_points?limit=1000&direction=center&format=json';
-const awayEndpoint = 'api/voter_movement_points?limit=1000&direction=away&format=json';
+const endpoint = 'api/voter_movement_points?limit=1000&random=1&direction=center&format=json';
+const awayEndpoint = 'api/voter_movement_points?limit=1000&random=1&direction=away&format=json';
 
 export const fetchVotersOnTheMove = apiAdapter(
   endpoint,
