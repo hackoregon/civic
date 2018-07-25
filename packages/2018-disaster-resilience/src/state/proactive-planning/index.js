@@ -20,7 +20,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         pending: false,
         error: null,
-        data: action.payload.results,
+        data: action.payload.results.features,
       };
     case API_FAILURE:
       return {

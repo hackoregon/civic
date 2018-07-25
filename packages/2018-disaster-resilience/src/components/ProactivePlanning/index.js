@@ -32,24 +32,23 @@ export class ProactivePlanning extends React.Component {
         loading={isLoading}
         error={error && 'Error loading data'}
       >
-          { proactivePlanning &&
-            <Scatterplot
-              title="Resilience and Displacement"
-              subtitle="Resilience as measured by census non-response rate and expected displacement in a 9.0 earthquake by neighborhood"
-              data={proactivePlanning}
-              xLabel="Census Non-Response Rate"
-              yLabel="Per Capita Displacement"
-              dataKey="census_response_rate"
-              dataKeyLabel="resilienceLabel"
-              dataValue="displaced_percap"
-              dataValueLabel="displacementLabel"
-              dataSeries="quadrant"
-              size={{ key: 'total_population', minSize: 2, maxSize: 10 }}
-              xNumberFormatter={percentage}
-              yNumberFormatter={percentage}
-            />
-          }
-          { console.log(proactivePlanning) }
+        { proactivePlanning &&
+          <Scatterplot
+            title="Resilience and Displacement"
+            subtitle="Resilience as measured by census non-response rate and expected displacement in a 9.0 earthquake by neighborhood"
+            data={proactivePlanning}
+            xLabel="Census Non-Response Rate"
+            yLabel="Per Capita Displacement"
+            dataKey="census_response_rate"
+            dataKeyLabel="resilienceLabel"
+            dataValue="displaced_percap"
+            dataValueLabel="displacementLabel"
+            dataSeries="quadrant"
+            size={{ key: 'total_population', minSize: 2, maxSize: 10 }}
+            xNumberFormatter={percentage}
+            yNumberFormatter={percentage}
+          />
+        }
       </CivicStoryCard>
     );
   }
