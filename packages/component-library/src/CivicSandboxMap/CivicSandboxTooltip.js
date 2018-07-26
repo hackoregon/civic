@@ -20,8 +20,6 @@ const MapTooltip = (props) => {
     tooltipData,
   } = props;
 
-  console.log('\nCivicSandbox Tooltip:\n', props);
-
   const x = tooltipData.x;
   const y = tooltipData.y;
 

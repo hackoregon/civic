@@ -36,7 +36,6 @@ const Sandbox = ({
   onSlideHover,
   tooltipInfo,
 }) => {
-  console.log('\nTooltip Info:\n', tooltipInfo);
   return (
     <div
       className={styles}

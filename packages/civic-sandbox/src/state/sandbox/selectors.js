@@ -147,13 +147,9 @@ export const getSelectedSlideDatum = createSelector(
   getSandbox,
   getSelectedSlidesData,
   ({ selectedSlideDatum }, slide) => {
-    /*global console*/
-    console.log('\nhover datum:', selectedSlideDatum, '\nslide data:\n', slide, '\n');
-
     if (!slide || !selectedSlideDatum || !selectedSlideDatum.object) return;
 
     const datumFieldNames = Object.keys(selectedSlideDatum.object.properties);
-    console.log('\nDatum Field Names:\n', datumFieldNames);
     if(datumFieldNames.length < 1) return;
 
     const slideAttributes = slide.map((slideObject, index) => {
@@ -165,7 +161,6 @@ export const getSelectedSlideDatum = createSelector(
       if (attrs.secondary.field) { slideAttrObj['secondary'] =  attrs.secondary }
       return slideAttrObj;
     });
-    console.log('\nSlide Attributes:\n', slideAttributes, '\n');
 
     const findSlideIndex = slideAttributes.filter(d => {
       const primary = d.primary;
@@ -178,7 +173,6 @@ export const getSelectedSlideDatum = createSelector(
         return false;
       }
     });
-    console.log('\nFind Slide Index:\n', findSlideIndex);
 
     if (findSlideIndex.length < 1) return;
     const slideIndex = findSlideIndex[0].index;
@@ -189,10 +183,8 @@ export const getSelectedSlideDatum = createSelector(
     tooltipObj['content'] = {};
 
     const tooltipSlideName = Object.keys(slide[slideIndex]);
-    console.log('\nTooltip Slide Name:\n', tooltipSlideName);
 
     const tooltipSlideAttrs = slide[slideIndex][tooltipSlideName[0]].slide_meta.attributes;
-    console.log('\nTooltip Attributes:\n', tooltipSlideAttrs);
     const tooltipPrimary = tooltipSlideAttrs.primary;
     const tooltipSecondary = tooltipSlideAttrs.secondary;
 
@@ -205,7 +197,6 @@ export const getSelectedSlideDatum = createSelector(
       tooltipObj.content[tooltipSecondary.name] = datumProps[tooltipSecondary.field];
     }
 
-    console.log('\nTooltip Object:\n', tooltipObj, '\n');
     return tooltipObj;
   }
 );
