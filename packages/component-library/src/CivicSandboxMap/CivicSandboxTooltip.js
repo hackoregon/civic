@@ -17,31 +17,28 @@ const tooltip = css`
 
 const MapTooltip = (props) => {
   const {
-    tooltipInfo,
-    x,
-    y,
+    tooltipData,
   } = props;
+
+  console.log('\nCivicSandbox Tooltip:\n', props);
+
+  const x = tooltipData.x;
+  const y = tooltipData.y;
 
   const xPosition = x < window.innerWidth * 0.66 ? x : x - (window.innerWidth * 0.1);
   const yPostition = y < 375  ? y : y - 50;
 
-  const keyValuePairs = Object.entries(tooltipInfo.properties);
+  const keyValuePairs = Object.entries(tooltipData.content);
 
-  const tooltipContent = keyValuePairs.map((d, i) => {
-    const nameSplit = d[0].split("_");
-    const name = nameSplit.reduce((acc, cur, i) => {
-      const capitalize = cur.charAt(0).toUpperCase() + cur.slice(1);
-      return acc + " " + capitalize;
-    }, "");
-
+  const tooltipContent = keyValuePairs.map((d, index) => {
     return (
-      <div key={i}>
-        {name + ': ' + d[1].toLocaleString()}
+      <div key={index}>
+        {d[0] + ': ' + d[1].toLocaleString()}
       </div>
     );
   });
 
-  const tooltipWrapper = (
+  return (
     <div
       className={tooltip}
       style={{
@@ -52,20 +49,10 @@ const MapTooltip = (props) => {
       { tooltipContent }
     </div>
   );
-
-  const tooltipRender = keyValuePairs.length > 0 ? tooltipWrapper : null;
-
-  return (
-    <div>
-      { tooltipRender }
-    </div>
-  );
 };
 
 MapTooltip.propTypes = {
-  tooltipInfo: PropTypes.object,
-  x: PropTypes.number,
-  y: PropTypes.number,
+  tooltipData: PropTypes.object,
 };
 
 export default MapTooltip;

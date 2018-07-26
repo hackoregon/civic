@@ -142,3 +142,70 @@ export const getSelectedFoundationDatum = createSelector(
     return visualizations;
   }
 );
+
+export const getSelectedSlideDatum = createSelector(
+  getSandbox,
+  getSelectedSlidesData,
+  ({ selectedSlideDatum }, slide) => {
+    /*global console*/
+    console.log('\nhover datum:', selectedSlideDatum, '\nslide data:\n', slide, '\n');
+
+    if (!slide || !selectedSlideDatum || !selectedSlideDatum.object) return;
+
+    const datumFieldNames = Object.keys(selectedSlideDatum.object.properties);
+    console.log('\nDatum Field Names:\n', datumFieldNames);
+    if(datumFieldNames.length < 1) return;
+
+    const slideAttributes = slide.map((slideObject, index) => {
+      const slideName = Object.keys(slideObject);
+      const attrs = slideObject[slideName[0]].slide_meta.attributes;
+      const slideAttrObj = {};
+      slideAttrObj['index'] = index;
+      if (attrs.primary.field) { slideAttrObj['primary'] = attrs.primary; }
+      if (attrs.secondary.field) { slideAttrObj['secondary'] =  attrs.secondary }
+      return slideAttrObj;
+    });
+    console.log('\nSlide Attributes:\n', slideAttributes, '\n');
+
+    const findSlideIndex = slideAttributes.filter(d => {
+      const primary = d.primary;
+      const secondary = d.secondary;
+      if (primary && secondary) {
+        return datumFieldNames.includes(d.primary.field && d.secondary.field);
+      } else if (primary) {
+        return datumFieldNames.includes(d.primary.field);
+      } else {
+        return false;
+      }
+    });
+    console.log('\nFind Slide Index:\n', findSlideIndex);
+
+    if (findSlideIndex.length < 1) return;
+    const slideIndex = findSlideIndex[0].index;
+
+    const tooltipObj = {};
+    tooltipObj['x'] = selectedSlideDatum.x;
+    tooltipObj['y'] = selectedSlideDatum.y;
+    tooltipObj['content'] = {};
+
+    const tooltipSlideName = Object.keys(slide[slideIndex]);
+    console.log('\nTooltip Slide Name:\n', tooltipSlideName);
+
+    const tooltipSlideAttrs = slide[slideIndex][tooltipSlideName[0]].slide_meta.attributes;
+    console.log('\nTooltip Attributes:\n', tooltipSlideAttrs);
+    const tooltipPrimary = tooltipSlideAttrs.primary;
+    const tooltipSecondary = tooltipSlideAttrs.secondary;
+
+    const datumProps = selectedSlideDatum.object.properties;
+
+    if (tooltipPrimary && tooltipPrimary.field) {
+      tooltipObj.content[tooltipPrimary.name] = datumProps[tooltipPrimary.field];
+    }
+    if (tooltipSecondary && tooltipSecondary.field) {
+      tooltipObj.content[tooltipSecondary.name] = datumProps[tooltipSecondary.field];
+    }
+
+    console.log('\nTooltip Object:\n', tooltipObj, '\n');
+    return tooltipObj;
+  }
+);

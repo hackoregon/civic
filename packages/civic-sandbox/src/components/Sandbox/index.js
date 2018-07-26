@@ -16,6 +16,7 @@ import {
   setPackage,
   fetchSlideByDate,
   setSelectedFoundationDatum,
+  setSelectedSlideDatum,
 } from '../../state/sandbox/actions';
 import {
   isAllSandboxLoading,
@@ -33,6 +34,7 @@ import {
   getSelectedFoundation,
   getSelectedSlides,
   getLayerSlides,
+  getSelectedSlideDatum,
 } from '../../state/sandbox/selectors';
 
 class SandboxComponent extends React.Component {
@@ -97,6 +99,8 @@ class SandboxComponent extends React.Component {
       foundationData={this.props.selectedFoundationData}
       defaultFoundation={this.props.foundationData}
       onFoundationClick={this.props.foundationClick}
+      onSlideHover={this.props.slideHover}
+      tooltipInfo={this.props.selectedSlideDatum}
     />;
   }
 }
@@ -119,6 +123,7 @@ export default connect(
     layerFoundation: getLayerFoundation(state),
     selectedSlide: getSelectedSlides(state),
     layerSlides: getLayerSlides(state),
+    selectedSlideDatum: getSelectedSlideDatum(state),
   }),
   dispatch => ({
     fetchFoundation(endpoint = '') {
@@ -141,6 +146,9 @@ export default connect(
     },
     foundationClick(feature) {
       dispatch(setSelectedFoundationDatum(feature));
+    },
+    slideHover(feature) {
+      dispatch(setSelectedSlideDatum(feature));
     },
   })
 )(SandboxComponent);
