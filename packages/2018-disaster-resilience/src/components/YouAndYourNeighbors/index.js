@@ -27,6 +27,16 @@ const mapContainer = css`
   margin: 0 auto;
 `;
 
+const emphasis = css`
+  color: #000;
+`;
+
+const gradientLabel = css`
+  ${emphasis};
+  position: relative;
+  bottom: -10px;
+`;
+
 const LAT = 45.5231;
 const LONG = -122.6765;
 const ZOOM = 13.5;
@@ -268,36 +278,43 @@ export class YouAndYourNeighbors extends React.Component {
               <h3>
                 <strong>Shaking Intensity: </strong>{shakingScale[coordProperties.pgv_site_mean_mmi].shaking}
               </h3>
+              <strong className={gradientLabel}>Less shaking</strong>
               <GradientScale
                 domain={[1, 10]}
                 primary={coordProperties.pgv_site_mean_mmi}
+                secondary={[coordProperties.pgv_site_min_mmi,coordProperties.pgv_site_max_mmi]}
                 height={50}
               />
-              <p>
-                {shakingScale[coordProperties.pgv_site_mean_mmi].description}
-              </p>
+              <p><strong>Best case:</strong> {shakingScale[coordProperties.pgv_site_min_mmi].description}</p>
+              <p className={emphasis}><strong>Most likely case:</strong> {shakingScale[coordProperties.pgv_site_mean_mmi].description}</p>
+              <p><strong>Worst case:</strong> {shakingScale[coordProperties.pgv_site_max_mmi].description}</p>
+
               <h3>
                 <strong>Landslide Potential: </strong>{coordProperties.pgd_landslide_wet_mean_di}
               </h3>
+              <strong className={gradientLabel}>Less landslide potential</strong>
               <GradientScale
                 domain={[0, 4]}
                 primary={landslidesScale[coordProperties.pgd_landslide_wet_mean_di].scale}
+                secondary={[landslidesScale[coordProperties.pgd_landslide_wet_min_di].scale, landslidesScale[coordProperties.pgd_landslide_wet_max_di].scale]}
                 height={50}
               />
-              <p>
-                {landslidesScale[coordProperties.pgd_landslide_wet_mean_di].description}
-              </p>
+              <p><strong>Best case:</strong> {landslidesScale[coordProperties.pgd_landslide_wet_min_di].description}</p>
+              <p className={emphasis}><strong>Most likely case:</strong> {landslidesScale[coordProperties.pgd_landslide_wet_mean_di].description}</p>
+              <p><strong>Worst case:</strong> {landslidesScale[coordProperties.pgd_landslide_wet_max_di].description}</p>
               <h3>
                 <strong>Liquefaction Potential: </strong>{coordProperties.pgd_liquefaction_wet_mean_di}
               </h3>
+              <strong className={gradientLabel}>Less liquefaction potential</strong>
               <GradientScale
                 domain={[0, 4]}
                 primary={liquefactionScale[coordProperties.pgd_liquefaction_wet_mean_di].scale}
+                secondary={[liquefactionScale[coordProperties.pgd_liquefaction_wet_min_di].scale, liquefactionScale[coordProperties.pgd_liquefaction_wet_max_di].scale]}
                 height={50}
               />
-              <p>
-                {liquefactionScale[coordProperties.pgd_liquefaction_wet_mean_di].description}
-              </p>
+              <p><strong>Best case:</strong> {liquefactionScale[coordProperties.pgd_liquefaction_wet_min_di].description}</p>
+              <p className={emphasis}><strong>Most likely case:</strong> {liquefactionScale[coordProperties.pgd_liquefaction_wet_mean_di].description}</p>
+              <p><strong>Worst case:</strong> {liquefactionScale[coordProperties.pgd_liquefaction_wet_max_di].description}</p>
             </div>
           }
         </div>
