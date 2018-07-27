@@ -1,6 +1,5 @@
 import fetchAdapter from '../fetch-adapter';
 import actionEmitter from '../common-action-emitter';
-import { slugify } from '../utils';
 
 export const API_START = 'YOU_AND_YOUR_NEIGHBORS/START';
 export const API_SUCCESS = 'YOU_AND_YOUR_NEIGHBORS/SUCCESS';
@@ -30,7 +29,7 @@ export const fetchYouAndYourNeighbors = fetchAdapter(
 export const fetchYouAndYourNeighborsCoords = fetchAdapter(
   `api/DisasterNeighborhoodGrid/`,
   {
-    encodeParams: (url, coords) => `${url}?lat=${slugify(coords.latitude.toPrecision(3).toString())}&long=${slugify(coords.longitude.toPrecision(3).toString())}`,
+    encodeParams: (url, coords) => `${url}?lat=${coords.latitude.toPrecision(6).toString()}&long=${coords.longitude.toPrecision(6).toString()}`,
     start: youAndYourNeighborsCoordsStart,
     success: youAndYourNeighborsCoordsSuccess,
     failure: youAndYourNeighborsCoordsFailure,

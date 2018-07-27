@@ -38,21 +38,21 @@ const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         coordsPending: true,
         coordsError: null,
-        selectedCoordsData: null,
+        coordsData: null,
       };
     case COORDS_SUCCESS:
       return {
         ...state,
         coordsPending: false,
         coordsError: null,
-        selectedCoordsData: action.payload.results,
+        coordsData: action.payload.results,
       };
     case COORDS_FAILURE:
       return {
         ...state,
         coordsPending: false,
         coordsError: action.payload,
-        selectedCoordsData: null,
+        coordsData: null,
       };
     case SET_COORDS:
       return {
