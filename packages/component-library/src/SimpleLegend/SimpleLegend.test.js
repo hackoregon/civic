@@ -8,6 +8,6 @@ describe('SimpleLegend', () => {
     const testLegendData = [{ name: 'a' }, { name: 'b' }, { name: 'c' }];
     const wrapper = shallow(<SimpleLegend legendData={testLegendData} />);
 
-    expect(wrapper.find('legend')).to.have.length(1);
+    expect(wrapper.find('div')).to.have.length(1);
   });
 });
