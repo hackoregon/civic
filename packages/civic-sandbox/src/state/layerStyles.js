@@ -1250,7 +1250,7 @@ export const slides = data => ({
       opacity: 1,
       filled: false,
       getPolygon: f => f.coordinates,
-      getLineColor: f => [114, 29, 124, 255],
+      getLineColor: f => [220, 69, 86, 255],
       getLineWidth: f => 45,
       lineWidthScale: 1,
       lineJointRounded: false,

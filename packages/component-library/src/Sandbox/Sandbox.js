@@ -33,6 +33,8 @@ const Sandbox = ({
   updateSlide,
   defaultFoundation,
   onFoundationClick,
+  onSlideHover,
+  tooltipInfo,
 }) => {
   return (
     <div
@@ -111,8 +113,12 @@ const Sandbox = ({
           <CivicSandboxMap
             mapLayers={layerData}
             onClick={onFoundationClick}
+            onHoverSlide={onSlideHover}
           >
-            <CivicSandboxTooltip />
+            { tooltipInfo && (
+              <CivicSandboxTooltip tooltipData={tooltipInfo}/>
+              )
+            }
           </CivicSandboxMap>
         </BaseMap>
       </div>

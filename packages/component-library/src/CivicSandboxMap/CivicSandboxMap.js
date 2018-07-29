@@ -11,12 +11,9 @@ const CivicSandboxMap = (props) => {
   const {
     viewport,
     mapLayers,
-    tooltipInfo,
-    x,
-    y,
-    onHover,
     children,
     onClick,
+    onHoverSlide,
   } = props;
 
   // Call multiple functions with supplied arguments
@@ -40,7 +37,7 @@ const CivicSandboxMap = (props) => {
         rounded={layer.data.rounded}
         autoHighlight={layer.data.autoHighlight}
         highlightColor={layer.data.highlightColor}
-        onHover={onHover}
+        onHover={onHoverSlide}
         parameters={{ depthTest: false }}
       />
       ) : layer.data.mapType === 'ScatterPlotMap' ? (
@@ -56,7 +53,7 @@ const CivicSandboxMap = (props) => {
           radiusScale={layer.data.radiusScale}
           autoHighlight={layer.data.autoHighlight}
           highlightColor={layer.data.highlightColor}
-          onHover={onHover}
+          onHover={onHoverSlide}
           parameters={{ depthTest: false }}
         />
       ) : layer.data.mapType === 'IconMap' ? (
@@ -75,7 +72,7 @@ const CivicSandboxMap = (props) => {
           getColor={layer.data.getColor}
           autoHighlight={layer.data.autoHighlight}
           highlightColor={layer.data.highlightColor}
-          onHover={onHover}
+          onHover={onHoverSlide}
           parameters={{ depthTest: false }}
         />
       ) : layer.data.mapType === 'ScreenGridMap' ? (
@@ -107,7 +104,7 @@ const CivicSandboxMap = (props) => {
               stroked={layer.data.stroked}
               getFillColor={layer.data.getFillColor}
               filled={layer.data.filled}
-              onHover={onHover}
+              onHover={onHoverSlide}
               autoHighlight={layer.data.autoHighlight}
               highlightColor={layer.data.highlightColor}
               parameters={{ depthTest: false }}
@@ -127,7 +124,6 @@ const CivicSandboxMap = (props) => {
           getFillColor={layer.data.getFillColor}
           filled={layer.data.filled}
           onClick={mapClick(onClick, layer.data.onClick)}
-          onHover={onHover}
           autoHighlight={layer.data.autoHighlight}
           highlightColor={layer.data.highlightColor}
           parameters={{ depthTest: false }}
@@ -136,16 +132,6 @@ const CivicSandboxMap = (props) => {
       ) : null;
   });
 
-  const tooltip = React.Children.map(children, (child) => {
-    return React.cloneElement(child, {
-      tooltipInfo,
-      x,
-      y,
-    });
-  });
-
-  const renderTooltip = tooltipInfo ? tooltip : null;
-
   return (
     <div className={crosshair}>
       <DeckGL
@@ -153,7 +139,7 @@ const CivicSandboxMap = (props) => {
         {...viewport}
       >
         { renderMaps }
-        { renderTooltip }
+        { children }
       </DeckGL>
     </div>
   );
@@ -162,10 +148,7 @@ const CivicSandboxMap = (props) => {
 CivicSandboxMap.propTypes = {
   viewport: PropTypes.object,
   mapLayers: PropTypes.array.isRequired,
-  tooltipInfo: PropTypes.object,
-  x: PropTypes.number,
-  y: PropTypes.number,
-  onHover: PropTypes.func,
+  onHoverSlide: PropTypes.func,
   onClick: PropTypes.func,
   children: PropTypes.node,
 };

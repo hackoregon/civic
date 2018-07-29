@@ -18,6 +18,7 @@ export const SLIDE_SUCCESS = 'SANDBOX/SLIDE_SUCCESS';
 export const SLIDE_FAILURE = 'SANDBOX/SLIDE_FAILURE';
 export const SET_SLIDES = 'SANDBOX/SET_SLIDES';
 export const SET_FOUNDATION_DATUM = 'SANDBOX/SET_FOUNDATION_DATUM';
+export const SET_SLIDE_DATUM = 'SANDBOX/SET_SLIDE_DATUM';
 
 // Simple actions
 export const SandboxStart = actionEmitter(SANDBOX_START);
@@ -89,5 +90,10 @@ export const fetchSlideByDate = (slide, date, type) => fetchByDateAdapter(slide,
 
 export const setSelectedFoundationDatum = (feature = {}) => ({
   type: SET_FOUNDATION_DATUM,
+  feature,
+});
+
+export const setSelectedSlideDatum = (feature = {}) => ({
+  type: SET_SLIDE_DATUM,
   feature,
 });
