@@ -180,7 +180,7 @@ export const getSelectedSlideDatum = createSelector(
     const tooltipObj = {};
     tooltipObj['x'] = selectedSlideDatum.x;
     tooltipObj['y'] = selectedSlideDatum.y;
-    tooltipObj['content'] = {};
+    tooltipObj['content'] = [];
 
     const tooltipSlideName = Object.keys(slide[slideIndex]);
 
@@ -191,10 +191,16 @@ export const getSelectedSlideDatum = createSelector(
     const datumProps = selectedSlideDatum.object.properties;
 
     if (tooltipPrimary && tooltipPrimary.field) {
-      tooltipObj.content[tooltipPrimary.name] = datumProps[tooltipPrimary.field];
+      tooltipObj.content.push({
+        name: tooltipPrimary.name,
+        value: datumProps[tooltipPrimary.field],
+      });
     }
     if (tooltipSecondary && tooltipSecondary.field) {
-      tooltipObj.content[tooltipSecondary.name] = datumProps[tooltipSecondary.field];
+      tooltipObj.content.push({
+        name: tooltipSecondary.name,
+        value: datumProps[tooltipSecondary.field],
+      });
     }
 
     return tooltipObj;
