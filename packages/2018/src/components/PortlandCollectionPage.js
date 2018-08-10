@@ -44,44 +44,48 @@ const subCopy = css`
   font-size: 18px;
   line-height: 1.7;
   margin: 20px 0;
+  color: black;
+  letter-spacing: auto;
+
 
   @media (max-width: 1024px) {
     font-size: 16px;
   }
 `;
 
-const disasterStyle = css`
-  background-color: #DC4556;
+const teamTitleStyle = css`
+  display: block;
+  font-size: 13px;
+  font-family: 'Rubik';
+  text-transform: uppercase;
+  letter-spacing: 3px;
 `;
-const electionsStyle = css`
-  background-color: #19B7AA;
-`;
-const housingStyle = css`
-  background-color: #1E62BD;
-`;
-const neighborhoodStyle = css`
-  background-color: #721D72;
-`;
-const transporationStyle = css`
-  background-color: #FFB226;
+
+const itemStyle = css`
+  background-color: #FFFFFF;
+  h2, h3 {
+    color: black;
+  }
 `;
 
 const sideListWrapper = css`
   display: block;
   position: relative;
-  margin-left: 60%;
+  margin-top: 60px;
+  margin-left: 50%;
 
   @media (max-width: 850px) {
     margin-left: 0;
+    margin-top: 0;
   }
 
   ul {
-    padding: 0;
-    margin: 0;
+    padding: 20px
+    margin: 60px 0 0 0;
     list-style: none;
     width: 40vw;
     height: 100vh;
-    background-color: black;
+    background-color: white;
     min-width: 320px;
     overflow-y: scroll;
 
@@ -93,20 +97,22 @@ const sideListWrapper = css`
   }
 
   li {
-    width: 100%;
+    width: 90%;
     height: 180px;
-    padding: 20px 20px;
+    padding: 20px 36px;
+    margin: 0 0 20px 0;
     box-sizing: border-box;
-    color: white;
     font-family: 'Rubik', sans-serif;
     font-size: 25px;
-    letter-spacing: -1px;
     text-decoration: none;
     border: none;
     transition: opacity .4s ease-in-out;
+    border: 1px solid #DDD;
+    border-radius: 2px;
+    box-shadow: 5px 5px 15px -3px rgba(0,0,0,0.2);
 
     p {
-      color: white;
+      color: black;
       font-family: 'Rubik', sans-serif;
       font-size: 30px;
       text-align: center;
@@ -139,17 +145,15 @@ const PortlandCollectionPage = () => (
       <div className={ subCopy }>
         Portland Collections are built by teams of volunteers who are passionate about showing the visual side of data to impact community awareness.
       </div>
-      <div className={ subCopy }>
-        <Link to="/sandbox">View Sandbox</Link>
-      </div>
     </div>
     <div className={ sideListWrapper }>
       <ul>
-        <Link to="/cities/portland/disaster"><li className={disasterStyle}><p>Disaster Resilience</p></li></Link>
-        <Link to="/cities/portland/elections"><li className={electionsStyle}><p>Local Elections</p></li></Link>
-        <Link to="/cities/portland/housing"><li className={housingStyle}><p>Housing Affordability</p></li></Link>
-        <Link to="/cities/portland/neighborhood"><li className={neighborhoodStyle}><p>Neighborhood Development</p></li></Link>
-        <Link to="/cities/portland/transportation"><li className={transporationStyle}><p>Transportation Systems</p></li></Link>
+        <Link to="/sandbox"><li className={itemStyle}><div className={teamTitleStyle}>Sandbox</div><h2>Explore Interactive Maps from Portland Collections</h2></li></Link>
+        <Link to="/cities/portland/disaster"><li className={itemStyle}><div className={teamTitleStyle}>Disaster Resilience</div><h2>Assessing Risk and Prioritizing Action to Strengthen Resilience in the Face of a Natural Disaster</h2></li></Link>
+        <Link to="/cities/portland/elections"><li className={itemStyle}><div className={teamTitleStyle}>Local Elections</div><h2>Quantifying Influence and Understanding the Impact of Money in our Political System</h2></li></Link>
+        <Link to="/cities/portland/housing"><li className={itemStyle}><div className={teamTitleStyle}>Housing Affordability</div><h2>Synthesizing Complex Information to Better Understand Affordable Housing Trends and Policy Dynamics</h2></li></Link>
+        <Link to="/cities/portland/neighborhood"><li className={itemStyle}><div className={teamTitleStyle}>Neighborhood Development</div><h2>Examining Local Patterns, Movement, and Our Sense of Place</h2></li></Link>
+        <Link to="/cities/portland/transportation"><li className={itemStyle}><div className={teamTitleStyle}>Transportation Systems</div><h2>Identifying Opportunities for Equitable Mobility in Cities</h2></li></Link>
       </ul>
     </div>
   </div>
