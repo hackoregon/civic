@@ -8,10 +8,14 @@ const collectionPageWrapper = css`
   width: 100%;
   overflow-y: hidden;
   h1 {
-    font-size: 50px;
+    font-size: 60px;
     line-height: 1.2;
     font-weight: 300;
     margin-bottom: 12px;
+
+    @media (max-width: 850px) {
+      font-size: 50px;
+    }
   }
 `;
 
@@ -39,17 +43,21 @@ const subCopy = css`
   letter-spacing: auto;
 
 
-  @media (max-width: 1024px) {
+  @media (max-width: 850px) {
     font-size: 16px;
   }
 `;
 
 const teamTitleStyle = css`
   display: block;
-  font-size: 13px;
+  font-size: 15px;
   font-family: 'Rubik';
   text-transform: uppercase;
   letter-spacing: 3px;
+
+  @media (max-width: 850px) {
+    font-size: 13px;
+  }
 `;
 
 const itemStyle = css`
@@ -99,8 +107,12 @@ const sideListWrapper = css`
     h2 {
       color: black;
       font-family: 'Rubik', sans-serif;
-      font-size: 18px;
+      font-size: 24px;
       line-height: 1.2;
+
+      @media (max-width: 850px) {
+        font-size: 20px;
+      }
     }
 
     :hover {
