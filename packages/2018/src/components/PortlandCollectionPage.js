@@ -8,24 +8,16 @@ const collectionPageWrapper = css`
   width: 100%;
   overflow-y: hidden;
   h1 {
-    width: 400px;
-    display: inline-block;
-    font-size: 80px;
+    font-size: 50px;
     line-height: 1.2;
-    letter-spacing: -1px;
-    font-weight: 400;
-    margin: 0 0 20px;
-    font-family: 'Rubik', sans-serif;
-
-    @media (max-width: 1024px) {
-      font-size: 60px;
-    }
+    font-weight: 300;
+    margin-bottom: 12px;
   }
 `;
 
 const leftContainer = css`
   position: fixed;
-  width: 60%;
+  width: 50%;
   padding: 60px;
   left: 0;
   box-sizing: border-box;
@@ -38,7 +30,6 @@ const leftContainer = css`
 `;
 
 const subCopy = css`
-  position: relative;
   display: block;
   font-family: 'Rubik',sans-serif;
   font-size: 18px;
@@ -70,7 +61,6 @@ const itemStyle = css`
 
 const sideListWrapper = css`
   display: block;
-  position: relative;
   margin-top: 60px;
   margin-left: 50%;
 
@@ -80,30 +70,25 @@ const sideListWrapper = css`
   }
 
   ul {
-    padding: 20px
-    margin: 60px 0 0 0;
+    padding: 0;
+    margin: 0;
     list-style: none;
-    width: 40vw;
     height: 100vh;
     background-color: white;
     min-width: 320px;
     overflow-y: scroll;
 
     @media (max-width: 850px) {
-      width: 100%;
       overflow-y: auto;
       height: auto;
     }
   }
 
   li {
-    width: 90%;
     height: 180px;
-    padding: 20px 36px;
-    margin: 0 0 20px 0;
+    padding: 20px 20px;
+    margin: 20px;
     box-sizing: border-box;
-    font-family: 'Rubik', sans-serif;
-    font-size: 25px;
     text-decoration: none;
     border: none;
     transition: opacity .4s ease-in-out;
@@ -111,11 +96,11 @@ const sideListWrapper = css`
     border-radius: 2px;
     box-shadow: 5px 5px 15px -3px rgba(0,0,0,0.2);
 
-    p {
+    h2 {
       color: black;
       font-family: 'Rubik', sans-serif;
-      font-size: 30px;
-      text-align: center;
+      font-size: 18px;
+      line-height: 1.2;
     }
 
     :hover {
