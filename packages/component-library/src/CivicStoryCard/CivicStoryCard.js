@@ -74,12 +74,16 @@ const CivicStoryCard = ({ slug, title, children, error, loading, source }) => {
       <div className={descriptionClass}>
         {content}
       </div>
-      <CivicStoryFooter slug={slug} source={source}/>
+      <CivicStoryFooter slug={slug} source={source} />
     </div>
   );
 };
 
 CivicStoryCard.displayName = 'CivicStoryCard';
+
+CivicStoryCard.defaultProps = {
+  source: 'https://service.civicpdx.org/',
+};
 
 CivicStoryCard.propTypes = {
   loading: PropTypes.bool,
