@@ -51,7 +51,7 @@ const cardError = css`
   background: #FDD;
 `;
 
-const CivicStoryCard = ({ slug, title, children, error, loading }) => {
+const CivicStoryCard = ({ slug, title, children, error, loading, source }) => {
   let content = children;
 
   if (loading) {
@@ -74,12 +74,16 @@ const CivicStoryCard = ({ slug, title, children, error, loading }) => {
       <div className={descriptionClass}>
         {content}
       </div>
-      <CivicStoryFooter slug={slug} />
+      <CivicStoryFooter slug={slug} source={source} />
     </div>
   );
 };
 
 CivicStoryCard.displayName = 'CivicStoryCard';
+
+CivicStoryCard.defaultProps = {
+  source: 'https://service.civicpdx.org/',
+};
 
 CivicStoryCard.propTypes = {
   loading: PropTypes.bool,
@@ -87,6 +91,7 @@ CivicStoryCard.propTypes = {
   title: PropTypes.string,
   slug: PropTypes.string,
   children: PropTypes.node,
+  source: PropTypes.string,
 };
 
 export default CivicStoryCard;

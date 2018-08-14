@@ -29,11 +29,13 @@ const storyLinkClass = css`
   }
 `;
 
-const StoryLink = ({ children, icon, route, action }) => (
+const StoryLink = ({ children, icon, route, action, link }) => (
   <div className={storyLinkClass}>
     {route
       ? <Link to={route}><i className={icon} /><span>{children}</span></Link>
-      : <a tabIndex="0" onClick={action}><i className={icon} /><span>{children}</span></a>
+      : link
+        ? <a href={link}><i className={icon} /><span>{children}</span></a>
+        : <a tabIndex="0" onClick={action}><i className={icon} /><span>{children}</span></a>
     }
   </div>
 );
@@ -45,6 +47,7 @@ StoryLink.propTypes = {
   children: PropTypes.node,
   icon: PropTypes.string,
   route: PropTypes.string,
+  link: PropTypes.string,
 };
 
 export default StoryLink;
