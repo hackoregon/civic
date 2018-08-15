@@ -142,3 +142,67 @@ export const getSelectedFoundationDatum = createSelector(
     return visualizations;
   }
 );
+
+export const getSelectedSlideDatum = createSelector(
+  getSandbox,
+  getSelectedSlidesData,
+  ({ selectedSlideDatum }, slide) => {
+    if (!slide || !selectedSlideDatum || !selectedSlideDatum.object) return;
+
+    const datumFieldNames = Object.keys(selectedSlideDatum.object.properties);
+    if(datumFieldNames.length < 1) return;
+
+    const slideAttributes = slide.map((slideObject, index) => {
+      const slideName = Object.keys(slideObject);
+      const attrs = slideObject[slideName[0]].slide_meta.attributes;
+      const slideAttrObj = {};
+      slideAttrObj['index'] = index;
+      if (attrs.primary.field) { slideAttrObj['primary'] = attrs.primary; }
+      if (attrs.secondary.field) { slideAttrObj['secondary'] =  attrs.secondary }
+      return slideAttrObj;
+    });
+
+    const findSlideIndex = slideAttributes.filter(d => {
+      const primary = d.primary;
+      const secondary = d.secondary;
+      if (primary && secondary) {
+        return datumFieldNames.includes(d.primary.field && d.secondary.field);
+      } else if (primary) {
+        return datumFieldNames.includes(d.primary.field);
+      } else {
+        return false;
+      }
+    });
+
+    if (findSlideIndex.length < 1) return;
+    const slideIndex = findSlideIndex[0].index;
+
+    const tooltipObj = {};
+    tooltipObj['x'] = selectedSlideDatum.x;
+    tooltipObj['y'] = selectedSlideDatum.y;
+    tooltipObj['content'] = [];
+
+    const tooltipSlideName = Object.keys(slide[slideIndex]);
+
+    const tooltipSlideAttrs = slide[slideIndex][tooltipSlideName[0]].slide_meta.attributes;
+    const tooltipPrimary = tooltipSlideAttrs.primary;
+    const tooltipSecondary = tooltipSlideAttrs.secondary;
+
+    const datumProps = selectedSlideDatum.object.properties;
+
+    if (tooltipPrimary && tooltipPrimary.field) {
+      tooltipObj.content.push({
+        name: tooltipPrimary.name,
+        value: datumProps[tooltipPrimary.field],
+      });
+    }
+    if (tooltipSecondary && tooltipSecondary.field) {
+      tooltipObj.content.push({
+        name: tooltipSecondary.name,
+        value: datumProps[tooltipSecondary.field],
+      });
+    }
+
+    return tooltipObj;
+  }
+);

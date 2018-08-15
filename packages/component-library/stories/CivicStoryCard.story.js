@@ -114,6 +114,16 @@ export default () => storiesOf('CivicStoryCard', module)
       </Container>
     )
   )
+  .add(
+    'Custom source link',
+    () => (
+      <Container>
+        <CivicStoryCard title={'Campsite Reports & income levels of a community'} source={'http://www.hackoregon.org'}>
+          <p className="Description">{wallOfText}</p>
+        </CivicStoryCard>
+      </Container>
+    )
+  )
   .add('loading', loadingDemo)
   .add('with error', errorDemo)
   .add('with title & description', tdDemo)
