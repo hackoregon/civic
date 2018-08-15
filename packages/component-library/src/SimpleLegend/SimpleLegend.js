@@ -9,11 +9,15 @@ const SimpleLegend = ({ legendData }) => {
     font-weight: bold;
     text-align: center;
     margin: 10px 0 0 0;
+
+    @media (max-width: 640px) {
+        text-align: left;
+    }
   `;
 
   if (legendData.length) {
     return (
-      <legend className={legendStyle}>
+      <div className={legendStyle}>
         {legendData.map((group, idx) => (
           <span
             key={group.name}
@@ -38,7 +42,7 @@ const SimpleLegend = ({ legendData }) => {
             </span>
           </span>
         ))}
-      </legend>
+      </div>
     );
   }
   return null;

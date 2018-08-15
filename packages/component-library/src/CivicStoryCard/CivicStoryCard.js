@@ -37,6 +37,10 @@ const titleClass = css`
   font-size: 2.5em;
   line-height:1.2;
   margin-bottom:1em;
+
+  @media (max-width: 640px) {
+    font-size: 2em;
+  }
 `;
 
 const cardLoading = css`
@@ -51,9 +55,21 @@ const cardError = css`
   background: #FDD;
 `;
 
+const desktopOnly = css`
+  @media (max-width: 640px) {
+    display: none;
+  }
+`;
+
+const mobileOnly = css`
+  display: none;
+  @media (max-width: 640px) {
+    display: block;
+  }
+`;
+
 const CivicStoryCard = ({ slug, title, children, error, loading, source }) => {
   let content = children;
-
   if (loading) {
     content = <div className={cardLoading}>Loading...</div>;
   } else if (error) {
@@ -63,10 +79,14 @@ const CivicStoryCard = ({ slug, title, children, error, loading, source }) => {
   return (
     <div className={cardClass}>
       <div className={watermarkContainer}>
-        <svg width="134" height="135" xmlns="http://www.w3.org/2000/svg">
-          <g fill="none" fillRule="evenodd">
+        <svg xmlns="http://www.w3.org/2000/svg">
+          <g className={desktopOnly} fill="none" fillRule="evenodd">
             <path d="M0 134.658V0l11.566 11.597v123.061H0z" fill="#191119" />
             <path d="M133.864 0v11.597H11.566v.008L0 .008V0h133.864z" fill="#DC4556" />
+          </g>
+          <g className={mobileOnly} fill="none" fillRule="evenodd">
+            <path d="M0 75V0l11.566 11.597v63.421H0z" fill="#191119" />
+            <path d="M75 0v11.597H11.566v.008L0 .008V0h133.864z" fill="#DC4556" />
           </g>
         </svg>
       </div>
