@@ -142,6 +142,9 @@ const PortlandCollectionPage = () => (
       <div className={ subCopy }>
         Portland Collections are built by teams of volunteers who are passionate about showing the visual side of data to impact community awareness.
       </div>
+      <div className={ subCopy }>
+        <a href="https://service.civicpdx.org/">Portland APIs</a>
+      </div>
     </div>
     <div className={ sideListWrapper }>
       <ul>
