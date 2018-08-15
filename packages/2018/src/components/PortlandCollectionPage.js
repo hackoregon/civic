@@ -8,24 +8,20 @@ const collectionPageWrapper = css`
   width: 100%;
   overflow-y: hidden;
   h1 {
-    width: 400px;
-    display: inline-block;
-    font-size: 80px;
+    font-size: 60px;
     line-height: 1.2;
-    letter-spacing: -1px;
-    font-weight: 400;
-    margin: 0 0 20px;
-    font-family: 'Rubik', sans-serif;
+    font-weight: 300;
+    margin-bottom: 12px;
 
-    @media (max-width: 1024px) {
-      font-size: 60px;
+    @media (max-width: 850px) {
+      font-size: 50px;
     }
   }
 `;
 
 const leftContainer = css`
   position: fixed;
-  width: 60%;
+  width: 50%;
   padding: 60px;
   left: 0;
   box-sizing: border-box;
@@ -38,78 +34,85 @@ const leftContainer = css`
 `;
 
 const subCopy = css`
-  position: relative;
   display: block;
   font-family: 'Rubik',sans-serif;
   font-size: 18px;
   line-height: 1.7;
   margin: 20px 0;
+  color: black;
+  letter-spacing: auto;
 
-  @media (max-width: 1024px) {
+
+  @media (max-width: 850px) {
     font-size: 16px;
   }
 `;
 
-const disasterStyle = css`
-  background-color: #DC4556;
+const teamTitleStyle = css`
+  display: block;
+  font-size: 15px;
+  font-family: 'Rubik';
+  text-transform: uppercase;
+  letter-spacing: 3px;
+
+  @media (max-width: 850px) {
+    font-size: 13px;
+  }
 `;
-const electionsStyle = css`
-  background-color: #19B7AA;
-`;
-const housingStyle = css`
-  background-color: #1E62BD;
-`;
-const neighborhoodStyle = css`
-  background-color: #721D72;
-`;
-const transporationStyle = css`
-  background-color: #FFB226;
+
+const itemStyle = css`
+  background-color: #FFFFFF;
+  h2, h3 {
+    color: black;
+  }
 `;
 
 const sideListWrapper = css`
   display: block;
-  position: relative;
-  margin-left: 60%;
+  margin-top: 60px;
+  margin-left: 50%;
 
   @media (max-width: 850px) {
     margin-left: 0;
+    margin-top: 0;
   }
 
   ul {
     padding: 0;
     margin: 0;
     list-style: none;
-    width: 40vw;
     height: 100vh;
-    background-color: black;
+    background-color: white;
     min-width: 320px;
     overflow-y: scroll;
 
     @media (max-width: 850px) {
-      width: 100%;
       overflow-y: auto;
       height: auto;
     }
   }
 
   li {
-    width: 100%;
     height: 180px;
     padding: 20px 20px;
+    margin: 20px;
     box-sizing: border-box;
-    color: white;
-    font-family: 'Rubik', sans-serif;
-    font-size: 25px;
-    letter-spacing: -1px;
     text-decoration: none;
     border: none;
     transition: opacity .4s ease-in-out;
+    border: 1px solid #DDD;
+    border-radius: 2px;
+    box-shadow: 5px 5px 15px -3px rgba(0,0,0,0.2);
 
-    p {
-      color: white;
+    h2 {
+      color: black;
       font-family: 'Rubik', sans-serif;
-      font-size: 30px;
-      text-align: center;
+      font-size: 24px;
+      line-height: 1.2;
+
+      @media (max-width: 850px) {
+        font-size: 20px;
+      }
     }
 
     :hover {
@@ -140,16 +143,17 @@ const PortlandCollectionPage = () => (
         Portland Collections are built by teams of volunteers who are passionate about showing the visual side of data to impact community awareness.
       </div>
       <div className={ subCopy }>
-        <Link to="/sandbox">View Sandbox</Link>
+        <a href="https://service.civicpdx.org/">Portland APIs</a>
       </div>
     </div>
     <div className={ sideListWrapper }>
       <ul>
-        <Link to="/cities/portland/disaster"><li className={disasterStyle}><p>Disaster Resilience</p></li></Link>
-        <Link to="/cities/portland/elections"><li className={electionsStyle}><p>Local Elections</p></li></Link>
-        <Link to="/cities/portland/housing"><li className={housingStyle}><p>Housing Affordability</p></li></Link>
-        <Link to="/cities/portland/neighborhood"><li className={neighborhoodStyle}><p>Neighborhood Development</p></li></Link>
-        <Link to="/cities/portland/transportation"><li className={transporationStyle}><p>Transportation Systems</p></li></Link>
+        <Link to="/sandbox"><li className={itemStyle}><div className={teamTitleStyle}>Sandbox</div><h2>Explore Interactive Maps from Portland Collections</h2></li></Link>
+        <Link to="/cities/portland/disaster"><li className={itemStyle}><div className={teamTitleStyle}>Disaster Resilience</div><h2>Assessing Risk and Prioritizing Action to Strengthen Resilience in the Face of a Natural Disaster</h2></li></Link>
+        <Link to="/cities/portland/elections"><li className={itemStyle}><div className={teamTitleStyle}>Local Elections</div><h2>Quantifying Influence and Understanding the Impact of Money in our Political System</h2></li></Link>
+        <Link to="/cities/portland/housing"><li className={itemStyle}><div className={teamTitleStyle}>Housing Affordability</div><h2>Synthesizing Complex Information to Better Understand Affordable Housing Trends and Policy Dynamics</h2></li></Link>
+        <Link to="/cities/portland/neighborhood"><li className={itemStyle}><div className={teamTitleStyle}>Neighborhood Development</div><h2>Examining Local Patterns, Movement, and Our Sense of Place</h2></li></Link>
+        <Link to="/cities/portland/transportation"><li className={itemStyle}><div className={teamTitleStyle}>Transportation Systems</div><h2>Identifying Opportunities for Equitable Mobility in Cities</h2></li></Link>
       </ul>
     </div>
   </div>
