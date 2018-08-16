@@ -29,6 +29,7 @@ const watermarkContainer = css`
   left: 0;
   top: 0;
   z-index: 0;
+  text-align: left;
 `;
 
 const titleClass = css`
