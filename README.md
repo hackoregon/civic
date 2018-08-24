@@ -54,11 +54,12 @@ $ yarn test --watch
 ## Using storybook
 
 We are committed to a shared component library. This is achieved using the `component-library` package and React Storybook.
-Run Storybook with the following command:
+Run Storybook with the following command or [view it here](https://hackoregon.github.io/civic/):
 
 ```bash
 $ yarn run storybook
 ```
+
 
 ## Project Layout
 
