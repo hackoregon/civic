@@ -16,30 +16,26 @@ const CivicSandboxMap = (props) => {
     onHoverSlide,
   } = props;
 
-  // Call multiple functions with supplied arguments
-  const mapClick = (...fns) => (...args) => {
-    fns.forEach(fn => fn(...args));
-  };
-
   const renderMaps = mapLayers.map((layer, index) => {
-    return layer.data.mapType === 'PathMap' ? (
-      <PathLayer
-        key={index}
-        id={layer.data.id}
-        pickable={layer.data.pickable}
-        data={layer.data.data}
-        getColor={layer.data.getColor}
-        opacity={layer.data.opacity}
-        getPath={layer.data.getPath}
-        getWidth={layer.data.getWidth}
-        widthScale={layer.data.widthScale}
-        widthMinPixels={1}
-        rounded={layer.data.rounded}
-        autoHighlight={layer.data.autoHighlight}
-        highlightColor={layer.data.highlightColor}
-        onHover={onHoverSlide}
-        parameters={{ depthTest: false }}
-      />
+    return (
+      layer.data.mapType === 'PathMap' ? (
+        <PathLayer
+          key={index}
+          id={layer.data.id}
+          pickable={layer.data.pickable}
+          data={layer.data.data}
+          getColor={layer.data.getColor}
+          opacity={layer.data.opacity}
+          getPath={layer.data.getPath}
+          getWidth={layer.data.getWidth}
+          widthScale={layer.data.widthScale}
+          widthMinPixels={1}
+          rounded={layer.data.rounded}
+          autoHighlight={layer.data.autoHighlight}
+          highlightColor={layer.data.highlightColor}
+          onHover={onHoverSlide}
+          parameters={{ depthTest: false }}
+        />
       ) : layer.data.mapType === 'ScatterPlotMap' ? (
         <ScatterplotLayer
           key={index}
@@ -91,24 +87,24 @@ const CivicSandboxMap = (props) => {
         />
       ) : layer.data.mapType === 'PolygonPlotMap' ||
           layer.data.mapType === 'SmallPolygonMap' ? (
-            <PolygonLayer
-              key={index}
-              id={layer.data.id}
-              pickable={layer.data.pickable}
-              data={layer.data.data}
-              opacity={layer.data.opacity}
-              getPolygon={layer.data.getPolygon}
-              getLineColor={layer.data.getLineColor}
-              getLineWidth={layer.data.getLineWidth}
-              lineWidthMinPixels={1}
-              stroked={layer.data.stroked}
-              getFillColor={layer.data.getFillColor}
-              filled={layer.data.filled}
-              onHover={onHoverSlide}
-              autoHighlight={layer.data.autoHighlight}
-              highlightColor={layer.data.highlightColor}
-              parameters={{ depthTest: false }}
-            />
+        <PolygonLayer
+          key={index}
+          id={layer.data.id}
+          pickable={layer.data.pickable}
+          data={layer.data.data}
+          opacity={layer.data.opacity}
+          getPolygon={layer.data.getPolygon}
+          getLineColor={layer.data.getLineColor}
+          getLineWidth={layer.data.getLineWidth}
+          lineWidthMinPixels={1}
+          stroked={layer.data.stroked}
+          getFillColor={layer.data.getFillColor}
+          filled={layer.data.filled}
+          onHover={onHoverSlide}
+          autoHighlight={layer.data.autoHighlight}
+          highlightColor={layer.data.highlightColor}
+          parameters={{ depthTest: false }}
+        />
       ) : layer.data.mapType === 'ChoroplethMap' ? (
         <PolygonLayer
           key={index}
@@ -123,13 +119,14 @@ const CivicSandboxMap = (props) => {
           stroked={layer.data.stroked}
           getFillColor={layer.data.getFillColor}
           filled={layer.data.filled}
-          onClick={mapClick(onClick, layer.data.onClick)}
+          onClick={onClick}
           autoHighlight={layer.data.autoHighlight}
           highlightColor={layer.data.highlightColor}
           parameters={{ depthTest: false }}
           updateTriggers={layer.data.updateTriggers || {}}
         />
-      ) : null;
+      ) : null
+    );
   });
 
   return (
