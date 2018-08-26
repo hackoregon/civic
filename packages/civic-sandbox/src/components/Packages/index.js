@@ -112,14 +112,9 @@ export class Packages extends React.Component {
             <a onClick={this.closeMap}>&lt; Back to Packages</a>
           </p>
           <SandboxComponent />
-          {selectedFoundationDatum && <div
-            style={{
-              top: '175px',
-              position: 'absolute',
-              width: '100%',
-            }}
-          >
-            <CivicSandboxDashboard data={selectedFoundationDatum} />
+          {selectedFoundationDatum && <div>
+            <CivicSandboxDashboard data={selectedFoundationDatum}>
+            </CivicSandboxDashboard>
           </div>}
         </section>)}
       </div>
