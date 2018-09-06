@@ -112,7 +112,20 @@ export class Packages extends React.Component {
             <a onClick={this.closeMap}>&lt; Back to Packages</a>
           </p>
           <SandboxComponent />
-          {selectedFoundationDatum && <div>
+          {selectedFoundationDatum && <div
+            className={css(`
+              position: absolute;
+              top: 21%;
+              left: 4%;
+              width: 96%;
+              height: 0;
+              @media(max-width: 900px) {
+                position: relative;
+                left: 0;
+                height: auto;
+              }
+            `)}
+          >
             <CivicSandboxDashboard data={selectedFoundationDatum}>
               {/*<div className={css(`display: inline-block; width: 90%; margin: 1% 2% 2% 7.5%;`)}>
                 <h2>How has ridership changed throughout Tri-Met's service area over time?</h2>

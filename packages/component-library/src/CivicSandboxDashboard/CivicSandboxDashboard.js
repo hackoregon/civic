@@ -8,19 +8,14 @@ import { css } from 'emotion';
 const dashboard = css`
   background: rgba(255, 255, 255, 1.0);
   color: #000;
-  width: 28%;
+  width: 34%;
   min-height: 300px;
   max-height: 525px;
-  position: absolute;
-  top: 21%;
-  left: 4%;
   display: flex;
   flex-direction: column;
   @media (max-width: 900px) {
     width: 100%;
-    position: relative;
-    left: 0;
-    display: inline-block;
+    max-height: none;
   }
 `;
 
@@ -73,6 +68,16 @@ const iconActive = css`
   margin: 0 auto;
 `;
 
+const donutChart = css`
+  width: 90%;
+  margin: 1% 2% 2% 7.5%;
+  height: 55%;
+  @media(max-width: 900px) {
+    max-height: 400px;
+    overflow-y: hidden;
+  }
+`;
+
 class CivicDashboard extends React.Component {
   constructor(props) {
     super(props);
@@ -110,8 +115,7 @@ class CivicDashboard extends React.Component {
             <p>{ object.data.toLocaleString() }</p>
           </div>
         ) : object.visualizationType === "PercentDonut" ? (
-          <div className={viz} key={index}
-            style={{"maxHeight": "500px", "overflowY": "hidden", "overflowX": "visible"}}>
+          <div className={donutChart} key={index}>
             <h2>{ object.title }</h2>
             <h2 style={{"textAlign": "center", "margin": "auto", "width": "50%"}}>
               { object.data[0].y < 1 ? percentage(object.data[0].y) :
