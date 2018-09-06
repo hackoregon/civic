@@ -71,10 +71,10 @@ const iconActive = css`
 const donutChart = css`
   width: 90%;
   margin: 1% 2% 2% 7.5%;
-  height: 55%;
+  height: 75%;
+  overflow-y: hidden;
   @media(max-width: 900px) {
     max-height: 400px;
-    overflow-y: hidden;
   }
 `;
 
