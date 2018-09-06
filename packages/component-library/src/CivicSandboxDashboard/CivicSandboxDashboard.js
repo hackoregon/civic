@@ -3,21 +3,25 @@ import PropTypes from 'prop-types';
 import PieChart from '../PieChart/PieChart';
 import HorizontalBarChart from '../HorizontalBarChart/HorizontalBarChart';
 import { numeric, percentage } from '../utils/formatters';
-
 import { css } from 'emotion';
 
 const dashboard = css`
   background: rgba(255, 255, 255, 1.0);
   color: #000;
-  width: 25%;
-  min-height: 275px;
-  max-height: 590px;
+  width: 28%;
+  min-height: 300px;
+  max-height: 525px;
   position: absolute;
-  top: 20%;
-  left: 2.5%;
-  z-index: 4;
+  top: 21%;
+  left: 4%;
   display: flex;
   flex-direction: column;
+  @media (max-width: 900px) {
+    width: 100%;
+    position: relative;
+    left: 0;
+    display: inline-block;
+  }
 `;
 
 const contentContainer = css`
@@ -36,17 +40,15 @@ const watermarkContainer = css`
 `;
 
 const viz = css`
-  margin: 0 1% 1% 5%;
+  width: 90%;
+  margin: 1% 2% 2% 7.5%;
 `;
 
 const buttonContainer = css`
+  position: relative;
   display: flex;
   flex-direction: row;
-  margin-top: auto;
-  height: 28px;
   width: 100%;
-  position: sticky;
-  bottom: 0;
 `;
 
 const icon = css`
@@ -57,6 +59,7 @@ const icon = css`
   font-size: 20px;
   height: 98%;
   width: 50%;
+  margin: 0 auto;
 `;
 
 const iconActive = css`
@@ -67,6 +70,7 @@ const iconActive = css`
   font-size: 20px;
   height: 98%;
   width: 50%;
+  margin: 0 auto;
 `;
 
 class CivicDashboard extends React.Component {
@@ -106,14 +110,20 @@ class CivicDashboard extends React.Component {
             <p>{ object.data.toLocaleString() }</p>
           </div>
         ) : object.visualizationType === "PercentDonut" ? (
-          <div className={viz} key={index}>
+          <div className={viz} key={index}
+            style={{"maxHeight": "500px", "overflowY": "hidden", "overflowX": "visible"}}>
             <h2>{ object.title }</h2>
+            <h2 style={{"textAlign": "center", "margin": "auto", "width": "50%"}}>
+              { object.data[0].y < 1 ? percentage(object.data[0].y) :
+                object.data[0].y.toFixed(1) + "%"
+              }
+            </h2>
             <PieChart
               data={object.data}
-              colors={['#19b7aa','#a9a9a9']}
-              width={450}
-              height={350}
-              innerRadius={70}
+              colors={["#19b7aa","#a9a9a9"]}
+              width={475}
+              height={375}
+              innerRadius={90}
               halfDoughnut={true}
             />
           </div>
@@ -136,26 +146,26 @@ class CivicDashboard extends React.Component {
         ) : object.visualizationType === "Legend" ? (
           <div className={viz} key={index}>
             <h2>{ object.title }</h2>
-            <div style={{display: 'flex', flexDirection: 'row'}}>
+            <div style={{"display": "flex", "flexDirection": "row"}}>
               {
                 object.colors.map((d,i,arr) => {
                   return (
-                    <div style={{background: d, height: '40px', width: `${100/arr.length}%`}} key={'legend' + i}>
+                    <div style={{"background": d, "height": "40px", "width": `${100/arr.length}%`}} key={"legend" + i}>
                     </div>
                   );
                 })
               }
             </div>
             <div>
-              <h4 style={{float: 'left'}}>
+              <h4 style={{"float": "left"}}>
                 {
                   object.min === 0 ? 0 :
-                  object.min < 1 && object.min > 0 ? percentage(object.min) :
+                  object.min > 0 && object.min < 1 ? percentage(object.min) :
                   object.min > 1 ? numeric(object.min) :
                   object.min
                 }
               </h4>
-              <h4 style={{float: 'right'}}>
+              <h4 style={{"float": "right"}}>
                 {
                   object.max < 1 && object.max > 0 ? percentage(object.max) :
                   object.max > 1 ? numeric(object.max) :
@@ -171,10 +181,10 @@ class CivicDashboard extends React.Component {
     const buttons = (
       <div className={buttonContainer}>
         <div className={this.state.show === "info" ? iconActive : icon} onClick={this.showInfo}>
-          <span className={"fa fa-info-circle"}></span>
+          <div className={"fa fa-info-circle"}></div>
         </div>
         <div className={this.state.show === "viz" ? iconActive : icon} onClick={this.showViz}>
-          <span className={"fa fa-eye"}></span>
+          <div className={"fa fa-eye"}></div>
         </div>
       </div>
     );

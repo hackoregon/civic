@@ -211,6 +211,22 @@ export const getSelectedFoundationDatum = createSelector(
     const attrs = foundation.slide_meta.attributes;
     const visualizations = [];
 
+    const selectedFoundationDatumProps = selectedFoundationDatum.object.properties;
+    const priamryFieldMatch = selectedFoundationDatumProps.hasOwnProperty(attrs.primary.field);
+    const secondaryFieldMatch = selectedFoundationDatumProps.hasOwnProperty(attrs.secondary.field);
+
+    if(!priamryFieldMatch && !secondaryFieldMatch) return;
+
+    if (attrs.primary && attrs.primary.field && attrs.primary.visualization) {
+      visualizations.push(
+        makeVisFor(attrs.primary, selectedFoundationDatum),
+      );
+    }
+    if (attrs.secondary && attrs.secondary.field && attrs.primary.visualization) {
+      visualizations.push(
+        makeVisFor(attrs.secondary, selectedFoundationDatum),
+      );
+    }
     if (attrs.primary && attrs.primary.field) {
       const legendType = {
         field: attrs.primary.field,
@@ -221,15 +237,6 @@ export const getSelectedFoundationDatum = createSelector(
 
       visualizations.push(
         makeVisFor(legendType, selectedFoundationDatum),
-      );
-
-      visualizations.push(
-        makeVisFor(attrs.primary, selectedFoundationDatum),
-      );
-    }
-    if (attrs.secondary && attrs.secondary.field) {
-      visualizations.push(
-        makeVisFor(attrs.secondary, selectedFoundationDatum),
       );
     }
 
