@@ -31,6 +31,7 @@ export class HumanImpactOfSweepingUrbanCampsites extends React.Component {
         slug="human-impact-of-sweeping-urban-campsites"
         loading={isLoading}
         error={error && 'error'}
+        source="https://github.com/hackoregon/neighborhoods-2018/tree/master/docs/campsites"
       >
         <Collapsable>
           <Collapsable.Section>

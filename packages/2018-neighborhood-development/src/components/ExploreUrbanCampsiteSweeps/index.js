@@ -55,6 +55,7 @@ export class ExploreUrbanCampsiteSweeps extends React.Component {
         slug="explore-urban-campsite-sweeps"
         loading={isLoading}
         error={error}
+        source="https://github.com/hackoregon/neighborhoods-2018/tree/master/docs/campsites"
       >
         <Collapsable>
           <Collapsable.Section>

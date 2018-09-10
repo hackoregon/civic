@@ -73,6 +73,7 @@ export class StudentEnrollmentTrends extends React.Component {
         slug="student-enrollment-trends"
         loading={schoolListLoading || schoolDataLoading}
         error={(schoolListFailure || schoolDataFailure) && 'Could not load school data'}
+        source="https://github.com/hackoregon/neighborhoods-2018/tree/master/docs/schools"
       >
         { (schoolList && selectedSchool && processedSchoolData) &&
           <div>

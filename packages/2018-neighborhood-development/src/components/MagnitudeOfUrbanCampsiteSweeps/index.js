@@ -32,6 +32,7 @@ export class MagnitudeOfUrbanCampsiteSweeps extends React.Component {
         slug="magnitude-of-urban-campsite-sweeps"
         loading={isLoading}
         error={error && 'Could not load sweeps data'}
+        source="https://github.com/hackoregon/neighborhoods-2018/tree/master/docs/campsites"
       >
         <Collapsable>
           <Collapsable.Section>
