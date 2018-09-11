@@ -11,7 +11,7 @@ const mapWrapper = css`
   margin: 0 auto;
   padding: 0;
   width: 100%;
-  height: 500px;
+  height: 100%;
 `;
 
 const navControl = css`
@@ -32,6 +32,7 @@ class BaseMap extends Component {
         maxZoom: 16,
         pitch: props.initialPitch || 0,
         bearing: 0,
+        scrollZoom: true,
       },
       tooltipInfo: null,
       x: null,
@@ -63,14 +64,15 @@ class BaseMap extends Component {
       y,
     } = this.state;
 
-    viewport.width = this.props.containerWidth ? this.props.containerWidth : 500;
-    viewport.height = 500;
-
     const {
+      height,
       mapboxStyle,
       mapboxToken,
       children,
     } = this.props;
+
+    viewport.width = this.props.containerWidth ? this.props.containerWidth : 500;
+    viewport.height = height ? height : 500;
 
     const childrenLayers = React.Children.map(children, child => {
       return React.cloneElement(child, {

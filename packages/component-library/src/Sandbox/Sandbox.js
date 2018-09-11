@@ -109,6 +109,9 @@ const Sandbox = ({
           mapboxToken={mapboxToken}
           mapboxStyle={mapboxStyle}
           initialZoom={10.5}
+          initialLatitude={45.5431}
+          initialLongitude={-122.7465}
+          height={575}
         >
           <CivicSandboxMap
             mapLayers={layerData}
