@@ -110,7 +110,6 @@ const makeVisFor = (spec, data) => {
     };
   }
   if (type === 'Text') {
-    // console.log('TYPE', spec.name, spec.field, data.properties[spec.field]);
     return {
       visualizationType: 'Text',
       title: spec.name,

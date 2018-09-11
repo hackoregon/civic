@@ -32,7 +32,7 @@ class BaseMap extends Component {
         maxZoom: 16,
         pitch: props.initialPitch || 0,
         bearing: 0,
-        scrollZoom: false,
+        scrollZoom: true,
       },
       tooltipInfo: null,
       x: null,
