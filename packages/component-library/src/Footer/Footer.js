@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { css } from 'emotion';
 import LogoStandard from '../Logo/LogoStandard';
@@ -72,9 +73,14 @@ const scrollToTopClass = css`
   }
 `;
 
-const Footer = () => (
+const defaultAttribution = (
+  <div>
+    &copy; Copyright {(new Date()).getFullYear()}
+  </div>);
+
+const Footer = ({ attribution }) => (
   <div className={footerClass}>
-    <div className={copyrightClass}>&copy; Copyright {(new Date()).getFullYear()}</div>
+    <div className={copyrightClass}>{attribution}</div>
     <div className={logoClass}><Link to="/" className={logoLinkStyle}><LogoStandard /></Link></div>
     <div className={scrollToTopClass}><ScrollToTop iconStyle="fa fa-angle-up" /></div>
   </div>
@@ -82,5 +88,13 @@ const Footer = () => (
 );
 
 Footer.displayName = 'Footer';
+
+Footer.defaultProps = {
+  attribution: defaultAttribution,
+};
+
+Footer.propTypes = {
+  attribution: PropTypes.node,
+};
 
 export default Footer;
