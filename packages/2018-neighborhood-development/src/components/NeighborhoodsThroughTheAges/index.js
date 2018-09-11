@@ -56,6 +56,7 @@ export class NeighborhoodsThroughTheAges extends React.Component {
         slug="neighborhoods-through-the-ages"
         loading={isLoading}
         error={error}
+        source="https://github.com/hackoregon/neighborhoods-2018/blob/master/docs/voter_registration/neighborhood%20age%20group%20occupancy.ipynb"
       >
         <p>
         Between the years of 2006 to 2016, for each neighborhood in Portland, Oregon, registered voters have been grouped into the age categories, 18- 25, 26-32, 33-39, 40-49, and 50+. Their residencies are plotted over time to gain insight into the age range and movement of registered voters in Portland neighborhoods.

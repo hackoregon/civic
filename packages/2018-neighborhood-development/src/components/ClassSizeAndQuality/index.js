@@ -51,6 +51,7 @@ export class ClassSizeAndQuality extends React.Component {
         loading={isLoading}
         slug="class-size-and-quality"
         title="Class Size and Quality"
+        source="https://github.com/hackoregon/neighborhoods-2018/tree/master/docs/schools"
       >
         <p>
           Average class size was used as a metric to determine which schools
