@@ -9,6 +9,10 @@ const titleStyle = css`
   font-weight: bold;
   text-align: center;
   margin: 0;
+
+  @media (max-width: 640px) {
+      text-align: left;
+  }
 `;
 
 const subtitleStyle = css`
@@ -17,6 +21,10 @@ const subtitleStyle = css`
   font-size: 14px;
   text-align: center;
   margin: 10px 0;
+
+  @media (max-width: 640px) {
+      text-align: left;
+  }
 `;
 
 const ChartTitle = ({ title, subtitle }) =>
