@@ -90,6 +90,34 @@ const tableData = {
   data: tableRows,
 };
 
+const legendComponent = age => legendData => (
+  <div className={legendStyle}>
+    <span
+      className={css`
+        margin-left: 5px;
+      `}
+    >
+      <svg viewBox="0 0 10 10" width="10px">
+        <circle
+          cx="5"
+          cy="5"
+          r="5"
+          fill={
+            CivicVictoryTheme.civic.group.colorScale[ageLabels[age].category]
+          }
+        />
+      </svg>
+      <span
+        className={css`
+          margin-left: 5px;
+        `}
+      >
+        {`Ages ${ageLabels[age].label}`}
+      </span>
+    </span>
+  </div>
+);
+
 export class VotersOnTheMove extends React.Component {
   componentDidMount() {
     this.props.init();
@@ -106,37 +134,6 @@ export class VotersOnTheMove extends React.Component {
     } = this.props;
 
     const data = { center: votersOnTheMove, away: awayVotersOnTheMove };
-
-    function legendComponent(age) {
-      const customLegend = (legendData) => {
-        return (
-          <legend className={legendStyle}>
-            <span
-              className={css`
-                margin-left: 5px;
-              `}
-            >
-              <svg viewBox="0 0 10 10" width="10px">
-                <circle
-                  cx="5"
-                  cy="5"
-                  r="5"
-                  fill={CivicVictoryTheme.civic.group.colorScale[ageLabels[age].category]}
-                />
-              </svg>
-              <span
-                className={css`
-                  margin-left: 5px;
-                `}
-              >
-                {`Ages ${ageLabels[age].label}`}
-              </span>
-            </span>
-          </legend>
-        );
-      };
-      return customLegend;
-    }
 
     const voterScatterplot = (age, direction) => (
       <Scatterplot
