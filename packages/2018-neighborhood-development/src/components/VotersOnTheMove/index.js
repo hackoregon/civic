@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { css } from 'emotion';
 
-import { CivicStoryCard, Scatterplot, Collapsable, CivicVictoryTheme, DataTable } from '@hackoregon/component-library';
+import { CivicStoryCard, Scatterplot, Collapsable, CivicVictoryTheme, DataTable, ChartTitle } from '@hackoregon/component-library';
 
 import { fetchVotersOnTheMove, fetchAwayVotersOnTheMove } from '../../state/voters-on-the-move/actions';
 
@@ -163,8 +163,12 @@ export class VotersOnTheMove extends React.Component {
           <Collapsable.Section>
             <div>
               <p>For voters relocating within Portland during 2006 - 2016, the visualizations below show movement distance and direction by age group.</p>
+                <ChartTitle title={'Movement of Registered Voters in Portland'} subtitle={'Direction and distance of movement relative to the Portland city center, 2006-2016'} />
               <DataTable data={tableData} />
+              <p>Overall, a greater percentage of Portland registered voters moved away from the city center than moved towards it. The sample of individual voter movements below paint a more granual picture of voter movement patterns.</p>
               { (votersOnTheMove && awayVotersOnTheMove) &&
+                <div>
+                <ChartTitle title={'Sampling Voter Movement'} subtitle={'Random sampling of 2000 voter movements relative to the Portland city center'} />
                 <div className={smallMultiples}>
                   <div className={chartColumn}>
                     <h2>Moves Towards City Center</h2>
@@ -176,6 +180,7 @@ export class VotersOnTheMove extends React.Component {
                     {voterScatterplot(18, 'away')}
                     {voterScatterplot(26, 'away')}
                   </div>
+                </div>
                 </div>
               }
             </div>
