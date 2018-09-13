@@ -5,6 +5,7 @@ import actionEmitter from '../common-action-emitter';
 export const START = 'HOUSING_POLICY/START';
 export const SUCCESS = 'HOUSING_POLICY/SUCCESS';
 export const FAILURE = 'HOUSING_POLICY/FAILURE';
+export const SET_POLICY = 'HOUSING_POLICY/SET_POLICY';
 
 // Simple actions
 export const AllStart = actionEmitter(START);
@@ -13,10 +14,15 @@ export const AllFailure = actionEmitter(FAILURE);
 
 // Order of the URLs here is important! It impacts the reducer.
 export const fetchAllHousingPolicyData = fetchManyAdapter(
-  ['/api/programs/?limit=208', '/api/policies/?limit=22'],
+  ['/api/policies/?limit=22', '/api/programs/?limit=208'],
   {
     start: AllStart,
     success: AllSuccess,
     failure: AllFailure,
   }
 );
+
+export const setSelectedPolicy = policy => ({
+  type: SET_POLICY,
+  selectedPolicy: policy,
+});

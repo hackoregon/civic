@@ -23,4 +23,7 @@ export const gradientLabel = css`
   ${emphasis}
   position: relative;
   bottom: -10px;
+  @media (max-width: 640px) {
+    bottom: -5px;
+  }
 `;

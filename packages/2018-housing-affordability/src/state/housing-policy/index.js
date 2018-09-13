@@ -1,10 +1,11 @@
-import { START, SUCCESS, FAILURE } from './actions';
+import { START, SUCCESS, FAILURE, SET_POLICY } from './actions';
 
 const INITIAL_STATE = {
   pending: false,
   error: null,
   allPolicies: null,
   allPrograms: null,
+  selectedPolicy: null,
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -32,6 +33,11 @@ const reducer = (state = INITIAL_STATE, action) => {
         error: action.payload,
         allPolicies: null,
         allPrograms: null,
+      };
+    case SET_POLICY:
+      return {
+        ...state,
+        selectedPolicy: action.selectedPolicy,
       };
     default:
       return state;
