@@ -13,6 +13,7 @@ import {
   SLIDES_SUCCESS,
   SET_FOUNDATION,
   SET_FOUNDATION_DATUM,
+  SET_SLIDE_DATUM,
   SET_SLIDES,
   SLIDE_START,
   SLIDE_FAILURE,
@@ -45,6 +46,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         sandboxError: null,
         sandbox: {},
         selectedFoundationDatum: null,
+        selectedSlideDatum: null,
       };
     case SANDBOX_SUCCESS:
       return {
@@ -53,6 +55,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         sandboxError: null,
         sandbox: action.payload.body,
         selectedFoundationDatum: null,
+        selectedSlideDatum: null,
       };
     case SANDBOX_FAILURE:
       return {
@@ -61,6 +64,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         sandboxError: action.payload,
         sandbox: {},
         selectedFoundationDatum: null,
+        selectedSlideDatum: null,
       };
     case FOUNDATION_START:
       return {
@@ -68,6 +72,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         foundationPending: true,
         foundationError: null,
         selectedFoundationDatum: null,
+        selectedSlideDatum: null,
       };
     case FOUNDATION_SUCCESS:
       return {
@@ -76,6 +81,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         foundationError: null,
         foundationData: action.payload,
         selectedFoundationDatum: null,
+        selectedSlideDatum: null,
       };
     case FOUNDATION_FAILURE:
       return {
@@ -84,6 +90,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         foundationError: action.payload,
         foundationData: null,
         selectedFoundationDatum: null,
+        selectedSlideDatum: null,
       };
     case SLIDES_START:
       return {
@@ -91,6 +98,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         slidesPending: true,
         slidesError: null,
         selectedFoundationDatum: null,
+        selectedSlideDatum: null,
       };
     case SLIDES_SUCCESS:
       return {
@@ -100,6 +108,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         slidesSuccess: true,
         slidesData: action.payload,
         selectedFoundationDatum: null,
+        selectedSlideDatum: null,
       };
     case SLIDES_FAILURE:
       return {
@@ -108,6 +117,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         slidesError: action.payload,
         slidesData: null,
         selectedFoundationDatum: null,
+        selectedSlideDatum: null,
       };
     case SET_PACKAGE:
       return {
@@ -118,6 +128,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         selectedFoundation: state.sandbox.packages[action.selectedPackage].default_foundation,
         selectedSlide: isArray(state.sandbox.packages[action.selectedPackage].default_slide) ? state.sandbox.packages[action.selectedPackage].default_slide : [state.sandbox.packages[action.selectedPackage].default_slide],
         selectedFoundationDatum: null,
+        selectedSlideDatum: null,
       };
     case SET_FOUNDATION:
       return {
@@ -125,6 +136,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         selectedFoundation: action.selectedFoundation,
         foundationData: {},
         selectedFoundationDatum: null,
+        selectedSlideDatum: null,
       };
     case SET_SLIDES:
       return {
@@ -132,6 +144,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         selectedSlide: action.selectedSlides,
         slidesData: [],
         selectedFoundationDatum: null,
+        selectedSlideDatum: null,
       };
     case SLIDE_START:
       return {
@@ -139,6 +152,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         slidesPending: true,
         slidesError: null,
         selectedFoundationDatum: null,
+        selectedSlideDatum: null,
       };
     case SLIDE_SUCCESS:
       let foundationData = state.foundationData;
@@ -158,6 +172,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         slidesError: null,
         slidesSuccess: true,
         selectedFoundationDatum: null,
+        selectedSlideDatum: null,
         slidesData,
         foundationData,
       };
@@ -168,11 +183,17 @@ const reducer = (state = INITIAL_STATE, action) => {
         slidesError: action.payload,
         slidesData: null,
         selectedFoundationDatum: null,
+        selectedSlideDatum: null,
       };
     case SET_FOUNDATION_DATUM:
       return {
         ...state,
         selectedFoundationDatum: action.feature,
+      };
+    case SET_SLIDE_DATUM:
+      return {
+        ...state,
+        selectedSlideDatum: action.feature,
       };
     default:
       return state;

@@ -29,6 +29,7 @@ export default class StoryFooter extends Component {
 
   static propTypes = {
     slug: PropTypes.string,
+    source: PropTypes.string,
   }
 
   constructor(props) {
@@ -43,7 +44,7 @@ export default class StoryFooter extends Component {
   switchState = ms => setTimeout(this.setToFalse, ms);
 
   handleCopy = () => {
-    const { slug } = this.props;
+    const slug = this.props.slug;
     // NOTE: we need to make sure this will work on all browsers
     copy(`${window.location.origin}/cards/${slug}`);
     this.switchState(MS_TO_SWITCH_TEXT);
@@ -51,15 +52,19 @@ export default class StoryFooter extends Component {
   }
 
   render() {
-    const { slug } = this.props;
+    const slug = this.props.slug;
+    const source = this.props.source;
     const shareTxt = this.state.copied ? 'Link copied!' : 'Share card'; // if copied, show Link copied, otherwise, show Share card
     const shareIcon = this.state.copied ? ICONS.check : ICONS.link;
+    const routeOrUndefined = `${window.location.origin}/cards/${slug}` === window.location.href
+      ? undefined
+      : `/cards/${slug}`;
+
     return (
       <div className={actionsClass}>
-        <CivicStoryLink route={`/cards/${slug}`} icon={ICONS.info}>Source</CivicStoryLink>
+        <CivicStoryLink link={source} route={source ? undefined : `/cards/${slug}`} icon={ICONS.info}>Source</CivicStoryLink>
         <div className={alignRight}>
-          <CivicStoryLink additionalClassName={alignRight} route={`/cards/${slug}`} icon={ICONS.eye}>View card</CivicStoryLink>
-          <CivicStoryLink additionalClassName={alignRight} action={this.handleCopy} icon={shareIcon}>{shareTxt}</CivicStoryLink>
+          <CivicStoryLink additionalClassName={alignRight} route={routeOrUndefined} action={this.handleCopy} icon={shareIcon}>{shareTxt}</CivicStoryLink>
         </div>
       </div>
     );

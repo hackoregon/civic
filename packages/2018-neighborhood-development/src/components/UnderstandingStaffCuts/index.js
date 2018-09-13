@@ -87,6 +87,7 @@ export class UnderstandingStaffCuts extends React.Component {
         slug="understanding-staff-cuts"
         loading={isLoading}
         error={error && 'Could not load sweeps data'}
+        source="https://github.com/hackoregon/neighborhoods-2018/tree/master/docs/schools"
       >
         <Collapsable>
           <Collapsable.Section>

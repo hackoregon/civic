@@ -18,7 +18,7 @@ const foundation007GetColor = (f) => {
     value >= 12000 ? earth[3] :
     value >= 8000 ? earth[2] :
     value >= 4000 ? earth[1] :
-    value >= 0 ? earth[0] :
+    value >= 0 && value !== null ? earth[0] :
     [0, 0, 0, 100];
 };
 
@@ -33,7 +33,7 @@ const foundation018GetColor = (f) => {
     value >= 75000 ? space[3] :
     value >= 50000 ? space[2] :
     value >= 25000 ? space[1] :
-    value >= 0 ? space[0] :
+    value >= 0 && value !== null ? space[0] :
     [0, 0, 0, 100];
 };
 
@@ -85,7 +85,8 @@ const foundation021GetColor = (f) => {
 // FOUNDATION 022 - Rent Burden
 const foundation022GetColor = (f) => {
   const value = f.properties.rent_burden;
-  return value <= 20 ? thermal[0] :
+  return value === null ? [0, 0, 0, 100] :
+    value <= 20 ? thermal[0] :
     value <= 30 ? thermal[1] :
     value <= 40 ? thermal[2] :
     value <= 50 ? thermal[3] :
@@ -100,7 +101,8 @@ const foundation022GetColor = (f) => {
 // FOUNDATION 024 - Households with Children
 const foundation024GetColor = (f) => {
   const value = f.properties.pc_household_with_children_under_18;
-  return value <= 0.2 ? space[0] :
+  return value === null ? [0, 0, 0, 100] :
+    value <= 0.2 ? space[0] :
     value <= 0.3 ? space[1] :
     value <= 0.4 ? space[2] :
     value <= 0.5 ? space[3] :
@@ -115,7 +117,8 @@ const foundation024GetColor = (f) => {
 // FOUNDATION 025 - Households with Seniors
 const foundation025GetColor = (f) => {
   const value = f.properties.pc_household_with_individuals_65_ovr;
-  return value <= 0.2 ? ocean[0] :
+  return value === null ? [0, 0, 0, 100] :
+    value <= 0.2 ? ocean[0] :
     value <= 0.3 ? ocean[1] :
     value <= 0.4 ? ocean[2] :
     value <= 0.5 ? ocean[3] :
@@ -344,7 +347,7 @@ const foundation045GetColor = (f) => {
     value >= 75 ? ocean[3] :
     value >= 50 ? ocean[2] :
     value >= 25 ? ocean[1] :
-    value >= 0 ? ocean[0] :
+    value >= 0 && value !== null ? ocean[0] :
     [0, 0, 0, 100];
 };
 
@@ -1250,7 +1253,7 @@ export const slides = data => ({
       opacity: 1,
       filled: false,
       getPolygon: f => f.coordinates,
-      getLineColor: f => [114, 29, 124, 255],
+      getLineColor: f => [220, 69, 86, 255],
       getLineWidth: f => 45,
       lineWidthScale: 1,
       lineJointRounded: false,

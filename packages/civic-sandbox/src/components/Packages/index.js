@@ -113,13 +113,20 @@ export class Packages extends React.Component {
           </p>
           <SandboxComponent />
           {selectedFoundationDatum && <div
-            style={{
-              top: '175px',
-              position: 'absolute',
-              width: '100%',
-            }}
+            className={css(`
+              position: absolute;
+              top: 21%;
+              left: 4%;
+              width: 96%;
+              height: 0;
+              @media(max-width: 900px) {
+                position: relative;
+                left: 0;
+                height: auto;
+              }
+            `)}
           >
-            <CivicSandboxDashboard data={selectedFoundationDatum} />
+            <CivicSandboxDashboard data={selectedFoundationDatum}/>
           </div>}
         </section>)}
       </div>

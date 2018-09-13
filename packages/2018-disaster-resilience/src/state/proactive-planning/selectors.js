@@ -7,6 +7,8 @@ export const getProactivePlanningRequest = createSelector(
   ({ proactivePlanning }) => proactivePlanning,
 );
 
+const extractProperties = data => (data && data.length) && data.map(feature => feature.properties);
+
 const processData = data => (data && data.length) && data.map(nbhd => ({
   displaced_percap: parseFloat(nbhd.displaced_percap),
   census_response_rate: (100 - parseFloat(nbhd.census_response_rate)) / 100,
@@ -18,7 +20,7 @@ const processData = data => (data && data.length) && data.map(nbhd => ({
 
 export const getProactivePlanningData = createSelector(
   getProactivePlanningRequest,
-  ({ data }) => data && processData(data).filter(nbhd => nbhd.total_population > 0)
+  ({ data }) => data && processData(extractProperties(data)).filter(nbhd => nbhd.total_population > 0)
 );
 
 export const isProactivePlanningPending = createSelector(

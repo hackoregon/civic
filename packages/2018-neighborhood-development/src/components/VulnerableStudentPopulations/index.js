@@ -12,6 +12,7 @@ export class VulnerableStudentPopulations extends React.Component {
       <CivicStoryCard
         title="Vulnerable Student Populations"
         slug="vulnerable-student-populations"
+        source="https://github.com/hackoregon/neighborhoods-2018/tree/master/docs/schools"
       >
         <Placeholder issue="228"/>
       </CivicStoryCard>
