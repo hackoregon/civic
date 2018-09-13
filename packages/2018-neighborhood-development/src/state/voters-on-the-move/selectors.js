@@ -18,7 +18,7 @@ export const isVotersOnTheMovePending = createSelector(
 
 export const catchVotersOnTheMoveErrors = createSelector(
   getVotersOnTheMoveRequest,
-  ({ error }) => error || error,
+  ({ error }) => error,
 );
 
 export const getAwayVotersOnTheMoveData = createSelector(
@@ -33,5 +33,5 @@ export const isAwayVotersOnTheMovePending = createSelector(
 
 export const catchAwayVotersOnTheMoveErrors = createSelector(
   getVotersOnTheMoveRequest,
-  ({ awayError }) => awayError || awayError,
+  ({ awayError }) => awayError,
 );
