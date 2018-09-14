@@ -160,12 +160,12 @@ export class VotersOnTheMove extends React.Component {
           <Collapsable.Section>
             <div>
               <p>For voters relocating within Portland during 2006 - 2016, the visualizations below show movement distance and direction by age group.</p>
-                <ChartTitle title={'Movement of Registered Voters in Portland'} subtitle={'Direction and distance of movement relative to the Portland city center, 2006-2016'} />
+                <ChartTitle title={'Movement of Registered Voters Within Portland'} subtitle={'Number of moves and change relative to city center by age group as measured by changes in voter registration, 2006-2016'} />
               <DataTable data={tableData} />
               <p>Overall, a greater percentage of Portland registered voters moved away from the city center than moved towards it. The sample of individual voter movements below paint a more granual picture of voter movement patterns.</p>
               { (votersOnTheMove && awayVotersOnTheMove) &&
                 <div>
-                <ChartTitle title={'Sampling Voter Movement'} subtitle={'Random sampling of 2000 voter movements relative to the Portland city center'} />
+                <ChartTitle title={'Distance and Direction of Moves Within Portland'} subtitle={'Miles and direction moved for moves within Portland for 2000 randomly sampled moves'} />
                 <div className={smallMultiples}>
                   <div className={chartColumn}>
                     <h2>Moves Towards City Center</h2>
