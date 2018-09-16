@@ -7,6 +7,7 @@ import humanImpactOfSweepingUrbanCampsites from './human-impact-of-sweeping-urba
 import exploreUrbanCampsiteSweeps from './explore-urban-campsite-sweeps';
 import studentEnrollmentTrends from './student-enrollment-trends';
 import understandingStaffCuts from './understanding-staff-cuts';
+import votersOnTheMove from './voters-on-the-move';
 
 export default function createReducer(asyncReducers) {
   return combineReducers({
@@ -18,6 +19,7 @@ export default function createReducer(asyncReducers) {
     classSizeAndQuality,
     studentEnrollmentTrends,
     understandingStaffCuts,
+    votersOnTheMove,
     ...asyncReducers,
   });
 }
