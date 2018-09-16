@@ -54,4 +54,4 @@ export { default as StackedAreaChart } from './StackedAreaChart/StackedAreaChart
 export { default as PDF } from './PDF/PDF';
 export { default as SimpleLegend } from './SimpleLegend/SimpleLegend';
 export { default as ChartContainer } from './ChartContainer/ChartContainer';
-
+export { default as HeatMap } from './HeatMap/HeatMap';
