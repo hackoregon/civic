@@ -73,10 +73,7 @@ const scrollToTopClass = css`
   }
 `;
 
-const defaultAttribution = (
-  <div>
-    &copy; Copyright {(new Date()).getFullYear()}
-  </div>);
+const defaultAttribution = `\u00A9 Copyright ${(new Date()).getFullYear()}`;
 
 const Footer = ({ attribution }) => (
   <div className={footerClass}>
