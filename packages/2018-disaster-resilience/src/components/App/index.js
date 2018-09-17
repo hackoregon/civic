@@ -12,7 +12,7 @@ import ProactivePlanning from '../ProactivePlanning';
 
 const App = () => (
   <PageLayout
-    teamTitle="Disaster Resiliance"
+    teamTitle="Disaster Resilience"
     heroTitle="Assessing Risk and Prioritizing Action to Strengthen Resilience in the Face of a Natural Disaster"
   >
     <p>The Cascadia Subduction Zone fault, running 100 miles off the coast from northern California to British Columbia, has the potential to cause a 9.0+ magnitude earthquake. Scientists estimate there is a 40% chance this event will occur within the next 50 years. Portland is well within the affected zone for this earthquake.</p>
