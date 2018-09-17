@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { css } from 'emotion';
 
-import { CivicStoryCard, BaseMap, IconMap, GradientScale } from '@hackoregon/component-library';
+import { CivicStoryCard, BaseMap, IconMap } from '@hackoregon/component-library';
+import CoordsShakingInformation from './CoordsShakingInformation';
 
 import {
   fetchYouAndYourNeighbors,
@@ -19,22 +20,18 @@ import {
   getYouAndYourNeighborsCoordsData,
   getSelectedCoords,
 } from '../../state/you-and-your-neighbors/selectors';
+import {
+  poiIconZoomScale,
+  poiGetIconColor,
+  poiIconMapping,
+} from './layerStyles';
+
 
 const mapContainer = css`
   display: flex;
   justifyContent: center;
   width: 500px;
   margin: 0 auto;
-`;
-
-const emphasis = css`
-  color: #000;
-`;
-
-const gradientLabel = css`
-  ${emphasis};
-  position: relative;
-  bottom: -10px;
 `;
 
 const LAT = 45.5231;
@@ -58,155 +55,6 @@ const mapGLOptions = {
   keyboard: false,
 };
 
-// Slide 016 - points of interest
-const poiIconMapping = {
-  School: {
-    x: 0,
-    y: 0,
-    width: 250,
-    height: 250,
-    mask: true,
-  },
-  Hospital: {
-    x: 250,
-    y: 0,
-    width: 250,
-    height: 250,
-    mask: true,
-  },
-  BEECN: {
-    x: 500,
-    y: 0,
-    width: 250,
-    height: 250,
-    mask: true,
-  },
-  'Fire Station': {
-    x: 0,
-    y: 250,
-    width: 250,
-    height: 250,
-    mask: true,
-  },
-  Pin: {
-    x: 250,
-    y: 250,
-    width: 250,
-    height: 250,
-    mask: true,
-  },
-  COMMCTR: {
-    x: 500,
-    y: 250,
-    width: 250,
-    height: 250,
-    mask: true,
-  },
-};
-
-const poiIconZoomScale = zoom => zoom > 11.5 ? 10 :
-  zoom > 10.5 ? 8 :
-  zoom > 9.5 ? 6 :
-  zoom > 8.5 ? 4 :
-  zoom > 7.5 ? 2 :
-  1;
-
-const poiGetIconColor = f => f.properties.type === 'BEECN' ? [0, 0, 0, 255] :
-  f.properties.type === 'COMMCTR' ? [114, 29, 124, 255] :
-  f.properties.type === 'Fire Station' ? [220, 69, 86, 255] :
-  f.properties.type === 'School' ? [255, 178, 38, 255] :
-  f.properties.type === 'Hospital' ? [30, 98, 189, 255] :
-  [0, 0, 0, 255];
-
-const shakingScale = {
-  1: {
-    shaking: 'Not felt',
-    description: 'Not felt except by a very few under especially favorable conditions.',
-  },
-  2: {
-    shaking: 'Weak',
-    description: 'Felt only by a few persons at rest,especially on upper floors of buildings.',
-  },
-  3: {
-    shaking: 'Weak',
-    description: 'Felt quite noticeably by persons indoors, especially on upper floors of buildings. Many people do not recognize it as an earthquake. Standing motor cars may rock slightly. Vibrations similar to the passing of a truck. Duration estimated.',
-  },
-  4: {
-    shaking: 'Light',
-    description: 'Felt indoors by many, outdoors by few during the day. At night, some awakened. Dishes, windows, doors disturbed; walls make cracking sound. Sensation like heavy truck striking building. Standing motor cars rocked noticeably.',
-  },
-  5: {
-    shaking: 'Moderate',
-    description: 'Felt by nearly everyone; many awakened. Some dishes, windows broken. Unstable objects overturned. Pendulum clocks may stop.',
-  },
-  6: {
-    shaking: 'Strong',
-    description: 'Felt by all, many frightened. Some heavy furniture moved; a few instances of fallen plaster. Damage slight.',
-  },
-  7: {
-    shaking: 'Very strong',
-    description: 'Damage negligible in buildings of good design and construction; slight to moderate in well-built ordinary structures; considerable damage in poorly built or badly designed structures; some chimneys broken.',
-  },
-  8: {
-    shaking: 'Severe',
-    description: 'Damage slight in specially designed structures; considerable damage in ordinary substantial buildings with partial collapse. Damage great in poorly built structures. Fall of chimneys, factory stacks, columns, monuments, walls. Heavy furniture overturned.',
-  },
-  9: {
-    shaking: 'Violent',
-    description: 'Damage considerable in specially designed structures; well-designed frame structures thrown out of plumb. Damage great in substantial buildings, with partial collapse. Buildings shifted off foundations.',
-  },
-  10: {
-    shaking: 'Extreme',
-    description: 'Some well-built wooden structures destroyed; most masonry and frame structures destroyed with foundations. Rails bent.',
-  },
-};
-
-const landslidesScale = {
-  None: {
-    scale: 0,
-    description: 'No potential permanent ground deformation due to landslides',
-  },
-  Low: {
-    scale: 1,
-    description: 'Low potential permanent ground deformation due to landslides (0 - 4 inches)',
-  },
-  Moderate: {
-    scale: 2,
-    description: 'Moderate potential permanent ground deformation due to landslides (4 - 12 inches)',
-  },
-  High: {
-    scale: 3,
-    description: 'High potential permanent ground deformation due to landslides (12 - 39 inches)',
-  },
-  'Very High': {
-    scale: 4,
-    description: 'Very high potential permanent ground deformation due to landslides (39 - 173 inches)',
-  },
-};
-
-const liquefactionScale = {
-  None: {
-    scale: 0,
-    description: 'No potential permanent ground deformation due to liquefaction',
-  },
-  Low: {
-    scale: 1,
-    description: 'Low potential permanent ground deformation due to liquefaction (0 - 4 inches)',
-  },
-  Moderate: {
-    scale: 2,
-    description: 'Moderate potential permanent ground deformation due to liquefaction (4 - 12 inches)',
-  },
-  High: {
-    scale: 3,
-    description: 'High potential permanent ground deformation due to liquefaction (12 - 39 inches)',
-  },
-  'Very High': {
-    scale: 4,
-    description: 'Very high potential permanent ground deformation due to liquefaction (39 - 173 inches)',
-  },
-};
-
 export class YouAndYourNeighbors extends React.Component {
 
   componentDidMount() {
@@ -226,27 +74,8 @@ export class YouAndYourNeighbors extends React.Component {
     } = this.props;
 
     const geocoderChange = viewport => setCoordinates({ latitude: viewport.latitude, longitude: viewport.longitude });
-    const coordProperties = (coordsData && coordsData.features.length > 0) && coordsData.features[0].properties;
+    const coordsProperties = (coordsData && coordsData.features.length > 0) && coordsData.features[0].properties;
     const noCoordsData = coordsData && coordsData.features.length < 1;
-
-    const overlay = !data
-    ? null
-    : (
-      <IconMap
-        data={data.features}
-        pickable
-        opacity={0.5}
-        iconAtlas="https://i.imgur.com/xgTAROe.png"
-        iconMapping={poiIconMapping}
-        iconSizeScale={poiIconZoomScale}
-        getPosition={f => f.geometry === null ? [0, 0] : f.geometry.coordinates}
-        getIcon={f => f.properties.type}
-        getSize={f => 11}
-        getColor={poiGetIconColor}
-        autoHighlight={false}
-        highlightColor={[0, 0, 0, 0]}
-      />
-    );
 
     return (
       <CivicStoryCard
@@ -268,54 +97,29 @@ export class YouAndYourNeighbors extends React.Component {
               geocoderOnChange={geocoderChange}
               mapGLOptions={mapGLOptions}
             >
-              {overlay}
+              {
+                data &&
+                  <IconMap
+                    data={data.features}
+                    pickable
+                    opacity={0.5}
+                    iconAtlas="https://i.imgur.com/xgTAROe.png"
+                    iconMapping={poiIconMapping}
+                    iconSizeScale={poiIconZoomScale}
+                    getPosition={f => (f.geometry === null ? [0, 0] : f.geometry.coordinates)}
+                    getIcon={f => f.properties.type}
+                    getSize={f => 11}
+                    getColor={poiGetIconColor}
+                    autoHighlight={false}
+                    highlightColor={[0, 0, 0, 0]}
+                  />
+              }
             </BaseMap>
           </div>
           { noCoordsData && <p>We don't have complete information for your address. <a href='http://www.civicplatform.org/'>Learn more about how your city can work to get their data in Civic.</a></p>}
           {
-            coordProperties &&
-            <div>
-              <h3>
-                <strong>Shaking Intensity: </strong>{shakingScale[coordProperties.pgv_site_mean_mmi].shaking}
-              </h3>
-              <strong className={gradientLabel}>Less shaking</strong>
-              <GradientScale
-                domain={[1, 10]}
-                primary={coordProperties.pgv_site_mean_mmi}
-                secondary={[coordProperties.pgv_site_min_mmi,coordProperties.pgv_site_max_mmi]}
-                height={50}
-              />
-              <p><strong>Best case:</strong> {shakingScale[coordProperties.pgv_site_min_mmi].description}</p>
-              <p className={emphasis}><strong>Most likely case:</strong> {shakingScale[coordProperties.pgv_site_mean_mmi].description}</p>
-              <p><strong>Worst case:</strong> {shakingScale[coordProperties.pgv_site_max_mmi].description}</p>
-
-              <h3>
-                <strong>Landslide Potential: </strong>{coordProperties.pgd_landslide_wet_mean_di}
-              </h3>
-              <strong className={gradientLabel}>Less landslide potential</strong>
-              <GradientScale
-                domain={[0, 4]}
-                primary={landslidesScale[coordProperties.pgd_landslide_wet_mean_di].scale}
-                secondary={[landslidesScale[coordProperties.pgd_landslide_wet_min_di].scale, landslidesScale[coordProperties.pgd_landslide_wet_max_di].scale]}
-                height={50}
-              />
-              <p><strong>Best case:</strong> {landslidesScale[coordProperties.pgd_landslide_wet_min_di].description}</p>
-              <p className={emphasis}><strong>Most likely case:</strong> {landslidesScale[coordProperties.pgd_landslide_wet_mean_di].description}</p>
-              <p><strong>Worst case:</strong> {landslidesScale[coordProperties.pgd_landslide_wet_max_di].description}</p>
-              <h3>
-                <strong>Liquefaction Potential: </strong>{coordProperties.pgd_liquefaction_wet_mean_di}
-              </h3>
-              <strong className={gradientLabel}>Less liquefaction potential</strong>
-              <GradientScale
-                domain={[0, 4]}
-                primary={liquefactionScale[coordProperties.pgd_liquefaction_wet_mean_di].scale}
-                secondary={[liquefactionScale[coordProperties.pgd_liquefaction_wet_min_di].scale, liquefactionScale[coordProperties.pgd_liquefaction_wet_max_di].scale]}
-                height={50}
-              />
-              <p><strong>Best case:</strong> {liquefactionScale[coordProperties.pgd_liquefaction_wet_min_di].description}</p>
-              <p className={emphasis}><strong>Most likely case:</strong> {liquefactionScale[coordProperties.pgd_liquefaction_wet_mean_di].description}</p>
-              <p><strong>Worst case:</strong> {liquefactionScale[coordProperties.pgd_liquefaction_wet_max_di].description}</p>
-            </div>
+            coordsProperties &&
+            <CoordsShakingInformation coordsProperties={coordsProperties} />
           }
         </div>
       </CivicStoryCard>
