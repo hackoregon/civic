@@ -3,7 +3,11 @@ import { connect } from 'react-redux';
 import { css } from 'emotion';
 import { insert } from 'ramda';
 
-import { CivicStoryCard, GradientScale, ChartTitle } from '@hackoregon/component-library';
+import {
+  CivicStoryCard,
+  GradientScale,
+  ChartTitle,
+} from '@hackoregon/component-library';
 
 import {
   fetchAllHousingPolicyData,
@@ -61,9 +65,20 @@ function SelectedPolicy(props) {
         border: 1px solid red;
       `}
     >
+      <h3>Category: {props.data.category}</h3>
+      <p>{props.data.description}</p>
+      <h3>Implementing governments</h3>
+      <ul>
       {props.data.governments.map(item => (
-        <div>{item.government_entity}</div>
+        <li key={item.government_entity}>{item.government_entity}<ul><li>{item.name && <strong>{`${item.name}: `}</strong>}{item.description}</li></ul></li>
       ))}
+      </ul>
+      <h3>More information:</h3>
+      <ul>
+      {props.data.links.map(
+        item => item.link && <li key={item.link}><a href={item.link}>{item.link_name}</a></li>
+      )}
+      </ul>
     </div>
   );
 }
@@ -71,7 +86,11 @@ function SelectedPolicy(props) {
 function PolicyText(props) {
   return (
     <div className={policyContainer} onClick={props.onClick}>
-      {props.selected ? <h2>{props.data.policy}</h2> : <h3>{props.data.policy}</h3>}
+      {props.selected ? (
+        <h2>{props.data.policy_name}</h2>
+      ) : (
+        <h3>{props.data.policy_name}</h3>
+      )}
     </div>
   );
 }
@@ -146,7 +165,10 @@ export class ExploreHousingPolicyImplementation extends React.Component {
           information.
         </p>
 
-        <ChartTitle title="Housing Policies In The Portland Metro Area" subtitle="Collected by Hack Oregon, as of June 2018" />
+        <ChartTitle
+          title="Housing Policies In The Portland Metro Area"
+          subtitle="Collected by Hack Oregon, as of June 2018"
+        />
 
         <div className={flexContainer}>
           {tableData &&

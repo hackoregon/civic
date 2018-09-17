@@ -28,7 +28,9 @@ export const getTableData = createSelector(
         program => program.policy === p.policy_id
       ).length;
       data.push({
-        policy: p.policy_type,
+        policy: p.policy_id,
+        policy_name: p.policy_type,
+        policy_desc: p.description,
         governments: totalCount,
       });
     });
@@ -47,8 +49,29 @@ export const getSelectedPolicyData = createSelector(
     const implementingGovernments = programs.filter(
       program => program.policy === selectedPolicy
     );
+
+    const selectedPolicyData = policies.filter(
+      policy => policy.policy_id === selectedPolicy
+    );
+
     return {
       policy: selectedPolicy,
+      description: selectedPolicyData[0].description,
+      category: selectedPolicyData[0].category,
+      links: [
+        {
+          link: selectedPolicyData[0].link1,
+          link_name: selectedPolicyData[0].link1_name,
+        },
+        {
+          link: selectedPolicyData[0].link2,
+          link_name: selectedPolicyData[0].link2_name,
+        },
+        {
+          link: selectedPolicyData[0].link3,
+          link_name: selectedPolicyData[0].link3_name,
+        },
+      ],
       governments: implementingGovernments,
     };
   }
