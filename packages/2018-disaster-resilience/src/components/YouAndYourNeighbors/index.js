@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { css } from 'emotion';
 
-import { CivicStoryCard, BaseMap, IconMap } from '@hackoregon/component-library';
+import { CivicStoryCard, BaseMap, IconMap, ChartTitle } from '@hackoregon/component-library';
 import CoordsShakingInformation from './CoordsShakingInformation';
 
 import {
@@ -32,6 +32,7 @@ const mapContainer = css`
   justifyContent: center;
   width: 500px;
   margin: 0 auto;
+  padding-bottom: 40px;
 `;
 
 const LAT = 45.5231;
@@ -85,7 +86,8 @@ export class YouAndYourNeighbors extends React.Component {
         error={error && 'Error loading data'}
       >
         <div>
-        <p>It will be critical for individuals to understand their location relative to key resources immediately following an earthquake. The <a href="https://www.portlandoregon.gov/pbem/59630" target="_blank" rel="noopener noreferrer">BEECN site</a> is a place to go in Portland after a major earthquake to ask for emergency assistance or report severe damage/injury. Places like hospitals, fire stations and schools will be rallying areas for the community and crucial for recovery efforts. Input your address, or a friend/family member’s address below to generate a personalized map.</p>
+        <p>It will be critical for individuals to understand their location relative to key resources immediately following an earthquake. The <a href="https://www.portlandoregon.gov/pbem/59630" target="_blank" rel="noopener noreferrer">BEECN site</a> is a place to go in Portland after a major earthquake to ask for emergency assistance or report severe damage/injury. Places like hospitals, fire stations and schools will be rallying areas for the community and crucial for recovery efforts. Input your address, or a friend/family member’s address below to generate a personalized map and information about expected impacts for your location.</p>
+          <ChartTitle title="Your Personalized Earthquake Map" subtitle="BEECN locations, Schools, Hospitals, and Fire Stations" />
           <div className={mapContainer}>
             <BaseMap
               initialLongitude={LONG}
