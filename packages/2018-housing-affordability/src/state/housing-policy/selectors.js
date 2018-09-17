@@ -28,7 +28,7 @@ export const getTableData = createSelector(
         program => program.policy === p.policy_id
       ).length;
       data.push({
-        policy: p.policy_id,
+        policy: p.policy_type,
         governments: totalCount,
       });
     });

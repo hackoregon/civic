@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { css } from 'emotion';
 import { insert } from 'ramda';
 
-import { CivicStoryCard, GradientScale } from '@hackoregon/component-library';
+import { CivicStoryCard, GradientScale, ChartTitle } from '@hackoregon/component-library';
 
 import {
   fetchAllHousingPolicyData,
@@ -27,10 +27,14 @@ const svgHeading = css`
   padding: 5px;
 `;
 
+const policyContainer = css`
+  width: 100%;
+`;
+
 const flexContainer = css`
   display: flex;
   width: 90%;
-  margin: 40px auto;
+  margin: 0px auto;
   flex-wrap: wrap;
   justify-content: space-around;
 `;
@@ -64,9 +68,18 @@ function SelectedPolicy(props) {
   );
 }
 
+function PolicyText(props) {
+  return (
+    <div className={policyContainer} onClick={props.onClick}>
+      {props.selected ? <h2>{props.data.policy}</h2> : <h3>{props.data.policy}</h3>}
+    </div>
+  );
+}
+
 function PolicyCircle(props) {
   return (
     <div className={svgHeading} onClick={props.onClick}>
+      {props.data.policy}
       <svg
         viewBox="0 0 100 100"
         width="100px"
@@ -133,20 +146,7 @@ export class ExploreHousingPolicyImplementation extends React.Component {
           information.
         </p>
 
-        <div
-          className={css`
-            width: 90%;
-            margin: 0 auto;
-          `}
-        >
-          <strong className={gradientLabel}>Fewer policies</strong>
-          <GradientScale
-            colorScale="ocean"
-            domain={[0, 100]}
-            primary={800}
-            height={50}
-          />
-        </div>
+        <ChartTitle title="Housing Policies In The Portland Metro Area" subtitle="Collected by Hack Oregon, as of June 2018" />
 
         <div className={flexContainer}>
           {tableData &&
@@ -163,19 +163,21 @@ export class ExploreHousingPolicyImplementation extends React.Component {
                   key={'selectedPolicyInset'}
                 />
               ) : (
-                <div className={css`min-width=100%;`}><h2>Pick One</h2></div>
+                <div className={css`min-width=100%;`}>
+                  <h2>Select a policy for more information</h2>
+                </div>
               ),
               tableData.map(
                 item =>
                   item.policy === this.props.selectedPolicy ? (
-                    <PolicyCircle
+                    <PolicyText
                       data={item}
                       onClick={() => this.handleClick(item.policy)}
                       selected
                       key={item.policy}
                     />
                   ) : (
-                    <PolicyCircle
+                    <PolicyText
                       data={item}
                       onClick={() => this.handleClick(item.policy)}
                       key={item.policy}
