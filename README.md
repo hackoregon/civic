@@ -54,11 +54,12 @@ $ yarn test --watch
 ## Using storybook
 
 We are committed to a shared component library. This is achieved using the `component-library` package and React Storybook.
-Run Storybook with the following command:
+Run Storybook with the following command or [view it here](https://hackoregon.github.io/civic/):
 
 ```bash
 $ yarn run storybook
 ```
+
 
 ## Project Layout
 
@@ -75,19 +76,28 @@ There are three types of packages right now:
 Every package has its own README with further details on what the package is for and how it works.
 
   - Year Packages
+    - [2018](packages/2018/README.md)
     - [2017](packages/2017/README.md)
   - Project Packages
+    - [2018-neighborhood-development](packages/2018-neighborhood-development/README.md)
+    - [2018-disaster-resilience](packages/2018-disaster-resilience/README.md)
+    - [2018-transportation-systems](packages/2018-transportation-systems/README.md)
+    - [2018-housing-affordability](packages/2018-housing-affordability/README.md)
+    - [2018-local-elections](packages/2018-local-elections/README.md)
+    - [2018-example-farmers-markets](packages/2018-example-farmers-markets/README.md)
     - [budget](packages/budget/README.md)
     - [emergency-response](packages/emergency-response/README.md)
     - [homelessness](packages/homelessness/README.md)
     - [housing](packages/housing/README.md)
     - [transportation](packages/transportation/README.md)
   - Utilities
+    - [civic-sandbox](packages/civic-sandbox/README.md)
     - [civic-babel-presets](packages/civic-babel-presets/README.md)
     - [component-library](packages/component-library/README.md)
     - [dev-server](packages/dev-server/README.md)
     - [mock-wrapper](packages/mock-wrapper/README.md)
     - [webpack-common](packages/webpack-common/README.md)
+    
 
 ## Testing across all packages
 

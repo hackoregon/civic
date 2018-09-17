@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from 'emotion';
-import CivicStoryCard from '../CivicStoryCard/CivicStoryCard';
-import Header from '../Navigation/Header'
-import Footer from '../Footer/Footer'
-import CollectionHero from '../Hero/CollectionHero'
+import Header from '../Navigation/Header';
+import Footer from '../Footer/Footer';
+import CollectionHero from '../Hero/CollectionHero';
 
 const defaultStyles = css`
   padding: 0px 24px;
@@ -30,9 +29,9 @@ const defaultStyles = css`
   }
 `;
 
-const PageLayout = ({ cardId, collectionId, heroTitle, heroSubtitle, title, mainProjectColor, teamTitle, overlay, children }) => (
+const PageLayout = ({ heroTitle, heroSubtitle, mainProjectColor, teamTitle, overlay, children, attribution }) => (
   <div>
-    <Header title="Civic" mainProjectColor={mainProjectColor} overlay={overlay ? overlay : false} />
+    <Header title="Civic" mainProjectColor={mainProjectColor} overlay={overlay || false} />
     { heroTitle && <CollectionHero
       teamTitle={teamTitle}
       heroTitle={heroTitle}
@@ -42,7 +41,7 @@ const PageLayout = ({ cardId, collectionId, heroTitle, heroSubtitle, title, main
     <div className={defaultStyles}>
       {children}
     </div>
-    <Footer />
+    <Footer attribution={attribution} />
   </div>
 );
 
@@ -53,9 +52,9 @@ PageLayout.propTypes = {
   teamTitle: PropTypes.string,
   heroTitle: PropTypes.string,
   heroSubtitle: PropTypes.string,
-  title: PropTypes.string,
   mainProjectColor: PropTypes.string,
   children: PropTypes.node,
+  attribution: PropTypes.node,
 };
 
 export default PageLayout;
