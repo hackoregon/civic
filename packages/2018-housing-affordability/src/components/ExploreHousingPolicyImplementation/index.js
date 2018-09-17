@@ -2,11 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { css } from 'emotion';
 import { insert } from 'ramda';
+import { groupBy } from 'lodash';
+
+import CivicVictoryTheme from '@hackoregon/component-library/src/VictoryTheme/VictoryThemeIndex';
 
 import {
   CivicStoryCard,
-  GradientScale,
   ChartTitle,
+  SimpleLegend,
 } from '@hackoregon/component-library';
 
 import {
@@ -22,17 +25,18 @@ import {
   getSelectedPolicy,
   getSelectedPolicyData,
 } from '../../state/housing-policy/selectors';
-import { gradientLabel } from '../css-utils';
-
-const svgHeading = css`
-  font-size: 26px;
-  font-family: 'Rubik', sans-serif;
-  font-weight: 400;
-  padding: 5px;
-`;
 
 const policyContainer = css`
   width: 100%;
+`;
+
+const policyLink = css`
+  color: #ee4950;
+  border-bottom: 2px solid;
+  cursor: pointer;
+  opacity: 0.9;
+  transition: all 0.25s ease-in-out;
+  width: fit-content;
 `;
 
 const flexContainer = css`
@@ -40,45 +44,68 @@ const flexContainer = css`
   width: 90%;
   margin: 0px auto;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: flex-start;
 `;
 
-const ocean = [
-  '#ffffe1',
-  '#effac1',
-  '#ceedc2',
-  '#8cd5c6',
-  '#4fc1cc',
-  '#28a1c8',
-  '#3e76b3',
-  '#4752a2',
-  '#2d4070',
+const legendTitles = [
+  { name: 'Low Implementation' },
+  { name: 'Medium Implementation' },
+  { name: 'High Implementation' },
 ];
-const colorScale = (num, total) => ocean[Math.floor((9 * num) / total)];
-const fillColor = selected => (selected ? '#eb2d5f' : '#AAA4AB');
+const legendScale = [7, 15, 99];
 
 function SelectedPolicy(props) {
+  const govData = groupBy(
+    props.data.governments,
+    item => item.government_entity
+  );
+
   return (
     <div
       className={css`
         width: 100%;
-        border: 1px solid red;
       `}
     >
       <h3>Category: {props.data.category}</h3>
       <p>{props.data.description}</p>
       <h3>Implementing governments</h3>
+      {console.log(govData)}
+      {console.log(Object.keys(govData))}
       <ul>
-      {props.data.governments.map(item => (
-        <li key={item.government_entity}>{item.government_entity}<ul><li>{item.name && <strong>{`${item.name}: `}</strong>}{item.description}</li></ul></li>
-      ))}
+        {Object.keys(govData).map(gov => (
+          <li key={gov}>
+            <strong>{gov}</strong>
+            <ul>
+              {govData[gov].map(
+                item =>
+                  item.description && (
+                    <li key={item.description}>
+                      {item.name && <a href={item.link}>{item.name}</a>}
+                      {item.name && ': '}
+                      {`${item.description} `}
+                      {!item.name && <a href={item.link}>(link)</a>}
+                    </li>
+                  )
+              )}
+            </ul>
+          </li>
+        ))}
       </ul>
-      <h3>More information:</h3>
-      <ul>
-      {props.data.links.map(
-        item => item.link && <li key={item.link}><a href={item.link}>{item.link_name}</a></li>
+      {props.data.links[0].link && (
+        <div>
+          <h3>More information:</h3>
+          <ul>
+            {props.data.links.map(
+              item =>
+                item.link && (
+                  <li key={item.link}>
+                    <a href={item.link}>{item.link_name}</a>
+                  </li>
+                )
+            )}
+          </ul>
+        </div>
       )}
-      </ul>
     </div>
   );
 }
@@ -87,47 +114,45 @@ function PolicyText(props) {
   return (
     <div className={policyContainer} onClick={props.onClick}>
       {props.selected ? (
-        <h2>{props.data.policy_name}</h2>
+        <h2 className={policyLink}>
+          <SimpleCircle
+            selected={props.selected}
+            index={legendScale.findIndex(x => props.data.governments <= x)}
+          />
+          {props.data.policy_name}
+        </h2>
       ) : (
-        <h3>{props.data.policy_name}</h3>
+        <h3 className={policyLink}>
+          <SimpleCircle
+            selected={props.selected}
+            index={legendScale.findIndex(x => props.data.governments <= x)}
+          />
+          {props.data.policy_name}
+        </h3>
       )}
     </div>
   );
 }
 
-function PolicyCircle(props) {
+function SimpleCircle(props) {
+  const width = props.selected ? '18px' : '10px';
+  const padding = props.selected ? '9px' : '5px';
+
   return (
-    <div className={svgHeading} onClick={props.onClick}>
-      {props.data.policy}
-      <svg
-        viewBox="0 0 100 100"
-        width="100px"
-        xmlns="http://www.w3.org/2000/svg"
-        version="1.1"
-      >
-        <circle cx="50" cy="50" r="50" fill={fillColor(props.selected)} />
-        <circle cx="50" cy="50" r="45" fill="#F3F2F3" />
-        <circle cx="80" cy="80" r="20" fill="#F3F2F3" />
-        <circle
-          cx="80"
-          cy="80"
-          r="18"
-          fill={colorScale(props.data.governments, 20)}
-        />
-        <text x="50" y="53.25" textAnchor="middle" alignmentBaseline="middle">
-          {props.data.policy}
-        </text>
-        <text
-          x="80"
-          y="83.25"
-          textAnchor="middle"
-          alignmentBaseline="middle"
-          fill="#F3F2F3"
-        >
-          {props.data.governments}
-        </text>
-      </svg>
-    </div>
+    <svg
+      className={css`
+        padding-right: ${padding};
+      `}
+      viewBox="0 0 10 10"
+      width={width}
+    >
+      <circle
+        cx="5"
+        cy="5"
+        r="5"
+        fill={CivicVictoryTheme.civic.group.colorScale[props.index]}
+      />
+    </svg>
   );
 }
 
@@ -159,16 +184,16 @@ export class ExploreHousingPolicyImplementation extends React.Component {
         slug="explore-housing-policy-implementation"
       >
         <p>
-          Use the arrows to click through policies currently being utilized to
-          learn more about what the policy means for affordable housing, which
-          governments in the region implement it, and links to additional
-          information.
+          Navigate through policies currently being utilized to learn more about
+          what the policy means for affordable housing, which governments in the
+          region implement it, and links to additional information.
         </p>
 
         <ChartTitle
           title="Housing Policies In The Portland Metro Area"
           subtitle="Collected by Hack Oregon, as of June 2018"
         />
+        <SimpleLegend legendData={legendTitles} />
 
         <div className={flexContainer}>
           {tableData &&
@@ -185,8 +210,8 @@ export class ExploreHousingPolicyImplementation extends React.Component {
                   key={'selectedPolicyInset'}
                 />
               ) : (
-                <div className={css`min-width=100%;`}>
-                  <h2>Select a policy for more information</h2>
+                <div className={policyContainer}>
+                  <h2>Select a policy for more information:</h2>
                 </div>
               ),
               tableData.map(
@@ -228,11 +253,6 @@ export class ExploreHousingPolicyImplementation extends React.Component {
           accurate representation of policies being implemented, government
           websites were reviewed and interviews with government employees were
           conducted in order to verify our findings.
-        </p>
-        <p>
-          <a href="https://docs.google.com/spreadsheets/d/1SVs9AQkw5guxEIuV1eGASKCg5miWhPn3UoZrALQpXLI/edit?usp=sharing">
-            Explore Findings
-          </a>
         </p>
       </CivicStoryCard>
     );
