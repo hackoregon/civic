@@ -35,7 +35,7 @@ class Collapsable extends React.Component {
       <a className={ toggleStyle } onClick={ this.onToggle }>
        { cta }
        <span
-        style={{ display: 'block', fontSize: '1em' }}
+        style={{ display: 'block' }}
         className={ `fa fa-arrow-${arrow}` }>
       </span>
       </a>

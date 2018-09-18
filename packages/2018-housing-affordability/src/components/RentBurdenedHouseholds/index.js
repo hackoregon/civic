@@ -87,7 +87,7 @@ export class RentBurdenedHouseholds extends React.Component {
             title="Cost Burden Rates for Renters in 2015"
             subtitle={selectedCity}
             data={chartData}
-            innerRadius={80}
+            innerRadius={90}
             dataLabel="label"
             dataValue="value"
           />
