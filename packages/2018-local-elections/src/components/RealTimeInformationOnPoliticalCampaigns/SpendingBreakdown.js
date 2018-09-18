@@ -27,7 +27,7 @@ const SpendingBreakdown = ({ spending, loading }) => {
       xLabel="Category"
       yLabel="Spending"
       title="Spending breakdown"
-      subtitle="Spending reported to ORSTAR by category"
+      subtitle="Spending reported to ORESTAR by category"
       dataValueFormatter={numeric}
       height={300}
       minimalist

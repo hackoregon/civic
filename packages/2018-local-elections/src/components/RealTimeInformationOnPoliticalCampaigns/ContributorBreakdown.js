@@ -23,7 +23,7 @@ const ContributorBreakdown = ({ contributors, loading }) => {
       loading={loading}
       data={data}
       title="Contributor breakdown"
-      subtitle="Contributions reported to ORSTAR by category"
+      subtitle="Contributions reported to ORESTAR by category"
       innerRadius={50}
       height={400}
     />
