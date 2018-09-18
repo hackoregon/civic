@@ -99,7 +99,7 @@ class HeatMap extends React.Component {
 
 HeatMap.propTypes = {
   data: object.isRequired,
-  id: string,
+  id: string.isRequired,
   centerLongitude: number,
   centerLatitude: number,
   initialZoom: number,
@@ -116,6 +116,14 @@ HeatMap.propTypes = {
   circleStrokeColor: string,
   circleStrokeWidth: number,
   circleStrokeOpacity: oneOfType([array, number]),
+};
+
+HeatMap.defaultProps = {
+  centerLongitude: 45.5597,
+  centerLatitude: -122.7066,
+  initialZoom: 9,
+  maxZoom: 19,
+  mapStyle: 'mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg',
 };
 
 export default HeatMap;
