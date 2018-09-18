@@ -13,7 +13,7 @@ const GradientLine = ({ scale, domain, fill }) => {
       y={scale.y(domain.y[1])}
       width={width}
       height={height}
-      style={{ fill, stroke: '#90A4AE' }}
+      style={{ fill, stroke: 'none' }}
     />
   );
 };

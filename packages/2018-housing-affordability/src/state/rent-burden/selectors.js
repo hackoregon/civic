@@ -34,9 +34,9 @@ export const getChartData = createSelector(
     const noBurden = 100 - severeBurden - moderateBurden;
 
     return [
-      { label: 'Severe Burden', value: severeBurden },
-      { label: 'Moderate Burden', value: moderateBurden },
-      { label: 'No Burden', value: noBurden },
+      { label: 'Severe', value: severeBurden },
+      { label: 'Moderate', value: moderateBurden },
+      { label: 'None', value: noBurden },
     ];
   }
 );

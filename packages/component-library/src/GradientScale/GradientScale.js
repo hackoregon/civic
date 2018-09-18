@@ -16,11 +16,6 @@ const colorScales = {
   earth: ['#fff8fc', '#f027f2', '#d7d8e9', '#b2c7e0', '#ab6d5', '#4ba1c8', '#28959b', '#288373', '#286356'],
 };
 
-const invert = css`
-  -webkit-filter: invert(100%); /* safari 6.0 - 9.0 */
-  filter: invert(100%);
-`;
-
 const GradientScale = ({ width, height, domain, primary, secondary = [], colorScale = 'thermal' }) => {
   const data = [
     ...secondary.map(num => ({ x: num, y: 0, type: 'secondary' })),
@@ -28,14 +23,11 @@ const GradientScale = ({ width, height, domain, primary, secondary = [], colorSc
   ];
   return (
     <div>
-      <svg style={{position:'absolute'}} height="0" width="0" className={invert}>
+      <svg style={{position:'absolute'}} height="0" width="0">
         <defs>
           <linearGradient id="myGradient">
-            <stop offset="0%" stopColor="white" />
-            {colorScales[colorScale].map(
-              (color, index) => <stop offset={`${(index * 9.09) + 9.09}%`} stopColor={color} />
-            )}
-            <stop offset="100%" stopColor="black" />
+            <stop offset="0%" stopColor="#FFFFFF" />
+            <stop offset="100%" stopColor="#19B7AA" />
           </linearGradient>
         </defs>
       </svg>
