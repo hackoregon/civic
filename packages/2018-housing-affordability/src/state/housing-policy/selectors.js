@@ -1,9 +1,24 @@
 import { createSelector } from 'reselect';
+import { groupBy } from 'lodash';
 import { rootState } from '../selectors';
 
 export const getHousingPolicy = createSelector(
   rootState,
   ({ housingPolicy }) => housingPolicy
+);
+
+const addLinks = governments => governments.map(program => ({
+  ...program,
+  links: [
+    { link: program.link1, link_name: program.link1_name },
+    { link: program.link2, link_name: program.link2_name },
+    { link: program.link3, link_name: program.link3_name },
+  ],
+}));
+
+const groupByEntity = governments => groupBy(
+  governments,
+  item => item.government_entity
 );
 
 const getProperty = key =>
@@ -73,6 +88,7 @@ export const getSelectedPolicyData = createSelector(
         },
       ],
       governments: implementingGovernments,
+      govData: groupByEntity(addLinks(implementingGovernments)),
     };
   }
 );
