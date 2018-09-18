@@ -6,10 +6,10 @@ import { Line } from 'victory';
 
 const GradientLine = ({ x, datum, scale }) => {
   const isPrimary = datum.type === 'primary';
-  const stroke = isPrimary ? '#201024' : '#AAA4AB';
-  const overlap = isPrimary ? 5 : 3;
+  const stroke = isPrimary ? '#721d7c' : '#AAA4AB';
+  const overlap = isPrimary ? 0 : 0;
   const width = isPrimary ? 8 : 6;
-  const opacity = isPrimary ? 1 : 0.7;
+  const opacity = isPrimary ? 1 : 1;
   return (
     <Line
       y1={scale.y(0) + overlap} y2={scale.y(1) - overlap}

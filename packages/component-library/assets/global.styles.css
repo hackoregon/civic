@@ -104,7 +104,6 @@ a {
   color: rgba(238,73,80,1);
   text-decoration: none;
   cursor: pointer;
-  border-bottom: 2px solid;
   opacity: 0.9;
   transition: all .25s ease-in-out;
 }

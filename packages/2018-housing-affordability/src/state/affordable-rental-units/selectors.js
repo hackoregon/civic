@@ -20,7 +20,7 @@ const allTypes = [
   'Under $800',
   '$600 to $799',
   '$400 to $599',
-  'Less than 400',
+  'Less than $400',
 ];
 
 const chartExclusions = [

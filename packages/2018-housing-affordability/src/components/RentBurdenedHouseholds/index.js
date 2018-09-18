@@ -85,8 +85,9 @@ export class RentBurdenedHouseholds extends React.Component {
         {chartData && (<section>
           <PieChart
             title="Cost Burden Rates for Renters in 2015"
+            subtitle={selectedCity}
             data={chartData}
-            innerRadius={100}
+            innerRadius={80}
             dataLabel="label"
             dataValue="value"
           />

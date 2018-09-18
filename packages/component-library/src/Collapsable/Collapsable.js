@@ -9,7 +9,9 @@ const toggleStyle = css`
   margin-top: 10px;
   display: block;
   text-align: center;
-  background: rgba(238,73,80,0.4);
+  font-family: 'Rubik', sans-serif;
+  font-weight: 500;
+  font-size: 1em;
 `;
 
 class Collapsable extends React.Component {
@@ -33,7 +35,7 @@ class Collapsable extends React.Component {
       <a className={ toggleStyle } onClick={ this.onToggle }>
        { cta }
        <span
-        style={{ display: 'block' }}
+        style={{ display: 'block', fontSize: '1em' }}
         className={ `fa fa-arrow-${arrow}` }>
       </span>
       </a>
