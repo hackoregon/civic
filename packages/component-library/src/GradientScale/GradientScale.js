@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { VictoryGroup, VictoryScatter } from 'victory';
+import { css } from 'emotion';
 
 import GradientLine from './GradientLine';
 import GradientBox from './GradientBox';
@@ -15,22 +16,18 @@ const colorScales = {
   earth: ['#fff8fc', '#f027f2', '#d7d8e9', '#b2c7e0', '#ab6d5', '#4ba1c8', '#28959b', '#288373', '#286356'],
 };
 
-
 const GradientScale = ({ width, height, domain, primary, secondary = [], colorScale = 'thermal' }) => {
   const data = [
-    { x: primary, y: 0, type: 'primary' },
     ...secondary.map(num => ({ x: num, y: 0, type: 'secondary' })),
+    { x: primary, y: 0, type: 'primary' },
   ];
   return (
     <div>
       <svg style={{position:'absolute'}} height="0" width="0">
         <defs>
           <linearGradient id="myGradient">
-            <stop offset="0%" stopColor="white" />
-            {colorScales[colorScale].map(
-              (color, index) => <stop offset={`${(index * 9.09) + 9.09}%`} stopColor={color} />
-            )}
-            <stop offset="100%" stopColor="black" />
+            <stop offset="0%" stopColor="#FFFFFF" />
+            <stop offset="100%" stopColor="#19B7AA" />
           </linearGradient>
         </defs>
       </svg>

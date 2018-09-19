@@ -128,7 +128,7 @@ class RealTimeInformationOnPoliticalCampaigns extends React.Component {
         slug="real-time-information-on-political-campaigns"
         loading={this.props.loadingControls}
       >
-        <h2 className={descriptionClass}>Data on contributions and spending from ORSTAR</h2>
+        <h2 className={descriptionClass}>Data on contributions and spending from ORESTAR</h2>
         <Controls
           campaign={this.props.campaign}
           campaigns={committees}

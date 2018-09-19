@@ -31,8 +31,6 @@ const lime300 = "#DCE775";
 const lightGreen500 = "#8BC34A";
 const teal700 = "#00796B";
 const cyan900 = "#006064";
-const blueGrey50 = "#ECEFF1";
-const blueGrey300 = "#90A4AE";
 const blueGrey700 = "#455A64";
 const grey900 = "#212121";
 const black = "#000000"
@@ -78,7 +76,8 @@ const centeredLabelStyles = assign({ textAnchor: "middle" }, baseLabelStyles);
 
 const pieLabelStyles = {
   fontFamily: sansSerif,
-  fontSize: '18px',
+  fontSize: '16px',
+  fontWeight: 'bold',
 }
 
 const axisLabelStyles = {
@@ -98,8 +97,8 @@ export default {
   area: assign({
     style: {
       data: {
-        fill: grey900,
-        stroke: 'black',
+        fill: 'white',
+        stroke: civicPrimary,
         strokeWidth: 1
       },
       labels: centeredLabelStyles
@@ -109,7 +108,7 @@ export default {
     style: {
       data: {
         fill: 'white',
-        stroke: 'black',
+        stroke: civicPrimary,
         strokeWidth: 1
       }
     }
@@ -118,7 +117,7 @@ export default {
     style: {
       axis: {
         fill: "transparent",
-        stroke: blueGrey300,
+        stroke: civicSecondaryLighter,
         strokeWidth: 2,
         strokeLinecap,
         strokeLinejoin
@@ -129,7 +128,7 @@ export default {
       }),
       grid: {
         fill: "transparent",
-        stroke: blueGrey50,
+        stroke: civicSecondaryLightest,
         strokeDasharray,
         strokeLinecap,
         strokeLinejoin
@@ -138,7 +137,7 @@ export default {
         fill: "transparent",
         padding,
         size: 5,
-        stroke: blueGrey300,
+        stroke: civicSecondaryLighter,
         strokeWidth: 1,
         strokeLinecap,
         strokeLinejoin

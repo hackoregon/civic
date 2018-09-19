@@ -108,8 +108,8 @@ export class AffordableRentalUnitsDwindling extends React.Component {
               dataValueFormatter={percentage}
               title={`${capitalize(selectedCity)} Change in Total Units By Cost Per Month`}
               subtitle="Change in Share of Units by Real Rent Level, 2005-2015"
-              yLabel="Cost Per Month Brackets"
-              xLabel="Percent Change in Total Units"
+              yLabel="Cost Per Month"
+              xLabel="% Change in Total Units"
             />
           </div>)}
           {isError && <ErrorMessage />}

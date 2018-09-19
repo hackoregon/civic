@@ -1,11 +1,12 @@
 import React from 'react';
-import Packages from '../Packages';
-import '@hackoregon/component-library/assets/global.styles.css';
 import { PageLayout } from '@hackoregon/component-library';
+import '@hackoregon/component-library/assets/global.styles.css';
+import Packages from '../Packages';
 
+const attribution = (<a href="https://service.civicpdx.org">Data Sources</a>);
 
 const App = () => (
-  <PageLayout>
+  <PageLayout attribution={attribution}>
     <Packages />
   </PageLayout>
 );
