@@ -33,6 +33,9 @@ const mapContainer = css`
   width: 500px;
   margin: 0 auto;
   padding-bottom: 40px;
+  @media (max-width: 640px) {
+   width: 100%;
+  }
 `;
 
 const LAT = 45.5231;
