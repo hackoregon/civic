@@ -39,14 +39,16 @@ export const getTableData = createSelector(
     if (!policies || !programs) return;
 
     policies.forEach(p => {
-      const totalCount = programs.filter(
+      const matchingPolicies = programs.filter(
         program => program.policy === p.policy_id
-      ).length;
+      );
+      const matchingGovernments = groupByEntity(matchingPolicies);
+      const totalPolicyCount = Object.keys(matchingGovernments).length;
       data.push({
         policy: p.policy_id,
         policy_name: p.policy_type,
         policy_desc: p.description,
-        governments: totalCount,
+        governments: totalPolicyCount,
       });
     });
 

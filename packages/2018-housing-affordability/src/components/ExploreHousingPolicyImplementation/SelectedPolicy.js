@@ -7,14 +7,9 @@ const govLinks = item =>
   item.links.map(
     link =>
       link.link_name && (
-        <ul key={link.name}>
+        <ul>
           <li>
-            {link.link_name}
-            {' ('}
-            <a href={link.link}>
-              <i className={ICONS.link} />
-            </a>
-            {')'}
+            <a href={link.link}>{link.link_name}</a>
           </li>
         </ul>
       )
@@ -42,33 +37,50 @@ function SelectedPolicy({ data }) {
     <div
       className={css`
         width: 100%;
+        border-bottom: 1px solid #f3f3f3;
       `}
     >
       <h3>Category: {data.category}</h3>
       <p>{data.description}</p>
-      <h3>Implementing governments</h3>
+      <h3>Implementing governments:</h3>
       <ul>
         {Object.keys(data.govData).map(gov => (
           <li key={gov}>
-            <strong>{gov}</strong>
-            <ul>
-              {data.govData[gov].map(
-                item =>
-                  item.description && (
-                    <li key={item.description}>
-                      {item.name && `${item.name}: `}
-                      {`${item.description} `}
-                      {govLinks(item)}
-                    </li>
-                  )
-              )}
-            </ul>
+            <p style={{ margin: 0, color: '#001732' }}>
+              <strong>{gov}</strong>
+            </p>
           </li>
         ))}
+      </ul>
+      <h3>More information by government:</h3>
+      <ul>
+        {Object.keys(data.govData).map(
+          gov =>
+            data.govData[gov][0].description && (
+              <li key={gov}>
+                <p style={{ margin: 0, color: '#001732' }}>
+                  <strong>{gov}</strong>
+                </p>
+                <ul>
+                  {data.govData[gov].map(
+                    item =>
+                      item.description && (
+                        <li key={item.description}>
+                          <p style={{ margin: 0 }}>
+                            <i>{item.name && `${item.name}: `}</i>
+                            {`${item.description} `}
+                          </p>
+                          {govLinks(item)}
+                        </li>
+                      )
+                  )}
+                </ul>
+              </li>
+            )
+        )}
       </ul>
       {policyLinks(data)}
     </div>
   );
 }
-
 export default SelectedPolicy;

@@ -4,39 +4,59 @@ import SimpleCircle from './SimpleCircle';
 
 const policyContainer = css`
   width: 100%;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #f3f3f3;
+  padding: 10px 0;
 `;
 
 const policyLink = css`
   color: #ee4950;
-  border-bottom: 2px solid;
   cursor: pointer;
   opacity: 0.9;
   transition: all 0.25s ease-in-out;
   width: fit-content;
+  margin: 0;
 `;
 
-const legendScale = [7, 15, 99];
+const policyCircle = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+`;
+
+const policyText = css`
+`;
+
+const legendScale = [6, 8, 9];
 
 function PolicyText({ onClick, data, selected }) {
   return (
     <div className={policyContainer} onClick={onClick}>
+      <div className={policyCircle}>
+        <SimpleCircle
+          selected={selected}
+          index={legendScale.findIndex(x => data.governments <= x)}
+        />
+      </div>
+      <div className={policyText}>
       {selected ? (
+        <div>
         <h2 className={policyLink}>
-          <SimpleCircle
-            selected={selected}
-            index={legendScale.findIndex(x => data.governments <= x)}
-          />
           {data.policy_name}
         </h2>
+        <h5 className={css`margin: 0;`}>{data.governments} policies</h5>
+        </div>
       ) : (
+        <div>
         <h3 className={policyLink}>
-          <SimpleCircle
-            selected={selected}
-            index={legendScale.findIndex(x => data.governments <= x)}
-          />
           {data.policy_name}
         </h3>
+        <h6 className={css`margin: 0;`}>{data.governments} policies</h6>
+        </div>
       )}
+      </div>
     </div>
   );
 }

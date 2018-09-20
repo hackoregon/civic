@@ -6,6 +6,7 @@ export const START = 'HOUSING_POLICY/START';
 export const SUCCESS = 'HOUSING_POLICY/SUCCESS';
 export const FAILURE = 'HOUSING_POLICY/FAILURE';
 export const SET_POLICY = 'HOUSING_POLICY/SET_POLICY';
+export const UNSET_POLICY = 'HOUSING_POLICY/UNSET_POLICY';
 
 // Simple actions
 export const AllStart = actionEmitter(START);
@@ -25,4 +26,9 @@ export const fetchAllHousingPolicyData = fetchManyAdapter(
 export const setSelectedPolicy = policy => ({
   type: SET_POLICY,
   selectedPolicy: policy,
+});
+
+export const unsetSelectedPolicy = () => ({
+  type: UNSET_POLICY,
+  selectedPolicy: null,
 });

@@ -1,4 +1,4 @@
-import { START, SUCCESS, FAILURE, SET_POLICY } from './actions';
+import { START, SUCCESS, FAILURE, SET_POLICY, UNSET_POLICY } from './actions';
 
 const INITIAL_STATE = {
   pending: false,
@@ -38,6 +38,11 @@ const reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         selectedPolicy: action.selectedPolicy,
+      };
+    case UNSET_POLICY:
+      return {
+        ...state,
+        selectedPolicy: null,
       };
     default:
       return state;

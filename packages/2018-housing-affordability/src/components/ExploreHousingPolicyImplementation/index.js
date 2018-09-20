@@ -14,6 +14,7 @@ import SelectedPolicy from './SelectedPolicy';
 import {
   fetchAllHousingPolicyData,
   setSelectedPolicy,
+  unsetSelectedPolicy,
 } from '../../state/housing-policy/actions';
 import {
   isLoading,
@@ -35,12 +36,16 @@ const flexContainer = css`
 
 const policyContainer = css`
   width: 100%;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #f3f3f3;
+  padding: 10px 0;
 `;
 
 const legendTitles = [
-  { name: 'Low Implementation' },
-  { name: 'Medium Implementation' },
-  { name: 'High Implementation' },
+  { name: 'Rarely Implemented' },
+  { name: 'Uncommonly Implemented' },
+  { name: 'Commonly Implemented' },
 ];
 
 export class ExploreHousingPolicyImplementation extends React.Component {
@@ -49,6 +54,8 @@ export class ExploreHousingPolicyImplementation extends React.Component {
   }
 
   handleClick(policy) {
+    policy === this.props.selectedPolicy ?
+    this.props.unsetPolicy() :
     this.props.setPolicy(policy);
   }
 
@@ -61,6 +68,7 @@ export class ExploreHousingPolicyImplementation extends React.Component {
       tableData,
       selectedPolicy,
       selectedPolicyData,
+      unsetPolicy,
     } = this.props;
 
     return (
@@ -81,7 +89,7 @@ export class ExploreHousingPolicyImplementation extends React.Component {
           subtitle="Collected by Hack Oregon, as of June 2018"
         />
         <SimpleLegend legendData={legendTitles} />
-
+        { selectedPolicy && <div className={policyContainer} />}
         <div className={flexContainer}>
           {tableData &&
             tableData.length &&
@@ -97,9 +105,7 @@ export class ExploreHousingPolicyImplementation extends React.Component {
                   key={'selectedPolicyInset'}
                 />
               ) : (
-                <div className={policyContainer}>
-                  <h2>Select a policy for more information:</h2>
-                </div>
+                <div className={policyContainer} />
               ),
               tableData.map(
                 item =>
@@ -165,6 +171,9 @@ export default connect(
     },
     setPolicy(policy = {}) {
       dispatch(setSelectedPolicy(policy));
+    },
+    unsetPolicy() {
+      dispatch(unsetSelectedPolicy());
     },
   })
 )(ExploreHousingPolicyImplementation);
