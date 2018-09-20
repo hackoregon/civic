@@ -37,6 +37,7 @@ import packageSelectorBox from './PackageSelectorBox.story';
 import civicSandboxDashboardStory from './CivicSandboxDashboard.story';
 import stackedAreaChart from './StackedAreaChart.story';
 import pdfStory from './PDF.story';
+import heatMapStory from './HeatMap.story';
 
 import '../assets/global.styles.css';
 
@@ -83,3 +84,4 @@ gradientScaleStory();
 sandboxStory();
 packageSelectorBox();
 civicSandboxDashboardStory();
+heatMapStory();

@@ -46,6 +46,9 @@ const missionClass = css`
 const chartGrid = css`
   display: flex;
   width: 100%;
+  @media (max-width: 640px) {
+    flex-direction: column;
+  }
 `;
 
 const chartCol = css`
@@ -54,7 +57,9 @@ const chartCol = css`
 
 const chartStyle = css`
   padding: 20px;
-  height: 350px;
+  @media (min-width: 641px) {
+    height: 350px;
+  }
 `;
 
 const propTypes = {
@@ -128,7 +133,7 @@ class RealTimeInformationOnPoliticalCampaigns extends React.Component {
         slug="real-time-information-on-political-campaigns"
         loading={this.props.loadingControls}
       >
-        <h2 className={descriptionClass}>Data on contributions and spending from ORSTAR</h2>
+        <h2 className={descriptionClass}>Data on contributions and spending from ORESTAR</h2>
         <Controls
           campaign={this.props.campaign}
           campaigns={committees}

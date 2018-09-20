@@ -6,14 +6,16 @@ import { Line } from 'victory';
 
 const GradientLine = ({ x, datum, scale }) => {
   const isPrimary = datum.type === 'primary';
-  const stroke = isPrimary ? 'black' : 'gold';
-  const overlap = isPrimary ? 10 : 5;
+  const stroke = isPrimary ? '#721d7c' : '#AAA4AB';
+  const overlap = isPrimary ? 0 : 0;
+  const width = isPrimary ? 8 : 6;
+  const opacity = isPrimary ? 1 : 1;
   return (
     <Line
       y1={scale.y(0) + overlap} y2={scale.y(1) - overlap}
       x1={x}
       x2={x}
-      style={{ stroke, strokeWidth: 10 }}
+      style={{ stroke, strokeWidth: width, strokeOpacity: opacity }}
     />
   );
 };

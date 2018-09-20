@@ -9,7 +9,9 @@ const toggleStyle = css`
   margin-top: 10px;
   display: block;
   text-align: center;
-  background: rgba(238,73,80,0.4);
+  font-family: 'Rubik', sans-serif;
+  font-weight: 500;
+  font-size: 1em;
 `;
 
 class Collapsable extends React.Component {
