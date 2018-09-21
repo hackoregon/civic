@@ -7,7 +7,7 @@ const govLinks = item =>
   item.links.map(
     link =>
       link.link_name && (
-        <ul>
+        <ul key={link.link_name}>
           <li>
             <a href={link.link}>{link.link_name}</a>
           </li>
@@ -57,7 +57,7 @@ function SelectedPolicy({ data }) {
         {Object.keys(data.govData).map(
           gov =>
             data.govData[gov][0].description && (
-              <li key={gov}>
+              <li key={`${gov}extra`}>
                 <p style={{ margin: 0, color: '#001732' }}>
                   <strong>{gov}</strong>
                 </p>
