@@ -46,14 +46,14 @@ function PolicyText({ onClick, data, selected }) {
         <h2 className={policyLink}>
           {data.policy_name}
         </h2>
-        <h5 className={css`margin: 0;`}>{data.governments} policies</h5>
+        <h5 className={css`margin: 0;`}>{data.governments} governments</h5>
         </div>
       ) : (
         <div>
         <h3 className={policyLink}>
           {data.policy_name}
         </h3>
-        <h6 className={css`margin: 0;`}>{data.governments} policies</h6>
+        <h6 className={css`margin: 0;`}>{data.governments} governments</h6>
         </div>
       )}
       </div>
