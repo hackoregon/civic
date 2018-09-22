@@ -67,26 +67,26 @@ export const getSelectedPolicyData = createSelector(
       program => program.policy === selectedPolicy
     );
 
-    const selectedPolicyData = policies.filter(
+    const selectedPolicyData = policies.find(
       policy => policy.policy_id === selectedPolicy
     );
 
     return {
       policy: selectedPolicy,
-      description: selectedPolicyData[0].description,
-      category: selectedPolicyData[0].category,
+      description: selectedPolicyData.description,
+      category: selectedPolicyData.category,
       links: [
         {
-          link: selectedPolicyData[0].link1,
-          link_name: selectedPolicyData[0].link1_name,
+          link: selectedPolicyData.link1,
+          link_name: selectedPolicyData.link1_name,
         },
         {
-          link: selectedPolicyData[0].link2,
-          link_name: selectedPolicyData[0].link2_name,
+          link: selectedPolicyData.link2,
+          link_name: selectedPolicyData.link2_name,
         },
         {
-          link: selectedPolicyData[0].link3,
-          link_name: selectedPolicyData[0].link3_name,
+          link: selectedPolicyData.link3,
+          link_name: selectedPolicyData.link3_name,
         },
       ],
       governments: implementingGovernments,

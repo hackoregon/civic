@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { css } from 'emotion';
-import { insert } from 'ramda';
+import { splitAt } from 'ramda';
 import {
   CivicStoryCard,
   ChartTitle,
@@ -54,9 +54,9 @@ export class ExploreHousingPolicyImplementation extends React.Component {
   }
 
   handleClick(policy) {
-    policy === this.props.selectedPolicy ?
-    this.props.unsetPolicy() :
-    this.props.setPolicy(policy);
+    policy === this.props.selectedPolicy
+      ? this.props.unsetPolicy()
+      : this.props.setPolicy(policy);
   }
 
   render() {
@@ -71,10 +71,16 @@ export class ExploreHousingPolicyImplementation extends React.Component {
       unsetPolicy,
     } = this.props;
 
+    const selectedIndex = selectedPolicy
+      ? tableData.findIndex(item => item.policy === selectedPolicy) + 1
+      : 0;
+
+    const [beforeList, afterList] = splitAt(selectedIndex, tableData || []);
+
     return (
       <CivicStoryCard
         loading={isLoading}
-        error={isError && 'Could not load required data 🤷‍♂️'}
+        error={isError && 'Could not load required data'}
         title="Explore Housing Policy Implementation in the Portland Metro Area"
         slug="explore-housing-policy-implementation"
       >
@@ -89,42 +95,27 @@ export class ExploreHousingPolicyImplementation extends React.Component {
           subtitle="Collected by Hack Oregon, as of June 2018"
         />
         <SimpleLegend legendData={legendTitles} />
-        { selectedPolicy && <div className={policyContainer} />}
         <div className={flexContainer}>
-          {tableData &&
-            tableData.length &&
-            insert(
-              selectedPolicy
-                ? tableData.findIndex(
-                    item => item.policy === selectedPolicy
-                  ) + 1
-                : 0,
-              selectedPolicy ? (
-                <SelectedPolicy
-                  data={selectedPolicyData}
-                  key={'selectedPolicyInset'}
-                />
-              ) : (
-                <div className={policyContainer} />
-              ),
-              tableData.map(
-                item =>
-                  item.policy === selectedPolicy ? (
-                    <PolicyText
-                      data={item}
-                      onClick={() => this.handleClick(item.policy)}
-                      selected
-                      key={item.policy}
-                    />
-                  ) : (
-                    <PolicyText
-                      data={item}
-                      onClick={() => this.handleClick(item.policy)}
-                      key={item.policy}
-                    />
-                  )
-              )
-            )}
+          {beforeList.map(item => (
+            <PolicyText
+              data={item}
+              key={item.policy}
+              selected={item.policy === selectedPolicy}
+              onClick={() => this.handleClick(item.policy)}
+            />
+          ))}
+          {!selectedPolicy ? (
+            <div className={policyContainer} />
+          ) : (
+            <SelectedPolicy data={selectedPolicyData} />
+          )}
+          {afterList.map(item => (
+            <PolicyText
+              data={item}
+              key={item.policy}
+              onClick={() => this.handleClick(item.policy)}
+            />
+          ))}
         </div>
 
         <p>
