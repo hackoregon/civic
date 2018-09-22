@@ -26,9 +26,6 @@ const policyCircle = css`
   padding: 10px;
 `;
 
-const policyText = css`
-`;
-
 const legendScale = [6, 8, 9];
 
 function PolicyText({ onClick, data, selected }) {
@@ -40,7 +37,7 @@ function PolicyText({ onClick, data, selected }) {
           index={legendScale.findIndex(x => data.governments <= x)}
         />
       </div>
-      <div className={policyText}>
+      <div>
       {selected ? (
         <div>
         <h2 className={policyLink}>
