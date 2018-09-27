@@ -79,6 +79,7 @@ class BaseMap extends Component {
       mapboxToken,
       geocoder,
       navigation,
+      navigationOptions,
       geocoderOptions,
       geocoderOnChange,
       mapGLOptions,
@@ -98,6 +99,11 @@ class BaseMap extends Component {
       });
     });
 
+    const navControl = css`
+      position: absolute;
+      ${navigationOptions.position}: 0;
+      z-index: 1;
+    `;
     return (
       <div className={mapWrapper}>
         <MapGL
@@ -140,6 +146,7 @@ BaseMap.propTypes = {
   mapboxStyle: PropTypes.string,
   geocoder: PropTypes.bool,
   navigation: PropTypes.bool,
+  navigationOptions: PropTypes.shape({ position: PropTypes.oneOf(['left','right']) }),
   geocoderOptions: PropTypes.object,
   geocoderOnChange: PropTypes.function,
   mapGLOptions: PropTypes.object,
@@ -150,6 +157,7 @@ BaseMap.defaultProps = {
   mapboxStyle: "mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg",
   mapboxToken: "pk.eyJ1IjoiaGFja29yZWdvbiIsImEiOiJjamk0MGZhc2cwNDl4M3FsdHAwaG54a3BnIn0.Fq1KA0IUwpeKQlFIoaEn_Q",
   navigation: true,
+  navigationOptions: { position: 'left' },
   geocoder: false,
 };
 export default Dimensions()(BaseMap)

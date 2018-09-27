@@ -154,7 +154,7 @@ const dashboardComponent = (foundationData1, slideData1) => {
     data: 245450,
   };
 
-  const comarpisonBarData = {
+  const comparisonBarData = {
     "visualizationType": "ComparisonBar",
     "title": "Total Population",
     "data": [
@@ -190,23 +190,23 @@ const dashboardComponent = (foundationData1, slideData1) => {
     ],
   };
 
-  const legnendVisible = boolean('Legend:', true);
+  const legendVisible = boolean('Legend:', true);
   const textVisible = boolean('Text:', true);
-  const comarpisonBarsVisible = boolean('Comparison Bars:', true);
+  const comparisonBarsVisible = boolean('Comparison Bars:', true);
   const donutVisible = boolean('Percent Donut:', true);
 
   const dashboardArray = [
     {
       "data": legendData,
-      "visible": legnendVisible,
+      "visible": legendVisible,
     },
     {
       "data": textData,
       "visible": textVisible,
     },
     {
-      "data": comarpisonBarData,
-      "visible": comarpisonBarsVisible,
+      "data": comparisonBarData,
+      "visible": comparisonBarsVisible,
     },
     {
       "data": donutData,
