@@ -38,6 +38,7 @@ import civicSandboxDashboardStory from './CivicSandboxDashboard.story';
 import stackedAreaChart from './StackedAreaChart.story';
 import pdfStory from './PDF.story';
 import heatMapStory from './HeatMap.story';
+import civicSandboxCardStory from './CivicSandboxCard.story';
 
 import '../assets/global.styles.css';
 
@@ -85,3 +86,4 @@ sandboxStory();
 packageSelectorBox();
 civicSandboxDashboardStory();
 heatMapStory();
+civicSandboxCardStory();

@@ -56,3 +56,4 @@ export { default as SimpleLegend } from './SimpleLegend/SimpleLegend';
 export { default as ChartTitle } from './ChartTitle/ChartTitle';
 export { default as ChartContainer } from './ChartContainer/ChartContainer';
 export { default as HeatMap } from './HeatMap/HeatMap';
+export { default as CivicSandboxCard } from './CivicSandboxCard/CivicSandboxCard';

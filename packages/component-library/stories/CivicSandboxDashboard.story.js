@@ -245,9 +245,9 @@ const dashboardComponent = (foundationData1, slideData1) => {
           initialLatitude={45.5445}
           initialLongitude={-122.7250}
           height={650}
+          navigationOptions={{ position: 'right'}}
         >
-            <CivicSandboxMap mapLayers={mapLayers}>
-            </CivicSandboxMap>
+          <CivicSandboxMap mapLayers={mapLayers} />
         </BaseMap>
       </div>
       <div
