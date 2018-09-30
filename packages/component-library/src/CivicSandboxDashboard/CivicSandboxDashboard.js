@@ -26,6 +26,7 @@ const contentContainer = css`
   margin-bottom: auto;
   overflow-y: auto;
   overflow-x: hidden;
+  padding: 10px;
 `;
 
 const watermarkContainer = css`
