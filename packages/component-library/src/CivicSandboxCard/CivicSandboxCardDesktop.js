@@ -10,10 +10,10 @@ const mapContainer = css``;
 const dashboardContainer = css`
   position: absolute;
   top: 2%;
-  left: 7.5%;
-  width: 92.5%;
+  left: 2%;
+  width: 100%;
   height: 0;
-  @media (max-width: 900px) {
+  @media (max-width: 640px) {
     position: relative;
     left: 0;
     height: 100%;

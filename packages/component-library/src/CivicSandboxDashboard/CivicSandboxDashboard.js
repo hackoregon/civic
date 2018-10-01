@@ -1,22 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { css } from 'emotion';
 import PieChart from '../PieChart/PieChart';
 import HorizontalBarChart from '../HorizontalBarChart/HorizontalBarChart';
+import CivicWatermark from '../CivicWatermark/CivicWatermark';
 import { numeric, percentage } from '../utils/formatters';
-import { css } from 'emotion';
 
 const dashboard = css`
   background: rgba(255, 255, 255, 1.0);
   color: #000;
-  width: 34%;
-  min-height: 300px;
-  max-height: 525px;
-  display: flex;
-  flex-direction: column;
-  @media (max-width: 900px) {
-    width: 100%;
-    max-height: none;
-  }
+  border: 1px solid #DDD;
+  border-radius: 2px;
+  box-shadow: 5px 5px 15px -3px rgba(0,0,0,0.2);
 `;
 
 const contentContainer = css`
@@ -27,12 +22,6 @@ const contentContainer = css`
   overflow-y: auto;
   overflow-x: hidden;
   padding: 10px;
-`;
-
-const watermarkContainer = css`
-  position: absolute;
-  left: 0;
-  top: 0;
 `;
 
 const viz = css`
@@ -105,8 +94,11 @@ class CivicDashboard extends React.Component {
   render() {
     const {
       data,
+      height,
       children,
     } = this.props;
+
+    const containerHeight = height ? css`min-height: ${height}px;` : css``;
 
     const visualizations = data.map((object, index) => {
       return (
@@ -195,18 +187,11 @@ class CivicDashboard extends React.Component {
     );
 
     return (
-      <div className={dashboard}>
+      <div className={css`${dashboard} ${containerHeight}`}>
         <div className={contentContainer}>
           { this.state.show === "info" ? children : visualizations }
         </div>
-        <div className={watermarkContainer}>
-          <svg width="134" height="135" xmlns="http://www.w3.org/2000/svg">
-            <g fill="none" fillRule="evenodd">
-              <path d="M0 134.658V0l11.566 11.597v123.061H0z" fill="#191119" />
-              <path d="M133.864 0v11.597H11.566v.008L0 .008V0h133.864z" fill="#DC4556" />
-            </g>
-          </svg>
-        </div>
+        <CivicWatermark />
         { children ? buttons : null }
       </div>
     );
@@ -215,6 +200,7 @@ class CivicDashboard extends React.Component {
 
 CivicDashboard.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object),
+  height: PropTypes.number,
   children: PropTypes.node,
 };
 

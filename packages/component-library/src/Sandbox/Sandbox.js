@@ -112,6 +112,7 @@ const Sandbox = ({
           initialLatitude={45.5431}
           initialLongitude={-122.7465}
           height={575}
+          navigationOptions={{ position: 'right' }}
         >
           <CivicSandboxMap
             mapLayers={layerData}

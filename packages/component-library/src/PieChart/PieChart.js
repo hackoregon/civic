@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { VictoryPie, VictoryLabel } from 'victory';
+import { VictoryPie, VictoryLabel, VictoryContainer } from 'victory';
 import ChartContainer from '../ChartContainer';
 import civicTheme from '../VictoryTheme/CivicVictoryTheme.js';
 
@@ -28,6 +28,7 @@ const PieChart = (props) => {
   const y = getOrElse(dataValue, 'y');
   const startAngle = halfDoughnut ? -90 : 0;
   const endAngle = halfDoughnut ? 90 : 360;
+  const adjustedHeight = halfDoughnut ? height / 2 : height;
 
   return (
     <ChartContainer title={title} subtitle={subtitle} loading={loading} error={error}>
@@ -46,6 +47,7 @@ const PieChart = (props) => {
         startAngle={startAngle}
         endAngle={endAngle}
         labelComponent={<VictoryLabel style={{ ...civicTheme.pieLabel.style }} />}
+        containerComponent={<VictoryContainer height={adjustedHeight} width={width} />}
       />
     </ChartContainer>
   );

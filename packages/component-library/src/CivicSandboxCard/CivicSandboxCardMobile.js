@@ -14,7 +14,7 @@ const dashboardContainer = css`
   left: 7.5%;
   width: 92.5%;
   height: 0;
-  @media (max-width: 900px) {
+  @media (max-width: 640px) {
     position: relative;
     left: 0;
     height: 100%;

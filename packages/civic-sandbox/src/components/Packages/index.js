@@ -26,6 +26,21 @@ const error = css`
   padding: 30px;
 `;
 
+const dashboard = css`
+  background: #FFFFFF;
+  position: absolute;
+  top: 21%;
+  left: 4%;
+  width: 35%;
+  min-height: 525px;
+  @media (max-width: 900px) {
+    position: relative;
+    left: 0;
+    height: auto;
+    width: 100%;
+  }
+`;
+
 const capitalize = str => str.length && str.split(' ')
   .reduce((full, word) => `${full} ${word[0].toUpperCase() + word.substring(1)}`, '')
   .trim();
@@ -113,20 +128,9 @@ export class Packages extends React.Component {
           </p>
           <SandboxComponent />
           {selectedFoundationDatum && <div
-            className={css(`
-              position: absolute;
-              top: 21%;
-              left: 4%;
-              width: 96%;
-              height: 0;
-              @media(max-width: 900px) {
-                position: relative;
-                left: 0;
-                height: auto;
-              }
-            `)}
+            className={dashboard}
           >
-            <CivicSandboxDashboard data={selectedFoundationDatum}/>
+            <CivicSandboxDashboard data={selectedFoundationDatum} height={525} />
           </div>}
         </section>)}
       </div>

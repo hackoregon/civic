@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from 'emotion';
 import CivicStoryFooter from './CivicStoryFooter';
+import CivicWatermark from '../CivicWatermark/CivicWatermark';
 
 const cardClass = css`
   text-align: center;
@@ -21,14 +22,6 @@ const cardClass = css`
 
 const descriptionClass = css`
   margin: 0 auto;
-  text-align: left;
-`;
-
-const watermarkContainer = css`
-  position:absolute;
-  left: 0;
-  top: 0;
-  z-index: 0;
   text-align: left;
 `;
 
@@ -56,19 +49,6 @@ const cardError = css`
   background: #FDD;
 `;
 
-const desktopOnly = css`
-  @media (max-width: 640px) {
-    display: none;
-  }
-`;
-
-const mobileOnly = css`
-  display: none;
-  @media (max-width: 640px) {
-    display: block;
-  }
-`;
-
 const CivicStoryCard = ({ slug, title, children, error, loading, source }) => {
   let content = children;
   if (loading) {
@@ -79,18 +59,7 @@ const CivicStoryCard = ({ slug, title, children, error, loading, source }) => {
 
   return (
     <div className={cardClass}>
-      <div className={watermarkContainer}>
-        <svg xmlns="http://www.w3.org/2000/svg">
-          <g className={desktopOnly} fill="none" fillRule="evenodd">
-            <path d="M0 134.658V0l11.566 11.597v123.061H0z" fill="#191119" />
-            <path d="M133.864 0v11.597H11.566v.008L0 .008V0h133.864z" fill="#DC4556" />
-          </g>
-          <g className={mobileOnly} fill="none" fillRule="evenodd">
-            <path d="M0 75V0l11.566 11.597v63.421H0z" fill="#191119" />
-            <path d="M75 0v11.597H11.566v.008L0 .008V0h133.864z" fill="#DC4556" />
-          </g>
-        </svg>
-      </div>
+      <CivicWatermark />
       { title ? <h2 className={titleClass}>{title}</h2> : null}
       <div className={descriptionClass}>
         {content}
