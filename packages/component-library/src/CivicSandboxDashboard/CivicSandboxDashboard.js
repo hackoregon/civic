@@ -68,6 +68,11 @@ const donutChart = css`
   }
 `;
 
+const donutPercentage = css`
+  text-align: center;
+  margin: -30px auto 0 auto;
+`;
+
 class CivicDashboard extends React.Component {
   constructor(props) {
     super(props);
@@ -110,11 +115,6 @@ class CivicDashboard extends React.Component {
         ) : object.visualizationType === "PercentDonut" ? (
           <div className={donutChart} key={index}>
             <h2>{ object.title }</h2>
-            <h2 style={{"textAlign": "center", "margin": "auto", "width": "50%"}}>
-              { object.data[0].y < 1 ? percentage(object.data[0].y) :
-                object.data[0].y.toFixed(1) + "%"
-              }
-            </h2>
             <PieChart
               data={object.data}
               colors={["#19b7aa","#a9a9a9"]}
@@ -123,6 +123,11 @@ class CivicDashboard extends React.Component {
               innerRadius={90}
               halfDoughnut={true}
             />
+            <h2 className={donutPercentage}>
+              { object.data[0].y < 1 ? percentage(object.data[0].y) :
+                object.data[0].y.toFixed(1) + "%"
+              }
+            </h2>
           </div>
         ) : object.visualizationType === "ComparisonBar" ? (
           <div className={viz} key={index}>
