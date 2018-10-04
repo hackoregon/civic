@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-const accentColor = 'rgb(238, 73, 80)';
+const accentColor = '#EE495C';
 const commonTransition = 'all .2s ease-in-out';
 const buttonClass = props => css`
   display: ${props.display || 'block'};

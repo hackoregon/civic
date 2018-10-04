@@ -12,7 +12,7 @@ const description = `
   Clicking should trigger an action.`;
 
 const demoCode = () => (
-  <Button onClick={action('clicked')}>Hello Button</Button>
+  <Button onClick={action('clicked')}>EXPLORE CIVIC 🚀</Button>
 );
 
 const altDemo = () => (
