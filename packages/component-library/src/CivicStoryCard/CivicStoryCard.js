@@ -12,6 +12,7 @@ const cardClass = css`
   border-radius: 2px;
   box-shadow: 5px 5px 15px -3px rgba(0,0,0,0.2);
   padding:3em;
+  background-color: white;
 
   p {
     margin: 40px 0;
@@ -69,7 +70,7 @@ const mobileOnly = css`
   }
 `;
 
-const CivicStoryCard = ({ slug, title, children, error, loading, source }) => {
+const CivicStoryCard = ({ slug, title, children, error, loading, source, footer }) => {
   let content = children;
   if (loading) {
     content = <div className={cardLoading}>Loading...</div>;
@@ -95,7 +96,7 @@ const CivicStoryCard = ({ slug, title, children, error, loading, source }) => {
       <div className={descriptionClass}>
         {content}
       </div>
-      <CivicStoryFooter slug={slug} source={source} />
+      { footer && <CivicStoryFooter slug={slug} source={source} />}
     </div>
   );
 };
@@ -104,6 +105,7 @@ CivicStoryCard.displayName = 'CivicStoryCard';
 
 CivicStoryCard.defaultProps = {
   source: 'https://service.civicpdx.org/',
+  footer: true,
 };
 
 CivicStoryCard.propTypes = {
@@ -113,6 +115,7 @@ CivicStoryCard.propTypes = {
   slug: PropTypes.string,
   children: PropTypes.node,
   source: PropTypes.string,
+  footer: PropTypes.bool,
 };
 
 export default CivicStoryCard;
