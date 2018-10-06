@@ -108,7 +108,6 @@ const issueStyle = index => css`
 `;
 
 class HomePage extends Component {
-  state = { slideIndex: 0 };
 
   render() {
     return (
@@ -126,14 +125,14 @@ class HomePage extends Component {
               autoplay
               autoplayInterval={4000}
               speed={1000}
-              cellSpacing={300}
-              afterSlide={slideIndex => this.setState({ slideIndex })}
               autoGenerateStyleTag={false}
               framePadding={'10px 0px'}
               renderTopCenterControls={props => <PagingDots {...props} />}
               renderCenterLeftControls={() => null}
               renderCenterRightControls={() => null}
               renderBottomCenterControls={() => null}
+              transitionMode={'fade'}
+              wrapAround
             >
               <div>
                 <div className={issueStyle(0)}>Homelessness</div>
