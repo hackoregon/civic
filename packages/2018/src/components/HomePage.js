@@ -148,11 +148,11 @@ class HomePage extends Component {
           <div className={gridContainer}>
             <div className={gridItem}>
               <div className={issueStyle(1)}>Homelessness</div>
-              <CivicCardStack cards={5}>{sampleChart}</CivicCardStack>
+              <CivicCardStack cards={3}>{sampleChart}</CivicCardStack>
             </div>
             <div className={gridItem}>
               <div className={issueStyle(2)}>Disaster Resilience</div>
-              <CivicCardStack cards={5}>
+              <CivicCardStack cards={3}>
                 <div className={chartWrapper}>
                   <Scatterplot
                     data={proactivePlanning}
@@ -171,11 +171,11 @@ class HomePage extends Component {
             </div>
             <div className={gridItem}>
               <div className={issueStyle(3)}>Affordable Housing</div>
-              <CivicCardStack cards={5}>{sampleChart}</CivicCardStack>
+              <CivicCardStack cards={3}>{sampleChart}</CivicCardStack>
             </div>
             <div className={gridItem}>
               <div className={issueStyle(4)}>Transportation</div>
-              <CivicCardStack cards={5}>{sampleChart}</CivicCardStack>
+              <CivicCardStack cards={3}>{sampleChart}</CivicCardStack>
             </div>
           </div>
           <h1>
