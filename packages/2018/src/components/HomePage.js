@@ -10,6 +10,7 @@ import {
   Scatterplot,
   GradientScale,
   PieChart,
+  LandingPage,
 } from '@hackoregon/component-library';
 import {
   monthYear,
@@ -48,21 +49,21 @@ const initialTextContainer = css`
 `;
 
 const buttonContainerStatic = css`
-  padding: 8px 0;
+  align-self: center;
 `;
 
 const titleStyle = css`
   font-size: 50px;
   line-height: 1.2;
-  font-weight: 300;
   font-family: 'Rubik', sans-serif;
+  letter-spacing: -1px;
   @media (max-width: 640px) {
     font-size: 36px;
   }
 `;
 
 const subtitleStyle = css`
-  font-size: 21px;
+  font-size: 20px;
   line-height: 1.2;
   font-weight: 400;
   font-family: 'Rubik', sans-serif;
@@ -70,10 +71,11 @@ const subtitleStyle = css`
   @media (max-width: 640px) {
     font-size: 18px;
   }
+  padding: 40px 0;
 `;
 
-const contentContainer = css`
-  padding: 25px 0;
+const initialContentContainer = css`
+  padding: 80px 6%;
   margin: 0 auto;
   max-width: 900px;
 `;
@@ -133,18 +135,20 @@ const sampleChart = (
 class HomePage extends Component {
   render() {
     return (
-      <PageLayout>
-        <div className={contentContainer}>
+        <LandingPage>
+        <div className={initialContentContainer}>
           <div className={initialTextContainer} />
+          <div className={css`display: flex; justify-content: space-between; align-items: flex-end;`}>
           <div className={titleStyle}>
             Making Public Data
             <br />
             Public Knowledge
           </div>
-          <div className={subtitleStyle}>For issues that matter</div>
           <div className={buttonContainerStatic}>
-            <Button>EXPLORE CIVIC ✨🚀✨</Button>
+            <Button>{`EXPLORE CIVIC >`}</Button>
           </div>
+          </div>
+          <div className={subtitleStyle}>Reimagining how to make information actionable for the issues that matter most</div>
           <div className={gridContainer}>
             <div className={gridItem}>
               <div className={issueStyle(1)}>Homelessness</div>
@@ -178,12 +182,11 @@ class HomePage extends Component {
               <CivicCardStack cards={3}>{sampleChart}</CivicCardStack>
             </div>
           </div>
-          <h1>
-            CIVIC is an art project that could transform the way that we use
-            information, and an offering to the benevolent overlords.
-          </h1>
+          <div className={css`padding-top: 40px;`}>
+            <a href="#getStarted"><Button>GET STARTED WITH YOUR CITY > </Button></a>
+          </div>
         </div>
-      </PageLayout>
+        </LandingPage>
     );
   }
 }

@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 import CanvasParticles from './CanvasParticles';
 import DataList from './DataList';
 import SearchBar from './SearchBar';
-import { Footer } from '@hackoregon/component-library';
+import { Header, Footer } from '@hackoregon/component-library';
 
 import logo from '../../assets/civic-logo-animated.svg';
 import smallLogo from '../../assets/civic-logo-c.svg';
@@ -457,27 +457,9 @@ class LandingPage extends React.Component {
       <div className={appWrapper} ref={(node) => { this.node = node; }}>
         <CanvasParticles />
         <div className={contentWrapper}>
-          <div className={topBar} />
-          <div className={leftContainer}>
-            <div className={logoWrapper}>
-              <img src={logo} />
-            </div>
-            <div className={missionStatementTitle}>{'Making public information public knowledge'}</div>
-            <p className={missionStatement}>{`CIVIC is a powerful open platform using data in way that’s fundamentally built to serve people.`}</p>
-            <p className={missionStatement}>{`We’re reimagining how to make information actionable through visual models, open standards, and creative frameworks that harness human collaboration at scale.`}</p>
-            <div className={ctaStyle}><a href="#getStarted">Get started with your city &rsaquo;</a></div>
-            <div className={citySkyline}><img src={ cityPath} width="100%" /></div>
-          </div>
-          <div className={collectionsLink}>
-            <Link to="/cities/portland">View all Collections &rsaquo;</Link>
-          </div>
+        <Header title="Civic" />
 
-          <div className={lookupWrapper}>
-            <div className={searchTitle}><strong>Explore CIVIC stories</strong></div>
-            <div className={searchSubTitle}><em>Discover data near you.</em></div>
-            <SearchBar handleSubmit={this.handleSearch} />
-            <DataList city={city} state={state} />
-          </div>
+          {this.props.children}
 
           <div className={aboutCivicWrapper} id="aboutCivic">
             <div className={sectionHeaderWrapper}>

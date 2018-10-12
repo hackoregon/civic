@@ -3,21 +3,18 @@ import PropTypes from 'prop-types';
 import { css } from 'emotion';
 import CivicStoryCard from '../CivicStoryCard/CivicStoryCard';
 
-const lastCardOpacity = 0.4;
-
-const foregroundCard = css`
-`;
+const LAST_CARD_OPACITY = 0.4;
 
 const bgCard = (index, total, baseOpacity) => css`
   position: absolute;
-  z-index: ${-index};
-  left: ${5 * (index)}px;
-  top: ${-5 * (index)}px;
-  opacity: ${1 - (index)*(1- baseOpacity)/(total - 1)};
+  z-index: ${total - index};
+  left: ${5 * index}px;
+  top: ${-5 * index}px;
+  opacity: ${1 - (index * (1 - baseOpacity)) / (total - 1)};
 `;
 
 const BackgroundStoryCard = (index, total, children) => (
-  <div className={bgCard(index, total, lastCardOpacity)} key={index}>
+  <div className={bgCard(index, total, LAST_CARD_OPACITY)} key={index}>
     <CivicStoryCard footer={false}>{children}</CivicStoryCard>
   </div>
 );
@@ -25,11 +22,11 @@ const BackgroundStoryCard = (index, total, children) => (
 const CivicCardStack = ({ cards, children }) => {
   return (
     <div>
-      <div className={foregroundCard}>
-      {cards &&
-        [...Array(cards)].map((item, index) =>
-          BackgroundStoryCard(index, cards, children)
-        )}
+      <div>
+        {cards &&
+          [...Array(cards)].map((item, index) =>
+            BackgroundStoryCard(index, cards, children)
+          )}
       </div>
     </div>
   );
