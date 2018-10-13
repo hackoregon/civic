@@ -1,6 +1,7 @@
 import { titleCase } from '@hackoregon/component-library/src/utils/formatters';
 import { disasterData } from './disasterData';
 import { housingData } from './housingData';
+import { transportationData } from './transportationData';
 
 const homelessnessData = [
   { count: 12, report_time: '2016-10-01T00:00:00Z' },
@@ -81,8 +82,30 @@ const getSelectedCityRank = data => {
     : {};
 };
 
+const formatRidershipOverTimeData = data =>
+  data
+    .map(yearObj => ({
+      type: 'Weekday',
+      year: yearObj.year,
+      ons: yearObj.weekday_sum_ons,
+    }))
+    .concat(
+      data.map(yearObj => ({
+        type: 'Saturday',
+        year: yearObj.year,
+        ons: yearObj.saturday_sum_ons,
+      }))
+    )
+    .concat(
+      data.map(yearObj => ({
+        type: 'Sunday',
+        year: yearObj.year,
+        ons: yearObj.sunday_sum_ons,
+      }))
+    );
+
 export const magnitudeOfUrbanCampsiteSweeps = formatData(homelessnessData);
 export const proactivePlanning = processData(disasterData);
 export const chartData = getChartData(housingData);
 export const selectedCityRank = getSelectedCityRank(housingData);
-
+export const ridershipData = formatRidershipOverTimeData(transportationData);

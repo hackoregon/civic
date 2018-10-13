@@ -1,57 +1,68 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router';
+import React from 'react';
 import { cx, css } from 'emotion';
-import {
-  Header,
-  Footer,
-  Button,
-  CivicStoryCard,
-  CivicCardStack,
-  BarChart,
-  Scatterplot,
-  GradientScale,
-  PieChart,
-  LineChart,
-  LandingPage,
-} from '@hackoregon/component-library';
-import {
-  monthYear,
-  percentage,
-  year,
-} from '@hackoregon/component-library/src/utils/formatters';
-
-import smallLogo from '@hackoregon/component-library/assets/civic-logo-c.svg';
-import brain from '@hackoregon/component-library/assets/brain.svg';
-import brainMobile from '@hackoregon/component-library/assets/brain-mobile.svg';
-import trees from '@hackoregon/component-library/assets/trees.png';
-import hackOregonLogo from '@hackoregon/component-library/assets/hack-oregon-logo.png';
-import heartMail from '@hackoregon/component-library/assets/heartmail.png';
-import twitterLogo from '@hackoregon/component-library/assets/twitter-logo.png';
+import { Link } from 'react-router';
 
 import CanvasParticles from './CanvasParticles';
+import DataList from './DataList';
+import SearchBar from './SearchBar';
+import { Header, Footer } from '@hackoregon/component-library';
 
-import {
-  magnitudeOfUrbanCampsiteSweeps,
-  proactivePlanning,
-  selectedCityRank,
-  chartData,
-  ridershipData,
-} from '../assets/homePageData';
+import logo from '../../assets/civic-logo-animated.svg';
+import smallLogo from '../../assets/civic-logo-c.svg';
+import brain from '../../assets/brain.svg';
+import brainMobile from '../../assets/brain-mobile.svg';
+import trees from '../../assets/trees.png';
+import hackOregonLogo from '../../assets/hack-oregon-logo.png';
+import heartMail from '../../assets/heartmail.png';
+import twitterLogo from '../../assets/twitter-logo.png';
 
-const civicCategoricalColor1 = '#DC4556';
-const civicCategoricalColor2 = '#19B7AA';
-const civicCategoricalColor3 = '#1E62BD';
-const civicCategoricalColor4 = '#721D7C';
-const civicCategoricalColor5 = '#FFB226';
+import cities from './cities';
+import zipCodes from './zipCodes.json';
 
-const colors = [
-  civicCategoricalColor1,
-  civicCategoricalColor2,
-  civicCategoricalColor3,
-  civicCategoricalColor4,
-  civicCategoricalColor5,
-];
+const searchTitle = css`
+  font-family: 'Rubik', sans-serif;
+  text-align: left;
+  font-size: 18px;
+  color: white;
+  margin: 0 auto;
+`;
+const searchSubTitle = css`
+  font-family: 'Rubik', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  font-style: italic;
+  color: #AAA4AB;
+  margin: 0;
+`;
+const logoWrapper = css`
+  position: relative;
+  margin: 0;
+  padding: 30px 0px 20px;
+  width: 160px;
+`;
+const missionStatementTitle = css`
+  font-family: 'Rubik', sans-serif;
+  text-align: left;
+  font-size: 50px;
+  line-height: 1.2;
+  width: 100%;
+  letter-spacing: -2px;
+  margin: 0;
+`;
+const missionStatement = css`
+  font-size: 20px;
+  line-height: 1.8;
+  font-family: "Rubik",sans-serif;
+  width: 100%;
+  margin: 25px 0;
+  max-width: 1000px;
+  text-align: left;
+  color: #001732;
 
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+`;
 const appWrapper = css`
   background-color: #ffffff;
   padding: 0px;
@@ -61,88 +72,103 @@ const appWrapper = css`
 const contentWrapper = css`
   position: relative;
 `;
-
-const initialTextContainer = css`
-  position: absolute;
+const lookupWrapper = css`
+  margin-top: 148px;
+  background-color: #240f27;
+  padding: 40px;
   width: 100%;
-  left: 0;
-  top: 88px;
-  min-height: 1000px;
-  z-index: -1;
-  mask-image: linear-gradient(to top, transparent 25%, black 240%);
-`;
+  max-width: 320px;
+  position: absolute;
+  top: 0;
+  right: 9%;
+  box-shadow: 14px 30px 60px 9px #0f18287a;
 
-const buttonContainerStatic = css`
-  align-self: center;
-`;
-
-const titleStyle = css`
-  font-size: 50px;
-  line-height: 1.2;
-  font-family: 'Rubik', sans-serif;
-  letter-spacing: -1px;
-  @media (max-width: 640px) {
-    font-size: 36px;
-  }
-`;
-
-const subtitleStyle = css`
-  font-size: 20px;
-  line-height: 1.2;
-  font-weight: 400;
-  font-family: 'Rubik', sans-serif;
-  color: #726371;
-  @media (max-width: 640px) {
-    font-size: 18px;
-  }
-  padding: 40px 0;
-`;
-
-const initialContentContainer = css`
-  padding: 80px 6%;
-  margin: 0 auto;
-  max-width: 900px;
-`;
-
-const issueStyle = index => css`
-  font-size: 21px;
-  line-height: 0;
-  font-weight: 500;
-  font-family: 'Rubik', sans-serif;
-  color: ${colors[index]};
-  text-align: right;
-  @media (max-width: 640px) {
-    font-size: 18px;
-  }
-`;
-
-const gridContainer = css`
-  position: relative;
-  display: grid;
-  grid-template: 50% 50% / 50% 50%;
-  row-gap: 20px;
-  column-gap: 20px;
-  padding: 40px 0 0 0;
-  @media (max-width: 640px) {
-    grid-template: 100% / 100%;
-  }
-`;
-
-const gridItem = css`
-  position: relative;
-  width: 30vw;
-  max-width: 400px;
-  height: 25vw;
-  max-height: 300px;
-  @media (max-width: 640px) {
+  ::before {
+    content: '';
     width: 100%;
-    height: 70vw;
+    border-bottom: solid 8px #ef495c;
+    position: absolute;
+    left: 0;
+    top: 0px;
+    z-index: 1;
+  }
+
+  @media (max-width: 1024px) {
+    max-width: 270px;
+    right: 6%;
+  }
+
+  @media (max-width: 850px) {
+    position: relative;
+    max-width: none;
+    width: 100%;
+    top: 0;
+    right: 0;
+    box-sizing: border-box;
+    margin-bottom: 100px;
   }
 `;
+const collectionsLink = css`
+  display: block;
+  font-family: 'Rubik';
+  font-size: 16px;
+  position: absolute;
+  top: 70px;
+  right: 9%;
+  margin: 0;
 
-const chartWrapper = css`
+  a {
+    color: #240f27;
+    text-decoration: none;
+    border-bottom: none;
+    :hover {
+      color: #240f27;
+      text-decoration: underline;
+    }
+  }
+
+  @media (max-width: 850px) {
+    right: 3%;
+  }
+
 `;
+const leftContainer = css`
+  display: block;
+  box-sizing: border-box;
+  position: relative;
+  padding-left: 70px;
+  width: 50%;
 
+  @media (max-width: 850px) {
+    width: 100%;
+    padding: 0 36px;
+  }
+`;
+const topBar = css`
+  position: relative;
+  width: 100%;
+  height: 25px;
+  background-color: #240f27;
+`;
+const ctaStyle = css`
+  color: #ed485b;
+  font-family: 'Rubik';
+  font-size: 18px;
+  font-style: italic;
+
+  a {
+    text-decoration: none;
+    border: none;
+
+    :hover {
+      text-decoration: underline;
+    }
+  }
+`;
+const citySkyline = css`
+  margin-top: 40px;
+  margin-bottom: 120px;
+`;
 const aboutCivicWrapper = css`
   background-color: white;
   height: 100%;
@@ -380,20 +406,14 @@ const donateButton = css`
   margin: 0;
 `;
 
-const sampleChart = (
-  <div className={chartWrapper}>
-    <BarChart
-      data={magnitudeOfUrbanCampsiteSweeps}
-      xLabel="Month"
-      yLabel="Sweeps"
-      dataKey="date"
-      dataValue="count"
-      xNumberFormatter={monthYear}
-    />
-  </div>
-);
 
-class HomePage extends Component {
+class LandingPage extends React.Component {
+  state = {
+    city: 'Portland',
+    state: 'OR',
+    imgPath: 'portland',
+  };
+
   componentDidMount() {
     // Used to fade in the page
     this.node.style.opacity = 0;
@@ -403,86 +423,44 @@ class HomePage extends Component {
     });
   }
 
+  handleSearch = (input) => {
+    const key = input ? input.toLowerCase() : '';
+    const cityResult = cities[key];
+
+    if (cityResult) {
+      return this.setState({
+        city: cityResult.name,
+        state: cityResult.state,
+        imgPath: cityResult.path,
+      });
+    }
+
+    const zipResult = zipCodes[key];
+
+    if (zipResult) {
+      const cityData = zipResult.city ? cities[zipResult.city.toLowerCase()] : {};
+      return this.setState({
+        city: cityData ? cityData.name : zipResult.city,
+        state: zipResult.state,
+        imgPath: cityData ? cityData.path : 'portland',
+      });
+    }
+
+    return null;
+  };
+
   render() {
+    const { city, state, imgPath } = this.state;
+    const cityPath = require(`../../assets/cities/${imgPath || 'portland'}.png`);
+
     return (
       <div className={appWrapper} ref={(node) => { this.node = node; }}>
         <CanvasParticles />
         <div className={contentWrapper}>
         <Header title="Civic" />
-        <div className={initialContentContainer}>
-          <div className={initialTextContainer} />
-          <div className={css`display: flex; justify-content: space-between; align-items: flex-end;`}>
-          <div className={titleStyle}>
-            Making Public Data
-            <br />
-            Public Knowledge
-          </div>
-          <div className={buttonContainerStatic}>
-            <Button>{`EXPLORE CIVIC >`}</Button>
-          </div>
-          </div>
-          <div className={subtitleStyle}>Reimagining how to make information actionable for the issues that matter most</div>
-          <div className={gridContainer}>
-            <div className={gridItem}>
-              <div className={issueStyle(1)}>Homelessness</div>
-              <CivicCardStack cards={3}>{sampleChart}</CivicCardStack>
-            </div>
-            <div className={gridItem}>
-              <div className={issueStyle(2)}>Disaster Resilience</div>
-              <CivicCardStack cards={3}>
-                <div className={chartWrapper}>
-                  <Scatterplot
-                    data={proactivePlanning}
-                    xLabel="Resilience"
-                    yLabel="Displacement"
-                    dataKey="census_response_rate"
-                    dataKeyLabel="resilienceLabel"
-                    dataValue="displaced_percap"
-                    dataValueLabel="displacementLabel"
-                    dataSeries="quadrant"
-                    size={{ key: 'total_population', minSize: 2, maxSize: 10 }}
-                    xNumberFormatter={percentage}
-                    yNumberFormatter={percentage}
-                    legendComponent={() => null}
-                  />
-                </div>
-              </CivicCardStack>
-            </div>
-            <div className={gridItem}>
-              <div className={issueStyle(3)}>Affordable Housing</div>
-              <CivicCardStack cards={3}>
-                {chartData &&
-                  <PieChart
-                    data={chartData}
-                    innerRadius={90}
-                    dataLabel="label"
-                    dataValue="value"
-                  />
-                }
-              </CivicCardStack>
-            </div>
-            <div className={gridItem}>
-              <div className={issueStyle(4)}>Transportation</div>
-              <CivicCardStack cards={3}>
-                { ridershipData &&
-                  <LineChart
-                    data={ridershipData}
-                    xLabel="Year"
-                    yLabel="Ridership"
-                    dataKey="year"
-                    dataValue="ons"
-                    dataSeries="type"
-                    xNumberFormatter={year}
-                    legendComponent={() => null}
-                  />
-                }
-              </CivicCardStack>
-            </div>
-          </div>
-          <div className={css`padding-top: 40px;`}>
-            <a href="#getStarted"><Button>GET STARTED WITH YOUR CITY > </Button></a>
-          </div>
-        </div>
+
+          {this.props.children}
+
           <div className={aboutCivicWrapper} id="aboutCivic">
             <div className={sectionHeaderWrapper}>
               <div className={smallLogoWrapper}>
@@ -593,6 +571,4 @@ class HomePage extends Component {
   }
 }
 
-HomePage.displayName = 'HomePage';
-
-export default HomePage;
+export default LandingPage;
