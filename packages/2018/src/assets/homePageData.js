@@ -1,7 +1,25 @@
 import { titleCase } from '@hackoregon/component-library/src/utils/formatters';
+import { ungroupBy } from '@hackoregon/component-library/src/utils/dataHelpers';
 import { disasterData } from './disasterData';
 import { housingData } from './housingData';
 import { transportationData } from './transportationData';
+import { electionData } from './electionData';
+import { educationData } from './educationData';
+
+const CHARTB_CATEGORIES = [
+  'black',
+  'hispanic',
+  'multi_ethnic',
+  'native',
+  'pacific',
+];
+const CHARTB_LABELS = [
+  'Black/African American',
+  'Hispanic/Latino',
+  'Multi-Ethnic',
+  'American Indian/Alaska Native',
+  'Native Hawaiian/Pacific Islander',
+];
 
 const homelessnessData = [
   { count: 12, report_time: '2016-10-01T00:00:00Z' },
@@ -104,8 +122,29 @@ const formatRidershipOverTimeData = data =>
       }))
     );
 
+function compareNumbers(a, b) {
+  return b - a;
+}
+
+const calcStudents = (numpct, enrollment) => ((numpct && enrollment) ? (numpct * enrollment) / 100 : 0);
+
+const calculateStudents = school => school.map(d => ({
+  year: d.year,
+  asian: calcStudents(d.enroll_asian, d.enroll_current),
+  black: calcStudents(d.enroll_black, d.enroll_current),
+  hispanic: calcStudents(d.enroll_hispanic, d.enroll_current),
+  multi_ethnic: calcStudents(d.enroll_multi_ethnic, d.enroll_current),
+  native: calcStudents(d.enroll_native, d.enroll_current),
+  pacific: calcStudents(d.enroll_pacific, d.enroll_current),
+  white: calcStudents(d.enroll_white, d.enroll_current),
+  underrepresented: calcStudents(100, d.enroll_current) - (calcStudents(d.enroll_white, d.enroll_current) + calcStudents(d.enroll_asian, d.enroll_current)),
+}));
+
 export const magnitudeOfUrbanCampsiteSweeps = formatData(homelessnessData);
 export const proactivePlanning = processData(disasterData);
 export const chartData = getChartData(housingData);
 export const selectedCityRank = getSelectedCityRank(housingData);
 export const ridershipData = formatRidershipOverTimeData(transportationData);
+export const electionsData = electionData.sort(compareNumbers);
+export const processedSchoolData = ungroupBy(calculateStudents(educationData), CHARTB_CATEGORIES, CHARTB_LABELS);
+
