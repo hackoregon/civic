@@ -470,7 +470,7 @@ class HomePage extends Component {
             <Carousel
               autoGenerateStyleTag={false}
               autoplay
-              autoplayInterval={5000}
+              autoplayInterval={10000}
               pauseOnHover={false}
               transitionMode={'fade'}
               wrapAround
@@ -478,7 +478,7 @@ class HomePage extends Component {
               cellSpacing={20}
             >
               <div className={gridItem}>
-                <div className={issueStyle(1)}>Homelessness</div>
+                <div className={issueStyle(0)}>Homelessness</div>
                 <CivicCardStack cards={3}>
                   <div className={chartWrapper}>
                     <BarChart
@@ -493,7 +493,7 @@ class HomePage extends Component {
                 </CivicCardStack>
               </div>
               <div className={gridItem}>
-                <div className={issueStyle(1)}>Neighborhoods</div>
+                <div className={issueStyle(3)}>Neighborhoods</div>
                 <CivicCardStack cards={3}>
                   <div className={chartWrapper}>
                     <img
@@ -508,7 +508,7 @@ class HomePage extends Component {
             <Carousel
               autoGenerateStyleTag={false}
               autoplay
-              autoplayInterval={10000}
+              autoplayInterval={5000}
               pauseOnHover={false}
               transitionMode={'fade'}
               wrapAround
@@ -516,7 +516,7 @@ class HomePage extends Component {
               cellSpacing={20}
             >
               <div className={gridItem}>
-                <div className={issueStyle(2)}>Disaster Resilience</div>
+                <div className={issueStyle(1)}>Disaster Resilience</div>
                 <CivicCardStack cards={3}>
                   <div className={chartWrapper}>
                     <Scatterplot
@@ -541,7 +541,7 @@ class HomePage extends Component {
                 </CivicCardStack>
               </div>
               <div className={gridItem}>
-                <div className={issueStyle(3)}>Education</div>
+                <div className={issueStyle(2)}>Education</div>
                 <CivicCardStack cards={3}>
                   <div className={chartWrapper}>
                     <StackedAreaChart
@@ -562,48 +562,6 @@ class HomePage extends Component {
             <Carousel
               autoGenerateStyleTag={false}
               autoplay
-              autoplayInterval={10000}
-              pauseOnHover={false}
-              transitionMode={'fade'}
-              wrapAround
-              withoutControls
-              cellSpacing={20}
-            >
-              <div className={gridItem}>
-                <div className={issueStyle(3)}>Affordable Housing</div>
-                <CivicCardStack cards={3}>
-                  <div className={chartWrapper}>
-                    <PieChart
-                      data={chartData}
-                      innerRadius={90}
-                      dataLabel="label"
-                      dataValue="value"
-                    />
-                  </div>
-                </CivicCardStack>
-              </div>
-              <div className={gridItem}>
-                <div className={issueStyle(4)}>Local Elections</div>
-                <CivicCardStack cards={3}>
-                  <div className={chartWrapper}>
-                    <HorizontalBarChart
-                      xLabel="Influence"
-                      yLabel="Category"
-                      dataLabel="category"
-                      dataValue="importance"
-                      xAxisLabel="Importance"
-                      sortOrder="sortOrder"
-                      data={electionsData}
-                      dataValueFormatter={percentage}
-                      domain={{ x: [0, 0.6], y: [1, 11] }}
-                    />
-                  </div>
-                </CivicCardStack>
-              </div>
-            </Carousel>
-            <Carousel
-              autoGenerateStyleTag={false}
-              autoplay
               autoplayInterval={5000}
               pauseOnHover={false}
               transitionMode={'fade'}
@@ -612,7 +570,7 @@ class HomePage extends Component {
               cellSpacing={20}
             >
               <div className={gridItem}>
-                <div className={issueStyle(4)}>Transportation</div>
+                <div className={issueStyle(2)}>Transportation</div>
                 <CivicCardStack cards={3}>
                   <div className={chartWrapper}>
                     <LineChart
@@ -629,7 +587,49 @@ class HomePage extends Component {
                 </CivicCardStack>
               </div>
               <div className={gridItem}>
-                <div className={issueStyle(2)}>Development</div>
+                <div className={issueStyle(1)}>Affordable Housing</div>
+                <CivicCardStack cards={3}>
+                  <div className={chartWrapper}>
+                    <PieChart
+                      data={chartData}
+                      innerRadius={90}
+                      dataLabel="label"
+                      dataValue="value"
+                    />
+                  </div>
+                </CivicCardStack>
+              </div>
+            </Carousel>
+            <Carousel
+              autoGenerateStyleTag={false}
+              autoplay
+              autoplayInterval={10000}
+              pauseOnHover={false}
+              transitionMode={'fade'}
+              wrapAround
+              withoutControls
+              cellSpacing={20}
+            >
+              <div className={gridItem}>
+                <div className={issueStyle(3)}>Local Elections</div>
+                <CivicCardStack cards={3}>
+                  <div className={chartWrapper}>
+                    <HorizontalBarChart
+                      xLabel="Influence"
+                      yLabel="Category"
+                      dataLabel="category"
+                      dataValue="importance"
+                      xAxisLabel="Importance"
+                      sortOrder="sortOrder"
+                      data={electionsData}
+                      dataValueFormatter={percentage}
+                      domain={{ x: [0, 0.6], y: [1, 11] }}
+                    />
+                  </div>
+                </CivicCardStack>
+              </div>
+              <div className={gridItem}>
+                <div className={issueStyle(0)}>Development</div>
                 <CivicCardStack cards={3}>
                   <div className={chartWrapper}>
                     <img
