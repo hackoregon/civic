@@ -50,20 +50,6 @@ const formatData = arr =>
     count: obj.count,
   }));
 
-const processData = data =>
-  data &&
-  data.length &&
-  data.map(nbhd => ({
-    displaced_percap: parseFloat(nbhd.properties.displaced_percap),
-    census_response_rate:
-      (100 - parseFloat(nbhd.properties.census_response_rate)) / 100,
-    total_population: parseFloat(nbhd.properties.total_population),
-    quadrant: nbhd.properties.quadrant,
-    resilienceLabel:
-      titleCase(nbhd.properties.name) + ' • Census Non-Response Rate',
-    displacementLabel: 'Displacement',
-  }));
-
 const getChartData = data => {
   if (!data) return;
 
@@ -141,7 +127,7 @@ const calculateStudents = school => school.map(d => ({
 }));
 
 export const magnitudeOfUrbanCampsiteSweeps = formatData(homelessnessData);
-export const proactivePlanning = processData(disasterData);
+export const proactivePlanning = disasterData;
 export const chartData = getChartData(housingData);
 export const selectedCityRank = getSelectedCityRank(housingData);
 export const ridershipData = formatRidershipOverTimeData(transportationData);
