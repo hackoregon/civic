@@ -12,6 +12,7 @@ const cardClass = css`
   border-radius: 2px;
   box-shadow: 5px 5px 15px -3px rgba(0,0,0,0.2);
   padding:3em;
+  background-color: white;
 
   p {
     margin: 40px 0;
@@ -69,7 +70,7 @@ const mobileOnly = css`
   }
 `;
 
-const CivicStoryCard = ({ slug, title, children, error, loading, source }) => {
+const CivicStoryCard = ({ slug, title, children, error, loading, source, footer, watermark }) => {
   let content = children;
   if (loading) {
     content = <div className={cardLoading}>Loading...</div>;
@@ -80,22 +81,28 @@ const CivicStoryCard = ({ slug, title, children, error, loading, source }) => {
   return (
     <div className={cardClass}>
       <div className={watermarkContainer}>
-        <svg xmlns="http://www.w3.org/2000/svg">
-          <g className={desktopOnly} fill="none" fillRule="evenodd">
-            <path d="M0 134.658V0l11.566 11.597v123.061H0z" fill="#191119" />
-            <path d="M133.864 0v11.597H11.566v.008L0 .008V0h133.864z" fill="#DC4556" />
-          </g>
-          <g className={mobileOnly} fill="none" fillRule="evenodd">
-            <path d="M0 75V0l11.566 11.597v63.421H0z" fill="#191119" />
-            <path d="M75 0v11.597H11.566v.008L0 .008V0h133.864z" fill="#DC4556" />
-          </g>
-        </svg>
+        {watermark || (
+          <svg xmlns="http://www.w3.org/2000/svg">
+            <g className={desktopOnly} fill="none" fillRule="evenodd">
+              <path d="M0 134.658V0l11.566 11.597v123.061H0z" fill="#191119" />
+              <path
+                d="M133.864 0v11.597H11.566v.008L0 .008V0h133.864z"
+                fill="#DC4556"
+              />
+            </g>
+            <g className={mobileOnly} fill="none" fillRule="evenodd">
+              <path d="M0 75V0l11.566 11.597v63.421H0z" fill="#191119" />
+              <path
+                d="M75 0v11.597H11.566v.008L0 .008V0h133.864z"
+                fill="#DC4556"
+              />
+            </g>
+          </svg>
+        )}
       </div>
-      { title ? <h2 className={titleClass}>{title}</h2> : null}
-      <div className={descriptionClass}>
-        {content}
-      </div>
-      <CivicStoryFooter slug={slug} source={source} />
+      {title ? <h2 className={titleClass}>{title}</h2> : null}
+      <div className={descriptionClass}>{content}</div>
+      {footer && <CivicStoryFooter slug={slug} source={source} />}
     </div>
   );
 };
@@ -104,6 +111,7 @@ CivicStoryCard.displayName = 'CivicStoryCard';
 
 CivicStoryCard.defaultProps = {
   source: 'https://service.civicpdx.org/',
+  footer: true,
 };
 
 CivicStoryCard.propTypes = {
@@ -113,6 +121,8 @@ CivicStoryCard.propTypes = {
   slug: PropTypes.string,
   children: PropTypes.node,
   source: PropTypes.string,
+  footer: PropTypes.bool,
+  watermark: PropTypes.node,
 };
 
 export default CivicStoryCard;
