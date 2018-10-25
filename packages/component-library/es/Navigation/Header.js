@@ -7,7 +7,7 @@ var _templateObject = _taggedTemplateLiteral(['\n  width: 100%;\n  min-width: 32
     _templateObject5 = _taggedTemplateLiteral(['\n  margin: 0 30px 0 0;\n  display:block;\n\n  @media (max-width: 640px) {\n    &.active {\n      display:block;\n    }\n\n    &.inactive {\n      display:none;\n    }\n  }\n'], ['\n  margin: 0 30px 0 0;\n  display:block;\n\n  @media (max-width: 640px) {\n    &.active {\n      display:block;\n    }\n\n    &.inactive {\n      display:none;\n    }\n  }\n']),
     _templateObject6 = _taggedTemplateLiteral(['\n  margin: 12px 24px;\n  flex: 2;\n'], ['\n  margin: 12px 24px;\n  flex: 2;\n']),
     _templateObject7 = _taggedTemplateLiteral(['\n  border: none;\n  opacity: 1;\n  transition: none;\n'], ['\n  border: none;\n  opacity: 1;\n  transition: none;\n']),
-    _templateObject8 = _taggedTemplateLiteral(['\n  a& {\n    display: none;\n    padding: 2rem;\n    border: none;\n\n    @media (max-width: 640px) {\n      display:block;\n    }\n  }\n'], ['\n  a& {\n    display: none;\n    padding: 2rem;\n    border: none;\n\n    @media (max-width: 640px) {\n      display:block;\n    }\n  }\n']);
+    _templateObject8 = _taggedTemplateLiteral(['\n  a& {\n    display: none;\n    padding: 2rem;\n    border: none;\n    padding-right: 0;\n    margin-right: 2rem;\n\n    @media (max-width: 640px) {\n      display:block;\n    }\n  }\n'], ['\n  a& {\n    display: none;\n    padding: 2rem;\n    border: none;\n    padding-right: 0;\n    margin-right: 2rem;\n\n    @media (max-width: 640px) {\n      display:block;\n    }\n  }\n']);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 

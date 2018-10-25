@@ -7,9 +7,8 @@ import CollectionHero from '../Hero/CollectionHero';
 
 const defaultStyles = css`
   padding: 0px 24px;
-
-  & > p, & > h1, & > h2, & > h3, & > h4, & > h5, & > h6 {
-    margin: auto;
+  @media (max-width: 640px) {
+    padding: 0px 6px;
   }
 
   > p {
@@ -25,6 +24,13 @@ const defaultStyles = css`
 
     &.small {
       font-size: 14px;
+    }
+  }
+
+  & > p, & > h1, & > h2, & > h3, & > h4, & > h5, & > h6 {
+    margin: auto;
+    @media (max-width: 640px) {
+      width: 90%;
     }
   }
 `;
