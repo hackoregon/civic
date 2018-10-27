@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-const accentColor = '#EE495C';
+const accentColor = '#DC4556';
 const commonTransition = 'all .2s ease-in-out';
 const buttonClass = props => css`
   display: ${props.display || 'block'};
@@ -12,7 +12,8 @@ const buttonClass = props => css`
   justify-content: space-between;
   transition: ${commonTransition};
   font-size: 1em;
-  font-weight: 600;
+  font-family: "Rubik", sans-serif;
+  font-weight: 500;
   color: ${accentColor};
   background: #FFF;
   cursor: pointer;

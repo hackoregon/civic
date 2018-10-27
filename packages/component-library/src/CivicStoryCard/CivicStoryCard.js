@@ -13,6 +13,7 @@ const cardClass = css`
   border-radius: 2px;
   box-shadow: 5px 5px 15px -3px rgba(0,0,0,0.2);
   padding:3em;
+  background-color: white;
 
   p {
     margin: 40px 0;
@@ -49,7 +50,7 @@ const cardError = css`
   background: #FDD;
 `;
 
-const CivicStoryCard = ({ slug, title, children, error, loading, source }) => {
+const CivicStoryCard = ({ slug, title, children, error, loading, source, footer, watermark }) => {
   let content = children;
   if (loading) {
     content = <div className={cardLoading}>Loading...</div>;
@@ -59,12 +60,10 @@ const CivicStoryCard = ({ slug, title, children, error, loading, source }) => {
 
   return (
     <div className={cardClass}>
-      <CivicWatermark />
-      { title ? <h2 className={titleClass}>{title}</h2> : null}
-      <div className={descriptionClass}>
-        {content}
-      </div>
-      <CivicStoryFooter slug={slug} source={source} />
+      {watermark}
+      {title ? <h2 className={titleClass}>{title}</h2> : null}
+      <div className={descriptionClass}>{content}</div>
+      {footer && <CivicStoryFooter slug={slug} source={source} />}
     </div>
   );
 };
@@ -73,6 +72,8 @@ CivicStoryCard.displayName = 'CivicStoryCard';
 
 CivicStoryCard.defaultProps = {
   source: 'https://service.civicpdx.org/',
+  footer: true,
+  watermark: <CivicWatermark />,
 };
 
 CivicStoryCard.propTypes = {
@@ -82,6 +83,8 @@ CivicStoryCard.propTypes = {
   slug: PropTypes.string,
   children: PropTypes.node,
   source: PropTypes.string,
+  footer: PropTypes.bool,
+  watermark: PropTypes.node,
 };
 
 export default CivicStoryCard;

@@ -95,7 +95,7 @@ const exClass = css`
     position: absolute;
     right: 1rem;
     width: auto;
-    z-index: 999;
+    z-index: 99999;
 
     @media (max-width: 640px) {
       display: block;
