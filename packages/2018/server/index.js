@@ -22,7 +22,7 @@ app.get('/*', (req, res) => console.log('Servicing request for', req.url) || res
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Civic 2018 - A Hack Oregon Project</title>
+    <title>CIVIC Platform – Making Public Information Public Knowledge</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta charset="utf-8"/>

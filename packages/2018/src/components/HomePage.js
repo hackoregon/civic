@@ -211,12 +211,19 @@ const sectionHeaderTitle = css`
   display: block;
   position: relative;
   box-sizing: border-box;
+  @media (max-width: 640px) {
+    font-size: 36px;
+  }
 `;
 const sectionHeaderSubtitle = css`
   font-family: 'Rubik', sans-serif;
   font-size: 20px;
   color: white;
   display: inline-block;
+  @media (max-width: 640px) {
+    font-size: 16px;
+    line-height: 1.5;
+  }
 `;
 const sectionContentWrapper = css`
   color: black;
@@ -371,6 +378,10 @@ const treesBackground = css`
 `;
 const hackOregonLogoWrapper = css`
   text-align: right;
+`;
+const hackOregonLogoStyle = css`
+  width: 100%;
+  max-width: 300px;
 `;
 const buttonStyle = css`
   border: 2px solid #ef495c;
@@ -611,7 +622,7 @@ class HomePage extends Component {
               cellSpacing={20}
             >
               <div className={gridItem}>
-                <div className={issueStyle(3)}>Local Elections</div>
+                <div className={issueStyle(0)}>Local Elections</div>
                 <CivicCardStack cards={3}>
                   <div className={chartWrapper}>
                     <HorizontalBarChart
@@ -629,7 +640,7 @@ class HomePage extends Component {
                 </CivicCardStack>
               </div>
               <div className={gridItem}>
-                <div className={issueStyle(0)}>Development</div>
+                <div className={issueStyle(3)}>Development</div>
                 <CivicCardStack cards={3}>
                   <div className={chartWrapper}>
                     <img
@@ -787,7 +798,7 @@ class HomePage extends Component {
             <div className={aboutCivicWrapper} id="aboutCivic">
               <div className={cx(sectionHeaderWrapper, treesBackground)}>
                 <div className={cx(sectionHeaderTitle, hackOregonLogoWrapper)}>
-                  <img src={hackOregonLogo} width="300" />
+                  <img src={hackOregonLogo} className={hackOregonLogoStyle} />
                 </div>
               </div>
               <div className={cx(sectionContentWrapper, rightThirdGrid)}>
