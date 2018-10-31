@@ -87,8 +87,6 @@ sandboxStory();
 packageSelectorBox();
 civicSandboxDashboardStory();
 heatMapStory();
-<<<<<<< HEAD
-civicSandboxCardStory();
-=======
 civicCardStackStory();
->>>>>>> ec47d54c02f9e6bac9a47a1aad8d886f1cd16792
+civicSandboxCardStory();
+

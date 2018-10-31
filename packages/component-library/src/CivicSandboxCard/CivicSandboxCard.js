@@ -4,9 +4,9 @@ import CivicSandboxCardDesktop from './CivicSandboxCardDesktop';
 import CivicSandboxCardMobile from './CivicSandboxCardMobile';
 
 // TODO: implement check for desktop browsers
-const desktop = true;
+// const desktop = true;
 
-const CivicSandboxCard = ({ children, mapLayers, dashboardData, title }) =>
+const CivicSandboxCard = ({ children, mapLayers, dashboardData, title, desktop }) =>
   desktop ? (
     <CivicSandboxCardDesktop
       mapLayers={mapLayers}
@@ -30,6 +30,7 @@ CivicSandboxCard.propTypes = {
   mapLayers: PropTypes.node,
   dashboardData: PropTypes.node,
   title: PropTypes.string,
+  desktop: PropTypes.bool,
 };
 
 export default CivicSandboxCard;

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Dimensions from 'react-dimensions';
 import { css } from 'emotion';
 
@@ -6,7 +7,7 @@ const watermarkContainer = css`
   position: absolute;
   left: 0;
   top: 0;
-  z-index: 0;
+  z-index: 1;
   text-align: left;
 `;
 
@@ -23,8 +24,13 @@ const breakpoint = 494;
 
 class CivicWatermark extends Component {
   render() {
-    const mobileOnly = this.props.containerWidth <= breakpoint ? block : none;
-    const desktopOnly = this.props.containerWidth > breakpoint ? block : none;
+    const {
+      containerWidth,
+      small,
+    } = this.props;
+
+    const mobileOnly = (small || containerWidth <= breakpoint) ? block : none;
+    const desktopOnly = (!mobileOnly && containerWidth > breakpoint) ? block : none;
 
     return (
       <div className={watermarkContainer}>
@@ -48,5 +54,10 @@ class CivicWatermark extends Component {
     );
   }
 }
+
+CivicWatermark.propTypes = {
+  small: PropTypes.bool,
+  containerWidth: PropTypes.number,
+};
 
 export default Dimensions()(CivicWatermark);

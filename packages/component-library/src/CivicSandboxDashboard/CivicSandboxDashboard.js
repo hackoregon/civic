@@ -12,16 +12,32 @@ const dashboard = css`
   border: 1px solid #DDD;
   border-radius: 2px;
   box-shadow: 5px 5px 15px -3px rgba(0,0,0,0.2);
+  position: fixed;
+  width: 40%;
 `;
 
 const contentContainer = css`
-  position: relative;
   display: flex;
   flex-direction: column;
   margin-bottom: auto;
   overflow-y: auto;
   overflow-x: hidden;
   padding: 10px;
+  height: 500px;
+`;
+
+const faderSolid = css`
+
+`
+
+const fader = css`
+  position: absolute;
+  display: flex;
+  top: 0;
+  left: 0;
+  height: 40px;
+  width: 100%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 40%, rgba(255, 255, 255, 0) 100%);
 `;
 
 const viz = css`
@@ -29,11 +45,15 @@ const viz = css`
   margin: 1% 2% 2% 7.5%;
 `;
 
+const fixedElements = css`
+`;
+
 const buttonContainer = css`
-  position: relative;
+  position: absolute;
   display: flex;
-  flex-direction: row;
   width: 100%;
+  bottom: 0;
+  left: 0;
 `;
 
 const icon = css`
@@ -193,11 +213,14 @@ class CivicDashboard extends React.Component {
 
     return (
       <div className={css`${dashboard} ${containerHeight}`}>
+        <div className={fixedElements}>
+          <CivicWatermark small />
+          <div className={fader} />
+          { children ? buttons : null }
+        </div>
         <div className={contentContainer}>
           { this.state.show === "info" ? children : visualizations }
         </div>
-        <CivicWatermark />
-        { children ? buttons : null }
       </div>
     );
   }

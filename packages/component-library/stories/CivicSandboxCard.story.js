@@ -10,10 +10,6 @@ import {
 } from '../src';
 import { wallOfText } from './shared';
 
-const dashboardDescription = css`
-  padding: 0 1% 0 5%;
-`;
-
 const displayName = CivicSandboxCard.displayName || 'CivicSandboxCard';
 
 class LoadData extends React.Component {
@@ -215,6 +211,7 @@ const dashboardComponent = (foundationData1, slideData1) => {
     ],
   };
 
+  const desktop = boolean('Desktop:', true);
   const legendVisible = boolean('Legend:', true);
   const textVisible = boolean('Text:', true);
   const comparisonBarsVisible = boolean('Comparison Bars:', true);
@@ -243,7 +240,7 @@ const dashboardComponent = (foundationData1, slideData1) => {
 
   //Dashboard Description
   const dashboardInformation = (
-    <div className={dashboardDescription}>
+    <div>
       <p>{wallOfText}</p>
       <p>{wallOfText}</p>
       <p>{wallOfText}</p>
@@ -259,7 +256,7 @@ const dashboardComponent = (foundationData1, slideData1) => {
   const title = "How has ridership changed throughout Tri-Met's service area over time?";
 
   return (
-    <CivicSandboxCard mapLayers={mapLayers} dashboardData={dashboardData} title={title}>
+    <CivicSandboxCard mapLayers={mapLayers} dashboardData={dashboardData} title={title} desktop={desktop}>
       {dashboardContents}
     </CivicSandboxCard>
   );
