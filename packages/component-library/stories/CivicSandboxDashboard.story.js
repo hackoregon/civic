@@ -265,7 +265,7 @@ const dashboardComponent = (foundationData1, slideData1) => {
         `)}
       >
         <CivicSandboxDashboard data={dashboardData}>
-          { dashboardDescriptionVisible ? dashboardInformation : null }
+          { dashboardDescriptionVisible && dashboardInformation }
         </CivicSandboxDashboard>
       </div>
     </div>

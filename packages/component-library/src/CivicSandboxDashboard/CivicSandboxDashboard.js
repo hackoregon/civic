@@ -22,7 +22,7 @@ const contentContainer = css`
   margin-bottom: auto;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 10px;
+  padding: 10px 10px 30px 10px;
   height: 500px;
 `;
 
@@ -50,6 +50,7 @@ const buttonContainer = css`
   width: 100%;
   bottom: 0;
   left: 0;
+  z-index: 1;
 `;
 
 const icon = css`
@@ -78,7 +79,6 @@ const donutChart = css`
   width: 90%;
   margin: 1% 2% 2% 7.5%;
   height: 75%;
-  overflow-y: hidden;
   @media(max-width: 900px) {
     max-height: 400px;
   }
@@ -93,7 +93,7 @@ class CivicDashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      show: React.Children.count(props.children) > 0 ? "info" : "viz",
+      show: "info",
     };
 
     this.showInfo = this.showInfo.bind(this);
@@ -215,7 +215,7 @@ class CivicDashboard extends React.Component {
           { children ? buttons : null }
         </div>
         <div className={contentContainer}>
-          { this.state.show === "info" ? children : visualizations }
+          { this.state.show === "info" && children ? children : visualizations }
         </div>
       </div>
     );
