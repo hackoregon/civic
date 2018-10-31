@@ -26,10 +26,6 @@ const contentContainer = css`
   height: 500px;
 `;
 
-const faderSolid = css`
-
-`
-
 const fader = css`
   position: absolute;
   display: flex;
@@ -97,7 +93,7 @@ class CivicDashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      show: "viz",
+      show: React.Children.count(props.children) > 0 ? "info" : "viz",
     };
 
     this.showInfo = this.showInfo.bind(this);
