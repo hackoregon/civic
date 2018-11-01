@@ -12,7 +12,7 @@ const dashboard = css`
   border: 1px solid #DDD;
   border-radius: 2px;
   box-shadow: 5px 5px 15px -3px rgba(0,0,0,0.2);
-  position: fixed;
+  position: absolute;
   width: 40%;
 `;
 

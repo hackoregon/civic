@@ -22,16 +22,9 @@ const titleClass = css`
   margin-bottom:1em;
 `;
 
-const mapContainer = css``;
-
 const dashboardContainer = css`
-  position: absolute;
-  top: 2%;
-  left: 2%;
-  width: 40%;
-  height: 0;
-  min-height: 525px;
-  max-height: 525px;
+  position: relative;
+  z-index: 1;
   @media (max-width: 640px) {
     position: relative;
     left: 0;
@@ -44,9 +37,28 @@ const descriptionClass = css`
   text-align: left;
 `;
 
+const fullWidth = css`
+  position: absolute;
+  width: 100%;
+  left: 0;
+`;
+
+const spacer = css`
+  min-height: 650px;
+  width: 100%;
+`;
+
 const CivicSandboxCardDesktop = ({ children, mapLayers, dashboardData, title }) => (
   <div>
-    <div className={mapContainer}>
+    <div className={fullWidth}>
+      <div className={dashboardContainer}>
+        <CivicSandboxDashboard data={dashboardData}>
+          <div className={cardClass}>
+            {title ? <div className={titleClass}><h2>{title}</h2></div> : null}
+            {children ? <div className={descriptionClass}>{children}</div> : null}
+          </div>
+        </CivicSandboxDashboard>
+      </div>
       <BaseMap
         initialZoom={10.5}
         initialLatitude={45.5445}
@@ -57,14 +69,7 @@ const CivicSandboxCardDesktop = ({ children, mapLayers, dashboardData, title }) 
         <CivicSandboxMap mapLayers={mapLayers} />
       </BaseMap>
     </div>
-    <div className={dashboardContainer}>
-      <CivicSandboxDashboard data={dashboardData}>
-        <div className={cardClass}>
-          {title ? <div className={titleClass}><h2>{title}</h2></div> : null}
-          {children ? <div className={descriptionClass}>{children}</div> : null}
-        </div>
-      </CivicSandboxDashboard>
-    </div>
+    <div className={spacer} />
   </div>
 );
 

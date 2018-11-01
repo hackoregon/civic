@@ -30,6 +30,7 @@ const App = () => (
     <WhatYouCanDoToPrepare />
     <p className="transition">Social capital is a statistic derived from measuring community engagement. Disaster resilience, measuring the ability for an entity to bounce back from a crisis and learn from it, increases dramatically when community members engage.</p>
     {/* <IncreasingSocialCapital /> */}
+    <ViolentShakingAndGroundDeformation />
     <PullQuote quoteText="The #1 thing you can do to increase social capital is to meet your neighbors. Do you know 3 people within a 3 block radius of your house?" />
     <ProactivePlanning />
   </PageLayout>

@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { css } from 'emotion';
 import CivicStoryCard from '../CivicStoryCard/CivicStoryCard';
 
+const LAST_CARD_OPACITY = 0.4;
+
 const watermarkContainer = css`
   position: absolute;
   left: 0;
@@ -21,8 +23,6 @@ const smallWatermark = (
     </svg>
   </div>
 );
-
-const LAST_CARD_OPACITY = 0.4;
 
 const cardStackWrapper = total => css`
   padding: 0 ${total * 5}px ${total * 5}px 0;
