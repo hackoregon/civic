@@ -167,6 +167,7 @@ const chartWrapper = css`
   @media (max-width: 450px) {
     min-height: 13vh;
     height: 15vh;
+    padding-bottom: 1em;
   }
 `;
 
