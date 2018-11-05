@@ -19,7 +19,7 @@ const itemStyle = css`
   background-color: #ffffff;
   height: 180px;
   padding: 20px 20px;
-  margin: 20px;
+  margin: 20px 0;
   box-sizing: border-box;
   text-decoration: none;
   transition: opacity 0.4s ease-in-out;
@@ -48,6 +48,7 @@ const CivicSandboxCardMobile = ({ title, link, style }) => (
           {' '}Interactive Map
         </div>
         <h2>{title}</h2>
+        <h3>Explore</h3>
       </div>
     </Link>
   </div>
