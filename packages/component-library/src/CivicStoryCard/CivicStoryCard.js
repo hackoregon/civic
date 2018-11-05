@@ -19,6 +19,10 @@ const cardClass = css`
     margin: 40px 0;
     line-height: 1.6;
   }
+
+  @media (max-width: 640px) {
+    padding: 3em 2em;
+  }
 `;
 
 const descriptionClass = css`
