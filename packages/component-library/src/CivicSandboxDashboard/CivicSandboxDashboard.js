@@ -117,6 +117,7 @@ class CivicDashboard extends React.Component {
       data,
       height,
       children,
+      style,
     } = this.props;
 
     const containerHeight = height ? css`min-height: ${height}px;` : css``;
@@ -208,7 +209,7 @@ class CivicDashboard extends React.Component {
     );
 
     return (
-      <div className={css`${dashboard} ${containerHeight}`}>
+      <div className={css`${dashboard} ${containerHeight} ${style}`}>
         <div className={fixedElements}>
           <CivicWatermark small />
           <div className={fader} />
@@ -226,6 +227,7 @@ CivicDashboard.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object),
   height: PropTypes.number,
   children: PropTypes.node,
+  style: PropTypes.string,
 };
 
 export default CivicDashboard;

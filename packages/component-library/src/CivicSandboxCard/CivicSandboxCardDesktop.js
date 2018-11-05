@@ -5,6 +5,12 @@ import BaseMap from '../BaseMap/BaseMap';
 import CivicSandboxMap from '../CivicSandboxMap/CivicSandboxMap';
 import CivicSandboxDashboard from '../CivicSandboxDashboard/CivicSandboxDashboard';
 
+const dashboardStyle = css`
+  top: 40px;
+  right: 40px;
+  min-height: 540px;
+`;
+
 const cardClass = css`
   padding: 0 2em 2em 2em;
 
@@ -45,14 +51,13 @@ const fullWidth = css`
 
 const spacer = css`
   min-height: 650px;
-  width: 100%;
 `;
 
-const CivicSandboxCardDesktop = ({ children, mapLayers, dashboardData, title }) => (
-  <div>
+const CivicSandboxCardDesktop = ({ children, mapLayers, dashboardData, title, style }) => (
+  <div className={style}>
     <div className={fullWidth}>
       <div className={dashboardContainer}>
-        <CivicSandboxDashboard data={dashboardData}>
+        <CivicSandboxDashboard data={dashboardData} style={dashboardStyle}>
           <div className={cardClass}>
             {title ? <div className={titleClass}><h2>{title}</h2></div> : null}
             {children ? <div className={descriptionClass}>{children}</div> : null}
@@ -69,7 +74,7 @@ const CivicSandboxCardDesktop = ({ children, mapLayers, dashboardData, title }) 
         <CivicSandboxMap mapLayers={mapLayers} />
       </BaseMap>
     </div>
-    <div className={spacer} />
+    <div className={spacer} aria-hidden />
   </div>
 );
 
@@ -78,6 +83,7 @@ CivicSandboxCardDesktop.propTypes = {
   mapLayers: PropTypes.node,
   dashboardData: PropTypes.node,
   title: PropTypes.string,
+  style: PropTypes.string,
 };
 
 export default CivicSandboxCardDesktop;

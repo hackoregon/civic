@@ -130,7 +130,7 @@ export class Packages extends React.Component {
           {selectedFoundationDatum && <div
             className={dashboard}
           >
-            <CivicSandboxDashboard data={selectedFoundationDatum} height={525} />
+            <CivicSandboxDashboard data={selectedFoundationDatum} style={css`width: 100%`} />
           </div>}
         </section>)}
       </div>

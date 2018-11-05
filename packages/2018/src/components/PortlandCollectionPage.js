@@ -51,7 +51,7 @@ const subCopy = css`
 const teamTitleStyle = css`
   display: block;
   font-size: 15px;
-  font-family: 'Rubik';
+  font-family: 'Rubik', sans-serif;
   text-transform: uppercase;
   letter-spacing: 3px;
 
@@ -98,7 +98,6 @@ const sideListWrapper = css`
     margin: 20px;
     box-sizing: border-box;
     text-decoration: none;
-    border: none;
     transition: opacity .4s ease-in-out;
     border: 1px solid #DDD;
     border-radius: 2px;

@@ -2,7 +2,8 @@ import React from 'react';
 import * as d3 from 'd3';
 import { CivicSandboxCard } from '@hackoregon/component-library';
 
-const wallOfText = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+const wallOfText =
+  'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 
 const dataURLs = [
   'https://gist.githubusercontent.com/mendozaline/f78b076ce13a9fd484f6b8a004065a95/raw/ff8bd893ba1890a6f6c20265f720587f9595a9c4/pop.json',
@@ -231,30 +232,64 @@ const dashboardComponent = (foundationData1, slideData1) => {
   const dashboardData = dashboardArray.filter(d => d.visible).map(d => d.data);
 
   //Dashboard Description
-  const dashboardInformation = (
+  const title = 'Severe Shaking and Ground Deformation';
+  const dashboardContents = (
     <div>
-      <p>{wallOfText}</p>
-      <p>{wallOfText}</p>
-      <p>{wallOfText}</p>
-      <p>{wallOfText}</p>
-      <p>{wallOfText}</p>
-      <h4>Source: census.gov ACS</h4>
+      <p>
+        Based on developed models, scientists can estimate what will happen to
+        the ground in a 9.0 Cascadia Subduction Zone earthquake. The below maps
+        apply these models to Portland based on a calculated average for each
+        neighborhood, based on the following:
+      </p>
+      <ul>
+        <li>
+          <p>
+            Shaking intensity, how much the surface of the earth moves during an
+            earthquake, is represented using a{' '}
+            <a href="https://earthquake.usgs.gov/learn/topics/mercalli.php">
+              Modified Mercalli (MM) Intensity scale.
+            </a>
+          </p>
+        </li>
+        <li>
+          <p>
+            Total Deformation (average of liquefaction/landslide combined)
+            during a wet season is impacted by both landslide potential and
+            liquefaction potential. Landslide potential is based on topography
+            and soil conditions. Liquefaction potential estimates the potential
+            for saturated (wet), unconsolidated/loose ground materials to
+            liquefy or give way during an earthquake.
+          </p>
+        </li>
+        <li>
+          <p>
+            Total Deformation (average of landslide - there’s no liquefaction)
+            during a dry season season is impacted by landslide potential based
+            on topography. The lack of moisture in the ground will lessen the
+            impact of the event.
+          </p>
+        </li>
+      </ul>
+      <h4>
+        Source:{' '}
+        <a href="http://www.oregongeology.org/pubs/ofr/p-O-18-02.htm">DOGAMI</a>
+      </h4>
     </div>
   );
-  const dashboardDescriptionVisible = true;
-  const dashboardContents = dashboardDescriptionVisible
-    ? dashboardInformation
-    : null;
-  const title = "How has ridership changed throughout Tri-Met's service area over time?";
 
   return (
-    <CivicSandboxCard mapLayers={mapLayers} dashboardData={dashboardData} title={title} desktop={desktop}>
+    <CivicSandboxCard
+      mapLayers={mapLayers}
+      dashboardData={dashboardData}
+      title={title}
+    >
       {dashboardContents}
     </CivicSandboxCard>
   );
 };
 
-ViolentShakingAndGroundDeformation.displayName = 'ViolentShakingAndGroundDeformation';
+ViolentShakingAndGroundDeformation.displayName =
+  'ViolentShakingAndGroundDeformation';
 
 // Connect this to the redux store when necessary
 export default ViolentShakingAndGroundDeformation;
