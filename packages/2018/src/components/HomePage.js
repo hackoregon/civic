@@ -138,7 +138,7 @@ const gridContainer = css`
   margin: 0 auto;
   max-width: 900px;
   @media (max-width: 850px) {
-    grid-template: 100% / 100%;
+    grid-template: 25% 25% 25% 25% / 100%;
   }
 `;
 
