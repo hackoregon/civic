@@ -20,13 +20,17 @@ const mobile = css`
   }
 `;
 
+const spacing = css`
+  margin: 80px auto;
+`;
+
 const CivicSandboxCard = ({
   children,
   mapLayers,
   dashboardData,
   title,
 }) => (
-  <section>
+  <section className={spacing}>
     <CivicSandboxCardDesktop
       mapLayers={mapLayers}
       dashboardData={dashboardData}
