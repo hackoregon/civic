@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router';
 import { css } from 'emotion';
 import BaseMap from '../BaseMap/BaseMap';
 import CivicSandboxMap from '../CivicSandboxMap/CivicSandboxMap';
 import CivicSandboxDashboard from '../CivicSandboxDashboard/CivicSandboxDashboard';
+import Button from '../Button/Button';
 
 const dashboardStyle = css`
   top: 40px;
-  right: 40px;
+  left: 40px;
   min-height: 540px;
 `;
 
@@ -24,8 +26,8 @@ const titleClass = css`
   margin: 0;
   text-align: left;
   font-size: 2em;
-  line-height:1.2;
-  margin-bottom:1em;
+  line-height: 1.2;
+  margin-bottom: 1em;
 `;
 
 const dashboardContainer = css`
@@ -53,14 +55,33 @@ const spacer = css`
   min-height: 650px;
 `;
 
-const CivicSandboxCardDesktop = ({ children, mapLayers, dashboardData, title, style }) => (
+const buttonContainer = css`
+  position: absolute;
+  bottom: 80px;
+  right: 40px;
+`;
+
+const CivicSandboxCardDesktop = ({
+  children,
+  mapLayers,
+  dashboardData,
+  title,
+  style,
+  link,
+}) => (
   <div className={style}>
     <div className={fullWidth}>
       <div className={dashboardContainer}>
         <CivicSandboxDashboard data={dashboardData} style={dashboardStyle}>
           <div className={cardClass}>
-            {title ? <div className={titleClass}><h2>{title}</h2></div> : null}
-            {children ? <div className={descriptionClass}>{children}</div> : null}
+            {title ? (
+              <div className={titleClass}>
+                <h2>{title}</h2>
+              </div>
+            ) : null}
+            {children ? (
+              <div className={descriptionClass}>{children}</div>
+            ) : null}
           </div>
         </CivicSandboxDashboard>
       </div>
@@ -73,6 +94,11 @@ const CivicSandboxCardDesktop = ({ children, mapLayers, dashboardData, title, st
       >
         <CivicSandboxMap mapLayers={mapLayers} />
       </BaseMap>
+      <div className={buttonContainer}>
+        <Link to={link}>
+          <Button>{'More interactive maps >'}</Button>
+        </Link>
+      </div>
     </div>
     <div className={spacer} aria-hidden />
   </div>
@@ -84,6 +110,7 @@ CivicSandboxCardDesktop.propTypes = {
   dashboardData: PropTypes.node,
   title: PropTypes.string,
   style: PropTypes.string,
+  link: PropTypes.string,
 };
 
 export default CivicSandboxCardDesktop;

@@ -29,6 +29,7 @@ const CivicSandboxCard = ({
   mapLayers,
   dashboardData,
   title,
+  link,
 }) => (
   <section className={spacing}>
     <CivicSandboxCardDesktop
@@ -36,10 +37,11 @@ const CivicSandboxCard = ({
       dashboardData={dashboardData}
       title={title}
       style={desktop}
+      link={link}
     >
       {children}
     </CivicSandboxCardDesktop>
-    <CivicSandboxCardMobile title={title} style={mobile} />
+    <CivicSandboxCardMobile title={title} style={mobile} link={link} />
   </section>
 );
 
@@ -48,6 +50,12 @@ CivicSandboxCard.propTypes = {
   mapLayers: PropTypes.node,
   dashboardData: PropTypes.node,
   title: PropTypes.string,
+  link: PropTypes.string,
+};
+
+
+CivicSandboxCard.defaultProps = {
+  link: '/sandbox',
 };
 
 export default CivicSandboxCard;

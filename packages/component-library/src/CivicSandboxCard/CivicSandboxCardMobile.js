@@ -48,7 +48,7 @@ const CivicSandboxCardMobile = ({ title, link, style }) => (
           {' '}Interactive Map
         </div>
         <h2>{title}</h2>
-        <h3>Explore</h3>
+        <h3>More interactive maps in the Sandbox ></h3>
       </div>
     </Link>
   </div>
