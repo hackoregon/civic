@@ -12,8 +12,12 @@ const actionsClass = css`
   display: flex;
   justify-content:space-between;
   margin: -3em;
-  margin-top:2em;
-  padding:0 3em;
+  margin-top: 2em;
+  padding: 0 3em;
+  @media (max-width: 640px) {
+    margin: -3em -2em;
+    margin-top: 2em;
+  }
 `;
 
 const alignRight = css`

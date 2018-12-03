@@ -68,6 +68,8 @@ const burgerClass = css`
     display: none;
     padding: 2rem;
     border: none;
+    padding-right: 0;
+    margin-right: 2rem;
 
     @media (max-width: 640px) {
       display:block;

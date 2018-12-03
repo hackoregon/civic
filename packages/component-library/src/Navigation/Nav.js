@@ -93,7 +93,7 @@ const navClass = css`
 const exClass = css`
     display: none;
     position: absolute;
-    right: 1rem;
+    right: 0;
     width: auto;
     z-index: 99999;
 
@@ -104,7 +104,7 @@ const exClass = css`
       font-family: 'Rubik', sans-serif;
       font-size: 1.25rem;
       font-weight: 500;
-      padding: 1rem;
+      padding: 2rem;
     }
 `;
 
