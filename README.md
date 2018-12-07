@@ -1,31 +1,44 @@
 # Civic [![Build Status](https://travis-ci.org/hackoregon/civic.svg?branch=master)](https://travis-ci.org/hackoregon/civic)
 
-Home of the Civic Platform frontend code.
-
-This is a lerna based monorepo. Check out lernajs.io for any in-depth docs if you need to debug. Otherwise follow along:
+This is the home of the front-end code for the (Civic Platform)[http://civicplatform.org/]. It's organized in a [lerna](learn.io) based mono-repo, but it's ok if you don't know what that means yet.
 
 ## Setup
 
+### Development environment
 Prerequisites you'll need in your development environment to use and contribute to this project.
 
-### Use yarn & nvm for cross-platform uniformity
+1. **bash** 
+	
+	You will need a Unix shell (bash). For Mac, this can be Terminal.app. For Windows, you'll need to use [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) (see issue #[53](https://github.com/hackoregon/civic/issues/53)).
+2. **nvm and yarn** 
+	
+	You will need the following tools installed in your Unix shell:
 
-These tools make sure every contributor has identical dependency versions, include node and node packages.
+	* [nvm](https://github.com/creationix/nvm)
+	* [yarn](https://yarnpkg.com/) > 1.0
+	
+	These tools make sure every contributor has identical dependency versions, include node and node packages.
 
-1. [nvm](https://github.com/creationix/nvm)
-2. [yarn](https://yarnpkg.com/) > 1.0
+3. **git**   
+
+	You will need to have Git installed and a GitHub account with [SSH keys setup for remote access](https://help.github.com/articles/connecting-to-github-with-ssh/).
 
 ### Install and build
 
 ```bash
+# Clone the repository and navigate to the project root
+$ git clone https://github.com/hackoregon/civic.git
+$ cd civic
+
 # Sets your Node.js version to match what the project uses (should also happen on clone)
 $ nvm use
+
+# Note for next two steps, if you get an error, try the same command again.
 
 # Installs all package dependencies and links cross-dependencies
 $ yarn bootstrap
 
-# This will build all packages. Since some packages are used internally, they need to
-# be built before the dependent packages are worked on
+# This will build all packages. Since some packages are used internally, they need to be built before the dependent packages are worked on. This operation takes while (~10 minutes), but only needs to be run at the project root once.
 $ yarn build
 ```
 
@@ -57,6 +70,7 @@ We are committed to a shared component library. This is achieved using the `comp
 Run Storybook with the following command or [view it here](https://hackoregon.github.io/civic/):
 
 ```bash
+# run this command from project root
 $ yarn run storybook
 ```
 
