@@ -42,7 +42,7 @@ $ yarn bootstrap
 $ yarn build
 ```
 
-## Working on a single package
+## Working on a single package other than the component library
 
 At this point, Lerna has prepared all packages in the monorepo.
 
@@ -64,14 +64,14 @@ $ yarn test
 $ yarn test --watch
 ```
 
-## Using storybook
+## Working on the component library using storybook
 
 We are committed to a shared component library. This is achieved using the `component-library` package and React Storybook.
 Run Storybook with the following command or [view it here](https://hackoregon.github.io/civic/):
 
 ```bash
-# run this command from project root
-$ yarn run storybook
+# run this command from project root (civic)
+$ yarn storybook
 ```
 
 
