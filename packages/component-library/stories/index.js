@@ -2,18 +2,13 @@ import React from 'react';
 import { storiesOf, linkTo } from '@storybook/react'; // eslint-disable-line
 import { checkA11y } from '@storybook/addon-a11y';
 import buttonStory from './Button.story';
-//import storycardStory from './StoryCard.story';
 import civicStorycardStory from './CivicStoryCard.story';
 import pageLayoutStory from './PageLayout.story';
-//import storyLinkStory from './StoryLink.story';
-//import storyFooterStory from './StoryFooter.story';
-//import editableStory from './Editable.story';
 import pieStory from './PieChart.story';
 import ScatterplotStory from './Scatterplot.story';
 import horizontalBarChartStory from './HorizontalBarChart.story';
 import BarChartStory from './BarChart.story';
 import lineChartStory from './LineChart.story';
-//import sankeyStory from './Sankey.story';
 import placeholderStory from './Placeholder.story';
 import dropdownStory from './DropdownMenu.story';
 import headerStory from './Header.story';
@@ -40,6 +35,13 @@ import civicCardStackStory from './CivicCardStack.story';
 import sliderStory from './Slider.story';
 import landingPage from './LandingPage.story';
 
+//Legacy components used in 2017 package. Not supported for ongoing development.
+//import storycardStory from './StoryCard.story';
+//import storyLinkStory from './StoryLink.story';
+//import storyFooterStory from './StoryFooter.story';
+//import editableStory from './Editable.story';
+//import sankeyStory from './Sankey.story';
+
 import '../assets/global.styles.css';
 
 // stories can be added directly here
@@ -50,12 +52,8 @@ storiesOf('Welcome', module)
   ));
 
 // or imported as functions from files then composed in the order you invoke them
-//editableStory();
 headerStory();
 buttonStory();
-//storyLinkStory();
-//storyFooterStory();
-//storycardStory();
 civicStorycardStory();
 pageLayoutStory();
 pieStory();
@@ -65,7 +63,6 @@ BarChartStory();
 lineChartStory();
 stackedAreaChart();
 placeholderStory();
-//sankeyStory();
 dropdownStory();
 baseMapStory();
 scatterPlotMapStory();
@@ -87,3 +84,10 @@ heatMapStory();
 civicCardStackStory();
 sliderStory();
 landingPage();
+
+//Legacy components used in 2017 package. Not supported for ongoing development.
+//editableStory();
+//storyLinkStory();
+//storyFooterStory();
+//storycardStory();
+//sankeyStory();
