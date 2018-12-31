@@ -1,6 +1,6 @@
 # Civic [![Build Status](https://travis-ci.org/hackoregon/civic.svg?branch=master)](https://travis-ci.org/hackoregon/civic)
 
-This is the home of the front-end code for the (Civic Platform)[http://civicplatform.org/]. It's organized in a [lerna](learn.io) based mono-repo, but it's ok if you don't know what that means yet.
+This is the home of the front-end code for the [Civic Platform](http://civicplatform.org/). It's organized in a [lerna](learn.io) based mono-repo, but it's ok if you don't know what that means yet.
 
 ## Setup
 
