@@ -52,10 +52,10 @@ const PackageSelectorCollection = () => (
   </div>
 );
 
-export default () => storiesOf('PackageSelector', module)
+export default () => storiesOf('CIVIC Platform Components/Package Selector Box', module)
 .add(
   'Basic List of selection Options',
   // 'This is a basic list of selection options for the
   // package Selector with just a title and descriptions')(
   PackageSelectorDemo)
-.add('collection of packages', PackageSelectorCollection);
+.add('Collection of packages', PackageSelectorCollection);

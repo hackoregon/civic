@@ -54,7 +54,7 @@ const dataURLs = [
   'https://gist.githubusercontent.com/mendozaline/b3a75b40c9a60781b6adc77cebb9b400/raw/11dd037d964b0b444cafdc060691a219deebdf21/016-points-interest.json',
 ];
 
-export default () => storiesOf(displayName, module)
+export default () => storiesOf('Maps/CIVIC Sandbox Map', module)
   .addDecorator(withKnobs)
   .addDecorator(checkA11y)
   .add('Simple usage', () => (

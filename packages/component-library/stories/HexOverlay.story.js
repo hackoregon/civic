@@ -93,7 +93,7 @@ const lightSettings = {
   numberOfLights: 2
 };
 
-export default () => storiesOf(displayName, module)
+export default () => storiesOf('Maps/Hex Overlay', module)
   .addDecorator(checkA11y)
   .addDecorator(withKnobs)
   .add('With tooltip', () => (

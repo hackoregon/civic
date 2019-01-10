@@ -34,7 +34,7 @@ class LoadData extends React.Component {
 
 const mapboxToken = 'pk.eyJ1IjoiaGFja29yZWdvbiIsImEiOiJjamk0MGZhc2cwNDl4M3FsdHAwaG54a3BnIn0.Fq1KA0IUwpeKQlFIoaEn_Q';
 
-export default () => storiesOf(displayName, module)
+export default () => storiesOf('Maps/Screen Grid Map', module)
   .addDecorator(withKnobs)
   .addDecorator(checkA11y)
   .add('Simple usage', () => (

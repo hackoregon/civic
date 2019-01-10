@@ -15,7 +15,7 @@ const demoCode = () => (
   <Header title="Civic" />
 );
 
-const altTitle = 'with Hero section';
+const altTitle = 'With Hero section';
 
 const altDemo = () => (
   <div><Header title="Civic" /><Hero /></div>
@@ -32,8 +32,8 @@ const overlayDemo = () => (
 
 // const propDocs = { inline: true, propTables: [Header] };
 
-export default () => storiesOf(displayName, module)
+export default () => storiesOf('CIVIC Platform Components/Header', module)
   .addDecorator(checkA11y)
   .add(title, demoCode)
   .add(altTitle, altDemo)
-  .add('in overlay mode', overlayDemo);
+  .add('In overlay mode', overlayDemo);

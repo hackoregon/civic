@@ -12,7 +12,7 @@ const Container = ({ children }) => (
 );
 
 export default () =>
-  storiesOf('CivicCardStack', module)
+  storiesOf('CIVIC Platform Components/CIVIC Card Stack', module)
     .addDecorator(checkA11y)
     .addDecorator(withKnobs)
     .add(

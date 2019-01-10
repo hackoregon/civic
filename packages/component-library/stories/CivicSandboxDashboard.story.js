@@ -273,7 +273,7 @@ const dashboardComponent = (foundationData1, slideData1) => {
 };
 
 
-export default () => storiesOf(displayName, module)
+export default () => storiesOf('CIVIC Platform Components/CIVIC Sandbox Dashboard', module)
   .addDecorator(withKnobs)
   .addDecorator(checkA11y)
   .add('Simple usage', () => (

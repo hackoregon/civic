@@ -7,16 +7,16 @@ import { Placeholder } from '../src';
 
 const sampleIssue = 56;
 
-export default () => storiesOf('Placeholder', module)
+export default () => storiesOf('Placeholder Story', module)
   .addDecorator(checkA11y)
   .addDecorator(withKnobs)
-  .add('default', () => <Placeholder />)
-  .add('with an issue', () => {
+  .add('Default', () => <Placeholder />)
+  .add('With an issue', () => {
     const issue = number('Issue', sampleIssue);
 
     return (<Placeholder issue={issue} />);
   })
-  .add('with a custom message', () => {
+  .add('With a custom message', () => {
     return (
       <Placeholder>
         <h1>Why is this still here?</h1>

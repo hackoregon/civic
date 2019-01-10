@@ -33,7 +33,7 @@ const styles = {
   },
 };
 
-export default class Welcome extends React.Component {
+export default class CivicPlatformStyle extends React.Component {
 
   static propTypes = {
     showApp: PropTypes.func,
@@ -49,32 +49,15 @@ export default class Welcome extends React.Component {
     if (this.props.showApp) this.props.showApp();
   }
 
-  render() {
+render() {
     return (
       <div style={styles.main}>
-        <h1>Welcome to Hack Oregon&apos;s Storybook</h1>
+        <h1>CIVIC Platform Components Style Guide</h1>
         <p>
-          This is a UI component dev environment for the component library.
-        </p>
-        <p>
-          Stories are originating from the <code style={styles.code}>/stories</code> directory.
-          <br />
-          A story is a state of one or more UI components.
-          <br />
-          (Basically a story is like a visual test case.)
-        </p>
-        <p>
-          See these sample <a style={styles.link} href="#" onClick={this.showApp}>stories</a> for a component called <code style={styles.code}>Button</code>.
-        </p>
-        <p>
-          Just like that, you can add your own components as stories.
-          <br />
-          You can also edit those components and see changes right away.
-          <br />
-          (Try editing the <code style={styles.code}>Button</code> component
-          located at <code style={styles.code}>src/stories/Button.js</code>.)
+          This is the Style Guide for the CIVIC Platform.
         </p>
       </div>
     );
   }
+
 }

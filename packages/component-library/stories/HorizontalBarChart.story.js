@@ -37,7 +37,7 @@ const sampleUnsortedData = [
       {population: 1000, label: 'Jack Russell Terrier'},
     ];
 
-export default () => storiesOf(displayName, module)
+export default () => storiesOf('Charts/Horizontal Bar Chart', module)
   .addDecorator(checkA11y)
   .addDecorator(withKnobs)
   .add('Default sort order', () => {
@@ -68,7 +68,7 @@ export default () => storiesOf(displayName, module)
       />
     );
   })
-  .add('minimalist', () => {
+  .add('Minimalist', () => {
     const data = object('Data', sampleMinimalistData);
     const sortOrder = text('Data series', 'sortOrder');
     const dataValue = text('Data values', 'population');
@@ -84,7 +84,7 @@ export default () => storiesOf(displayName, module)
       />
     );
   })
-  .add('Basic Usage', () => {
+  .add('Simple usage', () => {
     const data = object('Data', sampleData);
     const sortOrder = text('Data series', 'sortOrder');
     const dataValue = text('Data value', 'population');
@@ -105,7 +105,7 @@ export default () => storiesOf(displayName, module)
       />
     );
   })
-  .add('With Negative Values', () => {
+  .add('With negative values', () => {
     const data = object('Data', [
       {delta: 0.1, label: 'Labrador Retriever'},
       {delta: 0.3, label: 'Standard Poodle'},

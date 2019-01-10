@@ -34,10 +34,10 @@ const urlDemo = () => (
   />
 );
 
-const altTitle = 'without attribution';
-const urlTitle = 'with custom url';
+const altTitle = 'Without attribution';
+const urlTitle = 'With custom URL';
 
-export default () => storiesOf(displayName, module)
+export default () => storiesOf('CIVIC Platform Components/Pull Quote', module)
   .add(
     title,
     demoCode

@@ -15,9 +15,9 @@ const colorScales = [
 ];
 
 export default () =>
-  storiesOf(displayName, module)
+  storiesOf('CIVIC Platform Components/Gradient Scale', module)
     .addDecorator(withKnobs)
-    .add('Basic Usage', () => {
+    .add('Simple usage', () => {
       const domain = array('domain', [50, 90]);
       const primary = number('primary', 63);
       const colorScale = select('colorScale', colorScales, 'thermal');
@@ -28,7 +28,7 @@ export default () =>
         colorScale={colorScale}
       />);
     })
-    .add('With Secondary', () => {
+    .add('With secondary', () => {
       const domain = array('domain', [100, 600]);
       const primary = number('primary', 200);
       const secondary = array('secondary', [150, 400]);

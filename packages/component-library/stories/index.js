@@ -34,6 +34,17 @@ import heatMapStory from './HeatMap.story';
 import civicCardStackStory from './CivicCardStack.story';
 import sliderStory from './Slider.story';
 import landingPage from './LandingPage.story';
+import UIComponentsStyle from './UIComponentsStyle'; 
+import ChartsStyle from './ChartsStyle';
+import MapsStyle from './MapsStyle';
+import CivicPlatformStyle from './CivicPlatformStyle';
+import AccessibilityGuidelinesStyle from './AccessibilityGuidelinesStyle';
+import CardsStyle from './CardsStyle';
+import DataVisualizationStyle from './DataVisualizationStyle';
+import MotionStyle from './MotionStyle.js';
+import NavigationStyle from './NavigationStyle.js';
+import ResponsiveDesignStyle from './ResponsiveDesignStyle.js';
+import TerminologyStyle from './TerminologyStyle.js';
 
 //Legacy components used in 2017 package. Not supported for ongoing development.
 //import storycardStory from './StoryCard.story';
@@ -47,43 +58,102 @@ import '../assets/global.styles.css';
 // stories can be added directly here
 storiesOf('Welcome', module)
   .addDecorator(checkA11y)
-  .add('to Storybook', () => (
+  .add('To Storybook', () => (
     <Welcome showApp={linkTo('Button')} />
   ));
 
+storiesOf('UX Style Guide', module)
+  .addDecorator(checkA11y)
+  .add('Accessibility', () => (
+    <AccessibilityGuidelinesStyle />
+  ))
+  .add('Cards', () => (
+    <CardsStyle />
+  ))
+  .add('Data Visualization', () => (
+    <DataVisualizationStyle />
+  ))
+  .add('Motion', () => (
+    <MotionStyle />
+  ))
+  .add('Navigation', () => (
+    <NavigationStyle />
+  ))
+  .add('Responsive Design', () => (
+    <ResponsiveDesignStyle />
+  ))
+  .add('Terminology', () => (
+    <TerminologyStyle />
+  ));
+
+storiesOf('UI Components', module)
+  .addDecorator(checkA11y)
+  .add('UI Components Style Guide', () => (
+    <UIComponentsStyle />
+  ));
+
+storiesOf('Charts', module)
+  .addDecorator(checkA11y)
+  .add('Charts Style Guide', () => (
+    <ChartsStyle />
+  ));
+
+storiesOf('Maps', module)
+  .addDecorator(checkA11y)
+  .add('Maps Style Guide', () => (
+    <MapsStyle />
+  ));
+
+storiesOf('CIVIC Platform Components', module)
+  .addDecorator(checkA11y)
+  .add('Platform Components Style Guide', () => (
+    <CivicPlatformStyle />
+  ));
+
 // or imported as functions from files then composed in the order you invoke them
-headerStory();
+// common UI components
 buttonStory();
-civicStorycardStory();
-pageLayoutStory();
-pieStory();
-horizontalBarChartStory();
-ScatterplotStory();
-BarChartStory();
-lineChartStory();
-stackedAreaChart();
-placeholderStory();
 dropdownStory();
-baseMapStory();
-scatterPlotMapStory();
-dataTable();
-pullQuoteStory();
+sliderStory();
+
+// Civic platform components and page layout
+civicCardStackStory();
+civicSandboxDashboardStory();
+civicStorycardStory();
+gradientScaleStory();
+headerStory();
+landingPage();
+packageSelectorBox();
+pageLayoutStory();
 pdfStory();
-screenGridMapStory();
-pathMapStory();
-iconMapStory();
-mapOverlayStory();
-hexOverlayStory();
+pullQuoteStory();
+
+// charts
+BarChartStory();
+dataTable();
+horizontalBarChartStory();
+lineChartStory();
+pieStory();
+ScatterplotStory();
+stackedAreaChart();
+
+// maps
+baseMapStory();
 boundaryMapStory();
 civicSandboxMapStory();
-gradientScaleStory();
-sandboxStory();
-packageSelectorBox();
-civicSandboxDashboardStory();
 heatMapStory();
-civicCardStackStory();
-sliderStory();
-landingPage();
+hexOverlayStory();
+iconMapStory();
+mapOverlayStory();
+pathMapStory();
+scatterPlotMapStory();
+screenGridMapStory();
+
+// which section should this be in?
+sandboxStory();
+
+// placeholder story
+placeholderStory();
 
 //Legacy components used in 2017 package. Not supported for ongoing development.
 //editableStory();

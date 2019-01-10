@@ -14,7 +14,7 @@ const demoCode = () => (
   <LandingPage>Hello LandingPage</LandingPage>
 );
 
-export default () => storiesOf(displayName, module)
+export default () => storiesOf('CIVIC Platform Components/Landing Page', module)
   .addDecorator(checkA11y)
   .add(
     title,

@@ -107,6 +107,6 @@ const campaignFinanceExample = () => (
   </PageLayout>
 );
 
-export default () => storiesOf('PageLayout', module)
-  .add('a potential example of Housing project', housingExample)
-  .add('a potential example of Campaign Finance', campaignFinanceExample);
+export default () => storiesOf('CIVIC Platform Components/Page Layout', module)
+  .add('A potential example of Housing Project', housingExample)
+  .add('A potential example of Campaign Finance Project', campaignFinanceExample);
