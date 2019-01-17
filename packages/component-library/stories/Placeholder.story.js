@@ -7,7 +7,7 @@ import { Placeholder } from '../src';
 
 const sampleIssue = 56;
 
-export default () => storiesOf('Placeholder Story', module)
+export default () => storiesOf('CIVIC Platform Components/Placeholder Story', module)
   .addDecorator(checkA11y)
   .addDecorator(withKnobs)
   .add('Default', () => <Placeholder />)
@@ -20,7 +20,7 @@ export default () => storiesOf('Placeholder Story', module)
     return (
       <Placeholder>
         <h1>Why is this still here?</h1>
-        <p>Shouldn't someone have done something by now?</p>
+        <p>Shouldn&apos;t someone have done something by now?</p>
       </Placeholder>
     );
   })
