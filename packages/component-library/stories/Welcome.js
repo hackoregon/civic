@@ -3,21 +3,21 @@ import { styles } from './storyStyles.js';
 
 const Welcome = () => (
   <div style={styles.main}>
-    <h1>Welcome to Hack Oregon&apos;s Storybook</h1>
-    <p>
+    <h1 style={styles.h1}>Welcome to Hack Oregon&apos;s Storybook</h1>
+    <p style={styles.p}>
       This is a UI component dev environment for the component library.
     </p>
-    <p>
+    <p style={styles.p}>
       Stories originate from the <code style={styles.code}>/stories</code> directory.
       <br />
       A story is a state of one or more UI components.
       <br />
       (Basically a story is like a visual test case.)
     </p>
-    <p>
+    <p style={styles.p}>
       See these sample <a style={styles.link} href="#" onClick={this.showApp}>stories</a> for a component called <code style={styles.code}>Button</code>.
     </p>
-    <p>
+    <p style={styles.p}>
       Just like that, you can add your own components as stories.
       <br />
       You can also edit those components and see changes right away.
