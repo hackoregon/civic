@@ -1,0 +1,4 @@
+* text=auto
+
+yarn.lock -diff
+packages/component-library/es/** -diff
