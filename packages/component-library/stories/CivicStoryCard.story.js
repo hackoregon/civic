@@ -102,7 +102,7 @@ const errorDemo = () => (
   </Container>
 );
 
-export default () => storiesOf('CivicStoryCard', module)
+export default () => storiesOf('CIVIC Platform Components/CIVIC Story Card', module)
   .add(
     'Simple usage',
     // 'This is some basic usage with the CivicStoryCard with just a title and descriptions')(
@@ -124,8 +124,8 @@ export default () => storiesOf('CivicStoryCard', module)
       </Container>
     )
   )
-  .add('loading', loadingDemo)
-  .add('with error', errorDemo)
-  .add('with title & description', tdDemo)
-  .add('with title, description & visualization', tdvDemo)
-  .add('with collapsable sections', collapsableDemo);
+  .add('Loading', loadingDemo)
+  .add('With error', errorDemo)
+  .add('With title and description', tdDemo)
+  .add('With title, description and visualization', tdvDemo)
+  .add('With collapsable sections', collapsableDemo);

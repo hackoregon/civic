@@ -59,7 +59,7 @@ const staticMap = () => {
   );
 };
 
-export default () => storiesOf(displayName, module)
+export default () => storiesOf('Maps/Base Map', module)
   .addDecorator(withKnobs)
   .add(
     'Simple usage',

@@ -10,6 +10,7 @@ const title = 'Simple usage';
 const description = `
   This is some basic usage with the slider component as built for Raise Effect, updated with changes for latest rc-slider. Due to the nature of the component, a higher order component is required to contain local state.
   Sliding should trigger changes that affect the local state.`;
+
 const demoCode = () => {
   class CustomSlider extends React.Component {
     constructor(props) {
@@ -42,6 +43,6 @@ const demoCode = () => {
 
 // const propDocs = { inline: true, propTables: [Slider] };
 
-export default () => storiesOf(displayName, module)
+export default () => storiesOf("UI Components/Slider", module)
   .addDecorator(checkA11y)
   .add(title, demoCode);

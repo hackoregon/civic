@@ -123,7 +123,7 @@ const demoMap = () => {
   );
 };
 
-export default () => storiesOf(displayName, module)
+export default () => storiesOf('Maps/Boundary Map', module)
   .addDecorator(withKnobs)
   .addDecorator(checkA11y)
   .add('Simple usage',

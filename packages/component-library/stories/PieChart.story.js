@@ -15,9 +15,9 @@ const loading = () => (
   <PieChart loading />
 );
 
-export default () => storiesOf('Pie/Donut visualization', module).addDecorator(withKnobs)
+export default () => storiesOf('/Charts/Pie/Donut Visualization', module).addDecorator(withKnobs)
 .add(
-  'basic usage',
+  'Basic usage',
   // 'edit this visual in the knobs tab below and check click events in the actions tab',
   () => {
     const numberOfData = number('Amount of data values', 2);
@@ -31,7 +31,7 @@ export default () => storiesOf('Pie/Donut visualization', module).addDecorator(w
       </div>
     );
   }).add(
-  'simple usage',
+  'Simple usage',
   // 'edit this visual in the knobs tab below and check click events in the actions tab',
   () => {
     const sampleTitle = text('Title', 'Sample Title');

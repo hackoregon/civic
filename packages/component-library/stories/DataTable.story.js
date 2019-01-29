@@ -87,7 +87,7 @@ const demoCode = () => (
   </div>
 );
 
-export default () => storiesOf(displayName, module)
+export default () => storiesOf('Charts/Data Table', module)
   .add(
     title,
     withInfo(`

@@ -19,9 +19,9 @@ const sampleSimpleData = [
   { x: 20, y: 40 },
 ];
 
-export default () => storiesOf(displayName, module).addDecorator(withKnobs)
+export default () => storiesOf('Charts/Bar Chart', module).addDecorator(withKnobs)
   .add('Simple usage', () => <BarChart data={sampleSimpleData} />)
-  .add('Basic Usage', (() => {
+  .add('Basic usage', (() => {
     const data = object('Data', [
       { ye: 1994, population: 2000 },
       { ye: 1995, population: 8000 },

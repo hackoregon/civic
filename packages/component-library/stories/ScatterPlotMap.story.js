@@ -121,7 +121,7 @@ const tooltipMap = () => {
   );
 };
 
-export default () => storiesOf(displayName, module)
+export default () => storiesOf('Maps/Scatterplot Map', module)
   .addDecorator(withKnobs)
   .addDecorator(checkA11y)
   .add('Simple usage',

@@ -124,10 +124,10 @@ const customLegend = (legendData) => {
 };
 
 export default () =>
-  storiesOf(displayName, module)
+  storiesOf('Charts/Line Chart', module)
     .addDecorator(withKnobs)
     .add('Simple usage', () => <LineChart data={sampleSimpleData} />)
-    .add('with some props', () => {
+    .add('With some props', () => {
       const data = object('Data', sampleData);
       const dataKey = text('dataKey', sampleXKey);
       const dataValue = text('dataValue', sampleYKey);
@@ -150,7 +150,7 @@ export default () =>
         />
       );
     })
-    .add('with some props and unstructured data', () => {
+    .add('With some props and unstructured data', () => {
       const data = object('Data', sampleUnstructuredData);
       const dataKey = text('dataKey', sampleUnstructuredXKey);
       const dataValue = text('dataValue', sampleUnstructuredYKey);
@@ -173,7 +173,7 @@ export default () =>
         />
       );
     })
-    .add('with more optional props', () => {
+    .add('With more optional props', () => {
       const data = object('Data', sampleData);
       const dataKey = text('dataKey', sampleXKey);
       const dataKeyLabel = text('dataKeyLabel', sampleDataKeyLabel);

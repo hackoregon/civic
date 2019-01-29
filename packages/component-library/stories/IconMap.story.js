@@ -194,7 +194,7 @@ const tooltipMap = () => {
   );
 };
 
-export default () => storiesOf(displayName, module)
+export default () => storiesOf('Maps/Icon Map', module)
   .addDecorator(withKnobs)
   .addDecorator(checkA11y)
   .add(

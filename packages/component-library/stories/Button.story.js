@@ -19,12 +19,9 @@ const altDemo = () => (
   <Button onClick={action('clicked')}>😀 😎 👍 💯</Button>
 );
 
-const altTitle = 'with some emoji';
+const altTitle = 'With some emoji';
 
-export default () => storiesOf(displayName, module)
+export default () => storiesOf('UI Components/Button', module)
   .addDecorator(checkA11y)
-  .add(
-    title,
-    demoCode
-  )
+  .add(title, demoCode)
   .add(altTitle, altDemo);

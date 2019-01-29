@@ -10,6 +10,7 @@ const title = 'Simple usage';
 const description = `
   This is some basic usage with the button with providing a label to show the text.
   Clicking should trigger an action.`;
+
 const demoCode = () => (
   <Dropdown
     dispatch={dispatch => action => dispatch(action)}
@@ -25,9 +26,6 @@ const demoCode = () => (
 
 // const propDocs = { inline: true, propTables: [Dropdown] };
 
-export default () => storiesOf(displayName, module)
+export default () => storiesOf("UI Components/Dropdown List", module)
   .addDecorator(checkA11y)
-  .add(
-    title,
-    (demoCode)
-  )
+  .add(title, (demoCode))
