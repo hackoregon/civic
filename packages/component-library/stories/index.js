@@ -13,7 +13,6 @@ import placeholderStory from './Placeholder.story';
 import dropdownStory from './DropdownMenu.story';
 import headerStory from './Header.story';
 import dataTable from './DataTable.story';
-import Welcome from './Welcome';
 import baseMapStory from './BaseMap.story';
 import mapOverlayStory from './MapOverlay.story';
 import hexOverlayStory from './HexOverlay.story';
@@ -33,7 +32,6 @@ import pdfStory from './PDF.story';
 import heatMapStory from './HeatMap.story';
 import civicCardStackStory from './CivicCardStack.story';
 import sliderStory from './Slider.story';
-import landingPage from './LandingPage.story';
 import UIComponentsStyle from './UIComponentsStyle'; 
 import ChartsStyle from './ChartsStyle';
 import MapsStyle from './MapsStyle';
@@ -46,6 +44,12 @@ import NavigationStyle from './NavigationStyle.js';
 import ResponsiveDesignStyle from './ResponsiveDesignStyle.js';
 import TerminologyStyle from './TerminologyStyle.js';
 import IconographyStyle from './IconographyStyle';
+import LogosStyle from './LogosStyle';
+import ColorThemeStyle from './ColorThemeStyle';
+import TypographyStyle from './TypographyStyle';
+import TheBrandStyle from './TheBrandStyle';
+import ThePlatformStyle from './ThePlatformStyle';
+import Introduction from './Introduction';
 
 //Legacy components used in 2017 package. Not supported for ongoing development.
 //import storycardStory from './StoryCard.story';
@@ -53,14 +57,34 @@ import IconographyStyle from './IconographyStyle';
 //import storyFooterStory from './StoryFooter.story';
 //import editableStory from './Editable.story';
 //import sankeyStory from './Sankey.story';
+//import landingPage from './LandingPage.story';
 
 import '../assets/global.styles.css';
 
 // Welcome to Storybook
 storiesOf('Welcome', module)
   .addDecorator(checkA11y)
-  .add('To Storybook', () => (
-    <Welcome showApp={linkTo('Button')} />
+  .add('Introduction', () => (
+    <Introduction />
+  ))
+  .add('The CIVIC Brand', () => (
+    <TheBrandStyle />
+  ))
+  .add('The CIVIC Platform', () => (
+    <ThePlatformStyle showApp={linkTo('Button')} />
+  ));
+
+// Branding
+storiesOf('Branding', module)
+  .addDecorator(checkA11y)
+  .add('Logos', () => (
+    <LogosStyle />
+  ))
+  .add('Color Theme', () => (
+    <ColorThemeStyle />
+  ))
+  .add('Typography', () => (
+    <TypographyStyle />
   ));
 
   // UX Style Guide
@@ -109,6 +133,7 @@ storiesOf('Charts', module)
   ));
 BarChartStory();
 dataTable();
+gradientScaleStory();
 horizontalBarChartStory();
 lineChartStory();
 pieStory();
@@ -141,9 +166,7 @@ storiesOf('CIVIC Platform Components', module)
 civicCardStackStory();
 civicSandboxDashboardStory();
 civicStorycardStory();
-gradientScaleStory();
 headerStory();
-landingPage();
 packageSelectorBox();
 pageLayoutStory();
 pdfStory();
@@ -153,6 +176,7 @@ sandboxStory();
 
 //Legacy components used in 2017 package. Not supported for ongoing development.
 //editableStory();
+//landingPage();
 //storyLinkStory();
 //storyFooterStory();
 //storycardStory();

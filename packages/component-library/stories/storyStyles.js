@@ -1,3 +1,5 @@
+import { SSL_OP_TLS_BLOCK_PADDING_BUG } from "constants";
+
 /*
 Styles used in Storybook for the UI Style Guide pages
 */
@@ -14,22 +16,60 @@ const styles = {
     h1: {
       backgroundColor: 'white',
       color: '#201024',
+      fontSize: '2em',
     },
 
     h2: {
       backgroundColor: 'white',
       color: '#ee495c',
+      fontsize: '1.75em',
     },
 
     h3: {
       backgroundColor: 'white',
       color: '#201024',
+      fontSize: '1.75em',
+    },
+
+    h4: {
+      backgroundColor: 'white',
+      color: '#201024',
+      fontWeight: 'bold',
+      fontSize: '1.5em',
+      marginBottom: 5,
     },
 
     p: {
       backgroundColor: 'white',
       color: '#201024',
       fontSize: 16,
+    },
+
+    ul: {
+      fontFamily: 'Rubik, "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif',
+      fontSize: 15,
+    },
+
+    storyGrid: {
+      display: 'grid',
+      //gridTemplateColumns: 'auto auto auto',
+      gridTemplateColumns: '1fr 2fr 1fr',
+      //gridTemplateRows: 'auto auto auto',
+      gridTemplateRows: '1fr 1fr 1fr',
+      gridGap: '10px',
+    },
+
+    storyGridItem: {
+      gridRow: 2,
+      gridColumn: 2,
+      alignSelf: 'center',
+      justifyContent: 'center',
+    },
+
+    invertLogo: {
+      display: 'block',
+      backgroundColor: '#201024',
+      padding: 20,
     },
 
     logo: {

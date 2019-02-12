@@ -15,7 +15,7 @@ const colorScales = [
 ];
 
 export default () =>
-  storiesOf('CIVIC Platform Components/Gradient Scale', module)
+  storiesOf('Charts/Gradient Scale', module)
     .addDecorator(withKnobs)
     .add('Simple usage', () => {
       const domain = array('domain', [50, 90]);
