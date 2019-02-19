@@ -52,9 +52,7 @@ const styles = {
 
     storyGrid: {
       display: 'grid',
-      //gridTemplateColumns: 'auto auto auto',
       gridTemplateColumns: '1fr 2fr 1fr',
-      //gridTemplateRows: 'auto auto auto',
       gridTemplateRows: '1fr 1fr 1fr',
       gridGap: '10px',
     },
@@ -66,14 +64,15 @@ const styles = {
       justifyContent: 'center',
     },
 
-    invertLogo: {
-      display: 'block',
+    invertedLogo: {
+      //display: 'block',
       backgroundColor: '#201024',
+      margin: 20,
       padding: 20,
     },
 
     logo: {
-      width: 200,
+      padding: 0,
     },
   
     link: {
