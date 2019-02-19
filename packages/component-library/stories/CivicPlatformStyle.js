@@ -1,10 +1,10 @@
 import React from 'react';  
-import { styles } from './storyStyles.js';
+import { storybookStyles } from './storyStyles.js';
 
 const CivicPlatformStyle = () => (
-  <div style={styles.main}>
-    <h1 style={styles.h1}>CIVIC Platform Components Style Guide</h1>
-    <p style={styles.p}>This is the Style Guide for the CIVIC Platform.</p>
+  <div style={storybookStyles.main}>
+    <h1>CIVIC Platform Components Style Guide</h1>
+    <p>This is the Style Guide for the CIVIC Platform.</p>
   </div>
 );
 

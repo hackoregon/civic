@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import { Slider } from '../src';
 import { checkA11y } from '@storybook/addon-a11y';
-import { styles } from './storyStyles.js';
+import { storybookStyles } from './storyStyles.js';
 
 const displayName = Slider.displayName || 'Slider';
 const title = 'Simple usage';
@@ -47,8 +47,8 @@ const demoCode = () => {
 export default () => storiesOf("UI Components/Slider", module)
   .addDecorator(checkA11y)
   .addDecorator(story => 
-    <div style={styles.storyGrid}>
-      <div style={styles.storyGridItem}>
+    <div style={storybookStyles.storyGrid}>
+      <div style={storybookStyles.storyGridItem}>
         {story()}
       </div>
     </div>)

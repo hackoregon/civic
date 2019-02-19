@@ -1,5 +1,5 @@
 import React from 'react'; 
-import { styles } from './storyStyles.js';
+import { storybookStyles } from './storyStyles.js';
 import CivicLogo from '../src/Logo/CivicLogo';
 //import CivicLogoInverted from '../src/Logo/CivicLogoInverted';
 import CivicLogoC from '../src/Logo/CivicLogoC';
@@ -15,7 +15,7 @@ import CivicLogoC from '../src/Logo/CivicLogoC';
 const invertTitle = "Quick Usage"
 
 const LogosStyle = () => (
-  <div style={styles.main}>
+  <div style={storybookStyles.main}>
     <h1>
       Logos
     </h1>
@@ -37,7 +37,7 @@ const LogosStyle = () => (
     <p>
       Standard go-to Logo.
     </p>
-    <div style={styles.logo}>
+    <div style={storybookStyles.logo}>
       <CivicLogo alt={invertTitle} />
     </div>
     <h4>
@@ -72,10 +72,10 @@ const LogosStyle = () => (
     <p>
       Use on dark, solid-color backgrounds.
     </p>
-    <div style={styles.invertedLogo}>
+    <div style={storybookStyles.invertedLogo}>
       {/* <CivicLogoInverted alt={invertTitle} /> */}
     </div>
-    <div style={styles.invertedLogo}>
+    <div style={storybookStyles.invertedLogo}>
       {/* <CivicLogoCInverted alt={invertTitle} /> */}
     </div>
 

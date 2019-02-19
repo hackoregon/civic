@@ -1,55 +1,19 @@
 import { SSL_OP_TLS_BLOCK_PADDING_BUG } from "constants";
 
 /*
-Styles used in Storybook for the UI Style Guide pages
+  Styles used in Storybook.
+  Only styles that are needed exclusively in Storybook are defined here.
 */
 
-const styles = {
+const storybookStyles = {
+    // The display area for components
     main: {
       backgroundColor: 'white',
       margin: 15,
       maxWidth: 800,
-      lineHeight: 1.5,
-      fontFamily: 'Rubik, "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif',
     },
 
-    h1: {
-      backgroundColor: 'white',
-      color: '#201024',
-      fontSize: '2em',
-    },
-
-    h2: {
-      backgroundColor: 'white',
-      color: '#ee495c',
-      fontsize: '1.75em',
-    },
-
-    h3: {
-      backgroundColor: 'white',
-      color: '#201024',
-      fontSize: '1.75em',
-    },
-
-    h4: {
-      backgroundColor: 'white',
-      color: '#201024',
-      fontWeight: 'bold',
-      fontSize: '1.5em',
-      marginBottom: 5,
-    },
-
-    p: {
-      backgroundColor: 'white',
-      color: '#201024',
-      fontSize: 16,
-    },
-
-    ul: {
-      fontFamily: 'Rubik, "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif',
-      fontSize: 15,
-    },
-
+    // Use CSS grid to center UI components in the Storybook display
     storyGrid: {
       display: 'grid',
       gridTemplateColumns: '1fr 2fr 1fr',
@@ -64,8 +28,8 @@ const styles = {
       justifyContent: 'center',
     },
 
+    // Show inverted logos on a dark background in the Branding Logos section
     invertedLogo: {
-      //display: 'block',
       backgroundColor: '#201024',
       margin: 20,
       padding: 20,
@@ -75,6 +39,7 @@ const styles = {
       padding: 0,
     },
   
+    /*
     link: {
       color: '#1474f3',
       textDecoration: 'none',
@@ -91,6 +56,8 @@ const styles = {
       backgroundColor: '#f3f2f2',
       color: '#3a3a3a',
     },
+    */
+
   };
 
-  export { styles };
+  export { storybookStyles };

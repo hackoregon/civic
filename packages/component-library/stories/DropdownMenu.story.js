@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import { Dropdown } from '../src';
 import { checkA11y } from '@storybook/addon-a11y';
-import { styles } from './storyStyles.js';
+import { storybookStyles } from './storyStyles.js';
 
 const displayName = Dropdown.displayName || 'Dropdown';
 const title = 'Simple usage';
@@ -30,8 +30,8 @@ const demoCode = () => (
 export default () => storiesOf("UI Components/Dropdown List", module)
   .addDecorator(checkA11y)
   .addDecorator(story => 
-    <div style={styles.storyGrid}>
-      <div style={styles.storyGridItem}>
+    <div style={storybookStyles.storyGrid}>
+      <div style={storybookStyles.storyGridItem}>
         {story()}
       </div>
     </div>)

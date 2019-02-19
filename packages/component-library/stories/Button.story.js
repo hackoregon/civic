@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { checkA11y } from '@storybook/addon-a11y';
 import { Button } from '../src';
-import { styles } from './storyStyles.js';
+import { storybookStyles } from './storyStyles.js';
 
 const displayName = Button.displayName || 'Button';
 const title = 'Simple usage';
@@ -25,8 +25,8 @@ const altTitle = 'With some emoji';
 export default () => storiesOf('UI Components/Button', module)
   .addDecorator(checkA11y)
   .addDecorator(story => 
-    <div style={styles.storyGrid}>
-      <div style={styles.storyGridItem}>
+    <div style={storybookStyles.storyGrid}>
+      <div style={storybookStyles.storyGridItem}>
         {story()}
       </div>
     </div>)
