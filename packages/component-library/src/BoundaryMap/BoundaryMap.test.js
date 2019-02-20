@@ -5,23 +5,15 @@ import BoundaryMap from './BoundaryMap';
 describe('BoundaryMap', () => {
   const data = [
     {
-      "type": "Feature",
-      "properties": {
-        "name": "Null Island"
+      type: 'Feature',
+      properties: {
+        name: 'Null Island',
       },
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [0, 0],
-            [0, 1],
-            [1, 1],
-            [1, 0],
-            [0, 0]
-          ]
-        ]
-      }
-    }
+      geometry: {
+        type: 'Polygon',
+        coordinates: [[[0, 0], [0, 1], [1, 1], [1, 0], [0, 0]]],
+      },
+    },
   ];
 
   const defaultProps = { data };

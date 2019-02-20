@@ -18,16 +18,15 @@ const actionsClass = css`
 `;
 
 export default class StoryFooter extends Component {
-
   static defaultProps = {
     cardId: 'some-card-id',
     collectionId: 'some-collection-id',
-  }
+  };
 
   static propTypes = {
     cardId: PropTypes.string,
     collectionId: PropTypes.string,
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -46,7 +45,7 @@ export default class StoryFooter extends Component {
     copy(`${window.location.origin}/${collectionId}/${cardId}`);
     this.switchState(MS_TO_SWITCH_TEXT);
     this.setState({ copied: true });
-  }
+  };
 
   render() {
     const { collectionId, cardId } = this.props;
@@ -54,8 +53,20 @@ export default class StoryFooter extends Component {
     const shareIcon = this.state.copied ? ICONS.check : ICONS.link;
     return (
       <div className={actionsClass}>
-        <StoryLink className={'Context'} route={`/${collectionId}/${cardId}`} icon={ICONS.eye}>View card</StoryLink>
-        <StoryLink className={'Share'} action={this.handleCopy} icon={shareIcon}>{shareTxt}</StoryLink>
+        <StoryLink
+          className={'Context'}
+          route={`/${collectionId}/${cardId}`}
+          icon={ICONS.eye}
+        >
+          View card
+        </StoryLink>
+        <StoryLink
+          className={'Share'}
+          action={this.handleCopy}
+          icon={shareIcon}
+        >
+          {shareTxt}
+        </StoryLink>
       </div>
     );
   }

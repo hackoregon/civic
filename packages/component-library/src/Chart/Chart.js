@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export default class Chart extends Component {
-
-  static displayName = 'Chart'
+  static displayName = 'Chart';
 
   static childContextTypes = {
     height: PropTypes.number,
@@ -38,7 +37,6 @@ export default class Chart extends Component {
       right: 0,
     },
   };
-
 
   getChildContext() {
     const { width, height } = this.props;

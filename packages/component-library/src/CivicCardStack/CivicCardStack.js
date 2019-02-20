@@ -29,7 +29,9 @@ const bgCard = (index, total, baseOpacity) => css`
 
 const BackgroundStoryCard = (index, total, children) => (
   <div className={bgCard(index, total, LAST_CARD_OPACITY)} key={index}>
-    <CivicStoryCard footer={false} watermark={smallWatermark}>{children}</CivicStoryCard>
+    <CivicStoryCard footer={false} watermark={smallWatermark}>
+      {children}
+    </CivicStoryCard>
   </div>
 );
 

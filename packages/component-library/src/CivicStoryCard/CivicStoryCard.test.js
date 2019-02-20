@@ -9,9 +9,7 @@ describe('CivicStoryCard', () => {
   };
 
   describe('common properties', () => {
-    const wrapper = shallow(
-      <CivicStoryCard slug={slug} title={title} />,
-    );
+    const wrapper = shallow(<CivicStoryCard slug={slug} title={title} />);
 
     it('should render the title as an h2', () => {
       const h2 = wrapper.find('h2');
@@ -62,10 +60,8 @@ describe('CivicStoryCard', () => {
     const wrapper = shallow(
       <CivicStoryCard slug={slug} title={title}>
         <div className="Description">Some content</div>
-        <div>
-          Some other stuff
-        </div>
-      </CivicStoryCard>,
+        <div>Some other stuff</div>
+      </CivicStoryCard>
     );
 
     it('should render children into a container div under the title', () => {

@@ -14,7 +14,13 @@ import {
 import ChartContainer from '../ChartContainer';
 import SimpleLegend from '../SimpleLegend';
 import { numeric } from '../utils/formatters';
-import { chartEvents, getDefaultDomain, getDefaultDataSeriesLabels, getDefaultFillStyle, getDefaultLineStyle } from '../utils/chartHelpers';
+import {
+  chartEvents,
+  getDefaultDomain,
+  getDefaultDataSeriesLabels,
+  getDefaultFillStyle,
+  getDefaultLineStyle,
+} from '../utils/chartHelpers';
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
 
 const LineChart = ({
@@ -54,33 +60,32 @@ const LineChart = ({
       ? dataSeriesLabels.map(series => ({ name: series.category }))
       : null;
 
-  const lineData = dataSeries
-    ? groupBy(data, dataSeries)
-    : { category: data };
+  const lineData = dataSeries ? groupBy(data, dataSeries) : { category: data };
 
   const lines = lineData
-    ? Object.keys(lineData).map((category, index) =>
-      <VictoryLine
-        data={lineData[category].map(d => ({
-          dataKey: d[dataKey],
-          dataValue: d[dataValue],
-          series: d[dataSeries],
-        }))}
-        x="dataKey"
-        y="dataValue"
-        style={getDefaultLineStyle(index)}
-        standalone={false}
-      />
-      )
+    ? Object.keys(lineData).map((category, index) => (
+        <VictoryLine
+          data={lineData[category].map(d => ({
+            dataKey: d[dataKey],
+            dataValue: d[dataValue],
+            series: d[dataSeries],
+          }))}
+          x="dataKey"
+          y="dataValue"
+          style={getDefaultLineStyle(index)}
+          standalone={false}
+        />
+      ))
     : null;
 
   return (
     <ChartContainer title={title} subtitle={subtitle}>
-      {legendData && (
-        legendComponent ?
-        legendComponent(legendData) :
-        <SimpleLegend className="legend" legendData={legendData} />
-      )}
+      {legendData &&
+        (legendComponent ? (
+          legendComponent(legendData)
+        ) : (
+          <SimpleLegend className="legend" legendData={legendData} />
+        ))}
 
       <VictoryChart
         domain={chartDomain}
@@ -121,14 +126,18 @@ const LineChart = ({
             y={295}
           />
         </VictoryPortal>
-        { lines }
+        {lines}
         <VictoryScatter
           animate={{ onEnter: { duration: 500 } }}
-//        categories={{ x: categoryData }}
+          //        categories={{ x: categoryData }}
           data={data.map(d => ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],
-            label: `${dataKeyLabel ? dataKeyLabel : xLabel}: ${xNumberFormatter(d[dataKey])} • ${dataValueLabel ? dataValueLabel : yLabel}: ${yNumberFormatter(d[dataValue])}`,
+            label: `${dataKeyLabel ? dataKeyLabel : xLabel}: ${xNumberFormatter(
+              d[dataKey]
+            )} • ${
+              dataValueLabel ? dataValueLabel : yLabel
+            }: ${yNumberFormatter(d[dataValue])}`,
             series: d[dataSeries],
             size: size ? d[size.key] || size.value : 3,
           }))}
@@ -156,7 +165,7 @@ const LineChart = ({
 
 LineChart.propTypes = {
   data: PropTypes.arrayOf(
-    PropTypes.shape({ x: PropTypes.number, y: PropTypes.number }),
+    PropTypes.shape({ x: PropTypes.number, y: PropTypes.number })
   ),
   dataKey: PropTypes.string,
   dataKeyLabel: PropTypes.arrayOf(PropTypes.string),
@@ -164,7 +173,7 @@ LineChart.propTypes = {
   dataValueLabel: PropTypes.arrayOf(PropTypes.string),
   dataSeries: PropTypes.string,
   dataSeriesLabel: PropTypes.arrayOf(
-    PropTypes.shape({ category: PropTypes.string, label: PropTypes.string }),
+    PropTypes.shape({ category: PropTypes.string, label: PropTypes.string })
   ),
   domain: PropTypes.objectOf(PropTypes.array),
   size: PropTypes.shape({ key: PropTypes.string, value: PropTypes.string }),
@@ -191,8 +200,8 @@ LineChart.defaultProps = {
   style: null,
   subtitle: null,
   title: null,
-  xLabel: "X",
-  yLabel: "Y",
+  xLabel: 'X',
+  yLabel: 'Y',
   xNumberFormatter: numeric,
   yNumberFormatter: numeric,
   legendComponent: null,

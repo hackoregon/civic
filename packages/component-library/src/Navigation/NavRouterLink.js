@@ -16,7 +16,9 @@ const linkClass = css`
     padding: 1rem;
     text-align: center;
 
-    &:focus, &:hover, &:active {
+    &:focus,
+    &:hover,
+    &:active {
       color: rgba(255, 255, 255, 0.85);
     }
 
@@ -34,11 +36,10 @@ const NavRouterLink = ({ path, customStyles, name }) => {
   const pathTo = pathOrName(path, name);
 
   return (
-    <li className={linkClass} style={{ ...boxStyle }} >
-      <Link className={'nav-item'} to={pathTo} >
+    <li className={linkClass} style={{ ...boxStyle }}>
+      <Link className={'nav-item'} to={pathTo}>
         <span style={{ ...linkStyle }}>{name}</span>
       </Link>
-
     </li>
   );
 };

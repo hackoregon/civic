@@ -22,7 +22,12 @@ const titleStyle = css`
   }
 `;
 
-const CollectionHero = ({ heroTitle, heroSubtitle, mainProjectColor, teamTitle }) => (
+const CollectionHero = ({
+  heroTitle,
+  heroSubtitle,
+  mainProjectColor,
+  teamTitle,
+}) => (
   <Hero mainProjectColor={mainProjectColor}>
     <div>
       <span className={teamTitleStyle}>{teamTitle}</span>

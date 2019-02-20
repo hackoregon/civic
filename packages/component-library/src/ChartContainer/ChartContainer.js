@@ -6,13 +6,13 @@ import ChartTitle from '../ChartTitle';
 
 const chartLoading = css`
   text-align: center;
-  background: #EEE;
+  background: #eee;
   height: 100%;
 `;
 
 const chartError = css`
   text-align: center;
-  background: #FDD;
+  background: #fdd;
   height: 100%;
 `;
 
@@ -41,9 +41,7 @@ const ChartContainer = ({
   let content = (
     <div>
       <ChartTitle title={title} subtitle={subtitle} />
-      <div className={wrapperStyle}>
-        { children }
-      </div>
+      <div className={wrapperStyle}>{children}</div>
     </div>
   );
 
@@ -65,7 +63,6 @@ ChartContainer.propTypes = {
   className: PropTypes.string,
 };
 
-ChartContainer.defaultProps = {
-};
+ChartContainer.defaultProps = {};
 
 export default ChartContainer;

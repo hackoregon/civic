@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class ChartData extends Component {
-
-  static displayName = 'ChartData'
+  static displayName = 'ChartData';
 
   static propTypes = {
     children: PropTypes.node,
@@ -13,7 +12,7 @@ class ChartData extends Component {
       PropTypes.arrayOf(PropTypes.number),
       PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
     ]).isRequired,
-  }
+  };
 
   static childContextTypes = {
     xScale: PropTypes.func,
@@ -22,7 +21,7 @@ class ChartData extends Component {
       PropTypes.arrayOf(PropTypes.number),
       PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
     ]),
-  }
+  };
 
   getChildContext() {
     const { xScale, yScale, data } = this.props;
@@ -30,11 +29,7 @@ class ChartData extends Component {
   }
 
   render() {
-    return (
-      <g>
-        {this.props.children}
-      </g>
-    );
+    return <g>{this.props.children}</g>;
   }
 }
 

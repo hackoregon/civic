@@ -14,7 +14,7 @@ const commonMargin = '12px 8px';
 
 const footerClass = css`
   width: 100%;
-  background: #FFF;
+  background: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -73,15 +73,20 @@ const scrollToTopClass = css`
   }
 `;
 
-const defaultAttribution = `\u00A9 Copyright ${(new Date()).getFullYear()}`;
+const defaultAttribution = `\u00A9 Copyright ${new Date().getFullYear()}`;
 
 const Footer = ({ attribution }) => (
   <div className={footerClass}>
     <div className={copyrightClass}>{attribution}</div>
-    <div className={logoClass}><Link to="/" className={logoLinkStyle}><LogoStandard /></Link></div>
-    <div className={scrollToTopClass}><ScrollToTop iconStyle="fa fa-angle-up" /></div>
+    <div className={logoClass}>
+      <Link to="/" className={logoLinkStyle}>
+        <LogoStandard />
+      </Link>
+    </div>
+    <div className={scrollToTopClass}>
+      <ScrollToTop iconStyle="fa fa-angle-up" />
+    </div>
   </div>
-
 );
 
 Footer.displayName = 'Footer';

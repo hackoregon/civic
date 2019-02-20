@@ -39,15 +39,15 @@ const overlayHeaderClass = css`
 
 const navClass = css`
   margin: 0 30px 0 0;
-  display:block;
+  display: block;
 
   @media (max-width: 640px) {
     &.active {
-      display:block;
+      display: block;
     }
 
     &.inactive {
-      display:none;
+      display: none;
     }
   }
 `;
@@ -72,7 +72,7 @@ const burgerClass = css`
     margin-right: 2rem;
 
     @media (max-width: 640px) {
-      display:block;
+      display: block;
     }
   }
 `;
@@ -85,17 +85,27 @@ class Header extends Component {
     };
   }
 
-  togglesNestedMenu = () => this.setState({ menuActive: !this.state.menuActive })
+  togglesNestedMenu = () =>
+    this.setState({ menuActive: !this.state.menuActive });
 
   render() {
     const { children, menu, title, overlay, mainProjectColor } = this.props;
     return (
       <div className={overlay ? overlayContainerClass : containerClass}>
-        <nav className={overlay ? overlayHeaderClass : headerClass} style={{ backgroundColor: mainProjectColor || primaryColor }}>
+        <nav
+          className={overlay ? overlayHeaderClass : headerClass}
+          style={{ backgroundColor: mainProjectColor || primaryColor }}
+        >
           <div className={logoClass}>
-            <Link className={logoLinkClass} to="/"><Logo alt={title} /></Link>
+            <Link className={logoLinkClass} to="/">
+              <Logo alt={title} />
+            </Link>
           </div>
-          <div className={`${navClass} ${this.state.menuActive ? 'active' : 'inactive'}`}>
+          <div
+            className={`${navClass} ${
+              this.state.menuActive ? 'active' : 'inactive'
+            }`}
+          >
             <Nav
               menu={menu}
               toggleSubNav={this.togglesNestedMenu}
@@ -103,7 +113,7 @@ class Header extends Component {
               togglesNestedMenu={this.togglesNestedMenu}
             />
 
-            { children }
+            {children}
           </div>
           <a className={burgerClass}>
             <Icon
@@ -116,7 +126,6 @@ class Header extends Component {
       </div>
     );
   }
-
 }
 
 Header.displayName = 'Header';
@@ -125,7 +134,7 @@ Header.propTypes = {
   title: PropTypes.string,
   children: PropTypes.node,
   overlay: PropTypes.bool,
-  mainProjectColor: PropTypes.string
+  mainProjectColor: PropTypes.string,
 };
 
 export default Header;

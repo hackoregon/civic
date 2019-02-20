@@ -45,10 +45,10 @@ describe('Scatterplot', () => {
     const wrapper = shallow(<Scatterplot data={simpleData} />);
     expect(wrapper.find({ title: 'Scatter Plot' }).length).to.eql(1);
     expect(wrapper.find({ title: 'Scatter Plot' }).props().data).to.eql([
-      { dataKey: 100, dataValue: 1, label: "X: 100 • Y: 1", series: undefined },
-      { dataKey: 200, dataValue: 2, label: "X: 200 • Y: 2", series: undefined },
-      { dataKey: 300, dataValue: 3, label: "X: 300 • Y: 3", series: undefined },
-      { dataKey: 400, dataValue: 4, label: "X: 400 • Y: 4", series: undefined },
+      { dataKey: 100, dataValue: 1, label: 'X: 100 • Y: 1', series: undefined },
+      { dataKey: 200, dataValue: 2, label: 'X: 200 • Y: 2', series: undefined },
+      { dataKey: 300, dataValue: 3, label: 'X: 300 • Y: 3', series: undefined },
+      { dataKey: 400, dataValue: 4, label: 'X: 400 • Y: 4', series: undefined },
     ]);
   });
 
@@ -58,11 +58,11 @@ describe('Scatterplot', () => {
     wrapper.setProps({ data: customData });
 
     expect(wrapper.find({ title: 'Scatter Plot' }).props().data).to.eql([
-      { dataKey: 100, dataValue: 1, label: "X: 100 • Y: 1", series: undefined },
-      { dataKey: 200, dataValue: 2, label: "X: 200 • Y: 2", series: undefined },
-      { dataKey: 300, dataValue: 3, label: "X: 300 • Y: 3", series: undefined },
-      { dataKey: 400, dataValue: 4, label: "X: 400 • Y: 4", series: undefined },
-      { dataKey: 500, dataValue: 5, label: "X: 500 • Y: 5", series: undefined },
+      { dataKey: 100, dataValue: 1, label: 'X: 100 • Y: 1', series: undefined },
+      { dataKey: 200, dataValue: 2, label: 'X: 200 • Y: 2', series: undefined },
+      { dataKey: 300, dataValue: 3, label: 'X: 300 • Y: 3', series: undefined },
+      { dataKey: 400, dataValue: 4, label: 'X: 400 • Y: 4', series: undefined },
+      { dataKey: 500, dataValue: 5, label: 'X: 500 • Y: 5', series: undefined },
     ]);
   });
 
@@ -86,7 +86,9 @@ describe('Scatterplot', () => {
   });
 
   it('should properly set a domain if provided with one', () => {
-    const wrapper = shallow(<Scatterplot data={simpleData} domain={customDataDomain} />);
+    const wrapper = shallow(
+      <Scatterplot data={simpleData} domain={customDataDomain} />
+    );
     const chart = wrapper.find('VictoryChart');
 
     expect(chart.props().domain).to.eql(customDataDomain);
@@ -101,10 +103,10 @@ describe('Scatterplot', () => {
     };
     const wrapper = shallow(<Scatterplot {...props} />);
     expect(wrapper.find({ title: 'Scatter Plot' }).props().data).to.eql([
-      { dataKey: 100, dataValue: 1, label: "X: 100 • Y: 1", series: 'first' },
-      { dataKey: 200, dataValue: 2, label: "X: 200 • Y: 2", series: 'first' },
-      { dataKey: 100, dataValue: 3, label: "X: 100 • Y: 3", series: 'second' },
-      { dataKey: 200, dataValue: 3, label: "X: 200 • Y: 3", series: 'second' },
+      { dataKey: 100, dataValue: 1, label: 'X: 100 • Y: 1', series: 'first' },
+      { dataKey: 200, dataValue: 2, label: 'X: 200 • Y: 2', series: 'first' },
+      { dataKey: 100, dataValue: 3, label: 'X: 100 • Y: 3', series: 'second' },
+      { dataKey: 200, dataValue: 3, label: 'X: 200 • Y: 3', series: 'second' },
     ]);
   });
 
@@ -134,10 +136,10 @@ describe('Scatterplot', () => {
     };
     const wrapper = shallow(<Scatterplot {...props} />);
     expect(wrapper.find({ title: 'Scatter Plot' }).props().data).to.eql([
-      { dataKey: 100, dataValue: 1, label: "X: 100 • Y: 1", series: 'first' },
-      { dataKey: 200, dataValue: 2, label: "X: 200 • Y: 2", series: 'first' },
-      { dataKey: 100, dataValue: 3, label: "X: 100 • Y: 3", series: 'second' },
-      { dataKey: 200, dataValue: 3, label: "X: 200 • Y: 3", series: 'second' },
+      { dataKey: 100, dataValue: 1, label: 'X: 100 • Y: 1', series: 'first' },
+      { dataKey: 200, dataValue: 2, label: 'X: 200 • Y: 2', series: 'first' },
+      { dataKey: 100, dataValue: 3, label: 'X: 100 • Y: 3', series: 'second' },
+      { dataKey: 200, dataValue: 3, label: 'X: 200 • Y: 3', series: 'second' },
     ]);
   });
 

@@ -5,18 +5,15 @@ import ScatterPlotMap from './ScatterPlotMap';
 describe('ScatterPlotMap', () => {
   const data = [
     {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          0,
-          0
-        ]
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: [0, 0],
       },
-      "properties": {
-        "name": "Null Island"
-      }
-    }
+      properties: {
+        name: 'Null Island',
+      },
+    },
   ];
 
   const defaultProps = { data };
