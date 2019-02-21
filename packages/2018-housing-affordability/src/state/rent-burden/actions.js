@@ -42,7 +42,9 @@ export const fetchRentBurdenCity = fetchAdapter(
   }
 );
 
-export const setRentBurdenCity = (city = 'Portland-Vancouver-Hillsboro, OR-WA') => ({
+export const setRentBurdenCity = (
+  city = 'Portland-Vancouver-Hillsboro, OR-WA'
+) => ({
   type: SET_CITY,
   selectedCity: city,
 });

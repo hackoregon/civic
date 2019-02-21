@@ -3,11 +3,15 @@ import actionEmitter from '../api-adapter-action-emitter';
 
 // Types
 export const SCHOOL_LIST_START = 'STUDENT_ENROLLMENT_TRENDS/SCHOOL_LIST_START';
-export const SCHOOL_LIST_SUCCESS = 'STUDENT_ENROLLMENT_TRENDS/SCHOOL_LIST_SUCCESS';
-export const SCHOOL_LIST_FAILURE = 'STUDENT_ENROLLMENT_TRENDS/SCHOOL_LIST_FAILURE';
+export const SCHOOL_LIST_SUCCESS =
+  'STUDENT_ENROLLMENT_TRENDS/SCHOOL_LIST_SUCCESS';
+export const SCHOOL_LIST_FAILURE =
+  'STUDENT_ENROLLMENT_TRENDS/SCHOOL_LIST_FAILURE';
 export const SCHOOL_DATA_START = 'STUDENT_ENROLLMENT_TRENDS/SCHOOL_DATA_START';
-export const SCHOOL_DATA_SUCCESS = 'STUDENT_ENROLLMENT_TRENDS/SCHOOL_DATA_SUCCESS';
-export const SCHOOL_DATA_FAILURE = 'STUDENT_ENROLLMENT_TRENDS/SCHOOL_DATA_FAILURE';
+export const SCHOOL_DATA_SUCCESS =
+  'STUDENT_ENROLLMENT_TRENDS/SCHOOL_DATA_SUCCESS';
+export const SCHOOL_DATA_FAILURE =
+  'STUDENT_ENROLLMENT_TRENDS/SCHOOL_DATA_FAILURE';
 export const SET_SCHOOL = 'STUDENT_ENROLLMENT_TRENDS/UPDATE_SCHOOL';
 
 // Simple actions
@@ -28,22 +32,18 @@ export const fetchSchoolList = fetchAdapter(
   }
 );
 
-export const fetchSchoolData = fetchAdapter(
-  'api/school_demographics',
-  {
-    encodeParams: (url, school) => `${url}?name=${school}`,
-    start: schoolDataStart,
-    success: schoolDataSuccess,
-    failure: schoolDataFailure,
-  }
-);
+export const fetchSchoolData = fetchAdapter('api/school_demographics', {
+  encodeParams: (url, school) => `${url}?name=${school}`,
+  start: schoolDataStart,
+  success: schoolDataSuccess,
+  failure: schoolDataFailure,
+});
 
-export const setSchool = (school) => {
+export const setSchool = school => {
   return {
     type: SET_SCHOOL,
     selectedSchool: school,
   };
 };
-
 
 //http://service.civicpdx.org/neighborhood-development/api/school_demographics?format=json&name=Beverly+Cleary

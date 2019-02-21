@@ -1,4 +1,3 @@
-
 import apiAdapter from '../api-adapter';
 import actionEmitter from '../api-adapter-action-emitter';
 
@@ -20,7 +19,7 @@ const requestError = type => actionEmitter(`${type}/ERROR`);
 
 const API_BASE = 'http://service.civicpdx.org/local-elections/';
 
-const endpoint = (type) => {
+const endpoint = type => {
   const endpoints = {
     [CONTRIBUTOR_BREAKDOWN]: 'contributorbreakdown',
     [SPENDING_BREAKDOWN]: 'spendingbreakdown',
@@ -31,8 +30,13 @@ const endpoint = (type) => {
   return `${API_BASE}${endpoints[type]}/`;
 };
 
-export const fetchContributorBreakdown = (committeeID, electionCycleID, params = {}) =>
-  apiAdapter(`${endpoint(CONTRIBUTOR_BREAKDOWN)}`,
+export const fetchContributorBreakdown = (
+  committeeID,
+  electionCycleID,
+  params = {}
+) =>
+  apiAdapter(
+    `${endpoint(CONTRIBUTOR_BREAKDOWN)}`,
     {
       ...params,
       //election_cycle: electionCycleID,
@@ -42,10 +46,16 @@ export const fetchContributorBreakdown = (committeeID, electionCycleID, params =
       start: requestStart(CONTRIBUTOR_BREAKDOWN),
       success: requestSuccess(CONTRIBUTOR_BREAKDOWN),
       error: requestError(CONTRIBUTOR_BREAKDOWN),
-    })();
+    }
+  )();
 
-export const fetchSpendingBreakdown = (committeeID, electionCycleID, params = {}) =>
-  apiAdapter(`${endpoint(SPENDING_BREAKDOWN)}`,
+export const fetchSpendingBreakdown = (
+  committeeID,
+  electionCycleID,
+  params = {}
+) =>
+  apiAdapter(
+    `${endpoint(SPENDING_BREAKDOWN)}`,
     {
       ...params,
       //election_cycle: electionCycleID,
@@ -55,18 +65,22 @@ export const fetchSpendingBreakdown = (committeeID, electionCycleID, params = {}
       start: requestStart(SPENDING_BREAKDOWN),
       success: requestSuccess(SPENDING_BREAKDOWN),
       error: requestError(SPENDING_BREAKDOWN),
-    })();
+    }
+  )();
 
 export const fetchElectionCycles = (committeeID, params = {}) =>
-  apiAdapter(endpoint(ELECTION_CYCLES),
+  apiAdapter(
+    endpoint(ELECTION_CYCLES),
     {
       ...params,
       committee: committeeID,
-    }, {
+    },
+    {
       start: requestStart(ELECTION_CYCLES),
       success: requestSuccess(ELECTION_CYCLES),
       error: requestError(ELECTION_CYCLES),
-    })();
+    }
+  )();
 
 export const fetchCommittees = (params = {}) =>
   apiAdapter(endpoint(COMMITTEES), params, {

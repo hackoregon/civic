@@ -4,7 +4,7 @@ export const ICONS = {
   check: 'fa fa-check',
   download: 'fa fa-cloud-download',
   hamburger: 'fa fa-bars',
-  info: 'fa fa-info-circle'
+  info: 'fa fa-info-circle',
 };
 
 export default {

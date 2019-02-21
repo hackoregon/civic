@@ -2,4 +2,4 @@
  * exports from /Migration
  */
 
- export default from './reducer';
+export default from './reducer';

@@ -20,8 +20,10 @@ export const ARUStart = actionEmitter(CITY_START);
 export const ARUSuccess = actionEmitter(CITY_SUCCESS);
 export const ARUFailure = actionEmitter(CITY_FAILURE);
 
-const listDatatype = 'change-in-share-of-units-by-real-rent-level-2005-2015-real-gross-rents-under-800';
-const detailDatatype = 'change-in-share-of-units-by-real-rent-level-2005-2015-real-gross-rents';
+const listDatatype =
+  'change-in-share-of-units-by-real-rent-level-2005-2015-real-gross-rents-under-800';
+const detailDatatype =
+  'change-in-share-of-units-by-real-rent-level-2005-2015-real-gross-rents';
 
 // Thunk actions
 export const fetchAllARUCities = fetchAdapter(
@@ -36,7 +38,8 @@ export const fetchAllARUCities = fetchAdapter(
 export const fetchARUCity = fetchAdapter(
   `/api/harvardjchs/?datatype=${detailDatatype}`,
   {
-    encodeParams: (url, city = 'portland') => `${url}&limit=20&datapoint=${slugify(city)}`,
+    encodeParams: (url, city = 'portland') =>
+      `${url}&limit=20&datapoint=${slugify(city)}`,
     start: ARUStart,
     success: ARUSuccess,
     failure: ARUFailure,

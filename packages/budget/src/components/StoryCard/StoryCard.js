@@ -6,12 +6,10 @@ import './StoryCard.css';
 const StoryCard = ({ cardId, collectionId, title, children }) => (
   <div className={'Card'}>
     <h2 className={'Title Rubik'}>{title}</h2>
-    <div style={{ width: '100%' }}>
-      {children}
-    </div>
+    <div style={{ width: '100%' }}>{children}</div>
     <StoryFooter cardId={cardId} collectionId={collectionId} />
   </div>
-  );
+);
 
 StoryCard.displayName = 'StoryCard';
 

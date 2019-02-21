@@ -4,9 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 export function StoryPage() {
-  return (
-    <div>Placeholder</div>
-  );
+  return <div>Placeholder</div>;
 }
 
 StoryPage.displayName = 'StoryPage';
@@ -14,4 +12,7 @@ StoryPage.displayName = 'StoryPage';
 const mapDispatch = () => ({});
 const mapProps = () => ({});
 
-export default connect(mapProps, mapDispatch)(StoryPage);
+export default connect(
+  mapProps,
+  mapDispatch
+)(StoryPage);

@@ -15,15 +15,15 @@ const cardLoading = css`
   width: 100%;
   padding: 50px;
   text-align: center;
-  background: #EEE;
+  background: #eee;
 `;
 
 const cardError = css`
   width: 100%;
   padding: 50px;
   text-align: center;
-  background: #FDD;
-  border: 1px solid #C99;
+  background: #fdd;
+  border: 1px solid #c99;
 `;
 
 export class FarmersMarketsOverTime extends React.Component {
@@ -32,15 +32,16 @@ export class FarmersMarketsOverTime extends React.Component {
   }
 
   render() {
-    const {
-      isLoading,
-      farmersMarketsOverTime,
-    } = this.props;
+    const { isLoading, farmersMarketsOverTime } = this.props;
 
     if (isLoading) {
       return <div className={cardLoading}>Loading...</div>;
     } else if (!farmersMarketsOverTime) {
-      return <div className={cardError}>Could not render Farmers Markets Over Time</div>;
+      return (
+        <div className={cardError}>
+          Could not render Farmers Markets Over Time
+        </div>
+      );
     }
 
     return (
@@ -50,10 +51,11 @@ export class FarmersMarketsOverTime extends React.Component {
           slug="farmers-markets-over-time"
         >
           <p>
-            Farmers' markets saw steady growth through the 1990s into the mid-2000s. The recession
-            correlates with abnormal growth in the total number of Farmers' Markets. The last two
-            years have shown no growth. Is this plateau expected to continue? What causes
-            growth or decline in Farmers' Markets?
+            Farmers' markets saw steady growth through the 1990s into the
+            mid-2000s. The recession correlates with abnormal growth in the
+            total number of Farmers' Markets. The last two years have shown no
+            growth. Is this plateau expected to continue? What causes growth or
+            decline in Farmers' Markets?
           </p>
           <div>
             <LineChart
@@ -89,5 +91,5 @@ export default connect(
     init() {
       dispatch(fetchFarmersMarketsOverTime());
     },
-  }),
+  })
 )(FarmersMarketsOverTime);

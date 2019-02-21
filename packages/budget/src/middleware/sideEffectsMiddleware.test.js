@@ -24,9 +24,7 @@ describe('middleware', () => {
     const dispatchSpy = sinon.spy(store, 'dispatch');
 
     const payload = 'ARBITRARY';
-    const openModalAction = { type: OPEN_MODAL,
-      payload,
-    };
+    const openModalAction = { type: OPEN_MODAL, payload };
 
     store.dispatch(openModalAction);
     expect(dispatchSpy).to.have.been.calledWith(openModalAction);

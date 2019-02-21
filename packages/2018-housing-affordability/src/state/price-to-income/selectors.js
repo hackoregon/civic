@@ -3,17 +3,23 @@ import { rootState } from '../selectors';
 
 export const getPTI = createSelector(
   rootState,
-  ({ priceToIncome }) => priceToIncome,
+  ({ priceToIncome }) => priceToIncome
 );
 
-const getProperty = key => createSelector(getPTI, state => state[key]);
+const getProperty = key =>
+  createSelector(
+    getPTI,
+    state => state[key]
+  );
 
-const transformPTIResponse = data => data ? data
-  .map(datum => ({
-    ...datum,
-    value: +datum.value,
-    year: datum.date ? +datum.date.split('-')[0] : -1,
-  })) : [];
+const transformPTIResponse = data =>
+  data
+    ? data.map(datum => ({
+        ...datum,
+        value: +datum.value,
+        year: datum.date ? +datum.date.split('-')[0] : -1,
+      }))
+    : [];
 
 export const isAllCitiesLoading = getProperty('allCitiesPending');
 export const isCityDetailLoading = getProperty('cityPending');
@@ -43,12 +49,14 @@ export const getCountryData = createSelector(
 
 export const getSelectedCityRank = createSelector(
   getSelectedCityData,
-  (data) => {
+  data => {
     const datum = data && data.find(d => d.year === 2016);
-    return datum ? {
-      rank: datum.rank,
-      total: datum.total,
-    } : {};
+    return datum
+      ? {
+          rank: datum.rank,
+          total: datum.total,
+        }
+      : {};
   }
 );
 
@@ -56,10 +64,17 @@ export const getCityCountryChartData = createSelector(
   isAnyLoading,
   getSelectedCityData,
   getCountryData,
-  (isLoading, city, country) => isLoading || (city || []).map(c => ({
-    ...c,
-    series: c.datapoint,
-  })).concat((country || []).map(c => ({
-    ...c,
-    series: 'United States',
-  }))));
+  (isLoading, city, country) =>
+    isLoading ||
+    (city || [])
+      .map(c => ({
+        ...c,
+        series: c.datapoint,
+      }))
+      .concat(
+        (country || []).map(c => ({
+          ...c,
+          series: 'United States',
+        }))
+      )
+);

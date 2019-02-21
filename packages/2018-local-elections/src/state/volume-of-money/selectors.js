@@ -4,16 +4,22 @@ import { rootState } from '../selectors';
 
 export const getVolumeOfMoney = createSelector(
   rootState,
-  ({ volumeOfMoney }) => volumeOfMoney,
+  ({ volumeOfMoney }) => volumeOfMoney
 );
 
-const getProperty = key => createSelector(getVolumeOfMoney, state => state[key]);
+const getProperty = key =>
+  createSelector(
+    getVolumeOfMoney,
+    state => state[key]
+  );
 
-const transformRaceResponse = data => data ? data
-  .map(datum => ({
-    date: parseFloat(datum.year) + (parseFloat(datum.month) / 12),
-    sum: parseFloat(datum.sum),
-  })) : [];
+const transformRaceResponse = data =>
+  data
+    ? data.map(datum => ({
+        date: parseFloat(datum.year) + parseFloat(datum.month) / 12,
+        sum: parseFloat(datum.sum),
+      }))
+    : [];
 
 // const consolidate = (data, size) => data ?
 //   chunk(data, size).map(arr => arr.reduce(combineSum))
@@ -29,15 +35,16 @@ export const getSelectedRace = getProperty('selectedRace');
 export const isAnyLoading = createSelector(
   isAllRacesLoading,
   isRaceLoading,
-  (...loaders) => loaders.some(Boolean),
+  (...loaders) => loaders.some(Boolean)
 );
 
 export const getSelectedRaceData = createSelector(
   getVolumeOfMoney,
-  ({ selectedRaceData }) => selectedRaceData && transformRaceResponse(selectedRaceData),
+  ({ selectedRaceData }) =>
+    selectedRaceData && transformRaceResponse(selectedRaceData)
 );
 
 export const getAllRacesData = createSelector(
   getVolumeOfMoney,
-  ({ allRaces }) => allRaces && transformRaceResponse(allRaces),
+  ({ allRaces }) => allRaces && transformRaceResponse(allRaces)
 );

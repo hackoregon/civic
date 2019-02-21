@@ -20,12 +20,14 @@ const Container = styled.div`
 function App(props) {
   return (
     <Container>
-
-      <StoryCard title="Portland Road Works Explorer" collectionId="transportation" cardId="trans-construction-maps">
+      <StoryCard
+        title="Portland Road Works Explorer"
+        collectionId="transportation"
+        cardId="trans-construction-maps"
+      >
         <ConstructionViews />
       </StoryCard>
       <CrashData />
-
 
       {React.Children.toArray(props.children)}
     </Container>

@@ -3,20 +3,20 @@ import { rootState } from '../selectors';
 
 export const getPortlandFarmersMarketsRequest = createSelector(
   rootState,
-  ({ portlandFarmersMarkets }) => portlandFarmersMarkets,
+  ({ portlandFarmersMarkets }) => portlandFarmersMarkets
 );
 
 export const getPortlandFarmersMarketsData = createSelector(
   getPortlandFarmersMarketsRequest,
-  ({ data }) => data,
+  ({ data }) => data
 );
 
 export const isPortlandFarmersMarketsPending = createSelector(
   getPortlandFarmersMarketsRequest,
-  ({ pending }) => !!pending,
+  ({ pending }) => !!pending
 );
 
 export const getActiveFarmersMarket = createSelector(
   getPortlandFarmersMarketsRequest,
-  ({ selectedMarket }) => selectedMarket && selectedMarket.properties,
+  ({ selectedMarket }) => selectedMarket && selectedMarket.properties
 );

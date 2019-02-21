@@ -53,10 +53,25 @@ const tileStyles = {
   marginRight: '5px',
 };
 
-const youAffordableTile = { ...tileStyles, background: HOUSING_TEAM_PRIMARY_COLOR };
-const youNotAffordableTile = { ...tileStyles, marginLeft: '15px', background: '#c2e0ff' };
-const otherAffordableTile = { ...tileStyles, background: cssCrossHatch.join(', '), backgroundColor: '#CCC' };
-const otherNotAffordableTile = { ...tileStyles, marginLeft: '15px', background: 'transparent' };
+const youAffordableTile = {
+  ...tileStyles,
+  background: HOUSING_TEAM_PRIMARY_COLOR,
+};
+const youNotAffordableTile = {
+  ...tileStyles,
+  marginLeft: '15px',
+  background: '#c2e0ff',
+};
+const otherAffordableTile = {
+  ...tileStyles,
+  background: cssCrossHatch.join(', '),
+  backgroundColor: '#CCC',
+};
+const otherNotAffordableTile = {
+  ...tileStyles,
+  marginLeft: '15px',
+  background: 'transparent',
+};
 
 const MapLegend = ({ otherDemographicLabel }) => (
   <div style={legendStyles}>
