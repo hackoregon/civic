@@ -6,13 +6,13 @@ const fontBlockStyle = {
   marginBottom: '45px',
 }
 
-const TypographyStyle = () => (
+const TypographyStyleQuickUsage = () => (
   <div style={storybookStyles.main}>
     <h1>
       Typography
     </h1>
     <h2>
-      Quick Usage
+      Quick Usage:
     </h2>
     <div style={fontBlockStyle}>
       <h3>
@@ -60,7 +60,8 @@ const TypographyStyle = () => (
         Source: Google Fonts
       </h4>
     </div> 
+    <hr />
   </div>
 );
 
-export default TypographyStyle;
+export default TypographyStyleQuickUsage;

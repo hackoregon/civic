@@ -46,7 +46,11 @@ import TerminologyStyle from './TerminologyStyle.js';
 import IconographyStyle from './IconographyStyle';
 import LogosStyle from './LogosStyle';
 import ColorThemeStyle from './ColorThemeStyle';
-import TypographyStyle from './TypographyStyle';
+//import TypographyStyle from '/TypographyStyle';
+import TypographyStyleCommonSample from './TypographyStyleCommonSample';
+import TypographyStyleQuickUsage from './TypographyStyleQuickUsage';
+import TypographyStyleHeadings from './TypographyStyleHeadings';
+import TypographyStyleParagraphs from './TypographyStyleParagraphs';
 import TheBrandStyle from './TheBrandStyle';
 import ThePlatformStyle from './ThePlatformStyle';
 import Introduction from './Introduction';
@@ -84,7 +88,12 @@ storiesOf('Branding', module)
     <ColorThemeStyle />
   ))
   .add('Typography', () => (
-    <TypographyStyle />
+    <div>
+      <TypographyStyleQuickUsage />
+      <TypographyStyleCommonSample />
+      <TypographyStyleHeadings />
+      <TypographyStyleParagraphs />
+    </div>
   ));
 
   // UX Style Guide

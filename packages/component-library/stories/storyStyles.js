@@ -13,7 +13,7 @@ const storybookStyles = {
       maxWidth: 800,
     },
 
-    // Use CSS grid to center UI components in the Storybook display
+    // Use CSS grid to center UI components in the Storybook display area
     storyGrid: {
       display: 'grid',
       gridTemplateColumns: '1fr 2fr 1fr',
@@ -38,6 +38,13 @@ const storybookStyles = {
     logo: {
       padding: 0,
     },
+
+    // Display font type
+    fontSample: {
+      fontSize: '2.25em',
+      marginTop: 0,
+      marginBottom: 0,
+    }
   
     /*
     link: {
