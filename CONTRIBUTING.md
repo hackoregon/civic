@@ -8,30 +8,41 @@ is cleaned, analyzed, converted into databases, and made available through APIs.
 We use React and Redux as the backbone of our front-end technologies, but there are also many smaller libraries that any
 contributor may want to learn more about. Here's a list of resources:
 
-  1. [React](https://reactjs.org/)
-  2. [Redux](https://redux.js.org/) (along with [Thunk](https://github.com/gaearon/redux-thunk))
-  3. [React Router](https://github.com/ReactTraining/react-router/tree/v3/docs)
-  4. [Emotion](https://emotion.sh/)
-  5. [Victory Charts](https://formidable.com/open-source/victory/docs/victory-chart/)
-  6. [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/)
-  7. [Storybook](https://storybook.js.org/)
+1. [React](https://reactjs.org/)
+2. [Redux](https://redux.js.org/) (along with [Thunk](https://github.com/gaearon/redux-thunk))
+3. [React Router](https://github.com/ReactTraining/react-router/tree/v3/docs)
+4. [Emotion](https://emotion.sh/)
+5. [Victory Charts](https://formidable.com/open-source/victory/docs/victory-chart/)
+6. [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/)
+7. [Storybook](https://storybook.js.org/)
 
 Our testing tools are:
 
-  1. [Mocha](https://mochajs.org/)
-  2. [Chai](http://www.chaijs.com/)
-  3. [Enzyme](http://airbnb.io/enzyme/)
-  4. [JSDom](https://github.com/jsdom/jsdom)
+1. [Mocha](https://mochajs.org/)
+2. [Chai](http://www.chaijs.com/)
+3. [Enzyme](http://airbnb.io/enzyme/)
+4. [JSDom](https://github.com/jsdom/jsdom)
+
+We use the following tools to ensure code quality and consistency:
+
+1. [Prettier](https://prettier.io)
+2. [ESLint](https://eslint.org/)
 
 A couple other libraries in use in the background are:
 
-  1. [Lerna](https://lernajs.io/)
-  2. [Webpack](https://webpack.js.org/)
-  3. [Webpack Blocks](https://github.com/andywer/webpack-blocks)
-  4. [Babel](https://babeljs.io/)
+1. [Lerna](https://lernajs.io/)
+2. [Webpack](https://webpack.js.org/)
+3. [Webpack Blocks](https://github.com/andywer/webpack-blocks)
+4. [Babel](https://babeljs.io/)
 
 These libraries in the background aren't necessary to really understand, but knowing that the tools
 are in use and how they work can help when debugging issues. Read more in our [Architecture guide](ARCHITECTURE.md).
+
+## Code style and linting
+
+We use [Prettier](https://prettier.io), an opinionated code formatter, to format our code consistently across the project. This repository is configured to run Prettier automatically before files are committed. You can [configure your editor to run Prettier](https://prettier.io/docs/en/editors.html) to your files as you code.
+
+In addition, we use [ESLint](https://eslint.org/) to avoid problems with our code. ESLint can be [configured in your editor](https://eslint.org/docs/user-guide/integrations).
 
 ## Adding components
 
@@ -50,19 +61,19 @@ reusable components that have been tested under a variety of conditions. These c
 First, create a new folder in the `src` directory of the `component-library` package for the new component. Follow the conventions
 that the other components follow:
 
-  1. Capitalize the component name
-  2. Create a JS file with the same name as the component
+1. Capitalize the component name
+2. Create a JS file with the same name as the component
 
 When writing the JS implementation of a component, there aren't any hard and fast rules, but there are some strong suggestions:
 
-  1. Prefer a stateless, function component over a stateful, class component
-  2. Specify the [`PropTypes`](https://reactjs.org/docs/typechecking-with-proptypes.html) for the component
-  3. When styles are necessary, prefer Emotion over CSS
-  4. Choose composition over inheritance
-  5. Don't be afraid to break a large component down into smaller components that compose
-  6. Expect a variety of prop inputs
-  7. Expect a variety of layout usages
-  8. Don't forget about mobile styles as well as mobile interactions
+1. Prefer a stateless, function component over a stateful, class component
+2. Specify the [`PropTypes`](https://reactjs.org/docs/typechecking-with-proptypes.html) for the component
+3. When styles are necessary, prefer Emotion over CSS
+4. Choose composition over inheritance
+5. Don't be afraid to break a large component down into smaller components that compose
+6. Expect a variety of prop inputs
+7. Expect a variety of layout usages
+8. Don't forget about mobile styles as well as mobile interactions
 
 With these suggestions along with code review, you're sure to make something that will be useful for years to come!
 
