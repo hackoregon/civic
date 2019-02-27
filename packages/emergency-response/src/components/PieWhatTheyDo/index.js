@@ -12,7 +12,9 @@ const data = [
 
 class PieWhatTheyDo extends Component {
   render() {
-    return <ErPieChart data={data} />;
+    return (
+      <ErPieChart data={data} />
+    );
   }
 }
 

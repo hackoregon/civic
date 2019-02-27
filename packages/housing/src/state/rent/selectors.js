@@ -6,15 +6,15 @@ export const getRentState = state => propOr({}, 'rent')(state);
 
 export const getRentRequest = createSelector(
   getRentState,
-  affordability => affordability
+  affordability => affordability,
 );
 
 export const getRentData = createSelector(
   getRentRequest,
-  ({ data }) => data
+  ({ data }) => data,
 );
 
 export const isRentPending = createSelector(
   getRentRequest,
-  ({ pending }) => pending
+  ({ pending }) => pending,
 );

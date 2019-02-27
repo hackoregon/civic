@@ -11,12 +11,11 @@ export const fetchAffordabilityData = api('/affordable', {
   start: affordabilityStart,
   success: affordabilitySuccess,
   fail: affordabilityFail,
-  normalizer: json =>
-    json.map(({ affordable, NP_ID, year }) => ({
-      id: NP_ID,
-      affordable,
-      year,
-    })),
+  normalizer: json => json.map(({ affordable, NP_ID, year }) => ({
+    id: NP_ID,
+    affordable,
+    year,
+  })),
   buildParams: state => ({
     housing_size: getOtherUnitSize(state).value,
     demographic: getOtherDemographic(state).value,

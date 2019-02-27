@@ -1,5 +1,5 @@
 .container {
-  color: #726371;
+  color:#726371;
   font-weight: bold;
   display: flex;
   flex-direction: column;
@@ -16,13 +16,13 @@
 .listItem {
   display: inline;
   padding: 10px;
-  color: #aaa4ab;
+  color: #AAA4AB;
   flex: inherit;
 }
 
 .link {
   display: inline-block;
-  padding: 5px;
+  padding:5px;
   font-size: 1.3em;
   border: 0;
   font-family: inherit;

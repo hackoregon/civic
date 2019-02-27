@@ -2,32 +2,27 @@ import * as actions from './actions';
 import * as selectors from './selectors';
 import reducer from './index';
 
-const DEFAULT_NEIGHBORHOOD = {
-  value: 'ROSE CITY PARK',
-  label: 'Rose City Park',
-};
-const SAMPLE_DATA = [
-  {
-    id: 1,
-    neighborhood: 'ROSE CITY PARK',
-    pct_18_25: 0.11,
-    pct_26_32: 0.27,
-    pct_33_39: 0.23,
-    pct_40_49: 0.18,
-    pct_50_plus: 0.21,
-    year: 2006,
-  },
-  {
-    id: 2,
-    neighborhood: 'ROSE CITY PARK',
-    pct_18_25: 0.12,
-    pct_26_32: 0.27,
-    pct_33_39: 0.21,
-    pct_40_49: 0.17,
-    pct_50_plus: 0.23,
-    year: 2007,
-  },
-];
+const DEFAULT_NEIGHBORHOOD = { value: 'ROSE CITY PARK', label: 'Rose City Park' };
+const SAMPLE_DATA = [{
+  id: 1,
+  neighborhood: 'ROSE CITY PARK',
+  pct_18_25: 0.11,
+  pct_26_32: 0.27,
+  pct_33_39: 0.23,
+  pct_40_49: 0.18,
+  pct_50_plus: 0.21,
+  year: 2006,
+},
+{
+  id: 2,
+  neighborhood: 'ROSE CITY PARK',
+  pct_18_25: 0.12,
+  pct_26_32: 0.27,
+  pct_33_39: 0.21,
+  pct_40_49: 0.17,
+  pct_50_plus: 0.23,
+  year: 2007,
+}];
 
 describe('neighborhood-ages', () => {
   describe('neighborhood-ages actions', () => {
@@ -67,7 +62,7 @@ describe('neighborhood-ages', () => {
         expect(actions.neighborhoodAgesError(payload)).to.eql(expectedAction);
       });
     });
-    /*
+/*
     describe('neighborhood-ages api thunk', () => {
       let store;
 
@@ -105,11 +100,9 @@ describe('neighborhood-ages', () => {
     });
 
     it('should handle API_START', () => {
-      expect(
-        reducer(initialState, {
-          type: actions.API_START,
-        })
-      ).to.eql({
+      expect(reducer(initialState, {
+        type: actions.API_START,
+      })).to.eql({
         pending: true,
         error: null,
         data: [],
@@ -118,15 +111,10 @@ describe('neighborhood-ages', () => {
     });
 
     it('should handle API_SUCCESS', () => {
-      expect(
-        reducer(
-          { pending: true, error: null, data: null },
-          {
-            type: actions.API_SUCCESS,
-            payload,
-          }
-        )
-      ).to.eql({
+      expect(reducer({ pending: true, error: null, data: null }, {
+        type: actions.API_SUCCESS,
+        payload,
+      })).to.eql({
         pending: false,
         data: payload,
         error: null,
@@ -134,15 +122,10 @@ describe('neighborhood-ages', () => {
     });
 
     it('should handle API_ERROR', () => {
-      expect(
-        reducer(
-          { pending: true, error: null, data: null },
-          {
-            type: actions.API_ERROR,
-            payload,
-          }
-        )
-      ).to.eql({
+      expect(reducer({ pending: true, error: null, data: null }, {
+        type: actions.API_ERROR,
+        payload,
+      })).to.eql({
         pending: false,
         error: payload,
         data: null,
@@ -155,215 +138,129 @@ describe('neighborhood-ages', () => {
       it('extends the root selector', () => {
         const expectation = { one: 'two', three: 4 };
 
-        expect(
-          selectors.getNeighborhoodAgesRequest({
-            neighborhoodAges: expectation,
-          })
-        ).to.eql(expectation);
+        expect(selectors.getNeighborhoodAgesRequest({
+          neighborhoodAges: expectation,
+        })).to.eql(expectation);
 
-        expect(
-          selectors.getNeighborhoodAgesRequest({
-            red: 'herring',
-            neighborhood: {
-              neighborhoodAges: expectation,
-            },
-          })
-        ).to.eql(expectation);
+        expect(selectors.getNeighborhoodAgesRequest({
+          red: 'herring',
+          neighborhood: {
+            neighborhoodAges: expectation,
+          },
+        })).to.eql(expectation);
       });
     });
 
     describe('getNeighborhoodAgesData', () => {
       it('returns undefined when there is no data', () => {
-        expect(
-          selectors.getNeighborhoodAgesData({
-            neighborhoodAges: {
-              no: 'data to be seen',
-            },
-          })
-        ).to.be.undefined;
+        expect(selectors.getNeighborhoodAgesData({
+          neighborhoodAges: {
+            no: 'data to be seen',
+          },
+        })).to.be.undefined;
       });
 
       it('returns undefined when data has no data', () => {
-        expect(
-          selectors.getNeighborhoodAgesData({
-            neighborhoodAges: {
-              notdata: {
-                alsonotdata: {},
-              },
+        expect(selectors.getNeighborhoodAgesData({
+          neighborhoodAges: {
+            notdata: {
+              alsonotdata: {},
             },
-          })
-        ).to.be.undefined;
+          },
+        })).to.be.undefined;
       });
     });
 
     describe('isNeighborhoodAgesPending', () => {
       it('returns undefined when there is no value for pending', () => {
-        expect(
-          selectors.isNeighborhoodAgesPending({
-            neighborhoodAges: {
-              no: 'pending property',
-            },
-          })
-        ).to.be.undefined;
+        expect(selectors.isNeighborhoodAgesPending({
+          neighborhoodAges: {
+            no: 'pending property',
+          },
+        })).to.be.undefined;
       });
 
       it('returns false when the value for pending is false', () => {
-        expect(
-          selectors.isNeighborhoodAgesPending({
-            neighborhoodAges: {
-              pending: false,
-            },
-          })
-        ).to.be.false;
+        expect(selectors.isNeighborhoodAgesPending({
+          neighborhoodAges: {
+            pending: false,
+          },
+        })).to.be.false;
       });
 
       it('returns true when the value for pending is true', () => {
-        expect(
-          selectors.isNeighborhoodAgesPending({
-            neighborhoodAges: {
-              pending: true,
-            },
-          })
-        ).to.be.true;
+        expect(selectors.isNeighborhoodAgesPending({
+          neighborhoodAges: {
+            pending: true,
+          },
+        })).to.be.true;
       });
     });
 
     describe('getSelectedNeighborhood', () => {
       it('returns undefined when there is no selectedNeighborhood', () => {
-        expect(
-          selectors.getSelectedNeighborhood({
-            neighborhoodAges: {
-              no: 'data to be seen',
-            },
-          })
-        ).to.be.undefined;
+        expect(selectors.getSelectedNeighborhood({
+          neighborhoodAges: {
+            no: 'data to be seen',
+          },
+        })).to.be.undefined;
       });
 
       it('returns a selectedNeighborhood when one exists', () => {
-        expect(
-          selectors.getSelectedNeighborhood({
-            neighborhoodAges: {
-              selectedNeighborhood: DEFAULT_NEIGHBORHOOD,
-            },
-          })
-        ).to.eql(DEFAULT_NEIGHBORHOOD.value);
+        expect(selectors.getSelectedNeighborhood({
+          neighborhoodAges: {
+            selectedNeighborhood: DEFAULT_NEIGHBORHOOD,
+          },
+        })).to.eql(DEFAULT_NEIGHBORHOOD.value);
       });
     });
 
     describe('getListOfNeighborhoods', () => {
       it('returns undefined when there is no data', () => {
-        expect(
-          selectors.getListOfNeighborhoods({
-            neighborhoodAges: {
-              no: 'data to be seen',
-            },
-          })
-        ).to.be.undefined;
+        expect(selectors.getListOfNeighborhoods({
+          neighborhoodAges: {
+            no: 'data to be seen',
+          },
+        })).to.be.undefined;
       });
 
       it('returns a listOfNeighborhoods when there is data', () => {
-        expect(
-          selectors.getListOfNeighborhoods({
-            neighborhoodAges: {
-              data: SAMPLE_DATA,
-            },
-          })
-        ).to.eql([DEFAULT_NEIGHBORHOOD]);
+        expect(selectors.getListOfNeighborhoods({
+          neighborhoodAges: {
+            data: SAMPLE_DATA,
+          },
+        })).to.eql([DEFAULT_NEIGHBORHOOD]);
       });
     });
 
     describe('getDataForSelectedNeighborhood', () => {
       const FORMATTED_DATA = [
-        {
-          id: 1,
-          neighborhood: 'ROSE CITY PARK',
-          type: '18-25',
-          year: 2006,
-          value: 0.11,
-        },
-        {
-          id: 2,
-          neighborhood: 'ROSE CITY PARK',
-          type: '18-25',
-          year: 2007,
-          value: 0.12,
-        },
-        {
-          id: 1,
-          neighborhood: 'ROSE CITY PARK',
-          type: '26-32',
-          year: 2006,
-          value: 0.27,
-        },
-        {
-          id: 2,
-          neighborhood: 'ROSE CITY PARK',
-          type: '26-32',
-          year: 2007,
-          value: 0.27,
-        },
-        {
-          id: 1,
-          neighborhood: 'ROSE CITY PARK',
-          type: '33-39',
-          year: 2006,
-          value: 0.23,
-        },
-        {
-          id: 2,
-          neighborhood: 'ROSE CITY PARK',
-          type: '33-39',
-          year: 2007,
-          value: 0.21,
-        },
-        {
-          id: 1,
-          neighborhood: 'ROSE CITY PARK',
-          type: '40-49',
-          year: 2006,
-          value: 0.18,
-        },
-        {
-          id: 2,
-          neighborhood: 'ROSE CITY PARK',
-          type: '40-49',
-          year: 2007,
-          value: 0.17,
-        },
-        {
-          id: 1,
-          neighborhood: 'ROSE CITY PARK',
-          type: '50+',
-          year: 2006,
-          value: 0.21,
-        },
-        {
-          id: 2,
-          neighborhood: 'ROSE CITY PARK',
-          type: '50+',
-          year: 2007,
-          value: 0.23,
-        },
+        { id: 1, neighborhood: 'ROSE CITY PARK', type: '18-25', year: 2006, value: 0.11 },
+        { id: 2, neighborhood: 'ROSE CITY PARK', type: '18-25', year: 2007, value: 0.12 },
+        { id: 1, neighborhood: 'ROSE CITY PARK', type: '26-32', year: 2006, value: 0.27 },
+        { id: 2, neighborhood: 'ROSE CITY PARK', type: '26-32', year: 2007, value: 0.27 },
+        { id: 1, neighborhood: 'ROSE CITY PARK', type: '33-39', year: 2006, value: 0.23 },
+        { id: 2, neighborhood: 'ROSE CITY PARK', type: '33-39', year: 2007, value: 0.21 },
+        { id: 1, neighborhood: 'ROSE CITY PARK', type: '40-49', year: 2006, value: 0.18 },
+        { id: 2, neighborhood: 'ROSE CITY PARK', type: '40-49', year: 2007, value: 0.17 },
+        { id: 1, neighborhood: 'ROSE CITY PARK', type: '50+', year: 2006, value: 0.21 },
+        { id: 2, neighborhood: 'ROSE CITY PARK', type: '50+', year: 2007, value: 0.23 },
       ];
       it('returns false when there is no data', () => {
-        expect(
-          selectors.getDataForSelectedNeighborhood({
-            neighborhoodAges: {
-              no: 'data to be seen',
-            },
-          })
-        ).to.be.false;
+        expect(selectors.getDataForSelectedNeighborhood({
+          neighborhoodAges: {
+            no: 'data to be seen',
+          },
+        })).to.be.false;
       });
 
       it('returns data for a selectedNeighborhood when there is data', () => {
-        expect(
-          selectors.getDataForSelectedNeighborhood({
-            neighborhoodAges: {
-              data: SAMPLE_DATA,
-              selectedNeighborhood: DEFAULT_NEIGHBORHOOD,
-            },
-          })
-        ).to.eql(FORMATTED_DATA);
+        expect(selectors.getDataForSelectedNeighborhood({
+          neighborhoodAges: {
+            data: SAMPLE_DATA,
+            selectedNeighborhood: DEFAULT_NEIGHBORHOOD,
+          },
+        })).to.eql(FORMATTED_DATA);
       });
     });
   });

@@ -19,7 +19,7 @@ const contentClass = css`
 `;
 
 const headerClass = css`
-  font-family: 'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Roboto Condensed','Helvetica Neue',Helvetica,sans-serif;
   font-weight: bold;
   font-size: 21px;
 `;

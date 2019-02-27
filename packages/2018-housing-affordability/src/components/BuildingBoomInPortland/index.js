@@ -16,22 +16,14 @@ export class BuildingBoomInPortland extends React.Component {
         title="A Building Boom in Portland"
         slug="building-boom-in-portland"
       >
-        <p>
-          The Portland Metro Area is experiencing a building boom as evidenced
-          by building permits for new construction and ADUs.{' '}
-        </p>
+        <p>The Portland Metro Area is experiencing a building boom as evidenced by building
+          permits for new construction and ADUs. </p>
 
         <h1>Accessory Dwelling Units Over Time</h1>
-        <img
-          src={aduGif}
-          alt="heatmap of where Accessory Dwelling Units permits are in Portland over time"
-        />
+        <img src={aduGif} alt="heatmap of where Accessory Dwelling Units permits are in Portland over time" />
 
         <h1>Multi-family Housing Over Time</h1>
-        <img
-          src={mfGif}
-          alt="heatmap of where Multi-family housing permits are in Portland over time"
-        />
+        <img src={mfGif} alt="heatmap of where Multi-family housing permits are in Portland over time" />
       </CivicStoryCard>
     );
   }

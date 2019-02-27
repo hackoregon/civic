@@ -12,7 +12,11 @@ const Container = styled.div`
 `;
 
 function App(props) {
-  return <Container>{React.Children.toArray(props.children)}</Container>;
+  return (
+    <Container>
+      {React.Children.toArray(props.children)}
+    </Container>
+  );
 }
 
 App.displayName = 'App';

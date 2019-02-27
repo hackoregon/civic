@@ -16,7 +16,7 @@
   vertical-align: middle;
 }
 .rc-slider-tooltip-inner:before {
-  content: '$ ';
+  content: "$ ";
 }
 
 .rc-slider-track {
@@ -43,11 +43,7 @@
   background-color: #efefef;
 }
 
-.hour,
-.day,
-.week,
-.month,
-.year {
+.hour, .day, .week, .month, .year {
   font-weight: bold;
   font-size: 1.2em;
 }

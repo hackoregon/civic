@@ -5,11 +5,7 @@ import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
-import {
-  routerReducer,
-  routerMiddleware,
-  syncHistoryWithStore,
-} from 'react-router-redux';
+import { routerReducer, routerMiddleware, syncHistoryWithStore } from 'react-router-redux';
 import { createLogger } from 'redux-logger';
 import { reducer as reduxFormReducer } from 'redux-form';
 
@@ -50,7 +46,9 @@ import {
   App as FarmersMarketsApp,
 } from '@hackoregon/2018-example-farmers-markets';
 
-import { Reducers as SandboxReducers } from '@hackoregon/civic-sandbox';
+import {
+  Reducers as SandboxReducers,
+} from '@hackoregon/civic-sandbox';
 
 import './fonts.css';
 import RootPage from './components/RootPage';
@@ -68,8 +66,7 @@ const configureStore = (initialState, history) => {
     middlewares.push(createLogger());
   }
 
-  const composeEnhancers =
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE_ || compose;
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE_ || compose;
   const store = createStore(
     combineReducers({
       routing: routerReducer,
@@ -200,11 +197,7 @@ const routes = {
 // Finally create the application component and render it into the #content element
 const App = () => (
   <Provider store={store}>
-    <Router
-      onUpdate={() => window.scrollTo(0, 0)}
-      history={history}
-      routes={routes}
-    />
+    <Router onUpdate={() => window.scrollTo(0, 0)} history={history} routes={routes} />
   </Provider>
 );
 

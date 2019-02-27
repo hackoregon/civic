@@ -28,9 +28,7 @@ describe('farmers-markets-over-time', () => {
           payload,
         };
 
-        expect(actions.farmersMarketsOverTimeSuccess(payload)).to.eql(
-          expectedAction
-        );
+        expect(actions.farmersMarketsOverTimeSuccess(payload)).to.eql(expectedAction);
       });
     });
 
@@ -45,16 +43,14 @@ describe('farmers-markets-over-time', () => {
         const action1 = { type: actions.IMPORT_START };
         const action2 = { type: actions.IMPORT_SUCCESS };
 
-        return store
-          .dispatch(actions.fetchFarmersMarketsOverTime())
-          .then(() => {
-            const actionHistory = store.getActions();
+        return store.dispatch(actions.fetchFarmersMarketsOverTime()).then(() => {
+          const actionHistory = store.getActions();
 
-            expect(actionHistory).to.have.lengthOf(2);
-            expect(actionHistory[0]).to.eql(action1);
-            expect(actionHistory[1].type).to.equal(action2.type);
-            expect(actionHistory[1].payload).to.exist;
-          });
+          expect(actionHistory).to.have.lengthOf(2);
+          expect(actionHistory[0]).to.eql(action1);
+          expect(actionHistory[1].type).to.equal(action2.type);
+          expect(actionHistory[1].payload).to.exist;
+        });
       });
     });
   });
@@ -70,11 +66,9 @@ describe('farmers-markets-over-time', () => {
     });
 
     it('should handle IMPORT_START', () => {
-      expect(
-        reducer(initialState, {
-          type: actions.IMPORT_START,
-        })
-      ).to.eql({
+      expect(reducer(initialState, {
+        type: actions.IMPORT_START,
+      })).to.eql({
         pending: true,
         data: null,
       });
@@ -83,15 +77,10 @@ describe('farmers-markets-over-time', () => {
     const payload = { stu: 'ff' };
 
     it('should handle IMPORT_SUCCESS', () => {
-      expect(
-        reducer(
-          { pending: true, data: null },
-          {
-            type: actions.IMPORT_SUCCESS,
-            payload,
-          }
-        )
-      ).to.eql({
+      expect(reducer({ pending: true, data: null }, {
+        type: actions.IMPORT_SUCCESS,
+        payload,
+      })).to.eql({
         pending: false,
         data: payload,
       });
@@ -103,44 +92,36 @@ describe('farmers-markets-over-time', () => {
       it('extends the root selector', () => {
         const expectation = { one: 'two', three: 4 };
 
-        expect(
-          selectors.getFarmersMarketsOverTimeRequest({
-            farmersMarketsOverTime: expectation,
-          })
-        ).to.eql(expectation);
+        expect(selectors.getFarmersMarketsOverTimeRequest({
+          farmersMarketsOverTime: expectation,
+        })).to.eql(expectation);
 
-        expect(
-          selectors.getFarmersMarketsOverTimeRequest({
-            red: 'herring',
-            farmersMarkets: {
-              farmersMarketsOverTime: expectation,
-            },
-          })
-        ).to.eql(expectation);
+        expect(selectors.getFarmersMarketsOverTimeRequest({
+          red: 'herring',
+          farmersMarkets: {
+            farmersMarketsOverTime: expectation,
+          },
+        })).to.eql(expectation);
       });
     });
 
     describe('getFarmersMarketsOverTimeData', () => {
       it('returns undefined when there is no data', () => {
-        expect(
-          selectors.getFarmersMarketsOverTimeData({
-            farmersMarketsOverTime: {
-              no: 'data to be seen',
-            },
-          })
-        ).to.be.undefined;
+        expect(selectors.getFarmersMarketsOverTimeData({
+          farmersMarketsOverTime: {
+            no: 'data to be seen',
+          },
+        })).to.be.undefined;
       });
 
       it('returns undefined when data has no value for FarmersMarketsByYear', () => {
-        expect(
-          selectors.getFarmersMarketsOverTimeData({
-            farmersMarketsOverTime: {
-              data: {
-                NotFarmersMarketsByYear: {},
-              },
+        expect(selectors.getFarmersMarketsOverTimeData({
+          farmersMarketsOverTime: {
+            data: {
+              NotFarmersMarketsByYear: {},
             },
-          })
-        ).to.be.undefined;
+          },
+        })).to.be.undefined;
       });
 
       it('returns the data when data has a value for FarmersMarketsByYear', () => {
@@ -148,47 +129,39 @@ describe('farmers-markets-over-time', () => {
           here: 'it',
           i: 's',
         };
-        expect(
-          selectors.getFarmersMarketsOverTimeData({
-            farmersMarketsOverTime: {
-              data: {
-                FarmersMarketsByYear: data,
-              },
+        expect(selectors.getFarmersMarketsOverTimeData({
+          farmersMarketsOverTime: {
+            data: {
+              FarmersMarketsByYear: data,
             },
-          })
-        ).to.eql(data);
+          },
+        })).to.eql(data);
       });
     });
 
     describe('isFarmersMarketsOverTimePending', () => {
       it('returns false when there is no value for pending', () => {
-        expect(
-          selectors.isFarmersMarketsOverTimePending({
-            farmersMarketsOverTime: {
-              no: 'pending property',
-            },
-          })
-        ).to.be.false;
+        expect(selectors.isFarmersMarketsOverTimePending({
+          farmersMarketsOverTime: {
+            no: 'pending property',
+          },
+        })).to.be.false;
       });
 
       it('returns false when the value for pending is false', () => {
-        expect(
-          selectors.isFarmersMarketsOverTimePending({
-            farmersMarketsOverTime: {
-              pending: false,
-            },
-          })
-        ).to.be.false;
+        expect(selectors.isFarmersMarketsOverTimePending({
+          farmersMarketsOverTime: {
+            pending: false,
+          },
+        })).to.be.false;
       });
 
       it('returns true when the value for pending is true', () => {
-        expect(
-          selectors.isFarmersMarketsOverTimePending({
-            farmersMarketsOverTime: {
-              pending: true,
-            },
-          })
-        ).to.be.true;
+        expect(selectors.isFarmersMarketsOverTimePending({
+          farmersMarketsOverTime: {
+            pending: true,
+          },
+        })).to.be.true;
       });
     });
   });

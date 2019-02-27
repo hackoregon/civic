@@ -22,15 +22,12 @@ const defaultProps = {
 class Controls extends React.Component {
   renderElectionCycleDropdown() {
     const options = this.props.electionCycles.map(cycle => ({
-      value: cycle.name,
-      label: cycle.name,
+      value: cycle.name, label: cycle.name,
     }));
     const value = options.find(o => o.value === this.props.electionCycle.name);
 
-    const onChange = option => {
-      const cycle = this.props.electionCycles.find(
-        c => c.name === option.value
-      );
+    const onChange = (option) => {
+      const cycle = this.props.electionCycles.find(c => c.name === option.value);
 
       this.props.setElectionCycle(cycle);
     };
@@ -47,15 +44,12 @@ class Controls extends React.Component {
 
   renderCampaignDropdown() {
     const options = this.props.campaigns.map(campaign => ({
-      value: campaign.filer_name,
-      label: campaign.filer_name,
+      value: campaign.filer_name, label: campaign.filer_name,
     }));
     const value = options.find(o => o.value === this.props.campaign.filer_name);
 
-    const onChange = option => {
-      const committee = this.props.campaigns.find(
-        c => c.filer_name === option.value
-      );
+    const onChange = (option) => {
+      const committee = this.props.campaigns.find(c => c.filer_name === option.value);
 
       this.props.setCampaign(committee);
     };
@@ -77,9 +71,7 @@ class Controls extends React.Component {
     return (
       <div>
         <div style={{ float: 'left', width: '50%' }}>{campaignDropdown}</div>
-        <div style={{ float: 'right', width: '50%' }}>
-          {electionCycleDropdown}
-        </div>
+        <div style={{ float: 'right', width: '50%' }}>{electionCycleDropdown}</div>
       </div>
     );
   }

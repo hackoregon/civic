@@ -6,6 +6,7 @@ import { bubbleData, min, max, step, marks, style } from './utils';
 import 'rc-slider/assets/index.css';
 
 class StickySlider extends Component {
+
   constructor(props) {
     super(props);
     this.handleClickChange = this.handleClickChange.bind(this);
@@ -19,8 +20,10 @@ class StickySlider extends Component {
 
   componentWillMount() {
     const myData = [];
-    bubbleData.forEach(t => {
-      Object.keys(t).map(key => myData.push(t[key]));
+    bubbleData.forEach((t) => {
+      Object.keys(t).map(key =>
+        myData.push(t[key]),
+      );
       this.setState({ data: myData });
     });
   }
@@ -35,7 +38,7 @@ class StickySlider extends Component {
 
   timer(j) {
     setTimeout(() => {
-      const newValue = j;
+      const newValue = (j);
       this.setState({ value: newValue });
     }, (j - 1) * 4000);
   }
@@ -60,14 +63,14 @@ class StickySlider extends Component {
           value={this.state.value}
         />
         <div>
-          <br />
-          <br />
-          <br />
+          <br /><br /><br />
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <button onClick={this.delayState}>Play over time</button>
+            <button onClick={this.delayState} >Play over time</button>
           </div>
         </div>
-        <BubbleChart data={this.state.data[this.state.value]} />
+        <BubbleChart
+          data={this.state.data[this.state.value]}
+        />
       </div>
     );
   }

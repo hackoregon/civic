@@ -8,7 +8,11 @@ import DevTools from '../components/DevTools';
 const configureStore = (initialState = {}, history) => {
   const middlewares = [thunk, routerMiddleware(history), createLogger()];
   const enhancers = [applyMiddleware(...middlewares), DevTools.instrument()];
-  const store = createStore(rootReducer, initialState, compose(...enhancers));
+  const store = createStore(
+    rootReducer,
+    initialState,
+    compose(...enhancers),
+    );
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers

@@ -20,6 +20,7 @@ import {
   SLIDE_SUCCESS,
 } from './actions';
 
+
 const INITIAL_STATE = {
   sandboxPending: false,
   sandboxError: null,
@@ -124,13 +125,8 @@ const reducer = (state = INITIAL_STATE, action) => {
         selectedPackage: action.selectedPackage,
         foundationData: {},
         slidesData: [],
-        selectedFoundation:
-          state.sandbox.packages[action.selectedPackage].default_foundation,
-        selectedSlide: isArray(
-          state.sandbox.packages[action.selectedPackage].default_slide
-        )
-          ? state.sandbox.packages[action.selectedPackage].default_slide
-          : [state.sandbox.packages[action.selectedPackage].default_slide],
+        selectedFoundation: state.sandbox.packages[action.selectedPackage].default_foundation,
+        selectedSlide: isArray(state.sandbox.packages[action.selectedPackage].default_slide) ? state.sandbox.packages[action.selectedPackage].default_slide : [state.sandbox.packages[action.selectedPackage].default_slide],
         selectedFoundationDatum: null,
         selectedSlideDatum: null,
       };
@@ -165,15 +161,10 @@ const reducer = (state = INITIAL_STATE, action) => {
         foundationData = action.payload.data;
       }
       if (action.payload.type === 'slide') {
-        const slideIndex = findIndex(
-          state.slidesData,
-          o => o[action.payload.name]
-        );
-        slidesData = [
-          ...state.slidesData.slice(0, slideIndex),
+        const slideIndex = findIndex(state.slidesData, o => o[action.payload.name]);
+        slidesData = [...state.slidesData.slice(0, slideIndex),
           { [action.payload.name]: action.payload.data },
-          ...state.slidesData.slice(slideIndex + 1),
-        ];
+          ...state.slidesData.slice(slideIndex + 1)];
       }
       return {
         ...state,

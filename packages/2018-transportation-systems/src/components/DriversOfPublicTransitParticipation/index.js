@@ -14,12 +14,16 @@ import {
 } from '../../state/drivers-of-participation/selectors';
 
 export class DriversOfPublicTransitParticipation extends React.Component {
-  componentDidMount() {
+componentDidMount() {
     this.props.init();
   }
 
   render() {
-    const { isLoading, error, driversOfParticipation } = this.props;
+    const {
+      isLoading,
+      error,
+      driversOfParticipation,
+    } = this.props;
 
     return (
       <CivicStoryCard
@@ -27,13 +31,8 @@ export class DriversOfPublicTransitParticipation extends React.Component {
         slug="drivers-of-public-transit-participation"
       >
         <p>
-          The Relationship between Service Availability and the Change in
-          Ridership is complex, and while we cannot claim to understand it
-          completely, we can start looking at the data. To help facilitate
-          future discussion about this potential relationship, we have plotted
-          year-over-year changes in Scheduled Service vs Ridership.{' '}
-        </p>
-        {driversOfParticipation && (
+The Relationship between Service Availability and the Change in Ridership is complex, and while we cannot claim to understand it completely, we can start looking at the data. To help facilitate future discussion about this potential relationship, we have plotted year-over-year changes in Scheduled Service vs Ridership.        </p>
+        { driversOfParticipation &&
           <Scatterplot
             title="TriMet Ridership and Service Availability Changes"
             subtitle="Annual changes in ridership and service availability by line between 2013 and 2017"
@@ -46,16 +45,15 @@ export class DriversOfPublicTransitParticipation extends React.Component {
             dataSeries="year"
             xNumberFormatter={percentage}
             yNumberFormatter={percentage}
-            domain={{ x: [-1, 2], y: [-1, 2] }}
+            domain={{ x: [-1,2], y: [-1,2] }}
           />
-        )}
+        }
       </CivicStoryCard>
     );
   }
 }
 
-DriversOfPublicTransitParticipation.displayName =
-  'DriversOfPublicTransitParticipation';
+DriversOfPublicTransitParticipation.displayName = 'DriversOfPublicTransitParticipation';
 DriversOfPublicTransitParticipation.propTypes = {
   init: PropTypes.func,
   isLoading: PropTypes.bool,
@@ -73,5 +71,5 @@ export default connect(
     init() {
       dispatch(fetchDriversOfParticipation());
     },
-  })
+  }),
 )(DriversOfPublicTransitParticipation);

@@ -2,13 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { css } from 'emotion';
 
-import {
-  PackageSelectorBox,
-  Button,
-  CivicSandboxDashboard,
-} from '@hackoregon/component-library';
+import { PackageSelectorBox, Button, CivicSandboxDashboard } from '@hackoregon/component-library';
 import SandboxComponent from '../Sandbox';
-import { fetchSandbox, setPackage } from '../../state/sandbox/actions';
+import {
+  fetchSandbox,
+  setPackage,
+} from '../../state/sandbox/actions';
 import {
   isSandboxLoading,
   getSandboxData,
@@ -17,25 +16,20 @@ import {
 } from '../../state/sandbox/selectors';
 
 const loader = css`
-  background: #eee;
+  background: #EEE;
   padding: 30px;
 `;
 
 const error = css`
-  background: #fee;
-  color: #c00;
+  background: #FEE;
+  color: #C00;
   padding: 30px;
 `;
 
-const capitalize = str =>
-  str.length &&
-  str
-    .split(' ')
-    .reduce(
-      (full, word) => `${full} ${word[0].toUpperCase() + word.substring(1)}`,
-      ''
-    )
-    .trim();
+const capitalize = str => str.length && str.split(' ')
+  .reduce((full, word) => `${full} ${word[0].toUpperCase() + word.substring(1)}`, '')
+  .trim();
+
 
 export class Packages extends React.Component {
   constructor() {
@@ -50,27 +44,25 @@ export class Packages extends React.Component {
 
   closeMap = () => {
     this.setState({ mapIsOpen: false });
-  };
+  }
 
-  handlePackageSelection = selectedPackage => {
+  handlePackageSelection = (selectedPackage) => {
     this.props.setPackage(selectedPackage);
     this.setState({ mapIsOpen: true });
-  };
+  }
 
   render() {
-    const { isLoading, isError, sandbox, selectedFoundationDatum } = this.props;
+    const {
+      isLoading,
+      isError,
+      sandbox,
+      selectedFoundationDatum,
+    } = this.props;
 
-    const packages = sandbox.packages
-      ? Object.keys(sandbox.packages).map(p => ({
-          description: sandbox.packages[p].description,
-          title: capitalize(p),
-        }))
-      : [];
+    const packages = sandbox.packages ? Object.keys(sandbox.packages).map(p => ({ description: sandbox.packages[p].description, title: capitalize(p) })) : [];
 
     const Loader = () => <div className={loader}>Loading...</div>;
-    const ErrorMessage = () => (
-      <div className={error}>Could not load data for the sandbox.</div>
-    );
+    const ErrorMessage = () => <div className={error}>Could not load data for the sandbox.</div>;
 
     return (
       <div
@@ -78,54 +70,50 @@ export class Packages extends React.Component {
         font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
       `)}
       >
-        {!this.state.mapIsOpen && (
-          <div>
-            <div
-              className={css(`
+        {!this.state.mapIsOpen && (<div>
+          <div
+            className={css(`
             padding: 1.5rem;
             text-align: center;
             font-size: 1.2rem;
           `)}
-            >
-              Select a data collection
-            </div>
-            <section
-              className={css(`@media(min-width: 600px){
+          >
+            Select a data collection
+          </div>
+          <section
+            className={css(`@media(min-width: 600px){
               display:flex;
               flex-wrap: wrap;
             }`)}
-            >
-              {isLoading && <Loader />}
-              {packages &&
-                packages.map(p => (
-                  <div
-                    key={p.title}
-                    className={css(`@media(min-width: 600px) {
+          >
+            {isLoading && <Loader />}
+            {packages && (packages.map(p => (<div
+              key={p.title}
+              className={css(`@media(min-width: 600px) {
               width: 33%;
             }`)}
-                  >
-                    <PackageSelectorBox
-                      title={p.title}
-                      description={p.description}
-                      onClick={() => this.handlePackageSelection(p.title)}
-                    />
-                  </div>
-                ))}
-            </section>
-          </div>
-        )}
+            >
+              <PackageSelectorBox
+                title={p.title}
+                description={p.description}
+                onClick={() => this.handlePackageSelection(p.title)}
+              />
+            </div>)))
+            }
+          </section>
+        </div>)}
 
-        <section>{isError && <ErrorMessage />}</section>
+        <section>
+          {isError && <ErrorMessage />}
+        </section>
 
-        {this.state.mapIsOpen && (
-          <section style={{ position: 'relative' }}>
-            <p>
-              <a onClick={this.closeMap}>&lt; Back to Packages</a>
-            </p>
-            <SandboxComponent />
-            {selectedFoundationDatum && (
-              <div
-                className={css(`
+        {this.state.mapIsOpen && (<section style={{ position: 'relative' }}>
+          <p>
+            <a onClick={this.closeMap}>&lt; Back to Packages</a>
+          </p>
+          <SandboxComponent />
+          {selectedFoundationDatum && <div
+            className={css(`
               position: absolute;
               top: 21%;
               left: 4%;
@@ -137,12 +125,10 @@ export class Packages extends React.Component {
                 height: auto;
               }
             `)}
-              >
-                <CivicSandboxDashboard data={selectedFoundationDatum} />
-              </div>
-            )}
-          </section>
-        )}
+          >
+            <CivicSandboxDashboard data={selectedFoundationDatum}/>
+          </div>}
+        </section>)}
       </div>
     );
   }

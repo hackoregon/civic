@@ -9,6 +9,7 @@ const Root = ({ store, routes, history }) => (
   <Provider store={store}>
     <div>
       <Router routes={routes} history={history} />
+
     </div>
   </Provider>
 );

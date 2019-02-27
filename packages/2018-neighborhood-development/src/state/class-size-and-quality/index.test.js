@@ -1,5 +1,9 @@
 import reducer, { INITIAL_STATE } from './index';
-import { API_START, API_SUCCESS, API_ERROR } from './actions';
+import {
+  API_START,
+  API_SUCCESS,
+  API_ERROR,
+} from './actions';
 
 describe('class-size-and-quality reducer', () => {
   it('returns the initial state', () => {

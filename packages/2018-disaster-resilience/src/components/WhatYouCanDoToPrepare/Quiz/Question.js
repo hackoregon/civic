@@ -1,7 +1,9 @@
 import React, { PropTypes } from 'react';
 
 const Question = ({ question, questionId }) => (
-  <h3 className="question">{`Question ${questionId}. ${question}`}</h3>
+  <h3 className="question">
+    {`Question ${questionId}. ${question}`}
+  </h3>
 );
 
 Question.propTypes = {

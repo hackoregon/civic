@@ -7,14 +7,18 @@ import createReducer from './state';
 import { sideEffectsMiddleware } from './middleware';
 
 function configureStoreProd(initialState = {}, history) {
-  const middlewares = [thunk, sideEffectsMiddleware, routerMiddleware(history)];
+  const middlewares = [
+    thunk,
+    sideEffectsMiddleware,
+    routerMiddleware(history),
+  ];
 
   const enhancers = [applyMiddleware(...middlewares)];
 
   const store = createStore(
     createReducer(),
     initialState,
-    compose(...enhancers)
+    compose(...enhancers),
   );
 
   store.asyncReducers = {};
@@ -30,13 +34,12 @@ function configureStoreDev(initialState = {}, history) {
     routerMiddleware(history),
   ];
 
-  const composeEnhancers =
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   const enhancers = applyMiddleware(...middlewares);
   const store = createStore(
     createReducer(),
     initialState,
-    composeEnhancers(enhancers)
+    composeEnhancers(enhancers),
   );
 
   store.asyncReducers = {};
@@ -44,22 +47,18 @@ function configureStoreDev(initialState = {}, history) {
   /* istanbul ignore next */
   if (module.hot) {
     module.hot.accept('./state', () => {
-      Promise.resolve(require.ensure([], require => require('./state'))).then(
-        reducerModule => {
-          const createReducers = reducerModule.default;
-          const nextReducers = createReducers(store.asyncReducers);
-          store.replaceReducer(nextReducers);
-        }
-      );
+      Promise.resolve(require.ensure([], require => require('./state')))
+      .then((reducerModule) => {
+        const createReducers = reducerModule.default;
+        const nextReducers = createReducers(store.asyncReducers);
+        store.replaceReducer(nextReducers);
+      });
     });
   }
 
   return store;
 }
 
-const configureStore =
-  process.env.NODE_ENV === 'production'
-    ? configureStoreProd
-    : configureStoreDev;
+const configureStore = process.env.NODE_ENV === 'production' ? configureStoreProd : configureStoreDev;
 
 export default configureStore;

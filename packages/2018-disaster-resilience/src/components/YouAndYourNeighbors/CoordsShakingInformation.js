@@ -2,20 +2,12 @@ import React from 'react';
 
 import { ChartTitle } from '@hackoregon/component-library';
 
-import {
-  shakingScale,
-  landslidesScale,
-  liquefactionScale,
-  transformForLandslidesAndLiquefaction,
-} from './shakingScales';
+import { shakingScale, landslidesScale, liquefactionScale, transformForLandslidesAndLiquefaction } from './shakingScales';
 import IntensityDisplay from './IntensityDisplay';
 
 const CoordsShakingInformation = ({ coordsProperties }) => (
   <div>
-    <ChartTitle
-      title="Earthquake Impacts For Your Location"
-      subtitle="Expected outcomes in a wet season magnitude 9.0 Cascadia Subduction Zone earthquake"
-    />
+    <ChartTitle title='Earthquake Impacts For Your Location' subtitle='Expected outcomes in a wet season magnitude 9.0 Cascadia Subduction Zone earthquake' />
     <IntensityDisplay
       mean={coordsProperties.pgv_site_mean_mmi}
       min={coordsProperties.pgv_site_min_mmi}
@@ -49,3 +41,4 @@ const CoordsShakingInformation = ({ coordsProperties }) => (
 );
 
 export default CoordsShakingInformation;
+

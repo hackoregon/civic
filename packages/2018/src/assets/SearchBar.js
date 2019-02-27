@@ -31,9 +31,9 @@ const searchInput = css`
 export default class SearchBar extends React.Component {
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
-  };
+  }
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
     const text = event.target.text.value;
     this.props.handleSubmit(text);

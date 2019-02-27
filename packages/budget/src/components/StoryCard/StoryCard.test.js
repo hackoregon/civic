@@ -11,7 +11,7 @@ describe('StoryCard', () => {
 
   describe('common properties', () => {
     const wrapper = shallow(
-      <StoryCard cardId={cardId} collectionId={collectionId} title={title} />
+      <StoryCard cardId={cardId} collectionId={collectionId} title={title} />,
     );
 
     it('should render the title as an h2', () => {
@@ -33,8 +33,10 @@ describe('StoryCard', () => {
     const wrapper = shallow(
       <StoryCard cardId={cardId} collectionId={collectionId} title={title}>
         <div className="Description">Some content</div>
-        <div>Some other stuff</div>
-      </StoryCard>
+        <div>
+          Some other stuff
+        </div>
+      </StoryCard>,
     );
 
     it('should render children into a container div under the title', () => {

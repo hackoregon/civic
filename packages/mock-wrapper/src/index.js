@@ -9,10 +9,13 @@ import { Router, browserHistory } from 'react-router';
 import { createLogger } from 'redux-logger';
 
 export default function MockWrapper(App, Reducers, Routes = () => []) {
-  const middlewares = [thunk, routerMiddleware(browserHistory), createLogger()];
+  const middlewares = [
+    thunk,
+    routerMiddleware(browserHistory),
+    createLogger(),
+  ];
 
-  const composeEnhancers =
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE_ || compose;
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE_ || compose;
   const store = createStore(
     Reducers(),
     {},
@@ -24,9 +27,7 @@ export default function MockWrapper(App, Reducers, Routes = () => []) {
   // Allow for hot module replacement when applicable (dev mode)
   if (module.hot) {
     module.hot.accept('./index.js', () => {
-      const nextRootReducer = require('./index.js').Reducers(
-        store.asyncReducers
-      );
+      const nextRootReducer = require('./index.js').Reducers(store.asyncReducers);
       store.replaceReducer(nextRootReducer);
     });
   }
@@ -52,4 +53,4 @@ export default function MockWrapper(App, Reducers, Routes = () => []) {
   // const HotWrapper = hot(module)(Wrapper);
 
   render(<Wrapper />, document.getElementById('content'));
-}
+};

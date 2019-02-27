@@ -4,8 +4,7 @@ export const EXAMPLE_ACTION = 'EXAMPLE/ACTION';
    Because we have access to next we can continue with the other actions.
 */
 export const EXAMPLE_NEXT_ACTION = { type: 'SOME_ACTION' };
-const sideEffectsMiddleware = store => next => action => {
-  // eslint-disable-line
+const sideEffectsMiddleware = store => next => action => { // eslint-disable-line
   switch (action.type) {
     case EXAMPLE_ACTION:
       return next(EXAMPLE_NEXT_ACTION);

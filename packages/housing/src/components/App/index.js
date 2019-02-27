@@ -27,6 +27,7 @@ import TempVoterRegistration from '../TempVoterRegistration';
 import MapLegend from '../MapLegend';
 import './app.styles.css';
 
+
 import {
   updateOtherUnitSize,
   updateOtherDemographic,
@@ -109,19 +110,11 @@ export class App extends React.Component {
 
     return (
       <div>
-        <StoryCard
-          title="Map Your Affordability"
-          collectionId="housing"
-          cardId="affordability-map"
-        >
-          <p className="description" style={textAlignCenter}>
-            Compare your income to the average income of common demographics.
-          </p>
+        <StoryCard title="Map Your Affordability" collectionId="housing" cardId="affordability-map">
+          <p className="description" style={textAlignCenter}>Compare your income to the average income of common demographics.</p>
           <div>
             <div style={parameterGroupStyle}>
-              <h3 style={textAlignCenter}>
-                Your income: ${userIncome.toFixed(2)}/hr
-              </h3>
+              <h3 style={textAlignCenter}>Your income: ${userIncome.toFixed(2)}/hr</h3>
               <Slider
                 min={MIN_INCOME}
                 max={MAX_INCOME}
@@ -227,7 +220,7 @@ const mapDispatch = dispatch => ({
   },
 });
 
-const mapProps = state => {
+const mapProps = (state) => {
   const fromState = state.housing || state;
   return {
     neighborhoodData: getCombinedNeighborhoodsData(fromState),
@@ -240,7 +233,4 @@ const mapProps = state => {
   };
 };
 
-export default connect(
-  mapProps,
-  mapDispatch
-)(App);
+export default connect(mapProps, mapDispatch)(App);

@@ -35,7 +35,8 @@
     "lint": "lerna run lint -- --fix",
     "storybook": "BABEL_ENV=esm start-storybook -p 6006",
     "test": "lerna run test",
-    "travis": "make travis"
+    "travis": "make travis",
+    "pretty": "prettier --write \"./**/*.{js,jsx,json,css,md}\""
   },
   "husky": {
     "hooks": {

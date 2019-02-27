@@ -1,4 +1,9 @@
-import { START, SUCCESS, FAILURE, SET_CITY } from './actions';
+import {
+  START,
+  SUCCESS,
+  FAILURE,
+  SET_CITY,
+} from './actions';
 
 const INITIAL_STATE = {
   pending: false,

@@ -14,7 +14,10 @@ describe('<CrossHatch />', () => {
       addPattern: sinon.spy(),
     };
 
-    wrapper = shallow(<CrossHatch />, { context: { map } });
+    wrapper = shallow(
+      <CrossHatch />,
+      { context: { map } },
+    );
   });
 
   it('should render nothing', () => {

@@ -19,7 +19,11 @@ export class ProactivePlanning extends React.Component {
   }
 
   render() {
-    const { isLoading, error, proactivePlanning } = this.props;
+    const {
+      isLoading,
+      error,
+      proactivePlanning,
+    } = this.props;
 
     return (
       <CivicStoryCard
@@ -28,7 +32,7 @@ export class ProactivePlanning extends React.Component {
         loading={isLoading}
         error={error && 'Error loading data'}
       >
-        {proactivePlanning && (
+        { proactivePlanning &&
           <Scatterplot
             title="Resilience and Displacement"
             subtitle="Resilience as measured by census non-response rate and expected displacement in a 9.0 earthquake by neighborhood"
@@ -44,7 +48,7 @@ export class ProactivePlanning extends React.Component {
             xNumberFormatter={percentage}
             yNumberFormatter={percentage}
           />
-        )}
+        }
       </CivicStoryCard>
     );
   }
@@ -67,5 +71,5 @@ export default connect(
     init() {
       dispatch(fetchProactivePlanning());
     },
-  })
+  }),
 )(ProactivePlanning);

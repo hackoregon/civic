@@ -3,22 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { css } from 'emotion';
 
-import {
-  CivicStoryCard,
-  Dropdown,
-  StackedAreaChart,
-} from '@hackoregon/component-library';
+import { CivicStoryCard, Dropdown, StackedAreaChart } from '@hackoregon/component-library';
 import { ungroupBy } from '@hackoregon/component-library/src/utils/dataHelpers';
-import {
-  year,
-  titleCase,
-} from '@hackoregon/component-library/src/utils/formatters';
+import { year, titleCase } from '@hackoregon/component-library/src/utils/formatters';
 
-import {
-  fetchSchoolList,
-  fetchSchoolData,
-  setSchool,
-} from '../../state/student-enrollment-trends/actions';
+import { fetchSchoolList, fetchSchoolData, setSchool } from '../../state/student-enrollment-trends/actions';
 import {
   isSchoolListPending,
   catchSchoolListFailure,
@@ -31,8 +20,16 @@ import {
 } from '../../state/student-enrollment-trends/selectors';
 
 const DEFAULT_SCHOOL = 'Buckman';
-const CHARTA_CATEGORIES = ['white', 'asian', 'underrepresented'];
-const CHARTA_LABELS = ['White', 'Asian', 'Historically Underrepresented'];
+const CHARTA_CATEGORIES = [
+  'white',
+  'asian',
+  'underrepresented',
+];
+const CHARTA_LABELS = [
+  'White',
+  'Asian',
+  'Historically Underrepresented',
+];
 const CHARTB_CATEGORIES = [
   'black',
   'hispanic',
@@ -48,8 +45,7 @@ const CHARTB_LABELS = [
   'Native Hawaiian/Pacific Islander',
 ];
 
-const formatForSelector = arr =>
-  arr.map(name => ({ value: name, label: name }));
+const formatForSelector = arr => arr.map(name => ({ value: name, label: name }));
 const formatForChartA = d => ungroupBy(d, CHARTA_CATEGORIES, CHARTA_LABELS);
 const formatForChartB = d => ungroupBy(d, CHARTB_CATEGORIES, CHARTB_LABELS);
 
@@ -76,13 +72,10 @@ export class StudentEnrollmentTrends extends React.Component {
         title="Student Enrollment Trends"
         slug="student-enrollment-trends"
         loading={schoolListLoading || schoolDataLoading}
-        error={
-          (schoolListFailure || schoolDataFailure) &&
-          'Could not load school data'
-        }
+        error={(schoolListFailure || schoolDataFailure) && 'Could not load school data'}
         source="https://github.com/hackoregon/neighborhoods-2018/tree/master/docs/schools"
       >
-        {schoolList && selectedSchool && processedSchoolData && (
+        { (schoolList && selectedSchool && processedSchoolData) &&
           <div>
             <Dropdown
               value={selectedSchool}
@@ -91,9 +84,7 @@ export class StudentEnrollmentTrends extends React.Component {
             />
             <StackedAreaChart
               title="All Students"
-              subtitle={`Fall enrollment in Portland Public Schools - ${titleCase(
-                selectedSchool
-              )}`}
+              subtitle={`Fall enrollment in Portland Public Schools - ${titleCase(selectedSchool)}`}
               data={formatForChartA(processedSchoolData)}
               xLabel="Year"
               yLabel="Students"
@@ -105,9 +96,7 @@ export class StudentEnrollmentTrends extends React.Component {
             />
             <StackedAreaChart
               title="Students From Historically Underrepresented Groups"
-              subtitle={`Fall enrollment in Portland Public Schools - ${titleCase(
-                selectedSchool
-              )}`}
+              subtitle={`Fall enrollment in Portland Public Schools - ${titleCase(selectedSchool)}`}
               data={formatForChartB(processedSchoolData)}
               xLabel="Year"
               yLabel="Students"
@@ -118,7 +107,7 @@ export class StudentEnrollmentTrends extends React.Component {
               yNumberFormatter={year}
             />
           </div>
-        )}
+        }
       </CivicStoryCard>
     );
   }
@@ -128,6 +117,7 @@ StudentEnrollmentTrends.displayName = 'StudentEnrollmentTrends';
 
 // Connect this to the redux store when necessary
 export default connect(
+
   state => ({
     schoolListLoading: isSchoolListPending(state),
     schoolListFailure: catchSchoolListFailure(state),
@@ -146,5 +136,5 @@ export default connect(
       dispatch(fetchSchoolData(school));
       dispatch(setSchool(school));
     },
-  })
+  }),
 )(StudentEnrollmentTrends);

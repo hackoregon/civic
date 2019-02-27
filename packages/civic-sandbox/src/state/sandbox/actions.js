@@ -1,7 +1,4 @@
-import fetchAdapter, {
-  fetchAllSlidesAdapter,
-  fetchByDateAdapter,
-} from '../fetch-adapter';
+import fetchAdapter, { fetchAllSlidesAdapter, fetchByDateAdapter } from '../fetch-adapter';
 import actionEmitter from '../common-action-emitter';
 
 // Types
@@ -50,19 +47,23 @@ export const fetchSandbox = fetchAdapter(
   }
 );
 
-export const fetchFoundation = endpoint =>
-  fetchAdapter(endpoint, {
+export const fetchFoundation = endpoint => fetchAdapter(endpoint,
+  {
     start: FoundationStart,
     success: FoundationSuccess,
     failure: FoundationFailure,
-  });
+  }
+  );
 
-export const fetchSlides = slides =>
-  fetchAllSlidesAdapter(slides, {
+
+export const fetchSlides = slides => fetchAllSlidesAdapter(
+  slides,
+  {
     start: SlidesStart,
     success: SlidesSuccess,
     failure: SlidesFailure,
-  });
+  }
+);
 
 export const setPackage = (selectedPackage = '') => ({
   type: SET_PACKAGE,
@@ -79,8 +80,9 @@ export const setSlides = (selectedSlides = []) => ({
   selectedSlides,
 });
 
-export const fetchSlideByDate = (slide, date, type) =>
-  fetchByDateAdapter(slide, date, type, {
+
+export const fetchSlideByDate = (slide, date, type) => fetchByDateAdapter(slide, date, type,
+  {
     start: SlideStart,
     success: SlideSuccess,
     failure: SlideFailure,

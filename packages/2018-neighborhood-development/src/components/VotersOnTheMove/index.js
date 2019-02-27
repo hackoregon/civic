@@ -3,19 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { css } from 'emotion';
 
-import {
-  CivicStoryCard,
-  Scatterplot,
-  Collapsable,
-  CivicVictoryTheme,
-  DataTable,
-  ChartTitle,
-} from '@hackoregon/component-library';
+import { CivicStoryCard, Scatterplot, Collapsable, CivicVictoryTheme, DataTable, ChartTitle } from '@hackoregon/component-library';
 
-import {
-  fetchVotersOnTheMove,
-  fetchAwayVotersOnTheMove,
-} from '../../state/voters-on-the-move/actions';
+import { fetchVotersOnTheMove, fetchAwayVotersOnTheMove } from '../../state/voters-on-the-move/actions';
 
 import {
   isVotersOnTheMovePending,
@@ -33,7 +23,7 @@ const smallMultiples = css`
 `;
 
 const chartColumn = css`
-  width: 100%;
+  width: 100%
 `;
 
 const ageGroupLabels = [
@@ -147,9 +137,7 @@ export class VotersOnTheMove extends React.Component {
 
     const voterScatterplot = (age, direction) => (
       <Scatterplot
-        data={data[direction].results.filter(
-          ({ age_group }) => age_group === age
-        )}
+        data={data[direction].results.filter(({ age_group }) => age_group === age)}
         dataKey="x"
         dataValue="y"
         dataSeries="age_group"
@@ -165,83 +153,52 @@ export class VotersOnTheMove extends React.Component {
       <CivicStoryCard
         title="Voters on the Move"
         slug="voters-on-the-move"
-        loading={isLoading || isAwayLoading}
+        loading={(isLoading || isAwayLoading)}
         error={(error || awayError) && 'error'}
       >
         <Collapsable>
           <Collapsable.Section>
             <div>
-              <p>
-                For voters relocating within Portland during 2006 - 2016, the
-                visualizations below show movement distance and direction by age
-                group.
-              </p>
-              <ChartTitle
-                title={'Movement of Registered Voters Within Portland'}
-                subtitle={
-                  'Number of moves and change relative to city center by age group as measured by changes in voter registration, 2006-2016'
-                }
-              />
+              <p>For voters relocating within Portland during 2006 - 2016, the visualizations below show movement distance and direction by age group.</p>
+                <ChartTitle title={'Movement of Registered Voters Within Portland'} subtitle={'Number of moves and change relative to city center by age group as measured by changes in voter registration, 2006-2016'} />
               <DataTable data={tableData} />
-              <p>
-                Overall, the data showed that a greater percentage of Portland
-                registered voters moved away from the city center than moved
-                towards it, and that the average number of moves decreased by
-                age group. The sample of individual voter movements below paint
-                a more granual picture of voter movement patterns.
-              </p>
-              {votersOnTheMove && awayVotersOnTheMove && (
+              <p>Overall, the data showed that a greater percentage of Portland registered voters moved away from the city center than moved towards it, and that the average number of moves decreased by age group. The sample of individual voter movements below paint a more granual picture of voter movement patterns.</p>
+              { (votersOnTheMove && awayVotersOnTheMove) &&
                 <div>
-                  <ChartTitle
-                    title={'Distance and Direction of Moves Within Portland'}
-                    subtitle={
-                      'Distance in miles and direction of travel for 2000 randomly sampled moves within Portland'
-                    }
-                  />
-                  <div className={smallMultiples}>
-                    <div className={chartColumn}>
-                      <h2>Moves Towards City Center</h2>
-                      {voterScatterplot(18, 'center')}
-                      {voterScatterplot(26, 'center')}
-                    </div>
-                    <div className={chartColumn}>
-                      <h2>Moves Away From City Center</h2>
-                      {voterScatterplot(18, 'away')}
-                      {voterScatterplot(26, 'away')}
-                    </div>
+                <ChartTitle title={'Distance and Direction of Moves Within Portland'} subtitle={'Distance in miles and direction of travel for 2000 randomly sampled moves within Portland'} />
+                <div className={smallMultiples}>
+                  <div className={chartColumn}>
+                    <h2>Moves Towards City Center</h2>
+                    {voterScatterplot(18, 'center')}
+                    {voterScatterplot(26, 'center')}
+                  </div>
+                  <div className={chartColumn}>
+                    <h2>Moves Away From City Center</h2>
+                    {voterScatterplot(18, 'away')}
+                    {voterScatterplot(26, 'away')}
                   </div>
                 </div>
-              )}
+                </div>
+              }
             </div>
           </Collapsable.Section>
           <Collapsable.Section hidden>
             <div>
-              {votersOnTheMove && awayVotersOnTheMove && (
-                <div className={smallMultiples}>
-                  <div className={chartColumn}>
-                    {voterScatterplot(33, 'center')}
-                    {voterScatterplot(40, 'center')}
-                    {voterScatterplot(50, 'center')}
-                  </div>
-                  <div className={chartColumn}>
-                    {voterScatterplot(33, 'away')}
-                    {voterScatterplot(40, 'away')}
-                    {voterScatterplot(50, 'away')}
-                  </div>
+            { (votersOnTheMove && awayVotersOnTheMove) &&
+              <div className={smallMultiples}>
+                <div className={chartColumn}>
+                  {voterScatterplot(33, 'center')}
+                  {voterScatterplot(40, 'center')}
+                  {voterScatterplot(50, 'center')}
                 </div>
-              )}
-              <p>
-                Age is calculated at the time of relocation. Portland city
-                center is defined as the center of the Burnside Bridge. Change
-                in distance from Portland city center is calculated by taking
-                the displacement from the individual’s previous address. The
-                scatterplots show when people relocate from their previous
-                address, the direction and the distance moved either toward or
-                away from the city center. The scatterplots are generated based
-                on a random sampling of 2000 voter movements within Portland
-                (1000 movements towards the city center, 1000 movements away
-                from the city center).
-              </p>
+                <div className={chartColumn}>
+                  {voterScatterplot(33, 'away')}
+                  {voterScatterplot(40, 'away')}
+                  {voterScatterplot(50, 'away')}
+                </div>
+              </div>
+            }
+            <p>Age is calculated at the time of relocation. Portland city center is defined as the center of the Burnside Bridge. Change in distance from Portland city center is calculated by taking the displacement from the individual’s previous address. The scatterplots show when people relocate from their previous address, the direction and the distance moved either toward or away from the city center. The scatterplots are generated based on a random sampling of 2000 voter movements within Portland (1000 movements towards the city center, 1000 movements away from the city center).</p>
             </div>
           </Collapsable.Section>
         </Collapsable>
@@ -275,5 +232,5 @@ export default connect(
       dispatch(fetchVotersOnTheMove());
       dispatch(fetchAwayVotersOnTheMove());
     },
-  })
+  }),
 )(VotersOnTheMove);

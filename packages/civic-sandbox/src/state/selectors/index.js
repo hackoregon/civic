@@ -8,5 +8,5 @@ export const rootState = state => state.sandbox || state;
 // to think about state namespacing in each component
 export const getSomeData = createSelector(
   rootState,
-  ({ someData }) => someData
+  ({ someData }) => someData,
 );

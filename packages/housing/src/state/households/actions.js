@@ -7,12 +7,11 @@ export const householdsFail = actionEmitter(actionTypes.CALL_FAIL);
 export const householdsSuccess = actionEmitter(actionTypes.CALL_SUCCESS);
 
 /* eslint-disable no-param-reassign */
-export const normalizer = json =>
-  json.reduce((households, datum) => {
-    households[datum.NP_ID] = households[datum.NP_ID] || {};
-    households[datum.NP_ID][datum.demographic] = datum.households;
-    return households;
-  }, []);
+export const normalizer = json => json.reduce((households, datum) => {
+  households[datum.NP_ID] = households[datum.NP_ID] || {};
+  households[datum.NP_ID][datum.demographic] = datum.households;
+  return households;
+}, []);
 /* eslint-enable no-param-reassign */
 
 export const fetchHouseholdsData = api('/hhtooltip', {

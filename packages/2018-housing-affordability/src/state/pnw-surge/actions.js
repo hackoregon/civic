@@ -13,8 +13,7 @@ export const AllSuccess = actionEmitter(SUCCESS);
 export const AllFailure = actionEmitter(FAILURE);
 
 const datatype = 'real-percent-change-in-home-prices-from-dec-2015dec-2016';
-const yAxisDatatype =
-  'real-percent-change-in-home-prices-from-jan-2000dec-2016';
+const yAxisDatatype = 'real-percent-change-in-home-prices-from-jan-2000dec-2016';
 
 // Order of the URLs here is important! It impacts the reducer.
 export const fetchAllPNWSurgeData = fetchManyAdapter(
@@ -30,9 +29,7 @@ export const fetchAllPNWSurgeData = fetchManyAdapter(
   }
 );
 
-export const setPNWSurgeCity = (
-  city = 'Portland-Vancouver-Hillsboro, OR-WA'
-) => ({
+export const setPNWSurgeCity = (city = 'Portland-Vancouver-Hillsboro, OR-WA') => ({
   type: SET_CITY,
   selectedCity: city,
 });

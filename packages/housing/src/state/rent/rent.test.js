@@ -49,9 +49,7 @@ describe('rent actions', () => {
       store = mockStore({});
     });
 
-    afterEach(() => {
-      nock.cleanAll();
-    });
+    afterEach(() => { nock.cleanAll(); });
 
     it('should dispatch fetch and success when the fetch is successful', () => {
       const mockRentResponse = [
@@ -72,12 +70,10 @@ describe('rent actions', () => {
         { type: actionTypes.CALL_START },
         {
           type: actionTypes.CALL_SUCCESS,
-          payload: [
-            {
-              rent_amt: 917,
-              id: 1,
-            },
-          ],
+          payload: [{
+            rent_amt: 917,
+            id: 1,
+          }],
         },
       ];
 
@@ -118,28 +114,21 @@ describe('rent reducer', () => {
   });
 
   it('should handle CALL_START', () => {
-    expect(
-      reducer(initialState, {
-        type: actionTypes.CALL_START,
-      })
-    ).to.eql({
+    expect(reducer(initialState, {
+      type: actionTypes.CALL_START,
+    })).to.eql({
       pending: true,
       data: null,
       error: null,
     });
 
-    expect(
-      reducer(
-        {
-          pending: true,
-          data: null,
-          error: null,
-        },
-        {
-          type: actionTypes.CALL_START,
-        }
-      )
-    ).to.eql({
+    expect(reducer({
+      pending: true,
+      data: null,
+      error: null,
+    }, {
+      type: actionTypes.CALL_START,
+    })).to.eql({
       pending: true,
       data: null,
       error: null,
@@ -149,30 +138,23 @@ describe('rent reducer', () => {
   it('should handle CALL_FAIL', () => {
     const error = new Error('oops');
 
-    expect(
-      reducer(initialState, {
-        type: actionTypes.CALL_FAIL,
-        payload: error,
-      })
-    ).to.eql({
+    expect(reducer(initialState, {
+      type: actionTypes.CALL_FAIL,
+      payload: error,
+    })).to.eql({
       pending: false,
       data: null,
       error,
     });
 
-    expect(
-      reducer(
-        {
-          pending: true,
-          data: ['stuff'],
-          error: null,
-        },
-        {
-          type: actionTypes.CALL_FAIL,
-          payload: error,
-        }
-      )
-    ).to.eql({
+    expect(reducer({
+      pending: true,
+      data: ['stuff'],
+      error: null,
+    }, {
+      type: actionTypes.CALL_FAIL,
+      payload: error,
+    })).to.eql({
       pending: false,
       data: null,
       error,
@@ -182,30 +164,23 @@ describe('rent reducer', () => {
   it('should handle CALL_SUCCESS', () => {
     const data = 'Really good tacos';
 
-    expect(
-      reducer(initialState, {
-        type: actionTypes.CALL_SUCCESS,
-        payload: data,
-      })
-    ).to.eql({
+    expect(reducer(initialState, {
+      type: actionTypes.CALL_SUCCESS,
+      payload: data,
+    })).to.eql({
       pending: false,
       error: null,
       data,
     });
 
-    expect(
-      reducer(
-        {
-          pending: true,
-          error: new Error('oops'),
-          data: null,
-        },
-        {
-          type: actionTypes.CALL_SUCCESS,
-          payload: data,
-        }
-      )
-    ).to.eql({
+    expect(reducer({
+      pending: true,
+      error: new Error('oops'),
+      data: null,
+    }, {
+      type: actionTypes.CALL_SUCCESS,
+      payload: data,
+    })).to.eql({
       pending: false,
       error: null,
       data,
@@ -234,13 +209,11 @@ describe('rent selectors', () => {
     });
 
     it('should return the rent request object when set', () => {
-      state = {
-        rent: {
-          pending: true,
-          data: null,
-          error: null,
-        },
-      };
+      state = { rent: {
+        pending: true,
+        data: null,
+        error: null,
+      } };
       expect(selectors.getRentRequest(state)).to.eql(state.rent);
     });
   });

@@ -3,16 +3,13 @@
 //     dispatch(exampleAPI())
 import axios from 'axios';
 
-const apiAdapter = (url, { start, success, error }) => () => dispatch => {
+const apiAdapter = (url, { start, success, error }) => () => (dispatch) => {
   dispatch(start());
-  return axios
-    .get(url)
-    .then(res => {
-      dispatch(success(res));
-    })
-    .catch(err => {
-      dispatch(error(err));
-    });
+  return axios.get(url).then((res) => {
+    dispatch(success(res));
+  }).catch((err) => {
+    dispatch(error(err));
+  });
 };
 
 export default apiAdapter;

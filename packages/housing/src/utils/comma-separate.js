@@ -2,14 +2,8 @@ import { format } from 'd3-format';
 
 const formatCommaSeparated = format(',');
 
-export default function commaSeparate(
-  num,
-  decimalPrecision,
-  insistDecimalPrecision = false
-) {
-  if (!decimalPrecision) {
-    return formatCommaSeparated(num);
-  }
+export default function commaSeparate(num, decimalPrecision, insistDecimalPrecision = false) {
+  if (!decimalPrecision) { return formatCommaSeparated(num); }
 
   if (insistDecimalPrecision) {
     const splitNumber = num.toFixed(decimalPrecision).split('.');

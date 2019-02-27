@@ -1,18 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  PieChart,
-  Pie,
-  ResponsiveContainer,
-  Text,
-  Cell,
-  Legend,
-} from 'recharts';
+import { PieChart, Pie, ResponsiveContainer, Text, Cell, Legend } from 'recharts';
 import { css } from 'emotion';
 import CustomPieLegend from './CustomPieLegend';
 
 const containerClass = css`
-  color: #726371;
+  color:#726371;
   font-weight: bold;
   display: flex;
   flex-direction: column;
@@ -29,13 +22,13 @@ const yearsContainerClass = css`
 const listItemClass = css`
   display: inline;
   padding: 10px;
-  color: #aaa4ab;
+  color: #AAA4AB;
   flex: inherit;
 `;
 
 const linkClass = css`
   display: inline-block;
-  padding: 5px;
+  padding:5px;
   font-size: 1.3em;
   border: 0;
   font-family: inherit;
@@ -57,20 +50,20 @@ const findPercentage = (val, arr) => {
   return (val / total) * 100;
 };
 
-const getUniqueYears = arr =>
-  arr
-    .reduce((acc, curr) => {
-      if (acc.indexOf(curr.year) === -1) {
-        acc.push(curr.year);
-      }
-      return acc;
-    }, [])
-    .sort();
+const getUniqueYears = arr => (
+  arr.reduce((acc, curr) => {
+    if (acc.indexOf(curr.year) === -1) {
+      acc.push(curr.year);
+    }
+    return acc;
+  }, []).sort()
+);
 
-const getKeyByValue = (obj, val) =>
-  Object.keys(obj).find(key => obj[key] === val);
+const getKeyByValue = (obj, val) => (
+  Object.keys(obj).find(key => obj[key] === val)
+);
 
-const pieLabel = options => {
+const pieLabel = (options) => {
   if (!options.payload.label) {
     return null;
   }
@@ -92,6 +85,7 @@ const pieLabel = options => {
   );
 };
 
+
 class DefinitionPieChart extends React.Component {
   constructor(props) {
     super(props);
@@ -105,19 +99,17 @@ class DefinitionPieChart extends React.Component {
   }
 
   cleanData(data) {
-    return data
-      .filter(item => item.year === this.state.year)
-      .map((item, idx, arr) => ({
-        ...item,
-        name: this.props.categories[item.name],
-        label:
-          item.name ===
-            getKeyByValue(this.props.categories, this.state.activeValue) ||
-          false,
-        value: findPercentage(item.value, arr),
-        rawCount: item.value,
-        rawTotal: arr.reduce((acc, cur) => acc + cur.value, 0),
-      }));
+    return data.filter(item => item.year === this.state.year)
+      .map((item, idx, arr) => (
+        { ...item,
+          name: this.props.categories[item.name],
+          label: item.name === getKeyByValue(this.props.categories,
+            this.state.activeValue) || false,
+          value: findPercentage(item.value, arr),
+          rawCount: item.value,
+          rawTotal: arr.reduce((acc, cur) => acc + cur.value, 0),
+        }
+      ));
   }
 
   updateCategory(val) {
@@ -128,23 +120,24 @@ class DefinitionPieChart extends React.Component {
 
   render() {
     return (
-      <div style={{ marginBottom: '65px' }}>
+      <div style={{ marginBottom: '65px' }} >
         <div>
-          {this.props.data.length > 0 &&
-            React.cloneElement(this.props.content[this.state.activeValue], {
-              year: this.state.year,
-              data: this.cleanData(this.props.data).filter(
-                item => item.name === this.state.activeValue
-              )[0],
-            })}
+          { this.props.data.length > 0 &&
+            React.cloneElement(this.props.content[this.state.activeValue],
+              { year: this.state.year,
+                data: this.cleanData(this.props.data)
+                .filter(item => item.name === this.state.activeValue)[0] })
+          }
         </div>
         <div className={containerClass}>
           <div className={yearsContainerClass}>
             <ul>
-              {getUniqueYears(this.props.data).map(item => {
+              {
+              getUniqueYears(this.props.data)
+              .map((item) => {
                 const active = item === this.state.year ? linkActiveClass : '';
                 return (
-                  <li className={listItemClass} key={item}>
+                  <li className={listItemClass} key={item} >
                     <a
                       className={`${linkClass} ${active}`}
                       onClick={() => this.setState({ year: item })}
@@ -153,11 +146,14 @@ class DefinitionPieChart extends React.Component {
                     </a>
                   </li>
                 );
-              })}
+              })
+            }
             </ul>
           </div>
           <ResponsiveContainer width={'100%'} height={225}>
-            <PieChart margin={{ top: 0, right: 5, bottom: 120, left: 5 }}>
+            <PieChart
+              margin={{ top: 0, right: 5, bottom: 120, left: 5 }}
+            >
               <Pie
                 startAngle={180}
                 endAngle={0}
@@ -171,13 +167,14 @@ class DefinitionPieChart extends React.Component {
                 label={pieLabel}
                 onClick={options => this.updateCategory(options.payload.name)}
               >
-                {this.cleanData(this.props.data).map(entry => {
-                  const color =
-                    entry.name === this.state.activeValue
-                      ? this.props.colors[0]
-                      : this.props.colors[1];
+                {
+                this.cleanData(this.props.data).map((entry) => {
+                  const color = entry.name === this.state.activeValue
+                    ? this.props.colors[0]
+                    : this.props.colors[1];
                   return <Cell fill={color} key={entry.value} />;
-                })}
+                })
+              }
               </Pie>
               <Legend
                 wrapperStyle={{ bottom: '-75px' }}

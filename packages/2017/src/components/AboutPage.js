@@ -1,16 +1,11 @@
 import React from 'react';
 import styles from '../PlatformStyles';
 
-const staticContent =
-  'Civic is an open source project of Hack Oregon, built entirely by volunteers committed to neutral, nonpartisan exploration of civic analytics.';
+const staticContent = 'Civic is an open source project of Hack Oregon, built entirely by volunteers committed to neutral, nonpartisan exploration of civic analytics.';
 
 const AboutPage = () => (
   <div>
-    <div
-      className={`${styles.Page} ${styles.Hero} Hero`}
-      id={styles.Hero}
-      name={styles.Hero}
-    >
+    <div className={`${styles.Page} ${styles.Hero} Hero`} id={styles.Hero} name={styles.Hero}>
       <div className="Container">
         <div className={`${styles.Content} Content`}>
           <h1>About Civic</h1>
@@ -22,53 +17,29 @@ const AboutPage = () => (
         <div className={`${styles.Content} Content`}>
           <div className={styles.row}>
             <p className="large">{staticContent}</p>
-            <p>
-              For more information, visit us at{' '}
-              <a href="//hackoregon.org">hackoregon.org</a>
-            </p>
+            <p>For more information, visit us at <a href="//hackoregon.org">hackoregon.org</a></p>
           </div>
           <div className={styles.row}>
             <h2>Platform Team</h2>
           </div>
           <div className={`${styles.column} column ${styles.Platform}`}>
             <ul>
-              <li>
-                <a href="mailto:catherine@hackoregon.org">Cat Nikolovski</a>,{' '}
-                <i>Founder and Executive Producer</i>
-              </li>
-              <li>
-                <a href="mailto:megan@hackoregon.org">Megan Mckissack</a>,{' '}
-                <i>Technical Lead</i>
-              </li>
-              <li>
-                <a href="mailto:april@hackoregon.org">April Johnson</a>,{' '}
-                <i>Community and Partnerships</i>
-              </li>
+              <li><a href="mailto:catherine@hackoregon.org">Cat Nikolovski</a>, <i>Founder and Executive Producer</i></li>
+              <li><a href="mailto:megan@hackoregon.org">Megan Mckissack</a>, <i>Technical Lead</i></li>
+              <li><a href="mailto:april@hackoregon.org">April Johnson</a>, <i>Community and Partnerships</i></li>
             </ul>
           </div>
           <div className={`${styles.column} column ${styles.Platform}`}>
             <ul>
-              <li>
-                Jason Bernert, <i>Multimedia Production</i>
-              </li>
-              <li>
-                <a href="mailto:vengist@gmail.com">Ven Gist</a>,{' '}
-                <i>Design Principal</i>
-              </li>
-              <li>
-                <a href="mailto:adrienne.j.tilley@gmail.com">Adrienne Tilley</a>
-                , <i>Design Principal</i>
-              </li>
+              <li>Jason Bernert, <i>Multimedia Production</i></li>
+              <li><a href="mailto:vengist@gmail.com">Ven Gist</a>, <i>Design Principal</i></li>
+              <li><a href="mailto:adrienne.j.tilley@gmail.com">Adrienne Tilley</a>, <i>Design Principal</i></li>
             </ul>
           </div>
           <div className={`${styles.column} column ${styles.Platform}`}>
             <ul>
-              <li>
-                David Daniel, <i>Systems Architecture</i>
-              </li>
-              <li>
-                Dan Carr, <i>Systems Architecture</i>
-              </li>
+              <li>David Daniel, <i>Systems Architecture</i></li>
+              <li>Dan Carr, <i>Systems Architecture</i></li>
             </ul>
           </div>
           <div className={`${styles.row} ${styles.Collection}`}>
@@ -76,12 +47,8 @@ const AboutPage = () => (
           </div>
           <div className={`${styles.column} column ${styles.Collection}`}>
             <ul>
-              <li>
-                <h3>Opportunity/Cost</h3>
-              </li>
-              <li>
-                <h4>Core Team</h4>
-              </li>
+              <li><h3>Opportunity/Cost</h3></li>
+              <li><h4>Core Team</h4></li>
               <li>Gabriele Hayden</li>
               <li>Matthew Tschabold</li>
               <li>Bimal Rajbhandry</li>
@@ -108,9 +75,7 @@ const AboutPage = () => (
               <li>Kartik Nagappa</li>
               <li>Jason Bernert</li>
               <li>Clem Freeman</li>
-              <li>
-                <h4>Contributors</h4>
-              </li>
+              <li><h4>Contributors</h4></li>
               <li>Dennis Hemken</li>
               <li>Sailor Winkelman</li>
               <li>Rajesh Rengarajan</li>
@@ -132,12 +97,8 @@ const AboutPage = () => (
 
           <div className={`${styles.column} column ${styles.Collection}`}>
             <ul>
-              <li>
-                <h3>Unsheltered</h3>
-              </li>
-              <li>
-                <h4>Core Team</h4>
-              </li>
+              <li><h3>Unsheltered</h3></li>
+              <li><h4>Core Team</h4></li>
               <li>Pete Russo</li>
               <li>Cinthia Manuel</li>
               <li>Kristin Wolff</li>
@@ -154,9 +115,7 @@ const AboutPage = () => (
               <li>Clem Freeman</li>
               <li>Eric Gold</li>
               <li>Greg Adams</li>
-              <li>
-                <h4>Contributors</h4>
-              </li>
+              <li><h4>Contributors</h4></li>
               <li>Angela Dean</li>
               <li>Anna Shapiro</li>
               <li>Bryan Lehrer</li>
@@ -188,12 +147,8 @@ const AboutPage = () => (
 
           <div className={`${styles.column} column ${styles.Collection}`}>
             <ul>
-              <li>
-                <h3>The First Five Minutes</h3>
-              </li>
-              <li>
-                <h4>Core Team</h4>
-              </li>
+              <li><h3>The First Five Minutes</h3></li>
+              <li><h4>Core Team</h4></li>
               <li>Hannah Kane</li>
               <li>Kyle Joecken</li>
               <li>Qing Zhou</li>
@@ -206,9 +161,7 @@ const AboutPage = () => (
               <li>Justine Wang</li>
               <li>Keir Staple</li>
               <li>Mark Whitaker</li>
-              <li>
-                <h4>Contributors</h4>
-              </li>
+              <li><h4>Contributors</h4></li>
               <li>Oskar Radon Kimball</li>
               <li>Russell Gould</li>
               <li>Kayla Warfield</li>
@@ -230,12 +183,8 @@ const AboutPage = () => (
 
           <div className={`${styles.column} column ${styles.Collection}`}>
             <ul>
-              <li>
-                <h3>State of Motion</h3>
-              </li>
-              <li>
-                <h4>Core Team</h4>
-              </li>
+              <li><h3>State of Motion</h3></li>
+              <li><h4>Core Team</h4></li>
               <li>Sanjuro Jogdeo</li>
               <li>Ed Borasky</li>
               <li>Kevin Saavedra</li>
@@ -243,9 +192,7 @@ const AboutPage = () => (
               <li>Emily Tritsch</li>
               <li>Tony Fuentes</li>
               <li>Lee Coates</li>
-              <li>
-                <h4>Contributors</h4>
-              </li>
+              <li><h4>Contributors</h4></li>
               <li>Chris Smith</li>
               <li>Joe Hand</li>
               <li>Matthew Gantz</li>
@@ -280,12 +227,8 @@ const AboutPage = () => (
 
           <div className={`${styles.column} column ${styles.Collection}`}>
             <ul>
-              <li>
-                <h3>Run The Numbers</h3>
-              </li>
-              <li>
-                <h4>Core Team</h4>
-              </li>
+              <li><h3>Run The Numbers</h3></li>
+              <li><h4>Core Team</h4></li>
               <li>Jeanette Hardiman</li>
               <li>Mary Anne Thygesen</li>
               <li>Jim Tyhurst</li>
@@ -300,9 +243,7 @@ const AboutPage = () => (
               <li>Kari Goin</li>
               <li>Katie Lakey</li>
               <li>Shannon Carney</li>
-              <li>
-                <h4>Contributors</h4>
-              </li>
+              <li><h4>Contributors</h4></li>
               <li>Brett Davis</li>
               <li>Sheila Martin</li>
               <li>Mackenzie T Stout</li>
@@ -326,9 +267,7 @@ const AboutPage = () => (
 
           <div className={`${styles.column} column ${styles.Collection}`}>
             <ul>
-              <li>
-                <h3>Special Shout Outs</h3>
-              </li>
+              <li><h3>Special Shout Outs</h3></li>
               <li>Megan McKissack</li>
               <li>Ven Gist</li>
               <li>Daniel Carr</li>
@@ -349,7 +288,7 @@ const AboutPage = () => (
       </div>
     </div>
   </div>
-);
+  );
 
 AboutPage.displayName = 'AboutPage';
 

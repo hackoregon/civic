@@ -30,19 +30,16 @@ describe('Registry class', () => {
 
     describe('when the entires contains duplicates', () => {
       it('throws an error', () => {
-        const makeRegistry = () =>
-          new Registry(
-            commonEntries.concat([
-              {
-                slug: 'slug-one',
-                component: ComponentTwo,
-                project: '@hackoregon/project-three',
-              },
-            ])
-          );
+        const makeRegistry = () => new Registry(commonEntries.concat([
+          {
+            slug: 'slug-one',
+            component: ComponentTwo,
+            project: '@hackoregon/project-three',
+          },
+        ]));
 
         expect(makeRegistry).to.throw(
-          `Duplicate slugs found. All card slugs must be unique
+`Duplicate slugs found. All card slugs must be unique
 
 slug-one
 \t(ComponentOne) in @hackoregon/project-one
@@ -53,24 +50,21 @@ slug-one
       });
 
       it('throws an error for every duplicate', () => {
-        const makeRegistry = () =>
-          new Registry(
-            commonEntries.concat([
-              {
-                slug: 'slug-one',
-                component: ComponentTwo,
-                project: '@hackoregon/project-three',
-              },
-              {
-                slug: 'slug-two',
-                component: ComponentOne,
-                project: '@hackoregon/project-four',
-              },
-            ])
-          );
+        const makeRegistry = () => new Registry(commonEntries.concat([
+          {
+            slug: 'slug-one',
+            component: ComponentTwo,
+            project: '@hackoregon/project-three',
+          },
+          {
+            slug: 'slug-two',
+            component: ComponentOne,
+            project: '@hackoregon/project-four',
+          },
+        ]));
 
         expect(makeRegistry).to.throw(
-          `Duplicate slugs found. All card slugs must be unique
+`Duplicate slugs found. All card slugs must be unique
 
 slug-one
 \t(ComponentOne) in @hackoregon/project-one
@@ -104,15 +98,14 @@ slug-two
       it('throws an error', () => {
         const registry = new Registry(commonEntries);
 
-        const addDuplicate = () =>
-          registry.add({
-            slug: 'slug-one',
-            component: ComponentTwo,
-            project: '@hackoregon/project-three',
-          });
+        const addDuplicate = () => registry.add({
+          slug: 'slug-one',
+          component: ComponentTwo,
+          project: '@hackoregon/project-three',
+        });
 
         expect(addDuplicate).to.throw(
-          `Duplicate slugs found. All card slugs must be unique
+`Duplicate slugs found. All card slugs must be unique
 
 slug-one
 \t(ComponentOne) in @hackoregon/project-one

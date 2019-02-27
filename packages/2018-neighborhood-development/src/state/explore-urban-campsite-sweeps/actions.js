@@ -11,8 +11,7 @@ export const exploreUrbanCampsiteSweepsStart = actionEmitter(API_START);
 export const exploreUrbanCampsiteSweepsSuccess = actionEmitter(API_SUCCESS);
 export const exploreUrbanCampsiteSweepsError = actionEmitter(API_ERROR);
 
-const EXPLORE_URBAN_CAMPSITE_SWEEPS_API =
-  'http://service.civicpdx.org/neighborhood-development/api/camp_sweeps?limit=3000&format=json';
+const EXPLORE_URBAN_CAMPSITE_SWEEPS_API = 'http://service.civicpdx.org/neighborhood-development/api/camp_sweeps?limit=3000&format=json';
 
 export const fetchCampsiteSweeps = apiAdapter(
   EXPLORE_URBAN_CAMPSITE_SWEEPS_API,
@@ -23,7 +22,7 @@ export const fetchCampsiteSweeps = apiAdapter(
   }
 );
 
-export const incrementTimer = amount => {
+export const incrementTimer = (amount) => {
   return {
     type: INCREMENT_TIMER,
     payload: amount,

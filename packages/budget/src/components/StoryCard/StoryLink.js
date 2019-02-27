@@ -5,19 +5,13 @@ import './StoryLink.css';
 
 const StoryLink = ({ children, icon, route, action }) => (
   <div className="StoryLink">
-    {route ? (
-      <Link to={route}>
-        <i className={icon} />
-        <span>{children}</span>
-      </Link>
-    ) : (
-      <a tabIndex="0" onClick={action}>
-        <i className={icon} />
-        <span>{children}</span>
-      </a>
-    )}
+    {route
+      ? <Link to={route}><i className={icon} /><span>{children}</span></Link>
+      : <a tabIndex="0" onClick={action}><i className={icon} /><span>{children}</span></a>
+    }
   </div>
 );
+
 
 StoryLink.displayName = 'StoryLink';
 StoryLink.propTypes = {

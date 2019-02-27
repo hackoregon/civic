@@ -20,7 +20,9 @@ const CardDetailPage = ({ params }) => {
       <h1>Card not found</h1>
       <p>
         The card you are looking for doesn't exist.
-        <Link to="/cities/portland">View the Portland Collection</Link>
+        <Link to="/cities/portland">
+          View the Portland Collection
+        </Link>
       </p>
     </PageLayout>
   );

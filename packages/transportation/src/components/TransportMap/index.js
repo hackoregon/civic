@@ -18,6 +18,7 @@ class TransportMap extends Component {
     this.onEachFeature = this.onEachFeature.bind(this);
   }
 
+
   openPanel(e) {
     // console.log('e', e)
     const properties = e.target.feature;
@@ -33,6 +34,7 @@ class TransportMap extends Component {
     });
   }
 
+
   render() {
     // console.log('transport map render');
     // console.log(this.props.appData)
@@ -44,21 +46,16 @@ class TransportMap extends Component {
     // console.log(this.state.appData[`${mapType}Data`]);
 
     const blurb = {
-      features:
-        'This is a comprehensive map of all projects in the Right of Way, of any status. The map currently displays projects for the Grind and Pave group for the next several years.  Any feature can be clicked to display details for that feature.',
-      conflicts:
-        'Projects that appear on this map are potentially close together in time and space.  The default definition of "close" is shown here, which is within 200 meters and 14 days of another project.  In addition, only projects that overlap with the start and end dates show will be displayed. Note that in many cases, the project timelines (which can be viewed below the map by clicking on a marker) are very long, which leads to many potential overlaps with other projects.',
-      nearby:
-        'This map shows projects that are scheduled close to city hall until the end of the year.  With a little bit more development, users will be able to input an address and view nearby development.  Currently, the map shows the default definition of "nearby" for this map, which is projects within 200 meters of Portland City Hall.',
+      features: 'This is a comprehensive map of all projects in the Right of Way, of any status. The map currently displays projects for the Grind and Pave group for the next several years.  Any feature can be clicked to display details for that feature.',
+      conflicts: 'Projects that appear on this map are potentially close together in time and space.  The default definition of "close" is shown here, which is within 200 meters and 14 days of another project.  In addition, only projects that overlap with the start and end dates show will be displayed. Note that in many cases, the project timelines (which can be viewed below the map by clicking on a marker) are very long, which leads to many potential overlaps with other projects.',
+      nearby: 'This map shows projects that are scheduled close to city hall until the end of the year.  With a little bit more development, users will be able to input an address and view nearby development.  Currently, the map shows the default definition of "nearby" for this map, which is projects within 200 meters of Portland City Hall.',
     };
 
     console.log('RENDERING');
     console.log('GEODATA', this.props.geoData);
     let key = 'tempkey';
     if (this.props.geoData) {
-      key =
-        `${this.props.mapType}_${this.props.geoData.features.length}` ||
-        'tempkey';
+      key = `${this.props.mapType}_${this.props.geoData.features.length}` || 'tempkey';
     }
     // console.log('key', key)
 
@@ -70,16 +67,16 @@ class TransportMap extends Component {
         <LeafletMap center={portland} zoom={11} height={600} width={900}>
           {this.props.geoData && (
             <LayerGroup key={key}>
-              <GeoJSON
-                data={this.props.geoData}
-                onEachFeature={this.onEachFeature}
-              />
+              <GeoJSON data={this.props.geoData} onEachFeature={this.onEachFeature} />
             </LayerGroup>
           )}
         </LeafletMap>
-        {this.props.panelValues ? (
-          <MapPanel panelValues={this.props.panelValues} />
-        ) : null}
+        { this.props.panelValues ?
+          <MapPanel panelValues={this.props.panelValues} /> :
+          null
+        }
+
+
       </div>
     );
   }
@@ -94,11 +91,12 @@ TransportMap.propTypes = {
 };
 
 export default connect(
-  allState => {
+  (allState) => {
     const state = allState.transportation || allState;
     return { panelValues: state.app.panelValues };
   },
   dispatch => ({
     setPanelValues: properties => dispatch(setPanelValues(properties)),
-  })
+  }),
 )(TransportMap);
+

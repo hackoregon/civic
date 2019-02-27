@@ -13,7 +13,7 @@ export class TheShapeOfANeighborhood extends React.Component {
         title="The Shape of a Neighborhood"
         slug="the-shape-of-a-neighborhood"
       >
-        <Placeholder issue="79" />
+        <Placeholder issue="79"/>
       </CivicStoryCard>
     );
   }

@@ -7,24 +7,22 @@ export const getHousingPolicy = createSelector(
   ({ housingPolicy }) => housingPolicy
 );
 
-const addLinks = governments =>
-  governments.map(program => ({
-    ...program,
-    links: [
-      { link: program.link1, link_name: program.link1_name },
-      { link: program.link2, link_name: program.link2_name },
-      { link: program.link3, link_name: program.link3_name },
-    ],
-  }));
+const addLinks = governments => governments.map(program => ({
+  ...program,
+  links: [
+    { link: program.link1, link_name: program.link1_name },
+    { link: program.link2, link_name: program.link2_name },
+    { link: program.link3, link_name: program.link3_name },
+  ],
+}));
 
-const groupByEntity = governments =>
-  groupBy(governments, item => item.government_entity);
+const groupByEntity = governments => groupBy(
+  governments,
+  item => item.government_entity
+);
 
 const getProperty = key =>
-  createSelector(
-    getHousingPolicy,
-    state => state[key]
-  );
+  createSelector(getHousingPolicy, state => state[key]);
 
 export const isLoading = getProperty('pending');
 export const isError = getProperty('error');

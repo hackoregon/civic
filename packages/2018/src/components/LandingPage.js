@@ -31,7 +31,7 @@ const searchSubTitle = css`
   font-weight: 400;
   font-size: 16px;
   font-style: italic;
-  color: #aaa4ab;
+  color: #AAA4AB;
   margin: 0;
 `;
 const logoWrapper = css`
@@ -52,7 +52,7 @@ const missionStatementTitle = css`
 const missionStatement = css`
   font-size: 20px;
   line-height: 1.8;
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik",sans-serif;
   width: 100%;
   margin: 25px 0;
   max-width: 1000px;
@@ -130,6 +130,7 @@ const collectionsLink = css`
   @media (max-width: 850px) {
     right: 3%;
   }
+
 `;
 const leftContainer = css`
   display: block;
@@ -195,7 +196,7 @@ const sectionRightContainer = css`
 `;
 const sectionHeaderTitle = css`
   color: white;
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Rubik',sans-serif;
   font-size: 50px;
   letter-spacing: -1px;
   text-align: left;
@@ -325,8 +326,8 @@ const leftThirdWrapper = css`
   }
 
   p {
-    color: white;
-    line-height: 1.5;
+      color: white;
+      line-height: 1.5;
   }
 
   @media (max-width: 850px) {
@@ -364,7 +365,7 @@ const hackOregonLogoWrapper = css`
 const buttonStyle = css`
   border: 2px solid #ef495c;
   padding: 10px 20px;
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Rubik',sans-serif;
   font-size: 16px;
   color: #ef495c;
   background-color: transparent;
@@ -395,7 +396,7 @@ const iconAndTextWrapper = css`
   }
 
   span {
-    font-family: 'Rubik', sans-serif;
+    font-family: 'Rubik',sans-serif;
     font-size: 16px;
     display: block;
     margin-top: 20px;
@@ -404,6 +405,7 @@ const iconAndTextWrapper = css`
 const donateButton = css`
   margin: 0;
 `;
+
 
 class LandingPage extends React.Component {
   state = {
@@ -421,7 +423,7 @@ class LandingPage extends React.Component {
     });
   }
 
-  handleSearch = input => {
+  handleSearch = (input) => {
     const key = input ? input.toLowerCase() : '';
     const cityResult = cities[key];
 
@@ -436,9 +438,7 @@ class LandingPage extends React.Component {
     const zipResult = zipCodes[key];
 
     if (zipResult) {
-      const cityData = zipResult.city
-        ? cities[zipResult.city.toLowerCase()]
-        : {};
+      const cityData = zipResult.city ? cities[zipResult.city.toLowerCase()] : {};
       return this.setState({
         city: cityData ? cityData.name : zipResult.city,
         state: zipResult.state,
@@ -451,19 +451,13 @@ class LandingPage extends React.Component {
 
   render() {
     const { city, state, imgPath } = this.state;
-    const cityPath = require(`../../assets/cities/${imgPath ||
-      'portland'}.png`);
+    const cityPath = require(`../../assets/cities/${imgPath || 'portland'}.png`);
 
     return (
-      <div
-        className={appWrapper}
-        ref={node => {
-          this.node = node;
-        }}
-      >
+      <div className={appWrapper} ref={(node) => { this.node = node; }}>
         <CanvasParticles />
         <div className={contentWrapper}>
-          <Header title="Civic" />
+        <Header title="Civic" />
 
           {this.props.children}
 
@@ -477,10 +471,7 @@ class LandingPage extends React.Component {
                   CIVIC Software Foundation
                 </div>
                 <div className={sectionHeaderSubtitle}>
-                  CIVIC is a fully open source project. The Civic Software
-                  Foundation supports a network of people, cities, and
-                  organizations who are dedicated to innovating on the CIVIC
-                  Platform.
+                  CIVIC is a fully open source project. The Civic Software Foundation supports a network of people, cities, and organizations who are dedicated to innovating on the CIVIC Platform.
                 </div>
               </div>
             </div>
@@ -488,21 +479,11 @@ class LandingPage extends React.Component {
               <div className={contentLeftContainer}>
                 <div className={listTitle}>Supporting People</div>
                 <div className={listSubTitle}>Vision</div>
-                <p className={listText}>
-                  Empowering cities to create technology that is a reflection
-                  their ambition, their values, and their priorities.
-                </p>
+                <p className={listText}>Empowering cities to create technology that is a reflection their ambition, their values, and their priorities.</p>
                 <div className={listSubTitle}>Workflow</div>
-                <p className={listText}>
-                  Bringing our experience to existing partnerships to reshape
-                  and modernize current infrastructure and create a process to
-                  ensure sustainable outcomes.
-                </p>
+                <p className={listText}>Bringing our experience to existing partnerships to reshape and modernize current infrastructure and create a process to ensure sustainable outcomes.</p>
                 <div className={listSubTitle}>Tactics</div>
-                <p className={listText}>
-                  Helping teams solve technical challenges with proven
-                  implementation strategies.
-                </p>
+                <p className={listText}>Helping teams solve technical challenges with proven implementation strategies.</p>
               </div>
               <div className={brainWrapper}>
                 <img src={brain} />
@@ -513,21 +494,11 @@ class LandingPage extends React.Component {
               <div className={contentRightContainer}>
                 <div className={listTitle}>Supporting Technology</div>
                 <div className={listSubTitle}>Open Data</div>
-                <p className={listText}>
-                  Lowering the barrier to entry for information to be accessible
-                  and secure from the internet so data can be actionable in many
-                  ways.
-                </p>
+                <p className={listText}>Lowering the barrier to entry for information to be accessible and secure from the internet so data can be actionable in many ways.</p>
                 <div className={listSubTitle}>Open Code</div>
-                <p className={listText}>
-                  Designing for maximum interoperability between systems with
-                  reproducible standards that are built to scale.
-                </p>
+                <p className={listText}>Designing for maximum interoperability between systems with reproducible standards that are built to scale.</p>
                 <div className={listSubTitle}>Open Outcomes</div>
-                <p className={listText}>
-                  Enabling transparency in analytical models with live data
-                  sources that power shareable visualizations on the web.
-                </p>
+                <p className={listText}>Enabling transparency in analytical models with live data sources that power shareable visualizations on the web.</p>
               </div>
             </div>
           </div>
@@ -541,56 +512,19 @@ class LandingPage extends React.Component {
             <div className={sectionContentWrapper}>
               <div className={leftThirdWrapper}>
                 <div className={listTitle}>Membership Model for Cities</div>
-                <p className={listText}>
-                  The code for CIVIC is open source and free, but we recognize
-                  cities will be most successful through a supported process.
-                </p>
-                <p className={listText}>
-                  We have resources to help navigate the technical challenges
-                  and strategic opportunities that facilitate long-term goals
-                  for cities engaging with modern data systems.
-                </p>
-                <p className={listText}>
-                  We’re announcing a call to action for cities who want to work
-                  closely with people who are building the CIVIC Platform to
-                  become members and benefit from hands-on collaboration with
-                  our partner network.
-                </p>
-                <a href="http://hackoregon.org/membership">
-                  <button className={buttonStyle}>
-                    Start the conversation
-                  </button>
-                </a>
+                <p className={listText}>The code for CIVIC is open source and free,  but we recognize cities will be most successful through a supported process.</p>
+                <p className={listText}>We have resources to help navigate the technical challenges and strategic opportunities that facilitate long-term goals for cities engaging with modern data systems.</p>
+                <p className={listText}>We’re announcing a call to action for cities who want to work closely with people who are building the CIVIC Platform to become members and benefit from hands-on collaboration with our partner network.</p>
+                <a href="http://hackoregon.org/membership"><button className={buttonStyle}>Start the conversation</button></a>
               </div>
               <div className={rightThirdWrapper}>
                 <div className={listTitle}>Get Involved ✨</div>
-                <div className={listSubTitle}>
-                  Teamwork and building on CIVIC
-                </div>
-                <p className={listText}>
-                  You can help make CIVIC! We’re actively building focus teams
-                  across the country to develop new stories, new features, and
-                  better functionality on the platform. If you’re interested in
-                  collaborating with the people who are creating CIVIC, we’d
-                  love to talk to you.
-                </p>
-                <a href="http://hackoregon.org/joinacivicteam" target="_blank">
-                  <button className={buttonStyle}>Apply now</button>
-                </a>
-                <div className={listSubTitle}>
-                  Collaborate as an industry partner
-                </div>
-                <p className={listText}>
-                  We work with a variety of companies and organizations
-                  dedicated to empowering data driven innovation in cities. It’s
-                  important that CIVIC includes diverse perspectives across
-                  industry sectors whether or not you have experience working
-                  with government or software. Start the conversation by
-                  applying to join our network.
-                </p>
-                <a href="http://hackoregon.org/joinacivicteam" target="_blank">
-                  <button className={buttonStyle}>Apply now</button>
-                </a>
+                <div className={listSubTitle}>Teamwork and building on CIVIC</div>
+                <p className={listText}>You can help make CIVIC!  We’re actively building focus teams across the country to develop new stories, new features, and better functionality on the platform.  If you’re interested in collaborating with the people who are creating CIVIC, we’d love to talk to you.</p>
+                <a href="http://hackoregon.org/joinacivicteam" target="_blank"><button className={buttonStyle}>Apply now</button></a>
+                <div className={listSubTitle}>Collaborate as an industry partner</div>
+                <p className={listText}>We work with a variety of companies and organizations dedicated to empowering data driven innovation in cities. It’s important that CIVIC includes diverse perspectives across industry sectors whether or not you have experience working with government or software. Start the conversation by applying to join our network.</p>
+                <a href="http://hackoregon.org/joinacivicteam" target="_blank"><button className={buttonStyle}>Apply now</button></a>
               </div>
             </div>
           </div>
@@ -604,66 +538,32 @@ class LandingPage extends React.Component {
             <div className={sectionContentWrapper}>
               <div className={cx(rightThirdWrapper, talkToUs)}>
                 <div className={listTitle}>Talk to us</div>
-                <div className={listSubTitle}>
-                  <a href="mailto:hi@civicsoftwarefoundation.org">
-                    hi@civicsoftwarefoundation.org
-                  </a>
-                </div>
-                <div className={listTitle}>
-                  CIVIC launched to the world June 21st, 2018 at Hack Oregon’s
-                  live Demo Day in Portland, Oregon.
-                </div>
-                <div className={listText}>
-                  Please be patient while our website is under construction and
-                  stay tuned as we are able to share new things from the CIVIC
-                  Software Foundation.
-                </div>
+                <div className={listSubTitle}><a href="mailto:hi@civicsoftwarefoundation.org">hi@civicsoftwarefoundation.org</a></div>
+                <div className={listTitle}>CIVIC launched to the world June 21st, 2018 at Hack Oregon’s live Demo Day in Portland, Oregon.</div>
+                <div className={listText}>Please be patient while our website is under construction and stay tuned as we are able to share new things from the CIVIC Software Foundation.</div>
                 <div className={iconAndTextWrapper}>
                   <img src={heartMail} width="60" />
                   <span>Subscribe for updates!</span>
                 </div>
                 <div className={iconAndTextWrapper}>
-                  <a href="https://secure.squarespace.com/checkout/donate?donatePageId=551721b2e4b057e153f5c1cc">
-                    <button className={cx(buttonStyle, donateButton)}>
-                      Donate
-                    </button>
-                  </a>
+                  <a href="https://secure.squarespace.com/checkout/donate?donatePageId=551721b2e4b057e153f5c1cc"><button className={cx(buttonStyle, donateButton)}>Donate</button></a>
                   <span>Help us continue to maintain and develop CIVIC.</span>
                 </div>
                 <div className={iconAndTextWrapper}>
                   <img src={twitterLogo} width="40" />
-                  <span>
-                    <a href="https://twitter.com/civicsoftware">
-                      @civicsoftware
-                    </a>
-                    <br /> #CIVIC4Lyfe
-                  </span>
+                  <span><a href="https://twitter.com/civicsoftware">@civicsoftware</a><br/> #CIVIC4Lyfe</span>
                 </div>
               </div>
               <div className={leftThirdWrapper}>
-                <div className={listTitle}>
-                  CIVIC was developed by Hack Oregon.
-                </div>
-                <p className={listText}>
-                  The original concept, design, and source code for the CIVIC
-                  platform was developed by volunteer teams at Hack Oregon, a
-                  rapid-prototyping lab dedicated to creating open data projects
-                  that bring insight to local information challenges.
-                </p>
-                <p className={listText}>
-                  Hack Oregon is a non-profit program of the CIVIC Software
-                  Foundation.
-                </p>
-                <p className={listText}>
-                  If you live in Portland, you can volunteer to join a team for
-                  our next cycle.
-                </p>
-                <a href="http://hackoregon.org/civicpdx">
-                  <button className={buttonStyle}>Learn more</button>
-                </a>
+                <div className={listTitle}>CIVIC was developed by Hack Oregon.</div>
+                <p className={listText}>The original concept, design, and source code for the CIVIC platform was developed by volunteer teams at Hack Oregon, a rapid-prototyping lab dedicated to creating open data projects that bring insight to local information challenges.</p>
+                <p className={listText}>Hack Oregon is a non-profit program of the CIVIC Software Foundation.</p>
+                <p className={listText}>If you live in Portland, you can volunteer to join a team for our next cycle.</p>
+                <a href="http://hackoregon.org/civicpdx"><button className={buttonStyle}>Learn more</button></a>
               </div>
             </div>
           </div>
+
         </div>
         <Footer />
       </div>

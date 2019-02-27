@@ -8,7 +8,7 @@ import { transportApi } from '../../api';
 export const INITIAL_STATE = {
   stories: [],
   isFetching: false,
-  openModal: null,
+  openModal: null,  
   mapType: 'features',
   conflicts: {
     distance: 100,
@@ -36,14 +36,14 @@ export const INITIAL_STATE = {
 // *** ACTIONS: HOLDS ACTION PAYLOADS IN PLAIN JAVASCRIPT OBJECTS. MUST HAVE A TYPE
 // PROPERTY THAT INDICATES THE PERFORMED ACTION, TYPICALLY BE DE NED AS STRING
 // CONSTANTS. ALL OTHER PROPERTIES ARE THE ACTION'S PAYLOAD. *** //
-export const INIT_APP = 'INIT_APP';
+export const INIT_APP    = 'INIT_APP';
 
 export const GET_FEATURES = 'GET_FEATURES';
 export const GET_FEATURES_SUCCESS = 'GET_FEATURES_SUCCESS';
 export const GET_FEATURES_FAILURE = 'GET_FEATURES_FAILURE';
 
 export const CLOSE_MODAL = 'CLOSE_MODAL';
-export const OPEN_MODAL = 'OPEN_MODAL';
+export const OPEN_MODAL  = 'OPEN_MODAL';
 
 export const SET_PANEL_VALUES = 'SET_PANEL_VALUES';
 export const CLEAR_PANEL_VALUES = 'CLEAR_PANEL_VALUES';
@@ -55,29 +55,21 @@ export const SET_MAP_TYPE = 'SET_MAP_TYPE';
 // INITIALIZE APP ACTION CREATORS //
 export const initializeApp = () => ({ type: INIT_APP });
 
+
 // MODAL ACTION CREATORS //
 export const closeModal = payload => ({ type: CLOSE_MODAL, payload });
 export const openModal = payload => ({ type: OPEN_MODAL, payload });
 
 // RENDER PANEL CREATOR //
 export const setPanelValues = payload => ({ type: SET_PANEL_VALUES, payload });
-export const clearPanelValues = payload => ({
-  type: CLEAR_PANEL_VALUES,
-  payload,
-});
+export const clearPanelValues = payload => ({ type: CLEAR_PANEL_VALUES, payload });
 
 // FIRE API ACTION CREATORS //
 export const getFeatures = payload => ({ type: GET_FEATURES, payload });
-export const getFeaturesSuccess = ({ newMapType, geoData }) => ({
-  type: GET_FEATURES_SUCCESS,
-  payload: { newMapType, geoData },
-});
-export const getFeaturesFailure = error => ({
-  type: GET_FEATURES_FAILURE,
-  error,
-});
+export const getFeaturesSuccess = ({newMapType, geoData }) => ({ type: GET_FEATURES_SUCCESS, payload: {newMapType, geoData} });
+export const getFeaturesFailure = error => ({ type: GET_FEATURES_FAILURE, error });
 
-export const setMapType = payload => ({ type: SET_MAP_TYPE, payload });
+export const setMapType = payload => ({type: SET_MAP_TYPE, payload})
 
 // *** THUNKS: THE THUNK CAN BE USED TO DELAY THE DISPATCH OF AN ACTION, OR TO DISPATCH
 // ONLY IF A CERTAIN CONDITION IS MET. *** //
@@ -88,26 +80,25 @@ export const selectMapThunk = input => (dispatch, getState) => {
   console.log(state);
   // console.log(`inputs ${input}`);
   const newMapType = input || state.app.mapType;
-  console.log(`reducers post set ${newMapType}`);
+  console.log(`reducers post set ${newMapType}`)
   if (newMapType != state.app.mapType) {
-    console.log('diff');
+    console.log('diff')
     dispatch(setMapType(newMapType));
     dispatch(clearPanelValues());
   } else {
-    console.log('NOTHING HAPPENED');
+    console.log('NOTHING HAPPENED')
   }
   // console.log('reducers key')
   // console.log(state['app'][mapType]['data']);
   if (!state['app'][`${newMapType}Data`]) {
     // console.log('reducers no input')
     dispatch(getFeatures(newMapType));
-    return transportApi
-      .getFeatures(newMapType)
-      .then(
-        data => dispatch(getFeaturesSuccess({ geoData: data, newMapType })),
-        err => dispatch(getFeaturesFailure(err))
-      );
+    return transportApi.getFeatures(newMapType).then(
+      data => dispatch(getFeaturesSuccess({geoData: data, newMapType})),
+      err => dispatch(getFeaturesFailure(err)),
+    );
   }
+  
 };
 
 // *** REDUCER: TAKES THE PREVIOUS STATE AND AN ACTION, AND RETURNS THE NEXT STATE. *** //
@@ -145,7 +136,7 @@ export const reducer = (state = INITIAL_STATE, action) => {
       };
 
     case GET_FEATURES_SUCCESS:
-      console.log('success', action.payload);
+      console.log('success', action.payload)
       return {
         ...state,
         // geoData: action.payload.geoData
@@ -162,6 +153,7 @@ export const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         mapType: action.payload,
       };
+
 
     default:
       return state;

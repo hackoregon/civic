@@ -6,15 +6,15 @@ export const getPopulationsState = state => propOr({}, 'populations')(state);
 
 export const getPopulationsRequest = createSelector(
   getPopulationsState,
-  Populations => Populations
+  Populations => Populations,
 );
 
 export const getPopulationsData = createSelector(
   getPopulationsRequest,
-  ({ data }) => data
+  ({ data }) => data,
 );
 
 export const isPopulationsPending = createSelector(
   getPopulationsRequest,
-  ({ pending }) => pending
+  ({ pending }) => pending,
 );

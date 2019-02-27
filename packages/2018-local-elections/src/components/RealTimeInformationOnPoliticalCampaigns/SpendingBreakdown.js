@@ -1,10 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  dollars,
-  numeric,
-} from '@hackoregon/component-library/src/utils/formatters';
+import { dollars, numeric } from '@hackoregon/component-library/src/utils/formatters';
 
 import { HorizontalBarChart } from '@hackoregon/component-library';
 

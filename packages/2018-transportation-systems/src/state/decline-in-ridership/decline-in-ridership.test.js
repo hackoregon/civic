@@ -27,9 +27,7 @@ describe('ridership-over-time', () => {
           type: actions.API_SUCCESS,
           payload,
         };
-        expect(actions.ridershipOverTimeSuccess(payload)).to.eql(
-          expectedAction
-        );
+        expect(actions.ridershipOverTimeSuccess(payload)).to.eql(expectedAction);
       });
 
       it('should have an error action', () => {
@@ -46,7 +44,7 @@ describe('ridership-over-time', () => {
         expect(actions.ridershipOverTimeError(payload)).to.eql(expectedAction);
       });
     });
-    /*
+/*
     describe('ridership-over-time api thunk', () => {
       let store;
 
@@ -83,11 +81,9 @@ describe('ridership-over-time', () => {
     });
 
     it('should handle API_START', () => {
-      expect(
-        reducer(initialState, {
-          type: actions.API_START,
-        })
-      ).to.eql({
+      expect(reducer(initialState, {
+        type: actions.API_START,
+      })).to.eql({
         pending: true,
         error: null,
         data: null,
@@ -95,15 +91,10 @@ describe('ridership-over-time', () => {
     });
 
     it('should handle API_SUCCESS', () => {
-      expect(
-        reducer(
-          { pending: true, error: null, data: null },
-          {
-            type: actions.API_SUCCESS,
-            payload,
-          }
-        )
-      ).to.eql({
+      expect(reducer({ pending: true, error: null, data: null }, {
+        type: actions.API_SUCCESS,
+        payload,
+      })).to.eql({
         error: null,
         pending: false,
         data: payload,
@@ -111,15 +102,10 @@ describe('ridership-over-time', () => {
     });
 
     it('should handle API_ERROR', () => {
-      expect(
-        reducer(
-          { pending: true, error: null, data: null },
-          {
-            type: actions.API_ERROR,
-            payload,
-          }
-        )
-      ).to.eql({
+      expect(reducer({ pending: true, error: null, data: null }, {
+        type: actions.API_ERROR,
+        payload,
+      })).to.eql({
         pending: false,
         error: payload,
         data: null,
@@ -132,121 +118,99 @@ describe('ridership-over-time', () => {
       it('extends the root selector', () => {
         const expectation = { one: 'two', three: 4 };
 
-        expect(
-          selectors.getRidershipOverTimeRequest({
-            ridershipOverTime: expectation,
-          })
-        ).to.eql(expectation);
+        expect(selectors.getRidershipOverTimeRequest({
+          ridershipOverTime: expectation,
+        })).to.eql(expectation);
 
-        expect(
-          selectors.getRidershipOverTimeRequest({
-            red: 'herring',
-            transportation: {
-              ridershipOverTime: expectation,
-            },
-          })
-        ).to.eql(expectation);
+        expect(selectors.getRidershipOverTimeRequest({
+          red: 'herring',
+          transportation: {
+            ridershipOverTime: expectation,
+          },
+        })).to.eql(expectation);
       });
     });
 
     describe('getridershipOverTimeData', () => {
       it('returns undefined when there is no data', () => {
-        expect(
-          selectors.getRidershipOverTimeData({
-            ridershipOverTime: {
-              no: 'data to be seen',
-            },
-          })
-        ).to.be.undefined;
+        expect(selectors.getRidershipOverTimeData({
+          ridershipOverTime: {
+            no: 'data to be seen',
+          },
+        })).to.be.undefined;
       });
 
       it('returns undefined when data has no value for ridershipByYear', () => {
-        expect(
-          selectors.getRidershipOverTimeData({
-            ridershipOverTime: {
-              data: {
-                NotridershipByYear: {},
-              },
+        expect(selectors.getRidershipOverTimeData({
+          ridershipOverTime: {
+            data: {
+              NotridershipByYear: {},
             },
-          })
-        ).to.be.undefined;
+          },
+        })).to.be.undefined;
       });
 
       it('returns processed data when data has a value for ridershipByYear', () => {
         const res = {
-          data: [
-            {
-              year: 2001,
-              weekday_sum_ons: 56500470,
-              weekday_sum_offs: 57186610,
-              saturday_sum_ons: 3797456,
-              saturday_sum_offs: 3853425,
-              sunday_sum_ons: 3710746,
-              sunday_sum_offs: 3762772,
-              num_of_yearly_census: 3,
-              sunday_census: true,
-              saturday_census: true,
-              total_sum_ons: 64008672,
-              total_sum_offs: 64802807,
-            },
-          ],
+          data: [{
+            year: 2001,
+            weekday_sum_ons: 56500470,
+            weekday_sum_offs: 57186610,
+            saturday_sum_ons: 3797456,
+            saturday_sum_offs: 3853425,
+            sunday_sum_ons: 3710746,
+            sunday_sum_offs: 3762772,
+            num_of_yearly_census: 3,
+            sunday_census: true,
+            saturday_census: true,
+            total_sum_ons: 64008672,
+            total_sum_offs: 64802807,
+          }],
         };
-        const processedData = [
-          {
-            type: 'Weekday',
-            year: 2001,
-            ons: 56500470,
+        const processedData = [{
+          type: 'Weekday',
+          year: 2001,
+          ons: 56500470,
+        }, {
+          type: 'Saturday',
+          year: 2001,
+          ons: 3797456,
+        }, {
+          type: 'Sunday',
+          year: 2001,
+          ons: 3710746,
+        }];
+        expect(selectors.getRidershipOverTimeData({
+          ridershipOverTime: {
+            data: res,
           },
-          {
-            type: 'Saturday',
-            year: 2001,
-            ons: 3797456,
-          },
-          {
-            type: 'Sunday',
-            year: 2001,
-            ons: 3710746,
-          },
-        ];
-        expect(
-          selectors.getRidershipOverTimeData({
-            ridershipOverTime: {
-              data: res,
-            },
-          })
-        ).to.eql(processedData);
+        })).to.eql(processedData);
       });
     });
 
     describe('isridershipOverTimePending', () => {
       it('returns false when there is no value for pending', () => {
-        expect(
-          selectors.isRidershipOverTimePending({
-            ridershipOverTime: {
-              no: 'pending property',
-            },
-          })
-        ).to.be.false;
+        expect(selectors.isRidershipOverTimePending({
+          ridershipOverTime: {
+            no: 'pending property',
+          },
+        })).to.be.false;
       });
 
       it('returns false when the value for pending is false', () => {
-        expect(
-          selectors.isRidershipOverTimePending({
-            ridershipOverTime: {
-              pending: false,
-            },
-          })
-        ).to.be.false;
+        expect(selectors.isRidershipOverTimePending({
+          ridershipOverTime: {
+            pending: false,
+          },
+        })).to.be.false;
       });
 
       it('returns true when the value for pending is true', () => {
-        expect(
-          selectors.isRidershipOverTimePending({
-            ridershipOverTime: {
-              pending: true,
-            },
-          })
-        ).to.be.true;
+        expect(selectors.isRidershipOverTimePending({
+          ridershipOverTime: {
+            pending: true,
+          },
+        })).to.be.true;
       });
     });
   });

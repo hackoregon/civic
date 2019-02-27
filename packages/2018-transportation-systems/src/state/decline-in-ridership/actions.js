@@ -9,11 +9,13 @@ export const ridershipOverTimeStart = actionEmitter(API_START);
 export const ridershipOverTimeSuccess = actionEmitter(API_SUCCESS);
 export const ridershipOverTimeError = actionEmitter(API_ERROR);
 
-const DECLINE_IN_RIDERSHIP_API =
-  'http://service.civicpdx.org/transportation-systems/passenger-census/system/annual/total/?format=json';
+const DECLINE_IN_RIDERSHIP_API = 'http://service.civicpdx.org/transportation-systems/passenger-census/system/annual/total/?format=json';
 
-export const fetchRidershipOverTime = apiAdapter(DECLINE_IN_RIDERSHIP_API, {
-  start: ridershipOverTimeStart,
-  success: ridershipOverTimeSuccess,
-  error: ridershipOverTimeError,
-});
+export const fetchRidershipOverTime = apiAdapter(
+  DECLINE_IN_RIDERSHIP_API,
+  {
+    start: ridershipOverTimeStart,
+    success: ridershipOverTimeSuccess,
+    error: ridershipOverTimeError,
+  }
+);

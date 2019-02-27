@@ -34,9 +34,7 @@ describe('request', () => {
         .get('/housing')
         .reply(404, res);
       window.fetch.returns(Promise.reject(res));
-      return request(
-        'http://api.hackoregon.org/housing'
-      ).should.be.rejectedWith('Not Found');
+      return request('http://api.hackoregon.org/housing').should.be.rejectedWith('Not Found');
     });
   });
 });

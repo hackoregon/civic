@@ -3,14 +3,7 @@ import PropTypes from 'prop-types';
 import { RechartsPie } from '@hackoregon/component-library';
 import commaSeparate from '../../utils/comma-separate';
 
-const colors = [
-  '#3e75ac',
-  '#4c8ccd',
-  '#68a3df',
-  '#87baed',
-  '#abd1f7',
-  '#d3e8fd',
-];
+const colors = ['#3e75ac', '#4c8ccd', '#68a3df', '#87baed', '#abd1f7', '#d3e8fd'];
 
 const contentBlockStyle = {
   display: 'inline-block',
@@ -65,7 +58,7 @@ const DemographicDetailView = ({ demographics }) => {
   if (!demographics) return <div />;
   return (
     <div>
-      {demographics && (
+      {demographics &&
         <div style={textAlignCenter}>
           <h2>{demographics.name}</h2>
           <div style={contentBlockStyle}>
@@ -82,17 +75,9 @@ const DemographicDetailView = ({ demographics }) => {
           <div style={contentBlockStyle}>
             <h3 style={textAlignCenter}>Household Totals</h3>
             <div style={numberColumnStyle}>
-              <p style={numberStyle}>
-                {commaSeparate(demographics.households['Households'])}
-              </p>
-              <p style={numberStyle}>
-                {commaSeparate(demographics.households['Single-Person'])}
-              </p>
-              <p style={numberStyle}>
-                {commaSeparate(
-                  demographics.households['Households with Children']
-                )}
-              </p>
+              <p style={numberStyle}>{commaSeparate(demographics.households['Households'])}</p>
+              <p style={numberStyle}>{commaSeparate(demographics.households['Single-Person'])}</p>
+              <p style={numberStyle}>{commaSeparate(demographics.households['Households with Children'])}</p>
             </div>
             <div style={labelColumnStyle}>
               <p>Total Households</p>
@@ -103,19 +88,9 @@ const DemographicDetailView = ({ demographics }) => {
           <div style={contentBlockStyle}>
             <h3 style={textAlignCenter}>Vulnerable Populations</h3>
             <div style={numberColumnStyle}>
-              <p style={numberStyle}>
-                {commaSeparate(
-                  demographics.households['Foreign-Born Individuals']
-                )}
-              </p>
-              <p style={numberStyle}>
-                {commaSeparate(
-                  demographics.households['Persons Exp-Disabilities']
-                )}
-              </p>
-              <p style={numberStyle}>
-                {commaSeparate(demographics.households['Persons 65 and Older'])}
-              </p>
+              <p style={numberStyle}>{commaSeparate(demographics.households['Foreign-Born Individuals'])}</p>
+              <p style={numberStyle}>{commaSeparate(demographics.households['Persons Exp-Disabilities'])}</p>
+              <p style={numberStyle}>{commaSeparate(demographics.households['Persons 65 and Older'])}</p>
             </div>
             <div style={labelColumnStyle}>
               <p>Foreign Born</p>
@@ -124,7 +99,7 @@ const DemographicDetailView = ({ demographics }) => {
             </div>
           </div>
         </div>
-      )}
+      }
     </div>
   );
 };
