@@ -1,11 +1,6 @@
 import React from 'react'; 
 import { storybookStyles } from './storyStyles.js';
 
-const fontBlockStyle = {
-  marginTop: '40px',
-  marginBottom: '45px',
-}
-
 const TypographyStyleCommonSample = () => (
   <div style={storybookStyles.main}>
     <h2>

@@ -50,7 +50,7 @@ const TypographyStyleQuickUsage = () => (
     </div>
     <div style={fontBlockStyle}>
       <h3>
-        Data - needs correcting; shows wrong font type
+        Data (update to show correct font type)
       </h3>
       {/* is there a css class named Data?  Where is it? */}
       <p className="Data" style={storybookStyles.fontSample}>

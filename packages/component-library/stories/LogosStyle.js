@@ -70,7 +70,7 @@ const LogosStyle = () => (
       Inverted
     </h4>
     <p>
-      Use on dark, solid-color backgrounds.
+      Use on a dark, solid-color background.
     </p>
     <div style={storybookStyles.invertedLogo}>
       {/* <CivicLogoInverted alt={invertTitle} /> */}

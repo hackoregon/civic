@@ -46,25 +46,6 @@ const storybookStyles = {
       marginBottom: 0,
     }
   
-    /*
-    link: {
-      color: '#1474f3',
-      textDecoration: 'none',
-      borderBottom: '1px solid #1474f3',
-      paddingBottom: 2,
-    },
-  
-    code: {
-      fontSize: 15,
-      fontWeight: 600,
-      padding: '2px 5px',
-      border: '1px solid #eae9e9',
-      borderRadius: 4,
-      backgroundColor: '#f3f2f2',
-      color: '#3a3a3a',
-    },
-    */
-
   };
 
   export { storybookStyles };
