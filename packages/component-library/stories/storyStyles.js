@@ -39,13 +39,6 @@ const storybookStyles = {
       padding: 0,
     },
 
-    // Display font type
-    fontSample: {
-      fontSize: '2.25em',
-      marginTop: 0,
-      marginBottom: 0,
-    }
-  
   };
 
   export { storybookStyles };

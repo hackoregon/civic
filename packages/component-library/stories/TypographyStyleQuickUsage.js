@@ -1,9 +1,17 @@
 import React from 'react'; 
 import { storybookStyles } from './storyStyles.js';
 
+
+// Display font type
 const fontBlockStyle = {
   marginTop: '40px',
   marginBottom: '45px',
+}
+
+const fontSample = {
+      fontSize: '2.25em',
+      marginTop: 0,
+      marginBottom: 0,
 }
 
 const TypographyStyleQuickUsage = () => (
@@ -19,7 +27,7 @@ const TypographyStyleQuickUsage = () => (
         Brand
       </h3>
       {/* is there a css class named Brand?  Where is it? Make sure this is correct. */}
-      <h2 className="Brand" style={storybookStyles.fontSample}>
+      <h2 className="Brand" style={fontSample}>
         Sofia Pro
       </h2>
       <h4>
@@ -30,7 +38,7 @@ const TypographyStyleQuickUsage = () => (
       <h3>
         Headings
       </h3>
-      <h1 style={storybookStyles.fontSample}>
+      <h1 style={fontSample}>
         Rubik
       </h1>
       <h4>
@@ -41,7 +49,7 @@ const TypographyStyleQuickUsage = () => (
       <h3>
         Paragraphs
       </h3>
-      <p style={storybookStyles.fontSample}>
+      <p style={fontSample}>
         Merriweather
       </p>
       <h4>
@@ -53,7 +61,7 @@ const TypographyStyleQuickUsage = () => (
         Data (update to show correct font type)
       </h3>
       {/* is there a css class named Data?  Where is it? */}
-      <p className="Data" style={storybookStyles.fontSample}>
+      <p style={fontSample}>
         Roboto Condensed
       </p>
       <h4>
