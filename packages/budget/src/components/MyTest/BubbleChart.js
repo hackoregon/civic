@@ -5,7 +5,6 @@ import Bubbles from './Bubbles';
 import { createNodes, width, height, center } from './utils';
 
 class BubleAreaChart extends Component {
-
   constructor(props) {
     super(props);
 
@@ -31,13 +30,15 @@ class BubleAreaChart extends Component {
   render() {
     const { data } = this.state;
     return (
-      <div style={{ display: 'flex', justifyContent: 'space-around', margin: 'auto' }} >
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-around',
+          margin: 'auto',
+        }}
+      >
         <svg className="bubbleChart" width={width} height={height}>
-          <Bubbles
-            data={data}
-            forceStrength={0.02}
-            center={center}
-          />
+          <Bubbles data={data} forceStrength={0.02} center={center} />
         </svg>
       </div>
     );

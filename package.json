@@ -36,7 +36,7 @@
     "storybook": "BABEL_ENV=esm start-storybook -p 6006",
     "test": "lerna run test",
     "travis": "make travis",
-    "pretty": "prettier --write \"./**/*.{js,jsx,json,css,md}\""
+    "pretty": "prettier --write \"./**/*.{js,jsx,css,md}\""
   },
   "husky": {
     "hooks": {
@@ -44,7 +44,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,json,css,md}": [
+    "*.{js,jsx,css,md}": [
       "prettier --write",
       "git add"
     ]

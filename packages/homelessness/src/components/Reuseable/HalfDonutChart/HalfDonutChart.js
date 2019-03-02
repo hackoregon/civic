@@ -1,10 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { PieChart, Pie, ResponsiveContainer, Text, Cell, Legend } from 'recharts';
+import {
+  PieChart,
+  Pie,
+  ResponsiveContainer,
+  Text,
+  Cell,
+  Legend,
+} from 'recharts';
 import { css } from 'emotion';
 
 const containerClass = css`
-  color:#726371;
+  color: #726371;
   font-weight: bold;
   display: flex;
   flex-direction: column;
@@ -27,7 +34,9 @@ class HalfDonutChart extends React.Component {
     this.selectSet = this.selectSet.bind(this);
   }
   getColor(name) {
-    return name === this.state.selectedData.name ? this.state.colors[0] : this.state.colors[1];
+    return name === this.state.selectedData.name
+      ? this.state.colors[0]
+      : this.state.colors[1];
   }
   pieLabel(options) {
     const { cx, cy, payload } = options;
@@ -50,7 +59,9 @@ class HalfDonutChart extends React.Component {
   selectData(payload) {
     this.setState(prevState => ({
       ...prevState,
-      selectedData: this.state.selectedSet.data.find(data => data.name === payload.name),
+      selectedData: this.state.selectedSet.data.find(
+        data => data.name === payload.name
+      ),
     }));
   }
   selectSet(name) {
@@ -63,11 +74,9 @@ class HalfDonutChart extends React.Component {
   }
   render() {
     return (
-      <div className={containerClass} >
+      <div className={containerClass}>
         <ResponsiveContainer width={'100%'} height={225}>
-          <PieChart
-            margin={{ top: 0, right: 5, bottom: 100, left: 5 }}
-          >
+          <PieChart margin={{ top: 0, right: 5, bottom: 100, left: 5 }}>
             <Pie
               startAngle={180}
               endAngle={0}
@@ -80,12 +89,11 @@ class HalfDonutChart extends React.Component {
               label={this.pieLabel}
               onClick={this.selectData}
             >
-              {
-            this.state.selectedSet.data.map(data =>
-              <Cell key={data.name} fill={this.getColor(data.name)} />)
-          }
+              {this.state.selectedSet.data.map(data => (
+                <Cell key={data.name} fill={this.getColor(data.name)} />
+              ))}
             </Pie>
-            { this.props.legend ?
+            {this.props.legend ? (
               <Legend
                 iconType={'circle'}
                 payload={this.state.selectedSet.data.map(data => ({
@@ -96,7 +104,8 @@ class HalfDonutChart extends React.Component {
                 }))}
                 wrapperStyle={{ bottom: '-35px' }}
                 onClick={this.selectData}
-              /> : null }
+              />
+            ) : null}
           </PieChart>
         </ResponsiveContainer>
       </div>

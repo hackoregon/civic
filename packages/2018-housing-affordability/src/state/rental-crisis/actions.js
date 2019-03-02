@@ -30,18 +30,17 @@ export const fetchAllRentalCrisisCities = fetchAdapter(
   }
 );
 
-export const fetchRentalCrisisCity = fetchAdapter(
-  '/api/rentalcrisis/',
-  {
-    encodeParams: (url, city = 'Multnomah County, Oregon') => {
-      const [county, state] = city.split(', ');
-      return `${url}?limit=20&county_name=${spaceEncode(county)}&state_name=${spaceEncode(state)}`;
-    },
-    start: RentalCrisisStart,
-    success: RentalCrisisSuccess,
-    failure: RentalCrisisFailure,
-  }
-);
+export const fetchRentalCrisisCity = fetchAdapter('/api/rentalcrisis/', {
+  encodeParams: (url, city = 'Multnomah County, Oregon') => {
+    const [county, state] = city.split(', ');
+    return `${url}?limit=20&county_name=${spaceEncode(
+      county
+    )}&state_name=${spaceEncode(state)}`;
+  },
+  start: RentalCrisisStart,
+  success: RentalCrisisSuccess,
+  failure: RentalCrisisFailure,
+});
 
 export const setRentalCrisisCity = (city = 'Multnomah County, Oregon') => ({
   type: SET_CITY,

@@ -25,7 +25,13 @@ const SELECTOR_META = {
   features: {
     sourceName: {
       type: 'dropdown',
-      options: ['Grind and Pave', 'Capital Improv. Proj.', 'ROW Closures', 'Pavement Moratorium', 'Street Permits'],
+      options: [
+        'Grind and Pave',
+        'Capital Improv. Proj.',
+        'ROW Closures',
+        'Pavement Moratorium',
+        'Street Permits',
+      ],
       label: 'Source Name',
     },
     startDate: {
@@ -57,7 +63,6 @@ const SELECTOR_META = {
       label: 'End Date',
     },
   },
-
 };
 
 export default SELECTOR_META;

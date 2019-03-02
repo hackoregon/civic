@@ -4,8 +4,16 @@ import { css } from 'emotion';
 
 import '@hackoregon/component-library/assets/vendor/react-select.min.css';
 
-import { BarChart, CivicStoryCard, Dropdown } from '@hackoregon/component-library';
-import { numeric, dollars, year } from '@hackoregon/component-library/src/utils/formatters';
+import {
+  BarChart,
+  CivicStoryCard,
+  Dropdown,
+} from '@hackoregon/component-library';
+import {
+  numeric,
+  dollars,
+  year,
+} from '@hackoregon/component-library/src/utils/formatters';
 
 import {
   fetchAllRaces,
@@ -46,8 +54,8 @@ export class IncreasingVolumeOfMoney extends React.Component {
     } = this.props;
 
     const raceSubtitle = selectedRace
-     ? `Monthly total for all contributions reported in ORESTAR - ${selectedRace}`
-     : `Monthly total for all contributions reported in ORESTAR`
+      ? `Monthly total for all contributions reported in ORESTAR - ${selectedRace}`
+      : `Monthly total for all contributions reported in ORESTAR`;
 
     return (
       <CivicStoryCard
@@ -58,28 +66,32 @@ export class IncreasingVolumeOfMoney extends React.Component {
       >
         <div>
           <strong>Select A Race Type</strong>
-          {raceTypes && <Dropdown
-            value={selectedRace || 'Select a Race'}
-            onChange={setRace}
-            options={raceTypes}
-          />}
+          {raceTypes && (
+            <Dropdown
+              value={selectedRace || 'Select a Race'}
+              onChange={setRace}
+              options={raceTypes}
+            />
+          )}
         </div>
         <section>
-          {allRacesData && (<div>
-            <BarChart
-              data={selectedRaceData || allRacesData}
-              dataKey="date"
-              dataValue="sum"
-              title="Money Raised For Oregon Elections"
-              subtitle={raceSubtitle}
-              yLabel="Money Raised"
-              xLabel="Year"
-              xNumberFormatter={x => year(x)}
-              yNumberFormatter={y => dollars(numeric(y))}
-              barWidth={3}
-              domain={{ x: [2008, 2018] }}
-            />
-          </div>)}
+          {allRacesData && (
+            <div>
+              <BarChart
+                data={selectedRaceData || allRacesData}
+                dataKey="date"
+                dataValue="sum"
+                title="Money Raised For Oregon Elections"
+                subtitle={raceSubtitle}
+                yLabel="Money Raised"
+                xLabel="Year"
+                xNumberFormatter={x => year(x)}
+                yNumberFormatter={y => dollars(numeric(y))}
+                barWidth={3}
+                domain={{ x: [2008, 2018] }}
+              />
+            </div>
+          )}
         </section>
       </CivicStoryCard>
     );
@@ -108,4 +120,3 @@ export default connect(
     },
   })
 )(IncreasingVolumeOfMoney);
-

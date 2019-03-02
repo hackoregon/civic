@@ -17,19 +17,19 @@ export const youAndYourNeighborsCoordsSuccess = actionEmitter(COORDS_SUCCESS);
 export const youAndYourNeighborsCoordsFailure = actionEmitter(COORDS_FAILURE);
 export const youAndYourNeighborsSetCoords = actionEmitter(SET_COORDS);
 
-export const fetchYouAndYourNeighbors = fetchAdapter(
-  `sandbox/slides/poi/`,
-  {
-    start: youAndYourNeighborsStart,
-    success: youAndYourNeighborsSuccess,
-    failure: youAndYourNeighborsFailure,
-  }
-);
+export const fetchYouAndYourNeighbors = fetchAdapter(`sandbox/slides/poi/`, {
+  start: youAndYourNeighborsStart,
+  success: youAndYourNeighborsSuccess,
+  failure: youAndYourNeighborsFailure,
+});
 
 export const fetchYouAndYourNeighborsCoords = fetchAdapter(
   `api/DisasterNeighborhoodGrid/`,
   {
-    encodeParams: (url, coords) => `${url}?lat=${coords.latitude.toPrecision(6).toString()}&long=${coords.longitude.toPrecision(6).toString()}`,
+    encodeParams: (url, coords) =>
+      `${url}?lat=${coords.latitude
+        .toPrecision(6)
+        .toString()}&long=${coords.longitude.toPrecision(6).toString()}`,
     start: youAndYourNeighborsCoordsStart,
     success: youAndYourNeighborsCoordsSuccess,
     failure: youAndYourNeighborsCoordsFailure,

@@ -1,13 +1,13 @@
 import { css } from 'emotion';
 
 export const loader = css`
-  background: #EEE;
+  background: #eee;
   padding: 30px;
 `;
 
 export const error = css`
-  background: #FEE;
-  color: #C00;
+  background: #fee;
+  color: #c00;
   padding: 30px;
 `;
 

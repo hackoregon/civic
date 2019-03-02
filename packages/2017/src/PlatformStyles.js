@@ -106,7 +106,8 @@ const styles = {
         padding: 0;
         color: rgb(114, 99, 113);
 
-        & h3, & h4 {
+        & h3,
+        & h4 {
           color: black;
         }
       }
@@ -119,7 +120,7 @@ const styles = {
   `,
   Hero: css`
     display: flex;
-    background-color: rgba(34, 15, 37,1);
+    background-color: rgba(34, 15, 37, 1);
     height: 50vh;
     min-height: 420px;
     width: 100%;
@@ -152,7 +153,7 @@ const styles = {
     & > h1 {
       font-size: 3em;
       line-height: 1.25em;
-      color: rgba(255,255,255,1);
+      color: rgba(255, 255, 255, 1);
       font-weight: 100;
     }
   `,
@@ -173,7 +174,7 @@ const styles = {
 
       & .Content {
         width: 100%;
-        height:50vh;
+        height: 50vh;
         min-height: 420px;
 
         & h1 {
@@ -181,12 +182,24 @@ const styles = {
           text-transform: uppercase;
           font-size: 5em;
 
-          &.step1 { animation: ${step1} ${animControls}; }
-          &.step2 { animation: ${step2} ${animControls}; }
-          &.step3 { animation: ${step3} ${animControls}; }
-          &.step4 { animation: ${step4} ${animControls}; }
-          &.step5 { animation: ${step5} ${animControls}; }
-          &.step6 { animation: ${step6} ${animControls}; }
+          &.step1 {
+            animation: ${step1} ${animControls};
+          }
+          &.step2 {
+            animation: ${step2} ${animControls};
+          }
+          &.step3 {
+            animation: ${step3} ${animControls};
+          }
+          &.step4 {
+            animation: ${step4} ${animControls};
+          }
+          &.step5 {
+            animation: ${step5} ${animControls};
+          }
+          &.step6 {
+            animation: ${step6} ${animControls};
+          }
         }
       }
 
@@ -226,19 +239,19 @@ const styles = {
     }
   `,
   Tag: css`
-    border: 2px solid rgba(255,255,255,0.85);
+    border: 2px solid rgba(255, 255, 255, 0.85);
     padding: 10px;
     font-family: 'Rubik', sans-serif;
     font-weight: 400;
-    color: rgba(255,255,255,0.85);
+    color: rgba(255, 255, 255, 0.85);
     font-size: 1.25em;
     letter-spacing: 0.025em;
     pointer-events: none;
   `,
   Link: css`
-    border-bottom: 2px solid rgba(255,255,255,0.85);
-    transition: all .2s step-start;
-    color: rgba(255,255,255,0.85);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.85);
+    transition: all 0.2s step-start;
+    color: rgba(255, 255, 255, 0.85);
     padding: 6px 6px 6px 6px;
     font-family: 'Rubik', sans-serif;
     font-weight: 500;
@@ -248,8 +261,8 @@ const styles = {
     }
 
     &:hover {
-      border-color: rgba(255,255,255,1);
-      color: rgba(255,255,255,1);
+      border-color: rgba(255, 255, 255, 1);
+      color: rgba(255, 255, 255, 1);
     }
 
     &:focus {

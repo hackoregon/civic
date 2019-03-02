@@ -1,6 +1,9 @@
 export const DEMOGRAPHICS = [
   { value: 'Avg. Portland Household', label: 'Avg. Portland Household' },
-  { value: '3-Person Extremely Low-Income', label: '3-Person Extremely Low-Income' },
+  {
+    value: '3-Person Extremely Low-Income',
+    label: '3-Person Extremely Low-Income',
+  },
   { value: '3-Person Low-Income', label: '3-Person Low-Income' },
   { value: '3-Person Moderate-Income', label: '3-Person Moderate-Income' },
   { value: 'Couple with Family', label: 'Couple with Family' },

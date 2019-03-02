@@ -19,7 +19,6 @@ class TestComponent extends Component {
       </div>
     );
   }
-
 }
 
 export default connect(
@@ -28,5 +27,5 @@ export default connect(
   }),
   dispatch => ({
     getAgencies: () => dispatch(getAgenciesThunk()),
-  }),
+  })
 )(TestComponent);

@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { css } from 'emotion';
 
-import { CivicStoryCard, BaseMap, ScatterPlotMap } from '@hackoregon/component-library';
+import {
+  CivicStoryCard,
+  BaseMap,
+  ScatterPlotMap,
+} from '@hackoregon/component-library';
 
 import {
   fetchPortlandFarmersMarkets,
@@ -19,15 +23,15 @@ const cardLoading = css`
   width: 100%;
   padding: 50px;
   text-align: center;
-  background: #EEE;
+  background: #eee;
 `;
 
 const cardError = css`
   width: 100%;
   padding: 50px;
   text-align: center;
-  background: #FDD;
-  border: 1px solid #C99;
+  background: #fdd;
+  border: 1px solid #c99;
 `;
 
 export class PortlandFarmersMarkets extends React.Component {
@@ -46,7 +50,11 @@ export class PortlandFarmersMarkets extends React.Component {
     if (isLoading) {
       return <div className={cardLoading}>Loading...</div>;
     } else if (!portlandFarmersMarkets) {
-      return <div className={cardError}>Could not render Farmers Markets Over Time</div>;
+      return (
+        <div className={cardError}>
+          Could not render Farmers Markets Over Time
+        </div>
+      );
     }
 
     return (
@@ -65,10 +73,14 @@ export class PortlandFarmersMarkets extends React.Component {
         </BaseMap>
         {activeMarket && (
           <div>
-            <h3>{activeMarket.Market} ({activeMarket.status})</h3>
+            <h3>
+              {activeMarket.Market} ({activeMarket.status})
+            </h3>
             <dl>
               <dt>When to visit</dt>
-              <dd>{activeMarket.Day}, {activeMarket.Open_Times}</dd>
+              <dd>
+                {activeMarket.Day}, {activeMarket.Open_Times}
+              </dd>
               <dt>Address</dt>
               <dd>{activeMarket.Location}</dd>
               <dt>Time of the year</dt>
@@ -76,14 +88,17 @@ export class PortlandFarmersMarkets extends React.Component {
               <dt>Payment options</dt>
               <dd>{activeMarket.Accepts}</dd>
               <dt>Website</dt>
-              <dd><a href={activeMarket.Website}>{activeMarket.Website}</a></dd>
+              <dd>
+                <a href={activeMarket.Website}>{activeMarket.Website}</a>
+              </dd>
             </dl>
           </div>
         )}
         <h3>Neighborhood Friendly</h3>
         <p>
-          Portland has many farmers' markets and they are well-distributed throughout
-          the inner-city, extending through the westside as well as St. Johns.
+          Portland has many farmers' markets and they are well-distributed
+          throughout the inner-city, extending through the westside as well as
+          St. Johns.
         </p>
         <p>
           East of I-205 is a notable Farmers' Market desert. What could be the

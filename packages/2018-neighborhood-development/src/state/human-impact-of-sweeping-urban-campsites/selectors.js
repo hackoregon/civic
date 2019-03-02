@@ -4,7 +4,8 @@ import { ungroupBy } from '@hackoregon/component-library/src/utils/dataHelpers';
 
 export const getHumanImpactOfSweepingUrbanCampsitesRequest = createSelector(
   rootState,
-  ({ humanImpactOfSweepingUrbanCampsites }) => humanImpactOfSweepingUrbanCampsites,
+  ({ humanImpactOfSweepingUrbanCampsites }) =>
+    humanImpactOfSweepingUrbanCampsites
 );
 
 function toDate(dateStr) {
@@ -15,26 +16,29 @@ function toDate(dateStr) {
 const categories = ['report_count', 'unique_sites_estimate', 'sweep_count'];
 const categorylabels = ['Reports', 'Campsites (estimated)', 'Sweeps'];
 
-const formatData = arr => arr.map(obj => ({
-  date: toDate(obj.date),
-  report_count: obj.report_count,
-  sweep_count: obj.sweep_count,
-  unique_sites_estimate: obj.unique_sites_estimate,
-}));
+const formatData = arr =>
+  arr.map(obj => ({
+    date: toDate(obj.date),
+    report_count: obj.report_count,
+    sweep_count: obj.sweep_count,
+    unique_sites_estimate: obj.unique_sites_estimate,
+  }));
 
 const filterNull = arr => arr.filter(obj => !!obj.value);
 
 export const getHumanImpactOfSweepingUrbanCampsitesData = createSelector(
   getHumanImpactOfSweepingUrbanCampsitesRequest,
-  ({ data }) => data && filterNull(ungroupBy(formatData(data.results), categories, categorylabels)),
+  ({ data }) =>
+    data &&
+    filterNull(ungroupBy(formatData(data.results), categories, categorylabels))
 );
 
 export const isHumanImpactOfSweepingUrbanCampsitesPending = createSelector(
   getHumanImpactOfSweepingUrbanCampsitesRequest,
-  ({ pending }) => !!pending,
+  ({ pending }) => !!pending
 );
 
 export const catchHumanImpactOfSweepingUrbanCampsitesErrors = createSelector(
   getHumanImpactOfSweepingUrbanCampsitesRequest,
-  ({ error }) => error || error,
+  ({ error }) => error || error
 );

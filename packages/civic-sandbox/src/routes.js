@@ -6,10 +6,12 @@ const routes = () => [
     path: 'sandbox',
     name: 'sandbox',
     component: App,
-    childRoutes: [{
-      path: 'map',
-      component: Sandbox,
-    }],
+    childRoutes: [
+      {
+        path: 'map',
+        component: Sandbox,
+      },
+    ],
   },
 ];
 

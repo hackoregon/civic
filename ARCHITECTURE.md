@@ -10,9 +10,9 @@ starting with what it is this repo aims to make.
 
 There are currently three deploy targets:
 
-  1. Component Library (Storybook)
-  2. Civic 2017
-  3. Civic 2018
+1. Component Library (Storybook)
+2. Civic 2017
+3. Civic 2018
 
 **Component Library:** This is a collection of resuable and composable components that can be used in
 any project to quickly create a rich and consistent experience. They are packaged up in a Storybook,
@@ -37,9 +37,9 @@ implemented, such as the home page or an about page.
 For year packages to import arbitrary project packages, a project package must adhere to a consistent interface.
 That interface is for the `index.js` (or main script if different) to export three properties:
 
-  1. **App:** The narrative story component
-  2. **Routes:** The child routes
-  3. **Reducers:** The redux reducers
+1. **App:** The narrative story component
+2. **Routes:** The child routes
+3. **Reducers:** The redux reducers
 
 ### Creating a unified router
 

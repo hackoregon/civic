@@ -24,7 +24,12 @@ const styles = {
 };
 
 const colors = [
-  '#d7075f', '#e34d77', '#ed7690', '#f599ab', '#fbbcc6', '#fedde2',
+  '#d7075f',
+  '#e34d77',
+  '#ed7690',
+  '#f599ab',
+  '#fbbcc6',
+  '#fedde2',
 ];
 
 class ErPieChart extends Component {
