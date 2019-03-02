@@ -5,7 +5,11 @@ import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
-import { routerReducer, routerMiddleware, syncHistoryWithStore } from 'react-router-redux';
+import {
+  routerReducer,
+  routerMiddleware,
+  syncHistoryWithStore,
+} from 'react-router-redux';
 
 // Import routes, reducers, and root component from each project
 import {
@@ -45,12 +49,10 @@ import AboutPage from './components/AboutPage';
 
 // Create a store by combining all project reducers and the routing reducer
 const configureStore = (initialState, history) => {
-  const middlewares = [
-    thunk,
-    routerMiddleware(history),
-  ];
+  const middlewares = [thunk, routerMiddleware(history)];
 
-  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE_ || compose;
+  const composeEnhancers =
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE_ || compose;
   const store = createStore(
     combineReducers({
       routing: routerReducer,
@@ -68,23 +70,26 @@ const configureStore = (initialState, history) => {
 
   // Allow for hot module replacement when applicable (dev mode)
   if (module.hot) {
-    module.hot.accept([
-      '@hackoregon/civic-housing',
-      '@hackoregon/civic-emergency-response',
-      '@hackoregon/transportation',
-      '@hackoregon/civic-homelessness',
-      '@hackoregon/civic-budget',
-    ], () => {
-      const nextRootReducer = combineReducers({
-        routing: routerReducer,
-        housing: require('@hackoregon/civic-housing').Reducers(),
-        emergency: require('@hackoregon/civic-emergency-response').Reducers(),
-        transportation: require('@hackoregon/transportation').Reducers(),
-        homelessness: require('@hackoregon/civic-homelessness').Reducers(),
-        budget: require('@hackoregon/civic-budget').Reducers(),
-      });
-      store.replaceReducer(nextRootReducer);
-    });
+    module.hot.accept(
+      [
+        '@hackoregon/civic-housing',
+        '@hackoregon/civic-emergency-response',
+        '@hackoregon/transportation',
+        '@hackoregon/civic-homelessness',
+        '@hackoregon/civic-budget',
+      ],
+      () => {
+        const nextRootReducer = combineReducers({
+          routing: routerReducer,
+          housing: require('@hackoregon/civic-housing').Reducers(),
+          emergency: require('@hackoregon/civic-emergency-response').Reducers(),
+          transportation: require('@hackoregon/transportation').Reducers(),
+          homelessness: require('@hackoregon/civic-homelessness').Reducers(),
+          budget: require('@hackoregon/civic-budget').Reducers(),
+        });
+        store.replaceReducer(nextRootReducer);
+      }
+    );
   }
 
   return store;
@@ -142,7 +147,11 @@ const routes = {
 // Finally create the application component and render it into the #content element
 const App = () => (
   <Provider store={store}>
-    <Router onUpdate={() => window.scrollTo(0, 0)} history={history} routes={routes} />
+    <Router
+      onUpdate={() => window.scrollTo(0, 0)}
+      history={history}
+      routes={routes}
+    />
   </Provider>
 );
 

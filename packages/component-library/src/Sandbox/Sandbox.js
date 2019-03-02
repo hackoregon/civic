@@ -7,7 +7,6 @@ import CivicSandboxMap from '../CivicSandboxMap/CivicSandboxMap';
 import CivicSandboxTooltip from '../CivicSandboxMap/CivicSandboxTooltip';
 import SandboxDrawer from './SandboxDrawer';
 
-
 const drops = css(`
   flex-grow: 1;
   width: 40%;
@@ -37,9 +36,7 @@ const Sandbox = ({
   tooltipInfo,
 }) => {
   return (
-    <div
-      className={styles}
-    >
+    <div className={styles}>
       <div
         className={css(`
           display:flex;
@@ -59,7 +56,9 @@ const Sandbox = ({
             text-transform: uppercase;
             margin: 0 10px;
           `)}
-          >Data Collection</span>
+          >
+            Data Collection
+          </span>
           <Dropdown
             value={selectedPackage}
             options={Object.keys(data.packages).map(p => ({
@@ -77,13 +76,17 @@ const Sandbox = ({
             text-transform: uppercase;
             margin: 0 10px;
           `)}
-          >Base Map</span>
+          >
+            Base Map
+          </span>
           <Dropdown
             value={selectedFoundation}
-            options={data.packages[selectedPackage].foundations.map(foundation => ({
-              value: foundation,
-              label: data.foundations[foundation].name,
-            }))}
+            options={data.packages[selectedPackage].foundations.map(
+              foundation => ({
+                value: foundation,
+                label: data.foundations[foundation].name,
+              })
+            )}
             onChange={updateFoundation}
             simpleValue
           />
@@ -102,7 +105,6 @@ const Sandbox = ({
           foundationData={foundationData}
           defaultFoundation={defaultFoundation}
         />
-
       </div>
       <div>
         <BaseMap
@@ -118,10 +120,7 @@ const Sandbox = ({
             onClick={onFoundationClick}
             onHoverSlide={onSlideHover}
           >
-            { tooltipInfo && (
-              <CivicSandboxTooltip tooltipData={tooltipInfo}/>
-              )
-            }
+            {tooltipInfo && <CivicSandboxTooltip tooltipData={tooltipInfo} />}
           </CivicSandboxMap>
         </BaseMap>
       </div>

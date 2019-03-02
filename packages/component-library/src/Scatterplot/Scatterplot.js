@@ -12,7 +12,12 @@ import {
 import ChartContainer from '../ChartContainer';
 import SimpleLegend from '../SimpleLegend';
 import { numeric } from '../utils/formatters';
-import { chartEvents, getDefaultDomain, getDefaultDataSeriesLabels, getDefaultFillStyle } from '../utils/chartHelpers';
+import {
+  chartEvents,
+  getDefaultDomain,
+  getDefaultDataSeriesLabels,
+  getDefaultFillStyle,
+} from '../utils/chartHelpers';
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
 
 /*
@@ -73,11 +78,12 @@ const Scatterplot = ({
 
   return (
     <ChartContainer title={title} subtitle={subtitle}>
-      {legendData && (
-        legendComponent ?
-        legendComponent(legendData) :
-        <SimpleLegend className="legend" legendData={legendData} />
-      )}
+      {legendData &&
+        (legendComponent ? (
+          legendComponent(legendData)
+        ) : (
+          <SimpleLegend className="legend" legendData={legendData} />
+        ))}
 
       <VictoryChart
         domain={chartDomain}
@@ -125,11 +131,15 @@ const Scatterplot = ({
           bubbleProperty="bubbleSize"
           minBubbleSize={size && size.minSize}
           maxBubbleSize={size && size.maxSize}
-//        categories={{ x: categoryData }}
+          //        categories={{ x: categoryData }}
           data={data.map(d => ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],
-            label: `${dataKeyLabel ? d[dataKeyLabel] : xLabel}: ${xNumberFormatter(d[dataKey])} • ${dataValueLabel ? d[dataValueLabel] : yLabel}: ${yNumberFormatter(d[dataValue])}`,
+            label: `${
+              dataKeyLabel ? d[dataKeyLabel] : xLabel
+            }: ${xNumberFormatter(d[dataKey])} • ${
+              dataValueLabel ? d[dataValueLabel] : yLabel
+            }: ${yNumberFormatter(d[dataValue])}`,
             series: d[dataSeries],
             ...(size && { bubbleSize: d[size.key] }),
           }))}
@@ -157,7 +167,7 @@ const Scatterplot = ({
 
 Scatterplot.propTypes = {
   data: PropTypes.arrayOf(
-    PropTypes.shape({ x: PropTypes.number, y: PropTypes.number }),
+    PropTypes.shape({ x: PropTypes.number, y: PropTypes.number })
   ),
   dataKey: PropTypes.string,
   dataKeyLabel: PropTypes.string,
@@ -165,10 +175,14 @@ Scatterplot.propTypes = {
   dataValueLabel: PropTypes.string,
   dataSeries: PropTypes.string,
   dataSeriesLabel: PropTypes.arrayOf(
-    PropTypes.shape({ category: PropTypes.string, label: PropTypes.string }),
+    PropTypes.shape({ category: PropTypes.string, label: PropTypes.string })
   ),
   domain: PropTypes.objectOf(PropTypes.array),
-  size: PropTypes.shape({ key: PropTypes.string, minSize: PropTypes.number, maxSize: PropTypes.number }),
+  size: PropTypes.shape({
+    key: PropTypes.string,
+    minSize: PropTypes.number,
+    maxSize: PropTypes.number,
+  }),
   style: PropTypes.objectOf(PropTypes.object),
   title: PropTypes.string,
   subtitle: PropTypes.string,
@@ -194,8 +208,8 @@ Scatterplot.defaultProps = {
   style: null,
   title: null,
   subtitle: null,
-  xLabel: "X",
-  yLabel: "Y",
+  xLabel: 'X',
+  yLabel: 'Y',
   xNumberFormatter: numeric,
   yNumberFormatter: numeric,
   invertX: false,

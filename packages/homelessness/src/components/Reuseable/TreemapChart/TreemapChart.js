@@ -4,7 +4,7 @@ import { Treemap, ResponsiveContainer } from 'recharts';
 
 const COLORS = ['#75568D', '#e3dde8'];
 
-const Content = (options) => {
+const Content = options => {
   const { x, y, width, height, value, name, index } = options;
   const textStyle = {
     textAlign: 'left',
@@ -26,11 +26,11 @@ const Content = (options) => {
         }}
       />
       <foreignObject x={x + 10} y={y - 5} width={width - 10}>
-        <p xmlns="http://www.w3.org/1999/xhtml" style={textStyle} >
-          {name}<b>                                                                                  {value}%</b>
+        <p xmlns="http://www.w3.org/1999/xhtml" style={textStyle}>
+          {name}
+          <b> {value}%</b>
         </p>
       </foreignObject>
-
     </g>
   );
 };

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import DeckGL, { PolygonLayer } from 'deck.gl';
 
-const BoundaryMap = (props) => {
+const BoundaryMap = props => {
   const {
     viewport,
     data,
@@ -17,10 +17,7 @@ const BoundaryMap = (props) => {
 
   return (
     <div>
-      <DeckGL
-        className={'DeckGL'}
-        {...viewport}
-      >
+      <DeckGL className={'DeckGL'} {...viewport}>
         <PolygonLayer
           id={'polygon-layer'}
           className={'BoundaryMap'}
@@ -36,7 +33,7 @@ const BoundaryMap = (props) => {
           stroked={true}
           getFillColor={getFillColor}
           filled={filled}
-          updateTriggers={{getLineColor: getLineColor}}
+          updateTriggers={{ getLineColor: getLineColor }}
         />
       </DeckGL>
     </div>
@@ -58,11 +55,11 @@ BoundaryMap.propTypes = {
 
 BoundaryMap.defaultProps = {
   opacity: 1,
-  getLineColor: d => [255,0,0,255],
+  getLineColor: d => [255, 0, 0, 255],
   getLineWidth: d => 40,
   lineWidthScale: 1,
   lineJointRounded: false,
-  getFillColor: d => [0,0,0,0],
+  getFillColor: d => [0, 0, 0, 0],
   filled: false,
 };
 

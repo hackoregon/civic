@@ -16,7 +16,7 @@ const defaultStyles = css`
     max-width: 700px;
     font-size: 18px;
     margin-bottom: 1.5em;
-    line-height:1.8;
+    line-height: 1.8;
 
     &.transition {
       margin: 80px auto;
@@ -27,7 +27,13 @@ const defaultStyles = css`
     }
   }
 
-  & > p, & > h1, & > h2, & > h3, & > h4, & > h5, & > h6 {
+  & > p,
+  & > h1,
+  & > h2,
+  & > h3,
+  & > h4,
+  & > h5,
+  & > h6 {
     margin: auto;
     @media (max-width: 640px) {
       width: 90%;
@@ -35,18 +41,30 @@ const defaultStyles = css`
   }
 `;
 
-const PageLayout = ({ heroTitle, heroSubtitle, mainProjectColor, teamTitle, overlay, children, attribution }) => (
+const PageLayout = ({
+  heroTitle,
+  heroSubtitle,
+  mainProjectColor,
+  teamTitle,
+  overlay,
+  children,
+  attribution,
+}) => (
   <div>
-    <Header title="Civic" mainProjectColor={mainProjectColor} overlay={overlay || false} />
-    { heroTitle && <CollectionHero
-      teamTitle={teamTitle}
-      heroTitle={heroTitle}
-      heroSubtitle={heroSubtitle}
+    <Header
+      title="Civic"
       mainProjectColor={mainProjectColor}
-    /> }
-    <div className={defaultStyles}>
-      {children}
-    </div>
+      overlay={overlay || false}
+    />
+    {heroTitle && (
+      <CollectionHero
+        teamTitle={teamTitle}
+        heroTitle={heroTitle}
+        heroSubtitle={heroSubtitle}
+        mainProjectColor={mainProjectColor}
+      />
+    )}
+    <div className={defaultStyles}>{children}</div>
     <Footer attribution={attribution} />
   </div>
 );

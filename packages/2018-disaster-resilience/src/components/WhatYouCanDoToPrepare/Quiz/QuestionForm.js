@@ -22,9 +22,11 @@ const formClass = css`
 
 const QuestionForm = ({ back, next, done, questionId }) => (
   <div>
-    {questionId === 1 ?
-      <h2>Create your individual check list by answering the following questions:</h2> :
-    null}
+    {questionId === 1 ? (
+      <h2>
+        Create your individual check list by answering the following questions:
+      </h2>
+    ) : null}
     <Question
       question={QRMap[questionId - 1].question}
       questionId={questionId}
@@ -59,45 +61,35 @@ const QuestionForm = ({ back, next, done, questionId }) => (
     </form>
     <Recommendation recommendation={QRMap[questionId - 1].note} />
     <div className="button-container">
-      {questionId === 1 &&
-        <Button onClick={e => next(e)}>
-          Next
-        </Button>
-      }
-      {questionId !== 1 && questionId < QRMap.length &&
-      <div>
-        <Button
-          display="inline"
-          margin="0px 10px 0px 0px"
-          onClick={e => back(e)}
-        >
-          Back
-        </Button>
-        <Button
-          display="inline"
-          onClick={e => next(e)}
-        >
-          Next
-        </Button>
-      </div>
-      }
-      {questionId === QRMap.length &&
-      <div>
-        <Button
-          display="inline"
-          margin="0px 10px 0px 0px"
-          onClick={e => back(e)}
-        >
-          Back
-        </Button>
-        <Button
-          display="inline"
-          onClick={e => done(e)}
-        >
-          Done
-        </Button>
-      </div>
-      }
+      {questionId === 1 && <Button onClick={e => next(e)}>Next</Button>}
+      {questionId !== 1 && questionId < QRMap.length && (
+        <div>
+          <Button
+            display="inline"
+            margin="0px 10px 0px 0px"
+            onClick={e => back(e)}
+          >
+            Back
+          </Button>
+          <Button display="inline" onClick={e => next(e)}>
+            Next
+          </Button>
+        </div>
+      )}
+      {questionId === QRMap.length && (
+        <div>
+          <Button
+            display="inline"
+            margin="0px 10px 0px 0px"
+            onClick={e => back(e)}
+          >
+            Back
+          </Button>
+          <Button display="inline" onClick={e => done(e)}>
+            Done
+          </Button>
+        </div>
+      )}
     </div>
   </div>
 );

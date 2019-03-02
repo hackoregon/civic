@@ -3,7 +3,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { css } from 'emotion';
-import { BarChart, Bar, XAxis, YAxis, Text, Legend, ResponsiveContainer } from 'recharts';
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Text,
+  Legend,
+  ResponsiveContainer,
+} from 'recharts';
 import { Dropdown, StoryCard } from '@hackoregon/component-library';
 import shared from '../shared.styles';
 
@@ -18,10 +26,16 @@ import {
 
 const COLORS = ['#75568D', '#e3dde8'];
 const valueLabel = options => (
-  <Text {...options} fill={'#201024'} >{`${options.value}%`}</Text>
+  <Text {...options} fill={'#201024'}>{`${options.value}%`}</Text>
 );
 const axisLabel = options => (
-  <Text {...options} fill={'#201024'} y={options.y - 45} width={200} style={{ fontWeight: 'bold' }}>
+  <Text
+    {...options}
+    fill={'#201024'}
+    y={options.y - 45}
+    width={200}
+    style={{ fontWeight: 'bold' }}
+  >
     {options.payload.value}
   </Text>
 );
@@ -35,7 +49,7 @@ const containerClass = css`
 const selectContainerClass = css`
   margin-top: 50px;
   margin: 0 30px;
-  padding-bottom:13px;
+  padding-bottom: 13px;
   width: 300px;
 `;
 
@@ -52,20 +66,24 @@ class HomelessPopulation extends React.Component {
       ],
       value: 'ethnicity',
       footnote: {
-        Ethnicity: 'All race data in this report are presented as an over-count, which means ' +
-        'individuals were encouraged to select as many categories of race, ethnicity, or national' +
-        'origin as apply and they were counted within each category. For that reason, the ' +
-        'percentages may add up to more than 100.',
-        'Veteran Status': 'People who have served in the US military are included in Multnomah ' +
-        'county’s homeless population.\nIn 2015, 11% of the homeless have served in the US ' +
-        'military. Of those, 39% stayed in transitional housing, 47% were unsheltered and 14% ' +
-        'stayed in emergency shelters.',
-        Disability: 'A disabling condition is an injury, illness or chronic health condition. ' +
-        'These categories may include mental health and substance abuse as well as use of ' +
-        'equipment, such as wheelchair use.\n41% of the homeless with a disabling condition were ' +
-        'living unsheltered in 2015.',
-        Gender: 'While the Point-in-Time Count includes transgender as an option, the American ' +
-        'Community Survey (ACS) only includes male and female.',
+        Ethnicity:
+          'All race data in this report are presented as an over-count, which means ' +
+          'individuals were encouraged to select as many categories of race, ethnicity, or national' +
+          'origin as apply and they were counted within each category. For that reason, the ' +
+          'percentages may add up to more than 100.',
+        'Veteran Status':
+          'People who have served in the US military are included in Multnomah ' +
+          'county’s homeless population.\nIn 2015, 11% of the homeless have served in the US ' +
+          'military. Of those, 39% stayed in transitional housing, 47% were unsheltered and 14% ' +
+          'stayed in emergency shelters.',
+        Disability:
+          'A disabling condition is an injury, illness or chronic health condition. ' +
+          'These categories may include mental health and substance abuse as well as use of ' +
+          'equipment, such as wheelchair use.\n41% of the homeless with a disabling condition were ' +
+          'living unsheltered in 2015.',
+        Gender:
+          'While the Point-in-Time Count includes transgender as an option, the American ' +
+          'Community Survey (ACS) only includes male and female.',
         Age: '',
       },
     };
@@ -81,13 +99,14 @@ class HomelessPopulation extends React.Component {
       <StoryCard title="Homeless Population">
         <div className={containerClass}>
           <p style={shared.text}>
-              The graph below displays the percent of each type of homeless demographic against the
-              same demographic for the general population.
+            The graph below displays the percent of each type of homeless
+            demographic against the same demographic for the general population.
           </p>
 
           <p style={shared.text}>
-              People experiencing homelessness are more likely to be people of color, male, and more
-              likely to have a disabling condition than Multnomah County residents as a whole.
+            People experiencing homelessness are more likely to be people of
+            color, male, and more likely to have a disabling condition than
+            Multnomah County residents as a whole.
           </p>
           <div className={selectContainerClass}>
             <Dropdown
@@ -97,7 +116,7 @@ class HomelessPopulation extends React.Component {
               clearable={false}
             />
           </div>
-          <ResponsiveContainer width="100%" height={'100%'} minHeight={400} >
+          <ResponsiveContainer width="100%" height={'100%'} minHeight={400}>
             <BarChart
               data={this.props[this.state.value]}
               layout={'vertical'}
@@ -160,7 +179,7 @@ const mapDispatchToProps = dispatch => ({
   loadData: () => fetchPopulationData(dispatch),
 });
 
-const mapStateToProps = (allState) => {
+const mapStateToProps = allState => {
   const state = allState.homelessness || allState;
   return {
     ethnicity: ethnicity(state),
@@ -172,5 +191,6 @@ const mapStateToProps = (allState) => {
 };
 
 export default connect(
-  mapStateToProps, mapDispatchToProps,
+  mapStateToProps,
+  mapDispatchToProps
 )(HomelessPopulation);

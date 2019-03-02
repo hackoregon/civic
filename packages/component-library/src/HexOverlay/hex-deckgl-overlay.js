@@ -1,6 +1,6 @@
 /* global window */
-import React, {Component} from 'react';
-import DeckGL, {HexagonLayer} from 'deck.gl';
+import React, { Component } from 'react';
+import DeckGL, { HexagonLayer } from 'deck.gl';
 
 const LIGHT_SETTINGS = {
   lightsPosition: [-0.144528, 49.739968, 8000, -3.807751, 54.104682, 8000],
@@ -8,7 +8,7 @@ const LIGHT_SETTINGS = {
   diffuseRatio: 0.6,
   specularRatio: 0.2,
   lightsStrength: [0.8, 0.0, 0.8, 0.0],
-  numberOfLights: 2
+  numberOfLights: 2,
 };
 
 const colorRange = [
@@ -17,15 +17,15 @@ const colorRange = [
   [216, 254, 181],
   [254, 237, 177],
   [254, 173, 84],
-  [209, 55, 78]
+  [209, 55, 78],
 ];
 
-const elevationScale = {min: 1, max: 50};
+const elevationScale = { min: 1, max: 50 };
 
 const defaultProps = {
   radius: 1000,
   upperPercentile: 100,
-  coverage: 1
+  coverage: 1,
 };
 
 export default class DeckGLOverlay extends Component {
@@ -41,7 +41,7 @@ export default class DeckGLOverlay extends Component {
       minZoom: 5,
       maxZoom: 15,
       pitch: 40.5,
-      bearing: -27.396674584323023
+      bearing: -27.396674584323023,
     };
   }
 
@@ -50,7 +50,7 @@ export default class DeckGLOverlay extends Component {
     this.startAnimationTimer = null;
     this.intervalTimer = null;
     this.state = {
-      elevationScale: elevationScale.min
+      elevationScale: elevationScale.min,
     };
 
     this._startAnimate = this._startAnimate.bind(this);
@@ -91,12 +91,20 @@ export default class DeckGLOverlay extends Component {
     if (this.state.elevationScale === elevationScale.max) {
       this._stopAnimate();
     } else {
-      this.setState({elevationScale: this.state.elevationScale + 1});
+      this.setState({ elevationScale: this.state.elevationScale + 1 });
     }
   }
 
   render() {
-    const {viewport, data, opacity, radius, elevation, coverage, upperPercentile} = this.props;
+    const {
+      viewport,
+      data,
+      opacity,
+      radius,
+      elevation,
+      coverage,
+      upperPercentile,
+    } = this.props;
 
     if (!data) {
       return null;
@@ -117,8 +125,8 @@ export default class DeckGLOverlay extends Component {
         opacity,
         pickable: Boolean(this.props.onHover),
         radius,
-        upperPercentile
-      })
+        upperPercentile,
+      }),
     ];
 
     return <DeckGL {...viewport} layers={layers} />;

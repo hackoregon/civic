@@ -22,7 +22,6 @@ const menu = [
   },
 ];
 
-
 export const RootPage = props => (
   <div>
     <Header title="Civic" menu={menu} overlay={isRoot(props.location)} />
@@ -32,4 +31,7 @@ export const RootPage = props => (
 
 RootPage.displayName = 'Root';
 
-export default connect(() => ({}), () => ({}))(RootPage);
+export default connect(
+  () => ({}),
+  () => ({})
+)(RootPage);

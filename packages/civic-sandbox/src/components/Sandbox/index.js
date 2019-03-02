@@ -60,13 +60,15 @@ class SandboxComponent extends React.Component {
       this.props.fetchSlides(nextProps.slidesData);
     }
   }
-  updateSlide = (selectedSlide) => {
-    const selectedSlides = isArray(selectedSlide) ? selectedSlide : selectedSlide.split(',');
+  updateSlide = selectedSlide => {
+    const selectedSlides = isArray(selectedSlide)
+      ? selectedSlide
+      : selectedSlide.split(',');
     this.props.setSlides(selectedSlides);
-  }
+  };
   toggleDrawer = () => {
     this.setState({ drawerVisible: !this.state.drawerVisible });
-  }
+  };
   render() {
     const styles = css(`
     font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
@@ -76,32 +78,35 @@ class SandboxComponent extends React.Component {
       font-size: 1.5rem;
       width: 100%;
       text-align: center;
-      font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
+      font-family: 'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif;
     `;
 
     const layerData = [this.props.layerFoundation, ...this.props.layerSlides];
-    return this.props.isLoading ? <div className={loading}>Loading...</div> :
-    <Sandbox
-      layerData={layerData}
-      updateFoundation={this.props.setFoundation}
-      updateSlide={this.updateSlide}
-      toggleDrawer={this.toggleDrawer}
-      fetchSlideDataByDate={this.props.fetchSlideByDate}
-      updatePackage={this.props.setPackage}
-      styles={styles}
-      data={this.props.sandboxData}
-      selectedPackage={this.props.selectedPackage}
-      selectedFoundation={this.props.selectedFoundation}
-      selectedSlide={this.props.selectedSlide}
-      drawerVisible={this.state.drawerVisible}
-      slideData={this.props.selectedSlidesData}
-      defaultSlides={this.props.slidesData}
-      foundationData={this.props.selectedFoundationData}
-      defaultFoundation={this.props.foundationData}
-      onFoundationClick={this.props.foundationClick}
-      onSlideHover={this.props.slideHover}
-      tooltipInfo={this.props.selectedSlideDatum}
-    />;
+    return this.props.isLoading ? (
+      <div className={loading}>Loading...</div>
+    ) : (
+      <Sandbox
+        layerData={layerData}
+        updateFoundation={this.props.setFoundation}
+        updateSlide={this.updateSlide}
+        toggleDrawer={this.toggleDrawer}
+        fetchSlideDataByDate={this.props.fetchSlideByDate}
+        updatePackage={this.props.setPackage}
+        styles={styles}
+        data={this.props.sandboxData}
+        selectedPackage={this.props.selectedPackage}
+        selectedFoundation={this.props.selectedFoundation}
+        selectedSlide={this.props.selectedSlide}
+        drawerVisible={this.state.drawerVisible}
+        slideData={this.props.selectedSlidesData}
+        defaultSlides={this.props.slidesData}
+        foundationData={this.props.selectedFoundationData}
+        defaultFoundation={this.props.foundationData}
+        onFoundationClick={this.props.foundationClick}
+        onSlideHover={this.props.slideHover}
+        tooltipInfo={this.props.selectedSlideDatum}
+      />
+    );
   }
 }
 

@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { selectMapThunk } from '../../state';
 
 class SelectorButtons extends Component {
-
   render() {
     const styles = {
       display: 'flex',
@@ -43,5 +42,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(SelectorButtons);
-
+export default connect(
+  null,
+  mapDispatchToProps
+)(SelectorButtons);

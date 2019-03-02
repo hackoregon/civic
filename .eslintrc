@@ -1,11 +1,12 @@
 {
   "parser": "babel-eslint",
-  "extends": "airbnb",
+  "extends": ["airbnb", "plugin:prettier/recommended"],
   "env": {
     "mocha": true
   },
   "plugins": [
-    "react"
+    "react",
+    "prettier"
   ],
   "rules": {
     "jsx-a11y/img-has-alt": 0,

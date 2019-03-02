@@ -3,8 +3,8 @@ import invariant from 'invariant';
 import createReducer from '../state';
 
 const isFunc = is(Function);
-const isStr  = is(String);
-const isObj  = is(Object);
+const isStr = is(String);
+const isObj = is(Object);
 
 export function checkStore(store) {
   const source = new Map([
@@ -15,10 +15,12 @@ export function checkStore(store) {
     ['asyncReducers', isObj],
   ]);
 
-  for (const [key, value] of source) { // eslint-disable-line
+  for (const [key, value] of source) {
+    // eslint-disable-line
     if (!value(store[key])) {
-      invariant(false,
-        `(app/utils...) asyncInjectors: Expected a valid redux store. Check ${key}.`,
+      invariant(
+        false,
+        `(app/utils...) asyncInjectors: Expected a valid redux store. Check ${key}.`
       );
     }
   }
@@ -30,7 +32,7 @@ export function injectAsyncReducer(store, isValid) {
 
     invariant(
       isStr(name) && !isEmpty(name) && isFunc(asyncReducer),
-      '(app/utils...) injectAsyncReducer: Expected `asyncReducer` to be a reducer function',
+      '(app/utils...) injectAsyncReducer: Expected `asyncReducer` to be a reducer function'
     );
 
     if (Reflect.has(store.asyncReducers, name)) return;
@@ -39,7 +41,6 @@ export function injectAsyncReducer(store, isValid) {
     store.replaceReducer(createReducer(store.asyncReducers));
   };
 }
-
 
 export function getAsyncReducer(store) {
   checkStore(store);

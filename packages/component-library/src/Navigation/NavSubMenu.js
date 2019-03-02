@@ -37,7 +37,7 @@ const nestedMenuClass = css`
     z-index: 999;
     margin-top: 0;
     width: 200px;
-    background-color: #FFF;
+    background-color: #fff;
     padding: 20px;
     transition: all 0.5s cubic-bezier(0.42, 0, 0.14, 1);
 
@@ -49,7 +49,7 @@ const nestedMenuClass = css`
       margin-left: -24px;
       border-width: 12px;
       border-style: solid;
-      border-color: transparent transparent #FFF transparent;
+      border-color: transparent transparent #fff transparent;
     }
 
     & a {
@@ -70,13 +70,14 @@ const nestedMenuClass = css`
 const pathOrName = (p, n) => p || `/${n.toLowerCase()}`;
 
 const NavSubMenu = ({ items, isVisible }) => (
-  <div className={`${nestedMenuClass} ${isVisible ? visibleClass : hiddenClass}`}>
+  <div
+    className={`${nestedMenuClass} ${isVisible ? visibleClass : hiddenClass}`}
+  >
     {items.map((item, index) => (
-      <Link key={index} to={pathOrName(item.path, item.name)} >
+      <Link key={index} to={pathOrName(item.path, item.name)}>
         <span className="nested-menu-link">{item.name}</span>
       </Link>
-    ))
-    }
+    ))}
   </div>
 );
 

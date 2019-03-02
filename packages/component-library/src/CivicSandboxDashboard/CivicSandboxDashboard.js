@@ -6,7 +6,7 @@ import { numeric, percentage } from '../utils/formatters';
 import { css } from 'emotion';
 
 const dashboard = css`
-  background: rgba(255, 255, 255, 1.0);
+  background: rgba(255, 255, 255, 1);
   color: #000;
   width: 34%;
   min-height: 300px;
@@ -73,7 +73,7 @@ const donutChart = css`
   margin: 1% 2% 2% 7.5%;
   height: 75%;
   overflow-y: hidden;
-  @media(max-width: 900px) {
+  @media (max-width: 900px) {
     max-height: 400px;
   }
 `;
@@ -82,7 +82,7 @@ class CivicDashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      show: "viz",
+      show: 'viz',
     };
 
     this.showInfo = this.showInfo.bind(this);
@@ -91,104 +91,110 @@ class CivicDashboard extends React.Component {
 
   showInfo() {
     this.setState({
-      show: "info",
+      show: 'info',
     });
   }
 
   showViz() {
     this.setState({
-      show: "viz",
+      show: 'viz',
     });
   }
 
   render() {
-    const {
-      data,
-      children,
-    } = this.props;
+    const { data, children } = this.props;
 
     const visualizations = data.map((object, index) => {
-      return (
-        object.visualizationType === "Text" ? (
-          <div className={viz} key={index}>
-            <h2>{ object.title }</h2>
-            <p>{ object.data.toLocaleString() }</p>
+      return object.visualizationType === 'Text' ? (
+        <div className={viz} key={index}>
+          <h2>{object.title}</h2>
+          <p>{object.data.toLocaleString()}</p>
+        </div>
+      ) : object.visualizationType === 'PercentDonut' ? (
+        <div className={donutChart} key={index}>
+          <h2>{object.title}</h2>
+          <h2 style={{ textAlign: 'center', margin: 'auto', width: '50%' }}>
+            {object.data[0].y < 1
+              ? percentage(object.data[0].y)
+              : object.data[0].y.toFixed(1) + '%'}
+          </h2>
+          <PieChart
+            data={object.data}
+            colors={['#19b7aa', '#a9a9a9']}
+            width={475}
+            height={375}
+            innerRadius={90}
+            halfDoughnut={true}
+          />
+        </div>
+      ) : object.visualizationType === 'ComparisonBar' ? (
+        <div className={viz} key={index}>
+          <h2>{object.title}</h2>
+          <HorizontalBarChart
+            minimalist={object.minimalist}
+            data={object.data}
+            sortOrder={object.sortOrder}
+            dataValue={object.dataValue}
+            dataLabel={object.dataLabel}
+            dataKeyLabel={''}
+            title={''}
+            subtitle={''}
+            xLabel={''}
+            yLabel={''}
+          />
+        </div>
+      ) : object.visualizationType === 'Legend' ? (
+        <div className={viz} key={index}>
+          <h2>{object.title}</h2>
+          <div style={{ display: 'flex', flexDirection: 'row' }}>
+            {object.colors.map((d, i, arr) => {
+              return (
+                <div
+                  style={{
+                    background: d,
+                    height: '40px',
+                    width: `${100 / arr.length}%`,
+                  }}
+                  key={'legend' + i}
+                />
+              );
+            })}
           </div>
-        ) : object.visualizationType === "PercentDonut" ? (
-          <div className={donutChart} key={index}>
-            <h2>{ object.title }</h2>
-            <h2 style={{"textAlign": "center", "margin": "auto", "width": "50%"}}>
-              { object.data[0].y < 1 ? percentage(object.data[0].y) :
-                object.data[0].y.toFixed(1) + "%"
-              }
-            </h2>
-            <PieChart
-              data={object.data}
-              colors={["#19b7aa","#a9a9a9"]}
-              width={475}
-              height={375}
-              innerRadius={90}
-              halfDoughnut={true}
-            />
+          <div>
+            <h4 style={{ float: 'left' }}>
+              {object.min === 0
+                ? 0
+                : object.min > 0 && object.min < 1
+                ? percentage(object.min)
+                : object.min > 1
+                ? numeric(object.min)
+                : object.min}
+            </h4>
+            <h4 style={{ float: 'right' }}>
+              {object.max < 1 && object.max > 0
+                ? percentage(object.max)
+                : object.max > 1
+                ? numeric(object.max)
+                : object.max}
+            </h4>
           </div>
-        ) : object.visualizationType === "ComparisonBar" ? (
-          <div className={viz} key={index}>
-            <h2>{ object.title }</h2>
-            <HorizontalBarChart
-              minimalist={object.minimalist}
-              data={object.data}
-              sortOrder={object.sortOrder}
-              dataValue={object.dataValue}
-              dataLabel={object.dataLabel}
-              dataKeyLabel={""}
-              title={""}
-              subtitle={""}
-              xLabel={""}
-              yLabel={""}
-            />
-          </div>
-        ) : object.visualizationType === "Legend" ? (
-          <div className={viz} key={index}>
-            <h2>{ object.title }</h2>
-            <div style={{"display": "flex", "flexDirection": "row"}}>
-              {
-                object.colors.map((d,i,arr) => {
-                  return (
-                    <div style={{"background": d, "height": "40px", "width": `${100/arr.length}%`}} key={"legend" + i}>
-                    </div>
-                  );
-                })
-              }
-            </div>
-            <div>
-              <h4 style={{"float": "left"}}>
-                {
-                  object.min === 0 ? 0 :
-                  object.min > 0 && object.min < 1 ? percentage(object.min) :
-                  object.min > 1 ? numeric(object.min) :
-                  object.min
-                }
-              </h4>
-              <h4 style={{"float": "right"}}>
-                {
-                  object.max < 1 && object.max > 0 ? percentage(object.max) :
-                  object.max > 1 ? numeric(object.max) :
-                  object.max
-                }
-              </h4>
-            </div>
-          </div>
-        ) : null
-      );
+        </div>
+      ) : null;
     });
 
     const buttons = (
       <div className={buttonContainer}>
-        <div className={this.state.show === "info" ? iconActive : icon} onClick={this.showInfo}>
-          <div className={"fa fa-info-circle"}></div>
+        <div
+          className={this.state.show === 'info' ? iconActive : icon}
+          onClick={this.showInfo}
+        >
+          <div className={'fa fa-info-circle'} />
         </div>
-        <div className={this.state.show === "viz" ? iconActive : icon} onClick={this.showViz}>
-          <div className={"fa fa-eye"}></div>
+        <div
+          className={this.state.show === 'viz' ? iconActive : icon}
+          onClick={this.showViz}
+        >
+          <div className={'fa fa-eye'} />
         </div>
       </div>
     );
@@ -196,17 +202,20 @@ class CivicDashboard extends React.Component {
     return (
       <div className={dashboard}>
         <div className={contentContainer}>
-          { this.state.show === "info" ? children : visualizations }
+          {this.state.show === 'info' ? children : visualizations}
         </div>
         <div className={watermarkContainer}>
           <svg width="134" height="135" xmlns="http://www.w3.org/2000/svg">
             <g fill="none" fillRule="evenodd">
               <path d="M0 134.658V0l11.566 11.597v123.061H0z" fill="#191119" />
-              <path d="M133.864 0v11.597H11.566v.008L0 .008V0h133.864z" fill="#DC4556" />
+              <path
+                d="M133.864 0v11.597H11.566v.008L0 .008V0h133.864z"
+                fill="#DC4556"
+              />
             </g>
           </svg>
         </div>
-        { children ? buttons : null }
+        {children ? buttons : null}
       </div>
     );
   }

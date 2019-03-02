@@ -47,17 +47,23 @@ describe('neighborhoods actions', () => {
       store = mockStore({});
     });
 
-    afterEach(() => { nock.cleanAll(); });
+    afterEach(() => {
+      nock.cleanAll();
+    });
 
     it('should dispatch fetch and success when the fetch is successful', () => {
       const mockNeighborhoodsResponse = {
-        features: [{
-          id: 1,
-          geometry: [],
-        }],
+        features: [
+          {
+            id: 1,
+            geometry: [],
+          },
+        ],
       };
 
-      nock('https://s3-us-west-2.amazonaws.com/hacko-housing-staging/neighborhoods.geojson')
+      nock(
+        'https://s3-us-west-2.amazonaws.com/hacko-housing-staging/neighborhoods.geojson'
+      )
         .get('')
         .reply(200, mockNeighborhoodsResponse);
 
@@ -65,10 +71,12 @@ describe('neighborhoods actions', () => {
         { type: actionTypes.CALL_START },
         {
           type: actionTypes.CALL_SUCCESS,
-          payload: [{
-            geometry: [],
-            id: 1,
-          }],
+          payload: [
+            {
+              geometry: [],
+              id: 1,
+            },
+          ],
         },
       ];
 
@@ -78,7 +86,9 @@ describe('neighborhoods actions', () => {
     });
 
     it('should dispatch fetch and fail when the fetch is unsuccessful', () => {
-      nock('https://s3-us-west-2.amazonaws.com/hacko-housing-staging/neighborhoods.geojson')
+      nock(
+        'https://s3-us-west-2.amazonaws.com/hacko-housing-staging/neighborhoods.geojson'
+      )
         .get('')
         .reply(500, { error: 'Request was just no good' });
 
@@ -109,21 +119,28 @@ describe('neighborhoods reducer', () => {
   });
 
   it('should handle CALL_START', () => {
-    expect(reducer(initialState, {
-      type: actionTypes.CALL_START,
-    })).to.eql({
+    expect(
+      reducer(initialState, {
+        type: actionTypes.CALL_START,
+      })
+    ).to.eql({
       pending: true,
       data: null,
       error: null,
     });
 
-    expect(reducer({
-      pending: true,
-      data: null,
-      error: null,
-    }, {
-      type: actionTypes.CALL_START,
-    })).to.eql({
+    expect(
+      reducer(
+        {
+          pending: true,
+          data: null,
+          error: null,
+        },
+        {
+          type: actionTypes.CALL_START,
+        }
+      )
+    ).to.eql({
       pending: true,
       data: null,
       error: null,
@@ -133,23 +150,30 @@ describe('neighborhoods reducer', () => {
   it('should handle CALL_FAIL', () => {
     const error = new Error('oops');
 
-    expect(reducer(initialState, {
-      type: actionTypes.CALL_FAIL,
-      payload: error,
-    })).to.eql({
+    expect(
+      reducer(initialState, {
+        type: actionTypes.CALL_FAIL,
+        payload: error,
+      })
+    ).to.eql({
       pending: false,
       data: null,
       error,
     });
 
-    expect(reducer({
-      pending: true,
-      data: ['stuff'],
-      error: null,
-    }, {
-      type: actionTypes.CALL_FAIL,
-      payload: error,
-    })).to.eql({
+    expect(
+      reducer(
+        {
+          pending: true,
+          data: ['stuff'],
+          error: null,
+        },
+        {
+          type: actionTypes.CALL_FAIL,
+          payload: error,
+        }
+      )
+    ).to.eql({
       pending: false,
       data: null,
       error,
@@ -159,23 +183,30 @@ describe('neighborhoods reducer', () => {
   it('should handle CALL_SUCCESS', () => {
     const data = 'Really good tacos';
 
-    expect(reducer(initialState, {
-      type: actionTypes.CALL_SUCCESS,
-      payload: data,
-    })).to.eql({
+    expect(
+      reducer(initialState, {
+        type: actionTypes.CALL_SUCCESS,
+        payload: data,
+      })
+    ).to.eql({
       pending: false,
       error: null,
       data,
     });
 
-    expect(reducer({
-      pending: true,
-      error: new Error('oops'),
-      data: null,
-    }, {
-      type: actionTypes.CALL_SUCCESS,
-      payload: data,
-    })).to.eql({
+    expect(
+      reducer(
+        {
+          pending: true,
+          error: new Error('oops'),
+          data: null,
+        },
+        {
+          type: actionTypes.CALL_SUCCESS,
+          payload: data,
+        }
+      )
+    ).to.eql({
       pending: false,
       error: null,
       data,
@@ -204,12 +235,16 @@ describe('neighborhoods selectors', () => {
     });
 
     it('should return the rent request object when set', () => {
-      state = { neighborhoods: {
-        pending: true,
-        data: null,
-        error: null,
-      } };
-      expect(selectors.getNeighborhoodsRequest(state)).to.eql(state.neighborhoods);
+      state = {
+        neighborhoods: {
+          pending: true,
+          data: null,
+          error: null,
+        },
+      };
+      expect(selectors.getNeighborhoodsRequest(state)).to.eql(
+        state.neighborhoods
+      );
     });
   });
 

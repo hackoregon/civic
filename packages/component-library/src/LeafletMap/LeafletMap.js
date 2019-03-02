@@ -5,17 +5,14 @@ import isClient from '../utils/isClient';
 
 const LeafletMap = ({ width, height, children, ...mapProps }) => (
   <div>
-    {isClient &&
+    {isClient && (
       <Map {...mapProps} style={{ width, height }}>
-        <TileLayer
-          url={mapProps.url}
-          attribution={mapProps.attribution}
-        />
+        <TileLayer url={mapProps.url} attribution={mapProps.attribution} />
         {children}
       </Map>
-      }
+    )}
   </div>
-  );
+);
 
 LeafletMap.propTypes = {
   center: PropTypes.arrayOf(PropTypes.number),
@@ -35,7 +32,8 @@ LeafletMap.defaultProps = {
   height: 600,
   scrollWheelZoom: false,
   url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-  attribution: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors",
+  attribution:
+    "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors",
 };
 
 export default LeafletMap;

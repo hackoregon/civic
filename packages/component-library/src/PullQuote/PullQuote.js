@@ -30,9 +30,14 @@ const wrapperClass = css`
 const PullQuote = ({ quoteText, quoteAttribution, url }) => (
   <div className={wrapperClass}>
     <TwitterShareButton url={url || window.location.href} title={quoteText}>
-      <blockquote className={quoteClass} >
-          &#8220;{ quoteText }&#8221;<br />
-        { quoteAttribution ? <span className={attributionClass}>&#8212; { quoteAttribution }</span> : null }
+      <blockquote className={quoteClass}>
+        &#8220;
+        {quoteText}
+        &#8221;
+        <br />
+        {quoteAttribution ? (
+          <span className={attributionClass}>&#8212; {quoteAttribution}</span>
+        ) : null}
       </blockquote>
       <div className={iconClass}>
         <TwitterIcon size={24} round iconBgStyle={{ fill: '#eb4d5f' }} />

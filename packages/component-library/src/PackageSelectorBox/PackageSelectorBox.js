@@ -21,11 +21,9 @@ const packageSelectorClass = css`
     min-height: 186px;
   }
 
-
-
   &:hover {
     background-color: ${accentColor};
-    color: #FFF;
+    color: #fff;
   }
 
   &:focus {

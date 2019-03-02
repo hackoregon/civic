@@ -5,23 +5,20 @@ import IconMap from './IconMap';
 describe('IconMap', () => {
   const data = [
     {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          0,
-          0
-        ]
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: [0, 0],
       },
-      "properties": {
-        "name": "Null Island"
-      }
-    }
+      properties: {
+        name: 'Null Island',
+      },
+    },
   ];
 
   const viewport = { zoom: 9.5 };
 
-  const iconSizeScale = zoom => zoom > 9.5 ? 25 : 5;
+  const iconSizeScale = zoom => (zoom > 9.5 ? 25 : 5);
 
   const defaultProps = {
     data,

@@ -1,10 +1,10 @@
 import { getAsyncReducer } from './utils/asyncInjectors';
 
-const errorLoading = (err) => {
+const errorLoading = err => {
   console.error('Page load failed', err); // eslint-disable-line no-console
 };
 
-const loadModule = cb => (componentModule) => {
+const loadModule = cb => componentModule => {
   cb(null, componentModule.default);
 };
 
@@ -16,14 +16,16 @@ export default function createRoutes(store) {
       path: '/',
       name: 'homepage',
       getComponent(nextState, cb) {
-        const getModule = Promise.resolve(require.ensure([], (require) => {
-          cb(null, require('./components/App'));
-        }));
+        const getModule = Promise.resolve(
+          require.ensure([], require => {
+            cb(null, require('./components/App'));
+          })
+        );
 
         const renderRoute = loadModule(cb);
 
         getModule
-          .then((component) => {
+          .then(component => {
             injectAsyncReducer('app', require('./state/app').default);
             renderRoute(component);
           })
@@ -35,9 +37,11 @@ export default function createRoutes(store) {
       name: 'examplepage',
       getComponent(nextState, cb) {
         const renderRoute = loadModule(cb);
-        require.ensure([], require => Promise.resolve(require('./components/Example'))
-          .then(renderRoute)
-          .catch(errorLoading));
+        require.ensure([], require =>
+          Promise.resolve(require('./components/Example'))
+            .then(renderRoute)
+            .catch(errorLoading)
+        );
       },
     },
     {
@@ -45,9 +49,11 @@ export default function createRoutes(store) {
       name: 'examplepage',
       getComponent(nextState, cb) {
         const renderRoute = loadModule(cb);
-        require.ensure([], require => Promise.resolve(require('./components/Budget101'))
-          .then(renderRoute)
-          .catch(errorLoading));
+        require.ensure([], require =>
+          Promise.resolve(require('./components/Budget101'))
+            .then(renderRoute)
+            .catch(errorLoading)
+        );
       },
     },
     {
@@ -55,9 +61,11 @@ export default function createRoutes(store) {
       name: 'stackedareaepage',
       getComponent(nextState, cb) {
         const renderRoute = loadModule(cb);
-        require.ensure([], require => Promise.resolve(require('./components/StackedAreaChart'))
-          .then(renderRoute)
-          .catch(errorLoading));
+        require.ensure([], require =>
+          Promise.resolve(require('./components/StackedAreaChart'))
+            .then(renderRoute)
+            .catch(errorLoading)
+        );
       },
     },
     {
@@ -65,9 +73,11 @@ export default function createRoutes(store) {
       name: 'mytestpage',
       getComponent(nextState, cb) {
         const renderRoute = loadModule(cb);
-        require.ensure([], require => Promise.resolve(require('./components/MyTest'))
-        .then(renderRoute)
-        .catch(errorLoading));
+        require.ensure([], require =>
+          Promise.resolve(require('./components/MyTest'))
+            .then(renderRoute)
+            .catch(errorLoading)
+        );
       },
     },
     {
@@ -75,9 +85,11 @@ export default function createRoutes(store) {
       name: 'collectionpage',
       getComponent(nextState, cb) {
         const renderRoute = loadModule(cb);
-        require.ensure([], require => Promise.resolve(require('./components/CardCollection'))
-          .then(renderRoute)
-          .catch(errorLoading));
+        require.ensure([], require =>
+          Promise.resolve(require('./components/CardCollection'))
+            .then(renderRoute)
+            .catch(errorLoading)
+        );
       },
     },
     {
@@ -85,9 +97,10 @@ export default function createRoutes(store) {
       name: 'notfoundpage',
       getComponent(nextState, cb) {
         const renderRoute = loadModule(cb);
-        require.ensure([], require => Promise.resolve(require('./components/NotFoundPage'))
-          .then(renderRoute)
-          .catch(errorLoading),
+        require.ensure([], require =>
+          Promise.resolve(require('./components/NotFoundPage'))
+            .then(renderRoute)
+            .catch(errorLoading)
         );
       },
     },

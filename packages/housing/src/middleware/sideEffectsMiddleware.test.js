@@ -1,6 +1,9 @@
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
-import sideEffectsMiddleware, { EXAMPLE_NEXT_ACTION, EXAMPLE_ACTION } from './sideEffectsMiddleware';
+import sideEffectsMiddleware, {
+  EXAMPLE_NEXT_ACTION,
+  EXAMPLE_ACTION,
+} from './sideEffectsMiddleware';
 
 const middlewares = [thunk, sideEffectsMiddleware];
 
@@ -23,9 +26,7 @@ describe('middleware', () => {
     const dispatchSpy = sinon.spy(store, 'dispatch');
 
     const payload = 'ARBITRARY';
-    const exampleAction = { type: EXAMPLE_ACTION,
-      payload,
-    };
+    const exampleAction = { type: EXAMPLE_ACTION, payload };
 
     store.dispatch(exampleAction);
     expect(dispatchSpy).to.have.been.calledWith(exampleAction);

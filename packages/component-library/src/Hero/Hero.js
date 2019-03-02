@@ -35,15 +35,17 @@ const contentClass = css`
 `;
 
 const DefaultChildren = () => (
-  <h1>Data for the people,<br />by the people.</h1>
+  <h1>
+    Data for the people,
+    <br />
+    by the people.
+  </h1>
 );
 
 const Hero = ({ children, mainProjectColor }) => (
   <div className={heroClass} style={{ backgroundColor: mainProjectColor }}>
     <div className={containerClass}>
-      <div className={contentClass}>
-        {children || <DefaultChildren />}
-      </div>
+      <div className={contentClass}>{children || <DefaultChildren />}</div>
     </div>
   </div>
 );

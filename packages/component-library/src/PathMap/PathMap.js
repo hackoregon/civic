@@ -6,7 +6,7 @@ const crosshair = css`
   cursor: crosshair;
 `;
 
-const PathMap = (props) => {
+const PathMap = props => {
   const {
     viewport,
     data,
@@ -39,10 +39,7 @@ const PathMap = (props) => {
 
   return (
     <div className={crosshair}>
-      <DeckGL
-        className={'DeckGL'}
-        {...viewport}
-      >
+      <DeckGL className={'DeckGL'} {...viewport}>
         <PathLayer
           id={'path-layer'}
           className={'PathMap'}
@@ -59,11 +56,11 @@ const PathMap = (props) => {
           highlightColor={highlightColor}
           onClick={onLayerClick}
           onHover={onHover}
-          parameters={{depthTest: false}}
-          updateTriggers={{instanceColors: getColor}}
+          parameters={{ depthTest: false }}
+          updateTriggers={{ instanceColors: getColor }}
           visible={visible}
         />
-        { tooltipRender }
+        {tooltipRender}
       </DeckGL>
     </div>
   );
@@ -90,14 +87,14 @@ PathMap.propTypes = {
 };
 
 PathMap.defaultProps = {
-  getColor: d => [0,0,0],
+  getColor: d => [0, 0, 0],
   opacity: 0.9,
   getPath: d => d.geometry.coordinates,
   getWidth: d => 10,
   widthScale: 1,
   rounded: false,
   autoHighlight: true,
-  highlightColor: [0,0,128,191],
+  highlightColor: [0, 0, 128, 191],
   visible: true,
 };
 

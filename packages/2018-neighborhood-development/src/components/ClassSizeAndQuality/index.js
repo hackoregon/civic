@@ -2,9 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { CivicStoryCard, Dropdown, Scatterplot } from '@hackoregon/component-library';
+import {
+  CivicStoryCard,
+  Dropdown,
+  Scatterplot,
+} from '@hackoregon/component-library';
 
-import { fetchclassAndSizeQuality, updateYear } from '../../state/class-size-and-quality/actions';
+import {
+  fetchclassAndSizeQuality,
+  updateYear,
+} from '../../state/class-size-and-quality/actions';
 import {
   getDataForSelectedYear,
   getErrors,
@@ -26,7 +33,10 @@ const YEARS = [
   2017,
 ];
 
-const dropdownOptions = YEARS.map(year => ({ value: year, label: year.toString() }));
+const dropdownOptions = YEARS.map(year => ({
+  value: year,
+  label: year.toString(),
+}));
 
 export class ClassSizeAndQuality extends React.Component {
   componentDidMount() {
@@ -35,15 +45,10 @@ export class ClassSizeAndQuality extends React.Component {
 
   onYearChange = ({ value }) => {
     this.props.setYear(value);
-  }
+  };
 
   render() {
-    const {
-      error,
-      isLoading,
-      selectedYear,
-      selectedYearData,
-    } = this.props;
+    const { error, isLoading, selectedYear, selectedYearData } = this.props;
 
     return (
       <CivicStoryCard
@@ -55,9 +60,10 @@ export class ClassSizeAndQuality extends React.Component {
       >
         <p>
           Average class size was used as a metric to determine which schools
-          would receive or lose FTE in the 2018-19 fiscal year. Understanding fluctuations
-          in student teacher ratios across schools and time, as well as in relation
-          to teacher experience, provides the end user with context to understand a staffing model.
+          would receive or lose FTE in the 2018-19 fiscal year. Understanding
+          fluctuations in student teacher ratios across schools and time, as
+          well as in relation to teacher experience, provides the end user with
+          context to understand a staffing model.
         </p>
 
         <Dropdown
@@ -66,11 +72,11 @@ export class ClassSizeAndQuality extends React.Component {
           options={dropdownOptions}
         />
 
-        {selectedYearData && selectedYearData.length === 0 &&
+        {selectedYearData && selectedYearData.length === 0 && (
           <div>Loading...</div>
-        }
+        )}
 
-        {selectedYearData && selectedYearData.length > 0 &&
+        {selectedYearData && selectedYearData.length > 0 && (
           <Scatterplot
             data={selectedYearData}
             dataKey="teacherExperience"
@@ -82,7 +88,7 @@ export class ClassSizeAndQuality extends React.Component {
             title="Class Sizes and Teacher Experience"
             subtitle={`Average student / teacher ratio by average years of teacher experience - ${selectedYear}`}
           />
-        }
+        )}
       </CivicStoryCard>
     );
   }
@@ -112,5 +118,5 @@ export default connect(
     setYear(year) {
       dispatch(updateYear(year));
     },
-  }),
+  })
 )(ClassSizeAndQuality);

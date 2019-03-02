@@ -65,15 +65,26 @@ export const foundations = data => ({
   },
 });
 
- // Bike Lanes Color Function
-const colors = [[255, 120, 1], [255, 210, 159], [255, 255, 255], [147, 207, 210], [30, 130, 135]];
-const getPathColor = (f) => {
+// Bike Lanes Color Function
+const colors = [
+  [255, 120, 1],
+  [255, 210, 159],
+  [255, 255, 255],
+  [147, 207, 210],
+  [30, 130, 135],
+];
+const getPathColor = f => {
   const speedString = f.properties.avg_bike_speed.split('m')[0];
   const speed = parseFloat(speedString);
-  return speed < 8 ? colors[0] :
-    speed < 9 ? colors[1] :
-    speed < 10 ? colors[2] :
-    speed < 11 ? colors[3] : colors[4];
+  return speed < 8
+    ? colors[0]
+    : speed < 9
+    ? colors[1]
+    : speed < 10
+    ? colors[2]
+    : speed < 11
+    ? colors[3]
+    : colors[4];
 };
 
 export const slides = data => ({
@@ -174,7 +185,12 @@ export const slides = data => ({
       data: data.slide_data.features,
       getPosition: f => f.geometry.coordinates,
       opacity: 0.33,
-      colorRange: [[237, 248, 251], [178, 226, 226], [102, 194, 164], [35, 139, 69]],
+      colorRange: [
+        [237, 248, 251],
+        [178, 226, 226],
+        [102, 194, 164],
+        [35, 139, 69],
+      ],
       cellSizePixels: 40,
       autoHighlight: true,
       highlightColor: [200, 200, 200, 150],

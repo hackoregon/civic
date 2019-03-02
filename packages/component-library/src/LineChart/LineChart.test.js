@@ -21,7 +21,7 @@ describe('LineChart', () => {
 
     expect(wrapper.find('VictoryChart').length).to.eql(1);
   });
-/* TODO: rewrite these tests
+  /* TODO: rewrite these tests
   it('should render the relevant axis', () => {
     const wrapper = shallow(<LineChart xLabel="Year" {...defaultProps} />);
 
