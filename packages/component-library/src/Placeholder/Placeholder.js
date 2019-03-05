@@ -4,12 +4,13 @@ import { css } from 'emotion';
 const placeholderClass = css`
   text-align: center;
   border-radius: 15px;
-  border: 3px dashed #CCC;
+  border: 3px dashed #ccc;
   color: #666;
   padding: 3em;
   font-size: 18px;
 
-  & h1, & h2 {
+  & h1,
+  & h2 {
     font-size: 2em;
     font-weight: bold;
   }
@@ -25,7 +26,9 @@ const DefaultText = () => (
 const IssueText = ({ issue }) => (
   <div>
     <h1>Card In Progress</h1>
-    <a href={'https://github.com/hackoregon/civic/issues/' + issue}>View progress on GitHub</a>
+    <a href={'https://github.com/hackoregon/civic/issues/' + issue}>
+      View progress on GitHub
+    </a>
   </div>
 );
 

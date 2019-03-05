@@ -3,10 +3,11 @@
 //     dispatch(exampleAPI())
 import axios from 'axios';
 
-export default (url, params, { start, success, error }) => () => (dispatch) => {
+export default (url, params, { start, success, error }) => () => dispatch => {
   dispatch(start());
 
-  return axios.get(url, { params })
+  return axios
+    .get(url, { params })
     .then(res => dispatch(success(res)))
     .catch(err => dispatch(error(err)));
 };

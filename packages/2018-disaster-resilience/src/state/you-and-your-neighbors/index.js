@@ -1,4 +1,12 @@
-import { API_START, API_SUCCESS, API_FAILURE, COORDS_START, COORDS_SUCCESS, COORDS_FAILURE, SET_COORDS } from './actions';
+import {
+  API_START,
+  API_SUCCESS,
+  API_FAILURE,
+  COORDS_START,
+  COORDS_SUCCESS,
+  COORDS_FAILURE,
+  SET_COORDS,
+} from './actions';
 
 const INITIAL_STATE = {
   pending: false,

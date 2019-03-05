@@ -1,10 +1,10 @@
-import React from 'react';  
-import { styles } from './storyStyles.js';
+import React from 'react';
+import { storybookStyles } from './storyStyles.js';
 
 const MapsStyle = () => (
-  <div style={styles.main}>
-    <h1 style={styles.h1}>Maps Style Guide</h1>
-    <p style={styles.p}>This is the Style Guide for Maps.</p>
+  <div style={storybookStyles.main}>
+    <h1>Maps Style Guide</h1>
+    <p>This is the Style Guide for Maps.</p>
   </div>
 );
 

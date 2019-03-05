@@ -11,7 +11,7 @@ const titleStyle = css`
   margin: 0;
 
   @media (max-width: 640px) {
-      text-align: left;
+    text-align: left;
   }
 `;
 
@@ -23,7 +23,7 @@ const subtitleStyle = css`
   margin: 10px 0;
 
   @media (max-width: 640px) {
-      text-align: left;
+    text-align: left;
   }
 `;
 

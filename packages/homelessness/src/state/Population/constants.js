@@ -7,8 +7,7 @@
 export const NAME = 'population';
 export const NON_ACTION_TYPE = '30px';
 
-export const INITIAL_STATE = {
-};
+export const INITIAL_STATE = {};
 
 const GET_ETHNICITY = 'HOMELESSNESS/POPULATION/ETHNICITY/GET';
 const GET_ETHNICITY_SUCCESS = 'HOMELESSNESS/POPULATION/ETHNICITY/GET/SUCCESS';

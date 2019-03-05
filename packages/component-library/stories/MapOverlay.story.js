@@ -7,34 +7,36 @@ import { checkA11y } from '@storybook/addon-a11y';
 import { BaseMap } from '../src';
 import { MapOverlay } from '../src';
 import { MapTooltip } from '../src';
-import data from '../src/MapOverlay/mapoverlaydata.json'
+import data from '../src/MapOverlay/mapoverlaydata.json';
 
 const displayName = MapOverlay.displayName || 'MapOverlay';
 
-const mapboxToken = 'pk.eyJ1IjoidGhlbWVuZG96YWxpbmUiLCJhIjoiY2o1aXdoem1vMWtpNDJ3bnpqaGF1bnlhNSJ9.sjTrNKLW9daDBIGvP3_W0w';
+const mapboxToken =
+  'pk.eyJ1IjoidGhlbWVuZG96YWxpbmUiLCJhIjoiY2o1aXdoem1vMWtpNDJ3bnpqaGF1bnlhNSJ9.sjTrNKLW9daDBIGvP3_W0w';
 
 const optionsStyle = {
   'Lè Shine': 'mapbox://styles/themendozaline/cjg6296ub04ot2sqv9izku3qq',
   'Label Maker': 'mapbox://styles/themendozaline/cjg627xuw08mk2spjsb8jmho7',
-  'Moonlight': 'mapbox://styles/themendozaline/cjgq6r2lg00072rmqj1wocgdq',
-  'Navigation Guidance Night': 'mapbox://styles/themendozaline/cj6y6f5m006ar2sobpimm7ay7',
+  Moonlight: 'mapbox://styles/themendozaline/cjgq6r2lg00072rmqj1wocgdq',
+  'Navigation Guidance Night':
+    'mapbox://styles/themendozaline/cj6y6f5m006ar2sobpimm7ay7',
   'North Star': 'mapbox://styles/themendozaline/cj5oyewyy0fg22spetiv0hap0',
-  'Odyssey': 'mapbox://styles/themendozaline/cjgq6rklb000d2so1b8myaait',
-  'Scenic': 'mapbox://styles/themendozaline/cj8rrlv4tbtgs2rqnyhckuqva',
-}
+  Odyssey: 'mapbox://styles/themendozaline/cjgq6rklb000d2so1b8myaait',
+  Scenic: 'mapbox://styles/themendozaline/cj8rrlv4tbtgs2rqnyhckuqva',
+};
 
 const opacityOptions = {
-   range: true,
-   min: 0,
-   max: 1,
-   step: 0.05,
+  range: true,
+  min: 0,
+  max: 1,
+  step: 0.05,
 };
 
 const elevationOptions = {
-   range: true,
-   min: 1,
-   max: 100,
-   step: 1,
+  range: true,
+  min: 1,
+  max: 100,
+  step: 1,
 };
 
 const opacity = number('Opacity:', 0.8, opacityOptions);
@@ -43,15 +45,16 @@ const wireframe = boolean('Wireframe:', true);
 const elevation = number('Elevation:', 10, elevationOptions);
 const extruded = boolean('Extruded:', true);
 
-const mapboxStyle = selectV2('Mapbox Style', optionsStyle, optionsStyle['Label Maker']);
+const mapboxStyle = selectV2(
+  'Mapbox Style',
+  optionsStyle,
+  optionsStyle['Label Maker']
+);
 
 // without tooltip version
 const demoMap = () => {
   return (
-    <BaseMap
-      mapboxToken={mapboxToken}
-      mapboxStyle={mapboxStyle}
-    >
+    <BaseMap mapboxToken={mapboxToken} mapboxStyle={mapboxStyle}>
       <MapOverlay
         data={data.features}
         opacity={opacity}
@@ -73,13 +76,14 @@ const tooltipMap = () => {
   const filled = boolean('Filled:', true);
   const wireframe = boolean('Wireframe:', true);
   const extruded = boolean('Extruded:', true);
-  const mapboxStyle = selectV2('Mapbox Style', optionsStyle, optionsStyle['Label Maker']);
+  const mapboxStyle = selectV2(
+    'Mapbox Style',
+    optionsStyle,
+    optionsStyle['Label Maker']
+  );
 
   return (
-    <BaseMap
-      mapboxToken={mapboxToken}
-      mapboxStyle={mapboxStyle}
-    >
+    <BaseMap mapboxToken={mapboxToken} mapboxStyle={mapboxStyle}>
       <MapOverlay
         data={data.features}
         getPosition={f => f.geometry.coordinates}
@@ -88,30 +92,30 @@ const tooltipMap = () => {
         wireframe={wireframe}
         extruded={extruded}
         elevation={elevation}
-        onLayerHover={info => action('Layer')(info.layer.props.data[info.index].properties.NAME)}
-
+        onLayerHover={info =>
+          action('Layer')(info.layer.props.data[info.index].properties.NAME)
+        }
         outline={false}
         autoHighlight={true}
         visible={true}
       >
         <MapTooltip
-          primaryName={"Name"}
-          primaryField={"NAME"}
-          secondaryName={"Length"}
-          secondaryField={"Shape_Length"}
+          primaryName={'Name'}
+          primaryField={'NAME'}
+          secondaryName={'Length'}
+          secondaryField={'Shape_Length'}
         />
       </MapOverlay>
     </BaseMap>
   );
 };
 
-export default () => storiesOf('Maps/Map Overlay', module)
-  .addDecorator(checkA11y)
-  .addDecorator(withKnobs)
-  .add('Simple usage',(demoMap))
-  .add('With tooltip',
-    (tooltipMap)
-  );
+export default () =>
+  storiesOf('Maps/Map Overlay', module)
+    .addDecorator(checkA11y)
+    .addDecorator(withKnobs)
+    .add('Simple usage', demoMap)
+    .add('With tooltip', tooltipMap);
 
 /*
 

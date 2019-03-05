@@ -19,13 +19,19 @@ const spendingLinks = take(500, data.links.spending);
 
 const demoCode = () => (
   <div>
-    <Sankey width={375} height={300} nodes={data.nodes} links={transactionslinks} />
+    <Sankey
+      width={375}
+      height={300}
+      nodes={data.nodes}
+      links={transactionslinks}
+    />
     <Sankey width={375} height={300} nodes={data.nodes} links={spendingLinks} />
   </div>
 );
 
 // const propDocs = { inline: true, propTables: [Sankey] };
 
-export default () => storiesOf(displayName, module)
-  .addDecorator(checkA11y)
-  .add(title, demoCode);
+export default () =>
+  storiesOf(displayName, module)
+    .addDecorator(checkA11y)
+    .add(title, demoCode);

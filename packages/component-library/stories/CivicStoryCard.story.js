@@ -3,10 +3,7 @@ import React from 'react';
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
-import {
-  withKnobs,
-  text, number, object, array,
-} from '@storybook/addon-knobs';
+import { withKnobs, text, number, object, array } from '@storybook/addon-knobs';
 import {
   CivicStoryCard,
   Chart,
@@ -27,21 +24,19 @@ const labels = ['A', 'B', 'C', 'D', 'E', 'F'];
 const width = 300;
 const height = 300;
 
-const data = array('Data',[
-{sortOrder: 1, population: 2000, label: 'Labrador Retriever'},
-{sortOrder: 2, population: 8000, label: 'Standard Poodle'},
-{sortOrder: 3, population: 6000, label: 'French Bulldog'},
-{sortOrder: 4, population: 3000, label: 'Afghan Hound'},
-{sortOrder: 5, population: 1000, label: 'Jack Russell Terrier'}
+const data = array('Data', [
+  { sortOrder: 1, population: 2000, label: 'Labrador Retriever' },
+  { sortOrder: 2, population: 8000, label: 'Standard Poodle' },
+  { sortOrder: 3, population: 6000, label: 'French Bulldog' },
+  { sortOrder: 4, population: 3000, label: 'Afghan Hound' },
+  { sortOrder: 5, population: 1000, label: 'Jack Russell Terrier' },
 ]);
 const dataKey = text('Data key', 'sortOrder');
 const dataValue = text('Data values', 'population');
 const dataKeyLabel = text('Data key labels', 'label');
 
 const Container = ({ children }) => (
-  <div style={{padding:'30px'}}>
-    {children}
-  </div>
+  <div style={{ padding: '30px' }}>{children}</div>
 );
 
 const tdDemo = () => (
@@ -102,30 +97,33 @@ const errorDemo = () => (
   </Container>
 );
 
-export default () => storiesOf('CIVIC Platform Components/CIVIC Story Card', module)
-  .add(
-    'Simple usage',
-    // 'This is some basic usage with the CivicStoryCard with just a title and descriptions')(
-    () => (
+export default () =>
+  storiesOf('CIVIC Platform Components/CIVIC Story Card', module)
+    .add(
+      'Simple usage',
+      // 'This is some basic usage with the CivicStoryCard with just a title and descriptions')(
+      () => (
+        <Container>
+          <CivicStoryCard
+            title={'Campsite Reports & income levels of a community'}
+          >
+            <p className="Description">{wallOfText}</p>
+          </CivicStoryCard>
+        </Container>
+      )
+    )
+    .add('Custom source link', () => (
       <Container>
-        <CivicStoryCard title={'Campsite Reports & income levels of a community'}>
+        <CivicStoryCard
+          title={'Campsite Reports & income levels of a community'}
+          source={'http://www.hackoregon.org'}
+        >
           <p className="Description">{wallOfText}</p>
         </CivicStoryCard>
       </Container>
-    )
-  )
-  .add(
-    'Custom source link',
-    () => (
-      <Container>
-        <CivicStoryCard title={'Campsite Reports & income levels of a community'} source={'http://www.hackoregon.org'}>
-          <p className="Description">{wallOfText}</p>
-        </CivicStoryCard>
-      </Container>
-    )
-  )
-  .add('Loading', loadingDemo)
-  .add('With error', errorDemo)
-  .add('With title and description', tdDemo)
-  .add('With title, description and visualization', tdvDemo)
-  .add('With collapsable sections', collapsableDemo);
+    ))
+    .add('Loading', loadingDemo)
+    .add('With error', errorDemo)
+    .add('With title and description', tdDemo)
+    .add('With title, description and visualization', tdvDemo)
+    .add('With collapsable sections', collapsableDemo);

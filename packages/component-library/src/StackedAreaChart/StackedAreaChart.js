@@ -9,13 +9,19 @@ import {
   VictoryScatter,
   VictoryTooltip,
   VictoryStack,
-  VictoryArea
+  VictoryArea,
 } from 'victory';
 
 import ChartContainer from '../ChartContainer';
 import SimpleLegend from '../SimpleLegend';
 import { numeric } from '../utils/formatters';
-import { chartEvents, getDefaultStackedDomain, getDefaultDataSeriesLabels, getDefaultFillStyle, getDefaultAreaStyle } from '../utils/chartHelpers';
+import {
+  chartEvents,
+  getDefaultStackedDomain,
+  getDefaultDataSeriesLabels,
+  getDefaultFillStyle,
+  getDefaultAreaStyle,
+} from '../utils/chartHelpers';
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
 
 const StackedAreaChart = ({
@@ -37,14 +43,16 @@ const StackedAreaChart = ({
   yNumberFormatter,
   legendComponent,
 }) => {
-
-  const chartDomain = domain || getDefaultStackedDomain(data, dataKey, dataValue);
+  const chartDomain =
+    domain || getDefaultStackedDomain(data, dataKey, dataValue);
 
   const dataSeriesLabels = dataSeries
     ? dataSeriesLabel || getDefaultDataSeriesLabels(data, dataSeries)
     : null;
 
-  const scatterPlotStyle = style || {...CivicVictoryTheme.civic.areaScatter.style};
+  const scatterPlotStyle = style || {
+    ...CivicVictoryTheme.civic.areaScatter.style,
+  };
 
   const legendData =
     dataSeriesLabels && dataSeriesLabels.length
@@ -56,65 +64,68 @@ const StackedAreaChart = ({
       ? dataSeriesLabels.map(series => ({ name: series.category }))
       : null;
 
-  const lineData = dataSeries
-    ? groupBy(data, dataSeries)
-    : { category: data };
+  const lineData = dataSeries ? groupBy(data, dataSeries) : { category: data };
 
   const areas = lineData
-    ? Object.keys(lineData).map((category, index) =>
-      <VictoryArea
-        data={lineData[category].map(d => ({
-          dataKey: d[dataKey],
-          dataValue: d[dataValue],
-          series: d[dataSeries],
-        }))}
-        x="dataKey"
-        y="dataValue"
-        style={getDefaultAreaStyle(index)}
-        standalone={false}
-      />
-      )
+    ? Object.keys(lineData).map((category, index) => (
+        <VictoryArea
+          data={lineData[category].map(d => ({
+            dataKey: d[dataKey],
+            dataValue: d[dataValue],
+            series: d[dataSeries],
+          }))}
+          x="dataKey"
+          y="dataValue"
+          style={getDefaultAreaStyle(index)}
+          standalone={false}
+        />
+      ))
     : null;
 
-    const dots = lineData
-    ? Object.keys(lineData).map((category, index) =>
-      <VictoryScatter
-        data={lineData[category].map(d => ({
-          dataKey: d[dataKey],
-          dataValue: d[dataValue],
-          series: d[dataSeries],
-          label: `${dataKeyLabel ? dataKeyLabel : xLabel}: ${xNumberFormatter(d[dataKey])} • ${dataValueLabel ? dataValueLabel : yLabel}: ${yNumberFormatter(d[dataValue])}`,
-          size: size ? d[size.key] || size.value : 3,
-        }))}
-        animate={{ onEnter: { duration: 500 } }}
-        x="dataKey"
-        y="dataValue"
-        standalone={false}
-        size={d => d.size}
-        style={scatterPlotStyle}
-        title="Scatter Plot"
-        events={chartEvents}
-        labelComponent={
-          <VictoryTooltip
-            x={325}
-            y={0}
-            orientation="bottom"
-            pointerLength={0}
-            cornerRadius={0}
-            theme={CivicVictoryTheme.civic}
-          />
-        }
-      />
-      )
+  const dots = lineData
+    ? Object.keys(lineData).map((category, index) => (
+        <VictoryScatter
+          data={lineData[category].map(d => ({
+            dataKey: d[dataKey],
+            dataValue: d[dataValue],
+            series: d[dataSeries],
+            label: `${dataKeyLabel ? dataKeyLabel : xLabel}: ${xNumberFormatter(
+              d[dataKey]
+            )} • ${
+              dataValueLabel ? dataValueLabel : yLabel
+            }: ${yNumberFormatter(d[dataValue])}`,
+            size: size ? d[size.key] || size.value : 3,
+          }))}
+          animate={{ onEnter: { duration: 500 } }}
+          x="dataKey"
+          y="dataValue"
+          standalone={false}
+          size={d => d.size}
+          style={scatterPlotStyle}
+          title="Scatter Plot"
+          events={chartEvents}
+          labelComponent={
+            <VictoryTooltip
+              x={325}
+              y={0}
+              orientation="bottom"
+              pointerLength={0}
+              cornerRadius={0}
+              theme={CivicVictoryTheme.civic}
+            />
+          }
+        />
+      ))
     : null;
 
   return (
     <ChartContainer title={title} subtitle={subtitle}>
-      {legendData && (
-        legendComponent ?
-        legendComponent(legendData) :
-        <SimpleLegend className="legend" legendData={legendData} />
-      )}
+      {legendData &&
+        (legendComponent ? (
+          legendComponent(legendData)
+        ) : (
+          <SimpleLegend className="legend" legendData={legendData} />
+        ))}
 
       <VictoryChart
         domain={chartDomain}
@@ -155,12 +166,8 @@ const StackedAreaChart = ({
             y={295}
           />
         </VictoryPortal>
-        <VictoryStack>
-          { areas }
-        </VictoryStack>
-        <VictoryStack>
-          { dots }
-        </VictoryStack>
+        <VictoryStack>{areas}</VictoryStack>
+        <VictoryStack>{dots}</VictoryStack>
       </VictoryChart>
     </ChartContainer>
   );
@@ -168,7 +175,7 @@ const StackedAreaChart = ({
 
 StackedAreaChart.propTypes = {
   data: PropTypes.arrayOf(
-    PropTypes.shape({ x: PropTypes.number, y: PropTypes.number }),
+    PropTypes.shape({ x: PropTypes.number, y: PropTypes.number })
   ),
   dataKey: PropTypes.string,
   dataKeyLabel: PropTypes.arrayOf(PropTypes.string),
@@ -176,7 +183,7 @@ StackedAreaChart.propTypes = {
   dataValueLabel: PropTypes.arrayOf(PropTypes.string),
   dataSeries: PropTypes.string,
   dataSeriesLabel: PropTypes.arrayOf(
-    PropTypes.shape({ category: PropTypes.string, label: PropTypes.string }),
+    PropTypes.shape({ category: PropTypes.string, label: PropTypes.string })
   ),
   domain: PropTypes.objectOf(PropTypes.array),
   size: PropTypes.shape({ key: PropTypes.string, value: PropTypes.string }),
@@ -203,8 +210,8 @@ StackedAreaChart.defaultProps = {
   style: null,
   subtitle: null,
   title: null,
-  xLabel: "X",
-  yLabel: "Y",
+  xLabel: 'X',
+  yLabel: 'Y',
   xNumberFormatter: numeric,
   yNumberFormatter: numeric,
   legendComponent: null,

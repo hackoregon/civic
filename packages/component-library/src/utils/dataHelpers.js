@@ -18,14 +18,15 @@ export function ungroupBy(data, dataSeriesKeys, dataSeriesLabels) {
   }
 
   dataSeriesKeys.forEach((key, index) => {
-    arr.push(...data.map((obj) => {
-      const retObj = Object.assign({}, obj);
-      retObj.value = obj[key];
-      retObj.type = labels[index];
-      dataSeriesKeys.forEach(k => delete retObj[k]);
-      return retObj;
-    }));
+    arr.push(
+      ...data.map(obj => {
+        const retObj = Object.assign({}, obj);
+        retObj.value = obj[key];
+        retObj.type = labels[index];
+        dataSeriesKeys.forEach(k => delete retObj[k]);
+        return retObj;
+      })
+    );
   });
   return arr;
 }
-

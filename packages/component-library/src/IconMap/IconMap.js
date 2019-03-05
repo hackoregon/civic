@@ -6,7 +6,7 @@ const crosshair = css`
   cursor: crosshair;
 `;
 
-const IconMap = (props) => {
+const IconMap = props => {
   const {
     viewport,
     data,
@@ -43,10 +43,7 @@ const IconMap = (props) => {
 
   return (
     <div className={crosshair}>
-      <DeckGL
-        className={'DeckGL'}
-        {...viewport}
-      >
+      <DeckGL className={'DeckGL'} {...viewport}>
         <IconLayer
           id={'icon-layer'}
           className={'IconMap'}
@@ -64,9 +61,9 @@ const IconMap = (props) => {
           onClick={onLayerClick}
           onHover={onHover}
           visible={visible}
-          updateTriggers={{getSize: getSize}}
+          updateTriggers={{ getSize: getSize }}
         />
-        { tooltipRender }
+        {tooltipRender}
       </DeckGL>
     </div>
   );
@@ -98,7 +95,7 @@ IconMap.defaultProps = {
   sizeScale: 1,
   getPosition: d => d.geometry.coordinates,
   getSize: d => 10,
-  getColor: d => [0,0,0],
+  getColor: d => [0, 0, 0],
   visible: true,
 };
 

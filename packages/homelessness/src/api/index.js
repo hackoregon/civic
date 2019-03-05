@@ -3,13 +3,15 @@ import { sentence } from 'change-case';
 
 const BASE_URL = 'http://service.civicpdx.org/homeless';
 
-export const homelessGet = endpoint => axios.get(`${BASE_URL}${endpoint}`)
-  .then(response => response.data)
-  .catch(error => error);
+export const homelessGet = endpoint =>
+  axios
+    .get(`${BASE_URL}${endpoint}`)
+    .then(response => response.data)
+    .catch(error => error);
 
-export const compareEthnicityApi = () => homelessGet('/pitacseth')
-  .then(data => (
-    data.map((element) => {
+export const compareEthnicityApi = () =>
+  homelessGet('/pitacseth').then(data =>
+    data.map(element => {
       let name = '';
       switch (element.ethnicity) {
         case 'white':
@@ -27,11 +29,11 @@ export const compareEthnicityApi = () => homelessGet('/pitacseth')
         general: element.mult_general,
       };
     })
-  ));
+  );
 
-export const compareAgeGenderApi = () => homelessGet('/pitacs')
-  .then(data => (
-    data.map((element) => {
+export const compareAgeGenderApi = () =>
+  homelessGet('/pitacs').then(data =>
+    data.map(element => {
       let name = '';
       switch (element.comp_name) {
         case 'veterans':
@@ -64,19 +66,19 @@ export const compareAgeGenderApi = () => homelessGet('/pitacs')
         general: element.acs_percent,
       };
     })
-  ));
+  );
 
-export const typesOfSheltersApi = () => homelessGet('/individuals')
-  .then(data => data);
+export const typesOfSheltersApi = () =>
+  homelessGet('/individuals').then(data => data);
 
 const percentage = (sum, num) => Number(((num / sum) * 100).toFixed(2));
 
-export const compareServiceCallsApi = () => homelessGet('/service211')
-  .then((data) => {
+export const compareServiceCallsApi = () =>
+  homelessGet('/service211').then(data => {
     let housing = 0;
     let other = 0;
     const otherData = [];
-    data.forEach((datum) => {
+    data.forEach(datum => {
       const name = datum.service_name;
       if (name === 'Housing') {
         housing = datum.freq;
@@ -86,7 +88,7 @@ export const compareServiceCallsApi = () => homelessGet('/service211')
       }
     });
     const sum = housing + other;
-    const unsortedChart = otherData.map((datum) => {
+    const unsortedChart = otherData.map(datum => {
       if (datum.service_name !== 'Housing') {
         return {
           name: datum.service_name,
@@ -100,20 +102,25 @@ export const compareServiceCallsApi = () => homelessGet('/service211')
       name: '2016',
       otherChart,
       data: [
-        { name: 'Housing assistance', value: Math.round(percentage(sum, housing)) },
+        {
+          name: 'Housing assistance',
+          value: Math.round(percentage(sum, housing)),
+        },
         { name: 'Other services', value: Math.round(percentage(sum, other)) },
       ],
     };
   });
 
-export const compareMigrationApi = () => homelessGet('/migration')
-    .then((data) => {
-      const formatted = data.map(datum => ({
+export const compareMigrationApi = () =>
+  homelessGet('/migration').then(data => {
+    const formatted = data
+      .map(datum => ({
         name: sentence(datum.migrationarea),
         value: Math.trunc(datum.migrationpercent * 100),
-      })).sort((a, b) => b.value - a.value);
-      return {
-        name: 2015,
-        data: formatted,
-      };
-    });
+      }))
+      .sort((a, b) => b.value - a.value);
+    return {
+      name: 2015,
+      data: formatted,
+    };
+  });

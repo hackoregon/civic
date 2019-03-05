@@ -9,7 +9,8 @@ export const driversOfParticipationStart = actionEmitter(API_START);
 export const driversOfParticipationSuccess = actionEmitter(API_SUCCESS);
 export const driversOfParticipationError = actionEmitter(API_ERROR);
 
-const DRIVERS_OF_PARTICIPATION_API = 'http://service.civicpdx.org/transportation-systems/passenger-census/routes/annual/differences/?format=json&limit=1000';
+const DRIVERS_OF_PARTICIPATION_API =
+  'http://service.civicpdx.org/transportation-systems/passenger-census/routes/annual/differences/?format=json&limit=1000';
 
 export const fetchDriversOfParticipation = apiAdapter(
   DRIVERS_OF_PARTICIPATION_API,

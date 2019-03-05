@@ -13,7 +13,6 @@ import placeholderStory from './Placeholder.story';
 import dropdownStory from './DropdownMenu.story';
 import headerStory from './Header.story';
 import dataTable from './DataTable.story';
-import Welcome from './Welcome';
 import baseMapStory from './BaseMap.story';
 import mapOverlayStory from './MapOverlay.story';
 import hexOverlayStory from './HexOverlay.story';
@@ -33,8 +32,7 @@ import pdfStory from './PDF.story';
 import heatMapStory from './HeatMap.story';
 import civicCardStackStory from './CivicCardStack.story';
 import sliderStory from './Slider.story';
-import landingPage from './LandingPage.story';
-import UIComponentsStyle from './UIComponentsStyle'; 
+import UIComponentsStyle from './UIComponentsStyle';
 import ChartsStyle from './ChartsStyle';
 import MapsStyle from './MapsStyle';
 import CivicPlatformStyle from './CivicPlatformStyle';
@@ -46,6 +44,15 @@ import NavigationStyle from './NavigationStyle.js';
 import ResponsiveDesignStyle from './ResponsiveDesignStyle.js';
 import TerminologyStyle from './TerminologyStyle.js';
 import IconographyStyle from './IconographyStyle';
+import LogosStyle from './LogosStyle';
+import ColorThemeStyle from './ColorThemeStyle';
+import TypographyStyleCommonSample from './TypographyStyleCommonSample';
+import TypographyStyleQuickUsage from './TypographyStyleQuickUsage';
+import TypographyStyleHeadings from './TypographyStyleHeadings';
+import TypographyStyleParagraphs from './TypographyStyleParagraphs';
+import TheBrandStyle from './TheBrandStyle';
+import ThePlatformStyle from './ThePlatformStyle';
+import Introduction from './Introduction';
 
 //Legacy components used in 2017 package. Not supported for ongoing development.
 //import storycardStory from './StoryCard.story';
@@ -53,50 +60,49 @@ import IconographyStyle from './IconographyStyle';
 //import storyFooterStory from './StoryFooter.story';
 //import editableStory from './Editable.story';
 //import sankeyStory from './Sankey.story';
+//import landingPage from './LandingPage.story';
 
 import '../assets/global.styles.css';
 
 // Welcome to Storybook
 storiesOf('Welcome', module)
   .addDecorator(checkA11y)
-  .add('To Storybook', () => (
-    <Welcome showApp={linkTo('Button')} />
+  .add('Introduction', () => <Introduction />)
+  .add('The CIVIC Brand', () => <TheBrandStyle />)
+  .add('The CIVIC Platform', () => (
+    <ThePlatformStyle showApp={linkTo('Button')} />
   ));
 
-  // UX Style Guide
+// Branding
+storiesOf('Branding', module)
+  .addDecorator(checkA11y)
+  .add('Logos', () => <LogosStyle />)
+  .add('Color Theme', () => <ColorThemeStyle />)
+  .add('Typography', () => (
+    <div>
+      <TypographyStyleQuickUsage />
+      <TypographyStyleCommonSample />
+      <TypographyStyleHeadings />
+      <TypographyStyleParagraphs />
+    </div>
+  ));
+
+// UX Style Guide
 storiesOf('UX Style Guide', module)
   .addDecorator(checkA11y)
-  .add('Accessibility', () => (
-    <AccessibilityGuidelinesStyle />
-  ))
-  .add('Cards', () => (
-    <CardsStyle />
-  ))
-  .add('Data Visualization', () => (
-    <DataVisualizationStyle />
-  ))
-  .add('Iconography', () => (
-    <IconographyStyle />
-  ))
-  .add('Motion', () => (
-    <MotionStyle />
-  ))
-  .add('Navigation', () => (
-    <NavigationStyle />
-  ))
-  .add('Responsive Design', () => (
-    <ResponsiveDesignStyle />
-  ))
-  .add('Terminology', () => (
-    <TerminologyStyle />
-  ));
+  .add('Accessibility', () => <AccessibilityGuidelinesStyle />)
+  .add('Cards', () => <CardsStyle />)
+  .add('Data Visualization', () => <DataVisualizationStyle />)
+  .add('Iconography', () => <IconographyStyle />)
+  .add('Motion', () => <MotionStyle />)
+  .add('Navigation', () => <NavigationStyle />)
+  .add('Responsive Design', () => <ResponsiveDesignStyle />)
+  .add('Terminology', () => <TerminologyStyle />);
 
 // common UI components
 storiesOf('UI Components', module)
   .addDecorator(checkA11y)
-  .add('UI Components Style Guide', () => (
-    <UIComponentsStyle />
-  ));
+  .add('UI Components Style Guide', () => <UIComponentsStyle />);
 buttonStory();
 dropdownStory();
 sliderStory();
@@ -104,11 +110,10 @@ sliderStory();
 // charts
 storiesOf('Charts', module)
   .addDecorator(checkA11y)
-  .add('Charts Style Guide', () => (
-    <ChartsStyle />
-  ));
+  .add('Charts Style Guide', () => <ChartsStyle />);
 BarChartStory();
 dataTable();
+gradientScaleStory();
 horizontalBarChartStory();
 lineChartStory();
 pieStory();
@@ -118,9 +123,7 @@ stackedAreaChart();
 // maps
 storiesOf('Maps', module)
   .addDecorator(checkA11y)
-  .add('Maps Style Guide', () => (
-    <MapsStyle />
-  ));
+  .add('Maps Style Guide', () => <MapsStyle />);
 baseMapStory();
 boundaryMapStory();
 civicSandboxMapStory();
@@ -135,15 +138,11 @@ screenGridMapStory();
 // Civic platform components and page layout
 storiesOf('CIVIC Platform Components', module)
   .addDecorator(checkA11y)
-  .add('Platform Components Style Guide', () => (
-    <CivicPlatformStyle />
-  ));
+  .add('Platform Components Style Guide', () => <CivicPlatformStyle />);
 civicCardStackStory();
 civicSandboxDashboardStory();
 civicStorycardStory();
-gradientScaleStory();
 headerStory();
-landingPage();
 packageSelectorBox();
 pageLayoutStory();
 pdfStory();
@@ -153,6 +152,7 @@ sandboxStory();
 
 //Legacy components used in 2017 package. Not supported for ongoing development.
 //editableStory();
+//landingPage();
 //storyLinkStory();
 //storyFooterStory();
 //storycardStory();

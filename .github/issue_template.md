@@ -16,9 +16,11 @@
 > Also include a link to a Figma design if you have one.
 
 ## Data Visualization / Design Concerns
+
 > If you have specific design or data visualization concerns, mention them here
 
 ## Context
+
 > Why is this important? This information will be used to prioritize and contextualize story cards.
 
 ## Data Details (APIs)
@@ -34,8 +36,10 @@
 ## About this data
 
 ### How did we calculate this
->Description or link to GitHub description of data methodology
+
+> Description or link to GitHub description of data methodology
 
 ### See the source
->Link to API / data documentation on GitHub
->Link to original source data
+
+> Link to API / data documentation on GitHub
+> Link to original source data

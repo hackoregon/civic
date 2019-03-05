@@ -14,7 +14,8 @@ const dashboardDescription = css`
   padding: 0 1% 0 5%;
 `;
 
-const displayName = CivicSandboxDashboard.displayName || 'CivicSandboxDashboard';
+const displayName =
+  CivicSandboxDashboard.displayName || 'CivicSandboxDashboard';
 
 class LoadData extends React.Component {
   constructor(props) {
@@ -32,13 +33,17 @@ class LoadData extends React.Component {
       .defer(d3.json, this.props.urls[0])
       .defer(d3.json, this.props.urls[1])
       .await((error, foundation1, slide1) => {
-        if (error) { cmp.setState({error: error}) }
-        cmp.setState({foundation1, slide1});
+        if (error) {
+          cmp.setState({ error: error });
+        }
+        cmp.setState({ foundation1, slide1 });
       });
   }
 
   render() {
-    if (this.state.foundation1 === null) { return null }
+    if (this.state.foundation1 === null) {
+      return null;
+    }
     const { foundation1, slide1 } = this.state;
     return this.props.children(foundation1, slide1);
   }
@@ -50,23 +55,44 @@ const dataURLs = [
 ];
 
 const dashboardComponent = (foundationData1, slideData1) => {
-  if (foundationData1 === null) { return null }
+  if (foundationData1 === null) {
+    return null;
+  }
 
-  const mapboxToken = 'pk.eyJ1IjoidGhlbWVuZG96YWxpbmUiLCJhIjoiY2o1aXdoem1vMWtpNDJ3bnpqaGF1bnlhNSJ9.sjTrNKLW9daDBIGvP3_W0w';
+  const mapboxToken =
+    'pk.eyJ1IjoidGhlbWVuZG96YWxpbmUiLCJhIjoiY2o1aXdoem1vMWtpNDJ3bnpqaGF1bnlhNSJ9.sjTrNKLW9daDBIGvP3_W0w';
   const mapboxStyle = 'mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg';
-  const planetColorScheme = [[247,244,249,255],[231,225,239,255],[212,185,218,255],[201,148,199,255],[223,101,176,255],[231,41,138,255],[206,18,86,255],[152,0,67,255],[103,0,31,255]];
+  const planetColorScheme = [
+    [247, 244, 249, 255],
+    [231, 225, 239, 255],
+    [212, 185, 218, 255],
+    [201, 148, 199, 255],
+    [223, 101, 176, 255],
+    [231, 41, 138, 255],
+    [206, 18, 86, 255],
+    [152, 0, 67, 255],
+    [103, 0, 31, 255],
+  ];
 
   const populationGetColor = f => {
     const population = parseFloat(f.properties.total_population);
-    return population < 3000 ? planetColorScheme[0] :
-      population < 8000 ? planetColorScheme[1] :
-      population < 12000 ? planetColorScheme[2] :
-      population < 16000 ? planetColorScheme[3] :
-      population < 20000 ? planetColorScheme[4] :
-      population < 24000 ? planetColorScheme[5] :
-      population < 28000 ? planetColorScheme[6] :
-      population < 32000 ? planetColorScheme[7] :
-      planetColorScheme[8];
+    return population < 3000
+      ? planetColorScheme[0]
+      : population < 8000
+      ? planetColorScheme[1]
+      : population < 12000
+      ? planetColorScheme[2]
+      : population < 16000
+      ? planetColorScheme[3]
+      : population < 20000
+      ? planetColorScheme[4]
+      : population < 24000
+      ? planetColorScheme[5]
+      : population < 28000
+      ? planetColorScheme[6]
+      : population < 32000
+      ? planetColorScheme[7]
+      : planetColorScheme[8];
   };
 
   const foundation = {
@@ -105,7 +131,7 @@ const dashboardComponent = (foundationData1, slideData1) => {
     data: slideData1.slide_data.features,
     getPosition: f => f.geometry.coordinates,
     opacity: 0.9,
-    getColor: f => [138,43,226,255],
+    getColor: f => [138, 43, 226, 255],
     getRadius: f => 75,
     radiusScale: 1,
     radiusMinPixels: 1,
@@ -131,20 +157,20 @@ const dashboardComponent = (foundationData1, slideData1) => {
 
   // Dashboard Data
   const legendData = {
-    "visualizationType": "Legend",
-    "title": "Map Legend",
-    "min": 2500,
-    "max": 32000,
-    "colors": [
-      "rgba(247,244,249,1.0)",
-      "rgba(231,225,239,1.0)",
-      "rgba(212,185,218,1.0)",
-      "rgba(201,148,199,1.0)",
-      "rgba(223,101,176,1.0)",
-      "rgba(231,41,138,1.0)",
-      "rgba(206,18,86,1.0)",
-      "rgba(152,0,67,1.0)",
-      "rgba(103,0,31,1.0)",
+    visualizationType: 'Legend',
+    title: 'Map Legend',
+    min: 2500,
+    max: 32000,
+    colors: [
+      'rgba(247,244,249,1.0)',
+      'rgba(231,225,239,1.0)',
+      'rgba(212,185,218,1.0)',
+      'rgba(201,148,199,1.0)',
+      'rgba(223,101,176,1.0)',
+      'rgba(231,41,138,1.0)',
+      'rgba(206,18,86,1.0)',
+      'rgba(152,0,67,1.0)',
+      'rgba(103,0,31,1.0)',
     ],
   };
 
@@ -155,37 +181,37 @@ const dashboardComponent = (foundationData1, slideData1) => {
   };
 
   const comarpisonBarData = {
-    "visualizationType": "ComparisonBar",
-    "title": "Total Population",
-    "data": [
+    visualizationType: 'ComparisonBar',
+    title: 'Total Population',
+    data: [
       {
-        "name": "Downtown",
-        "value": 30639,
-        "sortOrder": 2,
+        name: 'Downtown',
+        value: 30639,
+        sortOrder: 2,
       },
       {
-        "name": "Average Total Population",
-        "value": 55000,
-        "sortOrder": 1,
+        name: 'Average Total Population',
+        value: 55000,
+        sortOrder: 1,
       },
     ],
-    "dataLabel": "name",
-    "dataValue": "value",
-    "sortOrder": "sortOrder",
-    "minimalist": true,
+    dataLabel: 'name',
+    dataValue: 'value',
+    sortOrder: 'sortOrder',
+    minimalist: true,
   };
 
   const donutData = {
-    "visualizationType": "PercentDonut",
-    "title": "Households with Children",
-    "data": [
+    visualizationType: 'PercentDonut',
+    title: 'Households with Children',
+    data: [
       {
-        "x": "Households with Children",
-        "y": 0.75,
+        x: 'Households with Children',
+        y: 0.75,
       },
       {
-        "x": null,
-        "y": 0.25,
+        x: null,
+        y: 0.25,
       },
     ],
   };
@@ -197,39 +223,39 @@ const dashboardComponent = (foundationData1, slideData1) => {
 
   const dashboardArray = [
     {
-      "data": legendData,
-      "visible": legnendVisible,
+      data: legendData,
+      visible: legnendVisible,
     },
     {
-      "data": textData,
-      "visible": textVisible,
+      data: textData,
+      visible: textVisible,
     },
     {
-      "data": comarpisonBarData,
-      "visible": comarpisonBarsVisible,
+      data: comarpisonBarData,
+      visible: comarpisonBarsVisible,
     },
     {
-      "data": donutData,
-      "visible": donutVisible,
+      data: donutData,
+      visible: donutVisible,
     },
   ];
 
-  const dashboardData = dashboardArray
-    .filter(d => d.visible)
-    .map(d => d.data);
+  const dashboardData = dashboardArray.filter(d => d.visible).map(d => d.data);
 
   //Dashboard Description
   const dashboardInformation = (
     <div className={dashboardDescription}>
-      <h2>How has ridership changed throughout Tri-Met's service area over time?</h2>
-      <p>{ wallOfText }</p>
-      <p>{ wallOfText }</p>
-      <p>{ wallOfText }</p>
-      <p>{ wallOfText }</p>
-      <p>{ wallOfText }</p>
-      <p>{ wallOfText }</p>
-      <p>{ wallOfText }</p>
-      <p>{ wallOfText }</p>
+      <h2>
+        How has ridership changed throughout Tri-Met's service area over time?
+      </h2>
+      <p>{wallOfText}</p>
+      <p>{wallOfText}</p>
+      <p>{wallOfText}</p>
+      <p>{wallOfText}</p>
+      <p>{wallOfText}</p>
+      <p>{wallOfText}</p>
+      <p>{wallOfText}</p>
+      <p>{wallOfText}</p>
       <h4>Source: census.gov ACS</h4>
     </div>
   );
@@ -237,17 +263,16 @@ const dashboardComponent = (foundationData1, slideData1) => {
 
   return (
     <div>
-      <div style={{ margin: '0 4%'}}>
+      <div style={{ margin: '0 4%' }}>
         <BaseMap
           mapboxToken={mapboxToken}
           mapboxStyle={mapboxStyle}
           initialZoom={10.5}
           initialLatitude={45.5445}
-          initialLongitude={-122.7250}
+          initialLongitude={-122.725}
           height={650}
         >
-            <CivicSandboxMap mapLayers={mapLayers}>
-            </CivicSandboxMap>
+          <CivicSandboxMap mapLayers={mapLayers} />
         </BaseMap>
       </div>
       <div
@@ -265,19 +290,21 @@ const dashboardComponent = (foundationData1, slideData1) => {
         `)}
       >
         <CivicSandboxDashboard data={dashboardData}>
-          { dashboardDescriptionVisible ? dashboardInformation : null }
+          {dashboardDescriptionVisible ? dashboardInformation : null}
         </CivicSandboxDashboard>
       </div>
     </div>
   );
 };
 
-
-export default () => storiesOf('CIVIC Platform Components/CIVIC Sandbox Dashboard', module)
-  .addDecorator(withKnobs)
-  .addDecorator(checkA11y)
-  .add('Simple usage', () => (
-    <LoadData urls={dataURLs}>
-      { (foundation1, slide1, slide2) => dashboardComponent(foundation1, slide1, slide2) }
-    </LoadData>
-  ));
+export default () =>
+  storiesOf('CIVIC Platform Components/CIVIC Sandbox Dashboard', module)
+    .addDecorator(withKnobs)
+    .addDecorator(checkA11y)
+    .add('Simple usage', () => (
+      <LoadData urls={dataURLs}>
+        {(foundation1, slide1, slide2) =>
+          dashboardComponent(foundation1, slide1, slide2)
+        }
+      </LoadData>
+    ));

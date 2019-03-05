@@ -12,9 +12,9 @@ const mapWrapper = css`
   max-width: 900px;
 `;
 
-const elevationScale = {min: 1, max: 50};
+const elevationScale = { min: 1, max: 50 };
 
-const MapOverlay = (props) => {
+const MapOverlay = props => {
   const {
     children,
     data,
@@ -53,13 +53,13 @@ const MapOverlay = (props) => {
   // const DATA_URL = 'https://raw.githubusercontent.com/uber-common/deck.gl-data/master/examples/geojson/vancouver-blocks.json'; // eslint-disable-line
 
   const LIGHT_SETTINGS = {
-      lightsPosition: [-125, 50.5, 5000, -122.8, 48.5, 8000],
-      ambientRatio: 0.2,
-      diffuseRatio: 0.5,
-      specularRatio: 0.3,
-      lightsStrength: [1.0, 0.0, 2.0, 0.0],
-      numberOfLights: 2
-    };
+    lightsPosition: [-125, 50.5, 5000, -122.8, 48.5, 8000],
+    ambientRatio: 0.2,
+    diffuseRatio: 0.5,
+    specularRatio: 0.3,
+    lightsStrength: [1.0, 0.0, 2.0, 0.0],
+    numberOfLights: 2,
+  };
 
   const layer = new GeoJsonLayer({
     data,
@@ -82,8 +82,8 @@ const MapOverlay = (props) => {
 
   return (
     <div className={crosshair}>
-      <DeckGL {...viewport} layers={[layer]} className={'MapOverlay'} >
-        { tooltipRender }
+      <DeckGL {...viewport} layers={[layer]} className={'MapOverlay'}>
+        {tooltipRender}
       </DeckGL>
     </div>
   );
@@ -98,7 +98,7 @@ MapOverlay.propTypes = {
 };
 
 MapOverlay.defaultProps = {
-  mapboxStyle: "mapbox://styles/themendozaline/cjg6296ub04ot2sqv9izku3qq",
+  mapboxStyle: 'mapbox://styles/themendozaline/cjg6296ub04ot2sqv9izku3qq',
 };
 
 export default MapOverlay;

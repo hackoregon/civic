@@ -17,7 +17,7 @@ const storyLinkClass = css`
 
     &:hover {
       background-color: ${primaryColor};
-      color: #FFF;
+      color: #fff;
     }
 
     &:focus {
@@ -37,13 +37,19 @@ const storyLinkClass = css`
 
 const StoryLink = ({ children, icon, route, action }) => (
   <div className={storyLinkClass}>
-    {route
-      ? <Link to={route}><i className={icon} /><span>{children}</span></Link>
-      : <a tabIndex="0" onClick={action}><i className={icon} /><span>{children}</span></a>
-    }
+    {route ? (
+      <Link to={route}>
+        <i className={icon} />
+        <span>{children}</span>
+      </Link>
+    ) : (
+      <a tabIndex="0" onClick={action}>
+        <i className={icon} />
+        <span>{children}</span>
+      </a>
+    )}
   </div>
 );
-
 
 StoryLink.displayName = 'StoryLink';
 StoryLink.propTypes = {

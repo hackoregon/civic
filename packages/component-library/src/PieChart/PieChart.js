@@ -4,11 +4,10 @@ import { VictoryPie, VictoryLabel } from 'victory';
 import ChartContainer from '../ChartContainer';
 import civicTheme from '../VictoryTheme/CivicVictoryTheme.js';
 
-const getOrElse = (possibleValue, defaultValue) => (
-  possibleValue == null ? defaultValue : possibleValue
-);
+const getOrElse = (possibleValue, defaultValue) =>
+  possibleValue == null ? defaultValue : possibleValue;
 
-const PieChart = (props) => {
+const PieChart = props => {
   const {
     title,
     subtitle,
@@ -30,7 +29,12 @@ const PieChart = (props) => {
   const endAngle = halfDoughnut ? 90 : 360;
 
   return (
-    <ChartContainer title={title} subtitle={subtitle} loading={loading} error={error}>
+    <ChartContainer
+      title={title}
+      subtitle={subtitle}
+      loading={loading}
+      error={error}
+    >
       <VictoryPie
         width={width}
         height={height}
@@ -45,14 +49,15 @@ const PieChart = (props) => {
         y={y}
         startAngle={startAngle}
         endAngle={endAngle}
-        labelComponent={<VictoryLabel style={{ ...civicTheme.pieLabel.style }} />}
+        labelComponent={
+          <VictoryLabel style={{ ...civicTheme.pieLabel.style }} />
+        }
       />
     </ChartContainer>
   );
 };
 
-PieChart.defaultProps = {
-};
+PieChart.defaultProps = {};
 
 PieChart.propTypes = {
   title: PropTypes.string,

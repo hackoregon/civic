@@ -29,17 +29,14 @@ export const fetchAllRaces = fetchAdapter(
   }
 );
 
-export const fetchRace = fetchAdapter(
-  `/totalcontributionsrawmonthracetype/`,
-  {
-    encodeParams: (url, race) => `${url}?limit=300&race_type=${race}`,
-    start: RaceStart,
-    success: RaceSuccess,
-    failure: RaceFailure,
-  }
-);
+export const fetchRace = fetchAdapter(`/totalcontributionsrawmonthracetype/`, {
+  encodeParams: (url, race) => `${url}?limit=300&race_type=${race}`,
+  start: RaceStart,
+  success: RaceSuccess,
+  failure: RaceFailure,
+});
 
-export const setRace = (race) => ({
+export const setRace = race => ({
   type: SET_RACE,
   selectedRace: race,
 });

@@ -10,15 +10,12 @@ export const portlandFarmersMarketsSuccess = actionEmitter(IMPORT_SUCCESS);
 
 const importPromise = import('../../assets/farmers-markets.json');
 
-export const fetchPortlandFarmersMarkets = importAdapter(
-  importPromise,
-  {
-    start: portlandFarmersMarketsStart,
-    success: portlandFarmersMarketsSuccess,
-  }
-);
+export const fetchPortlandFarmersMarkets = importAdapter(importPromise, {
+  start: portlandFarmersMarketsStart,
+  success: portlandFarmersMarketsSuccess,
+});
 
-export const setFarmersMarket = (market) => {
+export const setFarmersMarket = market => {
   return {
     type: SET_FARMERS_MARKET,
     selectedMarket: market,

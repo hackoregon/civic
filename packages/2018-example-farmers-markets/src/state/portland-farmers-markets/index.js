@@ -6,7 +6,11 @@ const INITIAL_STATE = {
   data: null,
 };
 
-const loadReducers = importReducer({ INITIAL_STATE, IMPORT_START, IMPORT_SUCCESS });
+const loadReducers = importReducer({
+  INITIAL_STATE,
+  IMPORT_START,
+  IMPORT_SUCCESS,
+});
 const allReducers = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SET_FARMERS_MARKET:

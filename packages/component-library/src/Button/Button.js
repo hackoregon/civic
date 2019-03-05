@@ -12,10 +12,10 @@ const buttonClass = props => css`
   justify-content: space-between;
   transition: ${commonTransition};
   font-size: 1em;
-  font-family: "Rubik", sans-serif;
+  font-family: 'Rubik', sans-serif;
   font-weight: 500;
   color: ${accentColor};
-  background: #FFF;
+  background: #fff;
   cursor: pointer;
   border: 2px solid ${accentColor};
 
@@ -30,7 +30,7 @@ const buttonClass = props => css`
 
   &:hover {
     background-color: ${accentColor};
-    color: #FFF;
+    color: #fff;
   }
 
   &:focus {

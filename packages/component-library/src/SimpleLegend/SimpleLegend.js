@@ -11,7 +11,7 @@ const SimpleLegend = ({ legendData }) => {
     margin: 10px 0 0 0;
 
     @media (max-width: 640px) {
-        text-align: left;
+      text-align: left;
     }
   `;
 
@@ -49,9 +49,7 @@ const SimpleLegend = ({ legendData }) => {
 };
 
 SimpleLegend.propTypes = {
-  legendData: PropTypes.arrayOf(
-    PropTypes.shape({ name: PropTypes.string }),
-  ),
+  legendData: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string })),
 };
 
 SimpleLegend.defaultProps = {

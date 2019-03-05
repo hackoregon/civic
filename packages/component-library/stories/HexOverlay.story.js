@@ -23,29 +23,35 @@ class LoadData extends React.Component {
   componentDidMount() {
     let cmp = this;
     d3.json(this.props.url, (error, data) => {
-      if (error) { return this.setState({error: error})}
-      cmp.setState({data: data});
+      if (error) {
+        return this.setState({ error: error });
+      }
+      cmp.setState({ data: data });
     });
   }
   render() {
-    if (this.state.data === null) { return null }
+    if (this.state.data === null) {
+      return null;
+    }
     return this.props.children(this.state.data);
   }
 }
 
 const displayName = HexOverlay.displayName || 'HexOverlay';
 
-const mapboxToken = 'pk.eyJ1IjoidGhlbWVuZG96YWxpbmUiLCJhIjoiY2o1aXdoem1vMWtpNDJ3bnpqaGF1bnlhNSJ9.sjTrNKLW9daDBIGvP3_W0w';
+const mapboxToken =
+  'pk.eyJ1IjoidGhlbWVuZG96YWxpbmUiLCJhIjoiY2o1aXdoem1vMWtpNDJ3bnpqaGF1bnlhNSJ9.sjTrNKLW9daDBIGvP3_W0w';
 
 const optionsStyle = {
   'Lè Shine': 'mapbox://styles/themendozaline/cjg6296ub04ot2sqv9izku3qq',
   'Label Maker': 'mapbox://styles/themendozaline/cjg627xuw08mk2spjsb8jmho7',
-  'Moonlight': 'mapbox://styles/themendozaline/cjgq6r2lg00072rmqj1wocgdq',
-  'Navigation Guidance Night': 'mapbox://styles/themendozaline/cj6y6f5m006ar2sobpimm7ay7',
+  Moonlight: 'mapbox://styles/themendozaline/cjgq6r2lg00072rmqj1wocgdq',
+  'Navigation Guidance Night':
+    'mapbox://styles/themendozaline/cj6y6f5m006ar2sobpimm7ay7',
   'North Star': 'mapbox://styles/themendozaline/cj5oyewyy0fg22spetiv0hap0',
-  'Odyssey': 'mapbox://styles/themendozaline/cjgq6rklb000d2so1b8myaait',
-  'Scenic': 'mapbox://styles/themendozaline/cj8rrlv4tbtgs2rqnyhckuqva',
-}
+  Odyssey: 'mapbox://styles/themendozaline/cjgq6rklb000d2so1b8myaait',
+  Scenic: 'mapbox://styles/themendozaline/cj8rrlv4tbtgs2rqnyhckuqva',
+};
 
 const coverageOptions = {
   range: true,
@@ -66,7 +72,7 @@ const radiusOptions = {
   min: 1,
   max: 1000,
   step: 0.1,
-}
+};
 
 const elevationOptions = {
   range: true,
@@ -81,7 +87,7 @@ const colorRange = [
   [216, 254, 181],
   [254, 237, 177],
   [254, 173, 84],
-  [209, 55, 78]
+  [209, 55, 78],
 ];
 
 const lightSettings = {
@@ -90,47 +96,54 @@ const lightSettings = {
   diffuseRatio: 0.6,
   specularRatio: 0.2,
   lightsStrength: [0.8, 0.0, 0.8, 0.0],
-  numberOfLights: 2
+  numberOfLights: 2,
 };
 
-export default () => storiesOf('Maps/Hex Overlay', module)
-  .addDecorator(checkA11y)
-  .addDecorator(withKnobs)
-  .add('With tooltip', () => (
-    <LoadData url='https://gist.githubusercontent.com/jasonleonhard/0ff6238d0a26ff5fd029225538734f81/raw/549a4bb2cc3a343d78b8a4486d30fd959ab908df/gistfile1.txt'>
-      {
-        data => {
-          if (data.features === null) { return null }
-
-          const optionsStyle = {
-            'Lè Shine': 'mapbox://styles/themendozaline/cjg6296ub04ot2sqv9izku3qq',
-            'Label Maker': 'mapbox://styles/themendozaline/cjg627xuw08mk2spjsb8jmho7',
-            'Moonlight': 'mapbox://styles/themendozaline/cjgq6r2lg00072rmqj1wocgdq',
-            'Navigation Guidance Night': 'mapbox://styles/themendozaline/cj6y6f5m006ar2sobpimm7ay7',
-            'North Star': 'mapbox://styles/themendozaline/cj5oyewyy0fg22spetiv0hap0',
-            'Odyssey': 'mapbox://styles/themendozaline/cjgq6rklb000d2so1b8myaait',
-            'Scenic': 'mapbox://styles/themendozaline/cj8rrlv4tbtgs2rqnyhckuqva',
+export default () =>
+  storiesOf('Maps/Hex Overlay', module)
+    .addDecorator(checkA11y)
+    .addDecorator(withKnobs)
+    .add('With tooltip', () => (
+      <LoadData url="https://gist.githubusercontent.com/jasonleonhard/0ff6238d0a26ff5fd029225538734f81/raw/549a4bb2cc3a343d78b8a4486d30fd959ab908df/gistfile1.txt">
+        {data => {
+          if (data.features === null) {
+            return null;
           }
 
+          const optionsStyle = {
+            'Lè Shine':
+              'mapbox://styles/themendozaline/cjg6296ub04ot2sqv9izku3qq',
+            'Label Maker':
+              'mapbox://styles/themendozaline/cjg627xuw08mk2spjsb8jmho7',
+            Moonlight:
+              'mapbox://styles/themendozaline/cjgq6r2lg00072rmqj1wocgdq',
+            'Navigation Guidance Night':
+              'mapbox://styles/themendozaline/cj6y6f5m006ar2sobpimm7ay7',
+            'North Star':
+              'mapbox://styles/themendozaline/cj5oyewyy0fg22spetiv0hap0',
+            Odyssey: 'mapbox://styles/themendozaline/cjgq6rklb000d2so1b8myaait',
+            Scenic: 'mapbox://styles/themendozaline/cj8rrlv4tbtgs2rqnyhckuqva',
+          };
+
           const strokeWidthOptions = {
-             range: true,
-             min: 0,
-             max: 100,
-             step: 1,
+            range: true,
+            min: 0,
+            max: 100,
+            step: 1,
           };
 
           const opacityOptions = {
-             range: true,
-             min: 0,
-             max: 1,
-             step: 0.05,
+            range: true,
+            min: 0,
+            max: 1,
+            step: 0.05,
           };
 
           const elevationOptions = {
-             range: true,
-             min: 1,
-             max: 50,
-             step: 1,
+            range: true,
+            min: 1,
+            max: 50,
+            step: 1,
           };
 
           const coverage = number('Coverage:', 0.8, coverageOptions);
@@ -141,13 +154,14 @@ export default () => storiesOf('Maps/Hex Overlay', module)
           const filled = boolean('Filled:', true);
           const wireframe = boolean('Wireframe:', true);
 
-          const mapboxStyle = selectV2('Mapbox Style', optionsStyle, optionsStyle['Label Maker']);
+          const mapboxStyle = selectV2(
+            'Mapbox Style',
+            optionsStyle,
+            optionsStyle['Label Maker']
+          );
 
           return (
-            <BaseMap
-              mapboxToken={mapboxToken}
-              mapboxStyle={mapboxStyle}
-            >
+            <BaseMap mapboxToken={mapboxToken} mapboxStyle={mapboxStyle}>
               <HexOverlay
                 data={data.features}
                 opacity={opacity}
@@ -160,15 +174,15 @@ export default () => storiesOf('Maps/Hex Overlay', module)
                 wireframe={wireframe}
               >
                 <MapTooltip isHex={true} />
-                <LoadData/>
+                <LoadData />
               </HexOverlay>
             </BaseMap>
           );
-      }}
-    </LoadData>
-  ));
+        }}
+      </LoadData>
+    ));
 
-  /*
+/*
   TODO: hard coded mapboxToken for ease for now: best practice to use env vars from .env named REACT_APP_...
   const MAPBOX_TOKEN = process.env.MapboxAccessToken; // eslint-disable-line
 

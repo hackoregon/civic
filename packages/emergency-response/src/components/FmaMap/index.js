@@ -3,7 +3,12 @@ import { LeafletMap } from '@hackoregon/component-library';
 import { LayerGroup, GeoJSON } from 'react-leaflet';
 import { isEmpty } from 'ramda';
 import { connect } from 'react-redux';
-import { getFmasThunk, getFmasData, renderFmaPanelProperties, getFmaPanelData } from '../../state';
+import {
+  getFmasThunk,
+  getFmasData,
+  renderFmaPanelProperties,
+  getFmaPanelData,
+} from '../../state';
 import MapPanel from '../MapPanel/index';
 
 const portland = [45.52, -122.67];
@@ -26,12 +31,20 @@ class FmaMap extends Component {
 
   setOpacity(e) {
     const layer = e.target;
-    layer.setStyle({ color: '#EE495C', fillColor: '#EE495C', fillOpacity: '1' });
+    layer.setStyle({
+      color: '#EE495C',
+      fillColor: '#EE495C',
+      fillOpacity: '1',
+    });
   }
 
   clearOpacity(e) {
     const layer = e.target;
-    layer.setStyle({ color: '#EE495C', fillColor: '#EE495C', fillOpacity: '0.15' });
+    layer.setStyle({
+      color: '#EE495C',
+      fillColor: '#EE495C',
+      fillOpacity: '0.15',
+    });
   }
 
   onEachFeature(feature, layer) {
@@ -45,22 +58,34 @@ class FmaMap extends Component {
   render() {
     return (
       <div>
-        {
-          !isEmpty(this.props.fmasData) ?
-            <LeafletMap center={portland} zoom={11} height={'75vh'} width={'100%'}>
-              <LayerGroup>
-                <GeoJSON style={{ color: '#EE495C', fillColor: '#EE495C', fillOpacity: '0.15' }} data={this.props.fmasData} onEachFeature={this.onEachFeature} />
-              </LayerGroup>
-            </LeafletMap>
-          :
-            <h1>Waiting for map to load...</h1>
-        }
+        {!isEmpty(this.props.fmasData) ? (
+          <LeafletMap
+            center={portland}
+            zoom={11}
+            height={'75vh'}
+            width={'100%'}
+          >
+            <LayerGroup>
+              <GeoJSON
+                style={{
+                  color: '#EE495C',
+                  fillColor: '#EE495C',
+                  fillOpacity: '0.15',
+                }}
+                data={this.props.fmasData}
+                onEachFeature={this.onEachFeature}
+              />
+            </LayerGroup>
+          </LeafletMap>
+        ) : (
+          <h1>Waiting for map to load...</h1>
+        )}
 
-        {
-          this.props.fmaPanelData && !isEmpty(this.props.fmaPanelData) ?
-            <MapPanel /> :
-            <h6>Click on an FMA to view some statistics</h6>
-        }
+        {this.props.fmaPanelData && !isEmpty(this.props.fmaPanelData) ? (
+          <MapPanel />
+        ) : (
+          <h6>Click on an FMA to view some statistics</h6>
+        )}
       </div>
     );
   }
@@ -73,6 +98,7 @@ export default connect(
   }),
   dispatch => ({
     getFmas: () => dispatch(getFmasThunk()),
-    renderPanel: fmaProperties => dispatch(renderFmaPanelProperties(fmaProperties)),
-  }),
+    renderPanel: fmaProperties =>
+      dispatch(renderFmaPanelProperties(fmaProperties)),
+  })
 )(FmaMap);

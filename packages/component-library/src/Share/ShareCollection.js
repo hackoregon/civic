@@ -7,14 +7,13 @@ import { ICONS } from '../styleConstants';
 const MS_TO_SWITCH_TEXT = 3000; // 3 seconds
 
 export default class ShareCollection extends Component {
-
   static defaultProps = {
     collectionId: 'some-collection-id',
-  }
+  };
 
   static propTypes = {
     collectionId: PropTypes.string,
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -32,13 +31,15 @@ export default class ShareCollection extends Component {
     copy(`${window.location.href}`);
     this.switchState(MS_TO_SWITCH_TEXT);
     this.setState({ copied: true });
-  }
+  };
 
   render() {
     const shareTxt = this.state.copied ? 'Link copied!' : 'Share'; // if copied, show Link copied, otherwise, show Share card
     const shareIcon = this.state.copied ? ICONS.check : ICONS.link;
     return (
-      <StoryLink className={'Share'} action={this.handleCopy} icon={shareIcon}>{shareTxt}</StoryLink>
+      <StoryLink className={'Share'} action={this.handleCopy} icon={shareIcon}>
+        {shareTxt}
+      </StoryLink>
     );
   }
 }

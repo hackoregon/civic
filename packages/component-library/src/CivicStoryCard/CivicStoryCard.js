@@ -8,10 +8,10 @@ const cardClass = css`
   max-width: 1000px;
   margin: 1.5em auto;
   position: relative;
-  border: 1px solid #DDD;
+  border: 1px solid #ddd;
   border-radius: 2px;
-  box-shadow: 5px 5px 15px -3px rgba(0,0,0,0.2);
-  padding:3em;
+  box-shadow: 5px 5px 15px -3px rgba(0, 0, 0, 0.2);
+  padding: 3em;
   background-color: white;
 
   p {
@@ -30,7 +30,7 @@ const descriptionClass = css`
 `;
 
 const watermarkContainer = css`
-  position:absolute;
+  position: absolute;
   left: 0;
   top: 0;
   z-index: 0;
@@ -41,8 +41,8 @@ const titleClass = css`
   margin: 0;
   text-align: left;
   font-size: 2.5em;
-  line-height:1.2;
-  margin-bottom:1em;
+  line-height: 1.2;
+  margin-bottom: 1em;
 
   @media (max-width: 640px) {
     font-size: 2em;
@@ -52,13 +52,13 @@ const titleClass = css`
 const cardLoading = css`
   padding: 50px;
   text-align: center;
-  background: #EEE;
+  background: #eee;
 `;
 
 const cardError = css`
   padding: 50px;
   text-align: center;
-  background: #FDD;
+  background: #fdd;
 `;
 
 const desktopOnly = css`
@@ -74,7 +74,16 @@ const mobileOnly = css`
   }
 `;
 
-const CivicStoryCard = ({ slug, title, children, error, loading, source, footer, watermark }) => {
+const CivicStoryCard = ({
+  slug,
+  title,
+  children,
+  error,
+  loading,
+  source,
+  footer,
+  watermark,
+}) => {
   let content = children;
   if (loading) {
     content = <div className={cardLoading}>Loading...</div>;

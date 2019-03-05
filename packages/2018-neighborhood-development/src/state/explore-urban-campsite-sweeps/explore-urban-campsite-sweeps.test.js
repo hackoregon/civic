@@ -14,7 +14,9 @@ describe('explore-urban-campsite-sweeps', () => {
           type: actions.API_START,
         };
 
-        expect(actions.exploreUrbanCampsiteSweepsStart()).to.eql(expectedAction);
+        expect(actions.exploreUrbanCampsiteSweepsStart()).to.eql(
+          expectedAction
+        );
       });
 
       it('should have a success action', () => {
@@ -27,7 +29,9 @@ describe('explore-urban-campsite-sweeps', () => {
           type: actions.API_SUCCESS,
           payload,
         };
-        expect(actions.exploreUrbanCampsiteSweepsSuccess(payload)).to.eql(expectedAction);
+        expect(actions.exploreUrbanCampsiteSweepsSuccess(payload)).to.eql(
+          expectedAction
+        );
       });
 
       it('should have an error action', () => {
@@ -41,7 +45,9 @@ describe('explore-urban-campsite-sweeps', () => {
           payload,
         };
 
-        expect(actions.exploreUrbanCampsiteSweepsError(payload)).to.eql(expectedAction);
+        expect(actions.exploreUrbanCampsiteSweepsError(payload)).to.eql(
+          expectedAction
+        );
       });
     });
   });
@@ -61,9 +67,11 @@ describe('explore-urban-campsite-sweeps', () => {
     });
 
     it('should handle API_START', () => {
-      expect(reducer(initialState, {
-        type: actions.API_START,
-      })).to.eql({
+      expect(
+        reducer(initialState, {
+          type: actions.API_START,
+        })
+      ).to.eql({
         pending: true,
         error: null,
         data: null,
@@ -73,10 +81,15 @@ describe('explore-urban-campsite-sweeps', () => {
     });
 
     it('should handle API_SUCCESS', () => {
-      expect(reducer({ pending: true, error: null, data: null, timer: 0, max_timer: 18 }, {
-        type: actions.API_SUCCESS,
-        payload,
-      })).to.eql({
+      expect(
+        reducer(
+          { pending: true, error: null, data: null, timer: 0, max_timer: 18 },
+          {
+            type: actions.API_SUCCESS,
+            payload,
+          }
+        )
+      ).to.eql({
         pending: false,
         data: payload,
         error: null,
@@ -86,10 +99,15 @@ describe('explore-urban-campsite-sweeps', () => {
     });
 
     it('should handle API_ERROR', () => {
-      expect(reducer({ pending: true, error: null, data: null, timer: 0, max_timer: 18 }, {
-        type: actions.API_ERROR,
-        payload,
-      })).to.eql({
+      expect(
+        reducer(
+          { pending: true, error: null, data: null, timer: 0, max_timer: 18 },
+          {
+            type: actions.API_ERROR,
+            payload,
+          }
+        )
+      ).to.eql({
         data: null,
         pending: false,
         error: payload,
@@ -104,62 +122,76 @@ describe('explore-urban-campsite-sweeps', () => {
       it('extends the root selector', () => {
         const expectation = { one: 'two', three: 4 };
 
-        expect(selectors.getCampsiteSweepsRequest({
-          exploreUrbanCampsiteSweeps: expectation,
-        })).to.eql(expectation);
-
-        expect(selectors.getCampsiteSweepsRequest({
-          red: 'herring',
-          neighborhood: {
+        expect(
+          selectors.getCampsiteSweepsRequest({
             exploreUrbanCampsiteSweeps: expectation,
-          },
-        })).to.eql(expectation);
+          })
+        ).to.eql(expectation);
+
+        expect(
+          selectors.getCampsiteSweepsRequest({
+            red: 'herring',
+            neighborhood: {
+              exploreUrbanCampsiteSweeps: expectation,
+            },
+          })
+        ).to.eql(expectation);
       });
     });
 
     describe('getexploreUrbanCampsiteSweepsData', () => {
       it('returns undefined when there is no data', () => {
-        expect(selectors.getCampsiteSweepsData({
-          exploreUrbanCampsiteSweeps: {
-            no: 'data to be seen',
-          },
-        })).to.be.undefined;
+        expect(
+          selectors.getCampsiteSweepsData({
+            exploreUrbanCampsiteSweeps: {
+              no: 'data to be seen',
+            },
+          })
+        ).to.be.undefined;
       });
 
       it('returns undefined when data is not the right format', () => {
-        expect(selectors.getCampsiteSweepsData({
-          exploreUrbanCampsiteSweeps: {
-            data: {
-              somethingDifferent: {},
+        expect(
+          selectors.getCampsiteSweepsData({
+            exploreUrbanCampsiteSweeps: {
+              data: {
+                somethingDifferent: {},
+              },
             },
-          },
-        })).to.be.undefined;
+          })
+        ).to.be.undefined;
       });
     });
 
     describe('isexploreUrbanCampsiteSweepsPending', () => {
       it('returns false when there is no value for pending', () => {
-        expect(selectors.isCampsiteSweepsPending({
-          exploreUrbanCampsiteSweeps: {
-            no: 'pending property',
-          },
-        })).to.be.false;
+        expect(
+          selectors.isCampsiteSweepsPending({
+            exploreUrbanCampsiteSweeps: {
+              no: 'pending property',
+            },
+          })
+        ).to.be.false;
       });
 
       it('returns false when the value for pending is false', () => {
-        expect(selectors.isCampsiteSweepsPending({
-          exploreUrbanCampsiteSweeps: {
-            pending: false,
-          },
-        })).to.be.false;
+        expect(
+          selectors.isCampsiteSweepsPending({
+            exploreUrbanCampsiteSweeps: {
+              pending: false,
+            },
+          })
+        ).to.be.false;
       });
 
       it('returns true when the value for pending is true', () => {
-        expect(selectors.isCampsiteSweepsPending({
-          exploreUrbanCampsiteSweeps: {
-            pending: true,
-          },
-        })).to.be.true;
+        expect(
+          selectors.isCampsiteSweepsPending({
+            exploreUrbanCampsiteSweeps: {
+              pending: true,
+            },
+          })
+        ).to.be.true;
       });
     });
   });

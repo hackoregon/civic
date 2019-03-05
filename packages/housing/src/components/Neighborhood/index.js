@@ -1,4 +1,4 @@
-import React from 'react'; 
+import React from 'react';
 import PropTypes from 'prop-types';
 import { GeoJSON, LayerGroup } from 'react-leaflet';
 import { crossHatch } from '../CrossHatch';
@@ -39,7 +39,11 @@ const setYouPathOptions = ({ affordableYou }) => ({
 const Neighborhood = ({ data, onSelect }) => (
   <LayerGroup>
     <GeoJSON data={data} {...setYouPathOptions(data)} />
-    <GeoJSON data={data} {...setOtherPathOptions(data)} onClick={e => onSelect(e.layer.feature)} />
+    <GeoJSON
+      data={data}
+      {...setOtherPathOptions(data)}
+      onClick={e => onSelect(e.layer.feature)}
+    />
   </LayerGroup>
 );
 

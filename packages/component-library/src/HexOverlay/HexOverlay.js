@@ -23,7 +23,7 @@ class HexOverlay extends Component {
     this.startAnimationTimer = null;
     this.intervalTimer = null;
     this.state = {
-      elevationScale: elevationScale.min
+      elevationScale: elevationScale.min,
     };
 
     this._startAnimate = this._startAnimate.bind(this);
@@ -64,7 +64,7 @@ class HexOverlay extends Component {
     if (this.state.elevationScale === elevationScale.max) {
       this._stopAnimate();
     } else {
-      this.setState({elevationScale: this.state.elevationScale + 1});
+      this.setState({ elevationScale: this.state.elevationScale + 1 });
     }
   }
 
@@ -120,15 +120,13 @@ class HexOverlay extends Component {
         pickable: true,
         upperPercentile: 100,
         getPosition: d => d.geometry.coordinates,
-      })
+      }),
     ];
 
     return (
-      <div className={ crosshair }>
-        <DeckGL { ...viewport }
-                layers={ layers } className={ 'HexOverlay' }
-        >
-          { tooltipRender }
+      <div className={crosshair}>
+        <DeckGL {...viewport} layers={layers} className={'HexOverlay'}>
+          {tooltipRender}
         </DeckGL>
       </div>
     );

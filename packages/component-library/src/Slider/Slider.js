@@ -6,7 +6,13 @@ import './SliderBox.css';
 
 const Slider = ({ value, onChange, min, max }) => (
   <div>
-    <RcSlider tipformatter={null} min={min} max={max} value={value} onChange={onChange} />
+    <RcSlider
+      tipformatter={null}
+      min={min}
+      max={max}
+      value={value}
+      onChange={onChange}
+    />
     <SliderTooltip value={value} />
   </div>
 );

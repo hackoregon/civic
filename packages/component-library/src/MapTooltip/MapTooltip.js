@@ -15,7 +15,7 @@ const tooltip = css`
   pointer-events: none;
 `;
 
-const MapTooltip = (props) => {
+const MapTooltip = props => {
   const {
     tooltipInfo,
     x,
@@ -24,11 +24,12 @@ const MapTooltip = (props) => {
     primaryField,
     secondaryName,
     secondaryField,
-    isHex
+    isHex,
   } = props;
 
-  const xPosition = x < window.innerWidth * 0.66 ? x : x - (window.innerWidth * 0.1);
-  const yPostition = y < 375  ? y : y - 50;
+  const xPosition =
+    x < window.innerWidth * 0.66 ? x : x - window.innerWidth * 0.1;
+  const yPostition = y < 375 ? y : y - 50;
 
   return (
     <div
@@ -38,22 +39,22 @@ const MapTooltip = (props) => {
         top: yPostition,
       }}
     >
-      { primaryName ?
+      {primaryName ? (
         <div>
           {primaryName}: {tooltipInfo.properties[primaryField]}
-        </div> : null
-      }
-      { secondaryName ?
+        </div>
+      ) : null}
+      {secondaryName ? (
         <div>
           {secondaryName}: {tooltipInfo.properties[secondaryField]}
-        </div> : null
-      }
-      { isHex ?
+        </div>
+      ) : null}
+      {isHex ? (
         <div>
           <div>elevation: {tooltipInfo.elevationValue}</div>
           <div>coordinates: {tooltipInfo.centroid.join(', ')}</div>
-        </div> : null
-      }
+        </div>
+      ) : null}
     </div>
   );
 };

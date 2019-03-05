@@ -46,14 +46,17 @@ describe('affordability actions', () => {
   });
 
   describe('affordability fetch thunk', () => {
-    const commonAffordabilityRequest = '/affordable?format=json&demographic=Avg.%20Portland%20Household&housing_size=Homeownership';
+    const commonAffordabilityRequest =
+      '/affordable?format=json&demographic=Avg.%20Portland%20Household&housing_size=Homeownership';
     let store;
 
     beforeEach(() => {
       store = mockStore({});
     });
 
-    afterEach(() => { nock.cleanAll(); });
+    afterEach(() => {
+      nock.cleanAll();
+    });
 
     it('should dispatch fetch and success when the fetch is successful', () => {
       const mockAffordabilityResponse = [
@@ -75,11 +78,13 @@ describe('affordability actions', () => {
         { type: actionTypes.CALL_START },
         {
           type: actionTypes.CALL_SUCCESS,
-          payload: [{
-            affordable: true,
-            id: 10,
-            year: 2016,
-          }],
+          payload: [
+            {
+              affordable: true,
+              id: 10,
+              year: 2016,
+            },
+          ],
         },
       ];
 
@@ -120,21 +125,28 @@ describe('affordability reducer', () => {
   });
 
   it('should handle CALL_START', () => {
-    expect(reducer(initialState, {
-      type: actionTypes.CALL_START,
-    })).to.eql({
+    expect(
+      reducer(initialState, {
+        type: actionTypes.CALL_START,
+      })
+    ).to.eql({
       pending: true,
       data: null,
       error: null,
     });
 
-    expect(reducer({
-      pending: true,
-      data: null,
-      error: null,
-    }, {
-      type: actionTypes.CALL_START,
-    })).to.eql({
+    expect(
+      reducer(
+        {
+          pending: true,
+          data: null,
+          error: null,
+        },
+        {
+          type: actionTypes.CALL_START,
+        }
+      )
+    ).to.eql({
       pending: true,
       data: null,
       error: null,
@@ -144,23 +156,30 @@ describe('affordability reducer', () => {
   it('should handle CALL_FAIL', () => {
     const error = new Error('oops');
 
-    expect(reducer(initialState, {
-      type: actionTypes.CALL_FAIL,
-      payload: error,
-    })).to.eql({
+    expect(
+      reducer(initialState, {
+        type: actionTypes.CALL_FAIL,
+        payload: error,
+      })
+    ).to.eql({
       pending: false,
       data: null,
       error,
     });
 
-    expect(reducer({
-      pending: true,
-      data: ['stuff'],
-      error: null,
-    }, {
-      type: actionTypes.CALL_FAIL,
-      payload: error,
-    })).to.eql({
+    expect(
+      reducer(
+        {
+          pending: true,
+          data: ['stuff'],
+          error: null,
+        },
+        {
+          type: actionTypes.CALL_FAIL,
+          payload: error,
+        }
+      )
+    ).to.eql({
       pending: false,
       data: null,
       error,
@@ -173,23 +192,30 @@ describe('affordability reducer', () => {
       [':(', 'Senior', 37469, 'Sellwood-Moreland-Brooklyn', 2016],
     ];
 
-    expect(reducer(initialState, {
-      type: actionTypes.CALL_SUCCESS,
-      payload: data,
-    })).to.eql({
+    expect(
+      reducer(initialState, {
+        type: actionTypes.CALL_SUCCESS,
+        payload: data,
+      })
+    ).to.eql({
       pending: false,
       error: null,
       data,
     });
 
-    expect(reducer({
-      pending: true,
-      error: new Error('oops'),
-      data: null,
-    }, {
-      type: actionTypes.CALL_SUCCESS,
-      payload: data,
-    })).to.eql({
+    expect(
+      reducer(
+        {
+          pending: true,
+          error: new Error('oops'),
+          data: null,
+        },
+        {
+          type: actionTypes.CALL_SUCCESS,
+          payload: data,
+        }
+      )
+    ).to.eql({
       pending: false,
       error: null,
       data,
@@ -218,12 +244,16 @@ describe('affordability selectors', () => {
     });
 
     it('should return the affordability request object when set', () => {
-      state = { affordability: {
-        pending: true,
-        data: null,
-        error: null,
-      } };
-      expect(selectors.getAffordabilityRequest(state)).to.eql(state.affordability);
+      state = {
+        affordability: {
+          pending: true,
+          data: null,
+          error: null,
+        },
+      };
+      expect(selectors.getAffordabilityRequest(state)).to.eql(
+        state.affordability
+      );
     });
   });
 

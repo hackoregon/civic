@@ -6,14 +6,23 @@ import { css } from 'emotion';
 import '@hackoregon/component-library/assets/vendor/react-select.min.css';
 
 const dropdownClass = css`
-  background-color: #FFF;
+  background-color: #fff;
   cursor: pointer;
   font-size: 15px;
   margin: 10px;
   z-index: 1404 !important;
 `;
 
-const Dropdown = ({ options, onChange, value, clearable, searchable, disabled, simpleValue, multi }) => (
+const Dropdown = ({
+  options,
+  onChange,
+  value,
+  clearable,
+  searchable,
+  disabled,
+  simpleValue,
+  multi,
+}) => (
   <Select
     className={dropdownClass}
     options={options}
@@ -25,14 +34,14 @@ const Dropdown = ({ options, onChange, value, clearable, searchable, disabled, s
     simpleValue={simpleValue}
     multi={multi}
   />
-  );
+);
 
 Dropdown.displayName = 'Dropdown';
 
 Dropdown.propTypes = {
   onChange: PropTypes.func.isRequired,
   options: PropTypes.array.isRequired,
-  value: PropTypes.any.isRequired,  // eslint-disable-line react/forbid-prop-types
+  value: PropTypes.any.isRequired, // eslint-disable-line react/forbid-prop-types
   clearable: PropTypes.bool,
   searchable: PropTypes.bool,
   disabled: PropTypes.bool,

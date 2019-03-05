@@ -4,10 +4,20 @@ import { connect } from 'react-redux';
 import { css } from 'emotion';
 import { min, max } from 'lodash';
 
-import { CivicStoryCard, Collapsable, BaseMap, ScatterPlotMap, Button, ChartContainer } from '@hackoregon/component-library';
+import {
+  CivicStoryCard,
+  Collapsable,
+  BaseMap,
+  ScatterPlotMap,
+  Button,
+  ChartContainer,
+} from '@hackoregon/component-library';
 import { contextualDesc, belowFoldOne, belowFoldTwo } from './text';
 
-import { fetchCampsiteSweeps, incrementTimer } from '../../state/explore-urban-campsite-sweeps/actions';
+import {
+  fetchCampsiteSweeps,
+  incrementTimer,
+} from '../../state/explore-urban-campsite-sweeps/actions';
 import {
   isCampsiteSweepsPending,
   catchCampsiteSweepsErrors,
@@ -31,16 +41,9 @@ export class ExploreUrbanCampsiteSweeps extends React.Component {
   }
 
   render() {
-    const {
-      isLoading,
-      error,
-      data,
-      timer,
-    } = this.props;
+    const { isLoading, error, data, timer } = this.props;
 
-    const scatterplot = !data
-    ? null
-    : (
+    const scatterplot = !data ? null : (
       <ScatterPlotMap
         data={data}
         autoHighlight={false}
@@ -94,7 +97,6 @@ ExploreUrbanCampsiteSweeps.propTypes = {
 };
 
 export default connect(
-
   state => ({
     isLoading: isCampsiteSweepsPending(state),
     error: catchCampsiteSweepsErrors(state),
@@ -108,5 +110,5 @@ export default connect(
     startTimer() {
       return setInterval(() => dispatch(incrementTimer(1)), 800);
     },
-  }),
+  })
 )(ExploreUrbanCampsiteSweeps);

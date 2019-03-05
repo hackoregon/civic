@@ -2,14 +2,13 @@ import { format } from 'd3-format';
 import { timeFormat } from 'd3-time-format';
 import { startCase, toLower } from 'lodash';
 
-
 const scales = [
   [1000000000000, 'trillion'],
   [1000000000, 'billion'],
   [1000000, 'million'],
 ];
 
-const abbreviateLarge = (number) => {
+const abbreviateLarge = number => {
   let num;
   let scale;
 
@@ -24,7 +23,7 @@ const abbreviateLarge = (number) => {
   return `${num} ${scale}`;
 };
 
-export const numeric = (d) => {
+export const numeric = d => {
   let formatted;
 
   // We want to specifically format numbers greater than one million.
@@ -43,4 +42,4 @@ export const dollars = d => `$${d}`;
 
 export const titleCase = str => startCase(toLower(str));
 export const unformatted = d => d;
-export const monthYear = timeFormat("%B %Y");
+export const monthYear = timeFormat('%B %Y');

@@ -22,7 +22,8 @@ export class DiveDeeperIntoTransportationData extends React.Component {
   }
 }
 
-DiveDeeperIntoTransportationData.displayName = 'DiveDeeperIntoTransportationData';
+DiveDeeperIntoTransportationData.displayName =
+  'DiveDeeperIntoTransportationData';
 
 // Connect this to the redux store when necessary
 export default DiveDeeperIntoTransportationData;

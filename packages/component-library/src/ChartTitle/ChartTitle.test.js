@@ -5,7 +5,9 @@ import ChartTitle from './ChartTitle';
 
 describe('ChartTitle', () => {
   it('should render a title and subtitle when provided', () => {
-    const wrapper = shallow(<ChartTitle title="Fun title" subtitle="Fun subtitle" />);
+    const wrapper = shallow(
+      <ChartTitle title="Fun title" subtitle="Fun subtitle" />
+    );
 
     expect(wrapper.find('h3').text()).to.eql('Fun title');
     expect(wrapper.find('span').text()).to.eql('Fun subtitle');
