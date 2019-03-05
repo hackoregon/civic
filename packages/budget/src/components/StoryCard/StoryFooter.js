@@ -8,7 +8,6 @@ import './StoryFooter.css';
 const MS_TO_SWITCH_TEXT = 3000; // 3 seconds
 
 export default class StoryFooter extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -19,11 +18,15 @@ export default class StoryFooter extends Component {
     this.handleCopy = this.handleCopy.bind(this);
   }
 
-  setToFalse () { this.setState({ copied: false }); }
+  setToFalse() {
+    this.setState({ copied: false });
+  }
 
-  switchState (ms) { setTimeout(this.setToFalse, ms); }
+  switchState(ms) {
+    setTimeout(this.setToFalse, ms);
+  }
 
-  handleCopy () {
+  handleCopy() {
     const { collectionId, cardId } = this.props;
     // NOTE: we need to make sure this will work on all browsers
     copy(`${window.location.origin}/${collectionId}/${cardId}`);
@@ -37,8 +40,20 @@ export default class StoryFooter extends Component {
     const shareIcon = this.state.copied ? ICONS.check : ICONS.link;
     return (
       <div className={'Actions'}>
-        <StoryLink className={'Context'} route={`/${collectionId}/${cardId}`} icon={ICONS.eye}>View card</StoryLink>
-        <StoryLink className={'Share'} action={this.handleCopy} icon={shareIcon}>{shareTxt}</StoryLink>
+        <StoryLink
+          className={'Context'}
+          route={`/${collectionId}/${cardId}`}
+          icon={ICONS.eye}
+        >
+          View card
+        </StoryLink>
+        <StoryLink
+          className={'Share'}
+          action={this.handleCopy}
+          icon={shareIcon}
+        >
+          {shareTxt}
+        </StoryLink>
       </div>
     );
   }
@@ -47,9 +62,9 @@ export default class StoryFooter extends Component {
 StoryFooter.defaultProps = {
   cardId: 'some-card-id',
   collectionId: 'some-collection-id',
-}
+};
 
 StoryFooter.propTypes = {
   cardId: PropTypes.string,
   collectionId: PropTypes.string,
-}
+};

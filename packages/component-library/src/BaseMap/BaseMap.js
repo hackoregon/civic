@@ -7,7 +7,8 @@ import createRef from 'create-react-ref/lib/createRef';
 import Geocoder from 'react-map-gl-geocoder';
 import './mapbox-gl.css';
 
-const MAPBOX_TOKEN = 'pk.eyJ1IjoiaGFja29yZWdvbiIsImEiOiJjamk0MGZhc2cwNDl4M3FsdHAwaG54a3BnIn0.Fq1KA0IUwpeKQlFIoaEn_Q';
+const MAPBOX_TOKEN =
+  'pk.eyJ1IjoiaGFja29yZWdvbiIsImEiOiJjamk0MGZhc2cwNDl4M3FsdHAwaG54a3BnIn0.Fq1KA0IUwpeKQlFIoaEn_Q';
 
 const mapWrapper = css`
   margin: 0 auto;
@@ -26,7 +27,7 @@ class BaseMap extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      viewport:{
+      viewport: {
         longitude: props.initialLongitude || -122.6765,
         latitude: props.initialLatitude || 45.5231,
         zoom: props.initialZoom || 9.5,
@@ -48,11 +49,11 @@ class BaseMap extends Component {
 
   onViewportChange(viewport) {
     this.setState({
-      viewport: {...this.state.viewport, ...viewport},
+      viewport: { ...this.state.viewport, ...viewport },
     });
   }
 
-  onHover({object, x, y}) {
+  onHover({ object, x, y }) {
     this.setState({
       tooltipInfo: object,
       x,
@@ -60,18 +61,13 @@ class BaseMap extends Component {
     });
   }
 
-  componentDidMount() { //Geocoder requires a ref to the map component
+  componentDidMount() {
+    //Geocoder requires a ref to the map component
     this.setState({ mounted: true });
   }
 
   render() {
-    const {
-      viewport,
-      tooltipInfo,
-      x,
-      y,
-      mounted,
-    } = this.state;
+    const { viewport, tooltipInfo, x, y, mounted } = this.state;
 
     const {
       height,
@@ -85,7 +81,9 @@ class BaseMap extends Component {
       children,
     } = this.props;
 
-    viewport.width = this.props.containerWidth ? this.props.containerWidth : 500;
+    viewport.width = this.props.containerWidth
+      ? this.props.containerWidth
+      : 500;
     viewport.height = height ? height : 500;
 
     const childrenLayers = React.Children.map(children, child => {
@@ -110,25 +108,25 @@ class BaseMap extends Component {
           {...mapGLOptions}
         >
           <div className={navControl}>
-          { navigation &&
-            <NavigationControl
-              className={'NavigationControl'}
-              onViewportChange={viewport => this.onViewportChange(viewport)}
-            />
-          }
+            {navigation && (
+              <NavigationControl
+                className={'NavigationControl'}
+                onViewportChange={viewport => this.onViewportChange(viewport)}
+              />
+            )}
           </div>
-          { (geocoder && mounted) &&
+          {geocoder && mounted && (
             <Geocoder
               mapRef={{ current: this.mapRef.current }}
               mapboxApiAccessToken={mapboxToken}
-              onViewportChange={(viewport) => {
+              onViewportChange={viewport => {
                 this.onViewportChange(viewport);
                 geocoderOnChange(viewport);
               }}
               options={{ ...geocoderOptions }}
             />
-          }
-          { childrenLayers }
+          )}
+          {childrenLayers}
         </MapGL>
       </div>
     );
@@ -147,9 +145,10 @@ BaseMap.propTypes = {
 };
 
 BaseMap.defaultProps = {
-  mapboxStyle: "mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg",
-  mapboxToken: "pk.eyJ1IjoiaGFja29yZWdvbiIsImEiOiJjamk0MGZhc2cwNDl4M3FsdHAwaG54a3BnIn0.Fq1KA0IUwpeKQlFIoaEn_Q",
+  mapboxStyle: 'mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg',
+  mapboxToken:
+    'pk.eyJ1IjoiaGFja29yZWdvbiIsImEiOiJjamk0MGZhc2cwNDl4M3FsdHAwaG54a3BnIn0.Fq1KA0IUwpeKQlFIoaEn_Q',
   navigation: true,
   geocoder: false,
 };
-export default Dimensions()(BaseMap)
+export default Dimensions()(BaseMap);

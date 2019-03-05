@@ -1,7 +1,9 @@
 import './fonts.css';
 
 export { default as AreaChart } from './AreaChart/AreaChart';
-export { default as HorizontalBarChart } from './HorizontalBarChart/HorizontalBarChart';
+export {
+  default as HorizontalBarChart,
+} from './HorizontalBarChart/HorizontalBarChart';
 export { default as BarChart } from './BarChart/BarChart';
 export { default as LineChart } from './LineChart/LineChart';
 export { default as Sankey } from './Sankey/Sankey';
@@ -45,12 +47,18 @@ export { default as BoundaryMap } from './BoundaryMap/BoundaryMap';
 export { default as MapTooltip } from './MapTooltip/MapTooltip';
 export { default as CivicSandboxMap } from './CivicSandboxMap/CivicSandboxMap';
 export { default as GradientScale } from './GradientScale/GradientScale';
-export { default as PackageSelectorBox } from './PackageSelectorBox/PackageSelectorBox';
+export {
+  default as PackageSelectorBox,
+} from './PackageSelectorBox/PackageSelectorBox';
 export { default as CanvasParticles } from './LandingPage/CanvasParticles';
-export { default as CivicSandboxDashboard } from './CivicSandboxDashboard/CivicSandboxDashboard';
+export {
+  default as CivicSandboxDashboard,
+} from './CivicSandboxDashboard/CivicSandboxDashboard';
 export { default as Collapsable } from './Collapsable/Collapsable';
 export { default as Sandbox } from './Sandbox/Sandbox';
-export { default as StackedAreaChart } from './StackedAreaChart/StackedAreaChart';
+export {
+  default as StackedAreaChart,
+} from './StackedAreaChart/StackedAreaChart';
 export { default as PDF } from './PDF/PDF';
 export { default as SimpleLegend } from './SimpleLegend/SimpleLegend';
 export { default as ChartTitle } from './ChartTitle/ChartTitle';

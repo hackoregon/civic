@@ -3,35 +3,35 @@ import { rootState } from '../selectors';
 
 export const getVotersOnTheMoveRequest = createSelector(
   rootState,
-  ({ votersOnTheMove }) => votersOnTheMove,
+  ({ votersOnTheMove }) => votersOnTheMove
 );
 
 export const getVotersOnTheMoveData = createSelector(
   getVotersOnTheMoveRequest,
-  ({ data }) => data,
+  ({ data }) => data
 );
 
 export const isVotersOnTheMovePending = createSelector(
   getVotersOnTheMoveRequest,
-  ({ pending }) => !!pending,
+  ({ pending }) => !!pending
 );
 
 export const catchVotersOnTheMoveErrors = createSelector(
   getVotersOnTheMoveRequest,
-  ({ error }) => error,
+  ({ error }) => error
 );
 
 export const getAwayVotersOnTheMoveData = createSelector(
   getVotersOnTheMoveRequest,
-  ({ awayData }) => awayData,
+  ({ awayData }) => awayData
 );
 
 export const isAwayVotersOnTheMovePending = createSelector(
   getVotersOnTheMoveRequest,
-  ({ awayPending }) => !!awayPending,
+  ({ awayPending }) => !!awayPending
 );
 
 export const catchAwayVotersOnTheMoveErrors = createSelector(
   getVotersOnTheMoveRequest,
-  ({ awayError }) => awayError,
+  ({ awayError }) => awayError
 );

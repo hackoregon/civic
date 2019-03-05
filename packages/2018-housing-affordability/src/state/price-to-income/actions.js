@@ -42,7 +42,8 @@ export const fetchAllPTICities = fetchAdapter(
 export const fetchPTICity = fetchAdapter(
   `/api/harvardjchs/?datatype=${datatype}`,
   {
-    encodeParams: (url, city = 'Portland-Vancouver-Hillsboro, OR-WA') => `${url}&limit=50&datapoint=${slugify(city)}`,
+    encodeParams: (url, city = 'Portland-Vancouver-Hillsboro, OR-WA') =>
+      `${url}&limit=50&datapoint=${slugify(city)}`,
     start: PTIStart,
     success: PTISuccess,
     failure: PTIFailure,

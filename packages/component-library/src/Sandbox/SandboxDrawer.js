@@ -47,10 +47,16 @@ const SandboxDrawer = ({
           font-size: .8rem;
           cursor: pointer;
         `)}
-        ><span>data overlays</span> <span className={css('font-size: 1.2rem; color: rgb(237,73,91);')}>{drawerVisible ? '<' : '>'}</span></div>
+        >
+          <span>data overlays</span>{' '}
+          <span className={css('font-size: 1.2rem; color: rgb(237,73,91);')}>
+            {drawerVisible ? '<' : '>'}
+          </span>
+        </div>
       </div>
-      {drawerVisible && <div
-        className={css(`
+      {drawerVisible && (
+        <div
+          className={css(`
         position: absolute;
         display: block;
         width: 250px;
@@ -65,63 +71,71 @@ const SandboxDrawer = ({
           z-index: 9999;
         }
       `)}
-      >
-        <div className={css('position: relative; z-index: 5000;')}>
-          <Dropdown
-            value={selectedSlide.join(',')}
-            options={options}
-            onChange={onChange}
-            multi
-            simpleValue
-          />
-        </div>
-        {foundationData && <div>
-          <div
-            className={title}
-          >{defaultFoundation.name}</div>
-          <div
-            className={css(`
+        >
+          <div className={css('position: relative; z-index: 5000;')}>
+            <Dropdown
+              value={selectedSlide.join(',')}
+              options={options}
+              onChange={onChange}
+              multi
+              simpleValue
+            />
+          </div>
+          {foundationData && (
+            <div>
+              <div className={title}>{defaultFoundation.name}</div>
+              <div
+                className={css(`
               padding: .5rem;
               font-size: .75rem;
               color: #333;
               position: relative;
               z-index: 5
               `)}
-          >
-            Date info driven by dropdown
-            <SandboxDateSelector slide={defaultFoundation} selectedSlideData={foundationData} fetchSlideByDate={fetchSlideByDate} type="foundation" />
-          </div>
-        </div>
-        }
+              >
+                Date info driven by dropdown
+                <SandboxDateSelector
+                  slide={defaultFoundation}
+                  selectedSlideData={foundationData}
+                  fetchSlideByDate={fetchSlideByDate}
+                  type="foundation"
+                />
+              </div>
+            </div>
+          )}
 
-        {defaultSlides.map((slide, index) => {
-          let selectedSlideData = {};
-          if (slideData.length) {
-            selectedSlideData = slideData.find((sData) => {
-              return sData[slide.name];
-            })[slide.name];
-          }
-          return (
-            <div>
-              <div
-                className={title}
-              >{slide.name}</div>
-              <div
-                className={css(`
+          {defaultSlides.map((slide, index) => {
+            let selectedSlideData = {};
+            if (slideData.length) {
+              selectedSlideData = slideData.find(sData => {
+                return sData[slide.name];
+              })[slide.name];
+            }
+            return (
+              <div>
+                <div className={title}>{slide.name}</div>
+                <div
+                  className={css(`
                   padding: .5rem;
                   font-size: .75rem;
                   color: #333;
                   position: relative;
                   z-index: ${5 - index}
                   `)}
-              >
-                Date info driven by dropdown
-                <SandboxDateSelector selectedSlideData={selectedSlideData} slide={slide} fetchSlideByDate={fetchSlideByDate} type="slide" />
+                >
+                  Date info driven by dropdown
+                  <SandboxDateSelector
+                    selectedSlideData={selectedSlideData}
+                    slide={slide}
+                    fetchSlideByDate={fetchSlideByDate}
+                    type="slide"
+                  />
+                </div>
               </div>
-            </div>);
-        }) }
-      </div>
-      }
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };

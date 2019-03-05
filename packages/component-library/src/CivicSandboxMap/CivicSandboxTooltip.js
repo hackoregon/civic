@@ -1,5 +1,12 @@
 import React from 'react';
-import { string, number, arrayOf, objectOf, oneOfType, shape} from 'prop-types';
+import {
+  string,
+  number,
+  arrayOf,
+  objectOf,
+  oneOfType,
+  shape,
+} from 'prop-types';
 import { css } from 'emotion';
 
 const tooltip = css`
@@ -15,21 +22,18 @@ const tooltip = css`
   pointer-events: none;
 `;
 
-const MapTooltip = (props) => {
-  const {
-    tooltipData,
-  } = props;
+const MapTooltip = props => {
+  const { tooltipData } = props;
   const x = tooltipData.x;
   const y = tooltipData.y;
 
-  const xPosition = x < window.innerWidth * 0.66 ? x : x - (window.innerWidth * 0.1);
+  const xPosition =
+    x < window.innerWidth * 0.66 ? x : x - window.innerWidth * 0.1;
   const yPostition = y < 375 ? y : y - 50;
 
   const tooltipContent = tooltipData.content.map((obj, index) => {
     return (
-      <div key={index}>
-        {`${obj.name}: ${obj.value.toLocaleString()}`}
-      </div>
+      <div key={index}>{`${obj.name}: ${obj.value.toLocaleString()}`}</div>
     );
   });
 
@@ -41,7 +45,7 @@ const MapTooltip = (props) => {
         top: yPostition,
       }}
     >
-      { tooltipContent }
+      {tooltipContent}
     </div>
   );
 };

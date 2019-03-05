@@ -10,8 +10,11 @@ const chartEvents = [
         return [
           {
             target: 'data',
-            mutation: props => ({ style: Object.assign(props.style, { fill: tooltipColor }) }),
-          }, {
+            mutation: props => ({
+              style: Object.assign(props.style, { fill: tooltipColor }),
+            }),
+          },
+          {
             target: 'labels',
             mutation: () => ({ active: true }),
           },
@@ -21,8 +24,9 @@ const chartEvents = [
         return [
           {
             target: 'data',
-            mutation: () => { },
-          }, {
+            mutation: () => {},
+          },
+          {
             target: 'labels',
             mutation: () => ({ active: false }),
           },
@@ -50,7 +54,7 @@ function getDefaultDomain(data, dataKey, dataLabel) {
 
 function getDefaultStackedDomain(data, dataKey, dataLabel) {
   function groupBy(objectArray, property) {
-    return objectArray.reduce(function (acc, obj) {
+    return objectArray.reduce(function(acc, obj) {
       var key = obj[property];
       if (!acc[key]) {
         acc[key] = [];
@@ -62,7 +66,9 @@ function getDefaultStackedDomain(data, dataKey, dataLabel) {
 
   const xValues = data.map(value => value[dataKey]);
   const yValues = Object.values(
-    groupBy(data, dataKey).map(value => value.reduce((acc, obj) => acc + obj[dataLabel], 0))
+    groupBy(data, dataKey).map(value =>
+      value.reduce((acc, obj) => acc + obj[dataLabel], 0)
+    )
   );
 
   return {
@@ -86,13 +92,16 @@ function getDefaultDataSeriesLabels(data, series) {
 function getDefaultFillStyle(dataSeriesLabel) {
   const dataSeriesCategories =
     dataSeriesLabel && dataSeriesLabel.length
-      ? dataSeriesLabel.map(series => (series.category))
+      ? dataSeriesLabel.map(series => series.category)
       : null;
   return {
     data: {
       fill: d => {
-        if (!dataSeriesCategories) return CivicVictoryTheme.civic.group.colorScale[0];
-        const idx = dataSeriesCategories.findIndex(series => series === d.series);
+        if (!dataSeriesCategories)
+          return CivicVictoryTheme.civic.group.colorScale[0];
+        const idx = dataSeriesCategories.findIndex(
+          series => series === d.series
+        );
         return CivicVictoryTheme.civic.group.colorScale[idx];
       },
     },
@@ -111,5 +120,12 @@ function getDefaultAreaStyle(idx) {
   };
 }
 
-export { chartEvents, getDefaultDomain, getDefaultDataSeriesLabels, getDefaultFillStyle, getDefaultLineStyle, getDefaultAreaStyle, getDefaultStackedDomain };
-
+export {
+  chartEvents,
+  getDefaultDomain,
+  getDefaultDataSeriesLabels,
+  getDefaultFillStyle,
+  getDefaultLineStyle,
+  getDefaultAreaStyle,
+  getDefaultStackedDomain,
+};

@@ -13,8 +13,14 @@ const defaultMenu = [
       { name: 'Disaster Resilience', path: '/cities/portland/disaster' },
       { name: 'Housing Affordability', path: '/cities/portland/housing' },
       { name: 'Local Elections', path: '/cities/portland/elections' },
-      { name: 'Neighborhood Development', path: '/cities/portland/neighborhood' },
-      { name: 'Transportation Systems', path: '/cities/portland/transportation' },
+      {
+        name: 'Neighborhood Development',
+        path: '/cities/portland/neighborhood',
+      },
+      {
+        name: 'Transportation Systems',
+        path: '/cities/portland/transportation',
+      },
     ],
   },
   {
@@ -72,16 +78,17 @@ const navClass = css`
     background-color: rgb(34, 15, 37);
 
     & ul {
-      display: block;position: relative;
+      display: block;
+      position: relative;
       margin: 0;
       padding-top: 80px;
 
       & > li {
-        color: #FFF;
+        color: #fff;
         display: block;
         text-align: center;
         text-decoration: none;
-        transition: all .25s ease-in-out;
+        transition: all 0.25s ease-in-out;
         margin: 0;
         padding: 0;
         flex: none;
@@ -91,21 +98,21 @@ const navClass = css`
 `;
 
 const exClass = css`
-    display: none;
-    position: absolute;
-    right: 0;
-    width: auto;
-    z-index: 99999;
+  display: none;
+  position: absolute;
+  right: 0;
+  width: auto;
+  z-index: 99999;
 
-    @media (max-width: 640px) {
-      display: block;
-      color: rgba(255, 255, 255, 0.65);
-      border: none;
-      font-family: 'Rubik', sans-serif;
-      font-size: 1.25rem;
-      font-weight: 500;
-      padding: 2rem;
-    }
+  @media (max-width: 640px) {
+    display: block;
+    color: rgba(255, 255, 255, 0.65);
+    border: none;
+    font-family: 'Rubik', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+    padding: 2rem;
+  }
 `;
 
 class Nav extends Component {
@@ -122,33 +129,52 @@ class Nav extends Component {
     const items = menu;
 
     this.setState(() => ({ menuActive: !this.state.menuActive, items }));
-  }
+  };
 
   render() {
-    const { menu = defaultMenu, toggleNestedMenu = this.handleClick } = this.props;
+    const {
+      menu = defaultMenu,
+      toggleNestedMenu = this.handleClick,
+    } = this.props;
     return (
       <div className={navClass}>
-        <a className={exClass}><Icon key="nav-ex" className={'fa fa-times'} handleClick={this.props.toggleSubNav} /></a>
+        <a className={exClass}>
+          <Icon
+            key="nav-ex"
+            className={'fa fa-times'}
+            handleClick={this.props.toggleSubNav}
+          />
+        </a>
         <ul>
           {menu.map((item, idx) =>
-            (item.nestedMenu
-              ? <li key={idx} onClick={e => toggleNestedMenu(item.name, item.nestedMenu, e)}><a className={'nav-item'}>{item.name}<Icon className={'fa fa-angle-down'}></Icon></a></li> // eslint-disable-line
-              : <NavLink
+            item.nestedMenu ? (
+              <li
                 key={idx}
-                name={item.name}
-                path={item.path}
-              />
-            ))
-          }
+                onClick={e => toggleNestedMenu(item.name, item.nestedMenu, e)}
+              >
+                <a className={'nav-item'}>
+                  {item.name}
+                  <Icon className={'fa fa-angle-down'} />
+                </a>
+              </li> // eslint-disable-line
+            ) : (
+              <NavLink key={idx} name={item.name} path={item.path} />
+            )
+          )}
         </ul>
-        <NavSubMenu isVisible={this.state.menuActive} items={this.state.items} />
+        <NavSubMenu
+          isVisible={this.state.menuActive}
+          items={this.state.items}
+        />
       </div>
     );
   }
-    }
+}
 
 Nav.propTypes = {
-  menu: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string, path: PropTypes.string })),
+  menu: PropTypes.arrayOf(
+    PropTypes.shape({ name: PropTypes.string, path: PropTypes.string })
+  ),
   toggleNestedMenu: PropTypes.func,
   toggleSubNav: PropTypes.func,
 };

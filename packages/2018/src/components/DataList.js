@@ -25,7 +25,7 @@ const card = css`
   box-sizing: border-box;
   text-align: left;
   margin: 6px 0px;
-  transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 
   :not(:last-child):before {
     content: '';
@@ -46,7 +46,7 @@ const eyebrowStyle = css`
   display: block;
   font-family: 'Rubik';
   font-size: 14px;
-  color: #EE495C;
+  color: #ee495c;
 `;
 const locationTitle = css`
   display: block;
@@ -64,7 +64,7 @@ const iconWrapper = css`
 `;
 const locationResult = css`
   color: white;
-  font-family: 'Rubik',sans-serif;
+  font-family: 'Rubik', sans-serif;
   font-size: 14px;
   width: 180px;
 `;
@@ -83,11 +83,26 @@ const whyStyle = css`
 
 const DataList = ({ city, state }) => {
   const missingStates = [];
-  const fileName = state && !missingStates.includes(state) ? `state/${state}` : 'local/local';
+  const fileName =
+    state && !missingStates.includes(state) ? `state/${state}` : 'local/local';
   const statePath = require(`../assets/${fileName}.svg`); // eslint-disable-line global-require, import/no-dynamic-require
-  const cityResult = city === 'Portland'
-    ? <span>We have Portland data!<br/><span className={whyStyle}><Link to="/cities/portland">View here</Link></span></span>
-    : <span>{`There's no CIVIC data for ${city} yet!`} <span className={whyStyle}><a href="#getStarted">Why?</a></span></span>;
+  const cityResult =
+    city === 'Portland' ? (
+      <span>
+        We have Portland data!
+        <br />
+        <span className={whyStyle}>
+          <Link to="/cities/portland">View here</Link>
+        </span>
+      </span>
+    ) : (
+      <span>
+        {`There's no CIVIC data for ${city} yet!`}{' '}
+        <span className={whyStyle}>
+          <a href="#getStarted">Why?</a>
+        </span>
+      </span>
+    );
 
   return (
     <div className={cardsWrapper}>
@@ -106,7 +121,7 @@ const DataList = ({ city, state }) => {
         </div>
         <div className={cardTextWrapper}>
           <span className={eyebrowStyle}>State</span>
-          <div className={locationTitle}>{ state || '?' }</div>
+          <div className={locationTitle}>{state || '?'}</div>
         </div>
       </div>
       <div className={card}>

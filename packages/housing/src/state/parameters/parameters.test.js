@@ -40,7 +40,9 @@ describe('parameters selectors', () => {
   describe('getUserUnitSize', () => {
     it('should return the first unit size when unset', () => {
       state = { parameters: {} };
-      expect(selectors.getUserUnitSize(state)).to.eql(constants.HOUSING_TYPES[0]);
+      expect(selectors.getUserUnitSize(state)).to.eql(
+        constants.HOUSING_TYPES[0]
+      );
     });
 
     it('should return the set unit size when the state is set', () => {
@@ -64,7 +66,9 @@ describe('parameters selectors', () => {
   describe('getOtherUnitSize', () => {
     it('should return the first unit size when unset', () => {
       state = { parameters: {} };
-      expect(selectors.getOtherUnitSize(state)).to.eql(constants.HOUSING_TYPES[0]);
+      expect(selectors.getOtherUnitSize(state)).to.eql(
+        constants.HOUSING_TYPES[0]
+      );
     });
 
     it('should return the set unit size when the state is set', () => {
@@ -76,7 +80,9 @@ describe('parameters selectors', () => {
   describe('getOtherDemographic', () => {
     it('should return the first demographic when unset', () => {
       state = { parameters: {} };
-      expect(selectors.getOtherDemographic(state)).to.eql(constants.DEMOGRAPHICS[0]);
+      expect(selectors.getOtherDemographic(state)).to.eql(
+        constants.DEMOGRAPHICS[0]
+      );
     });
 
     it('should return the set demographic when the state is set', () => {
@@ -88,7 +94,9 @@ describe('parameters selectors', () => {
   describe('getNeighborhood', () => {
     it('should return the default neighborhood when unset', () => {
       state = { parameters: {} };
-      expect(selectors.getNeighborhood(state)).to.eql(constants.DEFAULT_NEIGHBORHOOD);
+      expect(selectors.getNeighborhood(state)).to.eql(
+        constants.DEFAULT_NEIGHBORHOOD
+      );
     });
 
     it('should return the set neighborhood when the state is set', () => {
@@ -162,20 +170,27 @@ describe('parameters reducer', () => {
   });
 
   it('should handle UPDATE_USER_UNIT_SIZE', () => {
-    expect(reducer(initialState, {
-      type: actionTypes.UPDATE_USER_UNIT_SIZE,
-      payload: 'Studio',
-    })).to.eql(assocPath(['user', 'unitSize'], 'Studio', initialState));
+    expect(
+      reducer(initialState, {
+        type: actionTypes.UPDATE_USER_UNIT_SIZE,
+        payload: 'Studio',
+      })
+    ).to.eql(assocPath(['user', 'unitSize'], 'Studio', initialState));
 
-    expect(reducer({
-      user: {
-        unitSize: '1-BR',
-        demographic: 'Senior',
-      },
-    }, {
-      type: actionTypes.UPDATE_USER_UNIT_SIZE,
-      payload: 'Studio',
-    })).to.eql({
+    expect(
+      reducer(
+        {
+          user: {
+            unitSize: '1-BR',
+            demographic: 'Senior',
+          },
+        },
+        {
+          type: actionTypes.UPDATE_USER_UNIT_SIZE,
+          payload: 'Studio',
+        }
+      )
+    ).to.eql({
       user: {
         unitSize: 'Studio',
         demographic: 'Senior',
@@ -186,20 +201,27 @@ describe('parameters reducer', () => {
   });
 
   it('should handle UPDATE_OTHER_UNIT_SIZE', () => {
-    expect(reducer(initialState, {
-      type: actionTypes.UPDATE_OTHER_UNIT_SIZE,
-      payload: 'Studio',
-    })).to.eql(assocPath(['other', 'unitSize'], 'Studio', initialState));
+    expect(
+      reducer(initialState, {
+        type: actionTypes.UPDATE_OTHER_UNIT_SIZE,
+        payload: 'Studio',
+      })
+    ).to.eql(assocPath(['other', 'unitSize'], 'Studio', initialState));
 
-    expect(reducer({
-      other: {
-        unitSize: '1-BR',
-        income: 50000,
-      },
-    }, {
-      type: actionTypes.UPDATE_OTHER_UNIT_SIZE,
-      payload: 'Studio',
-    })).to.eql({
+    expect(
+      reducer(
+        {
+          other: {
+            unitSize: '1-BR',
+            income: 50000,
+          },
+        },
+        {
+          type: actionTypes.UPDATE_OTHER_UNIT_SIZE,
+          payload: 'Studio',
+        }
+      )
+    ).to.eql({
       other: {
         unitSize: 'Studio',
         income: 50000,
@@ -210,23 +232,31 @@ describe('parameters reducer', () => {
   });
 
   it('should handle UPDATE_OTHER_DEMOGRAPHIC', () => {
-    expect(reducer(initialState, {
-      type: actionTypes.UPDATE_OTHER_DEMOGRAPHIC,
-      payload: 'Couple With Family',
-    })).to.eql(assocPath(['other', 'demographic'], 'Couple With Family', initialState));
+    expect(
+      reducer(initialState, {
+        type: actionTypes.UPDATE_OTHER_DEMOGRAPHIC,
+        payload: 'Couple With Family',
+      })
+    ).to.eql(
+      assocPath(['other', 'demographic'], 'Couple With Family', initialState)
+    );
   });
 
   it('should handle UPDATE_USER_INCOME', () => {
-    expect(reducer(initialState, {
-      type: actionTypes.UPDATE_USER_INCOME,
-      payload: 5000000000,
-    })).to.eql(assocPath(['user', 'income'], 5000000000, initialState));
+    expect(
+      reducer(initialState, {
+        type: actionTypes.UPDATE_USER_INCOME,
+        payload: 5000000000,
+      })
+    ).to.eql(assocPath(['user', 'income'], 5000000000, initialState));
   });
 
   it('should handle UPDATE_NEIGHBORHOOD', () => {
-    expect(reducer(initialState, {
-      type: actionTypes.UPDATE_NEIGHBORHOOD,
-      payload: 42,
-    })).to.eql(assocPath(['neighborhood'], 42, initialState));
+    expect(
+      reducer(initialState, {
+        type: actionTypes.UPDATE_NEIGHBORHOOD,
+        payload: 42,
+      })
+    ).to.eql(assocPath(['neighborhood'], 42, initialState));
   });
 });

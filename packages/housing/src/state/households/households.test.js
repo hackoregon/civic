@@ -48,29 +48,31 @@ describe('households actions', () => {
   /* eslint-disable no-sparse-arrays, comma-style */
   describe('data normalizer', () => {
     it('should normalize the data', () => {
-      expect(actions.normalizer([
-        {
-          NP_ID: 4,
-          neighborhood: 'Central City',
-          demographic: 'Households',
-          households: 21028,
-          year: '2014',
-        },
-        {
-          NP_ID: 4,
-          neighborhood: 'Central City',
-          demographic: 'Households with Children',
-          households: 1037,
-          year: '2014',
-        },
-        {
-          NP_ID: 1,
-          neighborhood: '122nd-Division',
-          demographic: 'Households',
-          households: 7635,
-          year: '2014',
-        },
-      ])).to.eql([
+      expect(
+        actions.normalizer([
+          {
+            NP_ID: 4,
+            neighborhood: 'Central City',
+            demographic: 'Households',
+            households: 21028,
+            year: '2014',
+          },
+          {
+            NP_ID: 4,
+            neighborhood: 'Central City',
+            demographic: 'Households with Children',
+            households: 1037,
+            year: '2014',
+          },
+          {
+            NP_ID: 1,
+            neighborhood: '122nd-Division',
+            demographic: 'Households',
+            households: 7635,
+            year: '2014',
+          },
+        ])
+      ).to.eql([
         ,
         {
           Households: 7635,
@@ -94,7 +96,9 @@ describe('households actions', () => {
       store = mockStore({});
     });
 
-    afterEach(() => { nock.cleanAll(); });
+    afterEach(() => {
+      nock.cleanAll();
+    });
 
     it('should dispatch fetch and success when the fetch is successful', () => {
       const mockHouseholdsResponse = [
@@ -125,7 +129,6 @@ describe('households actions', () => {
         },
       ];
       /* eslint-enable no-sparse-arrays, comma-style */
-
 
       return store.dispatch(actions.fetchHouseholdsData()).then(() => {
         expect(store.getActions()).to.eql(expectedActions);
@@ -164,21 +167,28 @@ describe('households reducer', () => {
   });
 
   it('should handle CALL_START', () => {
-    expect(reducer(initialState, {
-      type: actionTypes.CALL_START,
-    })).to.eql({
+    expect(
+      reducer(initialState, {
+        type: actionTypes.CALL_START,
+      })
+    ).to.eql({
       pending: true,
       data: null,
       error: null,
     });
 
-    expect(reducer({
-      pending: true,
-      data: null,
-      error: null,
-    }, {
-      type: actionTypes.CALL_START,
-    })).to.eql({
+    expect(
+      reducer(
+        {
+          pending: true,
+          data: null,
+          error: null,
+        },
+        {
+          type: actionTypes.CALL_START,
+        }
+      )
+    ).to.eql({
       pending: true,
       data: null,
       error: null,
@@ -188,23 +198,30 @@ describe('households reducer', () => {
   it('should handle CALL_FAIL', () => {
     const error = new Error('oops');
 
-    expect(reducer(initialState, {
-      type: actionTypes.CALL_FAIL,
-      payload: error,
-    })).to.eql({
+    expect(
+      reducer(initialState, {
+        type: actionTypes.CALL_FAIL,
+        payload: error,
+      })
+    ).to.eql({
       pending: false,
       data: null,
       error,
     });
 
-    expect(reducer({
-      pending: true,
-      data: ['stuff'],
-      error: null,
-    }, {
-      type: actionTypes.CALL_FAIL,
-      payload: error,
-    })).to.eql({
+    expect(
+      reducer(
+        {
+          pending: true,
+          data: ['stuff'],
+          error: null,
+        },
+        {
+          type: actionTypes.CALL_FAIL,
+          payload: error,
+        }
+      )
+    ).to.eql({
       pending: false,
       data: null,
       error,
@@ -212,28 +229,32 @@ describe('households reducer', () => {
   });
 
   it('should handle CALL_SUCCESS', () => {
-    const data = [
-      { Households: 42 },
-      { Households: 1337 },
-    ];
+    const data = [{ Households: 42 }, { Households: 1337 }];
 
-    expect(reducer(initialState, {
-      type: actionTypes.CALL_SUCCESS,
-      payload: data,
-    })).to.eql({
+    expect(
+      reducer(initialState, {
+        type: actionTypes.CALL_SUCCESS,
+        payload: data,
+      })
+    ).to.eql({
       pending: false,
       error: null,
       data,
     });
 
-    expect(reducer({
-      pending: true,
-      error: new Error('oops'),
-      data: null,
-    }, {
-      type: actionTypes.CALL_SUCCESS,
-      payload: data,
-    })).to.eql({
+    expect(
+      reducer(
+        {
+          pending: true,
+          error: new Error('oops'),
+          data: null,
+        },
+        {
+          type: actionTypes.CALL_SUCCESS,
+          payload: data,
+        }
+      )
+    ).to.eql({
       pending: false,
       error: null,
       data,
@@ -262,11 +283,13 @@ describe('households selectors', () => {
     });
 
     it('should return the households request object when set', () => {
-      state = { households: {
-        pending: true,
-        data: null,
-        error: null,
-      } };
+      state = {
+        households: {
+          pending: true,
+          data: null,
+          error: null,
+        },
+      };
       expect(selectors.getHouseholdsRequest(state)).to.eql(state.households);
     });
   });

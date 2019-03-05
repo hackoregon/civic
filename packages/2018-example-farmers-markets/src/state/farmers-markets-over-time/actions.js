@@ -9,10 +9,7 @@ export const farmersMarketsOverTimeSuccess = actionEmitter(IMPORT_SUCCESS);
 
 const importPromise = import('../../assets/farmers-markets-by-year.json');
 
-export const fetchFarmersMarketsOverTime = importAdapter(
-  importPromise,
-  {
-    start: farmersMarketsOverTimeStart,
-    success: farmersMarketsOverTimeSuccess,
-  }
-);
+export const fetchFarmersMarketsOverTime = importAdapter(importPromise, {
+  start: farmersMarketsOverTimeStart,
+  success: farmersMarketsOverTimeSuccess,
+});

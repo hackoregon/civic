@@ -5,7 +5,12 @@ import RechartsPie from './RechartsPie';
 describe('Recharts Pie', () => {
   const { data, colors, styles, chartProportions } = {
     data: [{ name: 'Group A', value: 400 }],
-    styles: { fontFamily: 'Roboto Condensed', fontSize: '8', color: '#706371', fill: '#706371' },
+    styles: {
+      fontFamily: 'Roboto Condensed',
+      fontSize: '8',
+      color: '#706371',
+      fill: '#706371',
+    },
     colors: ['#a6cee3', '#1f78b4'],
     chartProportions: {
       chartWidth: 2,
@@ -22,7 +27,7 @@ describe('Recharts Pie', () => {
       chartProportions={chartProportions}
       colors={colors}
       styles={styles}
-    />,
+    />
   );
 
   it('should render a div', () => {
@@ -34,6 +39,11 @@ describe('Recharts Pie', () => {
   });
 
   it('should render a div with one child element that itself has two children elements', () => {
-    expect(wrapper.find('div').children().props().children).to.have.length(2);
+    expect(
+      wrapper
+        .find('div')
+        .children()
+        .props().children
+    ).to.have.length(2);
   });
 });

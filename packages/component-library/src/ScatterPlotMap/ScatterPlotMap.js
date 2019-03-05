@@ -7,7 +7,7 @@ const crosshair = css`
   cursor: crosshair;
 `;
 
-const ScatterPlotMap = (props) => {
+const ScatterPlotMap = props => {
   const {
     viewport,
     data,
@@ -40,10 +40,7 @@ const ScatterPlotMap = (props) => {
 
   return (
     <div className={crosshair}>
-      <DeckGL
-        className={'DeckGL'}
-        {...viewport}
-      >
+      <DeckGL className={'DeckGL'} {...viewport}>
         <ScatterplotLayer
           className={'ScatterPlotMap'}
           id={'scatterplot-layer'}
@@ -59,12 +56,12 @@ const ScatterPlotMap = (props) => {
           strokeWidth={strokeWidth}
           autoHighlight={autoHighlight}
           onClick={onLayerClick}
-          parameters={{depthTest: false}}
+          parameters={{ depthTest: false }}
           visible={visible}
-          updateTriggers={{instanceColors: getColor}}
+          updateTriggers={{ instanceColors: getColor }}
           onHover={onHover}
         />
-        { tooltipRender }
+        {tooltipRender}
       </DeckGL>
     </div>
   );
@@ -93,7 +90,7 @@ ScatterPlotMap.propTypes = {
 ScatterPlotMap.defaultProps = {
   getPosition: d => d.geometry.coordinates,
   opacity: 0.8,
-  getColor: d => [0,0,0],
+  getColor: d => [0, 0, 0],
   getRadius: d => 50,
   radiusScale: 1,
   outline: false,

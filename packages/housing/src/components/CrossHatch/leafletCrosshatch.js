@@ -7,7 +7,6 @@ import '../../externals/leafletPattern';
  * @see https://github.com/teastman/Leaflet.pattern
  */
 L.CrossHatch = L.Pattern.extend({
-
   /**
    * Default options for crosshatch pattern. Will be overriden by anything passed
    * to constructor
@@ -61,7 +60,9 @@ L.CrossHatch = L.Pattern.extend({
    */
   _update() {
     this._left.options.d = `M0,0 l${this.options.width},${this.options.height}`;
-    this._right.options.d = `M${this.options.width},0 l-${this.options.width},${this.options.height}`;
+    this._right.options.d = `M${this.options.width},0 l-${this.options.width},${
+      this.options.height
+    }`;
   },
 
   /**
