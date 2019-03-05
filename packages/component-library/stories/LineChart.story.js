@@ -59,7 +59,7 @@ const sampleUnstructuredDataSeries = 'type';
 const sampleUnstructuredXLabel = 'Size (ft)';
 const sampleUnstructuredYLabel = 'Age (yrs)';
 
-const customLegend = (legendData) => {
+const customLegend = legendData => {
   const legendStyle = css`
     font-family: 'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif;
     font-size: 14px;
@@ -84,31 +84,11 @@ const customLegend = (legendData) => {
           `}
         >
           <svg viewBox="0 0 50 10" width="50px">
-            <circle
-              cx="5"
-              cy="5"
-              r="1"
-            />
-            <circle
-              cx="15"
-              cy="5"
-              r="2"
-            />
-            <circle
-              cx="25"
-              cy="5"
-              r="3"
-            />
-            <circle
-              cx="35"
-              cy="5"
-              r="4"
-            />
-            <circle
-              cx="45"
-              cy="5"
-              r="5"
-            />
+            <circle cx="5" cy="5" r="1" />
+            <circle cx="15" cy="5" r="2" />
+            <circle cx="25" cy="5" r="3" />
+            <circle cx="35" cy="5" r="4" />
+            <circle cx="45" cy="5" r="5" />
           </svg>
           <span
             className={css`
@@ -180,7 +160,10 @@ export default () =>
       const dataValue = text('dataValue', sampleYKey);
       const dataValueLabel = text('dataValueLabel', sampleDataValueLabel);
       const dataSeries = text('dataSeries', sampleDataSeries);
-      const dataSeriesLabel = object('Data Series Labels', sampledataSeriesLabel);
+      const dataSeriesLabel = object(
+        'Data Series Labels',
+        sampledataSeriesLabel
+      );
       const domain = object('Domain', sampleDomain);
       const size = object('Size', sampleSize);
       const subtitle = text('Subtitle', sampleSubtitle);

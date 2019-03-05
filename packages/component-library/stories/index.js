@@ -32,7 +32,7 @@ import pdfStory from './PDF.story';
 import heatMapStory from './HeatMap.story';
 import civicCardStackStory from './CivicCardStack.story';
 import sliderStory from './Slider.story';
-import UIComponentsStyle from './UIComponentsStyle'; 
+import UIComponentsStyle from './UIComponentsStyle';
 import ChartsStyle from './ChartsStyle';
 import MapsStyle from './MapsStyle';
 import CivicPlatformStyle from './CivicPlatformStyle';
@@ -67,12 +67,8 @@ import '../assets/global.styles.css';
 // Welcome to Storybook
 storiesOf('Welcome', module)
   .addDecorator(checkA11y)
-  .add('Introduction', () => (
-    <Introduction />
-  ))
-  .add('The CIVIC Brand', () => (
-    <TheBrandStyle />
-  ))
+  .add('Introduction', () => <Introduction />)
+  .add('The CIVIC Brand', () => <TheBrandStyle />)
   .add('The CIVIC Platform', () => (
     <ThePlatformStyle showApp={linkTo('Button')} />
   ));
@@ -80,12 +76,8 @@ storiesOf('Welcome', module)
 // Branding
 storiesOf('Branding', module)
   .addDecorator(checkA11y)
-  .add('Logos', () => (
-    <LogosStyle />
-  ))
-  .add('Color Theme', () => (
-    <ColorThemeStyle />
-  ))
+  .add('Logos', () => <LogosStyle />)
+  .add('Color Theme', () => <ColorThemeStyle />)
   .add('Typography', () => (
     <div>
       <TypographyStyleQuickUsage />
@@ -95,40 +87,22 @@ storiesOf('Branding', module)
     </div>
   ));
 
-  // UX Style Guide
+// UX Style Guide
 storiesOf('UX Style Guide', module)
   .addDecorator(checkA11y)
-  .add('Accessibility', () => (
-    <AccessibilityGuidelinesStyle />
-  ))
-  .add('Cards', () => (
-    <CardsStyle />
-  ))
-  .add('Data Visualization', () => (
-    <DataVisualizationStyle />
-  ))
-  .add('Iconography', () => (
-    <IconographyStyle />
-  ))
-  .add('Motion', () => (
-    <MotionStyle />
-  ))
-  .add('Navigation', () => (
-    <NavigationStyle />
-  ))
-  .add('Responsive Design', () => (
-    <ResponsiveDesignStyle />
-  ))
-  .add('Terminology', () => (
-    <TerminologyStyle />
-  ));
+  .add('Accessibility', () => <AccessibilityGuidelinesStyle />)
+  .add('Cards', () => <CardsStyle />)
+  .add('Data Visualization', () => <DataVisualizationStyle />)
+  .add('Iconography', () => <IconographyStyle />)
+  .add('Motion', () => <MotionStyle />)
+  .add('Navigation', () => <NavigationStyle />)
+  .add('Responsive Design', () => <ResponsiveDesignStyle />)
+  .add('Terminology', () => <TerminologyStyle />);
 
 // common UI components
 storiesOf('UI Components', module)
   .addDecorator(checkA11y)
-  .add('UI Components Style Guide', () => (
-    <UIComponentsStyle />
-  ));
+  .add('UI Components Style Guide', () => <UIComponentsStyle />);
 buttonStory();
 dropdownStory();
 sliderStory();
@@ -136,9 +110,7 @@ sliderStory();
 // charts
 storiesOf('Charts', module)
   .addDecorator(checkA11y)
-  .add('Charts Style Guide', () => (
-    <ChartsStyle />
-  ));
+  .add('Charts Style Guide', () => <ChartsStyle />);
 BarChartStory();
 dataTable();
 gradientScaleStory();
@@ -151,9 +123,7 @@ stackedAreaChart();
 // maps
 storiesOf('Maps', module)
   .addDecorator(checkA11y)
-  .add('Maps Style Guide', () => (
-    <MapsStyle />
-  ));
+  .add('Maps Style Guide', () => <MapsStyle />);
 baseMapStory();
 boundaryMapStory();
 civicSandboxMapStory();
@@ -168,9 +138,7 @@ screenGridMapStory();
 // Civic platform components and page layout
 storiesOf('CIVIC Platform Components', module)
   .addDecorator(checkA11y)
-  .add('Platform Components Style Guide', () => (
-    <CivicPlatformStyle />
-  ));
+  .add('Platform Components Style Guide', () => <CivicPlatformStyle />);
 civicCardStackStory();
 civicSandboxDashboardStory();
 civicStorycardStory();

@@ -27,12 +27,12 @@ const demoCode = () => (
 
 // const propDocs = { inline: true, propTables: [Dropdown] };
 
-export default () => storiesOf("UI Components/Dropdown List", module)
-  .addDecorator(checkA11y)
-  .addDecorator(story => 
-    <div style={storybookStyles.storyGrid}>
-      <div style={storybookStyles.storyGridItem}>
-        {story()}
+export default () =>
+  storiesOf('UI Components/Dropdown List', module)
+    .addDecorator(checkA11y)
+    .addDecorator(story => (
+      <div style={storybookStyles.storyGrid}>
+        <div style={storybookStyles.storyGridItem}>{story()}</div>
       </div>
-    </div>)
-  .add(title, (demoCode))
+    ))
+    .add(title, demoCode);

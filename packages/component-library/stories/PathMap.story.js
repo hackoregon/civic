@@ -11,37 +11,57 @@ import data from '../src/PathMap/data.json';
 
 const displayName = PathMap.displayName || 'PathMap';
 
-const mapboxToken = 'pk.eyJ1IjoidGhlbWVuZG96YWxpbmUiLCJhIjoiY2o1aXdoem1vMWtpNDJ3bnpqaGF1bnlhNSJ9.sjTrNKLW9daDBIGvP3_W0w';
+const mapboxToken =
+  'pk.eyJ1IjoidGhlbWVuZG96YWxpbmUiLCJhIjoiY2o1aXdoem1vMWtpNDJ3bnpqaGF1bnlhNSJ9.sjTrNKLW9daDBIGvP3_W0w';
 
 const demoMap = () => {
   const mapStylesOptions = {
     'Hack Oregon Light': 'mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg',
     'Hack Oregon Dark': 'mapbox://styles/hackoregon/cjie02elo1vyw2rohd24kbtbd',
-    'Scenic': 'mapbox://styles/themendozaline/cj8rrlv4tbtgs2rqnyhckuqva',
-    'Navigation Guidance Night': 'mapbox://styles/themendozaline/cj6y6f5m006ar2sobpimm7ay7',
+    Scenic: 'mapbox://styles/themendozaline/cj8rrlv4tbtgs2rqnyhckuqva',
+    'Navigation Guidance Night':
+      'mapbox://styles/themendozaline/cj6y6f5m006ar2sobpimm7ay7',
     'Lè Shine': 'mapbox://styles/themendozaline/cjg6296ub04ot2sqv9izku3qq',
     'North Star': 'mapbox://styles/themendozaline/cj5oyewyy0fg22spetiv0hap0',
-    'Odyssey': 'mapbox://styles/themendozaline/cjgq6rklb000d2so1b8myaait',
+    Odyssey: 'mapbox://styles/themendozaline/cjgq6rklb000d2so1b8myaait',
   };
-  const mapboxStyle = selectV2('Mapbox Style', mapStylesOptions, mapStylesOptions['Navigation Guidance Night']);
+  const mapboxStyle = selectV2(
+    'Mapbox Style',
+    mapStylesOptions,
+    mapStylesOptions['Navigation Guidance Night']
+  );
 
   const colorSchemeOptions = {
-    'Blue Green': '[[237,248,251],[178,226,226],[102,194,164],[44,162,95],[0,109,44]]',
-    'Red Purple': '[[254,235,226],[251,180,185],[247,104,161],[197,27,138],[122,1,119]]',
-    'Purple Blue': '[[241,238,246],[189,201,225],[116,169,207],[43,140,190],[4,90,141]]',
-    'Yellow Orange Red': '[[255,255,178],[254,204,92],[253,141,60],[240,59,32],[189,0,38]]',
-    'Red Yellow Blue': '[[215,25,28],[253,174,97],[255,255,191],[171,217,233],[44,123,182]]',
+    'Blue Green':
+      '[[237,248,251],[178,226,226],[102,194,164],[44,162,95],[0,109,44]]',
+    'Red Purple':
+      '[[254,235,226],[251,180,185],[247,104,161],[197,27,138],[122,1,119]]',
+    'Purple Blue':
+      '[[241,238,246],[189,201,225],[116,169,207],[43,140,190],[4,90,141]]',
+    'Yellow Orange Red':
+      '[[255,255,178],[254,204,92],[253,141,60],[240,59,32],[189,0,38]]',
+    'Red Yellow Blue':
+      '[[215,25,28],[253,174,97],[255,255,191],[171,217,233],[44,123,182]]',
   };
-  const colorScheme = selectV2('Color Scheme:', colorSchemeOptions, colorSchemeOptions['Red Yellow Blue']);
+  const colorScheme = selectV2(
+    'Color Scheme:',
+    colorSchemeOptions,
+    colorSchemeOptions['Red Yellow Blue']
+  );
   const colors = JSON.parse(colorScheme);
 
   const getColor = f => {
     const speedString = f.properties.avg_bike_speed.split('m')[0];
     const speed = parseFloat(speedString);
-    return speed < 8 ? colors[0] :
-      speed < 9 ? colors[1] :
-      speed < 10 ? colors[2] :
-      speed < 11 ? colors[3] : colors[4];
+    return speed < 8
+      ? colors[0]
+      : speed < 9
+      ? colors[1]
+      : speed < 10
+      ? colors[2]
+      : speed < 11
+      ? colors[3]
+      : colors[4];
   };
 
   const opacityOptions = {
@@ -68,7 +88,7 @@ const demoMap = () => {
 
   const autoHighlight = boolean('Auto Highlight:', true);
 
-  const highlightColor = [125,125,125,125];
+  const highlightColor = [125, 125, 125, 125];
 
   const visible = boolean('Visible:', true);
 
@@ -90,7 +110,9 @@ const demoMap = () => {
         rounded={rounded}
         autoHighlight={autoHighlight}
         highlightColor={highlightColor}
-        onLayerClick={info => action('Layer clicked:', { depth: 2 })(info, info.object)}
+        onLayerClick={info =>
+          action('Layer clicked:', { depth: 2 })(info, info.object)
+        }
         visible={visible}
       />
     </BaseMap>
@@ -98,21 +120,32 @@ const demoMap = () => {
 };
 
 const tooltipMap = () => {
-  const colors = [[215,25,28],[253,174,97],[255,255,191],[171,217,233],[44,123,182]];
+  const colors = [
+    [215, 25, 28],
+    [253, 174, 97],
+    [255, 255, 191],
+    [171, 217, 233],
+    [44, 123, 182],
+  ];
 
   const getColor = f => {
     const speedString = f.properties.avg_bike_speed.split('m')[0];
     const speed = parseFloat(speedString);
-    return speed < 8 ? colors[0] :
-      speed < 9 ? colors[1] :
-      speed < 10 ? colors[2] :
-      speed < 11 ? colors[3] : colors[4];
+    return speed < 8
+      ? colors[0]
+      : speed < 9
+      ? colors[1]
+      : speed < 10
+      ? colors[2]
+      : speed < 11
+      ? colors[3]
+      : colors[4];
   };
 
   return (
     <BaseMap
       mapboxToken={mapboxToken}
-      mapboxStyle={"mapbox://styles/themendozaline/cj6y6f5m006ar2sobpimm7ay7"}
+      mapboxStyle={'mapbox://styles/themendozaline/cj6y6f5m006ar2sobpimm7ay7'}
       initialZoom={11.5}
       initialLatitude={45.5683}
       initialLongitude={-122.6712}
@@ -124,25 +157,24 @@ const tooltipMap = () => {
         getPath={f => f.geometry.coordinates}
         getWidth={f => 80}
         widthScale={1}
-        onLayerClick={info => action('Layer clicked:', { depth: 2 })(info, info.object)}
+        onLayerClick={info =>
+          action('Layer clicked:', { depth: 2 })(info, info.object)
+        }
       >
         <MapTooltip
-          primaryName={"average bike speed"}
-          primaryField={"avg_bike_speed"}
-          secondaryName={"length of lane"}
-          secondaryField={"shape_leng"}
+          primaryName={'average bike speed'}
+          primaryField={'avg_bike_speed'}
+          secondaryName={'length of lane'}
+          secondaryField={'shape_leng'}
         />
       </PathMap>
     </BaseMap>
   );
 };
 
-export default () => storiesOf('Maps/Path Map', module)
-  .addDecorator(withKnobs)
-  .addDecorator(checkA11y)
-  .add('Simple usage',
-    (demoMap)
-  )
-  .add('With tooltip',
-    (tooltipMap)
-  );
+export default () =>
+  storiesOf('Maps/Path Map', module)
+    .addDecorator(withKnobs)
+    .addDecorator(checkA11y)
+    .add('Simple usage', demoMap)
+    .add('With tooltip', tooltipMap);

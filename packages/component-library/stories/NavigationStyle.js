@@ -1,4 +1,4 @@
-import React from 'react';  
+import React from 'react';
 import { storybookStyles } from './storyStyles.js';
 
 const NavigationStyle = () => (
@@ -9,4 +9,4 @@ const NavigationStyle = () => (
   </div>
 );
 
-export default NavigationStyle; 
+export default NavigationStyle;

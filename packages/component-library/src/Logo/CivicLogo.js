@@ -7,7 +7,14 @@ const styles = {
   width: 'auto',
 };
 
-const CivicLogo = ({ alt }) => (isClient && <img style={styles} src={require('../../assets/civic-logo.svg')} alt={alt} />);
+const CivicLogo = ({ alt }) =>
+  isClient && (
+    <img
+      style={styles}
+      src={require('../../assets/civic-logo.svg')}
+      alt={alt}
+    />
+  );
 
 CivicLogo.displayName = 'Logo';
 CivicLogo.propTypes = {

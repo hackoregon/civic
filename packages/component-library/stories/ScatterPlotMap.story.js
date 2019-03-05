@@ -13,20 +13,26 @@ import busStops from '../src/ScatterPlotMap/busStops.json';
 
 const displayName = ScatterPlotMap.displayName || 'ScatterPlotMap';
 
-const mapboxToken = 'pk.eyJ1IjoidGhlbWVuZG96YWxpbmUiLCJhIjoiY2o1aXdoem1vMWtpNDJ3bnpqaGF1bnlhNSJ9.sjTrNKLW9daDBIGvP3_W0w';
+const mapboxToken =
+  'pk.eyJ1IjoidGhlbWVuZG96YWxpbmUiLCJhIjoiY2o1aXdoem1vMWtpNDJ3bnpqaGF1bnlhNSJ9.sjTrNKLW9daDBIGvP3_W0w';
 
 const mapStylesOptions = {
-    'Hack Oregon Light': 'mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg',
-    'Hack Oregon Dark': 'mapbox://styles/hackoregon/cjie02elo1vyw2rohd24kbtbd',
-    'Scenic': 'mapbox://styles/themendozaline/cj8rrlv4tbtgs2rqnyhckuqva',
-    'Navigation Guidance Night': 'mapbox://styles/themendozaline/cj6y6f5m006ar2sobpimm7ay7',
-    'Lè Shine': 'mapbox://styles/themendozaline/cjg6296ub04ot2sqv9izku3qq',
-    'North Star': 'mapbox://styles/themendozaline/cj5oyewyy0fg22spetiv0hap0',
-    'Odyssey': 'mapbox://styles/themendozaline/cjgq6rklb000d2so1b8myaait',
+  'Hack Oregon Light': 'mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg',
+  'Hack Oregon Dark': 'mapbox://styles/hackoregon/cjie02elo1vyw2rohd24kbtbd',
+  Scenic: 'mapbox://styles/themendozaline/cj8rrlv4tbtgs2rqnyhckuqva',
+  'Navigation Guidance Night':
+    'mapbox://styles/themendozaline/cj6y6f5m006ar2sobpimm7ay7',
+  'Lè Shine': 'mapbox://styles/themendozaline/cjg6296ub04ot2sqv9izku3qq',
+  'North Star': 'mapbox://styles/themendozaline/cj5oyewyy0fg22spetiv0hap0',
+  Odyssey: 'mapbox://styles/themendozaline/cjgq6rklb000d2so1b8myaait',
 };
 
 const demoMap = () => {
-  const mapboxStyle = selectV2('Mapbox Style', mapStylesOptions, mapStylesOptions['Lè Shine']);
+  const mapboxStyle = selectV2(
+    'Mapbox Style',
+    mapStylesOptions,
+    mapStylesOptions['Lè Shine']
+  );
 
   const opacityOptions = {
     range: true,
@@ -36,12 +42,18 @@ const demoMap = () => {
   };
   const opacity = number('Opacity:', 0.1, opacityOptions);
 
-  const getCircleColor = f => f.properties.TYPE === 'MAX' && f.properties.LINE === 'R' ? [255,0,0] :
-    f.properties.TYPE === 'MAX' && f.properties.LINE === 'B' ? [0,0,255] :
-    f.properties.TYPE === 'MAX' && f.properties.LINE === 'G' ? [0,255,0] :
-    f.properties.TYPE === 'MAX' && f.properties.LINE === 'Y' ? [255,215,0] :
-    f.properties.TYPE === 'MAX' && f.properties.LINE === 'O' ? [255,69,0] :
-    [148,0,211];
+  const getCircleColor = f =>
+    f.properties.TYPE === 'MAX' && f.properties.LINE === 'R'
+      ? [255, 0, 0]
+      : f.properties.TYPE === 'MAX' && f.properties.LINE === 'B'
+      ? [0, 0, 255]
+      : f.properties.TYPE === 'MAX' && f.properties.LINE === 'G'
+      ? [0, 255, 0]
+      : f.properties.TYPE === 'MAX' && f.properties.LINE === 'Y'
+      ? [255, 215, 0]
+      : f.properties.TYPE === 'MAX' && f.properties.LINE === 'O'
+      ? [255, 69, 0]
+      : [148, 0, 211];
 
   const radiusScaleOptions = {
     range: true,
@@ -66,10 +78,7 @@ const demoMap = () => {
   const visible = boolean('Visible:', true);
 
   return (
-    <BaseMap
-      mapboxToken={mapboxToken}
-      mapboxStyle={mapboxStyle}
-    >
+    <BaseMap mapboxToken={mapboxToken} mapboxStyle={mapboxStyle}>
       <ScatterPlotMap
         data={trimet.features}
         getPosition={f => f.geometry.coordinates}
@@ -80,7 +89,9 @@ const demoMap = () => {
         outline={outline}
         strokeWidth={strokeWidth}
         autoHighlight={autoHighlight}
-        onLayerClick={info => action('Layer clicked:', { depth: 2 })(info, info.object)}
+        onLayerClick={info =>
+          action('Layer clicked:', { depth: 2 })(info, info.object)
+        }
         visible={visible}
       />
     </BaseMap>
@@ -88,7 +99,11 @@ const demoMap = () => {
 };
 
 const tooltipMap = () => {
-  const mapboxStyle = selectV2('Mapbox Style', mapStylesOptions, mapStylesOptions['Scenic']);
+  const mapboxStyle = selectV2(
+    'Mapbox Style',
+    mapStylesOptions,
+    mapStylesOptions['Scenic']
+  );
 
   return (
     <BaseMap
@@ -102,31 +117,30 @@ const tooltipMap = () => {
         data={busStops.slide_data.features}
         getPosition={f => f.geometry.coordinates}
         opacity={1}
-        getColor={f => [220,20,60,255]}
+        getColor={f => [220, 20, 60, 255]}
         getRadius={f => 250}
         radiusScale={1}
         outline={false}
         autoHighlight={true}
-        onLayerClick={info => action('Layer clicked:', { depth: 2 })(info, info.object)}
+        onLayerClick={info =>
+          action('Layer clicked:', { depth: 2 })(info, info.object)
+        }
         visible={true}
       >
         <MapTooltip
-          primaryName={"average wait time"}
-          primaryField={"avg_wait"}
-          secondaryName={"bus route"}
-          secondaryField={"route"}
+          primaryName={'average wait time'}
+          primaryField={'avg_wait'}
+          secondaryName={'bus route'}
+          secondaryField={'route'}
         />
       </ScatterPlotMap>
     </BaseMap>
   );
 };
 
-export default () => storiesOf('Maps/Scatterplot Map', module)
-  .addDecorator(withKnobs)
-  .addDecorator(checkA11y)
-  .add('Simple usage',
-    (demoMap)
-  )
-  .add('With tooltip',
-    (tooltipMap)
-  );
+export default () =>
+  storiesOf('Maps/Scatterplot Map', module)
+    .addDecorator(withKnobs)
+    .addDecorator(checkA11y)
+    .add('Simple usage', demoMap)
+    .add('With tooltip', tooltipMap);

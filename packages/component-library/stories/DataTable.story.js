@@ -30,7 +30,8 @@ const testData = {
       align: 'center',
       header: 'Age',
       key: 'age',
-    }],
+    },
+  ],
   data: {
     11: {
       firstName: 'John',
@@ -87,8 +88,8 @@ const demoCode = () => (
   </div>
 );
 
-export default () => storiesOf('Charts/Data Table', module)
-  .add(
+export default () =>
+  storiesOf('Charts/Data Table', module).add(
     title,
     withInfo(`
       Simple data table to display data. Can be sorted by clicking the top of each column.

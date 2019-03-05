@@ -39,17 +39,17 @@ const demoCode = () => {
   }
 
   // NOTE - ONLY return block will be documented as src - find out how to show above code
-  return (<CustomSlider />);
+  return <CustomSlider />;
 };
 
 // const propDocs = { inline: true, propTables: [Slider] };
 
-export default () => storiesOf("UI Components/Slider", module)
-  .addDecorator(checkA11y)
-  .addDecorator(story => 
-    <div style={storybookStyles.storyGrid}>
-      <div style={storybookStyles.storyGridItem}>
-        {story()}
+export default () =>
+  storiesOf('UI Components/Slider', module)
+    .addDecorator(checkA11y)
+    .addDecorator(story => (
+      <div style={storybookStyles.storyGrid}>
+        <div style={storybookStyles.storyGridItem}>{story()}</div>
       </div>
-    </div>)
-  .add(title, demoCode);
+    ))
+    .add(title, demoCode);

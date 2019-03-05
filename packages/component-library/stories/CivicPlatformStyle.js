@@ -1,4 +1,4 @@
-import React from 'react';  
+import React from 'react';
 import { storybookStyles } from './storyStyles.js';
 
 const CivicPlatformStyle = () => (
