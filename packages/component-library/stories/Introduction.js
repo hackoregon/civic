@@ -24,7 +24,7 @@ const Introduction = () => (
     </p>
     <p>
       Our Storybook is iterative and will be updated as the CIVIC Platform
-      continues to grow. Please reach out to us in the SLACK #product_design
+      continues to grow. Please reach out to us in the SLACK #team_design
       channel with any questions about usage or suggestions for improving the
       stories.
     </p>
