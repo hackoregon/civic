@@ -10,13 +10,9 @@ const title = 'Simple usage';
 const description = `
   A landing page.`;
 
-const demoCode = () => (
-  <LandingPage>Hello LandingPage</LandingPage>
-);
+const demoCode = () => <LandingPage>Hello LandingPage</LandingPage>;
 
-export default () => storiesOf('CIVIC Platform Components/Landing Page', module)
-  .addDecorator(checkA11y)
-  .add(
-    title,
-    demoCode
-  );
+export default () =>
+  storiesOf('CIVIC Platform Components/Landing Page', module)
+    .addDecorator(checkA11y)
+    .add(title, demoCode);

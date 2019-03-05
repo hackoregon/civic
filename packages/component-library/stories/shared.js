@@ -1,6 +1,7 @@
 import React from 'react';
 
-export const wallOfText = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+export const wallOfText =
+  'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 export const wallOfRichText = (
   <div>
     <strong>Lorem ipsum dolor sit amet</strong>, consectetur adipisicing elit,
@@ -10,21 +11,22 @@ export const wallOfRichText = (
       <li>minim veniam, quis nostrud</li>
       <li>exercitation ullamco laboris</li>
     </ul>
-    nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-    velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+    officia deserunt mollit anim id est laborum.
   </div>
 );
-const firstRepeatInWallOfText = wallOfText
-  .split(' ')
-  .reduce((p, n, i) => {
-    if (typeof p === 'number') return p;
-    if (p[n]) return i;
-    p[n] = true;
-    return p;
-  }, {});
-export const randomLorem = () => wallOfText
-  .split(' ')[Math.floor((Math.random() * 100) % firstRepeatInWallOfText)];
+const firstRepeatInWallOfText = wallOfText.split(' ').reduce((p, n, i) => {
+  if (typeof p === 'number') return p;
+  if (p[n]) return i;
+  p[n] = true;
+  return p;
+}, {});
+export const randomLorem = () =>
+  wallOfText.split(' ')[
+    Math.floor((Math.random() * 100) % firstRepeatInWallOfText)
+  ];
 
 export const colors = [
   '#a6cee3',
@@ -53,6 +55,8 @@ export const colors = [
   '#ffffb3',
 ];
 export const randomizer = () => Math.random() * 100;
-export const getColors = (datum, idx) => (arguments.length === 2 ? colors[idx] : colors[datum]);
-export const getRandomValuesArray = (numsOf, func) => [...new Array(numsOf)].map(func);
+export const getColors = (datum, idx) =>
+  arguments.length === 2 ? colors[idx] : colors[datum];
+export const getRandomValuesArray = (numsOf, func) =>
+  [...new Array(numsOf)].map(func);
 export const objectRandomizer = () => ({ x: randomLorem(), y: randomizer() });

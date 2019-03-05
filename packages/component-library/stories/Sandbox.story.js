@@ -11,7 +11,8 @@ import { Sandbox } from '../src';
 
 import { foundations, slides } from '../src/Sandbox/constants';
 
-const mapboxToken = 'pk.eyJ1IjoidGhlbWVuZG96YWxpbmUiLCJhIjoiY2o1aXdoem1vMWtpNDJ3bnpqaGF1bnlhNSJ9.sjTrNKLW9daDBIGvP3_W0w';
+const mapboxToken =
+  'pk.eyJ1IjoidGhlbWVuZG96YWxpbmUiLCJhIjoiY2o1aXdoem1vMWtpNDJ3bnpqaGF1bnlhNSJ9.sjTrNKLW9daDBIGvP3_W0w';
 class SandboxStory extends React.Component {
   constructor() {
     super();
@@ -42,10 +43,16 @@ class SandboxStory extends React.Component {
     this.initialDataSetup = this.initialDataSetup.bind(this);
   }
   componentDidMount() {
-    fetch('https://sandbox.civicpdx.org/civic-sandbox').then(res => res).then(res => res.json()).then(data => this.setState({ data: data.body, hasFetched: true }));
+    fetch('https://sandbox.civicpdx.org/civic-sandbox')
+      .then(res => res)
+      .then(res => res.json())
+      .then(data => this.setState({ data: data.body, hasFetched: true }));
   }
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.hasFetched !== prevState.hasFetched && this.state.hasFetched) {
+    if (
+      this.state.hasFetched !== prevState.hasFetched &&
+      this.state.hasFetched
+    ) {
       this.initialDataSetup(this.state);
     }
     if (this.state.selectedFoundation !== prevState.selectedFoundation) {
@@ -55,28 +62,43 @@ class SandboxStory extends React.Component {
       this.updateSlide(this.state.selectedSlide);
     }
   }
-  initialDataSetup = (state) => {
+  initialDataSetup = state => {
     const selectedPackageData = state.data.packages[this.state.selectedPackage];
-    const selectedFoundation = selectedPackageData ? selectedPackageData.default_foundation : '';
-    const selectedSlide = selectedPackageData ? selectedPackageData.default_slide : [];
-    const defaultFoundation = selectedFoundation && state.data.foundations[selectedFoundation];
-    const defaultSlides = selectedSlide && selectedSlide.map(slide => state.data.slides[slide]);
-    this.setState({ selectedFoundation, selectedSlide, defaultFoundation, defaultSlides });
-  }
-  updateFoundation = (selectedFoundation) => {
+    const selectedFoundation = selectedPackageData
+      ? selectedPackageData.default_foundation
+      : '';
+    const selectedSlide = selectedPackageData
+      ? selectedPackageData.default_slide
+      : [];
+    const defaultFoundation =
+      selectedFoundation && state.data.foundations[selectedFoundation];
+    const defaultSlides =
+      selectedSlide && selectedSlide.map(slide => state.data.slides[slide]);
+    this.setState({
+      selectedFoundation,
+      selectedSlide,
+      defaultFoundation,
+      defaultSlides,
+    });
+  };
+  updateFoundation = selectedFoundation => {
     const defaultFoundation = this.state.data.foundations[selectedFoundation];
     this.fetchFoundationData(defaultFoundation);
     this.setState({ selectedFoundation, defaultFoundation });
-  }
-  updateSlide = (selectedSlide) => {
-    const selectedSlides = isArray(selectedSlide) ? selectedSlide : selectedSlide.split(',');
-    const defaultSlides = selectedSlides.map(slide => this.state.data.slides[slide]);
+  };
+  updateSlide = selectedSlide => {
+    const selectedSlides = isArray(selectedSlide)
+      ? selectedSlide
+      : selectedSlide.split(',');
+    const defaultSlides = selectedSlides.map(
+      slide => this.state.data.slides[slide]
+    );
     this.fetchSlideData(defaultSlides);
     this.setState({ selectedSlide: selectedSlides, defaultSlides });
-  }
-  fetchFoundationData = (foundation) => {
+  };
+  fetchFoundationData = foundation => {
     fetch(`${foundation.endpoint}`)
-      .then((res) => {
+      .then(res => {
         if (!res.ok) {
           throw Error(res.statusText);
         }
@@ -85,45 +107,55 @@ class SandboxStory extends React.Component {
       .then(res => res.json())
       .then(data => this.setState({ foundationData: data }))
       .catch(err => console.error(err));
-  }
-  fetchSlideData = (slideData) => {
+  };
+  fetchSlideData = slideData => {
     Promise.all(
-      slideData.map(
-        s => fetch(`${s.endpoint}`)
-        .then((res) => {
-          if (!res.ok) {
-            throw Error(res.statusText);
-          }
-          return res;
-        })
-        .then(res => res.json())
-        .then(data => ({ [s.name]: data }))
-        .catch(err => console.error(err))
+      slideData.map(s =>
+        fetch(`${s.endpoint}`)
+          .then(res => {
+            if (!res.ok) {
+              throw Error(res.statusText);
+            }
+            return res;
+          })
+          .then(res => res.json())
+          .then(data => ({ [s.name]: data }))
+          .catch(err => console.error(err))
       )
-    ).then((data) => {
+    ).then(data => {
       this.setState({ slideData: data });
     });
-  }
+  };
   findAndReplaceSlideData = (slideData, data, slide) => {
     const slideIndex = findIndex(slideData, o => o[slide.name]);
 
-    return [...slideData.slice(0, slideIndex),
+    return [
+      ...slideData.slice(0, slideIndex),
       Object.assign({}, slideData[slideIndex], data),
-      ...slideData.slice(slideIndex + 1)];
-  }
+      ...slideData.slice(slideIndex + 1),
+    ];
+  };
   fetchSlideDataByDate = (slide, date) => {
     fetch(`${slide.endpoint}${date}`)
-      .then((res) => {
+      .then(res => {
         if (!res.ok) {
           throw Error(res.statusText);
         }
         return res;
       })
       .then(res => res.json())
-      .then(data => this.setState({ slideData: this.findAndReplaceSlideData(this.state.slideData, data, slide) }))
+      .then(data =>
+        this.setState({
+          slideData: this.findAndReplaceSlideData(
+            this.state.slideData,
+            data,
+            slide
+          ),
+        })
+      )
       .catch(err => console.error(err));
-  }
-  updatePackage = (selectedPackage) => {
+  };
+  updatePackage = selectedPackage => {
     const { data } = this.state;
     const packageData = data.packages[selectedPackage];
     const selectedFoundation = packageData.default_foundation;
@@ -132,35 +164,51 @@ class SandboxStory extends React.Component {
     this.updateSlide(selectedSlide);
     const defaultFoundation = data.foundations[selectedFoundation];
     const defaultSlides = selectedSlide.map(slide => data.slides[slide]);
-    this.setState({ selectedPackage, selectedFoundation, selectedSlide, defaultFoundation, defaultSlides });
-  }
+    this.setState({
+      selectedPackage,
+      selectedFoundation,
+      selectedSlide,
+      defaultFoundation,
+      defaultSlides,
+    });
+  };
   toggleDrawer = () => {
     this.setState({ drawerVisible: !this.state.drawerVisible });
-  }
+  };
   formatData = (defaultFoundation, defaultSlides) => {
-    const formatSlideData = defaultSlides.map((slide) => {
-      let data = {
-        slide_meta: {}, slide_data: {} };
+    const formatSlideData = defaultSlides
+      .map(slide => {
+        let data = {
+          slide_meta: {},
+          slide_data: {},
+        };
 
-      if (this.state.slideData.length) {
-        data = this.state.slideData.find((slideData) => {
-          return slideData[slide.name];
-        })[slide.name];
-      }
-      const slideObj = slides(data)[slide.name];
+        if (this.state.slideData.length) {
+          data = this.state.slideData.find(slideData => {
+            return slideData[slide.name];
+          })[slide.name];
+        }
+        const slideObj = slides(data)[slide.name];
 
-      return [{
-        data: slideObj ? slideObj.boundary : {},
-      }, {
-        data: slideObj ? slideObj.map : {},
-      }];
-    }).reduce((a, b) => a.concat(b), []);
-    return [{
-      data: this.state.foundationData.slide_data ? foundations(this.state.foundationData)[defaultFoundation.name] : {},
-    },
+        return [
+          {
+            data: slideObj ? slideObj.boundary : {},
+          },
+          {
+            data: slideObj ? slideObj.map : {},
+          },
+        ];
+      })
+      .reduce((a, b) => a.concat(b), []);
+    return [
+      {
+        data: this.state.foundationData.slide_data
+          ? foundations(this.state.foundationData)[defaultFoundation.name]
+          : {},
+      },
       ...formatSlideData,
     ];
-  }
+  };
   render() {
     const styles = css(`
     position: fixed;
@@ -175,7 +223,10 @@ class SandboxStory extends React.Component {
       <Sandbox
         mapboxStyle={'mapbox://styles/themendozaline/cj6y6f5m006ar2sobpimm7ay7'}
         mapboxToken={mapboxToken}
-        layerData={this.formatData(this.state.defaultFoundation, this.state.defaultSlides)}
+        layerData={this.formatData(
+          this.state.defaultFoundation,
+          this.state.defaultSlides
+        )}
         updateFoundation={this.updateFoundation}
         updateSlide={this.updateSlide}
         toggleDrawer={this.toggleDrawer}
@@ -194,5 +245,7 @@ class SandboxStory extends React.Component {
   }
 }
 
-export default () => storiesOf('CIVIC Platform Components//Sandbox', module)
-.add('Sandbox', () => (<SandboxStory />));
+export default () =>
+  storiesOf('CIVIC Platform Components//Sandbox', module).add('Sandbox', () => (
+    <SandboxStory />
+  ));

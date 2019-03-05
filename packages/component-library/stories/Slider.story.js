@@ -4,6 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import { Slider } from '../src';
 import { checkA11y } from '@storybook/addon-a11y';
+import { storybookStyles } from './storyStyles.js';
 
 const displayName = Slider.displayName || 'Slider';
 const title = 'Simple usage';
@@ -38,11 +39,17 @@ const demoCode = () => {
   }
 
   // NOTE - ONLY return block will be documented as src - find out how to show above code
-  return (<CustomSlider />);
+  return <CustomSlider />;
 };
 
 // const propDocs = { inline: true, propTables: [Slider] };
 
-export default () => storiesOf("UI Components/Slider", module)
-  .addDecorator(checkA11y)
-  .add(title, demoCode);
+export default () =>
+  storiesOf('UI Components/Slider', module)
+    .addDecorator(checkA11y)
+    .addDecorator(story => (
+      <div style={storybookStyles.storyGrid}>
+        <div style={storybookStyles.storyGridItem}>{story()}</div>
+      </div>
+    ))
+    .add(title, demoCode);

@@ -4,13 +4,22 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import { StoryCard, Chart, ChartData, PieChart } from '../src';
-import { getRandomValuesArray, colors, objectRandomizer, wallOfRichText } from './shared';
+import {
+  getRandomValuesArray,
+  colors,
+  objectRandomizer,
+  wallOfRichText,
+} from './shared';
 import { checkA11y } from '@storybook/addon-a11y';
 
 const labels = ['A', 'B', 'C', 'D', 'E', 'F'];
 const width = 300;
 const height = 300;
-const tdDemo = () => (<StoryCard title={'A title goes here'}><p className="Description">{wallOfRichText}</p></StoryCard>);
+const tdDemo = () => (
+  <StoryCard title={'A title goes here'}>
+    <p className="Description">{wallOfRichText}</p>
+  </StoryCard>
+);
 const tdvDemo = () => (
   <StoryCard title={'A title goes here'}>
     <p className="Description">{wallOfRichText}</p>
@@ -33,11 +42,17 @@ const tdvDemo = () => (
   </StoryCard>
 );
 
-export default () => storiesOf('StoryCard', module)
-  .addDecorator(checkA11y)
-  .add(
-    'Simple usage',
-    // 'This is some basic usage with the StoryCard with just a title and descriptions')(
-    () => <StoryCard title={'Some title'}><p className="Description">some descriptions go here</p></StoryCard>)
-  .add('with title & description', tdDemo)
-  .add('with title, description & visualization', tdvDemo);
+export default () =>
+  storiesOf('StoryCard', module)
+    .addDecorator(checkA11y)
+    .add(
+      'Simple usage',
+      // 'This is some basic usage with the StoryCard with just a title and descriptions')(
+      () => (
+        <StoryCard title={'Some title'}>
+          <p className="Description">some descriptions go here</p>
+        </StoryCard>
+      )
+    )
+    .add('with title & description', tdDemo)
+    .add('with title, description & visualization', tdvDemo);
