@@ -128,7 +128,6 @@
     "webpack-node-externals": "^1.5.4"
   },
   "dependencies": {
-    "@hackoregon/civic-server": "0.0.10",
-    "deck.gl": "^5.2.4"
+    "@hackoregon/civic-server": "0.0.10"
   }
 }
