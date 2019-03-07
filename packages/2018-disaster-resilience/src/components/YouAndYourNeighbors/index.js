@@ -154,7 +154,7 @@ export class YouAndYourNeighbors extends React.Component {
           {noCoordsData && (
             <p>
               We don't have complete information for your address.{' '}
-              <a href="http://www.civicplatform.org/">
+              <a href="http://civicplatform.org/">
                 Learn more about how your city can work to get their data in
                 Civic.
               </a>
