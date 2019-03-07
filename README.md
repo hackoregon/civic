@@ -30,10 +30,10 @@ Prerequisites you'll need in your development environment to use and contribute 
 $ git clone https://github.com/hackoregon/civic.git
 $ cd civic
 
-# Sets your Node.js version to match what the project uses (should also happen on clone)
+# Sets your Node.js version to match what the project uses.
 $ nvm use
 
-# Note for next two steps, if you get an error, try the same command again.
+# Note for next two steps, if you get an error, keep trying the same command again.
 
 # Installs all package dependencies and links cross-dependencies
 $ yarn bootstrap
