@@ -8,7 +8,6 @@ import MapGL from 'react-map-gl';
 import { BaseMap } from '../src';
 import { checkA11y } from '@storybook/addon-a11y';
 import { MapTooltip } from '../src';
-import * as d3 from 'd3';
 
 class LoadData extends React.Component {
   constructor(props) {
@@ -16,18 +15,14 @@ class LoadData extends React.Component {
 
     this.state = {
       data: null,
-      error: null,
     };
   }
 
   componentDidMount() {
-    let cmp = this;
-    d3.json(this.props.url, (error, data) => {
-      if (error) {
-        return this.setState({ error: error });
-      }
-      cmp.setState({ data: data });
-    });
+    fetch(this.props.url)
+      .then(res => res)
+      .then(res => res.json())
+      .then(data => this.setState({ data: data.body }));
   }
   render() {
     if (this.state.data === null) {

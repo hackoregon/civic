@@ -5,7 +5,6 @@ import { withKnobs, number, selectV2 } from '@storybook/addon-knobs';
 import { checkA11y } from '@storybook/addon-a11y';
 import { BaseMap } from '../src';
 import { ScreenGridMap } from '../src';
-import * as d3 from 'd3';
 
 const displayName = ScreenGridMap.displayName || 'ScreenGridMap';
 
@@ -14,18 +13,14 @@ class LoadData extends React.Component {
     super(props);
     this.state = {
       data: null,
-      error: null,
     };
   }
 
   componentDidMount() {
-    let cmp = this;
-    d3.json(this.props.url, (error, data) => {
-      if (error) {
-        return this.setState({ error: error });
-      }
-      cmp.setState({ data: data });
-    });
+    fetch(this.props.url)
+      .then(res => res)
+      .then(res => res.json())
+      .then(data => this.setState({ data: data.body }));
   }
 
   render() {
