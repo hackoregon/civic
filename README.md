@@ -1,6 +1,6 @@
 # Civic [![Build Status](https://travis-ci.org/hackoregon/civic.svg?branch=master)](https://travis-ci.org/hackoregon/civic)
 
-This is the home of the front-end code for the [Civic Platform](http://civicplatform.org/). It's organized in a [lerna](learn.io) based mono-repo, but it's ok if you don't know what that means yet.
+This is the home of the front-end code for the [Civic Platform](http://civicplatform.org/). It's organized in a [Lerna](https://lernajs.io/) based mono-repo, but it's ok if you don't know what that means yet.
 
 ## Setup
 
@@ -30,10 +30,10 @@ Prerequisites you'll need in your development environment to use and contribute 
 $ git clone https://github.com/hackoregon/civic.git
 $ cd civic
 
-# Sets your Node.js version to match what the project uses (should also happen on clone)
+# Sets your Node.js version to match what the project uses.
 $ nvm use
 
-# Note for next two steps, if you get an error, try the same command again.
+# Note for next two steps, if you get an error, keep trying the same command again.
 
 # Installs all package dependencies and links cross-dependencies
 $ yarn bootstrap

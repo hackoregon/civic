@@ -38,8 +38,9 @@ These libraries in the background aren't necessary to really understand, but kno
 are in use and how they work can help when debugging issues. Read more in our [Architecture guide](ARCHITECTURE.md).
 
 ## Code style and linting
+We use automated tools to ensure code quality. You don't need to install anything, but you can configure your editor to make working with these automated tools easier.
 
-We use [Prettier](https://prettier.io), an opinionated code formatter, to format our code consistently across the project. This repository is configured to run Prettier automatically before files are committed. You can [configure your editor to run Prettier](https://prettier.io/docs/en/editors.html) to your files as you code.
+We use [Prettier](https://prettier.io), an opinionated code formatter, to format our code consistently across the project. This repository is configured to run Prettier automatically before files are committed. You can [configure your editor to run Prettier](https://prettier.io/docs/en/editors.html) on your files as you code.
 
 In addition, we use [ESLint](https://eslint.org/) to avoid problems with our code. ESLint can be [configured in your editor](https://eslint.org/docs/user-guide/integrations).
 
