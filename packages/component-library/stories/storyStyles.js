@@ -1,4 +1,4 @@
-import { SSL_OP_TLS_BLOCK_PADDING_BUG } from 'constants';
+import { SSL_OP_TLS_BLOCK_PADDING_BUG } from "constants";
 
 /*
   Styles used in Storybook.
@@ -8,36 +8,36 @@ import { SSL_OP_TLS_BLOCK_PADDING_BUG } from 'constants';
 const storybookStyles = {
   // The display area for components
   main: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     margin: 15,
-    maxWidth: 800,
+    maxWidth: 800
   },
 
   // Use CSS grid to center UI components in the Storybook display area
   storyGrid: {
-    display: 'grid',
-    gridTemplateColumns: '1fr 2fr 1fr',
-    gridTemplateRows: '1fr 1fr 1fr',
-    gridGap: '10px',
+    display: "grid",
+    gridTemplateColumns: "1fr 2fr 1fr",
+    gridTemplateRows: "1fr 1fr 1fr",
+    gridGap: "10px"
   },
 
   storyGridItem: {
     gridRow: 2,
     gridColumn: 2,
-    alignSelf: 'center',
-    justifyContent: 'center',
+    alignSelf: "center",
+    justifyContent: "center"
   },
 
-  // Show inverted logos on a dark background in the Branding Logos section
+  // Show inverted logos on a dark background in the Branding Logos story
   invertedLogo: {
-    backgroundColor: '#201024',
+    backgroundColor: "#201024",
     margin: 20,
-    padding: 20,
+    padding: 20
   },
 
   logo: {
-    padding: 0,
-  },
+    paddingLeft: 20
+  }
 };
 
 export { storybookStyles };
