@@ -11,7 +11,7 @@ const CivicLogoInverted = ({ alt }) =>
   isClient && (
     <img
       style={styles}
-      src={require("../../assets/civic-logo-animated-invert.svg")}
+      src={require("../../assets/civic-logo-invert.svg")}
       alt={alt}
     />
   );
