@@ -1,4 +1,5 @@
 import { SSL_OP_TLS_BLOCK_PADDING_BUG } from "constants";
+import "@hackoregon/component-library/assets/constants.css";
 
 /*
   Styles used in Storybook.
@@ -37,6 +38,48 @@ const storybookStyles = {
 
   logo: {
     paddingLeft: 20
+  },
+
+  // Display a solid color
+  solidColorSample: {
+    display: "flex"
+  },
+
+  // Brand color palette
+  colorBlock: {
+    height: 125,
+    width: 300,
+    marginLeft: 0,
+    marginTop: 10,
+    marginRight: 20,
+    marginBottom: 10
+  },
+
+  // Brand colors (should be global)
+  primaryBkgnd: {
+    backgroundColor: "rgba(34,15,37,1)"
+  },
+
+  secondaryBkgnd: {
+    backgroundColor: "rgba(238,73,92,1)"
+  },
+
+  tertiaryBkgnd: {
+    backgroundColor: "rgba(114,99,113,1)"
+  },
+
+  mediumBkgnd: {
+    backgroundColor: "rgba(170,164,171,1)"
+  },
+
+  subduedBkgnd: {
+    backgroundColor: "rgba(243,242,243,1)"
+  },
+
+  // Typography (a global style)
+  dataText: {
+    fontFamily: "Roboto Condensed",
+    fontSize: 12
   }
 };
 
