@@ -13,7 +13,7 @@ module.exports = createConfig([
   match(
     ['*.css'],
     [
-      css,
+      css(),
       postcss({
         plugins: [autoprefixer({ browsers: ['last 2 versions'] })],
       }),

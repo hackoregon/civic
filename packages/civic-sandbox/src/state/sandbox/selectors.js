@@ -3,7 +3,6 @@ import { isArray } from 'lodash';
 import { rootState } from '../selectors';
 
 import { slides, foundations } from '../layerStyles';
-import { select } from 'glamor';
 
 export const getState = createSelector(
   rootState,
