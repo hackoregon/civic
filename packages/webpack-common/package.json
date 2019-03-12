@@ -12,9 +12,9 @@
   "dependencies": {
     "autoprefixer": "^6.7.7",
     "lodash-webpack-plugin": "^0.11.5",
-    "webpack": "^3.12.0",
-    "webpack-blocks": "^1.0.0",
-    "webpack-dev-middleware": "^1.10.0",
+    "webpack": "^4.29.6",
+    "webpack-blocks": "^2.0.0-rc",
+    "webpack-dev-middleware": "^3.6.1",
     "webpack-hot-middleware": "^2.17.0"
   }
 }

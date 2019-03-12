@@ -79,6 +79,6 @@
     "recharts": "^0.22.1",
     "styled-components": "^1.4.2",
     "victory": "^0.26.0",
-    "webpack-blocks": "^1.0.0"
+    "webpack-blocks": "^2.0.0-rc"
   }
 }
