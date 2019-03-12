@@ -45,7 +45,10 @@
     "react-addons-test-utils": "^15.5.3",
     "sinon": "^1.17.7",
     "sinon-chai": "^2.8.0",
-    "source-map-support": "^0.4.11"
+    "source-map-support": "^0.4.11",
+    "webpack": "^4.29.6",
+    "webpack-blocks": "^2.0.0-rc",
+    "webpack-cli": "^3.2.3"
   },
   "dependencies": {
     "chai-enzyme": "^0.6.1",
@@ -78,7 +81,6 @@
     "react-share": "^2.2.0",
     "recharts": "^0.22.1",
     "styled-components": "^1.4.2",
-    "victory": "^0.26.0",
-    "webpack-blocks": "^2.0.0-rc"
+    "victory": "^0.26.0"
   }
 }
