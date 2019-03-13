@@ -13,7 +13,7 @@ import {
 
 import ChartContainer from '../ChartContainer';
 import SimpleLegend from '../SimpleLegend';
-import { numeric } from '../utils/formatters';
+import civicFormat from '../utils/civicFormat';
 import {
   chartEvents,
   getDefaultDomain,
@@ -202,8 +202,8 @@ LineChart.defaultProps = {
   title: null,
   xLabel: 'X',
   yLabel: 'Y',
-  xNumberFormatter: numeric,
-  yNumberFormatter: numeric,
+  xNumberFormatter: civicFormat.numeric,
+  yNumberFormatter: civicFormat.numeric,
   legendComponent: null,
 };
 

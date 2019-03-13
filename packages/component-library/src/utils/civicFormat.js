@@ -23,7 +23,7 @@ const abbreviateLarge = number => {
   return `${num} ${scale}`;
 };
 
-export const numeric = d => {
+const numeric = d => {
   let formatted;
 
   // We want to specifically format numbers greater than one million.
@@ -36,10 +36,22 @@ export const numeric = d => {
   return formatted;
 };
 
-export const year = format('.0f');
-export const percentage = format('.0%');
-export const dollars = d => `$${d}`;
+const year = format('.0f');
+const percentage = format('.0%');
+const dollars = d => `$${d}`;
 
-export const titleCase = str => startCase(toLower(str));
-export const unformatted = d => d;
-export const monthYear = timeFormat('%B %Y');
+const titleCase = str => startCase(toLower(str));
+const unformatted = d => d;
+const monthYear = timeFormat('%B %Y');
+
+const civicFormat = {
+  numeric,
+  year,
+  percentage,
+  dollars,
+  titleCase,
+  unformatted,
+  monthYear,
+};
+
+export default civicFormat;

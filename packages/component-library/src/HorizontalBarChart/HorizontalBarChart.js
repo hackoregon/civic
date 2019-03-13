@@ -11,7 +11,7 @@ import {
 } from 'victory';
 
 import ChartContainer from '../ChartContainer';
-import { numeric, unformatted } from '../utils/formatters';
+import civicFormat from '../utils/civicFormat';
 import { chartEvents } from '../utils/chartHelpers';
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
 
@@ -194,8 +194,8 @@ HorizontalBarChart.defaultProps = {
   subtitle: null,
   xLabel: 'X',
   yLabel: 'Y',
-  dataValueFormatter: numeric,
-  dataLabelFormatter: unformatted,
+  dataValueFormatter: civicFormat.numeric,
+  dataLabelFormatter: civicFormat.unformatted,
   minimalist: false,
 };
 

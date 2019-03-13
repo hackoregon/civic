@@ -1,4 +1,4 @@
-import { ungroupBy } from './dataHelpers';
+import ungroupBy from './ungroupBy';
 
 const SAMPLE_DATA = [
   {

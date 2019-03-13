@@ -4,15 +4,10 @@ import { connect } from 'react-redux';
 import { css } from 'emotion';
 
 import {
-  year,
-  percentage,
-  titleCase,
-} from '@hackoregon/component-library/src/utils/formatters';
-
-import {
   CivicStoryCard,
   LineChart,
   Dropdown,
+  civicFormat,
 } from '@hackoregon/component-library';
 
 import {
@@ -63,7 +58,8 @@ export class NeighborhoodsThroughTheAges extends React.Component {
     } = this.props;
 
     const neighborhoodSubtitle =
-      !!selectedNeighborhood && ` - ${titleCase(selectedNeighborhood)}`;
+      !!selectedNeighborhood &&
+      ` - ${civicFormat.titleCase(selectedNeighborhood)}`;
 
     return (
       <CivicStoryCard
@@ -99,8 +95,8 @@ export class NeighborhoodsThroughTheAges extends React.Component {
             dataKey="year"
             dataValue="value"
             dataSeries="type"
-            xNumberFormatter={year}
-            yNumberFormatter={percentage}
+            xNumberFormatter={civicFormat.year}
+            yNumberFormatter={civicFormat.percentage}
           />
         )}
       </CivicStoryCard>

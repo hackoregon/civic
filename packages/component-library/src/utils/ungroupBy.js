@@ -5,7 +5,7 @@
  @dataSeriesLabels: optional array of strings with labels for dataSeriesKeys
 */
 
-export function ungroupBy(data, dataSeriesKeys, dataSeriesLabels) {
+const ungroupBy = (data, dataSeriesKeys, dataSeriesLabels) => {
   const arr = [];
   const labels = [];
 
@@ -29,4 +29,6 @@ export function ungroupBy(data, dataSeriesKeys, dataSeriesLabels) {
     );
   });
   return arr;
-}
+};
+
+export default ungroupBy;

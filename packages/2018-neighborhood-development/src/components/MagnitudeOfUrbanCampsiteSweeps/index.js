@@ -7,8 +7,8 @@ import {
   CivicStoryCard,
   BarChart,
   Collapsable,
+  civicFormat,
 } from '@hackoregon/component-library';
-import { monthYear } from '@hackoregon/component-library/src/utils/formatters';
 
 import { fetchUrbanCampsiteSweepsByWeek } from '../../state/magnitude-of-urban-campsite-sweeps/actions';
 
@@ -54,7 +54,7 @@ export class MagnitudeOfUrbanCampsiteSweeps extends React.Component {
                   yLabel="Sweeps"
                   dataKey="date"
                   dataValue="count"
-                  xNumberFormatter={monthYear}
+                  xNumberFormatter={civicFormat.monthYear}
                 />
               )}
             </div>

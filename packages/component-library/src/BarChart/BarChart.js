@@ -11,7 +11,7 @@ import {
 } from 'victory';
 
 import ChartContainer from '../ChartContainer';
-import { numeric, year } from '../utils/formatters';
+import civicFormat from '../utils/civicFormat';
 import { assign } from 'lodash';
 import { css } from 'emotion';
 import { chartEvents, getDefaultDomain } from '../utils/chartHelpers';
@@ -135,8 +135,8 @@ BarChart.defaultProps = {
   subtitle: null,
   xLabel: 'X',
   yLabel: 'Y',
-  xNumberFormatter: year,
-  yNumberFormatter: numeric,
+  xNumberFormatter: civicFormat.year,
+  yNumberFormatter: civicFormat.numeric,
   barWidth: null,
 };
 

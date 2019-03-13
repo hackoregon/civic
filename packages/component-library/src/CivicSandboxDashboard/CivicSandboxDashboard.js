@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PieChart from '../PieChart/PieChart';
 import HorizontalBarChart from '../HorizontalBarChart/HorizontalBarChart';
-import { numeric, percentage } from '../utils/formatters';
+import civicFormat from '../utils/civicFormat';
 import { css } from 'emotion';
 
 const dashboard = css`
@@ -115,7 +115,7 @@ class CivicDashboard extends React.Component {
           <h2>{object.title}</h2>
           <h2 style={{ textAlign: 'center', margin: 'auto', width: '50%' }}>
             {object.data[0].y < 1
-              ? percentage(object.data[0].y)
+              ? civicFormat.percentage(object.data[0].y)
               : object.data[0].y.toFixed(1) + '%'}
           </h2>
           <PieChart
@@ -165,16 +165,16 @@ class CivicDashboard extends React.Component {
               {object.min === 0
                 ? 0
                 : object.min > 0 && object.min < 1
-                ? percentage(object.min)
+                ? civicFormat.percentage(object.min)
                 : object.min > 1
-                ? numeric(object.min)
+                ? civicFormat.numeric(object.min)
                 : object.min}
             </h4>
             <h4 style={{ float: 'right' }}>
               {object.max < 1 && object.max > 0
-                ? percentage(object.max)
+                ? civicFormat.percentage(object.max)
                 : object.max > 1
-                ? numeric(object.max)
+                ? civicFormat.numeric(object.max)
                 : object.max}
             </h4>
           </div>

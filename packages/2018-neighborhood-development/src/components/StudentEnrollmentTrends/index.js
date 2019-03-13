@@ -7,13 +7,9 @@ import {
   CivicStoryCard,
   Dropdown,
   StackedAreaChart,
+  ungroupBy,
+  civicFormat,
 } from '@hackoregon/component-library';
-import { ungroupBy } from '@hackoregon/component-library/src/utils/dataHelpers';
-import {
-  year,
-  titleCase,
-} from '@hackoregon/component-library/src/utils/formatters';
-
 import {
   fetchSchoolList,
   fetchSchoolData,
@@ -91,7 +87,7 @@ export class StudentEnrollmentTrends extends React.Component {
             />
             <StackedAreaChart
               title="All Students"
-              subtitle={`Fall enrollment in Portland Public Schools - ${titleCase(
+              subtitle={`Fall enrollment in Portland Public Schools - ${civicFormat.titleCase(
                 selectedSchool
               )}`}
               data={formatForChartA(processedSchoolData)}
@@ -100,12 +96,12 @@ export class StudentEnrollmentTrends extends React.Component {
               dataKey="year"
               dataValue="value"
               dataSeries="type"
-              xNumberFormatter={year}
-              yNumberFormatter={year}
+              xNumberFormatter={civicFormat.year}
+              yNumberFormatter={civicFormat.year}
             />
             <StackedAreaChart
               title="Students From Historically Underrepresented Groups"
-              subtitle={`Fall enrollment in Portland Public Schools - ${titleCase(
+              subtitle={`Fall enrollment in Portland Public Schools - ${civicFormat.titleCase(
                 selectedSchool
               )}`}
               data={formatForChartB(processedSchoolData)}
@@ -114,8 +110,8 @@ export class StudentEnrollmentTrends extends React.Component {
               dataKey="year"
               dataValue="value"
               dataSeries="type"
-              xNumberFormatter={year}
-              yNumberFormatter={year}
+              xNumberFormatter={civicFormat.year}
+              yNumberFormatter={civicFormat.year}
             />
           </div>
         )}
