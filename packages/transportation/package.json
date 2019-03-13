@@ -56,13 +56,13 @@
     "redux-logger": "^2.8.2",
     "redux-thunk": "^2.1.0",
     "reselect": "^3.0.0",
-    "styled-components": "^1.4.2",
-    "webpack-cli": "3.2.3"
+    "styled-components": "^1.4.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.0",
     "@babel/node": "^7.0.0",
+    "@babel/register": "7.0.0",
     "@hackoregon/civic-babel-presets": "^1.0.0-alpha.1c62c05f",
     "@hackoregon/mock-wrapper": "^1.0.0-alpha.1c62c05f",
     "@hackoregon/webpack-common": "^1.0.0-alpha.1c62c05f",

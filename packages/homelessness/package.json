@@ -82,7 +82,7 @@
     "@babel/plugin-transform-runtime": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
-    "@babel/register": "^7.0.0",
+    "@babel/register": "7.0.0",
     "@hackoregon/civic-babel-presets": "^1.0.0-alpha.1c62c05f",
     "@hackoregon/mock-wrapper": "^1.0.0-alpha.1c62c05f",
     "@hackoregon/webpack-common": "^1.0.0-alpha.1c62c05f",

@@ -1,4 +1,3 @@
---require mocha-clean
 --colors
 --recursive
 --require ./tools/testSetup
