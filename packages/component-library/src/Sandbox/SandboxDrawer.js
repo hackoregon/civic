@@ -112,7 +112,7 @@ const SandboxDrawer = ({
               })[slide.name];
             }
             return (
-              <div>
+              <div key={"slide-selector" + index}>
                 <div className={title}>{slide.name}</div>
                 <div
                   className={css(`
