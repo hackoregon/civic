@@ -50,6 +50,8 @@
     ]
   },
   "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
     "@storybook/addon-a11y": "^5.0.1",
     "@storybook/addon-actions": "^5.0.1",
     "@storybook/addon-info": "^5.0.1",
@@ -60,10 +62,10 @@
     "@storybook/storybook-deployer": "^2.8.1",
     "@storybook/theming": "^5.0.1",
     "autoprefixer": "^9.4.10",
-    "babel-cli": "^6.24.1",
-    "babel-core": "^6.24.1",
-    "babel-eslint": "^7.1.1",
-    "babel-loader": "^7.1.1",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^9.0.0",
+    "babel-jest": "^23.4.2",
+    "babel-loader": "^8.0.0",
     "babili-webpack-plugin": "0.1.2",
     "chai": "^3.5.0",
     "chai-as-promised": "^6.0.0",
@@ -129,5 +131,7 @@
     "webpack-md5-hash": "^0.0.6",
     "webpack-node-externals": "^1.5.4"
   },
-  "dependencies": {}
+  "dependencies": {
+
+  }
 }

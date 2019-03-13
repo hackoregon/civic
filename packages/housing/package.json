@@ -60,10 +60,13 @@
     "styled-components": "^1.4.2"
   },
   "devDependencies": {
+    "@babel/node": "^7.0.0",
     "@hackoregon/civic-babel-presets": "^1.0.0-alpha.1c62c05f",
     "@hackoregon/mock-wrapper": "^1.0.0-alpha.1c62c05f",
     "@hackoregon/webpack-common": "^1.0.0-alpha.1c62c05f",
     "autoprefixer": "^9.4.10",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.4.2",
     "chai": "^3.5.0",
     "chai-as-promised": "^6.0.0",
     "chai-enzyme": "^0.6.1",
@@ -97,8 +100,8 @@
     "sinon-chai": "^2.8.0",
     "version-bump-prompt": "^3.1.0",
     "webpack": "^4.29.6",
-    "webpack-cli": "^3.2.3",
     "webpack-blocks": "^2.0.0-rc",
-    "webpack-blocks-utils": "2.0.0-alpha.4"
+    "webpack-blocks-utils": "2.0.0-alpha.4",
+    "webpack-cli": "^3.2.3"
   }
 }

@@ -15,5 +15,6 @@
     "webpack-hot-middleware": "^2.22.0"
   },
   "dependencies": {
+
   }
 }

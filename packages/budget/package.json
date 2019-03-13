@@ -30,8 +30,8 @@
     "test": "cross-env BABEL_ENV=test mocha --opts ./mocha.opts 'src/**/*.test.js'"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.0.0",
     "@hackoregon/component-library": "^1.0.0-alpha.1c62c05f",
-    "babel-polyfill": "^6.23.0",
     "compression": "^1.6.2",
     "cross-env": "^3.1.3",
     "d3": "^4.8.0",
@@ -56,11 +56,13 @@
     "styled-components": "^1.4.2"
   },
   "devDependencies": {
+    "@babel/cli": "^7.0.0",
     "@hackoregon/civic-babel-presets": "^1.0.0-alpha.1c62c05f",
     "@hackoregon/mock-wrapper": "^1.0.0-alpha.1c62c05f",
     "@hackoregon/webpack-common": "^1.0.0-alpha.1c62c05f",
     "autoprefixer": "^9.4.10",
-    "babel-cli": "^6.24.1",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.4.2",
     "chai": "^3.5.0",
     "chai-as-promised": "^6.0.0",
     "chai-enzyme": "^0.6.1",
@@ -100,7 +102,7 @@
     "url-loader": "^1.1.2",
     "version-bump-prompt": "^3.1.0",
     "webpack": "^4.29.6",
-    "webpack-cli": "^3.2.3",
-    "webpack-blocks": "^2.0.0-rc"
+    "webpack-blocks": "^2.0.0-rc",
+    "webpack-cli": "^3.2.3"
   }
 }
