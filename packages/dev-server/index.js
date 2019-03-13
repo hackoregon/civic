@@ -13,7 +13,11 @@ const devMiddleware = require('webpack-dev-middleware');
 const hotMiddleware = require('webpack-hot-middleware');
 
 module.exports = function() {
-  console.log(chalk.yellow('\nStarting the DEVELOPMENT server...'));
+  console.log(
+    chalk.yellow(
+      `\nStarting the ${isProd ? `PRODUCTION` : `DEVELOPMENT`} server...`
+    )
+  );
 
   const afterWebpack = (err, stats) => {
     if (err) {
