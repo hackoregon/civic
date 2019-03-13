@@ -102,7 +102,6 @@
     "version-bump-prompt": "^3.1.0",
     "webpack": "^4.29.6",
     "webpack-blocks": "^2.0.0-rc",
-    "webpack-blocks-utils": "2.0.0-alpha.4",
     "webpack-cli": "^3.2.3"
   }
 }

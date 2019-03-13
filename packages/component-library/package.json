@@ -7,10 +7,10 @@
   "scripts": {
     "build:esm": "babel src --out-dir es --copy-files --no-comments",
     "build:cjs": "babel src --out-dir dist --copy-files --no-comments",
-    "build": "BABEL_ENV=esm npm run build:esm && BABEL_ENV=cjs npm run build:cjs",
+    "build": "BABEL_ENV=esm yarn run build:esm && BABEL_ENV=cjs yarn run build:cjs",
     "configure": "yarn run build",
     "test": "BABEL_ENV=test mocha --opts ./mocha.options ./src/**/*.test.js",
-    "test:watch": "npm run test -- -w",
+    "test:watch": "yarn run test -- -w",
     "lint": "eslint --fix src stories"
   },
   "author": "David Daniel <davidedaniel@gmail.com> (http://davidedaniel.github.io)",
@@ -38,7 +38,7 @@
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/plugin-syntax-import-meta": "^7.0.0",
     "babel-eslint": "^9.0.0",
-    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-add-module-exports": "^1.0.0",
     "chai": "^3.5.0",
     "chai-enzyme": "^0.6.1",
     "enzyme": "^2.7.1",
