@@ -62,10 +62,7 @@ module.exports = {
       }),
       env('development', [
         sourceMaps(),
-        addPlugins([
-          new webpack.NamedModulesPlugin(),
-          new webpack.HotModuleReplacementPlugin(),
-        ]),
+        addPlugins([new webpack.HotModuleReplacementPlugin()]),
       ]),
       env('production', [
         addPlugins([new webpack.LoaderOptionsPlugin({ minimize: true })]),
