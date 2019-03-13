@@ -1,32 +1,32 @@
-import React, { Component } from 'react';
-import { css } from 'emotion';
-import NavSubMenu from './NavSubMenu';
-import NavLink from './NavRouterLink';
-import Icon from '../Icon/Icon';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import { css } from "emotion";
+import NavSubMenu from "./NavSubMenu";
+import NavLink from "./NavRouterLink";
+import Icon from "../Icon/Icon";
+import PropTypes from "prop-types";
 
 const defaultMenu = [
   {
-    name: 'Collections',
-    path: '/',
+    name: "Collections",
+    path: "/",
     nestedMenu: [
-      { name: 'Disaster Resilience', path: '/cities/portland/disaster' },
-      { name: 'Housing Affordability', path: '/cities/portland/housing' },
-      { name: 'Local Elections', path: '/cities/portland/elections' },
+      { name: "Disaster Resilience", path: "/cities/portland/disaster" },
+      { name: "Housing Affordability", path: "/cities/portland/housing" },
+      { name: "Local Elections", path: "/cities/portland/elections" },
       {
-        name: 'Neighborhood Development',
-        path: '/cities/portland/neighborhood',
+        name: "Neighborhood Development",
+        path: "/cities/portland/neighborhood"
       },
       {
-        name: 'Transportation Systems',
-        path: '/cities/portland/transportation',
-      },
-    ],
+        name: "Transportation Systems",
+        path: "/cities/portland/transportation"
+      }
+    ]
   },
   {
-    name: 'Sandbox',
-    path: '/sandbox',
-  },
+    name: "Sandbox",
+    path: "/sandbox"
+  }
 ];
 
 const navClass = css`
@@ -52,7 +52,7 @@ const navClass = css`
     color: white;
     flex: 1;
     display: block;
-    font-family: 'Rubik', sans-serif;
+    font-family: "Rubik", sans-serif;
     font-size: 1.25rem;
     border: none;
     text-transform: uppercase;
@@ -68,7 +68,7 @@ const navClass = css`
 
   @media (max-width: 640px) {
     position: absolute;
-    z-index: 1;
+    z-index: 10001;
     height: 100%;
     width: 100%;
     margin: 0 !important;
@@ -108,7 +108,7 @@ const exClass = css`
     display: block;
     color: rgba(255, 255, 255, 0.65);
     border: none;
-    font-family: 'Rubik', sans-serif;
+    font-family: "Rubik", sans-serif;
     font-size: 1.25rem;
     font-weight: 500;
     padding: 2rem;
@@ -120,7 +120,7 @@ class Nav extends Component {
     super();
     this.state = {
       menuActive: false,
-      items: [],
+      items: []
     };
   }
 
@@ -134,14 +134,14 @@ class Nav extends Component {
   render() {
     const {
       menu = defaultMenu,
-      toggleNestedMenu = this.handleClick,
+      toggleNestedMenu = this.handleClick
     } = this.props;
     return (
       <div className={navClass}>
         <a className={exClass}>
           <Icon
             key="nav-ex"
-            className={'fa fa-times'}
+            className={"fa fa-times"}
             handleClick={this.props.toggleSubNav}
           />
         </a>
@@ -152,9 +152,9 @@ class Nav extends Component {
                 key={idx}
                 onClick={e => toggleNestedMenu(item.name, item.nestedMenu, e)}
               >
-                <a className={'nav-item'}>
+                <a className={"nav-item"}>
                   {item.name}
-                  <Icon className={'fa fa-angle-down'} />
+                  <Icon className={"fa fa-angle-down"} />
                 </a>
               </li> // eslint-disable-line
             ) : (
@@ -176,7 +176,7 @@ Nav.propTypes = {
     PropTypes.shape({ name: PropTypes.string, path: PropTypes.string })
   ),
   toggleNestedMenu: PropTypes.func,
-  toggleSubNav: PropTypes.func,
+  toggleSubNav: PropTypes.func
 };
 
 export default Nav;
