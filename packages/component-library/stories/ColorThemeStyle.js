@@ -1,6 +1,6 @@
 import React from "react";
-import { storybookStyles } from "./storyStyles.js";
-import "@hackoregon/component-library/assets/global.styles.css";
+import "../../component-library/assets/global.styles.css";
+import { storybookStyles } from "./storyStyles";
 
 const ColorThemeStyle = () => (
   <div style={storybookStyles.main}>
@@ -94,6 +94,78 @@ const ColorThemeStyle = () => (
         <p style={storybookStyles.dataText}>
           Used in logo and action color within the platform.
         </p>
+      </div>
+    </div>
+
+    <h2>Visualizations: Categorical</h2>
+    <div style={storybookStyles.solidColorSample}>
+      <div
+        style={Object.assign(
+          {},
+          storybookStyles.colorBlock,
+          storybookStyles.pinkBkgnd
+        )}
+      />
+      <div>
+        <h4>Pink</h4>
+        <p style={storybookStyles.dataText}>Hex: #DC4556</p>
+        <p style={storybookStyles.dataText}>rgb: 220,69,86</p>
+      </div>
+    </div>
+    <div style={storybookStyles.solidColorSample}>
+      <div
+        style={Object.assign(
+          {},
+          storybookStyles.colorBlock,
+          storybookStyles.blueBkgnd
+        )}
+      />
+      <div>
+        <h4>Blue</h4>
+        <p style={storybookStyles.dataText}>Hex: #19B7AA</p>
+        <p style={storybookStyles.dataText}>rgb: 25,183,170</p>
+      </div>
+    </div>
+    <div style={storybookStyles.solidColorSample}>
+      <div
+        style={Object.assign(
+          {},
+          storybookStyles.colorBlock,
+          storybookStyles.greenBkgnd
+        )}
+      />
+      <div>
+        <h4>Green</h4>
+        <p style={storybookStyles.dataText}>Hex: #1E62BD</p>
+        <p style={storybookStyles.dataText}>rgb: 30,98,189</p>
+      </div>
+    </div>
+    <div style={storybookStyles.solidColorSample}>
+      <div
+        style={Object.assign(
+          {},
+          storybookStyles.colorBlock,
+          storybookStyles.purpleBkgnd
+        )}
+      />
+      <div>
+        <h4>Purple</h4>
+        <p style={storybookStyles.dataText}>Hex: #721D7C</p>
+        <p style={storybookStyles.dataText}>rgb: 114,29,124</p>
+      </div>
+    </div>
+    <div style={storybookStyles.solidColorSample}>
+      <div
+        style={Object.assign(
+          {},
+          storybookStyles.colorBlock,
+          storybookStyles.yellowBkgnd
+        )}
+      />
+      <div>
+        <h4>Yellow</h4>
+        <p style={storybookStyles.dataText}>Hex: #FFB226</p>
+        <p style={storybookStyles.dataText}>rgb: 255,178,38</p>
       </div>
     </div>
   </div>

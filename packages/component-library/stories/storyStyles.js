@@ -55,7 +55,7 @@ const storybookStyles = {
     marginBottom: 10
   },
 
-  // Brand colors (should be global)
+  // Brand colors (make these global)
   primaryBkgnd: {
     backgroundColor: "rgba(34,15,37,1)"
   },
@@ -76,10 +76,38 @@ const storybookStyles = {
     backgroundColor: "rgba(243,242,243,1)"
   },
 
-  // Typography (a global style)
+  pinkBkgnd: {
+    backgroundColor: "rgba(220,69,86,1)"
+  },
+
+  greenBkgnd: {
+    backgroundColor: "rgba(25,183,170,1)"
+  },
+
+  blueBkgnd: {
+    backgroundColor: "rgba(30,98,189,1)"
+  },
+
+  purpleBkgnd: {
+    backgroundColor: "rgba(114,29,124,1)"
+  },
+
+  yellowBkgnd: {
+    backgroundColor: "rgba(255,178,38,1)"
+  },
+
+  // Typography (make these global)
   dataText: {
     fontFamily: "Roboto Condensed",
     fontSize: 12
+  },
+
+  dataFont: {
+    fontFamily: "Roboto Condensed"
+  },
+
+  largeParagraph: {
+    fontSize: 16
   }
 };
 
