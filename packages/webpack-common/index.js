@@ -10,8 +10,6 @@ const {
   match,
   setEnv,
   env,
-  devServer,
-  uglify,
   addPlugins,
   sourceMaps,
 } = require('webpack-blocks');
@@ -34,10 +32,13 @@ if (!isProd) {
 
 module.exports = {
   standard(opts) {
-    const options = Object.assign({
-      entryPoint: './src/client',
-      outputPrefix: path('./'),
-    }, opts);
+    const options = Object.assign(
+      {
+        entryPoint: './src/client',
+        outputPrefix: path('./'),
+      },
+      opts
+    );
     return createConfig([
       entryPoint([...entryPoints, options.entryPoint]),
       setOutput({
@@ -46,15 +47,16 @@ module.exports = {
         filename: '[name].bundle.js',
       }),
       babel(),
-      match(['*.css'], [
-        cssLoader({ sourceMap: true }),
-        postcss({
-          plugins: [autoprefixer({ browsers: ['last 2 versions'] })],
-        }),
-      ]),
-      match(['*.svg', '*.png', '*.gif', '*.jpg', '*.jpeg'], [
-        file(),
-      ]),
+      match(
+        ['*.css'],
+        [
+          cssLoader({ sourceMap: true }),
+          postcss({
+            plugins: [autoprefixer({ browsers: ['last 2 versions'] })],
+          }),
+        ]
+      ),
+      match(['*.svg', '*.png', '*.gif', '*.jpg', '*.jpeg'], [file()]),
       setEnv({
         NODE_ENV: process.env.NODE_ENV,
       }),
@@ -66,18 +68,7 @@ module.exports = {
         ]),
       ]),
       env('production', [
-        uglify({
-          parallel: true,
-          cache: true,
-          uglifyOptions: {
-            compress: {
-              warnings: false,
-            },
-          },
-        }),
-        addPlugins([
-          new webpack.LoaderOptionsPlugin({ minimize: true }),
-        ]),
+        addPlugins([new webpack.LoaderOptionsPlugin({ minimize: true })]),
       ]),
     ]);
   },
