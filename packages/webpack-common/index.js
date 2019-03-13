@@ -50,7 +50,7 @@ module.exports = {
         publicPath: '/',
         filename: '[name].bundle.js',
       }),
-      babel(),
+      babel({ rootMode: 'upward' }),
       match(
         ['*.css'],
         [
