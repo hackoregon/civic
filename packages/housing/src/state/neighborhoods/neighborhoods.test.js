@@ -90,13 +90,19 @@ describe('neighborhoods actions', () => {
         'https://s3-us-west-2.amazonaws.com/hacko-housing-staging/neighborhoods.geojson'
       )
         .get('')
-        .reply(500, { error: 'Request was just no good' });
+        .replyWithError('Request was just no good');
 
       const expectedActions = [
         { type: actionTypes.CALL_START },
         {
           type: actionTypes.CALL_FAIL,
-          payload: new Error({ error: 'Request was just no good' }),
+          payload: {
+            code: undefined,
+            errno: undefined,
+            message: `request to https://s3-us-west-2.amazonaws.com/hacko-housing-staging/neighborhoods.geojson failed, reason: Request was just no good`,
+            name: 'FetchError',
+            type: 'system',
+          },
         },
       ];
 
