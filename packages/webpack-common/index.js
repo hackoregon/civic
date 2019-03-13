@@ -1,7 +1,10 @@
 const webpack = require('webpack');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin;
 const {
   createConfig,
   entryPoint,
+  setMode,
   setOutput,
   babel,
   file,
@@ -40,6 +43,7 @@ module.exports = {
       opts
     );
     return createConfig([
+      setMode(process.env.NODE_ENV || 'development'),
       entryPoint([...entryPoints, options.entryPoint]),
       setOutput({
         path: `${options.outputPrefix}${isProd ? '/dist' : '/build'}`,
@@ -62,11 +66,12 @@ module.exports = {
       }),
       env('development', [
         sourceMaps(),
-        addPlugins([new webpack.HotModuleReplacementPlugin()]),
+        addPlugins([
+          new webpack.HotModuleReplacementPlugin(),
+          new BundleAnalyzerPlugin({ openAnalyzer: false }),
+        ]),
       ]),
-      env('production', [
-        addPlugins([new webpack.LoaderOptionsPlugin({ minimize: true })]),
-      ]),
+      env('production', []),
     ]);
   },
 };

@@ -9,14 +9,11 @@ const isProd = process.env.NODE_ENV === 'production';
 const outputPath = resolve(process.cwd(), isProd ? 'dist' : 'build');
 const config = require(resolve(process.cwd(), 'webpack.config.js'));
 
-
 const devMiddleware = require('webpack-dev-middleware');
 const hotMiddleware = require('webpack-hot-middleware');
 
 module.exports = function() {
   console.log(chalk.yellow('\nStarting the DEVELOPMENT server...'));
-
-  let middleware;
 
   const afterWebpack = (err, stats) => {
     if (err) {
@@ -44,11 +41,6 @@ module.exports = function() {
     console.log(chalk.green(`\nServer up at http://localhost:${port}`));
     console.log(chalk.gray('\nCtrl+C to stop the server'));
     console.log(chalk.yellow('\nLogging requests...'));
-
-    if (middleware) {
-      // Workaround to the mysterious multi-bundle undefined modules bug
-      middleware.invalidate();
-    }
   };
 
   if (isProd) {
@@ -62,7 +54,7 @@ module.exports = function() {
     console.log(chalk.gray('Compiling webpack config'));
     const compiler = webpack(config, afterWebpack);
 
-    middleware = devMiddleware(compiler, {
+    const middleware = devMiddleware(compiler, {
       noInfo: true,
       publicPath: config.output.publicPath,
       silent: true,
@@ -78,7 +70,11 @@ module.exports = function() {
   app.use('/', express.static(outputPath));
 
   // Redirect all other routes to index.html to let React handle routing client-side
-  app.get('/*', (req, res) => console.log('Servicing request for', req.url) || res.send(`
+  app.get(
+    '/*',
+    (req, res) =>
+      console.log('Servicing request for', req.url) ||
+      res.send(`
   <!DOCTYPE html>
   <html>
     <head>
@@ -95,9 +91,10 @@ module.exports = function() {
       <script type="text/javascript" src="/main.bundle.js"></script>
     </body>
   </html>
-  `));
+  `)
+  );
 
   // Start the server
   const port = process.env.PORT || 3000;
   app.listen(port);
-}
+};
