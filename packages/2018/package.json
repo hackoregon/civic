@@ -32,8 +32,6 @@
     "@babel/node": "^7.2.2",
     "@babel/register": "^7.0.0",
     "@hackoregon/civic-babel-presets": "^1.0.0-alpha.1c62c05f",
-    "@hackoregon/civic-emergency-response": "^1.0.0-alpha.1c62c05f",
-    "@hackoregon/civic-housing": "^1.0.0-alpha.1c62c05f",
     "@hackoregon/component-library": "^1.0.0-alpha.1c62c05f",
     "@hackoregon/dev-server": "^1.0.0-alpha.1c62c05f",
     "@hackoregon/webpack-common": "^1.0.0-alpha.1c62c05f",
