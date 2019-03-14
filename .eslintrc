@@ -15,6 +15,7 @@
   "rules": {
     "jsx-a11y/img-has-alt": 0,
     "prefer-arrow-callback": 0,
+    "no-underscore-dangle": 0,
     "func-names": 2,
     "react/jsx-filename-extension": 0,
     "react/require-default-props": 0,
