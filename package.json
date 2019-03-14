@@ -130,7 +130,7 @@
     "webpack-bundle-analyzer": "^3.1.0",
     "webpack-dev-middleware": "^3.6.1",
     "webpack-dev-server": "^3.2.1",
-    "webpack-hot-middleware": "^2.17.0",
+    "webpack-hot-middleware": "^2.24.3",
     "webpack-md5-hash": "^0.0.6",
     "webpack-node-externals": "^1.5.4"
   },

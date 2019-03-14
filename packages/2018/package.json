@@ -52,6 +52,6 @@
     "webpack-blocks": "^2.0.0-rc",
     "webpack-cli": "^3.2.3",
     "webpack-dev-middleware": "^3.6.1",
-    "webpack-hot-middleware": "^2.17.0"
+    "webpack-hot-middleware": "^2.24.3"
   }
 }
