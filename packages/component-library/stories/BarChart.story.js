@@ -38,8 +38,8 @@ export default () =>
           data={data}
           dataKey={dataKey}
           dataValue={dataValue}
-          title={'Dogs with Money'}
-          subtitle={'Dogs in Portland with a net worth greater than $1,000'}
+          title="Dogs with Money"
+          subtitle="Dogs in Portland with a net worth greater than $1,000"
           xLabel={xLabel}
           yLabel={yLabel}
         />

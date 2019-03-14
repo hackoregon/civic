@@ -146,7 +146,7 @@ const demoMap = () => {
         getWidth={f => 55}
         widthScale={1}
         rounded={false}
-        autoHighlight={true}
+        autoHighlight
         highlightColor={[200, 200, 200, 85]}
         onLayerClick={info =>
           action('Layer clicked:', { depth: 2 })(info, info.object)

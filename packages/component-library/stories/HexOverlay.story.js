@@ -2,11 +2,11 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, selectV2, number, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
+import MapGL from 'react-map-gl';
+import { checkA11y } from '@storybook/addon-a11y';
 import { HexOverlay } from '../src';
 import DeckGLOverlay from '../src/HexOverlay/hex-deckgl-overlay';
-import MapGL from 'react-map-gl';
 import { BaseMap } from '../src';
-import { checkA11y } from '@storybook/addon-a11y';
 import { MapTooltip } from '../src';
 
 class LoadData extends React.Component {
@@ -24,6 +24,7 @@ class LoadData extends React.Component {
       .then(res => res.json())
       .then(data => this.setState({ data: data.body }));
   }
+
   render() {
     if (this.state.data === null) {
       return null;
@@ -168,7 +169,7 @@ export default () =>
                 filled={filled}
                 wireframe={wireframe}
               >
-                <MapTooltip isHex={true} />
+                <MapTooltip isHex />
                 <LoadData />
               </HexOverlay>
             </BaseMap>

@@ -24,8 +24,8 @@ const tooltip = css`
 
 const MapTooltip = props => {
   const { tooltipData } = props;
-  const x = tooltipData.x;
-  const y = tooltipData.y;
+  const { x } = tooltipData;
+  const { y } = tooltipData;
 
   const xPosition =
     x < window.innerWidth * 0.66 ? x : x - window.innerWidth * 0.1;

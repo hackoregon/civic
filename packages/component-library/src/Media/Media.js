@@ -1,7 +1,7 @@
+import { css } from 'styled-components';
 import isClient from '../utils/isClient';
 
 // these sizes are arbitrary and you can set them to whatever you wish
-import { css } from 'styled-components';
 
 const sizes = {
   giant: 1170,

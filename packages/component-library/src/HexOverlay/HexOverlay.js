@@ -95,9 +95,9 @@ class HexOverlay extends Component {
 
     const tooltip = React.Children.map(children, child => {
       return React.cloneElement(child, {
-        tooltipInfo: tooltipInfo,
-        x: x,
-        y: y,
+        tooltipInfo,
+        x,
+        y,
       });
     });
     const tooltipRender = tooltipInfo ? tooltip : null;
@@ -125,7 +125,7 @@ class HexOverlay extends Component {
 
     return (
       <div className={crosshair}>
-        <DeckGL {...viewport} layers={layers} className={'HexOverlay'}>
+        <DeckGL {...viewport} layers={layers} className="HexOverlay">
           {tooltipRender}
         </DeckGL>
       </div>

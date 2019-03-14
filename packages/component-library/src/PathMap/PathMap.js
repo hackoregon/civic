@@ -29,9 +29,9 @@ const PathMap = props => {
 
   const tooltip = React.Children.map(children, child => {
     return React.cloneElement(child, {
-      tooltipInfo: tooltipInfo,
-      x: x,
-      y: y,
+      tooltipInfo,
+      x,
+      y,
     });
   });
 
@@ -39,11 +39,11 @@ const PathMap = props => {
 
   return (
     <div className={crosshair}>
-      <DeckGL className={'DeckGL'} {...viewport}>
+      <DeckGL className="DeckGL" {...viewport}>
         <PathLayer
-          id={'path-layer'}
-          className={'PathMap'}
-          pickable={true}
+          id="path-layer"
+          className="PathMap"
+          pickable
           data={data}
           getColor={getColor}
           opacity={opacity}

@@ -4,10 +4,10 @@ import * as d3 from 'd3';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
 import { checkA11y } from '@storybook/addon-a11y';
+import { css } from 'emotion';
 import { BaseMap } from '../src';
 import { CivicSandboxMap } from '../src';
 import { CivicSandboxDashboard } from '../src';
-import { css } from 'emotion';
 import { wallOfText } from './shared';
 
 const dashboardDescription = css`
@@ -28,13 +28,13 @@ class LoadData extends React.Component {
   }
 
   componentDidMount() {
-    let cmp = this;
+    const cmp = this;
     d3.queue()
       .defer(d3.json, this.props.urls[0])
       .defer(d3.json, this.props.urls[1])
       .await((error, foundation1, slide1) => {
         if (error) {
-          cmp.setState({ error: error });
+          cmp.setState({ error });
         }
         cmp.setState({ foundation1, slide1 });
       });
@@ -242,7 +242,7 @@ const dashboardComponent = (foundationData1, slideData1) => {
 
   const dashboardData = dashboardArray.filter(d => d.visible).map(d => d.data);
 
-  //Dashboard Description
+  // Dashboard Description
   const dashboardInformation = (
     <div className={dashboardDescription}>
       <h2>

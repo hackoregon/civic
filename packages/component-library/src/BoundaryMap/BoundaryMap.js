@@ -17,10 +17,10 @@ const BoundaryMap = props => {
 
   return (
     <div>
-      <DeckGL className={'DeckGL'} {...viewport}>
+      <DeckGL className="DeckGL" {...viewport}>
         <PolygonLayer
-          id={'polygon-layer'}
-          className={'BoundaryMap'}
+          id="polygon-layer"
+          className="BoundaryMap"
           pickable={false}
           data={data}
           opacity={opacity}
@@ -30,10 +30,10 @@ const BoundaryMap = props => {
           lineWidthScale={lineWidthScale}
           lineWidthMinPixels={1}
           lineJointRounded={lineJointRounded}
-          stroked={true}
+          stroked
           getFillColor={getFillColor}
           filled={filled}
-          updateTriggers={{ getLineColor: getLineColor }}
+          updateTriggers={{ getLineColor }}
         />
       </DeckGL>
     </div>

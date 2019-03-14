@@ -41,14 +41,14 @@ const Container = ({ children }) => (
 
 const tdDemo = () => (
   <Container>
-    <CivicStoryCard title={'A title goes here'}>
+    <CivicStoryCard title="A title goes here">
       <p className="Description">{wallOfRichText}</p>
     </CivicStoryCard>
   </Container>
 );
 const tdvDemo = () => (
   <Container>
-    <CivicStoryCard title={'Dogs x Income'}>
+    <CivicStoryCard title="Dogs x Income">
       <div style={{ display: 'flex', justifyContent: 'space-around' }}>
         <HorizontalBarChart
           data={data}
@@ -63,7 +63,7 @@ const tdvDemo = () => (
 );
 const collapsableDemo = () => (
   <Container>
-    <CivicStoryCard title={'Dogs x Income'}>
+    <CivicStoryCard title="Dogs x Income">
       <Collapsable>
         <Collapsable.Section>
           <div style={{ display: 'flex', justifyContent: 'space-around' }}>
@@ -104,9 +104,7 @@ export default () =>
       // 'This is some basic usage with the CivicStoryCard with just a title and descriptions')(
       () => (
         <Container>
-          <CivicStoryCard
-            title={'Campsite Reports & income levels of a community'}
-          >
+          <CivicStoryCard title="Campsite Reports & income levels of a community">
             <p className="Description">{wallOfText}</p>
           </CivicStoryCard>
         </Container>
@@ -115,8 +113,8 @@ export default () =>
     .add('Custom source link', () => (
       <Container>
         <CivicStoryCard
-          title={'Campsite Reports & income levels of a community'}
-          source={'http://www.hackoregon.org'}
+          title="Campsite Reports & income levels of a community"
+          source="http://www.hackoregon.org"
         >
           <p className="Description">{wallOfText}</p>
         </CivicStoryCard>

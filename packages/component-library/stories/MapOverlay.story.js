@@ -96,14 +96,14 @@ const tooltipMap = () => {
           action('Layer')(info.layer.props.data[info.index].properties.NAME)
         }
         outline={false}
-        autoHighlight={true}
-        visible={true}
+        autoHighlight
+        visible
       >
         <MapTooltip
-          primaryName={'Name'}
-          primaryField={'NAME'}
-          secondaryName={'Length'}
-          secondaryField={'Shape_Length'}
+          primaryName="Name"
+          primaryField="NAME"
+          secondaryName="Length"
+          secondaryField="Shape_Length"
         />
       </MapOverlay>
     </BaseMap>

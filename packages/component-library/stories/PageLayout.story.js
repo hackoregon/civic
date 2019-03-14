@@ -57,7 +57,7 @@ const housingExample = () => (
             dataKey={dataKey}
             dataValue={dataValue}
             dataKeyLabel={dataKeyLabel}
-            title={'Dogs x Income'}
+            title="Dogs x Income"
           />
         </div>
         <p className="Description">{wallOfRichText}</p>
@@ -86,7 +86,7 @@ const housingExample = () => (
             dataKey={dataKey}
             dataValue={dataValue}
             dataKeyLabel={dataKeyLabel}
-            title={'Dogs x Income'}
+            title="Dogs x Income"
           />
         </div>
         <p className="Description">{wallOfRichText}</p>
@@ -145,7 +145,7 @@ const campaignFinanceExample = () => (
       />
     </section>
     <section style={{ margin: '80px 0' }} id="chart-2">
-      <CivicStoryCard title={'Dogs x Income'}>
+      <CivicStoryCard title="Dogs x Income">
         <div style={{ display: 'flex', justifyContent: 'space-around' }}>
           <HorizontalBarChart
             data={data}

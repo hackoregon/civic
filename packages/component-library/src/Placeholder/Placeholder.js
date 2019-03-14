@@ -26,7 +26,7 @@ const DefaultText = () => (
 const IssueText = ({ issue }) => (
   <div>
     <h1>Card In Progress</h1>
-    <a href={'https://github.com/hackoregon/civic/issues/' + issue}>
+    <a href={`https://github.com/hackoregon/civic/issues/${issue}`}>
       View progress on GitHub
     </a>
   </div>

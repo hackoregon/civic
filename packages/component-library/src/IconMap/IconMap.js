@@ -28,14 +28,14 @@ const IconMap = props => {
     children,
   } = props;
 
-  const zoom = viewport.zoom;
+  const { zoom } = viewport;
   const sizeScale = iconSizeScale(zoom);
 
   const tooltip = React.Children.map(children, child => {
     return React.cloneElement(child, {
-      tooltipInfo: tooltipInfo,
-      x: x,
-      y: y,
+      tooltipInfo,
+      x,
+      y,
     });
   });
 
@@ -43,11 +43,11 @@ const IconMap = props => {
 
   return (
     <div className={crosshair}>
-      <DeckGL className={'DeckGL'} {...viewport}>
+      <DeckGL className="DeckGL" {...viewport}>
         <IconLayer
-          id={'icon-layer'}
-          className={'IconMap'}
-          pickable={true}
+          id="icon-layer"
+          className="IconMap"
+          pickable
           data={data}
           opacity={opacity}
           iconAtlas={iconAtlas}
@@ -61,7 +61,7 @@ const IconMap = props => {
           onClick={onLayerClick}
           onHover={onHover}
           visible={visible}
-          updateTriggers={{ getSize: getSize }}
+          updateTriggers={{ getSize }}
         />
         {tooltipRender}
       </DeckGL>

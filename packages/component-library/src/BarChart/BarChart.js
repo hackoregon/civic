@@ -10,10 +10,10 @@ import {
   VictoryTooltip,
 } from 'victory';
 
-import ChartContainer from '../ChartContainer';
-import civicFormat from '../utils/civicFormat';
 import { assign } from 'lodash';
 import { css } from 'emotion';
+import ChartContainer from '../ChartContainer';
+import civicFormat from '../utils/civicFormat';
 import { chartEvents, getDefaultDomain } from '../utils/chartHelpers';
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
 
@@ -100,8 +100,8 @@ const BarChart = ({
             )} • ${yLabel}: ${yNumberFormatter(d[dataValue])}`,
           }))}
           events={chartEvents}
-          x={'dataKey'}
-          y={'dataValue'}
+          x="dataKey"
+          y="dataValue"
           title="Bar Chart"
           style={{ data: { width: barWidth } }}
         />

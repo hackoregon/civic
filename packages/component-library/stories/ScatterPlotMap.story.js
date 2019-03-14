@@ -102,7 +102,7 @@ const tooltipMap = () => {
   const mapboxStyle = selectV2(
     'Mapbox Style',
     mapStylesOptions,
-    mapStylesOptions['Scenic']
+    mapStylesOptions.Scenic
   );
 
   return (
@@ -121,17 +121,17 @@ const tooltipMap = () => {
         getRadius={f => 250}
         radiusScale={1}
         outline={false}
-        autoHighlight={true}
+        autoHighlight
         onLayerClick={info =>
           action('Layer clicked:', { depth: 2 })(info, info.object)
         }
-        visible={true}
+        visible
       >
         <MapTooltip
-          primaryName={'average wait time'}
-          primaryField={'avg_wait'}
-          secondaryName={'bus route'}
-          secondaryField={'route'}
+          primaryName="average wait time"
+          primaryField="avg_wait"
+          secondaryName="bus route"
+          secondaryField="route"
         />
       </ScatterPlotMap>
     </BaseMap>

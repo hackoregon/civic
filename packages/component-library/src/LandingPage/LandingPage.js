@@ -2,10 +2,10 @@ import React from 'react';
 import { cx, css } from 'emotion';
 import { Link } from 'react-router';
 
+import { Header, Footer } from '@hackoregon/component-library';
 import CanvasParticles from './CanvasParticles';
 import DataList from './DataList';
 import SearchBar from './SearchBar';
-import { Header, Footer } from '@hackoregon/component-library';
 
 import logo from '../../assets/civic-logo-animated.svg';
 import smallLogo from '../../assets/civic-logo-c.svg';

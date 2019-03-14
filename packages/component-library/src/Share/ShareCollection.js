@@ -37,7 +37,7 @@ export default class ShareCollection extends Component {
     const shareTxt = this.state.copied ? 'Link copied!' : 'Share'; // if copied, show Link copied, otherwise, show Share card
     const shareIcon = this.state.copied ? ICONS.check : ICONS.link;
     return (
-      <StoryLink className={'Share'} action={this.handleCopy} icon={shareIcon}>
+      <StoryLink className="Share" action={this.handleCopy} icon={shareIcon}>
         {shareTxt}
       </StoryLink>
     );

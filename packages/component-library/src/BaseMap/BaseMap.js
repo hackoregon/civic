@@ -62,7 +62,7 @@ class BaseMap extends Component {
   }
 
   componentDidMount() {
-    //Geocoder requires a ref to the map component
+    // Geocoder requires a ref to the map component
     this.setState({ mounted: true });
   }
 
@@ -84,7 +84,7 @@ class BaseMap extends Component {
     viewport.width = this.props.containerWidth
       ? this.props.containerWidth
       : 500;
-    viewport.height = height ? height : 500;
+    viewport.height = height || 500;
 
     const childrenLayers = React.Children.map(children, child => {
       return React.cloneElement(child, {
@@ -99,7 +99,7 @@ class BaseMap extends Component {
     return (
       <div className={mapWrapper}>
         <MapGL
-          className={'MapGL'}
+          className="MapGL"
           {...viewport}
           mapStyle={mapboxStyle}
           mapboxApiAccessToken={mapboxToken}
@@ -110,7 +110,7 @@ class BaseMap extends Component {
           <div className={navControl}>
             {navigation && (
               <NavigationControl
-                className={'NavigationControl'}
+                className="NavigationControl"
                 onViewportChange={viewport => this.onViewportChange(viewport)}
               />
             )}

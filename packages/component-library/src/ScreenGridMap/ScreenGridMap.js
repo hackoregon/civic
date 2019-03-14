@@ -16,11 +16,11 @@ const ScreenGridMap = props => {
 
   return (
     <div>
-      <DeckGL className={'DeckGL'} {...viewport}>
+      <DeckGL className="DeckGL" {...viewport}>
         <ScreenGridLayer
-          id={'screengrid-layer'}
-          className={'ScreenGridMap'}
-          pickable={true}
+          id="screengrid-layer"
+          className="ScreenGridMap"
+          pickable
           data={data}
           getPosition={getPosition}
           opacity={opacity}

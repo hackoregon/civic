@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { css } from 'emotion';
 import PieChart from '../PieChart/PieChart';
 import HorizontalBarChart from '../HorizontalBarChart/HorizontalBarChart';
 import civicFormat from '../utils/civicFormat';
-import { css } from 'emotion';
 
 const dashboard = css`
   background: rgba(255, 255, 255, 1);
@@ -116,7 +116,7 @@ class CivicDashboard extends React.Component {
           <h2 style={{ textAlign: 'center', margin: 'auto', width: '50%' }}>
             {object.data[0].y < 1
               ? civicFormat.percentage(object.data[0].y)
-              : object.data[0].y.toFixed(1) + '%'}
+              : `${object.data[0].y.toFixed(1)}%`}
           </h2>
           <PieChart
             data={object.data}
@@ -124,7 +124,7 @@ class CivicDashboard extends React.Component {
             width={475}
             height={375}
             innerRadius={90}
-            halfDoughnut={true}
+            halfDoughnut
           />
         </div>
       ) : object.visualizationType === 'ComparisonBar' ? (
@@ -136,11 +136,11 @@ class CivicDashboard extends React.Component {
             sortOrder={object.sortOrder}
             dataValue={object.dataValue}
             dataLabel={object.dataLabel}
-            dataKeyLabel={''}
-            title={''}
-            subtitle={''}
-            xLabel={''}
-            yLabel={''}
+            dataKeyLabel=""
+            title=""
+            subtitle=""
+            xLabel=""
+            yLabel=""
           />
         </div>
       ) : object.visualizationType === 'Legend' ? (
@@ -155,7 +155,7 @@ class CivicDashboard extends React.Component {
                     height: '40px',
                     width: `${100 / arr.length}%`,
                   }}
-                  key={'legend' + i}
+                  key={`legend${i}`}
                 />
               );
             })}
@@ -188,13 +188,13 @@ class CivicDashboard extends React.Component {
           className={this.state.show === 'info' ? iconActive : icon}
           onClick={this.showInfo}
         >
-          <div className={'fa fa-info-circle'} />
+          <div className="fa fa-info-circle" />
         </div>
         <div
           className={this.state.show === 'viz' ? iconActive : icon}
           onClick={this.showViz}
         >
-          <div className={'fa fa-eye'} />
+          <div className="fa fa-eye" />
         </div>
       </div>
     );

@@ -133,11 +133,11 @@ const LineChart = ({
           data={data.map(d => ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],
-            label: `${dataKeyLabel ? dataKeyLabel : xLabel}: ${xNumberFormatter(
+            label: `${dataKeyLabel || xLabel}: ${xNumberFormatter(
               d[dataKey]
-            )} • ${
-              dataValueLabel ? dataValueLabel : yLabel
-            }: ${yNumberFormatter(d[dataValue])}`,
+            )} • ${dataValueLabel || yLabel}: ${yNumberFormatter(
+              d[dataValue]
+            )}`,
             series: d[dataSeries],
             size: size ? d[size.key] || size.value : 3,
           }))}

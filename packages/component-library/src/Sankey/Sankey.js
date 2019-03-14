@@ -122,15 +122,15 @@ const Sankey = ({
         <title>{`${node.name}\n${formatNum(node.value)}`}</title>
       </rect>
       {node.x >= w / 2 ? (
-        <text x={-8} y={node.dy / 2} dy={'.25em'} textAnchor={'end'}>
+        <text x={-8} y={node.dy / 2} dy=".25em" textAnchor="end">
           {node.name}
         </text>
       ) : (
         <text
           x={8 + sankeyChart.nodeWidth()}
           y={node.dy / 2}
-          dy={'.25em'}
-          textAnchor={'start'}
+          dy=".25em"
+          textAnchor="start"
         >
           {node.name}
         </text>

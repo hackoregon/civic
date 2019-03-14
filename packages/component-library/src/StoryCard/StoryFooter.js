@@ -54,17 +54,13 @@ export default class StoryFooter extends Component {
     return (
       <div className={actionsClass}>
         <StoryLink
-          className={'Context'}
+          className="Context"
           route={`/${collectionId}/${cardId}`}
           icon={ICONS.eye}
         >
           View card
         </StoryLink>
-        <StoryLink
-          className={'Share'}
-          action={this.handleCopy}
-          icon={shareIcon}
-        >
+        <StoryLink className="Share" action={this.handleCopy} icon={shareIcon}>
           {shareTxt}
         </StoryLink>
       </div>

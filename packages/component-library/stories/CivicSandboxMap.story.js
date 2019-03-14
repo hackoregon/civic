@@ -19,7 +19,7 @@ class LoadData extends React.Component {
   }
 
   componentDidMount() {
-    let cmp = this;
+    const cmp = this;
     d3.queue()
       .defer(d3.json, this.props.urls[0])
       .defer(d3.json, this.props.urls[1])
@@ -42,7 +42,7 @@ class LoadData extends React.Component {
           slide5
         ) => {
           if (error) {
-            return this.setState({ error: error });
+            return this.setState({ error });
           }
           cmp.setState({
             data: {
@@ -149,14 +149,14 @@ export default () =>
           const colorScheme = selectV2(
             'Color Schemes:',
             colorOptions,
-            colorOptions['Earth']
+            colorOptions.Earth
           );
           const colorSchemeArray = JSON.parse(colorScheme);
 
           const screenGridcolorScheme = selectV2(
             'ScreenGrid Color Schemes:',
             colorOptions,
-            colorOptions['Thermal']
+            colorOptions.Thermal
           );
           const screenGridcolorSchemeArray = JSON.parse(screenGridcolorScheme);
 
@@ -231,7 +231,7 @@ export default () =>
               id: 'choropleth-layer-foundation-property-values',
               pickable: true,
               data: foundation1.slide_data.features,
-              opacity: opacity,
+              opacity,
               getPolygon: f => f.geometry.coordinates,
               getLineColor: f => [0, 0, 0, 255],
               getLineWidth: f => 40,
@@ -249,7 +249,7 @@ export default () =>
               id: 'choropleth-layer-foundation-population',
               pickable: true,
               data: foundation2.slide_data.features,
-              opacity: opacity,
+              opacity,
               getPolygon: f => f.geometry.coordinates,
               getLineColor: f => [0, 0, 0, 255],
               getLineWidth: f => 40,
@@ -267,7 +267,7 @@ export default () =>
               id: 'choropleth-layer-foundation-household-children',
               pickable: true,
               data: foundation3.slide_data.features,
-              opacity: opacity,
+              opacity,
               getPolygon: f => f.geometry.coordinates,
               getLineColor: f => [255, 255, 255, 255],
               getLineWidth: f => 40,
@@ -282,8 +282,8 @@ export default () =>
             },
           };
 
-          //SLIDES
-          //005 Community Gardens
+          // SLIDES
+          // 005 Community Gardens
           const gardensBoundary = {
             mapType: 'PolygonPlotMap',
             id: 'boundary-layer-gardens-slide',
@@ -312,7 +312,7 @@ export default () =>
             highlightColor: [100, 100, 100, 255],
           };
 
-          //002 Bike Lanes
+          // 002 Bike Lanes
           const bikeLanesBoundary = {
             mapType: 'PolygonPlotMap',
             id: 'boundary-layer-bike-lanes',
@@ -339,7 +339,7 @@ export default () =>
             highlightColor: [100, 100, 100, 255],
           };
 
-          //010 Grocery Stores
+          // 010 Grocery Stores
           const groceryBoundary = {
             mapType: 'PolygonPlotMap',
             id: 'boundary-layer-grocery',
@@ -368,7 +368,7 @@ export default () =>
             parameters: { depthTest: false },
           };
 
-          //017 Building Permits
+          // 017 Building Permits
           const buildingPermitsMap = {
             mapType: 'ScreenGridMap',
             id: 'screengrid-layer-building-permits',
@@ -383,7 +383,7 @@ export default () =>
             updateTriggers: { instanceColors: screenGridcolorSchemeArray },
           };
 
-          //016 Points of Interest
+          // 016 Points of Interest
           const poiBoundary = {
             mapType: 'PolygonPlotMap',
             id: 'boundary-layer-poi',
@@ -475,7 +475,7 @@ export default () =>
             data: slide5.slide_data.features,
             opacity: 1,
             iconAtlas: 'https://i.imgur.com/l9URQ58.png',
-            iconMapping: iconMapping,
+            iconMapping,
             sizeScale: iconZoomScale,
             getPosition: f => f.geometry.coordinates,
             getIcon: f => f.properties.type,
@@ -493,7 +493,7 @@ export default () =>
           const foundationSelected = selectV2(
             'Foundations:',
             foundationOptions,
-            foundationOptions['Population']
+            foundationOptions.Population
           );
 
           const bikeLanesSlideVisible = boolean('Bike Lanes:', true);

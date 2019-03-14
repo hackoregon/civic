@@ -129,7 +129,7 @@ const CivicSandboxMap = props => {
 
   return (
     <div className={crosshair}>
-      <DeckGL className={'DeckGL'} {...viewport}>
+      <DeckGL className="DeckGL" {...viewport}>
         {renderMaps}
         {children}
       </DeckGL>

@@ -89,11 +89,11 @@ const StackedAreaChart = ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],
             series: d[dataSeries],
-            label: `${dataKeyLabel ? dataKeyLabel : xLabel}: ${xNumberFormatter(
+            label: `${dataKeyLabel || xLabel}: ${xNumberFormatter(
               d[dataKey]
-            )} • ${
-              dataValueLabel ? dataValueLabel : yLabel
-            }: ${yNumberFormatter(d[dataValue])}`,
+            )} • ${dataValueLabel || yLabel}: ${yNumberFormatter(
+              d[dataValue]
+            )}`,
             size: size ? d[size.key] || size.value : 3,
           }))}
           animate={{ onEnter: { duration: 500 } }}

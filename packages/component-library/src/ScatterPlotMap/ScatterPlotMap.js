@@ -30,9 +30,9 @@ const ScatterPlotMap = props => {
 
   const tooltip = React.Children.map(children, child => {
     return React.cloneElement(child, {
-      tooltipInfo: tooltipInfo,
-      x: x,
-      y: y,
+      tooltipInfo,
+      x,
+      y,
     });
   });
 
@@ -40,11 +40,11 @@ const ScatterPlotMap = props => {
 
   return (
     <div className={crosshair}>
-      <DeckGL className={'DeckGL'} {...viewport}>
+      <DeckGL className="DeckGL" {...viewport}>
         <ScatterplotLayer
-          className={'ScatterPlotMap'}
-          id={'scatterplot-layer'}
-          pickable={true}
+          className="ScatterPlotMap"
+          id="scatterplot-layer"
+          pickable
           data={data}
           getPosition={getPosition}
           opacity={opacity}

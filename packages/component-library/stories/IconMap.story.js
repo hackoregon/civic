@@ -28,7 +28,7 @@ const demoMap = () => {
   const mapboxStyle = selectV2(
     'Mapbox Style',
     optionsStyle,
-    optionsStyle['Scenic']
+    optionsStyle.Scenic
   );
 
   const opacityOptions = {
@@ -193,7 +193,7 @@ const tooltipMap = () => {
   return (
     <BaseMap
       mapboxToken={mapboxToken}
-      mapboxStyle={'mapbox://styles/themendozaline/cj8rrlv4tbtgs2rqnyhckuqva'}
+      mapboxStyle="mapbox://styles/themendozaline/cj8rrlv4tbtgs2rqnyhckuqva"
     >
       <IconMap
         data={data.features}
@@ -211,10 +211,10 @@ const tooltipMap = () => {
         }
       >
         <MapTooltip
-          primaryName={'Site Name'}
-          primaryField={'SITE_NAME'}
-          secondaryName={'Icon type'}
-          secondaryField={'ICON'}
+          primaryName="Site Name"
+          primaryField="SITE_NAME"
+          secondaryName="Icon type"
+          secondaryField="ICON"
         />
       </IconMap>
     </BaseMap>

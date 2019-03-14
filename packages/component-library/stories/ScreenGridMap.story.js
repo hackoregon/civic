@@ -88,7 +88,7 @@ export default () =>
           const colorScheme = selectV2(
             'Color Scheme:',
             colorSchemeOptions,
-            colorSchemeOptions['Planet']
+            colorSchemeOptions.Planet
           );
           const colorSchemeArray = JSON.parse(colorScheme);
 

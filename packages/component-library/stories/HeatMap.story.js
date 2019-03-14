@@ -19,7 +19,7 @@ class LoadData extends React.Component {
   fetchData(myURL) {
     fetch(myURL)
       .then(response => response.json())
-      .then(data => this.setState({ data: data }));
+      .then(data => this.setState({ data }));
   }
 
   componentDidMount() {
@@ -174,12 +174,12 @@ const heatmapComponent = data => {
 
   return (
     <HeatMap
-      id={'building-permits'}
+      id="building-permits"
       centerLatitude={45.5597}
       centerLongitude={-122.7066}
       initialZoom={9.75}
       maxZoom={maxZoom}
-      mapStyle={'mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg'}
+      mapStyle="mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg"
       data={data.results}
       heatMapWeight={heatMapWeight}
       heatMapIntensity={heatMapIntensity}
@@ -222,7 +222,7 @@ export default () =>
         max: 2016,
         step: 1,
       };
-      let year = number('Year', 1995, yearOptions, 'Heat Map');
+      const year = number('Year', 1995, yearOptions, 'Heat Map');
 
       const base =
         'https://service.civicpdx.org/housing-affordability/api/permits/';

@@ -40,9 +40,9 @@ const MapOverlay = props => {
 
   const tooltip = React.Children.map(children, child => {
     return React.cloneElement(child, {
-      tooltipInfo: tooltipInfo,
-      x: x,
-      y: y,
+      tooltipInfo,
+      x,
+      y,
     });
   });
 
@@ -82,7 +82,7 @@ const MapOverlay = props => {
 
   return (
     <div className={crosshair}>
-      <DeckGL {...viewport} layers={[layer]} className={'MapOverlay'}>
+      <DeckGL {...viewport} layers={[layer]} className="MapOverlay">
         {tooltipRender}
       </DeckGL>
     </div>

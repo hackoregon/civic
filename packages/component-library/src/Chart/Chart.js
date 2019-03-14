@@ -52,6 +52,7 @@ export default class Chart extends Component {
 
     return { width, height, margin };
   }
+
   render() {
     const { width, height } = this.props;
     let { margin } = this.props;

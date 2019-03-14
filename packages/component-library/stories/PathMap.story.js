@@ -145,7 +145,7 @@ const tooltipMap = () => {
   return (
     <BaseMap
       mapboxToken={mapboxToken}
-      mapboxStyle={'mapbox://styles/themendozaline/cj6y6f5m006ar2sobpimm7ay7'}
+      mapboxStyle="mapbox://styles/themendozaline/cj6y6f5m006ar2sobpimm7ay7"
       initialZoom={11.5}
       initialLatitude={45.5683}
       initialLongitude={-122.6712}
@@ -162,10 +162,10 @@ const tooltipMap = () => {
         }
       >
         <MapTooltip
-          primaryName={'average bike speed'}
-          primaryField={'avg_bike_speed'}
-          secondaryName={'length of lane'}
-          secondaryField={'shape_leng'}
+          primaryName="average bike speed"
+          primaryField="avg_bike_speed"
+          secondaryName="length of lane"
+          secondaryField="shape_leng"
         />
       </PathMap>
     </BaseMap>

@@ -1,9 +1,9 @@
 import React from 'react';
 import { storybookStyles } from './storyStyles.js';
 import CivicLogo from '../src/Logo/CivicLogo';
-//import CivicLogoInverted from '../src/Logo/CivicLogoInverted';
+// import CivicLogoInverted from '../src/Logo/CivicLogoInverted';
 import CivicLogoC from '../src/Logo/CivicLogoC';
-//import CivicLogoCInverted from '../src/Logo/CivicLogoCInverted';
+// import CivicLogoCInverted from '../src/Logo/CivicLogoCInverted';
 
 /*
   TODO:
