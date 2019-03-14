@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router';
-import { cx, css } from 'emotion';
-import Carousel from 'nuka-carousel';
+import React, { Component } from "react";
+import { Link } from "react-router";
+import { cx, css } from "emotion";
+import Carousel from "nuka-carousel";
 import {
   Footer,
   CivicCardStack,
@@ -11,23 +11,22 @@ import {
   PieChart,
   LineChart,
   HorizontalBarChart,
-} from '@hackoregon/component-library';
+  Logo
+} from "@hackoregon/component-library";
 import {
   monthYear,
   percentage,
-  year,
-} from '@hackoregon/component-library/src/utils/formatters';
+  year
+} from "@hackoregon/component-library/src/utils/formatters";
 
-import logo from '@hackoregon/component-library/assets/civic-logo-animated.svg';
-import smallLogo from '@hackoregon/component-library/assets/civic-logo-c.svg';
-import brain from '@hackoregon/component-library/assets/brain.svg';
-import brainMobile from '@hackoregon/component-library/assets/brain-mobile.svg';
-import trees from '@hackoregon/component-library/assets/trees.png';
-import hackOregonLogo from '@hackoregon/component-library/assets/hack-oregon-logo.png';
-import heartMail from '@hackoregon/component-library/assets/heartmail.png';
-import twitterLogo from '@hackoregon/component-library/assets/twitter-logo.png';
+import brain from "@hackoregon/component-library/assets/brain.svg";
+import brainMobile from "@hackoregon/component-library/assets/brain-mobile.svg";
+import trees from "@hackoregon/component-library/assets/trees.png";
+import hackOregonLogo from "@hackoregon/component-library/assets/hack-oregon-logo.png";
+import heartMail from "@hackoregon/component-library/assets/heartmail.png";
+import twitterLogo from "@hackoregon/component-library/assets/twitter-logo.png";
 
-import CanvasParticles from './CanvasParticles';
+import CanvasParticles from "./CanvasParticles";
 
 import {
   magnitudeOfUrbanCampsiteSweeps,
@@ -35,24 +34,24 @@ import {
   chartData,
   ridershipData,
   electionsData,
-  processedSchoolData,
-} from '../assets/homePageData';
+  processedSchoolData
+} from "../assets/homePageData";
 
-import transportationMap from '../assets/transportationMap.jpg';
-import evictionsMap from '../assets/evictionsMap.jpg';
+import transportationMap from "../assets/transportationMap.jpg";
+import evictionsMap from "../assets/evictionsMap.jpg";
 
-const civicCategoricalColor1 = '#DC4556';
-const civicCategoricalColor2 = '#19B7AA';
-const civicCategoricalColor3 = '#1E62BD';
-const civicCategoricalColor4 = '#721D7C';
-const civicCategoricalColor5 = '#FFB226';
+const civicCategoricalColor1 = "#DC4556";
+const civicCategoricalColor2 = "#19B7AA";
+const civicCategoricalColor3 = "#1E62BD";
+const civicCategoricalColor4 = "#721D7C";
+const civicCategoricalColor5 = "#FFB226";
 
 const colors = [
   civicCategoricalColor1,
   civicCategoricalColor2,
   civicCategoricalColor3,
   civicCategoricalColor4,
-  civicCategoricalColor5,
+  civicCategoricalColor5
 ];
 
 const buttonDropShadow = css`
@@ -94,7 +93,7 @@ const buttonContainerStatic = css`
 const titleStyle = css`
   font-size: 50px;
   line-height: 1.2;
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   letter-spacing: -1px;
   @media (max-width: 640px) {
     font-size: 36px;
@@ -105,7 +104,7 @@ const subtitleStyle = css`
   font-size: 26px;
   line-height: 1.2;
   font-weight: 300;
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   color: #726371;
   @media (max-width: 640px) {
     font-size: 18px;
@@ -121,7 +120,7 @@ const initialContentContainer = css`
 const issueStyle = index => css`
   font-size: 21px;
   font-weight: 500;
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   color: ${colors[index]};
   text-align: right;
   padding-right: 15px;
@@ -203,7 +202,7 @@ const sectionRightContainer = css`
 `;
 const sectionHeaderTitle = css`
   color: white;
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   font-size: 50px;
   letter-spacing: -1px;
   text-align: left;
@@ -217,7 +216,7 @@ const sectionHeaderTitle = css`
   }
 `;
 const sectionHeaderSubtitle = css`
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   font-size: 20px;
   color: white;
   display: inline-block;
@@ -288,20 +287,20 @@ const contentRightContainer = css`
 `;
 const listTitle = css`
   display: block;
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   font-size: 35px;
   margin: 40px 0;
   text-align: center;
 `;
 const listSubTitle = css`
   display: block;
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   font-size: 24px;
   margin: 12px 0;
 `;
 const listText = css`
   display: block;
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   font-size: 16px;
   color: black;
   line-height: 1.5;
@@ -387,7 +386,7 @@ const hackOregonLogoStyle = css`
 const buttonStyle = css`
   border: 2px solid #ef495c;
   padding: 10px 20px;
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   font-size: 16px;
   color: #ef495c;
   background-color: transparent;
@@ -419,7 +418,7 @@ const iconAndTextWrapper = css`
   }
 
   span {
-    font-family: 'Rubik', sans-serif;
+    font-family: "Rubik", sans-serif;
     font-size: 16px;
     display: block;
     margin-top: 20px;
@@ -434,7 +433,7 @@ class HomePage extends Component {
     // Used to fade in the page
     this.node.style.opacity = 0;
     window.requestAnimationFrame(() => {
-      this.node.style.transition = 'opacity 2500ms';
+      this.node.style.transition = "opacity 2500ms";
       this.node.style.opacity = 1;
     });
   }
@@ -452,7 +451,7 @@ class HomePage extends Component {
           <div className={topBar} />
           <div className={initialContentContainer}>
             <div className={logoWrapper}>
-              <img src={logo} />
+              <Logo />
             </div>
             <div
               className={css`
@@ -485,7 +484,7 @@ class HomePage extends Component {
                 autoplay
                 autoplayInterval={10000}
                 pauseOnHover={false}
-                transitionMode={'fade'}
+                transitionMode={"fade"}
                 wrapAround
                 withoutControls
                 cellSpacing={20}
@@ -511,7 +510,7 @@ class HomePage extends Component {
                     <div className={chartWrapper}>
                       <img
                         src={transportationMap}
-                        alt={'sample map'}
+                        alt={"sample map"}
                         className={cardImage}
                       />
                     </div>
@@ -523,7 +522,7 @@ class HomePage extends Component {
                 autoplay
                 autoplayInterval={5000}
                 pauseOnHover={false}
-                transitionMode={'fade'}
+                transitionMode={"fade"}
                 wrapAround
                 withoutControls
                 cellSpacing={20}
@@ -542,9 +541,9 @@ class HomePage extends Component {
                         dataValueLabel="displacementLabel"
                         dataSeries="quadrant"
                         size={{
-                          key: 'total_population',
+                          key: "total_population",
                           minSize: 2,
-                          maxSize: 10,
+                          maxSize: 10
                         }}
                         xNumberFormatter={percentage}
                         yNumberFormatter={percentage}
@@ -577,7 +576,7 @@ class HomePage extends Component {
                 autoplay
                 autoplayInterval={5000}
                 pauseOnHover={false}
-                transitionMode={'fade'}
+                transitionMode={"fade"}
                 wrapAround
                 withoutControls
                 cellSpacing={20}
@@ -618,7 +617,7 @@ class HomePage extends Component {
                 autoplay
                 autoplayInterval={10000}
                 pauseOnHover={false}
-                transitionMode={'fade'}
+                transitionMode={"fade"}
                 wrapAround
                 withoutControls
                 cellSpacing={20}
@@ -647,7 +646,7 @@ class HomePage extends Component {
                     <div className={chartWrapper}>
                       <img
                         src={evictionsMap}
-                        alt={'sample map'}
+                        alt={"sample map"}
                         className={cardImage}
                       />
                     </div>
@@ -667,7 +666,7 @@ class HomePage extends Component {
             <div className={aboutCivicWrapper} id="aboutCivic">
               <div className={sectionHeaderWrapper}>
                 <div className={smallLogoWrapper}>
-                  <img src={smallLogo} />
+                  <Logo type="squareLogoInverted" />
                 </div>
                 <div className={sectionRightContainer}>
                   <div className={sectionHeaderTitle}>
@@ -874,6 +873,6 @@ class HomePage extends Component {
   }
 }
 
-HomePage.displayName = 'HomePage';
+HomePage.displayName = "HomePage";
 
 export default HomePage;
