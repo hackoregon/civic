@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { VictoryPie, VictoryLabel } from 'victory';
 import ChartContainer from '../ChartContainer';
-import civicTheme from '../VictoryTheme/CivicVictoryTheme.js';
+import civicTheme from '../VictoryTheme/CivicVictoryTheme';
 
 const getOrElse = (possibleValue, defaultValue) =>
   possibleValue == null ? defaultValue : possibleValue;
@@ -62,10 +62,16 @@ PieChart.defaultProps = {};
 PieChart.propTypes = {
   title: PropTypes.string,
   subtitle: PropTypes.string,
+  colors: PropTypes.arrayOf(PropTypes.string),
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
   innerRadius: PropTypes.number,
-  colors: PropTypes.arrayOf(PropTypes.string),
+  loading: PropTypes.bool,
+  dataValue: PropTypes.string,
+  dataLabel: PropTypes.string,
+  error: PropTypes.string,
   halfDoughnut: PropTypes.bool,
+  width: PropTypes.number,
+  height: PropTypes.number,
 };
 
 export default PieChart;

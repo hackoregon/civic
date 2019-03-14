@@ -1,3 +1,6 @@
+/* Deprecated component, 2017 only */
+/* eslint-disable */
+
 import React from 'react';
 import { mount } from 'enzyme';
 // import { Map, TileLayer } from 'react-leaflet';

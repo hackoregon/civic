@@ -10,8 +10,6 @@ import {
   VictoryTooltip,
 } from 'victory';
 
-import { assign } from 'lodash';
-import { css } from 'emotion';
 import ChartContainer from '../ChartContainer';
 import civicFormat from '../utils/civicFormat';
 import { chartEvents, getDefaultDomain } from '../utils/chartHelpers';

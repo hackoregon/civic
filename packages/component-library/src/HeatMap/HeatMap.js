@@ -1,4 +1,6 @@
-/* eslint-disable import/no-extraneous-dependencies */
+/* Deprecated or needs refactored to work with Base Map */
+/* eslint-disable */
+
 import React from 'react';
 import mapboxgl from 'mapbox-gl';
 import { css } from 'emotion';

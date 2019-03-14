@@ -54,7 +54,7 @@ function getDefaultDomain(data, dataKey, dataLabel) {
 
 function getDefaultStackedDomain(data, dataKey, dataLabel) {
   function groupBy(objectArray, property) {
-    return objectArray.reduce(function(acc, obj) {
+    return objectArray.reduce((acc, obj) => {
       const key = obj[property];
       if (!acc[key]) {
         acc[key] = [];

@@ -127,17 +127,6 @@ export default class DataTable extends Component {
     };
   }
 
-  sortTable = (sortKey = '') => {
-    const { sorted: prevSorted, asc } = this.state;
-    const sorted = Object.values(prevSorted).sort(this.compare(sortKey, asc));
-    this.setState(prevState => {
-      return {
-        sorted,
-        asc: !prevState.asc,
-      };
-    });
-  };
-
   compare = (sortpivot, asc) => {
     // Returns a sorting function
     return (a, b) => {
@@ -171,6 +160,20 @@ export default class DataTable extends Component {
     };
   };
 
+  flattenColumns = topLevelColumns => {
+    return Object.values(topLevelColumns).reduce(
+      (accumulator, currentValue) => {
+        if (currentValue.columns) {
+          accumulator.push(...currentValue.columns);
+        } else {
+          accumulator.push(currentValue);
+        }
+        return accumulator;
+      },
+      []
+    );
+  };
+
   generateHeaderAndColumns = topLevelColumns => {
     const { HeaderComponent, ColumnComponent } = this.props;
     const Header = HeaderComponent || DefaultHeader;
@@ -202,33 +205,31 @@ export default class DataTable extends Component {
     );
   };
 
-  flattenColumns = topLevelColumns => {
-    return Object.values(topLevelColumns).reduce(
-      (accumulator, currentValue) => {
-        if (currentValue.columns) {
-          accumulator.push(...currentValue.columns);
-        } else {
-          accumulator.push(currentValue);
-        }
-        return accumulator;
-      },
-      []
-    );
+  sortTable = (sortKey = '') => {
+    const { sorted: prevSorted, asc } = this.state;
+    const sorted = Object.values(prevSorted).sort(this.compare(sortKey, asc));
+    this.setState(prevState => {
+      return {
+        sorted,
+        asc: !prevState.asc,
+      };
+    });
   };
 
   render() {
-    const { tableClass, RowComponent } = this.props;
+    const { data, tableClass, RowComponent } = this.props;
+    const { sorted, flattenedColumns } = this.state;
     const Row = RowComponent || DefaultRow;
     return (
       <table className={tableClass || defaultTableClass}>
-        {this.generateHeaderAndColumns(this.props.data.columns)}
+        {this.generateHeaderAndColumns(data.columns)}
         <tbody>
-          {Object.keys(this.state.sorted).map(id => (
+          {Object.keys(sorted).map(id => (
             <Row
               key={id}
               id={id}
-              columns={this.state.flattenedColumns}
-              data={this.state.sorted[id]}
+              columns={flattenedColumns}
+              data={sorted[id]}
             />
           ))}
         </tbody>

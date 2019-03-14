@@ -1,5 +1,5 @@
-import React, { PropTypes } from 'react';
-import { css } from 'emotion';
+import PropTypes from 'prop-types';
+import React from 'react';
 import { groupBy } from 'lodash';
 import {
   VictoryAxis,
@@ -53,11 +53,6 @@ const LineChart = ({
   const legendData =
     dataSeriesLabels && dataSeriesLabels.length
       ? dataSeriesLabels.map(series => ({ name: series.label }))
-      : null;
-
-  const categoryData =
-    dataSeriesLabels && dataSeriesLabels.length
-      ? dataSeriesLabels.map(series => ({ name: series.category }))
       : null;
 
   const lineData = dataSeries ? groupBy(data, dataSeries) : { category: data };

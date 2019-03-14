@@ -1,3 +1,6 @@
+/* Deprecated component, 2017 only */
+/* eslint-disable */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { sankey } from 'd3-sankey';

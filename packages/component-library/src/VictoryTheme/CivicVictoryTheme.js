@@ -25,14 +25,7 @@ const colors = [
   civicTertiary,
 ];
 
-const yellow200 = '#FFF59D';
-const deepOrange600 = '#F4511E';
-const lime300 = '#DCE775';
-const lightGreen500 = '#8BC34A';
-const teal700 = '#00796B';
-const cyan900 = '#006064';
 const blueGrey700 = '#455A64';
-const grey900 = '#212121';
 const black = '#000000';
 // *
 // * Typography

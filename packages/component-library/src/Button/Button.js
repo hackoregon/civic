@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { css } from 'emotion';
 
@@ -39,7 +40,7 @@ const buttonClass = props => css`
 `;
 
 const Button = ({ children, onClick, ...props }) => (
-  <button className={buttonClass(props)} onClick={onClick}>
+  <button type="button" className={buttonClass(props)} onClick={onClick}>
     {children}
   </button>
 );
@@ -47,8 +48,8 @@ const Button = ({ children, onClick, ...props }) => (
 Button.displayName = 'Button';
 
 Button.propTypes = {
-  children: React.PropTypes.string,
-  onClick: React.PropTypes.func,
+  children: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export default Button;

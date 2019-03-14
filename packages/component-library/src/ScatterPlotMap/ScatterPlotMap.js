@@ -90,8 +90,8 @@ ScatterPlotMap.propTypes = {
 ScatterPlotMap.defaultProps = {
   getPosition: d => d.geometry.coordinates,
   opacity: 0.8,
-  getColor: d => [0, 0, 0],
-  getRadius: d => 50,
+  getColor: () => [0, 0, 0],
+  getRadius: () => 50,
   radiusScale: 1,
   outline: false,
   strokeWidth: 1,

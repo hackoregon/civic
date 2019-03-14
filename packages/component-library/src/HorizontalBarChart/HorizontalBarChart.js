@@ -7,7 +7,6 @@ import {
   VictoryLabel,
   VictoryPortal,
   VictoryTooltip,
-  Bar,
 } from 'victory';
 
 import ChartContainer from '../ChartContainer';
@@ -53,7 +52,7 @@ const HorizontalBarChart = ({
 
   const NegativeAwareTickLabel = props => (
     <VictoryLabel
-      dx={props.scale.y(minValue) - 20}
+      dx={props.scale.y(minValue) - 20} // eslint-disable-line
       {...props}
       textAnchor="end"
     />
@@ -181,7 +180,7 @@ HorizontalBarChart.propTypes = {
   yLabel: PropTypes.string,
   dataValueFormatter: PropTypes.func,
   dataLabelFormatter: PropTypes.func,
-  minimalist: PropTypes.boolean,
+  minimalist: PropTypes.bool,
 };
 
 HorizontalBarChart.defaultProps = {

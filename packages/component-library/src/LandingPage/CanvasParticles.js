@@ -1,5 +1,7 @@
+/* Not currently used, updated and moved to 2018 package */
+/* eslint-disable */
+
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { css } from 'emotion';
 
 const canvasStyles = css`

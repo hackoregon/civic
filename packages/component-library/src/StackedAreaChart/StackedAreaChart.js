@@ -1,5 +1,5 @@
-import React, { PropTypes } from 'react';
-import { css } from 'emotion';
+import PropTypes from 'prop-types';
+import React from 'react';
 import { groupBy } from 'lodash';
 import {
   VictoryAxis,
@@ -19,7 +19,6 @@ import {
   chartEvents,
   getDefaultStackedDomain,
   getDefaultDataSeriesLabels,
-  getDefaultFillStyle,
   getDefaultAreaStyle,
 } from '../utils/chartHelpers';
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
@@ -59,11 +58,6 @@ const StackedAreaChart = ({
       ? dataSeriesLabels.map(series => ({ name: series.label }))
       : null;
 
-  const categoryData =
-    dataSeriesLabels && dataSeriesLabels.length
-      ? dataSeriesLabels.map(series => ({ name: series.category }))
-      : null;
-
   const lineData = dataSeries ? groupBy(data, dataSeries) : { category: data };
 
   const areas = lineData
@@ -83,7 +77,7 @@ const StackedAreaChart = ({
     : null;
 
   const dots = lineData
-    ? Object.keys(lineData).map((category, index) => (
+    ? Object.keys(lineData).map(category => (
         <VictoryScatter
           data={lineData[category].map(d => ({
             dataKey: d[dataKey],

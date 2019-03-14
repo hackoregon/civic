@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { css } from 'emotion';
 
@@ -40,12 +41,12 @@ const Placeholder = ({ issue, children }) => (
 
 Placeholder.displayName = 'Placeholder';
 Placeholder.propTypes = {
-  children: React.PropTypes.node,
-  issue: React.PropTypes.string,
+  children: PropTypes.node,
+  issue: PropTypes.string,
 };
 
 IssueText.propTypes = {
-  issue: React.PropTypes.string,
+  issue: PropTypes.string,
 };
 
 export default Placeholder;

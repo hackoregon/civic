@@ -1,3 +1,7 @@
+/* TODO: Fix linting errors */
+/* eslint-disable */
+
+import PropTypes from 'prop-types';
 import React from 'react';
 import { css } from 'emotion';
 
@@ -129,25 +133,25 @@ const Sandbox = ({
 };
 
 Sandbox.propTypes = {
-  data: React.PropTypes.object,
-  defaultSlides: React.PropTypes.array,
-  drawerVisible: React.PropTypes.bool,
-  fetchSlideDataByDate: React.PropTypes.func,
-  layerData: React.PropTypes.array,
-  mapboxStyle: React.PropTypes.string,
-  mapboxToken: React.PropTypes.string,
-  selectedFoundation: React.PropTypes.string,
-  selectedPackage: React.PropTypes.string,
-  selectedSlide: React.PropTypes.array,
-  slideData: React.PropTypes.array,
-  styles: React.PropTypes.string,
-  toggleDrawer: React.PropTypes.func,
-  updateFoundation: React.PropTypes.func,
-  updatePackage: React.PropTypes.func,
-  updateSlide: React.PropTypes.func,
-  onFoundationClick: React.PropTypes.func,
-  defaultFoundation: React.PropTypes.object,
-  foundationData: React.PropTypes.object,
+  data: PropTypes.object,
+  defaultSlides: PropTypes.array,
+  drawerVisible: PropTypes.bool,
+  fetchSlideDataByDate: PropTypes.func,
+  layerData: PropTypes.array,
+  mapboxStyle: PropTypes.string,
+  mapboxToken: PropTypes.string,
+  selectedFoundation: PropTypes.string,
+  selectedPackage: PropTypes.string,
+  selectedSlide: PropTypes.array,
+  slideData: PropTypes.array,
+  styles: PropTypes.string,
+  toggleDrawer: PropTypes.func,
+  updateFoundation: PropTypes.func,
+  updatePackage: PropTypes.func,
+  updateSlide: PropTypes.func,
+  onFoundationClick: PropTypes.func,
+  defaultFoundation: PropTypes.object,
+  foundationData: PropTypes.object,
 };
 
 export default Sandbox;

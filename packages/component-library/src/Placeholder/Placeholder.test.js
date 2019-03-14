@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-expressions */
+
 import React from 'react';
 import { render } from 'enzyme';
 import Placeholder from './Placeholder';

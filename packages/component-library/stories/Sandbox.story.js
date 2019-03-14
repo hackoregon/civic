@@ -65,43 +65,6 @@ class SandboxStory extends React.Component {
     }
   }
 
-  initialDataSetup = state => {
-    const selectedPackageData = state.data.packages[this.state.selectedPackage];
-    const selectedFoundation = selectedPackageData
-      ? selectedPackageData.default_foundation
-      : '';
-    const selectedSlide = selectedPackageData
-      ? selectedPackageData.default_slide
-      : [];
-    const defaultFoundation =
-      selectedFoundation && state.data.foundations[selectedFoundation];
-    const defaultSlides =
-      selectedSlide && selectedSlide.map(slide => state.data.slides[slide]);
-    this.setState({
-      selectedFoundation,
-      selectedSlide,
-      defaultFoundation,
-      defaultSlides,
-    });
-  };
-
-  updateFoundation = selectedFoundation => {
-    const defaultFoundation = this.state.data.foundations[selectedFoundation];
-    this.fetchFoundationData(defaultFoundation);
-    this.setState({ selectedFoundation, defaultFoundation });
-  };
-
-  updateSlide = selectedSlide => {
-    const selectedSlides = isArray(selectedSlide)
-      ? selectedSlide
-      : selectedSlide.split(',');
-    const defaultSlides = selectedSlides.map(
-      slide => this.state.data.slides[slide]
-    );
-    this.fetchSlideData(defaultSlides);
-    this.setState({ selectedSlide: selectedSlides, defaultSlides });
-  };
-
   fetchFoundationData = foundation => {
     fetch(`${foundation.endpoint}`)
       .then(res => {
@@ -134,16 +97,6 @@ class SandboxStory extends React.Component {
     });
   };
 
-  findAndReplaceSlideData = (slideData, data, slide) => {
-    const slideIndex = findIndex(slideData, o => o[slide.name]);
-
-    return [
-      ...slideData.slice(0, slideIndex),
-      Object.assign({}, slideData[slideIndex], data),
-      ...slideData.slice(slideIndex + 1),
-    ];
-  };
-
   fetchSlideDataByDate = (slide, date) => {
     fetch(`${slide.endpoint}${date}`)
       .then(res => {
@@ -165,26 +118,14 @@ class SandboxStory extends React.Component {
       .catch(err => console.error(err));
   };
 
-  updatePackage = selectedPackage => {
-    const { data } = this.state;
-    const packageData = data.packages[selectedPackage];
-    const selectedFoundation = packageData.default_foundation;
-    this.updateFoundation(selectedFoundation);
-    const selectedSlide = packageData.default_slide;
-    this.updateSlide(selectedSlide);
-    const defaultFoundation = data.foundations[selectedFoundation];
-    const defaultSlides = selectedSlide.map(slide => data.slides[slide]);
-    this.setState({
-      selectedPackage,
-      selectedFoundation,
-      selectedSlide,
-      defaultFoundation,
-      defaultSlides,
-    });
-  };
+  findAndReplaceSlideData = (slideData, data, slide) => {
+    const slideIndex = findIndex(slideData, o => o[slide.name]);
 
-  toggleDrawer = () => {
-    this.setState({ drawerVisible: !this.state.drawerVisible });
+    return [
+      ...slideData.slice(0, slideIndex),
+      Object.assign({}, slideData[slideIndex], data),
+      ...slideData.slice(slideIndex + 1),
+    ];
   };
 
   formatData = (defaultFoundation, defaultSlides) => {
@@ -220,6 +161,65 @@ class SandboxStory extends React.Component {
       },
       ...formatSlideData,
     ];
+  };
+
+  initialDataSetup = state => {
+    const selectedPackageData = state.data.packages[this.state.selectedPackage];
+    const selectedFoundation = selectedPackageData
+      ? selectedPackageData.default_foundation
+      : '';
+    const selectedSlide = selectedPackageData
+      ? selectedPackageData.default_slide
+      : [];
+    const defaultFoundation =
+      selectedFoundation && state.data.foundations[selectedFoundation];
+    const defaultSlides =
+      selectedSlide && selectedSlide.map(slide => state.data.slides[slide]);
+    this.setState({
+      selectedFoundation,
+      selectedSlide,
+      defaultFoundation,
+      defaultSlides,
+    });
+  };
+
+  toggleDrawer = () => {
+    this.setState({ drawerVisible: !this.state.drawerVisible });
+  };
+
+  updateFoundation = selectedFoundation => {
+    const defaultFoundation = this.state.data.foundations[selectedFoundation];
+    this.fetchFoundationData(defaultFoundation);
+    this.setState({ selectedFoundation, defaultFoundation });
+  };
+
+  updatePackage = selectedPackage => {
+    const { data } = this.state;
+    const packageData = data.packages[selectedPackage];
+    const selectedFoundation = packageData.default_foundation;
+    this.updateFoundation(selectedFoundation);
+    const selectedSlide = packageData.default_slide;
+    this.updateSlide(selectedSlide);
+    const defaultFoundation = data.foundations[selectedFoundation];
+    const defaultSlides = selectedSlide.map(slide => data.slides[slide]);
+    this.setState({
+      selectedPackage,
+      selectedFoundation,
+      selectedSlide,
+      defaultFoundation,
+      defaultSlides,
+    });
+  };
+
+  updateSlide = selectedSlide => {
+    const selectedSlides = isArray(selectedSlide)
+      ? selectedSlide
+      : selectedSlide.split(',');
+    const defaultSlides = selectedSlides.map(
+      slide => this.state.data.slides[slide]
+    );
+    this.fetchSlideData(defaultSlides);
+    this.setState({ selectedSlide: selectedSlides, defaultSlides });
   };
 
   render() {

@@ -1,3 +1,6 @@
+/* Deprecated or needs refactored to work with Base Map */
+/* eslint-disable */
+
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import PropTypes from 'prop-types';
@@ -51,6 +54,14 @@ class HexOverlay extends Component {
     this.startAnimationTimer = window.setTimeout(this._startAnimate, 1500);
   }
 
+  _animateHeight() {
+    if (this.state.elevationScale === elevationScale.max) {
+      this._stopAnimate();
+    } else {
+      this.setState({ elevationScale: this.state.elevationScale + 1 });
+    }
+  }
+
   _startAnimate() {
     this.intervalTimer = window.setInterval(this._animateHeight, 20);
   }
@@ -58,14 +69,6 @@ class HexOverlay extends Component {
   _stopAnimate() {
     window.clearTimeout(this.startAnimationTimer);
     window.clearTimeout(this.intervalTimer);
-  }
-
-  _animateHeight() {
-    if (this.state.elevationScale === elevationScale.max) {
-      this._stopAnimate();
-    } else {
-      this.setState({ elevationScale: this.state.elevationScale + 1 });
-    }
   }
 
   render() {

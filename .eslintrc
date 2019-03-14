@@ -18,13 +18,14 @@
     "func-names": 2,
     "react/jsx-filename-extension": 0,
     "react/require-default-props": 0,
+    "react/forbid-prop-types": 1,
     "arrow-body-style": 0,
     "import/no-extraneous-dependencies": [
       "error",
       {
         "devDependencies": [
-          "packages/**/*.story.js",
-          "packages/**/*.test.js"
+          "**/*.story.js",
+          "**/*.test.js"
         ]
       }
     ]

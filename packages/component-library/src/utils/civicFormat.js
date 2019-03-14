@@ -15,7 +15,7 @@ const abbreviateLarge = number => {
   for (let i = 0; i <= scales.length; i += 1) {
     if (Math.abs(number) >= scales[i][0]) {
       num = format('.2~r')(number / scales[i][0]);
-      scale = scales[i][1];
+      scale = scales[i][1]; // eslint-disable-line prefer-destructuring
       break;
     }
   }

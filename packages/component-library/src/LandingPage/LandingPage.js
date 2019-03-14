@@ -1,6 +1,8 @@
+/* Not currently used, updated and moved to 2018 package */
+/* eslint-disable */
+
 import React from 'react';
 import { cx, css } from 'emotion';
-import { Link } from 'react-router';
 
 import { Header, Footer } from '@hackoregon/component-library';
 import CanvasParticles from './CanvasParticles';

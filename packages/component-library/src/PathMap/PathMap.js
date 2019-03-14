@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import DeckGL, { PathLayer } from 'deck.gl';
 import { css } from 'emotion';
 
@@ -87,10 +88,10 @@ PathMap.propTypes = {
 };
 
 PathMap.defaultProps = {
-  getColor: d => [0, 0, 0],
+  getColor: () => [0, 0, 0],
   opacity: 0.9,
   getPath: d => d.geometry.coordinates,
-  getWidth: d => 10,
+  getWidth: () => 10,
   widthScale: 1,
   rounded: false,
   autoHighlight: true,

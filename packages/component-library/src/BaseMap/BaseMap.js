@@ -1,3 +1,6 @@
+/* TODO: Fix linting errors */
+/* eslint-disable */
+
 import React, { Component } from 'react';
 import MapGL, { NavigationControl } from 'react-map-gl';
 import Dimensions from 'react-dimensions';
@@ -9,6 +12,7 @@ import './mapbox-gl.css';
 
 const MAPBOX_TOKEN =
   'pk.eyJ1IjoiaGFja29yZWdvbiIsImEiOiJjamk0MGZhc2cwNDl4M3FsdHAwaG54a3BnIn0.Fq1KA0IUwpeKQlFIoaEn_Q';
+const MAPBOX_STYLE = 'mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg';
 
 const mapWrapper = css`
   margin: 0 auto;
@@ -47,10 +51,9 @@ class BaseMap extends Component {
     this.mapRef = createRef();
   }
 
-  onViewportChange(viewport) {
-    this.setState({
-      viewport: { ...this.state.viewport, ...viewport },
-    });
+  componentDidMount() {
+    // Geocoder requires a ref to the map component
+    this.setState({ mounted: true });
   }
 
   onHover({ object, x, y }) {
@@ -61,9 +64,10 @@ class BaseMap extends Component {
     });
   }
 
-  componentDidMount() {
-    // Geocoder requires a ref to the map component
-    this.setState({ mounted: true });
+  onViewportChange(viewport) {
+    this.setState({
+      viewport: { ...this.state.viewport, ...viewport },
+    });
   }
 
   render() {
@@ -134,20 +138,19 @@ class BaseMap extends Component {
 }
 
 BaseMap.propTypes = {
-  mapboxToken: PropTypes.string.isRequired,
+  mapboxToken: PropTypes.string,
   mapboxStyle: PropTypes.string,
   geocoder: PropTypes.bool,
   navigation: PropTypes.bool,
   geocoderOptions: PropTypes.object,
-  geocoderOnChange: PropTypes.function,
+  geocoderOnChange: PropTypes.func,
   mapGLOptions: PropTypes.object,
   children: PropTypes.node,
 };
 
 BaseMap.defaultProps = {
-  mapboxStyle: 'mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg',
-  mapboxToken:
-    'pk.eyJ1IjoiaGFja29yZWdvbiIsImEiOiJjamk0MGZhc2cwNDl4M3FsdHAwaG54a3BnIn0.Fq1KA0IUwpeKQlFIoaEn_Q',
+  mapboxStyle: MAPBOX_STYLE,
+  mapboxToken: MAPBOX_TOKEN,
   navigation: true,
   geocoder: false,
 };

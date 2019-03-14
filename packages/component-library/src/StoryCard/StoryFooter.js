@@ -1,3 +1,6 @@
+/* Deprecated component, 2017 only */
+/* eslint-disable react/destructuring-assignment */
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import copy from 'copy-to-clipboard';
@@ -37,8 +40,6 @@ export default class StoryFooter extends Component {
 
   setToFalse = () => this.setState({ copied: false });
 
-  switchState = ms => setTimeout(this.setToFalse, ms);
-
   handleCopy = () => {
     const { collectionId, cardId } = this.props;
     // NOTE: we need to make sure this will work on all browsers
@@ -46,6 +47,8 @@ export default class StoryFooter extends Component {
     this.switchState(MS_TO_SWITCH_TEXT);
     this.setState({ copied: true });
   };
+
+  switchState = ms => setTimeout(this.setToFalse, ms);
 
   render() {
     const { collectionId, cardId } = this.props;

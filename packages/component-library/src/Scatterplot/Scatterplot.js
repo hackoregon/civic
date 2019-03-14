@@ -1,5 +1,5 @@
-import React, { PropTypes } from 'react';
-import { css } from 'emotion';
+import PropTypes from 'prop-types';
+import React from 'react';
 import {
   VictoryAxis,
   VictoryChart,
@@ -69,11 +69,6 @@ const Scatterplot = ({
   const legendData =
     dataSeriesLabels && dataSeriesLabels.length
       ? dataSeriesLabels.map(series => ({ name: series.label }))
-      : null;
-
-  const categoryData =
-    dataSeriesLabels && dataSeriesLabels.length
-      ? dataSeriesLabels.map(series => ({ name: series.category }))
       : null;
 
   return (

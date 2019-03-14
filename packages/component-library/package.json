@@ -11,7 +11,7 @@
     "configure": "yarn run build",
     "test": "BABEL_ENV=test mocha --opts ./mocha.options ./src/**/*.test.js",
     "test:watch": "yarn run test -- -w",
-    "lint": "eslint --fix src stories"
+    "lint": "eslint --fix src"
   },
   "author": "David Daniel <davidedaniel@gmail.com> (http://davidedaniel.github.io)",
   "license": "MIT",

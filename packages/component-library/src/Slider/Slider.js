@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import 'rc-slider/assets/index.css';
 import SliderTooltip from './SliderTooltip';
 import RcSlider from './RcSlider';
@@ -18,10 +19,10 @@ const Slider = ({ value, onChange, min, max }) => (
 );
 
 Slider.propTypes = {
-  value: React.PropTypes.number,
-  onChange: React.PropTypes.func,
-  max: React.PropTypes.number,
-  min: React.PropTypes.number,
+  value: PropTypes.number,
+  onChange: PropTypes.func,
+  max: PropTypes.number,
+  min: PropTypes.number,
 };
 
 export default Slider;

@@ -16,12 +16,6 @@ class LoadData extends React.Component {
     this.fetchData = this.fetchData.bind(this);
   }
 
-  fetchData(myURL) {
-    fetch(myURL)
-      .then(response => response.json())
-      .then(data => this.setState({ data }));
-  }
-
   componentDidMount() {
     this.fetchData(this.props.dataURL);
   }
@@ -30,6 +24,12 @@ class LoadData extends React.Component {
     if (this.props.dataURL !== prevProps.dataURL) {
       this.fetchData(this.props.dataURL);
     }
+  }
+
+  fetchData(myURL) {
+    fetch(myURL)
+      .then(response => response.json())
+      .then(data => this.setState({ data }));
   }
 
   render() {

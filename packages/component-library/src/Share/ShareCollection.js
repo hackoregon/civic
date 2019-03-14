@@ -1,3 +1,6 @@
+/* Deprecated component, 2017 only */
+/* eslint-disable */
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import copy from 'copy-to-clipboard';
@@ -24,14 +27,14 @@ export default class ShareCollection extends Component {
 
   setToFalse = () => this.setState({ copied: false });
 
-  switchState = ms => setTimeout(this.setToFalse, ms);
-
   handleCopy = () => {
     // NOTE: we need to make sure this will work on all browsers
     copy(`${window.location.href}`);
     this.switchState(MS_TO_SWITCH_TEXT);
     this.setState({ copied: true });
   };
+
+  switchState = ms => setTimeout(this.setToFalse, ms);
 
   render() {
     const shareTxt = this.state.copied ? 'Link copied!' : 'Share'; // if copied, show Link copied, otherwise, show Share card

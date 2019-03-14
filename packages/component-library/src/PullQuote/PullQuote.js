@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { css } from 'emotion';
 import { TwitterShareButton, TwitterIcon } from 'react-share';
@@ -49,9 +50,9 @@ const PullQuote = ({ quoteText, quoteAttribution, url }) => (
 PullQuote.displayName = 'PullQuote';
 
 PullQuote.propTypes = {
-  quoteText: React.PropTypes.string,
-  quoteAttribution: React.PropTypes.string,
-  url: React.PropTypes.string,
+  quoteText: PropTypes.string,
+  quoteAttribution: PropTypes.string,
+  url: PropTypes.string,
 };
 
 export default PullQuote;
