@@ -177,10 +177,8 @@ export class VotersOnTheMove extends React.Component {
                 group.
               </p>
               <ChartTitle
-                title={'Movement of Registered Voters Within Portland'}
-                subtitle={
-                  'Number of moves and change relative to city center by age group as measured by changes in voter registration, 2006-2016'
-                }
+                title="Movement of Registered Voters Within Portland"
+                subtitle="Number of moves and change relative to city center by age group as measured by changes in voter registration, 2006-2016"
               />
               <DataTable data={tableData} />
               <p>
@@ -193,10 +191,8 @@ export class VotersOnTheMove extends React.Component {
               {votersOnTheMove && awayVotersOnTheMove && (
                 <div>
                   <ChartTitle
-                    title={'Distance and Direction of Moves Within Portland'}
-                    subtitle={
-                      'Distance in miles and direction of travel for 2000 randomly sampled moves within Portland'
-                    }
+                    title="Distance and Direction of Moves Within Portland"
+                    subtitle="Distance in miles and direction of travel for 2000 randomly sampled moves within Portland"
                   />
                   <div className={smallMultiples}>
                     <div className={chartColumn}>
