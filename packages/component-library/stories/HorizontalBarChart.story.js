@@ -5,8 +5,8 @@ import { action } from '@storybook/addon-actions';
 import { withInfo } from '@storybook/addon-info';
 import { checkA11y } from '@storybook/addon-a11y';
 import { withKnobs, text, number, object, array } from '@storybook/addon-knobs';
-import { HorizontalBarChart } from '../src';
-import { percentage } from '../src/utils/formatters';
+import { HorizontalBarChart, civicFormat } from '../src';
+
 
 const displayName = HorizontalBarChart.displayName || 'HorizontalBarChart';
 const title = 'Simple usage';
@@ -125,7 +125,7 @@ export default () =>
           subtitle="As of January 2017"
           xLabel={xLabel}
           yLabel={yLabel}
-          dataValueFormatter={percentage}
+          dataValueFormatter={civicFormat.percentage}
         />
       );
     });

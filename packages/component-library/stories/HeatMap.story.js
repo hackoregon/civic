@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { withKnobs, number, selectV2 } from '@storybook/addon-knobs';
+import { withKnobs, number, select } from '@storybook/addon-knobs';
 import { checkA11y } from '@storybook/addon-a11y';
 import { HeatMap } from '../src';
 
@@ -93,7 +93,7 @@ const heatmapComponent = data => {
     Cool:
       '[0, "rgba(0,0,0,0)", 0.2, "rgb(76, 110, 219)", 0.4, "rgb(35, 171, 216)", 0.6, "rgb(29, 223, 163)", 0.8, "rgb(82, 246, 103)", 1, "rgb(175, 240, 91)"]',
   };
-  const colorScaleString = selectV2(
+  const colorScaleString = select(
     'Heat Color',
     colorOptions,
     colorOptions.Plasma,
@@ -209,7 +209,7 @@ export default () =>
         'Accessory Dwelling Units':
           '?new_class=New+Construction,Alteration,Addition&is_adu=true',
       };
-      const selection = selectV2(
+      const selection = select(
         'Data:',
         selectionOptions,
         selectionOptions['Single Family'],

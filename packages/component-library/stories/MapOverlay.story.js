@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { withKnobs, boolean, number, selectV2 } from '@storybook/addon-knobs';
+import { withKnobs, boolean, number, select } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { checkA11y } from '@storybook/addon-a11y';
 import { BaseMap } from '../src';
@@ -45,7 +45,7 @@ const wireframe = boolean('Wireframe:', true);
 const elevation = number('Elevation:', 10, elevationOptions);
 const extruded = boolean('Extruded:', true);
 
-const mapboxStyle = selectV2(
+const mapboxStyle = select(
   'Mapbox Style',
   optionsStyle,
   optionsStyle['Label Maker']
@@ -76,10 +76,10 @@ const tooltipMap = () => {
   const filled = boolean('Filled:', true);
   const wireframe = boolean('Wireframe:', true);
   const extruded = boolean('Extruded:', true);
-  const mapboxStyle = selectV2(
-    'Mapbox Style',
+  const mapboxStyle = select(
+    optionsStyle['Label Maker'],
     optionsStyle,
-    optionsStyle['Label Maker']
+    'Mapbox Style'
   );
 
   return (

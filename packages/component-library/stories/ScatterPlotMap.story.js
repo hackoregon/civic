@@ -1,7 +1,7 @@
 import React from 'react';
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from '@storybook/react';
-import { withKnobs, number, selectV2, boolean } from '@storybook/addon-knobs';
+import { withKnobs, number, select, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { checkA11y } from '@storybook/addon-a11y';
 import { BaseMap } from '../src';
@@ -28,7 +28,7 @@ const mapStylesOptions = {
 };
 
 const demoMap = () => {
-  const mapboxStyle = selectV2(
+  const mapboxStyle = select(
     'Mapbox Style',
     mapStylesOptions,
     mapStylesOptions['Lè Shine']
@@ -99,7 +99,7 @@ const demoMap = () => {
 };
 
 const tooltipMap = () => {
-  const mapboxStyle = selectV2(
+  const mapboxStyle = select(
     'Mapbox Style',
     mapStylesOptions,
     mapStylesOptions.Scenic

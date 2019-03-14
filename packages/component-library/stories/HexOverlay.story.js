@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { withKnobs, selectV2, number, boolean } from '@storybook/addon-knobs';
+import { withKnobs, select, number, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import MapGL from 'react-map-gl';
 import { checkA11y } from '@storybook/addon-a11y';
@@ -150,7 +150,7 @@ export default () =>
           const filled = boolean('Filled:', true);
           const wireframe = boolean('Wireframe:', true);
 
-          const mapboxStyle = selectV2(
+          const mapboxStyle = select(
             'Mapbox Style',
             optionsStyle,
             optionsStyle['Label Maker']

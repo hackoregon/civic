@@ -6,7 +6,7 @@ import { storiesOf } from '@storybook/react';
 import 'react-select/dist/react-select.css';
 import { isArray, findIndex } from 'lodash';
 import { withInfo } from '@storybook/addon-info';
-import { withKnobs, number, selectV2, boolean } from '@storybook/addon-knobs';
+import { withKnobs, number, select, boolean } from '@storybook/addon-knobs';
 import { Sandbox } from '../src';
 
 import { foundations, slides } from '../src/Sandbox/constants';

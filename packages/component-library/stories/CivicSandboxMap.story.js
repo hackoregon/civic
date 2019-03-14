@@ -2,7 +2,7 @@
 import React from 'react';
 import * as d3 from 'd3';
 import { storiesOf } from '@storybook/react';
-import { withKnobs, selectV2, number, boolean } from '@storybook/addon-knobs';
+import { withKnobs, select, number, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { checkA11y } from '@storybook/addon-a11y';
 import { BaseMap } from '../src';
@@ -120,7 +120,7 @@ export default () =>
               'mapbox://styles/themendozaline/cj5oyewyy0fg22spetiv0hap0',
             Odyssey: 'mapbox://styles/themendozaline/cjgq6rklb000d2so1b8myaait',
           };
-          const mapboxStyle = selectV2(
+          const mapboxStyle = select(
             'Mapbox Style',
             mapStyleOptions,
             mapStyleOptions['Hack Oregon Light']
@@ -146,14 +146,14 @@ export default () =>
             Ocean:
               '[[255,255,217,255],[237,248,177,255],[199,233,180,255],[127,205,187,255],[65,182,196,255],[29,145,192,255],[34,94,168,255],[37,52,148,255],[8,29,88,255]]',
           };
-          const colorScheme = selectV2(
+          const colorScheme = select(
             'Color Schemes:',
             colorOptions,
             colorOptions.Earth
           );
           const colorSchemeArray = JSON.parse(colorScheme);
 
-          const screenGridcolorScheme = selectV2(
+          const screenGridcolorScheme = select(
             'ScreenGrid Color Schemes:',
             colorOptions,
             colorOptions.Thermal
@@ -490,7 +490,7 @@ export default () =>
             Population: '007-population',
             'Households with Children': '015-household-children',
           };
-          const foundationSelected = selectV2(
+          const foundationSelected = select(
             'Foundations:',
             foundationOptions,
             foundationOptions.Population

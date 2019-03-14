@@ -1,7 +1,7 @@
 import React from 'react';
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from '@storybook/react';
-import { withKnobs, number, selectV2, boolean } from '@storybook/addon-knobs';
+import { withKnobs, number, select, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { checkA11y } from '@storybook/addon-a11y';
 import { BaseMap } from '../src';
@@ -25,7 +25,7 @@ const demoMap = () => {
     'North Star': 'mapbox://styles/themendozaline/cj5oyewyy0fg22spetiv0hap0',
     Odyssey: 'mapbox://styles/themendozaline/cjgq6rklb000d2so1b8myaait',
   };
-  const mapboxStyle = selectV2(
+  const mapboxStyle = select(
     'Mapbox Style',
     mapStylesOptions,
     mapStylesOptions['Navigation Guidance Night']
@@ -43,7 +43,7 @@ const demoMap = () => {
     'Red Yellow Blue':
       '[[215,25,28],[253,174,97],[255,255,191],[171,217,233],[44,123,182]]',
   };
-  const colorScheme = selectV2(
+  const colorScheme = select(
     'Color Scheme:',
     colorSchemeOptions,
     colorSchemeOptions['Red Yellow Blue']

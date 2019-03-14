@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import {
   withKnobs,
   number,
-  selectV2,
+  select,
   boolean,
   color,
 } from '@storybook/addon-knobs';
@@ -33,7 +33,7 @@ const demoMap = () => {
     'North Star': 'mapbox://styles/themendozaline/cj5oyewyy0fg22spetiv0hap0',
     Odyssey: 'mapbox://styles/themendozaline/cjgq6rklb000d2so1b8myaait',
   };
-  const mapboxStyle = selectV2(
+  const mapboxStyle = select(
     'Mapbox Style',
     mapStylesOptions,
     mapStylesOptions['Navigation Guidance Night']
@@ -98,7 +98,7 @@ const demoMap = () => {
     'Red Yellow Blue':
       '[[215,25,28],[253,174,97],[255,255,191],[171,217,233],[44,123,182]]',
   };
-  const pathColorScheme = selectV2(
+  const pathColorScheme = select(
     'Path Color Scheme:',
     pathColorSchemeOptions,
     pathColorSchemeOptions['Red Yellow Blue']

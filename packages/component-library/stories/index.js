@@ -70,7 +70,7 @@ storiesOf('Welcome', module)
   .add('Introduction', () => <Introduction />)
   .add('The CIVIC Brand', () => <TheBrandStyle />)
   .add('The CIVIC Platform', () => (
-    <ThePlatformStyle showApp={linkTo('Button')} />
+    <ThePlatformStyle />
   ));
 
 // Branding

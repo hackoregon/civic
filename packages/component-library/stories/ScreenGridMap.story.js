@@ -1,7 +1,7 @@
 import React from 'react';
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from '@storybook/react';
-import { withKnobs, number, selectV2 } from '@storybook/addon-knobs';
+import { withKnobs, number, select } from '@storybook/addon-knobs';
 import { checkA11y } from '@storybook/addon-a11y';
 import { BaseMap } from '../src';
 import { ScreenGridMap } from '../src';
@@ -59,7 +59,7 @@ export default () =>
               'mapbox://styles/themendozaline/cj5oyewyy0fg22spetiv0hap0',
             Odyssey: 'mapbox://styles/themendozaline/cjgq6rklb000d2so1b8myaait',
           };
-          const mapboxStyle = selectV2(
+          const mapboxStyle = select(
             'Mapbox Style',
             optionsStyle,
             optionsStyle['Hack Oregon Light']
@@ -85,7 +85,7 @@ export default () =>
             Ocean:
               '[[237,248,177],[199,233,180],[127,205,187],[65,182,196],[29,145,192],[34,94,168],[37,52,148],[8,29,88]]',
           };
-          const colorScheme = selectV2(
+          const colorScheme = select(
             'Color Scheme:',
             colorSchemeOptions,
             colorSchemeOptions.Planet
