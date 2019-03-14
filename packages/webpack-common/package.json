@@ -10,7 +10,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "autoprefixer": "^6.7.7",
+    "autoprefixer": "^9.4.10",
     "lodash-webpack-plugin": "^0.11.5",
     "webpack": "^4.29.6",
     "webpack-blocks": "^2.0.0-rc",
