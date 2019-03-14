@@ -7,18 +7,18 @@ const styles = {
   width: "auto"
 };
 
-const CivicLogo = ({ alt }) =>
+const CivicLogoAnimated = ({ alt }) =>
   isClient && (
     <img
       style={styles}
-      src={require("../../assets/civic-logo.svg")}
+      src={require("../../assets/civic-logo-animated.svg")}
       alt={alt}
     />
   );
 
-CivicLogo.displayName = "Logo";
-CivicLogo.propTypes = {
+CivicLogoAnimated.displayName = "Logo";
+CivicLogoAnimated.propTypes = {
   alt: PropTypes.string
 };
 
-export default CivicLogo;
+export default CivicLogoAnimated;
