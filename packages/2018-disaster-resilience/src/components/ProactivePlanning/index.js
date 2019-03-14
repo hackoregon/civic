@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { css } from 'emotion';
 
-import { CivicStoryCard, Scatterplot } from '@hackoregon/component-library';
-import { percentage } from '@hackoregon/component-library/src/utils/formatters';
+import {
+  CivicStoryCard,
+  Scatterplot,
+  civicFormat,
+} from '@hackoregon/component-library';
 
 import { fetchProactivePlanning } from '../../state/proactive-planning/actions';
 import {
@@ -41,8 +44,8 @@ export class ProactivePlanning extends React.Component {
             dataValueLabel="displacementLabel"
             dataSeries="quadrant"
             size={{ key: 'total_population', minSize: 2, maxSize: 10 }}
-            xNumberFormatter={percentage}
-            yNumberFormatter={percentage}
+            xNumberFormatter={civicFormat.percentage}
+            yNumberFormatter={civicFormat.percentage}
           />
         )}
       </CivicStoryCard>

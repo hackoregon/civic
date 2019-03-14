@@ -2,10 +2,9 @@ import React from 'react';
 
 import {
   CivicStoryCard,
-  Placeholder,
   HorizontalBarChart,
+  civicFormat,
 } from '@hackoregon/component-library';
-import { percentage } from '@hackoregon/component-library/src/utils/formatters';
 
 const data = [
   {
@@ -88,7 +87,7 @@ export class OutraisingYourOpponent extends React.Component {
           xAxisLabel="Importance"
           sortOrder="sortOrder"
           data={data}
-          dataValueFormatter={percentage}
+          dataValueFormatter={civicFormat.percentage}
           domain={{ x: [0, 0.6], y: [1, 11] }}
         />
       </CivicStoryCard>

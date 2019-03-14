@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { css } from 'emotion';
 
-import { CivicStoryCard, Scatterplot } from '@hackoregon/component-library';
-import { percentage } from '@hackoregon/component-library/src/utils/formatters';
+import {
+  CivicStoryCard,
+  Scatterplot,
+  civicFormat,
+} from '@hackoregon/component-library';
 
 import { fetchDriversOfParticipation } from '../../state/drivers-of-participation/actions';
 import {
@@ -44,8 +47,8 @@ export class DriversOfPublicTransitParticipation extends React.Component {
             dataKeyLabel="combinedLabel"
             dataValue="ridership_change"
             dataSeries="year"
-            xNumberFormatter={percentage}
-            yNumberFormatter={percentage}
+            xNumberFormatter={civicFormat.percentage}
+            yNumberFormatter={civicFormat.percentage}
             domain={{ x: [-1, 2], y: [-1, 2] }}
           />
         )}

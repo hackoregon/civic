@@ -10,8 +10,8 @@ import {
   Dropdown,
   GradientScale,
   Collapsable,
+  civicFormat,
 } from '@hackoregon/component-library';
-import { percentage } from '@hackoregon/component-library/src/utils/formatters';
 
 import {
   fetchAllARUCities,
@@ -137,7 +137,7 @@ export class AffordableRentalUnitsDwindling extends React.Component {
                 data={chartData}
                 dataLabel="datatype"
                 dataValue="value"
-                dataValueFormatter={percentage}
+                dataValueFormatter={civicFormat.percentage}
                 title={`${capitalize(
                   selectedCity
                 )} Change in Total Units By Cost Per Month`}

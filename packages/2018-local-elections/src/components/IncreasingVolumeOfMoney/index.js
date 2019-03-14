@@ -8,12 +8,8 @@ import {
   BarChart,
   CivicStoryCard,
   Dropdown,
+  civicFormat,
 } from '@hackoregon/component-library';
-import {
-  numeric,
-  dollars,
-  year,
-} from '@hackoregon/component-library/src/utils/formatters';
 
 import {
   fetchAllRaces,
@@ -85,8 +81,10 @@ export class IncreasingVolumeOfMoney extends React.Component {
                 subtitle={raceSubtitle}
                 yLabel="Money Raised"
                 xLabel="Year"
-                xNumberFormatter={x => year(x)}
-                yNumberFormatter={y => dollars(numeric(y))}
+                xNumberFormatter={x => civicFormat.year(x)}
+                yNumberFormatter={y =>
+                  civicFormat.dollars(civicFormat.numeric(y))
+                }
                 barWidth={3}
                 domain={{ x: [2008, 2018] }}
               />

@@ -3,9 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { css } from 'emotion';
 
-import { CivicStoryCard, LineChart } from '@hackoregon/component-library';
-import { ungroupBy } from '@hackoregon/component-library/src/utils/dataHelpers';
-import { percentage } from '@hackoregon/component-library/src/utils/formatters';
+import {
+  CivicStoryCard,
+  LineChart,
+  ungroupBy,
+  civicFormat,
+} from '@hackoregon/component-library';
 
 import { fetchServiceAndRidership } from '../../state/service-and-ridership/actions';
 import {
@@ -160,7 +163,7 @@ export class ServiceAndRidership extends React.Component {
             dataValue="value"
             dataSeries="type"
             xNumberFormatter={d => `${d}`}
-            yNumberFormatter={percentage}
+            yNumberFormatter={civicFormat.percentage}
           />
         )}
       </CivicStoryCard>

@@ -11,12 +11,8 @@ import {
   PieChart,
   LineChart,
   HorizontalBarChart,
+  civicFormat,
 } from '@hackoregon/component-library';
-import {
-  monthYear,
-  percentage,
-  year,
-} from '@hackoregon/component-library/src/utils/formatters';
 
 import logo from '@hackoregon/component-library/assets/civic-logo-animated.svg';
 import smallLogo from '@hackoregon/component-library/assets/civic-logo-c.svg';
@@ -500,7 +496,7 @@ class HomePage extends Component {
                         yLabel="Sweeps"
                         dataKey="date"
                         dataValue="count"
-                        xNumberFormatter={monthYear}
+                        xNumberFormatter={civicFormat.monthYear}
                       />
                     </div>
                   </CivicCardStack>
@@ -546,8 +542,8 @@ class HomePage extends Component {
                           minSize: 2,
                           maxSize: 10,
                         }}
-                        xNumberFormatter={percentage}
-                        yNumberFormatter={percentage}
+                        xNumberFormatter={civicFormat.percentage}
+                        yNumberFormatter={civicFormat.percentage}
                         legendComponent={() => null}
                       />
                     </div>
@@ -564,8 +560,8 @@ class HomePage extends Component {
                         dataKey="year"
                         dataValue="value"
                         dataSeries="type"
-                        xNumberFormatter={year}
-                        yNumberFormatter={year}
+                        xNumberFormatter={civicFormat.year}
+                        yNumberFormatter={civicFormat.year}
                         legendComponent={() => null}
                       />
                     </div>
@@ -593,7 +589,7 @@ class HomePage extends Component {
                         dataKey="year"
                         dataValue="ons"
                         dataSeries="type"
-                        xNumberFormatter={year}
+                        xNumberFormatter={civicFormat.year}
                         legendComponent={() => null}
                       />
                     </div>
@@ -635,7 +631,7 @@ class HomePage extends Component {
                         xAxisLabel="Importance"
                         sortOrder="sortOrder"
                         data={electionsData}
-                        dataValueFormatter={percentage}
+                        dataValueFormatter={civicFormat.percentage}
                         domain={{ x: [0, 0.6], y: [1, 11] }}
                       />
                     </div>

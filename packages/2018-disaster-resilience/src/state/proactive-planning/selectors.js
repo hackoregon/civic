@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
+import { civicFormat } from '@hackoregon/component-library';
+
 import { rootState } from '../selectors';
-import { titleCase } from '@hackoregon/component-library/src/utils/formatters';
 
 export const getProactivePlanningRequest = createSelector(
   rootState,
@@ -18,7 +19,9 @@ const processData = data =>
     census_response_rate: (100 - parseFloat(nbhd.census_response_rate)) / 100,
     total_population: parseFloat(nbhd.total_population),
     quadrant: nbhd.quadrant,
-    resilienceLabel: titleCase(nbhd.name) + ' • Census Non-Response Rate',
+    resilienceLabel: `${civicFormat.titleCase(
+      nbhd.name
+    )} • Census Non-Response Rate`,
     displacementLabel: 'Displacement',
   }));
 
