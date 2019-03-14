@@ -1,5 +1,4 @@
-import { titleCase } from '@hackoregon/component-library/src/utils/formatters';
-import { ungroupBy } from '@hackoregon/component-library/src/utils/dataHelpers';
+import { ungroupBy } from '@hackoregon/component-library';
 import { disasterData } from './disasterData';
 import { housingData } from './housingData';
 import { transportationData } from './transportationData';
