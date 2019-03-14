@@ -45,10 +45,15 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,css,md}": [
+    "*.{js,jsx}": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ],
+    "*.{css,md}": [
       "prettier --write",
       "git add"
-    ]
+    ],
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",
