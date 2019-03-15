@@ -38,11 +38,19 @@ $ nvm use
 # Note for next two steps, if you get an error, keep trying the same command again.
 
 # Installs all package dependencies and links cross-dependencies.
-$ yarn install
+$ yarn bootstrap
 
 # This will build all packages. Since some packages are used internally, they need to be built before the dependent packages are worked on. This operation takes while (~10 minutes), but only needs to be run at the project root once.
 $ yarn build
 ```
+
+## Setting up your text editor
+
+In order to be the most productive, you’ll want to install some extensions or plug-ins for your text editor. These tools are already installed and configured project wide, so the only installation you’ll need is inside your text editor (don’t `npm install` or `yarn add` them). There are plug-ins or extensions available for the most commonly used editors (VS Code, Sublime Text, Vim, WebStorm, Atom, etc…)
+
+-   EditorConfig — for consistency in settings like indentation line-endings
+-   ESLint — to show linting in your editor as you’re coding
+-   Prettier — for code formatting in your editor as you’re coding
 
 ## Working on a single package other than the component library
 
