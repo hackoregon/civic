@@ -1,12 +1,34 @@
 # Civic [![Build Status](https://travis-ci.org/hackoregon/civic.svg?branch=master)](https://travis-ci.org/hackoregon/civic)
 
-This is the home of the front-end code for the [Civic Platform](http://civicplatform.org/). It's organized in a monorepo using Yarn Workspaces, but it's ok if you don't know what that means yet.
+This is the home of the front-end code for the [CIVIC Platform](http://civicplatform.org/). It's organized in a monorepo using Yarn Workspaces, but it's ok if you don't know what that means yet.
 
-## Setup
+# Let's make this better, together!
 
-### Development environment
+Civic magic happens when we work together. We welcome your collaborative contributions. We also have a [more technical contribution guide](https://github.com/hackoregon/civic/blob/master/CONTRIBUTING.md).
 
-Prerequisites you'll need in your development environment to use and contribute to this project.
+🐧 **I see something that could be better:**
+The first step is [open an issue](https://github.com/hackoregon/civic/issues/new/choose), and tell us what you see that could be better. Tell us about your vision so that we can see what you see and help to improve it.
+
+🐦 **I want to work on making something specific better:**
+If there's already a [documented issue](https://github.com/hackoregon/civic/issues) about what you want to work on, assign yourself to let others what you're working on. If there's not an issue, open one and assign yourself.
+
+🐤 **I want to work on making something better, but I'm not sure where to start:**
+Check out our [open issues](https://github.com/hackoregon/civic/issues) for things to work on and [open pull requests](https://github.com/hackoregon/civic/issues) to review and collaborate with others on existing efforts.
+
+🦜 **I've done something towards making this better:**
+Fantastic! Share it with us by [opening a pull request](https://github.com/hackoregon/civic/compare) with what you've done so far, and let's work together to make it even better and incorporate it into the CIVIC Platform!
+
+🦚 **I want to explore more things:**
+
+[CIVIC Platform](http://civicplatform.org/) 👏 [Components and Style Guide (Storybook)](https://hackoregon.github.io/civic/) 👏 [Platform Architecture Guide](https://github.com/hackoregon/civic/blob/master/ARCHITECTURE.md) 👏 [Redux Guide](https://github.com/hackoregon/civic/blob/master/WORKING_WITH_REDUX.md) 👏 [Contributing Guide](https://github.com/hackoregon/civic/blob/master/CONTRIBUTING.md)
+
+
+# Setup
+
+## Development environment
+
+### Prerequisites
+Before you install and build, you'll need the following.
 
 1. **bash**
 
@@ -23,13 +45,18 @@ Prerequisites you'll need in your development environment to use and contribute 
 
 3. **git**
 
-    You will need to have Git installed and a GitHub account with [SSH keys setup for remote access](https://help.github.com/articles/connecting-to-github-with-ssh/).
-
+    You will need to have [Git](https://git-scm.com/) installed in your bash environment.
 ### Install and build
 
+🐸**GENTLE WARNING**🐸: Make sure you have met the prerequisites ☝️
+
 ```bash
-# Clone the repository and navigate to the project root
+# Clone the repository using either https or ssh
+# https
 $ git clone https://github.com/hackoregon/civic.git
+# OR ssh
+$ git clone git@github.com:hackoregon/civic.git
+
 $ cd civic
 
 # Sets your Node.js version to match what the project uses.
@@ -40,15 +67,17 @@ $ nvm use
 # Installs all package dependencies and links cross-dependencies.
 $ yarn bootstrap
 
-# This will build all packages. Since some packages are used internally, they need to be built before the dependent packages are worked on. This operation takes while (~10 minutes), but only needs to be run at the project root once.
+# This will build all packages. Since some packages are used internally, they need to be built before the dependent packages are worked on. 
 $ yarn build
+
+# Take a pizza break! 🍕! This takes a while, but only needs to run at the project root once.
 ```
 
 ## Setting up your text editor
 
 In order to be the most productive, you’ll want to install some extensions or plug-ins for your text editor. These tools are already installed and configured project wide, so the only installation you’ll need is inside your text editor (don’t `npm install` or `yarn add` them). There are plug-ins or extensions available for the most commonly used editors (VS Code, Sublime Text, Vim, WebStorm, Atom, etc…)
 
-*WARNING, CONFIGURATION IS STILL UNDER CONSTRUCTION*
+🐸**GENTLE WARNING**🐸: Configuration still in progress. You may encounter linting errors.
 You may want to turn off Prettier and ESLint in your editor for the time being
 
 -   EditorConfig — for consistency in settings like indentation line-endings
