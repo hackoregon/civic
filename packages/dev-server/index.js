@@ -59,7 +59,7 @@ module.exports = function() {
     const compiler = webpack(config, afterWebpack);
 
     const middleware = devMiddleware(compiler, {
-      lazy: true,
+      // lazy: true,
       noInfo: true,
       publicPath: config.output.publicPath,
       silent: true,
