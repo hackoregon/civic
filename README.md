@@ -48,6 +48,9 @@ $ yarn build
 
 In order to be the most productive, you’ll want to install some extensions or plug-ins for your text editor. These tools are already installed and configured project wide, so the only installation you’ll need is inside your text editor (don’t `npm install` or `yarn add` them). There are plug-ins or extensions available for the most commonly used editors (VS Code, Sublime Text, Vim, WebStorm, Atom, etc…)
 
+*WARNING, CONFIGURATION IS STILL UNDER CONSTRUCTION*
+You may want to turn off Prettier and ESLint in your editor for the time being
+
 -   EditorConfig — for consistency in settings like indentation line-endings
 -   ESLint — to show linting in your editor as you’re coding
 -   Prettier — for code formatting in your editor as you’re coding
