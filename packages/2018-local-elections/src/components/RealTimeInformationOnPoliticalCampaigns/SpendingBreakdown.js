@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { HorizontalBarChart, civicFormat } from '@hackoregon/component-library';
+import { HorizontalBarChart } from '@hackoregon/component-library';
+import { civicFormat } from '@hackoregon/component-library/dist/utils';
 
 const propTypes = {
   spending: PropTypes.array,

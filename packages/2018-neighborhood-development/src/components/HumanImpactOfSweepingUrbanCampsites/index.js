@@ -6,8 +6,9 @@ import {
   CivicStoryCard,
   LineChart,
   Collapsable,
-  civicFormat,
 } from '@hackoregon/component-library';
+
+import { civicFormat } from '@hackoregon/component-library/dist/utils';
 
 import { fetchHumanImpactOfSweepingUrbanCampsites } from '../../state/human-impact-of-sweeping-urban-campsites/actions';
 

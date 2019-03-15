@@ -3,8 +3,9 @@ import React from 'react';
 import {
   CivicStoryCard,
   HorizontalBarChart,
-  civicFormat,
 } from '@hackoregon/component-library';
+
+import { civicFormat } from '@hackoregon/component-library/dist/utils';
 
 const data = [
   {

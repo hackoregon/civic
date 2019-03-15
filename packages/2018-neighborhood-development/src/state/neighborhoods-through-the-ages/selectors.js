@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 import { compose } from 'redux';
-import { civicFormat, ungroupBy } from '@hackoregon/component-library';
+import { civicFormat, ungroupBy } from '@hackoregon/component-library/dist/utils';
 
 import { rootState } from '../selectors';
 

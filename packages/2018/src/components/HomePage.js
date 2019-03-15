@@ -11,8 +11,9 @@ import {
   PieChart,
   LineChart,
   HorizontalBarChart,
-  civicFormat,
 } from '@hackoregon/component-library';
+
+import { civicFormat } from '@hackoregon/component-library/dist/utils';
 
 import logo from '@hackoregon/component-library/assets/civic-logo-animated.svg';
 import smallLogo from '@hackoregon/component-library/assets/civic-logo-c.svg';

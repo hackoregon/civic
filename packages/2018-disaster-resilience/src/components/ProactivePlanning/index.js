@@ -6,8 +6,9 @@ import { css } from 'emotion';
 import {
   CivicStoryCard,
   Scatterplot,
-  civicFormat,
 } from '@hackoregon/component-library';
+
+import { civicFormat } from '@hackoregon/component-library/dist/utils';
 
 import { fetchProactivePlanning } from '../../state/proactive-planning/actions';
 import {

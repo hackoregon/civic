@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { civicFormat } from '@hackoregon/component-library';
+import { civicFormat } from '@hackoregon/component-library/dist/utils';
 
 import { rootState } from '../selectors';
 

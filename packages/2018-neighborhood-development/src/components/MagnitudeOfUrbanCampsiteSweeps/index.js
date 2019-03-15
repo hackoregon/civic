@@ -7,8 +7,9 @@ import {
   CivicStoryCard,
   BarChart,
   Collapsable,
-  civicFormat,
 } from '@hackoregon/component-library';
+
+import { civicFormat } from '@hackoregon/component-library/dist/utils';
 
 import { fetchUrbanCampsiteSweepsByWeek } from '../../state/magnitude-of-urban-campsite-sweeps/actions';
 

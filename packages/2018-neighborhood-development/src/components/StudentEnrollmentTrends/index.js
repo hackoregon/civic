@@ -8,8 +8,8 @@ import {
   Dropdown,
   StackedAreaChart,
   ungroupBy,
-  civicFormat,
 } from '@hackoregon/component-library';
+import { civicFormat } from '@hackoregon/component-library/dist/utils';
 import {
   fetchSchoolList,
   fetchSchoolData,

@@ -6,9 +6,9 @@ import { css } from 'emotion';
 import {
   CivicStoryCard,
   LineChart,
-  ungroupBy,
-  civicFormat,
 } from '@hackoregon/component-library';
+
+import { ungroupBy, civicFormat } from '@hackoregon/component-library/dist/utils';
 
 import { fetchServiceAndRidership } from '../../state/service-and-ridership/actions';
 import {
