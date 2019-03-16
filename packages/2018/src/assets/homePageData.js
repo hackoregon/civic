@@ -1,4 +1,4 @@
-import { ungroupBy } from '@hackoregon/component-library';
+import { ungroupBy } from '@hackoregon/component-library/dist/utils';
 import { disasterData } from './disasterData';
 import { housingData } from './housingData';
 import { transportationData } from './transportationData';

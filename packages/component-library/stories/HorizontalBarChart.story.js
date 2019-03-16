@@ -5,7 +5,8 @@ import { action } from '@storybook/addon-actions';
 import { withInfo } from '@storybook/addon-info';
 import { checkA11y } from '@storybook/addon-a11y';
 import { withKnobs, text, number, object, array } from '@storybook/addon-knobs';
-import { HorizontalBarChart, civicFormat } from '../src';
+import { HorizontalBarChart } from '../src';
+import { civicFormat } from '../src/utils';
 
 
 const displayName = HorizontalBarChart.displayName || 'HorizontalBarChart';
