@@ -1,6 +1,8 @@
 import '@hackoregon/component-library/assets/global.styles.css';
 import '@hackoregon/component-library/assets/vendor/leaflet.css';
 
+import PropTypes from 'prop-types';
+
 /* eslint-disable import/no-extraneous-dependencies */
 // This should probably be the core component, containing, nav etc
 import React from 'react';
@@ -40,7 +42,7 @@ App.defaultProps = {
 };
 
 App.propTypes = {
-  children: React.PropTypes.node,
+  children: PropTypes.node,
 };
 
 export default App;

@@ -1,6 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
 // This should probably be the core component, containing, nav etc
 
+import PropTypes from 'prop-types';
+
 import React from 'react';
 import { connect } from 'react-redux';
 // import { withRouter } from 'react-router-dom';
@@ -183,16 +185,16 @@ App.defaultProps = {
 };
 
 App.propTypes = {
-  neighborhoodData: React.PropTypes.object,
-  demographicData: React.PropTypes.object,
-  setOtherDemographic: React.PropTypes.func,
-  otherDemographic: React.PropTypes.object,
-  userIncome: React.PropTypes.number,
-  userUnitSize: React.PropTypes.object,
-  setUserIncome: React.PropTypes.func,
-  setUnitSize: React.PropTypes.func,
-  setNeighborhood: React.PropTypes.func,
-  fetchAllData: React.PropTypes.func,
+  neighborhoodData: PropTypes.object,
+  demographicData: PropTypes.object,
+  setOtherDemographic: PropTypes.func,
+  otherDemographic: PropTypes.object,
+  userIncome: PropTypes.number,
+  userUnitSize: PropTypes.object,
+  setUserIncome: PropTypes.func,
+  setUnitSize: PropTypes.func,
+  setNeighborhood: PropTypes.func,
+  fetchAllData: PropTypes.func,
 };
 
 const mapDispatch = dispatch => ({

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 import { Header, Footer, StoryCard } from '@hackoregon/component-library';
@@ -344,7 +345,7 @@ CrashData.defaultProps = {
 };
 
 CrashData.propTypes = {
-  children: React.PropTypes.node,
+  children: PropTypes.node,
 };
 
 export default CrashData;

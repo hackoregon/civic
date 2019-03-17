@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { LeafletMap } from '@hackoregon/component-library';
 import { GeoJSON, LayerGroup } from 'react-leaflet';
 import { MapPanel } from '../index';
+import PropTypes from 'prop-types';
 import { isEmpty } from 'ramda';
 import { setPanelValues } from '../../state';
 
@@ -90,7 +91,7 @@ TransportMap.defaultProps = {
 };
 
 TransportMap.propTypes = {
-  appData: React.PropTypes.object,
+  appData: PropTypes.object,
 };
 
 export default connect(

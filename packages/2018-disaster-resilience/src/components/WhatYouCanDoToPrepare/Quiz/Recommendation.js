@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 const Recommendation = ({ recommendation }) => (
   <h3 className="recommendation">{recommendation}</h3>
