@@ -41,7 +41,7 @@ class SandboxComponent extends React.Component {
   constructor(props) {
     super();
     this.state = {
-      drawerVisible: false,
+      drawerVisible: true,
     };
     this.updateSlide = this.updateSlide.bind(this);
     this.toggleDrawer = this.toggleDrawer.bind(this);

@@ -108,7 +108,6 @@ const Sandbox = ({
       </div>
       <div>
         <BaseMap
-          mapboxToken={mapboxToken}
           mapboxStyle={mapboxStyle}
           initialZoom={10.5}
           initialLatitude={45.5431}
@@ -129,25 +128,24 @@ const Sandbox = ({
 };
 
 Sandbox.propTypes = {
-  data: React.PropTypes.object,
-  defaultSlides: React.PropTypes.array,
+  data: React.PropTypes.object.isRequired,
+  defaultSlides: React.PropTypes.array.isRequired,
   drawerVisible: React.PropTypes.bool,
   fetchSlideDataByDate: React.PropTypes.func,
-  layerData: React.PropTypes.array,
+  layerData: React.PropTypes.array.isRequired,
   mapboxStyle: React.PropTypes.string,
-  mapboxToken: React.PropTypes.string,
   selectedFoundation: React.PropTypes.string,
   selectedPackage: React.PropTypes.string,
   selectedSlide: React.PropTypes.array,
-  slideData: React.PropTypes.array,
+  slideData: React.PropTypes.array.isRequired,
   styles: React.PropTypes.string,
-  toggleDrawer: React.PropTypes.func,
-  updateFoundation: React.PropTypes.func,
-  updatePackage: React.PropTypes.func,
-  updateSlide: React.PropTypes.func,
+  toggleDrawer: React.PropTypes.func.isRequired,
+  updateFoundation: React.PropTypes.func.isRequired,
+  updatePackage: React.PropTypes.func.isRequired,
+  updateSlide: React.PropTypes.func.isRequired,
   onFoundationClick: React.PropTypes.func,
-  defaultFoundation: React.PropTypes.object,
-  foundationData: React.PropTypes.object,
+  defaultFoundation: React.PropTypes.object.isRequired,
+  foundationData: React.PropTypes.object.isRequired,
 };
 
 export default Sandbox;
