@@ -218,7 +218,6 @@ class SandboxStory extends React.Component {
     // console.log(this.state);
     return this.state.hasFetched ? (
       <Sandbox
-        mapboxStyle={'mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg'}
         layerData={this.formatData(
           this.state.defaultFoundation,
           this.state.defaultSlides
