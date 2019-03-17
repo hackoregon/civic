@@ -63,6 +63,7 @@ const StackedAreaChart = ({
   const areas = lineData
     ? Object.keys(lineData).map((category, index) => (
         <VictoryArea
+          key={category}
           data={lineData[category].map(d => ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],
@@ -79,6 +80,7 @@ const StackedAreaChart = ({
   const dots = lineData
     ? Object.keys(lineData).map(category => (
         <VictoryScatter
+          key={category}
           data={lineData[category].map(d => ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],

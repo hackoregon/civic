@@ -60,6 +60,7 @@ const LineChart = ({
   const lines = lineData
     ? Object.keys(lineData).map((category, index) => (
         <VictoryLine
+          key={category}
           data={lineData[category].map(d => ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],
