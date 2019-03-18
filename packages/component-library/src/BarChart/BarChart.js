@@ -42,7 +42,7 @@ const BarChart = ({
       <VictoryChart
         padding={{ left: 90, right: 50, bottom: 50, top: 50 }}
         domainPadding={{ x: [40, 40], y: [0, 0] }}
-        animate={{ duration: 200 }}
+        animate={{ duration: 500 }}
         theme={CivicVictoryTheme.civic}
         domain={chartDomain}
       >

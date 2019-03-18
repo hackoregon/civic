@@ -68,12 +68,11 @@ const HorizontalBarChart = ({
       <VictoryChart
         height={dataHeight + additionalHeight}
         domain={domain}
-        domainPadding={{ x: 20, y: 11 }}
+        domainPadding={{ x: 11, y: 20 }}
         padding={padding}
         theme={CivicVictoryTheme.civic}
       >
         <VictoryAxis
-          dependentAxis
           style={{
             tickLabels: { fill: 'none' },
             ticks: { stroke: 'none' },
@@ -83,9 +82,11 @@ const HorizontalBarChart = ({
         />
         {!minimalist && (
           <VictoryAxis
+            dependentAxis
             orientation="top"
             tickFormat={dataValueFormatter}
             title="X Axis"
+            offsetY={padding.top}
           />
         )}
         {!minimalist && (
