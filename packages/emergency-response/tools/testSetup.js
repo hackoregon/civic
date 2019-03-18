@@ -16,7 +16,7 @@ const sinonChai = require('sinon-chai');
 const chaiEnzyme = require('chai-enzyme');
 const chaiAsPromised = require('chai-as-promised');
 const enzyme = require('enzyme');
-const Adapter = require('enzyme-adapter-react-15');
+const Adapter = require('enzyme-adapter-react-16');
 
 enzyme.configure({ adapter: new Adapter() });
 
