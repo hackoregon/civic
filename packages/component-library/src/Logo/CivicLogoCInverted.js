@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import isClient from "../utils/isClient";
+import logoCInverted from "../../assets/civic-logo-c-invert.svg";
 
 const styles = {
   height: "60px",
@@ -8,13 +9,7 @@ const styles = {
 };
 
 const CivicLogoCInverted = ({ alt }) =>
-  isClient && (
-    <img
-      style={styles}
-      src={require("../../assets/civic-logo-c-invert.svg")}
-      alt={alt}
-    />
-  );
+  isClient && <img style={styles} src={logoCInverted} alt={alt} />;
 
 CivicLogoCInverted.displayName = "Logo";
 CivicLogoCInverted.propTypes = {
