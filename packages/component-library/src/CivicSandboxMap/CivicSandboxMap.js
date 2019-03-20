@@ -118,7 +118,7 @@ const CivicSandboxMap = props => {
         stroked={layer.data.stroked}
         getFillColor={layer.data.getFillColor}
         filled={layer.data.filled}
-        onClick={onClick}
+        onClick={onClick || layer.data.onLayerClick}
         autoHighlight={layer.data.autoHighlight}
         highlightColor={layer.data.highlightColor}
         parameters={{ depthTest: false }}

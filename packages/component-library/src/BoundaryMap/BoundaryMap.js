@@ -33,7 +33,7 @@ const BoundaryMap = props => {
           stroked={true}
           getFillColor={getFillColor}
           filled={filled}
-          updateTriggers={{ getLineColor: getLineColor }}
+          updateTriggers={{ getLineColor: getLineColor, getFillColor: getFillColor }}
         />
       </DeckGL>
     </div>
