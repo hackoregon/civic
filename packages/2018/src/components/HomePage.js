@@ -482,7 +482,7 @@ class HomePage extends Component {
                 autoplay
                 autoplayInterval={10000}
                 pauseOnHover={false}
-                transitionMode={'fade'}
+                transitionMode="fade"
                 wrapAround
                 withoutControls
                 cellSpacing={20}
@@ -508,7 +508,7 @@ class HomePage extends Component {
                     <div className={chartWrapper}>
                       <img
                         src={transportationMap}
-                        alt={'sample map'}
+                        alt="sample map"
                         className={cardImage}
                       />
                     </div>
@@ -520,7 +520,7 @@ class HomePage extends Component {
                 autoplay
                 autoplayInterval={5000}
                 pauseOnHover={false}
-                transitionMode={'fade'}
+                transitionMode="fade"
                 wrapAround
                 withoutControls
                 cellSpacing={20}
@@ -574,7 +574,7 @@ class HomePage extends Component {
                 autoplay
                 autoplayInterval={5000}
                 pauseOnHover={false}
-                transitionMode={'fade'}
+                transitionMode="fade"
                 wrapAround
                 withoutControls
                 cellSpacing={20}
@@ -615,7 +615,7 @@ class HomePage extends Component {
                 autoplay
                 autoplayInterval={10000}
                 pauseOnHover={false}
-                transitionMode={'fade'}
+                transitionMode="fade"
                 wrapAround
                 withoutControls
                 cellSpacing={20}
@@ -644,7 +644,7 @@ class HomePage extends Component {
                     <div className={chartWrapper}>
                       <img
                         src={evictionsMap}
-                        alt={'sample map'}
+                        alt="sample map"
                         className={cardImage}
                       />
                     </div>
