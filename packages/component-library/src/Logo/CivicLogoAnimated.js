@@ -7,18 +7,18 @@ const styles = {
   width: "auto"
 };
 
-const CivicLogoInverted = ({ alt }) =>
+const CivicLogoAnimated = ({ alt }) =>
   isClient && (
     <img
       style={styles}
-      src={require("../../assets/civic-logo-invert.svg")}
+      src={require("../../assets/civic-logo-animated.svg")}
       alt={alt}
     />
   );
 
-CivicLogoInverted.displayName = "Logo";
-CivicLogoInverted.propTypes = {
+CivicLogoAnimated.displayName = "Logo";
+CivicLogoAnimated.propTypes = {
   alt: PropTypes.string
 };
 
-export default CivicLogoInverted;
+export default CivicLogoAnimated;
