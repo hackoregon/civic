@@ -633,7 +633,7 @@ class HomePage extends Component {
                         sortOrder="sortOrder"
                         data={electionsData}
                         dataValueFormatter={civicFormat.percentage}
-                        domain={{ x: [0, 0.6], y: [1, 11] }}
+                        domain={{ x: [1, 11], y: [0, 0.6] }}
                       />
                     </div>
                   </CivicCardStack>

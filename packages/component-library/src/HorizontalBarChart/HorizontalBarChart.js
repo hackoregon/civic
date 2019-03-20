@@ -166,9 +166,7 @@ const HorizontalBarChart = ({
 };
 
 HorizontalBarChart.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({ x: PropTypes.number, y: PropTypes.number })
-  ),
+  data: PropTypes.arrayOf(PropTypes.object),
   sortOrder: PropTypes.string,
   dataValue: PropTypes.string,
   dataLabel: PropTypes.string,

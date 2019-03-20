@@ -89,7 +89,7 @@ export class OutraisingYourOpponent extends React.Component {
           sortOrder="sortOrder"
           data={data}
           dataValueFormatter={civicFormat.percentage}
-          domain={{ x: [0, 0.6], y: [1, 11] }}
+          domain={{ x: [1, 11], y: [0, 0.6] }}
         />
       </CivicStoryCard>
     );

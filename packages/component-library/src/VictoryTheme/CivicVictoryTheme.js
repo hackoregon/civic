@@ -43,8 +43,6 @@ const baseProps = {
   width: 650,
   height: 350,
   padding: 50,
-  domainPadding: 20,
-  animate: 100,
 };
 const tooltipProps = {
   x: 325,
