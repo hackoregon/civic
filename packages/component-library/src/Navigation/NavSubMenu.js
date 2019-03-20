@@ -22,7 +22,7 @@ const nestedMenuClass = css`
     color: rgba(255, 255, 255, 0.65);
     flex: 1;
     display: block;
-    font-family: 'Rubik', sans-serif;
+    font-family: "Rubik", sans-serif;
     font-size: 1.25rem;
     border: none;
     text-transform: uppercase;
@@ -38,7 +38,7 @@ const nestedMenuClass = css`
 
   @media (min-width: 641px) {
     position: absolute;
-    z-index: 999;
+    z-index: 1500;
     margin-top: 0;
     width: 200px;
     background-color: #fff;
@@ -46,7 +46,7 @@ const nestedMenuClass = css`
     transition: all 0.5s cubic-bezier(0.42, 0, 0.14, 1);
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       bottom: 100%;
       left: 50%;
@@ -63,7 +63,7 @@ const nestedMenuClass = css`
       font-size: 16px;
       flex: 1;
       display: block;
-      font-family: 'Rubik', sans-serif;
+      font-family: "Rubik", sans-serif;
       text-transform: uppercase;
       text-decoration: none;
       border: none;
@@ -85,7 +85,7 @@ const NavSubMenu = ({ items, isVisible }) => (
   </div>
 );
 
-NavSubMenu.displayName = 'NavSubMenu';
+NavSubMenu.displayName = "NavSubMenu";
 NavSubMenu.propTypes = {
   items: PropTypes.arrayOf(PropTypes.shape({})),
   isVisible: PropTypes.bool,

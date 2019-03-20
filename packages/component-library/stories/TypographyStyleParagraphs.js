@@ -1,18 +1,11 @@
-import React from 'react';
-import { storybookStyles } from './storyStyles';
-
-const fontBlockStyle = {
-  marginTop: '40px',
-  marginBottom: '45px',
-};
+import React from "react";
+import { storybookStyles } from "./storyStyles";
 
 const TypographyStyleParagraphs = () => (
   <div style={storybookStyles.main}>
     <h2>Paragraphs:</h2>
-    <h3>
-      Large Paragraph (NOTE: Where is the global style for large paragraph?)
-    </h3>
-    <p>
+    <h3>Large Paragraph</h3>
+    <p style={storybookStyles.largeParagraph}>
       Large Paragraph can be used as an intro paragraph or callout within
       content. Merriweather regular 16pt. Vivamus vitae odio tempor neque
       iaculis iaculis. Vestibulum ante ipsum primis in faucibus orci luctus et
@@ -55,17 +48,17 @@ const TypographyStyleParagraphs = () => (
       <a>Read More</a>
     </h4>
     <h3>Within Visualizations, Tiny Text, or Numbers</h3>
-    <p>
+    <p style={storybookStyles.dataText}>
       Use Roboto Condensed within visualizations and anywhere else with tiny
       text or numbers. Use Roboto Condensed Bold for headings and Roboto
       Condensed Regular everywhere else.
     </p>
-    <p>
+    <p style={storybookStyles.dataText}>
       It is condensed (allowing more content in smaller areas) and has good
       letter spacing and form hints (really legible down to 11px on digital
       devices).
     </p>
-    <p>
+    <p style={storybookStyles.dataText}>
       If a visualization displays larger numbers or text, feel free to use the
       heading typography, Rubik instead of Roboto Condensed.
     </p>

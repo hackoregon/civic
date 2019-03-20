@@ -1,5 +1,5 @@
-import React from 'react';
-import { storybookStyles } from './storyStyles.js';
+import React from "react";
+import { storybookStyles } from "./storyStyles";
 
 const TypographyStyleHeadings = () => (
   <div style={storybookStyles.main}>

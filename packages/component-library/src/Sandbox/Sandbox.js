@@ -112,7 +112,6 @@ const Sandbox = ({
       </div>
       <div>
         <BaseMap
-          mapboxToken={mapboxToken}
           mapboxStyle={mapboxStyle}
           initialZoom={10.5}
           initialLatitude={45.5431}
@@ -133,25 +132,24 @@ const Sandbox = ({
 };
 
 Sandbox.propTypes = {
-  data: PropTypes.object,
-  defaultSlides: PropTypes.array,
-  drawerVisible: PropTypes.bool,
-  fetchSlideDataByDate: PropTypes.func,
-  layerData: PropTypes.array,
-  mapboxStyle: PropTypes.string,
-  mapboxToken: PropTypes.string,
-  selectedFoundation: PropTypes.string,
-  selectedPackage: PropTypes.string,
-  selectedSlide: PropTypes.array,
-  slideData: PropTypes.array,
-  styles: PropTypes.string,
-  toggleDrawer: PropTypes.func,
-  updateFoundation: PropTypes.func,
-  updatePackage: PropTypes.func,
-  updateSlide: PropTypes.func,
-  onFoundationClick: PropTypes.func,
-  defaultFoundation: PropTypes.object,
-  foundationData: PropTypes.object,
+  data: React.PropTypes.object.isRequired,
+  defaultSlides: React.PropTypes.array.isRequired,
+  drawerVisible: React.PropTypes.bool,
+  fetchSlideDataByDate: React.PropTypes.func,
+  layerData: React.PropTypes.array.isRequired,
+  mapboxStyle: React.PropTypes.string,
+  selectedFoundation: React.PropTypes.string,
+  selectedPackage: React.PropTypes.string,
+  selectedSlide: React.PropTypes.array,
+  slideData: React.PropTypes.array.isRequired,
+  styles: React.PropTypes.string,
+  toggleDrawer: React.PropTypes.func.isRequired,
+  updateFoundation: React.PropTypes.func.isRequired,
+  updatePackage: React.PropTypes.func.isRequired,
+  updateSlide: React.PropTypes.func.isRequired,
+  onFoundationClick: React.PropTypes.func,
+  defaultFoundation: React.PropTypes.object.isRequired,
+  foundationData: React.PropTypes.object.isRequired,
 };
 
 export default Sandbox;

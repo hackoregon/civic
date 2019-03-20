@@ -10,20 +10,20 @@ Prerequisites you'll need in your development environment to use and contribute 
 
 1. **bash**
 
-   You will need a Unix shell (bash). For Mac, this can be Terminal.app. For Windows, you'll need to use [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) (see issue #[53](https://github.com/hackoregon/civic/issues/53)).
+    You will need a Unix shell (bash). For Mac, this can be Terminal.app. For Windows, you'll need to use [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) (see issue #[53](https://github.com/hackoregon/civic/issues/53)).
 
 2. **nvm and yarn**
 
-   You will need the following tools installed in your Unix shell:
+    You will need the following tools installed in your Unix shell:
 
-   - [nvm](https://github.com/creationix/nvm)
-   - [yarn](https://yarnpkg.com/) > 1.0
+    - [nvm](https://github.com/creationix/nvm)
+    - [yarn](https://yarnpkg.com/) > 1.0
 
-   These tools make sure every contributor has identical dependency versions, include node and node packages.
+    These tools make sure every contributor has identical dependency versions, include node and node packages.
 
 3. **git**
 
-   You will need to have Git installed and a GitHub account with [SSH keys setup for remote access](https://help.github.com/articles/connecting-to-github-with-ssh/).
+    You will need to have Git installed and a GitHub account with [SSH keys setup for remote access](https://help.github.com/articles/connecting-to-github-with-ssh/).
 
 ### Install and build
 
@@ -43,6 +43,17 @@ $ yarn install
 # This will build all packages. Since some packages are used internally, they need to be built before the dependent packages are worked on. This operation takes while (~10 minutes), but only needs to be run at the project root once.
 $ yarn build
 ```
+
+## Setting up your text editor
+
+In order to be the most productive, you’ll want to install some extensions or plug-ins for your text editor. These tools are already installed and configured project wide, so the only installation you’ll need is inside your text editor (don’t `npm install` or `yarn add` them). There are plug-ins or extensions available for the most commonly used editors (VS Code, Sublime Text, Vim, WebStorm, Atom, etc…)
+
+*WARNING, CONFIGURATION IS STILL UNDER CONSTRUCTION*
+You may want to turn off Prettier and ESLint in your editor for the time being
+
+-   EditorConfig — for consistency in settings like indentation line-endings
+-   ESLint — to show linting in your editor as you’re coding
+-   Prettier — for code formatting in your editor as you’re coding
 
 ## Working on a single package other than the component library
 
@@ -90,29 +101,29 @@ There are three types of packages right now:
 
 Every package has its own README with further details on what the package is for and how it works. We'll be adding some new packages for the 2019 project season.
 
-- Year Packages
-  - [2018](packages/2018/README.md)
-  - [2017](packages/2017/README.md)
-- Project Packages
-  - [2018-neighborhood-development](packages/2018-neighborhood-development/README.md)
-  - [2018-disaster-resilience](packages/2018-disaster-resilience/README.md)
-  - [2018-transportation-systems](packages/2018-transportation-systems/README.md)
-  - [2018-housing-affordability](packages/2018-housing-affordability/README.md)
-  - [2018-local-elections](packages/2018-local-elections/README.md)
-  - [2018-example-farmers-markets](packages/2018-example-farmers-markets/README.md)
-  - [budget](packages/budget/README.md)
-  - [emergency-response](packages/emergency-response/README.md)
-  - [homelessness](packages/homelessness/README.md)
-  - [housing](packages/housing/README.md)
-  - [transportation](packages/transportation/README.md)
-- Utilities
+-   Year Packages
+    -   [2018](packages/2018/README.md)
+    -   [2017](packages/2017/README.md)
+-   Project Packages
+    -   [2018-neighborhood-development](packages/2018-neighborhood-development/README.md)
+    -   [2018-disaster-resilience](packages/2018-disaster-resilience/README.md)
+    -   [2018-transportation-systems](packages/2018-transportation-systems/README.md)
+    -   [2018-housing-affordability](packages/2018-housing-affordability/README.md)
+    -   [2018-local-elections](packages/2018-local-elections/README.md)
+    -   [2018-example-farmers-markets](packages/2018-example-farmers-markets/README.md)
+    -   [budget](packages/budget/README.md)
+    -   [emergency-response](packages/emergency-response/README.md)
+    -   [homelessness](packages/homelessness/README.md)
+    -   [housing](packages/housing/README.md)
+    -   [transportation](packages/transportation/README.md)
+-   Utilities
 
-  - [civic-sandbox](packages/civic-sandbox/README.md)
-  - [civic-babel-presets](packages/civic-babel-presets/README.md)
-  - [component-library](packages/component-library/README.md)
-  - [dev-server](packages/dev-server/README.md)
-  - [mock-wrapper](packages/mock-wrapper/README.md)
-  - [webpack-common](packages/webpack-common/README.md)
+    -   [civic-sandbox](packages/civic-sandbox/README.md)
+    -   [civic-babel-presets](packages/civic-babel-presets/README.md)
+    -   [component-library](packages/component-library/README.md)
+    -   [dev-server](packages/dev-server/README.md)
+    -   [mock-wrapper](packages/mock-wrapper/README.md)
+    -   [webpack-common](packages/webpack-common/README.md)
 
 ## Testing across all packages
 

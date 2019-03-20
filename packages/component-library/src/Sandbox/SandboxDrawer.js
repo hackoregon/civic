@@ -25,11 +25,11 @@ const SandboxDrawer = ({
   slideData,
   fetchSlideByDate,
   foundationData,
-  defaultFoundation,
+  defaultFoundation
 }) => {
   const options = data.packages[selectedPackage].slides.map(slide => ({
     value: slide,
-    label: data.slides[slide].name,
+    label: data.slides[slide].name
   }));
   return (
     <div
@@ -51,9 +51,9 @@ const SandboxDrawer = ({
           cursor: pointer;
         `)}
         >
-          <span>data overlays</span>{' '}
-          <span className={css('font-size: 1.2rem; color: rgb(237,73,91);')}>
-            {drawerVisible ? '<' : '>'}
+          <span>data overlays</span>{" "}
+          <span className={css("font-size: 1.2rem; color: rgb(237,73,91);")}>
+            {drawerVisible ? "<" : ">"}
           </span>
         </div>
       </div>
@@ -75,9 +75,9 @@ const SandboxDrawer = ({
         }
       `)}
         >
-          <div className={css('position: relative; z-index: 5000;')}>
+          <div className={css("position: relative; z-index: 5000;")}>
             <Dropdown
-              value={selectedSlide.join(',')}
+              value={selectedSlide.join(",")}
               options={options}
               onChange={onChange}
               multi
@@ -93,7 +93,7 @@ const SandboxDrawer = ({
               font-size: .75rem;
               color: #333;
               position: relative;
-              z-index: 5
+              z-index: 10
               `)}
               >
                 Date info driven by dropdown
@@ -115,7 +115,7 @@ const SandboxDrawer = ({
               })[slide.name];
             }
             return (
-              <div>
+              <div key={"slide-selector" + index}>
                 <div className={title}>{slide.name}</div>
                 <div
                   className={css(`

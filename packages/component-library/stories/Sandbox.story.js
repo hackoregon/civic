@@ -5,14 +5,10 @@ import { css } from 'emotion';
 import { storiesOf } from '@storybook/react';
 import 'react-select/dist/react-select.css';
 import { isArray, findIndex } from 'lodash';
-import { withInfo } from '@storybook/addon-info';
-import { withKnobs, number, select, boolean } from '@storybook/addon-knobs';
 import { Sandbox } from '../src';
 
 import { foundations, slides } from '../src/Sandbox/constants';
 
-const mapboxToken =
-  'pk.eyJ1IjoidGhlbWVuZG96YWxpbmUiLCJhIjoiY2o1aXdoem1vMWtpNDJ3bnpqaGF1bnlhNSJ9.sjTrNKLW9daDBIGvP3_W0w';
 class SandboxStory extends React.Component {
   constructor() {
     super();
@@ -23,12 +19,12 @@ class SandboxStory extends React.Component {
         slides: {},
       },
       hasFetched: false,
-      selectedPackage: 'Evictions',
+      selectedPackage: 'Sweeps',
       selectedFoundation: '',
       selectedSlide: [],
       defaultFoundation: {},
       defaultSlides: [],
-      drawerVisible: false,
+      drawerVisible: true,
       slideData: [],
       foundationData: {},
     };
@@ -231,11 +227,9 @@ class SandboxStory extends React.Component {
     bottom: 0;
     width: 100%;
     `);
-    console.log(this.state);
+    // console.log(this.state);
     return this.state.hasFetched ? (
       <Sandbox
-        mapboxStyle="mapbox://styles/themendozaline/cj6y6f5m006ar2sobpimm7ay7"
-        mapboxToken={mapboxToken}
         layerData={this.formatData(
           this.state.defaultFoundation,
           this.state.defaultSlides
@@ -253,6 +247,8 @@ class SandboxStory extends React.Component {
         drawerVisible={this.state.drawerVisible}
         slideData={this.state.slideData}
         defaultSlides={this.state.defaultSlides}
+        defaultFoundation={this.state.defaultFoundation}
+        foundationData={this.state.foundationData}
       />
     ) : null;
   }
