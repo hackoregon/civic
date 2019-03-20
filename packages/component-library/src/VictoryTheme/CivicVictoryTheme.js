@@ -184,7 +184,12 @@ export default {
     },
     baseProps
   ),
-  chart: baseProps,
+  chart: assign(
+    {
+      animate: 100,
+    },
+    baseProps
+  ),
   errorbar: assign(
     {
       style: {

@@ -1,19 +1,10 @@
 import React from 'react';
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import { withInfo } from '@storybook/addon-info';
 import { checkA11y } from '@storybook/addon-a11y';
-import { withKnobs, text, number, object, array } from '@storybook/addon-knobs';
-import { HorizontalBarChart } from '../src';
-import { civicFormat } from '../src/utils';
+import { withKnobs, text, object } from '@storybook/addon-knobs';
+import { HorizontalBarChart, civicFormat } from '../src';
 
-
-const displayName = HorizontalBarChart.displayName || 'HorizontalBarChart';
-const title = 'Simple usage';
-const description = `
-  This is some basic usage with the button with providing a label to show the text.
-  Clicking should trigger an action.`;
 const sampleData = [
   { sortOrder: 1, population: 2000, label: 'Labrador Retriever' },
   { sortOrder: 2, population: 8000, label: 'Standard Poodle' },

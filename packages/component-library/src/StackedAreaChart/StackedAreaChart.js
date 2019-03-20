@@ -92,7 +92,6 @@ const StackedAreaChart = ({
             )}`,
             size: size ? d[size.key] || size.value : 3,
           }))}
-          animate={{ onEnter: { duration: 500 } }}
           x="dataKey"
           y="dataValue"
           standalone={false}
@@ -129,14 +128,12 @@ const StackedAreaChart = ({
         theme={CivicVictoryTheme.civic}
       >
         <VictoryAxis
-          animate={{ onEnter: { duration: 500 } }}
           style={{ grid: { stroke: 'none' } }}
           tickFormat={x => xNumberFormatter(x)}
           title="X Axis"
         />
         <VictoryAxis
           dependentAxis
-          animate={{ onEnter: { duration: 500 } }}
           tickFormat={y => yNumberFormatter(y)}
           title="Y Axis"
         />

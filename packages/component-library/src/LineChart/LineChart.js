@@ -89,14 +89,12 @@ const LineChart = ({
         theme={CivicVictoryTheme.civic}
       >
         <VictoryAxis
-          animate={{ onEnter: { duration: 500 } }}
           style={{ grid: { stroke: 'none' } }}
           tickFormat={x => xNumberFormatter(x)}
           title="X Axis"
         />
         <VictoryAxis
           dependentAxis
-          animate={{ onEnter: { duration: 500 } }}
           tickFormat={y => yNumberFormatter(y)}
           title="Y Axis"
         />
@@ -124,7 +122,6 @@ const LineChart = ({
         </VictoryPortal>
         {lines}
         <VictoryScatter
-          animate={{ onEnter: { duration: 500 } }}
           //        categories={{ x: categoryData }}
           data={data.map(d => ({
             dataKey: d[dataKey],
