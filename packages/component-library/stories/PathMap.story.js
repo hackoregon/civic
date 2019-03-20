@@ -7,7 +7,7 @@ import { checkA11y } from '@storybook/addon-a11y';
 import { BaseMap } from '../src';
 import { PathMap } from '../src';
 import { MapTooltip } from '../src';
-import { LoadData } from '../src';
+import { DemoJSONLoader } from '../src';
 import * as d3 from 'd3';
 
 
@@ -43,10 +43,10 @@ const widthScaleOptions = {
   step: 0.5,
 };
 
-const mapData = ['https://service.civicpdx.org/transportation-systems/sandbox/slides/routechange/?format=json'];
+const mapData = ['https://service.civicpdx.org/transportation-systems/sandbox/slides/routechange/'];
 
 const demoMap = () => (
-  <LoadData urls={mapData}>
+  <DemoJSONLoader urls={mapData}>
     {data => {
       const mapboxStyle = selectV2(
         'Mapbox Style',
@@ -98,11 +98,11 @@ const demoMap = () => (
         </BaseMap>
       );
     }}
-  </LoadData>
+  </DemoJSONLoader>
 );
 
 const tooltipMap = () => (
- <LoadData urls={mapData}>
+ <DemoJSONLoader urls={mapData}>
     {data => {
       const mapboxStyle = selectV2(
         'Mapbox Style',
@@ -159,7 +159,7 @@ const tooltipMap = () => (
         </BaseMap>
       );
     }}
-  </LoadData>
+  </DemoJSONLoader>
 );
 
 export default () =>

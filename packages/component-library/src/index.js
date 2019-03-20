@@ -65,4 +65,4 @@ export { default as ChartTitle } from './ChartTitle/ChartTitle';
 export { default as ChartContainer } from './ChartContainer/ChartContainer';
 export { default as HeatMap } from './HeatMap/HeatMap';
 export { default as CivicCardStack } from './CivicCardStack/CivicCardStack';
-export { default as LoadData } from './LoadData/LoadData';
+export { default as DemoJSONLoader } from './DemoJSONLoader/DemoJSONLoader';

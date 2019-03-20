@@ -1,13 +1,13 @@
 import React from 'react';
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from '@storybook/react';
-import { withKnobs, number, selectV2, boolean } from '@storybook/addon-knobs';
+import { withKnobs, number, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { checkA11y } from '@storybook/addon-a11y';
 import { BaseMap } from '../src';
 import { ScatterPlotMap } from '../src';
 import { MapTooltip } from '../src';
-import { LoadData } from '../src';
+import { DemoJSONLoader } from '../src';
 
 const displayName = ScatterPlotMap.displayName || 'ScatterPlotMap';
 
@@ -43,7 +43,7 @@ const highlightColor = [255, 165, 0, 155];
 const mapData = ["https://service.civicpdx.org/neighborhood-development/sandbox/slides/bikecounts/"];
 
 const demoMap = () => (
-  <LoadData urls={mapData}>
+  <DemoJSONLoader urls={mapData}>
     {data => {
       const opacity = number('Opacity:', 0.1, opacityOptions);
       const radiusScale = number('Radius Scale:', 1, radiusScaleOptions);
@@ -67,11 +67,11 @@ const demoMap = () => (
         </BaseMap>
       );
     }}
-  </LoadData>
+  </DemoJSONLoader>
 );
 
 const tooltipMap = () => (
-  <LoadData urls={mapData}>
+  <DemoJSONLoader urls={mapData}>
     {data => {
       const opacity = number('Opacity:', 0.1, opacityOptions);
       const radiusScale = number('Radius Scale:', 1, radiusScaleOptions);
@@ -102,7 +102,7 @@ const tooltipMap = () => (
         </BaseMap>
       );
     }}
-  </LoadData>
+  </DemoJSONLoader>
 );
 
 export default () =>

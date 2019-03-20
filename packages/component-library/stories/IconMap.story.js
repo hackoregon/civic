@@ -7,7 +7,7 @@ import { checkA11y } from '@storybook/addon-a11y';
 import { BaseMap } from '../src';
 import { IconMap } from '../src';
 import { MapTooltip } from '../src';
-import { LoadData } from '../src';
+import { DemoJSONLoader } from '../src';
 
 const displayName = IconMap.displayName || 'IconMap';
 
@@ -100,10 +100,10 @@ const poiGetIconColor = f =>
     ? [30, 98, 189, 255]
     : [0, 0, 0, 255];
 
-const mapData = ['https://service.civicpdx.org/disaster-resilience/sandbox/slides/poi/?format=json'];
+const mapData = ['https://service.civicpdx.org/disaster-resilience/sandbox/slides/poi/'];
 
 const demoMap = () => (
-  <LoadData urls={mapData}>
+  <DemoJSONLoader urls={mapData}>
     {data => {
       const opacity = number('Opacity:', 1, opacityOptions);
       const iconSize = number('Icon Size:', 10, iconSizeOptions);
@@ -125,11 +125,11 @@ const demoMap = () => (
         </BaseMap>
       );
     }}
-  </LoadData>
+  </DemoJSONLoader>
 );
 
 const tooltipMap = () => (
-  <LoadData urls={mapData}>
+  <DemoJSONLoader urls={mapData}>
     {data => {
       const opacity = number('Opacity:', 1, opacityOptions);
       const iconSize = number('Icon Size:', 10, iconSizeOptions);
@@ -158,7 +158,7 @@ const tooltipMap = () => (
         </BaseMap>
       );
     }}
-  </LoadData>
+  </DemoJSONLoader>
 );
 
 export default () =>

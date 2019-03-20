@@ -7,16 +7,16 @@ import { action } from '@storybook/addon-actions';
 import { checkA11y } from '@storybook/addon-a11y';
 import { BaseMap } from '../src';
 import { CivicSandboxMap } from '../src';
-import { LoadData } from '../src';
+import { DemoJSONLoader } from '../src';
 
 const displayName = CivicSandboxMap.displayName || 'CivicSandboxMap';
 
 const dataURLs = [
-  'https://service.civicpdx.org/neighborhood-development/sandbox/foundations/over65/?format=json',
-  'https://service.civicpdx.org/neighborhood-development/sandbox/foundations/under18/?format=json',
-  'https://service.civicpdx.org/neighborhood-development/sandbox/slides/communitygardens/?format=json',
-  'https://service.civicpdx.org/neighborhood-development/sandbox/slides/bikelanes/?format=json',
-  'https://service.civicpdx.org/neighborhood-development/sandbox/slides/retailgrocers/?format=json',
+  'https://service.civicpdx.org/neighborhood-development/sandbox/foundations/over65/',
+  'https://service.civicpdx.org/neighborhood-development/sandbox/foundations/under18/',
+  'https://service.civicpdx.org/neighborhood-development/sandbox/slides/communitygardens/',
+  'https://service.civicpdx.org/neighborhood-development/sandbox/slides/bikelanes/',
+  'https://service.civicpdx.org/neighborhood-development/sandbox/slides/retailgrocers/',
 ];
 
 export default () =>
@@ -24,7 +24,7 @@ export default () =>
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .add('Simple usage', () => (
-      <LoadData urls={dataURLs}>
+      <DemoJSONLoader urls={dataURLs}>
         {data => {
           if (data === null) { return null }
 
@@ -254,5 +254,5 @@ export default () =>
             </div>
           );
         }}
-      </LoadData>
+      </DemoJSONLoader>
     ));

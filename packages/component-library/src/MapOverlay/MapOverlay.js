@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import DeckGL, { GeoJsonLayer } from 'deck.gl';
 import { css } from 'emotion';
@@ -6,13 +6,6 @@ import { css } from 'emotion';
 const crosshair = css`
   cursor: crosshair;
 `;
-
-const mapWrapper = css`
-  margin: auto;
-  max-width: 900px;
-`;
-
-const elevationScale = { min: 1, max: 50 };
 
 const MapOverlay = props => {
   const {
@@ -36,6 +29,9 @@ const MapOverlay = props => {
     wireframe,
     x,
     y,
+    getElevation,
+    getFillColor,
+    getLineColor
   } = props;
 
   const tooltip = React.Children.map(children, child => {
@@ -47,10 +43,6 @@ const MapOverlay = props => {
   });
 
   const tooltipRender = tooltipInfo ? tooltip : null;
-
-  const colorScale = r => [r * 255, 140, 200 * (1 - r)];
-
-  // const DATA_URL = 'https://raw.githubusercontent.com/uber-common/deck.gl-data/master/examples/geojson/vancouver-blocks.json'; // eslint-disable-line
 
   const LIGHT_SETTINGS = {
     lightsPosition: [-125, 50.5, 5000, -122.8, 48.5, 8000],
@@ -75,9 +67,9 @@ const MapOverlay = props => {
     onClick: onLayerClick,
     pickable: true,
     stroked: false,
-    getElevation: f => Math.sqrt(f.properties.Shape_Length) * elevation,
-    getFillColor: f => colorScale(f.properties.Shape_Length),
-    getLineColor: f => [255, 255, 255],
+    getElevation: getElevation,
+    getFillColor: getFillColor,
+    getLineColor: getLineColor,
   });
 
   return (
@@ -95,10 +87,6 @@ MapOverlay.propTypes = {
   elevation: PropTypes.number,
   filled: PropTypes.bool,
   extruded: PropTypes.bool,
-};
-
-MapOverlay.defaultProps = {
-  mapboxStyle: 'mapbox://styles/themendozaline/cjg6296ub04ot2sqv9izku3qq',
 };
 
 export default MapOverlay;

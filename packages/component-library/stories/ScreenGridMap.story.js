@@ -5,7 +5,7 @@ import { withKnobs, number, selectV2 } from '@storybook/addon-knobs';
 import { checkA11y } from '@storybook/addon-a11y';
 import { BaseMap } from '../src';
 import { ScreenGridMap } from '../src';
-import { LoadData } from '../src';
+import { DemoJSONLoader } from '../src';
 
 const displayName = ScreenGridMap.displayName || 'ScreenGridMap';
 
@@ -14,7 +14,7 @@ export default () =>
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .add('Simple usage', () => (
-      <LoadData urls={["https://opendata.arcgis.com/datasets/a990260e73de4c4e8c7e2c47fe172835_50.geojson"]}>
+      <DemoJSONLoader urls={["http://service.civicpdx.org/transportation-systems/sandbox/slides/crashes/"]}>
         {data => {
           if (data === null) { return null }
 
@@ -56,7 +56,7 @@ export default () =>
           return (
             <BaseMap>
               <ScreenGridMap
-                data={data.features}
+                data={data.slide_data.features}
                 getPosition={f => f.geometry.coordinates}
                 opacity={opacity}
                 colorRange={colorSchemeArray}
@@ -65,5 +65,5 @@ export default () =>
             </BaseMap>
           );
         }}
-      </LoadData>
+      </DemoJSONLoader>
     ));
