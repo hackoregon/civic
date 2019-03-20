@@ -7,12 +7,8 @@ import { BaseMap } from '../src';
 const optionsStyle = {
   'Hack Oregon Light': 'mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg',
   'Hack Oregon Dark': 'mapbox://styles/hackoregon/cjie02elo1vyw2rohd24kbtbd',
-  Scenic: 'mapbox://styles/themendozaline/cj8rrlv4tbtgs2rqnyhckuqva',
-  'Navigation Guidance Night':
-    'mapbox://styles/themendozaline/cj6y6f5m006ar2sobpimm7ay7',
-  'Lè Shine': 'mapbox://styles/themendozaline/cjg6296ub04ot2sqv9izku3qq',
-  'North Star': 'mapbox://styles/themendozaline/cj5oyewyy0fg22spetiv0hap0',
-  Odyssey: 'mapbox://styles/themendozaline/cjgq6rklb000d2so1b8myaait',
+  'Navigation Guidance Night v2': 'mapbox://styles/mapbox/navigation-guidance-night-v2',
+  'Dark v9': 'mapbox://styles/mapbox/dark-v9',
 };
 
 const demoMap = () => {

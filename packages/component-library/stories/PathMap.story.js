@@ -7,170 +7,160 @@ import { checkA11y } from '@storybook/addon-a11y';
 import { BaseMap } from '../src';
 import { PathMap } from '../src';
 import { MapTooltip } from '../src';
-import data from '../src/PathMap/data.json';
+import { DemoJSONLoader } from '../src';
+import * as d3 from 'd3';
 
 const displayName = PathMap.displayName || 'PathMap';
 
-const mapboxToken =
-  'pk.eyJ1IjoidGhlbWVuZG96YWxpbmUiLCJhIjoiY2o1aXdoem1vMWtpNDJ3bnpqaGF1bnlhNSJ9.sjTrNKLW9daDBIGvP3_W0w';
 
-const demoMap = () => {
-  const mapStylesOptions = {
-    'Hack Oregon Light': 'mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg',
-    'Hack Oregon Dark': 'mapbox://styles/hackoregon/cjie02elo1vyw2rohd24kbtbd',
-    Scenic: 'mapbox://styles/themendozaline/cj8rrlv4tbtgs2rqnyhckuqva',
-    'Navigation Guidance Night':
-      'mapbox://styles/themendozaline/cj6y6f5m006ar2sobpimm7ay7',
-    'Lè Shine': 'mapbox://styles/themendozaline/cjg6296ub04ot2sqv9izku3qq',
-    'North Star': 'mapbox://styles/themendozaline/cj5oyewyy0fg22spetiv0hap0',
-    Odyssey: 'mapbox://styles/themendozaline/cjgq6rklb000d2so1b8myaait',
-  };
-  const mapboxStyle = select(
-    'Mapbox Style',
-    mapStylesOptions,
-    mapStylesOptions['Navigation Guidance Night']
-  );
-
-  const colorSchemeOptions = {
-    'Blue Green':
-      '[[237,248,251],[178,226,226],[102,194,164],[44,162,95],[0,109,44]]',
-    'Red Purple':
-      '[[254,235,226],[251,180,185],[247,104,161],[197,27,138],[122,1,119]]',
-    'Purple Blue':
-      '[[241,238,246],[189,201,225],[116,169,207],[43,140,190],[4,90,141]]',
-    'Yellow Orange Red':
-      '[[255,255,178],[254,204,92],[253,141,60],[240,59,32],[189,0,38]]',
-    'Red Yellow Blue':
-      '[[215,25,28],[253,174,97],[255,255,191],[171,217,233],[44,123,182]]',
-  };
-  const colorScheme = select(
-    'Color Scheme:',
-    colorSchemeOptions,
-    colorSchemeOptions['Red Yellow Blue']
-  );
-  const colors = JSON.parse(colorScheme);
-
-  const getColor = f => {
-    const speedString = f.properties.avg_bike_speed.split('m')[0];
-    const speed = parseFloat(speedString);
-    return speed < 8
-      ? colors[0]
-      : speed < 9
-      ? colors[1]
-      : speed < 10
-      ? colors[2]
-      : speed < 11
-      ? colors[3]
-      : colors[4];
-  };
-
-  const opacityOptions = {
-    range: true,
-    min: 0,
-    max: 1,
-    step: 0.1,
-  };
-  const opacity = number('Opacity:', 0.9, opacityOptions);
-
-  const getPath = f => f.geometry.coordinates;
-
-  const getWidth = f => 45;
-
-  const widthScaleOptions = {
-    range: true,
-    min: 1,
-    max: 10,
-    step: 0.5,
-  };
-  const widthScale = number('Width Scale:', 1, widthScaleOptions);
-
-  const rounded = boolean('Rounded:', false);
-
-  const autoHighlight = boolean('Auto Highlight:', true);
-
-  const highlightColor = [125, 125, 125, 125];
-
-  const visible = boolean('Visible:', true);
-
-  return (
-    <BaseMap
-      mapboxToken={mapboxToken}
-      mapboxStyle={mapboxStyle}
-      initialZoom={11.5}
-      initialLatitude={45.5683}
-      initialLongitude={-122.6712}
-    >
-      <PathMap
-        data={data.slide_data.features}
-        getColor={getColor}
-        opacity={opacity}
-        getPath={getPath}
-        getWidth={getWidth}
-        widthScale={widthScale}
-        rounded={rounded}
-        autoHighlight={autoHighlight}
-        highlightColor={highlightColor}
-        onLayerClick={info =>
-          action('Layer clicked:', { depth: 2 })(info, info.object)
-        }
-        visible={visible}
-      />
-    </BaseMap>
-  );
+const optionsStyle = {
+  'Hack Oregon Light': 'mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg',
+  'Hack Oregon Dark': 'mapbox://styles/hackoregon/cjie02elo1vyw2rohd24kbtbd',
+  'Navigation Guidance Night v2': 'mapbox://styles/mapbox/navigation-guidance-night-v2',
+  'Dark v9': 'mapbox://styles/mapbox/dark-v9',
 };
 
-const tooltipMap = () => {
-  const colors = [
-    [215, 25, 28],
-    [253, 174, 97],
-    [255, 255, 191],
-    [171, 217, 233],
-    [44, 123, 182],
-  ];
-
-  const getColor = f => {
-    const speedString = f.properties.avg_bike_speed.split('m')[0];
-    const speed = parseFloat(speedString);
-    return speed < 8
-      ? colors[0]
-      : speed < 9
-      ? colors[1]
-      : speed < 10
-      ? colors[2]
-      : speed < 11
-      ? colors[3]
-      : colors[4];
-  };
-
-  return (
-    <BaseMap
-      mapboxToken={mapboxToken}
-      mapboxStyle="mapbox://styles/themendozaline/cj6y6f5m006ar2sobpimm7ay7"
-      initialZoom={11.5}
-      initialLatitude={45.5683}
-      initialLongitude={-122.6712}
-    >
-      <PathMap
-        data={data.slide_data.features}
-        getColor={getColor}
-        opacity={1}
-        getPath={f => f.geometry.coordinates}
-        getWidth={f => 80}
-        widthScale={1}
-        onLayerClick={info =>
-          action('Layer clicked:', { depth: 2 })(info, info.object)
-        }
-      >
-        <MapTooltip
-          primaryName="average bike speed"
-          primaryField="avg_bike_speed"
-          secondaryName="length of lane"
-          secondaryField="shape_leng"
-        />
-      </PathMap>
-    </BaseMap>
-  );
+const colorSchemeOptions = {
+  'purpleGreen':
+    '[[115, 41, 125, 255],[149, 86, 156, 255],[181, 139, 186, 255],[214, 193, 217, 255],[215, 215, 215, 255],[192, 227, 213, 255],[135, 205, 179, 255],[77, 184, 144, 255],[18, 164, 110, 255]]',
+  'orangeTeal':
+    '[[244, 120, 32, 255],[247, 143, 69, 255],[244, 165, 130, 255],[245, 206, 189, 255],[247, 247, 247, 255],[197, 222, 235, 255],[147, 197, 222, 255],[94, 177, 192, 255],[43, 156, 161, 255]]',
+  'yellowBlue':
+    '[[252, 178, 40, 255],[254, 197, 94, 255],[251, 213, 143, 255],[248, 229, 196, 255],[247, 247, 247, 255],[195, 211, 233, 255],[140, 175, 220, 255],[88, 139, 200, 255],[49, 103, 178, 255]]'
 };
+
+const opacityOptions = {
+  range: true,
+  min: 0,
+  max: 1,
+  step: 0.05,
+};
+
+const widthScaleOptions = {
+  range: true,
+  min: 1,
+  max: 10,
+  step: 0.5,
+};
+
+const mapData = ['https://service.civicpdx.org/transportation-systems/sandbox/slides/routechange/'];
+
+const demoMap = () => (
+  <DemoJSONLoader urls={mapData}>
+    {data => {
+      const mapboxStyle = select(
+        'Mapbox Style',
+        optionsStyle,
+        optionsStyle['Hack Oregon Light']
+      );
+
+      const colorScheme = select(
+        'Color Scheme:',
+        colorSchemeOptions,
+        colorSchemeOptions['purpleGreen']
+      );
+      const colors = JSON.parse(colorScheme);
+
+      const divergingScale = d3.scaleThreshold()
+        .domain([-80, -60, -40, -20, 20, 40, 60, 80])
+        .range(colors);
+
+      const getPathColor = f => {
+        const value = f.properties.pct_change;
+        return divergingScale(value);
+      };
+
+      const opacity = number('Opacity:', 0.95, opacityOptions);
+      const getPath = f => f.geometry.coordinates;
+      const getWidth = f => 15;
+      const widthScale = number('Width Scale:', 1, widthScaleOptions);
+      const rounded = boolean('Rounded:', true);
+      const highlightColor = [125, 125, 125, 125];
+
+      return (
+        <BaseMap
+          mapboxStyle={mapboxStyle}
+          initialZoom={12}
+          initialLatitude={45.523027}
+          initialLongitude={-122.670370}
+        >
+          <PathMap
+            data={data.slide_data.features}
+            getColor={getPathColor}
+            opacity={opacity}
+            getPath={getPath}
+            getWidth={getWidth}
+            widthScale={widthScale}
+            rounded={rounded}
+            highlightColor={highlightColor}
+            onLayerClick={info => action('Layer clicked:', { depth: 2 })(info, info.object) }
+          />
+        </BaseMap>
+      );
+    }}
+  </DemoJSONLoader>
+);
+
+const tooltipMap = () => (
+ <DemoJSONLoader urls={mapData}>
+    {data => {
+      const mapboxStyle = select(
+        'Mapbox Style',
+        optionsStyle,
+        optionsStyle['Hack Oregon Light']
+      );
+
+      const colorScheme = select(
+        'Color Scheme:',
+        colorSchemeOptions,
+        colorSchemeOptions['purpleGreen']
+      );
+      const colors = JSON.parse(colorScheme);
+
+      const divergingScale = d3.scaleThreshold()
+        .domain([-80, -60, -40, -20, 20, 40, 60, 80])
+        .range(colors);
+
+      const getPathColor = f => {
+        const value = f.properties.pct_change;
+        return divergingScale(value);
+      };
+
+      const opacity = number('Opacity:', 0.95, opacityOptions);
+      const getPath = f => f.geometry.coordinates;
+      const getWidth = f => 15;
+      const widthScale = number('Width Scale:', 1, widthScaleOptions);
+      const rounded = boolean('Rounded:', true);
+      const highlightColor = [125, 125, 125, 125];
+
+      return (
+        <BaseMap
+          mapboxStyle={mapboxStyle}
+          initialZoom={12}
+          initialLatitude={45.523027}
+          initialLongitude={-122.670370}
+        >
+          <PathMap
+            data={data.slide_data.features}
+            getColor={getPathColor}
+            opacity={opacity}
+            getPath={getPath}
+            getWidth={getWidth}
+            widthScale={widthScale}
+            rounded={rounded}
+            highlightColor={highlightColor}
+            onLayerClick={info => action('Layer clicked:', { depth: 2 })(info, info.object) }
+          >
+            <MapTooltip
+              primaryName={'Percent Change'}
+              primaryField={'pct_change'}
+            />
+          </PathMap>
+        </BaseMap>
+      );
+    }}
+  </DemoJSONLoader>
+);
 
 export default () =>
   storiesOf('Maps/Path Map', module)

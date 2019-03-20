@@ -5,65 +5,18 @@ import { withKnobs, number, select } from '@storybook/addon-knobs';
 import { checkA11y } from '@storybook/addon-a11y';
 import { BaseMap } from '../src';
 import { ScreenGridMap } from '../src';
+import { DemoJSONLoader } from '../src';
 
 const displayName = ScreenGridMap.displayName || 'ScreenGridMap';
-
-class LoadData extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: null,
-    };
-  }
-
-  componentDidMount() {
-    fetch(this.props.url)
-      .then(res => res)
-      .then(res => res.json())
-      .then(data => this.setState({ data: data.body }));
-  }
-
-  render() {
-    if (this.state.data === null) {
-      return null;
-    }
-    return this.props.children(this.state.data);
-  }
-}
-
-const mapboxToken =
-  'pk.eyJ1IjoiaGFja29yZWdvbiIsImEiOiJjamk0MGZhc2cwNDl4M3FsdHAwaG54a3BnIn0.Fq1KA0IUwpeKQlFIoaEn_Q';
 
 export default () =>
   storiesOf('Maps/Screen Grid Map', module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .add('Simple usage', () => (
-      <LoadData url="https://opendata.arcgis.com/datasets/a990260e73de4c4e8c7e2c47fe172835_50.geojson">
+      <DemoJSONLoader urls={["http://service.civicpdx.org/transportation-systems/sandbox/slides/crashes/"]}>
         {data => {
-          if (data.features === null) {
-            return null;
-          }
-
-          const optionsStyle = {
-            'Hack Oregon Light':
-              'mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg',
-            'Hack Oregon Dark':
-              'mapbox://styles/hackoregon/cjie02elo1vyw2rohd24kbtbd',
-            Scenic: 'mapbox://styles/themendozaline/cj8rrlv4tbtgs2rqnyhckuqva',
-            'Navigation Guidance Night':
-              'mapbox://styles/themendozaline/cj6y6f5m006ar2sobpimm7ay7',
-            'Lè Shine':
-              'mapbox://styles/themendozaline/cjg6296ub04ot2sqv9izku3qq',
-            'North Star':
-              'mapbox://styles/themendozaline/cj5oyewyy0fg22spetiv0hap0',
-            Odyssey: 'mapbox://styles/themendozaline/cjgq6rklb000d2so1b8myaait',
-          };
-          const mapboxStyle = select(
-            'Mapbox Style',
-            optionsStyle,
-            optionsStyle['Hack Oregon Light']
-          );
+          if (data === null) { return null }
 
           const opacityOptions = {
             range: true,
@@ -101,9 +54,9 @@ export default () =>
           const cellSize = number('Cell Size:', 15, cellSizeOptions);
 
           return (
-            <BaseMap mapboxToken={mapboxToken} mapboxStyle={mapboxStyle}>
+            <BaseMap>
               <ScreenGridMap
-                data={data.features}
+                data={data.slide_data.features}
                 getPosition={f => f.geometry.coordinates}
                 opacity={opacity}
                 colorRange={colorSchemeArray}
@@ -112,5 +65,5 @@ export default () =>
             </BaseMap>
           );
         }}
-      </LoadData>
+      </DemoJSONLoader>
     ));

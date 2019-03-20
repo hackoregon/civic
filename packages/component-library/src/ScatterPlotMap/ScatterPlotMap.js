@@ -19,6 +19,7 @@ const ScatterPlotMap = props => {
     outline,
     strokeWidth,
     autoHighlight,
+    highlightColor,
     onLayerClick,
     visible,
     tooltipInfo,
@@ -55,6 +56,7 @@ const ScatterPlotMap = props => {
           outline={outline}
           strokeWidth={strokeWidth}
           autoHighlight={autoHighlight}
+          highlightColor={highlightColor}
           onClick={onLayerClick}
           parameters={{ depthTest: false }}
           visible={visible}
@@ -78,6 +80,7 @@ ScatterPlotMap.propTypes = {
   outline: PropTypes.bool,
   strokeWidth: PropTypes.number,
   autoHighlight: PropTypes.bool,
+  highlightColor: PropTypes.array,
   onLayerClick: PropTypes.func,
   visible: PropTypes.bool,
   tooltipInfo: PropTypes.object,
@@ -96,6 +99,7 @@ ScatterPlotMap.defaultProps = {
   outline: false,
   strokeWidth: 1,
   visible: true,
+  highlightColor: [0, 255, 0, 255]
 };
 
 export default ScatterPlotMap;

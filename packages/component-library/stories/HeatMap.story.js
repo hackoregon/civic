@@ -4,41 +4,9 @@ import { storiesOf } from '@storybook/react';
 import { withKnobs, number, select } from '@storybook/addon-knobs';
 import { checkA11y } from '@storybook/addon-a11y';
 import { HeatMap } from '../src';
+import { DemoJSONLoader } from '../src';
 
 const displayName = HeatMap.displayName || 'HeatMap';
-
-class LoadData extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: null,
-    };
-    this.fetchData = this.fetchData.bind(this);
-  }
-
-  componentDidMount() {
-    this.fetchData(this.props.dataURL);
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.dataURL !== prevProps.dataURL) {
-      this.fetchData(this.props.dataURL);
-    }
-  }
-
-  fetchData(myURL) {
-    fetch(myURL)
-      .then(response => response.json())
-      .then(data => this.setState({ data }));
-  }
-
-  render() {
-    if (this.state.data === null) {
-      return null;
-    }
-    return this.props.children(this.state.data);
-  }
-}
 
 const heatmapComponent = data => {
   if (data === null) {
@@ -230,6 +198,6 @@ export default () =>
       const url = base + selection + options + year;
 
       return (
-        <LoadData dataURL={url}>{data => heatmapComponent(data)}</LoadData>
+        <DemoJSONLoader urls={[url]}>{data => heatmapComponent(data)}</DemoJSONLoader>
       );
     });
