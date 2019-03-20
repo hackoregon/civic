@@ -27,7 +27,7 @@ export class ProactivePlanning extends React.Component {
 
     return (
       <CivicStoryCard
-        title="Proactive Planning for Citywide Resilience"
+        title="BLAH Planning for Citywide Resilience"
         slug="proactive-planning-for-city-wide-resilience"
         loading={isLoading}
         error={error && 'Error loading data'}

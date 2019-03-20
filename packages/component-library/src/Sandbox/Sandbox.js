@@ -1,6 +1,3 @@
-/* TODO: Fix linting errors */
-/* eslint-disable */
-
 import PropTypes from 'prop-types';
 import React from 'react';
 import { css } from 'emotion';
@@ -132,24 +129,24 @@ const Sandbox = ({
 };
 
 Sandbox.propTypes = {
-  data: React.PropTypes.object.isRequired,
-  defaultSlides: React.PropTypes.array.isRequired,
-  drawerVisible: React.PropTypes.bool,
-  fetchSlideDataByDate: React.PropTypes.func,
-  layerData: React.PropTypes.array.isRequired,
-  mapboxStyle: React.PropTypes.string,
-  selectedFoundation: React.PropTypes.string,
-  selectedPackage: React.PropTypes.string,
-  selectedSlide: React.PropTypes.array,
-  slideData: React.PropTypes.array.isRequired,
-  styles: React.PropTypes.string,
-  toggleDrawer: React.PropTypes.func.isRequired,
-  updateFoundation: React.PropTypes.func.isRequired,
-  updatePackage: React.PropTypes.func.isRequired,
-  updateSlide: React.PropTypes.func.isRequired,
-  onFoundationClick: React.PropTypes.func,
-  defaultFoundation: React.PropTypes.object.isRequired,
-  foundationData: React.PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
+  defaultSlides: PropTypes.array.isRequired,
+  drawerVisible: PropTypes.bool,
+  fetchSlideDataByDate: PropTypes.func,
+  layerData: PropTypes.array.isRequired,
+  mapboxStyle: PropTypes.string,
+  selectedFoundation: PropTypes.string,
+  selectedPackage: PropTypes.string,
+  selectedSlide: PropTypes.array,
+  slideData: PropTypes.array.isRequired,
+  styles: PropTypes.string,
+  toggleDrawer: PropTypes.func.isRequired,
+  updateFoundation: PropTypes.func.isRequired,
+  updatePackage: PropTypes.func.isRequired,
+  updateSlide: PropTypes.func.isRequired,
+  onFoundationClick: PropTypes.func,
+  defaultFoundation: PropTypes.object.isRequired,
+  foundationData: PropTypes.object.isRequired,
 };
 
 export default Sandbox;

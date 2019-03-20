@@ -125,7 +125,7 @@ class BaseMap extends Component {
               mapboxApiAccessToken={mapboxToken}
               onViewportChange={viewport => {
                 this.onViewportChange(viewport);
-                geocoderOnChange(viewport);
+                !!geocoderOnChange && geocoderOnChange(viewport);
               }}
               options={{ ...geocoderOptions }}
             />
