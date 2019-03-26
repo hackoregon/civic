@@ -41,8 +41,7 @@
     "eslint-check": "eslint --print-config . | eslint-config-prettier-check"
   },
   "husky": {
-    "hooks": {
-    }
+    "hooks": {}
   },
   "lint-staged": {
     "*.{js,jsx}": [
@@ -114,7 +113,7 @@
     "prettier": "1.16.4",
     "prop-types": "^15.5.3",
     "react-addons-test-utils": "^15.5.3",
-    "react-hot-loader": "^3.0.0-beta.7",
+    "react-hot-loader": "^4.8.0",
     "react-transform-hmr": "^1.0.4",
     "redux-immutable-state-invariant": "^1.2.4",
     "redux-mock-store": "^1.2.1",

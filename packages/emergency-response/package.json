@@ -40,7 +40,7 @@
     "leaflet": "^1.0.3",
     "ramda": "^0.23.0",
     "react": "^16.8.4",
-    "react-dom": "^16.8.4",
+    "react-dom": "npm:@hot-loader/react-dom",
     "react-fontawesome": "^1.6.1",
     "react-leaflet": "^1.1.6",
     "react-player": "^0.15.0",
@@ -103,7 +103,8 @@
     "npm-run-all": "^4.0.2",
     "postcss-loader": "^3.0.0",
     "react-addons-test-utils": "^15.5.3",
-    "react-hot-loader": "^3.0.0-beta.7",
+    "react-hot-loader": "^4.0.0",
+
     "react-test-renderer": "15",
     "react-transform-hmr": "^1.0.4",
     "redux-immutable-state-invariant": "^1.2.4",

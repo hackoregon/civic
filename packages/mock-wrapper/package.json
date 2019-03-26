@@ -18,7 +18,7 @@
   "dependencies": {
     "@hackoregon/civic-babel-presets": "^1.0.0-alpha.1c62c05f",
     "react": "^16.8.4",
-    "react-dom": "^16.8.4",
+    "react-dom": "npm:@hot-loader/react-dom",
     "react-hot-loader": "^4.2.0",
     "react-redux": "^5.0.3",
     "react-router": "^3.0.0",
