@@ -30,7 +30,7 @@ const isProd = process.env.NODE_ENV === 'production';
 const entryPoints = [];
 
 if (!isProd) {
-  entryPoints.unshift('webpack-hot-middleware/client?reload=true');
+  entryPoints.unshift('webpack-hot-middleware/client');
 }
 
 module.exports = {
