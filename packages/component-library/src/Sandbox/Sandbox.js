@@ -1,39 +1,38 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import Dropdown from '../Dropdown/Dropdown';
 import BaseMap from '../BaseMap/BaseMap';
 import CivicSandboxMap from '../CivicSandboxMap/CivicSandboxMap';
 import CivicSandboxTooltip from '../CivicSandboxMap/CivicSandboxTooltip';
 import SandboxDrawer from './SandboxDrawer';
 
-const drops = css(`
-  flex-grow: 1;
-  width: 40%;
+const baseMapWrapper = css(`
+  height: 80vh;
+  min-height: 650px;
 `);
 
 const Sandbox = ({
   data,
-  defaultSlides,
-  drawerVisible,
-  fetchSlideDataByDate,
   layerData,
-  mapboxStyle,
-  mapboxToken,
-  selectedFoundation,
-  foundationData,
-  selectedPackage,
-  selectedSlide,
-  slideData,
-  styles,
-  toggleDrawer,
-  updateFoundation,
-  updatePackage,
-  updateSlide,
   defaultFoundation,
+  defaultSlides,
+  selectedPackage,
+  selectedFoundation,
+  selectedSlide,
+  foundationData,
+  slideData,
+  updatePackage,
+  updateFoundation,
+  updateSlideCheckbox,
+  fetchSlideDataByDate,
+  drawerVisible,
+  toggleDrawer,
+  mapboxStyle,
+  styles,
   onFoundationClick,
   onSlideHover,
   tooltipInfo,
+  allSlides
 }) => {
   return (
     <div className={styles}>
@@ -49,52 +48,10 @@ const Sandbox = ({
           }
           `)}
       >
-        <div className={drops}>
-          <span
-            className={css(`
-            color: #555;
-            text-transform: uppercase;
-            margin: 0 10px;
-          `)}
-          >
-            Data Collection
-          </span>
-          <Dropdown
-            value={selectedPackage}
-            options={Object.keys(data.packages).map(p => ({
-              value: p,
-              label: p,
-            }))}
-            onChange={updatePackage}
-            simpleValue
-          />
-        </div>
-        <div className={drops}>
-          <span
-            className={css(`
-            color: #555;
-            text-transform: uppercase;
-            margin: 0 10px;
-          `)}
-          >
-            Base Map
-          </span>
-          <Dropdown
-            value={selectedFoundation}
-            options={data.packages[selectedPackage].foundations.map(
-              foundation => ({
-                value: foundation,
-                label: data.foundations[foundation].name,
-              })
-            )}
-            onChange={updateFoundation}
-            simpleValue
-          />
-        </div>
         <SandboxDrawer
           data={data}
           selectedSlide={selectedSlide}
-          onChange={updateSlide}
+          onChangeCheckbox={updateSlideCheckbox}
           selectedPackage={selectedPackage}
           toggleDrawer={toggleDrawer}
           drawerVisible={drawerVisible}
@@ -104,15 +61,18 @@ const Sandbox = ({
           selectedFoundation={selectedFoundation}
           foundationData={foundationData}
           defaultFoundation={defaultFoundation}
+          allSlides={allSlides}
+          updatePackage={updatePackage}
+          updateFoundation={updateFoundation}
         />
       </div>
-      <div>
+      <div className={baseMapWrapper}>
         <BaseMap
-          mapboxStyle={mapboxStyle}
+          mapboxStyle={"mapbox://styles/mapbox/dark-v9"}
           initialZoom={10.5}
           initialLatitude={45.5431}
-          initialLongitude={-122.7465}
-          height={575}
+          initialLongitude={-122.5765}
+          useContainerHeight
         >
           <CivicSandboxMap
             mapLayers={layerData}
@@ -129,23 +89,26 @@ const Sandbox = ({
 
 Sandbox.propTypes = {
   data: React.PropTypes.object.isRequired,
-  defaultSlides: React.PropTypes.array.isRequired,
-  drawerVisible: React.PropTypes.bool,
-  fetchSlideDataByDate: React.PropTypes.func,
   layerData: React.PropTypes.array.isRequired,
-  mapboxStyle: React.PropTypes.string,
-  selectedFoundation: React.PropTypes.string,
-  selectedPackage: React.PropTypes.string,
-  selectedSlide: React.PropTypes.array,
-  slideData: React.PropTypes.array.isRequired,
-  styles: React.PropTypes.string,
-  toggleDrawer: React.PropTypes.func.isRequired,
-  updateFoundation: React.PropTypes.func.isRequired,
-  updatePackage: React.PropTypes.func.isRequired,
-  updateSlide: React.PropTypes.func.isRequired,
-  onFoundationClick: React.PropTypes.func,
   defaultFoundation: React.PropTypes.object.isRequired,
+  defaultSlides: React.PropTypes.array.isRequired,
+  selectedPackage: React.PropTypes.string.isRequired,
+  selectedFoundation: React.PropTypes.string.isRequired,
+  selectedSlide: React.PropTypes.array.isRequired,
   foundationData: React.PropTypes.object.isRequired,
+  slideData: React.PropTypes.array.isRequired,
+  updatePackage: React.PropTypes.func.isRequired,
+  updateFoundation: React.PropTypes.func.isRequired,
+  updateSlideCheckbox: React.PropTypes.func.isRequired,
+  fetchSlideDataByDate: React.PropTypes.func.isRequired,
+  drawerVisible: React.PropTypes.bool.isRequired,
+  toggleDrawer: React.PropTypes.func.isRequired,
+  mapboxStyle: React.PropTypes.string,
+  styles: React.PropTypes.string,
+  onFoundationClick: React.PropTypes.func,
+  onSlideHover: React.PropTypes.func,
+  tooltipInfo: React.PropTypes.array,
+  allSlides: React.PropTypes.array.isRequired,
 };
 
 export default Sandbox;
