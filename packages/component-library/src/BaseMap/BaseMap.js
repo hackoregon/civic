@@ -7,9 +7,6 @@ import createRef from 'create-react-ref/lib/createRef';
 import Geocoder from 'react-map-gl-geocoder';
 import './mapbox-gl.css';
 
-const MAPBOX_TOKEN =
-  'pk.eyJ1IjoiaGFja29yZWdvbiIsImEiOiJjamk0MGZhc2cwNDl4M3FsdHAwaG54a3BnIn0.Fq1KA0IUwpeKQlFIoaEn_Q';
-
 const mapWrapper = css`
   margin: 0 auto;
   padding: 0;
@@ -79,12 +76,17 @@ class BaseMap extends Component {
       geocoderOnChange,
       mapGLOptions,
       children,
+      useContainerHeight
     } = this.props;
 
     viewport.width = this.props.containerWidth
       ? this.props.containerWidth
       : 500;
-    viewport.height = height ? height : 500;
+    viewport.height = useContainerHeight
+      ? this.props.containerHeight
+      : height
+      ? height
+      : 500;
 
     const childrenLayers = React.Children.map(children, child => {
       return React.cloneElement(child, {
@@ -142,6 +144,7 @@ BaseMap.propTypes = {
   geocoderOnChange: PropTypes.function,
   mapGLOptions: PropTypes.object,
   children: PropTypes.node,
+  useContainerHeight: PropTypes.bool
 };
 
 BaseMap.defaultProps = {
@@ -150,5 +153,6 @@ BaseMap.defaultProps = {
     'pk.eyJ1IjoiaGFja29yZWdvbiIsImEiOiJjamk0MGZhc2cwNDl4M3FsdHAwaG54a3BnIn0.Fq1KA0IUwpeKQlFIoaEn_Q',
   navigation: true,
   geocoder: false,
+  useContainerHeight: false
 };
 export default Dimensions()(BaseMap);
