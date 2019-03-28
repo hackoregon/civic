@@ -136,7 +136,7 @@ class BaseMap extends Component {
 }
 
 BaseMap.propTypes = {
-  mapboxToken: PropTypes.string.isRequired,
+  mapboxToken: PropTypes.string,
   mapboxStyle: PropTypes.string,
   geocoder: PropTypes.bool,
   navigation: PropTypes.bool,
