@@ -143,8 +143,11 @@ class SandboxStory extends React.Component {
       .catch(err => console.error(err));
   };
   fetchSlideData = slideData => {
+    const defaultSlides = [...slideData];
+    const slideDataNames = this.state.slideData.map(slide => Object.keys(slide)[0]);
+    const onlyFetchNewSlides = defaultSlides.filter(slide => !slideDataNames.includes(slide.name));
     Promise.all(
-      slideData.map(s =>
+      onlyFetchNewSlides.map(s =>
         fetch(`${s.endpoint}`)
           .then(res => {
             if (!res.ok) {
@@ -157,7 +160,7 @@ class SandboxStory extends React.Component {
           .catch(err => console.error(err))
       )
     ).then(data => {
-      this.setState({ slideData: data });
+      this.setState({ slideData: [...this.state.slideData, ...data] });
     });
   };
   findAndReplaceSlideData = (slideData, data, slide, slideLabel) => {
