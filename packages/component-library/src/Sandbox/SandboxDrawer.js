@@ -2,6 +2,7 @@ import React from "react";
 import { css } from "emotion";
 import Dropdown from "../Dropdown/Dropdown";
 import SandboxDateSelector from "./SandboxDateSelector";
+import SandboxToggleSwitch from './SandboxToggleSwitch';
 
 const menuOpen = css(`
   flex-grow: 0;
@@ -132,14 +133,6 @@ const SandboxDrawer = ({
           {foundationData && (
             <div>
               <div className={css(`
-                border-top: 1px solid #ddd;
-                padding: .3rem .5rem;
-                text-transform: capitalize;
-                font-weight: bold;
-              `)}>
-                {"Year"}
-              </div>
-              <div className={css(`
                 padding: .5rem;
                 font-size: .75rem;
                 color: #333;
@@ -189,31 +182,39 @@ const SandboxDrawer = ({
                   background: ${slideBackGroundColor};
                   color:${textColor}
                 `)}>
-                  <input
-                    type="checkbox"
+                  <SandboxToggleSwitch
                     name={slide.slideNumber}
                     checked={slide.checked}
                     onChange={onChangeCheckbox}
-                    className="input-checkbox"
+                    label={slide.label}
                   />
-                  {`${slide.label} - Polygon`}
                 </div>
-                {selectedSlideData.slide_data && (
-                  <div className={css(`
-                    padding: .5rem;
-                    font-size: .75rem;
-                    color: #333;
-                    position: relative;
-                    z-index: ${10 - index}
-                  `)}>
-                    <SandboxDateSelector
-                      selectedSlideData={selectedSlideData}
-                      slide={slide}
-                      fetchSlideByDate={fetchSlideByDate}
-                      type="slide"
-                    />
-                  </div>
-                )}
+                <div className={css(`
+                  padding: .5rem;
+                  font-size: .75rem;
+                  color: #333;
+                  position: relative;
+                  z-index: ${10 - index}
+                `)}>
+                  {selectedSlideData.slide_meta && selectedSlideData.slide_meta.dates.date_granularity
+                    ? <SandboxDateSelector
+                        selectedSlideData={selectedSlideData}
+                        slide={slide}
+                        fetchSlideByDate={fetchSlideByDate}
+                        type="slide"
+                      />
+                    : selectedSlideData.slide_meta && selectedSlideData.slide_meta.dates.default_date_filter
+                    ? <span className={css(`
+                        font-size: 17px;
+                        font-weight: 400;
+                        padding: 0 0 0 15px;
+                        margin: 0;
+                      `)}>
+                        {selectedSlideData.slide_meta.dates.default_date_filter}
+                      </span>
+                    : null
+                  }
+                </div>
               </div>
             );
           })}

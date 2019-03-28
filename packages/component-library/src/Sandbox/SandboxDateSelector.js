@@ -98,6 +98,7 @@ class DateDropdown extends React.Component {
         options={options}
         simpleValue
         onChange={this.handleChange}
+        placeholder={'Please select a date'}
       />
     );
   }
