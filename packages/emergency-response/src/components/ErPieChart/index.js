@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
-import { RechartsPie } from '@hackoregon/component-library';
+import React from 'react';
+import PropTypes from 'prop-types';
+
+import { RechartsPie, PieChart } from '@hackoregon/component-library';
 
 // This base can be adjusted to scale up or down the chart and legend
 const proportionBase = 400;
@@ -32,17 +34,20 @@ const colors = [
   '#fedde2',
 ];
 
-class ErPieChart extends Component {
-  render() {
-    return (
-      <RechartsPie
-        data={this.props.data}
-        chartProportions={chartProportions}
-        colors={colors}
-        styles={styles}
+const ErPieChart = ({ data, dataValue, dataLabel }) => (
+      <PieChart
+        data={data}
+        dataValue={dataValue}
+        dataLabel={dataLabel}
+        width={chartProportions.chartWidth}
+        height={chartProportions.chartHeight}
       />
-    );
-  }
+);
+
+ErPieChart.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object),
+  dataValue: PropTypes.string,
+  dataLabel: PropTypes.string,
 }
 
 export default ErPieChart;

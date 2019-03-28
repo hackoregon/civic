@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import '@hackoregon/component-library/assets/global.styles.css';
 import '@hackoregon/component-library/assets/vendor/leaflet.css';
 
-import { Footer, StoryCard } from '@hackoregon/component-library';
+import { Footer, StoryCard, CivicStoryCard } from '@hackoregon/component-library';
 
 import BagelShop from '../BagelShop/index';
 import FmaMap from '../FmaMap/index';
@@ -26,10 +26,8 @@ const Container = styled.div`
 function App(props) {
   return (
     <Container>
-      <StoryCard
+      <CivicStoryCard
         title="What Does Portland Fire &amp; Rescue Do?"
-        collectionId="emergency-response"
-        cardId="what-they-do"
       >
         <p className="Description">
           Surprisingly, the vast majority (71.9%) of calls Portland Fire &
@@ -66,7 +64,7 @@ function App(props) {
             </p>
           </div>
         </div>
-      </StoryCard>
+      </CivicStoryCard>
       <StoryCard
         title="Who Does Portland Fire &amp; Rescue Serve?"
         collectionId="emergency-response"
@@ -121,10 +119,8 @@ function App(props) {
           and 35 seconds, slightly lower for medical calls.
         </p>
       </StoryCard>
-      <StoryCard
+      <CivicStoryCard
         title="The Anatomy Of A Four-Alarm Fire"
-        collectionId="emergency-response"
-        cardId="four-alarm-fire"
       >
         <p className="Description">
           We looked at a specific event to better understand the comings and
@@ -136,7 +132,7 @@ function App(props) {
           resolved and the incident was investigated.
         </p>
         <BagelShop />
-      </StoryCard>
+      </CivicStoryCard>
       <StoryCard
         title="How Response Time Varies Across The City"
         collectionId="emergency-response"
