@@ -1,7 +1,7 @@
-import React from "react";
-import { css } from "emotion";
-import Dropdown from "../Dropdown/Dropdown";
-import SandboxDateSelector from "./SandboxDateSelector";
+import React from 'react';
+import { css } from 'emotion';
+import Dropdown from '../Dropdown/Dropdown';
+import SandboxDateSelector from './SandboxDateSelector';
 import SandboxToggleSwitch from './SandboxToggleSwitch';
 
 const menuOpen = css(`
@@ -64,7 +64,7 @@ const SandboxDrawer = ({
             padding: 5px 0 5px 5px;
             line-height: 1.5;
           `)}>
-            {drawerVisible ? "Close Menu" : "Open Menu"}
+            {drawerVisible ? 'Close Menu' : 'Open Menu'}
           </strong>
         </div>
       </div>
@@ -143,12 +143,12 @@ const SandboxDrawer = ({
                   slide={defaultFoundation}
                   selectedSlideData={foundationData}
                   fetchSlideByDate={fetchSlideByDate}
-                  type="foundation"
+                  type='foundation'
                 />
               </div>
             </div>
           )}
-          {/* SLIDE CHECKBOX INPUTS */}
+          {/* SLIDE TOGGLE INPUTS */}
           <div className={css(`
             position: relative;
             z-index: 200;
@@ -167,13 +167,13 @@ const SandboxDrawer = ({
               : {};
             const defaultGray = [238, 238, 238, 255];
             const backgroundSlideColor = slide.color;
-            const formatBackgroundColor = arr => arr.reduce((acc,cur,i) => i < 3 ? acc + cur +"," : acc +"1)", "rgba(");
+            const formatBackgroundColor = arr => arr.reduce((acc,cur,i) => i < 3 ? acc + cur +',' : acc +'1)', 'rgba(');
             const slideBackGroundColor = formatBackgroundColor(backgroundSlideColor);
-            const blackTextColor = "rgba(0,0,0,1)";
-            const whiteTextColor = "rgba(255,255,255,1)";
+            const blackTextColor = 'rgba(0,0,0,1)';
+            const whiteTextColor = 'rgba(255,255,255,1)';
             const textColor = slideBackGroundColor === defaultGray ? blackTextColor : whiteTextColor;
             return (
-              <div key={"slide-selector" + index}>
+              <div key={'slide-selector' + index}>
                 <div className={css(`
                   border-top: 1px solid #ddd;
                   padding: .3rem .5rem;
@@ -187,6 +187,7 @@ const SandboxDrawer = ({
                     checked={slide.checked}
                     onChange={onChangeCheckbox}
                     label={slide.label}
+                    mapType={slide.mapType}
                   />
                 </div>
                 <div className={css(`
@@ -201,7 +202,7 @@ const SandboxDrawer = ({
                         selectedSlideData={selectedSlideData}
                         slide={slide}
                         fetchSlideByDate={fetchSlideByDate}
-                        type="slide"
+                        type='slide'
                       />
                     : selectedSlideData.slide_meta && selectedSlideData.slide_meta.dates.default_date_filter
                     ? <span className={css(`

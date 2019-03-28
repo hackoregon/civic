@@ -68,6 +68,7 @@ const Sandbox = ({
       </div>
       <div className={baseMapWrapper}>
         <BaseMap
+          mapboxStyle={"mapbox://styles/mapbox/dark-v9"}
           initialZoom={10.5}
           initialLatitude={45.5431}
           initialLongitude={-122.5765}

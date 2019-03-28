@@ -77,16 +77,18 @@ class SandboxStory extends React.Component {
       slide_data: {}
     };
     const allSlides = state.data.packages[this.state.selectedPackage].slides.map(slide => {
-      const mapObj = slides(dataObj)[state.data.slides[slide].name].boundary;
-      const color = mapObj.getLineColor
-        ? mapObj.getLineColor()
+      const mapObj = slides(dataObj)[state.data.slides[slide].name];
+      const color = mapObj.boundary.getLineColor
+        ? mapObj.boundary.getLineColor()
         : [238,238,238,255]; //gray
+      const mapType = mapObj.map.mapType;
       return {
         slideNumber: slide,
         slideObj: state.data.slides[slide],
         label: state.data.slides[slide].name,
         checked: selectedSlide.includes(slide) ? true : false,
         color,
+        mapType
       };
     });
     const defaultSlides = allSlides
@@ -214,21 +216,20 @@ class SandboxStory extends React.Component {
     this.updateSlide(selectedSlide);
     const defaultFoundation = data.foundations[selectedFoundation];
     const defaultSlides = selectedSlide.map(slide => data.slides[slide]);
-    const dataObj = {
-      slide_meta: {},
-      slide_data: {},
-    };
+    const dataObj = { slide_meta: {}, slide_data: {} };
     const allSlides = data.packages[selectedPackage].slides.map(slide => {
-      const mapObj = slides(dataObj)[data.slides[slide].name].boundary;
-      const color = mapObj.getLineColor
-        ? mapObj.getLineColor()
+      const mapObj = slides(dataObj)[data.slides[slide].name];
+      const color = mapObj.boundary.getLineColor
+        ? mapObj.boundary.getLineColor()
         : [238,238,238,255]; //gray
+      const mapType = mapObj.map.mapType;
       return {
         slideNumber: slide,
         slideObj: data.slides[slide],
         label: data.slides[slide].name,
         checked: selectedSlide.includes(slide) ? true : false,
-        color
+        color,
+        mapType
       };
     });
 

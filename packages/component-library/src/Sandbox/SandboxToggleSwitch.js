@@ -49,9 +49,18 @@ const SandboxToggleSwitch = (props) => {
     name,
     checked,
     onChange,
-    label
+    label,
+    mapType
   } = props;
   // console.log(props);
+  const decodeMapType = mapType === 'PolygonPlotMap' ? 'Polygons'
+    : mapType === 'SmallPolygonMap' ? 'Polygons'
+    : mapType === 'ScatterPlotMap' ? 'Points'
+    : mapType === 'PathMap' ? 'Lines'
+    : mapType === 'IconMap' ? 'Icons'
+    : mapType === 'ScreenGridMap' ? 'Squares'
+    : '';
+
   return (
     <div className={toggleStyle}>
       <label className='switch'>
@@ -65,7 +74,7 @@ const SandboxToggleSwitch = (props) => {
         <div className='slider'></div>
       </label>
       <div style={{'paddingLeft': '2.5%'}}>
-        {`${label} - Polygon`}
+        {`${label} - ${decodeMapType}`}
       </div>
     </div>
   );
