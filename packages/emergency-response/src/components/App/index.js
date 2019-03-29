@@ -6,6 +6,7 @@ import React from 'react';
 
 import '@hackoregon/component-library/assets/global.styles.css';
 import '@hackoregon/component-library/assets/vendor/leaflet.css';
+import firstFiveMinutesTimeline from '../../../assets/emergency-response-5min.svg';
 
 import { PageLayout, StoryCard, CivicStoryCard } from '@hackoregon/component-library';
 
@@ -101,7 +102,7 @@ function App(props) {
       >
         <img
           style={{ maxWidth: '100%' }}
-          src="https://s3-us-west-2.amazonaws.com/hacko-emergency-response-staging/emergency-response-5min-lg.png"
+          src={firstFiveMinutesTimeline}
           alt="Timeline of a fire response"
         />
         <p className="Description">
