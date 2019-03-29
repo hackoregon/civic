@@ -19,6 +19,7 @@ describe('civicFormat', () => {
 
   it('should format dollars correctly', () => {
     expect(civicFormat.dollars(12)).to.eql('$12');
-    expect(civicFormat.dollars(230.5)).to.eql('$230.5');
+    expect(civicFormat.dollars(230.5)).to.eql('$230');
+    expect(civicFormat.dollars(7300000)).to.eql('$7.3 million');
   });
 });
