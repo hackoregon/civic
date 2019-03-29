@@ -6,15 +6,16 @@ import React from 'react';
 
 import '@hackoregon/component-library/assets/global.styles.css';
 import '@hackoregon/component-library/assets/vendor/leaflet.css';
-import firstFiveMinutesTimeline from '../../../assets/emergency-response-5min.svg';
 
-import { PageLayout, StoryCard, CivicStoryCard } from '@hackoregon/component-library';
+import { PageLayout, CivicStoryCard } from '@hackoregon/component-library';
 
 import BagelShop from '../BagelShop/index';
 import FmaMap from '../FmaMap/index';
 import PieWhatTheyDo from '../PieWhatTheyDo/index';
 import HowWhenBusy from '../HowWhenBusy/index';
 import ResponseTimeVaries from '../ResponseTimeVaries/index';
+
+import firstFiveMinutesTimeline from '../../../assets/emergency-response-5min.svg';
 
 function App(props) {
   return (
