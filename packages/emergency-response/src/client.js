@@ -1,6 +1,6 @@
 import MockWrapper from '@hackoregon/mock-wrapper';
-import { App, Routes, Reducers } from './index';
 import { hot } from 'react-hot-loader/root';
+import { App, Routes, Reducers } from './index';
 
 const HotApp = hot(App);
 
