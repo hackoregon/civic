@@ -3,12 +3,11 @@
 import PropTypes from 'prop-types';
 
 import React from 'react';
-import styled from 'styled-components';
 
 import '@hackoregon/component-library/assets/global.styles.css';
 import '@hackoregon/component-library/assets/vendor/leaflet.css';
 
-import { Footer, StoryCard, CivicStoryCard } from '@hackoregon/component-library';
+import { PageLayout, StoryCard, CivicStoryCard } from '@hackoregon/component-library';
 
 import BagelShop from '../BagelShop/index';
 import FmaMap from '../FmaMap/index';
@@ -16,18 +15,12 @@ import PieWhatTheyDo from '../PieWhatTheyDo/index';
 import HowWhenBusy from '../HowWhenBusy/index';
 import ResponseTimeVaries from '../ResponseTimeVaries/index';
 
-const Container = styled.div`
-  min-height: 100%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-`;
-
 function App(props) {
   return (
-    <Container>
+    <PageLayout>
       <CivicStoryCard
         title="What Does Portland Fire &amp; Rescue Do?"
+        slug="what-they-do"
       >
         <p className="Description">
           Surprisingly, the vast majority (71.9%) of calls Portland Fire &
@@ -65,10 +58,9 @@ function App(props) {
           </div>
         </div>
       </CivicStoryCard>
-      <StoryCard
+      <CivicStoryCard
         title="Who Does Portland Fire &amp; Rescue Serve?"
-        collectionId="emergency-response"
-        cardId="er-map"
+        slug="er-map"
       >
         <p className="Description">
           Portland Fire & Rescue divides the city into 31 Fire Management Areas
@@ -80,11 +72,10 @@ function App(props) {
           emergency response times.
         </p>
         <FmaMap />
-      </StoryCard>
-      <StoryCard
+      </CivicStoryCard>
+      <CivicStoryCard
         title="How Busy Is Portland Fire &amp; Rescue? When Are They Most Busy?"
-        collectionId="emergency-response"
-        cardId="when-theyre-busy"
+        slug="when-theyre-busy"
       >
         <p className="Description">
           Over the past 7 years, on an average day, each FMA has fielded
@@ -103,11 +94,10 @@ function App(props) {
           Call frequency ebbs and flows throughout the day, peaking during rush
           hour.
         </p>
-      </StoryCard>
-      <StoryCard
+      </CivicStoryCard>
+      <CivicStoryCard
         title="The First Five Minutes"
-        collectionId="emergency-response"
-        cardId="first-five-minutes"
+        slug="first-five-minutes"
       >
         <img
           style={{ maxWidth: '100%' }}
@@ -118,9 +108,10 @@ function App(props) {
           The median response time for the City of Portland is about 4 minutes
           and 35 seconds, slightly lower for medical calls.
         </p>
-      </StoryCard>
+      </CivicStoryCard>
       <CivicStoryCard
         title="The Anatomy Of A Four-Alarm Fire"
+        slug="anatomy-of-a-four-alarm-fire"
       >
         <p className="Description">
           We looked at a specific event to better understand the comings and
@@ -133,10 +124,9 @@ function App(props) {
         </p>
         <BagelShop />
       </CivicStoryCard>
-      <StoryCard
+      <CivicStoryCard
         title="How Response Time Varies Across The City"
-        collectionId="emergency-response"
-        cardId="response-time-varies"
+        slug="response-time-varies"
       >
         <p className="Description">
           Portland Fire and Rescue shows remarkably consistent response times
@@ -159,10 +149,10 @@ function App(props) {
         <p className="Description">
           Please see our Github repo for detailed methodology and documentation.
         </p>
-      </StoryCard>
+      </CivicStoryCard>
 
       {React.Children.toArray(props.children)}
-    </Container>
+    </PageLayout>
   );
 }
 
