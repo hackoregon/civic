@@ -32,14 +32,16 @@ export default () =>
       const dataValue = text('Data values', 'population');
       const xLabel = text('xLabel', 'Year');
       const yLabel = text('yLabel', 'Dogs');
+      const title = text('title', 'Dogs with Money');
+      const subtitle = text('subtitle', 'Dogs in Portland with a net worth greater than $1,000');
 
       return (
         <BarChart
           data={data}
           dataKey={dataKey}
           dataValue={dataValue}
-          title={'Dogs with Money'}
-          subtitle={'Dogs in Portland with a net worth greater than $1,000'}
+          title={title}
+          subtitle={subtitle}
           xLabel={xLabel}
           yLabel={yLabel}
         />
