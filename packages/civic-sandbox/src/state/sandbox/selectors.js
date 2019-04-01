@@ -350,3 +350,29 @@ export const getSelectedSlideDatum = createSelector(
     return tooltipObj;
   }
 );
+
+export const getAllSlides = createSelector(
+  getSandboxData,
+  getSelectedPackageData,
+  getSelectedSlides,
+  (sandbox, packageData, selectedSlides) => {
+    const allPackageSlideNumbers = isArray(packageData.slides) ? packageData.slides : [packageData.slides];
+    const allSlidesArr = allPackageSlideNumbers.map(slide => sandbox.slides[slide]);
+    const dataObj = {slide_data: {}, slide_meta: {}};
+    const allSlides = allSlidesArr.map((slide, index) => {
+      const mapObj = slides(dataObj)[slide.name];
+      const color = mapObj.boundary.getLineColor
+        ? mapObj.boundary.getLineColor()
+        : [238,238,238,255]; //gray
+      const mapType = mapObj.map.mapType;
+      return {
+        slideNumber: allPackageSlideNumbers[index],
+        endpoint: slide.endpoint,
+        label: slide.name,
+        checked: selectedSlides.includes(allPackageSlideNumbers[index]) ? true : false,
+        color,
+        mapType
+      };
+    });
+    return allSlides;
+});
