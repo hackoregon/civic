@@ -3,25 +3,42 @@ import { css } from 'emotion';
 import Dropdown from '../Dropdown/Dropdown';
 import SandboxDateSelector from './SandboxDateSelector';
 import SandboxToggleSwitch from './SandboxToggleSwitch';
+import SandboxMapLegend from './SandboxMapLegend';
 
 const menuOpen = css(`
-  flex-grow: 0;
-  width: 25%;
   position: absolute;
+  top: 4.3%;
   right: 0;
+  width: 33%;
   z-index: 5;
-  top: 4.5%;
   transition: 0.5s;
+  @media (max-width: 850px) {
+    top: 4%;
+    width: 90%;
+  }
+  @media (max-width: 500px) {
+    top: 4.9%;
+    right: 1px;
+    width: 100%;
+  }
 `);
 
 const menuClosed = css(`
-  flex-grow: 0;
-  width: 5%;
   position: absolute;
+  top: 4.3%;
   right: 0;
+  width: 7%;
   z-index: 5;
-  top: 4.5%;
   transition: 0.5s;
+  @media (max-width: 850px) {
+    top: 4%;
+    width: 15%;
+  }
+  @media (max-width: 500px) {
+    top: 4.9%;
+    right: 1px;
+    width: 25%;
+  }
 `);
 
 const SandboxDrawer = ({
@@ -39,13 +56,13 @@ const SandboxDrawer = ({
   allSlides,
   updatePackage,
   selectedFoundation,
-  updateFoundation
+  updateFoundation,
+  foundationMapProps
 }) => {
   return (
     <div
       className={drawerVisible ? menuOpen : menuClosed}
     >
-      {/* TOGGLE BUTTON  */}
       <div onClick={toggleDrawer}>
         <div className={css(`
           display: flex;
@@ -58,17 +75,19 @@ const SandboxDrawer = ({
           color: #F3F2F3;
           height: auto;
         `)}>
-          <strong className={css(`
-            font-size: 1.1rem;
+          <div className={css(`
+            font-size: 1.4rem;
             color: #F3F2F3;
-            padding: 5px 0 5px 5px;
             line-height: 1.5;
+            padding-left: 5px;
+            @media (max-width: 850px) {
+              font-size: 1.3rem;
+            }
           `)}>
             {drawerVisible ? 'Close Menu' : 'Open Menu'}
-          </strong>
+          </div>
         </div>
       </div>
-      {/* SIDE MENU */}
       {drawerVisible && (
         <div className={css(`
           position: absolute;
@@ -76,13 +95,18 @@ const SandboxDrawer = ({
           width: 100%;
           z-index: 100;
           background: #EEE;
-          height: 72vh;
+          height: 74vh;
           overflow-y: auto;
           background: #F3F2F3;
+          @media (max-width: 850px) {
+            height: 74vh;
+          }
+          @media (max-width: 500px) {
+            height: 88vh;
+          }
           .Select.is-open { position: relative; z-index: 1000; }
           .Select-menu-outer { z-index: 9999; }
         `)}>
-          {/* DATA COLLECTION SELECTOR */}
           <div className={css(`
             position: relative;
             z-index: 900;
@@ -105,7 +129,6 @@ const SandboxDrawer = ({
               simpleValue
             />
           </div>
-          {/* BASE LAYER SELECTOR */}
           <div className={css(`
             position: relative;
             z-index: 400;
@@ -129,7 +152,6 @@ const SandboxDrawer = ({
               simpleValue
             />
           </div>
-          {/* BASE LAYER YEAR SELCTOR */}
           {foundationData && (
             <div>
               <div className={css(`
@@ -146,9 +168,11 @@ const SandboxDrawer = ({
                   type='foundation'
                 />
               </div>
+              {!!foundationData.slide_data && !!foundationMapProps && (
+                  <SandboxMapLegend data={foundationData} mapProps={foundationMapProps}/>
+              )}
             </div>
           )}
-          {/* SLIDE TOGGLE INPUTS */}
           <div className={css(`
             position: relative;
             z-index: 200;
@@ -195,7 +219,7 @@ const SandboxDrawer = ({
                   font-size: .75rem;
                   color: #333;
                   position: relative;
-                  z-index: ${10 - index}
+                  z-index: ${10 - index};
                 `)}>
                   {selectedSlideData.slide_meta && selectedSlideData.slide_meta.dates.date_granularity
                     ? <SandboxDateSelector

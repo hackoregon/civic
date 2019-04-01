@@ -1,3 +1,5 @@
+import * as d3 from 'd3';
+
 /* COLOR SCHEME OPTIONS */
 const thermal = [
   [255, 255, 204, 255],
@@ -10,6 +12,7 @@ const thermal = [
   [189, 0, 38, 255],
   [128, 0, 38, 255],
 ];
+
 const planet = [
   [247, 244, 249, 255],
   [231, 225, 239, 255],
@@ -54,17 +57,6 @@ const ocean = [
   [37, 52, 148, 255],
   [8, 29, 88, 255],
 ];
-const redGreenDivergent = [
-  [222, 75, 88, 255],
-  [228, 118, 128, 255],
-  [234, 161, 168, 255],
-  [240, 204, 209, 255],
-  [247, 247, 247, 255],
-  [195, 220, 221, 255],
-  [143, 192, 194, 255],
-  [90, 164, 167, 255],
-  [38, 136, 140, 255],
-];
 const purpleGreenDivergent = [
   [115, 41, 125, 255],
   [149, 86, 156, 255],
@@ -77,554 +69,52 @@ const purpleGreenDivergent = [
   [18, 164, 110, 255],
 ];
 
-// FOUNDATION 007 - Total Population
-const foundation007GetColor = f => {
-  const value = f.properties.total_population;
-  return value >= 27000
-    ? earth[8]
-    : value >= 24000
-    ? earth[7]
-    : value >= 21000
-    ? earth[6]
-    : value >= 18000
-    ? earth[5]
-    : value >= 15000
-    ? earth[4]
-    : value >= 12000
-    ? earth[3]
-    : value >= 8000
-    ? earth[2]
-    : value >= 4000
-    ? earth[1]
-    : value >= 0 && value !== null
-    ? earth[0]
-    : [0, 0, 0, 100];
-};
+// ColorBrewer - Diverging - 10-class RdYlBu
+const earthquakeColorScheme = [
+  [49, 54, 149, 255],
+  [69, 117, 180, 255],
+  [116, 173, 209, 255],
+  [171, 217, 233, 255],
+  [224, 243, 248, 255],
+  [254, 224, 144, 255],
+  [253, 174, 97, 255],
+  [244, 109, 67, 255],
+  [215, 48, 39, 255],
+  [165, 0, 38, 255],
+];
 
-// FOUNDATION 018 - Median Household Income
-const foundation018GetColor = f => {
-  const value = f.properties.median_household_income;
-  return value >= 200000
-    ? space[8]
-    : value >= 175000
-    ? space[7]
-    : value >= 150000
-    ? space[6]
-    : value >= 125000
-    ? space[5]
-    : value >= 100000
-    ? space[4]
-    : value >= 75000
-    ? space[3]
-    : value >= 50000
-    ? space[2]
-    : value >= 25000
-    ? space[1]
-    : value >= 0 && value !== null
-    ? space[0]
-    : [0, 0, 0, 100];
-};
+// ColorBrewer - Diverging - 10-class PRGn
+const purpleGreenDivergent10 = [
+  [64, 0, 75, 255],
+  [118, 42, 131, 255],
+  [153, 112, 171, 255],
+  [194, 165, 207, 255],
+  [231, 212, 232, 255],
+  [217, 240, 211, 255],
+  [166, 219, 160, 255],
+  [90, 174, 97, 255],
+  [27, 120, 55, 255],
+  [0, 68, 27, 255],
+];
 
-// FOUNDATION 019 - Median Gross Rent
-const foundation019GetColor = f => {
-  const value = f.properties.Median_gross_rent;
-  return value >= 2700
-    ? planet[8]
-    : value >= 2400
-    ? planet[7]
-    : value >= 2100
-    ? planet[6]
-    : value >= 1800
-    ? planet[5]
-    : value >= 1500
-    ? planet[4]
-    : value >= 1200
-    ? planet[3]
-    : value >= 900
-    ? planet[2]
-    : value >= 600
-    ? planet[1]
-    : value >= 300
-    ? planet[0]
-    : [0, 0, 0, 100];
-};
-
-// FOUNDATION 020 - Evictions
-const foundation020GetColor = f => {
-  const value = f.properties.evictions;
-  return value <= 8
-    ? thermal[0]
-    : value <= 16
-    ? thermal[1]
-    : value <= 24
-    ? thermal[2]
-    : value <= 32
-    ? thermal[3]
-    : value <= 40
-    ? thermal[4]
-    : value <= 48
-    ? thermal[5]
-    : value <= 56
-    ? thermal[6]
-    : value <= 64
-    ? thermal[7]
-    : value <= 72
-    ? thermal[8]
-    : [0, 0, 0, 100];
-};
-
-// FOUNDATION 021 - Renter Occupied Households
-const foundation021GetColor = f => {
-  const value = f.properties.renter_occupied_households;
-  return value <= 225
-    ? ocean[0]
-    : value <= 450
-    ? ocean[1]
-    : value <= 675
-    ? ocean[2]
-    : value <= 900
-    ? ocean[3]
-    : value <= 1125
-    ? ocean[4]
-    : value <= 1350
-    ? ocean[5]
-    : value <= 1575
-    ? ocean[6]
-    : value <= 1800
-    ? ocean[7]
-    : value <= 2025
-    ? ocean[8]
-    : [0, 0, 0, 100];
-};
-
-// FOUNDATION 022 - Rent Burden
-const foundation022GetColor = f => {
-  const value = f.properties.rent_burden;
-  return value === null
-    ? [0, 0, 0, 100]
-    : value <= 20
-    ? thermal[0]
-    : value <= 30
-    ? thermal[1]
-    : value <= 40
-    ? thermal[2]
-    : value <= 50
-    ? thermal[3]
-    : value <= 60
-    ? thermal[4]
-    : value <= 70
-    ? thermal[5]
-    : value <= 80
-    ? thermal[6]
-    : value <= 90
-    ? thermal[7]
-    : value <= 100
-    ? thermal[8]
-    : [0, 0, 0, 100];
-};
-
-// FOUNDATION 024 - Households with Children
-const foundation024GetColor = f => {
-  const value = f.properties.pc_household_with_children_under_18;
-  return value === null
-    ? [0, 0, 0, 100]
-    : value <= 0.2
-    ? space[0]
-    : value <= 0.3
-    ? space[1]
-    : value <= 0.4
-    ? space[2]
-    : value <= 0.5
-    ? space[3]
-    : value <= 0.6
-    ? space[4]
-    : value <= 0.7
-    ? space[5]
-    : value <= 0.8
-    ? space[6]
-    : value <= 0.9
-    ? space[7]
-    : value <= 1.0
-    ? space[8]
-    : [0, 0, 0, 100];
-};
-
-// FOUNDATION 025 - Households with Seniors
-const foundation025GetColor = f => {
-  const value = f.properties.pc_household_with_individuals_65_ovr;
-  return value === null
-    ? [0, 0, 0, 100]
-    : value <= 0.2
-    ? ocean[0]
-    : value <= 0.3
-    ? ocean[1]
-    : value <= 0.4
-    ? ocean[2]
-    : value <= 0.5
-    ? ocean[3]
-    : value <= 0.6
-    ? ocean[4]
-    : value <= 0.7
-    ? ocean[5]
-    : value <= 0.8
-    ? ocean[6]
-    : value <= 0.9
-    ? ocean[7]
-    : value <= 1.0
-    ? ocean[8]
-    : [0, 0, 0, 100];
-};
-
-// FOUNDATION 026 - Householders Living Alone
-const foundation026GetColor = f => {
-  const value = f.properties.pc_householders_living_alone;
-  return value <= 0.2
-    ? planet[0]
-    : value <= 0.3
-    ? planet[1]
-    : value <= 0.4
-    ? planet[2]
-    : value <= 0.5
-    ? planet[3]
-    : value <= 0.6
-    ? planet[4]
-    : value <= 0.7
-    ? planet[5]
-    : value <= 0.8
-    ? planet[6]
-    : value <= 0.9
-    ? planet[7]
-    : value <= 1.0
-    ? planet[8]
-    : [0, 0, 0, 100];
-};
-
-// FOUNDATION 027 - Owner Occupied Households
-const foundation027GetColor = f => {
-  const value = f.properties.pc_owner_occupied_housing_units;
-  return value <= 0.2
-    ? space[0]
-    : value <= 0.3
-    ? space[1]
-    : value <= 0.4
-    ? space[2]
-    : value <= 0.5
-    ? space[3]
-    : value <= 0.6
-    ? space[4]
-    : value <= 0.7
-    ? space[5]
-    : value <= 0.8
-    ? space[6]
-    : value <= 0.9
-    ? space[7]
-    : value <= 1.0
-    ? space[8]
-    : [0, 0, 0, 100];
-};
-
-// FOUNDATION 028 - Percent Renter Occupied
-const foundation028GetColor = f => {
-  const value = f.properties.pctrenter_occupied;
-  return value <= 20
-    ? thermal[0]
-    : value <= 30
-    ? thermal[1]
-    : value <= 40
-    ? thermal[2]
-    : value <= 50
-    ? thermal[3]
-    : value <= 60
-    ? thermal[4]
-    : value <= 70
-    ? thermal[5]
-    : value <= 80
-    ? thermal[6]
-    : value <= 90
-    ? thermal[7]
-    : value <= 100
-    ? thermal[8]
-    : [0, 0, 0, 100];
-};
-
-// FOUNDATION 029 - Shaking Intensity (c)
-const foundation029GetColor = f => {
-  const value = f.properties.pgv_site_mean_mmi_txt;
-  return value === 'Very strong (VII)'
-    ? thermal[7]
-    : value === 'Severe (VIII)'
-    ? thermal[8]
-    : [0, 0, 0, 100];
-};
-
-// FOUNDATION 030 - Wet Season Mean Deformation Intensity
-const foundation030GetColor = f => {
-  const value = f.properties.pgd_total_wet_mean_di;
-  return value === 'Low'
-    ? [254, 226, 150, 255]
-    : value === 'Moderate'
-    ? [253, 155, 84, 255]
-    : value === 'High'
-    ? [230, 54, 56, 255]
-    : value === 'Very High'
-    ? [143, 31, 64, 255]
-    : [0, 0, 0, 100];
-};
-
-// FOUNDATION 033 - Dry Season Mean Deformation Intensity
-const foundation033GetColor = f => {
-  const value = f.properties.pgd_landslide_dry_mean_di;
-  return value === 'None'
-    ? [240, 231, 242, 255]
-    : value === 'Low'
-    ? [178, 199, 224, 255]
-    : [0, 0, 0, 100];
-};
-
-// FOUNDATION 034 - Census Reponse Rate
-const foundation034GetColor = f => {
-  const value = f.properties.census_response_rate;
-  return value <= 60
-    ? thermal[0]
-    : value <= 65
-    ? thermal[1]
-    : value <= 70
-    ? thermal[2]
-    : value <= 75
-    ? thermal[3]
-    : value <= 80
-    ? thermal[4]
-    : value <= 85
-    ? thermal[5]
-    : value <= 90
-    ? thermal[6]
-    : value <= 95
-    ? thermal[7]
-    : value <= 100
-    ? thermal[8]
-    : [0, 0, 0, 100];
-};
-
-// FOUNDATION 037 - Voters 18 to 25
-const foundation037GetColor = f => {
-  const value = f.properties.pct_18_25;
-  return value <= 0.2
-    ? earth[0]
-    : value <= 0.3
-    ? earth[1]
-    : value <= 0.4
-    ? earth[2]
-    : value <= 0.5
-    ? earth[3]
-    : value <= 0.6
-    ? earth[4]
-    : value <= 0.7
-    ? earth[5]
-    : value <= 0.8
-    ? earth[6]
-    : value <= 0.9
-    ? earth[7]
-    : value <= 1.0
-    ? earth[8]
-    : [0, 0, 0, 100];
-};
-
-// FOUNDATION 038 - Voters 26 to 32
-const foundation038GetColor = f => {
-  const value = f.properties.pct_26_32;
-  return value <= 0.2
-    ? earth[0]
-    : value <= 0.3
-    ? earth[1]
-    : value <= 0.4
-    ? earth[2]
-    : value <= 0.5
-    ? earth[3]
-    : value <= 0.6
-    ? earth[4]
-    : value <= 0.7
-    ? earth[5]
-    : value <= 0.8
-    ? earth[6]
-    : value <= 0.9
-    ? earth[7]
-    : value <= 1.0
-    ? earth[8]
-    : [0, 0, 0, 100];
-};
-
-// FOUNDATION 039 - Voters 33 to 39
-const foundation039GetColor = f => {
-  const value = f.properties.pct_33_39;
-  return value <= 0.2
-    ? earth[0]
-    : value <= 0.3
-    ? earth[1]
-    : value <= 0.4
-    ? earth[2]
-    : value <= 0.5
-    ? earth[3]
-    : value <= 0.6
-    ? earth[4]
-    : value <= 0.7
-    ? earth[5]
-    : value <= 0.8
-    ? earth[6]
-    : value <= 0.9
-    ? earth[7]
-    : value <= 1.0
-    ? earth[8]
-    : [0, 0, 0, 100];
-};
-
-// FOUNDATION 040 - Voters 40 to 49
-const foundation040GetColor = f => {
-  const value = f.properties.pct_40_49;
-  return value <= 0.2
-    ? earth[0]
-    : value <= 0.3
-    ? earth[1]
-    : value <= 0.4
-    ? earth[2]
-    : value <= 0.5
-    ? earth[3]
-    : value <= 0.6
-    ? earth[4]
-    : value <= 0.7
-    ? earth[5]
-    : value <= 0.8
-    ? earth[6]
-    : value <= 0.9
-    ? earth[7]
-    : value <= 1.0
-    ? earth[8]
-    : [0, 0, 0, 100];
-};
-
-// FOUNDATION 041 - Voters 50 plus
-const foundation041GetColor = f => {
-  const value = f.properties.pct_50_plus;
-  return value <= 0.2
-    ? earth[0]
-    : value <= 0.3
-    ? earth[1]
-    : value <= 0.4
-    ? earth[2]
-    : value <= 0.5
-    ? earth[3]
-    : value <= 0.6
-    ? earth[4]
-    : value <= 0.7
-    ? earth[5]
-    : value <= 0.8
-    ? earth[6]
-    : value <= 0.9
-    ? earth[7]
-    : value <= 1.0
-    ? earth[8]
-    : [0, 0, 0, 100];
-};
-
-// FOUNDATION 042 - Change in Ridership by Census Block
-const foundation042GetColor = f => {
-  const value = f.properties.stops_pct_change;
-  return value <= -100
-    ? purpleGreenDivergent[0]
-    : value <= -75
-    ? purpleGreenDivergent[1]
-    : value <= -50
-    ? purpleGreenDivergent[2]
-    : value <= -25
-    ? purpleGreenDivergent[3]
-    : value <= 25
-    ? purpleGreenDivergent[4]
-    : value <= 50
-    ? purpleGreenDivergent[5]
-    : value <= 75
-    ? purpleGreenDivergent[6]
-    : value <= 100
-    ? purpleGreenDivergent[7]
-    : value <= 1500
-    ? purpleGreenDivergent[8]
-    : [0, 0, 0, 100];
-};
-
-// FOUNDATION 043 - Eviction Rate
-const foundation043GetColor = f => {
-  const value = f.properties.eviction_rate;
-  return value <= 5
-    ? space[0]
-    : value <= 10
-    ? space[1]
-    : value <= 15
-    ? space[2]
-    : value <= 20
-    ? space[3]
-    : value <= 25
-    ? space[4]
-    : value <= 30
-    ? space[5]
-    : value <= 35
-    ? space[6]
-    : value <= 40
-    ? space[7]
-    : value <= 45
-    ? space[8]
-    : [0, 0, 0, 100];
-};
-
-// FOUNDATION 044 - Poverty Rate
-const foundation044GetColor = f => {
-  const value = f.properties.poverty_rate;
-  return value <= 7
-    ? ocean[0]
-    : value <= 14
-    ? ocean[1]
-    : value <= 21
-    ? ocean[2]
-    : value <= 28
-    ? ocean[3]
-    : value <= 35
-    ? ocean[4]
-    : value <= 42
-    ? ocean[5]
-    : value <= 49
-    ? ocean[6]
-    : value <= 56
-    ? ocean[7]
-    : value <= 100
-    ? ocean[8]
-    : [0, 0, 0, 100];
-};
-
-// FOUNDATION 045 - Camp Reports
-const foundation045GetColor = f => {
-  const value = f.properties.count;
-  return value >= 200
-    ? ocean[8]
-    : value >= 170
-    ? ocean[7]
-    : value >= 150
-    ? ocean[6]
-    : value >= 125
-    ? ocean[5]
-    : value >= 100
-    ? ocean[4]
-    : value >= 75
-    ? ocean[3]
-    : value >= 50
-    ? ocean[2]
-    : value >= 25
-    ? ocean[1]
-    : value >= 0 && value !== null
-    ? ocean[0]
-    : [0, 0, 0, 100];
-};
+// ColorBrewer - Diverging -  10-class RdBu
+const redBlueDivergent10 = [
+  [103,0,31, 255],
+  [178,24,43, 255],
+  [214,96,77, 255],
+  [244,165,130, 255],
+  [253,219,199, 255],
+  [209,229,240, 255],
+  [146,197,222, 255],
+  [67,147,195, 255],
+  [33,102,172, 255],
+  [5,48,97, 255],
+];
 
 export const foundations = data => ({
   'Total Population': {
     mapType: 'ChoroplethMap',
-    id: 'choropleth-layer-foundation-007-toatl-population',
+    id: 'choropleth-layer-foundation-007-total-population',
     pickable: true,
     data: data.slide_data.features,
     opacity: 0.5,
@@ -632,10 +122,14 @@ export const foundations = data => ({
     getLineColor: f => [112, 122, 122, 255],
     getLineWidth: f => 0.2,
     stroked: true,
-    getFillColor: foundation007GetColor,
+    scaleType: 'equal',
+    color: earth,
+    getPropValue: f => parseFloat(f.properties.total_population),
+    propName: 'total_population',
     filled: true,
     autoHighlight: true,
     highlightColor: [200, 200, 200, 100],
+    onLayerClick: f => console.log(f)
   },
   'Median Household Income': {
     mapType: 'ChoroplethMap',
@@ -647,10 +141,14 @@ export const foundations = data => ({
     getLineColor: f => [112, 122, 122, 255],
     getLineWidth: f => 0.2,
     stroked: true,
-    getFillColor: foundation018GetColor,
+    scaleType: 'equal',
+    color: space,
+    getPropValue: f => parseFloat(f.properties.median_household_income),
+    propName: 'median_household_income',
     filled: true,
     autoHighlight: true,
     highlightColor: [200, 200, 200, 100],
+    onLayerClick: f => console.log(f)
   },
   'Median Gross Rent': {
     mapType: 'ChoroplethMap',
@@ -662,12 +160,16 @@ export const foundations = data => ({
     getLineColor: f => [112, 122, 122, 255],
     getLineWidth: f => 0.2,
     stroked: true,
-    getFillColor: foundation019GetColor,
+    scaleType: 'equal',
+    color: planet,
+    getPropValue: f => parseFloat(f.properties.Median_gross_rent),
+    propName: 'Median_gross_rent',
     filled: true,
     autoHighlight: true,
     highlightColor: [200, 200, 200, 100],
+    onLayerClick: f => console.log(f)
   },
-  Evictions: {
+  'Evictions': {
     mapType: 'ChoroplethMap',
     id: 'choropleth-layer-foundation-020-evictions',
     pickable: true,
@@ -677,10 +179,14 @@ export const foundations = data => ({
     getLineColor: f => [112, 122, 122, 255],
     getLineWidth: f => 0.2,
     stroked: true,
-    getFillColor: foundation020GetColor,
+    scaleType: 'equal',
+    color: thermal,
+    getPropValue: f => parseFloat(f.properties.evictions),
+    propName: 'evictions',
     filled: true,
     autoHighlight: true,
     highlightColor: [200, 200, 200, 100],
+    onLayerClick: f => console.log(f)
   },
   'Renter Occupied Households': {
     mapType: 'ChoroplethMap',
@@ -692,10 +198,14 @@ export const foundations = data => ({
     getLineColor: f => [112, 122, 122, 255],
     getLineWidth: f => 0.2,
     stroked: true,
-    getFillColor: foundation021GetColor,
+    scaleType: 'equal',
+    color: ocean,
+    getPropValue: f => parseFloat(f.properties.renter_occupied_households),
+    propName: 'renter_occupied_households',
     filled: true,
     autoHighlight: true,
     highlightColor: [200, 200, 200, 100],
+    onLayerClick: f => console.log(f)
   },
   'Rent Burden': {
     mapType: 'ChoroplethMap',
@@ -707,10 +217,14 @@ export const foundations = data => ({
     getLineColor: f => [112, 122, 122, 255],
     getLineWidth: f => 0.2,
     stroked: true,
-    getFillColor: foundation022GetColor,
+    scaleType: 'equal',
+    color: thermal,
+    getPropValue: f => parseFloat(f.properties.rent_burden),
+    propName: 'rent_burden',
     filled: true,
     autoHighlight: true,
     highlightColor: [200, 200, 200, 100],
+    onLayerClick: f => console.log(f)
   },
   'Households with Children': {
     mapType: 'ChoroplethMap',
@@ -722,10 +236,14 @@ export const foundations = data => ({
     getLineColor: f => [112, 122, 122, 255],
     getLineWidth: f => 0.2,
     stroked: true,
-    getFillColor: foundation024GetColor,
+    scaleType: 'equal',
+    color: space,
+    getPropValue: f => f.properties.pc_household_with_children_under_18,
+    propName: 'pc_household_with_children_under_18',
     filled: true,
     autoHighlight: true,
     highlightColor: [200, 200, 200, 100],
+    onLayerClick: f => console.log(f)
   },
   'Households with Seniors': {
     mapType: 'ChoroplethMap',
@@ -737,10 +255,14 @@ export const foundations = data => ({
     getLineColor: f => [112, 122, 122, 255],
     getLineWidth: f => 0.2,
     stroked: true,
-    getFillColor: foundation025GetColor,
+    scaleType: 'equal',
+    color: ocean,
+    getPropValue: f => parseFloat(f.properties.pc_household_with_individuals_65_ovr),
+    propName: 'pc_household_with_individuals_65_ovr',
     filled: true,
     autoHighlight: true,
     highlightColor: [200, 200, 200, 100],
+    onLayerClick: f => console.log(f)
   },
   'Householders Living Alone': {
     mapType: 'ChoroplethMap',
@@ -752,10 +274,14 @@ export const foundations = data => ({
     getLineColor: f => [112, 122, 122, 255],
     getLineWidth: f => 0.2,
     stroked: true,
-    getFillColor: foundation026GetColor,
+    scaleType: 'equal',
+    color: planet,
+    getPropValue: f => parseFloat(f.properties.pc_householders_living_alone),
+    propName: 'pc_householders_living_alone',
     filled: true,
     autoHighlight: true,
     highlightColor: [200, 200, 200, 100],
+    onLayerClick: f => console.log(f)
   },
   'Owner Occupied Households': {
     mapType: 'ChoroplethMap',
@@ -767,10 +293,14 @@ export const foundations = data => ({
     getLineColor: f => [112, 122, 122, 255],
     getLineWidth: f => 0.2,
     stroked: true,
-    getFillColor: foundation027GetColor,
+    scaleType: 'equal',
+    color: space,
+    getPropValue: f => parseFloat(f.properties.pc_owner_occupied_housing_units),
+    propName: 'pc_owner_occupied_housing_units',
     filled: true,
     autoHighlight: true,
     highlightColor: [200, 200, 200, 100],
+    onLayerClick: f => console.log(f)
   },
   'Percent Renter Occupied': {
     mapType: 'ChoroplethMap',
@@ -782,10 +312,14 @@ export const foundations = data => ({
     getLineColor: f => [112, 122, 122, 255],
     getLineWidth: f => 0.2,
     stroked: true,
-    getFillColor: foundation028GetColor,
+    scaleType: 'equal',
+    color: thermal,
+    getPropValue: f => parseFloat(f.properties.pctrenter_occupied),
+    propName: 'pctrenter_occupied',
     filled: true,
     autoHighlight: true,
     highlightColor: [200, 200, 200, 100],
+    onLayerClick: f => console.log(f)
   },
   'Shaking Intensity': {
     mapType: 'ChoroplethMap',
@@ -797,10 +331,14 @@ export const foundations = data => ({
     getLineColor: f => [112, 122, 122, 255],
     getLineWidth: f => 0.2,
     stroked: true,
-    getFillColor: foundation029GetColor,
+    scaleType: 'ordinal',
+    color: [earthquakeColorScheme[7], earthquakeColorScheme[9]],
+    propName: 'pgv_site_mean_mmi_txt',
+    categories: ['Very strong (VII)', 'Severe (VIII)'],
     filled: true,
     autoHighlight: true,
     highlightColor: [200, 200, 200, 100],
+    onLayerClick: f => console.log(f)
   },
   'Wet Season Mean Deformation Intensity': {
     mapType: 'ChoroplethMap',
@@ -812,10 +350,14 @@ export const foundations = data => ({
     getLineColor: f => [112, 122, 122, 255],
     getLineWidth: f => 0.2,
     stroked: true,
-    getFillColor: foundation030GetColor,
+    scaleType: 'ordinal',
+    color: [earthquakeColorScheme[5], earthquakeColorScheme[6], earthquakeColorScheme[7], earthquakeColorScheme[9]],
+    propName: 'pgd_total_wet_mean_di',
+    categories: ['Low', 'Moderate', 'High', 'Very High'],
     filled: true,
     autoHighlight: true,
     highlightColor: [200, 200, 200, 100],
+    onLayerClick: f => console.log(f)
   },
   'Dry Season Mean Deformation Intensity': {
     mapType: 'ChoroplethMap',
@@ -827,10 +369,14 @@ export const foundations = data => ({
     getLineColor: f => [112, 122, 122, 255],
     getLineWidth: f => 0.2,
     stroked: true,
-    getFillColor: foundation033GetColor,
+    scaleType: 'ordinal',
+    color: [earthquakeColorScheme[4], earthquakeColorScheme[5]],
+    propName: 'pgd_landslide_dry_mean_di',
+    categories: ['None', 'Low'],
     filled: true,
     autoHighlight: true,
     highlightColor: [200, 200, 200, 100],
+    onLayerClick: f => console.log(f)
   },
   'Census Reponse Rate': {
     mapType: 'ChoroplethMap',
@@ -842,10 +388,14 @@ export const foundations = data => ({
     getLineColor: f => [112, 122, 122, 255],
     getLineWidth: f => 0.2,
     stroked: true,
-    getFillColor: foundation034GetColor,
+    scaleType: 'equal',
+    color: thermal,
+    getPropValue: f => parseFloat(f.properties.census_response_rate),
+    propName: 'census_response_rate',
     filled: true,
     autoHighlight: true,
     highlightColor: [200, 200, 200, 100],
+    onLayerClick: f => console.log(f)
   },
   'Voters 18 to 25': {
     mapType: 'ChoroplethMap',
@@ -857,10 +407,14 @@ export const foundations = data => ({
     getLineColor: f => [112, 122, 122, 255],
     getLineWidth: f => 0.2,
     stroked: true,
-    getFillColor: foundation037GetColor,
+    scaleType: 'equal',
+    color: earth,
+    getPropValue: f => parseFloat(f.properties.pct_18_25),
+    propName: 'pct_18_25',
     filled: true,
     autoHighlight: true,
     highlightColor: [200, 200, 200, 100],
+    onLayerClick: f => console.log(f)
   },
   'Voters 26 to 32': {
     mapType: 'ChoroplethMap',
@@ -872,10 +426,14 @@ export const foundations = data => ({
     getLineColor: f => [112, 122, 122, 255],
     getLineWidth: f => 0.2,
     stroked: true,
-    getFillColor: foundation038GetColor,
+    scaleType: 'equal',
+    color: earth,
+    getPropValue: f => parseFloat(f.properties.pct_26_32),
+    propName: 'pct_26_32',
     filled: true,
     autoHighlight: true,
     highlightColor: [200, 200, 200, 100],
+    onLayerClick: f => console.log(f)
   },
   'Voters 33 to 39': {
     mapType: 'ChoroplethMap',
@@ -887,7 +445,10 @@ export const foundations = data => ({
     getLineColor: f => [112, 122, 122, 255],
     getLineWidth: f => 0.2,
     stroked: true,
-    getFillColor: foundation039GetColor,
+    scaleType: 'equal',
+    color: earth,
+    getPropValue: f => parseFloat(f.properties.pct_33_39),
+    propName: 'pct_33_39',
     filled: true,
     autoHighlight: true,
     highlightColor: [200, 200, 200, 100],
@@ -902,10 +463,14 @@ export const foundations = data => ({
     getLineColor: f => [112, 122, 122, 255],
     getLineWidth: f => 0.2,
     stroked: true,
-    getFillColor: foundation040GetColor,
+    scaleType: 'equal',
+    color: earth,
+    getPropValue: f => parseFloat(f.properties.pct_40_49),
+    propName: 'pct_40_49',
     filled: true,
     autoHighlight: true,
     highlightColor: [200, 200, 200, 100],
+    onLayerClick: f => console.log(f)
   },
   'Voters 50 plus': {
     mapType: 'ChoroplethMap',
@@ -917,10 +482,14 @@ export const foundations = data => ({
     getLineColor: f => [112, 122, 122, 255],
     getLineWidth: f => 0.2,
     stroked: true,
-    getFillColor: foundation041GetColor,
+    scaleType: 'equal',
+    color: earth,
+    getPropValue: f => parseFloat(f.properties.pct_50_plus),
+    propName: 'pct_50_plus',
     filled: true,
     autoHighlight: true,
     highlightColor: [200, 200, 200, 100],
+    onLayerClick: f => console.log(f)
   },
   'Change in Ridership by Census Block': {
     mapType: 'ChoroplethMap',
@@ -932,10 +501,14 @@ export const foundations = data => ({
     getLineColor: f => [112, 122, 122, 255],
     getLineWidth: f => 0.2,
     stroked: true,
-    getFillColor: foundation042GetColor,
+    scaleType: 'threshold',
+    color: purpleGreenDivergent10,
+    propName: 'stops_pct_change',
+    categories: [-100, -75, -50, -25, 0, 25, 50, 75, 100],
     filled: true,
     autoHighlight: true,
     highlightColor: [200, 200, 200, 100],
+    onLayerClick: f => console.log(f)
   },
   'Eviction Rate': {
     mapType: 'ChoroplethMap',
@@ -947,10 +520,14 @@ export const foundations = data => ({
     getLineColor: f => [112, 122, 122, 255],
     getLineWidth: f => 0.2,
     stroked: true,
-    getFillColor: foundation043GetColor,
+    scaleType: 'equal',
+    color: space,
+    getPropValue: f => parseFloat(f.properties.eviction_rate),
+    propName: 'eviction_rate',
     filled: true,
     autoHighlight: true,
     highlightColor: [200, 200, 200, 100],
+    onLayerClick: f => console.log(f)
   },
   'Poverty Rate': {
     mapType: 'ChoroplethMap',
@@ -962,10 +539,14 @@ export const foundations = data => ({
     getLineColor: f => [112, 112, 112, 255],
     getLineWidth: f => 0.2,
     stroked: true,
-    getFillColor: foundation044GetColor,
+    scaleType: 'equal',
+    color: ocean,
+    getPropValue: f => parseFloat(f.properties.poverty_rate),
+    propName: 'poverty_rate',
     filled: true,
     autoHighlight: true,
     highlightColor: [200, 200, 200, 100],
+    onLayerClick: f => console.log(f)
   },
   'Camp Reports': {
     mapType: 'ChoroplethMap',
@@ -977,10 +558,14 @@ export const foundations = data => ({
     getLineColor: f => [112, 112, 112, 255],
     getLineWidth: f => 0.2,
     stroked: true,
-    getFillColor: foundation045GetColor,
+    scaleType: 'equal',
+    color: ocean,
+    getPropValue: f => parseFloat(f.properties.count),
+    propName: 'count',
     filled: true,
     autoHighlight: true,
     highlightColor: [200, 200, 200, 100],
+    onLayerClick: f => console.log(f)
   },
 });
 
@@ -1057,27 +642,13 @@ const poiGetIconColor = f =>
     : [0, 0, 0, 255];
 
 // Slide 015 - Change in Ridership by Route
+const divergingScale = d3.scaleThreshold()
+  .domain([-100, -75, -50, -25, 0, 25, 50, 75, 100])
+  .range(purpleGreenDivergent10);
+
 const ridershipRouteGetColor = f => {
   const value = f.properties.pct_change;
-  return value <= -100
-    ? purpleGreenDivergent[0]
-    : value <= -75
-    ? purpleGreenDivergent[1]
-    : value <= -50
-    ? purpleGreenDivergent[2]
-    : value <= -25
-    ? purpleGreenDivergent[3]
-    : value <= 25
-    ? purpleGreenDivergent[4]
-    : value <= 50
-    ? purpleGreenDivergent[5]
-    : value <= 75
-    ? purpleGreenDivergent[6]
-    : value <= 100
-    ? purpleGreenDivergent[7]
-    : value < 9999
-    ? purpleGreenDivergent[8]
-    : [255, 255, 255, 0];
+  return divergingScale(value);
 };
 
 export const slides = data => ({
