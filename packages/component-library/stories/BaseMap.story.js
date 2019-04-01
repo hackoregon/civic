@@ -8,8 +8,8 @@ import { css } from 'emotion';
 const displayName = BaseMap.displayName || 'BaseMap';
 
 const containerWrapper = css`
-  height: 90vh;
-  min-height: 575px;
+  height: 100vh;
+  min-height: 500px;
 `;
 
 const optionsStyle = {

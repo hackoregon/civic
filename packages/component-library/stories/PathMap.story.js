@@ -8,8 +8,8 @@ import { BaseMap } from '../src';
 import { PathMap } from '../src';
 import { MapTooltip } from '../src';
 import { DemoJSONLoader } from '../src';
-import * as d3 from 'd3';
 
+import * as d3 from 'd3';
 
 const displayName = PathMap.displayName || 'PathMap';
 
@@ -21,12 +21,12 @@ const optionsStyle = {
 };
 
 const colorSchemeOptions = {
-  'purpleGreen':
-    '[[115, 41, 125, 255],[149, 86, 156, 255],[181, 139, 186, 255],[214, 193, 217, 255],[215, 215, 215, 255],[192, 227, 213, 255],[135, 205, 179, 255],[77, 184, 144, 255],[18, 164, 110, 255]]',
-  'orangeTeal':
-    '[[244, 120, 32, 255],[247, 143, 69, 255],[244, 165, 130, 255],[245, 206, 189, 255],[247, 247, 247, 255],[197, 222, 235, 255],[147, 197, 222, 255],[94, 177, 192, 255],[43, 156, 161, 255]]',
-  'yellowBlue':
-    '[[252, 178, 40, 255],[254, 197, 94, 255],[251, 213, 143, 255],[248, 229, 196, 255],[247, 247, 247, 255],[195, 211, 233, 255],[140, 175, 220, 255],[88, 139, 200, 255],[49, 103, 178, 255]]'
+  'Red Yellow Blue':
+    '[[165,0,38,255],[215,48,39,255],[244,109,67,255],[253,174,97,255],[254,224,144,255],[224,243,248,255],[171,217,233,255],[116,173,209,255],[69,117,180,255],[49,54,149,255]]',
+  'Purple Green':
+    '[[64,0,75,255],[118,42,131,255],[153,112,171,255],[194,165,207,255],[231,212,232,255],[217,240,211,255],[166,219,160,255],[90,174,97,255],[27,120,55,255],[0,68,27,255]]',
+  'Red Blue':
+    '[[103,0,31,255],[178,24,43,255],[214,96,77,255],[244,165,130,255],[253,219,199,255],[209,229,240,255],[146,197,222,255],[67,147,195,255],[33,102,172,255],[5,48,97,255]]',
 };
 
 const opacityOptions = {
@@ -57,12 +57,12 @@ const demoMap = () => (
       const colorScheme = selectV2(
         'Color Scheme:',
         colorSchemeOptions,
-        colorSchemeOptions['purpleGreen']
+        colorSchemeOptions['Purple Green']
       );
       const colors = JSON.parse(colorScheme);
 
       const divergingScale = d3.scaleThreshold()
-        .domain([-80, -60, -40, -20, 20, 40, 60, 80])
+        .domain([-100, -75, -50, -25, 0, 25, 50, 75, 100])
         .range(colors);
 
       const getPathColor = f => {
@@ -113,12 +113,12 @@ const tooltipMap = () => (
       const colorScheme = selectV2(
         'Color Scheme:',
         colorSchemeOptions,
-        colorSchemeOptions['purpleGreen']
+        colorSchemeOptions['Purple Green']
       );
       const colors = JSON.parse(colorScheme);
 
       const divergingScale = d3.scaleThreshold()
-        .domain([-80, -60, -40, -20, 20, 40, 60, 80])
+        .domain([-100, -75, -50, -25, 0, 25, 50, 75, 100])
         .range(colors);
 
       const getPathColor = f => {
