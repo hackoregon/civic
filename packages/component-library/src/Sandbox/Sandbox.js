@@ -8,7 +8,11 @@ import SandboxDrawer from './SandboxDrawer';
 
 const baseMapWrapper = css(`
   height: 80vh;
-  min-height: 650px;
+  min-height: 700px;
+  @media (max-width: 850px) {
+    height: 65vh;
+    min-height: 650px;
+  }
 `);
 
 const Sandbox = ({
@@ -32,7 +36,8 @@ const Sandbox = ({
   onFoundationClick,
   onSlideHover,
   tooltipInfo,
-  allSlides
+  allSlides,
+  foundationMapProps
 }) => {
   return (
     <div className={styles}>
@@ -41,7 +46,8 @@ const Sandbox = ({
           display:flex;
           align-items: center;
           justify-content: space-between;
-          padding: 1rem;
+          padding: 0;
+          margin: 0;
 
           .Select-menu-outer {
             z-index: 100;
@@ -64,6 +70,7 @@ const Sandbox = ({
           allSlides={allSlides}
           updatePackage={updatePackage}
           updateFoundation={updateFoundation}
+          foundationMapProps={foundationMapProps}
         />
       </div>
       <div className={baseMapWrapper}>
@@ -109,6 +116,7 @@ Sandbox.propTypes = {
   onSlideHover: React.PropTypes.func,
   tooltipInfo: React.PropTypes.array,
   allSlides: React.PropTypes.array.isRequired,
+  foundationMapProps: React.PropTypes.object.isRequired,
 };
 
 export default Sandbox;
