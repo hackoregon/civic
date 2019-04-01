@@ -1,6 +1,5 @@
 import { SSL_OP_TLS_BLOCK_PADDING_BUG } from "constants";
 import "@hackoregon/component-library/assets/constants.css";
-
 /*
   Styles used in Storybook.
   Only styles that are needed exclusively in Storybook are defined here.
