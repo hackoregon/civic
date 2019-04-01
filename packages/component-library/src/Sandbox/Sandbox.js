@@ -27,7 +27,7 @@ const Sandbox = ({
   slideData,
   updatePackage,
   updateFoundation,
-  updateSlideCheckbox,
+  updateSlide,
   fetchSlideDataByDate,
   drawerVisible,
   toggleDrawer,
@@ -57,7 +57,7 @@ const Sandbox = ({
         <SandboxDrawer
           data={data}
           selectedSlide={selectedSlide}
-          onChangeCheckbox={updateSlideCheckbox}
+          onChange={updateSlide}
           selectedPackage={selectedPackage}
           toggleDrawer={toggleDrawer}
           drawerVisible={drawerVisible}
@@ -106,7 +106,7 @@ Sandbox.propTypes = {
   slideData: React.PropTypes.array.isRequired,
   updatePackage: React.PropTypes.func.isRequired,
   updateFoundation: React.PropTypes.func.isRequired,
-  updateSlideCheckbox: React.PropTypes.func.isRequired,
+  updateSlide: React.PropTypes.func.isRequired,
   fetchSlideDataByDate: React.PropTypes.func.isRequired,
   drawerVisible: React.PropTypes.bool.isRequired,
   toggleDrawer: React.PropTypes.func.isRequired,

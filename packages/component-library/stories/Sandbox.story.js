@@ -35,7 +35,7 @@ class SandboxStory extends React.Component {
 
     this.updateFoundation = this.updateFoundation.bind(this);
     this.updateSlide = this.updateSlide.bind(this);
-    this.updateSlideCheckbox = this.updateSlideCheckbox.bind(this);
+    this.updateSlide2 = this.updateSlide2.bind(this);
     this.updatePackage = this.updatePackage.bind(this);
     this.toggleDrawer = this.toggleDrawer.bind(this);
     this.fetchSlideData = this.fetchSlideData.bind(this);
@@ -60,7 +60,7 @@ class SandboxStory extends React.Component {
       this.updateFoundation(this.state.selectedFoundation);
     }
     if (this.state.selectedSlide !== prevState.selectedSlide) {
-      this.updateSlide(this.state.selectedSlide);
+      this.updateSlide2(this.state.selectedSlide);
     }
   }
   initialDataSetup = state => {
@@ -140,7 +140,7 @@ class SandboxStory extends React.Component {
     this.fetchFoundationData(defaultFoundation);
     this.setState({ selectedFoundation, defaultFoundation, foundationMapProps });
   };
-  updateSlide = selectedSlide => {
+  updateSlide2 = selectedSlide => {
     const selectedSlides = isArray(selectedSlide)
       ? selectedSlide
       : selectedSlide.split(',');
@@ -150,7 +150,7 @@ class SandboxStory extends React.Component {
     this.fetchSlideData(defaultSlides);
     this.setState({ selectedSlide: selectedSlides, defaultSlides });
   };
-  updateSlideCheckbox = event => {
+  updateSlide = event => {
     const slideNumber = event.target.name;
     const allSlides = this.state.allSlides.map(slide => {
       if (slide.slideNumber === slideNumber) { slide.checked = !slide.checked }
@@ -339,7 +339,7 @@ class SandboxStory extends React.Component {
           this.state.defaultSlides
         )}
         updateFoundation={this.updateFoundation}
-        updateSlideCheckbox={this.updateSlideCheckbox}
+        updateSlide={this.updateSlide}
         toggleDrawer={this.toggleDrawer}
         fetchSlideDataByDate={this.fetchSlideDataByDate}
         updatePackage={this.updatePackage}

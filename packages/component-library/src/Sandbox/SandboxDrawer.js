@@ -43,7 +43,7 @@ const menuClosed = css(`
 
 const SandboxDrawer = ({
   data,
-  onChangeCheckbox,
+  onChange,
   selectedSlide,
   selectedPackage,
   toggleDrawer,
@@ -209,7 +209,7 @@ const SandboxDrawer = ({
                   <SandboxToggleSwitch
                     name={slide.slideNumber}
                     checked={slide.checked}
-                    onChange={onChangeCheckbox}
+                    onChange={onChange}
                     label={slide.label}
                     mapType={slide.mapType}
                   />
