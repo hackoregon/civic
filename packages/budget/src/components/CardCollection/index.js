@@ -147,10 +147,8 @@ class CardCollection extends React.Component {
             </p>
           </div>
           <div className="ten-year__wrapper">
-            <h3 className="budget-heading Rubik">10 Years</h3>
-            <h3>City of Portland Service Area Budget</h3>
             <div className="ten-year__stacked-area-wrapper">
-              <StackedArea width={800} />
+              <StackedArea />
             </div>
           </div>
           <Sticky>
@@ -191,9 +189,9 @@ class CardCollection extends React.Component {
                 Explore the circles for more information about each Service
                 Area.
               </p>
-              <BubbleChart
+              {/*<BubbleChart
                 data={serviceAreaBubbleDataFTW[this.state.currentYear]}
-              />
+              />*/}
             </div>
           </StoryCard>
           <StoryCard
@@ -214,13 +212,13 @@ class CardCollection extends React.Component {
               value={this.state.currentServiceArea}
               clearable={false}
             />
-            <BubbleChart
+            {/*<BubbleChart
               data={
                 bureauDataByYear[this.state.currentServiceArea][
                   this.state.currentYear
                 ]
               }
-            />
+            />*/}
           </StoryCard>
           <StoryCard
             title="Program Budgets within Bureaus"
@@ -240,13 +238,13 @@ class CardCollection extends React.Component {
               value={this.state.currentBureau}
               clearable={false}
             />
-            <BubbleChart
+            {/*<BubbleChart
               data={
                 psProgramData[this.state.currentServiceArea]['FR'][
                   this.state.currentYear
                 ]
               }
-            />
+            />*/}
           </StoryCard>
         </StickyContainer>
         <Budget101 />
