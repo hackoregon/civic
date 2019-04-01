@@ -27,7 +27,7 @@ export const fetchByDateAdapter = (
     .then(res => {
       dispatch(
         success({
-          name: slide.name,
+          name: slide.label,
           data: res.data,
           type,
         })

@@ -35,35 +35,45 @@ import {
   getSelectedSlides,
   getLayerSlides,
   getSelectedSlideDatum,
+  getAllSlides,
+  getfoundationMapProps
 } from '../../state/sandbox/selectors';
 
 class SandboxComponent extends React.Component {
   constructor(props) {
     super();
     this.state = {
-      drawerVisible: true,
+      drawerVisible: false,
     };
     this.updateSlide = this.updateSlide.bind(this);
     this.toggleDrawer = this.toggleDrawer.bind(this);
-    props.fetchFoundation(props.foundationData.endpoint);
-    props.fetchSlides(props.slidesData);
   }
-  componentWillReceiveProps(nextProps) {
-    if (this.props.selectedPackage !== nextProps.selectedPackage) {
-      this.props.fetchFoundation(nextProps.foundationData.endpoint);
-      this.props.fetchSlides(nextProps.slidesData);
+  componentDidMount() {
+      this.props.fetchFoundation(this.props.foundationData.endpoint);
+      this.props.fetchSlides(this.props.slidesData);
+  }
+  componentDidUpdate(prevProps) {
+    if (!equals(this.props.selectedPackage, prevProps.selectedPackage)) {
+      this.props.fetchFoundation(this.props.foundationData.endpoint);
+      this.props.fetchSlides(this.props.slidesData);
     }
-    if (this.props.selectedFoundation !== nextProps.selectedFoundation) {
-      this.props.fetchFoundation(nextProps.foundationData.endpoint);
+    if (equals(this.props.selectedPackage, prevProps.selectedPackage) && !equals(this.props.selectedFoundation, prevProps.selectedFoundation)) {
+      this.props.fetchFoundation(this.props.foundationData.endpoint);
     }
-    if (!equals(this.props.selectedSlide, nextProps.selectedSlide)) {
-      this.props.fetchSlides(nextProps.slidesData);
+    if (equals(this.props.selectedPackage, prevProps.selectedPackage) && !equals(this.props.selectedSlide, prevProps.selectedSlide)) {
+      const fetchedSlideDataNames = this.props.selectedSlidesData.map(slideDatum => {
+        return Object.keys(slideDatum)[0];
+      });
+      const onlyFetchNewSlide = this.props.slidesData
+        .filter(d => !fetchedSlideDataNames.includes(d.name));
+      this.props.fetchSlides(onlyFetchNewSlide);
     }
   }
-  updateSlide = selectedSlide => {
-    const selectedSlides = isArray(selectedSlide)
-      ? selectedSlide
-      : selectedSlide.split(',');
+  updateSlide = event => {
+    const slideNumber = event.target.name;
+    const selectedSlides = this.props.selectedSlide.includes(slideNumber)
+      ? this.props.selectedSlide.filter(num => num !== slideNumber)
+      : [...this.props.selectedSlide, slideNumber];
     this.props.setSlides(selectedSlides);
   };
   toggleDrawer = () => {
@@ -105,6 +115,8 @@ class SandboxComponent extends React.Component {
         onFoundationClick={this.props.foundationClick}
         onSlideHover={this.props.slideHover}
         tooltipInfo={this.props.selectedSlideDatum}
+        allSlides={this.props.allSlides}
+        foundationMapProps={this.props.foundationMapProps}
       />
     );
   }
@@ -129,6 +141,8 @@ export default connect(
     selectedSlide: getSelectedSlides(state),
     layerSlides: getLayerSlides(state),
     selectedSlideDatum: getSelectedSlideDatum(state),
+    allSlides: getAllSlides(state),
+    foundationMapProps: getfoundationMapProps(state),
   }),
   dispatch => ({
     fetchFoundation(endpoint = '') {
