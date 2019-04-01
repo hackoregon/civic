@@ -121,7 +121,7 @@ const CivicSandboxMap = props => {
     return scaleQuantize;
   };
 
-  const createDiscreteBins = (categories, color, getPropValue) => {
+  const createDiscreteBins = (categories, color) => {
     const ordinalScale = d3.scaleOrdinal()
       .domain(categories)
       .range(color)
@@ -129,7 +129,7 @@ const CivicSandboxMap = props => {
     return ordinalScale;
   };
 
-  const createThresholdBins = (categories, color, getPropValue) => {
+  const createThresholdBins = (categories, color) => {
     const scaleThreshold = d3.scaleThreshold()
       .domain(categories)
       .range(color);
@@ -168,7 +168,7 @@ const CivicSandboxMap = props => {
         autoHighlight={slide.data.autoHighlight}
         highlightColor={slide.data.highlightColor}
         parameters={{ depthTest: false }}
-        updateTriggers={{ instancePickingColors: getFillColor }}
+        updateTriggers={slide.data.updateTriggers || { instancePickingColors: getFillColor }}
       />
     );
   };
