@@ -376,3 +376,21 @@ export const getAllSlides = createSelector(
     });
     return allSlides;
 });
+
+export const getfoundationMapProps = createSelector(
+    getSandboxData,
+    getSelectedFoundation,
+    (sandbox, selectedFoundation) => {
+      const dataObj = { slide_meta: {}, slide_data: {} };
+      const foundationMapObj = foundations(dataObj)[sandbox.foundations[selectedFoundation].name];
+      const foundationMapProps = {
+        color: foundationMapObj.color,
+        getPropValue: foundationMapObj.getPropValue,
+        propName: foundationMapObj.propName,
+        scaleType: foundationMapObj.scaleType,
+      };
+      if(foundationMapObj.scaleType === 'ordinal' || foundationMapObj.scaleType === 'threshold') {
+        foundationMapProps.categories = foundationMapObj.categories;
+      }
+    return foundationMapProps;
+});
