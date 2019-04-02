@@ -6,11 +6,11 @@ import { numeric } from '../utils/formatters';
 const legendContainer = css(`
   border-top: 2px solid gainsboro;
   border-bottom: 2px solid gainsboro;
-  margin: 1% 4% 8% 2%;
+  margin: 2% 0 8% 2%;
   display: flex;
   flex-wrap: nowrap;
-  height: 45px;
-  width: 95%;
+  height: 25px;
+  width: 96%;
 `);
 
 const colorBox = css(`
@@ -71,7 +71,9 @@ const SandboxMapLegend = (props) => {
   const percentFormat = d3.format('.1%');
 
   const ticksFormatted = ticks.map(d => {
-    return d >= 1000000 || d <= -1000000
+    return d === ''
+      ? ''
+      : d >= 1000000 || d <= -1000000
       ? numeric(d)
       : d >= 1000 || d <= -1000
       ? thousandsFormat(d)
@@ -83,7 +85,7 @@ const SandboxMapLegend = (props) => {
       ? percentFormat(d)
       : d && typeof d === 'string'
       ? d
-      : '';
+      : numeric(d);
   });
 
   const tickStyle = mapProps.scaleType === 'threshold' ? tickNumsThreshold : tickNums;
