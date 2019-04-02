@@ -1,15 +1,7 @@
 /* eslint-disable react/jsx-boolean-value, react/no-unused-prop-types */
 import React from 'react';
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Text,
-  ResponsiveContainer,
-} from 'recharts';
 
-import { StoryCard } from '@hackoregon/component-library';
+import { CivicStoryCard } from '@hackoregon/component-library';
 import shared from '../shared.styles';
 import ArcPieChart from './ArcPieChart';
 
@@ -56,7 +48,7 @@ class HomelessPopulation extends React.Component {
   }
   render() {
     return (
-      <StoryCard title="Does Domestic Violence Drive Homelessness?">
+      <CivicStoryCard title="Does Domestic Violence Drive Homelessness?">
         <div
           className="Women"
           style={{ marginLeft: '10px', marginRight: '10px', marginTop: '50px' }}
@@ -72,7 +64,7 @@ class HomelessPopulation extends React.Component {
             the risk of housing instability or homelessness if she does leave.
           </p>
           <div>
-            <ArcPieChart dataSets={pieData} renderLinks={false} />
+            <ArcPieChart data={pieData} />
             <p style={shared.footnote}>
               The 2015 Count revealed that 45% of homeless women in Multnomah
               County are affected by domestic violence—nearly one in two women
@@ -80,44 +72,8 @@ class HomelessPopulation extends React.Component {
               “Pressing Issues Facing Families Who Are Homeless”
             </p>
           </div>
-          <ResponsiveContainer width="100%" height={'100%'} minHeight={300}>
-            <BarChart
-              data={propsData2}
-              layout={'vertical'}
-              margin={{ top: 60, right: 10, left: 10, bottom: -5 }}
-            >
-              <XAxis
-                type="number"
-                axisLine={false}
-                tickLine={false}
-                tick={false}
-              />
-              <YAxis
-                type="category"
-                tickLine={false}
-                dataKey="name"
-                tick={axisLabel}
-                mirror
-                axisLine={false}
-              />
-              <Bar
-                dataKey="General Population"
-                fill={COLORS[1]}
-                label={valueLabel}
-                legendType={'circle'}
-                barSize={29}
-              />
-              <Bar
-                dataKey="Homeless"
-                fill={COLORS[0]}
-                label={valueLabel}
-                legendType={'circle'}
-                barSize={29}
-              />
-            </BarChart>
-          </ResponsiveContainer>
         </div>
-      </StoryCard>
+      </CivicStoryCard>
     );
   }
 }

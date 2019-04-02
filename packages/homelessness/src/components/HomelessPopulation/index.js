@@ -3,16 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { css } from 'emotion';
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Text,
-  Legend,
-  ResponsiveContainer,
-} from 'recharts';
-import { Dropdown, StoryCard } from '@hackoregon/component-library';
+import { Dropdown, CivicStoryCard, HorizontalBarChart } from '@hackoregon/component-library';
 import shared from '../shared.styles';
 
 import { fetchPopulationData } from '../../state/Population/actions';
@@ -24,21 +15,9 @@ import {
   gender,
 } from '../../state/Population/selectors';
 
-const COLORS = ['#75568D', '#e3dde8'];
-const valueLabel = options => (
-  <Text {...options} fill={'#201024'}>{`${options.value}%`}</Text>
-);
-const axisLabel = options => (
-  <Text
-    {...options}
-    fill={'#201024'}
-    y={options.y - 45}
-    width={200}
-    style={{ fontWeight: 'bold' }}
-  >
-    {options.payload.value}
-  </Text>
-);
+const barChartsForPopulation = (data) => {
+  return data.map(el => <HorizontalBarChart minimalist data={el.data} xLabel={el.title} dataValue='value' dataLabel='label' />);
+}
 
 const containerClass = css`
   text-align: center;
@@ -96,7 +75,7 @@ class HomelessPopulation extends React.Component {
   }
   render() {
     return (
-      <StoryCard title="Homeless Population">
+      <CivicStoryCard title="Homeless Population">
         <div className={containerClass}>
           <p style={shared.text}>
             The graph below displays the percent of each type of homeless
@@ -116,52 +95,10 @@ class HomelessPopulation extends React.Component {
               clearable={false}
             />
           </div>
-          <ResponsiveContainer width="100%" height={'100%'} minHeight={400}>
-            <BarChart
-              data={this.props[this.state.value]}
-              layout={'vertical'}
-              margin={{ top: 65, right: 10, left: 10, bottom: 0 }}
-            >
-              <Legend
-                verticalAlign={'bottom'}
-                align={'left'}
-                layout={'horizontal'}
-                iconSize={18}
-                wrapperStyle={{ top: 0 }}
-              />
-              <XAxis
-                type="number"
-                axisLine={false}
-                tickLine={false}
-                tick={false}
-              />
-              <YAxis
-                type="category"
-                tickLine={false}
-                dataKey="name"
-                tick={axisLabel}
-                mirror
-                axisLine={false}
-              />
-              <Bar
-                dataKey="general"
-                fill={COLORS[1]}
-                label={valueLabel}
-                legendType={'circle'}
-                barSize={24}
-              />
-              <Bar
-                dataKey="homeless"
-                fill={COLORS[0]}
-                label={valueLabel}
-                legendType={'circle'}
-                barSize={29}
-              />
-            </BarChart>
-          </ResponsiveContainer>
+          {this.props[this.state.value] && barChartsForPopulation(this.props[this.state.value])}
         </div>
         <p style={shared.footnote}>{this.state.footnote[this.state.value]}</p>
-      </StoryCard>
+      </CivicStoryCard>
     );
   }
 }

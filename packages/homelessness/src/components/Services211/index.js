@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { StoryCard } from '@hackoregon/component-library';
+import { CivicStoryCard } from '@hackoregon/component-library';
 import { HalfDonutChart, ListBarChart } from '../Reuseable';
 import { fetchServiceCallsData } from '../../state/Services211/actions';
 import shared from '../shared.styles';
@@ -13,7 +13,7 @@ class Services211 extends React.Component {
   render() {
     const dataLoaded = !!this.props.pieData[0];
     return (
-      <StoryCard title="Homelessness Services">
+      <CivicStoryCard title="Homelessness Services">
         <p style={shared.text}>
           In 2016 the 211info helpline fielded 6759 calls for services from
           people who self-identified as homeless. Most of those calls were
@@ -44,7 +44,7 @@ class Services211 extends React.Component {
             colors={['#75568D', '#d4d5d6']}
           />
         ) : null}
-      </StoryCard>
+      </CivicStoryCard>
     );
   }
 }

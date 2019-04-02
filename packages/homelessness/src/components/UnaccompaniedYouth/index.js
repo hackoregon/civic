@@ -1,5 +1,5 @@
 import React from 'react';
-import { StoryCard } from '@hackoregon/component-library';
+import { CivicStoryCard } from '@hackoregon/component-library';
 import shared from '../shared.styles';
 
 const styles = {
@@ -18,7 +18,7 @@ const styles = {
 const imgRoot = 'https://s3-us-west-2.amazonaws.com/hacko-homeless-staging';
 
 const UnaccompaniedYouth = () => (
-  <StoryCard title="Unaccompanied Youth—Undercounted?">
+  <CivicStoryCard title="Unaccompanied Youth—Undercounted?">
     <div style={styles.bodyContainer}>
       <p style={shared.text}>
         In 2015, 266 unaccompanied youth — people who are not part of a family
@@ -104,7 +104,7 @@ const UnaccompaniedYouth = () => (
         choice.”
       </p>
     </div>
-  </StoryCard>
+  </CivicStoryCard>
 );
 
 export default UnaccompaniedYouth;
