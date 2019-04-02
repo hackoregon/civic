@@ -10,7 +10,7 @@ import {
 class MapPanel extends Component {
   render() {
     console.log('rendered map panel');
-    const stats = this.props.fmaPanelData.stats;
+    const {stats} = this.props.fmaPanelData;
     return (
       <div
         style={{

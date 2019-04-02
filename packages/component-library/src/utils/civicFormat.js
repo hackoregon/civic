@@ -38,7 +38,7 @@ const numeric = d => {
 
 const year = format('.0f');
 const percentage = format('.0%');
-const dollars = d => `$${d}`;
+const dollars = d => `$${numeric(d)}`;
 
 const titleCase = str => startCase(toLower(str));
 const unformatted = d => d;
