@@ -4,7 +4,6 @@ import { css } from 'emotion';
 
 import {
   PackageSelectorBox,
-  Button,
   CivicSandboxDashboard,
 } from '@hackoregon/component-library';
 import SandboxComponent from '../Sandbox';
@@ -118,31 +117,33 @@ export class Packages extends React.Component {
         <section>{isError && <ErrorMessage />}</section>
 
         {this.state.mapIsOpen && (
-          <section style={{ position: 'relative' }}>
+          <div>
             <p>
               <a onClick={this.closeMap}>&lt; Back to Packages</a>
             </p>
-            <SandboxComponent />
-            {selectedFoundationDatum && (
-              <div
-                className={css(`
-              position: absolute;
-              top: 21%;
-              left: 4%;
-              width: 96%;
-              height: 0;
-              @media(max-width: 900px) {
-                position: relative;
-                left: 0;
-                height: auto;
-              }
-            `)}
-              >
-                <CivicSandboxDashboard data={selectedFoundationDatum} />
-              </div>
-            )}
-          </section>
+            <section style={{ position: 'relative' }}>
+              <SandboxComponent />
+              {selectedFoundationDatum && (
+                <div
+                  className={css(`
+                    position: absolute;
+                    top: 21%;
+                    left: 4%;
+                    width: 96%;
+                    height: 0;
+                    @media(max-width: 900px) {
+                      position: relative;
+                      left: 0;
+                      height: auto;
+                    }
+                `)}>
+                  <CivicSandboxDashboard data={selectedFoundationDatum} />
+                </div>
+              )}
+            </section>
+          </div>
         )}
+
       </div>
     );
   }

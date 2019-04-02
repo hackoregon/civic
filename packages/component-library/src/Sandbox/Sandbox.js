@@ -11,7 +11,7 @@ const baseMapWrapper = css(`
   min-height: 700px;
   @media (max-width: 850px) {
     height: 65vh;
-    min-height: 650px;
+    min-height: 600px;
   }
 `);
 
@@ -43,17 +43,19 @@ const Sandbox = ({
     <div className={styles}>
       <div
         className={css(`
-          display:flex;
-          align-items: center;
-          justify-content: space-between;
+          position: absolute;
+          top: 0;
+          right: 0;
           padding: 0;
           margin: 0;
-
-          .Select-menu-outer {
-            z-index: 100;
+          width: 100%;
+          height: 80vh;
+          min-height: 600px;
+          @media (max-width: 850px) {
+            height: 65vh;
+            min-height: 500px;
           }
-          `)}
-      >
+      `)}>
         <SandboxDrawer
           data={data}
           selectedSlide={selectedSlide}

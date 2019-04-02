@@ -7,36 +7,30 @@ import SandboxMapLegend from './SandboxMapLegend';
 
 const menuOpen = css(`
   position: absolute;
-  top: 4.3%;
+  top: 0;
   right: 0;
-  width: 33%;
+  width: 35%;
   z-index: 5;
   transition: 0.5s;
   @media (max-width: 850px) {
-    top: 4%;
     width: 90%;
   }
   @media (max-width: 500px) {
-    top: 4.9%;
-    right: 1px;
     width: 100%;
   }
 `);
 
 const menuClosed = css(`
   position: absolute;
-  top: 4.3%;
+  top: 0;
   right: 0;
   width: 7%;
   z-index: 5;
   transition: 0.5s;
   @media (max-width: 850px) {
-    top: 4%;
     width: 15%;
   }
   @media (max-width: 500px) {
-    top: 4.9%;
-    right: 1px;
     width: 25%;
   }
 `);
@@ -60,20 +54,14 @@ const SandboxDrawer = ({
   foundationMapProps
 }) => {
   return (
-    <div
-      className={drawerVisible ? menuOpen : menuClosed}
-    >
+    <div className={drawerVisible ? menuOpen : menuClosed}>
       <div onClick={toggleDrawer}>
         <div className={css(`
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
           text-transform: uppercase;
           font-size: 1rem;
           cursor: pointer;
           background: #EE495C;
           color: #F3F2F3;
-          height: auto;
         `)}>
           <div className={css(`
             font-size: 1.4rem;
@@ -90,28 +78,18 @@ const SandboxDrawer = ({
       </div>
       {drawerVisible && (
         <div className={css(`
-          position: absolute;
-          display: block;
-          width: 100%;
-          z-index: 100;
-          background: #EEE;
-          height: 74vh;
-          overflow-y: auto;
           background: #F3F2F3;
+          overflow-y: auto;
+          min-height: 550px;
+          height: 74vh;
           @media (max-width: 850px) {
-            height: 74vh;
+            height: 60vh;
           }
-          @media (max-width: 500px) {
-            height: 88vh;
-          }
-          .Select.is-open { position: relative; z-index: 1000; }
-          .Select-menu-outer { z-index: 9999; }
         `)}>
           <div className={css(`
             position: relative;
             z-index: 900;
-          `)}
-          >
+          `)}>
             <h2 className={css(`
               color: #555;
               text-transform: uppercase;
@@ -155,18 +133,29 @@ const SandboxDrawer = ({
           {foundationData && (
             <div>
               <div className={css(`
-                padding: .5rem;
+                position: relative;
                 font-size: .75rem;
                 color: #333;
-                position: relative;
                 z-index: 300;
               `)}>
-                <SandboxDateSelector
-                  slide={defaultFoundation}
-                  selectedSlideData={foundationData}
-                  fetchSlideByDate={fetchSlideByDate}
-                  type='foundation'
-                />
+                {foundationData.slide_meta && foundationData.slide_meta.dates.date_granularity
+                  ? <SandboxDateSelector
+                      slide={defaultFoundation}
+                      selectedSlideData={foundationData}
+                      fetchSlideByDate={fetchSlideByDate}
+                      type='foundation'
+                    />
+                  : foundationData.slide_meta && foundationData.slide_meta.dates.default_date_filter
+                  ? <span className={css(`
+                      font-size: 22px;
+                      font-weight: 400;
+                      padding: 0 0 0 16px;
+                      margin: 0;
+                    `)}>
+                      {foundationData.slide_meta.dates.default_date_filter}
+                    </span>
+                  : null
+                }
               </div>
               {!!foundationData.slide_data && !!foundationMapProps && (
                   <SandboxMapLegend data={foundationData} mapProps={foundationMapProps}/>
@@ -215,24 +204,23 @@ const SandboxDrawer = ({
                   />
                 </div>
                 <div className={css(`
-                  padding: .5rem;
+                  padding: .5rem 0 .5rem 0;
                   font-size: .75rem;
                   color: #333;
                   position: relative;
                   z-index: ${10 - index};
                 `)}>
-                  {selectedSlideData.slide_meta && selectedSlideData.slide_meta.dates.date_granularity
+                  {slide.checked && selectedSlideData.slide_meta && selectedSlideData.slide_meta.dates.date_granularity
                     ? <SandboxDateSelector
                         selectedSlideData={selectedSlideData}
                         slide={slide}
                         fetchSlideByDate={fetchSlideByDate}
                         type='slide'
                       />
-                    : selectedSlideData.slide_meta && selectedSlideData.slide_meta.dates.default_date_filter
+                    : slide.checked && selectedSlideData.slide_meta && selectedSlideData.slide_meta.dates.default_date_filter
                     ? <span className={css(`
-                        font-size: 17px;
-                        font-weight: 400;
-                        padding: 0 0 0 15px;
+                        font-size: 18px;
+                        padding: 0 0 0 17px;
                         margin: 0;
                       `)}>
                         {selectedSlideData.slide_meta.dates.default_date_filter}
