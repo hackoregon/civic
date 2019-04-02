@@ -1,71 +1,70 @@
-import React from 'react';
-import fetch from 'isomorphic-fetch';
-import StoryCard from '../StoryCard/StoryCard';
-import '../StoryCard/StoryCard.css';
-import '../StoryCard/StoryFooter.css';
-import '../StoryCard/StoryLink.css';
-import Budget101 from '../Budget101';
-import StackedArea from '../StackedAreaChart';
-import BubbleChart from '../MyTest/BubbleChart';
-import Example from '../Example';
-import { StickyContainer, Sticky } from 'react-sticky';
-import _ from 'lodash';
-import ReactSlider from 'rc-slider';
-import './CardCollection.css';
-import Select from 'react-select';
-import { saBubbleData } from '../MyTest/utils';
-import { data, colors } from '../StackedAreaChart/utils';
+import React from 'react'
+import fetch from 'isomorphic-fetch'
+import StoryCard from '../StoryCard/StoryCard'
+import '../StoryCard/StoryCard.css'
+import '../StoryCard/StoryFooter.css'
+import '../StoryCard/StoryLink.css'
+import Budget101 from '../Budget101'
+import StackedArea from '../StackedAreaChart'
+import { HorizontalBarChart } from '@hackoregon/component-library'
+import { StickyContainer, Sticky } from 'react-sticky'
+import _ from 'lodash'
+import ReactSlider from 'rc-slider'
+import './CardCollection.css'
+import Select from 'react-select'
+import { saBubbleData } from '../MyTest/utils'
+import { data, colors } from '../StackedAreaChart/utils'
 import {
   OVERALL_BUDGET,
   BUDGET_BY_SERVICE_AREA,
   BUDGET_BY_BUREAU,
   BUDGET_BY_PROGRAM,
   BUDGET_101,
-} from '../constants';
+} from '../constants'
 import {
   serviceAreaOptions,
   bureauOptions,
   serviceAreaBubbleDataFTW,
   bureauDataByYear,
   psProgramData,
-} from '../../data';
+} from '../../data'
 
-const yearList = _.range(2006, 2016);
-const sliderMin = _.min(yearList);
-const sliderMax = _.max(yearList);
+const yearList = [2013, 2014]
+const sliderMin = _.min(yearList)
+const sliderMax = _.max(yearList)
 const fiscalYearList = _.map(yearList, year => {
-  const yearString = _.toString(year);
-  return `FY${yearString}`;
-});
-const API_ROOT = 'http://service.civicpdx.org/budget/';
-const SACodeUrl = `${API_ROOT}code/?code_type=service_area_code&format=json`;
-const bureauCodeUrl = `${API_ROOT}code/?code_type=bureau_code&format=json`;
-const serviceAreaUrl = `${API_ROOT}history/service_area/?format=json`;
-const bureausUrl = `${API_ROOT}history/bureau/?format=json`;
+  const yearString = _.toString(year)
+  return `FY${yearString}`
+})
+const API_ROOT = 'http://service.civicpdx.org/budget/'
+const SACodeUrl = `${API_ROOT}code/?code_type=service_area_code&format=json`
+const bureauCodeUrl = `${API_ROOT}code/?code_type=bureau_code&format=json`
+const serviceAreaUrl = `${API_ROOT}history/service_area/?format=json`
+const bureausUrl = `${API_ROOT}history/bureau/?format=json`
 
 const urlsAndNames = [
   { name: 'ServiceAreaCodes', SACodeUrl },
   { name: 'ServiceAreas', serviceAreaUrl },
   { name: 'BureauCodes', bureauCodeUrl },
   { name: 'bureaus', bureausUrl },
-];
+]
 
 class CardCollection extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       data: null,
-      currentYear: fiscalYearList[7], // FY2013
+      currentYear: fiscalYearList[0], // FY2013
       currentServiceArea: 'PS',
       currentBureau: 'FR',
-    };
+    }
     // this.getData = this.getData.bind(this);
     // this.getAllData = this.getAllData.bind(this);
-    this.onSliderChange = this.onSliderChange.bind(this);
+    this.onSliderChange = this.onSliderChange.bind(this)
     // this.getServiceAreaByFiscalYear = this.getServiceAreaByFiscalYear.bind(this);
     // this.getSaSumByFiscalYear = this.getSaSumByFiscalYear.bind(this);
-    this.onServiceAreaSelect = this.onServiceAreaSelect.bind(this);
-    this.onBureauSelect = this.onBureauSelect.bind(this);
+    this.onServiceAreaSelect = this.onServiceAreaSelect.bind(this)
+    this.onBureauSelect = this.onBureauSelect.bind(this)
   }
 
   // componentDidMount() {
@@ -107,29 +106,29 @@ class CardCollection extends React.Component {
   // }
   //
   getAllData() {
-    this.getData(SACodeUrl, 'serviceAreaCodes');
-    this.getData(serviceAreaUrl, 'serviceAreas');
-    this.getData(bureauCodeUrl, 'bureauCodes');
-    this.getData(bureausUrl, 'bureaus');
+    this.getData(SACodeUrl, 'serviceAreaCodes')
+    this.getData(serviceAreaUrl, 'serviceAreas')
+    this.getData(bureauCodeUrl, 'bureauCodes')
+    this.getData(bureausUrl, 'bureaus')
   }
   onBureauSelect(obj) {
-    this.setState({ currentBureau: obj.value });
+    this.setState({ currentBureau: obj.value })
   }
 
   onSliderChange(value) {
-    this.setState({ currentYear: `FY${value}` });
+    this.setState({ currentYear: `FY${value}` })
   }
 
   onServiceAreaSelect(obj) {
-    this.setState({ currentServiceArea: obj.value });
+    this.setState({ currentServiceArea: obj.value })
   }
 
   render() {
-    console.log('state', this.state);
-    console.log('saBubbleData', saBubbleData);
+    console.log('state', this.state)
+    console.log('saBubbleData', saBubbleData)
 
-    const markObjects = _.map(yearList, (year, i) => ({ [year]: `FY${year}` }));
-    const marks = Object.assign({}, ...markObjects);
+    const markObjects = _.map(yearList, (year, i) => ({ [year]: `FY${year}` }))
+    const marks = Object.assign({}, ...markObjects)
 
     return (
       <div className="budget-card-collection">
@@ -151,106 +150,11 @@ class CardCollection extends React.Component {
               <StackedArea />
             </div>
           </div>
-          <Sticky>
-            <div className="budget-card-collection__sticky-controller">
-              <p>
-                Interact with the data by using the slider to see how the city
-                of Portland's budget has changed over the last ten years.
-              </p>
-              <p>
-                {' '}
-                Current year:{' '}
-                <span className="budget-current-year">
-                  {this.state.currentYear}
-                </span>
-              </p>
-              <ReactSlider
-                min={sliderMin}
-                max={sliderMax}
-                marks={marks}
-                step={1}
-                included={false}
-                onChange={this.onSliderChange}
-                value={Number(this.state.currentYear.replace('FY', ''))}
-              />
-            </div>
-          </Sticky>
-          <StoryCard
-            title="Budget By Service Area"
-            collectionId="budget"
-            cardId={BUDGET_BY_SERVICE_AREA}
-          >
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <p>
-                The circles demonstrate spending for each Service Area in the
-                City of Portland's budget.
-                <br />
-                <br />
-                Explore the circles for more information about each Service
-                Area.
-              </p>
-              {/*<BubbleChart
-                data={serviceAreaBubbleDataFTW[this.state.currentYear]}
-              />*/}
-            </div>
-          </StoryCard>
-          <StoryCard
-            title="Bureau Budgets within Service Areas"
-            cardId={BUDGET_BY_BUREAU}
-            collectionId="budget"
-          >
-            <p>
-              The circles demonstrate spending for each bureau within the
-              selected service area.
-              <br />
-              <br />
-              Explore the circles for more information about each bureau.
-            </p>
-            <Select
-              options={serviceAreaOptions}
-              onChange={this.onServiceAreaSelect}
-              value={this.state.currentServiceArea}
-              clearable={false}
-            />
-            {/*<BubbleChart
-              data={
-                bureauDataByYear[this.state.currentServiceArea][
-                  this.state.currentYear
-                ]
-              }
-            />*/}
-          </StoryCard>
-          <StoryCard
-            title="Program Budgets within Bureaus"
-            cardId={BUDGET_BY_PROGRAM}
-            collectionId="budget"
-          >
-            <p>
-              The circles demonstrate spending for each program within the
-              selected bureau.
-              <br />
-              <br />
-              Explore the circles for more information about each program.
-            </p>
-            <Select
-              options={bureauOptions}
-              onChange={this.onBureauSelect}
-              value={this.state.currentBureau}
-              clearable={false}
-            />
-            {/*<BubbleChart
-              data={
-                psProgramData[this.state.currentServiceArea]['FR'][
-                  this.state.currentYear
-                ]
-              }
-            />*/}
-          </StoryCard>
         </StickyContainer>
         <Budget101 />
       </div>
-    );
+    )
   }
 }
 
-export default CardCollection;
+export default CardCollection
