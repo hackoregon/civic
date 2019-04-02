@@ -245,7 +245,7 @@ class SandboxStory extends React.Component {
     const selectedSlide = isArray(packageData.default_slide)
       ? packageData.default_slide
       : packageData.default_slide.split(',');
-    this.updateSlide(selectedSlide);
+    this.updateSlide2(selectedSlide);
 
     const dataObj = { slide_meta: {}, slide_data: {} };
     const defaultFoundation = data.foundations[selectedFoundation];
