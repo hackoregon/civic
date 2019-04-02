@@ -1,6 +1,5 @@
 import React from "react";
-import "../../component-library/assets/global.styles.css";
-import { storybookStyles } from "./storyStyles";
+import { storybookStyles } from "../storyStyles";
 
 const ColorThemeStyle = () => (
   <div style={storybookStyles.main}>
