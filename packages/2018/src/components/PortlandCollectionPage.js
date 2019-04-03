@@ -135,7 +135,7 @@ const PortlandCollectionPage = () => (
     <div className={leftContainer}>
       <div className={homeLink}>
         <Link to="/">
-          <img src={require(`../assets/civic-logo-animated.svg`)} />
+          <img src={require(`../../../component-library/assets/civic-logo-animated.svg`)} />
         </Link>
       </div>
       <h1>Portland Collections</h1>

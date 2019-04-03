@@ -39,8 +39,7 @@
     "pretty": "prettier --write \"./**/*.{js,jsx,css,md}\""
   },
   "husky": {
-    "hooks": {
-    }
+    "hooks": {}
   },
   "lint-staged": {
     "*.{js,jsx}": [

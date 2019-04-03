@@ -7,14 +7,32 @@ import DataList from './DataList';
 import SearchBar from './SearchBar';
 import { Header, Footer } from '@hackoregon/component-library';
 
-import logo from '../../assets/civic-logo-animated.svg';
-import smallLogo from '../../assets/civic-logo-c.svg';
-import brain from '../../assets/brain.svg';
-import brainMobile from '../../assets/brain-mobile.svg';
-import trees from '../../assets/trees.png';
-import hackOregonLogo from '../../assets/hack-oregon-logo.png';
-import heartMail from '../../assets/heartmail.png';
-import twitterLogo from '../../assets/twitter-logo.png';
+// import logo from '../../assets/civic-logo-animated.svg';
+import logo from '../../../component-library/assets/civic-logo-animated.svg'
+
+// import smallLogo from '../../assets/civic-logo-c.svg';
+import smallLogo from '../../../component-library/assets/civic-logo-c.svg'
+
+// import brain from '../../assets/brain.svg';
+import brain from '../../../component-library/assets/brain.svg'
+
+// import brainMobile from '../../assets/brain-mobile.svg';
+import brainMobile from '../../../component-library/assets/brain-mobile.svg'
+
+// import trees from '../../assets/trees.png';
+import trees from '../../../component-library/assets/trees.png'
+
+// import hackOregonLogo from '../../assets/hack-oregon-logo.png';
+import hackOregonLogo from '../../../component-library/assets/hack-oregon-logo.png'
+
+// import heartMail from '../../assets/heartmail.png';
+import heartMail from '../../../component-library/assets/heartmail.png'
+
+// import twitterLogo from '../../assets/twitter-logo.png';
+import twitterLogo from '../../../component-library/assets/twitter-logo.png'
+
+
+
 
 import cities from './cities';
 import zipCodes from './zipCodes.json';
