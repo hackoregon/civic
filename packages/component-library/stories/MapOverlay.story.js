@@ -19,7 +19,7 @@ const demoMap = () => {
           <BaseMap>
             <MapOverlay
               data={data.slide_data.features}
-              opacity={1.0}
+              opacity={0.1}
               filled={true}
               getPosition={f => f.geometry.coordinates}
               onLayerClick={info => action('Layer clicked:')(info)}
