@@ -32,6 +32,7 @@ const MapOverlay = props => {
     getElevation,
     getFillColor,
     getLineColor,
+    getLineWidth,
     stroked,
   } = props;
 
@@ -61,6 +62,8 @@ const MapOverlay = props => {
     filled,
     onHover,
     wireframe,
+    getRadius,
+    getLineWidth,
     stroked,
     lineWidthMinPixels: strokeWidth,
     autoHighlight: true,

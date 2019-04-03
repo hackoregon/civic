@@ -1,37 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { LeafletMap } from '@hackoregon/component-library';
-import { GeoJSON, LayerGroup } from 'react-leaflet';
+import { BaseMap, MapOverlay } from '@hackoregon/component-library';
 import { MapPanel } from '../index';
 import PropTypes from 'prop-types';
 import { isEmpty } from 'ramda';
 import { setPanelValues } from '../../state';
 
-// import { GeoJSON, Marker, Popup } from 'react-leaflet';
-
-const portland = [45.52, -122.67];
-
 class TransportMap extends Component {
-  constructor(props) {
-    super(props);
-
-    // this.renderMap = this.renderMap.bind(this);
-    this.onEachFeature = this.onEachFeature.bind(this);
-  }
-
   openPanel(e) {
-    // console.log('e', e)
-    const properties = e.target.feature;
-    // const fmaId = layer.feature.properties.id;
-    // this.renderPanel(fmaId);
-    this.props.setPanelValues(properties);
-  }
-
-  onEachFeature(feature, layer) {
-    // console.log("trans this", this)
-    layer.on({
-      click: this.openPanel.bind(this),
-    });
+    this.props.setPanelValues(e.object);
   }
 
   render() {
@@ -53,34 +30,66 @@ class TransportMap extends Component {
         'This map shows projects that are scheduled close to city hall until the end of the year.  With a little bit more development, users will be able to input an address and view nearby development.  Currently, the map shows the default definition of "nearby" for this map, which is projects within 200 meters of Portland City Hall.',
     };
 
+    const radiusFor = {
+      features: 250,
+      conflicts: 250,
+      nearby: 20,
+    };
+
+    const zoomFor = {
+      features: 10,
+      conflicts: 10,
+      nearby: 15,
+    };
+
+    const { geoData, mapType } = this.props;
+
+    const lon = (type, data) => {
+      if (!data) return null;
+      if (type === 'nearby') {
+        console.log('LON', data.features[0].geometry.coordinates[0][0]);
+        return data.features[0].geometry.coordinates[0][0];
+      }
+      return null;
+    };
+
+    const lat = (type, data) => {
+      if (!data) return null;
+      if (type === 'nearby') {
+        return data.features[0].geometry.coordinates[0][1];
+      }
+      return null;
+    };
+
     console.log('RENDERING');
-    console.log('GEODATA', this.props.geoData);
+    console.log('GEODATA', geoData);
     let key = 'tempkey';
-    if (this.props.geoData) {
-      key =
-        `${this.props.mapType}_${this.props.geoData.features.length}` ||
-        'tempkey';
+    if (geoData) {
+      key = `${mapType}_${geoData.features.length}` || 'tempkey';
     }
-    // console.log('key', key)
 
     return (
       <div>
         <div style={{ textAlign: 'left', marginBottom: '1em' }}>
-          {blurb[this.props.mapType]}
+          {blurb[mapType]}
         </div>
-        <LeafletMap center={portland} zoom={11} height={600} width={900}>
-          {this.props.geoData && (
-            <LayerGroup key={key}>
-              <GeoJSON
-                data={this.props.geoData}
-                onEachFeature={this.onEachFeature}
-              />
-            </LayerGroup>
+        <BaseMap initialZoom={zoomFor[mapType]} initialLongitude={lon(mapType, geoData)} initialLatitude={lat(mapType, geoData)}>
+          {geoData && (
+            <MapOverlay
+              filled
+              stroked
+              data={geoData}
+              opacity={0.5}
+              getPosition={f => f.geometry.coordinates}
+              getElevation={() => 100}
+              getFillColor={() => [232, 114, 32, 255]}
+              getLineColor={() => [232, 114, 32, 255]}
+              getRadius={radiusFor[mapType]}
+              getLineWidth={1}
+              onLayerClick={this.openPanel.bind(this)}
+            />
           )}
-        </LeafletMap>
-        {this.props.panelValues ? (
-          <MapPanel panelValues={this.props.panelValues} />
-        ) : null}
+        </BaseMap>
       </div>
     );
   }
