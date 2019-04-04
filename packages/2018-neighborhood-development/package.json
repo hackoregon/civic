@@ -37,6 +37,7 @@
     "cross-env": "^5.2.0",
     "express": "^4.14.1",
     "invariant": "^2.2.2",
+    "prop-types": "^15.7.2",
     "ramda": "^0.23.0",
     "react": "^16.8.4",
     "react-dom": "npm:@hot-loader/react-dom",

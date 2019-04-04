@@ -31,7 +31,9 @@ const MapOverlay = props => {
     y,
     getElevation,
     getFillColor,
-    getLineColor
+    getLineColor,
+    getLineWidth,
+    stroked,
   } = props;
 
   const tooltip = React.Children.map(children, child => {
@@ -60,13 +62,16 @@ const MapOverlay = props => {
     filled,
     onHover,
     wireframe,
+    getRadius,
+    getLineWidth,
+    stroked,
+    lineWidthMinPixels: strokeWidth,
     autoHighlight: true,
     fp64: true,
     id: 'geojson',
     lightSettings: LIGHT_SETTINGS,
     onClick: onLayerClick,
     pickable: true,
-    stroked: false,
     getElevation: getElevation,
     getFillColor: getFillColor,
     getLineColor: getLineColor,
@@ -87,6 +92,13 @@ MapOverlay.propTypes = {
   elevation: PropTypes.number,
   filled: PropTypes.bool,
   extruded: PropTypes.bool,
+  stroked: PropTypes.bool,
+  strokeWidth: PropTypes.number,
 };
+
+MapOverlay.defaultProps = {
+  stroked: false,
+  strokeWidth: 1,
+}
 
 export default MapOverlay;

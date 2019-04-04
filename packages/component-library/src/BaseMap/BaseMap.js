@@ -56,6 +56,24 @@ class BaseMap extends Component {
     this.setState({ mounted: true });
   }
 
+  componentWillReceiveProps(props) {
+    let updatedViewportProps = {
+      zoom: props.initialZoom,
+      pitch: props.initialPitch,
+      longitude: props.initialLongitude,
+      latitude: props.initialLatitude,
+    };
+
+    // Remove all keys that have null/undefined values to keep defaults
+    Object.keys(updatedViewportProps).forEach((key) => {
+      if (updatedViewportProps[key] == null) {
+        delete updatedViewportProps[key];
+      }
+    });
+
+    this.setState({ viewport: { ...this.state.viewport, ...updatedViewportProps } })
+  }
+
   onHover({ object, x, y }) {
     this.setState({
       tooltipInfo: object,

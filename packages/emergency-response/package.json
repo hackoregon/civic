@@ -27,7 +27,9 @@
     "build": "rimraf dist && cross-env NODE_ENV=production webpack --config ./webpack.config.js",
     "start:dev": "cross-env NODE_ENV=development babel-node server",
     "start:prod:": "cross-env NODE_ENV=production node server",
-    "test": "cross-env BABEL_ENV=test mocha --opts ./mocha.opts 'src/**/*.test.js'"
+    "test": "cross-env BABEL_ENV=test mocha --opts ./mocha.opts 'src/**/*.test.js'",
+    "lint": "eslint --fix src"
+
   },
   "dependencies": {
     "@hackoregon/component-library": "^1.0.0-alpha.1c62c05f",
@@ -38,6 +40,7 @@
     "invariant": "^2.2.2",
     "isomorphic-fetch": "^2.2.1",
     "leaflet": "^1.0.3",
+    "prop-types": "^15.7.2",
     "ramda": "^0.23.0",
     "react": "^16.8.4",
     "react-dom": "npm:@hot-loader/react-dom",
@@ -104,7 +107,6 @@
     "postcss-loader": "^3.0.0",
     "react-addons-test-utils": "^15.5.3",
     "react-hot-loader": "^4.0.0",
-
     "react-test-renderer": "15",
     "react-transform-hmr": "^1.0.4",
     "redux-immutable-state-invariant": "^1.2.4",
