@@ -468,7 +468,7 @@ class LandingPage extends React.Component {
           <div className={aboutCivicWrapper} id="aboutCivic">
             <div className={sectionHeaderWrapper}>
               <div className={smallLogoWrapper}>
-                <Logo type={squareLogo}/>
+                <Logo type="squareLogo"/>
               </div>
               <div className={sectionRightContainer}>
                 <div className={sectionHeaderTitle}>

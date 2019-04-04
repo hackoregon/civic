@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import { Link } from 'react-router';
+import { Logo } from '@hackoregon/component-library'
 
 const collectionPageWrapper = css`
   position: relative;
@@ -135,7 +136,7 @@ const PortlandCollectionPage = () => (
     <div className={leftContainer}>
       <div className={homeLink}>
         <Link to="/">
-          <img src={require(`../../../component-library/assets/civic-logo-animated.svg`)} />
+          <Logo />
         </Link>
       </div>
       <h1>Portland Collections</h1>
