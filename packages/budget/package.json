@@ -49,6 +49,7 @@
     "react-router-redux": "^4.0.8",
     "react-select": "^1.0.0-rc.3",
     "react-sticky": "^5.0.8",
+    "react-test-renderer": "^16.8.4",
     "recharts": "^0.22.1",
     "redux": "^3.6.0",
     "redux-thunk": "^2.1.0",
