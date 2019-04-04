@@ -38,6 +38,7 @@
     "express": "^4.14.1",
     "invariant": "^2.2.2",
     "isomorphic-fetch": "^2.2.1",
+    "prop-types": "15.7.2",
     "ramda": "^0.23.0",
     "react": "^16.8.4",
     "react-dom": "npm:@hot-loader/react-dom",
@@ -94,7 +95,6 @@
     "postcss-loader": "^3.0.0",
     "react-addons-test-utils": "^15.5.3",
     "react-hot-loader": "^4.0.0",
-
     "react-test-renderer": "15",
     "react-transform-hmr": "^1.0.4",
     "redux-immutable-state-invariant": "^1.2.4",
