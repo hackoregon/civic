@@ -9,7 +9,6 @@ import { connect } from 'react-redux';
 import { StoryCard, Slider, Dropdown } from '@hackoregon/component-library';
 
 import '@hackoregon/component-library/assets/global.styles.css';
-import '@hackoregon/component-library/assets/vendor/leaflet.css';
 import '@hackoregon/component-library/assets/vendor/react-select.min.css';
 
 import { fetchAffordabilityData } from '../../state/affordability/actions';
@@ -91,6 +90,7 @@ const textAlignCenter = {
   textAlign: 'center',
 };
 
+
 export class App extends React.Component {
   componentDidMount() {
     this.props.fetchAllData();
@@ -108,6 +108,11 @@ export class App extends React.Component {
       setUnitSize,
       setNeighborhood,
     } = this.props;
+
+    const activeNeighborhood =
+      neighborhoodData &&
+      demographicData &&
+      neighborhoodData.features.find(n => n.id === demographicData.id);
 
     return (
       <div>
@@ -150,9 +155,9 @@ export class App extends React.Component {
             <MapLegend otherDemographicLabel={otherDemographic.label || ''} />
             <div style={mapStyles}>
               <Map
-                neighborhoods={neighborhoodData}
-                onSelect={id => setNeighborhood(id)}
-                activeNeighborhood={demographicData ? demographicData.id : 0}
+                neighborhoodData={neighborhoodData}
+                activeNeighborhood={activeNeighborhood}
+                onSelect={({ object }) => setNeighborhood(object)}
               />
             </div>
             <div style={arrowHackStyles} />

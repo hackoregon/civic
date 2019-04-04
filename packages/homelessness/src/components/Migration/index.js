@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { StoryCard } from '@hackoregon/component-library';
+import { CivicStoryCard } from '@hackoregon/component-library';
 import { TreemapChart, HalfDonutChart } from '../Reuseable';
 import shared from '../shared.styles';
 import { fetchMigrationDemoData } from '../../state/Migration/actions';
@@ -35,7 +35,7 @@ class Migration extends React.Component {
   render() {
     const dataLoaded = this.props.migrationData[0];
     return (
-      <StoryCard title="Homeless Migration">
+      <CivicStoryCard title="Homeless Migration">
         <div>
           <div>
             <h3 style={shared.header}>
@@ -44,7 +44,7 @@ class Migration extends React.Component {
               among the newly arrived unsheltered
             </h3>
           </div>
-          <HalfDonutChart dataSets={arrivalData} legend={false} />
+          <HalfDonutChart dataSets={arrivalData[0].data} />
           <div>
             <h3 style={shared.header}>were homeless on arrival</h3>
             <p style={shared.text}>
@@ -73,7 +73,7 @@ class Migration extends React.Component {
             </p>
           </div>
         </div>
-      </StoryCard>
+      </CivicStoryCard>
     );
   }
 }

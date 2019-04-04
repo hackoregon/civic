@@ -8,8 +8,17 @@ const root = state => state[NAME] || {};
 /**
  * Other specific selectors from substate
  */
+const formatForChart = data =>
+    data.map(element => ({
+        data: [
+            { label: 'Homeless', value: element.homeless },
+            { label: 'General', value: element.general },
+        ],
+        title: element.name,
+    }));
+
 const filterByName = (data, keys) =>
-  data.filter(element => keys.includes(element.name));
+  formatForChart(data.filter(element => keys.includes(element.name)));
 export const ethnicity = state =>
   filterByName(root(state).ethnicityData || [], ['White', 'People of Color']);
 export const veteranStatus = state =>
