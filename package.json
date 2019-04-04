@@ -111,7 +111,6 @@
     "npm-run-all": "^4.0.2",
     "postcss-loader": "^3.0.0",
     "prettier": "1.16.4",
-    "prop-types": "^15.5.3",
     "react-addons-test-utils": "^15.5.3",
     "react-hot-loader": "^4.8.0",
     "react-transform-hmr": "^1.0.4",
