@@ -1,20 +1,12 @@
 import React from 'react';
-import { StoryCard } from '@hackoregon/component-library';
+import PropTypes from 'prop-types';
+import { StoryCard, LineChart } from '@hackoregon/component-library';
+import { ungroupBy } from '@hackoregon/component-library/dist/utils';
 
-import LineChart from './LineChart';
 
 import eastData from './east.json';
 import northData from './north.json';
 import allData from './all.json';
-
-const colors = [
-  undefined,
-  '#a7a7a7',
-  '#99b2ce',
-  '#3b5d85',
-  '#ab070a',
-  '#e3070a',
-];
 
 const stackUnitGrowth = json =>
   json.map(year => {
@@ -24,10 +16,15 @@ const stackUnitGrowth = json =>
     return year;
   });
 
-const headingStyle = {
-  textAlign: 'center',
-  padding: '0 1em',
-};
+const keys = [
+  'Portland Metro Population Growth',
+  'Single Family Unit Growth (Stacked)',
+  'Multifamily Unit Growth (Stacked)',
+  'Median Home Price Growth',
+  'Rent Growth'
+];
+
+const formatData = data => ungroupBy(data, keys);
 
 const pStyle = {
   maxWidth: '800px',
@@ -36,6 +33,19 @@ const pStyle = {
   padding: '0 1em',
   textAlign: 'left',
 };
+
+const ProductionChart = ({ data, title }) => <LineChart
+  data={formatData(stackUnitGrowth(data))}
+  dataKey='name'
+  dataValue='value'
+  dataSeries='type'
+  title={title}
+/>
+
+ProductionChart.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object),
+  title: PropTypes.string,
+}
 
 const TempProdVsCost = () => (
   <StoryCard
@@ -81,26 +91,25 @@ const TempProdVsCost = () => (
       2011 through 2015, although again, there was a brief slowing of the rate
       of growth in 2014.
     </p>
-    <h3 style={headingStyle}>Portland Housing Production and Costs</h3>
-    <LineChart data={stackUnitGrowth(allData)} colors={colors} />
+
+    <ProductionChart data={allData} title='Portland Housing Production and Costs' />
+
     <p style={pStyle}>
       This pattern of increasing and moderating growth holds true across all
       neighborhoods. However, we see a slower rate of growth in housing costs in
       inner Portland neighborhoods that experienced significant new
       construction, like the Interstate corridor and NE Alberta:
     </p>
-    <h3 style={headingStyle}>
-      Inner N and NE Portland Housing Production and Costs
-    </h3>
-    <LineChart data={stackUnitGrowth(northData)} colors={colors} />
+
+    <ProductionChart data={northData} title='Inner N and NE Poretland Housing Production and Costs' />
+
     <p style={pStyle}>
       In contrast, areas that saw little new construction, like outer East
       Portland, saw steeper increases in both home prices and rental costs.
     </p>
-    <h3 style={headingStyle}>
-      Outer East Portland Housing Production and Costs
-    </h3>
-    <LineChart data={stackUnitGrowth(eastData)} colors={colors} />
+
+    <ProductionChart data={eastData} title='Outer East Portland Housing Production and Costs' />
+
     <p style={pStyle}>
       These charts suggest that greater amounts of new housing built in specific
       neighborhoods has been correlated with a slowing of the rate at which the
