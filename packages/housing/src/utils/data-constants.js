@@ -37,3 +37,7 @@ export const DEFAULT_NEIGHBORHOOD = {
 };
 
 export const HOUSING_TEAM_PRIMARY_COLOR = '#3e75ac';
+export const AFFORDABLE_YOU_COLOR = [5, 71, 138];
+export const AFFORDABLE_OTHER_COLOR = [185, 88, 211];
+export const AFFORDABLE_BOTH_COLOR = [214, 214, 109];
+export const AFFORDABLE_NEITHER_COLOR = [150, 150, 150];

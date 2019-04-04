@@ -1,77 +1,78 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { LeafletMap } from '@hackoregon/component-library';
-import { GeoJSON, LayerGroup } from 'react-leaflet';
-import Neighborhood from '../Neighborhood';
-import CrossHatch from '../CrossHatch';
+import { BaseMap, MapOverlay } from '@hackoregon/component-library';
+import {
+  AFFORDABLE_YOU_COLOR,
+  AFFORDABLE_OTHER_COLOR,
+  AFFORDABLE_BOTH_COLOR,
+  AFFORDABLE_NEITHER_COLOR
+} from '../../utils/data-constants';
 
-const portlandBounds = [[45.654527, -122.464291], [45.431897, -122.836892]];
+// Four possible colors
+// 1. Both can afford
+// 2. You can afford
+// 3. They can afford
+// 4. Neither can afford
+const getNeighborhoodColor = ({ affordableYou, affordableOther }) => {
+  if (affordableYou) {
+    return affordableOther ? AFFORDABLE_BOTH_COLOR : AFFORDABLE_YOU_COLOR;
+  }
+  return affordableOther ? AFFORDABLE_OTHER_COLOR: AFFORDABLE_NEITHER_COLOR;
+}
 
-const reactLeafletMapProps = {
-  bounds: portlandBounds,
-  scrollWheelZoom: false,
-  url: 'http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png',
-  attribution:
-    "&copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> &copy; <a href='http://cartodb.com/attributions'>CartoDB</a>",
-  subdomains: 'abcd',
+const asLine = feature => {
+  if (!feature || !feature.geoetry) return feature;
+  const copy = { ...feature };
+  copy.geometry.type = 'LineString';
+  return copy;
 };
 
-const reactLeafletMapStyle = {
-  width: '100%',
-  height: 'auto',
-};
-
-const activePathOptions = {
-  fill: false,
-  stroke: true,
-  color: '#ee495c',
-  weight: 3,
-};
-
-const Map = ({ neighborhoods, onSelect, activeNeighborhood }) => {
-  const activeDatum =
-    neighborhoods &&
-    activeNeighborhood &&
-    neighborhoods.features.find(
-      neighborhood => neighborhood.id === activeNeighborhood
-    );
-
+const Map = ({ neighborhoodData, activeNeighborhood, onSelect }) => {
   return (
-    <div style={reactLeafletMapStyle}>
-      {neighborhoods && (
-        <LeafletMap {...reactLeafletMapProps}>
-          {neighborhoods.features.map(neighborhood => (
-            <Neighborhood
-              key={neighborhood.id.toString()}
-              data={neighborhood}
-              onSelect={onSelect}
-            />
-          ))}
-          {activeDatum && (
-            <LayerGroup key={activeDatum.id}>
-              <GeoJSON
-                data={{ features: [activeDatum], type: 'FeatureCollection' }}
-                {...activePathOptions}
-              />
-            </LayerGroup>
-          )}
-          <CrossHatch />
-        </LeafletMap>
-      )}
-    </div>
+    <BaseMap initialZoom={9.8}>
+      <MapOverlay
+        filled
+        stroked
+        data={neighborhoodData}
+        opacity={0.4}
+        getPosition={f => f.geometry.coordinates}
+        getFillColor={getNeighborhoodColor}
+        getLineColor={() => [255, 255, 255]}
+        getRadius={10}
+        getLineWidth={4}
+      />
+      <MapOverlay
+        visible={!!activeNeighborhood}
+        id="selected-neighborhood"
+        stroked
+        pickable={false}
+        data={{features: [asLine(activeNeighborhood)], type: 'FeatureCollection'}}
+        opacity={1}
+        getPosition={f => f.geometry.coordinates}
+        getLineColor={() => [238, 73, 92]}
+        getLineWidth={8}
+      />
+      <MapOverlay
+        id="interaction-layer"
+        filled
+        stroked
+        data={neighborhoodData}
+        opacity={0.0}
+        getPosition={f => f.geometry.coordinates}
+        getFillColor={() => [255, 255, 255]}
+        getLineColor={() => [255, 255, 255]}
+        getRadius={10}
+        getLineWidth={4}
+        onLayerClick={onSelect}
+      />
+    </BaseMap>
   );
-};
+}
 
 Map.propTypes = {
-  neighborhoods: PropTypes.object,
+  neighborhoodData: PropTypes.arrayOf(PropTypes.object),
+  activeNeighborhood: PropTypes.object,
   onSelect: PropTypes.func,
-  activeNeighborhood: PropTypes.number,
-};
-
-Map.defaultProps = {
-  neighborhoods: null,
-  onSelect() {},
-  activeNeighborhood: 0,
 };
 
 export default Map;

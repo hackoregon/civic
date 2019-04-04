@@ -91,6 +91,7 @@ const textAlignCenter = {
   textAlign: 'center',
 };
 
+
 export class App extends React.Component {
   componentDidMount() {
     this.props.fetchAllData();
@@ -108,6 +109,11 @@ export class App extends React.Component {
       setUnitSize,
       setNeighborhood,
     } = this.props;
+
+    const activeNeighborhood =
+      neighborhoodData &&
+      demographicData &&
+      neighborhoodData.features.find(n => n.id === demographicData.id);
 
     return (
       <div>
@@ -150,9 +156,9 @@ export class App extends React.Component {
             <MapLegend otherDemographicLabel={otherDemographic.label || ''} />
             <div style={mapStyles}>
               <Map
-                neighborhoods={neighborhoodData}
-                onSelect={id => setNeighborhood(id)}
-                activeNeighborhood={demographicData ? demographicData.id : 0}
+                neighborhoodData={neighborhoodData}
+                activeNeighborhood={activeNeighborhood}
+                onSelect={({ object }) => setNeighborhood(object)}
               />
             </div>
             <div style={arrowHackStyles} />
