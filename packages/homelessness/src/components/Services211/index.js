@@ -19,7 +19,7 @@ class Services211 extends React.Component {
           people who self-identified as homeless. Most of those calls were
           directed to housing assistance services.
         </p>
-        {dataLoaded ? <HalfDonutChart dataSets={this.props.pieData} /> : null}
+        {dataLoaded ? <HalfDonutChart dataSets={this.props.pieData[0].data} /> : null}
         <h3 style={shared.header}>Housing Assistance</h3>
         <p style={shared.text}>
           Housing assistance is one of the most common ‘basic needs’ requested
@@ -39,9 +39,7 @@ class Services211 extends React.Component {
         {dataLoaded ? (
           <ListBarChart
             data={this.props.pieData[0].otherChart}
-            axisLabel="percent"
-            labelKey="name"
-            colors={['#75568D', '#d4d5d6']}
+            title='Non-Housing Assistance 211info Calls'
           />
         ) : null}
       </CivicStoryCard>

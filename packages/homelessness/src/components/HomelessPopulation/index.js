@@ -1,40 +1,53 @@
 /* eslint-disable react/jsx-boolean-value, react/no-unused-prop-types */
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { css } from 'emotion';
-import { Dropdown, CivicStoryCard, HorizontalBarChart } from '@hackoregon/component-library';
-import shared from '../shared.styles';
+import React from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import { css } from 'emotion'
+import {
+  Dropdown,
+  CivicStoryCard,
+  HorizontalBarChart,
+} from '@hackoregon/component-library'
+import shared from '../shared.styles'
 
-import { fetchPopulationData } from '../../state/Population/actions';
+import { fetchPopulationData } from '../../state/Population/actions'
 import {
   ethnicity,
   veteranStatus,
   disability,
   age,
   gender,
-} from '../../state/Population/selectors';
+} from '../../state/Population/selectors'
 
-const barChartsForPopulation = (data) => {
-  return data.map(el => <HorizontalBarChart minimalist data={el.data} xLabel={el.title} dataValue='value' dataLabel='label' />);
+const barChartsForPopulation = data => {
+  return !!data && data.map(el => (
+    <HorizontalBarChart
+      minimalist
+      data={el.data}
+      xLabel={el.title}
+      dataValue="value"
+      dataValueFormatter={d => `${d}%`}
+      dataLabel="label"
+    />
+  ))
 }
 
 const containerClass = css`
   text-align: center;
   max-width: 95%;
   margin: auto;
-`;
+`
 
 const selectContainerClass = css`
   margin-top: 50px;
   margin: 0 30px;
   padding-bottom: 13px;
   width: 300px;
-`;
+`
 
 class HomelessPopulation extends React.Component {
   constructor() {
-    super();
+    super()
     this.state = {
       options: [
         { value: 'ethnicity', label: 'Ethnicity' },
@@ -65,13 +78,13 @@ class HomelessPopulation extends React.Component {
           'Community Survey (ACS) only includes male and female.',
         Age: '',
       },
-    };
+    }
   }
   componentDidMount() {
-    this.props.loadData();
+    this.props.loadData()
   }
   handleChange(option) {
-    this.setState({ value: option.value });
+    this.setState({ value: option.value })
   }
   render() {
     return (
@@ -95,11 +108,12 @@ class HomelessPopulation extends React.Component {
               clearable={false}
             />
           </div>
-          {this.props[this.state.value] && barChartsForPopulation(this.props[this.state.value])}
+          {this.props[this.state.value] &&
+            barChartsForPopulation(this.props[this.state.value])}
         </div>
         <p style={shared.footnote}>{this.state.footnote[this.state.value]}</p>
       </CivicStoryCard>
-    );
+    )
   }
 }
 
@@ -110,24 +124,24 @@ HomelessPopulation.propTypes = {
   disability: PropTypes.array,
   age: PropTypes.array,
   gender: PropTypes.array,
-};
+}
 
 const mapDispatchToProps = dispatch => ({
   loadData: () => fetchPopulationData(dispatch),
-});
+})
 
 const mapStateToProps = allState => {
-  const state = allState.homelessness || allState;
+  const state = allState.homelessness || allState
   return {
     ethnicity: ethnicity(state),
     veteranStatus: veteranStatus(state),
     disability: disability(state),
     age: age(state),
     gender: gender(state),
-  };
-};
+  }
+}
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(HomelessPopulation);
+)(HomelessPopulation)

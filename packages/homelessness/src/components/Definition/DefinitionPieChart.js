@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { PieChart } from '@hackoregon/component-library';
-import { css } from 'emotion';
-import CustomPieLegend from './CustomPieLegend';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { css } from 'emotion'
+
+import { HalfDonutChart } from '../Reuseable'
 
 const containerClass = css`
   color: #726371;
@@ -12,19 +12,19 @@ const containerClass = css`
   justify-content: center;
   align-items: center;
   margin-bottom: 35px;
-`;
+`
 
 const yearsContainerClass = css`
   display: flex;
   justify-content: space-between;
-`;
+`
 
 const listItemClass = css`
   display: inline;
   padding: 10px;
   color: #aaa4ab;
   flex: inherit;
-`;
+`
 
 const linkClass = css`
   display: inline-block;
@@ -37,39 +37,35 @@ const linkClass = css`
     color: black;
     cursor: pointer;
   }
-`;
+`
 
 const linkActiveClass = css`
   font-weight: bold;
   color: black;
   border-bottom: 3px solid black;
-`;
-
-const pieContainerClass = css`
-  margin-bottom: -25%;
-`;
+`
 
 const findPercentage = (val, arr) => {
-  const total = arr.reduce((acc, cur) => acc + cur.value, 0);
-  return (val / total) * 100;
-};
+  const total = arr.reduce((acc, cur) => acc + cur.value, 0)
+  return (val / total) * 100
+}
 
 const getUniqueYears = arr =>
   arr
     .reduce((acc, curr) => {
       if (acc.indexOf(curr.year) === -1) {
-        acc.push(curr.year);
+        acc.push(curr.year)
       }
-      return acc;
+      return acc
     }, [])
-    .sort();
+    .sort()
 
 const getKeyByValue = (obj, val) =>
-  Object.keys(obj).find(key => obj[key] === val);
+  Object.keys(obj).find(key => obj[key] === val)
 
 const pieLabel = options => {
   if (!options.payload.label) {
-    return null;
+    return null
   }
 
   return (
@@ -86,19 +82,19 @@ const pieLabel = options => {
     >
       {`${options.payload.value.toFixed(1)}%`}
     </Text>
-  );
-};
+  )
+}
 
 class DefinitionPieChart extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       year: 2015,
       activeValue: props.initialValue,
-    };
+    }
 
-    this.updateCategory = this.updateCategory.bind(this);
-    this.cleanData = this.cleanData.bind(this);
+    this.updateCategory = this.updateCategory.bind(this)
+    this.cleanData = this.cleanData.bind(this)
   }
 
   cleanData(data) {
@@ -110,12 +106,12 @@ class DefinitionPieChart extends React.Component {
         value: findPercentage(item.value, arr),
         rawCount: item.value,
         rawTotal: arr.reduce((acc, cur) => acc + cur.value, 0),
-      }));
+      }))
   }
 
   updateCategory(val) {
     if (val !== this.state.activeValue) {
-      this.setState({ activeValue: val });
+      this.setState({ activeValue: val })
     }
   }
 
@@ -135,7 +131,7 @@ class DefinitionPieChart extends React.Component {
           <div className={yearsContainerClass}>
             <ul>
               {getUniqueYears(this.props.data).map(item => {
-                const active = item === this.state.year ? linkActiveClass : '';
+                const active = item === this.state.year ? linkActiveClass : ''
                 return (
                   <li className={listItemClass} key={item}>
                     <a
@@ -145,15 +141,14 @@ class DefinitionPieChart extends React.Component {
                       {item}
                     </a>
                   </li>
-                );
+                )
               })}
             </ul>
           </div>
         </div>
-        <div className={pieContainerClass}><PieChart data={this.cleanData(this.props.data)} halfDoughnut dataLabel='name' dataValue='value'/></div>
-        {console.log(this.cleanData(this.props.data))}
+        <HalfDonutChart dataSets={this.cleanData(this.props.data)} />
       </div>
-    );
+    )
   }
 }
 
@@ -163,6 +158,6 @@ DefinitionPieChart.propTypes = {
   initialValue: PropTypes.string,
   data: PropTypes.array,
   content: PropTypes.object,
-};
+}
 
-export default DefinitionPieChart;
+export default DefinitionPieChart

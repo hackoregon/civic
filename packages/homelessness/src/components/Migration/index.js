@@ -44,7 +44,7 @@ class Migration extends React.Component {
               among the newly arrived unsheltered
             </h3>
           </div>
-          <HalfDonutChart dataSets={arrivalData} legend={false} />
+          <HalfDonutChart dataSets={arrivalData[0].data} />
           <div>
             <h3 style={shared.header}>were homeless on arrival</h3>
             <p style={shared.text}>

@@ -15,7 +15,7 @@ const styles = {
   },
 };
 
-const imgRoot = 'https://s3-us-west-2.amazonaws.com/hacko-homeless-staging';
+const imgRoot = 'https://s3-us-west-2.amazonaws.com/hacko-cdn/2017-homelessness';
 
 const UnaccompaniedYouth = () => (
   <CivicStoryCard title="Unaccompanied Youth—Undercounted?">

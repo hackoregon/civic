@@ -3,24 +3,24 @@ import React from 'react';
 
 import { CivicStoryCard } from '@hackoregon/component-library';
 import shared from '../shared.styles';
-import ArcPieChart from './ArcPieChart';
+import {HalfDonutChart, ListBarChart} from '../Reuseable';
 
 const propsData2 = [
   {
-    name: 'Percent of homeless women who were affected by domestic violence',
-    Homeless: 45,
+    name: 'Domestic Violence',
+    value: 45,
   },
   {
-    name: 'Percent of homeless women who reported having a disability',
-    Homeless: 67,
+    name: 'Reported Disability',
+    value: 67,
   },
 ];
 
 const pieData = [
   {
     data: [
-      { name: 'Percent of homeless who were women', value: 35 },
-      { name: 'WontLabelMe', value: 65 },
+      { name: 'Women', value: 35 },
+      { name: 'Men', value: 65 },
     ],
     name: 2015,
   },
@@ -64,13 +64,14 @@ class HomelessPopulation extends React.Component {
             the risk of housing instability or homelessness if she does leave.
           </p>
           <div>
-            <ArcPieChart data={pieData} />
+            <HalfDonutChart dataSets={pieData[0].data} />
             <p style={shared.footnote}>
               The 2015 Count revealed that 45% of homeless women in Multnomah
               County are affected by domestic violence—nearly one in two women
               who participated. *National Center on Family Homelessness (2013),
               “Pressing Issues Facing Families Who Are Homeless”
             </p>
+            <ListBarChart data={propsData2} title='Homeless Women Affected By' />
           </div>
         </div>
       </CivicStoryCard>
