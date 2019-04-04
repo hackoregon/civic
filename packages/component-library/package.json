@@ -58,7 +58,6 @@
     "mocha-clean": "^1.0.0",
     "react-addons-css-transition-group": "^15.4.1",
     "react-addons-shallow-compare": "^15.4.1",
-    "react-addons-test-utils": "^15.5.3",
     "sinon": "^7.2.7",
     "sinon-chai": "^3.3.0",
     "source-map-support": "^0.4.11",
