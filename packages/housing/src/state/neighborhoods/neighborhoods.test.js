@@ -9,6 +9,8 @@ import * as selectors from './selectors';
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
+const s3url = 'https://s3-us-west-2.amazonaws.com/hacko-cdn/2017-housing/neighborhoods.geojson';
+
 describe('neighborhoods actions', () => {
   describe('neighborhoods fetch actions', () => {
     it('should have a start action', () => {
@@ -61,9 +63,7 @@ describe('neighborhoods actions', () => {
         ],
       };
 
-      nock(
-        'https://s3-us-west-2.amazonaws.com/hacko-housing-staging/neighborhoods.geojson'
-      )
+      nock(s3url)
         .get('')
         .reply(200, mockNeighborhoodsResponse);
 
@@ -86,9 +86,7 @@ describe('neighborhoods actions', () => {
     });
 
     it('should dispatch fetch and fail when the fetch is unsuccessful', () => {
-      nock(
-        'https://s3-us-west-2.amazonaws.com/hacko-housing-staging/neighborhoods.geojson'
-      )
+      nock(s3url)
         .get('')
         .replyWithError('Request was just no good');
 
@@ -99,7 +97,7 @@ describe('neighborhoods actions', () => {
           payload: {
             code: undefined,
             errno: undefined,
-            message: `request to https://s3-us-west-2.amazonaws.com/hacko-housing-staging/neighborhoods.geojson failed, reason: Request was just no good`,
+            message: `request to ${s3url} failed, reason: Request was just no good`,
             name: 'FetchError',
             type: 'system',
           },

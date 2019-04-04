@@ -9,6 +9,7 @@ const crosshair = css`
 
 const MapOverlay = props => {
   const {
+    id,
     children,
     data,
     viewport,
@@ -29,6 +30,7 @@ const MapOverlay = props => {
     wireframe,
     x,
     y,
+    pickable,
     getElevation,
     getFillColor,
     getLineColor,
@@ -56,7 +58,9 @@ const MapOverlay = props => {
   };
 
   const layer = new GeoJsonLayer({
+    id,
     data,
+    visible,
     extruded,
     opacity,
     filled,
@@ -65,13 +69,13 @@ const MapOverlay = props => {
     getRadius,
     getLineWidth,
     stroked,
+    pickable,
+    lineWidthScale: 20,
     lineWidthMinPixels: strokeWidth,
     autoHighlight: true,
     fp64: true,
-    id: 'geojson',
     lightSettings: LIGHT_SETTINGS,
     onClick: onLayerClick,
-    pickable: true,
     getElevation: getElevation,
     getFillColor: getFillColor,
     getLineColor: getLineColor,
@@ -87,6 +91,7 @@ const MapOverlay = props => {
 };
 
 MapOverlay.propTypes = {
+  id: PropTypes.string,
   mapboxStyle: PropTypes.string,
   opacity: PropTypes.number,
   elevation: PropTypes.number,
@@ -94,11 +99,16 @@ MapOverlay.propTypes = {
   extruded: PropTypes.bool,
   stroked: PropTypes.bool,
   strokeWidth: PropTypes.number,
+  visible: PropTypes.bool,
+  pickable: PropTypes.bool,
 };
 
 MapOverlay.defaultProps = {
+  id: 'geojson',
   stroked: false,
   strokeWidth: 1,
+  visible: true,
+  pickable: true,
 }
 
 export default MapOverlay;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { StoryCard } from '@hackoregon/component-library';
 
-const s3 = 'https://s3-us-west-2.amazonaws.com/hacko-housing-staging/';
+const s3 = 'https://s3-us-west-2.amazonaws.com/hacko-cdn/2017-housing/';
 
 const wrapperStyle = {
   maxWidth: '800px',

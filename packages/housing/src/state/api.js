@@ -1,6 +1,6 @@
 import qs from 'query-string';
 
-export const API_HOST = 'http://service.civicpdx.com/housing';
+export const API_HOST = 'https://service.civicpdx.org/housing';
 
 /**
  * buildUrl parameter is an optional function that will be passed the full redux state and the
