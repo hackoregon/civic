@@ -9,7 +9,6 @@ import { connect } from 'react-redux';
 import { StoryCard, Slider, Dropdown } from '@hackoregon/component-library';
 
 import '@hackoregon/component-library/assets/global.styles.css';
-import '@hackoregon/component-library/assets/vendor/leaflet.css';
 import '@hackoregon/component-library/assets/vendor/react-select.min.css';
 
 import { fetchAffordabilityData } from '../../state/affordability/actions';
