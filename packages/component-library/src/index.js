@@ -1,6 +1,5 @@
 import './fonts.css';
 
-export { default as AreaChart } from './AreaChart/AreaChart';
 export {
   default as HorizontalBarChart,
 } from './HorizontalBarChart/HorizontalBarChart';
@@ -20,8 +19,6 @@ export { default as ScrollToTop } from './ScrollToTop/ScrollToTop';
 export { default as Header } from './Navigation/Header';
 export { default as Nav } from './Navigation/Nav';
 export { default as NavRouterLink } from './Navigation/NavRouterLink';
-export { default as RechartsPie } from './RechartsPie/RechartsPie';
-export { default as LeafletMap } from './LeafletMap/LeafletMap';
 export { default as Dropdown } from './Dropdown/Dropdown';
 export { default as Icon } from './Icon/Icon';
 export { default as Placeholder } from './Placeholder/Placeholder';
