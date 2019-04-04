@@ -12761,14 +12761,7 @@ potpack@^1.0.1:
   resolved "https://registry.yarnpkg.com/potpack/-/potpack-1.0.1.tgz#d1b1afd89e4c8f7762865ec30bd112ab767e2ebf"
   integrity sha512-15vItUAbViaYrmaB/Pbw7z6qX2xENbFSTA7Ii4tgbPtasxm5v6ryKhKtL91tpWovDJzTiZqdwzhcFBCwiMVdVw==
 
-prelude-extension@^0.0.13:
-  version "0.0.13"
-  resolved "https://registry.yarnpkg.com/prelude-extension/-/prelude-extension-0.0.13.tgz#1d3fe41cb7578d8dbefc865efddd28d88c9a03a8"
-  integrity sha1-HT/kHLdXjY2+/IZe/d0o2IyaA6g=
-  dependencies:
-    prelude-ls "^1.1.2"
-
-prelude-ls@^1.1.1, prelude-ls@^1.1.2, prelude-ls@~1.1.2:
+prelude-ls@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
   integrity sha1-IZMqVJ9eUv/ZqCf1cOBL5iqX2lQ=
@@ -13615,15 +13608,6 @@ react-select@^1.0.0-rc.3:
     classnames "^2.2.4"
     prop-types "^15.5.8"
     react-input-autosize "^2.1.2"
-
-react-selectize@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/react-selectize/-/react-selectize-2.1.0.tgz#f5a3c72bb2d313129e543afd3b86cbfb378f1919"
-  integrity sha1-9aPHK7LTExKeVDr9O4bL+zePGRk=
-  dependencies:
-    prelude-extension "^0.0.13"
-    prelude-ls "^1.1.1"
-    tether "^1.1.1"
 
 react-share@^2.2.0:
   version "2.4.0"
@@ -15792,11 +15776,6 @@ test-exclude@^5.0.0:
     minimatch "^3.0.4"
     read-pkg-up "^4.0.0"
     require-main-filename "^1.0.1"
-
-tether@^1.1.1:
-  version "1.4.5"
-  resolved "https://registry.yarnpkg.com/tether/-/tether-1.4.5.tgz#8efd7b35572767ba502259ba9b1cc167fcf6f2c1"
-  integrity sha512-fysT1Gug2wbRi7a6waeu39yVDwiNtvwj5m9eRD+qZDSHKNghLo6KqP/U3yM2ap6TNUL2skjXGJaJJTJqoC31vw==
 
 text-extensions@^1.0.0:
   version "1.9.0"
