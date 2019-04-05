@@ -51,7 +51,7 @@
     "redux-devtools": "^3.3.2",
     "redux-devtools-dock-monitor": "^1.1.1",
     "redux-devtools-log-monitor": "^1.2.0",
-    "redux-form": "^6.6.0",
+    "redux-form": "^8.1.0",
     "redux-logger": "^2.8.2",
     "redux-thunk": "^2.1.0",
     "reselect": "^3.0.0",
