@@ -1,5 +1,4 @@
 import React from 'react';
-import { hot } from 'react-hot-loader/root';
 import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
@@ -154,6 +153,4 @@ const App = () => (
   </Provider>
 );
 
-const HotApp = hot(App);
-
-export default HotApp;
+export default App;
