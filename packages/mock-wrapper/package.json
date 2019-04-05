@@ -20,10 +20,10 @@
     "react": "^16.8.4",
     "react-dom": "npm:@hot-loader/react-dom",
     "react-hot-loader": "^4.2.0",
-    "react-redux": "^5.0.3",
+    "react-redux": "^6.0.1",
     "react-router": "^3.0.0",
     "react-router-redux": "^4.0.8",
-    "redux": "^3.6.0",
+    "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.1.0"
   }
