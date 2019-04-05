@@ -103,7 +103,7 @@ const foundation007GetColor = f => {
     : [0, 0, 0, 100];
 };
 
-// FOUNDATION 018 - Median Houshold Income
+// FOUNDATION 018 - Median Household Income
 const foundation018GetColor = f => {
   const value = f.properties.median_household_income;
   return value >= 200000
@@ -277,7 +277,7 @@ const foundation025GetColor = f => {
     : [0, 0, 0, 100];
 };
 
-// FOUNDATION 026 - Housholders Living Alone
+// FOUNDATION 026 - Householders Living Alone
 const foundation026GetColor = f => {
   const value = f.properties.pc_householders_living_alone;
   return value <= 0.2
@@ -301,7 +301,7 @@ const foundation026GetColor = f => {
     : [0, 0, 0, 100];
 };
 
-// FOUNDATION 027 - Owner Occupied Housholds
+// FOUNDATION 027 - Owner Occupied Households
 const foundation027GetColor = f => {
   const value = f.properties.pc_owner_occupied_housing_units;
   return value <= 0.2
@@ -639,9 +639,9 @@ export const foundations = data => ({
     autoHighlight: true,
     highlightColor: [200, 200, 200, 100],
   },
-  'Median Houshold Income': {
+  'Median Household Income': {
     mapType: 'ChoroplethMap',
-    id: 'choropleth-layer-foundation-018-median-houshold-income',
+    id: 'choropleth-layer-foundation-018-median-household-income',
     pickable: true,
     data: data.slide_data.features,
     opacity: 0.5,
@@ -744,9 +744,9 @@ export const foundations = data => ({
     autoHighlight: true,
     highlightColor: [200, 200, 200, 100],
   },
-  'Housholders Living Alone': {
+  'Householders Living Alone': {
     mapType: 'ChoroplethMap',
-    id: 'choropleth-layer-foundation-026-housholders-living-alone',
+    id: 'choropleth-layer-foundation-026-householders-living-alone',
     pickable: true,
     data: data.slide_data.features,
     opacity: 0.5,
@@ -759,9 +759,9 @@ export const foundations = data => ({
     autoHighlight: true,
     highlightColor: [200, 200, 200, 100],
   },
-  'Owner Occupied Housholds': {
+  'Owner Occupied Households': {
     mapType: 'ChoroplethMap',
-    id: 'choropleth-layer-foundation-027-owner-occupied-housholds',
+    id: 'choropleth-layer-foundation-027-owner-occupied-households',
     pickable: true,
     data: data.slide_data.features,
     opacity: 0.5,
