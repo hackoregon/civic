@@ -126,9 +126,10 @@ export class YouAndYourNeighbors extends React.Component {
               initialLatitude={LAT}
               initialZoom={ZOOM}
               navigation={false}
-              geocoder
-              geocoderOptions={geocoderOptions}
-              geocoderOnChange={geocoderChange}
+              // TODO: Reimplement Geocoder
+              // geocoder
+              // geocoderOptions={geocoderOptions}
+              // geocoderOnChange={geocoderChange}
               mapGLOptions={mapGLOptions}
             >
               {data && (
@@ -143,7 +144,7 @@ export class YouAndYourNeighbors extends React.Component {
                     f.geometry === null ? [0, 0] : f.geometry.coordinates
                   }
                   getIcon={f => f.properties.type}
-                  getSize={f => 11}
+                  getSize={f => 7}
                   getColor={poiGetIconColor}
                   autoHighlight={false}
                   highlightColor={[0, 0, 0, 0]}

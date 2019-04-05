@@ -76,7 +76,7 @@ IconMap.propTypes = {
   opacity: PropTypes.number,
   iconAtlas: PropTypes.string,
   iconMapping: PropTypes.object,
-  iconSizeScale: PropTypes.number,
+  iconSizeScale: PropTypes.function,
   sizeScale: PropTypes.number,
   getPosition: PropTypes.func,
   getIcon: PropTypes.func,
