@@ -29,8 +29,13 @@ const PieChart = props => {
   const y = getOrElse(dataValue, 'y');
   const startAngle = halfDoughnut ? -90 : 0;
   const endAngle = halfDoughnut ? 90 : 360;
-
   const legendLabels = data.map(value => ({ name: value.x }));
+  const legendProps = {};
+
+  if (useLegend) {
+    legendProps.labels = () => null;
+    legendProps.padding = 25;
+  }
 
   return (
     <ChartContainer
@@ -58,12 +63,12 @@ const PieChart = props => {
         }}
         x={x}
         y={y}
-        labels={d => (useLegend ? null : d.x)}
         startAngle={startAngle}
         endAngle={endAngle}
         labelComponent={
           <VictoryLabel style={{ ...civicTheme.pieLabel.style }} />
         }
+        {...legendProps}
       />
     </ChartContainer>
   );
