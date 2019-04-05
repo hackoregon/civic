@@ -38,13 +38,12 @@ module.exports = function() {
     const middleware = devMiddleware(compiler, {
       // lazy: true,
       publicPath: config.output.publicPath,
-      stats: 'errors-only',
+      stats: false,
       logLevel: 'warn',
     });
 
     app.use(middleware);
     app.use(hotMiddleware(compiler, {
-        log: () => {}
     }));
   }
 

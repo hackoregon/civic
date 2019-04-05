@@ -30,7 +30,7 @@ const isProd = process.env.NODE_ENV === 'production';
 const entryPoints = [];
 
 if (!isProd) {
-  entryPoints.unshift('webpack-hot-middleware/client');
+  entryPoints.unshift('webpack-hot-middleware/client?reload=true');
 }
 
 module.exports = {
@@ -68,6 +68,7 @@ module.exports = {
         sourceMaps(),
         addPlugins([
           new webpack.HotModuleReplacementPlugin(),
+          new webpack.NamedModulesPlugin(),
           new BundleAnalyzerPlugin({ openAnalyzer: false }),
         ]),
       ]),
