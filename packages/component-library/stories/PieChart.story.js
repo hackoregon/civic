@@ -50,6 +50,7 @@ export default () =>
         const chartWidth = number('Chart width', 450);
         const innerRadius = number('Inner radius', 100);
         const halfDoughnut = boolean('halfDoughnut', true);
+        const useLegend = boolean('useLegend', true);
 
         return (
           <div style={{ display: 'flex', justifyContent: 'space-around' }}>
@@ -62,6 +63,7 @@ export default () =>
               height={chartHeight}
               innerRadius={innerRadius}
               halfDoughnut={halfDoughnut}
+              useLegend={useLegend}
             />
           </div>
         );
