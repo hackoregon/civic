@@ -5,16 +5,14 @@ import { Link } from 'react-router';
 import CanvasParticles from './CanvasParticles';
 import DataList from './DataList';
 import SearchBar from './SearchBar';
-import { Header, Footer } from '@hackoregon/component-library';
+import { Header, Footer, Logo } from '@hackoregon/component-library';
 
-import logo from '../../assets/civic-logo-animated.svg';
-import smallLogo from '../../assets/civic-logo-c.svg';
-import brain from '../../assets/brain.svg';
-import brainMobile from '../../assets/brain-mobile.svg';
-import trees from '../../assets/trees.png';
-import hackOregonLogo from '../../assets/hack-oregon-logo.png';
-import heartMail from '../../assets/heartmail.png';
-import twitterLogo from '../../assets/twitter-logo.png';
+import brain from '@hackoregon/component-library/assets/brain.svg'
+import brainMobile from '@hackoregon/component-library/assets/brain-mobile.svg'
+import trees from '@hackoregon/component-library/assets/trees.png'
+import hackOregonLogo from '@hackoregon/component-library/assets/hack-oregon-logo.png'
+import heartMail from '@hackoregon/component-library/assets/heartmail.png'
+import twitterLogo from '@hackoregon/component-library/assets/twitter-logo.png'
 
 import cities from './cities';
 import zipCodes from './zipCodes.json';
@@ -470,7 +468,7 @@ class LandingPage extends React.Component {
           <div className={aboutCivicWrapper} id="aboutCivic">
             <div className={sectionHeaderWrapper}>
               <div className={smallLogoWrapper}>
-                <img src={smallLogo} />
+                <Logo type="squareLogo"/>
               </div>
               <div className={sectionRightContainer}>
                 <div className={sectionHeaderTitle}>
