@@ -1,6 +1,6 @@
 import React from "react";
-import { storybookStyles } from "./storyStyles";
-import Logo from "../src/Logo/Logo";
+import { storybookStyles } from "../storyStyles";
+import Logo from "../../src/Logo/Logo";
 
 const LogosStyle = () => (
   <div style={storybookStyles.main}>

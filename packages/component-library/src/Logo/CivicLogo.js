@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import isClient from "../utils/isClient";
+import logo from "../../assets/civic-logo.svg";
 
 const styles = {
   height: "60px",
@@ -8,13 +9,7 @@ const styles = {
 };
 
 const CivicLogo = ({ alt }) =>
-  isClient && (
-    <img
-      style={styles}
-      src={require("../../assets/civic-logo.svg")}
-      alt={alt}
-    />
-  );
+  isClient && <img style={styles} src={logo} alt={alt} />;
 
 CivicLogo.displayName = "Logo";
 CivicLogo.propTypes = {

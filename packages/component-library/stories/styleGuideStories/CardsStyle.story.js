@@ -1,5 +1,5 @@
 import React from "react";
-import { storybookStyles } from "./storyStyles";
+import { storybookStyles } from "../storyStyles";
 
 const CardsStyle = () => (
   <div style={storybookStyles.main}>

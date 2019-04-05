@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import isClient from "../utils/isClient";
+import animatedLogoInverted from "../../assets/civic-logo-invert-animated.svg";
 
 const styles = {
   height: "60px",
@@ -8,13 +9,7 @@ const styles = {
 };
 
 const CivicLogoAnimatedInverted = ({ alt }) =>
-  isClient && (
-    <img
-      style={styles}
-      src={require("../../assets/civic-logo-invert-animated.svg")}
-      alt={alt}
-    />
-  );
+  isClient && <img style={styles} src={animatedLogoInverted} alt={alt} />;
 
 CivicLogoAnimatedInverted.displayName = "Logo";
 CivicLogoAnimatedInverted.propTypes = {

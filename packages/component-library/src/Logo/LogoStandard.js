@@ -1,15 +1,16 @@
-import React from 'react';
-import isClient from '../utils/isClient';
+import React from "react";
+import isClient from "../utils/isClient";
+import logoStackStandard from "../../assets/civic-logo-stack_standard.svg";
 
 const styles = {
-  height: '60px',
-  width: 'auto',
+  height: "60px",
+  width: "auto"
 };
 
 const LogoStandard = () => (
   <img
     alt="Hack Oregon footer logo"
-    src={isClient ? require('../../assets/civic-logo-stack_standard.svg') : ''}
+    src={isClient ? logoStackStandard : ""}
     style={styles}
   />
 );

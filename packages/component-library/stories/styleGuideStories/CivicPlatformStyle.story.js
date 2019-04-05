@@ -1,5 +1,5 @@
-import React from 'react';
-import { storybookStyles } from './storyStyles.js';
+import React from "react";
+import { storybookStyles } from "../storyStyles.js";
 
 const CivicPlatformStyle = () => (
   <div style={storybookStyles.main}>
