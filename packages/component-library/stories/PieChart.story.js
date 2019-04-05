@@ -50,7 +50,7 @@ export default () =>
         const chartWidth = number('Chart width', 450);
         const innerRadius = number('Inner radius', 100);
         const halfDoughnut = boolean('halfDoughnut', true);
-        const useLegend = boolean('useLegend', true);
+        const useLegend = boolean('useLegend', false);
 
         return (
           <div style={{ display: 'flex', justifyContent: 'space-around' }}>
