@@ -18,7 +18,7 @@ import firstFiveMinutesTimeline from '../../../assets/emergency-response-5min.sv
 
 function App(props) {
   return (
-    <PageLayout>
+    <PageLayout header={false}>
       <CivicStoryCard
         title="What Does Portland Fire &amp; Rescue Do?"
         slug="what-they-do"
