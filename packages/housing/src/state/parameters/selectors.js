@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { propOr, path } from 'ramda';
+import { prop, propOr, path } from 'ramda';
 import {
   DEMOGRAPHICS,
   HOUSING_TYPES,
@@ -7,7 +7,7 @@ import {
   DEFAULT_NEIGHBORHOOD,
 } from '../../utils/data-constants';
 
-export const rootState = state => state.housing || state;
+export const rootState = state => !!state && state.housing || state;
 
 export const getUserState = createSelector(
   rootState,
