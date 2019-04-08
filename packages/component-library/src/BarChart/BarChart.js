@@ -11,9 +11,7 @@ import {
 } from 'victory';
 
 import ChartContainer from '../ChartContainer';
-import { numeric, year } from '../utils/formatters';
-import { assign } from 'lodash';
-import { css } from 'emotion';
+import civicFormat from '../utils/civicFormat';
 import { chartEvents, getDefaultDomain } from '../utils/chartHelpers';
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
 
@@ -44,7 +42,6 @@ const BarChart = ({
       <VictoryChart
         padding={{ left: 90, right: 50, bottom: 50, top: 50 }}
         domainPadding={{ x: [40, 40], y: [0, 0] }}
-        animate={{ duration: 200 }}
         theme={CivicVictoryTheme.civic}
         domain={chartDomain}
       >
@@ -100,8 +97,8 @@ const BarChart = ({
             )} • ${yLabel}: ${yNumberFormatter(d[dataValue])}`,
           }))}
           events={chartEvents}
-          x={'dataKey'}
-          y={'dataValue'}
+          x="dataKey"
+          y="dataValue"
           title="Bar Chart"
           style={{ data: { width: barWidth } }}
         />
@@ -135,8 +132,8 @@ BarChart.defaultProps = {
   subtitle: null,
   xLabel: 'X',
   yLabel: 'Y',
-  xNumberFormatter: year,
-  yNumberFormatter: numeric,
+  xNumberFormatter: civicFormat.year,
+  yNumberFormatter: civicFormat.numeric,
   barWidth: null,
 };
 

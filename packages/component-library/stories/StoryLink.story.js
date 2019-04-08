@@ -19,7 +19,7 @@ export default () =>
     .add('that can link to full page card', () => (
       <div style={object('Style', wrapperStyle)}>
         <StoryLink
-          className={'Context'}
+          className="Context"
           route={`/${collectionId}/${cardId}`}
           icon={ICONS.eye}
         >
@@ -31,7 +31,7 @@ export default () =>
     .add('that can take an action', () => (
       <div style={object('Style', wrapperStyle)}>
         <StoryLink
-          className={'Context'}
+          className="Context"
           action={action('Takes some action!')}
           icon={ICONS.download}
         >

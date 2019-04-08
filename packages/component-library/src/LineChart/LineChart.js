@@ -1,5 +1,5 @@
-import React, { PropTypes } from 'react';
-import { css } from 'emotion';
+import PropTypes from 'prop-types';
+import React from 'react';
 import { groupBy } from 'lodash';
 import {
   VictoryAxis,
@@ -13,7 +13,7 @@ import {
 
 import ChartContainer from '../ChartContainer';
 import SimpleLegend from '../SimpleLegend';
-import { numeric } from '../utils/formatters';
+import civicFormat from '../utils/civicFormat';
 import {
   chartEvents,
   getDefaultDomain,
@@ -55,16 +55,12 @@ const LineChart = ({
       ? dataSeriesLabels.map(series => ({ name: series.label }))
       : null;
 
-  const categoryData =
-    dataSeriesLabels && dataSeriesLabels.length
-      ? dataSeriesLabels.map(series => ({ name: series.category }))
-      : null;
-
   const lineData = dataSeries ? groupBy(data, dataSeries) : { category: data };
 
   const lines = lineData
     ? Object.keys(lineData).map((category, index) => (
         <VictoryLine
+          key={category}
           data={lineData[category].map(d => ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],
@@ -74,6 +70,11 @@ const LineChart = ({
           y="dataValue"
           style={getDefaultLineStyle(index)}
           standalone={false}
+          // TODO: This is a workaround for a Victory bug that results in incomplete
+          // line animations when the animate properties are derived from the VictoryChart
+          // wrapping component. Remove this direct animate after the bug is fixed.
+          // https://github.com/FormidableLabs/victory/issues/1282
+          animate={100}
         />
       ))
     : null;
@@ -93,14 +94,12 @@ const LineChart = ({
         theme={CivicVictoryTheme.civic}
       >
         <VictoryAxis
-          animate={{ onEnter: { duration: 500 } }}
           style={{ grid: { stroke: 'none' } }}
           tickFormat={x => xNumberFormatter(x)}
           title="X Axis"
         />
         <VictoryAxis
           dependentAxis
-          animate={{ onEnter: { duration: 500 } }}
           tickFormat={y => yNumberFormatter(y)}
           title="Y Axis"
         />
@@ -128,16 +127,15 @@ const LineChart = ({
         </VictoryPortal>
         {lines}
         <VictoryScatter
-          animate={{ onEnter: { duration: 500 } }}
           //        categories={{ x: categoryData }}
           data={data.map(d => ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],
-            label: `${dataKeyLabel ? dataKeyLabel : xLabel}: ${xNumberFormatter(
+            label: `${dataKeyLabel || xLabel}: ${xNumberFormatter(
               d[dataKey]
-            )} • ${
-              dataValueLabel ? dataValueLabel : yLabel
-            }: ${yNumberFormatter(d[dataValue])}`,
+            )} • ${dataValueLabel || yLabel}: ${yNumberFormatter(
+              d[dataValue]
+            )}`,
             series: d[dataSeries],
             size: size ? d[size.key] || size.value : 3,
           }))}
@@ -202,8 +200,8 @@ LineChart.defaultProps = {
   title: null,
   xLabel: 'X',
   yLabel: 'Y',
-  xNumberFormatter: numeric,
-  yNumberFormatter: numeric,
+  xNumberFormatter: civicFormat.numeric,
+  yNumberFormatter: civicFormat.numeric,
   legendComponent: null,
 };
 

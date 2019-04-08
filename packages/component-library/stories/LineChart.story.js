@@ -189,4 +189,30 @@ export default () =>
           legendComponent={customLegend}
         />
       );
-    });
+    })
+    .add('With many data points', () => {
+      const scale = 0.25;
+      return (
+        <LineChart
+          data={Array(100).fill(null).map((_, index) => {
+            const x = (index % 2 ? Math.floor(index / 2) : Math.ceil(index / 2)) * scale;
+            const fn = index % 2 ? 'sin' : 'cos';
+            return {
+              x,
+              fn,
+              y: Math[fn](x),
+            };
+          })}
+          dataKey='x'
+          dataKeyLabel='X'
+          dataValue='y'
+          dataValueLabel='Y'
+          dataSeries='fn'
+          domain={object('Domain', { x: [0, 50 * scale ], y: [-1.5, 1.5] })}
+          title={text('Title', 'Cos vs. Sin')}
+          subtitle={text('Subtitle', 'Getting wavy')}
+          xLabel='X'
+          yLabel='Y'
+        />
+      )
+    })

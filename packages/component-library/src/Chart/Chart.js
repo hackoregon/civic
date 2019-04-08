@@ -1,24 +1,13 @@
+/* Deprecated component, 2017 only */
+/* eslint-disable */
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export default class Chart extends Component {
-  static displayName = 'Chart';
-
   static childContextTypes = {
     height: PropTypes.number,
     width: PropTypes.number,
-    margin: PropTypes.shape({
-      top: PropTypes.number,
-      bottom: PropTypes.number,
-      left: PropTypes.number,
-      right: PropTypes.number,
-    }),
-  };
-
-  static propTypes = {
-    height: PropTypes.number,
-    width: PropTypes.number,
-    children: PropTypes.node,
     margin: PropTypes.shape({
       top: PropTypes.number,
       bottom: PropTypes.number,
@@ -38,6 +27,20 @@ export default class Chart extends Component {
     },
   };
 
+  static displayName = 'Chart';
+
+  static propTypes = {
+    height: PropTypes.number,
+    width: PropTypes.number,
+    children: PropTypes.node,
+    margin: PropTypes.shape({
+      top: PropTypes.number,
+      bottom: PropTypes.number,
+      left: PropTypes.number,
+      right: PropTypes.number,
+    }),
+  };
+
   getChildContext() {
     const { width, height } = this.props;
     let { margin } = this.props;
@@ -52,6 +55,7 @@ export default class Chart extends Component {
 
     return { width, height, margin };
   }
+
   render() {
     const { width, height } = this.props;
     let { margin } = this.props;

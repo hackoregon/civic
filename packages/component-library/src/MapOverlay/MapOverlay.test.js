@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import MapOverlay from './MapOverlay';
 import DeckGL from 'deck.gl';
+import MapOverlay from './MapOverlay';
 
 describe('MapOverlay', () => {
   const data = [

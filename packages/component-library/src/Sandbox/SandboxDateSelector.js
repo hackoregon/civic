@@ -1,3 +1,6 @@
+/* TODO: Fix linting errors */
+/* eslint-disable */
+
 import React from 'react';
 import { rangeRight } from 'lodash';
 import Dropdown from '../Dropdown/Dropdown';
@@ -86,10 +89,12 @@ class DateDropdown extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
   }
+
   handleChange = date => {
     this.setState({ date });
     this.props.fetchSlideByDate(this.props.slide, date, this.props.type);
   };
+
   render() {
     const options = dateHelper(this.props.selectedSlideData.slide_meta);
     return (

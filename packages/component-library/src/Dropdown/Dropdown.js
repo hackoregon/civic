@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Select from 'react-select';
 import { css } from 'emotion';
 
-import '@hackoregon/component-library/assets/vendor/react-select.min.css';
+import '../../assets/vendor/react-select.min.css';
 
 const dropdownClass = css`
   background-color: #fff;

@@ -1,11 +1,14 @@
+/* TODO: Fix linting errors */
+/* eslint-disable */
+
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { css } from 'emotion';
+import PropTypes from 'prop-types';
 import Nav from './Nav';
 import Logo from '../Logo/LogoAnimated';
 import Icon from '../Icon/Icon';
 import { ICONS } from '../styleConstants';
-import PropTypes from 'prop-types';
 
 const primaryColor = 'rgb(34, 15, 37)';
 

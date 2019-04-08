@@ -1,12 +1,72 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { withKnobs, selectV2, boolean } from '@storybook/addon-knobs';
+import { withKnobs, select, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { checkA11y } from '@storybook/addon-a11y';
 import { BaseMap } from '../src';
 import { CivicSandboxMap } from '../src';
+import CivicSandboxTooltip from '../src/CivicSandboxMap/CivicSandboxTooltip';
 import { DemoJSONLoader } from '../src';
+
+class LoadData extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: null,
+      error: null,
+    };
+  }
+
+  componentDidMount() {
+    const cmp = this;
+    d3.queue()
+      .defer(d3.json, this.props.urls[0])
+      .defer(d3.json, this.props.urls[1])
+      .defer(d3.json, this.props.urls[2])
+      .defer(d3.json, this.props.urls[3])
+      .defer(d3.json, this.props.urls[4])
+      .defer(d3.json, this.props.urls[5])
+      .defer(d3.json, this.props.urls[6])
+      .defer(d3.json, this.props.urls[7])
+      .await(
+        (
+          error,
+          foundation1,
+          foundation2,
+          foundation3,
+          slide1,
+          slide2,
+          slide3,
+          slide4,
+          slide5
+        ) => {
+          if (error) {
+            return this.setState({ error });
+          }
+          cmp.setState({
+            data: {
+              foundation1,
+              foundation2,
+              foundation3,
+              slide1,
+              slide2,
+              slide3,
+              slide4,
+              slide5,
+            },
+          });
+        }
+      );
+  }
+
+  render() {
+    if (this.state.data === null) {
+      return null;
+    }
+    return this.props.children(this.state.data);
+  }
+}
 
 const displayName = CivicSandboxMap.displayName || 'CivicSandboxMap';
 
@@ -47,10 +107,10 @@ export default () =>
             Ocean:
               '[[255,255,217,255],[237,248,177,255],[199,233,180,255],[127,205,187,255],[65,182,196,255],[29,145,192,255],[34,94,168,255],[37,52,148,255],[8,29,88,255]]',
           };
-          const colorScheme = selectV2(
+          const colorScheme = select(
             'Color Schemes:',
             colorOptions,
-            colorOptions['Earth']
+            colorOptions.Earth
           );
           const colorSchemeArray = JSON.parse(colorScheme);
 
@@ -95,8 +155,8 @@ export default () =>
             },
           };
 
-          //SLIDES
-          //005 Community Gardens
+          // SLIDES
+          // 005 Community Gardens
           const gardensBoundary = {
             mapType: 'PolygonPlotMap',
             id: 'boundary-layer-gardens-slide',
@@ -123,7 +183,7 @@ export default () =>
             highlightColor: [25, 183, 170, 25],
           };
 
-          //002 Bike Lanes
+          // 002 Bike Lanes
           const bikeLanesBoundary = {
             mapType: 'PolygonPlotMap',
             id: 'boundary-layer-bike-lanes',
@@ -148,7 +208,7 @@ export default () =>
             highlightColor: [100, 100, 100, 100],
           };
 
-          //010 Grocery Stores
+          // 010 Grocery Stores
           const groceryBoundary = {
             mapType: 'PolygonPlotMap',
             id: 'boundary-layer-grocery',
@@ -180,7 +240,7 @@ export default () =>
             'Households with Seniors': '025-households-seniors',
             'Households with Children': '015-household-children',
           };
-          const foundationSelected = selectV2(
+          const foundationSelected = select(
             'Foundations:',
             foundationOptions,
             foundationOptions['Households with Seniors']

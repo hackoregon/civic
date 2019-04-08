@@ -1,7 +1,7 @@
 import React from 'react';
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from '@storybook/react';
-import { withKnobs, number, selectV2, boolean } from '@storybook/addon-knobs';
+import { withKnobs, number, select, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { checkA11y } from '@storybook/addon-a11y';
 import { BaseMap } from '../src';
@@ -48,13 +48,13 @@ const mapData = ['https://service.civicpdx.org/transportation-systems/sandbox/sl
 const demoMap = () => (
   <DemoJSONLoader urls={mapData}>
     {data => {
-      const mapboxStyle = selectV2(
+      const mapboxStyle = select(
         'Mapbox Style',
         optionsStyle,
         optionsStyle['Hack Oregon Light']
       );
 
-      const colorScheme = selectV2(
+      const colorScheme = select(
         'Color Scheme:',
         colorSchemeOptions,
         colorSchemeOptions['Purple Green']
@@ -104,13 +104,13 @@ const demoMap = () => (
 const tooltipMap = () => (
  <DemoJSONLoader urls={mapData}>
     {data => {
-      const mapboxStyle = selectV2(
+      const mapboxStyle = select(
         'Mapbox Style',
         optionsStyle,
         optionsStyle['Hack Oregon Light']
       );
 
-      const colorScheme = selectV2(
+      const colorScheme = select(
         'Color Scheme:',
         colorSchemeOptions,
         colorSchemeOptions['Purple Green']

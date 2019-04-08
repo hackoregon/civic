@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { css } from 'emotion';
 
@@ -53,8 +54,8 @@ const Hero = ({ children, mainProjectColor }) => (
 Hero.displayName = 'Hero';
 
 Hero.propTypes = {
-  mainProjectColor: React.PropTypes.string,
-  children: React.PropTypes.node,
+  mainProjectColor: PropTypes.string,
+  children: PropTypes.node,
 };
 
 export default Hero;

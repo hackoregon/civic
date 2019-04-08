@@ -1,6 +1,7 @@
+import { ungroupBy } from '@hackoregon/component-library';
+
 import { createSelector } from 'reselect';
 import { rootState } from '../selectors';
-import { ungroupBy } from '@hackoregon/component-library/src/utils/dataHelpers';
 
 export const getHumanImpactOfSweepingUrbanCampsitesRequest = createSelector(
   rootState,

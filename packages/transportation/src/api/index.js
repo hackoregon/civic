@@ -1,12 +1,12 @@
 import { promiseToGet } from './utils';
 
-const ROOT_URL = 'http://service.civicpdx.org/transport/';
+const ROOT_URL = 'https://service.civicpdx.org/transport/';
 // const ROOT_URL = 'http://localhost:8000/transport/';
 
 // without fma: This endpoint provides the fma id and geoms for all FMAs (Fire Management Areas).
 // with fma: This viewset will provide the 'detail' action.
 
-export const getFeatures = input => {
+export const getFeatures = (input) => {
   let url = '';
   console.log(`api input ${input}`);
   switch (input) {
@@ -22,6 +22,9 @@ export const getFeatures = input => {
     case 'nearby':
       url = `${ROOT_URL}nearby?address=1221 SW 4th Avenue, Portland, OR&distance=200&startDate=2017-04-29&endDate=2017-12-31&format=json`;
       break;
+
+    default:
+      throw new Error('Unsupported feature type!');
   }
   console.log(`api url ${url}`);
   return promiseToGet(url);

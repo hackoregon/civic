@@ -1,3 +1,5 @@
+/* TODO: Fix linting errors */
+/* eslint-disable */
 import * as d3 from 'd3';
 
 /* COLOR SCHEME OPTIONS */

@@ -1,3 +1,6 @@
+/* Not currently used, updated and moved to 2018 package */
+/* eslint-disable */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from 'emotion';

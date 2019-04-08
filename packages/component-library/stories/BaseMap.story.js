@@ -1,7 +1,7 @@
 import React from 'react';
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from '@storybook/react';
-import { withKnobs, selectV2 } from '@storybook/addon-knobs';
+import { withKnobs, select } from '@storybook/addon-knobs';
 import { BaseMap } from '../src';
 import { css } from 'emotion';
 
@@ -20,7 +20,7 @@ const optionsStyle = {
 };
 
 const demoMap = () => {
-  const mapboxStyle = selectV2(
+  const mapboxStyle = select(
     'Mapbox Style',
     optionsStyle,
     optionsStyle['Hack Oregon Light']
@@ -30,7 +30,7 @@ const demoMap = () => {
 };
 
 const geocoderMap = () => {
-  const mapboxStyle = selectV2(
+  const mapboxStyle = select(
     'Mapbox Style',
     optionsStyle,
     optionsStyle['Hack Oregon Light']
@@ -47,7 +47,7 @@ const geocoderMap = () => {
 };
 
 const staticMap = () => {
-  const mapboxStyle = selectV2(
+  const mapboxStyle = select(
     'Mapbox Style',
     optionsStyle,
     optionsStyle['Hack Oregon Light']
@@ -71,7 +71,7 @@ const staticMap = () => {
 };
 
 const containerHeightMap = () => {
-  const mapboxStyle = selectV2(
+  const mapboxStyle = select(
     'Mapbox Style',
     optionsStyle,
     optionsStyle['Hack Oregon Light']

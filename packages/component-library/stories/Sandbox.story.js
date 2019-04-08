@@ -5,7 +5,6 @@ import { css } from 'emotion';
 import { storiesOf } from '@storybook/react';
 import 'react-select/dist/react-select.css';
 import { isArray, findIndex } from 'lodash';
-import { withInfo } from '@storybook/addon-info';
 import { Sandbox } from '../src';
 
 import { foundations, slides } from '../src/Sandbox/constants';
@@ -43,12 +42,14 @@ class SandboxStory extends React.Component {
     this.fetchSlideDataByDate = this.fetchSlideDataByDate.bind(this);
     this.initialDataSetup = this.initialDataSetup.bind(this);
   }
+
   componentDidMount() {
     fetch('https://sandbox.civicpdx.org/civic-sandbox')
       .then(res => res)
       .then(res => res.json())
       .then(data => this.setState({ data: data.body, hasFetched: true }));
   }
+
   componentDidUpdate(prevProps, prevState) {
     if (
       this.state.hasFetched !== prevState.hasFetched &&
@@ -63,6 +64,7 @@ class SandboxStory extends React.Component {
       this.updateSlide2(this.state.selectedSlide);
     }
   }
+
   initialDataSetup = state => {
     const selectedPackageData = state.data.packages[this.state.selectedPackage];
     const selectedFoundation = selectedPackageData
@@ -73,13 +75,8 @@ class SandboxStory extends React.Component {
       : [];
     const defaultFoundation =
       selectedFoundation && state.data.foundations[selectedFoundation];
-
-    const dataObj = {
-      slide_meta: {},
-      slide_data: {}
-    };
+    const dataObj = { slide_meta: {}, slide_data: {} };
     const foundationMapObj = foundations(dataObj)[defaultFoundation.name];
-
     let foundationMapProps = {
       color: foundationMapObj.color,
       getPropValue: foundationMapObj.getPropValue,
@@ -89,7 +86,6 @@ class SandboxStory extends React.Component {
     if(foundationMapObj.scaleType === 'ordinal' || foundationMapObj.scaleType === 'threshold') {
       foundationMapProps.categories = foundationMapObj.categories;
     }
-
     const allSlides = state.data.packages[this.state.selectedPackage].slides.map(slide => {
       const mapObj = slides(dataObj)[state.data.slides[slide].name];
       const color = mapObj.boundary.getLineColor
@@ -108,7 +104,6 @@ class SandboxStory extends React.Component {
     const defaultSlides = allSlides
       .filter(slide => slide.checked === true)
       .map(slide => state.data.slides[slide.slideNumber]);
-
     this.setState({
       selectedFoundation,
       selectedSlide,
@@ -118,15 +113,14 @@ class SandboxStory extends React.Component {
       foundationMapProps
     });
   };
+
   updateFoundation = selectedFoundation => {
     const defaultFoundation = this.state.data.foundations[selectedFoundation];
-
     const dataObj = {
       slide_meta: {},
       slide_data: {}
     };
     const foundationMapObj = foundations(dataObj)[defaultFoundation.name];
-
     let foundationMapProps = {
       color: foundationMapObj.color,
       getPropValue: foundationMapObj.getPropValue,
@@ -150,6 +144,7 @@ class SandboxStory extends React.Component {
     this.fetchSlideData(defaultSlides);
     this.setState({ selectedSlide: selectedSlides, defaultSlides });
   };
+
   updateSlide = event => {
     const slideNumber = event.target.name;
     const allSlides = this.state.allSlides.map(slide => {
@@ -164,6 +159,7 @@ class SandboxStory extends React.Component {
     this.fetchSlideData(defaultSlides);
     this.setState({ selectedSlide: selectedSlides, defaultSlides, allSlides });
   };
+
   fetchFoundationData = foundation => {
     fetch(`${foundation.endpoint}`)
       .then(res => {
@@ -176,6 +172,7 @@ class SandboxStory extends React.Component {
       .then(data => this.setState({ foundationData: data }))
       .catch(err => console.error(err));
   };
+
   fetchSlideData = slideData => {
     const defaultSlides = [...slideData];
     const slideDataNames = this.state.slideData.map(slide => Object.keys(slide)[0]);
@@ -197,6 +194,7 @@ class SandboxStory extends React.Component {
       this.setState({ slideData: [...this.state.slideData, ...data] });
     });
   };
+
   findAndReplaceSlideData = (slideData, data, slide, slideLabel) => {
     const slideDataValues = Object.values(slideData);
     const newSlideData = slideData.map((slide, index) => {
@@ -206,6 +204,7 @@ class SandboxStory extends React.Component {
     });
     return newSlideData;
   };
+
   fetchSlideDataByDate = (slide, date, type) => {
     let url;
     if(type === 'slide') {
@@ -237,6 +236,7 @@ class SandboxStory extends React.Component {
       })
       .catch(err => console.error(err));
   };
+
   updatePackage = selectedPackage => {
     const { data } = this.state;
     const packageData = data.packages[selectedPackage];
@@ -246,7 +246,6 @@ class SandboxStory extends React.Component {
       ? packageData.default_slide
       : packageData.default_slide.split(',');
     this.updateSlide2(selectedSlide);
-
     const dataObj = { slide_meta: {}, slide_data: {} };
     const defaultFoundation = data.foundations[selectedFoundation];
     const foundationMapObj = foundations(dataObj)[defaultFoundation.name];
@@ -259,7 +258,6 @@ class SandboxStory extends React.Component {
     if(foundationMapObj.scaleType === 'ordinal' || foundationMapObj.scaleType === 'threshold') {
       foundationMapProps.categories = foundationMapObj.categories;
     }
-
     const defaultSlides = selectedSlide.map(slide => data.slides[slide]);
     const allSlides = data.packages[selectedPackage].slides.map(slide => {
       const mapObj = slides(dataObj)[data.slides[slide].name];
@@ -276,7 +274,6 @@ class SandboxStory extends React.Component {
         mapType
       };
     });
-
     this.setState({
       selectedPackage,
       selectedFoundation,
@@ -287,9 +284,11 @@ class SandboxStory extends React.Component {
       foundationMapProps,
     });
   };
+
   toggleDrawer = () => {
     this.setState({ drawerVisible: !this.state.drawerVisible });
   };
+
   formatData = (defaultFoundation, defaultSlides) => {
     const formatSlideData = defaultSlides
       .map(slide => {
@@ -297,14 +296,12 @@ class SandboxStory extends React.Component {
           slide_meta: {},
           slide_data: {},
         };
-
         if (this.state.slideData.length) {
           data = this.state.slideData.find(slideData => {
             return slideData[slide.name];
           })[slide.name];
         }
         const slideObj = slides(data)[slide.name];
-
         return [
           {
             data: slideObj ? slideObj.boundary : {},
@@ -324,6 +321,66 @@ class SandboxStory extends React.Component {
       ...formatSlideData,
     ];
   };
+
+  initialDataSetup = state => {
+    const selectedPackageData = state.data.packages[this.state.selectedPackage];
+    const selectedFoundation = selectedPackageData
+      ? selectedPackageData.default_foundation
+      : '';
+    const selectedSlide = selectedPackageData
+      ? selectedPackageData.default_slide
+      : [];
+    const defaultFoundation =
+      selectedFoundation && state.data.foundations[selectedFoundation];
+    const defaultSlides =
+      selectedSlide && selectedSlide.map(slide => state.data.slides[slide]);
+    this.setState({
+      selectedFoundation,
+      selectedSlide,
+      defaultFoundation,
+      defaultSlides,
+    });
+  };
+
+  toggleDrawer = () => {
+    this.setState({ drawerVisible: !this.state.drawerVisible });
+  };
+
+  updateFoundation = selectedFoundation => {
+    const defaultFoundation = this.state.data.foundations[selectedFoundation];
+    this.fetchFoundationData(defaultFoundation);
+    this.setState({ selectedFoundation, defaultFoundation });
+  };
+
+  updatePackage = selectedPackage => {
+    const { data } = this.state;
+    const packageData = data.packages[selectedPackage];
+    const selectedFoundation = packageData.default_foundation;
+    this.updateFoundation(selectedFoundation);
+    const selectedSlide = packageData.default_slide;
+    this.updateSlide(selectedSlide);
+    const defaultFoundation = data.foundations[selectedFoundation];
+    const defaultSlides = selectedSlide.map(slide => data.slides[slide]);
+    this.setState({
+      selectedPackage,
+      selectedFoundation,
+      selectedSlide,
+      defaultFoundation,
+      defaultSlides,
+    });
+  };
+
+  updateSlide = selectedSlide => {
+    const selectedSlides = isArray(selectedSlide)
+      ? selectedSlide
+      : selectedSlide.split(',');
+    const defaultSlides = selectedSlides.map(
+      slide => this.state.data.slides[slide]
+    );
+    this.fetchSlideData(defaultSlides);
+    this.setState({ selectedSlide: selectedSlides, defaultSlides });
+  };
+
   render() {
     const styles = css(`
       margin: 0;
@@ -331,7 +388,7 @@ class SandboxStory extends React.Component {
       width: 100%;
       font-family: 'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif;
     `);
-    // console.log(this.state);
+
     return this.state.hasFetched ? (
       <Sandbox
         layerData={this.formatData(

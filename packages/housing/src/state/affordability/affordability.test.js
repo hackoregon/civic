@@ -96,13 +96,19 @@ describe('affordability actions', () => {
     it('should dispatch fetch and fail when the fetch is unsuccessful', () => {
       nock(API_HOST)
         .get(commonAffordabilityRequest)
-        .reply(500, { error: 'Request was just no good' });
+        .replyWithError('Request was just no good');
 
       const expectedActions = [
         { type: actionTypes.CALL_START },
         {
           type: actionTypes.CALL_FAIL,
-          payload: new Error({ error: 'Request was just no good' }),
+          payload: {
+            code: undefined,
+            errno: undefined,
+            message: `request to ${API_HOST}${commonAffordabilityRequest} failed, reason: Request was just no good`,
+            name: 'FetchError',
+            type: 'system',
+          },
         },
       ];
 
