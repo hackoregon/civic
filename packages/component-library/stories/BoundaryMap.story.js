@@ -1,14 +1,18 @@
 import React from 'react';
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from '@storybook/react';
-import { withKnobs, number, boolean, color } from '@storybook/addon-knobs';
+import {
+  withKnobs,
+  number,
+  boolean,
+  color,
+} from '@storybook/addon-knobs';
+
 import { checkA11y } from '@storybook/addon-a11y';
 import { BaseMap } from '../src';
 import { BoundaryMap } from '../src';
 import { PathMap } from '../src';
 import { DemoJSONLoader } from '../src';
-
-const displayName = BoundaryMap.displayName || 'BoundaryMap';
 
 const mapData = ['https://service.civicpdx.org/neighborhood-development/sandbox/slides/bikelanes/'];
 

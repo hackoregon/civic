@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
@@ -89,7 +90,7 @@ ConstructionViews.defaultProps = {
 };
 
 ConstructionViews.propTypes = {
-  children: React.PropTypes.node,
+  children: PropTypes.node,
 };
 
 export default connect(

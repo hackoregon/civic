@@ -7,7 +7,8 @@ import {
   LineChart,
   Collapsable,
 } from '@hackoregon/component-library';
-import { monthYear } from '@hackoregon/component-library/src/utils/formatters';
+
+import { civicFormat } from '@hackoregon/component-library/dist/utils';
 
 import { fetchHumanImpactOfSweepingUrbanCampsites } from '../../state/human-impact-of-sweeping-urban-campsites/actions';
 
@@ -57,7 +58,7 @@ export class HumanImpactOfSweepingUrbanCampsites extends React.Component {
                   dataKey="date"
                   dataValue="value"
                   dataSeries="type"
-                  xNumberFormatter={monthYear}
+                  xNumberFormatter={civicFormat.monthYear}
                 />
               )}
             </div>

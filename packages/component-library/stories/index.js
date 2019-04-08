@@ -54,13 +54,13 @@ import TheBrandStyle from "./styleGuideStories/TheBrandStyle.story";
 import ThePlatformStyle from "./styleGuideStories/ThePlatformStyle.story";
 import Introduction from "./styleGuideStories/Introduction.story";
 
-//Legacy components used in 2017 package. Not supported for ongoing development.
-//import storycardStory from './StoryCard.story';
-//import storyLinkStory from './StoryLink.story';
-//import storyFooterStory from './StoryFooter.story';
-//import editableStory from './Editable.story';
-//import sankeyStory from './Sankey.story';
-//import landingPage from './LandingPage.story';
+// Legacy components used in 2017 package. Not supported for ongoing development.
+// import storycardStory from './StoryCard.story';
+// import storyLinkStory from './StoryLink.story';
+// import storyFooterStory from './StoryFooter.story';
+// import editableStory from './Editable.story';
+// import sankeyStory from './Sankey.story';
+// import landingPage from './LandingPage.story';
 
 import "../assets/global.styles.css";
 
@@ -150,10 +150,10 @@ placeholderStory();
 pullQuoteStory();
 sandboxStory();
 
-//Legacy components used in 2017 package. Not supported for ongoing development.
-//editableStory();
-//landingPage();
-//storyLinkStory();
-//storyFooterStory();
-//storycardStory();
-//sankeyStory();
+// Legacy components used in 2017 package. Not supported for ongoing development.
+// editableStory();
+// landingPage();
+// storyLinkStory();
+// storyFooterStory();
+// storycardStory();
+// sankeyStory();

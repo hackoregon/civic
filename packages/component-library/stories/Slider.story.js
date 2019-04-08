@@ -2,8 +2,8 @@ import React from 'react';
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
-import { Slider } from '../src';
 import { checkA11y } from '@storybook/addon-a11y';
+import { Slider } from '../src';
 import { storybookStyles } from './storyStyles.js';
 
 const displayName = Slider.displayName || 'Slider';
@@ -21,9 +21,11 @@ const demoCode = () => {
       };
       this.handleChange = this.handleChange.bind(this);
     }
+
     handleChange(value) {
       this.setState({ value });
     }
+
     render() {
       return (
         <div className="slider-container">

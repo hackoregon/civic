@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { css } from 'emotion';
 
@@ -15,7 +16,7 @@ const PDF = ({ url }) => (
 PDF.displayName = 'PDF';
 
 PDF.propTypes = {
-  url: React.PropTypes.string,
+  url: PropTypes.string,
 };
 
 export default PDF;

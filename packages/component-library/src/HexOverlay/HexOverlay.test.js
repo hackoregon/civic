@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import HexOverlay from './HexOverlay';
 import DeckGL from 'deck.gl';
+import HexOverlay from './HexOverlay';
 
 describe('HexOverlay', () => {
   const data = [

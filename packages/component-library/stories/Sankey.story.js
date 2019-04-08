@@ -3,8 +3,8 @@ import { take } from 'ramda';
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
-import { Sankey } from '../src';
 import { checkA11y } from '@storybook/addon-a11y';
+import { Sankey } from '../src';
 
 const displayName = Sankey.displayName || 'Sankey';
 const title = 'Simple usage';

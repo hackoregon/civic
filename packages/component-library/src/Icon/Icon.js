@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 const Icon = ({ className, handleClick }) => (
@@ -7,8 +8,8 @@ const Icon = ({ className, handleClick }) => (
 );
 
 Icon.propTypes = {
-  className: React.PropTypes.string,
-  handleClick: React.PropTypes.func,
+  className: PropTypes.string,
+  handleClick: PropTypes.func,
 };
 
 export default Icon;

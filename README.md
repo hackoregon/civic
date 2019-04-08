@@ -65,7 +65,7 @@ $ nvm use
 # Note for next two steps, if you get an error, keep trying the same command again.
 
 # Installs all package dependencies and links cross-dependencies.
-$ yarn bootstrap
+$ yarn install
 
 # This will build all packages. Since some packages are used internally, they need to be built before the dependent packages are worked on. 
 $ yarn build

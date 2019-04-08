@@ -2,8 +2,8 @@ import React from 'react';
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
-import { Dropdown } from '../src';
 import { checkA11y } from '@storybook/addon-a11y';
+import { Dropdown } from '../src';
 import { storybookStyles } from './storyStyles.js';
 
 const displayName = Dropdown.displayName || 'Dropdown';

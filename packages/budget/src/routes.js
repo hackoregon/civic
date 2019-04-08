@@ -69,18 +69,6 @@ export default function createRoutes(store) {
       },
     },
     {
-      path: '/slider',
-      name: 'mytestpage',
-      getComponent(nextState, cb) {
-        const renderRoute = loadModule(cb);
-        require.ensure([], require =>
-          Promise.resolve(require('./components/MyTest'))
-            .then(renderRoute)
-            .catch(errorLoading)
-        );
-      },
-    },
-    {
       path: '/collection',
       name: 'collectionpage',
       getComponent(nextState, cb) {

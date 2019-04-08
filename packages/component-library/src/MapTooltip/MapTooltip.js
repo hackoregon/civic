@@ -67,6 +67,7 @@ MapTooltip.propTypes = {
   primaryField: PropTypes.string,
   secondaryName: PropTypes.string,
   secondaryField: PropTypes.string,
+  isHex: PropTypes.bool,
 };
 
 export default MapTooltip;

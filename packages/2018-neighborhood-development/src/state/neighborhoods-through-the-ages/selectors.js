@@ -1,7 +1,6 @@
 import { createSelector } from 'reselect';
 import { compose } from 'redux';
-import { titleCase } from '@hackoregon/component-library/src/utils/formatters';
-import { ungroupBy } from '@hackoregon/component-library/src/utils/dataHelpers';
+import { civicFormat, ungroupBy } from '@hackoregon/component-library/dist/utils';
 
 import { rootState } from '../selectors';
 
@@ -31,7 +30,7 @@ const getSelectedNeighborhoodData = (data, nbhd) =>
   data.filter(({ neighborhood }) => neighborhood === nbhd);
 const getUnique = obj => [...new Set(obj)];
 const formatForDropdown = arr =>
-  arr.map(obj => ({ value: obj, label: titleCase(obj) }));
+  arr.map(obj => ({ value: obj, label: civicFormat.titleCase(obj) }));
 const neighborhoodDropdown = compose(
   formatForDropdown,
   getUnique,

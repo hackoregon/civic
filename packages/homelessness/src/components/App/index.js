@@ -1,6 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
 // This should probably be the core component, containing, nav etc
 
+import PropTypes from 'prop-types';
+
 import React from 'react';
 import styled from 'styled-components';
 
@@ -21,7 +23,7 @@ App.defaultProps = {
 };
 
 App.propTypes = {
-  children: React.PropTypes.node,
+  children: PropTypes.node,
 };
 
 export default App;

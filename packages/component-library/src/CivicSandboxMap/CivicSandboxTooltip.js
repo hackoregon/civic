@@ -24,16 +24,18 @@ const tooltip = css`
 
 const MapTooltip = props => {
   const { tooltipData } = props;
-  const x = tooltipData.x;
-  const y = tooltipData.y;
+  const { x } = tooltipData;
+  const { y } = tooltipData;
 
   const xPosition =
     x < window.innerWidth * 0.66 ? x : x - window.innerWidth * 0.1;
   const yPostition = y < 375 ? y : y - 50;
 
-  const tooltipContent = tooltipData.content.map((obj, index) => {
+  const tooltipContent = tooltipData.content.map(obj => {
     return (
-      <div key={index}>{`${obj.name}: ${obj.value.toLocaleString()}`}</div>
+      <div key={`${obj.name}${obj.value}`}>{`${
+        obj.name
+      }: ${obj.value.toLocaleString()}`}</div>
     );
   });
 

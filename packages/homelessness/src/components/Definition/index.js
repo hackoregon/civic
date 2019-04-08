@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { StoryCard } from '@hackoregon/component-library';
+import { CivicStoryCard } from '@hackoregon/component-library';
 import shared from '../shared.styles';
 
 import { fetchDefinitionData } from '../../state/Definition/actions';
@@ -47,7 +47,7 @@ class Definition extends React.Component {
   }
   render() {
     return (
-      <StoryCard title="What does it mean to be homeless?">
+      <CivicStoryCard title="What does it mean to be homeless?">
         <div>
           <DefinitionPieChart
             data={this.props.shelterTypeData.filter(item => item.year !== 2009)}
@@ -88,7 +88,7 @@ class Definition extends React.Component {
             />
           </div>
         </div>
-      </StoryCard>
+      </CivicStoryCard>
     );
   }
 }

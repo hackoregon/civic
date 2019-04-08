@@ -10,10 +10,8 @@ const data = [
   { name: 'Other', value: 2.3 },
 ];
 
-class PieWhatTheyDo extends Component {
-  render() {
-    return <ErPieChart data={data} />;
-  }
-}
+const PieWhatTheyDo = () => (
+  <ErPieChart data={data} dataLabel='name' dataValue='value' />
+);
 
 export default PieWhatTheyDo;

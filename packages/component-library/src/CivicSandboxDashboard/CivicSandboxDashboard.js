@@ -1,9 +1,12 @@
+/* TODO: Fix linting errors */
+/* eslint-disable */
+
 import React from 'react';
 import PropTypes from 'prop-types';
+import { css } from 'emotion';
 import PieChart from '../PieChart/PieChart';
 import HorizontalBarChart from '../HorizontalBarChart/HorizontalBarChart';
-import { numeric, percentage } from '../utils/formatters';
-import { css } from 'emotion';
+import civicFormat from '../utils/civicFormat';
 
 const dashboard = css`
   background: rgba(255, 255, 255, 1);
@@ -115,8 +118,8 @@ class CivicDashboard extends React.Component {
           <h2>{object.title}</h2>
           <h2 style={{ textAlign: 'center', margin: 'auto', width: '50%' }}>
             {object.data[0].y < 1
-              ? percentage(object.data[0].y)
-              : object.data[0].y.toFixed(1) + '%'}
+              ? civicFormat.percentage(object.data[0].y)
+              : `${object.data[0].y.toFixed(1)}%`}
           </h2>
           <PieChart
             data={object.data}
@@ -124,7 +127,7 @@ class CivicDashboard extends React.Component {
             width={475}
             height={375}
             innerRadius={90}
-            halfDoughnut={true}
+            halfDoughnut
           />
         </div>
       ) : object.visualizationType === 'ComparisonBar' ? (
@@ -136,11 +139,11 @@ class CivicDashboard extends React.Component {
             sortOrder={object.sortOrder}
             dataValue={object.dataValue}
             dataLabel={object.dataLabel}
-            dataKeyLabel={''}
-            title={''}
-            subtitle={''}
-            xLabel={''}
-            yLabel={''}
+            dataKeyLabel=""
+            title=""
+            subtitle=""
+            xLabel=""
+            yLabel=""
           />
         </div>
       ) : object.visualizationType === 'Legend' ? (
@@ -155,7 +158,7 @@ class CivicDashboard extends React.Component {
                     height: '40px',
                     width: `${100 / arr.length}%`,
                   }}
-                  key={'legend' + i}
+                  key={`legend${i}`}
                 />
               );
             })}
@@ -165,16 +168,16 @@ class CivicDashboard extends React.Component {
               {object.min === 0
                 ? 0
                 : object.min > 0 && object.min < 1
-                ? percentage(object.min)
+                ? civicFormat.percentage(object.min)
                 : object.min > 1
-                ? numeric(object.min)
+                ? civicFormat.numeric(object.min)
                 : object.min}
             </h4>
             <h4 style={{ float: 'right' }}>
               {object.max < 1 && object.max > 0
-                ? percentage(object.max)
+                ? civicFormat.percentage(object.max)
                 : object.max > 1
-                ? numeric(object.max)
+                ? civicFormat.numeric(object.max)
                 : object.max}
             </h4>
           </div>
@@ -188,13 +191,13 @@ class CivicDashboard extends React.Component {
           className={this.state.show === 'info' ? iconActive : icon}
           onClick={this.showInfo}
         >
-          <div className={'fa fa-info-circle'} />
+          <div className="fa fa-info-circle" />
         </div>
         <div
           className={this.state.show === 'viz' ? iconActive : icon}
           onClick={this.showViz}
         >
-          <div className={'fa fa-eye'} />
+          <div className="fa fa-eye" />
         </div>
       </div>
     );

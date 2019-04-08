@@ -41,7 +41,6 @@ function configureStoreDev(initialState = {}, history) {
 
   store.asyncReducers = {};
 
-  /* istanbul ignore next */
   if (module.hot) {
     module.hot.accept('./state', () => {
       Promise.resolve(require.ensure([], require => require('./state'))).then(

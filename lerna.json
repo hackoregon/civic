@@ -1,8 +1,6 @@
 {
-  "lerna": "2.5.1",
   "version": "1.0.0-alpha.1c62c05f",
   "useWorkspaces": true,
   "npmClient": "yarn",
-  "hoist": true,
   "private": true
 }
