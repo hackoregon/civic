@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { RechartsPie } from '@hackoregon/component-library';
+import { PieChart } from '@hackoregon/component-library';
 import commaSeparate from '../../utils/comma-separate';
 
 const colors = [
@@ -38,27 +38,21 @@ const numberStyle = {
   fontWeight: 'bold',
 };
 
-// THIS IS A HACK!!!
-// The RechartsPie component centers the pie chart but then the legend runs off the edge.
-const chartStyle = {
-  marginLeft: '-50%',
-};
-
 const chartProportions = {
-  chartWidth: 480,
-  chartHeight: 160,
-  iconSize: 15,
-  pieInnerRadius: 40,
-  pieOuterRadius: 80,
-};
-
-const RechartsPieStyles = {
-  fontSize: '.8em',
+  width: 350,
+  height: 200,
+  innerRadius: 20,
 };
 
 const textAlignCenter = {
   textAlign: 'center',
 };
+
+// VictoryPie uses d3-interpolate to perform animations. d3-interpolate
+// "sanitizes" all values, despite whether or not they are used for an animation.
+// This results in english words that happen to also be valid html/css color names
+// become rgb(x, x, x) strings.
+const protectLabels = data => data.map(d => ({ ...d, name: `${d.name}.` }));
 
 /* eslint-disable dot-notation */
 const DemographicDetailView = ({ demographics }) => {
@@ -70,14 +64,13 @@ const DemographicDetailView = ({ demographics }) => {
           <h2>{demographics.name}</h2>
           <div style={contentBlockStyle}>
             <h3 style={textAlignCenter}>Race/Ethnicity</h3>
-            <div style={chartStyle}>
-              <RechartsPie
-                data={demographics.populations}
-                chartProportions={chartProportions}
-                colors={colors}
-                styles={RechartsPieStyles}
-              />
-            </div>
+            <PieChart
+              data={protectLabels(demographics.populations)}
+              dataLabel='name'
+              dataValue='value'
+              colors={colors}
+              {...chartProportions}
+            />
           </div>
           <div style={contentBlockStyle}>
             <h3 style={textAlignCenter}>Household Totals</h3>

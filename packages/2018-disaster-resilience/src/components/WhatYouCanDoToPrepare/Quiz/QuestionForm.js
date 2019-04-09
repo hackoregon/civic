@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Button } from '@hackoregon/component-library';
 import { css } from 'emotion';

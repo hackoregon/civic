@@ -1,10 +1,8 @@
 import React from 'react';
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from '@storybook/react';
-import { withKnobs, selectV2 } from '@storybook/addon-knobs';
+import { withKnobs, select } from '@storybook/addon-knobs';
 import { BaseMap } from '../src';
-
-const displayName = BaseMap.displayName || 'BaseMap';
 
 const optionsStyle = {
   'Hack Oregon Light': 'mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg',
@@ -14,7 +12,7 @@ const optionsStyle = {
 };
 
 const demoMap = () => {
-  const mapboxStyle = selectV2(
+  const mapboxStyle = select(
     'Mapbox Style',
     optionsStyle,
     optionsStyle['Hack Oregon Light']
@@ -24,7 +22,7 @@ const demoMap = () => {
 };
 
 const geocoderMap = () => {
-  const mapboxStyle = selectV2(
+  const mapboxStyle = select(
     'Mapbox Style',
     optionsStyle,
     optionsStyle['Hack Oregon Light']
@@ -41,7 +39,7 @@ const geocoderMap = () => {
 };
 
 const staticMap = () => {
-  const mapboxStyle = selectV2(
+  const mapboxStyle = select(
     'Mapbox Style',
     optionsStyle,
     optionsStyle['Hack Oregon Light']

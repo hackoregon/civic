@@ -1,3 +1,6 @@
+/* TODO: Fix linting errors */
+/* eslint-disable */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import DeckGL, {
@@ -129,7 +132,7 @@ const CivicSandboxMap = props => {
 
   return (
     <div className={crosshair}>
-      <DeckGL className={'DeckGL'} {...viewport}>
+      <DeckGL className="DeckGL" {...viewport}>
         {renderMaps}
         {children}
       </DeckGL>

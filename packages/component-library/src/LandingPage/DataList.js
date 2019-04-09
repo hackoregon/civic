@@ -1,3 +1,6 @@
+/* Not currently used 03/2019 */
+/* eslint-disable */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';

@@ -1,3 +1,6 @@
+/* Deprecated component, 2017 only */
+/* eslint-disable */
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import copy from 'copy-to-clipboard';
@@ -24,8 +27,6 @@ export default class ShareCollection extends Component {
 
   setToFalse = () => this.setState({ copied: false });
 
-  switchState = ms => setTimeout(this.setToFalse, ms);
-
   handleCopy = () => {
     // NOTE: we need to make sure this will work on all browsers
     copy(`${window.location.href}`);
@@ -33,11 +34,13 @@ export default class ShareCollection extends Component {
     this.setState({ copied: true });
   };
 
+  switchState = ms => setTimeout(this.setToFalse, ms);
+
   render() {
     const shareTxt = this.state.copied ? 'Link copied!' : 'Share'; // if copied, show Link copied, otherwise, show Share card
     const shareIcon = this.state.copied ? ICONS.check : ICONS.link;
     return (
-      <StoryLink className={'Share'} action={this.handleCopy} icon={shareIcon}>
+      <StoryLink className="Share" action={this.handleCopy} icon={shareIcon}>
         {shareTxt}
       </StoryLink>
     );

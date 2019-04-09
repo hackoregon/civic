@@ -44,21 +44,21 @@ export default class StoryFooter extends Component {
 
   setToFalse = () => this.setState({ copied: false });
 
-  switchState = ms => setTimeout(this.setToFalse, ms);
-
   handleCopy = () => {
-    const slug = this.props.slug;
+    const { slug } = this.props;
     // NOTE: we need to make sure this will work on all browsers
     copy(`${window.location.origin}/cards/${slug}`);
     this.switchState(MS_TO_SWITCH_TEXT);
     this.setState({ copied: true });
   };
 
+  switchState = ms => setTimeout(this.setToFalse, ms);
+
   render() {
-    const slug = this.props.slug;
-    const source = this.props.source;
-    const shareTxt = this.state.copied ? 'Link copied!' : 'Share card'; // if copied, show Link copied, otherwise, show Share card
-    const shareIcon = this.state.copied ? ICONS.check : ICONS.link;
+    const { slug, source } = this.props;
+    const { copied } = this.state;
+    const shareTxt = copied ? 'Link copied!' : 'Share card'; // if copied, show Link copied, otherwise, show Share card
+    const shareIcon = copied ? ICONS.check : ICONS.link;
     const routeOrUndefined =
       `${window.location.origin}/cards/${slug}` === window.location.href
         ? undefined

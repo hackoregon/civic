@@ -13,11 +13,8 @@ import {
   HorizontalBarChart,
   Logo
 } from "@hackoregon/component-library";
-import {
-  monthYear,
-  percentage,
-  year
-} from "@hackoregon/component-library/src/utils/formatters";
+import { civicFormat } from '@hackoregon/component-library/dist/utils';
+
 
 import brain from "@hackoregon/component-library/assets/brain.svg";
 import brainMobile from "@hackoregon/component-library/assets/brain-mobile.svg";
@@ -484,7 +481,7 @@ class HomePage extends Component {
                 autoplay
                 autoplayInterval={10000}
                 pauseOnHover={false}
-                transitionMode={"fade"}
+                transitionMode="fade"
                 wrapAround
                 withoutControls
                 cellSpacing={20}
@@ -499,7 +496,7 @@ class HomePage extends Component {
                         yLabel="Sweeps"
                         dataKey="date"
                         dataValue="count"
-                        xNumberFormatter={monthYear}
+                        xNumberFormatter={civicFormat.monthYear}
                       />
                     </div>
                   </CivicCardStack>
@@ -510,7 +507,7 @@ class HomePage extends Component {
                     <div className={chartWrapper}>
                       <img
                         src={transportationMap}
-                        alt={"sample map"}
+                        alt="sample map"
                         className={cardImage}
                       />
                     </div>
@@ -522,7 +519,7 @@ class HomePage extends Component {
                 autoplay
                 autoplayInterval={5000}
                 pauseOnHover={false}
-                transitionMode={"fade"}
+                transitionMode="fade"
                 wrapAround
                 withoutControls
                 cellSpacing={20}
@@ -545,8 +542,8 @@ class HomePage extends Component {
                           minSize: 2,
                           maxSize: 10
                         }}
-                        xNumberFormatter={percentage}
-                        yNumberFormatter={percentage}
+                        xNumberFormatter={civicFormat.percentage}
+                        yNumberFormatter={civicFormat.percentage}
                         legendComponent={() => null}
                       />
                     </div>
@@ -563,8 +560,8 @@ class HomePage extends Component {
                         dataKey="year"
                         dataValue="value"
                         dataSeries="type"
-                        xNumberFormatter={year}
-                        yNumberFormatter={year}
+                        xNumberFormatter={civicFormat.year}
+                        yNumberFormatter={civicFormat.year}
                         legendComponent={() => null}
                       />
                     </div>
@@ -576,7 +573,7 @@ class HomePage extends Component {
                 autoplay
                 autoplayInterval={5000}
                 pauseOnHover={false}
-                transitionMode={"fade"}
+                transitionMode="fade"
                 wrapAround
                 withoutControls
                 cellSpacing={20}
@@ -592,7 +589,7 @@ class HomePage extends Component {
                         dataKey="year"
                         dataValue="ons"
                         dataSeries="type"
-                        xNumberFormatter={year}
+                        xNumberFormatter={civicFormat.year}
                         legendComponent={() => null}
                       />
                     </div>
@@ -617,7 +614,7 @@ class HomePage extends Component {
                 autoplay
                 autoplayInterval={10000}
                 pauseOnHover={false}
-                transitionMode={"fade"}
+                transitionMode="fade"
                 wrapAround
                 withoutControls
                 cellSpacing={20}
@@ -634,8 +631,8 @@ class HomePage extends Component {
                         xAxisLabel="Importance"
                         sortOrder="sortOrder"
                         data={electionsData}
-                        dataValueFormatter={percentage}
-                        domain={{ x: [0, 0.6], y: [1, 11] }}
+                        dataValueFormatter={civicFormat.percentage}
+                        domain={{ x: [1, 11], y: [0, 0.6] }}
                       />
                     </div>
                   </CivicCardStack>
@@ -646,7 +643,7 @@ class HomePage extends Component {
                     <div className={chartWrapper}>
                       <img
                         src={evictionsMap}
-                        alt={"sample map"}
+                        alt="sample map"
                         className={cardImage}
                       />
                     </div>

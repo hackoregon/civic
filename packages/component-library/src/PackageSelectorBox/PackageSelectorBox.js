@@ -1,3 +1,7 @@
+/* TODO: Fix linting errors */
+/* eslint-disable */
+
+import PropTypes from 'prop-types';
 import React from 'react';
 import { css } from 'emotion';
 
@@ -50,9 +54,9 @@ const PackageSelector = ({ title, description, onClick }) => (
 PackageSelector.displayName = 'PackageSelector';
 
 PackageSelector.propTypes = {
-  title: React.PropTypes.string,
-  description: React.PropTypes.string,
-  onClick: React.PropTypes.func,
+  title: PropTypes.string,
+  description: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export default PackageSelector;

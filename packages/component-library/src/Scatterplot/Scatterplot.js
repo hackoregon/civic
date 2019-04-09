@@ -1,5 +1,5 @@
-import React, { PropTypes } from 'react';
-import { css } from 'emotion';
+import PropTypes from 'prop-types';
+import React from 'react';
 import {
   VictoryAxis,
   VictoryChart,
@@ -11,7 +11,7 @@ import {
 
 import ChartContainer from '../ChartContainer';
 import SimpleLegend from '../SimpleLegend';
-import { numeric } from '../utils/formatters';
+import civicFormat from '../utils/civicFormat';
 import {
   chartEvents,
   getDefaultDomain,
@@ -69,11 +69,6 @@ const Scatterplot = ({
   const legendData =
     dataSeriesLabels && dataSeriesLabels.length
       ? dataSeriesLabels.map(series => ({ name: series.label }))
-      : null;
-
-  const categoryData =
-    dataSeriesLabels && dataSeriesLabels.length
-      ? dataSeriesLabels.map(series => ({ name: series.category }))
       : null;
 
   return (
@@ -210,8 +205,8 @@ Scatterplot.defaultProps = {
   subtitle: null,
   xLabel: 'X',
   yLabel: 'Y',
-  xNumberFormatter: numeric,
-  yNumberFormatter: numeric,
+  xNumberFormatter: civicFormat.numeric,
+  yNumberFormatter: civicFormat.numeric,
   invertX: false,
   invertY: false,
   legendComponent: null,

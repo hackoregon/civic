@@ -1,9 +1,12 @@
-import React, { Component } from "react";
-import { css } from "emotion";
-import NavSubMenu from "./NavSubMenu";
-import NavLink from "./NavRouterLink";
-import Icon from "../Icon/Icon";
-import PropTypes from "prop-types";
+/* TODO: Fix linting errors */
+/* eslint-disable */
+
+import React, { Component } from 'react';
+import { css } from 'emotion';
+import PropTypes from 'prop-types';
+import NavSubMenu from './NavSubMenu';
+import NavLink from './NavRouterLink';
+import Icon from '../Icon/Icon';
 
 const defaultMenu = [
   {
@@ -141,7 +144,7 @@ class Nav extends Component {
         <a className={exClass}>
           <Icon
             key="nav-ex"
-            className={"fa fa-times"}
+            className="fa fa-times"
             handleClick={this.props.toggleSubNav}
           />
         </a>
@@ -152,9 +155,9 @@ class Nav extends Component {
                 key={idx}
                 onClick={e => toggleNestedMenu(item.name, item.nestedMenu, e)}
               >
-                <a className={"nav-item"}>
+                <a className="nav-item">
                   {item.name}
-                  <Icon className={"fa fa-angle-down"} />
+                  <Icon className="fa fa-angle-down" />
                 </a>
               </li> // eslint-disable-line
             ) : (

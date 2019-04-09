@@ -1,17 +1,6 @@
+import PropTypes from 'prop-types';
 import React from 'react';
-import styled from 'styled-components';
-import { Header, Footer, StoryCard } from '@hackoregon/component-library';
-import {
-  LineChart,
-  Line,
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-} from 'recharts';
+import { StoryCard, HorizontalBarChart } from '@hackoregon/component-library';
 
 const dataInc = [
   { name: 'Vehicle Incidents', Incidents: 49746 },
@@ -38,12 +27,9 @@ const dataAge = [
 ];
 const dataTot = [
   // { name: 'Incidents by serverity', 'Incidents across all modes': 2135, 'Serious injuries across all modes': 123, 'Pedestrian fatalities': 105 },
-  { name: 'Incidents by serverity', 'Incidents across all modes': 2135 },
-  {
-    name: 'Serious injuries across all modes',
-    'Serious injuries across all modes': 123,
-  },
-  { name: 'Pedestrian fatalities', 'Pedestrian fatalities': 105 },
+  { name: 'Incidents by serverity', Incidents: 2135 },
+  { name: 'Serious injuries across all modes', Incidents: 123 },
+  { name: 'Pedestrian fatalities', Incidents: 105 },
 ];
 
 function CrashData(props) {
@@ -76,68 +62,28 @@ function CrashData(props) {
           transportation - vehicle**, bike, and pedestrian. Here’s an overview
           of what we saw.
         </p>
-        <p style={{ marginTop: '2em' }}>
-          Total number of incidents by mode of transportation for data from ODOT
-          for the years 2004-2014
-        </p>
-        <LineChart
-          width={600}
-          height={300}
+        <HorizontalBarChart
           data={dataInc}
-          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-        >
-          <XAxis dataKey="name" />
-          <YAxis />
-          <CartesianGrid strokeDasharray="3 3" />
-          <Tooltip />
-          <Line
-            type="monotone"
-            dataKey="Incidents"
-            stroke="#E87220"
-            activeDot={{ r: 8 }}
-          />
-        </LineChart>
-        <p style={captionStyle}>
-          This is a breakdown of the total number of incidents by mode of
-          transportation for data from ODOT for the years 2004-2014
-        </p>
-        <LineChart
-          width={600}
-          height={300}
+          dataLabel="name"
+          dataValue="Incidents"
+          title="Total number of incidents by moe of transportation"
+          subtitle="For data from ODOT for the years 2004-2014"
+        />
+        <HorizontalBarChart
           data={dataInj}
-          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-        >
-          <XAxis dataKey="name" />
-          <YAxis />
-          <CartesianGrid strokeDasharray="3 3" />
-          <Tooltip />
-          <Line
-            type="monotone"
-            dataKey="Incidents"
-            stroke="#E87220"
-            activeDot={{ r: 8 }}
-          />
-        </LineChart>
-        <p style={captionStyle}>
-          This is the percentage of serious injury*** per mode of transportation
-        </p>
-        <LineChart
-          width={600}
-          height={300}
+          dataLabel="name"
+          dataValue="Incidents"
+          title="Total number of injuries by mode of transportation"
+          subtitle="For data from ODOT for the years 2004-2014"
+          dataValueFormatter={x => x}
+        />
+        <HorizontalBarChart
           data={dataFat}
-          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-        >
-          <XAxis dataKey="name" />
-          <YAxis />
-          <CartesianGrid strokeDasharray="3 3" />
-          <Tooltip />
-          <Line
-            type="monotone"
-            dataKey="Incidents"
-            stroke="#E87220"
-            activeDot={{ r: 8 }}
-          />
-        </LineChart>
+          dataLabel="name"
+          dataValue="Incidents"
+          title="Percentage of serious injury*** per mode of transportation"
+          dataValueFormatter={x => x}
+        />
         <p style={captionStyle}>
           This is the percentage of fatalities per mode of transportation
         </p>
@@ -160,46 +106,19 @@ function CrashData(props) {
       </StoryCard>
 
       <StoryCard title="97 Intersections">
-        <BarChart
-          width={600}
-          height={300}
+        <HorizontalBarChart
           data={dataTot}
-          margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
-        >
-          <XAxis dataKey="name" />
-          <YAxis />
-          <CartesianGrid strokeDasharray="3 3" />
-          <Tooltip />
-          <Bar barSize={75} dataKey="Pedestrian fatalities" fill="#aaa4ab" />
-          <Bar
-            barSize={75}
-            dataKey="Serious injuries across all modes"
-            fill="#ed8f4e"
-          />
-          <Bar
-            barSize={75}
-            dataKey="Incidents across all modes"
-            fill="#E87220"
-          />
-        </BarChart>
-        <p style={{ marginBottom: '2em' }}>
-          This is how many total incidents by severity were reported at the 97
-          intersections
-        </p>
+          dataLabel="name"
+          dataValue="Incidents"
+          title="Total incidents by severity reported at the 97 intersections"
+        />
 
-        <BarChart
-          width={600}
-          height={300}
+        <HorizontalBarChart
           data={dataAge}
-          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-        >
-          <XAxis dataKey="name" />
-          <YAxis />
-          <CartesianGrid strokeDasharray="3 3" />
-          <Tooltip />
-          <Bar dataKey="Incidents" fill="#E87220" />
-        </BarChart>
-        <p>Number of pedestrian fatalities by age distribution</p>
+          dataLabel="name"
+          dataValue="Incidents"
+          title="Distribution of pedestrian fatalities by age"
+        />
       </StoryCard>
 
       <StoryCard title="6 Repeat Offenders of Pedestrian Fatalities">
@@ -344,7 +263,7 @@ CrashData.defaultProps = {
 };
 
 CrashData.propTypes = {
-  children: React.PropTypes.node,
+  children: PropTypes.node,
 };
 
 export default CrashData;

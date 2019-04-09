@@ -2,9 +2,9 @@ import React from 'react';
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
+import { checkA11y } from '@storybook/addon-a11y';
 import { Header } from '../src';
 import Hero from '../src/Hero/Hero';
-import { checkA11y } from '@storybook/addon-a11y';
 
 const displayName = Header.displayName || 'Header';
 const title = 'Simple usage';

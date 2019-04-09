@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import DeckGL, { ScreenGridLayer } from 'deck.gl';
 
 const ScreenGridMap = props => {
@@ -16,11 +17,11 @@ const ScreenGridMap = props => {
 
   return (
     <div>
-      <DeckGL className={'DeckGL'} {...viewport}>
+      <DeckGL className="DeckGL" {...viewport}>
         <ScreenGridLayer
-          id={'screengrid-layer'}
-          className={'ScreenGridMap'}
-          pickable={true}
+          id="screengrid-layer"
+          className="ScreenGridMap"
+          pickable
           data={data}
           getPosition={getPosition}
           opacity={opacity}

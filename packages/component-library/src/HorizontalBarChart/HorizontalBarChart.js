@@ -7,11 +7,10 @@ import {
   VictoryLabel,
   VictoryPortal,
   VictoryTooltip,
-  Bar,
 } from 'victory';
 
 import ChartContainer from '../ChartContainer';
-import { numeric, unformatted } from '../utils/formatters';
+import civicFormat from '../utils/civicFormat';
 import { chartEvents } from '../utils/chartHelpers';
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
 
@@ -53,7 +52,7 @@ const HorizontalBarChart = ({
 
   const NegativeAwareTickLabel = props => (
     <VictoryLabel
-      dx={props.scale.y(minValue) - 20}
+      dx={props.scale.y(minValue) - 20} // eslint-disable-line
       {...props}
       textAnchor="end"
     />
@@ -69,12 +68,11 @@ const HorizontalBarChart = ({
       <VictoryChart
         height={dataHeight + additionalHeight}
         domain={domain}
-        domainPadding={{ x: 20, y: 11 }}
+        domainPadding={{ x: 11, y: 20 }}
         padding={padding}
         theme={CivicVictoryTheme.civic}
       >
         <VictoryAxis
-          dependentAxis
           style={{
             tickLabels: { fill: 'none' },
             ticks: { stroke: 'none' },
@@ -84,9 +82,11 @@ const HorizontalBarChart = ({
         />
         {!minimalist && (
           <VictoryAxis
+            dependentAxis
             orientation="top"
             tickFormat={dataValueFormatter}
             title="X Axis"
+            offsetY={padding.top}
           />
         )}
         {!minimalist && (
@@ -166,9 +166,7 @@ const HorizontalBarChart = ({
 };
 
 HorizontalBarChart.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({ x: PropTypes.number, y: PropTypes.number })
-  ),
+  data: PropTypes.arrayOf(PropTypes.object),
   sortOrder: PropTypes.string,
   dataValue: PropTypes.string,
   dataLabel: PropTypes.string,
@@ -181,7 +179,7 @@ HorizontalBarChart.propTypes = {
   yLabel: PropTypes.string,
   dataValueFormatter: PropTypes.func,
   dataLabelFormatter: PropTypes.func,
-  minimalist: PropTypes.boolean,
+  minimalist: PropTypes.bool,
 };
 
 HorizontalBarChart.defaultProps = {
@@ -194,8 +192,8 @@ HorizontalBarChart.defaultProps = {
   subtitle: null,
   xLabel: 'X',
   yLabel: 'Y',
-  dataValueFormatter: numeric,
-  dataLabelFormatter: unformatted,
+  dataValueFormatter: civicFormat.numeric,
+  dataLabelFormatter: civicFormat.unformatted,
   minimalist: false,
 };
 

@@ -1,7 +1,10 @@
-import React from "react";
-import { css } from "emotion";
-import Dropdown from "../Dropdown/Dropdown";
-import SandboxDateSelector from "./SandboxDateSelector";
+/* TODO: Fix linting errors */
+/* eslint-disable */
+
+import React from 'react';
+import { css } from 'emotion';
+import Dropdown from '../Dropdown/Dropdown';
+import SandboxDateSelector from './SandboxDateSelector';
 
 const title = css(`
 border-top: 1px solid #ddd;

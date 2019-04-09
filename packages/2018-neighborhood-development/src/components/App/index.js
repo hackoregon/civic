@@ -37,11 +37,14 @@ const App = () => (
     {/* <TheShapeOfANeighborhood /> */}
     <MagnitudeOfUrbanCampsiteSweeps />
     <HumanImpactOfSweepingUrbanCampsites />
-    <PullQuote
-      quoteText={`Portland’s response to unsanctioned camping in urban/natural areas has increased over 18mos; about 143 people are affected per week out of 1,668 people who are unsheltered on any given night`}
-    />
+    <PullQuote quoteText="Portland’s response to unsanctioned camping in urban/natural areas has increased over 18mos; about 143 people are affected per week out of 1,668 people who are unsheltered on any given night" />
     <ExploreUrbanCampsiteSweeps />
-    <p>{`Campsite sweeps displace people living in Portland's neighborhoods, and shows movement/migration of people on a micro time scale. Another dimension of Portland's neighborhoods, our schools, also shows a demographic shift over the past 10 years.`}</p>
+    <p>
+      Campsite sweeps displace people living in Portland's neighborhoods, and
+      shows movement/migration of people on a micro time scale. Another
+      dimension of Portland's neighborhoods, our schools, also shows a
+      demographic shift over the past 10 years.
+    </p>
     <StudentEnrollmentTrends />
     {/* <VulnerableStudentPopulations /> */}
     <ClassSizeAndQuality />

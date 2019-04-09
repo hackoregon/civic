@@ -1,3 +1,5 @@
+/* TODO: Fix linting errors */
+/* eslint-disable */
 /* COLOR SCHEME OPTIONS */
 const thermal = [
   [255, 255, 204, 255],

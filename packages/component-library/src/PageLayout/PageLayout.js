@@ -42,6 +42,7 @@ const defaultStyles = css`
 `;
 
 const PageLayout = ({
+  header,
   heroTitle,
   heroSubtitle,
   mainProjectColor,
@@ -51,11 +52,11 @@ const PageLayout = ({
   attribution,
 }) => (
   <div>
-    <Header
+    { header && <Header
       title="Civic"
       mainProjectColor={mainProjectColor}
       overlay={overlay || false}
-    />
+    /> }
     {heroTitle && (
       <CollectionHero
         teamTitle={teamTitle}
@@ -72,6 +73,7 @@ const PageLayout = ({
 PageLayout.displayName = 'PageLayout';
 
 PageLayout.propTypes = {
+  header: PropTypes.bool,
   overlay: PropTypes.bool,
   teamTitle: PropTypes.string,
   heroTitle: PropTypes.string,
@@ -80,5 +82,9 @@ PageLayout.propTypes = {
   children: PropTypes.node,
   attribution: PropTypes.node,
 };
+
+PageLayout.defaultProps = {
+  header: true,
+}
 
 export default PageLayout;

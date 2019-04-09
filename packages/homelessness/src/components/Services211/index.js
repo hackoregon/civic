@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { StoryCard } from '@hackoregon/component-library';
+import { CivicStoryCard } from '@hackoregon/component-library';
 import { HalfDonutChart, ListBarChart } from '../Reuseable';
 import { fetchServiceCallsData } from '../../state/Services211/actions';
 import shared from '../shared.styles';
@@ -13,13 +13,13 @@ class Services211 extends React.Component {
   render() {
     const dataLoaded = !!this.props.pieData[0];
     return (
-      <StoryCard title="Homelessness Services">
+      <CivicStoryCard title="Homelessness Services">
         <p style={shared.text}>
           In 2016 the 211info helpline fielded 6759 calls for services from
           people who self-identified as homeless. Most of those calls were
           directed to housing assistance services.
         </p>
-        {dataLoaded ? <HalfDonutChart dataSets={this.props.pieData} /> : null}
+        {dataLoaded ? <HalfDonutChart dataSets={this.props.pieData[0].data} /> : null}
         <h3 style={shared.header}>Housing Assistance</h3>
         <p style={shared.text}>
           Housing assistance is one of the most common ‘basic needs’ requested
@@ -39,12 +39,10 @@ class Services211 extends React.Component {
         {dataLoaded ? (
           <ListBarChart
             data={this.props.pieData[0].otherChart}
-            axisLabel="percent"
-            labelKey="name"
-            colors={['#75568D', '#d4d5d6']}
+            title='Non-Housing Assistance 211info Calls'
           />
         ) : null}
-      </StoryCard>
+      </CivicStoryCard>
     );
   }
 }

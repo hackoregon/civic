@@ -1,4 +1,6 @@
-/* eslint-disable import/no-extraneous-dependencies */
+/* Deprecated or needs refactored to work with Base Map */
+/* eslint-disable */
+
 import React from 'react';
 import mapboxgl from 'mapbox-gl';
 import { css } from 'emotion';
@@ -9,9 +11,6 @@ const mapWrapper = css`
   width: 100%;
   height: 500px;
 `;
-
-mapboxgl.accessToken =
-  'pk.eyJ1IjoidGhlbWVuZG96YWxpbmUiLCJhIjoiY2o1aXdoem1vMWtpNDJ3bnpqaGF1bnlhNSJ9.sjTrNKLW9daDBIGvP3_W0w';
 
 class HeatMap extends React.Component {
   constructor(props) {

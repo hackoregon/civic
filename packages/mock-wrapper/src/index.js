@@ -1,4 +1,3 @@
-// import { hot } from 'react-hot-loader';
 import React from 'react';
 import { render } from 'react-dom';
 import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
@@ -48,8 +47,6 @@ export default function MockWrapper(App, Reducers, Routes = () => []) {
       <Router history={history} routes={rootRoute} />
     </Provider>
   );
-
-  // const HotWrapper = hot(module)(Wrapper);
 
   render(<Wrapper />, document.getElementById('content'));
 }

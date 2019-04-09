@@ -1,7 +1,10 @@
 const webpack = require('webpack');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin;
 const {
   createConfig,
   entryPoint,
+  setMode,
   setOutput,
   babel,
   file,
@@ -10,8 +13,6 @@ const {
   match,
   setEnv,
   env,
-  devServer,
-  uglify,
   addPlugins,
   sourceMaps,
 } = require('webpack-blocks');
@@ -34,51 +35,44 @@ if (!isProd) {
 
 module.exports = {
   standard(opts) {
-    const options = Object.assign({
-      entryPoint: './src/client',
-      outputPrefix: path('./'),
-    }, opts);
+    const options = Object.assign(
+      {
+        entryPoint: './src/client',
+        outputPrefix: path('./'),
+      },
+      opts
+    );
     return createConfig([
+      setMode(process.env.NODE_ENV || 'development'),
       entryPoint([...entryPoints, options.entryPoint]),
       setOutput({
         path: `${options.outputPrefix}${isProd ? '/dist' : '/build'}`,
         publicPath: '/',
         filename: '[name].bundle.js',
       }),
-      babel(),
-      match(['*.css'], [
-        cssLoader({ sourceMap: true }),
-        postcss({
-          plugins: [autoprefixer({ browsers: ['last 2 versions'] })],
-        }),
-      ]),
-      match(['*.svg', '*.png', '*.gif', '*.jpg', '*.jpeg'], [
-        file(),
-      ]),
+      babel({ rootMode: 'upward' }),
+      match(
+        ['*.css'],
+        [
+          cssLoader({ sourceMap: true }),
+          postcss({
+            plugins: [autoprefixer({ browsers: ['last 2 versions'] })],
+          }),
+        ]
+      ),
+      match(['*.svg', '*.png', '*.gif', '*.jpg', '*.jpeg'], [file()]),
       setEnv({
         NODE_ENV: process.env.NODE_ENV,
       }),
       env('development', [
         sourceMaps(),
         addPlugins([
-          new webpack.NamedModulesPlugin(),
           new webpack.HotModuleReplacementPlugin(),
+          new webpack.NamedModulesPlugin(),
+          new BundleAnalyzerPlugin({ openAnalyzer: false }),
         ]),
       ]),
-      env('production', [
-        uglify({
-          parallel: true,
-          cache: true,
-          uglifyOptions: {
-            compress: {
-              warnings: false,
-            },
-          },
-        }),
-        addPlugins([
-          new webpack.LoaderOptionsPlugin({ minimize: true }),
-        ]),
-      ]),
+      env('production', []),
     ]);
   },
 };

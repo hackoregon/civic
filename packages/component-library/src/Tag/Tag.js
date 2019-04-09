@@ -1,4 +1,7 @@
+/* Deprecated component, 2017 only */
+
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router';
 
@@ -13,12 +16,14 @@ const StyledLink = styled(Link)`
   border: 2px solid rgba(255, 255, 255, 1);
 `;
 
-const Tag = props => <StyledLink to={props.location}>{props.name}</StyledLink>;
+const Tag = ({ location, name }) => (
+  <StyledLink to={location}>{name}</StyledLink>
+);
 
 Tag.displayName = 'Tag';
 Tag.propTypes = {
-  location: React.PropTypes.string,
-  name: React.PropTypes.string,
+  location: PropTypes.string,
+  name: PropTypes.string,
 };
 
 export default Tag;
