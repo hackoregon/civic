@@ -160,7 +160,7 @@ const SandboxDrawer = ({
                   : null
                 }
               </div>
-              {!!foundationData.slide_data && !!foundationMapProps && (
+              {foundationData.slide_data && foundationMapProps.scaleType && (
                   <SandboxMapLegend data={foundationData} mapProps={foundationMapProps}/>
               )}
             </div>

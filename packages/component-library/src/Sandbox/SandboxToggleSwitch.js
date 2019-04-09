@@ -52,7 +52,7 @@ const SandboxToggleSwitch = (props) => {
     label,
     mapType
   } = props;
-  // console.log(props);
+
   const decodeMapType = mapType === 'PolygonPlotMap' ? 'Polygons'
     : mapType === 'SmallPolygonMap' ? 'Polygons'
     : mapType === 'ScatterPlotMap' ? 'Points'

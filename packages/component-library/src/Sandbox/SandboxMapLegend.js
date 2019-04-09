@@ -1,7 +1,7 @@
 import React from 'react';
 import * as d3 from 'd3';
 import { css } from 'emotion';
-import { numeric } from '../utils/formatters';
+import civicFormat from '../utils/civicFormat';
 
 const legendContainer = css(`
   border-top: 2px solid gainsboro;
@@ -25,14 +25,15 @@ const colorBox = css(`
 const tickNums = css(`
   position: absolute;
   bottom: -20px;
-  font-size: small;
+  right: 0;
+  font-size: 15px;
 `);
 
 const tickNumsThreshold = css(`
   position: absolute;
   bottom: -20px;
   right: -7px;
-  font-size: small;
+  font-size: 15px;
 `);
 
 const SandboxMapLegend = (props) => {
@@ -74,18 +75,18 @@ const SandboxMapLegend = (props) => {
     return d === ''
       ? ''
       : d >= 1000000 || d <= -1000000
-      ? numeric(d)
+      ? civicFormat.numeric(d)
       : d >= 1000 || d <= -1000
       ? thousandsFormat(d)
       : d > 1 || d < -1
-      ? numeric(d)
+      ? civicFormat.numeric(d)
       : d === 0
       ? '0  '
       : d <= 1 && d >= -1
       ? percentFormat(d)
       : d && typeof d === 'string'
       ? d
-      : numeric(d);
+      : civicFormat.numeric(d);
   });
 
   const tickStyle = mapProps.scaleType === 'threshold' ? tickNumsThreshold : tickNums;
