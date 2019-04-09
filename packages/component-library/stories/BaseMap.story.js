@@ -3,6 +3,14 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, select } from '@storybook/addon-knobs';
 import { BaseMap } from '../src';
+import { css } from 'emotion';
+
+const displayName = BaseMap.displayName || 'BaseMap';
+
+const containerWrapper = css`
+  height: 100vh;
+  min-height: 500px;
+`;
 
 const optionsStyle = {
   'Hack Oregon Light': 'mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg',
@@ -62,9 +70,27 @@ const staticMap = () => {
   );
 };
 
+const containerHeightMap = () => {
+  const mapboxStyle = select(
+    'Mapbox Style',
+    optionsStyle,
+    optionsStyle['Hack Oregon Light']
+  );
+
+  return (
+    <div className={containerWrapper}>
+      <BaseMap
+        mapboxStyle={mapboxStyle}
+        useContainerHeight={true}
+      />
+    </div>
+  );
+};
+
 export default () =>
   storiesOf('Maps/Base Map', module)
     .addDecorator(withKnobs)
     .add('Simple usage', demoMap)
     .add('With geocoder usage', geocoderMap)
-    .add('No interactivity', staticMap);
+    .add('No interactivity', staticMap)
+    .add('Use container height', containerHeightMap);

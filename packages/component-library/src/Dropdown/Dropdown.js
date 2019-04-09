@@ -22,6 +22,7 @@ const Dropdown = ({
   disabled,
   simpleValue,
   multi,
+  placeholder
 }) => (
   <Select
     className={dropdownClass}
@@ -33,6 +34,7 @@ const Dropdown = ({
     disabled={disabled}
     simpleValue={simpleValue}
     multi={multi}
+    placeholder={placeholder}
   />
 );
 
@@ -47,6 +49,7 @@ Dropdown.propTypes = {
   disabled: PropTypes.bool,
   simpleValue: PropTypes.bool,
   multi: PropTypes.bool,
+  placeholder: PropTypes.string,
 };
 
 Dropdown.defaultProps = {

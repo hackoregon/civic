@@ -101,12 +101,17 @@ class BaseMap extends Component {
       geocoderOnChange,
       mapGLOptions,
       children,
+      useContainerHeight
     } = this.props;
 
     viewport.width = this.props.containerWidth
       ? this.props.containerWidth
       : 500;
-    viewport.height = height || 500;
+    viewport.height = useContainerHeight
+      ? this.props.containerHeight
+      : height
+      ? height
+      : 500;
 
     const childrenLayers = React.Children.map(children, child => {
       return React.cloneElement(child, {
@@ -164,6 +169,7 @@ BaseMap.propTypes = {
   geocoderOnChange: PropTypes.func,
   mapGLOptions: PropTypes.object,
   children: PropTypes.node,
+  useContainerHeight: PropTypes.bool
 };
 
 BaseMap.defaultProps = {
@@ -171,5 +177,6 @@ BaseMap.defaultProps = {
   mapboxToken: MAPBOX_TOKEN,
   navigation: true,
   geocoder: false,
+  useContainerHeight: false
 };
 export default Dimensions()(BaseMap);

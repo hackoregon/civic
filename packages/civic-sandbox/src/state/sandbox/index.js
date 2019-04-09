@@ -105,7 +105,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         slidesPending: false,
         slidesError: null,
         slidesSuccess: true,
-        slidesData: action.payload,
+        slidesData: [...state.slidesData, ...action.payload],
         selectedFoundationDatum: null,
         selectedSlideDatum: null,
       };
@@ -146,7 +146,6 @@ const reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         selectedSlide: action.selectedSlides,
-        slidesData: [],
         selectedFoundationDatum: null,
         selectedSlideDatum: null,
       };

@@ -1,6 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
-import * as d3 from 'd3';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, select, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
@@ -115,26 +114,6 @@ export default () =>
           );
           const colorSchemeArray = JSON.parse(colorScheme);
 
-          const seniorsGetColorScale = d3.scaleQuantize()
-            .domain(d3.extent(foundation1.slide_data.features, f => f.properties.pc_household_with_individuals_65_ovr))
-            .range(colorSchemeArray)
-            .nice();
-
-          const seniorsGetColor = f => {
-            const senior = parseFloat(f.properties.pc_household_with_individuals_65_ovr);
-            return seniorsGetColorScale(senior);
-          };
-
-          const childrenGetColorScale = d3.scaleQuantize()
-            .domain(d3.extent(foundation2.slide_data.features, f => f.properties.pc_household_with_children_under_18))
-            .range(colorSchemeArray)
-            .nice();
-
-          const childrenGetColor = f => {
-            const child = parseFloat(f.properties.pc_household_with_children_under_18);
-            return childrenGetColorScale(child);
-          };
-
           const foundations = {
             '025-households-seniors': {
               mapType: 'ChoroplethMap',
@@ -146,12 +125,14 @@ export default () =>
               getLineColor: f => [0, 0, 0, 255],
               getLineWidth: f => 0.1,
               stroked: true,
-              getFillColor: seniorsGetColor,
+              color: colorSchemeArray,
+              getPropValue: f => f.properties.pc_household_with_individuals_65_ovr,
+              propName: 'pc_household_with_individuals_65_ovr',
               filled: true,
               onLayerClick: info => action('Layer clicked:', { depth: 2 })(info, info.object),
               autoHighlight: true,
               highlightColor: [200, 200, 200, 150],
-              updateTriggers: { getFillColor: seniorsGetColor },
+              updateTriggers: { getFillColor: colorSchemeArray },
             },
             '015-household-children': {
               mapType: 'ChoroplethMap',
@@ -163,12 +144,14 @@ export default () =>
               getLineColor: f => [0, 0, 0, 255],
               getLineWidth: f => 0.1,
               stroked: true,
-              getFillColor: childrenGetColor,
+              color: colorSchemeArray,
+              getPropValue: f => f.properties.pc_household_with_children_under_18,
+              propName: 'pc_household_with_children_under_18',
               filled: true,
               onLayerClick: info => console.log(info, '\n', info.object),
               autoHighlight: true,
               highlightColor: [200, 200, 200, 150],
-              updateTriggers: { getFillColor: childrenGetColor },
+              updateTriggers: { getFillColor: colorSchemeArray },
             },
           };
 
