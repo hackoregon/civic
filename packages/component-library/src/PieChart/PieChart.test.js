@@ -23,6 +23,13 @@ describe('PieChart', () => {
     ).to.have.length(1);
   });
 
+  it('should show lapels in a legend if useLegend is true', () => {
+    const wrapper = shallow(<PieChart {...defaultProps} />);
+    expect(wrapper.find('SimpleLegend').length).to.eql(0);
+    wrapper.setProps({ useLegend: true });
+    expect(wrapper.find('SimpleLegend').length).to.eql(1);
+  });
+
   describe('nullable props handling', () => {
     const nullProps = {
       dataLabel: null,

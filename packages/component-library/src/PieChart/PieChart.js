@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { VictoryPie, VictoryLabel } from 'victory';
 import ChartContainer from '../ChartContainer';
-import civicTheme from '../VictoryTheme/CivicVictoryTheme';
+import civicTheme from '../VictoryTheme/CivicVictoryTheme.js';
+import SimpleLegend from '../SimpleLegend';
 
 const getOrElse = (possibleValue, defaultValue) =>
   possibleValue == null ? defaultValue : possibleValue;
@@ -19,6 +20,7 @@ const PieChart = props => {
     loading,
     error,
     halfDoughnut,
+    useLegend,
     width,
     height,
   } = props;
@@ -27,6 +29,13 @@ const PieChart = props => {
   const y = getOrElse(dataValue, 'y');
   const startAngle = halfDoughnut ? -90 : 0;
   const endAngle = halfDoughnut ? 90 : 360;
+  const legendLabels = data.map(value => ({ name: value.x }));
+  const legendProps = {};
+
+  if (useLegend) {
+    legendProps.labels = () => null;
+    legendProps.padding = 25;
+  }
 
   return (
     <ChartContainer
@@ -35,6 +44,13 @@ const PieChart = props => {
       loading={loading}
       error={error}
     >
+      {useLegend && (
+        <SimpleLegend
+          className="legend"
+          legendData={legendLabels}
+          colorScale={colors}
+        />
+      )}
       <VictoryPie
         width={width}
         height={height}
@@ -52,26 +68,30 @@ const PieChart = props => {
         labelComponent={
           <VictoryLabel style={{ ...civicTheme.pieLabel.style }} />
         }
+        {...legendProps}
       />
     </ChartContainer>
   );
 };
 
-PieChart.defaultProps = {};
+PieChart.defaultProps = {
+  useLegend: false,
+};
 
 PieChart.propTypes = {
-  title: PropTypes.string,
-  subtitle: PropTypes.string,
   colors: PropTypes.arrayOf(PropTypes.string),
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
-  innerRadius: PropTypes.number,
-  loading: PropTypes.bool,
-  dataValue: PropTypes.string,
   dataLabel: PropTypes.string,
+  dataValue: PropTypes.string,
   error: PropTypes.string,
   halfDoughnut: PropTypes.bool,
-  width: PropTypes.number,
   height: PropTypes.number,
+  innerRadius: PropTypes.number,
+  loading: PropTypes.bool,
+  subtitle: PropTypes.string,
+  title: PropTypes.string,
+  useLegend: PropTypes.bool,
+  width: PropTypes.number,
 };
 
 export default PieChart;
