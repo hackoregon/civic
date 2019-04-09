@@ -1,5 +1,5 @@
-import React, { PropTypes } from 'react';
-import { css } from 'emotion';
+import PropTypes from 'prop-types';
+import React from 'react';
 import { groupBy } from 'lodash';
 import {
   VictoryAxis,
@@ -14,12 +14,11 @@ import {
 
 import ChartContainer from '../ChartContainer';
 import SimpleLegend from '../SimpleLegend';
-import { numeric } from '../utils/formatters';
+import civicFormat from '../utils/civicFormat';
 import {
   chartEvents,
   getDefaultStackedDomain,
   getDefaultDataSeriesLabels,
-  getDefaultFillStyle,
   getDefaultAreaStyle,
 } from '../utils/chartHelpers';
 import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
@@ -59,16 +58,12 @@ const StackedAreaChart = ({
       ? dataSeriesLabels.map(series => ({ name: series.label }))
       : null;
 
-  const categoryData =
-    dataSeriesLabels && dataSeriesLabels.length
-      ? dataSeriesLabels.map(series => ({ name: series.category }))
-      : null;
-
   const lineData = dataSeries ? groupBy(data, dataSeries) : { category: data };
 
   const areas = lineData
     ? Object.keys(lineData).map((category, index) => (
         <VictoryArea
+          key={category}
           data={lineData[category].map(d => ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],
@@ -83,20 +78,20 @@ const StackedAreaChart = ({
     : null;
 
   const dots = lineData
-    ? Object.keys(lineData).map((category, index) => (
+    ? Object.keys(lineData).map(category => (
         <VictoryScatter
+          key={category}
           data={lineData[category].map(d => ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],
             series: d[dataSeries],
-            label: `${dataKeyLabel ? dataKeyLabel : xLabel}: ${xNumberFormatter(
+            label: `${dataKeyLabel || xLabel}: ${xNumberFormatter(
               d[dataKey]
-            )} • ${
-              dataValueLabel ? dataValueLabel : yLabel
-            }: ${yNumberFormatter(d[dataValue])}`,
+            )} • ${dataValueLabel || yLabel}: ${yNumberFormatter(
+              d[dataValue]
+            )}`,
             size: size ? d[size.key] || size.value : 3,
           }))}
-          animate={{ onEnter: { duration: 500 } }}
           x="dataKey"
           y="dataValue"
           standalone={false}
@@ -133,14 +128,12 @@ const StackedAreaChart = ({
         theme={CivicVictoryTheme.civic}
       >
         <VictoryAxis
-          animate={{ onEnter: { duration: 500 } }}
           style={{ grid: { stroke: 'none' } }}
           tickFormat={x => xNumberFormatter(x)}
           title="X Axis"
         />
         <VictoryAxis
           dependentAxis
-          animate={{ onEnter: { duration: 500 } }}
           tickFormat={y => yNumberFormatter(y)}
           title="Y Axis"
         />
@@ -212,8 +205,8 @@ StackedAreaChart.defaultProps = {
   title: null,
   xLabel: 'X',
   yLabel: 'Y',
-  xNumberFormatter: numeric,
-  yNumberFormatter: numeric,
+  xNumberFormatter: civicFormat.numeric,
+  yNumberFormatter: civicFormat.numeric,
   legendComponent: null,
 };
 

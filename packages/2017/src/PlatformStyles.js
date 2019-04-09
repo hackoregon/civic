@@ -1,4 +1,4 @@
-import { css, keyframes } from 'react-emotion';
+import { css, keyframes } from 'emotion';
 
 import housingHero from './assets/collection-hero-housing.jpg';
 import budgetHero from './assets/collection-hero-budget.jpg';

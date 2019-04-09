@@ -1,7 +1,7 @@
-import isClient from '../utils/isClient';
+/* Deprecated component, 2017 only */
 
-// these sizes are arbitrary and you can set them to whatever you wish
 import { css } from 'styled-components';
+// these sizes are arbitrary and you can set them to whatever you wish
 
 const sizes = {
   giant: 1170,

@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { withKnobs, boolean, number, selectV2 } from '@storybook/addon-knobs';
+import { withKnobs, boolean, number, select } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { checkA11y } from '@storybook/addon-a11y';
 import { BaseMap } from '../src';
@@ -11,13 +11,6 @@ import { DemoJSONLoader } from '../src';
 
 const displayName = MapOverlay.displayName || 'MapOverlay';
 
-const elevationOptions = {
-  range: true,
-  min: 1,
-  max: 100,
-  step: 1,
-};
-
 const demoMap = () => {
   return (
     <DemoJSONLoader urls={['http://service.civicpdx.org/neighborhood-development/sandbox/foundations/under18/']}>
@@ -26,7 +19,7 @@ const demoMap = () => {
           <BaseMap>
             <MapOverlay
               data={data.slide_data.features}
-              opacity={1.0}
+              opacity={0.1}
               filled={true}
               getPosition={f => f.geometry.coordinates}
               onLayerClick={info => action('Layer clicked:')(info)}

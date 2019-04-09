@@ -1,6 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { HOUSING_TEAM_PRIMARY_COLOR } from '../../utils/data-constants';
+import {
+  AFFORDABLE_YOU_COLOR,
+  AFFORDABLE_OTHER_COLOR,
+  AFFORDABLE_NEITHER_COLOR,
+  AFFORDABLE_BOTH_COLOR
+} from '../../utils/data-constants';
 
 const legendStyles = {
   display: 'flex',
@@ -12,37 +17,6 @@ const tileContainer = {
   textAlign: 'left',
 };
 
-const secondLegendItem = {
-  borderLeft: '3px solid #CCC',
-  paddingLeft: '15px',
-  marginLeft: '15px',
-  paddingBottom: '15px',
-};
-
-const hatchWidth = 5;
-const strokeWidth = 1;
-
-const cssCrossHatch = [
-  `repeating-linear-gradient(
-    45deg,
-    transparent,
-    transparent ${hatchWidth}px,
-    #FFF ${hatchWidth}px,
-    #FFF ${hatchWidth + strokeWidth}px,
-    transparent ${hatchWidth + strokeWidth}px,
-    transparent ${hatchWidth * 2}px
-  )`,
-  `repeating-linear-gradient(
-    -45deg,
-    transparent,
-    transparent ${hatchWidth}px,
-    #FFF ${hatchWidth}px,
-    #FFF ${hatchWidth + strokeWidth}px,
-    transparent ${hatchWidth + strokeWidth}px,
-    transparent ${hatchWidth * 2}px
-  )`,
-];
-
 const tileStyles = {
   display: 'inline-block',
   height: '20px',
@@ -53,40 +27,37 @@ const tileStyles = {
   marginRight: '5px',
 };
 
-const youAffordableTile = {
+const formatColor = color => `rgb(${color.join(',')})`;
+
+const neitherTile = {
   ...tileStyles,
-  background: HOUSING_TEAM_PRIMARY_COLOR,
+  background: formatColor(AFFORDABLE_NEITHER_COLOR),
 };
-const youNotAffordableTile = {
+const bothTile = {
   ...tileStyles,
   marginLeft: '15px',
-  background: '#c2e0ff',
+  background: formatColor(AFFORDABLE_BOTH_COLOR),
 };
-const otherAffordableTile = {
-  ...tileStyles,
-  background: cssCrossHatch.join(', '),
-  backgroundColor: '#CCC',
-};
-const otherNotAffordableTile = {
+const youTile = {
   ...tileStyles,
   marginLeft: '15px',
-  background: 'transparent',
+  background: formatColor(AFFORDABLE_YOU_COLOR),
+};
+const otherTile = {
+  ...tileStyles,
+  marginLeft: '15px',
+  background: formatColor(AFFORDABLE_OTHER_COLOR),
 };
 
 const MapLegend = ({ otherDemographicLabel }) => (
   <div style={legendStyles}>
     <div>
-      <p>Your Affordability</p>
+      <p>Who can afford it?</p>
       <div style={tileContainer}>
-        <span style={youAffordableTile} /> Yes
-        <span style={youNotAffordableTile} /> No
-      </div>
-    </div>
-    <div style={secondLegendItem}>
-      <p>{otherDemographicLabel} Affordability</p>
-      <div style={tileContainer}>
-        <span style={otherAffordableTile} /> Yes
-        <span style={otherNotAffordableTile} /> No
+        <span style={neitherTile} /> Neither
+        <span style={bothTile} /> Both
+        <span style={youTile} /> Only You
+        <span style={otherTile} /> Only {otherDemographicLabel}
       </div>
     </div>
   </div>

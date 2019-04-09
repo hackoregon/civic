@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import Icon from '../Icon/Icon';
 
@@ -19,7 +20,7 @@ const ScrollToTop = ({ iconStyle = null }) => (
 
 ScrollToTop.displayName = 'ScrollToTop';
 ScrollToTop.propTypes = {
-  iconStyle: React.PropTypes.string,
+  iconStyle: PropTypes.string,
 };
 
 export default ScrollToTop;

@@ -1,13 +1,14 @@
 /* eslint-disable import/no-extraneous-dependencies */
 // This should probably be the core component, containing, nav etc
 
+import PropTypes from 'prop-types';
+
 import React from 'react';
 import { connect } from 'react-redux';
 // import { withRouter } from 'react-router-dom';
 import { StoryCard, Slider, Dropdown } from '@hackoregon/component-library';
 
 import '@hackoregon/component-library/assets/global.styles.css';
-import '@hackoregon/component-library/assets/vendor/leaflet.css';
 import '@hackoregon/component-library/assets/vendor/react-select.min.css';
 
 import { fetchAffordabilityData } from '../../state/affordability/actions';
@@ -89,6 +90,7 @@ const textAlignCenter = {
   textAlign: 'center',
 };
 
+
 export class App extends React.Component {
   componentDidMount() {
     this.props.fetchAllData();
@@ -106,6 +108,11 @@ export class App extends React.Component {
       setUnitSize,
       setNeighborhood,
     } = this.props;
+
+    const activeNeighborhood =
+      neighborhoodData &&
+      demographicData &&
+      neighborhoodData.features.find(n => n.id === demographicData.id);
 
     return (
       <div>
@@ -148,9 +155,9 @@ export class App extends React.Component {
             <MapLegend otherDemographicLabel={otherDemographic.label || ''} />
             <div style={mapStyles}>
               <Map
-                neighborhoods={neighborhoodData}
-                onSelect={id => setNeighborhood(id)}
-                activeNeighborhood={demographicData ? demographicData.id : 0}
+                neighborhoodData={neighborhoodData}
+                activeNeighborhood={activeNeighborhood}
+                onSelect={({ object }) => setNeighborhood(object)}
               />
             </div>
             <div style={arrowHackStyles} />
@@ -183,16 +190,16 @@ App.defaultProps = {
 };
 
 App.propTypes = {
-  neighborhoodData: React.PropTypes.object,
-  demographicData: React.PropTypes.object,
-  setOtherDemographic: React.PropTypes.func,
-  otherDemographic: React.PropTypes.object,
-  userIncome: React.PropTypes.number,
-  userUnitSize: React.PropTypes.object,
-  setUserIncome: React.PropTypes.func,
-  setUnitSize: React.PropTypes.func,
-  setNeighborhood: React.PropTypes.func,
-  fetchAllData: React.PropTypes.func,
+  neighborhoodData: PropTypes.object,
+  demographicData: PropTypes.object,
+  setOtherDemographic: PropTypes.func,
+  otherDemographic: PropTypes.object,
+  userIncome: PropTypes.number,
+  userUnitSize: PropTypes.object,
+  setUserIncome: PropTypes.func,
+  setUnitSize: PropTypes.func,
+  setNeighborhood: PropTypes.func,
+  fetchAllData: PropTypes.func,
 };
 
 const mapDispatch = dispatch => ({

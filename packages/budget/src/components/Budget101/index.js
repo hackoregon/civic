@@ -1,6 +1,7 @@
 import React from 'react';
 import StoryCard from '../StoryCard/StoryCard';
 import PieChart from './PieChart';
+import DataTable from './DataTable';
 import { BUDGET_101 } from '../constants';
 
 import './Budget101.css';
@@ -31,15 +32,7 @@ function Budget101() {
           <div style={{ display: 'flex', justifyContent: 'space-around' }}>
             <PieChart />
             <div className="xcol">
-              <ul className="resources">
-                <li>30% Beginning Fund Balance</li>
-                <li>21% Service Charges and Fees</li>
-                <li>17% Taxes</li>
-                <li>15% Bond and Note Proceeds</li>
-                <li>8% Intergovernmental</li>
-                <li>8% Licences & Permits</li>
-                <li>1% Miscellaneous Sources</li>
-              </ul>
+              <DataTable />
             </div>
           </div>
           <h2 className="greenText">Total Budget: $4,283,586,753</h2>

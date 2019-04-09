@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const SliderTooltip = ({ value }) => (
   <div className="panel panel-default">
@@ -23,5 +24,9 @@ const SliderTooltip = ({ value }) => (
     </div>
   </div>
 );
+
+SliderTooltip.propTypes = {
+  value: PropTypes.number,
+};
 
 export default SliderTooltip;

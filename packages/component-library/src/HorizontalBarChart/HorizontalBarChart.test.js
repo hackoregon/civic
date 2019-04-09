@@ -26,12 +26,6 @@ const sampleUnstructuredData = [
   { population: 6000, label: 'French Bulldog' },
 ];
 
-const sampleUnstructuredDataSorted = [
-  { order: 1, population: 2000, label: 'Labrador Retriever' },
-  { order: 2, population: 8000, label: 'Standard Poodle' },
-  { order: 3, population: 6000, label: 'French Bulldog' },
-];
-
 describe('HorizontalBarChart', () => {
   it('renders a VictoryChart', () => {
     const wrapper = shallow(<HorizontalBarChart data={simpleData} />);

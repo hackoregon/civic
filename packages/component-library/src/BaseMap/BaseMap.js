@@ -1,3 +1,6 @@
+/* TODO: Fix linting errors */
+/* eslint-disable */
+
 import React, { Component } from 'react';
 import MapGL, { NavigationControl } from 'react-map-gl';
 import Dimensions from 'react-dimensions';
@@ -5,10 +8,11 @@ import { css } from 'emotion';
 import PropTypes from 'prop-types';
 import createRef from 'create-react-ref/lib/createRef';
 import Geocoder from 'react-map-gl-geocoder';
-import './mapbox-gl.css';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 const MAPBOX_TOKEN =
   'pk.eyJ1IjoiaGFja29yZWdvbiIsImEiOiJjamk0MGZhc2cwNDl4M3FsdHAwaG54a3BnIn0.Fq1KA0IUwpeKQlFIoaEn_Q';
+const MAPBOX_STYLE = 'mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg';
 
 const mapWrapper = css`
   margin: 0 auto;
@@ -47,10 +51,27 @@ class BaseMap extends Component {
     this.mapRef = createRef();
   }
 
-  onViewportChange(viewport) {
-    this.setState({
-      viewport: { ...this.state.viewport, ...viewport },
+  componentDidMount() {
+    // Geocoder requires a ref to the map component
+    this.setState({ mounted: true });
+  }
+
+  componentWillReceiveProps(props) {
+    let updatedViewportProps = {
+      zoom: props.initialZoom,
+      pitch: props.initialPitch,
+      longitude: props.initialLongitude,
+      latitude: props.initialLatitude,
+    };
+
+    // Remove all keys that have null/undefined values to keep defaults
+    Object.keys(updatedViewportProps).forEach((key) => {
+      if (updatedViewportProps[key] == null) {
+        delete updatedViewportProps[key];
+      }
     });
+
+    this.setState({ viewport: { ...this.state.viewport, ...updatedViewportProps } })
   }
 
   onHover({ object, x, y }) {
@@ -61,9 +82,10 @@ class BaseMap extends Component {
     });
   }
 
-  componentDidMount() {
-    //Geocoder requires a ref to the map component
-    this.setState({ mounted: true });
+  onViewportChange(viewport) {
+    this.setState({
+      viewport: { ...this.state.viewport, ...viewport },
+    });
   }
 
   render() {
@@ -79,12 +101,17 @@ class BaseMap extends Component {
       geocoderOnChange,
       mapGLOptions,
       children,
+      useContainerHeight
     } = this.props;
 
     viewport.width = this.props.containerWidth
       ? this.props.containerWidth
       : 500;
-    viewport.height = height ? height : 500;
+    viewport.height = useContainerHeight
+      ? this.props.containerHeight
+      : height
+      ? height
+      : 500;
 
     const childrenLayers = React.Children.map(children, child => {
       return React.cloneElement(child, {
@@ -99,7 +126,7 @@ class BaseMap extends Component {
     return (
       <div className={mapWrapper}>
         <MapGL
-          className={'MapGL'}
+          className="MapGL"
           {...viewport}
           mapStyle={mapboxStyle}
           mapboxApiAccessToken={mapboxToken}
@@ -110,7 +137,7 @@ class BaseMap extends Component {
           <div className={navControl}>
             {navigation && (
               <NavigationControl
-                className={'NavigationControl'}
+                className="NavigationControl"
                 onViewportChange={viewport => this.onViewportChange(viewport)}
               />
             )}
@@ -121,7 +148,7 @@ class BaseMap extends Component {
               mapboxApiAccessToken={mapboxToken}
               onViewportChange={viewport => {
                 this.onViewportChange(viewport);
-                geocoderOnChange(viewport);
+                !!geocoderOnChange && geocoderOnChange(viewport);
               }}
               options={{ ...geocoderOptions }}
             />
@@ -134,21 +161,22 @@ class BaseMap extends Component {
 }
 
 BaseMap.propTypes = {
-  mapboxToken: PropTypes.string.isRequired,
+  mapboxToken: PropTypes.string,
   mapboxStyle: PropTypes.string,
   geocoder: PropTypes.bool,
   navigation: PropTypes.bool,
   geocoderOptions: PropTypes.object,
-  geocoderOnChange: PropTypes.function,
+  geocoderOnChange: PropTypes.func,
   mapGLOptions: PropTypes.object,
   children: PropTypes.node,
+  useContainerHeight: PropTypes.bool
 };
 
 BaseMap.defaultProps = {
-  mapboxStyle: 'mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg',
-  mapboxToken:
-    'pk.eyJ1IjoiaGFja29yZWdvbiIsImEiOiJjamk0MGZhc2cwNDl4M3FsdHAwaG54a3BnIn0.Fq1KA0IUwpeKQlFIoaEn_Q',
+  mapboxStyle: MAPBOX_STYLE,
+  mapboxToken: MAPBOX_TOKEN,
   navigation: true,
   geocoder: false,
+  useContainerHeight: false
 };
 export default Dimensions()(BaseMap);

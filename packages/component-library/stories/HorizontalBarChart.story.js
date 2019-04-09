@@ -1,18 +1,10 @@
 import React from 'react';
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import { withInfo } from '@storybook/addon-info';
 import { checkA11y } from '@storybook/addon-a11y';
-import { withKnobs, text, number, object, array } from '@storybook/addon-knobs';
-import { HorizontalBarChart } from '../src';
-import { percentage } from '../src/utils/formatters';
+import { withKnobs, text, object } from '@storybook/addon-knobs';
+import { HorizontalBarChart, civicFormat } from '../src';
 
-const displayName = HorizontalBarChart.displayName || 'HorizontalBarChart';
-const title = 'Simple usage';
-const description = `
-  This is some basic usage with the button with providing a label to show the text.
-  Clicking should trigger an action.`;
 const sampleData = [
   { sortOrder: 1, population: 2000, label: 'Labrador Retriever' },
   { sortOrder: 2, population: 8000, label: 'Standard Poodle' },
@@ -96,8 +88,8 @@ export default () =>
           sortOrder={sortOrder}
           dataValue={dataValue}
           dataLabel={dataLabel}
-          title={'Dogs and their Money'}
-          subtitle={'As of January 2017'}
+          title="Dogs and their Money"
+          subtitle="As of January 2017"
           xLabel={xLabel}
           yLabel={yLabel}
         />
@@ -121,11 +113,11 @@ export default () =>
           data={data}
           dataValue={dataValue}
           dataLabel={dataLabel}
-          title={'Dogs and their Money'}
-          subtitle={'As of January 2017'}
+          title="Dogs and their Money"
+          subtitle="As of January 2017"
           xLabel={xLabel}
           yLabel={yLabel}
-          dataValueFormatter={percentage}
+          dataValueFormatter={civicFormat.percentage}
         />
       );
     });

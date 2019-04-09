@@ -83,7 +83,8 @@ export const setMapType = payload => ({ type: SET_MAP_TYPE, payload });
 // ONLY IF A CERTAIN CONDITION IS MET. *** //
 
 export const selectMapThunk = input => (dispatch, getState) => {
-  const state = getState();
+  const fullState = getState();
+  const state = fullState.transportation || fullState;
   console.log('reducers currentstate');
   console.log(state);
   // console.log(`inputs ${input}`);

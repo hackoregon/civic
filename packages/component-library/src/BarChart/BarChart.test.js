@@ -21,13 +21,6 @@ const customData = [
 const simpleDataDomain = { x: [100, 400], y: [0, 4] };
 const customDataDomain = { x: [100, 500], y: [0, 5] };
 
-const unstructuredMultiSeriesData = [
-  { amount: 100, rate: 1, type: 'first' },
-  { amount: 200, rate: 2, type: 'first' },
-  { amount: 100, rate: 3, type: 'second' },
-  { amount: 200, rate: 3, type: 'second' },
-];
-
 describe('BarChart', () => {
   it('renders a VictoryChart', () => {
     const wrapper = shallow(<BarChart data={simpleData} />);

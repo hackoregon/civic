@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Hero from './Hero';
 import { css } from 'emotion';
+import Hero from './Hero';
 
 const teamTitleStyle = css`
   display: block;

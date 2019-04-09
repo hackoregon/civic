@@ -1,12 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  dollars,
-  numeric,
-} from '@hackoregon/component-library/src/utils/formatters';
-
 import { HorizontalBarChart } from '@hackoregon/component-library';
+import { civicFormat } from '@hackoregon/component-library/dist/utils';
 
 const propTypes = {
   spending: PropTypes.array,
@@ -31,7 +27,7 @@ const SpendingBreakdown = ({ spending, loading }) => {
       yLabel="Spending"
       title="Spending breakdown"
       subtitle="Spending reported to ORESTAR by category"
-      dataValueFormatter={numeric}
+      dataValueFormatter={civicFormat.numeric}
       height={300}
       minimalist
     />
