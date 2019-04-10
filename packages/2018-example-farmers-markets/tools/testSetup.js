@@ -1,27 +1,27 @@
 /* eslint-disable import/no-extraneous-dependencies */
-process.env.NODE_ENV = 'test';
+process.env.NODE_ENV = "test";
 
-const identity = require('ramda').identity;
+const identity = require("ramda").identity;
 
-['.css', '.png', '.jpg', '.svg', '.gif'].forEach(ext => {
+[".css", ".png", ".jpg", ".svg", ".gif"].forEach(ext => {
   require.extensions[ext] = identity;
 });
 
-require('@babel/register')();
+require("@babel/register")();
 
-const chai = require('chai');
-const sinon = require('sinon');
-const jsdom = require('jsdom');
-const sinonChai = require('sinon-chai');
-const chaiEnzyme = require('chai-enzyme');
-const chaiAsPromised = require('chai-as-promised');
+const chai = require("chai");
+const sinon = require("sinon");
+const jsdom = require("jsdom");
+const sinonChai = require("sinon-chai");
+const chaiEnzyme = require("chai-enzyme");
+const chaiAsPromised = require("chai-as-promised");
 
 const { JSDOM } = jsdom;
 
-const exposedProperties = ['window', 'navigator', 'document'];
+const exposedProperties = ["window", "navigator", "document"];
 
 const { document } = new JSDOM(``, {
-  url: 'http://localhost',
+  url: "http://localhost"
 }).window;
 global.document = document;
 
@@ -31,8 +31,8 @@ chai.use(chaiEnzyme());
 chai.use(chaiAsPromised);
 
 global.navigator = {
-  userAgent: 'node.js',
-  platform: 'Node',
+  userAgent: "node.js",
+  platform: "Node"
 };
 global.assert = chai.assert;
 global.expect = chai.expect;
@@ -41,7 +41,7 @@ global.sinon = sinon;
 global.window = document.defaultView;
 
 Object.keys(document.defaultView).forEach(property => {
-  if (typeof global[property] === 'undefined') {
+  if (typeof global[property] === "undefined") {
     exposedProperties.push(property);
     global[property] = document.defaultView[property];
   }

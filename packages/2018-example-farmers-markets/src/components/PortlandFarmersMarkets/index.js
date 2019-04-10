@@ -1,23 +1,23 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { css } from 'emotion';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { css } from "emotion";
 
 import {
   CivicStoryCard,
   BaseMap,
-  ScatterPlotMap,
-} from '@hackoregon/component-library';
+  ScatterPlotMap
+} from "@hackoregon/component-library";
 
 import {
   fetchPortlandFarmersMarkets,
-  setFarmersMarket,
-} from '../../state/portland-farmers-markets/actions';
+  setFarmersMarket
+} from "../../state/portland-farmers-markets/actions";
 import {
   isPortlandFarmersMarketsPending,
   getPortlandFarmersMarketsData,
-  getActiveFarmersMarket,
-} from '../../state/portland-farmers-markets/selectors';
+  getActiveFarmersMarket
+} from "../../state/portland-farmers-markets/selectors";
 
 const cardLoading = css`
   width: 100%;
@@ -44,7 +44,7 @@ export class PortlandFarmersMarkets extends React.Component {
       isLoading,
       portlandFarmersMarkets,
       selectFarmersMarket,
-      activeMarket,
+      activeMarket
     } = this.props;
 
     if (isLoading) {
@@ -109,20 +109,20 @@ export class PortlandFarmersMarkets extends React.Component {
   }
 }
 
-PortlandFarmersMarkets.displayName = 'PortlandFarmersMarkets';
+PortlandFarmersMarkets.displayName = "PortlandFarmersMarkets";
 PortlandFarmersMarkets.propTypes = {
   init: PropTypes.func,
   selectFarmersMarket: PropTypes.func,
   isLoading: PropTypes.bool,
   portlandFarmersMarkets: PropTypes.object,
-  activeMarket: PropTypes.object,
+  activeMarket: PropTypes.object
 };
 
 export default connect(
   state => ({
     isLoading: isPortlandFarmersMarketsPending(state),
     portlandFarmersMarkets: getPortlandFarmersMarketsData(state),
-    activeMarket: getActiveFarmersMarket(state),
+    activeMarket: getActiveFarmersMarket(state)
   }),
   dispatch => ({
     init() {
@@ -130,6 +130,6 @@ export default connect(
     },
     selectFarmersMarket(market) {
       dispatch(setFarmersMarket(market));
-    },
+    }
   })
 )(PortlandFarmersMarkets);

@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 
-import { cx, css } from 'emotion';
-import { PageLayout, PullQuote } from '@hackoregon/component-library';
+import { cx, css } from "emotion";
+import { PageLayout, PullQuote } from "@hackoregon/component-library";
 
-import FarmersMarketsOverTime from '../FarmersMarketsOverTime';
-import PortlandFarmersMarkets from '../PortlandFarmersMarkets';
+import FarmersMarketsOverTime from "../FarmersMarketsOverTime";
+import PortlandFarmersMarkets from "../PortlandFarmersMarkets";
 
-import '@hackoregon/component-library/assets/global.styles.css';
+import "@hackoregon/component-library/assets/global.styles.css";
 
 const sectionMarginSmall = css`
   display: block;
@@ -112,6 +112,6 @@ const App = () => (
   </PageLayout>
 );
 
-App.displayName = 'App';
+App.displayName = "App";
 
 export default App;
