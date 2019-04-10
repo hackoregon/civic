@@ -1,13 +1,13 @@
-import { combineReducers } from 'redux';
-import { routerReducer } from 'react-router-redux';
-import neighborhoodAges from './neighborhoods-through-the-ages';
-import classSizeAndQuality from './class-size-and-quality';
-import magnitudeCampsiteSweeps from './magnitude-of-urban-campsite-sweeps';
-import humanImpactOfSweepingUrbanCampsites from './human-impact-of-sweeping-urban-campsites';
-import exploreUrbanCampsiteSweeps from './explore-urban-campsite-sweeps';
-import studentEnrollmentTrends from './student-enrollment-trends';
-import understandingStaffCuts from './understanding-staff-cuts';
-import votersOnTheMove from './voters-on-the-move';
+import { combineReducers } from "redux";
+import { routerReducer } from "react-router-redux";
+import neighborhoodAges from "./neighborhoods-through-the-ages";
+import classSizeAndQuality from "./class-size-and-quality";
+import magnitudeCampsiteSweeps from "./magnitude-of-urban-campsite-sweeps";
+import humanImpactOfSweepingUrbanCampsites from "./human-impact-of-sweeping-urban-campsites";
+import exploreUrbanCampsiteSweeps from "./explore-urban-campsite-sweeps";
+import studentEnrollmentTrends from "./student-enrollment-trends";
+import understandingStaffCuts from "./understanding-staff-cuts";
+import votersOnTheMove from "./voters-on-the-move";
 
 export default function createReducer(asyncReducers) {
   return combineReducers({
@@ -20,6 +20,6 @@ export default function createReducer(asyncReducers) {
     studentEnrollmentTrends,
     understandingStaffCuts,
     votersOnTheMove,
-    ...asyncReducers,
+    ...asyncReducers
   });
 }

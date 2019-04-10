@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { css } from 'emotion';
-import { min, max } from 'lodash';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { css } from "emotion";
+import { min, max } from "lodash";
 
 import {
   CivicStoryCard,
@@ -10,20 +10,20 @@ import {
   BaseMap,
   ScatterPlotMap,
   Button,
-  ChartContainer,
-} from '@hackoregon/component-library';
-import { contextualDesc, belowFoldOne, belowFoldTwo } from './text';
+  ChartContainer
+} from "@hackoregon/component-library";
+import { contextualDesc, belowFoldOne, belowFoldTwo } from "./text";
 
 import {
   fetchCampsiteSweeps,
-  incrementTimer,
-} from '../../state/explore-urban-campsite-sweeps/actions';
+  incrementTimer
+} from "../../state/explore-urban-campsite-sweeps/actions";
 import {
   isCampsiteSweepsPending,
   catchCampsiteSweepsErrors,
   getCampsiteSweepsDataByTime,
-  getCampsiteSweepsDateRange,
-} from '../../state/explore-urban-campsite-sweeps/selectors';
+  getCampsiteSweepsDateRange
+} from "../../state/explore-urban-campsite-sweeps/selectors";
 
 const LAT = 45.5231;
 const LONG = -122.6765;
@@ -86,14 +86,14 @@ export class ExploreUrbanCampsiteSweeps extends React.Component {
   }
 }
 
-ExploreUrbanCampsiteSweeps.displayName = 'ExploreUrbanCampsiteSweeps';
+ExploreUrbanCampsiteSweeps.displayName = "ExploreUrbanCampsiteSweeps";
 ExploreUrbanCampsiteSweeps.propTypes = {
   init: PropTypes.func,
   startTimer: PropTypes.func,
   isLoading: PropTypes.bool,
   error: PropTypes.string,
   data: PropTypes.arrayOf(PropTypes.object),
-  timer: PropTypes.int,
+  timer: PropTypes.int
 };
 
 export default connect(
@@ -101,7 +101,7 @@ export default connect(
     isLoading: isCampsiteSweepsPending(state),
     error: catchCampsiteSweepsErrors(state),
     data: getCampsiteSweepsDataByTime(state),
-    timer: getCampsiteSweepsDateRange(state),
+    timer: getCampsiteSweepsDateRange(state)
   }),
   dispatch => ({
     init() {
@@ -109,6 +109,6 @@ export default connect(
     },
     startTimer() {
       return setInterval(() => dispatch(incrementTimer(1)), 800);
-    },
+    }
   })
 )(ExploreUrbanCampsiteSweeps);

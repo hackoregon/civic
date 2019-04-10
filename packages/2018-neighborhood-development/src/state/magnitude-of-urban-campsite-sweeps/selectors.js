@@ -1,5 +1,5 @@
-import { createSelector } from 'reselect';
-import { rootState } from '../selectors';
+import { createSelector } from "reselect";
+import { rootState } from "../selectors";
 
 export const getMagnitudeOfUrbanCampsiteSweepsRequest = createSelector(
   rootState,
@@ -9,7 +9,7 @@ export const getMagnitudeOfUrbanCampsiteSweepsRequest = createSelector(
 const formatData = arr =>
   arr.map(obj => ({
     date: new Date(obj.report_time),
-    count: obj.count,
+    count: obj.count
   }));
 
 export const getMagnitudeOfUrbanCampsiteSweepsData = createSelector(

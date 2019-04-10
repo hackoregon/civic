@@ -4,36 +4,36 @@ import {
   API_ERROR,
   classAndSizeQualityStart,
   classAndSizeQualitySuccess,
-  classAndSizeQualityError,
-} from './actions';
+  classAndSizeQualityError
+} from "./actions";
 
-describe('class-size-and-quality actions', () => {
-  it('returns the correct start action', () => {
+describe("class-size-and-quality actions", () => {
+  it("returns the correct start action", () => {
     const expectedAction = {
-      type: API_START,
+      type: API_START
     };
 
     expect(classAndSizeQualityStart()).to.eql(expectedAction);
   });
 
-  it('sreturns the correct success action', () => {
+  it("sreturns the correct success action", () => {
     const payload = {
-      data: [],
+      data: []
     };
     const expectedAction = {
       type: API_SUCCESS,
-      payload,
+      payload
     };
     expect(classAndSizeQualitySuccess(payload)).to.eql(expectedAction);
   });
 
-  it('returns the correct error action', () => {
+  it("returns the correct error action", () => {
     const payload = {
-      error: 'error',
+      error: "error"
     };
     const expectedAction = {
       type: API_ERROR,
-      payload,
+      payload
     };
 
     expect(classAndSizeQualityError(payload)).to.eql(expectedAction);

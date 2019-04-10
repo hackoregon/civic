@@ -1,23 +1,23 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 import {
   CivicStoryCard,
   Dropdown,
-  Scatterplot,
-} from '@hackoregon/component-library';
+  Scatterplot
+} from "@hackoregon/component-library";
 
 import {
   fetchclassAndSizeQuality,
-  updateYear,
-} from '../../state/class-size-and-quality/actions';
+  updateYear
+} from "../../state/class-size-and-quality/actions";
 import {
   getDataForSelectedYear,
   getErrors,
   getSelectedYear,
-  isDataPending,
-} from '../../state/class-size-and-quality/selectors';
+  isDataPending
+} from "../../state/class-size-and-quality/selectors";
 
 const YEARS = [
   2007,
@@ -30,12 +30,12 @@ const YEARS = [
   2014,
   2015,
   2016,
-  2017,
+  2017
 ];
 
 const dropdownOptions = YEARS.map(year => ({
   value: year,
-  label: year.toString(),
+  label: year.toString()
 }));
 
 export class ClassSizeAndQuality extends React.Component {
@@ -94,14 +94,14 @@ export class ClassSizeAndQuality extends React.Component {
   }
 }
 
-ClassSizeAndQuality.displayName = 'ClassSizeAndQuality';
+ClassSizeAndQuality.displayName = "ClassSizeAndQuality";
 ClassSizeAndQuality.propTypes = {
   error: PropTypes.string,
   fetchData: PropTypes.func,
   isLoading: PropTypes.bool,
   selectedYear: PropTypes.number,
   selectedYearData: PropTypes.arrayOf(PropTypes.object),
-  setYear: PropTypes.func,
+  setYear: PropTypes.func
 };
 
 export default connect(
@@ -109,7 +109,7 @@ export default connect(
     isLoading: isDataPending(state),
     error: getErrors(state),
     selectedYear: getSelectedYear(state),
-    selectedYearData: getDataForSelectedYear(state),
+    selectedYearData: getDataForSelectedYear(state)
   }),
   dispatch => ({
     fetchData() {
@@ -117,6 +117,6 @@ export default connect(
     },
     setYear(year) {
       dispatch(updateYear(year));
-    },
+    }
   })
 )(ClassSizeAndQuality);

@@ -1,23 +1,23 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { css } from 'emotion';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { css } from "emotion";
 
 import {
   CivicStoryCard,
   BarChart,
-  Collapsable,
-} from '@hackoregon/component-library';
+  Collapsable
+} from "@hackoregon/component-library";
 
-import { civicFormat } from '@hackoregon/component-library/dist/utils';
+import { civicFormat } from "@hackoregon/component-library/dist/utils";
 
-import { fetchUrbanCampsiteSweepsByWeek } from '../../state/magnitude-of-urban-campsite-sweeps/actions';
+import { fetchUrbanCampsiteSweepsByWeek } from "../../state/magnitude-of-urban-campsite-sweeps/actions";
 
 import {
   isMagnitudeOfUrbanCampsiteSweepsPending,
   catchMagnitudeOfUrbanCampsiteSweepsErrors,
-  getMagnitudeOfUrbanCampsiteSweepsData,
-} from '../../state/magnitude-of-urban-campsite-sweeps/selectors';
+  getMagnitudeOfUrbanCampsiteSweepsData
+} from "../../state/magnitude-of-urban-campsite-sweeps/selectors";
 
 export class MagnitudeOfUrbanCampsiteSweeps extends React.Component {
   componentDidMount() {
@@ -32,7 +32,7 @@ export class MagnitudeOfUrbanCampsiteSweeps extends React.Component {
         title="Magnitude of Urban Campsite Sweeps"
         slug="magnitude-of-urban-campsite-sweeps"
         loading={isLoading}
-        error={error && 'Could not load sweeps data'}
+        error={error && "Could not load sweeps data"}
         source="https://github.com/hackoregon/neighborhoods-2018/tree/master/docs/campsites"
       >
         <Collapsable>
@@ -95,25 +95,23 @@ export class MagnitudeOfUrbanCampsiteSweeps extends React.Component {
     );
   }
 }
-MagnitudeOfUrbanCampsiteSweeps.displayName = 'MagnitudeOfUrbanCampsiteSweeps';
+MagnitudeOfUrbanCampsiteSweeps.displayName = "MagnitudeOfUrbanCampsiteSweeps";
 MagnitudeOfUrbanCampsiteSweeps.propTypes = {
   init: PropTypes.func,
   isLoading: PropTypes.bool,
   error: PropTypes.string,
-  magnitudeOfUrbanCampsiteSweeps: PropTypes.arrayOf(PropTypes.object),
+  magnitudeOfUrbanCampsiteSweeps: PropTypes.arrayOf(PropTypes.object)
 };
 
 export default connect(
   state => ({
     isLoading: isMagnitudeOfUrbanCampsiteSweepsPending(state),
     error: catchMagnitudeOfUrbanCampsiteSweepsErrors(state),
-    magnitudeOfUrbanCampsiteSweeps: getMagnitudeOfUrbanCampsiteSweepsData(
-      state
-    ),
+    magnitudeOfUrbanCampsiteSweeps: getMagnitudeOfUrbanCampsiteSweepsData(state)
   }),
   dispatch => ({
     init() {
       dispatch(fetchUrbanCampsiteSweepsByWeek());
-    },
+    }
   })
 )(MagnitudeOfUrbanCampsiteSweeps);
