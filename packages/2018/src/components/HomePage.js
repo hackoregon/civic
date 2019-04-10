@@ -13,8 +13,7 @@ import {
   HorizontalBarChart,
   Logo
 } from "@hackoregon/component-library";
-import { civicFormat } from '@hackoregon/component-library/dist/utils';
-
+import { civicFormat } from "@hackoregon/component-library/dist/utils";
 
 import brain from "@hackoregon/component-library/assets/brain.svg";
 import brainMobile from "@hackoregon/component-library/assets/brain-mobile.svg";
