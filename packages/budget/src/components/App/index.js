@@ -1,10 +1,10 @@
-import '@hackoregon/component-library/assets/global.styles.css';
-import 'rc-slider/assets/index.css';
-import 'react-select/dist/react-select.css';
+import "@hackoregon/component-library/assets/global.styles.css";
+import "rc-slider/assets/index.css";
+import "react-select/dist/react-select.css";
 
-import React from 'react';
-import styled from 'styled-components';
-import CardCollection from '../CardCollection';
+import React from "react";
+import styled from "styled-components";
+import CardCollection from "../CardCollection";
 
 const Container = styled.div`
   min-height: 100%;
@@ -22,6 +22,6 @@ function App() {
   );
 }
 
-App.displayName = 'App';
+App.displayName = "App";
 
 export default App;

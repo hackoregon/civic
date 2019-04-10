@@ -1,11 +1,11 @@
-import React from 'react';
-import StoryCard from '../StoryCard/StoryCard';
-import PieChart from './PieChart';
-import DataTable from './DataTable';
-import { BUDGET_101 } from '../constants';
+import React from "react";
+import StoryCard from "../StoryCard/StoryCard";
+import PieChart from "./PieChart";
+import DataTable from "./DataTable";
+import { BUDGET_101 } from "../constants";
 
-import './Budget101.css';
-import './stub.css';
+import "./Budget101.css";
+import "./stub.css";
 
 function Budget101() {
   return (
@@ -29,7 +29,7 @@ function Budget101() {
             Where does the money come from? The City of Portland’s budget is
             funded through seven resources:
           </p>
-          <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+          <div style={{ display: "flex", justifyContent: "space-around" }}>
             <PieChart />
             <div className="xcol">
               <DataTable />
@@ -43,7 +43,7 @@ function Budget101() {
         </div>
         <div id="SevenAreas">
           <h2>
-            City Services are divided into{' '}
+            City Services are divided into{" "}
             <span className="greenText">7 Service Areas</span>
           </h2>
           <p>
@@ -55,14 +55,14 @@ function Budget101() {
             Service Area is comprised of one or more bureaus. Continue reading
             for an example of how a service area is broken into bureaus.
           </p>
-          <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+          <div style={{ display: "flex", justifyContent: "space-around" }}>
             <div className="col">
               <img
                 alt="Public Safety icon"
                 className="publicIcons"
-                src={require('../../../assets/safety_budget101_icon.png')}
+                src={require("../../../assets/safety_budget101_icon.png")}
               />
-              <p style={{ textAlign: 'center' }}>
+              <p style={{ textAlign: "center" }}>
                 Public <br /> Safety
               </p>
             </div>
@@ -70,9 +70,9 @@ function Budget101() {
               <img
                 alt="Community Development icon"
                 className="publicIcons"
-                src={require('../../../assets/community_budget101_icon.png')}
+                src={require("../../../assets/community_budget101_icon.png")}
               />
-              <p style={{ textAlign: 'center' }}>
+              <p style={{ textAlign: "center" }}>
                 Community <br /> Development
               </p>
             </div>
@@ -80,9 +80,9 @@ function Budget101() {
               <img
                 alt="Public Utilities icon"
                 className="publicIcons"
-                src={require('../../../assets/utilities_budget101_icon.png')}
+                src={require("../../../assets/utilities_budget101_icon.png")}
               />
-              <p style={{ textAlign: 'center' }}>
+              <p style={{ textAlign: "center" }}>
                 Public <br /> Utilities
               </p>
             </div>
@@ -90,18 +90,18 @@ function Budget101() {
               <img
                 alt="City Support Services icon"
                 className="publicIcons"
-                src={require('../../../assets/support_budget101_icon.png')}
+                src={require("../../../assets/support_budget101_icon.png")}
               />
-              <p style={{ textAlign: 'center' }}>
+              <p style={{ textAlign: "center" }}>
                 City Support <br /> Services
               </p>
             </div>
           </div>
           <div
             style={{
-              display: 'flex',
-              justifyContent: 'space-around',
-              margin: 'auto',
+              display: "flex",
+              justifyContent: "space-around",
+              margin: "auto"
             }}
           >
             <div className="col">
@@ -109,10 +109,10 @@ function Budget101() {
                 alt="Transportation & Parking icon"
                 size="25%"
                 className="publicIcons"
-                src={require('../../../assets/transportation_budget101_icon.png')}
+                src={require("../../../assets/transportation_budget101_icon.png")}
               />
               <p>
-                Transportation & <br /> Parking{' '}
+                Transportation & <br /> Parking{" "}
               </p>
             </div>
             <div className="col">
@@ -120,7 +120,7 @@ function Budget101() {
                 alt="Parks, Recreaction, & Culture icon"
                 size="25%"
                 className="publicIcons"
-                src={require('../../../assets/parks_budget101_icon.png')}
+                src={require("../../../assets/parks_budget101_icon.png")}
               />
               <p>
                 Parks, Recreaction, <br /> & Culture
@@ -131,7 +131,7 @@ function Budget101() {
                 alt="Elected Officials icon"
                 size="25%"
                 className="publicIcons"
-                src={require('../../../assets/officials_budget101_icon.png')}
+                src={require("../../../assets/officials_budget101_icon.png")}
               />
               <p>
                 Elected <br /> Officials
@@ -144,23 +144,23 @@ function Budget101() {
             Each Service Area is broken down into <br />
             <span className="greenText"> one or more Bureaus</span>
           </h2>
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <div style={{ display: "flex", justifyContent: "center" }}>
             <img
               alt="Bureau Breakdown"
               className="breakdown"
-              src={require('../../../assets/bureau_breakdown_budget101.png')}
+              src={require("../../../assets/bureau_breakdown_budget101.png")}
             />
           </div>
         </div>
         <div id="GetInvolved">
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <div style={{ display: "flex", justifyContent: "center" }}>
             <img
               alt="Bureau Breakdown"
               className="arrows"
-              src={require('../../../assets/arrow_budget101.png')}
+              src={require("../../../assets/arrow_budget101.png")}
             />
           </div>
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <div style={{ display: "flex", justifyContent: "center" }}>
             <h2>Get Involved!</h2>
           </div>
           <div>

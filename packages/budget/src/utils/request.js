@@ -1,4 +1,4 @@
-import 'isomorphic-fetch';
+import "isomorphic-fetch";
 
 function parseJSON(response) {
   return response.json();

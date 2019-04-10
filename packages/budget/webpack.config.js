@@ -1,6 +1,6 @@
-const path = require('path');
-const { standard } = require('@hackoregon/webpack-common');
+const path = require("path");
+const { standard } = require("@hackoregon/webpack-common");
 
 module.exports = standard({
-  outputPrefix: path.resolve(__dirname),
+  outputPrefix: path.resolve(__dirname)
 });

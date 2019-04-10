@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router';
-import './StoryLink.css';
+import React from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router";
+import "./StoryLink.css";
 
 const StoryLink = ({ children, icon, route, action }) => (
   <div className="StoryLink">
@@ -19,12 +19,12 @@ const StoryLink = ({ children, icon, route, action }) => (
   </div>
 );
 
-StoryLink.displayName = 'StoryLink';
+StoryLink.displayName = "StoryLink";
 StoryLink.propTypes = {
   action: PropTypes.func,
   children: PropTypes.node,
   icon: PropTypes.string,
-  route: PropTypes.string,
+  route: PropTypes.string
 };
 
 export default StoryLink;
