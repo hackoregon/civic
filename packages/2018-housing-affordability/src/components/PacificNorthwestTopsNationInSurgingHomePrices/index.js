@@ -1,28 +1,28 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { loader, error, gradientLabel, emphasis } from '../css-utils';
+import React from "react";
+import { connect } from "react-redux";
+import { loader, error, gradientLabel, emphasis } from "../css-utils";
 
-import '@hackoregon/component-library/assets/vendor/react-select.min.css';
+import "@hackoregon/component-library/assets/vendor/react-select.min.css";
 
 import {
   CivicStoryCard,
   Dropdown,
   Scatterplot,
-  GradientScale,
-} from '@hackoregon/component-library';
+  GradientScale
+} from "@hackoregon/component-library";
 
 import {
   fetchAllPNWSurgeData,
-  setPNWSurgeCity,
-} from '../../state/pnw-surge/actions';
+  setPNWSurgeCity
+} from "../../state/pnw-surge/actions";
 import {
   isLoading,
   isError,
   getAllCities,
   getSelectedCity,
   getSelectedCityRank,
-  getChartData,
-} from '../../state/pnw-surge/selectors';
+  getChartData
+} from "../../state/pnw-surge/selectors";
 
 export class PacificNorthwestTopsNationInSurgingHomePrices extends React.Component {
   componentDidMount() {
@@ -38,7 +38,7 @@ export class PacificNorthwestTopsNationInSurgingHomePrices extends React.Compone
       selectedCity,
       selectedCityRank,
       chartData,
-      setCity,
+      setCity
     } = this.props;
 
     const cityOptions =
@@ -47,7 +47,7 @@ export class PacificNorthwestTopsNationInSurgingHomePrices extends React.Compone
     return (
       <CivicStoryCard
         loading={isLoading}
-        error={isError && 'Could not load required data'}
+        error={isError && "Could not load required data"}
         title="Pacific Northwest Tops the Nation in Surging Home Prices"
         slug="pacific-northwest-tops-nation-in-surging-home-prices"
       >
@@ -55,7 +55,7 @@ export class PacificNorthwestTopsNationInSurgingHomePrices extends React.Compone
           <p>
             The JCHS of Harvard University reports on the metro-area home price
             changes over time and looks at changes in value between peaks and
-            troughs in the housing market.{' '}
+            troughs in the housing market.{" "}
           </p>
 
           <div>
@@ -71,11 +71,11 @@ export class PacificNorthwestTopsNationInSurgingHomePrices extends React.Compone
           {selectedCityRank && (
             <div>
               <p>
-                {selectedCity} ranks{' '}
+                {selectedCity} ranks{" "}
                 <strong className={emphasis}>
-                  {selectedCityRank.rank}/{selectedCityRank.total}{' '}
+                  {selectedCityRank.rank}/{selectedCityRank.total}{" "}
                 </strong>
-                for home price changes between{' '}
+                for home price changes between{" "}
                 <strong className={emphasis}>2015 and 2016</strong>
               </p>
               <p>
@@ -120,7 +120,7 @@ export class PacificNorthwestTopsNationInSurgingHomePrices extends React.Compone
 }
 
 PacificNorthwestTopsNationInSurgingHomePrices.displayName =
-  'PacificNorthwestTopsNationInSurgingHomePrices';
+  "PacificNorthwestTopsNationInSurgingHomePrices";
 
 // Connect this to the redux store when necessary
 export default connect(
@@ -130,7 +130,7 @@ export default connect(
     allCities: getAllCities(state),
     selectedCity: getSelectedCity(state),
     selectedCityRank: getSelectedCityRank(state),
-    chartData: getChartData(state),
+    chartData: getChartData(state)
   }),
   dispatch => ({
     fetchData() {
@@ -138,6 +138,6 @@ export default connect(
     },
     setCity(city = {}) {
       dispatch(setPNWSurgeCity(city.value));
-    },
+    }
   })
 )(PacificNorthwestTopsNationInSurgingHomePrices);

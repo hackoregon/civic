@@ -1,11 +1,11 @@
-import React from 'react';
-import { css } from 'emotion';
+import React from "react";
+import { css } from "emotion";
 
-import CivicVictoryTheme from '@hackoregon/component-library/src/VictoryTheme/VictoryThemeIndex';
+import CivicVictoryTheme from "@hackoregon/component-library/src/VictoryTheme/VictoryThemeIndex";
 
 function SimpleCircle({ selected, index }) {
-  const width = selected ? '18px' : '10px';
-  const padding = selected ? '9px' : '5px';
+  const width = selected ? "18px" : "10px";
+  const padding = selected ? "9px" : "5px";
 
   return (
     <svg

@@ -1,6 +1,6 @@
-import { createSelector } from 'reselect';
-import { groupBy } from 'lodash';
-import { rootState } from '../selectors';
+import { createSelector } from "reselect";
+import { groupBy } from "lodash";
+import { rootState } from "../selectors";
 
 export const getHousingPolicy = createSelector(
   rootState,
@@ -13,8 +13,8 @@ const addLinks = governments =>
     links: [
       { link: program.link1, link_name: program.link1_name },
       { link: program.link2, link_name: program.link2_name },
-      { link: program.link3, link_name: program.link3_name },
-    ],
+      { link: program.link3, link_name: program.link3_name }
+    ]
   }));
 
 const groupByEntity = governments =>
@@ -26,11 +26,11 @@ const getProperty = key =>
     state => state[key]
   );
 
-export const isLoading = getProperty('pending');
-export const isError = getProperty('error');
-export const getAllPolicies = getProperty('allPolicies');
-export const getAllPrograms = getProperty('allPrograms');
-export const getSelectedPolicy = getProperty('selectedPolicy');
+export const isLoading = getProperty("pending");
+export const isError = getProperty("error");
+export const getAllPolicies = getProperty("allPolicies");
+export const getAllPrograms = getProperty("allPrograms");
+export const getSelectedPolicy = getProperty("selectedPolicy");
 
 export const getTableData = createSelector(
   getAllPolicies,
@@ -50,7 +50,7 @@ export const getTableData = createSelector(
         policy: p.policy_id,
         policy_name: p.policy_type,
         policy_desc: p.description,
-        governments: totalPolicyCount,
+        governments: totalPolicyCount
       });
     });
 
@@ -80,19 +80,19 @@ export const getSelectedPolicyData = createSelector(
       links: [
         {
           link: selectedPolicyData.link1,
-          link_name: selectedPolicyData.link1_name,
+          link_name: selectedPolicyData.link1_name
         },
         {
           link: selectedPolicyData.link2,
-          link_name: selectedPolicyData.link2_name,
+          link_name: selectedPolicyData.link2_name
         },
         {
           link: selectedPolicyData.link3,
-          link_name: selectedPolicyData.link3_name,
-        },
+          link_name: selectedPolicyData.link3_name
+        }
       ],
       governments: implementingGovernments,
-      govData: groupByEntity(addLinks(implementingGovernments)),
+      govData: groupByEntity(addLinks(implementingGovernments))
     };
   }
 );

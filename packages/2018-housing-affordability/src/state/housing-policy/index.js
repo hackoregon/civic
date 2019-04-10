@@ -1,11 +1,11 @@
-import { START, SUCCESS, FAILURE, SET_POLICY, UNSET_POLICY } from './actions';
+import { START, SUCCESS, FAILURE, SET_POLICY, UNSET_POLICY } from "./actions";
 
 const INITIAL_STATE = {
   pending: false,
   error: null,
   allPolicies: null,
   allPrograms: null,
-  selectedPolicy: null,
+  selectedPolicy: null
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -16,7 +16,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         pending: true,
         error: null,
         allPolicies: null,
-        allPrograms: null,
+        allPrograms: null
       };
     case SUCCESS:
       return {
@@ -24,7 +24,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         pending: false,
         error: null,
         allPolicies: action.payload[0].results,
-        allPrograms: action.payload[1].results,
+        allPrograms: action.payload[1].results
       };
     case FAILURE:
       return {
@@ -32,17 +32,17 @@ const reducer = (state = INITIAL_STATE, action) => {
         pending: false,
         error: action.payload,
         allPolicies: null,
-        allPrograms: null,
+        allPrograms: null
       };
     case SET_POLICY:
       return {
         ...state,
-        selectedPolicy: action.selectedPolicy,
+        selectedPolicy: action.selectedPolicy
       };
     case UNSET_POLICY:
       return {
         ...state,
-        selectedPolicy: null,
+        selectedPolicy: null
       };
     default:
       return state;

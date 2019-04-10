@@ -1,5 +1,5 @@
-import { createSelector } from 'reselect';
-import { rootState } from '../selectors';
+import { createSelector } from "reselect";
+import { rootState } from "../selectors";
 
 export const getPNWSurge = createSelector(
   rootState,
@@ -12,12 +12,12 @@ const getProperty = key =>
     state => state[key]
   );
 
-export const isLoading = getProperty('pending');
-export const isError = getProperty('error');
-export const getAllCities = getProperty('allCities');
-export const getShortTermTrend = getProperty('shortTermTrend');
-export const getLongTermTrend = getProperty('longTermTrend');
-export const getSelectedCity = getProperty('selectedCity');
+export const isLoading = getProperty("pending");
+export const isError = getProperty("error");
+export const getAllCities = getProperty("allCities");
+export const getShortTermTrend = getProperty("shortTermTrend");
+export const getLongTermTrend = getProperty("longTermTrend");
+export const getSelectedCity = getProperty("selectedCity");
 
 export const getSelectedCityShortTermData = createSelector(
   getShortTermTrend,
@@ -31,7 +31,7 @@ export const getSelectedCityRank = createSelector(
     return datum
       ? {
           rank: datum.rank,
-          total: datum.total,
+          total: datum.total
         }
       : {};
   }
@@ -51,7 +51,7 @@ export const getChartData = createSelector(
       data.push({
         shortTerm: +point.value,
         longTerm: longPoint && +longPoint.value,
-        series: point.datapoint === city ? point.datapoint : '',
+        series: point.datapoint === city ? point.datapoint : ""
       });
     });
 

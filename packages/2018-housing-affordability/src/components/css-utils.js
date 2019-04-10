@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from "emotion";
 
 export const loader = css`
   background: #eee;

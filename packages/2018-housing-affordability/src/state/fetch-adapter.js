@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { HOST, echo } from './utils';
+import axios from "axios";
+import { HOST, echo } from "./utils";
 
 const apiAdapter = (
   url,
