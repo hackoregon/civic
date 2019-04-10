@@ -1,4 +1,4 @@
-import { createSelector } from 'reselect';
+import { createSelector } from "reselect";
 
 // *** SELECTORS *** //
 // Selectors can compute derived data, allowing Redux to store the minimal possible state.

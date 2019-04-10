@@ -1,4 +1,4 @@
-import { transportApi } from '../../api';
+import { transportApi } from "../../api";
 
 // *** STATE OBJECT *** //
 // REDUX'S THREE PRINCIPLES:
@@ -9,46 +9,46 @@ export const INITIAL_STATE = {
   stories: [],
   isFetching: false,
   openModal: null,
-  mapType: 'features',
+  mapType: "features",
   conflicts: {
     distance: 100,
     days: 14,
-    startDate: '2017-04-29',
-    endDate: '2017-06-30',
-    features: null,
+    startDate: "2017-04-29",
+    endDate: "2017-06-30",
+    features: null
   },
   features: {
     showNulls: false,
-    sourceName: 'Grind and Pave',
-    startDate: '2017-04-29',
-    endDate: '2020-01-01',
-    features: null,
+    sourceName: "Grind and Pave",
+    startDate: "2017-04-29",
+    endDate: "2020-01-01",
+    features: null
   },
   nearby: {
     distance: 200,
-    address: '1120 SW 5th Ave, Portland, OR',
-    startDate: '2017-04-29',
-    endDate: '2017-12-31',
-    features: null,
-  },
+    address: "1120 SW 5th Ave, Portland, OR",
+    startDate: "2017-04-29",
+    endDate: "2017-12-31",
+    features: null
+  }
 };
 
 // *** ACTIONS: HOLDS ACTION PAYLOADS IN PLAIN JAVASCRIPT OBJECTS. MUST HAVE A TYPE
 // PROPERTY THAT INDICATES THE PERFORMED ACTION, TYPICALLY BE DE NED AS STRING
 // CONSTANTS. ALL OTHER PROPERTIES ARE THE ACTION'S PAYLOAD. *** //
-export const INIT_APP = 'INIT_APP';
+export const INIT_APP = "INIT_APP";
 
-export const GET_FEATURES = 'GET_FEATURES';
-export const GET_FEATURES_SUCCESS = 'GET_FEATURES_SUCCESS';
-export const GET_FEATURES_FAILURE = 'GET_FEATURES_FAILURE';
+export const GET_FEATURES = "GET_FEATURES";
+export const GET_FEATURES_SUCCESS = "GET_FEATURES_SUCCESS";
+export const GET_FEATURES_FAILURE = "GET_FEATURES_FAILURE";
 
-export const CLOSE_MODAL = 'CLOSE_MODAL';
-export const OPEN_MODAL = 'OPEN_MODAL';
+export const CLOSE_MODAL = "CLOSE_MODAL";
+export const OPEN_MODAL = "OPEN_MODAL";
 
-export const SET_PANEL_VALUES = 'SET_PANEL_VALUES';
-export const CLEAR_PANEL_VALUES = 'CLEAR_PANEL_VALUES';
+export const SET_PANEL_VALUES = "SET_PANEL_VALUES";
+export const CLEAR_PANEL_VALUES = "CLEAR_PANEL_VALUES";
 
-export const SET_MAP_TYPE = 'SET_MAP_TYPE';
+export const SET_MAP_TYPE = "SET_MAP_TYPE";
 
 // *** ACTION CREATORS: CREATES AN ACTION WITH OPTIONAL PAYLOAD AND BOUND DISPATCH. *** //
 
@@ -63,18 +63,18 @@ export const openModal = payload => ({ type: OPEN_MODAL, payload });
 export const setPanelValues = payload => ({ type: SET_PANEL_VALUES, payload });
 export const clearPanelValues = payload => ({
   type: CLEAR_PANEL_VALUES,
-  payload,
+  payload
 });
 
 // FIRE API ACTION CREATORS //
 export const getFeatures = payload => ({ type: GET_FEATURES, payload });
 export const getFeaturesSuccess = ({ newMapType, geoData }) => ({
   type: GET_FEATURES_SUCCESS,
-  payload: { newMapType, geoData },
+  payload: { newMapType, geoData }
 });
 export const getFeaturesFailure = error => ({
   type: GET_FEATURES_FAILURE,
-  error,
+  error
 });
 
 export const setMapType = payload => ({ type: SET_MAP_TYPE, payload });
@@ -85,21 +85,21 @@ export const setMapType = payload => ({ type: SET_MAP_TYPE, payload });
 export const selectMapThunk = input => (dispatch, getState) => {
   const fullState = getState();
   const state = fullState.transportation || fullState;
-  console.log('reducers currentstate');
+  console.log("reducers currentstate");
   console.log(state);
   // console.log(`inputs ${input}`);
   const newMapType = input || state.app.mapType;
   console.log(`reducers post set ${newMapType}`);
   if (newMapType != state.app.mapType) {
-    console.log('diff');
+    console.log("diff");
     dispatch(setMapType(newMapType));
     dispatch(clearPanelValues());
   } else {
-    console.log('NOTHING HAPPENED');
+    console.log("NOTHING HAPPENED");
   }
   // console.log('reducers key')
   // console.log(state['app'][mapType]['data']);
-  if (!state['app'][`${newMapType}Data`]) {
+  if (!state["app"][`${newMapType}Data`]) {
     // console.log('reducers no input')
     dispatch(getFeatures(newMapType));
     return transportApi
@@ -116,52 +116,52 @@ export const selectMapThunk = input => (dispatch, getState) => {
 export const reducer = (state = INITIAL_STATE, action) => {
   console.log(`reducer maptype = ${state.mapType}, action type=${action.type}`);
   console.log(`reducer payload = ${state.payload}`);
-  console.log('action', action);
+  console.log("action", action);
   switch (action.type) {
     case CLOSE_MODAL:
       return {
         ...state,
-        openModal: null,
+        openModal: null
       };
     case OPEN_MODAL:
       return {
         ...state,
-        openModal: action.payload,
+        openModal: action.payload
       };
     case SET_PANEL_VALUES:
       return {
         ...state,
-        panelValues: action.payload,
+        panelValues: action.payload
       };
     case CLEAR_PANEL_VALUES:
       return {
         ...state,
-        panelValues: null,
+        panelValues: null
       };
 
     case GET_FEATURES:
       return {
         ...state,
-        isFetching: true,
+        isFetching: true
       };
 
     case GET_FEATURES_SUCCESS:
-      console.log('success', action.payload);
+      console.log("success", action.payload);
       return {
         ...state,
         // geoData: action.payload.geoData
-        [`${action.payload.newMapType}Data`]: action.payload.geoData,
+        [`${action.payload.newMapType}Data`]: action.payload.geoData
       };
     case GET_FEATURES_FAILURE:
       return {
         ...state,
         isFetching: false,
-        error: action.error,
+        error: action.error
       };
     case SET_MAP_TYPE:
       return {
         ...state,
-        mapType: action.payload,
+        mapType: action.payload
       };
 
     default:
