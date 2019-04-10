@@ -1,21 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { css } from 'emotion';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { css } from "emotion";
 
 import {
   CivicStoryCard,
   BaseMap,
   IconMap,
-  ChartTitle,
-} from '@hackoregon/component-library';
-import CoordsShakingInformation from './CoordsShakingInformation';
+  ChartTitle
+} from "@hackoregon/component-library";
+import CoordsShakingInformation from "./CoordsShakingInformation";
 
 import {
   fetchYouAndYourNeighbors,
   fetchYouAndYourNeighborsCoords,
-  youAndYourNeighborsSetCoords,
-} from '../../state/you-and-your-neighbors/actions';
+  youAndYourNeighborsSetCoords
+} from "../../state/you-and-your-neighbors/actions";
 import {
   isYouAndYourNeighborsPending,
   catchYouAndYourNeighborsErrors,
@@ -23,13 +23,13 @@ import {
   isYouAndYourNeighborsCoordsPending,
   catchYouAndYourNeighborsCoordsErrors,
   getYouAndYourNeighborsCoordsData,
-  getSelectedCoords,
-} from '../../state/you-and-your-neighbors/selectors';
+  getSelectedCoords
+} from "../../state/you-and-your-neighbors/selectors";
 import {
   poiIconZoomScale,
   poiGetIconColor,
-  poiIconMapping,
-} from './layerStyles';
+  poiIconMapping
+} from "./layerStyles";
 
 const mapContainer = css`
   display: flex;
@@ -50,7 +50,7 @@ const geocoderOptions = {
   bbox: [-123.1847001376, 45.2458284187, -122.2151566806, 45.8544896021],
   zoom: 13.5,
   trackProximity: true,
-  placeholder: 'Enter your address',
+  placeholder: "Enter your address"
 };
 
 const mapGLOptions = {
@@ -60,7 +60,7 @@ const mapGLOptions = {
   doubleClickZoom: false,
   touchZoom: false,
   touchRotate: false,
-  keyboard: false,
+  keyboard: false
 };
 
 export class YouAndYourNeighbors extends React.Component {
@@ -77,13 +77,13 @@ export class YouAndYourNeighbors extends React.Component {
       coordsError,
       coordsData,
       selectedCoords,
-      setCoordinates,
+      setCoordinates
     } = this.props;
 
     const geocoderChange = viewport =>
       setCoordinates({
         latitude: viewport.latitude,
-        longitude: viewport.longitude,
+        longitude: viewport.longitude
       });
     const coordsProperties =
       coordsData &&
@@ -96,19 +96,19 @@ export class YouAndYourNeighbors extends React.Component {
         title="You and Your Neighbors in the Earthquake"
         slug="you-and-your-neighbors-in-the-earthquake"
         loading={isLoading}
-        error={error && 'Error loading data'}
+        error={error && "Error loading data"}
       >
         <div>
           <p>
             It will be critical for individuals to understand their location
-            relative to key resources immediately following an earthquake. The{' '}
+            relative to key resources immediately following an earthquake. The{" "}
             <a
               href="https://www.portlandoregon.gov/pbem/59630"
               target="_blank"
               rel="noopener noreferrer"
             >
               BEECN site
-            </a>{' '}
+            </a>{" "}
             is a place to go in Portland after a major earthquake to ask for
             emergency assistance or report severe damage/injury. Places like
             hospitals, fire stations and schools will be rallying areas for the
@@ -154,7 +154,7 @@ export class YouAndYourNeighbors extends React.Component {
           </div>
           {noCoordsData && (
             <p>
-              We don't have complete information for your address.{' '}
+              We don't have complete information for your address.{" "}
               <a href="http://civicplatform.org/">
                 Learn more about how your city can work to get their data in
                 Civic.
@@ -170,7 +170,7 @@ export class YouAndYourNeighbors extends React.Component {
   }
 }
 
-YouAndYourNeighbors.displayName = 'YouAndYourNeighbors';
+YouAndYourNeighbors.displayName = "YouAndYourNeighbors";
 YouAndYourNeighbors.propTypes = {
   init: PropTypes.func,
   isLoading: PropTypes.bool,
@@ -179,7 +179,7 @@ YouAndYourNeighbors.propTypes = {
   isCoordsLoading: PropTypes.bool,
   coordsError: PropTypes.object,
   coordsData: PropTypes.object,
-  setCoordinates: PropTypes.func,
+  setCoordinates: PropTypes.func
 };
 
 export default connect(
@@ -190,7 +190,7 @@ export default connect(
     isCoordsLoading: isYouAndYourNeighborsCoordsPending(state),
     coordsError: catchYouAndYourNeighborsCoordsErrors(state),
     coordsData: getYouAndYourNeighborsCoordsData(state),
-    selectedCoords: getSelectedCoords(state),
+    selectedCoords: getSelectedCoords(state)
   }),
   dispatch => ({
     init() {
@@ -199,6 +199,6 @@ export default connect(
     setCoordinates(coordinates = {}) {
       dispatch(fetchYouAndYourNeighborsCoords(coordinates));
       dispatch(youAndYourNeighborsSetCoords(coordinates));
-    },
+    }
   })
 )(YouAndYourNeighbors);

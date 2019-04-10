@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
-import React from 'react';
+import PropTypes from "prop-types";
+import React from "react";
 
 const Question = ({ question, questionId }) => (
   <h3 className="question">{`Question ${questionId}. ${question}`}</h3>
@@ -7,7 +7,7 @@ const Question = ({ question, questionId }) => (
 
 Question.propTypes = {
   question: PropTypes.string,
-  questionId: PropTypes.number,
+  questionId: PropTypes.number
 };
 
 export default Question;

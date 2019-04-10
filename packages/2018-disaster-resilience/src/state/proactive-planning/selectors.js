@@ -1,7 +1,7 @@
-import { createSelector } from 'reselect';
-import { civicFormat } from '@hackoregon/component-library/dist/utils';
+import { createSelector } from "reselect";
+import { civicFormat } from "@hackoregon/component-library/dist/utils";
 
-import { rootState } from '../selectors';
+import { rootState } from "../selectors";
 
 export const getProactivePlanningRequest = createSelector(
   rootState,
@@ -22,7 +22,7 @@ const processData = data =>
     resilienceLabel: `${civicFormat.titleCase(
       nbhd.name
     )} • Census Non-Response Rate`,
-    displacementLabel: 'Displacement',
+    displacementLabel: "Displacement"
   }));
 
 export const getProactivePlanningData = createSelector(
