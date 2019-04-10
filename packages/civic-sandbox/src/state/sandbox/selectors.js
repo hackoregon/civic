@@ -1,8 +1,8 @@
-import { createSelector } from 'reselect';
-import { isArray } from 'lodash';
-import { rootState } from '../selectors';
+import { createSelector } from "reselect";
+import { isArray } from "lodash";
+import { rootState } from "../selectors";
 
-import { slides, foundations } from '../layerStyles';
+import { slides, foundations } from "../layerStyles";
 
 export const getState = createSelector(
   rootState,
@@ -26,20 +26,20 @@ const getSandboxProperty = key =>
     state => state[key]
   );
 
-export const isSandboxLoading = getSandboxProperty('sandboxPending');
-export const isFoundationLoading = getSandboxProperty('foundationPending');
-export const areSlidesLoading = getSandboxProperty('slidesPending');
-export const getSandboxError = getSandboxProperty('sandboxError');
-export const getSandboxData = getSandboxProperty('sandbox');
-export const getFoundations = getSandboxProperty('foundations');
-export const getFoundationError = getSandboxProperty('foundationError');
-export const getSelectedPackage = getSandboxProperty('selectedPackage');
-export const getPackages = getSandboxProperty('packages');
-export const getSlidesSuccess = getSandboxProperty('slidesSuccess');
+export const isSandboxLoading = getSandboxProperty("sandboxPending");
+export const isFoundationLoading = getSandboxProperty("foundationPending");
+export const areSlidesLoading = getSandboxProperty("slidesPending");
+export const getSandboxError = getSandboxProperty("sandboxError");
+export const getSandboxData = getSandboxProperty("sandbox");
+export const getFoundations = getSandboxProperty("foundations");
+export const getFoundationError = getSandboxProperty("foundationError");
+export const getSelectedPackage = getSandboxProperty("selectedPackage");
+export const getPackages = getSandboxProperty("packages");
+export const getSlidesSuccess = getSandboxProperty("slidesSuccess");
 export const isAnyError =
-  getSandboxProperty('foundationError') || getSandboxProperty('slidesError');
-export const getSelectedFoundation = getSandboxProperty('selectedFoundation');
-export const getSelectedSlides = getSandboxProperty('selectedSlide');
+  getSandboxProperty("foundationError") || getSandboxProperty("slidesError");
+export const getSelectedFoundation = getSandboxProperty("selectedFoundation");
+export const getSelectedSlides = getSandboxProperty("selectedSlide");
 export const isAllSandboxLoading = isFoundationLoading || areSlidesLoading;
 
 export const getSelectedPackageData = createSelector(
@@ -82,23 +82,26 @@ export const getLayerSlides = createSelector(
       selectedSlides &&
       selectedSlides.length
     ) {
-      const formatSlideData = defaultSlides.map(slideDatum => {
-        const slideData = selectedSlides.find(slide => {
-          const fetchedSlideDataName = Object.keys(slide)[0];
-          const endpointSlideDataName = slideDatum.name;
-          return fetchedSlideDataName === endpointSlideDataName;
-        });
-        const slideDataObj = slideData ? slides(slideData[slideDatum.name])[slideDatum.name] : null;
-        return [
-          {
-            data: slideDataObj ? slideDataObj.boundary : {},
-          },
-          {
-            data: slideDataObj ? slideDataObj.map : {},
-          },
-        ];
-      })
-      .reduce((a, b) => a.concat(b), []);
+      const formatSlideData = defaultSlides
+        .map(slideDatum => {
+          const slideData = selectedSlides.find(slide => {
+            const fetchedSlideDataName = Object.keys(slide)[0];
+            const endpointSlideDataName = slideDatum.name;
+            return fetchedSlideDataName === endpointSlideDataName;
+          });
+          const slideDataObj = slideData
+            ? slides(slideData[slideDatum.name])[slideDatum.name]
+            : null;
+          return [
+            {
+              data: slideDataObj ? slideDataObj.boundary : {}
+            },
+            {
+              data: slideDataObj ? slideDataObj.map : {}
+            }
+          ];
+        })
+        .reduce((a, b) => a.concat(b), []);
       return [...formatSlideData];
     }
     return [{ data: {} }];
@@ -113,7 +116,7 @@ export const getLayerFoundation = createSelector(
     const foundationLayerData = {
       data: selectedFoundation.slide_data
         ? foundations(selectedFn)[defaultFn.name]
-        : {},
+        : {}
     };
     return foundationLayerData;
   }
@@ -121,94 +124,94 @@ export const getLayerFoundation = createSelector(
 
 const makeVisFor = (spec, data) => {
   const type = spec.visualization.type;
-  if (type === 'PercentDonut') {
+  if (type === "PercentDonut") {
     const val = data.object.properties[spec.field];
     return {
-      visualizationType: 'PercentDonut',
+      visualizationType: "PercentDonut",
       title: spec.name,
       data: [
         { x: spec.name, y: val },
         {
           x: spec.visualization.comparison_name,
-          y: val < 1 ? 1 - val : 100 - val,
-        },
-      ],
+          y: val < 1 ? 1 - val : 100 - val
+        }
+      ]
     };
   }
-  if (type === 'Text') {
+  if (type === "Text") {
     return {
-      visualizationType: 'Text',
+      visualizationType: "Text",
       title: spec.name,
       data:
         data.object.properties[spec.field] !== null &&
         data.object.properties[spec.field] !== undefined
           ? data.object.properties[spec.field]
-          : 'Data Not Available',
+          : "Data Not Available"
     };
   }
-  if (type === 'ComparisonBar') {
+  if (type === "ComparisonBar") {
     const val = data.object.properties[spec.field];
     return {
-      visualizationType: 'ComparisonBar',
+      visualizationType: "ComparisonBar",
       title: spec.name,
       data: [
         {
-          name: '',
+          name: "",
           value: val ? parseInt(data.object.properties[spec.field], 10) : 0,
-          sortOrder: 2,
+          sortOrder: 2
         },
         {
           name: spec.visualization.comparison_name,
           value:
-            spec.visualization.comparison_value === '10000000'
+            spec.visualization.comparison_value === "10000000"
               ? 50000
               : parseInt(spec.visualization.comparison_value, 10),
-          sortOrder: 1,
-        },
+          sortOrder: 1
+        }
       ],
-      dataLabel: 'name',
-      dataValue: 'value',
-      sortOrder: 'sortOrder',
-      minimalist: true,
+      dataLabel: "name",
+      dataValue: "value",
+      sortOrder: "sortOrder",
+      minimalist: true
     };
   }
-  if (type === 'Legend') {
+  if (type === "Legend") {
     const field = spec.field;
     const colorScale = data.layer.props.getFillColor;
 
-    if (field === 'pgv_site_mean_mmi_txt') {
+    if (field === "pgv_site_mean_mmi_txt") {
       return {
-        visualizationType: 'Legend',
-        title: 'Map Legend',
-        min: 'Very strong (VII)',
-        max: 'Severe (VIII)',
-        colors: ['Very strong (VII)', 'Severe (VIII)']
+        visualizationType: "Legend",
+        title: "Map Legend",
+        min: "Very strong (VII)",
+        max: "Severe (VIII)",
+        colors: ["Very strong (VII)", "Severe (VIII)"]
           .map(d => colorScale({ properties: { [field]: d } }))
-          .map(d => `rgba(${d.slice(0, 3).toString()},1.0)`),
+          .map(d => `rgba(${d.slice(0, 3).toString()},1.0)`)
       };
     }
 
-    if (field === 'pgd_total_wet_mean_di') {
+    if (field === "pgd_total_wet_mean_di") {
       return {
-        visualizationType: 'Legend',
-        title: 'Map Legend',
-        min: 'Low',
-        max: 'Very High',
-        colors: ['Low', 'Moderate', 'High', 'Very High']
+        visualizationType: "Legend",
+        title: "Map Legend",
+        min: "Low",
+        max: "Very High",
+        colors: ["Low", "Moderate", "High", "Very High"]
           .map(d => colorScale({ properties: { [field]: d } }))
-          .map(d => `rgba(${d.slice(0, 3).toString()},1.0)`),
+          .map(d => `rgba(${d.slice(0, 3).toString()},1.0)`)
       };
     }
 
-    if (field === 'pgd_landslide_dry_mean_di') {
+    if (field === "pgd_landslide_dry_mean_di") {
       return {
-        visualizationType: 'Legend',
-        title: 'Map Legend',
-        min: 'None',
-        max: 'Low',
-        colors: ['None', 'Low']
+        visualizationType: "Legend",
+        title: "Map Legend",
+        min: "None",
+        max: "Low",
+        colors: ["None", "Low"]
           .map(d => colorScale({ properties: { [field]: d } }))
-          .map(d => `rgba(${d.slice(0, 3).toString()},1.0)`),
+          .map(d => `rgba(${d.slice(0, 3).toString()},1.0)`)
       };
     }
 
@@ -227,11 +230,11 @@ const makeVisFor = (spec, data) => {
     );
 
     return {
-      visualizationType: 'Legend',
-      title: 'Map Legend',
+      visualizationType: "Legend",
+      title: "Map Legend",
       min: minMax[0].properties[field],
       max: minMax[minMax.length - 1].properties[field],
-      colors: stringColors,
+      colors: stringColors
     };
   }
 };
@@ -270,8 +273,8 @@ export const getSelectedFoundationDatum = createSelector(
       const legendType = {
         field: attrs.primary.field,
         visualization: {
-          type: 'Legend',
-        },
+          type: "Legend"
+        }
       };
 
       visualizations.push(makeVisFor(legendType, selectedFoundationDatum));
@@ -294,12 +297,12 @@ export const getSelectedSlideDatum = createSelector(
       const slideName = Object.keys(slideObject);
       const attrs = slideObject[slideName[0]].slide_meta.attributes;
       const slideAttrObj = {};
-      slideAttrObj['index'] = index;
+      slideAttrObj["index"] = index;
       if (attrs.primary.field) {
-        slideAttrObj['primary'] = attrs.primary;
+        slideAttrObj["primary"] = attrs.primary;
       }
       if (attrs.secondary.field) {
-        slideAttrObj['secondary'] = attrs.secondary;
+        slideAttrObj["secondary"] = attrs.secondary;
       }
       return slideAttrObj;
     });
@@ -320,9 +323,9 @@ export const getSelectedSlideDatum = createSelector(
     const slideIndex = findSlideIndex[0].index;
 
     const tooltipObj = {};
-    tooltipObj['x'] = selectedSlideDatum.x;
-    tooltipObj['y'] = selectedSlideDatum.y;
-    tooltipObj['content'] = [];
+    tooltipObj["x"] = selectedSlideDatum.x;
+    tooltipObj["y"] = selectedSlideDatum.y;
+    tooltipObj["content"] = [];
 
     const tooltipSlideName = Object.keys(slide[slideIndex]);
 
@@ -336,13 +339,13 @@ export const getSelectedSlideDatum = createSelector(
     if (tooltipPrimary && tooltipPrimary.field) {
       tooltipObj.content.push({
         name: tooltipPrimary.name,
-        value: datumProps[tooltipPrimary.field],
+        value: datumProps[tooltipPrimary.field]
       });
     }
     if (tooltipSecondary && tooltipSecondary.field) {
       tooltipObj.content.push({
         name: tooltipSecondary.name,
-        value: datumProps[tooltipSecondary.field],
+        value: datumProps[tooltipSecondary.field]
       });
     }
 
@@ -355,41 +358,54 @@ export const getAllSlides = createSelector(
   getSelectedPackageData,
   getSelectedSlides,
   (sandbox, packageData, selectedSlides) => {
-    const allPackageSlideNumbers = isArray(packageData.slides) ? packageData.slides : [packageData.slides];
-    const allSlidesArr = allPackageSlideNumbers.map(slide => sandbox.slides[slide]);
-    const dataObj = {slide_data: {}, slide_meta: {}};
+    const allPackageSlideNumbers = isArray(packageData.slides)
+      ? packageData.slides
+      : [packageData.slides];
+    const allSlidesArr = allPackageSlideNumbers.map(
+      slide => sandbox.slides[slide]
+    );
+    const dataObj = { slide_data: {}, slide_meta: {} };
     const allSlides = allSlidesArr.map((slide, index) => {
       const mapObj = slides(dataObj)[slide.name];
       const color = mapObj.boundary.getLineColor
         ? mapObj.boundary.getLineColor()
-        : [238,238,238,255]; //gray
+        : [238, 238, 238, 255]; //gray
       const mapType = mapObj.map.mapType;
       return {
         slideNumber: allPackageSlideNumbers[index],
         endpoint: slide.endpoint,
         label: slide.name,
-        checked: selectedSlides.includes(allPackageSlideNumbers[index]) ? true : false,
+        checked: selectedSlides.includes(allPackageSlideNumbers[index])
+          ? true
+          : false,
         color,
         mapType
       };
     });
     return allSlides;
-});
+  }
+);
 
 export const getfoundationMapProps = createSelector(
-    getSandboxData,
-    getSelectedFoundation,
-    (sandbox, selectedFoundation) => {
-      const dataObj = { slide_meta: {}, slide_data: {} };
-      const foundationMapObj = foundations(dataObj)[sandbox.foundations[selectedFoundation].name];
-      const foundationMapProps = {
-        color: foundationMapObj.color,
-        getPropValue: foundationMapObj.getPropValue,
-        propName: foundationMapObj.propName,
-        scaleType: foundationMapObj.scaleType,
-      };
-      if(foundationMapObj.scaleType === 'ordinal' || foundationMapObj.scaleType === 'threshold') {
-        foundationMapProps.categories = foundationMapObj.categories;
-      }
+  getSandboxData,
+  getSelectedFoundation,
+  (sandbox, selectedFoundation) => {
+    const dataObj = { slide_meta: {}, slide_data: {} };
+    const foundationMapObj = foundations(dataObj)[
+      sandbox.foundations[selectedFoundation].name
+    ];
+    const foundationMapProps = {
+      color: foundationMapObj.color,
+      getPropValue: foundationMapObj.getPropValue,
+      propName: foundationMapObj.propName,
+      scaleType: foundationMapObj.scaleType
+    };
+    if (
+      foundationMapObj.scaleType === "ordinal" ||
+      foundationMapObj.scaleType === "threshold"
+    ) {
+      foundationMapProps.categories = foundationMapObj.categories;
+    }
     return foundationMapProps;
-});
+  }
+);
