@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { BaseMap, MapOverlay } from '@hackoregon/component-library';
+import React from "react";
+import PropTypes from "prop-types";
+import { BaseMap, MapOverlay } from "@hackoregon/component-library";
 import {
   AFFORDABLE_YOU_COLOR,
   AFFORDABLE_OTHER_COLOR,
   AFFORDABLE_BOTH_COLOR,
   AFFORDABLE_NEITHER_COLOR
-} from '../../utils/data-constants';
+} from "../../utils/data-constants";
 
 // Four possible colors
 // 1. Both can afford
@@ -17,13 +17,13 @@ const getNeighborhoodColor = ({ affordableYou, affordableOther }) => {
   if (affordableYou) {
     return affordableOther ? AFFORDABLE_BOTH_COLOR : AFFORDABLE_YOU_COLOR;
   }
-  return affordableOther ? AFFORDABLE_OTHER_COLOR: AFFORDABLE_NEITHER_COLOR;
-}
+  return affordableOther ? AFFORDABLE_OTHER_COLOR : AFFORDABLE_NEITHER_COLOR;
+};
 
 const asLine = feature => {
   if (!feature || !feature.geoetry) return feature;
   const copy = { ...feature };
-  copy.geometry.type = 'LineString';
+  copy.geometry.type = "LineString";
   return copy;
 };
 
@@ -46,7 +46,10 @@ const Map = ({ neighborhoodData, activeNeighborhood, onSelect }) => {
         id="selected-neighborhood"
         stroked
         pickable={false}
-        data={{features: [asLine(activeNeighborhood)], type: 'FeatureCollection'}}
+        data={{
+          features: [asLine(activeNeighborhood)],
+          type: "FeatureCollection"
+        }}
         opacity={1}
         getPosition={f => f.geometry.coordinates}
         getLineColor={() => [238, 73, 92]}
@@ -67,12 +70,12 @@ const Map = ({ neighborhoodData, activeNeighborhood, onSelect }) => {
       />
     </BaseMap>
   );
-}
+};
 
 Map.propTypes = {
   neighborhoodData: PropTypes.arrayOf(PropTypes.object),
   activeNeighborhood: PropTypes.object,
-  onSelect: PropTypes.func,
+  onSelect: PropTypes.func
 };
 
 export default Map;

@@ -1,1 +1,1 @@
-export sideEffectsMiddleware from './sideEffectsMiddleware';
+export sideEffectsMiddleware from "./sideEffectsMiddleware";

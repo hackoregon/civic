@@ -1,17 +1,17 @@
-import { createSelector } from 'reselect';
-import { update, adjust, is, all } from 'ramda';
+import { createSelector } from "reselect";
+import { update, adjust, is, all } from "ramda";
 import {
   isAffordabilityPending,
-  getAffordabilityData,
-} from './affordability/selectors';
-import { isRentPending, getRentData } from './rent/selectors';
+  getAffordabilityData
+} from "./affordability/selectors";
+import { isRentPending, getRentData } from "./rent/selectors";
 import {
   isNeighborhoodsPending,
-  getNeighborhoodsData,
-} from './neighborhoods/selectors';
-import { getHouseholdsData } from './households/selectors';
-import { getPopulationsData } from './populations/selectors';
-import { getUserIncome, getNeighborhood } from './parameters/selectors';
+  getNeighborhoodsData
+} from "./neighborhoods/selectors";
+import { getHouseholdsData } from "./households/selectors";
+import { getPopulationsData } from "./populations/selectors";
+import { getUserIncome, getNeighborhood } from "./parameters/selectors";
 
 /**
  * I believe less than 30 % of income is what is considered 'affordable'. Double check with
@@ -53,7 +53,7 @@ const associateYourAffordability = (neighborhoods, rent, income) =>
       adjust(
         neighborhood => ({
           ...neighborhood,
-          affordableYou: isAffordable(rent_amt, income),
+          affordableYou: isAffordable(rent_amt, income)
         }),
         id - 1,
         accum
@@ -78,7 +78,7 @@ const associateNeighborhoodsData = (
 ) => {
   if (allArrays(neighborhoods, affordability, rent)) {
     return {
-      type: 'FeatureCollection',
+      type: "FeatureCollection",
       features: associateYourAffordability(
         associateOtherAffordability(
           orderNeighborhoods(neighborhoods),
@@ -86,7 +86,7 @@ const associateNeighborhoodsData = (
         ),
         rent,
         income
-      ),
+      )
     };
   }
   return null;
@@ -98,7 +98,7 @@ const associateDemographicData = (neighborhood, households, populations) => {
       id: neighborhood.id,
       name: neighborhood.name,
       households: households[neighborhood.id],
-      populations: populations[neighborhood.id],
+      populations: populations[neighborhood.id]
     };
   }
   return null;

@@ -1,8 +1,8 @@
-import { createSelector } from 'reselect';
-import { propOr } from 'ramda';
+import { createSelector } from "reselect";
+import { propOr } from "ramda";
 
 // api : State -> Obj
-export const getRentState = state => propOr({}, 'rent')(state);
+export const getRentState = state => propOr({}, "rent")(state);
 
 export const getRentRequest = createSelector(
   getRentState,

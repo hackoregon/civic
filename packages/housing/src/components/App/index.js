@@ -1,95 +1,94 @@
 /* eslint-disable import/no-extraneous-dependencies */
 // This should probably be the core component, containing, nav etc
 
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 // import { withRouter } from 'react-router-dom';
-import { StoryCard, Slider, Dropdown } from '@hackoregon/component-library';
+import { StoryCard, Slider, Dropdown } from "@hackoregon/component-library";
 
-import '@hackoregon/component-library/assets/global.styles.css';
-import '@hackoregon/component-library/assets/vendor/react-select.min.css';
+import "@hackoregon/component-library/assets/global.styles.css";
+import "@hackoregon/component-library/assets/vendor/react-select.min.css";
 
-import { fetchAffordabilityData } from '../../state/affordability/actions';
-import { fetchRentData } from '../../state/rent/actions';
-import { fetchNeighborhoods } from '../../state/neighborhoods/actions';
-import { fetchHouseholdsData } from '../../state/households/actions';
-import { fetchPopulationsData } from '../../state/populations/actions';
+import { fetchAffordabilityData } from "../../state/affordability/actions";
+import { fetchRentData } from "../../state/rent/actions";
+import { fetchNeighborhoods } from "../../state/neighborhoods/actions";
+import { fetchHouseholdsData } from "../../state/households/actions";
+import { fetchPopulationsData } from "../../state/populations/actions";
 import {
   isAnyCallPending,
   getCombinedNeighborhoodsData,
-  getCombinedDemographicData,
-} from '../../state/globalSelectors';
-import Map from '../Map';
-import DemographicDetailView from '../DemographicDetailView';
-import TempProdVsCost from '../TempProdVsCost';
-import TempVoterRegistration from '../TempVoterRegistration';
-import MapLegend from '../MapLegend';
-import './app.styles.css';
+  getCombinedDemographicData
+} from "../../state/globalSelectors";
+import Map from "../Map";
+import DemographicDetailView from "../DemographicDetailView";
+import TempProdVsCost from "../TempProdVsCost";
+import TempVoterRegistration from "../TempVoterRegistration";
+import MapLegend from "../MapLegend";
+import "./app.styles.css";
 
 import {
   updateOtherUnitSize,
   updateOtherDemographic,
   updateUserIncome,
   updateUserUnitSize,
-  updateNeighborhood,
-} from '../../state/parameters/actions';
+  updateNeighborhood
+} from "../../state/parameters/actions";
 import {
   getUserIncome,
   getUserUnitSize,
   getOtherDemographic,
-  getOtherUnitSize,
-} from '../../state/parameters/selectors';
+  getOtherUnitSize
+} from "../../state/parameters/selectors";
 import {
   DEMOGRAPHICS,
   HOUSING_TYPES,
   DEFAULT_INCOME,
   MIN_INCOME,
-  MAX_INCOME,
-} from '../../utils/data-constants';
+  MAX_INCOME
+} from "../../utils/data-constants";
 
 const parameterGroupStyle = {
-  display: 'inline-block',
-  verticalAlign: 'top',
-  width: '50%',
-  minWidth: '340px',
+  display: "inline-block",
+  verticalAlign: "top",
+  width: "50%",
+  minWidth: "340px"
 };
 
 const mapContainerStyles = {
-  background: '#f3f3f3',
-  borderBottom: '1px solid #ddd',
-  padding: '10px',
+  background: "#f3f3f3",
+  borderBottom: "1px solid #ddd",
+  padding: "10px"
 };
 
 const mapStyles = {
-  border: '1px solid #ddd',
+  border: "1px solid #ddd"
 };
 
 const tooltipStyles = {
-  background: '#f3f3f3',
-  padding: '30px',
-  position: 'relative',
-  zIndex: '1001',
+  background: "#f3f3f3",
+  padding: "30px",
+  position: "relative",
+  zIndex: "1001"
 };
 
 const arrowHackStyles = {
-  background: '#f3f3f3',
-  width: '100px',
-  height: '100px',
-  transform: 'rotate(45deg) translate(-30%, -30%)',
-  margin: 'auto',
-  position: 'absolute',
-  zIndex: '1000',
-  left: '0',
-  right: '0',
-  border: '1px solid #ddd',
+  background: "#f3f3f3",
+  width: "100px",
+  height: "100px",
+  transform: "rotate(45deg) translate(-30%, -30%)",
+  margin: "auto",
+  position: "absolute",
+  zIndex: "1000",
+  left: "0",
+  right: "0",
+  border: "1px solid #ddd"
 };
 
 const textAlignCenter = {
-  textAlign: 'center',
+  textAlign: "center"
 };
-
 
 export class App extends React.Component {
   componentDidMount() {
@@ -106,7 +105,7 @@ export class App extends React.Component {
       otherDemographic,
       setOtherDemographic,
       setUnitSize,
-      setNeighborhood,
+      setNeighborhood
     } = this.props;
 
     const activeNeighborhood =
@@ -152,7 +151,7 @@ export class App extends React.Component {
             </div>
           </div>
           <div style={mapContainerStyles}>
-            <MapLegend otherDemographicLabel={otherDemographic.label || ''} />
+            <MapLegend otherDemographicLabel={otherDemographic.label || ""} />
             <div style={mapStyles}>
               <Map
                 neighborhoodData={neighborhoodData}
@@ -173,7 +172,7 @@ export class App extends React.Component {
   }
 }
 
-App.displayName = 'App';
+App.displayName = "App";
 App.defaultProps = {
   children: <div />,
   neighborhoodData: {},
@@ -186,7 +185,7 @@ App.defaultProps = {
   setOtherDemographic() {},
   setNeighborhood() {},
   fetchAllData() {},
-  setUnitSize() {},
+  setUnitSize() {}
 };
 
 App.propTypes = {
@@ -199,7 +198,7 @@ App.propTypes = {
   setUserIncome: PropTypes.func,
   setUnitSize: PropTypes.func,
   setNeighborhood: PropTypes.func,
-  fetchAllData: PropTypes.func,
+  fetchAllData: PropTypes.func
 };
 
 const mapDispatch = dispatch => ({
@@ -231,7 +230,7 @@ const mapDispatch = dispatch => ({
 
   setNeighborhood(id) {
     dispatch(updateNeighborhood(id));
-  },
+  }
 });
 
 const mapProps = state => {
@@ -243,7 +242,7 @@ const mapProps = state => {
     userIncome: getUserIncome(fromState),
     userUnitSize: getUserUnitSize(fromState),
     otherDemographic: getOtherDemographic(fromState),
-    otherUnitSize: getOtherUnitSize(fromState),
+    otherUnitSize: getOtherUnitSize(fromState)
   };
 };
 

@@ -1,51 +1,51 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { PieChart } from '@hackoregon/component-library';
-import commaSeparate from '../../utils/comma-separate';
+import React from "react";
+import PropTypes from "prop-types";
+import { PieChart } from "@hackoregon/component-library";
+import commaSeparate from "../../utils/comma-separate";
 
 const colors = [
-  '#3e75ac',
-  '#4c8ccd',
-  '#68a3df',
-  '#87baed',
-  '#abd1f7',
-  '#d3e8fd',
+  "#3e75ac",
+  "#4c8ccd",
+  "#68a3df",
+  "#87baed",
+  "#abd1f7",
+  "#d3e8fd"
 ];
 
 const contentBlockStyle = {
-  display: 'inline-block',
-  verticalAlign: 'top',
-  width: '33.333%',
-  minWidth: '340px',
+  display: "inline-block",
+  verticalAlign: "top",
+  width: "33.333%",
+  minWidth: "340px"
 };
 
 const numberColumnStyle = {
-  display: 'inline-block',
-  width: '30%',
-  textAlign: 'right',
+  display: "inline-block",
+  width: "30%",
+  textAlign: "right"
 };
 
 const labelColumnStyle = {
-  boxSizing: 'border-box',
-  display: 'inline-block',
-  width: '70%',
-  textAlign: 'left',
-  paddingLeft: '1em',
+  boxSizing: "border-box",
+  display: "inline-block",
+  width: "70%",
+  textAlign: "left",
+  paddingLeft: "1em"
 };
 
 const numberStyle = {
   color: colors[0],
-  fontWeight: 'bold',
+  fontWeight: "bold"
 };
 
 const chartProportions = {
   width: 350,
   height: 200,
-  innerRadius: 20,
+  innerRadius: 20
 };
 
 const textAlignCenter = {
-  textAlign: 'center',
+  textAlign: "center"
 };
 
 // VictoryPie uses d3-interpolate to perform animations. d3-interpolate
@@ -66,8 +66,8 @@ const DemographicDetailView = ({ demographics }) => {
             <h3 style={textAlignCenter}>Race/Ethnicity</h3>
             <PieChart
               data={protectLabels(demographics.populations)}
-              dataLabel='name'
-              dataValue='value'
+              dataLabel="name"
+              dataValue="value"
               colors={colors}
               {...chartProportions}
             />
@@ -76,14 +76,14 @@ const DemographicDetailView = ({ demographics }) => {
             <h3 style={textAlignCenter}>Household Totals</h3>
             <div style={numberColumnStyle}>
               <p style={numberStyle}>
-                {commaSeparate(demographics.households['Households'])}
+                {commaSeparate(demographics.households["Households"])}
               </p>
               <p style={numberStyle}>
-                {commaSeparate(demographics.households['Single-Person'])}
+                {commaSeparate(demographics.households["Single-Person"])}
               </p>
               <p style={numberStyle}>
                 {commaSeparate(
-                  demographics.households['Households with Children']
+                  demographics.households["Households with Children"]
                 )}
               </p>
             </div>
@@ -98,16 +98,16 @@ const DemographicDetailView = ({ demographics }) => {
             <div style={numberColumnStyle}>
               <p style={numberStyle}>
                 {commaSeparate(
-                  demographics.households['Foreign-Born Individuals']
+                  demographics.households["Foreign-Born Individuals"]
                 )}
               </p>
               <p style={numberStyle}>
                 {commaSeparate(
-                  demographics.households['Persons Exp-Disabilities']
+                  demographics.households["Persons Exp-Disabilities"]
                 )}
               </p>
               <p style={numberStyle}>
-                {commaSeparate(demographics.households['Persons 65 and Older'])}
+                {commaSeparate(demographics.households["Persons 65 and Older"])}
               </p>
             </div>
             <div style={labelColumnStyle}>
@@ -124,11 +124,11 @@ const DemographicDetailView = ({ demographics }) => {
 /* eslint-enable dot-notation */
 
 DemographicDetailView.propTypes = {
-  demographics: PropTypes.object,
+  demographics: PropTypes.object
 };
 
 DemographicDetailView.defaultProps = {
-  demographics: null,
+  demographics: null
 };
 
 export default DemographicDetailView;
