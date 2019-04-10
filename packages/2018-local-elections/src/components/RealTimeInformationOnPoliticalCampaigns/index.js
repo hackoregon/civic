@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { css } from 'emotion';
-import { connect } from 'react-redux';
-import { uniqBy } from 'lodash';
+import React from "react";
+import PropTypes from "prop-types";
+import { css } from "emotion";
+import { connect } from "react-redux";
+import { uniqBy } from "lodash";
 
-import { CivicStoryCard } from '@hackoregon/component-library';
+import { CivicStoryCard } from "@hackoregon/component-library";
 
 import {
   fetchContributorBreakdown,
@@ -12,8 +12,8 @@ import {
   fetchElectionCycles,
   fetchCommittees,
   setElectionCycle,
-  setCampaign,
-} from '../../state/political-campaigns/actions';
+  setCampaign
+} from "../../state/political-campaigns/actions";
 import {
   isContributorBreakdownLoading,
   getContributorBreakdownData,
@@ -23,14 +23,14 @@ import {
   getElectionCycles,
   getElectionCycle,
   getCommittees,
-  getCampaign,
-} from '../../state/political-campaigns/selectors';
+  getCampaign
+} from "../../state/political-campaigns/selectors";
 
-import { campaign, electionCycle } from './defaults';
-import ContributorBreakdown from './ContributorBreakdown';
-import SpendingBreakdown from './SpendingBreakdown';
-import MoneyRaisedKPI from './MoneyRaisedKPI';
-import Controls from './Controls';
+import { campaign, electionCycle } from "./defaults";
+import ContributorBreakdown from "./ContributorBreakdown";
+import SpendingBreakdown from "./SpendingBreakdown";
+import MoneyRaisedKPI from "./MoneyRaisedKPI";
+import Controls from "./Controls";
 
 const descriptionClass = css``;
 
@@ -69,14 +69,14 @@ const propTypes = {
   contributorBreakdown: PropTypes.object,
   fetchSpendingBreakdown: PropTypes.func,
 
-  loadingContributorBreakdown: PropTypes.bool,
+  loadingContributorBreakdown: PropTypes.bool
 };
 
 const defaultProps = {
   campaign: {},
   committees: {
-    results: [],
-  },
+    results: []
+  }
 };
 
 class RealTimeInformationOnPoliticalCampaigns extends React.Component {
@@ -114,7 +114,7 @@ class RealTimeInformationOnPoliticalCampaigns extends React.Component {
     ) {
       contributors = uniqBy(
         this.props.contributorBreakdown.results,
-        'donor_category'
+        "donor_category"
       );
     }
 
@@ -125,7 +125,7 @@ class RealTimeInformationOnPoliticalCampaigns extends React.Component {
     if (this.props.spendingBreakdown && this.props.spendingBreakdown.results) {
       spending = uniqBy(
         this.props.spendingBreakdown.results,
-        'spending_category'
+        "spending_category"
       );
     }
 
@@ -171,7 +171,7 @@ class RealTimeInformationOnPoliticalCampaigns extends React.Component {
 }
 
 RealTimeInformationOnPoliticalCampaigns.displayName =
-  'RealTimeInformationOnPoliticalCampaigns';
+  "RealTimeInformationOnPoliticalCampaigns";
 RealTimeInformationOnPoliticalCampaigns.propTypes = propTypes;
 RealTimeInformationOnPoliticalCampaigns.defaultProps = defaultProps;
 
@@ -186,19 +186,19 @@ export default connect(
     campaign: getCampaign(state),
     committees: getCommittees(state),
     electionCycle: getElectionCycle(state),
-    electionCycles: getElectionCycles(state),
+    electionCycles: getElectionCycles(state)
   }),
   dispatch => ({
     fetchChartData: (committeeID, electionCycle) => {
       dispatch(
         fetchContributorBreakdown(committeeID, electionCycle.id, {
-          ordering: 'sum',
+          ordering: "sum"
         })
       );
       dispatch(
         fetchSpendingBreakdown(committeeID, electionCycle.name, {
-          ordering: 'sum',
-          limit: 8,
+          ordering: "sum",
+          limit: 8
         })
       );
     },
@@ -206,6 +206,6 @@ export default connect(
       dispatch(fetchElectionCycles(committeeID, { limit: 30 })),
     query: () => dispatch(fetchCommittees({ limit: 3000 })),
     setElectionCycle: c => dispatch(setElectionCycle(c)),
-    setCampaign: c => dispatch(setCampaign(c)),
+    setCampaign: c => dispatch(setCampaign(c))
   })
 )(RealTimeInformationOnPoliticalCampaigns);

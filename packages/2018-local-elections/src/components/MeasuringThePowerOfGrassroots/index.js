@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import { CivicStoryCard, Placeholder } from '@hackoregon/component-library';
+import { CivicStoryCard, Placeholder } from "@hackoregon/component-library";
 
 export class MeasuringThePowerOfGrassroots extends React.Component {
   componentDidMount() {
@@ -19,7 +19,7 @@ export class MeasuringThePowerOfGrassroots extends React.Component {
   }
 }
 
-MeasuringThePowerOfGrassroots.displayName = 'MeasuringThePowerOfGrassroots';
+MeasuringThePowerOfGrassroots.displayName = "MeasuringThePowerOfGrassroots";
 
 // Connect this to the redux store when necessary
 export default MeasuringThePowerOfGrassroots;

@@ -1,18 +1,18 @@
-import { combineReducers } from 'redux';
-import apiReducer from '../api-adapter-reducer';
+import { combineReducers } from "redux";
+import apiReducer from "../api-adapter-reducer";
 import {
   REQUEST_START,
   REQUEST_SUCCESS,
   REQUEST_ERROR,
   SET_CAMPAIGN,
-  SET_ELECTION_CYCLE,
-} from './actions';
+  SET_ELECTION_CYCLE
+} from "./actions";
 
 const INITIAL_REQUEST_STATE = {};
 
 const INITIAL_META_STATE = {
   campaign: {},
-  campaignCycle: {},
+  campaignCycle: {}
 };
 
 // The state should look something like this. Data stores the data/status for
@@ -40,12 +40,12 @@ const metaReducer = (state = INITIAL_META_STATE, action) => {
     case SET_CAMPAIGN:
       return {
         ...state,
-        campaign: action.payload.campaign,
+        campaign: action.payload.campaign
       };
     case SET_ELECTION_CYCLE:
       return {
         ...state,
-        electionCycle: action.payload.electionCycle,
+        electionCycle: action.payload.electionCycle
       };
     default:
       return state;
@@ -57,7 +57,7 @@ export default combineReducers({
     INITIAL_STATE: INITIAL_REQUEST_STATE,
     API_START: REQUEST_START,
     API_SUCCESS: REQUEST_SUCCESS,
-    API_ERROR: REQUEST_ERROR,
+    API_ERROR: REQUEST_ERROR
   }),
-  meta: metaReducer,
+  meta: metaReducer
 });

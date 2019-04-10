@@ -5,8 +5,8 @@ import {
   RACE_START,
   RACE_SUCCESS,
   RACE_FAILURE,
-  SET_RACE,
-} from './actions';
+  SET_RACE
+} from "./actions";
 
 const INITIAL_STATE = {
   allRacesPending: false,
@@ -14,7 +14,7 @@ const INITIAL_STATE = {
   racePending: false,
   raceError: null,
   selectedRace: null,
-  allRaces: null,
+  allRaces: null
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -24,47 +24,47 @@ const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         allRacesPending: true,
         allRacesError: null,
-        allRaces: null,
+        allRaces: null
       };
     case ALL_RACES_SUCCESS:
       return {
         ...state,
         allRacesPending: false,
         allRacesError: null,
-        allRaces: action.payload.results,
+        allRaces: action.payload.results
       };
     case ALL_RACES_FAILURE:
       return {
         ...state,
         allRacesPending: false,
         allRacesError: action.payload,
-        allRaces: null,
+        allRaces: null
       };
     case RACE_START:
       return {
         ...state,
         racePending: true,
         raceError: null,
-        selectedRaceData: null,
+        selectedRaceData: null
       };
     case RACE_SUCCESS:
       return {
         ...state,
         racePending: false,
         raceError: null,
-        selectedRaceData: action.payload.results,
+        selectedRaceData: action.payload.results
       };
     case RACE_FAILURE:
       return {
         ...state,
         racePending: false,
         raceError: action.payload,
-        selectedRaceData: null,
+        selectedRaceData: null
       };
     case SET_RACE:
       return {
         ...state,
-        selectedRace: action.selectedRace,
+        selectedRace: action.selectedRace
       };
     default:
       return state;
