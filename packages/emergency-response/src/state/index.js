@@ -5,8 +5,8 @@ import {
   getAgenciesThunk,
   getFmaThunk,
   getFmasThunk,
-  renderFmaPanelProperties,
-} from './reducers/app';
+  renderFmaPanelProperties
+} from "./reducers/app";
 
 import {
   getAgencyData,
@@ -14,11 +14,11 @@ import {
   getFmasData,
   getFmasFeatures,
   getFmaPanelData,
-  getFmasFeaturesByPropertiesId,
+  getFmasFeaturesByPropertiesId
   // getAppState,
   // getOpenModal,
   // getStories,
-} from './selectors/app';
+} from "./selectors/app";
 
 // exports
 export {
@@ -36,5 +36,5 @@ export {
   // getAppState,
   // getOpenModal,
   // getStories,
-  openModal,
+  openModal
 };

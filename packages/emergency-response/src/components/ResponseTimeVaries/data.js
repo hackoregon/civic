@@ -32,7 +32,7 @@ const data = [
     weekly_med_incs: 404.571428571429,
     weekly_fire_incs: 9.96428571428571,
     median_resp_time_med: 4.05,
-    median_resp_time_fire: 4.32,
+    median_resp_time_fire: 4.32
   },
   {
     fma: 7,
@@ -67,7 +67,7 @@ const data = [
     weekly_med_incs: 392.107142857143,
     weekly_fire_incs: 14.1785714285714,
     median_resp_time_med: 4.4,
-    median_resp_time_fire: 4.22,
+    median_resp_time_fire: 4.22
   },
   {
     fma: 16,
@@ -102,7 +102,7 @@ const data = [
     weekly_med_incs: 38.8095238095238,
     weekly_fire_incs: 1.46428571428571,
     median_resp_time_med: 6.18,
-    median_resp_time_fire: 5.32,
+    median_resp_time_fire: 5.32
   },
   {
     fma: 6,
@@ -137,7 +137,7 @@ const data = [
     weekly_med_incs: 12.2261904761905,
     weekly_fire_incs: 1.89285714285714,
     median_resp_time_med: 4.97,
-    median_resp_time_fire: 5.13,
+    median_resp_time_fire: 5.13
   },
   {
     fma: 8,
@@ -172,7 +172,7 @@ const data = [
     weekly_med_incs: 109.511904761905,
     weekly_fire_incs: 6.05952380952381,
     median_resp_time_med: 3.73,
-    median_resp_time_fire: 4.31,
+    median_resp_time_fire: 4.31
   },
   {
     fma: 10,
@@ -207,7 +207,7 @@ const data = [
     weekly_med_incs: 25.0952380952381,
     weekly_fire_incs: 1.63095238095238,
     median_resp_time_med: 5.62,
-    median_resp_time_fire: 5.32,
+    median_resp_time_fire: 5.32
   },
   {
     fma: 14,
@@ -242,7 +242,7 @@ const data = [
     weekly_med_incs: 154.619047619048,
     weekly_fire_incs: 8.40476190476191,
     median_resp_time_med: 4.75,
-    median_resp_time_fire: 4.45,
+    median_resp_time_fire: 4.45
   },
   {
     fma: 15,
@@ -277,7 +277,7 @@ const data = [
     weekly_med_incs: 15.7142857142857,
     weekly_fire_incs: 0.988095238095238,
     median_resp_time_med: 5.45,
-    median_resp_time_fire: 5.17,
+    median_resp_time_fire: 5.17
   },
   {
     fma: 17,
@@ -312,7 +312,7 @@ const data = [
     weekly_med_incs: 62.1190476190476,
     weekly_fire_incs: 5.40476190476191,
     median_resp_time_med: 5.87,
-    median_resp_time_fire: 6,
+    median_resp_time_fire: 6
   },
   {
     fma: 21,
@@ -347,7 +347,7 @@ const data = [
     weekly_med_incs: 109.916666666667,
     weekly_fire_incs: 6.67857142857143,
     median_resp_time_med: 4.25,
-    median_resp_time_fire: 4.83,
+    median_resp_time_fire: 4.83
   },
   {
     fma: 22,
@@ -382,7 +382,7 @@ const data = [
     weekly_med_incs: 111.75,
     weekly_fire_incs: 5.89285714285714,
     median_resp_time_med: 4.55,
-    median_resp_time_fire: 4.65,
+    median_resp_time_fire: 4.65
   },
   {
     fma: 2,
@@ -417,7 +417,7 @@ const data = [
     weekly_med_incs: 107.952380952381,
     weekly_fire_incs: 5.16666666666667,
     median_resp_time_med: 5.02,
-    median_resp_time_fire: 4.93,
+    median_resp_time_fire: 4.93
   },
   {
     fma: 3,
@@ -452,7 +452,7 @@ const data = [
     weekly_med_incs: 235.964285714286,
     weekly_fire_incs: 11.1190476190476,
     median_resp_time_med: 4.27,
-    median_resp_time_fire: 4.32,
+    median_resp_time_fire: 4.32
   },
   {
     fma: 4,
@@ -487,7 +487,7 @@ const data = [
     weekly_med_incs: 240.083333333333,
     weekly_fire_incs: 10,
     median_resp_time_med: 4,
-    median_resp_time_fire: 4.58,
+    median_resp_time_fire: 4.58
   },
   {
     fma: 5,
@@ -522,7 +522,7 @@ const data = [
     weekly_med_incs: 63.0952380952381,
     weekly_fire_incs: 2.69047619047619,
     median_resp_time_med: 5.27,
-    median_resp_time_fire: 5.02,
+    median_resp_time_fire: 5.02
   },
   {
     fma: 9,
@@ -557,7 +557,7 @@ const data = [
     weekly_med_incs: 139.321428571429,
     weekly_fire_incs: 7.10714285714286,
     median_resp_time_med: 4.38,
-    median_resp_time_fire: 4.27,
+    median_resp_time_fire: 4.27
   },
   {
     fma: 11,
@@ -592,7 +592,7 @@ const data = [
     weekly_med_incs: 264.821428571429,
     weekly_fire_incs: 12.1547619047619,
     median_resp_time_med: 4.17,
-    median_resp_time_fire: 4.48,
+    median_resp_time_fire: 4.48
   },
   {
     fma: 12,
@@ -627,7 +627,7 @@ const data = [
     weekly_med_incs: 136.166666666667,
     weekly_fire_incs: 6.63095238095238,
     median_resp_time_med: 4.02,
-    median_resp_time_fire: 4.48,
+    median_resp_time_fire: 4.48
   },
   {
     fma: 13,
@@ -662,7 +662,7 @@ const data = [
     weekly_med_incs: 240.130952380952,
     weekly_fire_incs: 11.5833333333333,
     median_resp_time_med: 4.07,
-    median_resp_time_fire: 4.43,
+    median_resp_time_fire: 4.43
   },
   {
     fma: 18,
@@ -697,7 +697,7 @@ const data = [
     weekly_med_incs: 105.380952380952,
     weekly_fire_incs: 4.04761904761905,
     median_resp_time_med: 5.42,
-    median_resp_time_fire: 5.1,
+    median_resp_time_fire: 5.1
   },
   {
     fma: 19,
@@ -732,7 +732,7 @@ const data = [
     weekly_med_incs: 184.738095238095,
     weekly_fire_incs: 7.96428571428571,
     median_resp_time_med: 4.25,
-    median_resp_time_fire: 4.55,
+    median_resp_time_fire: 4.55
   },
   {
     fma: 20,
@@ -767,7 +767,7 @@ const data = [
     weekly_med_incs: 82.9523809523809,
     weekly_fire_incs: 4.22619047619048,
     median_resp_time_med: 5.05,
-    median_resp_time_fire: 4.89,
+    median_resp_time_fire: 4.89
   },
   {
     fma: 23,
@@ -802,7 +802,7 @@ const data = [
     weekly_med_incs: 56.7142857142857,
     weekly_fire_incs: 3.57142857142857,
     median_resp_time_med: 5.35,
-    median_resp_time_fire: 5.45,
+    median_resp_time_fire: 5.45
   },
   {
     fma: 24,
@@ -837,7 +837,7 @@ const data = [
     weekly_med_incs: 114.357142857143,
     weekly_fire_incs: 6.05952380952381,
     median_resp_time_med: 4.25,
-    median_resp_time_fire: 4,
+    median_resp_time_fire: 4
   },
   {
     fma: 25,
@@ -872,7 +872,7 @@ const data = [
     weekly_med_incs: 198.666666666667,
     weekly_fire_incs: 7.59523809523809,
     median_resp_time_med: 4.7,
-    median_resp_time_fire: 4.42,
+    median_resp_time_fire: 4.42
   },
   {
     fma: 26,
@@ -907,7 +907,7 @@ const data = [
     weekly_med_incs: 101.428571428571,
     weekly_fire_incs: 5.01190476190476,
     median_resp_time_med: 4.45,
-    median_resp_time_fire: 4.27,
+    median_resp_time_fire: 4.27
   },
   {
     fma: 27,
@@ -942,7 +942,7 @@ const data = [
     weekly_med_incs: 9.54761904761905,
     weekly_fire_incs: 1.28571428571429,
     median_resp_time_med: 7.23,
-    median_resp_time_fire: 6.88,
+    median_resp_time_fire: 6.88
   },
   {
     fma: 28,
@@ -977,7 +977,7 @@ const data = [
     weekly_med_incs: 131.357142857143,
     weekly_fire_incs: 5.79761904761905,
     median_resp_time_med: 4.47,
-    median_resp_time_fire: 4.47,
+    median_resp_time_fire: 4.47
   },
   {
     fma: 29,
@@ -1012,7 +1012,7 @@ const data = [
     weekly_med_incs: 125.47619047619,
     weekly_fire_incs: 4.25,
     median_resp_time_med: 5.17,
-    median_resp_time_fire: 4.68,
+    median_resp_time_fire: 4.68
   },
   {
     fma: 30,
@@ -1047,7 +1047,7 @@ const data = [
     weekly_med_incs: 200.428571428571,
     weekly_fire_incs: 5.42857142857143,
     median_resp_time_med: 4.57,
-    median_resp_time_fire: 4.97,
+    median_resp_time_fire: 4.97
   },
   {
     fma: 31,
@@ -1082,8 +1082,8 @@ const data = [
     weekly_med_incs: 151.452380952381,
     weekly_fire_incs: 5.61904761904762,
     median_resp_time_med: 4.53,
-    median_resp_time_fire: 4.43,
-  },
+    median_resp_time_fire: 4.43
+  }
 ];
 
 export default data;

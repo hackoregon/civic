@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Provider } from 'react-redux';
-import { Router } from 'react-router';
+import React from "react";
+import PropTypes from "prop-types";
+import { Provider } from "react-redux";
+import { Router } from "react-router";
 // import DevTools from './DevTools';
 
 const Root = ({ store, routes, history }) => (
@@ -15,9 +15,9 @@ const Root = ({ store, routes, history }) => (
 Root.propTypes = {
   store: PropTypes.shape({
     getState: PropTypes.func.isRequired,
-    dispatch: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired
   }).isRequired,
-  history: PropTypes.shape({}).isRequired,
+  history: PropTypes.shape({}).isRequired
 };
 
 export default Root;

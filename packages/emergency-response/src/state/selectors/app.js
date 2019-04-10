@@ -1,5 +1,5 @@
-import { createSelector } from 'reselect';
-import { propOr } from 'ramda';
+import { createSelector } from "reselect";
+import { propOr } from "ramda";
 
 // *** SELECTORS *** //
 // Selectors can compute derived data, allowing Redux to store the minimal possible state.
@@ -22,7 +22,7 @@ export const getFmaData = createSelector(
 export const getFmasData = createSelector(
   appState,
   // ({ fmasData }) => fmasData,
-  propOr({}, 'fmasData')
+  propOr({}, "fmasData")
 );
 
 export const getFmaPanelData = createSelector(

@@ -1,6 +1,6 @@
-import { promiseToGet } from './utils';
+import { promiseToGet } from "./utils";
 
-const ROOT_URL = 'http://service.civicpdx.org/emergency';
+const ROOT_URL = "http://service.civicpdx.org/emergency";
 
 // without id: This viewset lists the agencies that respond to emergency incidents within Portland.
 // with id: This viewset retrievies a specific agency.
@@ -12,7 +12,7 @@ export const getAgencies = (inputs = {}) => {
   } else {
     url = `${ROOT_URL}/agencies/`;
   }
-  console.log('url', url);
+  console.log("url", url);
   return promiseToGet(url);
 };
 
@@ -50,7 +50,7 @@ export const getFireblocks = () => {
 export const getFma = inputs => {
   const { id } = inputs;
   const url = `${ROOT_URL}/fma/?fma_id=${id}`;
-  console.log('fmaId', id, 'url', url);
+  console.log("fmaId", id, "url", url);
   return promiseToGet(url);
 };
 
@@ -94,7 +94,7 @@ export const getIncidents = (inputs = {}) => {
     info,
     times,
     inctimesId,
-    totals,
+    totals
   } = inputs;
   let url;
 
@@ -244,5 +244,5 @@ export const fireApi = {
   getSituationFound,
   getStations,
   getTimeDescriptions,
-  getTypeNatureCodes,
+  getTypeNatureCodes
 };
