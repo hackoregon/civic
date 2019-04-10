@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router';
-import styles from '../PlatformStyles';
+import React from "react";
+import { Link } from "react-router";
+import styles from "../PlatformStyles";
 
 const HomePage = () => (
   <div>
@@ -135,6 +135,6 @@ const HomePage = () => (
   </div>
 );
 
-HomePage.displayName = 'HomePage';
+HomePage.displayName = "HomePage";
 
 export default HomePage;
