@@ -2,7 +2,7 @@
  * Definition reducer
  */
 
-import { actionTypes, INITIAL_STATE } from './constants';
+import { actionTypes, INITIAL_STATE } from "./constants";
 
 export default function definitionReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
@@ -11,7 +11,7 @@ export default function definitionReducer(state = INITIAL_STATE, action) {
     case actionTypes.GET_SHELTER_TYPE_SUCCESS:
       return {
         ...state,
-        shelterTypeData: action.payload,
+        shelterTypeData: action.payload
       };
     case actionTypes.GET_SHELTER_TYPE_FAILURE:
       return { ...state };

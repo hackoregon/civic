@@ -1,10 +1,10 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { CivicStoryCard } from '@hackoregon/component-library';
-import { HalfDonutChart, ListBarChart } from '../Reuseable';
-import { fetchServiceCallsData } from '../../state/Services211/actions';
-import shared from '../shared.styles';
+import React from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { CivicStoryCard } from "@hackoregon/component-library";
+import { HalfDonutChart, ListBarChart } from "../Reuseable";
+import { fetchServiceCallsData } from "../../state/Services211/actions";
+import shared from "../shared.styles";
 
 class Services211 extends React.Component {
   componentDidMount() {
@@ -19,7 +19,9 @@ class Services211 extends React.Component {
           people who self-identified as homeless. Most of those calls were
           directed to housing assistance services.
         </p>
-        {dataLoaded ? <HalfDonutChart dataSets={this.props.pieData[0].data} /> : null}
+        {dataLoaded ? (
+          <HalfDonutChart dataSets={this.props.pieData[0].data} />
+        ) : null}
         <h3 style={shared.header}>Housing Assistance</h3>
         <p style={shared.text}>
           Housing assistance is one of the most common ‘basic needs’ requested
@@ -39,7 +41,7 @@ class Services211 extends React.Component {
         {dataLoaded ? (
           <ListBarChart
             data={this.props.pieData[0].otherChart}
-            title='Non-Housing Assistance 211info Calls'
+            title="Non-Housing Assistance 211info Calls"
           />
         ) : null}
       </CivicStoryCard>
@@ -49,17 +51,17 @@ class Services211 extends React.Component {
 
 Services211.propTypes = {
   loadData: PropTypes.func.isRequired,
-  pieData: PropTypes.array.isRequired,
+  pieData: PropTypes.array.isRequired
 };
 
 const mapDispatchToProps = dispatch => ({
-  loadData: () => dispatch(fetchServiceCallsData()),
+  loadData: () => dispatch(fetchServiceCallsData())
 });
 
 const mapStateToProps = allState => {
   const state = allState.homelessness || allState;
   return {
-    pieData: [state.services211.serviceCallsData],
+    pieData: [state.services211.serviceCallsData]
   };
 };
 

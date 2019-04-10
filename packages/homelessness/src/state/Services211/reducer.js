@@ -2,7 +2,7 @@
  * Services211 reducer
  */
 
-import { actionTypes, INITIAL_STATE } from './constants';
+import { actionTypes, INITIAL_STATE } from "./constants";
 
 export default function services211Reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
@@ -11,7 +11,7 @@ export default function services211Reducer(state = INITIAL_STATE, action) {
     case actionTypes.GET_SERVICE_CALLS_SUCCESS:
       return {
         ...state,
-        serviceCallsData: action.payload,
+        serviceCallsData: action.payload
       };
     case actionTypes.GET_SERVICE_CALLS_FAILURE:
       return { ...state };

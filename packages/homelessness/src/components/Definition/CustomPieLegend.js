@@ -1,18 +1,18 @@
-import React from 'react';
+import React from "react";
 
 const CustomPieLegend = options => {
   const { payload } = options;
 
   const styles = {
-    display: 'inline-block',
-    verticalAlign: 'middle',
-    marginRight: 8,
+    display: "inline-block",
+    verticalAlign: "middle",
+    marginRight: 8
   };
 
   return (
-    <ul className="recharts-default-legend" style={{ textAlign: 'center' }}>
+    <ul className="recharts-default-legend" style={{ textAlign: "center" }}>
       {payload.map((entry, index) => {
-        const active = entry.value === options.active ? 'active' : '';
+        const active = entry.value === options.active ? "active" : "";
         return (
           <li
             key={entry.value}

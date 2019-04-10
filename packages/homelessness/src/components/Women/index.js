@@ -1,42 +1,39 @@
 /* eslint-disable react/jsx-boolean-value, react/no-unused-prop-types */
-import React from 'react';
+import React from "react";
 
-import { CivicStoryCard } from '@hackoregon/component-library';
-import shared from '../shared.styles';
-import {HalfDonutChart, ListBarChart} from '../Reuseable';
+import { CivicStoryCard } from "@hackoregon/component-library";
+import shared from "../shared.styles";
+import { HalfDonutChart, ListBarChart } from "../Reuseable";
 
 const propsData2 = [
   {
-    name: 'Domestic Violence',
-    value: 45,
+    name: "Domestic Violence",
+    value: 45
   },
   {
-    name: 'Reported Disability',
-    value: 67,
-  },
+    name: "Reported Disability",
+    value: 67
+  }
 ];
 
 const pieData = [
   {
-    data: [
-      { name: 'Women', value: 35 },
-      { name: 'Men', value: 65 },
-    ],
-    name: 2015,
-  },
+    data: [{ name: "Women", value: 35 }, { name: "Men", value: 65 }],
+    name: 2015
+  }
 ];
 
-const COLORS = ['#75568D', '#e3dde8'];
+const COLORS = ["#75568D", "#e3dde8"];
 const valueLabel = options => (
-  <Text {...options} fill={'#201024'}>{`${options.value}%`}</Text>
+  <Text {...options} fill={"#201024"}>{`${options.value}%`}</Text>
 );
 const axisLabel = options => (
   <Text
     {...options}
-    fill={'#201024'}
+    fill={"#201024"}
     y={options.y - 25}
     width={300}
-    style={{ fontWeight: 'bold' }}
+    style={{ fontWeight: "bold" }}
   >
     {options.payload.value}
   </Text>
@@ -51,7 +48,7 @@ class HomelessPopulation extends React.Component {
       <CivicStoryCard title="Does Domestic Violence Drive Homelessness?">
         <div
           className="Women"
-          style={{ marginLeft: '10px', marginRight: '10px', marginTop: '50px' }}
+          style={{ marginLeft: "10px", marginRight: "10px", marginTop: "50px" }}
         >
           <p style={shared.text}>
             Yes. Domestic violence is a primary cause of homelessness for women*
@@ -71,7 +68,10 @@ class HomelessPopulation extends React.Component {
               who participated. *National Center on Family Homelessness (2013),
               “Pressing Issues Facing Families Who Are Homeless”
             </p>
-            <ListBarChart data={propsData2} title='Homeless Women Affected By' />
+            <ListBarChart
+              data={propsData2}
+              title="Homeless Women Affected By"
+            />
           </div>
         </div>
       </CivicStoryCard>
