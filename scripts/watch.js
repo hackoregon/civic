@@ -1,33 +1,33 @@
 /* eslint-disable import/no-extraneous-dependencies */
 // requires
-const { resolve } = require('path');
-const { writeFile, existsSync, mkdirSync } = require('fs');
-const { createMonitor, walk } = require('watch');
-const { transformFileSync } = require('babel-core');
-const colors = require('colors/safe');
+const { resolve } = require("path");
+const { writeFile, existsSync, mkdirSync } = require("fs");
+const { createMonitor, walk } = require("watch");
+const { transformFileSync } = require("babel-core");
+const colors = require("colors/safe");
 
 // resolves
-const PKGS = resolve(__dirname, '../packages');
-const babelrc = resolve(__dirname, '..', '.babelrc');
+const PKGS = resolve(__dirname, "../packages");
+const babelrc = resolve(__dirname, "..", ".babelrc");
 
 // consts
-const watchFlag = process.argv[2] === '--watch';
+const watchFlag = process.argv[2] === "--watch";
 
 // patterns
 const jsFileReg = /.js/;
 const srcReg = /\/src\//;
 const pathReg = /(\/.*\/)/;
 const blackFlagsString = [
-  'node_modules',
-  '__tests__',
-  'lib',
-  'dist',
-  'civic-scripts',
-  'civic-logger',
-  '.test.',
-  '.story.',
-  '.json',
-].join('|');
+  "node_modules",
+  "__tests__",
+  "lib",
+  "dist",
+  "civic-scripts",
+  "civic-logger",
+  ".test.",
+  ".story.",
+  ".json"
+].join("|");
 const blackFlagsReg = new RegExp(`(${blackFlagsString})`);
 
 function babelMe(filename) {
@@ -35,7 +35,7 @@ function babelMe(filename) {
 }
 
 function getLibFromString(srcString) {
-  return srcString.replace(srcReg, '/lib/');
+  return srcString.replace(srcReg, "/lib/");
 }
 
 function babelify(filename) {
@@ -57,15 +57,14 @@ function babelify(filename) {
 }
 
 function watchCallback(monitor) {
-  monitor.on('changed', babelify);
+  monitor.on("changed", babelify);
 }
 
 function initialWalkCallback(f, files) {
-  const initialFiles = Object.keys(files)
-    .reduce((memo, curr) => {
-      if (memo.indexOf(curr) !== -1) return memo;
-      return memo.concat(curr);
-    }, []);
+  const initialFiles = Object.keys(files).reduce((memo, curr) => {
+    if (memo.indexOf(curr) !== -1) return memo;
+    return memo.concat(curr);
+  }, []);
 
   initialFiles.forEach(babelify);
 }
@@ -76,7 +75,7 @@ const options = {
   interval: 0.5,
   filter(filename) {
     return !blackFlagsReg.test(filename);
-  },
+  }
 };
 
 walk(PKGS, options, initialWalkCallback);
