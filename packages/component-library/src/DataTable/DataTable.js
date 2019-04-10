@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { css } from 'emotion';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { css } from "emotion";
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 
 // Classes
@@ -15,7 +15,7 @@ const defaultHeaderClass = css`
   box-sizing: border-box;
 `;
 const defaultHeaderCellClass = item => css`
-  border-bottom: ${item.underlined ? '1pt solid black' : ''};
+  border-bottom: ${item.underlined ? "1pt solid black" : ""};
   border-collapse: separate;
   padding: 0.25rem 1rem;
   text-align: center;
@@ -28,13 +28,13 @@ const defaultColumnCellClass = item => css`
   border-collapse: separate;
   cursor: pointer;
   padding: 0.25rem 1rem;
-  text-align: ${item.align || 'left'};
+  text-align: ${item.align || "left"};
 `;
 const defaultRowClass = css``;
 const defaultRowCellClass = item => css`
   border-bottom: 1pt solid lightgray;
   padding: 0.25rem 1rem;
-  text-align: ${item.align || 'left'};
+  text-align: ${item.align || "left"};
 `;
 
 // Default components
@@ -42,7 +42,7 @@ const DefaultColumn = ({
   columns,
   sortTable,
   columnClass,
-  columnCellClass,
+  columnCellClass
 }) => (
   <tr className={columnClass || defaultColumnClass}>
     {columns.map(item => (
@@ -61,12 +61,12 @@ DefaultColumn.propTypes = {
   columns: PropTypes.arrayOf(
     PropTypes.shape({
       header: PropTypes.string,
-      key: PropTypes.string,
+      key: PropTypes.string
     })
   ).isRequired,
   columnClass: PropTypes.string,
   columnCellClass: PropTypes.string,
-  sortTable: PropTypes.func.isRequired,
+  sortTable: PropTypes.func.isRequired
 };
 
 const DefaultHeader = ({ className, columns }) => (
@@ -75,7 +75,7 @@ const DefaultHeader = ({ className, columns }) => (
       <th
         key={item.key}
         className={defaultHeaderCellClass(item)}
-        colSpan={item.colSpan || '1'}
+        colSpan={item.colSpan || "1"}
       >
         {item.header}
       </th>
@@ -86,10 +86,10 @@ DefaultHeader.propTypes = {
   columns: PropTypes.arrayOf(
     PropTypes.shape({
       header: PropTypes.string,
-      key: PropTypes.string,
+      key: PropTypes.string
     })
   ).isRequired,
-  className: PropTypes.string,
+  className: PropTypes.string
 };
 
 const DefaultRow = ({ data, id, columns, rowClass, rowCellClass }) => (
@@ -109,12 +109,12 @@ DefaultRow.propTypes = {
   columns: PropTypes.arrayOf(
     PropTypes.shape({
       header: PropTypes.string,
-      key: PropTypes.string,
+      key: PropTypes.string
     })
   ).isRequired,
   id: PropTypes.string.isRequired,
   rowClass: PropTypes.string,
-  rowCellClass: PropTypes.string,
+  rowCellClass: PropTypes.string
 };
 
 export default class DataTable extends Component {
@@ -123,7 +123,7 @@ export default class DataTable extends Component {
     this.state = {
       asc: true,
       sorted: props.data.data,
-      flattenedColumns: this.flattenColumns(props.data.columns),
+      flattenedColumns: this.flattenColumns(props.data.columns)
     };
   }
 
@@ -132,16 +132,16 @@ export default class DataTable extends Component {
     return (a, b) => {
       // force null and undefined to the bottom
       let A =
-        a[sortpivot] === null || a[sortpivot] === undefined ? '' : a[sortpivot];
+        a[sortpivot] === null || a[sortpivot] === undefined ? "" : a[sortpivot];
       let B =
-        b[sortpivot] === null || b[sortpivot] === undefined ? '' : b[sortpivot];
+        b[sortpivot] === null || b[sortpivot] === undefined ? "" : b[sortpivot];
       // force any string values to lowercase for sorting accuracy
       A =
-        typeof a[sortpivot] === 'string'
+        typeof a[sortpivot] === "string"
           ? a[sortpivot].toLowerCase()
           : a[sortpivot];
       B =
-        typeof b[sortpivot] === 'string'
+        typeof b[sortpivot] === "string"
           ? b[sortpivot].toLowerCase()
           : b[sortpivot];
       // Return either 1 or -1 to indicate a sort priority
@@ -185,14 +185,14 @@ export default class DataTable extends Component {
         headerValues.push({
           ...item,
           colSpan: item.columns.length,
-          underlined: true,
+          underlined: true
         });
         columnValues.push(...item.columns);
       } else {
         headerValues.push({
-          colSpan: '1',
+          colSpan: "1",
           key: item.key,
-          underlined: false,
+          underlined: false
         });
         columnValues.push({ ...item });
       }
@@ -205,13 +205,13 @@ export default class DataTable extends Component {
     );
   };
 
-  sortTable = (sortKey = '') => {
+  sortTable = (sortKey = "") => {
     const { sorted: prevSorted, asc } = this.state;
     const sorted = Object.values(prevSorted).sort(this.compare(sortKey, asc));
     this.setState(prevState => {
       return {
         sorted,
-        asc: !prevState.asc,
+        asc: !prevState.asc
       };
     });
   };
@@ -243,13 +243,13 @@ DataTable.propTypes = {
     columns: PropTypes.arrayOf(
       PropTypes.shape({
         header: PropTypes.string,
-        key: PropTypes.string,
+        key: PropTypes.string
       })
     ).isRequired,
-    data: PropTypes.objectOf(PropTypes.object).isRequired,
+    data: PropTypes.objectOf(PropTypes.object).isRequired
   }).isRequired,
   HeaderComponent: PropTypes.element,
   ColumnComponent: PropTypes.element,
   RowComponent: PropTypes.element,
-  tableClass: PropTypes.string,
+  tableClass: PropTypes.string
 };

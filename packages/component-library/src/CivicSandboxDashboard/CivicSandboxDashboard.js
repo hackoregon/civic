@@ -1,12 +1,12 @@
 /* TODO: Fix linting errors */
 /* eslint-disable */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { css } from 'emotion';
-import PieChart from '../PieChart/PieChart';
-import HorizontalBarChart from '../HorizontalBarChart/HorizontalBarChart';
-import civicFormat from '../utils/civicFormat';
+import React from "react";
+import PropTypes from "prop-types";
+import { css } from "emotion";
+import PieChart from "../PieChart/PieChart";
+import HorizontalBarChart from "../HorizontalBarChart/HorizontalBarChart";
+import civicFormat from "../utils/civicFormat";
 
 const dashboard = css`
   background: rgba(255, 255, 255, 1);
@@ -85,7 +85,7 @@ class CivicDashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      show: 'viz',
+      show: "viz"
     };
 
     this.showInfo = this.showInfo.bind(this);
@@ -94,13 +94,13 @@ class CivicDashboard extends React.Component {
 
   showInfo() {
     this.setState({
-      show: 'info',
+      show: "info"
     });
   }
 
   showViz() {
     this.setState({
-      show: 'viz',
+      show: "viz"
     });
   }
 
@@ -108,29 +108,29 @@ class CivicDashboard extends React.Component {
     const { data, children } = this.props;
 
     const visualizations = data.map((object, index) => {
-      return object.visualizationType === 'Text' ? (
+      return object.visualizationType === "Text" ? (
         <div className={viz} key={index}>
           <h2>{object.title}</h2>
           <p>{object.data.toLocaleString()}</p>
         </div>
-      ) : object.visualizationType === 'PercentDonut' ? (
+      ) : object.visualizationType === "PercentDonut" ? (
         <div className={donutChart} key={index}>
           <h2>{object.title}</h2>
-          <h2 style={{ textAlign: 'center', margin: 'auto', width: '50%' }}>
+          <h2 style={{ textAlign: "center", margin: "auto", width: "50%" }}>
             {object.data[0].y < 1
               ? civicFormat.percentage(object.data[0].y)
               : `${object.data[0].y.toFixed(1)}%`}
           </h2>
           <PieChart
             data={object.data}
-            colors={['#19b7aa', '#a9a9a9']}
+            colors={["#19b7aa", "#a9a9a9"]}
             width={475}
             height={375}
             innerRadius={90}
             halfDoughnut
           />
         </div>
-      ) : object.visualizationType === 'ComparisonBar' ? (
+      ) : object.visualizationType === "ComparisonBar" ? (
         <div className={viz} key={index}>
           <h2>{object.title}</h2>
           <HorizontalBarChart
@@ -146,17 +146,17 @@ class CivicDashboard extends React.Component {
             yLabel=""
           />
         </div>
-      ) : object.visualizationType === 'Legend' ? (
+      ) : object.visualizationType === "Legend" ? (
         <div className={viz} key={index}>
           <h2>{object.title}</h2>
-          <div style={{ display: 'flex', flexDirection: 'row' }}>
+          <div style={{ display: "flex", flexDirection: "row" }}>
             {object.colors.map((d, i, arr) => {
               return (
                 <div
                   style={{
                     background: d,
-                    height: '40px',
-                    width: `${100 / arr.length}%`,
+                    height: "40px",
+                    width: `${100 / arr.length}%`
                   }}
                   key={`legend${i}`}
                 />
@@ -164,7 +164,7 @@ class CivicDashboard extends React.Component {
             })}
           </div>
           <div>
-            <h4 style={{ float: 'left' }}>
+            <h4 style={{ float: "left" }}>
               {object.min === 0
                 ? 0
                 : object.min > 0 && object.min < 1
@@ -173,7 +173,7 @@ class CivicDashboard extends React.Component {
                 ? civicFormat.numeric(object.min)
                 : object.min}
             </h4>
-            <h4 style={{ float: 'right' }}>
+            <h4 style={{ float: "right" }}>
               {object.max < 1 && object.max > 0
                 ? civicFormat.percentage(object.max)
                 : object.max > 1
@@ -188,13 +188,13 @@ class CivicDashboard extends React.Component {
     const buttons = (
       <div className={buttonContainer}>
         <div
-          className={this.state.show === 'info' ? iconActive : icon}
+          className={this.state.show === "info" ? iconActive : icon}
           onClick={this.showInfo}
         >
           <div className="fa fa-info-circle" />
         </div>
         <div
-          className={this.state.show === 'viz' ? iconActive : icon}
+          className={this.state.show === "viz" ? iconActive : icon}
           onClick={this.showViz}
         >
           <div className="fa fa-eye" />
@@ -205,7 +205,7 @@ class CivicDashboard extends React.Component {
     return (
       <div className={dashboard}>
         <div className={contentContainer}>
-          {this.state.show === 'info' ? children : visualizations}
+          {this.state.show === "info" ? children : visualizations}
         </div>
         <div className={watermarkContainer}>
           <svg width="134" height="135" xmlns="http://www.w3.org/2000/svg">
@@ -226,7 +226,7 @@ class CivicDashboard extends React.Component {
 
 CivicDashboard.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object),
-  children: PropTypes.node,
+  children: PropTypes.node
 };
 
 export default CivicDashboard;

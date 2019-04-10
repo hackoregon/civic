@@ -1,35 +1,35 @@
 /* Not currently used, updated and moved to 2018 package */
 /* eslint-disable */
 
-import React from 'react';
-import { cx, css } from 'emotion';
+import React from "react";
+import { cx, css } from "emotion";
 
-import { Header, Footer } from '@hackoregon/component-library';
-import CanvasParticles from './CanvasParticles';
-import DataList from './DataList';
-import SearchBar from './SearchBar';
+import { Header, Footer } from "@hackoregon/component-library";
+import CanvasParticles from "./CanvasParticles";
+import DataList from "./DataList";
+import SearchBar from "./SearchBar";
 
-import logo from '../../assets/civic-logo-animated.svg';
-import smallLogo from '../../assets/civic-logo-c.svg';
-import brain from '../../assets/brain.svg';
-import brainMobile from '../../assets/brain-mobile.svg';
-import trees from '../../assets/trees.png';
-import hackOregonLogo from '../../assets/hack-oregon-logo.png';
-import heartMail from '../../assets/heartmail.png';
-import twitterLogo from '../../assets/twitter-logo.png';
+import logo from "../../assets/civic-logo-animated.svg";
+import smallLogo from "../../assets/civic-logo-c.svg";
+import brain from "../../assets/brain.svg";
+import brainMobile from "../../assets/brain-mobile.svg";
+import trees from "../../assets/trees.png";
+import hackOregonLogo from "../../assets/hack-oregon-logo.png";
+import heartMail from "../../assets/heartmail.png";
+import twitterLogo from "../../assets/twitter-logo.png";
 
-import cities from './cities';
-import zipCodes from './zipCodes.json';
+import cities from "./cities";
+import zipCodes from "./zipCodes.json";
 
 const searchTitle = css`
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   text-align: left;
   font-size: 18px;
   color: white;
   margin: 0 auto;
 `;
 const searchSubTitle = css`
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   font-weight: 400;
   font-size: 16px;
   font-style: italic;
@@ -43,7 +43,7 @@ const logoWrapper = css`
   width: 160px;
 `;
 const missionStatementTitle = css`
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   text-align: left;
   font-size: 50px;
   line-height: 1.2;
@@ -54,7 +54,7 @@ const missionStatementTitle = css`
 const missionStatement = css`
   font-size: 20px;
   line-height: 1.8;
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   width: 100%;
   margin: 25px 0;
   max-width: 1000px;
@@ -86,7 +86,7 @@ const lookupWrapper = css`
   box-shadow: 14px 30px 60px 9px #0f18287a;
 
   ::before {
-    content: '';
+    content: "";
     width: 100%;
     border-bottom: solid 8px #ef495c;
     position: absolute;
@@ -112,7 +112,7 @@ const lookupWrapper = css`
 `;
 const collectionsLink = css`
   display: block;
-  font-family: 'Rubik';
+  font-family: "Rubik";
   font-size: 16px;
   position: absolute;
   top: 70px;
@@ -153,7 +153,7 @@ const topBar = css`
 `;
 const ctaStyle = css`
   color: #ed485b;
-  font-family: 'Rubik';
+  font-family: "Rubik";
   font-size: 18px;
   font-style: italic;
 
@@ -197,7 +197,7 @@ const sectionRightContainer = css`
 `;
 const sectionHeaderTitle = css`
   color: white;
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   font-size: 50px;
   letter-spacing: -1px;
   text-align: left;
@@ -208,7 +208,7 @@ const sectionHeaderTitle = css`
   box-sizing: border-box;
 `;
 const sectionHeaderSubtitle = css`
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   font-size: 20px;
   color: white;
   display: inline-block;
@@ -258,20 +258,20 @@ const contentRightContainer = css`
 `;
 const listTitle = css`
   display: block;
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   font-size: 35px;
   margin: 40px 0;
   text-align: center;
 `;
 const listSubTitle = css`
   display: block;
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   font-size: 24px;
   margin: 12px 0;
 `;
 const listText = css`
   display: block;
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   font-size: 16px;
   color: black;
   line-height: 1.5;
@@ -366,7 +366,7 @@ const hackOregonLogoWrapper = css`
 const buttonStyle = css`
   border: 2px solid #ef495c;
   padding: 10px 20px;
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   font-size: 16px;
   color: #ef495c;
   background-color: transparent;
@@ -397,7 +397,7 @@ const iconAndTextWrapper = css`
   }
 
   span {
-    font-family: 'Rubik', sans-serif;
+    font-family: "Rubik", sans-serif;
     font-size: 16px;
     display: block;
     margin-top: 20px;
@@ -409,29 +409,29 @@ const donateButton = css`
 
 class LandingPage extends React.Component {
   state = {
-    city: 'Portland',
-    state: 'OR',
-    imgPath: 'portland',
+    city: "Portland",
+    state: "OR",
+    imgPath: "portland"
   };
 
   componentDidMount() {
     // Used to fade in the page
     this.node.style.opacity = 0;
     window.requestAnimationFrame(() => {
-      this.node.style.transition = 'opacity 2500ms';
+      this.node.style.transition = "opacity 2500ms";
       this.node.style.opacity = 1;
     });
   }
 
   handleSearch = input => {
-    const key = input ? input.toLowerCase() : '';
+    const key = input ? input.toLowerCase() : "";
     const cityResult = cities[key];
 
     if (cityResult) {
       return this.setState({
         city: cityResult.name,
         state: cityResult.state,
-        imgPath: cityResult.path,
+        imgPath: cityResult.path
       });
     }
 
@@ -444,7 +444,7 @@ class LandingPage extends React.Component {
       return this.setState({
         city: cityData ? cityData.name : zipResult.city,
         state: zipResult.state,
-        imgPath: cityData ? cityData.path : 'portland',
+        imgPath: cityData ? cityData.path : "portland"
       });
     }
 
@@ -454,7 +454,7 @@ class LandingPage extends React.Component {
   render() {
     const { city, state, imgPath } = this.state;
     const cityPath = require(`../../assets/cities/${imgPath ||
-      'portland'}.png`);
+      "portland"}.png`);
 
     return (
       <div

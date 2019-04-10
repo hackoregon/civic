@@ -1,41 +1,41 @@
 /* Deprecated component, 2017 only */
 /* eslint-disable */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { sankey } from 'd3-sankey';
-import { format } from 'd3-format';
-import { clone, max } from 'ramda';
-import { css } from 'emotion';
+import React from "react";
+import PropTypes from "prop-types";
+import { sankey } from "d3-sankey";
+import { format } from "d3-format";
+import { clone, max } from "ramda";
+import { css } from "emotion";
 
-const formatNumber = format(',.0f');
+const formatNumber = format(",.0f");
 const formatNum = num => formatNumber(num);
 
 const colors = [
-  '#a6cee3',
-  '#1f78b4',
-  '#b2df8a',
-  '#33a02c',
-  '#fb9a99',
-  '#e31a1c',
-  '#fdbf6f',
-  '#ff7f00',
-  '#cab2d6',
-  '#6a3d9a',
-  '#ffff99',
-  '#b15928',
-  '#8dd3c7',
-  '#fb8072',
-  '#80b1d3',
-  '#bebada',
-  '#ffed6f',
-  '#fdb462',
-  '#b3de69',
-  '#fccde5',
-  '#d9d9d9',
-  '#bc80bd',
-  '#ccebc5',
-  '#ffffb3',
+  "#a6cee3",
+  "#1f78b4",
+  "#b2df8a",
+  "#33a02c",
+  "#fb9a99",
+  "#e31a1c",
+  "#fdbf6f",
+  "#ff7f00",
+  "#cab2d6",
+  "#6a3d9a",
+  "#ffff99",
+  "#b15928",
+  "#8dd3c7",
+  "#fb8072",
+  "#80b1d3",
+  "#bebada",
+  "#ffed6f",
+  "#fdb462",
+  "#b3de69",
+  "#fccde5",
+  "#d9d9d9",
+  "#bc80bd",
+  "#ccebc5",
+  "#ffffb3"
 ];
 
 const defaultMargin = { top: 20, right: 0, bottom: 20, left: 0 };
@@ -75,7 +75,7 @@ const Sankey = ({
   width = 650,
   height = 450,
   nodes,
-  links,
+  links
 }) => {
   const w = width - margin.left - margin.right;
   const h = height - margin.top - margin.bottom;
@@ -89,7 +89,7 @@ const Sankey = ({
 
   const chart = {
     nodes: clone(nodes),
-    links: clone(links),
+    links: clone(links)
   };
 
   sankeyChart
@@ -155,29 +155,29 @@ const Sankey = ({
   );
 };
 
-Sankey.displayName = 'Sankey';
+Sankey.displayName = "Sankey";
 Sankey.propTypes = {
   margin: PropTypes.shape({
     top: PropTypes.number,
     right: PropTypes.number,
     bottom: PropTypes.number,
-    left: PropTypes.number,
+    left: PropTypes.number
   }),
   width: PropTypes.number,
   height: PropTypes.number,
   nodes: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string,
-      node: PropTypes.number,
+      node: PropTypes.number
     })
   ),
   links: PropTypes.arrayOf(
     PropTypes.shape({
       source: PropTypes.number,
       target: PropTypes.number,
-      value: PropTypes.number,
+      value: PropTypes.number
     })
-  ),
+  )
 };
 
 export default Sankey;

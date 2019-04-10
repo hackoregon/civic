@@ -1,17 +1,17 @@
 /* TODO: Fix linting errors */
 /* eslint-disable */
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 import DeckGL, {
   IconLayer,
   PathLayer,
   PolygonLayer,
   ScatterplotLayer,
-  ScreenGridLayer,
-} from 'deck.gl';
-import { css } from 'emotion';
-import * as d3 from 'd3';
+  ScreenGridLayer
+} from "deck.gl";
+import { css } from "emotion";
+import * as d3 from "d3";
 
 const crosshair = css`
   cursor: crosshair;
@@ -117,7 +117,8 @@ const CivicSandboxMap = props => {
   );
 
   const createEqualBins = (data, color, getPropValue) => {
-    const scaleQuantize = d3.scaleQuantize()
+    const scaleQuantize = d3
+      .scaleQuantize()
       .domain(d3.extent(data, getPropValue))
       .range(color)
       .nice();
@@ -125,7 +126,8 @@ const CivicSandboxMap = props => {
   };
 
   const createDiscreteBins = (categories, color) => {
-    const ordinalScale = d3.scaleOrdinal()
+    const ordinalScale = d3
+      .scaleOrdinal()
       .domain(categories)
       .range(color)
       .unknown([0, 0, 0, 0]);
@@ -133,23 +135,30 @@ const CivicSandboxMap = props => {
   };
 
   const createThresholdBins = (categories, color) => {
-    const scaleThreshold = d3.scaleThreshold()
+    const scaleThreshold = d3
+      .scaleThreshold()
       .domain(categories)
       .range(color);
     return scaleThreshold;
   };
 
   const createChoroplethMap = (slide, index) => {
-    const scale = slide.data.scaleType === 'ordinal'
-      ? createDiscreteBins(slide.data.categories, slide.data.color)
-      : slide.data.scaleType === 'threshold'
-      ? createThresholdBins(slide.data.categories, slide.data.color)
-      : createEqualBins(slide.data.data, slide.data.color, slide.data.getPropValue);
+    const scale =
+      slide.data.scaleType === "ordinal"
+        ? createDiscreteBins(slide.data.categories, slide.data.color)
+        : slide.data.scaleType === "threshold"
+        ? createThresholdBins(slide.data.categories, slide.data.color)
+        : createEqualBins(
+            slide.data.data,
+            slide.data.color,
+            slide.data.getPropValue
+          );
 
     const getFillColor = f => {
-      const value = slide.data.scaleType === 'ordinal'
-        ? f.properties[slide.data.propName]
-        : parseFloat(f.properties[slide.data.propName]);
+      const value =
+        slide.data.scaleType === "ordinal"
+          ? f.properties[slide.data.propName]
+          : parseFloat(f.properties[slide.data.propName]);
       return scale(value) ? scale(value) : [0, 0, 0, 0];
     };
 
@@ -171,25 +180,28 @@ const CivicSandboxMap = props => {
         autoHighlight={slide.data.autoHighlight}
         highlightColor={slide.data.highlightColor}
         parameters={{ depthTest: false }}
-        updateTriggers={slide.data.updateTriggers || { instancePickingColors: getFillColor }}
+        updateTriggers={
+          slide.data.updateTriggers || { instancePickingColors: getFillColor }
+        }
       />
     );
   };
 
   const renderMaps = mapLayers.map((layer, index) => {
-    return layer.data.mapType === 'PathMap'
-    ? createPathMap(layer, index)
-    : layer.data.mapType === 'ScatterPlotMap'
-    ? createScatterPlotMap(layer, index)
-    : layer.data.mapType === 'IconMap'
-    ? createIconMap(layer, index)
-    : layer.data.mapType === 'ScreenGridMap'
-    ? createScreenGridMap(layer, index)
-    : layer.data.mapType === 'PolygonPlotMap' || layer.data.mapType === 'SmallPolygonMap'
-    ? createPolygonMap(layer, index)
-    : layer.data.mapType === 'ChoroplethMap'
-    ? createChoroplethMap(layer, index)
-    : null;
+    return layer.data.mapType === "PathMap"
+      ? createPathMap(layer, index)
+      : layer.data.mapType === "ScatterPlotMap"
+      ? createScatterPlotMap(layer, index)
+      : layer.data.mapType === "IconMap"
+      ? createIconMap(layer, index)
+      : layer.data.mapType === "ScreenGridMap"
+      ? createScreenGridMap(layer, index)
+      : layer.data.mapType === "PolygonPlotMap" ||
+        layer.data.mapType === "SmallPolygonMap"
+      ? createPolygonMap(layer, index)
+      : layer.data.mapType === "ChoroplethMap"
+      ? createChoroplethMap(layer, index)
+      : null;
   });
 
   return (
@@ -207,7 +219,7 @@ CivicSandboxMap.propTypes = {
   mapLayers: PropTypes.array.isRequired,
   onHoverSlide: PropTypes.func,
   onClick: PropTypes.func,
-  children: PropTypes.node,
+  children: PropTypes.node
 };
 
 export default CivicSandboxMap;

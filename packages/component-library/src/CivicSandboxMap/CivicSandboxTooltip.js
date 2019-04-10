@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 import {
   string,
   number,
   arrayOf,
   objectOf,
   oneOfType,
-  shape,
-} from 'prop-types';
-import { css } from 'emotion';
+  shape
+} from "prop-types";
+import { css } from "emotion";
 
 const tooltip = css`
   font-family: Helvetica, Arial, sans-serif;
@@ -44,7 +44,7 @@ const MapTooltip = props => {
       className={tooltip}
       style={{
         left: xPosition,
-        top: yPostition,
+        top: yPostition
       }}
     >
       {tooltipContent}
@@ -60,11 +60,11 @@ MapTooltip.propTypes = {
       content: arrayOf(
         shape({
           name: string,
-          value: oneOfType([number, string]),
+          value: oneOfType([number, string])
         })
-      ),
+      )
     })
-  ),
+  )
 };
 
 export default MapTooltip;

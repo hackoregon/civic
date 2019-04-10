@@ -1,16 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router';
-import { css } from 'emotion';
-import LogoStandard from '../Logo/LogoStandard';
-import ScrollToTop from '../ScrollToTop/ScrollToTop';
+import React from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router";
+import { css } from "emotion";
+import LogoStandard from "../Logo/LogoStandard";
+import ScrollToTop from "../ScrollToTop/ScrollToTop";
 
 const commonFont = `
   font-family: 'Rubik';
   font-weight: 500;
 `;
 
-const commonMargin = '12px 8px';
+const commonMargin = "12px 8px";
 
 const footerClass = css`
   width: 100%;
@@ -89,14 +89,14 @@ const Footer = ({ attribution }) => (
   </div>
 );
 
-Footer.displayName = 'Footer';
+Footer.displayName = "Footer";
 
 Footer.defaultProps = {
-  attribution: defaultAttribution,
+  attribution: defaultAttribution
 };
 
 Footer.propTypes = {
-  attribution: PropTypes.node,
+  attribution: PropTypes.node
 };
 
 export default Footer;

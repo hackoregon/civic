@@ -1,11 +1,11 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { css } from 'emotion';
-import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
+import PropTypes from "prop-types";
+import React from "react";
+import { css } from "emotion";
+import CivicVictoryTheme from "../VictoryTheme/VictoryThemeIndex";
 
 const SimpleLegend = ({ colorScale, legendData }) => {
   const legendStyle = css`
-    font-family: 'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif;
+    font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
     font-size: 14px;
     font-weight: bold;
     text-align: center;
@@ -48,12 +48,12 @@ const SimpleLegend = ({ colorScale, legendData }) => {
 
 SimpleLegend.propTypes = {
   colorScale: PropTypes.arrayOf(PropTypes.string),
-  legendData: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string })),
+  legendData: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
 };
 
 SimpleLegend.defaultProps = {
   colorScale: null,
-  legendData: null,
+  legendData: null
 };
 
 export default SimpleLegend;

@@ -1,7 +1,7 @@
-import React from 'react';
-import * as d3 from 'd3';
-import { css } from 'emotion';
-import civicFormat from '../utils/civicFormat';
+import React from "react";
+import * as d3 from "d3";
+import { css } from "emotion";
+import civicFormat from "../utils/civicFormat";
 
 const legendContainer = css(`
   border-top: 2px solid gainsboro;
@@ -36,44 +36,50 @@ const tickNumsThreshold = css(`
   font-size: 15px;
 `);
 
-const SandboxMapLegend = (props) => {
-  const {
-    data,
-    mapProps
-  } = props;
+const SandboxMapLegend = props => {
+  const { data, mapProps } = props;
 
   const createEqualBins = (data, color, getPropValue) => {
-    const scale = d3.scaleQuantize()
+    const scale = d3
+      .scaleQuantize()
       .domain(d3.extent(data.slide_data.features, getPropValue))
       .range(color)
       .nice();
     return scale;
   };
 
-  const colorScale = mapProps.scaleType === 'ordinal' || mapProps.scaleType === 'threshold'
-    ? mapProps.categories
-    : createEqualBins(data, mapProps.color, mapProps.getPropValue);
+  const colorScale =
+    mapProps.scaleType === "ordinal" || mapProps.scaleType === "threshold"
+      ? mapProps.categories
+      : createEqualBins(data, mapProps.color, mapProps.getPropValue);
 
-  const formatColor = arr => arr.reduce((acc,cur,i) => i < 3 ? acc + cur +',' : acc +'1)', 'rgba(');
+  const formatColor = arr =>
+    arr.reduce(
+      (acc, cur, i) => (i < 3 ? acc + cur + "," : acc + "1)"),
+      "rgba("
+    );
 
-  const mapColorsArr = mapProps.scaleType === 'ordinal' || mapProps.scaleType === 'threshold'
-    ? mapProps.color.map(arr => formatColor(arr))
-    : colorScale.range().map(arr => formatColor(arr));
+  const mapColorsArr =
+    mapProps.scaleType === "ordinal" || mapProps.scaleType === "threshold"
+      ? mapProps.color.map(arr => formatColor(arr))
+      : colorScale.range().map(arr => formatColor(arr));
 
-  const bins = mapProps.scaleType === 'ordinal' || mapProps.scaleType === 'threshold'
-    ? colorScale
-    : colorScale.range().map(d => colorScale.invertExtent(d));
+  const bins =
+    mapProps.scaleType === "ordinal" || mapProps.scaleType === "threshold"
+      ? colorScale
+      : colorScale.range().map(d => colorScale.invertExtent(d));
 
-  const ticks = mapProps.scaleType === 'ordinal' || mapProps.scaleType === 'threshold'
-    ? bins
-    : bins.reduce((a, c, i, arr) => c[1] ? [...a, c[1]] : [...a, ''], []);
+  const ticks =
+    mapProps.scaleType === "ordinal" || mapProps.scaleType === "threshold"
+      ? bins
+      : bins.reduce((a, c, i, arr) => (c[1] ? [...a, c[1]] : [...a, ""]), []);
 
-  const thousandsFormat = d3.format('.3s');
-  const percentFormat = d3.format('.1%');
+  const thousandsFormat = d3.format(".3s");
+  const percentFormat = d3.format(".1%");
 
   const ticksFormatted = ticks.map(d => {
-    return d === ''
-      ? ''
+    return d === ""
+      ? ""
       : d >= 1000000 || d <= -1000000
       ? civicFormat.numeric(d)
       : d >= 1000 || d <= -1000
@@ -81,19 +87,20 @@ const SandboxMapLegend = (props) => {
       : d > 1 || d < -1
       ? civicFormat.numeric(d)
       : d === 0
-      ? '0  '
+      ? "0  "
       : d <= 1 && d >= -1
       ? percentFormat(d)
-      : d && typeof d === 'string'
+      : d && typeof d === "string"
       ? d
       : civicFormat.numeric(d);
   });
 
-  const tickStyle = mapProps.scaleType === 'threshold' ? tickNumsThreshold : tickNums;
+  const tickStyle =
+    mapProps.scaleType === "threshold" ? tickNumsThreshold : tickNums;
   const legend = mapColorsArr.map((d, i) => {
     return (
       <div
-        key={'legend-pt-' + i}
+        key={"legend-pt-" + i}
         className={colorBox}
         style={{ backgroundColor: d }}
       >
@@ -104,11 +111,7 @@ const SandboxMapLegend = (props) => {
     );
   });
 
-  return (
-    <div className={legendContainer}>
-      { legend }
-    </div>
-  );
+  return <div className={legendContainer}>{legend}</div>;
 };
 
 export default SandboxMapLegend;

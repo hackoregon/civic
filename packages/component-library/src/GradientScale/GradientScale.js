@@ -1,19 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import { VictoryGroup, VictoryScatter } from 'victory';
+import { VictoryGroup, VictoryScatter } from "victory";
 
-import GradientLine from './GradientLine';
-import GradientBox from './GradientBox';
+import GradientLine from "./GradientLine";
+import GradientBox from "./GradientBox";
 
 const GradientScale = ({ width, height, domain, primary, secondary = [] }) => {
   const data = [
-    ...secondary.map(num => ({ x: num, y: 0, type: 'secondary' })),
-    { x: primary, y: 0, type: 'primary' },
+    ...secondary.map(num => ({ x: num, y: 0, type: "secondary" })),
+    { x: primary, y: 0, type: "primary" }
   ];
   return (
     <div>
-      <svg style={{ position: 'absolute' }} height="0" width="0">
+      <svg style={{ position: "absolute" }} height="0" width="0">
         <defs>
           <linearGradient id="myGradient">
             <stop offset="0%" stopColor="#FFFFFF" />
@@ -39,12 +39,12 @@ GradientScale.propTypes = {
   height: PropTypes.number,
   domain: PropTypes.arrayOf(PropTypes.number).isRequired,
   primary: PropTypes.number.isRequired,
-  secondary: PropTypes.arrayOf(PropTypes.number),
+  secondary: PropTypes.arrayOf(PropTypes.number)
 };
 
 GradientScale.defaultProps = {
   width: 500,
-  height: 100,
+  height: 100
 };
 
 export default GradientScale;

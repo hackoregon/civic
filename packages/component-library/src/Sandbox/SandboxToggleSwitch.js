@@ -1,5 +1,5 @@
-import React from 'react';
-import { css } from 'emotion';
+import React from "react";
+import { css } from "emotion";
 
 const toggleStyle = css`
   display: flex;
@@ -18,20 +18,20 @@ const toggleStyle = css`
     right: 0;
     bottom: 0;
     background-color: #ccc;
-    -webkit-transition: .4s;
-    transition: .4s;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
     border-radius: 35px;
   }
   .slider:before {
     position: absolute;
-    content: '';
+    content: "";
     height: 25px;
     width: 25px;
     left: 4px;
     bottom: 0px;
     background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
     border-radius: 50%;
   }
   input:checked + .slider {
@@ -44,38 +44,37 @@ const toggleStyle = css`
   }
 `;
 
-const SandboxToggleSwitch = (props) => {
-  const {
-    name,
-    checked,
-    onChange,
-    label,
-    mapType
-  } = props;
+const SandboxToggleSwitch = props => {
+  const { name, checked, onChange, label, mapType } = props;
 
-  const decodeMapType = mapType === 'PolygonPlotMap' ? 'Polygons'
-    : mapType === 'SmallPolygonMap' ? 'Polygons'
-    : mapType === 'ScatterPlotMap' ? 'Points'
-    : mapType === 'PathMap' ? 'Lines'
-    : mapType === 'IconMap' ? 'Icons'
-    : mapType === 'ScreenGridMap' ? 'Squares'
-    : '';
+  const decodeMapType =
+    mapType === "PolygonPlotMap"
+      ? "Polygons"
+      : mapType === "SmallPolygonMap"
+      ? "Polygons"
+      : mapType === "ScatterPlotMap"
+      ? "Points"
+      : mapType === "PathMap"
+      ? "Lines"
+      : mapType === "IconMap"
+      ? "Icons"
+      : mapType === "ScreenGridMap"
+      ? "Squares"
+      : "";
 
   return (
     <div className={toggleStyle}>
-      <label className='switch'>
+      <label className="switch">
         <input
-          type='checkbox'
+          type="checkbox"
           name={name}
           value={checked}
           checked={checked}
           onChange={onChange}
         />
-        <div className='slider'></div>
+        <div className="slider" />
       </label>
-      <div style={{'paddingLeft': '2.5%'}}>
-        {`${label} - ${decodeMapType}`}
-      </div>
+      <div style={{ paddingLeft: "2.5%" }}>{`${label} - ${decodeMapType}`}</div>
     </div>
   );
 };

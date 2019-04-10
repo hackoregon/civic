@@ -1,12 +1,12 @@
 /* Deprecated component, 2017 only */
 /* eslint-disable */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router';
-import { css } from 'emotion';
+import React from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router";
+import { css } from "emotion";
 
-const primaryColor = 'rgb(238, 73, 80)';
+const primaryColor = "rgb(238, 73, 80)";
 const storyLinkClass = css`
   border-bottom: 2px solid ${primaryColor};
 
@@ -54,12 +54,12 @@ const StoryLink = ({ children, icon, route, action }) => (
   </div>
 );
 
-StoryLink.displayName = 'StoryLink';
+StoryLink.displayName = "StoryLink";
 StoryLink.propTypes = {
   action: PropTypes.func,
   children: PropTypes.node,
   icon: PropTypes.string,
-  route: PropTypes.string,
+  route: PropTypes.string
 };
 
 export default StoryLink;

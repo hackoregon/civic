@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { css } from 'emotion';
+import PropTypes from "prop-types";
+import React from "react";
+import { css } from "emotion";
 
 const pdfClass = css`
   width: 100%;
@@ -13,10 +13,10 @@ const PDF = ({ url }) => (
   </object>
 );
 
-PDF.displayName = 'PDF';
+PDF.displayName = "PDF";
 
 PDF.propTypes = {
-  url: PropTypes.string,
+  url: PropTypes.string
 };
 
 export default PDF;

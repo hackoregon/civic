@@ -1,9 +1,9 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import Collapsable from './Collapsable';
+import React from "react";
+import { shallow } from "enzyme";
+import Collapsable from "./Collapsable";
 
-describe('Collapsable', () => {
-  it('should render all children by default', () => {
+describe("Collapsable", () => {
+  it("should render all children by default", () => {
     const wrapper = shallow(
       <Collapsable>
         <h1>test1</h1>
@@ -11,10 +11,10 @@ describe('Collapsable', () => {
       </Collapsable>
     );
 
-    expect(wrapper.find('h1').length).to.eql(2);
+    expect(wrapper.find("h1").length).to.eql(2);
   });
 
-  it('should collapse hidden children by default', () => {
+  it("should collapse hidden children by default", () => {
     const wrapper = shallow(
       <Collapsable>
         <h1>test1</h1>
@@ -22,10 +22,10 @@ describe('Collapsable', () => {
       </Collapsable>
     );
 
-    expect(wrapper.find('h1').length).to.eql(1);
+    expect(wrapper.find("h1").length).to.eql(1);
   });
 
-  it('should expand and collapse', () => {
+  it("should expand and collapse", () => {
     const wrapper = shallow(
       <Collapsable>
         <h1>test1</h1>
@@ -33,12 +33,12 @@ describe('Collapsable', () => {
       </Collapsable>
     );
 
-    expect(wrapper.find('a').text()).to.eql('More');
-    expect(wrapper.find('h1').length).to.eql(1);
-    wrapper.find('a').simulate('click');
-    expect(wrapper.find('a').text()).to.eql('Less');
-    expect(wrapper.find('h1').length).to.eql(2);
-    wrapper.find('a').simulate('click');
-    expect(wrapper.find('h1').length).to.eql(1);
+    expect(wrapper.find("a").text()).to.eql("More");
+    expect(wrapper.find("h1").length).to.eql(1);
+    wrapper.find("a").simulate("click");
+    expect(wrapper.find("a").text()).to.eql("Less");
+    expect(wrapper.find("h1").length).to.eql(2);
+    wrapper.find("a").simulate("click");
+    expect(wrapper.find("h1").length).to.eql(1);
   });
 });

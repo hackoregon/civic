@@ -1,15 +1,15 @@
-import React from 'react';
+import React from "react";
 
 /* eslint-disable import/no-extraneous-dependencies */
-import { storiesOf } from '@storybook/react';
+import { storiesOf } from "@storybook/react";
 
-import { withKnobs, text } from '@storybook/addon-knobs';
-import { checkA11y } from '@storybook/addon-a11y';
-import StoryFooter from '../src/StoryCard/StoryFooter';
+import { withKnobs, text } from "@storybook/addon-knobs";
+import { checkA11y } from "@storybook/addon-a11y";
+import StoryFooter from "../src/StoryCard/StoryFooter";
 // import { ICONS } from '../src/styleConstants';
 
-const collectionId = 'collection-id';
-const cardId = 'cardId';
+const collectionId = "collection-id";
+const cardId = "cardId";
 
 // const propTableOptions = { inline: true, propTables: [StoryFooter] };
 // const wrapperStyle = { width: '30%', padding: '10%', margin: '0 auto' };
@@ -18,12 +18,12 @@ const cardId = 'cardId';
 // copy via the link then try pasting from your clipboard.
 // `
 export default () =>
-  storiesOf('StoryFooter', module)
+  storiesOf("StoryFooter", module)
     .addDecorator(checkA11y)
     .addDecorator(withKnobs)
-    .add('default usage', () => (
+    .add("default usage", () => (
       <StoryFooter
-        cardId={text('Card Id', cardId)}
-        collectionId={text('collectionId', collectionId)}
+        cardId={text("Card Id", cardId)}
+        collectionId={text("collectionId", collectionId)}
       />
     ));

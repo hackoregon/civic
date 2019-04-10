@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Select from 'react-select';
-import { css } from 'emotion';
+import React from "react";
+import PropTypes from "prop-types";
+import Select from "react-select";
+import { css } from "emotion";
 
-import '../../assets/vendor/react-select.min.css';
+import "../../assets/vendor/react-select.min.css";
 
 const dropdownClass = css`
   background-color: #fff;
@@ -38,7 +38,7 @@ const Dropdown = ({
   />
 );
 
-Dropdown.displayName = 'Dropdown';
+Dropdown.displayName = "Dropdown";
 
 Dropdown.propTypes = {
   onChange: PropTypes.func.isRequired,
@@ -49,13 +49,13 @@ Dropdown.propTypes = {
   disabled: PropTypes.bool,
   simpleValue: PropTypes.bool,
   multi: PropTypes.bool,
-  placeholder: PropTypes.string,
+  placeholder: PropTypes.string
 };
 
 Dropdown.defaultProps = {
   clearable: false,
   searchable: true,
-  disabled: false,
+  disabled: false
 };
 
 export default Dropdown;

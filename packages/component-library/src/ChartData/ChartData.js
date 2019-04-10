@@ -1,8 +1,8 @@
 /* Deprecated component, 2017 only */
 /* eslint-disable */
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 class ChartData extends Component {
   static childContextTypes = {
@@ -10,11 +10,11 @@ class ChartData extends Component {
     yScale: PropTypes.func,
     data: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.number),
-      PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
-    ]),
+      PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number))
+    ])
   };
 
-  static displayName = 'ChartData';
+  static displayName = "ChartData";
 
   static propTypes = {
     children: PropTypes.node,
@@ -22,8 +22,8 @@ class ChartData extends Component {
     yScale: PropTypes.func,
     data: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.number),
-      PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
-    ]).isRequired,
+      PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number))
+    ]).isRequired
   };
 
   getChildContext() {

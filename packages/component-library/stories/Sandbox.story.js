@@ -1,13 +1,13 @@
 /* eslint-disable no-console */
-import React from 'react';
-import { css } from 'emotion';
+import React from "react";
+import { css } from "emotion";
 /* eslint-disable import/no-extraneous-dependencies */
-import { storiesOf } from '@storybook/react';
-import 'react-select/dist/react-select.css';
-import { isArray, findIndex } from 'lodash';
-import { Sandbox } from '../src';
+import { storiesOf } from "@storybook/react";
+import "react-select/dist/react-select.css";
+import { isArray, findIndex } from "lodash";
+import { Sandbox } from "../src";
 
-import { foundations, slides } from '../src/Sandbox/constants';
+import { foundations, slides } from "../src/Sandbox/constants";
 /* global fetch */
 
 class SandboxStory extends React.Component {
@@ -17,11 +17,11 @@ class SandboxStory extends React.Component {
       data: {
         packages: {},
         foundations: {},
-        slides: {},
+        slides: {}
       },
       hasFetched: false,
-      selectedPackage: 'Sweeps',
-      selectedFoundation: '',
+      selectedPackage: "Sweeps",
+      selectedFoundation: "",
       selectedSlide: [],
       defaultFoundation: {},
       defaultSlides: [],
@@ -44,7 +44,7 @@ class SandboxStory extends React.Component {
   }
 
   componentDidMount() {
-    fetch('https://sandbox.civicpdx.org/civic-sandbox')
+    fetch("https://sandbox.civicpdx.org/civic-sandbox")
       .then(res => res)
       .then(res => res.json())
       .then(data => this.setState({ data: data.body, hasFetched: true }));
@@ -69,7 +69,7 @@ class SandboxStory extends React.Component {
     const selectedPackageData = state.data.packages[this.state.selectedPackage];
     const selectedFoundation = selectedPackageData
       ? selectedPackageData.default_foundation
-      : '';
+      : "";
     const selectedSlide = selectedPackageData
       ? selectedPackageData.default_slide
       : [];
@@ -81,16 +81,21 @@ class SandboxStory extends React.Component {
       color: foundationMapObj.color,
       getPropValue: foundationMapObj.getPropValue,
       propName: foundationMapObj.propName,
-      scaleType: foundationMapObj.scaleType,
+      scaleType: foundationMapObj.scaleType
     };
-    if(foundationMapObj.scaleType === 'ordinal' || foundationMapObj.scaleType === 'threshold') {
+    if (
+      foundationMapObj.scaleType === "ordinal" ||
+      foundationMapObj.scaleType === "threshold"
+    ) {
       foundationMapProps.categories = foundationMapObj.categories;
     }
-    const allSlides = state.data.packages[this.state.selectedPackage].slides.map(slide => {
+    const allSlides = state.data.packages[
+      this.state.selectedPackage
+    ].slides.map(slide => {
       const mapObj = slides(dataObj)[state.data.slides[slide].name];
       const color = mapObj.boundary.getLineColor
         ? mapObj.boundary.getLineColor()
-        : [238,238,238,255]; //gray
+        : [238, 238, 238, 255]; //gray
       const mapType = mapObj.map.mapType;
       return {
         slideNumber: slide,
@@ -125,20 +130,27 @@ class SandboxStory extends React.Component {
       color: foundationMapObj.color,
       getPropValue: foundationMapObj.getPropValue,
       propName: foundationMapObj.propName,
-      scaleType: foundationMapObj.scaleType,
+      scaleType: foundationMapObj.scaleType
     };
-    if(foundationMapObj.scaleType === 'ordinal' || foundationMapObj.scaleType === 'threshold') {
+    if (
+      foundationMapObj.scaleType === "ordinal" ||
+      foundationMapObj.scaleType === "threshold"
+    ) {
       foundationMapProps.categories = foundationMapObj.categories;
     }
 
     this.fetchFoundationData(defaultFoundation);
-    this.setState({ selectedFoundation, defaultFoundation, foundationMapProps });
+    this.setState({
+      selectedFoundation,
+      defaultFoundation,
+      foundationMapProps
+    });
   };
 
   updateSlide2 = selectedSlide => {
     const selectedSlides = isArray(selectedSlide)
       ? selectedSlide
-      : selectedSlide.split(',');
+      : selectedSlide.split(",");
     const defaultSlides = selectedSlides.map(
       slide => this.state.data.slides[slide]
     );
@@ -149,12 +161,16 @@ class SandboxStory extends React.Component {
   updateSlide = event => {
     const slideNumber = event.target.name;
     const allSlides = this.state.allSlides.map(slide => {
-      if (slide.slideNumber === slideNumber) { slide.checked = !slide.checked }
+      if (slide.slideNumber === slideNumber) {
+        slide.checked = !slide.checked;
+      }
       return slide;
     });
-    const defaultSlides = allSlides.filter(slide => slide.checked === true)
+    const defaultSlides = allSlides
+      .filter(slide => slide.checked === true)
       .map(slide => this.state.data.slides[slide.slideNumber]);
-    const selectedSlides = allSlides.filter(slide => slide.checked === true)
+    const selectedSlides = allSlides
+      .filter(slide => slide.checked === true)
       .map(slide => slide.slideNumber);
 
     this.fetchSlideData(defaultSlides);
@@ -176,8 +192,12 @@ class SandboxStory extends React.Component {
 
   fetchSlideData = slideData => {
     const defaultSlides = [...slideData];
-    const slideDataNames = this.state.slideData.map(slide => Object.keys(slide)[0]);
-    const onlyFetchNewSlides = defaultSlides.filter(slide => !slideDataNames.includes(slide.name));
+    const slideDataNames = this.state.slideData.map(
+      slide => Object.keys(slide)[0]
+    );
+    const onlyFetchNewSlides = defaultSlides.filter(
+      slide => !slideDataNames.includes(slide.name)
+    );
     Promise.all(
       onlyFetchNewSlides.map(s =>
         fetch(`${s.endpoint}`)
@@ -200,7 +220,9 @@ class SandboxStory extends React.Component {
     const slideDataValues = Object.values(slideData);
     const newSlideData = slideData.map((slide, index) => {
       const slideDataName = Object.keys(slideDataValues[index])[0];
-      if (slideDataName === slideLabel) { slide = ({[slideLabel]: data}) }
+      if (slideDataName === slideLabel) {
+        slide = { [slideLabel]: data };
+      }
       return slide;
     });
     return newSlideData;
@@ -208,7 +230,7 @@ class SandboxStory extends React.Component {
 
   fetchSlideDataByDate = (slide, date, type) => {
     let url;
-    if(type === 'slide') {
+    if (type === "slide") {
       url = `${slide.slideObj.endpoint}${date}`;
     } else {
       url = `${slide.endpoint}${date}`;
@@ -222,14 +244,14 @@ class SandboxStory extends React.Component {
       })
       .then(res => res.json())
       .then(data => {
-        if(type === 'slide') {
+        if (type === "slide") {
           this.setState({
             slideData: this.findAndReplaceSlideData(
               this.state.slideData,
               data,
               type,
               slide.label
-            ),
+            )
           });
         } else {
           this.setState({ foundationData: data });
@@ -245,7 +267,7 @@ class SandboxStory extends React.Component {
     this.updateFoundation(selectedFoundation);
     const selectedSlide = isArray(packageData.default_slide)
       ? packageData.default_slide
-      : packageData.default_slide.split(',');
+      : packageData.default_slide.split(",");
     this.updateSlide2(selectedSlide);
     const dataObj = { slide_meta: {}, slide_data: {} };
     const defaultFoundation = data.foundations[selectedFoundation];
@@ -254,9 +276,12 @@ class SandboxStory extends React.Component {
       color: foundationMapObj.color,
       getPropValue: foundationMapObj.getPropValue,
       propName: foundationMapObj.propName,
-      scaleType: foundationMapObj.scaleType,
+      scaleType: foundationMapObj.scaleType
     };
-    if(foundationMapObj.scaleType === 'ordinal' || foundationMapObj.scaleType === 'threshold') {
+    if (
+      foundationMapObj.scaleType === "ordinal" ||
+      foundationMapObj.scaleType === "threshold"
+    ) {
       foundationMapProps.categories = foundationMapObj.categories;
     }
     const defaultSlides = selectedSlide.map(slide => data.slides[slide]);
@@ -264,7 +289,7 @@ class SandboxStory extends React.Component {
       const mapObj = slides(dataObj)[data.slides[slide].name];
       const color = mapObj.boundary.getLineColor
         ? mapObj.boundary.getLineColor()
-        : [238,238,238,255]; //gray
+        : [238, 238, 238, 255]; //gray
       const mapType = mapObj.map.mapType;
       return {
         slideNumber: slide,
@@ -282,7 +307,7 @@ class SandboxStory extends React.Component {
       defaultFoundation,
       defaultSlides,
       allSlides,
-      foundationMapProps,
+      foundationMapProps
     });
   };
 
@@ -295,7 +320,7 @@ class SandboxStory extends React.Component {
       .map(slide => {
         let data = {
           slide_meta: {},
-          slide_data: {},
+          slide_data: {}
         };
         if (this.state.slideData.length) {
           const findSlide = this.state.slideData.find(slideData => {
@@ -307,11 +332,11 @@ class SandboxStory extends React.Component {
 
         return [
           {
-            data: slideObj ? slideObj.boundary : {},
+            data: slideObj ? slideObj.boundary : {}
           },
           {
-            data: slideObj ? slideObj.map : {},
-          },
+            data: slideObj ? slideObj.map : {}
+          }
         ];
       })
       .reduce((a, b) => a.concat(b), []);
@@ -319,9 +344,9 @@ class SandboxStory extends React.Component {
       {
         data: this.state.foundationData.slide_data
           ? foundations(this.state.foundationData)[defaultFoundation.name]
-          : {},
+          : {}
       },
-      ...formatSlideData,
+      ...formatSlideData
     ];
   };
 
@@ -362,7 +387,6 @@ class SandboxStory extends React.Component {
 }
 
 export default () =>
-  storiesOf('CIVIC Platform Components/Sandbox', module)
-    .add('Sandbox', () => (
-      <SandboxStory />
-    ));
+  storiesOf("CIVIC Platform Components/Sandbox", module).add("Sandbox", () => (
+    <SandboxStory />
+  ));

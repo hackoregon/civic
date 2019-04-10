@@ -1,26 +1,28 @@
-import React from 'react';
+import React from "react";
 /* eslint-disable import/no-extraneous-dependencies */
-import { storiesOf } from '@storybook/react';
-import { withKnobs, number, boolean } from '@storybook/addon-knobs';
-import { action } from '@storybook/addon-actions';
-import { checkA11y } from '@storybook/addon-a11y';
-import { BaseMap } from '../src';
-import { ScatterPlotMap } from '../src';
-import { MapTooltip } from '../src';
-import { DemoJSONLoader } from '../src';
+import { storiesOf } from "@storybook/react";
+import { withKnobs, number, boolean } from "@storybook/addon-knobs";
+import { action } from "@storybook/addon-actions";
+import { checkA11y } from "@storybook/addon-a11y";
+import { BaseMap } from "../src";
+import { ScatterPlotMap } from "../src";
+import { MapTooltip } from "../src";
+import { DemoJSONLoader } from "../src";
 
-const displayName = ScatterPlotMap.displayName || 'ScatterPlotMap';
+const displayName = ScatterPlotMap.displayName || "ScatterPlotMap";
 
 const opacityOptions = {
   range: true,
   min: 0,
   max: 1,
-  step: 0.05,
+  step: 0.05
 };
 
-const getPosition = f => !!f.geometry ? f.geometry.coordinates : [-124.664355, 45.615779];
+const getPosition = f =>
+  !!f.geometry ? f.geometry.coordinates : [-124.664355, 45.615779];
 
-const getCircleColor = f => f.properties.year_2017 > 1000 ? [255,0,0,255] : [0,0,255,255];
+const getCircleColor = f =>
+  f.properties.year_2017 > 1000 ? [255, 0, 0, 255] : [0, 0, 255, 255];
 
 const getCircleRadius = f => Math.sqrt(f.properties.year_2017 / Math.PI) * 15;
 
@@ -28,27 +30,29 @@ const radiusScaleOptions = {
   range: true,
   min: 0,
   max: 25,
-  step: 0.5,
+  step: 0.5
 };
 
 const strokeWidthOptions = {
   range: true,
   min: 0,
   max: 20,
-  step: 0.5,
+  step: 0.5
 };
 
 const highlightColor = [255, 165, 0, 155];
 
-const mapData = ["https://service.civicpdx.org/neighborhood-development/sandbox/slides/bikecounts/"];
+const mapData = [
+  "https://service.civicpdx.org/neighborhood-development/sandbox/slides/bikecounts/"
+];
 
 const demoMap = () => (
   <DemoJSONLoader urls={mapData}>
     {data => {
-      const opacity = number('Opacity:', 0.1, opacityOptions);
-      const radiusScale = number('Radius Scale:', 1, radiusScaleOptions);
-      const outline = boolean('Stroke Only:', false);
-      const strokeWidth = number('Stroke Width:', 1, strokeWidthOptions);
+      const opacity = number("Opacity:", 0.1, opacityOptions);
+      const radiusScale = number("Radius Scale:", 1, radiusScaleOptions);
+      const outline = boolean("Stroke Only:", false);
+      const strokeWidth = number("Stroke Width:", 1, strokeWidthOptions);
       return (
         <BaseMap>
           <ScatterPlotMap
@@ -62,7 +66,9 @@ const demoMap = () => (
             strokeWidth={strokeWidth}
             autoHighlight={true}
             highlightColor={highlightColor}
-            onLayerClick={info => action('Layer clicked:', { depth: 2 })(info, info.object)}
+            onLayerClick={info =>
+              action("Layer clicked:", { depth: 2 })(info, info.object)
+            }
           />
         </BaseMap>
       );
@@ -73,10 +79,10 @@ const demoMap = () => (
 const tooltipMap = () => (
   <DemoJSONLoader urls={mapData}>
     {data => {
-      const opacity = number('Opacity:', 0.1, opacityOptions);
-      const radiusScale = number('Radius Scale:', 1, radiusScaleOptions);
-      const outline = boolean('Stroke Only:', false);
-      const strokeWidth = number('Stroke Width:', 1, strokeWidthOptions);
+      const opacity = number("Opacity:", 0.1, opacityOptions);
+      const radiusScale = number("Radius Scale:", 1, radiusScaleOptions);
+      const outline = boolean("Stroke Only:", false);
+      const strokeWidth = number("Stroke Width:", 1, strokeWidthOptions);
       return (
         <BaseMap>
           <ScatterPlotMap
@@ -90,13 +96,15 @@ const tooltipMap = () => (
             strokeWidth={strokeWidth}
             autoHighlight={true}
             highlightColor={highlightColor}
-            onLayerClick={info => action('Layer clicked:', { depth: 2 })(info, info.object)}
+            onLayerClick={info =>
+              action("Layer clicked:", { depth: 2 })(info, info.object)
+            }
           >
             <MapTooltip
-              primaryName={'Count Time'}
-              primaryField={'count_time'}
-              secondaryName={'Bike Count'}
-              secondaryField={'year_2017'}
+              primaryName={"Count Time"}
+              primaryField={"count_time"}
+              secondaryName={"Bike Count"}
+              secondaryField={"year_2017"}
             />
           </ScatterPlotMap>
         </BaseMap>
@@ -106,8 +114,8 @@ const tooltipMap = () => (
 );
 
 export default () =>
-  storiesOf('Maps/Scatterplot Map', module)
+  storiesOf("Maps/Scatterplot Map", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
-    .add('Simple usage', demoMap)
-    .add('With tooltip', tooltipMap);
+    .add("Simple usage", demoMap)
+    .add("With tooltip", tooltipMap);

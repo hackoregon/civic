@@ -4,7 +4,7 @@ html {
   font-size: 14px;
   line-height: 1.4;
   background-color: #fffefe;
-  font-family: 'Merriweather';
+  font-family: "Merriweather";
   font-weight: 400;
   color: #001732;
   min-height: 100% /* [3] */;
@@ -52,8 +52,8 @@ body {
 }
 
 .btc-text-warn {
-  color: #DE0050!important;
-  fill: #DE0050 !important
+  color: #de0050 !important;
+  fill: #de0050 !important;
 }
 
 .btc-bg-onyx {
@@ -101,15 +101,15 @@ body {
 }
 
 a {
-  color: rgba(238,73,80,1);
+  color: rgba(238, 73, 80, 1);
   text-decoration: none;
   cursor: pointer;
   opacity: 0.9;
-  transition: all .25s ease-in-out;
+  transition: all 0.25s ease-in-out;
 }
 
 a:hover {
-  color: rgba(238,73,80,1);
+  color: rgba(238, 73, 80, 1);
   text-decoration: none;
   cursor: pointer;
   opacity: 1;
@@ -194,11 +194,11 @@ p {
 /* Color */
 
 .PrimaryColor {
-  color: rgba(34,15,37,1);
-  fill: rgba(34,15,37,1);
+  color: rgba(34, 15, 37, 1);
+  fill: rgba(34, 15, 37, 1);
 }
 
 .SecondaryColor {
-  color: rgba(238,73,92,1);
-  fill: rgba(238,73,92,1);
+  color: rgba(238, 73, 92, 1);
+  fill: rgba(238, 73, 92, 1);
 }

@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 /* eslint-disable import/no-extraneous-dependencies */
-import { storiesOf } from '@storybook/react';
-import { withInfo } from '@storybook/addon-info';
-import { checkA11y } from '@storybook/addon-a11y';
-import { Slider } from '../src';
-import { storybookStyles } from './storyStyles.js';
+import { storiesOf } from "@storybook/react";
+import { withInfo } from "@storybook/addon-info";
+import { checkA11y } from "@storybook/addon-a11y";
+import { Slider } from "../src";
+import { storybookStyles } from "./storyStyles.js";
 
-const displayName = Slider.displayName || 'Slider';
-const title = 'Simple usage';
+const displayName = Slider.displayName || "Slider";
+const title = "Simple usage";
 const description = `
   This is some basic usage with the slider component as built for Raise Effect, updated with changes for latest rc-slider. Due to the nature of the component, a higher order component is required to contain local state.
   Sliding should trigger changes that affect the local state.`;
@@ -17,7 +17,7 @@ const demoCode = () => {
     constructor(props) {
       super(props);
       this.state = {
-        value: 0,
+        value: 0
       };
       this.handleChange = this.handleChange.bind(this);
     }
@@ -47,7 +47,7 @@ const demoCode = () => {
 // const propDocs = { inline: true, propTables: [Slider] };
 
 export default () =>
-  storiesOf('UI Components/Slider', module)
+  storiesOf("UI Components/Slider", module)
     .addDecorator(checkA11y)
     .addDecorator(story => (
       <div style={storybookStyles.storyGrid}>

@@ -1,14 +1,14 @@
 /* TODO: Fix linting errors */
 /* eslint-disable */
 
-import PropTypes from 'prop-types';
-import React from 'react';
-import { css } from 'emotion';
+import PropTypes from "prop-types";
+import React from "react";
+import { css } from "emotion";
 
-const backgroundColor = 'rgb(69, 69, 69)';
-const accentColor = 'rgb(237, 73, 91)';
-const borderColor = 'rgb(151, 151, 151)';
-const commonTransition = 'all .2s ease-in-out';
+const backgroundColor = "rgb(69, 69, 69)";
+const accentColor = "rgb(237, 73, 91)";
+const borderColor = "rgb(151, 151, 151)";
+const commonTransition = "all .2s ease-in-out";
 const packageSelectorClass = css`
   display: flex;
   flex-direction: column;
@@ -51,12 +51,12 @@ const PackageSelector = ({ title, description, onClick }) => (
   </div>
 );
 
-PackageSelector.displayName = 'PackageSelector';
+PackageSelector.displayName = "PackageSelector";
 
 PackageSelector.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
-  onClick: PropTypes.func,
+  onClick: PropTypes.func
 };
 
 export default PackageSelector;

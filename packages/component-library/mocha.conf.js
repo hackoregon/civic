@@ -1,22 +1,22 @@
 /* eslint-disable import/no-extraneous-dependencies */
-process.env.NODE_ENV = 'test';
+process.env.NODE_ENV = "test";
 
-require('@babel/register')();
+require("@babel/register")();
 
 // chai syntax
-const chai = require('chai');
+const chai = require("chai");
 // dom object in node
-const jsdom = require('jsdom');
+const jsdom = require("jsdom");
 
 const { JSDOM } = jsdom;
 
 // stubbing/spying library
-const sinon = require('sinon');
-const sinonChai = require('sinon-chai');
+const sinon = require("sinon");
+const sinonChai = require("sinon-chai");
 
 // enzyme configuration
-const enzyme = require('enzyme');
-const Adapter = require('enzyme-adapter-react-16');
+const enzyme = require("enzyme");
+const Adapter = require("enzyme-adapter-react-16");
 
 enzyme.configure({ adapter: new Adapter() });
 
@@ -28,18 +28,18 @@ global.sinon = sinon;
 
 // dom setup
 const { document } = new JSDOM(``, {
-  url: 'http://localhost',
+  url: "http://localhost"
 }).window;
 global.document = document;
 global.navigator = {
-  userAgent: 'node.js',
+  userAgent: "node.js"
 };
 global.window = document.defaultView;
 
 // we're going to emulate the dom with this part here
-const exposedProperties = ['window', 'navigator', 'document'];
+const exposedProperties = ["window", "navigator", "document"];
 Object.keys(document.defaultView).forEach(property => {
-  if (typeof global[property] === 'undefined') {
+  if (typeof global[property] === "undefined") {
     exposedProperties.push(property);
     global[property] = document.defaultView[property];
   }
@@ -47,4 +47,4 @@ Object.keys(document.defaultView).forEach(property => {
 
 // chai setup
 chai.use(sinonChai);
-chai.use(require('chai-enzyme')());
+chai.use(require("chai-enzyme")());

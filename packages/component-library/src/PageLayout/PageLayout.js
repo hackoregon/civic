@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { css } from 'emotion';
-import Header from '../Navigation/Header';
-import Footer from '../Footer/Footer';
-import CollectionHero from '../Hero/CollectionHero';
+import React from "react";
+import PropTypes from "prop-types";
+import { css } from "emotion";
+import Header from "../Navigation/Header";
+import Footer from "../Footer/Footer";
+import CollectionHero from "../Hero/CollectionHero";
 
 const defaultStyles = css`
   padding: 0px 24px;
@@ -49,14 +49,16 @@ const PageLayout = ({
   teamTitle,
   overlay,
   children,
-  attribution,
+  attribution
 }) => (
   <div>
-    { header && <Header
-      title="Civic"
-      mainProjectColor={mainProjectColor}
-      overlay={overlay || false}
-    /> }
+    {header && (
+      <Header
+        title="Civic"
+        mainProjectColor={mainProjectColor}
+        overlay={overlay || false}
+      />
+    )}
     {heroTitle && (
       <CollectionHero
         teamTitle={teamTitle}
@@ -70,7 +72,7 @@ const PageLayout = ({
   </div>
 );
 
-PageLayout.displayName = 'PageLayout';
+PageLayout.displayName = "PageLayout";
 
 PageLayout.propTypes = {
   header: PropTypes.bool,
@@ -80,11 +82,11 @@ PageLayout.propTypes = {
   heroSubtitle: PropTypes.string,
   mainProjectColor: PropTypes.string,
   children: PropTypes.node,
-  attribution: PropTypes.node,
+  attribution: PropTypes.node
 };
 
 PageLayout.defaultProps = {
-  header: true,
-}
+  header: true
+};
 
 export default PageLayout;

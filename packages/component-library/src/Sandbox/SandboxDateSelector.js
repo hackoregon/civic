@@ -1,23 +1,23 @@
 /* TODO: Fix linting errors */
 /* eslint-disable */
 
-import React from 'react';
-import { rangeRight } from 'lodash';
-import Dropdown from '../Dropdown/Dropdown';
+import React from "react";
+import { rangeRight } from "lodash";
+import Dropdown from "../Dropdown/Dropdown";
 
 const months = [
-  'Jan',
-  'Feb',
-  'Mar',
-  'Apr',
-  'May',
-  'Jun',
-  'Jul',
-  'Aug',
-  'Sep',
-  'Oct',
-  'Nov',
-  'Dec',
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec"
 ];
 
 const createMonths = (minDate, maxDate) => {
@@ -49,33 +49,33 @@ const createMonths = (minDate, maxDate) => {
 const dateHelper = (meta = {}) => {
   let dates = [];
   if (meta.dates && meta.dates.date_granularity !== null) {
-    if (meta.dates.date_granularity.toLowerCase() === 'year') {
+    if (meta.dates.date_granularity.toLowerCase() === "year") {
       dates = rangeRight(+meta.dates.min_date, +meta.dates.max_date + 1).map(
         String
       );
     }
-    if (meta.dates.date_granularity.toLowerCase() === 'decade') {
+    if (meta.dates.date_granularity.toLowerCase() === "decade") {
       dates = rangeRight(
         +meta.dates.min_date,
         +meta.dates.max_date + 1,
         10
       ).map(String);
     }
-    if (meta.dates.date_granularity.toLowerCase() === 'month') {
+    if (meta.dates.date_granularity.toLowerCase() === "month") {
       dates = createMonths(meta.dates.min_date, meta.dates.max_date);
     }
     return dates.map(date => ({
       label: date,
-      value: date,
+      value: date
     }));
   }
   return [
     meta.dates
       ? {
           label: meta.dates.default_date_filter,
-          value: meta.dates.default_date_filter,
+          value: meta.dates.default_date_filter
         }
-      : {},
+      : {}
   ];
 };
 
@@ -85,7 +85,7 @@ class DateDropdown extends React.Component {
     this.state = {
       date: props.selectedSlideData.slide_meta
         ? props.selectedSlideData.slide_meta.dates.default_date_filter
-        : '',
+        : ""
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -103,7 +103,7 @@ class DateDropdown extends React.Component {
         options={options}
         simpleValue
         onChange={this.handleChange}
-        placeholder={'Please select a date'}
+        placeholder={"Please select a date"}
       />
     );
   }

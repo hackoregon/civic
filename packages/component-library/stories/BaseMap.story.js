@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 /* eslint-disable import/no-extraneous-dependencies */
-import { storiesOf } from '@storybook/react';
-import { withKnobs, select } from '@storybook/addon-knobs';
-import { BaseMap } from '../src';
-import { css } from 'emotion';
+import { storiesOf } from "@storybook/react";
+import { withKnobs, select } from "@storybook/addon-knobs";
+import { BaseMap } from "../src";
+import { css } from "emotion";
 
-const displayName = BaseMap.displayName || 'BaseMap';
+const displayName = BaseMap.displayName || "BaseMap";
 
 const containerWrapper = css`
   height: 100vh;
@@ -13,17 +13,18 @@ const containerWrapper = css`
 `;
 
 const optionsStyle = {
-  'Hack Oregon Light': 'mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg',
-  'Hack Oregon Dark': 'mapbox://styles/hackoregon/cjie02elo1vyw2rohd24kbtbd',
-  'Navigation Guidance Night v2': 'mapbox://styles/mapbox/navigation-guidance-night-v2',
-  'Dark v9': 'mapbox://styles/mapbox/dark-v9',
+  "Hack Oregon Light": "mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg",
+  "Hack Oregon Dark": "mapbox://styles/hackoregon/cjie02elo1vyw2rohd24kbtbd",
+  "Navigation Guidance Night v2":
+    "mapbox://styles/mapbox/navigation-guidance-night-v2",
+  "Dark v9": "mapbox://styles/mapbox/dark-v9"
 };
 
 const demoMap = () => {
   const mapboxStyle = select(
-    'Mapbox Style',
+    "Mapbox Style",
     optionsStyle,
-    optionsStyle['Hack Oregon Light']
+    optionsStyle["Hack Oregon Light"]
   );
 
   return <BaseMap mapboxStyle={mapboxStyle} />;
@@ -31,16 +32,16 @@ const demoMap = () => {
 
 const geocoderMap = () => {
   const mapboxStyle = select(
-    'Mapbox Style',
+    "Mapbox Style",
     optionsStyle,
-    optionsStyle['Hack Oregon Light']
+    optionsStyle["Hack Oregon Light"]
   );
 
   return (
     <BaseMap
       mapboxStyle={mapboxStyle}
       geocoder
-      geocoderOptions={{ placeholder: '🚀search to blast off✨', zoom: 9.5 }} // additional geocoder options https://github.com/mapbox/mapbox-gl-geocoder/blob/master/API.md
+      geocoderOptions={{ placeholder: "🚀search to blast off✨", zoom: 9.5 }} // additional geocoder options https://github.com/mapbox/mapbox-gl-geocoder/blob/master/API.md
       mapGLOptions={{ dragPan: false }} // additional react-map-gl options https://github.com/uber/react-map-gl/blob/master/src/components/interactive-map.js
     />
   );
@@ -48,9 +49,9 @@ const geocoderMap = () => {
 
 const staticMap = () => {
   const mapboxStyle = select(
-    'Mapbox Style',
+    "Mapbox Style",
     optionsStyle,
-    optionsStyle['Hack Oregon Light']
+    optionsStyle["Hack Oregon Light"]
   );
 
   return (
@@ -64,7 +65,7 @@ const staticMap = () => {
         doubleClickZoom: false,
         touchZoom: false,
         touchRotate: false,
-        keyboard: false,
+        keyboard: false
       }}
     />
   );
@@ -72,25 +73,22 @@ const staticMap = () => {
 
 const containerHeightMap = () => {
   const mapboxStyle = select(
-    'Mapbox Style',
+    "Mapbox Style",
     optionsStyle,
-    optionsStyle['Hack Oregon Light']
+    optionsStyle["Hack Oregon Light"]
   );
 
   return (
     <div className={containerWrapper}>
-      <BaseMap
-        mapboxStyle={mapboxStyle}
-        useContainerHeight={true}
-      />
+      <BaseMap mapboxStyle={mapboxStyle} useContainerHeight={true} />
     </div>
   );
 };
 
 export default () =>
-  storiesOf('Maps/Base Map', module)
+  storiesOf("Maps/Base Map", module)
     .addDecorator(withKnobs)
-    .add('Simple usage', demoMap)
-    .add('With geocoder usage', geocoderMap)
-    .add('No interactivity', staticMap)
-    .add('Use container height', containerHeightMap);
+    .add("Simple usage", demoMap)
+    .add("With geocoder usage", geocoderMap)
+    .add("No interactivity", staticMap)
+    .add("Use container height", containerHeightMap);
