@@ -7,6 +7,9 @@
     "type": "git",
     "url": "git+https://github.com/hackoregon/civic.git"
   },
+  "scripts": {
+    "lint": "eslint --fix index.js"
+  },
   "author": "",
   "license": "MIT",
   "devDependencies": {
