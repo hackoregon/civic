@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import { CivicStoryCard, Placeholder } from '@hackoregon/component-library';
+import { CivicStoryCard, Placeholder } from "@hackoregon/component-library";
 
 export class DiveDeeperIntoTransportationData extends React.Component {
   componentDidMount() {
@@ -23,7 +23,7 @@ export class DiveDeeperIntoTransportationData extends React.Component {
 }
 
 DiveDeeperIntoTransportationData.displayName =
-  'DiveDeeperIntoTransportationData';
+  "DiveDeeperIntoTransportationData";
 
 // Connect this to the redux store when necessary
 export default DiveDeeperIntoTransportationData;

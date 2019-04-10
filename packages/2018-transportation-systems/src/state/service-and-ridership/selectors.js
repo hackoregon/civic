@@ -1,5 +1,5 @@
-import { createSelector } from 'reselect';
-import { rootState } from '../selectors';
+import { createSelector } from "reselect";
+import { rootState } from "../selectors";
 
 export const getServiceAndRidershipRequest = createSelector(
   rootState,
@@ -8,16 +8,16 @@ export const getServiceAndRidershipRequest = createSelector(
 
 const getCalculatedData = (data, divisor) =>
   data.data.map(yearObj => ({
-    type: 'TriMet Ridership',
+    type: "TriMet Ridership",
     year: yearObj.year,
-    value: yearObj.total_sum_ons / divisor - 1,
+    value: yearObj.total_sum_ons / divisor - 1
   }));
 
 const getData = data =>
   data.data.map(yearObj => ({
-    type: 'TriMet Ridership',
+    type: "TriMet Ridership",
     year: yearObj.year,
-    value: yearObj.total_sum_ons,
+    value: yearObj.total_sum_ons
   }));
 
 const filterData = data => data.filter(obj => obj.year > 2001);
