@@ -6,67 +6,7 @@ import { action } from '@storybook/addon-actions';
 import { checkA11y } from '@storybook/addon-a11y';
 import { BaseMap } from '../src';
 import { CivicSandboxMap } from '../src';
-import CivicSandboxTooltip from '../src/CivicSandboxMap/CivicSandboxTooltip';
 import { DemoJSONLoader } from '../src';
-
-class LoadData extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: null,
-      error: null,
-    };
-  }
-
-  componentDidMount() {
-    const cmp = this;
-    d3.queue()
-      .defer(d3.json, this.props.urls[0])
-      .defer(d3.json, this.props.urls[1])
-      .defer(d3.json, this.props.urls[2])
-      .defer(d3.json, this.props.urls[3])
-      .defer(d3.json, this.props.urls[4])
-      .defer(d3.json, this.props.urls[5])
-      .defer(d3.json, this.props.urls[6])
-      .defer(d3.json, this.props.urls[7])
-      .await(
-        (
-          error,
-          foundation1,
-          foundation2,
-          foundation3,
-          slide1,
-          slide2,
-          slide3,
-          slide4,
-          slide5
-        ) => {
-          if (error) {
-            return this.setState({ error });
-          }
-          cmp.setState({
-            data: {
-              foundation1,
-              foundation2,
-              foundation3,
-              slide1,
-              slide2,
-              slide3,
-              slide4,
-              slide5,
-            },
-          });
-        }
-      );
-  }
-
-  render() {
-    if (this.state.data === null) {
-      return null;
-    }
-    return this.props.children(this.state.data);
-  }
-}
 
 const displayName = CivicSandboxMap.displayName || 'CivicSandboxMap';
 
@@ -125,8 +65,9 @@ export default () =>
               getLineColor: f => [0, 0, 0, 255],
               getLineWidth: f => 0.1,
               stroked: true,
+              scaleType: 'equal',
               color: colorSchemeArray,
-              getPropValue: f => f.properties.pc_household_with_individuals_65_ovr,
+              getPropValue: f => parseFloat(f.properties.pc_household_with_individuals_65_ovr),
               propName: 'pc_household_with_individuals_65_ovr',
               filled: true,
               onLayerClick: info => action('Layer clicked:', { depth: 2 })(info, info.object),
@@ -144,6 +85,7 @@ export default () =>
               getLineColor: f => [0, 0, 0, 255],
               getLineWidth: f => 0.1,
               stroked: true,
+              scaleType: 'equal',
               color: colorSchemeArray,
               getPropValue: f => f.properties.pc_household_with_children_under_18,
               propName: 'pc_household_with_children_under_18',
