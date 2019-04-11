@@ -12,8 +12,6 @@ import {
 import { PieChart } from "../src";
 import { colors, getRandomValuesArray, objectRandomizer } from "./shared";
 
-const loading = () => <PieChart loading />;
-
 export default () =>
   storiesOf("/Charts/Pie/Donut Visualization", module)
     .addDecorator(withKnobs)
@@ -65,5 +63,4 @@ export default () =>
           </div>
         );
       }
-    )
-    .add("Loading", loading);
+    );

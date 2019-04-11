@@ -42,7 +42,7 @@ ScreenGridMap.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   getPosition: PropTypes.func,
   opacity: PropTypes.number,
-  colorRange: PropTypes.arrayOf(PropTypes.number),
+  colorRange: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
   cellSizePixels: PropTypes.number,
   autoHighlight: PropTypes.bool,
   onLayerClick: PropTypes.func,

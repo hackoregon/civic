@@ -26,5 +26,24 @@ module.exports = createConfig([
         xmlhttprequest: "{XMLHttpRequest:XMLHttpRequest}"
       }
     ]
-  })
+  }),
+  match(["*.js"], [storySourceLoader()])
 ]);
+
+function storySourceLoader() {
+  return (context, { merge }) =>
+    merge({
+      module: {
+        rules: [
+          Object.assign(
+            {
+              test: /\.stories\.jsx?$/,
+              loaders: [require.resolve("@storybook/addon-storysource/loader")],
+              enforce: "pre"
+            },
+            context.match // carries `test`, `exclude` & `include` as set by `match()`
+          )
+        ]
+      }
+    });
+}

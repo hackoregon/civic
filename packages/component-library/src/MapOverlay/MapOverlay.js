@@ -89,7 +89,7 @@ const MapOverlay = props => {
 MapOverlay.propTypes = {
   id: PropTypes.string,
   children: PropTypes.node,
-  data: PropTypes.shape({}),
+  data: PropTypes.arrayOf(PropTypes.shape({})),
   viewport: PropTypes.shape({}),
   autoHighlight: PropTypes.bool,
   extruded: PropTypes.bool,
@@ -107,13 +107,13 @@ MapOverlay.propTypes = {
   visible: PropTypes.bool,
   wireframe: PropTypes.bool,
   pickable: PropTypes.bool,
-  getElevation: PropTypes.oneOf(PropTypes.number, PropTypes.func),
-  getFillColor: PropTypes.oneOf(
+  getElevation: PropTypes.oneOfType([PropTypes.number, PropTypes.func]),
+  getFillColor: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.number),
     PropTypes.func
-  ),
-  getLineColor: PropTypes.oneOf(PropTypes.number, PropTypes.func),
-  getLineWidth: PropTypes.oneOf(PropTypes.number, PropTypes.func),
+  ]),
+  getLineColor: PropTypes.oneOfType([PropTypes.number, PropTypes.func]),
+  getLineWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.func]),
   stroked: PropTypes.bool
 };
 

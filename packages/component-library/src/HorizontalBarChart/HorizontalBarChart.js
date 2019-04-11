@@ -170,7 +170,10 @@ HorizontalBarChart.propTypes = {
   sortOrder: PropTypes.string,
   dataValue: PropTypes.string,
   dataLabel: PropTypes.string,
-  domain: PropTypes.arrayOf(PropTypes.array),
+  domain: PropTypes.shape({
+    x: PropTypes.arrayOf(PropTypes.number),
+    y: PropTypes.arrayOf(PropTypes.number)
+  }),
   loading: PropTypes.bool,
   error: PropTypes.string,
   title: PropTypes.string,

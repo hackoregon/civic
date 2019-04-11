@@ -113,7 +113,10 @@ BarChart.propTypes = {
   error: PropTypes.bool,
   dataKey: PropTypes.string,
   dataValue: PropTypes.string,
-  domain: PropTypes.arrayOf(PropTypes.array),
+  domain: PropTypes.shape({
+    x: PropTypes.arrayOf(PropTypes.number),
+    y: PropTypes.arrayOf(PropTypes.number)
+  }),
   title: PropTypes.string,
   subtitle: PropTypes.string,
   xLabel: PropTypes.string,

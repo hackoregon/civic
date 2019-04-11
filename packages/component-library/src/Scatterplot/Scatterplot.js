@@ -172,7 +172,10 @@ Scatterplot.propTypes = {
   dataSeriesLabel: PropTypes.arrayOf(
     PropTypes.shape({ category: PropTypes.string, label: PropTypes.string })
   ),
-  domain: PropTypes.arrayOf(PropTypes.array),
+  domain: PropTypes.shape({
+    x: PropTypes.arrayOf(PropTypes.number),
+    y: PropTypes.arrayOf(PropTypes.number)
+  }),
   size: PropTypes.shape({
     key: PropTypes.string,
     minSize: PropTypes.number,
