@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { css } from 'emotion';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { css } from "emotion";
 
 import {
   CivicStoryCard,
@@ -9,13 +9,13 @@ import {
   Collapsable,
   CivicVictoryTheme,
   DataTable,
-  ChartTitle,
-} from '@hackoregon/component-library';
+  ChartTitle
+} from "@hackoregon/component-library";
 
 import {
   fetchVotersOnTheMove,
-  fetchAwayVotersOnTheMove,
-} from '../../state/voters-on-the-move/actions';
+  fetchAwayVotersOnTheMove
+} from "../../state/voters-on-the-move/actions";
 
 import {
   isVotersOnTheMovePending,
@@ -23,8 +23,8 @@ import {
   getVotersOnTheMoveData,
   isAwayVotersOnTheMovePending,
   catchAwayVotersOnTheMoveErrors,
-  getAwayVotersOnTheMoveData,
-} from '../../state/voters-on-the-move/selectors';
+  getAwayVotersOnTheMoveData
+} from "../../state/voters-on-the-move/selectors";
 
 const smallMultiples = css`
   display: flex;
@@ -37,23 +37,23 @@ const chartColumn = css`
 `;
 
 const ageGroupLabels = [
-  { category: 18, label: '18-25' },
-  { category: 26, label: '26-32' },
-  { category: 33, label: '33-39' },
-  { category: 40, label: '40-49' },
-  { category: 50, label: '50+' },
+  { category: 18, label: "18-25" },
+  { category: 26, label: "26-32" },
+  { category: 33, label: "33-39" },
+  { category: 40, label: "40-49" },
+  { category: 50, label: "50+" }
 ];
 
 const ageLabels = {
-  18: { category: 0, label: '18-25' },
-  26: { category: 1, label: '26-32' },
-  33: { category: 2, label: '33-39' },
-  40: { category: 3, label: '40-49' },
-  50: { category: 4, label: '50+' },
+  18: { category: 0, label: "18-25" },
+  26: { category: 1, label: "26-32" },
+  33: { category: 2, label: "33-39" },
+  40: { category: 3, label: "40-49" },
+  50: { category: 4, label: "50+" }
 };
 
 const legendStyle = css`
-  font-family: 'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
   font-size: 14px;
   font-weight: bold;
   text-align: center;
@@ -65,39 +65,39 @@ const emphasis = css`
 `;
 
 const tableRows = [
-  { age_group: '18-25', towards: '50.3%', away: '49.7%', moves: '1.93' },
-  { age_group: '26-32', towards: '43.3%', away: '56.7%', moves: '1.97' },
-  { age_group: '33-39', towards: '41.1%', away: '58.9%', moves: '1.72' },
-  { age_group: '40-49', towards: '44.1%', away: '55.9%', moves: '1.52' },
-  { age_group: '55+', towards: '45.7%', away: '54.3%', moves: '1.40' },
+  { age_group: "18-25", towards: "50.3%", away: "49.7%", moves: "1.93" },
+  { age_group: "26-32", towards: "43.3%", away: "56.7%", moves: "1.97" },
+  { age_group: "33-39", towards: "41.1%", away: "58.9%", moves: "1.72" },
+  { age_group: "40-49", towards: "44.1%", away: "55.9%", moves: "1.52" },
+  { age_group: "55+", towards: "45.7%", away: "54.3%", moves: "1.40" }
 ];
 
 const tableCols = [
   {
-    align: 'left',
-    header: 'Age Group',
-    key: 'age_group',
+    align: "left",
+    header: "Age Group",
+    key: "age_group"
   },
   {
-    align: 'left',
-    header: 'Average Number of Moves',
-    key: 'moves',
+    align: "left",
+    header: "Average Number of Moves",
+    key: "moves"
   },
   {
-    align: 'left',
-    header: 'Moves Towards City Center',
-    key: 'towards',
+    align: "left",
+    header: "Moves Towards City Center",
+    key: "towards"
   },
   {
-    align: 'left',
-    header: 'Moves Away From City Center',
-    key: 'away',
-  },
+    align: "left",
+    header: "Moves Away From City Center",
+    key: "away"
+  }
 ];
 
 const tableData = {
   columns: tableCols,
-  data: tableRows,
+  data: tableRows
 };
 
 const legendComponent = age => legendData => (
@@ -140,7 +140,7 @@ export class VotersOnTheMove extends React.Component {
       votersOnTheMove,
       isAwayLoading,
       awayError,
-      awayVotersOnTheMove,
+      awayVotersOnTheMove
     } = this.props;
 
     const data = { center: votersOnTheMove, away: awayVotersOnTheMove };
@@ -166,7 +166,7 @@ export class VotersOnTheMove extends React.Component {
         title="Voters on the Move"
         slug="voters-on-the-move"
         loading={isLoading || isAwayLoading}
-        error={(error || awayError) && 'error'}
+        error={(error || awayError) && "error"}
       >
         <Collapsable>
           <Collapsable.Section>
@@ -197,13 +197,13 @@ export class VotersOnTheMove extends React.Component {
                   <div className={smallMultiples}>
                     <div className={chartColumn}>
                       <h2>Moves Towards City Center</h2>
-                      {voterScatterplot(18, 'center')}
-                      {voterScatterplot(26, 'center')}
+                      {voterScatterplot(18, "center")}
+                      {voterScatterplot(26, "center")}
                     </div>
                     <div className={chartColumn}>
                       <h2>Moves Away From City Center</h2>
-                      {voterScatterplot(18, 'away')}
-                      {voterScatterplot(26, 'away')}
+                      {voterScatterplot(18, "away")}
+                      {voterScatterplot(26, "away")}
                     </div>
                   </div>
                 </div>
@@ -215,14 +215,14 @@ export class VotersOnTheMove extends React.Component {
               {votersOnTheMove && awayVotersOnTheMove && (
                 <div className={smallMultiples}>
                   <div className={chartColumn}>
-                    {voterScatterplot(33, 'center')}
-                    {voterScatterplot(40, 'center')}
-                    {voterScatterplot(50, 'center')}
+                    {voterScatterplot(33, "center")}
+                    {voterScatterplot(40, "center")}
+                    {voterScatterplot(50, "center")}
                   </div>
                   <div className={chartColumn}>
-                    {voterScatterplot(33, 'away')}
-                    {voterScatterplot(40, 'away')}
-                    {voterScatterplot(50, 'away')}
+                    {voterScatterplot(33, "away")}
+                    {voterScatterplot(40, "away")}
+                    {voterScatterplot(50, "away")}
                   </div>
                 </div>
               )}
@@ -246,7 +246,7 @@ export class VotersOnTheMove extends React.Component {
   }
 }
 
-VotersOnTheMove.displayName = 'VotersOnTheMove';
+VotersOnTheMove.displayName = "VotersOnTheMove";
 VotersOnTheMove.propTypes = {
   init: PropTypes.func,
   isLoading: PropTypes.bool,
@@ -254,7 +254,7 @@ VotersOnTheMove.propTypes = {
   votersOnTheMove: PropTypes.arrayOf(PropTypes.object),
   isAwayLoading: PropTypes.bool,
   awayError: PropTypes.string,
-  awayVotersOnTheMove: PropTypes.arrayOf(PropTypes.object),
+  awayVotersOnTheMove: PropTypes.arrayOf(PropTypes.object)
 };
 
 export default connect(
@@ -264,12 +264,12 @@ export default connect(
     votersOnTheMove: getVotersOnTheMoveData(state),
     isAwayLoading: isAwayVotersOnTheMovePending(state),
     awayError: catchAwayVotersOnTheMoveErrors(state),
-    awayVotersOnTheMove: getAwayVotersOnTheMoveData(state),
+    awayVotersOnTheMove: getAwayVotersOnTheMoveData(state)
   }),
   dispatch => ({
     init() {
       dispatch(fetchVotersOnTheMove());
       dispatch(fetchAwayVotersOnTheMove());
-    },
+    }
   })
 )(VotersOnTheMove);

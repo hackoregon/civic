@@ -4,22 +4,22 @@
  *
  */
 
-import { actionTypes } from './constants';
-import { compareServiceCallsApi } from '../../api';
+import { actionTypes } from "./constants";
+import { compareServiceCallsApi } from "../../api";
 
 const getServiceCalls = payload => ({
   type: actionTypes.GET_SERVICE_CALLS,
-  payload,
+  payload
 });
 
 const getServiceCallsSuccess = payload => ({
   type: actionTypes.GET_SERVICE_CALLS_SUCCESS,
-  payload,
+  payload
 });
 
 const getServiceCallsFailure = error => ({
   type: actionTypes.GET_SERVICE_CALLS_FAILURE,
-  error,
+  error
 });
 
 export const fetchServiceCallsData = payload => dispatch => {
@@ -31,5 +31,5 @@ export const fetchServiceCallsData = payload => dispatch => {
 };
 
 export default {
-  fetchServiceCallsData,
+  fetchServiceCallsData
 };

@@ -1,32 +1,32 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { CivicStoryCard } from '@hackoregon/component-library';
-import { TreemapChart, HalfDonutChart } from '../Reuseable';
-import shared from '../shared.styles';
-import { fetchMigrationDemoData } from '../../state/Migration/actions';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { CivicStoryCard } from "@hackoregon/component-library";
+import { TreemapChart, HalfDonutChart } from "../Reuseable";
+import shared from "../shared.styles";
+import { fetchMigrationDemoData } from "../../state/Migration/actions";
 
 const arrivalData = [
   {
-    name: '2015 - 2017',
+    name: "2015 - 2017",
     data: [
       {
-        name: 'Arrived Homeless',
-        value: 12,
+        name: "Arrived Homeless",
+        value: 12
       },
       {
-        name: 'Arrived Sheltered',
-        value: 88,
-      },
-    ],
-  },
+        name: "Arrived Sheltered",
+        value: 88
+      }
+    ]
+  }
 ];
 
 class Migration extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      arrivalData,
+      arrivalData
     };
   }
   componentDidMount() {
@@ -80,17 +80,17 @@ class Migration extends React.Component {
 
 Migration.propTypes = {
   loadData: PropTypes.func.isRequired,
-  migrationData: PropTypes.array.isRequired,
+  migrationData: PropTypes.array.isRequired
 };
 
 const mapDispatchToProps = dispatch => ({
-  loadData: () => dispatch(fetchMigrationDemoData()),
+  loadData: () => dispatch(fetchMigrationDemoData())
 });
 
 const mapStateToProps = allState => {
   const state = allState.homelessness || allState;
   return {
-    migrationData: [state.migration.migrationDemoData],
+    migrationData: [state.migration.migrationDemoData]
   };
 };
 

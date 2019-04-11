@@ -1,49 +1,49 @@
-import React from 'react';
-import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
-import thunk from 'redux-thunk';
-import { Provider } from 'react-redux';
-import { Router, browserHistory } from 'react-router';
+import React from "react";
+import { createStore, compose, applyMiddleware, combineReducers } from "redux";
+import thunk from "redux-thunk";
+import { Provider } from "react-redux";
+import { Router, browserHistory } from "react-router";
 import {
   routerReducer,
   routerMiddleware,
-  syncHistoryWithStore,
-} from 'react-router-redux';
+  syncHistoryWithStore
+} from "react-router-redux";
 
 // Import routes, reducers, and root component from each project
 import {
   Routes as HousingRoutes,
   Reducers as HousingReducers,
-  App as HousingApp,
-} from '@hackoregon/civic-housing';
+  App as HousingApp
+} from "@hackoregon/civic-housing";
 
 import {
   Routes as EmergencyRoutes,
   Reducers as EmergencyReducers,
-  App as EmergencyApp,
-} from '@hackoregon/civic-emergency-response';
+  App as EmergencyApp
+} from "@hackoregon/civic-emergency-response";
 
 import {
   Routes as TransportationRoutes,
   Reducers as TransportationReducers,
-  App as TransportationApp,
-} from '@hackoregon/transportation';
+  App as TransportationApp
+} from "@hackoregon/transportation";
 
 import {
   Routes as HomelessnessRoutes,
   Reducers as HomelessnessReducers,
-  App as HomelessnessApp,
-} from '@hackoregon/civic-homelessness';
+  App as HomelessnessApp
+} from "@hackoregon/civic-homelessness";
 
 import {
   Routes as BudgetRoutes,
   Reducers as BudgetReducers,
-  App as BudgetApp,
-} from '@hackoregon/civic-budget';
+  App as BudgetApp
+} from "@hackoregon/civic-budget";
 
-import './fonts.css';
-import RootPage from './components/RootPage';
-import HomePage from './components/HomePage';
-import AboutPage from './components/AboutPage';
+import "./fonts.css";
+import RootPage from "./components/RootPage";
+import HomePage from "./components/HomePage";
+import AboutPage from "./components/AboutPage";
 
 // Create a store by combining all project reducers and the routing reducer
 const configureStore = (initialState, history) => {
@@ -58,7 +58,7 @@ const configureStore = (initialState, history) => {
       emergency: EmergencyReducers(),
       transportation: TransportationReducers(),
       homelessness: HomelessnessReducers(),
-      budget: BudgetReducers(),
+      budget: BudgetReducers()
     }),
     initialState,
     composeEnhancers(applyMiddleware(...middlewares))
@@ -70,20 +70,20 @@ const configureStore = (initialState, history) => {
   if (module.hot) {
     module.hot.accept(
       [
-        '@hackoregon/civic-housing',
-        '@hackoregon/civic-emergency-response',
-        '@hackoregon/transportation',
-        '@hackoregon/civic-homelessness',
-        '@hackoregon/civic-budget',
+        "@hackoregon/civic-housing",
+        "@hackoregon/civic-emergency-response",
+        "@hackoregon/transportation",
+        "@hackoregon/civic-homelessness",
+        "@hackoregon/civic-budget"
       ],
       () => {
         const nextRootReducer = combineReducers({
           routing: routerReducer,
-          housing: require('@hackoregon/civic-housing').Reducers(),
-          emergency: require('@hackoregon/civic-emergency-response').Reducers(),
-          transportation: require('@hackoregon/transportation').Reducers(),
-          homelessness: require('@hackoregon/civic-homelessness').Reducers(),
-          budget: require('@hackoregon/civic-budget').Reducers(),
+          housing: require("@hackoregon/civic-housing").Reducers(),
+          emergency: require("@hackoregon/civic-emergency-response").Reducers(),
+          transportation: require("@hackoregon/transportation").Reducers(),
+          homelessness: require("@hackoregon/civic-homelessness").Reducers(),
+          budget: require("@hackoregon/civic-budget").Reducers()
         });
         store.replaceReducer(nextRootReducer);
       }
@@ -99,47 +99,47 @@ const store = configureStore({}, browserHistory);
 const history = syncHistoryWithStore(browserHistory, store, {
   selectLocationState(state) {
     return state.routing;
-  },
+  }
 });
 
 // Compose a route hierarchy using each project's routes and root component
 const routes = {
-  path: '/',
+  path: "/",
   component: RootPage,
   indexRoute: {
-    component: HomePage,
+    component: HomePage
   },
   childRoutes: [
     {
-      path: 'about',
-      component: AboutPage,
+      path: "about",
+      component: AboutPage
     },
     {
-      path: 'housing',
+      path: "housing",
       component: HousingApp,
-      childRoutes: HousingRoutes(store),
+      childRoutes: HousingRoutes(store)
     },
     {
-      path: 'emergency',
+      path: "emergency",
       component: EmergencyApp,
-      childRoutes: EmergencyRoutes(store),
+      childRoutes: EmergencyRoutes(store)
     },
     {
-      path: 'transportation',
+      path: "transportation",
       component: TransportationApp,
-      childRoutes: TransportationRoutes(store),
+      childRoutes: TransportationRoutes(store)
     },
     {
-      path: 'homelessness',
+      path: "homelessness",
       component: HomelessnessApp,
-      childRoutes: HomelessnessRoutes(store),
+      childRoutes: HomelessnessRoutes(store)
     },
     {
-      path: 'budget',
+      path: "budget",
       component: BudgetApp,
-      childRoutes: BudgetRoutes(store),
-    },
-  ],
+      childRoutes: BudgetRoutes(store)
+    }
+  ]
 };
 
 // Finally create the application component and render it into the #content element

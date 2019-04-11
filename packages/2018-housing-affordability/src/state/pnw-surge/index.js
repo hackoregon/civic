@@ -1,11 +1,11 @@
-import { START, SUCCESS, FAILURE, SET_CITY } from './actions';
+import { START, SUCCESS, FAILURE, SET_CITY } from "./actions";
 
 const INITIAL_STATE = {
   pending: false,
   error: null,
   allCities: null,
   shortTermTrend: null,
-  longTermTrend: null,
+  longTermTrend: null
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -17,7 +17,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         error: null,
         allCities: null,
         shortTermTrend: null,
-        longTermTrend: null,
+        longTermTrend: null
       };
     case SUCCESS:
       return {
@@ -26,7 +26,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         error: null,
         allCities: action.payload[0].results.geography,
         shortTermTrend: action.payload[1].results,
-        longTermTrend: action.payload[2].results,
+        longTermTrend: action.payload[2].results
       };
     case FAILURE:
       return {
@@ -35,12 +35,12 @@ const reducer = (state = INITIAL_STATE, action) => {
         error: action.payload,
         allCities: null,
         shortTermTrend: null,
-        longTermTrend: null,
+        longTermTrend: null
       };
     case SET_CITY:
       return {
         ...state,
-        selectedCity: action.selectedCity,
+        selectedCity: action.selectedCity
       };
     default:
       return state;

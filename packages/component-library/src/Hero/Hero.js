@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { css } from 'emotion';
+import PropTypes from "prop-types";
+import React from "react";
+import { css } from "emotion";
 
 const heroClass = css`
   display: flex;
@@ -51,11 +51,11 @@ const Hero = ({ children, mainProjectColor }) => (
   </div>
 );
 
-Hero.displayName = 'Hero';
+Hero.displayName = "Hero";
 
 Hero.propTypes = {
   mainProjectColor: PropTypes.string,
-  children: PropTypes.node,
+  children: PropTypes.node
 };
 
 export default Hero;

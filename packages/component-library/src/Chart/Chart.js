@@ -1,8 +1,8 @@
 /* Deprecated component, 2017 only */
 /* eslint-disable */
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 export default class Chart extends Component {
   static childContextTypes = {
@@ -12,8 +12,8 @@ export default class Chart extends Component {
       top: PropTypes.number,
       bottom: PropTypes.number,
       left: PropTypes.number,
-      right: PropTypes.number,
-    }),
+      right: PropTypes.number
+    })
   };
 
   static defaultProps = {
@@ -23,11 +23,11 @@ export default class Chart extends Component {
       top: 0,
       bottom: 0,
       left: 0,
-      right: 0,
-    },
+      right: 0
+    }
   };
 
-  static displayName = 'Chart';
+  static displayName = "Chart";
 
   static propTypes = {
     height: PropTypes.number,
@@ -37,8 +37,8 @@ export default class Chart extends Component {
       top: PropTypes.number,
       bottom: PropTypes.number,
       left: PropTypes.number,
-      right: PropTypes.number,
-    }),
+      right: PropTypes.number
+    })
   };
 
   getChildContext() {
@@ -50,7 +50,7 @@ export default class Chart extends Component {
       top: 0,
       bottom: 0,
       left: 0,
-      right: 0,
+      right: 0
     };
 
     return { width, height, margin };
@@ -65,7 +65,7 @@ export default class Chart extends Component {
       top: 0,
       bottom: 0,
       left: 0,
-      right: 0,
+      right: 0
     };
 
     const insetString = `translate(${margin.left}, ${margin.top})`;
@@ -77,7 +77,7 @@ export default class Chart extends Component {
           padding: 0,
           margin: 0,
           width,
-          height,
+          height
         }}
       >
         <svg className="chart-svg" width={width} height={height}>
@@ -88,7 +88,7 @@ export default class Chart extends Component {
 
         <div
           style={{
-            display: 'none',
+            display: "none"
           }}
         />
       </div>

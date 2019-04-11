@@ -1,20 +1,20 @@
-import { assign } from 'lodash';
+import { assign } from "lodash";
 
 // *
 // * Colors
 // *
 
-const civicPrimary = '#1f1123';
-const civicSecondary = '#eb4d5f';
-const civicTertiary = '#716470';
-const civicSecondaryLighter = '#aaa4ab';
-const civicSecondaryLightest = '#f3f2f3';
+const civicPrimary = "#1f1123";
+const civicSecondary = "#eb4d5f";
+const civicTertiary = "#716470";
+const civicSecondaryLighter = "#aaa4ab";
+const civicSecondaryLightest = "#f3f2f3";
 
-const civicCategoricalColor1 = '#DC4556';
-const civicCategoricalColor2 = '#19B7AA';
-const civicCategoricalColor3 = '#1E62BD';
-const civicCategoricalColor4 = '#721D7C';
-const civicCategoricalColor5 = '#FFB226';
+const civicCategoricalColor1 = "#DC4556";
+const civicCategoricalColor2 = "#19B7AA";
+const civicCategoricalColor3 = "#1E62BD";
+const civicCategoricalColor4 = "#721D7C";
+const civicCategoricalColor5 = "#FFB226";
 
 const colors = [
   civicCategoricalColor1,
@@ -22,18 +22,18 @@ const colors = [
   civicCategoricalColor3,
   civicCategoricalColor4,
   civicCategoricalColor5,
-  civicTertiary,
+  civicTertiary
 ];
 
-const blueGrey700 = '#455A64';
-const black = '#000000';
+const blueGrey700 = "#455A64";
+const black = "#000000";
 // *
 // * Typography
 // *
 const sansSerif = "'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif";
-const letterSpacing = 'normal';
+const letterSpacing = "normal";
 const fontSize = 12;
-const fontWeight = 'normal';
+const fontWeight = "normal";
 // *
 // * Layout
 // *
@@ -42,14 +42,14 @@ const horizontalBarPadding = 2;
 const baseProps = {
   width: 650,
   height: 350,
-  padding: 50,
+  padding: 50
 };
 const tooltipProps = {
   x: 325,
   y: 0,
-  orientation: 'bottom',
+  orientation: "bottom",
   pointerLength: 0,
-  cornerRadius: 0,
+  cornerRadius: 0
 };
 // *
 // * Labels
@@ -60,41 +60,41 @@ const baseLabelStyles = {
   fontWeight,
   letterSpacing,
   padding,
-  fill: black,
+  fill: black
 };
 
-const centeredLabelStyles = assign({ textAnchor: 'middle' }, baseLabelStyles);
+const centeredLabelStyles = assign({ textAnchor: "middle" }, baseLabelStyles);
 
 const pieLabelStyles = {
   fontFamily: sansSerif,
-  fontSize: '16px',
-  fontWeight: 'bold',
+  fontSize: "16px",
+  fontWeight: "bold"
 };
 
 const axisLabelStyles = {
   fontFamily: sansSerif,
-  fontSize: '14px',
-  fontWeight: 'bold',
+  fontSize: "14px",
+  fontWeight: "bold"
 };
 
 // *
 // * Strokes
 // *
-const strokeDasharray = '10, 5';
-const strokeLinecap = 'round';
-const strokeLinejoin = 'round';
+const strokeDasharray = "10, 5";
+const strokeLinecap = "round";
+const strokeLinejoin = "round";
 
 export default {
   area: assign(
     {
       style: {
         data: {
-          fill: 'white',
+          fill: "white",
           stroke: civicPrimary,
-          strokeWidth: 1,
+          strokeWidth: 1
         },
-        labels: centeredLabelStyles,
-      },
+        labels: centeredLabelStyles
+      }
     },
     baseProps
   ),
@@ -102,11 +102,11 @@ export default {
     {
       style: {
         data: {
-          fill: 'white',
+          fill: "white",
           stroke: civicPrimary,
-          strokeWidth: 1,
-        },
-      },
+          strokeWidth: 1
+        }
+      }
     },
     baseProps
   ),
@@ -114,43 +114,43 @@ export default {
     {
       style: {
         axis: {
-          fill: 'transparent',
+          fill: "transparent",
           stroke: civicSecondaryLighter,
           strokeWidth: 2,
           strokeLinecap,
-          strokeLinejoin,
+          strokeLinejoin
         },
         axisLabel: assign({}, centeredLabelStyles, {
           padding,
-          stroke: 'transparent',
+          stroke: "transparent"
         }),
         grid: {
-          fill: 'transparent',
+          fill: "transparent",
           stroke: civicSecondaryLightest,
           strokeDasharray,
           strokeLinecap,
-          strokeLinejoin,
+          strokeLinejoin
         },
         ticks: {
-          fill: 'transparent',
+          fill: "transparent",
           padding,
           size: 5,
           stroke: civicSecondaryLighter,
           strokeWidth: 1,
           strokeLinecap,
-          strokeLinejoin,
+          strokeLinejoin
         },
         tickLabels: assign({}, baseLabelStyles, {
           fill: black,
-          stroke: 'transparent',
-        }),
-      },
+          stroke: "transparent"
+        })
+      }
     },
     baseProps
   ),
   axisLabel: assign(
     {
-      style: axisLabelStyles,
+      style: axisLabelStyles
     },
     baseProps
   ),
@@ -160,12 +160,12 @@ export default {
         data: {
           fill: civicTertiary,
           padding: horizontalBarPadding,
-          stroke: 'transparent',
+          stroke: "transparent",
           strokeWidth: 0,
-          width: 20,
+          width: 20
         },
-        labels: baseLabelStyles,
-      },
+        labels: baseLabelStyles
+      }
     },
     baseProps
   ),
@@ -173,20 +173,20 @@ export default {
     {
       style: {
         data: {
-          stroke: blueGrey700,
+          stroke: blueGrey700
         },
-        labels: centeredLabelStyles,
+        labels: centeredLabelStyles
       },
       candleColors: {
-        positive: '#ffffff',
-        negative: blueGrey700,
-      },
+        positive: "#ffffff",
+        negative: blueGrey700
+      }
     },
     baseProps
   ),
   chart: assign(
     {
-      animate: 100,
+      animate: 100
     },
     baseProps
   ),
@@ -194,53 +194,53 @@ export default {
     {
       style: {
         data: {
-          fill: 'transparent',
+          fill: "transparent",
           opacity: 1,
           stroke: blueGrey700,
-          strokeWidth: 2,
+          strokeWidth: 2
         },
         labels: assign({}, centeredLabelStyles, {
-          stroke: 'transparent',
-          strokeWidth: 0,
-        }),
-      },
+          stroke: "transparent",
+          strokeWidth: 0
+        })
+      }
     },
     baseProps
   ),
   group: assign(
     {
-      colorScale: colors,
+      colorScale: colors
     },
     baseProps
   ),
   legend: {
     colorScale: colors,
     gutter: 10,
-    orientation: 'vertical',
-    titleOrientation: 'top',
+    orientation: "vertical",
+    titleOrientation: "top",
     style: {
       data: {
-        type: 'circle',
+        type: "circle"
       },
       labels: baseLabelStyles,
-      title: assign({}, baseLabelStyles, { padding: 5 }),
-    },
+      title: assign({}, baseLabelStyles, { padding: 5 })
+    }
   },
   line: assign(
     {
       style: {
         data: {
-          fill: 'transparent',
+          fill: "transparent",
           opacity: 1,
           stroke: blueGrey700,
-          strokeWidth: 2,
+          strokeWidth: 2
         },
         labels: assign({}, baseLabelStyles, {
-          stroke: 'transparent',
+          stroke: "transparent",
           strokeWidth: 0,
-          textAnchor: 'start',
-        }),
-      },
+          textAnchor: "start"
+        })
+      }
     },
     baseProps
   ),
@@ -250,21 +250,21 @@ export default {
       style: {
         data: {
           padding,
-          stroke: 'white',
-          strokeWidth: 2,
+          stroke: "white",
+          strokeWidth: 2
         },
         labels: assign({}, baseLabelStyles, {
           padding: 20,
-          stroke: 'transparent',
-          strokeWidth: 0,
-        }),
-      },
+          stroke: "transparent",
+          strokeWidth: 0
+        })
+      }
     },
     baseProps
   ),
   pieLabel: assign(
     {
-      style: pieLabelStyles,
+      style: pieLabelStyles
     },
     baseProps
   ),
@@ -274,19 +274,19 @@ export default {
         data: {
           fill: blueGrey700,
           opacity: 1,
-          stroke: 'transparent',
-          strokeWidth: 0,
+          stroke: "transparent",
+          strokeWidth: 0
         },
         labels: assign({}, centeredLabelStyles, {
-          stroke: 'transparent',
-        }),
-      },
+          stroke: "transparent"
+        })
+      }
     },
     baseProps
   ),
   stack: assign(
     {
-      colorScale: colors,
+      colorScale: colors
     },
     baseProps
   ),
@@ -294,22 +294,22 @@ export default {
     {
       style: {
         data: {
-          fill: 'transparent',
-          stroke: 'transparent',
-          strokeWidth: 0,
+          fill: "transparent",
+          stroke: "transparent",
+          strokeWidth: 0
         },
         labels: centeredLabelStyles,
-        customHoverColor: civicSecondary,
+        customHoverColor: civicSecondary
       },
       flyoutStyle: {
-        stroke: 'transparent',
+        stroke: "transparent",
         strokeWidth: 1,
-        fill: civicSecondaryLightest,
+        fill: civicSecondaryLightest
       },
       flyoutProps: {
         cornerRadius: 10,
-        pointerLength: 10,
-      },
+        pointerLength: 10
+      }
     },
     tooltipProps
   ),
@@ -317,13 +317,13 @@ export default {
     {
       style: {
         data: {
-          fill: 'transparent',
-          stroke: 'transparent',
-          strokeWidth: 0,
+          fill: "transparent",
+          stroke: "transparent",
+          strokeWidth: 0
         },
-        labels: centeredLabelStyles,
-      },
+        labels: centeredLabelStyles
+      }
     },
     baseProps
-  ),
+  )
 };

@@ -1,5 +1,5 @@
-import { createSelector } from 'reselect';
-import { rootState } from '../selectors';
+import { createSelector } from "reselect";
+import { rootState } from "../selectors";
 
 export const getPTI = createSelector(
   rootState,
@@ -17,18 +17,18 @@ const transformPTIResponse = data =>
     ? data.map(datum => ({
         ...datum,
         value: +datum.value,
-        year: datum.date ? +datum.date.split('-')[0] : -1,
+        year: datum.date ? +datum.date.split("-")[0] : -1
       }))
     : [];
 
-export const isAllCitiesLoading = getProperty('allCitiesPending');
-export const isCityDetailLoading = getProperty('cityPending');
-export const isCountryLoading = getProperty('countryPending');
-export const getAllCitiesError = getProperty('allCitiesError');
-export const getAllCities = getProperty('allCities');
-export const getCityError = getProperty('cityError');
-export const getCountryError = getProperty('countryError');
-export const getSelectedCity = getProperty('selectedCity');
+export const isAllCitiesLoading = getProperty("allCitiesPending");
+export const isCityDetailLoading = getProperty("cityPending");
+export const isCountryLoading = getProperty("countryPending");
+export const getAllCitiesError = getProperty("allCitiesError");
+export const getAllCities = getProperty("allCities");
+export const getCityError = getProperty("cityError");
+export const getCountryError = getProperty("countryError");
+export const getSelectedCity = getProperty("selectedCity");
 
 export const isAnyLoading = createSelector(
   isAllCitiesLoading,
@@ -54,7 +54,7 @@ export const getSelectedCityRank = createSelector(
     return datum
       ? {
           rank: datum.rank,
-          total: datum.total,
+          total: datum.total
         }
       : {};
   }
@@ -69,12 +69,12 @@ export const getCityCountryChartData = createSelector(
     (city || [])
       .map(c => ({
         ...c,
-        series: c.datapoint,
+        series: c.datapoint
       }))
       .concat(
         (country || []).map(c => ({
           ...c,
-          series: 'United States',
+          series: "United States"
         }))
       )
 );

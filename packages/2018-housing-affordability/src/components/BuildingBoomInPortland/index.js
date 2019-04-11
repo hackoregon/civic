@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
-import { CivicStoryCard } from '@hackoregon/component-library';
+import { CivicStoryCard } from "@hackoregon/component-library";
 
-import aduGif from '../../assets/adus_time.gif';
-import mfGif from '../../assets/mf_time.gif';
+import aduGif from "../../assets/adus_time.gif";
+import mfGif from "../../assets/mf_time.gif";
 
 export class BuildingBoomInPortland extends React.Component {
   componentDidMount() {
@@ -18,7 +18,7 @@ export class BuildingBoomInPortland extends React.Component {
       >
         <p>
           The Portland Metro Area is experiencing a building boom as evidenced
-          by building permits for new construction and ADUs.{' '}
+          by building permits for new construction and ADUs.{" "}
         </p>
 
         <h1>Accessory Dwelling Units Over Time</h1>
@@ -37,7 +37,7 @@ export class BuildingBoomInPortland extends React.Component {
   }
 }
 
-BuildingBoomInPortland.displayName = 'BuildingBoomInPortland';
+BuildingBoomInPortland.displayName = "BuildingBoomInPortland";
 
 // Connect this to the redux store when necessary
 export default BuildingBoomInPortland;

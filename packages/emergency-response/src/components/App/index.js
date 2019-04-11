@@ -1,20 +1,20 @@
 /* eslint-disable import/no-extraneous-dependencies */
 // This should probably be the core component, containing, nav etc
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-import React from 'react';
+import React from "react";
 
-import '@hackoregon/component-library/assets/global.styles.css';
+import "@hackoregon/component-library/assets/global.styles.css";
 
-import { PageLayout, CivicStoryCard } from '@hackoregon/component-library';
+import { PageLayout, CivicStoryCard } from "@hackoregon/component-library";
 
-import BagelShop from '../BagelShop/index';
-import FmaMap from '../FmaMap/index';
-import PieWhatTheyDo from '../PieWhatTheyDo/index';
-import HowWhenBusy from '../HowWhenBusy/index';
-import ResponseTimeVaries from '../ResponseTimeVaries/index';
+import BagelShop from "../BagelShop/index";
+import FmaMap from "../FmaMap/index";
+import PieWhatTheyDo from "../PieWhatTheyDo/index";
+import HowWhenBusy from "../HowWhenBusy/index";
+import ResponseTimeVaries from "../ResponseTimeVaries/index";
 
-import firstFiveMinutesTimeline from '../../../assets/emergency-response-5min.svg';
+import firstFiveMinutesTimeline from "../../../assets/emergency-response-5min.svg";
 
 function App(props) {
   return (
@@ -29,30 +29,30 @@ function App(props) {
           be actual fires. The remaining incidents are service calls, “good
           intent” calls, and false alarms.
         </p>
-        <div style={{ display: 'flex', flexFlow: 'row wrap' }}>
-          <PieWhatTheyDo style={{ width: '50%' }} />
-          <div style={{ width: '50%' }}>
-            <p style={{ textAlign: 'left' }}>
-              <strong style={{ color: '#EE495C' }}>Medical incidents</strong>{' '}
+        <div style={{ display: "flex", flexFlow: "row wrap" }}>
+          <PieWhatTheyDo style={{ width: "50%" }} />
+          <div style={{ width: "50%" }}>
+            <p style={{ textAlign: "left" }}>
+              <strong style={{ color: "#EE495C" }}>Medical incidents</strong>{" "}
               include an even wider range of categories, as you might expect.
               The Bureau of Emergency Communications (911) routes all calls to
               either PF&R, the Police Bureau, or ambulance services (and often a
               combination). PF&R personnel include trained paramedics who can
               respond to calls for any kind of medical emergency.
             </p>
-            <p style={{ textAlign: 'left' }}>
-              <strong style={{ color: '#EE495C' }}>Fire incidents</strong> cover
+            <p style={{ textAlign: "left" }}>
+              <strong style={{ color: "#EE495C" }}>Fire incidents</strong> cover
               a range of categories including explosions, vehicle fires, and
               dumpster and trash fires.
             </p>
-            <p style={{ textAlign: 'left' }}>
-              <strong style={{ color: '#EE495C' }}>Service calls</strong> are
+            <p style={{ textAlign: "left" }}>
+              <strong style={{ color: "#EE495C" }}>Service calls</strong> are
               calls not related to fire, medical, rescue, or hazmat. Think cats
               in trees, street flooding, and even stubborn rings that you can’t
               get off that second knuckle!
             </p>
-            <p style={{ textAlign: 'left' }}>
-              <strong style={{ color: '#EE495C' }}>Good intent</strong> calls
+            <p style={{ textAlign: "left" }}>
+              <strong style={{ color: "#EE495C" }}>Good intent</strong> calls
               occur when there’s not actually an emergency. For example, steam
               or gas mistaken for smoke.
             </p>
@@ -96,12 +96,9 @@ function App(props) {
           hour.
         </p>
       </CivicStoryCard>
-      <CivicStoryCard
-        title="The First Five Minutes"
-        slug="first-five-minutes"
-      >
+      <CivicStoryCard title="The First Five Minutes" slug="first-five-minutes">
         <img
-          style={{ maxWidth: '100%' }}
+          style={{ maxWidth: "100%" }}
           src={firstFiveMinutesTimeline}
           alt="Timeline of a fire response"
         />
@@ -157,13 +154,13 @@ function App(props) {
   );
 }
 
-App.displayName = 'App';
+App.displayName = "App";
 App.defaultProps = {
-  children: <div />,
+  children: <div />
 };
 
 App.propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.node
 };
 
 export default App;

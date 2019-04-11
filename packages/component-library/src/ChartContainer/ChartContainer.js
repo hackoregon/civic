@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { css } from 'emotion';
+import React from "react";
+import PropTypes from "prop-types";
+import { css } from "emotion";
 
-import ChartTitle from '../ChartTitle';
+import ChartTitle from "../ChartTitle";
 
 const chartLoading = css`
   text-align: center;
@@ -29,7 +29,7 @@ const ChartContainer = ({
   loading,
   subtitle,
   children,
-  className,
+  className
 }) => {
   const wrapperStyle = css`
     margin: 0 auto;
@@ -60,7 +60,7 @@ ChartContainer.propTypes = {
   loading: PropTypes.bool,
   children: PropTypes.node,
   subtitle: PropTypes.string,
-  className: PropTypes.string,
+  className: PropTypes.string
 };
 
 ChartContainer.defaultProps = {};

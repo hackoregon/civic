@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
-import React from 'react';
+import PropTypes from "prop-types";
+import React from "react";
 
 const Icon = ({ className, handleClick }) => (
   <span>
@@ -9,7 +9,7 @@ const Icon = ({ className, handleClick }) => (
 
 Icon.propTypes = {
   className: PropTypes.string,
-  handleClick: PropTypes.func,
+  handleClick: PropTypes.func
 };
 
 export default Icon;

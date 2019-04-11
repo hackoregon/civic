@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios from "axios";
 
-const HOST = 'http://service.civicpdx.org/transportation-systems/';
+const HOST = "http://service.civicpdx.org/transportation-systems/";
 const echo = a => a;
 
 const apiAdapter = (

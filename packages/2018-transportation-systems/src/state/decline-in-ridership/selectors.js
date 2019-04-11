@@ -1,5 +1,5 @@
-import { createSelector } from 'reselect';
-import { rootState } from '../selectors';
+import { createSelector } from "reselect";
+import { rootState } from "../selectors";
 
 export const getRidershipOverTimeRequest = createSelector(
   rootState,
@@ -12,22 +12,22 @@ export const getRidershipOverTimeData = createSelector(
     (data || {}).data &&
     data.data
       .map(yearObj => ({
-        type: 'Weekday',
+        type: "Weekday",
         year: yearObj.year,
-        ons: yearObj.weekday_sum_ons,
+        ons: yearObj.weekday_sum_ons
       }))
       .concat(
         data.data.map(yearObj => ({
-          type: 'Saturday',
+          type: "Saturday",
           year: yearObj.year,
-          ons: yearObj.saturday_sum_ons,
+          ons: yearObj.saturday_sum_ons
         }))
       )
       .concat(
         data.data.map(yearObj => ({
-          type: 'Sunday',
+          type: "Sunday",
           year: yearObj.year,
-          ons: yearObj.sunday_sum_ons,
+          ons: yearObj.sunday_sum_ons
         }))
       )
 );

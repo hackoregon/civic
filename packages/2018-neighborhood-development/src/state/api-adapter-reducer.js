@@ -4,25 +4,25 @@ const apiAdapterReducer = ({
   INITIAL_STATE,
   API_START,
   API_SUCCESS,
-  API_ERROR,
+  API_ERROR
 }) => (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case API_START:
       return {
         ...state,
-        pending: true,
+        pending: true
       };
     case API_ERROR:
       return {
         ...state,
         pending: false,
-        error: action.payload,
+        error: action.payload
       };
     case API_SUCCESS:
       return {
         ...state,
         pending: false,
-        data: action.payload,
+        data: action.payload
       };
     default:
       return state;

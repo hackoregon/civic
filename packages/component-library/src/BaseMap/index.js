@@ -1,1 +1,1 @@
-export default from './BaseMap';
+export default from "./BaseMap";

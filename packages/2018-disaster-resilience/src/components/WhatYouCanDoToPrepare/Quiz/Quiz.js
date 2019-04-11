@@ -1,14 +1,14 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import PropTypes from "prop-types";
+import React, { Component } from "react";
 
-import QRMap from '../QR';
-import QuestionForm from './QuestionForm';
+import QRMap from "../QR";
+import QuestionForm from "./QuestionForm";
 
 class Quiz extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      questionId: 1,
+      questionId: 1
     };
 
     this.totalQuestions = QRMap.length;
@@ -48,7 +48,7 @@ class Quiz extends Component {
 }
 
 Quiz.propTypes = {
-  done: PropTypes.func.isRequired,
+  done: PropTypes.func.isRequired
 };
 
 export default Quiz;

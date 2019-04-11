@@ -1,8 +1,8 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { loader, error, gradientLabel, emphasis } from '../css-utils';
+import React from "react";
+import { connect } from "react-redux";
+import { loader, error, gradientLabel, emphasis } from "../css-utils";
 
-import '@hackoregon/component-library/assets/vendor/react-select.min.css';
+import "@hackoregon/component-library/assets/vendor/react-select.min.css";
 
 import {
   Dropdown,
@@ -10,22 +10,22 @@ import {
   Collapsable,
   LineChart,
   BarChart,
-  GradientScale,
-} from '@hackoregon/component-library';
+  GradientScale
+} from "@hackoregon/component-library";
 
 import {
   fetchAllRentalCrisisCities,
   fetchRentalCrisisCity,
-  setRentalCrisisCity,
-} from '../../state/rental-crisis/actions';
+  setRentalCrisisCity
+} from "../../state/rental-crisis/actions";
 import {
   isCityLoading,
   getCityError,
   getSelectedCity,
   getSelectedCityData,
   getSelectedCityRank,
-  getAllCities,
-} from '../../state/rental-crisis/selectors';
+  getAllCities
+} from "../../state/rental-crisis/selectors";
 
 export class PortlandNeedsAffordableRentalUnits extends React.Component {
   componentDidMount() {
@@ -41,7 +41,7 @@ export class PortlandNeedsAffordableRentalUnits extends React.Component {
       selectedCity,
       selectedCityData,
       selectedCityRank,
-      setCity,
+      setCity
     } = this.props;
 
     const cityOptions =
@@ -82,9 +82,9 @@ export class PortlandNeedsAffordableRentalUnits extends React.Component {
                 {selectedCityRank && (
                   <div>
                     <p>
-                      {selectedCity} ranks{' '}
+                      {selectedCity} ranks{" "}
                       <strong className={emphasis}>
-                        {selectedCityRank.rank}/{selectedCityRank.total}{' '}
+                        {selectedCityRank.rank}/{selectedCityRank.total}{" "}
                       </strong>
                       This ranking is based on the number of AAA (adequate,
                       affordable, and available) units per 100 ELI (extremely
@@ -173,7 +173,7 @@ export class PortlandNeedsAffordableRentalUnits extends React.Component {
 }
 
 PortlandNeedsAffordableRentalUnits.displayName =
-  'PortlandNeedsAffordableRentalUnits';
+  "PortlandNeedsAffordableRentalUnits";
 
 // Connect this to the redux store when necessary
 export default connect(
@@ -183,7 +183,7 @@ export default connect(
     selectedCity: getSelectedCity(state),
     selectedCityData: getSelectedCityData(state),
     selectedCityRank: getSelectedCityRank(state),
-    isError: getCityError(state),
+    isError: getCityError(state)
   }),
   dispatch => ({
     fetchAllCities() {
@@ -192,6 +192,6 @@ export default connect(
     setCity(city = {}) {
       dispatch(fetchRentalCrisisCity(city.value));
       dispatch(setRentalCrisisCity(city.value));
-    },
+    }
   })
 )(PortlandNeedsAffordableRentalUnits);

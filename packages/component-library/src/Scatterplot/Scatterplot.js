@@ -1,24 +1,24 @@
-import PropTypes from 'prop-types';
-import React from 'react';
+import PropTypes from "prop-types";
+import React from "react";
 import {
   VictoryAxis,
   VictoryChart,
   VictoryLabel,
   VictoryPortal,
   VictoryScatter,
-  VictoryTooltip,
-} from 'victory';
+  VictoryTooltip
+} from "victory";
 
-import ChartContainer from '../ChartContainer';
-import SimpleLegend from '../SimpleLegend';
-import civicFormat from '../utils/civicFormat';
+import ChartContainer from "../ChartContainer";
+import SimpleLegend from "../SimpleLegend";
+import civicFormat from "../utils/civicFormat";
 import {
   chartEvents,
   getDefaultDomain,
   getDefaultDataSeriesLabels,
-  getDefaultFillStyle,
-} from '../utils/chartHelpers';
-import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
+  getDefaultFillStyle
+} from "../utils/chartHelpers";
+import CivicVictoryTheme from "../VictoryTheme/VictoryThemeIndex";
 
 /*
  * @method Scatterplot
@@ -56,7 +56,7 @@ const Scatterplot = ({
   yNumberFormatter,
   invertX,
   invertY,
-  legendComponent,
+  legendComponent
 }) => {
   const chartDomain = domain || getDefaultDomain(data, dataKey, dataValue);
 
@@ -87,7 +87,7 @@ const Scatterplot = ({
       >
         <VictoryAxis
           animate={{ onEnter: { duration: 500 } }}
-          style={{ grid: { stroke: 'none' } }}
+          style={{ grid: { stroke: "none" } }}
           tickFormat={x => xNumberFormatter(x)}
           title="X Axis"
           invertAxis={invertX}
@@ -136,7 +136,7 @@ const Scatterplot = ({
               dataValueLabel ? d[dataValueLabel] : yLabel
             }: ${yNumberFormatter(d[dataValue])}`,
             series: d[dataSeries],
-            ...(size && { bubbleSize: d[size.key] }),
+            ...(size && { bubbleSize: d[size.key] })
           }))}
           events={chartEvents}
           labelComponent={
@@ -176,7 +176,7 @@ Scatterplot.propTypes = {
   size: PropTypes.shape({
     key: PropTypes.string,
     minSize: PropTypes.number,
-    maxSize: PropTypes.number,
+    maxSize: PropTypes.number
   }),
   style: PropTypes.objectOf(PropTypes.object),
   title: PropTypes.string,
@@ -187,14 +187,14 @@ Scatterplot.propTypes = {
   yNumberFormatter: PropTypes.func,
   invertX: PropTypes.bool,
   invertY: PropTypes.bool,
-  legendComponent: PropTypes.func,
+  legendComponent: PropTypes.func
 };
 
 Scatterplot.defaultProps = {
   data: null,
-  dataKey: 'x',
+  dataKey: "x",
   dataKeyLabel: null,
-  dataValue: 'y',
+  dataValue: "y",
   dataValueLabel: null,
   dataSeries: null,
   dataSeriesLabel: null,
@@ -203,13 +203,13 @@ Scatterplot.defaultProps = {
   style: null,
   title: null,
   subtitle: null,
-  xLabel: 'X',
-  yLabel: 'Y',
+  xLabel: "X",
+  yLabel: "Y",
   xNumberFormatter: civicFormat.numeric,
   yNumberFormatter: civicFormat.numeric,
   invertX: false,
   invertY: false,
-  legendComponent: null,
+  legendComponent: null
 };
 
 export default Scatterplot;

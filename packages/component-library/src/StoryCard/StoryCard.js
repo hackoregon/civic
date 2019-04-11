@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { css } from 'emotion';
-import StoryFooter from './StoryFooter';
+import React from "react";
+import PropTypes from "prop-types";
+import { css } from "emotion";
+import StoryFooter from "./StoryFooter";
 
 const cardClass = css`
   text-align: center;
@@ -22,13 +22,13 @@ const StoryCard = ({ cardId, collectionId, title, children }) => (
   </div>
 );
 
-StoryCard.displayName = 'StoryCard';
+StoryCard.displayName = "StoryCard";
 
 StoryCard.propTypes = {
   title: PropTypes.string,
   cardId: PropTypes.string,
   collectionId: PropTypes.string,
-  children: PropTypes.node,
+  children: PropTypes.node
 };
 
 export default StoryCard;

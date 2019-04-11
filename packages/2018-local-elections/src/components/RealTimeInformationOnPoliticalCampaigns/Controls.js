@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import { Dropdown } from '@hackoregon/component-library';
+import { Dropdown } from "@hackoregon/component-library";
 
 const propTypes = {
   campaign: PropTypes.object,
@@ -9,21 +9,21 @@ const propTypes = {
   setCampaign: PropTypes.func,
   electionCycles: PropTypes.array,
   electionCycle: PropTypes.object,
-  setElectionCycle: PropTypes.func,
+  setElectionCycle: PropTypes.func
 };
 
 const defaultProps = {
   campaign: {},
   committees: [],
   electionCycle: {},
-  electionCycles: [],
+  electionCycles: []
 };
 
 class Controls extends React.Component {
   renderElectionCycleDropdown() {
     const options = this.props.electionCycles.map(cycle => ({
       value: cycle.name,
-      label: cycle.name,
+      label: cycle.name
     }));
     const value = options.find(o => o.value === this.props.electionCycle.name);
 
@@ -48,7 +48,7 @@ class Controls extends React.Component {
   renderCampaignDropdown() {
     const options = this.props.campaigns.map(campaign => ({
       value: campaign.filer_name,
-      label: campaign.filer_name,
+      label: campaign.filer_name
     }));
     const value = options.find(o => o.value === this.props.campaign.filer_name);
 
@@ -76,8 +76,8 @@ class Controls extends React.Component {
 
     return (
       <div>
-        <div style={{ float: 'left', width: '50%' }}>{campaignDropdown}</div>
-        <div style={{ float: 'right', width: '50%' }}>
+        <div style={{ float: "left", width: "50%" }}>{campaignDropdown}</div>
+        <div style={{ float: "right", width: "50%" }}>
           {electionCycleDropdown}
         </div>
       </div>

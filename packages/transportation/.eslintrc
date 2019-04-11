@@ -4,9 +4,7 @@
   "env": {
     "mocha": true
   },
-  "plugins": [
-    "react"
-  ],
+  "plugins": ["react"],
   "rules": {
     "jsx-a11y/img-has-alt": 0,
     "prefer-arrow-callback": 0,
@@ -15,11 +13,9 @@
     "react/require-default-props": 0,
     "arrow-body-style": 0,
     "import/no-extraneous-dependencies": [
-      "error", {
-        "devDependencies": [
-          "packages/**/*.story.js",
-          "packages/**/*.test.js"
-          ]
+      "error",
+      {
+        "devDependencies": ["packages/**/*.story.js", "packages/**/*.test.js"]
       }
     ],
     "comma-dangle": [

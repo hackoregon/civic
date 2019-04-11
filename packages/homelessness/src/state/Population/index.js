@@ -2,4 +2,4 @@
  * exports from /Population
  */
 
-export default from './reducer';
+export default from "./reducer";

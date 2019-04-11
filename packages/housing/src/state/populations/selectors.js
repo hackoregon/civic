@@ -1,8 +1,8 @@
-import { createSelector } from 'reselect';
-import { propOr } from 'ramda';
+import { createSelector } from "reselect";
+import { propOr } from "ramda";
 
 // api : State -> Obj
-export const getPopulationsState = state => propOr({}, 'populations')(state);
+export const getPopulationsState = state => propOr({}, "populations")(state);
 
 export const getPopulationsRequest = createSelector(
   getPopulationsState,

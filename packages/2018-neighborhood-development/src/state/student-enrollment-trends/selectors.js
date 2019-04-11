@@ -1,5 +1,5 @@
-import { createSelector } from 'reselect';
-import { rootState } from '../selectors';
+import { createSelector } from "reselect";
+import { rootState } from "../selectors";
 
 export const getStudentEnrollmentTrendsRequest = createSelector(
   rootState,
@@ -22,7 +22,7 @@ const calculateStudents = school =>
     underrepresented:
       calcStudents(100, d.enroll_current) -
       (calcStudents(d.enroll_white, d.enroll_current) +
-        calcStudents(d.enroll_asian, d.enroll_current)),
+        calcStudents(d.enroll_asian, d.enroll_current))
   }));
 
 const getProperty = key =>
@@ -31,13 +31,13 @@ const getProperty = key =>
     state => state[key]
   );
 
-export const isSchoolListPending = getProperty('schoolListPending');
-export const isSchoolDataPending = getProperty('schoolDataPending');
-export const catchSchoolListFailure = getProperty('schoolListFailure');
-export const catchSchoolDataFailure = getProperty('schoolDataFailure');
-export const getSchoolList = getProperty('schoolList');
-export const getSchoolData = getProperty('schoolData');
-export const getSelectedSchool = getProperty('selectedSchool');
+export const isSchoolListPending = getProperty("schoolListPending");
+export const isSchoolDataPending = getProperty("schoolDataPending");
+export const catchSchoolListFailure = getProperty("schoolListFailure");
+export const catchSchoolDataFailure = getProperty("schoolDataFailure");
+export const getSchoolList = getProperty("schoolList");
+export const getSchoolData = getProperty("schoolData");
+export const getSelectedSchool = getProperty("selectedSchool");
 
 export const getProcessedSchoolData = createSelector(
   getStudentEnrollmentTrendsRequest,

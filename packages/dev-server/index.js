@@ -1,16 +1,16 @@
-const chalk = require('chalk');
-const express = require('express');
-const webpack = require('webpack');
-const resolve = require('path').resolve;
-const compression = require('compression');
+const chalk = require("chalk");
+const express = require("express");
+const webpack = require("webpack");
+const resolve = require("path").resolve;
+const compression = require("compression");
 
 const app = express();
-const isProd = process.env.NODE_ENV === 'production';
-const outputPath = resolve(process.cwd(), isProd ? 'dist' : 'build');
-const config = require(resolve(process.cwd(), 'webpack.config.js'));
+const isProd = process.env.NODE_ENV === "production";
+const outputPath = resolve(process.cwd(), isProd ? "dist" : "build");
+const config = require(resolve(process.cwd(), "webpack.config.js"));
 
-const devMiddleware = require('webpack-dev-middleware');
-const hotMiddleware = require('webpack-hot-middleware');
+const devMiddleware = require("webpack-dev-middleware");
+const hotMiddleware = require("webpack-hot-middleware");
 
 module.exports = function() {
   console.log(
@@ -21,40 +21,39 @@ module.exports = function() {
 
   const announceServer = () => {
     console.log(chalk.green(`\nServer up at http://localhost:${port}`));
-    console.log(chalk.yellow('\nLogging requests...\n'));
+    console.log(chalk.yellow("\nLogging requests...\n"));
   };
 
   if (isProd) {
     // Enable gzip compression and serve assets as they build when prod
     app.use(compression());
 
-    console.log(chalk.gray('Compiling production webpack config'));
+    console.log(chalk.gray("Compiling production webpack config"));
     webpack(config, afterWebpack);
   } else {
     // Start a webpack dev server with hot module reloading when dev
-    console.log(chalk.gray('Compiling webpack config'));
+    console.log(chalk.gray("Compiling webpack config"));
     const compiler = webpack(config);
 
     const middleware = devMiddleware(compiler, {
       // lazy: true,
       publicPath: config.output.publicPath,
       stats: false,
-      logLevel: 'warn',
+      logLevel: "warn"
     });
 
     app.use(middleware);
-    app.use(hotMiddleware(compiler, {
-    }));
+    app.use(hotMiddleware(compiler, {}));
   }
 
   // Respond with static files when they exist
-  app.use('/', express.static(outputPath));
+  app.use("/", express.static(outputPath));
 
   // Redirect all other routes to index.html to let React handle routing client-side
   app.get(
-    '/*',
+    "/*",
     (req, res) =>
-      console.log('Servicing request for', req.url) ||
+      console.log("Servicing request for", req.url) ||
       res.send(`
   <!DOCTYPE html>
   <html>

@@ -5,8 +5,8 @@ import {
   COORDS_START,
   COORDS_SUCCESS,
   COORDS_FAILURE,
-  SET_COORDS,
-} from './actions';
+  SET_COORDS
+} from "./actions";
 
 const INITIAL_STATE = {
   pending: false,
@@ -15,7 +15,7 @@ const INITIAL_STATE = {
   coordsPending: false,
   coordsError: null,
   coordsData: null,
-  selectedCoords: null,
+  selectedCoords: null
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -25,47 +25,47 @@ const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         pending: true,
         error: null,
-        data: null,
+        data: null
       };
     case API_SUCCESS:
       return {
         ...state,
         pending: false,
         error: null,
-        data: action.payload.slide_data,
+        data: action.payload.slide_data
       };
     case API_FAILURE:
       return {
         ...state,
         pending: false,
         error: action.payload,
-        data: null,
+        data: null
       };
     case COORDS_START:
       return {
         ...state,
         coordsPending: true,
         coordsError: null,
-        coordsData: null,
+        coordsData: null
       };
     case COORDS_SUCCESS:
       return {
         ...state,
         coordsPending: false,
         coordsError: null,
-        coordsData: action.payload.results,
+        coordsData: action.payload.results
       };
     case COORDS_FAILURE:
       return {
         ...state,
         coordsPending: false,
         coordsError: action.payload,
-        coordsData: null,
+        coordsData: null
       };
     case SET_COORDS:
       return {
         ...state,
-        selectedCoords: action.selectedCoords,
+        selectedCoords: action.selectedCoords
       };
     default:
       return state;

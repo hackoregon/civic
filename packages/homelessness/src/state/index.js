@@ -1,9 +1,9 @@
-import { combineReducers } from 'redux';
-import { routerReducer } from 'react-router-redux';
-import population from './Population';
-import definition from './Definition';
-import services211 from './Services211';
-import migration from './Migration';
+import { combineReducers } from "redux";
+import { routerReducer } from "react-router-redux";
+import population from "./Population";
+import definition from "./Definition";
+import services211 from "./Services211";
+import migration from "./Migration";
 
 export default function createReducer(asyncReducers) {
   return combineReducers({
@@ -12,6 +12,6 @@ export default function createReducer(asyncReducers) {
     population,
     definition,
     services211,
-    migration,
+    migration
   });
 }

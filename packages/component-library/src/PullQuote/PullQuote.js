@@ -1,10 +1,10 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { css } from 'emotion';
-import { TwitterShareButton, TwitterIcon } from 'react-share';
+import PropTypes from "prop-types";
+import React from "react";
+import { css } from "emotion";
+import { TwitterShareButton, TwitterIcon } from "react-share";
 
 const quoteClass = css`
-  font-family: 'Merriweather', serif;
+  font-family: "Merriweather", serif;
   font-size: 24px;
   color: #eb4d5f;
   margin-bottom: 12px;
@@ -41,18 +41,18 @@ const PullQuote = ({ quoteText, quoteAttribution, url }) => (
         ) : null}
       </blockquote>
       <div className={iconClass}>
-        <TwitterIcon size={24} round iconBgStyle={{ fill: '#eb4d5f' }} />
+        <TwitterIcon size={24} round iconBgStyle={{ fill: "#eb4d5f" }} />
       </div>
     </TwitterShareButton>
   </div>
 );
 
-PullQuote.displayName = 'PullQuote';
+PullQuote.displayName = "PullQuote";
 
 PullQuote.propTypes = {
   quoteText: PropTypes.string,
   quoteAttribution: PropTypes.string,
-  url: PropTypes.string,
+  url: PropTypes.string
 };
 
 export default PullQuote;

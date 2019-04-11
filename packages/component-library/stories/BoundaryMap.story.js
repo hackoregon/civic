@@ -1,38 +1,35 @@
-import React from 'react';
+import React from "react";
 /* eslint-disable import/no-extraneous-dependencies */
-import { storiesOf } from '@storybook/react';
-import {
-  withKnobs,
-  number,
-  boolean,
-  color,
-} from '@storybook/addon-knobs';
+import { storiesOf } from "@storybook/react";
+import { withKnobs, number, boolean, color } from "@storybook/addon-knobs";
 
-import { checkA11y } from '@storybook/addon-a11y';
-import { BaseMap } from '../src';
-import { BoundaryMap } from '../src';
-import { PathMap } from '../src';
-import { DemoJSONLoader } from '../src';
+import { checkA11y } from "@storybook/addon-a11y";
+import { BaseMap } from "../src";
+import { BoundaryMap } from "../src";
+import { PathMap } from "../src";
+import { DemoJSONLoader } from "../src";
 
-const mapData = ['https://service.civicpdx.org/neighborhood-development/sandbox/slides/bikelanes/'];
+const mapData = [
+  "https://service.civicpdx.org/neighborhood-development/sandbox/slides/bikelanes/"
+];
 
 const demoMap = () => (
   <DemoJSONLoader urls={mapData}>
     {data => {
       const getPolygon = d => d.coordinates;
 
-      const colorPicker = color('Boundary Color:', '#19B7AA');
+      const colorPicker = color("Boundary Color:", "#19B7AA");
 
       const colorOption1 = colorPicker
         .slice(5, -1)
-        .split(',')
+        .split(",")
         .map(n => parseInt(n, 10))
         .filter((n, i) => i < 3);
 
       const colorOption2 = [25, 183, 170, 255];
 
       const boundaryColor =
-        colorPicker.charAt(0) !== '#' ? colorOption1 : colorOption2;
+        colorPicker.charAt(0) !== "#" ? colorOption1 : colorOption2;
 
       const getLineColor = d => boundaryColor;
 
@@ -42,22 +39,19 @@ const demoMap = () => (
         range: true,
         min: 1,
         max: 10,
-        step: 1,
+        step: 1
       };
 
       const lineWidthScale = number(
-        'Boundary Width Scale:',
+        "Boundary Width Scale:",
         1,
         lineWidthScaleOptions
       );
 
-      const filled = boolean('Boundary Filled:', false);
+      const filled = boolean("Boundary Filled:", false);
 
       return (
-        <BaseMap
-          initialZoom={10.25}
-          initialLatitude={45.5381}
-        >
+        <BaseMap initialZoom={10.25} initialLatitude={45.5381}>
           <BoundaryMap
             data={data.slide_meta.boundary}
             opacity={1.0}
@@ -85,7 +79,7 @@ const demoMap = () => (
 );
 
 export default () =>
-  storiesOf('Maps/Boundary Map', module)
+  storiesOf("Maps/Boundary Map", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
-    .add('Simple usage', demoMap);
+    .add("Simple usage", demoMap);

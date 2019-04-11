@@ -1,5 +1,5 @@
-import { actionEmitter } from '../utils';
-import { actionTypes } from './constants';
+import { actionEmitter } from "../utils";
+import { actionTypes } from "./constants";
 
 export const updateUserIncome = actionEmitter(actionTypes.UPDATE_USER_INCOME);
 export const updateUserUnitSize = actionEmitter(

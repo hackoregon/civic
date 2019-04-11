@@ -1,10 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { createStore, compose, applyMiddleware } from 'redux';
-import { routerMiddleware } from 'react-router-redux';
-import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
-import thunk from 'redux-thunk';
-import createReducer from './state';
-import { sideEffectsMiddleware } from './middleware';
+import { createStore, compose, applyMiddleware } from "redux";
+import { routerMiddleware } from "react-router-redux";
+import reduxImmutableStateInvariant from "redux-immutable-state-invariant";
+import thunk from "redux-thunk";
+import createReducer from "./state";
+import { sideEffectsMiddleware } from "./middleware";
 
 function configureStoreProd(initialState = {}, history) {
   const middlewares = [thunk, sideEffectsMiddleware, routerMiddleware(history)];
@@ -27,7 +27,7 @@ function configureStoreDev(initialState = {}, history) {
     reduxImmutableStateInvariant(),
     thunk,
     sideEffectsMiddleware,
-    routerMiddleware(history),
+    routerMiddleware(history)
   ];
 
   const composeEnhancers =
@@ -42,8 +42,8 @@ function configureStoreDev(initialState = {}, history) {
   store.asyncReducers = {};
 
   if (module.hot) {
-    module.hot.accept('./state', () => {
-      Promise.resolve(require.ensure([], require => require('./state'))).then(
+    module.hot.accept("./state", () => {
+      Promise.resolve(require.ensure([], require => require("./state"))).then(
         reducerModule => {
           const createReducers = reducerModule.default;
           const nextReducers = createReducers(store.asyncReducers);
@@ -57,7 +57,7 @@ function configureStoreDev(initialState = {}, history) {
 }
 
 const configureStore =
-  process.env.NODE_ENV === 'production'
+  process.env.NODE_ENV === "production"
     ? configureStoreProd
     : configureStoreDev;
 

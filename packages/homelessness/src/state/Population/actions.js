@@ -4,22 +4,22 @@
  *
  */
 
-import { actionTypes } from './constants';
-import { compareEthnicityApi, compareAgeGenderApi } from '../../api';
+import { actionTypes } from "./constants";
+import { compareEthnicityApi, compareAgeGenderApi } from "../../api";
 
 const getAgeGender = payload => ({
   type: actionTypes.GET_AGE_GENDER,
-  payload,
+  payload
 });
 
 const getAgeGenderSuccess = payload => ({
   type: actionTypes.GET_AGE_GENDER_SUCCESS,
-  payload,
+  payload
 });
 
 const getAgeGenderFailure = error => ({
   type: actionTypes.GET_AGE_GENDER_FAILURE,
-  error,
+  error
 });
 
 export const fetchAgeGenderData = payload => dispatch => {
@@ -32,17 +32,17 @@ export const fetchAgeGenderData = payload => dispatch => {
 
 const getEthnicity = payload => ({
   type: actionTypes.GET_ETHNICITY,
-  payload,
+  payload
 });
 
 const getEthnicitySuccess = payload => ({
   type: actionTypes.GET_ETHNICITY_SUCCESS,
-  payload,
+  payload
 });
 
 const getEthnicityFailure = error => ({
   type: actionTypes.GET_DATA_FAILURE,
-  error,
+  error
 });
 
 export const fetchEthnicityData = payload => dispatch => {
@@ -60,5 +60,5 @@ export const fetchPopulationData = dispatch => {
 
 export default {
   fetchEthnicityData,
-  fetchAgeGenderData,
+  fetchAgeGenderData
 };

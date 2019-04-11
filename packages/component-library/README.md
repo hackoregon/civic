@@ -1,6 +1,6 @@
 ## Hack Oregon's React Component Library
----
 
+---
 
 Hack Oregon's [React](http://facebook.github.io/react/) Component Library encompasses platform components, a style guide, as well as data visualization components to be shared across projects.
 

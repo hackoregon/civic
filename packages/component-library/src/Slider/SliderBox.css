@@ -16,7 +16,7 @@
   vertical-align: middle;
 }
 .rc-slider-tooltip-inner:before {
-  content: '$ ';
+  content: "$ ";
 }
 
 .rc-slider-track {

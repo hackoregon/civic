@@ -26,7 +26,7 @@ To use a component in your project, import the precompiled component from the li
 Example: importing the StoryCard component from the component library
 
 ```javascript
-import StoryCard from '@hackoregon/component-library/lib/StoryCard/StoryCard';
+import StoryCard from "@hackoregon/component-library/lib/StoryCard/StoryCard";
 ```
 
 #### Publishing to NPM

@@ -1,11 +1,11 @@
-import React from 'react';
-import { css } from 'emotion';
+import React from "react";
+import { css } from "emotion";
 
 import {
   CivicStoryCard,
   ChartContainer,
-  Collapsable,
-} from '@hackoregon/component-library';
+  Collapsable
+} from "@hackoregon/component-library";
 
 const infographicContainer = css`
   display: flex;
@@ -75,8 +75,8 @@ export class SignificantStructuralDamage extends React.Component {
                 Portland’s 12 bridges, only the Tillikum and Sellwood Bridges
                 are expected to be safe and usable after a Cascadia quake. A
                 retrofitted Burnside Bridge could provide an essential lifeline
-                for rescue and recovery for Portland. This{' '}
-                <a href="https://youtu.be/sn98JkN5HXc">video simulation</a>{' '}
+                for rescue and recovery for Portland. This{" "}
+                <a href="https://youtu.be/sn98JkN5HXc">video simulation</a>{" "}
                 shows a simulated collapse of the Burnside Bridge based on
                 its&#39; current structural condition.
               </p>
@@ -108,7 +108,7 @@ export class SignificantStructuralDamage extends React.Component {
   }
 }
 
-SignificantStructuralDamage.displayName = 'SignificantStructuralDamage';
+SignificantStructuralDamage.displayName = "SignificantStructuralDamage";
 
 // Connect this to the redux store when necessary
 export default SignificantStructuralDamage;

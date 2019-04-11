@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import DeckGL, { PathLayer } from 'deck.gl';
-import { css } from 'emotion';
+import PropTypes from "prop-types";
+import React from "react";
+import DeckGL, { PathLayer } from "deck.gl";
+import { css } from "emotion";
 
 const crosshair = css`
   cursor: crosshair;
@@ -25,14 +25,14 @@ const PathMap = props => {
     x,
     y,
     onHover,
-    children,
+    children
   } = props;
 
   const tooltip = React.Children.map(children, child => {
     return React.cloneElement(child, {
       tooltipInfo,
       x,
-      y,
+      y
     });
   });
 
@@ -84,7 +84,7 @@ PathMap.propTypes = {
   x: PropTypes.number,
   y: PropTypes.number,
   onHover: PropTypes.func,
-  children: PropTypes.node,
+  children: PropTypes.node
 };
 
 PathMap.defaultProps = {
@@ -96,7 +96,7 @@ PathMap.defaultProps = {
   rounded: false,
   autoHighlight: true,
   highlightColor: [0, 0, 128, 191],
-  visible: true,
+  visible: true
 };
 
 export default PathMap;

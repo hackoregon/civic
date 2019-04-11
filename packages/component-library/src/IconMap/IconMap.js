@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import DeckGL, { IconLayer } from 'deck.gl';
-import { css } from 'emotion';
+import PropTypes from "prop-types";
+import React from "react";
+import DeckGL, { IconLayer } from "deck.gl";
+import { css } from "emotion";
 
 const crosshair = css`
   cursor: crosshair;
@@ -26,7 +26,7 @@ const IconMap = props => {
     x,
     y,
     onHover,
-    children,
+    children
   } = props;
 
   const { zoom } = viewport;
@@ -36,7 +36,7 @@ const IconMap = props => {
     return React.cloneElement(child, {
       tooltipInfo,
       x,
-      y,
+      y
     });
   });
 
@@ -90,7 +90,7 @@ IconMap.propTypes = {
   x: PropTypes.number,
   y: PropTypes.number,
   onHover: PropTypes.func,
-  children: PropTypes.node,
+  children: PropTypes.node
 };
 
 IconMap.defaultProps = {
@@ -99,7 +99,7 @@ IconMap.defaultProps = {
   getPosition: d => d.geometry.coordinates,
   getSize: () => 10,
   getColor: () => [0, 0, 0],
-  visible: true,
+  visible: true
 };
 
 export default IconMap;

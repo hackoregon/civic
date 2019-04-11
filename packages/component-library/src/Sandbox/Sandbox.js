@@ -1,11 +1,11 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { css } from 'emotion';
+import PropTypes from "prop-types";
+import React from "react";
+import { css } from "emotion";
 
-import BaseMap from '../BaseMap/BaseMap';
-import CivicSandboxMap from '../CivicSandboxMap/CivicSandboxMap';
-import CivicSandboxTooltip from '../CivicSandboxMap/CivicSandboxTooltip';
-import SandboxDrawer from './SandboxDrawer';
+import BaseMap from "../BaseMap/BaseMap";
+import CivicSandboxMap from "../CivicSandboxMap/CivicSandboxMap";
+import CivicSandboxTooltip from "../CivicSandboxMap/CivicSandboxTooltip";
+import SandboxDrawer from "./SandboxDrawer";
 
 const baseMapWrapper = css(`
   height: 80vh;
@@ -56,7 +56,8 @@ const Sandbox = ({
             height: 65vh;
             min-height: 500px;
           }
-      `)}>
+      `)}
+      >
         <SandboxDrawer
           data={data}
           selectedSlide={selectedSlide}
@@ -119,7 +120,7 @@ Sandbox.propTypes = {
   onSlideHover: PropTypes.func,
   tooltipInfo: PropTypes.array,
   allSlides: PropTypes.array.isRequired,
-  foundationMapProps: PropTypes.object.isRequired,
+  foundationMapProps: PropTypes.object.isRequired
 };
 
 export default Sandbox;

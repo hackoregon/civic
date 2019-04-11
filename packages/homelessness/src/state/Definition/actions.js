@@ -4,22 +4,22 @@
  *
  */
 
-import { actionTypes } from './constants';
-import { typesOfSheltersApi } from '../../api';
+import { actionTypes } from "./constants";
+import { typesOfSheltersApi } from "../../api";
 
 const getShelterType = payload => ({
   type: actionTypes.GET_SHELTER_TYPE,
-  payload,
+  payload
 });
 
 const getShelterTypeSuccess = payload => ({
   type: actionTypes.GET_SHELTER_TYPE_SUCCESS,
-  payload,
+  payload
 });
 
 const getShelterTypeFailure = payload => ({
   type: actionTypes.GET_SHELTER_TYPE_FAILURE,
-  payload,
+  payload
 });
 
 export const fetchShelterTypeData = payload => dispatch => {
@@ -35,5 +35,5 @@ export const fetchDefinitionData = dispatch => {
 };
 
 export default {
-  fetchShelterTypeData,
+  fetchShelterTypeData
 };

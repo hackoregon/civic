@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import ReactPlayer from 'react-player';
+import React, { Component } from "react";
+import ReactPlayer from "react-player";
 
 class BagelShop extends Component {
   render() {

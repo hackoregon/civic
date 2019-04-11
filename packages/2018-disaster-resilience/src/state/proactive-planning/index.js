@@ -1,9 +1,9 @@
-import { API_START, API_SUCCESS, API_FAILURE } from './actions';
+import { API_START, API_SUCCESS, API_FAILURE } from "./actions";
 
 const INITIAL_STATE = {
   pending: false,
   error: null,
-  data: null,
+  data: null
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -13,21 +13,21 @@ const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         pending: true,
         error: null,
-        data: null,
+        data: null
       };
     case API_SUCCESS:
       return {
         ...state,
         pending: false,
         error: null,
-        data: action.payload.results.features,
+        data: action.payload.results.features
       };
     case API_FAILURE:
       return {
         ...state,
         pending: false,
         error: action.payload,
-        data: null,
+        data: null
       };
     default:
       return state;

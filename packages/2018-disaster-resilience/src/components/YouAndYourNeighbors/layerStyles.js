@@ -5,43 +5,43 @@ export const poiIconMapping = {
     y: 0,
     width: 250,
     height: 250,
-    mask: true,
+    mask: true
   },
   Hospital: {
     x: 250,
     y: 0,
     width: 250,
     height: 250,
-    mask: true,
+    mask: true
   },
   BEECN: {
     x: 500,
     y: 0,
     width: 250,
     height: 250,
-    mask: true,
+    mask: true
   },
-  'Fire Station': {
+  "Fire Station": {
     x: 0,
     y: 250,
     width: 250,
     height: 250,
-    mask: true,
+    mask: true
   },
   Pin: {
     x: 250,
     y: 250,
     width: 250,
     height: 250,
-    mask: true,
+    mask: true
   },
   COMMCTR: {
     x: 500,
     y: 250,
     width: 250,
     height: 250,
-    mask: true,
-  },
+    mask: true
+  }
 };
 
 export const poiIconZoomScale = zoom =>
@@ -58,14 +58,14 @@ export const poiIconZoomScale = zoom =>
     : 1;
 
 export const poiGetIconColor = f =>
-  f.properties.type === 'BEECN'
+  f.properties.type === "BEECN"
     ? [0, 0, 0, 255]
-    : f.properties.type === 'COMMCTR'
+    : f.properties.type === "COMMCTR"
     ? [114, 29, 124, 255]
-    : f.properties.type === 'Fire Station'
+    : f.properties.type === "Fire Station"
     ? [220, 69, 86, 255]
-    : f.properties.type === 'School'
+    : f.properties.type === "School"
     ? [255, 178, 38, 255]
-    : f.properties.type === 'Hospital'
+    : f.properties.type === "Hospital"
     ? [30, 98, 189, 255]
     : [0, 0, 0, 255];

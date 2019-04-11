@@ -1,6 +1,6 @@
-import React from 'react';
-import { css } from 'emotion';
-import SimpleCircle from './SimpleCircle';
+import React from "react";
+import { css } from "emotion";
+import SimpleCircle from "./SimpleCircle";
 
 const policyContainer = css`
   width: 100%;

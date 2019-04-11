@@ -1,11 +1,11 @@
 /* Deprecated or needs refactored to work with Base Map */
 /* eslint-disable */
 
-import React, { Component } from 'react';
-import { render } from 'react-dom';
-import PropTypes from 'prop-types';
-import { css } from 'emotion';
-import DeckGL, { HexagonLayer } from 'deck.gl';
+import React, { Component } from "react";
+import { render } from "react-dom";
+import PropTypes from "prop-types";
+import { css } from "emotion";
+import DeckGL, { HexagonLayer } from "deck.gl";
 
 const crosshair = css`
   cursor: crosshair;
@@ -26,7 +26,7 @@ class HexOverlay extends Component {
     this.startAnimationTimer = null;
     this.intervalTimer = null;
     this.state = {
-      elevationScale: elevationScale.min,
+      elevationScale: elevationScale.min
     };
 
     this._startAnimate = this._startAnimate.bind(this);
@@ -89,7 +89,7 @@ class HexOverlay extends Component {
       y,
       onHover,
       onLayerHover,
-      children,
+      children
     } = this.props;
 
     if (!data) {
@@ -100,7 +100,7 @@ class HexOverlay extends Component {
       return React.cloneElement(child, {
         tooltipInfo,
         x,
-        y,
+        y
       });
     });
     const tooltipRender = tooltipInfo ? tooltip : null;
@@ -116,14 +116,14 @@ class HexOverlay extends Component {
         coverage,
         filled,
         wireframe,
-        id: 'heatmap',
+        id: "heatmap",
         elevationRange: [0, 3000],
         elevationScale: elevation,
         extruded: true,
         pickable: true,
         upperPercentile: 100,
-        getPosition: d => d.geometry.coordinates,
-      }),
+        getPosition: d => d.geometry.coordinates
+      })
     ];
 
     return (

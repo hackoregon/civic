@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import DeckGL, { GeoJsonLayer } from 'deck.gl';
-import { css } from 'emotion';
+import React from "react";
+import PropTypes from "prop-types";
+import DeckGL, { GeoJsonLayer } from "deck.gl";
+import { css } from "emotion";
 
 const crosshair = css`
   cursor: crosshair;
@@ -35,14 +35,14 @@ const MapOverlay = props => {
     getFillColor,
     getLineColor,
     getLineWidth,
-    stroked,
+    stroked
   } = props;
 
   const tooltip = React.Children.map(children, child => {
     return React.cloneElement(child, {
       tooltipInfo,
       x,
-      y,
+      y
     });
   });
 
@@ -54,7 +54,7 @@ const MapOverlay = props => {
     diffuseRatio: 0.5,
     specularRatio: 0.3,
     lightsStrength: [1.0, 0.0, 2.0, 0.0],
-    numberOfLights: 2,
+    numberOfLights: 2
   };
 
   const layer = new GeoJsonLayer({
@@ -78,7 +78,7 @@ const MapOverlay = props => {
     onClick: onLayerClick,
     getElevation: getElevation,
     getFillColor: getFillColor,
-    getLineColor: getLineColor,
+    getLineColor: getLineColor
   });
 
   return (
@@ -100,15 +100,15 @@ MapOverlay.propTypes = {
   stroked: PropTypes.bool,
   strokeWidth: PropTypes.number,
   visible: PropTypes.bool,
-  pickable: PropTypes.bool,
+  pickable: PropTypes.bool
 };
 
 MapOverlay.defaultProps = {
-  id: 'geojson',
+  id: "geojson",
   stroked: false,
   strokeWidth: 1,
   visible: true,
-  pickable: true,
-}
+  pickable: true
+};
 
 export default MapOverlay;

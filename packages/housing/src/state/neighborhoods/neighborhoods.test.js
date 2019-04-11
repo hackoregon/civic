@@ -1,48 +1,49 @@
-import nock from 'nock';
-import configureMockStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
-import { actionTypes } from './constants';
-import * as actions from './actions';
-import reducer from './reducer';
-import * as selectors from './selectors';
+import nock from "nock";
+import configureMockStore from "redux-mock-store";
+import thunk from "redux-thunk";
+import { actionTypes } from "./constants";
+import * as actions from "./actions";
+import reducer from "./reducer";
+import * as selectors from "./selectors";
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-const s3url = 'https://s3-us-west-2.amazonaws.com/hacko-cdn/2017-housing/neighborhoods.geojson';
+const s3url =
+  "https://s3-us-west-2.amazonaws.com/hacko-cdn/2017-housing/neighborhoods.geojson";
 
-describe('neighborhoods actions', () => {
-  describe('neighborhoods fetch actions', () => {
-    it('should have a start action', () => {
+describe("neighborhoods actions", () => {
+  describe("neighborhoods fetch actions", () => {
+    it("should have a start action", () => {
       const expectedAction = {
-        type: actionTypes.CALL_START,
+        type: actionTypes.CALL_START
       };
 
       expect(actions.neighborhoodsStart()).to.eql(expectedAction);
     });
 
-    it('should have a success action', () => {
-      const payload = 'Tacos';
+    it("should have a success action", () => {
+      const payload = "Tacos";
       const expectedAction = {
         type: actionTypes.CALL_SUCCESS,
-        payload,
+        payload
       };
 
       expect(actions.neighborhoodsSuccess(payload)).to.eql(expectedAction);
     });
 
-    it('should have a fail action', () => {
-      const payload = new Error('Hmm. This should not have happened');
+    it("should have a fail action", () => {
+      const payload = new Error("Hmm. This should not have happened");
       const expectedAction = {
         type: actionTypes.CALL_FAIL,
-        payload,
+        payload
       };
 
       expect(actions.neighborhoodsFail(payload)).to.eql(expectedAction);
     });
   });
 
-  describe('neighborhoods fetch thunk', () => {
+  describe("neighborhoods fetch thunk", () => {
     let store;
 
     beforeEach(() => {
@@ -53,18 +54,18 @@ describe('neighborhoods actions', () => {
       nock.cleanAll();
     });
 
-    it('should dispatch fetch and success when the fetch is successful', () => {
+    it("should dispatch fetch and success when the fetch is successful", () => {
       const mockNeighborhoodsResponse = {
         features: [
           {
             id: 1,
-            geometry: [],
-          },
-        ],
+            geometry: []
+          }
+        ]
       };
 
       nock(s3url)
-        .get('')
+        .get("")
         .reply(200, mockNeighborhoodsResponse);
 
       const expectedActions = [
@@ -74,10 +75,10 @@ describe('neighborhoods actions', () => {
           payload: [
             {
               geometry: [],
-              id: 1,
-            },
-          ],
-        },
+              id: 1
+            }
+          ]
+        }
       ];
 
       return store.dispatch(actions.fetchNeighborhoods()).then(() => {
@@ -85,10 +86,10 @@ describe('neighborhoods actions', () => {
       });
     });
 
-    it('should dispatch fetch and fail when the fetch is unsuccessful', () => {
+    it("should dispatch fetch and fail when the fetch is unsuccessful", () => {
       nock(s3url)
-        .get('')
-        .replyWithError('Request was just no good');
+        .get("")
+        .replyWithError("Request was just no good");
 
       const expectedActions = [
         { type: actionTypes.CALL_START },
@@ -98,10 +99,10 @@ describe('neighborhoods actions', () => {
             code: undefined,
             errno: undefined,
             message: `request to ${s3url} failed, reason: Request was just no good`,
-            name: 'FetchError',
-            type: 'system',
-          },
-        },
+            name: "FetchError",
+            type: "system"
+          }
+        }
       ];
 
       return store.dispatch(actions.fetchNeighborhoods()).then(() => {
@@ -111,26 +112,26 @@ describe('neighborhoods actions', () => {
   });
 });
 
-describe('neighborhoods reducer', () => {
+describe("neighborhoods reducer", () => {
   const initialState = {
     pending: false,
     data: null,
-    error: null,
+    error: null
   };
 
-  it('should return the initial state', () => {
+  it("should return the initial state", () => {
     expect(reducer(undefined, {})).to.eql(initialState);
   });
 
-  it('should handle CALL_START', () => {
+  it("should handle CALL_START", () => {
     expect(
       reducer(initialState, {
-        type: actionTypes.CALL_START,
+        type: actionTypes.CALL_START
       })
     ).to.eql({
       pending: true,
       data: null,
-      error: null,
+      error: null
     });
 
     expect(
@@ -138,87 +139,87 @@ describe('neighborhoods reducer', () => {
         {
           pending: true,
           data: null,
-          error: null,
+          error: null
         },
         {
-          type: actionTypes.CALL_START,
+          type: actionTypes.CALL_START
         }
       )
     ).to.eql({
       pending: true,
       data: null,
-      error: null,
+      error: null
     });
   });
 
-  it('should handle CALL_FAIL', () => {
-    const error = new Error('oops');
+  it("should handle CALL_FAIL", () => {
+    const error = new Error("oops");
 
     expect(
       reducer(initialState, {
         type: actionTypes.CALL_FAIL,
-        payload: error,
+        payload: error
       })
     ).to.eql({
       pending: false,
       data: null,
-      error,
+      error
     });
 
     expect(
       reducer(
         {
           pending: true,
-          data: ['stuff'],
-          error: null,
+          data: ["stuff"],
+          error: null
         },
         {
           type: actionTypes.CALL_FAIL,
-          payload: error,
+          payload: error
         }
       )
     ).to.eql({
       pending: false,
       data: null,
-      error,
+      error
     });
   });
 
-  it('should handle CALL_SUCCESS', () => {
-    const data = 'Really good tacos';
+  it("should handle CALL_SUCCESS", () => {
+    const data = "Really good tacos";
 
     expect(
       reducer(initialState, {
         type: actionTypes.CALL_SUCCESS,
-        payload: data,
+        payload: data
       })
     ).to.eql({
       pending: false,
       error: null,
-      data,
+      data
     });
 
     expect(
       reducer(
         {
           pending: true,
-          error: new Error('oops'),
-          data: null,
+          error: new Error("oops"),
+          data: null
         },
         {
           type: actionTypes.CALL_SUCCESS,
-          payload: data,
+          payload: data
         }
       )
     ).to.eql({
       pending: false,
       error: null,
-      data,
+      data
     });
   });
 });
 
-describe('neighborhoods selectors', () => {
+describe("neighborhoods selectors", () => {
   let state;
   const rent = {};
 
@@ -226,25 +227,25 @@ describe('neighborhoods selectors', () => {
     state = { rent };
   });
 
-  describe('getNeighborhoodsState', () => {
-    it('handles no state without errors', () => {
+  describe("getNeighborhoodsState", () => {
+    it("handles no state without errors", () => {
       selectors.getNeighborhoodsState().should.eql({});
     });
   });
 
-  describe('getNeighborhoodsRequest', () => {
-    it('should return an empty object when unset', () => {
+  describe("getNeighborhoodsRequest", () => {
+    it("should return an empty object when unset", () => {
       state = {};
       expect(selectors.getNeighborhoodsRequest(state)).to.eql({});
     });
 
-    it('should return the rent request object when set', () => {
+    it("should return the rent request object when set", () => {
       state = {
         neighborhoods: {
           pending: true,
           data: null,
-          error: null,
-        },
+          error: null
+        }
       };
       expect(selectors.getNeighborhoodsRequest(state)).to.eql(
         state.neighborhoods
@@ -252,14 +253,14 @@ describe('neighborhoods selectors', () => {
     });
   });
 
-  describe('getNeighborhoodsData', () => {
-    it('should return undefined when unset', () => {
+  describe("getNeighborhoodsData", () => {
+    it("should return undefined when unset", () => {
       state = {};
       expect(selectors.getNeighborhoodsData(state)).to.be.undefined;
     });
 
-    it('should return rent data when set', () => {
-      const data = 'you found it!';
+    it("should return rent data when set", () => {
+      const data = "you found it!";
       state = { neighborhoods: { data } };
       expect(selectors.getNeighborhoodsData(state)).to.eql(data);
     });

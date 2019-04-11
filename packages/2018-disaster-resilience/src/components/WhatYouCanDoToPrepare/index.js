@@ -1,14 +1,14 @@
-import React from 'react';
+import React from "react";
 
-import { CivicStoryCard } from '@hackoregon/component-library';
-import Quiz from './Quiz/Quiz';
-import Summary from './Summary/Summary';
+import { CivicStoryCard } from "@hackoregon/component-library";
+import Quiz from "./Quiz/Quiz";
+import Summary from "./Summary/Summary";
 
 export class WhatYouCanDoToPrepare extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      quizFinished: false,
+      quizFinished: false
     };
   }
 
@@ -39,7 +39,7 @@ export class WhatYouCanDoToPrepare extends React.Component {
   }
 }
 
-WhatYouCanDoToPrepare.displayName = 'WhatYouCanDoToPrepare';
+WhatYouCanDoToPrepare.displayName = "WhatYouCanDoToPrepare";
 
 // Connect this to the redux store when necessary
 export default WhatYouCanDoToPrepare;

@@ -1,64 +1,64 @@
-import React from 'react';
+import React from "react";
 
 import {
   CivicStoryCard,
-  HorizontalBarChart,
-} from '@hackoregon/component-library';
+  HorizontalBarChart
+} from "@hackoregon/component-library";
 
-import { civicFormat } from '@hackoregon/component-library/dist/utils';
+import { civicFormat } from "@hackoregon/component-library/dist/utils";
 
 const data = [
   {
-    category: 'Influencers',
+    category: "Influencers",
     importance: 0.532761433,
-    sortOrder: 11,
+    sortOrder: 11
   },
   {
-    category: '$ Expenditures',
+    category: "$ Expenditures",
     importance: 0.2577329977621656,
-    sortOrder: 10,
+    sortOrder: 10
   },
-  { category: '$ Received', importance: 0.22949919907509095, sortOrder: 9 },
+  { category: "$ Received", importance: 0.22949919907509095, sortOrder: 9 },
   {
-    category: 'Primary Vote Count',
+    category: "Primary Vote Count",
     importance: 0.22878431536282723,
-    sortOrder: 8,
+    sortOrder: 8
   },
   {
-    category: 'Grassroots',
+    category: "Grassroots",
     importance: 0.12021850170825318,
-    sortOrder: 7,
+    sortOrder: 7
   },
   {
-    category: 'Republican',
+    category: "Republican",
     importance: 0.05830959262159894,
-    sortOrder: 6,
+    sortOrder: 6
   },
   {
-    category: 'Democrat',
+    category: "Democrat",
     importance: 0.019450051372393994,
-    sortOrder: 5,
+    sortOrder: 5
   },
   {
-    category: 'St. Senator',
+    category: "St. Senator",
     importance: 0.03578981589773275,
-    sortOrder: 4,
+    sortOrder: 4
   },
   {
-    category: 'St. Representative',
+    category: "St. Representative",
     importance: 0.033471046408828774,
-    sortOrder: 3,
+    sortOrder: 3
   },
   {
-    category: 'Governor',
+    category: "Governor",
     importance: 0.012904292200920951,
-    sortOrder: 2,
+    sortOrder: 2
   },
   {
-    category: 'Attorney General',
+    category: "Attorney General",
     importance: 0.00384018759018759,
-    sortOrder: 1,
-  },
+    sortOrder: 1
+  }
 ];
 
 function compareNumbers(a, b) {
@@ -96,7 +96,7 @@ export class OutraisingYourOpponent extends React.Component {
   }
 }
 
-OutraisingYourOpponent.displayName = 'OutraisingYourOpponent';
+OutraisingYourOpponent.displayName = "OutraisingYourOpponent";
 
 // Connect this to the redux store when necessary
 export default OutraisingYourOpponent;

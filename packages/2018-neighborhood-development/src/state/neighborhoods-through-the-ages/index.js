@@ -1,23 +1,23 @@
-import apiReducer from '../api-adapter-reducer';
+import apiReducer from "../api-adapter-reducer";
 import {
   API_START,
   API_SUCCESS,
   API_ERROR,
-  UPDATE_NEIGHBORHOOD,
-} from './actions';
+  UPDATE_NEIGHBORHOOD
+} from "./actions";
 
 const INITIAL_STATE = {
   pending: false,
   error: null,
   data: [],
-  selectedNeighborhood: null,
+  selectedNeighborhood: null
 };
 
 const apiReducers = apiReducer({
   INITIAL_STATE,
   API_START,
   API_SUCCESS,
-  API_ERROR,
+  API_ERROR
 });
 
 const allReducers = (state = INITIAL_STATE, action) => {
@@ -25,7 +25,7 @@ const allReducers = (state = INITIAL_STATE, action) => {
     case UPDATE_NEIGHBORHOOD:
       return {
         ...state,
-        selectedNeighborhood: action.selectedNeighborhood,
+        selectedNeighborhood: action.selectedNeighborhood
       };
     default:
       return apiReducers(state, action);

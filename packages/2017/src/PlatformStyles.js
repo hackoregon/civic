@@ -1,14 +1,14 @@
-import { css, keyframes } from 'emotion';
+import { css, keyframes } from "emotion";
 
-import housingHero from './assets/collection-hero-housing.jpg';
-import budgetHero from './assets/collection-hero-budget.jpg';
-import transportationHero from './assets/collection-hero-transportation.jpg';
-import emergencyResponseHero from './assets/collection-hero-emergency-response.jpg';
-import homelessnessHero from './assets/collection-hero-homelessness.jpg';
+import housingHero from "./assets/collection-hero-housing.jpg";
+import budgetHero from "./assets/collection-hero-budget.jpg";
+import transportationHero from "./assets/collection-hero-transportation.jpg";
+import emergencyResponseHero from "./assets/collection-hero-emergency-response.jpg";
+import homelessnessHero from "./assets/collection-hero-homelessness.jpg";
 
 console.log(housingHero);
 
-const animControls = '9s step-start infinite running';
+const animControls = "9s step-start infinite running";
 
 const colorSlideshow = keyframes`
   0%     { background-color:rgb(34,15,37); }
@@ -204,7 +204,7 @@ const styles = {
       }
 
       & .Explore {
-        font-family: 'Rubik', sans-serif;
+        font-family: "Rubik", sans-serif;
         width: 100%;
         margin: 0 auto;
         font-weight: 500;
@@ -241,7 +241,7 @@ const styles = {
   Tag: css`
     border: 2px solid rgba(255, 255, 255, 0.85);
     padding: 10px;
-    font-family: 'Rubik', sans-serif;
+    font-family: "Rubik", sans-serif;
     font-weight: 400;
     color: rgba(255, 255, 255, 0.85);
     font-size: 1.25em;
@@ -253,7 +253,7 @@ const styles = {
     transition: all 0.2s step-start;
     color: rgba(255, 255, 255, 0.85);
     padding: 6px 6px 6px 6px;
-    font-family: 'Rubik', sans-serif;
+    font-family: "Rubik", sans-serif;
     font-weight: 500;
 
     & i {
@@ -268,7 +268,7 @@ const styles = {
     &:focus {
       outline: none;
     }
-  `,
+  `
 };
 
 export default styles;

@@ -1,51 +1,52 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { StoryCard, LineChart } from '@hackoregon/component-library';
-import { ungroupBy } from '@hackoregon/component-library/dist/utils';
+import React from "react";
+import PropTypes from "prop-types";
+import { StoryCard, LineChart } from "@hackoregon/component-library";
+import { ungroupBy } from "@hackoregon/component-library/dist/utils";
 
-
-import eastData from './east.json';
-import northData from './north.json';
-import allData from './all.json';
+import eastData from "./east.json";
+import northData from "./north.json";
+import allData from "./all.json";
 
 const stackUnitGrowth = json =>
   json.map(year => {
     // eslint-disable-next-line no-param-reassign
-    year['Multifamily Unit Growth (Stacked)'] +=
-      year['Single Family Unit Growth (Stacked)'];
+    year["Multifamily Unit Growth (Stacked)"] +=
+      year["Single Family Unit Growth (Stacked)"];
     return year;
   });
 
 const keys = [
-  'Portland Metro Population Growth',
-  'Single Family Unit Growth (Stacked)',
-  'Multifamily Unit Growth (Stacked)',
-  'Median Home Price Growth',
-  'Rent Growth'
+  "Portland Metro Population Growth",
+  "Single Family Unit Growth (Stacked)",
+  "Multifamily Unit Growth (Stacked)",
+  "Median Home Price Growth",
+  "Rent Growth"
 ];
 
 const formatData = data => ungroupBy(data, keys);
 
 const pStyle = {
-  maxWidth: '800px',
-  marginLeft: 'auto',
-  marginRight: 'auto',
-  padding: '0 1em',
-  textAlign: 'left',
+  maxWidth: "800px",
+  marginLeft: "auto",
+  marginRight: "auto",
+  padding: "0 1em",
+  textAlign: "left"
 };
 
-const ProductionChart = ({ data, title }) => <LineChart
-  data={formatData(stackUnitGrowth(data))}
-  dataKey='name'
-  dataValue='value'
-  dataSeries='type'
-  title={title}
-/>
+const ProductionChart = ({ data, title }) => (
+  <LineChart
+    data={formatData(stackUnitGrowth(data))}
+    dataKey="name"
+    dataValue="value"
+    dataSeries="type"
+    title={title}
+  />
+);
 
 ProductionChart.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object),
-  title: PropTypes.string,
-}
+  title: PropTypes.string
+};
 
 const TempProdVsCost = () => (
   <StoryCard
@@ -92,7 +93,10 @@ const TempProdVsCost = () => (
       of growth in 2014.
     </p>
 
-    <ProductionChart data={allData} title='Portland Housing Production and Costs' />
+    <ProductionChart
+      data={allData}
+      title="Portland Housing Production and Costs"
+    />
 
     <p style={pStyle}>
       This pattern of increasing and moderating growth holds true across all
@@ -101,14 +105,20 @@ const TempProdVsCost = () => (
       construction, like the Interstate corridor and NE Alberta:
     </p>
 
-    <ProductionChart data={northData} title='Inner N and NE Poretland Housing Production and Costs' />
+    <ProductionChart
+      data={northData}
+      title="Inner N and NE Poretland Housing Production and Costs"
+    />
 
     <p style={pStyle}>
       In contrast, areas that saw little new construction, like outer East
       Portland, saw steeper increases in both home prices and rental costs.
     </p>
 
-    <ProductionChart data={eastData} title='Outer East Portland Housing Production and Costs' />
+    <ProductionChart
+      data={eastData}
+      title="Outer East Portland Housing Production and Costs"
+    />
 
     <p style={pStyle}>
       These charts suggest that greater amounts of new housing built in specific

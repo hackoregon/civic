@@ -1,20 +1,20 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { loader, error, gradientLabel, emphasis } from '../css-utils';
+import React from "react";
+import { connect } from "react-redux";
+import { loader, error, gradientLabel, emphasis } from "../css-utils";
 
 import {
   CivicStoryCard,
   Dropdown,
   Collapsable,
   PieChart,
-  GradientScale,
-} from '@hackoregon/component-library';
+  GradientScale
+} from "@hackoregon/component-library";
 
 import {
   fetchAllRentBurdenCities,
   fetchRentBurdenCity,
-  setRentBurdenCity,
-} from '../../state/rent-burden/actions';
+  setRentBurdenCity
+} from "../../state/rent-burden/actions";
 import {
   isCityLoading,
   getCityError,
@@ -22,8 +22,8 @@ import {
   getSelectedCityData,
   getSelectedCityRank,
   getAllCities,
-  getChartData,
-} from '../../state/rent-burden/selectors';
+  getChartData
+} from "../../state/rent-burden/selectors";
 
 export class RentBurdenedHouseholds extends React.Component {
   componentDidMount() {
@@ -40,7 +40,7 @@ export class RentBurdenedHouseholds extends React.Component {
       selectedCityData,
       selectedCityRank,
       setCity,
-      chartData,
+      chartData
     } = this.props;
 
     const cityOptions =
@@ -60,7 +60,7 @@ export class RentBurdenedHouseholds extends React.Component {
           A household is severely burdened when its monthly rent exceeds 50% of
           monthly income. In 2015, 24% of all households in the Portland region
           were severely burdened, up 8 percentage points from 2014. Nationally,
-          Portland ranks 50 out of 100 in terms of cost burdened renters{' '}
+          Portland ranks 50 out of 100 in terms of cost burdened renters{" "}
         </p>
 
         <div>
@@ -80,12 +80,12 @@ export class RentBurdenedHouseholds extends React.Component {
           {selectedCityRank && (
             <div>
               <p>
-                {selectedCity} ranks{' '}
+                {selectedCity} ranks{" "}
                 <strong className={emphasis}>
-                  {selectedCityRank.rank}/{selectedCityRank.total}{' '}
+                  {selectedCityRank.rank}/{selectedCityRank.total}{" "}
                 </strong>
                 metropolitan areas with regards to the percentage of renter
-                households that are severely burdened{' '}
+                households that are severely burdened{" "}
                 <strong className={emphasis}>2015</strong>. A rank of 1 is the
                 smallest percentage of burdened households, while a rank of 100
                 is the greatest percentage of burdened households.
@@ -130,7 +130,7 @@ export class RentBurdenedHouseholds extends React.Component {
   }
 }
 
-RentBurdenedHouseholds.displayName = 'RentBurdenedHouseholds';
+RentBurdenedHouseholds.displayName = "RentBurdenedHouseholds";
 
 // Connect this to the redux store when necessary
 export default connect(
@@ -141,7 +141,7 @@ export default connect(
     selectedCityData: getSelectedCityData(state),
     selectedCityRank: getSelectedCityRank(state),
     chartData: getChartData(state),
-    isError: getCityError(state),
+    isError: getCityError(state)
   }),
   dispatch => ({
     fetchAllCities() {
@@ -150,6 +150,6 @@ export default connect(
     setCity(city = {}) {
       dispatch(fetchRentBurdenCity(city.value));
       dispatch(setRentBurdenCity(city.value));
-    },
+    }
   })
 )(RentBurdenedHouseholds);

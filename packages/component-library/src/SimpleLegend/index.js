@@ -1,1 +1,1 @@
-export default from './SimpleLegend';
+export default from "./SimpleLegend";

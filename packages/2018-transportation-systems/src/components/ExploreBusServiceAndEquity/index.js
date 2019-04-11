@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import { CivicStoryCard, Placeholder } from '@hackoregon/component-library';
+import { CivicStoryCard, Placeholder } from "@hackoregon/component-library";
 
 export class ExploreBusServiceAndEquity extends React.Component {
   componentDidMount() {
@@ -22,7 +22,7 @@ export class ExploreBusServiceAndEquity extends React.Component {
   }
 }
 
-ExploreBusServiceAndEquity.displayName = 'ExploreBusServiceAndEquity';
+ExploreBusServiceAndEquity.displayName = "ExploreBusServiceAndEquity";
 
 // Connect this to the redux store when necessary
 export default ExploreBusServiceAndEquity;

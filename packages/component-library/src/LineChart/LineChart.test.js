@@ -1,25 +1,25 @@
-import React from 'react';
-import { shallow } from 'enzyme';
+import React from "react";
+import { shallow } from "enzyme";
 
-import LineChart from './LineChart';
+import LineChart from "./LineChart";
 
-describe('LineChart', () => {
+describe("LineChart", () => {
   const data = [
     { year: 2015, population: 1 },
     { year: 2016, population: 2 },
-    { year: 2017, population: 3 },
+    { year: 2017, population: 3 }
   ];
 
   const defaultProps = {
     data,
-    dataKey: 'year',
-    dataValue: 'population',
+    dataKey: "year",
+    dataValue: "population"
   };
 
-  it('should render a VictoryChart', () => {
+  it("should render a VictoryChart", () => {
     const wrapper = shallow(<LineChart {...defaultProps} />);
 
-    expect(wrapper.find('VictoryChart').length).to.eql(1);
+    expect(wrapper.find("VictoryChart").length).to.eql(1);
   });
   /* TODO: rewrite these tests
   it('should render the relevant axis', () => {

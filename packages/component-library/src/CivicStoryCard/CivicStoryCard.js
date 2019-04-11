@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { css } from 'emotion';
-import CivicStoryFooter from './CivicStoryFooter';
+import React from "react";
+import PropTypes from "prop-types";
+import { css } from "emotion";
+import CivicStoryFooter from "./CivicStoryFooter";
 
 const cardClass = css`
   text-align: center;
@@ -82,7 +82,7 @@ const CivicStoryCard = ({
   loading,
   source,
   footer,
-  watermark,
+  watermark
 }) => {
   let content = children;
   if (loading) {
@@ -120,11 +120,11 @@ const CivicStoryCard = ({
   );
 };
 
-CivicStoryCard.displayName = 'CivicStoryCard';
+CivicStoryCard.displayName = "CivicStoryCard";
 
 CivicStoryCard.defaultProps = {
-  source: 'https://service.civicpdx.org/',
-  footer: true,
+  source: "https://service.civicpdx.org/",
+  footer: true
 };
 
 CivicStoryCard.propTypes = {
@@ -135,7 +135,7 @@ CivicStoryCard.propTypes = {
   children: PropTypes.node,
   source: PropTypes.string,
   footer: PropTypes.bool,
-  watermark: PropTypes.node,
+  watermark: PropTypes.node
 };
 
 export default CivicStoryCard;

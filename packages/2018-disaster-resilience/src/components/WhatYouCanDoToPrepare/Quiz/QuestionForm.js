@@ -1,12 +1,12 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { Field, reduxForm } from 'redux-form';
-import { Button } from '@hackoregon/component-library';
-import { css } from 'emotion';
+import PropTypes from "prop-types";
+import React from "react";
+import { Field, reduxForm } from "redux-form";
+import { Button } from "@hackoregon/component-library";
+import { css } from "emotion";
 
-import QRMap from '../QR';
-import Question from './Question';
-import Recommendation from './Recommendation';
+import QRMap from "../QR";
+import Question from "./Question";
+import Recommendation from "./Recommendation";
 
 const radio = css`
   font-size: 18px;
@@ -99,11 +99,11 @@ QuestionForm.propTypes = {
   back: PropTypes.func.isRequired,
   next: PropTypes.func.isRequired,
   done: PropTypes.func.isRequired,
-  questionId: PropTypes.number,
+  questionId: PropTypes.number
 };
 
 export default reduxForm({
-  form: 'Quiz',
+  form: "Quiz",
   destroyOnUnmount: false,
-  forceUnregisterOnUnmount: true,
+  forceUnregisterOnUnmount: true
 })(QuestionForm);

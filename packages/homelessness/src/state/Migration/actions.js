@@ -4,22 +4,22 @@
  *
  */
 
-import { actionTypes } from './constants';
-import { compareMigrationApi } from '../../api';
+import { actionTypes } from "./constants";
+import { compareMigrationApi } from "../../api";
 
 const getMigrationDemo = payload => ({
   type: actionTypes.GET_MIGRATION_DEMO,
-  payload,
+  payload
 });
 
 const getMigrationDemoSuccess = payload => ({
   type: actionTypes.GET_MIGRATION_DEMO_SUCCESS,
-  payload,
+  payload
 });
 
 const getMigrationDemoFailure = payload => ({
   type: actionTypes.GET_MIGRATION_DEMO_FAILURE,
-  payload,
+  payload
 });
 
 export const fetchMigrationDemoData = payload => dispatch => {
@@ -31,5 +31,5 @@ export const fetchMigrationDemoData = payload => dispatch => {
 };
 
 export default {
-  fetchMigrationDemoData,
+  fetchMigrationDemoData
 };

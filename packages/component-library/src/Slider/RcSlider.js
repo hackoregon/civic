@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import ReactSlider from 'rc-slider';
+import React from "react";
+import PropTypes from "prop-types";
+import ReactSlider from "rc-slider";
 
 const RcSlider = ({ min, max, value, onChange }) => (
   <ReactSlider
@@ -18,7 +18,7 @@ RcSlider.propTypes = {
   min: PropTypes.number,
   max: PropTypes.number,
   value: PropTypes.number,
-  onChange: PropTypes.func,
+  onChange: PropTypes.func
 };
 
 export default RcSlider;

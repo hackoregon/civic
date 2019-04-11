@@ -1,20 +1,20 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { css } from 'emotion';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { css } from "emotion";
 
 import {
   CivicStoryCard,
   Dropdown,
   StackedAreaChart,
-  ungroupBy,
-} from '@hackoregon/component-library';
-import { civicFormat } from '@hackoregon/component-library/dist/utils';
+  ungroupBy
+} from "@hackoregon/component-library";
+import { civicFormat } from "@hackoregon/component-library/dist/utils";
 import {
   fetchSchoolList,
   fetchSchoolData,
-  setSchool,
-} from '../../state/student-enrollment-trends/actions';
+  setSchool
+} from "../../state/student-enrollment-trends/actions";
 import {
   isSchoolListPending,
   catchSchoolListFailure,
@@ -23,25 +23,25 @@ import {
   catchSchoolDataFailure,
   getSchoolData,
   getSelectedSchool,
-  getProcessedSchoolData,
-} from '../../state/student-enrollment-trends/selectors';
+  getProcessedSchoolData
+} from "../../state/student-enrollment-trends/selectors";
 
-const DEFAULT_SCHOOL = 'Buckman';
-const CHARTA_CATEGORIES = ['white', 'asian', 'underrepresented'];
-const CHARTA_LABELS = ['White', 'Asian', 'Historically Underrepresented'];
+const DEFAULT_SCHOOL = "Buckman";
+const CHARTA_CATEGORIES = ["white", "asian", "underrepresented"];
+const CHARTA_LABELS = ["White", "Asian", "Historically Underrepresented"];
 const CHARTB_CATEGORIES = [
-  'black',
-  'hispanic',
-  'multi_ethnic',
-  'native',
-  'pacific',
+  "black",
+  "hispanic",
+  "multi_ethnic",
+  "native",
+  "pacific"
 ];
 const CHARTB_LABELS = [
-  'Black/African American',
-  'Hispanic/Latino',
-  'Multi-Ethnic',
-  'American Indian/Alaska Native',
-  'Native Hawaiian/Pacific Islander',
+  "Black/African American",
+  "Hispanic/Latino",
+  "Multi-Ethnic",
+  "American Indian/Alaska Native",
+  "Native Hawaiian/Pacific Islander"
 ];
 
 const formatForSelector = arr =>
@@ -64,7 +64,7 @@ export class StudentEnrollmentTrends extends React.Component {
       schoolDataFailure,
       schoolData,
       processedSchoolData,
-      selectedSchool,
+      selectedSchool
     } = this.props;
 
     return (
@@ -74,7 +74,7 @@ export class StudentEnrollmentTrends extends React.Component {
         loading={schoolListLoading || schoolDataLoading}
         error={
           (schoolListFailure || schoolDataFailure) &&
-          'Could not load school data'
+          "Could not load school data"
         }
         source="https://github.com/hackoregon/neighborhoods-2018/tree/master/docs/schools"
       >
@@ -120,7 +120,7 @@ export class StudentEnrollmentTrends extends React.Component {
   }
 }
 
-StudentEnrollmentTrends.displayName = 'StudentEnrollmentTrends';
+StudentEnrollmentTrends.displayName = "StudentEnrollmentTrends";
 
 // Connect this to the redux store when necessary
 export default connect(
@@ -132,7 +132,7 @@ export default connect(
     schoolDataFailure: catchSchoolDataFailure(state),
     schoolData: getSchoolData(state),
     selectedSchool: getSelectedSchool(state),
-    processedSchoolData: getProcessedSchoolData(state),
+    processedSchoolData: getProcessedSchoolData(state)
   }),
   dispatch => ({
     init() {
@@ -141,6 +141,6 @@ export default connect(
     setSchool(school = {}) {
       dispatch(fetchSchoolData(school));
       dispatch(setSchool(school));
-    },
+    }
   })
 )(StudentEnrollmentTrends);

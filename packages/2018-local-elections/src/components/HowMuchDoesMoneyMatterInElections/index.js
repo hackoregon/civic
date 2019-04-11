@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import { CivicStoryCard, Placeholder } from '@hackoregon/component-library';
+import { CivicStoryCard, Placeholder } from "@hackoregon/component-library";
 
 export class HowMuchDoesMoneyMatterInElections extends React.Component {
   componentDidMount() {
@@ -20,7 +20,7 @@ export class HowMuchDoesMoneyMatterInElections extends React.Component {
 }
 
 HowMuchDoesMoneyMatterInElections.displayName =
-  'HowMuchDoesMoneyMatterInElections';
+  "HowMuchDoesMoneyMatterInElections";
 
 // Connect this to the redux store when necessary
 export default HowMuchDoesMoneyMatterInElections;
