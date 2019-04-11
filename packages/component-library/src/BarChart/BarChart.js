@@ -108,12 +108,12 @@ const BarChart = ({
 };
 
 BarChart.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object),
+  data: PropTypes.arrayOf(PropTypes.shape({})),
   loading: PropTypes.bool,
   error: PropTypes.bool,
   dataKey: PropTypes.string,
   dataValue: PropTypes.string,
-  domain: PropTypes.objectOf(PropTypes.array),
+  domain: PropTypes.arrayOf(PropTypes.array),
   title: PropTypes.string,
   subtitle: PropTypes.string,
   xLabel: PropTypes.string,

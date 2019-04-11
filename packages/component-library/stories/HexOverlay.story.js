@@ -1,13 +1,9 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import { withKnobs, number } from "@storybook/addon-knobs";
 import { checkA11y } from "@storybook/addon-a11y";
-import { HexOverlay } from "../src";
-import { BaseMap } from "../src";
-import { MapTooltip } from "../src";
-import { DemoJSONLoader } from "../src";
-
-const displayName = HexOverlay.displayName || "HexOverlay";
+import { HexOverlay, BaseMap, MapTooltip, DemoJSONLoader } from "../src";
 
 export default () =>
   storiesOf("Maps/Hex Overlay", module)
@@ -84,8 +80,8 @@ export default () =>
                 elevation={elevation}
                 colorRange={colorRange}
                 lightSettings={lightSettings}
-                filled={true}
-                wireframe={true}
+                filled
+                wireframe
               >
                 <MapTooltip isHex />
               </HexOverlay>

@@ -70,8 +70,8 @@ const ScatterPlotMap = props => {
 };
 
 ScatterPlotMap.propTypes = {
-  viewport: PropTypes.object,
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  viewport: PropTypes.shape({}),
+  data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   getPosition: PropTypes.func,
   opacity: PropTypes.number,
   getColor: PropTypes.func,
@@ -80,10 +80,10 @@ ScatterPlotMap.propTypes = {
   outline: PropTypes.bool,
   strokeWidth: PropTypes.number,
   autoHighlight: PropTypes.bool,
-  highlightColor: PropTypes.array,
+  highlightColor: PropTypes.arrayOf(PropTypes.number),
   onLayerClick: PropTypes.func,
   visible: PropTypes.bool,
-  tooltipInfo: PropTypes.object,
+  tooltipInfo: PropTypes.shape({}),
   x: PropTypes.number,
   y: PropTypes.number,
   onHover: PropTypes.func,

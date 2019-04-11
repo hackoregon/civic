@@ -2,10 +2,8 @@ import React from "react";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
 import { withKnobs, select } from "@storybook/addon-knobs";
-import { BaseMap } from "../src";
 import { css } from "emotion";
-
-const displayName = BaseMap.displayName || "BaseMap";
+import { BaseMap } from "../src";
 
 const containerWrapper = css`
   height: 100vh;
@@ -80,7 +78,7 @@ const containerHeightMap = () => {
 
   return (
     <div className={containerWrapper}>
-      <BaseMap mapboxStyle={mapboxStyle} useContainerHeight={true} />
+      <BaseMap mapboxStyle={mapboxStyle} useContainerHeight />
     </div>
   );
 };

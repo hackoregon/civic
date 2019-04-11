@@ -173,9 +173,9 @@ LineChart.propTypes = {
   dataSeriesLabel: PropTypes.arrayOf(
     PropTypes.shape({ category: PropTypes.string, label: PropTypes.string })
   ),
-  domain: PropTypes.objectOf(PropTypes.array),
+  domain: PropTypes.arrayOf(PropTypes.array),
   size: PropTypes.shape({ key: PropTypes.string, value: PropTypes.string }),
-  style: PropTypes.objectOf(PropTypes.object),
+  style: PropTypes.arrayOf(PropTypes.shape({})),
   subtitle: PropTypes.string,
   title: PropTypes.string,
   xLabel: PropTypes.string,

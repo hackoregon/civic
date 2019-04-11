@@ -38,11 +38,11 @@ const ScreenGridMap = props => {
 };
 
 ScreenGridMap.propTypes = {
-  viewport: PropTypes.object,
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  viewport: PropTypes.shape({}),
+  data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   getPosition: PropTypes.func,
   opacity: PropTypes.number,
-  colorRange: PropTypes.array,
+  colorRange: PropTypes.arrayOf(PropTypes.number),
   cellSizePixels: PropTypes.number,
   autoHighlight: PropTypes.bool,
   onLayerClick: PropTypes.func,

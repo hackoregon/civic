@@ -1,10 +1,12 @@
+/* eslint-disable react/no-access-state-in-setstate */
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable no-console */
 import React from "react";
 import { css } from "emotion";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
 import "react-select/dist/react-select.css";
-import { isArray, findIndex } from "lodash";
+import { isArray } from "lodash";
 import { Sandbox } from "../src";
 
 import { foundations, slides } from "../src/Sandbox/constants";
@@ -77,7 +79,7 @@ class SandboxStory extends React.Component {
       selectedFoundation && state.data.foundations[selectedFoundation];
     const dataObj = { slide_meta: {}, slide_data: {} };
     const foundationMapObj = foundations(dataObj)[defaultFoundation.name];
-    let foundationMapProps = {
+    const foundationMapProps = {
       color: foundationMapObj.color,
       getPropValue: foundationMapObj.getPropValue,
       propName: foundationMapObj.propName,
@@ -95,13 +97,13 @@ class SandboxStory extends React.Component {
       const mapObj = slides(dataObj)[state.data.slides[slide].name];
       const color = mapObj.boundary.getLineColor
         ? mapObj.boundary.getLineColor()
-        : [238, 238, 238, 255]; //gray
-      const mapType = mapObj.map.mapType;
+        : [238, 238, 238, 255]; // gray
+      const { mapType } = mapObj.map;
       return {
         slideNumber: slide,
         slideObj: state.data.slides[slide],
         label: state.data.slides[slide].name,
-        checked: selectedSlide.includes(slide) ? true : false,
+        checked: !!selectedSlide.includes(slide),
         color,
         mapType
       };
@@ -126,7 +128,7 @@ class SandboxStory extends React.Component {
       slide_data: {}
     };
     const foundationMapObj = foundations(dataObj)[defaultFoundation.name];
-    let foundationMapProps = {
+    const foundationMapProps = {
       color: foundationMapObj.color,
       getPropValue: foundationMapObj.getPropValue,
       propName: foundationMapObj.propName,
@@ -162,6 +164,7 @@ class SandboxStory extends React.Component {
     const slideNumber = event.target.name;
     const allSlides = this.state.allSlides.map(slide => {
       if (slide.slideNumber === slideNumber) {
+        // eslint-disable-next-line no-param-reassign
         slide.checked = !slide.checked;
       }
       return slide;
@@ -218,9 +221,11 @@ class SandboxStory extends React.Component {
 
   findAndReplaceSlideData = (slideData, data, slide, slideLabel) => {
     const slideDataValues = Object.values(slideData);
+    // eslint-disable-next-line no-shadow
     const newSlideData = slideData.map((slide, index) => {
       const slideDataName = Object.keys(slideDataValues[index])[0];
       if (slideDataName === slideLabel) {
+        // eslint-disable-next-line no-param-reassign
         slide = { [slideLabel]: data };
       }
       return slide;
@@ -272,7 +277,7 @@ class SandboxStory extends React.Component {
     const dataObj = { slide_meta: {}, slide_data: {} };
     const defaultFoundation = data.foundations[selectedFoundation];
     const foundationMapObj = foundations(dataObj)[defaultFoundation.name];
-    let foundationMapProps = {
+    const foundationMapProps = {
       color: foundationMapObj.color,
       getPropValue: foundationMapObj.getPropValue,
       propName: foundationMapObj.propName,
@@ -289,13 +294,13 @@ class SandboxStory extends React.Component {
       const mapObj = slides(dataObj)[data.slides[slide].name];
       const color = mapObj.boundary.getLineColor
         ? mapObj.boundary.getLineColor()
-        : [238, 238, 238, 255]; //gray
-      const mapType = mapObj.map.mapType;
+        : [238, 238, 238, 255]; // gray
+      const { mapType } = mapObj.map;
       return {
         slideNumber: slide,
         slideObj: data.slides[slide],
         label: data.slides[slide].name,
-        checked: selectedSlide.includes(slide) ? true : false,
+        checked: !!selectedSlide.includes(slide),
         color,
         mapType
       };

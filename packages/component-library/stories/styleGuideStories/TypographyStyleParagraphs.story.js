@@ -29,11 +29,13 @@ const TypographyStyleParagraphs = () => (
     <h3>Action Inside a Paragraph</h3>
     <p>
       Vivamus vitae odio tempor neque iaculis iaculis. Vestibulum ante ipsum
-      primis in <a>faucibus orci</a> luctus et ultrices posuere cubilia Curae;
-      Aliquam gravida risus nibh, non rutrum ipsum efficitur at. Fusce volutpat
-      nisl nec odio aliquet facilisis. Integer eu lacus metus. Mauris tortor
-      lectus, pulvinar a aliquet vel, venenatis a diam. Vivamus et lorem
-      feugiat, venenatis justo vel, luctus eros.
+      primis in{" "}
+      <a href="https://www.youtube.com/watch?v=gJ5hbJsN7Hc">faucibus orci</a>{" "}
+      luctus et ultrices posuere cubilia Curae; Aliquam gravida risus nibh, non
+      rutrum ipsum efficitur at. Fusce volutpat nisl nec odio aliquet facilisis.
+      Integer eu lacus metus. Mauris tortor lectus, pulvinar a aliquet vel,
+      venenatis a diam. Vivamus et lorem feugiat, venenatis justo vel, luctus
+      eros.
     </p>
     <h3>Action Outside a Paragraph</h3>
     <p>
@@ -45,7 +47,7 @@ const TypographyStyleParagraphs = () => (
       venenatis justo vel, luctus eros.
     </p>
     <h4>
-      <a>Read More</a>
+      <a href="https://www.youtube.com/watch?v=gJ5hbJsN7Hc">Read More</a>
     </h4>
     <h3>Within Visualizations, Tiny Text, or Numbers</h3>
     <p style={storybookStyles.dataText}>

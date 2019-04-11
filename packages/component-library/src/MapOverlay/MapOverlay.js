@@ -15,21 +15,17 @@ const MapOverlay = props => {
     viewport,
     autoHighlight,
     extruded,
-    elevation,
     filled,
-    getColor,
     getRadius,
     onHover,
     onLayerClick,
     opacity,
-    outline,
-    radiusScale,
     strokeWidth,
     tooltipInfo,
-    visible,
-    wireframe,
     x,
     y,
+    visible,
+    wireframe,
     pickable,
     getElevation,
     getFillColor,
@@ -61,6 +57,7 @@ const MapOverlay = props => {
     id,
     data,
     visible,
+    autoHighlight,
     extruded,
     opacity,
     filled,
@@ -72,13 +69,12 @@ const MapOverlay = props => {
     pickable,
     lineWidthScale: 20,
     lineWidthMinPixels: strokeWidth,
-    autoHighlight: true,
     fp64: true,
     lightSettings: LIGHT_SETTINGS,
     onClick: onLayerClick,
-    getElevation: getElevation,
-    getFillColor: getFillColor,
-    getLineColor: getLineColor
+    getElevation,
+    getFillColor,
+    getLineColor
   });
 
   return (
@@ -92,15 +88,33 @@ const MapOverlay = props => {
 
 MapOverlay.propTypes = {
   id: PropTypes.string,
-  mapboxStyle: PropTypes.string,
-  opacity: PropTypes.number,
+  children: PropTypes.node,
+  data: PropTypes.shape({}),
+  viewport: PropTypes.shape({}),
+  autoHighlight: PropTypes.bool,
+  extruded: PropTypes.bool,
   elevation: PropTypes.number,
   filled: PropTypes.bool,
-  extruded: PropTypes.bool,
-  stroked: PropTypes.bool,
+  getColor: PropTypes.func,
+  getRadius: PropTypes.func,
+  onHover: PropTypes.func,
+  onLayerClick: PropTypes.func,
+  opacity: PropTypes.number,
   strokeWidth: PropTypes.number,
+  tooltipInfo: PropTypes.bool,
+  x: PropTypes.number,
+  y: PropTypes.number,
   visible: PropTypes.bool,
-  pickable: PropTypes.bool
+  wireframe: PropTypes.bool,
+  pickable: PropTypes.bool,
+  getElevation: PropTypes.oneOf(PropTypes.number, PropTypes.func),
+  getFillColor: PropTypes.oneOf(
+    PropTypes.arrayOf(PropTypes.number),
+    PropTypes.func
+  ),
+  getLineColor: PropTypes.oneOf(PropTypes.number, PropTypes.func),
+  getLineWidth: PropTypes.oneOf(PropTypes.number, PropTypes.func),
+  stroked: PropTypes.bool
 };
 
 MapOverlay.defaultProps = {

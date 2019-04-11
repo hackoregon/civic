@@ -1,16 +1,11 @@
 import React from "react";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
-import { withInfo } from "@storybook/addon-info";
 import { checkA11y } from "@storybook/addon-a11y";
 import { Slider } from "../src";
-import { storybookStyles } from "./storyStyles.js";
+import { storybookStyles } from "./storyStyles";
 
-const displayName = Slider.displayName || "Slider";
 const title = "Simple usage";
-const description = `
-  This is some basic usage with the slider component as built for Raise Effect, updated with changes for latest rc-slider. Due to the nature of the component, a higher order component is required to contain local state.
-  Sliding should trigger changes that affect the local state.`;
 
 const demoCode = () => {
   class CustomSlider extends React.Component {
@@ -27,12 +22,13 @@ const demoCode = () => {
     }
 
     render() {
+      const { value } = this.state;
       return (
         <div className="slider-container">
           <Slider
             min={0}
             max={100}
-            value={this.state.value}
+            value={value}
             onChange={this.handleChange}
           />
         </div>

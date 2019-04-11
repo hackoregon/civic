@@ -1,4 +1,6 @@
+/* eslint-disable no-nested-ternary */
 import React from "react";
+import PropTypes from "prop-types";
 import * as d3 from "d3";
 import { css } from "emotion";
 import civicFormat from "../utils/civicFormat";
@@ -36,17 +38,17 @@ const tickNumsThreshold = css(`
   font-size: 15px;
 `);
 
+const createEqualBins = (data, color, getPropValue) => {
+  const scale = d3
+    .scaleQuantize()
+    .domain(d3.extent(data.slide_data.features, getPropValue))
+    .range(color)
+    .nice();
+  return scale;
+};
+
 const SandboxMapLegend = props => {
   const { data, mapProps } = props;
-
-  const createEqualBins = (data, color, getPropValue) => {
-    const scale = d3
-      .scaleQuantize()
-      .domain(d3.extent(data.slide_data.features, getPropValue))
-      .range(color)
-      .nice();
-    return scale;
-  };
 
   const colorScale =
     mapProps.scaleType === "ordinal" || mapProps.scaleType === "threshold"
@@ -55,7 +57,7 @@ const SandboxMapLegend = props => {
 
   const formatColor = arr =>
     arr.reduce(
-      (acc, cur, i) => (i < 3 ? acc + cur + "," : acc + "1)"),
+      (acc, cur, i) => (i < 3 ? `${acc + cur},` : `${acc}1)`),
       "rgba("
     );
 
@@ -72,7 +74,7 @@ const SandboxMapLegend = props => {
   const ticks =
     mapProps.scaleType === "ordinal" || mapProps.scaleType === "threshold"
       ? bins
-      : bins.reduce((a, c, i, arr) => (c[1] ? [...a, c[1]] : [...a, ""]), []);
+      : bins.reduce((a, c) => (c[1] ? [...a, c[1]] : [...a, ""]), []);
 
   const thousandsFormat = d3.format(".3s");
   const percentFormat = d3.format(".1%");
@@ -100,7 +102,7 @@ const SandboxMapLegend = props => {
   const legend = mapColorsArr.map((d, i) => {
     return (
       <div
-        key={"legend-pt-" + i}
+        key={`legend-pt-${d.id}`}
         className={colorBox}
         style={{ backgroundColor: d }}
       >
@@ -112,6 +114,11 @@ const SandboxMapLegend = props => {
   });
 
   return <div className={legendContainer}>{legend}</div>;
+};
+
+SandboxMapLegend.propTypes = {
+  data: PropTypes.shape({}).isRequired,
+  mapProps: PropTypes.shape({}).isRequired
 };
 
 export default SandboxMapLegend;

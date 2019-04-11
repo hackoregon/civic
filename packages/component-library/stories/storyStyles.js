@@ -1,5 +1,4 @@
-import { SSL_OP_TLS_BLOCK_PADDING_BUG } from "constants";
-import "@hackoregon/component-library/assets/constants.css";
+import "../assets/constants.css";
 /*
   Styles used in Storybook.
   Only styles that are needed exclusively in Storybook are defined here.
@@ -110,4 +109,5 @@ const storybookStyles = {
   }
 };
 
+// eslint-disable-next-line import/prefer-default-export
 export { storybookStyles };

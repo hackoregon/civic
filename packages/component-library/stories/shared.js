@@ -20,6 +20,7 @@ export const wallOfRichText = (
 const firstRepeatInWallOfText = wallOfText.split(" ").reduce((p, n, i) => {
   if (typeof p === "number") return p;
   if (p[n]) return i;
+  // eslint-disable-next-line no-param-reassign
   p[n] = true;
   return p;
 }, {});
@@ -56,6 +57,7 @@ export const colors = [
 ];
 export const randomizer = () => Math.random() * 100;
 export const getColors = (datum, idx) =>
+  // eslint-disable-next-line no-undef
   arguments.length === 2 ? colors[idx] : colors[datum];
 export const getRandomValuesArray = (numsOf, func) =>
   [...new Array(numsOf)].map(func);

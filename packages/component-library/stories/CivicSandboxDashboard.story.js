@@ -1,53 +1,21 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable import/no-extraneous-dependencies */
 import React from "react";
-import * as d3 from "d3";
 import { storiesOf } from "@storybook/react";
 import { withKnobs, boolean } from "@storybook/addon-knobs";
 import { checkA11y } from "@storybook/addon-a11y";
 import { css } from "emotion";
-import { BaseMap } from "../src";
-import { CivicSandboxMap } from "../src";
-import { CivicSandboxDashboard } from "../src";
+import {
+  BaseMap,
+  CivicSandboxMap,
+  CivicSandboxDashboard,
+  DemoJSONLoader
+} from "../src";
 import { wallOfText } from "./shared";
 
 const dashboardDescription = css`
   padding: 0 1% 0 5%;
 `;
-
-const displayName =
-  CivicSandboxDashboard.displayName || "CivicSandboxDashboard";
-
-class LoadData extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      foundation1: null,
-      slide1: null,
-      error: null
-    };
-  }
-
-  componentDidMount() {
-    const cmp = this;
-    d3.queue()
-      .defer(d3.json, this.props.urls[0])
-      .defer(d3.json, this.props.urls[1])
-      .await((error, foundation1, slide1) => {
-        if (error) {
-          cmp.setState({ error });
-        }
-        cmp.setState({ foundation1, slide1 });
-      });
-  }
-
-  render() {
-    if (this.state.foundation1 === null) {
-      return null;
-    }
-    const { foundation1, slide1 } = this.state;
-    return this.props.children(foundation1, slide1);
-  }
-}
 
 const dataURLs = [
   "https://gist.githubusercontent.com/mendozaline/f78b076ce13a9fd484f6b8a004065a95/raw/ff8bd893ba1890a6f6c20265f720587f9595a9c4/pop.json",
@@ -102,8 +70,8 @@ const dashboardComponent = (foundationData1, slideData1) => {
     data: foundationData1.slide_data.features,
     opacity: 0.5,
     getPolygon: f => f.geometry.coordinates,
-    getLineColor: f => [0, 0, 0, 255],
-    getLineWidth: f => 0.5,
+    getLineColor: () => [0, 0, 0, 255],
+    getLineWidth: () => 0.5,
     stroked: true,
     getFillColor: populationGetColor,
     filled: true,
@@ -119,8 +87,8 @@ const dashboardComponent = (foundationData1, slideData1) => {
     opacity: 1,
     filled: false,
     getPolygon: f => f.coordinates,
-    getLineColor: f => [138, 43, 226, 255],
-    getLineWidth: f => 45,
+    getLineColor: () => [138, 43, 226, 255],
+    getLineWidth: () => 45,
     lineWidthScale: 1,
     lineJointRounded: false
   };
@@ -131,8 +99,8 @@ const dashboardComponent = (foundationData1, slideData1) => {
     data: slideData1.slide_data.features,
     getPosition: f => f.geometry.coordinates,
     opacity: 0.9,
-    getColor: f => [138, 43, 226, 255],
-    getRadius: f => 75,
+    getColor: () => [138, 43, 226, 255],
+    getRadius: () => 75,
     radiusScale: 1,
     radiusMinPixels: 1,
     autoHighlight: true,
@@ -246,7 +214,8 @@ const dashboardComponent = (foundationData1, slideData1) => {
   const dashboardInformation = (
     <div className={dashboardDescription}>
       <h2>
-        How has ridership changed throughout Tri-Met's service area over time?
+        How has ridership changed throughout Tri-Met&apos;s service area over
+        time?
       </h2>
       <p>{wallOfText}</p>
       <p>{wallOfText}</p>
@@ -302,9 +271,9 @@ export default () =>
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .add("Simple usage", () => (
-      <LoadData urls={dataURLs}>
+      <DemoJSONLoader urls={dataURLs}>
         {(foundation1, slide1, slide2) =>
           dashboardComponent(foundation1, slide1, slide2)
         }
-      </LoadData>
+      </DemoJSONLoader>
     ));
