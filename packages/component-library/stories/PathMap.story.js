@@ -8,8 +8,7 @@ import { BaseMap } from '../src';
 import { PathMap } from '../src';
 import { MapTooltip } from '../src';
 import { DemoJSONLoader } from '../src';
-
-import * as d3 from 'd3';
+import { scaleThreshold } from 'd3';
 
 const displayName = PathMap.displayName || 'PathMap';
 
@@ -61,7 +60,7 @@ const demoMap = () => (
       );
       const colors = JSON.parse(colorScheme);
 
-      const divergingScale = d3.scaleThreshold()
+      const divergingScale = scaleThreshold()
         .domain([-100, -75, -50, -25, 0, 25, 50, 75, 100])
         .range(colors);
 
@@ -117,7 +116,7 @@ const tooltipMap = () => (
       );
       const colors = JSON.parse(colorScheme);
 
-      const divergingScale = d3.scaleThreshold()
+      const divergingScale = scaleThreshold()
         .domain([-100, -75, -50, -25, 0, 25, 50, 75, 100])
         .range(colors);
 
