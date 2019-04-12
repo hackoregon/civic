@@ -1,4 +1,4 @@
-export const electionData = [
+const electionData = [
   {
     category: "Influencers",
     importance: 0.532761433,
@@ -55,3 +55,5 @@ export const electionData = [
     sortOrder: 1
   }
 ];
+
+export default electionData;

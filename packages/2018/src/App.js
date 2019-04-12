@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import React from "react";
 import { createStore, compose, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
@@ -51,6 +52,7 @@ import {
 import { Reducers as SandboxReducers } from "@hackoregon/civic-sandbox";
 
 import "./fonts.css";
+// eslint-disable-next-line import/no-named-as-default
 import RootPage from "./components/RootPage";
 import HomePage from "./components/HomePage";
 import SandboxPage from "./components/SandboxPage";

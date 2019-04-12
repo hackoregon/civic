@@ -1,4 +1,5 @@
 import React from "react";
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { css } from "emotion";
 import { Link } from "react-router";
 import { Logo } from "@hackoregon/component-library";
