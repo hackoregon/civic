@@ -16,7 +16,7 @@ export default () =>
     .add("Simple usage", () => (
       <DemoJSONLoader
         urls={[
-          "http://service.civicpdx.org/transportation-systems/sandbox/slides/crashes/"
+          "https://service.civicpdx.org/transportation-systems/sandbox/slides/crashes/"
         ]}
       >
         {data => {
