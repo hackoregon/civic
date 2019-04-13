@@ -1,12 +1,12 @@
 /* TODO: Fix linting errors */
 /* eslint-disable */
 
-import React, { Component } from 'react';
-import { css } from 'emotion';
-import PropTypes from 'prop-types';
-import NavSubMenu from './NavSubMenu';
-import NavLink from './NavRouterLink';
-import Icon from '../Icon/Icon';
+import React, { Component } from "react";
+import { css } from "emotion";
+import PropTypes from "prop-types";
+import NavSubMenu from "./NavSubMenu";
+import NavLink from "./NavRouterLink";
+import Icon from "../Icon/Icon";
 
 const defaultMenu = [
   {

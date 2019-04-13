@@ -1,46 +1,46 @@
-import configureMockStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
-import * as actions from './actions';
-import * as selectors from './selectors';
-import reducer from './index';
+import configureMockStore from "redux-mock-store";
+import thunk from "redux-thunk";
+import * as actions from "./actions";
+import * as selectors from "./selectors";
+import reducer from "./index";
 
 const mockStore = configureMockStore([thunk]);
 
-describe('ridership-over-time', () => {
-  describe('ridership-over-time actions', () => {
-    describe('ridership-over-time api actions', () => {
-      it('should have a start action', () => {
+describe("ridership-over-time", () => {
+  describe("ridership-over-time actions", () => {
+    describe("ridership-over-time api actions", () => {
+      it("should have a start action", () => {
         const expectedAction = {
-          type: actions.API_START,
+          type: actions.API_START
         };
 
         expect(actions.ridershipOverTimeStart()).to.eql(expectedAction);
       });
 
-      it('should have a success action', () => {
+      it("should have a success action", () => {
         const payload = {
           some: {
-            test: ['d', 'a', 't', 'a'],
-          },
+            test: ["d", "a", "t", "a"]
+          }
         };
         const expectedAction = {
           type: actions.API_SUCCESS,
-          payload,
+          payload
         };
         expect(actions.ridershipOverTimeSuccess(payload)).to.eql(
           expectedAction
         );
       });
 
-      it('should have an error action', () => {
+      it("should have an error action", () => {
         const payload = {
           some: {
-            test: ['d', 'a', 't', 'a'],
-          },
+            test: ["d", "a", "t", "a"]
+          }
         };
         const expectedAction = {
           type: actions.API_ERROR,
-          payload,
+          payload
         };
 
         expect(actions.ridershipOverTimeError(payload)).to.eql(expectedAction);
@@ -70,109 +70,109 @@ describe('ridership-over-time', () => {
     });
 */
   });
-  describe('ridership-over-time reducer', () => {
+  describe("ridership-over-time reducer", () => {
     const initialState = {
       pending: false,
       error: null,
-      data: null,
+      data: null
     };
-    const payload = { stu: 'ff' };
+    const payload = { stu: "ff" };
 
-    it('should return the initial state', () => {
+    it("should return the initial state", () => {
       expect(reducer(undefined, {})).to.eql(initialState);
     });
 
-    it('should handle API_START', () => {
+    it("should handle API_START", () => {
       expect(
         reducer(initialState, {
-          type: actions.API_START,
+          type: actions.API_START
         })
       ).to.eql({
         pending: true,
         error: null,
-        data: null,
+        data: null
       });
     });
 
-    it('should handle API_SUCCESS', () => {
+    it("should handle API_SUCCESS", () => {
       expect(
         reducer(
           { pending: true, error: null, data: null },
           {
             type: actions.API_SUCCESS,
-            payload,
+            payload
           }
         )
       ).to.eql({
         error: null,
         pending: false,
-        data: payload,
+        data: payload
       });
     });
 
-    it('should handle API_ERROR', () => {
+    it("should handle API_ERROR", () => {
       expect(
         reducer(
           { pending: true, error: null, data: null },
           {
             type: actions.API_ERROR,
-            payload,
+            payload
           }
         )
       ).to.eql({
         pending: false,
         error: payload,
-        data: null,
+        data: null
       });
     });
   });
 
-  describe('ridership-over-time selectors', () => {
-    describe('getRidershipOverTimeRequest', () => {
-      it('extends the root selector', () => {
-        const expectation = { one: 'two', three: 4 };
+  describe("ridership-over-time selectors", () => {
+    describe("getRidershipOverTimeRequest", () => {
+      it("extends the root selector", () => {
+        const expectation = { one: "two", three: 4 };
 
         expect(
           selectors.getRidershipOverTimeRequest({
-            ridershipOverTime: expectation,
+            ridershipOverTime: expectation
           })
         ).to.eql(expectation);
 
         expect(
           selectors.getRidershipOverTimeRequest({
-            red: 'herring',
+            red: "herring",
             transportation: {
-              ridershipOverTime: expectation,
-            },
+              ridershipOverTime: expectation
+            }
           })
         ).to.eql(expectation);
       });
     });
 
-    describe('getridershipOverTimeData', () => {
-      it('returns undefined when there is no data', () => {
+    describe("getridershipOverTimeData", () => {
+      it("returns undefined when there is no data", () => {
         expect(
           selectors.getRidershipOverTimeData({
             ridershipOverTime: {
-              no: 'data to be seen',
-            },
+              no: "data to be seen"
+            }
           })
         ).to.be.undefined;
       });
 
-      it('returns undefined when data has no value for ridershipByYear', () => {
+      it("returns undefined when data has no value for ridershipByYear", () => {
         expect(
           selectors.getRidershipOverTimeData({
             ridershipOverTime: {
               data: {
-                NotridershipByYear: {},
-              },
-            },
+                NotridershipByYear: {}
+              }
+            }
           })
         ).to.be.undefined;
       });
 
-      it('returns processed data when data has a value for ridershipByYear', () => {
+      it("returns processed data when data has a value for ridershipByYear", () => {
         const res = {
           data: [
             {
@@ -187,64 +187,64 @@ describe('ridership-over-time', () => {
               sunday_census: true,
               saturday_census: true,
               total_sum_ons: 64008672,
-              total_sum_offs: 64802807,
-            },
-          ],
+              total_sum_offs: 64802807
+            }
+          ]
         };
         const processedData = [
           {
-            type: 'Weekday',
+            type: "Weekday",
             year: 2001,
-            ons: 56500470,
+            ons: 56500470
           },
           {
-            type: 'Saturday',
+            type: "Saturday",
             year: 2001,
-            ons: 3797456,
+            ons: 3797456
           },
           {
-            type: 'Sunday',
+            type: "Sunday",
             year: 2001,
-            ons: 3710746,
-          },
+            ons: 3710746
+          }
         ];
         expect(
           selectors.getRidershipOverTimeData({
             ridershipOverTime: {
-              data: res,
-            },
+              data: res
+            }
           })
         ).to.eql(processedData);
       });
     });
 
-    describe('isridershipOverTimePending', () => {
-      it('returns false when there is no value for pending', () => {
+    describe("isridershipOverTimePending", () => {
+      it("returns false when there is no value for pending", () => {
         expect(
           selectors.isRidershipOverTimePending({
             ridershipOverTime: {
-              no: 'pending property',
-            },
+              no: "pending property"
+            }
           })
         ).to.be.false;
       });
 
-      it('returns false when the value for pending is false', () => {
+      it("returns false when the value for pending is false", () => {
         expect(
           selectors.isRidershipOverTimePending({
             ridershipOverTime: {
-              pending: false,
-            },
+              pending: false
+            }
           })
         ).to.be.false;
       });
 
-      it('returns true when the value for pending is true', () => {
+      it("returns true when the value for pending is true", () => {
         expect(
           selectors.isRidershipOverTimePending({
             ridershipOverTime: {
-              pending: true,
-            },
+              pending: true
+            }
           })
         ).to.be.true;
       });

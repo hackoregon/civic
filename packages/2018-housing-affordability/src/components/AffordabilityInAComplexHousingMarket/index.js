@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import { CivicStoryCard, PDF } from '@hackoregon/component-library';
+import { CivicStoryCard, PDF } from "@hackoregon/component-library";
 
 export class AffordabilityInAComplexHousingMarket extends React.Component {
   componentDidMount() {
@@ -34,7 +34,7 @@ export class AffordabilityInAComplexHousingMarket extends React.Component {
 }
 
 AffordabilityInAComplexHousingMarket.displayName =
-  'AffordabilityInAComplexHousingMarket';
+  "AffordabilityInAComplexHousingMarket";
 
 // Connect this to the redux store when necessary
 export default AffordabilityInAComplexHousingMarket;

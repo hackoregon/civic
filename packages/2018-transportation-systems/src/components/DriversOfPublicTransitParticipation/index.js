@@ -1,21 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { css } from 'emotion';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { css } from "emotion";
 
-import {
-  CivicStoryCard,
-  Scatterplot,
-} from '@hackoregon/component-library';
+import { CivicStoryCard, Scatterplot } from "@hackoregon/component-library";
 
-import { civicFormat } from '@hackoregon/component-library/dist/utils';
+import { civicFormat } from "@hackoregon/component-library/dist/utils";
 
-import { fetchDriversOfParticipation } from '../../state/drivers-of-participation/actions';
+import { fetchDriversOfParticipation } from "../../state/drivers-of-participation/actions";
 import {
   isDriversOfParticipationPending,
   catchDriversOfParticipationErrors,
-  getDriversOfParticipationData,
-} from '../../state/drivers-of-participation/selectors';
+  getDriversOfParticipationData
+} from "../../state/drivers-of-participation/selectors";
 
 export class DriversOfPublicTransitParticipation extends React.Component {
   componentDidMount() {
@@ -35,7 +32,7 @@ export class DriversOfPublicTransitParticipation extends React.Component {
           Ridership is complex, and while we cannot claim to understand it
           completely, we can start looking at the data. To help facilitate
           future discussion about this potential relationship, we have plotted
-          year-over-year changes in Scheduled Service vs Ridership.{' '}
+          year-over-year changes in Scheduled Service vs Ridership.{" "}
         </p>
         {driversOfParticipation && (
           <Scatterplot
@@ -59,23 +56,23 @@ export class DriversOfPublicTransitParticipation extends React.Component {
 }
 
 DriversOfPublicTransitParticipation.displayName =
-  'DriversOfPublicTransitParticipation';
+  "DriversOfPublicTransitParticipation";
 DriversOfPublicTransitParticipation.propTypes = {
   init: PropTypes.func,
   isLoading: PropTypes.bool,
   error: PropTypes.string,
-  driversOfParticipation: PropTypes.arrayOf(PropTypes.object),
+  driversOfParticipation: PropTypes.arrayOf(PropTypes.object)
 };
 
 export default connect(
   state => ({
     isLoading: isDriversOfParticipationPending(state),
     error: catchDriversOfParticipationErrors(state),
-    driversOfParticipation: getDriversOfParticipationData(state),
+    driversOfParticipation: getDriversOfParticipationData(state)
   }),
   dispatch => ({
     init() {
       dispatch(fetchDriversOfParticipation());
-    },
+    }
   })
 )(DriversOfPublicTransitParticipation);

@@ -1,18 +1,18 @@
 /* eslint-disable no-console */
-import React from 'react';
+import React from "react";
 /* eslint-disable import/no-extraneous-dependencies */
-import { storiesOf } from '@storybook/react';
-import { withInfo } from '@storybook/addon-info';
-import { checkA11y } from '@storybook/addon-a11y';
-import { StoryCard, Chart, ChartData, PieChart } from '../src';
+import { storiesOf } from "@storybook/react";
+import { withInfo } from "@storybook/addon-info";
+import { checkA11y } from "@storybook/addon-a11y";
+import { StoryCard, Chart, ChartData, PieChart } from "../src";
 import {
   getRandomValuesArray,
   colors,
   objectRandomizer,
-  wallOfRichText,
-} from './shared';
+  wallOfRichText
+} from "./shared";
 
-const labels = ['A', 'B', 'C', 'D', 'E', 'F'];
+const labels = ["A", "B", "C", "D", "E", "F"];
 const width = 300;
 const height = 300;
 const tdDemo = () => (
@@ -23,7 +23,7 @@ const tdDemo = () => (
 const tdvDemo = () => (
   <StoryCard title="A title goes here">
     <p className="Description">{wallOfRichText}</p>
-    <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+    <div style={{ display: "flex", justifyContent: "space-around" }}>
       <PieChart
         data={getRandomValuesArray(5, objectRandomizer)}
         innerRadius={100}
@@ -43,10 +43,10 @@ const tdvDemo = () => (
 );
 
 export default () =>
-  storiesOf('StoryCard', module)
+  storiesOf("StoryCard", module)
     .addDecorator(checkA11y)
     .add(
-      'Simple usage',
+      "Simple usage",
       // 'This is some basic usage with the StoryCard with just a title and descriptions')(
       () => (
         <StoryCard title="Some title">
@@ -54,5 +54,5 @@ export default () =>
         </StoryCard>
       )
     )
-    .add('with title & description', tdDemo)
-    .add('with title, description & visualization', tdvDemo);
+    .add("with title & description", tdDemo)
+    .add("with title, description & visualization", tdvDemo);

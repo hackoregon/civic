@@ -1,52 +1,52 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 import {
   AFFORDABLE_YOU_COLOR,
   AFFORDABLE_OTHER_COLOR,
   AFFORDABLE_NEITHER_COLOR,
   AFFORDABLE_BOTH_COLOR
-} from '../../utils/data-constants';
+} from "../../utils/data-constants";
 
 const legendStyles = {
-  display: 'flex',
-  marginLeft: '15px',
-  marginBottom: '15px',
+  display: "flex",
+  marginLeft: "15px",
+  marginBottom: "15px"
 };
 
 const tileContainer = {
-  textAlign: 'left',
+  textAlign: "left"
 };
 
 const tileStyles = {
-  display: 'inline-block',
-  height: '20px',
-  width: '30px',
-  border: '1px solid #999',
-  background: '#000',
-  marginBottom: '-2px',
-  marginRight: '5px',
+  display: "inline-block",
+  height: "20px",
+  width: "30px",
+  border: "1px solid #999",
+  background: "#000",
+  marginBottom: "-2px",
+  marginRight: "5px"
 };
 
-const formatColor = color => `rgb(${color.join(',')})`;
+const formatColor = color => `rgb(${color.join(",")})`;
 
 const neitherTile = {
   ...tileStyles,
-  background: formatColor(AFFORDABLE_NEITHER_COLOR),
+  background: formatColor(AFFORDABLE_NEITHER_COLOR)
 };
 const bothTile = {
   ...tileStyles,
-  marginLeft: '15px',
-  background: formatColor(AFFORDABLE_BOTH_COLOR),
+  marginLeft: "15px",
+  background: formatColor(AFFORDABLE_BOTH_COLOR)
 };
 const youTile = {
   ...tileStyles,
-  marginLeft: '15px',
-  background: formatColor(AFFORDABLE_YOU_COLOR),
+  marginLeft: "15px",
+  background: formatColor(AFFORDABLE_YOU_COLOR)
 };
 const otherTile = {
   ...tileStyles,
-  marginLeft: '15px',
-  background: formatColor(AFFORDABLE_OTHER_COLOR),
+  marginLeft: "15px",
+  background: formatColor(AFFORDABLE_OTHER_COLOR)
 };
 
 const MapLegend = ({ otherDemographicLabel }) => (
@@ -64,11 +64,11 @@ const MapLegend = ({ otherDemographicLabel }) => (
 );
 
 MapLegend.propTypes = {
-  otherDemographicLabel: PropTypes.string,
+  otherDemographicLabel: PropTypes.string
 };
 
 MapLegend.defaultProps = {
-  otherDemographicLabel: '',
+  otherDemographicLabel: ""
 };
 
 export default MapLegend;

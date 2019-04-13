@@ -1,6 +1,7 @@
 import React from "react";
 import { storiesOf, linkTo } from "@storybook/react"; // eslint-disable-line
 import { checkA11y } from "@storybook/addon-a11y";
+
 import buttonStory from "./Button.story";
 import civicStorycardStory from "./CivicStoryCard.story";
 import pageLayoutStory from "./PageLayout.story";
@@ -32,27 +33,29 @@ import pdfStory from "./PDF.story";
 import heatMapStory from "./HeatMap.story";
 import civicCardStackStory from "./CivicCardStack.story";
 import sliderStory from "./Slider.story";
-import UIComponentsStyle from "./styleGuideStories/UIComponentsStyle.story";
-import ChartsStyle from "./styleGuideStories/ChartsStyle.story";
-import MapsStyle from "./styleGuideStories/MapsStyle.story";
-import CivicPlatformStyle from "./styleGuideStories/CivicPlatformStyle.story";
+
 import AccessibilityGuidelinesStyle from "./styleGuideStories/AccessibilityGuidelinesStyle.story";
 import CardsStyle from "./styleGuideStories/CardsStyle.story";
+import ChartsStyle from "./styleGuideStories/ChartsStyle.story";
+import CivicPlatformStyle from "./styleGuideStories/CivicPlatformStyle.story";
+import ColorThemeStyle from "./styleGuideStories/ColorThemeStyle.story";
 import DataVisualizationStyle from "./styleGuideStories/DataVisualizationStyle.story";
+import FormsStyle from "./styleGuideStories/FormsStyle.story";
+import IconographyStyle from "./styleGuideStories/IconographyStyle.story";
+import Introduction from "./styleGuideStories/Introduction.story";
+import LogosStyle from "./styleGuideStories/LogosStyle.story";
+import MapsStyle from "./styleGuideStories/MapsStyle.story";
 import MotionStyle from "./styleGuideStories/MotionStyle.story";
 import NavigationStyle from "./styleGuideStories/NavigationStyle.story";
 import ResponsiveDesignStyle from "./styleGuideStories/ResponsiveDesignStyle.story";
 import TerminologyStyle from "./styleGuideStories/TerminologyStyle.story";
-import IconographyStyle from "./styleGuideStories/IconographyStyle.story";
-import LogosStyle from "./styleGuideStories/LogosStyle.story";
-import ColorThemeStyle from "./styleGuideStories/ColorThemeStyle.story";
+import TheBrandStyle from "./styleGuideStories/TheBrandStyle.story";
+import ThePlatformStyle from "./styleGuideStories/ThePlatformStyle.story";
 import TypographyStyleCommonSample from "./styleGuideStories/TypographyStyleCommonSample.story";
 import TypographyStyleQuickUsage from "./styleGuideStories/TypographyStyleQuickUsage.story";
 import TypographyStyleHeadings from "./styleGuideStories/TypographyStyleHeadings.story";
 import TypographyStyleParagraphs from "./styleGuideStories/TypographyStyleParagraphs.story";
-import TheBrandStyle from "./styleGuideStories/TheBrandStyle.story";
-import ThePlatformStyle from "./styleGuideStories/ThePlatformStyle.story";
-import Introduction from "./styleGuideStories/Introduction.story";
+import UIComponentsStyle from "./styleGuideStories/UIComponentsStyle.story";
 
 // Legacy components used in 2017 package. Not supported for ongoing development.
 // import storycardStory from './StoryCard.story';
@@ -69,9 +72,7 @@ storiesOf("Welcome", module)
   .addDecorator(checkA11y)
   .add("Introduction", () => <Introduction />)
   .add("The CIVIC Brand", () => <TheBrandStyle />)
-  .add("The CIVIC Platform", () => (
-    <ThePlatformStyle showApp={linkTo("Button")} />
-  ));
+  .add("The CIVIC Platform", () => <ThePlatformStyle />);
 
 // Branding
 storiesOf("Branding", module)
@@ -93,6 +94,7 @@ storiesOf("UX Style Guide", module)
   .add("Accessibility", () => <AccessibilityGuidelinesStyle />)
   .add("Cards", () => <CardsStyle />)
   .add("Data Visualization", () => <DataVisualizationStyle />)
+  .add("Forms", () => <FormsStyle />)
   .add("Iconography", () => <IconographyStyle />)
   .add("Motion", () => <MotionStyle />)
   .add("Navigation", () => <NavigationStyle />)

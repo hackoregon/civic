@@ -1,20 +1,20 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import DeckGL from 'deck.gl';
-import HexOverlay from './HexOverlay';
+import React from "react";
+import { shallow } from "enzyme";
+import DeckGL from "deck.gl";
+import HexOverlay from "./HexOverlay";
 
-describe('HexOverlay', () => {
+describe("HexOverlay", () => {
   const data = [
     {
-      type: 'Feature',
+      type: "Feature",
       geometry: {
-        type: 'Point',
-        coordinates: [0, 0],
+        type: "Point",
+        coordinates: [0, 0]
       },
       properties: {
-        name: 'Null Island',
-      },
-    },
+        name: "Null Island"
+      }
+    }
   ];
   const extruded = true;
   const opacity = 0.8;
@@ -24,52 +24,52 @@ describe('HexOverlay', () => {
     data,
     extruded,
     opacity,
-    radius,
+    radius
   };
 
   const wrapper = shallow(<HexOverlay {...defaultProps} />);
 
-  it('should render a DeckGLOverlay component', () => {
-    expect(wrapper.find('.HexOverlay')).to.have.length(1);
+  it("should render a DeckGLOverlay component", () => {
+    expect(wrapper.find(".HexOverlay")).to.have.length(1);
   });
 
-  it('should render a DeckGL component', () => {
+  it("should render a DeckGL component", () => {
     expect(wrapper.find(DeckGL)).length(1);
   });
 
-  it('should render with the same class name', () => {
-    expect(wrapper.find('.HexOverlay')).length(1);
+  it("should render with the same class name", () => {
+    expect(wrapper.find(".HexOverlay")).length(1);
   });
 
-  it('should render with extruded', () => {
+  it("should render with extruded", () => {
     expect(wrapper.props().children.props.layers[0].props.extruded).to.equal(
       true
     );
   });
 
-  it('should render with radius', () => {
+  it("should render with radius", () => {
     expect(wrapper.props().children.props.layers[0].props.radius).to.equal(200);
   });
 
-  it('should render with opacity of 0.8', () => {
+  it("should render with opacity of 0.8", () => {
     expect(wrapper.props().children.props.layers[0].props.opacity).to.equal(
       0.8
     );
   });
 
-  it('should render with an extrusion', () => {
+  it("should render with an extrusion", () => {
     expect(wrapper.props().children.props.layers[0].props.extruded).to.equal(
       true
     );
   });
 
-  it('should render with data', () => {
+  it("should render with data", () => {
     expect(wrapper.props().children.props.layers[0].props.data).to.equal(data);
   });
 
-  it('should render with an type string', () => {
+  it("should render with an type string", () => {
     expect(
       wrapper.props().children.props.layers[0].props.data[0].type
-    ).to.equal('Feature');
+    ).to.equal("Feature");
   });
 });

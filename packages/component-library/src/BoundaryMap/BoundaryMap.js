@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import DeckGL, { PolygonLayer } from 'deck.gl';
+import PropTypes from "prop-types";
+import React from "react";
+import DeckGL, { PolygonLayer } from "deck.gl";
 
 const BoundaryMap = props => {
   const {
@@ -13,7 +13,7 @@ const BoundaryMap = props => {
     lineWidthScale,
     lineJointRounded,
     getFillColor,
-    filled,
+    filled
   } = props;
 
   return (
@@ -34,7 +34,10 @@ const BoundaryMap = props => {
           stroked
           getFillColor={getFillColor}
           filled={filled}
-          updateTriggers={{ getLineColor: getLineColor, getFillColor: getFillColor }}
+          updateTriggers={{
+            getLineColor: getLineColor,
+            getFillColor: getFillColor
+          }}
         />
       </DeckGL>
     </div>
@@ -51,7 +54,7 @@ BoundaryMap.propTypes = {
   lineWidthScale: PropTypes.number,
   lineJointRounded: PropTypes.bool,
   getFillColor: PropTypes.func,
-  filled: PropTypes.bool,
+  filled: PropTypes.bool
 };
 
 BoundaryMap.defaultProps = {
@@ -61,7 +64,7 @@ BoundaryMap.defaultProps = {
   lineWidthScale: 1,
   lineJointRounded: false,
   getFillColor: () => [0, 0, 0, 0],
-  filled: false,
+  filled: false
 };
 
 export default BoundaryMap;

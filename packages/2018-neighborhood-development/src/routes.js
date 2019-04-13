@@ -1,11 +1,11 @@
-import App from './components/App';
+import App from "./components/App";
 
 const routes = () => [
   {
-    path: 'disaster',
-    name: 'disaster',
-    component: App,
-  },
+    path: "disaster",
+    name: "disaster",
+    component: App
+  }
 ];
 
 export default routes;

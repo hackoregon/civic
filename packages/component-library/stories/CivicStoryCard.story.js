@@ -1,42 +1,42 @@
 /* eslint-disable no-console */
-import React from 'react';
+import React from "react";
 /* eslint-disable import/no-extraneous-dependencies */
-import { storiesOf } from '@storybook/react';
-import { withInfo } from '@storybook/addon-info';
-import { withKnobs, text, number, object, array } from '@storybook/addon-knobs';
+import { storiesOf } from "@storybook/react";
+import { withInfo } from "@storybook/addon-info";
+import { withKnobs, text, number, object, array } from "@storybook/addon-knobs";
 import {
   CivicStoryCard,
   Chart,
   ChartData,
   Pie,
   HorizontalBarChart,
-  Collapsable,
-} from '../src';
+  Collapsable
+} from "../src";
 import {
   getRandomValuesArray,
   getColors,
   randomizer,
   wallOfRichText,
-  wallOfText,
-} from './shared';
+  wallOfText
+} from "./shared";
 
-const labels = ['A', 'B', 'C', 'D', 'E', 'F'];
+const labels = ["A", "B", "C", "D", "E", "F"];
 const width = 300;
 const height = 300;
 
-const data = array('Data', [
-  { sortOrder: 1, population: 2000, label: 'Labrador Retriever' },
-  { sortOrder: 2, population: 8000, label: 'Standard Poodle' },
-  { sortOrder: 3, population: 6000, label: 'French Bulldog' },
-  { sortOrder: 4, population: 3000, label: 'Afghan Hound' },
-  { sortOrder: 5, population: 1000, label: 'Jack Russell Terrier' },
+const data = array("Data", [
+  { sortOrder: 1, population: 2000, label: "Labrador Retriever" },
+  { sortOrder: 2, population: 8000, label: "Standard Poodle" },
+  { sortOrder: 3, population: 6000, label: "French Bulldog" },
+  { sortOrder: 4, population: 3000, label: "Afghan Hound" },
+  { sortOrder: 5, population: 1000, label: "Jack Russell Terrier" }
 ]);
-const dataKey = text('Data key', 'sortOrder');
-const dataValue = text('Data values', 'population');
-const dataKeyLabel = text('Data key labels', 'label');
+const dataKey = text("Data key", "sortOrder");
+const dataValue = text("Data values", "population");
+const dataKeyLabel = text("Data key labels", "label");
 
 const Container = ({ children }) => (
-  <div style={{ padding: '30px' }}>{children}</div>
+  <div style={{ padding: "30px" }}>{children}</div>
 );
 
 const tdDemo = () => (
@@ -49,7 +49,7 @@ const tdDemo = () => (
 const tdvDemo = () => (
   <Container>
     <CivicStoryCard title="Dogs x Income">
-      <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+      <div style={{ display: "flex", justifyContent: "space-around" }}>
         <HorizontalBarChart
           data={data}
           dataKey={dataKey}
@@ -66,7 +66,7 @@ const collapsableDemo = () => (
     <CivicStoryCard title="Dogs x Income">
       <Collapsable>
         <Collapsable.Section>
-          <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+          <div style={{ display: "flex", justifyContent: "space-around" }}>
             <HorizontalBarChart
               data={data}
               dataKey={dataKey}
@@ -98,9 +98,9 @@ const errorDemo = () => (
 );
 
 export default () =>
-  storiesOf('CIVIC Platform Components/CIVIC Story Card', module)
+  storiesOf("CIVIC Platform Components/CIVIC Story Card", module)
     .add(
-      'Simple usage',
+      "Simple usage",
       // 'This is some basic usage with the CivicStoryCard with just a title and descriptions')(
       () => (
         <Container>
@@ -110,7 +110,7 @@ export default () =>
         </Container>
       )
     )
-    .add('Custom source link', () => (
+    .add("Custom source link", () => (
       <Container>
         <CivicStoryCard
           title="Campsite Reports & income levels of a community"
@@ -120,8 +120,8 @@ export default () =>
         </CivicStoryCard>
       </Container>
     ))
-    .add('Loading', loadingDemo)
-    .add('With error', errorDemo)
-    .add('With title and description', tdDemo)
-    .add('With title, description and visualization', tdvDemo)
-    .add('With collapsable sections', collapsableDemo);
+    .add("Loading", loadingDemo)
+    .add("With error", errorDemo)
+    .add("With title and description", tdDemo)
+    .add("With title, description and visualization", tdvDemo)
+    .add("With collapsable sections", collapsableDemo);

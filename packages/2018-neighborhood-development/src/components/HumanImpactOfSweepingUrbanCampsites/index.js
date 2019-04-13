@@ -1,22 +1,22 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 import {
   CivicStoryCard,
   LineChart,
-  Collapsable,
-} from '@hackoregon/component-library';
+  Collapsable
+} from "@hackoregon/component-library";
 
-import { civicFormat } from '@hackoregon/component-library/dist/utils';
+import { civicFormat } from "@hackoregon/component-library/dist/utils";
 
-import { fetchHumanImpactOfSweepingUrbanCampsites } from '../../state/human-impact-of-sweeping-urban-campsites/actions';
+import { fetchHumanImpactOfSweepingUrbanCampsites } from "../../state/human-impact-of-sweeping-urban-campsites/actions";
 
 import {
   isHumanImpactOfSweepingUrbanCampsitesPending,
   catchHumanImpactOfSweepingUrbanCampsitesErrors,
-  getHumanImpactOfSweepingUrbanCampsitesData,
-} from '../../state/human-impact-of-sweeping-urban-campsites/selectors';
+  getHumanImpactOfSweepingUrbanCampsitesData
+} from "../../state/human-impact-of-sweeping-urban-campsites/selectors";
 
 export class HumanImpactOfSweepingUrbanCampsites extends React.Component {
   componentDidMount() {
@@ -27,7 +27,7 @@ export class HumanImpactOfSweepingUrbanCampsites extends React.Component {
     const {
       isLoading,
       error,
-      humanImpactOfSweepingUrbanCampsites,
+      humanImpactOfSweepingUrbanCampsites
     } = this.props;
 
     return (
@@ -35,7 +35,7 @@ export class HumanImpactOfSweepingUrbanCampsites extends React.Component {
         title="Human Impact of Sweeping Urban Campsites"
         slug="human-impact-of-sweeping-urban-campsites"
         loading={isLoading}
-        error={error && 'error'}
+        error={error && "error"}
         source="https://github.com/hackoregon/neighborhoods-2018/tree/master/docs/campsites"
       >
         <Collapsable>
@@ -111,12 +111,12 @@ export class HumanImpactOfSweepingUrbanCampsites extends React.Component {
 }
 
 HumanImpactOfSweepingUrbanCampsites.displayName =
-  'HumanImpactOfSweepingUrbanCampsites';
+  "HumanImpactOfSweepingUrbanCampsites";
 HumanImpactOfSweepingUrbanCampsites.propTypes = {
   init: PropTypes.func,
   isLoading: PropTypes.bool,
   error: PropTypes.string,
-  humanImpactOfSweepingUrbanCampsites: PropTypes.arrayOf(PropTypes.object),
+  humanImpactOfSweepingUrbanCampsites: PropTypes.arrayOf(PropTypes.object)
 };
 
 export default connect(
@@ -125,11 +125,11 @@ export default connect(
     error: catchHumanImpactOfSweepingUrbanCampsitesErrors(state),
     humanImpactOfSweepingUrbanCampsites: getHumanImpactOfSweepingUrbanCampsitesData(
       state
-    ),
+    )
   }),
   dispatch => ({
     init() {
       dispatch(fetchHumanImpactOfSweepingUrbanCampsites());
-    },
+    }
   })
 )(HumanImpactOfSweepingUrbanCampsites);

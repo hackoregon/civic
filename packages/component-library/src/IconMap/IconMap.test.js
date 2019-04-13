@@ -1,19 +1,19 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import IconMap from './IconMap';
+import React from "react";
+import { shallow } from "enzyme";
+import IconMap from "./IconMap";
 
-describe('IconMap', () => {
+describe("IconMap", () => {
   const data = [
     {
-      type: 'Feature',
+      type: "Feature",
       geometry: {
-        type: 'Point',
-        coordinates: [0, 0],
+        type: "Point",
+        coordinates: [0, 0]
       },
       properties: {
-        name: 'Null Island',
-      },
-    },
+        name: "Null Island"
+      }
+    }
   ];
 
   const viewport = { zoom: 9.5 };
@@ -23,19 +23,19 @@ describe('IconMap', () => {
   const defaultProps = {
     data,
     viewport,
-    iconSizeScale,
+    iconSizeScale
   };
 
-  it('should render a DeckGL component', () => {
+  it("should render a DeckGL component", () => {
     const wrapper = shallow(<IconMap {...defaultProps} />);
 
-    expect(wrapper.find('.DeckGL')).to.have.length(1);
+    expect(wrapper.find(".DeckGL")).to.have.length(1);
   });
 
-  it('should render child IconMap component', () => {
+  it("should render child IconMap component", () => {
     const wrapper = shallow(<IconMap {...defaultProps} />);
 
-    expect(wrapper.find('.DeckGL').children()).to.have.length(1);
-    expect(wrapper.find('.IconMap')).to.have.length(1);
+    expect(wrapper.find(".DeckGL").children()).to.have.length(1);
+    expect(wrapper.find(".IconMap")).to.have.length(1);
   });
 });

@@ -1,8 +1,11 @@
-import { createSelector } from 'reselect';
-import { compose } from 'redux';
-import { civicFormat, ungroupBy } from '@hackoregon/component-library/dist/utils';
+import { createSelector } from "reselect";
+import { compose } from "redux";
+import {
+  civicFormat,
+  ungroupBy
+} from "@hackoregon/component-library/dist/utils";
 
-import { rootState } from '../selectors';
+import { rootState } from "../selectors";
 
 export const getNeighborhoodAgesRequest = createSelector(
   rootState,
@@ -15,9 +18,9 @@ const getProperty = key =>
     state => state[key]
   );
 
-export const getNeighborhoodAgesData = getProperty('data');
-export const isNeighborhoodAgesPending = getProperty('pending');
-export const catchNeighborhoodAgesErrors = getProperty('error');
+export const getNeighborhoodAgesData = getProperty("data");
+export const isNeighborhoodAgesPending = getProperty("pending");
+export const catchNeighborhoodAgesErrors = getProperty("error");
 
 export const getSelectedNeighborhood = createSelector(
   getNeighborhoodAgesRequest,
@@ -41,13 +44,13 @@ const dataForNeighborhood = (data, nbhd) =>
   getSelectedNeighborhoodData(data, nbhd);
 
 const TYPES = [
-  'pct_18_25',
-  'pct_26_32',
-  'pct_33_39',
-  'pct_40_49',
-  'pct_50_plus',
+  "pct_18_25",
+  "pct_26_32",
+  "pct_33_39",
+  "pct_40_49",
+  "pct_50_plus"
 ];
-const LABELS = ['18-25', '26-32', '33-39', '40-49', '50+'];
+const LABELS = ["18-25", "26-32", "33-39", "40-49", "50+"];
 
 const formatData = data => ungroupBy(data, TYPES, LABELS);
 

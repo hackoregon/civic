@@ -1,21 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import { PieChart } from '@hackoregon/component-library';
+import { PieChart } from "@hackoregon/component-library";
 
 const propTypes = {
   contributors: PropTypes.array,
-  loading: PropTypes.bool,
+  loading: PropTypes.bool
 };
 
 const defaultProps = {
-  contributors: [],
+  contributors: []
 };
 
 const ContributorBreakdown = ({ contributors, loading }) => {
   const data = contributors.map(c => ({
     x: c.donor_category,
-    y: c.sum,
+    y: c.sum
   }));
 
   return (

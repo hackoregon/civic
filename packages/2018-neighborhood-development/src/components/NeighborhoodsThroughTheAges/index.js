@@ -1,32 +1,32 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { css } from 'emotion';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { css } from "emotion";
 
 import {
   CivicStoryCard,
   LineChart,
-  Dropdown,
-} from '@hackoregon/component-library';
+  Dropdown
+} from "@hackoregon/component-library";
 
-import { civicFormat } from '@hackoregon/component-library/dist/utils';
+import { civicFormat } from "@hackoregon/component-library/dist/utils";
 
 import {
   fetchNeighborhoodAges,
-  updateUserNeighborhood,
-} from '../../state/neighborhoods-through-the-ages/actions';
+  updateUserNeighborhood
+} from "../../state/neighborhoods-through-the-ages/actions";
 import {
   isNeighborhoodAgesPending,
   catchNeighborhoodAgesErrors,
   getNeighborhoodAgesData,
   getListOfNeighborhoods,
   getSelectedNeighborhood,
-  getDataForSelectedNeighborhood,
-} from '../../state/neighborhoods-through-the-ages/selectors';
+  getDataForSelectedNeighborhood
+} from "../../state/neighborhoods-through-the-ages/selectors";
 
 const DEFAULT_NEIGHBORHOOD = {
-  value: 'ROSE CITY PARK',
-  label: 'Rose City Park',
+  value: "ROSE CITY PARK",
+  label: "Rose City Park"
 };
 
 const cardLoading = css`
@@ -55,7 +55,7 @@ export class NeighborhoodsThroughTheAges extends React.Component {
       error,
       neighborhoods,
       selectedNeighborhood,
-      selectedNeighborhoodData,
+      selectedNeighborhoodData
     } = this.props;
 
     const neighborhoodSubtitle =
@@ -105,7 +105,7 @@ export class NeighborhoodsThroughTheAges extends React.Component {
   }
 }
 
-NeighborhoodsThroughTheAges.displayName = 'NeighborhoodsThroughTheAges';
+NeighborhoodsThroughTheAges.displayName = "NeighborhoodsThroughTheAges";
 NeighborhoodsThroughTheAges.propTypes = {
   init: PropTypes.func,
   setNeighborhood: PropTypes.func,
@@ -115,8 +115,8 @@ NeighborhoodsThroughTheAges.propTypes = {
   selectedNeighborhood: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   selectedNeighborhoodData: PropTypes.oneOfType([
     PropTypes.bool,
-    PropTypes.array,
-  ]),
+    PropTypes.array
+  ])
 };
 
 export default connect(
@@ -126,7 +126,7 @@ export default connect(
     data: getNeighborhoodAgesData(state),
     neighborhoods: getListOfNeighborhoods(state),
     selectedNeighborhood: getSelectedNeighborhood(state),
-    selectedNeighborhoodData: getDataForSelectedNeighborhood(state),
+    selectedNeighborhoodData: getDataForSelectedNeighborhood(state)
   }),
   dispatch => ({
     init() {
@@ -136,6 +136,6 @@ export default connect(
     },
     setNeighborhood(neighborhood) {
       dispatch(updateUserNeighborhood(neighborhood));
-    },
+    }
   })
 )(NeighborhoodsThroughTheAges);

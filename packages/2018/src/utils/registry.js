@@ -34,13 +34,13 @@ export default class Registry {
             }`
         );
 
-      errors.push(labels.join('\n'));
+      errors.push(labels.join("\n"));
     });
 
     if (errors.length) {
       throw new Error(
         `Duplicate slugs found. All card slugs must be unique\n\n${errors.join(
-          '\n\n'
+          "\n\n"
         )}\n`
       );
     }
@@ -55,7 +55,7 @@ export default class Registry {
   // Remove an entry (to have symmetry with Add)
   remove(entryOrSlug) {
     const toRemove =
-      typeof entryOrSlug === 'string'
+      typeof entryOrSlug === "string"
         ? this.entries.find(entry => entry.slug === entryOrSlug)
         : this.entries.find(entry => entry === entryOrSlug);
 

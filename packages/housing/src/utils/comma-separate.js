@@ -1,6 +1,6 @@
-import { format } from 'd3-format';
+import { format } from "d3-format";
 
-const formatCommaSeparated = format(',');
+const formatCommaSeparated = format(",");
 
 export default function commaSeparate(
   num,
@@ -12,8 +12,8 @@ export default function commaSeparate(
   }
 
   if (insistDecimalPrecision) {
-    const splitNumber = num.toFixed(decimalPrecision).split('.');
-    return `${formatCommaSeparated(splitNumber[0])}.${splitNumber[1] || ''}`;
+    const splitNumber = num.toFixed(decimalPrecision).split(".");
+    return `${formatCommaSeparated(splitNumber[0])}.${splitNumber[1] || ""}`;
   }
 
   return formatCommaSeparated(num.toFixed(decimalPrecision));

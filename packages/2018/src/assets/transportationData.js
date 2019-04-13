@@ -15,7 +15,7 @@ export const transportationData = [
     saturday_census: true,
     total_sum_ons: 361697,
     total_sum_offs: 366413,
-    total_total_stops: 929,
+    total_total_stops: 929
   },
   {
     year: 2002,
@@ -33,7 +33,7 @@ export const transportationData = [
     saturday_census: true,
     total_sum_ons: 443471,
     total_sum_offs: 448135,
-    total_total_stops: 976,
+    total_total_stops: 976
   },
   {
     year: 2003,
@@ -51,7 +51,7 @@ export const transportationData = [
     saturday_census: true,
     total_sum_ons: 401237,
     total_sum_offs: 404146,
-    total_total_stops: 905,
+    total_total_stops: 905
   },
   {
     year: 2004,
@@ -69,7 +69,7 @@ export const transportationData = [
     saturday_census: true,
     total_sum_ons: 529724,
     total_sum_offs: 531762,
-    total_total_stops: 1190,
+    total_total_stops: 1190
   },
   {
     year: 2005,
@@ -87,7 +87,7 @@ export const transportationData = [
     saturday_census: true,
     total_sum_ons: 636820,
     total_sum_offs: 639383,
-    total_total_stops: 1436,
+    total_total_stops: 1436
   },
   {
     year: 2006,
@@ -105,7 +105,7 @@ export const transportationData = [
     saturday_census: true,
     total_sum_ons: 638951,
     total_sum_offs: 644047,
-    total_total_stops: 1427,
+    total_total_stops: 1427
   },
   {
     year: 2007,
@@ -123,7 +123,7 @@ export const transportationData = [
     saturday_census: true,
     total_sum_ons: 650397,
     total_sum_offs: 654727,
-    total_total_stops: 1447,
+    total_total_stops: 1447
   },
   {
     year: 2008,
@@ -141,7 +141,7 @@ export const transportationData = [
     saturday_census: true,
     total_sum_ons: 683797,
     total_sum_offs: 684426,
-    total_total_stops: 1505,
+    total_total_stops: 1505
   },
   {
     year: 2009,
@@ -159,7 +159,7 @@ export const transportationData = [
     saturday_census: true,
     total_sum_ons: 661124,
     total_sum_offs: 668611,
-    total_total_stops: 1481,
+    total_total_stops: 1481
   },
   {
     year: 2010,
@@ -177,7 +177,7 @@ export const transportationData = [
     saturday_census: true,
     total_sum_ons: 678656,
     total_sum_offs: 693246,
-    total_total_stops: 1533,
+    total_total_stops: 1533
   },
   {
     year: 2011,
@@ -195,7 +195,7 @@ export const transportationData = [
     saturday_census: true,
     total_sum_ons: 672970,
     total_sum_offs: 686685,
-    total_total_stops: 1534,
+    total_total_stops: 1534
   },
   {
     year: 2012,
@@ -213,7 +213,7 @@ export const transportationData = [
     saturday_census: true,
     total_sum_ons: 693198,
     total_sum_offs: 702130,
-    total_total_stops: 1522,
+    total_total_stops: 1522
   },
   {
     year: 2013,
@@ -231,7 +231,7 @@ export const transportationData = [
     saturday_census: true,
     total_sum_ons: 649565,
     total_sum_offs: 654375,
-    total_total_stops: 1481,
+    total_total_stops: 1481
   },
   {
     year: 2014,
@@ -249,7 +249,7 @@ export const transportationData = [
     saturday_census: true,
     total_sum_ons: 691401,
     total_sum_offs: 700007,
-    total_total_stops: 1513,
+    total_total_stops: 1513
   },
   {
     year: 2015,
@@ -267,7 +267,7 @@ export const transportationData = [
     saturday_census: true,
     total_sum_ons: 679265,
     total_sum_offs: 686794,
-    total_total_stops: 1505,
+    total_total_stops: 1505
   },
   {
     year: 2016,
@@ -285,7 +285,7 @@ export const transportationData = [
     saturday_census: true,
     total_sum_ons: 660761,
     total_sum_offs: 668204,
-    total_total_stops: 1493,
+    total_total_stops: 1493
   },
   {
     year: 2017,
@@ -303,6 +303,6 @@ export const transportationData = [
     saturday_census: true,
     total_sum_ons: 653039,
     total_sum_offs: 659263,
-    total_total_stops: 1511,
-  },
+    total_total_stops: 1511
+  }
 ];

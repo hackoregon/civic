@@ -1,21 +1,21 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { css } from 'emotion';
-import { splitAt } from 'ramda';
+import React from "react";
+import { connect } from "react-redux";
+import { css } from "emotion";
+import { splitAt } from "ramda";
 import {
   CivicStoryCard,
   ChartTitle,
-  SimpleLegend,
-} from '@hackoregon/component-library';
+  SimpleLegend
+} from "@hackoregon/component-library";
 
-import PolicyText from './PolicyText';
-import SelectedPolicy from './SelectedPolicy';
+import PolicyText from "./PolicyText";
+import SelectedPolicy from "./SelectedPolicy";
 
 import {
   fetchAllHousingPolicyData,
   setSelectedPolicy,
-  unsetSelectedPolicy,
-} from '../../state/housing-policy/actions';
+  unsetSelectedPolicy
+} from "../../state/housing-policy/actions";
 import {
   isLoading,
   isError,
@@ -23,8 +23,8 @@ import {
   getAllPrograms,
   getTableData,
   getSelectedPolicy,
-  getSelectedPolicyData,
-} from '../../state/housing-policy/selectors';
+  getSelectedPolicyData
+} from "../../state/housing-policy/selectors";
 
 const flexContainer = css`
   display: flex;
@@ -43,9 +43,9 @@ const policyContainer = css`
 `;
 
 const legendTitles = [
-  { name: 'Rarely Implemented' },
-  { name: 'Uncommonly Implemented' },
-  { name: 'Commonly Implemented' },
+  { name: "Rarely Implemented" },
+  { name: "Uncommonly Implemented" },
+  { name: "Commonly Implemented" }
 ];
 
 export class ExploreHousingPolicyImplementation extends React.Component {
@@ -68,7 +68,7 @@ export class ExploreHousingPolicyImplementation extends React.Component {
       tableData,
       selectedPolicy,
       selectedPolicyData,
-      unsetPolicy,
+      unsetPolicy
     } = this.props;
 
     const selectedIndex = selectedPolicy
@@ -80,7 +80,7 @@ export class ExploreHousingPolicyImplementation extends React.Component {
     return (
       <CivicStoryCard
         loading={isLoading}
-        error={isError && 'Could not load required data'}
+        error={isError && "Could not load required data"}
         title="Explore Housing Policy Implementation in the Portland Metro Area"
         slug="explore-housing-policy-implementation"
       >
@@ -125,10 +125,10 @@ export class ExploreHousingPolicyImplementation extends React.Component {
           these policies can be tough to interpret.
         </p>
         <p>
-          In the spring and summer of 2018,{' '}
+          In the spring and summer of 2018,{" "}
           <a href="http://www.hackoregon.org/">Hack Oregon</a> volunteers
           surveyed local governments to understand what policies were being
-          implemented. Taking inspiration from the{' '}
+          implemented. Taking inspiration from the{" "}
           <a href="https://www.housingconsortium.org/maps/">
             Housing Consortium in Seattle, WA
           </a>
@@ -144,7 +144,7 @@ export class ExploreHousingPolicyImplementation extends React.Component {
 }
 
 ExploreHousingPolicyImplementation.displayName =
-  'ExploreHousingPolicyImplementation';
+  "ExploreHousingPolicyImplementation";
 
 export default connect(
   state => ({
@@ -154,7 +154,7 @@ export default connect(
     allPrograms: getAllPrograms(state),
     tableData: getTableData(state),
     selectedPolicy: getSelectedPolicy(state),
-    selectedPolicyData: getSelectedPolicyData(state),
+    selectedPolicyData: getSelectedPolicyData(state)
   }),
   dispatch => ({
     fetchData() {
@@ -165,6 +165,6 @@ export default connect(
     },
     unsetPolicy() {
       dispatch(unsetSelectedPolicy());
-    },
+    }
   })
 )(ExploreHousingPolicyImplementation);

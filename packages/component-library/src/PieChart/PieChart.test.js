@@ -1,43 +1,43 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import PieChart from './PieChart';
+import React from "react";
+import { shallow } from "enzyme";
+import PieChart from "./PieChart";
 
-describe('PieChart', () => {
+describe("PieChart", () => {
   const data = [
-    { x: 'slice1', y: 3000 },
-    { x: 'slice2', y: 20 },
-    { x: 'slice3', y: 6500 },
+    { x: "slice1", y: 3000 },
+    { x: "slice2", y: 20 },
+    { x: "slice3", y: 6500 }
   ];
   const defaultProps = {
-    data,
+    data
   };
 
-  it('should render a VictoryPie inside a ChartContainer', () => {
+  it("should render a VictoryPie inside a ChartContainer", () => {
     const wrapper = shallow(<PieChart {...defaultProps} />);
-    expect(wrapper.find('ChartContainer')).to.have.length(1);
+    expect(wrapper.find("ChartContainer")).to.have.length(1);
     expect(
       wrapper
-        .find('ChartContainer')
+        .find("ChartContainer")
         .children()
-        .find('VictoryPie')
+        .find("VictoryPie")
     ).to.have.length(1);
   });
 
-  it('should show lapels in a legend if useLegend is true', () => {
+  it("should show lapels in a legend if useLegend is true", () => {
     const wrapper = shallow(<PieChart {...defaultProps} />);
-    expect(wrapper.find('SimpleLegend').length).to.eql(0);
+    expect(wrapper.find("SimpleLegend").length).to.eql(0);
     wrapper.setProps({ useLegend: true });
-    expect(wrapper.find('SimpleLegend').length).to.eql(1);
+    expect(wrapper.find("SimpleLegend").length).to.eql(1);
   });
 
-  describe('nullable props handling', () => {
+  describe("nullable props handling", () => {
     const nullProps = {
       dataLabel: null,
-      dataValue: null,
+      dataValue: null
     };
     const valueProps = {
-      dataLabel: 'foo',
-      dataValue: 'bar',
+      dataLabel: "foo",
+      dataValue: "bar"
     };
     const nulledWrapper = shallow(
       <PieChart {...defaultProps} {...nullProps} />
@@ -46,16 +46,16 @@ describe('PieChart', () => {
       <PieChart {...defaultProps} {...valueProps} />
     );
 
-    it('should handle nullable dataKey', () => {
-      expect(nulledWrapper.find('VictoryPie').prop('x')).to.eql('x');
-      expect(valuedWrapper.find('VictoryPie').prop('x')).to.eql(
+    it("should handle nullable dataKey", () => {
+      expect(nulledWrapper.find("VictoryPie").prop("x")).to.eql("x");
+      expect(valuedWrapper.find("VictoryPie").prop("x")).to.eql(
         valueProps.dataLabel
       );
     });
 
-    it('should handle nullable labelKey', () => {
-      expect(nulledWrapper.find('VictoryPie').prop('y')).to.eql('y');
-      expect(valuedWrapper.find('VictoryPie').prop('y')).to.eql(
+    it("should handle nullable labelKey", () => {
+      expect(nulledWrapper.find("VictoryPie").prop("y")).to.eql("y");
+      expect(valuedWrapper.find("VictoryPie").prop("y")).to.eql(
         valueProps.dataValue
       );
     });

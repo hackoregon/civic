@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
-import { CivicStoryCard } from '@hackoregon/component-library';
+import { CivicStoryCard } from "@hackoregon/component-library";
 
-import taxlots from '../../assets/tl_2017_pcntchange.png';
+import taxlots from "../../assets/tl_2017_pcntchange.png";
 
 export class MeasuringMarketValueOfHomesInPortland extends React.Component {
   componentDidMount() {
@@ -26,7 +26,7 @@ export class MeasuringMarketValueOfHomesInPortland extends React.Component {
         <p>
           <a href={taxlots}>
             <img
-              style={{ width: '100%' }}
+              style={{ width: "100%" }}
               src={taxlots}
               alt="Tax lots in Portland"
             />
@@ -46,7 +46,7 @@ export class MeasuringMarketValueOfHomesInPortland extends React.Component {
 }
 
 MeasuringMarketValueOfHomesInPortland.displayName =
-  'MeasuringMarketValueOfHomesInPortland';
+  "MeasuringMarketValueOfHomesInPortland";
 
 // Connect this to the redux store when necessary
 export default MeasuringMarketValueOfHomesInPortland;

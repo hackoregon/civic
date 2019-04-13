@@ -1,12 +1,12 @@
 /* eslint-disable no-console */
-import React from 'react';
-import { css } from 'emotion';
-import { connect } from 'react-redux';
+import React from "react";
+import { css } from "emotion";
+import { connect } from "react-redux";
 /* eslint-disable import/no-extraneous-dependencies */
-import 'react-select/dist/react-select.css';
-import { isArray } from 'lodash';
-import { Sandbox } from '@hackoregon/component-library';
-import { equals } from 'ramda';
+import "react-select/dist/react-select.css";
+import { isArray } from "lodash";
+import { Sandbox } from "@hackoregon/component-library";
+import { equals } from "ramda";
 
 import {
   fetchFoundation,
@@ -16,8 +16,8 @@ import {
   setPackage,
   fetchSlideByDate,
   setSelectedFoundationDatum,
-  setSelectedSlideDatum,
-} from '../../state/sandbox/actions';
+  setSelectedSlideDatum
+} from "../../state/sandbox/actions";
 import {
   isAllSandboxLoading,
   getSandboxData,
@@ -37,35 +37,44 @@ import {
   getSelectedSlideDatum,
   getAllSlides,
   getfoundationMapProps
-} from '../../state/sandbox/selectors';
+} from "../../state/sandbox/selectors";
 
 class SandboxComponent extends React.Component {
   constructor(props) {
     super();
     this.state = {
-      drawerVisible: false,
+      drawerVisible: false
     };
     this.updateSlide = this.updateSlide.bind(this);
     this.toggleDrawer = this.toggleDrawer.bind(this);
   }
   componentDidMount() {
-      this.props.fetchFoundation(this.props.foundationData.endpoint);
-      this.props.fetchSlides(this.props.slidesData);
+    this.props.fetchFoundation(this.props.foundationData.endpoint);
+    this.props.fetchSlides(this.props.slidesData);
   }
   componentDidUpdate(prevProps) {
     if (!equals(this.props.selectedPackage, prevProps.selectedPackage)) {
       this.props.fetchFoundation(this.props.foundationData.endpoint);
       this.props.fetchSlides(this.props.slidesData);
     }
-    if (equals(this.props.selectedPackage, prevProps.selectedPackage) && !equals(this.props.selectedFoundation, prevProps.selectedFoundation)) {
+    if (
+      equals(this.props.selectedPackage, prevProps.selectedPackage) &&
+      !equals(this.props.selectedFoundation, prevProps.selectedFoundation)
+    ) {
       this.props.fetchFoundation(this.props.foundationData.endpoint);
     }
-    if (equals(this.props.selectedPackage, prevProps.selectedPackage) && !equals(this.props.selectedSlide, prevProps.selectedSlide)) {
-      const fetchedSlideDataNames = this.props.selectedSlidesData.map(slideDatum => {
-        return Object.keys(slideDatum)[0];
-      });
-      const onlyFetchNewSlide = this.props.slidesData
-        .filter(d => !fetchedSlideDataNames.includes(d.name));
+    if (
+      equals(this.props.selectedPackage, prevProps.selectedPackage) &&
+      !equals(this.props.selectedSlide, prevProps.selectedSlide)
+    ) {
+      const fetchedSlideDataNames = this.props.selectedSlidesData.map(
+        slideDatum => {
+          return Object.keys(slideDatum)[0];
+        }
+      );
+      const onlyFetchNewSlide = this.props.slidesData.filter(
+        d => !fetchedSlideDataNames.includes(d.name)
+      );
       this.props.fetchSlides(onlyFetchNewSlide);
     }
   }
@@ -88,7 +97,7 @@ class SandboxComponent extends React.Component {
       font-size: 1.5rem;
       width: 100%;
       text-align: center;
-      font-family: 'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif;
+      font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
     `;
 
     const layerData = [this.props.layerFoundation, ...this.props.layerSlides];
@@ -122,7 +131,7 @@ class SandboxComponent extends React.Component {
   }
 }
 
-SandboxComponent.displayName = 'SandboxComponent';
+SandboxComponent.displayName = "SandboxComponent";
 
 // Connect this to the redux store when necessary
 export default connect(
@@ -142,22 +151,22 @@ export default connect(
     layerSlides: getLayerSlides(state),
     selectedSlideDatum: getSelectedSlideDatum(state),
     allSlides: getAllSlides(state),
-    foundationMapProps: getfoundationMapProps(state),
+    foundationMapProps: getfoundationMapProps(state)
   }),
   dispatch => ({
-    fetchFoundation(endpoint = '') {
+    fetchFoundation(endpoint = "") {
       dispatch(fetchFoundation(endpoint)());
     },
     fetchSlides(slides = []) {
       dispatch(fetchSlides(slides)());
     },
-    fetchSlideByDate(slide, date = '', type = '') {
+    fetchSlideByDate(slide, date = "", type = "") {
       dispatch(fetchSlideByDate(slide, date, type)());
     },
-    setPackage(selectedPackage = '') {
+    setPackage(selectedPackage = "") {
       dispatch(setPackage(selectedPackage));
     },
-    setFoundation(selectedFoundation = '') {
+    setFoundation(selectedFoundation = "") {
       dispatch(setFoundation(selectedFoundation));
     },
     setSlides(selectedSlides = []) {
@@ -168,6 +177,6 @@ export default connect(
     },
     slideHover(feature) {
       dispatch(setSelectedSlideDatum(feature));
-    },
+    }
   })
 )(SandboxComponent);

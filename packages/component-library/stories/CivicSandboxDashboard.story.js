@@ -1,28 +1,28 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React from 'react';
-import { DemoJSONLoader } from '../src';
-import { storiesOf } from '@storybook/react';
-import { withKnobs, boolean } from '@storybook/addon-knobs';
-import { checkA11y } from '@storybook/addon-a11y';
-import { css } from 'emotion';
-import { BaseMap } from '../src';
-import { CivicSandboxMap } from '../src';
-import { CivicSandboxDashboard } from '../src';
-import { wallOfText } from './shared';
+import React from "react";
+import { storiesOf } from "@storybook/react";
+import { withKnobs, boolean } from "@storybook/addon-knobs";
+import { checkA11y } from "@storybook/addon-a11y";
+import { css } from "emotion";
+import { BaseMap } from "../src";
+import { CivicSandboxMap } from "../src";
+import { CivicSandboxDashboard } from "../src";
+import { wallOfText } from "./shared";
+import { DemoJSONLoader } from "../src";
 
 const dashboardDescription = css`
   padding: 0 1% 0 5%;
 `;
 
 const displayName =
-  CivicSandboxDashboard.displayName || 'CivicSandboxDashboard';
+  CivicSandboxDashboard.displayName || "CivicSandboxDashboard";
 
 const dataURLs = [
-  'https://service.civicpdx.org/neighborhood-development/sandbox/foundations/population/?format=json',
-  'https://service.civicpdx.org/neighborhood-development/sandbox/slides/retailgrocers/?format=json',
+  "https://service.civicpdx.org/neighborhood-development/sandbox/foundations/population/?format=json",
+  "https://service.civicpdx.org/neighborhood-development/sandbox/slides/retailgrocers/?format=json",
 ];
 
-const dashboardComponent = (data) => {
+const dashboardComponent = data => {
   if (data === null) return null;
   const [ populationData, groceryData ] = data;
 
@@ -35,12 +35,12 @@ const dashboardComponent = (data) => {
     [231, 41, 138, 255],
     [206, 18, 86, 255],
     [152, 0, 67, 255],
-    [103, 0, 31, 255],
+    [103, 0, 31, 255]
   ];
 
   const foundation = {
-    mapType: 'ChoroplethMap',
-    id: 'choropleth-layer-foundation-population',
+    mapType: "ChoroplethMap",
+    id: "choropleth-layer-foundation-population",
     pickable: true,
     data: populationData.slide_data.features,
     opacity: 0.5,
@@ -58,8 +58,8 @@ const dashboardComponent = (data) => {
   };
 
   const groceryBoundary = {
-    mapType: 'PolygonPlotMap',
-    id: 'boundary-layer-grocery',
+    mapType: "PolygonPlotMap",
+    id: "boundary-layer-grocery",
     data: groceryData.slide_meta.boundary,
     opacity: 1,
     filled: false,
@@ -67,11 +67,11 @@ const dashboardComponent = (data) => {
     getLineColor: f => [138, 43, 226, 255],
     getLineWidth: f => 45,
     lineWidthScale: 1,
-    lineJointRounded: false,
+    lineJointRounded: false
   };
   const groceryMap = {
-    mapType: 'ScatterPlotMap',
-    id: 'scatterplot-layer-grocery',
+    mapType: "ScatterPlotMap",
+    id: "scatterplot-layer-grocery",
     pickable: true,
     data: groceryData.slide_data.features,
     getPosition: f => f.geometry.coordinates,
@@ -82,84 +82,84 @@ const dashboardComponent = (data) => {
     radiusMinPixels: 1,
     autoHighlight: true,
     parameters: { depthTest: false },
-    highlightColor: [200, 200, 200, 255],
+    highlightColor: [200, 200, 200, 255]
   };
 
   const mapLayers = [
     {
       data: foundation,
-      visible: true,
+      visible: true
     },
     {
       data: groceryBoundary,
-      visible: true,
+      visible: true
     },
     {
       data: groceryMap,
-      visible: true,
-    },
+      visible: true
+    }
   ];
 
   // Dashboard Data
   const textData = {
-    visualizationType: 'Text',
-    title: 'Population',
-    data: 245450,
+    visualizationType: "Text",
+    title: "Population",
+    data: 245450
   };
 
   const comarpisonBarData = {
-    visualizationType: 'ComparisonBar',
-    title: 'Total Population',
+    visualizationType: "ComparisonBar",
+    title: "Total Population",
     data: [
       {
-        name: 'Downtown',
+        name: "Downtown",
         value: 30639,
-        sortOrder: 2,
+        sortOrder: 2
       },
       {
-        name: 'Average Total Population',
+        name: "Average Total Population",
         value: 55000,
-        sortOrder: 1,
-      },
+        sortOrder: 1
+      }
     ],
-    dataLabel: 'name',
-    dataValue: 'value',
-    sortOrder: 'sortOrder',
-    minimalist: true,
+    dataLabel: "name",
+    dataValue: "value",
+    sortOrder: "sortOrder",
+    minimalist: true
   };
 
   const donutData = {
-    visualizationType: 'PercentDonut',
-    title: 'Households with Children',
+    visualizationType: "PercentDonut",
+    title: "Households with Children",
     data: [
       {
-        x: 'Households with Children',
-        y: 0.75,
+        x: "Households with Children",
+        y: 0.75
       },
       {
         x: null,
-        y: 0.25,
-      },
-    ],
+        y: 0.25
+      }
+    ]
   };
 
-  const textVisible = boolean('Text:', true);
-  const comarpisonBarsVisible = boolean('Comparison Bars:', true);
-  const donutVisible = boolean('Percent Donut:', true);
+  const textVisible = boolean("Text:", true);
+  const comarpisonBarsVisible = boolean("Comparison Bars:", true);
+  const donutVisible = boolean("Percent Donut:", true);
 
   const dashboardArray = [
     {
       data: textData,
-      visible: textVisible,
+      visible: textVisible
     },
     {
       data: comarpisonBarData,
-      visible: comarpisonBarsVisible,
+      visible: comarpisonBarsVisible
     },
     {
       data: donutData,
-      visible: donutVisible,
-    },
+      visible: donutVisible
+    }
   ];
 
   const dashboardData = dashboardArray.filter(d => d.visible).map(d => d.data);
@@ -181,11 +181,11 @@ const dashboardComponent = (data) => {
       <h4>Source: census.gov ACS</h4>
     </div>
   );
-  const dashboardDescriptionVisible = boolean('Include Description:', true);
+  const dashboardDescriptionVisible = boolean("Include Description:", true);
 
   return (
     <div>
-      <div style={{ margin: '0 2%' }}>
+      <div style={{ margin: "0 2%" }}>
         <BaseMap
           initialZoom={10.5}
           initialLatitude={45.5445}
@@ -218,13 +218,11 @@ const dashboardComponent = (data) => {
 };
 
 export default () =>
-  storiesOf('CIVIC Platform Components/CIVIC Sandbox Dashboard', module)
+  storiesOf("CIVIC Platform Components/CIVIC Sandbox Dashboard", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
-    .add('Simple usage', () => (
+    .add("Simple usage", () => (
       <DemoJSONLoader urls={dataURLs}>
-        {(data) =>
-          dashboardComponent(data)
-        }
+        {data => dashboardComponent(data)}
       </DemoJSONLoader>
     ));

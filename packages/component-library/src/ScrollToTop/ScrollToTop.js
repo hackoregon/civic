@@ -1,12 +1,12 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import Icon from '../Icon/Icon';
+import PropTypes from "prop-types";
+import React from "react";
+import Icon from "../Icon/Icon";
 
-const hashToGoToTop = '#';
+const hashToGoToTop = "#";
 const styles = {
-  display: 'flex',
-  flexDirection: 'column',
-  textAlign: 'center',
+  display: "flex",
+  flexDirection: "column",
+  textAlign: "center"
 };
 
 const ScrollToTop = ({ iconStyle = null }) => (
@@ -18,9 +18,9 @@ const ScrollToTop = ({ iconStyle = null }) => (
   </div>
 );
 
-ScrollToTop.displayName = 'ScrollToTop';
+ScrollToTop.displayName = "ScrollToTop";
 ScrollToTop.propTypes = {
-  iconStyle: PropTypes.string,
+  iconStyle: PropTypes.string
 };
 
 export default ScrollToTop;

@@ -1,7 +1,7 @@
-import { createSelector } from 'reselect';
-import { min, max } from 'lodash';
-import { timeFormat } from 'd3-time-format';
-import { rootState } from '../selectors';
+import { createSelector } from "reselect";
+import { min, max } from "lodash";
+import { timeFormat } from "d3-time-format";
+import { rootState } from "../selectors";
 
 export const getCampsiteSweepsRequest = createSelector(
   rootState,
@@ -62,7 +62,7 @@ const filterSweepsData = (data, timer) => {
   return filterSweepsDataByDate(data, timepoints[timer], timepoints[timer + 1]);
 };
 
-const formatDate = timeFormat('%B %Y');
+const formatDate = timeFormat("%B %Y");
 
 const getDateRange = (data, timer) => {
   const timepoints = splitTimepointsToMonths(

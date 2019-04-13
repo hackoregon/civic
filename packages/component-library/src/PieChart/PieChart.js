@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { VictoryPie, VictoryLabel } from 'victory';
-import ChartContainer from '../ChartContainer';
-import civicTheme from '../VictoryTheme/CivicVictoryTheme.js';
-import SimpleLegend from '../SimpleLegend';
+import React from "react";
+import PropTypes from "prop-types";
+import { VictoryPie, VictoryLabel } from "victory";
+import ChartContainer from "../ChartContainer";
+import civicTheme from "../VictoryTheme/CivicVictoryTheme.js";
+import SimpleLegend from "../SimpleLegend";
 
 const getOrElse = (possibleValue, defaultValue) =>
   possibleValue == null ? defaultValue : possibleValue;
@@ -22,11 +22,11 @@ const PieChart = props => {
     halfDoughnut,
     useLegend,
     width,
-    height,
+    height
   } = props;
 
-  const x = getOrElse(dataLabel, 'x');
-  const y = getOrElse(dataValue, 'y');
+  const x = getOrElse(dataLabel, "x");
+  const y = getOrElse(dataValue, "y");
   const startAngle = halfDoughnut ? -90 : 0;
   const endAngle = halfDoughnut ? 90 : 360;
   const legendLabels = data.map(value => ({ name: value.x }));
@@ -59,7 +59,7 @@ const PieChart = props => {
         colorScale={colors}
         theme={civicTheme}
         animate={{
-          duration: 1000,
+          duration: 1000
         }}
         x={x}
         y={y}
@@ -75,7 +75,7 @@ const PieChart = props => {
 };
 
 PieChart.defaultProps = {
-  useLegend: false,
+  useLegend: false
 };
 
 PieChart.propTypes = {
@@ -91,7 +91,7 @@ PieChart.propTypes = {
   subtitle: PropTypes.string,
   title: PropTypes.string,
   useLegend: PropTypes.bool,
-  width: PropTypes.number,
+  width: PropTypes.number
 };
 
 export default PieChart;

@@ -1,6 +1,6 @@
-import { actionEmitter } from '../utils';
-import { actionTypes } from './constants';
-import { api } from '../api';
+import { actionEmitter } from "../utils";
+import { actionTypes } from "./constants";
+import { api } from "../api";
 
 export const householdsStart = actionEmitter(actionTypes.CALL_START);
 export const householdsFail = actionEmitter(actionTypes.CALL_FAIL);
@@ -15,10 +15,10 @@ export const normalizer = json =>
   }, []);
 /* eslint-enable no-param-reassign */
 
-export const fetchHouseholdsData = api('/hhtooltip', {
+export const fetchHouseholdsData = api("/hhtooltip", {
   start: householdsStart,
   success: householdsSuccess,
   fail: householdsFail,
   normalizer,
-  buildParams: () => {},
+  buildParams: () => {}
 });

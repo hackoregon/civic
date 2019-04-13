@@ -1,20 +1,20 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 import {
   CivicStoryCard,
   DataTable,
-  Collapsable,
-} from '@hackoregon/component-library';
+  Collapsable
+} from "@hackoregon/component-library";
 
-import { fetchUnderstandingStaffCuts } from '../../state/understanding-staff-cuts/actions';
+import { fetchUnderstandingStaffCuts } from "../../state/understanding-staff-cuts/actions";
 
 import {
   isUnderstandingStaffCutsPending,
   catchUnderstandingStaffCutsErrors,
-  getUnderstandingStaffCutsData,
-} from '../../state/understanding-staff-cuts/selectors';
+  getUnderstandingStaffCutsData
+} from "../../state/understanding-staff-cuts/selectors";
 
 export class UnderstandingStaffCuts extends React.Component {
   componentDidMount() {
@@ -26,57 +26,57 @@ export class UnderstandingStaffCuts extends React.Component {
 
     const tableCols = [
       {
-        align: 'left',
-        header: 'School',
-        key: 'school',
+        align: "left",
+        header: "School",
+        key: "school"
       },
       {
-        header: 'Students per FTE Staff',
-        key: 'student-staff',
+        header: "Students per FTE Staff",
+        key: "student-staff",
         columns: [
           {
-            align: 'right',
-            header: 'PPS Proposed 2018-2019 Staffing',
-            key: 'students',
+            align: "right",
+            header: "PPS Proposed 2018-2019 Staffing",
+            key: "students"
           },
           {
-            align: 'right',
-            header: 'Hack Oregon Predicted Staffing',
-            key: 'predictions',
+            align: "right",
+            header: "Hack Oregon Predicted Staffing",
+            key: "predictions"
           },
           {
-            align: 'right',
-            header: 'Variation',
-            key: 'variation',
-          },
-        ],
+            align: "right",
+            header: "Variation",
+            key: "variation"
+          }
+        ]
       },
       {
-        align: 'right',
-        header: '% Change Enrollment',
-        key: 'changes_in_enrollment_pct',
+        align: "right",
+        header: "% Change Enrollment",
+        key: "changes_in_enrollment_pct"
       },
       {
-        header: 'Student Demographics',
-        key: 'students-demo',
+        header: "Student Demographics",
+        key: "students-demo",
         columns: [
           {
-            align: 'right',
-            header: '% From Historically Underserved Groups',
-            key: 'historically_underserved_pct',
+            align: "right",
+            header: "% From Historically Underserved Groups",
+            key: "historically_underserved_pct"
           },
           {
-            align: 'right',
-            header: '% Recieving Free Meals by Direct Certification',
-            key: 'free_meals_direct_cert_pct',
-          },
-        ],
-      },
+            align: "right",
+            header: "% Recieving Free Meals by Direct Certification",
+            key: "free_meals_direct_cert_pct"
+          }
+        ]
+      }
     ];
 
     const tableData = {
       columns: tableCols,
-      data: understandingStaffCuts,
+      data: understandingStaffCuts
     };
 
     return (
@@ -84,7 +84,7 @@ export class UnderstandingStaffCuts extends React.Component {
         title="Understanding Staff Cuts in Portland Public Schools"
         slug="understanding-staff-cuts"
         loading={isLoading}
-        error={error && 'Could not load sweeps data'}
+        error={error && "Could not load sweeps data"}
         source="https://github.com/hackoregon/neighborhoods-2018/tree/master/docs/schools"
       >
         <Collapsable>
@@ -134,7 +134,7 @@ export class UnderstandingStaffCuts extends React.Component {
                 methodology to assess PPS changes against their stated goals.
                 This is a first step in understanding these changes. We
                 encourage you to explore the rest of the cards in the education
-                model to further inform your understanding of PPS data.{' '}
+                model to further inform your understanding of PPS data.{" "}
               </p>
               <p>
                 A high level interpretation of this model is that Historically
@@ -148,7 +148,7 @@ export class UnderstandingStaffCuts extends React.Component {
                 correlated with a decrease in the ratio of Students to FTE.
                 (TLDW; more staff in schools with higher % of Direct Cert or
                 Historically underserved populations). In the table, you can
-                explore which schools are outliers in our model.{' '}
+                explore which schools are outliers in our model.{" "}
               </p>
               <p>
                 <strong>Definitions</strong>
@@ -184,23 +184,23 @@ export class UnderstandingStaffCuts extends React.Component {
     );
   }
 }
-UnderstandingStaffCuts.displayName = 'UnderstandingStaffCuts';
+UnderstandingStaffCuts.displayName = "UnderstandingStaffCuts";
 UnderstandingStaffCuts.propTypes = {
   init: PropTypes.func,
   isLoading: PropTypes.bool,
   error: PropTypes.string,
-  understandingStaffCuts: PropTypes.object,
+  understandingStaffCuts: PropTypes.object
 };
 
 export default connect(
   state => ({
     isLoading: isUnderstandingStaffCutsPending(state),
     error: catchUnderstandingStaffCutsErrors(state),
-    understandingStaffCuts: getUnderstandingStaffCutsData(state),
+    understandingStaffCuts: getUnderstandingStaffCutsData(state)
   }),
   dispatch => ({
     init() {
       dispatch(fetchUnderstandingStaffCuts());
-    },
+    }
   })
 )(UnderstandingStaffCuts);

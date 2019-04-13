@@ -1,31 +1,31 @@
-import React from 'react';
-import { StoryCard } from '@hackoregon/component-library';
+import React from "react";
+import { StoryCard } from "@hackoregon/component-library";
 
-const s3 = 'https://s3-us-west-2.amazonaws.com/hacko-cdn/2017-housing/';
+const s3 = "https://s3-us-west-2.amazonaws.com/hacko-cdn/2017-housing/";
 
 const wrapperStyle = {
-  maxWidth: '800px',
-  margin: '0 auto',
-  padding: '0 1em',
-  textAlign: 'left',
+  maxWidth: "800px",
+  margin: "0 auto",
+  padding: "0 1em",
+  textAlign: "left"
 };
 
 const headingStyle = {
-  textAlign: 'center',
+  textAlign: "center"
 };
 
 const imgHeadingStyle = {
-  backgroundColor: '#f3f3f3',
-  textAlign: 'center',
-  fontWeight: 'normal',
-  marginBottom: '0',
-  padding: '15px 0 2px',
+  backgroundColor: "#f3f3f3",
+  textAlign: "center",
+  fontWeight: "normal",
+  marginBottom: "0",
+  padding: "15px 0 2px"
 };
 
 const imgStyle = {
-  maxWidth: '100%',
-  display: 'block',
-  margin: '0 auto',
+  maxWidth: "100%",
+  display: "block",
+  margin: "0 auto"
 };
 
 const TempVoterRegistration = () => (
@@ -72,7 +72,7 @@ const TempVoterRegistration = () => (
         <a href="http://www.oregonlive.com/business/index.ssf/2015/06/the_graying_of_oregon_new_cens.html">
           Charles Rynerson
         </a>
-        &nbsp;of the{' '}
+        &nbsp;of the{" "}
         <a href="https://www.pdx.edu/prc/home">Population Research Center</a> at
         Portland State University, “There’s a lot of young, well-educated people
         who have been coming here since the ’90s, but they were coming here in

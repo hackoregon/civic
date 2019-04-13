@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 const echo = a => a;
 
@@ -32,7 +32,7 @@ export const fetchByDateAdapter = (
         success({
           name: slide.label,
           data: res.data,
-          type,
+          type
         })
       );
       return res;
@@ -60,7 +60,7 @@ export const fetchAllSlidesAdapter = (
         dispatch(
           success(
             res.map((r, i) => ({
-              [slides[i].name]: r.data,
+              [slides[i].name]: r.data
             }))
           )
         );

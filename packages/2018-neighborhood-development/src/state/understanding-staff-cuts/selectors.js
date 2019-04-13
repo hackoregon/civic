@@ -1,5 +1,5 @@
-import { createSelector } from 'reselect';
-import { rootState } from '../selectors';
+import { createSelector } from "reselect";
+import { rootState } from "../selectors";
 
 export const getUnderstandingStaffCutsRequest = createSelector(
   rootState,
@@ -18,7 +18,7 @@ const formatData = data =>
     changes_in_enrollment_pct: (obj.changes_in_enrollment_pct * 100).toFixed(1),
     free_meals_direct_cert_pct: (obj.free_meals_direct_cert_pct * 100).toFixed(
       1
-    ),
+    )
   }));
 
 const arrToObj = arr =>

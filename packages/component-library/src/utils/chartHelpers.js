@@ -1,39 +1,39 @@
-import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
+import CivicVictoryTheme from "../VictoryTheme/VictoryThemeIndex";
 
 const tooltipColor = CivicVictoryTheme.civic.tooltip.style.customHoverColor;
 
 const chartEvents = [
   {
-    target: 'data',
+    target: "data",
     eventHandlers: {
       onMouseOver: () => {
         return [
           {
-            target: 'data',
+            target: "data",
             mutation: props => ({
-              style: Object.assign(props.style, { fill: tooltipColor }),
-            }),
+              style: Object.assign(props.style, { fill: tooltipColor })
+            })
           },
           {
-            target: 'labels',
-            mutation: () => ({ active: true }),
-          },
+            target: "labels",
+            mutation: () => ({ active: true })
+          }
         ];
       },
       onMouseOut: () => {
         return [
           {
-            target: 'data',
-            mutation: () => {},
+            target: "data",
+            mutation: () => {}
           },
           {
-            target: 'labels',
-            mutation: () => ({ active: false }),
-          },
+            target: "labels",
+            mutation: () => ({ active: false })
+          }
         ];
-      },
-    },
-  },
+      }
+    }
+  }
 ];
 
 function getDefaultDomain(data, dataKey, dataLabel) {
@@ -43,12 +43,12 @@ function getDefaultDomain(data, dataKey, dataLabel) {
   return {
     x: [
       Math.min(...xValues) < 0 ? Math.min(...xValues) : Math.min(...xValues),
-      Math.max(...xValues),
+      Math.max(...xValues)
     ],
     y: [
       Math.min(...yValues) < 0 ? Math.min(...yValues) : 0,
-      Math.max(...yValues),
-    ],
+      Math.max(...yValues)
+    ]
   };
 }
 
@@ -74,12 +74,12 @@ function getDefaultStackedDomain(data, dataKey, dataLabel) {
   return {
     x: [
       Math.min(...xValues) < 0 ? Math.min(...xValues) : Math.min(...xValues),
-      Math.max(...xValues),
+      Math.max(...xValues)
     ],
     y: [
       Math.min(...yValues) < 0 ? Math.min(...yValues) : 0,
-      Math.max(...yValues),
-    ],
+      Math.max(...yValues)
+    ]
   };
 }
 
@@ -103,20 +103,20 @@ function getDefaultFillStyle(dataSeriesLabel) {
           series => series === d.series
         );
         return CivicVictoryTheme.civic.group.colorScale[idx];
-      },
-    },
+      }
+    }
   };
 }
 
 function getDefaultLineStyle(idx) {
   return {
-    data: { stroke: CivicVictoryTheme.civic.group.colorScale[idx] },
+    data: { stroke: CivicVictoryTheme.civic.group.colorScale[idx] }
   };
 }
 
 function getDefaultAreaStyle(idx) {
   return {
-    data: { fill: CivicVictoryTheme.civic.group.colorScale[idx] },
+    data: { fill: CivicVictoryTheme.civic.group.colorScale[idx] }
   };
 }
 
@@ -127,5 +127,5 @@ export {
   getDefaultFillStyle,
   getDefaultLineStyle,
   getDefaultAreaStyle,
-  getDefaultStackedDomain,
+  getDefaultStackedDomain
 };

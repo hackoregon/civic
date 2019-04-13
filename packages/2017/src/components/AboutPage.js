@@ -1,8 +1,8 @@
-import React from 'react';
-import styles from '../PlatformStyles';
+import React from "react";
+import styles from "../PlatformStyles";
 
 const staticContent =
-  'Civic is an open source project of Hack Oregon, built entirely by volunteers committed to neutral, nonpartisan exploration of civic analytics.';
+  "Civic is an open source project of Hack Oregon, built entirely by volunteers committed to neutral, nonpartisan exploration of civic analytics.";
 
 const AboutPage = () => (
   <div>
@@ -23,7 +23,7 @@ const AboutPage = () => (
           <div className={styles.row}>
             <p className="large">{staticContent}</p>
             <p>
-              For more information, visit us at{' '}
+              For more information, visit us at{" "}
               <a href="//hackoregon.org">hackoregon.org</a>
             </p>
           </div>
@@ -33,15 +33,15 @@ const AboutPage = () => (
           <div className={`${styles.column} column ${styles.Platform}`}>
             <ul>
               <li>
-                <a href="mailto:catherine@hackoregon.org">Cat Nikolovski</a>,{' '}
+                <a href="mailto:catherine@hackoregon.org">Cat Nikolovski</a>,{" "}
                 <i>Founder and Executive Producer</i>
               </li>
               <li>
-                <a href="mailto:megan@hackoregon.org">Megan Mckissack</a>,{' '}
+                <a href="mailto:megan@hackoregon.org">Megan Mckissack</a>,{" "}
                 <i>Technical Lead</i>
               </li>
               <li>
-                <a href="mailto:april@hackoregon.org">April Johnson</a>,{' '}
+                <a href="mailto:april@hackoregon.org">April Johnson</a>,{" "}
                 <i>Community and Partnerships</i>
               </li>
             </ul>
@@ -52,7 +52,7 @@ const AboutPage = () => (
                 Jason Bernert, <i>Multimedia Production</i>
               </li>
               <li>
-                <a href="mailto:vengist@gmail.com">Ven Gist</a>,{' '}
+                <a href="mailto:vengist@gmail.com">Ven Gist</a>,{" "}
                 <i>Design Principal</i>
               </li>
               <li>
@@ -351,6 +351,6 @@ const AboutPage = () => (
   </div>
 );
 
-AboutPage.displayName = 'AboutPage';
+AboutPage.displayName = "AboutPage";
 
 export default AboutPage;

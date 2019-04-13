@@ -1,5 +1,5 @@
-import { createSelector } from 'reselect';
-import { rootState } from '../selectors';
+import { createSelector } from "reselect";
+import { rootState } from "../selectors";
 
 export const getDriversOfParticipationRequest = createSelector(
   rootState,
@@ -9,7 +9,7 @@ export const getDriversOfParticipationRequest = createSelector(
 const calcLabels = arr =>
   arr.map(obj => ({
     ...obj,
-    combinedLabel: `Line ${obj.route_id} - ${obj.year} • Frequency Change`,
+    combinedLabel: `Line ${obj.route_id} - ${obj.year} • Frequency Change`
   }));
 
 export const getDriversOfParticipationData = createSelector(

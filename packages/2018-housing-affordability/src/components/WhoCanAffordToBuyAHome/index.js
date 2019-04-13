@@ -1,23 +1,23 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { loader, error, gradientLabel, emphasis } from '../css-utils';
+import React from "react";
+import { connect } from "react-redux";
+import { loader, error, gradientLabel, emphasis } from "../css-utils";
 
-import '@hackoregon/component-library/assets/vendor/react-select.min.css';
+import "@hackoregon/component-library/assets/vendor/react-select.min.css";
 
 import {
   CivicStoryCard,
   LineChart,
   Dropdown,
   Collapsable,
-  GradientScale,
-} from '@hackoregon/component-library';
+  GradientScale
+} from "@hackoregon/component-library";
 
 import {
   fetchAllPTICities,
   fetchPTICity,
   fetchPTICountry,
-  setPTICity,
-} from '../../state/price-to-income/actions';
+  setPTICity
+} from "../../state/price-to-income/actions";
 import {
   isAllCitiesLoading,
   isCityDetailLoading,
@@ -26,8 +26,8 @@ import {
   getCityCountryChartData,
   getSelectedCityRank,
   getAllCities,
-  isAnyLoading,
-} from '../../state/price-to-income/selectors';
+  isAnyLoading
+} from "../../state/price-to-income/selectors";
 
 export class WhoCanAffordToBuyAHome extends React.Component {
   componentDidMount() {
@@ -46,7 +46,7 @@ export class WhoCanAffordToBuyAHome extends React.Component {
       allCities,
       selectedCityRank,
       setCity,
-      isAnyLoading,
+      isAnyLoading
     } = this.props;
 
     const cityOptions =
@@ -88,11 +88,11 @@ export class WhoCanAffordToBuyAHome extends React.Component {
           {chartData && (
             <div>
               <p>
-                {selectedCity} ranks{' '}
+                {selectedCity} ranks{" "}
                 <strong className={emphasis}>
-                  {selectedCityRank.rank}/{selectedCityRank.total}{' '}
+                  {selectedCityRank.rank}/{selectedCityRank.total}{" "}
                 </strong>
-                for the median home price to median income ratio in{' '}
+                for the median home price to median income ratio in{" "}
                 <strong className={emphasis}>2016</strong>
               </p>
               <p>
@@ -153,7 +153,7 @@ export class WhoCanAffordToBuyAHome extends React.Component {
   }
 }
 
-WhoCanAffordToBuyAHome.displayName = 'WhoCanAffordToBuyAHome';
+WhoCanAffordToBuyAHome.displayName = "WhoCanAffordToBuyAHome";
 
 export default connect(
   state => ({
@@ -163,7 +163,7 @@ export default connect(
     allCities: getAllCities(state),
     chartData: getCityCountryChartData(state),
     selectedCityRank: getSelectedCityRank(state),
-    isAnyLoading: isAnyLoading(state),
+    isAnyLoading: isAnyLoading(state)
   }),
   dispatch => ({
     fetchAllCities() {
@@ -175,6 +175,6 @@ export default connect(
     setCity(city = {}) {
       dispatch(fetchPTICity(city.value));
       dispatch(setPTICity(city.value));
-    },
+    }
   })
 )(WhoCanAffordToBuyAHome);

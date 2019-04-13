@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import DeckGL, { ScatterplotLayer } from 'deck.gl';
-import { css } from 'emotion';
+import React from "react";
+import PropTypes from "prop-types";
+import DeckGL, { ScatterplotLayer } from "deck.gl";
+import { css } from "emotion";
 
 const crosshair = css`
   cursor: crosshair;
@@ -26,14 +26,14 @@ const ScatterPlotMap = props => {
     x,
     y,
     onHover,
-    children,
+    children
   } = props;
 
   const tooltip = React.Children.map(children, child => {
     return React.cloneElement(child, {
       tooltipInfo,
       x,
-      y,
+      y
     });
   });
 
@@ -87,7 +87,7 @@ ScatterPlotMap.propTypes = {
   x: PropTypes.number,
   y: PropTypes.number,
   onHover: PropTypes.func,
-  children: PropTypes.node,
+  children: PropTypes.node
 };
 
 ScatterPlotMap.defaultProps = {

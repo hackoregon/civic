@@ -1,24 +1,24 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { loader, error, gradientLabel, emphasis } from '../css-utils';
+import React from "react";
+import { connect } from "react-redux";
+import { loader, error, gradientLabel, emphasis } from "../css-utils";
 
-import '@hackoregon/component-library/assets/vendor/react-select.min.css';
+import "@hackoregon/component-library/assets/vendor/react-select.min.css";
 
 import {
   HorizontalBarChart,
   CivicStoryCard,
   Dropdown,
   GradientScale,
-  Collapsable,
-} from '@hackoregon/component-library';
+  Collapsable
+} from "@hackoregon/component-library";
 
-import { civicFormat } from '@hackoregon/component-library/dist/utils';
+import { civicFormat } from "@hackoregon/component-library/dist/utils";
 
 import {
   fetchAllARUCities,
   fetchARUCity,
-  setARUCity,
-} from '../../state/affordable-rental-units/actions';
+  setARUCity
+} from "../../state/affordable-rental-units/actions";
 import {
   isAllCitiesLoading,
   isCityDetailLoading,
@@ -28,16 +28,16 @@ import {
   getSelectedCityLowRank,
   getSelectedCityHighRank,
   getAllCities,
-  getChartData,
-} from '../../state/affordable-rental-units/selectors';
+  getChartData
+} from "../../state/affordable-rental-units/selectors";
 
 const capitalize = str =>
   str.length &&
   str
-    .split(' ')
+    .split(" ")
     .reduce(
       (full, word) => `${full} ${word[0].toUpperCase() + word.substring(1)}`,
-      ''
+      ""
     )
     .trim();
 
@@ -58,7 +58,7 @@ export class AffordableRentalUnitsDwindling extends React.Component {
       selectedCityLowRank,
       selectedCityHighRank,
       setCity,
-      chartData,
+      chartData
     } = this.props;
 
     const cityOptions =
@@ -91,11 +91,11 @@ export class AffordableRentalUnitsDwindling extends React.Component {
           {selectedCityData && (
             <div>
               <p>
-                {capitalize(selectedCity)} ranks{' '}
+                {capitalize(selectedCity)} ranks{" "}
                 <strong className={emphasis}>
-                  {selectedCityLowRank.rank}/{selectedCityLowRank.total}{' '}
+                  {selectedCityLowRank.rank}/{selectedCityLowRank.total}{" "}
                 </strong>
-                for new units that cost{' '}
+                for new units that cost{" "}
                 <strong className={emphasis}>&lt;$800/mo</strong>
               </p>
               <p>
@@ -112,11 +112,11 @@ export class AffordableRentalUnitsDwindling extends React.Component {
           {selectedCityData && (
             <div>
               <p>
-                {capitalize(selectedCity)} ranks{' '}
+                {capitalize(selectedCity)} ranks{" "}
                 <strong className={emphasis}>
-                  {selectedCityHighRank.rank}/{selectedCityHighRank.total}{' '}
+                  {selectedCityHighRank.rank}/{selectedCityHighRank.total}{" "}
                 </strong>
-                for new units that cost{' '}
+                for new units that cost{" "}
                 <strong className={emphasis}>&gt;$2,000/mo</strong>
               </p>
               <p>
@@ -182,7 +182,7 @@ export class AffordableRentalUnitsDwindling extends React.Component {
   }
 }
 
-AffordableRentalUnitsDwindling.displayName = 'AffordableRentalUnitsDwindling';
+AffordableRentalUnitsDwindling.displayName = "AffordableRentalUnitsDwindling";
 
 export default connect(
   state => ({
@@ -194,7 +194,7 @@ export default connect(
     selectedCityData: getSelectedCityData(state),
     selectedCityLowRank: getSelectedCityLowRank(state),
     selectedCityHighRank: getSelectedCityHighRank(state),
-    chartData: getChartData(state),
+    chartData: getChartData(state)
   }),
   dispatch => ({
     fetchAllCities() {
@@ -203,6 +203,6 @@ export default connect(
     setCity(city = {}) {
       dispatch(fetchARUCity(city.value));
       dispatch(setARUCity(city.value));
-    },
+    }
   })
 )(AffordableRentalUnitsDwindling);

@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { css } from 'emotion';
+import React from "react";
+import PropTypes from "prop-types";
+import { css } from "emotion";
 
 const tooltip = css`
   font-family: Helvetica, Arial, sans-serif;
@@ -24,7 +24,7 @@ const MapTooltip = props => {
     primaryField,
     secondaryName,
     secondaryField,
-    isHex,
+    isHex
   } = props;
 
   const xPosition =
@@ -36,7 +36,7 @@ const MapTooltip = props => {
       className={tooltip}
       style={{
         left: xPosition,
-        top: yPostition,
+        top: yPostition
       }}
     >
       {primaryName ? (
@@ -52,7 +52,7 @@ const MapTooltip = props => {
       {isHex ? (
         <div>
           <div>elevation: {tooltipInfo.elevationValue}</div>
-          <div>coordinates: {tooltipInfo.centroid.join(', ')}</div>
+          <div>coordinates: {tooltipInfo.centroid.join(", ")}</div>
         </div>
       ) : null}
     </div>
@@ -67,7 +67,7 @@ MapTooltip.propTypes = {
   primaryField: PropTypes.string,
   secondaryName: PropTypes.string,
   secondaryField: PropTypes.string,
-  isHex: PropTypes.bool,
+  isHex: PropTypes.bool
 };
 
 export default MapTooltip;

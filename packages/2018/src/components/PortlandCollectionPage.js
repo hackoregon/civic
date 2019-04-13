@@ -1,7 +1,7 @@
-import React from 'react';
-import { css } from 'emotion';
-import { Link } from 'react-router';
-import { Logo } from '@hackoregon/component-library'
+import React from "react";
+import { css } from "emotion";
+import { Link } from "react-router";
+import { Logo } from "@hackoregon/component-library";
 
 const collectionPageWrapper = css`
   position: relative;
@@ -36,7 +36,7 @@ const leftContainer = css`
 
 const subCopy = css`
   display: block;
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   font-size: 18px;
   line-height: 1.7;
   margin: 20px 0;
@@ -51,7 +51,7 @@ const subCopy = css`
 const teamTitleStyle = css`
   display: block;
   font-size: 15px;
-  font-family: 'Rubik';
+  font-family: "Rubik";
   text-transform: uppercase;
   letter-spacing: 3px;
 
@@ -107,7 +107,7 @@ const sideListWrapper = css`
 
     h2 {
       color: black;
-      font-family: 'Rubik', sans-serif;
+      font-family: "Rubik", sans-serif;
       font-size: 24px;
       line-height: 1.2;
 
@@ -200,6 +200,6 @@ const PortlandCollectionPage = () => (
   </div>
 );
 
-PortlandCollectionPage.displayName = 'PortlandCollectionPage';
+PortlandCollectionPage.displayName = "PortlandCollectionPage";
 
 export default PortlandCollectionPage;

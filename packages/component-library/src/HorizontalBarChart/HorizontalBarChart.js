@@ -1,18 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 import {
   VictoryAxis,
   VictoryBar,
   VictoryChart,
   VictoryLabel,
   VictoryPortal,
-  VictoryTooltip,
-} from 'victory';
+  VictoryTooltip
+} from "victory";
 
-import ChartContainer from '../ChartContainer';
-import civicFormat from '../utils/civicFormat';
-import { chartEvents } from '../utils/chartHelpers';
-import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
+import ChartContainer from "../ChartContainer";
+import civicFormat from "../utils/civicFormat";
+import { chartEvents } from "../utils/chartHelpers";
+import CivicVictoryTheme from "../VictoryTheme/VictoryThemeIndex";
 
 const HorizontalBarChart = ({
   data,
@@ -28,7 +28,7 @@ const HorizontalBarChart = ({
   yLabel,
   dataValueFormatter,
   dataLabelFormatter,
-  minimalist,
+  minimalist
 }) => {
   const barData =
     sortOrder && sortOrder.length
@@ -37,7 +37,7 @@ const HorizontalBarChart = ({
           return { ...d, defaultSort: index + 1 };
         });
   const sortOrderKey =
-    sortOrder && sortOrder.length ? sortOrder : 'defaultSort';
+    sortOrder && sortOrder.length ? sortOrder : "defaultSort";
   const padding = minimalist
     ? { left: 115, right: 50, bottom: 25, top: 40 }
     : { left: 115, right: 50, bottom: 50, top: 70 };
@@ -74,9 +74,9 @@ const HorizontalBarChart = ({
       >
         <VictoryAxis
           style={{
-            tickLabels: { fill: 'none' },
-            ticks: { stroke: 'none' },
-            grid: { stroke: 'none' },
+            tickLabels: { fill: "none" },
+            ticks: { stroke: "none" },
+            grid: { stroke: "none" }
           }}
           title="Y Axis"
         />
@@ -106,9 +106,9 @@ const HorizontalBarChart = ({
           <VictoryLabel
             style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
             text={xLabel}
-            textAnchor={minimalist ? 'middle' : 'end'}
+            textAnchor={minimalist ? "middle" : "end"}
             title="X Axis Label"
-            verticalAnchor={minimalist ? 'middle' : 'end'}
+            verticalAnchor={minimalist ? "middle" : "end"}
             x={minimalist ? 325 : 600}
             y={minimalist ? 20 : 85}
           />
@@ -126,7 +126,7 @@ const HorizontalBarChart = ({
           data={barData.map(d => ({
             sortOrder: d[sortOrderKey],
             dataValue: d[dataValue],
-            label: dataLabelFormatter(d[dataLabel]),
+            label: dataLabelFormatter(d[dataLabel])
           }))}
           x="sortOrder"
           y="dataValue"
@@ -150,10 +150,10 @@ const HorizontalBarChart = ({
             dataValue: d[dataValue],
             label: `${dataLabelFormatter(d[dataLabel])}: ${dataValueFormatter(
               d[dataValue]
-            )}`,
+            )}`
           }))}
           style={{
-            data: { fill: 'none' },
+            data: { fill: "none" }
           }}
           title="Horizontal Bar Chart"
           x="sortOrder"
@@ -179,22 +179,22 @@ HorizontalBarChart.propTypes = {
   yLabel: PropTypes.string,
   dataValueFormatter: PropTypes.func,
   dataLabelFormatter: PropTypes.func,
-  minimalist: PropTypes.bool,
+  minimalist: PropTypes.bool
 };
 
 HorizontalBarChart.defaultProps = {
   data: null,
   sortOrder: null,
-  dataValue: 'x',
-  dataLabel: 'y',
+  dataValue: "x",
+  dataLabel: "y",
   domain: null,
   title: null,
   subtitle: null,
-  xLabel: 'X',
-  yLabel: 'Y',
+  xLabel: "X",
+  yLabel: "Y",
   dataValueFormatter: civicFormat.numeric,
   dataLabelFormatter: civicFormat.unformatted,
-  minimalist: false,
+  minimalist: false
 };
 
 export default HorizontalBarChart;

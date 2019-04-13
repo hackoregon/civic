@@ -1,1 +1,1 @@
-export default from './ChartTitle';
+export default from "./ChartTitle";

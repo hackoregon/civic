@@ -1,10 +1,10 @@
 /* TODO: Fix linting errors */
 /* eslint-disable */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router';
-import { css } from 'emotion';
+import React from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router";
+import { css } from "emotion";
 
 const storyLinkClass = css`
   & a {
@@ -53,13 +53,13 @@ const StoryLink = ({ children, icon, route, action, link }) => (
   </div>
 );
 
-StoryLink.displayName = 'StoryLink';
+StoryLink.displayName = "StoryLink";
 StoryLink.propTypes = {
   action: PropTypes.func,
   children: PropTypes.node,
   icon: PropTypes.string,
   route: PropTypes.string,
-  link: PropTypes.string,
+  link: PropTypes.string
 };
 
 export default StoryLink;

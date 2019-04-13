@@ -1,10 +1,10 @@
 /* TODO: Fix linting errors */
 /* eslint-disable */
 
-import PropTypes from 'prop-types';
-import React from 'react';
-import { Link } from 'react-router';
-import { css } from 'emotion';
+import PropTypes from "prop-types";
+import React from "react";
+import { Link } from "react-router";
+import { css } from "emotion";
 
 const visibleClass = css`
   visibility: visible;
@@ -88,7 +88,7 @@ const NavSubMenu = ({ items, isVisible }) => (
 NavSubMenu.displayName = "NavSubMenu";
 NavSubMenu.propTypes = {
   items: PropTypes.arrayOf(PropTypes.shape({})),
-  isVisible: PropTypes.bool,
+  isVisible: PropTypes.bool
 };
 
 export default NavSubMenu;

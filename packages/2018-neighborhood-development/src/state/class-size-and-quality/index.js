@@ -1,18 +1,18 @@
-import apiReducer from '../api-adapter-reducer';
-import { API_START, API_SUCCESS, API_ERROR, UPDATE_YEAR } from './actions';
+import apiReducer from "../api-adapter-reducer";
+import { API_START, API_SUCCESS, API_ERROR, UPDATE_YEAR } from "./actions";
 
 export const INITIAL_STATE = {
   pending: false,
   error: null,
   data: [],
-  selectedYear: 2017,
+  selectedYear: 2017
 };
 
 const apiReducers = apiReducer({
   INITIAL_STATE,
   API_START,
   API_SUCCESS,
-  API_ERROR,
+  API_ERROR
 });
 
 const allReducers = (state = INITIAL_STATE, action) => {
@@ -20,7 +20,7 @@ const allReducers = (state = INITIAL_STATE, action) => {
     case UPDATE_YEAR:
       return {
         ...state,
-        selectedYear: action.selectedYear,
+        selectedYear: action.selectedYear
       };
     default:
       return apiReducers(state, action);

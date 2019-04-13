@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { groupBy } from 'lodash';
+import PropTypes from "prop-types";
+import React from "react";
+import { groupBy } from "lodash";
 import {
   VictoryAxis,
   VictoryChart,
@@ -8,20 +8,20 @@ import {
   VictoryPortal,
   VictoryScatter,
   VictoryTooltip,
-  VictoryLine,
-} from 'victory';
+  VictoryLine
+} from "victory";
 
-import ChartContainer from '../ChartContainer';
-import SimpleLegend from '../SimpleLegend';
-import civicFormat from '../utils/civicFormat';
+import ChartContainer from "../ChartContainer";
+import SimpleLegend from "../SimpleLegend";
+import civicFormat from "../utils/civicFormat";
 import {
   chartEvents,
   getDefaultDomain,
   getDefaultDataSeriesLabels,
   getDefaultFillStyle,
-  getDefaultLineStyle,
-} from '../utils/chartHelpers';
-import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
+  getDefaultLineStyle
+} from "../utils/chartHelpers";
+import CivicVictoryTheme from "../VictoryTheme/VictoryThemeIndex";
 
 const LineChart = ({
   data,
@@ -40,7 +40,7 @@ const LineChart = ({
   yLabel,
   xNumberFormatter,
   yNumberFormatter,
-  legendComponent,
+  legendComponent
 }) => {
   const chartDomain = domain || getDefaultDomain(data, dataKey, dataValue);
 
@@ -64,7 +64,7 @@ const LineChart = ({
           data={lineData[category].map(d => ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],
-            series: d[dataSeries],
+            series: d[dataSeries]
           }))}
           x="dataKey"
           y="dataValue"
@@ -94,7 +94,7 @@ const LineChart = ({
         theme={CivicVictoryTheme.civic}
       >
         <VictoryAxis
-          style={{ grid: { stroke: 'none' } }}
+          style={{ grid: { stroke: "none" } }}
           tickFormat={x => xNumberFormatter(x)}
           title="X Axis"
         />
@@ -137,7 +137,7 @@ const LineChart = ({
               d[dataValue]
             )}`,
             series: d[dataSeries],
-            size: size ? d[size.key] || size.value : 3,
+            size: size ? d[size.key] || size.value : 3
           }))}
           events={chartEvents}
           labelComponent={
@@ -182,14 +182,14 @@ LineChart.propTypes = {
   yLabel: PropTypes.string,
   xNumberFormatter: PropTypes.func,
   yNumberFormatter: PropTypes.func,
-  legendComponent: PropTypes.func,
+  legendComponent: PropTypes.func
 };
 
 LineChart.defaultProps = {
   data: null,
-  dataKey: 'x',
+  dataKey: "x",
   dataKeyLabel: null,
-  dataValue: 'y',
+  dataValue: "y",
   dataValueLabel: null,
   dataSeries: null,
   dataSeriesLabel: null,
@@ -198,11 +198,11 @@ LineChart.defaultProps = {
   style: null,
   subtitle: null,
   title: null,
-  xLabel: 'X',
-  yLabel: 'Y',
+  xLabel: "X",
+  yLabel: "Y",
   xNumberFormatter: civicFormat.numeric,
   yNumberFormatter: civicFormat.numeric,
-  legendComponent: null,
+  legendComponent: null
 };
 
 export default LineChart;

@@ -1,17 +1,17 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-console */
-import webpack from 'webpack';
-import chalk from 'chalk';
-import config from '../webpack.config.prod';
+import webpack from "webpack";
+import chalk from "chalk";
+import config from "../webpack.config.prod";
 
-const errMsg     = chalk.red;
+const errMsg = chalk.red;
 const successMsg = chalk.green;
-const warnMsg    = chalk.yellow;
+const warnMsg = chalk.yellow;
 const loadingMsg = chalk.blue;
 
-process.env.NODE_ENV = 'production';
+process.env.NODE_ENV = "production";
 
-console.log(loadingMsg('Minifying...'));
+console.log(loadingMsg("Minifying..."));
 
 webpack(config).run((error, stats) => {
   if (error) {
@@ -26,12 +26,12 @@ webpack(config).run((error, stats) => {
   }
 
   if (jsonStats.hasWarnings) {
-    console.log(warnMsg('Webpack warnings: '));
+    console.log(warnMsg("Webpack warnings: "));
     jsonStats.warnings.map(warning => console.log(warnMsg(warning)));
   }
 
   console.log(`Webpack stats: ${stats}`);
-  console.log(successMsg('Production bundle available in /build.'));
+  console.log(successMsg("Production bundle available in /build."));
 
   return 0;
 });

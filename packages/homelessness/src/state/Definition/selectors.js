@@ -1,4 +1,4 @@
-import { NAME } from './constants';
+import { NAME } from "./constants";
 
 /**
  * Direct selector to the definition state
@@ -19,7 +19,7 @@ const combineAdultChild = data =>
       : acc.push({
           name: cur.sheltertype,
           value: cur.count,
-          year: cur.year,
+          year: cur.year
         });
 
     return acc;

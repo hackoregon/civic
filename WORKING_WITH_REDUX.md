@@ -2,23 +2,21 @@
 
 Redux is how state flows through Civic applications. It is an implementation of the [Flux Architecture](https://facebook.github.io/flux/) that's used to handle user and API interactions ([actions](https://redux.js.org/basics/actions)), manage state transformations ([reducers](https://redux.js.org/basics/reducers)), and provide data to UI components ([selectors](https://redux.js.org/recipes/computing-derived-data)). It does this by maintaining a single global, immutable store.
 
-
-
 ## Brief Glossary
 
 - **Flux:** A pattern for maintaining application state that mandates unidirectional data flow. Data is provided to components and instead of components mutating that data, components instead communicate intent. Those intentions are handled by a system outside of components that mutates data. Once mutated, that data is provided back to components to update the components state.
 
 - **State**: The representation of user interface as a data structure. A radio group with an active selection may look like this:
 
-  ````js
+  ```js
   {
     radioOptions: [
-      { name: 'One' },
-      { name: 'Two', selected: true },
-      { name: 'Three' }
-    ]
+      { name: "One" },
+      { name: "Two", selected: true },
+      { name: "Three" }
+    ];
   }
-  ````
+  ```
 
 - **Actions:** Plain objects that act as messages. They get dispatched by components and interpreted by reducers.
 
@@ -33,10 +31,8 @@ Redux is how state flows through Civic applications. It is an implementation of 
 - **Derived State:** A computed value from stored state. To use the radio group example above, it may be useful to know the total count of options. This count property doesn't need to be in the state object. If it were, that's a place where state can get out of sync. Instead it can be computed on demand:
 
   ```js
-  getCountOfRadioOptions = state => state.radioOptions.length
+  getCountOfRadioOptions = state => state.radioOptions.length;
   ```
-
-
 
 ## Architecture
 
@@ -88,8 +84,6 @@ const reusableConnector = connect(mapDispatchToProps, mapStateToProps);
 export default reusableConnector(RadioGroup);
 ```
 
-
-
 Redux likes to use the terms Presentational Component and Container Component to differentiate components that aren't connected to the store (Presentational) from those that are (Container). It's important to remember that this differentiation is only used to explain how each type of component is used. Under the hood, both types of components are the one and only React Component.
 
 [Further reading on integrating React and Redux](https://redux.js.org/basics/usage-with-react)
@@ -118,15 +112,15 @@ Writing all the code for a feature in its own directory isn't quite enough to ge
 This ends up looking something like this:
 
 ```js
-import { combineReducers } from 'redux';
-import duckOne from './duck-one';
-import duckTwo from './duck-two';
+import { combineReducers } from "redux";
+import duckOne from "./duck-one";
+import duckTwo from "./duck-two";
 
 export default function createReducer(asyncReducers) {
   return combineReducers({
     duckOne,
     duckTwo,
-    ...asyncReducers,
+    ...asyncReducers
   });
 }
 ```
@@ -168,8 +162,8 @@ There are various libraries that extend the utility of actions to better handle 
 In plain Redux, action emitters are functions that return actions. Typically in one of these two forms:
 
 ```js
-const ACTION_ONE = 'ACTION/ONE';
-const ACTION_TWO = 'ACTION/TWO';
+const ACTION_ONE = "ACTION/ONE";
+const ACTION_TWO = "ACTION/TWO";
 
 // Return a static action
 const emitterOne = () => ({ type: ACTION_ONE });
@@ -248,11 +242,11 @@ If you recall, selectors are pure functions that take state and return substate 
 ```js
 const highSchoolData = {
   classes: [
-    { name: 'English', passing: 25, failing: 5 },
-    { name: 'Math', passing: 20, failing: 7 },
-    { name: 'Band', passing: 40, failing: 0 },
-    { name: 'Chemistry', passing: 15, failing: 10 },
-  ],
+    { name: "English", passing: 25, failing: 5 },
+    { name: "Math", passing: 20, failing: 7 },
+    { name: "Band", passing: 40, failing: 0 },
+    { name: "Chemistry", passing: 15, failing: 10 }
+  ]
 };
 
 // A simple selector that works directly off of state
@@ -261,11 +255,12 @@ const getClasses = state => state.classes;
 // A selector that builds off of the getClasses selector
 const getClassStats = createSelector(
   getClasses,
-  classes => state.map(classObj => ({
-    name: classObj.name,
-    totalStudents: classObj.passing + classObj.failing,
-    percentPassing: classObj.passing / (classObj.passing + classObj.failing),
-  }))
+  classes =>
+    state.map(classObj => ({
+      name: classObj.name,
+      totalStudents: classObj.passing + classObj.failing,
+      percentPassing: classObj.passing / (classObj.passing + classObj.failing)
+    }))
 );
 
 getClassStats(highSchoolData);
@@ -286,16 +281,16 @@ Here is an example that requires two selectors:
 ```js
 const highSchoolData = {
   classes: [
-    { name: 'English', passing: 25, failing: 5 },
-    { name: 'Math', passing: 20, failing: 7 },
-    { name: 'Band', passing: 40, failing: 0 },
-    { name: 'Chemistry', passing: 15, failing: 10 },
+    { name: "English", passing: 25, failing: 5 },
+    { name: "Math", passing: 20, failing: 7 },
+    { name: "Band", passing: 40, failing: 0 },
+    { name: "Chemistry", passing: 15, failing: 10 }
   ],
   students: [
-    { name: 'Alice', classes: [ 'English', 'Band' ] },
-    { name: 'Bob', classes: [ 'Chemistry', 'Math' ] },
-    { name: 'Carol', classes: [ 'Band', 'Chemistry' ] },
-  ],
+    { name: "Alice", classes: ["English", "Band"] },
+    { name: "Bob", classes: ["Chemistry", "Math"] },
+    { name: "Carol", classes: ["Band", "Chemistry"] }
+  ]
 };
 
 // Get classes from state
@@ -329,7 +324,7 @@ const getClassesForStudent = createSelector(
   }
 );
 
-getClassesForStudent(highSchoolData, 'Carol');
+getClassesForStudent(highSchoolData, "Carol");
 // [
 //   { name: 'Band', passing: 40, failing: 0 },
 //   { name: 'Chemistry', passing: 15, failing: 10 },
@@ -358,7 +353,7 @@ combineReducers({
   elections: ElectionsReducers(),
   neighborhood: NeighborhoodReducers(),
   transportation: TransportationReducers(),
-  farmersMarkets: FarmersMarketsReducers(),
+  farmersMarkets: FarmersMarketsReducers()
 });
 ```
 
@@ -378,4 +373,3 @@ export const rootState = state => state.projectKey || state;
 ```
 
 As long as every selector for every project is [reselected] from the `rootState` selector, whether or not the project's root is `state` or `state.projectKey` is inconsequential.
-

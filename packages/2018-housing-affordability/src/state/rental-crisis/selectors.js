@@ -1,5 +1,5 @@
-import { createSelector } from 'reselect';
-import { rootState } from '../selectors';
+import { createSelector } from "reselect";
+import { rootState } from "../selectors";
 
 export const getRentalCrisis = createSelector(
   rootState,
@@ -12,12 +12,12 @@ const getProperty = key =>
     state => state[key]
   );
 
-export const isAllCitiesLoading = getProperty('allCitiesPending');
-export const isCityLoading = getProperty('cityPending');
-export const getAllCitiesError = getProperty('allCitiesError');
-export const getAllCities = getProperty('allCities');
-export const getCityError = getProperty('cityError');
-export const getSelectedCity = getProperty('selectedCity');
+export const isAllCitiesLoading = getProperty("allCitiesPending");
+export const isCityLoading = getProperty("cityPending");
+export const getAllCitiesError = getProperty("allCitiesError");
+export const getAllCities = getProperty("allCities");
+export const getCityError = getProperty("cityError");
+export const getSelectedCity = getProperty("selectedCity");
 
 // export const getSelectedCityData = createSelector(
 //   getRentalCrisis,
@@ -31,7 +31,7 @@ export const getSelectedCityData = createSelector(
       .map(datum => ({
         ...datum,
         eli_renters: +datum.eli_renters,
-        aaa_units: +datum.aaa_units,
+        aaa_units: +datum.aaa_units
       }))
       .sort((a, b) => a.sortOrder - b.sortOrder)
 );
@@ -43,7 +43,7 @@ export const getSelectedCityRank = createSelector(
     return datum
       ? {
           rank: datum.rank,
-          total: datum.total,
+          total: datum.total
         }
       : {};
   }

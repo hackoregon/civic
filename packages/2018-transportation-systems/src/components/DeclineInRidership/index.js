@@ -1,16 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { css } from 'emotion';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { css } from "emotion";
 
-import { CivicStoryCard, LineChart } from '@hackoregon/component-library';
+import { CivicStoryCard, LineChart } from "@hackoregon/component-library";
 
-import { fetchRidershipOverTime } from '../../state/decline-in-ridership/actions';
+import { fetchRidershipOverTime } from "../../state/decline-in-ridership/actions";
 import {
   isRidershipOverTimePending,
   catchRidershipOverTimeErrors,
-  getRidershipOverTimeData,
-} from '../../state/decline-in-ridership/selectors';
+  getRidershipOverTimeData
+} from "../../state/decline-in-ridership/selectors";
 
 export class DeclineInRidership extends React.Component {
   componentDidMount() {
@@ -52,23 +52,23 @@ export class DeclineInRidership extends React.Component {
     );
   }
 }
-DeclineInRidership.displayName = 'ridershipOverTime';
+DeclineInRidership.displayName = "ridershipOverTime";
 DeclineInRidership.propTypes = {
   init: PropTypes.func,
   isLoading: PropTypes.bool,
   error: PropTypes.string,
-  ridershipOverTime: PropTypes.arrayOf(PropTypes.object),
+  ridershipOverTime: PropTypes.arrayOf(PropTypes.object)
 };
 
 export default connect(
   state => ({
     isLoading: isRidershipOverTimePending(state),
     error: catchRidershipOverTimeErrors(state),
-    ridershipOverTime: getRidershipOverTimeData(state),
+    ridershipOverTime: getRidershipOverTimeData(state)
   }),
   dispatch => ({
     init() {
       dispatch(fetchRidershipOverTime());
-    },
+    }
   })
 )(DeclineInRidership);

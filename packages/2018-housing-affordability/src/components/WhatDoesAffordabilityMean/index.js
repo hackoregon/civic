@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import { CivicStoryCard, Placeholder } from '@hackoregon/component-library';
+import { CivicStoryCard, Placeholder } from "@hackoregon/component-library";
 
 export class WhatDoesAffordabilityMean extends React.Component {
   componentDidMount() {
@@ -31,14 +31,14 @@ export class WhatDoesAffordabilityMean extends React.Component {
           Not everyone makes the same amount of money or has the same size
           family. For example, if you have more dependents on one person’s
           salary, that can make it harder to afford the rent. The Department of
-          Housing and Urban Development publishes an annual data set defining{' '}
+          Housing and Urban Development publishes an annual data set defining{" "}
           <a href="https://www.huduser.gov/portal/datasets/il.html#2018_dat">
             median family incomes
-          </a>{' '}
+          </a>{" "}
           and affordability.
         </p>
         <p>
-          In Portland,{' '}
+          In Portland,{" "}
           <a href="https://www.portlandoregon.gov/phb/article/651806">
             the median family income for a family of four is $74,700.
           </a>
@@ -49,7 +49,7 @@ export class WhatDoesAffordabilityMean extends React.Component {
           $55,003 as $1,375. (
           <a href="https://www.portlandoregon.gov/phb/article/681253">
             https://www.portlandoregon.gov/phb/article/681253
-          </a>{' '}
+          </a>{" "}
           - page 30)
         </p>
       </CivicStoryCard>
@@ -57,7 +57,7 @@ export class WhatDoesAffordabilityMean extends React.Component {
   }
 }
 
-WhatDoesAffordabilityMean.displayName = 'WhatDoesAffordabilityMean';
+WhatDoesAffordabilityMean.displayName = "WhatDoesAffordabilityMean";
 
 // Connect this to the redux store when necessary
 export default WhatDoesAffordabilityMean;

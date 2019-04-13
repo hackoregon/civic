@@ -1,6 +1,6 @@
-import qs from 'query-string';
+import qs from "query-string";
 
-export const API_HOST = 'https://service.civicpdx.org/housing';
+export const API_HOST = "https://service.civicpdx.org/housing";
 
 /**
  * buildUrl parameter is an optional function that will be passed the full redux state and the
@@ -33,7 +33,7 @@ export const get = (
 export const api = (endpoint, { buildParams, ...rest }) => {
   const buildUrl = (state, partialUrl) => {
     const params = qs.stringify(buildParams(state));
-    return `${API_HOST}${partialUrl}?format=json${params ? `&${params}` : ''}`;
+    return `${API_HOST}${partialUrl}?format=json${params ? `&${params}` : ""}`;
   };
   return get(endpoint, { buildUrl, ...rest });
 };

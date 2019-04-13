@@ -1,12 +1,12 @@
-import { createSelector } from 'reselect';
-import { rootState } from '../selectors';
+import { createSelector } from "reselect";
+import { rootState } from "../selectors";
 
 const typeMap = {
-  E: 'Elementary School',
-  M: 'Middle School',
-  H: 'High School',
-  C: 'Charter School',
-  O: 'Other',
+  E: "Elementary School",
+  M: "Middle School",
+  H: "High School",
+  C: "Charter School",
+  O: "Other"
 };
 
 const getFormattedData = (data, selectedYear) =>
@@ -16,7 +16,7 @@ const getFormattedData = (data, selectedYear) =>
       classSize: item.class_size,
       teacherExperience: item.teacher_experience,
       type: typeMap[item.type],
-      combinedLabel: `${item.name} • Experience`,
+      combinedLabel: `${item.name} • Experience`
     }));
 
 const getClassSizeAndQualityDomain = createSelector(

@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import copy from 'copy-to-clipboard';
-import { css } from 'emotion';
-import CivicStoryLink from './CivicStoryLink';
-import { ICONS } from '../styleConstants';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import copy from "copy-to-clipboard";
+import { css } from "emotion";
+import CivicStoryLink from "./CivicStoryLink";
+import { ICONS } from "../styleConstants";
 
 const MS_TO_SWITCH_TEXT = 3000; // 3 seconds
 
@@ -27,18 +27,18 @@ const alignRight = css`
 
 export default class StoryFooter extends Component {
   static defaultProps = {
-    slug: 'some-card-id',
+    slug: "some-card-id"
   };
 
   static propTypes = {
     slug: PropTypes.string,
-    source: PropTypes.string,
+    source: PropTypes.string
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      copied: false,
+      copied: false
     };
   }
 
@@ -57,7 +57,7 @@ export default class StoryFooter extends Component {
   render() {
     const { slug, source } = this.props;
     const { copied } = this.state;
-    const shareTxt = copied ? 'Link copied!' : 'Share card'; // if copied, show Link copied, otherwise, show Share card
+    const shareTxt = copied ? "Link copied!" : "Share card"; // if copied, show Link copied, otherwise, show Share card
     const shareIcon = copied ? ICONS.check : ICONS.link;
     const routeOrUndefined =
       `${window.location.origin}/cards/${slug}` === window.location.href

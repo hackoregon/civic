@@ -1,9 +1,9 @@
 /* eslint-disable import/no-extraneous-dependencies */
 // This should probably be the core component, containing, nav etc
 
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-import React from 'react';
+import React from "react";
 
 function Table({ rows }) {
   return (
@@ -22,11 +22,11 @@ function Table({ rows }) {
 }
 
 Table.defaultProps = {
-  rows: [],
+  rows: []
 };
 
 Table.propTypes = {
-  rows: PropTypes.array,
+  rows: PropTypes.array
 };
 
 export default Table;

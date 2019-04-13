@@ -1,7 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router';
-import CardRegistry from '../card-registry';
-import { PageLayout } from '@hackoregon/component-library';
+import React from "react";
+import { Link } from "react-router";
+import CardRegistry from "../card-registry";
+import { PageLayout } from "@hackoregon/component-library";
 
 const CardDetailPage = ({ params }) => {
   const card = CardRegistry.find(params.slug);
@@ -26,6 +26,6 @@ const CardDetailPage = ({ params }) => {
   );
 };
 
-CardDetailPage.displayName = 'CardDetailPage';
+CardDetailPage.displayName = "CardDetailPage";
 
 export default CardDetailPage;

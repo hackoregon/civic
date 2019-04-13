@@ -1,16 +1,16 @@
 /* TODO: Fix linting errors */
 /* eslint-disable */
 
-import React, { Component } from 'react';
-import { Link } from 'react-router';
-import { css } from 'emotion';
-import PropTypes from 'prop-types';
-import Nav from './Nav';
-import Logo from '../Logo/LogoAnimated';
-import Icon from '../Icon/Icon';
-import { ICONS } from '../styleConstants';
+import React, { Component } from "react";
+import { Link } from "react-router";
+import { css } from "emotion";
+import PropTypes from "prop-types";
+import Nav from "./Nav";
+import Logo from "../Logo/LogoAnimated";
+import Icon from "../Icon/Icon";
+import { ICONS } from "../styleConstants";
 
-const primaryColor = 'rgb(34, 15, 37)';
+const primaryColor = "rgb(34, 15, 37)";
 
 const containerClass = css`
   width: 100%;
@@ -84,7 +84,7 @@ class Header extends Component {
   constructor() {
     super();
     this.state = {
-      menuActive: false,
+      menuActive: false
     };
   }
 
@@ -106,7 +106,7 @@ class Header extends Component {
           </div>
           <div
             className={`${navClass} ${
-              this.state.menuActive ? 'active' : 'inactive'
+              this.state.menuActive ? "active" : "inactive"
             }`}
           >
             <Nav
@@ -131,13 +131,13 @@ class Header extends Component {
   }
 }
 
-Header.displayName = 'Header';
+Header.displayName = "Header";
 Header.propTypes = {
   menu: PropTypes.arrayOf(PropTypes.shape({})),
   title: PropTypes.string,
   children: PropTypes.node,
   overlay: PropTypes.bool,
-  mainProjectColor: PropTypes.string,
+  mainProjectColor: PropTypes.string
 };
 
 export default Header;

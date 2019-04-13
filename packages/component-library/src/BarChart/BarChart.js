@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
 import {
   VictoryAxis,
@@ -7,13 +7,13 @@ import {
   VictoryChart,
   VictoryLabel,
   VictoryPortal,
-  VictoryTooltip,
-} from 'victory';
+  VictoryTooltip
+} from "victory";
 
-import ChartContainer from '../ChartContainer';
-import civicFormat from '../utils/civicFormat';
-import { chartEvents, getDefaultDomain } from '../utils/chartHelpers';
-import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
+import ChartContainer from "../ChartContainer";
+import civicFormat from "../utils/civicFormat";
+import { chartEvents, getDefaultDomain } from "../utils/chartHelpers";
+import CivicVictoryTheme from "../VictoryTheme/VictoryThemeIndex";
 
 const BarChart = ({
   data,
@@ -28,7 +28,7 @@ const BarChart = ({
   yNumberFormatter,
   barWidth,
   loading,
-  error,
+  error
 }) => {
   const chartDomain = domain || getDefaultDomain(data, dataKey, dataValue);
 
@@ -47,7 +47,7 @@ const BarChart = ({
       >
         <VictoryAxis
           tickFormat={xNumberFormatter}
-          style={{ grid: { stroke: 'none' } }}
+          style={{ grid: { stroke: "none" } }}
           title="X Axis"
         />
         <VictoryAxis
@@ -94,7 +94,7 @@ const BarChart = ({
             dataValue: d[dataValue],
             label: `${xLabel}: ${xNumberFormatter(
               d[dataKey]
-            )} • ${yLabel}: ${yNumberFormatter(d[dataValue])}`,
+            )} • ${yLabel}: ${yNumberFormatter(d[dataValue])}`
           }))}
           events={chartEvents}
           x="dataKey"
@@ -120,21 +120,21 @@ BarChart.propTypes = {
   yLabel: PropTypes.string,
   xNumberFormatter: PropTypes.func,
   yNumberFormatter: PropTypes.func,
-  barWidth: PropTypes.number,
+  barWidth: PropTypes.number
 };
 
 BarChart.defaultProps = {
   data: null,
-  dataKey: 'x',
-  dataValue: 'y',
+  dataKey: "x",
+  dataValue: "y",
   domain: null,
   title: null,
   subtitle: null,
-  xLabel: 'X',
-  yLabel: 'Y',
+  xLabel: "X",
+  yLabel: "Y",
   xNumberFormatter: civicFormat.year,
   yNumberFormatter: civicFormat.numeric,
-  barWidth: null,
+  barWidth: null
 };
 
 export default BarChart;

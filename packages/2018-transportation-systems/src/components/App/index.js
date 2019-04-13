@@ -1,15 +1,15 @@
-import React from 'react';
+import React from "react";
 
-import '@hackoregon/component-library/assets/global.styles.css';
-import { PageLayout } from '@hackoregon/component-library';
-import DeclineInRidership from '../DeclineInRidership';
-import HistoricalChangesToBusService from '../HistoricalChangesToBusService';
-import ServiceAndRidership from '../ServiceAndRidership';
-import DriversOfPublicTransitParticipation from '../DriversOfPublicTransitParticipation';
-import ExploreBusServiceAndEquity from '../ExploreBusServiceAndEquity';
-import MobilityTrendsUsingRealTimeData from '../MobilityTrendsUsingRealTimeData';
-import TheSecretIsInTheSensors from '../TheSecretIsInTheSensors';
-import DiveDeeperIntoTransportationData from '../DiveDeeperIntoTransportationData';
+import "@hackoregon/component-library/assets/global.styles.css";
+import { PageLayout } from "@hackoregon/component-library";
+import DeclineInRidership from "../DeclineInRidership";
+import HistoricalChangesToBusService from "../HistoricalChangesToBusService";
+import ServiceAndRidership from "../ServiceAndRidership";
+import DriversOfPublicTransitParticipation from "../DriversOfPublicTransitParticipation";
+import ExploreBusServiceAndEquity from "../ExploreBusServiceAndEquity";
+import MobilityTrendsUsingRealTimeData from "../MobilityTrendsUsingRealTimeData";
+import TheSecretIsInTheSensors from "../TheSecretIsInTheSensors";
+import DiveDeeperIntoTransportationData from "../DiveDeeperIntoTransportationData";
 
 const App = () => (
   <PageLayout
@@ -34,6 +34,6 @@ const App = () => (
   </PageLayout>
 );
 
-App.displayName = 'App';
+App.displayName = "App";
 
 export default App;

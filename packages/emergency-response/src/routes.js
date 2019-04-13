@@ -1,21 +1,21 @@
-import { App, Example, NotFoundPage } from './components/index';
+import { App, Example, NotFoundPage } from "./components/index";
 
 const routes = () => [
   {
-    path: 'emergency',
-    name: 'emergency',
+    path: "emergency",
+    name: "emergency",
     component: App,
     childRoutes: [
       {
-        path: 'example',
-        component: Example,
+        path: "example",
+        component: Example
       },
       {
-        path: 'notfoundpage',
-        component: NotFoundPage,
-      },
-    ],
-  },
+        path: "notfoundpage",
+        component: NotFoundPage
+      }
+    ]
+  }
 ];
 
 export default routes;

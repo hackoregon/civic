@@ -1,21 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { css } from 'emotion';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { css } from "emotion";
 
-import {
-  CivicStoryCard,
-  Scatterplot,
-} from '@hackoregon/component-library';
+import { CivicStoryCard, Scatterplot } from "@hackoregon/component-library";
 
-import { civicFormat } from '@hackoregon/component-library/dist/utils';
+import { civicFormat } from "@hackoregon/component-library/dist/utils";
 
-import { fetchProactivePlanning } from '../../state/proactive-planning/actions';
+import { fetchProactivePlanning } from "../../state/proactive-planning/actions";
 import {
   isProactivePlanningPending,
   catchProactivePlanningErrors,
-  getProactivePlanningData,
-} from '../../state/proactive-planning/selectors';
+  getProactivePlanningData
+} from "../../state/proactive-planning/selectors";
 
 export class ProactivePlanning extends React.Component {
   componentDidMount() {
@@ -30,7 +27,7 @@ export class ProactivePlanning extends React.Component {
         title="Planning for Citywide Resilience"
         slug="proactive-planning-for-city-wide-resilience"
         loading={isLoading}
-        error={error && 'Error loading data'}
+        error={error && "Error loading data"}
       >
         {proactivePlanning && (
           <Scatterplot
@@ -44,7 +41,7 @@ export class ProactivePlanning extends React.Component {
             dataValue="displaced_percap"
             dataValueLabel="displacementLabel"
             dataSeries="quadrant"
-            size={{ key: 'total_population', minSize: 2, maxSize: 10 }}
+            size={{ key: "total_population", minSize: 2, maxSize: 10 }}
             xNumberFormatter={civicFormat.percentage}
             yNumberFormatter={civicFormat.percentage}
           />
@@ -53,23 +50,23 @@ export class ProactivePlanning extends React.Component {
     );
   }
 }
-ProactivePlanning.displayName = 'proactivePlanning';
+ProactivePlanning.displayName = "proactivePlanning";
 ProactivePlanning.propTypes = {
   init: PropTypes.func,
   isLoading: PropTypes.bool,
   error: PropTypes.object,
-  proactivePlanning: PropTypes.arrayOf(PropTypes.object),
+  proactivePlanning: PropTypes.arrayOf(PropTypes.object)
 };
 
 export default connect(
   state => ({
     isLoading: isProactivePlanningPending(state),
     error: catchProactivePlanningErrors(state),
-    proactivePlanning: getProactivePlanningData(state),
+    proactivePlanning: getProactivePlanningData(state)
   }),
   dispatch => ({
     init() {
       dispatch(fetchProactivePlanning());
-    },
+    }
   })
 )(ProactivePlanning);

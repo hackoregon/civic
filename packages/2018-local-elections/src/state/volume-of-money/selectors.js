@@ -1,6 +1,6 @@
-import { createSelector } from 'reselect';
-import { chunk } from 'lodash';
-import { rootState } from '../selectors';
+import { createSelector } from "reselect";
+import { chunk } from "lodash";
+import { rootState } from "../selectors";
 
 export const getVolumeOfMoney = createSelector(
   rootState,
@@ -17,7 +17,7 @@ const transformRaceResponse = data =>
   data
     ? data.map(datum => ({
         date: parseFloat(datum.year) + parseFloat(datum.month) / 12,
-        sum: parseFloat(datum.sum),
+        sum: parseFloat(datum.sum)
       }))
     : [];
 
@@ -25,12 +25,12 @@ const transformRaceResponse = data =>
 //   chunk(data, size).map(arr => arr.reduce(combineSum))
 //   : null;
 
-export const isAllRacesLoading = getProperty('allRacesPending');
-export const isRaceLoading = getProperty('racePending');
-export const getAllRacesError = getProperty('allRacesError');
-export const getAllRaces = getProperty('allRaces');
-export const getRaceError = getProperty('raceError');
-export const getSelectedRace = getProperty('selectedRace');
+export const isAllRacesLoading = getProperty("allRacesPending");
+export const isRaceLoading = getProperty("racePending");
+export const getAllRacesError = getProperty("allRacesError");
+export const getAllRaces = getProperty("allRaces");
+export const getRaceError = getProperty("raceError");
+export const getSelectedRace = getProperty("selectedRace");
 
 export const isAnyLoading = createSelector(
   isAllRacesLoading,

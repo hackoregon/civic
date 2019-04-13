@@ -5,8 +5,8 @@ import {
   CITY_START,
   CITY_SUCCESS,
   CITY_FAILURE,
-  SET_CITY,
-} from './actions';
+  SET_CITY
+} from "./actions";
 
 const INITIAL_STATE = {
   allCitiesPending: false,
@@ -14,7 +14,7 @@ const INITIAL_STATE = {
   cityPending: false,
   cityError: null,
   selectedCity: null,
-  allCities: null,
+  allCities: null
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -24,47 +24,47 @@ const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         allCitiesPending: true,
         allCitiesError: null,
-        allCities: null,
+        allCities: null
       };
     case ALL_CITIES_SUCCESS:
       return {
         ...state,
         allCitiesPending: false,
         allCitiesError: null,
-        allCities: action.payload.results.geography,
+        allCities: action.payload.results.geography
       };
     case ALL_CITIES_FAILURE:
       return {
         ...state,
         allCitiesPending: false,
         allCitiesError: action.payload,
-        allCities: null,
+        allCities: null
       };
     case CITY_START:
       return {
         ...state,
         cityPending: true,
         cityError: null,
-        selectedCityData: null,
+        selectedCityData: null
       };
     case CITY_SUCCESS:
       return {
         ...state,
         cityPending: false,
         cityError: null,
-        selectedCityData: action.payload.results,
+        selectedCityData: action.payload.results
       };
     case CITY_FAILURE:
       return {
         ...state,
         cityPending: false,
         cityError: action.payload,
-        selectedCityData: null,
+        selectedCityData: null
       };
     case SET_CITY:
       return {
         ...state,
-        selectedCity: action.selectedCity,
+        selectedCity: action.selectedCity
       };
     default:
       return state;

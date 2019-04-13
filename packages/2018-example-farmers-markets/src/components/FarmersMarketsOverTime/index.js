@@ -1,15 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { css } from 'emotion';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { css } from "emotion";
 
-import { CivicStoryCard, LineChart } from '@hackoregon/component-library';
+import { CivicStoryCard, LineChart } from "@hackoregon/component-library";
 
-import { fetchFarmersMarketsOverTime } from '../../state/farmers-markets-over-time/actions';
+import { fetchFarmersMarketsOverTime } from "../../state/farmers-markets-over-time/actions";
 import {
   isFarmersMarketsOverTimePending,
-  getFarmersMarketsOverTimeData,
-} from '../../state/farmers-markets-over-time/selectors';
+  getFarmersMarketsOverTimeData
+} from "../../state/farmers-markets-over-time/selectors";
 
 const cardLoading = css`
   width: 100%;
@@ -75,21 +75,21 @@ export class FarmersMarketsOverTime extends React.Component {
   }
 }
 
-FarmersMarketsOverTime.displayName = 'FarmersMarketsOverTime';
+FarmersMarketsOverTime.displayName = "FarmersMarketsOverTime";
 FarmersMarketsOverTime.propTypes = {
   init: PropTypes.func,
   isLoading: PropTypes.bool,
-  farmersMarketsOverTime: PropTypes.arrayOf(PropTypes.object),
+  farmersMarketsOverTime: PropTypes.arrayOf(PropTypes.object)
 };
 
 export default connect(
   state => ({
     isLoading: isFarmersMarketsOverTimePending(state),
-    farmersMarketsOverTime: getFarmersMarketsOverTimeData(state),
+    farmersMarketsOverTime: getFarmersMarketsOverTimeData(state)
   }),
   dispatch => ({
     init() {
       dispatch(fetchFarmersMarketsOverTime());
-    },
+    }
   })
 )(FarmersMarketsOverTime);

@@ -1,15 +1,15 @@
-import fetchAdapter from '../fetch-adapter';
-import actionEmitter from '../common-action-emitter';
-import { slugify } from '../utils';
+import fetchAdapter from "../fetch-adapter";
+import actionEmitter from "../common-action-emitter";
+import { slugify } from "../utils";
 
 // Types
-export const ALL_CITIES_START = 'AFFORDABLE_RENTAL_UNITS/ALL_CITIES_START';
-export const ALL_CITIES_SUCCESS = 'AFFORDABLE_RENTAL_UNITS/ALL_CITIES_SUCCESS';
-export const ALL_CITIES_FAILURE = 'AFFORDABLE_RENTAL_UNITS/ALL_CITIES_FAILURE';
-export const CITY_START = 'AFFORDABLE_RENTAL_UNITS/CITY_START';
-export const CITY_SUCCESS = 'AFFORDABLE_RENTAL_UNITS/CITY_SUCCESS';
-export const CITY_FAILURE = 'AFFORDABLE_RENTAL_UNITS/CITY_FAILURE';
-export const SET_CITY = 'AFFORDABLE_RENTAL_UNITS/SET_CITY';
+export const ALL_CITIES_START = "AFFORDABLE_RENTAL_UNITS/ALL_CITIES_START";
+export const ALL_CITIES_SUCCESS = "AFFORDABLE_RENTAL_UNITS/ALL_CITIES_SUCCESS";
+export const ALL_CITIES_FAILURE = "AFFORDABLE_RENTAL_UNITS/ALL_CITIES_FAILURE";
+export const CITY_START = "AFFORDABLE_RENTAL_UNITS/CITY_START";
+export const CITY_SUCCESS = "AFFORDABLE_RENTAL_UNITS/CITY_SUCCESS";
+export const CITY_FAILURE = "AFFORDABLE_RENTAL_UNITS/CITY_FAILURE";
+export const SET_CITY = "AFFORDABLE_RENTAL_UNITS/SET_CITY";
 
 // Simple actions
 export const AllARUStart = actionEmitter(ALL_CITIES_START);
@@ -21,9 +21,9 @@ export const ARUSuccess = actionEmitter(CITY_SUCCESS);
 export const ARUFailure = actionEmitter(CITY_FAILURE);
 
 const listDatatype =
-  'change-in-share-of-units-by-real-rent-level-2005-2015-real-gross-rents-under-800';
+  "change-in-share-of-units-by-real-rent-level-2005-2015-real-gross-rents-under-800";
 const detailDatatype =
-  'change-in-share-of-units-by-real-rent-level-2005-2015-real-gross-rents';
+  "change-in-share-of-units-by-real-rent-level-2005-2015-real-gross-rents";
 
 // Thunk actions
 export const fetchAllARUCities = fetchAdapter(
@@ -31,24 +31,24 @@ export const fetchAllARUCities = fetchAdapter(
   {
     start: AllARUStart,
     success: AllARUSuccess,
-    failure: AllARUFailure,
+    failure: AllARUFailure
   }
 );
 
 export const fetchARUCity = fetchAdapter(
   `/api/harvardjchs/?datatype=${detailDatatype}`,
   {
-    encodeParams: (url, city = 'portland') =>
+    encodeParams: (url, city = "portland") =>
       `${url}&limit=20&datapoint=${slugify(city)}`,
     start: ARUStart,
     success: ARUSuccess,
-    failure: ARUFailure,
+    failure: ARUFailure
   }
 );
 
-export const setARUCity = (city = 'portland') => ({
+export const setARUCity = (city = "portland") => ({
   type: SET_CITY,
-  selectedCity: city,
+  selectedCity: city
 });
 
 // http://service.civicpdx.org/housing-affordability/api/harvardjchs/?datatype=change-in-share-of-units-by-real-rent-level-2005-2015-real-gross-rents&datapoint=portland

@@ -1,14 +1,14 @@
 /* Not currently used 03/2019 */
 /* eslint-disable */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router';
+import React from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router";
 
-import { css } from 'emotion';
+import { css } from "emotion";
 
-import localSVG from '../../assets/local/local.svg';
-import usaSVG from '../../assets/country/usa.svg';
+import localSVG from "../../assets/local/local.svg";
+import usaSVG from "../../assets/country/usa.svg";
 
 const cardsWrapper = css`
   display: flex;
@@ -18,7 +18,7 @@ const cardsWrapper = css`
   flex-wrap: wrap;
 `;
 const card = css`
-  font-family: 'Rubik';
+  font-family: "Rubik";
   position: relative;
   background-color: transparent;
   font-size: 2vw;
@@ -31,7 +31,7 @@ const card = css`
   transition: all 0.3s ease-in-out;
 
   :not(:last-child):before {
-    content: '';
+    content: "";
     height: 40px;
     border-right: 1px solid #ec485b;
     top: 82%;
@@ -47,13 +47,13 @@ const cardTextWrapper = css`
 `;
 const eyebrowStyle = css`
   display: block;
-  font-family: 'Rubik';
+  font-family: "Rubik";
   font-size: 14px;
   color: #ee495c;
 `;
 const locationTitle = css`
   display: block;
-  font-family: 'Rubik';
+  font-family: "Rubik";
   font-size: 18px;
   color: white;
 `;
@@ -67,7 +67,7 @@ const iconWrapper = css`
 `;
 const locationResult = css`
   color: white;
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   font-size: 14px;
   width: 180px;
 `;
@@ -87,10 +87,10 @@ const whyStyle = css`
 const DataList = ({ city, state }) => {
   const missingStates = [];
   const fileName =
-    state && !missingStates.includes(state) ? `state/${state}` : 'local/local';
+    state && !missingStates.includes(state) ? `state/${state}` : "local/local";
   const statePath = require(`../../assets/${fileName}.svg`); // eslint-disable-line global-require, import/no-dynamic-require
   const cityResult =
-    city === 'Portland' ? (
+    city === "Portland" ? (
       <span>
         We have Portland data!
         <br />
@@ -100,7 +100,7 @@ const DataList = ({ city, state }) => {
       </span>
     ) : (
       <span>
-        {`There's no CIVIC data for ${city} yet!`}{' '}
+        {`There's no CIVIC data for ${city} yet!`}{" "}
         <span className={whyStyle}>
           <a href="#getStarted">Why?</a>
         </span>
@@ -124,7 +124,7 @@ const DataList = ({ city, state }) => {
         </div>
         <div className={cardTextWrapper}>
           <span className={eyebrowStyle}>State</span>
-          <div className={locationTitle}>{state || '?'}</div>
+          <div className={locationTitle}>{state || "?"}</div>
         </div>
       </div>
       <div className={card}>
@@ -144,7 +144,7 @@ const DataList = ({ city, state }) => {
 
 DataList.propTypes = {
   city: PropTypes.string,
-  state: PropTypes.string,
+  state: PropTypes.string
 };
 
 export default DataList;

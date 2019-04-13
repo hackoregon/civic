@@ -1,21 +1,22 @@
-import React from 'react';
-import { CivicStoryCard } from '@hackoregon/component-library';
-import shared from '../shared.styles';
+import React from "react";
+import { CivicStoryCard } from "@hackoregon/component-library";
+import shared from "../shared.styles";
 
 const styles = {
   image: {
-    display: 'block',
-    margin: 'auto',
-    width: '90%',
+    display: "block",
+    margin: "auto",
+    width: "90%"
   },
   bodyContainer: {
-    maxWidth: '100%',
-    margin: '0 auto',
-    lineHeight: '1.35em',
-  },
+    maxWidth: "100%",
+    margin: "0 auto",
+    lineHeight: "1.35em"
+  }
 };
 
-const imgRoot = 'https://s3-us-west-2.amazonaws.com/hacko-cdn/2017-homelessness';
+const imgRoot =
+  "https://s3-us-west-2.amazonaws.com/hacko-cdn/2017-homelessness";
 
 const UnaccompaniedYouth = () => (
   <CivicStoryCard title="Unaccompanied Youth—Undercounted?">

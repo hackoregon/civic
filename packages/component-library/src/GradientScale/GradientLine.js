@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import { Line } from 'victory';
+import { Line } from "victory";
 
 const GradientLine = ({ x, datum, scale }) => {
-  const isPrimary = datum.type === 'primary';
-  const stroke = isPrimary ? '#721d7c' : '#AAA4AB';
+  const isPrimary = datum.type === "primary";
+  const stroke = isPrimary ? "#721d7c" : "#AAA4AB";
   const overlap = isPrimary ? 0 : 0;
   const width = isPrimary ? 8 : 6;
   const opacity = isPrimary ? 1 : 1;
@@ -23,11 +23,11 @@ const GradientLine = ({ x, datum, scale }) => {
 GradientLine.propTypes = {
   x: PropTypes.number,
   datum: PropTypes.shape({
-    type: PropTypes.string,
+    type: PropTypes.string
   }),
   scale: PropTypes.shape({
-    y: PropTypes.func,
-  }),
+    y: PropTypes.func
+  })
 };
 
 export default GradientLine;

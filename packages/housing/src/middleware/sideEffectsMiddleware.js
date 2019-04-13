@@ -1,9 +1,9 @@
-export const EXAMPLE_ACTION = 'EXAMPLE/ACTION';
+export const EXAMPLE_ACTION = "EXAMPLE/ACTION";
 /*
    The idea is to filter through the actions and do sideeffects here.
    Because we have access to next we can continue with the other actions.
 */
-export const EXAMPLE_NEXT_ACTION = { type: 'SOME_ACTION' };
+export const EXAMPLE_NEXT_ACTION = { type: "SOME_ACTION" };
 const sideEffectsMiddleware = store => next => action => {
   // eslint-disable-line
   switch (action.type) {

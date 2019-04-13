@@ -1,9 +1,9 @@
 /* Deprecated component, 2017 only */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { Link } from 'react-router';
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import { Link } from "react-router";
 
 const StyledLink = styled(Link)`
   padding: 6px 6px 6px 6px;
@@ -20,10 +20,10 @@ const Tag = ({ location, name }) => (
   <StyledLink to={location}>{name}</StyledLink>
 );
 
-Tag.displayName = 'Tag';
+Tag.displayName = "Tag";
 Tag.propTypes = {
   location: PropTypes.string,
-  name: PropTypes.string,
+  name: PropTypes.string
 };
 
 export default Tag;

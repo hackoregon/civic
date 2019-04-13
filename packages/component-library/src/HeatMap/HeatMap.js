@@ -1,10 +1,10 @@
 /* Deprecated or needs refactored to work with Base Map */
 /* eslint-disable */
 
-import React from 'react';
-import mapboxgl from 'mapbox-gl';
-import { css } from 'emotion';
-import { string, number, array, object, oneOfType } from 'prop-types';
+import React from "react";
+import mapboxgl from "mapbox-gl";
+import { css } from "emotion";
+import { string, number, array, object, oneOfType } from "prop-types";
 
 const mapWrapper = css`
   margin: 0;
@@ -28,46 +28,46 @@ class HeatMap extends React.Component {
       center: [this.props.centerLongitude, this.props.centerLatitude],
       minZoom: 8.5,
       zoom: this.props.initialZoom,
-      maxZoom: this.props.maxZoom,
+      maxZoom: this.props.maxZoom
     });
 
-    this.map.on('load', () => {
+    this.map.on("load", () => {
       this.map.addSource(dataId, {
-        type: 'geojson',
-        data: this.props.data,
+        type: "geojson",
+        data: this.props.data
       });
 
       this.map.addLayer(
         {
           id: heatmapId,
-          type: 'heatmap',
+          type: "heatmap",
           source: dataId,
           paint: {
-            'heatmap-weight': this.props.heatMapWeight,
-            'heatmap-intensity': this.props.heatMapIntensity,
-            'heatmap-color': this.props.heatMapColorScale,
-            'heatmap-radius': this.props.heatMapRadius,
-            'heatmap-opacity': this.props.heatMapOpacity,
-          },
+            "heatmap-weight": this.props.heatMapWeight,
+            "heatmap-intensity": this.props.heatMapIntensity,
+            "heatmap-color": this.props.heatMapColorScale,
+            "heatmap-radius": this.props.heatMapRadius,
+            "heatmap-opacity": this.props.heatMapOpacity
+          }
         },
-        'waterway-label'
+        "waterway-label"
       );
 
       this.map.addLayer(
         {
           id: circleId,
-          type: 'circle',
+          type: "circle",
           source: dataId,
           paint: {
-            'circle-radius': this.props.circleRadius,
-            'circle-color': this.props.circleFillColor,
-            'circle-stroke-color': this.props.circleStrokeColor,
-            'circle-stroke-width': this.props.circleStrokeWidth,
-            'circle-opacity': this.props.circleOpacity,
-            'circle-stroke-opacity': this.props.circleStrokeOpacity,
-          },
+            "circle-radius": this.props.circleRadius,
+            "circle-color": this.props.circleFillColor,
+            "circle-stroke-color": this.props.circleStrokeColor,
+            "circle-stroke-width": this.props.circleStrokeWidth,
+            "circle-opacity": this.props.circleOpacity,
+            "circle-stroke-opacity": this.props.circleStrokeOpacity
+          }
         },
-        'waterway-label'
+        "waterway-label"
       );
 
       this.map.addControl(new mapboxgl.NavigationControl());
@@ -90,17 +90,17 @@ class HeatMap extends React.Component {
     if (this.props.circleStrokeColor !== prevProps.circleStrokeColor) {
       this.map.setPaintProperty(
         heatmapId,
-        'heatmap-color',
+        "heatmap-color",
         this.props.heatMapColorScale
       );
       this.map.setPaintProperty(
         circleId,
-        'circle-color',
+        "circle-color",
         this.props.circleFillColor
       );
       this.map.setPaintProperty(
         circleId,
-        'circle-stroke-color',
+        "circle-stroke-color",
         this.props.circleStrokeColor
       );
     }
@@ -129,7 +129,7 @@ HeatMap.propTypes = {
   circleFillColor: string,
   circleStrokeColor: string,
   circleStrokeWidth: number,
-  circleStrokeOpacity: oneOfType([array, number]),
+  circleStrokeOpacity: oneOfType([array, number])
 };
 
 HeatMap.defaultProps = {
@@ -137,7 +137,7 @@ HeatMap.defaultProps = {
   centerLatitude: -122.7066,
   initialZoom: 9,
   maxZoom: 19,
-  mapStyle: 'mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg',
+  mapStyle: "mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg"
 };
 
 export default HeatMap;

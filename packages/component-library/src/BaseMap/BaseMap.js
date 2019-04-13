@@ -1,18 +1,18 @@
 /* TODO: Fix linting errors */
 /* eslint-disable */
 
-import React, { Component } from 'react';
-import MapGL, { NavigationControl } from 'react-map-gl';
-import Dimensions from 'react-dimensions';
-import { css } from 'emotion';
-import PropTypes from 'prop-types';
-import createRef from 'create-react-ref/lib/createRef';
-import Geocoder from 'react-map-gl-geocoder';
-import 'mapbox-gl/dist/mapbox-gl.css';
+import React, { Component } from "react";
+import MapGL, { NavigationControl } from "react-map-gl";
+import Dimensions from "react-dimensions";
+import { css } from "emotion";
+import PropTypes from "prop-types";
+import createRef from "create-react-ref/lib/createRef";
+import Geocoder from "react-map-gl-geocoder";
+import "mapbox-gl/dist/mapbox-gl.css";
 
 const MAPBOX_TOKEN =
-  'pk.eyJ1IjoiaGFja29yZWdvbiIsImEiOiJjamk0MGZhc2cwNDl4M3FsdHAwaG54a3BnIn0.Fq1KA0IUwpeKQlFIoaEn_Q';
-const MAPBOX_STYLE = 'mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg';
+  "pk.eyJ1IjoiaGFja29yZWdvbiIsImEiOiJjamk0MGZhc2cwNDl4M3FsdHAwaG54a3BnIn0.Fq1KA0IUwpeKQlFIoaEn_Q";
+const MAPBOX_STYLE = "mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg";
 
 const mapWrapper = css`
   margin: 0 auto;
@@ -39,12 +39,12 @@ class BaseMap extends Component {
         maxZoom: 16,
         pitch: props.initialPitch || 0,
         bearing: 0,
-        scrollZoom: true,
+        scrollZoom: true
       },
       tooltipInfo: null,
       x: null,
       y: null,
-      mounted: false,
+      mounted: false
     };
     this.onViewportChange = this.onViewportChange.bind(this);
     this.onHover = this.onHover.bind(this);
@@ -61,30 +61,32 @@ class BaseMap extends Component {
       zoom: props.initialZoom,
       pitch: props.initialPitch,
       longitude: props.initialLongitude,
-      latitude: props.initialLatitude,
+      latitude: props.initialLatitude
     };
 
     // Remove all keys that have null/undefined values to keep defaults
-    Object.keys(updatedViewportProps).forEach((key) => {
+    Object.keys(updatedViewportProps).forEach(key => {
       if (updatedViewportProps[key] == null) {
         delete updatedViewportProps[key];
       }
     });
 
-    this.setState({ viewport: { ...this.state.viewport, ...updatedViewportProps } })
+    this.setState({
+      viewport: { ...this.state.viewport, ...updatedViewportProps }
+    });
   }
 
   onHover({ object, x, y }) {
     this.setState({
       tooltipInfo: object,
       x,
-      y,
+      y
     });
   }
 
   onViewportChange(viewport) {
     this.setState({
-      viewport: { ...this.state.viewport, ...viewport },
+      viewport: { ...this.state.viewport, ...viewport }
     });
   }
 
@@ -119,7 +121,7 @@ class BaseMap extends Component {
         tooltipInfo,
         x,
         y,
-        onHover: info => this.onHover(info),
+        onHover: info => this.onHover(info)
       });
     });
 

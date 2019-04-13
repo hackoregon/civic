@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { HOST } from './utils';
+import axios from "axios";
+import { HOST } from "./utils";
 
 const fetchManyAdapter = (
   urls,

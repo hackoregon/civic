@@ -1,8 +1,8 @@
 /* Not currently used, updated and moved to 2018 package */
 /* eslint-disable */
 
-import React from 'react';
-import { css } from 'emotion';
+import React from "react";
+import { css } from "emotion";
 
 const canvasStyles = css`
   position: fixed;
@@ -23,7 +23,7 @@ class CanvasParticles extends React.Component {
       );
     })();
     const { canvas } = this.refs;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     const img = this.refs.image;
     const W = window.innerWidth;
     const H = window.innerHeight;
@@ -35,7 +35,7 @@ class CanvasParticles extends React.Component {
     // const dist;
 
     function paintCanvas() {
-      ctx.fillStyle = 'rgba(255, 255, 255, 1)';
+      ctx.fillStyle = "rgba(255, 255, 255, 1)";
       ctx.fillRect(0, 0, W, H);
     }
 
@@ -57,7 +57,7 @@ class CanvasParticles extends React.Component {
       this.radius = 4;
 
       this.draw = function() {
-        ctx.fillStyle = 'lightgrey';
+        ctx.fillStyle = "lightgrey";
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
 
