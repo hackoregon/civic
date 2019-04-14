@@ -3,8 +3,7 @@ import { storybookStyles } from "../storyStyles.js";
 
 const ResponsiveDesignStyle = () => (
   <div style={storybookStyles.main}>
-    <h1>UX Style Guide</h1>
-    <h2>Responsive Design</h2>
+    <h1>Responsive Design</h1>
     <p>Placeholder for Responsive Design guidelines.</p>
   </div>
 );

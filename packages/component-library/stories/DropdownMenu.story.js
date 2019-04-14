@@ -28,7 +28,7 @@ const demoCode = () => (
 // const propDocs = { inline: true, propTables: [Dropdown] };
 
 export default () =>
-  storiesOf("UI Components/Dropdown List", module)
+  storiesOf("Component Lib|Basic UI Components/Dropdown List", module)
     .addDecorator(checkA11y)
     .addDecorator(story => (
       <div style={storybookStyles.storyGrid}>

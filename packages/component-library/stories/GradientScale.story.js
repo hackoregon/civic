@@ -9,7 +9,7 @@ const displayName = "GradientScale";
 const colorScales = ["default", "thermal", "space", "ocean", "planet", "earth"];
 
 export default () =>
-  storiesOf("Charts/Gradient Scale", module)
+  storiesOf("Component Lib|Charts/Gradient Scale", module)
     .addDecorator(withKnobs)
     .add("Simple usage", () => {
       const domain = array("domain", [50, 90]);

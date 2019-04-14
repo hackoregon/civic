@@ -228,7 +228,7 @@ const heatmapComponent = data => {
 };
 
 export default () =>
-  storiesOf("Maps/Heat Map", module)
+  storiesOf("Component Lib|Maps/Heat Map", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .add("Simple usage", () => {

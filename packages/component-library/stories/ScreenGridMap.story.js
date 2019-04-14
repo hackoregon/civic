@@ -10,7 +10,7 @@ import { DemoJSONLoader } from "../src";
 const displayName = ScreenGridMap.displayName || "ScreenGridMap";
 
 export default () =>
-  storiesOf("Maps/Screen Grid Map", module)
+  storiesOf("Component Lib|Maps/Screen Grid Map", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .add("Simple usage", () => (

@@ -17,6 +17,6 @@ const demoCode = () => {
 };
 
 export default () =>
-  storiesOf("CIVIC Platform Components/PDF", module)
+  storiesOf("Component Lib|CIVIC Platform/PDF", module)
     .addDecorator(withKnobs)
     .add(title, demoCode);

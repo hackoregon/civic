@@ -89,7 +89,7 @@ const demoCode = () => (
 );
 
 export default () =>
-  storiesOf("Charts/Data Table", module).add(
+  storiesOf("Component Lib|Charts/Data Table", module).add(
     title,
     withInfo(`
       Simple data table to display data. Can be sorted by clicking the top of each column.

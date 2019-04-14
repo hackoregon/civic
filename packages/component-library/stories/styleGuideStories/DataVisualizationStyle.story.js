@@ -3,8 +3,7 @@ import { storybookStyles } from "../storyStyles.js";
 
 const DataVisualizationStyle = () => (
   <div style={storybookStyles.main}>
-    <h1>UX Style Guide</h1>
-    <h2>Data Visualization</h2>
+    <h1>Data Visualization</h1>
     <p>Placeholder for Data Visualization style guidelines.</p>
   </div>
 );

@@ -10,7 +10,7 @@ import { DemoJSONLoader } from "../src";
 const displayName = HexOverlay.displayName || "HexOverlay";
 
 export default () =>
-  storiesOf("Maps/Hex Overlay", module)
+  storiesOf("Component Lib|Maps/Hex Overlay", module)
     .addDecorator(checkA11y)
     .addDecorator(withKnobs)
     .add("With tooltip", () => (

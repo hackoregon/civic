@@ -7,7 +7,7 @@ import { Placeholder } from "../src";
 const sampleIssue = 56;
 
 export default () =>
-  storiesOf("CIVIC Platform Components/Placeholder Story", module)
+  storiesOf("Component Lib|CIVIC Platform/Placeholder Story", module)
     .addDecorator(checkA11y)
     .addDecorator(withKnobs)
     .add("Default", () => <Placeholder />)

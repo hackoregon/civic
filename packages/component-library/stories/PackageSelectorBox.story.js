@@ -74,7 +74,7 @@ const PackageSelectorCollection = () => (
 );
 
 export default () =>
-  storiesOf("CIVIC Platform Components/Package Selector Box", module)
+  storiesOf("Component Lib|CIVIC Platform/Package Selector Box", module)
     .add(
       "Basic List of selection Options",
       // 'This is a basic list of selection options for the

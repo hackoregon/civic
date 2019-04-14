@@ -13,6 +13,6 @@ const description = `
 const demoCode = () => <LandingPage>Hello LandingPage</LandingPage>;
 
 export default () =>
-  storiesOf("CIVIC Platform Components/Landing Page", module)
+  storiesOf("Component Lib|CIVIC Platform Components/Landing Page", module)
     .addDecorator(checkA11y)
     .add(title, demoCode);

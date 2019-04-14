@@ -7,26 +7,28 @@ import { Button } from "../src";
 import { storybookStyles } from "./storyStyles.js";
 
 const displayName = Button.displayName || "Button";
-const title = "Simple usage";
+
 const description = `
   This is some basic usage with the button with providing a label to show the text.
   Clicking should trigger an action.`;
 
-const demoCode = () => (
-  <Button onClick={action("clicked")}>Hello Button</Button>
-);
-
-const altDemo = () => <Button onClick={action("clicked")}>😀 😎 👍 💯</Button>;
-
-const altTitle = "With some emoji";
+const simpleButtonLabel = "Hello button";
 
 export default () =>
-  storiesOf("UI Components/Button", module)
+  storiesOf("Component Lib|Basic UI Components/Button", module)
     .addDecorator(checkA11y)
     .addDecorator(story => (
       <div style={storybookStyles.storyGrid}>
         <div style={storybookStyles.storyGridItem}>{story()}</div>
       </div>
     ))
-    .add(title, demoCode)
-    .add(altTitle, altDemo);
+    .add("Simple usage", () => (
+      <Button onClick={action("clicked")}>{simpleButtonLabel}</Button>
+    ))
+    .add("With some emoji", () => (
+      <Button onClick={action("clicked")}>
+        <span role="img" aria-label="So cool">
+          😀 😎 👍 💯
+        </span>
+      </Button>
+    ));

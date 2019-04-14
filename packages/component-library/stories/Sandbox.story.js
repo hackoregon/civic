@@ -387,6 +387,7 @@ class SandboxStory extends React.Component {
 }
 
 export default () =>
-  storiesOf("CIVIC Platform Components/Sandbox", module).add("Sandbox", () => (
-    <SandboxStory />
-  ));
+  storiesOf("Component Lib|CIVIC Platform/Sandbox", module).add(
+    "Sandbox",
+    () => <SandboxStory />
+  );

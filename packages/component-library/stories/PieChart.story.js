@@ -18,7 +18,7 @@ import { colors, getRandomValuesArray, objectRandomizer } from "./shared";
 const loading = () => <PieChart loading />;
 
 export default () =>
-  storiesOf("/Charts/Pie/Donut Visualization", module)
+  storiesOf("Component Lib|Charts/Pie/Donut Visualization", module)
     .addDecorator(withKnobs)
     .add(
       "Basic usage",
