@@ -13,7 +13,7 @@ export const neighborhoodAgesSuccess = actionEmitter(API_SUCCESS);
 export const neighborhoodAgesError = actionEmitter(API_ERROR);
 
 const NEIGHBORHOODS_THROUGH_THE_AGES_API =
-  "http://service.civicpdx.org/neighborhood-development/api/neighborhood_ages?limit=1516&format=json";
+  "https://service.civicpdx.org/neighborhood-development/api/neighborhood_ages?limit=1516&format=json";
 
 export const fetchNeighborhoodAges = apiAdapter(
   NEIGHBORHOODS_THROUGH_THE_AGES_API,

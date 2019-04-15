@@ -46,4 +46,4 @@ export const setSchool = school => {
   };
 };
 
-// http://service.civicpdx.org/neighborhood-development/api/school_demographics?format=json&name=Beverly+Cleary
+// https://service.civicpdx.org/neighborhood-development/api/school_demographics?format=json&name=Beverly+Cleary
