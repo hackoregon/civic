@@ -41,7 +41,7 @@ const App = () => (
     {/* <p className="transition">Preparedness and disaster resiliency go hand-in-hand.</p> */}
     <PullQuote
       quoteText="Does your family have a plan for earthquake preparedness? Here are the steps to help you get started."
-      url="http://civicplatform.org/cards/what-you-can-do-to-prepare-for-an-earthquake"
+      url="https://civicplatform.org/cards/what-you-can-do-to-prepare-for-an-earthquake"
     />
     <WhatYouCanDoToPrepare />
     <p className="transition">

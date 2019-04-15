@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const HOST = "http://service.civicpdx.org/disaster-resilience/";
+const HOST = "https://service.civicpdx.org/disaster-resilience/";
 const echo = a => a;
 
 const apiAdapter = (

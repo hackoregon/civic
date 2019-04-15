@@ -51,5 +51,5 @@ export const setARUCity = (city = "portland") => ({
   selectedCity: city
 });
 
-// http://service.civicpdx.org/housing-affordability/api/harvardjchs/?datatype=change-in-share-of-units-by-real-rent-level-2005-2015-real-gross-rents&datapoint=portland
-// http://service.civicpdx.org/housing-affordability/api/harvardjchs?datatype=change-in-share-of-units-by-real-rent-level-2005-2015-real-gross-rents&datapoint=portland
+// https://service.civicpdx.org/housing-affordability/api/harvardjchs/?datatype=change-in-share-of-units-by-real-rent-level-2005-2015-real-gross-rents&datapoint=portland
+// https://service.civicpdx.org/housing-affordability/api/harvardjchs?datatype=change-in-share-of-units-by-real-rent-level-2005-2015-real-gross-rents&datapoint=portland

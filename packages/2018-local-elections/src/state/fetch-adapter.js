@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const HOST = "http://service.civicpdx.org/local-elections";
+const HOST = "https://service.civicpdx.org/local-elections";
 const echo = a => a;
 
 const apiAdapter = (

@@ -64,7 +64,7 @@ class ConstructionViews extends Component {
           While this page does not currently have the ability to take user input
           for project filters, we hope to implement this functionality soon. The
           APIs, which have full filtering capability, can be accessed directly
-          at http://service.civicpdx.org/transport/
+          at https://service.civicpdx.org/transport/
         </p>
         <strong>
           <p
