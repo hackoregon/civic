@@ -118,7 +118,7 @@ Sandbox.propTypes = {
   styles: PropTypes.string,
   onFoundationClick: PropTypes.func,
   onSlideHover: PropTypes.func,
-  tooltipInfo: PropTypes.array,
+  tooltipInfo: PropTypes.object,
   allSlides: PropTypes.array.isRequired,
   foundationMapProps: PropTypes.object.isRequired
 };

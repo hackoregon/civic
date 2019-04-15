@@ -11,7 +11,7 @@ import DeckGL, {
   ScreenGridLayer
 } from "deck.gl";
 import { css } from "emotion";
-import * as d3 from "d3";
+import { scaleQuantize, scaleOrdinal, scaleThreshold, extent } from "d3";
 
 const crosshair = css`
   cursor: crosshair;
@@ -117,17 +117,15 @@ const CivicSandboxMap = props => {
   );
 
   const createEqualBins = (data, color, getPropValue) => {
-    const scaleQuantize = d3
-      .scaleQuantize()
-      .domain(d3.extent(data, getPropValue))
+    const quantizeScale = scaleQuantize()
+      .domain(extent(data, getPropValue))
       .range(color)
       .nice();
-    return scaleQuantize;
+    return quantizeScale;
   };
 
   const createDiscreteBins = (categories, color) => {
-    const ordinalScale = d3
-      .scaleOrdinal()
+    const ordinalScale = scaleOrdinal()
       .domain(categories)
       .range(color)
       .unknown([0, 0, 0, 0]);
@@ -135,11 +133,10 @@ const CivicSandboxMap = props => {
   };
 
   const createThresholdBins = (categories, color) => {
-    const scaleThreshold = d3
-      .scaleThreshold()
+    const thresholdScale = scaleThreshold()
       .domain(categories)
       .range(color);
-    return scaleThreshold;
+    return thresholdScale;
   };
 
   const createChoroplethMap = (slide, index) => {

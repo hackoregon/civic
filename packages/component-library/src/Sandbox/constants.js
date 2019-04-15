@@ -1,6 +1,6 @@
 /* TODO: Fix linting errors */
 /* eslint-disable */
-import * as d3 from "d3";
+import { scaleThreshold } from "d3";
 
 /* COLOR SCHEME OPTIONS */
 const thermal = [
@@ -14,7 +14,6 @@ const thermal = [
   [189, 0, 38, 255],
   [128, 0, 38, 255]
 ];
-
 const planet = [
   [247, 244, 249, 255],
   [231, 225, 239, 255],
@@ -650,8 +649,7 @@ const poiGetIconColor = f =>
     : [0, 0, 0, 255];
 
 // Slide 015 - Change in Ridership by Route
-const divergingScale = d3
-  .scaleThreshold()
+const divergingScale = scaleThreshold()
   .domain([-100, -75, -50, -25, 0, 25, 50, 75, 100])
   .range(purpleGreenDivergent10);
 
