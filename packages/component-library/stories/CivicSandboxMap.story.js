@@ -61,7 +61,7 @@ export default () =>
               getLineColor: f => [0, 0, 0, 255],
               getLineWidth: f => 0.1,
               stroked: true,
-              scaleType: 'equal',
+              scaleType: "equal",
               color: colorSchemeArray,
               getPropValue: f =>
                 parseFloat(f.properties.pc_household_with_individuals_65_ovr),
@@ -83,7 +83,7 @@ export default () =>
               getLineColor: f => [0, 0, 0, 255],
               getLineWidth: f => 0.1,
               stroked: true,
-              scaleType: 'equal',
+              scaleType: "equal",
               color: colorSchemeArray,
               getPropValue: f =>
                 parseFloat(f.properties.pc_household_with_children_under_18),

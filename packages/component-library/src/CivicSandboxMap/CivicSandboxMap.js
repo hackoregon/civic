@@ -3,7 +3,13 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import DeckGL, { IconLayer, PathLayer, PolygonLayer, ScatterplotLayer, ScreenGridLayer } from "deck.gl";
+import DeckGL, {
+  IconLayer,
+  PathLayer,
+  PolygonLayer,
+  ScatterplotLayer,
+  ScreenGridLayer
+} from "deck.gl";
 import { css } from "emotion";
 import { scaleQuantize, scaleOrdinal, scaleThreshold, extent } from "d3";
 

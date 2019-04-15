@@ -4,7 +4,9 @@ const echo = a => a;
 
 const apiAdapter = (url, { start, success, failure }) => () => dispatch => {
   dispatch(start());
-  const secureURL = url.includes("https") ? url : `${url.slice(0,4)}s${url.slice(4)}`;
+  const secureURL = url.includes("https")
+    ? url
+    : `${url.slice(0, 4)}s${url.slice(4)}`;
   return axios
     .get(secureURL)
     .then(res => {
@@ -24,7 +26,9 @@ export const fetchByDateAdapter = (
 ) => () => dispatch => {
   dispatch(start());
   const url = slide.endpoint;
-  const secureURL = url.includes("https") ? url : `${url.slice(0,4)}s${url.slice(4)}`;
+  const secureURL = url.includes("https")
+    ? url
+    : `${url.slice(0, 4)}s${url.slice(4)}`;
   return axios
     .get(`${secureURL}${date}`)
     .then(res => {
@@ -49,7 +53,9 @@ export const fetchAllSlidesAdapter = (
   dispatch(start());
   const fullUrls = slides.map(slide => {
     const url = slide.endpoint;
-    const secureURL = url.includes("https") ? url : `${url.slice(0,4)}s${url.slice(4)}`;
+    const secureURL = url.includes("https")
+      ? url
+      : `${url.slice(0, 4)}s${url.slice(4)}`;
     return axios.get(secureURL);
   });
 

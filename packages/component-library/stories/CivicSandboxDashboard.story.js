@@ -19,12 +19,12 @@ const displayName =
 
 const dataURLs = [
   "https://service.civicpdx.org/neighborhood-development/sandbox/foundations/population/?format=json",
-  "https://service.civicpdx.org/neighborhood-development/sandbox/slides/retailgrocers/?format=json",
+  "https://service.civicpdx.org/neighborhood-development/sandbox/slides/retailgrocers/?format=json"
 ];
 
 const dashboardComponent = data => {
   if (data === null) return null;
-  const [ populationData, groceryData ] = data;
+  const [populationData, groceryData] = data;
 
   const planetColorScheme = [
     [247, 244, 249, 255],
@@ -48,13 +48,13 @@ const dashboardComponent = data => {
     getLineColor: f => [0, 0, 0, 255],
     getLineWidth: f => 0.5,
     stroked: true,
-    scaleType: 'equal',
+    scaleType: "equal",
     color: planetColorScheme,
     getPropValue: f => parseFloat(f.properties.total_population),
-    propName: 'total_population',
+    propName: "total_population",
     filled: true,
     autoHighlight: true,
-    highlightColor: [200, 200, 200, 150],
+    highlightColor: [200, 200, 200, 150]
   };
 
   const groceryBoundary = {
