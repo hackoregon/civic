@@ -41,12 +41,13 @@
     "eslint-check": "eslint --print-config . | eslint-config-prettier-check"
   },
   "husky": {
-    "hooks": {}
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
-    "*.{js,jsx}": [
+    "*.{js,jsx,json}": [
       "prettier --write",
-      "eslint --fix",
       "git add"
     ],
     "*.{css,md}": [
