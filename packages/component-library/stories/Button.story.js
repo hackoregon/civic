@@ -3,6 +3,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { checkA11y } from "@storybook/addon-a11y";
+import { withKnobs, text } from "@storybook/addon-knobs";
 import { Button } from "../src";
 import { storybookStyles } from "./storyStyles.js";
 
@@ -16,6 +17,7 @@ const simpleButtonLabel = "Hello button";
 
 export default () =>
   storiesOf("Component Lib|Basic UI Components/Button", module)
+    .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .addDecorator(story => (
       <div style={storybookStyles.storyGrid}>

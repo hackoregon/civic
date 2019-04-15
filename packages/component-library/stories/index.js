@@ -69,6 +69,7 @@ import "../assets/global.styles.css";
 
 storiesOf("Welcome|About Us", module)
   .addDecorator(checkA11y)
+  .addParameters({ options: { showPanel: false } })
   .add("Introduction", () => <Introduction />)
   .add("The CIVIC Brand", () => <TheBrandStyle />)
   .add("The CIVIC Platform", () => <ThePlatformStyle />);
@@ -76,6 +77,7 @@ storiesOf("Welcome|About Us", module)
 // Branding
 storiesOf("Design|Brand", module)
   .addDecorator(checkA11y)
+  .addParameters({ options: { showPanel: false } })
   .add("Logos", () => <LogosStyle />)
   .add("Color Theme", () => <ColorThemeStyle />)
   .add("Typography", () => (
@@ -90,6 +92,7 @@ storiesOf("Design|Brand", module)
 // UX Style Guide
 storiesOf("Design|UX Style Guide", module)
   .addDecorator(checkA11y)
+  .addParameters({ options: { showPanel: false } })
   .add("Accessibility", () => <AccessibilityGuidelinesStyle />)
   .add("Story Cards", () => <CardsStyle />)
   .add("Data Visualization", () => <DataVisualizationStyle />)
@@ -103,6 +106,7 @@ storiesOf("Design|UX Style Guide", module)
 // Basic UI components
 storiesOf("Component Lib|Basic UI Components", module)
   .addDecorator(checkA11y)
+  .addParameters({ options: { showPanel: false } })
   .add("Basic Components Style Guide", () => <UIComponentsStyle />);
 buttonStory();
 dropdownStory();
@@ -111,6 +115,7 @@ sliderStory();
 // charts
 storiesOf("Component Lib|Charts", module)
   .addDecorator(checkA11y)
+  .addParameters({ options: { showPanel: false } })
   .add("Charts Style Guide", () => <ChartsStyle />);
 BarChartStory();
 dataTable();
@@ -124,6 +129,7 @@ stackedAreaChart();
 // maps
 storiesOf("Component Lib|Maps", module)
   .addDecorator(checkA11y)
+  .addParameters({ options: { showPanel: false } })
   .add("Maps Style Guide", () => <MapsStyle />);
 baseMapStory();
 boundaryMapStory();
@@ -139,6 +145,7 @@ screenGridMapStory();
 // Civic platform components and page layout
 storiesOf("Component Lib|CIVIC Platform", module)
   .addDecorator(checkA11y)
+  .addParameters({ options: { showPanel: false } })
   .add("Platform Components Style Guide", () => <CivicPlatformStyle />);
 civicCardStackStory();
 civicSandboxDashboardStory();
