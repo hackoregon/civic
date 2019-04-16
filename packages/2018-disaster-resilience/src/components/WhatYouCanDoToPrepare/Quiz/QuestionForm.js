@@ -1,3 +1,5 @@
+/* TODO: Ensure accessibility */
+/* eslint-disable */
 import PropTypes from "prop-types";
 import React from "react";
 import { Field, reduxForm } from "redux-form";

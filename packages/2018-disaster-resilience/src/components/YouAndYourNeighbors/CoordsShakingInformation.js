@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import { ChartTitle } from "@hackoregon/component-library";
 
@@ -47,5 +48,19 @@ const CoordsShakingInformation = ({ coordsProperties }) => (
     />
   </div>
 );
+
+CoordsShakingInformation.propTypes = {
+  coordsProperties: PropTypes.shape({
+    pgv_site_mean_mmi: PropTypes.number,
+    pgv_site_min_mmi: PropTypes.number,
+    pgv_site_max_mmi: PropTypes.number,
+    pgd_landslide_wet_mean: PropTypes.number,
+    pgd_landslide_wet_min: PropTypes.number,
+    pgd_landslide_wet_max: PropTypes.number,
+    pgd_liquefaction_wet_mean: PropTypes.number,
+    pgd_liquefaction_wet_min: PropTypes.number,
+    pgd_liquefaction_wet_max: PropTypes.number
+  })
+};
 
 export default CoordsShakingInformation;

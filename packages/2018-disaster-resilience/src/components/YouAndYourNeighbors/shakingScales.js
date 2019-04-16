@@ -3,7 +3,7 @@ function findIndexInScale(arr, target) {
   if (!arr || arr.length === 0) return null;
   if (arr.length === 1) return 0;
 
-  for (let i = 1; i < arr.length; i++) {
+  for (let i = 1; i < arr.length; i += 1) {
     // As soon as a number bigger than or equal to target is found, return the current
     if (arr[i] >= target) {
       return i;

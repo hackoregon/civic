@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { css } from "emotion";
 
 import { CivicStoryCard, Scatterplot } from "@hackoregon/component-library";
 
@@ -16,7 +15,8 @@ import {
 
 export class ProactivePlanning extends React.Component {
   componentDidMount() {
-    this.props.init();
+    const { init } = this.props;
+    init();
   }
 
   render() {
@@ -54,7 +54,7 @@ ProactivePlanning.displayName = "proactivePlanning";
 ProactivePlanning.propTypes = {
   init: PropTypes.func,
   isLoading: PropTypes.bool,
-  error: PropTypes.object,
+  error: PropTypes.shape({}),
   proactivePlanning: PropTypes.arrayOf(PropTypes.object)
 };
 

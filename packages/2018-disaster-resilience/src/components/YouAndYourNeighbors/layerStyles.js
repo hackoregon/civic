@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 // Slide 016 - points of interest - from packages/civic-sandbox/src/state/layerStyles.js
 export const poiIconMapping = {
   School: {

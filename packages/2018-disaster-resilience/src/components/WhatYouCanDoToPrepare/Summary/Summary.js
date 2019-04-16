@@ -8,12 +8,9 @@ const summaryFormat = {
 };
 
 class Summary extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   getRecommendations() {
-    const resultsCopy = this.props.quizResults;
+    const quizResults = this.props;
+    const resultsCopy = quizResults;
     const noAnswers = Object.keys(resultsCopy)
       .filter(quizNum => resultsCopy[quizNum] === "no")
       .slice(0, 3);
@@ -21,19 +18,23 @@ class Summary extends Component {
   }
 
   quizResult() {
-    const quizzes = Object.keys(this.props.quizResults);
+    const quizResults = this.props;
+    const quizzes = Object.keys(quizResults);
     return quizzes.reduce((score, quiz) => {
-      if (this.props.quizResults[quiz] === "yes") {
-        score += 1;
+      let currentScore = score;
+      if (quizResults[quiz] === "yes") {
+        currentScore += 1;
       }
-      return score;
+      return currentScore;
     }, 0);
   }
 
+  // eslint-disable-next-line class-methods-use-this
   downloadPDF(e) {
     e.preventDefault();
     e.stopPropagation();
 
+    // eslint-disable-next-line no-console
     console.log("Downloading pdf!!!");
   }
 
@@ -56,11 +57,7 @@ class Summary extends Component {
         </div>
 
         <div style={summaryFormat}>
-          <a href="" onClick={e => this.downloadPDF(e)}>
-            Download
-          </a>{" "}
-          a full list of recommendations in PDF format and keep it close at
-          hand. For more information about disaster preparedness and building
+          For more information about disaster preparedness and building
           neighborhood resilence see our resource page.
         </div>
 
@@ -79,7 +76,7 @@ class Summary extends Component {
           Ted Wheeler <br />
           Amanda Fritz <br />
           Chloe Eudaly <br />
-          Dan Saltzman
+          Jo Ann Hardesty
         </div>
 
         <div style={summaryFormat}>
@@ -93,6 +90,7 @@ class Summary extends Component {
 }
 
 Summary.propTypes = {
+  // eslint-disable-next-line react/no-unused-prop-types
   quizResults: PropTypes.objectOf(PropTypes.string)
 };
 
