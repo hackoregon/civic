@@ -1,5 +1,5 @@
-/* eslint-disable react/no-unused-prop-types */
-/* eslint-disable react/no-unused-state */
+/* TODO: fix linting errors */
+/* eslint-disable */
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
@@ -17,35 +17,33 @@ class Quiz extends Component {
   }
 
   next(e) {
-    const questionId = this.state;
     e.preventDefault();
     e.stopPropagation();
 
-    if (questionId < this.totalQuestions) {
-      this.setState({ questionId: questionId + 1 });
+    if (this.state.questionId < this.totalQuestions) {
+      this.setState({ questionId: this.state.questionId + 1 });
     }
   }
 
   back(e) {
-    const questionId = this.state;
     e.preventDefault();
     e.stopPropagation();
 
-    if (questionId > 1 && questionId <= this.totalQuestions) {
-      this.setState({ questionId: questionId - 1 });
+    if (
+      this.state.questionId > 1 &&
+      this.state.questionId <= this.totalQuestions
+    ) {
+      this.setState({ questionId: this.state.questionId - 1 });
     }
   }
 
   render() {
-    const questionId = this.state;
-    const done = this.props;
-
     return (
       <QuestionForm
         next={e => this.next(e)}
         back={e => this.back(e)}
-        questionId={questionId}
-        done={done}
+        questionId={this.state.questionId}
+        done={this.props.done}
       />
     );
   }

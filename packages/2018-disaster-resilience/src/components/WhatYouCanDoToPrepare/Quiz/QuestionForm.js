@@ -1,4 +1,4 @@
-/* TODO: Ensure accessibility */
+/* TODO: fix linting errors */
 /* eslint-disable */
 import PropTypes from "prop-types";
 import React from "react";
