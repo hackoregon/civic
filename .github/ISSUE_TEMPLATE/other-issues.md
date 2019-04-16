@@ -1,5 +1,5 @@
 ---
-name: Other Issues
+name: Other Issues 🤷‍♀️
 about: For all other issues
 title: ""
 labels: ""

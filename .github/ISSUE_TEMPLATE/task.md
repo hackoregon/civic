@@ -1,5 +1,5 @@
 ---
-name: Task
+name: Task 🧹
 about: Something that needs to get done, so other things can be done
 title: ""
 labels: ""
