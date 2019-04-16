@@ -1,8 +1,8 @@
 ---
 name: Story Card Request
 about: For Hack Oregon project teams
-title: "[CARD] Your Title Here"
-labels: card
+title: '[CARD] Your Title Here'
+labels: 'type:story-card'
 assignees: ''
 
 ---
