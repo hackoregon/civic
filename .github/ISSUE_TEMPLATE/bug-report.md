@@ -1,8 +1,8 @@
 ---
 name: Bug Report 🦟
 about: Something isn't working as expected? Here is the right place to report.
-title: ''
-labels: 'bug'
+title: ""
+labels: "bug"
 ---
 
 <!--
@@ -29,4 +29,4 @@ What happened.
 
 ### Environment
 
-Where are you seeing the error?
+Where are you seeing the error? (Environment details)

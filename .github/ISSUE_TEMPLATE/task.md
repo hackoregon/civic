@@ -1,8 +1,8 @@
 ---
 name: Task
 about: Something that needs to get done, so other things can be done
-title: ''
-labels: ''
+title: ""
+labels: ""
 ---
 
 <!--
@@ -12,10 +12,13 @@ labels: ''
 -->
 
 ## What
+
 What needs to be done?
 
 ### Why
-Why does it need to be done? Connected issues?
+
+Why does it need to be done? (Include links to related issues)
 
 ### When
+
 When does this need to be done?
