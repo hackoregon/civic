@@ -14,6 +14,6 @@ export const spaceEncode = str =>
     .toLowerCase()
     .replace(/\s+/g, "+");
 
-export const HOST = "http://service.civicpdx.org/housing-affordability";
+export const HOST = "https://service.civicpdx.org/housing-affordability";
 
 export const echo = a => a;

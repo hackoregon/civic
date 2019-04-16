@@ -87,21 +87,16 @@ class CivicDashboard extends React.Component {
     this.state = {
       show: "viz"
     };
-
     this.showInfo = this.showInfo.bind(this);
     this.showViz = this.showViz.bind(this);
   }
 
   showInfo() {
-    this.setState({
-      show: "info"
-    });
+    this.setState({ show: "info" });
   }
 
   showViz() {
-    this.setState({
-      show: "viz"
-    });
+    this.setState({ show: "viz" });
   }
 
   render() {

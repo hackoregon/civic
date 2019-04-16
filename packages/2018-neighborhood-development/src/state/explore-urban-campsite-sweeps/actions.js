@@ -12,7 +12,7 @@ export const exploreUrbanCampsiteSweepsSuccess = actionEmitter(API_SUCCESS);
 export const exploreUrbanCampsiteSweepsError = actionEmitter(API_ERROR);
 
 const EXPLORE_URBAN_CAMPSITE_SWEEPS_API =
-  "http://service.civicpdx.org/neighborhood-development/api/camp_sweeps?limit=3000&format=json";
+  "https://service.civicpdx.org/neighborhood-development/api/camp_sweeps?limit=3000&format=json";
 
 export const fetchCampsiteSweeps = apiAdapter(
   EXPLORE_URBAN_CAMPSITE_SWEEPS_API,

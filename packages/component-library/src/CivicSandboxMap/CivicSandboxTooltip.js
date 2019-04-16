@@ -53,18 +53,16 @@ const MapTooltip = props => {
 };
 
 MapTooltip.propTypes = {
-  tooltipData: objectOf(
-    shape({
-      x: number,
-      y: number,
-      content: arrayOf(
-        shape({
-          name: string,
-          value: oneOfType([number, string])
-        })
-      )
-    })
-  )
+  tooltipData: shape({
+    x: number,
+    y: number,
+    content: arrayOf(
+      shape({
+        name: string,
+        value: oneOfType([number, string])
+      })
+    )
+  })
 };
 
 export default MapTooltip;

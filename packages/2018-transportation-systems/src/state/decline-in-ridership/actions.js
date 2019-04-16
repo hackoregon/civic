@@ -10,7 +10,7 @@ export const ridershipOverTimeSuccess = actionEmitter(API_SUCCESS);
 export const ridershipOverTimeError = actionEmitter(API_ERROR);
 
 const DECLINE_IN_RIDERSHIP_API =
-  "http://service.civicpdx.org/transportation-systems/passenger-census/system/annual/averages/?format=json";
+  "https://service.civicpdx.org/transportation-systems/passenger-census/system/annual/averages/?format=json";
 
 export const fetchRidershipOverTime = apiAdapter(DECLINE_IN_RIDERSHIP_API, {
   start: ridershipOverTimeStart,
