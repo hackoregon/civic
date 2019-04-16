@@ -4,8 +4,8 @@ import { storiesOf } from "@storybook/react";
 import { withKnobs, number, select, boolean } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 import { checkA11y } from "@storybook/addon-a11y";
-import { BaseMap, PathMap, MapTooltip, DemoJSONLoader } from "../src";
 import { scaleThreshold } from "d3";
+import { BaseMap, PathMap, MapTooltip, DemoJSONLoader } from "../src";
 
 const optionsStyle = {
   "Hack Oregon Light": "mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg",

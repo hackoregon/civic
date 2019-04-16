@@ -48,7 +48,8 @@ ScreenGridMap.propTypes = {
   cellSizePixels: PropTypes.number,
   autoHighlight: PropTypes.bool,
   onLayerClick: PropTypes.func,
-  visible: PropTypes.bool
+  visible: PropTypes.bool,
+  gpuAggregation: PropTypes.bool
 };
 
 ScreenGridMap.defaultProps = {

@@ -12,7 +12,6 @@ import {
   DemoJSONLoader
 } from "../src";
 import { wallOfText } from "./shared";
-import { DemoJSONLoader } from "../src";
 
 const dashboardDescription = css`
   padding: 0 1% 0 5%;

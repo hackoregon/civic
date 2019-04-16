@@ -46,21 +46,12 @@ const tickNumsOrdinal = css(`
   font-size: 14px;
 `);
 
-const createEqualBins = (data, color, getPropValue) => {
-  const scale = d3
-    .scaleQuantize()
-    .domain(d3.extent(data.slide_data.features, getPropValue))
-    .range(color)
-    .nice();
-  return scale;
-};
-
 const SandboxMapLegend = props => {
   const { data, mapProps } = props;
 
-  const createEqualBins = (data, color, getPropValue) => {
+  const createEqualBins = (slide, color, getPropValue) => {
     const scale = scaleQuantize()
-      .domain(extent(data.slide_data.features, getPropValue))
+      .domain(extent(slide.slide_data.features, getPropValue))
       .range(color)
       .nice();
     return scale;
