@@ -17,7 +17,7 @@ const requestStart = type => actionEmitter(`${type}/START`);
 const requestSuccess = type => actionEmitter(`${type}/SUCCESS`);
 const requestError = type => actionEmitter(`${type}/ERROR`);
 
-const API_BASE = "http://service.civicpdx.org/local-elections/";
+const API_BASE = "https://service.civicpdx.org/local-elections/";
 
 const endpoint = type => {
   const endpoints = {

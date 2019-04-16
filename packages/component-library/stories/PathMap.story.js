@@ -4,8 +4,8 @@ import { storiesOf } from "@storybook/react";
 import { withKnobs, number, select, boolean } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 import { checkA11y } from "@storybook/addon-a11y";
-import * as d3 from "d3";
 import { BaseMap, PathMap, MapTooltip, DemoJSONLoader } from "../src";
+import { scaleThreshold } from "d3";
 
 const optionsStyle = {
   "Hack Oregon Light": "mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg",
@@ -58,8 +58,7 @@ const demoMap = () => (
       );
       const colors = JSON.parse(colorScheme);
 
-      const divergingScale = d3
-        .scaleThreshold()
+      const divergingScale = scaleThreshold()
         .domain([-100, -75, -50, -25, 0, 25, 50, 75, 100])
         .range(colors);
 
@@ -117,8 +116,7 @@ const tooltipMap = () => (
       );
       const colors = JSON.parse(colorScheme);
 
-      const divergingScale = d3
-        .scaleThreshold()
+      const divergingScale = scaleThreshold()
         .domain([-100, -75, -50, -25, 0, 25, 50, 75, 100])
         .range(colors);
 

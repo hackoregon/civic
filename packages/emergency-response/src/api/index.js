@@ -1,6 +1,6 @@
 import { promiseToGet } from "./utils";
 
-const ROOT_URL = "http://service.civicpdx.org/emergency";
+const ROOT_URL = "https://service.civicpdx.org/emergency";
 
 // without id: This viewset lists the agencies that respond to emergency incidents within Portland.
 // with id: This viewset retrievies a specific agency.

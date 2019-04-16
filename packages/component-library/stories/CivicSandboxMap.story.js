@@ -59,9 +59,10 @@ export default () =>
               getLineColor: () => [0, 0, 0, 255],
               getLineWidth: () => 0.1,
               stroked: true,
+              scaleType: "equal",
               color: colorSchemeArray,
               getPropValue: f =>
-                f.properties.pc_household_with_individuals_65_ovr,
+                parseFloat(f.properties.pc_household_with_individuals_65_ovr),
               propName: "pc_household_with_individuals_65_ovr",
               filled: true,
               onLayerClick: info =>
@@ -80,9 +81,10 @@ export default () =>
               getLineColor: () => [0, 0, 0, 255],
               getLineWidth: () => 0.1,
               stroked: true,
+              scaleType: "equal",
               color: colorSchemeArray,
               getPropValue: f =>
-                f.properties.pc_household_with_children_under_18,
+                parseFloat(f.properties.pc_household_with_children_under_18),
               propName: "pc_household_with_children_under_18",
               filled: true,
               onLayerClick: info => console.log(info, "\n", info.object),

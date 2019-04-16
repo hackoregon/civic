@@ -1,7 +1,7 @@
 import axios from "axios";
 import { sentence } from "change-case";
 
-const BASE_URL = "http://service.civicpdx.org/homeless";
+const BASE_URL = "https://service.civicpdx.org/homeless";
 
 export const homelessGet = endpoint =>
   axios

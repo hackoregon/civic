@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import React from "react";
 import PropTypes from "prop-types";
-import * as d3 from "d3";
+import { scaleQuantize, extent, format } from "d3";
 import { css } from "emotion";
 import civicFormat from "../utils/civicFormat";
 
@@ -28,14 +28,22 @@ const tickNums = css(`
   position: absolute;
   bottom: -20px;
   right: 0;
-  font-size: 15px;
+  font-size: 14px;
 `);
 
 const tickNumsThreshold = css(`
   position: absolute;
   bottom: -20px;
   right: -7px;
-  font-size: 15px;
+  font-size: 14px;
+`);
+
+const tickNumsOrdinal = css(`
+  position: absolute;
+  bottom: -20px;
+  right: unset;
+  left: 0;
+  font-size: 14px;
 `);
 
 const createEqualBins = (data, color, getPropValue) => {
@@ -49,6 +57,14 @@ const createEqualBins = (data, color, getPropValue) => {
 
 const SandboxMapLegend = props => {
   const { data, mapProps } = props;
+
+  const createEqualBins = (data, color, getPropValue) => {
+    const scale = scaleQuantize()
+      .domain(extent(data.slide_data.features, getPropValue))
+      .range(color)
+      .nice();
+    return scale;
+  };
 
   const colorScale =
     mapProps.scaleType === "ordinal" || mapProps.scaleType === "threshold"
@@ -76,8 +92,8 @@ const SandboxMapLegend = props => {
       ? bins
       : bins.reduce((a, c) => (c[1] ? [...a, c[1]] : [...a, ""]), []);
 
-  const thousandsFormat = d3.format(".3s");
-  const percentFormat = d3.format(".1%");
+  const thousandsFormat = format(".3s");
+  const percentFormat = format(".1%");
 
   const ticksFormatted = ticks.map(d => {
     return d === ""
@@ -98,7 +114,12 @@ const SandboxMapLegend = props => {
   });
 
   const tickStyle =
-    mapProps.scaleType === "threshold" ? tickNumsThreshold : tickNums;
+    mapProps.scaleType === "threshold"
+      ? tickNumsThreshold
+      : mapProps.scaleType === "ordinal"
+      ? tickNumsOrdinal
+      : tickNums;
+
   const legend = mapColorsArr.map((d, i) => {
     return (
       <div
