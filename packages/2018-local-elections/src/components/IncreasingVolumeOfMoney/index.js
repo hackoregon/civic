@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import { connect } from "react-redux";
-import { css } from "emotion";
 
 import "@hackoregon/component-library/assets/vendor/react-select.min.css";
 
@@ -37,6 +37,7 @@ const raceTypes = RACE_TYPES.map(r => ({ value: r, label: r }));
 
 export class IncreasingVolumeOfMoney extends React.Component {
   componentDidMount() {
+    // eslint-disable-next-line react/destructuring-assignment
     this.props.fetchAllRaces();
   }
 
@@ -45,7 +46,9 @@ export class IncreasingVolumeOfMoney extends React.Component {
       isError,
       selectedRace,
       allRacesData,
+      // eslint-disable-next-line no-shadow
       setRace,
+      // eslint-disable-next-line no-shadow
       isAnyLoading,
       selectedRaceData
     } = this.props;
