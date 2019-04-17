@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import * as actions from "./actions";
 import * as selectors from "./selectors";
 import reducer from "./index";
