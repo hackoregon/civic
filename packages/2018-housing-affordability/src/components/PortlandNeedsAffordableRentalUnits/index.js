@@ -1,9 +1,8 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import { connect } from "react-redux";
-import { loader, error, gradientLabel, emphasis } from "../css-utils";
 
 import "@hackoregon/component-library/assets/vendor/react-select.min.css";
-
 import {
   Dropdown,
   CivicStoryCard,
@@ -13,6 +12,7 @@ import {
   GradientScale
 } from "@hackoregon/component-library";
 
+import { loader, error, gradientLabel, emphasis } from "../css-utils";
 import {
   fetchAllRentalCrisisCities,
   fetchRentalCrisisCity,
@@ -29,8 +29,9 @@ import {
 
 export class PortlandNeedsAffordableRentalUnits extends React.Component {
   componentDidMount() {
-    this.props.fetchAllCities();
-    this.props.setCity();
+    const { fetchAllCities, setCity } = this.props;
+    fetchAllCities();
+    setCity();
   }
 
   render() {

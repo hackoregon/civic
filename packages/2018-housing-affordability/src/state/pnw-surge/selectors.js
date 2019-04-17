@@ -55,6 +55,7 @@ export const getChartData = createSelector(
       });
     });
 
+    // eslint-disable-next-line consistent-return
     return data;
   }
 );

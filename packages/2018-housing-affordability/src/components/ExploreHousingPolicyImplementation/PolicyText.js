@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { css } from "emotion";
 import SimpleCircle from "./SimpleCircle";
 
@@ -30,7 +31,13 @@ const legendScale = [6, 8, 9];
 
 function PolicyText({ onClick, data, selected }) {
   return (
-    <div className={policyContainer} onClick={onClick}>
+    <div
+      className={policyContainer}
+      onClick={onClick}
+      onKeyPress={onClick}
+      role="button"
+      tabIndex={0}
+    >
       <div className={policyCircle}>
         <SimpleCircle
           selected={selected}
@@ -65,5 +72,11 @@ function PolicyText({ onClick, data, selected }) {
     </div>
   );
 }
+
+PolicyText.propTypes = {
+  onClick: PropTypes.func,
+  data: PropTypes.shape({}),
+  selected: PropTypes.bool
+};
 
 export default PolicyText;

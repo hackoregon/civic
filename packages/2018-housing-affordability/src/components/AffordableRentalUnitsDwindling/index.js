@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import { connect } from "react-redux";
 
@@ -43,13 +44,13 @@ const capitalize = str =>
 
 export class AffordableRentalUnitsDwindling extends React.Component {
   componentDidMount() {
-    this.props.fetchAllCities();
-    this.props.setCity();
+    const { fetchAllCities, setCity } = this.props;
+    fetchAllCities();
+    setCity();
   }
 
   render() {
     const {
-      isLoadingAllCities,
       isLoading,
       isError,
       selectedCity,
