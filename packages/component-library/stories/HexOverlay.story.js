@@ -16,7 +16,7 @@ export default () =>
     .add("With tooltip", () => (
       <DemoJSONLoader
         urls={[
-          "http://service.civicpdx.org/neighborhood-development/sandbox/slides/bikeparking/"
+          "https://service.civicpdx.org/neighborhood-development/sandbox/slides/bikeparking/"
         ]}
       >
         {data => {
