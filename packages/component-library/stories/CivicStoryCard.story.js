@@ -114,7 +114,7 @@ export default () =>
       <Container>
         <CivicStoryCard
           title="Campsite Reports & income levels of a community"
-          source="http://www.hackoregon.org"
+          source="https://www.hackoregon.org"
         >
           <p className="Description">{wallOfText}</p>
         </CivicStoryCard>
