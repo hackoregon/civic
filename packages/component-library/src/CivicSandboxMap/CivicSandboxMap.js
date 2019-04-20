@@ -1,8 +1,7 @@
 /* TODO: Fix linting errors */
 /* eslint-disable */
-
 import React from "react";
-import PropTypes from "prop-types";
+import { arrayOf, shape, func, node, number } from "prop-types";
 import DeckGL, {
   IconLayer,
   PathLayer,
@@ -18,7 +17,14 @@ const crosshair = css`
 `;
 
 const CivicSandboxMap = props => {
-  const { viewport, mapLayers, children, onClick, onHoverSlide } = props;
+  const {
+    viewport,
+    mapLayers,
+    children,
+    onClick,
+    onHoverSlide,
+    selectedFoundationDatum
+  } = props;
 
   const createPathMap = (slide, index) => (
     <PathLayer
@@ -140,10 +146,11 @@ const CivicSandboxMap = props => {
   };
 
   const createChoroplethMap = (slide, index) => {
-    const scale =
-      slide.data.scaleType === "ordinal"
+    const scaleType = slide.data.scaleType;
+    const colorScale =
+      scaleType === "ordinal"
         ? createDiscreteBins(slide.data.categories, slide.data.color)
-        : slide.data.scaleType === "threshold"
+        : scaleType === "threshold"
         ? createThresholdBins(slide.data.categories, slide.data.color)
         : createEqualBins(
             slide.data.data,
@@ -156,47 +163,64 @@ const CivicSandboxMap = props => {
         slide.data.scaleType === "ordinal"
           ? f.properties[slide.data.propName]
           : parseFloat(f.properties[slide.data.propName]);
-      return scale(value) ? scale(value) : [0, 0, 0, 0];
+      return colorScale(value) ? colorScale(value) : [0, 0, 0, 55];
+    };
+
+    const getLineColor = f => {
+      const [selectedFeature] = selectedFoundationDatum;
+      const id = selectedFeature ? selectedFeature.id : null;
+      return f.id === id ? [255, 255, 0, 255] : [112, 122, 122, 155];
+    };
+
+    const getLineWidth = f => {
+      const [selectedFeature] = selectedFoundationDatum;
+      const id = selectedFeature ? selectedFeature.id : null;
+      return f.id === id ? 100 : 1;
     };
 
     return (
       <PolygonLayer
         key={index}
         id={slide.data.id}
-        pickable={slide.data.pickable}
+        pickable={true}
         data={slide.data.data}
-        opacity={slide.data.opacity}
-        getPolygon={slide.data.getPolygon}
-        getLineColor={slide.data.getLineColor}
-        getLineWidth={slide.data.getLineWidth}
+        opacity={slide.data.opacity || 0.9}
+        getPolygon={f => f.geometry.coordinates}
+        getLineColor={slide.data.getLineColor || getLineColor}
+        getLineWidth={slide.data.getLineWidth || getLineWidth}
         lineWidthMinPixels={1}
-        stroked={slide.data.stroked}
-        getFillColor={getFillColor}
-        filled={slide.data.filled}
+        stroked={true}
+        getFillColor={slide.data.getFillColor || getFillColor}
+        filled={true}
         onClick={onClick || slide.data.onLayerClick}
-        autoHighlight={slide.data.autoHighlight}
-        highlightColor={slide.data.highlightColor}
+        autoHighlight={true}
+        highlightColor={slide.data.highlightColor || [255, 255, 0, 55]}
         parameters={{ depthTest: false }}
         updateTriggers={
-          slide.data.updateTriggers || { instancePickingColors: getFillColor }
+          slide.data.updateTriggers || {
+            getLineColor: selectedFoundationDatum,
+            getLineWidth: selectedFoundationDatum
+          }
         }
       />
     );
   };
 
   const renderMaps = mapLayers.map((layer, index) => {
-    return layer.data.mapType === "PathMap"
+    const mapType = layer.data.mapType;
+    return mapType === "PathMap"
       ? createPathMap(layer, index)
-      : layer.data.mapType === "ScatterPlotMap"
+      : mapType === "ScatterPlotMap"
       ? createScatterPlotMap(layer, index)
-      : layer.data.mapType === "IconMap"
+      : mapType === "IconMap"
       ? createIconMap(layer, index)
-      : layer.data.mapType === "ScreenGridMap"
+      : mapType === "ScreenGridMap"
       ? createScreenGridMap(layer, index)
-      : layer.data.mapType === "PolygonPlotMap" ||
-        layer.data.mapType === "SmallPolygonMap"
+      : mapType === "PolygonPlotMap"
       ? createPolygonMap(layer, index)
-      : layer.data.mapType === "ChoroplethMap"
+      : mapType === "SmallPolygonMap"
+      ? createPolygonMap(layer, index)
+      : mapType === "ChoroplethMap"
       ? createChoroplethMap(layer, index)
       : null;
   });
@@ -212,11 +236,26 @@ const CivicSandboxMap = props => {
 };
 
 CivicSandboxMap.propTypes = {
-  viewport: PropTypes.object,
-  mapLayers: PropTypes.array.isRequired,
-  onHoverSlide: PropTypes.func,
-  onClick: PropTypes.func,
-  children: PropTypes.node
+  viewport: shape({
+    latitude: number,
+    longitude: number,
+    height: number,
+    width: number,
+    zoom: number
+  }),
+  mapLayers: arrayOf(
+    shape({
+      data: shape({})
+    })
+  ).isRequired,
+  onHoverSlide: func,
+  onClick: func,
+  children: node,
+  selectedFoundationDatum: arrayOf(shape({}))
+};
+
+CivicSandboxMap.defaultProps = {
+  selectedFoundationDatum: []
 };
 
 export default CivicSandboxMap;
