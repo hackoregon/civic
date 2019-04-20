@@ -9,12 +9,7 @@ import DeckGL, {
   ScatterplotLayer,
   ScreenGridLayer
 } from "deck.gl";
-import { css } from "emotion";
 import { scaleQuantize, scaleOrdinal, scaleThreshold, extent } from "d3";
-
-const crosshair = css`
-  cursor: crosshair;
-`;
 
 const CivicSandboxMap = props => {
   const {
@@ -226,8 +221,8 @@ const CivicSandboxMap = props => {
   });
 
   return (
-    <div className={crosshair}>
-      <DeckGL className="DeckGL" {...viewport}>
+    <div>
+      <DeckGL className="DeckGL" {...viewport} getCursor={() => "crosshair"}>
         {renderMaps}
         {children}
       </DeckGL>
