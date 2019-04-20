@@ -115,34 +115,36 @@ export class Packages extends React.Component {
     return (
       <div
         className={css(`
-        font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
-      `)}
+          font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
+        `)}
       >
         {!this.state.mapIsOpen && (
           <div>
             <div
               className={css(`
-            padding: 1.5rem;
-            text-align: center;
-            font-size: 1.2rem;
-          `)}
+                padding: 1.5rem;
+                text-align: center;
+                font-size: 1.2rem;
+              `)}
             >
               Select a data collection
             </div>
             <section
-              className={css(`@media(min-width: 600px){
-              display:flex;
-              flex-wrap: wrap;
-            }`)}
+              className={css(`
+                @media(min-width: 600px){
+                  display:flex;
+                  flex-wrap: wrap;
+                }`)}
             >
               {isLoading && <Loader />}
               {packages &&
                 packages.map(p => (
                   <div
                     key={p.title}
-                    className={css(`@media(min-width: 600px) {
-              width: 33%;
-            }`)}
+                    className={css(`
+                      @media(min-width: 600px) {
+                        width: 33%;
+                      }`)}
                   >
                     <PackageSelectorBox
                       title={p.title}

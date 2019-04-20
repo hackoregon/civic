@@ -127,6 +127,7 @@ const makeVisFor = (spec, data) => {
   if (type === "PercentDonut") {
     const val = data.object.properties[spec.field];
     return {
+      id: data.object.id,
       visualizationType: "PercentDonut",
       title: spec.name,
       data: [
@@ -138,8 +139,9 @@ const makeVisFor = (spec, data) => {
       ]
     };
   }
-  if (type === "Text") {
+  if (type === "Text" || type === "ComparisonBar") {
     return {
+      id: data.object.id,
       visualizationType: "Text",
       title: spec.name,
       data:
@@ -149,101 +151,13 @@ const makeVisFor = (spec, data) => {
           : "Data Not Available"
     };
   }
-  if (type === "ComparisonBar") {
-    const val = data.object.properties[spec.field];
-    return {
-      visualizationType: "ComparisonBar",
-      title: spec.name,
-      data: [
-        {
-          name: "",
-          value: val ? parseInt(data.object.properties[spec.field], 10) : 0,
-          sortOrder: 2
-        },
-        {
-          name: spec.visualization.comparison_name,
-          value:
-            spec.visualization.comparison_value === "10000000"
-              ? 50000
-              : parseInt(spec.visualization.comparison_value, 10),
-          sortOrder: 1
-        }
-      ],
-      dataLabel: "name",
-      dataValue: "value",
-      sortOrder: "sortOrder",
-      minimalist: true
-    };
-  }
-  if (type === "Legend") {
-    const field = spec.field;
-    const colorScale = data.layer.props.getFillColor;
-
-    if (field === "pgv_site_mean_mmi_txt") {
-      return {
-        visualizationType: "Legend",
-        title: "Map Legend",
-        min: "Very strong (VII)",
-        max: "Severe (VIII)",
-        colors: ["Very strong (VII)", "Severe (VIII)"]
-          .map(d => colorScale({ properties: { [field]: d } }))
-          .map(d => `rgba(${d.slice(0, 3).toString()},1.0)`)
-      };
-    }
-
-    if (field === "pgd_total_wet_mean_di") {
-      return {
-        visualizationType: "Legend",
-        title: "Map Legend",
-        min: "Low",
-        max: "Very High",
-        colors: ["Low", "Moderate", "High", "Very High"]
-          .map(d => colorScale({ properties: { [field]: d } }))
-          .map(d => `rgba(${d.slice(0, 3).toString()},1.0)`)
-      };
-    }
-
-    if (field === "pgd_landslide_dry_mean_di") {
-      return {
-        visualizationType: "Legend",
-        title: "Map Legend",
-        min: "None",
-        max: "Low",
-        colors: ["None", "Low"]
-          .map(d => colorScale({ properties: { [field]: d } }))
-          .map(d => `rgba(${d.slice(0, 3).toString()},1.0)`)
-      };
-    }
-
-    const minMax = [...data.layer.props.data]
-      .filter(
-        d => d.properties[field] !== null && d.properties[field] !== undefined
-      )
-      .sort((a, b) => a.properties[field] - b.properties[field]);
-
-    const uniqColors = [...minMax]
-      .map(d => colorScale(d))
-      .filter((d, i, arr) => arr.indexOf(d) === i);
-
-    const stringColors = uniqColors.map(
-      d => `rgba(${d.slice(0, 3).toString()},1.0)`
-    );
-
-    return {
-      visualizationType: "Legend",
-      title: "Map Legend",
-      min: minMax[0].properties[field],
-      max: minMax[minMax.length - 1].properties[field],
-      colors: stringColors
-    };
-  }
 };
 
 export const getSelectedFoundationDatum = createSelector(
   getSandbox,
   getSelectedFoundationData,
   ({ selectedFoundationDatum }, foundation) => {
-    if (!foundation || !selectedFoundationDatum) return;
+    if (!foundation || !selectedFoundationDatum) return [];
 
     const attrs = foundation.slide_meta.attributes;
     const visualizations = [];
@@ -257,7 +171,7 @@ export const getSelectedFoundationDatum = createSelector(
       attrs.secondary.field
     );
 
-    if (!priamryFieldMatch && !secondaryFieldMatch) return;
+    if (!priamryFieldMatch && !secondaryFieldMatch) return [];
 
     if (attrs.primary && attrs.primary.field && attrs.primary.visualization) {
       visualizations.push(makeVisFor(attrs.primary, selectedFoundationDatum));
@@ -268,16 +182,6 @@ export const getSelectedFoundationDatum = createSelector(
       attrs.primary.visualization
     ) {
       visualizations.push(makeVisFor(attrs.secondary, selectedFoundationDatum));
-    }
-    if (attrs.primary && attrs.primary.field) {
-      const legendType = {
-        field: attrs.primary.field,
-        visualization: {
-          type: "Legend"
-        }
-      };
-
-      visualizations.push(makeVisFor(legendType, selectedFoundationDatum));
     }
 
     return visualizations;
@@ -294,8 +198,8 @@ export const getSelectedSlideDatum = createSelector(
     if (datumFieldNames.length < 1) return;
 
     const slideAttributes = slide.map((slideObject, index) => {
-      const slideName = Object.keys(slideObject);
-      const attrs = slideObject[slideName[0]].slide_meta.attributes;
+      const [slideName] = Object.keys(slideObject);
+      const attrs = slideObject[slideName].slide_meta.attributes;
       const slideAttrObj = {};
       slideAttrObj["index"] = index;
       if (attrs.primary.field) {
@@ -327,10 +231,10 @@ export const getSelectedSlideDatum = createSelector(
     tooltipObj["y"] = selectedSlideDatum.y;
     tooltipObj["content"] = [];
 
-    const tooltipSlideName = Object.keys(slide[slideIndex]);
+    const [tooltipSlideName] = Object.keys(slide[slideIndex]);
 
     const tooltipSlideAttrs =
-      slide[slideIndex][tooltipSlideName[0]].slide_meta.attributes;
+      slide[slideIndex][tooltipSlideName].slide_meta.attributes;
     const tooltipPrimary = tooltipSlideAttrs.primary;
     const tooltipSecondary = tooltipSlideAttrs.secondary;
 
@@ -367,12 +271,13 @@ export const getAllSlides = createSelector(
     const dataObj = { slide_data: {}, slide_meta: {} };
     const allSlides = allSlidesArr.map((slide, index) => {
       const mapObj = slides(dataObj)[slide.name];
+      const gray = [238, 238, 238, 255];
       const color = mapObj.boundary.getLineColor
         ? mapObj.boundary.getLineColor()
-        : [238, 238, 238, 255]; //gray
+        : gray;
       const mapType = mapObj.map.mapType;
       return {
-        slideNumber: allPackageSlideNumbers[index],
+        slideId: allPackageSlideNumbers[index],
         endpoint: slide.endpoint,
         label: slide.name,
         checked: selectedSlides.includes(allPackageSlideNumbers[index])

@@ -91,7 +91,7 @@ class SandboxComponent extends React.Component {
   };
   render() {
     const styles = css(`
-    font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
+      font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
     `);
 
     const loading = css`
