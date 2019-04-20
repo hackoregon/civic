@@ -1,12 +1,11 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-console */
 import React from "react";
 import { css } from "emotion";
-/* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
 import "react-select/dist/react-select.css";
-import { isArray, findIndex } from "lodash";
+import { isArray } from "lodash";
 import { Sandbox } from "../src";
-
 import { foundations, slides } from "../src/Sandbox/constants";
 /* global fetch */
 
@@ -93,12 +92,13 @@ class SandboxStory extends React.Component {
       this.state.selectedPackage
     ].slides.map(slide => {
       const mapObj = slides(dataObj)[state.data.slides[slide].name];
+      const gray = [238, 238, 238, 255];
       const color = mapObj.boundary.getLineColor
         ? mapObj.boundary.getLineColor()
-        : [238, 238, 238, 255]; //gray
+        : gray;
       const mapType = mapObj.map.mapType;
       return {
-        slideNumber: slide,
+        slideId: slide,
         slideObj: state.data.slides[slide],
         label: state.data.slides[slide].name,
         checked: selectedSlide.includes(slide) ? true : false,
@@ -108,7 +108,7 @@ class SandboxStory extends React.Component {
     });
     const defaultSlides = allSlides
       .filter(slide => slide.checked === true)
-      .map(slide => state.data.slides[slide.slideNumber]);
+      .map(slide => state.data.slides[slide.slideId]);
     this.setState({
       selectedFoundation,
       selectedSlide,
@@ -159,26 +159,29 @@ class SandboxStory extends React.Component {
   };
 
   updateSlide = event => {
-    const slideNumber = event.target.name;
+    const slideId = event.target.name;
     const allSlides = this.state.allSlides.map(slide => {
-      if (slide.slideNumber === slideNumber) {
+      if (slide.slideId === slideId) {
         slide.checked = !slide.checked;
       }
       return slide;
     });
     const defaultSlides = allSlides
       .filter(slide => slide.checked === true)
-      .map(slide => this.state.data.slides[slide.slideNumber]);
+      .map(slide => this.state.data.slides[slide.slideId]);
     const selectedSlides = allSlides
       .filter(slide => slide.checked === true)
-      .map(slide => slide.slideNumber);
+      .map(slide => slide.slideId);
 
     this.fetchSlideData(defaultSlides);
     this.setState({ selectedSlide: selectedSlides, defaultSlides, allSlides });
   };
 
   fetchFoundationData = foundation => {
-    fetch(`${foundation.endpoint}`)
+    const url = foundation.endpoint.includes("https")
+      ? foundation.endpoint
+      : `${foundation.endpoint.slice(0, 4)}s${foundation.endpoint.slice(4)}`;
+    fetch(url)
       .then(res => {
         if (!res.ok) {
           throw Error(res.statusText);
@@ -199,8 +202,11 @@ class SandboxStory extends React.Component {
       slide => !slideDataNames.includes(slide.name)
     );
     Promise.all(
-      onlyFetchNewSlides.map(s =>
-        fetch(`${s.endpoint}`)
+      onlyFetchNewSlides.map(s => {
+        const url = s.endpoint.includes("https")
+          ? s.endpoint
+          : `${s.endpoint.slice(0, 4)}s${s.endpoint.slice(4)}`;
+        return fetch(url)
           .then(res => {
             if (!res.ok) {
               throw Error(res.statusText);
@@ -209,14 +215,14 @@ class SandboxStory extends React.Component {
           })
           .then(res => res.json())
           .then(data => ({ [s.name]: data }))
-          .catch(err => console.error(err))
-      )
+          .catch(err => console.error(err));
+      })
     ).then(data => {
       this.setState({ slideData: [...this.state.slideData, ...data] });
     });
   };
 
-  findAndReplaceSlideData = (slideData, data, slide, slideLabel) => {
+  findAndReplaceSlideData = (slideData, data, slideLabel) => {
     const slideDataValues = Object.values(slideData);
     const newSlideData = slideData.map((slide, index) => {
       const slideDataName = Object.keys(slideDataValues[index])[0];
@@ -231,9 +237,16 @@ class SandboxStory extends React.Component {
   fetchSlideDataByDate = (slide, date, type) => {
     let url;
     if (type === "slide") {
-      url = `${slide.slideObj.endpoint}${date}`;
+      url = slide.slideObj.endpoint.includes("https")
+        ? `${slide.slideObj.endpoint}${date}`
+        : `${slide.slideObj.endpoint.slice(
+            0,
+            4
+          )}s${slide.slideObj.endpoint.slice(4)}${date}`;
     } else {
-      url = `${slide.endpoint}${date}`;
+      url = slide.endpoint.includes("https")
+        ? `${slide.endpoint}${date}`
+        : `${slide.endpoint.slice(0, 4)}s${slide.endpoint.slice(4)}${date}`;
     }
     fetch(url)
       .then(res => {
@@ -287,12 +300,13 @@ class SandboxStory extends React.Component {
     const defaultSlides = selectedSlide.map(slide => data.slides[slide]);
     const allSlides = data.packages[selectedPackage].slides.map(slide => {
       const mapObj = slides(dataObj)[data.slides[slide].name];
+      const gray = [238, 238, 238, 255];
       const color = mapObj.boundary.getLineColor
         ? mapObj.boundary.getLineColor()
-        : [238, 238, 238, 255]; //gray
+        : gray;
       const mapType = mapObj.map.mapType;
       return {
-        slideNumber: slide,
+        slideId: slide,
         slideObj: data.slides[slide],
         label: data.slides[slide].name,
         checked: selectedSlide.includes(slide) ? true : false,
