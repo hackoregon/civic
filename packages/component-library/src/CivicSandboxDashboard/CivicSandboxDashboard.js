@@ -1,34 +1,81 @@
 /* TODO: Fix linting errors */
 /* eslint-disable */
-
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useState } from "react";
+import {
+  arrayOf,
+  bool,
+  func,
+  node,
+  number,
+  oneOfType,
+  shape,
+  string
+} from "prop-types";
 import { css } from "emotion";
 import PieChart from "../PieChart/PieChart";
 import HorizontalBarChart from "../HorizontalBarChart/HorizontalBarChart";
 import civicFormat from "../utils/civicFormat";
+import { ICONS } from "../styleConstants";
 
-const dashboard = css`
-  background: rgba(255, 255, 255, 1);
-  color: #000;
-  width: 34%;
-  min-height: 300px;
-  max-height: 525px;
+const container = css`
+  position: absolute;
+  bottom: 50px;
+  left: 25px;
   display: flex;
   flex-direction: column;
+  width: 575px;
+  background: rgba(243, 242, 243, 0.95);
+  border: 1px solid black;
   @media (max-width: 900px) {
-    width: 100%;
-    max-height: none;
+    width: 92%;
+    left: 1%;
   }
+`;
+
+const dashboardOpen = css`
+  height: 45vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  opacity: 1;
+  transition: height 750ms ease-out, opacity 1.5s ease-in;
+`;
+
+const dashboardClosed = css`
+  height: 0;
+  opacity: 0;
+  transition: height 750ms ease-out, opacity 0.25s linear;
 `;
 
 const contentContainer = css`
   position: relative;
   display: flex;
   flex-direction: column;
-  margin-bottom: auto;
   overflow-y: auto;
   overflow-x: hidden;
+`;
+
+const toggleContainer = css`
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+  border: 1px solid rgb(170, 164, 171);
+  background-color: rgb(243, 242, 243);
+  color: #dc4556;
+  z-index: 4;
+`;
+
+const toggleTitle = css`
+  flex: 3;
+  margin auto 20px;
+`;
+
+const toggleArrow = css`
+  flex: 1;
+  margin 1% auto;
+  font-size: 20px;
+  text-align: center;
 `;
 
 const watermarkContainer = css`
@@ -37,13 +84,9 @@ const watermarkContainer = css`
   top: 0;
 `;
 
-const viz = css`
-  width: 90%;
-  margin: 1% 2% 2% 7.5%;
-`;
-
 const buttonContainer = css`
-  position: relative;
+  position: absolute;
+  bottom: 40px;
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -71,136 +114,128 @@ const iconActive = css`
   margin: 0 auto;
 `;
 
-const donutChart = css`
+const viz = css`
   width: 90%;
-  margin: 1% 2% 2% 7.5%;
-  height: 75%;
+  margin: 2% 2% 2% 8%;
   overflow-y: hidden;
-  @media (max-width: 900px) {
-    max-height: 400px;
-  }
 `;
 
-class CivicDashboard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      show: "viz"
-    };
-    this.showInfo = this.showInfo.bind(this);
-    this.showViz = this.showViz.bind(this);
-  }
+const donutPercent = css`
+  position: absolute;
+  bottom: 43%;
+  left: 28%;
+  width: 50%;
+  margin: auto;
+  text-align: center;
+`;
 
-  showInfo() {
-    this.setState({ show: "info" });
-  }
+const createTextViz = (text, index) => (
+  <div className={viz} key={index}>
+    <h2>{text.title}</h2>
+    <h3>{text.data.toLocaleString()}</h3>
+  </div>
+);
 
-  showViz() {
-    this.setState({ show: "viz" });
-  }
+const createDonutViz = (donut, index) => {
+  const [percentValue] = donut.data;
+  const salmon = "#EE495C";
+  const gray = "#a9a9a9";
+  return (
+    <div className={viz} key={index}>
+      <h2>{donut.title}</h2>
+      <h2 className={donutPercent}>
+        {percentValue.y < 1
+          ? civicFormat.percentage(percentValue.y)
+          : `${percentValue.y.toFixed(1)}%`}
+      </h2>
+      <PieChart
+        data={donut.data}
+        colors={[salmon, gray]}
+        width={475}
+        height={400}
+        innerRadius={90}
+        halfDoughnut
+      />
+    </div>
+  );
+};
 
-  render() {
-    const { data, children } = this.props;
+const createBarsViz = (bars, index) => (
+  <div className={viz} key={index}>
+    <h2>{bars.title}</h2>
+    <HorizontalBarChart
+      minimalist={bars.minimalist}
+      data={bars.data}
+      sortOrder={bars.sortOrder}
+      dataValue={bars.dataValue}
+      dataLabel={bars.dataLabel}
+      dataKeyLabel=""
+      title=""
+      subtitle=""
+      xLabel=""
+      yLabel=""
+    />
+  </div>
+);
 
-    const visualizations = data.map((object, index) => {
-      return object.visualizationType === "Text" ? (
-        <div className={viz} key={index}>
-          <h2>{object.title}</h2>
-          <p>{object.data.toLocaleString()}</p>
-        </div>
-      ) : object.visualizationType === "PercentDonut" ? (
-        <div className={donutChart} key={index}>
-          <h2>{object.title}</h2>
-          <h2 style={{ textAlign: "center", margin: "auto", width: "50%" }}>
-            {object.data[0].y < 1
-              ? civicFormat.percentage(object.data[0].y)
-              : `${object.data[0].y.toFixed(1)}%`}
-          </h2>
-          <PieChart
-            data={object.data}
-            colors={["#19b7aa", "#a9a9a9"]}
-            width={475}
-            height={375}
-            innerRadius={90}
-            halfDoughnut
-          />
-        </div>
-      ) : object.visualizationType === "ComparisonBar" ? (
-        <div className={viz} key={index}>
-          <h2>{object.title}</h2>
-          <HorizontalBarChart
-            minimalist={object.minimalist}
-            data={object.data}
-            sortOrder={object.sortOrder}
-            dataValue={object.dataValue}
-            dataLabel={object.dataLabel}
-            dataKeyLabel=""
-            title=""
-            subtitle=""
-            xLabel=""
-            yLabel=""
-          />
-        </div>
-      ) : object.visualizationType === "Legend" ? (
-        <div className={viz} key={index}>
-          <h2>{object.title}</h2>
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            {object.colors.map((d, i, arr) => {
-              return (
-                <div
-                  style={{
-                    background: d,
-                    height: "40px",
-                    width: `${100 / arr.length}%`
-                  }}
-                  key={`legend${i}`}
-                />
-              );
-            })}
-          </div>
-          <div>
-            <h4 style={{ float: "left" }}>
-              {object.min === 0
-                ? 0
-                : object.min > 0 && object.min < 1
-                ? civicFormat.percentage(object.min)
-                : object.min > 1
-                ? civicFormat.numeric(object.min)
-                : object.min}
-            </h4>
-            <h4 style={{ float: "right" }}>
-              {object.max < 1 && object.max > 0
-                ? civicFormat.percentage(object.max)
-                : object.max > 1
-                ? civicFormat.numeric(object.max)
-                : object.max}
-            </h4>
-          </div>
-        </div>
-      ) : null;
-    });
+const placeholder = (
+  <div className={viz}>
+    <h2>Please select a polygon</h2>
+  </div>
+);
 
-    const buttons = (
-      <div className={buttonContainer}>
-        <div
-          className={this.state.show === "info" ? iconActive : icon}
-          onClick={this.showInfo}
-        >
-          <div className="fa fa-info-circle" />
-        </div>
-        <div
-          className={this.state.show === "viz" ? iconActive : icon}
-          onClick={this.showViz}
-        >
-          <div className="fa fa-eye" />
-        </div>
+const CivicDashboard = props => {
+  const { data, children, isDashboardOpen, onClick } = props;
+
+  const [display, setDisplay] = useState("visualizations");
+
+  const createVisualizations = data.map((object, index) => {
+    const vizType = object.visualizationType;
+    if (vizType === "Text") {
+      return createTextViz(object, index);
+    } else if (vizType === "PercentDonut") {
+      return createDonutViz(object, index);
+    } else if (vizType === "ComparisonBar") {
+      return createBarsViz(object, index);
+    } else {
+      return null;
+    }
+  });
+
+  const [hasVisualizations] = createVisualizations;
+  const visualizations = hasVisualizations ? createVisualizations : placeholder;
+
+  const visualizationButtons = (
+    <div className={buttonContainer}>
+      <div
+        className={display === "description" ? iconActive : icon}
+        onClick={() => setDisplay("description")}
+      >
+        <div className={ICONS.info} />
       </div>
-    );
+      <div
+        className={display === "visualizations" ? iconActive : icon}
+        onClick={() => setDisplay("visualizations")}
+      >
+        <div className={ICONS.eye} />
+      </div>
+    </div>
+  );
 
-    return (
-      <div className={dashboard}>
+  const dashboardToggleButton = (
+    <div className={toggleContainer} onClick={() => onClick()}>
+      <div className={toggleTitle}>Please select a polygon</div>
+      <div className={toggleArrow}>
+        <div className={isDashboardOpen ? ICONS.arrowDown : ICONS.arrowUp} />
+      </div>
+    </div>
+  );
+
+  return (
+    <div className={container}>
+      <div className={isDashboardOpen ? dashboardOpen : dashboardClosed}>
         <div className={contentContainer}>
-          {this.state.show === "info" ? children : visualizations}
+          {display === "description" ? children : visualizations}
         </div>
         <div className={watermarkContainer}>
           <svg width="134" height="135" xmlns="http://www.w3.org/2000/svg">
@@ -213,15 +248,25 @@ class CivicDashboard extends React.Component {
             </g>
           </svg>
         </div>
-        {children ? buttons : null}
+        {children ? visualizationButtons : null}
       </div>
-    );
-  }
-}
+      <div>{dashboardToggleButton}</div>
+    </div>
+  );
+};
 
 CivicDashboard.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object),
-  children: PropTypes.node
+  data: arrayOf(
+    shape({
+      data: oneOfType([arrayOf(shape({})), number]),
+      id: number,
+      title: string,
+      visualizationType: string
+    })
+  ),
+  children: node,
+  isDashboardOpen: bool,
+  onClick: func
 };
 
 export default CivicDashboard;
