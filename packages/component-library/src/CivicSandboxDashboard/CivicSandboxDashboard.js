@@ -191,19 +191,31 @@ const CivicDashboard = props => {
 
   const createVisualizations = data.map((object, index) => {
     const vizType = object.visualizationType;
-    if (vizType === "Text") {
-      return createTextViz(object, index);
-    } else if (vizType === "PercentDonut") {
-      return createDonutViz(object, index);
-    } else if (vizType === "ComparisonBar") {
-      return createBarsViz(object, index);
-    } else {
-      return null;
-    }
+    return vizType === "Text"
+      ? createTextViz(object, index)
+      : vizType === "PercentDonut"
+      ? createDonutViz(object, index)
+      : vizType === "ComparisonBar"
+      ? createBarsViz(object, index)
+      : null;
   });
 
   const [hasVisualizations] = createVisualizations;
   const visualizations = hasVisualizations ? createVisualizations : placeholder;
+
+  const civicWatermark = (
+    <div className={watermarkContainer}>
+      <svg width="134" height="135" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none" fillRule="evenodd">
+          <path d="M0 134.658V0l11.566 11.597v123.061H0z" fill="#191119" />
+          <path
+            d="M133.864 0v11.597H11.566v.008L0 .008V0h133.864z"
+            fill="#DC4556"
+          />
+        </g>
+      </svg>
+    </div>
+  );
 
   const visualizationButtons = (
     <div className={buttonContainer}>
@@ -237,20 +249,10 @@ const CivicDashboard = props => {
         <div className={contentContainer}>
           {display === "description" ? children : visualizations}
         </div>
-        <div className={watermarkContainer}>
-          <svg width="134" height="135" xmlns="http://www.w3.org/2000/svg">
-            <g fill="none" fillRule="evenodd">
-              <path d="M0 134.658V0l11.566 11.597v123.061H0z" fill="#191119" />
-              <path
-                d="M133.864 0v11.597H11.566v.008L0 .008V0h133.864z"
-                fill="#DC4556"
-              />
-            </g>
-          </svg>
-        </div>
+        {civicWatermark}
         {children ? visualizationButtons : null}
       </div>
-      <div>{dashboardToggleButton}</div>
+      {dashboardToggleButton}
     </div>
   );
 };
