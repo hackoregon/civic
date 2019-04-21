@@ -27,6 +27,7 @@
   "engines": {
     "npm": ">=3"
   },
+  "private": true,
   "scripts": {
     "clean": "rimraf build && mkdir build",
     "start": "yarn start:dev",

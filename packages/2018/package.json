@@ -3,6 +3,7 @@
   "version": "1.0.0-alpha.1c62c05f",
   "description": "All 2018 projects assembled",
   "main": "index.js",
+  "private": true,
   "scripts": {
     "start": "yarn start:dev",
     "start:dev": "cross-env NODE_ENV=development babel-node server/dev.js",
