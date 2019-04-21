@@ -1,6 +1,6 @@
 {
   "name": "@hackoregon/2018-disaster-resilience",
-  "version": "1.0.0-alpha.1c62c05f",
+  "version": "3.0.0-alpha.9d477899",
   "description": "Hack Oregon Front-end React + Redux Starter",
   "main": "src/index.js",
   "author": "David Daniel",
@@ -31,7 +31,7 @@
     "test": "cross-env BABEL_ENV=test mocha --opts ./mocha.opts 'src/**/*.test.js'"
   },
   "dependencies": {
-    "@hackoregon/component-library": "^1.0.0-alpha.1c62c05f",
+    "@hackoregon/component-library": "^3.0.0-alpha.9d477899",
     "axios": "^0.18.0",
     "compression": "^1.6.2",
     "cross-env": "^5.2.0",
@@ -55,9 +55,9 @@
     "@babel/core": "^7.0.0",
     "@babel/node": "^7.0.0",
     "@babel/register": "^7.0.0",
-    "@hackoregon/civic-babel-presets": "^1.0.0-alpha.1c62c05f",
-    "@hackoregon/mock-wrapper": "^1.0.0-alpha.1c62c05f",
-    "@hackoregon/webpack-common": "^1.0.0-alpha.1c62c05f",
+    "@hackoregon/civic-babel-presets": "^3.0.0-alpha.9d477899",
+    "@hackoregon/mock-wrapper": "^3.0.0-alpha.9d477899",
+    "@hackoregon/webpack-common": "^3.0.0-alpha.9d477899",
     "autoprefixer": "^9.4.10",
     "babel-jest": "^24.5.0",
     "chai": "^4.2.0",
