@@ -22,8 +22,7 @@
   "private": false,
   "keywords": [
     "civic",
-    "hackoregon",
-    "magic"
+    "hackoregon"
   ],
   "devDependencies": {
     "@babel/cli": "^7.0.0",

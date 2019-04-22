@@ -11,8 +11,7 @@
   "private": false,
   "keywords": [
     "civic",
-    "hackoregon",
-    "magic"
+    "hackoregon"
   ],
   "scripts": {
     "build:esm": "babel src --out-dir es --copy-files --no-comments",
