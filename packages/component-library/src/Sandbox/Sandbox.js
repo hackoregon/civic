@@ -6,6 +6,7 @@ import BaseMap from "../BaseMap/BaseMap";
 import CivicSandboxMap from "../CivicSandboxMap/CivicSandboxMap";
 import CivicSandboxTooltip from "../CivicSandboxMap/CivicSandboxTooltip";
 import SandboxDrawer from "./SandboxDrawer";
+import SandboxBaseMapSelector from "./SandboxBaseMapSelector";
 
 const baseMapWrapper = css(`
   height: 80vh;
@@ -77,9 +78,10 @@ const Sandbox = ({
           foundationMapProps={foundationMapProps}
         />
       </div>
+
       <div className={baseMapWrapper}>
         <BaseMap
-          mapboxStyle={"mapbox://styles/mapbox/dark-v9"}
+          mapboxStyle={"mapbox://styles/mapbox/light-v9"}
           initialZoom={10.5}
           initialLatitude={45.5431}
           initialLongitude={-122.5765}
@@ -90,6 +92,7 @@ const Sandbox = ({
             onClick={onFoundationClick}
             onHoverSlide={onSlideHover}
           >
+            <SandboxBaseMapSelector />
             {tooltipInfo && <CivicSandboxTooltip tooltipData={tooltipInfo} />}
           </CivicSandboxMap>
         </BaseMap>
