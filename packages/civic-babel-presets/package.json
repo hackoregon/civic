@@ -17,7 +17,8 @@
     "babel",
     "presets",
     "civic",
-    "hackoregon"
+    "hackoregon",
+    "✨"
   ],
   "dependencies": {
     "@babel/core": "^7.0.0",
