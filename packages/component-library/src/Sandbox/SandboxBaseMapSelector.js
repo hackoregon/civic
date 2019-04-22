@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import { css } from "emotion";
 
@@ -32,6 +33,11 @@ const SandboxBaseMapSelector = ({ onBaseMapStyleChange, baseMapStyle }) => {
       </div>
     </>
   );
+};
+
+SandboxBaseMapSelector.propTypes = {
+  onBaseMapStyleChange: PropTypes.func.isRequired,
+  baseMapStyle: PropTypes.string.isRequired
 };
 
 export default SandboxBaseMapSelector;
