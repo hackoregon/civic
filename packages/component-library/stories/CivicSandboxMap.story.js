@@ -3,7 +3,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { withKnobs, select, boolean } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
-import { checkA11y } from "@storybook/addon-a11y";
+import { withA11y } from "@storybook/addon-a11y";
 import { BaseMap, CivicSandboxMap, DemoJSONLoader } from "../src";
 
 const displayName = CivicSandboxMap.displayName || "CivicSandboxMap";
@@ -106,7 +106,7 @@ const CivicSandboxMapStory = data => {
     data: slide2.slide_meta.boundary,
     opacity: 1.0,
     getPolygon: f => f.coordinates,
-    getLineColor: () => [14, 29, 124, 255],
+    getLineColor: () => [255, 178, 38, 255],
     getLineWidth: () => 45,
     filled: false
   };
@@ -116,7 +116,7 @@ const CivicSandboxMapStory = data => {
     pickable: true,
     data: slide2.slide_data.features,
     opacity: 1,
-    getColor: () => [14, 29, 124, 255],
+    getColor: () => [255, 178, 38, 255],
     getPath: f => f.geometry.coordinates,
     getWidth: () => 25,
     rounded: false,
@@ -131,7 +131,7 @@ const CivicSandboxMapStory = data => {
     data: slide3.slide_meta.boundary,
     opacity: 1.0,
     getPolygon: f => f.coordinates,
-    getLineColor: () => [255, 178, 38, 255],
+    getLineColor: () => [114, 29, 124, 255],
     getLineWidth: () => 45,
     filled: false
   };
@@ -142,7 +142,9 @@ const CivicSandboxMapStory = data => {
     data: slide3.slide_data.features,
     getPosition: f => f.geometry.coordinates,
     opacity: 0.9,
-    getColor: () => [255, 178, 38, 255],
+    getFillColor: () => [114, 29, 124, 255],
+    getLineColor: () => [114, 29, 124, 255],
+    stroked: true,
     getRadius: () => 50,
     radiusScale: 1,
     radiusMinPixels: 1,
@@ -204,7 +206,7 @@ const CivicSandboxMapStory = data => {
 
   return (
     <div>
-      <BaseMap initialZoom={10}>
+      <BaseMap initialZoom={10} updateViewport={false}>
         <CivicSandboxMap mapLayers={mapLayersArray} />
       </BaseMap>
     </div>
@@ -214,7 +216,7 @@ const CivicSandboxMapStory = data => {
 export default () =>
   storiesOf("Maps/CIVIC Sandbox Map", module)
     .addDecorator(withKnobs)
-    .addDecorator(checkA11y)
+    .addDecorator(withA11y)
     .add("Simple usage", () => {
       return (
         <DemoJSONLoader urls={dataURLs}>

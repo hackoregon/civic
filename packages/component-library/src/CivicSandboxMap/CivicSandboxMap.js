@@ -49,7 +49,11 @@ const CivicSandboxMap = props => {
       data={slide.data.data}
       getPosition={slide.data.getPosition}
       opacity={slide.data.opacity}
-      getColor={slide.data.getColor}
+      getFillColor={slide.data.getFillColor}
+      getLineColor={slide.data.getLineColor}
+      stroked={slide.data.stroked || false}
+      getLineWidth={slide.data.getLineWidth || 5}
+      lineWidthMinPixels={1}
       getRadius={slide.data.getRadius}
       radiusScale={slide.data.radiusScale}
       autoHighlight={slide.data.autoHighlight}
