@@ -3,10 +3,12 @@
 import React from "react";
 import { css } from "emotion";
 import { storiesOf } from "@storybook/react";
+import { withA11y } from "@storybook/addon-a11y";
 import "react-select/dist/react-select.css";
 import { isArray } from "lodash";
 import { Sandbox } from "../src";
 import { foundations, slides } from "../src/Sandbox/constants";
+
 /* global fetch */
 
 class SandboxStory extends React.Component {
@@ -225,7 +227,7 @@ class SandboxStory extends React.Component {
   findAndReplaceSlideData = (slideData, data, slideLabel) => {
     const slideDataValues = Object.values(slideData);
     const newSlideData = slideData.map((slide, index) => {
-      const slideDataName = Object.keys(slideDataValues[index])[0];
+      const [slideDataName] = Object.keys(slideDataValues[index]);
       if (slideDataName === slideLabel) {
         slide = { [slideLabel]: data };
       }
@@ -262,7 +264,6 @@ class SandboxStory extends React.Component {
             slideData: this.findAndReplaceSlideData(
               this.state.slideData,
               data,
-              type,
               slide.label
             )
           });
@@ -401,6 +402,6 @@ class SandboxStory extends React.Component {
 }
 
 export default () =>
-  storiesOf("CIVIC Platform Components/Sandbox", module).add("Sandbox", () => (
-    <SandboxStory />
-  ));
+  storiesOf("CIVIC Platform Components/Sandbox", module)
+    .addDecorator(withA11y)
+    .add("Sandbox", () => <SandboxStory />);

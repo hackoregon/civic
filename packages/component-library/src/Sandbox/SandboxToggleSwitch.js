@@ -1,28 +1,35 @@
 import React from "react";
 import { css } from "emotion";
 
-const toggleStyle = css`
+const containerStyle = css`
   display: flex;
   align-items: center;
-  .switch {
-    position: relative;
-    width: 50px;
-    height: 25px;
-    outline: none;
-  }
-  .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
-    border-radius: 35px;
-  }
-  .slider:before {
+`;
+
+const toggleStyle = css`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 25px;
+  outline: none;
+`;
+
+const sliderStyle = css`
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 35px;
+  width: 50px;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+
+  &:before {
     position: absolute;
     content: "";
     height: 25px;
@@ -34,10 +41,12 @@ const toggleStyle = css`
     transition: 0.4s;
     border-radius: 50%;
   }
-  input:checked + .slider {
+
+  input:checked + & {
     background-color: darkOrange;
   }
-  input:checked + .slider:before {
+
+  input:checked + &:before {
     -webkit-transform: translateX(18px);
     -ms-transform: translateX(18px);
     transform: translateX(18px);
@@ -63,18 +72,20 @@ const SandboxToggleSwitch = props => {
       : "";
 
   return (
-    <div className={toggleStyle}>
-      <label className="switch">
+    <div className={containerStyle}>
+      <label className={toggleStyle} htmlFor={`slide-input-${label}`}>
         <input
+          id={`slide-input-${label}`}
           type="checkbox"
           name={name}
-          value={checked}
           checked={checked}
           onChange={onChange}
         />
-        <div className="slider" />
+        <div className={sliderStyle} />
+        <div style={{ marginLeft: "40px" }}>
+          {`${label} - ${decodeMapType}`}
+        </div>
       </label>
-      <div style={{ paddingLeft: "2.5%" }}>{`${label} - ${decodeMapType}`}</div>
     </div>
   );
 };
