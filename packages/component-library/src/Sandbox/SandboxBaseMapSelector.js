@@ -3,7 +3,7 @@ import { css } from "emotion";
 
 const baseMapMenu = css(`
   position: absolute;
-  background: #fff;
+  background: #f3f2f3;
   padding: 10px;
   bottom: 0;
   right: 0;
