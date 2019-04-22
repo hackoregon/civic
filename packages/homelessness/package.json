@@ -1,6 +1,6 @@
 {
   "name": "@hackoregon/civic-homelessness",
-  "version": "3.0.0-alpha.9d477899",
+  "version": "3.0.0",
   "description": "Civic/Homelessness 2017",
   "main": "src/index.js",
   "contributors": [
@@ -33,7 +33,7 @@
     "test": "cross-env BABEL_ENV=test mocha --opts ./mocha.opts 'src/**/*.test.js'"
   },
   "dependencies": {
-    "@hackoregon/component-library": "^3.0.0-alpha.9d477899",
+    "@hackoregon/component-library": "^3.0.0",
     "compression": "^1.6.2",
     "cross-env": "^5.2.0",
     "d3-format": "^1.2.0",
@@ -83,9 +83,9 @@
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "7.0.0",
-    "@hackoregon/civic-babel-presets": "^3.0.0-alpha.9d477899",
-    "@hackoregon/mock-wrapper": "^3.0.0-alpha.9d477899",
-    "@hackoregon/webpack-common": "^3.0.0-alpha.9d477899",
+    "@hackoregon/civic-babel-presets": "^3.0.0",
+    "@hackoregon/mock-wrapper": "^3.0.0",
+    "@hackoregon/webpack-common": "^3.0.0",
     "autoprefixer": "^9.4.10",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.5.0",
