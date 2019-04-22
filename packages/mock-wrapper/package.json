@@ -25,5 +25,6 @@
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.1.0"
-  }
+  },
+  "gitHead": "b50f7a7fca617964ade5a3ecb5225fee17b20fe4"
 }

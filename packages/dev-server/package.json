@@ -13,5 +13,6 @@
     "redux-logger": "^3.0.6",
     "webpack-dev-middleware": "^3.6.1",
     "webpack-hot-middleware": "^2.22.0"
-  }
+  },
+  "gitHead": "b50f7a7fca617964ade5a3ecb5225fee17b20fe4"
 }

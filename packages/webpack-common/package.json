@@ -20,5 +20,6 @@
   },
   "devDependencies": {
     "webpack-bundle-analyzer": "^3.1.0"
-  }
+  },
+  "gitHead": "b50f7a7fca617964ade5a3ecb5225fee17b20fe4"
 }
