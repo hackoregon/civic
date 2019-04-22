@@ -17,34 +17,59 @@ const baseMapWrapper = css(`
   }
 `);
 
-const Sandbox = ({
-  data,
-  layerData,
-  defaultFoundation,
-  defaultSlides,
-  selectedPackage,
-  selectedFoundation,
-  selectedSlide,
-  foundationData,
-  slideData,
-  updatePackage,
-  updateFoundation,
-  updateSlide,
-  fetchSlideDataByDate,
-  drawerVisible,
-  toggleDrawer,
-  mapboxStyle,
-  styles,
-  onFoundationClick,
-  onSlideHover,
-  tooltipInfo,
-  allSlides,
-  foundationMapProps
-}) => {
-  return (
-    <div className={styles}>
-      <div
-        className={css(`
+class Sandbox extends React.Component {
+  constructor(props) {
+    super();
+    this.state = {
+      baseMapStyle: "light",
+      baseMapStyleUrl: "mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg"
+    };
+    this.handleBaseMapStyleChange = this.handleBaseMapStyleChange.bind(this);
+  }
+
+  handleBaseMapStyleChange = baseMapStyleChangeEvent => {
+    baseMapStyleChangeEvent.target.value === "light"
+      ? this.setState({
+          baseMapStyle: "light",
+          baseMapStyleUrl:
+            "mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg"
+        })
+      : this.setState({
+          baseMapStyle: "dark",
+          baseMapStyleUrl: "mapbox://styles/mapbox/dark-v9"
+        });
+  };
+
+  render() {
+    const {
+      data,
+      layerData,
+      defaultFoundation,
+      defaultSlides,
+      selectedPackage,
+      selectedFoundation,
+      selectedSlide,
+      foundationData,
+      slideData,
+      updatePackage,
+      updateFoundation,
+      updateSlide,
+      fetchSlideDataByDate,
+      drawerVisible,
+      toggleDrawer,
+      mapboxStyle,
+      styles,
+      onFoundationClick,
+      onSlideHover,
+      tooltipInfo,
+      allSlides,
+      foundationMapProps
+    } = this.props;
+
+    return (
+      <div className={styles}>
+        <div
+          className={css(`
           position: absolute;
           top: 0;
           right: 0;
@@ -58,48 +83,52 @@ const Sandbox = ({
             min-height: 500px;
           }
       `)}
-      >
-        <SandboxDrawer
-          data={data}
-          selectedSlide={selectedSlide}
-          onChange={updateSlide}
-          selectedPackage={selectedPackage}
-          toggleDrawer={toggleDrawer}
-          drawerVisible={drawerVisible}
-          defaultSlides={defaultSlides}
-          slideData={slideData}
-          fetchSlideByDate={fetchSlideDataByDate}
-          selectedFoundation={selectedFoundation}
-          foundationData={foundationData}
-          defaultFoundation={defaultFoundation}
-          allSlides={allSlides}
-          updatePackage={updatePackage}
-          updateFoundation={updateFoundation}
-          foundationMapProps={foundationMapProps}
-        />
-      </div>
-
-      <div className={baseMapWrapper}>
-        <BaseMap
-          mapboxStyle={"mapbox://styles/mapbox/light-v9"}
-          initialZoom={10.5}
-          initialLatitude={45.5431}
-          initialLongitude={-122.5765}
-          useContainerHeight
         >
-          <CivicSandboxMap
-            mapLayers={layerData}
-            onClick={onFoundationClick}
-            onHoverSlide={onSlideHover}
+          <SandboxDrawer
+            data={data}
+            selectedSlide={selectedSlide}
+            onChange={updateSlide}
+            selectedPackage={selectedPackage}
+            toggleDrawer={toggleDrawer}
+            drawerVisible={drawerVisible}
+            defaultSlides={defaultSlides}
+            slideData={slideData}
+            fetchSlideByDate={fetchSlideDataByDate}
+            selectedFoundation={selectedFoundation}
+            foundationData={foundationData}
+            defaultFoundation={defaultFoundation}
+            allSlides={allSlides}
+            updatePackage={updatePackage}
+            updateFoundation={updateFoundation}
+            foundationMapProps={foundationMapProps}
+          />
+        </div>
+
+        <div className={baseMapWrapper}>
+          <BaseMap
+            mapboxStyle={this.state.baseMapStyleUrl}
+            initialZoom={10.5}
+            initialLatitude={45.5431}
+            initialLongitude={-122.5765}
+            useContainerHeight
           >
-            <SandboxBaseMapSelector />
-            {tooltipInfo && <CivicSandboxTooltip tooltipData={tooltipInfo} />}
-          </CivicSandboxMap>
-        </BaseMap>
+            <CivicSandboxMap
+              mapLayers={layerData}
+              onClick={onFoundationClick}
+              onHoverSlide={onSlideHover}
+            >
+              <SandboxBaseMapSelector
+                onBaseMapStyleChange={this.handleBaseMapStyleChange}
+                baseMapStyle={this.state.baseMapStyle}
+              />
+              {tooltipInfo && <CivicSandboxTooltip tooltipData={tooltipInfo} />}
+            </CivicSandboxMap>
+          </BaseMap>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 Sandbox.propTypes = {
   data: PropTypes.object.isRequired,
