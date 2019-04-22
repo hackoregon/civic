@@ -17,8 +17,13 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/hackoregon/component-library"
+    "url": "git+https://github.com/hackoregon/civic.git"
   },
+  "private": false,
+  "keywords": [
+    "civic",
+    "hackoregon"
+  ],
   "devDependencies": {
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.0",

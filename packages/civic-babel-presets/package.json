@@ -6,13 +6,19 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 0"
   },
+  "author": "David Daniel <davidedaniel@gmail.com> (http://davidedaniel.github.io)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hackoregon/civic.git"
+  },
+  "private": false,
   "keywords": [
     "babel",
     "presets",
-    "civic"
+    "civic",
+    "hackoregon"
   ],
-  "author": "David Daniel <davidedaniel@gmail.com> (http://davidedaniel.github.io)",
-  "license": "MIT",
   "dependencies": {
     "@babel/core": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.0.0",

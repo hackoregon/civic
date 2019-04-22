@@ -8,6 +8,11 @@
     "type": "git",
     "url": "git+https://github.com/hackoregon/civic.git"
   },
+  "private": false,
+  "keywords": [
+    "civic",
+    "hackoregon"
+  ],
   "scripts": {
     "build:esm": "babel src --out-dir es --copy-files --no-comments",
     "build:cjs": "babel src --out-dir dist --copy-files --no-comments",
