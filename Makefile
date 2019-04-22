@@ -107,5 +107,9 @@ deploy-2018: setup-aws access-ecr
 	./bin/ecs-deploy.sh --cluster $$ECS_CLUSTER --service-name $$ECS_SERVICE_2018 --image $$REMOTE_IMAGE_URL/civic-2018:latest --timeout 10
 
 deploy-component-library:
-	@echo "Deploying the component library";
-	yarn run deploy-storybook -- --ci;
+	@echo "Deploying the component library"
+	yarn run deploy-storybook -- --ci
+	@echo "Setting npm credentials"
+	npm config set //registry.npmjs.org/:_authToken=${NPM_TOKEN}
+	@echo "Publishing canary versions of packages to npm"
+	yarn run publish-canary
