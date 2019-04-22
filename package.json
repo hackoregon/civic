@@ -58,7 +58,6 @@
   "devDependencies": {
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.0",
-    "@hackoregon/civic-babel-presets": "^1.0.0-alpha.1c62c05f",
     "@storybook/addon-a11y": "^5.0.6",
     "@storybook/addon-actions": "^5.0.6",
     "@storybook/addon-info": "^5.0.6",
