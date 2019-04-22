@@ -260,7 +260,7 @@ const CivicDashboard = props => {
 CivicDashboard.propTypes = {
   data: arrayOf(
     shape({
-      data: oneOfType([arrayOf(shape({})), number]),
+      data: oneOfType([arrayOf(shape({})), number, string]),
       id: number,
       title: string,
       visualizationType: string

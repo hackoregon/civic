@@ -23,30 +23,32 @@ const baseMapWrapper = css(`
   }
 `);
 
-const Sandbox = ({
-  data,
-  layerData,
-  defaultFoundation,
-  defaultSlides,
-  selectedPackage,
-  selectedFoundation,
-  selectedSlide,
-  foundationData,
-  slideData,
-  updatePackage,
-  updateFoundation,
-  updateSlide,
-  fetchSlideDataByDate,
-  drawerVisible,
-  toggleDrawer,
-  styles,
-  onFoundationClick,
-  onSlideHover,
-  tooltipInfo,
-  allSlides,
-  foundationMapProps,
-  selectedFoundationDatum
-}) => {
+const Sandbox = props => {
+  const {
+    data,
+    layerData,
+    defaultFoundation,
+    defaultSlides,
+    selectedPackage,
+    selectedFoundation,
+    selectedSlide,
+    foundationData,
+    slideData,
+    updatePackage,
+    updateFoundation,
+    updateSlide,
+    fetchSlideDataByDate,
+    drawerVisible,
+    toggleDrawer,
+    styles,
+    onFoundationClick,
+    onSlideHover,
+    tooltipInfo,
+    allSlides,
+    foundationMapProps,
+    selectedFoundationDatum
+  } = props;
+
   return (
     <div className={styles}>
       <div
@@ -170,7 +172,7 @@ Sandbox.propTypes = {
   }).isRequired,
   selectedFoundationDatum: arrayOf(
     shape({
-      data: oneOfType([arrayOf(shape({})), number]),
+      data: oneOfType([arrayOf(shape({})), number, string]),
       id: number,
       title: string,
       visualizationType: string
