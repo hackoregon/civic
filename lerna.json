@@ -1,6 +1,11 @@
 {
-  "version": "1.0.0-alpha.1c62c05f",
+  "version": "3.0.0",
   "useWorkspaces": true,
   "npmClient": "yarn",
-  "private": true
+  "private": true,
+  "command": {
+    "publish": {
+      "message": "(🧹release): publish %s"
+    }
+  }
 }
