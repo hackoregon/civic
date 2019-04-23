@@ -43,7 +43,7 @@ const demoCode = () => {
 // const propDocs = { inline: true, propTables: [Slider] };
 
 export default () =>
-  storiesOf("Component Lib|Basic UI Components/Slider", module)
+  storiesOf("Component Lib|Basic Inputs/Slider", module)
     .addDecorator(checkA11y)
     .addDecorator(story => (
       <div style={storybookStyles.storyGrid}>
