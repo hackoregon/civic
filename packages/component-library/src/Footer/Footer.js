@@ -1,20 +1,20 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router';
-import { css } from 'emotion';
-import LogoStandard from '../Logo/LogoStandard';
-import ScrollToTop from '../ScrollToTop/ScrollToTop';
+import React from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router";
+import { css } from "emotion";
+import LogoStandard from "../Logo/LogoStandard";
+import ScrollToTop from "../ScrollToTop/ScrollToTop";
 
 const commonFont = `
   font-family: 'Rubik';
   font-weight: 500;
 `;
 
-const commonMargin = '12px 8px';
+const commonMargin = "12px 8px";
 
 const footerClass = css`
   width: 100%;
-  background: #FFF;
+  background: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -73,25 +73,30 @@ const scrollToTopClass = css`
   }
 `;
 
-const defaultAttribution = `\u00A9 Copyright ${(new Date()).getFullYear()}`;
+const defaultAttribution = `\u00A9 Copyright ${new Date().getFullYear()}`;
 
 const Footer = ({ attribution }) => (
   <div className={footerClass}>
     <div className={copyrightClass}>{attribution}</div>
-    <div className={logoClass}><Link to="/" className={logoLinkStyle}><LogoStandard /></Link></div>
-    <div className={scrollToTopClass}><ScrollToTop iconStyle="fa fa-angle-up" /></div>
+    <div className={logoClass}>
+      <Link to="/" className={logoLinkStyle}>
+        <LogoStandard />
+      </Link>
+    </div>
+    <div className={scrollToTopClass}>
+      <ScrollToTop iconStyle="fa fa-angle-up" />
+    </div>
   </div>
-
 );
 
-Footer.displayName = 'Footer';
+Footer.displayName = "Footer";
 
 Footer.defaultProps = {
-  attribution: defaultAttribution,
+  attribution: defaultAttribution
 };
 
 Footer.propTypes = {
-  attribution: PropTypes.node,
+  attribution: PropTypes.node
 };
 
 export default Footer;

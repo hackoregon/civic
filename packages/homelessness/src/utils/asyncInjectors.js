@@ -1,6 +1,6 @@
-import { is, isEmpty } from 'ramda';
-import invariant from 'invariant';
-import createReducer from '../state';
+import { is, isEmpty } from "ramda";
+import invariant from "invariant";
+import createReducer from "../state";
 
 const isFunc = is(Function);
 const isStr = is(String);
@@ -8,17 +8,19 @@ const isObj = is(Object);
 
 export function checkStore(store) {
   const source = new Map([
-    ['dispatch', isFunc],
-    ['subscribe', isFunc],
-    ['getState', isFunc],
-    ['replaceReducer', isFunc],
-    ['asyncReducers', isObj],
+    ["dispatch", isFunc],
+    ["subscribe", isFunc],
+    ["getState", isFunc],
+    ["replaceReducer", isFunc],
+    ["asyncReducers", isObj]
   ]);
 
-  for (const [key, value] of source) { // eslint-disable-line
+  for (const [key, value] of source) {
+    // eslint-disable-line
     if (!value(store[key])) {
-      invariant(false,
-        `(app/utils...) asyncInjectors: Expected a valid redux store. Check ${key}.`,
+      invariant(
+        false,
+        `(app/utils...) asyncInjectors: Expected a valid redux store. Check ${key}.`
       );
     }
   }
@@ -30,7 +32,7 @@ export function injectAsyncReducer(store, isValid) {
 
     invariant(
       isStr(name) && !isEmpty(name) && isFunc(asyncReducer),
-      '(app/utils...) injectAsyncReducer: Expected `asyncReducer` to be a reducer function',
+      "(app/utils...) injectAsyncReducer: Expected `asyncReducer` to be a reducer function"
     );
 
     if (Reflect.has(store.asyncReducers, name)) return;
@@ -40,11 +42,10 @@ export function injectAsyncReducer(store, isValid) {
   };
 }
 
-
 export function getAsyncReducer(store) {
   checkStore(store);
 
   return {
-    injectAsyncReducer: injectAsyncReducer(store, true),
+    injectAsyncReducer: injectAsyncReducer(store, true)
   };
 }

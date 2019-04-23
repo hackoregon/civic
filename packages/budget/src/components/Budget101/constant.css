@@ -42,26 +42,19 @@
 /* Phone Breakpoint */
 
 @media screen and small {
-
 }
-
 
 /* Tablet Portrait Breakpoint */
 
-@media screen and desktop and (max-width:768px) {
-
+@media screen and desktop and (max-width: 768px) {
 }
-
 
 /* Tablet Landscape Breakpoint */
 
-@media screen and (min-width:769px) and (max-width: 1024) {
-
+@media screen and (min-width: 769px) and (max-width: 1024) {
 }
-
 
 /* Desktop Breakpoint */
 
-@media screen and (min-width:1025px) {
-
+@media screen and (min-width: 1025px) {
 }

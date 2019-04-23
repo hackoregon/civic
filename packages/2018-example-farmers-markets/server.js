@@ -1,1 +1,1 @@
-require('@hackoregon/dev-server')();
+require("@hackoregon/dev-server")();

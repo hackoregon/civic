@@ -1,11 +1,12 @@
-import React, { PropTypes } from 'react';
-import { Field, reduxForm } from 'redux-form';
-import { Button } from '@hackoregon/component-library';
-import { css } from 'emotion';
+import PropTypes from "prop-types";
+import React from "react";
+import { Field, reduxForm } from "redux-form";
+import { Button } from "@hackoregon/component-library";
+import { css } from "emotion";
 
-import QRMap from '../QR';
-import Question from './Question';
-import Recommendation from './Recommendation';
+import QRMap from "../QR";
+import Question from "./Question";
+import Recommendation from "./Recommendation";
 
 const radio = css`
   font-size: 18px;
@@ -22,9 +23,11 @@ const formClass = css`
 
 const QuestionForm = ({ back, next, done, questionId }) => (
   <div>
-    {questionId === 1 ?
-      <h2>Create your individual check list by answering the following questions:</h2> :
-    null}
+    {questionId === 1 ? (
+      <h2>
+        Create your individual check list by answering the following questions:
+      </h2>
+    ) : null}
     <Question
       question={QRMap[questionId - 1].question}
       questionId={questionId}
@@ -59,45 +62,35 @@ const QuestionForm = ({ back, next, done, questionId }) => (
     </form>
     <Recommendation recommendation={QRMap[questionId - 1].note} />
     <div className="button-container">
-      {questionId === 1 &&
-        <Button onClick={e => next(e)}>
-          Next
-        </Button>
-      }
-      {questionId !== 1 && questionId < QRMap.length &&
-      <div>
-        <Button
-          display="inline"
-          margin="0px 10px 0px 0px"
-          onClick={e => back(e)}
-        >
-          Back
-        </Button>
-        <Button
-          display="inline"
-          onClick={e => next(e)}
-        >
-          Next
-        </Button>
-      </div>
-      }
-      {questionId === QRMap.length &&
-      <div>
-        <Button
-          display="inline"
-          margin="0px 10px 0px 0px"
-          onClick={e => back(e)}
-        >
-          Back
-        </Button>
-        <Button
-          display="inline"
-          onClick={e => done(e)}
-        >
-          Done
-        </Button>
-      </div>
-      }
+      {questionId === 1 && <Button onClick={e => next(e)}>Next</Button>}
+      {questionId !== 1 && questionId < QRMap.length && (
+        <div>
+          <Button
+            display="inline"
+            margin="0px 10px 0px 0px"
+            onClick={e => back(e)}
+          >
+            Back
+          </Button>
+          <Button display="inline" onClick={e => next(e)}>
+            Next
+          </Button>
+        </div>
+      )}
+      {questionId === QRMap.length && (
+        <div>
+          <Button
+            display="inline"
+            margin="0px 10px 0px 0px"
+            onClick={e => back(e)}
+          >
+            Back
+          </Button>
+          <Button display="inline" onClick={e => done(e)}>
+            Done
+          </Button>
+        </div>
+      )}
     </div>
   </div>
 );
@@ -106,11 +99,11 @@ QuestionForm.propTypes = {
   back: PropTypes.func.isRequired,
   next: PropTypes.func.isRequired,
   done: PropTypes.func.isRequired,
-  questionId: PropTypes.number,
+  questionId: PropTypes.number
 };
 
 export default reduxForm({
-  form: 'Quiz',
+  form: "Quiz",
   destroyOnUnmount: false,
-  forceUnregisterOnUnmount: true,
+  forceUnregisterOnUnmount: true
 })(QuestionForm);

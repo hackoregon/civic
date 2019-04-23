@@ -1,21 +1,17 @@
-// import { hot } from 'react-hot-loader';
-import React from 'react';
-import { render } from 'react-dom';
-import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
-import thunk from 'redux-thunk';
-import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux';
-import { Provider } from 'react-redux';
-import { Router, browserHistory } from 'react-router';
-import { createLogger } from 'redux-logger';
+import React from "react";
+import { render } from "react-dom";
+import { createStore, compose, applyMiddleware, combineReducers } from "redux";
+import thunk from "redux-thunk";
+import { syncHistoryWithStore, routerMiddleware } from "react-router-redux";
+import { Provider } from "react-redux";
+import { Router, browserHistory } from "react-router";
+import { createLogger } from "redux-logger";
 
 export default function MockWrapper(App, Reducers, Routes = () => []) {
-  const middlewares = [
-    thunk,
-    routerMiddleware(browserHistory),
-    createLogger(),
-  ];
+  const middlewares = [thunk, routerMiddleware(browserHistory), createLogger()];
 
-  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE_ || compose;
+  const composeEnhancers =
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE_ || compose;
   const store = createStore(
     Reducers(),
     {},
@@ -26,8 +22,10 @@ export default function MockWrapper(App, Reducers, Routes = () => []) {
 
   // Allow for hot module replacement when applicable (dev mode)
   if (module.hot) {
-    module.hot.accept('./index.js', () => {
-      const nextRootReducer = require('./index.js').Reducers(store.asyncReducers);
+    module.hot.accept("./index.js", () => {
+      const nextRootReducer = require("./index.js").Reducers(
+        store.asyncReducers
+      );
       store.replaceReducer(nextRootReducer);
     });
   }
@@ -35,13 +33,13 @@ export default function MockWrapper(App, Reducers, Routes = () => []) {
   const history = syncHistoryWithStore(browserHistory, store, {
     selectLocationState(state) {
       return state.routing;
-    },
+    }
   });
 
   const rootRoute = {
-    path: '/',
+    path: "/",
     component: App,
-    childRoutes: Routes(store),
+    childRoutes: Routes(store)
   };
 
   const Wrapper = () => (
@@ -50,7 +48,5 @@ export default function MockWrapper(App, Reducers, Routes = () => []) {
     </Provider>
   );
 
-  // const HotWrapper = hot(module)(Wrapper);
-
-  render(<Wrapper />, document.getElementById('content'));
-};
+  render(<Wrapper />, document.getElementById("content"));
+}

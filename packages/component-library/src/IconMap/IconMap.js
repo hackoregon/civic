@@ -1,12 +1,13 @@
-import React, { PropTypes } from 'react';
-import DeckGL, { IconLayer } from 'deck.gl';
-import { css } from 'emotion';
+import PropTypes from "prop-types";
+import React from "react";
+import DeckGL, { IconLayer } from "deck.gl";
+import { css } from "emotion";
 
 const crosshair = css`
   cursor: crosshair;
 `;
 
-const IconMap = (props) => {
+const IconMap = props => {
   const {
     viewport,
     data,
@@ -25,17 +26,17 @@ const IconMap = (props) => {
     x,
     y,
     onHover,
-    children,
+    children
   } = props;
 
-  const zoom = viewport.zoom;
+  const { zoom } = viewport;
   const sizeScale = iconSizeScale(zoom);
 
   const tooltip = React.Children.map(children, child => {
     return React.cloneElement(child, {
-      tooltipInfo: tooltipInfo,
-      x: x,
-      y: y,
+      tooltipInfo,
+      x,
+      y
     });
   });
 
@@ -43,14 +44,11 @@ const IconMap = (props) => {
 
   return (
     <div className={crosshair}>
-      <DeckGL
-        className={'DeckGL'}
-        {...viewport}
-      >
+      <DeckGL className="DeckGL" {...viewport}>
         <IconLayer
-          id={'icon-layer'}
-          className={'IconMap'}
-          pickable={true}
+          id="icon-layer"
+          className="IconMap"
+          pickable
           data={data}
           opacity={opacity}
           iconAtlas={iconAtlas}
@@ -64,9 +62,9 @@ const IconMap = (props) => {
           onClick={onLayerClick}
           onHover={onHover}
           visible={visible}
-          updateTriggers={{getSize: getSize}}
+          updateTriggers={{ getSize }}
         />
-        { tooltipRender }
+        {tooltipRender}
       </DeckGL>
     </div>
   );
@@ -78,28 +76,30 @@ IconMap.propTypes = {
   opacity: PropTypes.number,
   iconAtlas: PropTypes.string,
   iconMapping: PropTypes.object,
+  iconSizeScale: PropTypes.function,
   sizeScale: PropTypes.number,
   getPosition: PropTypes.func,
   getIcon: PropTypes.func,
   getSize: PropTypes.func,
   getColor: PropTypes.func,
   autoHighlight: PropTypes.bool,
+  onLayerClick: PropTypes.func,
   onClick: PropTypes.func,
   visible: PropTypes.bool,
   tooltipInfo: PropTypes.object,
   x: PropTypes.number,
   y: PropTypes.number,
   onHover: PropTypes.func,
-  children: PropTypes.node,
+  children: PropTypes.node
 };
 
 IconMap.defaultProps = {
   opacity: 1,
   sizeScale: 1,
   getPosition: d => d.geometry.coordinates,
-  getSize: d => 10,
-  getColor: d => [0,0,0],
-  visible: true,
+  getSize: () => 10,
+  getColor: () => [0, 0, 0],
+  visible: true
 };
 
 export default IconMap;

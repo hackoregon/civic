@@ -2,4 +2,4 @@
  * exports from /Services211
  */
 
- export default from './reducer';
+export default from "./reducer";

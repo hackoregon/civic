@@ -1,35 +1,23 @@
 {
   "parser": "babel-eslint",
-  "extends": "airbnb",
+  "extends": ["airbnb", "prettier", "prettier/react"],
   "env": {
     "mocha": true
   },
-  "plugins": [
-    "react"
-  ],
+  "plugins": ["react", "prettier"],
   "rules": {
     "jsx-a11y/img-has-alt": 0,
     "prefer-arrow-callback": 0,
+    "no-underscore-dangle": 0,
     "func-names": 2,
     "react/jsx-filename-extension": 0,
     "react/require-default-props": 0,
+    "react/forbid-prop-types": 1,
     "arrow-body-style": 0,
     "import/no-extraneous-dependencies": [
-      "error", {
-        "devDependencies": [
-          "packages/**/*.story.js",
-          "packages/**/*.test.js"
-          ]
-      }
-    ],
-    "comma-dangle": [
       "error",
       {
-        "arrays": "always-multiline",
-        "objects": "always-multiline",
-        "imports": "always-multiline",
-        "exports": "always-multiline",
-        "functions": "ignore"
+        "devDependencies": ["**/*.story.js", "**/*.test.js"]
       }
     ]
   },

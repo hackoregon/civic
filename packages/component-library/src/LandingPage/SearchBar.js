@@ -1,6 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { css } from 'emotion';
+/* Not currently used, updated and moved to 2018 package */
+/* eslint-disable */
+
+import React from "react";
+import PropTypes from "prop-types";
+import { css } from "emotion";
 
 const searchForm = css`
   display: block;
@@ -30,10 +33,10 @@ const searchInput = css`
 
 export default class SearchBar extends React.Component {
   static propTypes = {
-    handleSubmit: PropTypes.func.isRequired,
-  }
+    handleSubmit: PropTypes.func.isRequired
+  };
 
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault();
     const text = event.target.text.value;
     this.props.handleSubmit(text);

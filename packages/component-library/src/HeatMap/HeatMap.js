@@ -1,16 +1,16 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import React from 'react';
-import mapboxgl from 'mapbox-gl';
-import { css } from 'emotion';
-import { string, number, array, object, oneOfType } from 'prop-types';
+/* Deprecated or needs refactored to work with Base Map */
+/* eslint-disable */
+
+import React from "react";
+import mapboxgl from "mapbox-gl";
+import { css } from "emotion";
+import { string, number, array, object, oneOfType } from "prop-types";
 
 const mapWrapper = css`
   margin: 0;
   width: 100%;
   height: 500px;
 `;
-
-mapboxgl.accessToken = 'pk.eyJ1IjoidGhlbWVuZG96YWxpbmUiLCJhIjoiY2o1aXdoem1vMWtpNDJ3bnpqaGF1bnlhNSJ9.sjTrNKLW9daDBIGvP3_W0w';
 
 class HeatMap extends React.Component {
   constructor(props) {
@@ -19,8 +19,8 @@ class HeatMap extends React.Component {
 
   componentDidMount() {
     const dataId = `data-source-${this.props.id}`;
-    const heatmapId = `heat-layer-${this.props.id }`;
-    const circleId = `circle-layer-${this.props.id }`;
+    const heatmapId = `heat-layer-${this.props.id}`;
+    const circleId = `circle-layer-${this.props.id}`;
 
     this.map = new mapboxgl.Map({
       container: this.mapContainer,
@@ -28,72 +28,86 @@ class HeatMap extends React.Component {
       center: [this.props.centerLongitude, this.props.centerLatitude],
       minZoom: 8.5,
       zoom: this.props.initialZoom,
-      maxZoom: this.props.maxZoom,
+      maxZoom: this.props.maxZoom
     });
 
-    this.map.on('load', () => {
+    this.map.on("load", () => {
       this.map.addSource(dataId, {
-        type: 'geojson',
-        data: this.props.data,
+        type: "geojson",
+        data: this.props.data
       });
 
-      this.map.addLayer({
-        id: heatmapId,
-        type: 'heatmap',
-        source: dataId,
-        paint: {
-          'heatmap-weight': this.props.heatMapWeight,
-          'heatmap-intensity': this.props.heatMapIntensity,
-          'heatmap-color': this.props.heatMapColorScale,
-          'heatmap-radius': this.props.heatMapRadius,
-          'heatmap-opacity': this.props.heatMapOpacity,
+      this.map.addLayer(
+        {
+          id: heatmapId,
+          type: "heatmap",
+          source: dataId,
+          paint: {
+            "heatmap-weight": this.props.heatMapWeight,
+            "heatmap-intensity": this.props.heatMapIntensity,
+            "heatmap-color": this.props.heatMapColorScale,
+            "heatmap-radius": this.props.heatMapRadius,
+            "heatmap-opacity": this.props.heatMapOpacity
+          }
         },
-      }, 'waterway-label');
+        "waterway-label"
+      );
 
-      this.map.addLayer({
-        id: circleId,
-        type: 'circle',
-        source: dataId,
-        paint: {
-          'circle-radius': this.props.circleRadius,
-          'circle-color': this.props.circleFillColor,
-          'circle-stroke-color': this.props.circleStrokeColor,
-          'circle-stroke-width': this.props.circleStrokeWidth,
-          'circle-opacity': this.props.circleOpacity,
-          'circle-stroke-opacity': this.props.circleStrokeOpacity,
+      this.map.addLayer(
+        {
+          id: circleId,
+          type: "circle",
+          source: dataId,
+          paint: {
+            "circle-radius": this.props.circleRadius,
+            "circle-color": this.props.circleFillColor,
+            "circle-stroke-color": this.props.circleStrokeColor,
+            "circle-stroke-width": this.props.circleStrokeWidth,
+            "circle-opacity": this.props.circleOpacity,
+            "circle-stroke-opacity": this.props.circleStrokeOpacity
+          }
         },
-      }, 'waterway-label');
+        "waterway-label"
+      );
 
       this.map.addControl(new mapboxgl.NavigationControl());
-
     });
   }
 
   componentDidUpdate(prevProps) {
     const dataId = `data-source-${this.props.id}`;
-    const heatmapId = `heat-layer-${this.props.id }`;
-    const circleId = `circle-layer-${this.props.id }`;
+    const heatmapId = `heat-layer-${this.props.id}`;
+    const circleId = `circle-layer-${this.props.id}`;
 
-    const propsFirstIssueDate = this.props.data.features[0].properties.issue_date;
-    const prevPropsFirstIssueDate = prevProps.data.features[0].properties.issue_date;
+    const propsFirstIssueDate = this.props.data.features[0].properties
+      .issue_date;
+    const prevPropsFirstIssueDate =
+      prevProps.data.features[0].properties.issue_date;
     if (propsFirstIssueDate !== prevPropsFirstIssueDate) {
       this.map.getSource(dataId).setData(this.props.data);
     }
 
     if (this.props.circleStrokeColor !== prevProps.circleStrokeColor) {
-      this.map.setPaintProperty(heatmapId, 'heatmap-color', this.props.heatMapColorScale);
-      this.map.setPaintProperty(circleId, 'circle-color', this.props.circleFillColor);
-      this.map.setPaintProperty(circleId, 'circle-stroke-color', this.props.circleStrokeColor);
+      this.map.setPaintProperty(
+        heatmapId,
+        "heatmap-color",
+        this.props.heatMapColorScale
+      );
+      this.map.setPaintProperty(
+        circleId,
+        "circle-color",
+        this.props.circleFillColor
+      );
+      this.map.setPaintProperty(
+        circleId,
+        "circle-stroke-color",
+        this.props.circleStrokeColor
+      );
     }
   }
 
   render() {
-    return (
-      <div
-        className={mapWrapper}
-        ref={el => this.mapContainer = el}
-      />
-    );
+    return <div className={mapWrapper} ref={el => (this.mapContainer = el)} />;
   }
 }
 
@@ -115,7 +129,7 @@ HeatMap.propTypes = {
   circleFillColor: string,
   circleStrokeColor: string,
   circleStrokeWidth: number,
-  circleStrokeOpacity: oneOfType([array, number]),
+  circleStrokeOpacity: oneOfType([array, number])
 };
 
 HeatMap.defaultProps = {
@@ -123,7 +137,7 @@ HeatMap.defaultProps = {
   centerLatitude: -122.7066,
   initialZoom: 9,
   maxZoom: 19,
-  mapStyle: 'mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg',
+  mapStyle: "mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg"
 };
 
 export default HeatMap;

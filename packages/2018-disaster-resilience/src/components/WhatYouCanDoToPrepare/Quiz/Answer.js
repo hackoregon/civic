@@ -1,6 +1,6 @@
-import React, { PropTypes } from 'react';
-import { Field, reduxForm } from 'redux-form';
-
+import PropTypes from "prop-types";
+import React from "react";
+import { Field, reduxForm } from "redux-form";
 
 const Answer = ({ questionId }) => (
   <form>
@@ -34,7 +34,7 @@ const Answer = ({ questionId }) => (
 );
 
 Answer.propTypes = {
-  questionId: PropTypes.number,
+  questionId: PropTypes.number
 };
 
 export default reduxForm({})(Answer);

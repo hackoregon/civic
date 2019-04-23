@@ -1,5 +1,8 @@
-import React, { Children } from 'react';
-import { css } from 'emotion';
+/* TODO: Fix linting errors */
+/* eslint-disable */
+
+import React, { Children } from "react";
+import { css } from "emotion";
 
 const toggleStyle = css`
   padding: 10px;
@@ -9,7 +12,7 @@ const toggleStyle = css`
   margin-top: 10px;
   display: block;
   text-align: center;
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   font-weight: 500;
   font-size: 1em;
 `;
@@ -28,16 +31,13 @@ class Collapsable extends React.Component {
   }
 
   renderToggle() {
-    const cta = (this.state.expanded ? 'Less' : 'More');
-    const arrow = (this.state.expanded ? 'up' : 'down');
+    const cta = this.state.expanded ? "Less" : "More";
+    const arrow = this.state.expanded ? "up" : "down";
 
     return (
-      <a className={ toggleStyle } onClick={ this.onToggle }>
-       { cta }
-       <span
-        style={{ display: 'block' }}
-        className={ `fa fa-arrow-${arrow}` }>
-      </span>
+      <a className={toggleStyle} onClick={this.onToggle}>
+        {cta}
+        <span style={{ display: "block" }} className={`fa fa-arrow-${arrow}`} />
       </a>
     );
   }
@@ -47,7 +47,7 @@ class Collapsable extends React.Component {
     let showToggle;
     let toggle;
 
-    Children.forEach(this.props.children, (child) => {
+    Children.forEach(this.props.children, child => {
       if (child.props.hidden) {
         showToggle = true;
 
@@ -65,8 +65,8 @@ class Collapsable extends React.Component {
 
     return (
       <div>
-        { children }
-        { toggle }
+        {children}
+        {toggle}
       </div>
     );
   }

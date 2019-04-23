@@ -1,14 +1,13 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 
-const isRoot = ({ pathname }) => pathname === '/';
+const isRoot = ({ pathname }) => pathname === "/";
 
-export const RootPage = props => (
-  <div>
-    {props.children}
-  </div>
-);
+export const RootPage = props => <div>{props.children}</div>;
 
-RootPage.displayName = 'Root';
+RootPage.displayName = "Root";
 
-export default connect(() => ({}), () => ({}))(RootPage);
+export default connect(
+  () => ({}),
+  () => ({})
+)(RootPage);

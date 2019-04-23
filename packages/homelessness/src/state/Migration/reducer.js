@@ -2,7 +2,7 @@
  * Migration reducer
  */
 
-import { actionTypes, INITIAL_STATE } from './constants';
+import { actionTypes, INITIAL_STATE } from "./constants";
 
 export default function migrationReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
@@ -11,7 +11,7 @@ export default function migrationReducer(state = INITIAL_STATE, action) {
     case actionTypes.GET_MIGRATION_DEMO_SUCCESS:
       return {
         ...state,
-        migrationDemoData: action.payload,
+        migrationDemoData: action.payload
       };
     case actionTypes.GET_MIGRATION_DEMO_FAILURE:
       return { ...state };

@@ -1,19 +1,29 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Select from 'react-select';
-import { css } from 'emotion';
+import React from "react";
+import PropTypes from "prop-types";
+import Select from "react-select";
+import { css } from "emotion";
 
-import '@hackoregon/component-library/assets/vendor/react-select.min.css';
+import "../../assets/vendor/react-select.min.css";
 
 const dropdownClass = css`
-  background-color: #FFF;
+  background-color: #fff;
   cursor: pointer;
   font-size: 15px;
   margin: 10px;
   z-index: 1404 !important;
 `;
 
-const Dropdown = ({ options, onChange, value, clearable, searchable, disabled, simpleValue, multi }) => (
+const Dropdown = ({
+  options,
+  onChange,
+  value,
+  clearable,
+  searchable,
+  disabled,
+  simpleValue,
+  multi,
+  placeholder
+}) => (
   <Select
     className={dropdownClass}
     options={options}
@@ -24,26 +34,28 @@ const Dropdown = ({ options, onChange, value, clearable, searchable, disabled, s
     disabled={disabled}
     simpleValue={simpleValue}
     multi={multi}
+    placeholder={placeholder}
   />
-  );
+);
 
-Dropdown.displayName = 'Dropdown';
+Dropdown.displayName = "Dropdown";
 
 Dropdown.propTypes = {
   onChange: PropTypes.func.isRequired,
   options: PropTypes.array.isRequired,
-  value: PropTypes.any.isRequired,  // eslint-disable-line react/forbid-prop-types
+  value: PropTypes.any.isRequired, // eslint-disable-line react/forbid-prop-types
   clearable: PropTypes.bool,
   searchable: PropTypes.bool,
   disabled: PropTypes.bool,
   simpleValue: PropTypes.bool,
   multi: PropTypes.bool,
+  placeholder: PropTypes.string
 };
 
 Dropdown.defaultProps = {
   clearable: false,
   searchable: true,
-  disabled: false,
+  disabled: false
 };
 
 export default Dropdown;

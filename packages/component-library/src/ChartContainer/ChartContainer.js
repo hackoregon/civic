@@ -1,18 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { css } from 'emotion';
+import React from "react";
+import PropTypes from "prop-types";
+import { css } from "emotion";
 
-import ChartTitle from '../ChartTitle';
+import ChartTitle from "../ChartTitle";
 
 const chartLoading = css`
   text-align: center;
-  background: #EEE;
+  background: #eee;
   height: 100%;
 `;
 
 const chartError = css`
   text-align: center;
-  background: #FDD;
+  background: #fdd;
   height: 100%;
 `;
 
@@ -29,7 +29,7 @@ const ChartContainer = ({
   loading,
   subtitle,
   children,
-  className,
+  className
 }) => {
   const wrapperStyle = css`
     margin: 0 auto;
@@ -41,9 +41,7 @@ const ChartContainer = ({
   let content = (
     <div>
       <ChartTitle title={title} subtitle={subtitle} />
-      <div className={wrapperStyle}>
-        { children }
-      </div>
+      <div className={wrapperStyle}>{children}</div>
     </div>
   );
 
@@ -62,10 +60,9 @@ ChartContainer.propTypes = {
   loading: PropTypes.bool,
   children: PropTypes.node,
   subtitle: PropTypes.string,
-  className: PropTypes.string,
+  className: PropTypes.string
 };
 
-ChartContainer.defaultProps = {
-};
+ChartContainer.defaultProps = {};
 
 export default ChartContainer;

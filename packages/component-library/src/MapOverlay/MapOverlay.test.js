@@ -1,18 +1,18 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import MapOverlay from './MapOverlay';
-import DeckGL from 'deck.gl';
+import React from "react";
+import { shallow } from "enzyme";
+import DeckGL from "deck.gl";
+import MapOverlay from "./MapOverlay";
 
-describe('MapOverlay', () => {
+describe("MapOverlay", () => {
   const data = [
     {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [0, 0]
+      type: "Feature",
+      geometry: {
+        type: "Point",
+        coordinates: [0, 0]
       },
-      "properties": {
-        "name": "Null Island"
+      properties: {
+        name: "Null Island"
       }
     }
   ];
@@ -25,25 +25,25 @@ describe('MapOverlay', () => {
     extruded
   };
 
-  const wrapper = shallow(<MapOverlay {...defaultProps}/>);
+  const wrapper = shallow(<MapOverlay {...defaultProps} />);
 
-  it('should render a div wrapper', () => {
-    expect(wrapper.find('div')).length(1)
+  it("should render a div wrapper", () => {
+    expect(wrapper.find("div")).length(1);
   });
 
-  it('should render with the same class name', () => {
-    expect(wrapper.find('.MapOverlay')).length(1)
+  it("should render with the same class name", () => {
+    expect(wrapper.find(".MapOverlay")).length(1);
   });
 
-  it('should render a DeckGL component', () => {
-    expect(wrapper.find(DeckGL)).length(1)
+  it("should render a DeckGL component", () => {
+    expect(wrapper.find(DeckGL)).length(1);
   });
 
-  it('should render without stroked', () => {
-    expect(wrapper.props().layers)
+  it("should render without stroked", () => {
+    expect(wrapper.props().layers);
   });
 
-  it('should render without stroked', () => {
-    expect(wrapper.props().filled)
+  it("should render without stroked", () => {
+    expect(wrapper.props().filled);
   });
 });

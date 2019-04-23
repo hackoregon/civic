@@ -2,7 +2,7 @@
  * Population reducer
  */
 
-import { actionTypes, INITIAL_STATE } from './constants';
+import { actionTypes, INITIAL_STATE } from "./constants";
 
 export default function populationReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
@@ -11,7 +11,7 @@ export default function populationReducer(state = INITIAL_STATE, action) {
     case actionTypes.GET_ETHNICITY_SUCCESS:
       return {
         ...state,
-        ethnicityData: action.payload,
+        ethnicityData: action.payload
       };
     case actionTypes.GET_ETHNICITY_FAILURE:
       return { ...state };
@@ -20,7 +20,7 @@ export default function populationReducer(state = INITIAL_STATE, action) {
     case actionTypes.GET_AGE_GENDER_SUCCESS:
       return {
         ...state,
-        ageGenderData: action.payload,
+        ageGenderData: action.payload
       };
     case actionTypes.GET_AGE_GENDER_FAILURE:
       return { ...state };

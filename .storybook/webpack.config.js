@@ -1,21 +1,49 @@
-const webpack = require('webpack');
-const autoprefixer = require('autoprefixer');
+const webpack = require("webpack");
+const autoprefixer = require("autoprefixer");
 const {
   createConfig,
   match,
   css,
   postcss,
   file,
-} = require('webpack-blocks');
+  customConfig
+} = require("webpack-blocks");
 
 module.exports = createConfig([
-  match(['*.css'], [
-    css(),
-    postcss({
-      plugins: [autoprefixer({ browsers: ['last 2 versions'] })],
-    }),
-  ]),
-  match(['*.svg', '*.png', '*.gif', '*.jpg', '*.jpeg'], [
-    file(),
-  ]),
-])
+  match(
+    ["*.css"],
+    [
+      css(),
+      postcss({
+        plugins: [autoprefixer({ browsers: ["last 2 versions"] })]
+      })
+    ]
+  ),
+  match(["*.svg", "*.png", "*.gif", "*.jpg", "*.jpeg"], [file()]),
+  customConfig({
+    externals: [
+      {
+        xmlhttprequest: "{XMLHttpRequest:XMLHttpRequest}"
+      }
+    ]
+  }),
+  match(["*.js"], [storySourceLoader()])
+]);
+
+function storySourceLoader() {
+  return (context, { merge }) =>
+    merge({
+      module: {
+        rules: [
+          Object.assign(
+            {
+              test: /\.stories\.jsx?$/,
+              loaders: [require.resolve("@storybook/addon-storysource/loader")],
+              enforce: "pre"
+            },
+            context.match // carries `test`, `exclude` & `include` as set by `match()`
+          )
+        ]
+      }
+    });
+}

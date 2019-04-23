@@ -1,12 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { css } from 'emotion'
-import { connect } from 'react-redux';
-import { uniqBy } from 'lodash';
+import React from "react";
+import PropTypes from "prop-types";
+import { css } from "emotion";
+import { connect } from "react-redux";
+import { uniqBy } from "lodash";
 
-import {
-  CivicStoryCard,
-} from '@hackoregon/component-library';
+import { CivicStoryCard } from "@hackoregon/component-library";
 
 import {
   fetchContributorBreakdown,
@@ -14,34 +12,29 @@ import {
   fetchElectionCycles,
   fetchCommittees,
   setElectionCycle,
-  setCampaign,
-} from '../../state/political-campaigns/actions';
+  setCampaign
+} from "../../state/political-campaigns/actions";
 import {
   isContributorBreakdownLoading,
   getContributorBreakdownData,
-
   isSpendingBreakdownLoading,
   getSpendingBreakdownData,
-
   isPoliticalCampaignsLoading,
-
   getElectionCycles,
   getElectionCycle,
   getCommittees,
-  getCampaign,
-} from '../../state/political-campaigns/selectors';
+  getCampaign
+} from "../../state/political-campaigns/selectors";
 
-import { campaign, electionCycle } from './defaults';
-import ContributorBreakdown from './ContributorBreakdown';
-import SpendingBreakdown from './SpendingBreakdown';
-import MoneyRaisedKPI from './MoneyRaisedKPI';
-import Controls from './Controls';
+import { campaign, electionCycle } from "./defaults";
+import ContributorBreakdown from "./ContributorBreakdown";
+import SpendingBreakdown from "./SpendingBreakdown";
+import MoneyRaisedKPI from "./MoneyRaisedKPI";
+import Controls from "./Controls";
 
-const descriptionClass = css`
-`;
+const descriptionClass = css``;
 
-const missionClass = css`
-`;
+const missionClass = css``;
 
 const chartGrid = css`
   display: flex;
@@ -76,14 +69,14 @@ const propTypes = {
   contributorBreakdown: PropTypes.object,
   fetchSpendingBreakdown: PropTypes.func,
 
-  loadingContributorBreakdown: PropTypes.bool,
+  loadingContributorBreakdown: PropTypes.bool
 };
 
 const defaultProps = {
   campaign: {},
   committees: {
-    results: [],
-  },
+    results: []
+  }
 };
 
 class RealTimeInformationOnPoliticalCampaigns extends React.Component {
@@ -95,11 +88,11 @@ class RealTimeInformationOnPoliticalCampaigns extends React.Component {
 
   componentWillReceiveProps(newProps) {
     if (
-      (newProps.electionCycle && newProps.campaign) &&
-      (
-        (newProps.campaign.id !== this.props.campaign.id) ||
-        (newProps.electionCycle.id !== this.props.electionCycle.id)
-      )) {
+      newProps.electionCycle &&
+      newProps.campaign &&
+      (newProps.campaign.id !== this.props.campaign.id ||
+        newProps.electionCycle.id !== this.props.electionCycle.id)
+    ) {
       this.props.fetchChartData(newProps.campaign.id, newProps.electionCycle);
       this.props.fetchElectionCycles(newProps.campaign.id);
     }
@@ -115,8 +108,14 @@ class RealTimeInformationOnPoliticalCampaigns extends React.Component {
       committees = this.props.committees.results;
     }
 
-    if (this.props.contributorBreakdown && this.props.contributorBreakdown.results) {
-      contributors = uniqBy(this.props.contributorBreakdown.results, 'donor_category');
+    if (
+      this.props.contributorBreakdown &&
+      this.props.contributorBreakdown.results
+    ) {
+      contributors = uniqBy(
+        this.props.contributorBreakdown.results,
+        "donor_category"
+      );
     }
 
     if (this.props.electionCycles && this.props.electionCycles.results) {
@@ -124,7 +123,10 @@ class RealTimeInformationOnPoliticalCampaigns extends React.Component {
     }
 
     if (this.props.spendingBreakdown && this.props.spendingBreakdown.results) {
-      spending = uniqBy(this.props.spendingBreakdown.results, 'spending_category');
+      spending = uniqBy(
+        this.props.spendingBreakdown.results,
+        "spending_category"
+      );
     }
 
     return (
@@ -133,7 +135,9 @@ class RealTimeInformationOnPoliticalCampaigns extends React.Component {
         slug="real-time-information-on-political-campaigns"
         loading={this.props.loadingControls}
       >
-        <h2 className={descriptionClass}>Data on contributions and spending from ORESTAR</h2>
+        <h2 className={descriptionClass}>
+          Data on contributions and spending from ORESTAR
+        </h2>
         <Controls
           campaign={this.props.campaign}
           campaigns={committees}
@@ -142,7 +146,7 @@ class RealTimeInformationOnPoliticalCampaigns extends React.Component {
           electionCycles={electionCycles}
           setElectionCycle={this.props.setElectionCycle}
         />
-        <p className={missionClass}></p>
+        <p className={missionClass} />
         <div className={chartGrid}>
           <div className={chartCol}>
             <div className={chartStyle}>
@@ -166,7 +170,8 @@ class RealTimeInformationOnPoliticalCampaigns extends React.Component {
   }
 }
 
-RealTimeInformationOnPoliticalCampaigns.displayName = 'RealTimeInformationOnPoliticalCampaigns';
+RealTimeInformationOnPoliticalCampaigns.displayName =
+  "RealTimeInformationOnPoliticalCampaigns";
 RealTimeInformationOnPoliticalCampaigns.propTypes = propTypes;
 RealTimeInformationOnPoliticalCampaigns.defaultProps = defaultProps;
 
@@ -181,17 +186,26 @@ export default connect(
     campaign: getCampaign(state),
     committees: getCommittees(state),
     electionCycle: getElectionCycle(state),
-    electionCycles: getElectionCycles(state),
+    electionCycles: getElectionCycles(state)
   }),
   dispatch => ({
     fetchChartData: (committeeID, electionCycle) => {
-      dispatch(fetchContributorBreakdown(committeeID, electionCycle.id, { ordering: 'sum' }));
-      dispatch(fetchSpendingBreakdown(committeeID, electionCycle.name, { ordering: 'sum', limit: 8 }));
+      dispatch(
+        fetchContributorBreakdown(committeeID, electionCycle.id, {
+          ordering: "sum"
+        })
+      );
+      dispatch(
+        fetchSpendingBreakdown(committeeID, electionCycle.name, {
+          ordering: "sum",
+          limit: 8
+        })
+      );
     },
     fetchElectionCycles: committeeID =>
       dispatch(fetchElectionCycles(committeeID, { limit: 30 })),
     query: () => dispatch(fetchCommittees({ limit: 3000 })),
     setElectionCycle: c => dispatch(setElectionCycle(c)),
-    setCampaign: c => dispatch(setCampaign(c)),
-  }),
+    setCampaign: c => dispatch(setCampaign(c))
+  })
 )(RealTimeInformationOnPoliticalCampaigns);

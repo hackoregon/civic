@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import { CivicStoryCard, Placeholder } from '@hackoregon/component-library';
+import { CivicStoryCard, Placeholder } from "@hackoregon/component-library";
 
 export class YourVoteHasAPriceTag extends React.Component {
   componentDidMount() {
@@ -19,7 +19,7 @@ export class YourVoteHasAPriceTag extends React.Component {
   }
 }
 
-YourVoteHasAPriceTag.displayName = 'YourVoteHasAPriceTag';
+YourVoteHasAPriceTag.displayName = "YourVoteHasAPriceTag";
 
 // Connect this to the redux store when necessary
 export default YourVoteHasAPriceTag;

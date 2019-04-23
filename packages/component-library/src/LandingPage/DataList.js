@@ -1,11 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router';
+/* Not currently used 03/2019 */
+/* eslint-disable */
 
-import { css } from 'emotion';
+import React from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router";
 
-import localSVG from '../../assets/local/local.svg';
-import usaSVG from '../../assets/country/usa.svg';
+import { css } from "emotion";
+
+import localSVG from "../../assets/local/local.svg";
+import usaSVG from "../../assets/country/usa.svg";
 
 const cardsWrapper = css`
   display: flex;
@@ -15,7 +18,7 @@ const cardsWrapper = css`
   flex-wrap: wrap;
 `;
 const card = css`
-  font-family: 'Rubik';
+  font-family: "Rubik";
   position: relative;
   background-color: transparent;
   font-size: 2vw;
@@ -25,10 +28,10 @@ const card = css`
   box-sizing: border-box;
   text-align: left;
   margin: 6px 0px;
-  transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 
   :not(:last-child):before {
-    content: '';
+    content: "";
     height: 40px;
     border-right: 1px solid #ec485b;
     top: 82%;
@@ -44,13 +47,13 @@ const cardTextWrapper = css`
 `;
 const eyebrowStyle = css`
   display: block;
-  font-family: 'Rubik';
+  font-family: "Rubik";
   font-size: 14px;
-  color: #EE495C;
+  color: #ee495c;
 `;
 const locationTitle = css`
   display: block;
-  font-family: 'Rubik';
+  font-family: "Rubik";
   font-size: 18px;
   color: white;
 `;
@@ -64,7 +67,7 @@ const iconWrapper = css`
 `;
 const locationResult = css`
   color: white;
-  font-family: 'Rubik',sans-serif;
+  font-family: "Rubik", sans-serif;
   font-size: 14px;
   width: 180px;
 `;
@@ -83,11 +86,26 @@ const whyStyle = css`
 
 const DataList = ({ city, state }) => {
   const missingStates = [];
-  const fileName = state && !missingStates.includes(state) ? `state/${state}` : 'local/local';
+  const fileName =
+    state && !missingStates.includes(state) ? `state/${state}` : "local/local";
   const statePath = require(`../../assets/${fileName}.svg`); // eslint-disable-line global-require, import/no-dynamic-require
-  const cityResult = city === 'Portland'
-    ? <span>We have Portland data!<br/><span className={whyStyle}><Link to="/cities/portland">View here</Link></span></span>
-    : <span>{`There's no CIVIC data for ${city} yet!`} <span className={whyStyle}><a href="#getStarted">Why?</a></span></span>;
+  const cityResult =
+    city === "Portland" ? (
+      <span>
+        We have Portland data!
+        <br />
+        <span className={whyStyle}>
+          <Link to="/cities/portland">View here</Link>
+        </span>
+      </span>
+    ) : (
+      <span>
+        {`There's no CIVIC data for ${city} yet!`}{" "}
+        <span className={whyStyle}>
+          <a href="#getStarted">Why?</a>
+        </span>
+      </span>
+    );
 
   return (
     <div className={cardsWrapper}>
@@ -106,7 +124,7 @@ const DataList = ({ city, state }) => {
         </div>
         <div className={cardTextWrapper}>
           <span className={eyebrowStyle}>State</span>
-          <div className={locationTitle}>{ state || '?' }</div>
+          <div className={locationTitle}>{state || "?"}</div>
         </div>
       </div>
       <div className={card}>
@@ -126,7 +144,7 @@ const DataList = ({ city, state }) => {
 
 DataList.propTypes = {
   city: PropTypes.string,
-  state: PropTypes.string,
+  state: PropTypes.string
 };
 
 export default DataList;

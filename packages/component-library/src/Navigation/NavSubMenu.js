@@ -1,6 +1,10 @@
-import React from 'react';
-import { Link } from 'react-router';
-import { css } from 'emotion';
+/* TODO: Fix linting errors */
+/* eslint-disable */
+
+import PropTypes from "prop-types";
+import React from "react";
+import { Link } from "react-router";
+import { css } from "emotion";
 
 const visibleClass = css`
   visibility: visible;
@@ -18,7 +22,7 @@ const nestedMenuClass = css`
     color: rgba(255, 255, 255, 0.65);
     flex: 1;
     display: block;
-    font-family: 'Rubik', sans-serif;
+    font-family: "Rubik", sans-serif;
     font-size: 1.25rem;
     border: none;
     text-transform: uppercase;
@@ -34,22 +38,22 @@ const nestedMenuClass = css`
 
   @media (min-width: 641px) {
     position: absolute;
-    z-index: 999;
+    z-index: 1500;
     margin-top: 0;
     width: 200px;
-    background-color: #FFF;
+    background-color: #fff;
     padding: 20px;
     transition: all 0.5s cubic-bezier(0.42, 0, 0.14, 1);
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       bottom: 100%;
       left: 50%;
       margin-left: -24px;
       border-width: 12px;
       border-style: solid;
-      border-color: transparent transparent #FFF transparent;
+      border-color: transparent transparent #fff transparent;
     }
 
     & a {
@@ -59,7 +63,7 @@ const nestedMenuClass = css`
       font-size: 16px;
       flex: 1;
       display: block;
-      font-family: 'Rubik', sans-serif;
+      font-family: "Rubik", sans-serif;
       text-transform: uppercase;
       text-decoration: none;
       border: none;
@@ -70,20 +74,21 @@ const nestedMenuClass = css`
 const pathOrName = (p, n) => p || `/${n.toLowerCase()}`;
 
 const NavSubMenu = ({ items, isVisible }) => (
-  <div className={`${nestedMenuClass} ${isVisible ? visibleClass : hiddenClass}`}>
+  <div
+    className={`${nestedMenuClass} ${isVisible ? visibleClass : hiddenClass}`}
+  >
     {items.map((item, index) => (
-      <Link key={index} to={pathOrName(item.path, item.name)} >
+      <Link key={index} to={pathOrName(item.path, item.name)}>
         <span className="nested-menu-link">{item.name}</span>
       </Link>
-    ))
-    }
+    ))}
   </div>
 );
 
-NavSubMenu.displayName = 'NavSubMenu';
+NavSubMenu.displayName = "NavSubMenu";
 NavSubMenu.propTypes = {
-  items: React.PropTypes.arrayOf(React.PropTypes.shape({})),
-  isVisible: React.PropTypes.bool,
+  items: PropTypes.arrayOf(PropTypes.shape({})),
+  isVisible: PropTypes.bool
 };
 
 export default NavSubMenu;

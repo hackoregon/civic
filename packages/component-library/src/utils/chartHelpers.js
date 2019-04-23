@@ -1,35 +1,39 @@
-import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
+import CivicVictoryTheme from "../VictoryTheme/VictoryThemeIndex";
 
 const tooltipColor = CivicVictoryTheme.civic.tooltip.style.customHoverColor;
 
 const chartEvents = [
   {
-    target: 'data',
+    target: "data",
     eventHandlers: {
       onMouseOver: () => {
         return [
           {
-            target: 'data',
-            mutation: props => ({ style: Object.assign(props.style, { fill: tooltipColor }) }),
-          }, {
-            target: 'labels',
-            mutation: () => ({ active: true }),
+            target: "data",
+            mutation: props => ({
+              style: Object.assign(props.style, { fill: tooltipColor })
+            })
           },
+          {
+            target: "labels",
+            mutation: () => ({ active: true })
+          }
         ];
       },
       onMouseOut: () => {
         return [
           {
-            target: 'data',
-            mutation: () => { },
-          }, {
-            target: 'labels',
-            mutation: () => ({ active: false }),
+            target: "data",
+            mutation: () => {}
           },
+          {
+            target: "labels",
+            mutation: () => ({ active: false })
+          }
         ];
-      },
-    },
-  },
+      }
+    }
+  }
 ];
 
 function getDefaultDomain(data, dataKey, dataLabel) {
@@ -39,19 +43,19 @@ function getDefaultDomain(data, dataKey, dataLabel) {
   return {
     x: [
       Math.min(...xValues) < 0 ? Math.min(...xValues) : Math.min(...xValues),
-      Math.max(...xValues),
+      Math.max(...xValues)
     ],
     y: [
       Math.min(...yValues) < 0 ? Math.min(...yValues) : 0,
-      Math.max(...yValues),
-    ],
+      Math.max(...yValues)
+    ]
   };
 }
 
 function getDefaultStackedDomain(data, dataKey, dataLabel) {
   function groupBy(objectArray, property) {
-    return objectArray.reduce(function (acc, obj) {
-      var key = obj[property];
+    return objectArray.reduce((acc, obj) => {
+      const key = obj[property];
       if (!acc[key]) {
         acc[key] = [];
       }
@@ -62,18 +66,20 @@ function getDefaultStackedDomain(data, dataKey, dataLabel) {
 
   const xValues = data.map(value => value[dataKey]);
   const yValues = Object.values(
-    groupBy(data, dataKey).map(value => value.reduce((acc, obj) => acc + obj[dataLabel], 0))
+    groupBy(data, dataKey).map(value =>
+      value.reduce((acc, obj) => acc + obj[dataLabel], 0)
+    )
   );
 
   return {
     x: [
       Math.min(...xValues) < 0 ? Math.min(...xValues) : Math.min(...xValues),
-      Math.max(...xValues),
+      Math.max(...xValues)
     ],
     y: [
       Math.min(...yValues) < 0 ? Math.min(...yValues) : 0,
-      Math.max(...yValues),
-    ],
+      Math.max(...yValues)
+    ]
   };
 }
 
@@ -86,30 +92,40 @@ function getDefaultDataSeriesLabels(data, series) {
 function getDefaultFillStyle(dataSeriesLabel) {
   const dataSeriesCategories =
     dataSeriesLabel && dataSeriesLabel.length
-      ? dataSeriesLabel.map(series => (series.category))
+      ? dataSeriesLabel.map(series => series.category)
       : null;
   return {
     data: {
       fill: d => {
-        if (!dataSeriesCategories) return CivicVictoryTheme.civic.group.colorScale[0];
-        const idx = dataSeriesCategories.findIndex(series => series === d.series);
+        if (!dataSeriesCategories)
+          return CivicVictoryTheme.civic.group.colorScale[0];
+        const idx = dataSeriesCategories.findIndex(
+          series => series === d.series
+        );
         return CivicVictoryTheme.civic.group.colorScale[idx];
-      },
-    },
+      }
+    }
   };
 }
 
 function getDefaultLineStyle(idx) {
   return {
-    data: { stroke: CivicVictoryTheme.civic.group.colorScale[idx] },
+    data: { stroke: CivicVictoryTheme.civic.group.colorScale[idx] }
   };
 }
 
 function getDefaultAreaStyle(idx) {
   return {
-    data: { fill: CivicVictoryTheme.civic.group.colorScale[idx] },
+    data: { fill: CivicVictoryTheme.civic.group.colorScale[idx] }
   };
 }
 
-export { chartEvents, getDefaultDomain, getDefaultDataSeriesLabels, getDefaultFillStyle, getDefaultLineStyle, getDefaultAreaStyle, getDefaultStackedDomain };
-
+export {
+  chartEvents,
+  getDefaultDomain,
+  getDefaultDataSeriesLabels,
+  getDefaultFillStyle,
+  getDefaultLineStyle,
+  getDefaultAreaStyle,
+  getDefaultStackedDomain
+};

@@ -1,12 +1,13 @@
-import React, { PropTypes } from 'react';
-import DeckGL, { PathLayer } from 'deck.gl';
-import { css } from 'emotion';
+import PropTypes from "prop-types";
+import React from "react";
+import DeckGL, { PathLayer } from "deck.gl";
+import { css } from "emotion";
 
 const crosshair = css`
   cursor: crosshair;
 `;
 
-const PathMap = (props) => {
+const PathMap = props => {
   const {
     viewport,
     data,
@@ -24,14 +25,14 @@ const PathMap = (props) => {
     x,
     y,
     onHover,
-    children,
+    children
   } = props;
 
   const tooltip = React.Children.map(children, child => {
     return React.cloneElement(child, {
-      tooltipInfo: tooltipInfo,
-      x: x,
-      y: y,
+      tooltipInfo,
+      x,
+      y
     });
   });
 
@@ -39,14 +40,11 @@ const PathMap = (props) => {
 
   return (
     <div className={crosshair}>
-      <DeckGL
-        className={'DeckGL'}
-        {...viewport}
-      >
+      <DeckGL className="DeckGL" {...viewport}>
         <PathLayer
-          id={'path-layer'}
-          className={'PathMap'}
-          pickable={true}
+          id="path-layer"
+          className="PathMap"
+          pickable
           data={data}
           getColor={getColor}
           opacity={opacity}
@@ -59,11 +57,11 @@ const PathMap = (props) => {
           highlightColor={highlightColor}
           onClick={onLayerClick}
           onHover={onHover}
-          parameters={{depthTest: false}}
-          updateTriggers={{instanceColors: getColor}}
+          parameters={{ depthTest: false }}
+          updateTriggers={{ instanceColors: getColor }}
           visible={visible}
         />
-        { tooltipRender }
+        {tooltipRender}
       </DeckGL>
     </div>
   );
@@ -86,19 +84,19 @@ PathMap.propTypes = {
   x: PropTypes.number,
   y: PropTypes.number,
   onHover: PropTypes.func,
-  children: PropTypes.node,
+  children: PropTypes.node
 };
 
 PathMap.defaultProps = {
-  getColor: d => [0,0,0],
+  getColor: () => [0, 0, 0],
   opacity: 0.9,
   getPath: d => d.geometry.coordinates,
-  getWidth: d => 10,
+  getWidth: () => 10,
   widthScale: 1,
   rounded: false,
   autoHighlight: true,
-  highlightColor: [0,0,128,191],
-  visible: true,
+  highlightColor: [0, 0, 128, 191],
+  visible: true
 };
 
 export default PathMap;

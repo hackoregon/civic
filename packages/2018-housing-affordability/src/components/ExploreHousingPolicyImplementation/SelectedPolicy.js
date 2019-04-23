@@ -1,6 +1,6 @@
-import React from 'react';
-import { css } from 'emotion';
-import { ICONS } from '@hackoregon/component-library/src/styleConstants';
+import React from "react";
+import { css } from "emotion";
+import { ICONS } from "@hackoregon/component-library/src/styleConstants";
 
 const govLinks = item =>
   item.links[0].link &&
@@ -46,7 +46,7 @@ function SelectedPolicy({ data }) {
       <ul>
         {Object.keys(data.govData).map(gov => (
           <li key={gov}>
-            <p style={{ margin: 0, color: '#001732' }}>
+            <p style={{ margin: 0, color: "#001732" }}>
               <strong>{gov}</strong>
             </p>
           </li>
@@ -58,7 +58,7 @@ function SelectedPolicy({ data }) {
           gov =>
             data.govData[gov][0].description && (
               <li key={`${gov}extra`}>
-                <p style={{ margin: 0, color: '#001732' }}>
+                <p style={{ margin: 0, color: "#001732" }}>
                   <strong>{gov}</strong>
                 </p>
                 <ul>

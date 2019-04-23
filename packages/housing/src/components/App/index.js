@@ -1,93 +1,93 @@
 /* eslint-disable import/no-extraneous-dependencies */
 // This should probably be the core component, containing, nav etc
 
-import React from 'react';
-import { connect } from 'react-redux';
+import PropTypes from "prop-types";
+
+import React from "react";
+import { connect } from "react-redux";
 // import { withRouter } from 'react-router-dom';
-import { StoryCard, Slider, Dropdown } from '@hackoregon/component-library';
+import { StoryCard, Slider, Dropdown } from "@hackoregon/component-library";
 
-import '@hackoregon/component-library/assets/global.styles.css';
-import '@hackoregon/component-library/assets/vendor/leaflet.css';
-import '@hackoregon/component-library/assets/vendor/react-select.min.css';
+import "@hackoregon/component-library/assets/global.styles.css";
+import "@hackoregon/component-library/assets/vendor/react-select.min.css";
 
-import { fetchAffordabilityData } from '../../state/affordability/actions';
-import { fetchRentData } from '../../state/rent/actions';
-import { fetchNeighborhoods } from '../../state/neighborhoods/actions';
-import { fetchHouseholdsData } from '../../state/households/actions';
-import { fetchPopulationsData } from '../../state/populations/actions';
+import { fetchAffordabilityData } from "../../state/affordability/actions";
+import { fetchRentData } from "../../state/rent/actions";
+import { fetchNeighborhoods } from "../../state/neighborhoods/actions";
+import { fetchHouseholdsData } from "../../state/households/actions";
+import { fetchPopulationsData } from "../../state/populations/actions";
 import {
   isAnyCallPending,
   getCombinedNeighborhoodsData,
-  getCombinedDemographicData,
-} from '../../state/globalSelectors';
-import Map from '../Map';
-import DemographicDetailView from '../DemographicDetailView';
-import TempProdVsCost from '../TempProdVsCost';
-import TempVoterRegistration from '../TempVoterRegistration';
-import MapLegend from '../MapLegend';
-import './app.styles.css';
-
+  getCombinedDemographicData
+} from "../../state/globalSelectors";
+import Map from "../Map";
+import DemographicDetailView from "../DemographicDetailView";
+import TempProdVsCost from "../TempProdVsCost";
+import TempVoterRegistration from "../TempVoterRegistration";
+import MapLegend from "../MapLegend";
+import "./app.styles.css";
 
 import {
   updateOtherUnitSize,
   updateOtherDemographic,
   updateUserIncome,
   updateUserUnitSize,
-  updateNeighborhood,
-} from '../../state/parameters/actions';
+  updateNeighborhood
+} from "../../state/parameters/actions";
 import {
   getUserIncome,
   getUserUnitSize,
   getOtherDemographic,
-  getOtherUnitSize,
-} from '../../state/parameters/selectors';
+  getOtherUnitSize
+} from "../../state/parameters/selectors";
 import {
   DEMOGRAPHICS,
   HOUSING_TYPES,
   DEFAULT_INCOME,
   MIN_INCOME,
-  MAX_INCOME,
-} from '../../utils/data-constants';
+  MAX_INCOME
+} from "../../utils/data-constants";
 
 const parameterGroupStyle = {
-  display: 'inline-block',
-  verticalAlign: 'top',
-  width: '50%',
-  minWidth: '340px',
+  display: "inline-block",
+  verticalAlign: "top",
+  width: "50%",
+  minWidth: "340px"
 };
 
 const mapContainerStyles = {
-  background: '#f3f3f3',
-  borderBottom: '1px solid #ddd',
-  padding: '10px',
+  background: "#f3f3f3",
+  borderBottom: "1px solid #ddd",
+  padding: "10px"
 };
 
 const mapStyles = {
-  border: '1px solid #ddd',
+  border: "1px solid #ddd"
 };
 
 const tooltipStyles = {
-  background: '#f3f3f3',
-  padding: '30px',
-  position: 'relative',
-  zIndex: '1001',
+  background: "#f3f3f3",
+  padding: "30px",
+  position: "relative",
+  zIndex: "1001"
 };
 
 const arrowHackStyles = {
-  background: '#f3f3f3',
-  width: '100px',
-  height: '100px',
-  transform: 'rotate(45deg) translate(-30%, -30%)',
-  margin: 'auto',
-  position: 'absolute',
-  zIndex: '1000',
-  left: '0',
-  right: '0',
-  border: '1px solid #ddd',
+  background: "#f3f3f3",
+  width: "100px",
+  height: "100px",
+  transform: "rotate(45deg) translate(-30%, -30%)",
+  margin: "auto",
+  position: "absolute",
+  zIndex: "1000",
+  left: "0",
+  right: "0",
+  border: "1px solid #ddd"
 };
 
 const textAlignCenter = {
-  textAlign: 'center',
+  textAlign: "center"
 };
 
 export class App extends React.Component {
@@ -105,16 +105,29 @@ export class App extends React.Component {
       otherDemographic,
       setOtherDemographic,
       setUnitSize,
-      setNeighborhood,
+      setNeighborhood
     } = this.props;
+
+    const activeNeighborhood =
+      neighborhoodData &&
+      demographicData &&
+      neighborhoodData.features.find(n => n.id === demographicData.id);
 
     return (
       <div>
-        <StoryCard title="Map Your Affordability" collectionId="housing" cardId="affordability-map">
-          <p className="description" style={textAlignCenter}>Compare your income to the average income of common demographics.</p>
+        <StoryCard
+          title="Map Your Affordability"
+          collectionId="housing"
+          cardId="affordability-map"
+        >
+          <p className="description" style={textAlignCenter}>
+            Compare your income to the average income of common demographics.
+          </p>
           <div>
             <div style={parameterGroupStyle}>
-              <h3 style={textAlignCenter}>Your income: ${userIncome.toFixed(2)}/hr</h3>
+              <h3 style={textAlignCenter}>
+                Your income: ${userIncome.toFixed(2)}/hr
+              </h3>
               <Slider
                 min={MIN_INCOME}
                 max={MAX_INCOME}
@@ -138,12 +151,12 @@ export class App extends React.Component {
             </div>
           </div>
           <div style={mapContainerStyles}>
-            <MapLegend otherDemographicLabel={otherDemographic.label || ''} />
+            <MapLegend otherDemographicLabel={otherDemographic.label || ""} />
             <div style={mapStyles}>
               <Map
-                neighborhoods={neighborhoodData}
-                onSelect={id => setNeighborhood(id)}
-                activeNeighborhood={demographicData ? demographicData.id : 0}
+                neighborhoodData={neighborhoodData}
+                activeNeighborhood={activeNeighborhood}
+                onSelect={({ object }) => setNeighborhood(object)}
               />
             </div>
             <div style={arrowHackStyles} />
@@ -159,7 +172,7 @@ export class App extends React.Component {
   }
 }
 
-App.displayName = 'App';
+App.displayName = "App";
 App.defaultProps = {
   children: <div />,
   neighborhoodData: {},
@@ -172,20 +185,20 @@ App.defaultProps = {
   setOtherDemographic() {},
   setNeighborhood() {},
   fetchAllData() {},
-  setUnitSize() {},
+  setUnitSize() {}
 };
 
 App.propTypes = {
-  neighborhoodData: React.PropTypes.object,
-  demographicData: React.PropTypes.object,
-  setOtherDemographic: React.PropTypes.func,
-  otherDemographic: React.PropTypes.object,
-  userIncome: React.PropTypes.number,
-  userUnitSize: React.PropTypes.object,
-  setUserIncome: React.PropTypes.func,
-  setUnitSize: React.PropTypes.func,
-  setNeighborhood: React.PropTypes.func,
-  fetchAllData: React.PropTypes.func,
+  neighborhoodData: PropTypes.object,
+  demographicData: PropTypes.object,
+  setOtherDemographic: PropTypes.func,
+  otherDemographic: PropTypes.object,
+  userIncome: PropTypes.number,
+  userUnitSize: PropTypes.object,
+  setUserIncome: PropTypes.func,
+  setUnitSize: PropTypes.func,
+  setNeighborhood: PropTypes.func,
+  fetchAllData: PropTypes.func
 };
 
 const mapDispatch = dispatch => ({
@@ -217,10 +230,10 @@ const mapDispatch = dispatch => ({
 
   setNeighborhood(id) {
     dispatch(updateNeighborhood(id));
-  },
+  }
 });
 
-const mapProps = (state) => {
+const mapProps = state => {
   const fromState = state.housing || state;
   return {
     neighborhoodData: getCombinedNeighborhoodsData(fromState),
@@ -229,8 +242,11 @@ const mapProps = (state) => {
     userIncome: getUserIncome(fromState),
     userUnitSize: getUserUnitSize(fromState),
     otherDemographic: getOtherDemographic(fromState),
-    otherUnitSize: getOtherUnitSize(fromState),
+    otherUnitSize: getOtherUnitSize(fromState)
   };
 };
 
-export default connect(mapProps, mapDispatch)(App);
+export default connect(
+  mapProps,
+  mapDispatch
+)(App);

@@ -1,8 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import { Box } from 'victory';
-
+import { Box } from "victory";
 
 const GradientLine = ({ scale, domain, fill }) => {
   const width = scale.x(domain.x[1]) - scale.x(domain.x[0]);
@@ -13,7 +12,7 @@ const GradientLine = ({ scale, domain, fill }) => {
       y={scale.y(domain.y[1])}
       width={width}
       height={height}
-      style={{ fill, stroke: 'none' }}
+      style={{ fill, stroke: "none" }}
     />
   );
 };
@@ -21,13 +20,13 @@ const GradientLine = ({ scale, domain, fill }) => {
 GradientLine.propTypes = {
   scale: PropTypes.shape({
     y: PropTypes.func,
-    x: PropTypes.func,
+    x: PropTypes.func
   }),
   domain: PropTypes.shape({
     x: PropTypes.arrayOf(PropTypes.number),
-    y: PropTypes.arrayOf(PropTypes.number),
+    y: PropTypes.arrayOf(PropTypes.number)
   }),
-  fill: PropTypes.string.isRequired,
+  fill: PropTypes.string.isRequired
 };
 
 export default GradientLine;

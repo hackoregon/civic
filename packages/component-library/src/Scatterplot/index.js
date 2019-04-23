@@ -1,1 +1,1 @@
-export default from './Scatterplot';
+export default from "./Scatterplot";

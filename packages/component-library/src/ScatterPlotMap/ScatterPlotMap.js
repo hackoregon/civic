@@ -1,13 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import DeckGL, { ScatterplotLayer } from 'deck.gl';
-import { css } from 'emotion';
+import React from "react";
+import PropTypes from "prop-types";
+import DeckGL, { ScatterplotLayer } from "deck.gl";
+import { css } from "emotion";
 
 const crosshair = css`
   cursor: crosshair;
 `;
 
-const ScatterPlotMap = (props) => {
+const ScatterPlotMap = props => {
   const {
     viewport,
     data,
@@ -19,20 +19,21 @@ const ScatterPlotMap = (props) => {
     outline,
     strokeWidth,
     autoHighlight,
+    highlightColor,
     onLayerClick,
     visible,
     tooltipInfo,
     x,
     y,
     onHover,
-    children,
+    children
   } = props;
 
   const tooltip = React.Children.map(children, child => {
     return React.cloneElement(child, {
-      tooltipInfo: tooltipInfo,
-      x: x,
-      y: y,
+      tooltipInfo,
+      x,
+      y
     });
   });
 
@@ -40,14 +41,11 @@ const ScatterPlotMap = (props) => {
 
   return (
     <div className={crosshair}>
-      <DeckGL
-        className={'DeckGL'}
-        {...viewport}
-      >
+      <DeckGL className="DeckGL" {...viewport}>
         <ScatterplotLayer
-          className={'ScatterPlotMap'}
-          id={'scatterplot-layer'}
-          pickable={true}
+          className="ScatterPlotMap"
+          id="scatterplot-layer"
+          pickable
           data={data}
           getPosition={getPosition}
           opacity={opacity}
@@ -58,13 +56,14 @@ const ScatterPlotMap = (props) => {
           outline={outline}
           strokeWidth={strokeWidth}
           autoHighlight={autoHighlight}
+          highlightColor={highlightColor}
           onClick={onLayerClick}
-          parameters={{depthTest: false}}
+          parameters={{ depthTest: false }}
           visible={visible}
-          updateTriggers={{instanceColors: getColor}}
+          updateTriggers={{ instanceColors: getColor }}
           onHover={onHover}
         />
-        { tooltipRender }
+        {tooltipRender}
       </DeckGL>
     </div>
   );
@@ -81,24 +80,26 @@ ScatterPlotMap.propTypes = {
   outline: PropTypes.bool,
   strokeWidth: PropTypes.number,
   autoHighlight: PropTypes.bool,
+  highlightColor: PropTypes.array,
   onLayerClick: PropTypes.func,
   visible: PropTypes.bool,
   tooltipInfo: PropTypes.object,
   x: PropTypes.number,
   y: PropTypes.number,
   onHover: PropTypes.func,
-  children: PropTypes.node,
+  children: PropTypes.node
 };
 
 ScatterPlotMap.defaultProps = {
   getPosition: d => d.geometry.coordinates,
   opacity: 0.8,
-  getColor: d => [0,0,0],
-  getRadius: d => 50,
+  getColor: () => [0, 0, 0],
+  getRadius: () => 50,
   radiusScale: 1,
   outline: false,
   strokeWidth: 1,
   visible: true,
+  highlightColor: [0, 255, 0, 255]
 };
 
 export default ScatterPlotMap;

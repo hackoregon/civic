@@ -1,20 +1,20 @@
-import { createSelector } from 'reselect';
-import { propOr } from 'ramda';
+import { createSelector } from "reselect";
+import { propOr } from "ramda";
 
 // api : State -> Obj
-export const getHouseholdsState = state => propOr({}, 'households')(state);
+export const getHouseholdsState = state => propOr({}, "households")(state);
 
 export const getHouseholdsRequest = createSelector(
   getHouseholdsState,
-  Households => Households,
+  Households => Households
 );
 
 export const getHouseholdsData = createSelector(
   getHouseholdsRequest,
-  ({ data }) => data,
+  ({ data }) => data
 );
 
 export const isHouseholdsPending = createSelector(
   getHouseholdsRequest,
-  ({ pending }) => pending,
+  ({ pending }) => pending
 );

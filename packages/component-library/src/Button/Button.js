@@ -1,10 +1,11 @@
-import React from 'react';
-import { css } from 'emotion';
+import PropTypes from "prop-types";
+import React from "react";
+import { css } from "emotion";
 
-const accentColor = '#DC4556';
-const commonTransition = 'all .2s ease-in-out';
+const accentColor = "#DC4556";
+const commonTransition = "all .2s ease-in-out";
 const buttonClass = props => css`
-  display: ${props.display || 'block'};
+  display: ${props.display || "block"};
   margin: ${props.margin};
   padding: 6px;
   flex-wrap: nowrap;
@@ -15,7 +16,7 @@ const buttonClass = props => css`
   font-family: "Rubik", sans-serif;
   font-weight: 500;
   color: ${accentColor};
-  background: #FFF;
+  background: #fff;
   cursor: pointer;
   border: 2px solid ${accentColor};
 
@@ -30,7 +31,7 @@ const buttonClass = props => css`
 
   &:hover {
     background-color: ${accentColor};
-    color: #FFF;
+    color: #fff;
   }
 
   &:focus {
@@ -39,16 +40,16 @@ const buttonClass = props => css`
 `;
 
 const Button = ({ children, onClick, ...props }) => (
-  <button className={buttonClass(props)} onClick={onClick}>
+  <button type="button" className={buttonClass(props)} onClick={onClick}>
     {children}
   </button>
 );
 
-Button.displayName = 'Button';
+Button.displayName = "Button";
 
 Button.propTypes = {
-  children: React.PropTypes.string,
-  onClick: React.PropTypes.func,
+  children: PropTypes.string,
+  onClick: PropTypes.func
 };
 
 export default Button;

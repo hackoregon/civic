@@ -14,7 +14,7 @@ export default class Registry {
     const slugs = new Set();
 
     // Track every slug that is in entries more than once
-    this.entries.forEach((entry) => {
+    this.entries.forEach(entry => {
       if (slugs.has(entry.slug)) {
         duplicates.push(entry.slug);
       }
@@ -24,17 +24,24 @@ export default class Registry {
     // Throw an error that lists all duplicates
     const errors = [];
 
-    duplicates.forEach((duplicate) => {
+    duplicates.forEach(duplicate => {
       const labels = this.entries
         .filter(entry => entry.slug === duplicate)
-        .map(entry => `${entry.slug}\n\t(${entry.component.displayName}) in ${entry.project}`);
+        .map(
+          entry =>
+            `${entry.slug}\n\t(${entry.component.displayName}) in ${
+              entry.project
+            }`
+        );
 
-      errors.push(labels.join('\n'));
+      errors.push(labels.join("\n"));
     });
 
     if (errors.length) {
       throw new Error(
-        `Duplicate slugs found. All card slugs must be unique\n\n${errors.join('\n\n')}\n`
+        `Duplicate slugs found. All card slugs must be unique\n\n${errors.join(
+          "\n\n"
+        )}\n`
       );
     }
   }
@@ -47,9 +54,10 @@ export default class Registry {
 
   // Remove an entry (to have symmetry with Add)
   remove(entryOrSlug) {
-    const toRemove = typeof entryOrSlug === 'string'
-      ? this.entries.find(entry => entry.slug === entryOrSlug)
-      : this.entries.find(entry => entry === entryOrSlug);
+    const toRemove =
+      typeof entryOrSlug === "string"
+        ? this.entries.find(entry => entry.slug === entryOrSlug)
+        : this.entries.find(entry => entry === entryOrSlug);
 
     if (toRemove) {
       this.entries.splice(this.entries.indexOf(toRemove), 1);

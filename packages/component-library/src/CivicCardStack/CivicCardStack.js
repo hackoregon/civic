@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { css } from 'emotion';
-import CivicStoryCard from '../CivicStoryCard/CivicStoryCard';
+import React from "react";
+import PropTypes from "prop-types";
+import { css } from "emotion";
+import CivicStoryCard from "../CivicStoryCard/CivicStoryCard";
 
 const smallWatermark = (
   <svg xmlns="http://www.w3.org/2000/svg">
@@ -29,7 +29,9 @@ const bgCard = (index, total, baseOpacity) => css`
 
 const BackgroundStoryCard = (index, total, children) => (
   <div className={bgCard(index, total, LAST_CARD_OPACITY)} key={index}>
-    <CivicStoryCard footer={false} watermark={smallWatermark}>{children}</CivicStoryCard>
+    <CivicStoryCard footer={false} watermark={smallWatermark}>
+      {children}
+    </CivicStoryCard>
   </div>
 );
 
@@ -46,7 +48,7 @@ const CivicCardStack = ({ cards, children }) => {
 
 CivicCardStack.propTypes = {
   children: PropTypes.node,
-  cards: PropTypes.oneOf([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]),
+  cards: PropTypes.oneOf([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 };
 
 CivicCardStack.defaultProps = {};

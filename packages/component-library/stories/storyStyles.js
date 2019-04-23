@@ -1,57 +1,113 @@
+import { SSL_OP_TLS_BLOCK_PADDING_BUG } from "constants";
+import "@hackoregon/component-library/assets/constants.css";
 /*
-Styles used in Storybook for the UI Style Guide pages
+  Styles used in Storybook.
+  Only styles that are needed exclusively in Storybook are defined here.
 */
 
-const styles = {
-    main: {
-      backgroundColor: 'white',
-      margin: 15,
-      maxWidth: 800,
-      lineHeight: 1.5,
-      fontFamily: 'Rubik, "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif',
-    },
+const storybookStyles = {
+  // The display area for components
+  main: {
+    backgroundColor: "white",
+    margin: 15,
+    maxWidth: 800
+  },
 
-    h1: {
-      backgroundColor: 'white',
-      color: '#201024',
-    },
+  // Use CSS grid to center UI components in the Storybook display area
+  storyGrid: {
+    display: "grid",
+    gridTemplateColumns: "1fr 2fr 1fr",
+    gridTemplateRows: "1fr 1fr 1fr",
+    gridGap: "10px"
+  },
 
-    h2: {
-      backgroundColor: 'white',
-      color: '#ee495c',
-    },
+  storyGridItem: {
+    gridRow: 2,
+    gridColumn: 2,
+    alignSelf: "center",
+    justifyContent: "center"
+  },
 
-    h3: {
-      backgroundColor: 'white',
-      color: '#201024',
-    },
+  // Show inverted logos on a dark background in the Branding Logos story
+  invertedLogo: {
+    backgroundColor: "#201024",
+    margin: 20,
+    padding: 20
+  },
 
-    p: {
-      backgroundColor: 'white',
-      color: '#201024',
-      fontSize: 16,
-    },
+  logo: {
+    paddingLeft: 20
+  },
 
-    logo: {
-      width: 200,
-    },
-  
-    link: {
-      color: '#1474f3',
-      textDecoration: 'none',
-      borderBottom: '1px solid #1474f3',
-      paddingBottom: 2,
-    },
-  
-    code: {
-      fontSize: 15,
-      fontWeight: 600,
-      padding: '2px 5px',
-      border: '1px solid #eae9e9',
-      borderRadius: 4,
-      backgroundColor: '#f3f2f2',
-      color: '#3a3a3a',
-    },
-  };
+  // Display a solid color
+  solidColorSample: {
+    display: "flex"
+  },
 
-  export { styles };
+  // Brand color palette
+  colorBlock: {
+    height: 125,
+    width: 300,
+    marginLeft: 0,
+    marginTop: 10,
+    marginRight: 20,
+    marginBottom: 10
+  },
+
+  // Brand colors (make these global)
+  primaryBkgnd: {
+    backgroundColor: "rgba(34,15,37,1)"
+  },
+
+  secondaryBkgnd: {
+    backgroundColor: "rgba(238,73,92,1)"
+  },
+
+  tertiaryBkgnd: {
+    backgroundColor: "rgba(114,99,113,1)"
+  },
+
+  mediumBkgnd: {
+    backgroundColor: "rgba(170,164,171,1)"
+  },
+
+  subduedBkgnd: {
+    backgroundColor: "rgba(243,242,243,1)"
+  },
+
+  pinkBkgnd: {
+    backgroundColor: "rgba(220,69,86,1)"
+  },
+
+  greenBkgnd: {
+    backgroundColor: "rgba(25,183,170,1)"
+  },
+
+  blueBkgnd: {
+    backgroundColor: "rgba(30,98,189,1)"
+  },
+
+  purpleBkgnd: {
+    backgroundColor: "rgba(114,29,124,1)"
+  },
+
+  yellowBkgnd: {
+    backgroundColor: "rgba(255,178,38,1)"
+  },
+
+  // Typography (make these global)
+  dataText: {
+    fontFamily: "Roboto Condensed",
+    fontSize: 12
+  },
+
+  dataFont: {
+    fontFamily: "Roboto Condensed"
+  },
+
+  largeParagraph: {
+    fontSize: 16
+  }
+};
+
+export { storybookStyles };

@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import { CivicStoryCard, Placeholder } from '@hackoregon/component-library';
+import { CivicStoryCard, Placeholder } from "@hackoregon/component-library";
 
 export class ViolentShakingAndGroundDeformation extends React.Component {
   componentDidMount() {
@@ -19,7 +19,8 @@ export class ViolentShakingAndGroundDeformation extends React.Component {
   }
 }
 
-ViolentShakingAndGroundDeformation.displayName = 'ViolentShakingAndGroundDeformation';
+ViolentShakingAndGroundDeformation.displayName =
+  "ViolentShakingAndGroundDeformation";
 
 // Connect this to the redux store when necessary
 export default ViolentShakingAndGroundDeformation;

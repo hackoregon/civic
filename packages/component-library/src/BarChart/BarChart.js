@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
 import {
   VictoryAxis,
@@ -8,30 +8,46 @@ import {
   VictoryLabel,
   VictoryPortal,
   VictoryTooltip
-} from 'victory';
+} from "victory";
 
-import ChartContainer from '../ChartContainer';
-import { numeric, year } from '../utils/formatters';
-import { assign } from "lodash";
-import { css } from 'emotion';
-import { chartEvents, getDefaultDomain } from '../utils/chartHelpers';
-import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
+import ChartContainer from "../ChartContainer";
+import civicFormat from "../utils/civicFormat";
+import { chartEvents, getDefaultDomain } from "../utils/chartHelpers";
+import CivicVictoryTheme from "../VictoryTheme/VictoryThemeIndex";
 
-const BarChart = ({ data, dataKey, dataValue, domain, title, subtitle, xLabel, yLabel, xNumberFormatter, yNumberFormatter, barWidth, loading, error }) => {
+const BarChart = ({
+  data,
+  dataKey,
+  dataValue,
+  domain,
+  title,
+  subtitle,
+  xLabel,
+  yLabel,
+  xNumberFormatter,
+  yNumberFormatter,
+  barWidth,
+  loading,
+  error
+}) => {
   const chartDomain = domain || getDefaultDomain(data, dataKey, dataValue);
 
   return (
-    <ChartContainer title={title} subtitle={subtitle} loading={loading} error={error}>
+    <ChartContainer
+      title={title}
+      subtitle={subtitle}
+      loading={loading}
+      error={error}
+    >
       <VictoryChart
         padding={{ left: 90, right: 50, bottom: 50, top: 50 }}
         domainPadding={{ x: [40, 40], y: [0, 0] }}
-        animate={{ duration: 200 }}
         theme={CivicVictoryTheme.civic}
         domain={chartDomain}
       >
         <VictoryAxis
           tickFormat={xNumberFormatter}
-          style={{ grid: { stroke: 'none' } }}
+          style={{ grid: { stroke: "none" } }}
           title="X Axis"
         />
         <VictoryAxis
@@ -73,10 +89,16 @@ const BarChart = ({ data, dataKey, dataValue, domain, title, subtitle, xLabel, y
               theme={CivicVictoryTheme.civic}
             />
           }
-          data={data.map(d => ({ dataKey: d[dataKey], dataValue: d[dataValue], label: `${xLabel}: ${xNumberFormatter(d[dataKey])} • ${yLabel}: ${yNumberFormatter(d[dataValue])}` }))}
+          data={data.map(d => ({
+            dataKey: d[dataKey],
+            dataValue: d[dataValue],
+            label: `${xLabel}: ${xNumberFormatter(
+              d[dataKey]
+            )} • ${yLabel}: ${yNumberFormatter(d[dataValue])}`
+          }))}
           events={chartEvents}
-          x={'dataKey'}
-          y={'dataValue'}
+          x="dataKey"
+          y="dataValue"
           title="Bar Chart"
           style={{ data: { width: barWidth } }}
         />
@@ -98,21 +120,21 @@ BarChart.propTypes = {
   yLabel: PropTypes.string,
   xNumberFormatter: PropTypes.func,
   yNumberFormatter: PropTypes.func,
-  barWidth: PropTypes.number,
+  barWidth: PropTypes.number
 };
 
 BarChart.defaultProps = {
   data: null,
-  dataKey: 'x',
-  dataValue: 'y',
+  dataKey: "x",
+  dataValue: "y",
   domain: null,
   title: null,
   subtitle: null,
   xLabel: "X",
   yLabel: "Y",
-  xNumberFormatter: year,
-  yNumberFormatter: numeric,
-  barWidth: null,
+  xNumberFormatter: civicFormat.year,
+  yNumberFormatter: civicFormat.numeric,
+  barWidth: null
 };
 
 export default BarChart;

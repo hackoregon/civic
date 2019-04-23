@@ -1,67 +1,67 @@
-import React from 'react';
-import { css } from 'emotion';
+import React from "react";
+import { css } from "emotion";
 /* eslint-disable import/no-extraneous-dependencies */
-import { storiesOf } from '@storybook/react';
-import { object, text, withKnobs } from '@storybook/addon-knobs';
-import { LineChart, SimpleLegend } from '../src';
+import { storiesOf } from "@storybook/react";
+import { object, text, withKnobs } from "@storybook/addon-knobs";
+import { LineChart, SimpleLegend } from "../src";
 
-const displayName = LineChart.displayName || 'LineChart';
+const displayName = LineChart.displayName || "LineChart";
 
 const sampleSimpleData = [
   { x: 0, y: 20 },
   { x: 10, y: 30 },
   { x: 20, y: 50 },
-  { x: 30, y: 40 },
+  { x: 30, y: 40 }
 ];
 
 const sampleData = [
-  { x: 0, y: 2, series: 'cat' },
-  { x: 1, y: 3, series: 'cat' },
-  { x: 2, y: 5, series: 'cat' },
-  { x: 3, y: 4, series: 'cat' },
-  { x: 4, y: 7, series: 'cat' },
-  { x: 0, y: 4, series: 'dog' },
-  { x: 1, y: 5, series: 'dog' },
-  { x: 2, y: 2, series: 'dog' },
-  { x: 3, y: 3, series: 'dog' },
-  { x: 4, y: 4, series: 'dog' },
+  { x: 0, y: 2, series: "cat" },
+  { x: 1, y: 3, series: "cat" },
+  { x: 2, y: 5, series: "cat" },
+  { x: 3, y: 4, series: "cat" },
+  { x: 4, y: 7, series: "cat" },
+  { x: 0, y: 4, series: "dog" },
+  { x: 1, y: 5, series: "dog" },
+  { x: 2, y: 2, series: "dog" },
+  { x: 3, y: 3, series: "dog" },
+  { x: 4, y: 4, series: "dog" }
 ];
-const sampleDataSeries = 'series';
+const sampleDataSeries = "series";
 const sampledataSeriesLabel = [
-  { category: 'cat', label: 'Cat' },
-  { category: 'dog', label: 'Dog' },
+  { category: "cat", label: "Cat" },
+  { category: "dog", label: "Dog" }
 ];
 const sampleDomain = { x: [0, 6], y: [0, 8] };
-const sampleSize = { key: 'y' };
-const sampleSubtitle = 'A description of this chart.';
-const sampleTitle = 'Some title';
-const sampleXKey = 'x';
-const sampleXLabel = 'Number of animals';
-const sampleYKey = 'y';
-const sampleYLabel = 'Cuteness rating';
-const sampleDataKeyLabel = 'Animals';
-const sampleDataValueLabel = 'Cuteness';
+const sampleSize = { key: "y" };
+const sampleSubtitle = "A description of this chart.";
+const sampleTitle = "Some title";
+const sampleXKey = "x";
+const sampleXLabel = "Number of animals";
+const sampleYKey = "y";
+const sampleYLabel = "Cuteness rating";
+const sampleDataKeyLabel = "Animals";
+const sampleDataValueLabel = "Cuteness";
 
 const sampleUnstructuredData = [
-  { size: 0, age: 2000000, type: 'cat' },
-  { size: 5, age: 3000000, type: 'cat' },
-  { size: 10, age: 7000000, type: 'cat' },
-  { size: 0, age: 5000320, type: 'fish' },
-  { size: 5, age: 40002300, type: 'fish' },
-  { size: 10, age: 5007000, type: 'fish' },
-  { size: 0, age: 3000000, type: 'dog' },
-  { size: 5, age: 3000500, type: 'dog' },
-  { size: 10, age: 3000000.5, type: 'dog' },
+  { size: 0, age: 2000000, type: "cat" },
+  { size: 5, age: 3000000, type: "cat" },
+  { size: 10, age: 7000000, type: "cat" },
+  { size: 0, age: 5000320, type: "fish" },
+  { size: 5, age: 40002300, type: "fish" },
+  { size: 10, age: 5007000, type: "fish" },
+  { size: 0, age: 3000000, type: "dog" },
+  { size: 5, age: 3000500, type: "dog" },
+  { size: 10, age: 3000000.5, type: "dog" }
 ];
-const sampleUnstructuredXKey = 'size';
-const sampleUnstructuredYKey = 'age';
-const sampleUnstructuredDataSeries = 'type';
-const sampleUnstructuredXLabel = 'Size (ft)';
-const sampleUnstructuredYLabel = 'Age (yrs)';
+const sampleUnstructuredXKey = "size";
+const sampleUnstructuredYKey = "age";
+const sampleUnstructuredDataSeries = "type";
+const sampleUnstructuredXLabel = "Size (ft)";
+const sampleUnstructuredYLabel = "Age (yrs)";
 
-const customLegend = (legendData) => {
+const customLegend = legendData => {
   const legendStyle = css`
-    font-family: 'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif;
+    font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
     font-size: 14px;
     font-weight: bold;
     text-align: center;
@@ -84,31 +84,11 @@ const customLegend = (legendData) => {
           `}
         >
           <svg viewBox="0 0 50 10" width="50px">
-            <circle
-              cx="5"
-              cy="5"
-              r="1"
-            />
-            <circle
-              cx="15"
-              cy="5"
-              r="2"
-            />
-            <circle
-              cx="25"
-              cy="5"
-              r="3"
-            />
-            <circle
-              cx="35"
-              cy="5"
-              r="4"
-            />
-            <circle
-              cx="45"
-              cy="5"
-              r="5"
-            />
+            <circle cx="5" cy="5" r="1" />
+            <circle cx="15" cy="5" r="2" />
+            <circle cx="25" cy="5" r="3" />
+            <circle cx="35" cy="5" r="4" />
+            <circle cx="45" cy="5" r="5" />
           </svg>
           <span
             className={css`
@@ -124,18 +104,18 @@ const customLegend = (legendData) => {
 };
 
 export default () =>
-  storiesOf('Charts/Line Chart', module)
+  storiesOf("Charts/Line Chart", module)
     .addDecorator(withKnobs)
-    .add('Simple usage', () => <LineChart data={sampleSimpleData} />)
-    .add('With some props', () => {
-      const data = object('Data', sampleData);
-      const dataKey = text('dataKey', sampleXKey);
-      const dataValue = text('dataValue', sampleYKey);
-      const dataSeries = text('dataSeries', sampleDataSeries);
-      const subtitle = text('Subtitle', sampleSubtitle);
-      const title = text('Title', sampleTitle);
-      const xLabel = text('xLabel', sampleXLabel);
-      const yLabel = text('yLabel', sampleYLabel);
+    .add("Simple usage", () => <LineChart data={sampleSimpleData} />)
+    .add("With some props", () => {
+      const data = object("Data", sampleData);
+      const dataKey = text("dataKey", sampleXKey);
+      const dataValue = text("dataValue", sampleYKey);
+      const dataSeries = text("dataSeries", sampleDataSeries);
+      const subtitle = text("Subtitle", sampleSubtitle);
+      const title = text("Title", sampleTitle);
+      const xLabel = text("xLabel", sampleXLabel);
+      const yLabel = text("yLabel", sampleYLabel);
 
       return (
         <LineChart
@@ -150,15 +130,15 @@ export default () =>
         />
       );
     })
-    .add('With some props and unstructured data', () => {
-      const data = object('Data', sampleUnstructuredData);
-      const dataKey = text('dataKey', sampleUnstructuredXKey);
-      const dataValue = text('dataValue', sampleUnstructuredYKey);
-      const dataSeries = text('dataSeries', sampleUnstructuredDataSeries);
-      const subtitle = text('Subtitle', sampleSubtitle);
-      const title = text('Title', sampleTitle);
-      const xLabel = text('xLabel', sampleUnstructuredXLabel);
-      const yLabel = text('yLabel', sampleUnstructuredYLabel);
+    .add("With some props and unstructured data", () => {
+      const data = object("Data", sampleUnstructuredData);
+      const dataKey = text("dataKey", sampleUnstructuredXKey);
+      const dataValue = text("dataValue", sampleUnstructuredYKey);
+      const dataSeries = text("dataSeries", sampleUnstructuredDataSeries);
+      const subtitle = text("Subtitle", sampleSubtitle);
+      const title = text("Title", sampleTitle);
+      const xLabel = text("xLabel", sampleUnstructuredXLabel);
+      const yLabel = text("yLabel", sampleUnstructuredYLabel);
 
       return (
         <LineChart
@@ -173,20 +153,23 @@ export default () =>
         />
       );
     })
-    .add('With more optional props', () => {
-      const data = object('Data', sampleData);
-      const dataKey = text('dataKey', sampleXKey);
-      const dataKeyLabel = text('dataKeyLabel', sampleDataKeyLabel);
-      const dataValue = text('dataValue', sampleYKey);
-      const dataValueLabel = text('dataValueLabel', sampleDataValueLabel);
-      const dataSeries = text('dataSeries', sampleDataSeries);
-      const dataSeriesLabel = object('Data Series Labels', sampledataSeriesLabel);
-      const domain = object('Domain', sampleDomain);
-      const size = object('Size', sampleSize);
-      const subtitle = text('Subtitle', sampleSubtitle);
-      const title = text('Title', sampleTitle);
-      const xLabel = text('xLabel', sampleXLabel);
-      const yLabel = text('yLabel', sampleYLabel);
+    .add("With more optional props", () => {
+      const data = object("Data", sampleData);
+      const dataKey = text("dataKey", sampleXKey);
+      const dataKeyLabel = text("dataKeyLabel", sampleDataKeyLabel);
+      const dataValue = text("dataValue", sampleYKey);
+      const dataValueLabel = text("dataValueLabel", sampleDataValueLabel);
+      const dataSeries = text("dataSeries", sampleDataSeries);
+      const dataSeriesLabel = object(
+        "Data Series Labels",
+        sampledataSeriesLabel
+      );
+      const domain = object("Domain", sampleDomain);
+      const size = object("Size", sampleSize);
+      const subtitle = text("Subtitle", sampleSubtitle);
+      const title = text("Title", sampleTitle);
+      const xLabel = text("xLabel", sampleXLabel);
+      const yLabel = text("yLabel", sampleYLabel);
 
       return (
         <LineChart
@@ -204,6 +187,36 @@ export default () =>
           xLabel={xLabel}
           yLabel={yLabel}
           legendComponent={customLegend}
+        />
+      );
+    })
+    .add("With many data points", () => {
+      const scale = 0.25;
+      return (
+        <LineChart
+          data={Array(100)
+            .fill(null)
+            .map((_, index) => {
+              const x =
+                (index % 2 ? Math.floor(index / 2) : Math.ceil(index / 2)) *
+                scale;
+              const fn = index % 2 ? "sin" : "cos";
+              return {
+                x,
+                fn,
+                y: Math[fn](x)
+              };
+            })}
+          dataKey="x"
+          dataKeyLabel="X"
+          dataValue="y"
+          dataValueLabel="Y"
+          dataSeries="fn"
+          domain={object("Domain", { x: [0, 50 * scale], y: [-1.5, 1.5] })}
+          title={text("Title", "Cos vs. Sin")}
+          subtitle={text("Subtitle", "Getting wavy")}
+          xLabel="X"
+          yLabel="Y"
         />
       );
     });

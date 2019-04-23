@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { css } from 'emotion';
+import React from "react";
+import PropTypes from "prop-types";
+import { css } from "emotion";
 
 const propTypes = {
   total: PropTypes.string,
-  inState: PropTypes.string,
+  inState: PropTypes.string
 };
 
 const wrapperClass = css`
@@ -19,7 +19,7 @@ const contentClass = css`
 `;
 
 const headerClass = css`
-  font-family: 'Roboto Condensed','Helvetica Neue',Helvetica,sans-serif;
+  font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
   font-weight: bold;
   font-size: 21px;
 `;

@@ -1,15 +1,14 @@
-import React, { Component, PropTypes } from 'react';
+import PropTypes from "prop-types";
+import React, { Component } from "react";
 
-import QRMap from '../QR';
-import QuestionForm from './QuestionForm';
-
+import QRMap from "../QR";
+import QuestionForm from "./QuestionForm";
 
 class Quiz extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      questionId: 1,
+      questionId: 1
     };
 
     this.totalQuestions = QRMap.length;
@@ -28,7 +27,10 @@ class Quiz extends Component {
     e.preventDefault();
     e.stopPropagation();
 
-    if (this.state.questionId > 1 && this.state.questionId <= this.totalQuestions) {
+    if (
+      this.state.questionId > 1 &&
+      this.state.questionId <= this.totalQuestions
+    ) {
       this.setState({ questionId: this.state.questionId - 1 });
     }
   }
@@ -46,7 +48,7 @@ class Quiz extends Component {
 }
 
 Quiz.propTypes = {
-  done: PropTypes.func.isRequired,
+  done: PropTypes.func.isRequired
 };
 
 export default Quiz;

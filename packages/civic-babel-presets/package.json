@@ -1,32 +1,37 @@
 {
   "name": "@hackoregon/civic-babel-presets",
-  "version": "1.0.0-alpha.1c62c05f",
-  "private": true,
+  "version": "3.0.0",
   "description": "Unified babel presets for civic",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 0"
   },
+  "author": "David Daniel <davidedaniel@gmail.com> (http://davidedaniel.github.io)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hackoregon/civic.git"
+  },
+  "private": false,
   "keywords": [
     "babel",
     "presets",
-    "civic"
+    "civic",
+    "hackoregon"
   ],
-  "author": "David Daniel <davidedaniel@gmail.com> (http://davidedaniel.github.io)",
-  "license": "MIT",
   "dependencies": {
-    "babel-plugin-dynamic-import-node": "1.0.2",
-    "babel-plugin-emotion": "^9.1.0",
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.0.0",
+    "@babel/plugin-transform-react-jsx-source": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-plugin-dynamic-import-node": "^2.2.0",
+    "babel-plugin-emotion": "^10.0.9",
     "babel-plugin-lodash": "^3.3.2",
-    "babel-plugin-dynamic-import-node": "^1.2.0",
-    "babel-plugin-syntax-dynamic-import": "^6.18.0",
-    "babel-plugin-transform-class-properties": "^6.23.0",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.18.0",
-    "babel-plugin-transform-object-rest-spread": "6.26.0",
-    "babel-plugin-transform-react-jsx-source": "6.22.0",
-    "babel-plugin-transform-react-remove-prop-types": "^0.2.11",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.1.8",
-    "babel-preset-react": "^6.23.0"
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24"
   }
 }

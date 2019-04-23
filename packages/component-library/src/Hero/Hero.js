@@ -1,5 +1,6 @@
-import React from 'react';
-import { css } from 'emotion';
+import PropTypes from "prop-types";
+import React from "react";
+import { css } from "emotion";
 
 const heroClass = css`
   display: flex;
@@ -35,24 +36,26 @@ const contentClass = css`
 `;
 
 const DefaultChildren = () => (
-  <h1>Data for the people,<br />by the people.</h1>
+  <h1>
+    Data for the people,
+    <br />
+    by the people.
+  </h1>
 );
 
 const Hero = ({ children, mainProjectColor }) => (
   <div className={heroClass} style={{ backgroundColor: mainProjectColor }}>
     <div className={containerClass}>
-      <div className={contentClass}>
-        {children || <DefaultChildren />}
-      </div>
+      <div className={contentClass}>{children || <DefaultChildren />}</div>
     </div>
   </div>
 );
 
-Hero.displayName = 'Hero';
+Hero.displayName = "Hero";
 
 Hero.propTypes = {
-  mainProjectColor: React.PropTypes.string,
-  children: React.PropTypes.node,
+  mainProjectColor: PropTypes.string,
+  children: PropTypes.node
 };
 
 export default Hero;

@@ -1,19 +1,24 @@
-import React, { PropTypes } from 'react';
-import { css } from 'emotion';
+import PropTypes from "prop-types";
+import React from "react";
 import {
   VictoryAxis,
   VictoryChart,
   VictoryLabel,
   VictoryPortal,
   VictoryScatter,
-  VictoryTooltip,
-} from 'victory';
+  VictoryTooltip
+} from "victory";
 
-import ChartContainer from '../ChartContainer';
-import SimpleLegend from '../SimpleLegend';
-import { numeric } from '../utils/formatters';
-import { chartEvents, getDefaultDomain, getDefaultDataSeriesLabels, getDefaultFillStyle } from '../utils/chartHelpers';
-import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
+import ChartContainer from "../ChartContainer";
+import SimpleLegend from "../SimpleLegend";
+import civicFormat from "../utils/civicFormat";
+import {
+  chartEvents,
+  getDefaultDomain,
+  getDefaultDataSeriesLabels,
+  getDefaultFillStyle
+} from "../utils/chartHelpers";
+import CivicVictoryTheme from "../VictoryTheme/VictoryThemeIndex";
 
 /*
  * @method Scatterplot
@@ -51,7 +56,7 @@ const Scatterplot = ({
   yNumberFormatter,
   invertX,
   invertY,
-  legendComponent,
+  legendComponent
 }) => {
   const chartDomain = domain || getDefaultDomain(data, dataKey, dataValue);
 
@@ -66,18 +71,14 @@ const Scatterplot = ({
       ? dataSeriesLabels.map(series => ({ name: series.label }))
       : null;
 
-  const categoryData =
-    dataSeriesLabels && dataSeriesLabels.length
-      ? dataSeriesLabels.map(series => ({ name: series.category }))
-      : null;
-
   return (
     <ChartContainer title={title} subtitle={subtitle}>
-      {legendData && (
-        legendComponent ?
-        legendComponent(legendData) :
-        <SimpleLegend className="legend" legendData={legendData} />
-      )}
+      {legendData &&
+        (legendComponent ? (
+          legendComponent(legendData)
+        ) : (
+          <SimpleLegend className="legend" legendData={legendData} />
+        ))}
 
       <VictoryChart
         domain={chartDomain}
@@ -86,7 +87,7 @@ const Scatterplot = ({
       >
         <VictoryAxis
           animate={{ onEnter: { duration: 500 } }}
-          style={{ grid: { stroke: 'none' } }}
+          style={{ grid: { stroke: "none" } }}
           tickFormat={x => xNumberFormatter(x)}
           title="X Axis"
           invertAxis={invertX}
@@ -125,13 +126,17 @@ const Scatterplot = ({
           bubbleProperty="bubbleSize"
           minBubbleSize={size && size.minSize}
           maxBubbleSize={size && size.maxSize}
-//        categories={{ x: categoryData }}
+          //        categories={{ x: categoryData }}
           data={data.map(d => ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],
-            label: `${dataKeyLabel ? d[dataKeyLabel] : xLabel}: ${xNumberFormatter(d[dataKey])} • ${dataValueLabel ? d[dataValueLabel] : yLabel}: ${yNumberFormatter(d[dataValue])}`,
+            label: `${
+              dataKeyLabel ? d[dataKeyLabel] : xLabel
+            }: ${xNumberFormatter(d[dataKey])} • ${
+              dataValueLabel ? d[dataValueLabel] : yLabel
+            }: ${yNumberFormatter(d[dataValue])}`,
             series: d[dataSeries],
-            ...(size && { bubbleSize: d[size.key] }),
+            ...(size && { bubbleSize: d[size.key] })
           }))}
           events={chartEvents}
           labelComponent={
@@ -157,7 +162,7 @@ const Scatterplot = ({
 
 Scatterplot.propTypes = {
   data: PropTypes.arrayOf(
-    PropTypes.shape({ x: PropTypes.number, y: PropTypes.number }),
+    PropTypes.shape({ x: PropTypes.number, y: PropTypes.number })
   ),
   dataKey: PropTypes.string,
   dataKeyLabel: PropTypes.string,
@@ -165,10 +170,14 @@ Scatterplot.propTypes = {
   dataValueLabel: PropTypes.string,
   dataSeries: PropTypes.string,
   dataSeriesLabel: PropTypes.arrayOf(
-    PropTypes.shape({ category: PropTypes.string, label: PropTypes.string }),
+    PropTypes.shape({ category: PropTypes.string, label: PropTypes.string })
   ),
   domain: PropTypes.objectOf(PropTypes.array),
-  size: PropTypes.shape({ key: PropTypes.string, minSize: PropTypes.number, maxSize: PropTypes.number }),
+  size: PropTypes.shape({
+    key: PropTypes.string,
+    minSize: PropTypes.number,
+    maxSize: PropTypes.number
+  }),
   style: PropTypes.objectOf(PropTypes.object),
   title: PropTypes.string,
   subtitle: PropTypes.string,
@@ -178,14 +187,14 @@ Scatterplot.propTypes = {
   yNumberFormatter: PropTypes.func,
   invertX: PropTypes.bool,
   invertY: PropTypes.bool,
-  legendComponent: PropTypes.func,
+  legendComponent: PropTypes.func
 };
 
 Scatterplot.defaultProps = {
   data: null,
-  dataKey: 'x',
+  dataKey: "x",
   dataKeyLabel: null,
-  dataValue: 'y',
+  dataValue: "y",
   dataValueLabel: null,
   dataSeries: null,
   dataSeriesLabel: null,
@@ -196,11 +205,11 @@ Scatterplot.defaultProps = {
   subtitle: null,
   xLabel: "X",
   yLabel: "Y",
-  xNumberFormatter: numeric,
-  yNumberFormatter: numeric,
+  xNumberFormatter: civicFormat.numeric,
+  yNumberFormatter: civicFormat.numeric,
   invertX: false,
   invertY: false,
-  legendComponent: null,
+  legendComponent: null
 };
 
 export default Scatterplot;

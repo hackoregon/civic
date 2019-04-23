@@ -1,6 +1,6 @@
-import React, { PropTypes } from 'react';
-import { css } from 'emotion';
-import { groupBy } from 'lodash';
+import PropTypes from "prop-types";
+import React from "react";
+import { groupBy } from "lodash";
 import {
   VictoryAxis,
   VictoryChart,
@@ -8,14 +8,20 @@ import {
   VictoryPortal,
   VictoryScatter,
   VictoryTooltip,
-  VictoryLine,
-} from 'victory';
+  VictoryLine
+} from "victory";
 
-import ChartContainer from '../ChartContainer';
-import SimpleLegend from '../SimpleLegend';
-import { numeric } from '../utils/formatters';
-import { chartEvents, getDefaultDomain, getDefaultDataSeriesLabels, getDefaultFillStyle, getDefaultLineStyle } from '../utils/chartHelpers';
-import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
+import ChartContainer from "../ChartContainer";
+import SimpleLegend from "../SimpleLegend";
+import civicFormat from "../utils/civicFormat";
+import {
+  chartEvents,
+  getDefaultDomain,
+  getDefaultDataSeriesLabels,
+  getDefaultFillStyle,
+  getDefaultLineStyle
+} from "../utils/chartHelpers";
+import CivicVictoryTheme from "../VictoryTheme/VictoryThemeIndex";
 
 const LineChart = ({
   data,
@@ -34,7 +40,7 @@ const LineChart = ({
   yLabel,
   xNumberFormatter,
   yNumberFormatter,
-  legendComponent,
+  legendComponent
 }) => {
   const chartDomain = domain || getDefaultDomain(data, dataKey, dataValue);
 
@@ -49,38 +55,38 @@ const LineChart = ({
       ? dataSeriesLabels.map(series => ({ name: series.label }))
       : null;
 
-  const categoryData =
-    dataSeriesLabels && dataSeriesLabels.length
-      ? dataSeriesLabels.map(series => ({ name: series.category }))
-      : null;
-
-  const lineData = dataSeries
-    ? groupBy(data, dataSeries)
-    : { category: data };
+  const lineData = dataSeries ? groupBy(data, dataSeries) : { category: data };
 
   const lines = lineData
-    ? Object.keys(lineData).map((category, index) =>
-      <VictoryLine
-        data={lineData[category].map(d => ({
-          dataKey: d[dataKey],
-          dataValue: d[dataValue],
-          series: d[dataSeries],
-        }))}
-        x="dataKey"
-        y="dataValue"
-        style={getDefaultLineStyle(index)}
-        standalone={false}
-      />
-      )
+    ? Object.keys(lineData).map((category, index) => (
+        <VictoryLine
+          key={category}
+          data={lineData[category].map(d => ({
+            dataKey: d[dataKey],
+            dataValue: d[dataValue],
+            series: d[dataSeries]
+          }))}
+          x="dataKey"
+          y="dataValue"
+          style={getDefaultLineStyle(index)}
+          standalone={false}
+          // TODO: This is a workaround for a Victory bug that results in incomplete
+          // line animations when the animate properties are derived from the VictoryChart
+          // wrapping component. Remove this direct animate after the bug is fixed.
+          // https://github.com/FormidableLabs/victory/issues/1282
+          animate={100}
+        />
+      ))
     : null;
 
   return (
     <ChartContainer title={title} subtitle={subtitle}>
-      {legendData && (
-        legendComponent ?
-        legendComponent(legendData) :
-        <SimpleLegend className="legend" legendData={legendData} />
-      )}
+      {legendData &&
+        (legendComponent ? (
+          legendComponent(legendData)
+        ) : (
+          <SimpleLegend className="legend" legendData={legendData} />
+        ))}
 
       <VictoryChart
         domain={chartDomain}
@@ -88,14 +94,12 @@ const LineChart = ({
         theme={CivicVictoryTheme.civic}
       >
         <VictoryAxis
-          animate={{ onEnter: { duration: 500 } }}
-          style={{ grid: { stroke: 'none' } }}
+          style={{ grid: { stroke: "none" } }}
           tickFormat={x => xNumberFormatter(x)}
           title="X Axis"
         />
         <VictoryAxis
           dependentAxis
-          animate={{ onEnter: { duration: 500 } }}
           tickFormat={y => yNumberFormatter(y)}
           title="Y Axis"
         />
@@ -121,16 +125,19 @@ const LineChart = ({
             y={295}
           />
         </VictoryPortal>
-        { lines }
+        {lines}
         <VictoryScatter
-          animate={{ onEnter: { duration: 500 } }}
-//        categories={{ x: categoryData }}
+          //        categories={{ x: categoryData }}
           data={data.map(d => ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],
-            label: `${dataKeyLabel ? dataKeyLabel : xLabel}: ${xNumberFormatter(d[dataKey])} • ${dataValueLabel ? dataValueLabel : yLabel}: ${yNumberFormatter(d[dataValue])}`,
+            label: `${dataKeyLabel || xLabel}: ${xNumberFormatter(
+              d[dataKey]
+            )} • ${dataValueLabel || yLabel}: ${yNumberFormatter(
+              d[dataValue]
+            )}`,
             series: d[dataSeries],
-            size: size ? d[size.key] || size.value : 3,
+            size: size ? d[size.key] || size.value : 3
           }))}
           events={chartEvents}
           labelComponent={
@@ -156,7 +163,7 @@ const LineChart = ({
 
 LineChart.propTypes = {
   data: PropTypes.arrayOf(
-    PropTypes.shape({ x: PropTypes.number, y: PropTypes.number }),
+    PropTypes.shape({ x: PropTypes.number, y: PropTypes.number })
   ),
   dataKey: PropTypes.string,
   dataKeyLabel: PropTypes.arrayOf(PropTypes.string),
@@ -164,7 +171,7 @@ LineChart.propTypes = {
   dataValueLabel: PropTypes.arrayOf(PropTypes.string),
   dataSeries: PropTypes.string,
   dataSeriesLabel: PropTypes.arrayOf(
-    PropTypes.shape({ category: PropTypes.string, label: PropTypes.string }),
+    PropTypes.shape({ category: PropTypes.string, label: PropTypes.string })
   ),
   domain: PropTypes.objectOf(PropTypes.array),
   size: PropTypes.shape({ key: PropTypes.string, value: PropTypes.string }),
@@ -175,14 +182,14 @@ LineChart.propTypes = {
   yLabel: PropTypes.string,
   xNumberFormatter: PropTypes.func,
   yNumberFormatter: PropTypes.func,
-  legendComponent: PropTypes.func,
+  legendComponent: PropTypes.func
 };
 
 LineChart.defaultProps = {
   data: null,
-  dataKey: 'x',
+  dataKey: "x",
   dataKeyLabel: null,
-  dataValue: 'y',
+  dataValue: "y",
   dataValueLabel: null,
   dataSeries: null,
   dataSeriesLabel: null,
@@ -193,9 +200,9 @@ LineChart.defaultProps = {
   title: null,
   xLabel: "X",
   yLabel: "Y",
-  xNumberFormatter: numeric,
-  yNumberFormatter: numeric,
-  legendComponent: null,
+  xNumberFormatter: civicFormat.numeric,
+  yNumberFormatter: civicFormat.numeric,
+  legendComponent: null
 };
 
 export default LineChart;

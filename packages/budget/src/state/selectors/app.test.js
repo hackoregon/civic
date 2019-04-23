@@ -1,20 +1,20 @@
-import * as selectors from './app';
+import * as selectors from "./app";
 
 let state;
 const app = {};
-const ARBITRARY = 'Ron Burgundy';
+const ARBITRARY = "Ron Burgundy";
 
-describe('app selectors', () => {
+describe("app selectors", () => {
   beforeEach(() => {
     state = { app };
   });
-  describe('getAppState', () => {
-    it('handles no state without errors', () => {
+  describe("getAppState", () => {
+    it("handles no state without errors", () => {
       selectors.getAppState().should.be.eql({});
     });
   });
-  describe('getOpenModal', () => {
-    it('should return the correct data', () => {
+  describe("getOpenModal", () => {
+    it("should return the correct data", () => {
       state = { app: { openModal: ARBITRARY } };
       expect(selectors.getOpenModal(state)).to.be.eql(ARBITRARY);
       state = { app: { openModal: null } };

@@ -1,6 +1,6 @@
-import { promiseToGet } from './utils';
+import { promiseToGet } from "./utils";
 
-const ROOT_URL = 'http://service.civicpdx.org/emergency';
+const ROOT_URL = "https://service.civicpdx.org/emergency";
 
 // without id: This viewset lists the agencies that respond to emergency incidents within Portland.
 // with id: This viewset retrievies a specific agency.
@@ -12,7 +12,7 @@ export const getAgencies = (inputs = {}) => {
   } else {
     url = `${ROOT_URL}/agencies/`;
   }
-  console.log('url', url);
+  console.log("url", url);
   return promiseToGet(url);
 };
 
@@ -47,10 +47,10 @@ export const getFireblocks = () => {
 // It returns an id, the geom, and demographic stats about a FMA.
 // with incidents: This view returns all incidents for a FMA based on a latitude and
 // longitude.
-export const getFma = (inputs) => {
+export const getFma = inputs => {
   const { id } = inputs;
   const url = `${ROOT_URL}/fma/?fma_id=${id}`;
-  console.log('fmaId', id, 'url', url);
+  console.log("fmaId", id, "url", url);
   return promiseToGet(url);
 };
 
@@ -79,13 +79,23 @@ export const getFmas = (inputs = {}) => {
 // action.
 // incidents and info: This viewset will provide the details of an incident, returning
 // the incident model, related incident_times, and responder units. It will also return
- // a calculated response_time for the incident
+// a calculated response_time for the incident
 // incidents and times: This viewset will provide 'list' and 'detail' actions.
 // incidents, times and times id: This viewset will provide the 'detail' action.
 // incidents and totals: This viewset will provide 'list' and 'detail' actions.
 export const getIncidents = (inputs = {}) => {
-  const { found, incsitfoundId, foundclass, incsitfoundclassId, foundclassSub,
-  incsitfoundsubId, info, times, inctimesId, totals  } = inputs;
+  const {
+    found,
+    incsitfoundId,
+    foundclass,
+    incsitfoundclassId,
+    foundclassSub,
+    incsitfoundsubId,
+    info,
+    times,
+    inctimesId,
+    totals
+  } = inputs;
   let url;
 
   if (found && !incsitfoundId) {
@@ -234,5 +244,5 @@ export const fireApi = {
   getSituationFound,
   getStations,
   getTimeDescriptions,
-  getTypeNatureCodes,
+  getTypeNatureCodes
 };

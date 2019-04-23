@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { css } from 'emotion';
+import React from "react";
+import PropTypes from "prop-types";
+import { css } from "emotion";
 
-import { GradientScale } from '@hackoregon/component-library';
+import { GradientScale } from "@hackoregon/component-library";
 
 const emphasis = css`
   color: #000;
@@ -29,7 +29,7 @@ const IntensityDisplay = ({
   label,
   scale,
   transform,
-  domain,
+  domain
 }) => (
   <div>
     <h3>
@@ -78,11 +78,11 @@ IntensityDisplay.propTypes = {
   label: PropTypes.string,
   scale: PropTypes.object,
   transform: PropTypes.func,
-  domain: PropTypes.arrayOf(PropTypes.number),
+  domain: PropTypes.arrayOf(PropTypes.number)
 };
 
 IntensityDisplay.defaultProps = {
-  transform: noTransform,
+  transform: noTransform
 };
 
 export default IntensityDisplay;

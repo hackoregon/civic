@@ -1,6 +1,6 @@
-import React, { PropTypes } from 'react';
-import { css } from 'emotion';
-import { groupBy } from 'lodash';
+import PropTypes from "prop-types";
+import React from "react";
+import { groupBy } from "lodash";
 import {
   VictoryAxis,
   VictoryChart,
@@ -10,13 +10,18 @@ import {
   VictoryTooltip,
   VictoryStack,
   VictoryArea
-} from 'victory';
+} from "victory";
 
-import ChartContainer from '../ChartContainer';
-import SimpleLegend from '../SimpleLegend';
-import { numeric } from '../utils/formatters';
-import { chartEvents, getDefaultStackedDomain, getDefaultDataSeriesLabels, getDefaultFillStyle, getDefaultAreaStyle } from '../utils/chartHelpers';
-import CivicVictoryTheme from '../VictoryTheme/VictoryThemeIndex';
+import ChartContainer from "../ChartContainer";
+import SimpleLegend from "../SimpleLegend";
+import civicFormat from "../utils/civicFormat";
+import {
+  chartEvents,
+  getDefaultStackedDomain,
+  getDefaultDataSeriesLabels,
+  getDefaultAreaStyle
+} from "../utils/chartHelpers";
+import CivicVictoryTheme from "../VictoryTheme/VictoryThemeIndex";
 
 const StackedAreaChart = ({
   data,
@@ -35,86 +40,87 @@ const StackedAreaChart = ({
   yLabel,
   xNumberFormatter,
   yNumberFormatter,
-  legendComponent,
+  legendComponent
 }) => {
-
-  const chartDomain = domain || getDefaultStackedDomain(data, dataKey, dataValue);
+  const chartDomain =
+    domain || getDefaultStackedDomain(data, dataKey, dataValue);
 
   const dataSeriesLabels = dataSeries
     ? dataSeriesLabel || getDefaultDataSeriesLabels(data, dataSeries)
     : null;
 
-  const scatterPlotStyle = style || {...CivicVictoryTheme.civic.areaScatter.style};
+  const scatterPlotStyle = style || {
+    ...CivicVictoryTheme.civic.areaScatter.style
+  };
 
   const legendData =
     dataSeriesLabels && dataSeriesLabels.length
       ? dataSeriesLabels.map(series => ({ name: series.label }))
       : null;
 
-  const categoryData =
-    dataSeriesLabels && dataSeriesLabels.length
-      ? dataSeriesLabels.map(series => ({ name: series.category }))
-      : null;
-
-  const lineData = dataSeries
-    ? groupBy(data, dataSeries)
-    : { category: data };
+  const lineData = dataSeries ? groupBy(data, dataSeries) : { category: data };
 
   const areas = lineData
-    ? Object.keys(lineData).map((category, index) =>
-      <VictoryArea
-        data={lineData[category].map(d => ({
-          dataKey: d[dataKey],
-          dataValue: d[dataValue],
-          series: d[dataSeries],
-        }))}
-        x="dataKey"
-        y="dataValue"
-        style={getDefaultAreaStyle(index)}
-        standalone={false}
-      />
-      )
+    ? Object.keys(lineData).map((category, index) => (
+        <VictoryArea
+          key={category}
+          data={lineData[category].map(d => ({
+            dataKey: d[dataKey],
+            dataValue: d[dataValue],
+            series: d[dataSeries]
+          }))}
+          x="dataKey"
+          y="dataValue"
+          style={getDefaultAreaStyle(index)}
+          standalone={false}
+        />
+      ))
     : null;
 
-    const dots = lineData
-    ? Object.keys(lineData).map((category, index) =>
-      <VictoryScatter
-        data={lineData[category].map(d => ({
-          dataKey: d[dataKey],
-          dataValue: d[dataValue],
-          series: d[dataSeries],
-          label: `${dataKeyLabel ? dataKeyLabel : xLabel}: ${xNumberFormatter(d[dataKey])} • ${dataValueLabel ? dataValueLabel : yLabel}: ${yNumberFormatter(d[dataValue])}`,
-          size: size ? d[size.key] || size.value : 3,
-        }))}
-        animate={{ onEnter: { duration: 500 } }}
-        x="dataKey"
-        y="dataValue"
-        standalone={false}
-        size={d => d.size}
-        style={scatterPlotStyle}
-        title="Scatter Plot"
-        events={chartEvents}
-        labelComponent={
-          <VictoryTooltip
-            x={325}
-            y={0}
-            orientation="bottom"
-            pointerLength={0}
-            cornerRadius={0}
-            theme={CivicVictoryTheme.civic}
-          />
-        }
-      />
-      )
+  const dots = lineData
+    ? Object.keys(lineData).map(category => (
+        <VictoryScatter
+          key={category}
+          data={lineData[category].map(d => ({
+            dataKey: d[dataKey],
+            dataValue: d[dataValue],
+            series: d[dataSeries],
+            label: `${dataKeyLabel || xLabel}: ${xNumberFormatter(
+              d[dataKey]
+            )} • ${dataValueLabel || yLabel}: ${yNumberFormatter(
+              d[dataValue]
+            )}`,
+            size: size ? d[size.key] || size.value : 3
+          }))}
+          x="dataKey"
+          y="dataValue"
+          standalone={false}
+          size={d => d.size}
+          style={scatterPlotStyle}
+          title="Scatter Plot"
+          events={chartEvents}
+          labelComponent={
+            <VictoryTooltip
+              x={325}
+              y={0}
+              orientation="bottom"
+              pointerLength={0}
+              cornerRadius={0}
+              theme={CivicVictoryTheme.civic}
+            />
+          }
+        />
+      ))
     : null;
 
   return (
     <ChartContainer title={title} subtitle={subtitle}>
-      {legendData && (
-        legendComponent ?
-        legendComponent(legendData) :
-        <SimpleLegend className="legend" legendData={legendData} />
-      )}
+      {legendData &&
+        (legendComponent ? (
+          legendComponent(legendData)
+        ) : (
+          <SimpleLegend className="legend" legendData={legendData} />
+        ))}
 
       <VictoryChart
         domain={chartDomain}
@@ -122,14 +128,12 @@ const StackedAreaChart = ({
         theme={CivicVictoryTheme.civic}
       >
         <VictoryAxis
-          animate={{ onEnter: { duration: 500 } }}
-          style={{ grid: { stroke: 'none' } }}
+          style={{ grid: { stroke: "none" } }}
           tickFormat={x => xNumberFormatter(x)}
           title="X Axis"
         />
         <VictoryAxis
           dependentAxis
-          animate={{ onEnter: { duration: 500 } }}
           tickFormat={y => yNumberFormatter(y)}
           title="Y Axis"
         />
@@ -155,12 +159,8 @@ const StackedAreaChart = ({
             y={295}
           />
         </VictoryPortal>
-        <VictoryStack>
-          { areas }
-        </VictoryStack>
-        <VictoryStack>
-          { dots }
-        </VictoryStack>
+        <VictoryStack>{areas}</VictoryStack>
+        <VictoryStack>{dots}</VictoryStack>
       </VictoryChart>
     </ChartContainer>
   );
@@ -168,7 +168,7 @@ const StackedAreaChart = ({
 
 StackedAreaChart.propTypes = {
   data: PropTypes.arrayOf(
-    PropTypes.shape({ x: PropTypes.number, y: PropTypes.number }),
+    PropTypes.shape({ x: PropTypes.number, y: PropTypes.number })
   ),
   dataKey: PropTypes.string,
   dataKeyLabel: PropTypes.arrayOf(PropTypes.string),
@@ -176,7 +176,7 @@ StackedAreaChart.propTypes = {
   dataValueLabel: PropTypes.arrayOf(PropTypes.string),
   dataSeries: PropTypes.string,
   dataSeriesLabel: PropTypes.arrayOf(
-    PropTypes.shape({ category: PropTypes.string, label: PropTypes.string }),
+    PropTypes.shape({ category: PropTypes.string, label: PropTypes.string })
   ),
   domain: PropTypes.objectOf(PropTypes.array),
   size: PropTypes.shape({ key: PropTypes.string, value: PropTypes.string }),
@@ -187,14 +187,14 @@ StackedAreaChart.propTypes = {
   yLabel: PropTypes.string,
   xNumberFormatter: PropTypes.func,
   yNumberFormatter: PropTypes.func,
-  legendComponent: PropTypes.func,
+  legendComponent: PropTypes.func
 };
 
 StackedAreaChart.defaultProps = {
   data: null,
-  dataKey: 'x',
+  dataKey: "x",
   dataKeyLabel: null,
-  dataValue: 'y',
+  dataValue: "y",
   dataValueLabel: null,
   dataSeries: null,
   dataSeriesLabel: null,
@@ -205,9 +205,9 @@ StackedAreaChart.defaultProps = {
   title: null,
   xLabel: "X",
   yLabel: "Y",
-  xNumberFormatter: numeric,
-  yNumberFormatter: numeric,
-  legendComponent: null,
+  xNumberFormatter: civicFormat.numeric,
+  yNumberFormatter: civicFormat.numeric,
+  legendComponent: null
 };
 
 export default StackedAreaChart;

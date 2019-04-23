@@ -1,65 +1,67 @@
-import nock from 'nock';
-import configureMockStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
-import { actionTypes } from './constants';
-import * as actions from './actions';
-import { API_HOST } from '../api';
-import reducer from './reducer';
-import * as selectors from './selectors';
+import nock from "nock";
+import configureMockStore from "redux-mock-store";
+import thunk from "redux-thunk";
+import { actionTypes } from "./constants";
+import * as actions from "./actions";
+import { API_HOST } from "../api";
+import reducer from "./reducer";
+import * as selectors from "./selectors";
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-describe('rent actions', () => {
-  describe('rent fetch actions', () => {
-    it('should have a start action', () => {
+describe("rent actions", () => {
+  describe("rent fetch actions", () => {
+    it("should have a start action", () => {
       const expectedAction = {
-        type: actionTypes.CALL_START,
+        type: actionTypes.CALL_START
       };
 
       expect(actions.rentStart()).to.eql(expectedAction);
     });
 
-    it('should have a success action', () => {
-      const payload = 'Tacos';
+    it("should have a success action", () => {
+      const payload = "Tacos";
       const expectedAction = {
         type: actionTypes.CALL_SUCCESS,
-        payload,
+        payload
       };
 
       expect(actions.rentSuccess(payload)).to.eql(expectedAction);
     });
 
-    it('should have a fail action', () => {
-      const payload = new Error('Hmm. This should not have happened');
+    it("should have a fail action", () => {
+      const payload = new Error("Hmm. This should not have happened");
       const expectedAction = {
         type: actionTypes.CALL_FAIL,
-        payload,
+        payload
       };
 
       expect(actions.rentFail(payload)).to.eql(expectedAction);
     });
   });
 
-  describe('rent fetch thunk', () => {
-    const commonRentRequest = '/rent?format=json&housing_size=Homeownership';
+  describe("rent fetch thunk", () => {
+    const commonRentRequest = "/rent?format=json&housing_size=Homeownership";
     let store;
 
     beforeEach(() => {
       store = mockStore({});
     });
 
-    afterEach(() => { nock.cleanAll(); });
+    afterEach(() => {
+      nock.cleanAll();
+    });
 
-    it('should dispatch fetch and success when the fetch is successful', () => {
+    it("should dispatch fetch and success when the fetch is successful", () => {
       const mockRentResponse = [
         {
-          housing_size: 'Overall',
+          housing_size: "Overall",
           NP_ID: 1,
-          nh_name: '122nd-Division',
+          nh_name: "122nd-Division",
           rent_amt: 917,
-          year: 2016,
-        },
+          year: 2016
+        }
       ];
 
       nock(API_HOST)
@@ -70,11 +72,13 @@ describe('rent actions', () => {
         { type: actionTypes.CALL_START },
         {
           type: actionTypes.CALL_SUCCESS,
-          payload: [{
-            rent_amt: 917,
-            id: 1,
-          }],
-        },
+          payload: [
+            {
+              rent_amt: 917,
+              id: 1
+            }
+          ]
+        }
       ];
 
       return store.dispatch(actions.fetchRentData()).then(() => {
@@ -82,17 +86,23 @@ describe('rent actions', () => {
       });
     });
 
-    it('should dispatch fetch and fail when the fetch is unsuccessful', () => {
+    it("should dispatch fetch and fail when the fetch is unsuccessful", () => {
       nock(API_HOST)
         .get(commonRentRequest)
-        .reply(500, { error: 'Request was just no good' });
+        .replyWithError("Request was just no good");
 
       const expectedActions = [
         { type: actionTypes.CALL_START },
         {
           type: actionTypes.CALL_FAIL,
-          payload: new Error({ error: 'Request was just no good' }),
-        },
+          payload: {
+            code: undefined,
+            errno: undefined,
+            message: `request to ${API_HOST}${commonRentRequest} failed, reason: Request was just no good`,
+            name: "FetchError",
+            type: "system"
+          }
+        }
       ];
 
       return store.dispatch(actions.fetchRentData()).then(() => {
@@ -102,93 +112,114 @@ describe('rent actions', () => {
   });
 });
 
-describe('rent reducer', () => {
+describe("rent reducer", () => {
   const initialState = {
     pending: false,
     data: null,
-    error: null,
+    error: null
   };
 
-  it('should return the initial state', () => {
+  it("should return the initial state", () => {
     expect(reducer(undefined, {})).to.eql(initialState);
   });
 
-  it('should handle CALL_START', () => {
-    expect(reducer(initialState, {
-      type: actionTypes.CALL_START,
-    })).to.eql({
+  it("should handle CALL_START", () => {
+    expect(
+      reducer(initialState, {
+        type: actionTypes.CALL_START
+      })
+    ).to.eql({
       pending: true,
       data: null,
-      error: null,
+      error: null
     });
 
-    expect(reducer({
+    expect(
+      reducer(
+        {
+          pending: true,
+          data: null,
+          error: null
+        },
+        {
+          type: actionTypes.CALL_START
+        }
+      )
+    ).to.eql({
       pending: true,
       data: null,
-      error: null,
-    }, {
-      type: actionTypes.CALL_START,
-    })).to.eql({
-      pending: true,
-      data: null,
-      error: null,
-    });
-  });
-
-  it('should handle CALL_FAIL', () => {
-    const error = new Error('oops');
-
-    expect(reducer(initialState, {
-      type: actionTypes.CALL_FAIL,
-      payload: error,
-    })).to.eql({
-      pending: false,
-      data: null,
-      error,
-    });
-
-    expect(reducer({
-      pending: true,
-      data: ['stuff'],
-      error: null,
-    }, {
-      type: actionTypes.CALL_FAIL,
-      payload: error,
-    })).to.eql({
-      pending: false,
-      data: null,
-      error,
+      error: null
     });
   });
 
-  it('should handle CALL_SUCCESS', () => {
-    const data = 'Really good tacos';
+  it("should handle CALL_FAIL", () => {
+    const error = new Error("oops");
 
-    expect(reducer(initialState, {
-      type: actionTypes.CALL_SUCCESS,
-      payload: data,
-    })).to.eql({
+    expect(
+      reducer(initialState, {
+        type: actionTypes.CALL_FAIL,
+        payload: error
+      })
+    ).to.eql({
       pending: false,
-      error: null,
-      data,
+      data: null,
+      error
     });
 
-    expect(reducer({
-      pending: true,
-      error: new Error('oops'),
+    expect(
+      reducer(
+        {
+          pending: true,
+          data: ["stuff"],
+          error: null
+        },
+        {
+          type: actionTypes.CALL_FAIL,
+          payload: error
+        }
+      )
+    ).to.eql({
+      pending: false,
       data: null,
-    }, {
-      type: actionTypes.CALL_SUCCESS,
-      payload: data,
-    })).to.eql({
+      error
+    });
+  });
+
+  it("should handle CALL_SUCCESS", () => {
+    const data = "Really good tacos";
+
+    expect(
+      reducer(initialState, {
+        type: actionTypes.CALL_SUCCESS,
+        payload: data
+      })
+    ).to.eql({
       pending: false,
       error: null,
-      data,
+      data
+    });
+
+    expect(
+      reducer(
+        {
+          pending: true,
+          error: new Error("oops"),
+          data: null
+        },
+        {
+          type: actionTypes.CALL_SUCCESS,
+          payload: data
+        }
+      )
+    ).to.eql({
+      pending: false,
+      error: null,
+      data
     });
   });
 });
 
-describe('rent selectors', () => {
+describe("rent selectors", () => {
   let state;
   const rent = {};
 
@@ -196,36 +227,38 @@ describe('rent selectors', () => {
     state = { rent };
   });
 
-  describe('getRentState', () => {
-    it('handles no state without errors', () => {
+  describe("getRentState", () => {
+    it("handles no state without errors", () => {
       selectors.getRentState().should.eql({});
     });
   });
 
-  describe('getRentRequest', () => {
-    it('should return an empty object when unset', () => {
+  describe("getRentRequest", () => {
+    it("should return an empty object when unset", () => {
       state = {};
       expect(selectors.getRentRequest(state)).to.eql({});
     });
 
-    it('should return the rent request object when set', () => {
-      state = { rent: {
-        pending: true,
-        data: null,
-        error: null,
-      } };
+    it("should return the rent request object when set", () => {
+      state = {
+        rent: {
+          pending: true,
+          data: null,
+          error: null
+        }
+      };
       expect(selectors.getRentRequest(state)).to.eql(state.rent);
     });
   });
 
-  describe('getRentData', () => {
-    it('should return undefined when unset', () => {
+  describe("getRentData", () => {
+    it("should return undefined when unset", () => {
       state = {};
       expect(selectors.getRentData(state)).to.be.undefined;
     });
 
-    it('should return rent data when set', () => {
-      const data = 'you found it!';
+    it("should return rent data when set", () => {
+      const data = "you found it!";
       state = { rent: { data } };
       expect(selectors.getRentData(state)).to.eql(data);
     });

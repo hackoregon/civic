@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getAgencyData, getAgenciesThunk } from '../../state';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { getAgencyData, getAgenciesThunk } from "../../state";
 
 class TestComponent extends Component {
   componentWillMount() {
@@ -8,7 +8,7 @@ class TestComponent extends Component {
   }
 
   renderData() {
-    console.log('agencyData', this.props.agencyData);
+    console.log("agencyData", this.props.agencyData);
   }
 
   render() {
@@ -19,14 +19,13 @@ class TestComponent extends Component {
       </div>
     );
   }
-
 }
 
 export default connect(
   state => ({
-    agencyData: getAgencyData(state.transportation || state),
+    agencyData: getAgencyData(state.transportation || state)
   }),
   dispatch => ({
-    getAgencies: () => dispatch(getAgenciesThunk()),
-  }),
+    getAgencies: () => dispatch(getAgenciesThunk())
+  })
 )(TestComponent);

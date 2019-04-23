@@ -1,37 +1,47 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { css } from 'emotion';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { css } from "emotion";
 
-import { year, percentage, titleCase } from '@hackoregon/component-library/src/utils/formatters';
+import {
+  CivicStoryCard,
+  LineChart,
+  Dropdown
+} from "@hackoregon/component-library";
 
-import { CivicStoryCard, LineChart, Dropdown } from '@hackoregon/component-library';
+import { civicFormat } from "@hackoregon/component-library/dist/utils";
 
-import { fetchNeighborhoodAges, updateUserNeighborhood } from '../../state/neighborhoods-through-the-ages/actions';
+import {
+  fetchNeighborhoodAges,
+  updateUserNeighborhood
+} from "../../state/neighborhoods-through-the-ages/actions";
 import {
   isNeighborhoodAgesPending,
   catchNeighborhoodAgesErrors,
   getNeighborhoodAgesData,
   getListOfNeighborhoods,
   getSelectedNeighborhood,
-  getDataForSelectedNeighborhood,
-} from '../../state/neighborhoods-through-the-ages/selectors';
+  getDataForSelectedNeighborhood
+} from "../../state/neighborhoods-through-the-ages/selectors";
 
-const DEFAULT_NEIGHBORHOOD = { value: 'ROSE CITY PARK', label: 'Rose City Park' };
+const DEFAULT_NEIGHBORHOOD = {
+  value: "ROSE CITY PARK",
+  label: "Rose City Park"
+};
 
 const cardLoading = css`
   width: 100%;
   padding: 50px;
   text-align: center;
-  background: #EEE;
+  background: #eee;
 `;
 
 const cardError = css`
   width: 100%;
   padding: 50px;
   text-align: center;
-  background: #FDD;
-  border: 1px solid #C99;
+  background: #fdd;
+  border: 1px solid #c99;
 `;
 
 export class NeighborhoodsThroughTheAges extends React.Component {
@@ -45,10 +55,12 @@ export class NeighborhoodsThroughTheAges extends React.Component {
       error,
       neighborhoods,
       selectedNeighborhood,
-      selectedNeighborhoodData,
+      selectedNeighborhoodData
     } = this.props;
 
-    const neighborhoodSubtitle = !!selectedNeighborhood && ` - ${titleCase(selectedNeighborhood)}`;
+    const neighborhoodSubtitle =
+      !!selectedNeighborhood &&
+      ` - ${civicFormat.titleCase(selectedNeighborhood)}`;
 
     return (
       <CivicStoryCard
@@ -59,18 +71,22 @@ export class NeighborhoodsThroughTheAges extends React.Component {
         source="https://github.com/hackoregon/neighborhoods-2018/blob/master/docs/voter_registration/neighborhood%20age%20group%20occupancy.ipynb"
       >
         <p>
-        Between the years of 2006 to 2016, for each neighborhood in Portland, Oregon, registered voters have been grouped into the age categories, 18- 25, 26-32, 33-39, 40-49, and 50+. Their residencies are plotted over time to gain insight into the age range and movement of registered voters in Portland neighborhoods.
+          Between the years of 2006 to 2016, for each neighborhood in Portland,
+          Oregon, registered voters have been grouped into the age categories,
+          18- 25, 26-32, 33-39, 40-49, and 50+. Their residencies are plotted
+          over time to gain insight into the age range and movement of
+          registered voters in Portland neighborhoods.
         </p>
 
-        { !!selectedNeighborhood &&
+        {!!selectedNeighborhood && (
           <Dropdown
-          value={selectedNeighborhood}
-          onChange={event => event && this.props.setNeighborhood(event)}
-          options={neighborhoods}
+            value={selectedNeighborhood}
+            onChange={event => event && this.props.setNeighborhood(event)}
+            options={neighborhoods}
           />
-        }
+        )}
 
-        { !!selectedNeighborhoodData &&
+        {!!selectedNeighborhoodData && (
           <LineChart
             title="Registered Voters by Age"
             subtitle={`Registered voters in Portland by age group${neighborhoodSubtitle}`}
@@ -80,17 +96,16 @@ export class NeighborhoodsThroughTheAges extends React.Component {
             dataKey="year"
             dataValue="value"
             dataSeries="type"
-            xNumberFormatter={year}
-            yNumberFormatter={percentage}
+            xNumberFormatter={civicFormat.year}
+            yNumberFormatter={civicFormat.percentage}
           />
-        }
-
+        )}
       </CivicStoryCard>
     );
   }
 }
 
-NeighborhoodsThroughTheAges.displayName = 'NeighborhoodsThroughTheAges';
+NeighborhoodsThroughTheAges.displayName = "NeighborhoodsThroughTheAges";
 NeighborhoodsThroughTheAges.propTypes = {
   init: PropTypes.func,
   setNeighborhood: PropTypes.func,
@@ -98,7 +113,10 @@ NeighborhoodsThroughTheAges.propTypes = {
   error: PropTypes.string,
   neighborhoods: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
   selectedNeighborhood: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-  selectedNeighborhoodData: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
+  selectedNeighborhoodData: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.array
+  ])
 };
 
 export default connect(
@@ -108,7 +126,7 @@ export default connect(
     data: getNeighborhoodAgesData(state),
     neighborhoods: getListOfNeighborhoods(state),
     selectedNeighborhood: getSelectedNeighborhood(state),
-    selectedNeighborhoodData: getDataForSelectedNeighborhood(state),
+    selectedNeighborhoodData: getDataForSelectedNeighborhood(state)
   }),
   dispatch => ({
     init() {
@@ -118,6 +136,6 @@ export default connect(
     },
     setNeighborhood(neighborhood) {
       dispatch(updateUserNeighborhood(neighborhood));
-    },
-  }),
+    }
+  })
 )(NeighborhoodsThroughTheAges);

@@ -1,6 +1,13 @@
-import React from 'react';
-import { string, number, arrayOf, objectOf, oneOfType, shape} from 'prop-types';
-import { css } from 'emotion';
+import React from "react";
+import {
+  string,
+  number,
+  arrayOf,
+  objectOf,
+  oneOfType,
+  shape
+} from "prop-types";
+import { css } from "emotion";
 
 const tooltip = css`
   font-family: Helvetica, Arial, sans-serif;
@@ -15,21 +22,20 @@ const tooltip = css`
   pointer-events: none;
 `;
 
-const MapTooltip = (props) => {
-  const {
-    tooltipData,
-  } = props;
-  const x = tooltipData.x;
-  const y = tooltipData.y;
+const MapTooltip = props => {
+  const { tooltipData } = props;
+  const { x } = tooltipData;
+  const { y } = tooltipData;
 
-  const xPosition = x < window.innerWidth * 0.66 ? x : x - (window.innerWidth * 0.1);
+  const xPosition =
+    x < window.innerWidth * 0.66 ? x : x - window.innerWidth * 0.1;
   const yPostition = y < 375 ? y : y - 50;
 
-  const tooltipContent = tooltipData.content.map((obj, index) => {
+  const tooltipContent = tooltipData.content.map(obj => {
     return (
-      <div key={index}>
-        {`${obj.name}: ${obj.value.toLocaleString()}`}
-      </div>
+      <div key={`${obj.name}${obj.value}`}>{`${
+        obj.name
+      }: ${obj.value.toLocaleString()}`}</div>
     );
   });
 
@@ -38,27 +44,25 @@ const MapTooltip = (props) => {
       className={tooltip}
       style={{
         left: xPosition,
-        top: yPostition,
+        top: yPostition
       }}
     >
-      { tooltipContent }
+      {tooltipContent}
     </div>
   );
 };
 
 MapTooltip.propTypes = {
-  tooltipData: objectOf(
-    shape({
-      x: number,
-      y: number,
-      content: arrayOf(
-        shape({
-          name: string,
-          value: oneOfType([number, string]),
-        })
-      ),
-    })
-  ),
+  tooltipData: shape({
+    x: number,
+    y: number,
+    content: arrayOf(
+      shape({
+        name: string,
+        value: oneOfType([number, string])
+      })
+    )
+  })
 };
 
 export default MapTooltip;

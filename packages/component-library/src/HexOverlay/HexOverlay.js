@@ -1,8 +1,11 @@
-import React, { Component } from 'react';
-import { render } from 'react-dom';
-import PropTypes from 'prop-types';
-import { css } from 'emotion';
-import DeckGL, { HexagonLayer } from 'deck.gl';
+/* Deprecated or needs refactored to work with Base Map */
+/* eslint-disable */
+
+import React, { Component } from "react";
+import { render } from "react-dom";
+import PropTypes from "prop-types";
+import { css } from "emotion";
+import DeckGL, { HexagonLayer } from "deck.gl";
 
 const crosshair = css`
   cursor: crosshair;
@@ -51,6 +54,14 @@ class HexOverlay extends Component {
     this.startAnimationTimer = window.setTimeout(this._startAnimate, 1500);
   }
 
+  _animateHeight() {
+    if (this.state.elevationScale === elevationScale.max) {
+      this._stopAnimate();
+    } else {
+      this.setState({ elevationScale: this.state.elevationScale + 1 });
+    }
+  }
+
   _startAnimate() {
     this.intervalTimer = window.setInterval(this._animateHeight, 20);
   }
@@ -58,14 +69,6 @@ class HexOverlay extends Component {
   _stopAnimate() {
     window.clearTimeout(this.startAnimationTimer);
     window.clearTimeout(this.intervalTimer);
-  }
-
-  _animateHeight() {
-    if (this.state.elevationScale === elevationScale.max) {
-      this._stopAnimate();
-    } else {
-      this.setState({elevationScale: this.state.elevationScale + 1});
-    }
   }
 
   render() {
@@ -86,7 +89,7 @@ class HexOverlay extends Component {
       y,
       onHover,
       onLayerHover,
-      children,
+      children
     } = this.props;
 
     if (!data) {
@@ -95,9 +98,9 @@ class HexOverlay extends Component {
 
     const tooltip = React.Children.map(children, child => {
       return React.cloneElement(child, {
-        tooltipInfo: tooltipInfo,
-        x: x,
-        y: y,
+        tooltipInfo,
+        x,
+        y
       });
     });
     const tooltipRender = tooltipInfo ? tooltip : null;
@@ -113,22 +116,20 @@ class HexOverlay extends Component {
         coverage,
         filled,
         wireframe,
-        id: 'heatmap',
+        id: "heatmap",
         elevationRange: [0, 3000],
         elevationScale: elevation,
         extruded: true,
         pickable: true,
         upperPercentile: 100,
-        getPosition: d => d.geometry.coordinates,
+        getPosition: d => d.geometry.coordinates
       })
     ];
 
     return (
-      <div className={ crosshair }>
-        <DeckGL { ...viewport }
-                layers={ layers } className={ 'HexOverlay' }
-        >
-          { tooltipRender }
+      <div className={crosshair}>
+        <DeckGL {...viewport} layers={layers} className="HexOverlay">
+          {tooltipRender}
         </DeckGL>
       </div>
     );

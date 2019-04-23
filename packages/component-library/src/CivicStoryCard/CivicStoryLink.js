@@ -1,7 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router';
-import { css } from 'emotion';
+/* TODO: Fix linting errors */
+/* eslint-disable */
+
+import React from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router";
+import { css } from "emotion";
 
 const storyLinkClass = css`
   & a {
@@ -14,7 +17,7 @@ const storyLinkClass = css`
     color: #000;
 
     &:hover {
-      background-color: rgba(0,0,0,0.1);
+      background-color: rgba(0, 0, 0, 0.1);
       color: #000;
     }
 
@@ -31,23 +34,32 @@ const storyLinkClass = css`
 
 const StoryLink = ({ children, icon, route, action, link }) => (
   <div className={storyLinkClass}>
-    {route
-      ? <Link to={route}><i className={icon} /><span>{children}</span></Link>
-      : link
-        ? <a href={link}><i className={icon} /><span>{children}</span></a>
-        : <a tabIndex="0" onClick={action}><i className={icon} /><span>{children}</span></a>
-    }
+    {route ? (
+      <Link to={route}>
+        <i className={icon} />
+        <span>{children}</span>
+      </Link>
+    ) : link ? (
+      <a href={link}>
+        <i className={icon} />
+        <span>{children}</span>
+      </a>
+    ) : (
+      <a tabIndex="0" onClick={action}>
+        <i className={icon} />
+        <span>{children}</span>
+      </a>
+    )}
   </div>
 );
 
-
-StoryLink.displayName = 'StoryLink';
+StoryLink.displayName = "StoryLink";
 StoryLink.propTypes = {
   action: PropTypes.func,
   children: PropTypes.node,
   icon: PropTypes.string,
   route: PropTypes.string,
-  link: PropTypes.string,
+  link: PropTypes.string
 };
 
 export default StoryLink;

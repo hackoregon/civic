@@ -1,6 +1,7 @@
-import React from 'react';
-import { css } from 'emotion';
-import { Link } from 'react-router';
+import React from "react";
+import { css } from "emotion";
+import { Link } from "react-router";
+import { Logo } from "@hackoregon/component-library";
 
 const collectionPageWrapper = css`
   position: relative;
@@ -35,13 +36,12 @@ const leftContainer = css`
 
 const subCopy = css`
   display: block;
-  font-family: 'Rubik',sans-serif;
+  font-family: "Rubik", sans-serif;
   font-size: 18px;
   line-height: 1.7;
   margin: 20px 0;
   color: black;
   letter-spacing: auto;
-
 
   @media (max-width: 850px) {
     font-size: 16px;
@@ -51,7 +51,7 @@ const subCopy = css`
 const teamTitleStyle = css`
   display: block;
   font-size: 15px;
-  font-family: 'Rubik';
+  font-family: "Rubik";
   text-transform: uppercase;
   letter-spacing: 3px;
 
@@ -61,8 +61,9 @@ const teamTitleStyle = css`
 `;
 
 const itemStyle = css`
-  background-color: #FFFFFF;
-  h2, h3 {
+  background-color: #ffffff;
+  h2,
+  h3 {
     color: black;
   }
 `;
@@ -99,14 +100,14 @@ const sideListWrapper = css`
     box-sizing: border-box;
     text-decoration: none;
     border: none;
-    transition: opacity .4s ease-in-out;
-    border: 1px solid #DDD;
+    transition: opacity 0.4s ease-in-out;
+    border: 1px solid #ddd;
     border-radius: 2px;
-    box-shadow: 5px 5px 15px -3px rgba(0,0,0,0.2);
+    box-shadow: 5px 5px 15px -3px rgba(0, 0, 0, 0.2);
 
     h2 {
       color: black;
-      font-family: 'Rubik', sans-serif;
+      font-family: "Rubik", sans-serif;
       font-size: 24px;
       line-height: 1.2;
 
@@ -118,11 +119,8 @@ const sideListWrapper = css`
     :hover {
       opacity: 0.8;
     }
-
-
   }
 `;
-
 
 const homeLink = css`
   width: 100px;
@@ -133,32 +131,75 @@ const homeLink = css`
   }
 `;
 
-
 const PortlandCollectionPage = () => (
-  <div className={ collectionPageWrapper }>
-    <div className={ leftContainer }>
-      <div className={ homeLink }><Link to="/"><img src={require(`../assets/civic-logo-animated.svg`)} /></Link></div>
-      <h1>Portland Collections</h1>
-      <div className={ subCopy }>
-        Portland Collections are built by teams of volunteers who are passionate about showing the visual side of data to impact community awareness.
+  <div className={collectionPageWrapper}>
+    <div className={leftContainer}>
+      <div className={homeLink}>
+        <Link to="/">
+          <Logo />
+        </Link>
       </div>
-      <div className={ subCopy }>
+      <h1>Portland Collections</h1>
+      <div className={subCopy}>
+        Portland Collections are built by teams of volunteers who are passionate
+        about showing the visual side of data to impact community awareness.
+      </div>
+      <div className={subCopy}>
         <a href="https://service.civicpdx.org/">Portland APIs</a>
       </div>
     </div>
-    <div className={ sideListWrapper }>
+    <div className={sideListWrapper}>
       <ul>
-        <Link to="/sandbox"><li className={itemStyle}><div className={teamTitleStyle}>Sandbox</div><h2>Explore Interactive Maps from Portland Collections</h2></li></Link>
-        <Link to="/cities/portland/disaster"><li className={itemStyle}><div className={teamTitleStyle}>Disaster Resilience</div><h2>Assessing Risk and Prioritizing Action to Strengthen Resilience in the Face of a Natural Disaster</h2></li></Link>
-        <Link to="/cities/portland/elections"><li className={itemStyle}><div className={teamTitleStyle}>Local Elections</div><h2>Quantifying Influence and Understanding the Impact of Money in our Political System</h2></li></Link>
-        <Link to="/cities/portland/housing"><li className={itemStyle}><div className={teamTitleStyle}>Housing Affordability</div><h2>Synthesizing Complex Information to Better Understand Affordable Housing Trends and Policy Dynamics</h2></li></Link>
-        <Link to="/cities/portland/neighborhood"><li className={itemStyle}><div className={teamTitleStyle}>Neighborhood Development</div><h2>Examining Local Patterns, Movement, and Our Sense of Place</h2></li></Link>
-        <Link to="/cities/portland/transportation"><li className={itemStyle}><div className={teamTitleStyle}>Transportation Systems</div><h2>Identifying Opportunities for Equitable Mobility in Cities</h2></li></Link>
+        <Link to="/sandbox">
+          <li className={itemStyle}>
+            <div className={teamTitleStyle}>Sandbox</div>
+            <h2>Explore Interactive Maps from Portland Collections</h2>
+          </li>
+        </Link>
+        <Link to="/cities/portland/disaster">
+          <li className={itemStyle}>
+            <div className={teamTitleStyle}>Disaster Resilience</div>
+            <h2>
+              Assessing Risk and Prioritizing Action to Strengthen Resilience in
+              the Face of a Natural Disaster
+            </h2>
+          </li>
+        </Link>
+        <Link to="/cities/portland/elections">
+          <li className={itemStyle}>
+            <div className={teamTitleStyle}>Local Elections</div>
+            <h2>
+              Quantifying Influence and Understanding the Impact of Money in our
+              Political System
+            </h2>
+          </li>
+        </Link>
+        <Link to="/cities/portland/housing">
+          <li className={itemStyle}>
+            <div className={teamTitleStyle}>Housing Affordability</div>
+            <h2>
+              Synthesizing Complex Information to Better Understand Affordable
+              Housing Trends and Policy Dynamics
+            </h2>
+          </li>
+        </Link>
+        <Link to="/cities/portland/neighborhood">
+          <li className={itemStyle}>
+            <div className={teamTitleStyle}>Neighborhood Development</div>
+            <h2>Examining Local Patterns, Movement, and Our Sense of Place</h2>
+          </li>
+        </Link>
+        <Link to="/cities/portland/transportation">
+          <li className={itemStyle}>
+            <div className={teamTitleStyle}>Transportation Systems</div>
+            <h2>Identifying Opportunities for Equitable Mobility in Cities</h2>
+          </li>
+        </Link>
       </ul>
     </div>
   </div>
 );
 
-PortlandCollectionPage.displayName = 'PortlandCollectionPage';
+PortlandCollectionPage.displayName = "PortlandCollectionPage";
 
 export default PortlandCollectionPage;

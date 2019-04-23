@@ -1,17 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { css } from 'emotion';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { css } from "emotion";
 
-import { CivicStoryCard, Scatterplot } from '@hackoregon/component-library';
-import { percentage } from '@hackoregon/component-library/src/utils/formatters';
+import { CivicStoryCard, Scatterplot } from "@hackoregon/component-library";
 
-import { fetchProactivePlanning } from '../../state/proactive-planning/actions';
+import { civicFormat } from "@hackoregon/component-library/dist/utils";
+
+import { fetchProactivePlanning } from "../../state/proactive-planning/actions";
 import {
   isProactivePlanningPending,
   catchProactivePlanningErrors,
-  getProactivePlanningData,
-} from '../../state/proactive-planning/selectors';
+  getProactivePlanningData
+} from "../../state/proactive-planning/selectors";
 
 export class ProactivePlanning extends React.Component {
   componentDidMount() {
@@ -19,20 +20,16 @@ export class ProactivePlanning extends React.Component {
   }
 
   render() {
-    const {
-      isLoading,
-      error,
-      proactivePlanning,
-    } = this.props;
+    const { isLoading, error, proactivePlanning } = this.props;
 
     return (
       <CivicStoryCard
-        title="Proactive Planning for Citywide Resilience"
+        title="Planning for Citywide Resilience"
         slug="proactive-planning-for-city-wide-resilience"
         loading={isLoading}
-        error={error && 'Error loading data'}
+        error={error && "Error loading data"}
       >
-        { proactivePlanning &&
+        {proactivePlanning && (
           <Scatterplot
             title="Resilience and Displacement"
             subtitle="Resilience as measured by census non-response rate and expected displacement in a 9.0 earthquake by neighborhood"
@@ -44,32 +41,32 @@ export class ProactivePlanning extends React.Component {
             dataValue="displaced_percap"
             dataValueLabel="displacementLabel"
             dataSeries="quadrant"
-            size={{ key: 'total_population', minSize: 2, maxSize: 10 }}
-            xNumberFormatter={percentage}
-            yNumberFormatter={percentage}
+            size={{ key: "total_population", minSize: 2, maxSize: 10 }}
+            xNumberFormatter={civicFormat.percentage}
+            yNumberFormatter={civicFormat.percentage}
           />
-        }
+        )}
       </CivicStoryCard>
     );
   }
 }
-ProactivePlanning.displayName = 'proactivePlanning';
+ProactivePlanning.displayName = "proactivePlanning";
 ProactivePlanning.propTypes = {
   init: PropTypes.func,
   isLoading: PropTypes.bool,
   error: PropTypes.object,
-  proactivePlanning: PropTypes.arrayOf(PropTypes.object),
+  proactivePlanning: PropTypes.arrayOf(PropTypes.object)
 };
 
 export default connect(
   state => ({
     isLoading: isProactivePlanningPending(state),
     error: catchProactivePlanningErrors(state),
-    proactivePlanning: getProactivePlanningData(state),
+    proactivePlanning: getProactivePlanningData(state)
   }),
   dispatch => ({
     init() {
       dispatch(fetchProactivePlanning());
-    },
-  }),
+    }
+  })
 )(ProactivePlanning);

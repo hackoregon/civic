@@ -1,50 +1,93 @@
 # Civic [![Build Status](https://travis-ci.org/hackoregon/civic.svg?branch=master)](https://travis-ci.org/hackoregon/civic)
 
-This is the home of the front-end code for the [Civic Platform](http://civicplatform.org/). It's organized in a [lerna](learn.io) based mono-repo, but it's ok if you don't know what that means yet.
+This is the home of the front-end code for the [CIVIC Platform](http://civicplatform.org/). It's organized in a monorepo using Yarn Workspaces, but it's ok if you don't know what that means yet.
 
-## Setup
+# Let's make this better, together!
 
-### Development environment
-Prerequisites you'll need in your development environment to use and contribute to this project.
+Civic magic happens when we work together. We welcome your collaborative contributions. We also have a [more technical contribution guide](https://github.com/hackoregon/civic/blob/master/CONTRIBUTING.md).
 
-1. **bash** 
-	
-	You will need a Unix shell (bash). For Mac, this can be Terminal.app. For Windows, you'll need to use [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) (see issue #[53](https://github.com/hackoregon/civic/issues/53)).
-2. **nvm and yarn** 
-	
-	You will need the following tools installed in your Unix shell:
+🐧 **I see something that could be better:**
+The first step is [open an issue](https://github.com/hackoregon/civic/issues/new/choose), and tell us what you see that could be better. Tell us about your vision so that we can see what you see and help to improve it.
 
-	* [nvm](https://github.com/creationix/nvm)
-	* [yarn](https://yarnpkg.com/) > 1.0
-	
-	These tools make sure every contributor has identical dependency versions, include node and node packages.
+🐦 **I want to work on making something specific better:**
+If there's already a [documented issue](https://github.com/hackoregon/civic/issues) about what you want to work on, assign yourself to let others what you're working on. If there's not an issue, open one and assign yourself.
 
-3. **git**   
+🐤 **I want to work on making something better, but I'm not sure where to start:**
+Check out our [open issues with the good-first-issue label](https://github.com/hackoregon/civic/issues?q=is%3Aissue+is%3Aopen+label%3Agood-first-issue) for things to work on and [open pull requests](https://github.com/hackoregon/civic/issues) to review and collaborate with others on existing efforts.
 
-	You will need to have Git installed and a GitHub account with [SSH keys setup for remote access](https://help.github.com/articles/connecting-to-github-with-ssh/).
+🦜 **I've done something towards making this better:**
+Fantastic! Share it with us by [opening a pull request](https://github.com/hackoregon/civic/compare) with what you've done so far, and let's work together to make it even better and incorporate it into the CIVIC Platform!
+
+🦚 **I want to explore more things:**
+
+[CIVIC Platform](http://civicplatform.org/) 👏 [Components and Style Guide (Storybook)](https://hackoregon.github.io/civic/) 👏 [Platform Architecture Guide](https://github.com/hackoregon/civic/blob/master/ARCHITECTURE.md) 👏 [Redux Guide](https://github.com/hackoregon/civic/blob/master/WORKING_WITH_REDUX.md) 👏 [Contributing Guide](https://github.com/hackoregon/civic/blob/master/CONTRIBUTING.md)
+
+# Setup
+
+## Development environment
+
+### Prerequisites
+
+Before you install and build, you'll need the following.
+
+1. **bash**
+
+   You will need a Unix shell (bash). For Mac, this can be Terminal.app. For Windows, you'll need to use [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) (see issue #[53](https://github.com/hackoregon/civic/issues/53)).
+
+2. **nvm and yarn**
+
+   You will need the following tools installed in your Unix shell:
+
+   - [nvm](https://github.com/creationix/nvm)
+   - [yarn](https://yarnpkg.com/) > 1.0
+
+   These tools make sure every contributor has identical dependency versions, include node and node packages.
+
+3. **git**
+
+   You will need to have [Git](https://git-scm.com/) installed in your bash environment.
 
 ### Install and build
 
+🐸**GENTLE WARNING**🐸: Make sure you have met the prerequisites ☝️
+
 ```bash
-# Clone the repository and navigate to the project root
+# Clone the repository using either https or ssh
+# https
 $ git clone https://github.com/hackoregon/civic.git
+# OR ssh
+$ git clone git@github.com:hackoregon/civic.git
+
 $ cd civic
 
-# Sets your Node.js version to match what the project uses (should also happen on clone)
+# Sets your Node.js version to match what the project uses.
 $ nvm use
 
-# Note for next two steps, if you get an error, try the same command again.
+# Note for next two steps, if you get an error, keep trying the same command again.
 
-# Installs all package dependencies and links cross-dependencies
-$ yarn bootstrap
+# Installs all package dependencies and links cross-dependencies.
+$ yarn install
 
-# This will build all packages. Since some packages are used internally, they need to be built before the dependent packages are worked on. This operation takes while (~10 minutes), but only needs to be run at the project root once.
+# This will build all packages. Since some packages are used internally, they need to be built before the dependent packages are worked on.
 $ yarn build
+
+# Take a pizza break! 🍕! This takes a while, but only needs to run at the project root once.
 ```
+
+## Setting up your text editor
+
+In order to be the most productive, you’ll want to install some extensions or plug-ins for your text editor. These tools are already installed and configured project wide, so the only installation you’ll need is inside your text editor (don’t `npm install` or `yarn add` them). There are plug-ins or extensions available for the most commonly used editors (VS Code, Sublime Text, Vim, WebStorm, Atom, etc…)
+
+🐸**GENTLE WARNING**🐸: Configuration still in progress. You may encounter linting errors.
+You may want to turn off Prettier and ESLint in your editor for the time being
+
+- EditorConfig — for consistency in settings like indentation line-endings
+- ESLint — to show linting in your editor as you’re coding
+- Prettier — for code formatting in your editor as you’re coding
 
 ## Working on a single package other than the component library
 
-At this point, Lerna has prepared all packages in the monorepo.
+At this point, Yarn has prepared all packages in the monorepo.
 
 Most developers working in this project will be contributing to one package at a time.
 
@@ -52,7 +95,7 @@ This is the command sequence that will allow you to build/run an individual pack
 and work on it as if it was a standalone project:
 
 ```bash
-$ cd packages/{package-name} # e.g. cd package/housing
+$ cd packages/{package-name} # e.g. cd package/2018-disaster-resilience
 
 # run local project
 $ yarn start
@@ -74,7 +117,6 @@ Run Storybook with the following command or [view it here](https://hackoregon.gi
 $ yarn storybook
 ```
 
-
 ## Project Layout
 
 There are three types of packages right now:
@@ -83,35 +125,35 @@ There are three types of packages right now:
    project in a Hack Oregon project cycle.
 2. **Year package bundles**: A React/Redux codebase that bundles together all project packages for a given year. This
    is a unit that gets deployed to production.
-4. **Utilities**: Common code that other projects depend on.
+3. **Utilities**: Common code that other projects depend on.
 
 ### Packages
 
-Every package has its own README with further details on what the package is for and how it works.
+Every package has its own README with further details on what the package is for and how it works. We'll be adding some new packages for the 2019 project season.
 
-  - Year Packages
-    - [2018](packages/2018/README.md)
-    - [2017](packages/2017/README.md)
-  - Project Packages
-    - [2018-neighborhood-development](packages/2018-neighborhood-development/README.md)
-    - [2018-disaster-resilience](packages/2018-disaster-resilience/README.md)
-    - [2018-transportation-systems](packages/2018-transportation-systems/README.md)
-    - [2018-housing-affordability](packages/2018-housing-affordability/README.md)
-    - [2018-local-elections](packages/2018-local-elections/README.md)
-    - [2018-example-farmers-markets](packages/2018-example-farmers-markets/README.md)
-    - [budget](packages/budget/README.md)
-    - [emergency-response](packages/emergency-response/README.md)
-    - [homelessness](packages/homelessness/README.md)
-    - [housing](packages/housing/README.md)
-    - [transportation](packages/transportation/README.md)
-  - Utilities
-    - [civic-sandbox](packages/civic-sandbox/README.md)
-    - [civic-babel-presets](packages/civic-babel-presets/README.md)
-    - [component-library](packages/component-library/README.md)
-    - [dev-server](packages/dev-server/README.md)
-    - [mock-wrapper](packages/mock-wrapper/README.md)
-    - [webpack-common](packages/webpack-common/README.md)
-    
+- Year Packages
+  - [2018](packages/2018/README.md)
+  - [2017](packages/2017/README.md)
+- Project Packages
+  - [2018-neighborhood-development](packages/2018-neighborhood-development/README.md)
+  - [2018-disaster-resilience](packages/2018-disaster-resilience/README.md)
+  - [2018-transportation-systems](packages/2018-transportation-systems/README.md)
+  - [2018-housing-affordability](packages/2018-housing-affordability/README.md)
+  - [2018-local-elections](packages/2018-local-elections/README.md)
+  - [2018-example-farmers-markets](packages/2018-example-farmers-markets/README.md)
+  - [budget](packages/budget/README.md)
+  - [emergency-response](packages/emergency-response/README.md)
+  - [homelessness](packages/homelessness/README.md)
+  - [housing](packages/housing/README.md)
+  - [transportation](packages/transportation/README.md)
+- Utilities
+
+  - [civic-sandbox](packages/civic-sandbox/README.md)
+  - [civic-babel-presets](packages/civic-babel-presets/README.md)
+  - [component-library](packages/component-library/README.md)
+  - [dev-server](packages/dev-server/README.md)
+  - [mock-wrapper](packages/mock-wrapper/README.md)
+  - [webpack-common](packages/webpack-common/README.md)
 
 ## Testing across all packages
 

@@ -1,14 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router';
-import { css } from 'emotion';
+/* TODO: Fix linting errors */
+/* eslint-disable */
+
+import React from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router";
+import { css } from "emotion";
 
 const linkClass = css`
   & > a {
     color: rgba(255, 255, 255, 0.65);
     flex: 1;
     display: block;
-    font-family: 'Rubik', sans-serif;
+    font-family: "Rubik", sans-serif;
     font-size: 1.25rem;
     border: none;
     text-transform: uppercase;
@@ -16,7 +19,9 @@ const linkClass = css`
     padding: 1rem;
     text-align: center;
 
-    &:focus, &:hover, &:active {
+    &:focus,
+    &:hover,
+    &:active {
       color: rgba(255, 255, 255, 0.85);
     }
 
@@ -34,11 +39,10 @@ const NavRouterLink = ({ path, customStyles, name }) => {
   const pathTo = pathOrName(path, name);
 
   return (
-    <li className={linkClass} style={{ ...boxStyle }} >
-      <Link className={'nav-item'} to={pathTo} >
+    <li className={linkClass} style={{ ...boxStyle }}>
+      <Link className="nav-item" to={pathTo}>
         <span style={{ ...linkStyle }}>{name}</span>
       </Link>
-
     </li>
   );
 };
@@ -46,7 +50,7 @@ const NavRouterLink = ({ path, customStyles, name }) => {
 NavRouterLink.propTypes = {
   name: PropTypes.string,
   path: PropTypes.string,
-  customStyles: PropTypes.object,
+  customStyles: PropTypes.object
 };
 
 export default NavRouterLink;
