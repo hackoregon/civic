@@ -53,6 +53,7 @@ travis:
 
 	@if [ "$$SUITE" = "COMPONENT_LIBRARY" ]; then \
 		cd packages/component-library && yarn test && cd -; \
+		make deploy-component-library; \
 	fi
 
 deploy:
