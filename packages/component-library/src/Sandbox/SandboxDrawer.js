@@ -7,6 +7,7 @@ import Dropdown from "../Dropdown/Dropdown";
 import SandboxDateSelector from "./SandboxDateSelector";
 import SandboxToggleSwitch from "./SandboxToggleSwitch";
 import SandboxMapLegend from "./SandboxMapLegend";
+import SandboxBaseMapSelector from "./SandboxBaseMapSelector";
 
 const menuOpen = css(`
   position: absolute;
@@ -54,7 +55,9 @@ const SandboxDrawer = ({
   updatePackage,
   selectedFoundation,
   updateFoundation,
-  foundationMapProps
+  foundationMapProps,
+  onBaseMapStyleChange,
+  baseMapStyle
 }) => {
   return (
     <div className={drawerVisible ? menuOpen : menuClosed}>
@@ -183,6 +186,21 @@ const SandboxDrawer = ({
                 <SandboxMapLegend
                   data={foundationData}
                   mapProps={foundationMapProps}
+                />
+              )}
+              <h2
+                className={css(`
+                color: #555;
+                text-transform: uppercase;
+                margin: 0 10px;
+              `)}
+              >
+                Base map style
+              </h2>
+              {onBaseMapStyleChange && baseMapStyle && (
+                <SandboxBaseMapSelector
+                  onBaseMapStyleChange={onBaseMapStyleChange}
+                  baseMapStyle={baseMapStyle}
                 />
               )}
             </div>

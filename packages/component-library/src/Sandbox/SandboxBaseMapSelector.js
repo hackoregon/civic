@@ -3,18 +3,15 @@ import React from "react";
 import { css } from "emotion";
 
 const baseMapMenu = css(`
-  position: absolute;
   background: #f3f2f3;
   padding: 10px;
-  bottom: 0;
-  right: 0;
   z-index: 2;
   font-family: "Roboto Condensed", sans-serif;
 `);
 
 const SandboxBaseMapSelector = ({ onBaseMapStyleChange, baseMapStyle }) => {
   return (
-    <>
+    <React.Fragment>
       <div className={baseMapMenu}>
         <input
           checked={baseMapStyle === "light"}
@@ -22,16 +19,16 @@ const SandboxBaseMapSelector = ({ onBaseMapStyleChange, baseMapStyle }) => {
           value="light"
           onChange={onBaseMapStyleChange}
         />
-        <label for="light">Light</label>
+        <label htmlFor="light">Light</label>
         <input
           checked={baseMapStyle === "dark"}
           type="radio"
           value="dark"
           onChange={onBaseMapStyleChange}
         />
-        <label for="dark">Dark</label>
+        <label htmlFor="dark">Dark</label>
       </div>
-    </>
+    </React.Fragment>
   );
 };
 

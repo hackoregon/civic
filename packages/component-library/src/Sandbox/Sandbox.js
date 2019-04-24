@@ -6,7 +6,6 @@ import BaseMap from "../BaseMap/BaseMap";
 import CivicSandboxMap from "../CivicSandboxMap/CivicSandboxMap";
 import CivicSandboxTooltip from "../CivicSandboxMap/CivicSandboxTooltip";
 import SandboxDrawer from "./SandboxDrawer";
-import SandboxBaseMapSelector from "./SandboxBaseMapSelector";
 
 const baseMapWrapper = css(`
   height: 80vh;
@@ -101,6 +100,8 @@ class Sandbox extends React.Component {
             updatePackage={updatePackage}
             updateFoundation={updateFoundation}
             foundationMapProps={foundationMapProps}
+            onBaseMapStyleChange={this.handleBaseMapStyleChange}
+            baseMapStyle={this.state.baseMapStyle}
           />
         </div>
 
@@ -117,10 +118,6 @@ class Sandbox extends React.Component {
               onClick={onFoundationClick}
               onHoverSlide={onSlideHover}
             >
-              <SandboxBaseMapSelector
-                onBaseMapStyleChange={this.handleBaseMapStyleChange}
-                baseMapStyle={this.state.baseMapStyle}
-              />
               {tooltipInfo && <CivicSandboxTooltip tooltipData={tooltipInfo} />}
             </CivicSandboxMap>
           </BaseMap>
