@@ -1,6 +1,6 @@
 {
   "name": "@hackoregon/webpack-common",
-  "version": "3.1.0-ci.0",
+  "version": "3.2.0-ci.0",
   "description": "Common webpack blocks and patterns",
   "main": "index.js",
   "repository": {
