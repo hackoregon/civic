@@ -1,6 +1,6 @@
 {
   "name": "@hackoregon/dev-server",
-  "version": "3.0.0",
+  "version": "3.0.1-ci.0",
   "description": "A simple express server used when developing civic packages",
   "main": "index.js",
   "repository": {
