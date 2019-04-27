@@ -4,7 +4,7 @@ import { storybookStyles } from "../storyStyles";
 const CardsStyle = () => (
   <div style={storybookStyles.main}>
     <h1>Story Cards</h1>
-    <p>Placeholder for story Cards style guidelines.</p>
+    <p>Placeholder for Story Cards style guidelines.</p>
   </div>
 );
 
