@@ -1,6 +1,6 @@
 {
   "name": "@hackoregon/civic-housing",
-  "version": "3.2.0-ci.0",
+  "version": "3.0.0",
   "description": "Civic/Housing 2017",
   "main": "src/index.js",
   "contributors": [
@@ -37,7 +37,7 @@
     "test": "cross-env BABEL_ENV=test mocha --opts ./mocha.opts 'src/**/*.test.js'"
   },
   "dependencies": {
-    "@hackoregon/component-library": "^3.2.0-ci.0",
+    "@hackoregon/component-library": "^3.0.0",
     "compression": "^1.6.2",
     "cross-env": "^5.2.0",
     "d3-format": "^1.2.0",
@@ -64,9 +64,9 @@
     "@babel/core": "^7.0.0",
     "@babel/node": "^7.0.0",
     "@babel/register": "^7.0.0",
-    "@hackoregon/civic-babel-presets": "^3.2.0-ci.0",
-    "@hackoregon/mock-wrapper": "^3.2.0-ci.0",
-    "@hackoregon/webpack-common": "^3.2.0-ci.0",
+    "@hackoregon/civic-babel-presets": "^3.0.0",
+    "@hackoregon/mock-wrapper": "^3.0.0",
+    "@hackoregon/webpack-common": "^3.0.0",
     "autoprefixer": "^9.4.10",
     "babel-jest": "^24.5.0",
     "chai": "^4.2.0",

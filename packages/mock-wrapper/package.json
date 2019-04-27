@@ -1,6 +1,6 @@
 {
   "name": "@hackoregon/mock-wrapper",
-  "version": "3.2.0-ci.0",
+  "version": "3.0.0",
   "description": "A simple way to wrap a project as if it is in a year package",
   "main": "dist/index.js",
   "modules": "es/index.js",
@@ -21,7 +21,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@hackoregon/civic-babel-presets": "^3.2.0-ci.0",
+    "@hackoregon/civic-babel-presets": "^3.0.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-redux": "^6.0.1",
