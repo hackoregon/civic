@@ -1,6 +1,6 @@
 {
   "name": "@hackoregon/component-library",
-  "version": "3.2.0-ci.0",
+  "version": "3.0.0",
   "description": "Official repo for Hack Oregon React component library",
   "main": "dist/index.js",
   "modules": "es/index.js",
@@ -13,7 +13,7 @@
     "test:watch": "yarn run test -- -w",
     "lint": "eslint --fix src",
     "storybook": "node scripts/storybook.js",
-    "start": "node scripts/start.js"
+    "start": "node scripts/start.js"        
   },
   "author": "David Daniel <davidedaniel@gmail.com> (http://davidedaniel.github.io)",
   "license": "MIT",
