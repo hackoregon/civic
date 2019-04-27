@@ -1,6 +1,6 @@
 {
   "name": "@hackoregon/mock-wrapper",
-  "version": "1.0.0-alpha.1c62c05f",
+  "version": "3.0.0",
   "description": "A simple way to wrap a project as if it is in a year package",
   "main": "dist/index.js",
   "modules": "es/index.js",
@@ -8,6 +8,11 @@
     "type": "git",
     "url": "git+https://github.com/hackoregon/civic.git"
   },
+  "private": false,
+  "keywords": [
+    "civic",
+    "hackoregon"
+  ],
   "scripts": {
     "build:esm": "babel src --out-dir es --copy-files --no-comments",
     "build:cjs": "babel src --out-dir dist --copy-files --no-comments",
@@ -17,7 +22,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@hackoregon/civic-babel-presets": "^1.0.0-alpha.1c62c05f",
+    "@hackoregon/civic-babel-presets": "^3.0.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-redux": "^6.0.1",
@@ -26,5 +31,6 @@
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.1.0"
-  }
+  },
+  "gitHead": "b50f7a7fca617964ade5a3ecb5225fee17b20fe4"
 }

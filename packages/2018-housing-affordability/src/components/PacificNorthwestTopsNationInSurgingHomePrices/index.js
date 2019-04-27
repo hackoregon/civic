@@ -84,7 +84,6 @@ export class PacificNorthwestTopsNationInSurgingHomePrices extends React.Compone
                   domain={[1, selectedCityRank.total]}
                   primary={selectedCityRank.rank}
                   height={50}
-                  colorScale="ocean"
                 />
               </p>
             </div>

@@ -1,6 +1,6 @@
 {
   "name": "@hackoregon/webpack-common",
-  "version": "1.0.0-alpha.1c62c05f",
+  "version": "3.0.0",
   "description": "Common webpack blocks and patterns",
   "main": "index.js",
   "repository": {
@@ -10,6 +10,11 @@
   "scripts": {
     "lint": "eslint --fix index.js"
   },
+  "keywords": [
+    "civic",
+    "hackoregon"
+  ],
+  "private": false,
   "author": "",
   "license": "MIT",
   "dependencies": {
@@ -23,5 +28,6 @@
   },
   "devDependencies": {
     "webpack-bundle-analyzer": "^3.1.0"
-  }
+  },
+  "gitHead": "b50f7a7fca617964ade5a3ecb5225fee17b20fe4"
 }

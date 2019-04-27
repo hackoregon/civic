@@ -17,7 +17,7 @@ const demoCode = () => (
 const altDemo = () => <PullQuote quoteText={quoteText} />;
 
 const urlDemo = () => (
-  <PullQuote quoteText={quoteText} url="http://www.hackoregon.org" />
+  <PullQuote quoteText={quoteText} url="https://www.hackoregon.org" />
 );
 
 const altTitle = "Without attribution";

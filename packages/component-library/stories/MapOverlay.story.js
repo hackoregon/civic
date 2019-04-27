@@ -10,7 +10,7 @@ const demoMap = () => {
   return (
     <DemoJSONLoader
       urls={[
-        "http://service.civicpdx.org/neighborhood-development/sandbox/foundations/under18/"
+        "https://service.civicpdx.org/neighborhood-development/sandbox/foundations/under18/"
       ]}
     >
       {data => {
@@ -39,7 +39,7 @@ const tooltipMap = () => {
   return (
     <DemoJSONLoader
       urls={[
-        "http://service.civicpdx.org/neighborhood-development/sandbox/foundations/under18/"
+        "https://service.civicpdx.org/neighborhood-development/sandbox/foundations/under18/"
       ]}
     >
       {data => {

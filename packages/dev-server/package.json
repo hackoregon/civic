@@ -1,6 +1,6 @@
 {
   "name": "@hackoregon/dev-server",
-  "version": "1.0.0-alpha.1c62c05f",
+  "version": "3.0.0",
   "description": "A simple express server used when developing civic packages",
   "main": "index.js",
   "repository": {
@@ -10,6 +10,11 @@
   "scripts": {
     "lint": "eslint --fix index.js"
   },
+  "private": false,
+  "keywords": [
+    "civic",
+    "hackoregon"
+  ],
   "author": "",
   "license": "MIT",
   "devDependencies": {
@@ -17,5 +22,5 @@
     "webpack-dev-middleware": "^3.6.1",
     "webpack-hot-middleware": "^2.22.0"
   },
-  "dependencies": {}
+  "gitHead": "b50f7a7fca617964ade5a3ecb5225fee17b20fe4"
 }
