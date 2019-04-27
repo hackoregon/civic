@@ -8,6 +8,7 @@ import {
   text,
   color,
   boolean,
+  optionsKnob as options,
   select
 } from "@storybook/addon-knobs";
 import notes from "./button.markdown.md";
@@ -51,7 +52,16 @@ export default () =>
         "all .2s ease-in-out"
       );
       //const commonTransition = text("Transition", "all .2s ease-in-out");
-      const disabled = boolean("Disabled", false);
+      //const disabled = boolean("Disabled", false);
+      const valuesObj = {
+        Enabled: "",
+        Disabled: "disabled"
+      };
+      const optionsObj = {
+        display: "inline-radio"
+      };
+      const disabled = options("State", valuesObj, "", optionsObj);
+      //console.log(disabled);
       return (
         <Button
           onClick={action("clicked")}
