@@ -15,7 +15,7 @@ const INITIAL_STATE = {
   coordsPending: false,
   coordsError: null,
   coordsData: null,
-  selectedCoords: null
+  selectedCoords: { latitude: 45.5231, longitude: -122.6765 }
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -65,7 +65,7 @@ const reducer = (state = INITIAL_STATE, action) => {
     case SET_COORDS:
       return {
         ...state,
-        selectedCoords: action.selectedCoords
+        selectedCoords: action.payload
       };
     default:
       return state;

@@ -1,8 +1,7 @@
 /* TODO: Fix linting errors */
-/* eslint-disable */
 
 import React, { Component } from "react";
-import MapGL, { NavigationControl } from "react-map-gl";
+import MapGL, { NavigationControl, Marker } from "react-map-gl";
 import Dimensions from "react-dimensions";
 import { css } from "emotion";
 import PropTypes from "prop-types";
@@ -98,6 +97,7 @@ class BaseMap extends Component {
       mapboxStyle,
       mapboxToken,
       geocoder,
+      locationMarker,
       navigation,
       geocoderOptions,
       geocoderOnChange,
@@ -144,6 +144,18 @@ class BaseMap extends Component {
               />
             )}
           </div>
+          {locationMarker && (
+            <Marker
+              latitude={viewport.latitude}
+              longitude={viewport.longitude}
+              offsetLeft={-20}
+              offsetTop={-10}
+            >
+              <span role="img" aria-label="star">
+                ❌
+              </span>
+            </Marker>
+          )}
           {geocoder && mounted && (
             <Geocoder
               mapRef={{ current: this.mapRef.current }}

@@ -42,14 +42,11 @@ const mapContainer = css`
   }
 `;
 
-const LAT = 45.5231;
-const LONG = -122.6765;
 const ZOOM = 13.5;
 
 const geocoderOptions = {
   bbox: [-123.1847001376, 45.2458284187, -122.2151566806, 45.8544896021],
   zoom: 13.5,
-  trackProximity: true,
   placeholder: "Enter your address"
 };
 
@@ -122,14 +119,14 @@ export class YouAndYourNeighbors extends React.Component {
           />
           <div className={mapContainer}>
             <BaseMap
-              initialLongitude={LONG}
-              initialLatitude={LAT}
+              initialLongitude={selectedCoords.longitude}
+              initialLatitude={selectedCoords.latitude}
               initialZoom={ZOOM}
               navigation={false}
-              // TODO: Reimplement Geocoder
-              // geocoder
-              // geocoderOptions={geocoderOptions}
-              // geocoderOnChange={geocoderChange}
+              locationMarker={coordsProperties}
+              geocoder
+              geocoderOptions={geocoderOptions}
+              geocoderOnChange={geocoderChange}
               mapGLOptions={mapGLOptions}
             >
               {data && (
