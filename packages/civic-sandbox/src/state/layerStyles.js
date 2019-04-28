@@ -86,6 +86,12 @@ const purpleGreenDivergent10 = [
   [0, 68, 27, 200]
 ];
 
+const civicBlue = [30, 98, 189, 255];
+const civicGreen = [25, 183, 170, 255];
+const civicPurple = [114, 29, 124, 255];
+const civicPink = [220, 69, 86, 255];
+const civicYellow = [255, 178, 38, 255];
+
 export const foundations = data => ({
   "Total Population": {
     mapType: "ChoroplethMap",
@@ -373,13 +379,13 @@ const poiGetIconColor = f =>
   f.properties.type === "BEECN"
     ? [0, 0, 0, 255]
     : f.properties.type === "COMMCTR"
-    ? [114, 29, 124, 255]
+    ? civicPurple
     : f.properties.type === "Fire Station"
-    ? [220, 69, 86, 255]
+    ? civicPink
     : f.properties.type === "School"
-    ? [255, 178, 38, 255]
+    ? civicYellow
     : f.properties.type === "Hospital"
-    ? [30, 98, 189, 255]
+    ? civicBlue
     : [0, 0, 0, 255];
 
 // Slide 015 - Change in Ridership by Route
@@ -395,397 +401,251 @@ const ridershipRouteGetColor = f => {
 export const slides = data => ({
   "bike parking": {
     boundary: {
-      mapType: "PolygonPlotMap",
+      mapType: "BoundaryMap",
       id: "boundary-layer-slide-001-bike-parking",
       data: data.slide_meta.boundary,
       opacity: 1,
-      filled: false,
-      getPolygon: f => f.coordinates,
-      getLineColor: () => [30, 98, 189, 255],
-      getLineWidth: () => 45,
-      lineWidthScale: 1,
-      lineJointRounded: false
+      getLineColor: () => civicBlue,
+      getLineWidth: () => 45
     },
     map: {
       mapType: "ScatterPlotMap",
       id: "scatterplot-layer-slide-001-bike-parking",
-      pickable: true,
       data: data.slide_data.features,
-      getPosition: f => f.geometry.coordinates,
-      opacity: 0.05,
-      getFillColor: () => [30, 98, 189, 255],
-      getLineColor: () => [30, 98, 189, 255],
-      getRadius: () => 50,
-      radiusScale: 1,
-      radiusMinPixels: 1,
-      autoHighlight: true,
-      highlightColor: [255, 178, 38, 200],
-      parameters: { depthTest: false }
+      getFillColor: () => civicBlue,
+      getLineColor: () => civicBlue,
+      getRadius: () => 50
     }
   },
   "bike lanes": {
     boundary: {
-      mapType: "PolygonPlotMap",
+      mapType: "BoundaryMap",
       id: "boundary-layer-slide-002-bike-lanes",
       data: data.slide_meta.boundary,
       opacity: 0,
-      filled: false,
-      getPolygon: f => f.coordinates,
-      getLineColor: () => [255, 178, 38, 255],
-      getLineWidth: () => 45,
-      lineWidthScale: 1,
-      lineJointRounded: false
+      getLineColor: () => civicYellow,
+      getLineWidth: () => 45
     },
     map: {
       mapType: "PathMap",
       id: "path-layer-slide-002-bike-lanes",
-      pickable: true,
       data: data.slide_data.features,
-      opacity: 1,
-      getColor: () => [255, 178, 38, 255],
-      getPath: f => f.geometry.coordinates,
-      getWidth: () => 15,
-      rounded: false,
-      autoHighlight: true,
-      highlightColor: [0, 0, 0, 50]
+      getColor: () => civicYellow,
+      getWidth: () => 25
     }
   },
   parks: {
     boundary: {
-      mapType: "PolygonPlotMap",
+      mapType: "BoundaryMap",
       id: "boundary-layer-slide-003-parks",
       data: data.slide_meta.boundary,
       opacity: 1,
-      filled: false,
-      getPolygon: f => f.coordinates,
-      getLineColor: () => [25, 183, 170, 255],
-      getLineWidth: () => 45,
-      lineWidthScale: 1,
-      lineJointRounded: false
+      getLineColor: () => civicGreen,
+      getLineWidth: () => 45
     },
     map: {
       mapType: "SmallPolygonMap",
       id: "polygon-layer-slide-003-parks",
-      pickable: true,
       data: data.slide_data.features,
-      opacity: 1,
       getPolygon: f => f.geometry.coordinates,
-      getLineColor: () => [25, 183, 170, 255],
+      getLineColor: () => civicGreen,
       getLineWidth: () => 7.5,
-      stroked: true,
-      getFillColor: () => [25, 183, 170, 255],
-      filled: true,
-      autoHighlight: true,
-      highlightColor: [25, 183, 170, 25]
+      getFillColor: () => civicGreen
     }
   },
   "multi-use trails": {
     boundary: {
-      mapType: "PolygonPlotMap",
+      mapType: "BoundaryMap",
       id: "boundary-layer-slide-004-multi-use-trails",
       data: data.slide_meta.boundary,
       opacity: 0,
-      filled: false,
-      getPolygon: f => f.coordinates,
-      getLineColor: () => [220, 69, 86, 255],
-      getLineWidth: () => 45,
-      lineWidthScale: 1,
-      lineJointRounded: false
+      getLineColor: () => civicPink,
+      getLineWidth: () => 45
     },
     map: {
       mapType: "PathMap",
       id: "path-layer-slide-004-multi-use-trails",
-      pickable: true,
       data: data.slide_data.features,
-      opacity: 1,
-      getColor: () => [220, 69, 86, 255],
-      getPath: f => f.geometry.coordinates,
-      getWidth: () => 15,
-      rounded: false,
-      autoHighlight: true,
-      highlightColor: [0, 0, 0, 50]
+      getColor: () => civicPink,
+      getWidth: () => 25
     }
   },
   "community gardens": {
     boundary: {
-      mapType: "PolygonPlotMap",
+      mapType: "BoundaryMap",
       id: "boundary-layer-slide-005-community-gardens",
       data: data.slide_meta.boundary,
       opacity: 1,
-      filled: false,
-      getPolygon: f => f.coordinates,
-      getLineColor: () => [25, 183, 170, 255],
-      getLineWidth: () => 45,
-      lineWidthScale: 1,
-      lineJointRounded: false
+      getLineColor: () => civicGreen,
+      getLineWidth: () => 45
     },
     map: {
       mapType: "SmallPolygonMap",
       id: "polygon-layer-slide-005-community-gardens",
-      pickable: true,
       data: data.slide_data.features,
-      opacity: 1,
-      getPolygon: f => f.geometry.coordinates,
-      getLineColor: () => [25, 183, 170, 255],
+      getLineColor: () => civicGreen,
       getLineWidth: () => 5,
-      stroked: true,
-      getFillColor: () => [25, 183, 170, 255],
-      filled: true,
-      autoHighlight: true,
-      highlightColor: [25, 183, 170, 25]
+      getFillColor: () => civicGreen
     }
   },
   "bike greenways": {
     boundary: {
-      mapType: "PolygonPlotMap",
+      mapType: "BoundaryMap",
       id: "boundary-layer-slide-008-bike-greenways",
       data: data.slide_meta.boundary,
       opacity: 0,
-      filled: false,
-      getPolygon: f => f.coordinates,
-      getLineColor: () => [25, 183, 170, 255],
-      getLineWidth: () => 45,
-      lineWidthScale: 1,
-      lineJointRounded: false
+      getLineColor: () => civicGreen,
+      getLineWidth: () => 45
     },
     map: {
       mapType: "PathMap",
       id: "path-layer-slide-008-bike-greenways",
-      pickable: true,
       data: data.slide_data.features,
-      opacity: 1,
-      getColor: () => [25, 183, 170, 255],
-      getPath: f => f.geometry.coordinates,
-      getWidth: () => 15,
-      rounded: false,
-      autoHighlight: true,
-      highlightColor: [0, 0, 0, 50]
+      getColor: () => civicGreen,
+      getWidth: () => 25
     }
   },
   "rail stops": {
     boundary: {
-      mapType: "PolygonPlotMap",
+      mapType: "BoundaryMap",
       id: "boundary-layer-slide-009-rail-stops",
       data: data.slide_meta.boundary,
       opacity: 1,
-      filled: false,
-      getPolygon: f => f.coordinates,
-      getLineColor: () => [114, 29, 124, 255],
-      getLineWidth: () => 45,
-      lineWidthScale: 1,
-      lineJointRounded: false
+      getLineColor: () => civicPurple,
+      getLineWidth: () => 45
     },
     map: {
       mapType: "ScatterPlotMap",
       id: "scatterplot-layer-slide-009-rail-stops",
-      pickable: true,
       data: data.slide_data.features,
-      getPosition: f => f.geometry.coordinates,
-      opacity: 0.9,
-      getFillColor: () => [114, 29, 124, 255],
-      getLineColor: () => [114, 29, 124, 255],
-      getRadius: () => 40,
-      radiusScale: 1,
-      radiusMinPixels: 1,
-      autoHighlight: true,
-      highlightColor: [100, 100, 100, 100],
-      parameters: { depthTest: false }
+      getFillColor: () => civicPurple,
+      getLineColor: () => civicPurple,
+      getRadius: () => 40
     }
   },
   "grocery stores": {
     boundary: {
-      mapType: "PolygonPlotMap",
+      mapType: "BoundaryMap",
       id: "boundary-layer-slide-010-grocery-stores",
       data: data.slide_meta.boundary,
       opacity: 1,
-      filled: false,
-      getPolygon: f => f.coordinates,
-      getLineColor: () => [255, 178, 38, 255],
-      getLineWidth: () => 100,
-      lineWidthScale: 1,
-      lineJointRounded: false
+      getLineColor: () => civicYellow,
+      getLineWidth: () => 100
     },
     map: {
       mapType: "ScatterPlotMap",
       id: "scatterplot-layer-slide-010-grocery-stores",
-      pickable: true,
       data: data.slide_data.features,
-      getPosition: f => f.geometry.coordinates,
-      opacity: 0.9,
-      getFillColor: () => [255, 178, 38, 255],
-      getLineColor: () => [255, 178, 38, 255],
+      getFillColor: () => civicYellow,
+      getLineColor: () => civicYellow,
       getRadius: () => 100,
-      radiusScale: 1,
-      radiusMinPixels: 1,
-      autoHighlight: true,
-      highlightColor: [220, 69, 86, 200],
-      parameters: { depthTest: false }
+      highlightColor: [255, 140, 0, 155]
     }
   },
   demolitions: {
     boundary: {
-      mapType: "PolygonPlotMap",
+      mapType: "BoundaryMap",
       id: "boundary-layer-slide-011-demolitions",
       data: data.slide_meta.boundary,
       opacity: 1,
-      filled: false,
-      getPolygon: f => f.coordinates,
-      getLineColor: () => [220, 69, 86, 255],
-      getLineWidth: () => 45,
-      lineWidthScale: 1,
-      lineJointRounded: false
+      getLineColor: () => civicPink,
+      getLineWidth: () => 45
     },
     map: {
       mapType: "ScatterPlotMap",
       id: "scatterplot-layer-slide-011-demolitions",
-      pickable: true,
       data: data.slide_data.features,
-      getPosition: f => f.geometry.coordinates,
-      opacity: 0.9,
-      getFillColor: () => [220, 69, 86, 255],
-      getLineColor: () => [220, 69, 86, 255],
-      getRadius: () => 100,
-      radiusScale: 1,
-      radiusMinPixels: 1,
-      autoHighlight: true,
-      highlightColor: [255, 178, 38, 200],
-      parameters: { depthTest: false }
+      getFillColor: () => civicPink,
+      getLineColor: () => civicPink,
+      getRadius: () => 100
     }
   },
   "camp sweeps": {
     boundary: {
-      mapType: "PolygonPlotMap",
+      mapType: "BoundaryMap",
       id: "boundary-layer-slide-012-camps-sweeps",
       data: data.slide_meta.boundary,
       opacity: 1,
-      filled: false,
-      getPolygon: f => f.coordinates,
-      getLineColor: () => [30, 98, 189, 255],
-      getLineWidth: () => 45,
-      lineWidthScale: 1,
-      lineJointRounded: false
+      getLineColor: () => civicBlue,
+      getLineWidth: () => 45
     },
     map: {
       mapType: "ScatterPlotMap",
       id: "scatterplot-layer-slide-012-camps-sweeps",
-      pickable: true,
       data: data.slide_data.features,
-      getPosition: f => f.geometry.coordinates,
-      opacity: 0.75,
-      getFillColor: () => [30, 98, 189, 255],
-      getLineColor: () => [30, 98, 189, 255],
-      getRadius: () => 100,
-      radiusScale: 1,
-      radiusMinPixels: 1,
-      autoHighlight: true,
-      highlightColor: [255, 178, 38, 200],
-      parameters: { depthTest: false }
+      getFillColor: () => civicBlue,
+      getLineColor: () => civicBlue,
+      getRadius: () => 100
     }
   },
   "camp reports": {
     boundary: {
-      mapType: "PolygonPlotMap",
+      mapType: "BoundaryMap",
       id: "boundary-layer-slide-013-camp-reports",
       data: data.slide_meta.boundary,
       opacity: 1,
-      filled: false,
-      getPolygon: f => f.coordinates,
-      getLineColor: () => [114, 29, 124, 255],
-      getLineWidth: () => 45,
-      lineWidthScale: 1,
-      lineJointRounded: false
+      getLineColor: () => civicPurple,
+      getLineWidth: () => 45
     },
     map: {
       mapType: "ScatterPlotMap",
       id: "scatterplot-layer-slide-013-camp-reports",
-      pickable: true,
       data: data.slide_data.features,
-      getPosition: f => f.geometry.coordinates,
       opacity: 0.1,
-      getFillColor: () => [114, 29, 124, 255],
-      getLineColor: () => [114, 29, 124, 255],
-      getRadius: () => 100,
-      radiusScale: 1,
-      radiusMinPixels: 1,
-      autoHighlight: true,
-      highlightColor: [255, 178, 38, 200],
-      parameters: { depthTest: false }
+      getFillColor: () => civicPurple,
+      getLineColor: () => civicPurple,
+      getRadius: () => 100
     }
   },
   "bus stops": {
     boundary: {
-      mapType: "PolygonPlotMap",
+      mapType: "BoundaryMap",
       id: "boundary-layer-slide-014-bus-stops",
       data: data.slide_meta.boundary,
       opacity: 1,
-      filled: false,
-      getPolygon: f => f.coordinates,
-      getLineColor: () => [30, 98, 189, 255],
-      getLineWidth: () => 45,
-      lineWidthScale: 1,
-      lineJointRounded: false
+      getLineColor: () => civicBlue,
+      getLineWidth: () => 45
     },
     map: {
       mapType: "ScatterPlotMap",
       id: "scatterplot-layer-slide-014-bus-stops",
-      pickable: true,
       data: data.slide_data.features,
-      getPosition: f => f.geometry.coordinates,
-      opacity: 0.9,
-      getFillColor: () => [30, 98, 189, 255],
-      getLineColor: () => [30, 98, 189, 255],
-      getRadius: () => 40,
-      radiusScale: 1,
-      radiusMinPixels: 1,
-      autoHighlight: true,
-      highlightColor: [100, 100, 100, 100],
-      parameters: { depthTest: false }
+      getFillColor: () => civicBlue,
+      getLineColor: () => civicBlue,
+      getRadius: () => 40
     }
   },
   "Change in Ridership by Route": {
     boundary: {
-      mapType: "PolygonPlotMap",
+      mapType: "BoundaryMap",
       id: "boundary-layer-slide-015-change-ridership-route",
       data: data.slide_meta.boundary,
       opacity: 0,
-      filled: false,
-      getPolygon: f => f.coordinates,
       getLineColor: () => [0, 0, 0, 0],
-      getLineWidth: () => 45,
-      lineWidthScale: 1,
-      lineJointRounded: false
+      getLineWidth: () => 45
     },
     map: {
       mapType: "PathMap",
       id: "path-layer-slide-015-change-ridership-route",
-      pickable: true,
       data: data.slide_data.features,
-      opacity: 0.7,
+      opacity: 0.8,
       getColor: ridershipRouteGetColor,
-      getPath: f => f.geometry.coordinates,
-      getWidth: () => 20,
-      rounded: true,
-      autoHighlight: true,
-      highlightColor: [255, 178, 38, 200]
+      getWidth: () => 25,
+      rounded: true
     }
   },
   "points of interest": {
     boundary: {
-      mapType: "PolygonPlotMap",
+      mapType: "BoundaryMap",
       id: "boundary-layer-slide-016-poi",
       data: data.slide_meta.boundary,
       opacity: 0,
-      filled: false,
-      getPolygon: f => f.coordinates,
       getLineColor: () => [0, 0, 0, 255],
-      getLineWidth: () => 45,
-      lineWidthScale: 1,
-      lineJointRounded: false
+      getLineWidth: () => 45
     },
     map: {
       mapType: "IconMap",
       id: "icon-layer-slide-016-poi",
-      pickable: true,
       data: data.slide_data.features,
       opacity: 0.75,
       iconAtlas: "https://i.imgur.com/xgTAROe.png",
@@ -794,155 +654,103 @@ export const slides = data => ({
       getPosition: f => (f.geometry === null ? [0, 0] : f.geometry.coordinates),
       getIcon: f => f.properties.type,
       getSize: () => 11,
-      getColor: poiGetIconColor,
-      autoHighlight: false,
-      highlightColor: [0, 0, 0, 0]
+      getColor: poiGetIconColor
     }
   },
   "Building Permits": {
     boundary: {
-      mapType: "PolygonPlotMap",
+      mapType: "BoundaryMap",
       id: "boundary-layer-slide-017-building-permits",
       data: data.slide_meta.boundary,
       opacity: 0,
-      filled: false,
-      getPolygon: f => f.coordinates,
       getLineColor: () => [0, 0, 0, 255],
-      getLineWidth: () => 45,
-      lineWidthScale: 1,
-      lineJointRounded: false
+      getLineWidth: () => 45
     },
     map: {
       mapType: "ScreenGridMap",
       id: "screengrid-layer-slide-017-building-permits",
-      pickable: true,
       data: data.slide_data.features,
-      getPosition: f => f.geometry.coordinates,
       opacity: 0.75,
       colorRange: earth,
-      cellSizePixels: 35,
-      autoHighlight: true,
-      highlightColor: [100, 100, 100, 100]
+      cellSizePixels: 35
     }
   },
   "Safety Hotline": {
     boundary: {
-      mapType: "PolygonPlotMap",
+      mapType: "BoundaryMap",
       id: "boundary-layer-slide-031-safety-hotline",
       data: data.slide_meta.boundary,
       opacity: 1,
-      filled: false,
-      getPolygon: f => f.coordinates,
-      getLineColor: () => [30, 98, 189, 255],
-      getLineWidth: () => 45,
-      lineWidthScale: 1,
-      lineJointRounded: false
+      getLineColor: () => civicBlue,
+      getLineWidth: () => 45
     },
     map: {
       mapType: "ScatterPlotMap",
       id: "scatterplot-layer-slide-031-safety-hotline",
-      pickable: true,
       data: data.slide_data.features,
-      getPosition: f => f.geometry.coordinates,
       opacity: 0.15,
-      getFillColor: () => [30, 98, 189, 255],
-      getLineColor: () => [30, 98, 189, 255],
-      getRadius: () => 30,
-      radiusScale: 1,
-      radiusMinPixels: 1,
-      autoHighlight: true,
-      highlightColor: [255, 178, 38, 200],
-      parameters: { depthTest: false }
+      getFillColor: () => civicBlue,
+      getLineColor: () => civicBlue,
+      getRadius: () => 30
     }
   },
   Crashes: {
     boundary: {
-      mapType: "PolygonPlotMap",
+      mapType: "BoundaryMap",
       id: "boundary-layer-slide-032-crashes",
       data: data.slide_meta.boundary,
       opacity: 1,
-      filled: false,
-      getPolygon: f => f.coordinates,
-      getLineColor: () => [220, 69, 86, 255],
-      getLineWidth: () => 45,
-      lineWidthScale: 1,
-      lineJointRounded: false
+      getLineColor: () => civicPink,
+      getLineWidth: () => 45
     },
     map: {
       mapType: "ScatterPlotMap",
       id: "scatterplot-layer-slide-032-crashes",
-      pickable: true,
       data: data.slide_data.features,
-      getPosition: f => f.geometry.coordinates,
       opacity: 0.15,
-      getFillColor: () => [220, 69, 86, 255],
-      getLineColor: () => [220, 69, 86, 255],
-      getRadius: () => 30,
-      radiusScale: 1,
-      radiusMinPixels: 1,
-      autoHighlight: true,
-      highlightColor: [255, 178, 38, 200],
-      parameters: { depthTest: false }
+      getFillColor: () => civicPink,
+      getLineColor: () => civicPink,
+      getRadius: () => 30
     }
   },
   "Bike Counts": {
     boundary: {
-      mapType: "PolygonPlotMap",
+      mapType: "BoundaryMap",
       id: "boundary-layer-slide-035-bike-counts",
       data: data.slide_meta.boundary,
       opacity: 1,
-      filled: false,
-      getPolygon: f => f.coordinates,
-      getLineColor: () => [220, 69, 86, 255],
-      getLineWidth: () => 45,
-      lineWidthScale: 1,
-      lineJointRounded: false
+      getLineColor: () => civicPink,
+      getLineWidth: () => 45
     },
     map: {
       mapType: "ScatterPlotMap",
       id: "scatterplot-layer-slide-035-bike-counts",
-      pickable: true,
       data: data.slide_data.features,
       getPosition: f => (f.geometry === null ? [0, 0] : f.geometry.coordinates),
       opacity: 0.6,
-      getFillColor: () => [220, 69, 86, 255],
-      getLineColor: () => [220, 69, 86, 255],
-      getRadius: f => Math.sqrt(f.properties.year_2017 / Math.PI) * 10,
-      radiusScale: 1,
-      radiusMinPixels: 1,
-      autoHighlight: true,
-      highlightColor: [255, 178, 38, 200],
-      parameters: { depthTest: false }
+      getFillColor: () => civicPink,
+      getLineColor: () => civicPink,
+      getRadius: f => Math.sqrt(f.properties.year_2017 / Math.PI) * 10
     }
   },
   "Bike Estimates": {
     boundary: {
-      mapType: "PolygonPlotMap",
+      mapType: "BoundaryMap",
       id: "boundary-layer-slide-036-bike-estimates",
       data: data.slide_meta.boundary,
       opacity: 1,
-      filled: false,
-      getPolygon: f => f.coordinates,
-      getLineColor: () => [114, 29, 124, 255],
-      getLineWidth: () => 45,
-      lineWidthScale: 1,
-      lineJointRounded: false
+      getLineColor: () => civicPurple,
+      getLineWidth: () => 45
     },
     map: {
       mapType: "ScatterPlotMap",
       id: "scatterplot-layer-slide-036-bike-estimates",
-      pickable: true,
       data: data.slide_data.features,
       getPosition: f => (f.geometry === null ? [0, 0] : f.geometry.coordinates),
       opacity: 0.3,
-      getFillColor: () => [114, 29, 124, 255],
-      getLineColor: () => [114, 29, 124, 255],
-      getRadius: f => Math.sqrt(f.properties.year_2016 / Math.PI) * 10,
-      radiusScale: 1,
-      radiusMinPixels: 1,
-      autoHighlight: true,
-      highlightColor: [255, 178, 38, 200],
-      parameters: { depthTest: false }
+      getFillColor: () => civicPurple,
+      getLineColor: () => civicPurple,
+      getRadius: f => Math.sqrt(f.properties.year_2016 / Math.PI) * 10
     }
   }
 });
