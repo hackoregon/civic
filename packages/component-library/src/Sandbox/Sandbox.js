@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { css } from "emotion";
-
 import BaseMap from "../BaseMap/BaseMap";
 import CivicSandboxMap from "../CivicSandboxMap/CivicSandboxMap";
 import CivicSandboxTooltip from "../CivicSandboxMap/CivicSandboxTooltip";
@@ -20,8 +19,7 @@ class Sandbox extends React.Component {
   constructor(props) {
     super();
     this.state = {
-      baseMapStyle: "light",
-      baseMapStyleUrl: "mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg"
+      baseMapStyle: "light"
     };
     this.handleBaseMapStyleChange = this.handleBaseMapStyleChange.bind(this);
   }
@@ -29,13 +27,10 @@ class Sandbox extends React.Component {
   handleBaseMapStyleChange = baseMapStyleChangeEvent => {
     baseMapStyleChangeEvent.target.value === "light"
       ? this.setState({
-          baseMapStyle: "light",
-          baseMapStyleUrl:
-            "mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg"
+          baseMapStyle: "light"
         })
       : this.setState({
-          baseMapStyle: "dark",
-          baseMapStyleUrl: "mapbox://styles/mapbox/dark-v9"
+          baseMapStyle: "dark"
         });
   };
 
@@ -107,7 +102,7 @@ class Sandbox extends React.Component {
 
         <div className={baseMapWrapper}>
           <BaseMap
-            mapboxStyle={this.state.baseMapStyleUrl}
+            civicMapStyle={this.state.baseMapStyle}
             initialZoom={10.5}
             initialLatitude={45.5431}
             initialLongitude={-122.5765}
