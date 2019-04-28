@@ -12,7 +12,8 @@ import "mapbox-gl/dist/mapbox-gl.css";
 
 const MAPBOX_TOKEN =
   "pk.eyJ1IjoiaGFja29yZWdvbiIsImEiOiJjamk0MGZhc2cwNDl4M3FsdHAwaG54a3BnIn0.Fq1KA0IUwpeKQlFIoaEn_Q";
-const MAPBOX_STYLE = "mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg";
+const CIVIC_LIGHT = "mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg";
+const CIVIC_DARK = "mapbox://styles/mapbox/dark-v9";
 
 const mapWrapper = css`
   margin: 0 auto;
@@ -44,7 +45,8 @@ class BaseMap extends Component {
       tooltipInfo: null,
       x: null,
       y: null,
-      mounted: false
+      mounted: false,
+      civicMapStyle: "mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg"
     };
     this.onViewportChange = this.onViewportChange.bind(this);
     this.onHover = this.onHover.bind(this);
@@ -74,6 +76,12 @@ class BaseMap extends Component {
     this.setState({
       viewport: { ...this.state.viewport, ...updatedViewportProps }
     });
+
+    if (props.civicMapStyle === "light") {
+      this.setState({ civicMapStyle: CIVIC_LIGHT });
+    } else if (props.civicMapStyle === "dark") {
+      this.setState({ civicMapStyle: CIVIC_DARK });
+    }
   }
 
   onHover({ object, x, y }) {
@@ -95,7 +103,7 @@ class BaseMap extends Component {
 
     const {
       height,
-      mapboxStyle,
+      civicMapStyle,
       mapboxToken,
       geocoder,
       navigation,
@@ -130,7 +138,7 @@ class BaseMap extends Component {
         <MapGL
           className="MapGL"
           {...viewport}
-          mapStyle={mapboxStyle}
+          mapStyle={this.state.civicMapStyle}
           mapboxApiAccessToken={mapboxToken}
           onViewportChange={viewport => this.onViewportChange(viewport)}
           ref={this.mapRef}
@@ -175,7 +183,7 @@ BaseMap.propTypes = {
 };
 
 BaseMap.defaultProps = {
-  mapboxStyle: MAPBOX_STYLE,
+  mapboxStyle: CIVIC_LIGHT,
   mapboxToken: MAPBOX_TOKEN,
   navigation: true,
   geocoder: false,
