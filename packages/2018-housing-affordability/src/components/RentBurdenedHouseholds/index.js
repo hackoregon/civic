@@ -96,7 +96,6 @@ export class RentBurdenedHouseholds extends React.Component {
                   domain={[1, selectedCityRank.total]}
                   primary={selectedCityRank.rank}
                   height={50}
-                  colorScale="ocean"
                 />
               </p>
             </div>

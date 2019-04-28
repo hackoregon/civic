@@ -1,6 +1,6 @@
 {
   "name": "@hackoregon/civic-emergency-response",
-  "version": "1.0.0-alpha.1c62c05f",
+  "version": "3.0.0",
   "description": "Hack Oregon Front-end React + Redux Starter",
   "main": "src/index.js",
   "author": "David Daniel",
@@ -21,6 +21,7 @@
   "engines": {
     "npm": ">=3"
   },
+  "private": true,
   "scripts": {
     "clean": "rimraf ./build && mkdir build",
     "start": "yarn start:dev",
@@ -31,7 +32,7 @@
     "lint": "eslint --fix src"
   },
   "dependencies": {
-    "@hackoregon/component-library": "^1.0.0-alpha.1c62c05f",
+    "@hackoregon/component-library": "^3.0.0",
     "axios": "^0.16.1",
     "compression": "^1.6.2",
     "cross-env": "^5.2.0",
@@ -62,9 +63,9 @@
     "@babel/core": "^7.0.0",
     "@babel/node": "^7.0.0",
     "@babel/register": "^7.0.0",
-    "@hackoregon/civic-babel-presets": "^1.0.0-alpha.1c62c05f",
-    "@hackoregon/mock-wrapper": "^1.0.0-alpha.1c62c05f",
-    "@hackoregon/webpack-common": "^1.0.0-alpha.1c62c05f",
+    "@hackoregon/civic-babel-presets": "^3.0.0",
+    "@hackoregon/mock-wrapper": "^3.0.0",
+    "@hackoregon/webpack-common": "^3.0.0",
     "autoprefixer": "^9.4.10",
     "babel-jest": "^24.5.0",
     "chai": "^4.2.0",

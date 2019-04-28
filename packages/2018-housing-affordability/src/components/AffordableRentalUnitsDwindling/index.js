@@ -104,7 +104,6 @@ export class AffordableRentalUnitsDwindling extends React.Component {
                   domain={[1, selectedCityLowRank.total]}
                   primary={selectedCityLowRank.rank}
                   height={50}
-                  colorScale="ocean"
                 />
               </p>
             </div>
@@ -125,7 +124,6 @@ export class AffordableRentalUnitsDwindling extends React.Component {
                   domain={[1, selectedCityHighRank.total]}
                   primary={selectedCityHighRank.rank}
                   height={50}
-                  colorScale="ocean"
                 />
               </p>
             </div>
