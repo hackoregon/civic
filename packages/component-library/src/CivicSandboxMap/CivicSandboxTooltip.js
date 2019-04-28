@@ -32,10 +32,11 @@ const MapTooltip = props => {
   const yPostition = y < 375 ? y : y - 50;
 
   const tooltipContent = tooltipData.content.map(obj => {
+    const value = obj.value ? obj.value : "No Data Available";
     return (
-      <div key={`${obj.name}${obj.value}`}>{`${
-        obj.name
-      }: ${obj.value.toLocaleString()}`}</div>
+      <div key={`${obj.name}-${value}`}>
+        {obj.name + ": " + value.toLocaleString()}
+      </div>
     );
   });
 

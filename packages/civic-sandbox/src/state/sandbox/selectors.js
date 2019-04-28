@@ -126,6 +126,9 @@ const makeVisFor = (spec, data) => {
   const type = spec.visualization.type;
   if (type === "PercentDonut") {
     const val = data.object.properties[spec.field];
+    const comparisonName = spec.visualization.comparison_name
+      ? spec.visualization.comparison_name
+      : " ";
     return {
       id: data.object.id,
       visualizationType: "PercentDonut",
@@ -133,7 +136,7 @@ const makeVisFor = (spec, data) => {
       data: [
         { x: spec.name, y: val },
         {
-          x: spec.visualization.comparison_name,
+          x: comparisonName,
           y: val < 1 ? 1 - val : 100 - val
         }
       ]
