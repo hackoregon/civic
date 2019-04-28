@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useState } from "react";
 import { css } from "emotion";
+
 import BaseMap from "../BaseMap/BaseMap";
 import CivicSandboxMap from "../CivicSandboxMap/CivicSandboxMap";
 import CivicSandboxTooltip from "../CivicSandboxMap/CivicSandboxTooltip";
@@ -15,55 +16,42 @@ const baseMapWrapper = css(`
   }
 `);
 
-class Sandbox extends React.Component {
-  constructor(props) {
-    super();
-    this.state = {
-      baseMapStyle: "light"
-    };
-    this.handleBaseMapStyleChange = this.handleBaseMapStyleChange.bind(this);
-  }
+const Sandbox = ({
+  data,
+  layerData,
+  defaultFoundation,
+  defaultSlides,
+  selectedPackage,
+  selectedFoundation,
+  selectedSlide,
+  foundationData,
+  slideData,
+  updatePackage,
+  updateFoundation,
+  updateSlide,
+  fetchSlideDataByDate,
+  drawerVisible,
+  toggleDrawer,
+  mapboxStyle,
+  styles,
+  onFoundationClick,
+  onSlideHover,
+  tooltipInfo,
+  allSlides,
+  foundationMapProps
+}) => {
+  const [baseMapStyle, setBaseMapStyle] = useState("light");
 
-  handleBaseMapStyleChange = baseMapStyleChangeEvent => {
+  const handleBaseMapStyleChange = baseMapStyleChangeEvent => {
     baseMapStyleChangeEvent.target.value === "light"
-      ? this.setState({
-          baseMapStyle: "light"
-        })
-      : this.setState({
-          baseMapStyle: "dark"
-        });
+      ? setBaseMapStyle("light")
+      : setBaseMapStyle("dark");
   };
 
-  render() {
-    const {
-      data,
-      layerData,
-      defaultFoundation,
-      defaultSlides,
-      selectedPackage,
-      selectedFoundation,
-      selectedSlide,
-      foundationData,
-      slideData,
-      updatePackage,
-      updateFoundation,
-      updateSlide,
-      fetchSlideDataByDate,
-      drawerVisible,
-      toggleDrawer,
-      mapboxStyle,
-      styles,
-      onFoundationClick,
-      onSlideHover,
-      tooltipInfo,
-      allSlides,
-      foundationMapProps
-    } = this.props;
-
-    return (
-      <div className={styles}>
-        <div
-          className={css(`
+  return (
+    <div className={styles}>
+      <div
+        className={css(`
           position: absolute;
           top: 0;
           right: 0;
@@ -77,50 +65,49 @@ class Sandbox extends React.Component {
             min-height: 500px;
           }
       `)}
-        >
-          <SandboxDrawer
-            data={data}
-            selectedSlide={selectedSlide}
-            onChange={updateSlide}
-            selectedPackage={selectedPackage}
-            toggleDrawer={toggleDrawer}
-            drawerVisible={drawerVisible}
-            defaultSlides={defaultSlides}
-            slideData={slideData}
-            fetchSlideByDate={fetchSlideDataByDate}
-            selectedFoundation={selectedFoundation}
-            foundationData={foundationData}
-            defaultFoundation={defaultFoundation}
-            allSlides={allSlides}
-            updatePackage={updatePackage}
-            updateFoundation={updateFoundation}
-            foundationMapProps={foundationMapProps}
-            onBaseMapStyleChange={this.handleBaseMapStyleChange}
-            baseMapStyle={this.state.baseMapStyle}
-          />
-        </div>
-
-        <div className={baseMapWrapper}>
-          <BaseMap
-            civicMapStyle={this.state.baseMapStyle}
-            initialZoom={10.5}
-            initialLatitude={45.5431}
-            initialLongitude={-122.5765}
-            useContainerHeight
-          >
-            <CivicSandboxMap
-              mapLayers={layerData}
-              onClick={onFoundationClick}
-              onHoverSlide={onSlideHover}
-            >
-              {tooltipInfo && <CivicSandboxTooltip tooltipData={tooltipInfo} />}
-            </CivicSandboxMap>
-          </BaseMap>
-        </div>
+      >
+        <SandboxDrawer
+          data={data}
+          selectedSlide={selectedSlide}
+          onChange={updateSlide}
+          selectedPackage={selectedPackage}
+          toggleDrawer={toggleDrawer}
+          drawerVisible={drawerVisible}
+          defaultSlides={defaultSlides}
+          slideData={slideData}
+          fetchSlideByDate={fetchSlideDataByDate}
+          selectedFoundation={selectedFoundation}
+          foundationData={foundationData}
+          defaultFoundation={defaultFoundation}
+          allSlides={allSlides}
+          updatePackage={updatePackage}
+          updateFoundation={updateFoundation}
+          foundationMapProps={foundationMapProps}
+          onBaseMapStyleChange={handleBaseMapStyleChange}
+          baseMapStyle={baseMapStyle}
+        />
       </div>
-    );
-  }
-}
+
+      <div className={baseMapWrapper}>
+        <BaseMap
+          civicMapStyle={baseMapStyle}
+          initialZoom={10.5}
+          initialLatitude={45.5431}
+          initialLongitude={-122.5765}
+          useContainerHeight
+        >
+          <CivicSandboxMap
+            mapLayers={layerData}
+            onClick={onFoundationClick}
+            onHoverSlide={onSlideHover}
+          >
+            {tooltipInfo && <CivicSandboxTooltip tooltipData={tooltipInfo} />}
+          </CivicSandboxMap>
+        </BaseMap>
+      </div>
+    </div>
+  );
+};
 
 Sandbox.propTypes = {
   data: PropTypes.object.isRequired,
