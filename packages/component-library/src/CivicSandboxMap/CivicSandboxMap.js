@@ -40,7 +40,7 @@ const CivicSandboxMap = props => {
       widthMinPixels={1}
       rounded={slide.data.rounded || false}
       autoHighlight={slide.data.autoHighlight || true}
-      highlightColor={slide.data.highlightColor || [114, 29, 124, 255]}
+      highlightColor={slide.data.highlightColor || highlighterYellow}
       onHover={onHoverSlide}
       parameters={{ depthTest: false }}
     />
@@ -203,7 +203,7 @@ const CivicSandboxMap = props => {
     const getLineWidth = f => {
       const [selectedFeature] = selectedFoundationDatum;
       const id = selectedFeature ? selectedFeature.id : null;
-      return f.id === id ? 100 : 1;
+      return f.id === id ? 75 : 1;
     };
 
     return (
