@@ -167,14 +167,14 @@ export const getSelectedFoundationDatum = createSelector(
 
     const selectedFoundationDatumProps =
       selectedFoundationDatum.object.properties;
-    const priamryFieldMatch = selectedFoundationDatumProps.hasOwnProperty(
+    const primaryFieldMatch = selectedFoundationDatumProps.hasOwnProperty(
       attrs.primary.field
     );
     const secondaryFieldMatch = selectedFoundationDatumProps.hasOwnProperty(
       attrs.secondary.field
     );
 
-    if (!priamryFieldMatch && !secondaryFieldMatch) return [];
+    if (!primaryFieldMatch && !secondaryFieldMatch) return [];
 
     if (attrs.primary && attrs.primary.field && attrs.primary.visualization) {
       visualizations.push(makeVisFor(attrs.primary, selectedFoundationDatum));
