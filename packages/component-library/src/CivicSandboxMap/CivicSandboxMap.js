@@ -21,21 +21,26 @@ const CivicSandboxMap = props => {
     selectedFoundationDatum
   } = props;
 
+  const getDefaultPosition = f => f.geometry.coordinates;
+  const getDefaultBoundaryPolygon = f => f.coordinates;
+
+  const highlighterYellow = [255, 255, 0, 200];
+
   const createPathMap = (slide, index) => (
     <PathLayer
       key={index}
       id={slide.data.id}
-      pickable={slide.data.pickable}
+      pickable={slide.data.pickable || true}
       data={slide.data.data}
       getColor={slide.data.getColor}
-      opacity={slide.data.opacity}
-      getPath={slide.data.getPath}
+      opacity={slide.data.opacity || 0.9}
+      getPath={slide.data.getPath || getDefaultPosition}
       getWidth={slide.data.getWidth}
       widthScale={slide.data.widthScale}
       widthMinPixels={1}
-      rounded={slide.data.rounded}
-      autoHighlight={slide.data.autoHighlight}
-      highlightColor={slide.data.highlightColor}
+      rounded={slide.data.rounded || false}
+      autoHighlight={slide.data.autoHighlight || true}
+      highlightColor={slide.data.highlightColor || [114, 29, 124, 255]}
       onHover={onHoverSlide}
       parameters={{ depthTest: false }}
     />
@@ -45,19 +50,20 @@ const CivicSandboxMap = props => {
     <ScatterplotLayer
       key={index}
       id={slide.data.id}
-      pickable={slide.data.pickable}
+      pickable={slide.data.pickable || true}
       data={slide.data.data}
-      getPosition={slide.data.getPosition}
-      opacity={slide.data.opacity}
+      getPosition={slide.data.getPosition || getDefaultPosition}
+      opacity={slide.data.opacity || 0.9}
       getFillColor={slide.data.getFillColor}
       getLineColor={slide.data.getLineColor}
       stroked={slide.data.stroked || false}
       getLineWidth={slide.data.getLineWidth || 5}
       lineWidthMinPixels={1}
       getRadius={slide.data.getRadius}
-      radiusScale={slide.data.radiusScale}
-      autoHighlight={slide.data.autoHighlight}
-      highlightColor={slide.data.highlightColor}
+      radiusScale={slide.data.radiusScale || 1}
+      radiusMinPixels={1}
+      autoHighlight={slide.data.autoHighlight || true}
+      highlightColor={slide.data.highlightColor || highlighterYellow}
       onHover={onHoverSlide}
       parameters={{ depthTest: false }}
     />
@@ -67,7 +73,7 @@ const CivicSandboxMap = props => {
     <IconLayer
       key={index}
       id={slide.data.id}
-      pickable={slide.data.pickable}
+      pickable={slide.data.pickable || true}
       data={slide.data.data}
       opacity={slide.data.opacity}
       iconAtlas={slide.data.iconAtlas}
@@ -77,8 +83,8 @@ const CivicSandboxMap = props => {
       getIcon={slide.data.getIcon}
       getSize={slide.data.getSize}
       getColor={slide.data.getColor}
-      autoHighlight={slide.data.autoHighlight}
-      highlightColor={slide.data.highlightColor}
+      autoHighlight={slide.data.autoHighlight || false}
+      highlightColor={slide.data.highlightColor || [0, 0, 0, 0]}
       onHover={onHoverSlide}
       parameters={{ depthTest: false }}
     />
@@ -88,15 +94,36 @@ const CivicSandboxMap = props => {
     <ScreenGridLayer
       key={index}
       id={slide.data.id}
-      pickable={slide.data.pickable}
+      pickable={slide.data.pickable || true}
       data={slide.data.data}
-      getPosition={slide.data.getPosition}
-      opacity={slide.data.opacity}
+      getPosition={slide.data.getPosition || getDefaultPosition}
+      opacity={slide.data.opacity || 0.9}
       colorRange={slide.data.colorRange}
       cellSizePixels={slide.data.cellSizePixels}
-      autoHighlight={slide.data.autoHighlight}
-      highlightColor={slide.data.highlightColor}
-      updateTriggers={{ instanceColors: slide.data || {} }}
+      autoHighlight={slide.data.autoHighlight || true}
+      highlightColor={slide.data.highlightColor || highlighterYellow}
+      updateTriggers={{ instanceColors: slide.data }}
+      gpuAggregation={false}
+    />
+  );
+
+  const createBoundaryMap = (slide, index) => (
+    <PolygonLayer
+      key={index}
+      id={slide.data.id}
+      pickable={false}
+      data={slide.data.data}
+      opacity={slide.data.opacity}
+      getPolygon={slide.data.getPolygon || getDefaultBoundaryPolygon}
+      getLineColor={slide.data.getLineColor}
+      getLineWidth={slide.data.getLineWidth}
+      lineWidthMinPixels={1}
+      lineWidthScale={1}
+      lineJointRounded={slide.data.lineJointRounded || false}
+      stroked={true}
+      filled={false}
+      autoHighlight={false}
+      parameters={{ depthTest: false }}
     />
   );
 
@@ -104,19 +131,21 @@ const CivicSandboxMap = props => {
     <PolygonLayer
       key={index}
       id={slide.data.id}
-      pickable={slide.data.pickable}
+      pickable={true}
       data={slide.data.data}
-      opacity={slide.data.opacity}
-      getPolygon={slide.data.getPolygon}
+      opacity={slide.data.opacity || 0.9}
+      getPolygon={slide.data.getPolygon || getDefaultPosition}
       getLineColor={slide.data.getLineColor}
       getLineWidth={slide.data.getLineWidth}
       lineWidthMinPixels={1}
-      stroked={slide.data.stroked}
+      lineWidthScale={1}
+      lineJointRounded={slide.data.lineJointRounded || false}
+      stroked={slide.data.stroked || true}
       getFillColor={slide.data.getFillColor}
-      filled={slide.data.filled}
+      filled={slide.data.filled || true}
       onHover={onHoverSlide}
-      autoHighlight={slide.data.autoHighlight}
-      highlightColor={slide.data.highlightColor}
+      autoHighlight={slide.data.autoHighlight || true}
+      highlightColor={slide.data.highlightColor || highlighterYellow}
       parameters={{ depthTest: false }}
     />
   );
@@ -221,6 +250,8 @@ const CivicSandboxMap = props => {
       ? createPolygonMap(layer, index)
       : mapType === "ChoroplethMap"
       ? createChoroplethMap(layer, index)
+      : mapType === "BoundaryMap"
+      ? createBoundaryMap(layer, index)
       : null;
   });
 
