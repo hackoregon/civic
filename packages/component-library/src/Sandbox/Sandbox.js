@@ -173,7 +173,7 @@ Sandbox.propTypes = {
   selectedFoundationDatum: arrayOf(
     shape({
       data: oneOfType([arrayOf(shape({})), number, string]),
-      id: number,
+      id: oneOfType([number, string]),
       title: string,
       visualizationType: string
     })

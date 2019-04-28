@@ -152,7 +152,7 @@ const createDonutViz = (donut, index) => {
         data={donut.data}
         colors={[salmon, gray]}
         width={475}
-        height={400}
+        height={350}
         innerRadius={90}
         halfDoughnut
       />
@@ -261,7 +261,7 @@ CivicDashboard.propTypes = {
   data: arrayOf(
     shape({
       data: oneOfType([arrayOf(shape({})), number, string]),
-      id: number,
+      id: oneOfType([number, string]),
       title: string,
       visualizationType: string
     })
