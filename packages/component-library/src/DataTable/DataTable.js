@@ -246,7 +246,7 @@ DataTable.propTypes = {
         key: PropTypes.string
       })
     ).isRequired,
-    data: PropTypes.objectOf(PropTypes.object).isRequired
+    data: PropTypes.arrayOf(PropTypes.shape({})).isRequired
   }).isRequired,
   HeaderComponent: PropTypes.element,
   ColumnComponent: PropTypes.element,

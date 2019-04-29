@@ -1,21 +1,21 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable import/no-extraneous-dependencies */
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import { withKnobs, boolean } from "@storybook/addon-knobs";
 import { checkA11y } from "@storybook/addon-a11y";
 import { css } from "emotion";
-import { BaseMap } from "../src";
-import { CivicSandboxMap } from "../src";
-import { CivicSandboxDashboard } from "../src";
+import {
+  BaseMap,
+  CivicSandboxMap,
+  CivicSandboxDashboard,
+  DemoJSONLoader
+} from "../src";
 import { wallOfText } from "./shared";
-import { DemoJSONLoader } from "../src";
 
 const dashboardDescription = css`
   padding: 0 1% 0 5%;
 `;
-
-const displayName =
-  CivicSandboxDashboard.displayName || "CivicSandboxDashboard";
 
 const dataURLs = [
   "https://service.civicpdx.org/neighborhood-development/sandbox/foundations/population/?format=json",
@@ -45,8 +45,8 @@ const dashboardComponent = data => {
     data: populationData.slide_data.features,
     opacity: 0.5,
     getPolygon: f => f.geometry.coordinates,
-    getLineColor: f => [0, 0, 0, 255],
-    getLineWidth: f => 0.5,
+    getLineColor: () => [0, 0, 0, 255],
+    getLineWidth: () => 0.5,
     stroked: true,
     scaleType: "equal",
     color: planetColorScheme,
@@ -64,8 +64,8 @@ const dashboardComponent = data => {
     opacity: 1,
     filled: false,
     getPolygon: f => f.coordinates,
-    getLineColor: f => [138, 43, 226, 255],
-    getLineWidth: f => 45,
+    getLineColor: () => [138, 43, 226, 255],
+    getLineWidth: () => 45,
     lineWidthScale: 1,
     lineJointRounded: false
   };
@@ -76,8 +76,8 @@ const dashboardComponent = data => {
     data: groceryData.slide_data.features,
     getPosition: f => f.geometry.coordinates,
     opacity: 0.9,
-    getColor: f => [138, 43, 226, 255],
-    getRadius: f => 75,
+    getColor: () => [138, 43, 226, 255],
+    getRadius: () => 75,
     radiusScale: 1,
     radiusMinPixels: 1,
     autoHighlight: true,
@@ -168,7 +168,8 @@ const dashboardComponent = data => {
   const dashboardInformation = (
     <div className={dashboardDescription}>
       <h2>
-        How has ridership changed throughout Tri-Met's service area over time?
+        How has ridership changed throughout Tri-Met&apos;s service area over
+        time?
       </h2>
       <p>{wallOfText}</p>
       <p>{wallOfText}</p>

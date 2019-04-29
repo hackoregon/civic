@@ -71,12 +71,12 @@ const IconMap = props => {
 };
 
 IconMap.propTypes = {
-  viewport: PropTypes.object,
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  viewport: PropTypes.shape({}),
+  data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   opacity: PropTypes.number,
   iconAtlas: PropTypes.string,
-  iconMapping: PropTypes.object,
-  iconSizeScale: PropTypes.function,
+  iconMapping: PropTypes.shape({}),
+  iconSizeScale: PropTypes.func,
   sizeScale: PropTypes.number,
   getPosition: PropTypes.func,
   getIcon: PropTypes.func,
@@ -86,7 +86,7 @@ IconMap.propTypes = {
   onLayerClick: PropTypes.func,
   onClick: PropTypes.func,
   visible: PropTypes.bool,
-  tooltipInfo: PropTypes.object,
+  tooltipInfo: PropTypes.shape({}),
   x: PropTypes.number,
   y: PropTypes.number,
   onHover: PropTypes.func,

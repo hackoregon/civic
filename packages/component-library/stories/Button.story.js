@@ -4,21 +4,11 @@ import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { checkA11y } from "@storybook/addon-a11y";
 import { Button } from "../src";
-import { storybookStyles } from "./storyStyles.js";
+import { storybookStyles } from "./storyStyles";
 
-const displayName = Button.displayName || "Button";
 const title = "Simple usage";
-const description = `
-  This is some basic usage with the button with providing a label to show the text.
-  Clicking should trigger an action.`;
 
-const demoCode = () => (
-  <Button onClick={action("clicked")}>Hello Button</Button>
-);
-
-const altDemo = () => <Button onClick={action("clicked")}>😀 😎 👍 💯</Button>;
-
-const altTitle = "With some emoji";
+const demoCode = () => <Button onClick={action("clicked")}>Click Me</Button>;
 
 export default () =>
   storiesOf("UI Components/Button", module)
@@ -28,5 +18,4 @@ export default () =>
         <div style={storybookStyles.storyGridItem}>{story()}</div>
       </div>
     ))
-    .add(title, demoCode)
-    .add(altTitle, altDemo);
+    .add(title, demoCode);

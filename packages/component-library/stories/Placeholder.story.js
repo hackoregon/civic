@@ -1,4 +1,5 @@
 import React from "react";
+/* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
 import { number, withKnobs } from "@storybook/addon-knobs";
 import { checkA11y } from "@storybook/addon-a11y";

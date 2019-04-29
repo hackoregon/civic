@@ -1,16 +1,12 @@
+/* eslint-disable no-console */
 import React from "react";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
-import { withInfo } from "@storybook/addon-info";
 import { checkA11y } from "@storybook/addon-a11y";
 import { Dropdown } from "../src";
-import { storybookStyles } from "./storyStyles.js";
+import { storybookStyles } from "./storyStyles";
 
-const displayName = Dropdown.displayName || "Dropdown";
 const title = "Simple usage";
-const description = `
-  This is some basic usage with the button with providing a label to show the text.
-  Clicking should trigger an action.`;
 
 const demoCode = () => (
   <Dropdown
@@ -24,8 +20,6 @@ const demoCode = () => (
     ]}
   />
 );
-
-// const propDocs = { inline: true, propTables: [Dropdown] };
 
 export default () =>
   storiesOf("UI Components/Dropdown List", module)

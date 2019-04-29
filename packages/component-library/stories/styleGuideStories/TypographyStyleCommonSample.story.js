@@ -9,7 +9,8 @@ const TypographyStyleCommonSample = () => (
     <h2>Sub heading (Rubik Bold)</h2>
     <p>Paragraph (Merriweather)</p>
     <h4>
-      <a>Action</a> (Rubik Medium)
+      <a href="https://www.youtube.com/watch?v=gJ5hbJsN7Hc">Action</a> (Rubik
+      Medium)
     </h4>
     <hr />
     <h2>Example of a Common Sample:</h2>
@@ -25,7 +26,7 @@ const TypographyStyleCommonSample = () => (
       venenatis justo vel, luctus eros.
     </p>
     <h4>
-      <a>Read More</a>
+      <a href="https://www.youtube.com/watch?v=gJ5hbJsN7Hc">Read More</a>
     </h4>
     <hr />
   </div>

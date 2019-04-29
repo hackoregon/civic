@@ -1,13 +1,9 @@
 import React from "react";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
-import { withInfo } from "@storybook/addon-info";
 
-import { withKnobs, text, number, object, array } from "@storybook/addon-knobs";
+import { withKnobs, text, object } from "@storybook/addon-knobs";
 import { BarChart } from "../src";
-
-const displayName = BarChart.displayName || "BarChart";
 
 const sampleSimpleData = [
   { x: 5, y: 20 },
