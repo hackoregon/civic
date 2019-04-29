@@ -6,7 +6,6 @@ import { storiesOf } from "@storybook/react";
 import { withKnobs, select, boolean } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 import { checkA11y } from "@storybook/addon-a11y";
-// import { withA11y } from "@storybook/addon-a11y";
 import { BaseMap, CivicSandboxMap, DemoJSONLoader } from "../src";
 
 const dataURLs = [
@@ -75,7 +74,7 @@ const CivicSandboxMapStory = data => {
   // SLIDES
   // 005 Community Gardens
   const gardensBoundary = {
-    mapType: "PolygonPlotMap",
+    mapType: "BoundaryMap",
     id: "boundary-layer-gardens-slide",
     data: slide1.slide_meta.boundary,
     opacity: 1.0,
@@ -102,7 +101,7 @@ const CivicSandboxMapStory = data => {
 
   // 002 Bike Lanes
   const bikeLanesBoundary = {
-    mapType: "PolygonPlotMap",
+    mapType: "BoundaryMap",
     id: "boundary-layer-bike-lanes",
     data: slide2.slide_meta.boundary,
     opacity: 1.0,
@@ -127,7 +126,7 @@ const CivicSandboxMapStory = data => {
 
   // 010 Grocery Stores
   const groceryBoundary = {
-    mapType: "PolygonPlotMap",
+    mapType: "BoundaryMap",
     id: "boundary-layer-grocery",
     data: slide3.slide_meta.boundary,
     opacity: 1.0,
