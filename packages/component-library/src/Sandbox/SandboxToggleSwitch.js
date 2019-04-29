@@ -75,7 +75,6 @@ const SandboxToggleSwitch = props => {
 
   return (
     <div className={containerStyle}>
-      {/* eslint-disable-next-line */}
       <label className={toggleStyle} htmlFor={`slide-input-${label}`}>
         <input
           id={`slide-input-${label}`}
@@ -95,7 +94,7 @@ const SandboxToggleSwitch = props => {
 
 SandboxToggleSwitch.propTypes = {
   name: PropTypes.string,
-  checked: PropTypes.string,
+  checked: PropTypes.bool,
   onChange: PropTypes.func,
   label: PropTypes.string,
   mapType: PropTypes.string

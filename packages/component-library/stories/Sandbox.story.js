@@ -165,9 +165,11 @@ class SandboxStory extends React.Component {
   updateSlide = event => {
     const slideId = event.target.name;
     const allSlides = this.state.allSlides.map(slide => {
-      if (slide.slideNumber === slideId) {
-        // eslint-disable-next-line no-param-reassign
-        slide.checked = !slide.checked;
+      if (slide.slideId === slideId) {
+        return {
+          ...slide,
+          checked: !slide.checked
+        };
       }
       return slide;
     });
@@ -229,12 +231,10 @@ class SandboxStory extends React.Component {
 
   findAndReplaceSlideData = (slideData, data, slideLabel) => {
     const slideDataValues = Object.values(slideData);
-    // eslint-disable-next-line no-shadow
     const newSlideData = slideData.map((slide, index) => {
       const [slideDataName] = Object.keys(slideDataValues[index]);
       if (slideDataName === slideLabel) {
-        // eslint-disable-next-line no-param-reassign
-        slide = { [slideLabel]: data };
+        return { [slideLabel]: data };
       }
       return slide;
     });
