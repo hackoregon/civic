@@ -46,7 +46,7 @@ class BaseMap extends Component {
       x: null,
       y: null,
       mounted: false,
-      civicMapStyle: "mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg"
+      civicMapStyle: CIVIC_LIGHT
     };
     this.onViewportChange = this.onViewportChange.bind(this);
     this.onHover = this.onHover.bind(this);
