@@ -31,8 +31,8 @@ describe("CivicStoryCard", () => {
       </CivicStoryCard>
     );
 
-    it("should render loading message", () => {
-      expect(wrapper.text().indexOf("Loading...")).to.eql(0);
+    it("should render loading image", () => {
+      expect(wrapper.find("Logo").length).to.eql(1);
     });
 
     it("should not render children", () => {
