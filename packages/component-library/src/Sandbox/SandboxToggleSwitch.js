@@ -1,4 +1,6 @@
+/* eslint-disable no-nested-ternary */
 import React from "react";
+import PropTypes from "prop-types";
 import { css } from "emotion";
 
 const containerStyle = css`
@@ -73,6 +75,7 @@ const SandboxToggleSwitch = props => {
 
   return (
     <div className={containerStyle}>
+      {/* eslint-disable-next-line */}
       <label className={toggleStyle} htmlFor={`slide-input-${label}`}>
         <input
           id={`slide-input-${label}`}
@@ -88,6 +91,14 @@ const SandboxToggleSwitch = props => {
       </label>
     </div>
   );
+};
+
+SandboxToggleSwitch.propTypes = {
+  name: PropTypes.string,
+  checked: PropTypes.string,
+  onChange: PropTypes.func,
+  label: PropTypes.string,
+  mapType: PropTypes.string
 };
 
 export default SandboxToggleSwitch;

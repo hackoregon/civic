@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  string,
-  number,
-  arrayOf,
-  objectOf,
-  oneOfType,
-  shape
-} from "prop-types";
+import { string, number, arrayOf, oneOfType, shape } from "prop-types";
 import { css } from "emotion";
 
 const tooltip = css`

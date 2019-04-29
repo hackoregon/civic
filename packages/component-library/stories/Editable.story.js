@@ -26,6 +26,7 @@ export default () =>
 
       return (
         <button
+          type="button"
           disabled={boolean("Disabled", true)}
           style={object("Style", style)}
         >
@@ -37,6 +38,7 @@ export default () =>
       let content = text("Content", "This is the content");
       content = content.replace(/\n/g, "<br />");
 
+      // eslint-disable-next-line react/no-danger
       return <div dangerouslySetInnerHTML={{ __html: content }} />;
     })
     .add("as dynamic variables", () => {

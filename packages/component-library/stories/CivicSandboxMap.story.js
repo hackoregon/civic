@@ -1,12 +1,13 @@
+/* eslint-disable no-console */
+/* eslint-disable react/prop-types */
 /* eslint-disable import/no-extraneous-dependencies */
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import { withKnobs, select, boolean } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
-import { withA11y } from "@storybook/addon-a11y";
+import { checkA11y } from "@storybook/addon-a11y";
+// import { withA11y } from "@storybook/addon-a11y";
 import { BaseMap, CivicSandboxMap, DemoJSONLoader } from "../src";
-
-const displayName = CivicSandboxMap.displayName || "CivicSandboxMap";
 
 const dataURLs = [
   "https://service.civicpdx.org/neighborhood-development/sandbox/foundations/over65/",
@@ -216,7 +217,7 @@ const CivicSandboxMapStory = data => {
 export default () =>
   storiesOf("Maps/CIVIC Sandbox Map", module)
     .addDecorator(withKnobs)
-    .addDecorator(withA11y)
+    .addDecorator(checkA11y)
     .add("Simple usage", () => {
       return (
         <DemoJSONLoader urls={dataURLs}>

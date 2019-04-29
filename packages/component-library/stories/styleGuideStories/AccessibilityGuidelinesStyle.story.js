@@ -1,13 +1,16 @@
 import React from "react";
-import { storybookStyles } from "../storyStyles.js";
-//import { font-bold } from '../../assets/global.styles.js'
+import { storybookStyles } from "../storyStyles";
 
 const AccessibilityGuidelines = () => (
   <div style={storybookStyles.main}>
     <h1>Accessibility</h1>
     <p>
       The CIVIC platform will meet all criteria specified in{" "}
-      <a href="https://www.w3.org/TR/WCAG21/" target="_blank">
+      <a
+        href="https://www.w3.org/TR/WCAG21/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         Web Content Accessibility Guidelines (WCAG) 2.1
       </a>{" "}
       Level A and Level AA.
@@ -31,7 +34,11 @@ const AccessibilityGuidelines = () => (
     <h2>What are the principles of the guidelines?</h2>
     <p>
       See{" "}
-      <a href="https://www.w3.org/WAI/WCAG21/quickref/" target="_blank">
+      <a
+        href="https://www.w3.org/WAI/WCAG21/quickref/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         How to Meet WCAG
       </a>{" "}
       for a quick reference on meeting the four principles of WCAG.
@@ -74,7 +81,11 @@ const AccessibilityGuidelines = () => (
       Meet contrast ratios between text and its background color and between
       colors used to represent distinct information in data visualization.
       WebAIM describes the guidelines and has many examples
-      <a href="https://webaim.org/articles/contrast/" target="_blank">
+      <a
+        href="https://webaim.org/articles/contrast/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         : WebAIM Contrast and Color Accessibility
       </a>
       .
@@ -82,7 +93,11 @@ const AccessibilityGuidelines = () => (
     <h4>Forms</h4>
     <p>
       See{" "}
-      <a href="https://www.w3.org/WAI/tutorials/forms/" target="_blank">
+      <a
+        href="https://www.w3.org/WAI/tutorials/forms/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         Web Accessibility Tutorials on Forms
       </a>
       . The following sections in the tutorials are especially relevant to the
@@ -112,6 +127,7 @@ const AccessibilityGuidelines = () => (
       <a
         href="https://accessibility.digital.gov/visual-design/data-visualizations/"
         target="_blank"
+        rel="noopener noreferrer"
       >
         Data Visualizations
       </a>
@@ -126,12 +142,20 @@ const AccessibilityGuidelines = () => (
     <h2>What are the guidelines and who made them?</h2>
     <p>
       The{" "}
-      <a href="https://www.w3.org/Consortium/" target="_blank">
+      <a
+        href="https://www.w3.org/Consortium/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         W3C (World Wide Web Consortium)
       </a>{" "}
       develops web standards; they are led by the Web inventor Tim Berners-Lee.
       One of their initiatives is the{" "}
-      <a href="https://www.w3.org/WAI/" target="_blank">
+      <a
+        href="http://www.w3.org/WAI/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         WAI (Web Accessibility Initiative)
       </a>
       , to improve accessibility of the Web for people with disabilities.
@@ -139,11 +163,19 @@ const AccessibilityGuidelines = () => (
     <p>
       The WAI is made up of several working groups and Special Interest groups.
       The most important working group is the{" "}
-      <a href="https://www.w3.org/WAI/GL/" target="_blank">
+      <a
+        href="http://www.w3.org/WAI/GL/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         WCAG WG (Web Content Accessibility Guidelines Working Group)
       </a>
       . This group published{" "}
-      <a href="https://www.w3.org/TR/WCAG21/" target="_blank">
+      <a
+        href="https://www.w3.org/TR/WCAG21/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         WCAG 2.1
       </a>
       ; their web site has many useful resources and materials.
@@ -151,7 +183,7 @@ const AccessibilityGuidelines = () => (
     <p>
       Another organization that does a good job of explaining accessibility and
       the guidelines is{" "}
-      <a href="https://webaim.org" target="_blank">
+      <a href="http://webaim.org" target="_blank" rel="noopener noreferrer">
         WebAIM
       </a>
       .

@@ -5,8 +5,6 @@ import { storiesOf } from "@storybook/react";
 import { object, text, withKnobs } from "@storybook/addon-knobs";
 import { LineChart, SimpleLegend } from "../src";
 
-const displayName = LineChart.displayName || "LineChart";
-
 const sampleSimpleData = [
   { x: 0, y: 20 },
   { x: 10, y: 30 },

@@ -1,3 +1,5 @@
+/* eslint-disable react/no-access-state-in-setstate */
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-console */
 import React from "react";
@@ -78,7 +80,7 @@ class SandboxStory extends React.Component {
       selectedFoundation && state.data.foundations[selectedFoundation];
     const dataObj = { slide_meta: {}, slide_data: {} };
     const foundationMapObj = foundations(dataObj)[defaultFoundation.name];
-    let foundationMapProps = {
+    const foundationMapProps = {
       color: foundationMapObj.color,
       getPropValue: foundationMapObj.getPropValue,
       propName: foundationMapObj.propName,
@@ -98,12 +100,12 @@ class SandboxStory extends React.Component {
       const color = mapObj.boundary.getLineColor
         ? mapObj.boundary.getLineColor()
         : gray;
-      const mapType = mapObj.map.mapType;
+      const { mapType } = mapObj.map;
       return {
         slideId: slide,
         slideObj: state.data.slides[slide],
         label: state.data.slides[slide].name,
-        checked: selectedSlide.includes(slide) ? true : false,
+        checked: !!selectedSlide.includes(slide),
         color,
         mapType
       };
@@ -128,7 +130,7 @@ class SandboxStory extends React.Component {
       slide_data: {}
     };
     const foundationMapObj = foundations(dataObj)[defaultFoundation.name];
-    let foundationMapProps = {
+    const foundationMapProps = {
       color: foundationMapObj.color,
       getPropValue: foundationMapObj.getPropValue,
       propName: foundationMapObj.propName,
@@ -163,7 +165,8 @@ class SandboxStory extends React.Component {
   updateSlide = event => {
     const slideId = event.target.name;
     const allSlides = this.state.allSlides.map(slide => {
-      if (slide.slideId === slideId) {
+      if (slide.slideNumber === slideId) {
+        // eslint-disable-next-line no-param-reassign
         slide.checked = !slide.checked;
       }
       return slide;
@@ -226,9 +229,11 @@ class SandboxStory extends React.Component {
 
   findAndReplaceSlideData = (slideData, data, slideLabel) => {
     const slideDataValues = Object.values(slideData);
+    // eslint-disable-next-line no-shadow
     const newSlideData = slideData.map((slide, index) => {
       const [slideDataName] = Object.keys(slideDataValues[index]);
       if (slideDataName === slideLabel) {
+        // eslint-disable-next-line no-param-reassign
         slide = { [slideLabel]: data };
       }
       return slide;
@@ -286,7 +291,7 @@ class SandboxStory extends React.Component {
     const dataObj = { slide_meta: {}, slide_data: {} };
     const defaultFoundation = data.foundations[selectedFoundation];
     const foundationMapObj = foundations(dataObj)[defaultFoundation.name];
-    let foundationMapProps = {
+    const foundationMapProps = {
       color: foundationMapObj.color,
       getPropValue: foundationMapObj.getPropValue,
       propName: foundationMapObj.propName,
@@ -305,12 +310,12 @@ class SandboxStory extends React.Component {
       const color = mapObj.boundary.getLineColor
         ? mapObj.boundary.getLineColor()
         : gray;
-      const mapType = mapObj.map.mapType;
+      const { mapType } = mapObj.map;
       return {
         slideId: slide,
         slideObj: data.slides[slide],
         label: data.slides[slide].name,
-        checked: selectedSlide.includes(slide) ? true : false,
+        checked: !!selectedSlide.includes(slide),
         color,
         mapType
       };

@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable import/no-extraneous-dependencies */
 import React from "react";
 import { storiesOf } from "@storybook/react";
@@ -15,9 +16,6 @@ import { wallOfText } from "./shared";
 const dashboardDescription = css`
   padding: 0 1% 0 5%;
 `;
-
-const displayName =
-  CivicSandboxDashboard.displayName || "CivicSandboxDashboard";
 
 const dataURLs = [
   "https://service.civicpdx.org/neighborhood-development/sandbox/foundations/population/"

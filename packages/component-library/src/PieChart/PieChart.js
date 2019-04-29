@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { VictoryPie, VictoryLabel } from "victory";
 import ChartContainer from "../ChartContainer";
-import civicTheme from "../VictoryTheme/CivicVictoryTheme.js";
+import civicTheme from "../VictoryTheme/CivicVictoryTheme";
 import SimpleLegend from "../SimpleLegend";
 
 const getOrElse = (possibleValue, defaultValue) =>
@@ -80,7 +80,7 @@ PieChart.defaultProps = {
 
 PieChart.propTypes = {
   colors: PropTypes.arrayOf(PropTypes.string),
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   dataLabel: PropTypes.string,
   dataValue: PropTypes.string,
   error: PropTypes.string,

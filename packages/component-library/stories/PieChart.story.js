@@ -1,21 +1,16 @@
 import React from "react";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
-import { withInfo } from "@storybook/addon-info";
 
 import {
   withKnobs,
   text,
   number,
-  object,
   array,
   boolean
 } from "@storybook/addon-knobs";
 import { PieChart } from "../src";
 import { colors, getRandomValuesArray, objectRandomizer } from "./shared";
-
-const loading = () => <PieChart loading />;
 
 export default () =>
   storiesOf("/Charts/Pie/Donut Visualization", module)
@@ -68,5 +63,4 @@ export default () =>
           </div>
         );
       }
-    )
-    .add("Loading", loading);
+    );

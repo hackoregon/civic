@@ -60,7 +60,7 @@ const MapTooltip = props => {
 };
 
 MapTooltip.propTypes = {
-  tooltipInfo: PropTypes.object,
+  tooltipInfo: PropTypes.shape({}),
   x: PropTypes.number,
   y: PropTypes.number,
   primaryName: PropTypes.string,

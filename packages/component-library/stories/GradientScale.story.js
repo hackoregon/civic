@@ -4,8 +4,6 @@ import { storiesOf } from "@storybook/react";
 import { withKnobs, number, array, select } from "@storybook/addon-knobs";
 import { GradientScale } from "../src";
 
-const displayName = "GradientScale";
-
 const colorScales = ["default", "thermal", "space", "ocean", "planet", "earth"];
 
 export default () =>
