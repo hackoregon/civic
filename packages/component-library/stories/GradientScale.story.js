@@ -4,9 +4,7 @@ import { storiesOf } from "@storybook/react";
 import { withKnobs, number, array, select } from "@storybook/addon-knobs";
 import { GradientScale } from "../src";
 
-const displayName = "GradientScale";
-
-const colorScales = ["thermal", "space", "ocean", "planet", "earth"];
+const colorScales = ["default", "thermal", "space", "ocean", "planet", "earth"];
 
 export default () =>
   storiesOf("Charts/Gradient Scale", module)
@@ -14,7 +12,7 @@ export default () =>
     .add("Simple usage", () => {
       const domain = array("domain", [50, 90]);
       const primary = number("primary", 63);
-      const colorScale = select("colorScale", colorScales, "thermal");
+      const colorScale = select("colorScale", colorScales, "default");
 
       return (
         <GradientScale
@@ -28,7 +26,7 @@ export default () =>
       const domain = array("domain", [100, 600]);
       const primary = number("primary", 200);
       const secondary = array("secondary", [150, 400]);
-      const colorScale = select("colorScale", colorScales, "space");
+      const colorScale = select("colorScale", colorScales, "default");
 
       return (
         <GradientScale

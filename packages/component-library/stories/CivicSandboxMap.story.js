@@ -1,14 +1,12 @@
+/* eslint-disable no-console */
+/* eslint-disable react/prop-types */
 /* eslint-disable import/no-extraneous-dependencies */
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import { withKnobs, select, boolean } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 import { checkA11y } from "@storybook/addon-a11y";
-import { BaseMap } from "../src";
-import { CivicSandboxMap } from "../src";
-import { DemoJSONLoader } from "../src";
-
-const displayName = CivicSandboxMap.displayName || "CivicSandboxMap";
+import { BaseMap, CivicSandboxMap, DemoJSONLoader } from "../src";
 
 const dataURLs = [
   "https://service.civicpdx.org/neighborhood-development/sandbox/foundations/over65/",
@@ -58,8 +56,8 @@ export default () =>
               data: foundation1.slide_data.features,
               opacity: 0.55,
               getPolygon: f => f.geometry.coordinates,
-              getLineColor: f => [0, 0, 0, 255],
-              getLineWidth: f => 0.1,
+              getLineColor: () => [0, 0, 0, 255],
+              getLineWidth: () => 0.1,
               stroked: true,
               scaleType: "equal",
               color: colorSchemeArray,
@@ -80,8 +78,8 @@ export default () =>
               data: foundation2.slide_data.features,
               opacity: 0.55,
               getPolygon: f => f.geometry.coordinates,
-              getLineColor: f => [0, 0, 0, 255],
-              getLineWidth: f => 0.1,
+              getLineColor: () => [0, 0, 0, 255],
+              getLineWidth: () => 0.1,
               stroked: true,
               scaleType: "equal",
               color: colorSchemeArray,
@@ -104,8 +102,8 @@ export default () =>
             data: slide1.slide_meta.boundary,
             opacity: 1.0,
             getPolygon: f => f.coordinates,
-            getLineColor: f => [25, 183, 170, 255],
-            getLineWidth: f => 45,
+            getLineColor: () => [25, 183, 170, 255],
+            getLineWidth: () => 45,
             filled: false
           };
           const gardensMap = {
@@ -115,10 +113,10 @@ export default () =>
             data: slide1.slide_data.features,
             opacity: 1,
             getPolygon: f => f.geometry.coordinates,
-            getLineColor: f => [25, 183, 170, 255],
-            getLineWidth: f => 5,
+            getLineColor: () => [25, 183, 170, 255],
+            getLineWidth: () => 5,
             stroked: true,
-            getFillColor: f => [25, 183, 170, 255],
+            getFillColor: () => [25, 183, 170, 255],
             filled: true,
             autoHighlight: true,
             highlightColor: [25, 183, 170, 25]
@@ -131,8 +129,8 @@ export default () =>
             data: slide2.slide_meta.boundary,
             opacity: 1.0,
             getPolygon: f => f.coordinates,
-            getLineColor: f => [14, 29, 124, 255],
-            getLineWidth: f => 45,
+            getLineColor: () => [14, 29, 124, 255],
+            getLineWidth: () => 45,
             filled: false
           };
           const bikeLanesMap = {
@@ -141,9 +139,9 @@ export default () =>
             pickable: true,
             data: slide2.slide_data.features,
             opacity: 1,
-            getColor: f => [14, 29, 124, 255],
+            getColor: () => [14, 29, 124, 255],
             getPath: f => f.geometry.coordinates,
-            getWidth: f => 25,
+            getWidth: () => 25,
             rounded: false,
             autoHighlight: true,
             highlightColor: [100, 100, 100, 100]
@@ -156,8 +154,8 @@ export default () =>
             data: slide3.slide_meta.boundary,
             opacity: 1.0,
             getPolygon: f => f.coordinates,
-            getLineColor: f => [255, 178, 38, 255],
-            getLineWidth: f => 45,
+            getLineColor: () => [255, 178, 38, 255],
+            getLineWidth: () => 45,
             filled: false
           };
           const groceryMap = {
@@ -167,8 +165,8 @@ export default () =>
             data: slide3.slide_data.features,
             getPosition: f => f.geometry.coordinates,
             opacity: 0.9,
-            getColor: f => [255, 178, 38, 255],
-            getRadius: f => 50,
+            getColor: () => [255, 178, 38, 255],
+            getRadius: () => 50,
             radiusScale: 1,
             radiusMinPixels: 1,
             autoHighlight: true,
@@ -176,7 +174,7 @@ export default () =>
             parameters: { depthTest: false }
           };
 
-          //Foundations
+          // Foundations
           const foundationOptions = {
             "Households with Seniors": "025-households-seniors",
             "Households with Children": "015-household-children"
@@ -187,7 +185,7 @@ export default () =>
             foundationOptions["Households with Seniors"]
           );
 
-          //Slides
+          // Slides
           const bikeLanesSlideVisible = boolean("Bike Lanes:", true);
           const gardensSlideVisible = boolean("Community Gardens:", true);
           const grocerySlideVisible = boolean("Grocery Stores:", true);
@@ -227,6 +225,7 @@ export default () =>
             if (d.visible === true) {
               return d.data;
             }
+            return false;
           });
 
           return (

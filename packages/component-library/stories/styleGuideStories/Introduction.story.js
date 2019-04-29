@@ -1,5 +1,5 @@
 import React from "react";
-import { storybookStyles } from "../storyStyles.js";
+import { storybookStyles } from "../storyStyles";
 
 /*
   TODO
@@ -8,7 +8,7 @@ import { storybookStyles } from "../storyStyles.js";
 
 const Introduction = () => (
   <div style={storybookStyles.main}>
-    <h1>Introduction to CIVIC's Storybook</h1>
+    <h1>Introduction to CIVIC&apos;s Storybook</h1>
     <p>Our Storybook shows how to use the CIVIC platform.</p>
     <p>It has a style guide and the platform components.</p>
     <p>Contributions to the CIVIC platform are welcome.</p>

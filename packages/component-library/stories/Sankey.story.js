@@ -2,15 +2,11 @@ import React from "react";
 import { take } from "ramda";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
-import { withInfo } from "@storybook/addon-info";
 import { checkA11y } from "@storybook/addon-a11y";
 import { Sankey } from "../src";
 
 const displayName = Sankey.displayName || "Sankey";
 const title = "Simple usage";
-const description = `
-  This is some basic usage with the Sankey component. Please refer to the btc-data.json file for formatting of data.
-  In general, nodes and links are needed.`;
 
 const data = require("./btc-data.json");
 

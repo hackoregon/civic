@@ -35,8 +35,8 @@ const BoundaryMap = props => {
           getFillColor={getFillColor}
           filled={filled}
           updateTriggers={{
-            getLineColor: getLineColor,
-            getFillColor: getFillColor
+            getLineColor,
+            getFillColor
           }}
         />
       </DeckGL>
@@ -45,8 +45,8 @@ const BoundaryMap = props => {
 };
 
 BoundaryMap.propTypes = {
-  viewport: PropTypes.object,
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  viewport: PropTypes.shape({}),
+  data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   opacity: PropTypes.number,
   getPolygon: PropTypes.func,
   getLineColor: PropTypes.func,

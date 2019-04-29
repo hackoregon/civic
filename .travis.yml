@@ -1,21 +1,24 @@
 language: node_js
 cache: yarn
 node_js:
-  - "10.15.3"
+- 10.15.3
 services:
-  - docker
+- docker
 install:
-  - npm i -g npx
-  - npm i -g rimraf
-  - npm i -g cross-env
-  - yarn bootstrap
-  - yarn run configure
+- npm i -g npx
+- npm i -g rimraf
+- npm i -g cross-env
+- yarn bootstrap
+- yarn run configure
 matrix:
   include:
-    - env: SUITE=2017
-    - env: SUITE=2018
-    - env: SUITE=COMPONENT_LIBRARY
+  - env: SUITE=2017
+  - env: SUITE=2018
+  - env: SUITE=COMPONENT_LIBRARY
 script:
-  - yarn run travis
+- yarn run travis
 after_success:
-  - make deploy
+- make deploy
+env:
+  global:
+    secure: l16oa/uYpqv+pmzXoVZOxADnZgwCFii+DiUAsoCF7xDer3czpM9tpdy0uwNkb/XaLCtQctdSj8ZxMFT2AdORiZR0+VdqHSrBBm59oIdMkgyfFCrRBNlGZ7keAsxZCTDNlFSIMaGI4gtJmejMXsy31kyMEvNfcOUmgzBUPhR9wr6k0MFJQu/1ND5JV7rd3REyt7jKxdOTTZhu+7ioGOQTvCdKbYbyumVd4nuvA/eNdGvnTImVbvpAxCQlwIGFujnMRyq1+e/xp68jKV0jOxozOWs4R0KaiscTjm619snFRaFprSPtVh2mZZ/I+Ea1syXYDVurDRhuId4KAk/WTS17CxI3Io8Hg9OdfHVflCKeGnXtZX0ZMTpCKoXMFuqLlQu4XL9u8oP0NZqizR/A01g5w52ud0KWaGDJdAvLcBRAR9eoctyoFlVtqv01h60u3O9Vc3eeDXHUPwkWg4bMIx6fox36LGlZ6HFQLAD2oM9yD5cYTUF7fo+LtyTXO/OZhamZYquDzX48rj8gMsFhrWnjYos/02WBRolZ/zAm2Cidyni7iuPsoPNeHtcBHEhUJ85TbTczlQU7H4mHodhLjWZlO2NJnRgpn++ktxECV2Sb1ApgQX818lKu5nlVw4xFwlT922VBfhpAJnj1WKkaFvHQf0G3C0/v5wiSbstdjIhD458=

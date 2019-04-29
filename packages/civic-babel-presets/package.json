@@ -1,19 +1,25 @@
 {
   "name": "@hackoregon/civic-babel-presets",
-  "version": "1.0.0-alpha.1c62c05f",
-  "private": true,
+  "version": "3.0.0",
   "description": "Unified babel presets for civic",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 0"
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "lint": "eslint --fix index.js"
   },
+  "author": "David Daniel <davidedaniel@gmail.com> (http://davidedaniel.github.io)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hackoregon/civic.git"
+  },
+  "private": false,
   "keywords": [
     "babel",
     "presets",
-    "civic"
+    "civic",
+    "hackoregon"
   ],
-  "author": "David Daniel <davidedaniel@gmail.com> (http://davidedaniel.github.io)",
-  "license": "MIT",
   "dependencies": {
     "@babel/core": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.0.0",

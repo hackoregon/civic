@@ -212,7 +212,7 @@ const CivicSandboxMap = props => {
 };
 
 CivicSandboxMap.propTypes = {
-  viewport: PropTypes.object,
+  viewport: PropTypes.shape({}),
   mapLayers: PropTypes.array.isRequired,
   onHoverSlide: PropTypes.func,
   onClick: PropTypes.func,

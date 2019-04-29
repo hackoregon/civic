@@ -1,21 +1,16 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { withKnobs, boolean, number, select } from "@storybook/addon-knobs";
+import { withKnobs } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 import { checkA11y } from "@storybook/addon-a11y";
-import { BaseMap } from "../src";
-import { MapOverlay } from "../src";
-import { MapTooltip } from "../src";
-import { DemoJSONLoader } from "../src";
-
-const displayName = MapOverlay.displayName || "MapOverlay";
+import { BaseMap, MapOverlay, MapTooltip, DemoJSONLoader } from "../src";
 
 const demoMap = () => {
   return (
     <DemoJSONLoader
       urls={[
-        "http://service.civicpdx.org/neighborhood-development/sandbox/foundations/under18/"
+        "https://service.civicpdx.org/neighborhood-development/sandbox/foundations/under18/"
       ]}
     >
       {data => {
@@ -24,14 +19,14 @@ const demoMap = () => {
             <MapOverlay
               data={data.slide_data.features}
               opacity={0.1}
-              filled={true}
+              filled
               getPosition={f => f.geometry.coordinates}
               onLayerClick={info => action("Layer clicked:")(info)}
               getElevation={f =>
                 f.properties.pc_household_with_children_under_18 * 100
               }
-              getFillColor={f => [0, 100, 255, 255]}
-              getLineColor={f => [0, 0, 0, 0]}
+              getFillColor={() => [0, 100, 255, 255]}
+              getLineColor={() => [0, 0, 0, 0]}
             />
           </BaseMap>
         );
@@ -44,7 +39,7 @@ const tooltipMap = () => {
   return (
     <DemoJSONLoader
       urls={[
-        "http://service.civicpdx.org/neighborhood-development/sandbox/foundations/under18/"
+        "https://service.civicpdx.org/neighborhood-development/sandbox/foundations/under18/"
       ]}
     >
       {data => {
@@ -54,7 +49,7 @@ const tooltipMap = () => {
               data={data.slide_data.features}
               getPosition={f => f.geometry.coordinates}
               opacity={1.0}
-              filled={true}
+              filled
               onLayerHover={info =>
                 action("Layer")(
                   info.layer.props.data[info.index].properties.NAME
@@ -63,14 +58,16 @@ const tooltipMap = () => {
               getElevation={f =>
                 f.properties.pc_household_with_children_under_18 * 100
               }
-              getFillColor={f => [0, 100, 255, 255]}
-              getLineColor={f => [0, 0, 0, 0]}
+              getFillColor={() => [0, 100, 255, 255]}
+              getLineColor={() => [0, 0, 0, 0]}
+              x={120}
+              y={120}
             >
               <MapTooltip
-                primaryName={"Percent of Households with Children under 18"}
-                primaryField={"pc_household_with_children_under_18"}
-                secondaryName={"Year"}
-                secondaryField={"year"}
+                primaryName="Percent of Households with Children under 18"
+                primaryField="pc_household_with_children_under_18"
+                secondaryName="Year"
+                secondaryField="year"
               />
             </MapOverlay>
           </BaseMap>

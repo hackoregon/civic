@@ -4,12 +4,7 @@ import { storiesOf } from "@storybook/react";
 import { withKnobs, number, boolean } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 import { checkA11y } from "@storybook/addon-a11y";
-import { BaseMap } from "../src";
-import { ScatterPlotMap } from "../src";
-import { MapTooltip } from "../src";
-import { DemoJSONLoader } from "../src";
-
-const displayName = ScatterPlotMap.displayName || "ScatterPlotMap";
+import { BaseMap, ScatterPlotMap, MapTooltip, DemoJSONLoader } from "../src";
 
 const opacityOptions = {
   range: true,
@@ -19,7 +14,7 @@ const opacityOptions = {
 };
 
 const getPosition = f =>
-  !!f.geometry ? f.geometry.coordinates : [-124.664355, 45.615779];
+  f.geometry ? f.geometry.coordinates : [-124.664355, 45.615779];
 
 const getCircleColor = f =>
   f.properties.year_2017 > 1000 ? [255, 0, 0, 255] : [0, 0, 255, 255];
@@ -64,7 +59,7 @@ const demoMap = () => (
             radiusScale={radiusScale}
             outline={outline}
             strokeWidth={strokeWidth}
-            autoHighlight={true}
+            autoHighlight
             highlightColor={highlightColor}
             onLayerClick={info =>
               action("Layer clicked:", { depth: 2 })(info, info.object)
@@ -94,17 +89,17 @@ const tooltipMap = () => (
             radiusScale={radiusScale}
             outline={outline}
             strokeWidth={strokeWidth}
-            autoHighlight={true}
+            autoHighlight
             highlightColor={highlightColor}
             onLayerClick={info =>
               action("Layer clicked:", { depth: 2 })(info, info.object)
             }
           >
             <MapTooltip
-              primaryName={"Count Time"}
-              primaryField={"count_time"}
-              secondaryName={"Bike Count"}
-              secondaryField={"year_2017"}
+              primaryName="Count Time"
+              primaryField="count_time"
+              secondaryName="Bike Count"
+              secondaryField="year_2017"
             />
           </ScatterPlotMap>
         </BaseMap>

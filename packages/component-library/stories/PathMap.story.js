@@ -4,13 +4,8 @@ import { storiesOf } from "@storybook/react";
 import { withKnobs, number, select, boolean } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 import { checkA11y } from "@storybook/addon-a11y";
-import { BaseMap } from "../src";
-import { PathMap } from "../src";
-import { MapTooltip } from "../src";
-import { DemoJSONLoader } from "../src";
 import { scaleThreshold } from "d3";
-
-const displayName = PathMap.displayName || "PathMap";
+import { BaseMap, PathMap, MapTooltip, DemoJSONLoader } from "../src";
 
 const optionsStyle = {
   "Hack Oregon Light": "mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg",
@@ -74,7 +69,7 @@ const demoMap = () => (
 
       const opacity = number("Opacity:", 0.95, opacityOptions);
       const getPath = f => f.geometry.coordinates;
-      const getWidth = f => 15;
+      const getWidth = () => 15;
       const widthScale = number("Width Scale:", 1, widthScaleOptions);
       const rounded = boolean("Rounded:", true);
       const highlightColor = [125, 125, 125, 125];
@@ -132,7 +127,7 @@ const tooltipMap = () => (
 
       const opacity = number("Opacity:", 0.95, opacityOptions);
       const getPath = f => f.geometry.coordinates;
-      const getWidth = f => 15;
+      const getWidth = () => 15;
       const widthScale = number("Width Scale:", 1, widthScaleOptions);
       const rounded = boolean("Rounded:", true);
       const highlightColor = [125, 125, 125, 125];
@@ -158,8 +153,8 @@ const tooltipMap = () => (
             }
           >
             <MapTooltip
-              primaryName={"Percent Change"}
-              primaryField={"pct_change"}
+              primaryName="Percent Change"
+              primaryField="pct_change"
             />
           </PathMap>
         </BaseMap>

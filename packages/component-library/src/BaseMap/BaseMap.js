@@ -175,9 +175,9 @@ BaseMap.propTypes = {
   mapboxStyle: PropTypes.string,
   geocoder: PropTypes.bool,
   navigation: PropTypes.bool,
-  geocoderOptions: PropTypes.object,
+  geocoderOptions: PropTypes.shape({}),
   geocoderOnChange: PropTypes.func,
-  mapGLOptions: PropTypes.object,
+  mapGLOptions: PropTypes.shape({}),
   children: PropTypes.node,
   useContainerHeight: PropTypes.bool
 };

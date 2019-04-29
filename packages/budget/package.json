@@ -1,6 +1,6 @@
 {
   "name": "@hackoregon/civic-budget",
-  "version": "1.0.0-alpha.1c62c05f",
+  "version": "3.0.0",
   "description": "Civic/Budget 2017",
   "author": "David Daniel",
   "license": "MIT",
@@ -21,17 +21,19 @@
   "engines": {
     "npm": ">=3"
   },
+  "private": true,
   "scripts": {
     "clean": "rimraf ./build && mkdir build",
     "start": "yarn start:dev",
     "build": "rimraf dist && cross-env NODE_ENV=production webpack --config ./webpack.config.js",
     "start:dev": "cross-env NODE_ENV=development node server",
     "start:prod": "cross-env NODE_ENV=production node server",
-    "test": "cross-env BABEL_ENV=test mocha --opts ./mocha.opts 'src/**/*.test.js'"
+    "test": "cross-env BABEL_ENV=test mocha --opts ./mocha.opts 'src/**/*.test.js'",
+    "lint": "eslint --fix src"
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
-    "@hackoregon/component-library": "^1.0.0-alpha.1c62c05f",
+    "@hackoregon/component-library": "^3.0.0",
     "compression": "^1.6.2",
     "cross-env": "^5.2.0",
     "d3": "^4.8.0",
@@ -59,9 +61,9 @@
     "@babel/core": "^7.0.0",
     "@babel/node": "^7.0.0",
     "@babel/register": "^7.0.0",
-    "@hackoregon/civic-babel-presets": "^1.0.0-alpha.1c62c05f",
-    "@hackoregon/mock-wrapper": "^1.0.0-alpha.1c62c05f",
-    "@hackoregon/webpack-common": "^1.0.0-alpha.1c62c05f",
+    "@hackoregon/civic-babel-presets": "^3.0.0",
+    "@hackoregon/mock-wrapper": "^3.0.0",
+    "@hackoregon/webpack-common": "^3.0.0",
     "autoprefixer": "^9.4.10",
     "babel-jest": "^24.5.0",
     "chai": "^4.2.0",

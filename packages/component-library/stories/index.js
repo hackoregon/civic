@@ -1,5 +1,6 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React from "react";
-import { storiesOf, linkTo } from "@storybook/react"; // eslint-disable-line
+import { storiesOf } from "@storybook/react";
 import { checkA11y } from "@storybook/addon-a11y";
 
 import buttonStory from "./Button.story";

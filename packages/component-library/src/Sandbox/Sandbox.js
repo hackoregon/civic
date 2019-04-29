@@ -87,7 +87,6 @@ const Sandbox = ({
           baseMapStyle={baseMapStyle}
         />
       </div>
-
       <div className={baseMapWrapper}>
         <BaseMap
           civicMapStyle={baseMapStyle}
@@ -110,15 +109,15 @@ const Sandbox = ({
 };
 
 Sandbox.propTypes = {
-  data: PropTypes.object.isRequired,
-  layerData: PropTypes.array.isRequired,
-  defaultFoundation: PropTypes.object.isRequired,
-  defaultSlides: PropTypes.array.isRequired,
+  data: PropTypes.shape({}).isRequired,
+  layerData: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  defaultFoundation: PropTypes.shape({}).isRequired,
+  defaultSlides: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   selectedPackage: PropTypes.string.isRequired,
   selectedFoundation: PropTypes.string.isRequired,
-  selectedSlide: PropTypes.array.isRequired,
-  foundationData: PropTypes.object.isRequired,
-  slideData: PropTypes.array.isRequired,
+  selectedSlide: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  foundationData: PropTypes.shape({}).isRequired,
+  slideData: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   updatePackage: PropTypes.func.isRequired,
   updateFoundation: PropTypes.func.isRequired,
   updateSlide: PropTypes.func.isRequired,
@@ -129,9 +128,13 @@ Sandbox.propTypes = {
   styles: PropTypes.string,
   onFoundationClick: PropTypes.func,
   onSlideHover: PropTypes.func,
-  tooltipInfo: PropTypes.object,
-  allSlides: PropTypes.array.isRequired,
-  foundationMapProps: PropTypes.object.isRequired
+  tooltipInfo: PropTypes.arrayOf(PropTypes.shape({})),
+  allSlides: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  foundationMapProps: PropTypes.shape({}).isRequired
+};
+
+Sandbox.defaultProps = {
+  mapboxStyle: "mapbox://styles/mapbox/dark-v9"
 };
 
 export default Sandbox;

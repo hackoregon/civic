@@ -1,15 +1,11 @@
 import React from "react";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
-import { withInfo } from "@storybook/addon-info";
 import { checkA11y } from "@storybook/addon-a11y";
 import { Header } from "../src";
 import Hero from "../src/Hero/Hero";
 
-const displayName = Header.displayName || "Header";
 const title = "Simple usage";
-const description = `
-  a basic nav with logo & nav controls`;
 
 const demoCode = () => <Header title="Civic" />;
 

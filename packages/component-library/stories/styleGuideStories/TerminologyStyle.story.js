@@ -1,5 +1,5 @@
 import React from "react";
-import { storybookStyles } from "../storyStyles.js";
+import { storybookStyles } from "../storyStyles";
 
 const TerminologyStyle = () => (
   <div style={storybookStyles.main}>

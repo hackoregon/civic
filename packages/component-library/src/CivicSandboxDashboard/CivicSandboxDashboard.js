@@ -220,7 +220,7 @@ class CivicDashboard extends React.Component {
 }
 
 CivicDashboard.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object),
+  data: PropTypes.arrayOf(PropTypes.shape({})),
   children: PropTypes.node
 };
 

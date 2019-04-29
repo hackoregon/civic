@@ -1,28 +1,11 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-console */
 import React from "react";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
-import { withInfo } from "@storybook/addon-info";
-import { withKnobs, text, number, object, array } from "@storybook/addon-knobs";
-import {
-  CivicStoryCard,
-  Chart,
-  ChartData,
-  Pie,
-  HorizontalBarChart,
-  Collapsable
-} from "../src";
-import {
-  getRandomValuesArray,
-  getColors,
-  randomizer,
-  wallOfRichText,
-  wallOfText
-} from "./shared";
-
-const labels = ["A", "B", "C", "D", "E", "F"];
-const width = 300;
-const height = 300;
+import { text, array } from "@storybook/addon-knobs";
+import { CivicStoryCard, HorizontalBarChart, Collapsable } from "../src";
+import { wallOfRichText, wallOfText } from "./shared";
 
 const data = array("Data", [
   { sortOrder: 1, population: 2000, label: "Labrador Retriever" },
@@ -114,7 +97,7 @@ export default () =>
       <Container>
         <CivicStoryCard
           title="Campsite Reports & income levels of a community"
-          source="http://www.hackoregon.org"
+          source="https://www.hackoregon.org"
         >
           <p className="Description">{wallOfText}</p>
         </CivicStoryCard>
