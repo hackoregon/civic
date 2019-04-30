@@ -1,7 +1,14 @@
-import PropTypes from "prop-types";
 import React, { useState } from "react";
+import {
+  arrayOf,
+  bool,
+  func,
+  number,
+  string,
+  shape,
+  oneOfType
+} from "prop-types";
 import { css } from "emotion";
-
 import BaseMap from "../BaseMap/BaseMap";
 import CivicSandboxMap from "../CivicSandboxMap/CivicSandboxMap";
 import CivicSandboxTooltip from "../CivicSandboxMap/CivicSandboxTooltip";
@@ -38,7 +45,8 @@ const Sandbox = ({
   onSlideHover,
   tooltipInfo,
   allSlides,
-  foundationMapProps
+  foundationMapProps,
+  selectedFoundationDatum
 }) => {
   const [baseMapStyle, setBaseMapStyle] = useState("light");
 
@@ -94,11 +102,13 @@ const Sandbox = ({
           initialLatitude={45.5431}
           initialLongitude={-122.5765}
           useContainerHeight
+          updateViewport={false}
         >
           <CivicSandboxMap
             mapLayers={layerData}
             onClick={onFoundationClick}
             onHoverSlide={onSlideHover}
+            selectedFoundationDatum={selectedFoundationDatum}
           >
             {tooltipInfo && <CivicSandboxTooltip tooltipData={tooltipInfo} />}
           </CivicSandboxMap>
@@ -109,32 +119,74 @@ const Sandbox = ({
 };
 
 Sandbox.propTypes = {
-  data: PropTypes.shape({}).isRequired,
-  layerData: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  defaultFoundation: PropTypes.shape({}).isRequired,
-  defaultSlides: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  selectedPackage: PropTypes.string.isRequired,
-  selectedFoundation: PropTypes.string.isRequired,
-  selectedSlide: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  foundationData: PropTypes.shape({}).isRequired,
-  slideData: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  updatePackage: PropTypes.func.isRequired,
-  updateFoundation: PropTypes.func.isRequired,
-  updateSlide: PropTypes.func.isRequired,
-  fetchSlideDataByDate: PropTypes.func.isRequired,
-  drawerVisible: PropTypes.bool.isRequired,
-  toggleDrawer: PropTypes.func.isRequired,
-  mapboxStyle: PropTypes.string,
-  styles: PropTypes.string,
-  onFoundationClick: PropTypes.func,
-  onSlideHover: PropTypes.func,
-  tooltipInfo: PropTypes.arrayOf(PropTypes.shape({})),
-  allSlides: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  foundationMapProps: PropTypes.shape({}).isRequired
-};
-
-Sandbox.defaultProps = {
-  mapboxStyle: "mapbox://styles/mapbox/dark-v9"
+  data: shape({
+    packages: shape({}),
+    foundations: shape({}),
+    slides: shape({})
+  }).isRequired,
+  layerData: arrayOf(
+    shape({
+      data: shape({})
+    })
+  ).isRequired,
+  defaultFoundation: shape({
+    endpoint: string,
+    name: string,
+    visualization: string
+  }).isRequired,
+  defaultSlides: arrayOf(
+    shape({
+      endpoint: string,
+      name: string,
+      visualization: string
+    })
+  ).isRequired,
+  selectedPackage: string.isRequired,
+  selectedFoundation: string.isRequired,
+  selectedSlide: arrayOf(string).isRequired,
+  foundationData: shape({
+    slide_data: shape({}),
+    slide_meta: shape({})
+  }).isRequired,
+  slideData: arrayOf(shape({})).isRequired,
+  updatePackage: func.isRequired,
+  updateFoundation: func.isRequired,
+  updateSlide: func.isRequired,
+  fetchSlideDataByDate: func.isRequired,
+  drawerVisible: bool.isRequired,
+  toggleDrawer: func.isRequired,
+  styles: string,
+  onFoundationClick: func,
+  onSlideHover: func,
+  tooltipInfo: shape({
+    content: arrayOf(shape({})),
+    x: number,
+    y: number
+  }),
+  allSlides: arrayOf(
+    shape({
+      checked: bool,
+      color: arrayOf(number),
+      endpoint: string,
+      label: string,
+      mapType: string,
+      slideId: string
+    })
+  ).isRequired,
+  foundationMapProps: shape({
+    color: arrayOf(arrayOf(number)),
+    getPropValue: func,
+    propName: string,
+    scaleType: string
+  }).isRequired,
+  selectedFoundationDatum: arrayOf(
+    shape({
+      data: oneOfType([arrayOf(shape({})), number, string]),
+      id: oneOfType([number, string]),
+      title: string,
+      visualizationType: string
+    })
+  )
 };
 
 export default Sandbox;

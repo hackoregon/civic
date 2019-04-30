@@ -58,23 +58,25 @@ class BaseMap extends Component {
   }
 
   componentWillReceiveProps(props) {
-    let updatedViewportProps = {
-      zoom: props.initialZoom,
-      pitch: props.initialPitch,
-      longitude: props.initialLongitude,
-      latitude: props.initialLatitude
-    };
+    if (this.props.updateViewport) {
+      let updatedViewportProps = {
+        zoom: props.initialZoom,
+        pitch: props.initialPitch,
+        longitude: props.initialLongitude,
+        latitude: props.initialLatitude
+      };
 
-    // Remove all keys that have null/undefined values to keep defaults
-    Object.keys(updatedViewportProps).forEach(key => {
-      if (updatedViewportProps[key] == null) {
-        delete updatedViewportProps[key];
-      }
-    });
+      // Remove all keys that have null/undefined values to keep defaults
+      Object.keys(updatedViewportProps).forEach(key => {
+        if (updatedViewportProps[key] == null) {
+          delete updatedViewportProps[key];
+        }
+      });
 
-    this.setState({
-      viewport: { ...this.state.viewport, ...updatedViewportProps }
-    });
+      this.setState({
+        viewport: { ...this.state.viewport, ...updatedViewportProps }
+      });
+    }
 
     if (props.civicMapStyle === "light") {
       this.setState({ civicMapStyle: CIVIC_LIGHT });
@@ -191,7 +193,8 @@ BaseMap.propTypes = {
   geocoderOnChange: PropTypes.func,
   mapGLOptions: PropTypes.shape({}),
   children: PropTypes.node,
-  useContainerHeight: PropTypes.bool
+  useContainerHeight: PropTypes.bool,
+  updateViewport: PropTypes.bool
 };
 
 BaseMap.defaultProps = {
@@ -199,6 +202,7 @@ BaseMap.defaultProps = {
   mapboxToken: MAPBOX_TOKEN,
   navigation: true,
   geocoder: false,
-  useContainerHeight: false
+  useContainerHeight: false,
+  updateViewport: true
 };
 export default Dimensions()(BaseMap);

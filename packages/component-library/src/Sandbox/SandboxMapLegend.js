@@ -114,7 +114,7 @@ const SandboxMapLegend = props => {
   const legend = mapColorsArr.map((d, i) => {
     return (
       <div
-        key={`legend-pt-${d.id}`}
+        key={`legend-pt-${d.slice(5, 12).replace(/,/g, "")}`}
         className={colorBox}
         style={{ backgroundColor: d }}
       >
