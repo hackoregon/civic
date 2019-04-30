@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useState } from "react";
 import { css } from "emotion";
 
 import BaseMap from "../BaseMap/BaseMap";
@@ -40,6 +40,14 @@ const Sandbox = ({
   allSlides,
   foundationMapProps
 }) => {
+  const [baseMapStyle, setBaseMapStyle] = useState("light");
+
+  const handleBaseMapStyleChange = baseMapStyleChangeEvent => {
+    baseMapStyleChangeEvent.target.value === "light"
+      ? setBaseMapStyle("light")
+      : setBaseMapStyle("dark");
+  };
+
   return (
     <div className={styles}>
       <div
@@ -75,11 +83,13 @@ const Sandbox = ({
           updatePackage={updatePackage}
           updateFoundation={updateFoundation}
           foundationMapProps={foundationMapProps}
+          onBaseMapStyleChange={handleBaseMapStyleChange}
+          baseMapStyle={baseMapStyle}
         />
       </div>
       <div className={baseMapWrapper}>
         <BaseMap
-          mapboxStyle={mapboxStyle}
+          civicMapStyle={baseMapStyle}
           initialZoom={10.5}
           initialLatitude={45.5431}
           initialLongitude={-122.5765}
