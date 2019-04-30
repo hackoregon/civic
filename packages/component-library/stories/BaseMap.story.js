@@ -40,6 +40,7 @@ const geocoderMap = () => {
       mapboxStyle={mapboxStyle}
       geocoder
       geocoderOptions={{ placeholder: "🚀search to blast off✨", zoom: 9.5 }} // additional geocoder options https://github.com/mapbox/mapbox-gl-geocoder/blob/master/API.md
+      locationMarker
       mapGLOptions={{ dragPan: false }} // additional react-map-gl options https://github.com/uber/react-map-gl/blob/master/src/components/interactive-map.js
     />
   );

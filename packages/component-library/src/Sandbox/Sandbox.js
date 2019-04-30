@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   arrayOf,
   bool,
@@ -23,31 +23,38 @@ const baseMapWrapper = css(`
   }
 `);
 
-const Sandbox = props => {
-  const {
-    data,
-    layerData,
-    defaultFoundation,
-    defaultSlides,
-    selectedPackage,
-    selectedFoundation,
-    selectedSlide,
-    foundationData,
-    slideData,
-    updatePackage,
-    updateFoundation,
-    updateSlide,
-    fetchSlideDataByDate,
-    drawerVisible,
-    toggleDrawer,
-    styles,
-    onFoundationClick,
-    onSlideHover,
-    tooltipInfo,
-    allSlides,
-    foundationMapProps,
-    selectedFoundationDatum
-  } = props;
+const Sandbox = ({
+  data,
+  layerData,
+  defaultFoundation,
+  defaultSlides,
+  selectedPackage,
+  selectedFoundation,
+  selectedSlide,
+  foundationData,
+  slideData,
+  updatePackage,
+  updateFoundation,
+  updateSlide,
+  fetchSlideDataByDate,
+  drawerVisible,
+  toggleDrawer,
+  mapboxStyle,
+  styles,
+  onFoundationClick,
+  onSlideHover,
+  tooltipInfo,
+  allSlides,
+  foundationMapProps,
+  selectedFoundationDatum
+}) => {
+  const [baseMapStyle, setBaseMapStyle] = useState("light");
+
+  const handleBaseMapStyleChange = baseMapStyleChangeEvent => {
+    baseMapStyleChangeEvent.target.value === "light"
+      ? setBaseMapStyle("light")
+      : setBaseMapStyle("dark");
+  };
 
   return (
     <div className={styles}>
@@ -84,10 +91,13 @@ const Sandbox = props => {
           updatePackage={updatePackage}
           updateFoundation={updateFoundation}
           foundationMapProps={foundationMapProps}
+          onBaseMapStyleChange={handleBaseMapStyleChange}
+          baseMapStyle={baseMapStyle}
         />
       </div>
       <div className={baseMapWrapper}>
         <BaseMap
+          civicMapStyle={baseMapStyle}
           initialZoom={10.5}
           initialLatitude={45.5431}
           initialLongitude={-122.5765}
