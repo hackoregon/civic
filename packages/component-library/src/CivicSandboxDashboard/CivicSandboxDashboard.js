@@ -25,7 +25,6 @@ const container = css`
   flex-direction: column;
   width: 575px;
   background: rgba(243, 242, 243, 0.95);
-  border: 1px solid black;
   @media (max-width: 900px) {
     width: 92%;
     left: 1%;
