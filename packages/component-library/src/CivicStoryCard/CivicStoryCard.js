@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { css } from "emotion";
 import CivicStoryFooter from "./CivicStoryFooter";
+import Logo from "../Logo/Logo";
 
 const cardClass = css`
   text-align: center;
@@ -52,13 +53,12 @@ const titleClass = css`
 const cardLoading = css`
   padding: 50px;
   text-align: center;
-  background: #eee;
 `;
 
 const cardError = css`
   padding: 50px;
   text-align: center;
-  background: #fdd;
+  color: #ee495c;
 `;
 
 const desktopOnly = css`
@@ -86,9 +86,17 @@ const CivicStoryCard = ({
 }) => {
   let content = children;
   if (loading) {
-    content = <div className={cardLoading}>Loading...</div>;
+    content = (
+      <div className={cardLoading}>
+        <Logo type="squareLogoAnimated" alt="Loading..." />
+      </div>
+    );
   } else if (error) {
-    content = <div className={cardError}>{error}</div>;
+    content = (
+      <div className={cardError}>
+        <h2>{error}</h2>
+      </div>
+    );
   }
 
   return (
