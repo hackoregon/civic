@@ -1,5 +1,5 @@
 import React from "react";
-import { storybookStyles } from "../storyStyles.js";
+import { storybookStyles } from "../storyStyles";
 
 const ResponsiveDesignStyle = () => (
   <div style={storybookStyles.main}>

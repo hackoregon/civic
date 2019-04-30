@@ -5,8 +5,6 @@ import { storiesOf } from "@storybook/react";
 import { object, text, withKnobs } from "@storybook/addon-knobs";
 import { StackedAreaChart, SimpleLegend } from "../src";
 
-const displayName = StackedAreaChart.displayName || "Stacked Area Chart";
-
 const sampleSimpleData = [
   { x: 0, y: 20 },
   { x: 10, y: 30 },

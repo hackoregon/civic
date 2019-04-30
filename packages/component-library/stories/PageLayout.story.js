@@ -2,22 +2,9 @@
 import React from "react";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
-import { withInfo } from "@storybook/addon-info";
-import { withKnobs, text, number, object, array } from "@storybook/addon-knobs";
-import {
-  CivicStoryCard,
-  Chart,
-  ChartData,
-  Pie,
-  HorizontalBarChart,
-  PageLayout
-} from "../src";
-import {
-  getRandomValuesArray,
-  getColors,
-  randomizer,
-  wallOfRichText
-} from "./shared";
+import { text, array } from "@storybook/addon-knobs";
+import { CivicStoryCard, HorizontalBarChart, PageLayout } from "../src";
+import { wallOfRichText } from "./shared";
 
 const data = array("Data", [
   { sortOrder: 1, population: 2000, label: "Labrador Retriever" },
@@ -68,12 +55,13 @@ const housingExample = () => (
         className="Pullquote"
         style={{ maxWidth: "600px", margin: "100px auto" }}
       >
-        "This is an example of a pullquote where someone has something important
-        to say."
+        &quot;This is an example of a pullquote where someone has something
+        important to say.&quot;
       </blockquote>
     </section>
     <section style={{ margin: "80px 0" }} id="transition-narrative">
       <img
+        alt="splash"
         width="100%"
         src="https://images.unsplash.com/photo-1500331882646-91f0854732b3?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=b4c11afc54567512b21bbb4be177da8a&auto=format&fit=crop&w=2978&q=80"
       />
@@ -114,7 +102,8 @@ const campaignFinanceExample = () => (
         className="Pullquote"
         style={{ maxWidth: "600px", margin: "100px auto" }}
       >
-        "Political finance in Oregon has, up until now, been a black box."
+        &quot;Political finance in Oregon has, up until now, been a black
+        box.&quot;
       </blockquote>
       <p
         className="Description"
@@ -140,6 +129,7 @@ const campaignFinanceExample = () => (
     </section>
     <section style={{ margin: "80px 0" }} id="transition-narrative">
       <img
+        alt="splash"
         width="100%"
         src="https://images.unsplash.com/photo-1520452112805-c6692c840af0?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=3f493d4dcbbdcffb506e841399797d25&auto=format&fit=crop&w=2773&q=80"
       />

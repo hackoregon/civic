@@ -3,11 +3,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { withKnobs, number, select } from "@storybook/addon-knobs";
 import { checkA11y } from "@storybook/addon-a11y";
-import { BaseMap } from "../src";
-import { ScreenGridMap } from "../src";
-import { DemoJSONLoader } from "../src";
-
-const displayName = ScreenGridMap.displayName || "ScreenGridMap";
+import { BaseMap, ScreenGridMap, DemoJSONLoader } from "../src";
 
 export default () =>
   storiesOf("Component Lib|Maps/Screen Grid Map", module)

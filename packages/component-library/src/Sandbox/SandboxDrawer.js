@@ -7,6 +7,7 @@ import Dropdown from "../Dropdown/Dropdown";
 import SandboxDateSelector from "./SandboxDateSelector";
 import SandboxToggleSwitch from "./SandboxToggleSwitch";
 import SandboxMapLegend from "./SandboxMapLegend";
+import SandboxBaseMapSelector from "./SandboxBaseMapSelector";
 
 const menuOpen = css(`
   position: absolute;
@@ -41,11 +42,9 @@ const menuClosed = css(`
 const SandboxDrawer = ({
   data,
   onChange,
-  selectedSlide,
   selectedPackage,
   toggleDrawer,
   drawerVisible,
-  defaultSlides,
   slideData,
   fetchSlideByDate,
   foundationData,
@@ -54,7 +53,9 @@ const SandboxDrawer = ({
   updatePackage,
   selectedFoundation,
   updateFoundation,
-  foundationMapProps
+  foundationMapProps,
+  onBaseMapStyleChange,
+  baseMapStyle
 }) => {
   return (
     <div className={drawerVisible ? menuOpen : menuClosed}>
@@ -185,6 +186,21 @@ const SandboxDrawer = ({
                   mapProps={foundationMapProps}
                 />
               )}
+              <h2
+                className={css(`
+                color: #555;
+                text-transform: uppercase;
+                margin: 0 10px;
+              `)}
+              >
+                Base map style
+              </h2>
+              {onBaseMapStyleChange && baseMapStyle && (
+                <SandboxBaseMapSelector
+                  onBaseMapStyleChange={onBaseMapStyleChange}
+                  baseMapStyle={baseMapStyle}
+                />
+              )}
             </div>
           )}
           <div
@@ -240,7 +256,7 @@ const SandboxDrawer = ({
                 `)}
                 >
                   <SandboxToggleSwitch
-                    name={slide.slideNumber}
+                    name={slide.slideId}
                     checked={slide.checked}
                     onChange={onChange}
                     label={slide.label}

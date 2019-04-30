@@ -50,7 +50,7 @@ const NavRouterLink = ({ path, customStyles, name }) => {
 NavRouterLink.propTypes = {
   name: PropTypes.string,
   path: PropTypes.string,
-  customStyles: PropTypes.object
+  customStyles: PropTypes.shape({})
 };
 
 export default NavRouterLink;

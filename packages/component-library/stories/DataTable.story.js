@@ -5,7 +5,6 @@ import { withInfo } from "@storybook/addon-info";
 
 import { DataTable } from "../src";
 
-const displayName = "DataTable";
 const title = "Simple usage";
 // const description = 'A data table.';
 

@@ -95,9 +95,7 @@ const reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         slidesPending: true,
-        slidesError: null,
-        selectedFoundationDatum: null,
-        selectedSlideDatum: null
+        slidesError: null
       };
     case SLIDES_SUCCESS:
       return {
@@ -105,9 +103,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         slidesPending: false,
         slidesError: null,
         slidesSuccess: true,
-        slidesData: [...state.slidesData, ...action.payload],
-        selectedFoundationDatum: null,
-        selectedSlideDatum: null
+        slidesData: [...state.slidesData, ...action.payload]
       };
     case SLIDES_FAILURE:
       return {
@@ -145,17 +141,13 @@ const reducer = (state = INITIAL_STATE, action) => {
     case SET_SLIDES:
       return {
         ...state,
-        selectedSlide: action.selectedSlides,
-        selectedFoundationDatum: null,
-        selectedSlideDatum: null
+        selectedSlide: action.selectedSlides
       };
     case SLIDE_START:
       return {
         ...state,
         slidesPending: true,
-        slidesError: null,
-        selectedFoundationDatum: null,
-        selectedSlideDatum: null
+        slidesError: null
       };
     case SLIDE_SUCCESS:
       let foundationData = state.foundationData;
@@ -179,7 +171,6 @@ const reducer = (state = INITIAL_STATE, action) => {
         slidesPending: false,
         slidesError: null,
         slidesSuccess: true,
-        selectedFoundationDatum: null,
         selectedSlideDatum: null,
         slidesData,
         foundationData

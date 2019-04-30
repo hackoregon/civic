@@ -3,9 +3,8 @@ import React from "react";
 import { css } from "emotion";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
-import { withInfo } from "@storybook/addon-info";
-import { withKnobs, text, number, object, array } from "@storybook/addon-knobs";
-import { PackageSelectorBox, Icon, Logo } from "../src";
+import { array } from "@storybook/addon-knobs";
+import { PackageSelectorBox } from "../src";
 
 const packageSelectorList = array("Data", [
   {

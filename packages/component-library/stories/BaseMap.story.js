@@ -2,10 +2,8 @@ import React from "react";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
 import { withKnobs, select } from "@storybook/addon-knobs";
-import { BaseMap } from "../src";
 import { css } from "emotion";
-
-const displayName = BaseMap.displayName || "BaseMap";
+import { BaseMap } from "../src";
 
 const containerWrapper = css`
   height: 100vh;
@@ -42,6 +40,7 @@ const geocoderMap = () => {
       mapboxStyle={mapboxStyle}
       geocoder
       geocoderOptions={{ placeholder: "🚀search to blast off✨", zoom: 9.5 }} // additional geocoder options https://github.com/mapbox/mapbox-gl-geocoder/blob/master/API.md
+      locationMarker
       mapGLOptions={{ dragPan: false }} // additional react-map-gl options https://github.com/uber/react-map-gl/blob/master/src/components/interactive-map.js
     />
   );
@@ -80,7 +79,7 @@ const containerHeightMap = () => {
 
   return (
     <div className={containerWrapper}>
-      <BaseMap mapboxStyle={mapboxStyle} useContainerHeight={true} />
+      <BaseMap mapboxStyle={mapboxStyle} useContainerHeight />
     </div>
   );
 };

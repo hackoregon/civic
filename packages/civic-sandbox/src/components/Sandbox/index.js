@@ -36,7 +36,8 @@ import {
   getLayerSlides,
   getSelectedSlideDatum,
   getAllSlides,
-  getfoundationMapProps
+  getfoundationMapProps,
+  getSelectedFoundationDatum
 } from "../../state/sandbox/selectors";
 
 class SandboxComponent extends React.Component {
@@ -90,7 +91,7 @@ class SandboxComponent extends React.Component {
   };
   render() {
     const styles = css(`
-    font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
+      font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
     `);
 
     const loading = css`
@@ -126,6 +127,7 @@ class SandboxComponent extends React.Component {
         tooltipInfo={this.props.selectedSlideDatum}
         allSlides={this.props.allSlides}
         foundationMapProps={this.props.foundationMapProps}
+        selectedFoundationDatum={this.props.selectedFoundationDatum}
       />
     );
   }
@@ -151,7 +153,8 @@ export default connect(
     layerSlides: getLayerSlides(state),
     selectedSlideDatum: getSelectedSlideDatum(state),
     allSlides: getAllSlides(state),
-    foundationMapProps: getfoundationMapProps(state)
+    foundationMapProps: getfoundationMapProps(state),
+    selectedFoundationDatum: getSelectedFoundationDatum(state)
   }),
   dispatch => ({
     fetchFoundation(endpoint = "") {

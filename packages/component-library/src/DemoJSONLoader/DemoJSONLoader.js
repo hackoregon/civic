@@ -1,6 +1,5 @@
 import React from "react";
-import { string, arrayOf } from "prop-types";
-/* eslint-disable import/no-extraneous-dependencies */
+import { string, arrayOf, node } from "prop-types";
 /* global fetch */
 
 class StorybookJSONLoader extends React.Component {
@@ -12,7 +11,8 @@ class StorybookJSONLoader extends React.Component {
   }
 
   componentDidMount() {
-    const promisesArr = this.props.urls.map(url => {
+    const { urls } = this.props;
+    const promisesArr = urls.map(url => {
       return fetch(url)
         .then(response => response)
         .then(response =>
@@ -28,21 +28,23 @@ class StorybookJSONLoader extends React.Component {
 
     Promise.all(promisesArr)
       .then(data => this.setState({ data }))
+      // eslint-disable-next-line no-console
       .catch(error => console.log(error));
   }
 
   render() {
-    if (this.state.data === null) {
+    const { data } = this.state;
+    const { children } = this.props;
+    if (data === null) {
       return null;
     }
-    return this.state.data.length === 1
-      ? this.props.children(this.state.data[0])
-      : this.props.children(this.state.data);
+    return data.length === 1 ? children(data[0]) : children(data);
   }
 }
 
 StorybookJSONLoader.propTypes = {
-  urls: arrayOf(string).isRequired
+  urls: arrayOf(string).isRequired,
+  children: node
 };
 
 export default StorybookJSONLoader;

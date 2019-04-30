@@ -11,7 +11,7 @@ labels: ""
   Before opening a new issue, please search existing issues: https://github.com/hackoregon/civic/issues
 -->
 
-## What
+### What
 
 What needs to be done?
 

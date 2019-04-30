@@ -5,7 +5,7 @@ import { action } from "@storybook/addon-actions";
 import { checkA11y } from "@storybook/addon-a11y";
 import { withKnobs, text } from "@storybook/addon-knobs";
 import { Button } from "../src";
-import { storybookStyles } from "./storyStyles.js";
+import { storybookStyles } from "./storyStyles";
 
 const displayName = Button.displayName || "Button";
 

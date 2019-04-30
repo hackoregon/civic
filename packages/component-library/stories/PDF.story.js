@@ -5,7 +5,6 @@ import { text, withKnobs } from "@storybook/addon-knobs";
 
 import { PDF } from "../src";
 
-const displayName = PDF.displayName || "PDF";
 const title = "Simple usage";
 
 const sampleURL =

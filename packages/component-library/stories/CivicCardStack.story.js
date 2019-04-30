@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-console */
 import React from "react";
 /* eslint-disable import/no-extraneous-dependencies */

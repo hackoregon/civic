@@ -4,10 +4,7 @@ import { storiesOf } from "@storybook/react";
 import { withKnobs, number, boolean, color } from "@storybook/addon-knobs";
 
 import { checkA11y } from "@storybook/addon-a11y";
-import { BaseMap } from "../src";
-import { BoundaryMap } from "../src";
-import { PathMap } from "../src";
-import { DemoJSONLoader } from "../src";
+import { BaseMap, BoundaryMap, PathMap, DemoJSONLoader } from "../src";
 
 const mapData = [
   "https://service.civicpdx.org/neighborhood-development/sandbox/slides/bikelanes/"
@@ -31,9 +28,9 @@ const demoMap = () => (
       const boundaryColor =
         colorPicker.charAt(0) !== "#" ? colorOption1 : colorOption2;
 
-      const getLineColor = d => boundaryColor;
+      const getLineColor = () => boundaryColor;
 
-      const getLineWidth = d => 45;
+      const getLineWidth = () => 45;
 
       const lineWidthScaleOptions = {
         range: true,
@@ -64,12 +61,12 @@ const demoMap = () => (
           />
           <PathMap
             data={data.slide_data.features}
-            getColor={f => [255, 178, 38, 255]}
+            getColor={() => [255, 178, 38, 255]}
             opacity={1}
             getPath={f => f.geometry.coordinates}
-            getWidth={f => 40}
+            getWidth={() => 40}
             widthScale={1}
-            rounded={true}
+            rounded
             highlightColor={[200, 200, 200, 85]}
           />
         </BaseMap>

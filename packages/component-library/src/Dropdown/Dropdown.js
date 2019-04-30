@@ -42,8 +42,10 @@ Dropdown.displayName = "Dropdown";
 
 Dropdown.propTypes = {
   onChange: PropTypes.func.isRequired,
-  options: PropTypes.array.isRequired,
-  value: PropTypes.any.isRequired, // eslint-disable-line react/forbid-prop-types
+  options: PropTypes.arrayOf(
+    PropTypes.shape({ value: PropTypes.string, label: PropTypes.string })
+  ).isRequired,
+  value: PropTypes.any, // eslint-disable-line react/forbid-prop-types
   clearable: PropTypes.bool,
   searchable: PropTypes.bool,
   disabled: PropTypes.bool,

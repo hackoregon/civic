@@ -5,7 +5,6 @@ import { storiesOf } from "@storybook/react";
 import { object, text, boolean, withKnobs } from "@storybook/addon-knobs";
 import { Scatterplot, SimpleLegend } from "../src";
 
-const displayName = Scatterplot.displayName || "Scatterplot";
 const sampleData = [
   { x: 1, y: 2, series: "cat" },
   { x: 2, y: 3, series: "cat" },

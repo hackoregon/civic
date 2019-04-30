@@ -12,7 +12,8 @@ import {
   isSandboxLoading,
   getSandboxData,
   getSandboxError,
-  getSelectedFoundationDatum
+  getSelectedFoundationDatum,
+  isAllSandboxLoading
 } from "../../state/sandbox/selectors";
 
 const loader = css`
@@ -40,11 +41,31 @@ export class Packages extends React.Component {
   constructor() {
     super();
     this.state = {
-      mapIsOpen: false
+      mapIsOpen: false,
+      dashboardIsOpen: false
     };
   }
   componentDidMount() {
     this.props.fetchSandbox();
+  }
+
+  componentDidUpdate(prevProps) {
+    const [previousSelectedFoundation] = prevProps.selectedFoundationDatum;
+    const [currentSelectedFoundation] = this.props.selectedFoundationDatum;
+
+    const previousID = previousSelectedFoundation
+      ? previousSelectedFoundation.id
+      : null;
+    const currentID = currentSelectedFoundation
+      ? currentSelectedFoundation.id
+      : null;
+
+    if (previousID !== currentID) {
+      this.toggleDashboardOpen();
+    }
+    if (previousID !== null && currentID === null) {
+      this.toggleDashboardClose();
+    }
   }
 
   closeMap = () => {
@@ -56,8 +77,28 @@ export class Packages extends React.Component {
     this.setState({ mapIsOpen: true });
   };
 
+  toggleDashboard = () => {
+    this.setState(prevState => ({
+      dashboardIsOpen: !prevState.dashboardIsOpen
+    }));
+  };
+
+  toggleDashboardOpen = () => {
+    this.setState({ dashboardIsOpen: true });
+  };
+
+  toggleDashboardClose = () => {
+    this.setState({ dashboardIsOpen: false });
+  };
+
   render() {
-    const { isLoading, isError, sandbox, selectedFoundationDatum } = this.props;
+    const {
+      isLoading,
+      isError,
+      sandbox,
+      selectedFoundationDatum,
+      isAllSandboxLoading
+    } = this.props;
 
     const packages = sandbox.packages
       ? Object.keys(sandbox.packages).map(p => ({
@@ -74,34 +115,36 @@ export class Packages extends React.Component {
     return (
       <div
         className={css(`
-        font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
-      `)}
+          font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
+        `)}
       >
         {!this.state.mapIsOpen && (
           <div>
             <div
               className={css(`
-            padding: 1.5rem;
-            text-align: center;
-            font-size: 1.2rem;
-          `)}
+                padding: 1.5rem;
+                text-align: center;
+                font-size: 1.2rem;
+              `)}
             >
               Select a data collection
             </div>
             <section
-              className={css(`@media(min-width: 600px){
-              display:flex;
-              flex-wrap: wrap;
-            }`)}
+              className={css(`
+                @media(min-width: 600px){
+                  display:flex;
+                  flex-wrap: wrap;
+                }`)}
             >
               {isLoading && <Loader />}
               {packages &&
                 packages.map(p => (
                   <div
                     key={p.title}
-                    className={css(`@media(min-width: 600px) {
-              width: 33%;
-            }`)}
+                    className={css(`
+                      @media(min-width: 600px) {
+                        width: 33%;
+                      }`)}
                   >
                     <PackageSelectorBox
                       title={p.title}
@@ -123,22 +166,25 @@ export class Packages extends React.Component {
             </p>
             <section style={{ position: "relative" }}>
               <SandboxComponent />
-              {selectedFoundationDatum && (
+              {!isAllSandboxLoading && (
                 <div
                   className={css(`
                     position: absolute;
-                    top: 21%;
-                    left: 4%;
-                    width: 96%;
-                    height: 0;
-                    @media(max-width: 900px) {
-                      position: relative;
+                    bottom: 2.5%;
+                    left: 2.5%;
+                    width: 95%;
+                    @media(max-width: 600px) {
+                      position: absolute;
+                      bottom: 1%;
                       left: 0;
-                      height: auto;
                     }
                 `)}
                 >
-                  <CivicSandboxDashboard data={selectedFoundationDatum} />
+                  <CivicSandboxDashboard
+                    data={selectedFoundationDatum}
+                    onClick={this.toggleDashboard}
+                    isDashboardOpen={this.state.dashboardIsOpen}
+                  />
                 </div>
               )}
             </section>
@@ -157,7 +203,8 @@ export default connect(
     isLoading: isSandboxLoading(state),
     isError: getSandboxError(state),
     sandbox: getSandboxData(state),
-    selectedFoundationDatum: getSelectedFoundationDatum(state)
+    selectedFoundationDatum: getSelectedFoundationDatum(state),
+    isAllSandboxLoading: isAllSandboxLoading(state)
   }),
   dispatch => ({
     fetchSandbox() {

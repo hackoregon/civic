@@ -1,15 +1,11 @@
+/* eslint-disable no-nested-ternary */
 import React from "react";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
 import { withKnobs, number } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 import { checkA11y } from "@storybook/addon-a11y";
-import { BaseMap } from "../src";
-import { IconMap } from "../src";
-import { MapTooltip } from "../src";
-import { DemoJSONLoader } from "../src";
-
-const displayName = IconMap.displayName || "IconMap";
+import { BaseMap, IconMap, MapTooltip, DemoJSONLoader } from "../src";
 
 const opacityOptions = {
   range: true,
@@ -77,7 +73,7 @@ const poiIconZoomScale = zoom =>
     : 1;
 
 const getPosition = f =>
-  !!f.geometry ? f.geometry.coordinates : [-124.664355, 45.615779];
+  f.geometry ? f.geometry.coordinates : [-124.664355, 45.615779];
 
 const getIcon = d => d.properties.type;
 
@@ -110,7 +106,7 @@ const demoMap = () => (
     {data => {
       const opacity = number("Opacity:", 1, opacityOptions);
       const iconSize = number("Icon Size:", 10, iconSizeOptions);
-      const getSize = f => iconSize;
+      const getSize = () => iconSize;
       return (
         <BaseMap>
           <IconMap
@@ -138,7 +134,7 @@ const tooltipMap = () => (
     {data => {
       const opacity = number("Opacity:", 1, opacityOptions);
       const iconSize = number("Icon Size:", 10, iconSizeOptions);
-      const getSize = f => iconSize;
+      const getSize = () => iconSize;
       return (
         <BaseMap>
           <IconMap
@@ -156,10 +152,10 @@ const tooltipMap = () => (
             }
           >
             <MapTooltip
-              primaryName={"Type"}
-              primaryField={"type"}
-              secondaryName={"Description"}
-              secondaryField={"description2_txt"}
+              primaryName="Type"
+              primaryField="type"
+              secondaryName="Description"
+              secondaryField="description2_txt"
             />
           </IconMap>
         </BaseMap>
