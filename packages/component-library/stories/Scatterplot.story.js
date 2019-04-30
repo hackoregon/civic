@@ -89,7 +89,7 @@ const customLegend = legendData => {
 };
 
 export default () =>
-  storiesOf("Charts/Scatterplot", module)
+  storiesOf("Component Lib|Charts/Scatterplot", module)
     .addDecorator(withKnobs)
     .add("Simple usage", () => <Scatterplot data={sampleData} />)
     .add("With some props", () => {

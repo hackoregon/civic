@@ -165,7 +165,7 @@ const tooltipMap = () => (
 );
 
 export default () =>
-  storiesOf("Maps/Icon Map", module)
+  storiesOf("Component Lib|Maps/Icon Map", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .add("Simple usage", demoMap)

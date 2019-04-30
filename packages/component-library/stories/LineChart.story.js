@@ -102,7 +102,7 @@ const customLegend = legendData => {
 };
 
 export default () =>
-  storiesOf("Charts/Line Chart", module)
+  storiesOf("Component Lib|Charts/Line Chart", module)
     .addDecorator(withKnobs)
     .add("Simple usage", () => <LineChart data={sampleSimpleData} />)
     .add("With some props", () => {

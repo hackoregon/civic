@@ -27,7 +27,7 @@ const sampleUnsortedData = [
 ];
 
 export default () =>
-  storiesOf("Charts/Horizontal Bar Chart", module)
+  storiesOf("Component Lib|Charts/Horizontal Bar Chart", module)
     .addDecorator(checkA11y)
     .addDecorator(withKnobs)
     .add("Default sort order", () => {

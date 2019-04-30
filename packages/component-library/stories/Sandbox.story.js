@@ -407,6 +407,7 @@ class SandboxStory extends React.Component {
 }
 
 export default () =>
-  storiesOf("CIVIC Platform Components/Sandbox", module)
-    .addDecorator(withA11y)
-    .add("Sandbox", () => <SandboxStory />);
+  storiesOf("Component Lib|CIVIC Platform/Sandbox", module).add(
+    "Sandbox",
+    () => <SandboxStory />
+  );

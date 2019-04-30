@@ -102,7 +102,7 @@ const customLegend = legendData => {
 };
 
 export default () =>
-  storiesOf("Charts/Stacked Area Chart", module)
+  storiesOf("Component Lib|Charts/Stacked Area Chart", module)
     .addDecorator(withKnobs)
     .add("Simple usage", () => <StackedAreaChart data={sampleSimpleData} />)
     .add("With some props", () => {

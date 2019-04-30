@@ -3,8 +3,7 @@ import { storybookStyles } from "../storyStyles";
 
 const MotionStyle = () => (
   <div style={storybookStyles.main}>
-    <h1>UX Style Guide</h1>
-    <h2>Motion Style</h2>
+    <h1>Motion Style</h1>
     <p>Placeholder for Motion style guidelines.</p>
   </div>
 );

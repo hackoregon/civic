@@ -6,7 +6,7 @@ import { checkA11y } from "@storybook/addon-a11y";
 import { BaseMap, ScreenGridMap, DemoJSONLoader } from "../src";
 
 export default () =>
-  storiesOf("Maps/Screen Grid Map", module)
+  storiesOf("Component Lib|Maps/Screen Grid Map", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .add("Simple usage", () => (

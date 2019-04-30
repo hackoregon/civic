@@ -3,9 +3,8 @@ import { storybookStyles } from "../storyStyles";
 
 const CardsStyle = () => (
   <div style={storybookStyles.main}>
-    <h1>UX Style Guide</h1>
-    <h2>Cards</h2>
-    <p>Placeholder for Cards style guidelines.</p>
+    <h1>Story Cards</h1>
+    <p>Placeholder for story Cards style guidelines.</p>
   </div>
 );
 

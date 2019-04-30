@@ -214,7 +214,7 @@ const CivicSandboxMapStory = data => {
 };
 
 export default () =>
-  storiesOf("Maps/CIVIC Sandbox Map", module)
+  storiesOf("Component Lib|Maps/CIVIC Sandbox Map", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .add("Simple usage", () => {

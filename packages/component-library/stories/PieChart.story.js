@@ -13,7 +13,7 @@ import { PieChart } from "../src";
 import { colors, getRandomValuesArray, objectRandomizer } from "./shared";
 
 export default () =>
-  storiesOf("/Charts/Pie/Donut Visualization", module)
+  storiesOf("Component Lib|Charts/Pie/Donut Visualization", module)
     .addDecorator(withKnobs)
     .add(
       "Basic usage",

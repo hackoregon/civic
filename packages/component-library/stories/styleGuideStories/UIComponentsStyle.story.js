@@ -3,8 +3,8 @@ import { storybookStyles } from "../storyStyles";
 
 const UIComponentsStyle = () => (
   <div style={storybookStyles.main}>
-    <h1>UI Components Style Guide</h1>
-    <p>This is the Style Guide for common UI Components.</p>
+    <h1>Basic UI Components Style Guide</h1>
+    <p>This is the Style Guide for basic UI Components.</p>
     <h2>Button</h2>
     <p>Style information for buttons.</p>
     <h2>Checkbox</h2>

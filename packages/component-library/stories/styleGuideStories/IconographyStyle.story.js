@@ -3,8 +3,7 @@ import { storybookStyles } from "../storyStyles";
 
 const IconographyStyle = () => (
   <div style={storybookStyles.main}>
-    <h1>UX Style Guide</h1>
-    <h2>Iconography</h2>
+    <h1>Iconography</h1>
     <p>Placeholder for Iconography style guidelines.</p>
   </div>
 );
