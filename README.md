@@ -13,7 +13,7 @@ The first step is [open an issue](https://github.com/hackoregon/civic/issues/new
 If there's already a [documented issue](https://github.com/hackoregon/civic/issues) about what you want to work on, assign yourself to let others what you're working on. If there's not an issue, open one and assign yourself.
 
 🐤 **I want to work on making something better, but I'm not sure where to start:**
-Check out our [open issues with the good-first-issue label](https://github.com/hackoregon/civic/issues?q=is%3Aissue+is%3Aopen+label%3Agood-first-issue) for things to work on and [open pull requests](https://github.com/hackoregon/civic/issues) to review and collaborate with others on existing efforts.
+Check out our [open issues with the good-first-issue label](https://github.com/hackoregon/civic/issues?q=is%3Aissue+is%3Aopen+label%3Agood-first-issue) for things to work on and [open pull requests with the good-first-review label](https://github.com/hackoregon/civic/pulls?q=is%3Aopen+is%3Apr+label%3Agood-first-review) to review and collaborate with others on existing efforts.
 
 🦜 **I've done something towards making this better:**
 Fantastic! Share it with us by [opening a pull request](https://github.com/hackoregon/civic/compare) with what you've done so far, and let's work together to make it even better and incorporate it into the CIVIC Platform!
