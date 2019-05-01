@@ -3,37 +3,37 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { checkA11y } from "@storybook/addon-a11y";
 
-import buttonStory from "./Button.story";
-import civicStorycardStory from "./CivicStoryCard.story";
-import pageLayoutStory from "./PageLayout.story";
-import pieStory from "./PieChart.story";
-import ScatterplotStory from "./Scatterplot.story";
-import horizontalBarChartStory from "./HorizontalBarChart.story";
 import BarChartStory from "./BarChart.story";
-import lineChartStory from "./LineChart.story";
-import placeholderStory from "./Placeholder.story";
-import dropdownStory from "./DropdownMenu.story";
-import headerStory from "./Header.story";
-import dataTable from "./DataTable.story";
 import baseMapStory from "./BaseMap.story";
-import mapOverlayStory from "./MapOverlay.story";
-import hexOverlayStory from "./HexOverlay.story";
-import scatterPlotMapStory from "./ScatterPlotMap.story";
-import pullQuoteStory from "./PullQuote.story";
-import screenGridMapStory from "./ScreenGridMap.story";
-import pathMapStory from "./PathMap.story";
-import iconMapStory from "./IconMap.story";
 import boundaryMapStory from "./BoundaryMap.story";
-import civicSandboxMapStory from "./CivicSandboxMap.story";
-import gradientScaleStory from "./GradientScale.story";
-import sandboxStory from "./Sandbox.story";
-import packageSelectorBox from "./PackageSelectorBox.story";
-import civicSandboxDashboardStory from "./CivicSandboxDashboard.story";
-import stackedAreaChart from "./StackedAreaChart.story";
-import pdfStory from "./PDF.story";
-import heatMapStory from "./HeatMap.story";
+import buttonStory from "./Button.story";
 import civicCardStackStory from "./CivicCardStack.story";
+import civicSandboxDashboardStory from "./CivicSandboxDashboard.story";
+import civicSandboxMapStory from "./CivicSandboxMap.story";
+import civicStorycardStory from "./CivicStoryCard.story";
+import dataTable from "./DataTable.story";
+import dropdownStory from "./DropdownMenu.story";
+import gradientScaleStory from "./GradientScale.story";
+import headerStory from "./Header.story";
+import heatMapStory from "./HeatMap.story";
+import hexOverlayStory from "./HexOverlay.story";
+import horizontalBarChartStory from "./HorizontalBarChart.story";
+import iconMapStory from "./IconMap.story";
+import lineChartStory from "./LineChart.story";
+import mapOverlayStory from "./MapOverlay.story";
+import packageSelectorBox from "./PackageSelectorBox.story";
+import pageLayoutStory from "./PageLayout.story";
+import pathMapStory from "./PathMap.story";
+import pdfStory from "./PDF.story";
+import pieStory from "./PieChart.story";
+import placeholderStory from "./Placeholder.story";
+import pullQuoteStory from "./PullQuote.story";
+import sandboxStory from "./Sandbox.story";
+import scatterPlotMapStory from "./ScatterPlotMap.story";
+import ScatterplotStory from "./Scatterplot.story";
+import screenGridMapStory from "./ScreenGridMap.story";
 import sliderStory from "./Slider.story";
+import stackedAreaChart from "./StackedAreaChart.story";
 
 import AccessibilityGuidelinesStyle from "./styleGuideStories/AccessibilityGuidelinesStyle.story";
 import CardsStyle from "./styleGuideStories/CardsStyle.story";
@@ -68,16 +68,17 @@ import UIComponentsStyle from "./styleGuideStories/UIComponentsStyle.story";
 
 import "../assets/global.styles.css";
 
-// Welcome to Storybook
-storiesOf("Welcome", module)
+storiesOf("Welcome|About Us", module)
   .addDecorator(checkA11y)
+  .addParameters({ options: { showPanel: false } })
   .add("Introduction", () => <Introduction />)
   .add("The CIVIC Brand", () => <TheBrandStyle />)
   .add("The CIVIC Platform", () => <ThePlatformStyle />);
 
 // Branding
-storiesOf("Branding", module)
+storiesOf("Design|Brand", module)
   .addDecorator(checkA11y)
+  .addParameters({ options: { showPanel: false } })
   .add("Logos", () => <LogosStyle />)
   .add("Color Theme", () => <ColorThemeStyle />)
   .add("Typography", () => (
@@ -90,10 +91,11 @@ storiesOf("Branding", module)
   ));
 
 // UX Style Guide
-storiesOf("UX Style Guide", module)
+storiesOf("Design|UX Style Guide", module)
   .addDecorator(checkA11y)
+  .addParameters({ options: { showPanel: false } })
   .add("Accessibility", () => <AccessibilityGuidelinesStyle />)
-  .add("Cards", () => <CardsStyle />)
+  .add("Story Cards", () => <CardsStyle />)
   .add("Data Visualization", () => <DataVisualizationStyle />)
   .add("Forms", () => <FormsStyle />)
   .add("Iconography", () => <IconographyStyle />)
@@ -102,17 +104,19 @@ storiesOf("UX Style Guide", module)
   .add("Responsive Design", () => <ResponsiveDesignStyle />)
   .add("Terminology", () => <TerminologyStyle />);
 
-// common UI components
-storiesOf("UI Components", module)
+// Basic UI components
+storiesOf("Component Lib|Basic UI Components", module)
   .addDecorator(checkA11y)
-  .add("UI Components Style Guide", () => <UIComponentsStyle />);
+  .addParameters({ options: { showPanel: false } })
+  .add("Basic Components Style Guide", () => <UIComponentsStyle />);
 buttonStory();
 dropdownStory();
 sliderStory();
 
 // charts
-storiesOf("Charts", module)
+storiesOf("Component Lib|Charts", module)
   .addDecorator(checkA11y)
+  .addParameters({ options: { showPanel: false } })
   .add("Charts Style Guide", () => <ChartsStyle />);
 BarChartStory();
 dataTable();
@@ -124,8 +128,9 @@ ScatterplotStory();
 stackedAreaChart();
 
 // maps
-storiesOf("Maps", module)
+storiesOf("Component Lib|Maps", module)
   .addDecorator(checkA11y)
+  .addParameters({ options: { showPanel: false } })
   .add("Maps Style Guide", () => <MapsStyle />);
 baseMapStory();
 boundaryMapStory();
@@ -139,8 +144,9 @@ scatterPlotMapStory();
 screenGridMapStory();
 
 // Civic platform components and page layout
-storiesOf("CIVIC Platform Components", module)
+storiesOf("Component Lib|CIVIC Platform", module)
   .addDecorator(checkA11y)
+  .addParameters({ options: { showPanel: false } })
   .add("Platform Components Style Guide", () => <CivicPlatformStyle />);
 civicCardStackStory();
 civicSandboxDashboardStory();

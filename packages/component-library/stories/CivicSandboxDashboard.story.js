@@ -218,7 +218,7 @@ class DashboardStory extends React.Component {
 }
 
 export default () =>
-  storiesOf("CIVIC Platform Components/CIVIC Sandbox Dashboard", module)
+  storiesOf("Component Lib|CIVIC Platform/CIVIC Sandbox Dashboard", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .add("Simple usage", () => (

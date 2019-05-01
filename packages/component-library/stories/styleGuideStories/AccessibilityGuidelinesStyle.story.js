@@ -5,6 +5,12 @@ const AccessibilityGuidelines = () => (
   <div style={storybookStyles.main}>
     <h1>Accessibility</h1>
     <p>
+      The CIVIC platform aims to be radically inclusive. Towards that aim, we
+      start by incorporating best practices in web accessibility, and build
+      tools that allow us to participate and contribute in ways that truly
+      appreciate our different abilities and perspectives.
+    </p>
+    <p>
       The CIVIC platform will meet all criteria specified in{" "}
       <a
         href="https://www.w3.org/TR/WCAG21/"

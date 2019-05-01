@@ -1,11 +1,6 @@
 import React from "react";
 import { storybookStyles } from "../storyStyles";
 
-/*
-  TODO
-        Add links to Button story example.
-*/
-
 const Introduction = () => (
   <div style={storybookStyles.main}>
     <h1>Introduction to CIVIC&apos;s Storybook</h1>

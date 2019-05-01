@@ -13,7 +13,7 @@ const sampleSimpleData = [
 ];
 
 export default () =>
-  storiesOf("Charts/Bar Chart", module)
+  storiesOf("Component Lib|Charts/Bar Chart", module)
     .addDecorator(withKnobs)
     .add("Simple usage", () => <BarChart data={sampleSimpleData} />)
     .add("Basic usage", () => {

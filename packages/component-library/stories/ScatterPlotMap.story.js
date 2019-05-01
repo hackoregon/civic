@@ -109,7 +109,7 @@ const tooltipMap = () => (
 );
 
 export default () =>
-  storiesOf("Maps/Scatterplot Map", module)
+  storiesOf("Component Lib|Maps/Scatterplot Map", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .add("Simple usage", demoMap)

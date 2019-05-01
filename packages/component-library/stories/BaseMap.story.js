@@ -85,7 +85,7 @@ const containerHeightMap = () => {
 };
 
 export default () =>
-  storiesOf("Maps/Base Map", module)
+  storiesOf("Component Lib|Maps/Base Map", module)
     .addDecorator(withKnobs)
     .add("Simple usage", demoMap)
     .add("With geocoder usage", geocoderMap)

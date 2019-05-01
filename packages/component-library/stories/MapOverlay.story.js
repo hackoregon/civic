@@ -78,7 +78,7 @@ const tooltipMap = () => {
 };
 
 export default () =>
-  storiesOf("Maps/Map Overlay", module)
+  storiesOf("Component Lib|Maps/Map Overlay", module)
     .addDecorator(checkA11y)
     .addDecorator(withKnobs)
     .add("Simple usage", demoMap)
