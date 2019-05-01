@@ -13,6 +13,7 @@ addParameters({
 
 function loadStories() {
   require("../packages/component-library/stories");
+  addParameters({ viewport: options });
 }
 
 configure(loadStories, module);
