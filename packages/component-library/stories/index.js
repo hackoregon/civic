@@ -108,7 +108,7 @@ storiesOf("Design|UX Style Guide", module)
 storiesOf("Component Lib|Basic UI Components", module)
   .addDecorator(checkA11y)
   .addParameters({ options: { showPanel: false } })
-  .add("Basic Components Style Guide", () => <UIComponentsStyle />);
+  .add("UI Components Style Guide", () => <UIComponentsStyle />);
 buttonStory();
 dropdownStory();
 sliderStory();

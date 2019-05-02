@@ -9,13 +9,6 @@ addParameters({
   options: {
     showPanel: true,
     theme: themeCIVIC
-  }
-});
-
-addParameters({
-  options: {
-    showPanel: true,
-    theme: undefined
   },
   viewport: {
     defaultViewport: "responsive",
