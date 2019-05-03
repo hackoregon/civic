@@ -7,17 +7,12 @@ import {
   withKnobs,
   text,
   color,
-  boolean,
   optionsKnob as options,
   select
 } from "@storybook/addon-knobs";
 import notes from "./button.markdown.md";
 import { Button } from "../src";
 import { storybookStyles } from "./storyStyles";
-
-const description = `
-  This is some basic usage with the button with providing a label to show the text.
-  Clicking should trigger an action.`;
 
 export default () =>
   storiesOf("Component Lib|Basic Inputs/Button", module)
@@ -28,64 +23,79 @@ export default () =>
         <div style={storybookStyles.storyGridItem}>{story()}</div>
       </div>
     ))
-    .add("Simple usage", () => {
-      return (
-        <Button
-          onClick={action("clicked")}
-          //disabled={boolean("Disabled", false)}
-        >
-          Hello CIVIC
-        </Button>
-      );
-    })
-    .add("Basic usage", () => {
-      const accentColor = color("Text & border color", "#DC4556");
-      const bkgndColor = color("Background color", "#FFFFFF");
-      const label = text("Label", "Hello CIVIC");
-      const transitionOptions = {
-        Common: "all .2s ease-in-out",
-        Slower: "all 2s ease-in-out"
-      };
-      const commonTransition = select(
-        "Transition",
-        transitionOptions,
-        "all .2s ease-in-out"
-      );
-      //const commonTransition = text("Transition", "all .2s ease-in-out");
-      //const disabled = boolean("Disabled", false);
-      const valuesObj = {
-        Enabled: "",
-        Disabled: "disabled"
-      };
-      const optionsObj = {
-        display: "inline-radio"
-      };
-      const disabled = options("State", valuesObj, "", optionsObj);
-      //console.log(disabled);
-      return (
-        <Button
-          onClick={action("clicked")}
-          accentColor={accentColor}
-          bkgndColor={bkgndColor}
-          commonTransition={commonTransition}
-          disabled={disabled}
-        >
-          {label}
-        </Button>
-      );
-    })
     .add(
-      "With some emoji",
+      "Standard",
       () => {
-        const accentColor = color("Border color", "#DC4556");
+        const label = text("Label", "Hello CIVIC");
+        return <Button onClick={action("clicked")}>{label}</Button>;
+      },
+      { notes }
+    )
+    .add(
+      "Custom",
+      () => {
+        const accentColor = color("Text & border color", "#DC4556");
         const bkgndColor = color("Background color", "#FFFFFF");
+        const label = text("Label", "Hello CIVIC");
+        const transitionOptions = {
+          Standard: "all .2s ease-in-out",
+          Slow: "all .6s ease-in-out",
+          Fast: "all .1s ease-in-out"
+        };
+        const transition = select(
+          "Transition",
+          transitionOptions,
+          "all .2s ease-in-out"
+        );
+        //const disabled = boolean("Disabled", false);
+        const valuesObj = {
+          Enabled: "",
+          Disabled: "disabled"
+        };
+        const optionsObj = {
+          display: "inline-radio"
+        };
+        const disabled = options("State", valuesObj, "", optionsObj);
+        //console.log(disabled);
         return (
           <Button
             onClick={action("clicked")}
             accentColor={accentColor}
             bkgndColor={bkgndColor}
+            transition={transition}
+            disabled={disabled}
           >
-            <span role="img" aria-label="So cool">
+            {label}
+          </Button>
+        );
+      },
+      { notes }
+    )
+    .add(
+      "Custom non-text label",
+      () => {
+        const accentColor = color("Border color", "#DC4556");
+        const bkgndColor = color("Background color", "#FFFFFF");
+        const transitionOptions = {
+          Standard: "all .2s ease-in-out",
+          Slow: "all .6s ease-in-out",
+          Fast: "all .1s ease-in-out"
+        };
+        const transition = select(
+          "Transition",
+          transitionOptions,
+          "all .2s ease-in-out"
+        );
+        const ariaLabel = text("aria-label", "So cool");
+        return (
+          <Button
+            onClick={action("clicked")}
+            accentColor={accentColor}
+            bkgndColor={bkgndColor}
+            transition={transition}
+          >
+            {" "}
+            <span role="img" aria-label={ariaLabel}>
               😀 😎 👍 💯
             </span>
           </Button>

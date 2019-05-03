@@ -4,7 +4,7 @@ import { css } from "emotion";
 
 const accentColor = "#DC4556";
 const bkgndColor = "#FFFFFF";
-const commonTransition = "all .2s ease-in-out";
+const transition = "all .2s ease-in-out";
 const buttonClass = props => css`
   display: ${props.display || "block"};
   margin: ${props.margin};
@@ -12,7 +12,7 @@ const buttonClass = props => css`
   flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
-  transition: ${props.commonTransition || commonTransition};
+  transition: ${props.transition || transition};
   font-size: 1em;
   font-family: "Rubik", sans-serif;
   font-weight: 500;
@@ -27,7 +27,7 @@ const buttonClass = props => css`
 
   span {
     flex-wrap: nowrap;
-    transition: ${props.commonTransition || commonTransition};
+    transition: ${props.transition || transition};
   }
 
   &:hover {
