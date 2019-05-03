@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 /* eslint-disable import/no-extraneous-dependencies */
 import "react-select/dist/react-select.css";
 import { isArray } from "lodash";
-import { Sandbox } from "@hackoregon/component-library";
+import { Sandbox, Logo } from "@hackoregon/component-library";
 import { equals } from "ramda";
 
 import {
@@ -94,16 +94,27 @@ class SandboxComponent extends React.Component {
       font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
     `);
 
+    const loadingContainer = css`
+      display: flex;
+      height: 300px;
+    `;
     const loading = css`
       font-size: 1.5rem;
-      width: 100%;
+      margin: auto;
       text-align: center;
       font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
     `;
+    const loader = (
+      <div className={loadingContainer}>
+        <div className={loading}>
+          <Logo type="squareLogoAnimated" alt="Loading..." />
+        </div>
+      </div>
+    );
 
     const layerData = [this.props.layerFoundation, ...this.props.layerSlides];
     return this.props.isLoading ? (
-      <div className={loading}>Loading...</div>
+      loader
     ) : (
       <Sandbox
         layerData={layerData}
