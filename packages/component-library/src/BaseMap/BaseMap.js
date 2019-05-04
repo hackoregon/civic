@@ -36,7 +36,7 @@ class BaseMap extends Component {
         latitude: props.initialLatitude || 45.5231,
         zoom: props.initialZoom || 9.5,
         minZoom: 6,
-        maxZoom: 16,
+        maxZoom: 20,
         pitch: props.initialPitch || 0,
         bearing: 0,
         scrollZoom: true
@@ -113,7 +113,8 @@ class BaseMap extends Component {
       geocoderOnChange,
       mapGLOptions,
       children,
-      useContainerHeight
+      useContainerHeight,
+      onBaseMapClick
     } = this.props;
 
     viewport.width = this.props.containerWidth
@@ -145,6 +146,7 @@ class BaseMap extends Component {
           onViewportChange={viewport => this.onViewportChange(viewport)}
           ref={this.mapRef}
           {...mapGLOptions}
+          onClick={onBaseMapClick}
         >
           <div className={navControl}>
             {navigation && (
