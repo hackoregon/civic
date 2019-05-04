@@ -4,7 +4,8 @@ import { css } from "emotion";
 
 import {
   PackageSelectorBox,
-  CivicSandboxDashboard
+  CivicSandboxDashboard,
+  Logo
 } from "@hackoregon/component-library";
 import SandboxComponent from "../Sandbox";
 import { fetchSandbox, setPackage } from "../../state/sandbox/actions";
@@ -16,9 +17,9 @@ import {
   isAllSandboxLoading
 } from "../../state/sandbox/selectors";
 
-const loader = css`
-  background: #eee;
-  padding: 30px;
+const loadingStyle = css`
+  text-align: center;
+  margin: auto;
 `;
 
 const error = css`
@@ -107,7 +108,11 @@ export class Packages extends React.Component {
         }))
       : [];
 
-    const Loader = () => <div className={loader}>Loading...</div>;
+    const loadingLogo = (
+      <div className={loadingStyle}>
+        <Logo type="squareLogoAnimated" alt="Loading..." />
+      </div>
+    );
     const ErrorMessage = () => (
       <div className={error}>Could not load data for the sandbox.</div>
     );
@@ -136,7 +141,7 @@ export class Packages extends React.Component {
                   flex-wrap: wrap;
                 }`)}
             >
-              {isLoading && <Loader />}
+              {isLoading && loadingLogo}
               {packages &&
                 packages.map(p => (
                   <div
