@@ -2,7 +2,7 @@
 import React from "react";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
-import { withKnobs, number } from "@storybook/addon-knobs";
+import { withKnobs, number, boolean } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 import { checkA11y } from "@storybook/addon-a11y";
 import { BaseMap, IconMap, MapTooltip, DemoJSONLoader } from "../src";
@@ -164,9 +164,94 @@ const tooltipMap = () => (
   </DemoJSONLoader>
 );
 
+class TouchScreenDemo extends React.Component {
+  state = {
+    pointsData: [
+      {
+        geometry: {
+          coordinates: [-122.6658475, 45.5084872]
+        },
+        properties: {
+          type: "BEECN"
+        }
+      }
+    ]
+  };
+
+  onClick = ({ lngLat }) => {
+    this.setState({
+      pointsData: [
+        ...this.state.pointsData,
+        {
+          geometry: {
+            coordinates: lngLat
+          },
+          properties: {
+            type: "Pin"
+          }
+        }
+      ]
+    });
+  };
+
+  clearPoints = () => {
+    this.setState({ pointsData: [] });
+  };
+
+  render() {
+    const { pointsData } = this.state;
+
+    const touchZoomRotateOption = boolean("Touch Zoom/Rotate:", true);
+    const doubleClickZoomOption = boolean("Double Click Zoom:", true);
+    const dragPanOption = boolean("Drag Pan:", true);
+    const dragRotateOption = boolean("Drag Rotate:", true);
+
+    const getIconColor = f =>
+      f.properties.type === "BEECN" ? [238, 73, 92] : [25, 183, 170];
+
+    return (
+      <div style={{ height: "95vh", minHeight: "500px" }}>
+        <BaseMap
+          initialZoom={15}
+          initialLatitude={45.5084872}
+          initialLongitude={-122.6658475}
+          mapGLOptions={{
+            touchZoomRotate: touchZoomRotateOption,
+            doubleClickZoom: doubleClickZoomOption,
+            dragPan: dragPanOption,
+            dragRotate: dragRotateOption,
+            scrollZoom: touchZoomRotateOption
+          }}
+          onBaseMapClick={this.onClick}
+          updateViewport={false}
+          useContainerHeight
+        >
+          <IconMap
+            data={pointsData}
+            opacity={1.0}
+            iconAtlas="https://i.imgur.com/xgTAROe.png"
+            iconMapping={poiIconMapping}
+            iconSizeScale={poiIconZoomScale}
+            getPosition={getPosition}
+            getIcon={getIcon}
+            getSize={() => 7}
+            getColor={getIconColor}
+          />
+        </BaseMap>
+        <input
+          type="button"
+          onClick={this.clearPoints}
+          value={"Clear all points"}
+        />
+      </div>
+    );
+  }
+}
+
 export default () =>
   storiesOf("Component Lib|Maps/Icon Map", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .add("Simple usage", demoMap)
-    .add("With tooltip", tooltipMap);
+    .add("With tooltip", tooltipMap)
+    .add("TouchScreen Demo", () => <TouchScreenDemo />);
