@@ -201,14 +201,10 @@ class TouchScreenDemo extends React.Component {
   render() {
     const { pointsData } = this.state;
 
-    // const touchZoomOption = boolean( "Touch Zoom:", true);
-    // const touchRotateOption = boolean("Touch Rotate:", true);
     const touchZoomRotateOption = boolean("Touch Zoom/Rotate:", true);
     const doubleClickZoomOption = boolean("Double Click Zoom:", true);
     const dragPanOption = boolean("Drag Pan:", true);
     const dragRotateOption = boolean("Drag Rotate:", true);
-    // const scrollZoomOption = boolean("Scroll Zoom:", true);
-    // const keyboardOption = boolean("Keyboard:", true);
 
     const getIconColor = f =>
       f.properties.type === "BEECN" ? [238, 73, 92] : [25, 183, 170];
