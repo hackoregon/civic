@@ -2,21 +2,8 @@
 /* eslint-disable */
 
 import React, { Component } from "react";
-import { render } from "react-dom";
 import PropTypes from "prop-types";
-import { css } from "emotion";
 import DeckGL, { HexagonLayer } from "deck.gl";
-
-const crosshair = css`
-  cursor: crosshair;
-`;
-
-const mapWrapper = css`
-  margin: auto;
-  max-width: 900px;
-`;
-
-const colorScale = r => [r * 255, 140, 200 * (1 - r)];
 
 const elevationScale = { min: 1, max: 50 };
 
@@ -103,7 +90,8 @@ class HexOverlay extends Component {
         y
       });
     });
-    const tooltipRender = tooltipInfo ? tooltip : null;
+
+    const tooltipRender = tooltipInfo && x && y ? tooltip : null;
 
     const layers = [
       new HexagonLayer({
@@ -127,14 +115,16 @@ class HexOverlay extends Component {
     ];
 
     return (
-      <div className={crosshair}>
-        <DeckGL {...viewport} layers={layers} className="HexOverlay">
-          {tooltipRender}
-        </DeckGL>
+      <div>
+        <DeckGL
+          {...viewport}
+          layers={layers}
+          className="HexOverlay"
+          getCursor={() => "crosshair"}
+        />
+        {tooltipRender}
       </div>
     );
   }
 }
 export default HexOverlay;
-
-// TODO: after implimenting tooltip the booleans knobs are no longer work.... filled, wireframe, extruded.... extruded has to be set as true currently in layers... fix it

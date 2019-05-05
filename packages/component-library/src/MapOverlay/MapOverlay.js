@@ -1,11 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import DeckGL, { GeoJsonLayer } from "deck.gl";
-import { css } from "emotion";
-
-const crosshair = css`
-  cursor: crosshair;
-`;
 
 const MapOverlay = props => {
   const {
@@ -42,7 +37,7 @@ const MapOverlay = props => {
     });
   });
 
-  const tooltipRender = tooltipInfo ? tooltip : null;
+  const tooltipRender = tooltipInfo && x && y ? tooltip : null;
 
   const LIGHT_SETTINGS = {
     lightsPosition: [-125, 50.5, 5000, -122.8, 48.5, 8000],
@@ -78,10 +73,14 @@ const MapOverlay = props => {
   });
 
   return (
-    <div className={crosshair}>
-      <DeckGL {...viewport} layers={[layer]} className="MapOverlay">
-        {tooltipRender}
-      </DeckGL>
+    <div>
+      <DeckGL
+        {...viewport}
+        layers={[layer]}
+        className="MapOverlay"
+        getCursor={() => "crosshair"}
+      />
+      {tooltipRender}
     </div>
   );
 };
@@ -101,7 +100,7 @@ MapOverlay.propTypes = {
   onLayerClick: PropTypes.func,
   opacity: PropTypes.number,
   strokeWidth: PropTypes.number,
-  tooltipInfo: PropTypes.bool,
+  tooltipInfo: PropTypes.shape({}),
   x: PropTypes.number,
   y: PropTypes.number,
   visible: PropTypes.bool,
