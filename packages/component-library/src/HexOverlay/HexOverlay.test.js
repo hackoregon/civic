@@ -42,34 +42,38 @@ describe("HexOverlay", () => {
   });
 
   it("should render with extruded", () => {
-    expect(wrapper.props().children.props.layers[0].props.extruded).to.equal(
+    expect(wrapper.props().children[0].props.layers[0].props.extruded).to.equal(
       true
     );
   });
 
   it("should render with radius", () => {
-    expect(wrapper.props().children.props.layers[0].props.radius).to.equal(200);
+    expect(wrapper.props().children[0].props.layers[0].props.radius).to.equal(
+      200
+    );
   });
 
   it("should render with opacity of 0.8", () => {
-    expect(wrapper.props().children.props.layers[0].props.opacity).to.equal(
+    expect(wrapper.props().children[0].props.layers[0].props.opacity).to.equal(
       0.8
     );
   });
 
   it("should render with an extrusion", () => {
-    expect(wrapper.props().children.props.layers[0].props.extruded).to.equal(
+    expect(wrapper.props().children[0].props.layers[0].props.extruded).to.equal(
       true
     );
   });
 
   it("should render with data", () => {
-    expect(wrapper.props().children.props.layers[0].props.data).to.equal(data);
+    expect(wrapper.props().children[0].props.layers[0].props.data).to.equal(
+      data
+    );
   });
 
   it("should render with an type string", () => {
     expect(
-      wrapper.props().children.props.layers[0].props.data[0].type
+      wrapper.props().children[0].props.layers[0].props.data[0].type
     ).to.equal("Feature");
   });
 });
