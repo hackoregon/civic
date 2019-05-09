@@ -34,7 +34,7 @@
     "start": "node scripts/start",
     "deploy-storybook": "BABEL_ENV=esm storybook-to-ghpages",
     "in": "lerna run --scope",
-    "lint": "lerna run lint",
+    "lint": "lerna run lint --no-bail",
     "lint:fix": "lerna run lint --no-bail -- --fix",
     "storybook": "BABEL_ENV=esm start-storybook -p 6006",
     "test": "lerna run test --no-bail",
