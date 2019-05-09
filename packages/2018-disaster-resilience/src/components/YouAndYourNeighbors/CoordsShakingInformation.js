@@ -20,8 +20,8 @@ const CoordsShakingInformation = ({ coordsProperties }) => (
       mean={coordsProperties.pgv_site_mean_mmi}
       min={coordsProperties.pgv_site_min_mmi}
       max={coordsProperties.pgv_site_max_mmi}
-      metric={"Shaking Intensity"}
-      label={"More shaking"}
+      metric="Shaking Intensity"
+      label="More shaking"
       scale={shakingScale}
       domain={[1, 10]}
     />
@@ -29,8 +29,8 @@ const CoordsShakingInformation = ({ coordsProperties }) => (
       mean={parseFloat(coordsProperties.pgd_landslide_wet_mean)}
       min={parseFloat(coordsProperties.pgd_landslide_wet_min)}
       max={parseFloat(coordsProperties.pgd_landslide_wet_max)}
-      metric={"Landslide Potential"}
-      label={"More landslides"}
+      metric="Landslide Potential"
+      label="More landslides"
       scale={landslidesScale}
       transform={transformForLandslidesAndLiquefaction}
       domain={[0, 1180]}
@@ -39,8 +39,8 @@ const CoordsShakingInformation = ({ coordsProperties }) => (
       mean={parseFloat(coordsProperties.pgd_liquefaction_wet_mean)}
       min={parseFloat(coordsProperties.pgd_liquefaction_wet_min)}
       max={parseFloat(coordsProperties.pgd_liquefaction_wet_max)}
-      metric={"Liquefaction Potential"}
-      label={"More liquefaction"}
+      metric="Liquefaction Potential"
+      label="More liquefaction"
       scale={liquefactionScale}
       transform={transformForLandslidesAndLiquefaction}
       domain={[0, 1180]}
