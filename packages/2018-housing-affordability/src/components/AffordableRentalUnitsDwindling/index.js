@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { loader, error, gradientLabel, emphasis } from "../css-utils";
 
 import "@hackoregon/component-library/assets/vendor/react-select.min.css";
 
@@ -13,6 +12,7 @@ import {
 } from "@hackoregon/component-library";
 
 import { civicFormat } from "@hackoregon/component-library/dist/utils";
+import { loader, error, gradientLabel, emphasis } from "../css-utils";
 
 import {
   fetchAllARUCities,
