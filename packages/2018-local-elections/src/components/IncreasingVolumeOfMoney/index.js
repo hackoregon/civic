@@ -83,9 +83,11 @@ export class IncreasingVolumeOfMoney extends React.Component {
                 yLabel="Money Raised"
                 xLabel="Year"
                 xNumberFormatter={x => civicFormat.year(x)}
-                yNumberFormatter={y =>
-                  civicFormat.dollars(civicFormat.numeric(y))
-                }
+                yNumberFormatter={y => {
+                  console.log(civicFormat.dollars(y));
+
+                  return civicFormat.dollars(y);
+                }}
                 barWidth={3}
                 domain={{ x: [2008, 2018] }}
               />
