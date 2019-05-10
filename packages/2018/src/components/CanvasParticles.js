@@ -1,6 +1,8 @@
+/* eslint-disable */
 import React from "react";
 import ReactDOM from "react-dom";
 import { css } from "emotion";
+
 const canvasStyles = css`
   position: fixed;
 `;
@@ -19,7 +21,7 @@ class CanvasParticles extends React.Component {
         }
       );
     })();
-    const canvas = this.refs.canvas;
+    const { canvas } = this.refs;
     const ctx = canvas.getContext("2d");
     const img = this.refs.image;
     const W = window.innerWidth;
@@ -62,7 +64,7 @@ class CanvasParticles extends React.Component {
       };
     }
 
-    for (var i = 0; i < particleCount; i++) {
+    for (let i = 0; i < particleCount; i++) {
       particles.push(new Particle());
     }
 
@@ -72,17 +74,17 @@ class CanvasParticles extends React.Component {
       paintCanvas();
 
       // Call the function that will draw the balls using a loop
-      for (var i = 0; i < particles.length; i++) {
+      for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
         p.draw();
       }
 
-      //Finally call the update function
+      // Finally call the update function
       update();
     }
 
     function update() {
-      for (var i = 0; i < particles.length; i++) {
+      for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
 
         // Change the velocities
@@ -98,7 +100,7 @@ class CanvasParticles extends React.Component {
         else if (p.y - p.radius < 0) {
           p.y = H - p.radius;
         }
-        for (var j = i + 1; j < particles.length; j++) {
+        for (let j = i + 1; j < particles.length; j++) {
           const p2 = particles[j];
           distance(p, p2);
         }
@@ -117,7 +119,7 @@ class CanvasParticles extends React.Component {
       if (dist <= minDist) {
         // Draw the line
         ctx.beginPath();
-        ctx.strokeStyle = "rgba(239,74,93," + (1.0 - dist / minDist) + ")";
+        ctx.strokeStyle = `rgba(239,74,93,${1.0 - dist / minDist})`;
         ctx.moveTo(p1.x, p1.y);
         ctx.lineTo(p2.x, p2.y);
         ctx.stroke();
@@ -125,8 +127,8 @@ class CanvasParticles extends React.Component {
 
         // Some acceleration for the partcles
         // depending upon their distance
-        var ax = dx / 200000,
-          ay = dy / 200000;
+        const ax = dx / 200000;
+        const ay = dy / 200000;
 
         // Apply the acceleration on the particles
         p1.vx -= ax;
@@ -144,6 +146,7 @@ class CanvasParticles extends React.Component {
 
     animloop();
   }
+
   render() {
     return (
       <div>

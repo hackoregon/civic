@@ -1,4 +1,4 @@
-export const housingData = [
+const housingData = [
   {
     datapoint: "Portland-Vancouver-Hillsboro, OR-WA",
     datatype: "Moderately Burdened Owners",
@@ -132,3 +132,5 @@ export const housingData = [
     valuetype: "percent"
   }
 ];
+
+export default housingData;

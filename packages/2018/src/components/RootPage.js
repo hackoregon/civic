@@ -1,9 +1,12 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-const isRoot = ({ pathname }) => pathname === "/";
+export const RootPage = ({ children }) => <div>{children}</div>;
 
-export const RootPage = props => <div>{props.children}</div>;
+RootPage.propTypes = {
+  children: PropTypes.node
+};
 
 RootPage.displayName = "Root";
 

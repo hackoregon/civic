@@ -154,6 +154,7 @@ slug-one
 
     it("returns undefined when there is no matching entry", () => {
       const registry = new Registry(commonEntries);
+      // eslint-disable-next-line no-unused-expressions
       expect(registry.find("something-that-does-not-exist")).to.be.undefined;
     });
   });
