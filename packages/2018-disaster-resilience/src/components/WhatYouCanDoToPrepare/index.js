@@ -20,10 +20,11 @@ export class WhatYouCanDoToPrepare extends React.Component {
   }
 
   renderSection() {
-    return !this.state.quizFinished ? (
+    const { quizFinished } = this.state;
+    return !quizFinished ? (
       <Quiz done={e => this.done(e)} />
     ) : (
-      <Summary quizFinished={this.state.quizFinished} />
+      <Summary quizFinished={quizFinished} />
     );
   }
 

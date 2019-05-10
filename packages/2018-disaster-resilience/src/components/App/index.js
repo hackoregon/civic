@@ -1,13 +1,11 @@
+/* eslint-disable import/no-named-as-default */
 import React from "react";
 
 import "@hackoregon/component-library/assets/global.styles.css";
 import { PageLayout, PullQuote } from "@hackoregon/component-library";
-import LifeAlteringEvent from "../LifeAlteringEvent";
-import ViolentShakingAndGroundDeformation from "../ViolentShakingAndGroundDeformation";
 import SignificantStructuralDamage from "../SignificantStructuralDamage";
 import YouAndYourNeighbors from "../YouAndYourNeighbors";
 import WhatYouCanDoToPrepare from "../WhatYouCanDoToPrepare";
-import IncreasingSocialCapital from "../IncreasingSocialCapital";
 import ProactivePlanning from "../ProactivePlanning";
 
 const App = () => (
@@ -38,7 +36,6 @@ const App = () => (
       vicinity.
     </p>
     <YouAndYourNeighbors />
-    {/* <p className="transition">Preparedness and disaster resiliency go hand-in-hand.</p> */}
     <PullQuote
       quoteText="Does your family have a plan for earthquake preparedness? Here are the steps to help you get started."
       url="https://civicplatform.org/cards/what-you-can-do-to-prepare-for-an-earthquake"
