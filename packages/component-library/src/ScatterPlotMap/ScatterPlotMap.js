@@ -1,11 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import DeckGL, { ScatterplotLayer } from "deck.gl";
-import { css } from "emotion";
-
-const crosshair = css`
-  cursor: crosshair;
-`;
 
 const ScatterPlotMap = props => {
   const {
@@ -37,11 +32,11 @@ const ScatterPlotMap = props => {
     });
   });
 
-  const tooltipRender = tooltipInfo ? tooltip : null;
+  const tooltipRender = tooltipInfo && x && y ? tooltip : null;
 
   return (
-    <div className={crosshair}>
-      <DeckGL className="DeckGL" {...viewport}>
+    <div>
+      <DeckGL className="DeckGL" {...viewport} getCursor={() => "crosshair"}>
         <ScatterplotLayer
           className="ScatterPlotMap"
           id="scatterplot-layer"
@@ -63,8 +58,8 @@ const ScatterPlotMap = props => {
           updateTriggers={{ instanceColors: getColor }}
           onHover={onHover}
         />
-        {tooltipRender}
       </DeckGL>
+      {tooltipRender}
     </div>
   );
 };
