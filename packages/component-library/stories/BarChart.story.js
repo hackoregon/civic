@@ -15,23 +15,32 @@ const sampleSimpleData = [
 export default () =>
   storiesOf("Component Lib|Charts/Bar Chart", module)
     .addDecorator(withKnobs)
-    .add("Simple usage", () => <BarChart data={sampleSimpleData} />)
-    .add("Basic usage", () => {
-      const data = object("Data", [
-        { ye: 1994, population: 2000 },
-        { ye: 1995, population: 8000 },
-        { ye: 1996, population: 6000 },
-        { ye: 1997, population: 3000 },
-        { ye: 1998, population: 1000 }
-      ]);
-      const dataKey = text("Data key", "ye");
-      const dataValue = text("Data values", "population");
-      const xLabel = text("xLabel", "Year");
-      const yLabel = text("yLabel", "Dogs");
-      const title = text("title", "Dogs with Money");
+    .add("Standard", () => <BarChart data={sampleSimpleData} />)
+    .add("Custom", () => {
+      const GROUP_IDS = {
+        DATA: "Data",
+        LABELS: "Labels"
+      };
+      const data = object(
+        "Data",
+        [
+          { ye: 1994, population: 2000 },
+          { ye: 1995, population: 8000 },
+          { ye: 1996, population: 6000 },
+          { ye: 1997, population: 3000 },
+          { ye: 1998, population: 1000 }
+        ],
+        GROUP_IDS.DATA
+      );
+      const dataKey = text("Data key", "ye", GROUP_IDS.DATA);
+      const dataValue = text("Data values", "population", GROUP_IDS.DATA);
+      const xLabel = text("xLabel", "Year", GROUP_IDS.LABELS);
+      const yLabel = text("yLabel", "Dogs", GROUP_IDS.LABELS);
+      const title = text("title", "Dogs with Money", GROUP_IDS.LABELS);
       const subtitle = text(
         "subtitle",
-        "Dogs in Portland with a net worth greater than $1,000"
+        "Dogs in Portland with a net worth greater than $1,000",
+        GROUP_IDS.LABELS
       );
 
       return (
