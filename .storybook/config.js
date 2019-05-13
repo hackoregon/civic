@@ -4,11 +4,12 @@
 import { addParameters, configure } from "@storybook/react";
 import "../packages/component-library/assets/global.styles.css";
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
+import themeCIVIC from "./themeCIVIC";
 
 addParameters({
   options: {
     showPanel: true,
-    theme: undefined
+    theme: themeCIVIC
   },
   viewport: {
     defaultViewport: "responsive",
