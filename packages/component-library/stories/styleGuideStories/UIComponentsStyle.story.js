@@ -5,7 +5,15 @@ const UIComponentsStyle = () => (
   <div style={storybookStyles.main}>
     <h1>Basic UI Components Style Guide</h1>
     <p>This is the Style Guide for basic UI Components.</p>
-    <h2>Button</h2>
+    <h4>
+      <a href="#button">Button</a>
+    </h4>
+    <h4>Checkbox</h4>
+    <h4>Dropdown List</h4>
+    <h4>Radio Buttons</h4>
+    <h4>Slider</h4>
+    <h4>Text Input Field</h4>
+    <h2 id="button">Button</h2>
     <p>Style information for buttons.</p>
     <h2>Checkbox</h2>
     <p>Style information for checkboxes.</p>
