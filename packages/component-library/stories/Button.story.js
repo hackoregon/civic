@@ -7,7 +7,6 @@ import { withKnobs, text, color, select, files } from "@storybook/addon-knobs";
 import notes from "./button.notes.md";
 import { Button } from "../src";
 import { storybookStyles } from "./storyStyles";
-import { file } from "@babel/types";
 
 export default () =>
   storiesOf("Component Lib|Basic Inputs/Button", module)
