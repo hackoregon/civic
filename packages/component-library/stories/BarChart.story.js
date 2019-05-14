@@ -15,12 +15,21 @@ const sampleSimpleData = [
 export default () =>
   storiesOf("Component Lib|Charts/Bar Chart", module)
     .addDecorator(withKnobs)
-    .add("Standard", () => <BarChart data={sampleSimpleData} />)
-    .add("Custom", () => {
+    .add("Standard", () => {
       const GROUP_IDS = {
-        DATA: "Data",
-        LABELS: "Labels"
+        LABELS: "Labels",
+        DATA: "Data"
       };
+      const title = text("Title", "Dogs with Money", GROUP_IDS.LABELS);
+      const subtitle = text(
+        "Subtitle",
+        "Dogs in Portland with a net worth greater than $1,000",
+        GROUP_IDS.LABELS
+      );
+      const xLabel = text("X-axis", "Year", GROUP_IDS.LABELS);
+      const yLabel = text("Y-axis", "Dogs", GROUP_IDS.LABELS);
+      const dataKey = text("Data key", "ye", GROUP_IDS.DATA);
+      const dataValue = text("Data values", "population", GROUP_IDS.DATA);
       const data = object(
         "Data",
         [
@@ -32,17 +41,6 @@ export default () =>
         ],
         GROUP_IDS.DATA
       );
-      const dataKey = text("Data key", "ye", GROUP_IDS.DATA);
-      const dataValue = text("Data values", "population", GROUP_IDS.DATA);
-      const xLabel = text("xLabel", "Year", GROUP_IDS.LABELS);
-      const yLabel = text("yLabel", "Dogs", GROUP_IDS.LABELS);
-      const title = text("title", "Dogs with Money", GROUP_IDS.LABELS);
-      const subtitle = text(
-        "subtitle",
-        "Dogs in Portland with a net worth greater than $1,000",
-        GROUP_IDS.LABELS
-      );
-
       return (
         <BarChart
           data={data}
