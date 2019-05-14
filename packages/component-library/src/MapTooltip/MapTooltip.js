@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { css } from "emotion";
+import { get } from "lodash";
 import window from "global/window";
 
 const tooltip = css`
@@ -29,7 +30,9 @@ const MapTooltip = props => {
   } = props;
 
   const xPosition =
-    x < window.innerWidth * 0.66 ? x : x - window.innerWidth * 0.1;
+    x < get(window, "innerWidth", 1000) * 0.66
+      ? x
+      : x - get(window, "innerWidth", 1000) * 0.1;
   const yPostition = y < 375 ? y : y - 50;
 
   return (

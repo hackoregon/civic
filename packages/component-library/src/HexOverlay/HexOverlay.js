@@ -5,6 +5,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import DeckGL, { HexagonLayer } from "deck.gl";
 import window from "global/window";
+import { has } from "lodash";
 
 const elevationScale = { min: 1, max: 50 };
 
@@ -39,7 +40,8 @@ class HexOverlay extends Component {
     this._stopAnimate();
 
     // wait 1.5 secs to start animation so that all data are loaded
-    this.startAnimationTimer = window.setTimeout(this._startAnimate, 1500);
+    this.startAnimationTimer =
+      has(window, "setTimeout") && window.setTimeout(this._startAnimate, 1500);
   }
 
   _animateHeight() {
@@ -51,12 +53,14 @@ class HexOverlay extends Component {
   }
 
   _startAnimate() {
-    this.intervalTimer = window.setInterval(this._animateHeight, 20);
+    this.intervalTimer =
+      has(window, "setInterval") && window.setInterval(this._animateHeight, 20);
   }
 
   _stopAnimate() {
-    window.clearTimeout(this.startAnimationTimer);
-    window.clearTimeout(this.intervalTimer);
+    has(window, "clearTimeout") &&
+      window.clearTimeout(this.startAnimationTimer);
+    has(window, "clearTimeout") && window.clearTimeout(this.intervalTimer);
   }
 
   render() {

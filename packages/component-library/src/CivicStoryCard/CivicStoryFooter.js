@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import copy from "copy-to-clipboard";
 import { css } from "emotion";
+import { get } from "lodash";
 import window from "global/window";
 import CivicStoryLink from "./CivicStoryLink";
 import { ICONS } from "../styleConstants";
@@ -48,7 +49,7 @@ export default class StoryFooter extends Component {
   handleCopy = () => {
     const { slug } = this.props;
     // NOTE: we need to make sure this will work on all browsers
-    copy(`${window.location.origin}/cards/${slug}`);
+    copy(`${get(window, "location.origin", "")}/cards/${slug}`);
     this.switchState(MS_TO_SWITCH_TEXT);
     this.setState({ copied: true });
   };
@@ -61,7 +62,8 @@ export default class StoryFooter extends Component {
     const shareTxt = copied ? "Link copied!" : "Share card"; // if copied, show Link copied, otherwise, show Share card
     const shareIcon = copied ? ICONS.check : ICONS.link;
     const routeOrUndefined =
-      `${window.location.origin}/cards/${slug}` === window.location.href
+      `${get(window, "location.origin", "")}/cards/${slug}` ===
+      get(window, "location.href", "")
         ? undefined
         : `/cards/${slug}`;
 

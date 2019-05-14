@@ -22,7 +22,9 @@ const MapTooltip = props => {
   const { y } = tooltipData;
 
   const xPosition =
-    x < window.innerWidth * 0.66 ? x : x - window.innerWidth * 0.1;
+    x < get(window, "innerWidth", 1000) * 0.66
+      ? x
+      : x - get(window, "innerWidth", 1000) * 0.1;
   const yPostition = y < 375 ? y : y - 50;
 
   const tooltipContent = tooltipData.content.map(obj => {

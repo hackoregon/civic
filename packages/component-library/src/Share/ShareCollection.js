@@ -31,7 +31,7 @@ export default class ShareCollection extends Component {
 
   handleCopy = () => {
     // NOTE: we need to make sure this will work on all browsers
-    copy(`${window.location.href}`);
+    copy(`${get(window, "location.href", "")}`);
     this.switchState(MS_TO_SWITCH_TEXT);
     this.setState({ copied: true });
   };
