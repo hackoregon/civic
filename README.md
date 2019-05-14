@@ -117,6 +117,15 @@ Run Storybook with the following command or [view it here](https://hackoregon.gi
 $ yarn storybook
 ```
 
+## Working on the component library and a project package simultaneuously
+
+In separate terminals, run the commands in both sections above. Project packages rely on the built version of the component library, so if you have updated the component library, and want to see your changes in the project package you are working on, you'll need to rebuild the component library. Once the component library build has finished, your project package will reload with the update components.
+
+```bash
+$ cd packages/component-library
+$ yarn build
+```
+
 ## Project Layout
 
 There are three types of packages right now:
