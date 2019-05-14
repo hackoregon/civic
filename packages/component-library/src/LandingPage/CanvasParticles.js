@@ -3,6 +3,7 @@
 
 import React from "react";
 import { css } from "emotion";
+import window from "global/window";
 
 const canvasStyles = css`
   position: fixed;

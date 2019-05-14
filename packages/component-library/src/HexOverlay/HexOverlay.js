@@ -4,6 +4,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import DeckGL, { HexagonLayer } from "deck.gl";
+import window from "global/window";
 
 const elevationScale = { min: 1, max: 50 };
 

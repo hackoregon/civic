@@ -4,6 +4,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import copy from "copy-to-clipboard";
+import window from "global/window";
+
 import StoryLink from "../StoryCard/StoryLink";
 import { ICONS } from "../styleConstants";
 

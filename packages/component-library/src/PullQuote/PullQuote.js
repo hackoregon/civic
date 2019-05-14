@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { css } from "emotion";
 import { TwitterShareButton, TwitterIcon } from "react-share";
+import window from "global/window";
 
 const quoteClass = css`
   font-family: "Merriweather", serif;

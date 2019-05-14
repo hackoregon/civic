@@ -5,6 +5,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import copy from "copy-to-clipboard";
 import { css } from "emotion";
+import window from "global/window";
+
 import StoryLink from "./StoryLink";
 import { ICONS } from "../styleConstants";
 

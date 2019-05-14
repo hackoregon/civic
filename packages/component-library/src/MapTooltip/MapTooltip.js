@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { css } from "emotion";
+import window from "global/window";
 
 const tooltip = css`
   font-family: Helvetica, Arial, sans-serif;

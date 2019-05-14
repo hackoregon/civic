@@ -3,6 +3,7 @@
 
 import React from "react";
 import { cx, css } from "emotion";
+import window from "global/window";
 
 import { Header, Footer } from "@hackoregon/component-library";
 import CanvasParticles from "./CanvasParticles";
