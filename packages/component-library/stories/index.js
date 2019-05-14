@@ -102,7 +102,7 @@ storiesOf("Design|UX Style Guide", module)
   .add("Terminology", () => <TerminologyStyle />);
 
 // Basic UI components
-storiesOf("Component Lib|Basic UI Components", module)
+storiesOf("Component Lib|Basic Inputs", module)
   .addDecorator(checkA11y)
   .add("UI Components Style Guide", () => <UIComponentsStyle />);
 buttonStory();

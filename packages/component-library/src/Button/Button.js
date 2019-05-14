@@ -2,23 +2,21 @@ import PropTypes from "prop-types";
 import React from "react";
 import { css } from "emotion";
 
-const accentColor = "#DC4556";
-const commonTransition = "all .2s ease-in-out";
 const buttonClass = props => css`
-  display: ${props.display || "block"};
+  display: ${props.display};
   margin: ${props.margin};
   padding: 6px;
   flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
-  transition: ${commonTransition};
+  transition: ${props.transition};
   font-size: 1em;
   font-family: "Rubik", sans-serif;
   font-weight: 500;
-  color: ${accentColor};
-  background: #fff;
+  color: ${props.accentColor};
+  background: ${props.bkgndColor};
   cursor: pointer;
-  border: 2px solid ${accentColor};
+  border: 2px solid ${props.accentColor};
 
   i {
     margin-right: 12px;
@@ -26,12 +24,12 @@ const buttonClass = props => css`
 
   span {
     flex-wrap: nowrap;
-    transition: ${commonTransition};
+    transition: ${props.transition};
   }
 
   &:hover {
-    background-color: ${accentColor};
-    color: #fff;
+    background-color: ${props.accentColor};
+    color: ${props.bkgndColor};
   }
 
   &:focus {
@@ -50,6 +48,14 @@ Button.displayName = "Button";
 Button.propTypes = {
   children: PropTypes.string,
   onClick: PropTypes.func
+};
+
+Button.defaultProps = {
+  display: "block",
+  margin: "12px",
+  accentColor: "#DC4556",
+  bkgndColor: "#FFFFFF",
+  transition: "all .2s ease-in-out"
 };
 
 export default Button;
