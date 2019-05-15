@@ -119,7 +119,7 @@ $ yarn storybook
 
 ## Working on the component library and a project package simultaneuously
 
-In separate terminals, run the commands in the **Working on a single package other than the component library** and **Working on the component library using Storybook** sections. Project packages rely on the built version of the component library, so if you have updated the component library, and want to see your changes in the project package you are working on, you'll need to rebuild the component library. Once the component library build has finished, your project package will reload with the update components.
+In separate terminals, run the commands in the **Working on a single package other than the component library** and **Working on the component library using Storybook** sections above. Project packages rely on the built version of the component library, so if you have updated the component library, and want to see your changes in the project package you are working on, you'll need to rebuild the component library. Once the component library build has finished, your project package will reload with the update components.
 
 ```bash
 $ cd packages/component-library
