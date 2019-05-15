@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router";
-import { PageLayout } from "@hackoregon/component-library";
 import CardRegistry from "../card-registry";
 
 const CardDetailPageEmbed = ({ params }) => {
@@ -25,6 +24,6 @@ CardDetailPageEmbed.propTypes = {
   params: PropTypes.string
 };
 
-CardDetailPageEmbed.displayName = "CardDetailPage";
+CardDetailPageEmbed.displayName = "CardDetailPageEmbed";
 
 export default CardDetailPageEmbed;
