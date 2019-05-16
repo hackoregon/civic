@@ -1,10 +1,6 @@
 ---
 to: packages/<%=package%>/src/components/<%=h.changeCase.pascal(card)%>/index.js
 ---
-<%StoryCardName = h.changeCase.pascal(card)%>
-<%storyCardName = h.changeCase.camel(card)%>
-<%slug = h.changeCase.param(card)%>
-<%title = h.changeCase.title(card)%>
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";

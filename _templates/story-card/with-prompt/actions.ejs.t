@@ -1,10 +1,7 @@
 ---
 to: packages/<%=package%>/src/state/<%=h.changeCase.param(card)%>/actions.js
 ---
-<%STORY_CARD_NAME = h.changeCase.constant(card)%>
-<%StoryCardName = h.changeCase.pascal(card)%>
-<%storyCardName = h.changeCase.camel(card)%>
-import apiAdapter from "../api-adapter";
+<%STORY_CARD_NAME = h.changeCase.constant(card)%><%StoryCardName = h.changeCase.pascal(card)%><%storyCardName = h.changeCase.camel(card)%><%slug = h.changeCase.param(card)%><%title = h.changeCase.title(card)%>import apiAdapter from "../api-adapter";
 import actionEmitter from "../api-adapter-action-emitter";
 
 export const API_START = "<%=STORY_CARD_NAME%>_OVER_TIME/START";
