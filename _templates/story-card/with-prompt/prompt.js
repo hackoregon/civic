@@ -4,7 +4,12 @@
 module.exports = [
   {
     type: "input",
-    name: "message",
-    message: "What's your message?"
+    name: "package",
+    message: "package name:"
+  },
+  {
+    type: "input",
+    name: "card",
+    message: "story card name:"
   }
 ];
