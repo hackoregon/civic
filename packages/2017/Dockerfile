@@ -7,10 +7,15 @@ WORKDIR /usr/src/app
 RUN apt-get update && apt-get install -y apt-transport-https
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-RUN apt-get update && apt-get install yarn
+RUN apt-get update && apt-get install -y yarn
 
-# Install app dependencies
+# Copy and clean the package.json file to remove invalid
+# packages since this won't be associated to the workspace
 COPY package*.json ./
+COPY clean-packages.js clean-packages.js
+RUN node clean-packages.js
+
+# Instal dependencies
 RUN yarn install --production=true
 
 # Bundle app source
