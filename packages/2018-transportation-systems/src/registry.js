@@ -1,3 +1,6 @@
+import WithReduxInfrastructure from "./components/WithReduxInfrastructure";
+import ReallyReallyFast from "./components/ReallyReallyFast";
+import ICanMakeCards from "./components/ICanMakeCards";
 import DeclineInRidership from "./components/DeclineInRidership";
 import HistoricalChangesToBusService from "./components/HistoricalChangesToBusService";
 import ServiceAndRidership from "./components/ServiceAndRidership";
@@ -8,6 +11,18 @@ import TheSecretIsInTheSensors from "./components/TheSecretIsInTheSensors";
 import DiveDeeperIntoTransportationData from "./components/DiveDeeperIntoTransportationData";
 
 export default [
+  {
+    slug: "with-redux-infrastructure",
+    component: WithReduxInfrastructure
+  },
+  {
+    slug: "really-really-fast",
+    component: ReallyReallyFast
+  },
+  {
+    slug: "i-can-make-cards",
+    component: ICanMakeCards
+  },
   {
     slug: "plateau-in-ridership",
     component: DeclineInRidership
