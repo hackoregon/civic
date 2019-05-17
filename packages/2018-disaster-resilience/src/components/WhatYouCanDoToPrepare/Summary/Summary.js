@@ -19,10 +19,10 @@ class Summary extends Component {
 
   quizResult() {
     const quizResults = this.props;
-    const quizzes = Object.keys(quizResults);
+    const quizzes = quizResults.quizResults;
     return quizzes.reduce((score, quiz) => {
       let currentScore = score;
-      if (quizResults[quiz] === "yes") {
+      if (quiz === "yes") {
         currentScore += 1;
       }
       return currentScore;
