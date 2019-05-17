@@ -10,7 +10,7 @@ const summaryFormat = {
 class Summary extends Component {
   getRecommendations() {
     const quizResults = this.props;
-    const resultsCopy = quizResults;
+    const resultsCopy = quizResults.quizResults;
     const noAnswers = Object.keys(resultsCopy)
       .filter(quizNum => resultsCopy[quizNum] === "no")
       .slice(0, 3);
