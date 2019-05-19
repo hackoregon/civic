@@ -16,8 +16,11 @@ const opacityOptions = {
 const getPosition = f =>
   f.geometry ? f.geometry.coordinates : [-124.664355, 45.615779];
 
-const getCircleColor = f =>
+const getFillColor = f =>
   f.properties.year_2017 > 1000 ? [255, 0, 0, 255] : [0, 0, 255, 255];
+
+const getLineColor = f =>
+  f.properties.year_2017 > 1000 ? [0, 0, 255, 255] : [255, 0, 0, 255];
 
 const getCircleRadius = f => Math.sqrt(f.properties.year_2017 / Math.PI) * 15;
 
@@ -28,7 +31,7 @@ const radiusScaleOptions = {
   step: 0.5
 };
 
-const strokeWidthOptions = {
+const lineWidthOptions = {
   range: true,
   min: 0,
   max: 20,
@@ -46,19 +49,20 @@ const demoMap = () => (
     {data => {
       const opacity = number("Opacity:", 0.1, opacityOptions);
       const radiusScale = number("Radius Scale:", 1, radiusScaleOptions);
-      const outline = boolean("Stroke Only:", false);
-      const strokeWidth = number("Stroke Width:", 1, strokeWidthOptions);
+      const stroked = boolean("Stroke Only:", false);
+      const getLineWidth = number("Line Width:", 1, lineWidthOptions);
       return (
         <BaseMap>
           <ScatterPlotMap
             data={data.slide_data.features}
             getPosition={getPosition}
             opacity={opacity}
-            getColor={getCircleColor}
+            getFillColor={getFillColor}
+            getLineColor={getLineColor}
             getRadius={getCircleRadius}
             radiusScale={radiusScale}
-            outline={outline}
-            strokeWidth={strokeWidth}
+            stroked={stroked}
+            getLineWidth={getLineWidth}
             autoHighlight
             highlightColor={highlightColor}
             onLayerClick={info =>
@@ -76,19 +80,20 @@ const tooltipMap = () => (
     {data => {
       const opacity = number("Opacity:", 0.1, opacityOptions);
       const radiusScale = number("Radius Scale:", 1, radiusScaleOptions);
-      const outline = boolean("Stroke Only:", false);
-      const strokeWidth = number("Stroke Width:", 1, strokeWidthOptions);
+      const stroked = boolean("Stroke Only:", false);
+      const getLineWidth = number("Line Width:", 1, lineWidthOptions);
       return (
         <BaseMap>
           <ScatterPlotMap
             data={data.slide_data.features}
             getPosition={getPosition}
             opacity={opacity}
-            getColor={getCircleColor}
+            getFillColor={getFillColor}
+            getLineColor={getLineColor}
             getRadius={getCircleRadius}
             radiusScale={radiusScale}
-            outline={outline}
-            strokeWidth={strokeWidth}
+            stroked={stroked}
+            getLineWidth={getLineWidth}
             autoHighlight
             highlightColor={highlightColor}
             onLayerClick={info =>
