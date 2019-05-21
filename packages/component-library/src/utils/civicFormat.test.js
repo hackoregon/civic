@@ -23,6 +23,10 @@ describe("civicFormat", () => {
     expect(civicFormat.numericShort(73000000000)).to.eql("73b");
   });
 
+  it("takes decimal, changes to percentage", () => {
+    // test goes here
+  });
+
   it("should format percentages correctly", () => {
     expect(civicFormat.percentage(0.75)).to.eql("75%");
     expect(civicFormat.percentage(0.2379)).to.eql("24%");
