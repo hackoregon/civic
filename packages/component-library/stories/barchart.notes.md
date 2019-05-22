@@ -14,10 +14,10 @@ The Standard story shows the standard usage of BarChart for the CIVIC platform; 
 
 ## Custom
 
-The Custom story shows all possible properties that can be passed to the BarChart for customization. They include the properties in the Standard, plus these:
+The Custom story shows all possible properties that can be passed to the BarChart for customization. They include the properties in the Standard BarChart story, plus these:
 
+- Bar width
 - Loading message
 - Error message
-- xNumberFormatter (year format) (use an options list)
-- yNumberFormatter (number format) (use an options list)
-- Bar width
+- Data key format
+- Data format

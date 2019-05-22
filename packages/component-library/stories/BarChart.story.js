@@ -91,39 +91,28 @@ export default () =>
         const barWidth = number("Bar width", 37, {}, GROUP_IDS.CUSTOM);
         const loading = boolean("Loading...", false, GROUP_IDS.CUSTOM);
         const error = boolean("Error", false, GROUP_IDS.CUSTOM);
-
-        const xFormatterOptions = {
-          numeric: civicFormat.numeric,
-          year: civicFormat.year
-          // Other format types:
-          //  percentage: civicFormat.percentage,
-          //  dollars: civicFormat.dollars,
-          //  titleCase: civicFormat.titleCase,
-          //  unformatted: civicFormat.unformatted,
-          //  monthYear: civicFormat.monthYear
+        const getKeys = obj => {
+          const allKeys = Object.keys(obj);
+          let keyObject = {};
+          allKeys.forEach(item => (keyObject[item] = item));
+          return keyObject;
         };
-        const optionRadio = options(
+        const xFormatterOptions = getKeys(civicFormat);
+        const yFormatterOptions = getKeys(civicFormat);
+        const optionRadioX = options(
           "Data key format",
           xFormatterOptions,
-          civicFormat.year,
+          "year",
           { display: "radio" },
           GROUP_IDS.CUSTOM
         );
-
-        // Y is "Data value format"
-
-        // var civicFormat = {
-        //   numeric: numeric,
-        //   year: year,
-        //   percentage: percentage,
-        //   dollars: dollars,
-        //   titleCase: titleCase,
-        //   unformatted: unformatted,
-        //   monthYear: monthYear
-        // };
-
-        // xNumberFormatter={x => civicFormat.year(x)}
-        // yNumberFormatter={y => civicFormat.dollars(y)}
+        const optionRadioY = options(
+          "Data format",
+          yFormatterOptions,
+          "numeric",
+          { display: "radio" },
+          GROUP_IDS.CUSTOM
+        );
 
         return (
           <BarChart
@@ -137,8 +126,8 @@ export default () =>
             barWidth={barWidth}
             loading={loading}
             error={error}
-            // This works:
-            xNumberFormatter={value => `${value}%`}
+            xNumberFormatter={x => civicFormat[optionRadioX](x)}
+            yNumberFormatter={y => civicFormat[optionRadioY](y)}
           />
         );
       },
