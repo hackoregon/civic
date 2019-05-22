@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { withKnobs, number, select } from "@storybook/addon-knobs";
+import { withKnobs, select } from "@storybook/addon-knobs";
 import { checkA11y } from "@storybook/addon-a11y";
 import { HeatMap, DemoJSONLoader } from "../src";
 
@@ -130,12 +130,7 @@ const heatmapComponent = data => {
       "rgb(175, 240, 91)"
     ]
   };
-  const colorScale = select(
-    "Heat Color",
-    colorOptions,
-    colorOptions.Plasma,
-    "Heat Map"
-  );
+  const colorScale = select("Heat Color", colorOptions, colorOptions.Plasma);
 
   const heatMapColorScale = [
     "interpolate",
@@ -229,34 +224,10 @@ export default () =>
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .add("Simple usage", () => {
-      const selectionOptions = {
-        "Single Family":
-          "?new_type=Single+Family+Dwelling&new_class=New+Construction&is_adu=false",
-        "Multi Family":
-          "?new_type=Apartments/Condos,Duplex,Rowhouse,Townhouse&new_class=New+Construction&is_adu=false",
-        "Accessory Dwelling Units":
-          "?new_class=New+Construction,Alteration,Addition&is_adu=true"
-      };
-      const selection = select(
-        "Data:",
-        selectionOptions,
-        selectionOptions["Single Family"],
-        "Heat Map"
-      );
-
-      const yearOptions = {
-        range: true,
-        min: 1995,
-        max: 2016,
-        step: 1
-      };
-      const year = number("Year", 1995, yearOptions, "Heat Map");
-
-      const base =
-        "https://service.civicpdx.org/housing-affordability/api/permits/";
-      const options = "&format=json&limit=30000&year=";
-      const url = base + selection + options + year;
-
+      const url =
+        "https://service.civicpdx.org/housing-affordability/api/permits/" +
+        "?new_type=Apartments/Condos,Duplex,Rowhouse,Townhouse&new_class=New+Construction&is_adu=false" +
+        "&format=json&limit=3000&year=2015";
       return (
         <DemoJSONLoader urls={[url]}>
           {data => heatmapComponent(data)}
