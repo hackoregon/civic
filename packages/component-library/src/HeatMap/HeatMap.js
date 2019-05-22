@@ -22,6 +22,9 @@ class HeatMap extends React.Component {
     const heatmapId = `heat-layer-${this.props.id}`;
     const circleId = `circle-layer-${this.props.id}`;
 
+    mapboxgl.accessToken =
+      "pk.eyJ1IjoiaGFja29yZWdvbiIsImEiOiJjamk0MGZhc2cwNDl4M3FsdHAwaG54a3BnIn0.Fq1KA0IUwpeKQlFIoaEn_Q";
+
     this.map = new mapboxgl.Map({
       container: this.mapContainer,
       style: this.props.mapStyle,
