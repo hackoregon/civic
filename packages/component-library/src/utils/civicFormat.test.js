@@ -24,7 +24,16 @@ describe("civicFormat", () => {
   });
 
   it("takes decimal, changes to percentage", () => {
-    // test goes here
+    expect(civicFormat.decimalToPercent(0)).to.eql("0%");
+    expect(civicFormat.decimalToPercent(0.3456)).to.eql("34.6%");
+    expect(civicFormat.decimalToPercent(1.3456)).to.eql("134.6%");
+    expect(civicFormat.decimalToPercent(-1.3456)).to.eql("-134.6%");
+    expect(civicFormat.decimalToPercent(1)).to.eql("100%");
+    expect(civicFormat.decimalToPercent(10)).to.eql("1,000%");
+    expect(civicFormat.decimalToPercent(100)).to.eql("10,000%");
+    expect(civicFormat.decimalToPercent(1000)).to.eql("100,000%");
+    expect(civicFormat.decimalToPercent(10000)).to.eql("1,000,000%");
+    expect(civicFormat.decimalToPercent(-10000)).to.eql("-1,000,000%");
   });
 
   it("should format percentages correctly", () => {
@@ -37,6 +46,4 @@ describe("civicFormat", () => {
     expect(civicFormat.dollars(230.5)).to.eql("$231");
     expect(civicFormat.dollars(7300000)).to.eql("$7.3 million");
   });
-
-  it("abreviates 2000 to 2k", () => {});
 });

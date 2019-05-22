@@ -71,6 +71,18 @@ const numericShort = d => {
   return formatted;
 };
 
+const decimalToPercent = num => {
+  let formated;
+
+  if (Number.isInteger(num)) {
+    formated = format(",~%")(num);
+  } else {
+    formated = format(",.1%")(num);
+  }
+
+  return formated;
+};
+
 const year = format(".0f");
 const percentage = format(".0%");
 const dollars = d => `$${numeric(d)}`;
@@ -87,7 +99,8 @@ const civicFormat = {
   titleCase,
   unformatted,
   monthYear,
-  numericShort
+  numericShort,
+  decimalToPercent
 };
 
 export default civicFormat;
