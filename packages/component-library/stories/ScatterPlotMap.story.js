@@ -1,7 +1,7 @@
 import React from "react";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
-import { withKnobs, number, boolean } from "@storybook/addon-knobs";
+import { withKnobs, number, boolean, text } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 import { checkA11y } from "@storybook/addon-a11y";
 import { BaseMap, ScatterPlotMap, MapTooltip, DemoJSONLoader } from "../src";
@@ -36,6 +36,13 @@ const lineWidthOptions = {
   min: 0,
   max: 20,
   step: 0.5
+};
+
+const radiusOptions = {
+  range: true,
+  min: 0,
+  max: 100,
+  step: 1
 };
 
 const highlightColor = [255, 165, 0, 155];
@@ -113,9 +120,43 @@ const tooltipMap = () => (
   </DemoJSONLoader>
 );
 
+const sandboxFormStory = () => {
+  const url = text(
+    "Data url:",
+    "https://service.civicpdx.org/neighborhood-development/sandbox/slides/bikeparking/"
+  );
+  return (
+    <DemoJSONLoader urls={[url]}>
+      {data => {
+        const opacity = number("Opacity:", 0.1, opacityOptions);
+        const radius = number("Radius:", 1, radiusOptions);
+        const stroked = boolean("Stroke:", false);
+        const getLineWidth = number("Stroke Width:", 1, lineWidthOptions);
+        return (
+          <BaseMap initialZoom={14} updateViewport={false}>
+            <ScatterPlotMap
+              data={data.slide_data.features}
+              getPosition={getPosition}
+              opacity={opacity}
+              getFillColor={getFillColor}
+              getLineColor={getLineColor}
+              getRadius={() => radius}
+              stroked={stroked}
+              getLineWidth={getLineWidth}
+              autoHighlight
+              highlightColor={highlightColor}
+            />
+          </BaseMap>
+        );
+      }}
+    </DemoJSONLoader>
+  );
+};
+
 export default () =>
   storiesOf("Component Lib|Maps/Scatterplot Map", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .add("Simple usage", demoMap)
-    .add("With tooltip", tooltipMap);
+    .add("With tooltip", tooltipMap)
+    .add("Sandbox Form", sandboxFormStory);

@@ -58,6 +58,7 @@ const ScatterPlotMap = props => {
           getLineColor={getLineColor}
           getLineWidth={getLineWidth}
           getFillColor={getFillColor}
+          updateTriggers={{ getRadius }}
         />
       </DeckGL>
       {tooltipRender}
@@ -70,7 +71,7 @@ ScatterPlotMap.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   getPosition: PropTypes.func,
   opacity: PropTypes.number,
-  getRadius: PropTypes.func,
+  getRadius: PropTypes.oneOfType([PropTypes.func, PropTypes.number]),
   radiusScale: PropTypes.number,
   autoHighlight: PropTypes.bool,
   highlightColor: PropTypes.arrayOf(PropTypes.number),
@@ -83,7 +84,7 @@ ScatterPlotMap.propTypes = {
   children: PropTypes.node,
   stroked: PropTypes.bool,
   getLineColor: PropTypes.func,
-  getLineWidth: PropTypes.func,
+  getLineWidth: PropTypes.oneOfType([PropTypes.func, PropTypes.number]),
   getFillColor: PropTypes.func
 };
 
