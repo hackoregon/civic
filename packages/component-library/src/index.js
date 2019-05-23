@@ -10,7 +10,6 @@ export { default as Button } from "./Button/Button";
 export { default as StoryCard } from "./StoryCard/StoryCard";
 export { default as CivicStoryCard } from "./CivicStoryCard/CivicStoryCard";
 export { default as PageLayout } from "./PageLayout/PageLayout";
-export { default as Chart } from "./Chart/Chart";
 export { default as ChartData } from "./ChartData/ChartData";
 export { default as PieChart } from "./PieChart/PieChart";
 export { default as Slider } from "./Slider/Slider";
