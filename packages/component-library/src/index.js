@@ -22,7 +22,6 @@ export { default as Placeholder } from "./Placeholder/Placeholder";
 export { default as Tag } from "./Tag/Tag";
 export { default as Scatterplot } from "./Scatterplot/Scatterplot";
 export { default as Logo } from "./Logo/Logo";
-export { default as ShareCollection } from "./Share/ShareCollection";
 export { default as isClient } from "./utils/isClient";
 export { default as CivicVictoryTheme } from "./VictoryTheme/VictoryThemeIndex";
 export { default as CollectionHero } from "./Hero/CollectionHero";
