@@ -1,6 +1,7 @@
 import React from "react";
 import { string, number, arrayOf, oneOfType, shape } from "prop-types";
 import { css } from "emotion";
+import { get } from "lodash";
 import window from "global/window";
 
 const tooltip = css`
@@ -31,7 +32,7 @@ const MapTooltip = props => {
     const value = obj.value ? obj.value : "No Data Available";
     return (
       <div key={`${obj.name}-${value}`}>
-        {obj.name + ": " + value.toLocaleString()}
+        {`${obj.name}: ${value.toLocaleString()}`}
       </div>
     );
   });

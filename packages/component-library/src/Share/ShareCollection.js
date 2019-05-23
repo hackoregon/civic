@@ -4,6 +4,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import copy from "copy-to-clipboard";
+import { get } from "lodash";
 import window from "global/window";
 
 import StoryLink from "../StoryCard/StoryLink";
