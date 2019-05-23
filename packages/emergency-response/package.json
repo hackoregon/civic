@@ -29,7 +29,7 @@
     "start:dev": "cross-env NODE_ENV=development babel-node server",
     "start:prod:": "cross-env NODE_ENV=production node server",
     "test": "cross-env BABEL_ENV=test mocha --opts ./mocha.opts 'src/**/*.test.js'",
-    "lint": "eslint --fix src"
+    "lint": "eslint src"
   },
   "dependencies": {
     "@hackoregon/component-library": "^3.0.0",

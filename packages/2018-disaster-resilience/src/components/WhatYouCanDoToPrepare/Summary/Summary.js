@@ -10,7 +10,7 @@ const summaryFormat = {
 class Summary extends Component {
   getRecommendations() {
     const quizResults = this.props;
-    const resultsCopy = quizResults;
+    const resultsCopy = quizResults.quizResults;
     const noAnswers = Object.keys(resultsCopy)
       .filter(quizNum => resultsCopy[quizNum] === "no")
       .slice(0, 3);
@@ -19,10 +19,10 @@ class Summary extends Component {
 
   quizResult() {
     const quizResults = this.props;
-    const quizzes = Object.keys(quizResults);
+    const quizzes = quizResults.quizResults;
     return quizzes.reduce((score, quiz) => {
       let currentScore = score;
-      if (quizResults[quiz] === "yes") {
+      if (quiz === "yes") {
         currentScore += 1;
       }
       return currentScore;

@@ -3,20 +3,19 @@
 import React from "react";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
-import { text, array } from "@storybook/addon-knobs";
 import { CivicStoryCard, HorizontalBarChart, Collapsable } from "../src";
 import { wallOfRichText, wallOfText } from "./shared";
 
-const data = array("Data", [
+const data = [
   { sortOrder: 1, population: 2000, label: "Labrador Retriever" },
   { sortOrder: 2, population: 8000, label: "Standard Poodle" },
   { sortOrder: 3, population: 6000, label: "French Bulldog" },
   { sortOrder: 4, population: 3000, label: "Afghan Hound" },
   { sortOrder: 5, population: 1000, label: "Jack Russell Terrier" }
-]);
-const dataKey = text("Data key", "sortOrder");
-const dataValue = text("Data values", "population");
-const dataKeyLabel = text("Data key labels", "label");
+];
+const dataKey = "sortOrder";
+const dataValue = "population";
+const dataKeyLabel = "label";
 
 const Container = ({ children }) => (
   <div style={{ padding: "30px" }}>{children}</div>
@@ -35,9 +34,9 @@ const tdvDemo = () => (
       <div style={{ display: "flex", justifyContent: "space-around" }}>
         <HorizontalBarChart
           data={data}
-          dataKey={dataKey}
+          sortOrder={dataKey}
           dataValue={dataValue}
-          dataKeyLabel={dataKeyLabel}
+          dataLabel={dataKeyLabel}
         />
       </div>
       <p className="Description">{wallOfRichText}</p>
@@ -52,9 +51,9 @@ const collapsableDemo = () => (
           <div style={{ display: "flex", justifyContent: "space-around" }}>
             <HorizontalBarChart
               data={data}
-              dataKey={dataKey}
+              sortOrder={dataKey}
               dataValue={dataValue}
-              dataKeyLabel={dataKeyLabel}
+              dataLabel={dataKeyLabel}
             />
           </div>
         </Collapsable.Section>

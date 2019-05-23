@@ -69,6 +69,7 @@ import UIComponentsStyle from "./styleGuideStories/UIComponentsStyle.story";
 import "../assets/global.styles.css";
 
 storiesOf("Welcome|About Us", module)
+  .addParameters({ options: { showPanel: false } })
   .addDecorator(checkA11y)
   .add("Introduction", () => <Introduction />)
   .add("The CIVIC Brand", () => <TheBrandStyle />)
@@ -76,6 +77,7 @@ storiesOf("Welcome|About Us", module)
 
 // Branding
 storiesOf("Design|Brand", module)
+  .addParameters({ options: { showPanel: false } })
   .addDecorator(checkA11y)
   .add("Logos", () => <LogosStyle />)
   .add("Color Theme", () => <ColorThemeStyle />)
@@ -90,6 +92,7 @@ storiesOf("Design|Brand", module)
 
 // UX Style Guide
 storiesOf("Design|UX Style Guide", module)
+  .addParameters({ options: { showPanel: false } })
   .addDecorator(checkA11y)
   .add("Accessibility", () => <AccessibilityGuidelinesStyle />)
   .add("Story Cards", () => <CardsStyle />)
@@ -102,7 +105,8 @@ storiesOf("Design|UX Style Guide", module)
   .add("Terminology", () => <TerminologyStyle />);
 
 // Basic UI components
-storiesOf("Component Lib|Basic UI Components", module)
+storiesOf("Component Lib|Basic Inputs", module)
+  .addParameters({ options: { showPanel: false } })
   .addDecorator(checkA11y)
   .add("UI Components Style Guide", () => <UIComponentsStyle />);
 buttonStory();
@@ -111,6 +115,7 @@ sliderStory();
 
 // charts
 storiesOf("Component Lib|Charts", module)
+  .addParameters({ options: { showPanel: false } })
   .addDecorator(checkA11y)
   .add("Charts Style Guide", () => <ChartsStyle />);
 BarChartStory();
@@ -124,6 +129,7 @@ stackedAreaChart();
 
 // maps
 storiesOf("Component Lib|Maps", module)
+  .addParameters({ options: { showPanel: false } })
   .addDecorator(checkA11y)
   .add("Maps Style Guide", () => <MapsStyle />);
 baseMapStory();
@@ -139,6 +145,7 @@ screenGridMapStory();
 
 // Civic platform components and page layout
 storiesOf("Component Lib|CIVIC Platform", module)
+  .addParameters({ options: { showPanel: false } })
   .addDecorator(checkA11y)
   .add("Platform Components Style Guide", () => <CivicPlatformStyle />);
 civicCardStackStory();
