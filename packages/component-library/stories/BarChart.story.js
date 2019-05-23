@@ -14,16 +14,25 @@ import {
 import notes from "./barchart.notes.md";
 import { BarChart } from "../src";
 
+const GROUP_IDS = {
+  LABELS: "Labels",
+  DATA: "Data",
+  CUSTOM: "Custom"
+};
+const getKeyNames = obj => {
+  const keyNames = {};
+  Object.keys(obj).forEach(key => {
+    keyNames[key] = key;
+  });
+  return keyNames;
+};
+
 export default () =>
   storiesOf("Component Lib|Charts/Bar Chart", module)
     .addDecorator(withKnobs)
     .add(
       "Standard",
       () => {
-        const GROUP_IDS = {
-          LABELS: "Labels",
-          DATA: "Data"
-        };
         const title = text("Title", "Dogs with Money", GROUP_IDS.LABELS);
         const subtitle = text(
           "Subtitle",
@@ -31,7 +40,23 @@ export default () =>
           GROUP_IDS.LABELS
         );
         const xLabel = text("X-axis label", "Year", GROUP_IDS.LABELS);
+        const xFormatterOptions = getKeyNames(civicFormat);
+        const optionSelectX = options(
+          "X-axis value format",
+          xFormatterOptions,
+          "year",
+          { display: "select" },
+          GROUP_IDS.LABELS
+        );
         const yLabel = text("Y-axis label", "Dogs", GROUP_IDS.LABELS);
+        const yFormatterOptions = getKeyNames(civicFormat);
+        const optionSelectY = options(
+          "Y-axis value format",
+          yFormatterOptions,
+          "numeric",
+          { display: "select" },
+          GROUP_IDS.LABELS
+        );
         const dataKey = text("Data key", "ye", GROUP_IDS.DATA);
         const dataValue = text("Data values", "population", GROUP_IDS.DATA);
         const data = object(
@@ -54,6 +79,8 @@ export default () =>
             subtitle={subtitle}
             xLabel={xLabel}
             yLabel={yLabel}
+            xNumberFormatter={x => civicFormat[optionSelectX](x)}
+            yNumberFormatter={y => civicFormat[optionSelectY](y)}
           />
         );
       },
@@ -62,11 +89,6 @@ export default () =>
     .add(
       "Custom",
       () => {
-        const GROUP_IDS = {
-          LABELS: "Labels",
-          DATA: "Data",
-          CUSTOM: "Custom"
-        };
         const title = text("Title", "Dogs with Money", GROUP_IDS.LABELS);
         const subtitle = text(
           "Subtitle",
@@ -74,7 +96,23 @@ export default () =>
           GROUP_IDS.LABELS
         );
         const xLabel = text("X-axis label", "Year", GROUP_IDS.LABELS);
+        const xFormatterOptions = getKeyNames(civicFormat);
+        const optionSelectX = options(
+          "X-axis value format",
+          xFormatterOptions,
+          "year",
+          { display: "select" },
+          GROUP_IDS.LABELS
+        );
         const yLabel = text("Y-axis label", "Dogs", GROUP_IDS.LABELS);
+        const yFormatterOptions = getKeyNames(civicFormat);
+        const optionSelectY = options(
+          "Y-axis value format",
+          yFormatterOptions,
+          "numeric",
+          { display: "select" },
+          GROUP_IDS.LABELS
+        );
         const dataKey = text("Data key", "ye", GROUP_IDS.DATA);
         const dataValue = text("Data values", "population", GROUP_IDS.DATA);
         const data = object(
@@ -89,30 +127,8 @@ export default () =>
           GROUP_IDS.DATA
         );
         const barWidth = number("Bar width", 37, {}, GROUP_IDS.CUSTOM);
-        const loading = boolean("Loading...", false, GROUP_IDS.CUSTOM);
+        const loading = boolean("Loading", false, GROUP_IDS.CUSTOM);
         const error = boolean("Error", false, GROUP_IDS.CUSTOM);
-        const getKeys = obj => {
-          const allKeys = Object.keys(obj);
-          let keyObject = {};
-          allKeys.forEach(item => (keyObject[item] = item));
-          return keyObject;
-        };
-        const xFormatterOptions = getKeys(civicFormat);
-        const yFormatterOptions = getKeys(civicFormat);
-        const optionRadioX = options(
-          "Data key format",
-          xFormatterOptions,
-          "year",
-          { display: "radio" },
-          GROUP_IDS.CUSTOM
-        );
-        const optionRadioY = options(
-          "Data format",
-          yFormatterOptions,
-          "numeric",
-          { display: "radio" },
-          GROUP_IDS.CUSTOM
-        );
 
         return (
           <BarChart
@@ -126,8 +142,8 @@ export default () =>
             barWidth={barWidth}
             loading={loading}
             error={error}
-            xNumberFormatter={x => civicFormat[optionRadioX](x)}
-            yNumberFormatter={y => civicFormat[optionRadioY](y)}
+            xNumberFormatter={x => civicFormat[optionSelectX](x)}
+            yNumberFormatter={y => civicFormat[optionSelectY](y)}
           />
         );
       },
