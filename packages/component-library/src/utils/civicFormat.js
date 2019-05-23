@@ -61,7 +61,7 @@ const abbreviateLargeShort = number => {
 const numericShort = d => {
   let formatted;
 
-  // We want to specifically format numbers greater than one million.
+  // We want to specifically format numbers greater than one thousand.
   if (Math.abs(d) >= 1000) {
     formatted = abbreviateLargeShort(d);
   } else {
@@ -72,15 +72,15 @@ const numericShort = d => {
 };
 
 const decimalToPercent = num => {
-  let formated;
+  let formatted;
 
   if (Number.isInteger(num)) {
-    formated = format(",~%")(num);
+    formatted = format(",~%")(num);
   } else {
-    formated = format(",.1%")(num);
+    formatted = format(",.1%")(num);
   }
 
-  return formated;
+  return formatted;
 };
 
 const year = format(".0f");
