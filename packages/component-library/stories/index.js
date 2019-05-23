@@ -63,7 +63,6 @@ import UIComponentsStyle from "./styleGuideStories/UIComponentsStyle.story";
 // import storyLinkStory from './StoryLink.story';
 // import storyFooterStory from './StoryFooter.story';
 // import editableStory from './Editable.story';
-// import sankeyStory from './Sankey.story';
 // import landingPage from './LandingPage.story';
 
 import "../assets/global.styles.css";
