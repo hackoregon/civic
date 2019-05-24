@@ -10,19 +10,13 @@ import {
   optionsKnob as options
 } from "@storybook/addon-knobs";
 import { HorizontalBarChart, civicFormat } from "../src";
+import { getKeyNames } from "./shared";
 import notes from "./horizontalBarChart.notes.md";
 
 const GROUP_IDS = {
   LABELS: "Labels",
   DATA: "Data",
   CUSTOM: "Custom"
-};
-const getKeyNames = obj => {
-  const keyNames = {};
-  Object.keys(obj).forEach(key => {
-    keyNames[key] = key;
-  });
-  return keyNames;
 };
 
 export default () =>
