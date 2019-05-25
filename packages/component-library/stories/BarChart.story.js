@@ -1,8 +1,6 @@
 import React from "react";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
-import civicFormat from "../src/utils/civicFormat";
-
 import {
   withKnobs,
   text,
@@ -11,6 +9,9 @@ import {
   number,
   optionsKnob as options
 } from "@storybook/addon-knobs";
+import civicFormat from "../src/utils/civicFormat";
+
+import { getKeyNames } from "./shared";
 import notes from "./barchart.notes.md";
 import { BarChart } from "../src";
 
@@ -18,13 +19,6 @@ const GROUP_IDS = {
   LABELS: "Labels",
   DATA: "Data",
   CUSTOM: "Custom"
-};
-const getKeyNames = obj => {
-  const keyNames = {};
-  Object.keys(obj).forEach(key => {
-    keyNames[key] = key;
-  });
-  return keyNames;
 };
 
 export default () =>
