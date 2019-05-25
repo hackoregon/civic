@@ -1,0 +1,5 @@
+# HorizontalBarChart Component
+
+## Standard
+
+## Custom
