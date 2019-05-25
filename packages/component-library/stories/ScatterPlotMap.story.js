@@ -19,6 +19,12 @@ const opacityOptions = {
   step: 0.05
 };
 
+// const getPositionLoop = f => {
+//   return f.map(feature => {
+//     return feature.geometry ? feature.geometry.coordinates : [-124.664355, 45.615779]
+//   })
+// }
+
 const getPosition = f =>
   f.geometry ? f.geometry.coordinates : [-124.664355, 45.615779];
 
@@ -76,14 +82,10 @@ export default () =>
           lineWidthOptions,
           GROUP_IDS.MARKER
         );
+
         return (
           <DemoJSONLoader urls={mapData}>
             {allData => {
-              const getPositionKnob = number(
-                "Position",
-                getPosition,
-                GROUP_IDS.DATA
-              );
               const data = object(
                 "Data",
                 allData.slide_data.features,
@@ -93,7 +95,64 @@ export default () =>
                 <BaseMap>
                   <ScatterPlotMap
                     data={data}
-                    getPosition={getPositionKnob}
+                    getPosition={getPosition}
+                    opacity={opacity}
+                    getFillColor={getFillColor}
+                    getLineColor={getLineColor}
+                    getRadius={getCircleRadius}
+                    radiusScale={radiusScale}
+                    stroked={stroked}
+                    getLineWidth={getLineWidth}
+                    autoHighlight
+                    highlightColor={highlightColor}
+                    onLayerClick={info =>
+                      action("Layer clicked:", { depth: 2 })(info, info.object)
+                    }
+                  />
+                </BaseMap>
+              );
+            }}
+          </DemoJSONLoader>
+        );
+      },
+      { notes }
+    )
+    .add(
+      "Custom",
+      () => {
+        const opacity = number(
+          "Opacity:",
+          0.1,
+          opacityOptions,
+          GROUP_IDS.MARKER
+        );
+        const radiusScale = number(
+          "Radius Scale:",
+          1,
+          radiusScaleOptions,
+          GROUP_IDS.MARKER
+        );
+        const stroked = boolean("Stroke Only:", false, GROUP_IDS.MARKER);
+        const getLineWidth = number(
+          "Line Width:",
+          1,
+          lineWidthOptions,
+          GROUP_IDS.MARKER
+        );
+
+        return (
+          <DemoJSONLoader urls={mapData}>
+            {allData => {
+              const data = object(
+                "Data",
+                allData.slide_data.features,
+                GROUP_IDS.DATA
+              );
+              return (
+                <BaseMap>
+                  <ScatterPlotMap
+                    data={data}
+                    getPosition={getPosition}
                     opacity={opacity}
                     getFillColor={getFillColor}
                     getLineColor={getLineColor}
