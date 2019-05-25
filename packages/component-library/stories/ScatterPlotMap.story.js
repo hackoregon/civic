@@ -1,11 +1,23 @@
 import React from "react";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
-import { withKnobs, number, boolean, object } from "@storybook/addon-knobs";
+import {
+  withKnobs,
+  number,
+  boolean,
+  object,
+  color
+} from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 import { checkA11y } from "@storybook/addon-a11y";
 import { BaseMap, ScatterPlotMap, MapTooltip, DemoJSONLoader } from "../src";
 import notes from "./ScatterPlotMap.notes.md";
+
+const mapData = [
+  "https://service.civicpdx.org/neighborhood-development/sandbox/slides/bikecounts/"
+];
+
+const highlightColor = [255, 165, 0, 155];
 
 const GROUP_IDS = {
   MARKER: "Marker",
@@ -18,23 +30,6 @@ const opacityOptions = {
   max: 1,
   step: 0.05
 };
-
-// const getPositionLoop = f => {
-//   return f.map(feature => {
-//     return feature.geometry ? feature.geometry.coordinates : [-124.664355, 45.615779]
-//   })
-// }
-
-const getPosition = f =>
-  f.geometry ? f.geometry.coordinates : [-124.664355, 45.615779];
-
-const getFillColor = f =>
-  f.properties.year_2017 > 1000 ? [255, 0, 0, 255] : [0, 0, 255, 255];
-
-const getLineColor = f =>
-  f.properties.year_2017 > 1000 ? [0, 0, 255, 255] : [255, 0, 0, 255];
-
-const getCircleRadius = f => Math.sqrt(f.properties.year_2017 / Math.PI) * 15;
 
 const radiusScaleOptions = {
   range: true,
@@ -50,11 +45,16 @@ const lineWidthOptions = {
   step: 0.5
 };
 
-const highlightColor = [255, 165, 0, 155];
+const getPosition = f =>
+  f.geometry ? f.geometry.coordinates : [-124.664355, 45.615779];
 
-const mapData = [
-  "https://service.civicpdx.org/neighborhood-development/sandbox/slides/bikecounts/"
-];
+const getFillColorStandard = f =>
+  f.properties.year_2017 > 1000 ? [255, 0, 0, 255] : [0, 0, 255, 255];
+
+const getLineColorStandard = f =>
+  f.properties.year_2017 > 1000 ? [0, 0, 255, 255] : [255, 0, 0, 255];
+
+const getCircleRadius = f => Math.sqrt(f.properties.year_2017 / Math.PI) * 15;
 
 export default () =>
   storiesOf("Component Lib|Maps/Scatterplot Map", module)
@@ -75,14 +75,6 @@ export default () =>
           radiusScaleOptions,
           GROUP_IDS.MARKER
         );
-        const stroked = boolean("Stroke Only:", false, GROUP_IDS.MARKER);
-        const getLineWidth = number(
-          "Line Width:",
-          1,
-          lineWidthOptions,
-          GROUP_IDS.MARKER
-        );
-
         return (
           <DemoJSONLoader urls={mapData}>
             {allData => {
@@ -97,12 +89,12 @@ export default () =>
                     data={data}
                     getPosition={getPosition}
                     opacity={opacity}
-                    getFillColor={getFillColor}
-                    getLineColor={getLineColor}
+                    getFillColor={getFillColorStandard}
+                    getLineColor={getLineColorStandard}
                     getRadius={getCircleRadius}
                     radiusScale={radiusScale}
-                    stroked={stroked}
-                    getLineWidth={getLineWidth}
+                    stroked={false}
+                    getLineWidth={1}
                     autoHighlight
                     highlightColor={highlightColor}
                     onLayerClick={info =>
@@ -120,6 +112,26 @@ export default () =>
     .add(
       "Custom",
       () => {
+        const fillColorPicker = color(
+          "Fill Color:",
+          "#19B7AA",
+          GROUP_IDS.MARKER
+        );
+
+        const colorOption1 = colorPicker => {
+          return colorPicker
+            .slice(5, -1)
+            .split(",")
+            .map(n => parseInt(n, 10))
+            .filter((n, i) => i < 3);
+        };
+        const colorOption2 = [25, 183, 170, 255];
+
+        const getFillColor =
+          fillColorPicker.charAt(0) !== "#"
+            ? colorOption1(fillColorPicker)
+            : colorOption2;
+
         const opacity = number(
           "Opacity:",
           0.1,
@@ -132,9 +144,22 @@ export default () =>
           radiusScaleOptions,
           GROUP_IDS.MARKER
         );
-        const stroked = boolean("Stroke Only:", false, GROUP_IDS.MARKER);
+
+        const stroked = boolean("Stroked:", false, GROUP_IDS.MARKER);
+
+        const lineColorPicker = color(
+          "Stroke Line Color:",
+          "#19B7AA",
+          GROUP_IDS.MARKER
+        );
+
+        const getLineColor =
+          lineColorPicker.charAt(0) !== "#"
+            ? colorOption1(lineColorPicker)
+            : colorOption2;
+
         const getLineWidth = number(
-          "Line Width:",
+          "Stroke Line Width:",
           1,
           lineWidthOptions,
           GROUP_IDS.MARKER
@@ -148,6 +173,7 @@ export default () =>
                 allData.slide_data.features,
                 GROUP_IDS.DATA
               );
+
               return (
                 <BaseMap>
                   <ScatterPlotMap
@@ -194,8 +220,8 @@ export default () =>
                     data={data.slide_data.features}
                     getPosition={getPosition}
                     opacity={opacity}
-                    getFillColor={getFillColor}
-                    getLineColor={getLineColor}
+                    getFillColor={getFillColorStandard}
+                    getLineColor={getLineColorStandard}
                     getRadius={getCircleRadius}
                     radiusScale={radiusScale}
                     stroked={stroked}
