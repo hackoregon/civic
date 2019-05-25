@@ -2,8 +2,21 @@ import React from "react";
 import { css } from "emotion";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
-import { object, text, withKnobs } from "@storybook/addon-knobs";
-import { LineChart, SimpleLegend } from "../src";
+import {
+  object,
+  text,
+  withKnobs,
+  optionsKnob as options
+} from "@storybook/addon-knobs";
+import { LineChart, SimpleLegend, civicFormat } from "../src";
+import { getKeyNames } from "./shared";
+import notes from "./lineChart.notes.md";
+
+const GROUP_IDS = {
+  LABELS: "Labels",
+  DATA: "Data",
+  CUSTOM: "Custom"
+};
 
 const sampleSimpleData = [
   { x: 0, y: 20 },
@@ -104,117 +117,161 @@ const customLegend = legendData => {
 export default () =>
   storiesOf("Component Lib|Charts/Line Chart", module)
     .addDecorator(withKnobs)
-    .add("Simple usage", () => <LineChart data={sampleSimpleData} />)
-    .add("With some props", () => {
-      const data = object("Data", sampleData);
-      const dataKey = text("dataKey", sampleXKey);
-      const dataValue = text("dataValue", sampleYKey);
-      const dataSeries = text("dataSeries", sampleDataSeries);
-      const subtitle = text("Subtitle", sampleSubtitle);
-      const title = text("Title", sampleTitle);
-      const xLabel = text("xLabel", sampleXLabel);
-      const yLabel = text("yLabel", sampleYLabel);
+    .add(
+      "Standard",
+      () => {
+        const title = text("Title", sampleTitle, GROUP_IDS.LABELS);
+        const subtitle = text("Subtitle", sampleSubtitle, GROUP_IDS.LABELS);
+        const dataSeriesLabel = object(
+          "Data series labels",
+          sampledataSeriesLabel,
+          GROUP_IDS.LABELS
+        );
+        const xLabel = text("X-axis label", sampleXLabel, GROUP_IDS.LABELS);
+        const xFormatterOptions = getKeyNames(civicFormat);
+        const optionSelectX = options(
+          "X-axis value format",
+          xFormatterOptions,
+          "numeric",
+          { display: "select" },
+          GROUP_IDS.LABELS
+        );
+        const yLabel = text("Y-axis label", sampleYLabel, GROUP_IDS.LABELS);
+        const yFormatterOptions = getKeyNames(civicFormat);
+        const optionSelectY = options(
+          "Y-axis value format",
+          yFormatterOptions,
+          "numeric",
+          { display: "select" },
+          GROUP_IDS.LABELS
+        );
+        const dataKey = text("Data key", sampleXKey, GROUP_IDS.DATA);
+        const dataValue = text("Data values", sampleYKey, GROUP_IDS.DATA);
+        const dataSeries = text(
+          "Data series",
+          sampleDataSeries,
+          GROUP_IDS.DATA
+        );
+        const data = object("Data", sampleData, GROUP_IDS.DATA);
 
-      return (
-        <LineChart
-          data={data}
-          dataKey={dataKey}
-          dataValue={dataValue}
-          dataSeries={dataSeries}
-          subtitle={subtitle}
-          title={title}
-          xLabel={xLabel}
-          yLabel={yLabel}
-        />
-      );
-    })
-    .add("With some props and unstructured data", () => {
-      const data = object("Data", sampleUnstructuredData);
-      const dataKey = text("dataKey", sampleUnstructuredXKey);
-      const dataValue = text("dataValue", sampleUnstructuredYKey);
-      const dataSeries = text("dataSeries", sampleUnstructuredDataSeries);
-      const subtitle = text("Subtitle", sampleSubtitle);
-      const title = text("Title", sampleTitle);
-      const xLabel = text("xLabel", sampleUnstructuredXLabel);
-      const yLabel = text("yLabel", sampleUnstructuredYLabel);
+        return (
+          <LineChart
+            data={data}
+            dataKey={dataKey}
+            dataValue={dataValue}
+            dataSeries={dataSeries}
+            dataSeriesLabel={dataSeriesLabel}
+            subtitle={subtitle}
+            title={title}
+            xLabel={xLabel}
+            yLabel={yLabel}
+            xNumberFormatter={x => civicFormat[optionSelectX](x)}
+            yNumberFormatter={y => civicFormat[optionSelectY](y)}
+          />
+        );
+      },
+      { notes }
+    )
+    .add("Simple usage", () => <LineChart data={sampleSimpleData} />, { notes })
+    .add(
+      "With some props and unstructured data",
+      () => {
+        const data = object("Data", sampleUnstructuredData);
+        const dataKey = text("dataKey", sampleUnstructuredXKey);
+        const dataValue = text("dataValue", sampleUnstructuredYKey);
+        const dataSeries = text("dataSeries", sampleUnstructuredDataSeries);
+        const subtitle = text("Subtitle", sampleSubtitle);
+        const title = text("Title", sampleTitle);
+        const xLabel = text("xLabel", sampleUnstructuredXLabel);
+        const yLabel = text("yLabel", sampleUnstructuredYLabel);
 
-      return (
-        <LineChart
-          data={data}
-          dataKey={dataKey}
-          dataValue={dataValue}
-          dataSeries={dataSeries}
-          subtitle={subtitle}
-          title={title}
-          xLabel={xLabel}
-          yLabel={yLabel}
-        />
-      );
-    })
-    .add("With more optional props", () => {
-      const data = object("Data", sampleData);
-      const dataKey = text("dataKey", sampleXKey);
-      const dataKeyLabel = text("dataKeyLabel", sampleDataKeyLabel);
-      const dataValue = text("dataValue", sampleYKey);
-      const dataValueLabel = text("dataValueLabel", sampleDataValueLabel);
-      const dataSeries = text("dataSeries", sampleDataSeries);
-      const dataSeriesLabel = object(
-        "Data Series Labels",
-        sampledataSeriesLabel
-      );
-      const domain = object("Domain", sampleDomain);
-      const size = object("Size", sampleSize);
-      const subtitle = text("Subtitle", sampleSubtitle);
-      const title = text("Title", sampleTitle);
-      const xLabel = text("xLabel", sampleXLabel);
-      const yLabel = text("yLabel", sampleYLabel);
+        return (
+          <LineChart
+            data={data}
+            dataKey={dataKey}
+            dataValue={dataValue}
+            dataSeries={dataSeries}
+            subtitle={subtitle}
+            title={title}
+            xLabel={xLabel}
+            yLabel={yLabel}
+          />
+        );
+      },
+      { notes }
+    )
+    .add(
+      "With more optional props",
+      () => {
+        const data = object("Data", sampleData);
+        const dataKey = text("dataKey", sampleXKey);
+        const dataKeyLabel = text("dataKeyLabel", sampleDataKeyLabel);
+        const dataValue = text("dataValue", sampleYKey);
+        const dataValueLabel = text("dataValueLabel", sampleDataValueLabel);
+        const dataSeries = text("dataSeries", sampleDataSeries);
+        const dataSeriesLabel = object(
+          "Data Series Labels",
+          sampledataSeriesLabel
+        );
+        const domain = object("Domain", sampleDomain);
+        const size = object("Size", sampleSize);
+        const subtitle = text("Subtitle", sampleSubtitle);
+        const title = text("Title", sampleTitle);
+        const xLabel = text("xLabel", sampleXLabel);
+        const yLabel = text("yLabel", sampleYLabel);
 
-      return (
-        <LineChart
-          data={data}
-          dataKey={dataKey}
-          dataKeyLabel={dataKeyLabel}
-          dataValue={dataValue}
-          dataValueLabel={dataValueLabel}
-          dataSeries={dataSeries}
-          dataSeriesLabel={dataSeriesLabel}
-          domain={domain}
-          size={size}
-          subtitle={subtitle}
-          title={title}
-          xLabel={xLabel}
-          yLabel={yLabel}
-          legendComponent={customLegend}
-        />
-      );
-    })
-    .add("With many data points", () => {
-      const scale = 0.25;
-      return (
-        <LineChart
-          data={Array(100)
-            .fill(null)
-            .map((_, index) => {
-              const x =
-                (index % 2 ? Math.floor(index / 2) : Math.ceil(index / 2)) *
-                scale;
-              const fn = index % 2 ? "sin" : "cos";
-              return {
-                x,
-                fn,
-                y: Math[fn](x)
-              };
-            })}
-          dataKey="x"
-          dataKeyLabel="X"
-          dataValue="y"
-          dataValueLabel="Y"
-          dataSeries="fn"
-          domain={object("Domain", { x: [0, 50 * scale], y: [-1.5, 1.5] })}
-          title={text("Title", "Cos vs. Sin")}
-          subtitle={text("Subtitle", "Getting wavy")}
-          xLabel="X"
-          yLabel="Y"
-        />
-      );
-    });
+        return (
+          <LineChart
+            data={data}
+            dataKey={dataKey}
+            dataKeyLabel={dataKeyLabel}
+            dataValue={dataValue}
+            dataValueLabel={dataValueLabel}
+            dataSeries={dataSeries}
+            dataSeriesLabel={dataSeriesLabel}
+            domain={domain}
+            size={size}
+            subtitle={subtitle}
+            title={title}
+            xLabel={xLabel}
+            yLabel={yLabel}
+            legendComponent={customLegend}
+          />
+        );
+      },
+      { notes }
+    )
+    .add(
+      "With many data points",
+      () => {
+        const scale = 0.25;
+        return (
+          <LineChart
+            data={Array(100)
+              .fill(null)
+              .map((_, index) => {
+                const x =
+                  (index % 2 ? Math.floor(index / 2) : Math.ceil(index / 2)) *
+                  scale;
+                const fn = index % 2 ? "sin" : "cos";
+                return {
+                  x,
+                  fn,
+                  y: Math[fn](x)
+                };
+              })}
+            dataKey="x"
+            dataKeyLabel="X"
+            dataValue="y"
+            dataValueLabel="Y"
+            dataSeries="fn"
+            domain={object("Domain", { x: [0, 50 * scale], y: [-1.5, 1.5] })}
+            title={text("Title", "Cos vs. Sin")}
+            subtitle={text("Subtitle", "Getting wavy")}
+            xLabel="X"
+            yLabel="Y"
+          />
+        );
+      },
+      { notes }
+    );
