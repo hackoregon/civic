@@ -27,11 +27,11 @@ export default () =>
       "Standard",
       () => {
         const sampleData = [
-          { sortOrder: 1, population: 2000, label: "Labrador Retriever" },
-          { sortOrder: 2, population: 8000, label: "Standard Poodle" },
-          { sortOrder: 3, population: 6000, label: "French Bulldog" },
-          { sortOrder: 4, population: 3000, label: "Afghan Hound" },
-          { sortOrder: 5, population: 1000, label: "Jack Russell Terrier" }
+          { population: 2000, label: "Labrador Retriever" },
+          { population: 8000, label: "Standard Poodle" },
+          { population: 6000, label: "French Bulldog" },
+          { population: 3000, label: "Afghan Hound" },
+          { population: 1000, label: "Jack Russell Terrier" }
         ];
         const title = text("Title", "Dogs and their Money", GROUP_IDS.LABELS);
         const subtitle = text(
@@ -49,7 +49,6 @@ export default () =>
           GROUP_IDS.LABELS
         );
         const yLabel = text("Y-axis label", "Dogs", GROUP_IDS.LABELS);
-        const sortOrder = text("Sort order", "sortOrder", GROUP_IDS.DATA);
         const dataValue = text("Data value", "population", GROUP_IDS.DATA);
         const dataLabel = text("Data label", "label", GROUP_IDS.DATA);
         const data = object("Data", sampleData, GROUP_IDS.DATA);
@@ -57,7 +56,6 @@ export default () =>
         return (
           <HorizontalBarChart
             data={data}
-            sortOrder={sortOrder}
             dataValue={dataValue}
             dataLabel={dataLabel}
             title={title}
@@ -127,12 +125,11 @@ export default () =>
       () => {
         const sampleUnsortedData = [
           { population: 2000, label: "Labrador Retriever" },
-          { population: 6000, label: "French Bulldog" },
           { population: 8000, label: "Standard Poodle" },
+          { population: 6000, label: "French Bulldog" },
           { population: 3000, label: "Afghan Hound" },
           { population: 1000, label: "Jack Russell Terrier" }
         ];
-        const dataValue = text("Data value", "population", GROUP_IDS.DATA);
         const dataValueFormatter = getKeyNames(civicFormat);
         const optionSelectX = options(
           "X-axis value format",
@@ -141,6 +138,7 @@ export default () =>
           { display: "select" },
           GROUP_IDS.LABELS
         );
+        const dataValue = text("Data value", "population", GROUP_IDS.DATA);
         const dataLabel = text("Data label", "label", GROUP_IDS.DATA);
         const data = object("Data", sampleUnsortedData, GROUP_IDS.DATA);
 
@@ -159,11 +157,10 @@ export default () =>
       "Example: Minimalist",
       () => {
         const sampleMinimalistData = [
-          { sortOrder: 1, population: 2000, label: "Labrador Retriever" },
-          { sortOrder: 2, population: 8000, label: "Standard Poodle" }
+          { population: 2000, label: "Labrador Retriever" },
+          { population: 8000, label: "Standard Poodle" }
         ];
         const xLabel = text("X-axis label", "Dollars", GROUP_IDS.LABELS);
-        const sortOrder = text("Sort order", "sortOrder", GROUP_IDS.DATA);
         const dataValue = text("Data value", "population", GROUP_IDS.DATA);
         const dataLabel = text("Data label", "label", GROUP_IDS.DATA);
         const data = object("Data", sampleMinimalistData, GROUP_IDS.DATA);
@@ -171,7 +168,6 @@ export default () =>
         return (
           <HorizontalBarChart
             data={data}
-            sortOrder={sortOrder}
             dataValue={dataValue}
             dataLabel={dataLabel}
             xLabel={xLabel}
