@@ -19,6 +19,8 @@ const mapData = [
 
 const highlightColor = [255, 165, 0, 155];
 
+const colorOption2 = [25, 183, 170, 255];
+
 const GROUP_IDS = {
   MARKER: "Marker",
   DATA: "Data"
@@ -76,7 +78,6 @@ export default () =>
             .map(n => parseInt(n, 10))
             .filter((n, i) => i < 3);
         };
-        const colorOption2 = [25, 183, 170, 255];
 
         const getFillColor =
           fillColorPicker.charAt(0) !== "#"
@@ -95,6 +96,7 @@ export default () =>
           radiusScaleOptions,
           GROUP_IDS.MARKER
         );
+
         return (
           <DemoJSONLoader urls={mapData}>
             {allData => {
@@ -145,7 +147,6 @@ export default () =>
             .map(n => parseInt(n, 10))
             .filter((n, i) => i < 3);
         };
-        const colorOption2 = [25, 183, 170, 255];
 
         const getFillColor =
           fillColorPicker.charAt(0) !== "#"
@@ -185,6 +186,17 @@ export default () =>
           GROUP_IDS.MARKER
         );
 
+        const highlightColorPicker = color(
+          "Highlight Color:",
+          "#ffa500",
+          GROUP_IDS.MARKER
+        );
+
+        const getHighlightColor =
+          highlightColorPicker.charAt(0) !== "#"
+            ? colorOption1(highlightColorPicker)
+            : highlightColor;
+
         return (
           <DemoJSONLoader urls={mapData}>
             {allData => {
@@ -207,7 +219,7 @@ export default () =>
                     stroked={stroked}
                     getLineWidth={getLineWidth}
                     autoHighlight
-                    highlightColor={highlightColor}
+                    highlightColor={getHighlightColor}
                     onLayerClick={info =>
                       action("Layer clicked:", { depth: 2 })(info, info.object)
                     }
