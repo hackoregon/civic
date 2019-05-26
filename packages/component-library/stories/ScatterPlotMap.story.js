@@ -50,10 +50,10 @@ const lineWidthOptions = {
 const getPosition = f =>
   f.geometry ? f.geometry.coordinates : [-124.664355, 45.615779];
 
-const getFillColorStandard = f =>
+const getFillColorDataDriven = f =>
   f.properties.year_2017 > 1000 ? [255, 0, 0, 255] : [0, 0, 255, 255];
 
-const getLineColorStandard = f =>
+const getLineColorDataDriven = f =>
   f.properties.year_2017 > 1000 ? [0, 0, 255, 255] : [255, 0, 0, 255];
 
 const getCircleRadius = f => Math.sqrt(f.properties.year_2017 / Math.PI) * 15;
@@ -113,7 +113,7 @@ export default () =>
                     getPosition={getPosition}
                     opacity={opacity}
                     getFillColor={getFillColor}
-                    getLineColor={getLineColorStandard}
+                    getLineColor={getLineColorDataDriven}
                     getRadius={getCircleRadius}
                     radiusScale={radiusScale}
                     stroked={false}
@@ -268,7 +268,7 @@ export default () =>
                     getPosition={getPosition}
                     opacity={opacity}
                     getFillColor={getFillColor}
-                    getLineColor={getLineColorStandard}
+                    getLineColor={getLineColorDataDriven}
                     getRadius={getCircleRadius}
                     radiusScale={radiusScale}
                     stroked={false}
@@ -325,8 +325,8 @@ export default () =>
                     data={data}
                     getPosition={getPosition}
                     opacity={opacity}
-                    getFillColor={getFillColorStandard}
-                    getLineColor={getLineColorStandard}
+                    getFillColor={getFillColorDataDriven}
+                    getLineColor={getLineColorDataDriven}
                     getRadius={getCircleRadius}
                     radiusScale={radiusScale}
                     stroked={false}
