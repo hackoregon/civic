@@ -186,6 +186,12 @@ export default () =>
           GROUP_IDS.MARKER
         );
 
+        const autoHighlight = boolean(
+          "Auto hightlight:",
+          true,
+          GROUP_IDS.MARKER
+        );
+
         const highlightColorPicker = color(
           "Highlight Color:",
           "#ffa500",
@@ -218,7 +224,7 @@ export default () =>
                     radiusScale={radiusScale}
                     stroked={stroked}
                     getLineWidth={getLineWidth}
-                    autoHighlight
+                    autoHighlight={autoHighlight}
                     highlightColor={getHighlightColor}
                     onLayerClick={info =>
                       action("Layer clicked:", { depth: 2 })(info, info.object)
