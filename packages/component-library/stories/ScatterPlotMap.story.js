@@ -63,6 +63,26 @@ export default () =>
     .add(
       "Standard",
       () => {
+        const fillColorPicker = color(
+          "Fill Color:",
+          "#19B7AA",
+          GROUP_IDS.MARKER
+        );
+
+        const colorOption1 = colorPicker => {
+          return colorPicker
+            .slice(5, -1)
+            .split(",")
+            .map(n => parseInt(n, 10))
+            .filter((n, i) => i < 3);
+        };
+        const colorOption2 = [25, 183, 170, 255];
+
+        const getFillColor =
+          fillColorPicker.charAt(0) !== "#"
+            ? colorOption1(fillColorPicker)
+            : colorOption2;
+
         const opacity = number(
           "Opacity:",
           0.1,
@@ -89,7 +109,7 @@ export default () =>
                     data={data}
                     getPosition={getPosition}
                     opacity={opacity}
-                    getFillColor={getFillColorStandard}
+                    getFillColor={getFillColor}
                     getLineColor={getLineColorStandard}
                     getRadius={getCircleRadius}
                     radiusScale={radiusScale}
