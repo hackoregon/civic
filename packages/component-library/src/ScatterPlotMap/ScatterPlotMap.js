@@ -71,7 +71,7 @@ ScatterPlotMap.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   getPosition: PropTypes.func,
   opacity: PropTypes.number,
-  getRadius: PropTypes.oneOfType([PropTypes.func, PropTypes.number]),
+  getRadius: PropTypes.func,
   radiusScale: PropTypes.number,
   autoHighlight: PropTypes.bool,
   highlightColor: PropTypes.arrayOf(PropTypes.number),
@@ -84,7 +84,7 @@ ScatterPlotMap.propTypes = {
   children: PropTypes.node,
   stroked: PropTypes.bool,
   getLineColor: PropTypes.func,
-  getLineWidth: PropTypes.oneOfType([PropTypes.func, PropTypes.number]),
+  getLineWidth: PropTypes.func,
   getFillColor: PropTypes.func
 };
 
