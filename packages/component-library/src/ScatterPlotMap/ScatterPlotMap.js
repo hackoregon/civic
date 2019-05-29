@@ -58,6 +58,7 @@ const ScatterPlotMap = props => {
           getLineColor={getLineColor}
           getLineWidth={getLineWidth}
           getFillColor={getFillColor}
+          updateTriggers={{ getRadius }}
         />
       </DeckGL>
       {tooltipRender}
