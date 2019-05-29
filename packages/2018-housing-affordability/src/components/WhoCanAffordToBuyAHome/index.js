@@ -1,9 +1,8 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import { connect } from "react-redux";
-import { loader, error, gradientLabel, emphasis } from "../css-utils";
 
 import "@hackoregon/component-library/assets/vendor/react-select.min.css";
-
 import {
   CivicStoryCard,
   LineChart,
@@ -12,6 +11,7 @@ import {
   GradientScale
 } from "@hackoregon/component-library";
 
+import { loader, error, gradientLabel, emphasis } from "../css-utils";
 import {
   fetchAllPTICities,
   fetchPTICity,
@@ -20,7 +20,6 @@ import {
 } from "../../state/price-to-income/actions";
 import {
   isAllCitiesLoading,
-  isCityDetailLoading,
   getCityError,
   getSelectedCity,
   getCityCountryChartData,
@@ -31,21 +30,21 @@ import {
 
 export class WhoCanAffordToBuyAHome extends React.Component {
   componentDidMount() {
-    this.props.fetchAllCities();
-    this.props.fetchCountry();
-    this.props.setCity();
+    const { fetchAllCities, fetchCountry, setCity } = this.props;
+    fetchAllCities();
+    fetchCountry();
+    setCity();
   }
 
   render() {
     const {
-      isLoadingAllCities,
-      isLoading,
       isError,
       selectedCity,
       chartData,
       allCities,
       selectedCityRank,
       setCity,
+      // eslint-disable-next-line no-shadow
       isAnyLoading
     } = this.props;
 

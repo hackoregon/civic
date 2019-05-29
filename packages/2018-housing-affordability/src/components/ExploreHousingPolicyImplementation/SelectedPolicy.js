@@ -1,6 +1,6 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { css } from "emotion";
-import { ICONS } from "@hackoregon/component-library/src/styleConstants";
 
 const govLinks = item =>
   item.links[0].link &&
@@ -83,4 +83,9 @@ function SelectedPolicy({ data }) {
     </div>
   );
 }
+
+SelectedPolicy.propTypes = {
+  data: PropTypes.shape({})
+};
+
 export default SelectedPolicy;

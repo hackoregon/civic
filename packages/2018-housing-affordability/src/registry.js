@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default */
 import BuildingBoomInPortland from "./components/BuildingBoomInPortland";
 import WhatDoesAffordabilityMean from "./components/WhatDoesAffordabilityMean";
 import AffordableRentalUnitsDwindling from "./components/AffordableRentalUnitsDwindling";
