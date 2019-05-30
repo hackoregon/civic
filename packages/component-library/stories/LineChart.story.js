@@ -5,6 +5,7 @@ import { storiesOf } from "@storybook/react";
 import {
   object,
   text,
+  number,
   withKnobs,
   optionsKnob as options
 } from "@storybook/addon-knobs";
@@ -276,10 +277,10 @@ export default () =>
       "Example: Many data points",
       () => {
         const scale = 0.25;
+        const value = number("Number of data points", 100);
         return (
           <LineChart
-            // Add a knob for array size
-            data={Array(100)
+            data={Array(value)
               .fill(null)
               .map((_, index) => {
                 const x =
@@ -297,9 +298,8 @@ export default () =>
             dataValue="y"
             dataValueLabel="Y"
             dataSeries="fn"
-            domain={object("Domain", { x: [0, 50 * scale], y: [-1.5, 1.5] })}
-            title={text("Title", "Cos vs. Sin")}
-            subtitle={text("Subtitle", "Getting wavy")}
+            title="Cos vs. Sin"
+            subtitle="Getting wavy"
             xLabel="X"
             yLabel="Y"
           />
