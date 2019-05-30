@@ -113,16 +113,7 @@ export default () =>
                     getPosition={getPosition}
                     opacity={opacity}
                     getFillColor={getFillColor}
-                    getLineColor={getLineColorDataDriven}
-                    getRadius={getCircleRadius}
                     radiusScale={radiusScale}
-                    stroked={false}
-                    getLineWidth={1}
-                    autoHighlight
-                    highlightColor={highlightColor}
-                    onLayerClick={info =>
-                      action("Layer clicked:", { depth: 2 })(info, info.object)
-                    }
                   />
                 </BaseMap>
               );

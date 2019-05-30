@@ -10,6 +10,7 @@ These properties can be set in the standard story:
 - `radiusScale`
 - `opacity`
 - `data`
+- `getPosition`
 
 ## Custom
 
