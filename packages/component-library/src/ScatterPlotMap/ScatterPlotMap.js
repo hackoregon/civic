@@ -82,9 +82,9 @@ ScatterPlotMap.propTypes = {
   onHover: PropTypes.func,
   children: PropTypes.node,
   stroked: PropTypes.bool,
-  getLineColor: PropTypes.func,
-  getLineWidth: PropTypes.func,
-  getFillColor: PropTypes.func
+  getLineColor: PropTypes.oneOfType([PropTypes.func, PropTypes.array]),
+  getLineWidth: PropTypes.oneOfType([PropTypes.func, PropTypes.number]),
+  getFillColor: PropTypes.oneOfType([PropTypes.func, PropTypes.array])
 };
 
 ScatterPlotMap.defaultProps = {
