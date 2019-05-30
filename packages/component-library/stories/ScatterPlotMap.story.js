@@ -73,16 +73,11 @@ export default () =>
     .add(
       "Standard",
       () => {
-        const fillColorPicker = color(
-          "Fill Color:",
-          "#19B7AA",
+        const getFillColor = object(
+          "Fill Color",
+          [25, 183, 170, 255],
           GROUP_IDS.MARKER
         );
-
-        const getFillColor =
-          fillColorPicker.charAt(0) !== "#"
-            ? colorOption1(fillColorPicker)
-            : colorOption2;
 
         const opacity = number(
           "Opacity:",
