@@ -17,9 +17,9 @@ The Custom story shows all the possible properties that can be passed to the Sca
 
 - `data` : expects an array of objects.
 - `getPosition` : expects a function that returns the coordinates of each object in data array.
-- `opacity` : expects a number.
-- `getFillColor` : expects a function or an array in `[r, g, b, [a]]` format. If an array is provided, the color is applied to all objects. If a function is provided, it is called on each object to set the fill color.
-- `getLineColor` : expects a function or an array in `[r, g, b, [a]]` format. If an array is provided, the color is applied to all objects. If a function is provided, it is called on each object to set the fill color.
+- `opacity` : expects a number between 0 and 1.
+- `getFillColor` : expects a function or an array in `[r, g, b, [a]]` format, where `a` is a number between 0 and 255. If an array is provided, the color is applied to all objects. If a function is provided, it is called on each object to set the fill color.
+- `getLineColor` : expects a function or an array in `[r, g, b, [a]]` format, where `a` is a number between 0 and 255. If an array is provided, the color is applied to all objects. If a function is provided, it is called on each object to set the fill color.
 - `getRadius` : expects a function or a number. If a number is provided it is used as the radius for all objects. If a function is provided, it is called on each object to set the radius.
 - `radiusScale` : expects a number.
 - `stroked` : expects a boolean value.
