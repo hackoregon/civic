@@ -8,13 +8,7 @@ import { scaleThreshold } from "d3";
 import { BaseMap, PathMap, MapTooltip, DemoJSONLoader } from "../src";
 import notes from "./PathMap.notes.md";
 
-const optionsStyle = {
-  "Hack Oregon Light": "mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg",
-  "Hack Oregon Dark": "mapbox://styles/hackoregon/cjie02elo1vyw2rohd24kbtbd",
-  "Navigation Guidance Night v2":
-    "mapbox://styles/mapbox/navigation-guidance-night-v2",
-  "Dark v9": "mapbox://styles/mapbox/dark-v9"
-};
+const baseMapStyle = "mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg";
 
 const colorSchemeOptions = {
   "Red Yellow Blue":
@@ -43,6 +37,13 @@ const mapData = [
   "https://service.civicpdx.org/transportation-systems/sandbox/slides/routechange/"
 ];
 
+const highlightColor = [125, 125, 125, 125];
+
+const parseColors = colorScheme => JSON.parse(colorScheme);
+
+const getPath = f => f.geometry.coordinates;
+const getWidth = () => 15;
+
 export default () => {
   storiesOf("Component Lib|Maps/Path Map", module)
     .addDecorator(withKnobs)
@@ -50,41 +51,33 @@ export default () => {
     .add(
       "Standard",
       () => {
-        const mapboxStyle = select(
-          "Mapbox Style",
-          optionsStyle,
-          optionsStyle["Hack Oregon Light"]
-        );
-
         const colorScheme = select(
           "Color Scheme:",
           colorSchemeOptions,
           colorSchemeOptions["Purple Green"]
         );
-        const colors = JSON.parse(colorScheme);
+        const colors = parseColors(colorScheme);
 
         const divergingScale = scaleThreshold()
           .domain([-100, -75, -50, -25, 0, 25, 50, 75, 100])
           .range(colors);
 
         const getPathColor = f => {
-          const value = f.properties.pct_change;
-          return divergingScale(value);
+          const percentChange = f.properties.pct_change;
+          return divergingScale(percentChange);
         };
 
         const opacity = number("Opacity:", 0.95, opacityOptions);
-        const getPath = f => f.geometry.coordinates;
-        const getWidth = () => 15;
+
         const widthScale = number("Width Scale:", 1, widthScaleOptions);
         const rounded = boolean("Rounded:", true);
-        const highlightColor = [125, 125, 125, 125];
 
         return (
           <DemoJSONLoader urls={mapData}>
             {data => {
               return (
                 <BaseMap
-                  mapboxStyle={mapboxStyle}
+                  mapboxStyle={baseMapStyle}
                   initialZoom={12}
                   initialLatitude={45.523027}
                   initialLongitude={-122.67037}
@@ -113,18 +106,12 @@ export default () => {
     .add(
       "Example: With Tooltip",
       () => {
-        const mapboxStyle = select(
-          "Mapbox Style",
-          optionsStyle,
-          optionsStyle["Hack Oregon Light"]
-        );
-
         const colorScheme = select(
           "Color Scheme:",
           colorSchemeOptions,
           colorSchemeOptions["Purple Green"]
         );
-        const colors = JSON.parse(colorScheme);
+        const colors = parseColors(colorScheme);
 
         const divergingScale = scaleThreshold()
           .domain([-100, -75, -50, -25, 0, 25, 50, 75, 100])
@@ -136,18 +123,16 @@ export default () => {
         };
 
         const opacity = number("Opacity:", 0.95, opacityOptions);
-        const getPath = f => f.geometry.coordinates;
-        const getWidth = () => 15;
+
         const widthScale = number("Width Scale:", 1, widthScaleOptions);
         const rounded = boolean("Rounded:", true);
-        const highlightColor = [125, 125, 125, 125];
 
         return (
           <DemoJSONLoader urls={mapData}>
             {data => {
               return (
                 <BaseMap
-                  mapboxStyle={mapboxStyle}
+                  mapboxStyle={baseMapStyle}
                   initialZoom={12}
                   initialLatitude={45.523027}
                   initialLongitude={-122.67037}
