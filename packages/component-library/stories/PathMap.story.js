@@ -175,7 +175,12 @@ export default () => {
 
         return (
           <DemoJSONLoader urls={mapData}>
-            {data => {
+            {allData => {
+              const data = object(
+                "Data",
+                allData.slide_data.features,
+                GROUP_IDS.DATA
+              );
               return (
                 <BaseMap
                   mapboxStyle={baseMapStyle}
@@ -184,7 +189,7 @@ export default () => {
                   initialLongitude={-122.67037}
                 >
                   <PathMap
-                    data={data.slide_data.features}
+                    data={data}
                     getColor={getPathColor}
                     opacity={opacity}
                     getPath={getPath}
