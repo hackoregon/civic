@@ -70,22 +70,11 @@ export default () => {
     .add(
       "Standard",
       () => {
-        const colorScheme = select(
-          "Color Scheme:",
-          colorSchemeOptions,
-          colorSchemeOptions["Purple Green"],
+        const getColor = object(
+          "Color: ",
+          [25, 183, 170, 255],
           GROUP_IDS.MARKER
         );
-        const colors = parseColors(colorScheme);
-
-        const divergingScale = scaleThreshold()
-          .domain([-100, -75, -50, -25, 0, 25, 50, 75, 100])
-          .range(colors);
-
-        const getPathColor = f => {
-          const percentChange = f.properties.pct_change;
-          return divergingScale(percentChange);
-        };
 
         const opacity = number(
           "Opacity:",
@@ -118,7 +107,7 @@ export default () => {
                 >
                   <PathMap
                     data={data}
-                    getColor={getPathColor}
+                    getColor={getColor}
                     opacity={opacity}
                     getPath={getPath}
                     getWidth={getWidth}
@@ -208,22 +197,11 @@ export default () => {
     .add(
       "Example: With Tooltip",
       () => {
-        const colorScheme = select(
-          "Color Scheme:",
-          colorSchemeOptions,
-          colorSchemeOptions["Purple Green"],
+        const getColor = object(
+          "Color: ",
+          [25, 183, 170, 255],
           GROUP_IDS.MARKER
         );
-        const colors = parseColors(colorScheme);
-
-        const divergingScale = scaleThreshold()
-          .domain([-100, -75, -50, -25, 0, 25, 50, 75, 100])
-          .range(colors);
-
-        const getPathColor = f => {
-          const percentChange = f.properties.pct_change;
-          return divergingScale(percentChange);
-        };
 
         const opacity = number(
           "Opacity:",
@@ -256,7 +234,7 @@ export default () => {
                 >
                   <PathMap
                     data={data}
-                    getColor={getPathColor}
+                    getColor={getColor}
                     opacity={opacity}
                     getPath={getPath}
                     getWidth={getWidth}
