@@ -1,7 +1,13 @@
 import React from "react";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
-import { withKnobs, number, select, boolean } from "@storybook/addon-knobs";
+import {
+  withKnobs,
+  number,
+  select,
+  boolean,
+  object
+} from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 import { checkA11y } from "@storybook/addon-a11y";
 import { scaleThreshold } from "d3";
@@ -26,11 +32,23 @@ const opacityOptions = {
   step: 0.05
 };
 
+const getWidthOptions = {
+  range: true,
+  min: 0,
+  max: 100,
+  step: 1
+};
+
 const widthScaleOptions = {
   range: true,
   min: 1,
   max: 10,
   step: 0.5
+};
+
+const GROUP_IDS = {
+  MARKER: "Marker",
+  DATA: "Data"
 };
 
 const mapData = [
@@ -42,7 +60,8 @@ const highlightColor = [125, 125, 125, 125];
 const parseColors = colorScheme => JSON.parse(colorScheme);
 
 const getPath = f => f.geometry.coordinates;
-const getWidth = () => 15;
+
+// const getWidthSandard = () => 15;
 
 export default () => {
   storiesOf("Component Lib|Maps/Path Map", module)
@@ -54,7 +73,8 @@ export default () => {
         const colorScheme = select(
           "Color Scheme:",
           colorSchemeOptions,
-          colorSchemeOptions["Purple Green"]
+          colorSchemeOptions["Purple Green"],
+          GROUP_IDS.MARKER
         );
         const colors = parseColors(colorScheme);
 
@@ -67,10 +87,92 @@ export default () => {
           return divergingScale(percentChange);
         };
 
-        const opacity = number("Opacity:", 0.95, opacityOptions);
+        const opacity = number(
+          "Opacity:",
+          0.95,
+          opacityOptions,
+          GROUP_IDS.MARKER
+        );
 
-        const widthScale = number("Width Scale:", 1, widthScaleOptions);
-        const rounded = boolean("Rounded:", true);
+        const getWidth = number(
+          "Width:",
+          15,
+          getWidthOptions,
+          GROUP_IDS.MARKER
+        );
+
+        return (
+          <DemoJSONLoader urls={mapData}>
+            {allData => {
+              const data = object(
+                "Data",
+                allData.slide_data.features,
+                GROUP_IDS.DATA
+              );
+              return (
+                <BaseMap
+                  mapboxStyle={baseMapStyle}
+                  initialZoom={12}
+                  initialLatitude={45.523027}
+                  initialLongitude={-122.67037}
+                >
+                  <PathMap
+                    data={data}
+                    getColor={getPathColor}
+                    opacity={opacity}
+                    getPath={getPath}
+                    getWidth={getWidth}
+                  />
+                </BaseMap>
+              );
+            }}
+          </DemoJSONLoader>
+        );
+      },
+      { notes }
+    )
+    .add(
+      "Custom",
+      () => {
+        const colorScheme = select(
+          "Color Scheme:",
+          colorSchemeOptions,
+          colorSchemeOptions["Purple Green"],
+          GROUP_IDS.MARKER
+        );
+        const colors = parseColors(colorScheme);
+
+        const divergingScale = scaleThreshold()
+          .domain([-100, -75, -50, -25, 0, 25, 50, 75, 100])
+          .range(colors);
+
+        const getPathColor = f => {
+          const value = f.properties.pct_change;
+          return divergingScale(value);
+        };
+
+        const opacity = number(
+          "Opacity:",
+          0.95,
+          opacityOptions,
+          GROUP_IDS.MARKER
+        );
+
+        const getWidth = number(
+          "Width:",
+          15,
+          getWidthOptions,
+          GROUP_IDS.MARKER
+        );
+
+        const widthScale = number(
+          "Width Scale:",
+          1,
+          widthScaleOptions,
+          GROUP_IDS.MARKER
+        );
+
+        const rounded = boolean("Rounded:", true, GROUP_IDS.MARKER);
 
         return (
           <DemoJSONLoader urls={mapData}>
@@ -109,7 +211,8 @@ export default () => {
         const colorScheme = select(
           "Color Scheme:",
           colorSchemeOptions,
-          colorSchemeOptions["Purple Green"]
+          colorSchemeOptions["Purple Green"],
+          GROUP_IDS.MARKER
         );
         const colors = parseColors(colorScheme);
 
@@ -118,18 +221,32 @@ export default () => {
           .range(colors);
 
         const getPathColor = f => {
-          const value = f.properties.pct_change;
-          return divergingScale(value);
+          const percentChange = f.properties.pct_change;
+          return divergingScale(percentChange);
         };
 
-        const opacity = number("Opacity:", 0.95, opacityOptions);
+        const opacity = number(
+          "Opacity:",
+          0.95,
+          opacityOptions,
+          GROUP_IDS.MARKER
+        );
 
-        const widthScale = number("Width Scale:", 1, widthScaleOptions);
-        const rounded = boolean("Rounded:", true);
+        const getWidth = number(
+          "Width:",
+          15,
+          getWidthOptions,
+          GROUP_IDS.MARKER
+        );
 
         return (
           <DemoJSONLoader urls={mapData}>
-            {data => {
+            {allData => {
+              const data = object(
+                "Data",
+                allData.slide_data.features,
+                GROUP_IDS.DATA
+              );
               return (
                 <BaseMap
                   mapboxStyle={baseMapStyle}
@@ -138,17 +255,11 @@ export default () => {
                   initialLongitude={-122.67037}
                 >
                   <PathMap
-                    data={data.slide_data.features}
+                    data={data}
                     getColor={getPathColor}
                     opacity={opacity}
                     getPath={getPath}
                     getWidth={getWidth}
-                    widthScale={widthScale}
-                    rounded={rounded}
-                    highlightColor={highlightColor}
-                    onLayerClick={info =>
-                      action("Layer clicked:", { depth: 2 })(info, info.object)
-                    }
                   >
                     <MapTooltip
                       primaryName="Percent Change"
