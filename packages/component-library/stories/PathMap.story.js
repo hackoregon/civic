@@ -63,6 +63,8 @@ const getPath = f => f.geometry.coordinates;
 
 // const getWidthSandard = () => 15;
 
+const standardColor = [25, 183, 170, 255];
+
 export default () => {
   storiesOf("Component Lib|Maps/Path Map", module)
     .addDecorator(withKnobs)
@@ -70,11 +72,7 @@ export default () => {
     .add(
       "Standard",
       () => {
-        const getColor = object(
-          "Color: ",
-          [25, 183, 170, 255],
-          GROUP_IDS.MARKER
-        );
+        const getColor = object("Color: ", standardColor, GROUP_IDS.MARKER);
 
         const opacity = number(
           "Opacity:",
@@ -163,6 +161,18 @@ export default () => {
 
         const rounded = boolean("Rounded:", true, GROUP_IDS.MARKER);
 
+        const autoHighlight = boolean(
+          "Auto Highlight:",
+          true,
+          GROUP_IDS.MARKER
+        );
+
+        const getHighlightColor = object(
+          "Highlight Color: ",
+          highlightColor,
+          GROUP_IDS.MARKER
+        );
+
         return (
           <DemoJSONLoader urls={mapData}>
             {data => {
@@ -181,7 +191,8 @@ export default () => {
                     getWidth={getWidth}
                     widthScale={widthScale}
                     rounded={rounded}
-                    highlightColor={highlightColor}
+                    autoHighlight={autoHighlight}
+                    highlightColor={getHighlightColor}
                     onLayerClick={info =>
                       action("Layer clicked:", { depth: 2 })(info, info.object)
                     }
