@@ -48,6 +48,7 @@ export const getChartData = createSelector(
     ).value;
     const noBurden = 100 - severeBurden - moderateBurden;
 
+    // eslint-disable-next-line consistent-return
     return [
       { label: "Severe", value: severeBurden },
       { label: "Moderate", value: moderateBurden },

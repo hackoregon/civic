@@ -10,9 +10,8 @@ import {
 } from "@storybook/addon-knobs";
 import { checkA11y } from "@storybook/addon-a11y";
 import { extent } from "d3";
+
 import { BaseMap, DemoJSONLoader } from "../src";
-
-
 import notes from "./heatmap.notes.md";
 
 const GROUP_IDS = {

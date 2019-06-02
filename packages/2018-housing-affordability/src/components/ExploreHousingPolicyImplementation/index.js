@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { css } from "emotion";
 import { splitAt } from "ramda";
@@ -19,8 +20,6 @@ import {
 import {
   isLoading,
   isError,
-  getAllPolicies,
-  getAllPrograms,
   getTableData,
   getSelectedPolicy,
   getSelectedPolicyData
@@ -50,25 +49,23 @@ const legendTitles = [
 
 export class ExploreHousingPolicyImplementation extends React.Component {
   componentDidMount() {
-    this.props.fetchData();
+    const { fetchData } = this.props;
+    fetchData();
   }
 
   handleClick(policy) {
-    policy === this.props.selectedPolicy
-      ? this.props.unsetPolicy()
-      : this.props.setPolicy(policy);
+    const { selectedPolicy, unsetPolicy, setPolicy } = this.props;
+    // eslint-disable-next-line no-unused-expressions
+    policy === selectedPolicy ? unsetPolicy() : setPolicy(policy);
   }
 
   render() {
     const {
-      isLoading,
-      isError,
-      allPolicies,
-      allPrograms,
+      loading,
+      error,
       tableData,
       selectedPolicy,
-      selectedPolicyData,
-      unsetPolicy
+      selectedPolicyData
     } = this.props;
 
     const selectedIndex = selectedPolicy
@@ -79,8 +76,8 @@ export class ExploreHousingPolicyImplementation extends React.Component {
 
     return (
       <CivicStoryCard
-        loading={isLoading}
-        error={isError && "Could not load required data"}
+        loading={loading}
+        error={error && "Could not load required data"}
         title="Explore Housing Policy Implementation in the Portland Metro Area"
         slug="explore-housing-policy-implementation"
       >
@@ -143,15 +140,24 @@ export class ExploreHousingPolicyImplementation extends React.Component {
   }
 }
 
+ExploreHousingPolicyImplementation.propTypes = {
+  loading: PropTypes.bool,
+  error: PropTypes.bool,
+  tableData: PropTypes.arrayOf(PropTypes.shape({})),
+  selectedPolicy: PropTypes.shape({}),
+  selectedPolicyData: PropTypes.shape({}),
+  fetchData: PropTypes.func,
+  setPolicy: PropTypes.func,
+  unsetPolicy: PropTypes.func
+};
+
 ExploreHousingPolicyImplementation.displayName =
   "ExploreHousingPolicyImplementation";
 
 export default connect(
   state => ({
-    isLoading: isLoading(state),
-    isError: isError(state),
-    allPolicies: getAllPolicies(state),
-    allPrograms: getAllPrograms(state),
+    loading: isLoading(state),
+    error: isError(state),
     tableData: getTableData(state),
     selectedPolicy: getSelectedPolicy(state),
     selectedPolicyData: getSelectedPolicyData(state)

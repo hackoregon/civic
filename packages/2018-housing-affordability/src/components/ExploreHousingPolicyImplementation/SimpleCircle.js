@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { css } from "emotion";
 
 import CivicVictoryTheme from "@hackoregon/component-library/src/VictoryTheme/VictoryThemeIndex";
@@ -24,5 +25,10 @@ function SimpleCircle({ selected, index }) {
     </svg>
   );
 }
+
+SimpleCircle.propTypes = {
+  selected: PropTypes.bool,
+  index: PropTypes.number
+};
 
 export default SimpleCircle;

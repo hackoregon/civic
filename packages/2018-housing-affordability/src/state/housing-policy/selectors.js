@@ -54,6 +54,7 @@ export const getTableData = createSelector(
       });
     });
 
+    // eslint-disable-next-line consistent-return
     return data;
   }
 );
@@ -73,6 +74,7 @@ export const getSelectedPolicyData = createSelector(
       policy => policy.policy_id === selectedPolicy
     );
 
+    // eslint-disable-next-line consistent-return
     return {
       policy: selectedPolicy,
       description: selectedPolicyData.description,
