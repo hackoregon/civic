@@ -101,7 +101,7 @@ body {
 }
 
 a {
-  color: rgba(238, 73, 80, 1);
+  color: #1e62bd;
   text-decoration: none;
   cursor: pointer;
   opacity: 0.9;
@@ -109,7 +109,7 @@ a {
 }
 
 a:hover {
-  color: rgba(238, 73, 80, 1);
+  color: #1e62bd;
   text-decoration: none;
   cursor: pointer;
   opacity: 1;
@@ -199,6 +199,6 @@ p {
 }
 
 .SecondaryColor {
-  color: rgba(238, 73, 92, 1);
-  fill: rgba(238, 73, 92, 1);
+  color: #1e62bd;
+  fill: #1e62bd;
 }

@@ -53,7 +53,7 @@ Button.propTypes = {
 Button.defaultProps = {
   display: "block",
   margin: "12px",
-  accentColor: "#DC4556",
+  accentColor: "#1E62BD",
   bkgndColor: "#FFFFFF",
   transition: "all .2s ease-in-out"
 };
