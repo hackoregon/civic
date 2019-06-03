@@ -20,9 +20,11 @@ These properties can be set in the Standard story:
 
 ## Custom
 
-The Custom story shows all possible properties that can be passed to the LineChart component for customization. An additional property is added to the properties listed in the Standard story.
+The Custom story shows all possible properties that can be passed to the LineChart component for customization. Three additional properties are added to the properties listed in the Standard story.
 
 - domain: The domain property describes the range of data the component will include. This prop is given as an object that specifies separate arrays for the dependent and independent variables. If this prop is not provided, as in the Standard story, a domain will be calculated from data, or other available information. In line charts, the x value corresponds to the independent variable, shown on the x-axis, and the dependent variable corresponds to the y value, shown on the y-axis.
+- Data key label
+- Data value label
 
 The Custom story also shows the use of a custom legend, which is a separate component.
 
@@ -30,8 +32,8 @@ The Custom story also shows the use of a custom legend, which is a separate comp
 
 The example Simple story shows the minimal properties needed for the LineChart.
 
-- Title
-- Subtitle
+- X-axis label
+- Y-axis label
 - Data
 
 ## Many Data Points
