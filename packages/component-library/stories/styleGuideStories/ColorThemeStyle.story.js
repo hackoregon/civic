@@ -135,7 +135,7 @@ const ColorThemeStyle = () => (
       />
       <div>
         <h4>Green</h4>
-        <p style={storybookStyles.dataText}>Hex: #1E62BD</p>
+        <p style={storybookStyles.dataText}>Hex: #19B7AA</p>
         <p style={storybookStyles.dataText}>rgb: 30,98,189</p>
       </div>
     </div>
