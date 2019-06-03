@@ -72,21 +72,21 @@ export default () =>
       "Standard",
       () => {
         const sampleTransportationData = [
-          { x: 2001, y: 217309, series: "weekday" },
-          { x: 2002, y: 254651, series: "weekday" },
-          { x: 2003, y: 213986, series: "weekday" },
-          { x: 2004, y: 266412, series: "weekday" },
-          { x: 2005, y: 313494, series: "weekday" },
-          { x: 2001, y: 73028, series: "saturday" },
-          { x: 2002, y: 113778, series: "saturday" },
-          { x: 2003, y: 111636, series: "saturday" },
-          { x: 2004, y: 155272, series: "saturday" },
-          { x: 2005, y: 188757, series: "saturday" },
-          { x: 2001, y: 73028, series: "sunday" },
-          { x: 2002, y: 75042, series: "sunday" },
-          { x: 2003, y: 75615, series: "sunday" },
-          { x: 2004, y: 108040, series: "sunday" },
-          { x: 2005, y: 134569, series: "sunday" }
+          { year: 2001, ridership: 217309, series: "weekday" },
+          { year: 2002, ridership: 254651, series: "weekday" },
+          { year: 2003, ridership: 213986, series: "weekday" },
+          { year: 2004, ridership: 266412, series: "weekday" },
+          { year: 2005, ridership: 313494, series: "weekday" },
+          { year: 2001, ridership: 73028, series: "saturday" },
+          { year: 2002, ridership: 113778, series: "saturday" },
+          { year: 2003, ridership: 111636, series: "saturday" },
+          { year: 2004, ridership: 155272, series: "saturday" },
+          { year: 2005, ridership: 188757, series: "saturday" },
+          { year: 2001, ridership: 73028, series: "sunday" },
+          { year: 2002, ridership: 75042, series: "sunday" },
+          { year: 2003, ridership: 75615, series: "sunday" },
+          { year: 2004, ridership: 108040, series: "sunday" },
+          { year: 2005, ridership: 134569, series: "sunday" }
         ];
         const sampleDataSeries = "series";
         const sampleDataSeriesLabel = [
@@ -122,8 +122,8 @@ export default () =>
           GROUP_IDS.LABELS
         );
 
-        const dataKey = text("Data key", "x", GROUP_IDS.DATA);
-        const dataValue = text("Data values", "y", GROUP_IDS.DATA);
+        const dataKey = text("Data key", "year", GROUP_IDS.DATA);
+        const dataValue = text("Data values", "ridership", GROUP_IDS.DATA);
         const dataSeries = text(
           "Data series",
           sampleDataSeries,
@@ -158,21 +158,21 @@ export default () =>
       "Custom",
       () => {
         const sampleTransportationData = [
-          { x: 2001, y: 217309, series: "weekday" },
-          { x: 2002, y: 254651, series: "weekday" },
-          { x: 2003, y: 213986, series: "weekday" },
-          { x: 2004, y: 266412, series: "weekday" },
-          { x: 2005, y: 313494, series: "weekday" },
-          { x: 2001, y: 73028, series: "saturday" },
-          { x: 2002, y: 113778, series: "saturday" },
-          { x: 2003, y: 111636, series: "saturday" },
-          { x: 2004, y: 155272, series: "saturday" },
-          { x: 2005, y: 188757, series: "saturday" },
-          { x: 2001, y: 73028, series: "sunday" },
-          { x: 2002, y: 75042, series: "sunday" },
-          { x: 2003, y: 75615, series: "sunday" },
-          { x: 2004, y: 108040, series: "sunday" },
-          { x: 2005, y: 134569, series: "sunday" }
+          { year: 2001, ridership: 217309, series: "weekday" },
+          { year: 2002, ridership: 254651, series: "weekday" },
+          { year: 2003, ridership: 213986, series: "weekday" },
+          { year: 2004, ridership: 266412, series: "weekday" },
+          { year: 2005, ridership: 313494, series: "weekday" },
+          { year: 2001, ridership: 73028, series: "saturday" },
+          { year: 2002, ridership: 113778, series: "saturday" },
+          { year: 2003, ridership: 111636, series: "saturday" },
+          { year: 2004, ridership: 155272, series: "saturday" },
+          { year: 2005, ridership: 188757, series: "saturday" },
+          { year: 2001, ridership: 73028, series: "sunday" },
+          { year: 2002, ridership: 75042, series: "sunday" },
+          { year: 2003, ridership: 75615, series: "sunday" },
+          { year: 2004, ridership: 108040, series: "sunday" },
+          { year: 2005, ridership: 134569, series: "sunday" }
         ];
         const sampleDataSeries = "series";
         const sampleDataSeriesLabel = [
@@ -209,13 +209,13 @@ export default () =>
           { display: "select" },
           GROUP_IDS.LABELS
         );
-        const dataKey = text("Data key", "x", GROUP_IDS.DATA);
-        const dataKeyLabel = text("Data key label", "Year", GROUP_IDS.DATA);
-        const dataValue = text("Data value", "y", GROUP_IDS.DATA);
+        const dataKey = text("Data key", "year", GROUP_IDS.DATA);
+        const dataKeyLabel = text("Data key label", "Year", GROUP_IDS.CUSTOM);
+        const dataValue = text("Data value", "ridership", GROUP_IDS.DATA);
         const dataValueLabel = text(
           "Data value label",
           "Avg Daily Ridership",
-          GROUP_IDS.DATA
+          GROUP_IDS.CUSTOM
         );
         const dataSeries = text(
           "Data series",
@@ -277,7 +277,7 @@ export default () =>
       "Example: Many data points",
       () => {
         const scale = 0.25;
-        const value = number("Number of data points", 100);
+        const value = number("Number of data points", 100, GROUP_IDS.DATA);
         return (
           <LineChart
             data={Array(value)
