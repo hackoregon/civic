@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import React, { useState, useEffect } from "react";
 import { string, arrayOf, func } from "prop-types";
 /* global fetch */
@@ -20,7 +21,7 @@ const DemoJSONLoader = props => {
         );
     });
     Promise.all(promisesArr)
-      .then(data => setData(data))
+      .then(response => setData(response))
       .catch(error => {
         throw new Error(error);
       });
