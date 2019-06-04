@@ -20,7 +20,12 @@ The Standard story shows the standard usage of Scatterplot for the CIVIC platfor
 
 The Custom story shows all possible properties that can be passed to the Scatterplot for customization. They include the properties in the Standard Scatterplot story, plus these:
 
-- xxx
+- Size
+- Domain
+- Invert X
+- Invert Y
+
+The Custom story also shows the use of a custom legend, which is a separate component.
 
 ## Example: Simple
 
