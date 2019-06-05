@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default */
 import LifeAlteringEvent from "./components/LifeAlteringEvent";
 import ViolentShakingAndGroundDeformation from "./components/ViolentShakingAndGroundDeformation";
 import SignificantStructuralDamage from "./components/SignificantStructuralDamage";

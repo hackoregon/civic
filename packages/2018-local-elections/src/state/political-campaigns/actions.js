@@ -39,7 +39,7 @@ export const fetchContributorBreakdown = (
     `${endpoint(CONTRIBUTOR_BREAKDOWN)}`,
     {
       ...params,
-      //election_cycle: electionCycleID,
+      // election_cycle: electionCycleID,
       committee_id: committeeID
     },
     {
@@ -58,7 +58,7 @@ export const fetchSpendingBreakdown = (
     `${endpoint(SPENDING_BREAKDOWN)}`,
     {
       ...params,
-      //election_cycle: electionCycleID,
+      // election_cycle: electionCycleID,
       committee_id: committeeID
     },
     {

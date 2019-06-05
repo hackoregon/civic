@@ -76,7 +76,7 @@ IntensityDisplay.propTypes = {
   max: PropTypes.number,
   metric: PropTypes.string,
   label: PropTypes.string,
-  scale: PropTypes.object,
+  scale: PropTypes.shape({}),
   transform: PropTypes.func,
   domain: PropTypes.arrayOf(PropTypes.number)
 };

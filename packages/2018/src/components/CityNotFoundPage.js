@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router";
 
 const capitalize = str =>
@@ -19,6 +20,10 @@ const CityNotFoundPage = ({ params }) => (
     </p>
   </div>
 );
+
+CityNotFoundPage.propTypes = {
+  params: PropTypes.string
+};
 
 CityNotFoundPage.displayName = "CityNotFoundPage";
 

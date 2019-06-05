@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default */
 import IncreasingVolumeOfMoney from "./components/IncreasingVolumeOfMoney";
 import HowMuchDoesMoneyMatterInElections from "./components/HowMuchDoesMoneyMatterInElections";
 import OutraisingYourOpponent from "./components/OutraisingYourOpponent";

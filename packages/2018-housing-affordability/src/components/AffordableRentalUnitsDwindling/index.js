@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import { connect } from "react-redux";
-import { loader, error, gradientLabel, emphasis } from "../css-utils";
 
 import "@hackoregon/component-library/assets/vendor/react-select.min.css";
 
@@ -13,6 +13,7 @@ import {
 } from "@hackoregon/component-library";
 
 import { civicFormat } from "@hackoregon/component-library/dist/utils";
+import { loader, error, gradientLabel, emphasis } from "../css-utils";
 
 import {
   fetchAllARUCities,
@@ -43,13 +44,13 @@ const capitalize = str =>
 
 export class AffordableRentalUnitsDwindling extends React.Component {
   componentDidMount() {
-    this.props.fetchAllCities();
-    this.props.setCity();
+    const { fetchAllCities, setCity } = this.props;
+    fetchAllCities();
+    setCity();
   }
 
   render() {
     const {
-      isLoadingAllCities,
       isLoading,
       isError,
       selectedCity,

@@ -62,7 +62,8 @@ const mapGLOptions = {
 
 export class YouAndYourNeighbors extends React.Component {
   componentDidMount() {
-    this.props.init();
+    const { init } = this.props;
+    init();
   }
 
   render() {
@@ -70,8 +71,6 @@ export class YouAndYourNeighbors extends React.Component {
       isLoading,
       error,
       data,
-      isCoordsLoading,
-      coordsError,
       coordsData,
       selectedCoords,
       setCoordinates
@@ -171,11 +170,10 @@ YouAndYourNeighbors.displayName = "YouAndYourNeighbors";
 YouAndYourNeighbors.propTypes = {
   init: PropTypes.func,
   isLoading: PropTypes.bool,
-  error: PropTypes.object,
-  data: PropTypes.object,
-  isCoordsLoading: PropTypes.bool,
-  coordsError: PropTypes.object,
-  coordsData: PropTypes.object,
+  error: PropTypes.shape({}),
+  data: PropTypes.shape({}),
+  coordsData: PropTypes.shape({}),
+  selectedCoords: PropTypes.shape({}),
   setCoordinates: PropTypes.func
 };
 

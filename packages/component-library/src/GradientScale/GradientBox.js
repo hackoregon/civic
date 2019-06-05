@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import { Box } from "victory";
 
-const GradientLine = ({ scale, domain, fill }) => {
+const GradientBox = ({ scale, domain, fill }) => {
   const width = scale.x(domain.x[1]) - scale.x(domain.x[0]);
   const height = Math.abs(scale.y(domain.y[1]) - scale.y(domain.y[0]));
   return (
@@ -17,7 +17,7 @@ const GradientLine = ({ scale, domain, fill }) => {
   );
 };
 
-GradientLine.propTypes = {
+GradientBox.propTypes = {
   scale: PropTypes.shape({
     y: PropTypes.func,
     x: PropTypes.func
@@ -29,4 +29,4 @@ GradientLine.propTypes = {
   fill: PropTypes.string.isRequired
 };
 
-export default GradientLine;
+export default GradientBox;

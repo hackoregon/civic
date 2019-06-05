@@ -112,5 +112,5 @@ deploy-component-library:
 	@echo "Publishing canary versions of packages to npm"
 	yarn run publish-canary
 	@echo "Deploying the component library"
-	yarn run deploy-storybook -- --ci
+	yarn run deploy-storybook --ci
 

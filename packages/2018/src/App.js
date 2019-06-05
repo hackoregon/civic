@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import React from "react";
 import { createStore, compose, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
@@ -51,6 +52,7 @@ import {
 import { Reducers as SandboxReducers } from "@hackoregon/civic-sandbox";
 
 import "./fonts.css";
+// eslint-disable-next-line import/no-named-as-default
 import RootPage from "./components/RootPage";
 import HomePage from "./components/HomePage";
 import SandboxPage from "./components/SandboxPage";
@@ -58,6 +60,7 @@ import PortlandCollectionPage from "./components/PortlandCollectionPage";
 import CityNotFoundPage from "./components/CityNotFoundPage";
 import StateNotFoundPage from "./components/StateNotFoundPage";
 import CardDetailPage from "./components/CardDetailPage";
+import CardDetailPageEmbed from "./components/CardDetailPageEmbed";
 
 // Create a store by combining all project reducers and the routing reducer
 const configureStore = (initialState, history) => {
@@ -187,6 +190,10 @@ const routes = {
     {
       path: "cards/:slug",
       component: CardDetailPage
+    },
+    {
+      path: "cards/:slug/embed",
+      component: CardDetailPageEmbed
     },
     {
       path: "sandbox",

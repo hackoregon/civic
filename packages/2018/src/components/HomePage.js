@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router";
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { cx, css } from "emotion";
 import Carousel from "nuka-carousel";
 import {
@@ -468,6 +469,7 @@ class HomePage extends Component {
             <div className={buttonContainerStatic}>
               <Link to="/cities/portland">
                 <button
+                  type="button"
                   className={cx(buttonStyle, buttonDropShadow)}
                 >{`Explore CIVIC >`}</button>
               </Link>
@@ -654,8 +656,11 @@ class HomePage extends Component {
           <div className={initialContentContainer}>
             <div className={buttonContainerStatic}>
               <a href="#getStarted">
-                <button className={cx(buttonStyle, buttonDropShadow)}>
-                  Get started with your city >
+                <button
+                  type="button"
+                  className={cx(buttonStyle, buttonDropShadow)}
+                >
+                  Get started with your city &gt;
                 </button>
               </a>
             </div>
@@ -697,10 +702,10 @@ class HomePage extends Component {
                   </p>
                 </div>
                 <div className={brainWrapper}>
-                  <img src={brain} />
+                  <img src={brain} alt="" />
                 </div>
                 <div className={brainWrapperMobile}>
-                  <img src={brainMobile} />
+                  <img src={brainMobile} alt="" />
                 </div>
                 <div className={contentRightContainer}>
                   <div className={listTitle}>Supporting Technology</div>
@@ -749,13 +754,18 @@ class HomePage extends Component {
                     with our partner network.
                   </p>
                   <a href="http://hackoregon.org/membership">
-                    <button className={buttonStyle}>
+                    <button type="button" className={buttonStyle}>
                       Start the conversation
                     </button>
                   </a>
                 </div>
                 <div className={rightThirdWrapper}>
-                  <div className={listTitle}>Get Involved ✨</div>
+                  <div className={listTitle}>
+                    Get Involved{" "}
+                    <span role="img" aria-label="sparkles">
+                      ✨
+                    </span>
+                  </div>
                   <div className={listSubTitle}>
                     Teamwork and building on CIVIC
                   </div>
@@ -769,8 +779,11 @@ class HomePage extends Component {
                   <a
                     href="http://hackoregon.org/joinacivicteam"
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    <button className={buttonStyle}>Apply now</button>
+                    <button type="button" className={buttonStyle}>
+                      Apply now
+                    </button>
                   </a>
                   <div className={listSubTitle}>
                     Collaborate as an industry partner
@@ -786,8 +799,11 @@ class HomePage extends Component {
                   <a
                     href="http://hackoregon.org/joinacivicteam"
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    <button className={buttonStyle}>Apply now</button>
+                    <button type="button" className={buttonStyle}>
+                      Apply now
+                    </button>
                   </a>
                 </div>
               </div>
@@ -796,7 +812,11 @@ class HomePage extends Component {
             <div className={aboutCivicWrapper} id="aboutCivic">
               <div className={cx(sectionHeaderWrapper, treesBackground)}>
                 <div className={cx(sectionHeaderTitle, hackOregonLogoWrapper)}>
-                  <img src={hackOregonLogo} className={hackOregonLogoStyle} />
+                  <img
+                    src={hackOregonLogo}
+                    className={hackOregonLogoStyle}
+                    alt="Hack Oregon logo"
+                  />
                 </div>
               </div>
               <div className={cx(sectionContentWrapper, rightThirdGrid)}>
@@ -816,19 +836,22 @@ class HomePage extends Component {
                     Civic Software Foundation.
                   </div>
                   <div className={iconAndTextWrapper}>
-                    <img src={heartMail} width="60" />
+                    <img src={heartMail} width="60" alt="Mail Heart" />
                     <span>Subscribe for updates!</span>
                   </div>
                   <div className={iconAndTextWrapper}>
                     <a href="https://secure.squarespace.com/checkout/donate?donatePageId=551721b2e4b057e153f5c1cc">
-                      <button className={cx(buttonStyle, donateButton)}>
+                      <button
+                        type="button"
+                        className={cx(buttonStyle, donateButton)}
+                      >
                         Donate
                       </button>
                     </a>
                     <span>Help us continue to maintain and develop CIVIC.</span>
                   </div>
                   <div className={iconAndTextWrapper}>
-                    <img src={twitterLogo} width="40" />
+                    <img src={twitterLogo} width="40" alt="Twitter Logo" />
                     <span>
                       <a href="https://twitter.com/civicsoftware">
                         @civicsoftware
@@ -856,7 +879,9 @@ class HomePage extends Component {
                     for our next cycle.
                   </p>
                   <a href="http://hackoregon.org/civicpdx">
-                    <button className={buttonStyle}>Learn more</button>
+                    <button type="button" className={buttonStyle}>
+                      Learn more
+                    </button>
                   </a>
                 </div>
               </div>

@@ -1,5 +1,4 @@
 import { createSelector } from "reselect";
-import { chunk } from "lodash";
 import { rootState } from "../selectors";
 
 export const getVolumeOfMoney = createSelector(

@@ -1,9 +1,8 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import { connect } from "react-redux";
-import { loader, error, gradientLabel, emphasis } from "../css-utils";
 
 import "@hackoregon/component-library/assets/vendor/react-select.min.css";
-
 import {
   CivicStoryCard,
   Dropdown,
@@ -11,6 +10,7 @@ import {
   GradientScale
 } from "@hackoregon/component-library";
 
+import { gradientLabel, emphasis } from "../css-utils";
 import {
   fetchAllPNWSurgeData,
   setPNWSurgeCity
@@ -26,13 +26,16 @@ import {
 
 export class PacificNorthwestTopsNationInSurgingHomePrices extends React.Component {
   componentDidMount() {
-    this.props.fetchData();
-    this.props.setCity();
+    const { fetchData, setCity } = this.props;
+    fetchData();
+    setCity();
   }
 
   render() {
     const {
+      // eslint-disable-next-line no-shadow
       isLoading,
+      // eslint-disable-next-line no-shadow
       isError,
       allCities,
       selectedCity,
