@@ -121,8 +121,8 @@ const ColorThemeStyle = () => (
       />
       <div>
         <h4>Blue</h4>
-        <p style={storybookStyles.dataText}>Hex: #19B7AA</p>
-        <p style={storybookStyles.dataText}>rgb: 25,183,170</p>
+        <p style={storybookStyles.dataText}>Hex: #1E62BD</p>
+        <p style={storybookStyles.dataText}>rgb: 30,98,189</p>
       </div>
     </div>
     <div style={storybookStyles.solidColorSample}>
@@ -134,9 +134,9 @@ const ColorThemeStyle = () => (
         )}
       />
       <div>
-        <h4>Green</h4>
-        <p style={storybookStyles.dataText}>Hex: #1E62BD</p>
-        <p style={storybookStyles.dataText}>rgb: 30,98,189</p>
+        <h4>Teal</h4>
+        <p style={storybookStyles.dataText}>Hex: #19B7AA</p>
+        <p style={storybookStyles.dataText}>rgb: 25,183,170</p>
       </div>
     </div>
     <div style={storybookStyles.solidColorSample}>
