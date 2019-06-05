@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { css } from "emotion";
 
 import { CivicStoryCard, LineChart } from "@hackoregon/component-library";
 
@@ -14,7 +13,8 @@ import {
 
 export class DeclineInRidership extends React.Component {
   componentDidMount() {
-    this.props.init();
+    const { init } = this.props;
+    init();
   }
 
   render() {
@@ -31,9 +31,9 @@ export class DeclineInRidership extends React.Component {
           Newly released findings from TriMet shows a slow decline in public
           transit ridership relative to population growth over the last 10
           years, a pattern which appears to be consistent across the nation.
-          While the cause of decline in ridership doesn't point to a single
-          variable, it's been suggested that housing affordability and economic
-          displacement may play a role in this phenomenon.
+          While the cause of decline in ridership doesn&apos;t point to a single
+          variable, it&apos;s been suggested that housing affordability and
+          economic displacement may play a role in this phenomenon.
         </p>
         {ridershipOverTime && (
           <LineChart
