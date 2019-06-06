@@ -5,7 +5,7 @@ import { HorizontalBarChart } from "@hackoregon/component-library";
 import { civicFormat } from "@hackoregon/component-library/dist/utils";
 
 const propTypes = {
-  spending: PropTypes.array,
+  spending: PropTypes.arrayOf(PropTypes.shape({})),
   loading: PropTypes.bool
 };
 
@@ -16,7 +16,7 @@ const defaultProps = {
 const SpendingBreakdown = ({ spending, loading }) => {
   const data = spending.map(c => ({
     y: c.spending_category,
-    x: parseInt(c.sum)
+    x: parseInt(c.sum, 10)
   }));
 
   return (

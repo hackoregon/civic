@@ -31,14 +31,14 @@
     "start:dev": "cross-env NODE_ENV=development babel-node server",
     "start:prod": "cross-env NODE_ENV=production node server",
     "test": "cross-env BABEL_ENV=test mocha --opts ./mocha.opts 'src/**/*.test.js'",
-    "lint": "eslint --fix src"
+    "lint": "eslint src"
   },
   "dependencies": {
     "@hackoregon/component-library": "^3.0.0",
     "compression": "^1.6.2",
     "cross-env": "^5.2.0",
     "d3-format": "^1.2.0",
-    "emotion": "^10.0.6",
+    "emotion": "^10.0.9",
     "express": "^4.14.1",
     "invariant": "^2.2.2",
     "isomorphic-fetch": "^2.2.1",

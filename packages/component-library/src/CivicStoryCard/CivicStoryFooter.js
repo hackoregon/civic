@@ -17,11 +17,17 @@ const actionsClass = css`
   @media (max-width: 640px) {
     margin: -3em -2em;
     margin-top: 2em;
+    padding: 0;
   }
 `;
 
 const alignRight = css`
   margin-left: 0;
+  display: flex;
+`;
+
+const alignLeft = css`
+  margin-right: 0;
   display: flex;
 `;
 
@@ -57,23 +63,33 @@ export default class StoryFooter extends Component {
   render() {
     const { slug, source } = this.props;
     const { copied } = this.state;
-    const shareTxt = copied ? "Link copied!" : "Share card"; // if copied, show Link copied, otherwise, show Share card
+    const shareTxt = copied ? "Copied!" : "Share"; // if copied, show Link copied, otherwise, show Share card
     const shareIcon = copied ? ICONS.check : ICONS.link;
     const routeOrUndefined =
       `${window.location.origin}/cards/${slug}` === window.location.href
         ? undefined
         : `/cards/${slug}`;
+    const issue = `https://github.com/hackoregon/civic/issues/new?labels=type%3Astory-card&template=story-card-improve.md&title=[FEEDBACK] ${slug}`;
 
     return (
       <div className={actionsClass}>
-        <CivicStoryLink
-          link={source}
-          route={source ? undefined : `/cards/${slug}`}
-          icon={ICONS.info}
-        >
-          Source
-        </CivicStoryLink>
+        <div className={alignLeft}>
+          <CivicStoryLink
+            link={source}
+            route={source ? undefined : `/cards/${slug}`}
+            icon={ICONS.info}
+          >
+            Source
+          </CivicStoryLink>
+        </div>
         <div className={alignRight}>
+          <CivicStoryLink
+            additionalClassName={alignRight}
+            link={issue}
+            icon={ICONS.improve}
+          >
+            Improve
+          </CivicStoryLink>
           <CivicStoryLink
             additionalClassName={alignRight}
             route={routeOrUndefined}

@@ -1,16 +1,10 @@
+/* eslint-disable import/no-named-as-default */
 import React from "react";
 
 import "@hackoregon/component-library/assets/global.styles.css";
 import { PageLayout } from "@hackoregon/component-library";
 import IncreasingVolumeOfMoney from "../IncreasingVolumeOfMoney";
-import HowMuchDoesMoneyMatterInElections from "../HowMuchDoesMoneyMatterInElections";
 import OutraisingYourOpponent from "../OutraisingYourOpponent";
-import SuccessfulSpendingPatterns from "../SuccessfulSpendingPatterns";
-import InfluentialContributorCohorts from "../InfluentialContributorCohorts";
-import MeasuringThePowerOfGrassroots from "../MeasuringThePowerOfGrassroots";
-import YourVoteHasAPriceTag from "../YourVoteHasAPriceTag";
-import PrimariesArePredictive from "../PrimariesArePredictive";
-import IsPartyAffiliationRelevant from "../IsPartyAffiliationRelevant";
 import RealTimeInformationOnPoliticalCampaigns from "../RealTimeInformationOnPoliticalCampaigns";
 
 const App = () => (

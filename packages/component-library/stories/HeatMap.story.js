@@ -1,265 +1,261 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { withKnobs, number, select } from "@storybook/addon-knobs";
+import {
+  withKnobs,
+  select,
+  object,
+  text,
+  number
+} from "@storybook/addon-knobs";
 import { checkA11y } from "@storybook/addon-a11y";
-import { HeatMap, DemoJSONLoader } from "../src";
+import { extent } from "d3";
 
-const heatmapComponent = data => {
-  if (data === null) {
-    return null;
-  }
+import { BaseMap, DemoJSONLoader } from "../src";
+import notes from "./heatmap.notes.md";
 
-  const dataProperty = "new_units";
-  const dataMin = 0;
-  const dataMax = 2;
+const GROUP_IDS = {
+  HEAT_MAP: "Style",
+  HEAT_MAP_DATA: "Data"
+};
 
-  const maxZoom = 19;
-
-  const startZoomTransition = 11;
-  const endZoomTransition = 15;
-
-  const heatZoomFadeStart = 14;
-  const heatZoomFadeOut = 15;
-  const circleZoomFadeEnd = 15;
-  const circleZoomFadeIn = 14;
-
-  const heatMapWeight = [
-    "interpolate",
-    ["linear"],
-    ["get", dataProperty],
-    dataMin,
+const colorOptions = {
+  Inferno: [
     0,
-    dataMax,
-    1
-  ];
-
-  const heatMapIntensity = [
-    "interpolate",
-    ["linear"],
-    ["zoom"],
-    startZoomTransition,
+    "rgba(0,0,0,0)",
+    0.2,
+    "#420a68",
+    0.4,
+    "#932667",
+    0.6,
+    "#dd513a",
+    0.8,
+    "#fca50a",
     1,
-    endZoomTransition,
-    2
-  ];
-
-  const colorOptions = {
-    Plasma: [
-      0,
-      "rgba(0,0,0,0)",
-      0.2,
-      "#6a00a8",
-      0.4,
-      "#b12a90",
-      0.6,
-      "#e16462",
-      0.8,
-      "#fca636",
-      1,
-      "#f0f921"
-    ],
-    Viridis: [
-      0,
-      "rgba(0,0,0,0)",
-      0.2,
-      "#414487",
-      0.4,
-      "#2a788e",
-      0.6,
-      "#22a884",
-      0.8,
-      "#7ad151",
-      1,
-      "#fde725"
-    ],
-    Inferno: [
-      0,
-      "rgba(0,0,0,0)",
-      0.2,
-      "#420a68",
-      0.4,
-      "#932667",
-      0.6,
-      "#dd513a",
-      0.8,
-      "#fca50a",
-      1,
-      "#fcffa4"
-    ],
-    Magma: [
-      0,
-      "rgba(0,0,0,0)",
-      0.2,
-      "#3b0f70",
-      0.4,
-      "#8c2981",
-      0.6,
-      "#de4968",
-      0.8,
-      "#fe9f6d",
-      1,
-      "#fcfdbf"
-    ],
-    Warm: [
-      0,
-      "rgba(0,0,0,0)",
-      0.2,
-      "rgb(191, 60, 175)",
-      0.4,
-      "rgb(254, 75, 131)",
-      0.6,
-      "rgb(255, 120, 71)",
-      0.8,
-      "rgb(226, 183, 47)",
-      1,
-      "rgb(175, 240, 91)"
-    ],
-    Cool: [
-      0,
-      "rgba(0,0,0,0)",
-      0.2,
-      "rgb(76, 110, 219)",
-      0.4,
-      "rgb(35, 171, 216)",
-      0.6,
-      "rgb(29, 223, 163)",
-      0.8,
-      "rgb(82, 246, 103)",
-      1,
-      "rgb(175, 240, 91)"
-    ]
-  };
-  const colorScale = select(
-    "Heat Color",
-    colorOptions,
-    colorOptions.Plasma,
-    "Heat Map"
-  );
-
-  const heatMapColorScale = [
-    "interpolate",
-    ["linear"],
-    ["heatmap-density"],
-    ...colorScale
-  ];
-
-  const heatMapRadius = [
-    "interpolate",
-    ["linear"],
-    ["zoom"],
-    startZoomTransition,
-    15,
-    endZoomTransition,
-    20
-  ];
-
-  const heatMapOpacity = [
-    "interpolate",
-    ["linear"],
-    ["zoom"],
-    heatZoomFadeStart,
+    "#fcffa4"
+  ],
+  Viridis: [
+    0,
+    "rgba(0,0,0,0)",
+    0.2,
+    "#414487",
+    0.4,
+    "#2a788e",
+    0.6,
+    "#22a884",
+    0.8,
+    "#7ad151",
     1,
-    heatZoomFadeOut,
-    0
-  ];
-
-  const circleRadius = [
-    "interpolate",
-    ["linear"],
-    ["zoom"],
-    circleZoomFadeEnd,
-    ["interpolate", ["linear"], ["get", dataProperty], dataMin, 1, dataMax, 10],
-    maxZoom,
-    ["interpolate", ["linear"], ["get", dataProperty], dataMin, 11, dataMax, 20]
-  ];
-
-  const circleOpacity = [
-    "interpolate",
-    ["linear"],
-    ["zoom"],
-    circleZoomFadeIn,
+    "#fde725"
+  ],
+  Plasma: [
     0,
-    circleZoomFadeEnd,
-    1
-  ];
-
-  const circleFillColor = colorScale[11];
-
-  const circleStrokeColor = colorScale[5];
-
-  const circleStrokeWidth = 1.5;
-
-  const circleStrokeOpacity = [
-    "interpolate",
-    ["linear"],
-    ["zoom"],
-    circleZoomFadeIn,
+    "rgba(0,0,0,0)",
+    0.2,
+    "#6a00a8",
+    0.4,
+    "#b12a90",
+    0.6,
+    "#e16462",
+    0.8,
+    "#fca636",
+    1,
+    "#f0f921"
+  ],
+  Magma: [
     0,
-    circleZoomFadeEnd,
-    1
-  ];
+    "rgba(0,0,0,0)",
+    0.2,
+    "#3b0f70",
+    0.4,
+    "#8c2981",
+    0.6,
+    "#de4968",
+    0.8,
+    "#fe9f6d",
+    1,
+    "#fcfdbf"
+  ],
+  Warm: [
+    0,
+    "rgba(0,0,0,0)",
+    0.2,
+    "rgb(191, 60, 175)",
+    0.4,
+    "rgb(254, 75, 131)",
+    0.6,
+    "rgb(255, 120, 71)",
+    0.8,
+    "rgb(226, 183, 47)",
+    1,
+    "rgb(175, 240, 91)"
+  ],
+  Cool: [
+    0,
+    "rgba(0,0,0,0)",
+    0.2,
+    "rgb(76, 110, 219)",
+    0.4,
+    "rgb(35, 171, 216)",
+    0.6,
+    "rgb(29, 223, 163)",
+    0.8,
+    "rgb(82, 246, 103)",
+    1,
+    "rgb(175, 240, 91)"
+  ]
+};
 
-  return (
-    <HeatMap
-      id="building-permits"
-      centerLatitude={45.5597}
-      centerLongitude={-122.7066}
-      initialZoom={9.75}
-      maxZoom={maxZoom}
-      mapStyle="mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg"
-      data={data.results}
-      heatMapWeight={heatMapWeight}
-      heatMapIntensity={heatMapIntensity}
-      heatMapColorScale={heatMapColorScale}
-      heatMapRadius={heatMapRadius}
-      heatMapOpacity={heatMapOpacity}
-      circleRadius={circleRadius}
-      circleOpacity={circleOpacity}
-      circleFillColor={circleFillColor}
-      circleStrokeColor={circleStrokeColor}
-      circleStrokeWidth={circleStrokeWidth}
-      circleStrokeOpacity={circleStrokeOpacity}
-    />
-  );
+const heatMapDataURL =
+  "https://service.civicpdx.org/transportation-systems/trimet-stop-events/disturbance-stops/" +
+  "?limit=500&offset=0";
+
+const heatMapRadiusOptions = {
+  range: true,
+  min: 1,
+  max: 50,
+  step: 1
+};
+
+const heatMapIntensityOptions = {
+  range: true,
+  min: 1,
+  max: 5,
+  step: 0.5
+};
+
+const heatMapOpacityOptions = {
+  range: true,
+  min: 0,
+  max: 1,
+  step: 0.05
 };
 
 export default () =>
   storiesOf("Component Lib|Maps/Heat Map", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
-    .add("Simple usage", () => {
-      const selectionOptions = {
-        "Single Family":
-          "?new_type=Single+Family+Dwelling&new_class=New+Construction&is_adu=false",
-        "Multi Family":
-          "?new_type=Apartments/Condos,Duplex,Rowhouse,Townhouse&new_class=New+Construction&is_adu=false",
-        "Accessory Dwelling Units":
-          "?new_class=New+Construction,Alteration,Addition&is_adu=true"
-      };
-      const selection = select(
-        "Data:",
-        selectionOptions,
-        selectionOptions["Single Family"],
-        "Heat Map"
-      );
+    .add(
+      "Standard",
+      () => {
+        const heatMapRadius = number(
+          "Radius:",
+          25,
+          heatMapRadiusOptions,
+          GROUP_IDS.HEAT_MAP
+        );
 
-      const yearOptions = {
-        range: true,
-        min: 1995,
-        max: 2016,
-        step: 1
-      };
-      const year = number("Year", 1995, yearOptions, "Heat Map");
+        const heatMapOpacity = number(
+          "Opacity:",
+          0.9,
+          heatMapOpacityOptions,
+          GROUP_IDS.HEAT_MAP
+        );
 
-      const base =
-        "https://service.civicpdx.org/housing-affordability/api/permits/";
-      const options = "&format=json&limit=30000&year=";
-      const url = base + selection + options + year;
+        const heatMapIntensity = number(
+          "Intensity:",
+          1,
+          heatMapIntensityOptions,
+          GROUP_IDS.HEAT_MAP
+        );
 
-      return (
-        <DemoJSONLoader urls={[url]}>
-          {data => heatmapComponent(data)}
-        </DemoJSONLoader>
-      );
-    });
+        const heatMapColorGradient = select(
+          "Color Gradient:",
+          colorOptions,
+          colorOptions.Inferno,
+          GROUP_IDS.HEAT_MAP
+        );
+
+        const heatMapColor = object(
+          "heatmap-color:",
+          [
+            "interpolate",
+            ["linear"],
+            ["heatmap-density"],
+            ...heatMapColorGradient
+          ],
+          GROUP_IDS.HEAT_MAP
+        );
+
+        const heatMapAPIURL = text(
+          "API URL:",
+          heatMapDataURL,
+          GROUP_IDS.HEAT_MAP_DATA
+        );
+
+        const heatMapDataProperty = text(
+          "Property Key:",
+          "time_diff",
+          GROUP_IDS.HEAT_MAP_DATA
+        );
+
+        return (
+          <DemoJSONLoader urls={[heatMapAPIURL]}>
+            {data => {
+              const dataMinMax = extent(
+                data.results.features,
+                d => d.properties[heatMapDataProperty]
+              );
+
+              const dataMinimum = number(
+                "Data Minimum:",
+                dataMinMax[0],
+                {},
+                GROUP_IDS.HEAT_MAP_DATA
+              );
+              const dataMaximum = number(
+                "Data Maximum:",
+                dataMinMax[1],
+                {},
+                GROUP_IDS.HEAT_MAP_DATA
+              );
+
+              const heatMapWeight = object(
+                "heatmap-weight:",
+                [
+                  "interpolate",
+                  ["linear"],
+                  ["get", heatMapDataProperty],
+                  dataMinimum,
+                  0,
+                  dataMaximum,
+                  1
+                ],
+                GROUP_IDS.HEAT_MAP_DATA
+              );
+
+              const heatmapLayer = {
+                "heatmap-radius": heatMapRadius,
+                "heatmap-opacity": heatMapOpacity,
+                "heatmap-intensity": heatMapIntensity,
+                "heatmap-color": heatMapColor,
+                "heatmap-weight": heatMapWeight
+              };
+
+              // eslint-disable-next-line
+              const singleFeatureObj = object(
+                "Data: First Feature Object from GeoJSON",
+                data.results.features.slice(0, 1),
+                GROUP_IDS.HEAT_MAP_DATA
+              );
+
+              return (
+                <BaseMap
+                  updateViewport={false}
+                  initialZoom={11}
+                  initialLatitude={45.5141109}
+                  initialLongitude={-122.5398426}
+                  mapboxData={data.results}
+                  mapboxDataId="transit-stops-data"
+                  mapboxLayerType="heatmap"
+                  mapboxLayerOptions={heatmapLayer}
+                  mapboxLayerId="transit-stops-map"
+                  civicMapStyle="dark"
+                />
+              );
+            }}
+          </DemoJSONLoader>
+        );
+      },
+      { notes }
+    );

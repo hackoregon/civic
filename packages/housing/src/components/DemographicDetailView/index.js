@@ -65,10 +65,11 @@ const DemographicDetailView = ({ demographics }) => {
           <div style={contentBlockStyle}>
             <h3 style={textAlignCenter}>Race/Ethnicity</h3>
             <PieChart
-              data={protectLabels(demographics.populations)}
+              data={demographics.populations}
               dataLabel="name"
               dataValue="value"
               colors={colors}
+              useLegend
               {...chartProportions}
             />
           </div>

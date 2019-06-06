@@ -1,5 +1,4 @@
-/* TODO: Fix linting errors */
-
+/* eslint-disable no-nested-ternary */
 import React, { Component } from "react";
 import MapGL, { NavigationControl, Marker } from "react-map-gl";
 import Dimensions from "react-dimensions";
@@ -8,6 +7,7 @@ import PropTypes from "prop-types";
 import createRef from "create-react-ref/lib/createRef";
 import Geocoder from "react-map-gl-geocoder";
 import "mapbox-gl/dist/mapbox-gl.css";
+import { isEqual } from "lodash";
 
 const MAPBOX_TOKEN =
   "pk.eyJ1IjoiaGFja29yZWdvbiIsImEiOiJjamk0MGZhc2cwNDl4M3FsdHAwaG54a3BnIn0.Fq1KA0IUwpeKQlFIoaEn_Q";
@@ -44,8 +44,7 @@ class BaseMap extends Component {
       tooltipInfo: null,
       x: null,
       y: null,
-      mounted: false,
-      civicMapStyle: CIVIC_LIGHT
+      mounted: false
     };
     this.onViewportChange = this.onViewportChange.bind(this);
     this.onHover = this.onHover.bind(this);
@@ -58,8 +57,9 @@ class BaseMap extends Component {
   }
 
   componentWillReceiveProps(props) {
-    if (this.props.updateViewport) {
-      let updatedViewportProps = {
+    const { updateViewport } = props;
+    if (updateViewport) {
+      const updatedViewportProps = {
         zoom: props.initialZoom,
         pitch: props.initialPitch,
         longitude: props.initialLongitude,
@@ -74,14 +74,36 @@ class BaseMap extends Component {
       });
 
       this.setState({
+        // eslint-disable-next-line
         viewport: { ...this.state.viewport, ...updatedViewportProps }
       });
     }
+  }
 
-    if (props.civicMapStyle === "light") {
-      this.setState({ civicMapStyle: CIVIC_LIGHT });
-    } else if (props.civicMapStyle === "dark") {
-      this.setState({ civicMapStyle: CIVIC_DARK });
+  componentDidUpdate(prevProps) {
+    const {
+      mapboxData: previousMapboxData,
+      mapboxLayerOptions: previousMapboxLayerOptions
+    } = prevProps;
+    const {
+      mapboxData,
+      mapboxDataId,
+      mapboxLayerOptions,
+      mapboxLayerId
+    } = this.props;
+    if (!isEqual(previousMapboxData, mapboxData)) {
+      const map = this.mapRef.current.getMap();
+      map.getSource(mapboxDataId).setData(mapboxData);
+    }
+
+    if (!isEqual(previousMapboxLayerOptions, mapboxLayerOptions)) {
+      const map = this.mapRef.current.getMap();
+      const updatedProperties = Object.keys(mapboxLayerOptions).filter(
+        m => !isEqual(previousMapboxLayerOptions[m], mapboxLayerOptions[m])
+      );
+      updatedProperties.forEach(p =>
+        map.setPaintProperty(mapboxLayerId, p, mapboxLayerOptions[p])
+      );
     }
   }
 
@@ -95,6 +117,7 @@ class BaseMap extends Component {
 
   onViewportChange(viewport) {
     this.setState({
+      // eslint-disable-next-line
       viewport: { ...this.state.viewport, ...viewport }
     });
   }
@@ -104,6 +127,8 @@ class BaseMap extends Component {
 
     const {
       height,
+      containerHeight,
+      containerWidth,
       civicMapStyle,
       mapboxToken,
       geocoder,
@@ -114,17 +139,16 @@ class BaseMap extends Component {
       mapGLOptions,
       children,
       useContainerHeight,
-      onBaseMapClick
+      onBaseMapClick,
+      mapboxData,
+      mapboxDataId,
+      mapboxLayerType,
+      mapboxLayerOptions,
+      mapboxLayerId
     } = this.props;
 
-    viewport.width = this.props.containerWidth
-      ? this.props.containerWidth
-      : 500;
-    viewport.height = useContainerHeight
-      ? this.props.containerHeight
-      : height
-      ? height
-      : 500;
+    viewport.width = containerWidth || 500;
+    viewport.height = useContainerHeight ? containerHeight : height || 500;
 
     const childrenLayers = React.Children.map(children, child => {
       return React.cloneElement(child, {
@@ -136,23 +160,51 @@ class BaseMap extends Component {
       });
     });
 
+    const onMapLoad = () => {
+      if (!mapboxData || !mapboxLayerType || !mapboxLayerOptions) return;
+      const map = this.mapRef.current.getMap();
+      map.addSource(mapboxDataId, {
+        type: "geojson",
+        data: mapboxData
+      });
+      map.addLayer(
+        {
+          id: mapboxLayerId,
+          type: mapboxLayerType,
+          source: mapboxDataId,
+          paint: mapboxLayerOptions
+        },
+        "waterway-label"
+      );
+    };
+
+    const baseMapboxStyleURL =
+      civicMapStyle === "light"
+        ? CIVIC_LIGHT
+        : civicMapStyle === "dark"
+        ? CIVIC_DARK
+        : CIVIC_LIGHT;
+
     return (
       <div className={mapWrapper}>
         <MapGL
           className="MapGL"
           {...viewport}
-          mapStyle={this.state.civicMapStyle}
+          mapStyle={baseMapboxStyleURL}
           mapboxApiAccessToken={mapboxToken}
-          onViewportChange={viewport => this.onViewportChange(viewport)}
+          onViewportChange={newViewport => this.onViewportChange(newViewport)}
           ref={this.mapRef}
           {...mapGLOptions}
           onClick={onBaseMapClick}
+          onLoad={onMapLoad}
         >
           <div className={navControl}>
             {navigation && (
               <NavigationControl
                 className="NavigationControl"
-                onViewportChange={viewport => this.onViewportChange(viewport)}
+                onViewportChange={newViewport =>
+                  this.onViewportChange(newViewport)
+                }
               />
             )}
           </div>
@@ -172,9 +224,10 @@ class BaseMap extends Component {
             <Geocoder
               mapRef={{ current: this.mapRef.current }}
               mapboxApiAccessToken={mapboxToken}
-              onViewportChange={viewport => {
-                this.onViewportChange(viewport);
-                !!geocoderOnChange && geocoderOnChange(viewport);
+              onViewportChange={newViewport => {
+                this.onViewportChange(newViewport);
+                // eslint-disable-next-line
+                !!geocoderOnChange && geocoderOnChange(newViewport);
               }}
               options={{ ...geocoderOptions }}
             />
@@ -187,8 +240,16 @@ class BaseMap extends Component {
 }
 
 BaseMap.propTypes = {
+  initialLongitude: PropTypes.number,
+  initialLatitude: PropTypes.number,
+  initialZoom: PropTypes.number,
+  initialPitch: PropTypes.number,
+  height: PropTypes.number,
+  containerHeight: PropTypes.number,
+  containerWidth: PropTypes.number,
   mapboxToken: PropTypes.string,
-  mapboxStyle: PropTypes.string,
+  civicMapStyle: PropTypes.string,
+  locationMarker: PropTypes.bool,
   geocoder: PropTypes.bool,
   navigation: PropTypes.bool,
   geocoderOptions: PropTypes.shape({}),
@@ -196,11 +257,19 @@ BaseMap.propTypes = {
   mapGLOptions: PropTypes.shape({}),
   children: PropTypes.node,
   useContainerHeight: PropTypes.bool,
-  updateViewport: PropTypes.bool
+  updateViewport: PropTypes.bool,
+  onBaseMapClick: PropTypes.func,
+  mapboxDataId: PropTypes.string,
+  mapboxData: PropTypes.shape({
+    type: PropTypes.string,
+    features: PropTypes.arrayOf(PropTypes.shape({}))
+  }),
+  mapboxLayerType: PropTypes.string,
+  mapboxLayerId: PropTypes.string,
+  mapboxLayerOptions: PropTypes.shape({})
 };
 
 BaseMap.defaultProps = {
-  mapboxStyle: CIVIC_LIGHT,
   mapboxToken: MAPBOX_TOKEN,
   navigation: true,
   geocoder: false,

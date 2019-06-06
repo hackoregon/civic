@@ -6,7 +6,7 @@ import { TwitterShareButton, TwitterIcon } from "react-share";
 const quoteClass = css`
   font-family: "Merriweather", serif;
   font-size: 24px;
-  color: #eb4d5f;
+  color: #1e62bd;
   margin-bottom: 12px;
 `;
 
@@ -41,7 +41,7 @@ const PullQuote = ({ quoteText, quoteAttribution, url }) => (
         ) : null}
       </blockquote>
       <div className={iconClass}>
-        <TwitterIcon size={24} round iconBgStyle={{ fill: "#eb4d5f" }} />
+        <TwitterIcon size={24} round iconBgStyle={{ fill: "#1E62BD" }} />
       </div>
     </TwitterShareButton>
   </div>

@@ -56,7 +56,7 @@ const tooltipSlider = () => {
 };
 
 export default () =>
-  storiesOf("Component Lib|Basic UI Components/Slider", module)
+  storiesOf("Component Lib|Basic Inputs/Slider", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .addDecorator(story => (

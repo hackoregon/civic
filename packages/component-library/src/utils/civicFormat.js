@@ -36,6 +36,53 @@ const numeric = d => {
   return formatted;
 };
 
+const scalesShort = [
+  [1000000000000, "t"],
+  [1000000000, "b"],
+  [1000000, "m"],
+  [1000, "k"]
+];
+
+const abbreviateLargeShort = number => {
+  let num;
+  let scale;
+
+  for (let i = 0; i <= scalesShort.length; i += 1) {
+    if (Math.abs(number) >= scalesShort[i][0]) {
+      num = format(".2~r")(number / scalesShort[i][0]);
+      scale = scalesShort[i][1]; // eslint-disable-line prefer-destructuring
+      break;
+    }
+  }
+
+  return `${num}${scale}`;
+};
+
+const numericShort = d => {
+  let formatted;
+
+  // We want to specifically format numbers greater than one thousand.
+  if (Math.abs(d) >= 1000) {
+    formatted = abbreviateLargeShort(d);
+  } else {
+    formatted = format(",.0f")(d);
+  }
+
+  return formatted;
+};
+
+const decimalToPercent = num => {
+  let formatted;
+
+  if (Number.isInteger(num)) {
+    formatted = format(",~%")(num);
+  } else {
+    formatted = format(",.1%")(num);
+  }
+
+  return formatted;
+};
+
 const year = format(".0f");
 const percentage = format(".0%");
 const dollars = d => `$${numeric(d)}`;
@@ -51,7 +98,9 @@ const civicFormat = {
   dollars,
   titleCase,
   unformatted,
-  monthYear
+  monthYear,
+  numericShort,
+  decimalToPercent
 };
 
 export default civicFormat;

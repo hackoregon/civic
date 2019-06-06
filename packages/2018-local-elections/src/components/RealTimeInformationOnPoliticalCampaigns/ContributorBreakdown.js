@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { PieChart } from "@hackoregon/component-library";
 
 const propTypes = {
-  contributors: PropTypes.array,
+  contributors: PropTypes.arrayOf(PropTypes.shape({})),
   loading: PropTypes.bool
 };
 

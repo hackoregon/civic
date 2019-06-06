@@ -10,7 +10,7 @@
     "start:prod": "yarn run build && cross-env NODE_ENV=production node server",
     "build": "rimraf dist && cross-env NODE_ENV=production webpack --progress --config ./webpack.config.js",
     "test": "cross-env BABEL_ENV=test mocha --opts ./mocha.opts 'src/**/*.test.js'",
-    "lint": "eslint --fix src"
+    "lint": "eslint src"
   },
   "repository": {
     "type": "git",
@@ -23,8 +23,8 @@
   },
   "homepage": "https://github.com/hackoregon/civic#readme",
   "dependencies": {
-    "@emotion/core": "^10.0.9",
-    "@emotion/styled": "^10.0.9",
+    "@emotion/core": "^10.0.10",
+    "@emotion/styled": "^10.0.10",
     "@hackoregon/2018-disaster-resilience": "^3.0.0",
     "@hackoregon/2018-example-farmers-markets": "^3.0.0",
     "@hackoregon/2018-housing-affordability": "^3.0.0",
@@ -54,8 +54,8 @@
     "@babel/core": "^7.3.4",
     "@babel/node": "^7.2.2",
     "@babel/register": "^7.0.0",
-    "@emotion/core": "^10.0.9",
-    "@emotion/styled": "^10.0.9",
+    "@emotion/core": "^10.0.10",
+    "@emotion/styled": "^10.0.10",
     "@hackoregon/civic-babel-presets": "^3.0.0",
     "@hackoregon/component-library": "^3.0.0",
     "@hackoregon/dev-server": "^3.0.0",

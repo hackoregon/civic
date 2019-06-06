@@ -28,7 +28,7 @@ const MapTooltip = props => {
     const value = obj.value ? obj.value : "No Data Available";
     return (
       <div key={`${obj.name}-${value}`}>
-        {obj.name + ": " + value.toLocaleString()}
+        {`${obj.name  }: ${  value.toLocaleString()}`}
       </div>
     );
   });
