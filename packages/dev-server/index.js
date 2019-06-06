@@ -1,7 +1,7 @@
 const chalk = require("chalk");
 const express = require("express");
 const webpack = require("webpack");
-const resolve = require("path").resolve;
+const { resolve } = require("path");
 const compression = require("compression");
 const open = require("open");
 
@@ -78,7 +78,7 @@ module.exports = function() {
   // Start the server
   const port = process.env.PORT || 3000;
 
-  var setupServer = new Promise(function(resolve, reject) {
+  const setupServer = new Promise(function(resolve, reject) {
     resolve(app.listen(port, announceServer));
   });
 
