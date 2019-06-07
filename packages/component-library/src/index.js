@@ -19,7 +19,6 @@ export { default as NavRouterLink } from "./Navigation/NavRouterLink";
 export { default as Dropdown } from "./Dropdown/Dropdown";
 export { default as Icon } from "./Icon/Icon";
 export { default as Placeholder } from "./Placeholder/Placeholder";
-export { default as Tag } from "./Tag/Tag";
 export { default as Scatterplot } from "./Scatterplot/Scatterplot";
 export { default as Logo } from "./Logo/Logo";
 export { default as isClient } from "./utils/isClient";
