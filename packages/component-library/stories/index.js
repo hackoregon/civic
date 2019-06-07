@@ -15,7 +15,6 @@ import dataTable from "./DataTable.story";
 import dropdownStory from "./DropdownMenu.story";
 import gradientScaleStory from "./GradientScale.story";
 import headerStory from "./Header.story";
-import heatMapStory from "./HeatMap.story";
 import hexOverlayStory from "./HexOverlay.story";
 import horizontalBarChartStory from "./HorizontalBarChart.story";
 import iconMapStory from "./IconMap.story";
@@ -134,7 +133,6 @@ storiesOf("Component Lib|Maps", module)
 baseMapStory();
 boundaryMapStory();
 civicSandboxMapStory();
-heatMapStory();
 hexOverlayStory();
 iconMapStory();
 mapOverlayStory();

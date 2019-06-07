@@ -55,7 +55,6 @@ export { default as PDF } from "./PDF/PDF";
 export { default as SimpleLegend } from "./SimpleLegend/SimpleLegend";
 export { default as ChartTitle } from "./ChartTitle/ChartTitle";
 export { default as ChartContainer } from "./ChartContainer/ChartContainer";
-export { default as HeatMap } from "./HeatMap/HeatMap";
 export { default as CivicCardStack } from "./CivicCardStack/CivicCardStack";
 
 export { default as civicFormat } from "./utils/civicFormat";
