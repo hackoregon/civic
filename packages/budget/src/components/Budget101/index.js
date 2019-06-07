@@ -1,15 +1,14 @@
 import React from "react";
-import StoryCard from "../StoryCard/StoryCard";
+import { CivicStoryCard } from "@hackoregon/component-library";
 import PieChart from "./PieChart";
 import DataTable from "./DataTable";
-import { BUDGET_101 } from "../constants";
 
 import "./Budget101.css";
 import "./stub.css";
 
 function Budget101() {
   return (
-    <StoryCard title="Budget 101" collectionId="budget" cardId={BUDGET_101}>
+    <CivicStoryCard watermark={<div />} footer={false} title="Budget 101">
       <div className="budget">
         <div id="LearnAbout">
           <h1 className="greenText">Learn about the budget</h1>
@@ -174,7 +173,7 @@ function Budget101() {
           </div>
         </div>
       </div>
-    </StoryCard>
+    </CivicStoryCard>
   );
 }
 
