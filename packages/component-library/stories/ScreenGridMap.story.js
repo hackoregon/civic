@@ -94,4 +94,44 @@ export default () =>
         );
       },
       { notes }
-    );
+    )
+    .add("Custom", () => {
+      const opacity = number("Opacity:", 0.8, opacityOptions, GROUP_IDS.MARKER);
+
+      const colorScheme = select(
+        "Color Scheme:",
+        colorSchemeOptions,
+        colorSchemeOptions.Planet,
+        GROUP_IDS.MARKER
+      );
+      const colorSchemeArray = JSON.parse(colorScheme);
+
+      const cellSize = number(
+        "Cell Size:",
+        15,
+        cellSizeOptions,
+        GROUP_IDS.MARKER
+      );
+      return (
+        <DemoJSONLoader urls={mapData}>
+          {allData => {
+            const data = object(
+              "Data",
+              allData.slide_data.features,
+              GROUP_IDS.DATA
+            );
+            return (
+              <BaseMap>
+                <ScreenGridMap
+                  data={data}
+                  getPosition={f => f.geometry.coordinates}
+                  opacity={opacity}
+                  colorRange={colorSchemeArray}
+                  cellSizePixels={cellSize}
+                />
+              </BaseMap>
+            );
+          }}
+        </DemoJSONLoader>
+      );
+    });
