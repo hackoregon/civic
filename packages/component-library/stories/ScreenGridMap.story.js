@@ -1,7 +1,14 @@
 import React from "react";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
-import { withKnobs, number, select, object } from "@storybook/addon-knobs";
+import {
+  withKnobs,
+  number,
+  select,
+  object,
+  boolean
+} from "@storybook/addon-knobs";
+import { action } from "@storybook/addon-actions";
 import { checkA11y } from "@storybook/addon-a11y";
 import { BaseMap, ScreenGridMap, DemoJSONLoader } from "../src";
 import notes from "./ScreenGridMap.notes.md";
@@ -95,43 +102,63 @@ export default () =>
       },
       { notes }
     )
-    .add("Custom", () => {
-      const opacity = number("Opacity:", 0.8, opacityOptions, GROUP_IDS.MARKER);
+    .add(
+      "Custom",
+      () => {
+        const opacity = number(
+          "Opacity:",
+          0.8,
+          opacityOptions,
+          GROUP_IDS.MARKER
+        );
 
-      const colorScheme = select(
-        "Color Scheme:",
-        colorSchemeOptions,
-        colorSchemeOptions.Planet,
-        GROUP_IDS.MARKER
-      );
-      const colorSchemeArray = JSON.parse(colorScheme);
+        const colorScheme = select(
+          "Color Scheme:",
+          colorSchemeOptions,
+          colorSchemeOptions.Planet,
+          GROUP_IDS.MARKER
+        );
+        const colorSchemeArray = JSON.parse(colorScheme);
 
-      const cellSize = number(
-        "Cell Size:",
-        15,
-        cellSizeOptions,
-        GROUP_IDS.MARKER
-      );
-      return (
-        <DemoJSONLoader urls={mapData}>
-          {allData => {
-            const data = object(
-              "Data",
-              allData.slide_data.features,
-              GROUP_IDS.DATA
-            );
-            return (
-              <BaseMap>
-                <ScreenGridMap
-                  data={data}
-                  getPosition={f => f.geometry.coordinates}
-                  opacity={opacity}
-                  colorRange={colorSchemeArray}
-                  cellSizePixels={cellSize}
-                />
-              </BaseMap>
-            );
-          }}
-        </DemoJSONLoader>
-      );
-    });
+        const cellSize = number(
+          "Cell Size:",
+          15,
+          cellSizeOptions,
+          GROUP_IDS.MARKER
+        );
+
+        const autoHighlight = boolean(
+          "Auto Highlight:",
+          true,
+          GROUP_IDS.MARKER
+        );
+
+        return (
+          <DemoJSONLoader urls={mapData}>
+            {allData => {
+              const data = object(
+                "Data",
+                allData.slide_data.features,
+                GROUP_IDS.DATA
+              );
+              return (
+                <BaseMap>
+                  <ScreenGridMap
+                    data={data}
+                    getPosition={f => f.geometry.coordinates}
+                    opacity={opacity}
+                    colorRange={colorSchemeArray}
+                    cellSizePixels={cellSize}
+                    autoHighlight={autoHighlight}
+                    onLayerClick={info =>
+                      action("Layer clicked:", { depth: 2 })(info, info.object)
+                    }
+                  />
+                </BaseMap>
+              );
+            }}
+          </DemoJSONLoader>
+        );
+      },
+      { notes }
+    );
