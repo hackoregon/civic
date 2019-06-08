@@ -4,6 +4,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import copy from "copy-to-clipboard";
+import { get } from "lodash";
+import window from "global/window";
+
 import StoryLink from "../StoryCard/StoryLink";
 import { ICONS } from "../styleConstants";
 
@@ -29,7 +32,7 @@ export default class ShareCollection extends Component {
 
   handleCopy = () => {
     // NOTE: we need to make sure this will work on all browsers
-    copy(`${window.location.href}`);
+    copy(`${get(window, "location.href", "")}`);
     this.switchState(MS_TO_SWITCH_TEXT);
     this.setState({ copied: true });
   };

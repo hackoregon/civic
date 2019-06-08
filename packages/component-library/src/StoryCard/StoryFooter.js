@@ -5,6 +5,9 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import copy from "copy-to-clipboard";
 import { css } from "emotion";
+import { get } from "lodash";
+import window from "global/window";
+
 import StoryLink from "./StoryLink";
 import { ICONS } from "../styleConstants";
 
@@ -43,7 +46,7 @@ export default class StoryFooter extends Component {
   handleCopy = () => {
     const { collectionId, cardId } = this.props;
     // NOTE: we need to make sure this will work on all browsers
-    copy(`${window.location.origin}/${collectionId}/${cardId}`);
+    copy(`${get(window, "location.href", "")}/${collectionId}/${cardId}`);
     this.switchState(MS_TO_SWITCH_TEXT);
     this.setState({ copied: true });
   };
