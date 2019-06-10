@@ -1,18 +1,20 @@
 const chalk = require("chalk");
 const express = require("express");
 const webpack = require("webpack");
-const resolve = require("path").resolve;
+const { resolve } = require("path");
 const compression = require("compression");
 
 const app = express();
 const isProd = process.env.NODE_ENV === "production";
 const outputPath = resolve(process.cwd(), isProd ? "dist" : "build");
-const config = require(resolve(process.cwd(), "webpack.config.js"));
 
 const devMiddleware = require("webpack-dev-middleware");
 const hotMiddleware = require("webpack-hot-middleware");
+const config = require("../webpack-common/index.js");
 
-module.exports = function() {
+const port = process.env.PORT || 3000;
+
+module.exports = () => {
   console.log(
     chalk.yellow(
       `\nStarting the ${isProd ? `PRODUCTION` : `DEVELOPMENT`} server...`
@@ -29,7 +31,7 @@ module.exports = function() {
     app.use(compression());
 
     console.log(chalk.gray("Compiling production webpack config"));
-    webpack(config, afterWebpack);
+    webpack(config);
   } else {
     // Start a webpack dev server with hot module reloading when dev
     console.log(chalk.gray("Compiling webpack config"));
@@ -75,6 +77,5 @@ module.exports = function() {
   );
 
   // Start the server
-  const port = process.env.PORT || 3000;
   app.listen(port, announceServer);
 };
