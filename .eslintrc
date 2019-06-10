@@ -7,7 +7,7 @@
   "plugins": ["react", "prettier", "emotion"],
   "rules": {
     "emotion/jsx-import": "error",
-    "emotion/no-vanilla": "error",
+    "emotion/no-vanilla": "warn",
     "emotion/import-from-emotion": "error",
     "emotion/styled-import": "error",
     "jsx-a11y/img-has-alt": 0,
