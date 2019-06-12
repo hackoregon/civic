@@ -316,4 +316,62 @@ export default () =>
       {
         notes
       }
+    )
+    .add(
+      "Example: With negative values",
+      () => {
+        const sampleData = [
+          { x: -1.75, y: -1 },
+          { x: -1.25, y: -7 },
+          { x: -2.5, y: -2 },
+          { x: -2.35, y: -7.5 },
+          { x: -3, y: 2.5 },
+          { x: -3.5, y: 1 },
+          { x: -4.25, y: 3 },
+          { x: -4.75, y: 3.5 },
+          { x: 2.5, y: -3.5 },
+          { x: 2, y: -2.5 },
+          { x: 2.25, y: -4.5 },
+          { x: 2.5, y: -2 },
+          { x: 3.15, y: -9 },
+          { x: 3.3, y: -6.25 },
+          { x: 3.4, y: 3.5 },
+          { x: 3.75, y: 3 },
+          { x: 4.5, y: 3.5 },
+          { x: 7.75, y: 10.5 },
+          { x: 8, y: 5 },
+          { x: 3.5, y: 10.5 },
+          { x: 4.75, y: 11.5 },
+          { x: 4.5, y: 10.75 },
+          { x: 10.5, y: 26 },
+          { x: 10, y: 24 },
+          { x: 11.75, y: 23 },
+          { x: 12.6, y: 19 },
+          { x: 12.8, y: 22 },
+          { x: 13.25, y: 23 },
+          { x: 13.8, y: 26 },
+          { x: 14, y: 24 },
+          { x: 15, y: 22 },
+          { x: 16, y: 25 },
+          { x: 17, y: 25 },
+          { x: 18, y: 26 }
+        ];
+        const xLabel = text("X-axis label", "X", GROUP_IDS.LABELS);
+        const yLabel = text("Y-axis label", "Y", GROUP_IDS.LABELS);
+        // const dataKey = text("Data key", "x", GROUP_IDS.DATA);
+        // const dataValue = text("Data value", "y", GROUP_IDS.DATA);
+        const data = object("Data", sampleData, GROUP_IDS.DATA);
+        return (
+          <Scatterplot
+            data={data}
+            // dataKey={dataKey}
+            // dataValue={dataValue}
+            xLabel={xLabel}
+            yLabel={yLabel}
+          />
+        );
+      },
+      {
+        notes
+      }
     );

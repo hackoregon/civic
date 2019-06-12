@@ -34,3 +34,11 @@ The example Simple story shows the minimal properties needed for the Scatterplot
 - X-axis label
 - Y-axis label
 - Data
+
+## Example: With negative values
+
+The example story with negative values shows the minimal properties needed for the Scatterplot.
+
+- X-axis label
+- Y-axis label
+- Data
