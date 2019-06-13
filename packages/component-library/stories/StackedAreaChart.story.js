@@ -2,15 +2,23 @@ import React from "react";
 import { css } from "emotion";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
-import { object, text, withKnobs } from "@storybook/addon-knobs";
-import { StackedAreaChart, SimpleLegend } from "../src";
+import {
+  object,
+  text,
+  withKnobs,
+  optionsKnob as options
+} from "@storybook/addon-knobs";
+import { StackedAreaChart, SimpleLegend, civicFormat } from "../src";
+import notes from "./stackedAreaChart.notes.md";
 
-const sampleSimpleData = [
-  { x: 0, y: 20 },
-  { x: 10, y: 30 },
-  { x: 20, y: 50 },
-  { x: 30, y: 40 }
-];
+const GROUP_IDS = {
+  LABELS: "Labels",
+  DATA: "Data",
+  CUSTOM: "Custom"
+};
+
+const xFormatterOptions = getKeyNames(civicFormat);
+const yFormatterOptions = getKeyNames(civicFormat);
 
 const sampleData = [
   { x: 0, y: 2, series: "cat" },
@@ -41,19 +49,19 @@ const sampleDataKeyLabel = "Animals";
 const sampleDataValueLabel = "Cuteness";
 
 const sampleUnstructuredData = [
-  { size: 0, age: 2000000, type: "cat" },
-  { size: 5, age: 3000000, type: "cat" },
-  { size: 10, age: 7000000, type: "cat" },
-  { size: 0, age: 5000320, type: "fish" },
-  { size: 5, age: 40002300, type: "fish" },
-  { size: 10, age: 5007000, type: "fish" },
-  { size: 0, age: 3000000, type: "dog" },
-  { size: 5, age: 3000500, type: "dog" },
-  { size: 10, age: 3000000.5, type: "dog" }
+  { size: 0, age: 2000000, group: "cat" },
+  { size: 5, age: 3000000, group: "cat" },
+  { size: 10, age: 7000000, group: "cat" },
+  { size: 0, age: 5000320, group: "fish" },
+  { size: 5, age: 40002300, group: "fish" },
+  { size: 10, age: 5007000, group: "fish" },
+  { size: 0, age: 3000000, group: "dog" },
+  { size: 5, age: 3000500, group: "dog" },
+  { size: 10, age: 3000000.5, group: "dog" }
 ];
-const sampleUnstructuredXKey = "size";
-const sampleUnstructuredYKey = "age";
-const sampleUnstructuredDataSeries = "type";
+const sampleUnstructuredXKey = "year";
+const sampleUnstructuredYKey = "students";
+const sampleUnstructuredDataSeries = "group";
 const sampleUnstructuredXLabel = "Size (ft)";
 const sampleUnstructuredYLabel = "Age (yrs)";
 
@@ -104,16 +112,51 @@ const customLegend = legendData => {
 export default () =>
   storiesOf("Component Lib|Charts/Stacked Area Chart", module)
     .addDecorator(withKnobs)
-    .add("Simple usage", () => <StackedAreaChart data={sampleSimpleData} />)
-    .add("With some props", () => {
-      const data = object("Data", sampleData);
-      const dataKey = text("dataKey", sampleXKey);
-      const dataValue = text("dataValue", sampleYKey);
-      const dataSeries = text("dataSeries", sampleDataSeries);
-      const subtitle = text("Subtitle", sampleSubtitle);
-      const title = text("Title", sampleTitle);
-      const xLabel = text("xLabel", sampleXLabel);
-      const yLabel = text("yLabel", sampleYLabel);
+    .add("Standard", () => {
+      const title = text(
+        "Title:",
+        "Students from Historically Underrepresented Groups",
+        GROUP_IDS.LABELS
+      );
+      const subtitle = text(
+        "Subtitle",
+        "Fall enrollment in Portland Public Schools - Buckman",
+        GROUP_IDS.LABELS
+      );
+      const xLabel = text("X-axis label:", "Year", GROUP_IDS.LABELS);
+      const optionSelectX = options(
+        "X-axis value format",
+        xFormatterOptions,
+        "year",
+        { display: "select" },
+        GROUP_IDS.LABELS
+      );
+      const yLabel = text("Y-axis label:", "Students", GROUP_IDS.LABELS);
+      const optionSelectY = options(
+        "Y-axis value format",
+        yFormatterOptions,
+        "students",
+        { display: "select" },
+        GROUP_IDS.LABELS
+      );
+      const sampleEnrollmentData = [
+        { year: 0, students: 2000000, group: "cat" },
+        { year: 5, students: 3000000, group: "cat" },
+        { year: 10, students: 7000000, group: "cat" },
+        { year: 0, students: 5000320, group: "fish" },
+        { year: 5, students: 40002300, group: "fish" },
+        { year: 10, students: 5007000, group: "fish" },
+        { year: 0, students: 3000000, group: "dog" },
+        { year: 5, students: 3000500, group: "dog" },
+        { year: 10, students: 3000000.5, group: "dog" }
+      ];
+      // const sampleUnstructuredXKey = "year";
+      // const sampleUnstructuredYKey = "students";
+      // const sampleUnstructuredDataSeries = "group";
+      const dataKey = text("dataKey", "year", GROUP_IDS.DATA);
+      const dataValue = text("dataValue", "students", GROUP_IDS.DATA);
+      const dataSeries = text("dataSeries", "group", GROUP_IDS.DATA);
+      const data = object("Data", sampleEnrollmentData, GROUP_IDS.DATA);
 
       return (
         <StackedAreaChart
@@ -125,6 +168,8 @@ export default () =>
           title={title}
           xLabel={xLabel}
           yLabel={yLabel}
+          xNumberFormatter={x => civicFormat[optionSelectX](x)}
+          yNumberFormatter={y => civicFormat[optionSelectY](y)}
         />
       );
     })
@@ -187,4 +232,21 @@ export default () =>
           legendComponent={customLegend}
         />
       );
-    });
+    })
+    .add(
+      "Example: Simple",
+      () => {
+        const xLabel = text("X-axis label:", "X", GROUP_IDS.LABELS);
+        const yLabel = text("Y-axis label:", "Y", GROUP_IDS.LABELS);
+        const sampleSimpleData = [
+          { x: 0, y: 20 },
+          { x: 10, y: 30 },
+          { x: 20, y: 50 },
+          { x: 30, y: 40 }
+        ];
+        const data = object("Data", sampleSimpleData, GROUP_IDS.DATA);
+
+        return <StackedAreaChart data={data} />;
+      },
+      { notes }
+    );
