@@ -3,6 +3,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 
 import { DataTable } from "../src";
+import notes from "./dataTable.notes.md";
 
 const title = "Simple usage";
 // const description = 'A data table.';
@@ -87,4 +88,6 @@ const demoCode = () => (
 );
 
 export default () =>
-  storiesOf("Component Lib|Charts/Data Table", module).add(title, demoCode);
+  storiesOf("Component Lib|Charts/Data Table", module).add(title, demoCode, {
+    notes
+  });
