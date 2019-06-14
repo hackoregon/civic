@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { connect } from "react-redux";
 // import { withRouter } from 'react-router-dom';
-import { StoryCard, Slider, Dropdown } from "@hackoregon/component-library";
+import { StoryCard, Dropdown } from "@hackoregon/component-library";
 
 import "@hackoregon/component-library/assets/global.styles.css";
 import "@hackoregon/component-library/assets/vendor/react-select.min.css";
@@ -22,6 +22,7 @@ import {
   getCombinedDemographicData
 } from "../../state/globalSelectors";
 import Map from "../Map";
+import CustomSlider from "../CustomSlider";
 import DemographicDetailView from "../DemographicDetailView";
 import TempProdVsCost from "../TempProdVsCost";
 import TempVoterRegistration from "../TempVoterRegistration";
@@ -128,7 +129,7 @@ export class App extends React.Component {
               <h3 style={textAlignCenter}>
                 Your income: ${userIncome.toFixed(2)}/hr
               </h3>
-              <Slider
+              <CustomSlider
                 min={MIN_INCOME}
                 max={MAX_INCOME}
                 value={userIncome}

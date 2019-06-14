@@ -1,28 +1,55 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { bool, func, node, number } from "prop-types";
+import RcSlider from "rc-slider";
 import "rc-slider/assets/index.css";
-import SliderTooltip from "./SliderTooltip";
-import RcSlider from "./RcSlider";
-import "./SliderBox.css";
 
-const Slider = ({ value, onChange, min, max }) => (
-  <div>
-    <RcSlider
-      tipformatter={null}
-      min={min}
-      max={max}
-      value={value}
-      onChange={onChange}
-    />
-    <SliderTooltip value={value} />
-  </div>
+import "./slider.css";
+
+const SliderWithTooltip = RcSlider.createSliderWithTooltip(RcSlider);
+
+const Slider = ({
+  min,
+  max,
+  onChange,
+  showStepMarkers,
+  step,
+  value,
+  SliderComponent
+}) => {
+  return (
+    <span className="civic-slider-container">
+      <SliderComponent
+        dots={showStepMarkers}
+        min={min}
+        max={max}
+        step={step}
+        value={value}
+        onChange={onChange}
+      />
+    </span>
+  );
+};
+
+Slider.SliderWithTooltip = props => (
+  <span className="civic-slider-container">
+    <SliderWithTooltip {...props} />
+  </span>
 );
 
 Slider.propTypes = {
-  value: PropTypes.number,
-  onChange: PropTypes.func,
-  max: PropTypes.number,
-  min: PropTypes.number
+  max: number.isRequired,
+  min: number.isRequired,
+  onChange: func.isRequired,
+  showStepMarkers: bool,
+  step: number,
+  value: number.isRequired,
+  SliderComponent: node
+};
+
+Slider.defaultProps = {
+  showStepMarkers: false,
+  step: 1,
+  SliderComponent: RcSlider
 };
 
 export default Slider;

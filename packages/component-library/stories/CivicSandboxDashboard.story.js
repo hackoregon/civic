@@ -32,7 +32,7 @@ const createTextViz = (selectedFoundation, title, propName) => {
 const createDonutViz = (selectedFoundation, title, propName) => {
   return {
     visualizationType: "PercentDonut",
-    title: title,
+    title,
     data: [
       {
         x: title,
@@ -196,7 +196,7 @@ class DashboardStory extends React.Component {
             initialLatitude={45.5445}
             initialLongitude={-122.725}
             height={650}
-            mapboxStyle={"mapbox://styles/mapbox/dark-v9"}
+            mapboxStyle="mapbox://styles/mapbox/dark-v9"
             updateViewport={false}
           >
             <CivicSandboxMap
