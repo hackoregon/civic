@@ -22,7 +22,7 @@ const basicSlider = () => {
               action("onChange")(value);
             }}
             step={number("step", 10)}
-            value={number("value", get("value"))}
+            value={get("value")}
           />
         );
       }}
