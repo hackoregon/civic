@@ -6,7 +6,7 @@ import { action } from "@storybook/addon-actions";
 import { withKnobs, boolean, number } from "@storybook/addon-knobs";
 import { Slider } from "../src";
 import { storybookStyles } from "./storyStyles";
-import StatefulWrapper from "./helpers/StatefulWrapper";
+import StatefulWrapper from "../src/utils/StatefulWrapper";
 
 const basicSlider = () => {
   return (
@@ -14,7 +14,7 @@ const basicSlider = () => {
       {({ get, set }) => {
         return (
           <Slider
-            dots={boolean("dots (step markers)", false)}
+            showStepMarkers={boolean("showStepMarkers", false)}
             min={number("min", 0)}
             max={number("max", 100)}
             onChange={value => {
@@ -38,7 +38,7 @@ const tooltipSlider = () => {
       {({ get, set }) => {
         return (
           <Slider.SliderWithTooltip
-            dots={boolean("dots (step markers)", false)}
+            showStepMarkers={boolean("showStepMarkers", false)}
             min={number("min", 0)}
             max={number("max", 100)}
             onChange={value => {

@@ -11,24 +11,20 @@ const Slider = ({
   min,
   max,
   onChange,
-  showTooltip,
+  showStepMarkers,
   step,
-  dots,
-  tipFormatter,
   value,
-  SliderComponent,
-  ...rest
+  SliderComponent
 }) => {
   return (
     <span className="civic-slider-container">
       <SliderComponent
-        dots={dots}
+        dots={showStepMarkers}
         min={min}
         max={max}
         step={step}
         value={value}
         onChange={onChange}
-        {...rest}
       />
     </span>
   );
@@ -44,19 +40,15 @@ Slider.propTypes = {
   max: number.isRequired,
   min: number.isRequired,
   onChange: func.isRequired,
-  showTooltip: bool,
+  showStepMarkers: bool,
   step: number,
-  dots: bool, // step markers
-  tipFormatter: func,
   value: number.isRequired,
   SliderComponent: node
 };
 
 Slider.defaultProps = {
-  showTooltip: false,
+  showStepMarkers: false,
   step: 1,
-  dots: false,
-  tipFormatter: null,
   SliderComponent: RcSlider
 };
 
