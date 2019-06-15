@@ -1,8 +1,9 @@
 /* Not currently used, updated and moved to 2018 package */
-/* eslint-disable */
 
 import React from "react";
 import { css } from "emotion";
+import window from "global/window";
+import { get, has } from "lodash";
 
 const canvasStyles = css`
   position: fixed;
@@ -12,21 +13,21 @@ class CanvasParticles extends React.Component {
   componentDidMount() {
     window.requestAnimFrame = (function() {
       return (
-        window.requestAnimationFrame ||
-        window.webkitRequestAnimationFrame ||
-        window.mozRequestAnimationFrame ||
-        window.oRequestAnimationFrame ||
-        window.msRequestAnimationFrame ||
+        get(window, "requestAnimationFrame") ||
+        get(window, "webkitRequestAnimationFrame") ||
+        get(window, "mozRequestAnimationFrame") ||
+        get(window, "oRequestAnimationFrame") ||
+        get(window, "msRequestAnimationFrame") ||
         function(callback) {
-          window.setTimeout(callback, 1000 / 60);
+          has(window, "setTimeout") && window.setTimeout(callback, 1000 / 60);
         }
       );
     })();
     const { canvas } = this.refs;
     const ctx = canvas.getContext("2d");
     const img = this.refs.image;
-    const W = window.innerWidth;
-    const H = window.innerHeight;
+    const W = get(window, "innerWidth", 1000);
+    const H = get(window, "innerHeight", 1000);
     canvas.width = W * 1.2;
     canvas.height = H * 1.2;
     const particleCount = 40;

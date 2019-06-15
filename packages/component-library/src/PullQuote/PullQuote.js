@@ -2,6 +2,8 @@ import PropTypes from "prop-types";
 import React from "react";
 import { css } from "emotion";
 import { TwitterShareButton, TwitterIcon } from "react-share";
+import { get } from "lodash";
+import window from "global/window";
 
 const quoteClass = css`
   font-family: "Merriweather", serif;
@@ -30,7 +32,10 @@ const wrapperClass = css`
 
 const PullQuote = ({ quoteText, quoteAttribution, url }) => (
   <div className={wrapperClass}>
-    <TwitterShareButton url={url || window.location.href} title={quoteText}>
+    <TwitterShareButton
+      url={url || get(window, "location.href", "")}
+      title={quoteText}
+    >
       <blockquote className={quoteClass}>
         &#8220;
         {quoteText}

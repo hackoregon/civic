@@ -16,7 +16,6 @@ import dropdownStory from "./DropdownMenu.story";
 import gradientScaleStory from "./GradientScale.story";
 import headerStory from "./Header.story";
 import heatMapStory from "./HeatMap.story";
-import hexOverlayStory from "./HexOverlay.story";
 import horizontalBarChartStory from "./HorizontalBarChart.story";
 import iconMapStory from "./IconMap.story";
 import lineChartStory from "./LineChart.story";
@@ -60,7 +59,6 @@ import UIComponentsStyle from "./styleGuideStories/UIComponentsStyle.story";
 
 // Legacy components used in 2017 package. Not supported for ongoing development.
 // import editableStory from './Editable.story';
-// import sankeyStory from './Sankey.story';
 // import landingPage from './LandingPage.story';
 
 import "../assets/global.styles.css";
@@ -133,7 +131,6 @@ baseMapStory();
 boundaryMapStory();
 civicSandboxMapStory();
 heatMapStory();
-hexOverlayStory();
 iconMapStory();
 mapOverlayStory();
 pathMapStory();
