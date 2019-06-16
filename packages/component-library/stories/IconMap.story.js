@@ -2,7 +2,15 @@
 import React from "react";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
-import { withKnobs, number, boolean } from "@storybook/addon-knobs";
+import {
+  withKnobs,
+  number,
+  boolean,
+  text,
+  object,
+  select,
+  array
+} from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 import { checkA11y } from "@storybook/addon-a11y";
 import { BaseMap, IconMap, MapTooltip, DemoJSONLoader } from "../src";
@@ -103,26 +111,75 @@ const mapData = [
 
 // Use for props in knob method
 const GROUP_IDS = {
-  MARKERS: "Markers"
+  MARKERS: "Markers",
+  DATA: "Data"
 };
 
 const demoMap = () => (
   <DemoJSONLoader urls={mapData}>
     {data => {
-      const opacity = number("Opacity:", 1, opacityOptions);
-      const iconSize = number("Icon Size:", 10, iconSizeOptions);
-      const getSize = () => iconSize;
+      const helperFunc = func => func;
+
+      // >>> Below are vars for Marker Group <<< \\
+
+      // const getIcon // Proptype.Funciton
+
+      const getSize = number(
+        "Icon Size:",
+        10,
+        iconSizeOptions,
+        GROUP_IDS.MARKERS
+      );
+
+      const iconAtlas = text(
+        "Icon Atlas",
+        "https://i.imgur.com/xgTAROe.png",
+        GROUP_IDS.MARKERS
+      );
+
+      const iconMapping = object(
+        "Icon Mapping",
+        poiIconMapping,
+        GROUP_IDS.MARKERS
+      );
+
+      // const iconSizeScale // Proptype.Funciton
+
+      // const getColor // Proptype.Funciton
+
+      const opacity = number("Opacity:", 1, opacityOptions, GROUP_IDS.MARKERS);
+
+      // >>> Below are vars for Data Group <<< \\
+
+      // console.log(data.slide_data.features);
+
+      const dataSelector = data.slide_data.features.map(dataPoint => dataPoint);
+
+      const getPositionStory = select(
+        "Position",
+        getPosition,
+        getPosition[0],
+        GROUP_IDS.DATA
+      );
+
+      const dataStory = select(
+        "Data",
+        dataSelector,
+        dataSelector[0],
+        GROUP_IDS.DATA
+      );
+
       return (
         <BaseMap>
           <IconMap
             data={data.slide_data.features}
             opacity={opacity}
-            iconAtlas="https://i.imgur.com/xgTAROe.png"
-            iconMapping={poiIconMapping}
+            iconAtlas={iconAtlas}
+            iconMapping={iconMapping}
             iconSizeScale={poiIconZoomScale}
             getPosition={getPosition}
             getIcon={getIcon}
-            getSize={getSize}
+            getSize={helperFunc(getSize)}
             getColor={poiGetIconColor}
             onLayerClick={info =>
               action("Layer clicked:", { depth: 2 })(info, info.object)
