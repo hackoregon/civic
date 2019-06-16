@@ -29,13 +29,19 @@ class Migration extends React.Component {
       arrivalData
     };
   }
+
   componentDidMount() {
     this.props.loadData();
   }
+
   render() {
     const dataLoaded = this.props.migrationData[0];
     return (
-      <CivicStoryCard title="Homeless Migration">
+      <CivicStoryCard
+        footer={false}
+        watermark={<div />}
+        title="Homeless Migration"
+      >
         <div>
           <div>
             <h3 style={shared.header}>

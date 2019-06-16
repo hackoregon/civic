@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { StoryCard, LineChart } from "@hackoregon/component-library";
+import { CivicStoryCard, LineChart } from "@hackoregon/component-library";
 import { ungroupBy } from "@hackoregon/component-library/dist/utils";
 
 import eastData from "./east.json";
@@ -49,10 +49,10 @@ ProductionChart.propTypes = {
 };
 
 const TempProdVsCost = () => (
-  <StoryCard
+  <CivicStoryCard
+    footer={false}
+    watermark={<div />}
     title="Housing Production and Cost"
-    collectionId="housing"
-    cardId="production-and-cost"
   >
     <p style={pStyle}>
       Over the last ten years, the Portland region has&nbsp;
@@ -128,7 +128,7 @@ const TempProdVsCost = () => (
       implications for our city&nbsp;
       <a href="https://github.com/hackoregon/housing-backend/wiki">here</a>.
     </p>
-  </StoryCard>
+  </CivicStoryCard>
 );
 
 export default TempProdVsCost;

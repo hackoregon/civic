@@ -83,15 +83,22 @@ class HomelessPopulation extends React.Component {
       }
     };
   }
+
   componentDidMount() {
     this.props.loadData();
   }
+
   handleChange(option) {
     this.setState({ value: option.value });
   }
+
   render() {
     return (
-      <CivicStoryCard title="Homeless Population">
+      <CivicStoryCard
+        footer={false}
+        watermark={<div />}
+        title="Homeless Population"
+      >
         <div className={containerClass}>
           <p style={shared.text}>
             The graph below displays the percent of each type of homeless

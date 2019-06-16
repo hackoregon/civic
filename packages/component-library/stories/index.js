@@ -58,9 +58,6 @@ import TypographyStyleParagraphs from "./styleGuideStories/TypographyStyleParagr
 import UIComponentsStyle from "./styleGuideStories/UIComponentsStyle.story";
 
 // Legacy components used in 2017 package. Not supported for ongoing development.
-// import storycardStory from './StoryCard.story';
-// import storyLinkStory from './StoryLink.story';
-// import storyFooterStory from './StoryFooter.story';
 // import editableStory from './Editable.story';
 // import landingPage from './LandingPage.story';
 
@@ -159,7 +156,4 @@ sandboxStory();
 // Legacy components used in 2017 package. Not supported for ongoing development.
 // editableStory();
 // landingPage();
-// storyLinkStory();
-// storyFooterStory();
-// storycardStory();
 // sankeyStory();
