@@ -3,7 +3,7 @@ import { Component } from "react";
 import PropTypes from "prop-types";
 import { jsx, css } from "@emotion/core";
 
-const defaultOrb = css`
+const defaultStyle = css`
   height: 30px;
   width: 30px;
   border-radius: 15px;
@@ -16,8 +16,16 @@ const defaultOrb = css`
   }
 `;
 
+const pressStyle = css`
+  background-color: #000;
+  -webkit-transition: background-color 1000ms linear;
+  -ms-transition: background-color 1000ms linear;
+  transition: background-color 1000ms linear;
+`;
+
 const defaultState = {
   durationRequired: 1000,
+  animationState: null,
   pressTimeout: null,
   pressedStart: null,
   animationFrame: null
@@ -59,13 +67,14 @@ class Orb extends Component {
   };
 
   doPressAnimation = () => {
-    const { durationRequired } = this.state;
+    const { animationState, durationRequired } = this.state;
     const newAnimationFrame = window.requestAnimationFrame(() => {
       console.log("Do press animation");
     });
     const pressTimeout = setTimeout(this.handleOrbRelease, durationRequired);
 
     this.setState(() => ({
+      animationState: "pressing",
       pressedStart: new Date(),
       animationFrame: newAnimationFrame,
       pressTimeout
@@ -78,6 +87,7 @@ class Orb extends Component {
 
   render() {
     const { x, y } = this.props;
+    const { animationState } = this.state;
     const location = css`
       top: ${y}px;
       left: ${x}px;
@@ -92,8 +102,9 @@ class Orb extends Component {
         onTouchStart={this.handleOrbPress}
         onTouchEnd={this.handleOrbRelease}
         css={css`
-          ${defaultOrb};
           ${location};
+          ${defaultStyle};
+          ${animationState === "pressing" && pressStyle}
         `}
       />
     );
