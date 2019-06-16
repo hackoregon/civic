@@ -6,7 +6,6 @@ import { storiesOf } from "@storybook/react";
 import {
   object,
   text,
-  array,
   withKnobs,
   optionsKnob as options
 } from "@storybook/addon-knobs";
@@ -242,23 +241,11 @@ export default () =>
         );
 
         const dataKey = text("Data key", "year", GROUP_IDS.DATA);
-        // const dataKeyLabel = text("Data key label", "Year", GROUP_IDS.CUSTOM);
-        const dataKeyLabel = array(
-          "Data key label",
-          ["Year"],
-          ",",
-          GROUP_IDS.CUSTOM
-        );
+        const dataKeyLabel = text("Data key label", "Year", GROUP_IDS.CUSTOM);
         const dataValue = text("Data value", "students", GROUP_IDS.DATA);
-        // const dataValueLabel = text(
-        //   "Data value label",
-        //   "Enrolled students",
-        //   GROUP_IDS.CUSTOM
-        // );
-        const dataValueLabel = array(
+        const dataValueLabel = text(
           "Data value label",
-          ["Enrolled students"],
-          ",",
+          "Enrolled students",
           GROUP_IDS.CUSTOM
         );
         const dataSeries = text(
