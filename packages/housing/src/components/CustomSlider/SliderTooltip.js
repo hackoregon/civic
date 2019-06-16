@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const SliderTooltip = ({ value }) => (
-  <div className="panel panel-default">
+  <div className="slider-tooltip-container panel panel-default">
     <div className="panel-body">
       <ul className="list-inline">
         <li>

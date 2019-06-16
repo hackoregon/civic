@@ -10,10 +10,15 @@ class Services211 extends React.Component {
   componentDidMount() {
     this.props.loadData();
   }
+
   render() {
     const dataLoaded = !!this.props.pieData[0];
     return (
-      <CivicStoryCard title="Homelessness Services">
+      <CivicStoryCard
+        footer={false}
+        watermark={<div />}
+        title="Homelessness Services"
+      >
         <p style={shared.text}>
           In 2016 the 211info helpline fielded 6759 calls for services from
           people who self-identified as homeless. Most of those calls were

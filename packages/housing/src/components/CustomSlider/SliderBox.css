@@ -1,0 +1,17 @@
+.custom-slider {
+  width: 90%;
+  margin: auto;
+}
+
+.slider-tooltip-container .panel-body {
+  background-color: #efefef;
+}
+
+.slider-tooltip-container .hour,
+.slider-tooltip-container .day,
+.slider-tooltip-container .week,
+.slider-tooltip-container .month,
+.slider-tooltip-container .year {
+  font-weight: bold;
+  font-size: 1.2em;
+}
