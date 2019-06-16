@@ -101,6 +101,11 @@ const mapData = [
   "https://service.civicpdx.org/disaster-resilience/sandbox/slides/poi/"
 ];
 
+// Use for props in knob method
+const GROUP_IDS = {
+  MARKERS: "Markers"
+};
+
 const demoMap = () => (
   <DemoJSONLoader urls={mapData}>
     {data => {
@@ -241,7 +246,7 @@ class TouchScreenDemo extends React.Component {
         <input
           type="button"
           onClick={this.clearPoints}
-          value={"Clear all points"}
+          value="Clear all points"
         />
       </div>
     );
@@ -252,6 +257,6 @@ export default () =>
   storiesOf("Component Lib|Maps/Icon Map", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
-    .add("Simple usage", demoMap)
+    .add("Standard", demoMap)
     .add("With tooltip", tooltipMap)
     .add("TouchScreen Demo", () => <TouchScreenDemo />);
