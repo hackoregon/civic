@@ -21,8 +21,6 @@ These properties can be set in the Standard story:
 
 The Custom story shows all possible properties that can be passed to the StackedAreaChart component for customization. Three additional properties are added to the properties listed in the Standard story.
 
-- Data key label
-- Data value label
 - Domain
 
 ## Simple

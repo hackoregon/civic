@@ -241,13 +241,7 @@ export default () =>
         );
 
         const dataKey = text("Data key", "year", GROUP_IDS.DATA);
-        const dataKeyLabel = text("Data key label", "Year", GROUP_IDS.CUSTOM);
         const dataValue = text("Data value", "students", GROUP_IDS.DATA);
-        const dataValueLabel = text(
-          "Data value label",
-          "Enrolled students",
-          GROUP_IDS.CUSTOM
-        );
         const dataSeries = text(
           "Data series",
           enrollmentDataSeries,
@@ -261,20 +255,15 @@ export default () =>
         const data = object("Data", sampleEnrollmentData, GROUP_IDS.DATA);
 
         const domain = object("Domain", sampleDomain, GROUP_IDS.CUSTOM);
-        // A separate issue will be created for the size knob.
-        // const size = object("Size", sampleSize, GROUP_IDS.CUSTOM);
 
         return (
           <StackedAreaChart
             data={data}
             dataKey={dataKey}
-            dataKeyLabel={dataKeyLabel}
             dataValue={dataValue}
-            dataValueLabel={dataValueLabel}
             dataSeries={dataSeries}
             dataSeriesLabel={dataSeriesLabel}
             domain={domain}
-            // size={size}
             subtitle={subtitle}
             title={title}
             xLabel={xLabel}
