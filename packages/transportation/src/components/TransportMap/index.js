@@ -1,9 +1,10 @@
+/* eslint-disable */
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { BaseMap, MapOverlay } from "@hackoregon/component-library";
-import { MapPanel } from "../index";
 import PropTypes from "prop-types";
 import { isEmpty } from "ramda";
+import { MapPanel } from "../index";
 import { setPanelValues } from "../../state";
 
 class TransportMap extends Component {
@@ -80,12 +81,8 @@ class TransportMap extends Component {
         >
           {geoData && (
             <MapOverlay
-              filled
-              stroked
               data={geoData}
               opacity={0.5}
-              getPosition={f => f.geometry.coordinates}
-              getElevation={() => 100}
               getFillColor={() => [232, 114, 32, 255]}
               getLineColor={() => [232, 114, 32, 255]}
               getRadius={radiusFor[mapType]}
