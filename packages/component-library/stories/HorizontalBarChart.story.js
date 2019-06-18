@@ -225,4 +225,33 @@ export default () =>
         );
       },
       { notes }
+    )
+    .add(
+      "Example: Stacked bar chart",
+      () => {
+        const sampleStackedData = [
+          [{ x: 1, y: 7 }, { x: 2, y: 2 }],
+          [{ x: 1, y: 3 }, { x: 2, y: 5 }]
+        ];
+        const dataValue = text("Data value", "x", GROUP_IDS.DATA);
+        const dataValueFormatter = getKeyNames(civicFormat);
+        const optionSelectX = options(
+          "X-axis value format",
+          dataValueFormatter,
+          "percentage",
+          { display: "select" },
+          GROUP_IDS.LABELS
+        );
+
+        return (
+          <HorizontalBarChart
+            data={sampleStackedData}
+            dataValueFormatter={x => civicFormat[optionSelectX](x)}
+            dataValue={dataValue}
+            stacked
+            horizontal
+          />
+        );
+      },
+      { notes }
     );

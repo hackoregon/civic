@@ -6,7 +6,8 @@ import {
   VictoryChart,
   VictoryLabel,
   VictoryPortal,
-  VictoryTooltip
+  VictoryTooltip,
+  VictoryStack
 } from "victory";
 
 import ChartContainer from "../ChartContainer";
@@ -28,7 +29,8 @@ const HorizontalBarChart = ({
   yLabel,
   dataValueFormatter,
   dataLabelFormatter,
-  minimalist
+  minimalist,
+  stacked
 }) => {
   const barData =
     sortOrder && sortOrder.length
@@ -49,6 +51,30 @@ const HorizontalBarChart = ({
   const additionalHeight = padding.bottom + padding.top;
 
   const minValue = Math.min(0, ...data.map(d => d[dataValue]));
+
+  const categoricalColors = dataLength => {
+    const colorScheme = [];
+    for (let i = 0; i < dataLength; i += 1) {
+      colorScheme.push(CivicVictoryTheme.civic.group.colorScale[i]);
+    }
+    return colorScheme;
+  };
+
+  const transformData = dataset => {
+    const totals = dataset[0].map((newData, i) => {
+      // eslint-disable-line
+      return dataset.reduce((memo, curr) => {
+        return memo + curr[i].y;
+      }, 0);
+    });
+    const newData = dataset.map(indvData => {
+      return indvData.map((datum, i) => {
+        const newObj = { x: datum.x, y: (datum.y / totals[i]) * 100 };
+        return newObj;
+      });
+    });
+    return newData;
+  };
 
   const NegativeAwareTickLabel = props => (
     <VictoryLabel
@@ -113,60 +139,82 @@ const HorizontalBarChart = ({
             y={minimalist ? 20 : 85}
           />
         </VictoryPortal>
-        <VictoryBar
-          horizontal
-          labelComponent={
-            <NegativeAwareTickLabel
-              x={0}
-              orientation="left"
-              theme={CivicVictoryTheme.civic}
+        {!stacked && (
+          <>
+            <VictoryBar
+              horizontal
+              labelComponent={
+                <NegativeAwareTickLabel
+                  x={0}
+                  orientation="left"
+                  theme={CivicVictoryTheme.civic}
+                />
+              }
+              domainPadding={0}
+              data={barData.map(d => ({
+                sortOrder: d[sortOrderKey],
+                dataValue: d[dataValue],
+                label: dataLabelFormatter(d[dataLabel])
+              }))}
+              x="sortOrder"
+              y="dataValue"
+              events={chartEvents}
             />
-          }
-          domainPadding={0}
-          data={barData.map(d => ({
-            sortOrder: d[sortOrderKey],
-            dataValue: d[dataValue],
-            label: dataLabelFormatter(d[dataLabel])
-          }))}
-          x="sortOrder"
-          y="dataValue"
-          events={chartEvents}
-        />
-        <VictoryBar
-          horizontal
-          labelComponent={
-            <VictoryTooltip
-              x={325}
-              y={0}
-              orientation="bottom"
-              pointerLength={0}
-              cornerRadius={0}
-              theme={CivicVictoryTheme.civic}
+            <VictoryBar
+              horizontal
+              labelComponent={
+                <VictoryTooltip
+                  x={325}
+                  y={0}
+                  orientation="bottom"
+                  pointerLength={0}
+                  cornerRadius={0}
+                  theme={CivicVictoryTheme.civic}
+                />
+              }
+              domainPadding={0}
+              data={barData.map(d => ({
+                sortOrder: d[sortOrderKey],
+                dataValue: d[dataValue],
+                label: `${dataLabelFormatter(
+                  d[dataLabel]
+                )}: ${dataValueFormatter(d[dataValue])}`
+              }))}
+              style={{
+                data: { fill: "none" }
+              }}
+              title="Horizontal Bar Chart"
+              x="sortOrder"
+              y="dataValue"
+              events={chartEvents}
             />
-          }
-          domainPadding={0}
-          data={barData.map(d => ({
-            sortOrder: d[sortOrderKey],
-            dataValue: d[dataValue],
-            label: `${dataLabelFormatter(d[dataLabel])}: ${dataValueFormatter(
-              d[dataValue]
-            )}`
-          }))}
-          style={{
-            data: { fill: "none" }
-          }}
-          title="Horizontal Bar Chart"
-          x="sortOrder"
-          y="dataValue"
-          events={chartEvents}
-        />
+          </>
+        )}
+        {stacked && (
+          <VictoryStack colorScale={categoricalColors(data.length)}>
+            {transformData(data).map((obj, i) => {
+              return (
+                <VictoryBar
+                  domainPadding={0}
+                  data={obj}
+                  events={chartEvents}
+                  key={obj[i].x} // eslint-disable no-array-index-key
+                  horizontal
+                />
+              );
+            })}
+          </VictoryStack>
+        )}
       </VictoryChart>
     </ChartContainer>
   );
 };
 
 HorizontalBarChart.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({})),
+  data: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.shape({})),
+    PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({})))
+  ]),
   sortOrder: PropTypes.string,
   dataValue: PropTypes.string,
   dataLabel: PropTypes.string,
@@ -182,7 +230,8 @@ HorizontalBarChart.propTypes = {
   yLabel: PropTypes.string,
   dataValueFormatter: PropTypes.func,
   dataLabelFormatter: PropTypes.func,
-  minimalist: PropTypes.bool
+  minimalist: PropTypes.bool,
+  stacked: PropTypes.bool
 };
 
 HorizontalBarChart.defaultProps = {
@@ -197,7 +246,8 @@ HorizontalBarChart.defaultProps = {
   yLabel: "Y",
   dataValueFormatter: civicFormat.numeric,
   dataLabelFormatter: civicFormat.unformatted,
-  minimalist: false
+  minimalist: false,
+  stacked: false
 };
 
 export default HorizontalBarChart;
