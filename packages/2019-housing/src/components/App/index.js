@@ -1,0 +1,75 @@
+import React from "react";
+
+import { cx, css } from "emotion";
+import { PageLayout, PullQuote } from "@hackoregon/component-library";
+
+import FarmersMarketsOverTime from "../FarmersMarketsOverTime";
+import PortlandFarmersMarkets from "../PortlandFarmersMarkets";
+
+import "@hackoregon/component-library/assets/global.styles.css";
+
+const sectionMarginSmall = css`
+  display: block;
+  margin: 12px auto;
+`;
+const sectionMarginMedium = css`
+  display: block;
+  margin: 64px auto;
+`;
+const sectionMaxWidthSmall = css`
+  max-width: 700px;
+`;
+const sectionMaxWidthMedium = css`
+  max-width: 900px;
+`;
+const sectionBodyHeading = css`
+  margin: 80px auto 24px;
+`;
+const paragraphStyle = css`
+  line-height: 2;
+  font-size: 18px;
+`;
+
+const App = () => (
+  <PageLayout
+    teamTitle="Housing"
+    heroTitle="🚧 Site Under Construction 🚜"
+    heroSubtitle="Playground for building out the 2019 Housing team frontend"
+    overlay
+  >
+    <section className={sectionMarginMedium}>
+      <FarmersMarketsOverTime />
+    </section>
+    <section className={cx(sectionBodyHeading, sectionMaxWidthSmall)}>
+      <h2>Ullamcorper dignissim cras tincidunt?</h2>
+    </section>
+    <section className={cx(sectionMarginSmall, sectionMaxWidthSmall)}>
+      <p className={paragraphStyle}>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Elementum curabitur
+        vitae nunc sed. Nisl condimentum id venenatis a condimentum vitae sapien
+        pellentesque. Sapien eget mi proin sed libero enim sed faucibus turpis.
+        Fermentum leo vel orci porta.
+      </p>
+    </section>
+    <section className={cx(sectionMarginMedium, sectionMaxWidthMedium)}>
+      <PullQuote quoteText="Lorem Ipsum has been used as dummy text since the 1500s." />
+    </section>
+    <section className={cx(sectionMarginSmall, sectionMaxWidthSmall)}>
+      <p className={paragraphStyle}>
+        Dui accumsan sit amet nulla facilisi. Sed adipiscing diam donec
+        adipiscing. Amet volutpat consequat mauris nunc congue nisi vitae
+        suscipit. In fermentum et sollicitudin ac orci phasellus egestas tellus
+        rutrum. Sed turpis tincidunt id aliquet risus feugiat. Aliquet enim
+        tortor at auctor.
+      </p>
+    </section>
+    <section className={sectionMarginMedium}>
+      <PortlandFarmersMarkets />
+    </section>
+  </PageLayout>
+);
+
+App.displayName = "App";
+
+export default App;
