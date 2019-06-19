@@ -49,7 +49,8 @@ export class PortlandFarmersMarkets extends React.Component {
 
     if (isLoading) {
       return <div className={cardLoading}>Loading...</div>;
-    } else if (!portlandFarmersMarkets) {
+    }
+    if (!portlandFarmersMarkets) {
       return (
         <div className={cardError}>
           Could not render Farmers Markets Over Time
