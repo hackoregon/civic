@@ -4,6 +4,7 @@ import { VictoryPie, VictoryLabel } from "victory";
 import ChartContainer from "../ChartContainer";
 import civicTheme from "../VictoryTheme/CivicVictoryTheme";
 import SimpleLegend from "../SimpleLegend";
+import PropDisplay from "../utils/PropDisplay";
 
 const getOrElse = (possibleValue, defaultValue) =>
   possibleValue == null ? defaultValue : possibleValue;
@@ -37,7 +38,12 @@ const PieChart = props => {
     legendProps.padding = 25;
   }
 
-  return (
+  const allDataPropertiesExist =
+    data.filter(datum => dataValue in datum).length === data.length;
+
+  return !allDataPropertiesExist ? (
+    <PropDisplay properties={{ dataValue, data }} />
+  ) : (
     <ChartContainer
       title={title}
       subtitle={subtitle}
