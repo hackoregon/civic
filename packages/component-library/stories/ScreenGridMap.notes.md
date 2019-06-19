@@ -14,7 +14,7 @@ These properties can be set in the standard story:
 
 ## Custom
 
-The Custom story shows all the possible properties that can be passed to the ScatterPlot Map Component for customization.
+The Custom story shows all the possible properties that can be passed to the ScreenGrid Map Component for customization.
 
 - `data` : expects an array of objects.
 - `getPosition` : expects a function that returns the coordinates of each object in data array.
