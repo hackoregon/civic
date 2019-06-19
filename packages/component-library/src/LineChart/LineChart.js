@@ -166,9 +166,9 @@ LineChart.propTypes = {
     PropTypes.shape({ x: PropTypes.number, y: PropTypes.number })
   ),
   dataKey: PropTypes.string,
-  dataKeyLabel: PropTypes.arrayOf(PropTypes.string),
+  dataKeyLabel: PropTypes.string,
   dataValue: PropTypes.string,
-  dataValueLabel: PropTypes.arrayOf(PropTypes.string),
+  dataValueLabel: PropTypes.string,
   dataSeries: PropTypes.string,
   dataSeriesLabel: PropTypes.arrayOf(
     PropTypes.shape({ category: PropTypes.string, label: PropTypes.string })

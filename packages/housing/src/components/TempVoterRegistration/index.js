@@ -1,5 +1,5 @@
 import React from "react";
-import { StoryCard } from "@hackoregon/component-library";
+import { CivicStoryCard } from "@hackoregon/component-library";
 
 const s3 = "https://s3-us-west-2.amazonaws.com/hacko-cdn/2017-housing/";
 
@@ -29,10 +29,10 @@ const imgStyle = {
 };
 
 const TempVoterRegistration = () => (
-  <StoryCard
+  <CivicStoryCard
+    footer={false}
+    watermark={<div />}
     title="Voter Registration Data"
-    collectionId="housing"
-    cardId="voter-registration"
   >
     <div style={wrapperStyle}>
       <p>
@@ -231,7 +231,7 @@ const TempVoterRegistration = () => (
         alt="Age Distribution of Voters in 2008 and 2016"
       />
     </div>
-  </StoryCard>
+  </CivicStoryCard>
 );
 
 export default TempVoterRegistration;

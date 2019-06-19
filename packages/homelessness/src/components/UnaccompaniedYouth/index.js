@@ -19,7 +19,11 @@ const imgRoot =
   "https://s3-us-west-2.amazonaws.com/hacko-cdn/2017-homelessness";
 
 const UnaccompaniedYouth = () => (
-  <CivicStoryCard title="Unaccompanied Youth—Undercounted?">
+  <CivicStoryCard
+    footer={false}
+    watermark={<div />}
+    title="Unaccompanied Youth—Undercounted?"
+  >
     <div style={styles.bodyContainer}>
       <p style={shared.text}>
         In 2015, 266 unaccompanied youth — people who are not part of a family

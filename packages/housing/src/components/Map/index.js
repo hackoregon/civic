@@ -31,40 +31,32 @@ const Map = ({ neighborhoodData, activeNeighborhood, onSelect }) => {
   return (
     <BaseMap initialZoom={9.8}>
       <MapOverlay
-        filled
-        stroked
+        pickable={false}
         data={neighborhoodData}
         opacity={0.4}
-        getPosition={f => f.geometry.coordinates}
         getFillColor={getNeighborhoodColor}
-        getLineColor={() => [255, 255, 255]}
-        getRadius={10}
+        getLineColor={[255, 255, 255]}
         getLineWidth={4}
       />
       <MapOverlay
         visible={!!activeNeighborhood}
         id="selected-neighborhood"
-        stroked
         pickable={false}
         data={{
           features: [asLine(activeNeighborhood)],
           type: "FeatureCollection"
         }}
         opacity={1}
-        getPosition={f => f.geometry.coordinates}
-        getLineColor={() => [238, 73, 92]}
-        getLineWidth={8}
+        getFillColor={[0, 0, 0, 0]}
+        getLineColor={[238, 73, 92]}
+        getLineWidth={145}
       />
       <MapOverlay
         id="interaction-layer"
-        filled
-        stroked
         data={neighborhoodData}
         opacity={0.0}
-        getPosition={f => f.geometry.coordinates}
-        getFillColor={() => [255, 255, 255]}
-        getLineColor={() => [255, 255, 255]}
-        getRadius={10}
+        getFillColor={[255, 255, 255]}
+        getLineColor={[255, 255, 255]}
         getLineWidth={4}
         onLayerClick={onSelect}
       />

@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { css } from "emotion";
 
 import { CivicStoryCard, LineChart } from "@hackoregon/component-library";
 
@@ -130,7 +129,8 @@ const combineData = (a, b) => [...a, ...b];
 
 export class ServiceAndRidership extends React.Component {
   componentDidMount() {
-    this.props.init();
+    const { init } = this.props;
+    init();
   }
 
   render() {

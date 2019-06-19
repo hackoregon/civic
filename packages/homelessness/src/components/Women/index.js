@@ -25,12 +25,12 @@ const pieData = [
 
 const COLORS = ["#75568D", "#e3dde8"];
 const valueLabel = options => (
-  <Text {...options} fill={"#201024"}>{`${options.value}%`}</Text>
+  <Text {...options} fill="#201024">{`${options.value}%`}</Text>
 );
 const axisLabel = options => (
   <Text
     {...options}
-    fill={"#201024"}
+    fill="#201024"
     y={options.y - 25}
     width={300}
     style={{ fontWeight: "bold" }}
@@ -43,9 +43,14 @@ class HomelessPopulation extends React.Component {
   componentDidMount() {
     // this.props.loadData();
   }
+
   render() {
     return (
-      <CivicStoryCard title="Does Domestic Violence Drive Homelessness?">
+      <CivicStoryCard
+        footer={false}
+        watermark={<div />}
+        title="Does Domestic Violence Drive Homelessness?"
+      >
         <div
           className="Women"
           style={{ marginLeft: "10px", marginRight: "10px", marginTop: "50px" }}
