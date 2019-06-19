@@ -9,6 +9,7 @@ import boundaryMapStory from "./BoundaryMap.story";
 import buttonStory from "./Button.story";
 import civicCardStackStory from "./CivicCardStack.story";
 import civicSandboxDashboardStory from "./CivicSandboxDashboard.story";
+import multiLayerMapStory from "./MultiLayerMap.story";
 import civicSandboxMapStory from "./CivicSandboxMap.story";
 import civicStorycardStory from "./CivicStoryCard.story";
 import dataTable from "./DataTable.story";
@@ -142,6 +143,7 @@ mapOverlayStory();
 pathMapStory();
 scatterPlotMapStory();
 screenGridMapStory();
+multiLayerMapStory();
 
 // Civic platform components and page layout
 storiesOf("Component Lib|CIVIC Platform", module)
