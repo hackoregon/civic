@@ -11,6 +11,7 @@ import {
 } from "victory";
 
 import ChartContainer from "../ChartContainer";
+import PropDisplay from "../utils/PropDisplay";
 import civicFormat from "../utils/civicFormat";
 import { chartEvents, getDefaultDomain } from "../utils/chartHelpers";
 import CivicVictoryTheme from "../VictoryTheme/VictoryThemeIndex";
@@ -31,8 +32,13 @@ const BarChart = ({
   error
 }) => {
   const chartDomain = domain || getDefaultDomain(data, dataKey, dataValue);
+  const allDataPropertiesExist =
+    data.filter(datum => dataKey in datum).length === data.length &&
+    data.filter(datum => dataValue in datum).length === data.length;
 
-  return (
+  return !allDataPropertiesExist ? (
+    <PropDisplay properties={{ dataKey, dataValue, data }} />
+  ) : (
     <ChartContainer
       title={title}
       subtitle={subtitle}
