@@ -15,6 +15,7 @@ import {
 import ChartContainer from "../ChartContainer";
 import SimpleLegend from "../SimpleLegend";
 import civicFormat from "../utils/civicFormat";
+import PropDisplay from "../utils/PropDisplay";
 import {
   chartEvents,
   getDefaultStackedDomain,
@@ -113,7 +114,14 @@ const StackedAreaChart = ({
       ))
     : null;
 
-  return (
+  const allDataPropertiesExist =
+    data.filter(datum => dataKey in datum).length === data.length &&
+    data.filter(datum => dataValue in datum).length === data.length &&
+    data.filter(datum => dataSeries in datum).length === data.length;
+
+  return !allDataPropertiesExist ? (
+    <PropDisplay properties={{ dataKey, dataValue, dataSeries, data }} />
+  ) : (
     <ChartContainer title={title} subtitle={subtitle}>
       {legendData &&
         (legendComponent ? (
