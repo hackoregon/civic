@@ -19,7 +19,7 @@ The Custom story shows all the possible properties that can be passed to the Pat
 - `data` : expects an array of objects.
 - `getPath` : expects a function that returns an array of coordinates for each path. It is compatible with GeoJSON LineStrings.
 - `getColor` : expects a function or an array in `[r, g, b, [a]]` format, where `a` is a number between 0 and 255. If an array is provided, the color is applied to all objects. If a function is provided, it is called on each object to set the fill color.
-- `getWidth` : expects a function or a number. If a number is provided it is used as the radius for all objects. If a function is provided, it is called on each object to set the radius.
+- `getWidth` : expects a function or a number. If a number is provided it is used as the width for all objects. If a function is provided, it is called on each object to set the width.
 - `opacity` : expects a number between 0 and 1.
 - `widthScale` : expects a number.
 - `rounded` : expects a boolean value.
