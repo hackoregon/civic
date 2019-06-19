@@ -61,7 +61,7 @@ const HorizontalBarChart = ({
   };
 
   const transformData = dataset => {
-    const totals = dataset[0].map((newData, i) => {
+    const totals = dataset.map((newData, i) => {
       // eslint-disable-line
       return dataset.reduce((memo, curr) => {
         return memo + curr[i].y;
@@ -69,7 +69,7 @@ const HorizontalBarChart = ({
     });
     const newData = dataset.map(indvData => {
       return indvData.map((datum, i) => {
-        const newObj = { x: datum.x, y: (datum.y / totals[i]) * 100 };
+        const newObj = { x: datum.x, y: datum.y / totals[i] };
         return newObj;
       });
     });
@@ -192,13 +192,14 @@ const HorizontalBarChart = ({
         )}
         {stacked && (
           <VictoryStack colorScale={categoricalColors(data.length)}>
-            {transformData(data).map((obj, i) => {
+            {transformData(data).map((arr, i) => {
+              console.log(arr);
               return (
                 <VictoryBar
                   domainPadding={0}
-                  data={obj}
+                  data={arr}
                   events={chartEvents}
-                  key={obj[i].x} // eslint-disable no-array-index-key
+                  key={arr[i].x} // eslint-disable no-array-index-key
                   horizontal
                 />
               );

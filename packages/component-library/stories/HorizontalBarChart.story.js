@@ -230,8 +230,8 @@ export default () =>
       "Example: Stacked bar chart",
       () => {
         const sampleStackedData = [
-          [{ x: 1, y: 7 }, { x: 2, y: 2 }],
-          [{ x: 1, y: 3 }, { x: 2, y: 5 }]
+          [{ x: "a", y: 7 }, { x: "b", y: 2 }],
+          [{ x: "a", y: 3 }, { x: "b", y: 5 }]
         ];
         const dataValue = text("Data value", "x", GROUP_IDS.DATA);
         const dataValueFormatter = getKeyNames(civicFormat);
@@ -243,13 +243,16 @@ export default () =>
           GROUP_IDS.LABELS
         );
 
+        const xLabel = text("X-axis label", "percentage", GROUP_IDS.LABELS);
+        const yLabel = text("Y-axis label", "wow", GROUP_IDS.LABELS);
         return (
           <HorizontalBarChart
             data={sampleStackedData}
             dataValueFormatter={x => civicFormat[optionSelectX](x)}
             dataValue={dataValue}
+            xLabel={xLabel}
+            yLabel={yLabel}
             stacked
-            horizontal
           />
         );
       },
