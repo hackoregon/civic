@@ -6,9 +6,6 @@ import civicTheme from "../VictoryTheme/CivicVictoryTheme";
 import SimpleLegend from "../SimpleLegend";
 import PropDisplay from "../utils/PropDisplay";
 
-const getOrElse = (possibleValue, defaultValue) =>
-  possibleValue == null ? defaultValue : possibleValue;
-
 const PieChart = props => {
   const {
     title,
@@ -26,11 +23,9 @@ const PieChart = props => {
     height
   } = props;
 
-  const x = getOrElse(dataLabel, "x");
-  const y = getOrElse(dataValue, "y");
   const startAngle = halfDoughnut ? -90 : 0;
   const endAngle = halfDoughnut ? 90 : 360;
-  const legendLabels = data.map(value => ({ name: value[x] }));
+  const legendLabels = data.map(value => ({ name: value[dataLabel] }));
   const legendProps = {};
 
   if (useLegend) {
@@ -67,8 +62,8 @@ const PieChart = props => {
         animate={{
           duration: 1000
         }}
-        x={x}
-        y={y}
+        x={dataLabel}
+        y={dataValue}
         startAngle={startAngle}
         endAngle={endAngle}
         labelComponent={
@@ -98,6 +93,11 @@ PieChart.propTypes = {
   title: PropTypes.string,
   useLegend: PropTypes.bool,
   width: PropTypes.number
+};
+
+PieChart.defaultProps = {
+  dataLabel: "x",
+  dataValue: "y"
 };
 
 export default PieChart;
