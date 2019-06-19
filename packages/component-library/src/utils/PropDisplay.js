@@ -5,7 +5,7 @@ import { css } from "emotion";
 /**
  * Helper function to show invalid property values as code
  *
- * Takes in an `properties` object and and a message
+ * Takes in an `properties` object of and and an optional message string
  */
 const wrapperStyle = css`
   margin: 0 auto;
