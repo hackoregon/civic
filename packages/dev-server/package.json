@@ -27,5 +27,5 @@
     "webpack-dev-middleware": "^3.6.1",
     "webpack-hot-middleware": "^2.22.0",
     "open": "^6.3.0"
-  },
+  }
 }
