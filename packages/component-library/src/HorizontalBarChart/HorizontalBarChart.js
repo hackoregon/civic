@@ -13,6 +13,7 @@ import ChartContainer from "../ChartContainer";
 import civicFormat from "../utils/civicFormat";
 import { chartEvents } from "../utils/chartHelpers";
 import CivicVictoryTheme from "../VictoryTheme/VictoryThemeIndex";
+import PropertyDisplay from "../utils/PropDisplay";
 
 const HorizontalBarChart = ({
   data,
@@ -58,7 +59,12 @@ const HorizontalBarChart = ({
     />
   );
 
-  return (
+  const allDataPropertiesExist =
+    data.filter(datum => dataValue in datum).length === data.length;
+
+  return !allDataPropertiesExist ? (
+    <PropertyDisplay properties={{ dataValue, data }} />
+  ) : (
     <ChartContainer
       title={title}
       subtitle={subtitle}
