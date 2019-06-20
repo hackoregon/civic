@@ -56,7 +56,7 @@ const customLegend = legendData => {
               margin-left: 5px;
             `}
           >
-            Students
+            Experience
           </span>
         </span>
       </legend>
@@ -106,8 +106,7 @@ export default () =>
           { experience: 17, students: 25, series: "elementary" },
           { experience: 18, students: 26, series: "elementary" }
         ];
-        const sampleDataSeries = "series";
-        const sampledataSeriesLabel = [
+        const sampleDataSeriesLabel = [
           { category: "high", label: "High School" },
           { category: "middle", label: "Middle School" },
           { category: "elementary", label: "Elementary School" }
@@ -143,14 +142,10 @@ export default () =>
         );
         const dataKey = text("Data key", "experience", GROUP_IDS.DATA);
         const dataValue = text("Data value", "students", GROUP_IDS.DATA);
-        const dataSeries = text(
-          "Data series",
-          sampleDataSeries,
-          GROUP_IDS.DATA
-        );
+        const dataSeries = text("Data series", "series", GROUP_IDS.DATA);
         const dataSeriesLabel = object(
           "Data series labels",
-          sampledataSeriesLabel,
+          sampleDataSeriesLabel,
           GROUP_IDS.DATA
         );
         const data = object("Data", sampleData, GROUP_IDS.DATA);
@@ -214,8 +209,7 @@ export default () =>
           { experience: 17, students: 25, series: "elementary" },
           { experience: 18, students: 26, series: "elementary" }
         ];
-        const sampleDataSeries = "series";
-        const sampledataSeriesLabel = [
+        const sampleDataSeriesLabel = [
           { category: "high", label: "High School" },
           { category: "middle", label: "Middle School" },
           { category: "elementary", label: "Elementary School" }
@@ -252,14 +246,10 @@ export default () =>
 
         const dataKey = text("Data key", "experience", GROUP_IDS.DATA);
         const dataValue = text("Data value", "students", GROUP_IDS.DATA);
-        const dataSeries = text(
-          "Data series",
-          sampleDataSeries,
-          GROUP_IDS.DATA
-        );
+        const dataSeries = text("Data series", "series", GROUP_IDS.DATA);
         const dataSeriesLabel = object(
           "Data Series Labels",
-          sampledataSeriesLabel,
+          sampleDataSeriesLabel,
           GROUP_IDS.DATA
         );
         const data = object("Data", sampleData, GROUP_IDS.DATA);
@@ -358,18 +348,8 @@ export default () =>
         ];
         const xLabel = text("X-axis label", "X", GROUP_IDS.LABELS);
         const yLabel = text("Y-axis label", "Y", GROUP_IDS.LABELS);
-        // const dataKey = text("Data key", "x", GROUP_IDS.DATA);
-        // const dataValue = text("Data value", "y", GROUP_IDS.DATA);
         const data = object("Data", sampleData, GROUP_IDS.DATA);
-        return (
-          <Scatterplot
-            data={data}
-            // dataKey={dataKey}
-            // dataValue={dataValue}
-            xLabel={xLabel}
-            yLabel={yLabel}
-          />
-        );
+        return <Scatterplot data={data} xLabel={xLabel} yLabel={yLabel} />;
       },
       {
         notes
