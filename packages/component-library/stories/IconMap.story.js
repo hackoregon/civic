@@ -124,6 +124,8 @@ const demoMap = () => (
 
       // const getIcon // Proptype.Funciton
 
+      console.log(getIcon);
+
       const getSize = number(
         "Icon Size:",
         10,
@@ -315,5 +317,5 @@ export default () =>
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .add("Standard", demoMap)
-    .add("With tooltip", tooltipMap)
-    .add("TouchScreen Demo", () => <TouchScreenDemo />);
+    .add("Examples: With Tooltip", tooltipMap)
+    .add("Examples: Touch Screen", () => <TouchScreenDemo />);
