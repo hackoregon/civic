@@ -153,7 +153,7 @@ const CivicSandboxMapStory = data => {
     parameters: { depthTest: false }
   };
 
-  //Foundations
+  // Foundations
   const foundationOptions = {
     "Households with Seniors": "025-households-seniors",
     "Households with Children": "015-household-children"
@@ -164,7 +164,7 @@ const CivicSandboxMapStory = data => {
     foundationOptions["Households with Seniors"]
   );
 
-  //Slides
+  // Slides
   const bikeLanesSlideVisible = boolean("Bike Lanes:", true);
   const gardensSlideVisible = boolean("Community Gardens:", true);
   const grocerySlideVisible = boolean("Grocery Stores:", true);

@@ -32,18 +32,10 @@ describe("MapOverlay", () => {
   });
 
   it("should render with the same class name", () => {
-    expect(wrapper.find(".MapOverlay")).length(1);
+    expect(wrapper.find("DeckGL")).length(1);
   });
 
   it("should render a DeckGL component", () => {
     expect(wrapper.find(DeckGL)).length(1);
-  });
-
-  it("should render without stroked", () => {
-    expect(wrapper.props().layers);
-  });
-
-  it("should render without stroked", () => {
-    expect(wrapper.props().filled);
   });
 });

@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 // This should probably be the core component, containing, nav etc
 import React from "react";
 import styled from "styled-components";
-import { StoryCard } from "@hackoregon/component-library";
+import { CivicStoryCard } from "@hackoregon/component-library";
 import ConstructionViews from "../ConstructionViews";
 import CrashData from "../CrashData/CrashData";
 
@@ -20,13 +20,13 @@ const Container = styled.div`
 function App(props) {
   return (
     <Container>
-      <StoryCard
+      <CivicStoryCard
         title="Portland Road Works Explorer"
-        collectionId="transportation"
-        cardId="trans-construction-maps"
+        footer={false}
+        watermark={<div />}
       >
         <ConstructionViews />
-      </StoryCard>
+      </CivicStoryCard>
       <CrashData />
 
       {React.Children.toArray(props.children)}

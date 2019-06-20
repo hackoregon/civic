@@ -15,7 +15,7 @@ export class DiveDeeperIntoTransportationData extends React.Component {
       >
         <Placeholder>
           <h1>Sandbox Card</h1>
-          <p>Don't worry about this one</p>
+          <p>Do not worry about this one</p>
         </Placeholder>
       </CivicStoryCard>
     );

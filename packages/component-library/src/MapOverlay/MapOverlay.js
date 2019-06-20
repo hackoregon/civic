@@ -1,32 +1,39 @@
 import React from "react";
-import PropTypes from "prop-types";
+import {
+  shape,
+  bool,
+  number,
+  func,
+  node,
+  oneOfType,
+  arrayOf,
+  string
+} from "prop-types";
 import DeckGL, { GeoJsonLayer } from "deck.gl";
 
 const MapOverlay = props => {
   const {
     id,
+    viewport,
     children,
     data,
-    viewport,
-    autoHighlight,
-    extruded,
-    filled,
-    getRadius,
-    onHover,
-    onLayerClick,
-    opacity,
-    strokeWidth,
-    tooltipInfo,
-    x,
-    y,
-    visible,
-    wireframe,
     pickable,
-    getElevation,
+    opacity,
+    filled,
     getFillColor,
+    stroked,
     getLineColor,
     getLineWidth,
-    stroked
+    extruded,
+    getElevation,
+    getRadius,
+    autoHighlight,
+    highlightColor,
+    onLayerClick,
+    onHover,
+    tooltipInfo,
+    x,
+    y
   } = props;
 
   const tooltip = React.Children.map(children, child => {
@@ -39,89 +46,74 @@ const MapOverlay = props => {
 
   const tooltipRender = tooltipInfo && x && y ? tooltip : null;
 
-  const LIGHT_SETTINGS = {
-    lightsPosition: [-125, 50.5, 5000, -122.8, 48.5, 8000],
-    ambientRatio: 0.2,
-    diffuseRatio: 0.5,
-    specularRatio: 0.3,
-    lightsStrength: [1.0, 0.0, 2.0, 0.0],
-    numberOfLights: 2
-  };
-
-  const layer = new GeoJsonLayer({
-    id,
-    data,
-    visible,
-    autoHighlight,
-    extruded,
-    opacity,
-    filled,
-    onHover,
-    wireframe,
-    getRadius,
-    getLineWidth,
-    stroked,
-    pickable,
-    lineWidthScale: 20,
-    lineWidthMinPixels: strokeWidth,
-    fp64: true,
-    lightSettings: LIGHT_SETTINGS,
-    onClick: onLayerClick,
-    getElevation,
-    getFillColor,
-    getLineColor
-  });
-
   return (
     <div>
-      <DeckGL
-        {...viewport}
-        layers={[layer]}
-        className="MapOverlay"
-        getCursor={() => "crosshair"}
-      />
+      <DeckGL {...viewport} className="DeckGL" getCursor={() => "crosshair"}>
+        <GeoJsonLayer
+          id={id}
+          className="GeoJSONMap"
+          pickable={pickable}
+          data={data}
+          opacity={opacity}
+          filled={filled}
+          getFillColor={getFillColor}
+          stroked={stroked}
+          getLineColor={getLineColor}
+          getLineWidth={getLineWidth}
+          lineWidthMinPixels={1}
+          extruded={extruded}
+          getElevation={getElevation}
+          getRadius={getRadius}
+          autoHighlight={autoHighlight}
+          highlightColor={highlightColor}
+          onClick={onLayerClick}
+          onHover={onHover}
+          updateTriggers={{
+            getFillColor,
+            getLineColor,
+            getLineWidth
+          }}
+        />
+      </DeckGL>
       {tooltipRender}
     </div>
   );
 };
 
 MapOverlay.propTypes = {
-  id: PropTypes.string,
-  children: PropTypes.node,
-  data: PropTypes.arrayOf(PropTypes.shape({})),
-  viewport: PropTypes.shape({}),
-  autoHighlight: PropTypes.bool,
-  extruded: PropTypes.bool,
-  elevation: PropTypes.number,
-  filled: PropTypes.bool,
-  getColor: PropTypes.func,
-  getRadius: PropTypes.func,
-  onHover: PropTypes.func,
-  onLayerClick: PropTypes.func,
-  opacity: PropTypes.number,
-  strokeWidth: PropTypes.number,
-  tooltipInfo: PropTypes.shape({}),
-  x: PropTypes.number,
-  y: PropTypes.number,
-  visible: PropTypes.bool,
-  wireframe: PropTypes.bool,
-  pickable: PropTypes.bool,
-  getElevation: PropTypes.oneOfType([PropTypes.number, PropTypes.func]),
-  getFillColor: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.number),
-    PropTypes.func
-  ]),
-  getLineColor: PropTypes.oneOfType([PropTypes.number, PropTypes.func]),
-  getLineWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.func]),
-  stroked: PropTypes.bool
+  viewport: shape({}),
+  children: node,
+  id: string,
+  data: oneOfType([shape({}), arrayOf(shape({}))]).isRequired,
+  pickable: bool,
+  opacity: number,
+  filled: bool,
+  getFillColor: oneOfType([arrayOf(number), func]),
+  stroked: bool,
+  getLineColor: oneOfType([arrayOf(number), func]),
+  getLineWidth: oneOfType([number, func]),
+  extruded: bool,
+  getElevation: oneOfType([number, func]),
+  getRadius: oneOfType([number, func]),
+  autoHighlight: bool,
+  highlightColor: arrayOf(number),
+  onLayerClick: func,
+  onHover: func,
+  tooltipInfo: shape({}),
+  x: number,
+  y: number
 };
 
 MapOverlay.defaultProps = {
-  id: "geojson",
-  stroked: false,
-  strokeWidth: 1,
-  visible: true,
-  pickable: true
+  pickable: true,
+  opacity: 0.8,
+  filled: true,
+  getFillColor: [0, 0, 0],
+  stroked: true,
+  getLineColor: [112, 122, 122, 100],
+  getLineWidth: 10,
+  extruded: false,
+  autoHighlight: false
 };
 
 export default MapOverlay;

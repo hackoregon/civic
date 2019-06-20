@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { css } from "emotion";
 
 import { CivicStoryCard, Scatterplot } from "@hackoregon/component-library";
 
@@ -16,7 +15,8 @@ import {
 
 export class DriversOfPublicTransitParticipation extends React.Component {
   componentDidMount() {
-    this.props.init();
+    const { init } = this.props;
+    init();
   }
 
   render() {
@@ -26,6 +26,8 @@ export class DriversOfPublicTransitParticipation extends React.Component {
       <CivicStoryCard
         title="Drivers of Public Transit Participation"
         slug="drivers-of-public-transit-participation"
+        loading={isLoading}
+        error={error}
       >
         <p>
           The Relationship between Service Availability and the Change in
