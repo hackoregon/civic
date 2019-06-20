@@ -277,7 +277,7 @@ export default () =>
       "Example: Many data points",
       () => {
         const scale = 0.25;
-        const value = number("Number of data points", 100, GROUP_IDS.DATA);
+        const value = number("Number of data points", 100, {}, GROUP_IDS.DATA);
         return (
           <LineChart
             data={Array(value)
