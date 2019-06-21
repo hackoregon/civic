@@ -230,9 +230,9 @@ export default () =>
       "Example: Stacked bar chart",
       () => {
         const sampleStackedData = [
-          [{ x: "a", y: 7 }, { x: "b", y: 2 }, { x: "c", y: 3 }],
-          [{ x: "a", y: 2 }, { x: "b", y: 5 }, { x: "c", y: 4 }],
-          [{ x: "a", y: 1 }, { x: "b", y: 2 }, { x: "c", y: 3 }]
+          [{ x: "2017", y: 7 }, { x: "2018", y: 2 }, { x: "2019", y: 3 }],
+          [{ x: "2017", y: 2 }, { x: "2018", y: 5 }, { x: "2019", y: 4 }],
+          [{ x: "2017", y: 1 }, { x: "2018", y: 2 }, { x: "2019", y: 3 }]
         ];
 
         const dataValue = text("Data value", "x", GROUP_IDS.DATA);
@@ -245,9 +245,9 @@ export default () =>
           GROUP_IDS.LABELS
         );
         const minimalist = boolean("Minimalist", false, GROUP_IDS.CUSTOM);
-        const dataLabel = text("Data label", "x", GROUP_IDS.DATA);
-        const xLabel = text("X-axis label", "percent", GROUP_IDS.LABELS);
-        const yLabel = text("Y-axis label", "amount", GROUP_IDS.LABELS);
+        const dataLabel = text("Data label", "y", GROUP_IDS.DATA);
+        const xLabel = text("X-axis label", "Percent", GROUP_IDS.LABELS);
+        const yLabel = text("Y-axis label", "Year", GROUP_IDS.LABELS);
         const title = text("Title", "Numbers", GROUP_IDS.LABELS);
         const subtitle = text(
           "Subtitle",
