@@ -230,9 +230,11 @@ export default () =>
       "Example: Stacked bar chart",
       () => {
         const sampleStackedData = [
-          [{ x: "a", y: 7 }, { x: "b", y: 2 }],
-          [{ x: "a", y: 3 }, { x: "b", y: 5 }]
+          [{ x: "a", y: 7 }, { x: "b", y: 2 }, { x: "c", y: 3 }],
+          [{ x: "a", y: 2 }, { x: "b", y: 5 }, { x: "c", y: 4 }],
+          [{ x: "a", y: 1 }, { x: "b", y: 2 }, { x: "c", y: 3 }]
         ];
+
         const dataValue = text("Data value", "x", GROUP_IDS.DATA);
         const dataValueFormatter = getKeyNames(civicFormat);
         const optionSelectX = options(
@@ -242,16 +244,28 @@ export default () =>
           { display: "select" },
           GROUP_IDS.LABELS
         );
-
-        const xLabel = text("X-axis label", "percentage", GROUP_IDS.LABELS);
-        const yLabel = text("Y-axis label", "wow", GROUP_IDS.LABELS);
+        const minimalist = boolean("Minimalist", false, GROUP_IDS.CUSTOM);
+        const dataLabel = text("Data label", "x", GROUP_IDS.DATA);
+        const xLabel = text("X-axis label", "percent", GROUP_IDS.LABELS);
+        const yLabel = text("Y-axis label", "amount", GROUP_IDS.LABELS);
+        const title = text("Title", "Numbers", GROUP_IDS.LABELS);
+        const subtitle = text(
+          "Subtitle",
+          "that mean nothing",
+          GROUP_IDS.LABELS
+        );
+        const data = object("Data", sampleStackedData, GROUP_IDS.DATA);
         return (
           <HorizontalBarChart
-            data={sampleStackedData}
+            data={data}
             dataValueFormatter={x => civicFormat[optionSelectX](x)}
             dataValue={dataValue}
+            dataLabel={dataLabel}
             xLabel={xLabel}
             yLabel={yLabel}
+            title={title}
+            subtitle={subtitle}
+            minimalist={minimalist}
             stacked
           />
         );
