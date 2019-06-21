@@ -60,7 +60,7 @@ const HorizontalBarChart = ({
     return colorScheme;
   };
 
-  const transformDatato100 = dataset => {
+  const transformDatato100 = (dataset, value, label) => {
     const totals = dataset[0].map((currentData, i) => {
       return dataset.reduce((memo, curr) => {
         return memo + curr[i].y;
@@ -68,7 +68,10 @@ const HorizontalBarChart = ({
     });
     const newData = dataset.map(indvData => {
       return indvData.map((datum, i) => {
-        const newObj = { x: datum.x, y: datum.y / totals[i] };
+        const newObj = {
+          [`${value}`]: datum[value],
+          [`${label}`]: datum[label] / totals[i]
+        };
         return newObj;
       });
     });
@@ -191,7 +194,7 @@ const HorizontalBarChart = ({
         )}
         {stacked && (
           <VictoryStack colorScale={categoricalColors(data.length)}>
-            {transformDatato100(data).map((arr, i) => {
+            {transformDatato100(data, dataValue, dataLabel).map((arr, i) => {
               return (
                 <VictoryBar
                   domainPadding={0}
@@ -205,7 +208,7 @@ const HorizontalBarChart = ({
           </VictoryStack>
         )}
         {stacked &&
-          transformDatato100(data).map((arr, i) => {
+          transformDatato100(data, dataValue, dataLabel).map((arr, i) => {
             return (
               <VictoryAxis
                 style={{
