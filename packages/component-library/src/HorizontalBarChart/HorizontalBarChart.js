@@ -60,9 +60,8 @@ const HorizontalBarChart = ({
     return colorScheme;
   };
 
-  const transformData = dataset => {
-    const totals = dataset.map((newData, i) => {
-      // eslint-disable-line
+  const transformDatato100 = dataset => {
+    const totals = dataset[0].map((currentData, i) => {
       return dataset.reduce((memo, curr) => {
         return memo + curr[i].y;
       }, 0);
@@ -192,20 +191,32 @@ const HorizontalBarChart = ({
         )}
         {stacked && (
           <VictoryStack colorScale={categoricalColors(data.length)}>
-            {transformData(data).map((arr, i) => {
-              console.log(arr);
+            {transformDatato100(data).map((arr, i) => {
               return (
                 <VictoryBar
                   domainPadding={0}
                   data={arr}
                   events={chartEvents}
-                  key={arr[i].x} // eslint-disable no-array-index-key
+                  key={arr[i].x}
                   horizontal
                 />
               );
             })}
           </VictoryStack>
         )}
+        {stacked &&
+          transformDatato100(data).map((arr, i) => {
+            return (
+              <VictoryAxis
+                style={{
+                  tickFormat: arr[dataLabel],
+                  ticks: { stroke: "none" },
+                  grid: { stroke: "none" }
+                }}
+                key={arr[i]}
+              />
+            );
+          })}
       </VictoryChart>
     </ChartContainer>
   );
