@@ -28,3 +28,9 @@ The Custom story shows all possible properties that can be passed to the BarChar
 ## Example: Minimalist
 
 ## Example: With Negative Values
+
+## Example: Stacked Bar Chart
+
+The Stacked Bar Chart shows all the possible properties for the stacked option of the Horizontal Bar Chart.
+
+Simply pass `stacked` as a prop to the `HorizontalBarChart` component. The data should be formatted as an array of arrays of objects. The colors are sourced from the `CivicVictoryTheme.civic.group.colorScale` and are assigned by the arrays index in the larger array.
