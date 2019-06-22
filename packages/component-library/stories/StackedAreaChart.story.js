@@ -69,104 +69,108 @@ const customLegend = legendData => {
 export default () =>
   storiesOf("Component Lib|Charts/Stacked Area Chart", module)
     .addDecorator(withKnobs)
-    .add("Standard", () => {
-      const sampleEnrollmentData = [
-        { year: 2005, students: 34, group: "BAA" },
-        { year: 2006, students: 28, group: "BAA" },
-        { year: 2007, students: 17, group: "BAA" },
-        { year: 2008, students: 18, group: "BAA" },
-        { year: 2009, students: 14, group: "BAA" },
-        { year: 2010, students: 23, group: "BAA" },
-        { year: 2011, students: 21, group: "BAA" },
-        { year: 2012, students: 17, group: "BAA" },
-        { year: 2013, students: 19, group: "BAA" },
-        { year: 2014, students: 16, group: "BAA" },
+    .add(
+      "Standard",
+      () => {
+        const sampleEnrollmentData = [
+          { year: 2005, students: 34, group: "BAA" },
+          { year: 2006, students: 28, group: "BAA" },
+          { year: 2007, students: 17, group: "BAA" },
+          { year: 2008, students: 18, group: "BAA" },
+          { year: 2009, students: 14, group: "BAA" },
+          { year: 2010, students: 23, group: "BAA" },
+          { year: 2011, students: 21, group: "BAA" },
+          { year: 2012, students: 17, group: "BAA" },
+          { year: 2013, students: 19, group: "BAA" },
+          { year: 2014, students: 16, group: "BAA" },
 
-        { year: 2005, students: 34, group: "HIS" },
-        { year: 2006, students: 28, group: "HIS" },
-        { year: 2007, students: 24, group: "HIS" },
-        { year: 2008, students: 24, group: "HIS" },
-        { year: 2009, students: 37, group: "HIS" },
-        { year: 2010, students: 37, group: "HIS" },
-        { year: 2011, students: 44, group: "HIS" },
-        { year: 2012, students: 42, group: "HIS" },
-        { year: 2013, students: 48, group: "HIS" },
-        { year: 2014, students: 45, group: "HIS" },
+          { year: 2005, students: 34, group: "HIS" },
+          { year: 2006, students: 28, group: "HIS" },
+          { year: 2007, students: 24, group: "HIS" },
+          { year: 2008, students: 24, group: "HIS" },
+          { year: 2009, students: 37, group: "HIS" },
+          { year: 2010, students: 37, group: "HIS" },
+          { year: 2011, students: 44, group: "HIS" },
+          { year: 2012, students: 42, group: "HIS" },
+          { year: 2013, students: 48, group: "HIS" },
+          { year: 2014, students: 45, group: "HIS" },
 
-        { year: 2005, students: 0, group: "MULTI" },
-        { year: 2006, students: 0, group: "MULTI" },
-        { year: 2007, students: 28, group: "MULTI" },
-        { year: 2008, students: 41, group: "MULTI" },
-        { year: 2009, students: 23, group: "MULTI" },
-        { year: 2010, students: 42, group: "MULTI" },
-        { year: 2011, students: 54, group: "MULTI" },
-        { year: 2012, students: 55, group: "MULTI" },
-        { year: 2013, students: 56, group: "MULTI" },
-        { year: 2014, students: 59, group: "MULTI" }
-      ];
-      const enrollmentDataSeries = "group";
-      const enrollmentDataSeriesLabels = [
-        { category: "BAA", label: "Black/African American" },
-        { category: "HIS", label: "Hispanic/Latino" },
-        { category: "MULTI", label: "Multi-Ethnic" }
-      ];
-      const title = text(
-        "Title:",
-        "Students from Historically Underrepresented Groups",
-        GROUP_IDS.LABELS
-      );
-      const subtitle = text(
-        "Subtitle",
-        "Fall enrollment in Portland Public Schools - Buckman",
-        GROUP_IDS.LABELS
-      );
-      const xLabel = text("X-axis label:", "Year", GROUP_IDS.LABELS);
-      const optionSelectX = options(
-        "X-axis value format",
-        xFormatterOptions,
-        "year",
-        { display: "select" },
-        GROUP_IDS.LABELS
-      );
-      const yLabel = text("Y-axis label:", "Students", GROUP_IDS.LABELS);
-      const optionSelectY = options(
-        "Y-axis value format",
-        yFormatterOptions,
-        "numeric",
-        { display: "select" },
-        GROUP_IDS.LABELS
-      );
+          { year: 2005, students: 0, group: "MULTI" },
+          { year: 2006, students: 0, group: "MULTI" },
+          { year: 2007, students: 28, group: "MULTI" },
+          { year: 2008, students: 41, group: "MULTI" },
+          { year: 2009, students: 23, group: "MULTI" },
+          { year: 2010, students: 42, group: "MULTI" },
+          { year: 2011, students: 54, group: "MULTI" },
+          { year: 2012, students: 55, group: "MULTI" },
+          { year: 2013, students: 56, group: "MULTI" },
+          { year: 2014, students: 59, group: "MULTI" }
+        ];
+        const enrollmentDataSeries = "group";
+        const enrollmentDataSeriesLabels = [
+          { category: "BAA", label: "Black/African American" },
+          { category: "HIS", label: "Hispanic/Latino" },
+          { category: "MULTI", label: "Multi-Ethnic" }
+        ];
+        const title = text(
+          "Title:",
+          "Students from Historically Underrepresented Groups",
+          GROUP_IDS.LABELS
+        );
+        const subtitle = text(
+          "Subtitle",
+          "Fall enrollment in Portland Public Schools - Buckman",
+          GROUP_IDS.LABELS
+        );
+        const xLabel = text("X-axis label:", "Year", GROUP_IDS.LABELS);
+        const optionSelectX = options(
+          "X-axis value format",
+          xFormatterOptions,
+          "year",
+          { display: "select" },
+          GROUP_IDS.LABELS
+        );
+        const yLabel = text("Y-axis label:", "Students", GROUP_IDS.LABELS);
+        const optionSelectY = options(
+          "Y-axis value format",
+          yFormatterOptions,
+          "numeric",
+          { display: "select" },
+          GROUP_IDS.LABELS
+        );
 
-      const dataKey = text("Data key", "year", GROUP_IDS.DATA);
-      const dataValue = text("Data value", "students", GROUP_IDS.DATA);
-      const dataSeries = text(
-        "Data series",
-        enrollmentDataSeries,
-        GROUP_IDS.DATA
-      );
-      const dataSeriesLabel = object(
-        "Data series labels:",
-        enrollmentDataSeriesLabels,
-        GROUP_IDS.DATA
-      );
-      const data = object("Data", sampleEnrollmentData, GROUP_IDS.DATA);
+        const dataKey = text("Data key", "year", GROUP_IDS.DATA);
+        const dataValue = text("Data value", "students", GROUP_IDS.DATA);
+        const dataSeries = text(
+          "Data series",
+          enrollmentDataSeries,
+          GROUP_IDS.DATA
+        );
+        const dataSeriesLabel = object(
+          "Data series labels:",
+          enrollmentDataSeriesLabels,
+          GROUP_IDS.DATA
+        );
+        const data = object("Data", sampleEnrollmentData, GROUP_IDS.DATA);
 
-      return (
-        <StackedAreaChart
-          data={data}
-          dataKey={dataKey}
-          dataValue={dataValue}
-          dataSeries={dataSeries}
-          dataSeriesLabel={dataSeriesLabel}
-          subtitle={subtitle}
-          title={title}
-          xLabel={xLabel}
-          yLabel={yLabel}
-          xNumberFormatter={x => civicFormat[optionSelectX](x)}
-          yNumberFormatter={y => civicFormat[optionSelectY](y)}
-        />
-      );
-    })
+        return (
+          <StackedAreaChart
+            data={data}
+            dataKey={dataKey}
+            dataValue={dataValue}
+            dataSeries={dataSeries}
+            dataSeriesLabel={dataSeriesLabel}
+            subtitle={subtitle}
+            title={title}
+            xLabel={xLabel}
+            yLabel={yLabel}
+            xNumberFormatter={x => civicFormat[optionSelectX](x)}
+            yNumberFormatter={y => civicFormat[optionSelectY](y)}
+          />
+        );
+      },
+      { notes }
+    )
     .add(
       "Custom",
       () => {
