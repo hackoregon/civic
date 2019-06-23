@@ -21,7 +21,7 @@ const GROUP_IDS = {
   DATA: "Data"
 };
 
-const civicCategoricalColorOptions = {
+const CIVIC_CATEGORICAL_COLORS = {
   civicBlue: "civicBlue",
   civicGreen: "civicGreen",
   civicPurple: "civicPurple",
@@ -29,7 +29,7 @@ const civicCategoricalColorOptions = {
   civicYellow: "civicYellow"
 };
 
-const civicSequentialColorOptions = {
+const CIVIC_SEQUENTIAL_COLORS = {
   thermal: "thermal",
   planet: "planet",
   space: "space",
@@ -37,7 +37,7 @@ const civicSequentialColorOptions = {
   ocean: "ocean"
 };
 
-const civicDivergingColorOptions = {
+const CIVIC_DIVERGING_COLORS = {
   purpleGreen: "purpleGreen",
   purpleOrange: "purpleOrange"
 };
@@ -47,6 +47,20 @@ const opacityOptions = {
   min: 0.1,
   max: 1,
   step: 0.05
+};
+
+const radiusScaleOptions = {
+  range: true,
+  min: 1,
+  max: 100,
+  step: 1
+};
+
+const iconSizeOptions = {
+  range: true,
+  min: 1,
+  max: 100,
+  step: 1
 };
 
 export default () =>
@@ -65,58 +79,87 @@ export default () =>
           GROUP_IDS.STANDARD
         );
 
-        const pathMapScaleTypeOptions = {
+        const PATH_MAP_SCALE_TYPE_COLOR_OPTIONS = {
           "(none)": "",
           threshold: "threshold",
-          equal: "equal",
           ordinal: "ordinal",
-          quantile: "quantile"
+          equal: "equal"
         };
 
-        const scaleTypeSelection = select(
+        const scaleTypeColor = select(
           "Scale Type:",
-          pathMapScaleTypeOptions,
+          PATH_MAP_SCALE_TYPE_COLOR_OPTIONS,
           "",
           GROUP_IDS.CUSTOM
         );
 
         let lineColor;
+        let fieldName;
+        let dataRange;
+        let colorRange;
 
-        if (scaleTypeSelection === "") {
+        if (scaleTypeColor === "") {
           lineColor = select(
             "Civic Color:",
-            civicCategoricalColorOptions,
-            civicCategoricalColorOptions.civicGreen,
+            CIVIC_CATEGORICAL_COLORS,
+            CIVIC_CATEGORICAL_COLORS.civicGreen,
             GROUP_IDS.STANDARD
           );
-        } else if (scaleTypeSelection === "threshold") {
+
+          fieldName = text("Field Name:", "", GROUP_IDS.CUSTOM);
+          dataRange = object("Data Range:", [], GROUP_IDS.CUSTOM);
+          colorRange = object("Color Range:", [], GROUP_IDS.CUSTOM);
+        } else if (scaleTypeColor === "threshold") {
           lineColor = select(
             "Civic Color:",
-            civicDivergingColorOptions,
-            civicDivergingColorOptions.purpleGreen,
+            CIVIC_DIVERGING_COLORS,
+            CIVIC_DIVERGING_COLORS.purpleGreen,
             GROUP_IDS.CUSTOM
           );
-        } else if (
-          scaleTypeSelection === "equal" ||
-          scaleTypeSelection === "quantile"
-        ) {
+
+          fieldName = text("Field Name:", "shape_leng", GROUP_IDS.CUSTOM);
+
+          dataRange = object(
+            "Data Range:",
+            [50, 100, 250, 300, 350, 400, 450, 500],
+            GROUP_IDS.CUSTOM
+          );
+
+          colorRange = object("Color Range:", [], GROUP_IDS.CUSTOM);
+        } else if (scaleTypeColor === "ordinal") {
           lineColor = select(
             "Civic Color:",
-            civicSequentialColorOptions,
-            civicSequentialColorOptions.thermal,
+            CIVIC_CATEGORICAL_COLORS,
+            CIVIC_CATEGORICAL_COLORS.civicGreen,
+            GROUP_IDS.STANDARD
+          );
+
+          fieldName = text("Field Name:", "facility", GROUP_IDS.CUSTOM);
+
+          dataRange = object("Data Range:", ["NG", "ESR"], GROUP_IDS.CUSTOM);
+
+          colorRange = object(
+            "Color Range:",
+            [[0, 0, 255], [255, 0, 0]],
             GROUP_IDS.CUSTOM
           );
+        } else if (scaleTypeColor === "equal") {
+          lineColor = select(
+            "Civic Color:",
+            CIVIC_SEQUENTIAL_COLORS,
+            CIVIC_SEQUENTIAL_COLORS.thermal,
+            GROUP_IDS.CUSTOM
+          );
+
+          fieldName = text("Field Name:", "shape_leng", GROUP_IDS.CUSTOM);
+          dataRange = object("Data Range:", [], GROUP_IDS.CUSTOM);
+          colorRange = object("Color Range:", [], GROUP_IDS.CUSTOM);
         }
-
-        const fieldName = text("Field Name:", "", GROUP_IDS.CUSTOM);
-
-        const dataRange = object("Data Range:", [], GROUP_IDS.CUSTOM);
-
-        const colorRange = object("Color Range:", [], GROUP_IDS.CUSTOM);
 
         const pathMapAPIURL =
           "https://service.civicpdx.org/neighborhood-development/api/bike_greenways" +
           "?format=json&limit=280";
+
         const fetchURL = text("API URL:", pathMapAPIURL, GROUP_IDS.DATA);
 
         const onLayerClick = info => action("Line Clicked:")(info);
@@ -131,7 +174,7 @@ export default () =>
                 GROUP_IDS.DATA
               );
 
-              const pathMap = {
+              const pathMapLayer = {
                 mapType: "PathMap",
                 id: "storybook-pathmap-00",
                 data: data.results.features,
@@ -139,25 +182,28 @@ export default () =>
                 opacity,
                 civicColor: lineColor,
                 scaleType: {
-                  color: scaleTypeSelection
+                  color: scaleTypeColor
                 },
                 fieldName: {
                   color: fieldName
                 },
                 dataRange,
                 colorRange,
-                onLayerClick
+                onLayerClick,
+                pickable: 10
               };
 
               return (
                 <div style={{ height: "100vh" }}>
                   <BaseMap
-                    initialZoom={12}
+                    initialZoom={12.8}
+                    initialLongitude={-122.7150944}
+                    initialLatitude={45.4761333}
                     updateViewport={false}
                     civicMapStyle="dark"
                     useContainerHeight
                   >
-                    <MultiLayerMap mapLayers={[pathMap]} />
+                    <MultiLayerMap mapLayers={[pathMapLayer]} />
                   </BaseMap>
                 </div>
               );
@@ -173,6 +219,7 @@ export default () =>
       "ScatterPlot Map",
       () => {
         const circleRadius = number("radius:", 25, {}, GROUP_IDS.STANDARD);
+
         const circleOpacity = number(
           "opacity:",
           0.7,
@@ -180,73 +227,94 @@ export default () =>
           GROUP_IDS.STANDARD
         );
 
-        const scatterPlotMapColorScaleTypeOptions = {
+        const SCATTERPLOT_SCALE_TYPE_COLOR_OPTIONS = {
           "(none)": "",
           ordinal: "ordinal"
         };
 
-        const scaleTypeSelectionColor = select(
+        const scaleTypeColor = select(
           "Scale Type (color):",
-          scatterPlotMapColorScaleTypeOptions,
+          SCATTERPLOT_SCALE_TYPE_COLOR_OPTIONS,
           "",
           GROUP_IDS.CUSTOM
         );
 
         let circleColor;
+        let fieldNameColor;
+        let dataRange;
+        let colorRange;
 
-        if (scaleTypeSelectionColor === "") {
+        if (scaleTypeColor === "") {
           circleColor = select(
             "Civic Color:",
-            civicCategoricalColorOptions,
-            civicCategoricalColorOptions.civicGreen,
+            CIVIC_CATEGORICAL_COLORS,
+            CIVIC_CATEGORICAL_COLORS.civicGreen,
             GROUP_IDS.STANDARD
+          );
+
+          fieldNameColor = text("Field Name (color):", "", GROUP_IDS.CUSTOM);
+          dataRange = object("Data Range:", [], GROUP_IDS.CUSTOM);
+          colorRange = object("Color Range:", [], GROUP_IDS.CUSTOM);
+        } else if (scaleTypeColor === "ordinal") {
+          fieldNameColor = text(
+            "Field Name (color):",
+            "condition",
+            GROUP_IDS.CUSTOM
+          );
+
+          dataRange = object(
+            "Data Range:",
+            ["Dead", "Poor", "Fair", "Good"],
+            GROUP_IDS.CUSTOM
+          );
+
+          colorRange = object(
+            "Color Range:",
+            [[255, 0, 0], [255, 128, 0], [255, 255, 0], [0, 255, 0]],
+            GROUP_IDS.CUSTOM
           );
         }
 
-        const fieldNameColor = text(
-          "Field Name (color):",
-          "",
-          GROUP_IDS.CUSTOM
-        );
-
-        const dataRange = object("Data Range:", [], GROUP_IDS.CUSTOM);
-
-        const colorRange = object("Color Range:", [], GROUP_IDS.CUSTOM);
-
-        const scatterPlotMapAreaScaleTypeOptions = {
+        const SCATTERPLOT_SCALE_TYPE_AREA_OPTIONS = {
           "(none)": "",
           "circle area": "circle area"
         };
 
         const scaleTypeArea = select(
           "Scale Type (area):",
-          scatterPlotMapAreaScaleTypeOptions,
+          SCATTERPLOT_SCALE_TYPE_AREA_OPTIONS,
           "",
           GROUP_IDS.CUSTOM
         );
 
-        const fieldNameArea = text("Field Name (area):", "", GROUP_IDS.CUSTOM);
+        let fieldNameArea;
+        let circleRadiusScale;
 
-        const radiusScaleOptions = {
-          range: true,
-          min: 1,
-          max: 100,
-          step: 1
-        };
-
-        const circleRadiusScale = number(
-          "Radius Scale:",
-          1,
-          radiusScaleOptions,
-          GROUP_IDS.CUSTOM
-        );
+        if (scaleTypeArea === "") {
+          fieldNameArea = text("Field Name (area):", "", GROUP_IDS.CUSTOM);
+          circleRadiusScale = number(
+            "Radius Scale:",
+            1,
+            radiusScaleOptions,
+            GROUP_IDS.CUSTOM
+          );
+        } else if (scaleTypeArea === "circle area") {
+          fieldNameArea = text("Field Name (area):", "dbh", GROUP_IDS.CUSTOM);
+          circleRadiusScale = number(
+            "Radius Scale:",
+            20,
+            radiusScaleOptions,
+            GROUP_IDS.CUSTOM
+          );
+        }
 
         const scatterPlotAPIURL =
           "https://service.civicpdx.org/neighborhood-development/api/trees" +
           "?format=json&limit=1500&offset=2000";
+
         const fetchAPIURL = text("API URL:", scatterPlotAPIURL, GROUP_IDS.DATA);
 
-        const onLayerClick = info => action("Line Clicked:")(info);
+        const onLayerClick = info => action("Circle Clicked:")(info);
 
         return (
           <DemoJSONLoader urls={[fetchAPIURL]}>
@@ -258,7 +326,7 @@ export default () =>
                 GROUP_IDS.DATA
               );
 
-              const scatterPlotMap = {
+              const scatterPlotMapLayer = {
                 mapType: "ScatterPlotMap",
                 id: "storybook-scatterplotmap-00",
                 data: data.results.features,
@@ -267,7 +335,7 @@ export default () =>
                 civicColor: circleColor,
                 scaleType: {
                   area: scaleTypeArea,
-                  color: scaleTypeSelectionColor
+                  color: scaleTypeColor
                 },
                 fieldName: {
                   area: fieldNameArea,
@@ -282,12 +350,14 @@ export default () =>
               return (
                 <div style={{ height: "100vh" }}>
                   <BaseMap
-                    initialZoom={12}
+                    initialZoom={14}
+                    initialLatitude={45.5298276}
+                    initialLongitude={-122.698753}
                     updateViewport={false}
                     civicMapStyle="dark"
                     useContainerHeight
                   >
-                    <MultiLayerMap mapLayers={[scatterPlotMap]} />
+                    <MultiLayerMap mapLayers={[scatterPlotMapLayer]} />
                   </BaseMap>
                 </div>
               );
@@ -304,11 +374,13 @@ export default () =>
       () => {
         const squareColor = select(
           "CIVIC Colors:",
-          civicSequentialColorOptions,
-          civicSequentialColorOptions.thermal,
+          CIVIC_SEQUENTIAL_COLORS,
+          CIVIC_SEQUENTIAL_COLORS.thermal,
           GROUP_IDS.STANDARD
         );
+
         const squareSize = number("Square Size:", 10, {}, GROUP_IDS.STANDARD);
+
         const squareOpacity = number(
           "Opacity:",
           0.7,
@@ -319,6 +391,7 @@ export default () =>
         const screenGridMapAPIURL =
           "https://service.civicpdx.org/neighborhood-development/api/retail_locations" +
           "?format=json&limit=500";
+
         const fetchAPIURL = text(
           "API URL:",
           screenGridMapAPIURL,
@@ -335,11 +408,11 @@ export default () =>
                 GROUP_IDS.DATA
               );
 
-              const screenGridMap = {
+              const screenGridMapLayer = {
                 mapType: "ScreenGridMap",
                 id: "storybook-screengridmap-00",
                 data: data.results.features,
-                sqaureSize: squareSize,
+                squareSize,
                 opacity: squareOpacity,
                 civicColor: squareColor
               };
@@ -352,7 +425,7 @@ export default () =>
                     civicMapStyle="dark"
                     useContainerHeight
                   >
-                    <MultiLayerMap mapLayers={[screenGridMap]} />
+                    <MultiLayerMap mapLayers={[screenGridMapLayer]} />
                   </BaseMap>
                 </div>
               );
@@ -367,7 +440,12 @@ export default () =>
     .add(
       "Icon Map",
       () => {
-        const iconSize = number("Icon Size:", 10, {}, GROUP_IDS.STANDARD);
+        const iconSize = number(
+          "Icon Size:",
+          10,
+          iconSizeOptions,
+          GROUP_IDS.STANDARD
+        );
 
         const iconOpacity = number(
           "Opacity:",
@@ -431,14 +509,14 @@ export default () =>
           GROUP_IDS.STANDARD
         );
 
-        const iconMapScaleTypeOptions = {
+        const ICON_SCALE_TYPE_COLOR_OPTIONS = {
           ordinal: "ordinal"
         };
 
         const scaleType = select(
           "Scale Type:",
-          iconMapScaleTypeOptions,
-          iconMapScaleTypeOptions.ordinal,
+          ICON_SCALE_TYPE_COLOR_OPTIONS,
+          ICON_SCALE_TYPE_COLOR_OPTIONS.ordinal,
           GROUP_IDS.STANDARD
         );
 
@@ -464,9 +542,10 @@ export default () =>
 
         const iconMapAPIURL =
           "https://service.civicpdx.org/disaster-resilience/sandbox/slides/poi/";
+
         const fetchAPIURL = text("API URL:", iconMapAPIURL, GROUP_IDS.DATA);
 
-        const onLayerClick = info => action("Line Clicked:")(info);
+        const onLayerClick = info => action("Icon Clicked:")(info);
 
         return (
           <DemoJSONLoader urls={[fetchAPIURL]}>
@@ -482,7 +561,7 @@ export default () =>
                 d => d.geometry
               );
 
-              const iconMap = {
+              const iconMapLayer = {
                 mapType: "IconMap",
                 id: "storybook-icon-map",
                 data: dataFilterNulls,
@@ -509,7 +588,7 @@ export default () =>
                     civicMapStyle="dark"
                     useContainerHeight
                   >
-                    <MultiLayerMap mapLayers={[iconMap]} />
+                    <MultiLayerMap mapLayers={[iconMapLayer]} />
                   </BaseMap>
                 </div>
               );
@@ -531,7 +610,7 @@ export default () =>
           GROUP_IDS.STANDARD
         );
 
-        const polygonMapScaleTypeOptions = {
+        const POLYGON_SCALE_TYPE_COLOR_OPTIONS = {
           "(none)": "",
           threshold: "threshold",
           ordinal: "ordinal"
@@ -539,45 +618,70 @@ export default () =>
 
         const scaleTypeSelection = select(
           "Scale Type:",
-          polygonMapScaleTypeOptions,
+          POLYGON_SCALE_TYPE_COLOR_OPTIONS,
           "",
           GROUP_IDS.CUSTOM
         );
 
         let polygonColor;
+        let fieldName;
+        let dataRange;
+        let colorRange;
 
         if (scaleTypeSelection === "") {
           polygonColor = select(
             "Civic Color:",
-            civicCategoricalColorOptions,
-            civicCategoricalColorOptions.civicGreen,
+            CIVIC_CATEGORICAL_COLORS,
+            CIVIC_CATEGORICAL_COLORS.civicGreen,
             GROUP_IDS.STANDARD
           );
+
+          fieldName = text("Field Name:", "", GROUP_IDS.CUSTOM);
+          dataRange = object("Data Range:", [], GROUP_IDS.CUSTOM);
+          colorRange = object("Color Range:", [], GROUP_IDS.CUSTOM);
         } else if (scaleTypeSelection === "threshold") {
-          polygonColor = select(
-            "Civic Color:",
-            civicDivergingColorOptions,
-            civicDivergingColorOptions.purpleGreen,
+          // eslint-disable-next-line no-unused-expressions
+          polygonColor;
+
+          fieldName = text("Field Name:", "acres", GROUP_IDS.CUSTOM);
+
+          dataRange = object("Data Range:", [10], GROUP_IDS.CUSTOM);
+
+          colorRange = object(
+            "Color Range:",
+            [[255, 0, 0], [0, 255, 0]],
+            GROUP_IDS.CUSTOM
+          );
+        } else if (scaleTypeSelection === "ordinal") {
+          // eslint-disable-next-line no-unused-expressions
+          polygonColor;
+
+          fieldName = text("Field Name:", "name", GROUP_IDS.CUSTOM);
+
+          dataRange = object(
+            "Data Range:",
+            ["Grant Park", "Holladay Park"],
+            GROUP_IDS.CUSTOM
+          );
+
+          colorRange = object(
+            "Color Range:",
+            [[0, 255, 255], [255, 255, 0]],
             GROUP_IDS.CUSTOM
           );
         }
 
-        const fieldName = text("Field Name:", "", GROUP_IDS.CUSTOM);
-
-        const dataRange = object("Data Range:", [], GROUP_IDS.CUSTOM);
-
-        const colorRange = object("Color Range:", [], GROUP_IDS.CUSTOM);
-
         const smallPolygonMapAPIURL =
           "https://service.civicpdx.org/neighborhood-development/api/parks" +
           "?format=json&limit=100";
+
         const fetchAPIURL = text(
           "API URL:",
           smallPolygonMapAPIURL,
           GROUP_IDS.DATA
         );
 
-        const onLayerClick = info => action("Line Clicked:")(info.object);
+        const onLayerClick = info => action("Polygon Clicked:")(info);
 
         return (
           <DemoJSONLoader urls={[fetchAPIURL]}>
@@ -589,7 +693,7 @@ export default () =>
                 GROUP_IDS.DATA
               );
 
-              const smallPolygonMap = {
+              const smallPolygonMapLayer = {
                 mapType: "SmallPolygonMap",
                 id: "storybook-small-polygon-map",
                 data: data.results.features,
@@ -614,7 +718,7 @@ export default () =>
                     civicMapStyle="dark"
                     useContainerHeight
                   >
-                    <MultiLayerMap mapLayers={[smallPolygonMap]} />
+                    <MultiLayerMap mapLayers={[smallPolygonMapLayer]} />
                   </BaseMap>
                 </div>
               );
@@ -636,44 +740,16 @@ export default () =>
           GROUP_IDS.STANDARD
         );
 
-        const choroplethMapScaleTypeOptions = {
+        const CHOROPLETH_SCALE_TYPE_COLOR_OPTIONS = {
           equal: "equal",
-          quantile: "quantile",
           threshold: "threshold",
           ordinal: "ordinal"
         };
 
         const scaleTypeSelection = select(
           "Scale Type:",
-          choroplethMapScaleTypeOptions,
+          CHOROPLETH_SCALE_TYPE_COLOR_OPTIONS,
           "equal",
-          GROUP_IDS.STANDARD
-        );
-
-        let polygonColor;
-
-        if (scaleTypeSelection === "threshold") {
-          polygonColor = select(
-            "Civic Color:",
-            civicDivergingColorOptions,
-            civicDivergingColorOptions.purpleGreen,
-            GROUP_IDS.STANDARD
-          );
-        } else if (
-          scaleTypeSelection === "equal" ||
-          scaleTypeSelection === "quantile"
-        ) {
-          polygonColor = select(
-            "Civic Color:",
-            civicSequentialColorOptions,
-            civicSequentialColorOptions.thermal,
-            GROUP_IDS.STANDARD
-          );
-        }
-
-        const fieldName = text(
-          "Field Name:",
-          "dayoccupants",
           GROUP_IDS.STANDARD
         );
 
@@ -683,7 +759,7 @@ export default () =>
 
         const fetchURL = text("API URL:", choroplethMapAPIURL, GROUP_IDS.DATA);
 
-        const onLayerClick = info => action("Line Clicked:")(info.object);
+        const onLayerClick = info => action("Polygon Clicked:")(info);
 
         return (
           <DemoJSONLoader urls={[fetchURL]}>
@@ -695,18 +771,79 @@ export default () =>
                 GROUP_IDS.DATA
               );
 
-              const minMax = extent(
-                data.results.features,
-                d => +d.properties[fieldName]
-              );
+              let minMax;
+              let polygonColor;
+              let fieldName;
+              let dataRange;
+              let colorRange;
 
-              const dataRange = object(
-                "Data Range:",
-                minMax,
-                GROUP_IDS.STANDARD
-              );
+              if (scaleTypeSelection === "equal") {
+                polygonColor = select(
+                  "Civic Color:",
+                  CIVIC_SEQUENTIAL_COLORS,
+                  CIVIC_SEQUENTIAL_COLORS.thermal,
+                  GROUP_IDS.STANDARD
+                );
 
-              const colorRange = object("Color Range:", [], GROUP_IDS.STANDARD);
+                fieldName = text(
+                  "Field Name:",
+                  "dayoccupants",
+                  GROUP_IDS.STANDARD
+                );
+
+                minMax = extent(
+                  data.results.features,
+                  d => +d.properties[fieldName]
+                );
+
+                dataRange = object("Data Range:", minMax, GROUP_IDS.STANDARD);
+
+                colorRange = object("Color Range:", [], GROUP_IDS.STANDARD);
+              } else if (scaleTypeSelection === "threshold") {
+                polygonColor = select(
+                  "Civic Color:",
+                  CIVIC_DIVERGING_COLORS,
+                  CIVIC_DIVERGING_COLORS.purpleGreen,
+                  GROUP_IDS.STANDARD
+                );
+
+                fieldName = text(
+                  "Field Name:",
+                  "fatalitiestotal_day",
+                  GROUP_IDS.STANDARD
+                );
+
+                dataRange = object(
+                  "Data Range:",
+                  [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+                  GROUP_IDS.STANDARD
+                );
+
+                colorRange = object("Color Range:", [], GROUP_IDS.STANDARD);
+              } else if (scaleTypeSelection === "ordinal") {
+                // eslint-disable-next-line no-unused-expressions
+                polygonColor;
+
+                fieldName = text("Field Name:", "quadrant", GROUP_IDS.STANDARD);
+
+                dataRange = object(
+                  "Data Range:",
+                  ["Northeast", "Southeast", "North", "Southwest", "Northwest"],
+                  GROUP_IDS.STANDARD
+                );
+
+                colorRange = object(
+                  "Color Range:",
+                  [
+                    [255, 0, 0],
+                    [255, 255, 0],
+                    [255, 0, 255],
+                    [0, 255, 255],
+                    [255, 255, 255]
+                  ],
+                  GROUP_IDS.STANDARD
+                );
+              }
 
               const choroplethMap = {
                 mapType: "ChoroplethMap",
@@ -728,7 +865,8 @@ export default () =>
               return (
                 <div style={{ height: "100vh" }}>
                   <BaseMap
-                    initialZoom={9.8}
+                    initialZoom={9.6}
+                    initialLatitude={45.5401}
                     updateViewport={false}
                     civicMapStyle="dark"
                     useContainerHeight
