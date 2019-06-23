@@ -3,7 +3,12 @@ import React from "react";
 import { arrayOf, func, node, shape } from "prop-types";
 import DeckGL from "deck.gl";
 
-import createMapLayers from "./createLayers";
+import MultiPathMap from "./MultiPathMap";
+import MultiScatterPlotMap from "./MultiScatterPlotMap";
+import MultiScreenGridMap from "./MultiScreenGridMap";
+import MultiIconMap from "./MultiIconMap";
+import MultiSmallPolygonMap from "./MultiSmallPolygonMap";
+import MultiChoroplethMap from "./MultiChoroplethMap";
 
 const MultiLayerMap = props => {
   const { viewport, mapLayers, children, onHoverSlide } = props;
@@ -11,37 +16,37 @@ const MultiLayerMap = props => {
   const renderMaps = mapLayers.map((layerData, index) => {
     const { mapType } = layerData;
     return mapType === "PathMap"
-      ? createMapLayers.makePathMap({
+      ? MultiPathMap({
           ...layerData,
           index,
           onHoverSlide
         })
       : mapType === "ScatterPlotMap"
-      ? createMapLayers.makeScatterPlotMap({
+      ? MultiScatterPlotMap({
           ...layerData,
           index,
           onHoverSlide
         })
       : mapType === "ScreenGridMap"
-      ? createMapLayers.makeScreenGridMap({
+      ? MultiScreenGridMap({
           ...layerData,
           index
         })
       : mapType === "IconMap"
-      ? createMapLayers.makeIconMap({
+      ? MultiIconMap({
           ...layerData,
           index,
           onHoverSlide,
           viewport
         })
       : mapType === "SmallPolygonMap"
-      ? createMapLayers.makeSmallPolygonMap({
+      ? MultiSmallPolygonMap({
           ...layerData,
           index,
           onHoverSlide
         })
       : mapType === "ChoroplethMap"
-      ? createMapLayers.makeChoroplethMap({
+      ? MultiChoroplethMap({
           ...layerData,
           index
         })
