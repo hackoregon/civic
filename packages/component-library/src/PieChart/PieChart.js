@@ -4,7 +4,7 @@ import { VictoryPie, VictoryLabel } from "victory";
 import ChartContainer from "../ChartContainer";
 import civicTheme from "../VictoryTheme/CivicVictoryTheme";
 import SimpleLegend from "../SimpleLegend";
-import PropDisplay from "../utils/PropDisplay";
+import DataChecker from "../utils/DataChecker";
 
 const PieChart = props => {
   const {
@@ -33,44 +33,41 @@ const PieChart = props => {
     legendProps.padding = 25;
   }
 
-  const allDataPropertiesExist =
-    data.filter(datum => dataValue in datum).length === data.length;
-
-  return !allDataPropertiesExist ? (
-    <PropDisplay properties={{ dataValue, data }} />
-  ) : (
+  return (
     <ChartContainer
       title={title}
       subtitle={subtitle}
       loading={loading}
       error={error}
     >
-      {useLegend && (
-        <SimpleLegend
-          className="legend"
-          legendData={legendLabels}
+      <DataChecker dataAccessors={{ dataValue }} data={data}>
+        {useLegend && (
+          <SimpleLegend
+            className="legend"
+            legendData={legendLabels}
+            colorScale={colors}
+          />
+        )}
+        <VictoryPie
+          width={width}
+          height={height}
+          data={data}
+          innerRadius={innerRadius}
           colorScale={colors}
+          theme={civicTheme}
+          animate={{
+            duration: 1000
+          }}
+          x={dataLabel}
+          y={dataValue}
+          startAngle={startAngle}
+          endAngle={endAngle}
+          labelComponent={
+            <VictoryLabel style={{ ...civicTheme.pieLabel.style }} />
+          }
+          {...legendProps}
         />
-      )}
-      <VictoryPie
-        width={width}
-        height={height}
-        data={data}
-        innerRadius={innerRadius}
-        colorScale={colors}
-        theme={civicTheme}
-        animate={{
-          duration: 1000
-        }}
-        x={dataLabel}
-        y={dataValue}
-        startAngle={startAngle}
-        endAngle={endAngle}
-        labelComponent={
-          <VictoryLabel style={{ ...civicTheme.pieLabel.style }} />
-        }
-        {...legendProps}
-      />
+      </DataChecker>
     </ChartContainer>
   );
 };
