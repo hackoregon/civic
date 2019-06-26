@@ -1,13 +1,8 @@
 import React, { Fragment } from "react";
-import { string, shape } from "prop-types";
+import PropTypes from "prop-types";
 import { css } from "emotion";
 import checkData from "./checkData";
 
-/**
- * Helper function to show invalid property values as code
- *
- * Takes in an `properties` object of and and an optional message string
- */
 const wrapperStyle = css`
   margin: 0 auto;
   max-width: 900px;
@@ -67,8 +62,9 @@ const DataChecker = ({ data, dataAccessors, message, children }) => {
 };
 
 DataChecker.propTypes = {
-  dataAccessors: shape({}),
-  message: string
+  data: PropTypes.arrayOf(PropTypes.shape({})),
+  dataAccessors: PropTypes.arrayOf(PropTypes.string),
+  message: PropTypes.string
 };
 
 DataChecker.defaultProps = {
