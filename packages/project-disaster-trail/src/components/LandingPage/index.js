@@ -4,10 +4,9 @@ import { Link } from "react-router";
 import styled from "styled-components";
 
 import "@hackoregon/component-library/assets/global.styles.css";
-import { Button } from "@hackoregon/component-library";
 import { PageLayout, PullQuote } from "@hackoregon/component-library";
 
-const App = () => (
+const LandingPage = () => (
   <PageLayout
     teamTitle="Disaster Resilience"
     heroTitle="Assessing Risk and Prioritizing Action to Strengthen Resilience in the Face of a Natural Disaster"
@@ -36,7 +35,7 @@ const App = () => (
     </p>
     <PullQuote quoteText="The #1 thing you can do to increase social capital is to meet your neighbors. Do you know 3 people within a 3 block radius of your house?" />
     <CenterStyle>
-      <ButtonStyle href="/game">Play the Game</ButtonStyle>
+      <ButtonStyle to="/game">Play the Game</ButtonStyle>
     </CenterStyle>
   </PageLayout>
 );
@@ -47,7 +46,7 @@ const CenterStyle = styled.div`
 `;
 
 // Copied from packages/component-library/src/LandingPage/LandingPage.js. Is there a component?
-const ButtonStyle = styled.a`
+const ButtonStyle = styled(Link)`
   border: 2px solid #ef495c;
   padding: 10px 20px;
   font-family: "Rubik", sans-serif;
@@ -61,6 +60,6 @@ const ButtonStyle = styled.a`
   }
 `;
 
-App.displayName = "App";
+LandingPage.displayName = "LandingPage";
 
-export default App;
+export default LandingPage;
