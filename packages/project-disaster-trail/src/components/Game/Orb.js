@@ -88,10 +88,10 @@ class Orb extends Component {
   render() {
     const { x, y } = this.props;
     const { animationState } = this.state;
-    const location = css`
-      top: ${y}px;
-      left: ${x}px;
-    `;
+    // const location = css`
+    //   top: ${y}px;
+    //   left: ${x}px;
+    // `;
 
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
@@ -102,7 +102,7 @@ class Orb extends Component {
         onTouchStart={this.handleOrbPress}
         onTouchEnd={this.handleOrbRelease}
         css={css`
-          ${location};
+          /* ${location}; */
           ${defaultStyle};
           ${animationState === "pressing" && pressStyle}
         `}
