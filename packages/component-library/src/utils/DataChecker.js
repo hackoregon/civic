@@ -29,6 +29,7 @@ const DataChecker = ({ data, dataAccessors, message, children }) => {
           results[values[index]].valid === results[values[index]].total;
         const validCount = results[values[index]].valid;
         const totalCount = results[values[index]].total;
+        const keyValue = values[index];
         const invalidStyle = !isValid
           ? css`
               color: red;
@@ -40,14 +41,14 @@ const DataChecker = ({ data, dataAccessors, message, children }) => {
               {isValid ? "✅ " : "⛔️ "}
               {`${key}: `}
             </strong>
-            {JSON.stringify(values[index], undefined, 2)}
+            {JSON.stringify(keyValue, undefined, 2)}
             {!isValid && (
               <Fragment>
                 <br />
                 <small>
                   {validCount === 0
-                    ? `${key} is invalid`
-                    : `${key} missing in ${totalCount -
+                    ? `${key} is invalid. "${keyValue}" not found in data`
+                    : `${key} is invalid. "${keyValue}" missing in ${totalCount -
                         validCount}/${totalCount} objects in data`}
                 </small>
               </Fragment>
