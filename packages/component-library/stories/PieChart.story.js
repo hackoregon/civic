@@ -31,8 +31,10 @@ export default () =>
           "Contributions reported to ORESTAR by category",
           GROUP_IDS.LABELS
         );
-        const useLegend = boolean("Use legend", true, GROUP_IDS.LABELS);
         const halfDoughnut = boolean("Half doughnut", true, GROUP_IDS.DESIGN);
+        const useLegend = boolean("Use legend", true, GROUP_IDS.DESIGN);
+        const dataLabel = text("Data label", "x", GROUP_IDS.DATA);
+        const dataValue = text("Data value", "y", GROUP_IDS.DATA);
         const sampleData = [
           { x: "Business entity", y: 35 },
           { x: "Individual", y: 40 },
@@ -45,6 +47,8 @@ export default () =>
           <PieChart
             title={title}
             subtitle={subtitle}
+            dataLabel={dataLabel}
+            dataValue={dataValue}
             data={data}
             halfDoughnut={halfDoughnut}
             useLegend={useLegend}
@@ -62,7 +66,7 @@ export default () =>
           "Contributions reported to ORESTAR by category",
           GROUP_IDS.LABELS
         );
-        const useLegend = boolean("Use legend", true, GROUP_IDS.LABELS);
+        const useLegend = boolean("Use legend", true, GROUP_IDS.DESIGN);
         const halfDoughnut = boolean("Half doughnut", true, GROUP_IDS.DESIGN);
         const sampleData = [
           { contributor: "Business entity", amount: 35 },
@@ -70,11 +74,11 @@ export default () =>
           { contributor: "Labor organization", amount: 55 },
           { contributor: "Other", amount: 75 }
         ];
+        const dataLabel = text("Data label", "contributor", GROUP_IDS.DATA);
+        const dataValue = text("Data value", "amount", GROUP_IDS.DATA);
         const data = object("Data", sampleData, GROUP_IDS.DATA);
-        const dataLabel = text("Data label", "contributor", GROUP_IDS.CUSTOM);
-        const dataValue = text("Data value", "amount", GROUP_IDS.CUSTOM);
-        const chartHeight = number("Chart height", 100, {}, GROUP_IDS.CUSTOM);
-        const chartWidth = number("Chart width", 100, {}, GROUP_IDS.CUSTOM);
+        const chartHeight = number("Chart height", 350, {}, GROUP_IDS.CUSTOM);
+        const chartWidth = number("Chart width", 650, {}, GROUP_IDS.CUSTOM);
         const innerRadius = number("Inner radius", 50, {}, GROUP_IDS.CUSTOM);
         const categoricalColors = [
           "#DC4556",

@@ -10,14 +10,14 @@ These properties can be set in the Standard story:
 - Subtitle
 - Use legend
 - Half doughnut
+- Data label
+- Data value
 - Data
 
 ## Custom
 
 The Custom story shows all possible properties that can be passed to the PieChart component for customization. Three additional properties are added to the properties listed in the Standard story.
 
-- Data label
-- Data value
 - Chart height
 - Chart width
 - Inner radius
