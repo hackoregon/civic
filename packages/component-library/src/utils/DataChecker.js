@@ -31,7 +31,7 @@ const DataChecker = ({ data, dataAccessors, message, children }) => {
             `
           : css``;
         return (
-          <pre className={invalidStyle}>
+          <pre key={key} className={invalidStyle}>
             <strong>
               {isValid ? "✅ " : "⛔️ "}
               {`${key}: `}
@@ -62,8 +62,8 @@ const DataChecker = ({ data, dataAccessors, message, children }) => {
 };
 
 DataChecker.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({})),
-  dataAccessors: PropTypes.arrayOf(PropTypes.string),
+  data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  dataAccessors: PropTypes.shape({}).isRequired,
   message: PropTypes.string
 };
 
