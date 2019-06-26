@@ -1,6 +1,6 @@
 # CIVIC Design System Story Pattern
 
-Storybook is used to document [CIVIC's Design System](https://hackoregon.github.io/civic/). Each component in the library has a story. The Knobs addon is used to allow the props values to be changed while working with that component.
+Storybook is used to document [CIVIC's Design System](https://hackoregon.github.io/civic/). Each component in the library has a story.
 
 As you read through this document, refer to these stories to see the design pattern in use:
 
@@ -8,6 +8,8 @@ As you read through this document, refer to these stories to see the design patt
 - [Line Chart](https://hackoregon.github.io/civic/?path=/story/component-lib-charts-line-chart--standard)
 - [Scatterplot](https://hackoregon.github.io/civic/?path=/story/component-lib-charts-scatterplot--standard)
 - [Scatterplot Map](https://hackoregon.github.io/civic/?path=/story/component-lib-maps-scatterplot-map--standard)
+
+Note: To bring up the Addons Panel, select it from the dropdown list in the upper left corner of the screen, next to the CIVIC logo.
 
 ## Stories
 
@@ -19,7 +21,7 @@ There are three types of stories:
 
 ### Standard Story
 
-The Standard story is the default configuration of the component. For consistency, this is the configuration that is used unless it doesn't meet the needs of the project.
+The Standard story is the default configuration of the component. For consistency, this is the configuration that is used unless it doesn't meet the needs of your project.
 
 ### Custom Story
 
@@ -29,24 +31,30 @@ The Custom story provides knobs for all the props that are available for this co
 
 If there is a configuration of the component that has been used in a project, and may be useful again, create an example story.
 
-## Knobs EXPLAIN KNOBS!!
+## Knobs
 
-There is a Knob for each prop in that story. These let the user design the component for their particular use.
+The Knobs addon lets you set and change the props values of that component. Knobs are provided for each prop that can be modified in a story. See the example stories above.
 
-Story knobs are provided for each prop that is modified, for example Title.
+This helps during both development and design; the developer can test the props for results and the designer can configure the component for a particular use.
+
+Knobs references:
+
+- [Storybook's stories for Knobs](https://storybooks-official.netlify.com/?path=/story/addons-knobs-withknobs--tweaks-static-values)
+- [Knobs Github repository](https://github.com/storybookjs/storybook/tree/master/addons/knobs)
 
 ### Organize knobs into tabs
 
 Choose tab labels that are consistent with other stories; create a new one only if needed. Current knob tabs:
 
 - Labels
+- Design
 - Data
 - Marker
-- Custom (for the Custom story; knobs/props in addition to those in the Standard story)
+- Custom (for the Custom story; knobs/props that are in addition to those in the Standard story)
 
 ### Knob labels
 
-Use sentence case for labels. Choose knob labels that are consistent with other stories; create a new one only if needed. Some labels:
+Labels are descriptive; don't use the prop name. Use sentence case for labels. Choose knob labels that are consistent with other stories; create a new one only if needed. Some labels:
 
 - Title
 - Subtitle
@@ -58,15 +66,15 @@ Use sentence case for labels. Choose knob labels that are consistent with other 
 - Data values
 - Data
 
-## Story Development Code !FINISH!
+## Story Development Code
 
-When you select "Story" in the Addon panel, the code for the current story is shown and highlighted. The goal is to include all the values and props for that story in the highlighted code.
+When you select "Story" in the Addon panel, the code for the current story (inside the .add function) is shown and highlighted. Including all the values and props for that story inside the .add function, and highlighted, makes it easier for the developer to use that component.
 
-Use realistic data. Data in the story is often from a past project.
+Use realistic data. Data in the story is often from a past project. Use a subset of that data if there is so much that it overwhelms the usability of the story.
 
 ## Notes
 
-A Notes file is written for each story. It describes the story and the knobs/props. Use markdown format.
+A Notes file is written for each story. It describes the story and the knobs/props for that story. Use markdown format.
 
 Notes files are in the stories folder. The notes files are named by the componentName followed by .story.md.
 Examples:
