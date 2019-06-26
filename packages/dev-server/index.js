@@ -3,6 +3,7 @@ const express = require("express");
 const webpack = require("webpack");
 const { resolve } = require("path");
 const compression = require("compression");
+const open = require("open");
 
 const app = express();
 const isProd = process.env.NODE_ENV === "production";
@@ -79,5 +80,14 @@ module.exports = () => {
   );
 
   // Start the server
+  const port = process.env.PORT || 3000;
+
+  const setupServer = new Promise(function(resolve, reject) {
+    resolve(app.listen(port, announceServer));
+  });
+
+  setupServer.then(open(`http://localhost:3000`));
+
+  // Doesn't wait for Webpack Bundle Analyzer to finalize before opening localhost.
   app.listen(port, announceServer);
 };
