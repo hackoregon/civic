@@ -119,7 +119,7 @@ export default () =>
         );
         const subtitle = text(
           "Subtitle",
-          "Fall enrollment in Portland Public Schools - Buckman",
+          "Fall enrollment in Portland Public Schools - Buckman, using selected Census categories",
           GROUP_IDS.LABELS
         );
         const xLabel = text("X-axis label:", "Year", GROUP_IDS.LABELS);
@@ -224,7 +224,7 @@ export default () =>
         );
         const subtitle = text(
           "Subtitle",
-          "Fall enrollment in Portland Public Schools - Buckman",
+          "Fall enrollment in Portland Public Schools - Buckman, using selected Census categories",
           GROUP_IDS.LABELS
         );
         const xLabel = text("X-axis label:", "Year", GROUP_IDS.LABELS);
