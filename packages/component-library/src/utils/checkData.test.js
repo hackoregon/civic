@@ -65,7 +65,7 @@ describe("checkData", () => {
     });
   });
 
-  it("should handle invalid keys properly", () => {
+  it("should handle invalid data properly", () => {
     expect(
       checkData(
         [
@@ -83,20 +83,21 @@ describe("checkData", () => {
     });
   });
 
-  it("should handle null keys properly", () => {
+  it("should handle invalid keys properly", () => {
     expect(
       checkData(
         [
           { keyType: "door", lockType: "door", junk: "trunk" },
           { keyType: "car", lockType: "plane" }
         ],
-        ["keyType", "lockType", null]
+        ["keyType", "lockType", "category"]
       )
     ).to.eql({
       allKeysValid: false,
       error: false,
       keyType: { valid: 2, total: 2 },
-      lockType: { valid: 2, total: 2 }
+      lockType: { valid: 2, total: 2 },
+      category: { valid: 0, total: 2 }
     });
   });
 });
