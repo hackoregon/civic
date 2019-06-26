@@ -1,61 +1,26 @@
 import React from "react";
 import { css } from "emotion";
+
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
-import { object, text, withKnobs } from "@storybook/addon-knobs";
-import { StackedAreaChart, SimpleLegend } from "../src";
+import {
+  object,
+  text,
+  withKnobs,
+  optionsKnob as options
+} from "@storybook/addon-knobs";
+import { StackedAreaChart, civicFormat, SimpleLegend } from "../src";
+import { getKeyNames } from "./shared";
+import notes from "./stackedAreaChart.notes.md";
 
-const sampleSimpleData = [
-  { x: 0, y: 20 },
-  { x: 10, y: 30 },
-  { x: 20, y: 50 },
-  { x: 30, y: 40 }
-];
+const GROUP_IDS = {
+  LABELS: "Labels",
+  DATA: "Data",
+  CUSTOM: "Custom"
+};
 
-const sampleData = [
-  { x: 0, y: 2, series: "cat" },
-  { x: 1, y: 3, series: "cat" },
-  { x: 2, y: 5, series: "cat" },
-  { x: 3, y: 4, series: "cat" },
-  { x: 4, y: 7, series: "cat" },
-  { x: 0, y: 4, series: "dog" },
-  { x: 1, y: 5, series: "dog" },
-  { x: 2, y: 2, series: "dog" },
-  { x: 3, y: 3, series: "dog" },
-  { x: 4, y: 4, series: "dog" }
-];
-const sampleDataSeries = "series";
-const sampledataSeriesLabel = [
-  { category: "cat", label: "Cat" },
-  { category: "dog", label: "Dog" }
-];
-const sampleDomain = { x: [0, 6], y: [0, 8] };
-const sampleSize = { key: "y" };
-const sampleSubtitle = "A description of this chart.";
-const sampleTitle = "Some title";
-const sampleXKey = "x";
-const sampleXLabel = "Number of animals";
-const sampleYKey = "y";
-const sampleYLabel = "Cuteness rating";
-const sampleDataKeyLabel = "Animals";
-const sampleDataValueLabel = "Cuteness";
-
-const sampleUnstructuredData = [
-  { size: 0, age: 2000000, type: "cat" },
-  { size: 5, age: 3000000, type: "cat" },
-  { size: 10, age: 7000000, type: "cat" },
-  { size: 0, age: 5000320, type: "fish" },
-  { size: 5, age: 40002300, type: "fish" },
-  { size: 10, age: 5007000, type: "fish" },
-  { size: 0, age: 3000000, type: "dog" },
-  { size: 5, age: 3000500, type: "dog" },
-  { size: 10, age: 3000000.5, type: "dog" }
-];
-const sampleUnstructuredXKey = "size";
-const sampleUnstructuredYKey = "age";
-const sampleUnstructuredDataSeries = "type";
-const sampleUnstructuredXLabel = "Size (ft)";
-const sampleUnstructuredYLabel = "Age (yrs)";
+const xFormatterOptions = getKeyNames(civicFormat);
+const yFormatterOptions = getKeyNames(civicFormat);
 
 const customLegend = legendData => {
   const legendStyle = css`
@@ -93,7 +58,7 @@ const customLegend = legendData => {
               margin-left: 5px;
             `}
           >
-            Population
+            Students
           </span>
         </span>
       </legend>
@@ -104,87 +69,231 @@ const customLegend = legendData => {
 export default () =>
   storiesOf("Component Lib|Charts/Stacked Area Chart", module)
     .addDecorator(withKnobs)
-    .add("Simple usage", () => <StackedAreaChart data={sampleSimpleData} />)
-    .add("With some props", () => {
-      const data = object("Data", sampleData);
-      const dataKey = text("dataKey", sampleXKey);
-      const dataValue = text("dataValue", sampleYKey);
-      const dataSeries = text("dataSeries", sampleDataSeries);
-      const subtitle = text("Subtitle", sampleSubtitle);
-      const title = text("Title", sampleTitle);
-      const xLabel = text("xLabel", sampleXLabel);
-      const yLabel = text("yLabel", sampleYLabel);
+    .add(
+      "Standard",
+      () => {
+        const sampleEnrollmentData = [
+          { year: 2005, students: 34, group: "BAA" },
+          { year: 2006, students: 28, group: "BAA" },
+          { year: 2007, students: 17, group: "BAA" },
+          { year: 2008, students: 18, group: "BAA" },
+          { year: 2009, students: 14, group: "BAA" },
+          { year: 2010, students: 23, group: "BAA" },
+          { year: 2011, students: 21, group: "BAA" },
+          { year: 2012, students: 17, group: "BAA" },
+          { year: 2013, students: 19, group: "BAA" },
+          { year: 2014, students: 16, group: "BAA" },
 
-      return (
-        <StackedAreaChart
-          data={data}
-          dataKey={dataKey}
-          dataValue={dataValue}
-          dataSeries={dataSeries}
-          subtitle={subtitle}
-          title={title}
-          xLabel={xLabel}
-          yLabel={yLabel}
-        />
-      );
-    })
-    .add("With some props and unstructured data", () => {
-      const data = object("Data", sampleUnstructuredData);
-      const dataKey = text("dataKey", sampleUnstructuredXKey);
-      const dataValue = text("dataValue", sampleUnstructuredYKey);
-      const dataSeries = text("dataSeries", sampleUnstructuredDataSeries);
-      const subtitle = text("Subtitle", sampleSubtitle);
-      const title = text("Title", sampleTitle);
-      const xLabel = text("xLabel", sampleUnstructuredXLabel);
-      const yLabel = text("yLabel", sampleUnstructuredYLabel);
+          { year: 2005, students: 34, group: "HIS" },
+          { year: 2006, students: 28, group: "HIS" },
+          { year: 2007, students: 24, group: "HIS" },
+          { year: 2008, students: 24, group: "HIS" },
+          { year: 2009, students: 37, group: "HIS" },
+          { year: 2010, students: 37, group: "HIS" },
+          { year: 2011, students: 44, group: "HIS" },
+          { year: 2012, students: 42, group: "HIS" },
+          { year: 2013, students: 48, group: "HIS" },
+          { year: 2014, students: 45, group: "HIS" },
 
-      return (
-        <StackedAreaChart
-          data={data}
-          dataKey={dataKey}
-          dataValue={dataValue}
-          dataSeries={dataSeries}
-          subtitle={subtitle}
-          title={title}
-          xLabel={xLabel}
-          yLabel={yLabel}
-        />
-      );
-    })
-    .add("With more optional props", () => {
-      const data = object("Data", sampleData);
-      const dataKey = text("dataKey", sampleXKey);
-      const dataKeyLabel = text("dataKeyLabel", sampleDataKeyLabel);
-      const dataValue = text("dataValue", sampleYKey);
-      const dataValueLabel = text("dataValueLabel", sampleDataValueLabel);
-      const dataSeries = text("dataSeries", sampleDataSeries);
-      const dataSeriesLabel = object(
-        "Data Series Labels",
-        sampledataSeriesLabel
-      );
-      const domain = object("Domain", sampleDomain);
-      const size = object("Size", sampleSize);
-      const subtitle = text("Subtitle", sampleSubtitle);
-      const title = text("Title", sampleTitle);
-      const xLabel = text("xLabel", sampleXLabel);
-      const yLabel = text("yLabel", sampleYLabel);
+          { year: 2005, students: 0, group: "MULTI" },
+          { year: 2006, students: 0, group: "MULTI" },
+          { year: 2007, students: 28, group: "MULTI" },
+          { year: 2008, students: 41, group: "MULTI" },
+          { year: 2009, students: 23, group: "MULTI" },
+          { year: 2010, students: 42, group: "MULTI" },
+          { year: 2011, students: 54, group: "MULTI" },
+          { year: 2012, students: 55, group: "MULTI" },
+          { year: 2013, students: 56, group: "MULTI" },
+          { year: 2014, students: 59, group: "MULTI" }
+        ];
+        const enrollmentDataSeries = "group";
+        const enrollmentDataSeriesLabels = [
+          { category: "BAA", label: "Black/African American" },
+          { category: "HIS", label: "Hispanic/Latino" },
+          { category: "MULTI", label: "Multi-Ethnic" }
+        ];
+        const title = text(
+          "Title:",
+          "Students from Historically Underrepresented Groups",
+          GROUP_IDS.LABELS
+        );
+        const subtitle = text(
+          "Subtitle",
+          "Fall enrollment in Portland Public Schools - Buckman, using selected Census categories",
+          GROUP_IDS.LABELS
+        );
+        const xLabel = text("X-axis label:", "Year", GROUP_IDS.LABELS);
+        const optionSelectX = options(
+          "X-axis value format",
+          xFormatterOptions,
+          "year",
+          { display: "select" },
+          GROUP_IDS.LABELS
+        );
+        const yLabel = text("Y-axis label:", "Students", GROUP_IDS.LABELS);
+        const optionSelectY = options(
+          "Y-axis value format",
+          yFormatterOptions,
+          "numeric",
+          { display: "select" },
+          GROUP_IDS.LABELS
+        );
 
-      return (
-        <StackedAreaChart
-          data={data}
-          dataKey={dataKey}
-          dataKeyLabel={dataKeyLabel}
-          dataValue={dataValue}
-          dataValueLabel={dataValueLabel}
-          dataSeries={dataSeries}
-          dataSeriesLabel={dataSeriesLabel}
-          domain={domain}
-          size={size}
-          subtitle={subtitle}
-          title={title}
-          xLabel={xLabel}
-          yLabel={yLabel}
-          legendComponent={customLegend}
-        />
-      );
-    });
+        const dataKey = text("Data key", "year", GROUP_IDS.DATA);
+        const dataValue = text("Data value", "students", GROUP_IDS.DATA);
+        const dataSeries = text(
+          "Data series",
+          enrollmentDataSeries,
+          GROUP_IDS.DATA
+        );
+        const dataSeriesLabel = object(
+          "Data series labels:",
+          enrollmentDataSeriesLabels,
+          GROUP_IDS.DATA
+        );
+        const data = object("Data", sampleEnrollmentData, GROUP_IDS.DATA);
+
+        return (
+          <StackedAreaChart
+            data={data}
+            dataKey={dataKey}
+            dataValue={dataValue}
+            dataSeries={dataSeries}
+            dataSeriesLabel={dataSeriesLabel}
+            subtitle={subtitle}
+            title={title}
+            xLabel={xLabel}
+            yLabel={yLabel}
+            xNumberFormatter={x => civicFormat[optionSelectX](x)}
+            yNumberFormatter={y => civicFormat[optionSelectY](y)}
+          />
+        );
+      },
+      { notes }
+    )
+    .add(
+      "Custom",
+      () => {
+        const sampleEnrollmentData = [
+          { year: 2005, students: 34, group: "BAA" },
+          { year: 2006, students: 28, group: "BAA" },
+          { year: 2007, students: 17, group: "BAA" },
+          { year: 2008, students: 18, group: "BAA" },
+          { year: 2009, students: 14, group: "BAA" },
+          { year: 2010, students: 23, group: "BAA" },
+          { year: 2011, students: 21, group: "BAA" },
+          { year: 2012, students: 17, group: "BAA" },
+          { year: 2013, students: 19, group: "BAA" },
+          { year: 2014, students: 16, group: "BAA" },
+
+          { year: 2005, students: 34, group: "HIS" },
+          { year: 2006, students: 28, group: "HIS" },
+          { year: 2007, students: 24, group: "HIS" },
+          { year: 2008, students: 24, group: "HIS" },
+          { year: 2009, students: 37, group: "HIS" },
+          { year: 2010, students: 37, group: "HIS" },
+          { year: 2011, students: 44, group: "HIS" },
+          { year: 2012, students: 42, group: "HIS" },
+          { year: 2013, students: 48, group: "HIS" },
+          { year: 2014, students: 45, group: "HIS" },
+
+          { year: 2005, students: 0, group: "MULTI" },
+          { year: 2006, students: 0, group: "MULTI" },
+          { year: 2007, students: 28, group: "MULTI" },
+          { year: 2008, students: 41, group: "MULTI" },
+          { year: 2009, students: 23, group: "MULTI" },
+          { year: 2010, students: 42, group: "MULTI" },
+          { year: 2011, students: 54, group: "MULTI" },
+          { year: 2012, students: 55, group: "MULTI" },
+          { year: 2013, students: 56, group: "MULTI" },
+          { year: 2014, students: 59, group: "MULTI" }
+        ];
+        const enrollmentDataSeries = "group";
+        const enrollmentDataSeriesLabels = [
+          { category: "BAA", label: "Black/African American" },
+          { category: "HIS", label: "Hispanic/Latino" },
+          { category: "MULTI", label: "Multi-Ethnic" }
+        ];
+        const sampleDomain = { x: [2005, 2014], y: [0, 125] };
+        // const sampleSize = { key: "y" };
+
+        const title = text(
+          "Title:",
+          "Students from Historically Underrepresented Groups",
+          GROUP_IDS.LABELS
+        );
+        const subtitle = text(
+          "Subtitle",
+          "Fall enrollment in Portland Public Schools - Buckman, using selected Census categories",
+          GROUP_IDS.LABELS
+        );
+        const xLabel = text("X-axis label:", "Year", GROUP_IDS.LABELS);
+        const optionSelectX = options(
+          "X-axis value format",
+          xFormatterOptions,
+          "year",
+          { display: "select" },
+          GROUP_IDS.LABELS
+        );
+        const yLabel = text("Y-axis label:", "Students", GROUP_IDS.LABELS);
+        const optionSelectY = options(
+          "Y-axis value format",
+          yFormatterOptions,
+          "numeric",
+          { display: "select" },
+          GROUP_IDS.LABELS
+        );
+
+        const dataKey = text("Data key", "year", GROUP_IDS.DATA);
+        const dataValue = text("Data value", "students", GROUP_IDS.DATA);
+        const dataSeries = text(
+          "Data series",
+          enrollmentDataSeries,
+          GROUP_IDS.DATA
+        );
+        const dataSeriesLabel = object(
+          "Data series labels:",
+          enrollmentDataSeriesLabels,
+          GROUP_IDS.DATA
+        );
+        const data = object("Data", sampleEnrollmentData, GROUP_IDS.DATA);
+
+        const domain = object("Domain", sampleDomain, GROUP_IDS.CUSTOM);
+
+        return (
+          <StackedAreaChart
+            data={data}
+            dataKey={dataKey}
+            dataValue={dataValue}
+            dataSeries={dataSeries}
+            dataSeriesLabel={dataSeriesLabel}
+            domain={domain}
+            subtitle={subtitle}
+            title={title}
+            xLabel={xLabel}
+            yLabel={yLabel}
+            xNumberFormatter={x => civicFormat[optionSelectX](x)}
+            yNumberFormatter={y => civicFormat[optionSelectY](y)}
+            legendComponent={customLegend}
+          />
+        );
+      },
+      { notes }
+    )
+    .add(
+      "Example: Simple",
+      () => {
+        const xLabel = text("X-axis label:", "X", GROUP_IDS.LABELS);
+        const yLabel = text("Y-axis label:", "Y", GROUP_IDS.LABELS);
+        const sampleSimpleData = [
+          { x: 0, y: 20 },
+          { x: 10, y: 30 },
+          { x: 20, y: 50 },
+          { x: 30, y: 40 }
+        ];
+        const data = object("Data", sampleSimpleData, GROUP_IDS.DATA);
+
+        return <StackedAreaChart data={data} xLabel={xLabel} yLabel={yLabel} />;
+      },
+      { notes }
+    );
