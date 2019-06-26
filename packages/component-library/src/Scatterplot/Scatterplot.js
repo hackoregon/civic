@@ -12,6 +12,7 @@ import {
 import ChartContainer from "../ChartContainer";
 import SimpleLegend from "../SimpleLegend";
 import civicFormat from "../utils/civicFormat";
+import DataChecker from "../utils/DataChecker";
 import {
   chartEvents,
   getDefaultDomain,
@@ -79,83 +80,84 @@ const Scatterplot = ({
         ) : (
           <SimpleLegend className="legend" legendData={legendData} />
         ))}
-
-      <VictoryChart
-        domain={chartDomain}
-        theme={CivicVictoryTheme.civic}
-        animate={{ duration: 200 }}
-      >
-        <VictoryAxis
-          animate={{ onEnter: { duration: 500 } }}
-          style={{ grid: { stroke: "none" } }}
-          tickFormat={x => xNumberFormatter(x)}
-          title="X Axis"
-          invertAxis={invertX}
-        />
-        <VictoryAxis
-          dependentAxis
-          animate={{ onEnter: { duration: 500 } }}
-          tickFormat={y => yNumberFormatter(y)}
-          title="Y Axis"
-          invertAxis={invertY}
-        />
-        <VictoryPortal>
-          <VictoryLabel
-            style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
-            text={yLabel}
-            textAnchor="middle"
-            title="Y Axis Label"
-            verticalAnchor="end"
-            x={50}
-            y={45}
+      <DataChecker dataAccessors={{ dataKey, dataValue }} data={data}>
+        <VictoryChart
+          domain={chartDomain}
+          theme={CivicVictoryTheme.civic}
+          animate={{ duration: 200 }}
+        >
+          <VictoryAxis
+            animate={{ onEnter: { duration: 500 } }}
+            style={{ grid: { stroke: "none" } }}
+            tickFormat={x => xNumberFormatter(x)}
+            title="X Axis"
+            invertAxis={invertX}
           />
-        </VictoryPortal>
-        <VictoryPortal>
-          <VictoryLabel
-            style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
-            text={xLabel}
-            textAnchor="end"
-            title="X Axis Label"
-            verticalAnchor="end"
-            x={600}
-            y={295}
+          <VictoryAxis
+            dependentAxis
+            animate={{ onEnter: { duration: 500 } }}
+            tickFormat={y => yNumberFormatter(y)}
+            title="Y Axis"
+            invertAxis={invertY}
           />
-        </VictoryPortal>
-        <VictoryScatter
-          animate={{ onEnter: { duration: 500 } }}
-          bubbleProperty="bubbleSize"
-          minBubbleSize={size && size.minSize}
-          maxBubbleSize={size && size.maxSize}
-          //        categories={{ x: categoryData }}
-          data={data.map(d => ({
-            dataKey: d[dataKey],
-            dataValue: d[dataValue],
-            label: `${
-              dataKeyLabel ? d[dataKeyLabel] : xLabel
-            }: ${xNumberFormatter(d[dataKey])} • ${
-              dataValueLabel ? d[dataValueLabel] : yLabel
-            }: ${yNumberFormatter(d[dataValue])}`,
-            series: d[dataSeries],
-            ...(size && { bubbleSize: d[size.key] })
-          }))}
-          events={chartEvents}
-          labelComponent={
-            <VictoryTooltip
-              x={325}
-              y={0}
-              orientation="bottom"
-              pointerLength={0}
-              cornerRadius={0}
-              theme={CivicVictoryTheme.civic}
+          <VictoryPortal>
+            <VictoryLabel
+              style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
+              text={yLabel}
+              textAnchor="middle"
+              title="Y Axis Label"
+              verticalAnchor="end"
+              x={50}
+              y={45}
             />
-          }
-          size={3} // overridden by bubbleProperty
-          style={scatterPlotStyle}
-          title="Scatter Plot"
-          x="dataKey"
-          y="dataValue"
-        />
-      </VictoryChart>
+          </VictoryPortal>
+          <VictoryPortal>
+            <VictoryLabel
+              style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
+              text={xLabel}
+              textAnchor="end"
+              title="X Axis Label"
+              verticalAnchor="end"
+              x={600}
+              y={295}
+            />
+          </VictoryPortal>
+          <VictoryScatter
+            animate={{ onEnter: { duration: 500 } }}
+            bubbleProperty="bubbleSize"
+            minBubbleSize={size && size.minSize}
+            maxBubbleSize={size && size.maxSize}
+            //        categories={{ x: categoryData }}
+            data={data.map(d => ({
+              dataKey: d[dataKey],
+              dataValue: d[dataValue],
+              label: `${
+                dataKeyLabel ? d[dataKeyLabel] : xLabel
+              }: ${xNumberFormatter(d[dataKey])} • ${
+                dataValueLabel ? d[dataValueLabel] : yLabel
+              }: ${yNumberFormatter(d[dataValue])}`,
+              series: d[dataSeries],
+              ...(size && { bubbleSize: d[size.key] })
+            }))}
+            events={chartEvents}
+            labelComponent={
+              <VictoryTooltip
+                x={325}
+                y={0}
+                orientation="bottom"
+                pointerLength={0}
+                cornerRadius={0}
+                theme={CivicVictoryTheme.civic}
+              />
+            }
+            size={3} // overridden by bubbleProperty
+            style={scatterPlotStyle}
+            title="Scatter Plot"
+            x="dataKey"
+            y="dataValue"
+          />
+        </VictoryChart>
+      </DataChecker>
     </ChartContainer>
   );
 };

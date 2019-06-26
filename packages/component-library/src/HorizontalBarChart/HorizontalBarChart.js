@@ -13,6 +13,7 @@ import ChartContainer from "../ChartContainer";
 import civicFormat from "../utils/civicFormat";
 import { chartEvents } from "../utils/chartHelpers";
 import CivicVictoryTheme from "../VictoryTheme/VictoryThemeIndex";
+import DataChecker from "../utils/DataChecker";
 
 const HorizontalBarChart = ({
   data,
@@ -65,102 +66,104 @@ const HorizontalBarChart = ({
       loading={loading}
       error={error}
     >
-      <VictoryChart
-        height={dataHeight + additionalHeight}
-        domain={domain}
-        domainPadding={{ x: 11, y: 20 }}
-        padding={padding}
-        theme={CivicVictoryTheme.civic}
-      >
-        <VictoryAxis
-          style={{
-            tickLabels: { fill: "none" },
-            ticks: { stroke: "none" },
-            grid: { stroke: "none" }
-          }}
-          title="Y Axis"
-        />
-        {!minimalist && (
+      <DataChecker dataAccessors={{ dataValue }} data={data}>
+        <VictoryChart
+          height={dataHeight + additionalHeight}
+          domain={domain}
+          domainPadding={{ x: 11, y: 20 }}
+          padding={padding}
+          theme={CivicVictoryTheme.civic}
+        >
           <VictoryAxis
-            dependentAxis
-            orientation="top"
-            tickFormat={dataValueFormatter}
-            title="X Axis"
-            offsetY={padding.top}
+            style={{
+              tickLabels: { fill: "none" },
+              ticks: { stroke: "none" },
+              grid: { stroke: "none" }
+            }}
+            title="Y Axis"
           />
-        )}
-        {!minimalist && (
+          {!minimalist && (
+            <VictoryAxis
+              dependentAxis
+              orientation="top"
+              tickFormat={dataValueFormatter}
+              title="X Axis"
+              offsetY={padding.top}
+            />
+          )}
+          {!minimalist && (
+            <VictoryPortal>
+              <VictoryLabel
+                style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
+                text={yLabel}
+                textAnchor="middle"
+                title="Y Axis Label"
+                verticalAnchor="end"
+                x={50}
+                y={65}
+              />
+            </VictoryPortal>
+          )}
           <VictoryPortal>
             <VictoryLabel
               style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
-              text={yLabel}
-              textAnchor="middle"
-              title="Y Axis Label"
-              verticalAnchor="end"
-              x={50}
-              y={65}
+              text={xLabel}
+              textAnchor={minimalist ? "middle" : "end"}
+              title="X Axis Label"
+              verticalAnchor={minimalist ? "middle" : "end"}
+              x={minimalist ? 325 : 600}
+              y={minimalist ? 20 : 85}
             />
           </VictoryPortal>
-        )}
-        <VictoryPortal>
-          <VictoryLabel
-            style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
-            text={xLabel}
-            textAnchor={minimalist ? "middle" : "end"}
-            title="X Axis Label"
-            verticalAnchor={minimalist ? "middle" : "end"}
-            x={minimalist ? 325 : 600}
-            y={minimalist ? 20 : 85}
+          <VictoryBar
+            horizontal
+            labelComponent={
+              <NegativeAwareTickLabel
+                x={0}
+                orientation="left"
+                theme={CivicVictoryTheme.civic}
+              />
+            }
+            domainPadding={0}
+            data={barData.map(d => ({
+              sortOrder: d[sortOrderKey],
+              dataValue: d[dataValue],
+              label: dataLabelFormatter(d[dataLabel])
+            }))}
+            x="sortOrder"
+            y="dataValue"
+            events={chartEvents}
           />
-        </VictoryPortal>
-        <VictoryBar
-          horizontal
-          labelComponent={
-            <NegativeAwareTickLabel
-              x={0}
-              orientation="left"
-              theme={CivicVictoryTheme.civic}
-            />
-          }
-          domainPadding={0}
-          data={barData.map(d => ({
-            sortOrder: d[sortOrderKey],
-            dataValue: d[dataValue],
-            label: dataLabelFormatter(d[dataLabel])
-          }))}
-          x="sortOrder"
-          y="dataValue"
-          events={chartEvents}
-        />
-        <VictoryBar
-          horizontal
-          labelComponent={
-            <VictoryTooltip
-              x={325}
-              y={0}
-              orientation="bottom"
-              pointerLength={0}
-              cornerRadius={0}
-              theme={CivicVictoryTheme.civic}
-            />
-          }
-          domainPadding={0}
-          data={barData.map(d => ({
-            sortOrder: d[sortOrderKey],
-            dataValue: d[dataValue],
-            label: `${dataLabelFormatter(d[dataLabel])}: ${dataValueFormatter(
-              d[dataValue]
-            )}`
-          }))}
-          style={{
-            data: { fill: "none" }
-          }}
-          title="Horizontal Bar Chart"
-          x="sortOrder"
-          y="dataValue"
-          events={chartEvents}
-        />
-      </VictoryChart>
+          <VictoryBar
+            horizontal
+            labelComponent={
+              <VictoryTooltip
+                x={325}
+                y={0}
+                orientation="bottom"
+                pointerLength={0}
+                cornerRadius={0}
+                theme={CivicVictoryTheme.civic}
+              />
+            }
+            domainPadding={0}
+            data={barData.map(d => ({
+              sortOrder: d[sortOrderKey],
+              dataValue: d[dataValue],
+              label: `${dataLabelFormatter(d[dataLabel])}: ${dataValueFormatter(
+                d[dataValue]
+              )}`
+            }))}
+            style={{
+              data: { fill: "none" }
+            }}
+            title="Horizontal Bar Chart"
+            x="sortOrder"
+            y="dataValue"
+            events={chartEvents}
+          />
+        </VictoryChart>
+      </DataChecker>
     </ChartContainer>
   );
 };
