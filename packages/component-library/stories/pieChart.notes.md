@@ -22,8 +22,6 @@ The Custom story shows all possible properties that can be passed to the PieChar
 - Chart width
 - Inner radius
 - Colors
-- Start angle
-- End angle
 
 ## Simple
 

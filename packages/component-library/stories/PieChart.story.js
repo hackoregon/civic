@@ -93,8 +93,8 @@ export default () =>
           ",",
           GROUP_IDS.CUSTOM
         );
-        const startAngle = number("Start angle", 90, {}, GROUP_IDS.CUSTOM);
-        const endAngle = number("End angle", -90, {}, GROUP_IDS.CUSTOM);
+        // const startAngle = number("Start angle", 90, {}, GROUP_IDS.CUSTOM);
+        // const endAngle = number("End angle", -90, {}, GROUP_IDS.CUSTOM);
 
         return (
           <PieChart
@@ -107,8 +107,8 @@ export default () =>
             width={chartWidth}
             height={chartHeight}
             innerRadius={innerRadius}
-            startAngle={startAngle}
-            endAngle={endAngle}
+            // startAngle={startAngle}
+            // endAngle={endAngle}
             halfDoughnut={halfDoughnut}
             useLegend={useLegend}
           />
