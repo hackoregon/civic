@@ -7,7 +7,7 @@ import "@hackoregon/component-library/assets/global.styles.css";
 const Game = () => (
   <div>
     <h1>This is the game</h1>
-    <Orb x={200} y={400} />
+    <Orb />
   </div>
 );
 
