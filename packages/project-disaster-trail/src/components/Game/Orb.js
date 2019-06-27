@@ -1,14 +1,18 @@
 /** @jsx jsx */
 import { Component } from "react";
-import PropTypes from "prop-types";
 import { jsx, css } from "@emotion/core";
 
-const defaultStyle = css`
-  height: 30px;
-  width: 30px;
-  border-radius: 15px;
+const orbContainerStyle = css`
+  height: 80px;
+  width: 80px;
+  border-radius: 80px;
+`;
+
+const circleDefaultStyle = css`
+  height: 100%;
+  width: 100%;
+  border-radius: 80px;
   background-color: blue;
-  position: absolute;
   cursor: pointer;
   opacity: 0.8;
   &:hover {
@@ -16,7 +20,7 @@ const defaultStyle = css`
   }
 `;
 
-const pressStyle = css`
+const circlePressStyle = css`
   background-color: #000;
   -webkit-transition: background-color 1000ms linear;
   -ms-transition: background-color 1000ms linear;
@@ -86,35 +90,30 @@ class Orb extends Component {
   };
 
   render() {
-    const { x, y } = this.props;
     const { animationState } = this.state;
-    const location = css`
-      top: ${y}px;
-      left: ${x}px;
-    `;
 
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
       <div
-        onMouseDown={this.handleOrbPress}
-        onMouseUp={this.handleOrbRelease}
-        onMouseLeave={this.handleOrbRelease}
-        onTouchStart={this.handleOrbPress}
-        onTouchEnd={this.handleOrbRelease}
         css={css`
-          ${location};
-          ${defaultStyle};
-          ${animationState === "pressing" && pressStyle}
+          ${orbContainerStyle}
         `}
-      />
+      >
+        <div
+          onMouseDown={this.handleOrbPress}
+          onMouseUp={this.handleOrbRelease}
+          onMouseLeave={this.handleOrbRelease}
+          onTouchStart={this.handleOrbPress}
+          onTouchEnd={this.handleOrbRelease}
+          css={css`
+            ${circleDefaultStyle};
+            ${animationState === "pressing" && circlePressStyle}
+          `}
+        />
+      </div>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
   }
 }
-
-Orb.propTypes = {
-  x: PropTypes.number,
-  y: PropTypes.number
-};
 
 export default Orb;
