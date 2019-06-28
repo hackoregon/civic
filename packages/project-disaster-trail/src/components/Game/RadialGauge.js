@@ -40,14 +40,22 @@ class RadialGauge extends Component {
   };
 
   render() {
-    const { animateGauge } = this.props;
+    const { animateGauge, orbSize } = this.props;
     const { percent } = this.state;
+
+    const gaugeSizeStyle = css`
+      height: ${orbSize}px;
+      width: ${orbSize}px;
+      border-radius: ${orbSize}px;
+    `;
 
     return (
       <CircularProgressbar
         value={percent}
         strokeWidth={animateGauge ? 20 : 4}
-        css={gaugeDefaultStyle}
+        css={css`
+          ${gaugeDefaultStyle}, ${gaugeSizeStyle}
+        `}
         className={animateGauge ? "gauge-animate-style" : ""}
         styles={buildStyles({
           pathColor: "gold",
@@ -63,7 +71,8 @@ class RadialGauge extends Component {
 }
 
 RadialGauge.propTypes = {
-  animateGauge: PropTypes.bool
+  animateGauge: PropTypes.bool,
+  orbSize: PropTypes.number
 };
 
 export default RadialGauge;
