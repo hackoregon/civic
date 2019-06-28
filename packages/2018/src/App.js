@@ -55,6 +55,12 @@ import {
   App as Housing2019App
 } from "@hackoregon/2019-housing";
 
+import {
+  Routes as Template2019Routes,
+  Reducers as Template2019Reducers,
+  App as Template2019App
+} from "@hackoregon/2019-template";
+
 import { Reducers as SandboxReducers } from "@hackoregon/civic-sandbox";
 
 import "./fonts.css";
@@ -89,7 +95,8 @@ const configureStore = (initialState, history) => {
       farmersMarkets: FarmersMarketsReducers(),
       sandbox: SandboxReducers(),
       // Temporarily Hidden 2019 Pages ⬇️
-      housing2019: Housing2019Reducers()
+      housing2019: Housing2019Reducers(),
+      template2019: Template2019Reducers()
     }),
     initialState,
     composeEnhancers(applyMiddleware(...middlewares))
@@ -109,7 +116,8 @@ const configureStore = (initialState, history) => {
         "@hackoregon/2018-example-farmers-markets",
         "@hackoregon/civic-sandbox",
         // Temporarily Hidden 2019 Pages ⬇️
-        "@hackoregon/2019-housing"
+        "@hackoregon/2019-housing",
+        "@hackoregon/2019-template"
       ],
       () => {
         const nextRootReducer = combineReducers({
@@ -122,7 +130,8 @@ const configureStore = (initialState, history) => {
           farmersMarkets: require("@hackoregon/2018-example-farmers-markets").Reducers(),
           sandbox: require("@hackoregon/civic-sandbox").Reducers(),
           // Temporarily Hidden 2019 Pages ⬇️
-          housing2019: require("@hackoregon/2019-housing").Reducers()
+          housing2019: require("@hackoregon/2019-housing").Reducers(),
+          template2019: require("@hackoregon/2019-template").Reducers()
         });
         store.replaceReducer(nextRootReducer);
       }
@@ -219,6 +228,16 @@ const routes = {
           path: "housing",
           component: Housing2019App,
           childRoutes: Housing2019Routes(store)
+        }
+      ]
+    },
+    {
+      path: "2019",
+      childRoutes: [
+        {
+          path: "template",
+          component: Template2019App,
+          childRoutes: Template2019Routes(store)
         }
       ]
     }
