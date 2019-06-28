@@ -2,17 +2,13 @@ import App from "./components/App";
 import Routes from "./routes";
 import Reducers from "./state";
 
-import PortlandFarmersMarkets from "./components/PortlandFarmersMarkets";
-import FarmersMarketsOverTime from "./components/FarmersMarketsOverTime";
+// TODO: Update me before commiting new card
+import HousingDisplacement from "./components/HousingDisplacement";
 
 const CardRegistry = [
   {
-    slug: "portland-farmers-markets",
-    component: PortlandFarmersMarkets
-  },
-  {
-    slug: "farmers-markets-over-time",
-    component: FarmersMarketsOverTime
+    slug: "portland-population-change-over-time",
+    component: HousingDisplacement
   }
 ];
 

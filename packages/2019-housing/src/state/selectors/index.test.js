@@ -8,15 +8,15 @@ describe("rootState", () => {
     expect(rootState(state)).to.eql(state);
   });
 
-  it("uses the farmersMarkets object when the farmersMarkets key is present", () => {
+  it("uses the templateData object when the templateData key is present", () => {
     const state = {
-      farmersMarkets: {
+      templateData: {
         hello: "world"
       },
       otherScope: {
         not: "for you"
       }
     };
-    expect(rootState(state)).to.eql(state.farmersMarkets);
+    expect(rootState(state)).to.eql(state.templateData);
   });
 });

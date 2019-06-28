@@ -10,7 +10,8 @@
     "react-router",
     "webpack",
     "redux",
-    "hackoregon"
+    "hackoregon",
+    "2019"
   ],
   "repository": {
     "type": "git",
