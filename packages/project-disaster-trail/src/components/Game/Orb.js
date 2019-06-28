@@ -1,30 +1,38 @@
 /** @jsx jsx */
 import { Component } from "react";
 import { jsx, css } from "@emotion/core";
+import RadialGauge from "./RadialGauge";
 
 const orbContainerStyle = css`
+  position: relative;
   height: 80px;
   width: 80px;
   border-radius: 80px;
 `;
 
 const circleDefaultStyle = css`
-  height: 100%;
-  width: 100%;
-  border-radius: 80px;
-  background-color: blue;
+  transition: transform 1s;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 10;
+  height: 60px;
+  width: 60px;
+  border-radius: 60px;
+  background-color: mediumSeaGreen;
   cursor: pointer;
   opacity: 0.8;
+
   &:hover {
     opacity: 1;
   }
-`;
 
-const circlePressStyle = css`
-  background-color: #000;
-  -webkit-transition: background-color 1000ms linear;
-  -ms-transition: background-color 1000ms linear;
-  transition: background-color 1000ms linear;
+  &.circle-press-style {
+    background-color: mediumAquamarine;
+    -webkit-transition: background-color 1000ms linear;
+    -ms-transition: background-color 1000ms linear;
+    transition: background-color 1000ms linear;
+  }
 `;
 
 const defaultState = {
@@ -35,7 +43,6 @@ const defaultState = {
   animationFrame: null
 };
 
-// Note: onTouchStart and onTouchEnd are not tested
 class Orb extends Component {
   constructor(props) {
     super(props);
@@ -71,6 +78,7 @@ class Orb extends Component {
   };
 
   doPressAnimation = () => {
+    // eslint-disable-next-line no-unused-vars
     const { animationState, durationRequired } = this.state;
     const newAnimationFrame = window.requestAnimationFrame(() => {
       console.log("Do press animation");
@@ -95,20 +103,17 @@ class Orb extends Component {
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
       <div
-        css={css`
-          ${orbContainerStyle}
-        `}
+        css={orbContainerStyle}
+        onMouseDown={this.handleOrbPress}
+        onMouseUp={this.handleOrbRelease}
+        onMouseLeave={this.handleOrbRelease}
+        onTouchStart={this.handleOrbPress}
+        onTouchEnd={this.handleOrbRelease}
       >
+        <RadialGauge animateGauge={animationState === "pressing"} />
         <div
-          onMouseDown={this.handleOrbPress}
-          onMouseUp={this.handleOrbRelease}
-          onMouseLeave={this.handleOrbRelease}
-          onTouchStart={this.handleOrbPress}
-          onTouchEnd={this.handleOrbRelease}
-          css={css`
-            ${circleDefaultStyle};
-            ${animationState === "pressing" && circlePressStyle}
-          `}
+          css={circleDefaultStyle}
+          className={animationState ? "circle-press-style" : ""}
         />
       </div>
     );
