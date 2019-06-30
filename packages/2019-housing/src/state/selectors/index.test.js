@@ -1,7 +1,7 @@
 import { rootState } from "./index";
 
 describe("rootState", () => {
-  it("uses the full object when the elections key is not present", () => {
+  it("uses the full object when the template key is not present", () => {
     const state = {
       hello: "world"
     };

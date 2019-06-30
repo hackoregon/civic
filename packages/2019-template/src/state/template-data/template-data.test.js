@@ -14,7 +14,7 @@ describe("template-data", () => {
           type: actions.IMPORT_START
         };
 
-        expect(actions.templateDataStart()).to.eql(expectedAction);
+        expect(actions.TemplateDataStart()).to.eql(expectedAction);
       });
 
       it("should have a success action", () => {
@@ -28,7 +28,7 @@ describe("template-data", () => {
           payload
         };
 
-        expect(actions.templateDataSuccess(payload)).to.eql(expectedAction);
+        expect(actions.TemplateDataSuccess(payload)).to.eql(expectedAction);
       });
     });
 
@@ -95,22 +95,20 @@ describe("template-data", () => {
   });
 
   describe("template-data selectors", () => {
-    describe("getTemplateDataRequest", () => {
+    describe("getTemplateRequest", () => {
       it("extends the root selector", () => {
         const expectation = { one: "two", three: 4 };
 
         expect(
-          selectors.getTemplateDataRequest({
+          selectors.getTemplateRequest({
             templateData: expectation
           })
         ).to.eql(expectation);
 
         expect(
-          selectors.getTemplateDataRequest({
+          selectors.getTemplateRequest({
             red: "herring",
-            templateData: {
-              templateData: expectation
-            }
+            templateData: expectation
           })
         ).to.eql(expectation);
       });
@@ -118,23 +116,17 @@ describe("template-data", () => {
 
     describe("getTemplateData", () => {
       it("returns undefined when there is no data", () => {
+        // eslint-disable-next-line no-unused-expressions
         expect(
-          selectors.getTemplateData({
-            templateData: {
-              no: "data to be seen"
-            }
-          })
+          selectors.getTemplateData({ templateData: { no: "data to be seen" } })
         ).to.be.undefined;
       });
 
       it("returns undefined when data has no value for TemplateData", () => {
+        // eslint-disable-next-line no-unused-expressions
         expect(
           selectors.getTemplateData({
-            templateData: {
-              data: {
-                NotTemplateData: {}
-              }
-            }
+            templateData: { data: { NotTemplateData: {} } }
           })
         ).to.be.undefined;
       });
@@ -158,6 +150,7 @@ describe("template-data", () => {
 
     describe("isTemplateDataPending", () => {
       it("returns false when there is no value for pending", () => {
+        // eslint-disable-next-line no-unused-expressions
         expect(
           selectors.isTemplateDataPending({
             templateData: {
@@ -168,6 +161,7 @@ describe("template-data", () => {
       });
 
       it("returns false when the value for pending is false", () => {
+        // eslint-disable-next-line no-unused-expressions
         expect(
           selectors.isTemplateDataPending({
             templateData: {
@@ -178,6 +172,7 @@ describe("template-data", () => {
       });
 
       it("returns true when the value for pending is true", () => {
+        // eslint-disable-next-line no-unused-expressions
         expect(
           selectors.isTemplateDataPending({
             templateData: {

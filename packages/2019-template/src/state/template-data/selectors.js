@@ -3,20 +3,12 @@ import { rootState } from "../selectors";
 
 export const getTemplateRequest = createSelector(
   rootState,
-  ({ templateData }) => {
-    console.log("👀👀👀 templateData", templateData);
-
-    return templateData;
-  }
+  ({ templateData }) => templateData
 );
 
 export const getTemplateData = createSelector(
   getTemplateRequest,
-  ({ data }) => {
-    console.log("👀👀👀 data", data);
-
-    return data && data.TemplateData;
-  }
+  ({ data }) => data && data.TemplateData
 );
 
 export const isTemplateDataPending = createSelector(
