@@ -687,7 +687,7 @@ class HomePage extends Component {
                   <div className={listSubTitle}>Vision</div>
                   <p className={listText}>
                     Empowering cities to create technology that is a reflection
-                    their ambition, their values, and their priorities.
+                    of their ambition, their values, and their priorities.
                   </p>
                   <div className={listSubTitle}>Workflow</div>
                   <p className={listText}>
