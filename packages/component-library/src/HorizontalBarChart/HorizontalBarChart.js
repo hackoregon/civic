@@ -12,7 +12,11 @@ import {
 
 import ChartContainer from "../ChartContainer";
 import civicFormat from "../utils/civicFormat";
-import { chartEvents } from "../utils/chartHelpers";
+import {
+  chartEvents,
+  categoricalColors,
+  transformDatato100
+} from "../utils/chartHelpers";
 import CivicVictoryTheme from "../VictoryTheme/VictoryThemeIndex";
 
 const HorizontalBarChart = ({
@@ -51,32 +55,6 @@ const HorizontalBarChart = ({
   const additionalHeight = padding.bottom + padding.top;
 
   const minValue = Math.min(0, ...data.map(d => d[dataValue]));
-
-  const categoricalColors = dataLength => {
-    const colorScheme = [];
-    for (let i = 0; i < dataLength; i += 1) {
-      colorScheme.push(CivicVictoryTheme.civic.group.colorScale[i]);
-    }
-    return colorScheme;
-  };
-
-  const transformDatato100 = (dataset, value, label) => {
-    const totals = dataset[0].map((currentData, i) => {
-      return dataset.reduce((memo, curr) => {
-        return memo + curr[i].y;
-      }, 0);
-    });
-    const newData = dataset.map(indvData => {
-      return indvData.map((datum, i) => {
-        const newObj = {
-          [`${value}`]: datum[value],
-          [`${label}`]: datum[label] / totals[i]
-        };
-        return newObj;
-      });
-    });
-    return newData;
-  };
 
   const NegativeAwareTickLabel = props => (
     <VictoryLabel

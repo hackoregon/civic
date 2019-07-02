@@ -120,6 +120,32 @@ function getDefaultAreaStyle(idx) {
   };
 }
 
+const categoricalColors = dataLength => {
+  const colorScheme = [];
+  for (let i = 0; i < dataLength; i += 1) {
+    colorScheme.push(CivicVictoryTheme.civic.group.colorScale[i]);
+  }
+  return colorScheme;
+};
+
+const transformDatato100 = (dataset, value, label) => {
+  const totals = dataset[0].map((currentData, i) => {
+    return dataset.reduce((memo, curr) => {
+      return memo + curr[i].y;
+    }, 0);
+  });
+  const newData = dataset.map(indvData => {
+    return indvData.map((datum, i) => {
+      const newObj = {
+        [`${value}`]: datum[value],
+        [`${label}`]: datum[label] / totals[i]
+      };
+      return newObj;
+    });
+  });
+  return newData;
+};
+
 export {
   chartEvents,
   getDefaultDomain,
@@ -127,5 +153,7 @@ export {
   getDefaultFillStyle,
   getDefaultLineStyle,
   getDefaultAreaStyle,
-  getDefaultStackedDomain
+  getDefaultStackedDomain,
+  categoricalColors,
+  transformDatato100
 };
