@@ -14,8 +14,6 @@ const circleDefaultStyle = css`
   left: 10px;
   z-index: 10;
   background-color: mediumSeaGreen;
-  -webkit-transition: background-color 1000ms linear;
-  -ms-transition: background-color 1000ms linear;
   transition: background-color 1000ms linear;
   cursor: pointer;
   opacity: 0.8;
@@ -26,8 +24,6 @@ const circleDefaultStyle = css`
 
   &.circle-press-style {
     background-color: mediumAquamarine;
-    -webkit-transition: background-color 1000ms linear;
-    -ms-transition: background-color 1000ms linear;
     transition: background-color 1000ms linear;
   }
 `;
