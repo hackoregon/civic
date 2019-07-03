@@ -17,6 +17,15 @@ const gaugeDefaultStyle = css`
   }
 `;
 
+const progressBarStyle = {
+  pathColor: "gold",
+  trailColor: "transparent",
+  // Whether to use rounded or flat corners on the ends
+  strokeLinecap: "butt",
+  // How long animation takes to go from one percent to another, in seconds
+  pathTransitionDuration: 1
+};
+
 class RadialGauge extends Component {
   state = {
     percent: 0
@@ -34,9 +43,7 @@ class RadialGauge extends Component {
   }
 
   setPercent = percent => {
-    this.setState(() => ({
-      percent
-    }));
+    this.setState({ percent });
   };
 
   render() {
@@ -57,14 +64,7 @@ class RadialGauge extends Component {
           ${gaugeDefaultStyle}, ${gaugeSizeStyle}
         `}
         className={animateGauge ? "gauge-animate-style" : ""}
-        styles={buildStyles({
-          pathColor: "gold",
-          trailColor: "transparent",
-          // Whether to use rounded or flat corners on the ends
-          strokeLinecap: "butt",
-          // How long animation takes to go from one percent to another, in seconds
-          pathTransitionDuration: 1
-        })}
+        styles={buildStyles(progressBarStyle)}
       />
     );
   }
