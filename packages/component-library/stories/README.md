@@ -1,6 +1,10 @@
 # CIVIC Design System Story Pattern
 
-Storybook is used to document [CIVIC's Design System](https://hackoregon.github.io/civic/). Each component in the library has a story.
+Storybook is used to document [CIVIC's Design System](https://hackoregon.github.io/civic/); each component in the library has a story. Stories are used by UX, UI, and Data Visualization users to try out the components early in the design process. They can set properties, add sample data, and determine the design they want.
+
+Developers use Storybook when they are developing the component. Then they write the stories for that component making them easy for designers to use. When the developer wants to use the component in a project, the Story code is a good reference.
+
+This document is for the developers to use when they write the stories for a component.
 
 As you read through this document, refer to these stories to see the design pattern in use:
 
@@ -29,13 +33,30 @@ The Custom story provides knobs for all the props that are available for this co
 
 ### Example Story(s)
 
-If there is a configuration of the component that has been used in a project, and may be useful again, create an example story.
+If there is a configuration of the component that has been used in a project, and may be useful again, create an Example story.
 
 ## Knobs
 
-The Knobs addon lets you set and change the props values of that component. Knobs are provided for each prop that can be modified in a story. See the example stories above.
+The Knobs addon lets you set the props data type and change its values for that component. Knobs are provided for each prop that can be modified in a story. See the example stories above.
 
 This helps during both development and design; the developer can test the props for results and the designer can configure the component for a particular use.
+
+At this time, there are Knobs for these data types and inputs:
+
+- text
+- boolean
+- number
+- number bound by range
+- color
+- object
+- array
+- select
+- radio buttons
+- options
+- files
+- date
+- button
+- withKnobs options
 
 Knobs references:
 
@@ -44,7 +65,7 @@ Knobs references:
 
 ### Organize knobs into tabs
 
-Choose tab labels that are consistent with other stories; create a new one only if needed. Current knob tabs:
+Knobs can be organized in tabs, in the Addons panel. Choose tab labels that are consistent with other stories; create a new one only if needed. Current knob tabs:
 
 - Labels
 - Design
@@ -66,17 +87,47 @@ Labels are descriptive; don't use the prop name. Use sentence case for labels. C
 - Data values
 - Data
 
+## Utility Functions
+
+### `getKeyNames` in packages/component-library/stories/shared.js
+
+Some components let you set the value format for the axes. Currently those formats are defined in civicFormat.js: numeric, year, percentage, dollars, titleCase, unformatted, monthYear, numericShort, and decimalToPercent. Add a knob to allow the user to choose the format.
+
+Components expect a function prop to provide the format, but there is no knob function type. Use `getKeyNames` to pass the item selected in the options knob as a function to the component. See [Line Chart](https://hackoregon.github.io/civic/?path=/story/component-lib-charts-line-chart--standard) story for an example. See `optionSelectX` and `optionSelectY`.
+
+### `StatefulWrapper` in packages/component-library/src/utils/StatefulWrapper.js
+
+- StatefulWrapper is a helper function to set up dynamic state in controlled form components, such as the slider, for Storybook stories
+- Takes in an `initialState` object with any number of properties
+- Returns a function as a child component and provides `get` and `set` helpers
+- to update the controlled state.
+
+See the [Slider](https://hackoregon.github.io/civic/?path=/story/component-lib-basic-inputs-slider--basic-slider) story for an example of using the `StatefulWrapper`.
+
 ## Story Development Code
 
-When you select "Story" in the Addon panel, the code for the current story (inside the .add function) is shown and highlighted. Including all the values and props for that story inside the .add function, and highlighted, makes it easier for the developer to use that component.
+When you select "Story" in the Addon panel, the code for the current story (inside the .add function) is shown and highlighted. Including all the values and props for that story inside the .add function so they are highlighted, makes it easier for the developer to use that component.
 
 Use realistic data. Data in the story is often from a past project. Use a subset of that data if there is so much that it overwhelms the usability of the story.
+
+## Actions
+
+Actions display data received by the event handlers in a component when it is in Storybook. Actions aren't required in stories, but they are helpful when developing and debugging a component. For example:
+
+`<Button onClick={action('button-click')}>Hello World!</Button>`
+
+When the button is clicked all the data from the event is shown in the Actions tab in the Addons Panel.
+
+Actions references:
+
+- [Actions](https://github.com/storybookjs/storybook/tree/master/addons/actions)
 
 ## Notes
 
 A Notes file is written for each story. It describes the story and the knobs/props for that story. Use markdown format.
 
 Notes files are in the stories folder. The notes files are named by the componentName followed by .story.md.
+
 Examples:
 
 - [horizontalBarChart.notes.md](https://hackoregon.github.io/civic/?path=/info/component-lib-charts-horizontal-bar-chart--standard)
