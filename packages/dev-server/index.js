@@ -6,8 +6,8 @@ const compression = require("compression");
 const open = require("open");
 
 const app = express();
+const port = process.env.PORT || 3000;
 const isProd = process.env.NODE_ENV === "production";
-const port = process.env.PORT || 6006;
 const outputPath = resolve(process.cwd(), isProd ? "dist" : "build");
 
 const devMiddleware = require("webpack-dev-middleware");
@@ -23,9 +23,16 @@ module.exports = () => {
     )
   );
 
+  const openBrowser = () =>
+    isProd
+      ? console.log(chalk.green("\nPRODUCTION mode"))
+      : open(`http://localhost:${port}`);
+
   const announceServer = () => {
     console.log(chalk.green(`\nServer up at http://localhost:${port}`));
     console.log(chalk.yellow("\nLogging requests...\n"));
+    // Doesn't wait for Webpack Bundle Analyzer to finalize before opening localhost.
+    openBrowser();
   };
 
   if (isProd) {
@@ -79,9 +86,5 @@ module.exports = () => {
   );
 
   // Start the server
-  const setupServer = new Promise(function(resolve, reject) {
-    resolve(app.listen(port, announceServer));
-  });
-
-  setupServer.then(open(`http://localhost:${port}`));
+  app.listen(port, announceServer);
 };
