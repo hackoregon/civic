@@ -7,6 +7,7 @@ const open = require("open");
 
 const app = express();
 const isProd = process.env.NODE_ENV === "production";
+const port = process.env.PORT || 6006;
 const outputPath = resolve(process.cwd(), isProd ? "dist" : "build");
 
 const devMiddleware = require("webpack-dev-middleware");
@@ -14,8 +15,6 @@ const hotMiddleware = require("webpack-hot-middleware");
 
 // eslint-disable-next-line import/no-dynamic-require
 const config = require(resolve(process.cwd(), "webpack.config.js"));
-
-const port = process.env.PORT || 3000;
 
 module.exports = () => {
   console.log(
@@ -80,14 +79,9 @@ module.exports = () => {
   );
 
   // Start the server
-  const port = process.env.PORT || 3000;
-
   const setupServer = new Promise(function(resolve, reject) {
     resolve(app.listen(port, announceServer));
   });
 
-  setupServer.then(open(`http://localhost:3000`));
-
-  // Doesn't wait for Webpack Bundle Analyzer to finalize before opening localhost.
-  app.listen(port, announceServer);
+  setupServer.then(open(`http://localhost:${port}`));
 };
