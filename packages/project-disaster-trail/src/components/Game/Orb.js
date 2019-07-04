@@ -67,7 +67,7 @@ class Orb extends Component {
       window.cancelAnimationFrame(animationFrame);
       clearTimeout(pressTimeout);
       /* We keep setState() in a conditional in case of a mouseLeave when the orb had not been pressed to avoid unnecessary setState() calls */
-      this.setState(() => defaultState);
+      this.setState(defaultState);
     }
   };
 
@@ -79,12 +79,12 @@ class Orb extends Component {
     });
     const pressTimeout = setTimeout(this.handleOrbRelease, durationRequired);
 
-    this.setState(() => ({
+    this.setState({
       animationState: "pressing",
       pressedStart: new Date(),
       animationFrame: newAnimationFrame,
       pressTimeout
-    }));
+    });
   };
 
   doFullDurationAnimation = () => {
