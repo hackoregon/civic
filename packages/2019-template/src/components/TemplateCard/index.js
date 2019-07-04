@@ -25,7 +25,7 @@ const TemplateCardVisualization = ({ isLoading, templateData }) => (
 
 const TemplateCardFull = {
   title: "(Story Card #1, Issue #000) Template Card Title",
-  slug: "template-card-slug",
+  slug: "template-card",
   introText: (
     <p>
       Sed ut perspiciatis, unde omnis iste natus error sit voluptatem
