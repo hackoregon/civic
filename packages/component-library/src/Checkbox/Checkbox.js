@@ -2,8 +2,9 @@
 /* eslint-disable */
 import { jsx, css } from "@emotion/core";
 import PropTypes from "prop-types";
-import MaterialCheckbox from "@material-ui/core/Checkbox";
+import Checkbox from "@material-ui/core/Checkbox";
 
+/*
 const checkboxClass = props => css`
   display: ${props.display};
   margin: ${props.margin};
@@ -34,12 +35,19 @@ const checkboxClass = props => css`
     outline: none;
   }
 `;
+*/
+
+const checkboxClass = props => css`
+  background: ${props.bkgndColor};
+  cursor: pointer;
+  border: 2px solid ${props.accentColor};
+`;
 
 const CivicCheckbox = ({ children, onClick, ...props }) => (
   <Checkbox
     variant="contained"
     onClick={onClick}
-    onChange={onChange}
+    // onChange={onChange}
     css={checkboxClass(props)}
     inputProps={{ "aria-label": "Checkbox A" }}
   />
@@ -52,9 +60,8 @@ CivicCheckbox.propTypes = {
   checkedIcon: PropTypes.node,
   disabled: PropTypes.bool,
   icon: PropTypes.node,
-  onChange: PropTypes.func,
+  // onChange: PropTypes.func,
   type: PropTypes.string,
-
   onClick: PropTypes.func
 };
 
@@ -66,4 +73,4 @@ CivicCheckbox.defaultProps = {
   transition: "all .2s ease-in-out"
 };
 
-export default Checkbox;
+export default CivicCheckbox;

@@ -3,14 +3,14 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { checkA11y } from "@storybook/addon-a11y";
-// import { withKnobs, text, color, select, files } from "@storybook/addon-knobs";
+import { withKnobs, boolean } from "@storybook/addon-knobs";
 // import notes from "./checkbox.notes.md";
-import { Checkbox } from "../src";
+import { CivicCheckbox } from "../src";
 import { storybookStyles } from "./storyStyles";
 
 export default () =>
   storiesOf("Component Lib|Basic Inputs/Checkbox", module)
-    // .addDecorator(withKnobs)
+    .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .addDecorator(story => (
       <div style={storybookStyles.storyGrid}>
@@ -20,7 +20,14 @@ export default () =>
     .add(
       "Standard",
       () => {
-        return <Checkbox onClick={action("clicked")} />;
+        const checked = boolean("Checked", "true");
+        return (
+          <CivicCheckbox
+            onClick={action("clicked")}
+            onChange={action("changed")}
+            checked={checked}
+          />
+        );
       }
       // { notes }
     );
