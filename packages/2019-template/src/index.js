@@ -3,12 +3,12 @@ import Routes from "./routes";
 import Reducers from "./state";
 
 // TODO: Update me before commiting a new card
-import TemplateCard from "./components/TemplateCard";
+import TemplateCardFull from "./components/TemplateCard/indexFullCard";
 
 const CardRegistry = [
   {
     slug: "template-card",
-    component: TemplateCard
+    component: TemplateCardFull
   }
 ];
 
