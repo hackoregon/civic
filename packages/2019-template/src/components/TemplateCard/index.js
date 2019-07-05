@@ -86,7 +86,7 @@ class TemplateCard extends Component {
   render() {
     const { isLoading, data, children } = this.props;
 
-    return children({ isLoading, data, card: templateCardFull });
+    return children({ isLoading, data, cardMeta: templateCardFull });
   }
 }
 

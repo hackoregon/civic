@@ -1,4 +1,3 @@
-// To be moved to component library
 import React from "react";
 import PropTypes from "prop-types";
 import CivicCardLayoutClassic from "./CivicCardLayoutClassic";

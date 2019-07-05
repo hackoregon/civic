@@ -1,4 +1,3 @@
-// To be moved to component library
 import React from "react";
 import PropTypes from "prop-types";
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -47,30 +46,30 @@ Resource.propTypes = {
   })
 };
 
-function CivicCardLayoutFull({ isLoading, data, card }) {
+function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
   return (
     <React.Fragment>
       <div className={cx(sectionMarginSmall, sectionMaxWidthSmall)}>
-        <h1>{card.title}</h1>
-        {card.tags.map(tag => (
+        <h1>{cardMeta.title}</h1>
+        {cardMeta.tags.map(tag => (
           <Chip tag={tag} />
         ))}
-        {card.introText}
-        {card.selector}
+        {cardMeta.introText}
+        {cardMeta.selector}
       </div>
       <div className={cx(sectionMarginMedium, sectionMaxWidthMedium)}>
-        <card.visualization isLoading={isLoading} data={data} />
+        <cardMeta.visualization isLoading={isLoading} data={data} />
       </div>
       <div className={cx(sectionMarginSmall, sectionMaxWidthSmall)}>
-        {card.additionalText}
-        <PullQuote quoteText={card.shareText} />
+        {cardMeta.additionalText}
+        <PullQuote quoteText={cardMeta.shareText} />
         <h2>About this analysis</h2>
-        <p>{card.analysis}</p>
+        <p>{cardMeta.analysis}</p>
         <h2>About this data</h2>
-        <p>{card.metadata}</p>
+        <p>{cardMeta.metadata}</p>
         <h2>Links and resources</h2>
         <ul>
-          {card.resources.map(item => (
+          {cardMeta.resources.map(item => (
             <Resource item={item} />
           ))}
         </ul>
@@ -97,7 +96,7 @@ function CivicCardLayoutFull({ isLoading, data, card }) {
 CivicCardLayoutFull.propTypes = {
   isLoading: PropTypes.bool,
   data: PropTypes.arrayOf(PropTypes.object),
-  card: PropTypes.shape({
+  cardMeta: PropTypes.shape({
     /* TODO: Add shape */
   })
 };

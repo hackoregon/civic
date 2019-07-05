@@ -1,5 +1,6 @@
 import React from "react";
 
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { cx, css } from "emotion";
 import {
   PageLayout,
@@ -8,7 +9,7 @@ import {
   CivicCardLayoutClassic
 } from "@hackoregon/component-library";
 
-import TemplateCard from "../TemplateCard/TemplateCard";
+import TemplateCard from "../TemplateCard";
 
 import "@hackoregon/component-library/assets/global.styles.css";
 

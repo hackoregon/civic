@@ -1,15 +1,14 @@
-// To be moved to component library
 import React from "react";
 import PropTypes from "prop-types";
 import CivicStoryCard from "../CivicStoryCard/CivicStoryCard";
 
-function CivicCardLayoutClassic({ isLoading, data, card }) {
+function CivicCardLayoutClassic({ isLoading, data, cardMeta }) {
   return (
-    <CivicStoryCard title={card.title} slug={card.slug}>
+    <CivicStoryCard title={cardMeta.title} slug={cardMeta.slug}>
       <React.Fragment>
-        {card.introText}
-        {card.selector}
-        <card.visualization isLoading={isLoading} data={data} />
+        {cardMeta.introText}
+        {cardMeta.selector}
+        <cardMeta.visualization isLoading={isLoading} data={data} />
       </React.Fragment>
     </CivicStoryCard>
   );
@@ -18,7 +17,7 @@ function CivicCardLayoutClassic({ isLoading, data, card }) {
 CivicCardLayoutClassic.propTypes = {
   isLoading: PropTypes.bool,
   data: PropTypes.arrayOf(PropTypes.object),
-  card: PropTypes.shape({
+  cardMeta: PropTypes.shape({
     /* TODO: Add shape */
   })
 };
