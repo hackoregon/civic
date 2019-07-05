@@ -3,7 +3,8 @@ import React from "react";
 import PropTypes from "prop-types";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { cx, css } from "emotion";
-import { PullQuote, Placeholder } from "@hackoregon/component-library";
+import PullQuote from "../PullQuote/PullQuote";
+import Placeholder from "../Placeholder/Placeholder";
 
 const sectionMarginSmall = css`
   display: block;
@@ -46,33 +47,30 @@ Resource.propTypes = {
   })
 };
 
-function FullCard({ isLoading, templateData, templateCardFull }) {
+function CivicCardLayoutFull({ isLoading, data, card }) {
   return (
     <React.Fragment>
       <div className={cx(sectionMarginSmall, sectionMaxWidthSmall)}>
-        <h1>{templateCardFull.title}</h1>
-        {templateCardFull.tags.map(tag => (
+        <h1>{card.title}</h1>
+        {card.tags.map(tag => (
           <Chip tag={tag} />
         ))}
-        {templateCardFull.introText}
-        {templateCardFull.selector}
+        {card.introText}
+        {card.selector}
       </div>
       <div className={cx(sectionMarginMedium, sectionMaxWidthMedium)}>
-        <templateCardFull.visualization
-          isLoading={isLoading}
-          templateData={templateData}
-        />
+        <card.visualization isLoading={isLoading} data={data} />
       </div>
       <div className={cx(sectionMarginSmall, sectionMaxWidthSmall)}>
-        {templateCardFull.additionalText}
-        <PullQuote quoteText={templateCardFull.shareText} />
+        {card.additionalText}
+        <PullQuote quoteText={card.shareText} />
         <h2>About this analysis</h2>
-        <p>{templateCardFull.analysis}</p>
+        <p>{card.analysis}</p>
         <h2>About this data</h2>
-        <p>{templateCardFull.metadata}</p>
+        <p>{card.metadata}</p>
         <h2>Links and resources</h2>
         <ul>
-          {templateCardFull.resources.map(item => (
+          {card.resources.map(item => (
             <Resource item={item} />
           ))}
         </ul>
@@ -96,12 +94,12 @@ function FullCard({ isLoading, templateData, templateCardFull }) {
   );
 }
 
-FullCard.propTypes = {
+CivicCardLayoutFull.propTypes = {
   isLoading: PropTypes.bool,
-  templateData: PropTypes.arrayOf(PropTypes.object),
-  templateCardFull: PropTypes.shape({
+  data: PropTypes.arrayOf(PropTypes.object),
+  card: PropTypes.shape({
     /* TODO: Add shape */
   })
 };
 
-export default FullCard;
+export default CivicCardLayoutFull;

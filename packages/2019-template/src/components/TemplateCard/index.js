@@ -1,8 +1,8 @@
 import React from "react";
+import { CivicCard } from "@hackoregon/component-library";
 import TemplateCard from "./TemplateCard";
-import CivicFlexCard from "./CivicFlexCard";
 
 // eslint-disable-next-line react/prop-types
 export default ({ layout }) => (
-  <CivicFlexCard card={TemplateCard} layout={layout} />
+  <CivicCard card={TemplateCard} layout={layout} />
 );

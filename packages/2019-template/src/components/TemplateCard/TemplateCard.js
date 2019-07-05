@@ -9,11 +9,11 @@ import {
   getTemplateData
 } from "../../state/template-data/selectors";
 
-const TemplateCardVisualization = ({ isLoading, templateData }) => (
+const TemplateCardVisualization = ({ isLoading, data }) => (
   <React.Fragment>
-    {!isLoading && templateData && (
+    {!isLoading && data && (
       <LineChart
-        data={templateData}
+        data={data}
         dataKey="year"
         dataValue="ridership"
         dataSeries="series"
@@ -25,7 +25,7 @@ const TemplateCardVisualization = ({ isLoading, templateData }) => (
 
 TemplateCardVisualization.propTypes = {
   isLoading: PropTypes.bool,
-  templateData: PropTypes.arrayOf(
+  data: PropTypes.arrayOf(
     PropTypes.shape({
       year: PropTypes.number,
       ridership: PropTypes.number,
@@ -84,9 +84,9 @@ class TemplateCard extends Component {
   }
 
   render() {
-    const { isLoading, templateData, children } = this.props;
+    const { isLoading, data, children } = this.props;
 
-    return children({ isLoading, templateData, templateCardFull });
+    return children({ isLoading, data, card: templateCardFull });
   }
 }
 
@@ -95,14 +95,14 @@ TemplateCard.displayName = "TemplateCard";
 TemplateCard.propTypes = {
   init: PropTypes.func,
   isLoading: PropTypes.bool,
-  templateData: PropTypes.arrayOf(PropTypes.object),
+  data: PropTypes.arrayOf(PropTypes.shape({})),
   children: PropTypes.node
 };
 
 export default connect(
   state => ({
     isLoading: isTemplateDataPending(state),
-    templateData: getTemplateData(state)
+    data: getTemplateData(state)
   }),
   dispatch => ({
     init() {

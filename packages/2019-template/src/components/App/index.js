@@ -1,10 +1,13 @@
 import React from "react";
 
 import { cx, css } from "emotion";
-import { PageLayout, PullQuote } from "@hackoregon/component-library";
+import {
+  PageLayout,
+  PullQuote,
+  CivicCardLayoutClassic
+} from "@hackoregon/component-library";
 
 import TemplateCard from "../TemplateCard/index";
-import ClassicCard from "../TemplateCard/ClassicCard";
 
 import "@hackoregon/component-library/assets/global.styles.css";
 
@@ -66,7 +69,7 @@ const App = () => (
       </p>
     </section>
     <section className={sectionMarginMedium}>
-      <TemplateCard layout={ClassicCard} />
+      <TemplateCard layout={CivicCardLayoutClassic} />
     </section>
   </PageLayout>
 );
