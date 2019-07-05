@@ -1,5 +1,7 @@
+// To be moved to component library
 import React from "react";
 import PropTypes from "prop-types";
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { cx, css } from "emotion";
 import { PullQuote, Placeholder } from "@hackoregon/component-library";
 

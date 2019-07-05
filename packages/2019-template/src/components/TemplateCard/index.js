@@ -1,11 +1,8 @@
 import React from "react";
-
 import TemplateCard from "./TemplateCard";
-import ClassicCard from "./ClassicCard";
+import CivicFlexCard from "./CivicFlexCard";
 
-const ConnectedTemplateCardClassic = () => (
-  // eslint-disable-next-line react/no-children-prop
-  <TemplateCard children={ClassicCard} />
+// eslint-disable-next-line react/prop-types
+export default ({ layout }) => (
+  <CivicFlexCard card={TemplateCard} layout={layout} />
 );
-
-export default ConnectedTemplateCardClassic;
