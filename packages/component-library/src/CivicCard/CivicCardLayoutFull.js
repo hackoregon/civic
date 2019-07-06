@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { cx, css } from "emotion";
 import PullQuote from "../PullQuote/PullQuote";
 import Placeholder from "../Placeholder/Placeholder";
+import CivicVictoryTheme from "../VictoryTheme/CivicVictoryTheme";
 
 const sectionMarginSmall = css`
   display: block;
@@ -23,12 +24,35 @@ const sectionMaxWidthMedium = css`
   max-width: 900px;
 `;
 
-function Chip({ tag }) {
-  return <span>{` #${tag} `}</span>;
+const authorPhoto = css`
+  width: 50%;
+  filter: grayscale(100%);
+`;
+
+function Chip({ tag, index }) {
+  return (
+    <span
+      className={css`
+        display: inline-block;
+        padding: 0 2em;
+        height: 2em;
+        line-height: 2em;
+        border-radius: 1em;
+        background-color: ${CivicVictoryTheme.group.colorScale[
+          index % CivicVictoryTheme.group.colorScale.length
+        ]};
+        margin: 0 0.5em;
+        font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
+        font-weight: bold;
+        color: white;
+      `}
+    >{`#${tag}`}</span>
+  );
 }
 
 Chip.propTypes = {
-  tag: PropTypes.string
+  tag: PropTypes.string,
+  index: PropTypes.number
 };
 
 function Resource({ item }) {
@@ -51,8 +75,8 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
     <React.Fragment>
       <div className={cx(sectionMarginSmall, sectionMaxWidthSmall)}>
         <h1>{cardMeta.title}</h1>
-        {cardMeta.tags.map(tag => (
-          <Chip tag={tag} />
+        {cardMeta.tags.map((tag, index) => (
+          <Chip tag={tag} index={index} />
         ))}
         {cardMeta.introText}
         {cardMeta.selector}
@@ -64,9 +88,9 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
         {cardMeta.additionalText}
         <PullQuote quoteText={cardMeta.shareText} />
         <h2>About this analysis</h2>
-        <p>{cardMeta.analysis}</p>
+        {cardMeta.analysis}
         <h2>About this data</h2>
-        <p>{cardMeta.metadata}</p>
+        {cardMeta.metadata}
         <h2>Links and resources</h2>
         <ul>
           {cardMeta.resources.map(item => (
@@ -74,9 +98,13 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
           ))}
         </ul>
         <h2>Who made this?</h2>
-        <Placeholder>
-          <h3>Beautiful team members photos here!</h3>
-        </Placeholder>
+        {cardMeta.authors.map(photo => (
+          <img
+            className={authorPhoto}
+            src={photo}
+            alt="Pictures of people who worked on this"
+          />
+        ))}
         <h2>Help make this better</h2>
         <p>
           You can help make this better! Whether you noticed a typo, think you

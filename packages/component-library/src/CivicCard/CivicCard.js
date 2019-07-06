@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import CivicCardLayoutClassic from "./CivicCardLayoutClassic";
+import CivicCardLayoutFull from "./CivicCardLayoutClassic";
 
 const CivicCard = ({ card, layout }) => React.createElement(card, {}, layout);
 
@@ -10,7 +10,7 @@ CivicCard.propTypes = {
 };
 
 CivicCard.defaultProps = {
-  layout: CivicCardLayoutClassic
+  layout: CivicCardLayoutFull
 };
 
 export default CivicCard;
