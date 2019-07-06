@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { css } from "emotion";
+import { get } from "lodash";
+import { Link } from "react-router";
 import CivicStoryFooter from "./CivicStoryFooter";
 import Logo from "../Logo/Logo";
 
@@ -85,6 +87,11 @@ const CivicStoryCard = ({
   watermark
 }) => {
   let content = children;
+  const routeOrUndefined =
+    `${get(window, "location.origin", "")}/cards/${slug}` ===
+    get(window, "location.href", "")
+      ? undefined
+      : `/cards/${slug}`;
   if (loading) {
     content = (
       <div className={cardLoading}>
@@ -121,7 +128,11 @@ const CivicStoryCard = ({
           </svg>
         )}
       </div>
-      {title ? <h2 className={titleClass}>{title}</h2> : null}
+      {title ? (
+        <Link to={routeOrUndefined}>
+          <h2 className={titleClass}>{title}</h2>
+        </Link>
+      ) : null}
       <div className={descriptionClass}>{content}</div>
       {footer && <CivicStoryFooter slug={slug} source={source} />}
     </div>

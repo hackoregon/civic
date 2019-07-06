@@ -41,7 +41,7 @@ function Chip({ tag, index }) {
         background-color: ${CivicVictoryTheme.group.colorScale[
           index % CivicVictoryTheme.group.colorScale.length
         ]};
-        margin: 0 0.5em;
+        margin: 0.5em 0.5em;
         font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
         font-weight: bold;
         color: white;
