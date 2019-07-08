@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import compareValues from "../utils/compareValues";
 import {
   VictoryAxis,
   VictoryBar,
@@ -28,13 +29,15 @@ const HorizontalBarChart = ({
   yLabel,
   dataValueFormatter,
   dataLabelFormatter,
-  minimalist
+  minimalist,
+  sortBy
 }) => {
   const barData =
     sortOrder && sortOrder.length
       ? data
-      : data.map((d, index) => {
-          return { ...d, defaultSort: index + 1 };
+      : data.sort(compareValues(dataValue, sortBy)).map((d, index) => {
+          const sort = (sortBy = "Ascending" ? index + 1 : (index + 1) * -1); // Bar chart sorts bottom up
+          return { ...d, defaultSort: sort };
         });
   const sortOrderKey =
     sortOrder && sortOrder.length ? sortOrder : "defaultSort";
@@ -145,13 +148,16 @@ const HorizontalBarChart = ({
             />
           }
           domainPadding={0}
-          data={barData.map(d => ({
-            sortOrder: d[sortOrderKey],
-            dataValue: d[dataValue],
-            label: `${dataLabelFormatter(d[dataLabel])}: ${dataValueFormatter(
-              d[dataValue]
-            )}`
-          }))}
+          data={barData.map(d =>
+            // console.log(d),
+            ({
+              sortOrder: d[sortOrderKey],
+              dataValue: d[dataValue],
+              label: `${dataLabelFormatter(d[dataLabel])}: ${dataValueFormatter(
+                d[dataValue]
+              )}`
+            })
+          )}
           style={{
             data: { fill: "none" }
           }}
@@ -197,7 +203,8 @@ HorizontalBarChart.defaultProps = {
   yLabel: "Y",
   dataValueFormatter: civicFormat.numeric,
   dataLabelFormatter: civicFormat.unformatted,
-  minimalist: false
+  minimalist: false,
+  sortBy: "Descending"
 };
 
 export default HorizontalBarChart;

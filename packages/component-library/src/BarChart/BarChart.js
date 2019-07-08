@@ -96,6 +96,13 @@ const BarChart = ({
               d[dataKey]
             )} • ${yLabel}: ${yNumberFormatter(d[dataValue])}`
           }))}
+          // data={[
+          //   { ye: 1994, population: 2000 },
+          //   { ye: 1995, population: 8000 },
+          //   { ye: 1996, population: 6000 },
+          //   { ye: 1997, population: 3000 },
+          //   { ye: 1998, population: 1000 }
+          // ]}
           events={chartEvents}
           x="dataKey"
           y="dataValue"

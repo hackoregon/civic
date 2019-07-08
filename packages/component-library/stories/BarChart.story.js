@@ -109,24 +109,64 @@ export default () =>
         );
         const dataKey = text("Data key", "ye", GROUP_IDS.DATA);
         const dataValue = text("Data values", "population", GROUP_IDS.DATA);
-        const data = object(
-          "Data",
-          [
-            { ye: 1994, population: 2000 },
-            { ye: 1995, population: 8000 },
-            { ye: 1996, population: 6000 },
-            { ye: 1997, population: 3000 },
-            { ye: 1998, population: 1000 }
-          ],
-          GROUP_IDS.DATA
-        );
         const barWidth = number("Bar width", 37, {}, GROUP_IDS.CUSTOM);
         const loading = boolean("Loading", false, GROUP_IDS.CUSTOM);
         const error = boolean("Error", false, GROUP_IDS.CUSTOM);
 
+        // const data = object(
+        //   "Data",
+        //   [
+        //     { ye: 1994, population: 2000 },
+        //     { ye: 1995, population: 8000 },
+        //     { ye: 1996, population: 6000 },
+        //     { ye: 1997, population: 3000 },
+        //     { ye: 1998, population: 1000 }
+        //   ],
+        //   GROUP_IDS.DATA
+        // );
+
+        const dataList = [
+          { ye: 1994, population: 2000 },
+          { ye: 1995, population: 8000 },
+          { ye: 1996, population: 6000 },
+          { ye: 1997, population: 3000 },
+          { ye: 1998, population: 1000 }
+        ];
+
+        const data = object(
+          "Data",
+          dataList.sort(compareValues("population")),
+          GROUP_IDS.DATA
+        );
+
+        function compareValues(key, order = "asc") {
+          return function(a, b) {
+            if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+              return 0;
+            }
+
+            const varA =
+              typeof a[key] === "string" ? a[key].toUpperCase() : a[key];
+            const varB =
+              typeof b[key] === "string" ? b[key].toUpperCase() : b[key];
+
+            let comparison = 0;
+            if (varA > varB) {
+              comparison = 1;
+            } else if (varA < varB) {
+              comparison = -1;
+            }
+            return order == "desc" ? comparison * -1 : comparison;
+          };
+        }
+
+        console.clear();
+        console.log(getKeyNames(civicFormat));
+        console.log(data.sort(compareValues("population")));
+
         return (
           <BarChart
-            data={data}
+            data={data.sort(compareValues("population"))}
             dataKey={dataKey}
             dataValue={dataValue}
             title={title}
