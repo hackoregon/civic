@@ -10,6 +10,7 @@ import {
   optionsKnob as options
 } from "@storybook/addon-knobs";
 import civicFormat from "../src/utils/civicFormat";
+import compareValues from "../src/utils/compareValues";
 
 import { getKeyNames } from "./shared";
 import notes from "./barchart.notes.md";
@@ -109,24 +110,27 @@ export default () =>
         );
         const dataKey = text("Data key", "ye", GROUP_IDS.DATA);
         const dataValue = text("Data values", "population", GROUP_IDS.DATA);
-        const data = object(
-          "Data",
-          [
-            { ye: 1994, population: 2000 },
-            { ye: 1995, population: 8000 },
-            { ye: 1996, population: 6000 },
-            { ye: 1997, population: 3000 },
-            { ye: 1998, population: 1000 }
-          ],
-          GROUP_IDS.DATA
-        );
         const barWidth = number("Bar width", 37, {}, GROUP_IDS.CUSTOM);
         const loading = boolean("Loading", false, GROUP_IDS.CUSTOM);
         const error = boolean("Error", false, GROUP_IDS.CUSTOM);
 
+        const dataList = [
+          { ye: 1994, population: 2000 },
+          { ye: 1995, population: 8000 },
+          { ye: 1996, population: 6000 },
+          { ye: 1997, population: 3000 },
+          { ye: 1998, population: 1000 }
+        ];
+
+        const data = object(
+          "Data",
+          dataList.sort(compareValues("population")),
+          GROUP_IDS.DATA
+        );
+
         return (
           <BarChart
-            data={data}
+            data={data.sort(compareValues("population"))}
             dataKey={dataKey}
             dataValue={dataValue}
             title={title}
