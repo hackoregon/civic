@@ -130,7 +130,7 @@ export default () =>
 
         return (
           <BarChart
-            data={data.sort(compareValues("population"))}
+            data={data}
             dataKey={dataKey}
             dataValue={dataValue}
             title={title}
