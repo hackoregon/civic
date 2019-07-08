@@ -9,6 +9,7 @@ import {
   VictoryTooltip,
   VictoryStack
 } from "victory";
+import compareValues from "../utils/compareValues";
 import SimpleLegend from "../SimpleLegend";
 import ChartContainer from "../ChartContainer";
 import civicFormat from "../utils/civicFormat";
@@ -41,7 +42,8 @@ const HorizontalBarChart = ({
   hundredPercentData,
   dataSeriesKey,
   dataSeriesLabel,
-  legendComponent
+  legendComponent,
+  sortBy
 }) => {
   const groupedDataIfStacked = () => {
     if (stacked) {
@@ -60,8 +62,9 @@ const HorizontalBarChart = ({
   const barData =
     sortOrder && sortOrder.length
       ? data
-      : data.map((d, index) => {
-          return { ...d, defaultSort: index + 1 };
+      : data.sort(compareValues(dataValue, sortBy)).map((d, index) => {
+          const sort = (sortBy === "Ascending" ? index + 1 : (index + 1) * -1); // Bar chart sorts bottom up
+          return { ...d, defaultSort: sort };
         });
   const sortOrderKey =
     sortOrder && sortOrder.length ? sortOrder : "defaultSort";
@@ -284,7 +287,8 @@ HorizontalBarChart.propTypes = {
   hundredPercentData: PropTypes.bool,
   dataSeriesKey: PropTypes.string,
   dataSeriesLabel: PropTypes.shape({}),
-  legendComponent: PropTypes.func
+  legendComponent: PropTypes.func,
+  sortBy: PropTypes.string
 };
 
 HorizontalBarChart.defaultProps = {
@@ -304,7 +308,8 @@ HorizontalBarChart.defaultProps = {
   hundredPercentData: false,
   dataSeriesKey: null,
   dataSeriesLabel: {},
-  legendComponent: null
+  legendComponent: null,
+  sortBy: "Descending"
 };
 
 export default HorizontalBarChart;

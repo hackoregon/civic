@@ -7,11 +7,13 @@ import {
   text,
   object,
   boolean,
+  select,
   optionsKnob as options
 } from "@storybook/addon-knobs";
 import { HorizontalBarChart, civicFormat } from "../src";
 import { getKeyNames } from "./shared";
 import notes from "./horizontalBarChart.notes.md";
+import compareValues from "../src/utils/compareValues";
 
 const GROUP_IDS = {
   LABELS: "Labels",
@@ -33,6 +35,12 @@ export default () =>
           { population: 3000, label: "Afghan Hound" },
           { population: 1000, label: "Jack Russell Terrier" }
         ];
+        const sortBy = select(
+          "Sort By: ",
+          ["Ascending", "Descending"],
+          "Descending",
+          GROUP_IDS.DATA
+        );
         const title = text("Title", "Dogs and their Money", GROUP_IDS.LABELS);
         const subtitle = text(
           "Subtitle",
@@ -63,6 +71,7 @@ export default () =>
             xLabel={xLabel}
             yLabel={yLabel}
             dataValueFormatter={x => civicFormat[optionSelectX](x)}
+            sortBy={sortBy} // Take a compare function as a prop, default ascending. See dataValueFormatter
           />
         );
       },
