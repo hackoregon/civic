@@ -1,37 +1,42 @@
 /** @jsx jsx */
 import { Component } from "react";
-import PropTypes from "prop-types";
 import { jsx, css } from "@emotion/core";
+import RadialGauge from "./RadialGauge";
 
-const defaultStyle = css`
-  height: 30px;
-  width: 30px;
-  border-radius: 15px;
-  background-color: blue;
+const orbContainerStyle = css`
+  position: relative;
+`;
+
+const circleDefaultStyle = css`
+  transition: transform 1s;
   position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 10;
+  background-color: mediumSeaGreen;
+  transition: background-color 1000ms linear;
   cursor: pointer;
   opacity: 0.8;
+
   &:hover {
     opacity: 1;
   }
-`;
 
-const pressStyle = css`
-  background-color: #000;
-  -webkit-transition: background-color 1000ms linear;
-  -ms-transition: background-color 1000ms linear;
-  transition: background-color 1000ms linear;
+  &.circle-press-style {
+    background-color: mediumAquamarine;
+    transition: background-color 1000ms linear;
+  }
 `;
 
 const defaultState = {
   durationRequired: 1000,
+  orbSize: 60,
   animationState: null,
   pressTimeout: null,
   pressedStart: null,
   animationFrame: null
 };
 
-// Note: onTouchStart and onTouchEnd are not tested
 class Orb extends Component {
   constructor(props) {
     super(props);
@@ -62,23 +67,24 @@ class Orb extends Component {
       window.cancelAnimationFrame(animationFrame);
       clearTimeout(pressTimeout);
       /* We keep setState() in a conditional in case of a mouseLeave when the orb had not been pressed to avoid unnecessary setState() calls */
-      this.setState(() => defaultState);
+      this.setState(defaultState);
     }
   };
 
   doPressAnimation = () => {
+    // eslint-disable-next-line no-unused-vars
     const { animationState, durationRequired } = this.state;
     const newAnimationFrame = window.requestAnimationFrame(() => {
       console.log("Do press animation");
     });
     const pressTimeout = setTimeout(this.handleOrbRelease, durationRequired);
 
-    this.setState(() => ({
+    this.setState({
       animationState: "pressing",
       pressedStart: new Date(),
       animationFrame: newAnimationFrame,
       pressTimeout
-    }));
+    });
   };
 
   doFullDurationAnimation = () => {
@@ -86,35 +92,48 @@ class Orb extends Component {
   };
 
   render() {
-    const { x, y } = this.props;
-    const { animationState } = this.state;
-    // const location = css`
-    //   top: ${y}px;
-    //   left: ${x}px;
-    // `;
+    const { animationState, orbSize } = this.state;
+
+    const circleSizeStyle = css`
+      height: ${orbSize}px;
+      width: ${orbSize}px;
+      border-radius: ${orbSize}px;
+    `;
+
+    const orbSizeStyle = css`
+      height: ${orbSize + 20}px;
+      width: ${orbSize + 20}px;
+      border-radius: ${orbSize + 20}px;
+    `;
 
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
       <div
+        css={css`
+          ${orbContainerStyle};
+          ${orbSizeStyle}
+        `}
         onMouseDown={this.handleOrbPress}
         onMouseUp={this.handleOrbRelease}
         onMouseLeave={this.handleOrbRelease}
         onTouchStart={this.handleOrbPress}
         onTouchEnd={this.handleOrbRelease}
-        css={css`
-          /* ${location}; */
-          ${defaultStyle};
-          ${animationState === "pressing" && pressStyle}
-        `}
-      />
+      >
+        <RadialGauge
+          animateGauge={animationState === "pressing"}
+          orbSize={orbSize}
+        />
+        <div
+          css={css`
+            ${circleDefaultStyle};
+            ${circleSizeStyle}
+          `}
+          className={animationState ? "circle-press-style" : ""}
+        />
+      </div>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
   }
 }
-
-Orb.propTypes = {
-  x: PropTypes.number,
-  y: PropTypes.number
-};
 
 export default Orb;
