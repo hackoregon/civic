@@ -1,5 +1,6 @@
 /* eslint-disable import/no-named-as-default */
 import React from "react";
+import { Link } from "react-router";
 import styled from "styled-components";
 
 import "@hackoregon/component-library/assets/global.styles.css";

@@ -1,11 +1,28 @@
 import { createReducer, createSelector } from "redux-starter-kit";
+import find from "lodash/find";
+import size from "lodash/size";
+
+import CHAPTER_FACTORY from "./factories/ChapterFactory";
+import CHAPTERS from "../constants/chapters";
 
 // INITIAL STATE
 
+// build the Chapters model. Each Chapter is a simple data model
+// consisting of title, enabled, and type properties.
+const model = {};
+for (let i = 1, len = size(CHAPTERS); i <= len; i += 1) {
+  const chapterModel = CHAPTER_FACTORY.createChapter({ index: i });
+  model[i] = chapterModel;
+}
+
+// find the first chapter with 'enabled' true
+const firstActiveChapter = find(model, chapter => {
+  return chapter.enabled;
+});
+
 const initialState = {
-  chapters: { 0: { title: "Attractor" } },
-  chaptersOrder: [0, 1, 2, 3, 4, 5, 6],
-  activeChapter: 0
+  ...model,
+  activeChapter: firstActiveChapter.id
 };
 
 // CONSTANTS
@@ -16,7 +33,6 @@ export const actionTypes = {
 
 // ACTIONS
 
-// FETCH CHAPTER
 export const setActiveChapter = chapterId => dispatch => {
   dispatch({ type: actionTypes.SET_ACTIVE_CHAPTER, chapterId });
 };
@@ -30,10 +46,6 @@ export const chapters = createReducer(initialState, {
 });
 
 export default chapters;
-
-// MODELS
-
-const model = {};
 
 // SELECTORS
 
