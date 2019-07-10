@@ -34,7 +34,7 @@ TemplateCardVisualization.propTypes = {
   )
 };
 
-const templateCardFull = {
+const templateCardMeta = {
   title: "(Story Card #1, Issue #000) Template Card Title",
   slug: "template-card",
   introText: (
@@ -167,7 +167,7 @@ class TemplateCard extends Component {
   render() {
     const { isLoading, data, children } = this.props;
 
-    return children({ isLoading, data, cardMeta: templateCardFull });
+    return children({ isLoading, data, cardMeta: templateCardMeta });
   }
 }
 
