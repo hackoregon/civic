@@ -46,8 +46,6 @@ class BaseMap extends Component {
       y: null,
       mounted: false
     };
-    this.onViewportChange = this.onViewportChange.bind(this);
-    this.onHover = this.onHover.bind(this);
     this.mapRef = createRef();
   }
 
@@ -73,10 +71,9 @@ class BaseMap extends Component {
         }
       });
 
-      this.setState({
-        // eslint-disable-next-line
-        viewport: { ...this.state.viewport, ...updatedViewportProps }
-      });
+      this.setState(prevState => ({
+        viewport: { ...prevState.viewport, ...updatedViewportProps }
+      }));
     }
   }
 
@@ -107,20 +104,19 @@ class BaseMap extends Component {
     }
   }
 
-  onHover({ object, x, y }) {
+  onHover = ({ object, x, y }) => {
     this.setState({
       tooltipInfo: object,
       x,
       y
     });
-  }
+  };
 
-  onViewportChange(viewport) {
-    this.setState({
-      // eslint-disable-next-line
-      viewport: { ...this.state.viewport, ...viewport }
-    });
-  }
+  onViewportChange = viewport => {
+    this.setState(prevState => ({
+      viewport: { ...prevState.viewport, ...viewport }
+    }));
+  };
 
   render() {
     const { viewport, tooltipInfo, x, y, mounted } = this.state;
