@@ -175,9 +175,9 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
         <h2>Help make this better</h2>
         <p>
           CIVIC is an open platform, so you can help make this better! Whether
-          you noticed a typo, think you have an improvement for our data
-          visualization, or some additional context to add about the dataset, we
-          want you to contribute.
+          you noticed a typo, want to suggest an improvement for our data
+          visualization, or have context to add about the dataset, we want you
+          to contribute.ZZ
           <ul>
             <li>
               <a href="https://civicsoftwarefoundation.org/#volunteers">

@@ -10,6 +10,7 @@
     "start:prod": "yarn run build && cross-env NODE_ENV=production node server",
     "build": "rimraf dist && cross-env NODE_ENV=production webpack --progress --config ./webpack.config.js",
     "test": "cross-env BABEL_ENV=test mocha --opts ./mocha.opts 'src/**/*.test.js'",
+    "test:watch": "yarn run test -- -w",    
     "lint": "eslint src"
   },
   "repository": {
