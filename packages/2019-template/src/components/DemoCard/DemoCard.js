@@ -76,7 +76,7 @@ const demoCardMeta = {
     </Fragment>
   ),
   shareText:
-    "TriMet has cited economic displacement as a main driver of ridership loss.",
+    "TriMet has cited economic displacement as a main driver of ridership loss",
   tags: [
     "Transportation",
     "Housing",
