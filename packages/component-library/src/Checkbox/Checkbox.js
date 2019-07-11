@@ -5,8 +5,15 @@ import PropTypes from "prop-types";
 import MaterialCheckbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 
+/*
 const checkboxClass = props => css`
   background: ${props.bkgndColor};
+  cursor: pointer;
+`;
+*/
+
+const checkboxClass = css`
+  background: #fff;
   cursor: pointer;
 `;
 
