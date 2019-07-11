@@ -63,15 +63,17 @@ $ cd civic
 # Sets your Node.js version to match what the project uses.
 $ nvm use
 
-# Note for next two steps, if you get an error, keep trying the same command again.
-
 # Installs all package dependencies and links cross-dependencies.
+# Also builds the component library
+$ yarn bootstrap
+
+# This can take a while (approximately 5mins), so grab some coffee☕️, tea🍵 or another beverage of your choosing.
+
+# If you're getting an error like this one: "Your lockfile needs to be updated, but yarn was run with `--frozen-lockfile`",
+# you may consider running
 $ yarn install
-
-# This will build all packages. Since some packages are used internally, they need to be built before the dependent packages are worked on.
-$ yarn build
-
-# Take a pizza break! 🍕! This takes a while, but only needs to run at the project root once.
+# and then
+$ yarn bootstrap
 ```
 
 ## Setting up your text editor

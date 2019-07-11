@@ -42,12 +42,18 @@ class Definition extends React.Component {
       pitInitialValue: "PIT Survey"
     };
   }
+
   componentDidMount() {
     this.props.loadData();
   }
+
   render() {
     return (
-      <CivicStoryCard title="What does it mean to be homeless?">
+      <CivicStoryCard
+        footer={false}
+        watermark={<div />}
+        title="What does it mean to be homeless?"
+      >
         <div>
           <DefinitionPieChart
             data={this.props.shelterTypeData.filter(item => item.year !== 2009)}

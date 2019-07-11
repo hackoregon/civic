@@ -1,9 +1,0 @@
-.Actions {
-  padding: 24px;
-  display: flex;
-  justify-content: center;
-}
-
-.Actions div:first-child {
-  margin-right: 32px;
-}

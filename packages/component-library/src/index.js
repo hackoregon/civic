@@ -6,11 +6,10 @@ export {
 export { default as BarChart } from "./BarChart/BarChart";
 export { default as LineChart } from "./LineChart/LineChart";
 export { default as Button } from "./Button/Button";
-export { default as StoryCard } from "./StoryCard/StoryCard";
 export { default as CivicStoryCard } from "./CivicStoryCard/CivicStoryCard";
 export { default as PageLayout } from "./PageLayout/PageLayout";
 export { default as PieChart } from "./PieChart/PieChart";
-export { default as Slider } from "./Slider/Slider";
+export { default as Slider } from "./Slider";
 export { default as Footer } from "./Footer/Footer";
 export { default as ScrollToTop } from "./ScrollToTop/ScrollToTop";
 export { default as Header } from "./Navigation/Header";
@@ -36,6 +35,7 @@ export { default as MapOverlay } from "./MapOverlay/MapOverlay";
 export { default as BoundaryMap } from "./BoundaryMap/BoundaryMap";
 export { default as MapTooltip } from "./MapTooltip/MapTooltip";
 export { default as CivicSandboxMap } from "./CivicSandboxMap/CivicSandboxMap";
+export { default as MultiLayerMap } from "./MultiLayerMap/MultiLayerMap";
 export { default as GradientScale } from "./GradientScale/GradientScale";
 export {
   default as PackageSelectorBox

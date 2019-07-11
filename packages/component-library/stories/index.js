@@ -9,7 +9,7 @@ import boundaryMapStory from "./BoundaryMap.story";
 import buttonStory from "./Button.story";
 import civicCardStackStory from "./CivicCardStack.story";
 import civicSandboxDashboardStory from "./CivicSandboxDashboard.story";
-import civicSandboxMapStory from "./CivicSandboxMap.story";
+import multiLayerMapStory from "./MultiLayerMap.story";
 import civicStorycardStory from "./CivicStoryCard.story";
 import dataTable from "./DataTable.story";
 import dropdownStory from "./DropdownMenu.story";
@@ -58,9 +58,6 @@ import TypographyStyleParagraphs from "./styleGuideStories/TypographyStyleParagr
 import UIComponentsStyle from "./styleGuideStories/UIComponentsStyle.story";
 
 // Legacy components used in 2017 package. Not supported for ongoing development.
-// import storycardStory from './StoryCard.story';
-// import storyLinkStory from './StoryLink.story';
-// import storyFooterStory from './StoryFooter.story';
 // import editableStory from './Editable.story';
 // import landingPage from './LandingPage.story';
 
@@ -132,13 +129,13 @@ storiesOf("Component Lib|Maps", module)
   .add("Maps Style Guide", () => <MapsStyle />);
 baseMapStory();
 boundaryMapStory();
-civicSandboxMapStory();
 heatMapStory();
 iconMapStory();
 mapOverlayStory();
 pathMapStory();
 scatterPlotMapStory();
 screenGridMapStory();
+multiLayerMapStory();
 
 // Civic platform components and page layout
 storiesOf("Component Lib|CIVIC Platform", module)
@@ -159,7 +156,4 @@ sandboxStory();
 // Legacy components used in 2017 package. Not supported for ongoing development.
 // editableStory();
 // landingPage();
-// storyLinkStory();
-// storyFooterStory();
-// storycardStory();
 // sankeyStory();
