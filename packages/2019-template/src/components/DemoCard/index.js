@@ -6,7 +6,9 @@ import demoCardMeta from "./DemoCard";
 import { fetchDemoData } from "../../state/demo-data/actions";
 import {
   isDemoDataPending,
-  getDemoData
+  getDemoData,
+  getMidGentrificationRidershipData,
+  getLateGentrificationRidershipData
 } from "../../state/demo-data/selectors";
 
 class DemoCard extends Component {
@@ -35,7 +37,11 @@ DemoCard.propTypes = {
 export default connect(
   state => ({
     isLoading: isDemoDataPending(state),
-    data: getDemoData(state)
+    data: {
+      demoData: getDemoData(state),
+      midData: getMidGentrificationRidershipData(state),
+      lateData: getLateGentrificationRidershipData(state)
+    }
   }),
   dispatch => ({
     init() {
