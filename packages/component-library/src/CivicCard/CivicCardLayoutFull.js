@@ -2,9 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { cx, css } from "emotion";
+import _ from "lodash";
 import PullQuote from "../PullQuote/PullQuote";
 import Placeholder from "../Placeholder/Placeholder";
 import CivicVictoryTheme from "../VictoryTheme/CivicVictoryTheme";
+import { Collapsable } from "../../dist";
 
 const sectionMarginSmall = css`
   display: block;
@@ -27,6 +29,7 @@ const sectionMaxWidthMedium = css`
 const authorPhoto = css`
   width: 50%;
   filter: grayscale(100%);
+  cursor: pointer;
 `;
 
 function Chip({ tag, index }) {
@@ -45,6 +48,7 @@ function Chip({ tag, index }) {
         font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
         font-weight: bold;
         color: white;
+        cursor: pointer;
       `}
     >{`#${tag}`}</span>
   );
@@ -56,7 +60,9 @@ Chip.propTypes = {
 };
 
 function Resource({ item }) {
-  return (
+  return _.has(item, "section") ? (
+    <h3>{item.section}</h3>
+  ) : (
     <li>
       <a href={item.link}>{item.description}</a>
     </li>
@@ -70,14 +76,60 @@ Resource.propTypes = {
   })
 };
 
+function MetadataQuestion({ item }) {
+  return _.has(item, "section") ? (
+    <h3>{item.section}</h3>
+  ) : (
+    item.answer.length > 0 && (
+      <p>
+        <h4
+          className={css`
+            line-height: 0;
+          `}
+        >
+          {item.question}
+        </h4>
+        {item.answer}
+      </p>
+    )
+  );
+}
+
+MetadataQuestion.propTypes = {
+  item: PropTypes.shape({
+    question: PropTypes.string,
+    answer: PropTypes.string
+  })
+};
+
+function CollapsableSection({ items, collapseAfter }) {
+  const beforeFold = _.slice(items, 0, collapseAfter);
+  const afterFold = _.slice(items, collapseAfter);
+  return (
+    <Collapsable>
+      <Collapsable.Section>{beforeFold}</Collapsable.Section>
+      {afterFold.length > 0 && (
+        <Collapsable.Section hidden>{afterFold}</Collapsable.Section>
+      )}
+    </Collapsable>
+  );
+}
+
+CollapsableSection.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.node),
+  collapseAfter: PropTypes.number
+};
+
 function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
   return (
     <React.Fragment>
       <div className={cx(sectionMarginSmall, sectionMaxWidthSmall)}>
         <h1>{cardMeta.title}</h1>
+        <hr />
         {cardMeta.tags.map((tag, index) => (
           <Chip tag={tag} index={index} />
         ))}
+        <hr />
         {cardMeta.introText}
         {cardMeta.selector}
       </div>
@@ -85,18 +137,38 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
         <cardMeta.visualization isLoading={isLoading} data={data} />
       </div>
       <div className={cx(sectionMarginSmall, sectionMaxWidthSmall)}>
-        {cardMeta.additionalText}
         <PullQuote quoteText={cardMeta.shareText} />
+        {cardMeta.additionalText}
+        <hr />
         <h2>About this analysis</h2>
         {cardMeta.analysis}
+        <hr />
         <h2>About this data</h2>
         {cardMeta.metadata}
+        {_.has(cardMeta, "metadataQA") && (
+          <CollapsableSection
+            items={cardMeta.metadataQA.map(item => (
+              <MetadataQuestion item={item} />
+            ))}
+            collapseAfter={5}
+          />
+        )}
+        <hr />
         <h2>Links and resources</h2>
+        <p>
+          Interested in learning more? The following links and resources are
+          useful in gaining a greater understanding of the context of this data
+          visualization.
+        </p>
         <ul>
-          {cardMeta.resources.map(item => (
-            <Resource item={item} />
-          ))}
+          <CollapsableSection
+            items={cardMeta.resources.map(item => (
+              <Resource item={item} />
+            ))}
+            collapseAfter={7}
+          />
         </ul>
+        <hr />
         <h2>Who made this?</h2>
         {cardMeta.authors.map(photo => (
           <img
@@ -105,16 +177,29 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
             alt="Pictures of people who worked on this"
           />
         ))}
+        <hr />
         <h2>Help make this better</h2>
         <p>
-          You can help make this better! Whether you noticed a typo, think you
-          have an improvement for our data visualization, or some additional
-          context to add about the dataset, we want you to contribute! Get
-          started by filling out this form!
+          CIVIC is an open platform, so you can help make this better! Whether
+          you noticed a typo, think you have an improvement for our data
+          visualization, or some additional context to add about the dataset, we
+          want you to contribute.
+          <ul>
+            <li>
+              <a href="https://civicsoftwarefoundation.org/#volunteers">
+                Get Started!
+              </a>
+            </li>
+          </ul>
         </p>
-        <h2>Explore related cards</h2>
+        <hr />
+        <h2>Explore related data</h2>
         <Placeholder>
-          <h3>Thumbnails of other related cards here</h3>
+          <h3>
+            <a href="https://civicsoftwarefoundation.org/#cities">
+              See your data here!
+            </a>
+          </h3>
         </Placeholder>
       </div>
     </React.Fragment>
