@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { cx, css } from "emotion";
@@ -81,16 +81,10 @@ function MetadataQuestion({ item }) {
     <h3>{item.section}</h3>
   ) : (
     item.answer.length > 0 && (
-      <p>
-        <h4
-          className={css`
-            line-height: 0;
-          `}
-        >
-          {item.question}
-        </h4>
-        {item.answer}
-      </p>
+      <Fragment>
+        <h4>{item.question}</h4>
+        <p>{item.answer}</p>
+      </Fragment>
     )
   );
 }
