@@ -39,7 +39,7 @@ If there is a configuration of the component that has been used in a project, an
 
 ## Knobs
 
-The Knobs addon lets you sets data e and change its values for that component. Knobs are provided for each prop that can be modified in a story. See the example stories above.
+The Knobs addon lets you set data and change its values for that component. Knobs are provided for each prop that can be modified in a story. See the example stories above.
 
 This helps during both development and design; the developer can test the props for results and the designer can configure the component for a particular use.
 
