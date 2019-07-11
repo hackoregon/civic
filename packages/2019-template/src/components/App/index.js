@@ -1,9 +1,16 @@
 import React from "react";
 
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { cx, css } from "emotion";
-import { PageLayout, PullQuote } from "@hackoregon/component-library";
+import {
+  PageLayout,
+  PullQuote,
+  CivicCard,
+  CivicCardLayoutClassic
+} from "@hackoregon/component-library";
 
 import TemplateCard from "../TemplateCard";
+import DemoCard from "../DemoCard";
 
 import "@hackoregon/component-library/assets/global.styles.css";
 
@@ -65,7 +72,10 @@ const App = () => (
       </p>
     </section>
     <section className={sectionMarginMedium}>
-      <TemplateCard />
+      <CivicCard card={TemplateCard} layout={CivicCardLayoutClassic} />
+    </section>
+    <section className={sectionMarginMedium}>
+      <CivicCard card={DemoCard} layout={CivicCardLayoutClassic} />
     </section>
   </PageLayout>
 );

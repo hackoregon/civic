@@ -54,6 +54,13 @@ export { default as SimpleLegend } from "./SimpleLegend/SimpleLegend";
 export { default as ChartTitle } from "./ChartTitle/ChartTitle";
 export { default as ChartContainer } from "./ChartContainer/ChartContainer";
 export { default as CivicCardStack } from "./CivicCardStack/CivicCardStack";
+export { default as CivicCard } from "./CivicCard/CivicCard";
+export {
+  default as CivicCardLayoutFull
+} from "./CivicCard/CivicCardLayoutFull";
+export {
+  default as CivicCardLayoutClassic
+} from "./CivicCard/CivicCardLayoutClassic";
 
 export { default as civicFormat } from "./utils/civicFormat";
 export { default as ungroupBy } from "./utils/ungroupBy";

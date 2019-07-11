@@ -2,14 +2,14 @@ import { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import templateCardMeta from "./TemplateCard";
-import { fetchTemplateData } from "../../state/template-data/actions";
+import demoCardMeta from "./DemoCard";
+import { fetchDemoData } from "../../state/demo-data/actions";
 import {
-  isTemplateDataPending,
-  getTemplateData
-} from "../../state/template-data/selectors";
+  isDemoDataPending,
+  getDemoData
+} from "../../state/demo-data/selectors";
 
-class TemplateCard extends Component {
+class DemoCard extends Component {
   componentDidMount() {
     const { init } = this.props;
     init();
@@ -18,13 +18,13 @@ class TemplateCard extends Component {
   render() {
     const { isLoading, data, children /* cardMeta */ } = this.props;
 
-    return children({ isLoading, data, cardMeta: templateCardMeta });
+    return children({ isLoading, data, cardMeta: demoCardMeta });
   }
 }
 
-TemplateCard.displayName = "TemplateCard";
+DemoCard.displayName = "DemoCard";
 
-TemplateCard.propTypes = {
+DemoCard.propTypes = {
   init: PropTypes.func,
   isLoading: PropTypes.bool,
   data: PropTypes.arrayOf(PropTypes.shape({})),
@@ -34,12 +34,12 @@ TemplateCard.propTypes = {
 
 export default connect(
   state => ({
-    isLoading: isTemplateDataPending(state),
-    data: getTemplateData(state)
+    isLoading: isDemoDataPending(state),
+    data: getDemoData(state)
   }),
   dispatch => ({
     init() {
-      dispatch(fetchTemplateData());
+      dispatch(fetchDemoData());
     }
   })
-)(TemplateCard);
+)(DemoCard);
