@@ -85,8 +85,8 @@ const toggleArrow = css`
 
 const watermarkContainer = css`
   position: absolute;
-  left: 0;
-  top: 0;
+  left: -1px;
+  top: -1px;
 `;
 
 const buttonContainer = css`
