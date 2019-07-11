@@ -81,14 +81,14 @@ function MetadataQuestion({ item }) {
     <h3>{item.section}</h3>
   ) : (
     item.answer.length > 0 && (
+      <h4
+        className={css`
+          line-height: 0;
+        `}
+      >
+        {item.question}
+      </h4>
       <p>
-        <h4
-          className={css`
-            line-height: 0;
-          `}
-        >
-          {item.question}
-        </h4>
         {item.answer}
       </p>
     )
