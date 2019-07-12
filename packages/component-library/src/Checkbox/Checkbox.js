@@ -5,29 +5,10 @@ import PropTypes from "prop-types";
 import MaterialCheckbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 
-/*
-const checkboxClass = props => css`
-  background: ${props.bkgndColor};
-  cursor: pointer;
-
-  display: "block",
-  margin: "12px",
-  accentColor: "#DC4556",
-  bkgndColor: "#FFFFFF",
-  transition: "all .2s ease-in-out"
-
-`;
-*/
-
 const checkboxClass = css`
   background-color: #fff;
   color: #1e62bd;
   cursor: pointer;
-  font-family: serif;
-`;
-
-const labelClass = css`
-  font-family: serif;
 `;
 
 const Checkbox = ({
@@ -53,7 +34,6 @@ const Checkbox = ({
     }
     label={label}
     labelPlacement={labelPlacement}
-    css={labelClass}
   />
 );
 
@@ -61,16 +41,12 @@ Checkbox.displayName = "Checkbox";
 
 Checkbox.propTypes = {
   value: PropTypes.string,
-  // control: PropTypes.func,
   label: PropTypes.string,
   labelPlacement: PropTypes.string,
   checked: PropTypes.bool,
   variant: PropTypes.string,
-  // checkedIcon: PropTypes.node,
   disabled: PropTypes.bool,
-  // icon: PropTypes.node,
   onChange: PropTypes.func
-  // type: PropTypes.string
 };
 
 Checkbox.defaultProps = {
