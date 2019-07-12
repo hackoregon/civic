@@ -27,3 +27,5 @@ TemplateCardVisualization.propTypes = {
     })
   )
 };
+
+export default TemplateCardVisualization;
