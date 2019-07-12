@@ -9,12 +9,25 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 const checkboxClass = props => css`
   background: ${props.bkgndColor};
   cursor: pointer;
+
+  display: "block",
+  margin: "12px",
+  accentColor: "#DC4556",
+  bkgndColor: "#FFFFFF",
+  transition: "all .2s ease-in-out"
+
 `;
 */
 
 const checkboxClass = css`
-  background: #fff;
+  background-color: #fff;
+  color: #1e62bd;
   cursor: pointer;
+  font-family: serif;
+`;
+
+const labelClass = css`
+  font-family: serif;
 `;
 
 const Checkbox = ({
@@ -40,6 +53,7 @@ const Checkbox = ({
     }
     label={label}
     labelPlacement={labelPlacement}
+    css={labelClass}
   />
 );
 
@@ -66,13 +80,6 @@ Checkbox.defaultProps = {
   checked: false,
   variant: "contained",
   disabled: false
-  /*
-  display: "block",
-  margin: "12px",
-  accentColor: "#DC4556",
-  bkgndColor: "#FFFFFF",
-  transition: "all .2s ease-in-out"
-  */
 };
 
 export default Checkbox;

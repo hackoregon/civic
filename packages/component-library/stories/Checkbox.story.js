@@ -6,7 +6,8 @@ import { action } from "@storybook/addon-actions";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { checkA11y } from "@storybook/addon-a11y";
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { withKnobs, text, boolean } from "@storybook/addon-knobs";
+import { withKnobs, text, boolean, select } from "@storybook/addon-knobs";
+// import { FormGroup } from "@material-ui/core/FormGroup";
 import notes from "./checkbox.notes.md";
 import { Checkbox } from "../src";
 import { storybookStyles } from "./storyStyles";
@@ -44,6 +45,44 @@ export default () =>
                   }}
                   checked={get("checked")}
                   disabled={disabled}
+                />
+              );
+            }}
+          </StatefulWrapper>
+        );
+      },
+      { notes }
+    )
+    .add(
+      "Custom",
+      () => {
+        const label = text("Label", "Label", GROUP_IDS.LABELS);
+        const disabled = boolean("Disabled", false, GROUP_IDS.STATE);
+        const options = {
+          Top: "top",
+          Start: "start",
+          Bottom: "bottom",
+          End: "end"
+        };
+        const labelPlacement = select(
+          "Placement",
+          options,
+          "end",
+          GROUP_IDS.CUSTOM
+        );
+        return (
+          <StatefulWrapper initialState={{ checked: false }}>
+            {({ get, set }) => {
+              return (
+                <Checkbox
+                  label={label}
+                  onChange={event => {
+                    set({ checked: event.target.checked });
+                    action("onChange")(event);
+                  }}
+                  checked={get("checked")}
+                  disabled={disabled}
+                  labelPlacement={labelPlacement}
                 />
               );
             }}
