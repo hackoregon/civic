@@ -1,34 +1,9 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { Collapsable } from "@hackoregon/component-library";
 
-import { LineChart, Collapsable } from "@hackoregon/component-library";
+import TemplateCardVisualization from "./TemplateCardVisualization";
 
-const TemplateCardVisualization = ({ isLoading, data }) => (
-  <React.Fragment>
-    {!isLoading && data && (
-      <LineChart
-        data={data}
-        dataKey="year"
-        dataValue="ridership"
-        dataSeries="series"
-        title="Template Plot"
-      />
-    )}
-  </React.Fragment>
-);
-
-TemplateCardVisualization.propTypes = {
-  isLoading: PropTypes.bool,
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      year: PropTypes.number,
-      ridership: PropTypes.number,
-      series: PropTypes.string
-    })
-  )
-};
-
-const templateCardMeta = {
+const templateCardMeta = (/* data */) => ({
   title: "(Story Card #1, Issue #000) Template Card Title",
   slug: "template-card",
   introText: (
@@ -150,6 +125,6 @@ const templateCardMeta = {
     "https://civicsoftwarefoundation.org/static/human-grid-test-4c90bfc3f316f5d4e104320cb98c43c8.png",
     "https://civicsoftwarefoundation.org/static/human-grid-test2-ea1849501456af341647068243fc72bb.png"
   ]
-};
+});
 
 export default templateCardMeta;

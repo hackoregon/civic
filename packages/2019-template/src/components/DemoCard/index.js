@@ -1,8 +1,9 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { CivicCard } from "@hackoregon/component-library";
 
-import demoCardMeta from "./DemoCard";
+import demoCardMeta from "./demoCardMeta";
 import { fetchDemoData } from "../../state/demo-data/actions";
 import {
   isDemoDataPending,
@@ -18,9 +19,16 @@ class DemoCard extends Component {
   }
 
   render() {
-    const { isLoading, data, children /* cardMeta */ } = this.props;
+    const { isLoading, data, Layout } = this.props;
 
-    return children({ isLoading, data, cardMeta: demoCardMeta });
+    return (
+      <CivicCard
+        cardMeta={demoCardMeta}
+        isLoading={isLoading}
+        data={data}
+        Layout={Layout}
+      />
+    );
   }
 }
 
@@ -30,8 +38,7 @@ DemoCard.propTypes = {
   init: PropTypes.func,
   isLoading: PropTypes.bool,
   data: PropTypes.arrayOf(PropTypes.shape({})),
-  // cardMeta: PropTypes.shape({/* document shape */}),
-  children: PropTypes.node
+  Layout: PropTypes.node
 };
 
 export default connect(
