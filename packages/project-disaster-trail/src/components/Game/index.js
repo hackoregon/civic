@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 // import useChapters from "../../state/hooks/useChapters";
 
+import KitScreen from "./KitScreen";
 import Orb from "./Orb";
 import OrbManager from "./OrbManager";
 
@@ -14,7 +15,9 @@ const Game = () => {
   // console.log("activeChapter ", activeChapter);
   return (
     <GameContainerStyle>
-      <MapStyle />
+      <MapStyle>
+        <KitScreen />
+      </MapStyle>
       <GUIStyle>
         {/* <Orb /> */}
         {/* <OrbManager count={10} /> */}
