@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { VictoryPie, VictoryLabel } from "victory";
+import { VictoryPie, VictoryLabel, VictoryContainer } from "victory";
 import ChartContainer from "../ChartContainer";
 import civicTheme from "../VictoryTheme/CivicVictoryTheme";
 import SimpleLegend from "../SimpleLegend";
@@ -25,6 +25,7 @@ const PieChart = props => {
 
   const startAngle = halfDoughnut ? -90 : 0;
   const endAngle = halfDoughnut ? 90 : 360;
+  const adjustedHeight = halfDoughnut ? height / 2 : height;
   const legendLabels = data.map(value => ({ name: value[dataLabel] }));
   const legendProps = {};
 
@@ -66,6 +67,9 @@ const PieChart = props => {
             <VictoryLabel style={{ ...civicTheme.pieLabel.style }} />
           }
           {...legendProps}
+          containerComponent={
+            <VictoryContainer height={adjustedHeight} width={width} />
+          }
         />
       </DataChecker>
     </ChartContainer>
