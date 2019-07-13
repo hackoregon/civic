@@ -45,7 +45,10 @@ const GameContainerStyle = styled(PanelStyle)`
 `;
 
 const MapStyle = styled(PanelStyle)`
+  display: flex;
+  flex-direction: column-reverse;
   background: beige;
+  width: 100vw;
 `;
 
 const GUIStyle = styled(PanelStyle)`
