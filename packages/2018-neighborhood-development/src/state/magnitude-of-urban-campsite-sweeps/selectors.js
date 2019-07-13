@@ -8,7 +8,7 @@ export const getMagnitudeOfUrbanCampsiteSweepsRequest = createSelector(
 
 const formatData = arr =>
   arr.map(obj => ({
-    date: new Date(obj.report_time),
+    date: new Date(`${obj.report_time.slice(0, -1)  }-08:00`),
     count: obj.count
   }));
 
