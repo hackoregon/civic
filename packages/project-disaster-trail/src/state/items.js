@@ -10,7 +10,7 @@ let id;
 for (id in ITEMS) {
   const itemModel = ITEMS[id];
   // we can derive properties and add them to the model
-  model[id] = { id: itemModel, isDrinkable: id === ITEMS.WATER };
+  model[id] = { ...itemModel, isDrinkable: id === "WATER" };
 }
 
 const initialState = {
