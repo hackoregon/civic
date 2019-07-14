@@ -22,7 +22,7 @@ const OrbManager = ({ count = 10 }) => {
     model.x = Math.random() * window.innerWidth;
     model.y = Math.random() * window.innerHeight;
     model.velocity = {
-      x: (Math.random() - 2) * 10,
+      x: (Math.random() - 2) * 2,
       y: 0 // (Math.random() - 1) * 10
     };
 
