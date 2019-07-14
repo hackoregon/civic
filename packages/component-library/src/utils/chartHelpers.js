@@ -131,12 +131,13 @@ const categoricalColors = dataLength => {
 const transformDatato100 = (dataset, value, label) => {
   const totals = dataset[0].map((currentData, i) => {
     return dataset.reduce((memo, curr) => {
-      return memo + curr[i].y;
+      return memo + curr[i][label];
     }, 0);
   });
   const newData = dataset.map(indvData => {
     return indvData.map((datum, i) => {
       const newObj = {
+        ...datum,
         [`${value}`]: datum[value],
         [`${label}`]: datum[label] / totals[i]
       };
