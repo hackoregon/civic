@@ -33,4 +33,8 @@ The Custom story shows all possible properties that can be passed to the BarChar
 
 The Stacked Bar Chart shows all the possible properties for the stacked option of the Horizontal Bar Chart.
 
-Simply pass `stacked` as a prop to the `HorizontalBarChart` component. The data should be formatted as an array of arrays of objects. The colors are sourced from the `CivicVictoryTheme.civic.group.colorScale` and are assigned by the arrays index in the larger array.
+The Stacked Bar Chart requires the `stacked` and `groupByValue` props. The `groupByValue` is the value that you would like to data to be grouped by. This is the value that is represented by the color of the bar, not the value of the x or y axis. This value is needed because the chart requires an array of arrays of objects, and the standard data structure for CIVIC is an array of objects.
+
+If you would like the data to be formatted into percentages, pass the `hundredPercentData` prop.
+
+The colors are sourced from the `CivicVictoryTheme.civic.group.colorScale` and are assigned by the arrays index in the larger array.
