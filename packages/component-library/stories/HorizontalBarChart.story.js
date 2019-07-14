@@ -230,23 +230,39 @@ export default () =>
       "Example: Stacked bar chart",
       () => {
         const sampleStackedData = [
-          [{ x: "2017", y: 7 }, { x: "2018", y: 2 }, { x: "2019", y: 3 }],
-          [{ x: "2017", y: 2 }, { x: "2018", y: 5 }, { x: "2019", y: 4 }],
-          [{ x: "2017", y: 1 }, { x: "2018", y: 2 }, { x: "2019", y: 3 }]
+          { name: "Poodle", x: "2017", y: 7 },
+          { name: "Poodle", x: "2018", y: 2 },
+          { name: "Poodle", x: "2019", y: 3 },
+          { name: "Bulldog", x: "2017", y: 2 },
+          { name: "Bulldog", x: "2018", y: 5 },
+          { name: "Bulldog", x: "2019", y: 4 },
+          { name: "Terrier", x: "2017", y: 1 },
+          { name: "Terrier", x: "2018", y: 2 },
+          { name: "Terrier", x: "2019", y: 3 }
         ];
-
         const dataValue = text("Data value", "x", GROUP_IDS.DATA);
+        const dataLabel = text("Data label", "y", GROUP_IDS.DATA);
+        const groupByValue = text(
+          "Value to group data by",
+          "name",
+          GROUP_IDS.DATA
+        );
+        const hundredPercentData = boolean(
+          "Format data to 100%",
+          false,
+          GROUP_IDS.DATA
+        );
+        const data = object("Data", sampleStackedData, GROUP_IDS.DATA);
         const dataValueFormatter = getKeyNames(civicFormat);
         const optionSelectX = options(
           "X-axis value format",
           dataValueFormatter,
-          "percentage",
+          "numeric",
           { display: "select" },
           GROUP_IDS.LABELS
         );
         const minimalist = boolean("Minimalist", false, GROUP_IDS.CUSTOM);
-        const dataLabel = text("Data label", "y", GROUP_IDS.DATA);
-        const xLabel = text("X-axis label", "Percent", GROUP_IDS.LABELS);
+        const xLabel = text("X-axis label", "number", GROUP_IDS.LABELS);
         const yLabel = text("Y-axis label", "Year", GROUP_IDS.LABELS);
         const title = text("Title", "Numbers", GROUP_IDS.LABELS);
         const subtitle = text(
@@ -254,7 +270,7 @@ export default () =>
           "that mean nothing",
           GROUP_IDS.LABELS
         );
-        const data = object("Data", sampleStackedData, GROUP_IDS.DATA);
+
         return (
           <HorizontalBarChart
             data={data}
@@ -266,7 +282,9 @@ export default () =>
             title={title}
             subtitle={subtitle}
             minimalist={minimalist}
+            groupByValue={groupByValue}
             stacked
+            hundredPercentData={hundredPercentData}
           />
         );
       },
