@@ -1,12 +1,12 @@
 import React from "react";
-import { bool, func, node, number } from "prop-types";
+import { bool, func, node, number, string, arrayOf } from "prop-types";
 import RcSlider from "rc-slider";
 import "rc-slider/assets/index.css";
 
 import "./slider.css";
 
 const SliderWithTooltip = RcSlider.createSliderWithTooltip(RcSlider);
-
+const Range = RcSlider.createSliderWithTooltip(RcSlider.Range);
 const Slider = ({
   min,
   max,
@@ -14,7 +14,9 @@ const Slider = ({
   showStepMarkers,
   step,
   value,
-  SliderComponent
+  SliderComponent,
+  sliderType,
+  defaultValue
 }) => {
   return (
     <span className="civic-slider-container">
@@ -25,6 +27,8 @@ const Slider = ({
         step={step}
         value={value}
         onChange={onChange}
+        sliderType={sliderType}
+        defaultValue={defaultValue}
       />
     </span>
   );
@@ -36,6 +40,13 @@ Slider.SliderWithTooltip = props => (
   </span>
 );
 
+Slider.SliderWithRange = props => (
+  <span className="civic-slider-container">
+    {JSON.stringify(props)}
+    <Range {...props} />
+  </span>
+);
+
 Slider.propTypes = {
   max: number.isRequired,
   min: number.isRequired,
@@ -43,7 +54,9 @@ Slider.propTypes = {
   showStepMarkers: bool,
   step: number,
   value: number.isRequired,
-  SliderComponent: node
+  SliderComponent: node,
+  sliderType: string.isRequired,
+  defaultValue: arrayOf(number)
 };
 
 Slider.defaultProps = {

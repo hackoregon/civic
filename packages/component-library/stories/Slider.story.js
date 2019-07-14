@@ -55,6 +55,30 @@ const tooltipSlider = () => {
   );
 };
 
+const rangeSlider = () => {
+  return (
+    <StatefulWrapper initialState={{ value: [10, 20] }}>
+      {({ get, set }) => {
+        return (
+          <Slider.SliderWithRange
+            showStepMarkers={boolean("showStepMarkers", false)}
+            min={number("min", 0)}
+            max={number("max", 100)}
+            defaultValue={[10, 20]}
+            onChange={value => {
+              set({ value });
+              action("onChange")(value);
+            }}
+            step={number("step", 10)}
+            tooltipFormatter={data => `${data}!`}
+            value={("value", get("value"))}
+          />
+        );
+      }}
+    </StatefulWrapper>
+  );
+};
+
 export default () =>
   storiesOf("Component Lib|Basic Inputs/Slider", module)
     .addDecorator(withKnobs)
@@ -65,4 +89,5 @@ export default () =>
       </div>
     ))
     .add("Basic Slider", basicSlider)
-    .add("Slider With Tooltip", tooltipSlider);
+    .add("Slider With Tooltip", tooltipSlider)
+    .add("Slider With Range", rangeSlider);
