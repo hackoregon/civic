@@ -67,7 +67,7 @@ describe("groupBy", () => {
     expect(groupBy(SAMPLE_DATA, "name", "x")).to.eql(FORMATTED_DATA);
   });
 
-  it.only("should format unstructured data properly", () => {
+  it("should format unstructured data properly", () => {
     expect(groupBy(UNSTRUCTURED_DATA, "name", "x")).to.eql(
       FORMATTED_UNSTRUCTURED_DATA
     );

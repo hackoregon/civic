@@ -17,6 +17,7 @@ import {
   categoricalColors,
   transformDatato100
 } from "../utils/chartHelpers";
+import groupBy from "../utils/groupBy";
 import CivicVictoryTheme from "../VictoryTheme/VictoryThemeIndex";
 
 const HorizontalBarChart = ({
@@ -34,8 +35,24 @@ const HorizontalBarChart = ({
   dataValueFormatter,
   dataLabelFormatter,
   minimalist,
-  stacked
+  stacked,
+  hundredPercentData,
+  groupByValue
 }) => {
+  const groupedDataIfStacked = () => {
+    if (stacked) {
+      if (hundredPercentData) {
+        return transformDatato100(
+          groupBy(data, groupByValue, dataValue),
+          dataValue,
+          dataLabel
+        );
+      }
+      return groupBy(data, groupByValue, dataValue);
+    }
+    return data;
+  };
+  const groupedData = groupedDataIfStacked();
   const barData =
     sortOrder && sortOrder.length
       ? data
@@ -47,14 +64,14 @@ const HorizontalBarChart = ({
   const padding = minimalist
     ? { left: 115, right: 50, bottom: 25, top: 40 }
     : { left: 115, right: 50, bottom: 50, top: 70 };
-  const bars = data.length;
-  const spaces = bars - 1;
   const barHeight = CivicVictoryTheme.civic.bar.style.data.width;
   const spaceHeight = CivicVictoryTheme.civic.bar.style.data.padding * 2;
-  const dataHeight = bars * barHeight + spaces * spaceHeight;
   const additionalHeight = padding.bottom + padding.top;
-
   const minValue = Math.min(0, ...data.map(d => d[dataValue]));
+
+  const bars = stacked ? groupedData.length : data.length;
+  const spaces = bars - 1;
+  const dataHeight = bars * barHeight + spaces * spaceHeight;
 
   const NegativeAwareTickLabel = props => (
     <VictoryLabel
@@ -171,14 +188,14 @@ const HorizontalBarChart = ({
           />
         )}
         {stacked && (
-          <VictoryStack colorScale={categoricalColors(data.length)}>
-            {transformDatato100(data, dataValue, dataLabel).map((arr, i) => {
+          <VictoryStack colorScale={categoricalColors(groupedData.length)}>
+            {groupedData.map((arr, i) => {
               return (
                 <VictoryBar
                   domainPadding={0}
                   data={arr}
                   events={chartEvents}
-                  key={arr[i].x}
+                  key={arr[i][dataValue]}
                   horizontal
                 />
               );
@@ -186,7 +203,7 @@ const HorizontalBarChart = ({
           </VictoryStack>
         )}
         {stacked &&
-          transformDatato100(data, dataValue, dataLabel).map((arr, i) => {
+          groupedData.map((arr, i) => {
             return (
               <VictoryAxis
                 style={{
@@ -204,10 +221,7 @@ const HorizontalBarChart = ({
 };
 
 HorizontalBarChart.propTypes = {
-  data: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.shape({})),
-    PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({})))
-  ]),
+  data: PropTypes.arrayOf(PropTypes.shape({})),
   sortOrder: PropTypes.string,
   dataValue: PropTypes.string,
   dataLabel: PropTypes.string,
@@ -224,7 +238,9 @@ HorizontalBarChart.propTypes = {
   dataValueFormatter: PropTypes.func,
   dataLabelFormatter: PropTypes.func,
   minimalist: PropTypes.bool,
-  stacked: PropTypes.bool
+  stacked: PropTypes.bool,
+  hundredPercentData: PropTypes.bool,
+  groupByValue: PropTypes.string
 };
 
 HorizontalBarChart.defaultProps = {
@@ -240,7 +256,9 @@ HorizontalBarChart.defaultProps = {
   dataValueFormatter: civicFormat.numeric,
   dataLabelFormatter: civicFormat.unformatted,
   minimalist: false,
-  stacked: false
+  stacked: false,
+  hundredPercentData: false,
+  groupByValue: null
 };
 
 export default HorizontalBarChart;
