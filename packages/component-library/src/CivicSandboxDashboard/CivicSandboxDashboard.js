@@ -24,7 +24,11 @@ const container = css`
   display: flex;
   flex-direction: column;
   width: 575px;
-  background: rgba(243, 242, 243, 0.95);
+  background: rgba(243, 242, 243, 0.9);
+  color: rgb(85, 85, 85);
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  box-shadow: 5px 5px 15px -3px rgba(0, 0, 0, 0.2);
   @media (max-width: 900px) {
     width: 92%;
     left: 1%;
@@ -35,7 +39,7 @@ const dashboardOpen = css`
   height: 45vh;
   overflow-y: auto;
   overflow-x: hidden;
-  opacity: 1;
+  opacity: 0.9;
   transition: height 750ms ease-out, opacity 1.5s ease-in;
 `;
 
@@ -59,10 +63,12 @@ const toggleContainer = css`
   flex-direction: row;
   height: 100%;
   width: 100%;
-  border: 1px solid rgb(170, 164, 171);
-  background-color: rgb(243, 242, 243);
   color: #dc4556;
   z-index: 4;
+  opacity: 0.9;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  box-shadow: 5px 5px 15px -3px rgba(0, 0, 0, 0.2);
 `;
 
 const toggleTitle = css`
@@ -79,8 +85,8 @@ const toggleArrow = css`
 
 const watermarkContainer = css`
   position: absolute;
-  left: 0;
-  top: 0;
+  left: -1px;
+  top: -1px;
 `;
 
 const buttonContainer = css`
@@ -235,7 +241,9 @@ const CivicDashboard = props => {
 
   const dashboardToggleButton = (
     <div className={toggleContainer} onClick={() => onClick()}>
-      <div className={toggleTitle}>Please select a polygon</div>
+      <div className={toggleTitle}>
+        {isDashboardOpen ? "" : "Please select a polygon"}
+      </div>
       <div className={toggleArrow}>
         <div className={isDashboardOpen ? ICONS.arrowDown : ICONS.arrowUp} />
       </div>

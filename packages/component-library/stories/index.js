@@ -11,7 +11,6 @@ import checkboxStory from "./Checkbox.story";
 import civicCardStackStory from "./CivicCardStack.story";
 import civicSandboxDashboardStory from "./CivicSandboxDashboard.story";
 import multiLayerMapStory from "./MultiLayerMap.story";
-import civicSandboxMapStory from "./CivicSandboxMap.story";
 import civicStorycardStory from "./CivicStoryCard.story";
 import dataTable from "./DataTable.story";
 import dropdownStory from "./DropdownMenu.story";
@@ -132,7 +131,6 @@ storiesOf("Component Lib|Maps", module)
   .add("Maps Style Guide", () => <MapsStyle />);
 baseMapStory();
 boundaryMapStory();
-civicSandboxMapStory();
 heatMapStory();
 iconMapStory();
 mapOverlayStory();

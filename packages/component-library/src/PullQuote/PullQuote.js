@@ -27,7 +27,7 @@ const iconClass = css`
 const wrapperClass = css`
   max-width: 700px;
   text-align: center;
-  margin: 80px auto;
+  margin: 60px auto;
 `;
 
 const PullQuote = ({ quoteText, quoteAttribution, url }) => (

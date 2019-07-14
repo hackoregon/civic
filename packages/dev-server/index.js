@@ -6,6 +6,7 @@ const compression = require("compression");
 const open = require("open");
 
 const app = express();
+const port = process.env.PORT || 3000;
 const isProd = process.env.NODE_ENV === "production";
 const outputPath = resolve(process.cwd(), isProd ? "dist" : "build");
 
@@ -15,8 +16,6 @@ const hotMiddleware = require("webpack-hot-middleware");
 // eslint-disable-next-line import/no-dynamic-require
 const config = require(resolve(process.cwd(), "webpack.config.js"));
 
-const port = process.env.PORT || 3000;
-
 module.exports = () => {
   console.log(
     chalk.yellow(
@@ -24,9 +23,16 @@ module.exports = () => {
     )
   );
 
+  const openBrowser = () =>
+    isProd
+      ? console.log(chalk.green("\nPRODUCTION mode"))
+      : open(`http://localhost:${port}`);
+
   const announceServer = () => {
     console.log(chalk.green(`\nServer up at http://localhost:${port}`));
     console.log(chalk.yellow("\nLogging requests...\n"));
+    // Doesn't wait for Webpack Bundle Analyzer to finalize before opening localhost.
+    openBrowser();
   };
 
   if (isProd) {
@@ -80,14 +86,5 @@ module.exports = () => {
   );
 
   // Start the server
-  const port = process.env.PORT || 3000;
-
-  const setupServer = new Promise(function(resolve, reject) {
-    resolve(app.listen(port, announceServer));
-  });
-
-  setupServer.then(open(`http://localhost:3000`));
-
-  // Doesn't wait for Webpack Bundle Analyzer to finalize before opening localhost.
   app.listen(port, announceServer);
 };
