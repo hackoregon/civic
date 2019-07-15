@@ -6,7 +6,7 @@ import Orb from "./Orb";
 
 // OrbManager is responsible for moving Orbs
 
-const OrbManager = ({ count = 10 }) => {
+const OrbManager = ({ ratios }) => {
   // first create an empty array.
   let tempModels = [];
 
@@ -16,11 +16,14 @@ const OrbManager = ({ count = 10 }) => {
   // how big is the circle the orbs 'float' up and down in
   const period = 2;
 
-  for (let i = 0, model; i < count; i += 1) {
+  for (let i = 0, model; i < ratios.orbCount; i += 1) {
     // create an empty object and assign position and velocity
     model = {};
     model.x = Math.random() * window.innerWidth;
-    model.y = Math.random() * window.innerHeight;
+    model.y =
+      Math.random() * (ratios.interfaceHeight - ratios.orbSize) +
+      ratios.orbSize;
+
     model.velocity = {
       x: (Math.random() - 2) * 2,
       y: 0 // (Math.random() - 1) * 10
@@ -40,7 +43,7 @@ const OrbManager = ({ count = 10 }) => {
     const animate = () => {
       // we re-use tempModels by pushing updated data in to it.
       tempModels = [];
-      for (let i = 0, model; i < count; i += 1) {
+      for (let i = 0, model; i < ratios.orbCount; i += 1) {
         // get the model
         model = models[i];
 
@@ -52,8 +55,8 @@ const OrbManager = ({ count = 10 }) => {
         if (model.x < -30) model.x += window.innerWidth;
         if (model.x > window.innerWidth) model.x = 0;
 
-        if (model.y < -30) model.y += window.innerHeight;
-        if (model.y > window.innerHeight) model.y = 0;
+        if (model.y < -(ratios.orbSize / 2)) model.y += ratios.interfaceHeight;
+        if (model.y > ratios.interfaceHeight) model.y = ratios.orbSize / 2;
 
         // store the updated model.
         tempModels.push(model);

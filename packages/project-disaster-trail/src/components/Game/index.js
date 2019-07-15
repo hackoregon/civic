@@ -4,20 +4,37 @@ import styled from "styled-components";
 
 // import useChapters from "../../state/hooks/useChapters";
 
-import Orb from "./Orb";
+// import Orb from "./Orb";
 import OrbManager from "./OrbManager";
 
 import "@hackoregon/component-library/assets/global.styles.css";
 
+const XLScreen = {
+  height: 1800,
+  interfaceHeight: 700,
+  orbCount: 30,
+  orbSize: 90
+};
+
+const desktopScreen = {
+  interfaceHeight: 250,
+  orbCount: 10,
+  orbSize: 60
+};
+
 const Game = () => {
   // const { activeChapter } = useChapters();
   // console.log("activeChapter ", activeChapter);
+  let ratios = XLScreen;
+  if (window.innerHeight < XLScreen.height) {
+    ratios = desktopScreen;
+  }
   return (
     <GameContainerStyle>
       <MapStyle />
       <GUIStyle>
         {/* <Orb /> */}
-        {/* <OrbManager count={10} /> */}
+        <OrbManager ratios={ratios} />
       </GUIStyle>
     </GameContainerStyle>
   );
@@ -34,11 +51,19 @@ const PanelStyle = styled.div`
 `;
 
 const GameContainerStyle = styled(PanelStyle)`
+  display: grid;
+  overflow: hidden;
   height: 100vh;
-  grid-template-rows: 1fr 200px;
+  min-height: 650px;
+  min-width: 800px;
+  grid-template-rows: 1fr ${desktopScreen.interfaceHeight}px;
   grid-template-columns: 1fr;
   justify-content: center;
   align-items: center;
+
+  @media (min-height: ${XLScreen.height}px) {
+    grid-template-rows: 1fr ${XLScreen.interfaceHeight}px;
+  }
 `;
 
 const MapStyle = styled(PanelStyle)`
@@ -47,6 +72,11 @@ const MapStyle = styled(PanelStyle)`
 
 const GUIStyle = styled(PanelStyle)`
   background: pink;
+  height: ${desktopScreen.interfaceHeight}px;
+
+  @media (min-height: ${XLScreen.height}px) {
+    height: ${XLScreen.interfaceHeight}px;
+  }
 `;
 
 export default Game;
