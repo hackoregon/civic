@@ -1,7 +1,9 @@
 /** @jsx jsx */
 import { Component } from "react";
+import { connect } from "react-redux";
 import { css, jsx } from "@emotion/core";
 import { PropTypes } from "prop-types";
+import { addItem } from "../../state/kit";
 
 const ImagesContainer = css`
   position: relative;
@@ -17,16 +19,33 @@ const KitItemStyle = css`
 `;
 
 class KitItem extends Component {
-  state = {
-    filledItem: false
-  };
+  constructor(props) {
+    super(props);
 
-  fillKitItem = () => {
-    this.setState({ filledItem: true });
+    const shouldBeFilled = this.shouldBeFilled();
+
+    this.state = {
+      filledItem: shouldBeFilled
+    };
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { filledItem } = prevState;
+    const shouldBeFilled = this.shouldBeFilled();
+
+    if (shouldBeFilled && !filledItem) {
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({ filledItem: true });
+    }
+  }
+
+  shouldBeFilled = () => {
+    const { kitsFilledByItem, kitNumber } = this.props;
+    return kitsFilledByItem >= kitNumber;
   };
 
   render() {
-    const { emptySvg, fullSvg } = this.props;
+    const { emptySvg, fullSvg, onAddKitItem, itemType } = this.props;
     const { filledItem } = this.state;
 
     const EmptyKitItem = css`
@@ -54,7 +73,12 @@ class KitItem extends Component {
     /* eslint-disable jsx-a11y/click-events-have-key-events */
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
-      <div css={ImagesContainer} onClick={this.fillKitItem}>
+      <div
+        css={ImagesContainer}
+        onClick={() => {
+          onAddKitItem(itemType);
+        }}
+      >
         <div
           css={css`
             ${KitItemStyle};
@@ -78,7 +102,19 @@ class KitItem extends Component {
 
 KitItem.propTypes = {
   emptySvg: PropTypes.node,
-  fullSvg: PropTypes.node
+  fullSvg: PropTypes.node,
+  itemType: PropTypes.string,
+  kitsFilledByItem: PropTypes.number,
+  kitNumber: PropTypes.number,
+  onAddKitItem: PropTypes.func
 };
 
-export default KitItem;
+// Temporarily addItem from this component, will be orbs later
+export default connect(
+  null,
+  dispatch => ({
+    onAddKitItem(itemId) {
+      dispatch(addItem(itemId));
+    }
+  })
+)(KitItem);
