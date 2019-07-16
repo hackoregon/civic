@@ -6,6 +6,30 @@ import reducer from "./index";
 
 const mockStore = configureMockStore([thunk]);
 
+const formatRidershipData = data =>
+  !data
+    ? undefined
+    : data
+        .map(yearObj => ({
+          series: "Weekday",
+          year: yearObj.year,
+          ridership: yearObj.weekday_sum_ons
+        }))
+        .concat(
+          data.map(yearObj => ({
+            series: "Saturday",
+            year: yearObj.year,
+            ridership: yearObj.saturday_sum_ons
+          }))
+        )
+        .concat(
+          data.map(yearObj => ({
+            series: "Sunday",
+            year: yearObj.year,
+            ridership: yearObj.sunday_sum_ons
+          }))
+        );
+
 describe("demo-data", () => {
   describe("demo-data actions", () => {
     describe("demo-data import actions", () => {
@@ -178,6 +202,560 @@ describe("demo-data", () => {
             }
           })
         ).to.eql(results);
+      });
+    });
+
+    describe("getRoutes", () => {
+      it("returns undefined when there is no data", () => {
+        // eslint-disable-next-line no-unused-expressions
+        expect(selectors.getRoutes({ demoData: { no: "data to be seen" } })).to
+          .be.undefined;
+      });
+
+      it("returns undefined when data has no value for routes", () => {
+        // eslint-disable-next-line no-unused-expressions
+        expect(
+          selectors.getRoutes({
+            demoData: { data: { NotTemplateData: {} } }
+          })
+        ).to.be.undefined;
+      });
+
+      it("returns routes when data has a value for RouteGentrification", () => {
+        const data = [
+          { route: "12", gentrification: "Mid" },
+          { route: "14", gentrification: "Late" },
+          { route: "15", gentrification: "Mid" }
+        ];
+        const results = ["12", "14", "15"];
+        expect(
+          selectors.getRoutes({
+            demoData: {
+              data: {
+                RouteGentrification: data
+              }
+            }
+          })
+        ).to.eql(results);
+      });
+    });
+
+    describe("getMidGentrificationRoutes", () => {
+      it("returns undefined when there is no data", () => {
+        // eslint-disable-next-line no-unused-expressions
+        expect(
+          selectors.getMidGentrificationRoutes({
+            demoData: { no: "data to be seen" }
+          })
+        ).to.be.undefined;
+      });
+
+      it("returns undefined when data has no value for routes", () => {
+        // eslint-disable-next-line no-unused-expressions
+        expect(
+          selectors.getMidGentrificationRoutes({
+            demoData: { data: { NotTemplateData: {} } }
+          })
+        ).to.be.undefined;
+      });
+
+      it("returns routes when data has a value for RouteGentrification", () => {
+        const data = [
+          { route: "12", gentrification: "Mid" },
+          { route: "14", gentrification: "Late" },
+          { route: "15", gentrification: "Mid" }
+        ];
+        const results = ["12", "15"];
+        expect(
+          selectors.getMidGentrificationRoutes({
+            demoData: {
+              data: {
+                RouteGentrification: data
+              }
+            }
+          })
+        ).to.eql(results);
+      });
+    });
+
+    describe("getLateGentrificationRoutes", () => {
+      it("returns undefined when there is no data", () => {
+        // eslint-disable-next-line no-unused-expressions
+        expect(
+          selectors.getLateGentrificationRoutes({
+            demoData: { no: "data to be seen" }
+          })
+        ).to.be.undefined;
+      });
+
+      it("returns undefined when data has no value for routes", () => {
+        // eslint-disable-next-line no-unused-expressions
+        expect(
+          selectors.getLateGentrificationRoutes({
+            demoData: { data: { NotTemplateData: {} } }
+          })
+        ).to.be.undefined;
+      });
+
+      it("returns routes when data has a value for RouteGentrification", () => {
+        const data = [
+          { route: "12", gentrification: "Mid" },
+          { route: "14", gentrification: "Late" },
+          { route: "15", gentrification: "Mid" }
+        ];
+        const results = ["14"];
+        expect(
+          selectors.getLateGentrificationRoutes({
+            demoData: {
+              data: {
+                RouteGentrification: data
+              }
+            }
+          })
+        ).to.eql(results);
+      });
+    });
+
+    describe("getMidGentrificationRouteData", () => {
+      it("returns undefined when there is no data", () => {
+        // eslint-disable-next-line no-unused-expressions
+        expect(
+          selectors.getMidGentrificationRouteData({
+            demoData: { no: "data to be seen" }
+          })
+        ).to.be.undefined;
+      });
+
+      it("returns undefined when data has no value for routes", () => {
+        // eslint-disable-next-line no-unused-expressions
+        expect(
+          selectors.getMidGentrificationRouteData({
+            demoData: { data: { NotTemplateData: {} } }
+          })
+        ).to.be.undefined;
+      });
+
+      it("returns correctly when data has a value for RouteGentrification", () => {
+        const data = {
+          RouteGentrification: [
+            { route: "12", gentrification: "Mid" },
+            { route: "14", gentrification: "Late" },
+            { route: "15", gentrification: "Mid" }
+          ],
+          "12": [
+            {
+              year: 2001,
+              weekday_sum_ons: 5865,
+              weekday_sum_offs: 5533,
+              weekday_total_stops: 91,
+              saturday_sum_ons: 3073,
+              saturday_sum_offs: 2818,
+              saturday_total_stops: 68,
+              sunday_sum_ons: 2103,
+              sunday_sum_offs: 2055,
+              sunday_total_stops: 54,
+              num_of_yearly_census: 2,
+              sunday_census: true,
+              saturday_census: true,
+              total_sum_ons: 11041,
+              total_sum_offs: 10406,
+              total_total_stops: 213
+            }
+          ],
+          "15": [
+            {
+              year: 2001,
+              weekday_sum_ons: 6750,
+              weekday_sum_offs: 6593,
+              weekday_total_stops: 97,
+              saturday_sum_ons: 3557,
+              saturday_sum_offs: 3400,
+              saturday_total_stops: 70,
+              sunday_sum_ons: 2193,
+              sunday_sum_offs: 2149,
+              sunday_total_stops: 63,
+              num_of_yearly_census: 2,
+              sunday_census: true,
+              saturday_census: true,
+              total_sum_ons: 12500,
+              total_sum_offs: 12142,
+              total_total_stops: 230
+            }
+          ]
+        };
+        expect(
+          selectors.getMidGentrificationRouteData({
+            demoData: {
+              data
+            }
+          })
+        ).to.eql([data[12], data[15]]);
+      });
+    });
+
+    describe("getLateGentrificationRouteData", () => {
+      it("returns undefined when there is no data", () => {
+        // eslint-disable-next-line no-unused-expressions
+        expect(
+          selectors.getLateGentrificationRouteData({
+            demoData: { no: "data to be seen" }
+          })
+        ).to.be.undefined;
+      });
+
+      it("returns undefined when data has no value for routes", () => {
+        // eslint-disable-next-line no-unused-expressions
+        expect(
+          selectors.getLateGentrificationRouteData({
+            demoData: { data: { NotTemplateData: {} } }
+          })
+        ).to.be.undefined;
+      });
+
+      it("returns correctly when data has a value for RouteGentrification", () => {
+        const data = {
+          RouteGentrification: [
+            { route: "12", gentrification: "Mid" },
+            { route: "14", gentrification: "Late" },
+            { route: "15", gentrification: "Mid" }
+          ],
+          "14": [
+            {
+              year: 2001,
+              weekday_sum_ons: 5865,
+              weekday_sum_offs: 5533,
+              weekday_total_stops: 91,
+              saturday_sum_ons: 3073,
+              saturday_sum_offs: 2818,
+              saturday_total_stops: 68,
+              sunday_sum_ons: 2103,
+              sunday_sum_offs: 2055,
+              sunday_total_stops: 54,
+              num_of_yearly_census: 2,
+              sunday_census: true,
+              saturday_census: true,
+              total_sum_ons: 11041,
+              total_sum_offs: 10406,
+              total_total_stops: 213
+            }
+          ]
+        };
+        expect(
+          selectors.getLateGentrificationRouteData({
+            demoData: {
+              data
+            }
+          })
+        ).to.eql([data[14]]);
+      });
+    });
+
+    describe("getFormattedMidGentrificationRouteData", () => {
+      it("returns undefined when there is no data", () => {
+        // eslint-disable-next-line no-unused-expressions
+        expect(
+          selectors.getFormattedMidGentrificationRouteData({
+            demoData: { no: "data to be seen" }
+          })
+        ).to.be.undefined;
+      });
+
+      it("returns undefined when data has no value for routes", () => {
+        // eslint-disable-next-line no-unused-expressions
+        expect(
+          selectors.getFormattedMidGentrificationRouteData({
+            demoData: { data: { NotTemplateData: {} } }
+          })
+        ).to.be.undefined;
+      });
+
+      it("returns correctly when data has a value for RouteGentrification", () => {
+        const data = {
+          RouteGentrification: [
+            { route: "12", gentrification: "Mid" },
+            { route: "14", gentrification: "Late" },
+            { route: "15", gentrification: "Mid" }
+          ],
+          "12": [
+            {
+              year: 2001,
+              weekday_sum_ons: 5865,
+              weekday_sum_offs: 5533,
+              weekday_total_stops: 91,
+              saturday_sum_ons: 3073,
+              saturday_sum_offs: 2818,
+              saturday_total_stops: 68,
+              sunday_sum_ons: 2103,
+              sunday_sum_offs: 2055,
+              sunday_total_stops: 54,
+              num_of_yearly_census: 2,
+              sunday_census: true,
+              saturday_census: true,
+              total_sum_ons: 11041,
+              total_sum_offs: 10406,
+              total_total_stops: 213
+            }
+          ],
+          "15": [
+            {
+              year: 2001,
+              weekday_sum_ons: 6750,
+              weekday_sum_offs: 6593,
+              weekday_total_stops: 97,
+              saturday_sum_ons: 3557,
+              saturday_sum_offs: 3400,
+              saturday_total_stops: 70,
+              sunday_sum_ons: 2193,
+              sunday_sum_offs: 2149,
+              sunday_total_stops: 63,
+              num_of_yearly_census: 2,
+              sunday_census: true,
+              saturday_census: true,
+              total_sum_ons: 12500,
+              total_sum_offs: 12142,
+              total_total_stops: 230
+            }
+          ]
+        };
+        expect(
+          selectors.getFormattedMidGentrificationRouteData({
+            demoData: {
+              data
+            }
+          })
+        ).to.eql([
+          formatRidershipData(data[12]),
+          formatRidershipData(data[15])
+        ]);
+      });
+    });
+
+    describe("getFormattedLateGentrificationRouteData", () => {
+      it("returns undefined when there is no data", () => {
+        // eslint-disable-next-line no-unused-expressions
+        expect(
+          selectors.getFormattedLateGentrificationRouteData({
+            demoData: { no: "data to be seen" }
+          })
+        ).to.be.undefined;
+      });
+
+      it("returns undefined when data has no value for routes", () => {
+        // eslint-disable-next-line no-unused-expressions
+        expect(
+          selectors.getFormattedLateGentrificationRouteData({
+            demoData: { data: { NotTemplateData: {} } }
+          })
+        ).to.be.undefined;
+      });
+
+      it("returns correctly when data has a value for RouteGentrification", () => {
+        const data = {
+          RouteGentrification: [
+            { route: "12", gentrification: "Mid" },
+            { route: "14", gentrification: "Late" },
+            { route: "15", gentrification: "Mid" }
+          ],
+          "14": [
+            {
+              year: 2001,
+              weekday_sum_ons: 5865,
+              weekday_sum_offs: 5533,
+              weekday_total_stops: 91,
+              saturday_sum_ons: 3073,
+              saturday_sum_offs: 2818,
+              saturday_total_stops: 68,
+              sunday_sum_ons: 2103,
+              sunday_sum_offs: 2055,
+              sunday_total_stops: 54,
+              num_of_yearly_census: 2,
+              sunday_census: true,
+              saturday_census: true,
+              total_sum_ons: 11041,
+              total_sum_offs: 10406,
+              total_total_stops: 213
+            }
+          ]
+        };
+        const result = [
+          [
+            {
+              ridership: 5865,
+              series: "Weekday",
+              year: 2001
+            },
+            {
+              ridership: 3073,
+              series: "Saturday",
+              year: 2001
+            },
+            {
+              ridership: 2103,
+              series: "Sunday",
+              year: 2001
+            }
+          ]
+        ];
+        expect(
+          selectors.getFormattedLateGentrificationRouteData({
+            demoData: {
+              data
+            }
+          })
+        ).to.eql(result);
+      });
+    });
+
+    // --------------------------------------------------------------
+
+    describe("getMidGentrificationRidershipData", () => {
+      it("returns undefined when there is no data", () => {
+        // eslint-disable-next-line no-unused-expressions
+        expect(
+          selectors.getMidGentrificationRidershipData({
+            demoData: { no: "data to be seen" }
+          })
+        ).to.be.undefined;
+      });
+
+      it("returns undefined when data has no value for routes", () => {
+        // eslint-disable-next-line no-unused-expressions
+        expect(
+          selectors.getMidGentrificationRidershipData({
+            demoData: { data: { NotTemplateData: {} } }
+          })
+        ).to.be.undefined;
+      });
+
+      it("returns correctly when data has a value for RouteGentrification", () => {
+        const data = {
+          RouteGentrification: [
+            { route: "12", gentrification: "Mid" },
+            { route: "14", gentrification: "Late" },
+            { route: "15", gentrification: "Mid" }
+          ],
+          "12": [
+            {
+              year: 2001,
+              weekday_sum_ons: 5865,
+              weekday_sum_offs: 5533,
+              weekday_total_stops: 91,
+              saturday_sum_ons: 3073,
+              saturday_sum_offs: 2818,
+              saturday_total_stops: 68,
+              sunday_sum_ons: 2103,
+              sunday_sum_offs: 2055,
+              sunday_total_stops: 54,
+              num_of_yearly_census: 2,
+              sunday_census: true,
+              saturday_census: true,
+              total_sum_ons: 11041,
+              total_sum_offs: 10406,
+              total_total_stops: 213
+            }
+          ],
+          "15": [
+            {
+              year: 2001,
+              weekday_sum_ons: 6750,
+              weekday_sum_offs: 6593,
+              weekday_total_stops: 97,
+              saturday_sum_ons: 3557,
+              saturday_sum_offs: 3400,
+              saturday_total_stops: 70,
+              sunday_sum_ons: 2193,
+              sunday_sum_offs: 2149,
+              sunday_total_stops: 63,
+              num_of_yearly_census: 2,
+              sunday_census: true,
+              saturday_census: true,
+              total_sum_ons: 12500,
+              total_sum_offs: 12142,
+              total_total_stops: 230
+            }
+          ]
+        };
+        expect(
+          selectors.getMidGentrificationRidershipData({
+            demoData: {
+              data
+            }
+          })
+        ).to.eql([formatRidershipData(data[12])]);
+      });
+    });
+
+    describe("getLateGentrificationRidershipData", () => {
+      it("returns undefined when there is no data", () => {
+        // eslint-disable-next-line no-unused-expressions
+        expect(
+          selectors.getLateGentrificationRidershipData({
+            demoData: { no: "data to be seen" }
+          })
+        ).to.be.undefined;
+      });
+
+      it("returns undefined when data has no value for routes", () => {
+        // eslint-disable-next-line no-unused-expressions
+        expect(
+          selectors.getLateGentrificationRidershipData({
+            demoData: { data: { NotTemplateData: {} } }
+          })
+        ).to.be.undefined;
+      });
+
+      it("returns correctly when data has a value for RouteGentrification", () => {
+        const data = {
+          RouteGentrification: [
+            { route: "12", gentrification: "Mid" },
+            { route: "14", gentrification: "Late" },
+            { route: "15", gentrification: "Mid" }
+          ],
+          "14": [
+            {
+              year: 2001,
+              weekday_sum_ons: 5865,
+              weekday_sum_offs: 5533,
+              weekday_total_stops: 91,
+              saturday_sum_ons: 3073,
+              saturday_sum_offs: 2818,
+              saturday_total_stops: 68,
+              sunday_sum_ons: 2103,
+              sunday_sum_offs: 2055,
+              sunday_total_stops: 54,
+              num_of_yearly_census: 2,
+              sunday_census: true,
+              saturday_census: true,
+              total_sum_ons: 11041,
+              total_sum_offs: 10406,
+              total_total_stops: 213
+            }
+          ]
+        };
+        const result = [
+          {
+            ridership: 5865,
+            series: "Weekday",
+            year: 2001
+          },
+          {
+            ridership: 3073,
+            series: "Saturday",
+            year: 2001
+          },
+          {
+            ridership: 2103,
+            series: "Sunday",
+            year: 2001
+          }
+        ];
+        expect(
+          selectors.getLateGentrificationRidershipData({
+            demoData: {
+              data
+            }
+          })
+        ).to.eql(result);
       });
     });
 

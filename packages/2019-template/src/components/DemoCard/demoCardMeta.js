@@ -1,51 +1,16 @@
 import React, { Fragment } from "react";
-import PropTypes from "prop-types";
+import { Collapsable } from "@hackoregon/component-library";
 
-import { LineChart, Collapsable } from "@hackoregon/component-library";
-import { civicFormat } from "@hackoregon/component-library/dist/utils";
+import DemoCardVisualization from "./DemoCardVisualization";
 
-const DemoCardVisualization = ({ isLoading, data, title }) => (
-  <React.Fragment>
-    {!isLoading && data && (
-      <LineChart
-        data={data}
-        dataKey="year"
-        dataValue="ridership"
-        dataSeries="series"
-        title={title}
-        xLabel="Year"
-        yLabel="Ridership"
-        xNumberFormatter={civicFormat.year}
-        subtitle="Average daily ridership for TriMet bus and rail"
-      />
-    )}
-  </React.Fragment>
-);
-
-DemoCardVisualization.propTypes = {
-  isLoading: PropTypes.bool,
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      year: PropTypes.number,
-      ridership: PropTypes.number,
-      series: PropTypes.string
-    })
-  ),
-  title: PropTypes.string
-};
-
-DemoCardVisualization.defaultProps = {
-  title: "Public Transit Ridership"
-};
-
-const demoCardMeta = {
+const demoCardMeta = (/* data */) => ({
   title: "Transit Ridership, Gentrification, and Displacement",
   slug: "demo-card",
   introText: (
     <p>
       Gentrification and displacement drive changes in transit ridership.
-      Understanding transit ridership changes in different stages in the
-      gentrification process can help inform investments in equitable mobility.
+      Understanding these changes at the different stages of the gentrification
+      process can help inform investments in equitable mobility.
     </p>
   ),
   visualization: DemoCardVisualization,
@@ -69,7 +34,7 @@ const demoCardMeta = {
         Gentrification and displacement disproportionately impact communities of
         color. The list of tools and practices that have been used to inhibit
         the prosperity of people of color is lengthy: Jim Crow laws, racialized
-        mortgage- lending practices, restrictive covenants and deeds, public
+        mortgage-lending practices, restrictive covenants and deeds, public
         works projects condemning entire Black neighborhoods, and zoning rules
         that reinforce segregation are only a few to be named.
       </p>
@@ -91,23 +56,25 @@ const demoCardMeta = {
       <Collapsable.Section>
         <p>
           <em>
-            Note, this analysis is for demonstration purposes, and should not be
-            used to inform decision making
+            Note: This analysis is for demonstration purposes only and should
+            not be used to inform decision-making.
           </em>
         </p>
         <h3>Methodology Summary</h3>
         <p>
           This analysis uses quarterly ridership statistics produced by TriMet
           to calculate an average daily ridership for each bus line. Census
-          tracts were categorized into different gentrification categories,
-          based on a gentrification typology described below. Bus lines were
-          categorized based on the gentrification typology of the census tracts
-          that they pass through.
+          tracts were divided into different gentrification categories based on
+          a gentrification typology described below. Bus lines were categorized
+          based on the gentrification typology of the census tracts that they
+          pass through.
         </p>
         <h3>Gentrification and Displacement Methodology</h3>
         <p>
           The gentrification typologies of this analysis were developed by Dr.
-          Lisa Bates (2013), with some modifications.
+          Lisa Bates (2013), with some modifications. If bus lines passed
+          through at least 3 census tracts in mid-stage or late-stage
+          gentrification, they were included.
         </p>
       </Collapsable.Section>
       <Collapsable.Section hidden>
@@ -179,8 +146,8 @@ const demoCardMeta = {
   metadata: (
     <p>
       <em>
-        Note, this dataset documentation is for demonstration purposes, and is
-        not peer reviewed
+        Note: This dataset documentation is for demonstration purposes only and
+        is not peer-reviewed.
       </em>
     </p>
   ),
@@ -531,6 +498,6 @@ const demoCardMeta = {
     "https://civicsoftwarefoundation.org/static/human-grid-test-4c90bfc3f316f5d4e104320cb98c43c8.png",
     "https://civicsoftwarefoundation.org/static/human-grid-test2-ea1849501456af341647068243fc72bb.png"
   ]
-};
+});
 
 export default demoCardMeta;

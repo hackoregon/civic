@@ -7,6 +7,7 @@ import BarChartStory from "./BarChart.story";
 import baseMapStory from "./BaseMap.story";
 import boundaryMapStory from "./BoundaryMap.story";
 import buttonStory from "./Button.story";
+import checkboxStory from "./Checkbox.story";
 import civicCardStackStory from "./CivicCardStack.story";
 import civicSandboxDashboardStory from "./CivicSandboxDashboard.story";
 import multiLayerMapStory from "./MultiLayerMap.story";
@@ -105,6 +106,7 @@ storiesOf("Component Lib|Basic Inputs", module)
   .addDecorator(checkA11y)
   .add("UI Components Style Guide", () => <UIComponentsStyle />);
 buttonStory();
+checkboxStory();
 dropdownStory();
 sliderStory();
 

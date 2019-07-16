@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { cx, css } from "emotion";
@@ -81,16 +81,10 @@ function MetadataQuestion({ item }) {
     <h3>{item.section}</h3>
   ) : (
     item.answer.length > 0 && (
-      <p>
-        <h4
-          className={css`
-            line-height: 0;
-          `}
-        >
-          {item.question}
-        </h4>
-        {item.answer}
-      </p>
+      <Fragment>
+        <h4>{item.question}</h4>
+        <p>{item.answer}</p>
+      </Fragment>
     )
   );
 }
@@ -181,9 +175,9 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
         <h2>Help make this better</h2>
         <p>
           CIVIC is an open platform, so you can help make this better! Whether
-          you noticed a typo, think you have an improvement for our data
-          visualization, or some additional context to add about the dataset, we
-          want you to contribute.
+          you noticed a typo, want to suggest an improvement for our data
+          visualization, or have context to add about the dataset, we want you
+          to contribute.
           <ul>
             <li>
               <a href="https://civicsoftwarefoundation.org/#volunteers">

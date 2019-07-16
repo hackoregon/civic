@@ -1,8 +1,9 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { CivicCard } from "@hackoregon/component-library";
 
-import templateCardMeta from "./TemplateCard";
+import templateCardMeta from "./templateCardMeta";
 import { fetchTemplateData } from "../../state/template-data/actions";
 import {
   isTemplateDataPending,
@@ -16,9 +17,16 @@ class TemplateCard extends Component {
   }
 
   render() {
-    const { isLoading, data, children /* cardMeta */ } = this.props;
+    const { isLoading, data, Layout } = this.props;
 
-    return children({ isLoading, data, cardMeta: templateCardMeta });
+    return (
+      <CivicCard
+        cardMeta={templateCardMeta}
+        isLoading={isLoading}
+        data={data}
+        Layout={Layout}
+      />
+    );
   }
 }
 
@@ -28,8 +36,7 @@ TemplateCard.propTypes = {
   init: PropTypes.func,
   isLoading: PropTypes.bool,
   data: PropTypes.arrayOf(PropTypes.shape({})),
-  // cardMeta: PropTypes.shape({/* document shape */}),
-  children: PropTypes.node
+  Layout: PropTypes.node
 };
 
 export default connect(
