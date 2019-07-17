@@ -22,7 +22,6 @@ const cardClass = css`
 
   h2 {
     color: #001732;
-    text-decoration: underline dotted #201024;
   }
   @media (max-width: 640px) {
     padding: 3em 2em;

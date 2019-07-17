@@ -11,9 +11,21 @@ import DurationBar from "./DurationBar";
 
 import "@hackoregon/component-library/assets/global.styles.css";
 
+const XLScreen = {
+  height: 1800,
+  interfaceHeight: 700
+};
+
+const desktopScreen = {
+  interfaceHeight: 250
+};
+
 const Game = () => {
-  // const { activeChapter } = useChapters();
-  // console.log("activeChapter ", activeChapter);
+  let ratios = XLScreen;
+  if (window.innerHeight < XLScreen.height) {
+    ratios = desktopScreen;
+  }
+
   return (
     <GameContainerStyle>
       <MapStyle>
@@ -21,8 +33,17 @@ const Game = () => {
       </MapStyle>
       <DurationBar step="Choose supplies" />
       <GUIStyle>
-        {/* <Orb /> */}
-        {/* <OrbManager count={10} /> */}
+        {/* <Orb size={50} /> */}
+        <OrbManager
+          orbCount={10}
+          orbSize={50}
+          period={0.2}
+          velocityX={-0.75}
+          velocityY={0}
+          minVelocityX={-0.2}
+          minVelocityY={0.1}
+          ratios={ratios}
+        />
       </GUIStyle>
     </GameContainerStyle>
   );
@@ -39,11 +60,19 @@ const PanelStyle = styled.div`
 `;
 
 const GameContainerStyle = styled(PanelStyle)`
+  display: grid;
+  overflow: hidden;
   height: 100vh;
-  grid-template-rows: 1fr 50px 200px;
+  min-height: 650px;
+  min-width: 800px;
+  grid-template-rows: 1fr ${desktopScreen.interfaceHeight}px;
   grid-template-columns: 1fr;
   justify-content: center;
   align-items: center;
+
+  @media (min-height: ${XLScreen.height}px) {
+    grid-template-rows: 1fr ${XLScreen.interfaceHeight}px;
+  }
 `;
 
 const MapStyle = styled(PanelStyle)`
@@ -55,6 +84,11 @@ const MapStyle = styled(PanelStyle)`
 
 const GUIStyle = styled(PanelStyle)`
   background: pink;
+  height: ${desktopScreen.interfaceHeight}px;
+
+  @media (min-height: ${XLScreen.height}px) {
+    height: ${XLScreen.interfaceHeight}px;
+  }
 `;
 
 export default Game;
