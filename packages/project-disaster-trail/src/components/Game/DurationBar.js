@@ -44,10 +44,16 @@ const durationBarStyle = css`
 `;
 
 const durationBarStepStyle = css`
+  display: grid;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: repeat(3, 1fr);
+
   color: #ffffff;
   vertical-align: middle;
-  margin: 0 10px 0 10px;
-  padding-top: 2px;
+  /* margin: 0 10px 0 10px; */
+  /* padding-top: 2px; */
   font-family: "Roboto", sans-serif;
   font-size: 1.5em;
   text-align: center;
@@ -60,14 +66,15 @@ const DurationBar = ({ step }) => {
         ${durationBarStyle}
       `}
     >
-      <p
+      <div
         css={css`
           ${durationBarStepStyle}
         `}
       >
-        {step}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{step}
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{step}
-      </p>
+        <span>{step}</span>
+        <span>{step}</span>
+        <span>{step}</span>
+      </div>
     </div>
   );
 };

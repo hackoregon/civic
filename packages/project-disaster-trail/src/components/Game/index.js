@@ -40,7 +40,7 @@ const PanelStyle = styled.div`
 
 const GameContainerStyle = styled(PanelStyle)`
   height: 100vh;
-  grid-template-rows: 1fr 200px;
+  grid-template-rows: 1fr 50px 200px;
   grid-template-columns: 1fr;
   justify-content: center;
   align-items: center;
