@@ -5,39 +5,43 @@ import styled from "styled-components";
 // import useChapters from "../../state/hooks/useChapters";
 
 import KitScreen from "./KitScreen";
-// import Orb from "./Orb";
+import Orb from "./Orb";
 import OrbManager from "./OrbManager";
 
 import "@hackoregon/component-library/assets/global.styles.css";
 
 const XLScreen = {
   height: 1800,
-  interfaceHeight: 700,
-  orbCount: 30,
-  orbSize: 90
+  interfaceHeight: 700
 };
 
 const desktopScreen = {
-  interfaceHeight: 250,
-  orbCount: 10,
-  orbSize: 60
+  interfaceHeight: 250
 };
 
 const Game = () => {
-  // const { activeChapter } = useChapters();
-  // console.log("activeChapter ", activeChapter);
   let ratios = XLScreen;
   if (window.innerHeight < XLScreen.height) {
     ratios = desktopScreen;
   }
+
   return (
     <GameContainerStyle>
       <MapStyle>
         <KitScreen />
       </MapStyle>
       <GUIStyle>
-        {/* <Orb /> */}
-        <OrbManager ratios={ratios} />
+        {/* <Orb size={50} /> */}
+        <OrbManager
+          orbCount={10}
+          orbSize={50}
+          period={0.2}
+          velocityX={-0.75}
+          velocityY={0}
+          minVelocityX={-0.2}
+          minVelocityY={0.1}
+          ratios={ratios}
+        />
       </GUIStyle>
     </GameContainerStyle>
   );

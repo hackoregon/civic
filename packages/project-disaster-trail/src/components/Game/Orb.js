@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { Component } from "react";
+import { PureComponent } from "react";
 import { jsx, css } from "@emotion/core";
 import RadialGauge from "./RadialGauge";
 
@@ -9,9 +9,6 @@ const orbContainerStyle = css`
 
 const circleDefaultStyle = css`
   transition: transform 1s;
-  position: absolute;
-  top: 10px;
-  left: 10px;
   z-index: 10;
   background-color: mediumSeaGreen;
   transition: background-color 1000ms linear;
@@ -30,14 +27,13 @@ const circleDefaultStyle = css`
 
 const defaultState = {
   durationRequired: 1000,
-  orbSize: 60,
   animationState: null,
   pressTimeout: null,
   pressedStart: null,
   animationFrame: null
 };
 
-class Orb extends Component {
+class Orb extends PureComponent {
   constructor(props) {
     super(props);
     this.state = defaultState;
@@ -73,7 +69,7 @@ class Orb extends Component {
 
   doPressAnimation = () => {
     // eslint-disable-next-line no-unused-vars
-    const { animationState, durationRequired } = this.state;
+    const { durationRequired } = this.state;
     const newAnimationFrame = window.requestAnimationFrame(() => {
       console.log("Do press animation");
     });
@@ -92,18 +88,19 @@ class Orb extends Component {
   };
 
   render() {
-    const { animationState, orbSize } = this.state;
+    const { animationState } = this.state;
+    const { size } = this.props;
 
-    const circleSizeStyle = css`
-      height: ${orbSize}px;
-      width: ${orbSize}px;
-      border-radius: ${orbSize}px;
+    const sizeStyle = css`
+      height: ${size}px;
+      width: ${size}px;
+      border-radius: ${size}px;
     `;
 
-    const orbSizeStyle = css`
-      height: ${orbSize + 20}px;
-      width: ${orbSize + 20}px;
-      border-radius: ${orbSize + 20}px;
+    const absoluteStyle = css`
+      position: absolute;
+      top: -${size / 2}px;
+      left: -${size / 2}px;
     `;
 
     /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -111,7 +108,7 @@ class Orb extends Component {
       <div
         css={css`
           ${orbContainerStyle};
-          ${orbSizeStyle}
+          ${sizeStyle};
         `}
         onMouseDown={this.handleOrbPress}
         onMouseUp={this.handleOrbRelease}
@@ -119,14 +116,16 @@ class Orb extends Component {
         onTouchStart={this.handleOrbPress}
         onTouchEnd={this.handleOrbRelease}
       >
-        <RadialGauge
-          animateGauge={animationState === "pressing"}
-          orbSize={orbSize}
-        />
+        <div css={absoluteStyle}>
+          <RadialGauge
+            animateGauge={animationState === "pressing"}
+            size={size}
+          />
+        </div>
         <div
           css={css`
             ${circleDefaultStyle};
-            ${circleSizeStyle}
+            ${sizeStyle};
           `}
           className={animationState ? "circle-press-style" : ""}
         />
