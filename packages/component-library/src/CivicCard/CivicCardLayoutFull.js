@@ -99,13 +99,13 @@ MetadataQuestion.propTypes = {
 function CollapsableSection({ items, collapseAfter }) {
   const beforeFold = _.slice(items, 0, collapseAfter);
   const afterFold = _.slice(items, collapseAfter);
-  return (
+  return (afterFold && afterFold.length) > 0 ? (
     <Collapsable>
       <Collapsable.Section>{beforeFold}</Collapsable.Section>
-      {afterFold.length > 0 && (
-        <Collapsable.Section hidden>{afterFold}</Collapsable.Section>
-      )}
+      <Collapsable.Section hidden>{afterFold}</Collapsable.Section>
     </Collapsable>
+  ) : (
+    <Fragment>{beforeFold}</Fragment>
   );
 }
 

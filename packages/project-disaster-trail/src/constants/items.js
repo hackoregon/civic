@@ -11,27 +11,47 @@ import FlashlightColor from "../../assets/flashlight-color.svg";
 import WalkieTalkie from "../../assets/walkie-talkie.svg";
 import WalkieTalkieColor from "../../assets/walkie-talkie-color.svg";
 
-export const FOOD = { id: "FOOD", emptySvg: Corn, fullSvg: CornColor };
-export const WATER = { id: "WATER", emptySvg: Water, fullSvg: WaterColor };
+export const FOOD = {
+  id: "FOOD",
+  emptySvg: Corn,
+  fullSvg: CornColor,
+  quantity: 0,
+  kitsFilledByItem: 0
+};
+export const WATER = {
+  id: "WATER",
+  emptySvg: Water,
+  fullSvg: WaterColor,
+  quantity: 0,
+  kitsFilledByItem: 0
+};
 export const FIRE_EXTINGUISHER = {
   id: "FIRE_EXTINGUISHER",
   emptySvg: FireExtinguisher,
-  fullSvg: FireExtinguisherColor
+  fullSvg: FireExtinguisherColor,
+  quantity: 0,
+  kitsFilledByItem: 0
 };
 export const FIRST_AID_KIT = {
   id: "FIRST_AID_KIT",
   emptySvg: FirstAid,
-  fullSvg: FirstAidColor
+  fullSvg: FirstAidColor,
+  quantity: 0,
+  kitsFilledByItem: 0
 };
 export const FLASHLIGHT = {
   id: "FLASHLIGHT",
   emptySvg: Flashlight,
-  fullSvg: FlashlightColor
+  fullSvg: FlashlightColor,
+  quantity: 0,
+  kitsFilledByItem: 0
 };
 export const WALKIE_TALKIE = {
   id: "WALKIE_TALKIE",
   emptySvg: WalkieTalkie,
-  fullSvg: WalkieTalkieColor
+  fullSvg: WalkieTalkieColor,
+  quantity: 0,
+  kitsFilledByItem: 0
 };
 
 export const MINIMUM_KIT = {
