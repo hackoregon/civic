@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { PureComponent } from "react";
 import { jsx, css } from "@emotion/core";
+import { returnStatement } from "@babel/types";
 import RadialGauge from "./RadialGauge";
 
 const orbContainerStyle = css`
@@ -27,10 +28,10 @@ const circleDefaultStyle = css`
 
 const defaultState = {
   durationRequired: 1000,
-  animationState: null,
   pressTimeout: null,
   pressedStart: null,
-  animationFrame: null
+  isActive: false,
+  isComplete: false
 };
 
 class Orb extends PureComponent {
@@ -39,56 +40,50 @@ class Orb extends PureComponent {
     this.state = defaultState;
   }
 
+  componentWillUnmount() {
+    if (this.state.timeoutId) window.clearTimeout(this.state.timeoutId);
+  }
+
   handleOrbPress = () => {
-    this.doPressAnimation();
+    // if already pressed, do nothing
+    if (this.state.isActive || this.state.isComplete) return;
+
+    // start a timer. In n seconds, we check to see if we are complete
+    // complete means isActive is true
+    if (this.state.timeoutId) window.clearTimeout(this.state.timeoutId);
+
+    const { durationRequired } = this.state;
+    // set timer
+    const timeoutId = setTimeout(() => {
+      this.checkComplete();
+    }, durationRequired);
+
+    this.setState({ isActive: true, pressedStart: new Date(), timeoutId });
+
+    // callbacks
+    const { id, onOrbTouch } = this.props;
+    onOrbTouch(id);
   };
 
   handleOrbRelease = () => {
-    const { pressedStart, durationRequired } = this.state;
+    this.setState({ isActive: false });
+  };
 
-    if (pressedStart) {
+  checkComplete = () => {
+    const { pressedStart, durationRequired, isActive } = this.state;
+
+    if (isActive && pressedStart) {
       const pressedDuration = new Date() - pressedStart;
       if (pressedDuration >= durationRequired) {
-        this.doFullDurationAnimation();
+        const { id, onComplete } = this.props;
+        this.setState({ isComplete: true });
+        onComplete(id);
       }
     }
-
-    this.refreshOrbState();
-  };
-
-  refreshOrbState = () => {
-    const { animationFrame, pressTimeout } = this.state;
-    // We can use any default null value for the press animation here
-    if (animationFrame) {
-      window.cancelAnimationFrame(animationFrame);
-      clearTimeout(pressTimeout);
-      /* We keep setState() in a conditional in case of a mouseLeave when the orb had not been pressed to avoid unnecessary setState() calls */
-      this.setState(defaultState);
-    }
-  };
-
-  doPressAnimation = () => {
-    // eslint-disable-next-line no-unused-vars
-    const { durationRequired } = this.state;
-    const newAnimationFrame = window.requestAnimationFrame(() => {
-      console.log("Do press animation");
-    });
-    const pressTimeout = setTimeout(this.handleOrbRelease, durationRequired);
-
-    this.setState({
-      animationState: "pressing",
-      pressedStart: new Date(),
-      animationFrame: newAnimationFrame,
-      pressTimeout
-    });
-  };
-
-  doFullDurationAnimation = () => {
-    console.log("Do full duration animation");
   };
 
   render() {
-    const { animationState } = this.state;
+    const { isActive, isComplete } = this.state;
     const { size } = this.props;
 
     const sizeStyle = css`
@@ -117,17 +112,14 @@ class Orb extends PureComponent {
         onTouchEnd={this.handleOrbRelease}
       >
         <div css={absoluteStyle}>
-          <RadialGauge
-            animateGauge={animationState === "pressing"}
-            size={size}
-          />
+          <RadialGauge animateGauge={isActive || isComplete} size={size} />
         </div>
         <div
           css={css`
             ${circleDefaultStyle};
             ${sizeStyle};
           `}
-          className={animationState ? "circle-press-style" : ""}
+          className={isActive ? "circle-press-style" : ""}
         />
       </div>
     );

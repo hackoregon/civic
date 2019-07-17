@@ -7,6 +7,7 @@ import styled from "styled-components";
 import KitScreen from "./KitScreen";
 import Orb from "./Orb";
 import OrbManager from "./OrbManager";
+import PointsView from "../atoms/PointsView";
 
 import "@hackoregon/component-library/assets/global.styles.css";
 
@@ -28,6 +29,7 @@ const Game = () => {
   return (
     <GameContainerStyle>
       <MapStyle>
+        <PointsViewStyle />
         <KitScreen />
       </MapStyle>
       <GUIStyle>
@@ -36,10 +38,10 @@ const Game = () => {
           orbCount={10}
           orbSize={50}
           period={0.2}
-          velocityX={-0.75}
-          velocityY={0}
-          minVelocityX={-0.2}
-          minVelocityY={0.1}
+          minVelocityX={-0.75}
+          maxVelocityX={-0.2}
+          minVelocityY={0}
+          maxVelocityY={0}
           ratios={ratios}
         />
       </GUIStyle>
@@ -55,9 +57,11 @@ const PanelStyle = styled.div`
   width: 100%;
   height: 100%;
   background: white;
+  overflow: hidden;
 `;
 
 const GameContainerStyle = styled(PanelStyle)`
+  position: relative;
   display: grid;
   overflow: hidden;
   height: 100vh;
@@ -74,6 +78,7 @@ const GameContainerStyle = styled(PanelStyle)`
 `;
 
 const MapStyle = styled(PanelStyle)`
+  position: relative;
   display: flex;
   flex-direction: column-reverse;
   background: beige;
@@ -87,6 +92,14 @@ const GUIStyle = styled(PanelStyle)`
   @media (min-height: ${XLScreen.height}px) {
     height: ${XLScreen.interfaceHeight}px;
   }
+`;
+
+const PointsViewStyle = styled(PointsView)`
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 10px solid red;
+  z-index: 1;
 `;
 
 export default Game;

@@ -1,6 +1,10 @@
 /* eslint-disable import/no-named-as-default */
 import React, { useEffect, useState, memo } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import { map } from "lodash";
+
+import { addPoints } from "../../state/user";
 
 import Orb from "./Orb";
 
@@ -17,13 +21,14 @@ const OrbManager = ({
   period = 2,
   orbCount = 10,
   orbSize = 25,
-  velocityX = 2,
-  velocityY = 0,
   minVelocityX = 0.1,
   minVelocityY = 0.1,
-  ratios
+  maxVelocityX = 2,
+  maxVelocityY = 0,
+  ratios,
+  addPoints
 }) => {
-  // first create an empty array.
+  // create an empty array.
   let tempModels = [];
 
   const { interfaceHeight } = ratios;
@@ -40,8 +45,8 @@ const OrbManager = ({
     model.y = Math.random() * (interfaceHeight - orbSize);
 
     model.velocity = {
-      x: Math.max(minVelocityX + Math.random() * velocityX),
-      y: Math.max(minVelocityY + Math.random() * velocityY)
+      x: minVelocityX + Math.random() * (maxVelocityX - minVelocityX),
+      y: minVelocityY + Math.random() * (maxVelocityY - minVelocityY)
     };
 
     // store in the temporary array
@@ -50,6 +55,16 @@ const OrbManager = ({
 
   // store the temp values in state
   const [models, setModels] = useState(tempModels);
+
+  const onOrbTouch = id => {
+    // const model = models[id];
+    // console.log("orb touched,  ", id);
+  };
+
+  const onOrbComplete = id => {
+    console.log("complete ", id);
+    addPoints(1);
+  };
 
   useEffect(() => {
     let animationFrameId;
@@ -105,12 +120,29 @@ const OrbManager = ({
         transform: `translate(${model.x}px, ${model.y}px)`
       }}
     >
-      <Orb size={orbSize} />
+      <Orb
+        size={orbSize}
+        onOrbTouch={onOrbTouch}
+        onComplete={onOrbComplete}
+        id={index}
+      />
     </div>
   ));
 };
 
 OrbManager.displayName = "OrbManager";
 
+const mapStateToProps = ({}) => ({});
+
+const mapDispatchToProps = dispatch => ({
+  addPoints: bindActionCreators(addPoints, dispatch)
+  // setPlaying: bindActionCreators(settings.setPlaying, dispatch),
+});
+
 // use memo to not re-render OrbManager unless its props change
-export default memo(OrbManager);
+export default memo(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(OrbManager)
+);
