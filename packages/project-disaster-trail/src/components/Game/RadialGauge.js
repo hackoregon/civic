@@ -4,19 +4,6 @@ import PropTypes from "prop-types";
 import { jsx, css } from "@emotion/core";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 
-const gaugeDefaultStyle = css`
-  transition: transform 1s;
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  height: 60px;
-  width: 60px;
-
-  &.gauge-animate-style {
-    transform: scale(1.5);
-  }
-`;
-
 const progressBarStyle = {
   pathColor: "gold",
   trailColor: "transparent",
@@ -47,13 +34,27 @@ class RadialGauge extends Component {
   };
 
   render() {
-    const { animateGauge, orbSize } = this.props;
+    const { animateGauge, size } = this.props;
     const { percent } = this.state;
 
+    const gaugeDefaultStyle = css`
+      transition: transform 1s;
+      position: absolute;
+      top: ${size / 2}px;
+      left: ${size / 2}px;
+      height: ${size}px;
+      width: ${size}px;
+      pointer-events: none;
+
+      &.gauge-animate-style {
+        transform: scale(1.5);
+      }
+    `;
+
     const gaugeSizeStyle = css`
-      height: ${orbSize}px;
-      width: ${orbSize}px;
-      border-radius: ${orbSize}px;
+      height: ${size}px;
+      width: ${size}px;
+      border-radius: ${size}px;
     `;
 
     return (
@@ -72,7 +73,7 @@ class RadialGauge extends Component {
 
 RadialGauge.propTypes = {
   animateGauge: PropTypes.bool,
-  orbSize: PropTypes.number
+  size: PropTypes.number
 };
 
 export default RadialGauge;
