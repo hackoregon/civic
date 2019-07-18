@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { storiesOf } from "@storybook/react";
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -39,16 +39,16 @@ export default () =>
         const label = text("Label", "Label", GROUP_IDS.LABELS);
         const disabled = boolean("Disabled", false, GROUP_IDS.STATE);
         return (
-          <StatefulWrapper initialState={{ checked: false }}>
+          <StatefulWrapper initialState={{ value: false }}>
             {({ get, set }) => {
               return (
                 <Checkbox
                   label={label}
                   onChange={event => {
-                    set({ checked: event.target.checked });
+                    set({ value: event.target.checked });
                     action("onChange")(event);
                   }}
-                  checked={get("checked")}
+                  value={get("value")}
                   disabled={disabled}
                 />
               );
@@ -63,7 +63,6 @@ export default () =>
       () => {
         const label = text("Label", "Label", GROUP_IDS.LABELS);
         const disabled = boolean("Disabled", false, GROUP_IDS.STATE);
-        const value = text("Value", "checkboxValue", GROUP_IDS.DATA);
         const options = {
           Top: "top",
           Start: "start",
@@ -77,17 +76,16 @@ export default () =>
           GROUP_IDS.CUSTOM
         );
         return (
-          <StatefulWrapper initialState={{ checked: false }}>
+          <StatefulWrapper initialState={{ value: false }}>
             {({ get, set }) => {
               return (
                 <Checkbox
                   label={label}
                   onChange={event => {
-                    set({ checked: event.target.checked });
+                    set({ value: event.target.checked });
                     action("onChange")(event);
                   }}
-                  checked={get("checked")}
-                  value={value}
+                  value={get("value")}
                   disabled={disabled}
                   labelPlacement={labelPlacement}
                 />
@@ -122,74 +120,63 @@ export default () =>
         const disableThree = boolean("Disable 2017", false, GROUP_IDS.STATE);
         const disableFour = boolean("Disable 2018", false, GROUP_IDS.STATE);
         return (
-          <div>
-            <FormControl>
-              <FormLabel>{formLabel}</FormLabel>
-              <FormGroup row={row}>
-                <StatefulWrapper initialState={{ checked: false }}>
-                  {({ get, set }) => {
-                    return (
+          <StatefulWrapper
+            initialState={{
+              checkboxOne: false,
+              checkboxTwo: false,
+              checkboxThree: false,
+              checkboxFour: false
+            }}
+          >
+            {({ get, set }) => {
+              return (
+                <FormControl>
+                  <FormLabel>{formLabel}</FormLabel>
+                  <FormGroup row={row}>
+                    <Fragment>
                       <Checkbox
                         label={labelOne}
                         onChange={event => {
-                          set({ checked: event.target.checked });
+                          set({ checkboxOne: event.target.checked });
                           action("onChange")(event);
                         }}
-                        checked={get("checked")}
+                        value={get("checkboxOne")}
                         disabled={disableGroup || disableOne}
                       />
-                    );
-                  }}
-                </StatefulWrapper>
-                <StatefulWrapper initialState={{ checked: false }}>
-                  {({ get, set }) => {
-                    return (
                       <Checkbox
                         label={labelTwo}
                         onChange={event => {
-                          set({ checked: event.target.checked });
+                          set({ checkboxTwo: event.target.checked });
                           action("onChange")(event);
                         }}
-                        checked={get("checked")}
+                        value={get("checkboxTwo")}
                         disabled={disableGroup || disableTwo}
                       />
-                    );
-                  }}
-                </StatefulWrapper>
-                <StatefulWrapper initialState={{ checked: false }}>
-                  {({ get, set }) => {
-                    return (
                       <Checkbox
                         label={labelThree}
                         onChange={event => {
-                          set({ checked: event.target.checked });
+                          set({ checkboxThree: event.target.checked });
                           action("onChange")(event);
                         }}
-                        checked={get("checked")}
+                        value={get("checkboxThree")}
                         disabled={disableGroup || disableThree}
                       />
-                    );
-                  }}
-                </StatefulWrapper>
-                <StatefulWrapper initialState={{ checked: false }}>
-                  {({ get, set }) => {
-                    return (
                       <Checkbox
                         label={labelFour}
                         onChange={event => {
-                          set({ checked: event.target.checked });
+                          set({ checkboxFour: event.target.checked });
                           action("onChange")(event);
                         }}
-                        checked={get("checked")}
+                        value={get("checkboxFour")}
                         disabled={disableGroup || disableFour}
                       />
-                    );
-                  }}
-                </StatefulWrapper>
-              </FormGroup>
-              <FormHelperText>{formHelperText}</FormHelperText>
-            </FormControl>
-          </div>
+                    </Fragment>
+                  </FormGroup>
+                  <FormHelperText>{formHelperText}</FormHelperText>
+                </FormControl>
+              );
+            }}
+          </StatefulWrapper>
         );
       },
       { notes }
