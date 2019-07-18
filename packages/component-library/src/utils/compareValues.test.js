@@ -19,12 +19,12 @@ const SORTED_DATA_DESCENDING = [
 ];
 
 describe("compareValues", () => {
-  it("should format data properly", () => {
-    expect(SAMPLE_DATA.sort(compareValues("sort"))).to.eql(
+  it("should format data ascending", () => {
+    expect(SAMPLE_DATA.sort(compareValues("sort", "Ascending"))).to.eql(
       SORTED_DATA_ASCENDING
     );
   });
-  it("should format data properly", () => {
+  it("should format data descending", () => {
     expect(SAMPLE_DATA.sort(compareValues("sort", "Descending"))).to.eql(
       SORTED_DATA_DESCENDING
     );

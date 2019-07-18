@@ -140,25 +140,6 @@ const HorizontalBarChart = ({
           <VictoryBar
             horizontal
             labelComponent={
-              <NegativeAwareTickLabel
-                x={0}
-                orientation="left"
-                theme={CivicVictoryTheme.civic}
-              />
-            }
-            domainPadding={0}
-            data={barData.map(d => ({
-              sortOrder: d[sortOrderKey],
-              dataValue: d[dataValue],
-              label: dataLabelFormatter(d[dataLabel])
-            }))}
-            x="sortOrder"
-            y="dataValue"
-            events={chartEvents}
-          />
-          <VictoryBar
-            horizontal
-            labelComponent={
               <VictoryTooltip
                 x={325}
                 y={0}

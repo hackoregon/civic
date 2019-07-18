@@ -4,7 +4,7 @@
  * @param {*} order - Ascending or Descending
  */
 
-function compareValues(key, order = "asc") {
+function compareValues(key, order = "Ascending") {
   return (a, b) => {
     if (
       !Object.prototype.hasOwnProperty.call(a, key) ||
@@ -22,7 +22,7 @@ function compareValues(key, order = "asc") {
     } else if (varA < varB) {
       comparison = -1;
     }
-    return order === "desc" ? comparison * -1 : comparison;
+    return order === "Descending" ? comparison * -1 : comparison;
   };
 }
 
