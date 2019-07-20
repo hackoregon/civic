@@ -1,9 +1,10 @@
+/* TODO: Fix linting errors */
+/* eslint-disable */
 import PropTypes from "prop-types";
 import React from "react";
 import { css } from "emotion";
 
 const baseMapMenu = css(`
-  background: #f3f2f3;
   padding: 10px;
   z-index: 2;
   font-family: "Roboto Condensed", sans-serif;

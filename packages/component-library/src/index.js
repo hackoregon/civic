@@ -6,7 +6,7 @@ export {
 export { default as BarChart } from "./BarChart/BarChart";
 export { default as LineChart } from "./LineChart/LineChart";
 export { default as Button } from "./Button/Button";
-export { default as StoryCard } from "./StoryCard/StoryCard";
+export { default as Checkbox } from "./Checkbox/Checkbox";
 export { default as CivicStoryCard } from "./CivicStoryCard/CivicStoryCard";
 export { default as PageLayout } from "./PageLayout/PageLayout";
 export { default as PieChart } from "./PieChart/PieChart";
@@ -36,6 +36,7 @@ export { default as MapOverlay } from "./MapOverlay/MapOverlay";
 export { default as BoundaryMap } from "./BoundaryMap/BoundaryMap";
 export { default as MapTooltip } from "./MapTooltip/MapTooltip";
 export { default as CivicSandboxMap } from "./CivicSandboxMap/CivicSandboxMap";
+export { default as MultiLayerMap } from "./MultiLayerMap/MultiLayerMap";
 export { default as GradientScale } from "./GradientScale/GradientScale";
 export {
   default as PackageSelectorBox
@@ -54,6 +55,13 @@ export { default as SimpleLegend } from "./SimpleLegend/SimpleLegend";
 export { default as ChartTitle } from "./ChartTitle/ChartTitle";
 export { default as ChartContainer } from "./ChartContainer/ChartContainer";
 export { default as CivicCardStack } from "./CivicCardStack/CivicCardStack";
+export { default as CivicCard } from "./CivicCard/CivicCard";
+export {
+  default as CivicCardLayoutFull
+} from "./CivicCard/CivicCardLayoutFull";
+export {
+  default as CivicCardLayoutClassic
+} from "./CivicCard/CivicCardLayoutClassic";
 
 export { default as civicFormat } from "./utils/civicFormat";
 export { default as ungroupBy } from "./utils/ungroupBy";

@@ -24,13 +24,6 @@
   z-index: 5000;
 }
 
-.ten-year__wrapper {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-  padding: 0.5rem;
-  min-height: 5rem;
-}
-
 .Card {
   margin-top: 2rem;
   max-width: 800px;

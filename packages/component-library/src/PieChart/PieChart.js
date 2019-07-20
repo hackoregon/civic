@@ -4,9 +4,7 @@ import { VictoryPie, VictoryLabel } from "victory";
 import ChartContainer from "../ChartContainer";
 import civicTheme from "../VictoryTheme/CivicVictoryTheme";
 import SimpleLegend from "../SimpleLegend";
-
-const getOrElse = (possibleValue, defaultValue) =>
-  possibleValue == null ? defaultValue : possibleValue;
+import DataChecker from "../utils/DataChecker";
 
 const PieChart = props => {
   const {
@@ -25,11 +23,9 @@ const PieChart = props => {
     height
   } = props;
 
-  const x = getOrElse(dataLabel, "x");
-  const y = getOrElse(dataValue, "y");
   const startAngle = halfDoughnut ? -90 : 0;
   const endAngle = halfDoughnut ? 90 : 360;
-  const legendLabels = data.map(value => ({ name: value[x] }));
+  const legendLabels = data.map(value => ({ name: value[dataLabel] }));
   const legendProps = {};
 
   if (useLegend) {
@@ -44,32 +40,34 @@ const PieChart = props => {
       loading={loading}
       error={error}
     >
-      {useLegend && (
-        <SimpleLegend
-          className="legend"
-          legendData={legendLabels}
+      <DataChecker dataAccessors={{ dataValue }} data={data}>
+        {useLegend && (
+          <SimpleLegend
+            className="legend"
+            legendData={legendLabels}
+            colorScale={colors}
+          />
+        )}
+        <VictoryPie
+          width={width}
+          height={height}
+          data={data}
+          innerRadius={innerRadius}
           colorScale={colors}
+          theme={civicTheme}
+          animate={{
+            duration: 1000
+          }}
+          x={dataLabel}
+          y={dataValue}
+          startAngle={startAngle}
+          endAngle={endAngle}
+          labelComponent={
+            <VictoryLabel style={{ ...civicTheme.pieLabel.style }} />
+          }
+          {...legendProps}
         />
-      )}
-      <VictoryPie
-        width={width}
-        height={height}
-        data={data}
-        innerRadius={innerRadius}
-        colorScale={colors}
-        theme={civicTheme}
-        animate={{
-          duration: 1000
-        }}
-        x={x}
-        y={y}
-        startAngle={startAngle}
-        endAngle={endAngle}
-        labelComponent={
-          <VictoryLabel style={{ ...civicTheme.pieLabel.style }} />
-        }
-        {...legendProps}
-      />
+      </DataChecker>
     </ChartContainer>
   );
 };
@@ -92,6 +90,11 @@ PieChart.propTypes = {
   title: PropTypes.string,
   useLegend: PropTypes.bool,
   width: PropTypes.number
+};
+
+PieChart.defaultProps = {
+  dataLabel: "x",
+  dataValue: "y"
 };
 
 export default PieChart;

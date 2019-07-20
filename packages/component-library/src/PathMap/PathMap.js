@@ -65,10 +65,13 @@ const PathMap = props => {
 PathMap.propTypes = {
   viewport: PropTypes.shape({}),
   data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  getColor: PropTypes.func,
+  getColor: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.arrayOf(PropTypes.number)
+  ]),
   opacity: PropTypes.number,
   getPath: PropTypes.func,
-  getWidth: PropTypes.func,
+  getWidth: PropTypes.oneOfType([PropTypes.func, PropTypes.number]),
   widthScale: PropTypes.number,
   rounded: PropTypes.bool,
   autoHighlight: PropTypes.bool,

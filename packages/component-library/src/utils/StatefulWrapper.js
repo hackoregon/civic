@@ -18,6 +18,9 @@ import { func, shape } from "prop-types";
  *      );
  *    }}
  *  </StatefulWrapper>
+ *
+ * ⚠️ Do not set `value` as a knob when using this wrapper, it causes issues with
+ * Civic's deployed version of Storybook that you will not see locally ⚠️
  */
 class StatefulWrapper extends Component {
   static propTypes = {

@@ -6,7 +6,12 @@ import PropTypes from "prop-types";
 import React from "react";
 import { connect } from "react-redux";
 // import { withRouter } from 'react-router-dom';
-import { StoryCard, Dropdown } from "@hackoregon/component-library";
+
+import {
+  CivicStoryCard,
+  Slider,
+  Dropdown
+} from "@hackoregon/component-library";
 
 import "@hackoregon/component-library/assets/global.styles.css";
 import "@hackoregon/component-library/assets/vendor/react-select.min.css";
@@ -116,10 +121,10 @@ export class App extends React.Component {
 
     return (
       <div>
-        <StoryCard
+        <CivicStoryCard
+          footer={false}
+          watermark={<div />}
           title="Map Your Affordability"
-          collectionId="housing"
-          cardId="affordability-map"
         >
           <p className="description" style={textAlignCenter}>
             Compare your income to the average income of common demographics.
@@ -165,7 +170,7 @@ export class App extends React.Component {
               <DemographicDetailView demographics={demographicData} />
             </div>
           </div>
-        </StoryCard>
+        </CivicStoryCard>
         <TempProdVsCost />
         <TempVoterRegistration />
       </div>

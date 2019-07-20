@@ -1,5 +1,6 @@
 import React from "react";
 import { StickyContainer } from "react-sticky";
+import { CivicStoryCard } from "@hackoregon/component-library";
 import Budget101 from "../Budget101";
 import StackedArea from "../StackedAreaChart";
 import "./CardCollection.css";
@@ -19,11 +20,11 @@ const CardCollection = () => (
           decision-making!
         </p>
       </div>
-      <div className="ten-year__wrapper">
+      <CivicStoryCard watermark={<div />} footer={false}>
         <div className="ten-year__stacked-area-wrapper">
           <StackedArea />
         </div>
-      </div>
+      </CivicStoryCard>
     </StickyContainer>
     <Budget101 />
   </div>

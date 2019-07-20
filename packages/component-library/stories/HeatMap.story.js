@@ -108,7 +108,7 @@ const colorOptions = {
 
 const heatMapDataURL =
   "https://service.civicpdx.org/transportation-systems/trimet-stop-events/disturbance-stops/" +
-  "?limit=500&offset=0";
+  "?format=json&limit=500&offset=0";
 
 const heatMapRadiusOptions = {
   range: true,
@@ -166,14 +166,16 @@ export default () =>
           GROUP_IDS.HEAT_MAP
         );
 
+        const heatMapColorExpression = [
+          "interpolate",
+          ["linear"],
+          ["heatmap-density"],
+          ...heatMapColorGradient
+        ];
+
         const heatMapColor = object(
           "heatmap-color:",
-          [
-            "interpolate",
-            ["linear"],
-            ["heatmap-density"],
-            ...heatMapColorGradient
-          ],
+          heatMapColorExpression,
           GROUP_IDS.HEAT_MAP
         );
 
@@ -183,44 +185,33 @@ export default () =>
           GROUP_IDS.HEAT_MAP_DATA
         );
 
-        const heatMapDataProperty = text(
-          "Property Key:",
-          "time_diff",
-          GROUP_IDS.HEAT_MAP_DATA
-        );
-
         return (
           <DemoJSONLoader urls={[heatMapAPIURL]}>
             {data => {
+              const heatMapDataProperty = text(
+                "Property Key:",
+                "time_diff",
+                GROUP_IDS.HEAT_MAP_DATA
+              );
+
               const dataMinMax = extent(
                 data.results.features,
                 d => d.properties[heatMapDataProperty]
               );
 
-              const dataMinimum = number(
-                "Data Minimum:",
+              const heatMapWeightExpression = [
+                "interpolate",
+                ["linear"],
+                ["get", heatMapDataProperty],
                 dataMinMax[0],
-                {},
-                GROUP_IDS.HEAT_MAP_DATA
-              );
-              const dataMaximum = number(
-                "Data Maximum:",
+                0,
                 dataMinMax[1],
-                {},
-                GROUP_IDS.HEAT_MAP_DATA
-              );
+                1
+              ];
 
               const heatMapWeight = object(
                 "heatmap-weight:",
-                [
-                  "interpolate",
-                  ["linear"],
-                  ["get", heatMapDataProperty],
-                  dataMinimum,
-                  0,
-                  dataMaximum,
-                  1
-                ],
+                heatMapWeightExpression,
                 GROUP_IDS.HEAT_MAP_DATA
               );
 
