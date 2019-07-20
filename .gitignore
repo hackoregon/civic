@@ -11,3 +11,5 @@ lib-cov
 .idea
 .DS_Store
 *.sw[onp]
+civic.iml
+.vscode

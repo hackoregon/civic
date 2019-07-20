@@ -1,11 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
 import DeckGL, { IconLayer } from "deck.gl";
-import { css } from "emotion";
-
-const crosshair = css`
-  cursor: crosshair;
-`;
 
 const IconMap = props => {
   const {
@@ -40,11 +35,11 @@ const IconMap = props => {
     });
   });
 
-  const tooltipRender = tooltipInfo ? tooltip : null;
+  const tooltipRender = tooltipInfo && x && y ? tooltip : null;
 
   return (
-    <div className={crosshair}>
-      <DeckGL className="DeckGL" {...viewport}>
+    <div>
+      <DeckGL className="DeckGL" {...viewport} getCursor={() => "crosshair"}>
         <IconLayer
           id="icon-layer"
           className="IconMap"
@@ -64,8 +59,8 @@ const IconMap = props => {
           visible={visible}
           updateTriggers={{ getSize }}
         />
-        {tooltipRender}
       </DeckGL>
+      {tooltipRender}
     </div>
   );
 };

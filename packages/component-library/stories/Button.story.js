@@ -3,20 +3,13 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { checkA11y } from "@storybook/addon-a11y";
-import { withKnobs, text } from "@storybook/addon-knobs";
+import { withKnobs, text, color, select, files } from "@storybook/addon-knobs";
+import notes from "./button.notes.md";
 import { Button } from "../src";
 import { storybookStyles } from "./storyStyles";
 
-const displayName = Button.displayName || "Button";
-
-const description = `
-  This is some basic usage with the button with providing a label to show the text.
-  Clicking should trigger an action.`;
-
-const simpleButtonLabel = "Hello button";
-
 export default () =>
-  storiesOf("Component Lib|Basic UI Components/Button", module)
+  storiesOf("Component Lib|Basic Inputs/Button", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .addDecorator(story => (
@@ -24,13 +17,54 @@ export default () =>
         <div style={storybookStyles.storyGridItem}>{story()}</div>
       </div>
     ))
-    .add("Simple usage", () => (
-      <Button onClick={action("clicked")}>{simpleButtonLabel}</Button>
-    ))
-    .add("With some emoji", () => (
-      <Button onClick={action("clicked")}>
-        <span role="img" aria-label="So cool">
-          😀 😎 👍 💯
-        </span>
-      </Button>
-    ));
+    .add(
+      "Standard",
+      () => {
+        const label = text("Label", "Hello CIVIC");
+        return <Button onClick={action("clicked")}>{label}</Button>;
+      },
+      { notes }
+    )
+    .add(
+      "Custom",
+      () => {
+        const transitionOptions = {
+          Standard: "all .2s ease-in-out",
+          Slow: "all .6s ease-in-out",
+          Fast: "all .1s ease-in-out"
+        };
+        const label = text("Label", "Hello CIVIC");
+        const accentColor = color("Text & border color", "#DC4556");
+        const bkgndColor = color("Background color", "#FFFFFF");
+        const transition = select(
+          "Transition",
+          transitionOptions,
+          "all .2s ease-in-out"
+        );
+        return (
+          <Button
+            onClick={action("clicked")}
+            accentColor={accentColor}
+            bkgndColor={bkgndColor}
+            transition={transition}
+          >
+            {label}
+          </Button>
+        );
+      },
+      { notes }
+    )
+    .add(
+      "Example: Non-text label",
+      () => {
+        const label = text("Emoji label", "😀 😎 👍 💯");
+        const ariaLabel = text("aria-label", "So cool");
+        return (
+          <Button onClick={action("clicked")}>
+            {label}
+            <span role="img" aria-label={ariaLabel} />
+          </Button>
+        );
+      },
+      { notes }
+    );

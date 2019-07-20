@@ -127,8 +127,43 @@ const AccessibilityGuidelines = () => (
     <p>Use alternative text with images.</p>
 
     <h4>Data Visualization</h4>
+    <h5>Low vision</h5>
     <p>
-      A good reference for meeting accessibility requirements in data
+      For people who are blind, include text descriptions of any meaningful
+      images that can be read by assistive technology (screen readers). A person
+      with low vision is still able to perceive visual insights with the help of
+      accessibility features and considerations. Provide the opportunity to
+      increase the size of elements and focus on particular areas by zooming and
+      magnifying. Follow the WCAG 2.0 Level AA guidelines for contrast — high
+      contrast is crucial to improve legibility. Body text should have a
+      contrast ratio of at least 4.5:1 (and large text should be at least 3:1)
+      against its background color. Include textual content to provide
+      alternatives to visual information (especially color). Use captions and
+      always provide a table version of the visualization. Allow keyboard
+      alternatives for navigating graphical user interfaces.
+    </p>
+    <h5>Color blind</h5>
+    <p>
+      The two most common forms of color blindness are deuteranomaly and
+      deuteranopia — which together account for about 6% of men, and protanomaly
+      and protanopia, which account for another 2%. Tritanopia is very rare, and
+      affects less than 0.001% of men. For those affected the two most difficult
+      colors to distinguish are green and red. Stressing the contrast between
+      dark and light values is a good way to make the colors recognizable. While
+      hue and saturation have minimal effect on legibility, brightness
+      differences are far more perceptible.
+    </p>
+    <p>
+      Easily distinguishable formats (like bar charts or treemaps) or markers
+      (as used in scatter plots or maps) can supplement color to express
+      information. Those work perfectly, even in black and white, and reduce
+      problems for people with color blindness. Remember, the best way to
+      support accessibility for all visual disabilities is to provide
+      alternatives to visual information (especially color), using text and
+      tabular versions of the visualization. IBM data visualization guidelines.
+    </p>
+    <p>
+      Two good references for meeting accessibility requirements in data
       visualizations:{" "}
       <a
         href="https://accessibility.digital.gov/visual-design/data-visualizations/"
@@ -136,6 +171,14 @@ const AccessibilityGuidelines = () => (
         rel="noopener noreferrer"
       >
         Data Visualizations
+      </a>
+      ,{" "}
+      <a
+        href="https://www.ibm.com/design/language/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        IBM Data Visualization Guidelines
       </a>
       .
     </p>

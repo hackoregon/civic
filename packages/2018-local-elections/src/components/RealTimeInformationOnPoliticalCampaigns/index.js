@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/destructuring-assignment */
 import React from "react";
 import PropTypes from "prop-types";
 import { css } from "emotion";
@@ -29,7 +31,6 @@ import {
 import { campaign, electionCycle } from "./defaults";
 import ContributorBreakdown from "./ContributorBreakdown";
 import SpendingBreakdown from "./SpendingBreakdown";
-import MoneyRaisedKPI from "./MoneyRaisedKPI";
 import Controls from "./Controls";
 
 const descriptionClass = css``;
@@ -57,18 +58,14 @@ const chartStyle = css`
 
 const propTypes = {
   query: PropTypes.func,
-  loading: PropTypes.bool,
-  campaign: PropTypes.object,
-  committees: PropTypes.object,
+  campaign: PropTypes.shape({}),
+  committees: PropTypes.shape({}),
   setCampaign: PropTypes.func,
-  electionCycle: PropTypes.object,
+  electionCycle: PropTypes.shape({}),
   electionCycles: PropTypes.func,
-  spendingBreakdown: PropTypes.object,
+  spendingBreakdown: PropTypes.shape({}),
   setElectionCycle: PropTypes.func,
-  fetchContributorBreakdown: PropTypes.func,
-  contributorBreakdown: PropTypes.object,
-  fetchSpendingBreakdown: PropTypes.func,
-
+  contributorBreakdown: PropTypes.shape({}),
   loadingContributorBreakdown: PropTypes.bool
 };
 
@@ -189,6 +186,7 @@ export default connect(
     electionCycles: getElectionCycles(state)
   }),
   dispatch => ({
+    // eslint-disable-next-line no-shadow
     fetchChartData: (committeeID, electionCycle) => {
       dispatch(
         fetchContributorBreakdown(committeeID, electionCycle.id, {

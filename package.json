@@ -22,7 +22,7 @@
   ],
   "private": true,
   "scripts": {
-    "bootstrap": "yarn install --frozen-lockfile",
+    "bootstrap": "yarn install --frozen-lockfile && yarn --cwd ./packages/component-library/ build",
     "build": "lerna run build",
     "configure": "lerna run configure",
     "publish-patch": "lerna publish bump patch --yes",
@@ -32,9 +32,9 @@
     "clean": "lerna clean && rimraf node_modules",
     "watch": "node scripts/watch",
     "start": "node scripts/start",
-    "deploy-storybook": "BABEL_ENV=esm storybook-to-ghpages",
+    "deploy-storybook": "NODE_OPTIONS=--max_old_space_size=4096 BABEL_ENV=esm storybook-to-ghpages",
     "in": "lerna run --scope",
-    "lint": "lerna run lint",
+    "lint": "lerna run lint --no-bail",
     "lint:fix": "lerna run lint --no-bail -- --fix",
     "storybook": "BABEL_ENV=esm start-storybook -p 6006",
     "test": "lerna run test --no-bail",
@@ -48,11 +48,12 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,json}": [
+    "*.{js,jsx}": [
       "prettier --write",
+      "eslint --fix",
       "git add"
     ],
-    "*.{css,md}": [
+    "*.{css,md,json}": [
       "prettier --write",
       "git add"
     ]

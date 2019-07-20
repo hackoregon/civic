@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default */
 import DeclineInRidership from "./components/DeclineInRidership";
 import HistoricalChangesToBusService from "./components/HistoricalChangesToBusService";
 import ServiceAndRidership from "./components/ServiceAndRidership";

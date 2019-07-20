@@ -15,6 +15,8 @@ import {
 import ChartContainer from "../ChartContainer";
 import SimpleLegend from "../SimpleLegend";
 import civicFormat from "../utils/civicFormat";
+import DataChecker from "../utils/DataChecker";
+
 import {
   chartEvents,
   getDefaultStackedDomain,
@@ -115,53 +117,55 @@ const StackedAreaChart = ({
 
   return (
     <ChartContainer title={title} subtitle={subtitle}>
-      {legendData &&
-        (legendComponent ? (
-          legendComponent(legendData)
-        ) : (
-          <SimpleLegend className="legend" legendData={legendData} />
-        ))}
+      <DataChecker dataAccessors={{ dataKey, dataValue }} data={data}>
+        {legendData &&
+          (legendComponent ? (
+            legendComponent(legendData)
+          ) : (
+            <SimpleLegend className="legend" legendData={legendData} />
+          ))}
 
-      <VictoryChart
-        domain={chartDomain}
-        padding={{ left: 75, right: 50, bottom: 50, top: 50 }}
-        theme={CivicVictoryTheme.civic}
-      >
-        <VictoryAxis
-          style={{ grid: { stroke: "none" } }}
-          tickFormat={x => xNumberFormatter(x)}
-          title="X Axis"
-        />
-        <VictoryAxis
-          dependentAxis
-          tickFormat={y => yNumberFormatter(y)}
-          title="Y Axis"
-        />
-        <VictoryPortal>
-          <VictoryLabel
-            style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
-            text={yLabel}
-            textAnchor="middle"
-            title="Y Axis Label"
-            verticalAnchor="end"
-            x={75}
-            y={45}
+        <VictoryChart
+          domain={chartDomain}
+          padding={{ left: 75, right: 50, bottom: 50, top: 50 }}
+          theme={CivicVictoryTheme.civic}
+        >
+          <VictoryAxis
+            style={{ grid: { stroke: "none" } }}
+            tickFormat={x => xNumberFormatter(x)}
+            title="X Axis"
           />
-        </VictoryPortal>
-        <VictoryPortal>
-          <VictoryLabel
-            style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
-            text={xLabel}
-            textAnchor="end"
-            title="X Axis Label"
-            verticalAnchor="end"
-            x={600}
-            y={295}
+          <VictoryAxis
+            dependentAxis
+            tickFormat={y => yNumberFormatter(y)}
+            title="Y Axis"
           />
-        </VictoryPortal>
-        <VictoryStack>{areas}</VictoryStack>
-        <VictoryStack>{dots}</VictoryStack>
-      </VictoryChart>
+          <VictoryPortal>
+            <VictoryLabel
+              style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
+              text={yLabel}
+              textAnchor="middle"
+              title="Y Axis Label"
+              verticalAnchor="end"
+              x={75}
+              y={45}
+            />
+          </VictoryPortal>
+          <VictoryPortal>
+            <VictoryLabel
+              style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
+              text={xLabel}
+              textAnchor="end"
+              title="X Axis Label"
+              verticalAnchor="end"
+              x={600}
+              y={295}
+            />
+          </VictoryPortal>
+          <VictoryStack>{areas}</VictoryStack>
+          <VictoryStack>{dots}</VictoryStack>
+        </VictoryChart>
+      </DataChecker>
     </ChartContainer>
   );
 };

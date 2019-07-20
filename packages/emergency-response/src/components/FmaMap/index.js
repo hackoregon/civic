@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from "react";
 import { BaseMap, MapOverlay } from "@hackoregon/component-library";
 import { isEmpty } from "ramda";
@@ -18,6 +19,12 @@ class FmaMap extends React.Component {
 
   render() {
     const { fmasData, fmaPanelData, renderPanel } = this.props;
+    const getFillColor = f => {
+      if (fmaPanelData && fmaPanelData.fma_id === f.properties.fma_id) {
+        return [220, 69, 86, 255];
+      }
+      return [0, 100, 255, 115];
+    };
 
     return (
       <div>
@@ -25,14 +32,13 @@ class FmaMap extends React.Component {
           <BaseMap>
             <MapOverlay
               data={fmasData}
-              opacity={0.1}
-              filled
-              stroked
-              getPosition={f => f.geometry.coordinates}
+              opacity={0.8}
               onLayerClick={info => renderPanel(info.object.properties)}
-              getElevation={f => 100}
-              getFillColor={f => [0, 100, 255, 255]}
-              getLineColor={f => [220, 69, 86, 255]}
+              getFillColor={getFillColor}
+              getLineColor={[220, 69, 86, 155]}
+              getLineWidth={4}
+              autoHighlight
+              highlightColor={[220, 69, 86, 155]}
             />
           </BaseMap>
         )}

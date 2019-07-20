@@ -62,3 +62,11 @@ export const getColors = (datum, idx) =>
 export const getRandomValuesArray = (numsOf, func) =>
   [...new Array(numsOf)].map(func);
 export const objectRandomizer = () => ({ x: randomLorem(), y: randomizer() });
+
+export const getKeyNames = obj => {
+  const keyNames = {};
+  Object.keys(obj).forEach(key => {
+    keyNames[key] = key;
+  });
+  return keyNames;
+};

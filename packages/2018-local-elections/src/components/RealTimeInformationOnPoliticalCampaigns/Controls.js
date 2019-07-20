@@ -1,20 +1,24 @@
+/* eslint-disable react/destructuring-assignment */
 import React from "react";
 import PropTypes from "prop-types";
 
 import { Dropdown } from "@hackoregon/component-library";
 
 const propTypes = {
-  campaign: PropTypes.object,
-  campaigns: PropTypes.array,
+  campaign: PropTypes.shape({ filer_name: PropTypes.string }),
+  campaigns: PropTypes.arrayOf(
+    PropTypes.shape({ filer_name: PropTypes.string })
+  ),
   setCampaign: PropTypes.func,
-  electionCycles: PropTypes.array,
-  electionCycle: PropTypes.object,
+  electionCycles: PropTypes.arrayOf(
+    PropTypes.shape({ name: PropTypes.string })
+  ),
+  electionCycle: PropTypes.shape({ name: PropTypes.string }),
   setElectionCycle: PropTypes.func
 };
 
 const defaultProps = {
   campaign: {},
-  committees: [],
   electionCycle: {},
   electionCycles: []
 };

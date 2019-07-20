@@ -8,7 +8,7 @@
     "url": "git+https://github.com/hackoregon/civic.git"
   },
   "scripts": {
-    "lint": "eslint --fix index.js"
+    "lint": "eslint index.js"
   },
   "keywords": [
     "civic",
@@ -22,12 +22,10 @@
     "lodash-webpack-plugin": "^0.11.5",
     "webpack": "^4.29.6",
     "webpack-blocks": "^2.0.0-rc",
+    "webpack-bundle-analyzer": "^3.1.0",
     "webpack-cli": "^3.2.3",
     "webpack-dev-middleware": "^3.6.1",
     "webpack-hot-middleware": "^2.24.3"
-  },
-  "devDependencies": {
-    "webpack-bundle-analyzer": "^3.1.0"
   },
   "gitHead": "b50f7a7fca617964ade5a3ecb5225fee17b20fe4"
 }

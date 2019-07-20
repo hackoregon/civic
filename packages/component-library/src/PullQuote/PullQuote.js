@@ -2,11 +2,13 @@ import PropTypes from "prop-types";
 import React from "react";
 import { css } from "emotion";
 import { TwitterShareButton, TwitterIcon } from "react-share";
+import { get } from "lodash";
+import window from "global/window";
 
 const quoteClass = css`
   font-family: "Merriweather", serif;
   font-size: 24px;
-  color: #eb4d5f;
+  color: #1e62bd;
   margin-bottom: 12px;
 `;
 
@@ -25,12 +27,15 @@ const iconClass = css`
 const wrapperClass = css`
   max-width: 700px;
   text-align: center;
-  margin: 80px auto;
+  margin: 60px auto;
 `;
 
 const PullQuote = ({ quoteText, quoteAttribution, url }) => (
   <div className={wrapperClass}>
-    <TwitterShareButton url={url || window.location.href} title={quoteText}>
+    <TwitterShareButton
+      url={url || get(window, "location.href", "")}
+      title={quoteText}
+    >
       <blockquote className={quoteClass}>
         &#8220;
         {quoteText}
@@ -41,7 +46,7 @@ const PullQuote = ({ quoteText, quoteAttribution, url }) => (
         ) : null}
       </blockquote>
       <div className={iconClass}>
-        <TwitterIcon size={24} round iconBgStyle={{ fill: "#eb4d5f" }} />
+        <TwitterIcon size={24} round iconBgStyle={{ fill: "#1E62BD" }} />
       </div>
     </TwitterShareButton>
   </div>

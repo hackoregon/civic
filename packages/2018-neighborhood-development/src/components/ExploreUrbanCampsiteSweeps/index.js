@@ -45,7 +45,8 @@ export class ExploreUrbanCampsiteSweeps extends React.Component {
       <ScatterPlotMap
         data={data}
         autoHighlight={false}
-        getColor={() => [220, 69, 86]}
+        getFillColor={() => [220, 69, 86]}
+        getLineColor={() => [220, 69, 86]}
         getRadius={() => 100}
       />
     );

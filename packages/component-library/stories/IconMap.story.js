@@ -241,7 +241,7 @@ class TouchScreenDemo extends React.Component {
         <input
           type="button"
           onClick={this.clearPoints}
-          value={"Clear all points"}
+          value="Clear all points"
         />
       </div>
     );

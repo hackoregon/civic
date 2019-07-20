@@ -1,4 +1,4 @@
-export const transportationData = [
+const transportationData = [
   {
     year: 2001,
     weekday_sum_ons: 217309,
@@ -306,3 +306,5 @@ export const transportationData = [
     total_total_stops: 1511
   }
 ];
+
+export default transportationData;

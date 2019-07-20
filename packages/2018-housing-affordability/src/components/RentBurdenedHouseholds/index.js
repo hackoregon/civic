@@ -1,7 +1,6 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import { connect } from "react-redux";
-import { loader, error, gradientLabel, emphasis } from "../css-utils";
-
 import {
   CivicStoryCard,
   Dropdown,
@@ -9,6 +8,7 @@ import {
   PieChart,
   GradientScale
 } from "@hackoregon/component-library";
+import { loader, error, gradientLabel, emphasis } from "../css-utils";
 
 import {
   fetchAllRentBurdenCities,
@@ -27,8 +27,9 @@ import {
 
 export class RentBurdenedHouseholds extends React.Component {
   componentDidMount() {
-    this.props.fetchAllCities();
-    this.props.setCity();
+    const { fetchAllCities, setCity } = this.props;
+    fetchAllCities();
+    setCity();
   }
 
   render() {
@@ -37,7 +38,6 @@ export class RentBurdenedHouseholds extends React.Component {
       isError,
       allCities,
       selectedCity,
-      selectedCityData,
       selectedCityRank,
       setCity,
       chartData

@@ -109,6 +109,8 @@ const GradientScale = ({
         width={width}
       >
         <GradientBox padding={0} fill="url(#myGradient)" />
+        {/* Necessary dummy component to make VictoryLine work within GradientBox work */}
+        <VictoryScatter data={data} dataComponent={<GradientLine />} />
         <VictoryScatter data={data} dataComponent={<GradientLine />} />
       </VictoryGroup>
     </div>

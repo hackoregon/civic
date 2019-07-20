@@ -1,9 +1,9 @@
 import { ungroupBy } from "@hackoregon/component-library/dist/utils";
-import { disasterData } from "./disasterData";
-import { housingData } from "./housingData";
-import { transportationData } from "./transportationData";
-import { electionData } from "./electionData";
-import { educationData } from "./educationData";
+import disasterData from "./disasterData";
+import housingData from "./housingData";
+import transportationData from "./transportationData";
+import electionData from "./electionData";
+import educationData from "./educationData";
 
 const CHARTB_CATEGORIES = [
   "black",
@@ -50,8 +50,6 @@ const formatData = arr =>
   }));
 
 const getChartData = data => {
-  if (!data) return;
-
   const _ = { value: 0 };
 
   const severeBurden = +(

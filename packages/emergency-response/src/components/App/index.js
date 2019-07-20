@@ -20,6 +20,8 @@ function App(props) {
   return (
     <PageLayout header={false}>
       <CivicStoryCard
+        watermark={<div />}
+        footer={false}
         title="What Does Portland Fire &amp; Rescue Do?"
         slug="what-they-do"
       >
@@ -60,6 +62,8 @@ function App(props) {
         </div>
       </CivicStoryCard>
       <CivicStoryCard
+        watermark={<div />}
+        footer={false}
         title="Who Does Portland Fire &amp; Rescue Serve?"
         slug="er-map"
       >
@@ -75,6 +79,8 @@ function App(props) {
         <FmaMap />
       </CivicStoryCard>
       <CivicStoryCard
+        watermark={<div />}
+        footer={false}
         title="How Busy Is Portland Fire &amp; Rescue? When Are They Most Busy?"
         slug="when-theyre-busy"
       >
@@ -96,7 +102,12 @@ function App(props) {
           hour.
         </p>
       </CivicStoryCard>
-      <CivicStoryCard title="The First Five Minutes" slug="first-five-minutes">
+      <CivicStoryCard
+        watermark={<div />}
+        footer={false}
+        title="The First Five Minutes"
+        slug="first-five-minutes"
+      >
         <img
           style={{ maxWidth: "100%" }}
           src={firstFiveMinutesTimeline}
@@ -108,6 +119,8 @@ function App(props) {
         </p>
       </CivicStoryCard>
       <CivicStoryCard
+        watermark={<div />}
+        footer={false}
         title="The Anatomy Of A Four-Alarm Fire"
         slug="anatomy-of-a-four-alarm-fire"
       >
@@ -123,6 +136,8 @@ function App(props) {
         <BagelShop />
       </CivicStoryCard>
       <CivicStoryCard
+        watermark={<div />}
+        footer={false}
         title="How Response Time Varies Across The City"
         slug="response-time-varies"
       >

@@ -1,4 +1,4 @@
-export const disasterData = [
+const disasterData = [
   {
     displaced_percap: 0.029379256213786027,
     census_response_rate: 0.16055548700000002,
@@ -818,3 +818,5 @@ export const disasterData = [
     displacementLabel: "Displacement"
   }
 ];
+
+export default disasterData;

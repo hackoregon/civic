@@ -31,13 +31,10 @@ describe("PieChart", () => {
   });
 
   describe("nullable props handling", () => {
-    const nullProps = {
-      dataLabel: null,
-      dataValue: null
-    };
+    const nullProps = {};
     const valueProps = {
-      dataLabel: "foo",
-      dataValue: "bar"
+      dataLabel: "x",
+      dataValue: "y"
     };
     const nulledWrapper = shallow(
       <PieChart {...defaultProps} {...nullProps} />

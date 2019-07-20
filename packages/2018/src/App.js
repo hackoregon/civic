@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import React from "react";
 import { createStore, compose, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
@@ -48,9 +49,22 @@ import {
   App as FarmersMarketsApp
 } from "@hackoregon/2018-example-farmers-markets";
 
+import {
+  Routes as Housing2019Routes,
+  Reducers as Housing2019Reducers,
+  App as Housing2019App
+} from "@hackoregon/2019-housing";
+
+import {
+  Routes as Template2019Routes,
+  Reducers as Template2019Reducers,
+  App as Template2019App
+} from "@hackoregon/2019-template";
+
 import { Reducers as SandboxReducers } from "@hackoregon/civic-sandbox";
 
 import "./fonts.css";
+// eslint-disable-next-line import/no-named-as-default
 import RootPage from "./components/RootPage";
 import HomePage from "./components/HomePage";
 import SandboxPage from "./components/SandboxPage";
@@ -58,6 +72,7 @@ import PortlandCollectionPage from "./components/PortlandCollectionPage";
 import CityNotFoundPage from "./components/CityNotFoundPage";
 import StateNotFoundPage from "./components/StateNotFoundPage";
 import CardDetailPage from "./components/CardDetailPage";
+import CardDetailPageEmbed from "./components/CardDetailPageEmbed";
 
 // Create a store by combining all project reducers and the routing reducer
 const configureStore = (initialState, history) => {
@@ -78,7 +93,10 @@ const configureStore = (initialState, history) => {
       neighborhood: NeighborhoodReducers(),
       transportation: TransportationReducers(),
       farmersMarkets: FarmersMarketsReducers(),
-      sandbox: SandboxReducers()
+      sandbox: SandboxReducers(),
+      // Temporarily Hidden 2019 Pages ⬇️
+      housing2019: Housing2019Reducers(),
+      template2019: Template2019Reducers()
     }),
     initialState,
     composeEnhancers(applyMiddleware(...middlewares))
@@ -96,7 +114,10 @@ const configureStore = (initialState, history) => {
         "@hackoregon/2018-neighborhood-development",
         "@hackoregon/2018-transportation-systems",
         "@hackoregon/2018-example-farmers-markets",
-        "@hackoregon/civic-sandbox"
+        "@hackoregon/civic-sandbox",
+        // Temporarily Hidden 2019 Pages ⬇️
+        "@hackoregon/2019-housing",
+        "@hackoregon/2019-template"
       ],
       () => {
         const nextRootReducer = combineReducers({
@@ -107,7 +128,10 @@ const configureStore = (initialState, history) => {
           neighborhood: require("@hackoregon/2018-neighborhood-development").Reducers(),
           transportation: require("@hackoregon/2018-transportation-systems").Reducers(),
           farmersMarkets: require("@hackoregon/2018-example-farmers-markets").Reducers(),
-          sandbox: require("@hackoregon/civic-sandbox").Reducers()
+          sandbox: require("@hackoregon/civic-sandbox").Reducers(),
+          // Temporarily Hidden 2019 Pages ⬇️
+          housing2019: require("@hackoregon/2019-housing").Reducers(),
+          template2019: require("@hackoregon/2019-template").Reducers()
         });
         store.replaceReducer(nextRootReducer);
       }
@@ -189,8 +213,33 @@ const routes = {
       component: CardDetailPage
     },
     {
+      path: "cards/:slug/embed",
+      component: CardDetailPageEmbed
+    },
+    {
       path: "sandbox",
       component: SandboxPage
+    },
+    // Temporarily Hidden 2019 Pages ⬇️
+    {
+      path: "2019",
+      childRoutes: [
+        {
+          path: "housing",
+          component: Housing2019App,
+          childRoutes: Housing2019Routes(store)
+        }
+      ]
+    },
+    {
+      path: "2019",
+      childRoutes: [
+        {
+          path: "template",
+          component: Template2019App,
+          childRoutes: Template2019Routes(store)
+        }
+      ]
     }
   ]
 };

@@ -20,6 +20,9 @@ const cardClass = css`
     line-height: 1.6;
   }
 
+  h2 {
+    color: #001732;
+  }
   @media (max-width: 640px) {
     padding: 3em 2em;
   }
@@ -61,17 +64,13 @@ const cardError = css`
   color: #ee495c;
 `;
 
-const desktopOnly = css`
-  @media (max-width: 640px) {
-    display: none;
-  }
-`;
-
-const mobileOnly = css`
-  display: none;
-  @media (max-width: 640px) {
-    display: block;
-  }
+const scaleCorner = css`
+  width: 10vw;
+  min-width: 67px;
+  max-width: 134px;
+  height: 10vw;
+  min-height: 67px;
+  max-height: 134px;
 `;
 
 const CivicStoryCard = ({
@@ -103,18 +102,11 @@ const CivicStoryCard = ({
     <div className={cardClass}>
       <div className={watermarkContainer}>
         {watermark || (
-          <svg xmlns="http://www.w3.org/2000/svg">
-            <g className={desktopOnly} fill="none" fillRule="evenodd">
+          <svg className={scaleCorner} xmlns="http://www.w3.org/2000/svg">
+            <g fill="none" fillRule="evenodd">
               <path d="M0 134.658V0l11.566 11.597v123.061H0z" fill="#191119" />
               <path
                 d="M133.864 0v11.597H11.566v.008L0 .008V0h133.864z"
-                fill="#DC4556"
-              />
-            </g>
-            <g className={mobileOnly} fill="none" fillRule="evenodd">
-              <path d="M0 75V0l11.566 11.597v63.421H0z" fill="#191119" />
-              <path
-                d="M75 0v11.597H11.566v.008L0 .008V0h133.864z"
                 fill="#DC4556"
               />
             </g>

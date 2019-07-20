@@ -49,18 +49,21 @@ export class SignificantStructuralDamage extends React.Component {
                     <img
                       src="https://s3-us-west-2.amazonaws.com/hacko-cdn/2018-disaster-resilience/CriticalEnergy.svg"
                       className={infographicImg}
+                      alt="Oregon Fuel Reserve in NW Industrial. Condition After Quake: Not Functional. Impact To Region: Statewide Fuel Shortage."
                     />
                   </div>
                   <div className={infographicItem}>
                     <img
                       src="https://s3-us-west-2.amazonaws.com/hacko-cdn/2018-disaster-resilience/Bridge.svg"
                       className={infographicImg}
+                      alt="Portland Bridges. Condition After Quake: Usable: 2, Unusable: 10. Impact to Region: East-west regions will be mostly cut off from each other."
                     />
                   </div>
                   <div className={infographicItem}>
                     <img
                       src="https://s3-us-west-2.amazonaws.com/hacko-cdn/2018-disaster-resilience/Airport.svg"
                       className={infographicImg}
+                      alt="PDX Airport. Condition After Quake: Unusable. Impact to Region: Difficulties for aid and resources delivery."
                     />
                   </div>
                 </div>

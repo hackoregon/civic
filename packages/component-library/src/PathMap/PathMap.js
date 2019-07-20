@@ -1,11 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
 import DeckGL, { PathLayer } from "deck.gl";
-import { css } from "emotion";
-
-const crosshair = css`
-  cursor: crosshair;
-`;
 
 const PathMap = props => {
   const {
@@ -36,11 +31,11 @@ const PathMap = props => {
     });
   });
 
-  const tooltipRender = tooltipInfo ? tooltip : null;
+  const tooltipRender = tooltipInfo && x && y ? tooltip : null;
 
   return (
-    <div className={crosshair}>
-      <DeckGL className="DeckGL" {...viewport}>
+    <div>
+      <DeckGL className="DeckGL" {...viewport} getCursor={() => "crosshair"}>
         <PathLayer
           id="path-layer"
           className="PathMap"
@@ -61,8 +56,8 @@ const PathMap = props => {
           updateTriggers={{ instanceColors: getColor }}
           visible={visible}
         />
-        {tooltipRender}
       </DeckGL>
+      {tooltipRender}
     </div>
   );
 };
@@ -70,10 +65,13 @@ const PathMap = props => {
 PathMap.propTypes = {
   viewport: PropTypes.shape({}),
   data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  getColor: PropTypes.func,
+  getColor: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.arrayOf(PropTypes.number)
+  ]),
   opacity: PropTypes.number,
   getPath: PropTypes.func,
-  getWidth: PropTypes.func,
+  getWidth: PropTypes.oneOfType([PropTypes.func, PropTypes.number]),
   widthScale: PropTypes.number,
   rounded: PropTypes.bool,
   autoHighlight: PropTypes.bool,

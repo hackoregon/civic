@@ -3,6 +3,7 @@
 
 import React from "react";
 import { cx, css } from "emotion";
+import window from "global/window";
 
 import { Header, Footer } from "@hackoregon/component-library";
 import CanvasParticles from "./CanvasParticles";
@@ -491,7 +492,7 @@ class LandingPage extends React.Component {
                 <div className={listTitle}>Supporting People</div>
                 <div className={listSubTitle}>Vision</div>
                 <p className={listText}>
-                  Empowering cities to create technology that is a reflection
+                  Empowering cities to create technology that is a reflection of
                   their ambition, their values, and their priorities.
                 </p>
                 <div className={listSubTitle}>Workflow</div>

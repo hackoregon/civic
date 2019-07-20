@@ -1,9 +1,11 @@
+/* eslint-disable no-unused-expressions */
 import configureMockStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import * as actions from "./actions";
 import * as selectors from "./selectors";
 import reducer from "./index";
 
+// eslint-disable-next-line no-unused-vars
 const mockStore = configureMockStore([thunk]);
 
 describe("ridership-over-time", () => {

@@ -8,7 +8,7 @@
     "url": "git+https://github.com/hackoregon/civic.git"
   },
   "scripts": {
-    "lint": "eslint --fix index.js"
+    "lint": "eslint index.js"
   },
   "private": false,
   "keywords": [
@@ -17,10 +17,15 @@
   ],
   "author": "",
   "license": "MIT",
-  "devDependencies": {
+  "gitHead": "b50f7a7fca617964ade5a3ecb5225fee17b20fe4",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "compression": "^1.7.4",
+    "express": "^4.17.1",
     "redux-logger": "^3.0.6",
+    "webpack": "^4.33.0",
     "webpack-dev-middleware": "^3.6.1",
-    "webpack-hot-middleware": "^2.22.0"
-  },
-  "gitHead": "b50f7a7fca617964ade5a3ecb5225fee17b20fe4"
+    "webpack-hot-middleware": "^2.22.0",
+    "open": "^6.3.0"
+  }
 }

@@ -1,19 +1,20 @@
 import React from "react";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
-import { withKnobs, number, select, boolean } from "@storybook/addon-knobs";
+import {
+  withKnobs,
+  number,
+  select,
+  boolean,
+  object
+} from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 import { checkA11y } from "@storybook/addon-a11y";
 import { scaleThreshold } from "d3";
 import { BaseMap, PathMap, MapTooltip, DemoJSONLoader } from "../src";
+import notes from "./PathMap.notes.md";
 
-const optionsStyle = {
-  "Hack Oregon Light": "mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg",
-  "Hack Oregon Dark": "mapbox://styles/hackoregon/cjie02elo1vyw2rohd24kbtbd",
-  "Navigation Guidance Night v2":
-    "mapbox://styles/mapbox/navigation-guidance-night-v2",
-  "Dark v9": "mapbox://styles/mapbox/dark-v9"
-};
+const baseMapStyle = "mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg";
 
 const colorSchemeOptions = {
   "Red Yellow Blue":
@@ -31,6 +32,13 @@ const opacityOptions = {
   step: 0.05
 };
 
+const getWidthOptions = {
+  range: true,
+  min: 0,
+  max: 100,
+  step: 1
+};
+
 const widthScaleOptions = {
   range: true,
   min: 1,
@@ -38,134 +46,226 @@ const widthScaleOptions = {
   step: 0.5
 };
 
+const GROUP_IDS = {
+  MARKER: "Marker",
+  DATA: "Data"
+};
+
 const mapData = [
   "https://service.civicpdx.org/transportation-systems/sandbox/slides/routechange/"
 ];
 
-const demoMap = () => (
-  <DemoJSONLoader urls={mapData}>
-    {data => {
-      const mapboxStyle = select(
-        "Mapbox Style",
-        optionsStyle,
-        optionsStyle["Hack Oregon Light"]
-      );
+const highlightColor = [125, 125, 125, 125];
 
-      const colorScheme = select(
-        "Color Scheme:",
-        colorSchemeOptions,
-        colorSchemeOptions["Purple Green"]
-      );
-      const colors = JSON.parse(colorScheme);
+const parseColors = colorScheme => JSON.parse(colorScheme);
 
-      const divergingScale = scaleThreshold()
-        .domain([-100, -75, -50, -25, 0, 25, 50, 75, 100])
-        .range(colors);
+const getPath = f => f.geometry.coordinates;
 
-      const getPathColor = f => {
-        const value = f.properties.pct_change;
-        return divergingScale(value);
-      };
+// const getWidthSandard = () => 15;
 
-      const opacity = number("Opacity:", 0.95, opacityOptions);
-      const getPath = f => f.geometry.coordinates;
-      const getWidth = () => 15;
-      const widthScale = number("Width Scale:", 1, widthScaleOptions);
-      const rounded = boolean("Rounded:", true);
-      const highlightColor = [125, 125, 125, 125];
+const standardColor = [25, 183, 170, 255];
 
-      return (
-        <BaseMap
-          mapboxStyle={mapboxStyle}
-          initialZoom={12}
-          initialLatitude={45.523027}
-          initialLongitude={-122.67037}
-        >
-          <PathMap
-            data={data.slide_data.features}
-            getColor={getPathColor}
-            opacity={opacity}
-            getPath={getPath}
-            getWidth={getWidth}
-            widthScale={widthScale}
-            rounded={rounded}
-            highlightColor={highlightColor}
-            onLayerClick={info =>
-              action("Layer clicked:", { depth: 2 })(info, info.object)
-            }
-          />
-        </BaseMap>
-      );
-    }}
-  </DemoJSONLoader>
-);
-
-const tooltipMap = () => (
-  <DemoJSONLoader urls={mapData}>
-    {data => {
-      const mapboxStyle = select(
-        "Mapbox Style",
-        optionsStyle,
-        optionsStyle["Hack Oregon Light"]
-      );
-
-      const colorScheme = select(
-        "Color Scheme:",
-        colorSchemeOptions,
-        colorSchemeOptions["Purple Green"]
-      );
-      const colors = JSON.parse(colorScheme);
-
-      const divergingScale = scaleThreshold()
-        .domain([-100, -75, -50, -25, 0, 25, 50, 75, 100])
-        .range(colors);
-
-      const getPathColor = f => {
-        const value = f.properties.pct_change;
-        return divergingScale(value);
-      };
-
-      const opacity = number("Opacity:", 0.95, opacityOptions);
-      const getPath = f => f.geometry.coordinates;
-      const getWidth = () => 15;
-      const widthScale = number("Width Scale:", 1, widthScaleOptions);
-      const rounded = boolean("Rounded:", true);
-      const highlightColor = [125, 125, 125, 125];
-
-      return (
-        <BaseMap
-          mapboxStyle={mapboxStyle}
-          initialZoom={12}
-          initialLatitude={45.523027}
-          initialLongitude={-122.67037}
-        >
-          <PathMap
-            data={data.slide_data.features}
-            getColor={getPathColor}
-            opacity={opacity}
-            getPath={getPath}
-            getWidth={getWidth}
-            widthScale={widthScale}
-            rounded={rounded}
-            highlightColor={highlightColor}
-            onLayerClick={info =>
-              action("Layer clicked:", { depth: 2 })(info, info.object)
-            }
-          >
-            <MapTooltip
-              primaryName="Percent Change"
-              primaryField="pct_change"
-            />
-          </PathMap>
-        </BaseMap>
-      );
-    }}
-  </DemoJSONLoader>
-);
-
-export default () =>
+export default () => {
   storiesOf("Component Lib|Maps/Path Map", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
-    .add("Simple usage", demoMap)
-    .add("With tooltip", tooltipMap);
+    .add(
+      "Standard",
+      () => {
+        const getColor = object("Color: ", standardColor, GROUP_IDS.MARKER);
+
+        const opacity = number(
+          "Opacity:",
+          0.95,
+          opacityOptions,
+          GROUP_IDS.MARKER
+        );
+
+        const getWidth = number(
+          "Width:",
+          15,
+          getWidthOptions,
+          GROUP_IDS.MARKER
+        );
+
+        return (
+          <DemoJSONLoader urls={mapData}>
+            {allData => {
+              const data = object(
+                "Data",
+                allData.slide_data.features,
+                GROUP_IDS.DATA
+              );
+              return (
+                <BaseMap
+                  mapboxStyle={baseMapStyle}
+                  initialZoom={12}
+                  initialLatitude={45.523027}
+                  initialLongitude={-122.67037}
+                >
+                  <PathMap
+                    data={data}
+                    getColor={getColor}
+                    opacity={opacity}
+                    getPath={getPath}
+                    getWidth={getWidth}
+                  />
+                </BaseMap>
+              );
+            }}
+          </DemoJSONLoader>
+        );
+      },
+      { notes }
+    )
+    .add(
+      "Custom",
+      () => {
+        const colorScheme = select(
+          "Color Scheme:",
+          colorSchemeOptions,
+          colorSchemeOptions["Purple Green"],
+          GROUP_IDS.MARKER
+        );
+        const colors = parseColors(colorScheme);
+
+        const divergingScale = scaleThreshold()
+          .domain([-100, -75, -50, -25, 0, 25, 50, 75, 100])
+          .range(colors);
+
+        const getPathColor = f => {
+          const value = f.properties.pct_change;
+          return divergingScale(value);
+        };
+
+        const opacity = number(
+          "Opacity:",
+          0.95,
+          opacityOptions,
+          GROUP_IDS.MARKER
+        );
+
+        const getWidth = number(
+          "Width:",
+          15,
+          getWidthOptions,
+          GROUP_IDS.MARKER
+        );
+
+        const widthScale = number(
+          "Width Scale:",
+          1,
+          widthScaleOptions,
+          GROUP_IDS.MARKER
+        );
+
+        const rounded = boolean("Rounded:", true, GROUP_IDS.MARKER);
+
+        const autoHighlight = boolean(
+          "Auto Highlight:",
+          true,
+          GROUP_IDS.MARKER
+        );
+
+        const getHighlightColor = object(
+          "Highlight Color: ",
+          highlightColor,
+          GROUP_IDS.MARKER
+        );
+
+        return (
+          <DemoJSONLoader urls={mapData}>
+            {allData => {
+              const data = object(
+                "Data",
+                allData.slide_data.features,
+                GROUP_IDS.DATA
+              );
+              return (
+                <BaseMap
+                  mapboxStyle={baseMapStyle}
+                  initialZoom={12}
+                  initialLatitude={45.523027}
+                  initialLongitude={-122.67037}
+                >
+                  <PathMap
+                    data={data}
+                    getColor={getPathColor}
+                    opacity={opacity}
+                    getPath={getPath}
+                    getWidth={getWidth}
+                    widthScale={widthScale}
+                    rounded={rounded}
+                    autoHighlight={autoHighlight}
+                    highlightColor={getHighlightColor}
+                    onLayerClick={info =>
+                      action("Layer clicked:", { depth: 2 })(info, info.object)
+                    }
+                  />
+                </BaseMap>
+              );
+            }}
+          </DemoJSONLoader>
+        );
+      },
+      { notes }
+    )
+    .add(
+      "Example: With Tooltip",
+      () => {
+        const getColor = object(
+          "Color: ",
+          [25, 183, 170, 255],
+          GROUP_IDS.MARKER
+        );
+
+        const opacity = number(
+          "Opacity:",
+          0.95,
+          opacityOptions,
+          GROUP_IDS.MARKER
+        );
+
+        const getWidth = number(
+          "Width:",
+          15,
+          getWidthOptions,
+          GROUP_IDS.MARKER
+        );
+
+        return (
+          <DemoJSONLoader urls={mapData}>
+            {allData => {
+              const data = object(
+                "Data",
+                allData.slide_data.features,
+                GROUP_IDS.DATA
+              );
+              return (
+                <BaseMap
+                  mapboxStyle={baseMapStyle}
+                  initialZoom={12}
+                  initialLatitude={45.523027}
+                  initialLongitude={-122.67037}
+                >
+                  <PathMap
+                    data={data}
+                    getColor={getColor}
+                    opacity={opacity}
+                    getPath={getPath}
+                    getWidth={getWidth}
+                  >
+                    <MapTooltip
+                      primaryName="Percent Change"
+                      primaryField="pct_change"
+                    />
+                  </PathMap>
+                </BaseMap>
+              );
+            }}
+          </DemoJSONLoader>
+        );
+      },
+      { notes }
+    );
+};

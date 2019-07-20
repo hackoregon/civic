@@ -1,4 +1,4 @@
-export const educationData = [
+const educationData = [
   {
     id: 218,
     year: 2005,
@@ -231,3 +231,5 @@ export const educationData = [
     class_size: 23.9
   }
 ];
+
+export default educationData;

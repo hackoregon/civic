@@ -2,60 +2,25 @@ import React from "react";
 import { css } from "emotion";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
-import { object, text, withKnobs } from "@storybook/addon-knobs";
-import { LineChart, SimpleLegend } from "../src";
+import {
+  object,
+  text,
+  number,
+  withKnobs,
+  optionsKnob as options
+} from "@storybook/addon-knobs";
+import { LineChart, SimpleLegend, civicFormat } from "../src";
+import { getKeyNames } from "./shared";
+import notes from "./lineChart.notes.md";
 
-const sampleSimpleData = [
-  { x: 0, y: 20 },
-  { x: 10, y: 30 },
-  { x: 20, y: 50 },
-  { x: 30, y: 40 }
-];
+const GROUP_IDS = {
+  LABELS: "Labels",
+  DATA: "Data",
+  CUSTOM: "Custom"
+};
 
-const sampleData = [
-  { x: 0, y: 2, series: "cat" },
-  { x: 1, y: 3, series: "cat" },
-  { x: 2, y: 5, series: "cat" },
-  { x: 3, y: 4, series: "cat" },
-  { x: 4, y: 7, series: "cat" },
-  { x: 0, y: 4, series: "dog" },
-  { x: 1, y: 5, series: "dog" },
-  { x: 2, y: 2, series: "dog" },
-  { x: 3, y: 3, series: "dog" },
-  { x: 4, y: 4, series: "dog" }
-];
-const sampleDataSeries = "series";
-const sampledataSeriesLabel = [
-  { category: "cat", label: "Cat" },
-  { category: "dog", label: "Dog" }
-];
-const sampleDomain = { x: [0, 6], y: [0, 8] };
-const sampleSize = { key: "y" };
-const sampleSubtitle = "A description of this chart.";
-const sampleTitle = "Some title";
-const sampleXKey = "x";
-const sampleXLabel = "Number of animals";
-const sampleYKey = "y";
-const sampleYLabel = "Cuteness rating";
-const sampleDataKeyLabel = "Animals";
-const sampleDataValueLabel = "Cuteness";
-
-const sampleUnstructuredData = [
-  { size: 0, age: 2000000, type: "cat" },
-  { size: 5, age: 3000000, type: "cat" },
-  { size: 10, age: 7000000, type: "cat" },
-  { size: 0, age: 5000320, type: "fish" },
-  { size: 5, age: 40002300, type: "fish" },
-  { size: 10, age: 5007000, type: "fish" },
-  { size: 0, age: 3000000, type: "dog" },
-  { size: 5, age: 3000500, type: "dog" },
-  { size: 10, age: 3000000.5, type: "dog" }
-];
-const sampleUnstructuredXKey = "size";
-const sampleUnstructuredYKey = "age";
-const sampleUnstructuredDataSeries = "type";
-const sampleUnstructuredXLabel = "Size (ft)";
-const sampleUnstructuredYLabel = "Age (yrs)";
+const xFormatterOptions = getKeyNames(civicFormat);
+const yFormatterOptions = getKeyNames(civicFormat);
 
 const customLegend = legendData => {
   const legendStyle = css`
@@ -65,7 +30,6 @@ const customLegend = legendData => {
     text-align: center;
     margin: 10px 0 0 0;
   `;
-
   const legendContainer = css`
     display: flex;
     width: 100%;
@@ -104,117 +68,242 @@ const customLegend = legendData => {
 export default () =>
   storiesOf("Component Lib|Charts/Line Chart", module)
     .addDecorator(withKnobs)
-    .add("Simple usage", () => <LineChart data={sampleSimpleData} />)
-    .add("With some props", () => {
-      const data = object("Data", sampleData);
-      const dataKey = text("dataKey", sampleXKey);
-      const dataValue = text("dataValue", sampleYKey);
-      const dataSeries = text("dataSeries", sampleDataSeries);
-      const subtitle = text("Subtitle", sampleSubtitle);
-      const title = text("Title", sampleTitle);
-      const xLabel = text("xLabel", sampleXLabel);
-      const yLabel = text("yLabel", sampleYLabel);
+    .add(
+      "Standard",
+      () => {
+        const sampleTransportationData = [
+          { year: 2001, ridership: 217309, series: "weekday" },
+          { year: 2002, ridership: 254651, series: "weekday" },
+          { year: 2003, ridership: 213986, series: "weekday" },
+          { year: 2004, ridership: 266412, series: "weekday" },
+          { year: 2005, ridership: 313494, series: "weekday" },
+          { year: 2001, ridership: 73028, series: "saturday" },
+          { year: 2002, ridership: 113778, series: "saturday" },
+          { year: 2003, ridership: 111636, series: "saturday" },
+          { year: 2004, ridership: 155272, series: "saturday" },
+          { year: 2005, ridership: 188757, series: "saturday" },
+          { year: 2001, ridership: 73028, series: "sunday" },
+          { year: 2002, ridership: 75042, series: "sunday" },
+          { year: 2003, ridership: 75615, series: "sunday" },
+          { year: 2004, ridership: 108040, series: "sunday" },
+          { year: 2005, ridership: 134569, series: "sunday" }
+        ];
+        const sampleDataSeries = "series";
+        const sampleDataSeriesLabel = [
+          { category: "weekday", label: "Weekday" },
+          { category: "saturday", label: "Saturday" },
+          { category: "sunday", label: "Sunday" }
+        ];
 
-      return (
-        <LineChart
-          data={data}
-          dataKey={dataKey}
-          dataValue={dataValue}
-          dataSeries={dataSeries}
-          subtitle={subtitle}
-          title={title}
-          xLabel={xLabel}
-          yLabel={yLabel}
-        />
-      );
-    })
-    .add("With some props and unstructured data", () => {
-      const data = object("Data", sampleUnstructuredData);
-      const dataKey = text("dataKey", sampleUnstructuredXKey);
-      const dataValue = text("dataValue", sampleUnstructuredYKey);
-      const dataSeries = text("dataSeries", sampleUnstructuredDataSeries);
-      const subtitle = text("Subtitle", sampleSubtitle);
-      const title = text("Title", sampleTitle);
-      const xLabel = text("xLabel", sampleUnstructuredXLabel);
-      const yLabel = text("yLabel", sampleUnstructuredYLabel);
+        const title = text(
+          "Title",
+          "Public Transit Ridership",
+          GROUP_IDS.LABELS
+        );
+        const subtitle = text(
+          "Subtitle",
+          "Average daily ridership for TriMet bus and rail (unlinked trips)",
+          GROUP_IDS.LABELS
+        );
+        const xLabel = text("X-axis label", "Year", GROUP_IDS.LABELS);
+        const optionSelectX = options(
+          "X-axis value format",
+          xFormatterOptions,
+          "year",
+          { display: "select" },
+          GROUP_IDS.LABELS
+        );
+        const yLabel = text("Y-axis label", "Ridership", GROUP_IDS.LABELS);
+        const optionSelectY = options(
+          "Y-axis value format",
+          yFormatterOptions,
+          "numeric",
+          { display: "select" },
+          GROUP_IDS.LABELS
+        );
 
-      return (
-        <LineChart
-          data={data}
-          dataKey={dataKey}
-          dataValue={dataValue}
-          dataSeries={dataSeries}
-          subtitle={subtitle}
-          title={title}
-          xLabel={xLabel}
-          yLabel={yLabel}
-        />
-      );
-    })
-    .add("With more optional props", () => {
-      const data = object("Data", sampleData);
-      const dataKey = text("dataKey", sampleXKey);
-      const dataKeyLabel = text("dataKeyLabel", sampleDataKeyLabel);
-      const dataValue = text("dataValue", sampleYKey);
-      const dataValueLabel = text("dataValueLabel", sampleDataValueLabel);
-      const dataSeries = text("dataSeries", sampleDataSeries);
-      const dataSeriesLabel = object(
-        "Data Series Labels",
-        sampledataSeriesLabel
-      );
-      const domain = object("Domain", sampleDomain);
-      const size = object("Size", sampleSize);
-      const subtitle = text("Subtitle", sampleSubtitle);
-      const title = text("Title", sampleTitle);
-      const xLabel = text("xLabel", sampleXLabel);
-      const yLabel = text("yLabel", sampleYLabel);
+        const dataKey = text("Data key", "year", GROUP_IDS.DATA);
+        const dataValue = text("Data values", "ridership", GROUP_IDS.DATA);
+        const dataSeries = text(
+          "Data series",
+          sampleDataSeries,
+          GROUP_IDS.DATA
+        );
+        const dataSeriesLabel = object(
+          "Data series labels",
+          sampleDataSeriesLabel,
+          GROUP_IDS.DATA
+        );
+        const data = object("Data", sampleTransportationData, GROUP_IDS.DATA);
 
-      return (
-        <LineChart
-          data={data}
-          dataKey={dataKey}
-          dataKeyLabel={dataKeyLabel}
-          dataValue={dataValue}
-          dataValueLabel={dataValueLabel}
-          dataSeries={dataSeries}
-          dataSeriesLabel={dataSeriesLabel}
-          domain={domain}
-          size={size}
-          subtitle={subtitle}
-          title={title}
-          xLabel={xLabel}
-          yLabel={yLabel}
-          legendComponent={customLegend}
-        />
-      );
-    })
-    .add("With many data points", () => {
-      const scale = 0.25;
-      return (
-        <LineChart
-          data={Array(100)
-            .fill(null)
-            .map((_, index) => {
-              const x =
-                (index % 2 ? Math.floor(index / 2) : Math.ceil(index / 2)) *
-                scale;
-              const fn = index % 2 ? "sin" : "cos";
-              return {
-                x,
-                fn,
-                y: Math[fn](x)
-              };
-            })}
-          dataKey="x"
-          dataKeyLabel="X"
-          dataValue="y"
-          dataValueLabel="Y"
-          dataSeries="fn"
-          domain={object("Domain", { x: [0, 50 * scale], y: [-1.5, 1.5] })}
-          title={text("Title", "Cos vs. Sin")}
-          subtitle={text("Subtitle", "Getting wavy")}
-          xLabel="X"
-          yLabel="Y"
-        />
-      );
-    });
+        return (
+          <LineChart
+            data={data}
+            dataKey={dataKey}
+            dataValue={dataValue}
+            dataSeries={dataSeries}
+            dataSeriesLabel={dataSeriesLabel}
+            subtitle={subtitle}
+            title={title}
+            xLabel={xLabel}
+            yLabel={yLabel}
+            xNumberFormatter={x => civicFormat[optionSelectX](x)}
+            yNumberFormatter={y => civicFormat[optionSelectY](y)}
+          />
+        );
+      },
+      { notes }
+    )
+    .add(
+      "Custom",
+      () => {
+        const sampleTransportationData = [
+          { year: 2001, ridership: 217309, series: "weekday" },
+          { year: 2002, ridership: 254651, series: "weekday" },
+          { year: 2003, ridership: 213986, series: "weekday" },
+          { year: 2004, ridership: 266412, series: "weekday" },
+          { year: 2005, ridership: 313494, series: "weekday" },
+          { year: 2001, ridership: 73028, series: "saturday" },
+          { year: 2002, ridership: 113778, series: "saturday" },
+          { year: 2003, ridership: 111636, series: "saturday" },
+          { year: 2004, ridership: 155272, series: "saturday" },
+          { year: 2005, ridership: 188757, series: "saturday" },
+          { year: 2001, ridership: 73028, series: "sunday" },
+          { year: 2002, ridership: 75042, series: "sunday" },
+          { year: 2003, ridership: 75615, series: "sunday" },
+          { year: 2004, ridership: 108040, series: "sunday" },
+          { year: 2005, ridership: 134569, series: "sunday" }
+        ];
+        const sampleDataSeries = "series";
+        const sampleDataSeriesLabel = [
+          { category: "weekday", label: "Weekday" },
+          { category: "saturday", label: "Saturday" },
+          { category: "sunday", label: "Sunday" }
+        ];
+        const sampleDomain = { x: [2001, 2005], y: [0, 350000] };
+        // const sampleSize = { key: "y" };
+
+        const title = text(
+          "Title",
+          "Public Transit Ridership",
+          GROUP_IDS.LABELS
+        );
+        const subtitle = text(
+          "Subtitle",
+          "Average daily ridership for TriMet bus and rail (unlinked trips)",
+          GROUP_IDS.LABELS
+        );
+        const xLabel = text("X-axis label", "Year", GROUP_IDS.LABELS);
+        const optionSelectX = options(
+          "X-axis value format",
+          xFormatterOptions,
+          "year",
+          { display: "select" },
+          GROUP_IDS.LABELS
+        );
+        const yLabel = text("Y-axis label", "Ridership", GROUP_IDS.LABELS);
+        const optionSelectY = options(
+          "Y-axis value format",
+          yFormatterOptions,
+          "numeric",
+          { display: "select" },
+          GROUP_IDS.LABELS
+        );
+        const dataKey = text("Data key", "year", GROUP_IDS.DATA);
+        const dataKeyLabel = text("Data key label", "Year", GROUP_IDS.CUSTOM);
+        const dataValue = text("Data value", "ridership", GROUP_IDS.DATA);
+        const dataValueLabel = text(
+          "Data value label",
+          "Avg Daily Ridership",
+          GROUP_IDS.CUSTOM
+        );
+        const dataSeries = text(
+          "Data series",
+          sampleDataSeries,
+          GROUP_IDS.DATA
+        );
+        const dataSeriesLabel = object(
+          "Data series labels",
+          sampleDataSeriesLabel,
+          GROUP_IDS.DATA
+        );
+        const data = object("Data", sampleTransportationData, GROUP_IDS.DATA);
+
+        const domain = object("Domain", sampleDomain, GROUP_IDS.CUSTOM);
+        // A separate issue will be created for the size knob.
+        // const size = object("Size", sampleSize, GROUP_IDS.CUSTOM);
+
+        return (
+          <LineChart
+            data={data}
+            dataKey={dataKey}
+            dataKeyLabel={dataKeyLabel}
+            dataValue={dataValue}
+            dataValueLabel={dataValueLabel}
+            dataSeries={dataSeries}
+            dataSeriesLabel={dataSeriesLabel}
+            domain={domain}
+            // size={size}
+            subtitle={subtitle}
+            title={title}
+            xLabel={xLabel}
+            yLabel={yLabel}
+            xNumberFormatter={x => civicFormat[optionSelectX](x)}
+            yNumberFormatter={y => civicFormat[optionSelectY](y)}
+            legendComponent={customLegend}
+          />
+        );
+      },
+      { notes }
+    )
+    .add(
+      "Example: Simple",
+      () => {
+        const xLabel = text("X-axis label", "X", GROUP_IDS.LABELS);
+        const yLabel = text("Y-axis label", "Y", GROUP_IDS.LABELS);
+        const sampleSimpleData = [
+          { x: 0, y: 20 },
+          { x: 10, y: 30 },
+          { x: 20, y: 50 },
+          { x: 30, y: 40 }
+        ];
+        const data = object("Data", sampleSimpleData, GROUP_IDS.DATA);
+
+        return <LineChart data={data} xLabel={xLabel} yLabel={yLabel} />;
+      },
+      { notes }
+    )
+    .add(
+      "Example: Many data points",
+      () => {
+        const scale = 0.25;
+        const value = number("Number of data points", 100, {}, GROUP_IDS.DATA);
+        return (
+          <LineChart
+            data={Array(value)
+              .fill(null)
+              .map((_, index) => {
+                const x =
+                  (index % 2 ? Math.floor(index / 2) : Math.ceil(index / 2)) *
+                  scale;
+                const fn = index % 2 ? "sin" : "cos";
+                return {
+                  x,
+                  fn,
+                  y: Math[fn](x)
+                };
+              })}
+            dataKey="x"
+            dataKeyLabel="X"
+            dataValue="y"
+            dataValueLabel="Y"
+            dataSeries="fn"
+            title="Cos vs. Sin"
+            subtitle="Getting wavy"
+            xLabel="X"
+            yLabel="Y"
+          />
+        );
+      },
+      { notes }
+    );

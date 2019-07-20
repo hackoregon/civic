@@ -3,67 +3,68 @@ import React from "react";
 import { css } from "emotion";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
-import { array } from "@storybook/addon-knobs";
+import { withKnobs, object } from "@storybook/addon-knobs";
 import { PackageSelectorBox } from "../src";
 
-const packageSelectorList = array("Data", [
-  {
-    title: "Schools",
-    description:
-      "A short description of the sorts of things you can explore with this package. Data Sources?"
-  },
-  {
-    title: "Crimes",
-    description:
-      "A short description of the sorts of things you can explore with this package. Data Sources?"
-  },
-  {
-    title: "Demolitions",
-    description:
-      "A short description of the sorts of things you can explore with this package. Data Sources?"
-  },
-  {
-    title: "TriMet Ridership",
-    description:
-      "A short description of the sorts of things you can explore with this package. Data Sources?"
-  },
-  {
-    title: "Collisions",
-    description:
-      "A short description of the sorts of things you can explore with this package. Data Sources?"
-  },
-  {
-    title: "Mega-Quake",
-    description:
-      "A short description of the sorts of things you can explore with this package. Data Sources?"
-  }
-]);
-
-const PackageSelectorDemo = () => (
-  <div
-    className={css(`
-  @media (min-width: 600px) {
-    display: flex;
-    flex-wrap: wrap;
-  }
-`)}
-  >
-    {packageSelectorList.map(selector => (
-      <div
-        className={css(`
-        @media (min-width: 600px) {
-          width: 33%;
-        }
-      `)}
-      >
-        <PackageSelectorBox
-          title={selector.title}
-          description={selector.description}
-        />
-      </div>
-    ))}
-  </div>
-);
+const PackageSelectorDemo = () => {
+  const packageSelectorList = object("Data", [
+    {
+      title: "Schools",
+      description:
+        "A short description of the sorts of things you can explore with this package. Data Sources?"
+    },
+    {
+      title: "Crimes",
+      description:
+        "A short description of the sorts of things you can explore with this package. Data Sources?"
+    },
+    {
+      title: "Demolitions",
+      description:
+        "A short description of the sorts of things you can explore with this package. Data Sources?"
+    },
+    {
+      title: "TriMet Ridership",
+      description:
+        "A short description of the sorts of things you can explore with this package. Data Sources?"
+    },
+    {
+      title: "Collisions",
+      description:
+        "A short description of the sorts of things you can explore with this package. Data Sources?"
+    },
+    {
+      title: "Mega-Quake",
+      description:
+        "A short description of the sorts of things you can explore with this package. Data Sources?"
+    }
+  ]);
+  return (
+    <div
+      className={css(`
+    @media (min-width: 600px) {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  `)}
+    >
+      {packageSelectorList.map(selector => (
+        <div
+          className={css(`
+          @media (min-width: 600px) {
+            width: 33%;
+          }
+        `)}
+        >
+          <PackageSelectorBox
+            title={selector.title}
+            description={selector.description}
+          />
+        </div>
+      ))}
+    </div>
+  );
+};
 
 const PackageSelectorCollection = () => (
   <div>
@@ -74,6 +75,7 @@ const PackageSelectorCollection = () => (
 
 export default () =>
   storiesOf("Component Lib|CIVIC Platform/Package Selector Box", module)
+    .addDecorator(withKnobs)
     .add(
       "Basic List of selection Options",
       // 'This is a basic list of selection options for the

@@ -10,7 +10,7 @@
     "start:prod": "yarn run build && cross-env NODE_ENV=production node server",
     "build": "rimraf dist && cross-env NODE_ENV=production webpack --progress --config ./webpack.config.js",
     "test": "echo 'No tests!'",
-    "lint": "eslint --fix src"
+    "lint": "eslint src"
   },
   "repository": {
     "type": "git",
@@ -40,7 +40,7 @@
     "@hackoregon/dev-server": "^3.0.0",
     "@hackoregon/webpack-common": "^3.0.0",
     "autoprefixer": "^9.4.10",
-    "emotion": "^10.0.6",
+    "emotion": "^10.0.9",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-redux": "^6.0.1",

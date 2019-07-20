@@ -22,11 +22,25 @@ const demoCode = () => (
 );
 
 export default () =>
-  storiesOf("Component Lib|Basic UI Components/Dropdown List", module)
+  storiesOf("Component Lib|Basic Inputs/Dropdown List", module)
     .addDecorator(checkA11y)
     .addDecorator(story => (
       <div style={storybookStyles.storyGrid}>
         <div style={storybookStyles.storyGridItem}>{story()}</div>
       </div>
     ))
-    .add(title, demoCode);
+    .add("Simple usage", () => {
+      const options = [
+        { value: "0", label: "Murphy" },
+        { value: "1", label: "Carter" },
+        { value: "2", label: "Bebe" },
+        { value: "3", label: "Cissi" }
+      ];
+      return (
+        <Dropdown
+          dispatch={dispatch => action => dispatch(action)}
+          reduxAction={payload => console.log({ type: "ACTION", payload })}
+          options={options}
+        />
+      );
+    });

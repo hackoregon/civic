@@ -6,7 +6,8 @@ export const ICONS = {
   hamburger: "fa fa-bars",
   info: "fa fa-info-circle",
   arrowDown: "fa fa-arrow-down",
-  arrowUp: "fa fa-arrow-up"
+  arrowUp: "fa fa-arrow-up",
+  improve: "fa fa-commenting-o"
 };
 
 export default {
