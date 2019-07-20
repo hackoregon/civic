@@ -12,7 +12,6 @@ const checkboxClass = css`
 `;
 
 const Checkbox = ({
-  checked,
   variant,
   onChange,
   disabled,
@@ -21,10 +20,10 @@ const Checkbox = ({
   labelPlacement
 }) => (
   <FormControlLabel
-    value={value}
+    value={label}
     control={
       <MaterialCheckbox
-        checked={checked}
+        checked={value}
         variant={variant}
         onChange={onChange}
         disabled={disabled}
@@ -40,20 +39,18 @@ const Checkbox = ({
 Checkbox.displayName = "Checkbox";
 
 Checkbox.propTypes = {
-  value: PropTypes.string,
+  value: PropTypes.bool,
   label: PropTypes.string,
   labelPlacement: PropTypes.string,
-  checked: PropTypes.bool,
   variant: PropTypes.string,
   disabled: PropTypes.bool,
   onChange: PropTypes.func
 };
 
 Checkbox.defaultProps = {
-  value: "checkboxValue",
+  value: false,
   label: "Label",
   labelPlacement: "end",
-  checked: false,
   variant: "contained",
   disabled: false
 };

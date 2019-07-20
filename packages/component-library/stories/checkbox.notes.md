@@ -11,12 +11,15 @@ These properties can be set in the Standard story:
 - Label
 - Disabled
 
+These properties connect to your application state:
+
+- value
+
 ## Custom
 
 The Custom story shows all possible properties that can be passed to the Checkbox component for customization in the CIVIC platform. They include the properties in the Standard Checkbox story, plus:
 
 - Label placement
-- Value
 
 ## Example: Form group
 
@@ -24,5 +27,5 @@ This example story shows multiple checkboxes used as a group in a form. In addit
 
 - Form label
 - Form helper text
-- Display all checkboxes in a row
-- Disable the group of checkboxes
+- Display all in a row
+- Disable group
