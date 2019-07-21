@@ -8,16 +8,12 @@ function groupBy
  */
 
 const groupByKey = (data, dataSeriesKey, sortByKey) => {
-
-  const groupedObj = data.reduce(
-    (result, item) => {
-      return {
-        ...result,
-        [item[dataSeriesKey]]: [...(result[item[dataSeriesKey]] || []), item]
-      }
-    },
-    {}
-  );
+  const groupedObj = data.reduce((result, item) => {
+    return {
+      ...result,
+      [item[dataSeriesKey]]: [...(result[item[dataSeriesKey]] || []), item]
+    };
+  }, {});
   return Object.keys(groupedObj).map(key => {
     const arr = groupedObj[key];
     return arr.sort((a, b) => (a[sortByKey] > b[sortByKey] ? 1 : -1));
