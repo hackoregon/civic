@@ -18,11 +18,6 @@ const GROUP_IDS = {
   CUSTOM: "Custom"
 };
 
-const containerWrapper = css`
-  height: 100vh;
-  min-height: 500px;
-`;
-
 const MAP_STYLE_OPTIONS = {
   light: "light",
   dark: "dark"
@@ -212,11 +207,17 @@ export default () =>
     .add(
       "Example: Use Container Height",
       () => {
+        const containerWrapper = css`
+          height: 100vh;
+          min-height: 500px;
+        `;
+
         const useContainerHeight = boolean(
           "Use Container Height:",
           true,
           GROUP_IDS.CUSTOM
         );
+
         return (
           <div className={containerWrapper}>
             <BaseMap useContainerHeight={useContainerHeight} />

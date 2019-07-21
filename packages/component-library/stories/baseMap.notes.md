@@ -81,7 +81,9 @@ These props can be set in this story:
 
 This story shows how to make the Base Map's height responsive.
 
+The Base Map component must be wrapped in a `div` for this to work correctly and its CSS `height` property set to `100vh`. You can also set a `min-height` property to prevent the Base Map's height from becoming too short.
+
 This prop can be set in this story:
 
-- **useContainerHeight:** whether the Base Map should match the height of its parent container
+- **useContainerHeight:** whether the Base Map should adjust according to the height of its parent container
   - This prop expects a boolean
