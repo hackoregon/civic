@@ -73,6 +73,7 @@ import CityNotFoundPage from "./components/CityNotFoundPage";
 import StateNotFoundPage from "./components/StateNotFoundPage";
 import CardDetailPage from "./components/CardDetailPage";
 import CardDetailPageEmbed from "./components/CardDetailPageEmbed";
+import CardList from "./components/CardList";
 
 // Create a store by combining all project reducers and the routing reducer
 const configureStore = (initialState, history) => {
@@ -211,6 +212,10 @@ const routes = {
     {
       path: "cards/:slug",
       component: CardDetailPage
+    },
+    {
+      path: "cards/",
+      component: CardList
     },
     {
       path: "cards/:slug/embed",
