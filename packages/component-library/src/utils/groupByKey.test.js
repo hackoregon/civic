@@ -1,4 +1,4 @@
-import groupBy from "./groupBy";
+import groupByKey from "./groupByKey";
 
 const SAMPLE_DATA = [
   { name: "Poodle", x: "2017", y: 7 },
@@ -62,13 +62,13 @@ const FORMATTED_UNSTRUCTURED_DATA = [
   ]
 ];
 
-describe("groupBy", () => {
+describe("groupByKey", () => {
   it("should format data properly", () => {
-    expect(groupBy(SAMPLE_DATA, "name", "x")).to.eql(FORMATTED_DATA);
+    expect(groupByKey(SAMPLE_DATA, "name", "x")).to.eql(FORMATTED_DATA);
   });
 
   it("should format unstructured data properly", () => {
-    expect(groupBy(UNSTRUCTURED_DATA, "name", "x")).to.eql(
+    expect(groupByKey(UNSTRUCTURED_DATA, "name", "x")).to.eql(
       FORMATTED_UNSTRUCTURED_DATA
     );
   });
