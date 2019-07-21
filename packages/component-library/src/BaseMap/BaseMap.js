@@ -32,12 +32,12 @@ class BaseMap extends Component {
     super(props);
     this.state = {
       viewport: {
-        longitude: props.initialLongitude || -122.6765,
-        latitude: props.initialLatitude || 45.5231,
-        zoom: props.initialZoom || 9.5,
+        longitude: props.initialLongitude,
+        latitude: props.initialLatitude,
+        zoom: props.initialZoom,
         minZoom: 6,
         maxZoom: 20,
-        pitch: props.initialPitch || 0,
+        pitch: props.initialPitch,
         bearing: 0,
         scrollZoom: true
       },
@@ -144,7 +144,7 @@ class BaseMap extends Component {
     } = this.props;
 
     viewport.width = containerWidth || 500;
-    viewport.height = useContainerHeight ? containerHeight : height || 500;
+    viewport.height = useContainerHeight ? containerHeight : height;
 
     const childrenLayers = React.Children.map(children, child => {
       return React.cloneElement(child, {
@@ -270,6 +270,12 @@ BaseMap.defaultProps = {
   navigation: true,
   geocoder: false,
   useContainerHeight: false,
-  updateViewport: true
+  updateViewport: true,
+  initialLongitude: -122.6765,
+  initialLatitude: 45.5231,
+  initialZoom: 9.5,
+  initialPitch: 0,
+  height: 500
 };
+
 export default Dimensions()(BaseMap);
