@@ -17,7 +17,7 @@ import {
   categoricalColors,
   transformDatato100
 } from "../utils/chartHelpers";
-import groupBy from "../utils/groupBy";
+import groupByKey from "../utils/groupByKey";
 import CivicVictoryTheme from "../VictoryTheme/VictoryThemeIndex";
 import DataChecker from "../utils/DataChecker";
 
@@ -38,18 +38,18 @@ const HorizontalBarChart = ({
   minimalist,
   stacked,
   hundredPercentData,
-  groupByValue
+  dataSeriesKey
 }) => {
   const groupedDataIfStacked = () => {
     if (stacked) {
       if (hundredPercentData) {
         return transformDatato100(
-          groupBy(data, groupByValue, dataValue),
-          dataValue,
-          dataLabel
+          groupByKey(data, dataSeriesKey, dataLabel),
+          dataLabel,
+          dataValue
         );
       }
-      return groupBy(data, groupByValue, dataValue);
+      return groupByKey(data, dataSeriesKey, dataLabel);
     }
     return data;
   };
@@ -194,11 +194,24 @@ const HorizontalBarChart = ({
               {groupedData.map((arr, i) => {
                 return (
                   <VictoryBar
+                    title="Horizontal Bar Chart"
                     domainPadding={0}
                     data={arr}
                     events={chartEvents}
                     key={arr[i][dataValue]}
+                    labels={arr.map(d => `${d[dataSeriesKey]}: ${d[dataValue]}`)}
                     horizontal
+                    labelComponent={
+                      <VictoryTooltip
+                        x={325}
+                        y={0}
+                        orientation="bottom"
+                        pointerLength={0}
+                        cornerRadius={0}
+                        theme={CivicVictoryTheme.civic}
+                      />
+                    }
+                    events={chartEvents}
                   />
                 );
               })}
@@ -209,7 +222,7 @@ const HorizontalBarChart = ({
               return (
                 <VictoryAxis
                   style={{
-                    tickFormat: arr[dataLabel],
+                    tickFormat: arr[i][dataLabel],
                     ticks: { stroke: "none" },
                     grid: { stroke: "none" }
                   }}
@@ -243,7 +256,7 @@ HorizontalBarChart.propTypes = {
   minimalist: PropTypes.bool,
   stacked: PropTypes.bool,
   hundredPercentData: PropTypes.bool,
-  groupByValue: PropTypes.string
+  dataSeriesKey: PropTypes.string
 };
 
 HorizontalBarChart.defaultProps = {
@@ -261,7 +274,7 @@ HorizontalBarChart.defaultProps = {
   minimalist: false,
   stacked: false,
   hundredPercentData: false,
-  groupByValue: null
+  dataSeriesKey: null
 };
 
 export default HorizontalBarChart;

@@ -230,21 +230,21 @@ export default () =>
       "Example: Stacked bar chart",
       () => {
         const sampleStackedData = [
-          { name: "Poodle", x: "2017", y: 7 },
-          { name: "Poodle", x: "2018", y: 2 },
-          { name: "Poodle", x: "2019", y: 3 },
-          { name: "Bulldog", x: "2017", y: 2 },
-          { name: "Bulldog", x: "2018", y: 5 },
-          { name: "Bulldog", x: "2019", y: 4 },
-          { name: "Terrier", x: "2017", y: 1 },
-          { name: "Terrier", x: "2018", y: 2 },
-          { name: "Terrier", x: "2019", y: 3 }
+          { breed: "Poodle", x: "2017", y: 7 },
+          { breed: "Poodle", x: "2018", y: 2 },
+          { breed: "Poodle", x: "2019", y: 3 },
+          { breed: "Bulldog", x: "2017", y: 2 },
+          { breed: "Bulldog", x: "2018", y: 5 },
+          { breed: "Bulldog", x: "2019", y: 4 },
+          { breed: "Terrier", x: "2017", y: 1 },
+          { breed: "Terrier", x: "2018", y: 2 },
+          { breed: "Terrier", x: "2019", y: 3 }
         ];
-        const dataValue = text("Data value", "x", GROUP_IDS.DATA);
-        const dataLabel = text("Data label", "y", GROUP_IDS.DATA);
-        const groupByValue = text(
+        const dataValue = text("Data value", "y", GROUP_IDS.DATA);
+        const dataLabel = text("Data label", "x", GROUP_IDS.DATA);
+        const dataSeriesKey = text(
           "Value to group data by",
-          "name",
+          "breed",
           GROUP_IDS.DATA
         );
         const hundredPercentData = boolean(
@@ -262,12 +262,12 @@ export default () =>
           GROUP_IDS.LABELS
         );
         const minimalist = boolean("Minimalist", false, GROUP_IDS.CUSTOM);
-        const xLabel = text("X-axis label", "number", GROUP_IDS.LABELS);
+        const xLabel = text("X-axis label", "Number of Dogs", GROUP_IDS.LABELS);
         const yLabel = text("Y-axis label", "Year", GROUP_IDS.LABELS);
-        const title = text("Title", "Numbers", GROUP_IDS.LABELS);
+        const title = text("Title", "Number of Dogs", GROUP_IDS.LABELS);
         const subtitle = text(
           "Subtitle",
-          "that mean nothing",
+          "By Year",
           GROUP_IDS.LABELS
         );
 
@@ -282,7 +282,7 @@ export default () =>
             title={title}
             subtitle={subtitle}
             minimalist={minimalist}
-            groupByValue={groupByValue}
+            dataSeriesKey={dataSeriesKey}
             stacked
             hundredPercentData={hundredPercentData}
           />
