@@ -60,23 +60,19 @@ const legendStyle = css`
   margin: 10px 0 0 0;
 `;
 
-const emphasis = css`
-  color: #000;
-`;
-
 const tableRows = [
-  { age_group: "18-25", towards: "50.3%", away: "49.7%", moves: "1.93" },
-  { age_group: "26-32", towards: "43.3%", away: "56.7%", moves: "1.97" },
-  { age_group: "33-39", towards: "41.1%", away: "58.9%", moves: "1.72" },
-  { age_group: "40-49", towards: "44.1%", away: "55.9%", moves: "1.52" },
-  { age_group: "55+", towards: "45.7%", away: "54.3%", moves: "1.40" }
+  { ageGroup: "18-25", towards: "50.3%", away: "49.7%", moves: "1.93" },
+  { ageGroup: "26-32", towards: "43.3%", away: "56.7%", moves: "1.97" },
+  { ageGroup: "33-39", towards: "41.1%", away: "58.9%", moves: "1.72" },
+  { ageGroup: "40-49", towards: "44.1%", away: "55.9%", moves: "1.52" },
+  { ageGroup: "55+", towards: "45.7%", away: "54.3%", moves: "1.40" }
 ];
 
 const tableCols = [
   {
     align: "left",
     header: "Age Group",
-    key: "age_group"
+    key: "ageGroup"
   },
   {
     align: "left",
@@ -100,7 +96,7 @@ const tableData = {
   data: tableRows
 };
 
-const legendComponent = age => legendData => (
+const legendComponent = age => (
   <div className={legendStyle}>
     <span
       className={css`
@@ -130,7 +126,8 @@ const legendComponent = age => legendData => (
 
 export class VotersOnTheMove extends React.Component {
   componentDidMount() {
-    this.props.init();
+    const { init } = this.props;
+    init();
   }
 
   render() {
@@ -148,16 +145,16 @@ export class VotersOnTheMove extends React.Component {
     const voterScatterplot = (age, direction) => (
       <Scatterplot
         data={data[direction].results.filter(
-          ({ age_group }) => age_group === age
+          ({ ageGroup }) => ageGroup === age
         )}
         dataKey="x"
         dataValue="y"
-        dataSeries="age_group"
+        dataSeries="ageGroup"
         dataSeriesLabel={ageGroupLabels}
         xLabel="SE"
         yLabel="NW"
         domain={{ x: [-19.5, 19.5], y: [-10.5, 10.5] }}
-        legendComponent={legendComponent(age)}
+        legendComponent={() => legendComponent(age)}
       />
     );
 

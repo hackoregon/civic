@@ -18,7 +18,8 @@ import {
 
 export class UnderstandingStaffCuts extends React.Component {
   componentDidMount() {
-    this.props.init();
+    const { init } = this.props;
+    init();
   }
 
   render() {
@@ -189,7 +190,7 @@ UnderstandingStaffCuts.propTypes = {
   init: PropTypes.func,
   isLoading: PropTypes.bool,
   error: PropTypes.string,
-  understandingStaffCuts: PropTypes.object
+  understandingStaffCuts: PropTypes.shape({})
 };
 
 export default connect(

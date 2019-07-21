@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default */
 import TheShapeOfANeighborhood from "./components/TheShapeOfANeighborhood";
 import MagnitudeOfUrbanCampsiteSweeps from "./components/MagnitudeOfUrbanCampsiteSweeps";
 import HumanImpactOfSweepingUrbanCampsites from "./components/HumanImpactOfSweepingUrbanCampsites";

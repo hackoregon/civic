@@ -1,16 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { css } from "emotion";
-import { min, max } from "lodash";
 
 import {
   CivicStoryCard,
   Collapsable,
   BaseMap,
-  ScatterPlotMap,
-  Button,
-  ChartContainer
+  ScatterPlotMap
 } from "@hackoregon/component-library";
 import { contextualDesc, belowFoldOne, belowFoldTwo } from "./text";
 
@@ -31,13 +27,15 @@ const ZOOM = 10.5;
 
 export class ExploreUrbanCampsiteSweeps extends React.Component {
   componentDidMount() {
-    this.props.init();
-    const timerID = this.props.startTimer();
+    const { init, startTimer } = this.props;
+    init();
+    const timerID = startTimer();
     this.setState({ timerID });
   }
 
   componentWillUnmount() {
-    clearInterval(this.state.timerID);
+    const { timerID } = this.state;
+    clearInterval(timerID);
   }
 
   render() {
@@ -94,7 +92,7 @@ ExploreUrbanCampsiteSweeps.propTypes = {
   isLoading: PropTypes.bool,
   error: PropTypes.string,
   data: PropTypes.arrayOf(PropTypes.object),
-  timer: PropTypes.int
+  timer: PropTypes.number
 };
 
 export default connect(
