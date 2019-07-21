@@ -31,6 +31,7 @@ class TemplateCard extends Component {
 }
 
 TemplateCard.displayName = "TemplateCard";
+TemplateCard.tags = templateCardMeta().tags;
 
 TemplateCard.propTypes = {
   init: PropTypes.func,
