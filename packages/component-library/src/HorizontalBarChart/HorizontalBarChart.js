@@ -9,12 +9,13 @@ import {
   VictoryTooltip,
   VictoryStack
 } from "victory";
-
+import SimpleLegend from "../SimpleLegend";
 import ChartContainer from "../ChartContainer";
 import civicFormat from "../utils/civicFormat";
 import {
   chartEvents,
   categoricalColors,
+  getDefaultDataSeriesLabels,
   transformDatato100
 } from "../utils/chartHelpers";
 import groupByKey from "../utils/groupByKey";
@@ -38,7 +39,9 @@ const HorizontalBarChart = ({
   minimalist,
   stacked,
   hundredPercentData,
-  dataSeriesKey
+  dataSeriesKey,
+  dataSeriesLabel,
+  legendComponent
 }) => {
   const groupedDataIfStacked = () => {
     if (stacked) {
@@ -58,8 +61,8 @@ const HorizontalBarChart = ({
     sortOrder && sortOrder.length
       ? data
       : data.map((d, index) => {
-        return { ...d, defaultSort: index + 1 };
-      });
+          return { ...d, defaultSort: index + 1 };
+        });
   const sortOrderKey =
     sortOrder && sortOrder.length ? sortOrder : "defaultSort";
   const padding = minimalist
@@ -73,6 +76,13 @@ const HorizontalBarChart = ({
   const bars = stacked ? groupedData.length : data.length;
   const spaces = bars - 1;
   const dataHeight = bars * barHeight + spaces * spaceHeight;
+  const dataSeriesLabels = dataSeriesKey
+    ? dataSeriesLabel || getDefaultDataSeriesLabels(data, dataSeriesKey)
+    : null;
+  const legendData =
+    dataSeriesLabels && dataSeriesLabels.length
+      ? dataSeriesLabels.map(series => ({ name: series.label }))
+      : null;
 
   const NegativeAwareTickLabel = props => (
     <VictoryLabel
@@ -90,6 +100,12 @@ const HorizontalBarChart = ({
       error={error}
     >
       <DataChecker dataAccessors={{ dataValue }} data={data}>
+        {legendData &&
+          (legendComponent ? (
+            legendComponent(legendData)
+          ) : (
+            <SimpleLegend className="legend" legendData={legendData} />
+          ))}
         <VictoryChart
           height={dataHeight + additionalHeight}
           domain={domain}
@@ -199,7 +215,9 @@ const HorizontalBarChart = ({
                     data={arr}
                     events={chartEvents}
                     key={arr[i][dataValue]}
-                    labels={arr.map(d => `${d[dataSeriesKey]}: ${d[dataValue]}`)}
+                    labels={arr.map(
+                      d => `${d[dataSeriesKey]}: ${d[dataValue]}`
+                    )}
                     horizontal
                     labelComponent={
                       <VictoryTooltip
@@ -211,7 +229,6 @@ const HorizontalBarChart = ({
                         theme={CivicVictoryTheme.civic}
                       />
                     }
-                    events={chartEvents}
                   />
                 );
               })}
@@ -256,7 +273,9 @@ HorizontalBarChart.propTypes = {
   minimalist: PropTypes.bool,
   stacked: PropTypes.bool,
   hundredPercentData: PropTypes.bool,
-  dataSeriesKey: PropTypes.string
+  dataSeriesKey: PropTypes.string,
+  dataSeriesLabel: PropTypes.shape({}),
+  legendComponent: PropTypes.func
 };
 
 HorizontalBarChart.defaultProps = {
@@ -274,7 +293,9 @@ HorizontalBarChart.defaultProps = {
   minimalist: false,
   stacked: false,
   hundredPercentData: false,
-  dataSeriesKey: null
+  dataSeriesKey: null,
+  dataSeriesLabel: {},
+  legendComponent: null
 };
 
 export default HorizontalBarChart;

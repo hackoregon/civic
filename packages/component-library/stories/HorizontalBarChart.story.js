@@ -265,10 +265,16 @@ export default () =>
         const xLabel = text("X-axis label", "Number of Dogs", GROUP_IDS.LABELS);
         const yLabel = text("Y-axis label", "Year", GROUP_IDS.LABELS);
         const title = text("Title", "Number of Dogs", GROUP_IDS.LABELS);
-        const subtitle = text(
-          "Subtitle",
-          "By Year",
-          GROUP_IDS.LABELS
+        const subtitle = text("Subtitle", "By Year", GROUP_IDS.LABELS);
+        const dogDataSeriesLabels = [
+          { category: "Poodle", label: "Poodle" },
+          { category: "Bulldog", label: "Bulldog" },
+          { category: "Terrier", label: "Terrier" }
+        ];
+        const dataSeriesLabel = object(
+          "Data series labels:",
+          dogDataSeriesLabels,
+          GROUP_IDS.DATA
         );
 
         return (
@@ -285,6 +291,7 @@ export default () =>
             dataSeriesKey={dataSeriesKey}
             stacked
             hundredPercentData={hundredPercentData}
+            dataSeriesLabel={dataSeriesLabel}
           />
         );
       },
