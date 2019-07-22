@@ -127,9 +127,9 @@ class BaseMap extends Component {
       containerWidth,
       civicMapStyle,
       mapboxToken,
+      navigation,
       geocoder,
       locationMarker,
-      navigation,
       geocoderOptions,
       geocoderOnChange,
       mapGLOptions,
@@ -140,7 +140,8 @@ class BaseMap extends Component {
       mapboxDataId,
       mapboxLayerType,
       mapboxLayerOptions,
-      mapboxLayerId
+      mapboxLayerId,
+      locationMarkerCoord
     } = this.props;
 
     viewport.width = containerWidth || 500;
@@ -206,8 +207,8 @@ class BaseMap extends Component {
           </div>
           {locationMarker && (
             <Marker
-              latitude={viewport.latitude}
-              longitude={viewport.longitude}
+              latitude={locationMarkerCoord.latitude}
+              longitude={locationMarkerCoord.longitude}
               offsetLeft={-20}
               offsetTop={-10}
             >
@@ -222,7 +223,7 @@ class BaseMap extends Component {
               mapboxApiAccessToken={mapboxToken}
               onViewportChange={newViewport => {
                 this.onViewportChange(newViewport);
-                // eslint-disable-next-line
+                // eslint-disable-next-line no-unused-expressions
                 !!geocoderOnChange && geocoderOnChange(newViewport);
               }}
               options={{ ...geocoderOptions }}
@@ -245,9 +246,13 @@ BaseMap.propTypes = {
   containerWidth: PropTypes.number,
   mapboxToken: PropTypes.string,
   civicMapStyle: PropTypes.string,
-  locationMarker: PropTypes.bool,
-  geocoder: PropTypes.bool,
   navigation: PropTypes.bool,
+  locationMarker: PropTypes.bool,
+  locationMarkerCoord: PropTypes.shape({
+    latitude: PropTypes.number,
+    longitude: PropTypes.number
+  }),
+  geocoder: PropTypes.bool,
   geocoderOptions: PropTypes.shape({}),
   geocoderOnChange: PropTypes.func,
   mapGLOptions: PropTypes.shape({}),
@@ -275,7 +280,11 @@ BaseMap.defaultProps = {
   initialLatitude: 45.5231,
   initialZoom: 9.5,
   initialPitch: 0,
-  height: 500
+  height: 500,
+  locationMarkerCoord: {
+    latitude: 0,
+    longitude: 0
+  }
 };
 
 export default Dimensions()(BaseMap);

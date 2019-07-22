@@ -37,7 +37,7 @@ This story shows how to use a geocoder with the Base Map.
 These props can be set in this story:
 
 - **geocoder:** whether the Base Map should include the geocoder
-  - This property expects a boolean
+  - This prop expects a boolean
 - **geocoderOptions:** options for the geocoder search input
   - The geocoderOptions prop expects an object and may include the following properties:
   - **placeholder:** the text that appears in the geocoder search input
@@ -48,8 +48,16 @@ These props can be set in this story:
     - This property expects an array in the format:
       `[minLongitude, minLatitude, maxLongitude, maxLatitude]`
   - [Additional geocoder options can be found here.](https://github.com/mapbox/mapbox-gl-geocoder/blob/master/API.md)
-- **locationMarker:** whether to include a ❌ marker at the result location
-  - This property expects a boolean
+- **geocoderOnChange:** a function that updates the coordinates of the location marker
+  - This prop expects a function
+- **locationMarker:** whether to include an ❌ marker at the location of the geocoder results
+  - This prop expects a boolean
+- **locationMarkerCoord:** the coordinates of the location marker
+  - The locationMarkerCoord prop expects an object and must include the following properties:
+  - **latitude:** the latitude of the location marker
+    - This prop expects a decimal between -90 and 90
+  - **longitude:** the longitude of the location marker
+    - This prop expects a decimal between -120 and 120
 - **mapGLOptions:** interaction properties for the Base Map
   - Please refer to the "Example: No Interactivity" story for more information
 
