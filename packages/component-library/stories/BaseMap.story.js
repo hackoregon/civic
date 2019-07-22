@@ -12,6 +12,7 @@ import { action } from "@storybook/addon-actions";
 import { css } from "emotion";
 import { BaseMap } from "../src";
 import notes from "./baseMap.notes.md";
+import StatefulWrapper from "../src/utils/StatefulWrapper";
 
 const GROUP_IDS = {
   DESIGN: "Design",
@@ -146,12 +147,24 @@ export default () =>
         );
 
         return (
-          <BaseMap
-            geocoder={geocoder}
-            geocoderOptions={geocoderOptions}
-            locationMarker={locationMarker}
-            mapGLOptions={mapGLOptions}
-          />
+          <StatefulWrapper
+            initialState={{ coord: { latitude: 0, longitude: 0 } }}
+          >
+            {({ get, set }) => {
+              return (
+                <BaseMap
+                  geocoder={geocoder}
+                  geocoderOnChange={coord => {
+                    set({ coord });
+                  }}
+                  geocoderOptions={geocoderOptions}
+                  locationMarker={locationMarker}
+                  locationMarkerCoord={get("coord")}
+                  mapGLOptions={mapGLOptions}
+                />
+              );
+            }}
+          </StatefulWrapper>
         );
       },
       {
