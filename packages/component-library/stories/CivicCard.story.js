@@ -2,7 +2,12 @@
 import React, { Fragment } from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { storiesOf } from "@storybook/react";
-import { CivicCard, LineChart, Collapsable, CivicCardLayoutFull } from "../src";
+import {
+  CivicCard,
+  LineChart,
+  Collapsable,
+  CivicCardLayoutClassic
+} from "../src";
 import { civicFormat } from "../src/utils";
 
 const demoData = [
@@ -317,7 +322,7 @@ const demoCardMeta = (/* data */) => ({
 
 export default () =>
   storiesOf("Component Lib|Story Cards/CIVIC Story Card", module)
-    .add("Default layout", () => (
+    .add("Default layout (full)", () => (
       <CivicCard cardMeta={demoCardMeta} data={demoData} isLoading={false} />
     ))
     .add("Full layout", () => (
@@ -325,6 +330,6 @@ export default () =>
         cardMeta={demoCardMeta}
         data={demoData}
         isLoading={false}
-        Layout={CivicCardLayoutFull}
+        Layout={CivicCardLayoutClassic}
       />
     ));
