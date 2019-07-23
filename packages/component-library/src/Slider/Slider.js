@@ -42,7 +42,6 @@ Slider.SliderWithTooltip = props => (
 
 Slider.SliderWithRange = props => (
   <span className="civic-slider-container">
-    {JSON.stringify(props)}
     <Range {...props} />
   </span>
 );
