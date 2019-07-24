@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import CivicCardLayoutFull from "./CivicCardLayoutClassic";
+import CivicCardLayoutFull from "./CivicCardLayoutFull";
 
 const CivicCard = ({ cardMeta, data, isLoading, Layout }) => (
   <Layout cardMeta={cardMeta(data)} isLoading={isLoading} data={data} />

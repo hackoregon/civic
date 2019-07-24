@@ -1,7 +1,6 @@
+/* eslint-disable react/prop-types */
 import React from "react";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { css } from "emotion";
 
 import {
   CivicStoryCard,
@@ -21,7 +20,6 @@ import {
   getSchoolList,
   isSchoolDataPending,
   catchSchoolDataFailure,
-  getSchoolData,
   getSelectedSchool,
   getProcessedSchoolData
 } from "../../state/student-enrollment-trends/selectors";
@@ -51,8 +49,9 @@ const formatForChartB = d => ungroupBy(d, CHARTB_CATEGORIES, CHARTB_LABELS);
 
 export class StudentEnrollmentTrends extends React.Component {
   componentDidMount() {
-    this.props.init();
-    this.props.setSchool(DEFAULT_SCHOOL);
+    const { init, selectSchool } = this.props;
+    init();
+    selectSchool(DEFAULT_SCHOOL);
   }
 
   render() {
@@ -62,8 +61,8 @@ export class StudentEnrollmentTrends extends React.Component {
       schoolList,
       schoolDataLoading,
       schoolDataFailure,
-      schoolData,
       processedSchoolData,
+      selectSchool,
       selectedSchool
     } = this.props;
 
@@ -82,7 +81,7 @@ export class StudentEnrollmentTrends extends React.Component {
           <div>
             <Dropdown
               value={selectedSchool}
-              onChange={event => this.props.setSchool(event.value)}
+              onChange={event => selectSchool(event.value)}
               options={formatForSelector(schoolList)}
             />
             <StackedAreaChart
@@ -130,7 +129,6 @@ export default connect(
     schoolList: getSchoolList(state),
     schoolDataLoading: isSchoolDataPending(state),
     schoolDataFailure: catchSchoolDataFailure(state),
-    schoolData: getSchoolData(state),
     selectedSchool: getSelectedSchool(state),
     processedSchoolData: getProcessedSchoolData(state)
   }),
@@ -138,7 +136,7 @@ export default connect(
     init() {
       dispatch(fetchSchoolList());
     },
-    setSchool(school = {}) {
+    selectSchool(school = {}) {
       dispatch(fetchSchoolData(school));
       dispatch(setSchool(school));
     }

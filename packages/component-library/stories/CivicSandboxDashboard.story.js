@@ -57,10 +57,11 @@ class DashboardStory extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (
-      prevState.selectedFoundationDatumID !==
-      this.state.selectedFoundationDatumID
-    ) {
+    const {
+      selectedFoundationDatumID: prevSelectedFoundationDatumID
+    } = prevState;
+    const { selectedFoundationDatumID } = this.state;
+    if (prevSelectedFoundationDatumID !== selectedFoundationDatumID) {
       this.toggleDashboardOpen();
     }
   }
@@ -83,9 +84,19 @@ class DashboardStory extends React.Component {
   };
 
   render() {
-    if (this.props.data === null) return null;
+    // eslint-disable-next-line react/prop-types
+    const { data } = this.props;
 
-    const populationData = this.props.data;
+    if (data === null) return null;
+
+    const {
+      dashboardIsOpen,
+      selectedFoundationDatum,
+      selectedFoundationDatumID
+    } = this.state;
+
+    // eslint-disable-next-line react/prop-types
+    const populationData = data;
 
     const planetColorScheme = [
       [247, 244, 249, 155],
@@ -105,23 +116,23 @@ class DashboardStory extends React.Component {
       opacity: 1,
       data: populationData.slide_data.features,
       getLineColor: f => {
-        return f.id === this.state.selectedFoundationDatumID
+        return f.id === selectedFoundationDatumID
           ? [30, 144, 255, 255]
           : [0, 0, 0, 55];
       },
       getLineWidth: f => {
-        return f.id === this.state.selectedFoundationDatumID ? 175 : 1;
+        return f.id === selectedFoundationDatumID ? 175 : 1;
       },
       scaleType: "equal",
       color: planetColorScheme,
       getPropValue: f => f.properties.total_population,
       propName: "total_population",
       highlightColor: [30, 144, 255, 100],
-      onLayerClick: selectedFoundationDatum =>
-        this.setselectedFoundationDatum(selectedFoundationDatum),
+      onLayerClick: foundationDatum =>
+        this.setselectedFoundationDatum(foundationDatum),
       updateTriggers: {
-        getLineColor: this.state.selectedFoundationDatumID,
-        getLineWidth: this.state.selectedFoundationDatumID
+        getLineColor: selectedFoundationDatumID,
+        getLineWidth: selectedFoundationDatumID
       }
     };
 
@@ -134,25 +145,25 @@ class DashboardStory extends React.Component {
 
     // Dashboard Visualization
     let textData = {};
-    if (this.state.selectedFoundationDatum.properties) {
+    if (selectedFoundationDatum.properties) {
       textData = createTextViz(
-        this.state.selectedFoundationDatum,
+        selectedFoundationDatum,
         "Neighborhood Population",
         "total_population"
       );
     }
 
     let donutData = {};
-    if (this.state.selectedFoundationDatum.properties) {
+    if (selectedFoundationDatum.properties) {
       donutData = createDonutViz(
-        this.state.selectedFoundationDatum,
+        selectedFoundationDatum,
         "Neighborhood Population",
         "total_population"
       );
     }
 
-    const textVisible = boolean("Text:", true);
-    const donutVisible = boolean("Percent Donut:", false);
+    const textVisible = boolean("Text:", false);
+    const donutVisible = boolean("Percent Donut:", true);
 
     const dashboardArray = [
       {
@@ -173,7 +184,9 @@ class DashboardStory extends React.Component {
     const dashboardInformation = (
       <div className={dashboardDescription}>
         <h2>
-          How has ridership changed throughout Tri-Met's service area over time?
+          {
+            "How has ridership changed throughout Tri-Met's service area over time?"
+          }
         </h2>
         <p>{wallOfText}</p>
         <p>{wallOfText}</p>
@@ -201,13 +214,13 @@ class DashboardStory extends React.Component {
           >
             <CivicSandboxMap
               mapLayers={mapLayers}
-              selectedFoundationDatum={[this.state.selectedFoundationDatum]}
+              selectedFoundationDatum={[selectedFoundationDatum]}
             />
           </BaseMap>
           <CivicSandboxDashboard
             data={dashboardData}
             onClick={this.toggleDashboard}
-            isDashboardOpen={this.state.dashboardIsOpen}
+            isDashboardOpen={dashboardIsOpen}
           >
             {dashboardDescriptionVisible ? dashboardInformation : null}
           </CivicSandboxDashboard>

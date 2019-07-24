@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { css } from "emotion";
 
 import {
   CivicStoryCard,
@@ -29,24 +28,10 @@ const DEFAULT_NEIGHBORHOOD = {
   label: "Rose City Park"
 };
 
-const cardLoading = css`
-  width: 100%;
-  padding: 50px;
-  text-align: center;
-  background: #eee;
-`;
-
-const cardError = css`
-  width: 100%;
-  padding: 50px;
-  text-align: center;
-  background: #fdd;
-  border: 1px solid #c99;
-`;
-
 export class NeighborhoodsThroughTheAges extends React.Component {
   componentDidMount() {
-    this.props.init();
+    const { init } = this.props;
+    init();
   }
 
   render() {
@@ -55,7 +40,8 @@ export class NeighborhoodsThroughTheAges extends React.Component {
       error,
       neighborhoods,
       selectedNeighborhood,
-      selectedNeighborhoodData
+      selectedNeighborhoodData,
+      setNeighborhood
     } = this.props;
 
     const neighborhoodSubtitle =
@@ -81,7 +67,7 @@ export class NeighborhoodsThroughTheAges extends React.Component {
         {!!selectedNeighborhood && (
           <Dropdown
             value={selectedNeighborhood}
-            onChange={event => event && this.props.setNeighborhood(event)}
+            onChange={event => event && setNeighborhood(event)}
             options={neighborhoods}
           />
         )}

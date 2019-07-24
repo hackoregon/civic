@@ -1,5 +1,4 @@
-/* TODO: Fix linting errors */
-/* eslint-disable */
+/* eslint-disable no-nested-ternary */
 import React, { useState } from "react";
 import {
   arrayOf,
@@ -23,7 +22,7 @@ const container = css`
   left: 25px;
   display: flex;
   flex-direction: column;
-  width: 575px;
+  width: 500px;
   background: rgba(243, 242, 243, 0.9);
   color: rgb(85, 85, 85);
   border: 1px solid #ddd;
@@ -36,7 +35,7 @@ const container = css`
 `;
 
 const dashboardOpen = css`
-  height: 45vh;
+  height: 400px;
   overflow-y: auto;
   overflow-x: hidden;
   opacity: 0.9;
@@ -46,7 +45,7 @@ const dashboardOpen = css`
 const dashboardClosed = css`
   height: 0;
   opacity: 0;
-  transition: height 750ms ease-out, opacity 0.25s linear;
+  transition: height 750ms ease-out, opacity 0s linear;
 `;
 
 const contentContainer = css`
@@ -122,12 +121,13 @@ const iconActive = css`
 const viz = css`
   width: 90%;
   margin: 2% 2% 2% 8%;
+  padding-bottom: 25px;
   overflow-y: hidden;
 `;
 
 const donutPercent = css`
   position: absolute;
-  bottom: 43%;
+  bottom: 35px;
   left: 28%;
   width: 50%;
   margin: auto;
@@ -156,9 +156,9 @@ const createDonutViz = (donut, index) => {
       <PieChart
         data={donut.data}
         colors={[salmon, gray]}
-        width={475}
-        height={350}
-        innerRadius={90}
+        width={400}
+        height={400}
+        innerRadius={110}
         halfDoughnut
       />
     </div>
@@ -227,12 +227,18 @@ const CivicDashboard = props => {
       <div
         className={display === "description" ? iconActive : icon}
         onClick={() => setDisplay("description")}
+        onKeyPress={() => setDisplay("description")}
+        tabIndex={0}
+        role="button"
       >
         <div className={ICONS.info} />
       </div>
       <div
         className={display === "visualizations" ? iconActive : icon}
         onClick={() => setDisplay("visualizations")}
+        onKeyPress={() => setDisplay("visualizations")}
+        tabIndex={0}
+        role="button"
       >
         <div className={ICONS.eye} />
       </div>
@@ -240,7 +246,13 @@ const CivicDashboard = props => {
   );
 
   const dashboardToggleButton = (
-    <div className={toggleContainer} onClick={() => onClick()}>
+    <div
+      className={toggleContainer}
+      onClick={() => onClick()}
+      onKeyPress={() => onClick()}
+      tabIndex={0}
+      role="button"
+    >
       <div className={toggleTitle}>
         {isDashboardOpen ? "" : "Please select a polygon"}
       </div>

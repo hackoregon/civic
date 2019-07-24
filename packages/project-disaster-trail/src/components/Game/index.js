@@ -5,9 +5,10 @@ import styled from "styled-components";
 // import useChapters from "../../state/hooks/useChapters";
 
 import KitScreen from "./KitScreen";
-import Orb from "./Orb";
+// import Orb from "./Orb";
 import OrbManager from "./OrbManager";
 import PointsView from "../atoms/PointsView";
+import DurationBar from "./DurationBar";
 
 import "@hackoregon/component-library/assets/global.styles.css";
 
@@ -32,6 +33,7 @@ const Game = () => {
         <PointsViewStyle />
         <KitScreen />
       </MapStyle>
+      <DurationBar step="Choose supplies" />
       <GUIStyle>
         {/* <Orb size={50} /> */}
         <OrbManager
