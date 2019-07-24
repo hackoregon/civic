@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { PureComponent } from "react";
 import { jsx, css } from "@emotion/core";
-import { returnStatement } from "@babel/types";
 import RadialGauge from "./RadialGauge";
 
 const orbContainerStyle = css`
