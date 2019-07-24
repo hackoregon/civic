@@ -36,8 +36,6 @@ const OrbManager = ({
   // tick is used to modulate movement based on an incrementing value
   let tick = 0;
 
-  // const period = 2;
-
   for (let i = 0, model; i < orbCount; i += 1) {
     // create an empty object and assign position and velocity
     model = {};
