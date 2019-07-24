@@ -1,11 +1,12 @@
 /* eslint-disable import/no-named-as-default */
-import React, { memo } from "react";
+import React, { Fragment, memo } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import styled from "styled-components";
 
-// import useChapters from "../../state/hooks/useChapters";
-
 import * as SCREENS from "../../constants/screens";
+import { getActiveChapter, setActiveChapter } from "../../state/chapters";
+
 import KitScreen from "./KitScreen";
 // import Orb from "./Orb";
 import OrbManager from "./OrbManager";
@@ -14,9 +15,19 @@ import DurationBar from "./DurationBar";
 
 import "@hackoregon/component-library/assets/global.styles.css";
 
-const Game = ({ settings }) => {
-  return (
-    <GameContainerStyle screen={settings.screen}>
+const Game = ({ settings, activeChapter, goToChapter }) => {
+  const { screen } = settings;
+
+  const defaultScreen = chapterTitle => (
+    <Fragment>
+      <MapStyle />
+      <h1>{chapterTitle} screen</h1>
+      <GUIStyle screen={screen} />
+    </Fragment>
+  );
+
+  const kitScreen = (
+    <Fragment>
       <MapStyle>
         <PointsViewStyle />
         <KitScreen />
@@ -26,9 +37,38 @@ const Game = ({ settings }) => {
         {/* <Orb size={50} /> */}
         <OrbManager
           {...settings}
-          interfaceHeight={settings.screen.interfaceHeight}
+          interfaceHeight={props => props.screen.interfaceHeight}
         />
       </GUIStyle>
+    </Fragment>
+  );
+
+  const chapterButtons = (
+    <ChapterButtonsStyle>
+      <button
+        type="button"
+        onClick={() => {
+          goToChapter(activeChapter.id - 1);
+        }}
+      >
+        ←
+      </button>
+      <button
+        type="button"
+        onClick={() => {
+          goToChapter(activeChapter.id + 1);
+        }}
+      >
+        →
+      </button>
+    </ChapterButtonsStyle>
+  );
+
+  return (
+    <GameContainerStyle screen={settings.screen}>
+      {chapterButtons}
+      {activeChapter.id === 2 && kitScreen}
+      {activeChapter.id !== 2 && defaultScreen(activeChapter.title)}
     </GameContainerStyle>
   );
 };
@@ -44,6 +84,7 @@ const PanelStyle = styled.div`
   overflow: hidden;
 `;
 
+// Temporarily hardcode the height of the DurationBar and temporary chapter buttons
 const GameContainerStyle = styled(PanelStyle)`
   position: relative;
   display: grid;
@@ -51,13 +92,13 @@ const GameContainerStyle = styled(PanelStyle)`
   height: 100vh;
   min-height: 650px;
   min-width: 800px;
-  grid-template-rows: 1fr 40px ${props => props.screen.interfaceHeight}px;
+  grid-template-rows: 100px 1fr 40px ${props => props.screen.interfaceHeight}px;
   grid-template-columns: 1fr;
   justify-content: center;
   align-items: center;
 
-  @media (min-height: ${SCREENS.XL.height}px) {
-    grid-template-rows: 1fr ${SCREENS.XL.interfaceHeight}px;
+  @media (min-height: ${props => props.screen.height}px) {
+    grid-template-rows: 1fr ${props => props.screen.interfaceHeight}px;
   }
 `;
 
@@ -74,7 +115,7 @@ const GUIStyle = styled(PanelStyle)`
   height: ${props => props.screen.interfaceHeight}px;
 
   @media (min-height: ${SCREENS.XL.height}px) {
-    height: ${SCREENS.XL.interfaceHeight}px;
+    height: ${props => props.screen.interfaceHeight}px;
   }
 `;
 
@@ -86,6 +127,33 @@ const PointsViewStyle = styled(PointsView)`
   z-index: 1;
 `;
 
-const mapStateToProps = ({ settings }) => ({ settings });
+const ChapterButtonsStyle = styled(PanelStyle)`
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
 
-export default connect(mapStateToProps)(Game);
+  > button {
+    font-size: 80px;
+  }
+`;
+
+Game.propTypes = {
+  activeChapter: PropTypes.shape({
+    enabled: PropTypes.bool,
+    id: PropTypes.number,
+    title: PropTypes.string,
+    type: PropTypes.string
+  }),
+  goToChapter: PropTypes.func
+};
+
+export default connect(
+  state => ({
+    settings: state.settings,
+    activeChapter: getActiveChapter(state)
+  }),
+  dispatch => ({
+    goToChapter(chapter) {
+      dispatch(setActiveChapter(chapter));
+    }
+  })
+)(memo(Game));
