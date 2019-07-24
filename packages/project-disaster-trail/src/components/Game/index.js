@@ -1,9 +1,11 @@
 /* eslint-disable import/no-named-as-default */
-import React from "react";
+import React, { memo } from "react";
+import { connect } from "react-redux";
 import styled from "styled-components";
 
 // import useChapters from "../../state/hooks/useChapters";
 
+import * as SCREENS from "../../constants/screens";
 import KitScreen from "./KitScreen";
 // import Orb from "./Orb";
 import OrbManager from "./OrbManager";
@@ -12,39 +14,19 @@ import DurationBar from "./DurationBar";
 
 import "@hackoregon/component-library/assets/global.styles.css";
 
-const XLScreen = {
-  height: 1800,
-  interfaceHeight: 700
-};
-
-const desktopScreen = {
-  interfaceHeight: 250
-};
-
-const Game = () => {
-  let ratios = XLScreen;
-  if (window.innerHeight < XLScreen.height) {
-    ratios = desktopScreen;
-  }
-
+const Game = ({ settings }) => {
   return (
-    <GameContainerStyle>
+    <GameContainerStyle screen={settings.screen}>
       <MapStyle>
         <PointsViewStyle />
         <KitScreen />
       </MapStyle>
       <DurationBar step="Choose supplies" />
-      <GUIStyle>
+      <GUIStyle screen={settings.screen}>
         {/* <Orb size={50} /> */}
         <OrbManager
-          orbCount={40}
-          orbSize={100}
-          period={5}
-          minVelocityX={-15}
-          maxVelocityX={-3}
-          minVelocityY={0}
-          maxVelocityY={0}
-          ratios={ratios}
+          {...settings}
+          interfaceHeight={settings.screen.interfaceHeight}
         />
       </GUIStyle>
     </GameContainerStyle>
@@ -69,13 +51,13 @@ const GameContainerStyle = styled(PanelStyle)`
   height: 100vh;
   min-height: 650px;
   min-width: 800px;
-  grid-template-rows: 1fr ${desktopScreen.interfaceHeight}px;
+  grid-template-rows: 1fr 40px ${props => props.screen.interfaceHeight}px;
   grid-template-columns: 1fr;
   justify-content: center;
   align-items: center;
 
-  @media (min-height: ${XLScreen.height}px) {
-    grid-template-rows: 1fr ${XLScreen.interfaceHeight}px;
+  @media (min-height: ${SCREENS.XL.height}px) {
+    grid-template-rows: 1fr ${SCREENS.XL.interfaceHeight}px;
   }
 `;
 
@@ -89,10 +71,10 @@ const MapStyle = styled(PanelStyle)`
 
 const GUIStyle = styled(PanelStyle)`
   background: pink;
-  height: ${desktopScreen.interfaceHeight}px;
+  height: ${props => props.screen.interfaceHeight}px;
 
-  @media (min-height: ${XLScreen.height}px) {
-    height: ${XLScreen.interfaceHeight}px;
+  @media (min-height: ${SCREENS.XL.height}px) {
+    height: ${SCREENS.XL.interfaceHeight}px;
   }
 `;
 
@@ -104,4 +86,6 @@ const PointsViewStyle = styled(PointsView)`
   z-index: 1;
 `;
 
-export default Game;
+const mapStateToProps = ({ settings }) => ({ settings });
+
+export default connect(mapStateToProps)(Game);

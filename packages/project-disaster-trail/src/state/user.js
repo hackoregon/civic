@@ -24,7 +24,7 @@ export const addPoints = points => dispatch => {
 };
 
 // REDUCERS
-export const kit = createReducer(initialState, {
+export const user = createReducer(initialState, {
   [actionTypes.SET_POINTS]: (state, action) => {
     state.points = action.points;
   },
@@ -33,7 +33,7 @@ export const kit = createReducer(initialState, {
   }
 });
 
-export default kit;
+export default user;
 
 // SELECTORS
 

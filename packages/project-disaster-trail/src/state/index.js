@@ -4,6 +4,7 @@ import { routerReducer } from "react-router-redux";
 import chapters from "./chapters";
 import kit from "./kit";
 import user from "./user";
+import settings from "./settings";
 
 export default function createReducer(asyncReducers) {
   return combineReducers({
@@ -11,6 +12,7 @@ export default function createReducer(asyncReducers) {
     chapters,
     kit,
     user,
+    settings,
     ...asyncReducers
   });
 }

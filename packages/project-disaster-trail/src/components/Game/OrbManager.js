@@ -25,13 +25,11 @@ const OrbManager = ({
   minVelocityY = 0.1,
   maxVelocityX = 2,
   maxVelocityY = 0,
-  ratios,
-  addPoints
+  addPoints,
+  interfaceHeight
 }) => {
   // create an empty array.
   let tempModels = [];
-
-  const { interfaceHeight } = ratios;
 
   // tick is used to modulate movement based on an incrementing value
   let tick = 0;
