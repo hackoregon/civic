@@ -35,11 +35,11 @@ const Game = () => {
       <GUIStyle>
         {/* <Orb size={50} /> */}
         <OrbManager
-          orbCount={10}
-          orbSize={50}
-          period={0.2}
-          minVelocityX={-0.75}
-          maxVelocityX={-0.2}
+          orbCount={40}
+          orbSize={100}
+          period={5}
+          minVelocityX={-15}
+          maxVelocityX={-3}
           minVelocityY={0}
           maxVelocityY={0}
           ratios={ratios}
