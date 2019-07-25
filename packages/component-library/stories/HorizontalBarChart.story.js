@@ -230,18 +230,18 @@ export default () =>
       "Example: Stacked bar chart",
       () => {
         const sampleStackedData = [
-          { breed: "Poodle", x: "2017", y: 7 },
-          { breed: "Poodle", x: "2018", y: 2 },
-          { breed: "Poodle", x: "2019", y: 3 },
-          { breed: "Bulldog", x: "2017", y: 2 },
-          { breed: "Bulldog", x: "2018", y: 5 },
-          { breed: "Bulldog", x: "2019", y: 4 },
-          { breed: "Terrier", x: "2017", y: 1 },
-          { breed: "Terrier", x: "2018", y: 2 },
-          { breed: "Terrier", x: "2019", y: 3 }
+          { breed: "Poodle", year: "2017", numberOfDogs: 7 },
+          { breed: "Poodle", year: "2018", numberOfDogs: 2 },
+          { breed: "Poodle", year: "2019", numberOfDogs: 3 },
+          { breed: "Bulldog", year: "2017", numberOfDogs: 2 },
+          { breed: "Bulldog", year: "2018", numberOfDogs: 5 },
+          { breed: "Bulldog", year: "2019", numberOfDogs: 4 },
+          { breed: "Terrier", year: "2017", numberOfDogs: 1 },
+          { breed: "Terrier", year: "2018", numberOfDogs: 2 },
+          { breed: "Terrier", year: "2019", numberOfDogs: 3 }
         ];
-        const dataValue = text("Data value", "y", GROUP_IDS.DATA);
-        const dataLabel = text("Data label", "x", GROUP_IDS.DATA);
+        const dataValue = text("Data value", "numberOfDogs", GROUP_IDS.DATA);
+        const dataLabel = text("Data label", "year", GROUP_IDS.DATA);
         const dataSeriesKey = text(
           "Value to group data by",
           "breed",

@@ -212,7 +212,13 @@ const HorizontalBarChart = ({
                   <VictoryBar
                     title="Horizontal Bar Chart"
                     domainPadding={0}
-                    data={arr}
+                    data={arr.map(d => ({
+                      dataKey: d[dataLabel],
+                      dataValue: d[dataValue],
+                      series: d[dataSeriesKey]
+                    }))}
+                    x="dataKey"
+                    y="dataValue"
                     events={chartEvents}
                     key={arr[i][dataValue]}
                     labels={arr.map(
