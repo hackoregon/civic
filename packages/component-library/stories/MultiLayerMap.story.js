@@ -115,10 +115,18 @@ export default () =>
         return (
           <DemoJSONLoader urls={[fetchURL]}>
             {data => {
+              const featuresArrayPath = text(
+                "Features Array Path:",
+                "results.features",
+                GROUP_IDS.DATA
+              );
+
+              const featuresData = at(data, featuresArrayPath)[0];
+
               const pathMapLayer = {
                 mapType: "PathMap",
                 id: "storybook-pathmap-00",
-                data: data.results.features,
+                data: featuresData,
                 lineWidth,
                 opacity,
                 civicColor: lineColor,
@@ -238,10 +246,18 @@ export default () =>
         return (
           <DemoJSONLoader urls={[fetchAPIURL]}>
             {data => {
+              const featuresArrayPath = text(
+                "Features Array Path:",
+                "results.features",
+                GROUP_IDS.DATA
+              );
+
+              const featuresData = at(data, featuresArrayPath)[0];
+
               const scatterPlotMapLayer = {
                 mapType: "ScatterPlotMap",
                 id: "storybook-scatterplotmap-00",
-                data: data.results.features,
+                data: featuresData,
                 radius: circleRadius,
                 opacity: circleOpacity,
                 civicColor: circleColor,
@@ -313,10 +329,18 @@ export default () =>
         return (
           <DemoJSONLoader urls={[fetchAPIURL]}>
             {data => {
+              const featuresArrayPath = text(
+                "Features Array Path:",
+                "results.features",
+                GROUP_IDS.DATA
+              );
+
+              const featuresData = at(data, featuresArrayPath)[0];
+
               const screenGridMapLayer = {
                 mapType: "ScreenGridMap",
                 id: "storybook-screengridmap-00",
-                data: data.results.features,
+                data: featuresData,
                 squareSize,
                 opacity: squareOpacity,
                 civicColor: squareColor
@@ -458,9 +482,14 @@ export default () =>
         return (
           <DemoJSONLoader urls={[fetchAPIURL]}>
             {data => {
-              const dataFilterNulls = data.slide_data.features.filter(
-                d => d.geometry
+              const featuresArrayPath = text(
+                "Features Array Path:",
+                "slide_data.features",
+                GROUP_IDS.DATA
               );
+
+              const featuresData = at(data, featuresArrayPath)[0];
+              const dataFilterNulls = featuresData.filter(d => d.geometry);
 
               const iconMapLayer = {
                 mapType: "IconMap",
@@ -555,10 +584,18 @@ export default () =>
         return (
           <DemoJSONLoader urls={[fetchAPIURL]}>
             {data => {
+              const featuresArrayPath = text(
+                "Features Array Path:",
+                "results.features",
+                GROUP_IDS.DATA
+              );
+
+              const featuresData = at(data, featuresArrayPath)[0];
+
               const smallPolygonMapLayer = {
                 mapType: "SmallPolygonMap",
                 id: "storybook-small-polygon-map",
-                data: data.results.features,
+                data: featuresData,
                 opacity: polygonOpacity,
                 civicColor: polygonColor,
                 scaleType: {
@@ -646,13 +683,13 @@ export default () =>
 
               const colorRange = object("Color Range:", [], GROUP_IDS.DESIGN);
 
-              const featurePosition = text(
-                "Feature Array Position:",
+              const featuresArrayPath = text(
+                "Features Array Path:",
                 "results.features",
                 GROUP_IDS.DATA
               );
 
-              const featuresData = at(data, featurePosition)[0];
+              const featuresData = at(data, featuresArrayPath)[0];
 
               const choroplethMap = {
                 mapType: "ChoroplethMap",
