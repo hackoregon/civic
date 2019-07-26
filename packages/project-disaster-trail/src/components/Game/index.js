@@ -33,12 +33,9 @@ const Game = ({ settings, activeChapter, goToChapter }) => {
         <KitScreen />
       </MapStyle>
       <DurationBar step="Choose supplies" />
-      <GUIStyle screen={settings.screen}>
+      <GUIStyle screen={screen}>
         {/* <Orb size={50} /> */}
-        <OrbManager
-          {...settings}
-          interfaceHeight={props => props.screen.interfaceHeight}
-        />
+        <OrbManager {...settings} interfaceHeight={screen.interfaceHeight} />
       </GUIStyle>
     </Fragment>
   );
@@ -65,7 +62,7 @@ const Game = ({ settings, activeChapter, goToChapter }) => {
   );
 
   return (
-    <GameContainerStyle screen={settings.screen}>
+    <GameContainerStyle screen={screen}>
       {chapterButtons}
       {activeChapter.id === 2 && kitScreen}
       {activeChapter.id !== 2 && defaultScreen(activeChapter.title)}
@@ -137,6 +134,22 @@ const ChapterButtonsStyle = styled(PanelStyle)`
 `;
 
 Game.propTypes = {
+  settings: PropTypes.shape({
+    orbCount: PropTypes.number,
+    orbSize: PropTypes.number,
+    period: PropTypes.number,
+    minVelocityX: PropTypes.number,
+    maxVelocityX: PropTypes.number,
+    minVelocityY: PropTypes.number,
+    maxVelocityY: PropTypes.number,
+    mode: PropTypes.string,
+    screen: PropTypes.shape({
+      label: PropTypes.string,
+      width: PropTypes.number,
+      height: PropTypes.number,
+      interfaceHeight: PropTypes.number
+    })
+  }),
   activeChapter: PropTypes.shape({
     enabled: PropTypes.bool,
     id: PropTypes.number,
