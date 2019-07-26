@@ -1,10 +1,10 @@
-import { createReducer } from "redux-starter-kit";
+import { createReducer, createSelector } from "redux-starter-kit";
 import { shuffle } from "lodash";
 
 import { tasks, tasksForEnvironment, URBAN } from "../constants/tasks";
 
 const defaultEnv = URBAN;
-const defaultSaveYourself = [tasksForEnvironment[defaultEnv].saveYourself];
+const defaultSaveYourself = tasksForEnvironment[defaultEnv].saveYourself;
 
 // INITIAL STATE
 const initialState = {
@@ -33,7 +33,7 @@ export const doNextTask = taskChoice => dispatch => {
 /* eslint-disable no-param-reassign */
 export const tasksReducer = createReducer(initialState, {
   [actionTypes.CHANGE_ENVIRONMENT]: (state, action) => {
-    const newTasks = tasksForEnvironment[action.nextEnvironmentId];
+    const newTasks = tasksForEnvironment[action.nextEnvironmentId].saveYourself;
 
     state.activeEnvironment = action.nextEnvironmentId;
     state.taskOrder = shuffle(newTasks);
@@ -41,7 +41,7 @@ export const tasksReducer = createReducer(initialState, {
   },
   [actionTypes.DO_NEXT_TASK]: (state, action) => {
     state.activeTask += 1;
-    const noNextTask = state.taskOrder[state.activeTask];
+    const noNextTask = !state.taskOrder[state.activeTask];
 
     if (noNextTask) {
       state.taskOrder.push(action.taskChoice);
@@ -53,3 +53,23 @@ export const tasksReducer = createReducer(initialState, {
 export default tasksReducer;
 
 // SELECTORS
+
+export const getTaskOrder = createSelector(
+  ["tasks.taskOrder"],
+  taskOrder => taskOrder
+);
+
+export const getActiveTask = createSelector(
+  ["tasks.activeTask"],
+  activeTask => activeTask
+);
+
+export const getActiveEnvironment = createSelector(
+  ["tasks.activeEnvironment"],
+  activeEnvironment => activeEnvironment
+);
+
+export const getTasksForEnvironment = createSelector(
+  ["tasks.tasksForEnvironment"],
+  foundTasks => foundTasks
+);
