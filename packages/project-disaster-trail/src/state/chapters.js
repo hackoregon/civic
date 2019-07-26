@@ -46,6 +46,8 @@ export const chapters = createReducer(initialState, {
     if (action.chapterId < 1) return;
     // eslint-disable-next-line no-param-reassign
     state.activeChapter = action.chapterId;
+
+    // TODO: change chapter model enabled prop
   }
 });
 
