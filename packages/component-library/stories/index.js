@@ -28,6 +28,7 @@ import pdfStory from "./PDF.story";
 import pieStory from "./PieChart.story";
 import placeholderStory from "./Placeholder.story";
 import pullQuoteStory from "./PullQuote.story";
+import radioButtonGroupStory from "./RadioButtonGroup.story";
 import sandboxStory from "./Sandbox.story";
 import scatterPlotMapStory from "./ScatterPlotMap.story";
 import ScatterplotStory from "./Scatterplot.story";
@@ -108,6 +109,7 @@ storiesOf("Component Lib|Basic Inputs", module)
 buttonStory();
 checkboxStory();
 dropdownStory();
+radioButtonGroupStory();
 sliderStory();
 
 // charts
