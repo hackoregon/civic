@@ -1,13 +1,36 @@
 /* eslint-disable no-nested-ternary */
+/* eslint-disable import/no-extraneous-dependencies */
 import {
   scaleQuantize,
   scaleThreshold,
   scaleOrdinal,
   scaleQuantile,
-  extent
+  extent,
+  color as d3Color
 } from "d3";
 
 import CIVIC_MAP_COLORS from "./mapStyles";
+
+const white = "#fff";
+const convertToRGB = colorArray => {
+  return colorArray
+    .map(d => (d3Color(d) ? d3Color(d) : d3Color(white)))
+    .map(d => [d.r, d.g, d.b]);
+};
+
+const createRange = (civicColor, colorRange) => {
+  if (colorRange.length) {
+    if (d3Color(colorRange[0])) {
+      return convertToRGB(colorRange);
+    } 
+      return colorRange;
+    
+  } if (civicColor && CIVIC_MAP_COLORS[civicColor]) {
+    return CIVIC_MAP_COLORS[civicColor];
+  } 
+    return CIVIC_MAP_COLORS.earth;
+  
+};
 
 const createEqualScale = () => scaleQuantize();
 
@@ -25,15 +48,11 @@ export const updateEqualScale = (
     ? equalDomain
     : extent(featuresData, d => +d.properties[colorFieldName]);
 
-  const colorRange = equalRange.length
-    ? equalRange
-    : CIVIC_MAP_COLORS[civicColorSelection]
-    ? CIVIC_MAP_COLORS[civicColorSelection]
-    : CIVIC_MAP_COLORS.earth;
+  const range = createRange(civicColorSelection, equalRange);
 
   return equalScale
     .domain(domain)
-    .range(colorRange)
+    .range(range)
     .nice();
 };
 
@@ -66,21 +85,17 @@ const createThresholdScale = (
   categories,
   customColors
 ) => {
-  const colorRange = customColors.length
-    ? customColors
-    : CIVIC_MAP_COLORS[civicColorSelection]
-    ? CIVIC_MAP_COLORS[civicColorSelection]
-    : CIVIC_MAP_COLORS.purpleGreen;
-
+  const range = createRange(civicColorSelection, customColors);
   return scaleThreshold()
     .domain(categories)
-    .range(colorRange);
+    .range(range);
 };
 
 const createDiscreteScale = (categories, colorRange) => {
+  const range = createRange("", colorRange);
   return scaleOrdinal()
     .domain(categories)
-    .range(colorRange)
+    .range(range)
     .unknown([255, 255, 255, 128]);
 };
 
