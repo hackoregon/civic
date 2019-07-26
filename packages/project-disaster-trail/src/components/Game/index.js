@@ -93,10 +93,6 @@ const GameContainerStyle = styled(PanelStyle)`
   grid-template-columns: 1fr;
   justify-content: center;
   align-items: center;
-
-  @media (min-height: ${props => props.screen.height}px) {
-    grid-template-rows: 1fr ${props => props.screen.interfaceHeight}px;
-  }
 `;
 
 const MapStyle = styled(PanelStyle)`
