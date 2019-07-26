@@ -626,10 +626,8 @@ export default () =>
         );
 
         const choroplethMapAPIURL =
-          "https://gist.githubusercontent.com/mendozaline/ab3da9bb53c17bf95690f9bf9fdd3e5a/raw/9b39324ea3df7e6e2cebc7aab7b1868289947ff3/test.json";
-
-        // "https://service.civicpdx.org/disaster-resilience/api/DisasterNeighborhoodView/" +
-        // "?format=json&limit=102";
+          "https://service.civicpdx.org/disaster-resilience/api/DisasterNeighborhoodView/" +
+          "?format=json&limit=102";
 
         const fetchURL = text("API URL:", choroplethMapAPIURL, GROUP_IDS.DATA);
 
@@ -640,7 +638,7 @@ export default () =>
             {data => {
               const fieldName = text(
                 "Field Name:",
-                "Populations_of_Color__Density_by_Acre_",
+                "dayoccupants",
                 GROUP_IDS.DESIGN
               );
 
@@ -648,19 +646,18 @@ export default () =>
 
               const colorRange = object("Color Range:", [], GROUP_IDS.DESIGN);
 
-              console.log("LODASH AT");
               const featurePosition = text(
-                "Feature Position:",
-                "features",
-                GROUP_IDS.DESIGN
+                "Feature Array Position:",
+                "results.features",
+                GROUP_IDS.DATA
               );
-              console.log(at(data, featurePosition));
-              const dataLodash = at(data, featurePosition);
+
+              const featuresData = at(data, featurePosition)[0];
 
               const choroplethMap = {
                 mapType: "ChoroplethMap",
                 id: "storybook-choropleth-map",
-                data: dataLodash[0],
+                data: featuresData,
                 opacity: polygonOpacity,
                 civicColor: polygonColor,
                 scaleType: {
