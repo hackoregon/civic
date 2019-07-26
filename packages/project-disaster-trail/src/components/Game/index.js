@@ -8,6 +8,7 @@ import * as SCREENS from "../../constants/screens";
 import { getActiveChapter, setActiveChapter } from "../../state/chapters";
 
 import KitScreen from "./KitScreen";
+import TaskScreen from "./TaskScreen";
 // import Orb from "./Orb";
 import OrbManager from "./OrbManager";
 import PointsView from "../atoms/PointsView";
@@ -40,6 +41,14 @@ const Game = ({ settings, activeChapter, goToChapter }) => {
     </Fragment>
   );
 
+  const taskScreen = (
+    <Fragment>
+      <MapStyle>
+        <TaskScreen />
+      </MapStyle>
+    </Fragment>
+  );
+
   const chapterButtons = (
     <ChapterButtonsStyle>
       <button
@@ -65,7 +74,10 @@ const Game = ({ settings, activeChapter, goToChapter }) => {
     <GameContainerStyle screen={screen}>
       {chapterButtons}
       {activeChapter.id === 2 && kitScreen}
-      {activeChapter.id !== 2 && defaultScreen(activeChapter.title)}
+      {activeChapter.id === 6 && taskScreen}
+      {activeChapter.id !== 2 &&
+        activeChapter.id !== 6 &&
+        defaultScreen(activeChapter.title)}
     </GameContainerStyle>
   );
 };
