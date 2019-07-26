@@ -7,46 +7,50 @@ import {
 } from "./items";
 
 // Save yourself ids
-const protection = "PROTECTION";
+export const PROTECTION = "protection";
 // Save others ids
-const fire = "FIRE";
-const injury = "INJURY";
-const hunger = "HUNGER";
-const thirst = "THIRST";
+export const FIRE = "fire";
+export const INJURY = "injury";
+export const HUNGER = "hunger";
+export const THIRST = "thirst";
 
-const tasks = {
+// environments
+export const URBAN = "urban";
+export const SUBURBAN = "suburban";
+
+export const tasks = {
   // Save Yourself
-  protection: {
-    id: protection,
+  [PROTECTION]: {
+    id: PROTECTION,
     time: 10,
     requiredItems: [protectiveGear],
     points: 3,
     text: "I'm afraid I'll fall over the rubble."
   },
   // Save Others
-  fire: {
-    id: fire,
+  [FIRE]: {
+    id: FIRE,
     time: 20,
     requiredItems: [fireExtinguisher],
     points: 5,
     text: "Uh oh! This fire could spread!"
   },
-  injury: {
-    id: injury,
+  [INJURY]: {
+    id: INJURY,
     time: 20,
     requiredItems: [firstAidKit],
     points: 7,
     text: "That person looks hurt."
   },
-  hunger: {
-    id: hunger,
+  [HUNGER]: {
+    id: HUNGER,
     time: 20,
     requiredItems: [food],
     points: 5,
     text: "That person looks hurt."
   },
-  thirst: {
-    id: thirst,
+  [THIRST]: {
+    id: THIRST,
     time: 20,
     requiredItems: [water],
     points: 5,
@@ -54,18 +58,13 @@ const tasks = {
   }
 };
 
-const tasksForEnvironment = {
-  suburban: {
-    saveYourself: [protection],
-    saveOthers: [hunger, thirst]
+export const tasksForEnvironment = {
+  [SUBURBAN]: {
+    saveYourself: [PROTECTION],
+    saveOthers: [HUNGER, THIRST]
   },
-  urban: {
-    saveYourself: [protection],
-    saveOthers: [fire, injury]
+  [URBAN]: {
+    saveYourself: [PROTECTION],
+    saveOthers: [FIRE, INJURY]
   }
-};
-
-export default {
-  tasks,
-  tasksForEnvironment
 };
