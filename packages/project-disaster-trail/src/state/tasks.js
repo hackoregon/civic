@@ -12,21 +12,23 @@ const initialState = {
   tasksForEnvironment,
   activeEnvironment: defaultEnv,
   taskOrder: shuffle(defaultSaveYourself),
-  activeTask: 0
+  activeTask: 0,
+  completedTasks: []
 };
 
 // CONSTANTS
 const actionTypes = {
   CHANGE_ENVIRONMENT: "CHANGE_ENVIRONMENT",
-  DO_NEXT_TASK: "DO_NEXT_TASK"
+  DO_NEXT_TASK: "DO_NEXT_TASK",
+  COMPLETE_TASK: "COMPLETE_TASK"
 };
 
 // ACTIONS
 export const changeEnvironment = nextEnvironmentId => dispatch => {
   dispatch({ type: actionTypes.CHANGE_ENVIRONMENT, nextEnvironmentId });
 };
-export const doNextTask = taskChoice => dispatch => {
-  dispatch({ type: actionTypes.DO_NEXT_TASK, taskChoice });
+export const doNextTask = (taskChoice, completedTask) => dispatch => {
+  dispatch({ type: actionTypes.DO_NEXT_TASK, taskChoice, completedTask });
 };
 
 // REDUCERS
@@ -40,10 +42,12 @@ export const tasksReducer = createReducer(initialState, {
     state.activeTask = 0;
   },
   [actionTypes.DO_NEXT_TASK]: (state, action) => {
-    state.activeTask += 1;
     const noNextTask = !state.taskOrder[state.activeTask];
 
-    if (noNextTask) {
+    state.activeTask += 1;
+    state.completedTasks.push(action.completedTask);
+
+    if (noNextTask && action.taskChoice) {
       state.taskOrder.push(action.taskChoice);
     }
   }
@@ -72,4 +76,9 @@ export const getActiveEnvironment = createSelector(
 export const getTasksForEnvironment = createSelector(
   ["tasks.tasksForEnvironment"],
   foundTasks => foundTasks
+);
+
+export const getCompletedTasks = createSelector(
+  ["tasks.completedTasks"],
+  completedTasks => completedTasks
 );

@@ -5,10 +5,11 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 
 import * as SCREENS from "../../constants/screens";
-import { getActiveChapter, setActiveChapter } from "../../state/chapters";
+import { getActiveChapter } from "../../state/chapters";
 
+import ChapterButtons from "./ChapterButtons";
 import KitScreen from "./KitScreen";
-import TaskScreen from "./TaskScreen";
+import TaskScreen from "./TaskScreen/index";
 // import Orb from "./Orb";
 import OrbManager from "./OrbManager";
 import PointsView from "../atoms/PointsView";
@@ -16,7 +17,7 @@ import DurationBar from "./DurationBar";
 
 import "@hackoregon/component-library/assets/global.styles.css";
 
-const Game = ({ settings, activeChapter, goToChapter }) => {
+const Game = ({ settings, activeChapter }) => {
   const { screen } = settings;
 
   const defaultScreen = chapterTitle => (
@@ -30,8 +31,8 @@ const Game = ({ settings, activeChapter, goToChapter }) => {
   const kitScreen = (
     <Fragment>
       <MapStyle>
-        <PointsViewStyle />
         <KitScreen />
+        <PointsViewStyle />
       </MapStyle>
       <DurationBar step="Choose supplies" />
       <GUIStyle screen={screen}>
@@ -41,44 +42,21 @@ const Game = ({ settings, activeChapter, goToChapter }) => {
     </Fragment>
   );
 
-  const taskScreen = (
-    <Fragment>
-      <MapStyle>
-        <TaskScreen />
-      </MapStyle>
-    </Fragment>
-  );
-
-  const chapterButtons = (
-    <ChapterButtonsStyle>
-      <button
-        type="button"
-        onClick={() => {
-          goToChapter(activeChapter.id - 1);
-        }}
-      >
-        ←
-      </button>
-      <button
-        type="button"
-        onClick={() => {
-          goToChapter(activeChapter.id + 1);
-        }}
-      >
-        →
-      </button>
-    </ChapterButtonsStyle>
-  );
-
   return (
-    <GameContainerStyle screen={screen}>
-      {chapterButtons}
-      {activeChapter.id === 2 && kitScreen}
-      {activeChapter.id === 6 && taskScreen}
-      {activeChapter.id !== 2 &&
-        activeChapter.id !== 6 &&
-        defaultScreen(activeChapter.title)}
-    </GameContainerStyle>
+    <Fragment>
+      {activeChapter.id === 6 && (
+        <TaskScreen interfaceHeight={screen.interfaceHeight} />
+      )}
+      {activeChapter.id !== 6 && (
+        <GameContainerStyle screen={screen}>
+          <ChapterButtons />
+          {activeChapter.id === 2 && kitScreen}
+          {activeChapter.id !== 2 &&
+            activeChapter.id !== 6 &&
+            defaultScreen(activeChapter.title)}
+        </GameContainerStyle>
+      )}
+    </Fragment>
   );
 };
 
@@ -109,8 +87,7 @@ const GameContainerStyle = styled(PanelStyle)`
 
 const MapStyle = styled(PanelStyle)`
   position: relative;
-  display: flex;
-  flex-direction: column-reverse;
+  display: grid;
   background: beige;
   width: 100vw;
 `;
@@ -130,15 +107,6 @@ const PointsViewStyle = styled(PointsView)`
   right: 0;
   border: 10px solid red;
   z-index: 1;
-`;
-
-const ChapterButtonsStyle = styled(PanelStyle)`
-  display: inline-grid;
-  grid-template-columns: 1fr 1fr;
-
-  > button {
-    font-size: 80px;
-  }
 `;
 
 Game.propTypes = {
@@ -163,18 +131,10 @@ Game.propTypes = {
     id: PropTypes.number,
     title: PropTypes.string,
     type: PropTypes.string
-  }),
-  goToChapter: PropTypes.func
+  })
 };
 
-export default connect(
-  state => ({
-    settings: state.settings,
-    activeChapter: getActiveChapter(state)
-  }),
-  dispatch => ({
-    goToChapter(chapter) {
-      dispatch(setActiveChapter(chapter));
-    }
-  })
-)(memo(Game));
+export default connect(state => ({
+  settings: state.settings,
+  activeChapter: getActiveChapter(state)
+}))(memo(Game));

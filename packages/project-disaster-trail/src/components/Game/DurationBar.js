@@ -2,23 +2,6 @@
 import { jsx, css } from "@emotion/core";
 import PropTypes from "prop-types";
 
-const durationBarStyle = css`
-  width: 100%;
-  height: 40px;
-  margin: 0;
-  background-color: #721d7c;
-  animation: scroll-left 30s linear 5s;
-  animation-fill-mode: forwards;
-  @keyframes scroll-left {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-100%);
-    }
-  }
-`;
-
 const durationBarStepStyle = css`
   display: grid;
   height: 100%;
@@ -33,7 +16,24 @@ const durationBarStepStyle = css`
   text-align: center;
 `;
 
-const DurationBar = ({ step }) => {
+const DurationBar = ({ step, durationLength }) => {
+  const durationBarStyle = css`
+    width: 100%;
+    height: 40px;
+    margin: 0;
+    background-color: #721d7c;
+    animation: scroll-left ${durationLength}s linear;
+    animation-fill-mode: forwards;
+    @keyframes scroll-left {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+  `;
+
   return (
     <div
       css={css`
@@ -54,11 +54,13 @@ const DurationBar = ({ step }) => {
 };
 
 DurationBar.propTypes = {
-  step: PropTypes.string
+  step: PropTypes.string,
+  durationLength: PropTypes.number
 };
 
 DurationBar.defaultProps = {
-  step: "Current step"
+  step: "Current step",
+  durationLength: 30
 };
 
 export default DurationBar;
