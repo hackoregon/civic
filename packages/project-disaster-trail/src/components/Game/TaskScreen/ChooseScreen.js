@@ -6,10 +6,13 @@ import { css, jsx } from "@emotion/core";
 
 import {
   getTaskOrder,
-  getActiveTask,
+  getActiveTaskData,
   getActiveEnvironment,
   getTasksForEnvironment,
-  getCompletedTasks
+  getCompletedTasks,
+  getHasSavedSelf,
+  addTask,
+  increaseActiveTask
 } from "../../../state/tasks";
 import { XL } from "../../../constants/screens";
 import DurationBar from "../DurationBar";
@@ -34,11 +37,10 @@ class ChooseScreen extends Component {
   state = defaultState;
 
   componentDidMount() {
-    const { taskOrder, activeTask } = this.props;
+    const { activeTask } = this.props;
     const { timeToVote } = this.state;
-    const nextTask = taskOrder[activeTask];
 
-    if (!nextTask) {
+    if (!activeTask) {
       this.setState({
         voteTimer: setTimeout(this.chooseRandomTask, timeToVote)
       });
@@ -55,17 +57,17 @@ class ChooseScreen extends Component {
   };
 
   chooseTask = task => {
-    const { goToTask } = this.props;
+    const { addNextTask } = this.props;
     this.clearVoteTimeout();
-    goToTask(task);
+    addNextTask(task);
   };
 
   chooseRandomTask = () => {
-    const { goToTask } = this.props;
+    const { addNextTask } = this.props;
     const possibleTasks = this.getPossibleTasks();
     const randomIndex = Math.floor(Math.random() * possibleTasks.length);
     const randomTask = possibleTasks[randomIndex];
-    goToTask(randomTask);
+    addNextTask(randomTask);
   };
 
   getPossibleTasks = () => {
@@ -80,10 +82,10 @@ class ChooseScreen extends Component {
   render() {
     const {
       taskOrder,
-      activeTask,
+      saveOthersMode,
+      goToNextTask,
       activeEnvironment,
       tasksForEnvironment,
-      goToTask,
       completedTasks,
       interfaceHeight
     } = this.props;
@@ -115,7 +117,6 @@ class ChooseScreen extends Component {
     );
 
     const tasksTodo = taskOrder.join(", ").toString();
-    const nextTask = taskOrder[activeTask];
 
     // All possible tasks for the game environment
     const saveYourselfTasks = tasksForEnvironment[
@@ -130,38 +131,39 @@ class ChooseScreen extends Component {
       <div
         css={css`
           ${screenLayout};
-          ${nextTask && screenWithInterfaceLayout}
+          ${saveOthersMode && screenWithInterfaceLayout}
         `}
       >
         <div>
           <h2>Task: Choose Screen</h2>
-          {nextTask && (
+          {!saveOthersMode && (
             <h3>
               Tasks to be done first in {activeEnvironment} environment: [{" "}
               {tasksTodo} ]
             </h3>
           )}
-          <h3>Have you saved yourself yet? {nextTask ? "nope" : "yep!"}</h3>
-          <h3>Next Task: {nextTask || "vote below!"}</h3>
-          {nextTask ? (
-            <button
-              type="button"
-              onClick={() => {
-                goToTask(nextTask);
-              }}
-            >
-              Go to task
-            </button>
-          ) : (
+          <h3>
+            Have you saved yourself yet? {saveOthersMode ? "yep!" : "nope"}
+          </h3>
+          {saveOthersMode ? (
             <Fragment>
               <h3>Choose next task for {activeEnvironment} environment:</h3>
               {possibleTaskButtons}
             </Fragment>
+          ) : (
+            <button
+              type="button"
+              onClick={() => {
+                goToNextTask();
+              }}
+            >
+              Save Yourself!
+            </button>
           )}
           <h3>Complete Tasks: [{completedTasks.join(", ").toString()} ]</h3>
         </div>
 
-        {!nextTask && (
+        {saveOthersMode && (
           <Fragment>
             <DurationBar
               step="Choose a task"
@@ -177,21 +179,36 @@ class ChooseScreen extends Component {
 
 ChooseScreen.propTypes = {
   taskOrder: PropTypes.arrayOf(PropTypes.string),
-  activeTask: PropTypes.number,
+  activeTask: PropTypes.shape({}),
+  saveOthersMode: PropTypes.bool,
   activeEnvironment: PropTypes.string,
   tasksForEnvironment: PropTypes.shape({}),
   completedTasks: PropTypes.arrayOf(PropTypes.string),
-  goToTask: PropTypes.func,
+  addNextTask: PropTypes.func,
+  goToNextTask: PropTypes.func,
   interfaceHeight: PropTypes.number
 };
 
 const mapStateToProps = state => ({
   taskOrder: getTaskOrder(state),
-  activeTask: getActiveTask(state),
+  saveOthersMode: getHasSavedSelf(state),
+  activeTask: getActiveTaskData(state),
   activeEnvironment: getActiveEnvironment(state),
   tasksForEnvironment: getTasksForEnvironment(state),
   completedTasks: getCompletedTasks(state),
   interfaceHeight: state.settings.screen.interfaceHeight
 });
 
-export default connect(mapStateToProps)(ChooseScreen);
+const mapDispatchToProps = dispatch => ({
+  addNextTask(taskChoice, taskId) {
+    dispatch(addTask(taskChoice, taskId));
+  },
+  goToNextTask() {
+    dispatch(increaseActiveTask());
+  }
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ChooseScreen);

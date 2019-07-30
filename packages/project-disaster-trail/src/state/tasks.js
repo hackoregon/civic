@@ -98,3 +98,10 @@ export const getCompletedTasks = createSelector(
   ["tasks.completedTasks"],
   completedTasks => completedTasks
 );
+
+export const getHasSavedSelf = createSelector(
+  ["tasks.taskOrder", "tasks.activeTask"],
+  (taskOrder, activeTask) => {
+    return activeTask >= taskOrder.length;
+  }
+);
