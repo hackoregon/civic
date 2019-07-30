@@ -1,117 +1,55 @@
-import React from "react";
+import React, { Component } from "react";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
-import {
-  getTaskOrder,
-  getActiveTask,
-  getActiveEnvironment,
-  getTasksForEnvironment,
-  doNextTask,
-  changeEnvironment
-} from "../../../state/tasks";
 
-const TaskScreen = ({
-  taskOrder,
-  activeTask,
-  activeEnvironment,
-  tasksForEnvironment,
-  addTask,
-  updateEnvironment
-}) => {
-  const mapTasksToButton = task => (
-    <button
-      key={task}
-      type="button"
-      onClick={() => {
-        addTask(task);
-      }}
-    >
-      {task}
-    </button>
-  );
+import ChooseScreen from "./ChooseScreen";
+import SolveScreen from "./SolveScreen";
+import { getActiveTask } from "../../../state/tasks";
 
-  // All possible tasks for the game environment
-  const saveYourselfTasks = tasksForEnvironment[
-    activeEnvironment
-  ].saveYourself.map(mapTasksToButton);
-  const saveOthersTasks = tasksForEnvironment[activeEnvironment].saveOthers.map(
-    mapTasksToButton
-  );
-  const possibleTasks = [].concat(saveYourselfTasks, saveOthersTasks);
-
-  // All types of environment
-  const environments = Object.keys(tasksForEnvironment);
-  const envButtons = environments.map(environment => (
-    <button
-      key={environment}
-      type="button"
-      onClick={() => {
-        updateEnvironment(environment);
-      }}
-    >
-      {environment}
-    </button>
-  ));
-
-  return (
-    <div style={{ flexDirection: "column" }}>
-      <h1>Task Screen</h1>
-      <h2>activeEnvironment: {activeEnvironment}</h2>
-      <div>
-        <h2>tasksForEnvironment</h2>
-        <p>
-          saveYourself: [
-          {tasksForEnvironment[activeEnvironment].saveYourself.map(
-            task => ` ${task}, `
-          )}
-          ]
-        </p>
-        <p>
-          saveOthers: [
-          {tasksForEnvironment[activeEnvironment].saveOthers.map(
-            task => ` ${task}, `
-          )}
-          ]
-        </p>
-      </div>
-
-      <h2>taskOrder: [{taskOrder.map(task => ` ${task}, `)}]</h2>
-
-      <h2>activeTask: {taskOrder[activeTask]}</h2>
-      <h3>Change activeTask</h3>
-      {possibleTasks}
-      <h3>Change activeEnvironment</h3>
-      {envButtons}
-    </div>
-  );
+const defaultState = {
+  currentTask: null
 };
 
+class TaskScreen extends Component {
+  state = defaultState;
+
+  componentDidUpdate(prevProps) {
+    const { activeTask } = this.props;
+    const taskHasBeenCompleted = prevProps.activeTask !== activeTask;
+    if (taskHasBeenCompleted) {
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState(defaultState);
+    }
+  }
+
+  goToTask = task => {
+    this.setState({
+      currentTask: task
+    });
+  };
+
+  render() {
+    const { currentTask } = this.state;
+
+    return (
+      <div>
+        <h1>Task Screen</h1>
+        {currentTask ? (
+          <SolveScreen currentTask={currentTask} />
+        ) : (
+          <ChooseScreen goToTask={this.goToTask} />
+        )}
+      </div>
+    );
+  }
+}
+
 TaskScreen.propTypes = {
-  taskOrder: PropTypes.arrayOf(PropTypes.string),
-  activeTask: PropTypes.number,
-  activeEnvironment: PropTypes.string,
-  tasksForEnvironment: PropTypes.shape({}),
-  addTask: PropTypes.func,
-  updateEnvironment: PropTypes.func
+  activeTask: PropTypes.number
 };
 
 const mapStateToProps = state => ({
-  taskOrder: getTaskOrder(state),
-  activeTask: getActiveTask(state),
-  activeEnvironment: getActiveEnvironment(state),
-  tasksForEnvironment: getTasksForEnvironment(state)
+  activeTask: getActiveTask(state)
 });
 
-const mapDispatchToProps = dispatch => ({
-  addTask(chosenTask) {
-    dispatch(doNextTask(chosenTask));
-  },
-  updateEnvironment(chosenEnv) {
-    dispatch(changeEnvironment(chosenEnv));
-  }
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TaskScreen);
+export default connect(mapStateToProps)(TaskScreen);
