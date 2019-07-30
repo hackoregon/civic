@@ -14,6 +14,17 @@ import {
 import { XL } from "../../../constants/screens";
 import DurationBar from "../DurationBar";
 
+const screenLayout = css`
+  position: relative;
+  display: grid;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr;
+  background: beige;
+`;
+
 const defaultState = {
   voteTimer: null,
   timeToVote: 7000
@@ -77,17 +88,6 @@ class ChooseScreen extends Component {
       interfaceHeight
     } = this.props;
     const { timeToVote } = this.state;
-
-    const screenLayout = css`
-      position: relative;
-      display: grid;
-      overflow: hidden;
-      width: 100%;
-      height: 100%;
-      grid-template-rows: 1fr;
-      grid-template-columns: 1fr;
-      background: beige;
-    `;
 
     const screenWithInterfaceLayout = css`
       grid-template-rows: 1fr 40px ${interfaceHeight}px;
