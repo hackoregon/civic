@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Component, Fragment } from "react";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
 import {
@@ -9,68 +9,133 @@ import {
   getCompletedTasks
 } from "../../../state/tasks";
 
-const ChooseScreen = ({
-  taskOrder,
-  activeTask,
-  activeEnvironment,
-  tasksForEnvironment,
-  completedTasks,
-  goToTask
-}) => {
-  const mapTasksToButton = task => (
-    <button
-      key={task}
-      type="button"
-      onClick={() => {
-        goToTask(task);
-      }}
-    >
-      {task}
-    </button>
-  );
+import DurationBar from "../DurationBar";
 
-  const tasksTodo = taskOrder.join(", ").toString();
-  const nextTask = taskOrder[activeTask];
-
-  // All possible tasks for the game environment
-  const saveYourselfTasks = tasksForEnvironment[
-    activeEnvironment
-  ].saveYourself.map(mapTasksToButton);
-  const saveOthersTasks = tasksForEnvironment[activeEnvironment].saveOthers.map(
-    mapTasksToButton
-  );
-  const possibleTaskButtons = [].concat(saveYourselfTasks, saveOthersTasks);
-
-  return (
-    <div>
-      <h2>Choose Screen</h2>
-      {nextTask && (
-        <h3>
-          Tasks to be done first in {activeEnvironment} environment: [{" "}
-          {tasksTodo} ]
-        </h3>
-      )}
-      <h3>Have you saved yourself yet? {nextTask ? "nope" : "yep!"}</h3>
-      <h3>Next Task: {nextTask || "vote below!"}</h3>
-      {nextTask ? (
-        <button
-          type="button"
-          onClick={() => {
-            goToTask(nextTask);
-          }}
-        >
-          Go to task
-        </button>
-      ) : (
-        <Fragment>
-          <h3>Choose next task for {activeEnvironment} environment:</h3>
-          {possibleTaskButtons}
-        </Fragment>
-      )}
-      <h3>Complete Tasks: [{completedTasks.join(", ").toString()} ]</h3>
-    </div>
-  );
+const defaultState = {
+  voteTimer: null,
+  timeToVote: 7000
 };
+
+class ChooseScreen extends Component {
+  state = defaultState;
+
+  componentDidMount() {
+    const { taskOrder, activeTask } = this.props;
+    const { timeToVote } = this.state;
+    const nextTask = taskOrder[activeTask];
+
+    if (!nextTask) {
+      this.setState({
+        voteTimer: setTimeout(this.chooseRandomTask, timeToVote)
+      });
+    }
+  }
+
+  componentWillUnmount() {
+    this.clearVoteTimeout();
+  }
+
+  clearVoteTimeout = () => {
+    const { voteTimer } = this.state;
+    clearTimeout(voteTimer);
+  };
+
+  chooseTask = task => {
+    const { goToTask } = this.props;
+    this.clearVoteTimeout();
+    goToTask(task);
+  };
+
+  chooseRandomTask = () => {
+    const { goToTask } = this.props;
+    const possibleTasks = this.getPossibleTasks();
+    const randomIndex = Math.floor(Math.random() * possibleTasks.length);
+    const randomTask = possibleTasks[randomIndex];
+    goToTask(randomTask);
+  };
+
+  getPossibleTasks = () => {
+    const { activeEnvironment, tasksForEnvironment } = this.props;
+    // All possible tasks for the game environment
+    const saveYourselfTasks =
+      tasksForEnvironment[activeEnvironment].saveYourself;
+    const saveOthersTasks = tasksForEnvironment[activeEnvironment].saveOthers;
+    return [].concat(saveYourselfTasks, saveOthersTasks);
+  };
+
+  render() {
+    const {
+      taskOrder,
+      activeTask,
+      activeEnvironment,
+      tasksForEnvironment,
+      goToTask,
+      completedTasks
+    } = this.props;
+    const { timeToVote } = this.state;
+
+    const mapTasksToButton = task => (
+      <button
+        key={task}
+        type="button"
+        onClick={() => {
+          this.chooseTask(task);
+        }}
+      >
+        {task}
+      </button>
+    );
+
+    const tasksTodo = taskOrder.join(", ").toString();
+    const nextTask = taskOrder[activeTask];
+
+    // All possible tasks for the game environment
+    const saveYourselfTasks = tasksForEnvironment[
+      activeEnvironment
+    ].saveYourself.map(mapTasksToButton);
+    const saveOthersTasks = tasksForEnvironment[
+      activeEnvironment
+    ].saveOthers.map(mapTasksToButton);
+    const possibleTaskButtons = [].concat(saveYourselfTasks, saveOthersTasks);
+
+    return (
+      <div>
+        <h2>Choose Screen</h2>
+        {nextTask && (
+          <h3>
+            Tasks to be done first in {activeEnvironment} environment: [{" "}
+            {tasksTodo} ]
+          </h3>
+        )}
+        <h3>Have you saved yourself yet? {nextTask ? "nope" : "yep!"}</h3>
+        <h3>Next Task: {nextTask || "vote below!"}</h3>
+        {nextTask ? (
+          <button
+            type="button"
+            onClick={() => {
+              goToTask(nextTask);
+            }}
+          >
+            Go to task
+          </button>
+        ) : (
+          <Fragment>
+            <h3>Choose next task for {activeEnvironment} environment:</h3>
+            {possibleTaskButtons}
+          </Fragment>
+        )}
+        <h3>Complete Tasks: [{completedTasks.join(", ").toString()} ]</h3>
+
+        {!nextTask && (
+          <DurationBar
+            step="Choose a task"
+            durationLength={timeToVote / 1000}
+          />
+        )}
+      </div>
+    );
+  }
+}
 
 ChooseScreen.propTypes = {
   taskOrder: PropTypes.arrayOf(PropTypes.string),
