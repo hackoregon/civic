@@ -22,7 +22,7 @@ export const tasks = {
   // Save Yourself
   [PROTECTION]: {
     id: PROTECTION,
-    time: 10,
+    time: 5 * 1000,
     requiredItems: [protectiveGear],
     points: 3,
     text: "I'm afraid I'll fall over the rubble."
@@ -30,28 +30,28 @@ export const tasks = {
   // Save Others
   [FIRE]: {
     id: FIRE,
-    time: 20,
+    time: 10 * 1000, // seconds * milliseconds
     requiredItems: [fireExtinguisher],
     points: 5,
     text: "Uh oh! This fire could spread!"
   },
   [INJURY]: {
     id: INJURY,
-    time: 20,
+    time: 10 * 1000, // seconds * milliseconds
     requiredItems: [firstAidKit],
     points: 7,
     text: "That person looks hurt."
   },
   [HUNGER]: {
     id: HUNGER,
-    time: 20,
+    time: 10 * 1000, // seconds * milliseconds
     requiredItems: [food],
     points: 5,
     text: "That person looks hurt."
   },
   [THIRST]: {
     id: THIRST,
-    time: 20,
+    time: 10 * 1000, // seconds * milliseconds
     requiredItems: [water],
     points: 5,
     text: "That person looks hurt."
