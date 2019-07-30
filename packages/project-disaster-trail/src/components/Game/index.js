@@ -30,8 +30,8 @@ const Game = ({ settings, activeChapter, goToChapter }) => {
   const kitScreen = (
     <Fragment>
       <MapStyle>
-        <PointsViewStyle />
         <KitScreen />
+        <PointsViewStyle />
       </MapStyle>
       <DurationBar step="Choose supplies" />
       <GUIStyle screen={screen}>
@@ -109,8 +109,7 @@ const GameContainerStyle = styled(PanelStyle)`
 
 const MapStyle = styled(PanelStyle)`
   position: relative;
-  display: flex;
-  flex-direction: column-reverse;
+  display: grid;
   background: beige;
   width: 100vw;
 `;
