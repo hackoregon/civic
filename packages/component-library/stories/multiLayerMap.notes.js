@@ -79,25 +79,23 @@ const createCustomColorProp = (
   ${
     threshold
       ? `- This property requires one of these diverging color schemes as a string if the \`scaleType\` is set to \`threshold\`:
-    - purpleGreen
-    - purpleOrange`
+        - purpleGreen
+        - purpleOrange`
       : ""
   }
   ${
     equal
       ? `- This property requires one of these sequential color schemes as a string if the \`scaleType\` is set to \`equal\`:
-    - thermal
-    - planet
-    - space
-    - earth
-    - ocean`
+        - thermal
+        - planet
+        - space
+        - earth
+        - ocean`
       : ""
   }
   ${
     ordinal
-      ? `
-  - This property requires no value if \`scaleType\` is set to \`ordinal\`
-  `
+      ? `- This property requires no value if \`scaleType\` is set to \`ordinal\``
       : ""
   }
 `;
@@ -114,7 +112,7 @@ const createOnClickProp = geometryType => `
   - This property expects a function
 `;
 
-const notes = `
+const baseNotes = `
 # MultiLayer Map Component
 
 The MultiLayer Map component is a more convenient way to display multiple map layers on the same Base Map.
@@ -125,21 +123,14 @@ These props can be passed to the MultiLayer Map component:
   - This prop expects an array of objects
   - Each object has a collection of properties made up of the values described below each map type.
 
-The MultiLayer Map component can display these map types:
-
-- [Path Map](#path-map)
-- [ScatterPlot Map](#scatterplot-map)
-- [Screen Grid Map](#screen-grid-map)
-- [Icon Map](#icon-map)
-- [Small Polygon Map](#small-polygon-map)
-- [Choropleth Map](#choropleth-map)
-
-
 ----
 
+`;
+
+const pathNotes = `
+${baseNotes}
 
 ## Path Map
-[Back to top](#multilayer-map-component)
 
 The Standard tab shows the basic implementation of a Path Map for the MultiLayer Map component.
 
@@ -204,12 +195,12 @@ ${fieldNameProp}
       - Thus the value at index 0 in the \`dataRange\` will have the color at index 0 of the \`colorRange\`
 
 ${createOnClickProp("a line")}
+`;
 
-
-
+const scatterPlotNotes = `
+${baseNotes}
 
 ## ScatterPlot Map
-[Back to top](#multilayer-map-component)
 
 The Standard tab shows the basic implementation of a ScatterPlot Map for the MultiLayer Map component.
 
@@ -277,12 +268,12 @@ ${createCustomColorProp("lines", {
   - This property requires a number greater than 1
 
 ${createOnClickProp("a line")}
+`;
 
-
-
+const screenGridNotes = `
+${baseNotes}
 
 ## Screen Grid Map
-[Back to top](#multilayer-map-component)
 
 The Standard tab shows the basic implementation of a Screen Grid Map for the MultiLayer Map component.
 
@@ -294,11 +285,13 @@ ${createDataProp("squares", "Point")}
 ${createSizeProp("square", "Size")}
 ${createOpacityProp("squares")}
 ${createColorProp("squares", civicSequentialColorOptions)}
+`;
 
-
-
+const iconNotes = `
+${baseNotes}
 
 ## Icon Map
+
 The Standard tab shows the basic implementation of an Icon Map for the MultiLayer Map component.
 
 These properties can be used to create a standard icon map layer object:
@@ -402,12 +395,12 @@ ${createOpacityProp("icons")}
     - And so on...
 
 ${createOnClickProp("an icon")}
+`;
 
-
-
+const smallPolygonNotes = `
+${baseNotes}
 
 ## Small Polygon Map
-[Back to top](#multilayer-map-component)
 
 The Standard tab shows the basic implementation of a Small Polygon Map for the MultiLayer Map component.
 
@@ -424,7 +417,7 @@ ${createColorProp("polygons", civicCategoricalColorOptions)}
 The Custom tab shows additional properties that can be used to create a custom small polygon map layer object:
 
 ${createScaleTypeProp({ threshold: true, equal: false, ordinal: true })}
-${createCustomColorProp("lines", {
+${createCustomColorProp("polygons", {
   threshold: true,
   equal: false,
   ordinal: true
@@ -465,12 +458,12 @@ ${fieldNameProp}
         - \`colorRange\`: \`[[0,0,255], [255,165,0], [0,255,0]]\`
     - The index of each value in \`dataRange\` will determine which color from the \`colorRange\` it's assigned
       - Thus the value at index 0 in the \`dataRange\` will have the color at index 0 of the \`colorRange\`
+`;
 
-
-
+const choroplethNotes = `
+${baseNotes}
 
 ## Choropleth Map
-[Back to top](#multilayer-map-component)
 
 The Standard tab shows the basic implementation of a Choropleth Map for the MultiLayer Map component.
 
@@ -533,5 +526,14 @@ ${createOnClickProp("a line")}
 
 
 `;
+
+const notes = {
+  pathNotes,
+  scatterPlotNotes,
+  screenGridNotes,
+  iconNotes,
+  smallPolygonNotes,
+  choroplethNotes
+};
 
 export default notes;

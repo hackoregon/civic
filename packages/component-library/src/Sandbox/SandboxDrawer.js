@@ -87,10 +87,13 @@ const SandboxDrawer = ({
       {drawerVisible && (
         <div
           className={css(`
-          background: #F3F2F3;
+          background: rgba(243,242,243,0.9);
           overflow-y: auto;
           min-height: 550px;
           height: 74vh;
+          border: 1px solid #ddd;
+          border-radius: 2px;
+          box-shadow: -10px 5px 15px -3px rgba(0, 0, 0, 0.2);
           @media (max-width: 850px) {
             height: 60vh;
           }
@@ -231,7 +234,7 @@ const SandboxDrawer = ({
             const backgroundSlideColor = slide.color;
             const formatBackgroundColor = arr =>
               arr.reduce(
-                (acc, cur, i) => (i < 3 ? acc + cur + "," : acc + "1)"),
+                (acc, cur, i) => (i < 3 ? acc + cur + "," : acc + "0.9)"),
                 "rgba("
               );
             const slideBackGroundColor = formatBackgroundColor(

@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { css } from "emotion";
 
 import {
   CivicStoryCard,
@@ -21,7 +20,8 @@ import {
 
 export class MagnitudeOfUrbanCampsiteSweeps extends React.Component {
   componentDidMount() {
-    this.props.init();
+    const { init } = this.props;
+    init();
   }
 
   render() {
@@ -71,7 +71,8 @@ export class MagnitudeOfUrbanCampsiteSweeps extends React.Component {
                 30 days.
               </p>
               <p>
-                Let's take a look at the past 18 months of sweeps in our city.
+                Let&apos;s take a look at the past 18 months of sweeps in our
+                city.
               </p>
               <p>
                 The amount of campsite sweeps significantly increased to a peak

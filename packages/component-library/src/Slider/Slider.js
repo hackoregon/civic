@@ -1,5 +1,5 @@
 import React from "react";
-import { bool, func, node, number, string, arrayOf } from "prop-types";
+import { bool, func, node, number} from "prop-types";
 import RcSlider from "rc-slider";
 import "rc-slider/assets/index.css";
 
@@ -14,9 +14,7 @@ const Slider = ({
   showStepMarkers,
   step,
   value,
-  SliderComponent,
-  sliderType,
-  defaultValue
+  SliderComponent
 }) => {
   return (
     <span className="civic-slider-container">
@@ -27,8 +25,6 @@ const Slider = ({
         step={step}
         value={value}
         onChange={onChange}
-        sliderType={sliderType}
-        defaultValue={defaultValue}
       />
     </span>
   );
@@ -54,8 +50,6 @@ Slider.propTypes = {
   step: number,
   value: number.isRequired,
   SliderComponent: node,
-  sliderType: string.isRequired,
-  defaultValue: arrayOf(number)
 };
 
 Slider.defaultProps = {

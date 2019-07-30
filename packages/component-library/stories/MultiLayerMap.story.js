@@ -6,11 +6,11 @@ import {
   text,
   number,
   select,
-  object
+  object,
+  optionsKnob as options
 } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 import { checkA11y } from "@storybook/addon-a11y";
-import { extent } from "d3";
 import { BaseMap, MultiLayerMap, DemoJSONLoader } from "../src";
 
 import notes from "./multiLayerMap.notes";
@@ -80,16 +80,19 @@ export default () =>
         );
 
         const PATH_MAP_SCALE_TYPE_COLOR_OPTIONS = {
-          "(none)": "",
+          none: "",
           threshold: "threshold",
           ordinal: "ordinal",
           equal: "equal"
         };
 
-        const scaleTypeColor = select(
+        const scaleTypeColor = options(
           "Scale Type:",
           PATH_MAP_SCALE_TYPE_COLOR_OPTIONS,
           "",
+          {
+            display: "inline-radio"
+          },
           GROUP_IDS.CUSTOM
         );
 
@@ -105,10 +108,6 @@ export default () =>
             CIVIC_CATEGORICAL_COLORS.civicGreen,
             GROUP_IDS.STANDARD
           );
-
-          fieldName = text("Field Name:", "", GROUP_IDS.CUSTOM);
-          dataRange = object("Data Range:", [], GROUP_IDS.CUSTOM);
-          colorRange = object("Color Range:", [], GROUP_IDS.CUSTOM);
         } else if (scaleTypeColor === "threshold") {
           lineColor = select(
             "Civic Color:",
@@ -212,7 +211,7 @@ export default () =>
         );
       },
       {
-        notes
+        notes: notes.pathNotes
       }
     )
     .add(
@@ -228,14 +227,17 @@ export default () =>
         );
 
         const SCATTERPLOT_SCALE_TYPE_COLOR_OPTIONS = {
-          "(none)": "",
+          none: "",
           ordinal: "ordinal"
         };
 
-        const scaleTypeColor = select(
+        const scaleTypeColor = options(
           "Scale Type (color):",
           SCATTERPLOT_SCALE_TYPE_COLOR_OPTIONS,
           "",
+          {
+            display: "inline-radio"
+          },
           GROUP_IDS.CUSTOM
         );
 
@@ -251,10 +253,6 @@ export default () =>
             CIVIC_CATEGORICAL_COLORS.civicGreen,
             GROUP_IDS.STANDARD
           );
-
-          fieldNameColor = text("Field Name (color):", "", GROUP_IDS.CUSTOM);
-          dataRange = object("Data Range:", [], GROUP_IDS.CUSTOM);
-          colorRange = object("Color Range:", [], GROUP_IDS.CUSTOM);
         } else if (scaleTypeColor === "ordinal") {
           fieldNameColor = text(
             "Field Name (color):",
@@ -276,14 +274,17 @@ export default () =>
         }
 
         const SCATTERPLOT_SCALE_TYPE_AREA_OPTIONS = {
-          "(none)": "",
+          none: "",
           "circle area": "circle area"
         };
 
-        const scaleTypeArea = select(
+        const scaleTypeArea = options(
           "Scale Type (area):",
           SCATTERPLOT_SCALE_TYPE_AREA_OPTIONS,
           "",
+          {
+            display: "inline-radio"
+          },
           GROUP_IDS.CUSTOM
         );
 
@@ -366,7 +367,7 @@ export default () =>
         );
       },
       {
-        notes
+        notes: notes.scatterPlotNotes
       }
     )
     .add(
@@ -434,7 +435,7 @@ export default () =>
         );
       },
       {
-        notes
+        notes: notes.screenGridNotes
       }
     )
     .add(
@@ -513,10 +514,13 @@ export default () =>
           ordinal: "ordinal"
         };
 
-        const scaleType = select(
+        const scaleType = options(
           "Scale Type:",
           ICON_SCALE_TYPE_COLOR_OPTIONS,
-          ICON_SCALE_TYPE_COLOR_OPTIONS.ordinal,
+          "ordinal",
+          {
+            display: "inline-radio"
+          },
           GROUP_IDS.STANDARD
         );
 
@@ -597,7 +601,7 @@ export default () =>
         );
       },
       {
-        notes
+        notes: notes.iconNotes
       }
     )
     .add(
@@ -611,15 +615,18 @@ export default () =>
         );
 
         const POLYGON_SCALE_TYPE_COLOR_OPTIONS = {
-          "(none)": "",
+          none: "",
           threshold: "threshold",
           ordinal: "ordinal"
         };
 
-        const scaleTypeSelection = select(
+        const scaleTypeSelection = options(
           "Scale Type:",
           POLYGON_SCALE_TYPE_COLOR_OPTIONS,
           "",
+          {
+            display: "inline-radio"
+          },
           GROUP_IDS.CUSTOM
         );
 
@@ -635,14 +642,7 @@ export default () =>
             CIVIC_CATEGORICAL_COLORS.civicGreen,
             GROUP_IDS.STANDARD
           );
-
-          fieldName = text("Field Name:", "", GROUP_IDS.CUSTOM);
-          dataRange = object("Data Range:", [], GROUP_IDS.CUSTOM);
-          colorRange = object("Color Range:", [], GROUP_IDS.CUSTOM);
         } else if (scaleTypeSelection === "threshold") {
-          // eslint-disable-next-line no-unused-expressions
-          polygonColor;
-
           fieldName = text("Field Name:", "acres", GROUP_IDS.CUSTOM);
 
           dataRange = object("Data Range:", [10], GROUP_IDS.CUSTOM);
@@ -653,9 +653,6 @@ export default () =>
             GROUP_IDS.CUSTOM
           );
         } else if (scaleTypeSelection === "ordinal") {
-          // eslint-disable-next-line no-unused-expressions
-          polygonColor;
-
           fieldName = text("Field Name:", "name", GROUP_IDS.CUSTOM);
 
           dataRange = object(
@@ -727,7 +724,7 @@ export default () =>
         );
       },
       {
-        notes
+        notes: notes.smallPolygonNotes
       }
     )
     .add(
@@ -746,10 +743,13 @@ export default () =>
           ordinal: "ordinal"
         };
 
-        const scaleTypeSelection = select(
+        const scaleTypeSelection = options(
           "Scale Type:",
           CHOROPLETH_SCALE_TYPE_COLOR_OPTIONS,
           "equal",
+          {
+            display: "inline-radio"
+          },
           GROUP_IDS.STANDARD
         );
 
@@ -771,7 +771,6 @@ export default () =>
                 GROUP_IDS.DATA
               );
 
-              let minMax;
               let polygonColor;
               let fieldName;
               let dataRange;
@@ -791,12 +790,7 @@ export default () =>
                   GROUP_IDS.STANDARD
                 );
 
-                minMax = extent(
-                  data.results.features,
-                  d => +d.properties[fieldName]
-                );
-
-                dataRange = object("Data Range:", minMax, GROUP_IDS.STANDARD);
+                dataRange = object("Data Range:", [], GROUP_IDS.STANDARD);
 
                 colorRange = object("Color Range:", [], GROUP_IDS.STANDARD);
               } else if (scaleTypeSelection === "threshold") {
@@ -880,6 +874,6 @@ export default () =>
         );
       },
       {
-        notes
+        notes: notes.choroplethNotes
       }
     );

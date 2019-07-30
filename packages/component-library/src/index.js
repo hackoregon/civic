@@ -6,6 +6,7 @@ export {
 export { default as BarChart } from "./BarChart/BarChart";
 export { default as LineChart } from "./LineChart/LineChart";
 export { default as Button } from "./Button/Button";
+export { default as Checkbox } from "./Checkbox/Checkbox";
 export { default as CivicStoryCard } from "./CivicStoryCard/CivicStoryCard";
 export { default as PageLayout } from "./PageLayout/PageLayout";
 export { default as PieChart } from "./PieChart/PieChart";
@@ -54,6 +55,13 @@ export { default as SimpleLegend } from "./SimpleLegend/SimpleLegend";
 export { default as ChartTitle } from "./ChartTitle/ChartTitle";
 export { default as ChartContainer } from "./ChartContainer/ChartContainer";
 export { default as CivicCardStack } from "./CivicCardStack/CivicCardStack";
+export { default as CivicCard } from "./CivicCard/CivicCard";
+export {
+  default as CivicCardLayoutFull
+} from "./CivicCard/CivicCardLayoutFull";
+export {
+  default as CivicCardLayoutClassic
+} from "./CivicCard/CivicCardLayoutClassic";
 
 export { default as civicFormat } from "./utils/civicFormat";
 export { default as ungroupBy } from "./utils/ungroupBy";

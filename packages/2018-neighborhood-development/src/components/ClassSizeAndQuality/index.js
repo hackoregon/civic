@@ -40,11 +40,13 @@ const dropdownOptions = YEARS.map(year => ({
 
 export class ClassSizeAndQuality extends React.Component {
   componentDidMount() {
-    this.props.fetchData(this.props.selectedYear);
+    const { fetchData, selectedYear } = this.props;
+    fetchData(selectedYear);
   }
 
   onYearChange = ({ value }) => {
-    this.props.setYear(value);
+    const { setYear } = this.props;
+    setYear(value);
   };
 
   render() {

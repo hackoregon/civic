@@ -20,7 +20,8 @@ import {
 
 export class HumanImpactOfSweepingUrbanCampsites extends React.Component {
   componentDidMount() {
-    this.props.init();
+    const { init } = this.props;
+    init();
   }
 
   render() {
@@ -46,7 +47,8 @@ export class HumanImpactOfSweepingUrbanCampsites extends React.Component {
                 operates a public reporting system for campsite locations. This
                 card explores the total quantity of reports from the public
                 compared to the amount of unique campsites that were reported,
-                and then looks at HUCIRP's clean-up response to public reports.
+                and then looks at HUCIRP&apos;s clean-up response to public
+                reports.
               </p>
               {humanImpactOfSweepingUrbanCampsites && (
                 <LineChart
@@ -66,7 +68,7 @@ export class HumanImpactOfSweepingUrbanCampsites extends React.Component {
           <Collapsable.Section hidden>
             <div>
               <p>
-                The Homelessness/Urban Camping Impact Reduction Program's
+                The Homelessness/Urban Camping Impact Reduction Program&apos;s
                 (HUCIRP) weekly campsite clean-up reports provide an estimate of
                 how many unique campsites were reported in a given week, in
                 addition to a total number of campsite reports (methodology is
@@ -93,14 +95,15 @@ export class HumanImpactOfSweepingUrbanCampsites extends React.Component {
                 the number and type of people at the campsite (presence of
                 children, dogs, etc.), how many people are present, whether the
                 campsite is a vehicle or a tent, and a criteria for reporting a
-                campsite, including: "repeated instances of overly aggressive
-                behavior from campers", "public intoxication and/or conspicuous
-                drug use," "campsite obstructs public right-of-way", "misuse of
-                public spaces", "structures", "excessive trash and/or
-                biohazards", or "damage to the environment." See the Source link
-                for more information about how many reports fit the various
-                criteria and how the public is responding to campsites within
-                the reports.
+                campsite, including: &quot;repeated instances of overly
+                aggressive behavior from campers&quot;, &quot;public
+                intoxication and/or conspicuous drug use,&quot; &quot;campsite
+                obstructs public right-of-way&quot;, &quot;misuse of public
+                spaces&quot;, &quot;structures&quot;, &quot;excessive trash
+                and/or biohazards&quot;, or &quot;damage to the
+                environment.&quot; See the Source link for more information
+                about how many reports fit the various criteria and how the
+                public is responding to campsites within the reports.
               </p>
             </div>
           </Collapsable.Section>

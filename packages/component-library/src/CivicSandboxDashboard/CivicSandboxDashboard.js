@@ -1,5 +1,4 @@
-/* TODO: Fix linting errors */
-/* eslint-disable */
+/* eslint-disable no-nested-ternary */
 import React, { useState } from "react";
 import {
   arrayOf,
@@ -23,8 +22,12 @@ const container = css`
   left: 25px;
   display: flex;
   flex-direction: column;
-  width: 575px;
-  background: rgba(243, 242, 243, 0.95);
+  width: 500px;
+  background: rgba(243, 242, 243, 0.9);
+  color: rgb(85, 85, 85);
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  box-shadow: 5px 5px 15px -3px rgba(0, 0, 0, 0.2);
   @media (max-width: 900px) {
     width: 92%;
     left: 1%;
@@ -32,17 +35,17 @@ const container = css`
 `;
 
 const dashboardOpen = css`
-  height: 45vh;
+  height: 400px;
   overflow-y: auto;
   overflow-x: hidden;
-  opacity: 1;
+  opacity: 0.9;
   transition: height 750ms ease-out, opacity 1.5s ease-in;
 `;
 
 const dashboardClosed = css`
   height: 0;
   opacity: 0;
-  transition: height 750ms ease-out, opacity 0.25s linear;
+  transition: height 750ms ease-out, opacity 0s linear;
 `;
 
 const contentContainer = css`
@@ -59,10 +62,12 @@ const toggleContainer = css`
   flex-direction: row;
   height: 100%;
   width: 100%;
-  border: 1px solid rgb(170, 164, 171);
-  background-color: rgb(243, 242, 243);
   color: #dc4556;
   z-index: 4;
+  opacity: 0.9;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  box-shadow: 5px 5px 15px -3px rgba(0, 0, 0, 0.2);
 `;
 
 const toggleTitle = css`
@@ -79,8 +84,8 @@ const toggleArrow = css`
 
 const watermarkContainer = css`
   position: absolute;
-  left: 0;
-  top: 0;
+  left: -1px;
+  top: -1px;
 `;
 
 const buttonContainer = css`
@@ -116,12 +121,13 @@ const iconActive = css`
 const viz = css`
   width: 90%;
   margin: 2% 2% 2% 8%;
+  padding-bottom: 25px;
   overflow-y: hidden;
 `;
 
 const donutPercent = css`
   position: absolute;
-  bottom: 43%;
+  bottom: 35px;
   left: 28%;
   width: 50%;
   margin: auto;
@@ -150,9 +156,9 @@ const createDonutViz = (donut, index) => {
       <PieChart
         data={donut.data}
         colors={[salmon, gray]}
-        width={475}
-        height={350}
-        innerRadius={90}
+        width={400}
+        height={400}
+        innerRadius={110}
         halfDoughnut
       />
     </div>
@@ -221,12 +227,18 @@ const CivicDashboard = props => {
       <div
         className={display === "description" ? iconActive : icon}
         onClick={() => setDisplay("description")}
+        onKeyPress={() => setDisplay("description")}
+        tabIndex={0}
+        role="button"
       >
         <div className={ICONS.info} />
       </div>
       <div
         className={display === "visualizations" ? iconActive : icon}
         onClick={() => setDisplay("visualizations")}
+        onKeyPress={() => setDisplay("visualizations")}
+        tabIndex={0}
+        role="button"
       >
         <div className={ICONS.eye} />
       </div>
@@ -234,8 +246,16 @@ const CivicDashboard = props => {
   );
 
   const dashboardToggleButton = (
-    <div className={toggleContainer} onClick={() => onClick()}>
-      <div className={toggleTitle}>Please select a polygon</div>
+    <div
+      className={toggleContainer}
+      onClick={() => onClick()}
+      onKeyPress={() => onClick()}
+      tabIndex={0}
+      role="button"
+    >
+      <div className={toggleTitle}>
+        {isDashboardOpen ? "" : "Please select a polygon"}
+      </div>
       <div className={toggleArrow}>
         <div className={isDashboardOpen ? ICONS.arrowDown : ICONS.arrowUp} />
       </div>

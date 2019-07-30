@@ -50,6 +50,8 @@ export default () =>
             dataLabel={dataLabel}
             dataValue={dataValue}
             data={data}
+            width={650}
+            height={350}
             halfDoughnut={halfDoughnut}
             useLegend={useLegend}
           />
