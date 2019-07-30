@@ -12,14 +12,15 @@ const initialState = {
   tasksForEnvironment,
   activeEnvironment: defaultEnv,
   taskOrder: shuffle(defaultSaveYourself),
-  activeTask: 0,
+  activeTask: -1,
   completedTasks: []
 };
 
 // CONSTANTS
 const actionTypes = {
   CHANGE_ENVIRONMENT: "CHANGE_ENVIRONMENT",
-  DO_NEXT_TASK: "DO_NEXT_TASK",
+  ADD_TASK: "ADD_TASK",
+  INCREASE_ACTIVE_TASK: "INCREASE_ACTIVE_TASK",
   COMPLETE_TASK: "COMPLETE_TASK"
 };
 
@@ -27,8 +28,14 @@ const actionTypes = {
 export const changeEnvironment = nextEnvironmentId => dispatch => {
   dispatch({ type: actionTypes.CHANGE_ENVIRONMENT, nextEnvironmentId });
 };
-export const doNextTask = (taskChoice, completedTask) => dispatch => {
-  dispatch({ type: actionTypes.DO_NEXT_TASK, taskChoice, completedTask });
+export const addTask = taskChoice => dispatch => {
+  dispatch({ type: actionTypes.ADD_TASK, taskChoice });
+};
+export const increaseActiveTask = () => dispatch => {
+  dispatch({ type: actionTypes.INCREASE_ACTIVE_TASK });
+};
+export const completeTask = completedTask => dispatch => {
+  dispatch({ type: actionTypes.COMPLETE_TASK, completedTask });
 };
 
 // REDUCERS
@@ -41,15 +48,16 @@ export const tasksReducer = createReducer(initialState, {
     state.taskOrder = shuffle(newTasks);
     state.activeTask = 0;
   },
-  [actionTypes.DO_NEXT_TASK]: (state, action) => {
-    const noNextTask = !state.taskOrder[state.activeTask];
-
+  [actionTypes.ADD_TASK]: (state, action) => {
+    state.taskOrder.push(action.taskChoice);
+  },
+  [actionTypes.INCREASE_ACTIVE_TASK]: state => {
     state.activeTask += 1;
+  },
+  [actionTypes.COMPLETE_TASK]: (state, action) => {
+    state.activeTask += 1;
+    // Log completed task
     state.completedTasks.push(action.completedTask);
-
-    if (noNextTask && action.taskChoice) {
-      state.taskOrder.push(action.taskChoice);
-    }
   }
 });
 /* eslint-enable no-param-reassign */
@@ -66,6 +74,14 @@ export const getTaskOrder = createSelector(
 export const getActiveTask = createSelector(
   ["tasks.activeTask"],
   activeTask => activeTask
+);
+
+export const getActiveTaskData = createSelector(
+  ["tasks.tasks", "tasks.taskOrder", "tasks.activeTask"],
+  (allTasks, taskOrder, activeTask) => {
+    const taskId = taskOrder[activeTask];
+    return allTasks[taskId];
+  }
 );
 
 export const getActiveEnvironment = createSelector(
