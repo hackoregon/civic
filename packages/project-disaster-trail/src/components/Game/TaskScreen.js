@@ -1,7 +1,6 @@
 import React from "react";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
-import { map } from "lodash";
 import {
   getTaskOrder,
   getActiveTask,
@@ -19,39 +18,40 @@ const TaskScreen = ({
   addTask,
   updateEnvironment
 }) => {
-  const possibleTasks = [];
-  map(tasksForEnvironment[activeEnvironment], tasks => {
-    for (let i = 0; i < tasks.length; i += 1) {
-      const taskOption = tasks[i];
-      possibleTasks.push(
-        <button
-          key={taskOption}
-          type="button"
-          onClick={() => {
-            addTask(taskOption);
-          }}
-        >
-          {taskOption}
-        </button>
-      );
-    }
-  });
+  const mapTasksToButton = task => (
+    <button
+      key={task}
+      type="button"
+      onClick={() => {
+        addTask(task);
+      }}
+    >
+      {task}
+    </button>
+  );
 
+  // All possible tasks for the game environment
+  const saveYourselfTasks = tasksForEnvironment[
+    activeEnvironment
+  ].saveYourself.map(mapTasksToButton);
+  const saveOthersTasks = tasksForEnvironment[activeEnvironment].saveOthers.map(
+    mapTasksToButton
+  );
+  const possibleTasks = [].concat(saveYourselfTasks, saveOthersTasks);
+
+  // All types of environment
   const environments = Object.keys(tasksForEnvironment);
-  const envButtons = [];
-  for (let i = 0; i < environments.length; i += 1) {
-    envButtons.push(
-      <button
-        key={environments[i]}
-        type="button"
-        onClick={() => {
-          updateEnvironment(environments[i]);
-        }}
-      >
-        {environments[i]}
-      </button>
-    );
-  }
+  const envButtons = environments.map(environment => (
+    <button
+      key={environment}
+      type="button"
+      onClick={() => {
+        updateEnvironment(environment);
+      }}
+    >
+      {environment}
+    </button>
+  ));
 
   return (
     <div style={{ flexDirection: "column" }}>
@@ -61,23 +61,21 @@ const TaskScreen = ({
         <h2>tasksForEnvironment</h2>
         <p>
           saveYourself: [
-          {map(
-            tasksForEnvironment[activeEnvironment].saveYourself,
+          {tasksForEnvironment[activeEnvironment].saveYourself.map(
             task => ` ${task}, `
           )}
           ]
         </p>
         <p>
           saveOthers: [
-          {map(
-            tasksForEnvironment[activeEnvironment].saveOthers,
+          {tasksForEnvironment[activeEnvironment].saveOthers.map(
             task => ` ${task}, `
           )}
           ]
         </p>
       </div>
 
-      <h2>taskOrder: [{map(taskOrder, task => ` ${task}, `)}]</h2>
+      <h2>taskOrder: [{taskOrder.map(task => ` ${task}, `)}]</h2>
 
       <h2>activeTask: {taskOrder[activeTask]}</h2>
       <h3>Change activeTask</h3>
@@ -96,8 +94,6 @@ TaskScreen.propTypes = {
   addTask: PropTypes.func,
   updateEnvironment: PropTypes.func
 };
-
-// export default TaskScreen;
 
 const mapStateToProps = state => ({
   taskOrder: getTaskOrder(state),
