@@ -1,4 +1,4 @@
-import { createReducer } from "redux-starter-kit";
+import { createReducer, createSelector } from "redux-starter-kit";
 
 import * as MODES from "../constants/modes";
 import * as SCREENS from "../constants/screens";
@@ -40,3 +40,8 @@ export const settings = createReducer(initialState, {});
 export default settings;
 
 // SELECTORS
+
+export const getScreenHeight = createSelector(
+  ["settings.screen.interfaceHeight"],
+  interfaceHeight => interfaceHeight
+);
