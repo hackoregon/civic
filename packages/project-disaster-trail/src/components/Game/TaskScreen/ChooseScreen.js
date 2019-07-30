@@ -14,6 +14,7 @@ import {
   addTask,
   increaseActiveTask
 } from "../../../state/tasks";
+import { getScreenHeight } from "../../../state/settings";
 import { XL } from "../../../constants/screens";
 import DurationBar from "../DurationBar";
 
@@ -196,7 +197,7 @@ const mapStateToProps = state => ({
   activeEnvironment: getActiveEnvironment(state),
   tasksForEnvironment: getTasksForEnvironment(state),
   completedTasks: getCompletedTasks(state),
-  interfaceHeight: state.settings.screen.interfaceHeight
+  interfaceHeight: getScreenHeight(state)
 });
 
 const mapDispatchToProps = dispatch => ({
