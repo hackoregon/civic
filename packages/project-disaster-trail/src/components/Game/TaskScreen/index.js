@@ -8,7 +8,7 @@ import {
   getTasksForEnvironment,
   doNextTask,
   changeEnvironment
-} from "../../state/tasks";
+} from "../../../state/tasks";
 
 const TaskScreen = ({
   taskOrder,

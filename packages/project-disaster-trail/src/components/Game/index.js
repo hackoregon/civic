@@ -8,7 +8,7 @@ import * as SCREENS from "../../constants/screens";
 import { getActiveChapter, setActiveChapter } from "../../state/chapters";
 
 import KitScreen from "./KitScreen";
-import TaskScreen from "./TaskScreen";
+import TaskScreen from "./TaskScreen/index";
 // import Orb from "./Orb";
 import OrbManager from "./OrbManager";
 import PointsView from "../atoms/PointsView";
