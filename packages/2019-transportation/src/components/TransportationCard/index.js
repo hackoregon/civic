@@ -2,13 +2,11 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { CivicCard } from "@hackoregon/component-library";
+import { isLoaded } from "reduxful";
+import { resourceShape } from "reduxful/react-addons";
 
 import transportationCardMeta from "./transportationCardMeta";
-import { fetchTransportationData } from "../../state/transportation-data/actions";
-import {
-  isTransportationDataPending,
-  getTransportationData
-} from "../../state/transportation-data/selectors";
+import api from "../../state/before-after-delay-maps/api";
 
 class TransportationCard extends Component {
   componentDidMount() {
@@ -17,12 +15,12 @@ class TransportationCard extends Component {
   }
 
   render() {
-    const { isLoading, data, Layout } = this.props;
+    const { data, Layout } = this.props;
 
     return (
       <CivicCard
         cardMeta={transportationCardMeta}
-        isLoading={isLoading}
+        isLoading={!isLoaded(data)}
         data={data}
         Layout={Layout}
       />
@@ -34,19 +32,17 @@ TransportationCard.displayName = "TransportationCard";
 
 TransportationCard.propTypes = {
   init: PropTypes.func,
-  isLoading: PropTypes.bool,
-  data: PropTypes.arrayOf(PropTypes.shape({})),
+  data: resourceShape,
   Layout: PropTypes.node
 };
 
 export default connect(
   state => ({
-    isLoading: isTransportationDataPending(state),
-    data: getTransportationData(state)
+    data: api.selectors.getDisturbanceStops(state) // for 2018 package, replace state with state.transportation2019
   }),
   dispatch => ({
     init() {
-      dispatch(fetchTransportationData());
+      dispatch(api.actionCreators.getDisturbanceStops());
     }
   })
 )(TransportationCard);
