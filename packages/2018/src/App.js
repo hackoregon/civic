@@ -1,6 +1,6 @@
 /* eslint-disable global-require */
 import React from "react";
-import { createStore, compose, applyMiddleware, combineReducers } from "redux";
+import { createStore, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
 import { Provider } from "react-redux";
 import { Router, browserHistory } from "react-router";
@@ -11,6 +11,7 @@ import {
 } from "react-router-redux";
 import { createLogger } from "redux-logger";
 import { reducer as reduxFormReducer } from "redux-form";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 // Import routes, reducers, and root component from each project
 import {
@@ -87,8 +88,6 @@ const configureStore = (initialState, history) => {
     middlewares.push(createLogger());
   }
 
-  const composeEnhancers =
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE_ || compose;
   const store = createStore(
     combineReducers({
       routing: routerReducer,
@@ -106,7 +105,7 @@ const configureStore = (initialState, history) => {
       transportation2019: Transportation2019Reducers()
     }),
     initialState,
-    composeEnhancers(applyMiddleware(...middlewares))
+    composeWithDevTools(applyMiddleware(...middlewares))
   );
 
   store.asyncReducers = {};
