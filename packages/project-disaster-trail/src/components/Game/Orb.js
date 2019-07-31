@@ -82,6 +82,7 @@ class Orb extends PureComponent {
       if (pressedDuration >= durationRequired) {
         const { id, onComplete } = this.props;
         // before final logic is added assume all orbs are bad
+        // eslint-disable-next-line react/no-unused-state
         this.setState({ isComplete: true, isCorrect: false });
         onComplete(id);
       }
@@ -89,7 +90,7 @@ class Orb extends PureComponent {
   };
 
   render() {
-    const { isActive, isComplete, isCorrect } = this.state;
+    const { isActive, isComplete } = this.state;
     const { size } = this.props;
 
     const sizeStyle = css`
@@ -103,6 +104,10 @@ class Orb extends PureComponent {
       top: -${size / 2}px;
       left: -${size / 2}px;
     `;
+
+    let orbClass = "";
+    if (isActive) orbClass = "circle-press-style";
+    if (isComplete) orbClass = "circle-bad-item-style";
 
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
@@ -125,18 +130,7 @@ class Orb extends PureComponent {
             ${circleDefaultStyle};
             ${sizeStyle};
           `}
-          /* Check for isComplete and assign bad style if true,
-            then check for isActive
-            Can be both isComplete and isActive at the same time
-          */
-          /* eslint-disable no-nested-ternary */
-          className={
-            isComplete
-              ? "circle-bad-item-style"
-              : isActive
-              ? "circle-press-style"
-              : ""
-          }
+          className={orbClass}
         />
       </div>
     );

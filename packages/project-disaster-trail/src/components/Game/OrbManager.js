@@ -59,8 +59,6 @@ const OrbManager = ({
 
   const onOrbComplete = id => {
     console.log("complete ", id);
-    // console.log("this.state", this.state);
-
     addPoints(1);
   };
 
