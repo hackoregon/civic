@@ -1,55 +1,74 @@
-import Corn from "../../assets/corn.svg";
+import CornEmpty from "../../assets/corn.svg";
 import CornColor from "../../assets/corn-color.svg";
-import Water from "../../assets/water.svg";
+import WaterEmpty from "../../assets/water.svg";
 import WaterColor from "../../assets/water-color.svg";
-import FireExtinguisher from "../../assets/fire-extinguisher.svg";
+import FireExtinguisherEmpty from "../../assets/fire-extinguisher.svg";
 import FireExtinguisherColor from "../../assets/fire-extinguisher-color.svg";
-import FirstAid from "../../assets/first-aid-kit.svg";
+import FirstAidEmpty from "../../assets/first-aid-kit.svg";
 import FirstAidColor from "../../assets/first-aid-kit-color.svg";
-import Flashlight from "../../assets/flashlight.svg";
+import FlashlightEmpty from "../../assets/flashlight.svg";
 import FlashlightColor from "../../assets/flashlight-color.svg";
-import WalkieTalkie from "../../assets/walkie-talkie.svg";
+import WalkieTalkieEmpty from "../../assets/walkie-talkie.svg";
 import WalkieTalkieColor from "../../assets/walkie-talkie-color.svg";
 
+export const food = "FOOD";
+export const water = "WATER";
+export const fireExtinguisher = "FIRE_EXTINGUISHER";
+export const firstAidKit = "FIRST_AID_KIT";
+export const flashlight = "FLASHLIGHT";
+export const walkieTalkie = "WALKIE_TALKIE";
+
+// No current svgs
+export const protectiveGear = "PROTECTIVE_GEAR";
+
 export const FOOD = {
-  id: "FOOD",
-  emptySvg: Corn,
+  id: food,
+  emptySvg: CornEmpty,
   fullSvg: CornColor,
   quantity: 0,
   kitsFilledByItem: 0
 };
 export const WATER = {
-  id: "WATER",
-  emptySvg: Water,
+  id: water,
+  emptySvg: WaterEmpty,
   fullSvg: WaterColor,
   quantity: 0,
   kitsFilledByItem: 0
 };
 export const FIRE_EXTINGUISHER = {
-  id: "FIRE_EXTINGUISHER",
-  emptySvg: FireExtinguisher,
+  id: fireExtinguisher,
+  emptySvg: FireExtinguisherEmpty,
   fullSvg: FireExtinguisherColor,
   quantity: 0,
   kitsFilledByItem: 0
 };
 export const FIRST_AID_KIT = {
-  id: "FIRST_AID_KIT",
-  emptySvg: FirstAid,
+  id: firstAidKit,
+  emptySvg: FirstAidEmpty,
   fullSvg: FirstAidColor,
   quantity: 0,
   kitsFilledByItem: 0
 };
 export const FLASHLIGHT = {
-  id: "FLASHLIGHT",
-  emptySvg: Flashlight,
+  id: flashlight,
+  emptySvg: FlashlightEmpty,
   fullSvg: FlashlightColor,
   quantity: 0,
   kitsFilledByItem: 0
 };
 export const WALKIE_TALKIE = {
-  id: "WALKIE_TALKIE",
-  emptySvg: WalkieTalkie,
+  id: walkieTalkie,
+  emptySvg: WalkieTalkieEmpty,
   fullSvg: WalkieTalkieColor,
+  quantity: 0,
+  kitsFilledByItem: 0
+};
+
+// TODO: update items
+export const PROTECTIVE_GEAR = {
+  id: protectiveGear,
+  emptySvg: "https://image.flaticon.com/icons/svg/1705/1705460.svg",
+  fullSvg: "https://image.flaticon.com/icons/svg/1705/1705463.svg",
   quantity: 0,
   kitsFilledByItem: 0
 };
@@ -60,7 +79,8 @@ export const MINIMUM_KIT = {
   FIRE_EXTINGUISHER: { ...FIRE_EXTINGUISHER, quantity: 1 },
   FIRST_AID_KIT: { ...FIRST_AID_KIT, quantity: 1 },
   FLASHLIGHT: { ...FLASHLIGHT, quantity: 1 },
-  WALKIE_TALKIE: { ...WALKIE_TALKIE, quantity: 1 }
+  WALKIE_TALKIE: { ...WALKIE_TALKIE, quantity: 1 },
+  PROTECTIVE_GEAR: { ...PROTECTIVE_GEAR, quantity: 1 }
 };
 
 export default {
@@ -69,5 +89,6 @@ export default {
   FIRE_EXTINGUISHER,
   FIRST_AID_KIT,
   FLASHLIGHT,
-  WALKIE_TALKIE
+  WALKIE_TALKIE,
+  PROTECTIVE_GEAR
 };
