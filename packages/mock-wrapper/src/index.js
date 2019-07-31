@@ -6,6 +6,7 @@ import { syncHistoryWithStore, routerMiddleware } from "react-router-redux";
 import { Provider } from "react-redux";
 import { Router, browserHistory } from "react-router";
 import { createLogger } from "redux-logger";
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { composeWithDevTools } from "redux-devtools-extension";
 
 export default function MockWrapper(App, Reducers, Routes = () => []) {
