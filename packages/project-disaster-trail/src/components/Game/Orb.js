@@ -23,6 +23,11 @@ const circleDefaultStyle = css`
     background-color: mediumAquamarine;
     transition: background-color 1000ms linear;
   }
+
+  &.circle-bad-item-style {
+    transition: filter 0.5s ease-in-out;
+    filter: grayscale(100%);
+  }
 `;
 
 const defaultState = {
@@ -30,7 +35,8 @@ const defaultState = {
   pressTimeout: null,
   pressedStart: null,
   isActive: false,
-  isComplete: false
+  isComplete: false,
+  isCorrect: false
 };
 
 class Orb extends PureComponent {
@@ -75,7 +81,9 @@ class Orb extends PureComponent {
       const pressedDuration = new Date() - pressedStart;
       if (pressedDuration >= durationRequired) {
         const { id, onComplete } = this.props;
-        this.setState({ isComplete: true });
+        // before final logic is added assume all orbs are bad
+        // eslint-disable-next-line react/no-unused-state
+        this.setState({ isComplete: true, isCorrect: false });
         onComplete(id);
       }
     }
@@ -96,6 +104,10 @@ class Orb extends PureComponent {
       top: -${size / 2}px;
       left: -${size / 2}px;
     `;
+
+    let orbClass = "";
+    if (isActive) orbClass = "circle-press-style";
+    if (isComplete) orbClass = "circle-bad-item-style";
 
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
@@ -118,7 +130,7 @@ class Orb extends PureComponent {
             ${circleDefaultStyle};
             ${sizeStyle};
           `}
-          className={isActive ? "circle-press-style" : ""}
+          className={orbClass}
         />
       </div>
     );
