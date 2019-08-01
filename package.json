@@ -22,7 +22,7 @@
   ],
   "private": true,
   "scripts": {
-    "bootstrap": "yarn install --frozen-lockfile && yarn --cwd ./packages/component-library/ build",
+    "bootstrap": "yarn install --frozen-lockfile && yarn --cwd ./packages/component-library/ build && yarn --cwd ./packages/mock-wrapper/ build",
     "build": "lerna run build",
     "configure": "lerna run configure",
     "publish-patch": "lerna publish bump patch --yes",
