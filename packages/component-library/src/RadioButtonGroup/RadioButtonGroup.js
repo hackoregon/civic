@@ -13,32 +13,34 @@ const radioButtonGroupClass = css`
 `;
 
 const RadioButtonGroup = ({
-  labels, // an array of labels - create a radio btn for each label
-  onChange, // for the group
-  disabled, // disable the group of btns
-  value, // the value of the selected btn
+  labels,
+  onChange,
+  disabled,
+  value,
   grpLabel,
-  labelPlacement
+  labelPlacement,
+  row
 }) => (
   <MaterialRadioGroup
     name={grpLabel}
     onChange={onChange}
     value={value}
+    row={row}
     inputProps={{ "aria-label": { grpLabel } }}
   >
     {labels.map(label => (
       <FormControlLabel
         key={label.id}
-        value={label} // select the label of this btn from the array
+        value={label}
         control={
           <MaterialRadio
-            disabled={disabled} // can I disable a specific btn? Do I want to?
+            disabled={disabled}
             css={radioButtonGroupClass}
-            inputProps={{ "aria-label": { label } }} // label of this btn
+            inputProps={{ "aria-label": { label } }}
           />
         }
-        label={label} // select the label of this btn from the array
-        labelPlacement={labelPlacement} // all btns in group have same placement
+        label={label}
+        labelPlacement={labelPlacement}
       />
     ))}
   </MaterialRadioGroup>
@@ -48,20 +50,20 @@ RadioButtonGroup.displayName = "RadioButtonGroup";
 
 RadioButtonGroup.propTypes = {
   labels: PropTypes.arrayOf(PropTypes.string),
-  // label: PropTypes.string,
   value: PropTypes.string,
   grpLabel: PropTypes.string,
   labelPlacement: PropTypes.string,
+  row: PropTypes.bool,
   disabled: PropTypes.bool,
   onChange: PropTypes.func
 };
 
 RadioButtonGroup.defaultProps = {
   labels: ["Label 1", "Label 2", "Label 3"],
-  // label: "Label",
   value: "Label 1",
   grpLabel: "Group Label",
   labelPlacement: "end",
+  row: false,
   disabled: false
 };
 

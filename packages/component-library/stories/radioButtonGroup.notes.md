@@ -8,8 +8,8 @@ The Standard story shows the standard usage of the Radio Button Group for the CI
 
 These properties can be set in the Standard story:
 
-- Label
-- Disabled
+- Labels - an array of labels, one for each radio button
+- Disable the group of radio buttons
 
 ## Custom
 
@@ -17,5 +17,13 @@ The Custom story shows all possible properties that can be passed to the Radio B
 
 - Label placement
 - Value
+- Display all radio buttons in a row
 
 ## Example:
+
+This example story shows the radio button group as it would be used in a form. In a form group you can also set values for:
+
+- Form label
+- Form helper text
+- Display all radio buttons in a row
+- Disable the group of radio buttons

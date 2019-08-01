@@ -42,19 +42,11 @@ export default () =>
     .add(
       "Standard",
       () => {
-        // const radioLabels = ["2016", "2017", "2018"];
-        // const labels = array("Labels", radioLabels, ", ", GROUP_IDS.LABELS);
-        const labels = array(
-          "Labels",
-          ["2016", "2017", "2018"],
-          ", ",
-          GROUP_IDS.LABELS
-        );
+        const radioLabels = ["2016", "2017", "2018"];
+        const labels = array("Labels", radioLabels, ", ", GROUP_IDS.LABELS);
         const disabled = boolean("Disabled", false, GROUP_IDS.STATE);
         return (
-          // what is value (a string?) and starting value
-          // set it to the value (label) of the first btn
-          <StatefulWrapper initialState={{ value: false }}>
+          <StatefulWrapper initialState={{ value: radioLabels[0] }}>
             {({ get, set }) => {
               return (
                 <RadioButtonGroup
@@ -76,7 +68,8 @@ export default () =>
     .add(
       "Custom",
       () => {
-        const label = text("Label", "Label", GROUP_IDS.LABELS);
+        const radioLabels = ["2016", "2017", "2018"];
+        const labels = array("Labels", radioLabels, ", ", GROUP_IDS.LABELS);
         const disabled = boolean("Disabled", false, GROUP_IDS.STATE);
         const options = {
           Top: "top",
@@ -84,6 +77,7 @@ export default () =>
           Bottom: "bottom",
           End: "end"
         };
+        const row = boolean("Display in a row", false, GROUP_IDS.CUSTOM);
         const labelPlacement = select(
           "Label placement",
           options,
@@ -91,18 +85,19 @@ export default () =>
           GROUP_IDS.CUSTOM
         );
         return (
-          <StatefulWrapper initialState={{ value: false }}>
+          <StatefulWrapper initialState={{ value: radioLabels[0] }}>
             {({ get, set }) => {
               return (
                 <RadioButtonGroup
-                  label={label}
+                  labels={labels}
                   onChange={event => {
-                    set({ value: event.target.checked });
+                    set({ value: event.target.value });
                     action("onChange")(event);
                   }}
                   value={get("value")}
                   disabled={disabled}
                   labelPlacement={labelPlacement}
+                  row={row}
                 />
               );
             }}
@@ -119,71 +114,33 @@ export default () =>
           "Show results for the following years",
           GROUP_IDS.LABELS
         );
-        const labelOne = text("Label One", "2015", GROUP_IDS.LABELS);
-        const labelTwo = text("Label Two", "2016", GROUP_IDS.LABELS);
-        const labelThree = text("Label Three", "2017", GROUP_IDS.LABELS);
-        const labelFour = text("Label Four", "2018", GROUP_IDS.LABELS);
+        const radioLabels = ["2016", "2017", "2018"];
+        const labels = array("Labels", radioLabels, ", ", GROUP_IDS.LABELS);
         const formHelperText = text(
           "Form helper text",
           "* Select at least one year",
           GROUP_IDS.LABELS
         );
         const row = boolean("Display in a row", false, GROUP_IDS.DESIGN);
-        const disableGroup = boolean("Disable group", false, GROUP_IDS.STATE);
-        const disableOne = boolean("Disable 2015", false, GROUP_IDS.STATE);
-        const disableTwo = boolean("Disable 2016", false, GROUP_IDS.STATE);
-        const disableThree = boolean("Disable 2017", false, GROUP_IDS.STATE);
-        const disableFour = boolean("Disable 2018", false, GROUP_IDS.STATE);
+        const disabled = boolean("Disabled", false, GROUP_IDS.STATE);
+
         return (
-          <StatefulWrapper
-            initialState={{
-              checkboxOne: false,
-              checkboxTwo: false,
-              checkboxThree: false,
-              checkboxFour: false
-            }}
-          >
+          <StatefulWrapper initialState={{ value: radioLabels[0] }}>
             {({ get, set }) => {
               return (
                 <FormControl>
                   <FormLabel>{formLabel}</FormLabel>
-                  <FormGroup row={row}>
+                  <FormGroup>
                     <Fragment>
                       <RadioButtonGroup
-                        label={labelOne}
+                        labels={labels}
                         onChange={event => {
-                          set({ checkboxOne: event.target.checked });
+                          set({ value: event.target.value });
                           action("onChange")(event);
                         }}
-                        value={get("checkboxOne")}
-                        disabled={disableGroup || disableOne}
-                      />
-                      <RadioButtonGroup
-                        label={labelTwo}
-                        onChange={event => {
-                          set({ checkboxTwo: event.target.checked });
-                          action("onChange")(event);
-                        }}
-                        value={get("checkboxTwo")}
-                        disabled={disableGroup || disableTwo}
-                      />
-                      <RadioButtonGroup
-                        label={labelThree}
-                        onChange={event => {
-                          set({ checkboxThree: event.target.checked });
-                          action("onChange")(event);
-                        }}
-                        value={get("checkboxThree")}
-                        disabled={disableGroup || disableThree}
-                      />
-                      <RadioButtonGroup
-                        label={labelFour}
-                        onChange={event => {
-                          set({ checkboxFour: event.target.checked });
-                          action("onChange")(event);
-                        }}
-                        value={get("checkboxFour")}
-                        disabled={disableGroup || disableFour}
+                        value={get("value")}
+                        disabled={disabled}
+                        row={row}
                       />
                     </Fragment>
                   </FormGroup>
