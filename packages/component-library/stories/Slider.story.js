@@ -47,7 +47,7 @@ const tooltipSlider = () => {
             }}
             step={number("step", 10)}
             tooltipFormatter={data => `${data}!`}
-            value={number("value", get("value"))}
+            value={get("value")}
           />
         );
       }}
@@ -70,8 +70,8 @@ const rangeSlider = () => {
             }}
             step={number("step", 10)}
             tooltipFormatter={data => `${data}!`}
-            firstValue={number("first value", get("value"))}
-            secondValue={number("second value", get("value"))}
+            firstValue={get("firstValue")}
+            secondValue={get("secondValue")}
           />
         );
       }}
