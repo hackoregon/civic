@@ -20,7 +20,7 @@ class TransportationCard extends Component {
     return (
       <CivicCard
         cardMeta={transportationCardMeta}
-        isLoading={!isLoaded(data)}
+        isLoading={!isLoaded(data.disturbanceStops)}
         data={data}
         Layout={Layout}
       />
@@ -38,7 +38,12 @@ TransportationCard.propTypes = {
 
 export default connect(
   state => ({
-    data: api.selectors.getDisturbanceStops(state) // for 2018 package, replace state with state.transportation2019
+    data: {
+      disturbanceStops: api.selectors.getDisturbanceStops(
+        state.transportation2019 || state
+      )
+    }
+    // state.packageName || state needed to make work in the project package and 2018 package
   }),
   dispatch => ({
     init() {

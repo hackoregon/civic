@@ -7,7 +7,6 @@ import { extent } from "d3-array";
 import {
   BaseMap,
   IconMap,
-  Slider,
   ChartContainer
 } from "@hackoregon/component-library";
 
@@ -130,7 +129,7 @@ function BeforeAfterDelayMaps({ isLoading, data }) {
   const heatMapDataProperty = "time_diff";
   const dataMinMax = !isLoading
     ? extent(
-        data.value.results.features,
+        data.disturbanceStops.value.results.features,
         d => d.properties[heatMapDataProperty]
       )
     : [0, 1];
@@ -154,7 +153,6 @@ function BeforeAfterDelayMaps({ isLoading, data }) {
 
   return (
     <Fragment>
-      <Slider />
       <div
         className={css`
           display: grid;
@@ -168,7 +166,7 @@ function BeforeAfterDelayMaps({ isLoading, data }) {
               initialZoom={14.5}
               initialLatitude={45.5132}
               initialLongitude={-122.6709}
-              mapboxData={data.value.results}
+              mapboxData={data.disturbanceStops.value.results}
               mapboxDataId="transit-stops-data"
               mapboxLayerType="heatmap"
               mapboxLayerOptions={heatmapLayer}
@@ -178,7 +176,8 @@ function BeforeAfterDelayMaps({ isLoading, data }) {
               mapGLOptions={mapGLOptions}
             >
               <IconMap
-                data={data.value.results.features}
+                // should use traffic signals https://gis-pdx.opendata.arcgis.com/datasets/traffic-signals
+                data={data.disturbanceStops.value.results.features}
                 opacity={0.5}
                 iconAtlas="https://i.imgur.com/xgTAROe.png"
                 iconMapping={poiIconMapping}
@@ -197,7 +196,7 @@ function BeforeAfterDelayMaps({ isLoading, data }) {
               initialZoom={14.5}
               initialLatitude={45.5132}
               initialLongitude={-122.6709}
-              mapboxData={data.value.results}
+              mapboxData={data.disturbanceStops.value.results}
               mapboxDataId="transit-stops-data"
               mapboxLayerType="heatmap"
               mapboxLayerOptions={heatmapLayer}
@@ -207,7 +206,8 @@ function BeforeAfterDelayMaps({ isLoading, data }) {
               mapGLOptions={mapGLOptions}
             >
               <IconMap
-                data={data.value.results.features}
+                // should use traffic signals https://gis-pdx.opendata.arcgis.com/datasets/traffic-signals
+                data={data.disturbanceStops.value.results.features}
                 opacity={0.5}
                 iconAtlas="https://i.imgur.com/xgTAROe.png"
                 iconMapping={poiIconMapping}
