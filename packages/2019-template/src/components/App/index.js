@@ -72,13 +72,13 @@ const App = () => (
       </p>
     </section>
     <section className={sectionMarginMedium}>
+      <TemplateAPICard Layout={CivicCardLayoutClassic} />
+    </section>
+    <section className={sectionMarginMedium}>
       <TemplateFileCard Layout={CivicCardLayoutClassic} />
     </section>
     <section className={sectionMarginMedium}>
       <DemoCard Layout={CivicCardLayoutClassic} />
-    </section>
-    <section className={sectionMarginMedium}>
-      <TemplateAPICard Layout={CivicCardLayoutClassic} />
     </section>
   </PageLayout>
 );
