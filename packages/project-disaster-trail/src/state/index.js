@@ -6,6 +6,7 @@ import kit from "./kit";
 import user from "./user";
 import settings from "./settings";
 import tasks from "./tasks";
+import orbs from "./orbs";
 
 export default function createReducer(asyncReducers) {
   return combineReducers({
@@ -15,6 +16,7 @@ export default function createReducer(asyncReducers) {
     user,
     settings,
     tasks,
+    orbs,
     ...asyncReducers
   });
 }
