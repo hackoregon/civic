@@ -54,7 +54,7 @@ const PageLayout = ({
   <div>
     {header && (
       <Header
-        title="Civic"
+        title="Civic homepage"
         mainProjectColor={mainProjectColor}
         overlay={overlay || false}
       />
