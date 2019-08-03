@@ -78,7 +78,7 @@ const App = () => (
       <DemoCard Layout={CivicCardLayoutClassic} />
     </section>
     <section className={sectionMarginMedium}>
-      <TemplateAPICard />
+      <TemplateAPICard Layout={CivicCardLayoutClassic} />
     </section>
   </PageLayout>
 );
