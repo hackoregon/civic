@@ -131,7 +131,9 @@ class Orb extends PureComponent {
             ${sizeStyle};
           `}
           className={orbClass}
-        />
+        >
+          {/* <p>{this.props.id}</p> */}
+        </div>
       </div>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
