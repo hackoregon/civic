@@ -3,11 +3,12 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { isLoaded } from "reduxful";
 import { resourceShape } from "reduxful/react-addons";
-import { CivicStoryCard } from "@hackoregon/component-library";
+import { CivicCard } from "@hackoregon/component-library";
 
+import TemplateAPICardMeta from "./templateAPICardMeta";
 import api from "../../state/template-api-data/api";
 
-const TemplateAPICard = ({ init, data }) => {
+const TemplateAPICard = ({ init, data, Layout }) => {
   useEffect(() => {
     init();
   }, [
@@ -21,20 +22,12 @@ const TemplateAPICard = ({ init, data }) => {
   const loading = !isLoaded(data.ridershipOverTime);
 
   return (
-    <CivicStoryCard
-      title="Plateau in Ridership"
-      slug="template-api-data"
-      loading={loading}
-    >
-      <p>
-        Newly released findings from TriMet shows a slow decline in public
-        transit ridership relative to population growth over the last 10 years,
-        a pattern which appears to be consistent across the nation. While the
-        cause of decline in ridership doesn&apos;t point to a single variable,
-        it&apos;s been suggested that housing affordability and economic
-        displacement may play a role in this phenomenon.
-      </p>
-    </CivicStoryCard>
+    <CivicCard
+      cardMeta={TemplateAPICardMeta}
+      isLoading={loading}
+      data={data}
+      Layout={Layout}
+    />
   );
 };
 
@@ -42,7 +35,8 @@ TemplateAPICard.displayName = "TemplateAPICard";
 
 TemplateAPICard.propTypes = {
   init: PropTypes.func,
-  data: resourceShape
+  data: resourceShape,
+  Layout: PropTypes.node
 };
 
 export default connect(
