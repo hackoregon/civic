@@ -11,10 +11,6 @@ const apiDesc = {
   }
 };
 
-const plateauInRidershipAPI = new Reduxful(
-  "plateauInRidershipAPI",
-  apiDesc,
-  apiConfig
-);
+const newTemplateAPI = new Reduxful("newTemplateAPI", apiDesc, apiConfig);
 
-export default plateauInRidershipAPI;
+export default newTemplateAPI;

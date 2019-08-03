@@ -5,7 +5,7 @@ import { isLoaded } from "reduxful";
 import { resourceShape } from "reduxful/react-addons";
 import { CivicStoryCard } from "@hackoregon/component-library";
 
-import api from "../../state/plateau-in-ridership/api";
+import api from "../../state/template-api-data/api";
 
 const TemplateAPICard = ({ init, data }) => {
   useEffect(() => {
@@ -23,7 +23,7 @@ const TemplateAPICard = ({ init, data }) => {
   return (
     <CivicStoryCard
       title="Plateau in Ridership"
-      slug="plateau-in-ridership"
+      slug="template-api-data"
       loading={loading}
     >
       <p>
