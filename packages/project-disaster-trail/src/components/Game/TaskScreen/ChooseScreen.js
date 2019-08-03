@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { Component, Fragment } from "react";
+import { PureComponent, Fragment } from "react";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
 import { css, jsx } from "@emotion/core";
@@ -14,9 +14,9 @@ import {
   addTask,
   increaseActiveTask
 } from "../../../state/tasks";
-import { getScreenHeight } from "../../../state/settings";
-import { XL } from "../../../constants/screens";
-import DurationBar from "../DurationBar";
+import DurationBar from "../../atoms/DurationBar";
+import TextContainer from "../../atoms/Containers/TextContainer";
+import OrbManager from "../OrbManager";
 
 const screenLayout = css`
   position: relative;
@@ -24,8 +24,8 @@ const screenLayout = css`
   overflow: hidden;
   width: 100%;
   height: 100%;
-  grid-template-rows: 1fr;
-  grid-template-columns: 1fr;
+  justify-content: center;
+  align-items: center;
   background: beige;
 `;
 
@@ -34,7 +34,7 @@ const defaultState = {
   timeToVote: 7000
 };
 
-class ChooseScreen extends Component {
+class ChooseScreen extends PureComponent {
   state = defaultState;
 
   componentDidMount() {
@@ -87,23 +87,9 @@ class ChooseScreen extends Component {
       goToNextTask,
       activeEnvironment,
       tasksForEnvironment,
-      completedTasks,
-      interfaceHeight
+      completedTasks
     } = this.props;
     const { timeToVote } = this.state;
-
-    const screenWithInterfaceLayout = css`
-      grid-template-rows: 1fr 40px ${interfaceHeight}px;
-    `;
-
-    const GUIStyle = css`
-      background: pink;
-      height: ${interfaceHeight}px;
-
-      @media (min-height: ${XL.height}px) {
-        height: ${interfaceHeight}px;
-      }
-    `;
 
     const mapTasksToButton = task => (
       <button
@@ -129,51 +115,47 @@ class ChooseScreen extends Component {
     const possibleTaskButtons = [].concat(saveYourselfTasks, saveOthersTasks);
 
     return (
-      <div
-        css={css`
-          ${screenLayout};
-          ${saveOthersMode && screenWithInterfaceLayout}
-        `}
-      >
-        <div>
-          <h2>Task: Choose Screen</h2>
-          {!saveOthersMode && (
+      <Fragment>
+        <div css={screenLayout}>
+          <TextContainer>
+            <h2>Task: Choose Screen</h2>
+            {!saveOthersMode && (
+              <h3>
+                Tasks to be done first in {activeEnvironment} environment: [{" "}
+                {tasksTodo} ]
+              </h3>
+            )}
             <h3>
-              Tasks to be done first in {activeEnvironment} environment: [{" "}
-              {tasksTodo} ]
+              Have you saved yourself yet? {saveOthersMode ? "yep!" : "nope"}
             </h3>
-          )}
-          <h3>
-            Have you saved yourself yet? {saveOthersMode ? "yep!" : "nope"}
-          </h3>
-          {saveOthersMode ? (
-            <Fragment>
-              <h3>Choose next task for {activeEnvironment} environment:</h3>
-              {possibleTaskButtons}
-            </Fragment>
-          ) : (
-            <button
-              type="button"
-              onClick={() => {
-                goToNextTask();
-              }}
-            >
-              Save Yourself!
-            </button>
-          )}
-          <h3>Complete Tasks: [{completedTasks.join(", ").toString()} ]</h3>
+            {saveOthersMode ? (
+              <Fragment>
+                <h3>Choose next task for {activeEnvironment} environment:</h3>
+                {possibleTaskButtons}
+              </Fragment>
+            ) : (
+              <button
+                type="button"
+                onClick={() => {
+                  goToNextTask();
+                }}
+              >
+                Save Yourself!
+              </button>
+            )}
+            <h3>Complete Tasks: [{completedTasks.join(", ").toString()} ]</h3>
+          </TextContainer>
         </div>
-
         {saveOthersMode && (
           <Fragment>
             <DurationBar
               step="Choose a task"
               durationLength={timeToVote / 1000}
             />
-            <div css={GUIStyle} />
+            <OrbManager />
           </Fragment>
         )}
-      </div>
+      </Fragment>
     );
   }
 }
@@ -186,8 +168,7 @@ ChooseScreen.propTypes = {
   tasksForEnvironment: PropTypes.shape({}),
   completedTasks: PropTypes.arrayOf(PropTypes.string),
   addNextTask: PropTypes.func,
-  goToNextTask: PropTypes.func,
-  interfaceHeight: PropTypes.number
+  goToNextTask: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -196,8 +177,7 @@ const mapStateToProps = state => ({
   activeTask: getActiveTaskData(state),
   activeEnvironment: getActiveEnvironment(state),
   tasksForEnvironment: getTasksForEnvironment(state),
-  completedTasks: getCompletedTasks(state),
-  interfaceHeight: getScreenHeight(state)
+  completedTasks: getCompletedTasks(state)
 });
 
 const mapDispatchToProps = dispatch => ({

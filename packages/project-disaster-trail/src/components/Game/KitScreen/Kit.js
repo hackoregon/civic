@@ -3,7 +3,7 @@ import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
 import { map } from "lodash";
 import { jsx, css } from "@emotion/core";
-import { getKitsNecessary, getItems } from "../../state/kit";
+import { getKitsNecessary, getItems } from "../../../state/kit";
 import KitItem from "./KitItem";
 
 const containerStyle = css`

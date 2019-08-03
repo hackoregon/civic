@@ -43,9 +43,6 @@ SETTINGS_FACTORY.getInitialSettings = () => {
     initialState.maxVelocityY = 0;
   }
 
-  console.log(screen);
-  console.log("initialState ", initialState);
-
   return initialState;
 };
 

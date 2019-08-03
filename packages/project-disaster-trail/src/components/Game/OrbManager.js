@@ -5,7 +5,6 @@ import { bindActionCreators } from "redux";
 import { map } from "lodash";
 import styled from "@emotion/styled";
 
-import { addPoints } from "../../state/user";
 import useBounds from "../../state/hooks/useBounds";
 import usePrevious from "../../state/hooks/usePrevious";
 import useAnimationFrame from "../../state/hooks/useAnimationFrame";
@@ -16,6 +15,12 @@ import {
   getPeriod,
   getVelocityRange
 } from "../../state/settings";
+import {
+  getOrbs,
+  setOrbs,
+  getOrbsTouched,
+  getOrbsComplete
+} from "../../state/orbs";
 
 import Orb from "./Orb";
 
@@ -29,6 +34,8 @@ import Orb from "./Orb";
  * @returns
  */
 const OrbManager = ({
+  orbs,
+  setOrbs,
   paused = false,
   period = 2,
   orbCount = 10,
@@ -39,15 +46,15 @@ const OrbManager = ({
     maxVelocityX = 2,
     maxVelocityY = 0
   } = {},
-  addPoints
+  touchedOrbs,
+  completedOrbs
 } = {}) => {
   const [hasInitialized, setHasInitialized] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   useAnimationFrame(() => animate());
 
   // store references to all models
-  const [models, setModels] = useState([]);
-  const prevModels = usePrevious(models);
+  const prevModels = usePrevious(orbs);
 
   // tick is used to modulate movement based on an incrementing value
   const [tick, setTick] = useState(0);
@@ -84,28 +91,16 @@ const OrbManager = ({
         // store in the temporary array
         tempModels.push(model);
       }
-      setModels(tempModels);
+      setOrbs(tempModels);
       setHasInitialized(true);
     }
   }, [bounds]);
 
-  // useEffect(() => {
-  //   if (!paused) {
-  //     animate();
-  //   }
-  // }, [paused]);
-
-  // useEffect(() => {
-  //   if (isAnimating) {
-  //     animate();
-  //   }
-  // }, [isAnimating]);
-
   useEffect(() => {
-    if (prevModels && !prevModels.length && models.length && !isAnimating) {
+    if (prevModels && !prevModels.length && orbs.length && !isAnimating) {
       setIsAnimating(true);
     }
-  }, [models]);
+  }, [orbs]);
 
   useEffect(() => {
     return () => {
@@ -121,8 +116,14 @@ const OrbManager = ({
 
     // we re-use tempModels by pushing updated data in to it.
     for (let i = 0, model; i < orbCount; i += 1) {
+      model = { ...orbs[i] };
+
+      // if the orb is touched or complete, do not move it
+      if (touchedOrbs.indexOf(i) > -1 || completedOrbs.indexOf(i) > -1) {
+        tempModels.push(model);
+        continue;
+      }
       // get the model
-      model = models[i];
 
       // and move it
       model.x += model.velocity.x; // + Math.cos(tick * 0.1) * period;
@@ -140,26 +141,16 @@ const OrbManager = ({
     }
 
     // store all models in state
-    setModels(tempModels);
+    setOrbs(tempModels);
 
     setTick(tick + 1);
-  };
-
-  const onOrbTouch = id => {
-    // const model = models[id];
-    // console.log("orb touched,  ", id);
-  };
-
-  const onOrbComplete = id => {
-    console.log("complete ", id);
-    addPoints(1);
   };
 
   // this is the render method
   // simply wrap Orb with some styling that moves it
   return (
     <OrbsStyle ref={boundsRef}>
-      {map(models, (model, index) => (
+      {map(orbs, (model, index) => (
         <div
           key={index}
           style={{
@@ -169,8 +160,7 @@ const OrbManager = ({
         >
           <Orb
             size={orbSize}
-            onOrbTouch={onOrbTouch}
-            onComplete={onOrbComplete}
+            // onComplete={onOrbComplete}
             id={index}
           />
         </div>
@@ -192,12 +182,14 @@ const mapStateToProps = state => ({
   orbCount: getOrbCount(state),
   orbSize: getOrbSize(state),
   period: getPeriod(state),
-  velocityRange: getVelocityRange(state)
+  velocityRange: getVelocityRange(state),
+  orbs: getOrbs(state),
+  touchedOrbs: getOrbsTouched(state),
+  completedOrbs: getOrbsComplete(state)
 });
 
 const mapDispatchToProps = dispatch => ({
-  addPoints: bindActionCreators(addPoints, dispatch)
-  // setPlaying: bindActionCreators(settings.setPlaying, dispatch),
+  setOrbs: bindActionCreators(setOrbs, dispatch)
 });
 
 // use memo to not re-render OrbManager unless its props change
