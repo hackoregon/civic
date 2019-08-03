@@ -19,12 +19,12 @@ const demoCardMeta = (/* data */) => ({
       <p>
         TriMet, the transit agency serving the Portland, OR, metro area, has
         seen recent declines in bus ridership, similar to other agencies across
-        the country. TriMet has{" "}
+        the country.{" "}
         <a href="http://transitcenter.org/2017/11/14/in-portland-economic-displacement-may-be-a-driver-of-transit-ridership-loss/">
-          cited
+          TriMet has cited economic displacement as a main driver of ridership
+          loss
         </a>{" "}
-        economic displacement as a main driver of ridership loss. Portland is
-        one of the most{" "}
+        . Portland is one of the most{" "}
         <a href="http://www.oregonlive.com/hg/index.ssf/2017/02/portland_gentrification_4_real.html">
           rapidly gentrifying cities
         </a>{" "}
