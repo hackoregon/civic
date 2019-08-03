@@ -5,6 +5,7 @@ import Reducers from "./state";
 // TODO: Update me before commiting a new card
 import TemplateCard from "./components/TemplateCard";
 import DemoCard from "./components/DemoCard";
+import TemplateAPICard from "./components/TemplateAPICard";
 
 const CardRegistry = [
   {
@@ -14,6 +15,10 @@ const CardRegistry = [
   {
     slug: "demo-card",
     component: DemoCard
+  },
+  {
+    slug: "template-api-card",
+    component: TemplateAPICard
   }
 ];
 
