@@ -3,14 +3,14 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { CivicCard } from "@hackoregon/component-library";
 
-import templateCardMeta from "./templateCardMeta";
-import { fetchTemplateData } from "../../state/template-data/actions";
+import TemplateFileCardMeta from "./templateFileCardMeta";
+import { fetchTemplateData } from "../../state/template-file-data/actions";
 import {
   isTemplateDataPending,
   getTemplateData
-} from "../../state/template-data/selectors";
+} from "../../state/template-file-data/selectors";
 
-class TemplateCard extends Component {
+class TemplateFileCard extends Component {
   componentDidMount() {
     const { init } = this.props;
     init();
@@ -21,7 +21,7 @@ class TemplateCard extends Component {
 
     return (
       <CivicCard
-        cardMeta={templateCardMeta}
+        cardMeta={TemplateFileCardMeta}
         isLoading={isLoading}
         data={data}
         Layout={Layout}
@@ -30,9 +30,9 @@ class TemplateCard extends Component {
   }
 }
 
-TemplateCard.displayName = "TemplateCard";
+TemplateFileCard.displayName = "TemplateFileCard";
 
-TemplateCard.propTypes = {
+TemplateFileCard.propTypes = {
   init: PropTypes.func,
   isLoading: PropTypes.bool,
   data: PropTypes.arrayOf(PropTypes.shape({})),
@@ -49,4 +49,4 @@ export default connect(
       dispatch(fetchTemplateData());
     }
   })
-)(TemplateCard);
+)(TemplateFileCard);

@@ -1,11 +1,11 @@
 import React from "react";
 import { Collapsable } from "@hackoregon/component-library";
 
-import TemplateCardVisualization from "./TemplateCardVisualization";
+import TemplateFileCardVisualization from "./TemplateFileCardVisualization";
 
-const templateCardMeta = (/* data */) => ({
-  title: "(Story Card #1, Issue #000) Template Card Title",
-  slug: "template-card",
+const TemplateFileCardMeta = (/* data */) => ({
+  title: "(Story Card #1, Issue #000) Template File Card Title",
+  slug: "template-file-card",
   introText: (
     <p>
       Ice cream candy canes brownie marzipan jelly chocolate bar marshmallow.
@@ -14,7 +14,7 @@ const templateCardMeta = (/* data */) => ({
       cake jelly beans sugar plum chocolate cupcake tiramisu cake.
     </p>
   ),
-  visualization: TemplateCardVisualization,
+  visualization: TemplateFileCardVisualization,
   additionalText: (
     <p>
       Pastry sweet roll candy chocolate bar cupcake gingerbread. Chocolate jelly
@@ -127,4 +127,4 @@ const templateCardMeta = (/* data */) => ({
   ]
 });
 
-export default templateCardMeta;
+export default TemplateFileCardMeta;

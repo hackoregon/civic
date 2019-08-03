@@ -9,7 +9,7 @@ import {
 } from "@hackoregon/component-library";
 
 import TemplateAPICard from "../TemplateAPICard";
-import TemplateCard from "../TemplateCard";
+import TemplateFileCard from "../TemplateFileCard";
 import DemoCard from "../DemoCard";
 
 import "@hackoregon/component-library/assets/global.styles.css";
@@ -72,7 +72,7 @@ const App = () => (
       </p>
     </section>
     <section className={sectionMarginMedium}>
-      <TemplateCard Layout={CivicCardLayoutClassic} />
+      <TemplateFileCard Layout={CivicCardLayoutClassic} />
     </section>
     <section className={sectionMarginMedium}>
       <DemoCard Layout={CivicCardLayoutClassic} />

@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 import { routerReducer } from "react-router-redux";
 
-import templateData from "./template-data";
+import templateData from "./template-file-data";
 import demoData from "./demo-data";
 import plateauInRidershipAPI from "./plateau-in-ridership/api";
 

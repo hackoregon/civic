@@ -6,9 +6,9 @@ import reducer from "./index";
 
 const mockStore = configureMockStore([thunk]);
 
-describe("template-data", () => {
-  describe("template-data actions", () => {
-    describe("template-data import actions", () => {
+describe("template-file-data", () => {
+  describe("template-file-data actions", () => {
+    describe("template-file-data import actions", () => {
       it("should have a start action", () => {
         const expectedAction = {
           type: actions.IMPORT_START
@@ -32,7 +32,7 @@ describe("template-data", () => {
       });
     });
 
-    describe("template-data import thunk", () => {
+    describe("template-file-data import thunk", () => {
       let store;
 
       beforeEach(() => {
@@ -55,7 +55,7 @@ describe("template-data", () => {
     });
   });
 
-  describe("template-data reducer", () => {
+  describe("template-file-data reducer", () => {
     const initialState = {
       pending: false,
       data: null
@@ -94,7 +94,7 @@ describe("template-data", () => {
     });
   });
 
-  describe("template-data selectors", () => {
+  describe("template-file-data selectors", () => {
     describe("getTemplateRequest", () => {
       it("extends the root selector", () => {
         const expectation = { one: "two", three: 4 };
