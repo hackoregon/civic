@@ -79,7 +79,7 @@ const Footer = ({ attribution }) => (
   <div className={footerClass}>
     <div className={copyrightClass}>{attribution}</div>
     <div className={logoClass}>
-      <Link to="/" className={logoLinkStyle}>
+      <Link to="/" alt="civic homepage" className={logoLinkStyle}>
         <LogoStandard />
       </Link>
     </div>
