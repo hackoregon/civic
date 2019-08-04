@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
 
@@ -14,6 +14,11 @@ import {
 import TextContainer from "../../atoms/Containers/TextContainer";
 
 class TaskMap extends Component {
+  state = {
+    taskChosen: false,
+    exampleTimeToAnimate: null
+  };
+
   componentDidUpdate(prevProps) {
     const { chooseTask, clearVoteTimeout } = this.props;
 
@@ -23,10 +28,25 @@ class TaskMap extends Component {
     }
   }
 
+  componentWillUnmount() {
+    const { exampleTimeToAnimate } = this.state;
+    clearTimeout(exampleTimeToAnimate);
+  }
+
   chooseTask = task => {
     const { addNextTask, clearVoteTimeout } = this.props;
     clearVoteTimeout();
-    addNextTask(task);
+
+    this.panAndZoom();
+    // addNextTask(task);
+
+    // As an example of the time to pan and zoom, use a timeout... otherwise it would be the line above
+    const exampleTimeToAnimate = setTimeout(() => {
+      addNextTask(task);
+    }, 2000);
+    this.setState({
+      exampleTimeToAnimate
+    });
   };
 
   chooseRandomTask = () => {
@@ -46,12 +66,17 @@ class TaskMap extends Component {
     return [].concat(saveYourselfTasks, saveOthersTasks);
   };
 
+  panAndZoom = () => {
+    this.setState({ taskChosen: true });
+  };
+
   render() {
     const {
       activeEnvironment,
       tasksForEnvironment,
       completedTasks
     } = this.props;
+    const { taskChosen } = this.state;
 
     const mapTasksToButton = task => (
       <button
@@ -74,13 +99,18 @@ class TaskMap extends Component {
     ].saveOthers.map(mapTasksToButton);
     const possibleTaskButtons = [].concat(saveYourselfTasks, saveOthersTasks);
 
-    // <h1>PANNING AND ZOOMING...</h1>
-
     return (
       <TextContainer>
-        <h3>Choose next task for {activeEnvironment} environment:</h3>
-        {possibleTaskButtons}
-        <h3>Complete Tasks: [{completedTasks.join(", ").toString()} ]</h3>
+        {taskChosen ? (
+          <h1>SUPER COOL MAP IS PANNING AND ZOOMING...</h1>
+        ) : (
+          <Fragment>
+            <h2>THIS IS A SUPER COOL MAP</h2>
+            <h3>Choose next task for {activeEnvironment} environment:</h3>
+            {possibleTaskButtons}
+            <h3>Complete Tasks: [{completedTasks.join(", ").toString()} ]</h3>
+          </Fragment>
+        )}
       </TextContainer>
     );
   }
