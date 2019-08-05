@@ -325,7 +325,7 @@ export default () =>
     .add("Default layout (full)", () => (
       <CivicCard cardMeta={demoCardMeta} data={demoData} isLoading={false} />
     ))
-    .add("Full layout", () => (
+    .add("Classic layout", () => (
       <CivicCard
         cardMeta={demoCardMeta}
         data={demoData}
