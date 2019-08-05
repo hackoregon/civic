@@ -24,6 +24,9 @@ const DataChecker = ({
   ) : (
     <div className={wrapperStyle}>
       <h1>{message}</h1>
+      {results.invalidType && (
+        <h2>Invalid Type - check if array or object is expected</h2>
+      )}
       <h2>Data Accessors</h2>
       {keys.map((key, index) => {
         const isValid =
@@ -60,7 +63,7 @@ const DataChecker = ({
       <h2>Data</h2>
       <pre>
         <strong>data: </strong>
-        {JSON.stringify(data, undefined, 2)}
+        {!dataIsObject && JSON.stringify(data, undefined, 2)}
       </pre>
     </div>
   );

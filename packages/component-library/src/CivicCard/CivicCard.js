@@ -1,9 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
+import DataChecker from "../utils/DataChecker";
 import CivicCardLayoutFull from "./CivicCardLayoutFull";
+import { cardMetaKeys } from "./cardMetaTypes";
 
 const CivicCard = ({ cardMeta, data, isLoading, Layout }) => (
-  <Layout cardMeta={cardMeta(data)} isLoading={isLoading} data={data} />
+  <DataChecker
+    data={cardMeta(data)}
+    dataAccessors={cardMetaKeys}
+    dataIsObject
+    message="Invalid cardMeta"
+  >
+    <Layout cardMeta={cardMeta(data)} isLoading={isLoading} data={data} />
+  </DataChecker>
 );
 
 CivicCard.propTypes = {
