@@ -8,7 +8,7 @@ const checkData = (data, dataKeys, dataIsObject = false) => {
   const results = {};
   const isArray = Array.isArray(data) && Array.isArray(dataKeys);
   const validType = (!dataIsObject && isArray) || (dataIsObject && !isArray);
-  results.error = !validType;
+  results.invalidType = !validType;
   const dataAsArray = dataIsObject ? [data] : data;
   // eslint-disable-next-line no-return-assign
   const keyChecks =

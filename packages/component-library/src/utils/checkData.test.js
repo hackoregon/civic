@@ -4,15 +4,15 @@ describe("checkData", () => {
   it("should add an error for invalid types", () => {
     expect(checkData({}, ["doorKey", "houseKey"])).to.eql({
       allKeysValid: false,
-      error: true
+      invalidType: true
     });
     expect(checkData({ keyType: "door" }, "doorKey")).to.eql({
       allKeysValid: false,
-      error: true
+      invalidType: true
     });
     expect(checkData({}, ["doorKey", "houseKey"])).to.eql({
       allKeysValid: false,
-      error: true
+      invalidType: true
     });
   });
 
@@ -27,7 +27,7 @@ describe("checkData", () => {
       )
     ).to.eql({
       allKeysValid: true,
-      error: false,
+      invalidType: false,
       keyType: { valid: 2, total: 2 }
     });
   });
@@ -43,7 +43,7 @@ describe("checkData", () => {
       )
     ).to.eql({
       allKeysValid: true,
-      error: false,
+      invalidType: false,
       keyType: { valid: 2, total: 2 }
     });
   });
@@ -59,7 +59,7 @@ describe("checkData", () => {
       )
     ).to.eql({
       allKeysValid: true,
-      error: false,
+      invalidType: false,
       keyType: { valid: 2, total: 2 },
       lockType: { valid: 2, total: 2 }
     });
@@ -76,7 +76,7 @@ describe("checkData", () => {
       )
     ).to.eql({
       allKeysValid: false,
-      error: false,
+      invalidType: false,
       keyType: { valid: 2, total: 2 },
       lockType: { valid: 2, total: 2 },
       junk: { valid: 1, total: 2 }
@@ -94,7 +94,7 @@ describe("checkData", () => {
       )
     ).to.eql({
       allKeysValid: false,
-      error: false,
+      invalidType: false,
       keyType: { valid: 2, total: 2 },
       lockType: { valid: 2, total: 2 },
       category: { valid: 0, total: 2 }
@@ -106,7 +106,7 @@ describe("checkData", () => {
       checkData({ keyType: "door", lockType: "door" }, ["keyType"], true)
     ).to.eql({
       allKeysValid: true,
-      error: false,
+      invalidType: false,
       keyType: { valid: 1, total: 1 }
     });
   });
@@ -120,7 +120,7 @@ describe("checkData", () => {
       )
     ).to.eql({
       allKeysValid: true,
-      error: false,
+      invalidType: false,
       keyType: { valid: 1, total: 1 },
       lockType: { valid: 1, total: 1 }
     });
@@ -135,7 +135,7 @@ describe("checkData", () => {
       )
     ).to.eql({
       allKeysValid: false,
-      error: false,
+      invalidType: false,
       keyType: { valid: 1, total: 1 },
       lockType: { valid: 1, total: 1 },
       junk: { valid: 0, total: 1 }
@@ -151,7 +151,7 @@ describe("checkData", () => {
       )
     ).to.eql({
       allKeysValid: false,
-      error: true
+      invalidType: true
     });
   });
 });
