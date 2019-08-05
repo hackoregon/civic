@@ -9,10 +9,16 @@ const wrapperStyle = css`
   width: 90%;
 `;
 
-const DataChecker = ({ data, dataAccessors, message, children }) => {
+const DataChecker = ({
+  data,
+  dataIsObject,
+  dataAccessors,
+  message,
+  children
+}) => {
   const keys = Object.keys(dataAccessors);
   const values = Object.values(dataAccessors);
-  const results = checkData(data, values);
+  const results = checkData(data, values, dataIsObject);
   const component = results.allKeysValid ? (
     children
   ) : (
@@ -68,7 +74,8 @@ DataChecker.propTypes = {
 };
 
 DataChecker.defaultProps = {
-  message: "Invalid Data"
+  message: "Invalid Data",
+  dataIsObject: false
 };
 
 export default DataChecker;

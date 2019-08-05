@@ -100,4 +100,58 @@ describe("checkData", () => {
       category: { valid: 0, total: 2 }
     });
   });
+
+  it("should work for a simple object test case", () => {
+    expect(
+      checkData({ keyType: "door", lockType: "door" }, ["keyType"], true)
+    ).to.eql({
+      allKeysValid: true,
+      error: false,
+      keyType: { valid: 1, total: 1 }
+    });
+  });
+
+  it("should handle object multiple keys", () => {
+    expect(
+      checkData(
+        { keyType: "door", lockType: "door", junk: "trunk" },
+        ["keyType", "lockType"],
+        true
+      )
+    ).to.eql({
+      allKeysValid: true,
+      error: false,
+      keyType: { valid: 1, total: 1 },
+      lockType: { valid: 1, total: 1 }
+    });
+  });
+
+  it("should handle object missing keys properly", () => {
+    expect(
+      checkData(
+        { keyType: "door", lockType: "door" },
+        ["keyType", "lockType", "junk"],
+        true
+      )
+    ).to.eql({
+      allKeysValid: false,
+      error: false,
+      keyType: { valid: 1, total: 1 },
+      lockType: { valid: 1, total: 1 },
+      junk: { valid: 0, total: 1 }
+    });
+  });
+
+  it("should error when dataIsObject = true and passed array", () => {
+    expect(
+      checkData(
+        [{ keyType: "door", lockType: "door" }],
+        ["keyType", "lockType", "junk"],
+        true
+      )
+    ).to.eql({
+      allKeysValid: false,
+      error: true
+    });
+  });
 });
