@@ -6,7 +6,7 @@ import _ from "lodash";
 import PullQuote from "../PullQuote/PullQuote";
 import Placeholder from "../Placeholder/Placeholder";
 import CivicVictoryTheme from "../VictoryTheme/CivicVictoryTheme";
-import { Collapsable } from "../../dist";
+import Collapsable from "../Collapsable/Collapsable";
 
 const sectionMarginSmall = css`
   display: block;
