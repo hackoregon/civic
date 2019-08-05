@@ -99,7 +99,7 @@ const demoCardMeta = (/* data */) => ({
     "Portland",
     "Demo"
   ],
-  selector: null,
+  selector: null, // optional, to be added later
   analysis: (
     <Collapsable>
       <Collapsable.Section>
