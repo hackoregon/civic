@@ -63,7 +63,7 @@ const DataChecker = ({ data, dataAccessors, message, children }) => {
 
 DataChecker.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  dataAccessors: PropTypes.shape({}).isRequired,
+  dataAccessors: PropTypes.objectOf(PropTypes.string).isRequired,
   message: PropTypes.string
 };
 
