@@ -1,6 +1,6 @@
 /* eslint-disable global-require */
 import React from "react";
-import { createStore, compose, applyMiddleware, combineReducers } from "redux";
+import { createStore, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
 import { Provider } from "react-redux";
 import { Router, browserHistory } from "react-router";
@@ -11,6 +11,7 @@ import {
 } from "react-router-redux";
 import { createLogger } from "redux-logger";
 import { reducer as reduxFormReducer } from "redux-form";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 // Import routes, reducers, and root component from each project
 import {
@@ -61,6 +62,12 @@ import {
   App as Template2019App
 } from "@hackoregon/2019-template";
 
+import {
+  Routes as Transportation2019Routes,
+  Reducers as Transportation2019Reducers,
+  App as Transportation2019App
+} from "@hackoregon/2019-transportation";
+
 import { Reducers as SandboxReducers } from "@hackoregon/civic-sandbox";
 
 import "./fonts.css";
@@ -82,8 +89,6 @@ const configureStore = (initialState, history) => {
     middlewares.push(createLogger());
   }
 
-  const composeEnhancers =
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE_ || compose;
   const store = createStore(
     combineReducers({
       routing: routerReducer,
@@ -97,10 +102,11 @@ const configureStore = (initialState, history) => {
       sandbox: SandboxReducers(),
       // Temporarily Hidden 2019 Pages ⬇️
       housing2019: Housing2019Reducers(),
-      template2019: Template2019Reducers()
+      template2019: Template2019Reducers(),
+      transportation2019: Transportation2019Reducers()
     }),
     initialState,
-    composeEnhancers(applyMiddleware(...middlewares))
+    composeWithDevTools(applyMiddleware(...middlewares))
   );
 
   store.asyncReducers = {};
@@ -118,7 +124,8 @@ const configureStore = (initialState, history) => {
         "@hackoregon/civic-sandbox",
         // Temporarily Hidden 2019 Pages ⬇️
         "@hackoregon/2019-housing",
-        "@hackoregon/2019-template"
+        "@hackoregon/2019-template",
+        "@hackoregon/2019-transportation"
       ],
       () => {
         const nextRootReducer = combineReducers({
@@ -132,7 +139,8 @@ const configureStore = (initialState, history) => {
           sandbox: require("@hackoregon/civic-sandbox").Reducers(),
           // Temporarily Hidden 2019 Pages ⬇️
           housing2019: require("@hackoregon/2019-housing").Reducers(),
-          template2019: require("@hackoregon/2019-template").Reducers()
+          template2019: require("@hackoregon/2019-template").Reducers(),
+          transportation2019: require("@hackoregon/2019-transportation").Reducers()
         });
         store.replaceReducer(nextRootReducer);
       }
@@ -233,16 +241,16 @@ const routes = {
           path: "housing",
           component: Housing2019App,
           childRoutes: Housing2019Routes(store)
-        }
-      ]
-    },
-    {
-      path: "2019",
-      childRoutes: [
+        },
         {
           path: "template",
           component: Template2019App,
           childRoutes: Template2019Routes(store)
+        },
+        {
+          path: "transportation",
+          component: Transportation2019App,
+          childRoutes: Transportation2019Routes(store)
         }
       ]
     }

@@ -94,7 +94,10 @@ class Header extends Component {
   render() {
     const { children, menu, title, overlay, mainProjectColor } = this.props;
     return (
-      <div className={overlay ? overlayContainerClass : containerClass}>
+      <header
+        className={overlay ? overlayContainerClass : containerClass}
+        id="site-header"
+      >
         <nav
           className={overlay ? overlayHeaderClass : headerClass}
           style={{ backgroundColor: mainProjectColor || primaryColor }}
@@ -126,7 +129,7 @@ class Header extends Component {
             />
           </a>
         </nav>
-      </div>
+      </header>
     );
   }
 }

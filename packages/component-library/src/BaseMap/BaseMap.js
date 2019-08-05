@@ -32,12 +32,12 @@ class BaseMap extends Component {
     super(props);
     this.state = {
       viewport: {
-        longitude: props.initialLongitude || -122.6765,
-        latitude: props.initialLatitude || 45.5231,
-        zoom: props.initialZoom || 9.5,
+        longitude: props.initialLongitude,
+        latitude: props.initialLatitude,
+        zoom: props.initialZoom,
         minZoom: 6,
         maxZoom: 20,
-        pitch: props.initialPitch || 0,
+        pitch: props.initialPitch,
         bearing: 0,
         scrollZoom: true
       },
@@ -46,8 +46,6 @@ class BaseMap extends Component {
       y: null,
       mounted: false
     };
-    this.onViewportChange = this.onViewportChange.bind(this);
-    this.onHover = this.onHover.bind(this);
     this.mapRef = createRef();
   }
 
@@ -73,10 +71,9 @@ class BaseMap extends Component {
         }
       });
 
-      this.setState({
-        // eslint-disable-next-line
-        viewport: { ...this.state.viewport, ...updatedViewportProps }
-      });
+      this.setState(prevState => ({
+        viewport: { ...prevState.viewport, ...updatedViewportProps }
+      }));
     }
   }
 
@@ -107,20 +104,19 @@ class BaseMap extends Component {
     }
   }
 
-  onHover({ object, x, y }) {
+  onHover = ({ object, x, y }) => {
     this.setState({
       tooltipInfo: object,
       x,
       y
     });
-  }
+  };
 
-  onViewportChange(viewport) {
-    this.setState({
-      // eslint-disable-next-line
-      viewport: { ...this.state.viewport, ...viewport }
-    });
-  }
+  onViewportChange = viewport => {
+    this.setState(prevState => ({
+      viewport: { ...prevState.viewport, ...viewport }
+    }));
+  };
 
   render() {
     const { viewport, tooltipInfo, x, y, mounted } = this.state;
@@ -131,9 +127,9 @@ class BaseMap extends Component {
       containerWidth,
       civicMapStyle,
       mapboxToken,
+      navigation,
       geocoder,
       locationMarker,
-      navigation,
       geocoderOptions,
       geocoderOnChange,
       mapGLOptions,
@@ -144,11 +140,12 @@ class BaseMap extends Component {
       mapboxDataId,
       mapboxLayerType,
       mapboxLayerOptions,
-      mapboxLayerId
+      mapboxLayerId,
+      locationMarkerCoord
     } = this.props;
 
     viewport.width = containerWidth || 500;
-    viewport.height = useContainerHeight ? containerHeight : height || 500;
+    viewport.height = useContainerHeight ? containerHeight : height;
 
     const childrenLayers = React.Children.map(children, child => {
       return React.cloneElement(child, {
@@ -210,8 +207,8 @@ class BaseMap extends Component {
           </div>
           {locationMarker && (
             <Marker
-              latitude={viewport.latitude}
-              longitude={viewport.longitude}
+              latitude={locationMarkerCoord.latitude}
+              longitude={locationMarkerCoord.longitude}
               offsetLeft={-20}
               offsetTop={-10}
             >
@@ -226,7 +223,7 @@ class BaseMap extends Component {
               mapboxApiAccessToken={mapboxToken}
               onViewportChange={newViewport => {
                 this.onViewportChange(newViewport);
-                // eslint-disable-next-line
+                // eslint-disable-next-line no-unused-expressions
                 !!geocoderOnChange && geocoderOnChange(newViewport);
               }}
               options={{ ...geocoderOptions }}
@@ -249,9 +246,13 @@ BaseMap.propTypes = {
   containerWidth: PropTypes.number,
   mapboxToken: PropTypes.string,
   civicMapStyle: PropTypes.string,
-  locationMarker: PropTypes.bool,
-  geocoder: PropTypes.bool,
   navigation: PropTypes.bool,
+  locationMarker: PropTypes.bool,
+  locationMarkerCoord: PropTypes.shape({
+    latitude: PropTypes.number,
+    longitude: PropTypes.number
+  }),
+  geocoder: PropTypes.bool,
   geocoderOptions: PropTypes.shape({}),
   geocoderOnChange: PropTypes.func,
   mapGLOptions: PropTypes.shape({}),
@@ -274,6 +275,16 @@ BaseMap.defaultProps = {
   navigation: true,
   geocoder: false,
   useContainerHeight: false,
-  updateViewport: true
+  updateViewport: true,
+  initialLongitude: -122.6765,
+  initialLatitude: 45.5231,
+  initialZoom: 9.5,
+  initialPitch: 0,
+  height: 500,
+  locationMarkerCoord: {
+    latitude: 0,
+    longitude: 0
+  }
 };
+
 export default Dimensions()(BaseMap);

@@ -1,94 +1,98 @@
 /* eslint-disable import/no-named-as-default */
-import React from "react";
-import styled from "styled-components";
+import React, { memo } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import styled from "@emotion/styled";
 
-// import useChapters from "../../state/hooks/useChapters";
+// import * as SCREENS from "../../constants/screens";
+import { getActiveChapter } from "../../state/chapters";
 
-import KitScreen from "./KitScreen";
-import Orb from "./Orb";
-import OrbManager from "./OrbManager";
-import DurationBar from "./DurationBar";
+import ChapterButtons from "./ChapterButtons";
+import DefaultScreen from "./DefaultScreen/index";
+import KitScreen from "./KitScreen/index";
+import TaskScreen from "./TaskScreen/index";
+import Panel from "../atoms/Panel";
+import media from "../../utils/mediaQueries";
 
 import "@hackoregon/component-library/assets/global.styles.css";
 
-const XLScreen = {
-  height: 1800,
-  interfaceHeight: 700
-};
-
-const desktopScreen = {
-  interfaceHeight: 250
-};
-
-const Game = () => {
-  let ratios = XLScreen;
-  if (window.innerHeight < XLScreen.height) {
-    ratios = desktopScreen;
-  }
+const Game = ({ activeChapter }) => {
+  const renderChapter = chapterId => {
+    switch (chapterId) {
+      case 2:
+        return <KitScreen />;
+      case 6:
+        return <TaskScreen />;
+      default:
+        return <DefaultScreen chapterId={chapterId} />;
+    }
+  };
 
   return (
     <GameContainerStyle>
-      <MapStyle>
-        <KitScreen />
-      </MapStyle>
-      <DurationBar step="Choose supplies" />
-      <GUIStyle>
-        {/* <Orb size={50} /> */}
-        <OrbManager
-          orbCount={10}
-          orbSize={50}
-          period={0.2}
-          velocityX={-0.75}
-          velocityY={0}
-          minVelocityX={-0.2}
-          minVelocityY={0.1}
-          ratios={ratios}
-        />
-      </GUIStyle>
+      <ChapterButtons />
+      {renderChapter(activeChapter.id)}
     </GameContainerStyle>
   );
 };
 
 Game.displayName = "Game";
 
-const PanelStyle = styled.div`
+// Temporarily hardcode the height of the DurationBar and temporary chapter buttons
+const GameContainerStyle = styled(Panel)`
   position: relative;
   display: grid;
   width: 100%;
-  height: 100%;
-  background: white;
-`;
-
-const GameContainerStyle = styled(PanelStyle)`
-  display: grid;
-  overflow: hidden;
   height: 100vh;
-  min-height: 650px;
-  min-width: 800px;
-  grid-template-rows: 1fr ${desktopScreen.interfaceHeight}px;
+  min-height: 600px;
+
+  grid-template-rows: 100px 1fr 40px 200px;
   grid-template-columns: 1fr;
   justify-content: center;
   align-items: center;
 
-  @media (min-height: ${XLScreen.height}px) {
-    grid-template-rows: 1fr ${XLScreen.interfaceHeight}px;
+  ${media.lg} {
+    grid-template-rows: 100px 1fr 40px 250px;
+    min-height: 650px;
+  }
+
+  ${media.xl} {
+    grid-template-rows: 100px 1fr 40px 700px;
   }
 `;
 
-const MapStyle = styled(PanelStyle)`
-  display: flex;
-  flex-direction: column-reverse;
+export const MapStyle = styled(Panel)`
+  position: relative;
+  display: grid;
   background: beige;
   width: 100vw;
 `;
 
-const GUIStyle = styled(PanelStyle)`
+export const GUIStyle = styled(Panel)`
+  display: block;
   background: pink;
-  height: ${desktopScreen.interfaceHeight}px;
-
-  @media (min-height: ${XLScreen.height}px) {
-    height: ${XLScreen.interfaceHeight}px;
-  }
 `;
 
-export default Game;
+Game.propTypes = {
+  settings: PropTypes.shape({
+    orbCount: PropTypes.number,
+    orbSize: PropTypes.number,
+    period: PropTypes.number,
+    minVelocityX: PropTypes.number,
+    maxVelocityX: PropTypes.number,
+    minVelocityY: PropTypes.number,
+    maxVelocityY: PropTypes.number,
+    mode: PropTypes.string
+  }),
+  activeChapter: PropTypes.shape({
+    enabled: PropTypes.bool,
+    id: PropTypes.number,
+    title: PropTypes.string,
+    type: PropTypes.string
+  })
+};
+
+export default connect(state => ({
+  settings: state.settings,
+  activeChapter: getActiveChapter(state)
+}))(memo(Game));

@@ -33,6 +33,7 @@
     "@hackoregon/2018-transportation-systems": "^3.0.0",
     "@hackoregon/2019-housing": "^1.0.0",
     "@hackoregon/2019-template": "^1.0.0",
+    "@hackoregon/2019-transportation": "^1.0.0",
     "@hackoregon/civic-sandbox": "^3.0.0",
     "@hackoregon/component-library": "^3.0.0",
     "chalk": "^1.1.3",
@@ -48,6 +49,7 @@
     "react-router-redux": "^4.0.8",
     "react-typekit": "^1.1.3",
     "redux": "^4.0.1",
+    "redux-devtools-extension": "^2.13.8",
     "redux-form": "^8.1.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.1.0"

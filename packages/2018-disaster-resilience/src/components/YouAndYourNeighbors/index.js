@@ -122,7 +122,8 @@ export class YouAndYourNeighbors extends React.Component {
               initialLatitude={selectedCoords.latitude}
               initialZoom={ZOOM}
               navigation={false}
-              locationMarker={coordsProperties}
+              locationMarker
+              locationMarkerCoord={selectedCoords}
               geocoder
               geocoderOptions={geocoderOptions}
               geocoderOnChange={geocoderChange}
@@ -140,7 +141,7 @@ export class YouAndYourNeighbors extends React.Component {
                     f.geometry === null ? [0, 0] : f.geometry.coordinates
                   }
                   getIcon={f => f.properties.type}
-                  getSize={f => 7}
+                  getSize={() => 7}
                   getColor={poiGetIconColor}
                   autoHighlight={false}
                   highlightColor={[0, 0, 0, 0]}
@@ -150,7 +151,7 @@ export class YouAndYourNeighbors extends React.Component {
           </div>
           {noCoordsData && (
             <p>
-              We don't have complete information for your address.{" "}
+              We don&apos;t have complete information for your address.{" "}
               <a href="https://civicplatform.org/">
                 Learn more about how your city can work to get their data in
                 Civic.

@@ -21,8 +21,9 @@ const firstActiveChapter = find(model, chapter => {
 });
 
 const initialState = {
-  ...model,
-  activeChapter: firstActiveChapter.id
+  chapters: { ...model },
+  activeChapter: firstActiveChapter.id,
+  lastChapter: size(CHAPTERS)
 };
 
 // CONSTANTS
@@ -41,7 +42,12 @@ export const setActiveChapter = chapterId => dispatch => {
 
 export const chapters = createReducer(initialState, {
   [actionTypes.SET_ACTIVE_CHAPTER]: (state, action) => {
-    state.setActiveChapter = action.chapterId;
+    if (action.chapterId > state.lastChapter) return;
+    if (action.chapterId < 1) return;
+    // eslint-disable-next-line no-param-reassign
+    state.activeChapter = action.chapterId;
+
+    // TODO: change chapter model enabled prop
   }
 });
 
@@ -57,15 +63,15 @@ export default chapters;
  * @returns
  */
 export const getActiveChapter = createSelector(
-  ["chapters.chapters", "activeChapterId"],
-  (chapters, id) => {
-    return chapters[id];
+  ["chapters.chapters", "chapters.activeChapter"],
+  (gameChapters, id) => {
+    return gameChapters[id];
   }
 );
 
 export const getChapterById = createSelector(
-  ["state.chapters.chapters", "id"],
-  (chapters, id) => {
-    return chapters[id];
+  ["chapters.chapters", "id"],
+  (gameChapters, id) => {
+    return gameChapters[id];
   }
 );

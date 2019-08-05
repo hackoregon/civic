@@ -1,11 +1,16 @@
 /** @jsx jsx */
-import { Fragment } from "react";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
 import { map } from "lodash";
 import { jsx, css } from "@emotion/core";
-import { getKitsNecessary, getItems } from "../../state/kit";
+import { getKitsNecessary, getItems } from "../../../state/kit";
 import KitItem from "./KitItem";
+
+const containerStyle = css`
+  display: flex;
+  flex-direction: column-reverse;
+  width: 100vw;
+`;
 
 const kitStyle = css`
   display: flex;
@@ -44,7 +49,7 @@ const KitScreen = ({ kitsNecessary, currentKit }) => {
     kits.push(newKit);
   }
 
-  return <Fragment>{kits}</Fragment>;
+  return <div css={containerStyle}>{kits}</div>;
 };
 
 KitScreen.propTypes = {

@@ -13,3 +13,4 @@ lib-cov
 *.sw[onp]
 civic.iml
 .vscode
+package-lock.json

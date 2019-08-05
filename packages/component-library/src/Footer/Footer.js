@@ -76,17 +76,17 @@ const scrollToTopClass = css`
 const defaultAttribution = `\u00A9 Copyright ${new Date().getFullYear()}`;
 
 const Footer = ({ attribution }) => (
-  <div className={footerClass}>
+  <footer className={footerClass}>
     <div className={copyrightClass}>{attribution}</div>
     <div className={logoClass}>
-      <Link to="/" className={logoLinkStyle}>
+      <Link to="/" alt="civic homepage" className={logoLinkStyle}>
         <LogoStandard />
       </Link>
     </div>
     <div className={scrollToTopClass}>
       <ScrollToTop iconStyle="fa fa-angle-up" />
     </div>
-  </div>
+  </footer>
 );
 
 Footer.displayName = "Footer";
