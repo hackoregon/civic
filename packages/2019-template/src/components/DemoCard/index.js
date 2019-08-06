@@ -33,7 +33,6 @@ class DemoCard extends Component {
 }
 
 DemoCard.displayName = "DemoCard";
-DemoCard.tags = demoCardMeta().tags;
 
 DemoCard.propTypes = {
   init: PropTypes.func,
