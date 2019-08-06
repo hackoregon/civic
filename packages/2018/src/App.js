@@ -222,7 +222,7 @@ const routes = {
       component: CardDetailPage
     },
     {
-      path: "cards/",
+      path: "cards",
       component: CardList
     },
     {
