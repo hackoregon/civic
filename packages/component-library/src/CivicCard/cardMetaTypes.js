@@ -12,19 +12,19 @@ const cardMetaObjectProperties = {
   analysis: PropTypes.node,
   metadata: PropTypes.node,
   metadataQA: PropTypes.arrayOf(
-    PropTypes.oneOf(
+    PropTypes.oneOf([
       PropTypes.shape({ section: PropTypes.string }),
       PropTypes.shape({ question: PropTypes.string, answer: PropTypes.string })
-    )
+    ])
   ),
   resources: PropTypes.arrayOf(
-    PropTypes.oneOf(
+    PropTypes.oneOf([
       PropTypes.shape({ section: PropTypes.string }),
       PropTypes.shape({
         link: PropTypes.string /* url */,
         description: PropTypes.string
       })
-    )
+    ])
   ),
   authors: PropTypes.arrayOf(PropTypes.string /* image url */)
 };
