@@ -22,16 +22,16 @@ const AccessibilityGuidelines = () => (
       Level A and Level AA.
     </p>
     <h2>What types of disabilities do we need to account for?</h2>
-    <h4>Visual</h4>
+    <h3>Visual</h3>
     <p>Blindness, low vision, and color-blindness.</p>
-    <h4>Hearing</h4>
+    <h3>Hearing</h3>
     <p>Deafness and hard-of-hearing.</p>
-    <h4>Motor</h4>
+    <h3>Motor</h3>
     <p>
       Inability to use a mouse, slow response time, and limited fine motor
       control.
     </p>
-    <h4>Cognitive</h4>
+    <h3>Cognitive</h3>
     <p>
       Learning disabilities, distractibility, and inability to remember or focus
       on large amounts of information.
@@ -49,7 +49,7 @@ const AccessibilityGuidelines = () => (
       </a>{" "}
       for a quick reference on meeting the four principles of WCAG.
     </p>
-    <h4>Perceivable</h4>
+    <h3>Perceivable</h3>
     <p>
       Information and user interface components must be presentable to users in
       ways they can perceive.
@@ -59,18 +59,18 @@ const AccessibilityGuidelines = () => (
       through the browser or through assistive technologies, e.g., screen
       readers, screen enlargers, etc.
     </p>
-    <h4>Operable</h4>
+    <h3>Operable</h3>
     <p>User interface components and navigation must be operable.</p>
     <p>
       Users can interact with all controls and interactive elements using either
       the mouse, keyboard, or an assistive device.
     </p>
-    <h4>Understandable</h4>
+    <h3>Understandable</h3>
     <p>Content is clear and limits confusion and ambiguity.</p>
     <p>
       Information and the operation of user interface must be understandable.
     </p>
-    <h4>Robust</h4>
+    <h3>Robust</h3>
     <p>
       Content must be robust enough that it can be interpreted reliably by a
       wide variety of user agents, including assistive technologies.
@@ -82,7 +82,7 @@ const AccessibilityGuidelines = () => (
       order of priority. Considerations when proposing this order are the most
       common disabilities and the most common features in our user interfaces.
     </p>
-    <h4>Color Theme</h4>
+    <h3>Color Theme</h3>
     <p>
       Meet contrast ratios between text and its background color and between
       colors used to represent distinct information in data visualization.
@@ -96,7 +96,7 @@ const AccessibilityGuidelines = () => (
       </a>
       .
     </p>
-    <h4>Forms</h4>
+    <h3>Forms</h3>
     <p>
       See{" "}
       <a
@@ -121,13 +121,13 @@ const AccessibilityGuidelines = () => (
       The Forms story has an example of a form that follows our styles and meets
       accessibility requirements.
     </p>
-    <h4>Resize Text</h4>
+    <h3>Resize Text</h3>
     <p>Allow text to be increased in size and readable.</p>
     <h4>Images</h4>
     <p>Use alternative text with images.</p>
 
-    <h4>Data Visualization</h4>
-    <h5>Low vision</h5>
+    <h3>Data Visualization</h3>
+    <h4>Low vision</h4>
     <p>
       For people who are blind, include text descriptions of any meaningful
       images that can be read by assistive technology (screen readers). A person
@@ -142,7 +142,7 @@ const AccessibilityGuidelines = () => (
       always provide a table version of the visualization. Allow keyboard
       alternatives for navigating graphical user interfaces.
     </p>
-    <h5>Color blind</h5>
+    <h4>Color blind</h4>
     <p>
       The two most common forms of color blindness are deuteranomaly and
       deuteranopia — which together account for about 6% of men, and protanomaly
@@ -182,9 +182,9 @@ const AccessibilityGuidelines = () => (
       </a>
       .
     </p>
-    <h4>Reading and Navigation Order</h4>
+    <h3>Reading and Navigation Order</h3>
     <p>Logical and intuitive.</p>
-    <h4>Keyboard Accessible</h4>
+    <h3>Keyboard Accessible</h3>
     <p>Navigation to all page elements is available using the keyboard.</p>
     <p>Keyboard commands reference: (placeholder).</p>
 
