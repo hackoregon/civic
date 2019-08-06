@@ -1,3 +1,6 @@
+import React from "react";
+import { CivicCardLayoutFull } from "@hackoregon/component-library";
+
 import App from "./components/App";
 import Routes from "./routes";
 import Reducers from "./state";
@@ -9,11 +12,13 @@ import DemoCard from "./components/DemoCard";
 const CardRegistry = [
   {
     slug: "template-card",
-    component: TemplateCard
+    // this reflects the odd way that these components are composed
+    component: () => <TemplateCard Layout={CivicCardLayoutFull} />
   },
   {
     slug: "demo-card",
-    component: DemoCard
+    // this reflects the odd way that these components are composed
+    component: () => <DemoCard Layout={CivicCardLayoutFull} />
   }
 ];
 
