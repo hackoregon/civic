@@ -169,18 +169,11 @@ $ /Users/Awesome_Volunteer/civic/node_modules/.bin/hygen api-story-card with-pro
 ✔ What will be the title of the card? (Capitalized With Spaces): · Ducks Taking Buses
 
 Loaded templates: _templates
-      inject: packages/2019-transportation/src/components/App/index.js
-      inject: packages/2019-transportation/src/components/App/index.js
-       added: packages/2019-transportation/src/components/DucksTakingBuses/ducksTakingBusesMeta.js
-       added: packages/2019-transportation/src/components/DucksTakingBuses/DucksTakingBusesVisualization.js
-       added: packages/2019-transportation/src/components/DucksTakingBuses/index.js
-      inject: packages/2019-transportation/src/index.js
-      inject: packages/2019-transportation/src/index.js
-       added: packages/2019-transportation/src/state/ducks-taking-buses-data/api.js
-      inject: packages/2019-transportation/src/state/index.js
-      inject: packages/2019-transportation/src/state/index.js
+      MANY INJECT AND ADDED MESSAGES
 ✨  Done in 37.18s.
 ```
+
+If the package you chose isn't set up quite the way the generator expected you may need to make some modifications to files where code was injected but this should get you most of the way there. Now you can customize and hook in your own data.
 
 ### Using local data (not recommended)
 
@@ -190,35 +183,9 @@ The process is very similar to genrating an API data based card. At the top of t
 $ yarn card:local-data
 ```
 
-You'll then follow the same prompts as above. When you've finished you'll see an output like this:
+You'll then follow the same prompts as above. When you've finished you'll see a similar output to the one above.
 
-```bash
-$ yarn card:local-data
-yarn run v1.16.0
-$ yarn hygen local-data-story-card with-prompt
-$ /Users/Awesome_Volunteer/code/civic/node_modules/.bin/hygen local-data-story-card with-prompt
-✔ Which existing package should this card be in?: · 2019-transportation
-✔ What will be the title of the card? (Capitalized With Spaces): · Geese on Trains
-
-Loaded templates: _templates
-       added: packages/2019-transportation/src/assets/geese-on-trains-data.json
-      inject: packages/2019-transportation/src/components/App/index.js
-      inject: packages/2019-transportation/src/components/App/index.js
-       added: packages/2019-transportation/src/components/GeeseOnTrains/geeseOnTrainsMeta.js
-       added: packages/2019-transportation/src/components/GeeseOnTrains/GeeseOnTrainsVisualization.js
-       added: packages/2019-transportation/src/components/GeeseOnTrains/index.js
-      inject: packages/2019-transportation/src/index.js
-      inject: packages/2019-transportation/src/index.js
-       added: packages/2019-transportation/src/state/geese-on-trains-data/actions.js
-      inject: packages/2019-transportation/src/state/index.js
-      inject: packages/2019-transportation/src/state/index.js
-       added: packages/2019-transportation/src/state/geese-on-trains-data/index.js
-       added: packages/2019-transportation/src/state/geese-on-trains-data/selectors.js
-       added: packages/2019-transportation/src/state/geese-on-trains-data/geese-on-trains-data.test.js
-✨  Done in 30.37s.
-```
-
-As you can see, much more needs to be added to the state and your data will obviously be static.
+If the package you chose isn't set up quite the way the generator expected you may need to make some modifications to files where code was injected but this should get you most of the way there. Now you can customize and hook in your own data.
 
 ## Project Layout
 
