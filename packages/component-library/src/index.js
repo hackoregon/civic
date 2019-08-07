@@ -17,6 +17,7 @@ export { default as Header } from "./Navigation/Header";
 export { default as Nav } from "./Navigation/Nav";
 export { default as NavRouterLink } from "./Navigation/NavRouterLink";
 export { default as Dropdown } from "./Dropdown/Dropdown";
+export { default as Select } from "./Select/Select";
 export { default as Icon } from "./Icon/Icon";
 export { default as Placeholder } from "./Placeholder/Placeholder";
 export { default as Scatterplot } from "./Scatterplot/Scatterplot";
