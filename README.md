@@ -130,6 +130,60 @@ $ cd packages/component-library
 $ yarn build
 ```
 
+## Creating a new Card
+
+There are two options to create a card: from API data and from local json data. Our new card generator makes it easy to load data from the API so we recommend that approach for ease of creation and the most up to date data.
+
+### Using API data (recommended)
+
+At the top of the repo run:
+
+```bash
+$ yarn card
+```
+
+This will bring up the prompt:
+
+```bash
+$ Which existing package should this card be in?: >
+```
+
+Type the name of a package that already exists in the `civic/packages/` directory (example `2019-transportation`) and press enter.
+
+You will now see this prompt:
+
+```bash
+$ What will be the title of the card? (Capitalized With Spaces): >
+```
+
+Type the title of what you want to show on the new card and press enter. You may always change it later. Be aware that this choice will determine the names of newly created directories, files, and the import of those files into existing files.
+
+You should see something like this now:
+
+```bash
+$ yarn card
+yarn run v1.16.0
+$ yarn hygen api-story-card with-prompt
+$ /Users/Awesome_Volunteer/civic/node_modules/.bin/hygen api-story-card with-prompt
+✔ Which existing package should this card be in?: · 2019-transportation
+✔ What will be the title of the card? (Capitalized With Spaces): · Ducks Taking Buses
+
+Loaded templates: _templates
+      inject: packages/2019-transportation/src/components/App/index.js
+      inject: packages/2019-transportation/src/components/App/index.js
+       added: packages/2019-transportation/src/components/DucksTakingBuses/ducksTakingBusesMeta.js
+       added: packages/2019-transportation/src/components/DucksTakingBuses/DucksTakingBusesVisualization.js
+       added: packages/2019-transportation/src/components/DucksTakingBuses/index.js
+      inject: packages/2019-transportation/src/index.js
+      inject: packages/2019-transportation/src/index.js
+       added: packages/2019-transportation/src/state/ducks-taking-buses-data/api.js
+      inject: packages/2019-transportation/src/state/index.js
+      inject: packages/2019-transportation/src/state/index.js
+✨  Done in 37.18s.
+```
+
+### Using local data (not recommended)
+
 ## Project Layout
 
 There are three types of packages right now:
