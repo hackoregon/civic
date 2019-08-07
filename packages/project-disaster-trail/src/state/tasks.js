@@ -12,7 +12,7 @@ const initialState = {
   tasksForEnvironment,
   activeEnvironment: defaultEnv,
   taskOrder: shuffle(defaultSaveYourself),
-  activeTask: -1,
+  activeTask: 0,
   completedTasks: []
 };
 

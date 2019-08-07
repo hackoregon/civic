@@ -1,22 +1,44 @@
-import React, { memo } from "react";
+import React, { memo, useEffect } from "react";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
 
+import { goToNextChapter } from "../../../state/chapters";
+import { getActiveTaskData } from "../../../state/tasks";
 import ChooseScreen from "./ChooseScreen";
 import SolveScreen from "./SolveScreen";
-import { getActiveTask, getActiveTaskData } from "../../../state/tasks";
 
-const TaskScreen = ({ activeTask }) => {
+const TaskScreen = ({ activeTask, endChapter }) => {
+  // Prevent calling useEffect again with 2nd argument so timer isn't deleted
+  useEffect(() => {
+    const taskChapterTimer = setTimeout(
+      endChapter,
+      60 * 1000 /* end chapter after 1 minute */
+    );
+
+    return () => {
+      clearTimeout(taskChapterTimer);
+    };
+  }, []);
+
   return activeTask ? <SolveScreen /> : <ChooseScreen />;
 };
 
 TaskScreen.propTypes = {
-  activeTask: PropTypes.shape({})
+  activeTask: PropTypes.shape({}),
+  endChapter: PropTypes.func
 };
 
 const mapStateToProps = state => ({
-  activeTaskId: getActiveTask(state),
   activeTask: getActiveTaskData(state)
 });
 
-export default connect(mapStateToProps)(memo(TaskScreen));
+const mapDispatchToProps = dispatch => ({
+  endChapter() {
+    dispatch(goToNextChapter());
+  }
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(memo(TaskScreen));
