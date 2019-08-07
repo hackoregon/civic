@@ -17,16 +17,29 @@ class SolveScreen extends PureComponent {
   state = defaultState;
 
   componentDidMount() {
+    this.createTaskTimeout();
+  }
+
+  componentDidUpdate(prevProps) {
     const { activeTask } = this.props;
 
-    this.setState({
-      taskTimer: setTimeout(this.finishTask, activeTask.time)
-    });
+    if (activeTask.id !== prevProps.activeTask.id) {
+      this.clearTaskTimeout();
+      this.createTaskTimeout();
+    }
   }
 
   componentWillUnmount() {
     this.clearTaskTimeout();
   }
+
+  createTaskTimeout = () => {
+    const { activeTask } = this.props;
+
+    this.setState({
+      taskTimer: setTimeout(this.finishTask, activeTask.time)
+    });
+  };
 
   clearTaskTimeout = () => {
     const { taskTimer } = this.state;
@@ -79,7 +92,9 @@ class SolveScreen extends PureComponent {
 
 SolveScreen.propTypes = {
   completeActiveTask: PropTypes.func,
-  activeTask: PropTypes.shape({})
+  activeTask: PropTypes.shape({
+    id: PropTypes.string
+  })
 };
 
 const mapStateToProps = state => ({
