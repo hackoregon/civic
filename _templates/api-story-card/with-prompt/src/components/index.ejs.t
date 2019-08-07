@@ -22,8 +22,8 @@ const <%=StoryCardName%> = ({ init, data, Layout }) => {
     */
   ]);
 
-  // FIXME: ridershipOverTime should be a variable
-  const loading = !isLoaded(data.ridershipOverTime);
+  // FIXME: mockRidershipOverTime should be a variable
+  const loading = !isLoaded(data.mockRidershipOverTime);
 
   return (
     <CivicCard
@@ -46,8 +46,8 @@ const <%=StoryCardName%> = ({ init, data, Layout }) => {
 export default connect(
   state => ({
     data: {
-      // FIXME: ridershipOverTime should be a variable
-      ridershipOverTime: api.selectors.getRidershipOverTime(
+      // FIXME: mockRidershipOverTime should be a variable
+      mockRidershipOverTime: api.selectors.getMockRidershipData(
         state.<%=storyCardName%>2019 || state
       )
     }
@@ -55,8 +55,8 @@ export default connect(
   }),
   dispatch => ({
     init() {
-      // FIXME: ridershipOverTime should be a variable
-      dispatch(api.actionCreators.getRidershipOverTime());
+      // FIXME: mockRidershipOverTime should be a variable
+      dispatch(api.actionCreators.getMockRidershipData());
     }
   })
 )(<%=StoryCardName%>);

@@ -11,7 +11,7 @@ const <%=StoryCardName%>Visualization = ({ isLoading, data }) => (
   <>
     {!isLoading && data && (
       <LineChart
-        data={data.ridershipOverTime.value}
+        data={data.mockRidershipOverTime.value}
         dataKey="year"
         dataValue="weekday_sum_ons"
         title="Template API Plot"

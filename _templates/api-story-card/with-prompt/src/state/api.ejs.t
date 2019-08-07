@@ -6,11 +6,11 @@ import requestAdapter from "../request-adapter";
 
 const apiConfig = { requestAdapter };
 
-// FIXME: getRidershipOverTime should be variable (or more clearly mock data)
+// FIXME: getMockRidershipData should be variable
 const HOST = "https://service.civicpdx.org/transportation-systems";
 
 const apiDesc = {
-  getRidershipOverTime: {
+  getMockRidershipData: {
     url: `${HOST}/passenger-census/system/annual/averages/?format=json`
   }
 };
