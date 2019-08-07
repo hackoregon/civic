@@ -5,11 +5,11 @@ module.exports = [
   {
     type: "input",
     name: "package",
-    message: "package name:"
+    message: "Which existing package should this card be in?:"
   },
   {
     type: "input",
     name: "card",
-    message: "story card name:"
+    message: "What will be the title of the card? (Capitalized With Spaces):"
   }
 ];
