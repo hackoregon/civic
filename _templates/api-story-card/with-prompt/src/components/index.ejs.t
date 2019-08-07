@@ -9,7 +9,7 @@ import { resourceShape } from "reduxful/react-addons";
 import { CivicCard } from "@hackoregon/component-library";
 
 import <%=StoryCardName%>Meta from "./<%=storyCardName%>Meta";
-import api from "../../state/<%=slug%>-data/api";
+import api from "../../state/<%=slug%>/api";
 
 const <%=StoryCardName%> = ({ init, data, Layout }) => {
   useEffect(() => {

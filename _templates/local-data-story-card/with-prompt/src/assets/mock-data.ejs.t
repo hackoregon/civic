@@ -1,5 +1,5 @@
 ---
-to: packages/<%=package%>/src/assets/<%=slug%>-data.json
+to: packages/<%=package%>/src/assets/<%=slug%>.json
 ---
 {
   "<%=StoryCardName%>Data": [

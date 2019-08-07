@@ -1,5 +1,5 @@
 ---
-to: packages/<%=package%>/src/state/<%=slug%>-data/selectors.js
+to: packages/<%=package%>/src/state/<%=slug%>/selectors.js
 ---
 import { createSelector } from "reselect";
 import { rootState } from "../selectors";

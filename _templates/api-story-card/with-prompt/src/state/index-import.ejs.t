@@ -5,4 +5,4 @@ inject: true
 after: \nimport(?![\s\S]*\nimport).*
 skip_if: import <%=storyCardName%>Data from
 ---
-import <%=storyCardName%>Data from "./<%=slug%>-data/api";
+import <%=storyCardName%>Data from "./<%=slug%>/api";

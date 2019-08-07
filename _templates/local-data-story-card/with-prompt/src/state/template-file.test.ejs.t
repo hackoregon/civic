@@ -1,5 +1,5 @@
 ---
-to: packages/<%=package%>/src/state/<%=slug%>-data/<%=slug%>-data.test.js
+to: packages/<%=package%>/src/state/<%=slug%>/<%=slug%>.test.js
 ---
 import configureMockStore from "redux-mock-store";
 import thunk from "redux-thunk";
@@ -9,9 +9,9 @@ import reducer from "./index";
 
 const mockStore = configureMockStore([thunk]);
 
-describe("<%=slug%>-data", () => {
-  describe("<%=slug%>-data actions", () => {
-    describe("<%=slug%>-data import actions", () => {
+describe("<%=slug%>", () => {
+  describe("<%=slug%> actions", () => {
+    describe("<%=slug%> import actions", () => {
       it("should have a start action", () => {
         const expectedAction = {
           type: actions.IMPORT_START
@@ -35,7 +35,7 @@ describe("<%=slug%>-data", () => {
       });
     });
 
-    describe("<%=slug%>-data import thunk", () => {
+    describe("<%=slug%> import thunk", () => {
       let store;
 
       beforeEach(() => {
@@ -58,7 +58,7 @@ describe("<%=slug%>-data", () => {
     });
   });
 
-  describe("<%=slug%>-data reducer", () => {
+  describe("<%=slug%> reducer", () => {
     const initialState = {
       pending: false,
       data: null
@@ -97,7 +97,7 @@ describe("<%=slug%>-data", () => {
     });
   });
 
-  describe("<%=slug%>-data selectors", () => {
+  describe("<%=slug%> selectors", () => {
     describe("get<%=StoryCardName%>Request", () => {
       it("extends the root selector", () => {
         const expectation = { one: "two", three: 4 };

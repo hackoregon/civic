@@ -1,5 +1,5 @@
 ---
-to: packages/<%=package%>/src/state/<%=slug%>-data/api.js
+to: packages/<%=package%>/src/state/<%=slug%>/api.js
 ---
 import Reduxful from "reduxful";
 import requestAdapter from "../request-adapter";
