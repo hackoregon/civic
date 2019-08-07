@@ -184,6 +184,42 @@ Loaded templates: _templates
 
 ### Using local data (not recommended)
 
+The process is very similar to genrating an API data based card. At the top of the repo run:
+
+```bash
+$ yarn card:local-data
+```
+
+You'll then follow the same prompts as above. When you've finished you'll see an output like this:
+
+```bash
+$ yarn card:local-data
+yarn run v1.16.0
+$ yarn hygen local-data-story-card with-prompt
+$ /Users/Awesome_Volunteer/code/civic/node_modules/.bin/hygen local-data-story-card with-prompt
+✔ Which existing package should this card be in?: · 2019-transportation
+✔ What will be the title of the card? (Capitalized With Spaces): · Geese on Trains
+
+Loaded templates: _templates
+       added: packages/2019-transportation/src/assets/geese-on-trains-data.json
+      inject: packages/2019-transportation/src/components/App/index.js
+      inject: packages/2019-transportation/src/components/App/index.js
+       added: packages/2019-transportation/src/components/GeeseOnTrains/geeseOnTrainsMeta.js
+       added: packages/2019-transportation/src/components/GeeseOnTrains/GeeseOnTrainsVisualization.js
+       added: packages/2019-transportation/src/components/GeeseOnTrains/index.js
+      inject: packages/2019-transportation/src/index.js
+      inject: packages/2019-transportation/src/index.js
+       added: packages/2019-transportation/src/state/geese-on-trains-data/actions.js
+      inject: packages/2019-transportation/src/state/index.js
+      inject: packages/2019-transportation/src/state/index.js
+       added: packages/2019-transportation/src/state/geese-on-trains-data/index.js
+       added: packages/2019-transportation/src/state/geese-on-trains-data/selectors.js
+       added: packages/2019-transportation/src/state/geese-on-trains-data/geese-on-trains-data.test.js
+✨  Done in 30.37s.
+```
+
+As you can see, much more needs to be added to the state and your data will obviously be static.
+
 ## Project Layout
 
 There are three types of packages right now:
