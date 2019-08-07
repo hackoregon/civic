@@ -42,7 +42,7 @@ TemplateAPICard.propTypes = {
 export default connect(
   state => ({
     data: {
-      ridershipOverTime: api.selectors.getRidershipOverTime(
+      ridershipOverTime: api.selectors.getMockRidershipData(
         state.template2019 || state
       )
     }
@@ -50,7 +50,7 @@ export default connect(
   }),
   dispatch => ({
     init() {
-      dispatch(api.actionCreators.getRidershipOverTime());
+      dispatch(api.actionCreators.getMockRidershipData());
     }
   })
 )(TemplateAPICard);

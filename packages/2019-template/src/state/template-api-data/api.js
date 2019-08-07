@@ -6,7 +6,7 @@ const apiConfig = { requestAdapter };
 const HOST = "https://service.civicpdx.org/transportation-systems";
 
 const apiDesc = {
-  getRidershipOverTime: {
+  getMockRidershipData: {
     url: `${HOST}/passenger-census/system/annual/averages/?format=json`
   }
 };
