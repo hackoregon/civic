@@ -58,6 +58,31 @@ export const getItemCount = createSelector(
   items => size(items)
 );
 
+export const getKitCreationItems = createSelector(
+  ["kit.items"],
+  items => {
+    const genericWeighting = 1 / size(items);
+
+    const kitCreationItems = Object.keys(items).reduce((result, itemKey) => {
+      const itemData = items[itemKey];
+
+      const genericItem = {
+        imageSVG: itemData.fullSvg,
+        good: itemData.goodKitItem,
+        onSelection: () => {
+          console.log("selected");
+        },
+        weighting: genericWeighting
+      };
+      result.push(genericItem);
+
+      return result;
+    }, []);
+
+    return kitCreationItems;
+  }
+);
+
 export const getKitsNecessary = createSelector(
   ["kit.numberKitsStarted"],
   numberKitsStarted => numberKitsStarted

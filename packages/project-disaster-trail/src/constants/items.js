@@ -26,42 +26,48 @@ export const FOOD = {
   emptySvg: CornEmpty,
   fullSvg: CornColor,
   quantity: 0,
-  kitsFilledByItem: 0
+  kitsFilledByItem: 0,
+  goodKitItem: true
 };
 export const WATER = {
   id: water,
   emptySvg: WaterEmpty,
   fullSvg: WaterColor,
   quantity: 0,
-  kitsFilledByItem: 0
+  kitsFilledByItem: 0,
+  goodKitItem: true
 };
 export const FIRE_EXTINGUISHER = {
   id: fireExtinguisher,
   emptySvg: FireExtinguisherEmpty,
   fullSvg: FireExtinguisherColor,
   quantity: 0,
-  kitsFilledByItem: 0
+  kitsFilledByItem: 0,
+  goodKitItem: true
 };
 export const FIRST_AID_KIT = {
   id: firstAidKit,
   emptySvg: FirstAidEmpty,
   fullSvg: FirstAidColor,
   quantity: 0,
-  kitsFilledByItem: 0
+  kitsFilledByItem: 0,
+  goodKitItem: true
 };
 export const FLASHLIGHT = {
   id: flashlight,
   emptySvg: FlashlightEmpty,
   fullSvg: FlashlightColor,
   quantity: 0,
-  kitsFilledByItem: 0
+  kitsFilledByItem: 0,
+  goodKitItem: true
 };
 export const WALKIE_TALKIE = {
   id: walkieTalkie,
   emptySvg: WalkieTalkieEmpty,
   fullSvg: WalkieTalkieColor,
   quantity: 0,
-  kitsFilledByItem: 0
+  kitsFilledByItem: 0,
+  goodKitItem: true
 };
 
 // TODO: update items
@@ -70,7 +76,8 @@ export const PROTECTIVE_GEAR = {
   emptySvg: "https://image.flaticon.com/icons/svg/1705/1705460.svg",
   fullSvg: "https://image.flaticon.com/icons/svg/1705/1705463.svg",
   quantity: 0,
-  kitsFilledByItem: 0
+  kitsFilledByItem: 0,
+  goodKitItem: true
 };
 
 export const MINIMUM_KIT = {
