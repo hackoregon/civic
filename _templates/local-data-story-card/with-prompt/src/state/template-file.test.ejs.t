@@ -1,3 +1,6 @@
+---
+to: packages/<%=package%>/src/state/<%=slug%>/<%=slug%>.test.js
+---
 import configureMockStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import * as actions from "./actions";
@@ -6,15 +9,15 @@ import reducer from "./index";
 
 const mockStore = configureMockStore([thunk]);
 
-describe("template-data", () => {
-  describe("template-data actions", () => {
-    describe("template-data import actions", () => {
+describe("<%=slug%>", () => {
+  describe("<%=slug%> actions", () => {
+    describe("<%=slug%> import actions", () => {
       it("should have a start action", () => {
         const expectedAction = {
           type: actions.IMPORT_START
         };
 
-        expect(actions.TemplateDataStart()).to.eql(expectedAction);
+        expect(actions.<%=StoryCardName%>DataStart()).to.eql(expectedAction);
       });
 
       it("should have a success action", () => {
@@ -28,11 +31,11 @@ describe("template-data", () => {
           payload
         };
 
-        expect(actions.TemplateDataSuccess(payload)).to.eql(expectedAction);
+        expect(actions.<%=StoryCardName%>DataSuccess(payload)).to.eql(expectedAction);
       });
     });
 
-    describe("template-data import thunk", () => {
+    describe("<%=slug%> import thunk", () => {
       let store;
 
       beforeEach(() => {
@@ -43,7 +46,7 @@ describe("template-data", () => {
         const action1 = { type: actions.IMPORT_START };
         const action2 = { type: actions.IMPORT_SUCCESS };
 
-        return store.dispatch(actions.fetchTemplateData()).then(() => {
+        return store.dispatch(actions.fetch<%=StoryCardName%>Data()).then(() => {
           const actionHistory = store.getActions();
 
           expect(actionHistory).to.have.lengthOf(2);
@@ -55,7 +58,7 @@ describe("template-data", () => {
     });
   });
 
-  describe("template-data reducer", () => {
+  describe("<%=slug%> reducer", () => {
     const initialState = {
       pending: false,
       data: null
@@ -94,53 +97,53 @@ describe("template-data", () => {
     });
   });
 
-  describe("template-data selectors", () => {
-    describe("getTemplateRequest", () => {
+  describe("<%=slug%> selectors", () => {
+    describe("get<%=StoryCardName%>Request", () => {
       it("extends the root selector", () => {
         const expectation = { one: "two", three: 4 };
 
         expect(
-          selectors.getTemplateRequest({
-            templateData: expectation
+          selectors.get<%=StoryCardName%>Request({
+            <%=storyCardName%>Data: expectation
           })
         ).to.eql(expectation);
 
         expect(
-          selectors.getTemplateRequest({
+          selectors.get<%=StoryCardName%>Request({
             red: "herring",
-            templateData: expectation
+            <%=storyCardName%>Data: expectation
           })
         ).to.eql(expectation);
       });
     });
 
-    describe("getTemplateData", () => {
+    describe("get<%=StoryCardName%>Data", () => {
       it("returns undefined when there is no data", () => {
         // eslint-disable-next-line no-unused-expressions
         expect(
-          selectors.getTemplateData({ templateData: { no: "data to be seen" } })
+          selectors.get<%=StoryCardName%>Data({ <%=storyCardName%>Data: { no: "data to be seen" } })
         ).to.be.undefined;
       });
 
-      it("returns undefined when data has no value for TemplateData", () => {
+      it("returns undefined when data has no value for <%=StoryCardName%>Data", () => {
         // eslint-disable-next-line no-unused-expressions
         expect(
-          selectors.getTemplateData({
-            templateData: { data: { NotTemplateData: {} } }
+          selectors.get<%=StoryCardName%>Data({
+            <%=storyCardName%>Data: { data: { Not<%=StoryCardName%>Data: {} } }
           })
         ).to.be.undefined;
       });
 
-      it("returns the data when data has a value for TemplateData", () => {
+      it("returns the data when data has a value for <%=StoryCardName%>Data", () => {
         const data = {
           here: "it",
           i: "s"
         };
         expect(
-          selectors.getTemplateData({
-            templateData: {
+          selectors.get<%=StoryCardName%>Data({
+            <%=storyCardName%>Data: {
               data: {
-                TemplateData: data
+                <%=StoryCardName%>Data: data
               }
             }
           })
@@ -148,12 +151,12 @@ describe("template-data", () => {
       });
     });
 
-    describe("isTemplateDataPending", () => {
+    describe("is<%=StoryCardName%>DataPending", () => {
       it("returns false when there is no value for pending", () => {
         // eslint-disable-next-line no-unused-expressions
         expect(
-          selectors.isTemplateDataPending({
-            templateData: {
+          selectors.is<%=StoryCardName%>DataPending({
+            <%=storyCardName%>Data: {
               no: "pending property"
             }
           })
@@ -163,8 +166,8 @@ describe("template-data", () => {
       it("returns false when the value for pending is false", () => {
         // eslint-disable-next-line no-unused-expressions
         expect(
-          selectors.isTemplateDataPending({
-            templateData: {
+          selectors.is<%=StoryCardName%>DataPending({
+            <%=storyCardName%>Data: {
               pending: false
             }
           })
@@ -174,8 +177,8 @@ describe("template-data", () => {
       it("returns true when the value for pending is true", () => {
         // eslint-disable-next-line no-unused-expressions
         expect(
-          selectors.isTemplateDataPending({
-            templateData: {
+          selectors.is<%=StoryCardName%>DataPending({
+            <%=storyCardName%>Data: {
               pending: true
             }
           })

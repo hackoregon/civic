@@ -1,16 +1,19 @@
+---
+to: packages/<%=package%>/src/components/<%=StoryCardName%>/index.js
+---
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { CivicCard } from "@hackoregon/component-library";
 
-import templateCardMeta from "./templateCardMeta";
-import { fetchTemplateData } from "../../state/template-data/actions";
+import <%=StoryCardName%>Meta from "./<%=storyCardName%>Meta";
+import { fetch<%=StoryCardName%>Data } from "../../state/<%=slug%>/actions";
 import {
-  isTemplateDataPending,
-  getTemplateData
-} from "../../state/template-data/selectors";
+  is<%=StoryCardName%>DataPending,
+  get<%=StoryCardName%>Data
+} from "../../state/<%=slug%>/selectors";
 
-class TemplateCard extends Component {
+class <%=StoryCardName%> extends Component {
   componentDidMount() {
     const { init } = this.props;
     init();
@@ -21,7 +24,7 @@ class TemplateCard extends Component {
 
     return (
       <CivicCard
-        cardMeta={templateCardMeta}
+        cardMeta={<%=StoryCardName%>Meta}
         isLoading={isLoading}
         data={data}
         Layout={Layout}
@@ -30,9 +33,9 @@ class TemplateCard extends Component {
   }
 }
 
-TemplateCard.displayName = "TemplateCard";
+<%=StoryCardName%>.displayName = "<%=StoryCardName%>";
 
-TemplateCard.propTypes = {
+<%=StoryCardName%>.propTypes = {
   init: PropTypes.func,
   isLoading: PropTypes.bool,
   data: PropTypes.arrayOf(PropTypes.shape({})),
@@ -41,12 +44,12 @@ TemplateCard.propTypes = {
 
 export default connect(
   state => ({
-    isLoading: isTemplateDataPending(state),
-    data: getTemplateData(state)
+    isLoading: is<%=StoryCardName%>DataPending(state),
+    data: get<%=StoryCardName%>Data(state)
   }),
   dispatch => ({
     init() {
-      dispatch(fetchTemplateData());
+      dispatch(fetch<%=StoryCardName%>Data());
     }
   })
-)(TemplateCard);
+)(<%=StoryCardName%>);

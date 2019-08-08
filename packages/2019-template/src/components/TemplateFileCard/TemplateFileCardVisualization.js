@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import { LineChart } from "@hackoregon/component-library";
 
-const TemplateCardVisualization = ({ isLoading, data }) => (
+const TemplateFileCardVisualization = ({ isLoading, data }) => (
   <React.Fragment>
     {!isLoading && data && (
       <LineChart
@@ -11,13 +11,13 @@ const TemplateCardVisualization = ({ isLoading, data }) => (
         dataKey="year"
         dataValue="ridership"
         dataSeries="series"
-        title="Template Plot"
+        title="Template File Plot"
       />
     )}
   </React.Fragment>
 );
 
-TemplateCardVisualization.propTypes = {
+TemplateFileCardVisualization.propTypes = {
   isLoading: PropTypes.bool,
   data: PropTypes.arrayOf(
     PropTypes.shape({
@@ -28,4 +28,4 @@ TemplateCardVisualization.propTypes = {
   )
 };
 
-export default TemplateCardVisualization;
+export default TemplateFileCardVisualization;

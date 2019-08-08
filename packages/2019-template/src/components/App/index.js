@@ -8,7 +8,8 @@ import {
   CivicCardLayoutClassic
 } from "@hackoregon/component-library";
 
-import TemplateCard from "../TemplateCard";
+import TemplateAPICard from "../TemplateAPICard";
+import TemplateFileCard from "../TemplateFileCard";
 import DemoCard from "../DemoCard";
 
 import "@hackoregon/component-library/assets/global.styles.css";
@@ -56,8 +57,8 @@ const App = () => (
     </section>
     <section className={cx(sectionMarginMedium, sectionMaxWidthMedium)}>
       <PullQuote
-        quoteText="The lorem ipsum text is typically a scrambled section of De 
-      finibus bonorum et malorum, with words altered, added, and removed to make 
+        quoteText="The lorem ipsum text is typically a scrambled section of De
+      finibus bonorum et malorum, with words altered, added, and removed to make
       it nonsensical, improper Latin."
       />
     </section>
@@ -71,7 +72,10 @@ const App = () => (
       </p>
     </section>
     <section className={sectionMarginMedium}>
-      <TemplateCard Layout={CivicCardLayoutClassic} />
+      <TemplateAPICard Layout={CivicCardLayoutClassic} />
+    </section>
+    <section className={sectionMarginMedium}>
+      <TemplateFileCard Layout={CivicCardLayoutClassic} />
     </section>
     <section className={sectionMarginMedium}>
       <DemoCard Layout={CivicCardLayoutClassic} />
