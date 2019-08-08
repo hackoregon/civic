@@ -38,6 +38,7 @@ export { default as MapTooltip } from "./MapTooltip/MapTooltip";
 export { default as CivicSandboxMap } from "./CivicSandboxMap/CivicSandboxMap";
 export { default as MultiLayerMap } from "./MultiLayerMap/MultiLayerMap";
 export { default as GradientScale } from "./GradientScale/GradientScale";
+export { default as Chip } from "./Chip/Chip";
 export {
   default as PackageSelectorBox
 } from "./PackageSelectorBox/PackageSelectorBox";
