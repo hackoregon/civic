@@ -75,9 +75,6 @@
   "dependencies": {
     "@material-ui/core": "^4.1.3",
     "@turf/center-of-mass": "^6.0.1",
-    "chai-enzyme": "^1.0.0-beta.1",
-    "cheerio": "^1.0.0-rc.2",
-    "classnames": "^2.2.5",
     "copy-to-clipboard": "^3.0.5",
     "create-react-ref": "^0.1.0",
     "d3": "^4.8.0",
