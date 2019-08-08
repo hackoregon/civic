@@ -74,6 +74,7 @@
     "webpack-cli": "^3.2.3"
   },
   "dependencies": {
+    "@emotion/core": "^10.0.15",
     "@material-ui/core": "^4.1.3",
     "copy-to-clipboard": "^3.0.5",
     "create-react-ref": "^0.1.0",

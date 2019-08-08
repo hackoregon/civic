@@ -5,7 +5,8 @@ import { cx, css } from "emotion"; // eslint-disable-line emotion/no-vanilla
 import {
   PageLayout,
   PullQuote,
-  CivicCardLayoutClassic
+  CivicCardLayoutClassic,
+  CivicCardLayoutVisualizationOnly
 } from "@hackoregon/component-library";
 
 import TemplateAPICard from "../TemplateAPICard";
@@ -45,6 +46,18 @@ const App = () => (
   >
     <section className={cx(sectionBodyHeading, sectionMaxWidthSmall)}>
       <h2>Ullamcorper dignissim cras tincidunt?</h2>
+    </section>
+    <section className={cx(sectionMarginSmall, sectionMaxWidthSmall)}>
+      <p className={paragraphStyle}>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Elementum curabitur
+        vitae nunc sed. Nisl condimentum id venenatis a condimentum vitae sapien
+        pellentesque. Sapien eget mi proin sed libero enim sed faucibus turpis.
+        Fermentum leo vel orci porta.
+      </p>
+    </section>
+    <section className={sectionMarginMedium}>
+      <DemoCard Layout={CivicCardLayoutVisualizationOnly} />
     </section>
     <section className={cx(sectionMarginSmall, sectionMaxWidthSmall)}>
       <p className={paragraphStyle}>
