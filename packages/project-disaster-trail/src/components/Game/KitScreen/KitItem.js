@@ -1,9 +1,9 @@
 /** @jsx jsx */
 import { Component } from "react";
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 import { css, jsx } from "@emotion/core";
 import { PropTypes } from "prop-types";
-import { addItem } from "../../../state/kit";
+// import { addItem } from "../../../state/kit";
 
 const ImagesContainer = css`
   position: relative;
@@ -40,12 +40,12 @@ class KitItem extends Component {
   }
 
   shouldBeFilled = () => {
-    const { kitsFilledByItem, kitNumber } = this.props;
-    return kitsFilledByItem >= kitNumber;
+    console.log("should be filled?");
+    return false;
   };
 
   render() {
-    const { emptySvg, fullSvg, onAddKitItem, itemType } = this.props;
+    const { emptySvg, fullSvg } = this.props;
     const { filledItem } = this.state;
 
     const EmptyKitItem = css`
@@ -73,12 +73,7 @@ class KitItem extends Component {
     /* eslint-disable jsx-a11y/click-events-have-key-events */
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
-      <div
-        css={ImagesContainer}
-        onClick={() => {
-          onAddKitItem(itemType);
-        }}
-      >
+      <div css={ImagesContainer}>
         <div
           css={css`
             ${KitItemStyle};
@@ -103,18 +98,7 @@ class KitItem extends Component {
 KitItem.propTypes = {
   emptySvg: PropTypes.node,
   fullSvg: PropTypes.node,
-  itemType: PropTypes.string,
-  kitsFilledByItem: PropTypes.number,
-  kitNumber: PropTypes.number,
-  onAddKitItem: PropTypes.func
+  itemType: PropTypes.string
 };
 
-// Temporarily addItem from this component, will be orbs later
-export default connect(
-  null,
-  dispatch => ({
-    onAddKitItem(itemId) {
-      dispatch(addItem(itemId));
-    }
-  })
-)(KitItem);
+export default KitItem;

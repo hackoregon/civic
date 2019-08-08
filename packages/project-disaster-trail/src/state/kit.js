@@ -1,14 +1,13 @@
 import { createReducer, createSelector } from "redux-starter-kit";
 import size from "lodash/size";
-import itemTypes, { MINIMUM_KIT as minimumKit } from "../constants/items";
+import itemTypes from "../constants/items";
 
 // INITIAL STATE
 // items will be a list of objects, where each object is an id and a quantity
 // the id is related to the items reducer
 const initialState = {
   items: itemTypes,
-  playerKit: {},
-  numberKitsStarted: 1
+  playerKit: {}
 };
 
 // CONSTANTS
@@ -32,25 +31,6 @@ export const addItemToPlayerKit = itemId => dispatch => {
 export const kit = createReducer(initialState, {
   [actionTypes.ADD_ITEM_TO_PLAYER_KIT]: (state, action) => {
     state.playerKit[action.itemId] = true;
-  },
-  [actionTypes.ADD_ITEM]: (state, action) => {
-    const newQuantity = state.items[action.itemId].quantity + action.quantity;
-    const minimumQuantity = minimumKit[action.itemId].quantity;
-    const kitsFilledByItem = Math.ceil(newQuantity / minimumQuantity);
-    const numberKitsNecessary =
-      kitsFilledByItem > state.numberKitsStarted
-        ? kitsFilledByItem
-        : state.numberKitsStarted;
-
-    state.items = {
-      ...state.items,
-      [action.itemId]: {
-        ...state.items[action.itemId],
-        quantity: newQuantity,
-        kitsFilledByItem
-      }
-    };
-    state.numberKitsStarted = numberKitsNecessary;
   }
 });
 /* eslint-enable no-param-reassign */
@@ -92,9 +72,4 @@ export const getKitCreationItems = createSelector(
 
     return kitCreationItems;
   }
-);
-
-export const getKitsNecessary = createSelector(
-  ["kit.numberKitsStarted"],
-  numberKitsStarted => numberKitsStarted
 );
