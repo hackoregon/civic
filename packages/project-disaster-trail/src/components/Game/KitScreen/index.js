@@ -1,12 +1,15 @@
 import React, { memo } from "react";
+import { connect } from "react-redux";
+import { PropTypes } from "prop-types";
 
-import { MapStyle, GUIStyle } from "../index";
+import { getKitCreationItems } from "../../../state/kit";
 import DurationBar from "../../atoms/DurationBar";
-import Kit from "./Kit";
 import PointsView from "../../atoms/PointsView";
+import { MapStyle, GUIStyle } from "../index";
 import OrbManager from "../OrbManager";
+import Kit from "./Kit";
 
-const KitScreen = () => {
+const KitScreen = ({ possibleItems }) => {
   return (
     <>
       <MapStyle>
@@ -15,10 +18,25 @@ const KitScreen = () => {
       </MapStyle>
       <DurationBar step="Choose supplies" />
       <GUIStyle>
-        <OrbManager />
+        <OrbManager possibleItems={possibleItems} />
       </GUIStyle>
     </>
   );
 };
 
-export default memo(KitScreen);
+KitScreen.propTypes = {
+  possibleItems: PropTypes.arrayOf(
+    PropTypes.shape({
+      imageSVG: PropTypes.string,
+      good: PropTypes.bool,
+      onSelection: PropTypes.func,
+      weighting: PropTypes.number
+    })
+  )
+};
+
+const mapStateToProps = state => ({
+  possibleItems: getKitCreationItems(state)
+});
+
+export default connect(mapStateToProps)(memo(KitScreen));
