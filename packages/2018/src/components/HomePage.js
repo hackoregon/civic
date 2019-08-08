@@ -88,23 +88,23 @@ const buttonContainerStatic = css`
 `;
 
 const titleStyle = css`
-  font-size: 50px;
+  font-size: 3.57rem;
   line-height: 1.2;
   font-family: "Rubik", sans-serif;
   letter-spacing: -1px;
   @media (max-width: 640px) {
-    font-size: 36px;
+    font-size: 2.57rem;
   }
 `;
 
 const subtitleStyle = css`
-  font-size: 26px;
+  font-size: 1.853rem;
   line-height: 1.2;
   font-weight: 300;
   font-family: "Rubik", sans-serif;
   color: #726371;
   @media (max-width: 640px) {
-    font-size: 18px;
+    font-size: 1.28rem;
   }
 `;
 
@@ -115,14 +115,14 @@ const initialContentContainer = css`
 `;
 
 const issueStyle = index => css`
-  font-size: 21px;
+  font-size: 1.5rem;
   font-weight: 500;
   font-family: "Rubik", sans-serif;
   color: ${colors[index]};
   text-align: right;
   padding-right: 15px;
   @media (max-width: 640px) {
-    font-size: 18px;
+    font-size: 1.28rem;
   }
 `;
 
@@ -200,7 +200,7 @@ const sectionRightContainer = css`
 const sectionHeaderTitle = css`
   color: white;
   font-family: "Rubik", sans-serif;
-  font-size: 50px;
+  font-size: 3.57rem;
   letter-spacing: -1px;
   text-align: left;
   line-height: 1.2;
@@ -209,16 +209,16 @@ const sectionHeaderTitle = css`
   position: relative;
   box-sizing: border-box;
   @media (max-width: 640px) {
-    font-size: 36px;
+    font-size: 2.57rem;
   }
 `;
 const sectionHeaderSubtitle = css`
   font-family: "Rubik", sans-serif;
-  font-size: 20px;
+  font-size: 1.42rem;
   color: white;
   display: inline-block;
   @media (max-width: 640px) {
-    font-size: 16px;
+    font-size: 1.14rem;
     line-height: 1.5;
   }
 `;
@@ -285,20 +285,20 @@ const contentRightContainer = css`
 const listTitle = css`
   display: block;
   font-family: "Rubik", sans-serif;
-  font-size: 35px;
+  font-size: 2.5rem;
   margin: 40px 0;
   text-align: center;
 `;
 const listSubTitle = css`
   display: block;
   font-family: "Rubik", sans-serif;
-  font-size: 24px;
+  font-size: 1.71rem;
   margin: 12px 0;
 `;
 const listText = css`
   display: block;
   font-family: "Rubik", sans-serif;
-  font-size: 16px;
+  font-size: 1.14rem;
   color: black;
   line-height: 1.5;
 `;
@@ -384,7 +384,7 @@ const buttonStyle = css`
   border: 2px solid #ef495c;
   padding: 10px 20px;
   font-family: "Rubik", sans-serif;
-  font-size: 16px;
+  font-size: 1.14rem;
   color: #ef495c;
   background-color: transparent;
   margin: 10px 0px 40px;
@@ -416,7 +416,7 @@ const iconAndTextWrapper = css`
 
   span {
     font-family: "Rubik", sans-serif;
-    font-size: 16px;
+    font-size: 1.14rem;
     display: block;
     margin-top: 20px;
   }
