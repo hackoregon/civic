@@ -84,7 +84,7 @@ class SolveScreen extends PureComponent {
           step="Choose a task"
           durationLength={taskDuration / 1000}
         />
-        <OrbManager />
+        <OrbManager possibleItems={[]} />
       </Fragment>
     );
   }
