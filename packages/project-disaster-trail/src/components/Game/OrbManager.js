@@ -35,7 +35,7 @@ import Orb from "./Orb";
  */
 const OrbManager = ({
   orbs,
-  setOrbs,
+  setOrbsState,
   paused = false,
   period = 2,
   orbCount = 10,
@@ -47,10 +47,13 @@ const OrbManager = ({
     maxVelocityY = 0
   } = {},
   touchedOrbs,
-  completedOrbs
+  completedOrbs,
+  possibleItems
 } = {}) => {
   const [hasInitialized, setHasInitialized] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
+
+  // eslint-disable-next-line no-use-before-define
   useAnimationFrame(() => animate());
 
   // store references to all models
@@ -71,37 +74,41 @@ const OrbManager = ({
   // which should only happen once, after the component renders the very first time
   const prevBounds = usePrevious(bounds);
 
+  // Initializes the orb data and placement. Only reexecutes when "bounds" is updated (screen resize)
   useEffect(() => {
     // ensure we only run this once
     if (prevBounds && !prevBounds.width && bounds.width && !hasInitialized) {
       // create an empty array.
-      const tempModels = [];
+      const initialModels = [];
+      // create a number of orbs based on each possibleItems weighting to achieve the correct distribution. Add the x, y, and velocity properties to its existing properties for that item
+      for (let i = 0, itemData; i < possibleItems.length; i += 1) {
+        itemData = possibleItems[i];
+        const totalOrbsForThisItem = Math.round(orbCount * itemData.weighting);
 
-      for (let i = 0, model; i < orbCount; i += 1) {
-        // create an empty object and assign position and velocity
-        model = {};
-        model.x = Math.random() * bounds.width;
-        model.y = Math.random() * (bounds.height - orbSize / 2);
-
-        model.velocity = {
-          x: minVelocityX + Math.random() * (maxVelocityX - minVelocityX),
-          y: minVelocityY + Math.random() * (maxVelocityY - minVelocityY)
-        };
-
-        // store in the temporary array
-        tempModels.push(model);
+        for (let j = 0; j < totalOrbsForThisItem; j += 1) {
+          itemData.x = Math.random() * bounds.width;
+          itemData.y = Math.random() * (bounds.height - orbSize / 2);
+          itemData.velocity = {
+            x: minVelocityX + Math.random() * (maxVelocityX - minVelocityX),
+            y: minVelocityY + Math.random() * (maxVelocityY - minVelocityY)
+          };
+          initialModels.push(Object.assign({}, itemData));
+        }
       }
-      setOrbs(tempModels);
+
+      setOrbsState(initialModels);
       setHasInitialized(true);
     }
   }, [bounds]);
 
+  // Sets off initial animation and only attempts re-execution when orbs has changed
   useEffect(() => {
     if (prevModels && !prevModels.length && orbs.length && !isAnimating) {
       setIsAnimating(true);
     }
   }, [orbs]);
 
+  // Cleanup when component is destroyed
   useEffect(() => {
     return () => {
       window.cancelAnimationFrame(animationFrameId);
@@ -109,21 +116,24 @@ const OrbManager = ({
   }, []);
 
   // `animate` is called every frame
+  // eslint-disable-next-line consistent-return
   const animate = () => {
-    if (!bounds || !bounds.width || paused || !isAnimating) return null;
+    if (!bounds || !bounds.width || paused || !isAnimating || !hasInitialized)
+      return null;
 
     const tempModels = [];
 
     // we re-use tempModels by pushing updated data in to it.
-    for (let i = 0, model; i < orbCount; i += 1) {
+    for (let i = 0, model; i < orbs.length; i += 1) {
+      // get the model
       model = { ...orbs[i] };
 
       // if the orb is touched or complete, do not move it
       if (touchedOrbs.indexOf(i) > -1 || completedOrbs.indexOf(i) > -1) {
         tempModels.push(model);
+        // eslint-disable-next-line no-continue
         continue;
       }
-      // get the model
 
       // and move it
       model.x += model.velocity.x; // + Math.cos(tick * 0.1) * period;
@@ -141,7 +151,7 @@ const OrbManager = ({
     }
 
     // store all models in state
-    setOrbs(tempModels);
+    setOrbsState(tempModels);
 
     setTick(tick + 1);
   };
@@ -189,7 +199,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setOrbs: bindActionCreators(setOrbs, dispatch)
+  setOrbsState: bindActionCreators(setOrbs, dispatch)
 });
 
 // use memo to not re-render OrbManager unless its props change
