@@ -25,6 +25,7 @@ export const FOOD = {
   id: food,
   emptySvg: CornEmpty,
   fullSvg: CornColor,
+  imgAlt: "food kit item",
   quantity: 0,
   kitsFilledByItem: 0,
   goodKitItem: true
@@ -33,6 +34,7 @@ export const WATER = {
   id: water,
   emptySvg: WaterEmpty,
   fullSvg: WaterColor,
+  imgAlt: "water kit item",
   quantity: 0,
   kitsFilledByItem: 0,
   goodKitItem: true
@@ -41,6 +43,7 @@ export const FIRE_EXTINGUISHER = {
   id: fireExtinguisher,
   emptySvg: FireExtinguisherEmpty,
   fullSvg: FireExtinguisherColor,
+  imgAlt: "fire extinguisher kit item",
   quantity: 0,
   kitsFilledByItem: 0,
   goodKitItem: true
@@ -49,6 +52,7 @@ export const FIRST_AID_KIT = {
   id: firstAidKit,
   emptySvg: FirstAidEmpty,
   fullSvg: FirstAidColor,
+  imgAlt: "first aid kit kit item",
   quantity: 0,
   kitsFilledByItem: 0,
   goodKitItem: true
@@ -57,6 +61,7 @@ export const FLASHLIGHT = {
   id: flashlight,
   emptySvg: FlashlightEmpty,
   fullSvg: FlashlightColor,
+  imgAlt: "flashlight kit item",
   quantity: 0,
   kitsFilledByItem: 0,
   goodKitItem: true
@@ -65,6 +70,7 @@ export const WALKIE_TALKIE = {
   id: walkieTalkie,
   emptySvg: WalkieTalkieEmpty,
   fullSvg: WalkieTalkieColor,
+  imgAlt: "walkie talkie kit item",
   quantity: 0,
   kitsFilledByItem: 0,
   goodKitItem: true
@@ -75,6 +81,7 @@ export const PROTECTIVE_GEAR = {
   id: protectiveGear,
   emptySvg: "https://image.flaticon.com/icons/svg/1705/1705460.svg",
   fullSvg: "https://image.flaticon.com/icons/svg/1705/1705463.svg",
+  imgAlt: "protective gear kit item",
   quantity: 0,
   kitsFilledByItem: 0,
   goodKitItem: true

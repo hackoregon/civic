@@ -68,8 +68,10 @@ export const getKitCreationItems = createSelector(
 
       const genericItem = {
         imageSVG: itemData.fullSvg,
+        imgAlt: itemData.imgAlt,
         good: itemData.goodKitItem,
         onSelection: () => {
+          // eslint-disable-next-line no-console
           console.log("selected");
         },
         weighting: genericWeighting

@@ -170,6 +170,7 @@ const OrbManager = ({
         >
           <Orb
             size={orbSize}
+            model={model}
             // onComplete={onOrbComplete}
             id={index}
           />
