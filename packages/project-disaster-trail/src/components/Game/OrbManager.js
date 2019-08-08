@@ -48,7 +48,8 @@ const OrbManager = ({
   } = {},
   touchedOrbs,
   completedOrbs,
-  possibleItems
+  possibleItems,
+  onOrbSelection
 } = {}) => {
   const [hasInitialized, setHasInitialized] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -129,6 +130,7 @@ const OrbManager = ({
       model = { ...orbs[i] };
 
       // if the orb is touched or complete, do not move it
+      // TODO: seperate out orb animation when good / bad
       if (touchedOrbs.indexOf(i) > -1 || completedOrbs.indexOf(i) > -1) {
         tempModels.push(model);
         // eslint-disable-next-line no-continue
@@ -171,7 +173,7 @@ const OrbManager = ({
           <Orb
             size={orbSize}
             model={model}
-            // onComplete={onOrbComplete}
+            onOrbSelection={onOrbSelection}
             id={index}
           />
         </div>

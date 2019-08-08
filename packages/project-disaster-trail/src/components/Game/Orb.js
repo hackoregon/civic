@@ -6,7 +6,6 @@ import { bindActionCreators } from "redux";
 import { jsx, css } from "@emotion/core";
 import RadialGauge from "./RadialGauge";
 
-import { addPoints } from "../../state/user";
 import { getOrbTouched, setOrbTouched, setOrbComplete } from "../../state/orbs";
 
 const orbContainerStyle = css`
@@ -99,6 +98,7 @@ class Orb extends PureComponent {
 
   checkComplete = () => {
     const { pressedStart, durationRequired, isActive } = this.state;
+    const { onOrbSelection, model } = this.props;
 
     if (isActive && pressedStart) {
       const pressedDuration = new Date() - pressedStart;
@@ -109,8 +109,7 @@ class Orb extends PureComponent {
         this.setState({ isComplete: true, isCorrect: false });
 
         setOrbCompleteInState(id, true);
-
-        addPointsToState(1);
+        onOrbSelection(model);
       }
     }
   };
@@ -176,7 +175,6 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addPointsToState: bindActionCreators(addPoints, dispatch),
   setOrbTouchedInState: bindActionCreators(setOrbTouched, dispatch),
   setOrbCompleteInState: bindActionCreators(setOrbComplete, dispatch)
 });

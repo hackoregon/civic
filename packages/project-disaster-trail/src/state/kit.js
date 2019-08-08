@@ -7,20 +7,32 @@ import itemTypes, { MINIMUM_KIT as minimumKit } from "../constants/items";
 // the id is related to the items reducer
 const initialState = {
   items: itemTypes,
+  playerKit: {},
   numberKitsStarted: 1
 };
 
 // CONSTANTS
 
-export const actionTypes = { ADD_ITEM: "ADD_ITEM" };
+export const actionTypes = {
+  ADD_ITEM: "ADD_ITEM",
+  ADD_ITEM_TO_PLAYER_KIT: "ADD_ITEM_TO_PLAYER_KIT"
+};
 
 // ACTIONS
 export const addItem = (itemId, quantity = 1) => dispatch => {
   dispatch({ type: actionTypes.ADD_ITEM, itemId, quantity });
 };
 
+export const addItemToPlayerKit = itemId => dispatch => {
+  dispatch({ type: actionTypes.ADD_ITEM_TO_PLAYER_KIT, itemId });
+};
+
 // REDUCERS
+/* eslint-disable no-param-reassign */
 export const kit = createReducer(initialState, {
+  [actionTypes.ADD_ITEM_TO_PLAYER_KIT]: (state, action) => {
+    state.playerKit[action.itemId] = true;
+  },
   [actionTypes.ADD_ITEM]: (state, action) => {
     const newQuantity = state.items[action.itemId].quantity + action.quantity;
     const minimumQuantity = minimumKit[action.itemId].quantity;
@@ -30,7 +42,6 @@ export const kit = createReducer(initialState, {
         ? kitsFilledByItem
         : state.numberKitsStarted;
 
-    // eslint-disable-next-line no-param-reassign
     state.items = {
       ...state.items,
       [action.itemId]: {
@@ -39,10 +50,10 @@ export const kit = createReducer(initialState, {
         kitsFilledByItem
       }
     };
-    // eslint-disable-next-line no-param-reassign
     state.numberKitsStarted = numberKitsNecessary;
   }
 });
+/* eslint-enable no-param-reassign */
 
 export default kit;
 
@@ -67,14 +78,12 @@ export const getKitCreationItems = createSelector(
       const itemData = items[itemKey];
 
       const genericItem = {
+        type: itemData.id,
         imageSVG: itemData.fullSvg,
         imgAlt: itemData.imgAlt,
         good: itemData.goodKitItem,
-        onSelection: () => {
-          // eslint-disable-next-line no-console
-          console.log("selected");
-        },
-        weighting: genericWeighting
+        weighting: genericWeighting,
+        points: itemData.pointsForPuttingInKit
       };
       result.push(genericItem);
 

@@ -28,7 +28,8 @@ export const FOOD = {
   imgAlt: "food kit item",
   quantity: 0,
   kitsFilledByItem: 0,
-  goodKitItem: true
+  goodKitItem: true,
+  pointsForPuttingInKit: 1
 };
 export const WATER = {
   id: water,
@@ -37,7 +38,8 @@ export const WATER = {
   imgAlt: "water kit item",
   quantity: 0,
   kitsFilledByItem: 0,
-  goodKitItem: true
+  goodKitItem: true,
+  pointsForPuttingInKit: 1
 };
 export const FIRE_EXTINGUISHER = {
   id: fireExtinguisher,
@@ -46,7 +48,8 @@ export const FIRE_EXTINGUISHER = {
   imgAlt: "fire extinguisher kit item",
   quantity: 0,
   kitsFilledByItem: 0,
-  goodKitItem: true
+  goodKitItem: true,
+  pointsForPuttingInKit: 1
 };
 export const FIRST_AID_KIT = {
   id: firstAidKit,
@@ -55,7 +58,8 @@ export const FIRST_AID_KIT = {
   imgAlt: "first aid kit kit item",
   quantity: 0,
   kitsFilledByItem: 0,
-  goodKitItem: true
+  goodKitItem: true,
+  pointsForPuttingInKit: 1
 };
 export const FLASHLIGHT = {
   id: flashlight,
@@ -64,7 +68,8 @@ export const FLASHLIGHT = {
   imgAlt: "flashlight kit item",
   quantity: 0,
   kitsFilledByItem: 0,
-  goodKitItem: true
+  goodKitItem: true,
+  pointsForPuttingInKit: 1
 };
 export const WALKIE_TALKIE = {
   id: walkieTalkie,
@@ -73,7 +78,8 @@ export const WALKIE_TALKIE = {
   imgAlt: "walkie talkie kit item",
   quantity: 0,
   kitsFilledByItem: 0,
-  goodKitItem: true
+  goodKitItem: true,
+  pointsForPuttingInKit: 1
 };
 
 // TODO: update items
@@ -84,7 +90,8 @@ export const PROTECTIVE_GEAR = {
   imgAlt: "protective gear kit item",
   quantity: 0,
   kitsFilledByItem: 0,
-  goodKitItem: true
+  goodKitItem: true,
+  pointsForPuttingInKit: 1
 };
 
 export const MINIMUM_KIT = {
