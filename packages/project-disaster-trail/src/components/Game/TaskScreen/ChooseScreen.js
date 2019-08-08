@@ -1,22 +1,13 @@
 /** @jsx jsx */
-import { Component, Fragment } from "react";
+import { PureComponent, Fragment } from "react";
 import { PropTypes } from "prop-types";
-import { connect } from "react-redux";
 import { css, jsx } from "@emotion/core";
+import { connect } from "react-redux";
 
-import {
-  getTaskOrder,
-  getActiveTaskData,
-  getActiveEnvironment,
-  getTasksForEnvironment,
-  getCompletedTasks,
-  getHasSavedSelf,
-  addTask,
-  increaseActiveTask
-} from "../../../state/tasks";
-import { getScreenHeight } from "../../../state/settings";
-import { XL } from "../../../constants/screens";
-import DurationBar from "../DurationBar";
+import { getActiveTaskData } from "../../../state/tasks";
+import DurationBar from "../../atoms/DurationBar";
+import OrbManager from "../OrbManager";
+import TaskMap from "./TaskMap";
 
 const screenLayout = css`
   position: relative;
@@ -24,17 +15,18 @@ const screenLayout = css`
   overflow: hidden;
   width: 100%;
   height: 100%;
-  grid-template-rows: 1fr;
-  grid-template-columns: 1fr;
+  justify-content: center;
+  align-items: center;
   background: beige;
 `;
 
 const defaultState = {
   voteTimer: null,
-  timeToVote: 7000
+  timeToVote: 20000,
+  chooseTask: false
 };
 
-class ChooseScreen extends Component {
+class ChooseScreen extends PureComponent {
   state = defaultState;
 
   componentDidMount() {
@@ -42,6 +34,7 @@ class ChooseScreen extends Component {
     const { timeToVote } = this.state;
 
     if (!activeTask) {
+      // multiple first saveyourself issue root
       this.setState({
         voteTimer: setTimeout(this.chooseRandomTask, timeToVote)
       });
@@ -57,159 +50,35 @@ class ChooseScreen extends Component {
     clearTimeout(voteTimer);
   };
 
-  chooseTask = task => {
-    const { addNextTask } = this.props;
-    this.clearVoteTimeout();
-    addNextTask(task);
-  };
-
   chooseRandomTask = () => {
-    const { addNextTask } = this.props;
-    const possibleTasks = this.getPossibleTasks();
-    const randomIndex = Math.floor(Math.random() * possibleTasks.length);
-    const randomTask = possibleTasks[randomIndex];
-    addNextTask(randomTask);
-  };
-
-  getPossibleTasks = () => {
-    const { activeEnvironment, tasksForEnvironment } = this.props;
-    // All possible tasks for the game environment
-    const saveYourselfTasks =
-      tasksForEnvironment[activeEnvironment].saveYourself;
-    const saveOthersTasks = tasksForEnvironment[activeEnvironment].saveOthers;
-    return [].concat(saveYourselfTasks, saveOthersTasks);
+    this.setState({ chooseTask: true });
   };
 
   render() {
-    const {
-      taskOrder,
-      saveOthersMode,
-      goToNextTask,
-      activeEnvironment,
-      tasksForEnvironment,
-      completedTasks,
-      interfaceHeight
-    } = this.props;
-    const { timeToVote } = this.state;
-
-    const screenWithInterfaceLayout = css`
-      grid-template-rows: 1fr 40px ${interfaceHeight}px;
-    `;
-
-    const GUIStyle = css`
-      background: pink;
-      height: ${interfaceHeight}px;
-
-      @media (min-height: ${XL.height}px) {
-        height: ${interfaceHeight}px;
-      }
-    `;
-
-    const mapTasksToButton = task => (
-      <button
-        key={task}
-        type="button"
-        onClick={() => {
-          this.chooseTask(task);
-        }}
-      >
-        {task}
-      </button>
-    );
-
-    const tasksTodo = taskOrder.join(", ").toString();
-
-    // All possible tasks for the game environment
-    const saveYourselfTasks = tasksForEnvironment[
-      activeEnvironment
-    ].saveYourself.map(mapTasksToButton);
-    const saveOthersTasks = tasksForEnvironment[
-      activeEnvironment
-    ].saveOthers.map(mapTasksToButton);
-    const possibleTaskButtons = [].concat(saveYourselfTasks, saveOthersTasks);
+    const { timeToVote, chooseTask } = this.state;
 
     return (
-      <div
-        css={css`
-          ${screenLayout};
-          ${saveOthersMode && screenWithInterfaceLayout}
-        `}
-      >
-        <div>
-          <h2>Task: Choose Screen</h2>
-          {!saveOthersMode && (
-            <h3>
-              Tasks to be done first in {activeEnvironment} environment: [{" "}
-              {tasksTodo} ]
-            </h3>
-          )}
-          <h3>
-            Have you saved yourself yet? {saveOthersMode ? "yep!" : "nope"}
-          </h3>
-          {saveOthersMode ? (
-            <Fragment>
-              <h3>Choose next task for {activeEnvironment} environment:</h3>
-              {possibleTaskButtons}
-            </Fragment>
-          ) : (
-            <button
-              type="button"
-              onClick={() => {
-                goToNextTask();
-              }}
-            >
-              Save Yourself!
-            </button>
-          )}
-          <h3>Complete Tasks: [{completedTasks.join(", ").toString()} ]</h3>
+      <Fragment>
+        <div css={screenLayout}>
+          <TaskMap
+            chooseTask={chooseTask}
+            clearVoteTimeout={this.clearVoteTimeout}
+          />
         </div>
 
-        {saveOthersMode && (
-          <Fragment>
-            <DurationBar
-              step="Choose a task"
-              durationLength={timeToVote / 1000}
-            />
-            <div css={GUIStyle} />
-          </Fragment>
-        )}
-      </div>
+        <DurationBar step="Choose a task" durationLength={timeToVote / 1000} />
+        <OrbManager />
+      </Fragment>
     );
   }
 }
 
 ChooseScreen.propTypes = {
-  taskOrder: PropTypes.arrayOf(PropTypes.string),
-  activeTask: PropTypes.shape({}),
-  saveOthersMode: PropTypes.bool,
-  activeEnvironment: PropTypes.string,
-  tasksForEnvironment: PropTypes.shape({}),
-  completedTasks: PropTypes.arrayOf(PropTypes.string),
-  addNextTask: PropTypes.func,
-  goToNextTask: PropTypes.func,
-  interfaceHeight: PropTypes.number
+  activeTask: PropTypes.shape({})
 };
 
 const mapStateToProps = state => ({
-  taskOrder: getTaskOrder(state),
-  saveOthersMode: getHasSavedSelf(state),
-  activeTask: getActiveTaskData(state),
-  activeEnvironment: getActiveEnvironment(state),
-  tasksForEnvironment: getTasksForEnvironment(state),
-  completedTasks: getCompletedTasks(state),
-  interfaceHeight: getScreenHeight(state)
+  activeTask: getActiveTaskData(state)
 });
 
-const mapDispatchToProps = dispatch => ({
-  addNextTask(taskChoice, taskId) {
-    dispatch(addTask(taskChoice, taskId));
-  },
-  goToNextTask() {
-    dispatch(increaseActiveTask());
-  }
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ChooseScreen);
+export default connect(mapStateToProps)(ChooseScreen);

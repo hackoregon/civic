@@ -29,7 +29,8 @@ const initialState = {
 // CONSTANTS
 
 export const actionTypes = {
-  SET_ACTIVE_CHAPTER: "SET_ACTIVE_CHAPTER"
+  SET_ACTIVE_CHAPTER: "SET_ACTIVE_CHAPTER",
+  GO_TO_NEXT_CHAPTER: "GO_TO_NEXT_CHAPTER"
 };
 
 // ACTIONS
@@ -38,18 +39,25 @@ export const setActiveChapter = chapterId => dispatch => {
   dispatch({ type: actionTypes.SET_ACTIVE_CHAPTER, chapterId });
 };
 
+export const goToNextChapter = () => dispatch => {
+  dispatch({ type: actionTypes.GO_TO_NEXT_CHAPTER });
+};
+
 // REDUCERS
 
+/* eslint-disable no-param-reassign */
 export const chapters = createReducer(initialState, {
   [actionTypes.SET_ACTIVE_CHAPTER]: (state, action) => {
     if (action.chapterId > state.lastChapter) return;
     if (action.chapterId < 1) return;
-    // eslint-disable-next-line no-param-reassign
     state.activeChapter = action.chapterId;
-
-    // TODO: change chapter model enabled prop
+  },
+  [actionTypes.GO_TO_NEXT_CHAPTER]: state => {
+    if (state.activeChapter >= state.lastChapter) return;
+    state.activeChapter += 1;
   }
 });
+/* eslint-enable no-param-reassign */
 
 export default chapters;
 
@@ -70,7 +78,7 @@ export const getActiveChapter = createSelector(
 );
 
 export const getChapterById = createSelector(
-  ["chapters.chapters", "chapters.activeChapter"],
+  ["chapters.chapters", "id"],
   (gameChapters, id) => {
     return gameChapters[id];
   }

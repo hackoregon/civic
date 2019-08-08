@@ -1,20 +1,21 @@
+---
+to: packages/<%=package%>/src/components/<%=StoryCardName%>/<%=storyCardName%>Meta.js
+---
 import React from "react";
 import { Collapsable } from "@hackoregon/component-library";
 
-import TemplateCardVisualization from "./TemplateCardVisualization";
+import <%=StoryCardName%>Visualization from "./<%=StoryCardName%>Visualization";
 
-const templateCardMeta = (/* data */) => ({
-  title: "(Story Card #1, Issue #000) Template Card Title",
-  slug: "template-card",
+const <%=StoryCardName%>Meta = (/* data */) => ({
+  title: "<%=title%>",
+  slug: "<%=slug%>-card",
   introText: (
     <p>
-      Ice cream candy canes brownie marzipan jelly chocolate bar marshmallow.
-      Toffee cotton candy candy canes danish soufflé tootsie roll tiramisu
-      cupcake candy. Liquorice jujubes chocolate cake chupa chups. Halvah oat
-      cake jelly beans sugar plum chocolate cupcake tiramisu cake.
+      This template card loads data from a file stored in this repo, and can be used
+      as a starting point cards that do NOT need to make API calls.
     </p>
   ),
-  visualization: TemplateCardVisualization,
+  visualization: <%=StoryCardName%>Visualization, // data, isLoading are passed to this as props
   additionalText: (
     <p>
       Pastry sweet roll candy chocolate bar cupcake gingerbread. Chocolate jelly
@@ -127,4 +128,4 @@ const templateCardMeta = (/* data */) => ({
   ]
 });
 
-export default templateCardMeta;
+export default <%=StoryCardName%>Meta;

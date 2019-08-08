@@ -1,7 +1,13 @@
 /** @jsx jsx */
 import { PureComponent } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+
 import { jsx, css } from "@emotion/core";
 import RadialGauge from "./RadialGauge";
+
+import { addPoints } from "../../state/user";
+import { getOrbTouched, setOrbTouched, setOrbComplete } from "../../state/orbs";
 
 const orbContainerStyle = css`
   position: relative;
@@ -66,12 +72,14 @@ class Orb extends PureComponent {
     this.setState({ isActive: true, pressedStart: new Date(), timeoutId });
 
     // callbacks
-    const { id, onOrbTouch } = this.props;
-    onOrbTouch(id);
+    const { id, setOrbTouched } = this.props;
+    setOrbTouched(id, true);
   };
 
   handleOrbRelease = () => {
     this.setState({ isActive: false });
+    const { id, setOrbTouched } = this.props;
+    setOrbTouched(id, false);
   };
 
   checkComplete = () => {
@@ -80,18 +88,21 @@ class Orb extends PureComponent {
     if (isActive && pressedStart) {
       const pressedDuration = new Date() - pressedStart;
       if (pressedDuration >= durationRequired) {
-        const { id, onComplete } = this.props;
+        const { id, setOrbComplete, addPoints } = this.props;
         // before final logic is added assume all orbs are bad
         // eslint-disable-next-line react/no-unused-state
         this.setState({ isComplete: true, isCorrect: false });
-        onComplete(id);
+
+        setOrbComplete(id, true);
+
+        addPoints(1);
       }
     }
   };
 
   render() {
     const { isActive, isComplete } = this.state;
-    const { size } = this.props;
+    const { id, size, isTouched } = this.props;
 
     const sizeStyle = css`
       height: ${size}px;
@@ -131,11 +142,29 @@ class Orb extends PureComponent {
             ${sizeStyle};
           `}
           className={orbClass}
-        />
+        >
+          {/* debug */}
+          {/* <p>
+            {isTouched ? "touching" : "not touching"}-{id}
+          </p> */}
+        </div>
       </div>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
   }
 }
 
-export default Orb;
+const mapStateToProps = (state, ownProps) => ({
+  isTouched: getOrbTouched({ ...state, id: ownProps.id })
+});
+
+const mapDispatchToProps = dispatch => ({
+  addPoints: bindActionCreators(addPoints, dispatch),
+  setOrbTouched: bindActionCreators(setOrbTouched, dispatch),
+  setOrbComplete: bindActionCreators(setOrbComplete, dispatch)
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Orb);

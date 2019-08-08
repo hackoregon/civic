@@ -1,44 +1,44 @@
-/** @jsx jsx */
+import React, { memo, useEffect } from "react";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
-import { css, jsx } from "@emotion/core";
 
-import ChapterButtons from "../ChapterButtons";
+import { goToNextChapter } from "../../../state/chapters";
+import { getActiveTaskData } from "../../../state/tasks";
 import ChooseScreen from "./ChooseScreen";
 import SolveScreen from "./SolveScreen";
-import { getActiveTask, getActiveTaskData } from "../../../state/tasks";
 
-const screenLayout = css`
-  position: relative;
-  display: grid;
-  overflow: hidden;
-  width: 100vw;
-  height: 100vh;
-  min-height: 650px;
-  min-width: 800px;
-  grid-template-rows: 100px 1fr;
-  grid-template-columns: 1fr;
-  justify-content: center;
-  align-items: center;
-  background: beige;
-`;
+const TaskScreen = ({ activeTask, endChapter }) => {
+  // Prevent calling useEffect again with 2nd argument so timer isn't deleted
+  useEffect(() => {
+    const taskChapterTimer = setTimeout(
+      endChapter,
+      60 * 1000 /* end chapter after 1 minute */
+    );
 
-const TaskScreen = ({ activeTask }) => {
-  return (
-    <div css={screenLayout}>
-      <ChapterButtons />
-      {activeTask ? <SolveScreen /> : <ChooseScreen />}
-    </div>
-  );
+    return () => {
+      clearTimeout(taskChapterTimer);
+    };
+  }, []);
+
+  return activeTask ? <SolveScreen /> : <ChooseScreen />;
 };
 
 TaskScreen.propTypes = {
-  activeTask: PropTypes.shape({})
+  activeTask: PropTypes.shape({}),
+  endChapter: PropTypes.func
 };
 
 const mapStateToProps = state => ({
-  activeTaskId: getActiveTask(state),
   activeTask: getActiveTaskData(state)
 });
 
-export default connect(mapStateToProps)(TaskScreen);
+const mapDispatchToProps = dispatch => ({
+  endChapter() {
+    dispatch(goToNextChapter());
+  }
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(memo(TaskScreen));

@@ -1,7 +1,7 @@
 /* eslint-disable import/no-named-as-default */
 import React from "react";
 import { Link } from "react-router";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 import "@hackoregon/component-library/assets/global.styles.css";
 import { PageLayout, PullQuote } from "@hackoregon/component-library";

@@ -3,7 +3,7 @@ import { Component } from "react";
 import { connect } from "react-redux";
 import { css, jsx } from "@emotion/core";
 import { PropTypes } from "prop-types";
-import { addItem } from "../../state/kit";
+import { addItem } from "../../../state/kit";
 
 const ImagesContainer = css`
   position: relative;

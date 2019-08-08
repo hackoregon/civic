@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import Icon from "../Icon/Icon";
 
-const hashToGoToTop = "#";
+const hashToGoToTop = "#site-header";
 const styles = {
   display: "flex",
   flexDirection: "column",
@@ -11,7 +11,7 @@ const styles = {
 
 const ScrollToTop = ({ iconStyle = null }) => (
   <div>
-    <a style={styles} aria-label="scroll to top" href={hashToGoToTop}>
+    <a style={styles} href={hashToGoToTop}>
       {iconStyle && <Icon className={iconStyle} />}
       <span>Back to Top</span>
     </a>

@@ -8,6 +8,7 @@ import { getActiveChapter, setActiveChapter } from "../../state/chapters";
 const buttonContainer = css`
   display: inline-grid;
   grid-template-columns: 1fr 1fr;
+  width: 100%;
 
   > button {
     font-size: 80px;
