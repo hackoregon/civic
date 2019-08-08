@@ -2,6 +2,7 @@
 import { PureComponent } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { PropTypes } from "prop-types";
 
 import { jsx, css } from "@emotion/core";
 import RadialGauge from "./RadialGauge";
@@ -103,7 +104,7 @@ class Orb extends PureComponent {
     if (isActive && pressedStart) {
       const pressedDuration = new Date() - pressedStart;
       if (pressedDuration >= durationRequired) {
-        const { id, setOrbCompleteInState, addPointsToState } = this.props;
+        const { id, setOrbCompleteInState } = this.props;
         // before final logic is added assume all orbs are bad
         // eslint-disable-next-line react/no-unused-state
         this.setState({ isComplete: true, isCorrect: false });
@@ -159,16 +160,22 @@ class Orb extends PureComponent {
           className={orbClass}
         >
           <img src={model.imageSVG} alt={model.imgAlt} css={iconStyle} />
-          {/* debug */}
-          {/* <p>
-            {isTouched ? "touching" : "not touching"}-{id}
-          </p> */}
         </div>
       </div>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
   }
 }
+
+Orb.propTypes = {
+  id: PropTypes.number,
+  setOrbTouchedInState: PropTypes.func,
+  setOrbCompleteInState: PropTypes.func,
+  isTouched: PropTypes.bool,
+  onOrbSelection: PropTypes.func,
+  model: PropTypes.shape({}),
+  size: PropTypes.number
+};
 
 const mapStateToProps = (state, ownProps) => ({
   isTouched: getOrbTouched({ ...state, id: ownProps.id })
