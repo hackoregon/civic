@@ -1,9 +1,9 @@
 /** @jsx jsx */
-import { Component } from "react";
-// import { connect } from "react-redux";
+import { useEffect, useState } from "react";
+import { connect } from "react-redux";
 import { css, jsx } from "@emotion/core";
 import { PropTypes } from "prop-types";
-// import { addItem } from "../../../state/kit";
+import { getPlayerKit } from "../../../state/kit";
 
 const ImagesContainer = css`
   position: relative;
@@ -18,87 +18,70 @@ const KitItemStyle = css`
   position: absolute;
 `;
 
-class KitItem extends Component {
-  constructor(props) {
-    super(props);
+const KitItem = ({ emptySvg, fullSvg, playerKit, itemType }) => {
+  const [filledItem, setFilledItem] = useState(false);
 
-    const shouldBeFilled = this.shouldBeFilled();
-
-    this.state = {
-      filledItem: shouldBeFilled
-    };
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    const { filledItem } = prevState;
-    const shouldBeFilled = this.shouldBeFilled();
-
-    if (shouldBeFilled && !filledItem) {
-      // eslint-disable-next-line react/no-did-update-set-state
-      this.setState({ filledItem: true });
+  useEffect(() => {
+    if (playerKit[itemType] && !filledItem) {
+      setFilledItem(true);
     }
-  }
+  });
 
-  shouldBeFilled = () => {
-    console.log("should be filled?");
-    return false;
-  };
+  const EmptyKitItem = css`
+    background-image: url(${emptySvg});
+    background-size: cover;
+    opacity: 1;
+    transition: all 1s ease;
 
-  render() {
-    const { emptySvg, fullSvg } = this.props;
-    const { filledItem } = this.state;
-
-    const EmptyKitItem = css`
-      background-image: url(${emptySvg});
-      background-size: cover;
-      opacity: 1;
-      transition: all 1s ease;
-
-      &.filled-item {
-        opacity: 0;
-      }
-    `;
-
-    const ColorKitItem = css`
-      background-image: url(${fullSvg});
-      background-size: cover;
+    &.filled-item {
       opacity: 0;
-      transition: all 1s ease;
+    }
+  `;
 
-      &.filled-item {
-        opacity: 1;
-      }
-    `;
+  const ColorKitItem = css`
+    background-image: url(${fullSvg});
+    background-size: cover;
+    opacity: 0;
+    transition: all 1s ease;
 
-    /* eslint-disable jsx-a11y/click-events-have-key-events */
-    /* eslint-disable jsx-a11y/no-static-element-interactions */
-    return (
-      <div css={ImagesContainer}>
-        <div
-          css={css`
-            ${KitItemStyle};
-            ${EmptyKitItem}
-          `}
-          className={filledItem ? "filled-item" : ""}
-        />
-        <div
-          css={css`
-            ${KitItemStyle};
-            ${ColorKitItem}
-          `}
-          className={filledItem ? "filled-item" : ""}
-        />
-      </div>
-    );
-    /* eslint-enable jsx-a11y/click-events-have-key-events */
-    /* eslint-enable jsx-a11y/no-static-element-interactions */
-  }
-}
+    &.filled-item {
+      opacity: 1;
+    }
+  `;
+
+  /* eslint-disable jsx-a11y/click-events-have-key-events */
+  /* eslint-disable jsx-a11y/no-static-element-interactions */
+  return (
+    <div css={ImagesContainer}>
+      <div
+        css={css`
+          ${KitItemStyle};
+          ${EmptyKitItem}
+        `}
+        className={filledItem ? "filled-item" : ""}
+      />
+      <div
+        css={css`
+          ${KitItemStyle};
+          ${ColorKitItem}
+        `}
+        className={filledItem ? "filled-item" : ""}
+      />
+    </div>
+  );
+  /* eslint-enable jsx-a11y/click-events-have-key-events */
+  /* eslint-enable jsx-a11y/no-static-element-interactions */
+};
 
 KitItem.propTypes = {
   emptySvg: PropTypes.node,
   fullSvg: PropTypes.node,
+  playerKit: PropTypes.shape({}),
   itemType: PropTypes.string
 };
 
-export default KitItem;
+const mapStateToProps = state => ({
+  playerKit: getPlayerKit(state)
+});
+
+export default connect(mapStateToProps)(KitItem);

@@ -49,6 +49,11 @@ export const getItemCount = createSelector(
   items => size(items)
 );
 
+export const getPlayerKit = createSelector(
+  ["kit.playerKit"],
+  playerKit => playerKit
+);
+
 export const getKitCreationItems = createSelector(
   ["kit.items"],
   items => {
