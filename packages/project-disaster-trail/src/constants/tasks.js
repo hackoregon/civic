@@ -5,6 +5,12 @@ import {
   food,
   water
 } from "./items";
+// Images
+import fire from "../../assets/fire.svg";
+import hunger from "../../assets/hunger.svg";
+import injury from "../../assets/injury.png";
+import rubble from "../../assets/rubble.svg";
+import thirsty from "../../assets/thirsty.svg";
 
 // Save yourself ids
 export const PROTECTION = "protection";
@@ -26,9 +32,8 @@ export const tasks = {
     requiredItems: [protectiveGear],
     points: 3,
     text: "I'm afraid I'll fall over the rubble.",
-    imageSVG:
-      "https://www.flaticon.com/premium-icon/icons/svg/1296/1296211.svg",
-    imageAlt: "some armor"
+    imageSVG: rubble,
+    imageAlt: "a rocky road"
   },
   // Save Others
   [FIRE]: {
@@ -37,8 +42,8 @@ export const tasks = {
     requiredItems: [fireExtinguisher],
     points: 5,
     text: "Uh oh! This fire could spread!",
-    imageSVG: "https://image.flaticon.com/icons/svg/599/599694.svg",
-    imageAlt: "hungry person"
+    imageSVG: fire,
+    imageAlt: "stuff on fire"
   },
   [INJURY]: {
     id: INJURY,
@@ -46,9 +51,8 @@ export const tasks = {
     requiredItems: [firstAidKit],
     points: 7,
     text: "That person looks hurt.",
-    imageSVG:
-      "https://toppng.com/public/uploads/preview/hurt-knee-peter-griffin-familyguy-freetoedit-peter-griffin-holding-knee-11562866719sisngmcv6q.png",
-    imageAlt: "hungry person"
+    imageSVG: injury,
+    imageAlt: "an injured person"
   },
   [HUNGER]: {
     id: HUNGER,
@@ -56,9 +60,8 @@ export const tasks = {
     requiredItems: [food],
     points: 5,
     text: "So. Hungry.",
-    imageSVG:
-      "https://www.flaticon.com/premium-icon/icons/svg/1622/1622979.svg",
-    imageAlt: "hungry person"
+    imageSVG: hunger,
+    imageAlt: "a hungry person"
   },
   [THIRST]: {
     id: THIRST,
@@ -66,7 +69,8 @@ export const tasks = {
     requiredItems: [water],
     points: 5,
     text: "Oh no! I'm so thirsty. Whatever will I do?",
-    imageSVG: "https://image.flaticon.com/icons/svg/1917/1917702.svg"
+    imageSVG: thirsty,
+    imageAlt: "a sweaty person"
   }
 };
 
