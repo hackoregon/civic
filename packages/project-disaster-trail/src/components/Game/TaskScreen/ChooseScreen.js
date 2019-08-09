@@ -67,7 +67,7 @@ class ChooseScreen extends PureComponent {
         </div>
 
         <DurationBar step="Choose a task" durationLength={timeToVote / 1000} />
-        <OrbManager />
+        <OrbManager possibleItems={[]} />
       </Fragment>
     );
   }

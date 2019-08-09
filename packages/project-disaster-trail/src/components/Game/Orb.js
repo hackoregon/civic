@@ -2,11 +2,11 @@
 import { PureComponent } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { PropTypes } from "prop-types";
 
 import { jsx, css } from "@emotion/core";
 import RadialGauge from "./RadialGauge";
 
-import { addPoints } from "../../state/user";
 import { getOrbTouched, setOrbTouched, setOrbComplete } from "../../state/orbs";
 
 const orbContainerStyle = css`
@@ -20,6 +20,9 @@ const circleDefaultStyle = css`
   transition: background-color 1000ms linear;
   cursor: pointer;
   opacity: 0.8;
+  display: grid;
+  align-items: center;
+  justify-items: center;
 
   &:hover {
     opacity: 1;
@@ -34,6 +37,12 @@ const circleDefaultStyle = css`
     transition: filter 0.5s ease-in-out;
     filter: grayscale(100%);
   }
+`;
+
+const iconStyle = css`
+  position: relative;
+  width: 75%;
+  height: 75%;
 `;
 
 const defaultState = {
@@ -52,57 +61,64 @@ class Orb extends PureComponent {
   }
 
   componentWillUnmount() {
-    if (this.state.timeoutId) window.clearTimeout(this.state.timeoutId);
+    const { timeoutId } = this.state;
+    if (timeoutId) window.clearTimeout(timeoutId);
   }
 
   handleOrbPress = () => {
+    const { isActive, isComplete, timeoutId } = this.state;
     // if already pressed, do nothing
-    if (this.state.isActive || this.state.isComplete) return;
+    if (isActive || isComplete) return;
 
     // start a timer. In n seconds, we check to see if we are complete
     // complete means isActive is true
-    if (this.state.timeoutId) window.clearTimeout(this.state.timeoutId);
+    if (timeoutId) window.clearTimeout(timeoutId);
 
     const { durationRequired } = this.state;
     // set timer
-    const timeoutId = setTimeout(() => {
+    const newTimeoutId = setTimeout(() => {
       this.checkComplete();
     }, durationRequired);
 
-    this.setState({ isActive: true, pressedStart: new Date(), timeoutId });
+    this.setState({
+      isActive: true,
+      pressedStart: new Date(),
+      timeoutId: newTimeoutId
+    });
 
     // callbacks
-    const { id, setOrbTouched } = this.props;
-    setOrbTouched(id, true);
+    const { id, setOrbTouchedInState } = this.props;
+    setOrbTouchedInState(id, true);
   };
 
   handleOrbRelease = () => {
     this.setState({ isActive: false });
-    const { id, setOrbTouched } = this.props;
-    setOrbTouched(id, false);
+    const { id, setOrbTouchedInState } = this.props;
+    setOrbTouchedInState(id, false);
   };
 
   checkComplete = () => {
     const { pressedStart, durationRequired, isActive } = this.state;
+    const { onOrbSelection, model } = this.props;
 
     if (isActive && pressedStart) {
       const pressedDuration = new Date() - pressedStart;
       if (pressedDuration >= durationRequired) {
-        const { id, setOrbComplete, addPoints } = this.props;
+        const { id, setOrbCompleteInState } = this.props;
         // before final logic is added assume all orbs are bad
         // eslint-disable-next-line react/no-unused-state
         this.setState({ isComplete: true, isCorrect: false });
 
-        setOrbComplete(id, true);
-
-        addPoints(1);
+        setOrbCompleteInState(id, true);
+        onOrbSelection(model);
       }
     }
   };
 
   render() {
     const { isActive, isComplete } = this.state;
-    const { id, size, isTouched } = this.props;
+    // eslint-disable-next-line no-unused-vars
+    const { id, size, isTouched, model } = this.props;
 
     const sizeStyle = css`
       height: ${size}px;
@@ -143,10 +159,7 @@ class Orb extends PureComponent {
           `}
           className={orbClass}
         >
-          {/* debug */}
-          {/* <p>
-            {isTouched ? "touching" : "not touching"}-{id}
-          </p> */}
+          <img src={model.imageSVG} alt={model.imgAlt} css={iconStyle} />
         </div>
       </div>
     );
@@ -154,14 +167,23 @@ class Orb extends PureComponent {
   }
 }
 
+Orb.propTypes = {
+  id: PropTypes.number,
+  setOrbTouchedInState: PropTypes.func,
+  setOrbCompleteInState: PropTypes.func,
+  isTouched: PropTypes.bool,
+  onOrbSelection: PropTypes.func,
+  model: PropTypes.shape({}),
+  size: PropTypes.number
+};
+
 const mapStateToProps = (state, ownProps) => ({
   isTouched: getOrbTouched({ ...state, id: ownProps.id })
 });
 
 const mapDispatchToProps = dispatch => ({
-  addPoints: bindActionCreators(addPoints, dispatch),
-  setOrbTouched: bindActionCreators(setOrbTouched, dispatch),
-  setOrbComplete: bindActionCreators(setOrbComplete, dispatch)
+  setOrbTouchedInState: bindActionCreators(setOrbTouched, dispatch),
+  setOrbCompleteInState: bindActionCreators(setOrbComplete, dispatch)
 });
 
 export default connect(
