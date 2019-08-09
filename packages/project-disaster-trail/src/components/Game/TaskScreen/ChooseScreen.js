@@ -85,6 +85,7 @@ class ChooseScreen extends PureComponent {
         <OrbManager
           possibleItems={weightedTasks}
           onOrbSelection={this.onTaskSelection}
+          frozenOrbInterface
         />
       </Fragment>
     );
