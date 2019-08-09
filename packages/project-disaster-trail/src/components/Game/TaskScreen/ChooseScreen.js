@@ -4,7 +4,13 @@ import { PropTypes } from "prop-types";
 import { css, jsx } from "@emotion/core";
 import { connect } from "react-redux";
 
-import { getWeightedTasks, getActiveTaskData } from "../../../state/tasks";
+import {
+  getWeightedTasks,
+  getActiveTaskData,
+  addTask,
+  getActiveEnvironment,
+  getTasksForEnvironment
+} from "../../../state/tasks";
 import DurationBar from "../../atoms/DurationBar";
 import OrbManager from "../OrbManager";
 import TaskMap from "./TaskMap";
@@ -23,7 +29,8 @@ const screenLayout = css`
 const defaultState = {
   voteTimer: null,
   timeToVote: 20000,
-  chooseTask: false
+  chooseTask: false,
+  animateMap: false
 };
 
 class ChooseScreen extends PureComponent {
@@ -39,12 +46,14 @@ class ChooseScreen extends PureComponent {
     }, {});
 
     this.setState({
-      voteTimer: setTimeout(this.chooseRandomTask, timeToVote),
+      voteTimer: setTimeout(this.goToTask, timeToVote),
       taskVotes
     });
   }
 
   componentWillUnmount() {
+    const { exampleTimeToAnimate } = this.state;
+    clearTimeout(exampleTimeToAnimate);
     this.clearVoteTimeout();
   }
 
@@ -53,8 +62,20 @@ class ChooseScreen extends PureComponent {
     clearTimeout(voteTimer);
   };
 
+  getPossibleTasks = () => {
+    const { activeEnvironment, tasksForEnvironment } = this.props;
+    // All possible tasks for the game environment
+    const saveYourselfTasks =
+      tasksForEnvironment[activeEnvironment].saveYourself;
+    const saveOthersTasks = tasksForEnvironment[activeEnvironment].saveOthers;
+    return [].concat(saveYourselfTasks, saveOthersTasks);
+  };
+
   chooseRandomTask = () => {
-    this.setState({ chooseTask: true });
+    const possibleTasks = this.getPossibleTasks();
+    const randomIndex = Math.floor(Math.random() * possibleTasks.length);
+    const randomTask = possibleTasks[randomIndex];
+    return randomTask;
   };
 
   onTaskSelection = task => {
@@ -68,17 +89,59 @@ class ChooseScreen extends PureComponent {
     return true;
   };
 
+  // returns [ {vote count}, {task id} ]
+  tallyVotes = () => {
+    const { taskVotes } = this.state;
+    const taskIds = Object.keys(taskVotes);
+
+    return taskIds.reduce(
+      (accumulator, id) => {
+        const votesForTask = taskVotes[id];
+        const [mostVotesCount] = accumulator;
+        if (votesForTask > mostVotesCount) {
+          // eslint-disable-next-line no-param-reassign
+          accumulator = [votesForTask, id];
+        }
+        return accumulator;
+      },
+      [0, null]
+    );
+  };
+
+  goToTask = () => {
+    const { addNextTask } = this.props;
+    const voteResults = this.tallyVotes();
+
+    this.clearVoteTimeout();
+
+    // eslint-disable-next-line prefer-const
+    let [mostVotesCount, mostVotesId] = voteResults;
+    if (mostVotesCount < 1) {
+      mostVotesId = this.chooseRandomTask();
+    }
+
+    // trigger pan and zoom...
+    this.setState({
+      animateMap: true
+    });
+
+    // As an example of the time to pan and zoom, use a timeout
+    const exampleTimeToAnimate = setTimeout(() => {
+      addNextTask(mostVotesId);
+    }, 2000);
+    this.setState({
+      exampleTimeToAnimate
+    });
+  };
+
   render() {
-    const { timeToVote, chooseTask } = this.state;
+    const { timeToVote, animateMap } = this.state;
     const { weightedTasks } = this.props;
 
     return (
       <Fragment>
         <div css={screenLayout}>
-          <TaskMap
-            chooseTask={chooseTask}
-            clearVoteTimeout={this.clearVoteTimeout}
-          />
+          <TaskMap animateMap={animateMap} />
         </div>
 
         <DurationBar step="Choose a task" durationLength={timeToVote / 1000} />
@@ -94,12 +157,26 @@ class ChooseScreen extends PureComponent {
 
 ChooseScreen.propTypes = {
   activeTask: PropTypes.shape({}),
-  weightedTasks: PropTypes.arrayOf(PropTypes.shape({}))
+  weightedTasks: PropTypes.arrayOf(PropTypes.shape({})),
+  addNextTask: PropTypes.func,
+  activeEnvironment: PropTypes.string,
+  tasksForEnvironment: PropTypes.shape({})
 };
 
 const mapStateToProps = state => ({
   weightedTasks: getWeightedTasks(state),
-  activeTask: getActiveTaskData(state)
+  activeTask: getActiveTaskData(state),
+  activeEnvironment: getActiveEnvironment(state),
+  tasksForEnvironment: getTasksForEnvironment(state)
 });
 
-export default connect(mapStateToProps)(ChooseScreen);
+const mapDispatchToProps = dispatch => ({
+  addNextTask(taskChoice, taskId) {
+    dispatch(addTask(taskChoice, taskId));
+  }
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ChooseScreen);
