@@ -26,8 +26,6 @@ export const FOOD = {
   emptySvg: CornEmpty,
   fullSvg: CornColor,
   imgAlt: "food kit item",
-  quantity: 0,
-  kitsFilledByItem: 0,
   goodKitItem: true,
   pointsForPuttingInKit: 1
 };
@@ -36,8 +34,6 @@ export const WATER = {
   emptySvg: WaterEmpty,
   fullSvg: WaterColor,
   imgAlt: "water kit item",
-  quantity: 0,
-  kitsFilledByItem: 0,
   goodKitItem: true,
   pointsForPuttingInKit: 1
 };
@@ -46,8 +42,6 @@ export const FIRE_EXTINGUISHER = {
   emptySvg: FireExtinguisherEmpty,
   fullSvg: FireExtinguisherColor,
   imgAlt: "fire extinguisher kit item",
-  quantity: 0,
-  kitsFilledByItem: 0,
   goodKitItem: true,
   pointsForPuttingInKit: 1
 };
@@ -56,8 +50,6 @@ export const FIRST_AID_KIT = {
   emptySvg: FirstAidEmpty,
   fullSvg: FirstAidColor,
   imgAlt: "first aid kit kit item",
-  quantity: 0,
-  kitsFilledByItem: 0,
   goodKitItem: true,
   pointsForPuttingInKit: 1
 };
@@ -66,8 +58,6 @@ export const FLASHLIGHT = {
   emptySvg: FlashlightEmpty,
   fullSvg: FlashlightColor,
   imgAlt: "flashlight kit item",
-  quantity: 0,
-  kitsFilledByItem: 0,
   goodKitItem: true,
   pointsForPuttingInKit: 1
 };
@@ -76,8 +66,6 @@ export const WALKIE_TALKIE = {
   emptySvg: WalkieTalkieEmpty,
   fullSvg: WalkieTalkieColor,
   imgAlt: "walkie talkie kit item",
-  quantity: 0,
-  kitsFilledByItem: 0,
   goodKitItem: true,
   pointsForPuttingInKit: 1
 };
@@ -88,20 +76,8 @@ export const PROTECTIVE_GEAR = {
   emptySvg: "https://image.flaticon.com/icons/svg/1705/1705460.svg",
   fullSvg: "https://image.flaticon.com/icons/svg/1705/1705463.svg",
   imgAlt: "protective gear kit item",
-  quantity: 0,
-  kitsFilledByItem: 0,
   goodKitItem: true,
   pointsForPuttingInKit: 1
-};
-
-export const MINIMUM_KIT = {
-  FOOD: { ...FOOD, quantity: 1 },
-  WATER: { ...WATER, quantity: 1 },
-  FIRE_EXTINGUISHER: { ...FIRE_EXTINGUISHER, quantity: 1 },
-  FIRST_AID_KIT: { ...FIRST_AID_KIT, quantity: 1 },
-  FLASHLIGHT: { ...FLASHLIGHT, quantity: 1 },
-  WALKIE_TALKIE: { ...WALKIE_TALKIE, quantity: 1 },
-  PROTECTIVE_GEAR: { ...PROTECTIVE_GEAR, quantity: 1 }
 };
 
 export default {
