@@ -107,7 +107,7 @@ export const getHasSavedSelf = createSelector(
   }
 );
 
-export const getPossibleTasks = createSelector(
+export const getWeightedTasks = createSelector(
   ["tasks.tasks", "tasks.tasksForEnvironment", "tasks.activeEnvironment"],
   (allTasks, tasksForEnv, activeEnvironment) => {
     const environmentTasks = tasksForEnv[activeEnvironment];

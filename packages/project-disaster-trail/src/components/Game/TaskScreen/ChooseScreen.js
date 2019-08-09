@@ -4,7 +4,7 @@ import { PropTypes } from "prop-types";
 import { css, jsx } from "@emotion/core";
 import { connect } from "react-redux";
 
-import { getPossibleTasks, getActiveTaskData } from "../../../state/tasks";
+import { getWeightedTasks, getActiveTaskData } from "../../../state/tasks";
 import DurationBar from "../../atoms/DurationBar";
 import OrbManager from "../OrbManager";
 import TaskMap from "./TaskMap";
@@ -30,15 +30,18 @@ class ChooseScreen extends PureComponent {
   state = defaultState;
 
   componentDidMount() {
-    const { activeTask } = this.props;
     const { timeToVote } = this.state;
+    const { weightedTasks } = this.props;
+    const taskVotes = weightedTasks.reduce((result, taskData) => {
+      // eslint-disable-next-line no-param-reassign
+      result[taskData.type] = 0;
+      return result;
+    }, {});
 
-    if (!activeTask) {
-      // multiple first saveyourself issue root
-      this.setState({
-        voteTimer: setTimeout(this.chooseRandomTask, timeToVote)
-      });
-    }
+    this.setState({
+      voteTimer: setTimeout(this.chooseRandomTask, timeToVote),
+      taskVotes
+    });
   }
 
   componentWillUnmount() {
@@ -54,9 +57,20 @@ class ChooseScreen extends PureComponent {
     this.setState({ chooseTask: true });
   };
 
+  onTaskSelection = task => {
+    const { taskVotes } = this.state;
+    taskVotes[task.type] += 1;
+
+    this.setState({
+      taskVotes
+    });
+    // Return true so Orb knows how to animate
+    return true;
+  };
+
   render() {
     const { timeToVote, chooseTask } = this.state;
-    const { possibleTasks } = this.props;
+    const { weightedTasks } = this.props;
 
     return (
       <Fragment>
@@ -68,7 +82,10 @@ class ChooseScreen extends PureComponent {
         </div>
 
         <DurationBar step="Choose a task" durationLength={timeToVote / 1000} />
-        <OrbManager possibleItems={possibleTasks} />
+        <OrbManager
+          possibleItems={weightedTasks}
+          onOrbSelection={this.onTaskSelection}
+        />
       </Fragment>
     );
   }
@@ -76,11 +93,11 @@ class ChooseScreen extends PureComponent {
 
 ChooseScreen.propTypes = {
   activeTask: PropTypes.shape({}),
-  possibleTasks: PropTypes.arrayOf(PropTypes.shape({}))
+  weightedTasks: PropTypes.arrayOf(PropTypes.shape({}))
 };
 
 const mapStateToProps = state => ({
-  possibleTasks: getPossibleTasks(state),
+  weightedTasks: getWeightedTasks(state),
   activeTask: getActiveTaskData(state)
 });
 
