@@ -25,7 +25,10 @@ export const tasks = {
     time: 15 * 1000,
     requiredItems: [protectiveGear],
     points: 3,
-    text: "I'm afraid I'll fall over the rubble."
+    text: "I'm afraid I'll fall over the rubble.",
+    imageSVG:
+      "https://www.flaticon.com/premium-icon/icons/svg/1296/1296211.svg",
+    imageAlt: "some armor"
   },
   // Save Others
   [FIRE]: {
@@ -33,28 +36,37 @@ export const tasks = {
     time: 20 * 1000, // seconds * milliseconds
     requiredItems: [fireExtinguisher],
     points: 5,
-    text: "Uh oh! This fire could spread!"
+    text: "Uh oh! This fire could spread!",
+    imageSVG: "https://image.flaticon.com/icons/svg/599/599694.svg",
+    imageAlt: "hungry person"
   },
   [INJURY]: {
     id: INJURY,
     time: 20 * 1000, // seconds * milliseconds
     requiredItems: [firstAidKit],
     points: 7,
-    text: "That person looks hurt."
+    text: "That person looks hurt.",
+    imageSVG:
+      "https://toppng.com/public/uploads/preview/hurt-knee-peter-griffin-familyguy-freetoedit-peter-griffin-holding-knee-11562866719sisngmcv6q.png",
+    imageAlt: "hungry person"
   },
   [HUNGER]: {
     id: HUNGER,
     time: 20 * 1000, // seconds * milliseconds
     requiredItems: [food],
     points: 5,
-    text: "So. Hungry."
+    text: "So. Hungry.",
+    imageSVG:
+      "https://www.flaticon.com/premium-icon/icons/svg/1622/1622979.svg",
+    imageAlt: "hungry person"
   },
   [THIRST]: {
     id: THIRST,
     time: 20 * 1000, // seconds * milliseconds
     requiredItems: [water],
     points: 5,
-    text: "Oh no! I'm so thirsty. Whatever will I do?"
+    text: "Oh no! I'm so thirsty. Whatever will I do?",
+    imageSVG: "https://image.flaticon.com/icons/svg/1917/1917702.svg"
   }
 };
 
