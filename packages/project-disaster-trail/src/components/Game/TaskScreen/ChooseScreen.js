@@ -4,7 +4,7 @@ import { PropTypes } from "prop-types";
 import { css, jsx } from "@emotion/core";
 import { connect } from "react-redux";
 
-import { getActiveTaskData } from "../../../state/tasks";
+import { getPossibleTasks, getActiveTaskData } from "../../../state/tasks";
 import DurationBar from "../../atoms/DurationBar";
 import OrbManager from "../OrbManager";
 import TaskMap from "./TaskMap";
@@ -56,6 +56,7 @@ class ChooseScreen extends PureComponent {
 
   render() {
     const { timeToVote, chooseTask } = this.state;
+    const { possibleTasks } = this.props;
 
     return (
       <Fragment>
@@ -67,17 +68,19 @@ class ChooseScreen extends PureComponent {
         </div>
 
         <DurationBar step="Choose a task" durationLength={timeToVote / 1000} />
-        <OrbManager possibleItems={[]} />
+        <OrbManager possibleItems={possibleTasks} />
       </Fragment>
     );
   }
 }
 
 ChooseScreen.propTypes = {
-  activeTask: PropTypes.shape({})
+  activeTask: PropTypes.shape({}),
+  possibleTasks: PropTypes.arrayOf(PropTypes.shape({}))
 };
 
 const mapStateToProps = state => ({
+  possibleTasks: getPossibleTasks(state),
   activeTask: getActiveTaskData(state)
 });
 
