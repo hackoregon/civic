@@ -80,16 +80,6 @@ export const PROTECTIVE_GEAR = {
   pointsForPuttingInKit: 1
 };
 
-export const MINIMUM_KIT = {
-  FOOD,
-  WATER,
-  FIRE_EXTINGUISHER,
-  FIRST_AID_KIT,
-  FLASHLIGHT,
-  WALKIE_TALKIE,
-  PROTECTIVE_GEAR
-};
-
 export default {
   FOOD,
   WATER,
