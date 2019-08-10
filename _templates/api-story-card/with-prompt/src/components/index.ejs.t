@@ -48,7 +48,7 @@ export default connect(
     data: {
       // FIXME: mockRidershipOverTime should be a variable
       mockRidershipOverTime: api.selectors.getMockRidershipData(
-        state.<%=storyCardName%>2019 || state
+        state.<%=package%> || state
       )
     }
     // state.packageName || state needed to make work in the project package and 2018 package
