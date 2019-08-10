@@ -43,7 +43,7 @@ export default connect(
   state => ({
     data: {
       ridershipOverTime: api.selectors.getMockRidershipData(
-        state.template2019 || state
+        state.package2019Template || state
       )
     }
     // state.packageName || state needed to make work in the project package and 2018 package

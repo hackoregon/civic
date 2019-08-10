@@ -100,9 +100,9 @@ const configureStore = (initialState, history) => {
       farmersMarkets: FarmersMarketsReducers(),
       sandbox: SandboxReducers(),
       // Temporarily Hidden 2019 Pages ⬇️
-      housing2019: Housing2019Reducers(),
-      template2019: Template2019Reducers(),
-      transportation2019: Transportation2019Reducers()
+      package2019Housing: Housing2019Reducers(),
+      package2019Template: Template2019Reducers(),
+      package2019Transportation: Transportation2019Reducers()
     }),
     initialState,
     composeWithDevTools(applyMiddleware(...middlewares))
@@ -137,9 +137,9 @@ const configureStore = (initialState, history) => {
           farmersMarkets: require("@hackoregon/2018-example-farmers-markets").Reducers(),
           sandbox: require("@hackoregon/civic-sandbox").Reducers(),
           // Temporarily Hidden 2019 Pages ⬇️
-          housing2019: require("@hackoregon/2019-housing").Reducers(),
-          template2019: require("@hackoregon/2019-template").Reducers(),
-          transportation2019: require("@hackoregon/2019-transportation").Reducers()
+          package2019Housing: require("@hackoregon/2019-housing").Reducers(),
+          package2019Template: require("@hackoregon/2019-template").Reducers(),
+          package2019Transportation: require("@hackoregon/2019-transportation").Reducers()
         });
         store.replaceReducer(nextRootReducer);
       }
