@@ -82,6 +82,15 @@ class SolveScreen extends PureComponent {
       background: beige;
     `;
 
+    const taskImage = css`
+      background-image: url(${activeTask.imageSVG});
+      background-repeat: no-repeat;
+      background-size: cover;
+      margin: 15px;
+      height: 150px;
+      width: 150px;
+    `;
+
     const taskDuration = activeTask.time;
 
     return (
@@ -93,6 +102,7 @@ class SolveScreen extends PureComponent {
               Correct items chosen: {correctItemsChosen} of{" "}
               {activeTask.numberItemsToSolve}
             </h3>
+            <div css={taskImage} />
             <button
               type="button"
               onClick={() => {
@@ -119,7 +129,8 @@ class SolveScreen extends PureComponent {
 SolveScreen.propTypes = {
   completeActiveTask: PropTypes.func,
   activeTask: PropTypes.shape({
-    id: PropTypes.string
+    id: PropTypes.string,
+    imageSVG: PropTypes.string
   }),
   playerKitItems: PropTypes.arrayOf(PropTypes.shape({}))
 };
