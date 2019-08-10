@@ -49,13 +49,16 @@ const OrbManager = ({
   touchedOrbs,
   completedOrbs,
   possibleItems,
-  onOrbSelection
+  onOrbSelection,
+  frozenOrbInterface
 } = {}) => {
   const [hasInitialized, setHasInitialized] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
 
-  // eslint-disable-next-line no-use-before-define
-  useAnimationFrame(() => animate());
+  if (!frozenOrbInterface) {
+    // eslint-disable-next-line no-use-before-define
+    useAnimationFrame(() => animate());
+  }
 
   // store references to all models
   const prevModels = usePrevious(orbs);
@@ -104,7 +107,13 @@ const OrbManager = ({
 
   // Sets off initial animation and only attempts re-execution when orbs has changed
   useEffect(() => {
-    if (prevModels && !prevModels.length && orbs.length && !isAnimating) {
+    if (
+      !frozenOrbInterface &&
+      prevModels &&
+      !prevModels.length &&
+      orbs.length &&
+      !isAnimating
+    ) {
       setIsAnimating(true);
     }
   }, [orbs]);
