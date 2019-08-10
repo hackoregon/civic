@@ -17,6 +17,6 @@ describe("rootState", () => {
         not: "for you"
       }
     };
-    expect(rootState(state)).to.eql(state.disaster);
+    expect(rootState(state)).to.eql(state.packageDisasterResilience);
   });
 });

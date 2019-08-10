@@ -17,6 +17,6 @@ describe("rootState", () => {
         not: "for you"
       }
     };
-    expect(rootState(state)).to.eql(state.transportation);
+    expect(rootState(state)).to.eql(state.package2018TransportationSystems);
   });
 });

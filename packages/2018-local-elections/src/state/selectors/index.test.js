@@ -17,6 +17,6 @@ describe("rootState", () => {
         not: "for you"
       }
     };
-    expect(rootState(state)).to.eql(state.elections);
+    expect(rootState(state)).to.eql(state.package2018LocalElections);
   });
 });

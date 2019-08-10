@@ -17,6 +17,6 @@ describe("rootState", () => {
         not: "for you"
       }
     };
-    expect(rootState(state)).to.eql(state.housing);
+    expect(rootState(state)).to.eql(state.package2018HousingAffordability);
   });
 });
