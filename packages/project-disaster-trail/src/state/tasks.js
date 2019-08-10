@@ -1,5 +1,6 @@
 import { createReducer, createSelector } from "redux-starter-kit";
 import { shuffle } from "lodash";
+import size from "lodash/size";
 
 import { tasks, tasksForEnvironment, URBAN } from "../constants/tasks";
 
@@ -103,5 +104,37 @@ export const getHasSavedSelf = createSelector(
   ["tasks.taskOrder", "tasks.activeTask"],
   (taskOrder, activeTask) => {
     return activeTask >= taskOrder.length;
+  }
+);
+
+export const getWeightedTasks = createSelector(
+  ["tasks.tasks", "tasks.tasksForEnvironment", "tasks.activeEnvironment"],
+  (allTasks, tasksForEnv, activeEnvironment) => {
+    const environmentTasks = tasksForEnv[activeEnvironment];
+    const environmentTasksArray = [].concat(
+      environmentTasks.saveYourself,
+      environmentTasks.saveOthers
+    );
+    const genericWeighting = 1 / size(allTasks);
+
+    const possibleTasks = Object.keys(allTasks).reduce((result, taskKey) => {
+      const taskData = allTasks[taskKey];
+      const modifiedTaskWeight = environmentTasksArray.includes(taskData.id)
+        ? genericWeighting * 2
+        : genericWeighting;
+
+      const genericItem = {
+        type: taskData.id,
+        imageSVG: taskData.imageSVG,
+        imgAlt: taskData.imgAlt,
+        weighting: modifiedTaskWeight,
+        points: taskData.points
+      };
+      result.push(genericItem);
+
+      return result;
+    }, []);
+
+    return possibleTasks;
   }
 );
