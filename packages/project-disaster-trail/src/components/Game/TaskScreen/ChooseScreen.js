@@ -17,7 +17,6 @@ import TaskMap from "./TaskMap";
 
 const screenLayout = css`
   position: relative;
-  display: grid;
   overflow: hidden;
   width: 100%;
   height: 100%;
