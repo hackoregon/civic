@@ -8,7 +8,9 @@
     "url": "git+https://github.com/hackoregon/civic.git"
   },
   "scripts": {
-    "lint": "eslint index.js"
+    "lint": "eslint index.js",
+    "test": "echo 'No tests!'",
+    "test:watch": "echo 'No tests!'"    
   },
   "private": false,
   "keywords": [

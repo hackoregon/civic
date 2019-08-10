@@ -39,7 +39,7 @@
     "lint": "lerna run lint --no-bail",
     "lint:fix": "lerna run lint --no-bail -- --fix",
     "storybook": "BABEL_ENV=esm start-storybook -p 6006",
-    "test": "lerna run test --no-bail",
+    "test": "lerna exec yarn test --no-bail",
     "travis": "make travis",
     "pretty": "prettier --write \"./**/*.{js,jsx,css,md}\"",
     "eslint-check": "eslint --print-config . | eslint-config-prettier-check"
