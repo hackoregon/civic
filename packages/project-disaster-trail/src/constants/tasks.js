@@ -29,7 +29,8 @@ export const tasks = {
   [PROTECTION]: {
     id: PROTECTION,
     time: 15 * 1000,
-    requiredItems: [protectiveGear],
+    requiredItem: protectiveGear,
+    numberItemsToSolve: 5,
     points: 3,
     text: "I'm afraid I'll fall over the rubble.",
     imageSVG: rubble,
@@ -39,7 +40,8 @@ export const tasks = {
   [FIRE]: {
     id: FIRE,
     time: 20 * 1000, // seconds * milliseconds
-    requiredItems: [fireExtinguisher],
+    requiredItem: fireExtinguisher,
+    numberItemsToSolve: 5,
     points: 5,
     text: "Uh oh! This fire could spread!",
     imageSVG: fire,
@@ -48,7 +50,8 @@ export const tasks = {
   [INJURY]: {
     id: INJURY,
     time: 20 * 1000, // seconds * milliseconds
-    requiredItems: [firstAidKit],
+    requiredItem: firstAidKit,
+    numberItemsToSolve: 5,
     points: 7,
     text: "That person looks hurt.",
     imageSVG: injury,
@@ -57,7 +60,8 @@ export const tasks = {
   [HUNGER]: {
     id: HUNGER,
     time: 20 * 1000, // seconds * milliseconds
-    requiredItems: [food],
+    requiredItem: food,
+    numberItemsToSolve: 5,
     points: 5,
     text: "So. Hungry.",
     imageSVG: hunger,
@@ -66,7 +70,8 @@ export const tasks = {
   [THIRST]: {
     id: THIRST,
     time: 20 * 1000, // seconds * milliseconds
-    requiredItems: [water],
+    requiredItem: water,
+    numberItemsToSolve: 5,
     points: 5,
     text: "Oh no! I'm so thirsty. Whatever will I do?",
     imageSVG: thirsty,

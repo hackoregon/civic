@@ -78,3 +78,30 @@ export const getKitCreationItems = createSelector(
     return kitCreationItems;
   }
 );
+
+export const getPlayerKitItems = createSelector(
+  ["kit.playerKit", "kit.items"],
+  (playerKit, allItems) => {
+    const genericWeighting = 1 / size(playerKit);
+
+    const playerKitItems = Object.keys(playerKit).reduce((result, itemKey) => {
+      const itemData = allItems[itemKey];
+
+      const genericItem = {
+        type: itemData.id,
+        imageSVG: itemData.fullSvg,
+        imgAlt: itemData.imgAlt,
+        // default false adjust in component
+        good: false,
+        weighting: genericWeighting,
+        // default 0 adjust in component
+        points: 0
+      };
+      result.push(genericItem);
+
+      return result;
+    }, []);
+
+    return playerKitItems;
+  }
+);

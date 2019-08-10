@@ -109,10 +109,10 @@ class ChooseScreen extends PureComponent {
   };
 
   goToTask = () => {
+    this.clearVoteTimeout();
+
     const { addNextTask } = this.props;
     const voteResults = this.tallyVotes();
-
-    this.clearVoteTimeout();
 
     // eslint-disable-next-line prefer-const
     let [mostVotesCount, mostVotesId] = voteResults;
@@ -120,16 +120,14 @@ class ChooseScreen extends PureComponent {
       mostVotesId = this.chooseRandomTask();
     }
 
-    // trigger pan and zoom...
-    this.setState({
-      animateMap: true
-    });
-
     // As an example of the time to pan and zoom, use a timeout
     const exampleTimeToAnimate = setTimeout(() => {
       addNextTask(mostVotesId);
     }, 2000);
+
     this.setState({
+      // trigger pan and zoom...
+      animateMap: true,
       exampleTimeToAnimate
     });
   };

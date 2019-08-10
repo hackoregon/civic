@@ -5,12 +5,14 @@ import { PropTypes } from "prop-types";
 import { css, jsx } from "@emotion/core";
 
 import { completeTask, getActiveTaskData } from "../../../state/tasks";
+import { getPlayerKitItems } from "../../../state/kit";
 import DurationBar from "../../atoms/DurationBar";
 import TextContainer from "../../atoms/Containers/TextContainer";
 import OrbManager from "../OrbManager";
 
 const defaultState = {
-  taskTimer: null
+  taskTimer: null,
+  correctItemsChosen: 0
 };
 
 class SolveScreen extends PureComponent {
@@ -22,10 +24,15 @@ class SolveScreen extends PureComponent {
 
   componentDidUpdate(prevProps) {
     const { activeTask } = this.props;
+    const { correctItemsChosen } = this.state;
 
     if (activeTask.id !== prevProps.activeTask.id) {
       this.clearTaskTimeout();
       this.createTaskTimeout();
+    }
+
+    if (correctItemsChosen >= activeTask.numberItemsToSolve) {
+      this.finishTask();
     }
   }
 
@@ -51,8 +58,20 @@ class SolveScreen extends PureComponent {
     completeActiveTask(activeTask.id);
   };
 
+  onItemSelection = item => {
+    const { activeTask } = this.props;
+
+    if (item.type === activeTask.requiredItem) {
+      this.setState(state => ({
+        correctItemsChosen: state.correctItemsChosen + 1
+      }));
+    }
+  };
+
   render() {
-    const { completeActiveTask, activeTask } = this.props;
+    const { completeActiveTask, activeTask, playerKitItems } = this.props;
+    const { correctItemsChosen } = this.state;
+
     const screenLayout = css`
       position: relative;
       display: grid;
@@ -70,13 +89,17 @@ class SolveScreen extends PureComponent {
         <div css={screenLayout}>
           <TextContainer>
             <h2>{activeTask.text}</h2>
+            <h3>
+              Correct items chosen: {correctItemsChosen} of{" "}
+              {activeTask.numberItemsToSolve}
+            </h3>
             <button
               type="button"
               onClick={() => {
                 completeActiveTask(activeTask.id);
               }}
             >
-              Use {activeTask.requiredItems[0]}
+              Use {activeTask.requiredItem}
             </button>
           </TextContainer>
         </div>
@@ -84,7 +107,10 @@ class SolveScreen extends PureComponent {
           step="Choose a task"
           durationLength={taskDuration / 1000}
         />
-        <OrbManager possibleItems={[]} />
+        <OrbManager
+          possibleItems={playerKitItems}
+          onOrbSelection={this.onItemSelection}
+        />
       </Fragment>
     );
   }
@@ -94,11 +120,13 @@ SolveScreen.propTypes = {
   completeActiveTask: PropTypes.func,
   activeTask: PropTypes.shape({
     id: PropTypes.string
-  })
+  }),
+  playerKitItems: PropTypes.arrayOf(PropTypes.shape({}))
 };
 
 const mapStateToProps = state => ({
-  activeTask: getActiveTaskData(state)
+  activeTask: getActiveTaskData(state),
+  playerKitItems: getPlayerKitItems(state)
 });
 
 const mapDispatchToProps = dispatch => ({
