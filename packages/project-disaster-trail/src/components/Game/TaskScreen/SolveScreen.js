@@ -1,14 +1,17 @@
 /** @jsx jsx */
 import { PureComponent, Fragment } from "react";
+import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
 import { css, jsx } from "@emotion/core";
 
 import { completeTask, getActiveTaskData } from "../../../state/tasks";
-import { getPlayerKitItems } from "../../../state/kit";
+import { addItemToPlayerKit, getKitCreationItems } from "../../../state/kit";
 import DurationBar from "../../atoms/DurationBar";
 import TextContainer from "../../atoms/Containers/TextContainer";
 import OrbManager from "../OrbManager";
+import { GUIStyle } from "../index";
+import { addPoints } from "../../../state/user";
 
 const defaultState = {
   taskTimer: null,
@@ -68,8 +71,17 @@ class SolveScreen extends PureComponent {
     }
   };
 
+  onKitItemSelection = kitItem => {
+    const { addItemToPlayerKitInState, addPointsToState } = this.props;
+    if (kitItem.good) {
+      addItemToPlayerKitInState(kitItem.type);
+      addPointsToState(kitItem.points);
+    }
+    return kitItem.good;
+  };
+
   render() {
-    const { completeActiveTask, activeTask, playerKitItems } = this.props;
+    const { completeActiveTask, activeTask, possibleItems } = this.props;
     const { correctItemsChosen } = this.state;
 
     const screenLayout = css`
@@ -117,10 +129,12 @@ class SolveScreen extends PureComponent {
           step="Choose a task"
           durationLength={taskDuration / 1000}
         />
-        <OrbManager
-          possibleItems={playerKitItems}
-          onOrbSelection={this.onItemSelection}
-        />
+        <GUIStyle>
+          <OrbManager
+            possibleItems={possibleItems}
+            onOrbSelection={this.onKitItemSelection}
+          />
+        </GUIStyle>
       </Fragment>
     );
   }
@@ -132,18 +146,29 @@ SolveScreen.propTypes = {
     id: PropTypes.string,
     imageSVG: PropTypes.string
   }),
-  playerKitItems: PropTypes.arrayOf(PropTypes.shape({}))
+  possibleItems: PropTypes.arrayOf(
+    PropTypes.shape({
+      imageSVG: PropTypes.string,
+      good: PropTypes.bool,
+      onSelection: PropTypes.func,
+      weighting: PropTypes.number
+    })
+  ),
+  addItemToPlayerKitInState: PropTypes.func,
+  addPointsToState: PropTypes.func
 };
 
 const mapStateToProps = state => ({
   activeTask: getActiveTaskData(state),
-  playerKitItems: getPlayerKitItems(state)
+  possibleItems: getKitCreationItems(state)
 });
 
 const mapDispatchToProps = dispatch => ({
   completeActiveTask(taskChoice, taskId) {
     dispatch(completeTask(taskChoice, taskId));
-  }
+  },
+  addItemToPlayerKitInState: bindActionCreators(addItemToPlayerKit, dispatch),
+  addPointsToState: bindActionCreators(addPoints, dispatch)
 });
 
 export default connect(
