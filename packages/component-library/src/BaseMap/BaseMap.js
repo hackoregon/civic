@@ -1,6 +1,11 @@
 /* eslint-disable no-nested-ternary */
 import React, { Component } from "react";
-import MapGL, { StaticMap, NavigationControl, Marker } from "react-map-gl";
+import MapGL, {
+  StaticMap,
+  NavigationControl,
+  Marker,
+  FlyToInterpolator
+} from "react-map-gl";
 import Dimensions from "react-dimensions";
 import { css } from "emotion";
 import PropTypes from "prop-types";
@@ -142,7 +147,8 @@ class BaseMap extends Component {
       mapboxLayerType,
       mapboxLayerOptions,
       mapboxLayerId,
-      locationMarkerCoord
+      locationMarkerCoord,
+      animate
     } = this.props;
 
     viewport.width = containerWidth || 500;
@@ -184,12 +190,19 @@ class BaseMap extends Component {
         : CIVIC_LIGHT;
 
     const MapComponent = isInteractive ? MapGL : StaticMap;
+    const animationProps = !animate
+      ? {}
+      : {
+          transitionDuration: 1000,
+          transitionInterpolator: new FlyToInterpolator()
+        };
 
     return (
       <div className={mapWrapper}>
         <MapComponent
           className="MapGL"
           {...viewport}
+          {...animationProps}
           mapStyle={baseMapboxStyleURL}
           mapboxApiAccessToken={mapboxToken}
           onViewportChange={newViewport => this.onViewportChange(newViewport)}
@@ -263,6 +276,7 @@ BaseMap.propTypes = {
   children: PropTypes.node,
   useContainerHeight: PropTypes.bool,
   updateViewport: PropTypes.bool,
+  animate: PropTypes.bool,
   onBaseMapClick: PropTypes.func,
   mapboxDataId: PropTypes.string,
   mapboxData: PropTypes.shape({
@@ -280,6 +294,7 @@ BaseMap.defaultProps = {
   geocoder: false,
   useContainerHeight: false,
   updateViewport: true,
+  animate: false,
   initialLongitude: -122.6765,
   initialLatitude: 45.5231,
   initialZoom: 9.5,

@@ -6,7 +6,8 @@ import {
   select,
   number,
   boolean,
-  object
+  object,
+  button
 } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 import { css } from "emotion";
@@ -36,6 +37,11 @@ const PITCH_OPTIONS = {
   min: 0,
   max: 60,
   step: 1
+};
+
+const animatedMapProps = {
+  lon: -122.65,
+  lat: 45.5
 };
 
 export default () =>
@@ -131,6 +137,36 @@ export default () =>
           civicMapStyle={civicMapStyle}
           isInteractive={false}
           navigation={false}
+        />
+      );
+    })
+    .add("Animate to Coordinates", () => {
+      const civicMapStyle = select(
+        "CIVIC Map Styles:",
+        MAP_STYLE_OPTIONS,
+        MAP_STYLE_OPTIONS["Hack Oregon Light"],
+        GROUP_IDS.DESIGN
+      );
+
+      button("Portland", () => {
+        console.log("Going to Portland");
+        animatedMapProps.lon = -122.65;
+        animatedMapProps.lat = 45.5;
+      });
+
+      button("Eugene", () => {
+        console.log("Going to Eugene");
+        animatedMapProps.lon = -123.09;
+        animatedMapProps.lat = 44.09;
+      });
+
+      return (
+        <BaseMap
+          civicMapStyle={civicMapStyle}
+          initialLongitude={animatedMapProps.lon}
+          initialLatitude={animatedMapProps.lat}
+          navigation={false}
+          animate
         />
       );
     })
