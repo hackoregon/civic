@@ -88,7 +88,7 @@ const TaskMap = ({ completedTasks, animateMap }) => {
   return animateMap ? (
     <TextContainer>
       <h1>SUPER COOL MAP IS PANNING AND ZOOMING...</h1>
-      <h3>Complete Tasks: [{completedTasks.join(", ").toString()} ]</h3>
+      <h3>Complete Tasks: [{completedTasks.join(", ")} ]</h3>
     </TextContainer>
   ) : (
     //   <h2>THIS IS A SUPER COOL MAP</h2>
@@ -96,13 +96,9 @@ const TaskMap = ({ completedTasks, animateMap }) => {
       initialZoom={14}
       initialLatitude={lat}
       initialLongitude={lon}
-      mapGLOptions={{
-        touchZoomRotate: true,
-        doubleClickZoom: true,
-        dragPan: true,
-        dragRotate: true,
-        scrollZoom: true
-      }}
+      initialPitch={60}
+      isInteractive={false}
+      navigation={false}
       useContainerHeight
     >
       <IconMap
