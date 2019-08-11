@@ -5,8 +5,8 @@ import { cx, css } from "emotion";
 import _ from "lodash";
 import PullQuote from "../PullQuote/PullQuote";
 import Placeholder from "../Placeholder/Placeholder";
-import CivicVictoryTheme from "../VictoryTheme/CivicVictoryTheme";
 import { Collapsable } from "../../dist";
+import Chip from "../Chip/Chip";
 
 const sectionMarginSmall = css`
   display: block;
@@ -32,27 +32,27 @@ const authorPhoto = css`
   cursor: pointer;
 `;
 
-function Chip({ tag, index }) {
-  return (
-    <span
-      className={css`
-        display: inline-block;
-        padding: 0 2em;
-        height: 2em;
-        line-height: 2em;
-        border-radius: 1em;
-        background-color: ${CivicVictoryTheme.group.colorScale[
-          index % CivicVictoryTheme.group.colorScale.length
-        ]};
-        margin: 0.5em 0.5em;
-        font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
-        font-weight: bold;
-        color: white;
-        cursor: pointer;
-      `}
-    >{`#${tag}`}</span>
-  );
-}
+// function Chip({ tag, index }) {
+//   return (
+//     <span
+//       className={css`
+//         display: inline-block;
+//         padding: 0 2em;
+//         height: 2em;
+//         line-height: 2em;
+//         border-radius: 1em;
+//         background-color: ${CivicVictoryTheme.group.colorScale[
+//           index % CivicVictoryTheme.group.colorScale.length
+//         ]};
+//         margin: 0.5em 0.5em;
+//         font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
+//         font-weight: bold;
+//         color: white;
+//         cursor: pointer;
+//       `}
+//     >{`#${tag}`}</span>
+//   );
+// }
 
 Chip.propTypes = {
   tag: PropTypes.string,
