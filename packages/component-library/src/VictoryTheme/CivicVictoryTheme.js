@@ -186,7 +186,7 @@ export default {
   ),
   chart: assign(
     {
-      animate: 100
+      animate: { duration: 1000 }
     },
     baseProps
   ),
