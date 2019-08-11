@@ -127,6 +127,7 @@ export const getWeightedTasks = createSelector(
         type: taskData.id,
         imageSVG: taskData.imageSVG,
         imgAlt: taskData.imgAlt,
+        locations: taskData.locations,
         weighting: modifiedTaskWeight,
         points: taskData.points
       };
