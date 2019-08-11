@@ -103,6 +103,7 @@ const BarChart = ({
             y="dataValue"
             title="Bar Chart"
             style={{ data: { width: barWidth } }}
+            animate
           />
         </VictoryChart>
       </DataChecker>

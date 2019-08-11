@@ -75,7 +75,7 @@ const LineChart = ({
           // line animations when the animate properties are derived from the VictoryChart
           // wrapping component. Remove this direct animate after the bug is fixed.
           // https://github.com/FormidableLabs/victory/issues/1282
-          animate={100}
+          animate
         />
       ))
     : null;
