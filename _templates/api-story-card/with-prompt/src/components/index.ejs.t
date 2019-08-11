@@ -48,10 +48,10 @@ export default connect(
     data: {
       // FIXME: mockRidershipOverTime should be a variable
       mockRidershipOverTime: api.selectors.getMockRidershipData(
-        state.<%=package%> || state
+        state.package<%= h.changeCase.pascalCase(package)%> || state
       )
     }
-    // state.packageName || state needed to make work in the project package and 2018 package
+    // state.packageProjectName || state needed to make work in the project package and 2018 package
   }),
   dispatch => ({
     init() {
