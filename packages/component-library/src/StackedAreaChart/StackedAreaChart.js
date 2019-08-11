@@ -75,6 +75,7 @@ const StackedAreaChart = ({
           y="dataValue"
           style={getDefaultAreaStyle(index)}
           standalone={false}
+          animate
         />
       ))
     : null;
@@ -111,6 +112,7 @@ const StackedAreaChart = ({
               theme={CivicVictoryTheme.civic}
             />
           }
+          animate
         />
       ))
     : null;
