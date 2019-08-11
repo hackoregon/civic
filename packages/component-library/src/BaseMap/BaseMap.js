@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import React, { Component } from "react";
-import MapGL, { NavigationControl, Marker } from "react-map-gl";
+import MapGL, { StaticMap, NavigationControl, Marker } from "react-map-gl";
 import Dimensions from "react-dimensions";
 import { css } from "emotion";
 import PropTypes from "prop-types";
@@ -125,6 +125,7 @@ class BaseMap extends Component {
       height,
       containerHeight,
       containerWidth,
+      isInteractive,
       civicMapStyle,
       mapboxToken,
       navigation,
@@ -182,9 +183,11 @@ class BaseMap extends Component {
         ? CIVIC_DARK
         : CIVIC_LIGHT;
 
+    const MapComponent = isInteractive ? MapGL : StaticMap;
+
     return (
       <div className={mapWrapper}>
-        <MapGL
+        <MapComponent
           className="MapGL"
           {...viewport}
           mapStyle={baseMapboxStyleURL}
@@ -230,7 +233,7 @@ class BaseMap extends Component {
             />
           )}
           {childrenLayers}
-        </MapGL>
+        </MapComponent>
       </div>
     );
   }
@@ -241,6 +244,7 @@ BaseMap.propTypes = {
   initialLatitude: PropTypes.number,
   initialZoom: PropTypes.number,
   initialPitch: PropTypes.number,
+  isInteractive: PropTypes.bool,
   height: PropTypes.number,
   containerHeight: PropTypes.number,
   containerWidth: PropTypes.number,
@@ -280,6 +284,7 @@ BaseMap.defaultProps = {
   initialLatitude: 45.5231,
   initialZoom: 9.5,
   initialPitch: 0,
+  isInteractive: true,
   height: 500,
   locationMarkerCoord: {
     latitude: 0,
