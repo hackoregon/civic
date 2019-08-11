@@ -8,9 +8,9 @@ describe("rootState", () => {
     expect(rootState(state)).to.eql(state);
   });
 
-  it("uses the disaster object when the sandbox key is present", () => {
+  it("uses the sandbox object when the sandbox key is present", () => {
     const state = {
-      sandbox: {
+      packageCivicSandbox: {
         hello: "world"
       },
       otherScope: {

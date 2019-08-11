@@ -10,13 +10,13 @@ describe("rootState", () => {
 
   it("uses the disaster object when the disaster key is present", () => {
     const state = {
-      disaster: {
+      package2018DisasterResilience: {
         hello: "world"
       },
       otherScope: {
         not: "for you"
       }
     };
-    expect(rootState(state)).to.eql(state.packageDisasterResilience);
+    expect(rootState(state)).to.eql(state.package2018DisasterResilience);
   });
 });

@@ -10,7 +10,7 @@ describe("rootState", () => {
 
   it("uses the housing object when the housing key is present", () => {
     const state = {
-      housing: {
+      package2018HousingAffordability: {
         hello: "world"
       },
       otherScope: {

@@ -10,7 +10,7 @@ describe("rootState", () => {
 
   it("uses the elections object when the elections key is present", () => {
     const state = {
-      elections: {
+      package2018LocalElections: {
         hello: "world"
       },
       otherScope: {

@@ -143,7 +143,7 @@ describe("ridership-over-time", () => {
         expect(
           selectors.getRidershipOverTimeRequest({
             red: "herring",
-            transportation: {
+            package2018TransportationSystems: {
               ridershipOverTime: expectation
             }
           })

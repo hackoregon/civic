@@ -10,7 +10,7 @@ describe("rootState", () => {
 
   it("uses the neighborhood object when the neighborhood key is present", () => {
     const state = {
-      neighborhood: {
+      package2018NeighborhoodDevelopment: {
         hello: "world"
       },
       otherScope: {

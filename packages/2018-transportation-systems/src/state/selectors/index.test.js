@@ -10,7 +10,7 @@ describe("rootState", () => {
 
   it("uses the transportation object when the transportation key is present", () => {
     const state = {
-      transportation: {
+      package2018TransportationSystems: {
         hello: "world"
       },
       otherScope: {
