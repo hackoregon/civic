@@ -9,7 +9,6 @@ import {
   routerMiddleware,
   syncHistoryWithStore
 } from "react-router-redux";
-import { createLogger } from "redux-logger";
 import { reducer as reduxFormReducer } from "redux-form";
 import { composeWithDevTools } from "redux-devtools-extension";
 
@@ -84,9 +83,6 @@ import CardDetailPageEmbed from "./components/CardDetailPageEmbed";
 // Create a store by combining all project reducers and the routing reducer
 const configureStore = (initialState, history) => {
   const middlewares = [thunk, routerMiddleware(history)];
-  if (process.env.NODE_ENV !== "production") {
-    middlewares.push(createLogger());
-  }
 
   const store = createStore(
     combineReducers({
