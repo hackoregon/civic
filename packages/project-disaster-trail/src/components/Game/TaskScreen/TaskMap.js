@@ -97,6 +97,7 @@ const asGeoJSON = (tasks, activeTask, completedTasks) =>
   }, []);
 
 const TaskMap = ({ activeTask, completedTasks, tasks }) => {
+  // TODO: This just takes the first location and that's no good
   const lon = activeTask ? activeTask.locations[0][0] : omsiLon;
   const lat = activeTask ? activeTask.locations[0][1] : omsiLat;
 

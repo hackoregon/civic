@@ -109,7 +109,7 @@ class ChooseScreen extends PureComponent {
   goToTask = () => {
     this.clearVoteTimeout();
 
-    const { addNextTask } = this.props;
+    const { addNextTask, weightedTasks } = this.props;
     const voteResults = this.tallyVotes();
 
     // eslint-disable-next-line prefer-const
@@ -125,19 +125,22 @@ class ChooseScreen extends PureComponent {
 
     this.setState({
       // trigger pan and zoom...
-      // animateMap: true,
+      activeTask: weightedTasks.find(task => task.type === mostVotesId),
       exampleTimeToAnimate
     });
   };
 
   render() {
-    const { timeToVote } = this.state;
+    const { timeToVote, activeTask } = this.state;
     const { weightedTasks } = this.props;
 
     return (
       <Fragment>
         <div css={screenLayout}>
-          <TaskMap activeTask={weightedTasks[0]} tasks={weightedTasks} />
+          <TaskMap
+            activeTask={activeTask || weightedTasks[0]}
+            tasks={weightedTasks}
+          />
         </div>
 
         <DurationBar step="Choose a task" durationLength={timeToVote / 1000} />
