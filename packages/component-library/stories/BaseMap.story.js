@@ -118,6 +118,22 @@ export default () =>
         notes
       }
     )
+    .add("Non-interactive", () => {
+      const civicMapStyle = select(
+        "CIVIC Map Styles:",
+        MAP_STYLE_OPTIONS,
+        MAP_STYLE_OPTIONS["Hack Oregon Light"],
+        GROUP_IDS.DESIGN
+      );
+
+      return (
+        <BaseMap
+          civicMapStyle={civicMapStyle}
+          isInteractive={false}
+          navigation={false}
+        />
+      );
+    })
     .add(
       "Example: With Geocoder",
       () => {
