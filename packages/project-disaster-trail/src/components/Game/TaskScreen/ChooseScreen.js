@@ -28,8 +28,7 @@ const screenLayout = css`
 const defaultState = {
   voteTimer: null,
   timeToVote: 20000,
-  chooseTask: false,
-  animateMap: false
+  chooseTask: false
 };
 
 class ChooseScreen extends PureComponent {
@@ -126,19 +125,19 @@ class ChooseScreen extends PureComponent {
 
     this.setState({
       // trigger pan and zoom...
-      animateMap: true,
+      // animateMap: true,
       exampleTimeToAnimate
     });
   };
 
   render() {
-    const { timeToVote, animateMap } = this.state;
+    const { timeToVote } = this.state;
     const { weightedTasks } = this.props;
 
     return (
       <Fragment>
         <div css={screenLayout}>
-          <TaskMap animateMap={animateMap} />
+          <TaskMap activeTask={weightedTasks[0]} tasks={weightedTasks} />
         </div>
 
         <DurationBar step="Choose a task" durationLength={timeToVote / 1000} />

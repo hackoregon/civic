@@ -5,38 +5,34 @@ import { connect } from "react-redux";
 import { BaseMap, IconMap } from "@hackoregon/component-library";
 
 import { getCompletedTasks } from "../../../state/tasks";
-import TextContainer from "../../atoms/Containers/TextContainer";
 
-const [lon, lat] = [-122.6655, 45.5081];
-const getPosition = f => (f.geometry ? f.geometry.coordinates : [lon, lat]);
-
-const FIXTURE_DATA = [
-  {
-    geometry: {
-      coordinates: [-122.6658475, 45.5084872]
-    },
-    properties: {
-      type: "BEECN"
-    }
-  }
-];
+const [omsiLon, omsiLat] = [-122.6655, 45.5081];
+const getPosition = f =>
+  f.geometry ? f.geometry.coordinates : [omsiLon, omsiLat];
 
 const getIconColor = f => {
   const mapping = {
-    BEECN: [238, 73, 92]
+    BEECN: [238, 73, 92],
+    fire: [238, 73, 92],
+    injury: [238, 73, 92],
+    hunger: [238, 73, 92],
+    thirst: [238, 73, 92],
+    protection: [238, 73, 92]
   };
   return mapping[f.properties.type] || [25, 183, 170];
 };
 
+// This is a hacked together example mapping using last year's icon map
+// but with this year's task IDs.
 const poiIconMapping = {
-  School: {
+  fire: {
     x: 0,
     y: 0,
     width: 250,
     height: 250,
     mask: true
   },
-  Hospital: {
+  injury: {
     x: 250,
     y: 0,
     width: 250,
@@ -50,21 +46,21 @@ const poiIconMapping = {
     height: 250,
     mask: true
   },
-  "Fire Station": {
+  hunger: {
     x: 0,
     y: 250,
     width: 250,
     height: 250,
     mask: true
   },
-  Pin: {
+  thirst: {
     x: 250,
     y: 250,
     width: 250,
     height: 250,
     mask: true
   },
-  COMMCTR: {
+  protection: {
     x: 500,
     y: 250,
     width: 250,
@@ -84,25 +80,41 @@ const poiIconZoomScale = zoom => {
   return size;
 };
 
-const TaskMap = ({ completedTasks, animateMap }) => {
-  return animateMap ? (
-    <TextContainer>
-      <h1>SUPER COOL MAP IS PANNING AND ZOOMING...</h1>
-      <h3>Complete Tasks: [{completedTasks.join(", ")} ]</h3>
-    </TextContainer>
-  ) : (
-    //   <h2>THIS IS A SUPER COOL MAP</h2>
+const asGeoJSON = (tasks, activeTask, completedTasks) =>
+  tasks.reduce((features, task) => {
+    const props = { ...task, isCompleted: completedTasks.includes(task.type) };
+    if (task.type === activeTask.type) {
+      props.isActive = true;
+    }
+    delete props.locations;
+    const points = task.locations.map(location => ({
+      geometry: {
+        coordinates: location
+      },
+      properties: props
+    }));
+    return features.concat(points);
+  }, []);
+
+const TaskMap = ({ activeTask, completedTasks, tasks }) => {
+  const lon = activeTask ? activeTask.locations[0][0] : omsiLon;
+  const lat = activeTask ? activeTask.locations[0][1] : omsiLat;
+
+  const data = asGeoJSON(tasks, activeTask, completedTasks);
+
+  return (
     <BaseMap
       initialZoom={14}
-      initialLatitude={lat}
       initialLongitude={lon}
+      initialLatitude={lat}
       initialPitch={60}
       isInteractive={false}
       navigation={false}
       useContainerHeight
+      animate
     >
       <IconMap
-        data={FIXTURE_DATA}
+        data={data}
         getPosition={getPosition}
         iconAtlas="https://i.imgur.com/xgTAROe.png"
         iconMapping={poiIconMapping}
@@ -116,8 +128,12 @@ const TaskMap = ({ completedTasks, animateMap }) => {
 };
 
 TaskMap.propTypes = {
+  activeTask: PropTypes.shape({
+    task: PropTypes.string,
+    locations: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number))
+  }),
   completedTasks: PropTypes.arrayOf(PropTypes.string),
-  animateMap: PropTypes.bool
+  tasks: PropTypes.arrayOf(PropTypes.object)
 };
 
 const mapStateToProps = state => ({
