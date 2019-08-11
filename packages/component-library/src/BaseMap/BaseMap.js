@@ -1,7 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import React, { Component } from "react";
 import MapGL, {
-  StaticMap,
   NavigationControl,
   Marker,
   FlyToInterpolator
@@ -189,7 +188,6 @@ class BaseMap extends Component {
         ? CIVIC_DARK
         : CIVIC_LIGHT;
 
-    const MapComponent = isInteractive ? MapGL : StaticMap;
     const animationProps = !animate
       ? {}
       : {
@@ -199,7 +197,7 @@ class BaseMap extends Component {
 
     return (
       <div className={mapWrapper}>
-        <MapComponent
+        <MapGL
           className="MapGL"
           {...viewport}
           {...animationProps}
@@ -210,6 +208,12 @@ class BaseMap extends Component {
           {...mapGLOptions}
           onClick={onBaseMapClick}
           onLoad={onMapLoad}
+          scrollZoom={isInteractive}
+          dragPan={isInteractive}
+          dragRotate={isInteractive}
+          doubleClickZoom={isInteractive}
+          touchZoom={isInteractive}
+          touchRotate={isInteractive}
         >
           <div className={navControl}>
             {navigation && (
@@ -246,7 +250,7 @@ class BaseMap extends Component {
             />
           )}
           {childrenLayers}
-        </MapComponent>
+        </MapGL>
       </div>
     );
   }

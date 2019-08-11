@@ -148,16 +148,14 @@ export default () =>
         GROUP_IDS.DESIGN
       );
 
-      button("Portland", () => {
-        console.log("Going to Portland");
-        animatedMapProps.lon = -122.65;
-        animatedMapProps.lat = 45.5;
+      button("OMSI", () => {
+        animatedMapProps.lon = -122.665567;
+        animatedMapProps.lat = 45.508549;
       });
 
-      button("Eugene", () => {
-        console.log("Going to Eugene");
-        animatedMapProps.lon = -123.09;
-        animatedMapProps.lat = 44.09;
+      button("Rocky Butte", () => {
+        animatedMapProps.lon = -122.564674;
+        animatedMapProps.lat = 45.54554;
       });
 
       return (
@@ -165,6 +163,9 @@ export default () =>
           civicMapStyle={civicMapStyle}
           initialLongitude={animatedMapProps.lon}
           initialLatitude={animatedMapProps.lat}
+          initialPitch={45}
+          initialZoom={14}
+          isInteractive={false}
           navigation={false}
           animate
         />
