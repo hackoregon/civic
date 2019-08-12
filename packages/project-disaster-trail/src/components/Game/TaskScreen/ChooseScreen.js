@@ -17,7 +17,6 @@ import TaskMap from "./TaskMap";
 
 const screenLayout = css`
   position: relative;
-  display: grid;
   overflow: hidden;
   width: 100%;
   height: 100%;
@@ -29,8 +28,7 @@ const screenLayout = css`
 const defaultState = {
   voteTimer: null,
   timeToVote: 20000,
-  chooseTask: false,
-  animateMap: false
+  chooseTask: false
 };
 
 class ChooseScreen extends PureComponent {
@@ -111,7 +109,7 @@ class ChooseScreen extends PureComponent {
   goToTask = () => {
     this.clearVoteTimeout();
 
-    const { addNextTask } = this.props;
+    const { addNextTask, weightedTasks } = this.props;
     const voteResults = this.tallyVotes();
 
     // eslint-disable-next-line prefer-const
@@ -127,19 +125,22 @@ class ChooseScreen extends PureComponent {
 
     this.setState({
       // trigger pan and zoom...
-      animateMap: true,
+      activeTask: weightedTasks.find(task => task.type === mostVotesId),
       exampleTimeToAnimate
     });
   };
 
   render() {
-    const { timeToVote, animateMap } = this.state;
+    const { timeToVote, activeTask } = this.state;
     const { weightedTasks } = this.props;
 
     return (
       <Fragment>
         <div css={screenLayout}>
-          <TaskMap animateMap={animateMap} />
+          <TaskMap
+            activeTask={activeTask || weightedTasks[0]}
+            tasks={weightedTasks}
+          />
         </div>
 
         <DurationBar step="Choose a task" durationLength={timeToVote / 1000} />
