@@ -109,9 +109,17 @@ const TaskMap = ({ activeTask, completedTasks, tasks }) => {
       initialLongitude={lon}
       initialLatitude={lat}
       initialPitch={60}
-      isInteractive={false}
       navigation={false}
       useContainerHeight
+      mapGLOptions={{
+        scrollZoom: false,
+        dragPan: false,
+        dragRotate: false,
+        doubleClickZoom: false,
+        touchZoom: false,
+        touchRotate: false,
+        keyboard: false
+      }}
       animate
     >
       <IconMap

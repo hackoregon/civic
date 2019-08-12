@@ -30,6 +30,17 @@ These props can be set in the Custom story:
 - **onBaseMapClick:** this function will be called when the Base Map is clicked
   - This prop expects a function
 
+## Example: Animate to Coordinates
+
+This story shows how the `animate` prop impacts changing map coordinates, including updating `initialLongitude` and `initialLatitude`.
+
+No props can be set in this story.
+
+These actions can be taken from this story:
+
+- **OMSI**: Sets the BaseMap `initialLongitude` and `initialLatitude` to OMSI's coordinates.
+- **Rocky Butte**: Sets the BaseMap `initialLongitude` and `initialLatitude` to Rocky Butte's coordinates.
+
 ## Example: With Geocoder
 
 This story shows how to use a geocoder with the Base Map.

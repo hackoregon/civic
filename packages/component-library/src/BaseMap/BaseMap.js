@@ -129,7 +129,6 @@ class BaseMap extends Component {
       height,
       containerHeight,
       containerWidth,
-      isInteractive,
       civicMapStyle,
       mapboxToken,
       navigation,
@@ -208,12 +207,6 @@ class BaseMap extends Component {
           {...mapGLOptions}
           onClick={onBaseMapClick}
           onLoad={onMapLoad}
-          scrollZoom={isInteractive}
-          dragPan={isInteractive}
-          dragRotate={isInteractive}
-          doubleClickZoom={isInteractive}
-          touchZoom={isInteractive}
-          touchRotate={isInteractive}
         >
           <div className={navControl}>
             {navigation && (
@@ -261,7 +254,6 @@ BaseMap.propTypes = {
   initialLatitude: PropTypes.number,
   initialZoom: PropTypes.number,
   initialPitch: PropTypes.number,
-  isInteractive: PropTypes.bool,
   height: PropTypes.number,
   containerHeight: PropTypes.number,
   containerWidth: PropTypes.number,
@@ -303,7 +295,6 @@ BaseMap.defaultProps = {
   initialLatitude: 45.5231,
   initialZoom: 9.5,
   initialPitch: 0,
-  isInteractive: true,
   height: 500,
   locationMarkerCoord: {
     latitude: 0,

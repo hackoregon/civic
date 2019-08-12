@@ -124,53 +124,43 @@ export default () =>
         notes
       }
     )
-    .add("Non-interactive", () => {
-      const civicMapStyle = select(
-        "CIVIC Map Styles:",
-        MAP_STYLE_OPTIONS,
-        MAP_STYLE_OPTIONS["Hack Oregon Light"],
-        GROUP_IDS.DESIGN
-      );
+    .add(
+      "Example: Animate to Coordinates",
+      () => {
+        button("OMSI", () => {
+          animatedMapProps.lon = -122.665567;
+          animatedMapProps.lat = 45.508549;
+        });
 
-      return (
-        <BaseMap
-          civicMapStyle={civicMapStyle}
-          isInteractive={false}
-          navigation={false}
-        />
-      );
-    })
-    .add("Animate to Coordinates", () => {
-      const civicMapStyle = select(
-        "CIVIC Map Styles:",
-        MAP_STYLE_OPTIONS,
-        MAP_STYLE_OPTIONS["Hack Oregon Light"],
-        GROUP_IDS.DESIGN
-      );
+        button("Rocky Butte", () => {
+          animatedMapProps.lon = -122.564674;
+          animatedMapProps.lat = 45.54554;
+        });
 
-      button("OMSI", () => {
-        animatedMapProps.lon = -122.665567;
-        animatedMapProps.lat = 45.508549;
-      });
-
-      button("Rocky Butte", () => {
-        animatedMapProps.lon = -122.564674;
-        animatedMapProps.lat = 45.54554;
-      });
-
-      return (
-        <BaseMap
-          civicMapStyle={civicMapStyle}
-          initialLongitude={animatedMapProps.lon}
-          initialLatitude={animatedMapProps.lat}
-          initialPitch={45}
-          initialZoom={14}
-          isInteractive={false}
-          navigation={false}
-          animate
-        />
-      );
-    })
+        return (
+          <BaseMap
+            initialLongitude={animatedMapProps.lon}
+            initialLatitude={animatedMapProps.lat}
+            initialPitch={45}
+            initialZoom={14}
+            mapGLOptions={{
+              scrollZoom: false,
+              dragPan: false,
+              dragRotate: false,
+              doubleClickZoom: false,
+              touchZoom: false,
+              touchRotate: false,
+              keyboard: false
+            }}
+            navigation={false}
+            animate
+          />
+        );
+      },
+      {
+        notes
+      }
+    )
     .add(
       "Example: With Geocoder",
       () => {
