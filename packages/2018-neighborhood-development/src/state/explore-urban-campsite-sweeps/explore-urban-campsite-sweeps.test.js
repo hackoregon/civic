@@ -133,7 +133,7 @@ describe("explore-urban-campsite-sweeps", () => {
         expect(
           selectors.getCampsiteSweepsRequest({
             red: "herring",
-            neighborhood: {
+            package2018NeighborhoodDevelopment: {
               exploreUrbanCampsiteSweeps: expectation
             }
           })

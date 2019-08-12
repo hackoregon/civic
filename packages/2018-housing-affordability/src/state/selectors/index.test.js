@@ -10,13 +10,13 @@ describe("rootState", () => {
 
   it("uses the housing object when the housing key is present", () => {
     const state = {
-      housing: {
+      package2018HousingAffordability: {
         hello: "world"
       },
       otherScope: {
         not: "for you"
       }
     };
-    expect(rootState(state)).to.eql(state.housing);
+    expect(rootState(state)).to.eql(state.package2018HousingAffordability);
   });
 });

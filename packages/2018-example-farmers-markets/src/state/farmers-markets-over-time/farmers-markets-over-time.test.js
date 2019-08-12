@@ -112,7 +112,7 @@ describe("farmers-markets-over-time", () => {
         expect(
           selectors.getFarmersMarketsOverTimeRequest({
             red: "herring",
-            farmersMarkets: {
+            package2018ExampleFarmersMarkets: {
               farmersMarketsOverTime: expectation
             }
           })
