@@ -34,7 +34,9 @@ These props can be set in the Custom story:
 
 This story shows how the `animate` prop impacts changing map coordinates, including updating `initialLongitude` and `initialLatitude`.
 
-No props can be set in this story.
+These props can be set in this story:
+
+- **animationDuration**: Controls how long the "fly to" effect takes. Measured in milliseconds.
 
 These actions can be taken from this story:
 

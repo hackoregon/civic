@@ -39,6 +39,13 @@ const PITCH_OPTIONS = {
   step: 1
 };
 
+const ANIMATION_OPTIONS = {
+  range: true,
+  min: 0,
+  max: 5000,
+  step: 10
+};
+
 const animatedMapProps = {
   lon: -122.65,
   lat: 45.5
@@ -137,6 +144,8 @@ export default () =>
           animatedMapProps.lat = 45.54554;
         });
 
+        const animationDuration = number("Duration", 1000, ANIMATION_OPTIONS);
+
         return (
           <BaseMap
             initialLongitude={animatedMapProps.lon}
@@ -153,6 +162,7 @@ export default () =>
               keyboard: false
             }}
             navigation={false}
+            animationDuration={animationDuration}
             animate
           />
         );

@@ -146,7 +146,8 @@ class BaseMap extends Component {
       mapboxLayerOptions,
       mapboxLayerId,
       locationMarkerCoord,
-      animate
+      animate,
+      animationDuration
     } = this.props;
 
     viewport.width = containerWidth || 500;
@@ -190,7 +191,7 @@ class BaseMap extends Component {
     const animationProps = !animate
       ? {}
       : {
-          transitionDuration: 1000,
+          transitionDuration: animationDuration,
           transitionInterpolator: new FlyToInterpolator()
         };
 
@@ -273,6 +274,7 @@ BaseMap.propTypes = {
   useContainerHeight: PropTypes.bool,
   updateViewport: PropTypes.bool,
   animate: PropTypes.bool,
+  animationDuration: PropTypes.number,
   onBaseMapClick: PropTypes.func,
   mapboxDataId: PropTypes.string,
   mapboxData: PropTypes.shape({
@@ -299,7 +301,8 @@ BaseMap.defaultProps = {
   locationMarkerCoord: {
     latitude: 0,
     longitude: 0
-  }
+  },
+  animationDuration: 1000
 };
 
 export default Dimensions()(BaseMap);
