@@ -363,7 +363,6 @@ export default () =>
                     }}
                     radiusScale={radiusScale}
                     circleFieldName={circleFieldName}
-                    autoHighlight
                     onLayerClick={onLayerClick}
                   />
                 </BaseMap>
