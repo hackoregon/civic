@@ -29,6 +29,10 @@ const cardMetaObjectProperties = {
   authors: PropTypes.arrayOf(PropTypes.string /* image url */)
 };
 
+export const optionalCardMetaKeys = {
+  metadataQA: true
+};
+
 export const cardMetaKeys = getKeyNames(cardMetaObjectProperties);
 
 const cardMetaTypes = PropTypes.shape(cardMetaObjectProperties);

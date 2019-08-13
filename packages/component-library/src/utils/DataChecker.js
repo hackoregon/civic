@@ -13,12 +13,13 @@ const DataChecker = ({
   data,
   dataIsObject,
   dataAccessors,
+  optionalKeys,
   message,
   children
 }) => {
   const keys = Object.keys(dataAccessors);
   const values = Object.values(dataAccessors);
-  const results = checkData(data, values, dataIsObject);
+  const results = checkData(data, values, dataIsObject, optionalKeys);
   const component = results.allKeysValid ? (
     children
   ) : (
@@ -73,7 +74,8 @@ const DataChecker = ({
 DataChecker.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   dataAccessors: PropTypes.objectOf(PropTypes.string).isRequired,
-  message: PropTypes.string
+  message: PropTypes.string,
+  optionalKeys: PropTypes.shape({})
 };
 
 DataChecker.defaultProps = {

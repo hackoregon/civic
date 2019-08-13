@@ -1,10 +1,15 @@
-const checkKey = (data, key) => {
+const checkKey = (data, key, optionalKeys = {}) => {
+  // If key is optional, skip
+  if (optionalKeys[key]) {
+    return { valid: 0, total: 0 };
+  }
+
   const valid = data.filter(datum => key in datum).length;
   const total = data.length;
   return { valid, total };
 };
 
-const checkData = (data, dataKeys, dataIsObject = false) => {
+const checkData = (data, dataKeys, dataIsObject = false, optionalKeys) => {
   const results = {};
   const isArray = Array.isArray(data) && Array.isArray(dataKeys);
   const validType = (!dataIsObject && isArray) || (dataIsObject && !isArray);
@@ -14,7 +19,7 @@ const checkData = (data, dataKeys, dataIsObject = false) => {
   const keyChecks =
     validType &&
     dataKeys.map(key => {
-      results[key] = checkKey(dataAsArray, key);
+      results[key] = checkKey(dataAsArray, key, optionalKeys);
       return checkKey(dataAsArray, key);
     });
   results.allKeysValid =
