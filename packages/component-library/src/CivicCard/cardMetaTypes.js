@@ -30,7 +30,8 @@ const cardMetaObjectProperties = {
 };
 
 export const optionalCardMetaKeys = {
-  metadataQA: true
+  metadataQA: true,
+  selector: true
 };
 
 export const cardMetaKeys = getKeyNames(cardMetaObjectProperties);

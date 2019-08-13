@@ -20,7 +20,7 @@ const checkData = (data, dataKeys, dataIsObject = false, optionalKeys) => {
     validType &&
     dataKeys.map(key => {
       results[key] = checkKey(dataAsArray, key, optionalKeys);
-      return checkKey(dataAsArray, key);
+      return checkKey(dataAsArray, key, optionalKeys);
     });
   results.allKeysValid =
     validType && keyChecks.every(key => key.valid === key.total);
