@@ -10,13 +10,13 @@ describe("rootState", () => {
 
   it("uses the transportation object when the transportation key is present", () => {
     const state = {
-      transportation: {
+      package2018TransportationSystems: {
         hello: "world"
       },
       otherScope: {
         not: "for you"
       }
     };
-    expect(rootState(state)).to.eql(state.transportation);
+    expect(rootState(state)).to.eql(state.package2018TransportationSystems);
   });
 });

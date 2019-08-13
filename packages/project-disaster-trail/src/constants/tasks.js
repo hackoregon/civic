@@ -34,7 +34,8 @@ export const tasks = {
     points: 3,
     text: "I'm afraid I'll fall over the rubble.",
     imageSVG: rubble,
-    imageAlt: "a rocky road"
+    imageAlt: "a rocky road",
+    locations: [[-122.664628, 45.507309], [-122.648491, 45.51188]]
   },
   // Save Others
   [FIRE]: {
@@ -45,7 +46,13 @@ export const tasks = {
     points: 5,
     text: "Uh oh! This fire could spread!",
     imageSVG: fire,
-    imageAlt: "stuff on fire"
+    imageAlt: "stuff on fire",
+    locations: [
+      [-122.65819, 45.515699],
+      [-122.656388, 45.516842],
+      [-122.651882, 45.514948],
+      [-122.676215, 45.514166]
+    ]
   },
   [INJURY]: {
     id: INJURY,
@@ -55,7 +62,8 @@ export const tasks = {
     points: 7,
     text: "That person looks hurt.",
     imageSVG: injury,
-    imageAlt: "an injured person"
+    imageAlt: "an injured person",
+    locations: [[-122.678618, 45.52018], [-122.655916, 45.526043]]
   },
   [HUNGER]: {
     id: HUNGER,
@@ -65,7 +73,13 @@ export const tasks = {
     points: 5,
     text: "So. Hungry.",
     imageSVG: hunger,
-    imageAlt: "a hungry person"
+    imageAlt: "a hungry person",
+    locations: [
+      [-122.667632, 45.523096],
+      [-122.681665, 45.530282],
+      [-122.663426, 45.515429],
+      [-122.663168, 45.519849]
+    ]
   },
   [THIRST]: {
     id: THIRST,
@@ -75,7 +89,14 @@ export const tasks = {
     points: 5,
     text: "Oh no! I'm so thirsty. Whatever will I do?",
     imageSVG: thirsty,
-    imageAlt: "a sweaty person"
+    imageAlt: "a sweaty person",
+    locations: [
+      [-122.655229, 45.508422],
+      [-122.640638, 45.528929],
+      [-122.646131, 45.521713],
+      [-122.646045, 45.52039],
+      [-122.641453, 45.515248]
+    ]
   }
 };
 

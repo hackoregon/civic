@@ -210,7 +210,8 @@ export const getWeightedTasks = createSelector(
       const genericItem = {
         type: taskData.id,
         imageSVG: taskData.imageSVG,
-        imgAlt: taskData.imgAlt,
+        imageAlt: taskData.imageAlt,
+        locations: taskData.locations,
         weighting: modifiedTaskWeight,
         points: taskData.points
       };

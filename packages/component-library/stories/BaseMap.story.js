@@ -6,7 +6,8 @@ import {
   select,
   number,
   boolean,
-  object
+  object,
+  button
 } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 import { css } from "emotion";
@@ -36,6 +37,18 @@ const PITCH_OPTIONS = {
   min: 0,
   max: 60,
   step: 1
+};
+
+const ANIMATION_OPTIONS = {
+  range: true,
+  min: 0,
+  max: 5000,
+  step: 10
+};
+
+const animatedMapProps = {
+  lon: -122.65,
+  lat: 45.5
 };
 
 export default () =>
@@ -111,6 +124,46 @@ export default () =>
             height={height}
             navigation={navigation}
             onBaseMapClick={onBaseMapClick}
+          />
+        );
+      },
+      {
+        notes
+      }
+    )
+    .add(
+      "Example: Animate to Coordinates",
+      () => {
+        button("OMSI", () => {
+          animatedMapProps.lon = -122.665567;
+          animatedMapProps.lat = 45.508549;
+        });
+
+        button("Rocky Butte", () => {
+          animatedMapProps.lon = -122.564674;
+          animatedMapProps.lat = 45.54554;
+        });
+
+        const animationDuration = number("Duration", 1000, ANIMATION_OPTIONS);
+
+        return (
+          <BaseMap
+            initialLongitude={animatedMapProps.lon}
+            initialLatitude={animatedMapProps.lat}
+            initialPitch={45}
+            initialZoom={14}
+            mapGLOptions={{
+              scrollZoom: false,
+              dragPan: false,
+              dragRotate: false,
+              doubleClickZoom: false,
+              touchZoom: false,
+              touchRotate: false,
+              keyboard: false
+            }}
+            navigation={false}
+            animationDuration={animationDuration}
+            animate
           />
         );
       },

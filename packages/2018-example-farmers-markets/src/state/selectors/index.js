@@ -2,7 +2,8 @@ import { createSelector } from "reselect";
 
 // The root state for a package is namespaced in the 2018 package
 // and the root state object when developing a package in isolation
-export const rootState = state => state.farmersMarkets || state;
+export const rootState = state =>
+  state.package2018ExampleFarmersMarkets || state;
 
 // Creating all selectors off the appState selector eliminates the need
 // to think about state namespacing in each component

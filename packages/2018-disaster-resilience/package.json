@@ -29,6 +29,7 @@
     "start:dev": "cross-env NODE_ENV=development babel-node server",
     "start:prod": "cross-env NODE_ENV=production node server",
     "test": "cross-env BABEL_ENV=test mocha --opts ./mocha.opts 'src/**/*.test.js'",
+    "test:watch": "yarn test -w",
     "lint": "eslint src"
   },
   "dependencies": {
@@ -50,7 +51,6 @@
     "react-router-redux": "^4.0.8",
     "redux": "^4.0.1",
     "redux-form": "^8.1.0",
-    "redux-logger": "^2.8.2",
     "redux-thunk": "^2.1.0",
     "reselect": "^3.0.0"
   },

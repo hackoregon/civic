@@ -19,7 +19,6 @@ import TaskMap from "./TaskMap";
 
 const screenLayout = css`
   position: relative;
-  display: grid;
   overflow: hidden;
   width: 100%;
   height: 100%;
@@ -34,7 +33,8 @@ const defaultState = {
   animationId: null,
   animationDuration: 2000,
   chooseTask: false,
-  animateMap: false
+  animateMap: false,
+  voteTimer: null
 };
 
 class ChooseScreen extends PureComponent {
@@ -173,14 +173,26 @@ class ChooseScreen extends PureComponent {
     this.setState({ animateMap: false });
   };
 
+  // render() {
+  //   const { animateMap } = this.state;
+  //   this.setState({
+  //     // trigger pan and zoom...
+  //     activeTask: weightedTasks.find(task => task.type === mostVotesId),
+  //     exampleTimeToAnimate
+  //   });
+  // };
+
   render() {
-    const { animateMap } = this.state;
+    const { activeTask } = this.state;
     const { weightedTasks } = this.props;
 
     return (
       <Fragment>
         <div css={screenLayout}>
-          <TaskMap animateMap={animateMap} />
+          <TaskMap
+            activeTask={activeTask || weightedTasks[0]}
+            tasks={weightedTasks}
+          />
         </div>
 
         <DurationBar step="Choose a task" />

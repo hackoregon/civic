@@ -10,6 +10,7 @@
     "start:prod": "yarn run build && cross-env NODE_ENV=production node server",
     "build": "rimraf dist && cross-env NODE_ENV=production webpack --progress --config ./webpack.config.js",
     "test": "cross-env BABEL_ENV=test mocha --opts ./mocha.opts 'src/**/*.test.js'",
+    "test:watch": "yarn test -w",
     "lint": "eslint src"
   },
   "repository": {
@@ -50,7 +51,6 @@
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.8",
     "redux-form": "^8.1.0",
-    "redux-logger": "^3.0.6",
     "redux-thunk": "^2.1.0"
   },
   "devDependencies": {
