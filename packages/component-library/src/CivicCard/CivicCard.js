@@ -18,9 +18,9 @@ const CivicCard = ({ cardMeta, data, isLoading, Layout }) => (
 
 CivicCard.propTypes = {
   cardMeta: PropTypes.func.isRequired,
-  data: PropTypes.shape({}),
+  data: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.array]),
   isLoading: PropTypes.bool,
-  Layout: PropTypes.node
+  Layout: PropTypes.func
 };
 
 CivicCard.defaultProps = {

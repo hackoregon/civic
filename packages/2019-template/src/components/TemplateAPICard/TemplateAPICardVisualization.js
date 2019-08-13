@@ -19,7 +19,7 @@ const TemplateAPICardVisualization = ({ isLoading, data }) => (
 
 TemplateAPICardVisualization.propTypes = {
   isLoading: PropTypes.bool,
-  data: resourceShape
+  data: PropTypes.shape({ ridershipOverTime: resourceShape })
 };
 
 export default TemplateAPICardVisualization;

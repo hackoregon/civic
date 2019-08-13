@@ -72,7 +72,10 @@ const DataChecker = ({
 };
 
 DataChecker.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  data: PropTypes.oneOfType([
+    PropTypes.shape({}),
+    PropTypes.arrayOf(PropTypes.shape({}))
+  ]).isRequired,
   dataAccessors: PropTypes.objectOf(PropTypes.string).isRequired,
   message: PropTypes.string,
   optionalKeys: PropTypes.shape({})

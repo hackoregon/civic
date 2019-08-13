@@ -203,7 +203,7 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
 
 CivicCardLayoutFull.propTypes = {
   isLoading: PropTypes.bool,
-  data: PropTypes.arrayOf(PropTypes.object),
+  data: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.array]),
   cardMeta: cardMetaTypes
 };
 

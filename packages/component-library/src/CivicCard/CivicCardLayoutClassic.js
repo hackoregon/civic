@@ -17,7 +17,7 @@ function CivicCardLayoutClassic({ isLoading, data, cardMeta }) {
 
 CivicCardLayoutClassic.propTypes = {
   isLoading: PropTypes.bool,
-  data: PropTypes.arrayOf(PropTypes.object),
+  data: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.array]),
   cardMeta: cardMetaTypes
 };
 
