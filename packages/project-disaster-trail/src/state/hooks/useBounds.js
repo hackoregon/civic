@@ -36,21 +36,22 @@ const useBounds = ref => {
     handleResize();
 
     if (typeof ResizeObserver === "function") {
+      /* eslint-disable no-undef */
       let resizeObserver = new ResizeObserver(() => handleResize());
       resizeObserver.observe(element);
 
+      /* eslint-disable consistent-return */
       return () => {
-        if (!resizeObserver) {
-          return;
+        if (resizeObserver) {
+          resizeObserver.disconnect();
+          resizeObserver = null;
         }
-
-        resizeObserver.disconnect();
-        resizeObserver = null;
       };
     }
     // Browser support, remove freely
     window.addEventListener("resize", handleResize);
 
+    /* eslint-disable consistent-return */
     return () => {
       window.removeEventListener("resize", handleResize);
     };

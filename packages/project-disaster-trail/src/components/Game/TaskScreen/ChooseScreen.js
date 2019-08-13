@@ -3,13 +3,15 @@ import { PureComponent, Fragment } from "react";
 import { PropTypes } from "prop-types";
 import { css, jsx } from "@emotion/core";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 import {
   getWeightedTasks,
-  getActiveTaskData,
   addTask,
   getActiveEnvironment,
-  getTasksForEnvironment
+  getTasksForEnvironment,
+  startTick as _startTick,
+  stopTick as _stopTick
 } from "../../../state/tasks";
 import DurationBar from "../../atoms/DurationBar";
 import OrbManager from "../OrbManager";
@@ -27,8 +29,10 @@ const screenLayout = css`
 `;
 
 const defaultState = {
-  voteTimer: null,
-  timeToVote: 20000,
+  voteId: null,
+  votingDuration: 20000,
+  animationId: null,
+  animationDuration: 2000,
   chooseTask: false,
   animateMap: false
 };
@@ -37,8 +41,8 @@ class ChooseScreen extends PureComponent {
   state = defaultState;
 
   componentDidMount() {
-    const { timeToVote } = this.state;
-    const { weightedTasks } = this.props;
+    const { votingDuration } = this.state;
+    const { weightedTasks, startTick } = this.props;
     const taskVotes = weightedTasks.reduce((result, taskData) => {
       // eslint-disable-next-line no-param-reassign
       result[taskData.type] = 0;
@@ -46,20 +50,42 @@ class ChooseScreen extends PureComponent {
     }, {});
 
     this.setState({
-      voteTimer: setTimeout(this.goToTask, timeToVote),
+      // voteId: setTimeout(this.goToTask, votingDuration),
       taskVotes
     });
+
+    startTick(votingDuration);
+  }
+
+  componentDidUpdate(prevProps) {
+    const { outOfTime } = this.props;
+    const { animateMap } = this.state;
+
+    // user ran out of time before 'completing' the task
+    if (outOfTime && !prevProps.outOfTime) {
+      if (!animateMap) {
+        this.moveMap();
+      } else {
+        this.goToTask();
+      }
+    }
   }
 
   componentWillUnmount() {
-    const { exampleTimeToAnimate } = this.state;
-    clearTimeout(exampleTimeToAnimate);
+    const { animationId } = this.state;
+    clearTimeout(animationId);
     this.clearVoteTimeout();
+
+    const { stopTick } = this.props;
+    stopTick();
   }
 
   clearVoteTimeout = () => {
-    const { voteTimer } = this.state;
-    clearTimeout(voteTimer);
+    const { stopTick } = this.props;
+    stopTick();
+
+    const { voteId } = this.state;
+    clearTimeout(voteId);
   };
 
   getPossibleTasks = () => {
@@ -108,8 +134,24 @@ class ChooseScreen extends PureComponent {
     );
   };
 
+  moveMap = () => {
+    const { startTick } = this.props;
+    const { animationDuration } = this.state;
+    this.setState({
+      // trigger pan and zoom...
+      animateMap: true
+    });
+
+    let { animationId } = this.state;
+    clearTimeout(animationId);
+    animationId = setTimeout(() => startTick(animationDuration), 100);
+    this.setState({ animationId });
+  };
+
   goToTask = () => {
-    this.clearVoteTimeout();
+    // this.clearVoteTimeout();
+    const { stopTick, startTick } = this.props;
+    stopTick();
 
     const { addNextTask } = this.props;
     const voteResults = this.tallyVotes();
@@ -120,20 +162,19 @@ class ChooseScreen extends PureComponent {
       mostVotesId = this.chooseRandomTask();
     }
 
-    // As an example of the time to pan and zoom, use a timeout
-    const exampleTimeToAnimate = setTimeout(() => {
-      addNextTask(mostVotesId);
-    }, 2000);
+    addNextTask(mostVotesId);
+    const { votingDuration } = this.state;
 
-    this.setState({
-      // trigger pan and zoom...
-      animateMap: true,
-      exampleTimeToAnimate
-    });
+    let { animationId } = this.state;
+    clearTimeout(animationId);
+    animationId = setTimeout(() => startTick(votingDuration), 100);
+    this.setState({ animationId });
+
+    this.setState({ animateMap: false });
   };
 
   render() {
-    const { timeToVote, animateMap } = this.state;
+    const { animateMap } = this.state;
     const { weightedTasks } = this.props;
 
     return (
@@ -142,7 +183,7 @@ class ChooseScreen extends PureComponent {
           <TaskMap animateMap={animateMap} />
         </div>
 
-        <DurationBar step="Choose a task" durationLength={timeToVote / 1000} />
+        <DurationBar step="Choose a task" />
         <OrbManager
           possibleItems={weightedTasks}
           onOrbSelection={this.onTaskSelection}
@@ -158,20 +199,25 @@ ChooseScreen.propTypes = {
   weightedTasks: PropTypes.arrayOf(PropTypes.shape({})),
   addNextTask: PropTypes.func,
   activeEnvironment: PropTypes.string,
-  tasksForEnvironment: PropTypes.shape({})
+  tasksForEnvironment: PropTypes.shape({}),
+  startTick: PropTypes.func,
+  stopTick: PropTypes.func,
+  outOfTime: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
   weightedTasks: getWeightedTasks(state),
-  activeTask: getActiveTaskData(state),
   activeEnvironment: getActiveEnvironment(state),
-  tasksForEnvironment: getTasksForEnvironment(state)
+  tasksForEnvironment: getTasksForEnvironment(state),
+  outOfTime: state.tasks.outOfTime
 });
 
 const mapDispatchToProps = dispatch => ({
   addNextTask(taskChoice, taskId) {
     dispatch(addTask(taskChoice, taskId));
-  }
+  },
+  startTick: bindActionCreators(_startTick, dispatch),
+  stopTick: bindActionCreators(_stopTick, dispatch)
 });
 
 export default connect(

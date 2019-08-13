@@ -14,15 +14,28 @@ const initialState = {
   activeEnvironment: defaultEnv,
   taskOrder: shuffle(defaultSaveYourself),
   activeTask: 0,
-  completedTasks: []
+  activeTime: 0,
+  startTime: 0,
+  totalTime: 0,
+  completedTasks: [],
+  outOfTime: false,
+  playing: true
 };
+
+let timerId = 0;
 
 // CONSTANTS
 const actionTypes = {
   CHANGE_ENVIRONMENT: "CHANGE_ENVIRONMENT",
   ADD_TASK: "ADD_TASK",
   INCREASE_ACTIVE_TASK: "INCREASE_ACTIVE_TASK",
-  COMPLETE_TASK: "COMPLETE_TASK"
+  COMPLETE_TASK: "COMPLETE_TASK",
+  SET_START_TIME: "SET_START_TIME",
+  RESET_START_TIME: "RESET_START_TIME",
+  TICK: "TICK",
+  OUT_OF_TIME: "OUT_OF_TIME",
+  PAUSE: "PAUSE",
+  PLAY: "PLAY"
 };
 
 // ACTIONS
@@ -37,6 +50,45 @@ export const increaseActiveTask = () => dispatch => {
 };
 export const completeTask = completedTask => dispatch => {
   dispatch({ type: actionTypes.COMPLETE_TASK, completedTask });
+};
+
+export const startTick = totalTime => (dispatch, getState) => {
+  let now = new Date();
+  dispatch({ type: actionTypes.SET_START_TIME, time: now });
+
+  const loop = () => {
+    timerId = window.requestAnimationFrame(loop);
+
+    now = new Date();
+    const {
+      tasks: { activeTime, startTime }
+    } = getState();
+
+    const outOfTime = activeTime - startTime > totalTime;
+    if (!outOfTime) {
+      dispatch({ type: actionTypes.TICK, time: now, totalTime });
+    } else {
+      dispatch({ type: actionTypes.OUT_OF_TIME });
+      window.cancelAnimationFrame(timerId);
+    }
+  };
+
+  window.cancelAnimationFrame(timerId);
+  timerId = window.requestAnimationFrame(loop);
+};
+
+export const stopTick = () => () => {
+  window.cancelAnimationFrame(timerId);
+};
+
+// warning: this is not operating as intended
+export const pause = () => dispatch => {
+  dispatch({ type: actionTypes.PAUSE });
+};
+
+// warning: this is not operating as intended
+export const play = () => dispatch => {
+  dispatch({ type: actionTypes.PLAY });
 };
 
 // REDUCERS
@@ -59,6 +111,31 @@ export const tasksReducer = createReducer(initialState, {
     state.activeTask += 1;
     // Log completed task
     state.completedTasks.push(action.completedTask);
+
+    // reset timer to 0
+    state.activeTime = 0;
+  },
+  [actionTypes.SET_START_TIME]: (state, action) => {
+    const { time } = action;
+    state.startTime = time;
+    state.outOfTime = false;
+  },
+  [actionTypes.RESET_START_TIME]: (state, action) => {
+    const { time } = action;
+    state.startTime = time;
+  },
+  [actionTypes.TICK]: (state, action) => {
+    state.activeTime = action.time;
+    state.totalTime = action.totalTime;
+  },
+  [actionTypes.OUT_OF_TIME]: state => {
+    state.outOfTime = true;
+  },
+  [actionTypes.PAUSE]: state => {
+    state.playing = false;
+  },
+  [actionTypes.PLAY]: state => {
+    state.playing = true;
   }
 });
 /* eslint-enable no-param-reassign */
@@ -72,9 +149,9 @@ export const getTaskOrder = createSelector(
   taskOrder => taskOrder
 );
 
-export const getActiveTask = createSelector(
+export const getActiveTaskId = createSelector(
   ["tasks.activeTask"],
-  activeTask => activeTask
+  activeTaskId => activeTaskId
 );
 
 export const getActiveTaskData = createSelector(
@@ -93,6 +170,13 @@ export const getActiveEnvironment = createSelector(
 export const getTasksForEnvironment = createSelector(
   ["tasks.tasksForEnvironment"],
   foundTasks => foundTasks
+);
+
+export const getPercentComplete = createSelector(
+  ["tasks.activeTime", "tasks.startTime", "tasks.totalTime"],
+  (activeTime, startTime, totalTime) => {
+    return Math.max(0, Math.min(1, (activeTime - startTime) / totalTime)); // number within range of 0 - 1
+  }
 );
 
 export const getCompletedTasks = createSelector(
@@ -137,4 +221,19 @@ export const getWeightedTasks = createSelector(
 
     return possibleTasks;
   }
+);
+
+export const getActiveTime = createSelector(
+  ["activeTime"],
+  time => time
+);
+
+export const getOutOfTime = createSelector(
+  ["outOfTime"],
+  outOfTime => outOfTime
+);
+
+export const getIsPlaying = createSelector(
+  ["tasks.playing"],
+  playing => playing
 );

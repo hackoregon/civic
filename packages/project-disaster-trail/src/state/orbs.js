@@ -40,20 +40,25 @@ export const setOrbComplete = (id, isComplete) => dispatch => {
 export const orbs = createReducer(initialState, {
   [actionTypes.SET_ORBS]: (state, action) => {
     const { models } = action;
+    /* eslint-disable no-param-reassign */
     state.orbs = models;
   },
   [actionTypes.SET_ORB_TOUCHED]: (state, action) => {
     const { id, isTouched } = action;
-    isTouched
-      ? state.touchedOrbs.push(id)
-      : remove(state.touchedOrbs, orbId => orbId === id);
+    if (isTouched) {
+      state.touchedOrbs.push(id);
+    } else {
+      remove(state.touchedOrbs, orbId => orbId === id);
+    }
   },
 
   [actionTypes.SET_ORB_COMPLETE]: (state, action) => {
     const { id, isComplete } = action;
-    isComplete
-      ? state.completedOrbs.push(id)
-      : remove(state.completedOrbs, orbId => orbId === id);
+    if (isComplete) {
+      state.completedOrbs.push(id);
+    } else {
+      remove(state.completedOrbs, orbId => orbId === id);
+    }
   }
 });
 
@@ -63,12 +68,12 @@ export default orbs;
 
 export const getOrbs = createSelector(
   ["orbs.orbs"],
-  orbs => orbs
+  orbModels => orbModels
 );
 export const getOrbById = createSelector(
   ["orbs.orbs", "id"],
-  (orbs, id) => {
-    return orbs[id];
+  (orbModels, id) => {
+    return orbModels[id];
   }
 );
 

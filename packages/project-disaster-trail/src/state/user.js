@@ -26,9 +26,11 @@ export const addPoints = points => dispatch => {
 // REDUCERS
 export const user = createReducer(initialState, {
   [actionTypes.SET_POINTS]: (state, action) => {
+    /* eslint-disable no-param-reassign */
     state.points = action.points;
   },
   [actionTypes.ADD_POINTS]: (state, action) => {
+    /* eslint-disable no-param-reassign */
     state.points += action.points;
   }
 });
@@ -38,6 +40,6 @@ export default user;
 // SELECTORS
 
 export const getPoints = createSelector(
-  ["ui.points"],
+  ["user.points"],
   points => points
 );

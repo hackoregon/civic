@@ -3,7 +3,7 @@ import CHAPTERS from "../constants/chapters";
 
 const totalChapters = CHAPTERS.length;
 const initialState = {
-  activeChapterId: 2
+  activeChapterId: 6
 };
 
 // CONSTANTS

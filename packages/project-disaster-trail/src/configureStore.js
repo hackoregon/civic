@@ -4,10 +4,9 @@ import { routerMiddleware } from "react-router-redux";
 import reduxImmutableStateInvariant from "redux-immutable-state-invariant";
 import thunk from "redux-thunk";
 import createReducer from "./state";
-import { sideEffectsMiddleware } from "./middleware";
 
 function configureStoreProd(initialState = {}, history) {
-  const middlewares = [thunk, sideEffectsMiddleware, routerMiddleware(history)];
+  const middlewares = [thunk, routerMiddleware(history)];
 
   const enhancers = [applyMiddleware(...middlewares)];
 
@@ -26,7 +25,6 @@ function configureStoreDev(initialState = {}, history) {
   const middlewares = [
     reduxImmutableStateInvariant(),
     thunk,
-    sideEffectsMiddleware,
     routerMiddleware(history)
   ];
 

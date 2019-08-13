@@ -1,6 +1,9 @@
 /** @jsx jsx */
+import { memo } from "react";
+import { connect } from "react-redux";
 import { jsx, css } from "@emotion/core";
 import PropTypes from "prop-types";
+import { getPercentComplete } from "../../../state/tasks";
 
 const durationBarStepStyle = css`
   display: grid;
@@ -16,38 +19,46 @@ const durationBarStepStyle = css`
   text-align: center;
 `;
 
-const DurationBar = ({ step, durationLength }) => {
+const DurationBar = ({ step, percentComplete }) => {
+  const containerStyle = css`
+    position: relative;
+    width: 100%;
+  `;
+
   const durationBarStyle = css`
     width: 100%;
     height: 40px;
     margin: 0;
     background-color: #721d7c;
-    animation: scroll-left ${durationLength}s linear;
-    animation-fill-mode: forwards;
-    @keyframes scroll-left {
-      0% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(-100%);
-      }
-    }
+    transform: translateX(-${percentComplete * 100}%);
   `;
 
   return (
-    <div
-      css={css`
-        ${durationBarStyle}
-      `}
-    >
+    <div css={containerStyle}>
       <div
         css={css`
-          ${durationBarStepStyle}
+          ${durationBarStyle}
         `}
       >
-        <span>{step}</span>
-        <span>{step}</span>
-        <span>{step}</span>
+        <div
+          css={css`
+            ${durationBarStepStyle}
+          `}
+        >
+          <span>{step}</span>
+          <span>{step}</span>
+          <span>{step}</span>
+        </div>
+      </div>
+      <div
+        css={css`
+          position: absolute;
+          left: 0;
+          top: 0;
+          z-index: 1;
+        `}
+      >
+        <p>{Math.round(percentComplete * 100) || 0}</p>
       </div>
     </div>
   );
@@ -55,12 +66,15 @@ const DurationBar = ({ step, durationLength }) => {
 
 DurationBar.propTypes = {
   step: PropTypes.string,
-  durationLength: PropTypes.number
+  percentComplete: PropTypes.number
 };
 
 DurationBar.defaultProps = {
-  step: "Current step",
-  durationLength: 30
+  step: "Current step"
 };
 
-export default DurationBar;
+const mapStateToProps = state => ({
+  percentComplete: getPercentComplete(state)
+});
+
+export default connect(mapStateToProps)(memo(DurationBar));

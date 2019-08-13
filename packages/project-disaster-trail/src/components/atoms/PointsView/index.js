@@ -1,8 +1,14 @@
 import React, { memo } from "react";
+import { PropTypes } from "prop-types";
+
 import { connect } from "react-redux";
 import styled from "@emotion/styled";
 
 const PointsView = ({ points }) => <h1>Points: {points}</h1>;
+
+PointsView.propTypes = {
+  points: PropTypes.number
+};
 
 const mapStateToProps = ({ user }) => ({
   points: user.points
