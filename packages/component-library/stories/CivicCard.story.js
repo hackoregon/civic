@@ -6,7 +6,8 @@ import {
   CivicCard,
   LineChart,
   Collapsable,
-  CivicCardLayoutClassic
+  CivicCardLayoutClassic,
+  CivicCardLayoutVisualizationOnly
 } from "../src";
 import { civicFormat } from "../src/utils";
 
@@ -321,15 +322,23 @@ const demoCardMeta = (/* data */) => ({
 });
 
 export default () =>
-  storiesOf("Component Lib|Story Cards/CIVIC Story Card", module)
-    .add("Default layout (full)", () => (
+  storiesOf("Component Lib|Story Cards/CIVIC Card", module)
+    .add("Layout: Default (full)", () => (
       <CivicCard cardMeta={demoCardMeta} data={demoData} isLoading={false} />
     ))
-    .add("Classic layout", () => (
+    .add("Layout: Classic", () => (
       <CivicCard
         cardMeta={demoCardMeta}
         data={demoData}
         isLoading={false}
         Layout={CivicCardLayoutClassic}
+      />
+    ))
+    .add("Layout: Visualization Only", () => (
+      <CivicCard
+        cardMeta={demoCardMeta}
+        data={demoData}
+        isLoading={false}
+        Layout={CivicCardLayoutVisualizationOnly}
       />
     ));

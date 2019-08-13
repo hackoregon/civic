@@ -8,6 +8,7 @@ function CivicCardLayoutVisualizationOnly({ isLoading, data, cardMeta }) {
     <div
       css={css`
         text-align: center;
+        margin: 1.5em auto;
       `}
     >
       <cardMeta.visualization isLoading={isLoading} data={data} />
