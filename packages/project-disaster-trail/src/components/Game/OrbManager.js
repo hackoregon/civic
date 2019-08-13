@@ -5,6 +5,7 @@ import { bindActionCreators } from "redux";
 import { map } from "lodash";
 import styled from "@emotion/styled";
 
+import { palette } from "../../constants/style";
 import useBounds from "../../state/hooks/useBounds";
 import usePrevious from "../../state/hooks/usePrevious";
 import useAnimationFrame from "../../state/hooks/useAnimationFrame";
@@ -198,6 +199,7 @@ const OrbsStyle = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
+  background-color: ${palette.blue};
 `;
 
 const mapStateToProps = state => ({
