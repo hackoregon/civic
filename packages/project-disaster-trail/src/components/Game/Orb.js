@@ -3,11 +3,11 @@ import { PureComponent } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { PropTypes } from "prop-types";
-
 import { jsx, css } from "@emotion/core";
-import RadialGauge from "./RadialGauge";
 
+import { palette } from "../../constants/style";
 import { getOrbTouched, setOrbTouched, setOrbComplete } from "../../state/orbs";
+import RadialGauge from "./RadialGauge";
 
 const orbContainerStyle = css`
   position: relative;
@@ -16,10 +16,9 @@ const orbContainerStyle = css`
 const circleDefaultStyle = css`
   transition: transform 1s;
   z-index: 10;
-  background-color: mediumSeaGreen;
+  background-color: ${palette.gold};
   transition: background-color 1000ms linear;
   cursor: pointer;
-  opacity: 0.8;
   display: grid;
   align-items: center;
   justify-items: center;
@@ -29,7 +28,7 @@ const circleDefaultStyle = css`
   }
 
   &.circle-press-style {
-    background-color: mediumAquamarine;
+    background-color: ${palette.lightGreen};
     transition: background-color 1000ms linear;
   }
 
