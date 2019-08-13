@@ -1,9 +1,9 @@
 import { createReducer, createSelector } from "redux-starter-kit";
 import CHAPTERS from "../constants/chapters";
 
-const totalChapters = CHAPTERS.length;
+const lastChapterIndex = CHAPTERS.length - 1;
 const initialState = {
-  activeChapterId: 2
+  activeChapterIndex: 0
 };
 
 // CONSTANTS
@@ -15,8 +15,8 @@ export const actionTypes = {
 
 // ACTIONS
 
-export const setActiveChapter = chapterId => dispatch => {
-  dispatch({ type: actionTypes.SET_ACTIVE_CHAPTER, chapterId });
+export const setActiveChapter = chapterIndex => dispatch => {
+  dispatch({ type: actionTypes.SET_ACTIVE_CHAPTER, chapterIndex });
 };
 
 export const goToNextChapter = () => dispatch => {
@@ -28,14 +28,15 @@ export const goToNextChapter = () => dispatch => {
 /* eslint-disable no-param-reassign */
 export const chapters = createReducer(initialState, {
   [actionTypes.SET_ACTIVE_CHAPTER]: (state, action) => {
-    if (action.chapterId < 1 || action.chapterId > totalChapters) return;
+    if (action.chapterIndex < 0 || action.chapterIndex > lastChapterIndex)
+      return;
 
-    state.activeChapterId = action.chapterId;
+    state.activeChapterIndex = action.chapterIndex;
   },
 
   [actionTypes.GO_TO_NEXT_CHAPTER]: state => {
-    if (state.activeChapterId >= totalChapters) return;
-    state.activeChapterId += 1;
+    if (state.activeChapterIndex >= lastChapterIndex) return;
+    state.activeChapterIndex += 1;
   }
 });
 /* eslint-enable no-param-reassign */
@@ -44,15 +45,19 @@ export default chapters;
 
 // SELECTORS
 
-/**
- * returns the Chapter for the given chapterId
- *
- * @param {*} id
- * @returns
- */
-export const getActiveChapter = createSelector(
-  ["chapters.activeChapterId"],
-  activeChapterId => CHAPTERS.find(chapter => chapter.id === activeChapterId)
+export const getActiveChapterIndex = createSelector(
+  ["chapters.activeChapterIndex"],
+  activeChapterIndex => activeChapterIndex
+);
+
+export const getActiveChapterId = createSelector(
+  ["chapters.activeChapterIndex"],
+  activeChapterIndex => CHAPTERS[activeChapterIndex].id
+);
+
+export const getActiveChapterData = createSelector(
+  ["chapters.activeChapterIndex"],
+  activeChapterIndex => CHAPTERS[activeChapterIndex]
 );
 
 export const getChapterById = createSelector(

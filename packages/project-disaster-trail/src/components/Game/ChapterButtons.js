@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { css, jsx } from "@emotion/core";
 
-import { getActiveChapter, setActiveChapter } from "../../state/chapters";
+import { getActiveChapterIndex, setActiveChapter } from "../../state/chapters";
 
 const buttonContainer = css`
   display: inline-grid;
@@ -15,13 +15,13 @@ const buttonContainer = css`
   }
 `;
 
-const ChapterButtons = ({ activeChapter, goToChapter }) => {
+const ChapterButtons = ({ activeChapterIndex, goToChapter }) => {
   return (
     <div css={buttonContainer}>
       <button
         type="button"
         onClick={() => {
-          goToChapter(activeChapter.id - 1);
+          goToChapter(activeChapterIndex - 1);
         }}
       >
         ←
@@ -29,7 +29,7 @@ const ChapterButtons = ({ activeChapter, goToChapter }) => {
       <button
         type="button"
         onClick={() => {
-          goToChapter(activeChapter.id + 1);
+          goToChapter(activeChapterIndex + 1);
         }}
       >
         →
@@ -39,18 +39,13 @@ const ChapterButtons = ({ activeChapter, goToChapter }) => {
 };
 
 ChapterButtons.propTypes = {
-  activeChapter: PropTypes.shape({
-    enabled: PropTypes.bool,
-    id: PropTypes.number,
-    title: PropTypes.string,
-    type: PropTypes.string
-  }),
+  activeChapterIndex: PropTypes.number,
   goToChapter: PropTypes.func
 };
 
 export default connect(
   state => ({
-    activeChapter: getActiveChapter(state)
+    activeChapterIndex: getActiveChapterIndex(state)
   }),
   dispatch => ({
     goToChapter(chapter) {
