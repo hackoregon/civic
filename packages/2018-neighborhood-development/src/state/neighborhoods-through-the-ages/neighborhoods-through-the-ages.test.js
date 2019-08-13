@@ -165,7 +165,7 @@ describe("neighborhood-ages", () => {
         expect(
           selectors.getNeighborhoodAgesRequest({
             red: "herring",
-            neighborhood: {
+            package2018NeighborhoodDevelopment: {
               neighborhoodAges: expectation
             }
           })

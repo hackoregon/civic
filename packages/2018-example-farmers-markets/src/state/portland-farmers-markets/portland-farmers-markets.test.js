@@ -167,7 +167,7 @@ describe("portland-farmers-markets", () => {
         expect(
           selectors.getPortlandFarmersMarketsRequest({
             red: "herring",
-            farmersMarkets: {
+            package2018ExampleFarmersMarkets: {
               portlandFarmersMarkets: expectation
             }
           })

@@ -7,7 +7,7 @@ export const IMPORT_SUCCESS = "TEMPLATE_DATA/SUCCESS";
 export const TemplateDataStart = actionEmitter(IMPORT_START);
 export const TemplateDataSuccess = actionEmitter(IMPORT_SUCCESS);
 
-const importPromise = import("../../assets/template-data.json");
+const importPromise = import("../../assets/template-file-data.json");
 
 export const fetchTemplateData = importAdapter(importPromise, {
   start: TemplateDataStart,

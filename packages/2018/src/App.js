@@ -9,7 +9,6 @@ import {
   routerMiddleware,
   syncHistoryWithStore
 } from "react-router-redux";
-import { createLogger } from "redux-logger";
 import { reducer as reduxFormReducer } from "redux-form";
 import { composeWithDevTools } from "redux-devtools-extension";
 
@@ -84,25 +83,22 @@ import CardDetailPageEmbed from "./components/CardDetailPageEmbed";
 // Create a store by combining all project reducers and the routing reducer
 const configureStore = (initialState, history) => {
   const middlewares = [thunk, routerMiddleware(history)];
-  if (process.env.NODE_ENV !== "production") {
-    middlewares.push(createLogger());
-  }
 
   const store = createStore(
     combineReducers({
       routing: routerReducer,
       form: reduxFormReducer,
-      disaster: DisasterReducers(),
-      housing: HousingReducers(),
-      elections: ElectionsReducers(),
-      neighborhood: NeighborhoodReducers(),
-      transportation: TransportationReducers(),
-      farmersMarkets: FarmersMarketsReducers(),
-      sandbox: SandboxReducers(),
+      package2018DisasterResilience: DisasterReducers(),
+      package2018HousingAffordability: HousingReducers(),
+      package2018LocalElections: ElectionsReducers(),
+      package2018NeighborhoodDevelopment: NeighborhoodReducers(),
+      package2018TransportationSystems: TransportationReducers(),
+      package2018ExampleFarmersMarkets: FarmersMarketsReducers(),
+      packageCivicSandbox: SandboxReducers(),
       // Temporarily Hidden 2019 Pages ⬇️
-      housing2019: Housing2019Reducers(),
-      template2019: Template2019Reducers(),
-      transportation2019: Transportation2019Reducers()
+      package2019Housing: Housing2019Reducers(),
+      package2019Template: Template2019Reducers(),
+      package2019Transportation: Transportation2019Reducers()
     }),
     initialState,
     composeWithDevTools(applyMiddleware(...middlewares))
@@ -129,17 +125,17 @@ const configureStore = (initialState, history) => {
       () => {
         const nextRootReducer = combineReducers({
           routing: routerReducer,
-          disaster: require("@hackoregon/2018-disaster-resilience").Reducers(),
-          housing: require("@hackoregon/2018-housing-affordability").Reducers(),
-          elections: require("@hackoregon/2018-local-elections").Reducers(),
-          neighborhood: require("@hackoregon/2018-neighborhood-development").Reducers(),
-          transportation: require("@hackoregon/2018-transportation-systems").Reducers(),
-          farmersMarkets: require("@hackoregon/2018-example-farmers-markets").Reducers(),
-          sandbox: require("@hackoregon/civic-sandbox").Reducers(),
+          package2018DisasterResilience: require("@hackoregon/2018-disaster-resilience").Reducers(),
+          package2018HousingAffordability: require("@hackoregon/2018-housing-affordability").Reducers(),
+          package2018LocalElections: require("@hackoregon/2018-local-elections").Reducers(),
+          package2018NeighborhoodDevelopment: require("@hackoregon/2018-neighborhood-development").Reducers(),
+          package2018TransportationSystems: require("@hackoregon/2018-transportation-systems").Reducers(),
+          package2018ExampleFarmersMarkets: require("@hackoregon/2018-example-farmers-markets").Reducers(),
+          packageCivicSandbox: require("@hackoregon/civic-sandbox").Reducers(),
           // Temporarily Hidden 2019 Pages ⬇️
-          housing2019: require("@hackoregon/2019-housing").Reducers(),
-          template2019: require("@hackoregon/2019-template").Reducers(),
-          transportation2019: require("@hackoregon/2019-transportation").Reducers()
+          package2019Housing: require("@hackoregon/2019-housing").Reducers(),
+          package2019Template: require("@hackoregon/2019-template").Reducers(),
+          package2019Transportation: require("@hackoregon/2019-transportation").Reducers()
         });
         store.replaceReducer(nextRootReducer);
       }

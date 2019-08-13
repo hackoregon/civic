@@ -5,10 +5,12 @@ import { cx, css } from "emotion"; // eslint-disable-line emotion/no-vanilla
 import {
   PageLayout,
   PullQuote,
-  CivicCardLayoutClassic
+  CivicCardLayoutClassic,
+  CivicCardLayoutVisualizationOnly
 } from "@hackoregon/component-library";
 
-import TemplateCard from "../TemplateCard";
+import TemplateAPICard from "../TemplateAPICard";
+import TemplateFileCard from "../TemplateFileCard";
 import DemoCard from "../DemoCard";
 
 import "@hackoregon/component-library/assets/global.styles.css";
@@ -54,10 +56,22 @@ const App = () => (
         Fermentum leo vel orci porta.
       </p>
     </section>
+    <section className={sectionMarginMedium}>
+      <DemoCard Layout={CivicCardLayoutVisualizationOnly} />
+    </section>
+    <section className={cx(sectionMarginSmall, sectionMaxWidthSmall)}>
+      <p className={paragraphStyle}>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Elementum curabitur
+        vitae nunc sed. Nisl condimentum id venenatis a condimentum vitae sapien
+        pellentesque. Sapien eget mi proin sed libero enim sed faucibus turpis.
+        Fermentum leo vel orci porta.
+      </p>
+    </section>
     <section className={cx(sectionMarginMedium, sectionMaxWidthMedium)}>
       <PullQuote
-        quoteText="The lorem ipsum text is typically a scrambled section of De 
-      finibus bonorum et malorum, with words altered, added, and removed to make 
+        quoteText="The lorem ipsum text is typically a scrambled section of De
+      finibus bonorum et malorum, with words altered, added, and removed to make
       it nonsensical, improper Latin."
       />
     </section>
@@ -71,7 +85,10 @@ const App = () => (
       </p>
     </section>
     <section className={sectionMarginMedium}>
-      <TemplateCard Layout={CivicCardLayoutClassic} />
+      <TemplateAPICard Layout={CivicCardLayoutClassic} />
+    </section>
+    <section className={sectionMarginMedium}>
+      <TemplateFileCard Layout={CivicCardLayoutClassic} />
     </section>
     <section className={sectionMarginMedium}>
       <DemoCard Layout={CivicCardLayoutClassic} />

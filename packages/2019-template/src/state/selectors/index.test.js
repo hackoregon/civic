@@ -8,15 +8,15 @@ describe("rootState", () => {
     expect(rootState(state)).to.eql(state);
   });
 
-  it("uses the template2019 object when the template2019 key is present", () => {
+  it("uses the package2019Template object when the package2019Template key is present", () => {
     const state = {
-      template2019: {
+      package2019Template: {
         hello: "world"
       },
       otherScope: {
         not: "for you"
       }
     };
-    expect(rootState(state)).to.eql(state.template2019);
+    expect(rootState(state)).to.eql(state.package2019Template);
   });
 });

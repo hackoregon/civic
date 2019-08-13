@@ -1,24 +1,24 @@
-import React from "react";
-import { CivicCardLayoutFull } from "@hackoregon/component-library";
-
 import App from "./components/App";
 import Routes from "./routes";
 import Reducers from "./state";
 
 // TODO: Update me before commiting a new card
-import TemplateCard from "./components/TemplateCard";
+import TemplateFileCard from "./components/TemplateFileCard";
 import DemoCard from "./components/DemoCard";
+import TemplateAPICard from "./components/TemplateAPICard";
 
 const CardRegistry = [
   {
-    slug: "template-card",
-    // this reflects the odd way that these components are composed
-    component: () => <TemplateCard Layout={CivicCardLayoutFull} />
+    slug: "template-file-card",
+    component: TemplateFileCard
   },
   {
     slug: "demo-card",
-    // this reflects the odd way that these components are composed
-    component: () => <DemoCard Layout={CivicCardLayoutFull} />
+    component: DemoCard
+  },
+  {
+    slug: "template-api-card",
+    component: TemplateAPICard
   }
 ];
 

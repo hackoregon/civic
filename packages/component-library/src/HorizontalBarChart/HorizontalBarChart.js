@@ -173,6 +173,7 @@ const HorizontalBarChart = ({
               x="sortOrder"
               y="dataValue"
               events={chartEvents}
+              animate
             />
           )}
           {!stacked && (
@@ -203,6 +204,7 @@ const HorizontalBarChart = ({
               x="sortOrder"
               y="dataValue"
               events={chartEvents}
+              animate
             />
           )}
           {stacked && (
@@ -235,6 +237,7 @@ const HorizontalBarChart = ({
                         theme={CivicVictoryTheme.civic}
                       />
                     }
+                    animate
                   />
                 );
               })}

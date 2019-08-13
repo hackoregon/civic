@@ -1,26 +1,22 @@
 /** @jsx jsx */
 import { PureComponent, Fragment } from "react";
 import { PropTypes } from "prop-types";
-import { connect } from "react-redux";
 import { css, jsx } from "@emotion/core";
+import { connect } from "react-redux";
 
 import {
-  getTaskOrder,
+  getWeightedTasks,
   getActiveTaskData,
-  getActiveEnvironment,
-  getTasksForEnvironment,
-  getCompletedTasks,
-  getHasSavedSelf,
   addTask,
-  increaseActiveTask
+  getActiveEnvironment,
+  getTasksForEnvironment
 } from "../../../state/tasks";
 import DurationBar from "../../atoms/DurationBar";
-import TextContainer from "../../atoms/Containers/TextContainer";
 import OrbManager from "../OrbManager";
+import TaskMap from "./TaskMap";
 
 const screenLayout = css`
   position: relative;
-  display: grid;
   overflow: hidden;
   width: 100%;
   height: 100%;
@@ -31,44 +27,37 @@ const screenLayout = css`
 
 const defaultState = {
   voteTimer: null,
-  timeToVote: 7000
+  timeToVote: 20000,
+  chooseTask: false
 };
 
 class ChooseScreen extends PureComponent {
   state = defaultState;
 
   componentDidMount() {
-    const { activeTask } = this.props;
     const { timeToVote } = this.state;
+    const { weightedTasks } = this.props;
+    const taskVotes = weightedTasks.reduce((result, taskData) => {
+      // eslint-disable-next-line no-param-reassign
+      result[taskData.type] = 0;
+      return result;
+    }, {});
 
-    if (!activeTask) {
-      this.setState({
-        voteTimer: setTimeout(this.chooseRandomTask, timeToVote)
-      });
-    }
+    this.setState({
+      voteTimer: setTimeout(this.goToTask, timeToVote),
+      taskVotes
+    });
   }
 
   componentWillUnmount() {
+    const { exampleTimeToAnimate } = this.state;
+    clearTimeout(exampleTimeToAnimate);
     this.clearVoteTimeout();
   }
 
   clearVoteTimeout = () => {
     const { voteTimer } = this.state;
     clearTimeout(voteTimer);
-  };
-
-  chooseTask = task => {
-    const { addNextTask } = this.props;
-    this.clearVoteTimeout();
-    addNextTask(task);
-  };
-
-  chooseRandomTask = () => {
-    const { addNextTask } = this.props;
-    const possibleTasks = this.getPossibleTasks();
-    const randomIndex = Math.floor(Math.random() * possibleTasks.length);
-    const randomTask = possibleTasks[randomIndex];
-    addNextTask(randomTask);
   };
 
   getPossibleTasks = () => {
@@ -80,112 +69,109 @@ class ChooseScreen extends PureComponent {
     return [].concat(saveYourselfTasks, saveOthersTasks);
   };
 
-  render() {
-    const {
-      taskOrder,
-      saveOthersMode,
-      goToNextTask,
-      activeEnvironment,
-      tasksForEnvironment,
-      completedTasks
-    } = this.props;
-    const { timeToVote } = this.state;
+  chooseRandomTask = () => {
+    const possibleTasks = this.getPossibleTasks();
+    const randomIndex = Math.floor(Math.random() * possibleTasks.length);
+    const randomTask = possibleTasks[randomIndex];
+    return randomTask;
+  };
 
-    const mapTasksToButton = task => (
-      <button
-        key={task}
-        type="button"
-        onClick={() => {
-          this.chooseTask(task);
-        }}
-      >
-        {task}
-      </button>
+  onTaskSelection = task => {
+    const { taskVotes } = this.state;
+    taskVotes[task.type] += 1;
+
+    this.setState({
+      taskVotes
+    });
+    // Return true so Orb knows how to animate
+    return true;
+  };
+
+  // returns [ {vote count}, {task id} ]
+  tallyVotes = () => {
+    const { taskVotes } = this.state;
+    const taskIds = Object.keys(taskVotes);
+
+    return taskIds.reduce(
+      (accumulator, id) => {
+        const votesForTask = taskVotes[id];
+        const [mostVotesCount] = accumulator;
+        if (votesForTask > mostVotesCount) {
+          // eslint-disable-next-line no-param-reassign
+          accumulator = [votesForTask, id];
+        }
+        return accumulator;
+      },
+      [0, null]
     );
+  };
 
-    const tasksTodo = taskOrder.join(", ").toString();
+  goToTask = () => {
+    this.clearVoteTimeout();
 
-    // All possible tasks for the game environment
-    const saveYourselfTasks = tasksForEnvironment[
-      activeEnvironment
-    ].saveYourself.map(mapTasksToButton);
-    const saveOthersTasks = tasksForEnvironment[
-      activeEnvironment
-    ].saveOthers.map(mapTasksToButton);
-    const possibleTaskButtons = [].concat(saveYourselfTasks, saveOthersTasks);
+    const { addNextTask, weightedTasks } = this.props;
+    const voteResults = this.tallyVotes();
+
+    // eslint-disable-next-line prefer-const
+    let [mostVotesCount, mostVotesId] = voteResults;
+    if (mostVotesCount < 1) {
+      mostVotesId = this.chooseRandomTask();
+    }
+
+    // As an example of the time to pan and zoom, use a timeout
+    const exampleTimeToAnimate = setTimeout(() => {
+      addNextTask(mostVotesId);
+    }, 2000);
+
+    this.setState({
+      // trigger pan and zoom...
+      activeTask: weightedTasks.find(task => task.type === mostVotesId),
+      exampleTimeToAnimate
+    });
+  };
+
+  render() {
+    const { timeToVote, activeTask } = this.state;
+    const { weightedTasks } = this.props;
 
     return (
       <Fragment>
         <div css={screenLayout}>
-          <TextContainer>
-            <h2>Task: Choose Screen</h2>
-            {!saveOthersMode && (
-              <h3>
-                Tasks to be done first in {activeEnvironment} environment: [{" "}
-                {tasksTodo} ]
-              </h3>
-            )}
-            <h3>
-              Have you saved yourself yet? {saveOthersMode ? "yep!" : "nope"}
-            </h3>
-            {saveOthersMode ? (
-              <Fragment>
-                <h3>Choose next task for {activeEnvironment} environment:</h3>
-                {possibleTaskButtons}
-              </Fragment>
-            ) : (
-              <button
-                type="button"
-                onClick={() => {
-                  goToNextTask();
-                }}
-              >
-                Save Yourself!
-              </button>
-            )}
-            <h3>Complete Tasks: [{completedTasks.join(", ").toString()} ]</h3>
-          </TextContainer>
+          <TaskMap
+            activeTask={activeTask || weightedTasks[0]}
+            tasks={weightedTasks}
+          />
         </div>
-        {saveOthersMode && (
-          <Fragment>
-            <DurationBar
-              step="Choose a task"
-              durationLength={timeToVote / 1000}
-            />
-            <OrbManager />
-          </Fragment>
-        )}
+
+        <DurationBar step="Choose a task" durationLength={timeToVote / 1000} />
+        <OrbManager
+          possibleItems={weightedTasks}
+          onOrbSelection={this.onTaskSelection}
+          frozenOrbInterface
+        />
       </Fragment>
     );
   }
 }
 
 ChooseScreen.propTypes = {
-  taskOrder: PropTypes.arrayOf(PropTypes.string),
   activeTask: PropTypes.shape({}),
-  saveOthersMode: PropTypes.bool,
-  activeEnvironment: PropTypes.string,
-  tasksForEnvironment: PropTypes.shape({}),
-  completedTasks: PropTypes.arrayOf(PropTypes.string),
+  weightedTasks: PropTypes.arrayOf(PropTypes.shape({})),
   addNextTask: PropTypes.func,
-  goToNextTask: PropTypes.func
+  activeEnvironment: PropTypes.string,
+  tasksForEnvironment: PropTypes.shape({})
 };
 
 const mapStateToProps = state => ({
-  taskOrder: getTaskOrder(state),
-  saveOthersMode: getHasSavedSelf(state),
+  weightedTasks: getWeightedTasks(state),
   activeTask: getActiveTaskData(state),
   activeEnvironment: getActiveEnvironment(state),
-  tasksForEnvironment: getTasksForEnvironment(state),
-  completedTasks: getCompletedTasks(state)
+  tasksForEnvironment: getTasksForEnvironment(state)
 });
 
 const mapDispatchToProps = dispatch => ({
   addNextTask(taskChoice, taskId) {
     dispatch(addTask(taskChoice, taskId));
-  },
-  goToNextTask() {
-    dispatch(increaseActiveTask());
   }
 });
 
