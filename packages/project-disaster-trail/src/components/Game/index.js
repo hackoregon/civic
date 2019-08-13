@@ -5,7 +5,8 @@ import { connect } from "react-redux";
 import styled from "@emotion/styled";
 
 // import * as SCREENS from "../../constants/screens";
-import { getActiveChapter } from "../../state/chapters";
+import { getActiveChapterId } from "../../state/chapters";
+import { KIT, TASKS } from "../../constants/chapters";
 
 import ChapterButtons from "./ChapterButtons";
 import DefaultScreen from "./DefaultScreen/index";
@@ -16,22 +17,22 @@ import media from "../../utils/mediaQueries";
 
 import "@hackoregon/component-library/assets/global.styles.css";
 
-const Game = ({ activeChapter }) => {
+const Game = ({ activeChapterId }) => {
   const renderChapter = chapterId => {
     switch (chapterId) {
-      case 2:
+      case KIT:
         return <KitScreen />;
-      case 6:
+      case TASKS:
         return <TaskScreen />;
       default:
-        return <DefaultScreen chapterId={chapterId} />;
+        return <DefaultScreen />;
     }
   };
 
   return (
     <GameContainerStyle>
       <ChapterButtons />
-      {renderChapter(activeChapter.id)}
+      {renderChapter(activeChapterId)}
     </GameContainerStyle>
   );
 };
@@ -84,15 +85,10 @@ Game.propTypes = {
     maxVelocityY: PropTypes.number,
     mode: PropTypes.string
   }),
-  activeChapter: PropTypes.shape({
-    enabled: PropTypes.bool,
-    id: PropTypes.number,
-    title: PropTypes.string,
-    type: PropTypes.string
-  })
+  activeChapterId: PropTypes.string
 };
 
 export default connect(state => ({
   settings: state.settings,
-  activeChapter: getActiveChapter(state)
+  activeChapterId: getActiveChapterId(state)
 }))(memo(Game));
