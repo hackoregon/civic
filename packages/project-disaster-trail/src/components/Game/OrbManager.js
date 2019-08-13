@@ -23,6 +23,8 @@ import {
 } from "../../state/orbs";
 
 import Orb from "./Orb";
+import { addItemToPlayerKit, getKitCreationItems } from "../../state/kit";
+import { addPoints } from "../../state/user";
 
 /**
  * OrbManager is responsible for moving Orbs
@@ -46,14 +48,23 @@ const OrbManager = ({
     maxVelocityX = 2,
     maxVelocityY = 0
   } = {},
+  kitItems,
   touchedOrbs,
   completedOrbs,
-  possibleItems,
-  onOrbSelection,
-  frozenOrbInterface
+  frozenOrbInterface,
+  addItemToPlayerKitInState,
+  addPointsToState
 } = {}) => {
   const [hasInitialized, setHasInitialized] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
+
+  const onKitItemSelection = kitItem => {
+    if (kitItem.good) {
+      addItemToPlayerKitInState(kitItem.type);
+      addPointsToState(kitItem.points);
+    }
+    return kitItem.good;
+  };
 
   if (!frozenOrbInterface) {
     // eslint-disable-next-line no-use-before-define
@@ -84,9 +95,9 @@ const OrbManager = ({
     if (prevBounds && !prevBounds.width && bounds.width && !hasInitialized) {
       // create an empty array.
       const initialModels = [];
-      // create a number of orbs based on each possibleItems weighting to achieve the correct distribution. Add the x, y, and velocity properties to its existing properties for that item
-      for (let i = 0, itemData; i < possibleItems.length; i += 1) {
-        itemData = possibleItems[i];
+      // create a number of orbs based on each kitItems weighting to achieve the correct distribution. Add the x, y, and velocity properties to its existing properties for that item
+      for (let i = 0, itemData; i < kitItems.length; i += 1) {
+        itemData = kitItems[i];
         const totalOrbsForThisItem = Math.round(orbCount * itemData.weighting);
 
         for (let j = 0; j < totalOrbsForThisItem; j += 1) {
@@ -182,7 +193,7 @@ const OrbManager = ({
           <Orb
             size={orbSize}
             model={model}
-            onOrbSelection={onOrbSelection}
+            onOrbSelection={onKitItemSelection}
             id={index}
           />
         </div>
@@ -207,11 +218,14 @@ const mapStateToProps = state => ({
   velocityRange: getVelocityRange(state),
   orbs: getOrbs(state),
   touchedOrbs: getOrbsTouched(state),
-  completedOrbs: getOrbsComplete(state)
+  completedOrbs: getOrbsComplete(state),
+  kitItems: getKitCreationItems(state)
 });
 
 const mapDispatchToProps = dispatch => ({
-  setOrbsState: bindActionCreators(setOrbs, dispatch)
+  setOrbsState: bindActionCreators(setOrbs, dispatch),
+  addPointsToState: bindActionCreators(addPoints, dispatch),
+  addItemToPlayerKitInState: bindActionCreators(addItemToPlayerKit, dispatch)
 });
 
 // use memo to not re-render OrbManager unless its props change
