@@ -32,6 +32,7 @@
     "@hackoregon/2018-local-elections": "^3.0.0",
     "@hackoregon/2018-neighborhood-development": "^3.0.0",
     "@hackoregon/2018-transportation-systems": "^3.0.0",
+    "@hackoregon/2019-education": "^1.0.0",
     "@hackoregon/2019-housing": "^1.0.0",
     "@hackoregon/2019-template": "^1.0.0",
     "@hackoregon/2019-transportation": "^1.0.0",

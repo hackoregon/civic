@@ -50,6 +50,12 @@ import {
 } from "@hackoregon/2018-example-farmers-markets";
 
 import {
+  Routes as Education2019Routes,
+  Reducers as Education2019Reducers,
+  App as Education2019App
+} from "@hackoregon/2019-education";
+
+import {
   Routes as Housing2019Routes,
   Reducers as Housing2019Reducers,
   App as Housing2019App
@@ -96,6 +102,7 @@ const configureStore = (initialState, history) => {
       package2018ExampleFarmersMarkets: FarmersMarketsReducers(),
       packageCivicSandbox: SandboxReducers(),
       // Temporarily Hidden 2019 Pages ⬇️
+      package2019Education: Education2019Reducers(),
       package2019Housing: Housing2019Reducers(),
       package2019Template: Template2019Reducers(),
       package2019Transportation: Transportation2019Reducers()
@@ -118,6 +125,7 @@ const configureStore = (initialState, history) => {
         "@hackoregon/2018-example-farmers-markets",
         "@hackoregon/civic-sandbox",
         // Temporarily Hidden 2019 Pages ⬇️
+        "@hackoregon/2019-education",
         "@hackoregon/2019-housing",
         "@hackoregon/2019-template",
         "@hackoregon/2019-transportation"
@@ -133,6 +141,7 @@ const configureStore = (initialState, history) => {
           package2018ExampleFarmersMarkets: require("@hackoregon/2018-example-farmers-markets").Reducers(),
           packageCivicSandbox: require("@hackoregon/civic-sandbox").Reducers(),
           // Temporarily Hidden 2019 Pages ⬇️
+          package2019Education: require("@hackoregon/2019-education").Reducers(),
           package2019Housing: require("@hackoregon/2019-housing").Reducers(),
           package2019Template: require("@hackoregon/2019-template").Reducers(),
           package2019Transportation: require("@hackoregon/2019-transportation").Reducers()
@@ -228,6 +237,11 @@ const routes = {
     {
       path: "2019",
       childRoutes: [
+        {
+          path: "education",
+          component: Education2019App,
+          childRoutes: Education2019Routes(store)
+        },
         {
           path: "housing",
           component: Housing2019App,
