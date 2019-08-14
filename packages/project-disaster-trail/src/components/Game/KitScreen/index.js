@@ -6,6 +6,7 @@ import { PropTypes } from "prop-types";
 import { getKitCreationItems, addItemToPlayerKit } from "../../../state/kit";
 import { addPoints } from "../../../state/user";
 import DurationBar from "../../atoms/DurationBar";
+import Ticker from "../../atoms/Ticker";
 import PointsView from "../../atoms/PointsView";
 import { MapStyle, GUIStyle } from "../index";
 import OrbManager from "../OrbManager";
@@ -31,6 +32,7 @@ const KitScreen = ({
         <PointsView />
       </MapStyle>
       <DurationBar step="Choose supplies" />
+      <Ticker text="Ticker tape text that goes across the screen to give instructions" />
       <GUIStyle>
         <OrbManager
           possibleItems={possibleItems}

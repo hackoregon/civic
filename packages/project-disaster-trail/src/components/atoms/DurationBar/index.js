@@ -7,7 +7,7 @@ import { getPercentComplete } from "../../../state/tasks";
 
 import { palette } from "../../../constants/style";
 
-const DurationBar = ({ step, percentComplete, debug = false }) => {
+const DurationBar = ({ percentComplete, debug = false }) => {
   const containerStyle = css`
     position: relative;
     width: 100%;
@@ -54,12 +54,8 @@ const DurationBar = ({ step, percentComplete, debug = false }) => {
 };
 
 DurationBar.propTypes = {
-  step: PropTypes.string,
-  percentComplete: PropTypes.number
-};
-
-DurationBar.defaultProps = {
-  step: "Current step"
+  percentComplete: PropTypes.number,
+  debug: PropTypes.bool
 };
 
 const mapStateToProps = state => ({

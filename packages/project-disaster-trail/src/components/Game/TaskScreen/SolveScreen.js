@@ -13,6 +13,7 @@ import {
 } from "../../../state/tasks";
 import { getPlayerKitItems } from "../../../state/kit";
 import DurationBar from "../../atoms/DurationBar";
+import Ticker from "../../atoms/Ticker";
 import TextContainer from "../../atoms/Containers/TextContainer";
 import OrbManager from "../OrbManager";
 
@@ -106,6 +107,7 @@ class SolveScreen extends PureComponent {
           </TextContainer>
         </div>
         <DurationBar step="Choose a task" debug />
+        <Ticker text="Ticker tape text that goes across the screen to give instructions" />
         <OrbManager
           possibleItems={playerKitItems}
           onOrbSelection={this.onItemSelection}

@@ -14,6 +14,7 @@ import {
   stopTick as _stopTick
 } from "../../../state/tasks";
 import DurationBar from "../../atoms/DurationBar";
+import Ticker from "../../atoms/Ticker";
 import OrbManager from "../OrbManager";
 import TaskMap from "./TaskMap";
 
@@ -198,6 +199,7 @@ class ChooseScreen extends PureComponent {
         </div>
 
         <DurationBar step="Choose a task" />
+        <Ticker text="Ticker tape text that goes across the screen to give instructions" />
         <OrbManager
           possibleItems={weightedTasks}
           onOrbSelection={this.onTaskSelection}

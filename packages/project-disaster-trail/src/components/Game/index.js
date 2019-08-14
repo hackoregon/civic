@@ -47,13 +47,13 @@ const GameContainerStyle = styled(Panel)`
   height: 100vh;
   min-height: 600px;
 
-  grid-template-rows: 100px 1fr 24px 200px;
+  grid-template-rows: 100px 1fr 24px 80px 200px;
   grid-template-columns: 1fr;
   justify-content: center;
   align-items: center;
 
   ${media.lg} {
-    grid-template-rows: 100px 1fr 24px 250px;
+    grid-template-rows: 100px 1fr 24px 60px 250px;
     min-height: 650px;
   }
 
