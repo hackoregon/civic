@@ -8,6 +8,7 @@ import baseMapStory from "./BaseMap.story";
 import boundaryMapStory from "./BoundaryMap.story";
 import buttonStory from "./Button.story";
 import checkboxStory from "./Checkbox.story";
+import civicCardStory from "./CivicCard.story";
 import civicCardStackStory from "./CivicCardStack.story";
 import civicSandboxDashboardStory from "./CivicSandboxDashboard.story";
 import multiLayerMapStory from "./MultiLayerMap.story";
@@ -138,6 +139,12 @@ pathMapStory();
 scatterPlotMapStory();
 screenGridMapStory();
 multiLayerMapStory();
+
+// Civic story cards
+storiesOf("Component Lib|Story Cards", module)
+  .addParameters({ options: { showPanel: false } })
+  .addDecorator(checkA11y);
+civicCardStory();
 
 // Civic platform components and page layout
 storiesOf("Component Lib|CIVIC Platform", module)

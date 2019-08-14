@@ -37,8 +37,8 @@ DemoCard.displayName = "DemoCard";
 DemoCard.propTypes = {
   init: PropTypes.func,
   isLoading: PropTypes.bool,
-  data: PropTypes.arrayOf(PropTypes.shape({})),
-  Layout: PropTypes.node
+  data: PropTypes.shape({}),
+  Layout: PropTypes.func
 };
 
 export default connect(

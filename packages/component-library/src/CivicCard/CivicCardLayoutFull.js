@@ -6,7 +6,8 @@ import _ from "lodash";
 import PullQuote from "../PullQuote/PullQuote";
 import Placeholder from "../Placeholder/Placeholder";
 import CivicVictoryTheme from "../VictoryTheme/CivicVictoryTheme";
-import { Collapsable } from "../../dist";
+import Collapsable from "../Collapsable/Collapsable";
+import cardMetaTypes from "./cardMetaTypes";
 
 const sectionMarginSmall = css`
   display: block;
@@ -202,10 +203,8 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
 
 CivicCardLayoutFull.propTypes = {
   isLoading: PropTypes.bool,
-  data: PropTypes.arrayOf(PropTypes.object),
-  cardMeta: PropTypes.shape({
-    /* TODO: Add shape */
-  })
+  data: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.array]),
+  cardMeta: cardMetaTypes
 };
 
 export default CivicCardLayoutFull;

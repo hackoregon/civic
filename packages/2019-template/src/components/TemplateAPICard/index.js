@@ -35,8 +35,8 @@ TemplateAPICard.displayName = "TemplateAPICard";
 
 TemplateAPICard.propTypes = {
   init: PropTypes.func,
-  data: resourceShape,
-  Layout: PropTypes.node
+  data: PropTypes.shape({ ridershipOverTime: resourceShape }),
+  Layout: PropTypes.func
 };
 
 export default connect(

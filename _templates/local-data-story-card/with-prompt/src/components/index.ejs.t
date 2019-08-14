@@ -39,7 +39,7 @@ class <%=StoryCardName%> extends Component {
   init: PropTypes.func,
   isLoading: PropTypes.bool,
   data: PropTypes.arrayOf(PropTypes.shape({})),
-  Layout: PropTypes.node
+  Layout: PropTypes.func
 };
 
 export default connect(

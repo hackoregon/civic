@@ -5,6 +5,8 @@ import { jsx, css } from "@emotion/core";
 import PropTypes from "prop-types";
 import { getPercentComplete } from "../../../state/tasks";
 
+import { palette } from "../../../constants/style";
+
 const durationBarStepStyle = css`
   display: grid;
   height: 100%;
@@ -29,8 +31,8 @@ const DurationBar = ({ step, percentComplete }) => {
     width: 100%;
     height: 40px;
     margin: 0;
-    background-color: #721d7c;
     transform: translateX(-${percentComplete * 100}%);
+    background-color: ${palette.red};
   `;
 
   return (

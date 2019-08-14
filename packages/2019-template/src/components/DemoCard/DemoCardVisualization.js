@@ -75,13 +75,19 @@ export default function DemoCardVisualization({ isLoading, data }) {
   );
 }
 
+const dataShape = PropTypes.arrayOf(
+  PropTypes.shape({
+    year: PropTypes.number,
+    ridership: PropTypes.number,
+    series: PropTypes.string
+  })
+);
+
 DemoCardVisualization.propTypes = {
   isLoading: PropTypes.bool,
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      year: PropTypes.number,
-      ridership: PropTypes.number,
-      series: PropTypes.string
-    })
-  )
+  data: PropTypes.shape({
+    demoData: dataShape,
+    midData: dataShape,
+    lateData: dataShape
+  })
 };
