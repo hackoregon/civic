@@ -52,6 +52,10 @@ export const completeTask = completedTask => dispatch => {
   dispatch({ type: actionTypes.COMPLETE_TASK, completedTask });
 };
 
+// summon `startTick` when you want to start a new timer,
+// it uses requestAnimationFrame to summon the `loop` function
+// The loop function evaluates if the timer is expired (outOfTime)
+// or if the timer should 'tick' which counts down.
 export const startTick = totalTime => (dispatch, getState) => {
   let now = new Date();
   dispatch({ type: actionTypes.SET_START_TIME, time: now });
@@ -77,18 +81,9 @@ export const startTick = totalTime => (dispatch, getState) => {
   timerId = window.requestAnimationFrame(loop);
 };
 
+// use when unloading a component that summoned a timer
 export const stopTick = () => () => {
   window.cancelAnimationFrame(timerId);
-};
-
-// warning: this is not operating as intended
-export const pause = () => dispatch => {
-  dispatch({ type: actionTypes.PAUSE });
-};
-
-// warning: this is not operating as intended
-export const play = () => dispatch => {
-  dispatch({ type: actionTypes.PLAY });
 };
 
 // REDUCERS
@@ -115,27 +110,25 @@ export const tasksReducer = createReducer(initialState, {
     // reset timer to 0
     state.activeTime = 0;
   },
+  // summoned when the timer starts
   [actionTypes.SET_START_TIME]: (state, action) => {
     const { time } = action;
     state.startTime = time;
     state.outOfTime = false;
   },
+  // a timer can be reset
   [actionTypes.RESET_START_TIME]: (state, action) => {
     const { time } = action;
     state.startTime = time;
   },
+  // each 'tick' represents time passing when the timer is running
   [actionTypes.TICK]: (state, action) => {
     state.activeTime = action.time;
     state.totalTime = action.totalTime;
   },
+  // when the timer has completed
   [actionTypes.OUT_OF_TIME]: state => {
     state.outOfTime = true;
-  },
-  [actionTypes.PAUSE]: state => {
-    state.playing = false;
-  },
-  [actionTypes.PLAY]: state => {
-    state.playing = true;
   }
 });
 /* eslint-enable no-param-reassign */
@@ -172,6 +165,10 @@ export const getTasksForEnvironment = createSelector(
   foundTasks => foundTasks
 );
 
+// helpful to derive the percentage complete of current time/total time
+// ie when a timer is started, current time is 0
+// as the timer 'ticks' the current time increases
+// and eventually reaches 100% complete
 export const getPercentComplete = createSelector(
   ["tasks.activeTime", "tasks.startTime", "tasks.totalTime"],
   (activeTime, startTime, totalTime) => {
@@ -232,9 +229,4 @@ export const getActiveTime = createSelector(
 export const getOutOfTime = createSelector(
   ["outOfTime"],
   outOfTime => outOfTime
-);
-
-export const getIsPlaying = createSelector(
-  ["tasks.playing"],
-  playing => playing
 );

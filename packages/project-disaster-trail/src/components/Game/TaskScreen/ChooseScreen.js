@@ -54,6 +54,7 @@ class ChooseScreen extends PureComponent {
       taskVotes
     });
 
+    // when the component mounts, we want to start a timer
     startTick(votingDuration);
   }
 
@@ -71,6 +72,7 @@ class ChooseScreen extends PureComponent {
     }
   }
 
+  // cleanup
   componentWillUnmount() {
     const { animationId } = this.state;
     clearTimeout(animationId);

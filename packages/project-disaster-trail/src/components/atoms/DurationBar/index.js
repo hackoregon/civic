@@ -35,6 +35,8 @@ const DurationBar = ({ step, percentComplete }) => {
     background-color: ${palette.red};
   `;
 
+  // DurationBar is now connected directly to the store's `percentComplete`
+  // it's less reusable than it was but easier to work with
   return (
     <div css={containerStyle}>
       <div
