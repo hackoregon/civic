@@ -1,7 +1,7 @@
 /* Base */
 
 html {
-  font-size: 14px;
+  font-size: 1rem;
   line-height: 1.4;
   background-color: #fffefe;
   font-family: "Merriweather";
@@ -126,7 +126,7 @@ a:hover {
 }
 
 .Title {
-  font-size: 50px;
+  font-size: 3.57rem;
   line-height: 1.2;
   font-weight: 300;
   font-family: "Rubik", sans-serif;
@@ -188,7 +188,7 @@ p {
 }
 
 .Pullquote {
-  font-size: 40px;
+  font-size: 2.85rem;
 }
 
 /* Color */
