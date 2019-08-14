@@ -105,7 +105,7 @@ class SolveScreen extends PureComponent {
             </button>
           </TextContainer>
         </div>
-        <DurationBar step="Choose a task" />
+        <DurationBar step="Choose a task" debug />
         <OrbManager
           possibleItems={playerKitItems}
           onOrbSelection={this.onItemSelection}

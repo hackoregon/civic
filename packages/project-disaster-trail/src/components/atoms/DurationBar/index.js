@@ -21,7 +21,7 @@ const durationBarStepStyle = css`
   text-align: center;
 `;
 
-const DurationBar = ({ step, percentComplete }) => {
+const DurationBar = ({ step, percentComplete, debug = false }) => {
   const containerStyle = css`
     position: relative;
     width: 100%;
@@ -29,7 +29,7 @@ const DurationBar = ({ step, percentComplete }) => {
 
   const durationBarStyle = css`
     width: 100%;
-    height: 40px;
+    height: 24px;
     margin: 0;
     transform: translateX(-${percentComplete * 100}%);
     background-color: ${palette.red};
@@ -43,27 +43,25 @@ const DurationBar = ({ step, percentComplete }) => {
         css={css`
           ${durationBarStyle}
         `}
-      >
+      />
+      {debug && (
         <div
           css={css`
-            ${durationBarStepStyle}
+            position: absolute;
+            left: 0;
+            top: -10px;
+            z-index: 1;
           `}
         >
-          <span>{step}</span>
-          <span>{step}</span>
-          <span>{step}</span>
+          <p
+            css={css`
+              color: white;
+            `}
+          >
+            {Math.round(percentComplete * 100) || 0}%
+          </p>
         </div>
-      </div>
-      <div
-        css={css`
-          position: absolute;
-          left: 0;
-          top: 0;
-          z-index: 1;
-        `}
-      >
-        <p>{Math.round(percentComplete * 100) || 0}</p>
-      </div>
+      )}
     </div>
   );
 };
