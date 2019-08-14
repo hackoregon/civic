@@ -7,24 +7,11 @@ import { getPercentComplete } from "../../../state/tasks";
 
 import { palette } from "../../../constants/style";
 
-const durationBarStepStyle = css`
-  display: grid;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  grid-template-columns: repeat(3, 1fr);
-
-  color: #ffffff;
-  vertical-align: middle;
-  font-family: "Roboto", sans-serif;
-  font-size: 1.5em;
-  text-align: center;
-`;
-
 const DurationBar = ({ step, percentComplete, debug = false }) => {
   const containerStyle = css`
     position: relative;
     width: 100%;
+    background: ${palette.black};
   `;
 
   const durationBarStyle = css`
