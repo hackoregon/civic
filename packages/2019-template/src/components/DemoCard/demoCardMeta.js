@@ -36,9 +36,9 @@ const demoCardMeta = (/* data */) => ({
         the prosperity of people of color is lengthy: Jim Crow laws, racialized
         mortgage-lending practices, restrictive covenants and deeds, public
         works projects condemning entire Black neighborhoods, and zoning rules
-        that reinforce segregation are only a few to be named."`}
+        that reinforce segregation are only a few to be named.`}
+        {"("}<a href="https://www.portlandoregon.gov/bps/article/700970">Source</a>{")"}
       </p>
-      <a href="https://www.portlandoregon.gov/bps/article/700970">Source</a>
     </Fragment>
   ),
   shareText:
