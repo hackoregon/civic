@@ -9,22 +9,55 @@ import useBounds from "../../state/hooks/useBounds";
 import usePrevious from "../../state/hooks/usePrevious";
 import useAnimationFrame from "../../state/hooks/useAnimationFrame";
 
-import {
-  getOrbCount,
-  getOrbSize,
-  getPeriod,
-  getVelocityRange
-} from "../../state/settings";
-import {
-  getOrbs,
-  setOrbs,
-  getOrbsTouched,
-  getOrbsComplete
-} from "../../state/orbs";
+import { getOrbsTouched, getOrbsComplete } from "../../state/orbs";
 
 import Orb from "./Orb";
 import { addItemToPlayerKit, getKitCreationItems } from "../../state/kit";
 import { addPoints } from "../../state/user";
+
+function createOrbsFromKit(kitItems, bounds, config) {
+  if (!kitItems.length) {
+    return [];
+  }
+
+  // create an empty array.
+  const orbCollection = [];
+  // create a number of orbs based on each kitItems weighting to achieve the correct distribution. Add the x, y, and velocity properties to its existing properties for that item
+  for (let i = 0; i < kitItems.length; i += 1) {
+    const kitData = kitItems[i];
+    const totalGeneratedOrbs = Math.round(config.orbCount * kitData.weighting);
+
+    for (let j = 0; j < totalGeneratedOrbs; j += 1) {
+      const orbId = `${kitData.type}-${j}`;
+      kitData.x = Math.random() * bounds.width;
+      kitData.y = Math.random() * (bounds.height - config.orbSize / 2);
+      kitData.velocity = {
+        x:
+          config.minVelocityX +
+          Math.random() * (config.maxVelocityX - config.minVelocityX),
+        y:
+          config.minVelocityY +
+          Math.random() * (config.maxVelocityY - config.minVelocityY)
+      };
+
+      orbCollection.push(
+        Object.assign({}, { orbId }, { touched: false }, kitData)
+      );
+    }
+  }
+
+  return orbCollection;
+}
+
+const ORB_CONFIG = {
+  period: 2,
+  orbCount: 10,
+  orbSize: 40,
+  maxVelocityY: 0,
+  minVelocityX: 0.1,
+  minVelocityY: 0.1,
+  maxVelocityX: 2
+};
 
 /**
  * OrbManager is responsible for moving Orbs
@@ -36,114 +69,45 @@ import { addPoints } from "../../state/user";
  * @returns
  */
 const OrbManager = ({
-  orbs,
-  setOrbsState,
-  paused = false,
-  period = 2,
-  orbCount = 10,
-  orbSize = 25,
-  velocityRange: {
-    minVelocityX = 0.1,
-    minVelocityY = 0.1,
-    maxVelocityX = 2,
-    maxVelocityY = 0
-  } = {},
   kitItems,
   touchedOrbs,
   completedOrbs,
-  frozenOrbInterface,
   addItemToPlayerKitInState,
   addPointsToState
 } = {}) => {
   const [hasInitialized, setHasInitialized] = useState(false);
-  const [isAnimating, setIsAnimating] = useState(false);
-
-  const onKitItemSelection = kitItem => {
-    if (kitItem.good) {
-      addItemToPlayerKitInState(kitItem.type);
-      addPointsToState(kitItem.points);
-    }
-    return kitItem.good;
-  };
-
-  if (!frozenOrbInterface) {
-    // eslint-disable-next-line no-use-before-define
-    useAnimationFrame(() => animate());
-  }
-
-  // store references to all models
-  const prevModels = usePrevious(orbs);
-
+  const [orbs, setOrbsState] = useState([]);
+  // const [touchedOrbs, setTouchedOrb] = useState([]);
+  // const [completedOrbs, setCompletedOrbs] = useState([]);
   // tick is used to modulate movement based on an incrementing value
   const [tick, setTick] = useState(0);
-
-  // store reference to requestAnimationFrame for memory management purposes
-  const animationFrameId = null;
 
   // the boundaries of the OrbManagers area
   const boundsRef = useRef();
   const bounds = useBounds(boundsRef);
+  const prevBounds = usePrevious(bounds);
+
   // a reference to the previous state's bounds
   // used to control when the orbs are initialized:
   // specifically when there were no bounds in prev state but there are bounds in current state
   // which should only happen once, after the component renders the very first time
-  const prevBounds = usePrevious(bounds);
 
   // Initializes the orb data and placement. Only reexecutes when "bounds" is updated (screen resize)
   useEffect(() => {
     // ensure we only run this once
     if (prevBounds && !prevBounds.width && bounds.width && !hasInitialized) {
-      // create an empty array.
-      const initialModels = [];
-      // create a number of orbs based on each kitItems weighting to achieve the correct distribution. Add the x, y, and velocity properties to its existing properties for that item
-      for (let i = 0, itemData; i < kitItems.length; i += 1) {
-        itemData = kitItems[i];
-        const totalOrbsForThisItem = Math.round(orbCount * itemData.weighting);
-
-        for (let j = 0; j < totalOrbsForThisItem; j += 1) {
-          itemData.x = Math.random() * bounds.width;
-          itemData.y = Math.random() * (bounds.height - orbSize / 2);
-          itemData.velocity = {
-            x: minVelocityX + Math.random() * (maxVelocityX - minVelocityX),
-            y: minVelocityY + Math.random() * (maxVelocityY - minVelocityY)
-          };
-          initialModels.push(Object.assign({}, itemData));
-        }
-      }
-
-      setOrbsState(initialModels);
+      const newOrbs = createOrbsFromKit(kitItems, bounds, ORB_CONFIG);
       setHasInitialized(true);
+      setOrbsState(newOrbs);
     }
   }, [bounds]);
-
-  // Sets off initial animation and only attempts re-execution when orbs has changed
-  useEffect(() => {
-    if (
-      !frozenOrbInterface &&
-      prevModels &&
-      !prevModels.length &&
-      orbs.length &&
-      !isAnimating
-    ) {
-      setIsAnimating(true);
-    }
-  }, [orbs]);
-
-  // Cleanup when component is destroyed
-  useEffect(() => {
-    return () => {
-      window.cancelAnimationFrame(animationFrameId);
-    };
-  }, []);
 
   // `animate` is called every frame
   // eslint-disable-next-line consistent-return
   const animate = () => {
-    if (!bounds || !bounds.width || paused || !isAnimating || !hasInitialized)
-      return null;
+    if (!bounds || !bounds.width || !hasInitialized) return null;
 
     const tempModels = [];
-
     // we re-use tempModels by pushing updated data in to it.
     for (let i = 0, model; i < orbs.length; i += 1) {
       // get the model
@@ -159,14 +123,16 @@ const OrbManager = ({
 
       // and move it
       model.x += model.velocity.x; // + Math.cos(tick * 0.1) * period;
-      model.y += model.velocity.y + Math.sin((tick + i) * 0.1) * period;
+      model.y +=
+        model.velocity.y + Math.sin((tick + i) * 0.1) * ORB_CONFIG.period;
 
       // is it offscreen?
-      if (model.x < -orbSize) model.x += bounds.width;
-      if (model.x > bounds.width) model.x -= bounds.width + orbSize;
+      if (model.x < -ORB_CONFIG.orbSize) model.x += bounds.width;
+      if (model.x > bounds.width) model.x -= bounds.width + ORB_CONFIG.orbSize;
 
-      if (model.y < -orbSize) model.y += bounds.height;
-      if (model.y > bounds.height) model.y -= bounds.height + orbSize;
+      if (model.y < -ORB_CONFIG.orbSize) model.y += bounds.height;
+      if (model.y > bounds.height)
+        model.y -= bounds.height + ORB_CONFIG.orbSize;
 
       // store the updated model.
       tempModels.push(model);
@@ -178,23 +144,53 @@ const OrbManager = ({
     setTick(tick + 1);
   };
 
+  useAnimationFrame(() => animate());
+
   // this is the render method
   // simply wrap Orb with some styling that moves it
+  //
+  // const getOrbById = id => {
+  //   return orbs.find(orb => orb.id === id);
+  // };
+
+  const addOrbScore = orb => {
+    if (orb.good) {
+      addItemToPlayerKitInState(orb.type);
+      addPointsToState(orb.points);
+    }
+  };
+
+  const setOrbTouched = (touchedOrbId, isTouched) => {
+    const orb = getOrbById(touchedOrbId);
+    if (isTouched) {
+      orb.touched = true;
+      setTouchedOrb(oldSet => [...oldSet, touchedOrb]);
+      return;
+    }
+
+
+  };
+  //
+  // const setOrbComplete = (completedOrbId, isComplete) => {
+  //
+  // };
+
   return (
     <OrbsStyle ref={boundsRef}>
-      {map(orbs, (model, index) => (
+      {map(orbs, (orb, index) => (
         <div
           key={index}
           style={{
             position: "absolute",
-            transform: `translate(${model.x}px, ${model.y}px)`
+            transform: `translate(${orb.x}px, ${orb.y}px)`
           }}
         >
           <Orb
-            size={orbSize}
-            model={model}
-            onOrbSelection={onKitItemSelection}
             id={index}
+            size={ORB_CONFIG.orbSize}
+            orb={orb}
+            addOrbScore={addOrbScore}
+            // setOrbTouchedInState={setOrbTouchedInState}
           />
         </div>
       ))}
@@ -212,18 +208,12 @@ const OrbsStyle = styled.div`
 `;
 
 const mapStateToProps = state => ({
-  orbCount: getOrbCount(state),
-  orbSize: getOrbSize(state),
-  period: getPeriod(state),
-  velocityRange: getVelocityRange(state),
-  orbs: getOrbs(state),
   touchedOrbs: getOrbsTouched(state),
   completedOrbs: getOrbsComplete(state),
   kitItems: getKitCreationItems(state)
 });
 
 const mapDispatchToProps = dispatch => ({
-  setOrbsState: bindActionCreators(setOrbs, dispatch),
   addPointsToState: bindActionCreators(addPoints, dispatch),
   addItemToPlayerKitInState: bindActionCreators(addItemToPlayerKit, dispatch)
 });

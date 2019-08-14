@@ -144,11 +144,7 @@ class ChooseScreen extends PureComponent {
         </div>
 
         <DurationBar step="Choose a task" durationLength={timeToVote / 1000} />
-        <OrbManager
-          possibleItems={weightedTasks}
-          onOrbSelection={this.onTaskSelection}
-          frozenOrbInterface
-        />
+        <OrbManager onOrbSelection={this.onTaskSelection} />
       </Fragment>
     );
   }

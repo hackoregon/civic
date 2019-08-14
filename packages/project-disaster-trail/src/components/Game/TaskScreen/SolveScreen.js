@@ -5,7 +5,6 @@ import { PropTypes } from "prop-types";
 import { css, jsx } from "@emotion/core";
 
 import { completeTask, getActiveTaskData } from "../../../state/tasks";
-import { getPlayerKitItems } from "../../../state/kit";
 import DurationBar from "../../atoms/DurationBar";
 import TextContainer from "../../atoms/Containers/TextContainer";
 import OrbManager from "../OrbManager";
@@ -69,7 +68,7 @@ class SolveScreen extends PureComponent {
   };
 
   render() {
-    const { completeActiveTask, activeTask, playerKitItems } = this.props;
+    const { completeActiveTask, activeTask } = this.props;
     const { correctItemsChosen } = this.state;
 
     const screenLayout = css`
@@ -107,10 +106,7 @@ class SolveScreen extends PureComponent {
           step="Choose a task"
           durationLength={taskDuration / 1000}
         />
-        <OrbManager
-          possibleItems={playerKitItems}
-          onOrbSelection={this.onItemSelection}
-        />
+        <OrbManager onOrbSelection={this.onItemSelection} />
       </Fragment>
     );
   }
@@ -120,13 +116,11 @@ SolveScreen.propTypes = {
   completeActiveTask: PropTypes.func,
   activeTask: PropTypes.shape({
     id: PropTypes.string
-  }),
-  playerKitItems: PropTypes.arrayOf(PropTypes.shape({}))
+  })
 };
 
 const mapStateToProps = state => ({
-  activeTask: getActiveTaskData(state),
-  playerKitItems: getPlayerKitItems(state)
+  activeTask: getActiveTaskData(state)
 });
 
 const mapDispatchToProps = dispatch => ({

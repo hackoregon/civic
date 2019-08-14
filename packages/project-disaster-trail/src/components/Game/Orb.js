@@ -46,10 +46,9 @@ const iconStyle = css`
 `;
 
 const defaultState = {
-  durationRequired: 1000,
   pressTimeout: null,
   pressedStart: null,
-  isActive: false,
+  isActive: true,
   isComplete: false,
   isCorrect: false
 };
@@ -60,34 +59,14 @@ class Orb extends PureComponent {
     this.state = defaultState;
   }
 
-  componentWillUnmount() {
-    const { timeoutId } = this.state;
-    if (timeoutId) window.clearTimeout(timeoutId);
-  }
-
   handleOrbPress = () => {
-    const { isActive, isComplete, timeoutId } = this.state;
-    // if already pressed, do nothing
-    if (isActive || isComplete) return;
-
-    // start a timer. In n seconds, we check to see if we are complete
-    // complete means isActive is true
-    if (timeoutId) window.clearTimeout(timeoutId);
-
-    const { durationRequired } = this.state;
-    // set timer
-    const newTimeoutId = setTimeout(() => {
-      this.checkComplete();
-    }, durationRequired);
-
-    this.setState({
-      isActive: true,
-      pressedStart: new Date(),
-      timeoutId: newTimeoutId
-    });
-
-    // callbacks
+    const { isComplete } = this.state;
     const { id, setOrbTouchedInState } = this.props;
+    // if already pressed, do nothing
+    if (isComplete) return;
+
+    this.setState({isActive: true});
+
     setOrbTouchedInState(id, true);
   };
 
@@ -97,28 +76,36 @@ class Orb extends PureComponent {
     setOrbTouchedInState(id, false);
   };
 
-  checkComplete = () => {
-    const { pressedStart, durationRequired, isActive } = this.state;
-    const { onOrbSelection, model } = this.props;
-
-    if (isActive && pressedStart) {
-      const pressedDuration = new Date() - pressedStart;
-      if (pressedDuration >= durationRequired) {
-        const { id, setOrbCompleteInState } = this.props;
-        // before final logic is added assume all orbs are bad
-        // eslint-disable-next-line react/no-unused-state
-        this.setState({ isComplete: true, isCorrect: false });
-
-        setOrbCompleteInState(id, true);
-        onOrbSelection(model);
-      }
+  componentDidUpdate(prevProps, prevState) {
+    const { isComplete } = this.state;
+    const { addOrbScore, orb } = this.props;
+    if (isComplete) {
+      addOrbScore(orb);
     }
-  };
+  }
+
+  // checkComplete = () => {
+  //   const { pressedStart, durationRequired, isActive } = this.state;
+  //   const { onOrbSelection, orb } = this.props;
+	//
+  //   if (isActive && pressedStart) {
+  //     const pressedDuration = new Date() - pressedStart;
+  //     if (pressedDuration >= durationRequired) {
+  //       const { id, setOrbCompleteInState } = this.props;
+  //       // before final logic is added assume all orbs are bad
+  //       // eslint-disable-next-line react/no-unused-state
+  //       this.setState({ isComplete: true, isCorrect: false });
+	//
+  //       setOrbCompleteInState(id, true);
+  //       onOrbSelection(orb);
+  //     }
+  //   }
+  // };
 
   render() {
     const { isActive, isComplete } = this.state;
     // eslint-disable-next-line no-unused-vars
-    const { id, size, isTouched, model } = this.props;
+    const { id, size, isTouched, orb } = this.props;
 
     const sizeStyle = css`
       height: ${size}px;
@@ -150,16 +137,21 @@ class Orb extends PureComponent {
         onTouchEnd={this.handleOrbRelease}
       >
         <div css={absoluteStyle}>
-          <RadialGauge animateGauge={isActive || isComplete} size={size} />
+          <RadialGauge
+              isComplete={() => this.setState({isComplete: true})}
+              animateGauge={isActive}
+              size={size}
+          />
         </div>
         <div
           css={css`
             ${circleDefaultStyle};
             ${sizeStyle};
+            ${sizeStyle};
           `}
           className={orbClass}
         >
-          <img src={model.imageSVG} alt={model.imgAlt} css={iconStyle} />
+          <img src={orb.imageSVG} alt={orb.imgAlt} css={iconStyle} />
         </div>
       </div>
     );
@@ -172,8 +164,8 @@ Orb.propTypes = {
   setOrbTouchedInState: PropTypes.func,
   setOrbCompleteInState: PropTypes.func,
   isTouched: PropTypes.bool,
-  onOrbSelection: PropTypes.func,
-  model: PropTypes.shape({}),
+  addOrbScore: PropTypes.func,
+  orb: PropTypes.shape({}),
   size: PropTypes.number
 };
 

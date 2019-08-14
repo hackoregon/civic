@@ -18,14 +18,23 @@ class RadialGauge extends Component {
     percent: 0
   };
 
-  componentDidUpdate(prevProps) {
+  gaugeIncrement = () => {
+    const gaugeTimer = window.setInterval(() => {
+      const currentPercent = this.state.percent;
+      if (currentPercent !== 100) {
+        const update = currentPercent + 15;
+        this.setPercent(update);
+      } else {
+        window.clearInterval(gaugeTimer);
+        this.props.isComplete();
+      }
+    }, 300);
+  };
+
+  componentDidUpdate(prevProps, prevState) {
     const { animateGauge } = this.props;
     if (prevProps.animateGauge !== animateGauge) {
-      if (animateGauge) {
-        this.setPercent(100);
-      } else {
-        this.setPercent(0);
-      }
+      this.gaugeIncrement();
     }
   }
 
@@ -73,6 +82,7 @@ class RadialGauge extends Component {
 
 RadialGauge.propTypes = {
   animateGauge: PropTypes.bool,
+  isComplete: PropTypes.func,
   size: PropTypes.number
 };
 
