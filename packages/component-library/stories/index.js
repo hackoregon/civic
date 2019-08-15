@@ -58,7 +58,7 @@ import TypographyStyleQuickUsage from "./styleGuideStories/TypographyStyleQuickU
 import TypographyStyleHeadings from "./styleGuideStories/TypographyStyleHeadings.story";
 import TypographyStyleParagraphs from "./styleGuideStories/TypographyStyleParagraphs.story";
 import UIComponentsStyle from "./styleGuideStories/UIComponentsStyle.story";
-
+import Badge from "./Badge.story";
 // Legacy components used in 2017 package. Not supported for ongoing development.
 // import editableStory from './Editable.story';
 // import landingPage from './LandingPage.story';
@@ -152,6 +152,7 @@ storiesOf("Component Lib|CIVIC Platform", module)
   .addDecorator(checkA11y)
   .add("Platform Components Style Guide", () => <CivicPlatformStyle />);
 civicCardStackStory();
+Badge();
 civicSandboxDashboardStory();
 civicStorycardStory();
 headerStory();
