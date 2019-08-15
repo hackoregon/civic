@@ -73,6 +73,12 @@ import {
   App as Education2019App
 } from "@hackoregon/2019-education";
 
+import {
+  Routes as Elections2019Routes,
+  Reducers as Elections2019Reducers,
+  App as Elections2019App
+} from "@hackoregon/2019-elections";
+
 // hygen import injection (do not remove or modify this line)
 
 import { Reducers as SandboxReducers } from "@hackoregon/civic-sandbox";
@@ -107,6 +113,7 @@ const configureStore = (initialState, history) => {
       package2019Housing: Housing2019Reducers(),
       package2019Template: Template2019Reducers(),
       package2019Education: Education2019Reducers(),
+      package2019Elections: Elections2019Reducers(),
       // hygen store injection (do not remove or modify this line)
       package2019Transportation: Transportation2019Reducers()
     }),
@@ -131,6 +138,7 @@ const configureStore = (initialState, history) => {
         "@hackoregon/2019-housing",
         "@hackoregon/2019-template",
         "@hackoregon/2019-education",
+        "@hackoregon/2019-elections",
         // hygen hot module injection (do not remove or modify this line)
         "@hackoregon/2019-transportation"
       ],
@@ -148,6 +156,7 @@ const configureStore = (initialState, history) => {
           package2019Housing: require("@hackoregon/2019-housing").Reducers(),
           package2019Template: require("@hackoregon/2019-template").Reducers(),
           package2019Education: require("@hackoregon/2019-education").Reducers(),
+          package2019Elections: require("@hackoregon/2019-elections").Reducers(),
           // hygen reducer injection (do not remove or modify this line)
           package2019Transportation: require("@hackoregon/2019-transportation").Reducers()
         });
@@ -256,6 +265,11 @@ const routes = {
           path: "education",
           component: Education2019App,
           childRoutes: Education2019Routes(store)
+        },
+        {
+          path: "elections",
+          component: Elections2019App,
+          childRoutes: Elections2019Routes(store)
         },
         // hygen route injection (do not remove or modify this line)
         {
