@@ -1,5 +1,4 @@
 /* eslint-disable no-nested-ternary */
-/* eslint-disable import/no-extraneous-dependencies */
 import {
   scaleQuantize,
   scaleThreshold,
@@ -22,14 +21,13 @@ const createRange = (civicColor, colorRange) => {
   if (colorRange.length) {
     if (d3Color(colorRange[0])) {
       return convertToRGB(colorRange);
-    } 
-      return colorRange;
-    
-  } if (civicColor && CIVIC_MAP_COLORS[civicColor]) {
+    }
+    return colorRange;
+  }
+  if (civicColor && CIVIC_MAP_COLORS[civicColor]) {
     return CIVIC_MAP_COLORS[civicColor];
-  } 
-    return CIVIC_MAP_COLORS.earth;
-  
+  }
+  return CIVIC_MAP_COLORS.earth;
 };
 
 const createEqualScale = () => scaleQuantize();
