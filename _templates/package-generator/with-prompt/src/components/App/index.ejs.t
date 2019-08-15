@@ -8,7 +8,7 @@ import { cx, css } from "emotion"; // eslint-disable-line emotion/no-vanilla
 import {
   PageLayout,
   PullQuote,
-  CivicCardLayoutClassic
+  CivicCardLayoutClassic, // eslint-disable-line
 } from "@hackoregon/component-library";
 
 import "@hackoregon/component-library/assets/global.styles.css";
