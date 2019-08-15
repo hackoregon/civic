@@ -67,6 +67,12 @@ import {
   App as Transportation2019App
 } from "@hackoregon/2019-transportation";
 
+import {
+  Routes as Education2019Routes,
+  Reducers as Education2019Reducers,
+  App as Education2019App
+} from "@hackoregon/2019-education";
+
 // hygen import injection (do not remove or modify this line)
 
 import { Reducers as SandboxReducers } from "@hackoregon/civic-sandbox";
@@ -100,6 +106,7 @@ const configureStore = (initialState, history) => {
       // Temporarily Hidden 2019 Pages ⬇️
       package2019Housing: Housing2019Reducers(),
       package2019Template: Template2019Reducers(),
+      package2019Education: Education2019Reducers(),
       // hygen store injection (do not remove or modify this line)
       package2019Transportation: Transportation2019Reducers()
     }),
@@ -123,6 +130,7 @@ const configureStore = (initialState, history) => {
         // Temporarily Hidden 2019 Pages ⬇️
         "@hackoregon/2019-housing",
         "@hackoregon/2019-template",
+        "@hackoregon/2019-education",
         // hygen hot module injection (do not remove or modify this line)
         "@hackoregon/2019-transportation"
       ],
@@ -139,6 +147,7 @@ const configureStore = (initialState, history) => {
           // Temporarily Hidden 2019 Pages ⬇️
           package2019Housing: require("@hackoregon/2019-housing").Reducers(),
           package2019Template: require("@hackoregon/2019-template").Reducers(),
+          package2019Education: require("@hackoregon/2019-education").Reducers(),
           // hygen reducer injection (do not remove or modify this line)
           package2019Transportation: require("@hackoregon/2019-transportation").Reducers()
         });
@@ -242,6 +251,11 @@ const routes = {
           path: "template",
           component: Template2019App,
           childRoutes: Template2019Routes(store)
+        },
+        {
+          path: "education",
+          component: Education2019App,
+          childRoutes: Education2019Routes(store)
         },
         // hygen route injection (do not remove or modify this line)
         {
