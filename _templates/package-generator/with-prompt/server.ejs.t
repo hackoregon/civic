@@ -1,4 +1,4 @@
 ---
-to: packages/<%=package%>/server.js
+to: packages/<%=year%>-<%=packageTitle%>/server.js
 ---
 require("@hackoregon/dev-server")();

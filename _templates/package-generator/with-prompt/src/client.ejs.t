@@ -1,5 +1,5 @@
 ---
-to: packages/<%=package%>/src/client.js
+to: packages/<%=year%>-<%=packageTitle%>/src/client.js
 ---
 import MockWrapper from "@hackoregon/mock-wrapper";
 import { App, Routes, Reducers } from "./index";

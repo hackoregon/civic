@@ -1,5 +1,5 @@
 ---
-to: packages/<%=package%>/src/components/App/index.js
+to: packages/<%=year%>-<%=packageTitle%>/src/components/App/index.js
 ---
 import React from "react";
 
@@ -39,7 +39,7 @@ const App = () => (
   <PageLayout
     teamTitle="<%=title%>"
     heroTitle="🚧 Site Under Construction 🚜"
-    heroSubtitle="Playground for building out the <%=title%> team frontend"
+    heroSubtitle="Playground for building out the <%=year%> <%=title%> team frontend"
     overlay
   >
     <section className={cx(sectionBodyHeading, sectionMaxWidthSmall)}>

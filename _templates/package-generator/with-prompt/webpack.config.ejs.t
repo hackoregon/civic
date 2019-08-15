@@ -1,5 +1,5 @@
 ---
-to: packages/<%=package%>/webpack.config.js
+to: packages/<%=year%>-<%=packageTitle%>/webpack.config.js
 ---
 const path = require("path");
 const { standard } = require("@hackoregon/webpack-common");

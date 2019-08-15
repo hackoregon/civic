@@ -1,5 +1,5 @@
 ---
-to: packages/<%=package%>/src/state/index.js
+to: packages/<%=year%>-<%=packageTitle%>/src/state/index.js
 ---
 import { combineReducers } from "redux";
 import { routerReducer } from "react-router-redux";

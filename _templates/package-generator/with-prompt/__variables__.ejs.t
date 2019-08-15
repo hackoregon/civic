@@ -4,6 +4,14 @@
 #
 # Full list of helpers to change case: https://github.com/blakeembrey/change-case
 ---
+# 1969-package-name
+# TODO
 
 # Package Name
-<%title = h.changeCase.title(package)%>
+<%title = h.changeCase.title(packageTitle)%>
+
+# PackageName
+<%pascalTitle = h.changeCase.pascal(packageTitle)%>
+
+# packageName
+<%camelTitle = h.changeCase.camel(packageTitle)%>

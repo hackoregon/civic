@@ -1,12 +1,12 @@
 ---
-to: packages/<%=package%>/src/routes.js
+to: packages/<%=year%>-<%=packageTitle%>/src/routes.js
 ---
 import App from "./components/App";
 
 const routes = () => [
   {
-    path: "<%=package%>",
-    name: "<%=package%>",
+    path: "<%=year%>-<%=packageTitle%>",
+    name: "<%=year%>-<%=packageTitle%>",
     component: App
   }
 ];

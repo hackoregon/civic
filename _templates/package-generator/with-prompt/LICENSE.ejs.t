@@ -1,9 +1,9 @@
 ---
-to: packages/<%=package%>/LICENSE
+to: packages/<%=year%>-<%=packageTitle%>/LICENSE
 ---
 The MIT License (MIT)
 
-Copyright (c) 2019 Hack Oregon
+Copyright (c) <%=year%> Hack Oregon
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

@@ -1,5 +1,5 @@
 ---
-to: packages/<%=package%>/mocha.opts
+to: packages/<%=year%>-<%=packageTitle%>/mocha.opts
 ---
 --colors
 --recursive

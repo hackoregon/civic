@@ -1,5 +1,5 @@
 ---
-to: packages/<%=package%>/src/state/selectors/index.test.js
+to: packages/<%=year%>-<%=packageTitle%>/src/state/selectors/index.test.js
 ---
 import { rootState } from "./index";
 

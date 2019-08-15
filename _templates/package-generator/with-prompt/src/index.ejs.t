@@ -1,5 +1,5 @@
 ---
-to: packages/<%=package%>/src/index.js
+to: packages/<%=year%>-<%=packageTitle%>/src/index.js
 ---
 import App from "./components/App";
 import Routes from "./routes";
