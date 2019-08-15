@@ -7,7 +7,8 @@ import React from "react";
 import { cx, css } from "emotion"; // eslint-disable-line emotion/no-vanilla
 import {
   PageLayout,
-  PullQuote
+  PullQuote,
+  CivicCardLayoutClassic
 } from "@hackoregon/component-library";
 
 import "@hackoregon/component-library/assets/global.styles.css";
@@ -36,7 +37,7 @@ const paragraphStyle = css`
 
 const App = () => (
   <PageLayout
-    teamTitle="<%=package%>"
+    teamTitle="<%=title%>"
     heroTitle="🚧 Site Under Construction 🚜"
     heroSubtitle="Playground for building out the <%=title%> team frontend"
     overlay
