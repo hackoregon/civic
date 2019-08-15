@@ -5,12 +5,12 @@ module.exports = [
   {
     type: "input",
     name: "year",
-    message: "What is the year? (e.g. 1969): "
+    message: "What is the year? (e.g. 2019): "
   },
   {
     type: "input",
     name: "packageTitle",
     message:
-      "What do you want to name the new package, sans-year? (e.g. package-name, this will become YYYY-package-name based on your previous response): "
+      "What do you want to name the new package, without the year prefix? (e.g. package-name, not YYYY-package-name based): "
   }
 ];
