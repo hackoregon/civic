@@ -42,6 +42,7 @@ export default () =>
     .add(
       "Standard",
       () => {
+        const grpLabel = text("Group label", "Year", GROUP_IDS.LABELS);
         const radioLabels = ["2016", "2017", "2018"];
         const labels = array("Labels", radioLabels, ", ", GROUP_IDS.LABELS);
         const disabled = boolean("Disabled", false, GROUP_IDS.STATE);
@@ -50,6 +51,7 @@ export default () =>
             {({ get, set }) => {
               return (
                 <RadioButtonGroup
+                  grpLabel={grpLabel}
                   labels={labels}
                   onChange={event => {
                     set({ value: event.target.value });
@@ -109,16 +111,12 @@ export default () =>
     .add(
       "Example: Form group",
       () => {
-        const formLabel = text(
-          "Form label",
-          "Show results for the following years",
-          GROUP_IDS.LABELS
-        );
+        const grpLabel = text("Group label", "Year", GROUP_IDS.LABELS);
         const radioLabels = ["2016", "2017", "2018"];
         const labels = array("Labels", radioLabels, ", ", GROUP_IDS.LABELS);
         const formHelperText = text(
           "Form helper text",
-          "* Select at least one year",
+          "* Show results for this year",
           GROUP_IDS.LABELS
         );
         const row = boolean("Display in a row", false, GROUP_IDS.DESIGN);
@@ -129,10 +127,11 @@ export default () =>
             {({ get, set }) => {
               return (
                 <FormControl>
-                  <FormLabel>{formLabel}</FormLabel>
+                  <FormLabel>{grpLabel}</FormLabel>
                   <FormGroup>
                     <Fragment>
                       <RadioButtonGroup
+                        grpLabel={grpLabel}
                         labels={labels}
                         onChange={event => {
                           set({ value: event.target.value });

@@ -22,11 +22,12 @@ const RadioButtonGroup = ({
   row
 }) => (
   <MaterialRadioGroup
+    aria-label={grpLabel}
     name={grpLabel}
     onChange={onChange}
     value={value}
     row={row}
-    inputProps={{ "aria-label": { grpLabel } }}
+    inputProps={{ "aria-labelledby": { grpLabel } }}
   >
     {labels.map(label => (
       <FormControlLabel
@@ -61,7 +62,7 @@ RadioButtonGroup.propTypes = {
 RadioButtonGroup.defaultProps = {
   labels: ["Label 1", "Label 2", "Label 3"],
   value: "Label 1",
-  grpLabel: "Group Label",
+  grpLabel: "GroupLabel",
   labelPlacement: "end",
   row: false,
   disabled: false
