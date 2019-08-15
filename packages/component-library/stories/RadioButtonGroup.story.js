@@ -14,8 +14,6 @@ import {
   array
 } from "@storybook/addon-knobs";
 import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
-import FormGroup from "@material-ui/core/FormGroup";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import { RadioButtonGroup } from "../src";
 import { storybookStyles } from "./storyStyles";
@@ -70,6 +68,7 @@ export default () =>
     .add(
       "Custom",
       () => {
+        const grpLabel = text("Group label", "Year", GROUP_IDS.LABELS);
         const radioLabels = ["2016", "2017", "2018"];
         const labels = array("Labels", radioLabels, ", ", GROUP_IDS.LABELS);
         const disabled = boolean("Disabled", false, GROUP_IDS.STATE);
@@ -91,6 +90,7 @@ export default () =>
             {({ get, set }) => {
               return (
                 <RadioButtonGroup
+                  grpLabel={grpLabel}
                   labels={labels}
                   onChange={event => {
                     set({ value: event.target.value });
@@ -127,22 +127,19 @@ export default () =>
             {({ get, set }) => {
               return (
                 <FormControl>
-                  <FormLabel>{grpLabel}</FormLabel>
-                  <FormGroup>
-                    <Fragment>
-                      <RadioButtonGroup
-                        grpLabel={grpLabel}
-                        labels={labels}
-                        onChange={event => {
-                          set({ value: event.target.value });
-                          action("onChange")(event);
-                        }}
-                        value={get("value")}
-                        disabled={disabled}
-                        row={row}
-                      />
-                    </Fragment>
-                  </FormGroup>
+                  <Fragment>
+                    <RadioButtonGroup
+                      grpLabel={grpLabel}
+                      labels={labels}
+                      onChange={event => {
+                        set({ value: event.target.value });
+                        action("onChange")(event);
+                      }}
+                      value={get("value")}
+                      disabled={disabled}
+                      row={row}
+                    />
+                  </Fragment>
                   <FormHelperText>{formHelperText}</FormHelperText>
                 </FormControl>
               );

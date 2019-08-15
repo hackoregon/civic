@@ -2,13 +2,12 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { jsx, css } from "@emotion/core";
 import PropTypes from "prop-types";
+import FormLabel from "@material-ui/core/FormLabel";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import MaterialRadio from "@material-ui/core/Radio";
 import MaterialRadioGroup from "@material-ui/core/RadioGroup";
 
 const radioButtonGroupClass = css`
-  background-color: #fff;
-  color: #1e62bd;
   cursor: pointer;
 `;
 
@@ -29,6 +28,7 @@ const RadioButtonGroup = ({
     row={row}
     inputProps={{ "aria-labelledby": { grpLabel } }}
   >
+    <FormLabel>{grpLabel}</FormLabel>
     {labels.map(label => (
       <FormControlLabel
         key={label.id}

@@ -8,6 +8,7 @@ The Standard story shows the standard usage of the Radio Button Group for the CI
 
 These properties can be set in the Standard story:
 
+- Group label - the label for the group of radio buttons. This is required to meet accessibility requirements.
 - Labels - an array of labels, one for each radio button
 - Disable the group of radio buttons
 
@@ -16,14 +17,14 @@ These properties can be set in the Standard story:
 The Custom story shows all possible properties that can be passed to the Radio Button Group component for customization in the CIVIC platform. They include the properties in the Standard Radio Button Group story, plus:
 
 - Label placement
-- Value
 - Display all radio buttons in a row
 
 ## Example:
 
-This example story shows the radio button group as it would be used in a form. In a form group you can also set values for:
+This example story shows the radio button group as it would be used in a form. In a form group, using additional Material UI components shown in the story, you can set values for:
 
-- Form label
-- Form helper text
+- Group label
+- Labels
 - Display all radio buttons in a row
 - Disable the group of radio buttons
+- Form helper text
