@@ -2,10 +2,42 @@
 import React from "react";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
-import { withKnobs, number, boolean } from "@storybook/addon-knobs";
+import { withKnobs, number, boolean, text } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 import { checkA11y } from "@storybook/addon-a11y";
-import { BaseMap, IconMap, MapTooltip, DemoJSONLoader } from "../src";
+import { at } from "lodash";
+import {
+  mdiSchool,
+  mdiHospitalBuilding,
+  mdiRadioTower,
+  mdiFireTruck,
+  mdiAccountGroup,
+  mdiMapMarker
+} from "@mdi/js";
+import {
+  BaseMap,
+  IconMap,
+  MapTooltip,
+  DemoJSONLoader,
+  ScatterPlotMap
+} from "../src";
+
+const iconMaker = (
+  mdiIconName,
+  width = 240,
+  height = 240,
+  viewbox = "0 0 48 48"
+) =>
+  `data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="${width}px" height="${height}px" viewBox="${viewbox}"><path d="${mdiIconName}"/></svg>`;
+
+const iconSet = {
+  1: iconMaker(mdiSchool),
+  2: iconMaker(mdiHospitalBuilding),
+  3: iconMaker(mdiRadioTower),
+  4: iconMaker(mdiFireTruck),
+  5: iconMaker(mdiAccountGroup),
+  6: iconMaker(mdiMapMarker)
+};
 
 const opacityOptions = {
   range: true,
@@ -80,89 +112,27 @@ const getIcon = d => d.properties.type;
 const iconSizeOptions = {
   range: true,
   min: 1,
-  max: 15,
+  max: 100,
   step: 1
 };
 
-const poiGetIconColor = f =>
-  f.properties.type === "BEECN"
-    ? [0, 0, 0, 255]
-    : f.properties.type === "COMMCTR"
-    ? [114, 29, 124, 255]
-    : f.properties.type === "Fire Station"
-    ? [220, 69, 86, 255]
-    : f.properties.type === "School"
-    ? [255, 178, 38, 255]
-    : f.properties.type === "Hospital"
-    ? [30, 98, 189, 255]
-    : [0, 0, 0, 255];
+const iconColorSet = {
+  1: [255, 178, 38, 255],
+  2: [30, 98, 189, 255],
+  3: [65, 175, 73, 255],
+  4: [220, 69, 86, 255],
+  5: [114, 29, 124, 255],
+  6: [0, 0, 0, 255]
+};
 
-const mapData = [
-  "https://service.civicpdx.org/disaster-resilience/sandbox/slides/poi/"
-];
+const API_URL =
+  "https://opendata.arcgis.com/datasets/fd1d618ac3174ad5be730524a4dd778e_26.geojson";
 
-const demoMap = () => (
-  <DemoJSONLoader urls={mapData}>
-    {data => {
-      const opacity = number("Opacity:", 1, opacityOptions);
-      const iconSize = number("Icon Size:", 10, iconSizeOptions);
-      const getSize = () => iconSize;
-      return (
-        <BaseMap>
-          <IconMap
-            data={data.slide_data.features}
-            opacity={opacity}
-            iconAtlas="https://i.imgur.com/xgTAROe.png"
-            iconMapping={poiIconMapping}
-            iconSizeScale={poiIconZoomScale}
-            getPosition={getPosition}
-            getIcon={getIcon}
-            getSize={getSize}
-            getColor={poiGetIconColor}
-            onLayerClick={info =>
-              action("Layer clicked:", { depth: 2 })(info, info.object)
-            }
-          />
-        </BaseMap>
-      );
-    }}
-  </DemoJSONLoader>
-);
-
-const tooltipMap = () => (
-  <DemoJSONLoader urls={mapData}>
-    {data => {
-      const opacity = number("Opacity:", 1, opacityOptions);
-      const iconSize = number("Icon Size:", 10, iconSizeOptions);
-      const getSize = () => iconSize;
-      return (
-        <BaseMap>
-          <IconMap
-            data={data.slide_data.features}
-            opacity={opacity}
-            iconAtlas="https://i.imgur.com/xgTAROe.png"
-            iconMapping={poiIconMapping}
-            iconSizeScale={poiIconZoomScale}
-            getPosition={getPosition}
-            getIcon={getIcon}
-            getSize={getSize}
-            getColor={poiGetIconColor}
-            onLayerClick={info =>
-              action("Layer clicked:", { depth: 2 })(info, info.object)
-            }
-          >
-            <MapTooltip
-              primaryName="Type"
-              primaryField="type"
-              secondaryName="Description"
-              secondaryField="description2_txt"
-            />
-          </IconMap>
-        </BaseMap>
-      );
-    }}
-  </DemoJSONLoader>
-);
+const GROUP_IDS = {
+  MARKER: "Design",
+  DATA: "Data",
+  CUSTOM: "Custom"
+};
 
 class TouchScreenDemo extends React.Component {
   state = {
@@ -179,9 +149,9 @@ class TouchScreenDemo extends React.Component {
   };
 
   onClick = ({ lngLat }) => {
-    this.setState({
+    this.setState(prevState => ({
       pointsData: [
-        ...this.state.pointsData,
+        ...prevState.pointsData,
         {
           geometry: {
             coordinates: lngLat
@@ -191,7 +161,7 @@ class TouchScreenDemo extends React.Component {
           }
         }
       ]
-    });
+    }));
   };
 
   clearPoints = () => {
@@ -236,6 +206,7 @@ class TouchScreenDemo extends React.Component {
             getIcon={getIcon}
             getSize={() => 7}
             getColor={getIconColor}
+            autoHighlight
           />
         </BaseMap>
         <input
@@ -248,10 +219,158 @@ class TouchScreenDemo extends React.Component {
   }
 }
 
+const getRandomInt = (numMin, numMax) => {
+  const min = Math.ceil(numMin);
+  const max = Math.floor(numMax);
+  return Math.floor(Math.random() * (max - min)) + min;
+};
+
 export default () =>
   storiesOf("Component Lib|Maps/Icon Map", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
-    .add("Simple usage", demoMap)
-    .add("With tooltip", tooltipMap)
+    .add(
+      "Standard",
+      () => {
+        const opacity = number(
+          "Opacity:",
+          0.9,
+          opacityOptions,
+          GROUP_IDS.MARKER
+        );
+        const iconSize = number(
+          "Icon Size:",
+          20,
+          iconSizeOptions,
+          GROUP_IDS.MARKER
+        );
+
+        const onIconClick = info => action("Icon Clicked:")(info);
+        const fetchURL = text("Data API URL:", API_URL, GROUP_IDS.DATA);
+
+        return (
+          <DemoJSONLoader urls={[fetchURL]}>
+            {data => {
+              const featuresArrayPath = text(
+                "Features Array Path:",
+                "features",
+                GROUP_IDS.DATA
+              );
+              const featuresData = at(data, featuresArrayPath)[0];
+
+              return (
+                <div style={{ height: "100vh" }}>
+                  <BaseMap updateViewport={false} useContainerHeight>
+                    <ScatterPlotMap
+                      data={featuresData}
+                      getPosition={f => f.geometry.coordinates}
+                      opacity={0.9}
+                      getFillColor={[0, 0, 0]}
+                      getRadius={15}
+                    />
+                    <IconMap
+                      data={featuresData}
+                      opacity={opacity}
+                      iconSizeScale={poiIconZoomScale}
+                      getPosition={getPosition}
+                      getIcon={f => {
+                        const rand = getRandomInt(1, 6);
+                        return {
+                          id: f.properties.OBJECTID,
+                          url: iconSet[rand],
+                          height: 960,
+                          width: 960,
+                          mask: true,
+                          anchorX: 240,
+                          anchorY: 240
+                        };
+                      }}
+                      getSize={iconSize}
+                      getColor={() => {
+                        const rand = getRandomInt(1, 6);
+                        return iconColorSet[rand];
+                      }}
+                      onLayerClick={onIconClick}
+                    />
+                  </BaseMap>
+                </div>
+              );
+            }}
+          </DemoJSONLoader>
+        );
+      },
+      {}
+    )
+    .add(
+      "Example: With Tooltip",
+      () => {
+        const opacity = number(
+          "Opacity:",
+          0.9,
+          opacityOptions,
+          GROUP_IDS.MARKER
+        );
+        const iconSize = number(
+          "Icon Size:",
+          15,
+          iconSizeOptions,
+          GROUP_IDS.MARKER
+        );
+
+        const onIconClick = info => action("Icon Clicked:")(info);
+        const fetchURL = text("Data API URL:", API_URL, GROUP_IDS.DATA);
+
+        return (
+          <DemoJSONLoader urls={[fetchURL]}>
+            {data => {
+              const featuresArrayPath = text(
+                "Features Array Path:",
+                "features",
+                GROUP_IDS.DATA
+              );
+              const featuresData = at(data, featuresArrayPath)[0];
+
+              return (
+                <div style={{ height: "100vh" }}>
+                  <BaseMap updateViewport={false} useContainerHeight>
+                    <IconMap
+                      data={featuresData}
+                      opacity={opacity}
+                      iconSizeScale={poiIconZoomScale}
+                      getPosition={getPosition}
+                      getIcon={f => {
+                        const rand = getRandomInt(1, 6);
+                        return {
+                          id: f.properties.OBJECTID,
+                          url: iconSet[rand],
+                          height: 480,
+                          width: 480,
+                          mask: true,
+                          anchorX: 120,
+                          anchorY: 120
+                        };
+                      }}
+                      getSize={iconSize}
+                      getColor={() => {
+                        const rand = getRandomInt(1, 6);
+                        return iconColorSet[rand];
+                      }}
+                      onLayerClick={onIconClick}
+                    >
+                      <MapTooltip
+                        primaryName="Type"
+                        primaryField="COMMON"
+                        secondaryName="Notes"
+                        secondaryField="NOTES"
+                      />
+                    </IconMap>
+                  </BaseMap>
+                </div>
+              );
+            }}
+          </DemoJSONLoader>
+        );
+      },
+      {}
+    )
     .add("TouchScreen Demo", () => <TouchScreenDemo />);
