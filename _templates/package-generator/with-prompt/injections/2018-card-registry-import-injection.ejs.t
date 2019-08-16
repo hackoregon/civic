@@ -1,5 +1,5 @@
 ---
-to: packages/2018/card-registry.js
+to: packages/2018/src/card-registry.js
 inject: true
 # This regex will inject this after the the last occurrence of a new line that begins with "import" (i.e. right after the other import statements)
 after: \nimport(?![\s\S]*\nimport).*

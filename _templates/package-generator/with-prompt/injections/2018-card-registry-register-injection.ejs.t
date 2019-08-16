@@ -1,5 +1,5 @@
 ---
-to: packages/2018/card-registry.js
+to: packages/2018/src/card-registry.js
 inject: true
 # This regex will inject this BEFORE the the last occurrence ".concat" (since the last ".concat" needs a semicolon)
 before: \.concat(?![\s\S]*\.concat)
