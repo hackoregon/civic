@@ -1,5 +1,3 @@
-import "../assets/constants.css";
-
 /*
   Styles used in Storybook.
   Only styles that are needed exclusively in Storybook are defined here.
