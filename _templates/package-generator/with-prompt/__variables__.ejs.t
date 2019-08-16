@@ -15,3 +15,6 @@
 
 # packageName
 <%camelTitle = h.changeCase.camel(packageTitle)%>
+
+# package-name
+<%kababTitle = h.changeCase.param(packageTitle)%>
