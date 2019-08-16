@@ -28,7 +28,7 @@ export const tasks = {
   // Save Yourself
   [PROTECTION]: {
     id: PROTECTION,
-    time: 15 * 1000,
+    time: 5 * 1000,
     requiredItem: protectiveGear,
     numberItemsToSolve: 5,
     points: 3,
@@ -40,7 +40,7 @@ export const tasks = {
   // Save Others
   [FIRE]: {
     id: FIRE,
-    time: 20 * 1000, // seconds * milliseconds
+    time: 5 * 1000, // seconds * milliseconds
     requiredItem: fireExtinguisher,
     numberItemsToSolve: 5,
     points: 5,
@@ -56,7 +56,7 @@ export const tasks = {
   },
   [INJURY]: {
     id: INJURY,
-    time: 20 * 1000, // seconds * milliseconds
+    time: 5 * 1000, // seconds * milliseconds
     requiredItem: firstAidKit,
     numberItemsToSolve: 5,
     points: 7,
@@ -67,7 +67,7 @@ export const tasks = {
   },
   [HUNGER]: {
     id: HUNGER,
-    time: 20 * 1000, // seconds * milliseconds
+    time: 5 * 1000, // seconds * milliseconds
     requiredItem: food,
     numberItemsToSolve: 5,
     points: 5,
@@ -83,7 +83,7 @@ export const tasks = {
   },
   [THIRST]: {
     id: THIRST,
-    time: 20 * 1000, // seconds * milliseconds
+    time: 5 * 1000, // seconds * milliseconds
     requiredItem: water,
     numberItemsToSolve: 5,
     points: 5,

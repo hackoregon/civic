@@ -7,49 +7,81 @@ import { css, jsx } from "@emotion/core";
 
 import {
   completeTask,
-  getActiveTaskData,
-  startTick as _startTick,
-  stopTick as _stopTick
+  getActiveTaskData
+  // startTick as _startTick,
+  // stopTick as _stopTick
 } from "../../../state/tasks";
 import { getPlayerKitItems } from "../../../state/kit";
-import DurationBar from "../../atoms/DurationBar";
-import Ticker from "../../atoms/Ticker";
 import TextContainer from "../../atoms/Containers/TextContainer";
-import OrbManager from "../OrbManager";
 
 const defaultState = {
   taskTimer: null,
   correctItemsChosen: 0
 };
 
+const screenLayout = css`
+  position: absolute;
+  left: 0;
+  display: grid;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: 1fr;
+  background: beige;
+  z-index: 101;
+  transform: translateY(-100%);
+  transition: transform 0.5s;
+`;
+
+const onScreenStyle = css`
+  transform: translateY(0%);
+`;
+
 class SolveScreen extends PureComponent {
   state = defaultState;
 
   componentDidMount() {
-    const { activeTask, startTick } = this.props;
-    startTick(activeTask.time);
+    // const { activeTask, startTick } = this.props;
+    // startTick(activeTask.time);
   }
 
   componentDidUpdate(prevProps) {
-    const { activeTask, startTick, stopTick, outOfTime } = this.props;
+    const { activeTask, outOfTime } = this.props;
     const { correctItemsChosen } = this.state;
 
-    if (activeTask.id !== prevProps.activeTask.id) {
-      startTick(activeTask.time);
-    }
+    // if (
+    //   activeTask &&
+    //   prevProps.activeTask &&
+    //   activeTask.id !== prevProps.activeTask.id
+    // ) {
+    //   startTick(activeTask.time);
+    // }
 
-    if (correctItemsChosen >= activeTask.numberItemsToSolve) {
-      this.finishTask();
-      stopTick();
-    }
+    // if (activeTask && correctItemsChosen >= activeTask.numberItemsToSolve) {
+    //   this.finishTask();
+    // }
 
-    // user ran out of time before 'completing' the task
-    if (outOfTime && !prevProps.outOfTime) {
-      this.finishTask();
-      setTimeout(() => {
-        startTick(activeTask.time);
-      }, 500);
-    }
+    // // user ran out of time before 'completing' the task
+    // if (
+    //   (outOfTime && !prevProps.outOfTime) ||
+    //   (!activeTask && prevProps.activeTask)
+    // ) {
+    //   this.finishTask();
+
+    //   // start the next task
+    //   if (activeTask) {
+    //     setTimeout(() => {
+    //       startTick(activeTask.time);
+    //     }, 500);
+    //   }
+    // }
+
+    // // store the last active task
+    // // to avoid activeTask text disappearing
+    // // when the activeTask property is null
+    // if (activeTask && activeTask !== this.state.activeTask) {
+    //   this.setState({ activeTask });
+    // }
   }
 
   componentWillUnmount() {
@@ -59,8 +91,10 @@ class SolveScreen extends PureComponent {
 
   finishTask = () => {
     const { completeActiveTask, activeTask, stopTick } = this.props;
-    completeActiveTask(activeTask.id);
-    stopTick();
+    if (activeTask) {
+      stopTick();
+      completeActiveTask(activeTask.id);
+    }
   };
 
   onItemSelection = item => {
@@ -74,22 +108,24 @@ class SolveScreen extends PureComponent {
   };
 
   render() {
-    const { completeActiveTask, activeTask, playerKitItems } = this.props;
+    const { completeActiveTask, playerKitItems, open } = this.props;
     const { correctItemsChosen } = this.state;
 
-    const screenLayout = css`
-      position: relative;
-      display: grid;
-      overflow: hidden;
-      width: 100%;
-      height: 100%;
-      grid-template-columns: 1fr;
-      background: beige;
-    `;
+    // we've stored the activeTask in state
+    // to avoid the activeTask text disappearing
+    // while the component animates out
+    const activeTask = this.props.activeTask
+      ? this.props.activeTask
+      : this.state.activeTask;
 
     return (
-      <Fragment>
-        <div css={screenLayout}>
+      <div
+        css={css`
+          ${screenLayout}
+          ${open ? onScreenStyle : {}}
+        `}
+      >
+        {activeTask && (
           <TextContainer>
             <h2>{activeTask.text}</h2>
             <h3>
@@ -105,14 +141,8 @@ class SolveScreen extends PureComponent {
               Use {activeTask.requiredItem}
             </button>
           </TextContainer>
-        </div>
-        <DurationBar step="Choose a task" debug />
-        <Ticker text="Ticker tape text that goes across the screen to give instructions" />
-        <OrbManager
-          possibleItems={playerKitItems}
-          onOrbSelection={this.onItemSelection}
-        />
-      </Fragment>
+        )}
+      </div>
     );
   }
 }
@@ -123,8 +153,8 @@ SolveScreen.propTypes = {
     id: PropTypes.string
   }),
   playerKitItems: PropTypes.arrayOf(PropTypes.shape({})),
-  startTick: PropTypes.func,
-  stopTick: PropTypes.func,
+  // startTick: PropTypes.func,
+  // stopTick: PropTypes.func,
   outOfTime: PropTypes.bool
 };
 
@@ -135,8 +165,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  startTick: bindActionCreators(_startTick, dispatch),
-  stopTick: bindActionCreators(_stopTick, dispatch),
+  // startTick: bindActionCreators(_startTick, dispatch),
+  // stopTick: bindActionCreators(_stopTick, dispatch),
   completeActiveTask(taskChoice, taskId) {
     dispatch(completeTask(taskChoice, taskId));
   }

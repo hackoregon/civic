@@ -51,12 +51,12 @@ class ChooseScreen extends PureComponent {
     }, {});
 
     this.setState({
-      // voteId: setTimeout(this.goToTask, votingDuration),
+      voteId: setTimeout(this.goToTask, votingDuration),
       taskVotes
     });
 
     // when the component mounts, we want to start a timer
-    startTick(votingDuration);
+    // startTick(votingDuration);
   }
 
   componentDidUpdate(prevProps) {
@@ -138,6 +138,7 @@ class ChooseScreen extends PureComponent {
   };
 
   moveMap = () => {
+    console.log("moveMap");
     const { startTick } = this.props;
     const { animationDuration } = this.state;
     this.setState({
@@ -145,14 +146,15 @@ class ChooseScreen extends PureComponent {
       animateMap: true
     });
 
-    let { animationId } = this.state;
+    const { animationId } = this.state;
     clearTimeout(animationId);
-    animationId = setTimeout(() => startTick(animationDuration), 100);
+    // animationId = setTimeout(() => startTick(animationDuration), 100);
     this.setState({ animationId });
   };
 
   goToTask = () => {
-    // this.clearVoteTimeout();
+    console.log("go to task");
+    this.clearVoteTimeout();
     const { stopTick, startTick } = this.props;
     stopTick();
 
@@ -180,32 +182,22 @@ class ChooseScreen extends PureComponent {
   //   const { animateMap } = this.state;
   //   this.setState({
   //     // trigger pan and zoom...
-  //     activeTask: weightedTasks.find(task => task.type === mostVotesId),
+  //     selectedTask: weightedTasks.find(task => task.type === mostVotesId),
   //     exampleTimeToAnimate
   //   });
   // };
 
   render() {
-    const { activeTask } = this.state;
+    const { selectedTask } = this.state;
     const { weightedTasks } = this.props;
 
     return (
-      <Fragment>
-        <div css={screenLayout}>
-          <TaskMap
-            activeTask={activeTask || weightedTasks[0]}
-            tasks={weightedTasks}
-          />
-        </div>
-
-        <DurationBar step="Choose a task" />
-        <Ticker text="Ticker tape text that goes across the screen to give instructions" />
-        <OrbManager
-          possibleItems={weightedTasks}
-          onOrbSelection={this.onTaskSelection}
-          frozenOrbInterface
+      <div css={screenLayout}>
+        <TaskMap
+          activeTask={selectedTask || weightedTasks[0]}
+          tasks={weightedTasks}
         />
-      </Fragment>
+      </div>
     );
   }
 }

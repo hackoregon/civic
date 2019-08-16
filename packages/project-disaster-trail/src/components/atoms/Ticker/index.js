@@ -17,11 +17,16 @@ const containerStyle = css`
 `;
 
 const textStyle = css`
+  margin: 0;
   padding: 5px 15px;
   text-align: center;
+  font-family: "Boogaloo", cursive;
+  font-size: 16px;
+  line-height: 1;
   color: ${palette.gold};
 
   ${media.md} {
+    font-size: 48px;
     padding: 10px 25px;
   }
 `;

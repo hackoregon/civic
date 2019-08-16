@@ -14,15 +14,15 @@ const initialState = {
   activeEnvironment: defaultEnv,
   taskOrder: shuffle(defaultSaveYourself),
   activeTask: 0,
-  activeTime: 0,
-  startTime: 0,
-  totalTime: 0,
+  // activeTime: 0,
+  // startTime: 0,
+  // totalTime: 0,
   completedTasks: [],
-  outOfTime: false,
-  playing: true
+  outOfTime: false
+  // playing: true
 };
 
-let timerId = 0;
+// const timerId = 0;
 
 // CONSTANTS
 const actionTypes = {
@@ -30,12 +30,8 @@ const actionTypes = {
   ADD_TASK: "ADD_TASK",
   INCREASE_ACTIVE_TASK: "INCREASE_ACTIVE_TASK",
   COMPLETE_TASK: "COMPLETE_TASK",
-  SET_START_TIME: "SET_START_TIME",
-  RESET_START_TIME: "RESET_START_TIME",
-  TICK: "TICK",
-  OUT_OF_TIME: "OUT_OF_TIME",
-  PAUSE: "PAUSE",
-  PLAY: "PLAY"
+  START_TASK: "START_TASK",
+  OUT_OF_TIME: "OUT_OF_TIME"
 };
 
 // ACTIONS
@@ -48,6 +44,9 @@ export const addTask = taskChoice => dispatch => {
 export const increaseActiveTask = () => dispatch => {
   dispatch({ type: actionTypes.INCREASE_ACTIVE_TASK });
 };
+export const startTask = task => dispatch => {
+  dispatch({ type: actionTypes.START_TASK, task });
+};
 export const completeTask = completedTask => dispatch => {
   dispatch({ type: actionTypes.COMPLETE_TASK, completedTask });
 };
@@ -56,35 +55,35 @@ export const completeTask = completedTask => dispatch => {
 // it uses requestAnimationFrame to summon the `loop` function
 // The loop function evaluates if the timer is expired (outOfTime)
 // or if the timer should 'tick' which counts down.
-export const startTick = totalTime => (dispatch, getState) => {
-  let now = new Date();
-  dispatch({ type: actionTypes.SET_START_TIME, time: now });
+// export const startTick = totalTime => (dispatch, getState) => {
+//   let now = new Date();
+//   dispatch({ type: actionTypes.SET_START_TIME, time: now });
 
-  const loop = () => {
-    timerId = window.requestAnimationFrame(loop);
+//   const loop = () => {
+//     timerId = window.requestAnimationFrame(loop);
 
-    now = new Date();
-    const {
-      tasks: { activeTime, startTime }
-    } = getState();
+//     now = new Date();
+//     const {
+//       tasks: { activeTime, startTime }
+//     } = getState();
 
-    const outOfTime = activeTime - startTime > totalTime;
-    if (!outOfTime) {
-      dispatch({ type: actionTypes.TICK, time: now, totalTime });
-    } else {
-      dispatch({ type: actionTypes.OUT_OF_TIME });
-      window.cancelAnimationFrame(timerId);
-    }
-  };
+//     const outOfTime = activeTime - startTime > totalTime;
+//     if (!outOfTime) {
+//       dispatch({ type: actionTypes.TICK, time: now, totalTime });
+//     } else {
+//       dispatch({ type: actionTypes.OUT_OF_TIME });
+//       window.cancelAnimationFrame(timerId);
+//     }
+//   };
 
-  window.cancelAnimationFrame(timerId);
-  timerId = window.requestAnimationFrame(loop);
-};
+//   window.cancelAnimationFrame(timerId);
+//   timerId = window.requestAnimationFrame(loop);
+// };
 
-// use when unloading a component that summoned a timer
-export const stopTick = () => () => {
-  window.cancelAnimationFrame(timerId);
-};
+// // use when unloading a component that summoned a timer
+// export const stopTick = () => () => {
+//   window.cancelAnimationFrame(timerId);
+// };
 
 // REDUCERS
 /* eslint-disable no-param-reassign */
@@ -108,28 +107,28 @@ export const tasksReducer = createReducer(initialState, {
     state.completedTasks.push(action.completedTask);
 
     // reset timer to 0
-    state.activeTime = 0;
-  },
-  // summoned when the timer starts
-  [actionTypes.SET_START_TIME]: (state, action) => {
-    const { time } = action;
-    state.startTime = time;
-    state.outOfTime = false;
-  },
-  // a timer can be reset
-  [actionTypes.RESET_START_TIME]: (state, action) => {
-    const { time } = action;
-    state.startTime = time;
-  },
-  // each 'tick' represents time passing when the timer is running
-  [actionTypes.TICK]: (state, action) => {
-    state.activeTime = action.time;
-    state.totalTime = action.totalTime;
-  },
-  // when the timer has completed
-  [actionTypes.OUT_OF_TIME]: state => {
-    state.outOfTime = true;
+    // state.activeTime = 0;
   }
+  // // summoned when the timer starts
+  // [actionTypes.SET_START_TIME]: (state, action) => {
+  //   const { time } = action;
+  //   state.startTime = time;
+  //   state.outOfTime = false;
+  // },
+  // // a timer can be reset
+  // [actionTypes.RESET_START_TIME]: (state, action) => {
+  //   const { time } = action;
+  //   state.startTime = time;
+  // },
+  // // each 'tick' represents time passing when the timer is running
+  // [actionTypes.TICK]: (state, action) => {
+  //   state.activeTime = action.time;
+  //   state.totalTime = action.totalTime;
+  // },
+  // // when the timer has completed
+  // [actionTypes.OUT_OF_TIME]: state => {
+  //   state.outOfTime = true;
+  // }
 });
 /* eslint-enable no-param-reassign */
 
@@ -169,12 +168,12 @@ export const getTasksForEnvironment = createSelector(
 // ie when a timer is started, current time is 0
 // as the timer 'ticks' the current time increases
 // and eventually reaches 100% complete
-export const getPercentComplete = createSelector(
-  ["tasks.activeTime", "tasks.startTime", "tasks.totalTime"],
-  (activeTime, startTime, totalTime) => {
-    return Math.max(0, Math.min(1, (activeTime - startTime) / totalTime)); // number within range of 0 - 1
-  }
-);
+// export const getPercentComplete = createSelector(
+//   ["tasks.activeTime", "tasks.startTime", "tasks.totalTime"],
+//   (activeTime, startTime, totalTime) => {
+//     return Math.max(0, Math.min(1, (activeTime - startTime) / totalTime)); // number within range of 0 - 1
+//   }
+// );
 
 export const getCompletedTasks = createSelector(
   ["tasks.completedTasks"],
@@ -221,10 +220,10 @@ export const getWeightedTasks = createSelector(
   }
 );
 
-export const getActiveTime = createSelector(
-  ["activeTime"],
-  time => time
-);
+// export const getActiveTime = createSelector(
+//   ["activeTime"],
+//   time => time
+// );
 
 export const getOutOfTime = createSelector(
   ["outOfTime"],
