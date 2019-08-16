@@ -10,7 +10,7 @@ import { css } from "emotion";
 import PropTypes from "prop-types";
 import createRef from "create-react-ref/lib/createRef";
 import Geocoder from "react-map-gl-geocoder";
-import mapboxgl from "mapbox-gl";
+import mapboxgl from "mapbox-gl/dist/mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { isEqual } from "lodash";
 
