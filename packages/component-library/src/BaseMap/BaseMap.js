@@ -10,6 +10,7 @@ import { css } from "emotion";
 import PropTypes from "prop-types";
 import createRef from "create-react-ref/lib/createRef";
 import Geocoder from "react-map-gl-geocoder";
+import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { isEqual } from "lodash";
 
@@ -147,7 +148,9 @@ class BaseMap extends Component {
       mapboxLayerId,
       locationMarkerCoord,
       animate,
-      animationDuration
+      animationDuration,
+      scaleBar,
+      scaleBarOptions
     } = this.props;
 
     viewport.width = containerWidth || 500;
@@ -164,8 +167,18 @@ class BaseMap extends Component {
     });
 
     const onMapLoad = () => {
-      if (!mapboxData || !mapboxLayerType || !mapboxLayerOptions) return;
       const map = this.mapRef.current.getMap();
+
+      if (scaleBar) {
+        map.addControl(
+          new mapboxgl.ScaleControl({
+            maxWidth: scaleBarOptions.maxWidth,
+            unit: scaleBarOptions.units
+          })
+        );
+      }
+
+      if (!mapboxData || !mapboxLayerType || !mapboxLayerOptions) return;
       map.addSource(mapboxDataId, {
         type: "geojson",
         data: mapboxData
@@ -283,7 +296,12 @@ BaseMap.propTypes = {
   }),
   mapboxLayerType: PropTypes.string,
   mapboxLayerId: PropTypes.string,
-  mapboxLayerOptions: PropTypes.shape({})
+  mapboxLayerOptions: PropTypes.shape({}),
+  scaleBar: PropTypes.bool,
+  scaleBarOptions: PropTypes.shape({
+    maxWidth: PropTypes.number,
+    units: PropTypes.string
+  })
 };
 
 BaseMap.defaultProps = {
@@ -302,7 +320,8 @@ BaseMap.defaultProps = {
     latitude: 0,
     longitude: 0
   },
-  animationDuration: 1000
+  animationDuration: 1000,
+  scaleBar: false
 };
 
 export default Dimensions()(BaseMap);
