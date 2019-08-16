@@ -10,9 +10,9 @@ import { css } from "emotion";
 import PropTypes from "prop-types";
 import createRef from "create-react-ref/lib/createRef";
 import Geocoder from "react-map-gl-geocoder";
-import mapboxgl from "mapbox-gl/dist/mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { isEqual } from "lodash";
+import { ScaleControl } from "mapbox-gl/dist/mapbox-gl";
 
 const MAPBOX_TOKEN =
   "pk.eyJ1IjoiaGFja29yZWdvbiIsImEiOiJjamk0MGZhc2cwNDl4M3FsdHAwaG54a3BnIn0.Fq1KA0IUwpeKQlFIoaEn_Q";
@@ -171,7 +171,7 @@ class BaseMap extends Component {
 
       if (scaleBar) {
         map.addControl(
-          new mapboxgl.ScaleControl({
+          new ScaleControl({
             maxWidth: scaleBarOptions.maxWidth,
             unit: scaleBarOptions.units
           })
