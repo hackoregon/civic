@@ -130,7 +130,7 @@ $ cd packages/component-library
 $ yarn build
 ```
 
-## Creating a new Card
+## Creating a new card
 
 There are two options to create a card: from API data and from local json data. Our new card generator makes it easy to load data from the API so we recommend that approach for ease of creation and the most up to date data.
 
@@ -186,6 +186,24 @@ $ yarn card:local-data
 You'll then follow the same prompts as above. When you've finished you'll see a similar output to the one above.
 
 If the package you chose isn't set up quite the way the generator expected you may need to make some modifications to files where code was injected but this should get you most of the way there. Now you can customize and hook in your own data.
+
+## Creating a new Package
+
+At the top of the repo run:
+
+```bash
+$ yarn new-package
+```
+
+This will bring up the prompt:
+
+```bash
+$ What do you want to name the new package? (e.g. YYYY-package-name): >
+```
+
+Type the name of the new package that you want to create and press enter.
+✨ DONE ✨
+You can now add a card if you want. Try it out using the [Creating a new card](#creating-a-new-card)
 
 ## Project Layout
 
