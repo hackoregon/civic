@@ -6,4 +6,4 @@ before: \.concat(?![\s\S]*\.concat)
 # Skip if the story card is already imported OR if the hygen:skip directive is found
 skip_if: "(concat(<%=pascalTitle%><%=year%>|hygen:skip)"
 ---
-  .concat(<%=pascalTitle%><%=year%>.map(decorate("@hackoregon/<%=year%>-<%=kababTitle%>")));
+  .concat(<%=pascalTitle%><%=year%>.map(decorate("@hackoregon/<%=year%>-<%=packageTitle%>")));
