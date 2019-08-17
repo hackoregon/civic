@@ -1,6 +1,3 @@
----
-to: packages/<%=year%>-<%=packageTitle%>/src/components/App/index.js
----
 import React from "react";
 
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -8,7 +5,7 @@ import { cx, css } from "emotion"; // eslint-disable-line emotion/no-vanilla
 import {
   PageLayout,
   PullQuote,
-  CivicCardLayoutClassic, // eslint-disable-line
+  CivicCardLayoutClassic // eslint-disable-line
 } from "@hackoregon/component-library";
 
 import "@hackoregon/component-library/assets/global.styles.css";
@@ -37,9 +34,9 @@ const paragraphStyle = css`
 
 const App = () => (
   <PageLayout
-    teamTitle="<%=title%>"
+    teamTitle="Education"
     heroTitle="🚧 Site Under Construction 🚜"
-    heroSubtitle="Playground for building out the <%=year%> <%=title%> team frontend"
+    heroSubtitle="Playground for building out the 2019 Education team frontend"
     overlay
   >
     <section className={cx(sectionBodyHeading, sectionMaxWidthSmall)}>

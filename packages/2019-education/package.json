@@ -1,10 +1,7 @@
----
-to: packages/<%=year%>-<%=packageTitle%>/package.json
----
 {
-  "name": "@hackoregon/<%=year%>-<%=packageTitle%>",
+  "name": "@hackoregon/2019-education",
   "version": "1.0.0",
-  "description": "<%=year%> Hack Oregon <%=title%> Project",
+  "description": "2019 Hack Oregon Education Project",
   "main": "src/index.js",
   "author": "",
   "license": "MIT",
@@ -14,7 +11,7 @@ to: packages/<%=year%>-<%=packageTitle%>/package.json
     "webpack",
     "redux",
     "hackoregon",
-    "<%=year%>"
+    "2019"
   ],
   "repository": {
     "type": "git",
