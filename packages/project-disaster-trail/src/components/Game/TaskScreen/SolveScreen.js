@@ -25,6 +25,7 @@ const screenLayout = css`
   width: 100%;
   height: 100%;
   grid-template-columns: 1fr;
+  padding-top: 100px;
   background: beige;
   z-index: 101;
   transform: translateY(-100%);

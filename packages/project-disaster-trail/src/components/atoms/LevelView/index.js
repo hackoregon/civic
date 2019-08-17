@@ -4,9 +4,10 @@ import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
 import styled from "@emotion/styled";
 
+import { getActiveChapterIndex } from "../../../state/chapters";
 import { palette } from "../../../constants/style";
 
-const PointsContainer = styled.div`
+const LevelContainer = styled.div`
   margin-top: 20px;
   padding: 20px;
   background: ${palette.white};
@@ -26,20 +27,20 @@ const PointsContainer = styled.div`
   }
 `;
 
-const PointsView = ({ points }) => (
-  <PointsContainer>
+const LevelView = ({ activeChapterIndex }) => (
+  <LevelContainer>
     <h2>
-      Points <span className="red">{points}</span>
+      Level <span className="red">{activeChapterIndex}</span>
     </h2>
-  </PointsContainer>
+  </LevelContainer>
 );
 
-PointsView.propTypes = {
-  points: PropTypes.number
+LevelView.propTypes = {
+  activeChapterIndex: PropTypes.string
 };
 
-const mapStateToProps = ({ user }) => ({
-  points: user.points
+const mapStateToProps = state => ({
+  activeChapterIndex: getActiveChapterIndex(state)
 });
 
-export default connect(mapStateToProps)(memo(PointsView));
+export default connect(mapStateToProps)(memo(LevelView));
