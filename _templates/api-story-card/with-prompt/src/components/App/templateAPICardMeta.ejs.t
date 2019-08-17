@@ -8,7 +8,7 @@ import <%=StoryCardName%>Visualization from "./<%=StoryCardName%>Visualization";
 
 const <%=StoryCardName%>Meta = (/* data */) => ({
   title: "<%=title%>",
-  slug: "<%=slug%>-card",
+  slug: "<%=slug%>",
   introText: (
     <p>
       This template card loads data from an API using Reduxful, and can be used
