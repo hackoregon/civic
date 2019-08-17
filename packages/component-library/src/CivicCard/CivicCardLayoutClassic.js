@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import CivicStoryCard from "../CivicStoryCard/CivicStoryCard";
+import cardMetaTypes from "./cardMetaTypes";
 
 function CivicCardLayoutClassic({ isLoading, data, cardMeta }) {
   return (
@@ -16,10 +17,8 @@ function CivicCardLayoutClassic({ isLoading, data, cardMeta }) {
 
 CivicCardLayoutClassic.propTypes = {
   isLoading: PropTypes.bool,
-  data: PropTypes.arrayOf(PropTypes.object),
-  cardMeta: PropTypes.shape({
-    /* TODO: Add shape */
-  })
+  data: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.array]),
+  cardMeta: cardMetaTypes
 };
 
 export default CivicCardLayoutClassic;

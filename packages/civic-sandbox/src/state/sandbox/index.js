@@ -156,8 +156,8 @@ const reducer = (state = INITIAL_STATE, action) => {
         slidesError: null
       };
     case SLIDE_SUCCESS:
-      let {foundationData} = state;
-      let {slidesData} = state;
+      let { foundationData } = state;
+      let { slidesData } = state;
       if (action.payload.type === "foundation") {
         foundationData = action.payload.data;
       }

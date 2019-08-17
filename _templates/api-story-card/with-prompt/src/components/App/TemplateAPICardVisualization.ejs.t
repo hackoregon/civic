@@ -22,7 +22,7 @@ const <%=StoryCardName%>Visualization = ({ isLoading, data }) => (
 
 <%=StoryCardName%>Visualization.propTypes = {
   isLoading: PropTypes.bool,
-  data: resourceShape
+  data: PropTypes.shape({ mockRidershipOverTime: resourceShape })
 };
 
 export default <%=StoryCardName%>Visualization;

@@ -8,6 +8,7 @@ function CivicCardLayoutVisualizationOnly({ isLoading, data, cardMeta }) {
     <div
       css={css`
         text-align: center;
+        margin: 1.5em auto;
       `}
     >
       <cardMeta.visualization isLoading={isLoading} data={data} />
@@ -18,7 +19,7 @@ function CivicCardLayoutVisualizationOnly({ isLoading, data, cardMeta }) {
 
 CivicCardLayoutVisualizationOnly.propTypes = {
   isLoading: PropTypes.bool,
-  data: PropTypes.arrayOf(PropTypes.object),
+  data: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.array]),
   cardMeta: PropTypes.shape({
     /* TODO: Add shape */
   })

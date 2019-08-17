@@ -132,19 +132,15 @@ ${baseNotes}
 
 ## Path Map
 
-The Standard tab shows the basic implementation of a Path Map for the MultiLayer Map component.
+This story shows the basic implementation of a Path Map for the MultiLayer Map component.
 
-These properties can be used to create a standard path map layer object:
+These properties can be used to create a path map layer object:
 ${createMapTypeProp("PathMap")}
 ${idProp}
 ${createDataProp("lines", "LineString")}
 ${createSizeProp("line", "Width")}
 ${createOpacityProp("lines")}
 ${createColorProp("lines", civicCategoricalColorOptions)}
-
-----
-
-The Custom tab shows additional properties that can be used to create a custom path map layer object:
 ${createScaleTypeProp({ threshold: true, equal: true, ordinal: true })}
 ${createCustomColorProp("lines", {
   threshold: true,
@@ -202,9 +198,9 @@ ${baseNotes}
 
 ## ScatterPlot Map
 
-The Standard tab shows the basic implementation of a ScatterPlot Map for the MultiLayer Map component.
+This story shows the basic implementation of a ScatterPlot Map for the MultiLayer Map component.
 
-These properties can be used to create a standard scatter plot map layer object:
+These properties can be used to create a scatter plot map layer object:
 ${createMapTypeProp("ScatterPlotMap")}
 ${idProp}
 ${createDataProp("circles", "Point")}
@@ -214,11 +210,6 @@ ${createDataProp("circles", "Point")}
 
 ${createOpacityProp("circles")}
 ${createColorProp("circles", civicCategoricalColorOptions)}
-
-----
-
-The Custom tab shows additional properties that can be used to create a custom scatter plot map layer object:
-
 - **scaleType (color):** indicates how the data should be grouped into classes/bins
   - This property expects an object with a key set to \`"color"\` and one of the following strings as its value:
     - ordinal: divides the data into classes/bins for categorical data
@@ -267,7 +258,7 @@ ${createCustomColorProp("lines", {
 - **radiusScale:** a radius multiplier for all circles
   - This property requires a number greater than 1
 
-${createOnClickProp("a line")}
+${createOnClickProp("a circle")}
 `;
 
 const screenGridNotes = `
@@ -275,9 +266,9 @@ ${baseNotes}
 
 ## Screen Grid Map
 
-The Standard tab shows the basic implementation of a Screen Grid Map for the MultiLayer Map component.
+This story shows the basic implementation of a Screen Grid Map for the MultiLayer Map component.
 
-These properties can be used to create a standard screen grid map layer object:
+These properties can be used to create a screen grid map layer object:
 
 ${createMapTypeProp("ScreenGridMap")}
 ${idProp}
@@ -292,9 +283,9 @@ ${baseNotes}
 
 ## Icon Map
 
-The Standard tab shows the basic implementation of an Icon Map for the MultiLayer Map component.
+This story shows the basic implementation of an Icon Map for the MultiLayer Map component.
 
-These properties can be used to create a standard icon map layer object:
+These properties can be used to create an icon map layer object:
 
 ${createMapTypeProp("IconMap")}
 ${idProp}
@@ -402,20 +393,15 @@ ${baseNotes}
 
 ## Small Polygon Map
 
-The Standard tab shows the basic implementation of a Small Polygon Map for the MultiLayer Map component.
+This story shows the basic implementation of a Small Polygon Map for the MultiLayer Map component.
 
-These properties can be used to create a standard small polygon map layer object:
+These properties can be used to create a small polygon map layer object:
 
 ${createMapTypeProp("SmallPolygonMap")}
 ${idProp}
 ${createDataProp("polygons", "Polygon")}
 ${createOpacityProp("polygons")}
 ${createColorProp("polygons", civicCategoricalColorOptions)}
-
-----
-
-The Custom tab shows additional properties that can be used to create a custom small polygon map layer object:
-
 ${createScaleTypeProp({ threshold: true, equal: false, ordinal: true })}
 ${createCustomColorProp("polygons", {
   threshold: true,
@@ -458,6 +444,7 @@ ${fieldNameProp}
         - \`colorRange\`: \`[[0,0,255], [255,165,0], [0,255,0]]\`
     - The index of each value in \`dataRange\` will determine which color from the \`colorRange\` it's assigned
       - Thus the value at index 0 in the \`dataRange\` will have the color at index 0 of the \`colorRange\`
+${createOnClickProp("a polygon")}
 `;
 
 const choroplethNotes = `
@@ -465,9 +452,9 @@ ${baseNotes}
 
 ## Choropleth Map
 
-The Standard tab shows the basic implementation of a Choropleth Map for the MultiLayer Map component.
+This story shows the basic implementation of a Choropleth Map for the MultiLayer Map component.
 
-These properties can be used to create a standard choropleth map layer object:
+These properties can be used to create a choropleth map layer object:
 
 ${createMapTypeProp("ChoroplethMap")}
 ${idProp}
@@ -522,7 +509,7 @@ ${fieldNameProp}
     - The index of each value in \`dataRange\` will determine which color from the \`colorRange\` it's assigned
       - Thus the value at index 0 in the \`dataRange\` will have the color at index 0 of the \`colorRange\`
 
-${createOnClickProp("a line")}
+${createOnClickProp("a polygon")}
 
 
 `;

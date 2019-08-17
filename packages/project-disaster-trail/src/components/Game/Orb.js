@@ -1,8 +1,9 @@
 /** @jsx jsx */
 import { PureComponent } from "react";
 import { PropTypes } from "prop-types";
-
 import { jsx, css } from "@emotion/core";
+
+import { palette } from "../../constants/style";
 import RadialGauge from "./RadialGauge";
 
 const orbContainerStyle = css`
@@ -12,10 +13,9 @@ const orbContainerStyle = css`
 const circleDefaultStyle = css`
   transition: transform 1s;
   z-index: 10;
-  background-color: mediumSeaGreen;
+  background-color: ${palette.gold};
   transition: background-color 1000ms linear;
   cursor: pointer;
-  opacity: 0.8;
   display: grid;
   align-items: center;
   justify-items: center;
@@ -25,7 +25,7 @@ const circleDefaultStyle = css`
   }
 
   &.circle-press-style {
-    background-color: mediumAquamarine;
+    background-color: ${palette.lightGreen};
     transition: background-color 1000ms linear;
   }
 

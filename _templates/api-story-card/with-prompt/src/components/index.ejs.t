@@ -39,8 +39,8 @@ const <%=StoryCardName%> = ({ init, data, Layout }) => {
 
 <%=StoryCardName%>.propTypes = {
   init: PropTypes.func,
-  data: resourceShape,
-  Layout: PropTypes.node
+  data: PropTypes.shape({ mockRidershipOverTime: resourceShape }),
+  Layout: PropTypes.func
 };
 
 export default connect(

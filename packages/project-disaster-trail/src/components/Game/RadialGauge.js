@@ -3,8 +3,10 @@ import PropTypes from "prop-types";
 import { css, jsx } from "@emotion/core";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 
+import { palette } from "../../constants/style";
+
 const progressBarStyle = {
-  pathColor: "gold",
+  pathColor: palette.turqoise,
   trailColor: "transparent",
   // Whether to use rounded or flat corners on the ends
   strokeLinecap: "butt",

@@ -24,6 +24,8 @@
   },
   "homepage": "https://github.com/hackoregon/civic#readme",
   "dependencies": {
+    "@hackoregon/2019-elections": "^1.0.0",
+    "@hackoregon/2019-education": "^1.0.0",
     "@emotion/core": "^10.0.10",
     "@emotion/styled": "^10.0.10",
     "@hackoregon/2018-disaster-resilience": "^3.0.0",
@@ -61,7 +63,6 @@
     "@emotion/core": "^10.0.10",
     "@emotion/styled": "^10.0.10",
     "@hackoregon/civic-babel-presets": "^3.0.0",
-    "@hackoregon/component-library": "^3.0.0",
     "@hackoregon/dev-server": "^3.0.0",
     "@hackoregon/webpack-common": "^3.0.0",
     "autoprefixer": "^9.4.10",
