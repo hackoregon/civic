@@ -44,7 +44,7 @@ const LineChart = ({
   xNumberFormatter,
   yNumberFormatter,
   legendComponent,
-  theme = DataVisualizationTheme
+  theme
 }) => {
   const chartDomain = domain || getDefaultDomain(data, dataKey, dataValue);
 
@@ -214,7 +214,8 @@ LineChart.defaultProps = {
   yLabel: "Y",
   xNumberFormatter: civicFormat.numeric,
   yNumberFormatter: civicFormat.numeric,
-  legendComponent: null
+  legendComponent: null,
+  theme: DataVisualizationTheme
 };
 
 export default LineChart;

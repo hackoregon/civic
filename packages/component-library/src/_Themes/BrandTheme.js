@@ -26,8 +26,6 @@ export default {
     flexDirection: "column"
   },
 
-  /* utitlity */
-
   a: {
     color: "#1e62bd",
     textDecoration: "none",

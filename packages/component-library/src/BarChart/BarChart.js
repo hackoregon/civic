@@ -32,7 +32,7 @@ const BarChart = ({
   barWidth,
   loading,
   error,
-  theme = DataVisualizationTheme
+  theme
 }) => {
   const chartDomain = domain || getDefaultDomain(data, dataKey, dataValue);
 
@@ -147,7 +147,8 @@ BarChart.defaultProps = {
   yLabel: "Y",
   xNumberFormatter: civicFormat.year,
   yNumberFormatter: civicFormat.numeric,
-  barWidth: null
+  barWidth: null,
+  theme: DataVisualizationTheme
 };
 
 export default BarChart;
