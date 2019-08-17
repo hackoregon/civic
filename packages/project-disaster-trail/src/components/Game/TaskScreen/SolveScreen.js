@@ -1,7 +1,6 @@
 /** @jsx jsx */
-import { PureComponent, Fragment } from "react";
+import { PureComponent } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import { PropTypes } from "prop-types";
 import { css, jsx } from "@emotion/core";
 
@@ -11,7 +10,6 @@ import {
   // startTick as _startTick,
   // stopTick as _stopTick
 } from "../../../state/tasks";
-import { getPlayerKitItems } from "../../../state/kit";
 import TextContainer from "../../atoms/Containers/TextContainer";
 
 const defaultState = {
@@ -40,59 +38,23 @@ const onScreenStyle = css`
 class SolveScreen extends PureComponent {
   state = defaultState;
 
-  componentDidMount() {
-    // const { activeTask, startTick } = this.props;
-    // startTick(activeTask.time);
-  }
+  componentDidUpdate() {
+    const { activeTask } = this.props;
 
-  componentDidUpdate(prevProps) {
-    const { activeTask, outOfTime } = this.props;
-    const { correctItemsChosen } = this.state;
-
-    // if (
-    //   activeTask &&
-    //   prevProps.activeTask &&
-    //   activeTask.id !== prevProps.activeTask.id
-    // ) {
-    //   startTick(activeTask.time);
-    // }
-
-    // if (activeTask && correctItemsChosen >= activeTask.numberItemsToSolve) {
-    //   this.finishTask();
-    // }
-
-    // // user ran out of time before 'completing' the task
-    // if (
-    //   (outOfTime && !prevProps.outOfTime) ||
-    //   (!activeTask && prevProps.activeTask)
-    // ) {
-    //   this.finishTask();
-
-    //   // start the next task
-    //   if (activeTask) {
-    //     setTimeout(() => {
-    //       startTick(activeTask.time);
-    //     }, 500);
-    //   }
-    // }
-
-    // // store the last active task
-    // // to avoid activeTask text disappearing
-    // // when the activeTask property is null
-    // if (activeTask && activeTask !== this.state.activeTask) {
-    //   this.setState({ activeTask });
-    // }
-  }
-
-  componentWillUnmount() {
-    const { stopTick } = this.props;
-    stopTick();
+    // store the last active task
+    // to avoid activeTask text disappearing
+    // when the activeTask property is null
+    // eslint-disable-next-line react/destructuring-assignment
+    const activeTaskInState = this.state.activeTask;
+    if (activeTask && activeTask !== activeTaskInState) {
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({ activeTask });
+    }
   }
 
   finishTask = () => {
-    const { completeActiveTask, activeTask, stopTick } = this.props;
+    const { completeActiveTask, activeTask } = this.props;
     if (activeTask) {
-      stopTick();
       completeActiveTask(activeTask.id);
     }
   };
@@ -108,15 +70,15 @@ class SolveScreen extends PureComponent {
   };
 
   render() {
-    const { completeActiveTask, playerKitItems, open } = this.props;
+    const { completeActiveTask, open, activeTask } = this.props;
     const { correctItemsChosen } = this.state;
+    // eslint-disable-next-line react/destructuring-assignment
+    const activeTaskInState = this.state.activeTask;
 
     // we've stored the activeTask in state
     // to avoid the activeTask text disappearing
     // while the component animates out
-    const activeTask = this.props.activeTask
-      ? this.props.activeTask
-      : this.state.activeTask;
+    const activeTaskToRender = activeTask || activeTaskInState;
 
     return (
       <div
@@ -125,20 +87,20 @@ class SolveScreen extends PureComponent {
           ${open ? onScreenStyle : {}}
         `}
       >
-        {activeTask && (
+        {activeTaskToRender && (
           <TextContainer>
-            <h2>{activeTask.text}</h2>
+            <h2>{activeTaskToRender.text}</h2>
             <h3>
               Correct items chosen: {correctItemsChosen} of{" "}
-              {activeTask.numberItemsToSolve}
+              {activeTaskToRender.numberItemsToSolve}
             </h3>
             <button
               type="button"
               onClick={() => {
-                completeActiveTask(activeTask.id);
+                completeActiveTask(activeTaskToRender.id);
               }}
             >
-              Use {activeTask.requiredItem}
+              Use {activeTaskToRender.requiredItem}
             </button>
           </TextContainer>
         )}
@@ -152,21 +114,15 @@ SolveScreen.propTypes = {
   activeTask: PropTypes.shape({
     id: PropTypes.string
   }),
-  playerKitItems: PropTypes.arrayOf(PropTypes.shape({})),
-  // startTick: PropTypes.func,
-  // stopTick: PropTypes.func,
-  outOfTime: PropTypes.bool
+  open: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
   activeTask: getActiveTaskData(state),
-  playerKitItems: getPlayerKitItems(state),
   outOfTime: state.tasks.outOfTime
 });
 
 const mapDispatchToProps = dispatch => ({
-  // startTick: bindActionCreators(_startTick, dispatch),
-  // stopTick: bindActionCreators(_stopTick, dispatch),
   completeActiveTask(taskChoice, taskId) {
     dispatch(completeTask(taskChoice, taskId));
   }

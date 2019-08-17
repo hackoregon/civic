@@ -1,13 +1,11 @@
 /** @jsx jsx */
 import { memo } from "react";
-import { connect } from "react-redux";
 import { jsx, css } from "@emotion/core";
 import PropTypes from "prop-types";
-import { getPercentComplete } from "../../../state/tasks";
 
 import { palette } from "../../../constants/style";
 
-const DurationBar = ({ percentComplete, debug = false }) => {
+const DurationBar = ({ percentComplete = 0, debug = false }) => {
   const containerStyle = css`
     position: relative;
     width: 100%;
@@ -58,8 +56,4 @@ DurationBar.propTypes = {
   debug: PropTypes.bool
 };
 
-const mapStateToProps = state => ({
-  percentComplete: getPercentComplete(state)
-});
-
-export default connect(mapStateToProps)(memo(DurationBar));
+export default memo(DurationBar);
