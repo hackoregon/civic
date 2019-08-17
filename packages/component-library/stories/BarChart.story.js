@@ -14,7 +14,7 @@ import civicFormat from "../src/utils/civicFormat";
 import { getKeyNames } from "./shared";
 import notes from "./barchart.notes.md";
 import { BarChart } from "../src";
-import { CrazyVisualizationTheme } from "../src/_Themes/index";
+import { VictoryCrazyTheme } from "../src/_Themes/index";
 
 const GROUP_IDS = {
   LABELS: "Labels",
@@ -76,7 +76,7 @@ export default () =>
             yLabel={yLabel}
             xNumberFormatter={x => civicFormat[optionSelectX](x)}
             yNumberFormatter={y => civicFormat[optionSelectY](y)}
-            theme={CrazyVisualizationTheme}
+            theme={VictoryCrazyTheme}
           />
         );
       },

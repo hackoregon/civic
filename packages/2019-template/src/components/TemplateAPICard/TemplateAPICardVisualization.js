@@ -2,10 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { resourceShape } from "reduxful/react-addons";
 
-import {
-  CrazyVisualizationTheme,
-  LineChart
-} from "@hackoregon/component-library";
+import { VictoryCrazyTheme, LineChart } from "@hackoregon/component-library";
 
 const TemplateAPICardVisualization = ({ isLoading, data }) => (
   <>
@@ -15,7 +12,7 @@ const TemplateAPICardVisualization = ({ isLoading, data }) => (
         dataKey="year"
         dataValue="weekday_sum_ons"
         title="Template API Plot"
-        theme={CrazyVisualizationTheme}
+        theme={VictoryCrazyTheme}
       />
     )}
   </>

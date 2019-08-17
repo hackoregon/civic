@@ -1,7 +1,7 @@
 import Brand from "./BrandTheme";
-import Victory from "./VictoryTheme";
-import CrazyVisualization from "./CrazyVisualizationTheme";
+import Victory from "./Victory/VictoryTheme";
+import VictoryCrazy from "./Victory/VictoryCrazyTheme";
 
 export const BrandTheme = Brand;
 export const VictoryTheme = Victory;
-export const CrazyVisualizationTheme = CrazyVisualization;
+export const VictoryCrazyTheme = VictoryCrazy;
