@@ -5,6 +5,6 @@ after: \[
 skip_if: <%=slug%>
 ---
   {
-    slug: "<%=slug%>-card",
+    slug: "<%=slug%>",
     component: <%=StoryCardName%>
   },

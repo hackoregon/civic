@@ -6,6 +6,6 @@ after: \[
 skip_if: "(<%=slug%>|hygen:skip)"
 ---
   {
-    slug: "<%=slug%>-card",
+    slug: "<%=slug%>",
     component: <%=StoryCardName%>
   },
