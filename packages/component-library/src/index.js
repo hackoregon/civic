@@ -69,8 +69,8 @@ export {
   default as CivicCardLayoutVisualizationOnly
 } from "./CivicCard/CivicCardLayoutVisualizationOnly";
 export {
-  default as CivicCardLayoutExample
-} from "./CivicCard/CivicCardLayoutExample";
+  default as CivicCardLayoutFullWithDescriptions
+} from "./CivicCard/CivicCardLayoutFullWithDescriptions";
 
 export { default as civicFormat } from "./utils/civicFormat";
 export { default as ungroupBy } from "./utils/ungroupBy";

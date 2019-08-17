@@ -64,7 +64,7 @@ Desc.propTypes = {
   id: PropTypes.string
 };
 
-function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
+function CivicCardLayoutFullWithDescriptions({ isLoading, data, cardMeta }) {
   return (
     <div>
       <div>
@@ -212,10 +212,10 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
   );
 }
 
-CivicCardLayoutFull.propTypes = {
+CivicCardLayoutFullWithDescriptions.propTypes = {
   isLoading: PropTypes.bool,
   data: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.array]),
   cardMeta: cardMetaTypes
 };
 
-export default CivicCardLayoutFull;
+export default CivicCardLayoutFullWithDescriptions;

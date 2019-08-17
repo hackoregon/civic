@@ -8,7 +8,7 @@ import {
   Collapsable,
   CivicCardLayoutClassic,
   CivicCardLayoutVisualizationOnly,
-  CivicCardLayoutExample
+  CivicCardLayoutFullWithDescriptions
 } from "../src";
 import { civicFormat } from "../src/utils";
 
@@ -329,7 +329,7 @@ export default () =>
         cardMeta={demoCardMeta}
         data={demoData}
         isLoading={false}
-        Layout={CivicCardLayoutExample}
+        Layout={CivicCardLayoutFullWithDescriptions}
       />
     ))
     .add("Layout: Default (full)", () => (
