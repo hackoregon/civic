@@ -324,7 +324,7 @@ const demoCardMeta = (/* data */) => ({
 
 export default () =>
   storiesOf("Component Lib|Story Cards/CIVIC Card", module)
-    .add("Layout: Example (full)", () => (
+    .add("Layout: Full With Descriptions", () => (
       <CivicCard
         cardMeta={demoCardMeta}
         data={demoData}
