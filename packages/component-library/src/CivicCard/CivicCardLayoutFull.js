@@ -1,8 +1,8 @@
-import React, { Fragment } from "react";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
+import { Fragment } from "react";
 import PropTypes from "prop-types";
 import _ from "lodash";
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { cx, css } from "emotion";
 import PullQuote from "../PullQuote/PullQuote";
 import Placeholder from "../Placeholder/Placeholder";
 import cardMetaTypes from "./cardMetaTypes";
@@ -49,14 +49,14 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
   return (
     <Fragment>
       <article>
-        <div className={cx(sectionMarginSmall, sectionMaxWidthSmall)}>
+        <div css={[sectionMarginSmall, sectionMaxWidthSmall]}>
           <header>
-            <h1 className={cardMetaItem} id="title">
+            <h1 css={cardMetaItem} id="title">
               {cardMeta.title}
             </h1>
           </header>
           <hr />
-          <section className={cardMetaItem} id="tags">
+          <section css={cardMetaItem} id="tags">
             {cardMeta.tags.map((tag, index) => (
               <Chip tag={tag} index={index} />
             ))}
@@ -64,41 +64,37 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
           <hr />
         </div>
         <section>
-          <div className={cx(sectionMarginSmall, sectionMaxWidthSmall)}>
-            <div className={cardMetaItem} id="introText">
+          <div css={[sectionMarginSmall, sectionMaxWidthSmall]}>
+            <div css={cardMetaItem} id="introText">
               {cardMeta.introText}
             </div>
           </div>
           <figure
             id="visualization"
-            className={cx(
-              sectionMarginMedium,
-              sectionMaxWidthMedium,
-              cardMetaItem
-            )}
+            css={[sectionMarginMedium, sectionMaxWidthMedium, cardMetaItem]}
           >
             {cardMeta.selector}
             <cardMeta.visualization isLoading={isLoading} data={data} />
           </figure>
-          <div className={cx(sectionMarginSmall, sectionMaxWidthSmall)}>
-            <div className={cardMetaItem} id="shareText">
+          <div css={[sectionMarginSmall, sectionMaxWidthSmall]}>
+            <div css={cardMetaItem} id="shareText">
               <PullQuote quoteText={cardMeta.shareText} />
             </div>
-            <div className={cardMetaItem} id="additionalText">
+            <div css={cardMetaItem} id="additionalText">
               {cardMeta.additionalText}
             </div>
           </div>
         </section>
-        <hr className={cx(sectionMarginSmall, sectionMaxWidthSmall)} />
-        <section className={cx(sectionMarginSmall, sectionMaxWidthSmall)}>
-          <div className={cardMetaItem} id="analysis">
+        <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
+        <section css={[sectionMarginSmall, sectionMaxWidthSmall]}>
+          <div css={cardMetaItem} id="analysis">
             <h2>About this analysis</h2>
             {cardMeta.analysis}
           </div>
         </section>
-        <hr className={cx(sectionMarginSmall, sectionMaxWidthSmall)} />
+        <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
         <section
-          className={cx(sectionMarginSmall, sectionMaxWidthSmall, cardMetaItem)}
+          css={[sectionMarginSmall, sectionMaxWidthSmall, cardMetaItem]}
           id="metadata"
         >
           <h2>About this data</h2>
@@ -112,9 +108,9 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
             />
           )}
         </section>
-        <hr className={cx(sectionMarginSmall, sectionMaxWidthSmall)} />
+        <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
         <section
-          className={cx(sectionMarginSmall, sectionMaxWidthSmall, cardMetaItem)}
+          css={[sectionMarginSmall, sectionMaxWidthSmall, cardMetaItem]}
           id="resources"
         >
           <h2>Links and resources</h2>
@@ -132,23 +128,23 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
             />
           </ul>
         </section>
-        <hr className={cx(sectionMarginSmall, sectionMaxWidthSmall)} />
+        <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
         <section
-          className={cx(sectionMarginSmall, sectionMaxWidthSmall, cardMetaItem)}
+          css={[sectionMarginSmall, sectionMaxWidthSmall, cardMetaItem]}
           id="authors"
         >
           <h2>Who made this?</h2>
           {cardMeta.authors.map(photo => (
             <img
-              className={authorPhoto}
+              css={authorPhoto}
               src={photo}
               alt="Pictures of people who worked on this"
             />
           ))}
         </section>
-        <hr className={cx(sectionMarginSmall, sectionMaxWidthSmall)} />
+        <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
         <section
-          className={cx(sectionMarginSmall, sectionMaxWidthSmall, platformItem)}
+          css={[sectionMarginSmall, sectionMaxWidthSmall, platformItem]}
           id="improve"
         >
           <h2>Help make this better</h2>
@@ -167,9 +163,9 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
           </p>
         </section>
       </article>
-      <hr className={cx(sectionMarginSmall, sectionMaxWidthSmall)} />
+      <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
       <section
-        className={cx(sectionMarginSmall, sectionMaxWidthSmall, platformItem)}
+        css={[sectionMarginSmall, sectionMaxWidthSmall, platformItem]}
         id="explore"
       >
         <h2>Explore related data</h2>
