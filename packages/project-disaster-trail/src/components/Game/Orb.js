@@ -66,31 +66,30 @@ export default class Orb extends PureComponent {
     }
   }
 
-  incrementGauge = percent => {
-    return new Promise(resolve => {
-      setTimeout(() => {
-        const { isActive } = this.state;
-
-        if (percent === 100) {
-          this.setState({ isComplete: true }, resolve);
-        } else if (percent < 100 && isActive) {
-          const update = percent + 10;
-          this.setState({ percent: update }, () => this.incrementGauge(update));
-        } else if (percent < 100 && !isActive) {
-          this.setState({ isActive: false, percent: 0 }, resolve);
-        }
-      }, 200);
-    });
+  incrementGauge = () => {
+    const timer = setInterval(() => {
+      const { isActive, percent } = this.state;
+      if (percent === 100) {
+        this.setState({ isComplete: true });
+        clearInterval(timer);
+      } else if (percent < 100 && isActive) {
+        const update = percent + 10;
+        this.setState({ percent: update });
+      } else if (percent < 100 && !isActive) {
+        this.setState({ isActive: false, percent: 0 });
+        clearInterval(timer);
+      }
+    }, 200);
   };
 
   handleOrbPress = () => {
-    const { isComplete, percent } = this.state;
+    const { isComplete } = this.state;
     const { orb, setOrbTouched } = this.props;
     // if already pressed, do nothing
     if (isComplete) return;
 
     this.setState({ isActive: true }, () => {
-      this.incrementGauge(percent);
+      this.incrementGauge();
     });
     setOrbTouched(orb, true);
   };
