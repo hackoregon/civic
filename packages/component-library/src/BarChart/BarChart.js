@@ -11,7 +11,7 @@ import {
 } from "victory";
 
 import { ThemeProvider } from "emotion-theming";
-import { DataVisualizationTheme } from "../_Themes/index";
+import { VictoryTheme } from "../_Themes/index";
 
 import ChartContainer from "../ChartContainer";
 import DataChecker from "../utils/DataChecker";
@@ -148,7 +148,7 @@ BarChart.defaultProps = {
   xNumberFormatter: civicFormat.year,
   yNumberFormatter: civicFormat.numeric,
   barWidth: null,
-  theme: DataVisualizationTheme
+  theme: VictoryTheme
 };
 
 export default BarChart;

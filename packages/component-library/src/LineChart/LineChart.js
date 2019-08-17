@@ -12,7 +12,7 @@ import {
 } from "victory";
 
 import { ThemeProvider } from "emotion-theming";
-import { DataVisualizationTheme } from "../_Themes/index";
+import { VictoryTheme } from "../_Themes/index";
 
 import ChartContainer from "../ChartContainer";
 import SimpleLegend from "../SimpleLegend";
@@ -215,7 +215,7 @@ LineChart.defaultProps = {
   xNumberFormatter: civicFormat.numeric,
   yNumberFormatter: civicFormat.numeric,
   legendComponent: null,
-  theme: DataVisualizationTheme
+  theme: VictoryTheme
 };
 
 export default LineChart;

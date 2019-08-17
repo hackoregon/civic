@@ -3,7 +3,7 @@ import "./fonts.css";
 // THEMES
 export {
   BrandTheme,
-  DataVisualizationTheme,
+  VictoryTheme,
   CrazyVisualizationTheme
 } from "./_Themes/index";
 
