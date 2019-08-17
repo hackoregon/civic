@@ -29,7 +29,7 @@ const mapAndInfoStyle = css`
 const TaskScreen = ({
   activeTask,
   completeActiveTask,
-  // endChapter,
+  endChapter,
   debug = true
 }) => {
   const prevActiveTask = usePrevious(activeTask);
@@ -37,11 +37,13 @@ const TaskScreen = ({
   const prevAction = usePrevious(action);
   const [percentComplete, setPercentComplete] = useState(0);
   const [timer] = useState(new Timer());
+  const [chapterTimer] = useState(new Timer());
   const [votingComplete, setVotingComplete] = useState(false);
   const [movingMapComplete, setMovingMapComplete] = useState(false);
 
   const votingDuration = 20;
   const mapTransitionDuration = 5;
+  const chapterDuration = 60;
 
   // 1) Solve Screen
   // 2) Vote
@@ -68,8 +70,8 @@ const TaskScreen = ({
   };
 
   const startTimer = duration => {
-    const d = debug ? 5 : duration;
-    timer.setDuration(d);
+    // const d = debug ? 5 : duration;
+    timer.setDuration(duration);
     timer.reset();
     timer.addCallback((t, p) => {
       setPercentComplete(p);
@@ -88,6 +90,15 @@ const TaskScreen = ({
       timer.stop();
     };
   }, [timer, activeTask, action]);
+
+  useEffect(() => {
+    chapterTimer.setDuration(chapterDuration);
+    chapterTimer.addCompleteCallback(() => endChapter());
+    chapterTimer.start();
+    return () => {
+      chapterTimer.stop();
+    };
+  }, [chapterTimer]);
 
   useEffect(() => {
     switch (action) {
