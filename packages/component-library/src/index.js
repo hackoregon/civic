@@ -1,5 +1,13 @@
 import "./fonts.css";
 
+// THEMES
+export {
+  BrandTheme,
+  DataVisualizationTheme,
+  CrazyVisualizationTheme
+} from "./_Themes/index";
+
+// COMPONENTS
 export {
   default as HorizontalBarChart
 } from "./HorizontalBarChart/HorizontalBarChart";

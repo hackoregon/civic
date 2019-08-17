@@ -2,8 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import { resourceShape } from "reduxful/react-addons";
 
-import { CrazyVisualizationTheme } from "@hackoregon/component-library/src/_Themes/index";
-import { LineChart } from "@hackoregon/component-library";
+import {
+  CrazyVisualizationTheme,
+  LineChart
+} from "@hackoregon/component-library";
 
 const TemplateAPICardVisualization = ({ isLoading, data }) => (
   <>

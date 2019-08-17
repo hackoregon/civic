@@ -3,8 +3,8 @@ import React from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { cx, css } from "emotion"; // eslint-disable-line emotion/no-vanilla
 import { Global } from "@emotion/core";
-import { BrandTheme } from "@hackoregon/component-library/src/_Themes/index";
 import {
+  BrandTheme,
   PageLayout,
   PullQuote,
   CivicCardLayoutClassic,
