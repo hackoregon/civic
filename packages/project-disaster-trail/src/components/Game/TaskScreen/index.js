@@ -5,7 +5,13 @@ import { connect } from "react-redux";
 import { css, jsx } from "@emotion/core";
 
 import { goToNextChapter } from "../../../state/chapters";
-import { getActiveTaskData, completeTask } from "../../../state/tasks";
+import {
+  getActiveTaskData,
+  completeTask,
+  getWeightedTasks
+} from "../../../state/tasks";
+import { getPlayerKitItems } from "../../../state/kit";
+import OrbManager from "../OrbManager";
 import ChooseScreen from "./ChooseScreen";
 import SolveScreen from "./SolveScreen";
 import DurationBar from "../../atoms/DurationBar";
@@ -30,7 +36,9 @@ const TaskScreen = ({
   activeTask,
   completeActiveTask,
   endChapter,
-  debug = true
+  debug = true,
+  playerKitItems,
+  weightedTasks
 }) => {
   const prevActiveTask = usePrevious(activeTask);
   const [action, setAction] = useState(ACTIONS.SOLVING);
@@ -152,10 +160,33 @@ const TaskScreen = ({
     }
   }, [action, prevAction]);
 
+  const onItemSelection = item => {
+    // eslint-disable-next-line no-console
+    console.log("item ", item);
+    // if (item.type === activeTask.requiredItem) {
+    //   this.setState(state => ({
+    //     correctItemsChosen: state.correctItemsChosen + 1
+    //   }));
+    // }
+  };
+
+  const onTaskSelection = task => {
+    // eslint-disable-next-line no-console
+    console.log("onTaskSelection ", task);
+    // const { taskVotes } = this.state;
+    // taskVotes[task.type] += 1;
+
+    // this.setState({
+    //   taskVotes
+    // });
+    // // Return true so Orb knows how to animate
+    // return true;
+  };
+
   const isSolving = action === ACTIONS.SOLVING;
-  // const possibleItems = isSolving ? playerKitItems : weightedTasks;
-  // const frozenOrbInterface = !isSolving;
-  // const onOrbSelection = isSolving ? this.onItemSelection : this.onTaskSelection;
+  const possibleItems = isSolving ? playerKitItems : weightedTasks;
+  const frozenOrbInterface = !isSolving;
+  const onOrbSelection = isSolving ? onItemSelection : onTaskSelection;
 
   return (
     <Fragment>
@@ -174,11 +205,11 @@ const TaskScreen = ({
         percentComplete={percentComplete}
       />
       <Ticker text="Ticker tape text that goes across the screen to give instructions" />
-      {/* <OrbManager
+      <OrbManager
         possibleItems={possibleItems}
         onOrbSelection={onOrbSelection}
         frozenOrbInterface={frozenOrbInterface}
-      /> */}
+      />
     </Fragment>
   );
 };
@@ -187,11 +218,15 @@ TaskScreen.propTypes = {
   activeTask: PropTypes.shape({}),
   completeActiveTask: PropTypes.func,
   endChapter: PropTypes.func,
-  debug: PropTypes.bool
+  debug: PropTypes.bool,
+  playerKitItems: PropTypes.arrayOf(PropTypes.shape({})),
+  weightedTasks: PropTypes.arrayOf(PropTypes.shape({}))
 };
 
 const mapStateToProps = state => ({
-  activeTask: getActiveTaskData(state)
+  activeTask: getActiveTaskData(state),
+  playerKitItems: getPlayerKitItems(state),
+  weightedTasks: getWeightedTasks(state)
 });
 
 const mapDispatchToProps = dispatch => ({

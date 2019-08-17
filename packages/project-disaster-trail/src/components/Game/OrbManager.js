@@ -56,10 +56,10 @@ const OrbManager = ({
   const [hasInitialized, setHasInitialized] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
 
-  if (!frozenOrbInterface) {
-    // eslint-disable-next-line no-use-before-define
-    useAnimationFrame(() => animate());
-  }
+  // use null to avoid dynamically altering the hooks,
+  // which throws an error
+  // eslint-disable-next-line no-use-before-define
+  useAnimationFrame(() => (frozenOrbInterface ? null : animate()));
 
   // store references to all models
   const prevModels = usePrevious(orbs);
