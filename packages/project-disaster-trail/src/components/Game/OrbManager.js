@@ -5,11 +5,10 @@ import { bindActionCreators } from "redux";
 import { map } from "lodash";
 import styled from "@emotion/styled";
 
+import remove from "lodash/remove";
 import useBounds from "../../state/hooks/useBounds";
 import usePrevious from "../../state/hooks/usePrevious";
 import useAnimationFrame from "../../state/hooks/useAnimationFrame";
-
-import { getOrbsTouched, getOrbsComplete } from "../../state/orbs";
 
 import Orb from "./Orb";
 import { addItemToPlayerKit, getKitCreationItems } from "../../state/kit";
@@ -70,15 +69,13 @@ const ORB_CONFIG = {
  */
 const OrbManager = ({
   kitItems,
-  touchedOrbs,
-  completedOrbs,
   addItemToPlayerKitInState,
   addPointsToState
 } = {}) => {
   const [hasInitialized, setHasInitialized] = useState(false);
   const [orbs, setOrbsState] = useState([]);
-  // const [touchedOrbs, setTouchedOrb] = useState([]);
-  // const [completedOrbs, setCompletedOrbs] = useState([]);
+  const [touchedOrbs, setTouchedOrb] = useState([]);
+  const [completedOrbs, setCompletedOrbs] = useState([]);
   // tick is used to modulate movement based on an incrementing value
   const [tick, setTick] = useState(0);
 
@@ -109,33 +106,38 @@ const OrbManager = ({
 
     const tempModels = [];
     // we re-use tempModels by pushing updated data in to it.
-    for (let i = 0, model; i < orbs.length; i += 1) {
+    for (let i = 0; i < orbs.length; i += 1) {
       // get the model
-      model = { ...orbs[i] };
+      const currentOrb = { ...orbs[i] };
+      const currentOrbId = currentOrb.orbId;
 
       // if the orb is touched or complete, do not move it
       // TODO: seperate out orb animation when good / bad
-      if (touchedOrbs.indexOf(i) > -1 || completedOrbs.indexOf(i) > -1) {
-        tempModels.push(model);
+      if (
+        touchedOrbs.indexOf(currentOrbId) > -1 ||
+        completedOrbs.indexOf(currentOrbId) > -1
+      ) {
+        tempModels.push(currentOrb);
         // eslint-disable-next-line no-continue
         continue;
       }
 
       // and move it
-      model.x += model.velocity.x; // + Math.cos(tick * 0.1) * period;
-      model.y +=
-        model.velocity.y + Math.sin((tick + i) * 0.1) * ORB_CONFIG.period;
+      currentOrb.x += currentOrb.velocity.x; // + Math.cos(tick * 0.1) * period;
+      currentOrb.y +=
+        currentOrb.velocity.y + Math.sin((tick + i) * 0.1) * ORB_CONFIG.period;
 
       // is it offscreen?
-      if (model.x < -ORB_CONFIG.orbSize) model.x += bounds.width;
-      if (model.x > bounds.width) model.x -= bounds.width + ORB_CONFIG.orbSize;
+      if (currentOrb.x < -ORB_CONFIG.orbSize) currentOrb.x += bounds.width;
+      if (currentOrb.x > bounds.width)
+        currentOrb.x -= bounds.width + ORB_CONFIG.orbSize;
 
-      if (model.y < -ORB_CONFIG.orbSize) model.y += bounds.height;
-      if (model.y > bounds.height)
-        model.y -= bounds.height + ORB_CONFIG.orbSize;
+      if (currentOrb.y < -ORB_CONFIG.orbSize) currentOrb.y += bounds.height;
+      if (currentOrb.y > bounds.height)
+        currentOrb.y -= bounds.height + ORB_CONFIG.orbSize;
 
       // store the updated model.
-      tempModels.push(model);
+      tempModels.push(currentOrb);
     }
 
     // store all models in state
@@ -146,13 +148,6 @@ const OrbManager = ({
 
   useAnimationFrame(() => animate());
 
-  // this is the render method
-  // simply wrap Orb with some styling that moves it
-  //
-  // const getOrbById = id => {
-  //   return orbs.find(orb => orb.id === id);
-  // };
-
   const addOrbScore = orb => {
     if (orb.good) {
       addItemToPlayerKitInState(orb.type);
@@ -160,20 +155,25 @@ const OrbManager = ({
     }
   };
 
-  const setOrbTouched = (touchedOrbId, isTouched) => {
-    const orb = getOrbById(touchedOrbId);
+  const setOrbTouched = (orb, isTouched) => {
+    const { orbId } = orb;
+
     if (isTouched) {
-      orb.touched = true;
-      setTouchedOrb(oldSet => [...oldSet, touchedOrb]);
+      setTouchedOrb(prevOrbs => [...prevOrbs, orbId]);
       return;
     }
 
-
+    const updatedOrbs = remove(
+      touchedOrbs,
+      touchedOrb => touchedOrb.orbId === orbId
+    );
+    setTouchedOrb(updatedOrbs);
   };
-  //
-  // const setOrbComplete = (completedOrbId, isComplete) => {
-  //
-  // };
+
+  const setOrbComplete = orb => {
+    const { orbId } = orb;
+    setCompletedOrbs(prevOrbs => [...prevOrbs, orbId]);
+  };
 
   return (
     <OrbsStyle ref={boundsRef}>
@@ -186,11 +186,11 @@ const OrbManager = ({
           }}
         >
           <Orb
-            id={index}
-            size={ORB_CONFIG.orbSize}
             orb={orb}
+            size={ORB_CONFIG.orbSize}
             addOrbScore={addOrbScore}
-            // setOrbTouchedInState={setOrbTouchedInState}
+            setOrbTouched={setOrbTouched}
+            setOrbComplete={setOrbComplete}
           />
         </div>
       ))}
@@ -208,8 +208,6 @@ const OrbsStyle = styled.div`
 `;
 
 const mapStateToProps = state => ({
-  touchedOrbs: getOrbsTouched(state),
-  completedOrbs: getOrbsComplete(state),
   kitItems: getKitCreationItems(state)
 });
 

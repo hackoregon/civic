@@ -1,13 +1,9 @@
 /** @jsx jsx */
 import { PureComponent } from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import { PropTypes } from "prop-types";
 
 import { jsx, css } from "@emotion/core";
 import RadialGauge from "./RadialGauge";
-
-import { getOrbTouched, setOrbTouched, setOrbComplete } from "../../state/orbs";
 
 const orbContainerStyle = css`
   position: relative;
@@ -48,64 +44,67 @@ const iconStyle = css`
 const defaultState = {
   pressTimeout: null,
   pressedStart: null,
-  isActive: true,
+  isActive: false,
   isComplete: false,
-  isCorrect: false
+  isCorrect: false,
+  percent: 0
 };
 
-class Orb extends PureComponent {
+export default class Orb extends PureComponent {
   constructor(props) {
     super(props);
     this.state = defaultState;
   }
 
-  handleOrbPress = () => {
+  componentDidUpdate(prevProps, prevState) {
     const { isComplete } = this.state;
-    const { id, setOrbTouchedInState } = this.props;
+    const { addOrbScore, orb, setOrbComplete } = this.props;
+
+    if (!prevState.isComplete && isComplete) {
+      addOrbScore(orb);
+      setOrbComplete(orb);
+    }
+  }
+
+  incrementGauge = percent => {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        const { isActive } = this.state;
+
+        if (percent === 100) {
+          this.setState({ isComplete: true }, resolve);
+        } else if (percent < 100 && isActive) {
+          const update = percent + 10;
+          this.setState({ percent: update }, () => this.incrementGauge(update));
+        } else if (percent < 100 && !isActive) {
+          this.setState({ isActive: false, percent: 0 }, resolve);
+        }
+      }, 200);
+    });
+  };
+
+  handleOrbPress = () => {
+    const { isComplete, percent } = this.state;
+    const { orb, setOrbTouched } = this.props;
     // if already pressed, do nothing
     if (isComplete) return;
 
-    this.setState({isActive: true});
-
-    setOrbTouchedInState(id, true);
+    this.setState({ isActive: true }, () => {
+      this.incrementGauge(percent);
+    });
+    setOrbTouched(orb, true);
   };
 
   handleOrbRelease = () => {
     this.setState({ isActive: false });
-    const { id, setOrbTouchedInState } = this.props;
-    setOrbTouchedInState(id, false);
+    const { orb, setOrbTouched } = this.props;
+    setOrbTouched(orb, false);
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    const { isComplete } = this.state;
-    const { addOrbScore, orb } = this.props;
-    if (isComplete) {
-      addOrbScore(orb);
-    }
-  }
-
-  // checkComplete = () => {
-  //   const { pressedStart, durationRequired, isActive } = this.state;
-  //   const { onOrbSelection, orb } = this.props;
-	//
-  //   if (isActive && pressedStart) {
-  //     const pressedDuration = new Date() - pressedStart;
-  //     if (pressedDuration >= durationRequired) {
-  //       const { id, setOrbCompleteInState } = this.props;
-  //       // before final logic is added assume all orbs are bad
-  //       // eslint-disable-next-line react/no-unused-state
-  //       this.setState({ isComplete: true, isCorrect: false });
-	//
-  //       setOrbCompleteInState(id, true);
-  //       onOrbSelection(orb);
-  //     }
-  //   }
-  // };
-
   render() {
-    const { isActive, isComplete } = this.state;
+    const { isActive, isComplete, percent } = this.state;
     // eslint-disable-next-line no-unused-vars
-    const { id, size, isTouched, orb } = this.props;
+    const { size, orb } = this.props;
 
     const sizeStyle = css`
       height: ${size}px;
@@ -137,11 +136,7 @@ class Orb extends PureComponent {
         onTouchEnd={this.handleOrbRelease}
       >
         <div css={absoluteStyle}>
-          <RadialGauge
-              isComplete={() => this.setState({isComplete: true})}
-              animateGauge={isActive}
-              size={size}
-          />
+          <RadialGauge percent={percent} isActive={isActive} size={size} />
         </div>
         <div
           css={css`
@@ -160,25 +155,9 @@ class Orb extends PureComponent {
 }
 
 Orb.propTypes = {
-  id: PropTypes.number,
-  setOrbTouchedInState: PropTypes.func,
-  setOrbCompleteInState: PropTypes.func,
-  isTouched: PropTypes.bool,
+  setOrbTouched: PropTypes.func,
+  setOrbComplete: PropTypes.func,
   addOrbScore: PropTypes.func,
   orb: PropTypes.shape({}),
   size: PropTypes.number
 };
-
-const mapStateToProps = (state, ownProps) => ({
-  isTouched: getOrbTouched({ ...state, id: ownProps.id })
-});
-
-const mapDispatchToProps = dispatch => ({
-  setOrbTouchedInState: bindActionCreators(setOrbTouched, dispatch),
-  setOrbCompleteInState: bindActionCreators(setOrbComplete, dispatch)
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Orb);
