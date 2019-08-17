@@ -37,26 +37,16 @@ const authorPhoto = css`
   cursor: pointer;
 `;
 
-const cardMetaItem = css`
-  border: 1px solid red;
-`;
-
-const platformItem = css`
-  border: 1px solid blue;
-`;
-
 function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
   return (
     <Fragment>
       <article>
         <div css={[sectionMarginSmall, sectionMaxWidthSmall]}>
           <header>
-            <h1 css={cardMetaItem} id="title">
-              {cardMeta.title}
-            </h1>
+            <h1 id="title">{cardMeta.title}</h1>
           </header>
           <hr />
-          <section css={cardMetaItem} id="tags">
+          <section id="tags">
             {cardMeta.tags.map((tag, index) => (
               <Chip tag={tag} index={index} />
             ))}
@@ -65,38 +55,31 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
         </div>
         <section>
           <div css={[sectionMarginSmall, sectionMaxWidthSmall]}>
-            <div css={cardMetaItem} id="introText">
-              {cardMeta.introText}
-            </div>
+            <div id="introText">{cardMeta.introText}</div>
           </div>
           <figure
             id="visualization"
-            css={[sectionMarginMedium, sectionMaxWidthMedium, cardMetaItem]}
+            css={[sectionMarginMedium, sectionMaxWidthMedium]}
           >
             {cardMeta.selector}
             <cardMeta.visualization isLoading={isLoading} data={data} />
           </figure>
           <div css={[sectionMarginSmall, sectionMaxWidthSmall]}>
-            <div css={cardMetaItem} id="shareText">
+            <div id="shareText">
               <PullQuote quoteText={cardMeta.shareText} />
             </div>
-            <div css={cardMetaItem} id="additionalText">
-              {cardMeta.additionalText}
-            </div>
+            <div id="additionalText">{cardMeta.additionalText}</div>
           </div>
         </section>
         <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
         <section css={[sectionMarginSmall, sectionMaxWidthSmall]}>
-          <div css={cardMetaItem} id="analysis">
+          <div id="analysis">
             <h2>About this analysis</h2>
             {cardMeta.analysis}
           </div>
         </section>
         <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
-        <section
-          css={[sectionMarginSmall, sectionMaxWidthSmall, cardMetaItem]}
-          id="metadata"
-        >
+        <section css={[sectionMarginSmall, sectionMaxWidthSmall]} id="metadata">
           <h2>About this data</h2>
           {cardMeta.metadata}
           {_.has(cardMeta, "metadataQA") && (
@@ -110,7 +93,7 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
         </section>
         <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
         <section
-          css={[sectionMarginSmall, sectionMaxWidthSmall, cardMetaItem]}
+          css={[sectionMarginSmall, sectionMaxWidthSmall]}
           id="resources"
         >
           <h2>Links and resources</h2>
@@ -129,10 +112,7 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
           </ul>
         </section>
         <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
-        <section
-          css={[sectionMarginSmall, sectionMaxWidthSmall, cardMetaItem]}
-          id="authors"
-        >
+        <section css={[sectionMarginSmall, sectionMaxWidthSmall]} id="authors">
           <h2>Who made this?</h2>
           {cardMeta.authors.map(photo => (
             <img
@@ -143,10 +123,7 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
           ))}
         </section>
         <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
-        <section
-          css={[sectionMarginSmall, sectionMaxWidthSmall, platformItem]}
-          id="improve"
-        >
+        <section css={[sectionMarginSmall, sectionMaxWidthSmall]} id="improve">
           <h2>Help make this better</h2>
           <p>
             CIVIC is an open platform, so you can help make this better! Whether
@@ -164,10 +141,7 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
         </section>
       </article>
       <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
-      <section
-        css={[sectionMarginSmall, sectionMaxWidthSmall, platformItem]}
-        id="explore"
-      >
+      <section css={[sectionMarginSmall, sectionMaxWidthSmall]} id="explore">
         <h2>Explore related data</h2>
         <Placeholder>
           <h3>
