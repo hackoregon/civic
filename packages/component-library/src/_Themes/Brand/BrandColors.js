@@ -1,7 +1,4 @@
 export default {
-  /*         */
-  /*  BRAND  */
-  /*         */
   // Plum
   primary: {
     rgb: "rgb(34,15,37)",

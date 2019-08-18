@@ -1,28 +1,20 @@
 import { assign } from "lodash";
+import CategoricalColors from "../CategoricalColors";
+import BrandColors from "../Brand/BrandColors";
 
-// *          *
-// * BRANDING *
-// *          *
+// Brand Colors
+const civicPrimary = BrandColors.primary.hex;
+const civicSecondary = BrandColors.secondary.hex;
+const civicTertiary = BrandColors.tertiary.hex;
+const civicSecondaryLighter = BrandColors.medium.hex;
+const civicSecondaryLightest = BrandColors.subdued.hex;
 
-// *
-// * Colors
-// *
-
-const civicPrimary = "#1f1123";
-const civicSecondary = "#eb4d5f";
-const civicTertiary = "#716470";
-const civicSecondaryLighter = "#aaa4ab";
-const civicSecondaryLightest = "#f3f2f3";
-
-// *                                  *
-// * DATA VISUALIZATION ONLY BELOW    *
-// *                                  *
-
-const civicCategoricalColor1 = "#DC4556";
-const civicCategoricalColor2 = "#19B7AA";
-const civicCategoricalColor3 = "#1E62BD";
-const civicCategoricalColor4 = "#721D7C";
-const civicCategoricalColor5 = "#FFB226";
+// Categorical Colors
+const civicCategoricalColor1 = CategoricalColors.pink.hex;
+const civicCategoricalColor2 = CategoricalColors.green.hex;
+const civicCategoricalColor3 = CategoricalColors.blue.hex;
+const civicCategoricalColor4 = CategoricalColors.purple.hex;
+const civicCategoricalColor5 = CategoricalColors.yellow.hex;
 
 const colors = [
   civicCategoricalColor1,
