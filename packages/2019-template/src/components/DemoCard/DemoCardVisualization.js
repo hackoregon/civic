@@ -3,7 +3,11 @@ import PropTypes from "prop-types";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { css } from "emotion"; // eslint-disable-line emotion/no-vanilla
 
-import { LineChart, Button } from "@hackoregon/component-library";
+import {
+  LineChart,
+  Button,
+  CategoricalColors
+} from "@hackoregon/component-library";
 import { civicFormat } from "@hackoregon/component-library/dist/utils";
 
 export default function DemoCardVisualization({ isLoading, data }) {
@@ -37,21 +41,33 @@ export default function DemoCardVisualization({ isLoading, data }) {
         `}
       >
         <Button
-          accentColor={dataType === "demoData" ? "#DC4556" : "#1E62BD"}
+          accentColor={
+            dataType === "demoData"
+              ? CategoricalColors.pink.hex
+              : CategoricalColors.blue.hex
+          }
           onClick={() => setData("demoData")}
           margin="6px auto"
         >
           All Neighborhoods
         </Button>
         <Button
-          accentColor={dataType === "midData" ? "#DC4556" : "#1E62BD"}
+          accentColor={
+            dataType === "midData"
+              ? CategoricalColors.pink.hex
+              : CategoricalColors.blue.hex
+          }
           onClick={() => setData("midData")}
           margin="6px auto"
         >
           Mid Gentrification
         </Button>
         <Button
-          accentColor={dataType === "lateData" ? "#DC4556" : "#1E62BD"}
+          accentColor={
+            dataType === "lateData"
+              ? CategoricalColors.pink.hex
+              : CategoricalColors.blue.hex
+          }
           onClick={() => setData("lateData")}
           margin="6px auto"
         >
