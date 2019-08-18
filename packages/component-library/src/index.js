@@ -2,8 +2,9 @@ import "./fonts.css";
 
 // THEMES
 export {
-  BrandColors,
   CategoricalColors,
+  BrandColors,
+  BrandTypography,
   BrandTheme,
   VictoryTheme,
   VictoryCrazyTheme

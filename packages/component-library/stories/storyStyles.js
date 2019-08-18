@@ -52,20 +52,6 @@ const storybookStyles = {
     marginTop: 10,
     marginRight: 20,
     marginBottom: 10
-  },
-
-  // Typography (make these global)
-  dataText: {
-    fontFamily: "Roboto Condensed",
-    fontSize: 12
-  },
-
-  dataFont: {
-    fontFamily: "Roboto Condensed"
-  },
-
-  largeParagraph: {
-    fontSize: 16
   }
 };
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { storybookStyles } from "../storyStyles";
+import { BrandTypography } from "../../src/_Themes/index";
 
 // Display font type
 const fontBlockStyle = {
@@ -36,7 +37,7 @@ const TypographyStyleQuickUsage = () => (
     </div>
     <div style={fontBlockStyle}>
       <h3>Data</h3>
-      <p style={Object.assign({}, fontSample, storybookStyles.dataFont)}>
+      <p style={Object.assign({}, fontSample, BrandTypography.dataFont)}>
         Roboto Condensed
       </p>
       <h4>Source: Google Fonts</h4>
