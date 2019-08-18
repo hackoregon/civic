@@ -1,9 +1,7 @@
-import Colors from "./Brand/BrandColors";
-import Brand from "./BrandTheme";
-import Victory from "./Victory/VictoryTheme";
-import VictoryCrazy from "./Victory/VictoryCrazyTheme";
+export { default as CategoricalColors } from "./CategoricalColors";
 
-export const BrandColors = Colors;
-export const BrandTheme = Brand;
-export const VictoryTheme = Victory;
-export const VictoryCrazyTheme = VictoryCrazy;
+export { default as BrandColors } from "./Brand/BrandColors";
+export { default as BrandTheme } from "./Brand/BrandTheme";
+
+export { default as VictoryTheme } from "./Victory/VictoryTheme";
+export { default as VictoryCrazyTheme } from "./Victory/VictoryCrazyTheme";

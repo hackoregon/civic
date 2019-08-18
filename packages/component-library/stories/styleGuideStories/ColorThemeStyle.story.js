@@ -1,6 +1,6 @@
 import React from "react";
 import { storybookStyles } from "../storyStyles";
-import { BrandColors } from "../../src/_Themes/index";
+import { BrandColors, CategoricalColors } from "../../src/_Themes/index";
 
 const ColorThemeStyle = () => (
   <div style={storybookStyles.main}>
@@ -91,61 +91,71 @@ const ColorThemeStyle = () => (
     <div style={storybookStyles.solidColorSample}>
       <div
         style={Object.assign({}, storybookStyles.colorBlock, {
-          backgroundColor: BrandColors.pink.rgba
+          backgroundColor: CategoricalColors.pink.rgba
         })}
       />
       <div>
         <h4>Pink</h4>
-        <p style={storybookStyles.dataText}>Hex: {BrandColors.pink.hex}</p>
-        <p style={storybookStyles.dataText}>{BrandColors.pink.rgb} </p>
+        <p style={storybookStyles.dataText}>
+          Hex: {CategoricalColors.pink.hex}
+        </p>
+        <p style={storybookStyles.dataText}>{CategoricalColors.pink.rgb} </p>
       </div>
     </div>
     <div style={storybookStyles.solidColorSample}>
       <div
         style={Object.assign({}, storybookStyles.colorBlock, {
-          backgroundColor: BrandColors.blue.rgba
+          backgroundColor: CategoricalColors.blue.rgba
         })}
       />
       <div>
         <h4>Blue</h4>
-        <p style={storybookStyles.dataText}>Hex: {BrandColors.blue.hex}</p>
-        <p style={storybookStyles.dataText}>{BrandColors.blue.rgb} </p>
+        <p style={storybookStyles.dataText}>
+          Hex: {CategoricalColors.blue.hex}
+        </p>
+        <p style={storybookStyles.dataText}>{CategoricalColors.blue.rgb} </p>
       </div>
     </div>
     <div style={storybookStyles.solidColorSample}>
       <div
         style={Object.assign({}, storybookStyles.colorBlock, {
-          backgroundColor: BrandColors.green.rgba
+          backgroundColor: CategoricalColors.green.rgba
         })}
       />
       <div>
         <h4>Teal</h4>
-        <p style={storybookStyles.dataText}>Hex: {BrandColors.green.hex}</p>
-        <p style={storybookStyles.dataText}>{BrandColors.green.rgb} </p>
+        <p style={storybookStyles.dataText}>
+          Hex: {CategoricalColors.green.hex}
+        </p>
+        <p style={storybookStyles.dataText}>{CategoricalColors.green.rgb} </p>
       </div>
     </div>
     <div style={storybookStyles.solidColorSample}>
       <div
         style={Object.assign({}, storybookStyles.colorBlock, {
-          backgroundColor: BrandColors.purple.rgba
+          backgroundColor: CategoricalColors.purple.rgba
         })}
       />
       <div>
         <h4>Purple</h4>
-        <p style={storybookStyles.dataText}>Hex: {BrandColors.purple.hex}</p>
-        <p style={storybookStyles.dataText}>{BrandColors.purple.rgb} </p>
+        <p style={storybookStyles.dataText}>
+          Hex: {CategoricalColors.purple.hex}
+        </p>
+        <p style={storybookStyles.dataText}>{CategoricalColors.purple.rgb} </p>
       </div>
     </div>
     <div style={storybookStyles.solidColorSample}>
       <div
         style={Object.assign({}, storybookStyles.colorBlock, {
-          backgroundColor: BrandColors.yellow.rgba
+          backgroundColor: CategoricalColors.yellow.rgba
         })}
       />
       <div>
         <h4>Yellow</h4>
-        <p style={storybookStyles.dataText}>Hex: {BrandColors.yellow.hex}</p>
-        <p style={storybookStyles.dataText}>{BrandColors.yellow.rgb} </p>
+        <p style={storybookStyles.dataText}>
+          Hex: {CategoricalColors.yellow.hex}
+        </p>
+        <p style={storybookStyles.dataText}>{CategoricalColors.yellow.rgb} </p>
       </div>
     </div>
   </div>
