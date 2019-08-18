@@ -489,7 +489,7 @@ export default () =>
               );
 
               const featuresData = at(data, featuresArrayPath)[0];
-              const dataFilterNulls = featuresData.filter(d => d.geometry);
+              const dataFilterNulls = featuresData ? featuresData.filter(d => d.geometry) : [];
 
               const iconMapLayer = {
                 mapType: "IconMap",

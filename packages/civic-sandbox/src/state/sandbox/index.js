@@ -110,7 +110,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         slidesPending: false,
         slidesError: action.payload,
-        slidesData: null,
+        slidesData: [],
         selectedFoundationDatum: null,
         selectedSlideDatum: null
       };
@@ -121,16 +121,16 @@ const reducer = (state = INITIAL_STATE, action) => {
         foundationData: {},
         slidesData: [],
         selectedFoundation:
-          state.packageCivicSandbox.packages[action.selectedPackage]
+          state.sandbox.packages[action.selectedPackage]
             .default_foundation,
         selectedSlide: isArray(
-          state.packageCivicSandbox.packages[action.selectedPackage]
+          state.sandbox.packages[action.selectedPackage]
             .default_slide
         )
-          ? state.packageCivicSandbox.packages[action.selectedPackage]
+          ? state.sandbox.packages[action.selectedPackage]
               .default_slide
           : [
-              state.packageCivicSandbox.packages[action.selectedPackage]
+              state.sandbox.packages[action.selectedPackage]
                 .default_slide
             ],
         selectedFoundationDatum: null,
