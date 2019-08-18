@@ -60,11 +60,6 @@ export default class StoryFooter extends Component {
     this.setState({ copied: true });
   };
 
-  handleEmbedLink = url => {
-    console.log("WORKED");
-    window.open(url, "_blank");
-  };
-
   switchState = ms => setTimeout(this.setToFalse, ms);
 
   render() {
