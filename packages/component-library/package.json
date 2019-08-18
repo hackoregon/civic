@@ -96,6 +96,7 @@
     "react-map-gl-geocoder": "^1.7.0",
     "react-select": "^1.0.0-rc.3",
     "react-share": "^2.2.0",
+    "shortid": "^2.2.14",
     "victory": "^32.0.2"
   },
   "peerDependencies": {
