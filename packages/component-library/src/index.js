@@ -1,7 +1,13 @@
 import "./fonts.css";
 
 // THEMES
-export { BrandTheme, VictoryTheme, VictoryCrazyTheme } from "./_Themes/index";
+export {
+  BrandColors,
+  CategoricalColors,
+  BrandTheme,
+  VictoryTheme,
+  VictoryCrazyTheme
+} from "./_Themes/index";
 
 // COMPONENTS
 export {
