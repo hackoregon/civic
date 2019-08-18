@@ -3,8 +3,6 @@
   Only styles that are needed exclusively in Storybook are defined here.
 */
 
-import { BrandColors } from "../src/_Themes/index";
-
 const storybookStyles = {
   // The display area for components
   main: {
@@ -52,47 +50,6 @@ const storybookStyles = {
     marginTop: 10,
     marginRight: 20,
     marginBottom: 10
-  },
-
-  // Brand colors (make these global)
-  primaryBkgnd: {
-    backgroundColor: BrandColors.primary.rgba
-  },
-
-  secondaryBkgnd: {
-    backgroundColor: BrandColors.secondary.rgba
-  },
-
-  tertiaryBkgnd: {
-    backgroundColor: BrandColors.tertiary.rgba
-  },
-
-  mediumBkgnd: {
-    backgroundColor: BrandColors.medium.rgba
-  },
-
-  subduedBkgnd: {
-    backgroundColor: BrandColors.subdued.rgba
-  },
-
-  pinkBkgnd: {
-    backgroundColor: BrandColors.pink.rgba
-  },
-
-  greenBkgnd: {
-    backgroundColor: BrandColors.green.rgba
-  },
-
-  blueBkgnd: {
-    backgroundColor: BrandColors.blue.rgba
-  },
-
-  purpleBkgnd: {
-    backgroundColor: BrandColors.purple.rgba
-  },
-
-  yellowBkgnd: {
-    backgroundColor: BrandColors.yellow.rgba
   },
 
   // Typography (make these global)
