@@ -122,7 +122,7 @@ export default () =>
         );
         const barWidth = number("Bar width", 37, {}, GROUP_IDS.CUSTOM);
         const loading = boolean("Loading", false, GROUP_IDS.CUSTOM);
-        const error = boolean("Error", false, GROUP_IDS.CUSTOM);
+        const error = text("Error", false, GROUP_IDS.CUSTOM);
 
         return (
           <BarChart
