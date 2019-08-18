@@ -3,6 +3,8 @@
   Only styles that are needed exclusively in Storybook are defined here.
 */
 
+import { BrandColors } from "../src/_Themes/index";
+
 const storybookStyles = {
   // The display area for components
   main: {
@@ -28,7 +30,7 @@ const storybookStyles = {
 
   // Show inverted logos on a dark background in the Branding Logos story
   invertedLogo: {
-    backgroundColor: "#201024",
+    backgroundColor: BrandColors.primary.hex,
     margin: 20,
     padding: 20
   },
