@@ -121,18 +121,12 @@ const reducer = (state = INITIAL_STATE, action) => {
         foundationData: {},
         slidesData: [],
         selectedFoundation:
-          state.sandbox.packages[action.selectedPackage]
-            .default_foundation,
+          state.sandbox.packages[action.selectedPackage].default_foundation,
         selectedSlide: isArray(
-          state.sandbox.packages[action.selectedPackage]
-            .default_slide
+          state.sandbox.packages[action.selectedPackage].default_slide
         )
-          ? state.sandbox.packages[action.selectedPackage]
-              .default_slide
-          : [
-              state.sandbox.packages[action.selectedPackage]
-                .default_slide
-            ],
+          ? state.sandbox.packages[action.selectedPackage].default_slide
+          : [state.sandbox.packages[action.selectedPackage].default_slide],
         selectedFoundationDatum: null,
         selectedSlideDatum: null
       };
@@ -155,9 +149,8 @@ const reducer = (state = INITIAL_STATE, action) => {
         slidesPending: true,
         slidesError: null
       };
-    case SLIDE_SUCCESS:
-      let { foundationData } = state;
-      let { slidesData } = state;
+    case SLIDE_SUCCESS: {
+      let { foundationData, slidesData } = state;
       if (action.payload.type === "foundation") {
         foundationData = action.payload.data;
       }
@@ -181,6 +174,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         slidesData,
         foundationData
       };
+    }
     case SLIDE_FAILURE:
       return {
         ...state,
