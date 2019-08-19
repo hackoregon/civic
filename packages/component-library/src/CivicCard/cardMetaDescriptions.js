@@ -53,7 +53,8 @@ const cardMetaDescriptions = {
   },
   resources: {
     title: "Links and Resources",
-    description: "This section includes links and resources"
+    description:
+      "This section includes links and resources that provide additional context to the data visualization. Some recommended sections are: Studies and papers, Articles, Organizations"
   },
   authors: {
     title: "Authors",
