@@ -10,7 +10,7 @@ import {
   CivicCardLayoutClassic,
   CivicCardLayoutVisualizationOnly,
   CivicCardLayoutSideBySide,
-  RadioButtonGroup
+  RadioButtonGroup,
   CivicCardLayoutFullWithDescriptions
 } from "../src";
 import { civicFormat } from "../src/utils";
