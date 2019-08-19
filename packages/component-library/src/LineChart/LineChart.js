@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
+import shortid from "shortid";
 import { groupBy } from "lodash";
 import {
   VictoryAxis,
@@ -61,7 +62,7 @@ const LineChart = ({
   const lines = lineData
     ? Object.keys(lineData).map((category, index) => (
         <VictoryLine
-          key={category}
+          key={shortid.generate()}
           data={lineData[category].map(d => ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],
