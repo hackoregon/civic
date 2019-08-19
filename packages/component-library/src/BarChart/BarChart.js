@@ -119,7 +119,7 @@ const BarChart = ({
 BarChart.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({})),
   loading: PropTypes.bool,
-  error: PropTypes.bool,
+  error: PropTypes.string,
   dataKey: PropTypes.string,
   dataValue: PropTypes.string,
   domain: PropTypes.shape({
