@@ -44,19 +44,9 @@ export default {
   /* Global Styles from product_design */
 
   /* Typography */
-  ".Description": {
-    maxWidth: "900px",
-    margin: "0 auto",
-    textAlign: "left",
-    lineHeight: "1.7"
-  },
-
-  ".Title": {
-    fontSize: "3.57rem",
-    lineHeight: "1.2",
-    fontWeight: "300",
-    fontFamily: "'Rubik', sans-serif",
-    marginBottom: "12px"
+  p: {
+    fontSize: "1em",
+    color: "#706371"
   },
 
   h1: {
@@ -107,9 +97,32 @@ export default {
     fontWeight: "500"
   },
 
-  p: {
-    fontSize: "1em",
-    color: "#706371"
+  ".Description": {
+    maxWidth: "900px",
+    margin: "0 auto",
+    textAlign: "left",
+    lineHeight: "1.7"
+  },
+
+  ".Title": {
+    fontSize: "3.57rem",
+    lineHeight: "1.2",
+    fontWeight: "300",
+    fontFamily: "'Rubik', sans-serif",
+    marginBottom: "12px"
+  },
+
+  ".DataText": {
+    fontFamily: "Roboto Condensed",
+    fontSize: "0.86rem"
+  },
+
+  ".DataFont": {
+    fontFamily: "Roboto Condensed"
+  },
+
+  ".LargeParagraph": {
+    fontSize: "1.14rem"
   },
 
   ".Pullquote": {

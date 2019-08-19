@@ -63,8 +63,6 @@ import UIComponentsStyle from "./styleGuideStories/UIComponentsStyle.story";
 // import editableStory from './Editable.story';
 // import landingPage from './LandingPage.story';
 
-import "../assets/global.styles.css";
-
 storiesOf("Welcome|About Us", module)
   .addParameters({ options: { showPanel: false } })
   .addDecorator(checkA11y)
@@ -79,12 +77,12 @@ storiesOf("Design|Brand", module)
   .add("Logos", () => <LogosStyle />)
   .add("Color Theme", () => <ColorThemeStyle />)
   .add("Typography", () => (
-    <div>
+    <>
       <TypographyStyleQuickUsage />
       <TypographyStyleCommonSample />
       <TypographyStyleHeadings />
       <TypographyStyleParagraphs />
-    </div>
+    </>
   ));
 
 // UX Style Guide

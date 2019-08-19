@@ -5,7 +5,6 @@ export {
   CategoricalColors,
   VisualizationColors,
   BrandColors,
-  BrandTypography,
   BrandTheme,
   VictoryTheme,
   VictoryCrazyTheme
