@@ -1,5 +1,15 @@
 import "./fonts.css";
 
+// THEMES
+export {
+  VisualizationColors,
+  BrandColors,
+  BrandTheme,
+  VictoryTheme,
+  VictoryCrazyTheme
+} from "./_Themes/index";
+
+// COMPONENTS
 export {
   default as HorizontalBarChart
 } from "./HorizontalBarChart/HorizontalBarChart";

@@ -1,8 +1,11 @@
 /* eslint-disable global-require */
 /* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
 
-import { addParameters, configure } from "@storybook/react";
-import "../packages/component-library/assets/global.styles.css";
+import React from "react";
+import { addDecorator, addParameters, configure } from "@storybook/react";
+import { Global } from "@emotion/core";
+import { BrandTheme } from "@hackoregon/component-library";
+
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 import themeCIVIC from "./themeCIVIC";
 
@@ -23,4 +26,12 @@ function loadStories() {
   require("../packages/component-library/stories");
 }
 
+const withGlobal = cb => (
+  <>
+    <Global styles={BrandTheme} />
+    {cb()}
+  </>
+);
+
+addDecorator(withGlobal);
 configure(loadStories, module);
