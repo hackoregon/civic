@@ -29,10 +29,10 @@ const subtitleStyle = css`
 
 const ChartTitle = ({ title, subtitle }) =>
   title || subtitle ? (
-    <div>
-      {title ? <h3 className={titleStyle}>{title}</h3> : null}
-      {subtitle ? <span className={subtitleStyle}>{subtitle}</span> : null}
-    </div>
+    <figcaption>
+      {title ? <h2 className={titleStyle}>{title}</h2> : null}
+      {subtitle ? <h3 className={subtitleStyle}>{subtitle}</h3> : null}
+    </figcaption>
   ) : null;
 
 ChartTitle.propTypes = {
