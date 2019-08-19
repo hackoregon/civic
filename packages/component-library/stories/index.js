@@ -8,6 +8,7 @@ import baseMapStory from "./BaseMap.story";
 import boundaryMapStory from "./BoundaryMap.story";
 import buttonStory from "./Button.story";
 import checkboxStory from "./Checkbox.story";
+import collapsableStory from "./Collapsable.story";
 import civicCardStory from "./CivicCard.story";
 import civicCardStackStory from "./CivicCardStack.story";
 import civicSandboxDashboardStory from "./CivicSandboxDashboard.story";
@@ -154,6 +155,7 @@ storiesOf("Component Lib|CIVIC Platform", module)
 civicCardStackStory();
 civicSandboxDashboardStory();
 civicStorycardStory();
+collapsableStory();
 headerStory();
 packageSelectorBox();
 pageLayoutStory();
