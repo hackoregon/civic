@@ -12,7 +12,6 @@ import {
 import { LineChart, SimpleLegend, civicFormat } from "../src";
 import { getKeyNames } from "./shared";
 import notes from "./lineChart.notes.md";
-import { VictoryCrazyTheme } from "../src/_Themes/index";
 
 const GROUP_IDS = {
   LABELS: "Labels",
@@ -150,7 +149,6 @@ export default () =>
             yLabel={yLabel}
             xNumberFormatter={x => civicFormat[optionSelectX](x)}
             yNumberFormatter={y => civicFormat[optionSelectY](y)}
-            theme={VictoryCrazyTheme}
           />
         );
       },
