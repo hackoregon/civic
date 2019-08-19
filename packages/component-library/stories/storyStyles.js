@@ -1,9 +1,9 @@
-import "../assets/constants.css";
-
 /*
   Styles used in Storybook.
   Only styles that are needed exclusively in Storybook are defined here.
 */
+
+import { BrandColors } from "../src/_Themes/index";
 
 const storybookStyles = {
   // The display area for components
@@ -30,7 +30,7 @@ const storybookStyles = {
 
   // Show inverted logos on a dark background in the Branding Logos story
   invertedLogo: {
-    backgroundColor: "#201024",
+    backgroundColor: BrandColors.primary.hex,
     margin: 20,
     padding: 20
   },
@@ -52,61 +52,6 @@ const storybookStyles = {
     marginTop: 10,
     marginRight: 20,
     marginBottom: 10
-  },
-
-  // Brand colors (make these global)
-  primaryBkgnd: {
-    backgroundColor: "rgba(34,15,37,1)"
-  },
-
-  secondaryBkgnd: {
-    backgroundColor: "rgba(238,73,92,1)"
-  },
-
-  tertiaryBkgnd: {
-    backgroundColor: "rgba(114,99,113,1)"
-  },
-
-  mediumBkgnd: {
-    backgroundColor: "rgba(170,164,171,1)"
-  },
-
-  subduedBkgnd: {
-    backgroundColor: "rgba(243,242,243,1)"
-  },
-
-  pinkBkgnd: {
-    backgroundColor: "rgba(220,69,86,1)"
-  },
-
-  greenBkgnd: {
-    backgroundColor: "rgba(25,183,170,1)"
-  },
-
-  blueBkgnd: {
-    backgroundColor: "rgba(30,98,189,1)"
-  },
-
-  purpleBkgnd: {
-    backgroundColor: "rgba(114,29,124,1)"
-  },
-
-  yellowBkgnd: {
-    backgroundColor: "rgba(255,178,38,1)"
-  },
-
-  // Typography (make these global)
-  dataText: {
-    fontFamily: "Roboto Condensed",
-    fontSize: 12
-  },
-
-  dataFont: {
-    fontFamily: "Roboto Condensed"
-  },
-
-  largeParagraph: {
-    fontSize: 16
   }
 };
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { PolygonLayer } from "deck.gl";
+import shortid from "shortid";
 import { number, string, bool, func, arrayOf, shape } from "prop-types";
 import {
   createColorScale,
@@ -10,7 +11,6 @@ import {
 
 const MultiChoroplethMap = props => {
   const {
-    index,
     id,
     data,
     pickable = true,
@@ -75,7 +75,7 @@ const MultiChoroplethMap = props => {
 
   return (
     <PolygonLayer
-      key={index}
+      key={shortid.generate()}
       id={id}
       pickable={pickable}
       data={data}
@@ -104,7 +104,6 @@ const MultiChoroplethMap = props => {
 };
 
 MultiChoroplethMap.propTypes = {
-  index: number,
   id: string.isRequired,
   data: arrayOf(shape({})).isRequired,
   pickable: bool,
