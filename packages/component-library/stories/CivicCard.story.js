@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { Fragment, useState } from "react";
+import { useMediaQuery } from "@material-ui/core";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { storiesOf } from "@storybook/react";
 import {
@@ -172,9 +173,14 @@ function DemoCardVisualization({ isLoading, data }) {
 }
 
 function DemoCardVisualizationWithSelector({ isLoading, data }) {
+  const isDesktop = useMediaQuery("(min-width:640px)");
   const grpLabel = "Bus Line";
   const radioLabels = ["14", "72", "20"];
   const [busRoute, setBusRoute] = useState("14");
+  const domain = {
+    x: [2009, 2017],
+    y: [0, 20000]
+  };
   return (
     !isLoading &&
     data && (
@@ -182,6 +188,8 @@ function DemoCardVisualizationWithSelector({ isLoading, data }) {
         <RadioButtonGroup
           grpLabel={grpLabel}
           labels={radioLabels}
+          row={!isDesktop}
+          labelPlacement={isDesktop ? "" : "bottom"}
           onChange={({ target }) => setBusRoute(target.value)}
           value={busRoute}
         />
@@ -189,6 +197,7 @@ function DemoCardVisualizationWithSelector({ isLoading, data }) {
           data={data[busRoute]}
           dataKey="year"
           dataValue="weekday_sum_ons"
+          domain={domain}
           title="Portland Transit Ridership - Weekdays"
           xLabel="Year"
           yLabel="Ridership"

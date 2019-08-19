@@ -15,7 +15,7 @@ function CivicCardLayoutSideBySide({ isLoading, data, cardMeta }) {
         css={css`
           display: flex;
           flex-direction: "row";
-          @media screen and (max-width: 600px) {
+          @media screen and (max-width: 640px) {
             flex-direction: column;
           }
         `}
