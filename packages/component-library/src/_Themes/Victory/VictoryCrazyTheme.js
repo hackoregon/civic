@@ -8,21 +8,21 @@ import { assign } from "lodash";
 // * Colors
 // *
 
-const civicPrimary = "#1f1123";
-const civicSecondary = "#eb4d5f";
-const civicTertiary = "#716470";
-const civicSecondaryLighter = "#aaa4ab";
-const civicSecondaryLightest = "#f3f2f3";
+const civicPrimary = "red";
+const civicSecondary = "orange";
+const civicTertiary = "yellow";
+const civicSecondaryLighter = "green";
+const civicSecondaryLightest = "blue";
 
 // *                                  *
 // * DATA VISUALIZATION ONLY BELOW    *
 // *                                  *
 
-const civicCategoricalColor1 = "#DC4556";
-const civicCategoricalColor2 = "#19B7AA";
-const civicCategoricalColor3 = "#1E62BD";
-const civicCategoricalColor4 = "#721D7C";
-const civicCategoricalColor5 = "#FFB226";
+const civicCategoricalColor1 = "red";
+const civicCategoricalColor2 = "orange";
+const civicCategoricalColor3 = "yellow";
+const civicCategoricalColor4 = "green";
+const civicCategoricalColor5 = "blue";
 
 const colors = [
   civicCategoricalColor1,

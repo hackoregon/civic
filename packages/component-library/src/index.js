@@ -1,5 +1,15 @@
 import "./fonts.css";
 
+// THEMES
+export {
+  VisualizationColors,
+  BrandColors,
+  BrandTheme,
+  VictoryTheme,
+  VictoryCrazyTheme
+} from "./_Themes/index";
+
+// COMPONENTS
 export {
   default as HorizontalBarChart
 } from "./HorizontalBarChart/HorizontalBarChart";
@@ -71,6 +81,9 @@ export {
 export {
   default as CivicCardLayoutSideBySide
 } from "./CivicCard/CivicCardLayoutSideBySide";
+  default as CivicCardLayoutFullWithDescriptions
+} from "./CivicCard/CivicCardLayoutFullWithDescriptions";
+
 export { default as civicFormat } from "./utils/civicFormat";
 export { default as ungroupBy } from "./utils/ungroupBy";
 export { default as DemoJSONLoader } from "./DemoJSONLoader/DemoJSONLoader";

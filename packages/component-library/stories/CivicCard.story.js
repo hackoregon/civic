@@ -11,6 +11,7 @@ import {
   CivicCardLayoutVisualizationOnly,
   CivicCardLayoutSideBySide,
   RadioButtonGroup
+  CivicCardLayoutFullWithDescriptions
 } from "../src";
 import { civicFormat } from "../src/utils";
 
@@ -487,6 +488,14 @@ const demoCardMetaSideBySide = data => {
 
 export default () =>
   storiesOf("Component Lib|Story Cards/CIVIC Card", module)
+    .add("Layout: Full With Descriptions", () => (
+      <CivicCard
+        cardMeta={demoCardMeta}
+        data={demoData}
+        isLoading={false}
+        Layout={CivicCardLayoutFullWithDescriptions}
+      />
+    ))
     .add("Layout: Default (full)", () => (
       <CivicCard cardMeta={demoCardMeta} data={demoData} isLoading={false} />
     ))
