@@ -39,10 +39,10 @@ const ChartContainer = ({
   `;
 
   let content = (
-    <div>
+    <figure>
       <ChartTitle title={title} subtitle={subtitle} />
       <div className={wrapperStyle}>{children}</div>
-    </div>
+    </figure>
   );
 
   if (loading) {

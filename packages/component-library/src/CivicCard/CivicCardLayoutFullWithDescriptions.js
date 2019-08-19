@@ -93,13 +93,13 @@ function CivicCardLayoutFullWithDescriptions({ isLoading, data, cardMeta }) {
               </div>
               <Desc id="introText" />
             </div>
-            <figure
+            <div
               id="visualization"
               css={[sectionMarginMedium, sectionMaxWidthMedium, cardMetaItem]}
             >
               {cardMeta.selector}
               <cardMeta.visualization isLoading={isLoading} data={data} />
-            </figure>
+            </div>
             <Desc id="visualization" />
             <div css={[sectionMarginSmall, sectionMaxWidthSmall]}>
               <div css={cardMetaItem} id="shareText">

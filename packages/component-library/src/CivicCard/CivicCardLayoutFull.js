@@ -58,13 +58,13 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
           <div css={[sectionMarginSmall, sectionMaxWidthSmall]}>
             <div id="introText">{cardMeta.introText}</div>
           </div>
-          <figure
+          <div
             id="visualization"
             css={[sectionMarginMedium, sectionMaxWidthMedium]}
           >
             {cardMeta.selector}
             <cardMeta.visualization isLoading={isLoading} data={data} />
-          </figure>
+          </div>
           <div css={[sectionMarginSmall, sectionMaxWidthSmall]}>
             <div id="shareText">
               <PullQuote quoteText={cardMeta.shareText} />
