@@ -31,6 +31,9 @@ const ChartContainer = ({
   children,
   className
 }) => {
+  const figureWrapper = css`
+    margin: 0;
+  `;
   const wrapperStyle = css`
     margin: 0 auto;
     max-width: 900px;
@@ -39,7 +42,7 @@ const ChartContainer = ({
   `;
 
   let content = (
-    <figure>
+    <figure className={figureWrapper}>
       <ChartTitle title={title} subtitle={subtitle} />
       <div className={wrapperStyle}>{children}</div>
     </figure>
