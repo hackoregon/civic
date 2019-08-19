@@ -6,9 +6,11 @@ import { css } from "emotion"; // eslint-disable-line emotion/no-vanilla
 import {
   LineChart,
   Button,
-  CategoricalColors
+  VisualizationColors
 } from "@hackoregon/component-library";
 import { civicFormat } from "@hackoregon/component-library/dist/utils";
+
+const categoricalColors = VisualizationColors.categorical;
 
 export default function DemoCardVisualization({ isLoading, data }) {
   const [dataType, setData] = useState("demoData");
@@ -43,8 +45,8 @@ export default function DemoCardVisualization({ isLoading, data }) {
         <Button
           accentColor={
             dataType === "demoData"
-              ? CategoricalColors.pink.hex
-              : CategoricalColors.blue.hex
+              ? categoricalColors.pink.hex
+              : categoricalColors.blue.hex
           }
           onClick={() => setData("demoData")}
           margin="6px auto"
@@ -54,8 +56,8 @@ export default function DemoCardVisualization({ isLoading, data }) {
         <Button
           accentColor={
             dataType === "midData"
-              ? CategoricalColors.pink.hex
-              : CategoricalColors.blue.hex
+              ? categoricalColors.pink.hex
+              : categoricalColors.blue.hex
           }
           onClick={() => setData("midData")}
           margin="6px auto"
@@ -65,8 +67,8 @@ export default function DemoCardVisualization({ isLoading, data }) {
         <Button
           accentColor={
             dataType === "lateData"
-              ? CategoricalColors.pink.hex
-              : CategoricalColors.blue.hex
+              ? categoricalColors.pink.hex
+              : categoricalColors.blue.hex
           }
           onClick={() => setData("lateData")}
           margin="6px auto"

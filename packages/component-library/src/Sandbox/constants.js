@@ -1,7 +1,9 @@
 /* TODO: Fix linting errors */
 /* eslint-disable */
 import { scaleThreshold } from "d3";
-import { VisualizationColors, CategoricalColors } from "../_Themes/index";
+import { VisualizationColors } from "../_Themes/index";
+
+const categoricalColors = VisualizationColors.categorical;
 
 const { thermal, planet, space, earth, ocean } = VisualizationColors.sequential;
 
@@ -33,11 +35,11 @@ const purpleGreenDivergent10 = [
   [0, 68, 27, 200]
 ];
 
-const civicBlue = CategoricalColors.blue.mapFormatRGBA;
-const civicGreen = CategoricalColors.green.mapFormatRGBA;
-const civicPurple = CategoricalColors.purple.mapFormatRGBA;
-const civicPink = CategoricalColors.pink.mapFormatRGBA;
-const civicYellow = CategoricalColors.yellow.mapFormatRGBA;
+const civicBlue = categoricalColors.blue.mapFormatRGBA;
+const civicGreen = categoricalColors.green.mapFormatRGBA;
+const civicPurple = categoricalColors.purple.mapFormatRGBA;
+const civicPink = categoricalColors.pink.mapFormatRGBA;
+const civicYellow = categoricalColors.yellow.mapFormatRGBA;
 
 export const foundations = data => ({
   "Total Population": {

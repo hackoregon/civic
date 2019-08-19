@@ -1,6 +1,8 @@
 import { assign } from "lodash";
-import CategoricalColors from "../CategoricalColors";
+import VisualizationColors from "../VisualizationColors";
 import BrandColors from "../Brand/BrandColors";
+
+const categoricalColors = VisualizationColors.categorical;
 
 // Brand Colors
 const civicPrimary = BrandColors.primary.hex;
@@ -10,11 +12,11 @@ const civicSecondaryLighter = BrandColors.medium.hex;
 const civicSecondaryLightest = BrandColors.subdued.hex;
 
 // Categorical Colors
-const civicCategoricalColor1 = CategoricalColors.pink.hex;
-const civicCategoricalColor2 = CategoricalColors.green.hex;
-const civicCategoricalColor3 = CategoricalColors.blue.hex;
-const civicCategoricalColor4 = CategoricalColors.purple.hex;
-const civicCategoricalColor5 = CategoricalColors.yellow.hex;
+const civicCategoricalColor1 = categoricalColors.pink.hex;
+const civicCategoricalColor2 = categoricalColors.green.hex;
+const civicCategoricalColor3 = categoricalColors.blue.hex;
+const civicCategoricalColor4 = categoricalColors.purple.hex;
+const civicCategoricalColor5 = categoricalColors.yellow.hex;
 
 const colors = [
   civicCategoricalColor1,
