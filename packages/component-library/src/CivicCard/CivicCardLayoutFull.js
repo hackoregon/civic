@@ -3,6 +3,7 @@ import { jsx, css } from "@emotion/core";
 import { Fragment } from "react";
 import PropTypes from "prop-types";
 import _ from "lodash";
+import { generate } from "shortid";
 import PullQuote from "../PullQuote/PullQuote";
 import Placeholder from "../Placeholder/Placeholder";
 import cardMetaTypes from "./cardMetaTypes";
@@ -48,7 +49,7 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
           <hr />
           <section id="tags">
             {cardMeta.tags.map((tag, index) => (
-              <Chip tag={tag} index={index} />
+              <Chip tag={tag} index={index} key={generate()} />
             ))}
           </section>
           <hr />
@@ -85,7 +86,7 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
           {_.has(cardMeta, "metadataQA") && (
             <CollapsableSection
               items={cardMeta.metadataQA.map(item => (
-                <MetadataQuestion item={item} />
+                <MetadataQuestion item={item} key={generate()} />
               ))}
               collapseAfter={5}
             />
@@ -102,14 +103,12 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
             useful in gaining a greater understanding of the context of this
             data visualization.
           </p>
-          <ul>
-            <CollapsableSection
-              items={cardMeta.resources.map(item => (
-                <Resource item={item} />
-              ))}
-              collapseAfter={7}
-            />
-          </ul>
+          <CollapsableSection
+            items={cardMeta.resources.map(item => (
+              <Resource item={item} key={generate()} />
+            ))}
+            collapseAfter={7}
+          />
         </section>
         <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
         <section css={[sectionMarginSmall, sectionMaxWidthSmall]} id="authors">
@@ -119,6 +118,7 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
               css={authorPhoto}
               src={photo}
               alt="Pictures of people who worked on this"
+              key={generate()}
             />
           ))}
         </section>
@@ -130,14 +130,14 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
             you noticed a typo, want to suggest an improvement for our data
             visualization, or have context to add about the dataset, we want you
             to contribute.
-            <ul>
-              <li>
-                <a href="https://civicsoftwarefoundation.org/#volunteers">
-                  Get Started!
-                </a>
-              </li>
-            </ul>
           </p>
+          <ul>
+            <li>
+              <a href="https://civicsoftwarefoundation.org/#volunteers">
+                Get Started!
+              </a>
+            </li>
+          </ul>
         </section>
       </article>
       <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
