@@ -3,6 +3,7 @@ import "./fonts.css";
 // THEMES
 export {
   CategoricalColors,
+  VisualizationColors,
   BrandColors,
   BrandTypography,
   BrandTheme,

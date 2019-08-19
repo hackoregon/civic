@@ -1,4 +1,5 @@
 export { default as CategoricalColors } from "./CategoricalColors";
+export { default as VisualizationColors } from "./VisualizationColors";
 
 export { default as BrandColors } from "./Brand/BrandColors";
 export { default as BrandTypography } from "./Brand/BrandTypography";
