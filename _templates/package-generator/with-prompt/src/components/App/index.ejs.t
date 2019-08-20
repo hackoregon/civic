@@ -5,13 +5,13 @@ import React from "react";
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { cx, css } from "emotion"; // eslint-disable-line emotion/no-vanilla
+import { Global } from "@emotion/core";
 import {
+  BrandTheme,
   PageLayout,
   PullQuote,
   CivicCardLayoutClassic, // eslint-disable-line
 } from "@hackoregon/component-library";
-
-import "@hackoregon/component-library/assets/global.styles.css";
 
 const sectionMarginSmall = css`
   display: block;
@@ -36,50 +36,53 @@ const paragraphStyle = css`
 `;
 
 const App = () => (
-  <PageLayout
-    teamTitle="<%=title%>"
-    heroTitle="🚧 Site Under Construction 🚜"
-    heroSubtitle="Playground for building out the <%=year%> <%=title%> team frontend"
-    overlay
-  >
-    <section className={cx(sectionBodyHeading, sectionMaxWidthSmall)}>
-      <h2>Ullamcorper dignissim cras tincidunt?</h2>
-    </section>
-    <section className={cx(sectionMarginSmall, sectionMaxWidthSmall)}>
-      <p className={paragraphStyle}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Elementum curabitur
-        vitae nunc sed. Nisl condimentum id venenatis a condimentum vitae sapien
-        pellentesque. Sapien eget mi proin sed libero enim sed faucibus turpis.
-        Fermentum leo vel orci porta.
-      </p>
-    </section>
-    <section className={cx(sectionMarginSmall, sectionMaxWidthSmall)}>
-      <p className={paragraphStyle}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Elementum curabitur
-        vitae nunc sed. Nisl condimentum id venenatis a condimentum vitae sapien
-        pellentesque. Sapien eget mi proin sed libero enim sed faucibus turpis.
-        Fermentum leo vel orci porta.
-      </p>
-    </section>
-    <section className={cx(sectionMarginMedium, sectionMaxWidthMedium)}>
-      <PullQuote
-        quoteText="The lorem ipsum text is typically a scrambled section of De
-      finibus bonorum et malorum, with words altered, added, and removed to make
-      it nonsensical, improper Latin."
-      />
-    </section>
-    <section className={cx(sectionMarginSmall, sectionMaxWidthSmall)}>
-      <p className={paragraphStyle}>
-        Dui accumsan sit amet nulla facilisi. Sed adipiscing diam donec
-        adipiscing. Amet volutpat consequat mauris nunc congue nisi vitae
-        suscipit. In fermentum et sollicitudin ac orci phasellus egestas tellus
-        rutrum. Sed turpis tincidunt id aliquet risus feugiat. Aliquet enim
-        tortor at auctor.
-      </p>
-    </section>
-  </PageLayout>
+  <>
+    <Global styles={BrandTheme} />
+    <PageLayout
+      teamTitle="<%=title%>"
+      heroTitle="🚧 Site Under Construction 🚜"
+      heroSubtitle="Playground for building out the <%=year%> <%=title%> team frontend"
+      overlay
+    >
+      <section className={cx(sectionBodyHeading, sectionMaxWidthSmall)}>
+        <h2>Ullamcorper dignissim cras tincidunt?</h2>
+      </section>
+      <section className={cx(sectionMarginSmall, sectionMaxWidthSmall)}>
+        <p className={paragraphStyle}>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Elementum curabitur
+          vitae nunc sed. Nisl condimentum id venenatis a condimentum vitae sapien
+          pellentesque. Sapien eget mi proin sed libero enim sed faucibus turpis.
+          Fermentum leo vel orci porta.
+        </p>
+      </section>
+      <section className={cx(sectionMarginSmall, sectionMaxWidthSmall)}>
+        <p className={paragraphStyle}>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Elementum curabitur
+          vitae nunc sed. Nisl condimentum id venenatis a condimentum vitae sapien
+          pellentesque. Sapien eget mi proin sed libero enim sed faucibus turpis.
+          Fermentum leo vel orci porta.
+        </p>
+      </section>
+      <section className={cx(sectionMarginMedium, sectionMaxWidthMedium)}>
+        <PullQuote
+          quoteText="The lorem ipsum text is typically a scrambled section of De
+        finibus bonorum et malorum, with words altered, added, and removed to make
+        it nonsensical, improper Latin."
+        />
+      </section>
+      <section className={cx(sectionMarginSmall, sectionMaxWidthSmall)}>
+        <p className={paragraphStyle}>
+          Dui accumsan sit amet nulla facilisi. Sed adipiscing diam donec
+          adipiscing. Amet volutpat consequat mauris nunc congue nisi vitae
+          suscipit. In fermentum et sollicitudin ac orci phasellus egestas tellus
+          rutrum. Sed turpis tincidunt id aliquet risus feugiat. Aliquet enim
+          tortor at auctor.
+        </p>
+      </section>
+    </PageLayout>
+  </>
 );
 
 App.displayName = "App";
