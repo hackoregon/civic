@@ -1,4 +1,5 @@
 import React from "react";
+
 import {
   shape,
   bool,
@@ -9,7 +10,9 @@ import {
   arrayOf,
   string
 } from "prop-types";
+
 import DeckGL, { GeoJsonLayer } from "deck.gl";
+import centerOfMass from "@turf/center-of-mass";
 
 const MapOverlay = props => {
   const {
@@ -26,7 +29,9 @@ const MapOverlay = props => {
     getLineWidth,
     extruded,
     getElevation,
+    circleFieldName,
     getRadius,
+    radiusScale,
     autoHighlight,
     highlightColor,
     onLayerClick,
@@ -46,6 +51,16 @@ const MapOverlay = props => {
 
   const tooltipRender = tooltipInfo && x && y ? tooltip : null;
 
+  const centroidData = circleFieldName
+    ? data.map(d =>
+        centerOfMass(d.geometry, { properties: { ...d.properties } })
+      )
+    : [];
+
+  const radius = circleFieldName
+    ? f => Math.sqrt(+f.properties[circleFieldName])
+    : getRadius || 10;
+
   return (
     <div>
       <DeckGL {...viewport} className="DeckGL" getCursor={() => "crosshair"}>
@@ -53,7 +68,7 @@ const MapOverlay = props => {
           id={id}
           className="GeoJSONMap"
           pickable={pickable}
-          data={data}
+          data={[...data, ...centroidData]}
           opacity={opacity}
           filled={filled}
           getFillColor={getFillColor}
@@ -63,7 +78,10 @@ const MapOverlay = props => {
           lineWidthMinPixels={1}
           extruded={extruded}
           getElevation={getElevation}
-          getRadius={getRadius}
+          circleFieldName={circleFieldName}
+          getRadius={radius}
+          pointRadiusScale={radiusScale}
+          pointRadiusMinPixels={1}
           autoHighlight={autoHighlight}
           highlightColor={highlightColor}
           onClick={onLayerClick}
@@ -71,7 +89,8 @@ const MapOverlay = props => {
           updateTriggers={{
             getFillColor,
             getLineColor,
-            getLineWidth
+            getLineWidth,
+            getRadius
           }}
         />
       </DeckGL>
@@ -84,7 +103,7 @@ MapOverlay.propTypes = {
   viewport: shape({}),
   children: node,
   id: string,
-  data: oneOfType([shape({}), arrayOf(shape({}))]).isRequired,
+  data: arrayOf(shape({})).isRequired,
   pickable: bool,
   opacity: number,
   filled: bool,
@@ -94,7 +113,9 @@ MapOverlay.propTypes = {
   getLineWidth: oneOfType([number, func]),
   extruded: bool,
   getElevation: oneOfType([number, func]),
+  circleFieldName: string,
   getRadius: oneOfType([number, func]),
+  radiusScale: number,
   autoHighlight: bool,
   highlightColor: arrayOf(number),
   onLayerClick: func,

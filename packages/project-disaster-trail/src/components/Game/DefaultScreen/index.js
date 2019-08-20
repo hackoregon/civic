@@ -2,25 +2,22 @@ import React, { memo } from "react";
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
 
-import { getChapterById } from "../../../state/chapters";
+import { getActiveChapterData } from "../../../state/chapters";
 
-const DefaultScreen = ({ chapterModel }) => (
+const DefaultScreen = ({ activeChapter }) => (
   <>
-    <h1>
-      {chapterModel.id}. {chapterModel.title} screen
-    </h1>
+    <h1>{activeChapter.title} screen</h1>
   </>
 );
 
 DefaultScreen.propTypes = {
-  chapterModel: PropTypes.shape({
-    title: PropTypes.string,
-    id: PropTypes.number
+  activeChapter: PropTypes.shape({
+    title: PropTypes.string
   })
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  chapterModel: getChapterById({ ...state, id: ownProps.chapterId })
+const mapStateToProps = state => ({
+  activeChapter: getActiveChapterData(state)
 });
 
 export default connect(mapStateToProps)(memo(DefaultScreen));

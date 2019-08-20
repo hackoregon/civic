@@ -25,7 +25,7 @@ const DemoJSONLoader = props => {
       .catch(error => {
         throw new Error(error);
       });
-  }, [props.urls[0]]);
+  }, [...props.urls]);
 
   if (data === null) {
     return null;

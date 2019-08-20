@@ -6,7 +6,7 @@ The Standard story shows the basic usage of the MapOverlay component for the CIV
 
 These props can be set in the Standard story:
 
-- **data:** this prop expects a valid [GeoJSON object](https://tools.ietf.org/html/rfc7946#section-3) or an [array of feature objects](https://tools.ietf.org/html/rfc7946#section-3.2)
+- **data:** this prop expects an [array of feature objects](https://tools.ietf.org/html/rfc7946#section-3.2)
 - **getFillColor:** the color of each feature
   - This prop expects an array in `[r, g, b, [a]]` format or a function
   - Each value in the array should be between 0 and 255
@@ -47,8 +47,20 @@ These props can be set in the Custom story:
 
 ## Example: Choropleth Map
 
-This story shows MapOverlay used to create a choropleth map.
+This story shows how the MapOverlay component can be used to create a choropleth map.
+
+## Example: Choropleth + Circle Map
+
+This story shows how the MapOverlay component can be used to create a choropleth map with circles displayed in the center of each polygon.
+
+These additional props can be set in the Choropleth + Circle Map story:
+
+- **circleFieldName:** the name of the property to be visualized as circles
+  - This property requires a string
+  - This value name will come from one of the properties found in each feature object in the data array
+- **radiusScale:** a radius multiplier for all circles
+  - This property requires a number greater than 1
 
 ## Example: With Tooltip
 
-This story shows MapOverlay used with the MapTooltip component.
+This story shows how the MapOverlay component can be used with the MapTooltip component.

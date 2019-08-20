@@ -30,6 +30,19 @@ These props can be set in the Custom story:
 - **onBaseMapClick:** this function will be called when the Base Map is clicked
   - This prop expects a function
 
+## Example: Animate to Coordinates
+
+This story shows how the `animate` prop impacts changing map coordinates, including updating `initialLongitude` and `initialLatitude`.
+
+These props can be set in this story:
+
+- **animationDuration**: Controls how long the "fly to" effect takes. Measured in milliseconds.
+
+These actions can be taken from this story:
+
+- **OMSI**: Sets the BaseMap `initialLongitude` and `initialLatitude` to OMSI's coordinates.
+- **Rocky Butte**: Sets the BaseMap `initialLongitude` and `initialLatitude` to Rocky Butte's coordinates.
+
 ## Example: With Geocoder
 
 This story shows how to use a geocoder with the Base Map.
@@ -95,3 +108,19 @@ This prop can be set in this story:
 
 - **useContainerHeight:** whether the Base Map should adjust according to the height of its parent container
   - This prop expects a boolean
+
+## Example: With Scale Bar
+
+This story shows how to include a scale bar on the Base Map.
+
+- **scaleBar:** whether the Base Map should include a scale bar
+  - This prop expects a boolean
+- **scaleBarOptions:** options for the scale bar
+  - The scaleBarOptions prop expects an object and must include the following properties:
+  - **maxWidth:** the maximum length of the scale bar
+    - This property expects a number
+  - **units:** distance units displayed by the scale bar
+    - This property expects 1 of the following strings:
+      - `"imperial"`
+      - `"metric"`
+      - `"nautical"`

@@ -32,13 +32,18 @@ const storyLinkClass = css`
   }
 `;
 
-const StoryLink = ({ children, icon, route, action, link }) => (
+const StoryLink = ({ children, icon, route, action, link, embed }) => (
   <div className={storyLinkClass}>
     {route ? (
       <Link to={route}>
         <i className={icon} />
         <span>{children}</span>
       </Link>
+    ) : embed ? (
+      <a href={link} target="_blank">
+        <i className={icon} />
+        <span>{children}</span>
+      </a>
     ) : link ? (
       <a href={link}>
         <i className={icon} />

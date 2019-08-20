@@ -39,8 +39,8 @@ const <%=StoryCardName%> = ({ init, data, Layout }) => {
 
 <%=StoryCardName%>.propTypes = {
   init: PropTypes.func,
-  data: resourceShape,
-  Layout: PropTypes.node
+  data: PropTypes.shape({ mockRidershipOverTime: resourceShape }),
+  Layout: PropTypes.func
 };
 
 export default connect(
@@ -48,10 +48,10 @@ export default connect(
     data: {
       // FIXME: mockRidershipOverTime should be a variable
       mockRidershipOverTime: api.selectors.getMockRidershipData(
-        state.<%=storyCardName%>2019 || state
+        state.package<%= h.changeCase.pascalCase(package)%> || state
       )
     }
-    // state.packageName || state needed to make work in the project package and 2018 package
+    // state.packageProjectName || state needed to make work in the project package and 2018 package
   }),
   dispatch => ({
     init() {

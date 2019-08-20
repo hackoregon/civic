@@ -1,5 +1,9 @@
 import { assign } from "lodash";
 
+// *          *
+// * BRANDING *
+// *          *
+
 // *
 // * Colors
 // *
@@ -9,6 +13,10 @@ const civicSecondary = "#eb4d5f";
 const civicTertiary = "#716470";
 const civicSecondaryLighter = "#aaa4ab";
 const civicSecondaryLightest = "#f3f2f3";
+
+// *                                  *
+// * DATA VISUALIZATION ONLY BELOW    *
+// *                                  *
 
 const civicCategoricalColor1 = "#DC4556";
 const civicCategoricalColor2 = "#19B7AA";
@@ -25,8 +33,6 @@ const colors = [
   civicTertiary
 ];
 
-const blueGrey700 = "#455A64";
-const black = "#000000";
 // *
 // * Typography
 // *
@@ -60,7 +66,7 @@ const baseLabelStyles = {
   fontWeight,
   letterSpacing,
   padding,
-  fill: black
+  fill: civicPrimary
 };
 
 const centeredLabelStyles = assign({ textAnchor: "middle" }, baseLabelStyles);
@@ -141,7 +147,7 @@ export default {
           strokeLinejoin
         },
         tickLabels: assign({}, baseLabelStyles, {
-          fill: black,
+          fill: civicPrimary,
           stroke: "transparent"
         })
       }
@@ -173,20 +179,20 @@ export default {
     {
       style: {
         data: {
-          stroke: blueGrey700
+          stroke: civicSecondaryLighter
         },
         labels: centeredLabelStyles
       },
       candleColors: {
         positive: "#ffffff",
-        negative: blueGrey700
+        negative: civicSecondaryLighter
       }
     },
     baseProps
   ),
   chart: assign(
     {
-      animate: 100
+      animate: { duration: 1000 }
     },
     baseProps
   ),
@@ -196,7 +202,7 @@ export default {
         data: {
           fill: "transparent",
           opacity: 1,
-          stroke: blueGrey700,
+          stroke: civicSecondaryLighter,
           strokeWidth: 2
         },
         labels: assign({}, centeredLabelStyles, {
@@ -232,7 +238,7 @@ export default {
         data: {
           fill: "transparent",
           opacity: 1,
-          stroke: blueGrey700,
+          stroke: civicSecondaryLighter,
           strokeWidth: 2
         },
         labels: assign({}, baseLabelStyles, {
@@ -272,7 +278,7 @@ export default {
     {
       style: {
         data: {
-          fill: blueGrey700,
+          fill: civicSecondaryLighter,
           opacity: 1,
           stroke: "transparent",
           strokeWidth: 0
