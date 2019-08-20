@@ -79,7 +79,7 @@
     "clean-webpack-plugin": "^2.0.0",
     "colors": "^1.1.2",
     "coveralls": "^3.0.3",
-    "enzyme": "^3.9.0",
+    "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.11.2",
     "jest": "^24.5.0",
     "jsdom": "^14.0.0",
