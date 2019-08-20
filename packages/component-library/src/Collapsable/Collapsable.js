@@ -1,8 +1,17 @@
-import React, { useState, Children } from "react";
+/** @jsx jsx */
+import { useState, Children, useRef, Fragment } from "react";
 import PropTypes from "prop-types";
-import { css } from "emotion";
+import { jsx, css } from "@emotion/core";
 
+// To do: replace color with link color when in brand theme
 const toggleStyle = css`
+  background: none;
+  color: rgb(30, 98, 189);
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
   padding: 10px;
   border-bottom: none;
   margin-left: auto;
@@ -15,7 +24,17 @@ const toggleStyle = css`
   font-size: 1em;
 `;
 
+const arrowStyle = css`
+  display: block;
+`;
+
+const hiddenStyle = css`
+  outline: 0;
+`;
+
 function Collapsable({ children }) {
+  const hiddenRef = useRef(null);
+  const buttonRef = useRef(null);
   const [expanded, setExpanded] = useState(false);
   const cta = expanded ? "Less" : "More";
   const arrow = expanded ? "up" : "down";
@@ -26,21 +45,38 @@ function Collapsable({ children }) {
     child => child.props.hidden
   );
 
+  function handleClick(isExpanded) {
+    setExpanded(!isExpanded);
+    if (isExpanded) {
+      buttonRef.current.focus();
+    } else {
+      hiddenRef.current.focus();
+    }
+  }
+
   return (
-    <div>
+    <Fragment>
       {unhiddenChildren}
-      {expanded && hiddenChildren}
+      <div css={hiddenStyle} role="group" tabIndex="-1" ref={hiddenRef}>
+        {expanded && hiddenChildren}
+      </div>
       {hiddenChildren.length > 0 && (
-        // eslint-disable-next-line
-        <a className={toggleStyle} onClick={() => setExpanded(!expanded)}>
+        <button
+          css={toggleStyle}
+          onClick={() => handleClick(expanded)}
+          type="button"
+          aria-live="polite"
+          ref={buttonRef}
+        >
           {cta}
           <span
-            style={{ display: "block" }}
+            css={arrowStyle}
             className={`fa fa-arrow-${arrow}`}
+            aria-hidden="true"
           />
-        </a>
+        </button>
       )}
-    </div>
+    </Fragment>
   );
 }
 

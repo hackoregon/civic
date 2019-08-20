@@ -1,7 +1,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import { wallOfText } from "./shared";
-import notes from "./button.notes.md";
+import notes from "./collapsable.notes.md";
 import { Collapsable } from "../src";
 
 export default () =>
@@ -12,9 +12,11 @@ export default () =>
         return (
           <>
             <p>{wallOfText}</p>
+            <a href="https://www.example.com">Example link</a>
             <Collapsable>
               <Collapsable.Section hidden>
                 <p>{wallOfText}</p>
+                <a href="https://www.example.com">Example link</a>
               </Collapsable.Section>
             </Collapsable>
           </>
@@ -23,28 +25,18 @@ export default () =>
       { notes }
     )
     .add(
-      "Custom",
+      "Example: Alternate Usage",
       () => {
         return (
           <Collapsable>
             <Collapsable.Section>
               <p>{wallOfText}</p>
+              <a href="https://www.example.com">Example link</a>
             </Collapsable.Section>
             <Collapsable.Section hidden>
               <p>{wallOfText}</p>
+              <a href="https://www.example.com">Example link</a>
             </Collapsable.Section>
-          </Collapsable>
-        );
-      },
-      { notes }
-    )
-    .add(
-      "Example: Non-text label",
-      () => {
-        return (
-          <Collapsable>
-            <Collapsable.Section>{wallOfText}</Collapsable.Section>
-            <Collapsable.Section hidden>{wallOfText}</Collapsable.Section>
           </Collapsable>
         );
       },

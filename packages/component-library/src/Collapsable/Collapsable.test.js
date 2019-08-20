@@ -33,12 +33,12 @@ describe("Collapsable", () => {
       </Collapsable>
     );
 
-    expect(wrapper.find("a").text()).to.eql("More");
+    expect(wrapper.find({ type: "button" }).text()).to.eql("More");
     expect(wrapper.find("h1").length).to.eql(1);
-    wrapper.find("a").simulate("click");
-    expect(wrapper.find("a").text()).to.eql("Less");
+    wrapper.find({ type: "button" }).simulate("click");
+    expect(wrapper.find({ type: "button" }).text()).to.eql("Less");
     expect(wrapper.find("h1").length).to.eql(2);
-    wrapper.find("a").simulate("click");
+    wrapper.find({ type: "button" }).simulate("click");
     expect(wrapper.find("h1").length).to.eql(1);
   });
 });

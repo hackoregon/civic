@@ -2,8 +2,8 @@
 
 ## Standard
 
-The Standard story shows uses the standard usage of the Collapsable for the CIVIC platform. Collapsable includes standard styling.
+The Standard story shows uses the standard usage of the Collapsable for the CIVIC platform.
 
-## Custom
+## Example: Alternate Usage
 
-The Custom story shows all possible properties that can be passed to Collapsable component for customization.
+This example shows another way of implementing the Collapsable component
