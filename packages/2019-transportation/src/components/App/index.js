@@ -42,20 +42,10 @@ const App = () => (
       heroSubtitle="Playground for building out the 2019 Transportation team frontend"
       overlay
     >
-      <section
-        css={css`
-          ${sectionBodyHeading};
-          ${sectionMaxWidthSmall}
-        `}
-      >
+      <section css={[sectionBodyHeading, sectionMaxWidthSmall]}>
         <h2>Ullamcorper dignissim cras tincidunt?</h2>
       </section>
-      <section
-        css={css`
-          ${sectionMarginSmall};
-          ${sectionMaxWidthSmall}
-        `}
-      >
+      <section css={[sectionMarginSmall, sectionMaxWidthSmall]}>
         <p css={paragraphStyle}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Elementum
@@ -64,12 +54,7 @@ const App = () => (
           faucibus turpis. Fermentum leo vel orci porta.
         </p>
       </section>
-      <section
-        css={css`
-          ${sectionMarginSmall};
-          ${sectionMaxWidthSmall}
-        `}
-      >
+      <section css={[sectionMarginSmall, sectionMaxWidthSmall]}>
         <p css={paragraphStyle}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Elementum
@@ -78,24 +63,14 @@ const App = () => (
           faucibus turpis. Fermentum leo vel orci porta.
         </p>
       </section>
-      <section
-        css={css`
-          ${sectionMarginMedium};
-          ${sectionMaxWidthMedium}
-        `}
-      >
+      <section css={[sectionMarginMedium, sectionMaxWidthMedium]}>
         <PullQuote
           quoteText="The lorem ipsum text is typically a scrambled section of De
         finibus bonorum et malorum, with words altered, added, and removed to make
         it nonsensical, improper Latin."
         />
       </section>
-      <section
-        css={css`
-          ${sectionMarginSmall};
-          ${sectionMaxWidthSmall}
-        `}
-      >
+      <section css={[sectionMarginSmall, sectionMaxWidthSmall]}>
         <p css={paragraphStyle}>
           Dui accumsan sit amet nulla facilisi. Sed adipiscing diam donec
           adipiscing. Amet volutpat consequat mauris nunc congue nisi vitae
