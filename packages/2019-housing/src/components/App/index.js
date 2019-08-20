@@ -1,11 +1,10 @@
 import React from "react";
 
 import { css } from "emotion";
-import { PageLayout } from "@hackoregon/component-library";
+import { Global } from "@emotion/core";
+import { BrandTheme, PageLayout } from "@hackoregon/component-library";
 
 import HousingDisplacement from "../HousingDisplacement";
-
-import "@hackoregon/component-library/assets/global.styles.css";
 
 const sectionMarginMedium = css`
   display: block;
@@ -13,16 +12,19 @@ const sectionMarginMedium = css`
 `;
 
 const App = () => (
-  <PageLayout
-    teamTitle="Housing"
-    heroTitle="🚧 Site Under Construction 🚜"
-    heroSubtitle="Playground for building out the 2019 Housing team frontend"
-    overlay
-  >
-    <section className={sectionMarginMedium}>
-      <HousingDisplacement />
-    </section>
-  </PageLayout>
+  <>
+    <Global styles={BrandTheme} />
+    <PageLayout
+      teamTitle="Housing"
+      heroTitle="🚧 Site Under Construction 🚜"
+      heroSubtitle="Playground for building out the 2019 Housing team frontend"
+      overlay
+    >
+      <section className={sectionMarginMedium}>
+        <HousingDisplacement />
+      </section>
+    </PageLayout>
+  </>
 );
 
 App.displayName = "App";
