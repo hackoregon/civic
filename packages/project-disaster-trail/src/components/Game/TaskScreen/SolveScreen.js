@@ -1,17 +1,15 @@
 /** @jsx jsx */
 import { PureComponent, Fragment } from "react";
-import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
 import { css, jsx } from "@emotion/core";
 
 import { completeTask, getActiveTaskData } from "../../../state/tasks";
-import { addItemToPlayerKit, getKitCreationItems } from "../../../state/kit";
+import { getKitCreationItems } from "../../../state/kit";
 import DurationBar from "../../atoms/DurationBar";
 import TextContainer from "../../atoms/Containers/TextContainer";
 import OrbManager from "../OrbManager";
 import { GUIStyle } from "../index";
-import { addPoints } from "../../../state/user";
 
 const defaultState = {
   taskTimer: null,
@@ -61,23 +59,14 @@ class SolveScreen extends PureComponent {
     completeActiveTask(activeTask.id);
   };
 
-  onItemSelection = item => {
+  onKitItemSelection = kitItem => {
     const { activeTask } = this.props;
 
-    if (item.type === activeTask.requiredItem) {
+    if (activeTask.requiredItem === kitItem.type) {
       this.setState(state => ({
         correctItemsChosen: state.correctItemsChosen + 1
       }));
     }
-  };
-
-  onKitItemSelection = kitItem => {
-    const { addItemToPlayerKitInState, addPointsToState } = this.props;
-    if (kitItem.good) {
-      addItemToPlayerKitInState(kitItem.type);
-      addPointsToState(kitItem.points);
-    }
-    return kitItem.good;
   };
 
   render() {
@@ -153,9 +142,7 @@ SolveScreen.propTypes = {
       onSelection: PropTypes.func,
       weighting: PropTypes.number
     })
-  ),
-  addItemToPlayerKitInState: PropTypes.func,
-  addPointsToState: PropTypes.func
+  )
 };
 
 const mapStateToProps = state => ({
@@ -166,9 +153,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   completeActiveTask(taskChoice, taskId) {
     dispatch(completeTask(taskChoice, taskId));
-  },
-  addItemToPlayerKitInState: bindActionCreators(addItemToPlayerKit, dispatch),
-  addPointsToState: bindActionCreators(addPoints, dispatch)
+  }
 });
 
 export default connect(
