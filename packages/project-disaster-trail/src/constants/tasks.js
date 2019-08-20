@@ -1,8 +1,13 @@
 import {
-  protectiveGear,
+  blanket,
+  dustMask,
   fireExtinguisher,
   firstAidKit,
+  flashlight,
   food,
+  protectiveGear,
+  rope,
+  tent,
   water
 } from "./items";
 // Images
@@ -13,31 +18,57 @@ import rubble from "../../assets/rubble.svg";
 import thirsty from "../../assets/thirsty.svg";
 
 // Save yourself ids
-export const PROTECTION = "protection";
+export const PROTECT_BODY = "protect-body";
+export const PROTECT_LUNGS = "protect-lungs";
 // Save others ids
+export const COLD = "cold";
 export const FIRE = "fire";
-export const INJURY = "injury";
 export const HUNGER = "hunger";
+export const HOLE = "hole";
+export const INJURY = "injury";
+export const RAIN = "rain";
+export const RESCUE_PET = "rescue-pet";
 export const THIRST = "thirst";
 
 // environments
 export const URBAN = "urban";
-export const SUBURBAN = "suburban";
 
 export const tasks = {
   // Save Yourself
-  [PROTECTION]: {
-    id: PROTECTION,
+  [PROTECT_BODY]: {
+    id: PROTECT_BODY,
     time: 15 * 1000,
     requiredItem: protectiveGear,
-    numberItemsToSolve: 5,
+    numberItemsToSolve: 3,
     points: 3,
     text: "I'm afraid I'll fall over the rubble.",
     imageSVG: rubble,
     imageAlt: "a rocky road",
-    locations: [[-122.664628, 45.507309], [-122.648491, 45.51188]]
+    locations: [[-122.664628, 45.507309]]
+  },
+  [PROTECT_LUNGS]: {
+    id: PROTECT_LUNGS,
+    time: 15 * 1000,
+    requiredItem: dustMask,
+    numberItemsToSolve: 1,
+    points: 3,
+    text: "It's so dusty!",
+    imageSVG: "https://image.flaticon.com/icons/svg/1054/1054873.svg",
+    imageAlt: "juggling man",
+    locations: [[-122.648491, 45.51188]]
   },
   // Save Others
+  [COLD]: {
+    id: COLD,
+    time: 20 * 1000, // seconds * milliseconds
+    requiredItem: blanket,
+    numberItemsToSolve: 1,
+    points: 3,
+    text: "It's c-c-cold...",
+    imageSVG: "https://image.flaticon.com/icons/svg/1054/1054873.svg",
+    imageAlt: "juggling man",
+    locations: [[-122.65819, 45.515699]]
+  },
   [FIRE]: {
     id: FIRE,
     time: 20 * 1000, // seconds * milliseconds
@@ -47,23 +78,7 @@ export const tasks = {
     text: "Uh oh! This fire could spread!",
     imageSVG: fire,
     imageAlt: "stuff on fire",
-    locations: [
-      [-122.65819, 45.515699],
-      [-122.656388, 45.516842],
-      [-122.651882, 45.514948],
-      [-122.676215, 45.514166]
-    ]
-  },
-  [INJURY]: {
-    id: INJURY,
-    time: 20 * 1000, // seconds * milliseconds
-    requiredItem: firstAidKit,
-    numberItemsToSolve: 5,
-    points: 7,
-    text: "That person looks hurt.",
-    imageSVG: injury,
-    imageAlt: "an injured person",
-    locations: [[-122.678618, 45.52018], [-122.655916, 45.526043]]
+    locations: [[-122.656388, 45.516842]]
   },
   [HUNGER]: {
     id: HUNGER,
@@ -74,12 +89,51 @@ export const tasks = {
     text: "So. Hungry.",
     imageSVG: hunger,
     imageAlt: "a hungry person",
-    locations: [
-      [-122.667632, 45.523096],
-      [-122.681665, 45.530282],
-      [-122.663426, 45.515429],
-      [-122.663168, 45.519849]
-    ]
+    locations: [[-122.651882, 45.514948]]
+  },
+  [HOLE]: {
+    id: HOLE,
+    time: 20 * 1000, // seconds * milliseconds
+    requiredItem: rope,
+    numberItemsToSolve: 1,
+    points: 3,
+    text: "Excuse me, sir. I seem to be stuck",
+    imageSVG: "https://image.flaticon.com/icons/svg/1054/1054873.svg",
+    imageAlt: "juggling man",
+    locations: [[-122.676215, 45.514166]]
+  },
+  [INJURY]: {
+    id: INJURY,
+    time: 20 * 1000, // seconds * milliseconds
+    requiredItem: firstAidKit,
+    numberItemsToSolve: 5,
+    points: 7,
+    text: "That person looks hurt.",
+    imageSVG: injury,
+    imageAlt: "an injured person",
+    locations: [[-122.678618, 45.52018]]
+  },
+  [RAIN]: {
+    id: RAIN,
+    time: 20 * 1000, // seconds * milliseconds
+    requiredItem: tent,
+    numberItemsToSolve: 2,
+    points: 4,
+    text: "Ah! Rain!",
+    imageSVG: "https://image.flaticon.com/icons/svg/1054/1054873.svg",
+    imageAlt: "juggling man",
+    locations: [[-122.655916, 45.526043]]
+  },
+  [RESCUE_PET]: {
+    id: RESCUE_PET,
+    time: 20 * 1000, // seconds * milliseconds
+    requiredItem: flashlight,
+    numberItemsToSolve: 2,
+    points: 4,
+    text: "Where is my cat, Mr. Whiskers?",
+    imageSVG: "https://image.flaticon.com/icons/svg/1054/1054873.svg",
+    imageAlt: "juggling man",
+    locations: [[-122.667632, 45.523096]]
   },
   [THIRST]: {
     id: THIRST,
@@ -89,24 +143,14 @@ export const tasks = {
     points: 5,
     text: "Oh no! I'm so thirsty. Whatever will I do?",
     imageSVG: thirsty,
-    imageAlt: "a sweaty person",
-    locations: [
-      [-122.655229, 45.508422],
-      [-122.640638, 45.528929],
-      [-122.646131, 45.521713],
-      [-122.646045, 45.52039],
-      [-122.641453, 45.515248]
-    ]
+    imageAlt: "a sweaty pineapple",
+    locations: [[-122.681665, 45.530282]]
   }
 };
 
 export const tasksForEnvironment = {
-  [SUBURBAN]: {
-    saveYourself: [PROTECTION, INJURY],
-    saveOthers: [HUNGER, THIRST]
-  },
   [URBAN]: {
-    saveYourself: [PROTECTION, THIRST],
-    saveOthers: [FIRE, INJURY]
+    saveYourself: [PROTECT_BODY, PROTECT_LUNGS],
+    saveOthers: [FIRE, INJURY, HOLE, HUNGER]
   }
 };
