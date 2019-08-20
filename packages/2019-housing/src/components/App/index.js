@@ -1,7 +1,7 @@
-import React from "react";
+import { Fragment } from "react";
 
-import { css } from "emotion";
-import { Global } from "@emotion/core";
+/** @jsx jsx */
+import { jsx, css, Global } from "@emotion/core";
 import { BrandTheme, PageLayout } from "@hackoregon/component-library";
 
 import HousingDisplacement from "../HousingDisplacement";
@@ -12,7 +12,7 @@ const sectionMarginMedium = css`
 `;
 
 const App = () => (
-  <>
+  <Fragment>
     <Global styles={BrandTheme} />
     <PageLayout
       teamTitle="Housing"
@@ -20,11 +20,11 @@ const App = () => (
       heroSubtitle="Playground for building out the 2019 Housing team frontend"
       overlay
     >
-      <section className={sectionMarginMedium}>
+      <section css={sectionMarginMedium}>
         <HousingDisplacement />
       </section>
     </PageLayout>
-  </>
+  </Fragment>
 );
 
 App.displayName = "App";
