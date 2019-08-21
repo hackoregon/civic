@@ -2,6 +2,7 @@
 /* eslint-disable */
 import React from "react";
 import { arrayOf, shape, func, node, number } from "prop-types";
+import shortid from "shortid";
 import DeckGL, {
   IconLayer,
   PathLayer,
@@ -26,9 +27,9 @@ const CivicSandboxMap = props => {
 
   const highlighterYellow = [255, 255, 0, 200];
 
-  const createPathMap = (slide, index) => (
+  const createPathMap = slide => (
     <PathLayer
-      key={index}
+      key={shortid.generate()}
       id={slide.data.id}
       pickable={slide.data.pickable || true}
       data={slide.data.data}
@@ -46,9 +47,9 @@ const CivicSandboxMap = props => {
     />
   );
 
-  const createScatterPlotMap = (slide, index) => (
+  const createScatterPlotMap = slide => (
     <ScatterplotLayer
-      key={index}
+      key={shortid.generate()}
       id={slide.data.id}
       pickable={slide.data.pickable || true}
       data={slide.data.data}
@@ -69,9 +70,9 @@ const CivicSandboxMap = props => {
     />
   );
 
-  const createIconMap = (slide, index) => (
+  const createIconMap = slide => (
     <IconLayer
-      key={index}
+      key={shortid.generate()}
       id={slide.data.id}
       pickable={slide.data.pickable || true}
       data={slide.data.data}
@@ -90,9 +91,9 @@ const CivicSandboxMap = props => {
     />
   );
 
-  const createScreenGridMap = (slide, index) => (
+  const createScreenGridMap = slide => (
     <ScreenGridLayer
-      key={index}
+      key={shortid.generate()}
       id={slide.data.id}
       pickable={slide.data.pickable || true}
       data={slide.data.data}
@@ -107,9 +108,9 @@ const CivicSandboxMap = props => {
     />
   );
 
-  const createBoundaryMap = (slide, index) => (
+  const createBoundaryMap = slide => (
     <PolygonLayer
-      key={index}
+      key={shortid.generate()}
       id={slide.data.id}
       pickable={false}
       data={slide.data.data}
@@ -127,9 +128,9 @@ const CivicSandboxMap = props => {
     />
   );
 
-  const createPolygonMap = (slide, index) => (
+  const createPolygonMap = slide => (
     <PolygonLayer
-      key={index}
+      key={shortid.generate()}
       id={slide.data.id}
       pickable={true}
       data={slide.data.data}
@@ -173,7 +174,7 @@ const CivicSandboxMap = props => {
     return thresholdScale;
   };
 
-  const createChoroplethMap = (slide, index) => {
+  const createChoroplethMap = slide => {
     const scaleType = slide.data.scaleType;
     const colorScale =
       scaleType === "ordinal"
@@ -208,7 +209,7 @@ const CivicSandboxMap = props => {
 
     return (
       <PolygonLayer
-        key={index}
+        key={shortid.generate()}
         id={slide.data.id}
         pickable={true}
         data={slide.data.data}
