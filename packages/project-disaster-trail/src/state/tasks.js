@@ -14,7 +14,8 @@ const initialState = {
   activeEnvironment: defaultEnv,
   taskOrder: shuffle(defaultSaveYourself),
   activeTask: 0,
-  completedTasks: []
+  completedTasks: [],
+  outOfTime: false
 };
 
 // CONSTANTS
@@ -22,7 +23,9 @@ const actionTypes = {
   CHANGE_ENVIRONMENT: "CHANGE_ENVIRONMENT",
   ADD_TASK: "ADD_TASK",
   INCREASE_ACTIVE_TASK: "INCREASE_ACTIVE_TASK",
-  COMPLETE_TASK: "COMPLETE_TASK"
+  COMPLETE_TASK: "COMPLETE_TASK",
+  START_TASK: "START_TASK",
+  OUT_OF_TIME: "OUT_OF_TIME"
 };
 
 // ACTIONS
@@ -34,6 +37,9 @@ export const addTask = taskChoice => dispatch => {
 };
 export const increaseActiveTask = () => dispatch => {
   dispatch({ type: actionTypes.INCREASE_ACTIVE_TASK });
+};
+export const startTask = task => dispatch => {
+  dispatch({ type: actionTypes.START_TASK, task });
 };
 export const completeTask = completedTask => dispatch => {
   dispatch({ type: actionTypes.COMPLETE_TASK, completedTask });
@@ -72,9 +78,9 @@ export const getTaskOrder = createSelector(
   taskOrder => taskOrder
 );
 
-export const getActiveTask = createSelector(
+export const getActiveTaskId = createSelector(
   ["tasks.activeTask"],
-  activeTask => activeTask
+  activeTaskId => activeTaskId
 );
 
 export const getActiveTaskData = createSelector(
@@ -138,4 +144,9 @@ export const getWeightedTasks = createSelector(
 
     return possibleTasks;
   }
+);
+
+export const getOutOfTime = createSelector(
+  ["outOfTime"],
+  outOfTime => outOfTime
 );

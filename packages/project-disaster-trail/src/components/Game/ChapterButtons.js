@@ -6,12 +6,18 @@ import { css, jsx } from "@emotion/core";
 import { getActiveChapterIndex, setActiveChapter } from "../../state/chapters";
 
 const buttonContainer = css`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 50px;
   display: inline-grid;
   grid-template-columns: 1fr 1fr;
-  width: 100%;
+  pointer-events: all;
 
   > button {
-    font-size: 80px;
+    font-size: 20px;
+    height: 100%;
   }
 `;
 

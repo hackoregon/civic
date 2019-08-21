@@ -39,7 +39,9 @@ export const getVelocityRange = createSelector(
     "settings.maxVelocityX",
     "settings.maxVelocityY"
   ],
+  /* eslint-disable no-unused-expressions */
   (minVelocityX, minVelocityY, maxVelocityX, maxVelocityY) => {
+    /* eslint-disable no-sequences */
     minVelocityX, minVelocityY, maxVelocityX, maxVelocityY;
   }
 );

@@ -12,9 +12,8 @@ import forEach from "lodash/forEach";
 const breakpoints = { xs: 320, sm: 768, md: 1200, lg: 1440, xl: 2400 };
 
 const mediaQueries = {};
-forEach(
-  breakpoints,
-  (bp, key) => (mediaQueries[key] = `@media (min-width: ${bp}px)`)
-);
+forEach(breakpoints, (bp, key) => {
+  mediaQueries[key] = `@media (min-width: ${bp}px)`;
+});
 
 export default mediaQueries;
