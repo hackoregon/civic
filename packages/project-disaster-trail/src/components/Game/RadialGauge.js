@@ -1,7 +1,6 @@
 /** @jsx jsx */
-import { Component } from "react";
 import PropTypes from "prop-types";
-import { jsx, css } from "@emotion/core";
+import { css, jsx } from "@emotion/core";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 
 import { palette } from "../../constants/style";
@@ -12,70 +11,47 @@ const progressBarStyle = {
   // Whether to use rounded or flat corners on the ends
   strokeLinecap: "butt",
   // How long animation takes to go from one percent to another, in seconds
-  pathTransitionDuration: 1
+  pathTransitionDuration: 0.5
 };
 
-class RadialGauge extends Component {
-  state = {
-    percent: 0
-  };
+const RadialGauge = ({ isActive, size, percent }) => {
+  const gaugeDefaultStyle = css`
+    transition: transform 1s;
+    position: absolute;
+    top: ${size / 2}px;
+    left: ${size / 2}px;
+    height: ${size}px;
+    width: ${size}px;
+    pointer-events: none;
 
-  componentDidUpdate(prevProps) {
-    const { animateGauge } = this.props;
-    if (prevProps.animateGauge !== animateGauge) {
-      if (animateGauge) {
-        this.setPercent(100);
-      } else {
-        this.setPercent(0);
-      }
+    &.gauge-animate-style {
+      transform: scale(1.5);
     }
-  }
+  `;
 
-  setPercent = percent => {
-    this.setState({ percent });
-  };
+  const gaugeSizeStyle = css`
+    height: ${size}px;
+    width: ${size}px;
+    border-radius: ${size}px;
+  `;
 
-  render() {
-    const { animateGauge, size } = this.props;
-    const { percent } = this.state;
-
-    const gaugeDefaultStyle = css`
-      transition: transform 1s;
-      position: absolute;
-      top: ${size / 2}px;
-      left: ${size / 2}px;
-      height: ${size}px;
-      width: ${size}px;
-      pointer-events: none;
-
-      &.gauge-animate-style {
-        transform: scale(1.5);
-      }
-    `;
-
-    const gaugeSizeStyle = css`
-      height: ${size}px;
-      width: ${size}px;
-      border-radius: ${size}px;
-    `;
-
-    return (
-      <CircularProgressbar
-        value={percent}
-        strokeWidth={animateGauge ? 20 : 4}
-        css={css`
-          ${gaugeDefaultStyle}, ${gaugeSizeStyle}
-        `}
-        className={animateGauge ? "gauge-animate-style" : ""}
-        styles={buildStyles(progressBarStyle)}
-      />
-    );
-  }
-}
+  return (
+    <CircularProgressbar
+      value={percent}
+      strokeWidth={isActive ? 20 : 4}
+      css={css`
+        ${gaugeDefaultStyle}, ${gaugeSizeStyle}
+      `}
+      className={isActive ? "gauge-animate-style" : ""}
+      styles={buildStyles(progressBarStyle)}
+    />
+  );
+};
 
 RadialGauge.propTypes = {
-  animateGauge: PropTypes.bool,
-  size: PropTypes.number
+  isActive: PropTypes.bool,
+  size: PropTypes.number,
+  percent: PropTypes.number
 };
 
 export default RadialGauge;
