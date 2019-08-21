@@ -1,8 +1,10 @@
 ---
-name: Story Card Improvement 📉
+name: "Story Card Improvement \U0001F4C9"
 about: Feedback for Story Cards
-title: "card-slug-here"
-labels: "type:story-card"
+title: card-slug-here
+labels: type:story-card
+assignees: ''
+
 ---
 
 # Story Card Improvement
