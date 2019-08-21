@@ -108,3 +108,19 @@ This prop can be set in this story:
 
 - **useContainerHeight:** whether the Base Map should adjust according to the height of its parent container
   - This prop expects a boolean
+
+## Example: With Scale Bar
+
+This story shows how to include a scale bar on the Base Map.
+
+- **scaleBar:** whether the Base Map should include a scale bar
+  - This prop expects a boolean
+- **scaleBarOptions:** options for the scale bar
+  - The scaleBarOptions prop expects an object and must include the following properties:
+  - **maxWidth:** the maximum length of the scale bar
+    - This property expects a number
+  - **units:** distance units displayed by the scale bar
+    - This property expects 1 of the following strings:
+      - `"imperial"`
+      - `"metric"`
+      - `"nautical"`

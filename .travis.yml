@@ -12,7 +12,7 @@ install:
 - yarn run configure
 matrix:
   include:
-  - env: SUITE=2017
+#  - env: SUITE=2017
   - env: SUITE=2018
   - env: SUITE=COMPONENT_LIBRARY
 script:

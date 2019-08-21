@@ -29,6 +29,7 @@ import pdfStory from "./PDF.story";
 import pieStory from "./PieChart.story";
 import placeholderStory from "./Placeholder.story";
 import pullQuoteStory from "./PullQuote.story";
+import radioButtonGroupStory from "./RadioButtonGroup.story";
 import sandboxStory from "./Sandbox.story";
 import scatterPlotMapStory from "./ScatterPlotMap.story";
 import ScatterplotStory from "./Scatterplot.story";
@@ -63,8 +64,6 @@ import UIComponentsStyle from "./styleGuideStories/UIComponentsStyle.story";
 // import editableStory from './Editable.story';
 // import landingPage from './LandingPage.story';
 
-import "../assets/global.styles.css";
-
 storiesOf("Welcome|About Us", module)
   .addParameters({ options: { showPanel: false } })
   .addDecorator(checkA11y)
@@ -79,12 +78,12 @@ storiesOf("Design|Brand", module)
   .add("Logos", () => <LogosStyle />)
   .add("Color Theme", () => <ColorThemeStyle />)
   .add("Typography", () => (
-    <div>
+    <>
       <TypographyStyleQuickUsage />
       <TypographyStyleCommonSample />
       <TypographyStyleHeadings />
       <TypographyStyleParagraphs />
-    </div>
+    </>
   ));
 
 // UX Style Guide
@@ -109,6 +108,7 @@ storiesOf("Component Lib|Basic Inputs", module)
 buttonStory();
 checkboxStory();
 dropdownStory();
+radioButtonGroupStory();
 sliderStory();
 
 // charts

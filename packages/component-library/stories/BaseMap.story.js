@@ -51,6 +51,11 @@ const animatedMapProps = {
   lat: 45.5
 };
 
+const containerWrapper = css`
+  height: 100vh;
+  min-height: 500px;
+`;
+
 export default () =>
   storiesOf("Component Lib|Maps/Base Map", module)
     .addDecorator(withKnobs)
@@ -273,11 +278,6 @@ export default () =>
     .add(
       "Example: Use Container Height",
       () => {
-        const containerWrapper = css`
-          height: 100vh;
-          min-height: 500px;
-        `;
-
         const useContainerHeight = boolean(
           "Use Container Height:",
           true,
@@ -287,6 +287,25 @@ export default () =>
         return (
           <div className={containerWrapper}>
             <BaseMap useContainerHeight={useContainerHeight} />
+          </div>
+        );
+      },
+      {
+        notes
+      }
+    )
+    .add(
+      "Example: With Scale Bar",
+      () => {
+        return (
+          <div className={containerWrapper}>
+            <BaseMap
+              scaleBar
+              scaleBarOptions={{
+                maxWidth: 200,
+                units: "imperial"
+              }}
+            />
           </div>
         );
       },
