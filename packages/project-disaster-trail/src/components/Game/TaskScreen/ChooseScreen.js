@@ -135,8 +135,6 @@ ChooseScreen.propTypes = {
   activeEnvironment: PropTypes.string,
   tasksForEnvironment: PropTypes.shape({}),
   votingComplete: PropTypes.bool
-  // startTick: PropTypes.func,
-  // stopTick: PropTypes.func,
 };
 
 const mapStateToProps = state => ({

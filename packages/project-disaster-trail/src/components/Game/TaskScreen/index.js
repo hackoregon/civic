@@ -40,14 +40,15 @@ const TaskScreen = ({
   playerKitItems,
   weightedTasks
 }) => {
-  const prevActiveTask = usePrevious(activeTask);
-  const [action, setAction] = useState(ACTIONS.SOLVING);
-  const prevAction = usePrevious(action);
   const [percentComplete, setPercentComplete] = useState(0);
+  const [action, setAction] = useState(ACTIONS.SOLVING);
   const [timer] = useState(new Timer());
   const [chapterTimer] = useState(new Timer());
   const [votingComplete, setVotingComplete] = useState(false);
   const [movingMapComplete, setMovingMapComplete] = useState(false);
+
+  const prevActiveTask = usePrevious(activeTask);
+  const prevAction = usePrevious(action);
 
   const votingDuration = 20;
   const mapTransitionDuration = 5;
@@ -56,7 +57,7 @@ const TaskScreen = ({
   // 1) Solve Screen
   // 2) Vote
   // 3) Move Map
-  // 4) Go to step 1?
+  // 4) Go to step 1
   const onTimerComplete = () => {
     switch (action) {
       case ACTIONS.SOLVING:
@@ -78,7 +79,6 @@ const TaskScreen = ({
   };
 
   const startTimer = duration => {
-    // const d = debug ? 5 : duration;
     timer.setDuration(duration);
     timer.reset();
     timer.addCallback((t, p) => {
@@ -99,6 +99,7 @@ const TaskScreen = ({
     };
   }, [timer, activeTask, action]);
 
+  // start a timer for the _entire_ chapter
   useEffect(() => {
     chapterTimer.setDuration(chapterDuration);
     chapterTimer.addCompleteCallback(() => endChapter());
@@ -108,6 +109,7 @@ const TaskScreen = ({
     };
   }, [chapterTimer]);
 
+  // when an action is complete, what should happen next?
   useEffect(() => {
     switch (action) {
       case ACTIONS.SOLVING:
@@ -134,14 +136,8 @@ const TaskScreen = ({
     }
   }, [prevActiveTask, activeTask, votingComplete, movingMapComplete]);
 
-  // useEffect(() => {
-  //   if (activeTask && activeTask !== prevActiveTask) {
-  //     // eslint-disable-next-line no-console
-  //     console.log("new task");
-  //   }
-  // }, [activeTask, prevActiveTask]);
-
-  // when the user transitions from one action to another
+  // when the user transitions from one action to another,
+  // start a timer
   useEffect(() => {
     if (action !== prevAction) {
       switch (action) {

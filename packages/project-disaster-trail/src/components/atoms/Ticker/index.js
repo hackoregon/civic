@@ -1,7 +1,6 @@
 import { memo } from "react";
 import { PropTypes } from "prop-types";
 /** @jsx jsx */
-/** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 
 import { palette } from "../../../constants/style";

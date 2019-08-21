@@ -40,7 +40,7 @@ export const tasks = {
   // Save Others
   [FIRE]: {
     id: FIRE,
-    time: 30, // seconds * milliseconds
+    time: 30,
     requiredItem: fireExtinguisher,
     numberItemsToSolve: 5,
     points: 5,
@@ -56,7 +56,7 @@ export const tasks = {
   },
   [INJURY]: {
     id: INJURY,
-    time: 30, // seconds * milliseconds
+    time: 30,
     requiredItem: firstAidKit,
     numberItemsToSolve: 5,
     points: 7,
@@ -67,7 +67,7 @@ export const tasks = {
   },
   [HUNGER]: {
     id: HUNGER,
-    time: 30, // seconds * milliseconds
+    time: 30,
     requiredItem: food,
     numberItemsToSolve: 5,
     points: 5,
@@ -83,7 +83,7 @@ export const tasks = {
   },
   [THIRST]: {
     id: THIRST,
-    time: 30, // seconds * milliseconds
+    time: 30,
     requiredItem: water,
     numberItemsToSolve: 5,
     points: 5,
