@@ -9,6 +9,7 @@ import {
   VictoryTooltip,
   VictoryStack
 } from "victory";
+import shortid from "shortid";
 import SimpleLegend from "../SimpleLegend";
 import ChartContainer from "../ChartContainer";
 import civicFormat from "../utils/civicFormat";
@@ -209,7 +210,7 @@ const HorizontalBarChart = ({
           )}
           {stacked && (
             <VictoryStack colorScale={categoricalColors(groupedData.length)}>
-              {groupedData.map((arr, i) => {
+              {groupedData.map(arr => {
                 return (
                   <VictoryBar
                     title="Horizontal Bar Chart"
@@ -222,7 +223,7 @@ const HorizontalBarChart = ({
                     x="dataKey"
                     y="dataValue"
                     events={chartEvents}
-                    key={arr[i][dataValue]}
+                    key={shortid.generate()}
                     labels={arr.map(
                       d => `${d[dataSeriesKey]}: ${d[dataValue]}`
                     )}
@@ -252,7 +253,7 @@ const HorizontalBarChart = ({
                     ticks: { stroke: "none" },
                     grid: { stroke: "none" }
                   }}
-                  key={arr[i]}
+                  key={shortid.generate()}
                 />
               );
             })}

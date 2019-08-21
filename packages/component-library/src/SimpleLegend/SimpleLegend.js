@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { css } from "emotion";
+import shortid from "shortid";
 import CivicVictoryTheme from "../VictoryTheme/VictoryThemeIndex";
 
 const SimpleLegend = ({ colorScale, legendData }) => {
@@ -23,7 +24,7 @@ const SimpleLegend = ({ colorScale, legendData }) => {
       <div className={legendStyle}>
         {legendData.map((group, idx) => (
           <span
-            key={group.name}
+            key={shortid.generate()}
             className={css`
               margin-left: 10px;
             `}

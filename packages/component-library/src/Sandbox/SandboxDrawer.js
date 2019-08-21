@@ -8,6 +8,7 @@ import SandboxDateSelector from "./SandboxDateSelector";
 import SandboxToggleSwitch from "./SandboxToggleSwitch";
 import SandboxMapLegend from "./SandboxMapLegend";
 import SandboxBaseMapSelector from "./SandboxBaseMapSelector";
+import shortid from "shortid";
 
 const menuOpen = css(`
   position: absolute;
@@ -247,7 +248,7 @@ const SandboxDrawer = ({
                 ? blackTextColor
                 : whiteTextColor;
             return (
-              <div key={"slide-selector" + index}>
+              <div key={shortid.generate()}>
                 <div
                   className={css(`
                   border-top: 1px solid #ddd;
