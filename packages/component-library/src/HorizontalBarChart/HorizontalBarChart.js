@@ -20,8 +20,8 @@ import {
   transformDatato100
 } from "../utils/chartHelpers";
 import groupByKey from "../utils/groupByKey";
-import CivicVictoryTheme from "../VictoryTheme/VictoryThemeIndex";
 import DataChecker from "../utils/DataChecker";
+import { VictoryTheme } from "../_Themes/index";
 
 const HorizontalBarChart = ({
   data,
@@ -69,8 +69,8 @@ const HorizontalBarChart = ({
   const padding = minimalist
     ? { left: 115, right: 50, bottom: 25, top: 40 }
     : { left: 115, right: 50, bottom: 50, top: 70 };
-  const barHeight = CivicVictoryTheme.civic.bar.style.data.width;
-  const spaceHeight = CivicVictoryTheme.civic.bar.style.data.padding * 2;
+  const barHeight = VictoryTheme.bar.style.data.width;
+  const spaceHeight = VictoryTheme.bar.style.data.padding * 2;
   const additionalHeight = padding.bottom + padding.top;
   const minValue = Math.min(0, ...data.map(d => d[dataValue]));
 
@@ -112,7 +112,7 @@ const HorizontalBarChart = ({
           domain={domain}
           domainPadding={{ x: 11, y: 20 }}
           padding={padding}
-          theme={CivicVictoryTheme.civic}
+          theme={VictoryTheme}
         >
           <VictoryAxis
             style={{
@@ -134,7 +134,7 @@ const HorizontalBarChart = ({
           {!minimalist && (
             <VictoryPortal>
               <VictoryLabel
-                style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
+                style={{ ...VictoryTheme.axisLabel.style }}
                 text={yLabel}
                 textAnchor="middle"
                 title="Y Axis Label"
@@ -146,7 +146,7 @@ const HorizontalBarChart = ({
           )}
           <VictoryPortal>
             <VictoryLabel
-              style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
+              style={{ ...VictoryTheme.axisLabel.style }}
               text={xLabel}
               textAnchor={minimalist ? "middle" : "end"}
               title="X Axis Label"
@@ -162,7 +162,7 @@ const HorizontalBarChart = ({
                 <NegativeAwareTickLabel
                   x={0}
                   orientation="left"
-                  theme={CivicVictoryTheme.civic}
+                  theme={VictoryTheme}
                 />
               }
               domainPadding={0}
@@ -187,7 +187,7 @@ const HorizontalBarChart = ({
                   orientation="bottom"
                   pointerLength={0}
                   cornerRadius={0}
-                  theme={CivicVictoryTheme.civic}
+                  theme={VictoryTheme}
                 />
               }
               domainPadding={0}
@@ -235,7 +235,7 @@ const HorizontalBarChart = ({
                         orientation="bottom"
                         pointerLength={0}
                         cornerRadius={0}
-                        theme={CivicVictoryTheme.civic}
+                        theme={VictoryTheme}
                       />
                     }
                     animate

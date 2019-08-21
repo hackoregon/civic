@@ -24,7 +24,7 @@ import {
   getDefaultDataSeriesLabels,
   getDefaultAreaStyle
 } from "../utils/chartHelpers";
-import CivicVictoryTheme from "../VictoryTheme/VictoryThemeIndex";
+import { VictoryTheme } from "../_Themes/index";
 
 const StackedAreaChart = ({
   data,
@@ -53,7 +53,7 @@ const StackedAreaChart = ({
     : null;
 
   const scatterPlotStyle = style || {
-    ...CivicVictoryTheme.civic.areaScatter.style
+    ...VictoryTheme.areaScatter.style
   };
 
   const legendData =
@@ -110,7 +110,7 @@ const StackedAreaChart = ({
               orientation="bottom"
               pointerLength={0}
               cornerRadius={0}
-              theme={CivicVictoryTheme.civic}
+              theme={VictoryTheme}
             />
           }
           animate
@@ -131,7 +131,7 @@ const StackedAreaChart = ({
         <VictoryChart
           domain={chartDomain}
           padding={{ left: 75, right: 50, bottom: 50, top: 50 }}
-          theme={CivicVictoryTheme.civic}
+          theme={VictoryTheme}
         >
           <VictoryAxis
             style={{ grid: { stroke: "none" } }}
@@ -145,7 +145,7 @@ const StackedAreaChart = ({
           />
           <VictoryPortal>
             <VictoryLabel
-              style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
+              style={{ ...VictoryTheme.axisLabel.style }}
               text={yLabel}
               textAnchor="middle"
               title="Y Axis Label"
@@ -156,7 +156,7 @@ const StackedAreaChart = ({
           </VictoryPortal>
           <VictoryPortal>
             <VictoryLabel
-              style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
+              style={{ ...VictoryTheme.axisLabel.style }}
               text={xLabel}
               textAnchor="end"
               title="X Axis Label"

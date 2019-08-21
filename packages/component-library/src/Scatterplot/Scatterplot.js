@@ -19,7 +19,7 @@ import {
   getDefaultDataSeriesLabels,
   getDefaultFillStyle
 } from "../utils/chartHelpers";
-import CivicVictoryTheme from "../VictoryTheme/VictoryThemeIndex";
+import { VictoryTheme } from "../_Themes/index";
 
 /*
  * @method Scatterplot
@@ -83,7 +83,7 @@ const Scatterplot = ({
       <DataChecker dataAccessors={{ dataKey, dataValue }} data={data}>
         <VictoryChart
           domain={chartDomain}
-          theme={CivicVictoryTheme.civic}
+          theme={VictoryTheme}
           animate={{ duration: 200 }}
         >
           <VictoryAxis
@@ -102,7 +102,7 @@ const Scatterplot = ({
           />
           <VictoryPortal>
             <VictoryLabel
-              style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
+              style={{ ...VictoryTheme.axisLabel.style }}
               text={yLabel}
               textAnchor="middle"
               title="Y Axis Label"
@@ -113,7 +113,7 @@ const Scatterplot = ({
           </VictoryPortal>
           <VictoryPortal>
             <VictoryLabel
-              style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
+              style={{ ...VictoryTheme.axisLabel.style }}
               text={xLabel}
               textAnchor="end"
               title="X Axis Label"
@@ -147,7 +147,7 @@ const Scatterplot = ({
                 orientation="bottom"
                 pointerLength={0}
                 cornerRadius={0}
-                theme={CivicVictoryTheme.civic}
+                theme={VictoryTheme}
               />
             }
             size={3} // overridden by bubbleProperty

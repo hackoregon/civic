@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { css } from "emotion";
 import shortid from "shortid";
-import CivicVictoryTheme from "../VictoryTheme/VictoryThemeIndex";
+import { VictoryTheme } from "../_Themes/index";
 
 const SimpleLegend = ({ colorScale, legendData }) => {
   const legendStyle = css`
@@ -17,7 +17,7 @@ const SimpleLegend = ({ colorScale, legendData }) => {
     }
   `;
 
-  const colorMap = colorScale || CivicVictoryTheme.civic.group.colorScale;
+  const colorMap = colorScale || VictoryTheme.group.colorScale;
 
   if (legendData.length) {
     return (

@@ -1,6 +1,6 @@
-import CivicVictoryTheme from "../VictoryTheme/VictoryThemeIndex";
+import { VictoryTheme } from "../_Themes/index";
 
-const tooltipColor = CivicVictoryTheme.civic.tooltip.style.customHoverColor;
+const tooltipColor = VictoryTheme.tooltip.style.customHoverColor;
 
 const chartEvents = [
   {
@@ -97,12 +97,11 @@ function getDefaultFillStyle(dataSeriesLabel) {
   return {
     data: {
       fill: d => {
-        if (!dataSeriesCategories)
-          return CivicVictoryTheme.civic.group.colorScale[0];
+        if (!dataSeriesCategories) return VictoryTheme.group.colorScale[0];
         const idx = dataSeriesCategories.findIndex(
           series => series === d.series
         );
-        return CivicVictoryTheme.civic.group.colorScale[idx];
+        return VictoryTheme.group.colorScale[idx];
       }
     }
   };
@@ -110,20 +109,20 @@ function getDefaultFillStyle(dataSeriesLabel) {
 
 function getDefaultLineStyle(idx) {
   return {
-    data: { stroke: CivicVictoryTheme.civic.group.colorScale[idx] }
+    data: { stroke: VictoryTheme.group.colorScale[idx] }
   };
 }
 
 function getDefaultAreaStyle(idx) {
   return {
-    data: { fill: CivicVictoryTheme.civic.group.colorScale[idx] }
+    data: { fill: VictoryTheme.group.colorScale[idx] }
   };
 }
 
 const categoricalColors = dataLength => {
   const colorScheme = [];
   for (let i = 0; i < dataLength; i += 1) {
-    colorScheme.push(CivicVictoryTheme.civic.group.colorScale[i]);
+    colorScheme.push(VictoryTheme.group.colorScale[i]);
   }
   return colorScheme;
 };

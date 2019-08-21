@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { VictoryPie, VictoryLabel, VictoryContainer } from "victory";
 import ChartContainer from "../ChartContainer";
-import civicTheme from "../VictoryTheme/CivicVictoryTheme";
+import { VictoryTheme } from "../_Themes/index";
 import SimpleLegend from "../SimpleLegend";
 import DataChecker from "../utils/DataChecker";
 
@@ -55,7 +55,7 @@ const PieChart = props => {
           data={data}
           innerRadius={innerRadius}
           colorScale={colors}
-          theme={civicTheme}
+          theme={VictoryTheme}
           animate={{
             duration: 1000
           }}
@@ -64,7 +64,7 @@ const PieChart = props => {
           startAngle={startAngle}
           endAngle={endAngle}
           labelComponent={
-            <VictoryLabel style={{ ...civicTheme.pieLabel.style }} />
+            <VictoryLabel style={{ ...VictoryTheme.pieLabel.style }} />
           }
           {...legendProps}
           containerComponent={
