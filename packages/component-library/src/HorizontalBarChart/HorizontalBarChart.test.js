@@ -37,10 +37,10 @@ describe("HorizontalBarChart", () => {
     expect(wrapper.find({ title: "Horizontal Bar Chart" }).length).to.eql(1);
     expect(wrapper.find({ title: "Horizontal Bar Chart" }).props().data).to.eql(
       [
-        { sortOrder: 1, dataValue: 400, label: "rat: 400" },
-        { sortOrder: 2, dataValue: 300, label: "fish: 300" },
-        { sortOrder: 3, dataValue: 200, label: "dog: 200" },
-        { sortOrder: 4, dataValue: 100, label: "cat: 100" }
+        { sortOrder: -1, dataValue: 400, label: "rat: 400" },
+        { sortOrder: -2, dataValue: 300, label: "fish: 300" },
+        { sortOrder: -3, dataValue: 200, label: "dog: 200" },
+        { sortOrder: -4, dataValue: 100, label: "cat: 100" }
       ]
     );
   });
@@ -52,11 +52,11 @@ describe("HorizontalBarChart", () => {
 
     expect(wrapper.find({ title: "Horizontal Bar Chart" }).props().data).to.eql(
       [
-        { sortOrder: 1, dataValue: 500, label: "bat: 500" },
-        { sortOrder: 2, dataValue: 400, label: "rat: 400" },
-        { sortOrder: 3, dataValue: 300, label: "fish: 300" },
-        { sortOrder: 4, dataValue: 200, label: "dog: 200" },
-        { sortOrder: 5, dataValue: 100, label: "cat: 100" }
+        { sortOrder: -1, dataValue: 500, label: "bat: 500" },
+        { sortOrder: -2, dataValue: 400, label: "rat: 400" },
+        { sortOrder: -3, dataValue: 300, label: "fish: 300" },
+        { sortOrder: -4, dataValue: 200, label: "dog: 200" },
+        { sortOrder: -5, dataValue: 100, label: "cat: 100" }
       ]
     );
   });
@@ -137,9 +137,9 @@ describe("HorizontalBarChart", () => {
     const wrapper = shallow(<HorizontalBarChart {...props} />);
     expect(wrapper.find({ title: "Horizontal Bar Chart" }).props().data).to.eql(
       [
-        { sortOrder: 1, dataValue: 8000, label: "Standard Poodle: 8,000" },
-        { sortOrder: 2, dataValue: 6000, label: "French Bulldog: 6,000" },
-        { sortOrder: 3, dataValue: 2000, label: "Labrador Retriever: 2,000" }
+        { sortOrder: -1, dataValue: 8000, label: "Standard Poodle: 8,000" },
+        { sortOrder: -2, dataValue: 6000, label: "French Bulldog: 6,000" },
+        { sortOrder: -3, dataValue: 2000, label: "Labrador Retriever: 2,000" }
       ]
     );
   });
