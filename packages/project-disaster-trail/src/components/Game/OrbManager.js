@@ -14,40 +14,12 @@ import useAnimationFrame from "../../state/hooks/useAnimationFrame";
 import Orb from "./Orb";
 import { addItemToPlayerKit, getKitCreationItems } from "../../state/kit";
 import { addPoints } from "../../state/user";
-
-function createOrbsFromKit(kitItems, bounds, config) {
-  if (!kitItems.length) {
-    return [];
-  }
-
-  // create an empty array.
-  const orbCollection = [];
-  // create a number of orbs based on each kitItems weighting to achieve the correct distribution. Add the x, y, and velocity properties to its existing properties for that item
-  for (let i = 0; i < kitItems.length; i += 1) {
-    const kitData = kitItems[i];
-    const totalGeneratedOrbs = Math.round(config.orbCount * kitData.weighting);
-
-    for (let j = 0; j < totalGeneratedOrbs; j += 1) {
-      const orbId = `${kitData.type}-${j}`;
-      kitData.x = Math.random() * bounds.width;
-      kitData.y = Math.random() * (bounds.height - config.orbSize / 2);
-      kitData.velocity = {
-        x:
-          config.minVelocityX +
-          Math.random() * (config.maxVelocityX - config.minVelocityX),
-        y:
-          config.minVelocityY +
-          Math.random() * (config.maxVelocityY - config.minVelocityY)
-      };
-
-      orbCollection.push(
-        Object.assign({}, { orbId }, { touched: false }, kitData)
-      );
-    }
-  }
-
-  return orbCollection;
-}
+import {
+  completedOrbHandler,
+  createOrbsFromKit,
+  uncompletedOrbHandler
+} from "./OrbManagerHelpers";
+import { getActiveTaskData } from "../../state/tasks";
 
 const ORB_CONFIG = {
   period: 2,
@@ -70,6 +42,7 @@ const ORB_CONFIG = {
  */
 const OrbManager = ({
   kitItems,
+  activeTask,
   addItemToPlayerKitInState,
   addPointsToState
 } = {}) => {
@@ -109,24 +82,20 @@ const OrbManager = ({
     // we re-use tempModels by pushing updated data in to it.
     for (let i = 0; i < orbs.length; i += 1) {
       // get the model
-      const currentOrb = { ...orbs[i] };
+      let currentOrb = { ...orbs[i] };
       const currentOrbId = currentOrb.orbId;
 
       // if the orb is touched or complete, do not move it
       // TODO: seperate out orb animation when good / bad
-      if (
-        touchedOrbs.indexOf(currentOrbId) > -1 ||
-        completedOrbs.indexOf(currentOrbId) > -1
-      ) {
+      if (touchedOrbs.indexOf(currentOrbId) > -1) {
         tempModels.push(currentOrb);
         // eslint-disable-next-line no-continue
         continue;
+      } else if (completedOrbs.indexOf(currentOrbId) > -1) {
+        completedOrbHandler(completedOrbs, currentOrb, activeTask, tick);
+      } else {
+        currentOrb = uncompletedOrbHandler(currentOrb, tick, i, ORB_CONFIG);
       }
-
-      // and move it
-      currentOrb.x += currentOrb.velocity.x; // + Math.cos(tick * 0.1) * period;
-      currentOrb.y +=
-        currentOrb.velocity.y + Math.sin((tick + i) * 0.1) * ORB_CONFIG.period;
 
       // is it offscreen?
       if (currentOrb.x < -ORB_CONFIG.orbSize) currentOrb.x += bounds.width;
@@ -210,7 +179,8 @@ const OrbsStyle = styled.div`
 `;
 
 const mapStateToProps = state => ({
-  kitItems: getKitCreationItems(state)
+  kitItems: getKitCreationItems(state),
+  activeTask: getActiveTaskData(state) // This should be passed through from the parent component
 });
 
 const mapDispatchToProps = dispatch => ({
