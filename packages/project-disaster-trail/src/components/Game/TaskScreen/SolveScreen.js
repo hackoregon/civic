@@ -4,12 +4,7 @@ import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
 import { css, jsx } from "@emotion/core";
 
-import {
-  completeTask,
-  getActiveTaskData
-  // startTick as _startTick,
-  // stopTick as _stopTick
-} from "../../../state/tasks";
+import { completeTask, getActiveTaskData } from "../../../state/tasks";
 import TextContainer from "../../atoms/Containers/TextContainer";
 
 const defaultState = {
@@ -71,7 +66,7 @@ class SolveScreen extends PureComponent {
   };
 
   render() {
-    const { completeActiveTask, open, activeTask } = this.props;
+    const { completeActiveTask, activeTask, open } = this.props;
     const { correctItemsChosen } = this.state;
     // eslint-disable-next-line react/destructuring-assignment
     const activeTaskInState = this.state.activeTask;
@@ -119,8 +114,7 @@ SolveScreen.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  activeTask: getActiveTaskData(state),
-  outOfTime: state.tasks.outOfTime
+  activeTask: getActiveTaskData(state)
 });
 
 const mapDispatchToProps = dispatch => ({
