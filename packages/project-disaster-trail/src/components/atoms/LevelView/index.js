@@ -36,7 +36,7 @@ const LevelView = ({ activeChapterIndex }) => (
 );
 
 LevelView.propTypes = {
-  activeChapterIndex: PropTypes.string
+  activeChapterIndex: PropTypes.number
 };
 
 const mapStateToProps = state => ({

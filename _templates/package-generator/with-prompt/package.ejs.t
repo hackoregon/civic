@@ -37,6 +37,7 @@ to: packages/<%=year%>-<%=packageTitle%>/package.json
   "dependencies": {
     "@emotion/core": "^10.0.10",
     "@hackoregon/component-library": "^3.0.0",
+    "@hackoregon/dev-server": "^3.0.0",
     "@hackoregon/mock-wrapper": "^3.0.0",
     "@hackoregon/webpack-common": "^3.0.0",
     "axios": "^0.18.0",
@@ -64,7 +65,6 @@ to: packages/<%=year%>-<%=packageTitle%>/package.json
     "@babel/node": "^7.0.0",
     "@babel/register": "^7.0.0",
     "@hackoregon/civic-babel-presets": "^3.0.0",
-    "@hackoregon/dev-server": "^3.0.0",
     "autoprefixer": "^9.4.10",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
