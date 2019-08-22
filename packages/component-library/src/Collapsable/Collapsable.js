@@ -32,7 +32,17 @@ const hiddenStyle = css`
   outline: 0;
 `;
 
-function Collapsable({ children }) {
+const visuallyHidden = css`
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap; /* added line */
+`;
+
+function Collapsable({ children, description }) {
   const hiddenRef = useRef(null);
   const buttonRef = useRef(null);
   const [expanded, setExpanded] = useState(false);
@@ -69,6 +79,7 @@ function Collapsable({ children }) {
           ref={buttonRef}
         >
           {cta}
+          <span css={visuallyHidden}>{description}</span>
           <span
             css={arrowStyle}
             className={`fa fa-arrow-${arrow}`}
@@ -85,7 +96,8 @@ const Section = ({ children }) => children;
 Collapsable.Section = Section;
 
 Collapsable.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
+  description: PropTypes.string.isRequired
 };
 
 export default Collapsable;

@@ -13,7 +13,7 @@ export default () =>
           <>
             <p>{wallOfText}</p>
             <a href="https://www.example.com">Example link</a>
-            <Collapsable>
+            <Collapsable description="Lorem ipsum">
               <Collapsable.Section hidden>
                 <p>{wallOfText}</p>
                 <a href="https://www.example.com">Example link</a>
@@ -28,7 +28,7 @@ export default () =>
       "Example: Alternate Usage",
       () => {
         return (
-          <Collapsable>
+          <Collapsable description="Lorem ipsum">
             <Collapsable.Section>
               <p>{wallOfText}</p>
               <a href="https://www.example.com">Example link</a>
