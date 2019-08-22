@@ -10,13 +10,13 @@ describe("rootState", () => {
 
   it("uses the elections object when the elections key is present", () => {
     const state = {
-      elections: {
+      package2018LocalElections: {
         hello: "world"
       },
       otherScope: {
         not: "for you"
       }
     };
-    expect(rootState(state)).to.eql(state.elections);
+    expect(rootState(state)).to.eql(state.package2018LocalElections);
   });
 });

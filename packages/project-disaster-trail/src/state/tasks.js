@@ -1,5 +1,6 @@
 import { createReducer, createSelector } from "redux-starter-kit";
 import { shuffle } from "lodash";
+import size from "lodash/size";
 
 import { tasks, tasksForEnvironment, URBAN } from "../constants/tasks";
 
@@ -12,8 +13,9 @@ const initialState = {
   tasksForEnvironment,
   activeEnvironment: defaultEnv,
   taskOrder: shuffle(defaultSaveYourself),
-  activeTask: -1,
-  completedTasks: []
+  activeTask: 0,
+  completedTasks: [],
+  outOfTime: false
 };
 
 // CONSTANTS
@@ -21,7 +23,9 @@ const actionTypes = {
   CHANGE_ENVIRONMENT: "CHANGE_ENVIRONMENT",
   ADD_TASK: "ADD_TASK",
   INCREASE_ACTIVE_TASK: "INCREASE_ACTIVE_TASK",
-  COMPLETE_TASK: "COMPLETE_TASK"
+  COMPLETE_TASK: "COMPLETE_TASK",
+  START_TASK: "START_TASK",
+  OUT_OF_TIME: "OUT_OF_TIME"
 };
 
 // ACTIONS
@@ -33,6 +37,9 @@ export const addTask = taskChoice => dispatch => {
 };
 export const increaseActiveTask = () => dispatch => {
   dispatch({ type: actionTypes.INCREASE_ACTIVE_TASK });
+};
+export const startTask = task => dispatch => {
+  dispatch({ type: actionTypes.START_TASK, task });
 };
 export const completeTask = completedTask => dispatch => {
   dispatch({ type: actionTypes.COMPLETE_TASK, completedTask });
@@ -71,9 +78,9 @@ export const getTaskOrder = createSelector(
   taskOrder => taskOrder
 );
 
-export const getActiveTask = createSelector(
+export const getActiveTaskId = createSelector(
   ["tasks.activeTask"],
-  activeTask => activeTask
+  activeTaskId => activeTaskId
 );
 
 export const getActiveTaskData = createSelector(
@@ -104,4 +111,42 @@ export const getHasSavedSelf = createSelector(
   (taskOrder, activeTask) => {
     return activeTask >= taskOrder.length;
   }
+);
+
+export const getWeightedTasks = createSelector(
+  ["tasks.tasks", "tasks.tasksForEnvironment", "tasks.activeEnvironment"],
+  (allTasks, tasksForEnv, activeEnvironment) => {
+    const environmentTasks = tasksForEnv[activeEnvironment];
+    const environmentTasksArray = [].concat(
+      environmentTasks.saveYourself,
+      environmentTasks.saveOthers
+    );
+    const genericWeighting = 1 / size(allTasks);
+
+    const possibleTasks = Object.keys(allTasks).reduce((result, taskKey) => {
+      const taskData = allTasks[taskKey];
+      const modifiedTaskWeight = environmentTasksArray.includes(taskData.id)
+        ? genericWeighting * 2
+        : genericWeighting;
+
+      const genericItem = {
+        type: taskData.id,
+        imageSVG: taskData.imageSVG,
+        imageAlt: taskData.imageAlt,
+        locations: taskData.locations,
+        weighting: modifiedTaskWeight,
+        points: taskData.points
+      };
+      result.push(genericItem);
+
+      return result;
+    }, []);
+
+    return possibleTasks;
+  }
+);
+
+export const getOutOfTime = createSelector(
+  ["outOfTime"],
+  outOfTime => outOfTime
 );

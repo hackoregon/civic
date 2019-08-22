@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
+import shortid from "shortid";
 import { groupBy } from "lodash";
 import {
   VictoryAxis,
@@ -10,6 +11,9 @@ import {
   VictoryTooltip,
   VictoryLine
 } from "victory";
+
+import { ThemeProvider } from "emotion-theming";
+import { VictoryTheme } from "../_Themes/index";
 
 import ChartContainer from "../ChartContainer";
 import SimpleLegend from "../SimpleLegend";
@@ -22,7 +26,6 @@ import {
   getDefaultFillStyle,
   getDefaultLineStyle
 } from "../utils/chartHelpers";
-import CivicVictoryTheme from "../VictoryTheme/VictoryThemeIndex";
 
 const LineChart = ({
   data,
@@ -41,7 +44,8 @@ const LineChart = ({
   yLabel,
   xNumberFormatter,
   yNumberFormatter,
-  legendComponent
+  legendComponent,
+  theme
 }) => {
   const chartDomain = domain || getDefaultDomain(data, dataKey, dataValue);
 
@@ -61,7 +65,7 @@ const LineChart = ({
   const lines = lineData
     ? Object.keys(lineData).map((category, index) => (
         <VictoryLine
-          key={category}
+          key={shortid.generate()}
           data={lineData[category].map(d => ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],
@@ -75,92 +79,94 @@ const LineChart = ({
           // line animations when the animate properties are derived from the VictoryChart
           // wrapping component. Remove this direct animate after the bug is fixed.
           // https://github.com/FormidableLabs/victory/issues/1282
-          animate={100}
+          animate
         />
       ))
     : null;
 
   return (
-    <ChartContainer title={title} subtitle={subtitle}>
-      <DataChecker dataAccessors={{ dataKey, dataValue }} data={data}>
-        {legendData &&
-          (legendComponent ? (
-            legendComponent(legendData)
-          ) : (
-            <SimpleLegend className="legend" legendData={legendData} />
-          ))}
+    <ThemeProvider theme={theme}>
+      <ChartContainer title={title} subtitle={subtitle}>
+        <DataChecker dataAccessors={{ dataKey, dataValue }} data={data}>
+          {legendData &&
+            (legendComponent ? (
+              legendComponent(legendData)
+            ) : (
+              <SimpleLegend className="legend" legendData={legendData} />
+            ))}
 
-        <VictoryChart
-          domain={chartDomain}
-          padding={{ left: 75, right: 50, bottom: 50, top: 50 }}
-          theme={CivicVictoryTheme.civic}
-        >
-          <VictoryAxis
-            style={{ grid: { stroke: "none" } }}
-            tickFormat={x => xNumberFormatter(x)}
-            title="X Axis"
-          />
-          <VictoryAxis
-            dependentAxis
-            tickFormat={y => yNumberFormatter(y)}
-            title="Y Axis"
-          />
-          <VictoryPortal>
-            <VictoryLabel
-              style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
-              text={yLabel}
-              textAnchor="middle"
-              title="Y Axis Label"
-              verticalAnchor="end"
-              x={75}
-              y={45}
+          <VictoryChart
+            domain={chartDomain}
+            padding={{ left: 75, right: 50, bottom: 50, top: 50 }}
+            theme={theme}
+          >
+            <VictoryAxis
+              style={{ grid: { stroke: "none" } }}
+              tickFormat={x => xNumberFormatter(x)}
+              title="X Axis"
             />
-          </VictoryPortal>
-          <VictoryPortal>
-            <VictoryLabel
-              style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
-              text={xLabel}
-              textAnchor="end"
-              title="X Axis Label"
-              verticalAnchor="end"
-              x={600}
-              y={295}
+            <VictoryAxis
+              dependentAxis
+              tickFormat={y => yNumberFormatter(y)}
+              title="Y Axis"
             />
-          </VictoryPortal>
-          {lines}
-          <VictoryScatter
-            //        categories={{ x: categoryData }}
-            data={data.map(d => ({
-              dataKey: d[dataKey],
-              dataValue: d[dataValue],
-              label: `${dataKeyLabel || xLabel}: ${xNumberFormatter(
-                d[dataKey]
-              )} • ${dataValueLabel || yLabel}: ${yNumberFormatter(
-                d[dataValue]
-              )}`,
-              series: d[dataSeries],
-              size: size ? d[size.key] || size.value : 3
-            }))}
-            events={chartEvents}
-            labelComponent={
-              <VictoryTooltip
-                x={325}
-                y={0}
-                orientation="bottom"
-                pointerLength={0}
-                cornerRadius={0}
-                theme={CivicVictoryTheme.civic}
+            <VictoryPortal>
+              <VictoryLabel
+                style={{ ...theme.axisLabel.style }}
+                text={yLabel}
+                textAnchor="middle"
+                title="Y Axis Label"
+                verticalAnchor="end"
+                x={75}
+                y={45}
               />
-            }
-            size={d => d.size}
-            style={scatterPlotStyle}
-            title="Scatter Plot"
-            x="dataKey"
-            y="dataValue"
-          />
-        </VictoryChart>
-      </DataChecker>
-    </ChartContainer>
+            </VictoryPortal>
+            <VictoryPortal>
+              <VictoryLabel
+                style={{ ...theme.axisLabel.style }}
+                text={xLabel}
+                textAnchor="end"
+                title="X Axis Label"
+                verticalAnchor="end"
+                x={600}
+                y={295}
+              />
+            </VictoryPortal>
+            {lines}
+            <VictoryScatter
+              //        categories={{ x: categoryData }}
+              data={data.map(d => ({
+                dataKey: d[dataKey],
+                dataValue: d[dataValue],
+                label: `${dataKeyLabel || xLabel}: ${xNumberFormatter(
+                  d[dataKey]
+                )} • ${dataValueLabel || yLabel}: ${yNumberFormatter(
+                  d[dataValue]
+                )}`,
+                series: d[dataSeries],
+                size: size ? d[size.key] || size.value : 3
+              }))}
+              events={chartEvents}
+              labelComponent={
+                <VictoryTooltip
+                  x={325}
+                  y={0}
+                  orientation="bottom"
+                  pointerLength={0}
+                  cornerRadius={0}
+                  theme={theme}
+                />
+              }
+              size={d => d.size}
+              style={scatterPlotStyle}
+              title="Scatter Plot"
+              x="dataKey"
+              y="dataValue"
+            />
+          </VictoryChart>
+        </DataChecker>
+      </ChartContainer>
+    </ThemeProvider>
   );
 };
 
@@ -188,7 +194,8 @@ LineChart.propTypes = {
   yLabel: PropTypes.string,
   xNumberFormatter: PropTypes.func,
   yNumberFormatter: PropTypes.func,
-  legendComponent: PropTypes.func
+  legendComponent: PropTypes.func,
+  theme: PropTypes.shape({})
 };
 
 LineChart.defaultProps = {
@@ -208,7 +215,8 @@ LineChart.defaultProps = {
   yLabel: "Y",
   xNumberFormatter: civicFormat.numeric,
   yNumberFormatter: civicFormat.numeric,
-  legendComponent: null
+  legendComponent: null,
+  theme: VictoryTheme
 };
 
 export default LineChart;

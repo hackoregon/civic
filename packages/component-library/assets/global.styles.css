@@ -1,7 +1,7 @@
 /* Base */
 
 html {
-  font-size: 14px;
+  font-size: 1rem;
   line-height: 1.4;
   background-color: #fffefe;
   font-family: "Merriweather";
@@ -15,25 +15,6 @@ html {
   -webkit-overflow-scrolling: touch;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-.font-extra-light {
-  font-weight: 100;
-}
-.font-light {
-  font-weight: 300;
-}
-.font-normal {
-  font-weight: 400;
-}
-.font-bold {
-  font-weight: 600;
-}
-.font-extra-bold {
-  font-weight: 800;
-}
-
-.text-underline {
-  text-decoration: underline;
-}
 
 body {
   margin: 0;
@@ -41,64 +22,7 @@ body {
   flex-direction: column;
 }
 
-.btc-text-onyx {
-  color: #001732 !important;
-  fill: #001732 !important;
-}
-
-.btc-text-light {
-  color: #f7f7f7 !important;
-  fill: #f7f7f7 !important;
-}
-
-.btc-text-warn {
-  color: #de0050 !important;
-  fill: #de0050 !important;
-}
-
-.btc-bg-onyx {
-  background-color: #001732;
-  border-color: #001732;
-}
-.btc-bg-yellow {
-  background: #ffb45a;
-}
-.btc-bg-action {
-  background-color: #e91e63;
-}
-.btc-bg-white {
-  background-color: #fff;
-}
-.btc-bg-black {
-  background-color: #000;
-}
-.btc-text-uppercase {
-  text-transform: uppercase;
-}
-.btc-text-black {
-  color: #000 !important;
-  fill: #000 !important;
-}
-.btc-text-white {
-  color: #fff !important;
-  fill: #fff !important;
-}
-
 /* utitlity */
-.btc-rounded {
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  -o-border-radius: 4px;
-  border-radius: 4px;
-}
-.btc-circle {
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  -ms-border-radius: 50%;
-  -o-border-radius: 50%;
-  border-radius: 50%;
-}
 
 a {
   color: #1e62bd;
@@ -126,55 +50,49 @@ a:hover {
 }
 
 .Title {
-  font-size: 50px;
+  font-size: 3.57rem;
   line-height: 1.2;
   font-weight: 300;
   font-family: "Rubik", sans-serif;
   margin-bottom: 12px;
 }
 
-h1,
-.h1 {
+h1 {
   font-size: 36px;
   font-size: 2.25rem;
   line-height: 2.625rem;
   font-family: "Rubik", sans-serif;
   font-weight: 500;
 }
-h2,
-.h2 {
+h2 {
   font-size: 26px;
   font-size: 1.625rem;
   line-height: 2.125rem;
   font-family: "Rubik", sans-serif;
   font-weight: 400;
 }
-h3,
-.h3 {
+h3 {
   font-size: 18px;
   font-size: 1.125rem;
   line-height: 1.625rem;
   font-family: "Rubik", sans-serif;
   font-weight: 500;
 }
-h4,
-.h4 {
+h4 {
   font-size: 16px;
   font-size: 1rem;
   line-height: 1.375rem;
   font-family: "Rubik", sans-serif;
   font-weight: 500;
 }
-h5,
-.h5 {
+h5 {
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 1.125rem;
   font-family: "Rubik", sans-serif;
   font-weight: 500;
 }
-h6,
-.h6 {
+h6 {
   font-size: 12px;
   font-size: 0.75rem;
   line-height: 0.9375rem;
@@ -188,17 +106,5 @@ p {
 }
 
 .Pullquote {
-  font-size: 40px;
-}
-
-/* Color */
-
-.PrimaryColor {
-  color: rgba(34, 15, 37, 1);
-  fill: rgba(34, 15, 37, 1);
-}
-
-.SecondaryColor {
-  color: #1e62bd;
-  fill: #1e62bd;
+  font-size: 2.85rem;
 }

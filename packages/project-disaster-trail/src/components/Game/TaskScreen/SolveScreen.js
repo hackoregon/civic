@@ -1,85 +1,116 @@
 /** @jsx jsx */
-import { PureComponent, Fragment } from "react";
+import { PureComponent } from "react";
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
 import { css, jsx } from "@emotion/core";
 
 import { completeTask, getActiveTaskData } from "../../../state/tasks";
-import DurationBar from "../../atoms/DurationBar";
 import TextContainer from "../../atoms/Containers/TextContainer";
-import OrbManager from "../OrbManager";
 
 const defaultState = {
-  taskTimer: null
+  taskTimer: null,
+  correctItemsChosen: 0
 };
+
+const screenLayout = css`
+  position: absolute;
+  left: 0;
+  display: grid;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: 1fr;
+  padding-top: 100px;
+  background: beige;
+  z-index: 101;
+  transform: translateY(-100%);
+  transition: transform 0.5s;
+`;
+
+const onScreenStyle = css`
+  transform: translateY(0%);
+`;
 
 class SolveScreen extends PureComponent {
   state = defaultState;
 
-  componentDidMount() {
+  componentDidUpdate() {
     const { activeTask } = this.props;
 
-    this.setState({
-      taskTimer: setTimeout(this.finishTask, activeTask.time)
-    });
+    // store the last active task
+    // to avoid activeTask text disappearing
+    // when the activeTask property is null
+    // eslint-disable-next-line react/destructuring-assignment
+    const activeTaskInState = this.state.activeTask;
+    if (activeTask && activeTask !== activeTaskInState) {
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({ activeTask });
+    }
   }
-
-  componentWillUnmount() {
-    this.clearTaskTimeout();
-  }
-
-  clearTaskTimeout = () => {
-    const { taskTimer } = this.state;
-    clearTimeout(taskTimer);
-  };
 
   finishTask = () => {
     const { completeActiveTask, activeTask } = this.props;
-    completeActiveTask(activeTask.id);
+    if (activeTask) {
+      completeActiveTask(activeTask.id);
+    }
+  };
+
+  onItemSelection = item => {
+    const { activeTask } = this.props;
+
+    if (item.type === activeTask.requiredItem) {
+      this.setState(state => ({
+        correctItemsChosen: state.correctItemsChosen + 1
+      }));
+    }
   };
 
   render() {
-    const { completeActiveTask, activeTask } = this.props;
-    const screenLayout = css`
-      position: relative;
-      display: grid;
-      overflow: hidden;
-      width: 100%;
-      height: 100%;
-      grid-template-columns: 1fr;
-      background: beige;
-    `;
+    const { completeActiveTask, activeTask, open } = this.props;
+    const { correctItemsChosen } = this.state;
+    // eslint-disable-next-line react/destructuring-assignment
+    const activeTaskInState = this.state.activeTask;
 
-    const taskDuration = activeTask.time;
+    // we've stored the activeTask in state
+    // to avoid the activeTask text disappearing
+    // while the component animates out
+    const activeTaskToRender = activeTask || activeTaskInState;
 
     return (
-      <Fragment>
-        <div css={screenLayout}>
+      <div
+        css={css`
+          ${screenLayout}
+          ${open ? onScreenStyle : {}}
+        `}
+      >
+        {activeTaskToRender && (
           <TextContainer>
-            <h2>{activeTask.text}</h2>
+            <h2>{activeTaskToRender.text}</h2>
+            <h3>
+              Correct items chosen: {correctItemsChosen} of{" "}
+              {activeTaskToRender.numberItemsToSolve}
+            </h3>
             <button
               type="button"
               onClick={() => {
-                completeActiveTask(activeTask.id);
+                completeActiveTask(activeTaskToRender.id);
               }}
             >
-              Use {activeTask.requiredItems[0]}
+              Use {activeTaskToRender.requiredItem}
             </button>
           </TextContainer>
-        </div>
-        <DurationBar
-          step="Choose a task"
-          durationLength={taskDuration / 1000}
-        />
-        <OrbManager />
-      </Fragment>
+        )}
+      </div>
     );
   }
 }
 
 SolveScreen.propTypes = {
   completeActiveTask: PropTypes.func,
-  activeTask: PropTypes.shape({})
+  activeTask: PropTypes.shape({
+    id: PropTypes.string
+  }),
+  open: PropTypes.bool
 };
 
 const mapStateToProps = state => ({

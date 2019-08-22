@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { css } from "emotion";
+import shortid from "shortid";
 import checkData from "./checkData";
 
 const wrapperStyle = css`
@@ -9,15 +10,25 @@ const wrapperStyle = css`
   width: 90%;
 `;
 
-const DataChecker = ({ data, dataAccessors, message, children }) => {
+const DataChecker = ({
+  data,
+  dataIsObject,
+  dataAccessors,
+  optionalKeys,
+  message,
+  children
+}) => {
   const keys = Object.keys(dataAccessors);
   const values = Object.values(dataAccessors);
-  const results = checkData(data, values);
+  const results = checkData(data, values, dataIsObject, optionalKeys);
   const component = results.allKeysValid ? (
     children
   ) : (
     <div className={wrapperStyle}>
       <h1>{message}</h1>
+      {results.invalidType && (
+        <h2>Invalid Type - check if array or object is expected</h2>
+      )}
       <h2>Data Accessors</h2>
       {keys.map((key, index) => {
         const isValid =
@@ -31,7 +42,7 @@ const DataChecker = ({ data, dataAccessors, message, children }) => {
             `
           : css``;
         return (
-          <pre key={key} className={invalidStyle}>
+          <pre key={shortid.generate()} className={invalidStyle}>
             <strong>
               {isValid ? "✅ " : "⛔️ "}
               {`${key}: `}
@@ -54,7 +65,7 @@ const DataChecker = ({ data, dataAccessors, message, children }) => {
       <h2>Data</h2>
       <pre>
         <strong>data: </strong>
-        {JSON.stringify(data, undefined, 2)}
+        {!dataIsObject && JSON.stringify(data, undefined, 2)}
       </pre>
     </div>
   );
@@ -62,13 +73,18 @@ const DataChecker = ({ data, dataAccessors, message, children }) => {
 };
 
 DataChecker.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  dataAccessors: PropTypes.shape({}).isRequired,
-  message: PropTypes.string
+  data: PropTypes.oneOfType([
+    PropTypes.shape({}),
+    PropTypes.arrayOf(PropTypes.shape({}))
+  ]).isRequired,
+  dataAccessors: PropTypes.objectOf(PropTypes.string).isRequired,
+  message: PropTypes.string,
+  optionalKeys: PropTypes.shape({})
 };
 
 DataChecker.defaultProps = {
-  message: "Invalid Data"
+  message: "Invalid Data",
+  dataIsObject: false
 };
 
 export default DataChecker;

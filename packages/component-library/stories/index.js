@@ -8,6 +8,7 @@ import baseMapStory from "./BaseMap.story";
 import boundaryMapStory from "./BoundaryMap.story";
 import buttonStory from "./Button.story";
 import checkboxStory from "./Checkbox.story";
+import civicCardStory from "./CivicCard.story";
 import civicCardStackStory from "./CivicCardStack.story";
 import civicSandboxDashboardStory from "./CivicSandboxDashboard.story";
 import multiLayerMapStory from "./MultiLayerMap.story";
@@ -28,6 +29,7 @@ import pdfStory from "./PDF.story";
 import pieStory from "./PieChart.story";
 import placeholderStory from "./Placeholder.story";
 import pullQuoteStory from "./PullQuote.story";
+import radioButtonGroupStory from "./RadioButtonGroup.story";
 import sandboxStory from "./Sandbox.story";
 import scatterPlotMapStory from "./ScatterPlotMap.story";
 import ScatterplotStory from "./Scatterplot.story";
@@ -63,8 +65,6 @@ import UIComponentsStyle from "./styleGuideStories/UIComponentsStyle.story";
 // import editableStory from './Editable.story';
 // import landingPage from './LandingPage.story';
 
-import "../assets/global.styles.css";
-
 storiesOf("Welcome|About Us", module)
   .addParameters({ options: { showPanel: false } })
   .addDecorator(checkA11y)
@@ -79,12 +79,12 @@ storiesOf("Design|Brand", module)
   .add("Logos", () => <LogosStyle />)
   .add("Color Theme", () => <ColorThemeStyle />)
   .add("Typography", () => (
-    <div>
+    <>
       <TypographyStyleQuickUsage />
       <TypographyStyleCommonSample />
       <TypographyStyleHeadings />
       <TypographyStyleParagraphs />
-    </div>
+    </>
   ));
 
 // UX Style Guide
@@ -110,6 +110,7 @@ buttonStory();
 checkboxStory();
 dropdownStory();
 selectStory();
+radioButtonGroupStory();
 sliderStory();
 
 // charts
@@ -140,6 +141,12 @@ pathMapStory();
 scatterPlotMapStory();
 screenGridMapStory();
 multiLayerMapStory();
+
+// Civic story cards
+storiesOf("Component Lib|Story Cards", module)
+  .addParameters({ options: { showPanel: false } })
+  .addDecorator(checkA11y);
+civicCardStory();
 
 // Civic platform components and page layout
 storiesOf("Component Lib|CIVIC Platform", module)

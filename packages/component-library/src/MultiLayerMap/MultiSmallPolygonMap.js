@@ -1,12 +1,12 @@
 import React from "react";
 import { PolygonLayer } from "deck.gl";
+import shortid from "shortid";
 import { number, string, bool, func, arrayOf, shape } from "prop-types";
 
 import { createColorScale, createSizeScale } from "./createLayers";
 
 const MultiSmallPolygonMap = props => {
   const {
-    index,
     id,
     data,
     pickable = true,
@@ -46,7 +46,7 @@ const MultiSmallPolygonMap = props => {
 
   return (
     <PolygonLayer
-      key={index}
+      key={shortid.generate()}
       id={id}
       data={data}
       pickable={pickable}
@@ -72,7 +72,6 @@ const MultiSmallPolygonMap = props => {
 };
 
 MultiSmallPolygonMap.propTypes = {
-  index: number,
   id: string.isRequired,
   data: arrayOf(shape({})).isRequired,
   pickable: bool,

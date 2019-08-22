@@ -12,6 +12,7 @@ import {
   VictoryArea
 } from "victory";
 
+import shortid from "shortid";
 import ChartContainer from "../ChartContainer";
 import SimpleLegend from "../SimpleLegend";
 import civicFormat from "../utils/civicFormat";
@@ -65,7 +66,7 @@ const StackedAreaChart = ({
   const areas = lineData
     ? Object.keys(lineData).map((category, index) => (
         <VictoryArea
-          key={category}
+          key={shortid.generate()}
           data={lineData[category].map(d => ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],
@@ -75,6 +76,7 @@ const StackedAreaChart = ({
           y="dataValue"
           style={getDefaultAreaStyle(index)}
           standalone={false}
+          animate
         />
       ))
     : null;
@@ -82,7 +84,7 @@ const StackedAreaChart = ({
   const dots = lineData
     ? Object.keys(lineData).map(category => (
         <VictoryScatter
-          key={category}
+          key={shortid.generate()}
           data={lineData[category].map(d => ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],
@@ -111,6 +113,7 @@ const StackedAreaChart = ({
               theme={CivicVictoryTheme.civic}
             />
           }
+          animate
         />
       ))
     : null;

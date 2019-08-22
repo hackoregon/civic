@@ -67,11 +67,9 @@ export default class StoryFooter extends Component {
     const { copied } = this.state;
     const shareTxt = copied ? "Copied!" : "Share"; // if copied, show Link copied, otherwise, show Share card
     const shareIcon = copied ? ICONS.check : ICONS.link;
-    const routeOrUndefined =
-      `${get(window, "location.origin", "")}/cards/${slug}` ===
-      get(window, "location.href", "")
-        ? undefined
-        : `/cards/${slug}`;
+    const isEmbedded =
+      `${get(window, "location.origin", "")}/cards/${slug}/embed/` ===
+      get(window, "location.href", "");
     const issue = `https://github.com/hackoregon/civic/issues/new?labels=type%3Astory-card&template=story-card-improve.md&title=[FEEDBACK] ${slug}`;
 
     return (
@@ -79,6 +77,7 @@ export default class StoryFooter extends Component {
         <div className={alignLeft}>
           <CivicStoryLink
             link={source}
+            embed={isEmbedded}
             route={source ? undefined : `/cards/${slug}`}
             icon={ICONS.info}
           >
@@ -89,13 +88,13 @@ export default class StoryFooter extends Component {
           <CivicStoryLink
             additionalClassName={alignRight}
             link={issue}
+            embed={isEmbedded}
             icon={ICONS.improve}
           >
             Improve
           </CivicStoryLink>
           <CivicStoryLink
             additionalClassName={alignRight}
-            route={routeOrUndefined}
             action={this.handleCopy}
             icon={shareIcon}
           >

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { css } from "emotion";
+import shortid from "shortid";
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 
 // Classes
@@ -47,7 +48,7 @@ const DefaultColumn = ({
   <tr className={columnClass || defaultColumnClass}>
     {columns.map(item => (
       <th
-        key={item.key}
+        key={shortid.generate()}
         className={columnCellClass || defaultColumnCellClass(item)}
         colSpan={item.colSpan}
         onClick={() => sortTable(item.key)}
@@ -73,7 +74,7 @@ const DefaultHeader = ({ className, columns }) => (
   <tr className={className || defaultHeaderClass}>
     {columns.map(item => (
       <th
-        key={item.key}
+        key={shortid.generate()}
         className={defaultHeaderCellClass(item)}
         colSpan={item.colSpan || "1"}
       >
@@ -92,11 +93,11 @@ DefaultHeader.propTypes = {
   className: PropTypes.string
 };
 
-const DefaultRow = ({ data, id, columns, rowClass, rowCellClass }) => (
+const DefaultRow = ({ data, columns, rowClass, rowCellClass }) => (
   <tr className={rowClass || defaultRowClass}>
     {columns.map(item => (
       <td
-        key={id + data[item.key]}
+        key={shortid.generate()}
         className={rowCellClass || defaultRowCellClass(item)}
       >
         {data[item.key]}
@@ -112,7 +113,6 @@ DefaultRow.propTypes = {
       key: PropTypes.string
     })
   ).isRequired,
-  id: PropTypes.string.isRequired,
   rowClass: PropTypes.string,
   rowCellClass: PropTypes.string
 };
@@ -226,7 +226,7 @@ export default class DataTable extends Component {
         <tbody>
           {Object.keys(sorted).map(id => (
             <Row
-              key={id}
+              key={shortid.generate()}
               id={id}
               columns={flattenedColumns}
               data={sorted[id]}

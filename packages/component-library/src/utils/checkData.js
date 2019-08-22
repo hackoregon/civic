@@ -1,22 +1,29 @@
-const checkKey = (data, key) => {
+const checkKey = (data, key, optionalKeys = {}) => {
+  // If key is optional, skip
+  if (optionalKeys[key]) {
+    return { valid: 0, total: 0 };
+  }
+
   const valid = data.filter(datum => key in datum).length;
   const total = data.length;
   return { valid, total };
 };
 
-const checkData = (data, dataKeys) => {
+const checkData = (data, dataKeys, dataIsObject = false, optionalKeys) => {
   const results = {};
-  const error = !(Array.isArray(data) && Array.isArray(dataKeys));
-  results.error = error;
+  const isArray = Array.isArray(data) && Array.isArray(dataKeys);
+  const validType = (!dataIsObject && isArray) || (dataIsObject && !isArray);
+  results.invalidType = !validType;
+  const dataAsArray = dataIsObject ? [data] : data;
   // eslint-disable-next-line no-return-assign
   const keyChecks =
-    !error &&
+    validType &&
     dataKeys.map(key => {
-      results[key] = checkKey(data, key);
-      return checkKey(data, key);
+      results[key] = checkKey(dataAsArray, key, optionalKeys);
+      return checkKey(dataAsArray, key, optionalKeys);
     });
   results.allKeysValid =
-    !error && keyChecks.every(key => key.valid === key.total);
+    validType && keyChecks.every(key => key.valid === key.total);
   return results;
 };
 

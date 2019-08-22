@@ -1,5 +1,15 @@
 import "./fonts.css";
 
+// THEMES
+export {
+  VisualizationColors,
+  BrandColors,
+  BrandTheme,
+  VictoryTheme,
+  VictoryCrazyTheme
+} from "./_Themes/index";
+
+// COMPONENTS
 export {
   default as HorizontalBarChart
 } from "./HorizontalBarChart/HorizontalBarChart";
@@ -7,6 +17,9 @@ export { default as BarChart } from "./BarChart/BarChart";
 export { default as LineChart } from "./LineChart/LineChart";
 export { default as Button } from "./Button/Button";
 export { default as Checkbox } from "./Checkbox/Checkbox";
+export {
+  default as RadioButtonGroup
+} from "./RadioButtonGroup/RadioButtonGroup";
 export { default as CivicStoryCard } from "./CivicStoryCard/CivicStoryCard";
 export { default as PageLayout } from "./PageLayout/PageLayout";
 export { default as PieChart } from "./PieChart/PieChart";
@@ -63,6 +76,15 @@ export {
 export {
   default as CivicCardLayoutClassic
 } from "./CivicCard/CivicCardLayoutClassic";
+export {
+  default as CivicCardLayoutVisualizationOnly
+} from "./CivicCard/CivicCardLayoutVisualizationOnly";
+export {
+  default as CivicCardLayoutSideBySide
+} from "./CivicCard/CivicCardLayoutSideBySide";
+export {
+  default as CivicCardLayoutFullWithDescriptions
+} from "./CivicCard/CivicCardLayoutFullWithDescriptions";
 
 export { default as civicFormat } from "./utils/civicFormat";
 export { default as ungroupBy } from "./utils/ungroupBy";

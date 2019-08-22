@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import shortid from "shortid";
 import { css } from "emotion";
 import CivicStoryCard from "../CivicStoryCard/CivicStoryCard";
 
@@ -28,7 +29,10 @@ const bgCard = (index, total, baseOpacity) => css`
 `;
 
 const BackgroundStoryCard = (index, total, children) => (
-  <div className={bgCard(index, total, LAST_CARD_OPACITY)} key={index}>
+  <div
+    className={bgCard(index, total, LAST_CARD_OPACITY)}
+    key={shortid.generate()}
+  >
     <CivicStoryCard footer={false} watermark={smallWatermark}>
       {children}
     </CivicStoryCard>
