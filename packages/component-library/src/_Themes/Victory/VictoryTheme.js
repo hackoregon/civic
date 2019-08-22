@@ -14,7 +14,7 @@ const civicSecondaryLightest = BrandColors.subdued.hex;
 // *
 // * Typography
 // *
-const sansSerif = "'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif";
+const sansSerif = "Roboto Condensed, Helvetica Neue, Helvetica, sans-serif";
 const letterSpacing = "normal";
 const fontSize = 12;
 const fontWeight = "normal";
