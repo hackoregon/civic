@@ -70,7 +70,7 @@ export const getActiveChapter = createSelector(
 );
 
 export const getChapterById = createSelector(
-  ["chapters.chapters", "chapters.activeChapter"],
+  ["chapters.chapters", "id"],
   (gameChapters, id) => {
     return gameChapters[id];
   }

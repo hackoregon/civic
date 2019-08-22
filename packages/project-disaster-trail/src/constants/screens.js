@@ -1,20 +1,24 @@
+// Large touch display
 export const XL = {
   label: "XL",
-  width: 2400,
-  height: 1800,
-  interfaceHeight: 700
+  width: 2400
 };
+
+// tablet or desktop
 export const LG = {
   label: "LG",
-  width: 768,
-  height: 800,
-  interfaceHeight: 250
+  width: 1440
 };
+
+export const MD = {
+  label: "MD",
+  width: 1200
+};
+
+// handheld
 export const SM = {
   label: "SM",
-  width: 320,
-  height: 799,
-  interfaceHeight: 200
+  width: 768
 };
 
 export const getScreen = () => {
@@ -25,6 +29,9 @@ export const getScreen = () => {
     screen = LG;
   }
   if (width < LG.width) {
+    screen = MD;
+  }
+  if (width < MD.width) {
     screen = SM;
   }
 
