@@ -81,7 +81,10 @@ import {
 // hygen import injection (do not remove or modify this line)
 
 import { Reducers as SandboxReducers } from "@hackoregon/civic-sandbox";
-import { CardDetailPage } from "@hackoregon/component-library";
+import {
+  CardDetailPage,
+  CardDetailPageEmbed
+} from "@hackoregon/component-library";
 
 import "./fonts.css";
 // eslint-disable-next-line import/no-named-as-default
@@ -91,7 +94,6 @@ import SandboxPage from "./components/SandboxPage";
 import PortlandCollectionPage from "./components/PortlandCollectionPage";
 import CityNotFoundPage from "./components/CityNotFoundPage";
 import StateNotFoundPage from "./components/StateNotFoundPage";
-import CardDetailPageEmbed from "./components/CardDetailPageEmbed";
 import CardRegistry from "./card-registry";
 
 // Create a store by combining all project reducers and the routing reducer
@@ -243,7 +245,9 @@ const routes = {
     },
     {
       path: "cards/:slug/embed",
-      component: CardDetailPageEmbed
+      component: params => (
+        <CardDetailPageEmbed {...params} CardRegistry={CardRegistry} />
+      )
     },
     {
       path: "sandbox",

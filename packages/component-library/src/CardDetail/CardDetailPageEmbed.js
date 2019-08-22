@@ -20,8 +20,16 @@ const CardDetailPageEmbed = ({ params, CardRegistry }) => {
 };
 
 CardDetailPageEmbed.propTypes = {
-  params: PropTypes.string,
-  CardRegistry: PropTypes.node
+  params: PropTypes.shape({ slug: PropTypes.string.isRequired }),
+  CardRegistry: PropTypes.shape({
+    entries: PropTypes.arrayOf(
+      PropTypes.shape({
+        component: PropTypes.func.isRequired,
+        project: PropTypes.string.isRequired,
+        slug: PropTypes.string.isRequired
+      })
+    )
+  })
 };
 
 CardDetailPageEmbed.displayName = "CardDetailPageEmbed";
