@@ -6,12 +6,8 @@ import { action } from "@storybook/addon-actions";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { checkA11y } from "@storybook/addon-a11y";
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { withKnobs, text, boolean, select } from "@storybook/addon-knobs";
-import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
-import FormGroup from "@material-ui/core/FormGroup";
+import { withKnobs, text, boolean, object } from "@storybook/addon-knobs";
 import FormHelperText from "@material-ui/core/FormHelperText";
-import { Checkbox } from "../src";
 import { storybookStyles } from "./storyStyles";
 import StatefulWrapper from "../src/utils/StatefulWrapper";
 import notes from "./checkbox.notes.md";
@@ -35,30 +31,126 @@ export default () =>
       </div>
     ))
     .add(
-      "Standard",
+      "Standard One",
       () => {
-        const label = text("Label", "Label", GROUP_IDS.LABELS);
+        const formLabel = text(
+          "Form label",
+          "TriMet Bus Lines",
+          GROUP_IDS.LABELS
+        );
         const disabled = boolean("Disabled", false, GROUP_IDS.STATE);
-        const options = [
-          { value: 10, label: "Ten" },
-          { value: 20, label: "Twenty" },
-          { value: 30, label: "Thirty" }
+        const optionsOne = [
+          "All",
+          "2 - Division",
+          "4 - Fessenden",
+          "6 - Martin Luther King Jr. Blvd",
+          "8 - Jackson Park/NE 15th",
+          "9 - Powell Blvd",
+          "10 - Harold St"
         ];
-        const optionsTwo = ["ten", "twenty", "thirty"];
+        const options = object("List items", optionsOne, GROUP_IDS.DATA);
         return (
-          <StatefulWrapper initialState={{ value: "ten" }}>
+          <StatefulWrapper initialState={{ value: "All" }}>
             {({ get, set }) => {
               return (
                 <Select
-                  label={label}
+                  formLabel={formLabel}
                   onChange={event => {
                     set({ value: event.target.value });
                     action("onChange")(event);
                   }}
                   value={get("value")}
                   disabled={disabled}
-                  options={optionsTwo}
+                  options={options}
                 />
+              );
+            }}
+          </StatefulWrapper>
+        );
+      },
+      { notes }
+    )
+    .add(
+      "Standard Two",
+      () => {
+        const formLabel = text(
+          "Form label",
+          "TriMet Bus Lines",
+          GROUP_IDS.LABELS
+        );
+        const disabled = boolean("Disabled", false, GROUP_IDS.STATE);
+        const optionsOne = [
+          { value: 1, label: "All" },
+          { value: 2, label: "2 - Division" },
+          { value: 4, label: "4 - Fessenden" },
+          { value: 5, label: "6 - Martin Luther King Jr. Blvd" },
+          { value: 8, label: "8 - Jackson Park/NE 15th" },
+          { value: 9, label: "9 - Powell Blvd" },
+          { value: 10, label: "10 - Harold St" }
+        ];
+        const options = object("List items", optionsOne, GROUP_IDS.DATA);
+        return (
+          <StatefulWrapper initialState={{ value: 1 }}>
+            {({ get, set }) => {
+              return (
+                <Select
+                  formLabel={formLabel}
+                  onChange={event => {
+                    set({ value: event.target.value });
+                    action("onChange")(event);
+                  }}
+                  value={get("value")}
+                  disabled={disabled}
+                  options={options}
+                />
+              );
+            }}
+          </StatefulWrapper>
+        );
+      },
+      { notes }
+    )
+    .add(
+      "Example: Form group",
+      () => {
+        const formLabel = text(
+          "Form label",
+          "TriMet Bus Lines",
+          GROUP_IDS.LABELS
+        );
+        const formHelperText = text(
+          "Form helper text",
+          "* Select a bus line",
+          GROUP_IDS.LABELS
+        );
+        const disabled = boolean("Disabled", false, GROUP_IDS.STATE);
+        const optionsOne = [
+          "All",
+          "2 - Division",
+          "4 - Fessenden",
+          "6 - Martin Luther King Jr. Blvd",
+          "8 - Jackson Park/NE 15th",
+          "9 - Powell Blvd",
+          "10 - Harold St"
+        ];
+        const options = object("List items", optionsOne, GROUP_IDS.DATA);
+        return (
+          <StatefulWrapper initialState={{ value: "All" }}>
+            {({ get, set }) => {
+              return (
+                <Fragment>
+                  <Select
+                    formLabel={formLabel}
+                    onChange={event => {
+                      set({ value: event.target.value });
+                      action("onChange")(event);
+                    }}
+                    value={get("value")}
+                    disabled={disabled}
+                    options={options}
+                  />
+                  <FormHelperText>{formHelperText}</FormHelperText>
+                </Fragment>
               );
             }}
           </StatefulWrapper>
