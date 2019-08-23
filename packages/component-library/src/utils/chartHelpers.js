@@ -1,40 +1,41 @@
 import { VictoryTheme } from "../_Themes/index";
 
-// TODO: make into function accepting theme
-const tooltipColor = VictoryTheme.tooltip.style.customHoverColor;
-const chartEvents = [
-  {
-    target: "data",
-    eventHandlers: {
-      onMouseOver: () => {
-        return [
-          {
-            target: "data",
-            mutation: props => ({
-              style: Object.assign(props.style, { fill: tooltipColor })
-            })
-          },
-          {
-            target: "labels",
-            mutation: () => ({ active: true })
-          }
-        ];
-      },
-      onMouseOut: () => {
-        return [
-          {
-            target: "data",
-            mutation: () => {}
-          },
-          {
-            target: "labels",
-            mutation: () => ({ active: false })
-          }
-        ];
+const chartEvents = (theme = VictoryTheme) => {
+  const tooltipColor = theme.tooltip.style.customHoverColor;
+  return [
+    {
+      target: "data",
+      eventHandlers: {
+        onMouseOver: () => {
+          return [
+            {
+              target: "data",
+              mutation: props => ({
+                style: Object.assign(props.style, { fill: tooltipColor })
+              })
+            },
+            {
+              target: "labels",
+              mutation: () => ({ active: true })
+            }
+          ];
+        },
+        onMouseOut: () => {
+          return [
+            {
+              target: "data",
+              mutation: () => {}
+            },
+            {
+              target: "labels",
+              mutation: () => ({ active: false })
+            }
+          ];
+        }
       }
     }
-  }
-];
+  ];
+};
 
 function getDefaultDomain(data, dataKey, dataLabel) {
   const xValues = data.map(value => value[dataKey]);

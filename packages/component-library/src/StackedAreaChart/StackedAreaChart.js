@@ -103,7 +103,7 @@ const StackedAreaChart = ({
           size={d => d.size}
           style={scatterPlotStyle}
           title="Scatter Plot"
-          events={chartEvents}
+          events={chartEvents(theme)}
           labelComponent={
             <VictoryTooltip
               x={325}

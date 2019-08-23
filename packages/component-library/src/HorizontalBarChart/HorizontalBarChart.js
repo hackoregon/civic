@@ -174,7 +174,7 @@ const HorizontalBarChart = ({
               }))}
               x="sortOrder"
               y="dataValue"
-              events={chartEvents}
+              events={chartEvents(theme)}
               animate
             />
           )}
@@ -205,7 +205,7 @@ const HorizontalBarChart = ({
               title="Horizontal Bar Chart"
               x="sortOrder"
               y="dataValue"
-              events={chartEvents}
+              events={chartEvents(theme)}
               animate
             />
           )}
@@ -223,7 +223,7 @@ const HorizontalBarChart = ({
                     }))}
                     x="dataKey"
                     y="dataValue"
-                    events={chartEvents}
+                    events={chartEvents(theme)}
                     key={shortid.generate()}
                     labels={arr.map(
                       d => `${d[dataSeriesKey]}: ${d[dataValue]}`

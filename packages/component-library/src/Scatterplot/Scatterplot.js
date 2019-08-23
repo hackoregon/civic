@@ -145,7 +145,7 @@ const Scatterplot = ({
               series: d[dataSeries],
               ...(size && { bubbleSize: d[size.key] })
             }))}
-            events={chartEvents}
+            events={chartEvents(theme)}
             labelComponent={
               <VictoryTooltip
                 x={325}
