@@ -13,6 +13,7 @@ import {
 import { PieChart } from "../src";
 import { VictoryCrazyTheme, VictoryTheme } from "../src/_Themes/index";
 import { colors as categoricalColors } from "../src/_Themes/Victory/VictoryCrazyTheme";
+import { getKeyNames } from "./shared";
 import notes from "./pieChart.notes.md";
 
 const GROUP_IDS = {
@@ -91,13 +92,15 @@ export default () =>
           ",",
           GROUP_IDS.CUSTOM
         );
+        const themes = {
+          VictoryTheme,
+          VictoryCrazyTheme
+        };
+        const themeOptions = getKeyNames(themes);
         const theme = options(
-          "Choose theme",
-          {
-            VictoryCrazyTheme,
-            "Default - VictoryTheme": VictoryTheme
-          },
-          VictoryCrazyTheme,
+          "Visualization theme",
+          themeOptions,
+          "VictoryCrazyTheme",
           { display: "select" },
           GROUP_IDS.CUSTOM
         );
@@ -114,7 +117,7 @@ export default () =>
             innerRadius={innerRadius}
             halfDoughnut={halfDoughnut}
             useLegend={useLegend}
-            theme={theme}
+            theme={(name => themes[name])(theme)}
           />
         );
       },
