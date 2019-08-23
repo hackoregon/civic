@@ -10,7 +10,7 @@ import { withKnobs, text, boolean, object } from "@storybook/addon-knobs";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import { storybookStyles } from "./storyStyles";
 import StatefulWrapper from "../src/utils/StatefulWrapper";
-import notes from "./checkbox.notes.md";
+import notes from "./select.notes.md";
 import Select from "../src/Select/Select";
 
 const GROUP_IDS = {
