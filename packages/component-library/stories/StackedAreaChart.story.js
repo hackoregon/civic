@@ -269,7 +269,7 @@ export default () =>
         const theme = options(
           "Visualization theme",
           themeOptions,
-          "VictoryCrazyTheme",
+          "VictoryTheme",
           { display: "select" },
           GROUP_IDS.CUSTOM
         );
