@@ -7,7 +7,7 @@ import {
   CivicStoryCard,
   Scatterplot,
   Collapsable,
-  CivicVictoryTheme,
+  VictoryTheme,
   DataTable,
   ChartTitle
 } from "@hackoregon/component-library";
@@ -108,9 +108,7 @@ const legendComponent = age => (
           cx="5"
           cy="5"
           r="5"
-          fill={
-            CivicVictoryTheme.civic.group.colorScale[ageLabels[age].category]
-          }
+          fill={VictoryTheme.group.colorScale[ageLabels[age].category]}
         />
       </svg>
       <span
