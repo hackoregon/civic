@@ -9,7 +9,6 @@ install:
 - npm i -g rimraf
 - npm i -g cross-env
 - yarn bootstrap
-- yarn run configure
 matrix:
   include:
 #  - env: SUITE=2017
