@@ -1,13 +1,15 @@
 /** @jsx jsx */
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { jsx } from "@emotion/core";
 import { has } from "lodash";
 import PropTypes from "prop-types";
-import FormControl from "@material-ui/core/FormControl";
 import MaterialSelect from "@material-ui/core/Select";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
-import MenuItem from "@material-ui/core/MenuItem";
-import { FormLabel } from "@material-ui/core";
+import {
+  FormControl,
+  OutlinedInput,
+  MenuItem,
+  FormLabel,
+  FormHelperText
+} from "@material-ui/core";
 
 const Select = ({
   autoWidth,
@@ -17,6 +19,7 @@ const Select = ({
   value,
   variant,
   formLabel,
+  formHelperText,
   disabled,
   options
 }) => {
@@ -44,6 +47,7 @@ const Select = ({
           <MenuItem value={item.value}>{item.label}</MenuItem>
         ))}
       </MaterialSelect>
+      <FormHelperText>{formHelperText}</FormHelperText>
     </FormControl>
   );
 };
@@ -58,6 +62,7 @@ Select.propTypes = {
   value: PropTypes.string,
   variant: PropTypes.string,
   formLabel: PropTypes.string,
+  formHelperText: PropTypes.string,
   disabled: PropTypes.bool,
   options: PropTypes.oneOf(
     PropTypes.arrayOf(PropTypes.string),
@@ -74,6 +79,7 @@ Select.defaultProps = {
   value: "List item",
   variant: "outlined",
   formLabel: "Label",
+  formHelperText: "",
   disabled: false
 };
 
