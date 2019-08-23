@@ -36,7 +36,6 @@ export { default as Placeholder } from "./Placeholder/Placeholder";
 export { default as Scatterplot } from "./Scatterplot/Scatterplot";
 export { default as Logo } from "./Logo/Logo";
 export { default as isClient } from "./utils/isClient";
-export { default as CivicVictoryTheme } from "./VictoryTheme/VictoryThemeIndex";
 export { default as CollectionHero } from "./Hero/CollectionHero";
 export { default as BaseMap } from "./BaseMap/BaseMap";
 export { default as ScatterPlotMap } from "./ScatterPlotMap/ScatterPlotMap";
@@ -89,3 +88,4 @@ export {
 export { default as civicFormat } from "./utils/civicFormat";
 export { default as ungroupBy } from "./utils/ungroupBy";
 export { default as DemoJSONLoader } from "./DemoJSONLoader/DemoJSONLoader";
+export { default as Badge } from "./Badge/Badge";
