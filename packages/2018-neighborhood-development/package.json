@@ -33,7 +33,7 @@
     "lint": "eslint src"
   },
   "dependencies": {
-    "@hackoregon/component-library": "^3.0.0",
+    "@hackoregon/component-library": "^4.0.0",
     "@hackoregon/mock-wrapper": "^3.0.0",
     "axios": "^0.18.0",
     "compression": "^1.6.2",
