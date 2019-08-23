@@ -12,7 +12,6 @@ import {
 } from "@storybook/addon-knobs";
 import { PieChart } from "../src";
 import { VictoryCrazyTheme, VictoryTheme } from "../src/_Themes/index";
-import { colors as categoricalColors } from "../src/_Themes/Victory/VictoryCrazyTheme";
 import { getKeyNames } from "./shared";
 import notes from "./pieChart.notes.md";
 
@@ -86,12 +85,6 @@ export default () =>
         const chartHeight = number("Chart height", 350, {}, GROUP_IDS.CUSTOM);
         const chartWidth = number("Chart width", 650, {}, GROUP_IDS.CUSTOM);
         const innerRadius = number("Inner radius", 50, {}, GROUP_IDS.CUSTOM);
-        const colors = array(
-          "Colors",
-          categoricalColors,
-          ",",
-          GROUP_IDS.CUSTOM
-        );
         const themes = {
           VictoryTheme,
           VictoryCrazyTheme
@@ -100,10 +93,11 @@ export default () =>
         const theme = options(
           "Visualization theme",
           themeOptions,
-          "VictoryCrazyTheme",
+          "VictoryTheme",
           { display: "select" },
-          GROUP_IDS.CUSTOM
+          GROUP_IDS.DESIGN
         );
+        const colors = array("Colors", [], ",", GROUP_IDS.DESIGN);
         return (
           <PieChart
             title={title}

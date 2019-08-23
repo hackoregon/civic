@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { VictoryPie, VictoryLabel, VictoryContainer } from "victory";
 import ChartContainer from "../ChartContainer";
-import { VictoryTheme, VisualizationColors } from "../_Themes/index";
+import { VictoryTheme } from "../_Themes/index";
 import SimpleLegend from "../SimpleLegend";
 import DataChecker from "../utils/DataChecker";
 
@@ -29,6 +29,7 @@ const PieChart = props => {
   const adjustedHeight = halfDoughnut ? height / 2 : height;
   const legendLabels = data.map(value => ({ name: value[dataLabel] }));
   const legendProps = {};
+  const colorScale = colors.length ? colors : theme.group.colorScale;
 
   if (useLegend) {
     legendProps.labels = () => null;
@@ -47,7 +48,7 @@ const PieChart = props => {
           <SimpleLegend
             className="legend"
             legendData={legendLabels}
-            colorScale={colors}
+            colorScale={colorScale}
           />
         )}
         <VictoryPie
@@ -55,7 +56,7 @@ const PieChart = props => {
           height={height}
           data={data}
           innerRadius={innerRadius}
-          colorScale={colors}
+          colorScale={colorScale}
           theme={theme}
           animate={{
             duration: 1000
@@ -100,7 +101,7 @@ PieChart.defaultProps = {
   dataLabel: "x",
   dataValue: "y",
   theme: VictoryTheme,
-  colors: VisualizationColors.VictoryColors
+  colors: []
 };
 
 export default PieChart;
