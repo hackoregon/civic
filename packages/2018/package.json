@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/hackoregon/civic#readme",
   "dependencies": {
+    "@hackoregon/2019-housing": "^1.0.0",
     "@hackoregon/2019-elections": "^1.0.0",
     "@hackoregon/2019-education": "^1.0.0",
     "@emotion/core": "^10.0.10",
