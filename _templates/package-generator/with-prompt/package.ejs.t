@@ -36,7 +36,7 @@ to: packages/<%=year%>-<%=packageTitle%>/package.json
   },
   "dependencies": {
     "@emotion/core": "^10.0.10",
-    "@hackoregon/component-library": "^3.0.0",
+    "@hackoregon/component-library": "^4.0.0",
     "@hackoregon/dev-server": "^3.0.0",
     "@hackoregon/mock-wrapper": "^3.0.0",
     "@hackoregon/webpack-common": "^3.0.0",
