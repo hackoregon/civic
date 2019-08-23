@@ -1,7 +1,7 @@
 import { VictoryTheme } from "../_Themes/index";
 
+// TODO: make into function accepting theme
 const tooltipColor = VictoryTheme.tooltip.style.customHoverColor;
-
 const chartEvents = [
   {
     target: "data",
@@ -89,7 +89,7 @@ function getDefaultDataSeriesLabels(data, series) {
   return uniqueCategories.map(cat => ({ category: cat, label: cat }));
 }
 
-function getDefaultFillStyle(dataSeriesLabel) {
+function getDefaultFillStyle(dataSeriesLabel, theme = VictoryTheme) {
   const dataSeriesCategories =
     dataSeriesLabel && dataSeriesLabel.length
       ? dataSeriesLabel.map(series => series.category)
@@ -97,32 +97,32 @@ function getDefaultFillStyle(dataSeriesLabel) {
   return {
     data: {
       fill: d => {
-        if (!dataSeriesCategories) return VictoryTheme.group.colorScale[0];
+        if (!dataSeriesCategories) return theme.group.colorScale[0];
         const idx = dataSeriesCategories.findIndex(
           series => series === d.series
         );
-        return VictoryTheme.group.colorScale[idx];
+        return theme.group.colorScale[idx];
       }
     }
   };
 }
 
-function getDefaultLineStyle(idx) {
+function getDefaultLineStyle(idx, theme = VictoryTheme) {
   return {
-    data: { stroke: VictoryTheme.group.colorScale[idx] }
+    data: { stroke: theme.group.colorScale[idx] }
   };
 }
 
-function getDefaultAreaStyle(idx) {
+function getDefaultAreaStyle(idx, theme = VictoryTheme) {
   return {
-    data: { fill: VictoryTheme.group.colorScale[idx] }
+    data: { fill: theme.group.colorScale[idx] }
   };
 }
 
-const categoricalColors = dataLength => {
+const categoricalColors = (dataLength, theme = VictoryTheme) => {
   const colorScheme = [];
   for (let i = 0; i < dataLength; i += 1) {
-    colorScheme.push(VictoryTheme.group.colorScale[i]);
+    colorScheme.push(theme.group.colorScale[i]);
   }
   return colorScheme;
 };
