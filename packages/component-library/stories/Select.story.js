@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { storiesOf } from "@storybook/react";
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -7,7 +7,6 @@ import { action } from "@storybook/addon-actions";
 import { checkA11y } from "@storybook/addon-a11y";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { withKnobs, text, boolean, object } from "@storybook/addon-knobs";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import { storybookStyles } from "./storyStyles";
 import StatefulWrapper from "../src/utils/StatefulWrapper";
 import notes from "./select.notes.md";
@@ -111,7 +110,7 @@ export default () =>
       { notes }
     )
     .add(
-      "Example: Form group",
+      "Custom",
       () => {
         const formLabel = text(
           "Form label",
@@ -138,19 +137,17 @@ export default () =>
           <StatefulWrapper initialState={{ value: "All" }}>
             {({ get, set }) => {
               return (
-                <Fragment>
-                  <Select
-                    formLabel={formLabel}
-                    onChange={event => {
-                      set({ value: event.target.value });
-                      action("onChange")(event);
-                    }}
-                    value={get("value")}
-                    disabled={disabled}
-                    options={options}
-                  />
-                  <FormHelperText>{formHelperText}</FormHelperText>
-                </Fragment>
+                <Select
+                  formLabel={formLabel}
+                  formHelperText={formHelperText}
+                  onChange={event => {
+                    set({ value: event.target.value });
+                    action("onChange")(event);
+                  }}
+                  value={get("value")}
+                  disabled={disabled}
+                  options={options}
+                />
               );
             }}
           </StatefulWrapper>

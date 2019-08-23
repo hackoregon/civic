@@ -13,8 +13,8 @@ These properties can be set in the Standard story:
 - List items:  
   The list items can be specified as names in an array, as shown in the Standard One story. The list items can also be specified as an array of objects of value and name, as shown in the Standard Two story.
 
-## Example: Form group
+## Custom
 
-This example shows the addition of helper text. In addition to the properties shown in the Standard stories, you can use either of the data formats and set the property for:
+The Custom story shows all possible properties that can be passed to the Select component for customization in the CIVIC platform. They include the properties in the Standard stories, including either data format, plus:
 
 - Form helper text
