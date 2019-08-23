@@ -1,4 +1,0 @@
---colors
---recursive
---require ./tools/testSetup
---ui bdd

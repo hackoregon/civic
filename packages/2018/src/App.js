@@ -50,12 +50,6 @@ import {
 } from "@hackoregon/2018-example-farmers-markets";
 
 import {
-  Routes as Housing2019Routes,
-  Reducers as Housing2019Reducers,
-  App as Housing2019App
-} from "@hackoregon/2019-housing";
-
-import {
   Routes as Template2019Routes,
   Reducers as Template2019Reducers,
   App as Template2019App
@@ -110,7 +104,6 @@ const configureStore = (initialState, history) => {
       package2018ExampleFarmersMarkets: FarmersMarketsReducers(),
       packageCivicSandbox: SandboxReducers(),
       // Temporarily Hidden 2019 Pages ⬇️
-      package2019Housing: Housing2019Reducers(),
       package2019Template: Template2019Reducers(),
       package2019Education: Education2019Reducers(),
       package2019Elections: Elections2019Reducers(),
@@ -135,7 +128,6 @@ const configureStore = (initialState, history) => {
         "@hackoregon/2018-example-farmers-markets",
         "@hackoregon/civic-sandbox",
         // Temporarily Hidden 2019 Pages ⬇️
-        "@hackoregon/2019-housing",
         "@hackoregon/2019-template",
         "@hackoregon/2019-education",
         "@hackoregon/2019-elections",
@@ -153,7 +145,6 @@ const configureStore = (initialState, history) => {
           package2018ExampleFarmersMarkets: require("@hackoregon/2018-example-farmers-markets").Reducers(),
           packageCivicSandbox: require("@hackoregon/civic-sandbox").Reducers(),
           // Temporarily Hidden 2019 Pages ⬇️
-          package2019Housing: require("@hackoregon/2019-housing").Reducers(),
           package2019Template: require("@hackoregon/2019-template").Reducers(),
           package2019Education: require("@hackoregon/2019-education").Reducers(),
           package2019Elections: require("@hackoregon/2019-elections").Reducers(),
@@ -251,11 +242,6 @@ const routes = {
     {
       path: "2019",
       childRoutes: [
-        {
-          path: "housing",
-          component: Housing2019App,
-          childRoutes: Housing2019Routes(store)
-        },
         {
           path: "template",
           component: Template2019App,
