@@ -29,7 +29,7 @@ CardDetailPageEmbed.propTypes = {
         slug: PropTypes.string.isRequired
       })
     )
-  })
+  }).isRequired
 };
 
 CardDetailPageEmbed.displayName = "CardDetailPageEmbed";

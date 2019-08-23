@@ -64,8 +64,11 @@ export class ExploreUrbanCampsiteSweeps extends React.Component {
             <div>
               <p>{contextualDesc}</p>
               <h2>{timer}</h2>
-              <BaseMap initialLongitude={LONG} initialLatitude={LAT}>
+              <BaseMap
+                initialLongitude={LONG}
+                initialLatitude={LAT}
                 initialZoom={ZOOM}
+              >
                 {scatterplot}
               </BaseMap>
             </div>

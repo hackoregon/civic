@@ -36,7 +36,7 @@ CardDetailPage.propTypes = {
         slug: PropTypes.string.isRequired
       })
     )
-  })
+  }).isRequired
 };
 
 CardDetailPage.displayName = "CardDetailPage";
