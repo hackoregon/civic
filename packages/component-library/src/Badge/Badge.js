@@ -20,7 +20,7 @@ function Badge({ children, value, color }) {
 
 Badge.defaultProps = {
   value: 42,
-  color: "red"
+  color: "#AAA4AB"
 };
 
 Badge.propTypes = {
