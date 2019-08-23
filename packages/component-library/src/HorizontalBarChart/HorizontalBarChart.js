@@ -42,7 +42,8 @@ const HorizontalBarChart = ({
   hundredPercentData,
   dataSeriesKey,
   dataSeriesLabel,
-  legendComponent
+  legendComponent,
+  theme
 }) => {
   const groupedDataIfStacked = () => {
     if (stacked) {
@@ -69,8 +70,8 @@ const HorizontalBarChart = ({
   const padding = minimalist
     ? { left: 115, right: 50, bottom: 25, top: 40 }
     : { left: 115, right: 50, bottom: 50, top: 70 };
-  const barHeight = VictoryTheme.bar.style.data.width;
-  const spaceHeight = VictoryTheme.bar.style.data.padding * 2;
+  const barHeight = theme.bar.style.data.width;
+  const spaceHeight = theme.bar.style.data.padding * 2;
   const additionalHeight = padding.bottom + padding.top;
   const minValue = Math.min(0, ...data.map(d => d[dataValue]));
 
@@ -112,7 +113,7 @@ const HorizontalBarChart = ({
           domain={domain}
           domainPadding={{ x: 11, y: 20 }}
           padding={padding}
-          theme={VictoryTheme}
+          theme={theme}
         >
           <VictoryAxis
             style={{
@@ -134,7 +135,7 @@ const HorizontalBarChart = ({
           {!minimalist && (
             <VictoryPortal>
               <VictoryLabel
-                style={{ ...VictoryTheme.axisLabel.style }}
+                style={{ ...theme.axisLabel.style }}
                 text={yLabel}
                 textAnchor="middle"
                 title="Y Axis Label"
@@ -146,7 +147,7 @@ const HorizontalBarChart = ({
           )}
           <VictoryPortal>
             <VictoryLabel
-              style={{ ...VictoryTheme.axisLabel.style }}
+              style={{ ...theme.axisLabel.style }}
               text={xLabel}
               textAnchor={minimalist ? "middle" : "end"}
               title="X Axis Label"
@@ -162,7 +163,7 @@ const HorizontalBarChart = ({
                 <NegativeAwareTickLabel
                   x={0}
                   orientation="left"
-                  theme={VictoryTheme}
+                  theme={theme}
                 />
               }
               domainPadding={0}
@@ -187,7 +188,7 @@ const HorizontalBarChart = ({
                   orientation="bottom"
                   pointerLength={0}
                   cornerRadius={0}
-                  theme={VictoryTheme}
+                  theme={theme}
                 />
               }
               domainPadding={0}
@@ -235,7 +236,7 @@ const HorizontalBarChart = ({
                         orientation="bottom"
                         pointerLength={0}
                         cornerRadius={0}
-                        theme={VictoryTheme}
+                        theme={theme}
                       />
                     }
                     animate
@@ -285,7 +286,8 @@ HorizontalBarChart.propTypes = {
   hundredPercentData: PropTypes.bool,
   dataSeriesKey: PropTypes.string,
   dataSeriesLabel: PropTypes.shape({}),
-  legendComponent: PropTypes.func
+  legendComponent: PropTypes.func,
+  theme: PropTypes.shape({})
 };
 
 HorizontalBarChart.defaultProps = {
@@ -305,7 +307,8 @@ HorizontalBarChart.defaultProps = {
   hundredPercentData: false,
   dataSeriesKey: null,
   dataSeriesLabel: {},
-  legendComponent: null
+  legendComponent: null,
+  theme: VictoryTheme
 };
 
 export default HorizontalBarChart;
