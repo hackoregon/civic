@@ -12,6 +12,7 @@ import {
 import { StackedAreaChart, civicFormat, SimpleLegend } from "../src";
 import { getKeyNames } from "./shared";
 import notes from "./stackedAreaChart.notes.md";
+import { VictoryCrazyTheme, VictoryTheme } from "../src/_Themes/index";
 
 const GROUP_IDS = {
   LABELS: "Labels",
@@ -22,7 +23,7 @@ const GROUP_IDS = {
 const xFormatterOptions = getKeyNames(civicFormat);
 const yFormatterOptions = getKeyNames(civicFormat);
 
-const customLegend = legendData => {
+const customLegend = (legendData, theme) => {
   const legendStyle = css`
     font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
     font-size: 14px;
@@ -39,7 +40,7 @@ const customLegend = legendData => {
 
   return (
     <div className={legendContainer}>
-      <SimpleLegend legendData={legendData} />
+      <SimpleLegend legendData={legendData} theme={theme} />
       <legend className={legendStyle}>
         <span
           className={css`
@@ -260,6 +261,19 @@ export default () =>
 
         const domain = object("Domain", sampleDomain, GROUP_IDS.CUSTOM);
 
+        const themes = {
+          VictoryTheme,
+          VictoryCrazyTheme
+        };
+        const themeOptions = getKeyNames(themes);
+        const theme = options(
+          "Visualization theme",
+          themeOptions,
+          "VictoryCrazyTheme",
+          { display: "select" },
+          GROUP_IDS.CUSTOM
+        );
+
         return (
           <StackedAreaChart
             data={data}
@@ -275,6 +289,7 @@ export default () =>
             xNumberFormatter={x => civicFormat[optionSelectX](x)}
             yNumberFormatter={y => civicFormat[optionSelectY](y)}
             legendComponent={customLegend}
+            theme={(name => themes[name])(theme)}
           />
         );
       },
