@@ -1,51 +1,51 @@
 {
   "name": "@hackoregon/civic",
+  "private": true,
   "description": "Civic is an open source project of Hack Oregon, built entirely by volunteers committed to neutral, nonpartisan exploration of civic analytics.",
-  "author": "Hack Oregon",
-  "license": "MIT",
+  "keywords": [
+    "boilerplate",
+    "hackoregon",
+    "lerna",
+    "monorepo",
+    "react",
+    "react-router",
+    "redux",
+    "webpack"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/hackoregon/civic"
   },
-  "keywords": [
-    "react",
-    "react-router",
-    "webpack",
-    "redux",
-    "boilerplate",
-    "monorepo",
-    "lerna",
-    "hackoregon"
-  ],
+  "license": "MIT",
+  "author": "Hack Oregon",
   "workspaces": [
     "packages/*"
   ],
-  "private": true,
   "scripts": {
     "bootstrap": "yarn install --frozen-lockfile && yarn --cwd ./packages/component-library/ build && yarn --cwd ./packages/mock-wrapper/ build",
     "build": "lerna run build",
-    "new-card": "yarn card",
-    "new-card:local-data": "yarn card:local-data",
-    "new-package": "yarn hygen package-generator with-prompt && yarn",
-    "card": "yarn hygen api-story-card with-prompt && yarn",
-    "card:local-data": "yarn hygen local-data-story-card with-prompt && yarn",
-    "configure": "lerna run configure",
-    "publish-patch": "lerna publish bump patch --yes",
-    "publish-minor": "lerna publish bump minor --yes",
-    "publish-major": "lerna publish bump major --yes",
-    "publish-canary": "lerna publish --canary --yes --preid ci --npm-tag=ci -m '(🐦ci-canary): publish %s'",
+    "card": "yarn new-card",
+    "card:local-data": "yarn new-card:local-data",
     "clean": "lerna clean && rimraf node_modules",
-    "watch": "node scripts/watch",
-    "start": "node scripts/start",
+    "configure": "lerna run configure",
     "deploy-storybook": "NODE_OPTIONS=--max_old_space_size=4096 BABEL_ENV=esm storybook-to-ghpages",
+    "eslint-check": "eslint --print-config . | eslint-config-prettier-check",
     "in": "lerna run --scope",
     "lint": "lerna run lint --no-bail",
     "lint:fix": "lerna run lint --no-bail -- --fix",
+    "new-card": "yarn hygen api-story-card with-prompt && yarn",
+    "new-card:local-data": "yarn hygen local-data-story-card with-prompt && yarn",
+    "new-package": "yarn hygen package-generator with-prompt && yarn",
+    "pretty": "prettier --write \"./**/*.{js,jsx,css,md}\"",
+    "publish-canary": "lerna publish --canary --yes --preid ci --npm-tag=ci -m '(🐦ci-canary): publish %s'",
+    "publish-major": "lerna publish bump major --yes",
+    "publish-minor": "lerna publish bump minor --yes",
+    "publish-patch": "lerna publish bump patch --yes",
+    "start": "node scripts/start",
     "storybook": "BABEL_ENV=esm start-storybook -p 6006",
     "test": "lerna exec yarn test --no-bail",
     "travis": "make travis",
-    "pretty": "prettier --write \"./**/*.{js,jsx,css,md}\"",
-    "eslint-check": "eslint --print-config . | eslint-config-prettier-check"
+    "watch": "node scripts/watch"
   },
   "husky": {
     "hooks": {
@@ -53,16 +53,17 @@
     }
   },
   "lint-staged": {
+    "*.{css,md,json}": [
+      "prettier --write",
+      "git add"
+    ],
     "*.{js,jsx}": [
       "prettier --write",
       "eslint --fix",
       "git add"
-    ],
-    "*.{css,md,json}": [
-      "prettier --write",
-      "git add"
     ]
   },
+  "dependencies": {},
   "devDependencies": {
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.0",
@@ -139,6 +140,5 @@
     "webpack-hot-middleware": "^2.24.3",
     "webpack-md5-hash": "^0.0.6",
     "webpack-node-externals": "^1.5.4"
-  },
-  "dependencies": {}
+  }
 }
