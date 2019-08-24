@@ -24,6 +24,8 @@
   "scripts": {
     "bootstrap": "yarn install --frozen-lockfile && yarn --cwd ./packages/component-library/ build && yarn --cwd ./packages/mock-wrapper/ build",
     "build": "lerna run build",
+    "new-card": "yarn card",
+    "new-card:local-data": "yarn card:local-data",
     "new-package": "yarn hygen package-generator with-prompt && yarn",
     "card": "yarn hygen api-story-card with-prompt && yarn",
     "card:local-data": "yarn hygen local-data-story-card with-prompt && yarn",
