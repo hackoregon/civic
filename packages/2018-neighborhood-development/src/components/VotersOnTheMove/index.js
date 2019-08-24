@@ -1,7 +1,8 @@
-import React from "react";
+import { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { css } from "emotion";
+/** @jsx jsx */
+import { css, jsx } from "@emotion/core";
 
 import {
   CivicStoryCard,
@@ -97,9 +98,9 @@ const tableData = {
 };
 
 const legendComponent = age => (
-  <div className={legendStyle}>
+  <div css={legendStyle}>
     <span
-      className={css`
+      css={css`
         margin-left: 5px;
       `}
     >
@@ -112,7 +113,7 @@ const legendComponent = age => (
         />
       </svg>
       <span
-        className={css`
+        css={css`
           margin-left: 5px;
         `}
       >
@@ -122,7 +123,7 @@ const legendComponent = age => (
   </div>
 );
 
-export class VotersOnTheMove extends React.Component {
+export class VotersOnTheMove extends Component {
   componentDidMount() {
     const { init } = this.props;
     init();
@@ -189,13 +190,13 @@ export class VotersOnTheMove extends React.Component {
                     title="Distance and Direction of Moves Within Portland"
                     subtitle="Distance in miles and direction of travel for 2000 randomly sampled moves within Portland"
                   />
-                  <div className={smallMultiples}>
-                    <div className={chartColumn}>
+                  <div css={smallMultiples}>
+                    <div css={chartColumn}>
                       <h2>Moves Towards City Center</h2>
                       {voterScatterplot(18, "center")}
                       {voterScatterplot(26, "center")}
                     </div>
-                    <div className={chartColumn}>
+                    <div css={chartColumn}>
                       <h2>Moves Away From City Center</h2>
                       {voterScatterplot(18, "away")}
                       {voterScatterplot(26, "away")}
@@ -208,13 +209,13 @@ export class VotersOnTheMove extends React.Component {
           <Collapsable.Section hidden>
             <div>
               {votersOnTheMove && awayVotersOnTheMove && (
-                <div className={smallMultiples}>
-                  <div className={chartColumn}>
+                <div css={smallMultiples}>
+                  <div css={chartColumn}>
                     {voterScatterplot(33, "center")}
                     {voterScatterplot(40, "center")}
                     {voterScatterplot(50, "center")}
                   </div>
-                  <div className={chartColumn}>
+                  <div css={chartColumn}>
                     {voterScatterplot(33, "away")}
                     {voterScatterplot(40, "away")}
                     {voterScatterplot(50, "away")}
