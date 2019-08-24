@@ -76,7 +76,7 @@
     "colors": "^1.1.2",
     "coveralls": "^3.0.3",
     "css-loader": "^2.1.1",
-    "enzyme": "^3.10.0",
+    "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.11.2",
     "eslint": "^5.15.1",
     "jest": "^24.5.0",
