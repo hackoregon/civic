@@ -8,7 +8,7 @@ import { isLoaded } from "reduxful";
 import { resourceShape } from "reduxful/react-addons";
 import { CivicCard } from "@hackoregon/component-library";
 
-import <%=StoryCardName%>Meta from "./<%=storyCardName%>Meta";
+import <%=storyCardName%>Meta from "./<%=storyCardName%>Meta";
 import api from "../../state/<%=slug%>/api";
 
 const <%=StoryCardName%> = ({ init, data, Layout }) => {
@@ -26,7 +26,7 @@ const <%=StoryCardName%> = ({ init, data, Layout }) => {
 
   return (
     <CivicCard
-      cardMeta={<%=StoryCardName%>Meta}
+      cardMeta={<%=storyCardName%>Meta}
       isLoading={loading}
       data={data}
       Layout={Layout}
