@@ -22,8 +22,7 @@ const <%=StoryCardName%> = ({ init, data, Layout }) => {
     */
   ]);
 
-  // FIXME: mockRidershipOverTime should be a variable
-  const loading = !isLoaded(data.mockRidershipOverTime);
+  const loading = !isLoaded(data.<%=aPI%>);
 
   return (
     <CivicCard
@@ -39,15 +38,14 @@ const <%=StoryCardName%> = ({ init, data, Layout }) => {
 
 <%=StoryCardName%>.propTypes = {
   init: PropTypes.func,
-  data: PropTypes.shape({ mockRidershipOverTime: resourceShape }),
+  data: PropTypes.shape({ <%=aPI%>: resourceShape }),
   Layout: PropTypes.func
 };
 
 export default connect(
   state => ({
     data: {
-      // FIXME: mockRidershipOverTime should be a variable
-      mockRidershipOverTime: api.selectors.getMockRidershipData(
+      <%=aPI%>: api.selectors.get<%=API%>Data(
         state.package<%= h.changeCase.pascalCase(package)%> || state
       )
     }
@@ -55,8 +53,7 @@ export default connect(
   }),
   dispatch => ({
     init() {
-      // FIXME: mockRidershipOverTime should be a variable
-      dispatch(api.actionCreators.getMockRidershipData());
+      dispatch(api.actionCreators.get<%=API%>Data());
     }
   })
 )(<%=StoryCardName%>);
