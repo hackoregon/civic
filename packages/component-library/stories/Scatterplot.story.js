@@ -13,6 +13,7 @@ import { Scatterplot, SimpleLegend } from "../src";
 import notes from "./scatterplot.notes.md";
 import civicFormat from "../src/utils/civicFormat";
 import { getKeyNames } from "./shared";
+import { VictoryCrazyTheme, VictoryTheme } from "../src/_Themes/index";
 
 const GROUP_IDS = {
   LABELS: "Labels",
@@ -20,7 +21,7 @@ const GROUP_IDS = {
   CUSTOM: "Custom"
 };
 
-const customLegend = legendData => {
+const customLegend = (legendData, theme) => {
   const legendStyle = css`
     font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
     font-size: 14px;
@@ -37,7 +38,7 @@ const customLegend = legendData => {
 
   return (
     <div className={legendContainer}>
-      <SimpleLegend legendData={legendData} />
+      <SimpleLegend legendData={legendData} theme={theme} />
       <legend className={legendStyle}>
         <span
           className={css`
@@ -260,6 +261,18 @@ export default () =>
         const domain = object("Domain", sampleDomain, GROUP_IDS.CUSTOM);
         const invertX = boolean("Invert X", false, GROUP_IDS.CUSTOM);
         const invertY = boolean("Invert Y", false, GROUP_IDS.CUSTOM);
+        const themes = {
+          VictoryTheme,
+          VictoryCrazyTheme
+        };
+        const themeOptions = getKeyNames(themes);
+        const theme = options(
+          "Visualization theme",
+          themeOptions,
+          "VictoryTheme",
+          { display: "select" },
+          GROUP_IDS.CUSTOM
+        );
 
         return (
           <Scatterplot
@@ -279,6 +292,7 @@ export default () =>
             invertX={invertX}
             invertY={invertY}
             legendComponent={customLegend}
+            theme={(name => themes[name])(theme)}
           />
         );
       },

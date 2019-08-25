@@ -18,13 +18,15 @@ const cardMetaObjectProperties = {
     ])
   ),
   resources: PropTypes.arrayOf(
-    PropTypes.oneOfType([
-      PropTypes.shape({ section: PropTypes.string }),
-      PropTypes.shape({
-        link: PropTypes.string /* url */,
-        description: PropTypes.string
-      })
-    ])
+    PropTypes.shape({
+      heading: PropTypes.string,
+      items: PropTypes.arrayOf(
+        PropTypes.shape({
+          link: PropTypes.string,
+          description: PropTypes.string
+        })
+      )
+    })
   ),
   authors: PropTypes.arrayOf(PropTypes.string /* image url */)
 };

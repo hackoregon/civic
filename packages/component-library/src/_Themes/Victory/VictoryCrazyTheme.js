@@ -24,7 +24,7 @@ const civicCategoricalColor3 = "yellow";
 const civicCategoricalColor4 = "green";
 const civicCategoricalColor5 = "blue";
 
-const colors = [
+export const colors = [
   civicCategoricalColor1,
   civicCategoricalColor2,
   civicCategoricalColor3,
@@ -36,7 +36,7 @@ const colors = [
 // *
 // * Typography
 // *
-const sansSerif = "'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif";
+const comicSans = "Comic Sans MS, cursive, sans-serif";
 const letterSpacing = "normal";
 const fontSize = 12;
 const fontWeight = "normal";
@@ -61,7 +61,7 @@ const tooltipProps = {
 // * Labels
 // *
 const baseLabelStyles = {
-  fontFamily: sansSerif,
+  fontFamily: comicSans,
   fontSize,
   fontWeight,
   letterSpacing,
@@ -72,13 +72,13 @@ const baseLabelStyles = {
 const centeredLabelStyles = assign({ textAnchor: "middle" }, baseLabelStyles);
 
 const pieLabelStyles = {
-  fontFamily: sansSerif,
+  fontFamily: comicSans,
   fontSize: "16px",
   fontWeight: "bold"
 };
 
 const axisLabelStyles = {
-  fontFamily: sansSerif,
+  fontFamily: comicSans,
   fontSize: "14px",
   fontWeight: "bold"
 };

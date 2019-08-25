@@ -1,3 +1,5 @@
+import BrandColors from "./Brand/BrandColors";
+
 const categorical = {
   pink: {
     rgb: "rgb(220,69,86)",
@@ -31,6 +33,15 @@ const categorical = {
     hex: "#FFB226"
   }
 };
+
+const victoryColors = [
+  categorical.pink.hex,
+  categorical.green.hex,
+  categorical.blue.hex,
+  categorical.purple.hex,
+  categorical.yellow.hex,
+  BrandColors.tertiary.hex
+];
 
 const sequential = {
   thermal: [
@@ -92,5 +103,6 @@ const sequential = {
 
 export default {
   categorical,
+  victoryColors,
   sequential
 };

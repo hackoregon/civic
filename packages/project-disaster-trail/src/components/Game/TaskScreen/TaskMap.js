@@ -121,6 +121,7 @@ const TaskMap = ({ activeTask, completedTasks, tasks }) => {
         keyboard: false
       }}
       animate
+      civicMapStyle="disaster-game"
     >
       <IconMap
         data={data}

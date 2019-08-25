@@ -102,7 +102,7 @@ const BarChart = ({
                   d[dataKey]
                 )} • ${yLabel}: ${yNumberFormatter(d[dataValue])}`
               }))}
-              events={chartEvents}
+              events={chartEvents(theme)}
               x="dataKey"
               y="dataValue"
               title="Bar Chart"

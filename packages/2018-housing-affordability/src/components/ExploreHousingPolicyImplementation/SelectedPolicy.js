@@ -1,6 +1,6 @@
-import React from "react";
 import PropTypes from "prop-types";
-import { css } from "emotion";
+/** @jsx jsx */
+import { css, jsx } from "@emotion/core";
 
 const govLinks = item =>
   item.links[0].link &&
@@ -35,7 +35,7 @@ const policyLinks = data =>
 function SelectedPolicy({ data }) {
   return (
     <div
-      className={css`
+      css={css`
         width: 100%;
         border-bottom: 1px solid #f3f3f3;
       `}

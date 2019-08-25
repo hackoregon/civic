@@ -11,7 +11,7 @@ const <%=StoryCardName%>Visualization = ({ isLoading, data }) => (
   <>
     {!isLoading && data && (
       <LineChart
-        data={data.mockRidershipOverTime.value}
+        data={data.<%=aPI%>.value}
         dataKey="year"
         dataValue="weekday_sum_ons"
         title="Template API Plot"
@@ -22,7 +22,7 @@ const <%=StoryCardName%>Visualization = ({ isLoading, data }) => (
 
 <%=StoryCardName%>Visualization.propTypes = {
   isLoading: PropTypes.bool,
-  data: PropTypes.shape({ mockRidershipOverTime: resourceShape })
+  data: PropTypes.shape({ <%=aPI%>: resourceShape })
 };
 
 export default <%=StoryCardName%>Visualization;

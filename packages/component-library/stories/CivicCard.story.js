@@ -433,44 +433,56 @@ const demoCardMeta = (/* data */) => ({
     }
   ],
   resources: [
-    { section: "Studies and Papers" },
     {
-      link: "https://www.portlandoregon.gov/bps/62635",
-      description:
-        "Gentrification and Displacement Study - Portland Bureau of Planning and Sustainability"
+      heading: "Studies and Papers",
+      items: [
+        {
+          link: "https://www.portlandoregon.gov/bps/62635",
+          description:
+            "Gentrification and Displacement Study - Portland Bureau of Planning and Sustainability"
+        },
+        {
+          link:
+            "https://www.sciencedirect.com/science/article/abs/pii/S2213624X18300270",
+          description:
+            "Gentrification of station areas and its impact on transit ridership"
+        }
+      ]
     },
     {
-      link:
-        "https://www.sciencedirect.com/science/article/abs/pii/S2213624X18300270",
-      description:
-        "Gentrification of station areas and its impact on transit ridership"
+      heading: "Articles",
+      items: [
+        {
+          link:
+            "http://transitcenter.org/2017/11/14/in-portland-economic-displacement-may-be-a-driver-of-transit-ridership-loss/",
+          description:
+            "In Portland, Economic Displacement May Be A Driver of Transit Ridership Loss"
+        },
+        {
+          link:
+            "https://www.nrdc.org/onearth/when-public-transportation-leads-gentrification",
+          description: "When Public Transit Leads Gentrification"
+        },
+        {
+          link:
+            "http://transitcenter.org/publications/inclusive-transit-advancing-equity-improved-access-opportunity/",
+          description:
+            "Inclusive Transit: Advancing Equity Through Improved Access and Opportunity"
+        }
+      ]
     },
-    { section: "Articles" },
     {
-      link:
-        "http://transitcenter.org/2017/11/14/in-portland-economic-displacement-may-be-a-driver-of-transit-ridership-loss/",
-      description:
-        "In Portland, Economic Displacement May Be A Driver of Transit Ridership Loss"
-    },
-    {
-      link:
-        "https://www.nrdc.org/onearth/when-public-transportation-leads-gentrification",
-      description: "When Public Transit Leads Gentrification"
-    },
-    {
-      link:
-        "http://transitcenter.org/publications/inclusive-transit-advancing-equity-improved-access-opportunity/",
-      description:
-        "Inclusive Transit: Advancing Equity Through Improved Access and Opportunity"
-    },
-    { section: "Organizations" },
-    { link: "https://trimet.org/", description: "TriMet" },
-    {
-      link: "https://www.portlandoregon.gov/bps/",
-      description: "Portland Bureau of Planning and Sustainability"
-    },
-    { link: "https://www.paalf.org/", description: "PAALF" },
-    { link: "http://transitcenter.org/", description: "TransitCenter" }
+      heading: "Organizations",
+      items: [
+        { link: "https://trimet.org/", description: "TriMet" },
+        {
+          link: "https://www.portlandoregon.gov/bps/",
+          description: "Portland Bureau of Planning and Sustainability"
+        },
+        { link: "https://www.paalf.org/", description: "PAALF" },
+        { link: "http://transitcenter.org/", description: "TransitCenter" }
+      ]
+    }
   ],
   // authors likely an array of keys in the future
   authors: [
