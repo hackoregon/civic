@@ -2,7 +2,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { jsx, css } from "@emotion/core";
 import PropTypes from "prop-types";
-import CivicVictoryTheme from "../VictoryTheme/CivicVictoryTheme";
+import { VisualizationColors } from "../_Themes";
 
 function Chip({ tag, index }) {
   return (
@@ -13,8 +13,8 @@ function Chip({ tag, index }) {
         height: 2em;
         line-height: 2em;
         border-radius: 1em;
-        background-color: ${CivicVictoryTheme.group.colorScale[
-          index % CivicVictoryTheme.group.colorScale.length
+        background-color: ${VisualizationColors.victoryColors[
+          index % VisualizationColors.victoryColors.length
         ]};
         margin: 0.5em 0.5em;
         font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;

@@ -4,7 +4,7 @@ import CardRegistry from "../card-registry";
 import Checkbox from "../../../component-library/src/Checkbox/Checkbox";
 
 const CardList = () => {
-  const { tags } = CardRegistry;
+  const { tags, entries } = CardRegistry;
 
   return (
     <PageLayout>
@@ -20,6 +20,20 @@ const CardList = () => {
               {/* <li>{`#${tag} (${tags[tag]})`}</li> */}
             </>
           ))}
+        </ul>
+      </div>
+      <div>
+        <ul>
+          {entries
+            .filter(entry => entry.component.tags)
+            .map(entry => (
+              <>
+                <li>
+                  {`slug: ${entry.slug}`}
+                  {`tags: ${entry.component.tags}`}
+                </li>
+              </>
+            ))}
         </ul>
       </div>
     </PageLayout>
