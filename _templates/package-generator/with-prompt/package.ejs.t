@@ -46,6 +46,7 @@ to: packages/<%=year%>-<%=packageTitle%>/package.json
     "cross-fetch": "^3.0.4",
     "express": "^4.14.1",
     "invariant": "^2.2.2",
+    "lodash": "^4.17.11",
     "prop-types": "^15.7.2",
     "ramda": "^0.23.0",
     "react": "^16.8.4",
