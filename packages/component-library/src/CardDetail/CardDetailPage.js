@@ -4,7 +4,7 @@ import { Link } from "react-router";
 import { PageLayout } from "../..";
 
 const CardDetailPage = ({ params, CardRegistry }) => {
-  const card = CardRegistry.find(entry => entry.slug === params.slug);
+  const card = CardRegistry.find(params.slug);
 
   if (card && card.component) {
     const CardComponent = card.component;

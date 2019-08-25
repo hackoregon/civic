@@ -9,8 +9,13 @@ import { Provider } from "react-redux";
 import { Router, browserHistory } from "react-router";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { composeWithDevTools } from "redux-devtools-extension";
-import { CardDetailPage, BrandTheme } from "@hackoregon/component-library";
-import RootPageDefault from "./RootPage";
+import {
+  CardDetailPage,
+  CardDetailPageEmbed,
+  BrandTheme
+} from "@hackoregon/component-library";
+import Registry from "./utils/registry";
+import RootPageDefault from "./components/RootPage";
 
 export default function MockWrapper(
   App,
@@ -42,14 +47,29 @@ export default function MockWrapper(
     }
   });
 
+  const CardRegistryClass = new Registry(CardRegistry);
+
   const CardDetailWrapper = ({ params }) => (
     <>
       <Global styles={BrandTheme} />
-      <CardDetailPage params={params} CardRegistry={CardRegistry} />
+      <CardDetailPage params={params} CardRegistry={CardRegistryClass} />
     </>
   );
 
   CardDetailWrapper.propTypes = {
+    params: PropTypes.shape({
+      slug: PropTypes.string.isRequired
+    }).isRequired
+  };
+
+  const CardDetailEmbedWrapper = ({ params }) => (
+    <>
+      <Global styles={BrandTheme} />
+      <CardDetailPageEmbed params={params} CardRegistry={CardRegistryClass} />
+    </>
+  );
+
+  CardDetailEmbedWrapper.propTypes = {
     params: PropTypes.shape({
       slug: PropTypes.string.isRequired
     }).isRequired
@@ -66,6 +86,10 @@ export default function MockWrapper(
       {
         path: "cards/:slug",
         component: CardDetailWrapper
+      },
+      {
+        path: "cards/:slug/embed",
+        component: CardDetailEmbedWrapper
       }
     ]
   };
