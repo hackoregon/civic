@@ -1171,7 +1171,7 @@
     find-root "^1.1.0"
     source-map "^0.7.2"
 
-"@emotion/cache@^10.0.14", "@emotion/cache@^10.0.15":
+"@emotion/cache@^10.0.15":
   version "10.0.15"
   resolved "https://registry.yarnpkg.com/@emotion/cache/-/cache-10.0.15.tgz#b81767b48015aae2689c60373992145c67b8de02"
   dependencies:
@@ -1384,42 +1384,6 @@
 "@emotion/weak-memoize@0.2.3":
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/@emotion/weak-memoize/-/weak-memoize-0.2.3.tgz#dfa0c92efe44a1d1a7974fb49ffeb40ef2da5a27"
-
-"@hackoregon/component-library@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@hackoregon/component-library/-/component-library-3.0.0.tgz#d2b6eb2acba25a35e0919b59953aadc8b9cbb872"
-  dependencies:
-    chai-enzyme "^1.0.0-beta.1"
-    cheerio "^1.0.0-rc.2"
-    classnames "^2.2.5"
-    copy-to-clipboard "^3.0.5"
-    create-react-ref "^0.1.0"
-    d3 "^4.8.0"
-    d3-format "1.3.0"
-    d3-sankey "^0.4.2"
-    d3-shape "^1.0.6"
-    d3-time-format "^2.1.3"
-    deck.gl "^6.4.7"
-    emotion "^10.0.6"
-    lodash "^4.17.11"
-    mapbox-gl "^0.53.1"
-    prop-types "^15.7.2"
-    ramda "^0.23.0"
-    rc-slider "^7.0.2"
-    react "^16.8.4"
-    react-addons-transition-group "16.0.0-alpha.3"
-    react-dimensions "^1.3.1"
-    react-dom "^16.8.4"
-    react-faux-dom "^3.0.1"
-    react-map-gl "4.1.1"
-    react-map-gl-geocoder "^1.7.0"
-    react-motion "^0.4.7"
-    react-router "^3.0.0"
-    react-select "^1.0.0-rc.3"
-    react-share "^2.2.0"
-    react-test-renderer "^16.8.4"
-    styled-components "^1.4.2"
-    victory "^32.0.2"
 
 "@icons/material@^0.2.4":
   version "0.2.4"
@@ -5450,15 +5414,6 @@ create-ecdh@^4.0.0:
     bn.js "^4.1.0"
     elliptic "^6.0.0"
 
-create-emotion@^10.0.14:
-  version "10.0.14"
-  resolved "https://registry.yarnpkg.com/create-emotion/-/create-emotion-10.0.14.tgz#4c140aaef6a9588ed47c926f9c4679e4719be43e"
-  dependencies:
-    "@emotion/cache" "^10.0.14"
-    "@emotion/serialize" "^0.11.8"
-    "@emotion/sheet" "0.9.3"
-    "@emotion/utils" "0.11.2"
-
 create-emotion@^10.0.9:
   version "10.0.9"
   resolved "https://registry.yarnpkg.com/create-emotion/-/create-emotion-10.0.9.tgz#290c2036126171c9566fa24f49c9241d54625138"
@@ -5501,7 +5456,7 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-create-react-class@^15.5.1, create-react-class@^15.5.2:
+create-react-class@^15.5.1:
   version "15.6.3"
   resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.6.3.tgz#2d73237fb3f970ae6ebe011a9e66f46dbca80036"
   dependencies:
@@ -5930,14 +5885,6 @@ d3-request@1.0.6:
     d3-dsv "1"
     xmlhttprequest "1"
 
-d3-sankey@^0.4.2:
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/d3-sankey/-/d3-sankey-0.4.2.tgz#34a1512f2b4406a35f80eac7febcf5822dbec5ad"
-  dependencies:
-    d3-array "1"
-    d3-collection "1"
-    d3-interpolate "1"
-
 d3-scale@1.0.7, d3-scale@^1.0.0:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/d3-scale/-/d3-scale-1.0.7.tgz#fa90324b3ea8a776422bd0472afab0b252a0945d"
@@ -5964,7 +5911,7 @@ d3-shape@1.2.0:
   dependencies:
     d3-path "1"
 
-d3-shape@^1.0.0, d3-shape@^1.0.6, d3-shape@^1.2.0:
+d3-shape@^1.0.0, d3-shape@^1.2.0:
   version "1.3.5"
   resolved "https://registry.yarnpkg.com/d3-shape/-/d3-shape-1.3.5.tgz#e81aea5940f59f0a79cfccac012232a8987c6033"
   dependencies:
@@ -6622,13 +6569,6 @@ emotion-theming@^10.0.7, emotion-theming@^10.0.9:
     "@emotion/weak-memoize" "0.2.2"
     hoist-non-react-statics "^3.3.0"
     object-assign "^4.1.1"
-
-emotion@^10.0.6:
-  version "10.0.14"
-  resolved "https://registry.yarnpkg.com/emotion/-/emotion-10.0.14.tgz#d7702a6147de6e8ce863dacde98418a467c5fed4"
-  dependencies:
-    babel-plugin-emotion "^10.0.14"
-    create-emotion "^10.0.14"
 
 emotion@^10.0.9:
   version "10.0.9"
@@ -12200,10 +12140,6 @@ pbkdf2@^3.0.3:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-performance-now@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-0.2.0.tgz#33ef30c5c77d4ea21c5a53869d91b56d8f2555e5"
-
 performance-now@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
@@ -12669,10 +12605,6 @@ qs@6.7.0, qs@^6.5.1, qs@^6.5.2, qs@^6.6.0:
   version "6.7.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
 
-query-selector@^1.0.9:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/query-selector/-/query-selector-1.0.9.tgz#917fd31b7379b53fd441e536af647552e01e7e9e"
-
 query-string@^4.1.0, query-string@^4.2.2, query-string@^4.2.3, query-string@^4.3.3:
   version "4.3.4"
   resolved "https://registry.yarnpkg.com/query-string/-/query-string-4.3.4.tgz#bbb693b9ca915c232515b228b1a02b609043dbeb"
@@ -12716,7 +12648,7 @@ raf-schd@^4.0.0:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/raf-schd/-/raf-schd-4.0.1.tgz#e72f29a96de260dead719f34c29e56fdc1c1473e"
 
-raf@^3.1.0, raf@^3.4.0:
+raf@^3.4.0:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/raf/-/raf-3.4.1.tgz#0742e99a4a6552f445d73e3ee0328af0ff1ede39"
   dependencies:
@@ -12865,13 +12797,6 @@ react-addons-create-fragment@^15.6.2:
     loose-envify "^1.3.1"
     object-assign "^4.1.0"
 
-react-addons-transition-group@16.0.0-alpha.3:
-  version "16.0.0-alpha.3"
-  resolved "https://registry.yarnpkg.com/react-addons-transition-group/-/react-addons-transition-group-16.0.0-alpha.3.tgz#27fa041ce20b58466fa4a0197775ca66604c14ea"
-  dependencies:
-    fbjs "^0.8.9"
-    object-assign "^4.1.0"
-
 react-base16-styling@^0.5.1:
   version "0.5.3"
   resolved "https://registry.yarnpkg.com/react-base16-styling/-/react-base16-styling-0.5.3.tgz#3858f24e9c4dd8cbd3f702f3f74d581ca2917269"
@@ -13001,13 +12926,6 @@ react-fast-compare@2.0.4, react-fast-compare@^2.0.0, react-fast-compare@^2.0.2:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-2.0.4.tgz#e84b4d455b0fec113e0402c329352715196f81f9"
 
-react-faux-dom@^3.0.1:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/react-faux-dom/-/react-faux-dom-3.1.0.tgz#d070ce8068bcf10e19b5dec329d2da671aa6734b"
-  dependencies:
-    query-selector "^1.0.9"
-    style-attr "^1.0.1"
-
 react-focus-lock@^1.17.7, react-focus-lock@^1.18.3:
   version "1.19.1"
   resolved "https://registry.yarnpkg.com/react-focus-lock/-/react-focus-lock-1.19.1.tgz#2f3429793edaefe2d077121f973ce5a3c7a0651a"
@@ -13113,15 +13031,6 @@ react-map-gl@4.1.1:
     prop-types "^15.5.7"
     react-virtualized-auto-sizer "^1.0.2"
     viewport-mercator-project "^6.1.0"
-
-react-motion@^0.4.7:
-  version "0.4.8"
-  resolved "https://registry.yarnpkg.com/react-motion/-/react-motion-0.4.8.tgz#23bb2dd27c2d8e00d229e45572d105efcf40a35e"
-  dependencies:
-    create-react-class "^15.5.2"
-    performance-now "^0.2.0"
-    prop-types "^15.5.8"
-    raf "^3.1.0"
 
 react-move@^5.0.0:
   version "5.2.1"
@@ -15045,10 +14954,6 @@ strong-log-transformer@^2.0.0:
     duplexer "^0.1.1"
     minimist "^1.2.0"
     through "^2.3.4"
-
-style-attr@^1.0.1:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/style-attr/-/style-attr-1.3.0.tgz#2c1997a4865e25d7dbcb216be0ad715f005b9b17"
 
 style-loader@^0.23.1:
   version "0.23.1"
