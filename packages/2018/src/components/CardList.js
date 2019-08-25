@@ -1,7 +1,10 @@
 import React from "react";
-import { PageLayout } from "@hackoregon/component-library";
+import {
+  PageLayout,
+  CivicCardLayoutVisualizationOnly,
+  Checkbox
+} from "@hackoregon/component-library";
 import CardRegistry from "../card-registry";
-import Checkbox from "../../../component-library/src/Checkbox/Checkbox";
 
 const CardList = () => {
   const { tags, entries } = CardRegistry;
@@ -17,7 +20,6 @@ const CardList = () => {
               <li>
                 <Checkbox label={tag} />
               </li>
-              {/* <li>{`#${tag} (${tags[tag]})`}</li> */}
             </>
           ))}
         </ul>
@@ -28,10 +30,7 @@ const CardList = () => {
             .filter(entry => entry.component.tags)
             .map(entry => (
               <>
-                <li>
-                  {`slug: ${entry.slug}`}
-                  {`tags: ${entry.component.tags}`}
-                </li>
+                {<entry.component Layout={CivicCardLayoutVisualizationOnly} />}
               </>
             ))}
         </ul>
