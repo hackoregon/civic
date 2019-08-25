@@ -8,6 +8,7 @@ import {
   PullQuote,
   CivicCardLayoutClassic // eslint-disable-line
 } from "@hackoregon/component-library";
+import HousingDisplacement from "../HousingDisplacement";
 
 const sectionMarginSmall = css`
   display: block;
@@ -76,6 +77,9 @@ const App = () => (
           tellus rutrum. Sed turpis tincidunt id aliquet risus feugiat. Aliquet
           enim tortor at auctor.
         </p>
+      </section>
+      <section className={sectionMarginMedium}>
+        <HousingDisplacement Layout={CivicCardLayoutClassic} />
       </section>
     </PageLayout>
   </Fragment>
