@@ -1,6 +1,6 @@
-import React from "react";
 import PropTypes from "prop-types";
-import { css } from "emotion";
+/** @jsx jsx */
+import { css, jsx } from "@emotion/core";
 
 import { GradientScale } from "@hackoregon/component-library";
 
@@ -42,8 +42,8 @@ const IntensityDisplay = ({
         ? scale[transform(mean)].name
         : `${scale[transform(min)].name} - ${scale[transform(max)].name}`}
     </h3>
-    <div className={rightAlign}>
-      <strong className={gradientLabel}>{label}</strong>
+    <div css={rightAlign}>
+      <strong css={gradientLabel}>{label}</strong>
     </div>
     <GradientScale
       domain={domain}
@@ -57,7 +57,7 @@ const IntensityDisplay = ({
         {scale[transform(min)].description}
       </p>
     )}
-    <p className={emphasis}>
+    <p css={emphasis}>
       <strong>Most likely case: </strong>
       {scale[transform(min)].description}
     </p>

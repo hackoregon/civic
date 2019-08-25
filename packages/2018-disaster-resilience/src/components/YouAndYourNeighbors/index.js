@@ -1,7 +1,8 @@
-import React from "react";
+import { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { css } from "emotion";
+/** @jsx jsx */
+import { css, jsx } from "@emotion/core";
 
 import {
   CivicStoryCard,
@@ -60,7 +61,7 @@ const mapGLOptions = {
   keyboard: false
 };
 
-export class YouAndYourNeighbors extends React.Component {
+export class YouAndYourNeighbors extends Component {
   componentDidMount() {
     const { init } = this.props;
     init();
@@ -116,7 +117,7 @@ export class YouAndYourNeighbors extends React.Component {
             title="Your Personalized Earthquake Map"
             subtitle="BEECN locations, Schools, Hospitals, and Fire Stations"
           />
-          <div className={mapContainer}>
+          <div css={mapContainer}>
             <BaseMap
               initialLongitude={selectedCoords.longitude}
               initialLatitude={selectedCoords.latitude}

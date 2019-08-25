@@ -11,5 +11,11 @@ module.exports = [
     type: "input",
     name: "card",
     message: "What will be the title of the card? (Capitalized With Spaces):"
+  },
+  {
+    type: "input",
+    name: "api",
+    message:
+      "What data you will be fetching from your API endpoint? (e.g. Annual Ridership)"
   }
 ];

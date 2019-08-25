@@ -1,40 +1,41 @@
-import CivicVictoryTheme from "../VictoryTheme/VictoryThemeIndex";
+import { VictoryTheme } from "../_Themes/index";
 
-const tooltipColor = CivicVictoryTheme.civic.tooltip.style.customHoverColor;
-
-const chartEvents = [
-  {
-    target: "data",
-    eventHandlers: {
-      onMouseOver: () => {
-        return [
-          {
-            target: "data",
-            mutation: props => ({
-              style: Object.assign(props.style, { fill: tooltipColor })
-            })
-          },
-          {
-            target: "labels",
-            mutation: () => ({ active: true })
-          }
-        ];
-      },
-      onMouseOut: () => {
-        return [
-          {
-            target: "data",
-            mutation: () => {}
-          },
-          {
-            target: "labels",
-            mutation: () => ({ active: false })
-          }
-        ];
+const chartEvents = (theme = VictoryTheme) => {
+  const tooltipColor = theme.tooltip.style.customHoverColor;
+  return [
+    {
+      target: "data",
+      eventHandlers: {
+        onMouseOver: () => {
+          return [
+            {
+              target: "data",
+              mutation: props => ({
+                style: Object.assign(props.style, { fill: tooltipColor })
+              })
+            },
+            {
+              target: "labels",
+              mutation: () => ({ active: true })
+            }
+          ];
+        },
+        onMouseOut: () => {
+          return [
+            {
+              target: "data",
+              mutation: () => {}
+            },
+            {
+              target: "labels",
+              mutation: () => ({ active: false })
+            }
+          ];
+        }
       }
     }
-  }
-];
+  ];
+};
 
 function getDefaultDomain(data, dataKey, dataLabel) {
   const xValues = data.map(value => value[dataKey]);
@@ -89,7 +90,7 @@ function getDefaultDataSeriesLabels(data, series) {
   return uniqueCategories.map(cat => ({ category: cat, label: cat }));
 }
 
-function getDefaultFillStyle(dataSeriesLabel) {
+function getDefaultFillStyle(dataSeriesLabel, theme = VictoryTheme) {
   const dataSeriesCategories =
     dataSeriesLabel && dataSeriesLabel.length
       ? dataSeriesLabel.map(series => series.category)
@@ -97,33 +98,32 @@ function getDefaultFillStyle(dataSeriesLabel) {
   return {
     data: {
       fill: d => {
-        if (!dataSeriesCategories)
-          return CivicVictoryTheme.civic.group.colorScale[0];
+        if (!dataSeriesCategories) return theme.group.colorScale[0];
         const idx = dataSeriesCategories.findIndex(
           series => series === d.series
         );
-        return CivicVictoryTheme.civic.group.colorScale[idx];
+        return theme.group.colorScale[idx];
       }
     }
   };
 }
 
-function getDefaultLineStyle(idx) {
+function getDefaultLineStyle(idx, theme = VictoryTheme) {
   return {
-    data: { stroke: CivicVictoryTheme.civic.group.colorScale[idx] }
+    data: { stroke: theme.group.colorScale[idx] }
   };
 }
 
-function getDefaultAreaStyle(idx) {
+function getDefaultAreaStyle(idx, theme = VictoryTheme) {
   return {
-    data: { fill: CivicVictoryTheme.civic.group.colorScale[idx] }
+    data: { fill: theme.group.colorScale[idx] }
   };
 }
 
-const categoricalColors = dataLength => {
+const categoricalColors = (dataLength, theme = VictoryTheme) => {
   const colorScheme = [];
   for (let i = 0; i < dataLength; i += 1) {
-    colorScheme.push(CivicVictoryTheme.civic.group.colorScale[i]);
+    colorScheme.push(theme.group.colorScale[i]);
   }
   return colorScheme;
 };
