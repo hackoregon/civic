@@ -1,13 +1,10 @@
 /** @jsx jsx */
 import { PureComponent } from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-
+import { PropTypes } from "prop-types";
 import { jsx, css } from "@emotion/core";
-import RadialGauge from "./RadialGauge";
 
-import { addPoints } from "../../state/user";
-import { getOrbTouched, setOrbTouched, setOrbComplete } from "../../state/orbs";
+import { palette } from "../../constants/style";
+import RadialGauge from "./RadialGauge";
 
 const orbContainerStyle = css`
   position: relative;
@@ -16,17 +13,19 @@ const orbContainerStyle = css`
 const circleDefaultStyle = css`
   transition: transform 1s;
   z-index: 10;
-  background-color: mediumSeaGreen;
+  background-color: ${palette.gold};
   transition: background-color 1000ms linear;
   cursor: pointer;
-  opacity: 0.8;
+  display: grid;
+  align-items: center;
+  justify-items: center;
 
   &:hover {
     opacity: 1;
   }
 
   &.circle-press-style {
-    background-color: mediumAquamarine;
+    background-color: ${palette.lightGreen};
     transition: background-color 1000ms linear;
   }
 
@@ -36,73 +35,75 @@ const circleDefaultStyle = css`
   }
 `;
 
+const iconStyle = css`
+  position: relative;
+  width: 75%;
+  height: 75%;
+`;
+
 const defaultState = {
-  durationRequired: 1000,
   pressTimeout: null,
   pressedStart: null,
   isActive: false,
   isComplete: false,
-  isCorrect: false
+  isCorrect: false,
+  percent: 0
 };
 
-class Orb extends PureComponent {
+export default class Orb extends PureComponent {
   constructor(props) {
     super(props);
     this.state = defaultState;
   }
 
-  componentWillUnmount() {
-    if (this.state.timeoutId) window.clearTimeout(this.state.timeoutId);
+  componentDidUpdate(prevProps, prevState) {
+    const { isComplete } = this.state;
+    const { addOrbScore, orb, setOrbComplete } = this.props;
+
+    if (!prevState.isComplete && isComplete) {
+      addOrbScore(orb);
+      setOrbComplete(orb);
+    }
   }
 
+  incrementGauge = () => {
+    const timer = setInterval(() => {
+      const { isActive, percent } = this.state;
+      if (percent === 100) {
+        this.setState({ isComplete: true });
+        clearInterval(timer);
+      } else if (percent < 100 && isActive) {
+        const update = percent + 10;
+        this.setState({ percent: update });
+      } else if (percent < 100 && !isActive) {
+        this.setState({ isActive: false, percent: 0 });
+        clearInterval(timer);
+      }
+    }, 200);
+  };
+
   handleOrbPress = () => {
+    const { isComplete } = this.state;
+    const { orb, setOrbTouched } = this.props;
     // if already pressed, do nothing
-    if (this.state.isActive || this.state.isComplete) return;
+    if (isComplete) return;
 
-    // start a timer. In n seconds, we check to see if we are complete
-    // complete means isActive is true
-    if (this.state.timeoutId) window.clearTimeout(this.state.timeoutId);
-
-    const { durationRequired } = this.state;
-    // set timer
-    const timeoutId = setTimeout(() => {
-      this.checkComplete();
-    }, durationRequired);
-
-    this.setState({ isActive: true, pressedStart: new Date(), timeoutId });
-
-    // callbacks
-    const { id, setOrbTouched } = this.props;
-    setOrbTouched(id, true);
+    this.setState({ isActive: true }, () => {
+      this.incrementGauge();
+    });
+    setOrbTouched(orb, true);
   };
 
   handleOrbRelease = () => {
     this.setState({ isActive: false });
-    const { id, setOrbTouched } = this.props;
-    setOrbTouched(id, false);
-  };
-
-  checkComplete = () => {
-    const { pressedStart, durationRequired, isActive } = this.state;
-
-    if (isActive && pressedStart) {
-      const pressedDuration = new Date() - pressedStart;
-      if (pressedDuration >= durationRequired) {
-        const { id, setOrbComplete, addPoints } = this.props;
-        // before final logic is added assume all orbs are bad
-        // eslint-disable-next-line react/no-unused-state
-        this.setState({ isComplete: true, isCorrect: false });
-
-        setOrbComplete(id, true);
-
-        addPoints(1);
-      }
-    }
+    const { orb, setOrbTouched } = this.props;
+    setOrbTouched(orb, false);
   };
 
   render() {
-    const { isActive, isComplete } = this.state;
-    const { id, size, isTouched } = this.props;
+    const { isActive, isComplete, percent } = this.state;
+    // eslint-disable-next-line no-unused-vars
+    const { size, orb } = this.props;
 
     const sizeStyle = css`
       height: ${size}px;
@@ -134,19 +135,17 @@ class Orb extends PureComponent {
         onTouchEnd={this.handleOrbRelease}
       >
         <div css={absoluteStyle}>
-          <RadialGauge animateGauge={isActive || isComplete} size={size} />
+          <RadialGauge percent={percent} isActive={isActive} size={size} />
         </div>
         <div
           css={css`
             ${circleDefaultStyle};
             ${sizeStyle};
+            ${sizeStyle};
           `}
           className={orbClass}
         >
-          {/* debug */}
-          {/* <p>
-            {isTouched ? "touching" : "not touching"}-{id}
-          </p> */}
+          <img src={orb.imageSVG} alt={orb.imgAlt} css={iconStyle} />
         </div>
       </div>
     );
@@ -154,17 +153,10 @@ class Orb extends PureComponent {
   }
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  isTouched: getOrbTouched({ ...state, id: ownProps.id })
-});
-
-const mapDispatchToProps = dispatch => ({
-  addPoints: bindActionCreators(addPoints, dispatch),
-  setOrbTouched: bindActionCreators(setOrbTouched, dispatch),
-  setOrbComplete: bindActionCreators(setOrbComplete, dispatch)
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Orb);
+Orb.propTypes = {
+  setOrbTouched: PropTypes.func,
+  setOrbComplete: PropTypes.func,
+  addOrbScore: PropTypes.func,
+  orb: PropTypes.shape({}),
+  size: PropTypes.number
+};

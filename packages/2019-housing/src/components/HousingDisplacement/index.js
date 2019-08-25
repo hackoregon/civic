@@ -1,10 +1,11 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import {
   CivicStoryCard,
   LineChart,
   Slider
 } from "@hackoregon/component-library";
-import { css } from "emotion";
+/** @jsx jsx */
+import { css, jsx } from "@emotion/core";
 
 // TODO: Wire this up the the API when it is built
 import data from "./test-housing-displacement.json";
@@ -62,19 +63,19 @@ class TestDisplacementCard extends Component {
           not stayed within the Portland MSA.
         </p>
         <div
-          className={css`
+          css={css`
             display: flex;
             justify-content: flex-end;
             margin-bottom: 1rem;
           `}
         >
           <div
-            className={css`
+            css={css`
               width: fit-content;
             `}
           >
             <h5
-              className={css`
+              css={css`
                 margin-bottom: 0.75rem;
               `}
             >

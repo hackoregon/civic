@@ -1,7 +1,8 @@
-import React from "react";
+import { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { css } from "emotion";
+/** @jsx jsx */
+import { css, jsx } from "@emotion/core";
 import { splitAt } from "ramda";
 import {
   CivicStoryCard,
@@ -47,7 +48,7 @@ const legendTitles = [
   { name: "Commonly Implemented" }
 ];
 
-export class ExploreHousingPolicyImplementation extends React.Component {
+export class ExploreHousingPolicyImplementation extends Component {
   componentDidMount() {
     const { fetchData } = this.props;
     fetchData();
@@ -92,7 +93,7 @@ export class ExploreHousingPolicyImplementation extends React.Component {
           subtitle="Collected by Hack Oregon, as of June 2018"
         />
         <SimpleLegend legendData={legendTitles} />
-        <div className={flexContainer}>
+        <div css={flexContainer}>
           {beforeList.map(item => (
             <PolicyText
               data={item}
@@ -102,7 +103,7 @@ export class ExploreHousingPolicyImplementation extends React.Component {
             />
           ))}
           {!selectedPolicy ? (
-            <div className={policyContainer} />
+            <div css={policyContainer} />
           ) : (
             <SelectedPolicy data={selectedPolicyData} />
           )}

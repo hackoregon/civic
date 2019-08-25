@@ -1,6 +1,10 @@
 /* eslint-disable no-nested-ternary */
 import React, { Component } from "react";
-import MapGL, { NavigationControl, Marker } from "react-map-gl";
+import MapGL, {
+  NavigationControl,
+  Marker,
+  FlyToInterpolator
+} from "react-map-gl";
 import Dimensions from "react-dimensions";
 import { css } from "emotion";
 import PropTypes from "prop-types";
@@ -9,10 +13,10 @@ import Geocoder from "react-map-gl-geocoder";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { isEqual } from "lodash";
 
-const MAPBOX_TOKEN =
-  "pk.eyJ1IjoiaGFja29yZWdvbiIsImEiOiJjamk0MGZhc2cwNDl4M3FsdHAwaG54a3BnIn0.Fq1KA0IUwpeKQlFIoaEn_Q";
-const CIVIC_LIGHT = "mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg";
-const CIVIC_DARK = "mapbox://styles/mapbox/dark-v9";
+import mapboxgl from "./mapboxgl";
+import { MapGLResources } from "../_Themes/index";
+
+const { MAPBOX_TOKEN, CIVIC_LIGHT, CIVIC_DARK, DISASTER_GAME } = MapGLResources;
 
 const mapWrapper = css`
   margin: 0 auto;
@@ -141,7 +145,11 @@ class BaseMap extends Component {
       mapboxLayerType,
       mapboxLayerOptions,
       mapboxLayerId,
-      locationMarkerCoord
+      locationMarkerCoord,
+      animate,
+      animationDuration,
+      scaleBar,
+      scaleBarOptions
     } = this.props;
 
     viewport.width = containerWidth || 500;
@@ -158,8 +166,18 @@ class BaseMap extends Component {
     });
 
     const onMapLoad = () => {
-      if (!mapboxData || !mapboxLayerType || !mapboxLayerOptions) return;
       const map = this.mapRef.current.getMap();
+
+      if (scaleBar) {
+        map.addControl(
+          new mapboxgl.ScaleControl({
+            maxWidth: scaleBarOptions.maxWidth,
+            unit: scaleBarOptions.units
+          })
+        );
+      }
+
+      if (!mapboxData || !mapboxLayerType || !mapboxLayerOptions) return;
       map.addSource(mapboxDataId, {
         type: "geojson",
         data: mapboxData
@@ -175,18 +193,26 @@ class BaseMap extends Component {
       );
     };
 
-    const baseMapboxStyleURL =
-      civicMapStyle === "light"
-        ? CIVIC_LIGHT
-        : civicMapStyle === "dark"
-        ? CIVIC_DARK
-        : CIVIC_LIGHT;
+    let baseMapboxStyleURL = CIVIC_LIGHT;
+    if (civicMapStyle === "dark") {
+      baseMapboxStyleURL = CIVIC_DARK;
+    } else if (civicMapStyle === "disaster-game") {
+      baseMapboxStyleURL = DISASTER_GAME;
+    }
+
+    const animationProps = !animate
+      ? {}
+      : {
+          transitionDuration: animationDuration,
+          transitionInterpolator: new FlyToInterpolator()
+        };
 
     return (
       <div className={mapWrapper}>
         <MapGL
           className="MapGL"
           {...viewport}
+          {...animationProps}
           mapStyle={baseMapboxStyleURL}
           mapboxApiAccessToken={mapboxToken}
           onViewportChange={newViewport => this.onViewportChange(newViewport)}
@@ -259,6 +285,8 @@ BaseMap.propTypes = {
   children: PropTypes.node,
   useContainerHeight: PropTypes.bool,
   updateViewport: PropTypes.bool,
+  animate: PropTypes.bool,
+  animationDuration: PropTypes.number,
   onBaseMapClick: PropTypes.func,
   mapboxDataId: PropTypes.string,
   mapboxData: PropTypes.shape({
@@ -267,7 +295,12 @@ BaseMap.propTypes = {
   }),
   mapboxLayerType: PropTypes.string,
   mapboxLayerId: PropTypes.string,
-  mapboxLayerOptions: PropTypes.shape({})
+  mapboxLayerOptions: PropTypes.shape({}),
+  scaleBar: PropTypes.bool,
+  scaleBarOptions: PropTypes.shape({
+    maxWidth: PropTypes.number,
+    units: PropTypes.string
+  })
 };
 
 BaseMap.defaultProps = {
@@ -276,6 +309,7 @@ BaseMap.defaultProps = {
   geocoder: false,
   useContainerHeight: false,
   updateViewport: true,
+  animate: false,
   initialLongitude: -122.6765,
   initialLatitude: 45.5231,
   initialZoom: 9.5,
@@ -284,7 +318,9 @@ BaseMap.defaultProps = {
   locationMarkerCoord: {
     latitude: 0,
     longitude: 0
-  }
+  },
+  animationDuration: 1000,
+  scaleBar: false
 };
 
 export default Dimensions()(BaseMap);

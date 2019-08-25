@@ -29,15 +29,16 @@
     "start:dev": "cross-env NODE_ENV=development babel-node server",
     "start:prod": "cross-env NODE_ENV=production node server",
     "test": "cross-env BABEL_ENV=test mocha --opts ./mocha.opts 'src/**/*.test.js'",
+    "test:watch": "yarn test -w",
     "lint": "eslint src"
   },
   "dependencies": {
-    "@hackoregon/component-library": "^3.0.0",
-    "@hackoregon/mock-wrapper": "^3.0.0",    
+    "@hackoregon/component-library": "^4.0.0",
+    "@hackoregon/mock-wrapper": "^3.0.0",
     "axios": "^0.18.0",
     "compression": "^1.6.2",
     "cross-env": "^5.2.0",
-    "emotion": "^10.0.9",
+    "@emotion/core": "^10.0.10",
     "express": "^4.14.1",
     "invariant": "^2.2.2",
     "lodash": "^4.17.11",
@@ -50,7 +51,6 @@
     "react-router-redux": "^4.0.8",
     "redux": "^4.0.1",
     "redux-form": "^8.1.0",
-    "redux-logger": "^2.8.2",
     "redux-thunk": "^2.1.0",
     "reselect": "^3.0.0"
   },

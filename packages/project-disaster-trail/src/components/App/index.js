@@ -2,11 +2,7 @@
 import React from "react";
 import { Provider } from "react-redux";
 import { Router, browserHistory } from "react-router";
-import {
-  routerReducer,
-  routerMiddleware,
-  syncHistoryWithStore
-} from "react-router-redux";
+import { syncHistoryWithStore } from "react-router-redux";
 
 import "@hackoregon/component-library/assets/global.styles.css";
 import LandingPage from "../LandingPage";

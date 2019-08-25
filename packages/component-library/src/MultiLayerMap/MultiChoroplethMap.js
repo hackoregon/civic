@@ -1,5 +1,6 @@
 import React from "react";
-import { PolygonLayer } from "deck.gl";
+import { GeoJsonLayer } from "deck.gl";
+import shortid from "shortid";
 import { number, string, bool, func, arrayOf, shape } from "prop-types";
 import {
   createColorScale,
@@ -10,7 +11,6 @@ import {
 
 const MultiChoroplethMap = props => {
   const {
-    index,
     id,
     data,
     pickable = true,
@@ -74,8 +74,8 @@ const MultiChoroplethMap = props => {
   const getLineWidth = createSizeScale(polygonWidth);
 
   return (
-    <PolygonLayer
-      key={index}
+    <GeoJsonLayer
+      key={shortid.generate()}
       id={id}
       pickable={pickable}
       data={data}
@@ -89,6 +89,7 @@ const MultiChoroplethMap = props => {
       lineWidthMinPixels={1}
       lineWidthScale={1}
       lineJointRounded={false}
+      extruded={false}
       onHover={onHoverSlide}
       onClick={onLayerClick}
       autoHighlight={autoHighlight}
@@ -104,7 +105,6 @@ const MultiChoroplethMap = props => {
 };
 
 MultiChoroplethMap.propTypes = {
-  index: number,
   id: string.isRequired,
   data: arrayOf(shape({})).isRequired,
   pickable: bool,

@@ -14,6 +14,7 @@ import civicFormat from "../src/utils/civicFormat";
 import { getKeyNames } from "./shared";
 import notes from "./barchart.notes.md";
 import { BarChart } from "../src";
+import { VictoryCrazyTheme, VictoryTheme } from "../src/_Themes/index";
 
 const GROUP_IDS = {
   LABELS: "Labels",
@@ -122,7 +123,20 @@ export default () =>
         );
         const barWidth = number("Bar width", 37, {}, GROUP_IDS.CUSTOM);
         const loading = boolean("Loading", false, GROUP_IDS.CUSTOM);
-        const error = boolean("Error", false, GROUP_IDS.CUSTOM);
+        const error = text("Error", false, GROUP_IDS.CUSTOM);
+
+        const themes = {
+          VictoryTheme,
+          VictoryCrazyTheme
+        };
+        const themeOptions = getKeyNames(themes);
+        const theme = options(
+          "Visualization theme",
+          themeOptions,
+          "VictoryTheme",
+          { display: "select" },
+          GROUP_IDS.CUSTOM
+        );
 
         return (
           <BarChart
@@ -138,6 +152,7 @@ export default () =>
             error={error}
             xNumberFormatter={x => civicFormat[optionSelectX](x)}
             yNumberFormatter={y => civicFormat[optionSelectY](y)}
+            theme={(name => themes[name])(theme)}
           />
         );
       },

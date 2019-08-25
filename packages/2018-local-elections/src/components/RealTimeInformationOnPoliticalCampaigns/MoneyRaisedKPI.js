@@ -1,6 +1,6 @@
-import React from "react";
 import PropTypes from "prop-types";
-import { css } from "emotion";
+/** @jsx jsx */
+import { css, jsx } from "@emotion/core";
 
 const propTypes = {
   total: PropTypes.string,
@@ -26,11 +26,11 @@ const headerClass = css`
 
 const MoneyRaisedKPI = ({ total, inState }) => {
   return (
-    <div className={wrapperClass}>
-      <div className={contentClass}>
-        <h2 className={headerClass}>Total raised</h2>
+    <div css={wrapperClass}>
+      <div css={contentClass}>
+        <h2 css={headerClass}>Total raised</h2>
         {total}
-        <h2 className={headerClass}>In state</h2>
+        <h2 css={headerClass}>In state</h2>
         {inState}
       </div>
     </div>

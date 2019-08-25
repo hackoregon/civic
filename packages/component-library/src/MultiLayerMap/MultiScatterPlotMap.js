@@ -1,7 +1,7 @@
 import React from "react";
 import { ScatterplotLayer } from "deck.gl";
 import { number, string, bool, func, arrayOf, shape } from "prop-types";
-
+import shortid from "shortid";
 import {
   createColorScale,
   updateQuantileScale,
@@ -11,7 +11,6 @@ import {
 
 const MultiScatterPlotMap = props => {
   const {
-    index,
     id,
     data,
     pickable = true,
@@ -75,7 +74,7 @@ const MultiScatterPlotMap = props => {
 
   return (
     <ScatterplotLayer
-      key={`scatterplot-layer${index}`}
+      key={shortid.generate()}
       id={id}
       pickable={pickable}
       data={data}
@@ -99,7 +98,6 @@ const MultiScatterPlotMap = props => {
 };
 
 MultiScatterPlotMap.propTypes = {
-  index: number,
   id: string.isRequired,
   data: arrayOf(shape({})).isRequired,
   pickable: bool,

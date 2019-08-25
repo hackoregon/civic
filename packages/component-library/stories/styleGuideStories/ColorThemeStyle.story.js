@@ -1,5 +1,8 @@
 import React from "react";
 import { storybookStyles } from "../storyStyles";
+import { BrandColors, VisualizationColors } from "../../src/_Themes/index";
+
+const categoricalColors = VisualizationColors.categorical;
 
 const ColorThemeStyle = () => (
   <div style={storybookStyles.main}>
@@ -8,17 +11,15 @@ const ColorThemeStyle = () => (
 
     <div style={storybookStyles.solidColorSample}>
       <div
-        style={Object.assign(
-          {},
-          storybookStyles.colorBlock,
-          storybookStyles.primaryBkgnd
-        )}
+        style={Object.assign({}, storybookStyles.colorBlock, {
+          backgroundColor: BrandColors.primary.rgba
+        })}
       />
       <div>
         <h4>Plum (Primary)</h4>
-        <p style={storybookStyles.dataText}>Hex: #201024</p>
-        <p style={storybookStyles.dataText}>rgb: 34,15,37</p>
-        <p style={storybookStyles.dataText}>
+        <p className="DataText">Hex: {BrandColors.primary.hex}</p>
+        <p className="DataText">{BrandColors.primary.rgb} </p>
+        <p className="DataText">
           Used for primary content such as logos, headings, and backgrounds.
         </p>
       </div>
@@ -26,17 +27,15 @@ const ColorThemeStyle = () => (
 
     <div style={storybookStyles.solidColorSample}>
       <div
-        style={Object.assign(
-          {},
-          storybookStyles.colorBlock,
-          storybookStyles.secondaryBkgnd
-        )}
+        style={Object.assign({}, storybookStyles.colorBlock, {
+          backgroundColor: BrandColors.secondary.rgba
+        })}
       />
       <div>
         <h4>Salmon (Secondary)</h4>
-        <p style={storybookStyles.dataText}>Hex: #EE495C</p>
-        <p style={storybookStyles.dataText}>rgb: 238,73,92</p>
-        <p style={storybookStyles.dataText}>
+        <p className="DataText">Hex: {BrandColors.secondary.hex}</p>
+        <p className="DataText">{BrandColors.secondary.rgb} </p>
+        <p className="DataText">
           Used in the logo and for the action color in the platform.
         </p>
       </div>
@@ -44,17 +43,15 @@ const ColorThemeStyle = () => (
 
     <div style={storybookStyles.solidColorSample}>
       <div
-        style={Object.assign(
-          {},
-          storybookStyles.colorBlock,
-          storybookStyles.tertiaryBkgnd
-        )}
+        style={Object.assign({}, storybookStyles.colorBlock, {
+          backgroundColor: BrandColors.tertiary.rgba
+        })}
       />
       <div>
         <h4>Plum Light (Tertiary)</h4>
-        <p style={storybookStyles.dataText}>Hex: #726371</p>
-        <p style={storybookStyles.dataText}>rgb: 114,99,113</p>
-        <p style={storybookStyles.dataText}>
+        <p className="DataText">Hex: {BrandColors.tertiary.hex}</p>
+        <p className="DataText">{BrandColors.tertiary.rgb} </p>
+        <p className="DataText">
           Compliment to primary for paragraphs and secondary content.
         </p>
       </div>
@@ -62,17 +59,15 @@ const ColorThemeStyle = () => (
 
     <div style={storybookStyles.solidColorSample}>
       <div
-        style={Object.assign(
-          {},
-          storybookStyles.colorBlock,
-          storybookStyles.mediumBkgnd
-        )}
+        style={Object.assign({}, storybookStyles.colorBlock, {
+          backgroundColor: BrandColors.medium.rgba
+        })}
       />
       <div>
         <h4>Medium</h4>
-        <p style={storybookStyles.dataText}>Hex: #AAA4AB</p>
-        <p style={storybookStyles.dataText}>rgb: 170,164,171</p>
-        <p style={storybookStyles.dataText}>
+        <p className="DataText">Hex: {BrandColors.medium.hex}</p>
+        <p className="DataText">{BrandColors.medium.rgb} </p>
+        <p className="DataText">
           Used for primary brand content such as logo, headings, backgrounds.
         </p>
       </div>
@@ -80,17 +75,15 @@ const ColorThemeStyle = () => (
 
     <div style={storybookStyles.solidColorSample}>
       <div
-        style={Object.assign(
-          {},
-          storybookStyles.colorBlock,
-          storybookStyles.subduedBkgnd
-        )}
+        style={Object.assign({}, storybookStyles.colorBlock, {
+          backgroundColor: BrandColors.subdued.rgba
+        })}
       />
       <div>
         <h4>Subdued</h4>
-        <p style={storybookStyles.dataText}>Hex: #F3F2F3</p>
-        <p style={storybookStyles.dataText}>rgb: 243,242,243</p>
-        <p style={storybookStyles.dataText}>
+        <p className="DataText">Hex: {BrandColors.subdued.hex}</p>
+        <p className="DataText">{BrandColors.subdued.rgb} </p>
+        <p className="DataText">
           Used in logo and action color within the platform.
         </p>
       </div>
@@ -99,72 +92,62 @@ const ColorThemeStyle = () => (
     <h2>Visualizations: Categorical</h2>
     <div style={storybookStyles.solidColorSample}>
       <div
-        style={Object.assign(
-          {},
-          storybookStyles.colorBlock,
-          storybookStyles.pinkBkgnd
-        )}
+        style={Object.assign({}, storybookStyles.colorBlock, {
+          backgroundColor: categoricalColors.pink.rgba
+        })}
       />
       <div>
         <h4>Pink</h4>
-        <p style={storybookStyles.dataText}>Hex: #DC4556</p>
-        <p style={storybookStyles.dataText}>rgb: 220,69,86</p>
+        <p className="DataText">Hex: {categoricalColors.pink.hex}</p>
+        <p className="DataText">{categoricalColors.pink.rgb} </p>
       </div>
     </div>
     <div style={storybookStyles.solidColorSample}>
       <div
-        style={Object.assign(
-          {},
-          storybookStyles.colorBlock,
-          storybookStyles.blueBkgnd
-        )}
+        style={Object.assign({}, storybookStyles.colorBlock, {
+          backgroundColor: categoricalColors.blue.rgba
+        })}
       />
       <div>
         <h4>Blue</h4>
-        <p style={storybookStyles.dataText}>Hex: #1E62BD</p>
-        <p style={storybookStyles.dataText}>rgb: 30,98,189</p>
+        <p className="DataText">Hex: {categoricalColors.blue.hex}</p>
+        <p className="DataText">{categoricalColors.blue.rgb} </p>
       </div>
     </div>
     <div style={storybookStyles.solidColorSample}>
       <div
-        style={Object.assign(
-          {},
-          storybookStyles.colorBlock,
-          storybookStyles.greenBkgnd
-        )}
+        style={Object.assign({}, storybookStyles.colorBlock, {
+          backgroundColor: categoricalColors.green.rgba
+        })}
       />
       <div>
         <h4>Teal</h4>
-        <p style={storybookStyles.dataText}>Hex: #19B7AA</p>
-        <p style={storybookStyles.dataText}>rgb: 25,183,170</p>
+        <p className="DataText">Hex: {categoricalColors.green.hex}</p>
+        <p className="DataText">{categoricalColors.green.rgb} </p>
       </div>
     </div>
     <div style={storybookStyles.solidColorSample}>
       <div
-        style={Object.assign(
-          {},
-          storybookStyles.colorBlock,
-          storybookStyles.purpleBkgnd
-        )}
+        style={Object.assign({}, storybookStyles.colorBlock, {
+          backgroundColor: categoricalColors.purple.rgba
+        })}
       />
       <div>
         <h4>Purple</h4>
-        <p style={storybookStyles.dataText}>Hex: #721D7C</p>
-        <p style={storybookStyles.dataText}>rgb: 114,29,124</p>
+        <p className="DataText">Hex: {categoricalColors.purple.hex}</p>
+        <p className="DataText">{categoricalColors.purple.rgb} </p>
       </div>
     </div>
     <div style={storybookStyles.solidColorSample}>
       <div
-        style={Object.assign(
-          {},
-          storybookStyles.colorBlock,
-          storybookStyles.yellowBkgnd
-        )}
+        style={Object.assign({}, storybookStyles.colorBlock, {
+          backgroundColor: categoricalColors.yellow.rgba
+        })}
       />
       <div>
         <h4>Yellow</h4>
-        <p style={storybookStyles.dataText}>Hex: #FFB226</p>
-        <p style={storybookStyles.dataText}>rgb: 255,178,38</p>
+        <p className="DataText">Hex: {categoricalColors.yellow.hex}</p>
+        <p className="DataText">{categoricalColors.yellow.rgb} </p>
       </div>
     </div>
   </div>

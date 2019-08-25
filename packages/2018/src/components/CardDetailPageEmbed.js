@@ -4,6 +4,7 @@ import { Link } from "react-router";
 import CardRegistry from "../card-registry";
 
 const CardDetailPageEmbed = ({ params }) => {
+  console.log(CardRegistry);
   const card = CardRegistry.find(params.slug);
 
   if (card && card.component) {

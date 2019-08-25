@@ -1,7 +1,8 @@
-import React from "react";
+import { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { css } from "emotion";
+/** @jsx jsx */
+import { css, jsx } from "@emotion/core";
 
 import { CivicStoryCard, LineChart } from "@hackoregon/component-library";
 
@@ -26,21 +27,22 @@ const cardError = css`
   border: 1px solid #c99;
 `;
 
-export class FarmersMarketsOverTime extends React.Component {
+class FarmersMarketsOverTime extends Component {
   componentDidMount() {
-    this.props.init();
+    const { init } = this.props;
+    init();
   }
 
   render() {
     const { isLoading, farmersMarketsOverTime } = this.props;
 
     if (isLoading) {
-      return <div className={cardLoading}>Loading...</div>;
-    } else if (!farmersMarketsOverTime) {
+      return <div css={cardLoading}>Loading...</div>;
+    }
+
+    if (!farmersMarketsOverTime) {
       return (
-        <div className={cardError}>
-          Could not render Farmers Markets Over Time
-        </div>
+        <div css={cardError}>Could not render Farmers Markets Over Time</div>
       );
     }
 
@@ -51,11 +53,11 @@ export class FarmersMarketsOverTime extends React.Component {
           slug="farmers-markets-over-time"
         >
           <p>
-            Farmers' markets saw steady growth through the 1990s into the
+            Farmers&apos; markets saw steady growth through the 1990s into the
             mid-2000s. The recession correlates with abnormal growth in the
-            total number of Farmers' Markets. The last two years have shown no
-            growth. Is this plateau expected to continue? What causes growth or
-            decline in Farmers' Markets?
+            total number of Farmers&apos; Markets. The last two years have shown
+            no growth. Is this plateau expected to continue? What causes growth
+            or decline in Farmers&apos; Markets?
           </p>
           <div>
             <LineChart

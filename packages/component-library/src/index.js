@@ -1,5 +1,15 @@
 import "./fonts.css";
 
+// THEMES
+export {
+  VisualizationColors,
+  BrandColors,
+  BrandTheme,
+  VictoryTheme,
+  VictoryCrazyTheme
+} from "./_Themes/index";
+
+// COMPONENTS
 export {
   default as HorizontalBarChart
 } from "./HorizontalBarChart/HorizontalBarChart";
@@ -7,6 +17,9 @@ export { default as BarChart } from "./BarChart/BarChart";
 export { default as LineChart } from "./LineChart/LineChart";
 export { default as Button } from "./Button/Button";
 export { default as Checkbox } from "./Checkbox/Checkbox";
+export {
+  default as RadioButtonGroup
+} from "./RadioButtonGroup/RadioButtonGroup";
 export { default as CivicStoryCard } from "./CivicStoryCard/CivicStoryCard";
 export { default as PageLayout } from "./PageLayout/PageLayout";
 export { default as PieChart } from "./PieChart/PieChart";
@@ -17,12 +30,12 @@ export { default as Header } from "./Navigation/Header";
 export { default as Nav } from "./Navigation/Nav";
 export { default as NavRouterLink } from "./Navigation/NavRouterLink";
 export { default as Dropdown } from "./Dropdown/Dropdown";
+export { default as Select } from "./Select/Select";
 export { default as Icon } from "./Icon/Icon";
 export { default as Placeholder } from "./Placeholder/Placeholder";
 export { default as Scatterplot } from "./Scatterplot/Scatterplot";
 export { default as Logo } from "./Logo/Logo";
 export { default as isClient } from "./utils/isClient";
-export { default as CivicVictoryTheme } from "./VictoryTheme/VictoryThemeIndex";
 export { default as CollectionHero } from "./Hero/CollectionHero";
 export { default as BaseMap } from "./BaseMap/BaseMap";
 export { default as ScatterPlotMap } from "./ScatterPlotMap/ScatterPlotMap";
@@ -63,7 +76,17 @@ export {
 export {
   default as CivicCardLayoutClassic
 } from "./CivicCard/CivicCardLayoutClassic";
+export {
+  default as CivicCardLayoutVisualizationOnly
+} from "./CivicCard/CivicCardLayoutVisualizationOnly";
+export {
+  default as CivicCardLayoutSideBySide
+} from "./CivicCard/CivicCardLayoutSideBySide";
+export {
+  default as CivicCardLayoutFullWithDescriptions
+} from "./CivicCard/CivicCardLayoutFullWithDescriptions";
 
 export { default as civicFormat } from "./utils/civicFormat";
 export { default as ungroupBy } from "./utils/ungroupBy";
 export { default as DemoJSONLoader } from "./DemoJSONLoader/DemoJSONLoader";
+export { default as Badge } from "./Badge/Badge";

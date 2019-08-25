@@ -10,6 +10,7 @@
     "start:prod": "yarn run build && cross-env NODE_ENV=production node server",
     "build": "rimraf dist && cross-env NODE_ENV=production webpack --progress --config ./webpack.config.js",
     "test": "echo 'No tests!'",
+    "test:watch": "echo 'No tests!'",
     "lint": "eslint src"
   },
   "repository": {
@@ -36,7 +37,7 @@
     "@babel/node": "^7.0.0",
     "@babel/register": "^7.0.0",
     "@hackoregon/civic-babel-presets": "^3.0.0",
-    "@hackoregon/component-library": "^3.0.0",
+    "@hackoregon/component-library": "^4.0.0",
     "@hackoregon/dev-server": "^3.0.0",
     "@hackoregon/webpack-common": "^3.0.0",
     "autoprefixer": "^9.4.10",

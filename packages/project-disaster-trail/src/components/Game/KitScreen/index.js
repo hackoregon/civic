@@ -1,24 +1,21 @@
-import React, { memo } from "react";
-
-import { MapStyle, GUIStyle } from "../index";
+import React from "react";
 import DurationBar from "../../atoms/DurationBar";
-import Kit from "./Kit";
-import PointsView from "../../atoms/PointsView";
+import Ticker from "../../atoms/Ticker";
+import { MapStyle, GUIStyle } from "../index";
 import OrbManager from "../OrbManager";
+import Kit from "./Kit";
 
-const KitScreen = () => {
-  return (
-    <>
-      <MapStyle>
-        <Kit />
-        <PointsView />
-      </MapStyle>
-      <DurationBar step="Choose supplies" />
-      <GUIStyle>
-        <OrbManager />
-      </GUIStyle>
-    </>
-  );
-};
+const KitScreen = () => (
+  <>
+    <MapStyle>
+      <Kit />
+    </MapStyle>
+    <DurationBar step="Choose supplies" />
+    <Ticker text="Ticker tape text that goes across the screen to give instructions" />
+    <GUIStyle>
+      <OrbManager />
+    </GUIStyle>
+  </>
+);
 
-export default memo(KitScreen);
+export default KitScreen;
