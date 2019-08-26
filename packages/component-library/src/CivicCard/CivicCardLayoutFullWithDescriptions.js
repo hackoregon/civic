@@ -7,8 +7,8 @@ import PullQuote from "../PullQuote/PullQuote";
 import Placeholder from "../Placeholder/Placeholder";
 import cardMetaTypes from "./cardMetaTypes";
 import cardMetaDescription from "./cardMetaDescriptions";
+import { Chip } from "../index";
 import {
-  Chip,
   Resource,
   MetadataQuestion,
   CollapsableSection
