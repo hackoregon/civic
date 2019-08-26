@@ -47,56 +47,56 @@ export default function MockWrapper(
     }
   });
 
-  const CardRegistryClass = new Registry(CardRegistry);
-
-  const CardDetailWrapper = ({ params }) => (
-    <>
-      <Global styles={BrandTheme} />
-      <CardDetailPage params={params} CardRegistry={CardRegistryClass} />
-    </>
-  );
-
-  CardDetailWrapper.propTypes = {
-    params: PropTypes.shape({
-      slug: PropTypes.string.isRequired
-    }).isRequired
-  };
-
-  const CardDetailEmbedWrapper = ({ params }) => (
-    <>
-      <Global styles={BrandTheme} />
-      <CardDetailPageEmbed params={params} CardRegistry={CardRegistryClass} />
-    </>
-  );
-
-  CardDetailEmbedWrapper.propTypes = {
-    params: PropTypes.shape({
-      slug: PropTypes.string.isRequired
-    }).isRequired
-  };
-
-  const cardDetailAndEmbedRoutes = [
-    {
-      path: "cards/:slug",
-      component: CardDetailWrapper
-    },
-    {
-      path: "cards/:slug/embed",
-      component: CardDetailEmbedWrapper
-    }
-  ];
-
   const rootRoute = {
     path: "/",
     component: RootPageDefault,
     indexRoute: {
       component: App
     },
-    childRoutes: [
-      ...Routes(store),
-      ...(CardRegistry ? cardDetailAndEmbedRoutes : [])
-    ]
+    childRoutes: [...Routes(store)]
   };
+
+  if (CardRegistry) {
+    const CardRegistryClass = new Registry(CardRegistry);
+
+    const CardDetailWrapper = ({ params }) => (
+      <>
+        <Global styles={BrandTheme} />
+        <CardDetailPage params={params} CardRegistry={CardRegistryClass} />
+      </>
+    );
+
+    CardDetailWrapper.propTypes = {
+      params: PropTypes.shape({
+        slug: PropTypes.string.isRequired
+      }).isRequired
+    };
+
+    const CardDetailEmbedWrapper = ({ params }) => (
+      <>
+        <Global styles={BrandTheme} />
+        <CardDetailPageEmbed params={params} CardRegistry={CardRegistryClass} />
+      </>
+    );
+
+    CardDetailEmbedWrapper.propTypes = {
+      params: PropTypes.shape({
+        slug: PropTypes.string.isRequired
+      }).isRequired
+    };
+
+    const cardDetailRoute = {
+      path: "cards/:slug",
+      component: CardDetailWrapper
+    };
+    const cardDetailEmbedRoute = {
+      path: "cards/:slug/embed",
+      component: CardDetailEmbedWrapper
+    };
+
+    rootRoute.childRoutes.push(cardDetailRoute);
+    rootRoute.childRoutes.push(cardDetailEmbedRoute);
+  }
 
   const Wrapper = () => (
     <Provider store={store}>
