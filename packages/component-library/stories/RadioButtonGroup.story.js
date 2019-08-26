@@ -13,8 +13,7 @@ import {
   select,
   array
 } from "@storybook/addon-knobs";
-import FormControl from "@material-ui/core/FormControl";
-import FormHelperText from "@material-ui/core/FormHelperText";
+import { FormControl, FormHelperText } from "@material-ui/core";
 import { RadioButtonGroup } from "../src";
 import { storybookStyles } from "./storyStyles";
 import StatefulWrapper from "../src/utils/StatefulWrapper";

@@ -1,9 +1,8 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import PropTypes from "prop-types";
-import FormLabel from "@material-ui/core/FormLabel";
 import shortid from "shortid";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
+import { FormControlLabel, FormLabel } from "@material-ui/core";
 import MaterialRadio from "@material-ui/core/Radio";
 import MaterialRadioGroup from "@material-ui/core/RadioGroup";
 
