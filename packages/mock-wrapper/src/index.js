@@ -75,6 +75,17 @@ export default function MockWrapper(
     }).isRequired
   };
 
+  const cardDetailAndEmbedRoutes = [
+    {
+      path: "cards/:slug",
+      component: CardDetailWrapper
+    },
+    {
+      path: "cards/:slug/embed",
+      component: CardDetailEmbedWrapper
+    }
+  ];
+
   const rootRoute = {
     path: "/",
     component: RootPageDefault,
@@ -83,14 +94,7 @@ export default function MockWrapper(
     },
     childRoutes: [
       ...Routes(store),
-      {
-        path: "cards/:slug",
-        component: CardDetailWrapper
-      },
-      {
-        path: "cards/:slug/embed",
-        component: CardDetailEmbedWrapper
-      }
+      ...(CardRegistry ? cardDetailAndEmbedRoutes : [])
     ]
   };
 
