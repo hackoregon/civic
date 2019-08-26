@@ -1,5 +1,4 @@
 /** @jsx jsx */
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { jsx, css } from "@emotion/core";
 import PropTypes from "prop-types";
 import FormLabel from "@material-ui/core/FormLabel";
