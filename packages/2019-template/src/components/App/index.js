@@ -1,8 +1,7 @@
-import React from "react";
+import { Fragment } from "react";
 
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { cx, css } from "emotion"; // eslint-disable-line emotion/no-vanilla
-import { Global } from "@emotion/core";
+/** @jsx jsx */
+import { jsx, css, Global } from "@emotion/core";
 import {
   BrandTheme,
   PageLayout,
@@ -38,7 +37,7 @@ const paragraphStyle = css`
 `;
 
 const App = () => (
-  <>
+  <Fragment>
     <Global styles={BrandTheme} />
     <PageLayout
       teamTitle="Template"
@@ -46,11 +45,11 @@ const App = () => (
       heroSubtitle="Playground for building out the 2019 Template team frontend"
       overlay
     >
-      <section className={cx(sectionBodyHeading, sectionMaxWidthSmall)}>
+      <section css={[sectionBodyHeading, sectionMaxWidthSmall]}>
         <h2>Ullamcorper dignissim cras tincidunt?</h2>
       </section>
-      <section className={cx(sectionMarginSmall, sectionMaxWidthSmall)}>
-        <p className={paragraphStyle}>
+      <section css={[sectionMarginSmall, sectionMaxWidthSmall]}>
+        <p css={paragraphStyle}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Elementum
           curabitur vitae nunc sed. Nisl condimentum id venenatis a condimentum
@@ -58,11 +57,11 @@ const App = () => (
           faucibus turpis. Fermentum leo vel orci porta.
         </p>
       </section>
-      <section className={sectionMarginMedium}>
+      <section css={sectionMarginMedium}>
         <DemoCard Layout={CivicCardLayoutVisualizationOnly} />
       </section>
-      <section className={cx(sectionMarginSmall, sectionMaxWidthSmall)}>
-        <p className={paragraphStyle}>
+      <section css={[sectionMarginSmall, sectionMaxWidthSmall]}>
+        <p css={paragraphStyle}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Elementum
           curabitur vitae nunc sed. Nisl condimentum id venenatis a condimentum
@@ -70,15 +69,15 @@ const App = () => (
           faucibus turpis. Fermentum leo vel orci porta.
         </p>
       </section>
-      <section className={cx(sectionMarginMedium, sectionMaxWidthMedium)}>
+      <section css={[sectionMarginMedium, sectionMaxWidthMedium]}>
         <PullQuote
           quoteText="The lorem ipsum text is typically a scrambled section of De
         finibus bonorum et malorum, with words altered, added, and removed to make
         it nonsensical, improper Latin."
         />
       </section>
-      <section className={cx(sectionMarginSmall, sectionMaxWidthSmall)}>
-        <p className={paragraphStyle}>
+      <section css={[sectionMarginSmall, sectionMaxWidthSmall]}>
+        <p css={paragraphStyle}>
           Dui accumsan sit amet nulla facilisi. Sed adipiscing diam donec
           adipiscing. Amet volutpat consequat mauris nunc congue nisi vitae
           suscipit. In fermentum et sollicitudin ac orci phasellus egestas
@@ -86,17 +85,17 @@ const App = () => (
           enim tortor at auctor.
         </p>
       </section>
-      <section className={sectionMarginMedium}>
+      <section css={sectionMarginMedium}>
         <TemplateAPICard Layout={CivicCardLayoutClassic} />
       </section>
-      <section className={sectionMarginMedium}>
+      <section css={sectionMarginMedium}>
         <TemplateFileCard Layout={CivicCardLayoutClassic} />
       </section>
-      <section className={sectionMarginMedium}>
+      <section css={sectionMarginMedium}>
         <DemoCard Layout={CivicCardLayoutClassic} />
       </section>
     </PageLayout>
-  </>
+  </Fragment>
 );
 
 App.displayName = "App";

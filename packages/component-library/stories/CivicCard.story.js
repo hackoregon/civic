@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
+import { useMediaQuery } from "@material-ui/core";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { storiesOf } from "@storybook/react";
 import {
@@ -8,6 +9,8 @@ import {
   Collapsable,
   CivicCardLayoutClassic,
   CivicCardLayoutVisualizationOnly,
+  CivicCardLayoutSideBySide,
+  RadioButtonGroup,
   CivicCardLayoutFullWithDescriptions
 } from "../src";
 import { civicFormat } from "../src/utils";
@@ -35,6 +38,123 @@ const demoData = [
   }
 ];
 
+const sideBySideDemoData = {
+  14: [
+    {
+      year: 2009,
+      weekday_sum_ons: 6958
+    },
+    {
+      year: 2010,
+      weekday_sum_ons: 6497
+    },
+    {
+      year: 2011,
+      weekday_sum_ons: 6167
+    },
+    {
+      year: 2012,
+      weekday_sum_ons: 6253
+    },
+    {
+      year: 2013,
+      weekday_sum_ons: 6082
+    },
+    {
+      year: 2014,
+      weekday_sum_ons: 6326
+    },
+    {
+      year: 2015,
+      weekday_sum_ons: 6139
+    },
+    {
+      year: 2016,
+      weekday_sum_ons: 5778
+    },
+    {
+      year: 2017,
+      weekday_sum_ons: 5742
+    }
+  ],
+  72: [
+    {
+      year: 2009,
+      weekday_sum_ons: 17691
+    },
+    {
+      year: 2010,
+      weekday_sum_ons: 16376
+    },
+    {
+      year: 2011,
+      weekday_sum_ons: 16848
+    },
+    {
+      year: 2012,
+      weekday_sum_ons: 16947
+    },
+    {
+      year: 2013,
+      weekday_sum_ons: 16387
+    },
+    {
+      year: 2014,
+      weekday_sum_ons: 16774
+    },
+    {
+      year: 2015,
+      weekday_sum_ons: 16551
+    },
+    {
+      year: 2016,
+      weekday_sum_ons: 15355
+    },
+    {
+      year: 2017,
+      weekday_sum_ons: 14913
+    }
+  ],
+  20: [
+    {
+      year: 2009,
+      weekday_sum_ons: 10476
+    },
+    {
+      year: 2010,
+      weekday_sum_ons: 10115
+    },
+    {
+      year: 2011,
+      weekday_sum_ons: 10058
+    },
+    {
+      year: 2012,
+      weekday_sum_ons: 10834
+    },
+    {
+      year: 2013,
+      weekday_sum_ons: 10683
+    },
+    {
+      year: 2014,
+      weekday_sum_ons: 11270
+    },
+    {
+      year: 2015,
+      weekday_sum_ons: 11209
+    },
+    {
+      year: 2016,
+      weekday_sum_ons: 10543
+    },
+    {
+      year: 2017,
+      weekday_sum_ons: 10988
+    }
+  ]
+};
+
 function DemoCardVisualization({ isLoading, data }) {
   return (
     !isLoading &&
@@ -49,6 +169,43 @@ function DemoCardVisualization({ isLoading, data }) {
         xNumberFormatter={civicFormat.year}
         subtitle="Average daily ridership for all TriMet bus and rail"
       />
+    )
+  );
+}
+
+function DemoCardVisualizationWithSelector({ isLoading, data }) {
+  const isDesktop = useMediaQuery("(min-width:640px)");
+  const grpLabel = "Bus Line";
+  const radioLabels = ["14", "72", "20"];
+  const [busRoute, setBusRoute] = useState("14");
+  const domain = {
+    x: [2009, 2017],
+    y: [0, 20000]
+  };
+  return (
+    !isLoading &&
+    data && (
+      <>
+        <RadioButtonGroup
+          grpLabel={grpLabel}
+          labels={radioLabels}
+          row={!isDesktop}
+          labelPlacement={isDesktop ? "" : "bottom"}
+          onChange={({ target }) => setBusRoute(target.value)}
+          value={busRoute}
+        />
+        <LineChart
+          data={data[busRoute]}
+          dataKey="year"
+          dataValue="weekday_sum_ons"
+          domain={domain}
+          title="Portland Transit Ridership - Weekdays"
+          xLabel="Year"
+          yLabel="Ridership"
+          xNumberFormatter={civicFormat.year}
+          subtitle="Average daily ridership for all TriMet bus and rail"
+        />
+      </>
     )
   );
 }
@@ -276,44 +433,56 @@ const demoCardMeta = (/* data */) => ({
     }
   ],
   resources: [
-    { section: "Studies and Papers" },
     {
-      link: "https://www.portlandoregon.gov/bps/62635",
-      description:
-        "Gentrification and Displacement Study - Portland Bureau of Planning and Sustainability"
+      heading: "Studies and Papers",
+      items: [
+        {
+          link: "https://www.portlandoregon.gov/bps/62635",
+          description:
+            "Gentrification and Displacement Study - Portland Bureau of Planning and Sustainability"
+        },
+        {
+          link:
+            "https://www.sciencedirect.com/science/article/abs/pii/S2213624X18300270",
+          description:
+            "Gentrification of station areas and its impact on transit ridership"
+        }
+      ]
     },
     {
-      link:
-        "https://www.sciencedirect.com/science/article/abs/pii/S2213624X18300270",
-      description:
-        "Gentrification of station areas and its impact on transit ridership"
+      heading: "Articles",
+      items: [
+        {
+          link:
+            "http://transitcenter.org/2017/11/14/in-portland-economic-displacement-may-be-a-driver-of-transit-ridership-loss/",
+          description:
+            "In Portland, Economic Displacement May Be A Driver of Transit Ridership Loss"
+        },
+        {
+          link:
+            "https://www.nrdc.org/onearth/when-public-transportation-leads-gentrification",
+          description: "When Public Transit Leads Gentrification"
+        },
+        {
+          link:
+            "http://transitcenter.org/publications/inclusive-transit-advancing-equity-improved-access-opportunity/",
+          description:
+            "Inclusive Transit: Advancing Equity Through Improved Access and Opportunity"
+        }
+      ]
     },
-    { section: "Articles" },
     {
-      link:
-        "http://transitcenter.org/2017/11/14/in-portland-economic-displacement-may-be-a-driver-of-transit-ridership-loss/",
-      description:
-        "In Portland, Economic Displacement May Be A Driver of Transit Ridership Loss"
-    },
-    {
-      link:
-        "https://www.nrdc.org/onearth/when-public-transportation-leads-gentrification",
-      description: "When Public Transit Leads Gentrification"
-    },
-    {
-      link:
-        "http://transitcenter.org/publications/inclusive-transit-advancing-equity-improved-access-opportunity/",
-      description:
-        "Inclusive Transit: Advancing Equity Through Improved Access and Opportunity"
-    },
-    { section: "Organizations" },
-    { link: "https://trimet.org/", description: "TriMet" },
-    {
-      link: "https://www.portlandoregon.gov/bps/",
-      description: "Portland Bureau of Planning and Sustainability"
-    },
-    { link: "https://www.paalf.org/", description: "PAALF" },
-    { link: "http://transitcenter.org/", description: "TransitCenter" }
+      heading: "Organizations",
+      items: [
+        { link: "https://trimet.org/", description: "TriMet" },
+        {
+          link: "https://www.portlandoregon.gov/bps/",
+          description: "Portland Bureau of Planning and Sustainability"
+        },
+        { link: "https://www.paalf.org/", description: "PAALF" },
+        { link: "http://transitcenter.org/", description: "TransitCenter" }
+      ]
+    }
   ],
   // authors likely an array of keys in the future
   authors: [
@@ -321,6 +490,13 @@ const demoCardMeta = (/* data */) => ({
     "https://civicsoftwarefoundation.org/static/human-grid-test2-ea1849501456af341647068243fc72bb.png"
   ]
 });
+
+const demoCardMetaSideBySide = data => {
+  return {
+    ...demoCardMeta(data),
+    visualization: DemoCardVisualizationWithSelector
+  };
+};
 
 export default () =>
   storiesOf("Component Lib|Story Cards/CIVIC Card", module)
@@ -349,5 +525,13 @@ export default () =>
         data={demoData}
         isLoading={false}
         Layout={CivicCardLayoutVisualizationOnly}
+      />
+    ))
+    .add("Layout: SideBySide", () => (
+      <CivicCard
+        cardMeta={demoCardMetaSideBySide}
+        data={sideBySideDemoData}
+        isLoading={false}
+        Layout={CivicCardLayoutSideBySide}
       />
     ));

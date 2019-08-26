@@ -33,7 +33,8 @@
     "lint": "eslint src"
   },
   "dependencies": {
-    "@hackoregon/component-library": "^3.0.0",
+    "@hackoregon/component-library": "^4.0.0",
+    "@emotion/core": "^10.0.10",
     "axios": "^0.18.0",
     "compression": "^1.6.2",
     "cross-env": "^5.2.0",

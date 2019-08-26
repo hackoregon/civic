@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
+import shortid from "shortid";
 import { groupBy } from "lodash";
 import {
   VictoryAxis,
@@ -52,7 +53,8 @@ const LineChart = ({
     ? dataSeriesLabel || getDefaultDataSeriesLabels(data, dataSeries)
     : null;
 
-  const scatterPlotStyle = style || getDefaultFillStyle(dataSeriesLabels);
+  const scatterPlotStyle =
+    style || getDefaultFillStyle(dataSeriesLabels, theme);
 
   const legendData =
     dataSeriesLabels && dataSeriesLabels.length
@@ -64,7 +66,7 @@ const LineChart = ({
   const lines = lineData
     ? Object.keys(lineData).map((category, index) => (
         <VictoryLine
-          key={category}
+          key={shortid.generate()}
           data={lineData[category].map(d => ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],
@@ -72,7 +74,7 @@ const LineChart = ({
           }))}
           x="dataKey"
           y="dataValue"
-          style={getDefaultLineStyle(index)}
+          style={getDefaultLineStyle(index, theme)}
           standalone={false}
           // TODO: This is a workaround for a Victory bug that results in incomplete
           // line animations when the animate properties are derived from the VictoryChart
@@ -89,9 +91,13 @@ const LineChart = ({
         <DataChecker dataAccessors={{ dataKey, dataValue }} data={data}>
           {legendData &&
             (legendComponent ? (
-              legendComponent(legendData)
+              legendComponent(legendData, theme)
             ) : (
-              <SimpleLegend className="legend" legendData={legendData} />
+              <SimpleLegend
+                className="legend"
+                legendData={legendData}
+                theme={theme}
+              />
             ))}
 
           <VictoryChart
@@ -145,7 +151,7 @@ const LineChart = ({
                 series: d[dataSeries],
                 size: size ? d[size.key] || size.value : 3
               }))}
-              events={chartEvents}
+              events={chartEvents(theme)}
               labelComponent={
                 <VictoryTooltip
                   x={325}

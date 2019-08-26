@@ -12,12 +12,11 @@ import createRef from "create-react-ref/lib/createRef";
 import Geocoder from "react-map-gl-geocoder";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { isEqual } from "lodash";
-import mapboxgl from "./mapboxgl";
 
-const MAPBOX_TOKEN =
-  "pk.eyJ1IjoiaGFja29yZWdvbiIsImEiOiJjamk0MGZhc2cwNDl4M3FsdHAwaG54a3BnIn0.Fq1KA0IUwpeKQlFIoaEn_Q";
-const CIVIC_LIGHT = "mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg";
-const CIVIC_DARK = "mapbox://styles/mapbox/dark-v9";
+import mapboxgl from "./mapboxgl";
+import { MapGLResources } from "../_Themes/index";
+
+const { MAPBOX_TOKEN, CIVIC_LIGHT, CIVIC_DARK, DISASTER_GAME } = MapGLResources;
 
 const mapWrapper = css`
   margin: 0 auto;
@@ -194,12 +193,12 @@ class BaseMap extends Component {
       );
     };
 
-    const baseMapboxStyleURL =
-      civicMapStyle === "light"
-        ? CIVIC_LIGHT
-        : civicMapStyle === "dark"
-        ? CIVIC_DARK
-        : CIVIC_LIGHT;
+    let baseMapboxStyleURL = CIVIC_LIGHT;
+    if (civicMapStyle === "dark") {
+      baseMapboxStyleURL = CIVIC_DARK;
+    } else if (civicMapStyle === "disaster-game") {
+      baseMapboxStyleURL = DISASTER_GAME;
+    }
 
     const animationProps = !animate
       ? {}

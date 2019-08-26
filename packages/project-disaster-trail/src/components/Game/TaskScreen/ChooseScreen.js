@@ -1,18 +1,15 @@
 /** @jsx jsx */
-import { PureComponent, Fragment } from "react";
+import { PureComponent } from "react";
 import { PropTypes } from "prop-types";
 import { css, jsx } from "@emotion/core";
 import { connect } from "react-redux";
 
 import {
   getWeightedTasks,
-  getActiveTaskData,
   addTask,
   getActiveEnvironment,
   getTasksForEnvironment
 } from "../../../state/tasks";
-import DurationBar from "../../atoms/DurationBar";
-import OrbManager from "../OrbManager";
 import TaskMap from "./TaskMap";
 
 const screenLayout = css`
@@ -26,16 +23,17 @@ const screenLayout = css`
 `;
 
 const defaultState = {
-  voteTimer: null,
-  timeToVote: 20000,
-  chooseTask: false
+  voteId: null,
+  animationId: null,
+  chooseTask: false,
+  animateMap: false,
+  voteTimer: null
 };
 
 class ChooseScreen extends PureComponent {
   state = defaultState;
 
   componentDidMount() {
-    const { timeToVote } = this.state;
     const { weightedTasks } = this.props;
     const taskVotes = weightedTasks.reduce((result, taskData) => {
       // eslint-disable-next-line no-param-reassign
@@ -44,21 +42,17 @@ class ChooseScreen extends PureComponent {
     }, {});
 
     this.setState({
-      voteTimer: setTimeout(this.goToTask, timeToVote),
       taskVotes
     });
   }
 
-  componentWillUnmount() {
-    const { exampleTimeToAnimate } = this.state;
-    clearTimeout(exampleTimeToAnimate);
-    this.clearVoteTimeout();
-  }
+  componentDidUpdate(prevProps) {
+    const { votingComplete } = this.props;
 
-  clearVoteTimeout = () => {
-    const { voteTimer } = this.state;
-    clearTimeout(voteTimer);
-  };
+    if (votingComplete && !prevProps.votingComplete) {
+      this.goToTask();
+    }
+  }
 
   getPossibleTasks = () => {
     const { activeEnvironment, tasksForEnvironment } = this.props;
@@ -107,9 +101,7 @@ class ChooseScreen extends PureComponent {
   };
 
   goToTask = () => {
-    this.clearVoteTimeout();
-
-    const { addNextTask, weightedTasks } = this.props;
+    const { addNextTask } = this.props;
     const voteResults = this.tallyVotes();
 
     // eslint-disable-next-line prefer-const
@@ -118,38 +110,20 @@ class ChooseScreen extends PureComponent {
       mostVotesId = this.chooseRandomTask();
     }
 
-    // As an example of the time to pan and zoom, use a timeout
-    const exampleTimeToAnimate = setTimeout(() => {
-      addNextTask(mostVotesId);
-    }, 2000);
-
-    this.setState({
-      // trigger pan and zoom...
-      activeTask: weightedTasks.find(task => task.type === mostVotesId),
-      exampleTimeToAnimate
-    });
+    addNextTask(mostVotesId);
   };
 
   render() {
-    const { timeToVote, activeTask } = this.state;
+    const { selectedTask } = this.state;
     const { weightedTasks } = this.props;
 
     return (
-      <Fragment>
-        <div css={screenLayout}>
-          <TaskMap
-            activeTask={activeTask || weightedTasks[0]}
-            tasks={weightedTasks}
-          />
-        </div>
-
-        <DurationBar step="Choose a task" durationLength={timeToVote / 1000} />
-        <OrbManager
-          possibleItems={weightedTasks}
-          onOrbSelection={this.onTaskSelection}
-          frozenOrbInterface
+      <div css={screenLayout}>
+        <TaskMap
+          activeTask={selectedTask || weightedTasks[0]}
+          tasks={weightedTasks}
         />
-      </Fragment>
+      </div>
     );
   }
 }
@@ -159,12 +133,12 @@ ChooseScreen.propTypes = {
   weightedTasks: PropTypes.arrayOf(PropTypes.shape({})),
   addNextTask: PropTypes.func,
   activeEnvironment: PropTypes.string,
-  tasksForEnvironment: PropTypes.shape({})
+  tasksForEnvironment: PropTypes.shape({}),
+  votingComplete: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
   weightedTasks: getWeightedTasks(state),
-  activeTask: getActiveTaskData(state),
   activeEnvironment: getActiveEnvironment(state),
   tasksForEnvironment: getTasksForEnvironment(state)
 });

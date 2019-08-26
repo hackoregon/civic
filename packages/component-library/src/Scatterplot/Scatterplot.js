@@ -19,7 +19,7 @@ import {
   getDefaultDataSeriesLabels,
   getDefaultFillStyle
 } from "../utils/chartHelpers";
-import CivicVictoryTheme from "../VictoryTheme/VictoryThemeIndex";
+import { VictoryTheme } from "../_Themes/index";
 
 /*
  * @method Scatterplot
@@ -57,7 +57,8 @@ const Scatterplot = ({
   yNumberFormatter,
   invertX,
   invertY,
-  legendComponent
+  legendComponent,
+  theme
 }) => {
   const chartDomain = domain || getDefaultDomain(data, dataKey, dataValue);
 
@@ -65,7 +66,8 @@ const Scatterplot = ({
     ? dataSeriesLabel || getDefaultDataSeriesLabels(data, dataSeries)
     : null;
 
-  const scatterPlotStyle = style || getDefaultFillStyle(dataSeriesLabels);
+  const scatterPlotStyle =
+    style || getDefaultFillStyle(dataSeriesLabels, theme);
 
   const legendData =
     dataSeriesLabels && dataSeriesLabels.length
@@ -76,14 +78,18 @@ const Scatterplot = ({
     <ChartContainer title={title} subtitle={subtitle}>
       {legendData &&
         (legendComponent ? (
-          legendComponent(legendData)
+          legendComponent(legendData, theme)
         ) : (
-          <SimpleLegend className="legend" legendData={legendData} />
+          <SimpleLegend
+            className="legend"
+            legendData={legendData}
+            theme={theme}
+          />
         ))}
       <DataChecker dataAccessors={{ dataKey, dataValue }} data={data}>
         <VictoryChart
           domain={chartDomain}
-          theme={CivicVictoryTheme.civic}
+          theme={theme}
           animate={{ duration: 200 }}
         >
           <VictoryAxis
@@ -102,7 +108,7 @@ const Scatterplot = ({
           />
           <VictoryPortal>
             <VictoryLabel
-              style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
+              style={{ ...theme.axisLabel.style }}
               text={yLabel}
               textAnchor="middle"
               title="Y Axis Label"
@@ -113,7 +119,7 @@ const Scatterplot = ({
           </VictoryPortal>
           <VictoryPortal>
             <VictoryLabel
-              style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
+              style={{ ...theme.axisLabel.style }}
               text={xLabel}
               textAnchor="end"
               title="X Axis Label"
@@ -139,7 +145,7 @@ const Scatterplot = ({
               series: d[dataSeries],
               ...(size && { bubbleSize: d[size.key] })
             }))}
-            events={chartEvents}
+            events={chartEvents(theme)}
             labelComponent={
               <VictoryTooltip
                 x={325}
@@ -147,7 +153,7 @@ const Scatterplot = ({
                 orientation="bottom"
                 pointerLength={0}
                 cornerRadius={0}
-                theme={CivicVictoryTheme.civic}
+                theme={theme}
               />
             }
             size={3} // overridden by bubbleProperty
@@ -192,7 +198,8 @@ Scatterplot.propTypes = {
   yNumberFormatter: PropTypes.func,
   invertX: PropTypes.bool,
   invertY: PropTypes.bool,
-  legendComponent: PropTypes.func
+  legendComponent: PropTypes.func,
+  theme: PropTypes.shape({})
 };
 
 Scatterplot.defaultProps = {
@@ -214,7 +221,8 @@ Scatterplot.defaultProps = {
   yNumberFormatter: civicFormat.numeric,
   invertX: false,
   invertY: false,
-  legendComponent: null
+  legendComponent: null,
+  theme: VictoryTheme
 };
 
 export default Scatterplot;

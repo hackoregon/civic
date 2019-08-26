@@ -1,8 +1,10 @@
 ---
-name: Task 🧹
+name: "Task \U0001F9F9"
 about: Something that needs to get done, so other things can be done
-title: ""
-labels: ""
+title: ''
+labels: ''
+assignees: ''
+
 ---
 
 <!--

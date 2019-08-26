@@ -237,6 +237,7 @@ export default () =>
           GROUP_IDS.MARKER
         );
 
+        const onLayerClick = info => action("Layer Clicked:")(info);
         const fetchURL = text("Data API URL:", CIVIC_API_URL, GROUP_IDS.DATA);
 
         return (
@@ -271,6 +272,7 @@ export default () =>
                     getFillColor={f =>
                       colorScale(f.properties[polygonFieldName])
                     }
+                    onLayerClick={onLayerClick}
                   />
                 </BaseMap>
               );
@@ -376,6 +378,7 @@ export default () =>
     .add(
       "Example: With Tooltip",
       () => {
+        const onLayerClick = info => action("Layer Clicked:")(info);
         return (
           <DemoJSONLoader urls={[CIVIC_API_URL]}>
             {data => (
@@ -383,6 +386,7 @@ export default () =>
                 <MapOverlay
                   data={data.results.features}
                   getFillColor={[25, 183, 170]}
+                  onLayerClick={onLayerClick}
                 >
                   <MapTooltip
                     primaryName="Earthquake - Total Day Injuries"

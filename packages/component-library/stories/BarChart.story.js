@@ -124,13 +124,16 @@ export default () =>
         const barWidth = number("Bar width", 37, {}, GROUP_IDS.CUSTOM);
         const loading = boolean("Loading", false, GROUP_IDS.CUSTOM);
         const error = text("Error", false, GROUP_IDS.CUSTOM);
+
+        const themes = {
+          VictoryTheme,
+          VictoryCrazyTheme
+        };
+        const themeOptions = getKeyNames(themes);
         const theme = options(
-          "Choose theme",
-          {
-            VictoryCrazyTheme,
-            "Default - VictoryTheme": VictoryTheme
-          },
-          VictoryCrazyTheme,
+          "Visualization theme",
+          themeOptions,
+          "VictoryTheme",
           { display: "select" },
           GROUP_IDS.CUSTOM
         );
@@ -149,7 +152,7 @@ export default () =>
             error={error}
             xNumberFormatter={x => civicFormat[optionSelectX](x)}
             yNumberFormatter={y => civicFormat[optionSelectY](y)}
-            theme={theme}
+            theme={(name => themes[name])(theme)}
           />
         );
       },

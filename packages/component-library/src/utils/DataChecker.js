@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { css } from "emotion";
+import shortid from "shortid";
 import checkData from "./checkData";
 
 const wrapperStyle = css`
@@ -41,7 +42,7 @@ const DataChecker = ({
             `
           : css``;
         return (
-          <pre key={key} className={invalidStyle}>
+          <pre key={shortid.generate()} className={invalidStyle}>
             <strong>
               {isValid ? "✅ " : "⛔️ "}
               {`${key}: `}

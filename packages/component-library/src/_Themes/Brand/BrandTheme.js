@@ -50,7 +50,6 @@ export default {
   },
 
   h1: {
-    // fontSize: '36px',
     fontSize: "2.25rem",
     lineHeight: "2.625rem",
     fontFamily: "'Rubik', sans-serif",
@@ -58,7 +57,6 @@ export default {
   },
 
   h2: {
-    // fontSize: '26px',
     fontSize: "1.625rem",
     lineHeight: "2.125rem",
     fontFamily: "'Rubik', sans-serif",
@@ -66,7 +64,6 @@ export default {
   },
 
   h3: {
-    // fontSize: '18px',
     fontSize: "1.125rem",
     lineHeight: "1.625rem",
     fontFamily: "'Rubik', sans-serif",
@@ -74,7 +71,6 @@ export default {
   },
 
   h4: {
-    // fontSize: '16px',
     fontSize: "1rem",
     lineHeight: "1.375rem",
     fontFamily: "'Rubik', sans-serif",
@@ -82,7 +78,6 @@ export default {
   },
 
   h5: {
-    // fontSize: '14px',
     fontSize: "0.875rem",
     lineHeight: "1.125rem",
     fontFamily: "'Rubik', sans-serif",
@@ -90,7 +85,6 @@ export default {
   },
 
   h6: {
-    // fontSize: '12px',
     fontSize: "0.75rem",
     lineHeight: "0.9375rem",
     fontFamily: "'Rubik', sans-serif",

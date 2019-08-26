@@ -14,8 +14,6 @@ import { scaleThreshold } from "d3";
 import { BaseMap, PathMap, MapTooltip, DemoJSONLoader } from "../src";
 import notes from "./PathMap.notes.md";
 
-const baseMapStyle = "mapbox://styles/hackoregon/cjiazbo185eib2srytwzleplg";
-
 const colorSchemeOptions = {
   "Red Yellow Blue":
     "[[165,0,38,255],[215,48,39,255],[244,109,67,255],[253,174,97,255],[254,224,144,255],[224,243,248,255],[171,217,233,255],[116,173,209,255],[69,117,180,255],[49,54,149,255]]",
@@ -98,7 +96,7 @@ export default () => {
               );
               return (
                 <BaseMap
-                  mapboxStyle={baseMapStyle}
+                  mapStyle="light"
                   initialZoom={12}
                   initialLatitude={45.523027}
                   initialLongitude={-122.67037}
@@ -183,7 +181,7 @@ export default () => {
               );
               return (
                 <BaseMap
-                  mapboxStyle={baseMapStyle}
+                  mapStyle="light"
                   initialZoom={12}
                   initialLatitude={45.523027}
                   initialLongitude={-122.67037}
@@ -243,7 +241,7 @@ export default () => {
               );
               return (
                 <BaseMap
-                  mapboxStyle={baseMapStyle}
+                  mapStyle="light"
                   initialZoom={12}
                   initialLatitude={45.523027}
                   initialLongitude={-122.67037}

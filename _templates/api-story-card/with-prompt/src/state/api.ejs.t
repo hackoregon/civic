@@ -6,12 +6,14 @@ import requestAdapter from "../request-adapter";
 
 const apiConfig = { requestAdapter };
 
-// FIXME: getMockRidershipData should be variable
 const HOST = "https://service.civicpdx.org/transportation-systems";
 
 const apiDesc = {
-  getMockRidershipData: {
-    url: `${HOST}/passenger-census/system/annual/averages/?format=json`
+  get<%=API%>Data: {
+    url: `${HOST}/passenger-census/system/annual/averages/?format=json`,
+    // you can apply any needed data transformations to value here
+    // if complex, separate tranformation function to another file
+    dataTransform: data => data    
   }
 };
 

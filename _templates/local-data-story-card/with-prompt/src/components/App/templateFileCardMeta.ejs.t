@@ -114,12 +114,17 @@ const <%=StoryCardName%>Meta = (/* data */) => ({
     </Collapsable>
   ),
   resources: [
-    { link: "http://www.hackoregon.org", description: "Hack Oregon" },
     {
-      link: "https://www.civicsoftwarefoundation.org",
-      description: "Civic Software Foundation"
-    },
-    { link: "https://www.civicplatform.org", description: "Civic Platform" }
+      heading: "Organizations",
+      items: [
+        { link: "http://www.hackoregon.org", description: "Hack Oregon" },
+        {
+          link: "https://www.civicsoftwarefoundation.org",
+          description: "Civic Software Foundation"
+        },
+        { link: "https://www.civicplatform.org", description: "Civic Platform" }
+      ]
+    }
   ],
   // authors likely an array of keys in the future
   authors: [
