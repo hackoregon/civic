@@ -6,7 +6,7 @@ import { Link } from "react-router";
 import { css } from "emotion";
 import PropTypes from "prop-types";
 import Nav from "./Nav";
-import Logo from "../Logo/LogoAnimated";
+import Logo from "../Logo/Logo";
 import Icon from "../Icon/Icon";
 import { ICONS } from "../styleConstants";
 
@@ -92,7 +92,14 @@ class Header extends Component {
     this.setState({ menuActive: !this.state.menuActive });
 
   render() {
-    const { children, menu, title, overlay, mainProjectColor } = this.props;
+    const {
+      children,
+      menu,
+      title,
+      overlay,
+      mainProjectColor,
+      logoType
+    } = this.props;
     return (
       <header
         className={overlay ? overlayContainerClass : containerClass}
@@ -104,7 +111,7 @@ class Header extends Component {
         >
           <div className={logoClass}>
             <Link className={logoLinkClass} to="/">
-              <Logo alt={title} />
+              <Logo type={logoType} alt={title} />
             </Link>
           </div>
           <div
@@ -140,7 +147,12 @@ Header.propTypes = {
   title: PropTypes.string,
   children: PropTypes.node,
   overlay: PropTypes.bool,
-  mainProjectColor: PropTypes.string
+  mainProjectColor: PropTypes.string,
+  logoType: PropTypes.string
+};
+
+Header.defaultProps = {
+  logoType: "standardLogoAnimatedInverted"
 };
 
 export default Header;
