@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import { getKeyNames } from "../../stories/shared";
 
 const cardMetaObjectProperties = {
   title: PropTypes.string,
@@ -34,6 +33,14 @@ const cardMetaObjectProperties = {
 export const optionalCardMetaKeys = {
   metadataQA: true,
   selector: true
+};
+
+const getKeyNames = obj => {
+  const keyNames = {};
+  Object.keys(obj).forEach(key => {
+    keyNames[key] = key;
+  });
+  return keyNames;
 };
 
 export const cardMetaKeys = getKeyNames(cardMetaObjectProperties);
