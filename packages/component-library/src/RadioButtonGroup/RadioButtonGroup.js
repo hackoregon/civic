@@ -2,7 +2,12 @@
 import { jsx, css } from "@emotion/core";
 import PropTypes from "prop-types";
 import shortid from "shortid";
-import { FormControlLabel, FormLabel } from "@material-ui/core";
+import {
+  FormControlLabel,
+  FormLabel,
+  FormControl,
+  FormHelperText
+} from "@material-ui/core";
 import MaterialRadio from "@material-ui/core/Radio";
 import MaterialRadioGroup from "@material-ui/core/RadioGroup";
 
@@ -17,33 +22,36 @@ const RadioButtonGroup = ({
   value,
   grpLabel,
   labelPlacement,
-  row
+  row,
+  formHelperText
 }) => (
-  <MaterialRadioGroup
-    aria-label={grpLabel}
-    name={grpLabel}
-    onChange={onChange}
-    value={value}
-    row={row}
-    inputProps={{ "aria-labelledby": { grpLabel } }}
-  >
+  <FormControl disabled={disabled}>
     <FormLabel>{grpLabel}</FormLabel>
-    {labels.map(label => (
-      <FormControlLabel
-        key={shortid.generate()}
-        value={label}
-        control={
-          <MaterialRadio
-            disabled={disabled}
-            css={radioButtonGroupClass}
-            inputProps={{ "aria-label": { label } }}
-          />
-        }
-        label={label}
-        labelPlacement={labelPlacement}
-      />
-    ))}
-  </MaterialRadioGroup>
+    <MaterialRadioGroup
+      aria-label={grpLabel}
+      name={grpLabel}
+      onChange={onChange}
+      value={value}
+      row={row}
+      inputProps={{ "aria-labelledby": { grpLabel } }}
+    >
+      {labels.map(label => (
+        <FormControlLabel
+          key={shortid.generate()}
+          value={label}
+          control={
+            <MaterialRadio
+              css={radioButtonGroupClass}
+              inputProps={{ "aria-label": { label } }}
+            />
+          }
+          label={label}
+          labelPlacement={labelPlacement}
+        />
+      ))}
+    </MaterialRadioGroup>
+    <FormHelperText>{formHelperText}</FormHelperText>
+  </FormControl>
 );
 
 RadioButtonGroup.displayName = "RadioButtonGroup";
@@ -53,6 +61,7 @@ RadioButtonGroup.propTypes = {
   value: PropTypes.string,
   grpLabel: PropTypes.string,
   labelPlacement: PropTypes.string,
+  formHelperText: PropTypes.string,
   row: PropTypes.bool,
   disabled: PropTypes.bool,
   onChange: PropTypes.func
@@ -63,6 +72,7 @@ RadioButtonGroup.defaultProps = {
   value: "Label 1",
   grpLabel: "GroupLabel",
   labelPlacement: "end",
+  formHelperText: "Helper text",
   row: false,
   disabled: false
 };
