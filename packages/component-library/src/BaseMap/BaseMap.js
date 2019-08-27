@@ -149,15 +149,17 @@ class BaseMap extends Component {
       animate,
       animationDuration,
       scaleBar,
-      scaleBarOptions
+      scaleBarOptions,
+      sharedViewport,
+      onSharedViewportChange
     } = this.props;
 
     viewport.width = containerWidth || 500;
     viewport.height = useContainerHeight ? containerHeight : height;
 
     const childrenLayers = React.Children.map(children, child => {
-      const layerViewport = this.props.sharedViewport
-        ? { ...viewport, ...this.props.sharedViewport }
+      const layerViewport = sharedViewport
+        ? { ...viewport, ...sharedViewport }
         : viewport;
       return React.cloneElement(child, {
         viewport: layerViewport,
@@ -210,10 +212,10 @@ class BaseMap extends Component {
           transitionInterpolator: new FlyToInterpolator()
         };
 
-    const finalViewport = this.props.sharedViewport
+    const finalViewport = sharedViewport
       ? {
           ...viewport,
-          ...this.props.sharedViewport,
+          ...sharedViewport,
           height,
           width: containerWidth
         }
@@ -228,8 +230,8 @@ class BaseMap extends Component {
           mapStyle={baseMapboxStyleURL}
           mapboxApiAccessToken={mapboxToken}
           onViewportChange={newViewport => {
-            if (this.props.vpChange) {
-              this.props.vpChange(newViewport);
+            if (onSharedViewportChange) {
+              onSharedViewportChange(newViewport);
             } else {
               this.onViewportChange(newViewport);
             }
@@ -313,7 +315,9 @@ BaseMap.propTypes = {
   scaleBarOptions: PropTypes.shape({
     maxWidth: PropTypes.number,
     units: PropTypes.string
-  })
+  }),
+  sharedViewport: PropTypes.shape({}),
+  onSharedViewportChange: PropTypes.func
 };
 
 BaseMap.defaultProps = {
