@@ -14,8 +14,6 @@ import {
 } from "../src";
 import notes from "./comparisonMap.notes.md";
 
-// import { css } from "emotion";
-
 const GROUP_IDS = {
   DESIGN: "Design",
   DATA: "Data"
