@@ -1,12 +1,13 @@
 /* eslint-disable no-nested-ternary */
-import React, { Component } from "react";
+import { Component, Children, cloneElement } from "react";
 import MapGL, {
   NavigationControl,
   Marker,
   FlyToInterpolator
 } from "react-map-gl";
 import Dimensions from "react-dimensions";
-import { css } from "emotion";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 import PropTypes from "prop-types";
 import createRef from "create-react-ref/lib/createRef";
 import Geocoder from "react-map-gl-geocoder";
@@ -155,8 +156,8 @@ class BaseMap extends Component {
     viewport.width = containerWidth || 500;
     viewport.height = useContainerHeight ? containerHeight : height;
 
-    const childrenLayers = React.Children.map(children, child => {
-      return React.cloneElement(child, {
+    const childrenLayers = Children.map(children, child => {
+      return cloneElement(child, {
         viewport,
         tooltipInfo,
         x,
@@ -208,7 +209,7 @@ class BaseMap extends Component {
         };
 
     return (
-      <div className={mapWrapper}>
+      <div css={mapWrapper}>
         <MapGL
           className="MapGL"
           {...viewport}
@@ -221,7 +222,7 @@ class BaseMap extends Component {
           onClick={onBaseMapClick}
           onLoad={onMapLoad}
         >
-          <div className={navControl}>
+          <div css={navControl}>
             {navigation && (
               <NavigationControl
                 className="NavigationControl"
