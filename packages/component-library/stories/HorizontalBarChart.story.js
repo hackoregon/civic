@@ -13,7 +13,6 @@ import {
 import { HorizontalBarChart, civicFormat } from "../src";
 import { getKeyNames } from "./shared";
 import notes from "./horizontalBarChart.notes.md";
-import compareValues from "../src/utils/compareValues";
 
 const GROUP_IDS = {
   LABELS: "Labels",
@@ -71,7 +70,7 @@ export default () =>
             xLabel={xLabel}
             yLabel={yLabel}
             dataValueFormatter={x => civicFormat[optionSelectX](x)}
-            sortBy={sortBy} // Take a compare function as a prop, default ascending. See dataValueFormatter
+            sortBy={sortBy} // Take a compare function as a prop, default descending. See dataValueFormatter
           />
         );
       },

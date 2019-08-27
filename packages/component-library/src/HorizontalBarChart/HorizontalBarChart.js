@@ -62,10 +62,7 @@ const HorizontalBarChart = ({
   const barData =
     sortOrder && sortOrder.length
       ? data
-      : data.sort(compareValues(dataValue, sortBy)).map((d, index) => {
-          const sort = (sortBy === "Ascending" ? index + 1 : (index + 1) * -1); // Bar chart sorts bottom up
-          return { ...d, defaultSort: sort };
-        });
+      : data.sort(compareValues(dataValue, sortBy));
   const sortOrderKey =
     sortOrder && sortOrder.length ? sortOrder : "defaultSort";
   const padding = minimalist

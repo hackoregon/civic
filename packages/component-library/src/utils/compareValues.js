@@ -21,7 +21,7 @@ function compareValues(key, order = "Ascending") {
     } else if (varA < varB) {
       comparison = -1;
     }
-    return order === "Descending" ? comparison * -1 : comparison;
+    return order === "Descending" ? comparison : comparison * -1;
   };
 }
 
