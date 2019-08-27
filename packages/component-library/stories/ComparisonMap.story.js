@@ -2,8 +2,18 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import { withKnobs, select, number, text } from "@storybook/addon-knobs";
-// import { action } from "@storybook/addon-actions";
-import { BaseMap, ComparisonMap, MapOverlay, DemoJSONLoader } from "../src";
+import { action } from "@storybook/addon-actions";
+import {
+  BaseMap,
+  ComparisonMap,
+  MapOverlay,
+  DemoJSONLoader,
+  VisualizationColors
+} from "../src";
+import { at } from "lodash";
+import { scaleQuantize, extent } from "d3";
+import notes from "./comparisonMap.notes.md";
+
 // import { css } from "emotion";
 
 const GROUP_IDS = {
@@ -22,6 +32,22 @@ const heightOptions = {
   min: 100,
   max: 1500,
   step: 25
+};
+
+const sequentialColorOptions = {
+  thermal: VisualizationColors.sequential["thermal"],
+  planet: VisualizationColors.sequential["planet"],
+  space: VisualizationColors.sequential["space"],
+  earth: VisualizationColors.sequential["earth"],
+  ocean: VisualizationColors.sequential["ocean"]
+};
+
+const selectColorOptions = {
+  thermal: "thermal",
+  planet: "planet",
+  space: "space",
+  earth: "earth",
+  ocean: "ocean"
 };
 
 const API_URL =
@@ -54,39 +80,78 @@ export default () =>
         const initialViewport = {
           latitude: 45.5780256,
           longitude: -122.3997374,
-          zoom: 9
+          zoom: 9.1
         };
 
+        const leftMapColorScheme = select(
+          "Color Scheme - Left:",
+          selectColorOptions,
+          "thermal",
+          GROUP_IDS.DESIGN
+        );
+
+        const rightMapColorScheme = select(
+          "Color Scheme - Right:",
+          selectColorOptions,
+          "ocean",
+          GROUP_IDS.DESIGN
+        );
+
+        const onLayerClick = info => action("Layer Clicked:")(info);
         const fetchURL = text("Data API URL:", API_URL, GROUP_IDS.DATA);
 
         return (
           <DemoJSONLoader urls={[fetchURL]}>
             {data => {
+              const featuresArrayPath = text(
+                "Features Array Path:",
+                "features",
+                GROUP_IDS.DATA
+              );
+              const featuresData = at(data, featuresArrayPath)[0];
+
+              const leftMapDataProperty = text(
+                "Field Name - Left:",
+                "IncomeMedianHH",
+                GROUP_IDS.DATA
+              );
+              const leftColorScale = scaleQuantize()
+                .domain(
+                  extent(featuresData, d => +d.properties[leftMapDataProperty])
+                )
+                .range(sequentialColorOptions[leftMapColorScheme]);
+
+              const rightMapDataProperty = text(
+                "Field Name - Right:",
+                "Pct_RegisteredVoters",
+                GROUP_IDS.DATA
+              );
+              const rightColorScale = scaleQuantize()
+                .domain(
+                  extent(featuresData, d => +d.properties[rightMapDataProperty])
+                )
+                .range(sequentialColorOptions[rightMapColorScheme]);
+
               const leftMap = (
-                <BaseMap
-                  civicMapStyle={civicMapStyleLeft}
-                  height={height}
-                  mapGLOptions={{ keyboard: false }}
-                >
+                <BaseMap civicMapStyle={civicMapStyleLeft} height={height}>
                   <MapOverlay
-                    data={data.features}
-                    getFillColor={[255, 0, 0, 100]}
-                    autoHighlight
+                    data={featuresData}
+                    getFillColor={f =>
+                      leftColorScale(+f.properties[leftMapDataProperty])
+                    }
+                    onLayerClick={onLayerClick}
                   />
                 </BaseMap>
               );
 
               const rightMap = (
-                <BaseMap
-                  civicMapStyle={civicMapStyleRight}
-                  height={height}
-                  mapGLOptions={{ keyboard: true }}
-                  navigation={false}
-                >
+                <BaseMap civicMapStyle={civicMapStyleRight} height={height}>
                   <MapOverlay
-                    data={data.features}
-                    getFillColor={[0, 0, 255, 100]}
-                    autoHighlight
+                    data={featuresData}
+                    getFillColor={f =>
+                      rightColorScale(+f.properties[rightMapDataProperty])
+                    }
+                    onLayerClick={onLayerClick}
                   />
                 </BaseMap>
               );
@@ -104,5 +169,5 @@ export default () =>
           </DemoJSONLoader>
         );
       },
-      {}
+      { notes }
     );
