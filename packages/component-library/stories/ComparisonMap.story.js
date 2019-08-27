@@ -1,8 +1,9 @@
-/* eslint-disable */
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import { withKnobs, select, number, text } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
+import { at } from "lodash";
+import { scaleQuantize, extent } from "d3";
 import {
   BaseMap,
   ComparisonMap,
@@ -10,8 +11,6 @@ import {
   DemoJSONLoader,
   VisualizationColors
 } from "../src";
-import { at } from "lodash";
-import { scaleQuantize, extent } from "d3";
 import notes from "./comparisonMap.notes.md";
 
 // import { css } from "emotion";
@@ -35,11 +34,11 @@ const heightOptions = {
 };
 
 const sequentialColorOptions = {
-  thermal: VisualizationColors.sequential["thermal"],
-  planet: VisualizationColors.sequential["planet"],
-  space: VisualizationColors.sequential["space"],
-  earth: VisualizationColors.sequential["earth"],
-  ocean: VisualizationColors.sequential["ocean"]
+  thermal: VisualizationColors.sequential.thermal,
+  planet: VisualizationColors.sequential.planet,
+  space: VisualizationColors.sequential.space,
+  earth: VisualizationColors.sequential.earth,
+  ocean: VisualizationColors.sequential.ocean
 };
 
 const selectColorOptions = {

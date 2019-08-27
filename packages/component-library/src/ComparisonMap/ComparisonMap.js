@@ -1,9 +1,8 @@
-/* eslint-disable */
-/** @jsx jsx */
 import React from "react";
-import Slider from "../Slider/Slider";
+/** @jsx jsx */
 import { css, jsx } from "@emotion/core";
 import { node, number, shape } from "prop-types";
+import Slider from "../Slider/Slider";
 
 const sliderWrapper = css`
   margin: 2em auto;

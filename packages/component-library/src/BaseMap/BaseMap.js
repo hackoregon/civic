@@ -1,4 +1,3 @@
-/* eslint-disable */
 /* eslint-disable no-nested-ternary */
 import React, { Component } from "react";
 import MapGL, {
