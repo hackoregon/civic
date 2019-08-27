@@ -84,7 +84,10 @@ export {
 export {
   default as CivicCardLayoutFullWithDescriptions
 } from "./CivicCard/CivicCardLayoutFullWithDescriptions";
-
+export { default as CardDetailPage } from "./CardDetail/CardDetailPage";
+export {
+  default as CardDetailPageEmbed
+} from "./CardDetail/CardDetailPageEmbed";
 export { default as civicFormat } from "./utils/civicFormat";
 export { default as ungroupBy } from "./utils/ungroupBy";
 export { default as DemoJSONLoader } from "./DemoJSONLoader/DemoJSONLoader";
