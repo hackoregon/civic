@@ -1,5 +1,3 @@
-/* TODO: Fix linting errors */
-
 import { Component } from "react";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
