@@ -35,6 +35,7 @@ import sandboxStory from "./Sandbox.story";
 import scatterPlotMapStory from "./ScatterPlotMap.story";
 import ScatterplotStory from "./Scatterplot.story";
 import screenGridMapStory from "./ScreenGridMap.story";
+import selectStory from "./Select.story";
 import sliderStory from "./Slider.story";
 import stackedAreaChart from "./StackedAreaChart.story";
 
@@ -107,6 +108,7 @@ storiesOf("Component Lib|Basic Inputs", module)
 buttonStory();
 checkboxStory();
 dropdownStory();
+selectStory();
 radioButtonGroupStory();
 sliderStory();
 

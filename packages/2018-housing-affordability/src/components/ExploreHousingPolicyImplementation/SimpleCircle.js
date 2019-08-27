@@ -1,6 +1,6 @@
-import React from "react";
 import PropTypes from "prop-types";
-import { css } from "emotion";
+/** @jsx jsx */
+import { css, jsx } from "@emotion/core";
 
 import { VictoryTheme } from "@hackoregon/component-library";
 
@@ -10,7 +10,7 @@ function SimpleCircle({ selected, index }) {
 
   return (
     <svg
-      className={css`
+      css={css`
         padding-right: ${padding};
       `}
       viewBox="0 0 10 10"

@@ -8,7 +8,7 @@ import { isLoaded } from "reduxful";
 import { resourceShape } from "reduxful/react-addons";
 import { CivicCard } from "@hackoregon/component-library";
 
-import <%=StoryCardName%>Meta from "./<%=storyCardName%>Meta";
+import <%=storyCardName%>Meta from "./<%=storyCardName%>Meta";
 import api from "../../state/<%=slug%>/api";
 
 const <%=StoryCardName%> = ({ init, data, Layout }) => {
@@ -22,12 +22,11 @@ const <%=StoryCardName%> = ({ init, data, Layout }) => {
     */
   ]);
 
-  // FIXME: mockRidershipOverTime should be a variable
-  const loading = !isLoaded(data.mockRidershipOverTime);
+  const loading = !isLoaded(data.<%=aPI%>);
 
   return (
     <CivicCard
-      cardMeta={<%=StoryCardName%>Meta}
+      cardMeta={<%=storyCardName%>Meta}
       isLoading={loading}
       data={data}
       Layout={Layout}
@@ -39,15 +38,14 @@ const <%=StoryCardName%> = ({ init, data, Layout }) => {
 
 <%=StoryCardName%>.propTypes = {
   init: PropTypes.func,
-  data: PropTypes.shape({ mockRidershipOverTime: resourceShape }),
+  data: PropTypes.shape({ <%=aPI%>: resourceShape }),
   Layout: PropTypes.func
 };
 
 export default connect(
   state => ({
     data: {
-      // FIXME: mockRidershipOverTime should be a variable
-      mockRidershipOverTime: api.selectors.getMockRidershipData(
+      <%=aPI%>: api.selectors.get<%=API%>Data(
         state.package<%= h.changeCase.pascalCase(package)%> || state
       )
     }
@@ -55,8 +53,7 @@ export default connect(
   }),
   dispatch => ({
     init() {
-      // FIXME: mockRidershipOverTime should be a variable
-      dispatch(api.actionCreators.getMockRidershipData());
+      dispatch(api.actionCreators.get<%=API%>Data());
     }
   })
 )(<%=StoryCardName%>);

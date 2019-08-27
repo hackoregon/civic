@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
-import React from "react";
+import { Component } from "react";
 import PropTypes from "prop-types";
-import { css } from "emotion";
+/** @jsx jsx */
+import { css, jsx } from "@emotion/core";
 import { connect } from "react-redux";
 import { uniqBy } from "lodash";
 
@@ -76,7 +77,7 @@ const defaultProps = {
   }
 };
 
-class RealTimeInformationOnPoliticalCampaigns extends React.Component {
+class RealTimeInformationOnPoliticalCampaigns extends Component {
   componentDidMount() {
     this.props.setCampaign(campaign);
     this.props.setElectionCycle(electionCycle);
@@ -132,7 +133,7 @@ class RealTimeInformationOnPoliticalCampaigns extends React.Component {
         slug="real-time-information-on-political-campaigns"
         loading={this.props.loadingControls}
       >
-        <h2 className={descriptionClass}>
+        <h2 css={descriptionClass}>
           Data on contributions and spending from ORESTAR
         </h2>
         <Controls
@@ -143,18 +144,18 @@ class RealTimeInformationOnPoliticalCampaigns extends React.Component {
           electionCycles={electionCycles}
           setElectionCycle={this.props.setElectionCycle}
         />
-        <p className={missionClass} />
-        <div className={chartGrid}>
-          <div className={chartCol}>
-            <div className={chartStyle}>
+        <p css={missionClass} />
+        <div css={chartGrid}>
+          <div css={chartCol}>
+            <div css={chartStyle}>
               <SpendingBreakdown
                 spending={spending}
                 loading={this.props.loadingSpendingBreakdown}
               />
             </div>
           </div>
-          <div className={chartCol}>
-            <div className={chartStyle}>
+          <div css={chartCol}>
+            <div css={chartStyle}>
               <ContributorBreakdown
                 contributors={contributors}
                 loading={this.props.loadingContributorBreakdown}
