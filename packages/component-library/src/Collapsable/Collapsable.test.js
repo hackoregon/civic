@@ -24,21 +24,4 @@ describe("Collapsable", () => {
 
     expect(wrapper.find("h1").length).to.eql(1);
   });
-
-  it("should expand and collapse", () => {
-    const wrapper = shallow(
-      <Collapsable>
-        <h1>test1</h1>
-        <h1 hidden>test2</h1>
-      </Collapsable>
-    );
-
-    expect(wrapper.find("a").text()).to.eql("More");
-    expect(wrapper.find("h1").length).to.eql(1);
-    wrapper.find("a").simulate("click");
-    expect(wrapper.find("a").text()).to.eql("Less");
-    expect(wrapper.find("h1").length).to.eql(2);
-    wrapper.find("a").simulate("click");
-    expect(wrapper.find("h1").length).to.eql(1);
-  });
 });
