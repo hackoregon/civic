@@ -1,6 +1,6 @@
 const chalk = require("chalk");
 const express = require("express");
-const resolve = require("path").resolve;
+const {resolve} = require("path");
 const compression = require("compression");
 
 const app = express();
@@ -24,7 +24,7 @@ app.get(
     console.log("Servicing request for", req.url) ||
     res.send(`
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>CIVIC Platform – Making Public Information Public Knowledge</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
