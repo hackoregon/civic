@@ -1,11 +1,17 @@
-/* TODO: Fix linting errors */
-/* eslint-disable */
-
-import { Children, Component } from "react";
 /** @jsx jsx */
+import { useState, Children, useRef, Fragment } from "react";
+import PropTypes from "prop-types";
 import { jsx, css } from "@emotion/core";
 
+// To do: replace color with link color when in brand theme
 const toggleStyle = css`
+  background: none;
+  color: rgb(30, 98, 189);
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
   padding: 10px;
   border-bottom: none;
   margin-left: auto;
@@ -18,63 +24,80 @@ const toggleStyle = css`
   font-size: 1em;
 `;
 
-class Collapsable extends Component {
-  constructor(props) {
-    super(props);
+const arrowStyle = css`
+  display: block;
+`;
 
-    this.state = { expanded: false };
+const hiddenStyle = css`
+  outline: 0;
+`;
 
-    this.onToggle = this.onToggle.bind(this);
-  }
+const visuallyHidden = css`
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap; /* added line */
+`;
 
-  onToggle() {
-    this.setState({ expanded: !this.state.expanded });
-  }
+function Collapsable({ children, description }) {
+  const hiddenRef = useRef(null);
+  const buttonRef = useRef(null);
+  const [expanded, setExpanded] = useState(false);
+  const cta = expanded ? "Less" : "More";
+  const arrow = expanded ? "up" : "down";
+  const unhiddenChildren = Children.toArray(children).filter(
+    child => !child.props.hidden
+  );
+  const hiddenChildren = Children.toArray(children).filter(
+    child => child.props.hidden
+  );
 
-  renderToggle() {
-    const cta = this.state.expanded ? "Less" : "More";
-    const arrow = this.state.expanded ? "up" : "down";
-
-    return (
-      <a css={toggleStyle} onClick={this.onToggle}>
-        {cta}
-        <span style={{ display: "block" }} className={`fa fa-arrow-${arrow}`} />
-      </a>
-    );
-  }
-
-  render() {
-    const children = [];
-    let showToggle;
-    let toggle;
-
-    Children.forEach(this.props.children, child => {
-      if (child.props.hidden) {
-        showToggle = true;
-
-        if (this.state.expanded) {
-          children.push(child);
-        }
-      } else {
-        children.push(child);
-      }
-    });
-
-    if (showToggle) {
-      toggle = this.renderToggle();
+  function handleClick(isExpanded) {
+    setExpanded(!isExpanded);
+    if (isExpanded) {
+      buttonRef.current.focus();
+    } else {
+      hiddenRef.current.focus();
     }
-
-    return (
-      <div>
-        {children}
-        {toggle}
-      </div>
-    );
   }
+
+  return (
+    <Fragment>
+      {unhiddenChildren}
+      <div css={hiddenStyle} role="group" tabIndex="-1" ref={hiddenRef}>
+        {expanded && hiddenChildren}
+      </div>
+      {hiddenChildren.length > 0 && (
+        <button
+          css={toggleStyle}
+          onClick={() => handleClick(expanded)}
+          type="button"
+          aria-live="polite"
+          ref={buttonRef}
+        >
+          {cta}
+          <span css={visuallyHidden}>{description}</span>
+          <span
+            css={arrowStyle}
+            className={`fa fa-arrow-${arrow}`}
+            aria-hidden="true"
+          />
+        </button>
+      )}
+    </Fragment>
+  );
 }
 
 const Section = ({ children }) => children;
 
 Collapsable.Section = Section;
+
+Collapsable.propTypes = {
+  children: PropTypes.node,
+  description: PropTypes.string.isRequired
+};
 
 export default Collapsable;
