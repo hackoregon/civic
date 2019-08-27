@@ -19,7 +19,11 @@ const HousingDisplacement = ({ init, data, Layout }) => {
     */
   ]);
 
-  const loading = !isLoaded(data.homeownershipByRace);
+  const loading =
+    !isLoaded(data.homeownershipByRace) ||
+    !isLoaded(data.homeownershipHistoricallyBlack20) ||
+    !isLoaded(data.homeownershipHistoricallyBlack40) ||
+    !isLoaded(data.homeownershipHistoricallyBlack60);
 
   return (
     <CivicCard
@@ -44,6 +48,18 @@ export default connect(
     data: {
       homeownershipByRace: api.selectors.getHomeownershipByRaceData(
         state.package2019Housing || state
+      ),
+      homeownershipHistoricallyBlack60: api.selectors.getHomeownershipByRaceData(
+        state.package2019Housing || state,
+        { "1990-black-pop-proportion-floor": 0.6 }
+      ),
+      homeownershipHistoricallyBlack40: api.selectors.getHomeownershipByRaceData(
+        state.package2019Housing || state,
+        { "1990-black-pop-proportion-floor": 0.4 }
+      ),
+      homeownershipHistoricallyBlack20: api.selectors.getHomeownershipByRaceData(
+        state.package2019Housing || state,
+        { "1990-black-pop-proportion-floor": 0.2 }
       )
     }
     // state.packageProjectName || state needed to make work in the project package and 2018 package
@@ -51,6 +67,21 @@ export default connect(
   dispatch => ({
     init() {
       dispatch(api.actionCreators.getHomeownershipByRaceData());
+      dispatch(
+        api.actionCreators.getHomeownershipByRaceData({
+          "1990-black-pop-proportion-floor": 0.6
+        })
+      );
+      dispatch(
+        api.actionCreators.getHomeownershipByRaceData({
+          "1990-black-pop-proportion-floor": 0.4
+        })
+      );
+      dispatch(
+        api.actionCreators.getHomeownershipByRaceData({
+          "1990-black-pop-proportion-floor": 0.2
+        })
+      );
     }
   })
 )(HousingDisplacement);
