@@ -1,8 +1,9 @@
 /* TODO: Fix linting errors */
 /* eslint-disable */
 
-import React, { Children } from "react";
-import { css } from "emotion";
+import { Children, Component } from "react";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 
 const toggleStyle = css`
   padding: 10px;
@@ -17,7 +18,7 @@ const toggleStyle = css`
   font-size: 1em;
 `;
 
-class Collapsable extends React.Component {
+class Collapsable extends Component {
   constructor(props) {
     super(props);
 
@@ -35,7 +36,7 @@ class Collapsable extends React.Component {
     const arrow = this.state.expanded ? "up" : "down";
 
     return (
-      <a className={toggleStyle} onClick={this.onToggle}>
+      <a css={toggleStyle} onClick={this.onToggle}>
         {cta}
         <span style={{ display: "block" }} className={`fa fa-arrow-${arrow}`} />
       </a>
