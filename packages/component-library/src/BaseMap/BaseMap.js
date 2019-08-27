@@ -39,8 +39,8 @@ class BaseMap extends Component {
         longitude: props.initialLongitude,
         latitude: props.initialLatitude,
         zoom: props.initialZoom,
-        minZoom: 6,
-        maxZoom: 20,
+        minZoom: props.minZoom,
+        maxZoom: props.maxZoom,
         pitch: props.initialPitch,
         bearing: 0,
         scrollZoom: true
@@ -124,7 +124,6 @@ class BaseMap extends Component {
 
   render() {
     const { viewport, tooltipInfo, x, y, mounted } = this.state;
-
     const {
       height,
       containerHeight,
@@ -149,15 +148,20 @@ class BaseMap extends Component {
       animate,
       animationDuration,
       scaleBar,
-      scaleBarOptions
+      scaleBarOptions,
+      sharedViewport,
+      onSharedViewportChange
     } = this.props;
 
     viewport.width = containerWidth || 500;
     viewport.height = useContainerHeight ? containerHeight : height;
 
     const childrenLayers = React.Children.map(children, child => {
+      const layerViewport = sharedViewport
+        ? { ...viewport, ...sharedViewport }
+        : viewport;
       return React.cloneElement(child, {
-        viewport,
+        viewport: layerViewport,
         tooltipInfo,
         x,
         y,
@@ -207,29 +211,37 @@ class BaseMap extends Component {
           transitionInterpolator: new FlyToInterpolator()
         };
 
+    const finalViewport = sharedViewport
+      ? {
+          ...viewport,
+          ...sharedViewport,
+          height,
+          width: containerWidth
+        }
+      : viewport;
+
     return (
       <div className={mapWrapper}>
         <MapGL
           className="MapGL"
-          {...viewport}
+          {...finalViewport}
           {...animationProps}
           mapStyle={baseMapboxStyleURL}
           mapboxApiAccessToken={mapboxToken}
-          onViewportChange={newViewport => this.onViewportChange(newViewport)}
+          onViewportChange={newViewport => {
+            if (onSharedViewportChange) {
+              onSharedViewportChange(newViewport);
+            } else {
+              this.onViewportChange(newViewport);
+            }
+          }}
           ref={this.mapRef}
           {...mapGLOptions}
           onClick={onBaseMapClick}
           onLoad={onMapLoad}
         >
           <div className={navControl}>
-            {navigation && (
-              <NavigationControl
-                className="NavigationControl"
-                onViewportChange={newViewport =>
-                  this.onViewportChange(newViewport)
-                }
-              />
-            )}
+            {navigation && <NavigationControl />}
           </div>
           {locationMarker && (
             <Marker
@@ -266,6 +278,8 @@ BaseMap.propTypes = {
   initialLongitude: PropTypes.number,
   initialLatitude: PropTypes.number,
   initialZoom: PropTypes.number,
+  minZoom: PropTypes.number,
+  maxZoom: PropTypes.number,
   initialPitch: PropTypes.number,
   height: PropTypes.number,
   containerHeight: PropTypes.number,
@@ -300,7 +314,9 @@ BaseMap.propTypes = {
   scaleBarOptions: PropTypes.shape({
     maxWidth: PropTypes.number,
     units: PropTypes.string
-  })
+  }),
+  sharedViewport: PropTypes.shape({}),
+  onSharedViewportChange: PropTypes.func
 };
 
 BaseMap.defaultProps = {
@@ -313,6 +329,8 @@ BaseMap.defaultProps = {
   initialLongitude: -122.6765,
   initialLatitude: 45.5231,
   initialZoom: 9.5,
+  minZoom: 6,
+  maxZoom: 20,
   initialPitch: 0,
   height: 500,
   locationMarkerCoord: {
