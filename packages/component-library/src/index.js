@@ -49,6 +49,7 @@ export { default as BoundaryMap } from "./BoundaryMap/BoundaryMap";
 export { default as MapTooltip } from "./MapTooltip/MapTooltip";
 export { default as CivicSandboxMap } from "./CivicSandboxMap/CivicSandboxMap";
 export { default as MultiLayerMap } from "./MultiLayerMap/MultiLayerMap";
+export { default as ComparisonMap } from "./ComparisonMap/ComparisonMap";
 export { default as GradientScale } from "./GradientScale/GradientScale";
 export {
   default as PackageSelectorBox
