@@ -1,3 +1,5 @@
+import { cloneDeep } from "lodash";
+
 export function createOrbsFromKit(kitItems, bounds, config) {
   if (!kitItems.length) {
     return [];
@@ -33,35 +35,32 @@ export function createOrbsFromKit(kitItems, bounds, config) {
 }
 
 export function isCorrectCompletedOrb(currentOrb, activeTask) {
-  return activeTask.requiredItem === currentOrb.type;
+  return activeTask && activeTask.requiredItem === currentOrb.type;
 }
 
-export function isIncorrectCompletedOrb(currentOrb, completedOrbs, activeTask) {
-  return (
-    activeTask.requiredItem !== currentOrb.type &&
-    completedOrbs.includes(currentOrb.type)
-  );
+export function isIncorrectCompletedOrb(currentOrb, activeTask) {
+  return activeTask && activeTask.requiredItem !== currentOrb.type;
 }
 
-export function completedOrbHandler(
-  completedOrbs,
-  currentOrb,
-  activeTask,
-) {
-  const orbCopy = currentOrb;
-  if (isCorrectCompletedOrb(currentOrb, activeTask)) {
-    orbCopy.y -= 1.0;
+export function completedOrbHandler(currentOrb, activeTask) {
+  const orbCopy = cloneDeep(currentOrb);
+  if (isCorrectCompletedOrb(orbCopy, activeTask)) {
+    orbCopy.y -= 2.0;
   }
 
-  if (isIncorrectCompletedOrb(currentOrb, completedOrbs, activeTask)) {
-    // currentOrb.y -= currentOrb.velocity.y + Math.sin((tick + index) * 0.1) * orbConfig.period;
+  if (isIncorrectCompletedOrb(orbCopy, activeTask)) {
+    orbCopy.y += 2.0;
   }
+
+  return orbCopy;
 }
 
 export function uncompletedOrbHandler(currentOrb, tick, index, orbConfig) {
-  currentOrb.x += currentOrb.velocity.x; // + Math.cos(tick * 0.1) * period;
-  currentOrb.y +=
-    currentOrb.velocity.y + Math.sin((tick + index) * 0.1) * orbConfig.period;
+  const orbCopy = cloneDeep(currentOrb);
 
-  return currentOrb;
+  orbCopy.x += orbCopy.velocity.x; // + Math.cos(tick * 0.1) * period;
+  orbCopy.y +=
+    orbCopy.velocity.y + Math.sin((tick + index) * 0.1) * orbConfig.period;
+
+  return orbCopy;
 }

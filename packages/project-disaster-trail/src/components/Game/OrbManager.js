@@ -84,27 +84,47 @@ const OrbManager = ({
       // get the model
       let currentOrb = { ...orbs[i] };
       const currentOrbId = currentOrb.orbId;
+      const isOrbCompleted = completedOrbs.indexOf(currentOrbId) > -1;
 
       // if the orb is touched or complete, do not move it
-      // TODO: seperate out orb animation when good / bad
       if (touchedOrbs.indexOf(currentOrbId) > -1) {
         tempModels.push(currentOrb);
         // eslint-disable-next-line no-continue
         continue;
-      } else if (completedOrbs.indexOf(currentOrbId) > -1) {
-        completedOrbHandler(completedOrbs, currentOrb, activeTask, tick);
+      }
+
+      if (isOrbCompleted) {
+        currentOrb = completedOrbHandler(currentOrb, activeTask);
       } else {
         currentOrb = uncompletedOrbHandler(currentOrb, tick, i, ORB_CONFIG);
       }
 
       // is it offscreen?
-      if (currentOrb.x < -ORB_CONFIG.orbSize) currentOrb.x += bounds.width;
-      if (currentOrb.x > bounds.width)
-        currentOrb.x -= bounds.width + ORB_CONFIG.orbSize;
+      if (currentOrb.x < -ORB_CONFIG.orbSize) {
+        currentOrb.x += bounds.width;
+      }
 
-      if (currentOrb.y < -ORB_CONFIG.orbSize) currentOrb.y += bounds.height;
-      if (currentOrb.y > bounds.height)
+      if (currentOrb.x > bounds.width) {
+        currentOrb.x -= bounds.width + ORB_CONFIG.orbSize;
+      }
+
+      if (currentOrb.y < -ORB_CONFIG.orbSize) {
+        if (isOrbCompleted) {
+          // eslint-disable-next-line no-continue
+          continue;
+        }
+
+        currentOrb.y += bounds.height;
+      }
+
+      if (currentOrb.y > bounds.height) {
+        if (isOrbCompleted) {
+          // eslint-disable-next-line no-continue
+          continue;
+        }
+
         currentOrb.y -= bounds.height + ORB_CONFIG.orbSize;
+      }
 
       // store the updated model.
       tempModels.push(currentOrb);
