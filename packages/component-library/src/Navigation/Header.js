@@ -124,7 +124,7 @@ class Header extends Component {
           <a className={burgerClass}>
             <Icon
               key="nav-burger"
-              className={`${ICONS.hamburger}`}
+              className={ICONS.hamburger}
               handleClick={this.togglesNestedMenu}
             />
           </a>
