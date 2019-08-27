@@ -1,6 +1,6 @@
-import React from "react";
 import PropTypes from "prop-types";
-import { css } from "emotion";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 import { get } from "lodash";
 import window from "global/window";
 
@@ -37,7 +37,7 @@ const MapTooltip = props => {
 
   return (
     <div
-      className={tooltip}
+      css={tooltip}
       style={{
         left: xPosition,
         top: yPostition

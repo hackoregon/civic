@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
-import React from "react";
-import { css } from "emotion";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 
 const placeholderClass = css`
   text-align: center;
@@ -34,7 +34,7 @@ const IssueText = ({ issue }) => (
 );
 
 const Placeholder = ({ issue, children }) => (
-  <div className={placeholderClass}>
+  <div css={placeholderClass}>
     {issue ? <IssueText issue={issue} /> : children || <DefaultText />}
   </div>
 );

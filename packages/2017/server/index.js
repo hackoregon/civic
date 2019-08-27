@@ -1,6 +1,6 @@
 const chalk = require("chalk");
 const express = require("express");
-const {resolve} = require("path");
+const { resolve } = require("path");
 const compression = require("compression");
 
 const app = express();

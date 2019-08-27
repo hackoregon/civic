@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
-import React from "react";
-import { css } from "emotion";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 
 const pdfClass = css`
   width: 100%;
@@ -8,7 +8,7 @@ const pdfClass = css`
 `;
 
 const PDF = ({ url }) => (
-  <object className={pdfClass} data={url} type="application/pdf">
+  <object css={pdfClass} data={url} type="application/pdf">
     <a href={url}>{url}</a>
   </object>
 );

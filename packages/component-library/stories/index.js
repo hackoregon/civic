@@ -65,7 +65,6 @@ import TypographyStyleParagraphs from "./styleGuideStories/TypographyStyleParagr
 import UIComponentsStyle from "./styleGuideStories/UIComponentsStyle.story";
 // Legacy components used in 2017 package. Not supported for ongoing development.
 // import editableStory from './Editable.story';
-// import landingPage from './LandingPage.story';
 
 storiesOf("Welcome|About Us", module)
   .addParameters({ options: { showPanel: false } })
@@ -171,5 +170,4 @@ sandboxStory();
 
 // Legacy components used in 2017 package. Not supported for ongoing development.
 // editableStory();
-// landingPage();
 // sankeyStory();

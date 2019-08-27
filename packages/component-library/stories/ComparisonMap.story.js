@@ -1,4 +1,5 @@
 import React from "react";
+/* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
 import { withKnobs, select, number, text } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
@@ -12,8 +13,6 @@ import {
   VisualizationColors
 } from "../src";
 import notes from "./comparisonMap.notes.md";
-
-// import { css } from "emotion";
 
 const GROUP_IDS = {
   DESIGN: "Design",

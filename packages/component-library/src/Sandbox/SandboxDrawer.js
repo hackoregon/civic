@@ -1,14 +1,14 @@
 /* TODO: Fix linting errors */
 /* eslint-disable */
 
-import React from "react";
-import { css } from "emotion";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
+import shortid from "shortid";
 import Dropdown from "../Dropdown/Dropdown";
 import SandboxDateSelector from "./SandboxDateSelector";
 import SandboxToggleSwitch from "./SandboxToggleSwitch";
 import SandboxMapLegend from "./SandboxMapLegend";
 import SandboxBaseMapSelector from "./SandboxBaseMapSelector";
-import shortid from "shortid";
 
 const menuOpen = css(`
   position: absolute;
@@ -59,10 +59,10 @@ const SandboxDrawer = ({
   baseMapStyle
 }) => {
   return (
-    <div className={drawerVisible ? menuOpen : menuClosed}>
+    <div css={drawerVisible ? menuOpen : menuClosed}>
       <div onClick={toggleDrawer}>
         <div
-          className={css(`
+          css={css(`
           text-transform: uppercase;
           font-size: 1rem;
           cursor: pointer;
@@ -71,7 +71,7 @@ const SandboxDrawer = ({
         `)}
         >
           <div
-            className={css(`
+            css={css(`
             font-size: 1.4rem;
             color: #F3F2F3;
             line-height: 1.5;
@@ -87,7 +87,7 @@ const SandboxDrawer = ({
       </div>
       {drawerVisible && (
         <div
-          className={css(`
+          css={css(`
           background: rgba(243,242,243,0.9);
           overflow-y: auto;
           min-height: 550px;
@@ -101,13 +101,13 @@ const SandboxDrawer = ({
         `)}
         >
           <div
-            className={css(`
+            css={css(`
             position: relative;
             z-index: 900;
           `)}
           >
             <h2
-              className={css(`
+              css={css(`
               color: #555;
               text-transform: uppercase;
               margin: 0 10px;
@@ -126,13 +126,13 @@ const SandboxDrawer = ({
             />
           </div>
           <div
-            className={css(`
+            css={css(`
             position: relative;
             z-index: 400;
           `)}
           >
             <h2
-              className={css(`
+              css={css(`
               color: #555;
               text-transform: uppercase;
               margin: 0 10px;
@@ -155,7 +155,7 @@ const SandboxDrawer = ({
           {foundationData && (
             <div>
               <div
-                className={css(`
+                css={css(`
                 position: relative;
                 font-size: .75rem;
                 color: #333;
@@ -173,7 +173,7 @@ const SandboxDrawer = ({
                 ) : foundationData.slide_meta &&
                   foundationData.slide_meta.dates.default_date_filter ? (
                   <span
-                    className={css(`
+                    css={css(`
                       font-size: 22px;
                       font-weight: 400;
                       padding: 0 0 0 16px;
@@ -191,7 +191,7 @@ const SandboxDrawer = ({
                 />
               )}
               <h2
-                className={css(`
+                css={css(`
                 color: #555;
                 text-transform: uppercase;
                 margin: 0 10px;
@@ -208,13 +208,13 @@ const SandboxDrawer = ({
             </div>
           )}
           <div
-            className={css(`
+            css={css(`
             position: relative;
             z-index: 200;
           `)}
           >
             <h2
-              className={css(`
+              css={css(`
               color: #555;
               text-transform: uppercase;
               margin: 0 10px;
@@ -224,6 +224,7 @@ const SandboxDrawer = ({
             </h2>
           </div>
           {allSlides.map((slide, index) => {
+            // eslint-disable-next-line no-extra-boolean-cast
             const selectedSlideData = !!slideData.find(
               slideDatum => slideDatum[slide.label]
             )
@@ -235,7 +236,7 @@ const SandboxDrawer = ({
             const backgroundSlideColor = slide.color;
             const formatBackgroundColor = arr =>
               arr.reduce(
-                (acc, cur, i) => (i < 3 ? acc + cur + "," : acc + "0.9)"),
+                (acc, cur, i) => (i < 3 ? `${acc + cur},` : `${acc}0.9)`),
                 "rgba("
               );
             const slideBackGroundColor = formatBackgroundColor(
@@ -250,7 +251,7 @@ const SandboxDrawer = ({
             return (
               <div key={shortid.generate()}>
                 <div
-                  className={css(`
+                  css={css(`
                   border-top: 1px solid #ddd;
                   padding: .3rem .5rem;
                   text-transform: capitalize;
@@ -268,7 +269,7 @@ const SandboxDrawer = ({
                   />
                 </div>
                 <div
-                  className={css(`
+                  css={css(`
                   padding: .5rem 0 .5rem 0;
                   font-size: .75rem;
                   color: #333;
@@ -289,11 +290,11 @@ const SandboxDrawer = ({
                     selectedSlideData.slide_meta &&
                     selectedSlideData.slide_meta.dates.default_date_filter ? (
                     <span
-                      className={css(`
-                        font-size: 18px;
-                        padding: 0 0 0 17px;
-                        margin: 0;
-                      `)}
+                      css={css(`
+                          font-size: 18px;
+                          padding: 0 0 0 17px;
+                          margin: 0;
+                        `)}
                     >
                       {selectedSlideData.slide_meta.dates.default_date_filter}
                     </span>
