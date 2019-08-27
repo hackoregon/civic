@@ -39,7 +39,6 @@ function createKit(currentKit) {
 }
 
 const KitScreen = ({ currentKit }) => {
-  console.log("Expecting current kit", currentKit);
   const kit = createKit(currentKit);
 
   return <div css={containerStyle}>{kit}</div>;
