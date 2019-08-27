@@ -37,7 +37,7 @@ export const tasks = {
   // Save Yourself
   [PROTECT_BODY]: {
     id: PROTECT_BODY,
-    time: 15 * 1000,
+    time: 15,
     requiredItem: protectiveGear,
     numberItemsToSolve: 3,
     points: 3,
@@ -48,7 +48,7 @@ export const tasks = {
   },
   [PROTECT_LUNGS]: {
     id: PROTECT_LUNGS,
-    time: 15 * 1000,
+    time: 15,
     requiredItem: dustMask,
     numberItemsToSolve: 1,
     points: 3,
@@ -60,7 +60,7 @@ export const tasks = {
   // Save Others
   [COLD]: {
     id: COLD,
-    time: 20 * 1000, // seconds * milliseconds
+    time: 20,
     requiredItem: blanket,
     numberItemsToSolve: 1,
     points: 3,
@@ -71,7 +71,7 @@ export const tasks = {
   },
   [FIRE]: {
     id: FIRE,
-    time: 20 * 1000, // seconds * milliseconds
+    time: 30,
     requiredItem: fireExtinguisher,
     numberItemsToSolve: 5,
     points: 5,
@@ -82,7 +82,7 @@ export const tasks = {
   },
   [HUNGER]: {
     id: HUNGER,
-    time: 20 * 1000, // seconds * milliseconds
+    time: 20,
     requiredItem: food,
     numberItemsToSolve: 5,
     points: 5,
@@ -93,7 +93,7 @@ export const tasks = {
   },
   [HOLE]: {
     id: HOLE,
-    time: 20 * 1000, // seconds * milliseconds
+    time: 20,
     requiredItem: rope,
     numberItemsToSolve: 1,
     points: 3,
@@ -104,7 +104,7 @@ export const tasks = {
   },
   [INJURY]: {
     id: INJURY,
-    time: 20 * 1000, // seconds * milliseconds
+    time: 30,
     requiredItem: firstAidKit,
     numberItemsToSolve: 5,
     points: 7,
@@ -115,7 +115,7 @@ export const tasks = {
   },
   [RAIN]: {
     id: RAIN,
-    time: 20 * 1000, // seconds * milliseconds
+    time: 20,
     requiredItem: tent,
     numberItemsToSolve: 2,
     points: 4,
@@ -126,7 +126,7 @@ export const tasks = {
   },
   [RESCUE_PET]: {
     id: RESCUE_PET,
-    time: 20 * 1000, // seconds * milliseconds
+    time: 20,
     requiredItem: flashlight,
     numberItemsToSolve: 2,
     points: 4,
@@ -137,7 +137,7 @@ export const tasks = {
   },
   [THIRST]: {
     id: THIRST,
-    time: 20 * 1000, // seconds * milliseconds
+    time: 30,
     requiredItem: water,
     numberItemsToSolve: 5,
     points: 5,

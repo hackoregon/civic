@@ -1,6 +1,6 @@
-import React from "react";
 import PropTypes from "prop-types";
-import { css } from "emotion";
+/** @jsx jsx */
+import { css, jsx } from "@emotion/core";
 import SimpleCircle from "./SimpleCircle";
 
 const policyContainer = css`
@@ -32,13 +32,13 @@ const legendScale = [6, 8, 9];
 function PolicyText({ onClick, data, selected }) {
   return (
     <div
-      className={policyContainer}
+      css={policyContainer}
       onClick={onClick}
       onKeyPress={onClick}
       role="button"
       tabIndex={0}
     >
-      <div className={policyCircle}>
+      <div css={policyCircle}>
         <SimpleCircle
           selected={selected}
           index={legendScale.findIndex(x => data.governments <= x)}
@@ -47,9 +47,9 @@ function PolicyText({ onClick, data, selected }) {
       <div>
         {selected ? (
           <div>
-            <h2 className={policyLink}>{data.policy_name}</h2>
+            <h2 css={policyLink}>{data.policy_name}</h2>
             <h5
-              className={css`
+              css={css`
                 margin: 0;
               `}
             >
@@ -58,9 +58,9 @@ function PolicyText({ onClick, data, selected }) {
           </div>
         ) : (
           <div>
-            <h3 className={policyLink}>{data.policy_name}</h3>
+            <h3 css={policyLink}>{data.policy_name}</h3>
             <h6
-              className={css`
+              css={css`
                 margin: 0;
               `}
             >

@@ -5,7 +5,9 @@ import PropTypes from "prop-types";
 import _ from "lodash";
 
 import Collapsable from "../Collapsable/Collapsable";
-import CivicVictoryTheme from "../VictoryTheme/CivicVictoryTheme";
+import VisualizationColors from "../_Themes/VisualizationColors";
+
+const { victoryColors } = VisualizationColors;
 
 const chipStyle = index => css`
   display: inline-block;
@@ -13,9 +15,7 @@ const chipStyle = index => css`
   height: 2em;
   line-height: 2em;
   border-radius: 1em;
-  background-color: ${CivicVictoryTheme.group.colorScale[
-    index % CivicVictoryTheme.group.colorScale.length
-  ]};
+  background-color: ${victoryColors[index % victoryColors.length]};
   margin: 0.5em 0.5em;
   font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
   font-weight: bold;
@@ -32,20 +32,30 @@ Chip.propTypes = {
   index: PropTypes.number
 };
 
-export function Resource({ item }) {
-  return _.has(item, "section") ? (
-    <h3>{item.section}</h3>
-  ) : (
-    <li>
-      <a href={item.link}>{item.description}</a>
-    </li>
+export function Resource({ section }) {
+  return (
+    <Fragment>
+      <h3>{section.heading}</h3>
+      <ul>
+        {section.items.map(item => (
+          <li>
+            <a href={item.link}>{item.description}</a>
+          </li>
+        ))}
+      </ul>
+    </Fragment>
   );
 }
 
 Resource.propTypes = {
-  item: PropTypes.shape({
-    link: PropTypes.string,
-    description: PropTypes.string
+  section: PropTypes.shape({
+    heading: PropTypes.string,
+    items: PropTypes.arrayOf(
+      PropTypes.shape({
+        link: PropTypes.string,
+        description: PropTypes.string
+      })
+    )
   })
 };
 

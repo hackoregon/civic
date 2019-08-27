@@ -10,6 +10,7 @@ const containerStyle = css`
   display: flex;
   flex-direction: column-reverse;
   width: 100vw;
+  padding-top: 100px;
 `;
 
 const kitStyle = css`

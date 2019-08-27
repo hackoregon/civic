@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { Link } from "react-router";
 import { css } from "emotion";
+import shortid from "shortid";
 
 const visibleClass = css`
   visibility: visible;
@@ -77,8 +78,8 @@ const NavSubMenu = ({ items, isVisible }) => (
   <div
     className={`${nestedMenuClass} ${isVisible ? visibleClass : hiddenClass}`}
   >
-    {items.map((item, index) => (
-      <Link key={index} to={pathOrName(item.path, item.name)}>
+    {items.map(item => (
+      <Link key={shortid.generate()} to={pathOrName(item.path, item.name)}>
         <span className="nested-menu-link">{item.name}</span>
       </Link>
     ))}

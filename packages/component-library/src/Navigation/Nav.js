@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import NavSubMenu from "./NavSubMenu";
 import NavLink from "./NavRouterLink";
 import Icon from "../Icon/Icon";
+import shortid from "shortid";
 
 const defaultMenu = [
   {
@@ -149,10 +150,10 @@ class Nav extends Component {
           />
         </a>
         <ul>
-          {menu.map((item, idx) =>
+          {menu.map(item =>
             item.nestedMenu ? (
               <li
-                key={idx}
+                key={shortid.generate()}
                 onClick={e => toggleNestedMenu(item.name, item.nestedMenu, e)}
               >
                 <a className="nav-item">
@@ -161,7 +162,11 @@ class Nav extends Component {
                 </a>
               </li> // eslint-disable-line
             ) : (
-              <NavLink key={idx} name={item.name} path={item.path} />
+              <NavLink
+                key={shortid.generate()}
+                name={item.name}
+                path={item.path}
+              />
             )
           )}
         </ul>

@@ -1,7 +1,8 @@
-import React from "react";
+import { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { css } from "emotion";
+/** @jsx jsx */
+import { css, jsx } from "@emotion/core";
 
 import {
   CivicStoryCard,
@@ -34,9 +35,10 @@ const cardError = css`
   border: 1px solid #c99;
 `;
 
-export class PortlandFarmersMarkets extends React.Component {
+class PortlandFarmersMarkets extends Component {
   componentDidMount() {
-    this.props.init();
+    const { init } = this.props;
+    init();
   }
 
   render() {
@@ -48,12 +50,12 @@ export class PortlandFarmersMarkets extends React.Component {
     } = this.props;
 
     if (isLoading) {
-      return <div className={cardLoading}>Loading...</div>;
-    } else if (!portlandFarmersMarkets) {
+      return <div css={cardLoading}>Loading...</div>;
+    }
+
+    if (!portlandFarmersMarkets) {
       return (
-        <div className={cardError}>
-          Could not render Farmers Markets Over Time
-        </div>
+        <div css={cardError}>Could not render Farmers Markets Over Time</div>
       );
     }
 
@@ -96,13 +98,13 @@ export class PortlandFarmersMarkets extends React.Component {
         )}
         <h3>Neighborhood Friendly</h3>
         <p>
-          Portland has many farmers' markets and they are well-distributed
+          Portland has many farmers&apos; markets and they are well-distributed
           throughout the inner-city, extending through the westside as well as
           St. Johns.
         </p>
         <p>
-          East of I-205 is a notable Farmers' Market desert. What could be the
-          explanation for this?
+          East of I-205 is a notable Farmers&apos; Market desert. What could be
+          the explanation for this?
         </p>
       </CivicStoryCard>
     );
@@ -114,8 +116,8 @@ PortlandFarmersMarkets.propTypes = {
   init: PropTypes.func,
   selectFarmersMarket: PropTypes.func,
   isLoading: PropTypes.bool,
-  portlandFarmersMarkets: PropTypes.object,
-  activeMarket: PropTypes.object
+  portlandFarmersMarkets: PropTypes.shape({}),
+  activeMarket: PropTypes.shape({})
 };
 
 export default connect(

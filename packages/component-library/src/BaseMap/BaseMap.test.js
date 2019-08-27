@@ -2,9 +2,9 @@ import React from "react";
 import { shallow } from "enzyme";
 import BaseMap from "./BaseMap";
 import ScatterPlotMap from "../ScatterPlotMap/ScatterPlotMap";
+import { MapGLResources } from "../_Themes/index";
 
-const MAPBOX_TOKEN =
-  "pk.eyJ1IjoiaGFja29yZWdvbiIsImEiOiJjamk0MGZhc2cwNDl4M3FsdHAwaG54a3BnIn0.Fq1KA0IUwpeKQlFIoaEn_Q";
+const { MAPBOX_TOKEN } = MapGLResources;
 
 // React Dimensions doesn't render its contents when it has no height or width
 describe.skip("BaseMap", () => {

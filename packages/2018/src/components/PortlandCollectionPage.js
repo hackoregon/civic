@@ -1,6 +1,5 @@
-import React from "react";
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { css } from "emotion";
+/** @jsx jsx */
+import { css, jsx } from "@emotion/core";
 import { Link } from "react-router";
 import { Logo } from "@hackoregon/component-library";
 
@@ -133,33 +132,33 @@ const homeLink = css`
 `;
 
 const PortlandCollectionPage = () => (
-  <div className={collectionPageWrapper}>
-    <div className={leftContainer}>
-      <div className={homeLink}>
+  <div css={collectionPageWrapper}>
+    <div css={leftContainer}>
+      <div css={homeLink}>
         <Link to="/">
           <Logo />
         </Link>
       </div>
       <h1>Portland Collections</h1>
-      <div className={subCopy}>
+      <div css={subCopy}>
         Portland Collections are built by teams of volunteers who are passionate
         about showing the visual side of data to impact community awareness.
       </div>
-      <div className={subCopy}>
+      <div css={subCopy}>
         <a href="https://service.civicpdx.org/">Portland APIs</a>
       </div>
     </div>
-    <div className={sideListWrapper}>
+    <div css={sideListWrapper}>
       <ul>
         <Link to="/sandbox">
-          <li className={itemStyle}>
-            <div className={teamTitleStyle}>Sandbox</div>
+          <li css={itemStyle}>
+            <div css={teamTitleStyle}>Sandbox</div>
             <h2>Explore Interactive Maps from Portland Collections</h2>
           </li>
         </Link>
         <Link to="/cities/portland/disaster">
-          <li className={itemStyle}>
-            <div className={teamTitleStyle}>Disaster Resilience</div>
+          <li css={itemStyle}>
+            <div css={teamTitleStyle}>Disaster Resilience</div>
             <h2>
               Assessing Risk and Prioritizing Action to Strengthen Resilience in
               the Face of a Natural Disaster
@@ -167,8 +166,8 @@ const PortlandCollectionPage = () => (
           </li>
         </Link>
         <Link to="/cities/portland/elections">
-          <li className={itemStyle}>
-            <div className={teamTitleStyle}>Local Elections</div>
+          <li css={itemStyle}>
+            <div css={teamTitleStyle}>Local Elections</div>
             <h2>
               Quantifying Influence and Understanding the Impact of Money in our
               Political System
@@ -176,8 +175,8 @@ const PortlandCollectionPage = () => (
           </li>
         </Link>
         <Link to="/cities/portland/housing">
-          <li className={itemStyle}>
-            <div className={teamTitleStyle}>Housing Affordability</div>
+          <li css={itemStyle}>
+            <div css={teamTitleStyle}>Housing Affordability</div>
             <h2>
               Synthesizing Complex Information to Better Understand Affordable
               Housing Trends and Policy Dynamics
@@ -185,14 +184,14 @@ const PortlandCollectionPage = () => (
           </li>
         </Link>
         <Link to="/cities/portland/neighborhood">
-          <li className={itemStyle}>
-            <div className={teamTitleStyle}>Neighborhood Development</div>
+          <li css={itemStyle}>
+            <div css={teamTitleStyle}>Neighborhood Development</div>
             <h2>Examining Local Patterns, Movement, and Our Sense of Place</h2>
           </li>
         </Link>
         <Link to="/cities/portland/transportation">
-          <li className={itemStyle}>
-            <div className={teamTitleStyle}>Transportation Systems</div>
+          <li css={itemStyle}>
+            <div css={teamTitleStyle}>Transportation Systems</div>
             <h2>Identifying Opportunities for Equitable Mobility in Cities</h2>
           </li>
         </Link>

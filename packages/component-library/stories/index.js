@@ -3,6 +3,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { checkA11y } from "@storybook/addon-a11y";
 
+import badgeStory from "./Badge.story";
 import BarChartStory from "./BarChart.story";
 import baseMapStory from "./BaseMap.story";
 import boundaryMapStory from "./BoundaryMap.story";
@@ -34,6 +35,7 @@ import sandboxStory from "./Sandbox.story";
 import scatterPlotMapStory from "./ScatterPlotMap.story";
 import ScatterplotStory from "./Scatterplot.story";
 import screenGridMapStory from "./ScreenGridMap.story";
+import selectStory from "./Select.story";
 import sliderStory from "./Slider.story";
 import stackedAreaChart from "./StackedAreaChart.story";
 
@@ -59,7 +61,6 @@ import TypographyStyleQuickUsage from "./styleGuideStories/TypographyStyleQuickU
 import TypographyStyleHeadings from "./styleGuideStories/TypographyStyleHeadings.story";
 import TypographyStyleParagraphs from "./styleGuideStories/TypographyStyleParagraphs.story";
 import UIComponentsStyle from "./styleGuideStories/UIComponentsStyle.story";
-
 // Legacy components used in 2017 package. Not supported for ongoing development.
 // import editableStory from './Editable.story';
 // import landingPage from './LandingPage.story';
@@ -108,6 +109,7 @@ storiesOf("Component Lib|Basic Inputs", module)
 buttonStory();
 checkboxStory();
 dropdownStory();
+selectStory();
 radioButtonGroupStory();
 sliderStory();
 
@@ -152,6 +154,7 @@ storiesOf("Component Lib|CIVIC Platform", module)
   .addDecorator(checkA11y)
   .add("Platform Components Style Guide", () => <CivicPlatformStyle />);
 civicCardStackStory();
+badgeStory();
 civicSandboxDashboardStory();
 civicStorycardStory();
 headerStory();

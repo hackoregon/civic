@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { VictoryPie, VictoryLabel, VictoryContainer } from "victory";
 import ChartContainer from "../ChartContainer";
-import civicTheme from "../VictoryTheme/CivicVictoryTheme";
+import { VictoryTheme } from "../_Themes/index";
 import SimpleLegend from "../SimpleLegend";
 import DataChecker from "../utils/DataChecker";
 
@@ -20,7 +20,8 @@ const PieChart = props => {
     halfDoughnut,
     useLegend,
     width,
-    height
+    height,
+    theme
   } = props;
 
   const startAngle = halfDoughnut ? -90 : 0;
@@ -28,6 +29,7 @@ const PieChart = props => {
   const adjustedHeight = halfDoughnut ? height / 2 : height;
   const legendLabels = data.map(value => ({ name: value[dataLabel] }));
   const legendProps = {};
+  const colorScale = colors.length ? colors : theme.group.colorScale;
 
   if (useLegend) {
     legendProps.labels = () => null;
@@ -46,7 +48,7 @@ const PieChart = props => {
           <SimpleLegend
             className="legend"
             legendData={legendLabels}
-            colorScale={colors}
+            colorScale={colorScale}
           />
         )}
         <VictoryPie
@@ -54,8 +56,8 @@ const PieChart = props => {
           height={height}
           data={data}
           innerRadius={innerRadius}
-          colorScale={colors}
-          theme={civicTheme}
+          colorScale={colorScale}
+          theme={theme}
           animate={{
             duration: 1000
           }}
@@ -63,9 +65,7 @@ const PieChart = props => {
           y={dataValue}
           startAngle={startAngle}
           endAngle={endAngle}
-          labelComponent={
-            <VictoryLabel style={{ ...civicTheme.pieLabel.style }} />
-          }
+          labelComponent={<VictoryLabel style={{ ...theme.pieLabel.style }} />}
           {...legendProps}
           containerComponent={
             <VictoryContainer height={adjustedHeight} width={width} />
@@ -93,12 +93,15 @@ PieChart.propTypes = {
   subtitle: PropTypes.string,
   title: PropTypes.string,
   useLegend: PropTypes.bool,
-  width: PropTypes.number
+  width: PropTypes.number,
+  theme: PropTypes.shape({})
 };
 
 PieChart.defaultProps = {
   dataLabel: "x",
-  dataValue: "y"
+  dataValue: "y",
+  theme: VictoryTheme,
+  colors: []
 };
 
 export default PieChart;
