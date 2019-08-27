@@ -13,6 +13,7 @@ import civicCardStory from "./CivicCard.story";
 import civicCardStackStory from "./CivicCardStack.story";
 import civicSandboxDashboardStory from "./CivicSandboxDashboard.story";
 import multiLayerMapStory from "./MultiLayerMap.story";
+import comparisonMapStory from "./ComparisonMap.story";
 import civicStorycardStory from "./CivicStoryCard.story";
 import dataTable from "./DataTable.story";
 import dropdownStory from "./DropdownMenu.story";
@@ -141,6 +142,7 @@ pathMapStory();
 scatterPlotMapStory();
 screenGridMapStory();
 multiLayerMapStory();
+comparisonMapStory();
 
 // Civic story cards
 storiesOf("Component Lib|Story Cards", module)
