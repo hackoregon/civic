@@ -32,11 +32,11 @@ const sectionMaxWidthMedium = css`
   max-width: 900px;
 `;
 
-const authorPhoto = css`
-  width: 50%;
-  filter: grayscale(100%);
-  cursor: pointer;
-`;
+// const authorPhoto = css`
+//   width: 50%;
+//   filter: grayscale(100%);
+//   cursor: pointer;
+// `;
 
 function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
   return (
@@ -113,14 +113,23 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
         <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
         <section css={[sectionMarginSmall, sectionMaxWidthSmall]} id="authors">
           <h2>Who made this?</h2>
-          {cardMeta.authors.map(photo => (
-            <img
-              css={authorPhoto}
-              src={photo}
-              alt="Pictures of people who worked on this"
-              key={generate()}
-            />
+          {cardMeta.authors.map(authorInfo => (
+            <p>
+              {authorInfo.name}:{" "}
+              <a href={`mailto:${authorInfo.email}`}>{authorInfo.email}</a>
+            </p>
           ))}
+          {/*
+            Future implementation:
+            {cardMeta.authors.map(photo => (
+              <img
+                css={authorPhoto}
+                src={photo}
+                alt="Pictures of people who worked on this"
+                key={generate()}
+              />
+            ))}
+          */}
         </section>
         <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
         <section css={[sectionMarginSmall, sectionMaxWidthSmall]} id="improve">

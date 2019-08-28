@@ -32,11 +32,11 @@ const sectionMaxWidthMedium = css`
   max-width: 900px;
 `;
 
-const authorPhoto = css`
-  width: 50%;
-  filter: grayscale(100%);
-  cursor: pointer;
-`;
+// const authorPhoto = css`
+//   width: 50%;
+//   filter: grayscale(100%);
+//   cursor: pointer;
+// `;
 
 const cardMetaItem = css`
   border: 1px solid red;
@@ -162,14 +162,20 @@ function CivicCardLayoutFullWithDescriptions({ isLoading, data, cardMeta }) {
             id="authors"
           >
             <h2>Who made this?</h2>
-            {cardMeta.authors.map(photo => (
+            {cardMeta.authors.map(authorInfo => (
+              <p>
+                {authorInfo.name}:{" "}
+                <a href={`mailto:${authorInfo.email}`}>{authorInfo.email}</a>
+              </p>
+            ))}
+            {/* {cardMeta.authors.map(photo => (
               <img
                 css={authorPhoto}
                 src={photo}
                 alt="Pictures of people who worked on this"
                 key={generate()}
               />
-            ))}
+            ))} */}
           </section>
           <Desc id="authors" />
           <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
