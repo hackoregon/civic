@@ -70,8 +70,8 @@ const GradientScale = ({
   height,
   domain,
   primary,
-  secondary = [],
-  colorScale = "default"
+  secondary,
+  colorScale
 }) => {
   const data = [
     ...secondary.map(num => ({ x: num, y: 0, type: "secondary" })),
@@ -122,12 +122,15 @@ GradientScale.propTypes = {
   height: PropTypes.number,
   domain: PropTypes.arrayOf(PropTypes.number).isRequired,
   primary: PropTypes.number.isRequired,
-  secondary: PropTypes.arrayOf(PropTypes.number)
+  secondary: PropTypes.arrayOf(PropTypes.number),
+  colorScale: PropTypes.string
 };
 
 GradientScale.defaultProps = {
   width: 500,
-  height: 100
+  height: 100,
+  secondary: [],
+  colorScale: "default"
 };
 
 export default GradientScale;

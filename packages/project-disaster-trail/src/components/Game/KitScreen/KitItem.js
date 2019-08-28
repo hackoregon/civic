@@ -25,7 +25,7 @@ const KitItem = ({ emptySvg, fullSvg, playerKit, itemType }) => {
     if (playerKit[itemType] && !filledItem) {
       setFilledItem(true);
     }
-  });
+  }, [playerKit, itemType, filledItem]);
 
   const EmptyKitItem = css`
     background-image: url(${emptySvg});

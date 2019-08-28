@@ -9,10 +9,12 @@ import baseMapStory from "./BaseMap.story";
 import boundaryMapStory from "./BoundaryMap.story";
 import buttonStory from "./Button.story";
 import checkboxStory from "./Checkbox.story";
+import collapsableStory from "./Collapsable.story";
 import civicCardStory from "./CivicCard.story";
 import civicCardStackStory from "./CivicCardStack.story";
 import civicSandboxDashboardStory from "./CivicSandboxDashboard.story";
 import multiLayerMapStory from "./MultiLayerMap.story";
+import comparisonMapStory from "./ComparisonMap.story";
 import civicStorycardStory from "./CivicStoryCard.story";
 import dataTable from "./DataTable.story";
 import gradientScaleStory from "./GradientScale.story";
@@ -140,6 +142,7 @@ pathMapStory();
 scatterPlotMapStory();
 screenGridMapStory();
 multiLayerMapStory();
+comparisonMapStory();
 
 // Civic story cards
 storiesOf("Component Lib|Story Cards", module)
@@ -156,6 +159,7 @@ civicCardStackStory();
 badgeStory();
 civicSandboxDashboardStory();
 civicStorycardStory();
+collapsableStory();
 headerStory();
 packageSelectorBox();
 pageLayoutStory();
@@ -166,6 +170,5 @@ sandboxStory();
 
 // Legacy components used in 2017 package. Not supported for ongoing development.
 // editableStory();
-// landingPage();
 // sankeyStory();
 // dropdownStory();

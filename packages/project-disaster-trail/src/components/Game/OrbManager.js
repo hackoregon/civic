@@ -1,8 +1,8 @@
 /* eslint-disable import/no-named-as-default */
-import React, { useEffect, useState, memo, useRef } from "react";
+import React, { useEffect, useState, memo, useRef, useCallback } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { map } from "lodash";
+import { map, find as _find } from "lodash";
 import styled from "@emotion/styled";
 
 import remove from "lodash/remove";
@@ -14,6 +14,17 @@ import useAnimationFrame from "../../state/hooks/useAnimationFrame";
 import Orb from "./Orb";
 import { addItemToPlayerKit, getKitCreationItems } from "../../state/kit";
 import { addPoints } from "../../state/user";
+
+const ORB_CONFIG = {
+  period: 1,
+  orbCount: 10,
+  orbSize: 40,
+  maxVelocityY: 0,
+  minVelocityX: 0.5,
+  minVelocityY: 0,
+  maxVelocityX: 2,
+  verticalBuffer: 25
+};
 
 function createOrbsFromKit(kitItems, bounds, config) {
   if (!kitItems.length) {
@@ -30,7 +41,9 @@ function createOrbsFromKit(kitItems, bounds, config) {
     for (let j = 0; j < totalGeneratedOrbs; j += 1) {
       const orbId = `${kitData.type}-${j}`;
       kitData.x = Math.random() * bounds.width;
-      kitData.y = Math.random() * (bounds.height - config.orbSize / 2);
+      kitData.y =
+        ORB_CONFIG.verticalBuffer +
+        Math.random() * (bounds.height - ORB_CONFIG.verticalBuffer * 2);
       kitData.velocity = {
         x:
           config.minVelocityX +
@@ -48,16 +61,6 @@ function createOrbsFromKit(kitItems, bounds, config) {
 
   return orbCollection;
 }
-
-const ORB_CONFIG = {
-  period: 2,
-  orbCount: 10,
-  orbSize: 40,
-  maxVelocityY: 0,
-  minVelocityX: 0.1,
-  minVelocityY: 0.1,
-  maxVelocityX: 2
-};
 
 /**
  * OrbManager is responsible for moving Orbs
@@ -98,7 +101,42 @@ const OrbManager = ({
       setHasInitialized(true);
       setOrbsState(newOrbs);
     }
-  }, [bounds]);
+  }, [bounds, hasInitialized, kitItems, prevBounds]);
+
+  const addOrbScore = useCallback(
+    orbId => {
+      const theOrb = _find(orbs, orb => orb.orbId === orbId);
+      if (theOrb.good) {
+        addItemToPlayerKitInState(theOrb.type);
+        addPointsToState(theOrb.points);
+      }
+    },
+    // update when orbs.length changes
+    // if we udpate when orbs changes, the addOrbScore will continuously be recreated,
+    // and, in turn, causes `Orb` to render continously.
+    // eslint-disable-next-line
+    [addItemToPlayerKitInState, addPointsToState, orbs.length]
+  );
+
+  const setOrbTouched = useCallback(
+    (orbId, isTouched) => {
+      if (isTouched) {
+        setTouchedOrb(prevOrbs => [...prevOrbs, orbId]);
+        return;
+      }
+
+      const updatedOrbs = remove(
+        touchedOrbs,
+        touchedOrb => touchedOrb.orbId === orbId
+      );
+      setTouchedOrb(updatedOrbs);
+    },
+    [touchedOrbs]
+  );
+
+  const setOrbComplete = useCallback(orbId => {
+    setCompletedOrbs(prevOrbs => [...prevOrbs, orbId]);
+  }, []);
 
   // `animate` is called every frame
   // eslint-disable-next-line consistent-return
@@ -106,6 +144,8 @@ const OrbManager = ({
     if (!bounds || !bounds.width || !hasInitialized) return null;
 
     const tempModels = [];
+    const centerY = (bounds.height - ORB_CONFIG.verticalBuffer * 2) / 2;
+
     // we re-use tempModels by pushing updated data in to it.
     for (let i = 0; i < orbs.length; i += 1) {
       // get the model
@@ -133,9 +173,27 @@ const OrbManager = ({
       if (currentOrb.x > bounds.width)
         currentOrb.x -= bounds.width + ORB_CONFIG.orbSize;
 
-      if (currentOrb.y < -ORB_CONFIG.orbSize) currentOrb.y += bounds.height;
-      if (currentOrb.y > bounds.height)
-        currentOrb.y -= bounds.height + ORB_CONFIG.orbSize;
+      // keep the orb within vertical bounds
+      if (currentOrb.y < ORB_CONFIG.verticalBuffer)
+        currentOrb.y = ORB_CONFIG.verticalBuffer;
+      if (
+        currentOrb.y >
+        bounds.height - ORB_CONFIG.verticalBuffer - ORB_CONFIG.orbSize
+      )
+        currentOrb.y =
+          bounds.height - ORB_CONFIG.verticalBuffer - ORB_CONFIG.orbSize;
+
+      // apply a 'force' that pulls the orbs vertically towards the center of the screen
+      const distanceFromCenter = currentOrb.y - centerY;
+      // if the orb is far enough away from the vertical center,
+      // the further the orb is from the center,
+      // the larger the distance
+      // and the greater the 'pull' towards the center
+      if (Math.abs(distanceFromCenter) > 80) {
+        currentOrb.y += -distanceFromCenter * 0.02;
+      }
+
+      currentOrb.y = Math.round(currentOrb.y * 10) / 10;
 
       // store the updated model.
       tempModels.push(currentOrb);
@@ -149,33 +207,6 @@ const OrbManager = ({
 
   useAnimationFrame(() => animate());
 
-  const addOrbScore = orb => {
-    if (orb.good) {
-      addItemToPlayerKitInState(orb.type);
-      addPointsToState(orb.points);
-    }
-  };
-
-  const setOrbTouched = (orb, isTouched) => {
-    const { orbId } = orb;
-
-    if (isTouched) {
-      setTouchedOrb(prevOrbs => [...prevOrbs, orbId]);
-      return;
-    }
-
-    const updatedOrbs = remove(
-      touchedOrbs,
-      touchedOrb => touchedOrb.orbId === orbId
-    );
-    setTouchedOrb(updatedOrbs);
-  };
-
-  const setOrbComplete = orb => {
-    const { orbId } = orb;
-    setCompletedOrbs(prevOrbs => [...prevOrbs, orbId]);
-  };
-
   return (
     <OrbsStyle ref={boundsRef}>
       {map(orbs, (orb, index) => (
@@ -187,7 +218,9 @@ const OrbManager = ({
           }}
         >
           <Orb
-            orb={orb}
+            orbId={orb.orbId}
+            imageSVG={orb.imageSVG}
+            imgAlt={orb.imgAlt}
             size={ORB_CONFIG.orbSize}
             addOrbScore={addOrbScore}
             setOrbTouched={setOrbTouched}

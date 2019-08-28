@@ -1,9 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router";
-import CardRegistry from "../card-registry";
 
-const CardDetailPageEmbed = ({ params }) => {
+const CardDetailPageEmbed = ({ params, CardRegistry }) => {
   const card = CardRegistry.find(params.slug);
 
   if (card && card.component) {
@@ -21,7 +20,16 @@ const CardDetailPageEmbed = ({ params }) => {
 };
 
 CardDetailPageEmbed.propTypes = {
-  params: PropTypes.string
+  params: PropTypes.shape({ slug: PropTypes.string.isRequired }),
+  CardRegistry: PropTypes.shape({
+    entries: PropTypes.arrayOf(
+      PropTypes.shape({
+        component: PropTypes.func.isRequired,
+        project: PropTypes.string.isRequired,
+        slug: PropTypes.string.isRequired
+      })
+    )
+  }).isRequired
 };
 
 CardDetailPageEmbed.displayName = "CardDetailPageEmbed";
