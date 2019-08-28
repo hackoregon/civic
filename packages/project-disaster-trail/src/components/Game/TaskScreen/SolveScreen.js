@@ -1,62 +1,39 @@
 /** @jsx jsx */
-import { PureComponent, Fragment } from "react";
+import { PureComponent } from "react";
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
 import { css, jsx } from "@emotion/core";
 
 import { completeTask, getActiveTaskData } from "../../../state/tasks";
 import { getKitCreationItems } from "../../../state/kit";
-import DurationBar from "../../atoms/DurationBar";
 import TextContainer from "../../atoms/Containers/TextContainer";
-import OrbManager from "../OrbManager";
-import { GUIStyle } from "../index";
 
 const defaultState = {
-  taskTimer: null,
   correctItemsChosen: 0
 };
 
 class SolveScreen extends PureComponent {
   state = defaultState;
 
-  componentDidMount() {
-    this.createTaskTimeout();
-  }
-
-  componentDidUpdate(prevProps) {
-    const { activeTask } = this.props;
-    const { correctItemsChosen } = this.state;
-
-    if (activeTask.id !== prevProps.activeTask.id) {
-      this.clearTaskTimeout();
-      this.createTaskTimeout();
-    }
-
-    if (correctItemsChosen >= activeTask.numberItemsToSolve) {
-      this.finishTask();
-    }
-  }
-
-  componentWillUnmount() {
-    this.clearTaskTimeout();
-  }
-
-  createTaskTimeout = () => {
+  componentDidUpdate() {
     const { activeTask } = this.props;
 
-    this.setState({
-      taskTimer: setTimeout(this.finishTask, activeTask.time)
-    });
-  };
-
-  clearTaskTimeout = () => {
-    const { taskTimer } = this.state;
-    clearTimeout(taskTimer);
-  };
+    // store the last active task
+    // to avoid activeTask text disappearing
+    // when the activeTask property is null
+    // eslint-disable-next-line react/destructuring-assignment
+    const activeTaskInState = this.state.activeTask;
+    if (activeTask && activeTask !== activeTaskInState) {
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({ activeTask });
+    }
+  }
 
   finishTask = () => {
     const { completeActiveTask, activeTask } = this.props;
-    completeActiveTask(activeTask.id);
+    if (activeTask) {
+      completeActiveTask(activeTask.id);
+    }
   };
 
   onKitItemSelection = kitItem => {
@@ -70,21 +47,34 @@ class SolveScreen extends PureComponent {
   };
 
   render() {
-    const { completeActiveTask, activeTask, possibleItems } = this.props;
+    const { completeActiveTask, activeTask, open } = this.props;
     const { correctItemsChosen } = this.state;
 
+    // eslint-disable-next-line react/destructuring-assignment
+    const activeTaskInState = this.state.activeTask;
+    const taskToRender = activeTask || activeTaskInState;
+
     const screenLayout = css`
-      position: relative;
+      position: absolute;
+      left: 0;
       display: grid;
       overflow: hidden;
       width: 100%;
       height: 100%;
       grid-template-columns: 1fr;
+      padding-top: 100px;
       background: beige;
+      z-index: 101;
+      transform: translateY(-100%);
+      transition: transform 0.5s;
+    `;
+
+    const onScreenStyle = css`
+      transform: translateY(0%);
     `;
 
     const taskImage = css`
-      background-image: url(${activeTask.imageSVG});
+      background-image: url(${taskToRender ? taskToRender.imageSVG : null});
       background-repeat: no-repeat;
       background-size: cover;
       margin: 15px;
@@ -92,39 +82,34 @@ class SolveScreen extends PureComponent {
       width: 150px;
     `;
 
-    const taskDuration = activeTask.time;
+    // const taskDuration = taskToRender.time;
 
     return (
-      <Fragment>
-        <div css={screenLayout}>
+      <div
+        css={css`
+          ${screenLayout}
+          ${open ? onScreenStyle : {}}
+        `}
+      >
+        {taskToRender && (
           <TextContainer>
-            <h2>{activeTask.text}</h2>
+            <h2>{taskToRender.text}</h2>
             <h3>
               Correct items chosen: {correctItemsChosen} of{" "}
-              {activeTask.numberItemsToSolve}
+              {taskToRender.numberItemsToSolve}
             </h3>
             <div css={taskImage} />
             <button
               type="button"
               onClick={() => {
-                completeActiveTask(activeTask.id);
+                completeActiveTask(taskToRender.id);
               }}
             >
-              Use {activeTask.requiredItem}
+              Use {taskToRender.requiredItem}
             </button>
           </TextContainer>
-        </div>
-        <DurationBar
-          step="Choose a task"
-          durationLength={taskDuration / 1000}
-        />
-        <GUIStyle>
-          <OrbManager
-            possibleItems={possibleItems}
-            onOrbSelection={this.onKitItemSelection}
-          />
-        </GUIStyle>
-      </Fragment>
+        )}
+      </div>
     );
   }
 }
@@ -135,14 +120,16 @@ SolveScreen.propTypes = {
     id: PropTypes.string,
     imageSVG: PropTypes.string
   }),
-  possibleItems: PropTypes.arrayOf(
-    PropTypes.shape({
-      imageSVG: PropTypes.string,
-      good: PropTypes.bool,
-      onSelection: PropTypes.func,
-      weighting: PropTypes.number
-    })
-  )
+  // leaving this commented as it will likely be needed post merge
+  // possibleItems: PropTypes.arrayOf(
+  //   PropTypes.shape({
+  //     imageSVG: PropTypes.string,
+  //     good: PropTypes.bool,
+  //     onSelection: PropTypes.func,
+  //     weighting: PropTypes.number
+  //   })
+  // ),
+  open: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
