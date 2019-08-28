@@ -50,7 +50,7 @@ function createOrbsFromKit(kitItems, bounds, config) {
 }
 
 const ORB_CONFIG = {
-  period: 2,
+  period: 1,
   orbCount: 10,
   orbSize: 40,
   maxVelocityY: 0,

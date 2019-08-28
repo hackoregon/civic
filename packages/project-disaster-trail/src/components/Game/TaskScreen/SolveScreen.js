@@ -5,31 +5,12 @@ import { PropTypes } from "prop-types";
 import { css, jsx } from "@emotion/core";
 
 import { completeTask, getActiveTaskData } from "../../../state/tasks";
+import { getKitCreationItems } from "../../../state/kit";
 import TextContainer from "../../atoms/Containers/TextContainer";
 
 const defaultState = {
-  taskTimer: null,
   correctItemsChosen: 0
 };
-
-const screenLayout = css`
-  position: absolute;
-  left: 0;
-  display: grid;
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-  grid-template-columns: 1fr;
-  padding-top: 100px;
-  background: beige;
-  z-index: 101;
-  transform: translateY(-100%);
-  transition: transform 0.5s;
-`;
-
-const onScreenStyle = css`
-  transform: translateY(0%);
-`;
 
 class SolveScreen extends PureComponent {
   state = defaultState;
@@ -55,10 +36,10 @@ class SolveScreen extends PureComponent {
     }
   };
 
-  onItemSelection = item => {
+  onKitItemSelection = kitItem => {
     const { activeTask } = this.props;
 
-    if (item.type === activeTask.requiredItem) {
+    if (activeTask.requiredItem === kitItem.type) {
       this.setState(state => ({
         correctItemsChosen: state.correctItemsChosen + 1
       }));
@@ -68,13 +49,40 @@ class SolveScreen extends PureComponent {
   render() {
     const { completeActiveTask, activeTask, open } = this.props;
     const { correctItemsChosen } = this.state;
+
     // eslint-disable-next-line react/destructuring-assignment
     const activeTaskInState = this.state.activeTask;
+    const taskToRender = activeTask || activeTaskInState;
 
-    // we've stored the activeTask in state
-    // to avoid the activeTask text disappearing
-    // while the component animates out
-    const activeTaskToRender = activeTask || activeTaskInState;
+    const screenLayout = css`
+      position: absolute;
+      left: 0;
+      display: grid;
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      grid-template-columns: 1fr;
+      padding-top: 100px;
+      background: beige;
+      z-index: 101;
+      transform: translateY(-100%);
+      transition: transform 0.5s;
+    `;
+
+    const onScreenStyle = css`
+      transform: translateY(0%);
+    `;
+
+    const taskImage = css`
+      background-image: url(${taskToRender ? taskToRender.imageSVG : null});
+      background-repeat: no-repeat;
+      background-size: cover;
+      margin: 15px;
+      height: 150px;
+      width: 150px;
+    `;
+
+    // const taskDuration = taskToRender.time;
 
     return (
       <div
@@ -83,20 +91,21 @@ class SolveScreen extends PureComponent {
           ${open ? onScreenStyle : {}}
         `}
       >
-        {activeTaskToRender && (
+        {taskToRender && (
           <TextContainer>
-            <h2>{activeTaskToRender.text}</h2>
+            <h2>{taskToRender.text}</h2>
             <h3>
               Correct items chosen: {correctItemsChosen} of{" "}
-              {activeTaskToRender.numberItemsToSolve}
+              {taskToRender.numberItemsToSolve}
             </h3>
+            <div css={taskImage} />
             <button
               type="button"
               onClick={() => {
-                completeActiveTask(activeTaskToRender.id);
+                completeActiveTask(taskToRender.id);
               }}
             >
-              Use {activeTaskToRender.requiredItem}
+              Use {taskToRender.requiredItem}
             </button>
           </TextContainer>
         )}
@@ -108,13 +117,24 @@ class SolveScreen extends PureComponent {
 SolveScreen.propTypes = {
   completeActiveTask: PropTypes.func,
   activeTask: PropTypes.shape({
-    id: PropTypes.string
+    id: PropTypes.string,
+    imageSVG: PropTypes.string
   }),
+  // leaving this commented as it will likely be needed post merge
+  // possibleItems: PropTypes.arrayOf(
+  //   PropTypes.shape({
+  //     imageSVG: PropTypes.string,
+  //     good: PropTypes.bool,
+  //     onSelection: PropTypes.func,
+  //     weighting: PropTypes.number
+  //   })
+  // ),
   open: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
-  activeTask: getActiveTaskData(state)
+  activeTask: getActiveTaskData(state),
+  possibleItems: getKitCreationItems(state)
 });
 
 const mapDispatchToProps = dispatch => ({

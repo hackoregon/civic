@@ -58,7 +58,7 @@ const GameGrid = styled.div`
 
   ${media.lg} {
     grid-template-rows: 1fr 24px 60px 250px;
-    min-height: 650px;
+    min-height: 800px;
   }
 
   ${media.xl} {
