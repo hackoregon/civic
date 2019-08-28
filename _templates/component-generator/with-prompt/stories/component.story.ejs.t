@@ -4,10 +4,9 @@ to: packages/component-library/stories/<%=component%>.story.js
 import React from "react";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
-// import { action } from "@storybook/addon-actions";
 import { checkA11y } from "@storybook/addon-a11y";
-import { withKnobs, text, color, select } from "@storybook/addon-knobs";
-// import notes from "./button.notes.md";
+import { withKnobs, text } from "@storybook/addon-knobs";
+import notes from "./<%=camelComponent%>.notes.md";
 import { <%=component%> } from "../src";
 import { storybookStyles } from "./storyStyles";
 
@@ -23,7 +22,8 @@ export default () =>
     .add(
       "Standard",
       () => {
-        return <<%=component%> />
-      } // ,
-      // { notes }
-    )
+        const message = text("Message", "");
+        return <<%=component%> message={message} />
+      },
+      { notes }
+    );
