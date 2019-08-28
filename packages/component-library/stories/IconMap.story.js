@@ -179,9 +179,10 @@ class TouchScreenDemo extends React.Component {
   };
 
   onClick = ({ lngLat }) => {
+    const { pointsData } = this.state;
     this.setState({
       pointsData: [
-        ...this.state.pointsData,
+        ...pointsData,
         {
           geometry: {
             coordinates: lngLat

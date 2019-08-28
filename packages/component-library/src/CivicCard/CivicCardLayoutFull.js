@@ -105,7 +105,7 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
           </p>
           <CollapsableSection
             items={cardMeta.resources.map(item => (
-              <Resource item={item} key={generate()} />
+              <Resource section={item} key={generate()} />
             ))}
             collapseAfter={7}
           />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   arrayOf,
   bool,
@@ -8,7 +8,8 @@ import {
   shape,
   oneOfType
 } from "prop-types";
-import { css } from "emotion";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 import BaseMap from "../BaseMap/BaseMap";
 import CivicSandboxMap from "../CivicSandboxMap/CivicSandboxMap";
 import CivicSandboxTooltip from "../CivicSandboxMap/CivicSandboxTooltip";
@@ -39,7 +40,6 @@ const Sandbox = ({
   fetchSlideDataByDate,
   drawerVisible,
   toggleDrawer,
-  mapboxStyle,
   styles,
   onFoundationClick,
   onSlideHover,
@@ -51,15 +51,16 @@ const Sandbox = ({
   const [baseMapStyle, setBaseMapStyle] = useState("light");
 
   const handleBaseMapStyleChange = baseMapStyleChangeEvent => {
+    // eslint-disable-next-line no-unused-expressions
     baseMapStyleChangeEvent.target.value === "light"
       ? setBaseMapStyle("light")
       : setBaseMapStyle("dark");
   };
 
   return (
-    <div className={styles}>
+    <div css={styles}>
       <div
-        className={css(`
+        css={css`
           position: absolute;
           top: 0;
           right: 0;
@@ -72,7 +73,7 @@ const Sandbox = ({
             height: 65vh;
             min-height: 500px;
           }
-      `)}
+        `}
       >
         <SandboxDrawer
           data={data}
@@ -95,7 +96,7 @@ const Sandbox = ({
           baseMapStyle={baseMapStyle}
         />
       </div>
-      <div className={baseMapWrapper}>
+      <div css={baseMapWrapper}>
         <BaseMap
           civicMapStyle={baseMapStyle}
           initialZoom={10.5}
@@ -155,7 +156,7 @@ Sandbox.propTypes = {
   fetchSlideDataByDate: func.isRequired,
   drawerVisible: bool.isRequired,
   toggleDrawer: func.isRequired,
-  styles: string,
+  styles: shape({}),
   onFoundationClick: func,
   onSlideHover: func,
   tooltipInfo: shape({

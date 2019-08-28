@@ -1,10 +1,10 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { mount } from "enzyme";
 import Button from "./Button";
 
 describe("Button", () => {
   const testString = "Hello";
-  const wrapper = shallow(<Button>{testString}</Button>);
+  const wrapper = mount(<Button>{testString}</Button>);
   it("should render a button", () => {
     expect(wrapper.find("button")).to.have.length(1);
   });

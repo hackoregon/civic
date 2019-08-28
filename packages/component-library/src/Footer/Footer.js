@@ -1,7 +1,7 @@
-import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router";
-import { css } from "emotion";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 import LogoStandard from "../Logo/LogoStandard";
 import ScrollToTop from "../ScrollToTop/ScrollToTop";
 
@@ -76,14 +76,14 @@ const scrollToTopClass = css`
 const defaultAttribution = `\u00A9 Copyright ${new Date().getFullYear()}`;
 
 const Footer = ({ attribution }) => (
-  <footer className={footerClass}>
-    <div className={copyrightClass}>{attribution}</div>
-    <div className={logoClass}>
-      <Link to="/" alt="civic homepage" className={logoLinkStyle}>
+  <footer css={footerClass}>
+    <div css={copyrightClass}>{attribution}</div>
+    <div css={logoClass}>
+      <Link to="/" alt="civic homepage" css={logoLinkStyle}>
         <LogoStandard />
       </Link>
     </div>
-    <div className={scrollToTopClass}>
+    <div css={scrollToTopClass}>
       <ScrollToTop iconStyle="fa fa-angle-up" />
     </div>
   </footer>

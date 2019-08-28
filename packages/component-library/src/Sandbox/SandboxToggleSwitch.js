@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
-import React from "react";
 import PropTypes from "prop-types";
-import { css } from "emotion";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 
 const containerStyle = css`
   display: flex;
@@ -74,8 +74,8 @@ const SandboxToggleSwitch = props => {
       : "";
 
   return (
-    <div className={containerStyle}>
-      <label className={toggleStyle} htmlFor={`slide-input-${label}`}>
+    <div css={containerStyle}>
+      <label css={toggleStyle} htmlFor={`slide-input-${label}`}>
         <input
           id={`slide-input-${label}`}
           type="checkbox"
@@ -83,7 +83,7 @@ const SandboxToggleSwitch = props => {
           checked={checked}
           onChange={onChange}
         />
-        <div className={sliderStyle} />
+        <div css={sliderStyle} />
         <div style={{ marginLeft: "40px" }}>
           {`${label} - ${decodeMapType}`}
         </div>

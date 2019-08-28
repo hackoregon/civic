@@ -1,8 +1,10 @@
 /* TODO: Fix linting errors */
 /* eslint-disable */
+
 import PropTypes from "prop-types";
-import React from "react";
-import { css } from "emotion";
+import { Fragment } from "react";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 
 const baseMapMenu = css(`
   padding: 10px;
@@ -12,8 +14,8 @@ const baseMapMenu = css(`
 
 const SandboxBaseMapSelector = ({ onBaseMapStyleChange, baseMapStyle }) => {
   return (
-    <React.Fragment>
-      <div className={baseMapMenu}>
+    <Fragment>
+      <div css={baseMapMenu}>
         <input
           checked={baseMapStyle === "light"}
           type="radio"
@@ -29,7 +31,7 @@ const SandboxBaseMapSelector = ({ onBaseMapStyleChange, baseMapStyle }) => {
         />
         <label htmlFor="dark">Dark</label>
       </div>
-    </React.Fragment>
+    </Fragment>
   );
 };
 

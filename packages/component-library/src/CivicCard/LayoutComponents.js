@@ -32,20 +32,30 @@ Chip.propTypes = {
   index: PropTypes.number
 };
 
-export function Resource({ item }) {
-  return _.has(item, "section") ? (
-    <h3>{item.section}</h3>
-  ) : (
-    <li>
-      <a href={item.link}>{item.description}</a>
-    </li>
+export function Resource({ section }) {
+  return (
+    <Fragment>
+      <h3>{section.heading}</h3>
+      <ul>
+        {section.items.map(item => (
+          <li>
+            <a href={item.link}>{item.description}</a>
+          </li>
+        ))}
+      </ul>
+    </Fragment>
   );
 }
 
 Resource.propTypes = {
-  item: PropTypes.shape({
-    link: PropTypes.string,
-    description: PropTypes.string
+  section: PropTypes.shape({
+    heading: PropTypes.string,
+    items: PropTypes.arrayOf(
+      PropTypes.shape({
+        link: PropTypes.string,
+        description: PropTypes.string
+      })
+    )
   })
 };
 
