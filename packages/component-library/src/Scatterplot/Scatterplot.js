@@ -58,12 +58,14 @@ const Scatterplot = ({
   invertX,
   invertY,
   legendComponent,
-  theme
+  theme,
+  loading
 }) => {
-  const chartDomain = domain || getDefaultDomain(data, dataKey, dataValue);
+  const safeData = data && data.length ? data : [{}];
+  const chartDomain = domain || getDefaultDomain(safeData, dataKey, dataValue);
 
   const dataSeriesLabels = dataSeries
-    ? dataSeriesLabel || getDefaultDataSeriesLabels(data, dataSeries)
+    ? dataSeriesLabel || getDefaultDataSeriesLabels(safeData, dataSeries)
     : null;
 
   const scatterPlotStyle =
@@ -75,7 +77,7 @@ const Scatterplot = ({
       : null;
 
   return (
-    <ChartContainer title={title} subtitle={subtitle}>
+    <ChartContainer title={title} subtitle={subtitle} loading={loading}>
       {legendData &&
         (legendComponent ? (
           legendComponent(legendData, theme)
@@ -86,7 +88,7 @@ const Scatterplot = ({
             theme={theme}
           />
         ))}
-      <DataChecker dataAccessors={{ dataKey, dataValue }} data={data}>
+      <DataChecker dataAccessors={{ dataKey, dataValue }} data={safeData}>
         <VictoryChart
           domain={chartDomain}
           theme={theme}
@@ -134,7 +136,7 @@ const Scatterplot = ({
             minBubbleSize={size && size.minSize}
             maxBubbleSize={size && size.maxSize}
             //        categories={{ x: categoryData }}
-            data={data.map(d => ({
+            data={safeData.map(d => ({
               dataKey: d[dataKey],
               dataValue: d[dataValue],
               label: `${
@@ -199,7 +201,8 @@ Scatterplot.propTypes = {
   invertX: PropTypes.bool,
   invertY: PropTypes.bool,
   legendComponent: PropTypes.func,
-  theme: PropTypes.shape({})
+  theme: PropTypes.shape({}),
+  loading: PropTypes.bool
 };
 
 Scatterplot.defaultProps = {
@@ -222,7 +225,8 @@ Scatterplot.defaultProps = {
   invertX: false,
   invertY: false,
   legendComponent: null,
-  theme: VictoryTheme
+  theme: VictoryTheme,
+  loading: null
 };
 
 export default Scatterplot;

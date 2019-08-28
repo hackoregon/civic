@@ -45,12 +45,14 @@ const LineChart = ({
   xNumberFormatter,
   yNumberFormatter,
   legendComponent,
+  loading,
   theme
 }) => {
-  const chartDomain = domain || getDefaultDomain(data, dataKey, dataValue);
+  const safeData = data && data.length ? data : [{}];
+  const chartDomain = domain || getDefaultDomain(safeData, dataKey, dataValue);
 
   const dataSeriesLabels = dataSeries
-    ? dataSeriesLabel || getDefaultDataSeriesLabels(data, dataSeries)
+    ? dataSeriesLabel || getDefaultDataSeriesLabels(safeData, dataSeries)
     : null;
 
   const scatterPlotStyle =
@@ -61,7 +63,9 @@ const LineChart = ({
       ? dataSeriesLabels.map(series => ({ name: series.label }))
       : null;
 
-  const lineData = dataSeries ? groupBy(data, dataSeries) : { category: data };
+  const lineData = dataSeries
+    ? groupBy(safeData, dataSeries)
+    : { category: safeData };
 
   const lines = lineData
     ? Object.keys(lineData).map((category, index) => (
@@ -87,8 +91,8 @@ const LineChart = ({
 
   return (
     <ThemeProvider theme={theme}>
-      <ChartContainer title={title} subtitle={subtitle}>
-        <DataChecker dataAccessors={{ dataKey, dataValue }} data={data}>
+      <ChartContainer title={title} subtitle={subtitle} loading={loading}>
+        <DataChecker dataAccessors={{ dataKey, dataValue }} data={safeData}>
           {legendData &&
             (legendComponent ? (
               legendComponent(legendData, theme)
@@ -140,7 +144,7 @@ const LineChart = ({
             {lines}
             <VictoryScatter
               //        categories={{ x: categoryData }}
-              data={data.map(d => ({
+              data={safeData.map(d => ({
                 dataKey: d[dataKey],
                 dataValue: d[dataValue],
                 label: `${dataKeyLabel || xLabel}: ${xNumberFormatter(
@@ -200,7 +204,8 @@ LineChart.propTypes = {
   xNumberFormatter: PropTypes.func,
   yNumberFormatter: PropTypes.func,
   legendComponent: PropTypes.func,
-  theme: PropTypes.shape({})
+  theme: PropTypes.shape({}),
+  loading: PropTypes.bool
 };
 
 LineChart.defaultProps = {
@@ -221,7 +226,8 @@ LineChart.defaultProps = {
   xNumberFormatter: civicFormat.numeric,
   yNumberFormatter: civicFormat.numeric,
   legendComponent: null,
-  theme: VictoryTheme
+  theme: VictoryTheme,
+  loading: null
 };
 
 export default LineChart;

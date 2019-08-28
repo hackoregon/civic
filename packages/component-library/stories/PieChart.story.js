@@ -85,6 +85,7 @@ export default () =>
         const chartHeight = number("Chart height", 350, {}, GROUP_IDS.CUSTOM);
         const chartWidth = number("Chart width", 650, {}, GROUP_IDS.CUSTOM);
         const innerRadius = number("Inner radius", 50, {}, GROUP_IDS.CUSTOM);
+        const loading = boolean("Loading", false, GROUP_IDS.CUSTOM);
         const themes = {
           VictoryTheme,
           VictoryCrazyTheme
@@ -112,6 +113,7 @@ export default () =>
             halfDoughnut={halfDoughnut}
             useLegend={useLegend}
             theme={(name => themes[name])(theme)}
+            loading={loading}
           />
         );
       },
