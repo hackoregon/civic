@@ -2,13 +2,12 @@
 to: packages/component-library/stories/<%=component%>.story.js
 ---
 import React from "react";
-/* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
 import { checkA11y } from "@storybook/addon-a11y";
 import { withKnobs, text } from "@storybook/addon-knobs";
-import notes from "./<%=camelComponent%>.notes.md";
 import { <%=component%> } from "../src";
 import { storybookStyles } from "./storyStyles";
+import notes from "./<%=camelComponent%>.notes.md";
 
 export default () =>
   storiesOf("Component Lib|Basic Inputs/<%=component%>", module)
