@@ -86,6 +86,7 @@
     "@emotion/core": "^10.0.15",
     "@material-ui/core": "^4.4.0",
     "@material-ui/styles": "^4.3.3",
+    "@material-ui/lab": "^4.0.0-alpha.24",
     "@turf/center-of-mass": "^6.0.1",
     "copy-to-clipboard": "^3.0.5",
     "create-react-ref": "^0.1.0",
