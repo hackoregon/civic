@@ -30,12 +30,12 @@ export { default as Header } from "./Navigation/Header";
 export { default as Nav } from "./Navigation/Nav";
 export { default as NavRouterLink } from "./Navigation/NavRouterLink";
 export { default as Dropdown } from "./Dropdown/Dropdown";
+export { default as Select } from "./Select/Select";
 export { default as Icon } from "./Icon/Icon";
 export { default as Placeholder } from "./Placeholder/Placeholder";
 export { default as Scatterplot } from "./Scatterplot/Scatterplot";
 export { default as Logo } from "./Logo/Logo";
 export { default as isClient } from "./utils/isClient";
-export { default as CivicVictoryTheme } from "./VictoryTheme/VictoryThemeIndex";
 export { default as CollectionHero } from "./Hero/CollectionHero";
 export { default as BaseMap } from "./BaseMap/BaseMap";
 export { default as ScatterPlotMap } from "./ScatterPlotMap/ScatterPlotMap";
@@ -84,7 +84,11 @@ export {
 export {
   default as CivicCardLayoutFullWithDescriptions
 } from "./CivicCard/CivicCardLayoutFullWithDescriptions";
-
+export { default as CardDetailPage } from "./CardDetail/CardDetailPage";
+export {
+  default as CardDetailPageEmbed
+} from "./CardDetail/CardDetailPageEmbed";
 export { default as civicFormat } from "./utils/civicFormat";
 export { default as ungroupBy } from "./utils/ungroupBy";
 export { default as DemoJSONLoader } from "./DemoJSONLoader/DemoJSONLoader";
+export { default as Badge } from "./Badge/Badge";

@@ -10,6 +10,7 @@ const containerStyle = css`
   display: flex;
   flex-direction: column-reverse;
   width: 100vw;
+  padding-top: 100px;
 `;
 
 const kitStyle = css`
@@ -22,14 +23,16 @@ function createKit(currentKit) {
   const items = [];
 
   map(currentKit, item => {
-    items.push(
-      <KitItem
-        emptySvg={item.emptySvg}
-        fullSvg={item.fullSvg}
-        itemType={item.id}
-        key={item.id}
-      />
-    );
+    if (item.goodKitItem) {
+      items.push(
+        <KitItem
+          emptySvg={item.emptySvg}
+          fullSvg={item.fullSvg}
+          itemType={item.id}
+          key={item.id}
+        />
+      );
+    }
   });
 
   return <div css={kitStyle}>{items}</div>;

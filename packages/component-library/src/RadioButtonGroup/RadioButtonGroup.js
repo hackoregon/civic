@@ -3,6 +3,7 @@
 import { jsx, css } from "@emotion/core";
 import PropTypes from "prop-types";
 import FormLabel from "@material-ui/core/FormLabel";
+import shortid from "shortid";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import MaterialRadio from "@material-ui/core/Radio";
 import MaterialRadioGroup from "@material-ui/core/RadioGroup";
@@ -31,7 +32,7 @@ const RadioButtonGroup = ({
     <FormLabel>{grpLabel}</FormLabel>
     {labels.map(label => (
       <FormControlLabel
-        key={label.id}
+        key={shortid.generate()}
         value={label}
         control={
           <MaterialRadio

@@ -33,13 +33,13 @@
     "lint": "eslint src"
   },
   "dependencies": {
-    "@hackoregon/component-library": "^3.0.0",
-    "@hackoregon/webpack-common": "^3.0.0",    
+    "@hackoregon/component-library": "^4.0.0",
+    "@hackoregon/webpack-common": "^3.0.0",
     "@hackoregon/mock-wrapper": "^3.0.0",
+    "@emotion/core": "^10.0.10",
     "axios": "^0.18.0",
     "compression": "^1.6.2",
     "cross-env": "^5.2.0",
-    "emotion": "^10.0.9",
     "express": "^4.14.1",
     "invariant": "^2.2.2",
     "prop-types": "^15.7.2",

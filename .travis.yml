@@ -16,7 +16,7 @@ matrix:
   - env: SUITE=2018
   - env: SUITE=COMPONENT_LIBRARY
 script:
-- yarn run travis
+- NODE_OPTIONS=--max_old_space_size=4096 yarn run travis
 after_success:
 - make deploy
 env:

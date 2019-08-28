@@ -3,6 +3,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { scaleQuantize, extent, format } from "d3";
 import { css } from "emotion";
+import shortid from "shortid";
 import civicFormat from "../utils/civicFormat";
 
 const legendContainer = css(`
@@ -114,7 +115,7 @@ const SandboxMapLegend = props => {
   const legend = mapColorsArr.map((d, i) => {
     return (
       <div
-        key={`legend-pt-${d.slice(5, 12).replace(/,/g, "")}`}
+        key={shortid.generate()}
         className={colorBox}
         style={{ backgroundColor: d }}
       >

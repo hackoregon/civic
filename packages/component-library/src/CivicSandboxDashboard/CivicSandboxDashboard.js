@@ -11,6 +11,7 @@ import {
   string
 } from "prop-types";
 import { css } from "emotion";
+import shortid from "shortid";
 import PieChart from "../PieChart/PieChart";
 import HorizontalBarChart from "../HorizontalBarChart/HorizontalBarChart";
 import civicFormat from "../utils/civicFormat";
@@ -134,19 +135,19 @@ const donutPercent = css`
   text-align: center;
 `;
 
-const createTextViz = (text, index) => (
-  <div className={viz} key={index}>
+const createTextViz = text => (
+  <div className={viz} key={shortid.generate()}>
     <h2>{text.title}</h2>
     <h3>{text.data.toLocaleString()}</h3>
   </div>
 );
 
-const createDonutViz = (donut, index) => {
+const createDonutViz = donut => {
   const [percentValue] = donut.data;
   const salmon = "#EE495C";
   const gray = "#a9a9a9";
   return (
-    <div className={viz} key={index}>
+    <div className={viz} key={shortid.generate()}>
       <h2>{donut.title}</h2>
       <h2 className={donutPercent}>
         {percentValue.y < 1
@@ -165,8 +166,8 @@ const createDonutViz = (donut, index) => {
   );
 };
 
-const createBarsViz = (bars, index) => (
-  <div className={viz} key={index}>
+const createBarsViz = bars => (
+  <div className={viz} key={shortid.generate()}>
     <h2>{bars.title}</h2>
     <HorizontalBarChart
       minimalist={bars.minimalist}
