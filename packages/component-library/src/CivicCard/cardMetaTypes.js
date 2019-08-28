@@ -28,12 +28,7 @@ const cardMetaObjectProperties = {
     })
   ),
   // authors: PropTypes.arrayOf(PropTypes.string /* image url */)
-  authors: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string,
-      email: PropTypes.string
-    })
-  )
+  authors: PropTypes.arrayOf(PropTypes.string /* author email */)
 };
 
 export const optionalCardMetaKeys = {

@@ -126,18 +126,9 @@ const TemplateFileCardMeta = (/* data */) => ({
     }
   ],
   authors: [
-    {
-      name: "Dustin Henderson",
-      email: "scicampwinner07@gmail.com"
-    },
-    {
-      name: "Jim Hopper",
-      email: "jim.hopper@yahoo.com"
-    },
-    {
-      name: "Joyce Byers",
-      email: "byers0180@hotmail.com"
-    }
+    "scicampwinner07@gmail.com",
+    "jim.hopper@yahoo.com",
+    "byers0180@hotmail.com"
   ]
   // authors likely an array of keys in the future
   // authors: [

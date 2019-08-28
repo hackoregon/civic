@@ -113,10 +113,9 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
         <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
         <section css={[sectionMarginSmall, sectionMaxWidthSmall]} id="authors">
           <h2>Who made this?</h2>
-          {cardMeta.authors.map(authorInfo => (
-            <p>
-              {authorInfo.name}:{" "}
-              <a href={`mailto:${authorInfo.email}`}>{authorInfo.email}</a>
+          {cardMeta.authors.map(authorEmail => (
+            <p key={authorEmail}>
+              <a href={`mailto:${authorEmail}`}>{authorEmail}</a>
             </p>
           ))}
           {/*
