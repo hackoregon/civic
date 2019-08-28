@@ -27,7 +27,6 @@
     "card": "yarn new-card",
     "card:local-data": "yarn new-card:local-data",
     "clean": "lerna clean && rimraf node_modules",
-    "configure": "lerna run configure",
     "deploy-storybook": "NODE_OPTIONS=--max_old_space_size=4096 BABEL_ENV=esm storybook-to-ghpages",
     "eslint-check": "eslint --print-config . | eslint-config-prettier-check",
     "in": "lerna run --scope",
