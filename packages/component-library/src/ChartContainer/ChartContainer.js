@@ -1,20 +1,17 @@
 import PropTypes from "prop-types";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
+import Skeleton from "@material-ui/lab/Skeleton";
 
 import ChartTitle from "../ChartTitle";
-
-const chartLoading = css`
-  text-align: center;
-  background: #eee;
-  height: 100%;
-`;
 
 const chartError = css`
   text-align: center;
   background: #fdd;
   height: 100%;
 `;
+
+const defaultVictoryAspectRatio = 650 / 350;
 
 /**
   ChartContainer renders titles, subtitles, and provides some default styling for charts.
@@ -29,7 +26,8 @@ const ChartContainer = ({
   loading,
   subtitle,
   children,
-  className
+  className,
+  aspectRatio
 }) => {
   const figureWrapper = css`
     margin: 0;
@@ -40,21 +38,24 @@ const ChartContainer = ({
     width: 100%;
     ${className};
   `;
+  const fullHeight = css`
+    padding-top: ${100 / aspectRatio}%;
+  `;
 
-  let content = (
-    <figure css={figureWrapper}>
-      <ChartTitle title={title} subtitle={subtitle} />
-      <div css={wrapperStyle}>{children}</div>
-    </figure>
-  );
+  let content = <div css={wrapperStyle}>{children}</div>;
 
   if (loading) {
-    content = <div css={chartLoading}>Loading...</div>;
+    content = <Skeleton css={[wrapperStyle, fullHeight]} />;
   } else if (error) {
-    content = <div css={chartError}>{error}</div>;
+    content = <div css={[wrapperStyle, fullHeight, chartError]}>{error}</div>;
   }
 
-  return content;
+  return (
+    <figure css={figureWrapper}>
+      <ChartTitle title={title} subtitle={subtitle} />
+      {content}
+    </figure>
+  );
 };
 
 ChartContainer.propTypes = {
@@ -63,9 +64,12 @@ ChartContainer.propTypes = {
   loading: PropTypes.bool,
   children: PropTypes.node,
   subtitle: PropTypes.string,
-  className: PropTypes.string
+  className: PropTypes.string,
+  aspectRatio: PropTypes.number
 };
 
-ChartContainer.defaultProps = {};
+ChartContainer.defaultProps = {
+  aspectRatio: defaultVictoryAspectRatio
+};
 
 export default ChartContainer;
