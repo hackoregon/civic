@@ -22,7 +22,7 @@ export default () =>
     .add(
       "Standard",
       () => {
-        const message = text("Message", "");
+        const message = text("Message");
         return <<%=component%> message={message} />
       },
       { notes }
