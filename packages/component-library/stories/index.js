@@ -3,6 +3,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { checkA11y } from "@storybook/addon-a11y";
 
+// DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator import injection
 import badgeStory from "./Badge.story";
 import BarChartStory from "./BarChart.story";
 import baseMapStory from "./BaseMap.story";
@@ -113,6 +114,7 @@ dropdownStory();
 selectStory();
 radioButtonGroupStory();
 sliderStory();
+// DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator story injection
 
 // charts
 storiesOf("Component Lib|Charts", module)
