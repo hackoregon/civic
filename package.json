@@ -27,7 +27,6 @@
     "new-package": "yarn hygen package-generator with-prompt && yarn",
     "card": "yarn hygen api-story-card with-prompt && yarn",
     "card:local-data": "yarn hygen local-data-story-card with-prompt && yarn",
-    "configure": "lerna run configure",
     "publish-patch": "lerna publish bump patch --yes",
     "publish-minor": "lerna publish bump minor --yes",
     "publish-major": "lerna publish bump major --yes",
