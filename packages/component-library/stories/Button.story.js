@@ -3,7 +3,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { checkA11y } from "@storybook/addon-a11y";
-import { withKnobs, text, color, select, files } from "@storybook/addon-knobs";
+import { withKnobs, text, color, select } from "@storybook/addon-knobs";
 import notes from "./button.notes.md";
 import { Button } from "../src";
 import { storybookStyles } from "./storyStyles";

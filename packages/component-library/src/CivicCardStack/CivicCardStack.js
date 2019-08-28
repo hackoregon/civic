@@ -1,7 +1,7 @@
-import React from "react";
 import PropTypes from "prop-types";
 import shortid from "shortid";
-import { css } from "emotion";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 import CivicStoryCard from "../CivicStoryCard/CivicStoryCard";
 
 const smallWatermark = (
@@ -29,10 +29,7 @@ const bgCard = (index, total, baseOpacity) => css`
 `;
 
 const BackgroundStoryCard = (index, total, children) => (
-  <div
-    className={bgCard(index, total, LAST_CARD_OPACITY)}
-    key={shortid.generate()}
-  >
+  <div css={bgCard(index, total, LAST_CARD_OPACITY)} key={shortid.generate()}>
     <CivicStoryCard footer={false} watermark={smallWatermark}>
       {children}
     </CivicStoryCard>
@@ -41,7 +38,7 @@ const BackgroundStoryCard = (index, total, children) => (
 
 const CivicCardStack = ({ cards, children }) => {
   return (
-    <div className={cardStackWrapper(cards)}>
+    <div css={cardStackWrapper(cards)}>
       {cards &&
         [...Array(cards)].map((item, index) =>
           BackgroundStoryCard(index, cards, children)

@@ -1,6 +1,6 @@
-import React from "react";
 import PropTypes from "prop-types";
-import { css } from "emotion";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 import Hero from "./Hero";
 
 const teamTitleStyle = css`
@@ -30,8 +30,8 @@ const CollectionHero = ({
 }) => (
   <Hero mainProjectColor={mainProjectColor}>
     <div>
-      <span className={teamTitleStyle}>{teamTitle}</span>
-      <h1 className={titleStyle}>{heroTitle}</h1>
+      <span css={teamTitleStyle}>{teamTitle}</span>
+      <h1 css={titleStyle}>{heroTitle}</h1>
       <h2>{heroSubtitle}</h2>
     </div>
   </Hero>

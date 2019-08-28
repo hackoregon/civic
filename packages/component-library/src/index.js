@@ -42,7 +42,6 @@ export { default as ScatterPlotMap } from "./ScatterPlotMap/ScatterPlotMap";
 export { default as DataTable } from "./DataTable/DataTable";
 export { default as PullQuote } from "./PullQuote/PullQuote";
 export { default as ScreenGridMap } from "./ScreenGridMap/ScreenGridMap";
-export { default as LandingPage } from "./LandingPage/LandingPage";
 export { default as PathMap } from "./PathMap/PathMap";
 export { default as IconMap } from "./IconMap/IconMap";
 export { default as MapOverlay } from "./MapOverlay/MapOverlay";
@@ -50,11 +49,11 @@ export { default as BoundaryMap } from "./BoundaryMap/BoundaryMap";
 export { default as MapTooltip } from "./MapTooltip/MapTooltip";
 export { default as CivicSandboxMap } from "./CivicSandboxMap/CivicSandboxMap";
 export { default as MultiLayerMap } from "./MultiLayerMap/MultiLayerMap";
+export { default as ComparisonMap } from "./ComparisonMap/ComparisonMap";
 export { default as GradientScale } from "./GradientScale/GradientScale";
 export {
   default as PackageSelectorBox
 } from "./PackageSelectorBox/PackageSelectorBox";
-export { default as CanvasParticles } from "./LandingPage/CanvasParticles";
 export {
   default as CivicSandboxDashboard
 } from "./CivicSandboxDashboard/CivicSandboxDashboard";
@@ -84,7 +83,10 @@ export {
 export {
   default as CivicCardLayoutFullWithDescriptions
 } from "./CivicCard/CivicCardLayoutFullWithDescriptions";
-
+export { default as CardDetailPage } from "./CardDetail/CardDetailPage";
+export {
+  default as CardDetailPageEmbed
+} from "./CardDetail/CardDetailPageEmbed";
 export { default as civicFormat } from "./utils/civicFormat";
 export { default as ungroupBy } from "./utils/ungroupBy";
 export { default as DemoJSONLoader } from "./DemoJSONLoader/DemoJSONLoader";

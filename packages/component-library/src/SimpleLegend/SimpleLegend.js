@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
-import React from "react";
-import { css } from "emotion";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 import shortid from "shortid";
 import { VictoryTheme } from "../_Themes/index";
 
@@ -21,11 +21,11 @@ const SimpleLegend = ({ colorScale, legendData, theme }) => {
 
   if (legendData.length) {
     return (
-      <div className={legendStyle}>
+      <div css={legendStyle}>
         {legendData.map((group, idx) => (
           <span
             key={shortid.generate()}
-            className={css`
+            css={css`
               margin-left: 10px;
             `}
           >
@@ -33,7 +33,7 @@ const SimpleLegend = ({ colorScale, legendData, theme }) => {
               <circle cx="5" cy="5" r="5" fill={colorMap[idx]} />
             </svg>
             <span
-              className={css`
+              css={css`
                 margin-left: 5px;
               `}
             >

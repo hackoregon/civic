@@ -1,6 +1,6 @@
-import React from "react";
 import PropTypes from "prop-types";
-import { css } from "emotion";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 import isClient from "../utils/isClient";
 import logoC from "../../assets/civic-logo-c.svg";
 
@@ -14,7 +14,7 @@ const stylesClass = css`
 `;
 
 const CivicLogoCAnimated = ({ alt }) =>
-  isClient && <img className={stylesClass} src={logoC} alt={alt} />;
+  isClient && <img css={stylesClass} src={logoC} alt={alt} />;
 
 CivicLogoCAnimated.displayName = "Logo";
 CivicLogoCAnimated.propTypes = {

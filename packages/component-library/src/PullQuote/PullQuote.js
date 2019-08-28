@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
-import React from "react";
-import { css } from "emotion";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 import { TwitterShareButton, TwitterIcon } from "react-share";
 import { get } from "lodash";
 import window from "global/window";
@@ -31,21 +31,21 @@ const wrapperClass = css`
 `;
 
 const PullQuote = ({ quoteText, quoteAttribution, url }) => (
-  <div className={wrapperClass}>
+  <div css={wrapperClass}>
     <TwitterShareButton
       url={url || get(window, "location.href", "")}
       title={quoteText}
     >
-      <blockquote className={quoteClass}>
+      <blockquote css={quoteClass}>
         &#8220;
         {quoteText}
         &#8221;
         <br />
         {quoteAttribution ? (
-          <span className={attributionClass}>&#8212; {quoteAttribution}</span>
+          <span css={attributionClass}>&#8212; {quoteAttribution}</span>
         ) : null}
       </blockquote>
-      <div className={iconClass}>
+      <div css={iconClass}>
         <TwitterIcon size={24} round iconBgStyle={{ fill: "#1E62BD" }} />
       </div>
     </TwitterShareButton>

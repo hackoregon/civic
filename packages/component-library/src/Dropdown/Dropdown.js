@@ -1,7 +1,7 @@
-import React from "react";
 import PropTypes from "prop-types";
 import Select from "react-select";
-import { css } from "emotion";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 
 import "../../assets/vendor/react-select.min.css";
 
@@ -25,7 +25,7 @@ const Dropdown = ({
   placeholder
 }) => (
   <Select
-    className={dropdownClass}
+    css={dropdownClass}
     options={options}
     onChange={onChange}
     value={value}

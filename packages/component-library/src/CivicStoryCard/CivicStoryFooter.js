@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import PropTypes from "prop-types";
 import copy from "copy-to-clipboard";
-import { css } from "emotion";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 import { get } from "lodash";
 import window from "global/window";
 import CivicStoryLink from "./CivicStoryLink";
@@ -73,8 +74,8 @@ export default class StoryFooter extends Component {
     const issue = `https://github.com/hackoregon/civic/issues/new?labels=type%3Astory-card&template=story-card-improve.md&title=[FEEDBACK] ${slug}`;
 
     return (
-      <div className={actionsClass}>
-        <div className={alignLeft}>
+      <div css={actionsClass}>
+        <div css={alignLeft}>
           <CivicStoryLink
             link={source}
             embed={isEmbedded}
@@ -84,7 +85,7 @@ export default class StoryFooter extends Component {
             Source
           </CivicStoryLink>
         </div>
-        <div className={alignRight}>
+        <div css={alignRight}>
           <CivicStoryLink
             additionalClassName={alignRight}
             link={issue}

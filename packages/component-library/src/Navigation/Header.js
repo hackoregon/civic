@@ -1,9 +1,10 @@
 /* TODO: Fix linting errors */
 /* eslint-disable */
 
-import React, { Component } from "react";
+import { Component } from "react";
 import { Link } from "react-router";
-import { css } from "emotion";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 import PropTypes from "prop-types";
 import Nav from "./Nav";
 import Logo from "../Logo/Logo";
@@ -102,22 +103,21 @@ class Header extends Component {
     } = this.props;
     return (
       <header
-        className={overlay ? overlayContainerClass : containerClass}
+        css={overlay ? overlayContainerClass : containerClass}
         id="site-header"
       >
         <nav
-          className={overlay ? overlayHeaderClass : headerClass}
+          css={overlay ? overlayHeaderClass : headerClass}
           style={{ backgroundColor: mainProjectColor || primaryColor }}
         >
-          <div className={logoClass}>
-            <Link className={logoLinkClass} to="/">
+          <div css={logoClass}>
+            <Link css={logoLinkClass} to="/">
               <Logo type={logoType} alt={title} />
             </Link>
           </div>
           <div
-            className={`${navClass} ${
-              this.state.menuActive ? "active" : "inactive"
-            }`}
+            css={navClass}
+            className={this.state.menuActive ? "active" : "inactive"}
           >
             <Nav
               menu={menu}
@@ -128,10 +128,10 @@ class Header extends Component {
 
             {children}
           </div>
-          <a className={burgerClass}>
+          <a css={burgerClass}>
             <Icon
               key="nav-burger"
-              className={`${ICONS.hamburger}`}
+              className={ICONS.hamburger}
               handleClick={this.togglesNestedMenu}
             />
           </a>

@@ -1,10 +1,7 @@
-/* TODO: Fix linting errors */
-/* eslint-disable */
-
-import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router";
-import { css } from "emotion";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 
 const storyLinkClass = css`
   & a {
@@ -32,15 +29,18 @@ const storyLinkClass = css`
   }
 `;
 
+/* eslint-disable no-nested-ternary */
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 const StoryLink = ({ children, icon, route, action, link, embed }) => (
-  <div className={storyLinkClass}>
+  <div css={storyLinkClass}>
     {route ? (
       <Link to={route}>
         <i className={icon} />
         <span>{children}</span>
       </Link>
     ) : embed ? (
-      <a href={link} target="_blank">
+      <a href={link} target="_blank" rel="noopener noreferrer">
         <i className={icon} />
         <span>{children}</span>
       </a>
@@ -50,13 +50,16 @@ const StoryLink = ({ children, icon, route, action, link, embed }) => (
         <span>{children}</span>
       </a>
     ) : (
-      <a tabIndex="0" onClick={action}>
+      <a tabIndex="0" onClick={action} role="button">
         <i className={icon} />
         <span>{children}</span>
       </a>
     )}
   </div>
 );
+/* eslint-enable no-nested-ternary */
+/* eslint-enable jsx-a11y/anchor-is-valid */
+/* eslint-enable jsx-a11y/click-events-have-key-events */
 
 StoryLink.displayName = "StoryLink";
 StoryLink.propTypes = {
@@ -64,7 +67,8 @@ StoryLink.propTypes = {
   children: PropTypes.node,
   icon: PropTypes.string,
   route: PropTypes.string,
-  link: PropTypes.string
+  link: PropTypes.string,
+  embed: PropTypes.bool
 };
 
 export default StoryLink;

@@ -1,12 +1,12 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { mount } from "enzyme";
 import PackageSelectorBox from "./PackageSelectorBox";
 
 describe("PackageSelctorBox", () => {
   const testTitle = "Schools";
   const testDescription =
     "A short description of the sorts of things you can explore with this package. Data Sources?";
-  const wrapper = shallow(
+  const wrapper = mount(
     <PackageSelectorBox title={testTitle} description={testDescription} />
   );
   it("should render a link", () => {
