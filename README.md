@@ -130,6 +130,25 @@ $ cd packages/component-library
 $ yarn build
 ```
 
+## Creating a new component
+
+It's as easy as running `yarn component` from the root of the repo. You'll be prompted to name your component. When that's done, it will add new files as seen here:
+
+```
+civic
+└───packages
+    └───component-library
+        └───src
+        │   └───YourNewComponent
+        │           YourNewComponent.js
+        │           YourNewComponent.test.js
+        └───stories
+                YourNewComponent.story.js
+                yourNewComponent.notes.md
+```
+
+It will export `YourNewComponent.js` from `component-library/src/index.js`. It was also set up the `YourNewComponent.story.js` for you in storybook `component-library/stories/index.js`. You can now run `yarn storybook` from the root and see YourNewComponent under BasicInputs/YourNewComponent. You can also run `yarn test` within `component-library/` and see that the YourNewComponent tests all pass. As you develop, make sure to update `YourNewComponent.story.js`, `yourNewComponent.notes.md`, and `YourNewComponent.test.js` so that future developers can easily understand how to use your work and rest easy that it is well tested!
+
 ## Creating a new card
 
 There are two options to create a card: from API data and from local json data. Our new card generator makes it easy to load data from the API so we recommend that approach for ease of creation and the most up to date data.
