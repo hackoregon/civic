@@ -2,6 +2,8 @@
 
 This is the home of the front-end code for the [CIVIC Platform](http://civicplatform.org/). It's organized in a monorepo using Yarn Workspaces, but it's ok if you don't know what that means yet.
 
+**✨Demo Day⁇✨** _You may notice a lot of references to Demo Day! Our next Demo Day is September 11, 2019 in Portland, OR. [Get tickets!](www.civicsoftwarefoundation.org/#demoday)_
+
 # Let's make this better, together!
 
 Civic magic happens when we work together. We welcome your collaborative contributions. We also have a [more technical contribution guide](https://github.com/hackoregon/civic/blob/master/CONTRIBUTING.md).
