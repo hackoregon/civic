@@ -5,7 +5,7 @@ import FarmersMarketsOverTimeNewVisualization from "./FarmersMarketsOverTimeNewV
 
 const FarmersMarketsOverTimeNewMeta = (/* data */) => ({
   title: "Farmers Markets Trending Upward",
-  slug: "farmers-markets-over-time-new",
+  slug: "farmers-markets-over-time",
   introText: (
     <p>
       Farmers&apos; markets saw steady growth through the 1990s into the

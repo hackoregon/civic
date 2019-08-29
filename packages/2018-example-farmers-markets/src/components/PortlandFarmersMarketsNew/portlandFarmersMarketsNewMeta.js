@@ -5,7 +5,7 @@ import PortlandFarmersMarketsNewVisualization from "./PortlandFarmersMarketsNewV
 
 const PortlandFarmersMarketsNewMeta = (/* data */) => ({
   title: "Portland Farmers Markets New",
-  slug: "portland-farmers-markets-new",
+  slug: "portland-farmers-markets",
   introText: (
     <p>
       This template card loads data from a file stored in this repo, and can be

@@ -2,27 +2,17 @@ import App from "./components/App";
 import Routes from "./routes";
 import Reducers from "./state";
 
-import PortlandFarmersMarkets from "./components/PortlandFarmersMarkets";
-import FarmersMarketsOverTime from "./components/FarmersMarketsOverTime";
 import FarmersMarketsOverTimeNew from "./components/FarmersMarketsOverTimeNew";
 import PortlandFarmersMarketsNew from "./components/PortlandFarmersMarketsNew";
 
 const CardRegistry = [
   {
-    slug: "portland-farmers-markets-new",
+    slug: "portland-farmers-markets",
     component: PortlandFarmersMarketsNew
   },
   {
-    slug: "farmers-markets-over-time-new",
-    component: FarmersMarketsOverTimeNew
-  },
-  {
-    slug: "portland-farmers-markets",
-    component: PortlandFarmersMarkets
-  },
-  {
     slug: "farmers-markets-over-time",
-    component: FarmersMarketsOverTime
+    component: FarmersMarketsOverTimeNew
   }
 ];
 

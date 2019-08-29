@@ -6,10 +6,7 @@ import {
   CivicCardLayoutClassic
 } from "@hackoregon/component-library";
 import PortlandFarmersMarketsNew from "../PortlandFarmersMarketsNew";
-
-// import FarmersMarketsOverTime from "../FarmersMarketsOverTime";
 import FarmersMarketsOverTimeNew from "../FarmersMarketsOverTimeNew";
-import PortlandFarmersMarkets from "../PortlandFarmersMarkets";
 
 import "@hackoregon/component-library/assets/global.styles.css";
 
@@ -84,10 +81,6 @@ const App = () => (
         farmers may choose to forgo the farmers market.
       </p>
     </section>
-    {/* <section css={sectionMarginMedium}>
-      <FarmersMarketsOverTime />
-    </section> */}
-    {/* Above section is the old, below is the new */}
     <section className={sectionMarginMedium}>
       <FarmersMarketsOverTimeNew Layout={CivicCardLayoutClassic} />
     </section>
@@ -102,10 +95,6 @@ const App = () => (
         this city that attracts grassroot and local initiatives.
       </p>
     </section>
-    <section css={sectionMarginMedium}>
-      <PortlandFarmersMarkets />
-    </section>
-    {/* Above section is the old, below is the new */}
     <section className={sectionMarginMedium}>
       <PortlandFarmersMarketsNew Layout={CivicCardLayoutClassic} />
     </section>
