@@ -484,11 +484,7 @@ const demoCardMeta = (/* data */) => ({
       ]
     }
   ],
-  authors: [
-    "scicampwinner07@gmail.com",
-    "jim.hopper@yahoo.com",
-    "byers0180@hotmail.com"
-  ]
+  authors: [] // No authors so demo is *nice*
   // // authors likely an array of keys in the future
   // authors: [
   //   "https://civicsoftwarefoundation.org/static/human-grid-test-4c90bfc3f316f5d4e104320cb98c43c8.png",
