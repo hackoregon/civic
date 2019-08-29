@@ -59,7 +59,7 @@ const cardMetaDescriptions = {
   authors: {
     title: "Authors",
     description:
-      "This section shows all of the people who worked on the card that want to be shown"
+      "This section shows all of the people who worked on the card that want to be shown. It is currently a list of author email addresses — later that will be used as an id to get associated images and more."
   }
 };
 
