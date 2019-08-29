@@ -5,8 +5,13 @@ import Reducers from "./state";
 import PortlandFarmersMarkets from "./components/PortlandFarmersMarkets";
 import FarmersMarketsOverTime from "./components/FarmersMarketsOverTime";
 import FarmersMarketsOverTimeNew from "./components/FarmersMarketsOverTimeNew";
+import PortlandFarmersMarketsNew from "./components/PortlandFarmersMarketsNew";
 
 const CardRegistry = [
+  {
+    slug: "portland-farmers-markets-new",
+    component: PortlandFarmersMarketsNew
+  },
   {
     slug: "farmers-markets-over-time-new",
     component: FarmersMarketsOverTimeNew

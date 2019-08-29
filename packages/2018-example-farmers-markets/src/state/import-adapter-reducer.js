@@ -2,7 +2,8 @@
 const importAdapterReducer = ({
   INITIAL_STATE,
   IMPORT_START,
-  IMPORT_SUCCESS
+  IMPORT_SUCCESS,
+  SET_FARMERS_MARKET_NEW
 }) => (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case IMPORT_START:
@@ -14,6 +15,11 @@ const importAdapterReducer = ({
       return {
         pending: false,
         data: action.payload
+      };
+    case SET_FARMERS_MARKET_NEW:
+      return {
+        ...state,
+        selectedMarket: action.selectedMarket
       };
     default:
       return state;

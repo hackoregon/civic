@@ -5,8 +5,9 @@ import {
   PullQuote,
   CivicCardLayoutClassic
 } from "@hackoregon/component-library";
+import PortlandFarmersMarketsNew from "../PortlandFarmersMarketsNew";
 
-import FarmersMarketsOverTime from "../FarmersMarketsOverTime";
+// import FarmersMarketsOverTime from "../FarmersMarketsOverTime";
 import FarmersMarketsOverTimeNew from "../FarmersMarketsOverTimeNew";
 import PortlandFarmersMarkets from "../PortlandFarmersMarkets";
 
@@ -83,9 +84,9 @@ const App = () => (
         farmers may choose to forgo the farmers market.
       </p>
     </section>
-    <section css={sectionMarginMedium}>
+    {/* <section css={sectionMarginMedium}>
       <FarmersMarketsOverTime />
-    </section>
+    </section> */}
     {/* Above section is the old, below is the new */}
     <section className={sectionMarginMedium}>
       <FarmersMarketsOverTimeNew Layout={CivicCardLayoutClassic} />
@@ -103,6 +104,10 @@ const App = () => (
     </section>
     <section css={sectionMarginMedium}>
       <PortlandFarmersMarkets />
+    </section>
+    {/* Above section is the old, below is the new */}
+    <section className={sectionMarginMedium}>
+      <PortlandFarmersMarketsNew Layout={CivicCardLayoutClassic} />
     </section>
     <section css={[sectionBodyHeading, sectionMaxWidthSmall]}>
       <h2>There is room for more</h2>
