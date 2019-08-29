@@ -8,11 +8,11 @@ const FarmersMarketsOverTimeMeta = (/* data */) => ({
   slug: "farmers-markets-over-time",
   introText: (
     <p>
-      Farmers&apos; markets saw steady growth through the 1990s into the
+      {`Farmers' markets saw steady growth through the 1990s into the
       mid-2000s. The recession correlates with abnormal growth in the total
-      number of Farmers&apos; Markets. The last two years have shown no growth.
+      number of Farmers' Markets. The last two years have shown no growth.
       Is this plateau expected to continue? What causes growth or decline in
-      Farmers&apos; Markets?
+      Farmers' Markets?`}
     </p>
   ),
   visualization: FarmersMarketsOverTimeVisualization, // data, isLoading are passed to this as props
@@ -129,10 +129,7 @@ const FarmersMarketsOverTimeMeta = (/* data */) => ({
     }
   ],
   // authors likely an array of keys in the future
-  authors: [
-    "https://civicsoftwarefoundation.org/static/human-grid-test-4c90bfc3f316f5d4e104320cb98c43c8.png",
-    "https://civicsoftwarefoundation.org/static/human-grid-test2-ea1849501456af341647068243fc72bb.png"
-  ]
+  authors: []
 });
 
 export default FarmersMarketsOverTimeMeta;
