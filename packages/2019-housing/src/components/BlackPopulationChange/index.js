@@ -19,7 +19,10 @@ const BlackPopulationChange = ({ init, data, Layout }) => {
     */
   ]);
 
-  const loading = !isLoaded(data.ncdbYearly);
+  const loading =
+    !isLoaded(data.ncdbYearly1990) ||
+    !isLoaded(data.ncdbYearly2017) ||
+    !isLoaded(data.ncdbCensusTractMap);
 
   return (
     <CivicCard
@@ -35,22 +38,60 @@ BlackPopulationChange.displayName = "BlackPopulationChange";
 
 BlackPopulationChange.propTypes = {
   init: PropTypes.func,
-  data: PropTypes.shape({ ncdbYearly: resourceShape }),
+  data: PropTypes.shape({
+    ncdbYearly1990: resourceShape,
+    ncdbCensusTractMap: resourceShape
+  }),
   Layout: PropTypes.func
 };
 
 export default connect(
   state => ({
     data: {
-      ncdbYearly: api.selectors.getNcdbYearlyData(
-        state.package2019Housing || state
+      ncdbYearly1990: api.selectors.getNcdbYearlyData(
+        state.package2019Housing || state,
+        {
+          limit: 500,
+          metroname: "Portland-Vancouver-Hillsboro, OR-WA",
+          year: 1990
+        }
+      ),
+      ncdbYearly2017: api.selectors.getNcdbYearlyData(
+        state.package2019Housing || state,
+        {
+          limit: 500,
+          metroname: "Portland-Vancouver-Hillsboro, OR-WA",
+          year: 2017
+        }
+      ),
+      ncdbCensusTractMap: api.selectors.getNcdbCensusTractMap(
+        state.package2019Housing || state,
+        { limit: 500 }
       )
     }
     // state.packageProjectName || state needed to make work in the project package and 2018 package
   }),
   dispatch => ({
     init() {
-      dispatch(api.actionCreators.getNcdbYearlyData());
+      dispatch(
+        api.actionCreators.getNcdbYearlyData({
+          limit: 500,
+          metroname: "Portland-Vancouver-Hillsboro, OR-WA",
+          year: 1990
+        })
+      );
+      dispatch(
+        api.actionCreators.getNcdbYearlyData({
+          limit: 500,
+          metroname: "Portland-Vancouver-Hillsboro, OR-WA",
+          year: 2017
+        })
+      );
+      dispatch(
+        api.actionCreators.getNcdbCensusTractMap({
+          limit: 500
+        })
+      );
     }
   })
 )(BlackPopulationChange);

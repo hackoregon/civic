@@ -3,11 +3,17 @@ import requestAdapter from "../request-adapter";
 
 const apiConfig = { requestAdapter };
 
-const HOST = "https://service.civicpdx.org/transportation-systems";
+const HOST = "https://service.civicpdx.org";
 
 const apiDesc = {
   getNcdbYearlyData: {
-    url: `${HOST}/passenger-census/system/annual/averages/?format=json`,
+    url: `${HOST}/housing2019/v1/api/ncdbsampleyearly/`,
+    // you can apply any needed data transformations to value here
+    // if complex, separate tranformation function to another file
+    dataTransform: data => data
+  },
+  getNcdbCensusTractMap: {
+    url: `${HOST}/sandbox/api/PdxMsa2010CensusTracts/`,
     // you can apply any needed data transformations to value here
     // if complex, separate tranformation function to another file
     dataTransform: data => data
