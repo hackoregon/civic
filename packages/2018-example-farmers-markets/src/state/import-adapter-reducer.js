@@ -13,6 +13,7 @@ const importAdapterReducer = ({
       };
     case IMPORT_SUCCESS:
       return {
+        ...state,
         pending: false,
         data: action.payload
       };

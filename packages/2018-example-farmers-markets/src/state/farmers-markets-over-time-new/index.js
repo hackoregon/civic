@@ -3,7 +3,8 @@ import { IMPORT_START, IMPORT_SUCCESS } from "./actions";
 
 const INITIAL_STATE = {
   pending: false,
-  data: null
+  data: null,
+  selectedMarket: null
 };
 
 export default importReducer({ INITIAL_STATE, IMPORT_START, IMPORT_SUCCESS });
