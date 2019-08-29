@@ -7,7 +7,8 @@ import {
 
 const INITIAL_STATE = {
   pending: false,
-  data: null
+  data: null,
+  selectedMarket: null
 };
 
 export default importReducer({
