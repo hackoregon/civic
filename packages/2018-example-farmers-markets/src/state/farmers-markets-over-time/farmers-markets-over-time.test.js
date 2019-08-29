@@ -6,15 +6,15 @@ import reducer from "./index";
 
 const mockStore = configureMockStore([thunk]);
 
-describe("portland-farmers-markets-new", () => {
-  describe("portland-farmers-markets-new actions", () => {
-    describe("portland-farmers-markets-new import actions", () => {
+describe("farmers-markets-over-time", () => {
+  describe("farmers-markets-over-time actions", () => {
+    describe("farmers-markets-over-time import actions", () => {
       it("should have a start action", () => {
         const expectedAction = {
           type: actions.IMPORT_START
         };
 
-        expect(actions.PortlandFarmersMarketsNewDataStart()).to.eql(
+        expect(actions.FarmersMarketsOverTimeDataStart()).to.eql(
           expectedAction
         );
       });
@@ -30,13 +30,13 @@ describe("portland-farmers-markets-new", () => {
           payload
         };
 
-        expect(actions.PortlandFarmersMarketsNewDataSuccess(payload)).to.eql(
+        expect(actions.FarmersMarketsOverTimeDataSuccess(payload)).to.eql(
           expectedAction
         );
       });
     });
 
-    describe("portland-farmers-markets-new import thunk", () => {
+    describe("farmers-markets-over-time import thunk", () => {
       let store;
 
       beforeEach(() => {
@@ -48,7 +48,7 @@ describe("portland-farmers-markets-new", () => {
         const action2 = { type: actions.IMPORT_SUCCESS };
 
         return store
-          .dispatch(actions.fetchPortlandFarmersMarketsNewData())
+          .dispatch(actions.fetchFarmersMarketsOverTimeData())
           .then(() => {
             const actionHistory = store.getActions();
 
@@ -61,11 +61,10 @@ describe("portland-farmers-markets-new", () => {
     });
   });
 
-  describe("portland-farmers-markets-new reducer", () => {
+  describe("farmers-markets-over-time reducer", () => {
     const initialState = {
       pending: false,
-      data: null,
-      selectedMarket: null
+      data: null
     };
 
     it("should return the initial state", () => {
@@ -79,8 +78,7 @@ describe("portland-farmers-markets-new", () => {
         })
       ).to.eql({
         pending: true,
-        data: null,
-        selectedMarket: null
+        data: null
       });
     });
 
@@ -102,57 +100,57 @@ describe("portland-farmers-markets-new", () => {
     });
   });
 
-  describe("portland-farmers-markets-new selectors", () => {
-    describe("getPortlandFarmersMarketsNewRequest", () => {
+  describe("farmers-markets-over-time selectors", () => {
+    describe("getFarmersMarketsOverTimeRequest", () => {
       it("extends the root selector", () => {
         const expectation = { one: "two", three: 4 };
 
         expect(
-          selectors.getPortlandFarmersMarketsNewRequest({
-            portlandFarmersMarketsNewData: expectation
+          selectors.getFarmersMarketsOverTimeRequest({
+            farmersMarketsOverTimeData: expectation
           })
         ).to.eql(expectation);
 
         expect(
-          selectors.getPortlandFarmersMarketsNewRequest({
+          selectors.getFarmersMarketsOverTimeRequest({
             red: "herring",
-            portlandFarmersMarketsNewData: expectation
+            farmersMarketsOverTimeData: expectation
           })
         ).to.eql(expectation);
       });
     });
 
-    describe("getPortlandFarmersMarketsNewData", () => {
+    describe("getFarmersMarketsOverTimeData", () => {
       it("returns undefined when there is no data", () => {
         // eslint-disable-next-line no-unused-expressions
         expect(
-          selectors.getPortlandFarmersMarketsNewData({
-            portlandFarmersMarketsNewData: { no: "data to be seen" }
+          selectors.getFarmersMarketsOverTimeData({
+            farmersMarketsOverTimeData: { no: "data to be seen" }
           })
         ).to.be.undefined;
       });
 
-      it("returns undefined when data has no value for PortlandFarmersMarketsNewData", () => {
+      it("returns undefined when data has no value for FarmersMarketsOverTimeData", () => {
         // eslint-disable-next-line no-unused-expressions
         expect(
-          selectors.getPortlandFarmersMarketsNewData({
-            portlandFarmersMarketsNewData: {
-              data: { NotPortlandFarmersMarketsNewData: {} }
+          selectors.getFarmersMarketsOverTimeData({
+            farmersMarketsOverTimeData: {
+              data: { NotFarmersMarketsOverTimeData: {} }
             }
           })
         ).to.be.undefined;
       });
 
-      it("returns the data when data has a value for PortlandFarmersMarketsNewData", () => {
+      it("returns the data when data has a value for FarmersMarketsOverTimeData", () => {
         const data = {
           here: "it",
           i: "s"
         };
         expect(
-          selectors.getPortlandFarmersMarketsNewData({
-            portlandFarmersMarketsNewData: {
+          selectors.getFarmersMarketsOverTimeData({
+            farmersMarketsOverTimeData: {
               data: {
-                PortlandFarmersMarketsNewData: data
+                FarmersMarketsOverTimeData: data
               }
             }
           })
@@ -160,12 +158,12 @@ describe("portland-farmers-markets-new", () => {
       });
     });
 
-    describe("isPortlandFarmersMarketsNewDataPending", () => {
+    describe("isFarmersMarketsOverTimeDataPending", () => {
       it("returns false when there is no value for pending", () => {
         // eslint-disable-next-line no-unused-expressions
         expect(
-          selectors.isPortlandFarmersMarketsNewDataPending({
-            portlandFarmersMarketsNewData: {
+          selectors.isFarmersMarketsOverTimeDataPending({
+            farmersMarketsOverTimeData: {
               no: "pending property"
             }
           })
@@ -175,8 +173,8 @@ describe("portland-farmers-markets-new", () => {
       it("returns false when the value for pending is false", () => {
         // eslint-disable-next-line no-unused-expressions
         expect(
-          selectors.isPortlandFarmersMarketsNewDataPending({
-            portlandFarmersMarketsNewData: {
+          selectors.isFarmersMarketsOverTimeDataPending({
+            farmersMarketsOverTimeData: {
               pending: false
             }
           })
@@ -186,8 +184,8 @@ describe("portland-farmers-markets-new", () => {
       it("returns true when the value for pending is true", () => {
         // eslint-disable-next-line no-unused-expressions
         expect(
-          selectors.isPortlandFarmersMarketsNewDataPending({
-            portlandFarmersMarketsNewData: {
+          selectors.isFarmersMarketsOverTimeDataPending({
+            farmersMarketsOverTimeData: {
               pending: true
             }
           })

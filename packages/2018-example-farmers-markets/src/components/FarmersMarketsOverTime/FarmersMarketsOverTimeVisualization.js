@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import { LineChart } from "@hackoregon/component-library";
 
-const FarmersMarketsOverTimeNewVisualization = ({ isLoading, data }) => (
+const FarmersMarketsOverTimeVisualization = ({ isLoading, data }) => (
   <React.Fragment>
     {!isLoading && data && (
       <LineChart
@@ -20,7 +20,7 @@ const FarmersMarketsOverTimeNewVisualization = ({ isLoading, data }) => (
   </React.Fragment>
 );
 
-FarmersMarketsOverTimeNewVisualization.propTypes = {
+FarmersMarketsOverTimeVisualization.propTypes = {
   isLoading: PropTypes.bool,
   data: PropTypes.arrayOf(
     PropTypes.shape({
@@ -31,4 +31,4 @@ FarmersMarketsOverTimeNewVisualization.propTypes = {
   )
 };
 
-export default FarmersMarketsOverTimeNewVisualization;
+export default FarmersMarketsOverTimeVisualization;

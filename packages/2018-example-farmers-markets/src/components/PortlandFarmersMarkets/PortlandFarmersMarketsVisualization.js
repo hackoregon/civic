@@ -2,10 +2,10 @@ import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { BaseMap, ScatterPlotMap } from "@hackoregon/component-library";
-import { setFarmersMarket } from "../../state/portland-farmers-markets-new/actions";
-import { getActiveFarmersMarket } from "../../state/portland-farmers-markets-new/selectors";
+import { setFarmersMarket } from "../../state/portland-farmers-markets/actions";
+import { getActiveFarmersMarket } from "../../state/portland-farmers-markets/selectors";
 
-const PortlandFarmersMarketsNewVisualization = ({
+const PortlandFarmersMarketsVisualization = ({
   isLoading,
   data,
   selectFarmersMarket,
@@ -61,7 +61,7 @@ const PortlandFarmersMarketsNewVisualization = ({
   </Fragment>
 );
 
-PortlandFarmersMarketsNewVisualization.propTypes = {
+PortlandFarmersMarketsVisualization.propTypes = {
   isLoading: PropTypes.bool,
   data: PropTypes.arrayOf(
     PropTypes.shape({
@@ -74,7 +74,7 @@ PortlandFarmersMarketsNewVisualization.propTypes = {
   activeMarket: PropTypes.shape({})
 };
 
-// export default PortlandFarmersMarketsNewVisualization;
+// export default PortlandFarmersMarketsVisualization;
 
 export default connect(
   state => ({
@@ -85,4 +85,4 @@ export default connect(
       dispatch(setFarmersMarket(market));
     }
   })
-)(PortlandFarmersMarketsNewVisualization);
+)(PortlandFarmersMarketsVisualization);

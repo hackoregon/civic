@@ -1,8 +1,4 @@
-import {
-  IMPORT_START,
-  IMPORT_SUCCESS,
-  SET_FARMERS_MARKET_NEW
-} from "./actions";
+import { IMPORT_START, IMPORT_SUCCESS, SET_FARMERS_MARKET } from "./actions";
 
 const INITIAL_STATE = {
   pending: false,
@@ -23,7 +19,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         pending: false,
         data: action.payload
       };
-    case SET_FARMERS_MARKET_NEW:
+    case SET_FARMERS_MARKET:
       return {
         ...state,
         selectedMarket: action.selectedMarket

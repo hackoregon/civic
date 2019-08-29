@@ -1,18 +1,21 @@
 import React from "react";
 import { Collapsable } from "@hackoregon/component-library";
 
-import PortlandFarmersMarketsNewVisualization from "./PortlandFarmersMarketsNewVisualization";
+import FarmersMarketsOverTimeVisualization from "./FarmersMarketsOverTimeVisualization";
 
-const PortlandFarmersMarketsNewMeta = (/* data */) => ({
-  title: "Portland Farmers Markets New",
-  slug: "portland-farmers-markets",
+const FarmersMarketsOverTimeMeta = (/* data */) => ({
+  title: "Farmers Markets Trending Upward",
+  slug: "farmers-markets-over-time",
   introText: (
     <p>
-      This template card loads data from a file stored in this repo, and can be
-      used as a starting point cards that do NOT need to make API calls.
+      Farmers&apos; markets saw steady growth through the 1990s into the
+      mid-2000s. The recession correlates with abnormal growth in the total
+      number of Farmers&apos; Markets. The last two years have shown no growth.
+      Is this plateau expected to continue? What causes growth or decline in
+      Farmers&apos; Markets?
     </p>
   ),
-  visualization: PortlandFarmersMarketsNewVisualization, // data, isLoading are passed to this as props
+  visualization: FarmersMarketsOverTimeVisualization, // data, isLoading are passed to this as props
   additionalText: (
     <p>
       Pastry sweet roll candy chocolate bar cupcake gingerbread. Chocolate jelly
@@ -132,4 +135,4 @@ const PortlandFarmersMarketsNewMeta = (/* data */) => ({
   ]
 });
 
-export default PortlandFarmersMarketsNewMeta;
+export default FarmersMarketsOverTimeMeta;

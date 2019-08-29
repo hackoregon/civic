@@ -1,13 +1,13 @@
 import { combineReducers } from "redux";
 import { routerReducer } from "react-router-redux";
-import farmersMarketsOverTimeNewData from "./farmers-markets-over-time-new";
-import portlandFarmersMarketsNewData from "./portland-farmers-markets-new";
+import farmersMarketsOverTimeData from "./farmers-markets-over-time";
+import portlandFarmersMarketsData from "./portland-farmers-markets";
 
 export default function createReducer(asyncReducers) {
   return combineReducers({
     routing: routerReducer,
-    portlandFarmersMarketsNewData,
-    farmersMarketsOverTimeNewData,
+    portlandFarmersMarketsData,
+    farmersMarketsOverTimeData,
     ...asyncReducers
   });
 }
