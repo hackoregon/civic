@@ -42,10 +42,10 @@ const ChartContainer = ({
     padding-top: ${100 / aspectRatio}%;
   `;
 
-  let content = <div css={wrapperStyle}>{children}</div>;
+  let content = <Skeleton css={[wrapperStyle, fullHeight]} />;
 
-  if (loading) {
-    content = <Skeleton css={[wrapperStyle, fullHeight]} />;
+  if (!loading) {
+    content = <div css={wrapperStyle}>{children}</div>;
   } else if (error) {
     content = <div css={[wrapperStyle, fullHeight, chartError]}>{error}</div>;
   }
