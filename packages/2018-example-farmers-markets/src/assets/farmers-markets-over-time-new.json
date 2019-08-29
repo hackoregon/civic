@@ -1,0 +1,100 @@
+{
+  "FarmersMarketsOverTimeNewData": [
+    {
+      "Year": 1994,
+      "FarmersMarketCount": 1755
+    },
+    {
+      "Year": 1995,
+      "FarmersMarketCount": 2082
+    },
+    {
+      "Year": 1996,
+      "FarmersMarketCount": 2410
+    },
+    {
+      "Year": 1997,
+      "FarmersMarketCount": 2578
+    },
+    {
+      "Year": 1998,
+      "FarmersMarketCount": 2746
+    },
+    {
+      "Year": 1999,
+      "FarmersMarketCount": 2804
+    },
+    {
+      "Year": 2000,
+      "FarmersMarketCount": 2863
+    },
+    {
+      "Year": 2001,
+      "FarmersMarketCount": 3000
+    },
+    {
+      "Year": 2002,
+      "FarmersMarketCount": 3137
+    },
+    {
+      "Year": 2003,
+      "FarmersMarketCount": 3421
+    },
+    {
+      "Year": 2004,
+      "FarmersMarketCount": 3706
+    },
+    {
+      "Year": 2005,
+      "FarmersMarketCount": 4045
+    },
+    {
+      "Year": 2006,
+      "FarmersMarketCount": 4385
+    },
+    {
+      "Year": 2007,
+      "FarmersMarketCount": 4535
+    },
+    {
+      "Year": 2008,
+      "FarmersMarketCount": 4685
+    },
+    {
+      "Year": 2009,
+      "FarmersMarketCount": 5274
+    },
+    {
+      "Year": 2010,
+      "FarmersMarketCount": 6132
+    },
+    {
+      "Year": 2011,
+      "FarmersMarketCount": 7175
+    },
+    {
+      "Year": 2012,
+      "FarmersMarketCount": 7864
+    },
+    {
+      "Year": 2013,
+      "FarmersMarketCount": 8144
+    },
+    {
+      "Year": 2014,
+      "FarmersMarketCount": 8268
+    },
+    {
+      "Year": 2015,
+      "FarmersMarketCount": 8476
+    },
+    {
+      "Year": 2016,
+      "FarmersMarketCount": 8669
+    },
+    {
+      "Year": 2017,
+      "FarmersMarketCount": 8687
+    }
+  ]
+}

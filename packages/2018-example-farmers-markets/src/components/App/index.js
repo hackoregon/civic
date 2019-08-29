@@ -1,8 +1,13 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
-import { PageLayout, PullQuote } from "@hackoregon/component-library";
+import {
+  PageLayout,
+  PullQuote,
+  CivicCardLayoutClassic
+} from "@hackoregon/component-library";
 
 import FarmersMarketsOverTime from "../FarmersMarketsOverTime";
+import FarmersMarketsOverTimeNew from "../FarmersMarketsOverTimeNew";
 import PortlandFarmersMarkets from "../PortlandFarmersMarkets";
 
 import "@hackoregon/component-library/assets/global.styles.css";
@@ -80,6 +85,10 @@ const App = () => (
     </section>
     <section css={sectionMarginMedium}>
       <FarmersMarketsOverTime />
+    </section>
+    {/* Above section is the old, below is the new */}
+    <section className={sectionMarginMedium}>
+      <FarmersMarketsOverTimeNew Layout={CivicCardLayoutClassic} />
     </section>
     <section css={[sectionBodyHeading, sectionMaxWidthSmall]}>
       <h2>How does Portland look today?</h2>
