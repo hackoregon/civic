@@ -1,20 +1,18 @@
 import React from "react";
 import { Collapsable } from "@hackoregon/component-library";
 
-import TemplateFileCardVisualization from "./TemplateFileCardVisualization";
+import PortlandFarmersMarketsVisualization from "./PortlandFarmersMarketsVisualization";
 
-const TemplateFileCardMeta = (/* data */) => ({
-  title: "(Story Card #1, Issue #000) Template File Card Title",
-  slug: "template-file-card",
+const PortlandFarmersMarketsMeta = (/* data */) => ({
+  title: "Portland Farmers Markets ",
+  slug: "portland-farmers-markets",
   introText: (
     <p>
-      Ice cream candy canes brownie marzipan jelly chocolate bar marshmallow.
-      Toffee cotton candy candy canes danish soufflé tootsie roll tiramisu
-      cupcake candy. Liquorice jujubes chocolate cake chupa chups. Halvah oat
-      cake jelly beans sugar plum chocolate cupcake tiramisu cake.
+      This template card loads data from a file stored in this repo, and can be
+      used as a starting point cards that do NOT need to make API calls.
     </p>
   ),
-  visualization: TemplateFileCardVisualization,
+  visualization: PortlandFarmersMarketsVisualization, // data, isLoading are passed to this as props
   additionalText: (
     <p>
       Pastry sweet roll candy chocolate bar cupcake gingerbread. Chocolate jelly
@@ -127,16 +125,8 @@ const TemplateFileCardMeta = (/* data */) => ({
       ]
     }
   ],
-  authors: [
-    "scicampwinner07@gmail.com",
-    "jim.hopper@yahoo.com",
-    "byers0180@hotmail.com"
-  ]
   // authors likely an array of keys in the future
-  // authors: [
-  //   "https://civicsoftwarefoundation.org/static/human-grid-test-4c90bfc3f316f5d4e104320cb98c43c8.png",
-  //   "https://civicsoftwarefoundation.org/static/human-grid-test2-ea1849501456af341647068243fc72bb.png"
-  // ]
+  authors: []
 });
 
-export default TemplateFileCardMeta;
+export default PortlandFarmersMarketsMeta;

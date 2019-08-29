@@ -52,12 +52,16 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
             <h1 id="title">{cardMeta.title}</h1>
           </header>
           <hr />
-          <section id="tags">
-            {cardMeta.tags.map((tag, index) => (
-              <Chip tag={tag} index={index} key={generate()} />
-            ))}
-          </section>
-          <hr />
+          {cardMeta.tags.length > 0 && (
+            <Fragment>
+              <section id="tags">
+                {cardMeta.tags.map((tag, index) => (
+                  <Chip tag={tag} index={index} key={generate()} />
+                ))}
+              </section>
+              <hr />
+            </Fragment>
+          )}
         </div>
         <section>
           <div css={[sectionMarginSmall, sectionMaxWidthSmall]}>

@@ -3,15 +3,15 @@ import { rootState } from "../selectors";
 
 export const getFarmersMarketsOverTimeRequest = createSelector(
   rootState,
-  ({ farmersMarketsOverTime }) => farmersMarketsOverTime
+  ({ farmersMarketsOverTimeData }) => farmersMarketsOverTimeData
 );
 
 export const getFarmersMarketsOverTimeData = createSelector(
   getFarmersMarketsOverTimeRequest,
-  ({ data }) => data && data.FarmersMarketsByYear
+  ({ data }) => data && data.FarmersMarketsOverTimeData
 );
 
-export const isFarmersMarketsOverTimePending = createSelector(
+export const isFarmersMarketsOverTimeDataPending = createSelector(
   getFarmersMarketsOverTimeRequest,
   ({ pending }) => !!pending
 );
