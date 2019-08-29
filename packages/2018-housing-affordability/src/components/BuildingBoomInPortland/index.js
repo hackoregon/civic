@@ -2,9 +2,6 @@ import React from "react";
 
 import { CivicStoryCard } from "@hackoregon/component-library";
 
-import aduGif from "../../assets/adus_time.gif";
-import mfGif from "../../assets/mf_time.gif";
-
 export class BuildingBoomInPortland extends React.Component {
   componentDidMount() {
     // initialize data here
@@ -22,16 +19,8 @@ export class BuildingBoomInPortland extends React.Component {
         </p>
 
         <h1>Accessory Dwelling Units Over Time</h1>
-        <img
-          src={aduGif}
-          alt="heatmap of where Accessory Dwelling Units permits are in Portland over time"
-        />
 
         <h1>Multi-family Housing Over Time</h1>
-        <img
-          src={mfGif}
-          alt="heatmap of where Multi-family housing permits are in Portland over time"
-        />
       </CivicStoryCard>
     );
   }
