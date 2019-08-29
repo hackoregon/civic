@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { storiesOf } from "@storybook/react";
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -13,8 +13,6 @@ import {
   select,
   array
 } from "@storybook/addon-knobs";
-import FormControl from "@material-ui/core/FormControl";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import { RadioButtonGroup } from "../src";
 import { storybookStyles } from "./storyStyles";
 import StatefulWrapper from "../src/utils/StatefulWrapper";
@@ -57,6 +55,7 @@ export default () =>
                   }}
                   value={get("value")}
                   disabled={disabled}
+                  formHelperText=""
                 />
               );
             }}
@@ -71,6 +70,11 @@ export default () =>
         const grpLabel = text("Group label", "Year", GROUP_IDS.LABELS);
         const radioLabels = ["2016", "2017", "2018"];
         const labels = array("Labels", radioLabels, ", ", GROUP_IDS.LABELS);
+        const formHelperText = text(
+          "Helper text",
+          "* Show results for this year",
+          GROUP_IDS.LABELS
+        );
         const disabled = boolean("Disabled", false, GROUP_IDS.STATE);
         const options = {
           Top: "top",
@@ -100,6 +104,7 @@ export default () =>
                   disabled={disabled}
                   labelPlacement={labelPlacement}
                   row={row}
+                  formHelperText={formHelperText}
                 />
               );
             }}
@@ -115,7 +120,7 @@ export default () =>
         const radioLabels = ["2016", "2017", "2018"];
         const labels = array("Labels", radioLabels, ", ", GROUP_IDS.LABELS);
         const formHelperText = text(
-          "Form helper text",
+          "Helper text",
           "* Show results for this year",
           GROUP_IDS.LABELS
         );
@@ -126,22 +131,18 @@ export default () =>
           <StatefulWrapper initialState={{ value: radioLabels[0] }}>
             {({ get, set }) => {
               return (
-                <FormControl>
-                  <Fragment>
-                    <RadioButtonGroup
-                      grpLabel={grpLabel}
-                      labels={labels}
-                      onChange={event => {
-                        set({ value: event.target.value });
-                        action("onChange")(event);
-                      }}
-                      value={get("value")}
-                      disabled={disabled}
-                      row={row}
-                    />
-                  </Fragment>
-                  <FormHelperText>{formHelperText}</FormHelperText>
-                </FormControl>
+                <RadioButtonGroup
+                  grpLabel={grpLabel}
+                  labels={labels}
+                  onChange={event => {
+                    set({ value: event.target.value });
+                    action("onChange")(event);
+                  }}
+                  value={get("value")}
+                  disabled={disabled}
+                  row={row}
+                  formHelperText={formHelperText}
+                />
               );
             }}
           </StatefulWrapper>

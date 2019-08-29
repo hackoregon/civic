@@ -18,6 +18,7 @@ The Custom story shows all possible properties that can be passed to the Radio B
 
 - Label placement
 - Display all radio buttons in a row
+- Helper text
 
 ## Example:
 
@@ -27,4 +28,4 @@ This example story shows the radio button group as it would be used in a form. I
 - Labels
 - Display all radio buttons in a row
 - Disable the group of radio buttons
-- Form helper text
+- Helper text
