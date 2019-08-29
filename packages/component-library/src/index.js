@@ -10,6 +10,7 @@ export {
 } from "./_Themes/index";
 
 // COMPONENTS
+// DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator src injection
 export {
   default as HorizontalBarChart
 } from "./HorizontalBarChart/HorizontalBarChart";
