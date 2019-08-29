@@ -64,8 +64,7 @@ describe("farmers-markets-over-time-new", () => {
   describe("farmers-markets-over-time-new reducer", () => {
     const initialState = {
       pending: false,
-      data: null,
-      selectedMarket: null
+      data: null
     };
 
     it("should return the initial state", () => {
@@ -79,8 +78,7 @@ describe("farmers-markets-over-time-new", () => {
         })
       ).to.eql({
         pending: true,
-        data: null,
-        selectedMarket: null
+        data: null
       });
     });
 
