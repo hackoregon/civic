@@ -498,6 +498,10 @@ const demoCardMetaMissingData = (/* data */) => ({
   introText: <p>Check the console</p>,
   // visualization gets data, isLoading as props by default
   visualization: DemoCardVisualization,
+  selector: null,
+  analysis: null,
+  metadata: null,
+  resources: null,
   authors: []
 });
 

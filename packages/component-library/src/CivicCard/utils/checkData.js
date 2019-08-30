@@ -1,12 +1,14 @@
 const checkKey = (data, key, optionalKeys = {}) => {
   // If key is optional, skip
   if (optionalKeys[key]) {
-    return { valid: 0, total: 0 };
+    return { valid: 0, total: 0, isNull: false };
   }
 
   const valid = data.filter(datum => key in datum).length;
   const total = data.length;
-  return { valid, total };
+  const isNull = data[0][key] === null;
+
+  return { valid, total, isNull };
 };
 
 const checkData = (data, dataKeys, dataIsObject = false, optionalKeys) => {

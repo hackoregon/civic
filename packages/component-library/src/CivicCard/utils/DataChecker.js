@@ -29,23 +29,30 @@ const DataChecker = ({
     const accessorMessage = (
       isValid,
       isOptional,
+      isNull,
       key,
       keyValue,
       validCount,
       totalCount
     ) => {
+      let keyMessage = "";
+      if (isOptional) {
+        keyMessage = `${key} is optional`;
+      } else if (isNull) {
+        keyMessage = `${key} cannot be null`;
+      } else if (validCount === 0) {
+        keyMessage = `${key} is invalid. "${keyValue}" not found in data`;
+      } else if (!isValid) {
+        return `${key} is invalid. "${keyValue}" missing in ${totalCount -
+          validCount}/${totalCount} objects in data`;
+      }
+
       /* eslint-disable no-nested-ternary */
       return `
         ${
-          isOptional ? "Optional: " : isValid ? "✅ " : "🥺 "
-        }${key}: ${JSON.stringify(keyValue, undefined, 2)}
-        ${!isValid &&
-          (isOptional
-            ? `${key} is optional`
-            : validCount === 0
-            ? `${key} is invalid. "${keyValue}" not found in data`
-            : `${key} is invalid. "${keyValue}" missing in ${totalCount -
-                validCount}/${totalCount} objects in data`)}
+          isOptional ? "✅ Optional --" : isValid && !isNull ? "✅" : "🥺"
+        } ${key}: ${keyValue && JSON.stringify(keyValue, undefined, 2)}
+        ${keyMessage || ""}
       `;
       /* eslint-enable no-nested-ternary */
     };
@@ -54,12 +61,14 @@ const DataChecker = ({
       const isValid =
         results[values[index]].valid === results[values[index]].total;
       const isOptional = optionalKeys[key];
+      const { isNull } = results[values[index]];
       const validCount = results[values[index]].valid;
       const totalCount = results[values[index]].total;
       const keyValue = values[index];
       return accessorMessage(
         isValid,
         isOptional,
+        isNull,
         key,
         keyValue,
         validCount,
