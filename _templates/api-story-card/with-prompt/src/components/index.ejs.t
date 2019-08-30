@@ -13,6 +13,7 @@ import api from "../../state/<%=slug%>/api";
 const <%=StoryCardName%> = ({ init, data, Layout }) => {
   useEffect(() => {
     init();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     /*
     https://reactjs.org/docs/hooks-effect.html#tip-optimizing-performance-by-skipping-effects

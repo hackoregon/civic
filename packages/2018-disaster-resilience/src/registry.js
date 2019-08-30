@@ -6,8 +6,13 @@ import YouAndYourNeighbors from "./components/YouAndYourNeighbors";
 import WhatYouCanDoToPrepare from "./components/WhatYouCanDoToPrepare";
 import IncreasingSocialCapital from "./components/IncreasingSocialCapital";
 import ProactivePlanning from "./components/ProactivePlanning";
+import ProactivePlanningPuma from "./components/ProactivePlanningPuma";
 
 export default [
+  {
+    slug: "proactive-planning-puma",
+    component: ProactivePlanningPuma
+  },
   {
     slug: "life-altering-event",
     component: LifeAlteringEvent

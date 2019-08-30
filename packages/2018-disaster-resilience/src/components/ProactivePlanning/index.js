@@ -13,7 +13,7 @@ import {
   getProactivePlanningData
 } from "../../state/proactive-planning/selectors";
 
-export class ProactivePlanning extends React.Component {
+class ProactivePlanning extends React.Component {
   componentDidMount() {
     const { init } = this.props;
     init();

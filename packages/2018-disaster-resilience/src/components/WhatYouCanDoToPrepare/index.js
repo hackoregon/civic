@@ -4,7 +4,7 @@ import { CivicStoryCard } from "@hackoregon/component-library";
 import Quiz from "./Quiz/Quiz";
 import Summary from "./Summary/Summary";
 
-export class WhatYouCanDoToPrepare extends React.Component {
+class WhatYouCanDoToPrepare extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

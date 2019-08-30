@@ -2,7 +2,7 @@ import React from "react";
 
 import { CivicStoryCard, Placeholder } from "@hackoregon/component-library";
 
-export class ViolentShakingAndGroundDeformation extends React.Component {
+class ViolentShakingAndGroundDeformation extends React.Component {
   componentDidMount() {
     // initialize data here
   }
