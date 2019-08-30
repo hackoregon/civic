@@ -1,9 +1,9 @@
 import React from "react";
 import { Collapsable } from "@hackoregon/component-library";
 
-import ProactivePlanningPumaVisualization from "./ProactivePlanningPumaVisualization";
+import ProactivePlanningVisualization from "./ProactivePlanningVisualization";
 
-const ProactivePlanningPumaMeta = (/* data */) => ({
+const ProactivePlanningMeta = (/* data */) => ({
   title: "Planning for Citywide Resilience",
   slug: "proactive-planning-for-city-wide-resilience",
   introText: (
@@ -13,7 +13,7 @@ const ProactivePlanningPumaMeta = (/* data */) => ({
       template! For example, the loading state of the card needs to be improved.
     </p>
   ),
-  visualization: ProactivePlanningPumaVisualization, // data is passed to this as props
+  visualization: ProactivePlanningVisualization, // data is passed to this as props
   additionalText: (
     <p>
       Pastry sweet roll candy chocolate bar cupcake gingerbread. Chocolate jelly
@@ -130,4 +130,4 @@ const ProactivePlanningPumaMeta = (/* data */) => ({
   authors: []
 });
 
-export default ProactivePlanningPumaMeta;
+export default ProactivePlanningMeta;

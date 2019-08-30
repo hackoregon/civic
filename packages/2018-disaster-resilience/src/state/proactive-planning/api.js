@@ -9,7 +9,7 @@ const HOST = "https://service.civicpdx.org/disaster-resilience";
 
 // API DESCRIPTION
 const apiDesc = {
-  getProactivePlanningPumaData: {
+  getProactivePlanningData: {
     url: `${HOST}/api/DisasterNeighborhoodView/?limit=150`,
     // you can apply any needed data transformations to value here
     // if complex, separate tranformation function to another file
@@ -17,10 +17,10 @@ const apiDesc = {
   }
 };
 
-const proactivePlanningPumaData = new Reduxful(
-  "proactivePlanningPumaData",
+const proactivePlanningData = new Reduxful(
+  "proactivePlanningData",
   apiDesc,
   apiConfig
 );
 
-export default proactivePlanningPumaData;
+export default proactivePlanningData;

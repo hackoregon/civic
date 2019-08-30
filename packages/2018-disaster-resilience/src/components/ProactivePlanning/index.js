@@ -4,36 +4,32 @@ import { connect } from "react-redux";
 import { resourceShape } from "reduxful/react-addons";
 import { CivicCard } from "@hackoregon/component-library";
 
-import proactivePlanningPumaMeta from "./proactivePlanningPumaMeta";
-import api from "../../state/proactive-planning-puma/api";
+import proactivePlanningMeta from "./proactivePlanningMeta";
+import api from "../../state/proactive-planning/api";
 
-const ProactivePlanningPuma = ({ init, data, Layout }) => {
+const ProactivePlanning = ({ init, data, Layout }) => {
   useEffect(() => {
     init();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <CivicCard
-      cardMeta={proactivePlanningPumaMeta}
-      data={data}
-      Layout={Layout}
-    />
+    <CivicCard cardMeta={proactivePlanningMeta} data={data} Layout={Layout} />
   );
 };
 
-ProactivePlanningPuma.displayName = "ProactivePlanningPuma";
+ProactivePlanning.displayName = "ProactivePlanning";
 
-ProactivePlanningPuma.propTypes = {
+ProactivePlanning.propTypes = {
   init: PropTypes.func,
-  data: PropTypes.shape({ proactivePlanningPuma: resourceShape }),
+  data: PropTypes.shape({ proactivePlanning: resourceShape }),
   Layout: PropTypes.func
 };
 
 export default connect(
   state => ({
     data: {
-      proactivePlanningPuma: api.selectors.getProactivePlanningPumaData(
+      proactivePlanning: api.selectors.getProactivePlanningData(
         state.package2018DisasterResilience || state
       )
     }
@@ -41,7 +37,7 @@ export default connect(
   }),
   dispatch => ({
     init() {
-      dispatch(api.actionCreators.getProactivePlanningPumaData());
+      dispatch(api.actionCreators.getProactivePlanningData());
     }
   })
-)(ProactivePlanningPuma);
+)(ProactivePlanning);

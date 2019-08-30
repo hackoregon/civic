@@ -5,8 +5,8 @@ import { isLoaded } from "reduxful";
 import { Scatterplot } from "@hackoregon/component-library";
 import { civicFormat } from "@hackoregon/component-library/dist/utils";
 
-const ProactivePlanningPumaVisualization = ({ data }) => {
-  const isLoading = !isLoaded(data.proactivePlanningPuma);
+const ProactivePlanningVisualization = ({ data }) => {
+  const isLoading = !isLoaded(data.proactivePlanning);
 
   return (
     <>
@@ -14,7 +14,7 @@ const ProactivePlanningPumaVisualization = ({ data }) => {
         <Scatterplot
           title="Resilience and Displacement"
           subtitle="Resilience as measured by census non-response rate and expected displacement in a 9.0 earthquake by neighborhood"
-          data={data.proactivePlanningPuma.value}
+          data={data.proactivePlanning.value}
           xLabel="Census Non-Response Rate"
           yLabel="Per Capita Displacement"
           dataKey="census_response_rate"
@@ -31,8 +31,8 @@ const ProactivePlanningPumaVisualization = ({ data }) => {
   );
 };
 
-ProactivePlanningPumaVisualization.propTypes = {
-  data: PropTypes.shape({ proactivePlanningPuma: resourceShape })
+ProactivePlanningVisualization.propTypes = {
+  data: PropTypes.shape({ proactivePlanning: resourceShape })
 };
 
-export default ProactivePlanningPumaVisualization;
+export default ProactivePlanningVisualization;
