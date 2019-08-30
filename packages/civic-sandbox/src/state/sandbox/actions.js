@@ -42,7 +42,7 @@ export const SlideFailure = actionEmitter(SLIDE_FAILURE);
 
 // Thunk actions
 export const fetchSandbox = fetchAdapter(
-  "https://sandbox.civicpdx.org/civic-sandbox",
+  "https://gist.githubusercontent.com/mendozaline/5f9b9157d031cb5fd505bcce098f3fc2/raw/26c02f1ca40f7372d05a60f0c21334d616856eba/packs.json",
   {
     start: SandboxStart,
     success: SandboxSuccess,
@@ -57,12 +57,14 @@ export const fetchFoundation = endpoint =>
     failure: FoundationFailure
   });
 
-export const fetchSlides = slides =>
-  fetchAllSlidesAdapter(slides, {
+export const fetchSlides = slides => {
+  console.log("actions-fetchSlides-slides:", slides);
+  return fetchAllSlidesAdapter(slides, {
     start: SlidesStart,
     success: SlidesSuccess,
     failure: SlidesFailure
   });
+};
 
 export const setPackage = (selectedPackage = "") => ({
   type: SET_PACKAGE,

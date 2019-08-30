@@ -56,7 +56,8 @@ const SandboxDrawer = ({
   updateFoundation,
   foundationMapProps,
   onBaseMapStyleChange,
-  baseMapStyle
+  baseMapStyle,
+  defaultSlides
 }) => {
   return (
     <div css={drawerVisible ? menuOpen : menuClosed}>
@@ -100,6 +101,7 @@ const SandboxDrawer = ({
           }
         `)}
         >
+          {/* DATA COLLECTIONS */}
           <div
             css={css(`
             position: relative;
@@ -117,15 +119,20 @@ const SandboxDrawer = ({
             </h2>
             <Dropdown
               value={selectedPackage}
-              options={Object.keys(data.packages).map(p => ({
-                value: p,
-                label: p
+              options={data.packages.map(p => ({
+                value: p.displayName,
+                label: p.displayName
               }))}
-              onChange={updatePackage}
+              onChange={name => {
+                console.log("sandbox-drawer-data-c-e:", name);
+                updatePackage({ displayName: name });
+              }}
               simpleValue
             />
           </div>
-          <div
+
+          {/* FOUNDATIONS */}
+          {/*<div
             css={css(`
             position: relative;
             z-index: 400;
@@ -207,6 +214,9 @@ const SandboxDrawer = ({
               )}
             </div>
           )}
+          */}
+
+          {/* SLIDES */}
           <div
             css={css(`
             position: relative;
@@ -225,13 +235,13 @@ const SandboxDrawer = ({
           </div>
           {allSlides.map((slide, index) => {
             // eslint-disable-next-line no-extra-boolean-cast
-            const selectedSlideData = !!slideData.find(
-              slideDatum => slideDatum[slide.label]
-            )
-              ? slideData.find(slideDatum => slideDatum[slide.label])[
-                  slide.label
-                ]
-              : {};
+            // const selectedSlideData = !!slideData.find(
+            //   slideDatum => slideDatum[slide.label]
+            // )
+            //   ? slideData.find(slideDatum => slideDatum[slide.label])[
+            //       slide.label
+            //     ]
+            //   : {};
             const defaultGray = [238, 238, 238, 255];
             const backgroundSlideColor = slide.color;
             const formatBackgroundColor = arr =>
@@ -261,7 +271,7 @@ const SandboxDrawer = ({
                 `)}
                 >
                   <SandboxToggleSwitch
-                    name={slide.slideId}
+                    name={slide.label}
                     checked={slide.checked}
                     onChange={onChange}
                     label={slide.label}
@@ -277,7 +287,7 @@ const SandboxDrawer = ({
                   z-index: ${10 - index};
                 `)}
                 >
-                  {slide.checked &&
+                  {/*slide.checked &&
                   selectedSlideData.slide_meta &&
                   selectedSlideData.slide_meta.dates.date_granularity ? (
                     <SandboxDateSelector
@@ -298,7 +308,7 @@ const SandboxDrawer = ({
                     >
                       {selectedSlideData.slide_meta.dates.default_date_filter}
                     </span>
-                  ) : null}
+                  ) : null */}
                 </div>
               </div>
             );

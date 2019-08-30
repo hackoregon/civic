@@ -37,6 +37,8 @@ const INITIAL_STATE = {
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
+  /* global console */
+  console.log("STATE:", state);
   switch (action.type) {
     case SANDBOX_START:
       return {
@@ -48,11 +50,14 @@ const reducer = (state = INITIAL_STATE, action) => {
         selectedSlideDatum: null
       };
     case SANDBOX_SUCCESS:
+      console.log("a-SANDBOX_SUCCESS:", action);
       return {
         ...state,
         sandboxPending: false,
         sandboxError: null,
-        sandbox: action.payload.body,
+        sandbox: {
+          packages: action.payload
+        },
         selectedFoundationDatum: null,
         selectedSlideDatum: null
       };
@@ -98,6 +103,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         slidesError: null
       };
     case SLIDES_SUCCESS:
+      console.log("a-SLIDES_SUCCESS", action.payload);
       return {
         ...state,
         slidesPending: false,
@@ -115,18 +121,23 @@ const reducer = (state = INITIAL_STATE, action) => {
         selectedSlideDatum: null
       };
     case SET_PACKAGE:
+      console.log("a-SET_PACKAGE:", action);
       return {
         ...state,
-        selectedPackage: action.selectedPackage,
+        selectedPackage: action.selectedPackage.displayName,
         foundationData: {},
         slidesData: [],
-        selectedFoundation:
-          state.sandbox.packages[action.selectedPackage].default_foundation,
-        selectedSlide: isArray(
-          state.sandbox.packages[action.selectedPackage].default_slide
-        )
-          ? state.sandbox.packages[action.selectedPackage].default_slide
-          : [state.sandbox.packages[action.selectedPackage].default_slide],
+        // selectedFoundation:
+        //   state.sandbox.packages[action.selectedPackage].default_foundation,
+        // selectedSlide: isArray(
+        //   state.sandbox.packages[action.selectedPackage].default_slide
+        // )
+        //   ? state.sandbox.packages[action.selectedPackage].default_slide
+        //   : [state.sandbox.packages[action.selectedPackage].default_slide],
+        sandbox: {
+          ...state.sandbox,
+          foundations: ["0000"]
+        },
         selectedFoundationDatum: null,
         selectedSlideDatum: null
       };
@@ -139,6 +150,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         selectedSlideDatum: null
       };
     case SET_SLIDES:
+      console.log("a-SET_SLIDESSSSS:", action);
       return {
         ...state,
         selectedSlide: action.selectedSlides

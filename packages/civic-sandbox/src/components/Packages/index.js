@@ -46,6 +46,7 @@ export class Packages extends React.Component {
       dashboardIsOpen: false
     };
   }
+
   componentDidMount() {
     this.props.fetchSandbox();
   }
@@ -100,11 +101,19 @@ export class Packages extends React.Component {
       selectedFoundationDatum,
       isAllSandboxLoading
     } = this.props;
-
+    /* global console */
+    console.log("package-index-props:", this.props);
+    // const packages = sandbox.packages
+    //   ? Object.keys(sandbox.packages).map(p => ({
+    //       description: sandbox.packages[p].description,
+    //       title: capitalize(p)
+    //     }))
+    //   : [];
     const packages = sandbox.packages
-      ? Object.keys(sandbox.packages).map(p => ({
-          description: sandbox.packages[p].description,
-          title: capitalize(p)
+      ? sandbox.packages.map(p => ({
+          ...p,
+          description: p.description,
+          title: p.displayName
         }))
       : [];
 
@@ -154,7 +163,7 @@ export class Packages extends React.Component {
                     <PackageSelectorBox
                       title={p.title}
                       description={p.description}
-                      onClick={() => this.handlePackageSelection(p.title)}
+                      onClick={() => this.handlePackageSelection(p)}
                     />
                   </div>
                 ))}

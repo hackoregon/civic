@@ -11,7 +11,8 @@ import {
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import BaseMap from "../BaseMap/BaseMap";
-import CivicSandboxMap from "../CivicSandboxMap/CivicSandboxMap";
+// import CivicSandboxMap from "../CivicSandboxMap/CivicSandboxMap";
+import CivicSandboxMap from "../MultiLayerMap/MultiLayerMap";
 import CivicSandboxTooltip from "../CivicSandboxMap/CivicSandboxTooltip";
 import SandboxDrawer from "./SandboxDrawer";
 
@@ -48,7 +49,7 @@ const Sandbox = ({
   foundationMapProps,
   selectedFoundationDatum
 }) => {
-  const [baseMapStyle, setBaseMapStyle] = useState("light");
+  const [baseMapStyle, setBaseMapStyle] = useState("dark");
 
   const handleBaseMapStyleChange = baseMapStyleChangeEvent => {
     // eslint-disable-next-line no-unused-expressions
@@ -125,11 +126,7 @@ Sandbox.propTypes = {
     foundations: shape({}),
     slides: shape({})
   }).isRequired,
-  layerData: arrayOf(
-    shape({
-      data: shape({})
-    })
-  ).isRequired,
+  layerData: arrayOf(shape({})).isRequired,
   defaultFoundation: shape({
     endpoint: string,
     name: string,

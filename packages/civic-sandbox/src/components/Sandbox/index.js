@@ -15,8 +15,8 @@ import {
   setSlides,
   setPackage,
   fetchSlideByDate,
-  setSelectedFoundationDatum,
-  setSelectedSlideDatum
+  setSelectedFoundationDatum
+  // setSelectedSlideDatum
 } from "../../state/sandbox/actions";
 import {
   isAllSandboxLoading,
@@ -29,14 +29,14 @@ import {
   getSlidesData,
   getSelectedFoundationData,
   getSelectedSlidesData,
-  getLayerFoundation,
+  // getLayerFoundation,
   getSelectedPackage,
   getSelectedFoundation,
   getSelectedSlides,
   getLayerSlides,
-  getSelectedSlideDatum,
+  // getSelectedSlideDatum,
   getAllSlides,
-  getfoundationMapProps,
+  // getfoundationMapProps,
   getSelectedFoundationDatum
 } from "../../state/sandbox/selectors";
 
@@ -49,47 +49,65 @@ class SandboxComponent extends React.Component {
     this.updateSlide = this.updateSlide.bind(this);
     this.toggleDrawer = this.toggleDrawer.bind(this);
   }
+
   componentDidMount() {
-    this.props.fetchFoundation(this.props.foundationData.endpoint);
+    // this.props.fetchFoundation(this.props.foundationData.endpoint);
+    console.log("\n");
+    console.log("sandbox-index-CDM:");
+    console.log("sandbox-index-CDM-slidesData:", this.props.slidesData);
     this.props.fetchSlides(this.props.slidesData);
   }
+
   componentDidUpdate(prevProps) {
+    console.log("\n");
+    console.log("sandbox-index-CDU:");
+    console.log("sandbox-index-CDU-slidesData:", this.props.slidesData);
+
+    // if (!equals(this.props.selectedPackage, prevProps.selectedPackage)) {
+    // this.props.fetchFoundation(this.props.foundationData.endpoint);
+    // this.props.fetchSlides(this.props.slidesData);
+    // }
+    // if (
+    //   equals(this.props.selectedPackage, prevProps.selectedPackage) &&
+    //   !equals(this.props.selectedFoundation, prevProps.selectedFoundation)
+    // ) {
+    //   this.props.fetchFoundation(this.props.foundationData.endpoint);
+    // }
     if (!equals(this.props.selectedPackage, prevProps.selectedPackage)) {
-      this.props.fetchFoundation(this.props.foundationData.endpoint);
+      console.log("sandbox-index-CDU-NEW SLIDES");
+      // const fetchedSlideDataNames = this.props.selectedSlidesData.map(
+      //   slideDatum => {
+      //     return Object.keys(slideDatum)[0];
+      //   }
+      // );
+      // const onlyFetchNewSlide = this.props.slidesData.filter(
+      //   d => !fetchedSlideDataNames.includes(d.name)
+      // );
+      // this.props.fetchSlides(onlyFetchNewSlide);
       this.props.fetchSlides(this.props.slidesData);
     }
-    if (
-      equals(this.props.selectedPackage, prevProps.selectedPackage) &&
-      !equals(this.props.selectedFoundation, prevProps.selectedFoundation)
-    ) {
-      this.props.fetchFoundation(this.props.foundationData.endpoint);
-    }
-    if (
-      equals(this.props.selectedPackage, prevProps.selectedPackage) &&
-      !equals(this.props.selectedSlide, prevProps.selectedSlide)
-    ) {
-      const fetchedSlideDataNames = this.props.selectedSlidesData.map(
-        slideDatum => {
-          return Object.keys(slideDatum)[0];
-        }
-      );
-      const onlyFetchNewSlide = this.props.slidesData.filter(
-        d => !fetchedSlideDataNames.includes(d.name)
-      );
-      this.props.fetchSlides(onlyFetchNewSlide);
-    }
   }
+
   updateSlide = event => {
-    const slideNumber = event.target.name;
-    const selectedSlides = this.props.selectedSlide.includes(slideNumber)
-      ? this.props.selectedSlide.filter(num => num !== slideNumber)
-      : [...this.props.selectedSlide, slideNumber];
+    console.log("sandbox-index-updateSlide-event:", event);
+    console.log("sandbox-index-updateSlide-event-target:", event.target);
+    const slideName = event.target.name;
+    // const slideLabel = event.target.label;
+
+    const selectedSlides = this.props.selectedSlide.includes(slideName)
+      ? this.props.selectedSlide.filter(name => name !== slideName)
+      : [...this.props.selectedSlide, slideName];
     this.props.setSlides(selectedSlides);
   };
+
   toggleDrawer = () => {
     this.setState({ drawerVisible: !this.state.drawerVisible });
   };
+
   render() {
+    /* global console */
+    console.log("sandox-index-props:", this.props);
+
     const styles = css(`
       font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
     `);
@@ -112,7 +130,8 @@ class SandboxComponent extends React.Component {
       </div>
     );
 
-    const layerData = [this.props.layerFoundation, ...this.props.layerSlides];
+    // const layerData = [this.props.layerFoundation, ...this.props.layerSlides];
+    const layerData = [...this.props.layerSlides];
     return this.props.isLoading ? (
       loader
     ) : (
@@ -133,11 +152,10 @@ class SandboxComponent extends React.Component {
         defaultSlides={this.props.slidesData}
         foundationData={this.props.selectedFoundationData}
         defaultFoundation={this.props.foundationData}
-        onFoundationClick={this.props.foundationClick}
         onSlideHover={this.props.slideHover}
         tooltipInfo={this.props.selectedSlideDatum}
         allSlides={this.props.allSlides}
-        foundationMapProps={this.props.foundationMapProps}
+        // foundationMapProps={this.props.foundationMapProps}
         selectedFoundationDatum={this.props.selectedFoundationDatum}
       />
     );
@@ -159,12 +177,12 @@ export default connect(
     slidesData: getSlidesData(state),
     selectedFoundationData: getSelectedFoundationData(state),
     selectedSlidesData: getSelectedSlidesData(state),
-    layerFoundation: getLayerFoundation(state),
+    // layerFoundation: getLayerFoundation(state),
     selectedSlide: getSelectedSlides(state),
     layerSlides: getLayerSlides(state),
-    selectedSlideDatum: getSelectedSlideDatum(state),
+    // selectedSlideDatum: getSelectedSlideDatum(state),
     allSlides: getAllSlides(state),
-    foundationMapProps: getfoundationMapProps(state),
+    // foundationMapProps: getfoundationMapProps(state),
     selectedFoundationDatum: getSelectedFoundationDatum(state)
   }),
   dispatch => ({
@@ -188,9 +206,9 @@ export default connect(
     },
     foundationClick(feature) {
       dispatch(setSelectedFoundationDatum(feature));
-    },
-    slideHover(feature) {
-      dispatch(setSelectedSlideDatum(feature));
     }
+    // slideHover(feature) {
+    //   dispatch(setSelectedSlideDatum(feature));
+    // }
   })
 )(SandboxComponent);

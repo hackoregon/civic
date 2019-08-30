@@ -3,7 +3,7 @@ import { isArray } from "lodash";
 import { rootState } from "../selectors";
 
 import { slides, foundations } from "../layerStyles";
-
+/* global console */
 export const getState = createSelector(
   rootState,
   state => state
@@ -40,7 +40,8 @@ export const isAnyError =
   getSandboxProperty("foundationError") || getSandboxProperty("slidesError");
 export const getSelectedFoundation = getSandboxProperty("selectedFoundation");
 export const getSelectedSlides = getSandboxProperty("selectedSlide");
-export const isAllSandboxLoading = isFoundationLoading || areSlidesLoading;
+// export const isAllSandboxLoading = isFoundationLoading || areSlidesLoading;
+export const isAllSandboxLoading = areSlidesLoading; // getSlidesSuccess;
 
 export const getSelectedPackageData = createSelector(
   getSandboxData,
@@ -56,10 +57,17 @@ export const getFoundationData = createSelector(
 export const getSlidesData = createSelector(
   getSandboxData,
   getSelectedSlides,
-  (sandbox, slides) =>
-    isArray(slides)
-      ? slides.map(slide => sandbox.slides[slide])
-      : [sandbox.slides[slides]]
+  getSelectedPackage,
+  (sandbox, slides, selectedPackage) => {
+    // isArray(slides)
+    // ? slides.map(slide => sandbox.slides[slide])
+    // : [sandbox.slides[slides]]
+    console.log("selector-getSlidesData");
+    console.log("selector-getSlidesData-selectedPackage:", selectedPackage);
+    return sandbox.packages.filter(d => {
+      return d.displayName === selectedPackage;
+    });
+  }
 );
 
 export const getSelectedFoundationData = createSelector(
@@ -72,37 +80,75 @@ export const getSelectedSlidesData = createSelector(
   sandbox => sandbox.slidesData
 );
 
+// export const getLayerSlides = createSelector(
+//   getSlidesData,
+//   getSelectedSlidesData,
+//   (defaultSlides, selectedSlides) => {
+//     if (
+//       defaultSlides &&
+//       defaultSlides.length &&
+//       selectedSlides &&
+//       selectedSlides.length
+//     ) {
+//       const formatSlideData = defaultSlides
+//         .map(slideDatum => {
+//           const slideData = selectedSlides.find(slide => {
+//             const fetchedSlideDataName = Object.keys(slide)[0];
+//             const endpointSlideDataName = slideDatum.name;
+//             return fetchedSlideDataName === endpointSlideDataName;
+//           });
+//           const slideDataObj = slideData
+//             ? slides(slideData[slideDatum.name])[slideDatum.name]
+//             : null;
+//           return [
+//             {
+//               data: slideDataObj ? slideDataObj.boundary : {}
+//             },
+//             {
+//               data: slideDataObj ? slideDataObj.map : {}
+//             }
+//           ];
+//         })
+//         .reduce((a, b) => a.concat(b), []);
+//       return [...formatSlideData];
+//     }
+//     return [{ data: {} }];
+//   }
+// );
+
 export const getLayerSlides = createSelector(
-  getSlidesData,
   getSelectedSlidesData,
-  (defaultSlides, selectedSlides) => {
-    if (
-      defaultSlides &&
-      defaultSlides.length &&
-      selectedSlides &&
-      selectedSlides.length
-    ) {
-      const formatSlideData = defaultSlides
-        .map(slideDatum => {
-          const slideData = selectedSlides.find(slide => {
-            const fetchedSlideDataName = Object.keys(slide)[0];
-            const endpointSlideDataName = slideDatum.name;
-            return fetchedSlideDataName === endpointSlideDataName;
-          });
-          const slideDataObj = slideData
-            ? slides(slideData[slideDatum.name])[slideDatum.name]
-            : null;
+  selectedSlides => {
+    if (true) {
+      console.log("selector-getLayerSlides-selectedSlides:", selectedSlides);
+      const sizeScale = zoom =>
+        zoom > 11.5
+          ? 5.5
+          : zoom > 10.5
+          ? 5
+          : zoom > 9.5
+          ? 4
+          : zoom > 8.5
+          ? 3
+          : zoom > 7.5
+          ? 2
+          : 1;
+      const getPosition = f =>
+        f.geometry === null ? [0, 0] : f.geometry.coordinates;
+
+      const formattedData = selectedSlides
+        .map(d => {
           return [
             {
-              data: slideDataObj ? slideDataObj.boundary : {}
-            },
-            {
-              data: slideDataObj ? slideDataObj.map : {}
+              ...d.visualization.map,
+              data: d.results.features
+              // sizeScale,
+              // getPosition
             }
           ];
         })
         .reduce((a, b) => a.concat(b), []);
-      return [...formatSlideData];
+      return formattedData;
     }
     return [{ data: {} }];
   }
@@ -123,7 +169,7 @@ export const getLayerFoundation = createSelector(
 );
 
 const makeVisFor = (spec, data) => {
-  const type = spec.visualization.type;
+  const {type} = spec.visualization;
   if (type === "PercentDonut") {
     const val = data.object.properties[spec.field];
     const comparisonName = spec.visualization.comparison_name
@@ -204,35 +250,35 @@ export const getSelectedSlideDatum = createSelector(
       const [slideName] = Object.keys(slideObject);
       const attrs = slideObject[slideName].slide_meta.attributes;
       const slideAttrObj = {};
-      slideAttrObj["index"] = index;
+      slideAttrObj.index = index;
       if (attrs.primary.field) {
-        slideAttrObj["primary"] = attrs.primary;
+        slideAttrObj.primary = attrs.primary;
       }
       if (attrs.secondary.field) {
-        slideAttrObj["secondary"] = attrs.secondary;
+        slideAttrObj.secondary = attrs.secondary;
       }
       return slideAttrObj;
     });
 
     const findSlideIndex = slideAttributes.filter(d => {
-      const primary = d.primary;
-      const secondary = d.secondary;
+      const {primary} = d;
+      const {secondary} = d;
       if (primary && secondary) {
         return datumFieldNames.includes(d.primary.field && d.secondary.field);
-      } else if (primary) {
+      } if (primary) {
         return datumFieldNames.includes(d.primary.field);
-      } else {
+      } 
         return false;
-      }
+      
     });
 
     if (findSlideIndex.length < 1) return;
     const slideIndex = findSlideIndex[0].index;
 
     const tooltipObj = {};
-    tooltipObj["x"] = selectedSlideDatum.x;
-    tooltipObj["y"] = selectedSlideDatum.y;
-    tooltipObj["content"] = [];
+    tooltipObj.x = selectedSlideDatum.x;
+    tooltipObj.y = selectedSlideDatum.y;
+    tooltipObj.content = [];
 
     const [tooltipSlideName] = Object.keys(slide[slideIndex]);
 
@@ -260,60 +306,119 @@ export const getSelectedSlideDatum = createSelector(
   }
 );
 
+// export const getAllSlides = createSelector(
+//   getSandboxData,
+//   getSelectedPackageData,
+//   getSelectedSlides,
+//   (sandbox, packageData, selectedSlides) => {
+//     const allPackageSlideNumbers = isArray(packageData.slides)
+//       ? packageData.slides
+//       : [packageData.slides];
+//     const allSlidesArr = allPackageSlideNumbers.map(
+//       slide => sandbox.slides[slide]
+//     );
+//     const dataObj = { slide_data: {}, slide_meta: {} };
+//     const allSlides = allSlidesArr.map((slide, index) => {
+//       const mapObj = slides(dataObj)[slide.name];
+//       const gray = [238, 238, 238, 255];
+//       const color = mapObj.boundary.getLineColor
+//         ? mapObj.boundary.getLineColor()
+//         : gray;
+//       const mapType = mapObj.map.mapType;
+//       return {
+//         slideId: allPackageSlideNumbers[index],
+//         endpoint: slide.endpoint,
+//         label: slide.name,
+//         checked: selectedSlides.includes(allPackageSlideNumbers[index])
+//           ? true
+//           : false,
+//         color,
+//         mapType
+//       };
+//     });
+//     return allSlides;
+//   }
+// );
+
 export const getAllSlides = createSelector(
   getSandboxData,
-  getSelectedPackageData,
+  getSelectedSlidesData,
   getSelectedSlides,
-  (sandbox, packageData, selectedSlides) => {
-    const allPackageSlideNumbers = isArray(packageData.slides)
-      ? packageData.slides
-      : [packageData.slides];
-    const allSlidesArr = allPackageSlideNumbers.map(
-      slide => sandbox.slides[slide]
-    );
-    const dataObj = { slide_data: {}, slide_meta: {} };
-    const allSlides = allSlidesArr.map((slide, index) => {
-      const mapObj = slides(dataObj)[slide.name];
-      const gray = [238, 238, 238, 255];
-      const color = mapObj.boundary.getLineColor
-        ? mapObj.boundary.getLineColor()
-        : gray;
-      const mapType = mapObj.map.mapType;
+  (sandbox, selectedSlidesData, deSelectedSlides) => {
+    // const allPackageSlideNumbers = isArray(packageData.slides)
+    //   ? packageData.slides
+    //   : [packageData.slides];
+    // const allSlidesArr = allPackageSlideNumbers.map(
+    //   slide => sandbox.slides[slide]
+    // );
+    // const dataObj = { slide_data: {}, slide_meta: {} };
+    // const allSlides = allSlidesArr.map((slide, index) => {
+    //   const mapObj = slides(dataObj)[slide.name];
+    //   const gray = [238, 238, 238, 255];
+    //   const color = mapObj.boundary.getLineColor
+    //     ? mapObj.boundary.getLineColor()
+    //     : gray;
+    //   const mapType = mapObj.map.mapType;
+    //   return {
+    //     slideId: allPackageSlideNumbers[index],
+    //     endpoint: slide.endpoint,
+    //     label: slide.name,
+    //     checked: selectedSlides.includes(allPackageSlideNumbers[index])
+    //       ? true
+    //       : false,
+    //     color,
+    //     mapType
+    //   };
+    // });
+    // const selectedSlideAll = sandbox.packages
+    //   .filter(p => {
+    //     console.log("selector-getAllSlides-pack:", p);
+    //     console.log("selector-getAllSlides-pack:", selectedPackage);
+    //     return p.displayName === selectedPackage;
+    //   }).map((d,i) => {
+    //     return {
+    //       ...d,
+    //       ...d.layers[i]
+    //     };
+    //   });
+    // console.log("selector-getAllSlides-selectedSlide", selectedSlide);
+
+    const allSlides = selectedSlidesData.map((p, indx) => {
+      console.log("selector-getAllSlides-slides:", p);
       return {
-        slideId: allPackageSlideNumbers[index],
-        endpoint: slide.endpoint,
-        label: slide.name,
-        checked: selectedSlides.includes(allPackageSlideNumbers[index])
-          ? true
-          : false,
-        color,
-        mapType
+        slideId: indx,
+        endpoint: p.dataEndpoint,
+        label: p.displayName,
+        checked: !deSelectedSlides.includes(p.displayName),
+        color: [220, 20, 60],
+        mapType: p.visualization.map.mapType
       };
     });
+    console.log("selector-getAllSlides-allSlides", allSlides);
     return allSlides;
   }
 );
 
-export const getfoundationMapProps = createSelector(
-  getSandboxData,
-  getSelectedFoundation,
-  (sandbox, selectedFoundation) => {
-    const dataObj = { slide_meta: {}, slide_data: {} };
-    const foundationMapObj = foundations(dataObj)[
-      sandbox.foundations[selectedFoundation].name
-    ];
-    const foundationMapProps = {
-      color: foundationMapObj.color,
-      getPropValue: foundationMapObj.getPropValue,
-      propName: foundationMapObj.propName,
-      scaleType: foundationMapObj.scaleType
-    };
-    if (
-      foundationMapObj.scaleType === "ordinal" ||
-      foundationMapObj.scaleType === "threshold"
-    ) {
-      foundationMapProps.categories = foundationMapObj.categories;
-    }
-    return foundationMapProps;
-  }
-);
+// export const getfoundationMapProps = createSelector(
+//   getSandboxData,
+//   getSelectedFoundation,
+//   (sandbox, selectedFoundation) => {
+//     const dataObj = { slide_meta: {}, slide_data: {} };
+//     const foundationMapObj = foundations(dataObj)[
+//       sandbox.foundations[selectedFoundation].name
+//     ];
+//     const foundationMapProps = {
+//       color: foundationMapObj.color,
+//       getPropValue: foundationMapObj.getPropValue,
+//       propName: foundationMapObj.propName,
+//       scaleType: foundationMapObj.scaleType
+//     };
+//     if (
+//       foundationMapObj.scaleType === "ordinal" ||
+//       foundationMapObj.scaleType === "threshold"
+//     ) {
+//       foundationMapProps.categories = foundationMapObj.categories;
+//     }
+//     return foundationMapProps;
+//   }
+// );
