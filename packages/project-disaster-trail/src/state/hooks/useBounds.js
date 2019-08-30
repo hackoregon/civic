@@ -55,7 +55,7 @@ const useBounds = ref => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [ref.current]);
+  }, [handleResize, ref]);
 
   return rect;
 };

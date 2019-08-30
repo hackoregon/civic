@@ -7003,6 +7003,11 @@ eslint-plugin-prettier@^3.0.1:
   dependencies:
     prettier-linter-helpers "^1.0.0"
 
+eslint-plugin-react-hooks@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-1.7.0.tgz#6210b6d5a37205f0b92858f895a4e827020a7d04"
+  integrity sha512-iXTCFcOmlWvw4+TOE8CLWj6yX1GwzT0Y6cUfHHZqWnSk144VmVIRcVGtUAzrLES7C798lmvnt02C7rxaOX1HNA==
+
 eslint-plugin-react@^7.12.4:
   version "7.12.4"
   resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.12.4.tgz#b1ecf26479d61aee650da612e425c53a99f48c8c"
@@ -13156,9 +13161,10 @@ react-map-gl-geocoder@^1.7.0:
     prop-types "^15.6.2"
     viewport-mercator-project "6.1.1"
 
-react-map-gl@4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/react-map-gl/-/react-map-gl-4.1.1.tgz#354baa5e5b4afbf21b4252983e44804b10a112d4"
+react-map-gl@4.1.4:
+  version "4.1.4"
+  resolved "https://registry.yarnpkg.com/react-map-gl/-/react-map-gl-4.1.4.tgz#544a734ee30ab858a9fc303d358a5bdf5969f842"
+  integrity sha512-rkS551WTCM0Pq2DyBAebMvCEO3cny98fkulVkxmWZN83ygcBQj6RzdAwEjWA51/CHvr2g0q24qooa28PLAtgEg==
   dependencies:
     "@babel/runtime" "^7.0.0"
     mapbox-gl "~0.53.0"

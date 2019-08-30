@@ -57,12 +57,25 @@ export default class Orb extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    // What properties have changed?
+    // useful for debugging
+    // for (const i in prevProps) {
+    //   if (this.props[i] !== prevProps[i]) {
+    //     console.log(
+    //       i,
+    //       prevProps[i],
+    //       this.props[i],
+    //       this.props[i] === prevProps[i]
+    //     );
+    //   }
+    // }
+
     const { isComplete } = this.state;
-    const { addOrbScore, orb, setOrbComplete } = this.props;
+    const { addOrbScore, orbId, setOrbComplete } = this.props;
 
     if (!prevState.isComplete && isComplete) {
-      addOrbScore(orb);
-      setOrbComplete(orb);
+      addOrbScore(orbId);
+      setOrbComplete(orbId);
     }
   }
 
@@ -84,26 +97,26 @@ export default class Orb extends PureComponent {
 
   handleOrbPress = () => {
     const { isComplete } = this.state;
-    const { orb, setOrbTouched } = this.props;
+    const { orbId, setOrbTouched } = this.props;
     // if already pressed, do nothing
     if (isComplete) return;
 
     this.setState({ isActive: true }, () => {
       this.incrementGauge();
     });
-    setOrbTouched(orb, true);
+    setOrbTouched(orbId, true);
   };
 
   handleOrbRelease = () => {
     this.setState({ isActive: false });
-    const { orb, setOrbTouched } = this.props;
-    setOrbTouched(orb, false);
+    const { orbId, setOrbTouched } = this.props;
+    setOrbTouched(orbId, false);
   };
 
   render() {
     const { isActive, isComplete, percent } = this.state;
     // eslint-disable-next-line no-unused-vars
-    const { size, orb } = this.props;
+    const { size, imageSVG, imgAlt } = this.props;
 
     const sizeStyle = css`
       height: ${size}px;
@@ -145,7 +158,7 @@ export default class Orb extends PureComponent {
           `}
           className={orbClass}
         >
-          <img src={orb.imageSVG} alt={orb.imgAlt} css={iconStyle} />
+          <img src={imageSVG} alt={imgAlt} css={iconStyle} />
         </div>
       </div>
     );
@@ -154,9 +167,11 @@ export default class Orb extends PureComponent {
 }
 
 Orb.propTypes = {
+  orbId: PropTypes.string,
   setOrbTouched: PropTypes.func,
   setOrbComplete: PropTypes.func,
   addOrbScore: PropTypes.func,
-  orb: PropTypes.shape({}),
+  imageSVG: PropTypes.string,
+  imgAlt: PropTypes.string,
   size: PropTypes.number
 };

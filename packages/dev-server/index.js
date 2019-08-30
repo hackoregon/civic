@@ -67,7 +67,7 @@ module.exports = () => {
       console.log("Servicing request for", req.url) ||
       res.send(`
   <!DOCTYPE html>
-  <html>
+  <html lang="en">
     <head>
       <title>CIVIC 2018 - A Hack Oregon Project</title>
       <meta http-equiv="X-UA-Compatible" content="IE=edge">

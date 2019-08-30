@@ -1,6 +1,6 @@
-import React from "react";
 import PropTypes from "prop-types";
-import { css } from "emotion";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 
 import ChartTitle from "../ChartTitle";
 
@@ -42,16 +42,16 @@ const ChartContainer = ({
   `;
 
   let content = (
-    <figure className={figureWrapper}>
+    <figure css={figureWrapper}>
       <ChartTitle title={title} subtitle={subtitle} />
-      <div className={wrapperStyle}>{children}</div>
+      <div css={wrapperStyle}>{children}</div>
     </figure>
   );
 
   if (loading) {
-    content = <div className={chartLoading}>Loading...</div>;
+    content = <div css={chartLoading}>Loading...</div>;
   } else if (error) {
-    content = <div className={chartError}>{error}</div>;
+    content = <div css={chartError}>{error}</div>;
   }
 
   return content;

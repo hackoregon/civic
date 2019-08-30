@@ -1,6 +1,7 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import PropTypes from "prop-types";
-import { css } from "emotion";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 import shortid from "shortid";
 import checkData from "./checkData";
 
@@ -24,7 +25,7 @@ const DataChecker = ({
   const component = results.allKeysValid ? (
     children
   ) : (
-    <div className={wrapperStyle}>
+    <div css={wrapperStyle}>
       <h1>{message}</h1>
       {results.invalidType && (
         <h2>Invalid Type - check if array or object is expected</h2>
@@ -42,7 +43,7 @@ const DataChecker = ({
             `
           : css``;
         return (
-          <pre key={shortid.generate()} className={invalidStyle}>
+          <pre key={shortid.generate()} css={invalidStyle}>
             <strong>
               {isValid ? "✅ " : "⛔️ "}
               {`${key}: `}
