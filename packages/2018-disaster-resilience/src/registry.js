@@ -5,12 +5,11 @@ import SignificantStructuralDamage from "./components/SignificantStructuralDamag
 import YouAndYourNeighbors from "./components/YouAndYourNeighbors";
 import WhatYouCanDoToPrepare from "./components/WhatYouCanDoToPrepare";
 import IncreasingSocialCapital from "./components/IncreasingSocialCapital";
-import ProactivePlanning from "./components/ProactivePlanning";
 import ProactivePlanningPuma from "./components/ProactivePlanningPuma";
 
 export default [
   {
-    slug: "proactive-planning-puma",
+    slug: "proactive-planning-for-city-wide-resilience",
     component: ProactivePlanningPuma
   },
   {
@@ -36,9 +35,5 @@ export default [
   {
     slug: "increasing-social-capital",
     component: IncreasingSocialCapital
-  },
-  {
-    slug: "proactive-planning-for-city-wide-resilience",
-    component: ProactivePlanning
   }
 ];

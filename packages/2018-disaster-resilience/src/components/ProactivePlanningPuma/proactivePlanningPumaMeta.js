@@ -4,8 +4,8 @@ import { Collapsable } from "@hackoregon/component-library";
 import ProactivePlanningPumaVisualization from "./ProactivePlanningPumaVisualization";
 
 const ProactivePlanningPumaMeta = (/* data */) => ({
-  title: "Proactive Planning Puma",
-  slug: "proactive-planning-puma",
+  title: "Planning for Citywide Resilience",
+  slug: "proactive-planning-for-city-wide-resilience",
   introText: (
     <p>
       This template card loads data from an API using Reduxful, and can be used
