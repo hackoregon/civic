@@ -12,7 +12,8 @@ import {
   PieChart,
   LineChart,
   HorizontalBarChart,
-  Logo
+  Logo,
+  BrandTheme
 } from "@hackoregon/component-library";
 import { civicFormat } from "@hackoregon/component-library/dist/utils";
 
@@ -73,6 +74,14 @@ const topBar = css`
   width: 100%;
   height: 25px;
   background-color: #240f27;
+`;
+
+const bannerBlock = css`
+  position: relative;
+  width: 100%;
+  background-color: #f3f2f3;
+  margin-top: 0;
+  padding: 0.1em;
 `;
 
 const logoWrapper = css`
@@ -446,6 +455,13 @@ class HomePage extends Component {
         <CanvasParticles />
         <div css={contentWrapper}>
           <div css={topBar} />
+          <section css={bannerBlock}>
+            <div css={[initialContentContainer, BrandTheme.h3]}>
+              <a href="https://www.civicsoftwarefoundation.org/">
+                {`Learn more about Civic Software Foundation and Demo Day >`}
+              </a>
+            </div>
+          </section>
           <div css={initialContentContainer}>
             <div css={logoWrapper}>
               <Logo />

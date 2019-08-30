@@ -38,6 +38,11 @@ const authorPhoto = css`
   cursor: pointer;
 `;
 
+const demoAuthorPhotos = [
+  "https://civicsoftwarefoundation.org/static/human-grid-test-4c90bfc3f316f5d4e104320cb98c43c8.png",
+  "https://civicsoftwarefoundation.org/static/human-grid-test2-ea1849501456af341647068243fc72bb.png"
+];
+
 function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
   return (
     <Fragment>
@@ -47,12 +52,16 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
             <h1 id="title">{cardMeta.title}</h1>
           </header>
           <hr />
-          <section id="tags">
-            {cardMeta.tags.map((tag, index) => (
-              <Chip tag={tag} index={index} key={generate()} />
-            ))}
-          </section>
-          <hr />
+          {cardMeta.tags.length > 0 && (
+            <Fragment>
+              <section id="tags">
+                {cardMeta.tags.map((tag, index) => (
+                  <Chip tag={tag} index={index} key={generate()} />
+                ))}
+              </section>
+              <hr />
+            </Fragment>
+          )}
         </div>
         <section>
           <div css={[sectionMarginSmall, sectionMaxWidthSmall]}>
@@ -113,14 +122,20 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
         <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
         <section css={[sectionMarginSmall, sectionMaxWidthSmall]} id="authors">
           <h2>Who made this?</h2>
-          {cardMeta.authors.map(photo => (
-            <img
-              css={authorPhoto}
-              src={photo}
-              alt="Pictures of people who worked on this"
-              key={generate()}
-            />
-          ))}
+          {cardMeta.authors.length
+            ? cardMeta.authors.map(authorEmail => (
+                <p key={authorEmail}>
+                  <a href={`mailto:${authorEmail}`}>{authorEmail}</a>
+                </p>
+              ))
+            : demoAuthorPhotos.map(photo => (
+                <img
+                  css={authorPhoto}
+                  src={photo}
+                  alt="Pictures of people who worked on this"
+                  key={generate()}
+                />
+              ))}
         </section>
         <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
         <section css={[sectionMarginSmall, sectionMaxWidthSmall]} id="improve">

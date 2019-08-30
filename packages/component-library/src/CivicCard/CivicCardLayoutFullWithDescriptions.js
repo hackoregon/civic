@@ -51,6 +51,11 @@ const description = css`
   margin: auto;
 `;
 
+const demoAuthorPhotos = [
+  "https://civicsoftwarefoundation.org/static/human-grid-test-4c90bfc3f316f5d4e104320cb98c43c8.png",
+  "https://civicsoftwarefoundation.org/static/human-grid-test2-ea1849501456af341647068243fc72bb.png"
+];
+
 function Desc({ id }) {
   return (
     <div css={description}>
@@ -158,18 +163,24 @@ function CivicCardLayoutFullWithDescriptions({ isLoading, data, cardMeta }) {
           <Desc id="resources" />
           <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
           <section
-            css={[sectionMarginSmall, sectionMaxWidthSmall, cardMetaItem]}
+            css={[sectionMarginSmall, sectionMaxWidthSmall]}
             id="authors"
           >
             <h2>Who made this?</h2>
-            {cardMeta.authors.map(photo => (
-              <img
-                css={authorPhoto}
-                src={photo}
-                alt="Pictures of people who worked on this"
-                key={generate()}
-              />
-            ))}
+            {cardMeta.authors.length
+              ? cardMeta.authors.map(authorEmail => (
+                  <p key={authorEmail}>
+                    <a href={`mailto:${authorEmail}`}>{authorEmail}</a>
+                  </p>
+                ))
+              : demoAuthorPhotos.map(photo => (
+                  <img
+                    css={authorPhoto}
+                    src={photo}
+                    alt="Pictures of people who worked on this"
+                    key={generate()}
+                  />
+                ))}
           </section>
           <Desc id="authors" />
           <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />

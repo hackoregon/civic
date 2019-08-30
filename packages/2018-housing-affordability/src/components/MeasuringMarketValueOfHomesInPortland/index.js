@@ -2,8 +2,6 @@ import React from "react";
 
 import { CivicStoryCard } from "@hackoregon/component-library";
 
-import taxlots from "../../assets/tl_2017_pcntchange.png";
-
 export class MeasuringMarketValueOfHomesInPortland extends React.Component {
   componentDidMount() {
     // initialize data here
@@ -23,15 +21,7 @@ export class MeasuringMarketValueOfHomesInPortland extends React.Component {
           changing in value.
         </p>
 
-        <p>
-          <a href={taxlots}>
-            <img
-              style={{ width: "100%" }}
-              src={taxlots}
-              alt="Tax lots in Portland"
-            />
-          </a>
-        </p>
+        <p>{/* map could go here */}</p>
 
         <p>
           Metro compiles data from Clackamas, Multnomah, and Washington
