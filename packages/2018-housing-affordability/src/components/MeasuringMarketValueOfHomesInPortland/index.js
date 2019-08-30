@@ -21,9 +21,7 @@ export class MeasuringMarketValueOfHomesInPortland extends React.Component {
           changing in value.
         </p>
 
-        <p>
-          {/* map could go here */}
-        </p>
+        <p>{/* map could go here */}</p>
 
         <p>
           Metro compiles data from Clackamas, Multnomah, and Washington

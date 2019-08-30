@@ -9,9 +9,15 @@ import remove from "lodash/remove";
 import { palette } from "../../constants/style";
 import useBounds from "../../state/hooks/useBounds";
 import usePrevious from "../../state/hooks/usePrevious";
+import { getActiveTaskData } from "../../state/tasks";
 import useAnimationFrame from "../../state/hooks/useAnimationFrame";
 
 import Orb from "./Orb";
+import {
+  completedOrbHandler,
+  createOrbsFromKit,
+  uncompletedOrbHandler
+} from "./OrbManagerHelpers";
 import { addItemToPlayerKit, getKitCreationItems } from "../../state/kit";
 import { addPoints } from "../../state/user";
 
@@ -26,42 +32,6 @@ const ORB_CONFIG = {
   verticalBuffer: 25
 };
 
-function createOrbsFromKit(kitItems, bounds, config) {
-  if (!kitItems.length) {
-    return [];
-  }
-
-  // create an empty array.
-  const orbCollection = [];
-  // create a number of orbs based on each kitItems weighting to achieve the correct distribution. Add the x, y, and velocity properties to its existing properties for that item
-  for (let i = 0; i < kitItems.length; i += 1) {
-    const kitData = kitItems[i];
-    const totalGeneratedOrbs = Math.round(config.orbCount * kitData.weighting);
-
-    for (let j = 0; j < totalGeneratedOrbs; j += 1) {
-      const orbId = `${kitData.type}-${j}`;
-      kitData.x = Math.random() * bounds.width;
-      kitData.y =
-        ORB_CONFIG.verticalBuffer +
-        Math.random() * (bounds.height - ORB_CONFIG.verticalBuffer * 2);
-      kitData.velocity = {
-        x:
-          config.minVelocityX +
-          Math.random() * (config.maxVelocityX - config.minVelocityX),
-        y:
-          config.minVelocityY +
-          Math.random() * (config.maxVelocityY - config.minVelocityY)
-      };
-
-      orbCollection.push(
-        Object.assign({}, { orbId }, { touched: false }, kitData)
-      );
-    }
-  }
-
-  return orbCollection;
-}
-
 /**
  * OrbManager is responsible for moving Orbs
  *
@@ -73,6 +43,7 @@ function createOrbsFromKit(kitItems, bounds, config) {
  */
 const OrbManager = ({
   kitItems,
+  activeTask,
   addItemToPlayerKitInState,
   addPointsToState
 } = {}) => {
@@ -149,51 +120,70 @@ const OrbManager = ({
     // we re-use tempModels by pushing updated data in to it.
     for (let i = 0; i < orbs.length; i += 1) {
       // get the model
-      const currentOrb = { ...orbs[i] };
+      let currentOrb = { ...orbs[i] };
       const currentOrbId = currentOrb.orbId;
+      const isOrbCompleted = completedOrbs.indexOf(currentOrbId) > -1;
 
-      // if the orb is touched or complete, do not move it
-      // TODO: seperate out orb animation when good / bad
-      if (
-        touchedOrbs.indexOf(currentOrbId) > -1 ||
-        completedOrbs.indexOf(currentOrbId) > -1
-      ) {
+      if (touchedOrbs.indexOf(currentOrbId) > -1) {
         tempModels.push(currentOrb);
         // eslint-disable-next-line no-continue
         continue;
       }
 
-      // and move it
-      currentOrb.x += currentOrb.velocity.x; // + Math.cos(tick * 0.1) * period;
-      currentOrb.y +=
-        currentOrb.velocity.y + Math.sin((tick + i) * 0.1) * ORB_CONFIG.period;
-
-      // is it offscreen?
-      if (currentOrb.x < -ORB_CONFIG.orbSize) currentOrb.x += bounds.width;
-      if (currentOrb.x > bounds.width)
-        currentOrb.x -= bounds.width + ORB_CONFIG.orbSize;
-
-      // keep the orb within vertical bounds
-      if (currentOrb.y < ORB_CONFIG.verticalBuffer)
-        currentOrb.y = ORB_CONFIG.verticalBuffer;
-      if (
-        currentOrb.y >
-        bounds.height - ORB_CONFIG.verticalBuffer - ORB_CONFIG.orbSize
-      )
-        currentOrb.y =
-          bounds.height - ORB_CONFIG.verticalBuffer - ORB_CONFIG.orbSize;
-
-      // apply a 'force' that pulls the orbs vertically towards the center of the screen
-      const distanceFromCenter = currentOrb.y - centerY;
-      // if the orb is far enough away from the vertical center,
-      // the further the orb is from the center,
-      // the larger the distance
-      // and the greater the 'pull' towards the center
-      if (Math.abs(distanceFromCenter) > 80) {
-        currentOrb.y += -distanceFromCenter * 0.02;
+      if (isOrbCompleted) {
+        currentOrb = completedOrbHandler(currentOrb, activeTask);
+      } else {
+        currentOrb = uncompletedOrbHandler(currentOrb, tick, i, ORB_CONFIG);
       }
 
-      currentOrb.y = Math.round(currentOrb.y * 10) / 10;
+      // is it offscreen?
+      if (currentOrb.x < -ORB_CONFIG.orbSize) {
+        currentOrb.x += bounds.width;
+      }
+
+      if (currentOrb.x > bounds.width) {
+        currentOrb.x -= bounds.width + ORB_CONFIG.orbSize;
+      }
+
+      if (currentOrb.y < -ORB_CONFIG.orbSize) {
+        if (isOrbCompleted) {
+          // eslint-disable-next-line no-continue
+          continue;
+        }
+
+        currentOrb.y += bounds.height;
+      }
+
+      if (currentOrb.y > bounds.height) {
+        if (isOrbCompleted) {
+          // eslint-disable-next-line no-continue
+          continue;
+        }
+
+        // keep the orb within vertical bounds
+        if (!isOrbCompleted) {
+          if (currentOrb.y < ORB_CONFIG.verticalBuffer)
+            currentOrb.y = ORB_CONFIG.verticalBuffer;
+          if (
+            currentOrb.y >
+            bounds.height - ORB_CONFIG.verticalBuffer - ORB_CONFIG.orbSize
+          )
+            currentOrb.y =
+              bounds.height - ORB_CONFIG.verticalBuffer - ORB_CONFIG.orbSize;
+
+          // apply a 'force' that pulls the orbs vertically towards the center of the screen
+          const distanceFromCenter = currentOrb.y - centerY;
+          // if the orb is far enough away from the vertical center,
+          // the further the orb is from the center,
+          // the larger the distance
+          // and the greater the 'pull' towards the center
+          if (Math.abs(distanceFromCenter) > 80) {
+            currentOrb.y += -distanceFromCenter * 0.02;
+          }
+
+          currentOrb.y = Math.round(currentOrb.y * 10) / 10;
+        }
+      }
 
       // store the updated model.
       tempModels.push(currentOrb);
@@ -243,7 +233,8 @@ const OrbsStyle = styled.div`
 `;
 
 const mapStateToProps = state => ({
-  kitItems: getKitCreationItems(state)
+  kitItems: getKitCreationItems(state),
+  activeTask: getActiveTaskData(state) // This should be passed through from the parent component
 });
 
 const mapDispatchToProps = dispatch => ({
