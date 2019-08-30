@@ -4,7 +4,6 @@ to: packages/<%=package%>/src/components/<%=StoryCardName%>/index.js
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { isLoaded } from "reduxful";
 import { resourceShape } from "reduxful/react-addons";
 import { CivicCard } from "@hackoregon/component-library";
 
@@ -22,12 +21,9 @@ const <%=StoryCardName%> = ({ init, data, Layout }) => {
     */
   ]);
 
-  const loading = !isLoaded(data.<%=aPI%>);
-
   return (
     <CivicCard
       cardMeta={<%=storyCardName%>Meta}
-      isLoading={loading}
       data={data}
       Layout={Layout}
     />
