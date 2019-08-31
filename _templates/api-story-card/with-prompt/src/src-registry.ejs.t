@@ -1,5 +1,5 @@
 ---
-to: packages/<%=package%>/src/registry.js
+to: packages/<%=package%>/src/index.js
 inject: true
 after: \[
 # Skip if the slug is found OR if the hygen:skip directive is found
