@@ -80,12 +80,16 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
               <cardMeta.visualization isLoading={isLoading} data={data} />
             </div>
           )}
-          {cardMeta.shareText && (
+          {(cardMeta.shareText || cardMeta.additionalText) && (
             <div css={[sectionMarginSmall, sectionMaxWidthSmall]}>
-              <div id="shareText">
-                <PullQuote quoteText={cardMeta.shareText} />
-              </div>
-              <div id="additionalText">{cardMeta.additionalText}</div>
+              {cardMeta.shareText && (
+                <div id="shareText">
+                  <PullQuote quoteText={cardMeta.shareText} />
+                </div>
+              )}
+              {cardMeta.additionalText && (
+                <div id="additionalText">{cardMeta.additionalText}</div>
+              )}
             </div>
           )}
         </section>
@@ -100,7 +104,7 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
             </section>
           </Fragment>
         )}
-        {cardMeta.metadata && (
+        {(cardMeta.metadata || cardMeta.metadataQA) && (
           <Fragment>
             <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
             <section
