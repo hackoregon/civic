@@ -7,6 +7,7 @@ import {
   PullQuote,
   CivicCardLayoutClassic
 } from "@hackoregon/component-library";
+import SignificantStructuralDamageDinosaur from "../SignificantStructuralDamageDinosaur";
 import ProactivePlanning from "../ProactivePlanning";
 import SignificantStructuralDamage from "../SignificantStructuralDamage";
 import YouAndYourNeighbors from "../YouAndYourNeighbors";
@@ -38,6 +39,9 @@ const App = () => (
     </p>
     {/* <ViolentShakingAndGroundDeformation /> */}
     <SignificantStructuralDamage />
+    <section css={sectionMarginMedium}>
+      <SignificantStructuralDamageDinosaur Layout={CivicCardLayoutClassic} />
+    </section>
     {/* <LifeAlteringEvent /> */}
     <p className="transition">
       The first step in increasing disaster resilience for most Portlanders will
