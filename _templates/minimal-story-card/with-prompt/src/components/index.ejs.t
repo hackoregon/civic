@@ -1,7 +1,7 @@
 ---
 to: packages/<%=package%>/src/components/<%=StoryCardName%>/index.js
 ---
-import React, { useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { CivicCard } from "@hackoregon/component-library";
 
