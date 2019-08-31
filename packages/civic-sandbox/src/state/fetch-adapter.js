@@ -48,50 +48,55 @@ export const fetchByDateAdapter = (
 };
 
 export const fetchAllSlidesAdapter = (
-  slides,
+  slidesArray,
   { start, success, failure }
 ) => () => dispatch => {
-  console.log("\n");
-  console.log("fetchAllSlidesAdapter");
-  console.log("fetchAllSlidesAdapter-slides", slides);
+  // console.log("\n");
+  // console.log("fetchAllSlidesAdapter");
+  console.log("fetchAllSlidesAdapter-slidesArray", slidesArray);
   dispatch(start());
-  const layerURLS = slides
-    .map(s => {
-      return s.layers.map(d => d.layerEndpoint);
-    })
-    .reduce((a, c) => [...a, ...c], []);
-  console.log("fetchAllSlidesAdapter-layerURLS", layerURLS);
+  // const layerURLS = slidesArray
+  //   .map(s => {
+  //     return s.layers.map(d => d.layerEndpoint);
+  //   })
+  //   .reduce((a, c) => [...a, ...c], []);
+  // console.log("fetchAllSlidesAdapter-layerURLS", layerURLS);
 
-  const fullUrls = layerURLS.map(slide => {
+  const layerUrls = slidesArray.map(oneSlide => {
     // console.log("fetchAllSlidesAdapter-slide", slide);
-    // const url = slide.endpoint;
-    const secureURL = slide.includes("https")
-      ? slide
-      : `${slide.slice(0, 4)}s${slide.slice(4)}`;
+    const url = oneSlide.slide.layerEndpoint;
+    const secureURL = url.includes("https")
+      ? url
+      : `${url.slice(0, 4)}s${url.slice(4)}`;
     // console.log("fetchAllSlidesAdapter-secureURL", secureURL);
-    return axios.get(secureURL);
+    return axios.get(secureURL); //promise
   });
-  // console.log("fetchAllSlidesAdapter-fullUrls", fullUrls); //promises
+  // console.log("fetchAllSlidesAdapter-layerUrls", layerUrls); //promises
+
   return (
     axios
-      .all(fullUrls)
-      .then(d => {
-        console.log("d:", d);
-        const dataURLS = d.map(d => d.data.dataEndpoint);
-        console.log("dataURLS:", dataURLS);
-        const fetchData = dataURLS.map(d => axios.get(d));
+      .all(layerUrls)
+      .then(layerObjects => {
+        // console.log("l:", l);
+        const dataURLS = layerObjects.map(l2 => l2.data.dataEndpoint);
+        // console.log("dataURLS:", dataURLS);
+
+        const fetchData = dataURLS.map((url,i) => {
+          return slidesArray[i].defaultSlide ? axios.get(url) : [];
+        });
+
         return axios.all(fetchData).then(
-          axios.spread((...res) => {
-            console.log("resp:", res);
+          axios.spread((...layerData) => {
+            // console.log("layerData:", layerData);
             dispatch(
               success(
-                res.map((r, i) => ({
-                  ...r.data,
-                  ...d[i].data
+                layerData.map((d, i) => ({
+                  ...d.data,
+                  ...layerObjects[i].data
                 }))
               )
             );
-            return res;
+            return layerData;
           })
         );
       })

@@ -58,15 +58,29 @@ export const getSlidesData = createSelector(
   getSandboxData,
   getSelectedSlides,
   getSelectedPackage,
-  (sandbox, slides, selectedPackage) => {
+  (sandbox, selectedSlides, selectedPackage) => {
     // isArray(slides)
     // ? slides.map(slide => sandbox.slides[slide])
     // : [sandbox.slides[slides]]
     console.log("selector-getSlidesData");
     console.log("selector-getSlidesData-selectedPackage:", selectedPackage);
-    return sandbox.packages.filter(d => {
+    console.log("selector-getSlidesData-selectedSlides:", selectedSlides);
+
+    const [packageMatch]  = sandbox.packages.filter(d => {
       return d.displayName === selectedPackage;
     });
+    console.log("selector-getSlidesData-packageMatch:", packageMatch);
+    
+    const selectedSlidesData = packageMatch.layers.map(d => {
+      console.log(d);
+      console.log(selectedSlides.includes(d.name));
+      return selectedSlides.includes(d.name)
+        ? ({slide: d, defaultSlide: true})
+        : ({slide: d, defaultSlide: false});
+  });
+    console.log("selector-getSlidesData-selectedSlidesData:", selectedSlidesData);
+
+    return selectedSlidesData;
   }
 );
 
@@ -118,37 +132,27 @@ export const getSelectedSlidesData = createSelector(
 
 export const getLayerSlides = createSelector(
   getSelectedSlidesData,
-  selectedSlides => {
+  getSelectedSlides,
+  (slidesData, selectedSlides) => {
     if (true) {
+      console.log("selector-getLayerSlides-slidesData:", slidesData);
       console.log("selector-getLayerSlides-selectedSlides:", selectedSlides);
-      const sizeScale = zoom =>
-        zoom > 11.5
-          ? 5.5
-          : zoom > 10.5
-          ? 5
-          : zoom > 9.5
-          ? 4
-          : zoom > 8.5
-          ? 3
-          : zoom > 7.5
-          ? 2
-          : 1;
-      const getPosition = f =>
-        f.geometry === null ? [0, 0] : f.geometry.coordinates;
 
-      const formattedData = selectedSlides
+      const formattedSliderVizData = slidesData
+        .filter(d => selectedSlides.includes(d.displayName))
         .map(d => {
           return [
             {
               ...d.visualization.map,
-              data: d.results.features
-              // sizeScale,
-              // getPosition
+              data: d.results ? d.results.features : [],
+              layerInfo: d
             }
           ];
         })
         .reduce((a, b) => a.concat(b), []);
-      return formattedData;
+      console.log("selector-getLayerSlides-formattedSliderVizData:", formattedSliderVizData);
+
+      return formattedSliderVizData;
     }
     return [{ data: {} }];
   }
@@ -345,6 +349,7 @@ export const getAllSlides = createSelector(
   getSelectedSlidesData,
   getSelectedSlides,
   (sandbox, selectedSlidesData, deSelectedSlides) => {
+
     // const allPackageSlideNumbers = isArray(packageData.slides)
     //   ? packageData.slides
     //   : [packageData.slides];
@@ -382,18 +387,36 @@ export const getAllSlides = createSelector(
     //     };
     //   });
     // console.log("selector-getAllSlides-selectedSlide", selectedSlide);
+    console.log("selector-getAllSlides");
 
-    const allSlides = selectedSlidesData.map((p, indx) => {
-      console.log("selector-getAllSlides-slides:", p);
+    // const allSlides = []//packageData.map(d => d.name === )
+    // .layers.map((slide, indx) => {
+    //   console.log("selector-getAllSlides-slides:", slide);
+    //   return {
+    //     slideId: indx,
+    //     endpoint: slide.dataEndpoint,
+    //     label: slide.displayName,
+    //     // checked: !deSelectedSlides.includes(slide.displayName),
+    //     color: [220, 20, 60],
+    //     mapType: slide.visualization.map.mapType
+    //   };
+    // });
+
+    // console.log("selector-getAllSlides-layerSlides:", layerSlides);
+
+    const allSlides = selectedSlidesData.map((s, indx) => {
+      console.log("selector-getAllSlides-slide:", s);
       return {
         slideId: indx,
-        endpoint: p.dataEndpoint,
-        label: p.displayName,
-        checked: !deSelectedSlides.includes(p.displayName),
-        color: [220, 20, 60],
-        mapType: p.visualization.map.mapType
+        endpoint: s.dataEndpoint,
+        label: s.displayName,
+        checked: s.results ? true : false,
+        color: [220, 20, 60, 255],
+        civicColor: s.visualization.map.civicColor,
+        mapType: s.visualization.map.mapType
       };
     });
+
     console.log("selector-getAllSlides-allSlides", allSlides);
     return allSlides;
   }

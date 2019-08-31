@@ -129,14 +129,13 @@ const reducer = (state = INITIAL_STATE, action) => {
         slidesData: [],
         // selectedFoundation:
         //   state.sandbox.packages[action.selectedPackage].default_foundation,
-        // selectedSlide: isArray(
-        //   state.sandbox.packages[action.selectedPackage].default_slide
-        // )
-        //   ? state.sandbox.packages[action.selectedPackage].default_slide
-        //   : [state.sandbox.packages[action.selectedPackage].default_slide],
+        selectedSlide: state.sandbox.packages
+          .filter(d => d.displayName === action.selectedPackage.displayName)
+          .reduce((a,c) => [...a, ...c.layers.map(d => d.name)], [])
+          .slice(0,1),
         sandbox: {
           ...state.sandbox,
-          foundations: ["0000"]
+          foundations: []
         },
         selectedFoundationDatum: null,
         selectedSlideDatum: null

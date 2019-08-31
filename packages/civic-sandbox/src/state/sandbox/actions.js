@@ -42,7 +42,7 @@ export const SlideFailure = actionEmitter(SLIDE_FAILURE);
 
 // Thunk actions
 export const fetchSandbox = fetchAdapter(
-  "https://gist.githubusercontent.com/mendozaline/5f9b9157d031cb5fd505bcce098f3fc2/raw/26c02f1ca40f7372d05a60f0c21334d616856eba/packs.json",
+  "https://gist.githubusercontent.com/mendozaline/5f9b9157d031cb5fd505bcce098f3fc2/raw/d6b024d3cf5463fe639b72422a849b127928e18e/packs.json",
   {
     start: SandboxStart,
     success: SandboxSuccess,

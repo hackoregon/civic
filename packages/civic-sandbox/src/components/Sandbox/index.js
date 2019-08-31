@@ -52,15 +52,15 @@ class SandboxComponent extends React.Component {
 
   componentDidMount() {
     // this.props.fetchFoundation(this.props.foundationData.endpoint);
-    console.log("\n");
-    console.log("sandbox-index-CDM:");
     console.log("sandbox-index-CDM-slidesData:", this.props.slidesData);
-    this.props.fetchSlides(this.props.slidesData);
+    const layerURLS = this.props.slidesData;
+      // .map(s => s.layerEndpoint);
+    console.log("sandbox-index-CDM-layerURLS;", layerURLS);
+
+    this.props.fetchSlides(layerURLS);
   }
 
   componentDidUpdate(prevProps) {
-    console.log("\n");
-    console.log("sandbox-index-CDU:");
     console.log("sandbox-index-CDU-slidesData:", this.props.slidesData);
 
     // if (!equals(this.props.selectedPackage, prevProps.selectedPackage)) {
@@ -73,8 +73,28 @@ class SandboxComponent extends React.Component {
     // ) {
     //   this.props.fetchFoundation(this.props.foundationData.endpoint);
     // }
+    if (
+      equals(this.props.selectedPackage, prevProps.selectedPackage) &&
+      !equals(this.props.selectedSlide, prevProps.selectedSlide)
+    ){
+      console.log("sandbox-index-CDU-SAME PACK & NEW SLIDES");
+      // const layerURLS = this.props.slidesData;
+      // this.props.fetchSlides(layerURLS);
+
+      // const onlyFetchNewSlide = this.props.selectedSlidesData.filter(slideDatum => {
+      //   return slideDatum.defaultSlide;
+      // });
+      const onlyFetchNewSlide = this.props.slidesData.filter(
+        d => !prevProps.selectedSlide.includes(d.slide.name) && this.props.selectedSlide.includes(d.slide.name)
+      );
+      console.log("sandbox-index-CDU-onlyFetchNewSlide", onlyFetchNewSlide);
+      this.props.fetchSlides(onlyFetchNewSlide);
+
+
+    }
+
     if (!equals(this.props.selectedPackage, prevProps.selectedPackage)) {
-      console.log("sandbox-index-CDU-NEW SLIDES");
+      console.log("sandbox-index-CDU-NEW PACK & SLIDES");
       // const fetchedSlideDataNames = this.props.selectedSlidesData.map(
       //   slideDatum => {
       //     return Object.keys(slideDatum)[0];
@@ -84,7 +104,8 @@ class SandboxComponent extends React.Component {
       //   d => !fetchedSlideDataNames.includes(d.name)
       // );
       // this.props.fetchSlides(onlyFetchNewSlide);
-      this.props.fetchSlides(this.props.slidesData);
+      const layerURLS = this.props.slidesData;
+      this.props.fetchSlides(layerURLS);
     }
   }
 
