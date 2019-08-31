@@ -492,6 +492,19 @@ const demoCardMeta = (/* data */) => ({
   // ]
 });
 
+const demoCardMetaMissingData = (/* data */) => ({
+  title: "Demo Card (missing data)",
+  slug: "demo-card-missing-data",
+  introText: <p>Check the console</p>,
+  // visualization gets data, isLoading as props by default
+  visualization: DemoCardVisualization,
+  selector: null,
+  analysis: null,
+  metadata: null,
+  resources: null,
+  authors: []
+});
+
 const demoCardMetaSideBySide = data => {
   return {
     ...demoCardMeta(data),
@@ -511,6 +524,13 @@ export default () =>
     ))
     .add("Layout: Default (full)", () => (
       <CivicCard cardMeta={demoCardMeta} data={demoData} isLoading={false} />
+    ))
+    .add("Layout: Default (full, missing data) check console", () => (
+      <CivicCard
+        cardMeta={demoCardMetaMissingData}
+        data={demoData}
+        isLoading={false}
+      />
     ))
     .add("Layout: Classic", () => (
       <CivicCard

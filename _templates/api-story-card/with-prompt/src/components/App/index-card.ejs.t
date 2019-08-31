@@ -4,6 +4,6 @@ inject: true
 before: '</PageLayout>'
 skip_if: <<%=StoryCardName%>
 ---
-    <section className={sectionMarginMedium}>
+    <section css={sectionMarginMedium}>
       <<%=StoryCardName%> Layout={CivicCardLayoutClassic} />
     </section>

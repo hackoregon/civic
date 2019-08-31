@@ -47,78 +47,101 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
   return (
     <Fragment>
       <article>
-        <div css={[sectionMarginSmall, sectionMaxWidthSmall]}>
-          <header>
-            <h1 id="title">{cardMeta.title}</h1>
-          </header>
-          <hr />
-          {cardMeta.tags.length > 0 && (
-            <Fragment>
-              <section id="tags">
-                {cardMeta.tags.map((tag, index) => (
-                  <Chip tag={tag} index={index} key={generate()} />
-                ))}
-              </section>
-              <hr />
-            </Fragment>
-          )}
-        </div>
+        {cardMeta.title && (
+          <div css={[sectionMarginSmall, sectionMaxWidthSmall]}>
+            <header>
+              <h1 id="title">{cardMeta.title}</h1>
+            </header>
+            <hr />
+            {cardMeta.tags && cardMeta.tags.length > 0 && (
+              <Fragment>
+                <section id="tags">
+                  {cardMeta.tags.map((tag, index) => (
+                    <Chip tag={tag} index={index} key={generate()} />
+                  ))}
+                </section>
+                <hr />
+              </Fragment>
+            )}
+          </div>
+        )}
         <section>
-          <div css={[sectionMarginSmall, sectionMaxWidthSmall]}>
-            <div id="introText">{cardMeta.introText}</div>
-          </div>
-          <div
-            id="visualization"
-            css={[sectionMarginMedium, sectionMaxWidthMedium]}
-          >
-            {cardMeta.selector}
-            <cardMeta.visualization isLoading={isLoading} data={data} />
-          </div>
-          <div css={[sectionMarginSmall, sectionMaxWidthSmall]}>
-            <div id="shareText">
-              <PullQuote quoteText={cardMeta.shareText} />
+          {cardMeta.introText && (
+            <div css={[sectionMarginSmall, sectionMaxWidthSmall]}>
+              <div id="introText">{cardMeta.introText}</div>
             </div>
-            <div id="additionalText">{cardMeta.additionalText}</div>
-          </div>
-        </section>
-        <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
-        <section css={[sectionMarginSmall, sectionMaxWidthSmall]}>
-          <div id="analysis">
-            <h2>About this analysis</h2>
-            {cardMeta.analysis}
-          </div>
-        </section>
-        <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
-        <section css={[sectionMarginSmall, sectionMaxWidthSmall]} id="metadata">
-          <h2>About this data</h2>
-          {cardMeta.metadata}
-          {_.has(cardMeta, "metadataQA") && (
-            <CollapsableSection
-              items={cardMeta.metadataQA.map(item => (
-                <MetadataQuestion item={item} key={generate()} />
-              ))}
-              collapseAfter={5}
-            />
+          )}
+          {cardMeta.visualization && (
+            <div
+              id="visualization"
+              css={[sectionMarginMedium, sectionMaxWidthMedium]}
+            >
+              {cardMeta.selector}
+              <cardMeta.visualization isLoading={isLoading} data={data} />
+            </div>
+          )}
+          {cardMeta.shareText && (
+            <div css={[sectionMarginSmall, sectionMaxWidthSmall]}>
+              <div id="shareText">
+                <PullQuote quoteText={cardMeta.shareText} />
+              </div>
+              <div id="additionalText">{cardMeta.additionalText}</div>
+            </div>
           )}
         </section>
-        <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
-        <section
-          css={[sectionMarginSmall, sectionMaxWidthSmall]}
-          id="resources"
-        >
-          <h2>Links and resources</h2>
-          <p>
-            Interested in learning more? The following links and resources are
-            useful in gaining a greater understanding of the context of this
-            data visualization.
-          </p>
-          <CollapsableSection
-            items={cardMeta.resources.map(item => (
-              <Resource section={item} key={generate()} />
-            ))}
-            collapseAfter={7}
-          />
-        </section>
+        {cardMeta.analysis && (
+          <Fragment>
+            <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
+            <section css={[sectionMarginSmall, sectionMaxWidthSmall]}>
+              <div id="analysis">
+                <h2>About this analysis</h2>
+                {cardMeta.analysis}
+              </div>
+            </section>
+          </Fragment>
+        )}
+        {cardMeta.metadata && (
+          <Fragment>
+            <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
+            <section
+              css={[sectionMarginSmall, sectionMaxWidthSmall]}
+              id="metadata"
+            >
+              <h2>About this data</h2>
+              {cardMeta.metadata}
+              {_.has(cardMeta, "metadataQA") && (
+                <CollapsableSection
+                  items={cardMeta.metadataQA.map(item => (
+                    <MetadataQuestion item={item} key={generate()} />
+                  ))}
+                  collapseAfter={5}
+                />
+              )}
+            </section>
+          </Fragment>
+        )}
+        {cardMeta.resources && (
+          <Fragment>
+            <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
+            <section
+              css={[sectionMarginSmall, sectionMaxWidthSmall]}
+              id="resources"
+            >
+              <h2>Links and resources</h2>
+              <p>
+                Interested in learning more? The following links and resources
+                are useful in gaining a greater understanding of the context of
+                this data visualization.
+              </p>
+              <CollapsableSection
+                items={cardMeta.resources.map(item => (
+                  <Resource section={item} key={generate()} />
+                ))}
+                collapseAfter={7}
+              />
+            </section>
+          </Fragment>
+        )}
         <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
         <section css={[sectionMarginSmall, sectionMaxWidthSmall]} id="authors">
           <h2>Who made this?</h2>

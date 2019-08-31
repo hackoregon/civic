@@ -33,6 +33,8 @@
     "lint": "eslint src"
   },
   "dependencies": {
+    "reduxful": "^1.2.2",
+    "cross-fetch": "^3.0.4",
     "@hackoregon/component-library": "^4.0.0",
     "@hackoregon/webpack-common": "^3.0.0",
     "@hackoregon/mock-wrapper": "^3.0.0",
