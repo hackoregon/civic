@@ -1,11 +1,11 @@
 import React from "react";
 import { Collapsable } from "@hackoregon/component-library";
 
-import SignificantStructuralDamageDinosaurVisualization from "./SignificantStructuralDamageDinosaurVisualization";
+import SignificantStructuralDamageVisualization from "./SignificantStructuralDamageVisualization";
 
-const SignificantStructuralDamageDinosaurMeta = (/* data */) => ({
-  title: "Significant Structural Damage Dinosaur",
-  slug: "significant-structural-damage-dinosaur",
+const SignificantStructuralDamageMeta = (/* data */) => ({
+  title: "Significant Structural Damage",
+  slug: "significant-structural-damage",
   introText: (
     <p>
       {`Key pieces of Portland's infrastructure are estimated to be
@@ -15,7 +15,7 @@ const SignificantStructuralDamageDinosaurMeta = (/* data */) => ({
         services, and rebuild after a Cascadia quake.`}
     </p>
   ),
-  visualization: SignificantStructuralDamageDinosaurVisualization, // data, isLoading are passed to this as props
+  visualization: SignificantStructuralDamageVisualization, // data, isLoading are passed to this as props
   additionalText: (
     <Collapsable>
       <Collapsable.Section hidden>
@@ -73,4 +73,4 @@ const SignificantStructuralDamageDinosaurMeta = (/* data */) => ({
   authors: []
 });
 
-export default SignificantStructuralDamageDinosaurMeta;
+export default SignificantStructuralDamageMeta;

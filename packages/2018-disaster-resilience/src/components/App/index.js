@@ -7,9 +7,8 @@ import {
   PullQuote,
   CivicCardLayoutClassic
 } from "@hackoregon/component-library";
-import SignificantStructuralDamageDinosaur from "../SignificantStructuralDamageDinosaur";
-import ProactivePlanning from "../ProactivePlanning";
 import SignificantStructuralDamage from "../SignificantStructuralDamage";
+import ProactivePlanning from "../ProactivePlanning";
 import YouAndYourNeighbors from "../YouAndYourNeighbors";
 import WhatYouCanDoToPrepare from "../WhatYouCanDoToPrepare";
 
@@ -38,9 +37,8 @@ const App = () => (
       resilience.
     </p>
     {/* <ViolentShakingAndGroundDeformation /> */}
-    <SignificantStructuralDamage />
     <section css={sectionMarginMedium}>
-      <SignificantStructuralDamageDinosaur Layout={CivicCardLayoutClassic} />
+      <SignificantStructuralDamage Layout={CivicCardLayoutClassic} />
     </section>
     {/* <LifeAlteringEvent /> */}
     <p className="transition">
