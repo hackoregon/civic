@@ -1,13 +1,15 @@
-/** @jsx jsx */
-import { PureComponent } from "react";
+import React, { PureComponent } from "react";
 import { PropTypes } from "prop-types";
+/** @jsx jsx */
 import { jsx, css } from "@emotion/core";
+import { TweenMax, Power2 } from "gsap/TweenMax";
 
 import { palette } from "../../constants/style";
 import RadialGauge from "./RadialGauge";
 
 const orbContainerStyle = css`
   position: relative;
+  opacity: 0;
 `;
 
 const circleDefaultStyle = css`
@@ -47,13 +49,31 @@ const defaultState = {
   isActive: false,
   isComplete: false,
   isCorrect: false,
-  percent: 0
+  percent: 0,
+  hasAnimated: false
 };
 
 export default class Orb extends PureComponent {
   constructor(props) {
     super(props);
     this.state = defaultState;
+    this.orbRef = React.createRef();
+  }
+
+  componentDidMount() {
+    // is this the first render?
+    const { hasAnimated } = this.state;
+    const { delay } = this.props;
+    if (!hasAnimated) {
+      TweenMax.fromTo(
+        this.orbRef.current,
+        1,
+        { autoAlpha: 0, y: 25, scale: 0 },
+        { autoAlpha: 1, ease: Power2.easeOut, delay, y: 0, scale: 1 }
+      );
+      // eslint-disable-next-line no-did-update-set-state
+      this.setState({ hasAnimated: true });
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -137,6 +157,7 @@ export default class Orb extends PureComponent {
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
       <div
+        ref={this.orbRef}
         css={css`
           ${orbContainerStyle};
           ${sizeStyle};
@@ -173,5 +194,6 @@ Orb.propTypes = {
   addOrbScore: PropTypes.func,
   imageSVG: PropTypes.string,
   imgAlt: PropTypes.string,
-  size: PropTypes.number
+  size: PropTypes.number,
+  delay: PropTypes.number
 };

@@ -1,6 +1,6 @@
-import { cloneDeep } from "lodash";
+import { cloneDeep, sampleSize } from "lodash";
 
-export function createOrbsFromKit(kitItems, bounds, config) {
+export function createRandomLayout(kitItems, bounds, config) {
   if (!kitItems.length) {
     return [];
   }
@@ -15,7 +15,7 @@ export function createOrbsFromKit(kitItems, bounds, config) {
     for (let j = 0; j < totalGeneratedOrbs; j += 1) {
       const orbId = `${kitData.type}-${j}`;
       kitData.x = Math.random() * bounds.width;
-      kitData.y = Math.random() * (bounds.height - config.orbSize / 2);
+      kitData.y = Math.random() * (bounds.height - config.orbSize * 2);
       kitData.velocity = {
         x:
           config.minVelocityX +
@@ -34,6 +34,66 @@ export function createOrbsFromKit(kitItems, bounds, config) {
   return orbCollection;
 }
 
+export function createFixedLayout(
+  kitItems,
+  bounds,
+  config,
+  totalGeneratedOrbs = 50,
+  columnsInRow = 15
+) {
+  if (!kitItems.length) {
+    return [];
+  }
+
+  // create an empty array.
+  let orbCollection = [];
+
+  for (let i = 0, orbCount = kitItems.length; i < orbCount; i += 1) {
+    const kitData = kitItems[i];
+    const jCount = totalGeneratedOrbs / orbCount;
+
+    for (let j = 0; j < jCount; j += 1) {
+      const orbId = `${kitData.type}-${j}`;
+      kitData.x = 0;
+      kitData.y = 0;
+      kitData.velocity = {
+        x: 0,
+        y: 0
+      };
+
+      orbCollection.push(
+        Object.assign({}, { orbId }, { touched: false }, kitData)
+      );
+    }
+  }
+
+  // rearranges the orbs so the layout appears random
+  orbCollection = sampleSize(orbCollection, orbCollection.length);
+
+  // build a staggered grid of 4 columns, then 3 in the next
+  // if we have 11 items, rows will be 6 and columns will be 3
+  const rows = Math.ceil(orbCollection.length / columnsInRow);
+  const columnWidth =
+    (bounds.width - config.verticalBuffer * 2 - config.orbSize / 2) /
+    (columnsInRow - 1);
+  const rowHeight = (bounds.height - config.verticalBuffer * 2) / rows;
+
+  for (let i = 0; i < orbCollection.length; i += 1) {
+    const orb = orbCollection[i];
+
+    const rowIndex = Math.floor(i / columnsInRow);
+    const columnIndex = i % columnsInRow;
+    orb.x =
+      config.verticalBuffer + columnIndex * columnWidth - config.orbSize / 2;
+    orb.y = config.verticalBuffer + rowIndex * rowHeight - config.orbSize / 2;
+    orb.delay = i * 0.05;
+
+    orbCollection[i] = orb;
+  }
+
+  return orbCollection;
+}
+
 export function isCorrectCompletedOrb(currentOrb, activeTask) {
   return activeTask && activeTask.requiredItem === currentOrb.type;
 }
@@ -42,20 +102,29 @@ export function isIncorrectCompletedOrb(currentOrb, activeTask) {
   return activeTask && activeTask.requiredItem !== currentOrb.type;
 }
 
-export function completedOrbHandler(currentOrb, activeTask) {
+export function completedOrbHandler(
+  currentOrb,
+  activeTask,
+  frozenOrbInterface
+) {
   const orbCopy = cloneDeep(currentOrb);
-  if (isCorrectCompletedOrb(orbCopy, activeTask)) {
+  if (isCorrectCompletedOrb(orbCopy, activeTask) || frozenOrbInterface) {
     orbCopy.y -= 2.0;
-  }
-
-  if (isIncorrectCompletedOrb(orbCopy, activeTask)) {
+  } else if (isIncorrectCompletedOrb(orbCopy, activeTask)) {
     orbCopy.y += 2.0;
   }
 
   return orbCopy;
 }
 
-export function uncompletedOrbHandler(currentOrb, tick, index, orbConfig) {
+export function uncompletedOrbHandler(
+  currentOrb,
+  tick,
+  index,
+  orbConfig,
+  frozenOrbInterface
+) {
+  if (frozenOrbInterface) return currentOrb;
   const orbCopy = cloneDeep(currentOrb);
 
   orbCopy.x += orbCopy.velocity.x; // + Math.cos(tick * 0.1) * period;

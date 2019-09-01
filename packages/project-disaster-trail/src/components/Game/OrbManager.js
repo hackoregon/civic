@@ -15,7 +15,8 @@ import useAnimationFrame from "../../state/hooks/useAnimationFrame";
 import Orb from "./Orb";
 import {
   completedOrbHandler,
-  createOrbsFromKit,
+  createFixedLayout,
+  createRandomLayout,
   uncompletedOrbHandler
 } from "./OrbManagerHelpers";
 import { addItemToPlayerKit, getKitCreationItems } from "../../state/kit";
@@ -45,7 +46,8 @@ const OrbManager = ({
   kitItems,
   activeTask,
   addItemToPlayerKitInState,
-  addPointsToState
+  addPointsToState,
+  frozenOrbInterface = false
 } = {}) => {
   const [hasInitialized, setHasInitialized] = useState(false);
   const [orbs, setOrbsState] = useState([]);
@@ -68,11 +70,13 @@ const OrbManager = ({
   useEffect(() => {
     // ensure we only run this once
     if (prevBounds && !prevBounds.width && bounds.width && !hasInitialized) {
-      const newOrbs = createOrbsFromKit(kitItems, bounds, ORB_CONFIG);
+      const newOrbs = frozenOrbInterface
+        ? createFixedLayout(kitItems, bounds, ORB_CONFIG)
+        : createRandomLayout(kitItems, bounds, ORB_CONFIG);
       setHasInitialized(true);
       setOrbsState(newOrbs);
     }
-  }, [bounds, hasInitialized, kitItems, prevBounds]);
+  }, [bounds, frozenOrbInterface, hasInitialized, kitItems, prevBounds]);
 
   const addOrbScore = useCallback(
     orbId => {
@@ -131,9 +135,19 @@ const OrbManager = ({
       }
 
       if (isOrbCompleted) {
-        currentOrb = completedOrbHandler(currentOrb, activeTask);
+        currentOrb = completedOrbHandler(
+          currentOrb,
+          activeTask,
+          frozenOrbInterface
+        );
       } else {
-        currentOrb = uncompletedOrbHandler(currentOrb, tick, i, ORB_CONFIG);
+        currentOrb = uncompletedOrbHandler(
+          currentOrb,
+          tick,
+          i,
+          ORB_CONFIG,
+          frozenOrbInterface
+        );
       }
 
       // is it offscreen?
@@ -215,6 +229,7 @@ const OrbManager = ({
             addOrbScore={addOrbScore}
             setOrbTouched={setOrbTouched}
             setOrbComplete={setOrbComplete}
+            delay={orb.delay}
           />
         </div>
       ))}
