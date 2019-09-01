@@ -9,9 +9,10 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
+import shortid from "shortid";
 // import useMediaQuery from "@material-ui/core/useMediaQuery";
 // import { PageLayout } from "../..";
-import { Checkbox, CivicCardLayoutVisualizationOnly } from "../index";
+import { Checkbox, CivicCardLayoutPreview } from "../index";
 
 const drawerWidth = 240;
 const headerHeight = 120;
@@ -45,7 +46,8 @@ const useStyles = makeStyles(theme => ({
     }
   },
   toolbar: {
-    backgroundColor: "white"
+    width: "100%",
+    marginLeft: "10px"
   },
   drawerPaper: {
     width: drawerWidth,
@@ -54,16 +56,40 @@ const useStyles = makeStyles(theme => ({
     }
   },
   content: {
-    // alignSelf: 'stretch',
-    padding: theme.spacing(3),
+    position: "absolute",
+    top: headerHeight,
+    // border: '3px solid red',
+    padding: theme.spacing(1),
     width: "100%",
     [theme.breakpoints.up("sm")]: {
+      left: drawerWidth,
       width: `calc(100% - ${drawerWidth}px)`,
       alignSelf: "flex-end"
-      // width: '100%'
     }
+  },
+  filterItem: {
+    listStyleType: "none"
+  },
+  entriesList: {
+    padding: "0px",
+    display: "flex"
+  },
+  entry: {
+    margin: "10px",
+    width: "100%",
+    flexWrap: "wrap",
+    listStyleType: "none",
+    alignSelf: "stretch"
   }
 }));
+
+const checkTags = (entryTags, activeTags) => {
+  if (!entryTags) return false;
+  for (let i = 0; i < entryTags.length; i += 1) {
+    if (activeTags[entryTags[i]]) return true;
+  }
+  return false;
+};
 
 const CardList = ({ CardRegistry }) => {
   const { entries, tags } = CardRegistry;
@@ -82,30 +108,28 @@ const CardList = ({ CardRegistry }) => {
   }
 
   const drawer = (
-    <div>
-      <div className={classes.toolbar} />
-      <div>
-        <h1>Filters</h1>
-        <h2>Topic</h2>
-        <ul>
-          {Object.keys(tags).map(tag => (
-            <>
-              <li>
-                <Checkbox
-                  value={activeTags[tag]}
-                  label={tag}
-                  onChange={() =>
-                    setActiveTags({ ...activeTags, [tag]: !activeTags[tag] })
-                  }
-                />
-              </li>
-              {/* <li>{ `#${tag} (${tags[tag]})`}</li> */}
-            </>
-          ))}
-        </ul>
-      </div>
+    <div className={classes.toolbar}>
+      <h1>Filters</h1>
+      <h2>Topic</h2>
+      <ul>
+        {Object.keys(tags).map(tag => (
+          <li key={shortid.generate()} className={classes.filterItem}>
+            <Checkbox
+              value={activeTags[tag]}
+              label={tag}
+              onChange={() =>
+                setActiveTags({ ...activeTags, [tag]: !activeTags[tag] })
+              }
+            />
+          </li>
+        ))}
+      </ul>
     </div>
   );
+
+  console.log("ENTRY / TAGS / 0", entries[0].component.tags);
+  console.log("ENTRY / TAGS / 1", entries[1].component.tags);
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -156,19 +180,15 @@ const CardList = ({ CardRegistry }) => {
         </Hidden>
       </nav>
       <main className={classes.content}>
-        <Typography variant="h3">Did you know?</Typography>
+        <h1>Did you know?</h1>
         <div>
-          <ul>
+          <ul className={classes.entriesList}>
             {entries
-              // .filter(entry => activeTags.includes(entry.component.tags))
+              .filter(entry => checkTags(entry.component.tags, activeTags))
               .map(entry => (
-                <>
-                  {
-                    <entry.component
-                      Layout={CivicCardLayoutVisualizationOnly}
-                    />
-                  }
-                </>
+                <li key={shortid.generate()} className={classes.entry}>
+                  {<entry.component Layout={CivicCardLayoutPreview} />}
+                </li>
               ))}
           </ul>
         </div>

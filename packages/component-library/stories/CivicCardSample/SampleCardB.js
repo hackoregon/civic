@@ -4,15 +4,22 @@ import { CivicCard } from "../../src";
 import sampleCardMeta from "./sampleCardMeta";
 import sampleCardData from "./sampleCardData";
 
+const sampleCardMetaB = data => {
+  return {
+    ...sampleCardMeta(data),
+    tags: ["Housing", "Gentrification", "Portland", "Rail"]
+  };
+};
+
 const SampleCard = ({ isLoading, Layout }) => (
   <CivicCard
-    cardMeta={sampleCardMeta}
+    cardMeta={sampleCardMetaB}
     data={sampleCardData}
     isLoading={isLoading}
     Layout={Layout}
   />
 );
 
-SampleCard.tags = sampleCardMeta().tags;
+SampleCard.tags = sampleCardMetaB().tags;
 
 export default SampleCard;

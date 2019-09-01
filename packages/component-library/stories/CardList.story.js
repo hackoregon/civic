@@ -4,12 +4,7 @@ import { storiesOf } from "@storybook/react";
 import { checkA11y } from "@storybook/addon-a11y";
 import { CardList } from "../src/index";
 import { storybookStyles } from "./storyStyles";
-import { SampleCard } from "./CivicCardSample";
-
-// const SampleCard_A = SampleCard;
-// SampleCard_A.tags = [
-
-// ];
+import { SampleCard, SampleCardB } from "./CivicCardSample";
 
 const CardRegistryMock = {
   tags: {
@@ -31,7 +26,7 @@ const CardRegistryMock = {
     {
       slug: "demo-card",
       project: "@hackoregon/2019-template",
-      component: SampleCard
+      component: SampleCardB
     }
   ]
 };
