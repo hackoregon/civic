@@ -3,9 +3,11 @@ import { jsx } from "@emotion/core";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
+import { generate } from "shortid";
 
 import cardMetaTypes from "./cardMetaTypes";
 import CivicCardLink from "./CivicCardLink";
+import { Chip } from "./LayoutComponents";
 
 function CivicCardLayoutPreview({ cardMeta }) {
   return (
@@ -13,6 +15,11 @@ function CivicCardLayoutPreview({ cardMeta }) {
       <CardContent>
         <h2>{cardMeta.title}</h2>
         <p>{cardMeta.introText}</p>
+        <section id={`${cardMeta.slug}-tags`}>
+          {cardMeta.tags.map((tag, index) => (
+            <Chip tag={tag} index={index} key={generate()} />
+          ))}
+        </section>
       </CardContent>
       <CardActions>
         <CivicCardLink slug={cardMeta.slug}>Learn more</CivicCardLink>
