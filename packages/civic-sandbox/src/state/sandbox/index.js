@@ -102,15 +102,50 @@ const reducer = (state = INITIAL_STATE, action) => {
         slidesPending: true,
         slidesError: null
       };
-    case SLIDES_SUCCESS:
-      console.log("a-SLIDES_SUCCESS", action.payload);
+    case SLIDES_SUCCESS: {
+      console.log("a-SLIDES_SUCCESS");
+      console.log("a-payload:", action.payload);
+      console.log("a-state.slidesData:", state.slidesData);
+      // let { slidesData } = state;
+      // if (state.slidesData.findIndex(d => d.displayName === action.payload[0].displayName)) {
+      //   const slideIndex = state.slidesData.findIndex(d => d.displayName === action.payload[0].displayName);
+
+      //   slidesData = [
+      //     ...state.slidesData.slice(0, slideIndex),
+      //     ...action.payload,
+      //     ...state.slidesData.slice(slideIndex + 1)
+      //   ];
+      // }
+
+      // const payloadSlideIndex = state.slidesData.findIndex(d => {
+      //   return d.displayName === action.payload[0].displayName;
+      // });
+      // console.log("a-payloadSlideIndex:", payloadSlideIndex);
+
+      // const newSlidesData = payloadSlideIndex > -1
+      //   ? state.slidesData.map((d,i) => {
+      //       return i === payloadSlideIndex ? action.payload[0] : d;
+      //     })
+      //   : [...state.slidesData, ...action.payload];
+      // console.log("a-newSlidesData:", newSlidesData);
+
       return {
         ...state,
         slidesPending: false,
         slidesError: null,
         slidesSuccess: true,
-        slidesData: [...state.slidesData, ...action.payload]
+        slidesData: state.slidesData.length
+          ? [
+              ...state.slidesData.map(d => {
+                return d.displayName === action.payload[0].displayName
+                  ? action.payload[0]
+                  : d;
+              })
+            ]
+          : [...state.slidesData, ...action.payload]
+        // slidesData
       };
+    }
     case SLIDES_FAILURE:
       return {
         ...state,
@@ -131,8 +166,8 @@ const reducer = (state = INITIAL_STATE, action) => {
         //   state.sandbox.packages[action.selectedPackage].default_foundation,
         selectedSlide: state.sandbox.packages
           .filter(d => d.displayName === action.selectedPackage.displayName)
-          .reduce((a,c) => [...a, ...c.layers.map(d => d.name)], [])
-          .slice(0,1),
+          .reduce((a, c) => [...a, ...c.layers.map(d => d.name)], [])
+          .slice(0, 1),
         sandbox: {
           ...state.sandbox,
           foundations: []

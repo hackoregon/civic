@@ -47,7 +47,8 @@ const Sandbox = ({
   tooltipInfo,
   allSlides,
   foundationMapProps,
-  selectedFoundationDatum
+  selectedFoundationDatum,
+  areSlidesLoading
 }) => {
   const [baseMapStyle, setBaseMapStyle] = useState("dark");
 
@@ -95,6 +96,7 @@ const Sandbox = ({
           foundationMapProps={foundationMapProps}
           onBaseMapStyleChange={handleBaseMapStyleChange}
           baseMapStyle={baseMapStyle}
+          areSlidesLoading={areSlidesLoading}
         />
       </div>
       <div css={baseMapWrapper}>

@@ -54,7 +54,7 @@ class SandboxComponent extends React.Component {
     // this.props.fetchFoundation(this.props.foundationData.endpoint);
     console.log("sandbox-index-CDM-slidesData:", this.props.slidesData);
     const layerURLS = this.props.slidesData;
-      // .map(s => s.layerEndpoint);
+    // .map(s => s.layerEndpoint);
     console.log("sandbox-index-CDM-layerURLS;", layerURLS);
 
     this.props.fetchSlides(layerURLS);
@@ -76,7 +76,7 @@ class SandboxComponent extends React.Component {
     if (
       equals(this.props.selectedPackage, prevProps.selectedPackage) &&
       !equals(this.props.selectedSlide, prevProps.selectedSlide)
-    ){
+    ) {
       console.log("sandbox-index-CDU-SAME PACK & NEW SLIDES");
       // const layerURLS = this.props.slidesData;
       // this.props.fetchSlides(layerURLS);
@@ -84,13 +84,21 @@ class SandboxComponent extends React.Component {
       // const onlyFetchNewSlide = this.props.selectedSlidesData.filter(slideDatum => {
       //   return slideDatum.defaultSlide;
       // });
-      const onlyFetchNewSlide = this.props.slidesData.filter(
-        d => !prevProps.selectedSlide.includes(d.slide.name) && this.props.selectedSlide.includes(d.slide.name)
-      );
+      const onlyFetchNewSlide = this.props.slidesData.filter((d, index) => {
+        const previouslyFetched = this.props.selectedSlidesData[index].results;
+        console.log("sandbox-index-CDU-previouslyFetched", previouslyFetched);
+
+        return (
+          !previouslyFetched &&
+          !prevProps.selectedSlide.includes(d.slide.name) &&
+          this.props.selectedSlide.includes(d.slide.name)
+        );
+      });
       console.log("sandbox-index-CDU-onlyFetchNewSlide", onlyFetchNewSlide);
-      this.props.fetchSlides(onlyFetchNewSlide);
 
-
+      if (onlyFetchNewSlide.length) {
+        this.props.fetchSlides(onlyFetchNewSlide);
+      }
     }
 
     if (!equals(this.props.selectedPackage, prevProps.selectedPackage)) {
@@ -110,10 +118,12 @@ class SandboxComponent extends React.Component {
   }
 
   updateSlide = event => {
-    console.log("sandbox-index-updateSlide-event:", event);
-    console.log("sandbox-index-updateSlide-event-target:", event.target);
+    console.log("sandbox-index-updateSlide:");
+    console.log(
+      "sandbox-index-updateSlide-event-target-name:",
+      event.target.name
+    );
     const slideName = event.target.name;
-    // const slideLabel = event.target.label;
 
     const selectedSlides = this.props.selectedSlide.includes(slideName)
       ? this.props.selectedSlide.filter(name => name !== slideName)
@@ -153,9 +163,10 @@ class SandboxComponent extends React.Component {
 
     // const layerData = [this.props.layerFoundation, ...this.props.layerSlides];
     const layerData = [...this.props.layerSlides];
-    return this.props.isLoading ? (
-      loader
-    ) : (
+    return (
+      // this.props.isLoading ? (
+      // loader
+      // ) : (
       <Sandbox
         layerData={layerData}
         updateFoundation={this.props.setFoundation}
@@ -178,6 +189,7 @@ class SandboxComponent extends React.Component {
         allSlides={this.props.allSlides}
         // foundationMapProps={this.props.foundationMapProps}
         selectedFoundationDatum={this.props.selectedFoundationDatum}
+        areSlidesLoading={this.props.isLoading}
       />
     );
   }

@@ -62,23 +62,26 @@ export const getSlidesData = createSelector(
     // isArray(slides)
     // ? slides.map(slide => sandbox.slides[slide])
     // : [sandbox.slides[slides]]
-    console.log("selector-getSlidesData");
+    console.log("\nselectors");
     console.log("selector-getSlidesData-selectedPackage:", selectedPackage);
     console.log("selector-getSlidesData-selectedSlides:", selectedSlides);
 
-    const [packageMatch]  = sandbox.packages.filter(d => {
+    const [packageMatch] = sandbox.packages.filter(d => {
       return d.displayName === selectedPackage;
     });
     console.log("selector-getSlidesData-packageMatch:", packageMatch);
-    
+
     const selectedSlidesData = packageMatch.layers.map(d => {
-      console.log(d);
-      console.log(selectedSlides.includes(d.name));
+      // console.log(d);
+      // console.log(selectedSlides.includes(d.name));
       return selectedSlides.includes(d.name)
-        ? ({slide: d, defaultSlide: true})
-        : ({slide: d, defaultSlide: false});
-  });
-    console.log("selector-getSlidesData-selectedSlidesData:", selectedSlidesData);
+        ? { slide: d, defaultSlide: true }
+        : { slide: d, defaultSlide: false };
+    });
+    console.log(
+      "selector-getSlidesData-selectedSlidesData:",
+      selectedSlidesData
+    );
 
     return selectedSlidesData;
   }
@@ -134,27 +137,27 @@ export const getLayerSlides = createSelector(
   getSelectedSlidesData,
   getSelectedSlides,
   (slidesData, selectedSlides) => {
-    if (true) {
-      console.log("selector-getLayerSlides-slidesData:", slidesData);
-      console.log("selector-getLayerSlides-selectedSlides:", selectedSlides);
+    console.log("selector-getLayerSlides-slidesData:", slidesData);
+    console.log("selector-getLayerSlides-selectedSlides:", selectedSlides);
 
-      const formattedSliderVizData = slidesData
-        .filter(d => selectedSlides.includes(d.displayName))
-        .map(d => {
-          return [
-            {
-              ...d.visualization.map,
-              data: d.results ? d.results.features : [],
-              layerInfo: d
-            }
-          ];
-        })
-        .reduce((a, b) => a.concat(b), []);
-      console.log("selector-getLayerSlides-formattedSliderVizData:", formattedSliderVizData);
+    const formattedSliderVizData = slidesData
+      .filter(d => selectedSlides.includes(d.displayName))
+      .map(d => {
+        return [
+          {
+            ...d.visualization.map,
+            data: d.results ? d.results.features : [],
+            layerInfo: d
+          }
+        ];
+      })
+      .reduce((a, b) => a.concat(b), []);
+    console.log(
+      "selector-getLayerSlides-formattedSliderVizData:",
+      formattedSliderVizData
+    );
 
-      return formattedSliderVizData;
-    }
-    return [{ data: {} }];
+    return formattedSliderVizData;
   }
 );
 
@@ -173,7 +176,7 @@ export const getLayerFoundation = createSelector(
 );
 
 const makeVisFor = (spec, data) => {
-  const {type} = spec.visualization;
+  const { type } = spec.visualization;
   if (type === "PercentDonut") {
     const val = data.object.properties[spec.field];
     const comparisonName = spec.visualization.comparison_name
@@ -265,15 +268,15 @@ export const getSelectedSlideDatum = createSelector(
     });
 
     const findSlideIndex = slideAttributes.filter(d => {
-      const {primary} = d;
-      const {secondary} = d;
+      const { primary } = d;
+      const { secondary } = d;
       if (primary && secondary) {
         return datumFieldNames.includes(d.primary.field && d.secondary.field);
-      } if (primary) {
+      }
+      if (primary) {
         return datumFieldNames.includes(d.primary.field);
-      } 
-        return false;
-      
+      }
+      return false;
     });
 
     if (findSlideIndex.length < 1) return;
@@ -348,8 +351,7 @@ export const getAllSlides = createSelector(
   getSandboxData,
   getSelectedSlidesData,
   getSelectedSlides,
-  (sandbox, selectedSlidesData, deSelectedSlides) => {
-
+  (sandbox, selectedSlidesData, selectedSlides) => {
     // const allPackageSlideNumbers = isArray(packageData.slides)
     //   ? packageData.slides
     //   : [packageData.slides];
@@ -387,7 +389,7 @@ export const getAllSlides = createSelector(
     //     };
     //   });
     // console.log("selector-getAllSlides-selectedSlide", selectedSlide);
-    console.log("selector-getAllSlides");
+    console.log("\n");
 
     // const allSlides = []//packageData.map(d => d.name === )
     // .layers.map((slide, indx) => {
@@ -402,15 +404,18 @@ export const getAllSlides = createSelector(
     //   };
     // });
 
-    // console.log("selector-getAllSlides-layerSlides:", layerSlides);
+    console.log(
+      "selector-getAllSlides-selectedSlidesData:",
+      selectedSlidesData
+    );
 
     const allSlides = selectedSlidesData.map((s, indx) => {
-      console.log("selector-getAllSlides-slide:", s);
+      // console.log("selector-getAllSlides-slide:", s);
       return {
         slideId: indx,
         endpoint: s.dataEndpoint,
         label: s.displayName,
-        checked: s.results ? true : false,
+        checked: !!selectedSlides.includes(s.displayName),
         color: [220, 20, 60, 255],
         civicColor: s.visualization.map.civicColor,
         mapType: s.visualization.map.mapType

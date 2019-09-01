@@ -57,7 +57,8 @@ const SandboxDrawer = ({
   foundationMapProps,
   onBaseMapStyleChange,
   baseMapStyle,
-  defaultSlides
+  defaultSlides,
+  areSlidesLoading
 }) => {
   return (
     <div css={drawerVisible ? menuOpen : menuClosed}>
@@ -230,89 +231,86 @@ const SandboxDrawer = ({
               margin: 0 10px;
             `)}
             >
-              Slide Layers
+              Data Layers
             </h2>
           </div>
-          {allSlides.map((slide, index) => {
-            // eslint-disable-next-line no-extra-boolean-cast
-            // const selectedSlideData = !!slideData.find(
-            //   slideDatum => slideDatum[slide.label]
-            // )
-            //   ? slideData.find(slideDatum => slideDatum[slide.label])[
-            //       slide.label
-            //     ]
-            //   : {};
-            const defaultGray = [238, 238, 238, 255];
-            const backgroundSlideColor = slide.color;
-            const formatBackgroundColor = arr =>
-              arr.reduce(
-                (acc, cur, i) => (i < 3 ? `${acc + cur},` : `${acc}0.9)`),
-                "rgba("
+
+          {!areSlidesLoading && allSlides ? (
+            allSlides.map((slide, index) => {
+              const defaultGray = [238, 238, 238, 255];
+              const backgroundSlideColor = slide.color;
+              const formatBackgroundColor = arr =>
+                arr.reduce(
+                  (acc, cur, i) => (i < 3 ? `${acc + cur},` : `${acc}0.9)`),
+                  "rgba("
+                );
+              const slideBackGroundColor = formatBackgroundColor(
+                backgroundSlideColor
               );
-            const slideBackGroundColor = formatBackgroundColor(
-              backgroundSlideColor
-            );
-            const blackTextColor = "rgba(0,0,0,1)";
-            const whiteTextColor = "rgba(255,255,255,1)";
-            const textColor =
-              slideBackGroundColor === defaultGray
-                ? blackTextColor
-                : whiteTextColor;
-            return (
-              <div key={shortid.generate()}>
-                <div
-                  css={css(`
-                  border-top: 1px solid #ddd;
-                  padding: .3rem .5rem;
-                  text-transform: capitalize;
-                  font-weight: bold;
-                  background: ${slideBackGroundColor};
-                  color:${textColor}
-                `)}
-                >
-                  <SandboxToggleSwitch
-                    name={slide.label}
-                    checked={slide.checked}
-                    onChange={onChange}
-                    label={slide.label}
-                    mapType={slide.mapType}
-                  />
-                </div>
-                <div
-                  css={css(`
-                  padding: .5rem 0 .5rem 0;
-                  font-size: .75rem;
-                  color: #333;
-                  position: relative;
-                  z-index: ${10 - index};
-                `)}
-                >
-                  {/*slide.checked &&
-                  selectedSlideData.slide_meta &&
-                  selectedSlideData.slide_meta.dates.date_granularity ? (
-                    <SandboxDateSelector
-                      selectedSlideData={selectedSlideData}
-                      slide={slide}
-                      fetchSlideByDate={fetchSlideByDate}
-                      type="slide"
+              const blackTextColor = "rgba(0,0,0,1)";
+              const whiteTextColor = "rgba(255,255,255,1)";
+              const textColor =
+                slideBackGroundColor === defaultGray
+                  ? blackTextColor
+                  : whiteTextColor;
+              return (
+                <div key={shortid.generate()}>
+                  <div
+                    css={css(`
+                    border-top: 1px solid #ddd;
+                    padding: .3rem .5rem;
+                    text-transform: capitalize;
+                    font-weight: bold;
+                    background: ${slideBackGroundColor};
+                    color:${textColor}
+                  `)}
+                  >
+                    <SandboxToggleSwitch
+                      name={slide.label}
+                      checked={slide.checked}
+                      onChange={onChange}
+                      label={slide.label}
+                      mapType={slide.mapType}
                     />
-                  ) : slide.checked &&
+                  </div>
+                  <div
+                    css={css(`
+                    padding: .5rem 0 .5rem 0;
+                    font-size: .75rem;
+                    color: #333;
+                    position: relative;
+                    z-index: ${10 - index};
+                  `)}
+                  >
+                    {/*slide.checked &&
                     selectedSlideData.slide_meta &&
-                    selectedSlideData.slide_meta.dates.default_date_filter ? (
-                    <span
-                      css={css(`
-                          font-size: 18px;
-                          padding: 0 0 0 17px;
-                          margin: 0;
-                        `)}
-                    >
-                      {selectedSlideData.slide_meta.dates.default_date_filter}
-                    </span>
-                  ) : null */}
+                    selectedSlideData.slide_meta.dates.date_granularity ? (
+                      <SandboxDateSelector
+                        selectedSlideData={selectedSlideData}
+                        slide={slide}
+                        fetchSlideByDate={fetchSlideByDate}
+                        type="slide"
+                      />
+                    ) : slide.checked &&
+                      selectedSlideData.slide_meta &&
+                      selectedSlideData.slide_meta.dates.default_date_filter ? (
+                      <span
+                        css={css(`
+                            font-size: 18px;
+                            padding: 0 0 0 17px;
+                            margin: 0;
+                          `)}
+                      >
+                        {selectedSlideData.slide_meta.dates.default_date_filter}
+                      </span>
+                    ) : null */}
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })
+          ) : (
+            <h3>Loading...</h3>
+          )}
         </div>
       )}
     </div>
