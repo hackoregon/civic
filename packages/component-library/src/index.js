@@ -86,6 +86,9 @@ export {
 export {
   default as CivicCardLayoutFullWithDescriptions
 } from "./CivicCard/CivicCardLayoutFullWithDescriptions";
+export {
+  default as CivicCardLayoutPreview
+} from "./CivicCard/CivicCardLayoutPreview";
 export { default as CardDetailPage } from "./CardDetail/CardDetailPage";
 export {
   default as CardDetailPageEmbed
