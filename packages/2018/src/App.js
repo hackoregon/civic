@@ -246,7 +246,7 @@ const routes = {
     },
     {
       path: "cards",
-      component: CardList
+      component: () => <CardList CardRegistry={CardRegistry} />
     },
     {
       path: "cards/:slug/embed",

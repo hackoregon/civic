@@ -127,9 +127,6 @@ const CardList = ({ CardRegistry }) => {
     </div>
   );
 
-  console.log("ENTRY / TAGS / 0", entries[0].component.tags);
-  console.log("ENTRY / TAGS / 1", entries[1].component.tags);
-
   return (
     <div className={classes.root}>
       <CssBaseline />
