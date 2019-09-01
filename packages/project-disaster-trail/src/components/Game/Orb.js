@@ -61,10 +61,13 @@ export default class Orb extends PureComponent {
   }
 
   componentDidMount() {
-    // is this the first render?
+    // If this is the first render
     const { hasAnimated } = this.state;
     const { delay } = this.props;
+
     if (!hasAnimated) {
+      // make the component 0 alpha, smaller, and slightly lower on the screen
+      // and animate it to full opacity, regular size, and to it's correct coordinates
       TweenMax.fromTo(
         this.orbRef.current,
         1,

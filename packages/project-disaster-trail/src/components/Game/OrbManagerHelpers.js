@@ -34,6 +34,16 @@ export function createRandomLayout(kitItems, bounds, config) {
   return orbCollection;
 }
 
+// createFixedLayout is responsible for
+// creating orbModels,
+// laying them out in a grid
+// and setting a `delay` in each orb for sequential animations
+//
+// use `totalGeneratedOrbs` to control how many orbs should be made at once
+// note that this creates `n` number of orbs based on what's found in the kit
+//
+// use `columnsInRow` to define how many columns (ie instances across, remember columns hold things up)
+// the grid will auto populate the number of rows required to display all the orbs
 export function createFixedLayout(
   kitItems,
   bounds,
@@ -70,24 +80,34 @@ export function createFixedLayout(
   // rearranges the orbs so the layout appears random
   orbCollection = sampleSize(orbCollection, orbCollection.length);
 
-  // build a staggered grid of 4 columns, then 3 in the next
-  // if we have 11 items, rows will be 6 and columns will be 3
+  // perform some grid-related calculations to derive
+  // rows (we already know columns from function args),
+  // rowHeight and columnWidth
+  // be sure to account for verticalBuffer
+  // and orbSize (remember orb's 0,0 coordinate is its own top-left, not center of component)
   const rows = Math.ceil(orbCollection.length / columnsInRow);
   const columnWidth =
     (bounds.width - config.verticalBuffer * 2 - config.orbSize / 2) /
     (columnsInRow - 1);
   const rowHeight = (bounds.height - config.verticalBuffer * 2) / rows;
 
+  // for each orb, calculate and assign the x/y coordinates
   for (let i = 0; i < orbCollection.length; i += 1) {
     const orb = orbCollection[i];
 
+    // rowIndex is from 0 (left of container) to columnsInRow (right of container)
     const rowIndex = Math.floor(i / columnsInRow);
+
+    // columnIndex is from 0 (top of container) to rows (bottom of container)
     const columnIndex = i % columnsInRow;
     orb.x =
       config.verticalBuffer + columnIndex * columnWidth - config.orbSize / 2;
     orb.y = config.verticalBuffer + rowIndex * rowHeight - config.orbSize / 2;
+
+    // also pass a delay for sequential animations
     orb.delay = i * 0.05;
 
+    // store the data
     orbCollection[i] = orb;
   }
 
