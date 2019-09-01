@@ -137,25 +137,47 @@ export const getLayerSlides = createSelector(
   getSelectedSlidesData,
   getSelectedSlides,
   (slidesData, selectedSlides) => {
-    console.log("selector-getLayerSlides-slidesData:", slidesData);
+    console.log("\nselector-getLayerSlides-slidesData:", slidesData);
     console.log("selector-getLayerSlides-selectedSlides:", selectedSlides);
+    
+    // const test1 = selectedSlides.map(d => {
+    //   const findSlide = slidesData.find(e => e.displayName === d);
+    //   return findSlide;
+    // });
+    // console.log("selector-getLayerSlides-test1:", test1);
 
-    const formattedSliderVizData = slidesData
-      .filter(d => selectedSlides.includes(d.displayName))
+    // const filteredSliderVizData = slidesData
+    //   .filter(d => selectedSlides.includes(d.displayName));
+    // console.log("selector-getLayerSlides-filteredSliderVizData:", filteredSliderVizData);
+
+    const filteredSliderVizData = selectedSlides.reduce((a,c) => {
+      const findSlide = slidesData.find(e => e.displayName === c);
+      return findSlide ? [...a, findSlide] : a;
+    }, []);
+    console.log("selector-getLayerSlides-filteredSliderVizData:", filteredSliderVizData);
+
+    const formattedSliderVizData = filteredSliderVizData
       .map(d => {
-        return [
-          {
-            ...d.visualization.map,
-            data: d.results ? d.results.features : [],
-            layerInfo: d
-          }
-        ];
-      })
-      .reduce((a, b) => a.concat(b), []);
-    console.log(
-      "selector-getLayerSlides-formattedSliderVizData:",
-      formattedSliderVizData
-    );
+        return {
+          ...d.visualization.map,
+          data: d.results ? d.results.features : [],
+          layerInfo: d
+        };
+      });
+    console.log("selector-getLayerSlides-formattedSliderVizData:", formattedSliderVizData);
+
+    // const formattedSliderVizData = slidesData
+    //   .filter(d => selectedSlides.includes(d.displayName))
+    //   .map(d => {
+    //     return [
+    //       {
+    //         ...d.visualization.map,
+    //         data: d.results ? d.results.features : [],
+    //         layerInfo: d
+    //       }
+    //     ];
+    //   })
+    //   .reduce((a, b) => a.concat(b), []);
 
     return formattedSliderVizData;
   }
