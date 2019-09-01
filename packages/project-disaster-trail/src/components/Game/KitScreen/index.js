@@ -13,7 +13,7 @@ const KitScreen = () => (
     <DurationBar step="Choose supplies" />
     <Ticker text="Ticker tape text that goes across the screen to give instructions" />
     <GUIStyle>
-      <OrbManager />
+      <OrbManager frozenOrbInterface />
     </GUIStyle>
   </>
 );
