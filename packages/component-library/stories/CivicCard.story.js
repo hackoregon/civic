@@ -184,7 +184,7 @@ const sampleCardMetaMissingData = (/* data */) => ({
   analysis: null,
   metadata: null,
   resources: null,
-  authors: []
+  authors: null
 });
 
 const sampleCardMetaSideBySide = data => {
