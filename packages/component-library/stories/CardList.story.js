@@ -4,6 +4,12 @@ import { storiesOf } from "@storybook/react";
 import { checkA11y } from "@storybook/addon-a11y";
 import { CardList } from "../src/index";
 import { storybookStyles } from "./storyStyles";
+import { SampleCard } from "./CivicCardSample";
+
+// const SampleCard_A = SampleCard;
+// SampleCard_A.tags = [
+
+// ];
 
 const CardRegistryMock = {
   tags: {
@@ -20,21 +26,12 @@ const CardRegistryMock = {
     {
       slug: "template-file-card",
       project: "@hackoregon/2019-template",
-      component: { tags: ["Transportation", "Bus", "Rail", "Portland"] }
+      component: SampleCard
     },
     {
       slug: "demo-card",
       project: "@hackoregon/2019-template",
-      component: {
-        tags: [
-          "Transportation",
-          "Housing",
-          "Gentrification",
-          "Transit",
-          "Portland",
-          "Demo"
-        ]
-      }
+      component: SampleCard
     }
   ]
 };

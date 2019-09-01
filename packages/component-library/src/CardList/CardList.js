@@ -11,7 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 // import useMediaQuery from "@material-ui/core/useMediaQuery";
 // import { PageLayout } from "../..";
-import { Checkbox } from "../index";
+import { Checkbox, CivicCardLayoutVisualizationOnly } from "../index";
 
 const drawerWidth = 240;
 const headerHeight = 120;
@@ -66,11 +66,16 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const CardList = ({ CardRegistry }) => {
-  const { tags } = CardRegistry;
+  const { entries, tags } = CardRegistry;
+
+  const initState = {};
+  Object.keys(tags).forEach(tag => {
+    initState[tag] = true;
+  });
   const classes = useStyles();
-  // const isDesktop = useMediaQuery("(min-width:640px)");
   const [mobileOpen, setMobileOpen] = useState(false);
   const theme = useTheme();
+  const [activeTags, setActiveTags] = useState(initState);
 
   function handleDrawerToggle() {
     setMobileOpen(!mobileOpen);
@@ -86,7 +91,13 @@ const CardList = ({ CardRegistry }) => {
           {Object.keys(tags).map(tag => (
             <>
               <li>
-                <Checkbox label={tag} />
+                <Checkbox
+                  value={activeTags[tag]}
+                  label={tag}
+                  onChange={() =>
+                    setActiveTags({ ...activeTags, [tag]: !activeTags[tag] })
+                  }
+                />
               </li>
               {/* <li>{ `#${tag} (${tags[tag]})`}</li> */}
             </>
@@ -95,7 +106,6 @@ const CardList = ({ CardRegistry }) => {
       </div>
     </div>
   );
-
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -147,20 +157,21 @@ const CardList = ({ CardRegistry }) => {
       </nav>
       <main className={classes.content}>
         <Typography variant="h3">Did you know?</Typography>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
-          ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
-          elementum integer enim neque volutpat ac tincidunt. Ornare suspendisse
-          sed nisi lacus sed viverra tellus. Purus sit amet volutpat consequat
-          mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis
-          risus sed vulputate odio. Morbi tincidunt ornare massa eget egestas
-          purus viverra accumsan in. In hendrerit gravida rutrum quisque non
-          tellus orci ac. Pellentesque nec nam aliquam sem et tortor. Habitant
-          morbi tristique senectus et. Adipiscing elit duis tristique
-          sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-          posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography>
+        <div>
+          <ul>
+            {entries
+              // .filter(entry => activeTags.includes(entry.component.tags))
+              .map(entry => (
+                <>
+                  {
+                    <entry.component
+                      Layout={CivicCardLayoutVisualizationOnly}
+                    />
+                  }
+                </>
+              ))}
+          </ul>
+        </div>
       </main>
     </div>
   );

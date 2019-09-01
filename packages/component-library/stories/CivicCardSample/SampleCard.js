@@ -13,4 +13,6 @@ const SampleCard = ({ isLoading, Layout }) => (
   />
 );
 
+SampleCard.tags = sampleCardMeta.tags;
+
 export default SampleCard;
