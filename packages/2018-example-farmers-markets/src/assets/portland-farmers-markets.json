@@ -1,0 +1,384 @@
+{
+  "PortlandFarmersMarketsData": [
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 1,
+        "xcoord": 7639493.924769827,
+        "ycoord": 668024.4915639336,
+        "Market": "Hillsdale Farmers Market",
+        "Location": "SW Capitol Highway and SW Sunset Boulevard",
+        "Day": "Sunday",
+        "Open_Dates": "April 6 - November 18, December 2 and 16",
+        "Open_Times": "9 a.m. - 1 p.m (April-Nov.); December 10 a.m. - 2 p.m.",
+        "Accepts": "cash, credit, debit, and SNAP (up to $10 match)",
+        "Website": "http://www.hillsdalefarmersmarket.com",
+        "status": "Active"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.69361613200346, 45.47806636497596]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 2,
+        "xcoord": 7659589.7099432275,
+        "ycoord": 688714.1375409117,
+        "Market": "Hollywood Farmers Market",
+        "Location": "NE 44th Avenue and Hancock Street",
+        "Day": "Saturday",
+        "Open_Dates": "Year-round",
+        "Open_Times": "8 a.m. - 1 p.m. (April - Sep)\n9 a.m. - 1 p.m. (Oct - Nov); 1st & 3rd Saturdays 9 a.m. - 1 p.m. (Dec - March)",
+        "Accepts": "debit, SNAP ($10 match), and FDNP",
+        "Website": "http://hollywoodfarmersmarket.org/",
+        "status": "Active"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.61741059657074, 45.53626184751855]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 3,
+        "xcoord": 7667868.106142279,
+        "ycoord": 682226.227732533,
+        "Market": "Montavilla Farmers Market",
+        "Location": "7600 SE Stark Street",
+        "Day": "Sunday",
+        "Open_Dates": "May 6th - October 28, November 18, and December 23",
+        "Open_Times": "10 a.m. - 2 p.m.  (May 6th - Oct)  11 a.m. - 1 p.m. (Dec)",
+        "Accepts": "cash, debit, SNAP, and FDNP",
+        "Website": "http://www.montavillamarket.org",
+        "status": "Active"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.58446059496849, 45.51906399210851]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 4,
+        "xcoord": 7650248.18102206,
+        "ycoord": 666264.9987326378,
+        "Market": "Moreland Farmers Market",
+        "Location": "SE Bybee Boulevard and SE 14th Avenue",
+        "Day": "Wednesday",
+        "Open_Dates": "May 2 - October 31",
+        "Open_Times": "2 p.m. - 7 p.m.",
+        "Accepts": "cash, debit, credit, and SNAP ($5-10 match)",
+        "Website": "http://www.morelandfarmersmarket.org",
+        "status": "Active"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.6515213832168, 45.47403540527695]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 5,
+        "xcoord": 7652231.171396536,
+        "ycoord": 675950.292641044,
+        "Market": "People's Farmers Market",
+        "Location": "3029 SE 21st Avenue",
+        "Day": "Wednesday",
+        "Open_Dates": "Year-round",
+        "Open_Times": "2 p.m. - 7 p.m.",
+        "Accepts": "debit, credit, SNAP ($10 match), and FDNP",
+        "Website": "http://www.peoples.coop/farmers-market",
+        "status": "Active"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.64479592126342, 45.50073453596261]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 6,
+        "xcoord": 7641968.749491788,
+        "ycoord": 680442.9505409969,
+        "Market": "Portland Farmers Market at Portland State University",
+        "Location": "South Park Blocks between SW Hall Street and Montgomery Street",
+        "Day": "Saturday",
+        "Open_Dates": "Year-round",
+        "Open_Times": "8:30 a.m. - 2 p.m. (March-October); 9 a.m. - 2 p.m. (Nov - Feburary)",
+        "Accepts": "credit, debit, SNAP, and FDNP",
+        "Website": "http://www.portlandfarmersmarket.org/markets/psu/",
+        "status": "Active"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.68528061237981, 45.51229790814151]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 7,
+        "xcoord": 7671504.482281903,
+        "ycoord": 667982.699002273,
+        "Market": "Lents International Farmers Market",
+        "Location": "SE 92nd and Reedway between Foster and Harold",
+        "Day": "Sunday",
+        "Open_Dates": "June 3 - November 18",
+        "Open_Times": "9 a.m. -  2 p.m.",
+        "Accepts": "debit, credit, SNAP ($10 match), and FDNP",
+        "Website": "http://www.portlandfarmersmarket.org/our-markets/lents-international/",
+        "status": "Active"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.5685218910869, 45.481317272993984]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 8,
+        "xcoord": 7649262.230865956,
+        "ycoord": 686620.1652610168,
+        "Market": "Lloyd Farmers Market",
+        "Location": "NE Holladay Street and NE 7th Avenue",
+        "Day": "Tuesday",
+        "Open_Dates": "Year-round (except July 4, Dec 26 and Jan 2)",
+        "Open_Times": "10 a.m. - 2 p.m.",
+        "Accepts": "cash, debit, credit, SNAP, and FDNP",
+        "Website": "http://lloydfarmersmkt.net",
+        "status": "Active"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.65748240042298, 45.529771487386164]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 9,
+        "xcoord": 7641217.905105045,
+        "ycoord": 675834.5981717453,
+        "Market": "OHSU Farmers Market",
+        "Location": "3181 SW Sam Jackson Park Road",
+        "Day": "Tuesday",
+        "Open_Dates": "June - September",
+        "Open_Times": "10 a.m. - 2 p.m.",
+        "Accepts": "debit, SNAP ($5 match), and FDNP",
+        "Website": "http://www.ohsu.edu/farmersmarket",
+        "status": "Active"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.68772183447007, 45.49960751343774]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 10,
+        "xcoord": 7649197.820923523,
+        "ycoord": 696638.1082030962,
+        "Market": "King Portland Farmers Market",
+        "Location": "NE 7th Avenue and Wygant Street",
+        "Day": "Sunday",
+        "Open_Dates": "May 6 -  November 18",
+        "Open_Times": "10 a.m. - 2 p.m.",
+        "Accepts": "credit, debit, SNAP ($10 match), and FDNP",
+        "Website": "http://www.portlandfarmersmarket.org/markets/king/",
+        "status": "Active"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.65877808277808, 45.55723281765895]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 11,
+        "xcoord": 7624956.688906628,
+        "ycoord": 709262.6341589732,
+        "Market": "St Johns Farmers Market",
+        "Location": "St. Johns Plaza, at N Lombard Street and N Philadelphia Avenue",
+        "Day": "Saturday",
+        "Open_Dates": "May 19 - October 27",
+        "Open_Times": "9 a.m. - 2 p.m.",
+        "Accepts": "cash, debit, credit, and SNAP (up to $10 match)",
+        "Website": "https://www.facebook.com/stjohnsfarmersmarket/",
+        "status": "Active"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.75475583495664, 45.59002866147453]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 12,
+        "xcoord": 7643554.159217894,
+        "ycoord": 682807.6107455868,
+        "Market": "Portland Farmers Market at Pioneer Courthouse Square",
+        "Location": "Pioneer Courthouse Square, 701 SW 6th Avenue",
+        "Day": "Monday",
+        "Open_Dates": "June 18 - August 27",
+        "Open_Times": "10 a.m. - 2 p.m.",
+        "Accepts": "credit, debit, SNAP, and FDNP",
+        "Website": "http://www.portlandfarmersmarket.org/markets/pioneer-square/",
+        "status": "Active"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.67934700007805, 45.51889850300336]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 13,
+        "xcoord": 7658990.216696908,
+        "ycoord": 697072.8397018623,
+        "Market": "Cully Farmers Market",
+        "Location": "NE 42nd between NE Alberta and NE Sumner Street",
+        "Day": "Thursday",
+        "Open_Dates": "June - September",
+        "Open_Times": "4 p.m - 8 p.m. (June - Aug)  4 p.m. - 7 p.m. (Sept)",
+        "Accepts": "Accepts cash and SNAP (up to $10 match)",
+        "Website": "http://www.cullyfarmersmarket.com",
+        "status": "Active"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.62060553123548, 45.55913592518865]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 14,
+        "xcoord": 7659603.028467386,
+        "ycoord": 667754.2661390495,
+        "Market": "Woodstock Farmers Market",
+        "Location": "SE 46th Avenue and Woodstock Boulevard",
+        "Day": "Sunday",
+        "Open_Dates": "June 3 - October 28",
+        "Open_Times": "10 a.m. - 2 p.m.",
+        "Accepts": "cash, debit, credit, SNAP, and FDNP",
+        "Website": "http://www.woodstockmarketpdx.com",
+        "status": "Active"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.61521728165111, 45.478796056096215]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 15,
+        "xcoord": 7645381.201557011,
+        "ycoord": 674814.4745216259,
+        "Market": "South Waterfront Farmers Market",
+        "Location": "3508 SW Moody Avenue",
+        "Day": "Thursday",
+        "Open_Dates": "June - October ",
+        "Open_Times": "2 p.m. - 7 p.m.",
+        "Accepts": "cash, debit, credit, SNAP and FDNP",
+        "Website": "http://www.southwaterfrontfarmersmarket.com",
+        "status": "Active"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.67138343867757, 45.497118650880736]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 16,
+        "xcoord": 7642358.926516663,
+        "ycoord": 706335.1511743842,
+        "Market": "Kenton Portland Farmers Market",
+        "Location": "N McClellan Street and N Denver Avenue",
+        "Day": "Wednesday",
+        "Open_Dates": "June 6  - September 26",
+        "Open_Times": "3 p.m. - 7 p.m.",
+        "Accepts": "cash, credit, debit, SNAP ($10 match), and FDNP",
+        "Website": "http://www.portlandfarmersmarket.org/index.php/markets/kenton/",
+        "status": "Active"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.68649231932385, 45.58331437878709]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 17,
+        "xcoord": 7642762.9318835875,
+        "ycoord": 682104.6706748118,
+        "Market": "Portland Farmers Market at Shemanski Park",
+        "Location": "Shemanski Park between SW Salmon & SW Main Street",
+        "Day": "Wednesday",
+        "Open_Dates": "May 2 - October 31 (closed July 4), November 21",
+        "Open_Times": "10 a.m. - 2 p.m.",
+        "Accepts": "cash, credit, debit, SNAP, and FDNP",
+        "Website": "http://www.portlandfarmersmarket.org/our-markets/shemanski-park/",
+        "status": "Active"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.6823587296288, 45.5169126908241]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 18,
+        "xcoord": 7635179.186648623,
+        "ycoord": 708459.6676228917,
+        "Market": "New Columbia Farmers Market",
+        "Location": "4632 N. Trenton Street",
+        "Day": "Thursday",
+        "Open_Dates": "June - August",
+        "Open_Times": "4 p.m. - 7 p.m.",
+        "Accepts": "credit, debit, SNAP, and FDNP",
+        "Website": "http://villagegardens.org/farmers-market/",
+        "status": "Active"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.71475237403288, 45.58860268304531]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 19,
+        "xcoord": 7649855.4690519245,
+        "ycoord": 702010.5970298824,
+        "Market": "Woodlawn Neighborhood Farmers Market ",
+        "Location": "NE Dekum Street and NE Durham Avenue",
+        "Day": "Saturday",
+        "Open_Dates": "May 20 - October 28",
+        "Open_Times": "10 a.m. - 2 p.m.",
+        "Accepts": "cash, debit, credit, and SNAP",
+        "Website": "http://woodlawnfarmersmarket.squarespace.com/",
+        "status": "Active"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.65677135333287, 45.57201057021076]
+      }
+    }
+  ]
+}

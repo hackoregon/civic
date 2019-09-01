@@ -23,7 +23,7 @@ const infographicImg = css`
   width: 100%;
 `;
 
-export class SignificantStructuralDamage extends Component {
+class SignificantStructuralDamage extends Component {
   componentDidMount() {
     // initialize data here
   }

@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import { getKeyNames } from "../../stories/shared";
 
 const cardMetaObjectProperties = {
   title: PropTypes.string,
@@ -28,12 +27,21 @@ const cardMetaObjectProperties = {
       )
     })
   ),
-  authors: PropTypes.arrayOf(PropTypes.string /* image url */)
+  // authors: PropTypes.arrayOf(PropTypes.string /* image url */)
+  authors: PropTypes.arrayOf(PropTypes.string /* author email */)
 };
 
 export const optionalCardMetaKeys = {
-  metadataQA: true,
-  selector: true
+  selector: true,
+  metadataQA: true
+};
+
+const getKeyNames = obj => {
+  const keyNames = {};
+  Object.keys(obj).forEach(key => {
+    keyNames[key] = key;
+  });
+  return keyNames;
 };
 
 export const cardMetaKeys = getKeyNames(cardMetaObjectProperties);

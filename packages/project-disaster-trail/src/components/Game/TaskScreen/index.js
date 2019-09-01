@@ -1,4 +1,4 @@
-import { memo, useEffect, useState, Fragment } from "react";
+import { memo, useEffect, useState, Fragment, useCallback } from "react";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
 /** @jsx jsx */
@@ -58,7 +58,7 @@ const TaskScreen = ({
   // 2) Vote
   // 3) Move Map
   // 4) Go to step 1
-  const onTimerComplete = () => {
+  const onTimerComplete = useCallback(() => {
     switch (action) {
       case ACTIONS.SOLVING:
         if (activeTask) {
@@ -76,17 +76,20 @@ const TaskScreen = ({
         console.warn("Unknown action in onTimerComplete ", action);
         break;
     }
-  };
+  }, [action, activeTask, completeActiveTask]);
 
-  const startTimer = duration => {
-    timer.setDuration(duration);
-    timer.reset();
-    timer.addCallback((t, p) => {
-      setPercentComplete(p);
-    });
-    timer.addCompleteCallback(() => onTimerComplete());
-    timer.start();
-  };
+  const startTimer = useCallback(
+    duration => {
+      timer.setDuration(duration);
+      timer.reset();
+      timer.addCallback((t, p) => {
+        setPercentComplete(p);
+      });
+      timer.addCompleteCallback(() => onTimerComplete());
+      timer.start();
+    },
+    [onTimerComplete, timer]
+  );
 
   // when the component mounts, start a timer of the active task's time
   useEffect(() => {
@@ -97,7 +100,7 @@ const TaskScreen = ({
     return () => {
       timer.stop();
     };
-  }, [timer, activeTask, action]);
+  }, [timer, activeTask, action, startTimer]);
 
   // start a timer for the _entire_ chapter
   useEffect(() => {
@@ -107,7 +110,7 @@ const TaskScreen = ({
     return () => {
       chapterTimer.stop();
     };
-  }, [chapterTimer]);
+  }, [chapterTimer, endChapter]);
 
   // when an action is complete, what should happen next?
   useEffect(() => {
@@ -134,7 +137,7 @@ const TaskScreen = ({
         console.warn("Unknown action: ", action);
         break;
     }
-  }, [prevActiveTask, activeTask, votingComplete, movingMapComplete]);
+  }, [prevActiveTask, activeTask, votingComplete, movingMapComplete, action]);
 
   // when the user transitions from one action to another,
   // start a timer
@@ -154,7 +157,7 @@ const TaskScreen = ({
           console.log("unknown action ", action);
       }
     }
-  }, [action, prevAction]);
+  }, [action, prevAction, startTimer]);
 
   const onItemSelection = item => {
     // eslint-disable-next-line no-console

@@ -1,10 +1,7 @@
-/* TODO: Fix linting errors */
-/* eslint-disable */
-
-import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router";
-import { css } from "emotion";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 
 const linkClass = css`
   & > a {
@@ -39,7 +36,7 @@ const NavRouterLink = ({ path, customStyles, name }) => {
   const pathTo = pathOrName(path, name);
 
   return (
-    <li className={linkClass} style={{ ...boxStyle }}>
+    <li css={linkClass} style={{ ...boxStyle }}>
       <Link className="nav-item" to={pathTo}>
         <span style={{ ...linkStyle }}>{name}</span>
       </Link>

@@ -1,9 +1,6 @@
-/* TODO: Fix linting errors */
-/* eslint-disable */
-
 import PropTypes from "prop-types";
-import React from "react";
-import { css } from "emotion";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 
 const backgroundColor = "rgb(69, 69, 69)";
 const accentColor = "rgb(237, 73, 91)";
@@ -44,12 +41,16 @@ const packageSelectorClass = css`
   }
 `;
 
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 const PackageSelector = ({ title, description, onClick }) => (
-  <div className={packageSelectorClass} onClick={onClick}>
+  <div css={packageSelectorClass} onClick={onClick}>
     <h2>{title}</h2>
     <p>{description}</p>
   </div>
 );
+/* eslint-enable jsx-a11y/click-events-have-key-events */
+/* eslint-enable jsx-a11y/no-static-element-interactions */
 
 PackageSelector.displayName = "PackageSelector";
 

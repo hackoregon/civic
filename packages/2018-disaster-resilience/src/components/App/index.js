@@ -1,12 +1,21 @@
-/* eslint-disable import/no-named-as-default */
-import React from "react";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 
 import "@hackoregon/component-library/assets/global.styles.css";
-import { PageLayout, PullQuote } from "@hackoregon/component-library";
+import {
+  PageLayout,
+  PullQuote,
+  CivicCardLayoutClassic
+} from "@hackoregon/component-library";
+import ProactivePlanning from "../ProactivePlanning";
 import SignificantStructuralDamage from "../SignificantStructuralDamage";
 import YouAndYourNeighbors from "../YouAndYourNeighbors";
 import WhatYouCanDoToPrepare from "../WhatYouCanDoToPrepare";
-import ProactivePlanning from "../ProactivePlanning";
+
+const sectionMarginMedium = css`
+  display: block;
+  margin: 64px auto;
+`;
 
 const App = () => (
   <PageLayout
@@ -49,7 +58,9 @@ const App = () => (
     </p>
     {/* <IncreasingSocialCapital /> */}
     <PullQuote quoteText="The #1 thing you can do to increase social capital is to meet your neighbors. Do you know 3 people within a 3 block radius of your house?" />
-    <ProactivePlanning />
+    <section className={sectionMarginMedium}>
+      <ProactivePlanning Layout={CivicCardLayoutClassic} />
+    </section>
   </PageLayout>
 );
 

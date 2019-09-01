@@ -3,19 +3,21 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { checkA11y } from "@storybook/addon-a11y";
 
+// DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator import injection
 import badgeStory from "./Badge.story";
 import BarChartStory from "./BarChart.story";
 import baseMapStory from "./BaseMap.story";
 import boundaryMapStory from "./BoundaryMap.story";
 import buttonStory from "./Button.story";
 import checkboxStory from "./Checkbox.story";
+import collapsableStory from "./Collapsable.story";
 import civicCardStory from "./CivicCard.story";
 import civicCardStackStory from "./CivicCardStack.story";
 import civicSandboxDashboardStory from "./CivicSandboxDashboard.story";
 import multiLayerMapStory from "./MultiLayerMap.story";
+import comparisonMapStory from "./ComparisonMap.story";
 import civicStorycardStory from "./CivicStoryCard.story";
 import dataTable from "./DataTable.story";
-import dropdownStory from "./DropdownMenu.story";
 import gradientScaleStory from "./GradientScale.story";
 import headerStory from "./Header.story";
 import heatMapStory from "./HeatMap.story";
@@ -66,6 +68,7 @@ import UIComponentsStyle from "./styleGuideStories/UIComponentsStyle.story";
 // Legacy components used in 2017 package. Not supported for ongoing development.
 // import editableStory from './Editable.story';
 // import landingPage from './LandingPage.story';
+// import dropdownStory from "./DropdownMenu.story";
 
 storiesOf("Welcome|About Us", module)
   .addParameters({ options: { showPanel: false } })
@@ -110,10 +113,10 @@ storiesOf("Component Lib|Basic Inputs", module)
   .add("UI Components Style Guide", () => <UIComponentsStyle />);
 buttonStory();
 checkboxStory();
-dropdownStory();
-selectStory();
 radioButtonGroupStory();
+selectStory();
 sliderStory();
+// DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator story injection
 
 // charts
 storiesOf("Component Lib|Charts", module)
@@ -143,6 +146,7 @@ pathMapStory();
 scatterPlotMapStory();
 screenGridMapStory();
 multiLayerMapStory();
+comparisonMapStory();
 
 // Civic story cards
 storiesOf("Component Lib|Story Cards", module)
@@ -159,6 +163,7 @@ civicCardStackStory();
 badgeStory();
 civicSandboxDashboardStory();
 civicStorycardStory();
+collapsableStory();
 headerStory();
 packageSelectorBox();
 pageLayoutStory();
@@ -171,5 +176,5 @@ cardListStory();
 
 // Legacy components used in 2017 package. Not supported for ongoing development.
 // editableStory();
-// landingPage();
 // sankeyStory();
+// dropdownStory();

@@ -9,6 +9,10 @@ import ProactivePlanning from "./components/ProactivePlanning";
 
 export default [
   {
+    slug: "proactive-planning-for-city-wide-resilience",
+    component: ProactivePlanning
+  },
+  {
     slug: "life-altering-event",
     component: LifeAlteringEvent
   },
@@ -31,9 +35,5 @@ export default [
   {
     slug: "increasing-social-capital",
     component: IncreasingSocialCapital
-  },
-  {
-    slug: "proactive-planning-for-city-wide-resilience",
-    component: ProactivePlanning
   }
 ];

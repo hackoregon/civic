@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import DataChecker from "../utils/DataChecker";
+import DataChecker from "./utils/DataChecker";
 import CivicCardLayoutFull from "./CivicCardLayoutFull";
 import { cardMetaKeys, optionalCardMetaKeys } from "./cardMetaTypes";
 

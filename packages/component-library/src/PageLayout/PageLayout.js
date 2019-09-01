@@ -1,6 +1,6 @@
-import React from "react";
 import PropTypes from "prop-types";
-import { css } from "emotion";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 import Header from "../Navigation/Header";
 import Footer from "../Footer/Footer";
 import CollectionHero from "../Hero/CollectionHero";
@@ -67,7 +67,7 @@ const PageLayout = ({
         mainProjectColor={mainProjectColor}
       />
     )}
-    <div className={defaultStyles}>{children}</div>
+    <div css={defaultStyles}>{children}</div>
     <Footer attribution={attribution} />
   </div>
 );

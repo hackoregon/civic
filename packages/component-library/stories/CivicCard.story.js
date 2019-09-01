@@ -484,11 +484,25 @@ const demoCardMeta = (/* data */) => ({
       ]
     }
   ],
-  // authors likely an array of keys in the future
-  authors: [
-    "https://civicsoftwarefoundation.org/static/human-grid-test-4c90bfc3f316f5d4e104320cb98c43c8.png",
-    "https://civicsoftwarefoundation.org/static/human-grid-test2-ea1849501456af341647068243fc72bb.png"
-  ]
+  authors: [] // No authors so demo is *nice*
+  // // authors likely an array of keys in the future
+  // authors: [
+  //   "https://civicsoftwarefoundation.org/static/human-grid-test-4c90bfc3f316f5d4e104320cb98c43c8.png",
+  //   "https://civicsoftwarefoundation.org/static/human-grid-test2-ea1849501456af341647068243fc72bb.png"
+  // ]
+});
+
+const demoCardMetaMissingData = (/* data */) => ({
+  title: "Demo Card (missing data)",
+  slug: "demo-card-missing-data",
+  introText: <p>Check the console</p>,
+  // visualization gets data, isLoading as props by default
+  visualization: DemoCardVisualization,
+  selector: null,
+  analysis: null,
+  metadata: null,
+  resources: null,
+  authors: []
 });
 
 const demoCardMetaSideBySide = data => {
@@ -510,6 +524,13 @@ export default () =>
     ))
     .add("Layout: Default (full)", () => (
       <CivicCard cardMeta={demoCardMeta} data={demoData} isLoading={false} />
+    ))
+    .add("Layout: Default (full, missing data) check console", () => (
+      <CivicCard
+        cardMeta={demoCardMetaMissingData}
+        data={demoData}
+        isLoading={false}
+      />
     ))
     .add("Layout: Classic", () => (
       <CivicCard

@@ -1,10 +1,11 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable import/no-extraneous-dependencies */
-import React from "react";
+import { Component } from "react";
 import { storiesOf } from "@storybook/react";
 import { withKnobs, boolean } from "@storybook/addon-knobs";
 import { checkA11y } from "@storybook/addon-a11y";
-import { css } from "emotion";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 import {
   BaseMap,
   CivicSandboxMap,
@@ -46,7 +47,7 @@ const createDonutViz = (selectedFoundation, title, propName) => {
   };
 };
 
-class DashboardStory extends React.Component {
+class DashboardStory extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -182,7 +183,7 @@ class DashboardStory extends React.Component {
 
     // Dashboard Description
     const dashboardInformation = (
-      <div className={dashboardDescription}>
+      <div css={dashboardDescription}>
         <h2>
           {
             "How has ridership changed throughout Tri-Met's service area over time?"

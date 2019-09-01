@@ -2,6 +2,8 @@
 
 This is the home of the front-end code for the [CIVIC Platform](http://civicplatform.org/). It's organized in a monorepo using Yarn Workspaces, but it's ok if you don't know what that means yet.
 
+**✨Demo Day⁇✨** _You may notice a lot of references to Demo Day! Our next Demo Day is September 11, 2019 in Portland, OR. [Get tickets!](www.civicsoftwarefoundation.org/#demoday)_
+
 # Let's make this better, together!
 
 Civic magic happens when we work together. We welcome your collaborative contributions. We also have a [more technical contribution guide](https://github.com/hackoregon/civic/blob/master/CONTRIBUTING.md).
@@ -64,49 +66,35 @@ $ cd civic
 $ nvm use
 
 # Installs all package dependencies and links cross-dependencies.
-# Also builds the component library
+# Also builds the component library and mock-wrapper
 $ yarn bootstrap
 
-# This can take a while (approximately 5mins), so grab some coffee☕️, tea🍵 or another beverage of your choosing.
-
-# If you're getting an error like this one: "Your lockfile needs to be updated, but yarn was run with `--frozen-lockfile`",
-# you may consider running
-$ yarn install
-# and then
-$ yarn bootstrap
+# This can take a minute, so take a stretch break (mental or physical)!
 ```
 
-## Setting up your text editor
+## Text editor additions
 
 In order to be the most productive, you’ll want to install some extensions or plug-ins for your text editor. These tools are already installed and configured project wide, so the only installation you’ll need is inside your text editor (don’t `npm install` or `yarn add` them). There are plug-ins or extensions available for the most commonly used editors (VS Code, Sublime Text, Vim, WebStorm, Atom, etc…)
 
-🐸**GENTLE WARNING**🐸: Configuration still in progress. You may encounter linting errors.
-You may want to turn off Prettier and ESLint in your editor for the time being
-
-- EditorConfig — for consistency in settings like indentation line-endings
 - ESLint — to show linting in your editor as you’re coding
 - Prettier — for code formatting in your editor as you’re coding
+- EditorConfig — for consistency in settings like indentation line-endings
 
 ## Working on a single package other than the component library
 
-At this point, Yarn has prepared all packages in the monorepo.
-
 Most developers working in this project will be contributing to one package at a time.
 
-This is the command sequence that will allow you to build/run an individual package every time (for example, the `housing` package)
+This is the command sequence that will allow you to build/run an individual package every time (for example, the `2019-template` package)
 and work on it as if it was a standalone project:
 
 ```bash
-$ cd packages/{package-name} # e.g. cd package/2018-disaster-resilience
+$ cd packages/{package-name} # e.g. cd package/2019-template
 
 # run local project
 $ yarn start
 
-# test local project
-$ yarn test
-
 # watch tests while working on them
-$ yarn test --watch
+$ yarn test:watch
 ```
 
 ## Working on the component library using Storybook
@@ -129,6 +117,25 @@ $ cd packages/component-library
 # rebuild the component library
 $ yarn build
 ```
+
+## Creating a new component
+
+It's as easy as running `yarn component` from the root of the repo. You'll be prompted to name your component. When that's done, it will add new files as seen here:
+
+```
+civic
+└───packages
+    └───component-library
+        └───src
+        │   └───YourNewComponent
+        │           YourNewComponent.js
+        │           YourNewComponent.test.js
+        └───stories
+                YourNewComponent.story.js
+                yourNewComponent.notes.md
+```
+
+It will export `YourNewComponent.js` from `component-library/src/index.js`. It was also set up the `YourNewComponent.story.js` for you in storybook `component-library/stories/index.js`. You can now run `yarn storybook` from the root and see YourNewComponent under BasicInputs/YourNewComponent. You can also run `yarn test` within `component-library/` and see that the YourNewComponent tests all pass. As you develop, make sure to update `YourNewComponent.story.js`, `yourNewComponent.notes.md`, and `YourNewComponent.test.js` so that future developers can easily understand how to use your work and rest easy that it is well tested!
 
 ## Creating a new card
 
@@ -217,10 +224,10 @@ There are three types of packages right now:
 
 ### Packages
 
-Every package has its own README with further details on what the package is for and how it works. We'll be adding some new packages for the 2019 project season.
+Every package has its own README with further details on what the package is for and how it works. New packages in development for the 2019 project season.
 
 - Year Packages
-  - [2018](packages/2018/README.md)
+  - [2018](packages/2018/README.md) <- despite the name, this package powers [civicplatform.org](civicplatform.org) in 2019 and beyond.
   - [2017](packages/2017/README.md)
 - Project Packages
   - [2018-neighborhood-development](packages/2018-neighborhood-development/README.md)
@@ -235,7 +242,6 @@ Every package has its own README with further details on what the package is for
   - [housing](packages/housing/README.md)
   - [transportation](packages/transportation/README.md)
 - Utilities
-
   - [civic-sandbox](packages/civic-sandbox/README.md)
   - [civic-babel-presets](packages/civic-babel-presets/README.md)
   - [component-library](packages/component-library/README.md)
