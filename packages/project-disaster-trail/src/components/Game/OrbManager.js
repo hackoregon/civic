@@ -151,51 +151,43 @@ const OrbManager = ({
       }
 
       // is it offscreen?
-      if (currentOrb.x < -ORB_CONFIG.orbSize) {
-        currentOrb.x += bounds.width;
-      }
-
-      if (currentOrb.x > bounds.width) {
-        currentOrb.x -= bounds.width + ORB_CONFIG.orbSize;
-      }
-
-      if (currentOrb.y < -ORB_CONFIG.orbSize) {
-        if (isOrbCompleted) {
-          // eslint-disable-next-line no-continue
-          continue;
+      if (!isOrbCompleted) {
+        if (currentOrb.x < -ORB_CONFIG.orbSize) {
+          currentOrb.x += bounds.width;
         }
 
-        currentOrb.y += bounds.height;
-      }
-
-      if (currentOrb.y > bounds.height) {
-        if (isOrbCompleted) {
-          // eslint-disable-next-line no-continue
-          continue;
+        if (currentOrb.x > bounds.width) {
+          currentOrb.x -= bounds.width + ORB_CONFIG.orbSize;
         }
 
-        // keep the orb within vertical bounds
-        if (!isOrbCompleted) {
-          if (currentOrb.y < ORB_CONFIG.verticalBuffer)
-            currentOrb.y = ORB_CONFIG.verticalBuffer;
-          if (
-            currentOrb.y >
-            bounds.height - ORB_CONFIG.verticalBuffer - ORB_CONFIG.orbSize
-          )
-            currentOrb.y =
-              bounds.height - ORB_CONFIG.verticalBuffer - ORB_CONFIG.orbSize;
+        if (currentOrb.y < -ORB_CONFIG.orbSize) {
+          currentOrb.y += bounds.height;
+        }
 
-          // apply a 'force' that pulls the orbs vertically towards the center of the screen
-          const distanceFromCenter = currentOrb.y - centerY;
-          // if the orb is far enough away from the vertical center,
-          // the further the orb is from the center,
-          // the larger the distance
-          // and the greater the 'pull' towards the center
-          if (Math.abs(distanceFromCenter) > 80) {
-            currentOrb.y += -distanceFromCenter * 0.02;
+        if (currentOrb.y > bounds.height) {
+          // keep the orb within vertical bounds
+          if (!isOrbCompleted) {
+            if (currentOrb.y < ORB_CONFIG.verticalBuffer)
+              currentOrb.y = ORB_CONFIG.verticalBuffer;
+            if (
+              currentOrb.y >
+              bounds.height - ORB_CONFIG.verticalBuffer - ORB_CONFIG.orbSize
+            )
+              currentOrb.y =
+                bounds.height - ORB_CONFIG.verticalBuffer - ORB_CONFIG.orbSize;
+
+            // apply a 'force' that pulls the orbs vertically towards the center of the screen
+            const distanceFromCenter = currentOrb.y - centerY;
+            // if the orb is far enough away from the vertical center,
+            // the further the orb is from the center,
+            // the larger the distance
+            // and the greater the 'pull' towards the center
+            if (Math.abs(distanceFromCenter) > 80) {
+              currentOrb.y += -distanceFromCenter * 0.02;
+            }
+
+            currentOrb.y = Math.round(currentOrb.y * 10) / 10;
           }
-
-          currentOrb.y = Math.round(currentOrb.y * 10) / 10;
         }
       }
 

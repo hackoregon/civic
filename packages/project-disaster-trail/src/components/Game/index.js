@@ -75,7 +75,11 @@ export const MapStyle = styled(Panel)`
 
 export const GUIStyle = styled(Panel)`
   display: block;
+  position: relative;
   background: pink;
+  /* uncomment for orbs to be on top of other elements */
+  /* overflow: visible; */
+  /* z-index: 101; */
 `;
 
 Game.propTypes = {
