@@ -32,6 +32,8 @@
     "lint": "eslint src"
   },
   "dependencies": {
+    "reduxful": "^1.2.2",
+    "cross-fetch": "^3.0.4",
     "@emotion/core": "^10.0.10",
     "@hackoregon/component-library": "^4.0.0",
     "@hackoregon/dev-server": "^3.0.0",
