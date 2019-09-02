@@ -38,6 +38,14 @@ const BlackPopulationChangeVisualization = ({ isLoading, data }) => {
   return (
     data && (
       <div>
+        <strong>
+          Visualization TODO:
+          <ul>
+            <li>Make this a single composite map with a slider</li>
+            <li>Add a map legend once they exist</li>
+            <li>Should we use tooltips?</li>
+          </ul>
+        </strong>
         <ChartContainer
           title="Black Population Share by Census Tract, 1990"
           subtitle="subtitle"

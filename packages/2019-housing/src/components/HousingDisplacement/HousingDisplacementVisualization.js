@@ -18,6 +18,13 @@ const HousingDisplacementVisualization = ({ isLoading, data }) => {
 
   return (
     <Fragment>
+      <strong>
+        Visualization TODO:
+        <ul>
+          <li>Make these side by side instead of stacked</li>
+          <li>Add more context about what the slider is doing</li>
+        </ul>
+      </strong>
       <div
         css={css`
           display: flex;
