@@ -26,5 +26,15 @@ export default {
     rgb: "rgb(243,242,243)",
     rgba: "rgba(243,242,243,1)",
     hex: "#F3F2F3"
+  },
+  action: {
+    rgb: "rgb(30,98,189)",
+    rgba: "rgba(30,98,189,1)",
+    hex: "#1E62BD"
+  },
+  background: {
+    rgb: "rgb(255,254,254)",
+    rgba: "rgba(255,254,254,1)",
+    hex: "#FFFEFE"
   }
 };

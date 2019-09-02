@@ -1,5 +1,5 @@
 // Use with emotion's Global component
-
+import colors from "./BrandColors";
 /* Add all of this and BRANDING to theme for 2018 */
 export default {
   /* Base */
@@ -27,14 +27,14 @@ export default {
   },
 
   a: {
-    color: "#1e62bd",
+    color: colors.action,
     textDecoration: "none",
     cursor: "pointer",
     opacity: "0.9",
     transition: "all 0.25s ease-in-out",
 
     ":hover": {
-      color: "#1e62bd",
+      color: colors.action,
       textDecoration: "none",
       cursor: "pointer",
       opacity: 1
