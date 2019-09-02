@@ -36,8 +36,7 @@ export const getFoundationError = getSandboxProperty("foundationError");
 export const getSelectedPackage = getSandboxProperty("selectedPackage");
 export const getPackages = getSandboxProperty("packages");
 export const getSlidesSuccess = getSandboxProperty("slidesSuccess");
-export const isAnyError =
-  getSandboxProperty("foundationError") || getSandboxProperty("slidesError");
+export const isAnyError = getSandboxProperty("slidesError");
 export const getSelectedFoundation = getSandboxProperty("selectedFoundation");
 export const getSelectedSlides = getSandboxProperty("selectedSlide");
 // export const isAllSandboxLoading = isFoundationLoading || areSlidesLoading;

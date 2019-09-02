@@ -146,7 +146,9 @@ const reducer = (state = INITIAL_STATE, action) => {
         // slidesData
       };
     }
-    case SLIDES_FAILURE:
+    case SLIDES_FAILURE: {
+      console.log("a-SLIDES_FAILURE");
+      console.log("a-payload:", action.payload);
       return {
         ...state,
         slidesPending: false,
@@ -155,6 +157,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         selectedFoundationDatum: null,
         selectedSlideDatum: null
       };
+    }
     case SET_PACKAGE:
       console.log("a-SET_PACKAGE:", action);
       return {

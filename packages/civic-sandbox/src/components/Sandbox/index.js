@@ -44,7 +44,7 @@ class SandboxComponent extends React.Component {
   constructor(props) {
     super();
     this.state = {
-      drawerVisible: false
+      drawerVisible: true
     };
     this.updateSlide = this.updateSlide.bind(this);
     this.toggleDrawer = this.toggleDrawer.bind(this);
@@ -143,23 +143,23 @@ class SandboxComponent extends React.Component {
       font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
     `);
 
-    const loadingContainer = css`
-      display: flex;
-      height: 300px;
-    `;
-    const loading = css`
-      font-size: 1.5rem;
-      margin: auto;
-      text-align: center;
-      font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
-    `;
-    const loader = (
-      <div className={loadingContainer}>
-        <div className={loading}>
-          <Logo type="squareLogoAnimated" alt="Loading..." />
-        </div>
-      </div>
-    );
+    // const loadingContainer = css`
+    //   display: flex;
+    //   height: 300px;
+    // `;
+    // const loading = css`
+    //   font-size: 1.5rem;
+    //   margin: auto;
+    //   text-align: center;
+    //   font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
+    // `;
+    // const loader = (
+    //   <div className={loadingContainer}>
+    //     <div className={loading}>
+    //       <Logo type="squareLogoAnimated" alt="Loading..." />
+    //     </div>
+    //   </div>
+    // );
 
     // const layerData = [this.props.layerFoundation, ...this.props.layerSlides];
     const layerData = [...this.props.layerSlides];
@@ -190,6 +190,7 @@ class SandboxComponent extends React.Component {
         // foundationMapProps={this.props.foundationMapProps}
         selectedFoundationDatum={this.props.selectedFoundationDatum}
         areSlidesLoading={this.props.isLoading}
+        errors={this.props.isError}
       />
     );
   }

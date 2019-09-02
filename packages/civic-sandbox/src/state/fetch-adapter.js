@@ -98,7 +98,10 @@ export const fetchAllSlidesAdapter = (
             );
             return layerData;
           })
-        );
+        ).catch(err => {
+          dispatch(failure(err));
+        });
+
       })
       // .then(d2 => {
       //   console.log("d2:", d2);
@@ -118,9 +121,9 @@ export const fetchAllSlidesAdapter = (
       //   return res;
       // })
       // )
-      .catch(err => {
-        dispatch(failure(err));
-      })
+      // .catch(err => {
+      //   dispatch(failure(err));
+      // })
   );
 };
 
