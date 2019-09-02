@@ -8,13 +8,10 @@ import youAndYourNeighborsGorillaMeta from "./youAndYourNeighborsGorillaMeta";
 import api from "../../state/you-and-your-neighbors-gorilla/api";
 
 const YouAndYourNeighborsGorilla = ({ init, data, Layout }) => {
-  useEffect(
-    () => {
-      init();
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    },
-    [init]
-  );
+  useEffect(() => {
+    init();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [init]);
 
   return (
     <CivicCard
@@ -33,18 +30,22 @@ YouAndYourNeighborsGorilla.propTypes = {
   Layout: PropTypes.func
 };
 
+const mapStateToProps = state => ({
+  data: {
+    disasterNeighborhoodGrid: api.selectors.getYouAndYourNeighbors(
+      state.package2018DisasterResilience || state
+    )
+  }
+  // state.packageProjectName || state needed to make work in the project package and 2018 package
+});
+
+const mapDispatchToProps = dispatch => ({
+  init() {
+    dispatch(api.actionCreators.getYouAndYourNeighbors());
+  }
+});
+
 export default connect(
-  state => ({
-    data: {
-      disasterNeighborhoodGrid: api.selectors.getYouAndYourNeighbors(
-        state.package2018DisasterResilience || state
-      )
-    }
-    // state.packageProjectName || state needed to make work in the project package and 2018 package
-  }),
-  dispatch => ({
-    init() {
-      dispatch(api.actionCreators.getYouAndYourNeighbors());
-    }
-  })
+  mapStateToProps,
+  mapDispatchToProps
 )(YouAndYourNeighborsGorilla);
