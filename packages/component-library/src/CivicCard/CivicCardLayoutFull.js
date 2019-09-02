@@ -146,24 +146,32 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
             </section>
           </Fragment>
         )}
-        <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
-        <section css={[sectionMarginSmall, sectionMaxWidthSmall]} id="authors">
-          <h2>Who made this?</h2>
-          {cardMeta.authors.length
-            ? cardMeta.authors.map(authorEmail => (
-                <p key={authorEmail}>
-                  <a href={`mailto:${authorEmail}`}>{authorEmail}</a>
-                </p>
-              ))
-            : demoAuthorPhotos.map(photo => (
-                <img
-                  css={authorPhoto}
-                  src={photo}
-                  alt="Pictures of people who worked on this"
-                  key={generate()}
-                />
-              ))}
-        </section>
+        {((cardMeta.authors && cardMeta.authors === "demo") ||
+          (cardMeta.authors && cardMeta.authors.length > 0)) && (
+          <Fragment>
+            <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
+            <section
+              css={[sectionMarginSmall, sectionMaxWidthSmall]}
+              id="authors"
+            >
+              <h2>Who made this?</h2>
+              {cardMeta.authors === "demo"
+                ? demoAuthorPhotos.map(photo => (
+                    <img
+                      css={authorPhoto}
+                      src={photo}
+                      alt="Pictures of people who worked on this"
+                      key={generate()}
+                    />
+                  ))
+                : cardMeta.authors.map(authorEmail => (
+                    <p key={authorEmail}>
+                      <a href={`mailto:${authorEmail}`}>{authorEmail}</a>
+                    </p>
+                  ))}
+            </section>
+          </Fragment>
+        )}
         <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
         <section css={[sectionMarginSmall, sectionMaxWidthSmall]} id="improve">
           <h2>Help make this better</h2>
