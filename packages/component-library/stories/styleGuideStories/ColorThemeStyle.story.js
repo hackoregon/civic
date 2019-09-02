@@ -36,7 +36,7 @@ const ColorThemeStyle = () => (
         <p className="DataText">Hex: {BrandColors.secondary.hex}</p>
         <p className="DataText">{BrandColors.secondary.rgb} </p>
         <p className="DataText">
-          Used in the logo and for the action color in the platform.
+          Used in the logo and for an accent color in the platform.
         </p>
       </div>
     </div>
@@ -86,6 +86,20 @@ const ColorThemeStyle = () => (
         <p className="DataText">
           Used in logo and action color within the platform.
         </p>
+      </div>
+    </div>
+
+    <div style={storybookStyles.solidColorSample}>
+      <div
+        style={Object.assign({}, storybookStyles.colorBlock, {
+          backgroundColor: BrandColors.action.rgba
+        })}
+      />
+      <div>
+        <h4>Action</h4>
+        <p className="DataText">Hex: {BrandColors.action.hex}</p>
+        <p className="DataText">{BrandColors.action.rgb} </p>
+        <p className="DataText">Used for action color within the platform.</p>
       </div>
     </div>
 
