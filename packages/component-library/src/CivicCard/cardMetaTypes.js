@@ -27,7 +27,6 @@ const cardMetaObjectProperties = {
       )
     })
   ),
-  // authors: PropTypes.arrayOf(PropTypes.string /* image url */)
   authors: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.string /* author email */),
     PropTypes.oneOf(["Demo"])
