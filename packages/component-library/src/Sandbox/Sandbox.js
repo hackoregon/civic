@@ -48,7 +48,8 @@ const Sandbox = ({
   allSlides,
   foundationMapProps,
   selectedFoundationDatum,
-  areSlidesLoading
+  areSlidesLoading,
+  errors
 }) => {
   const [baseMapStyle, setBaseMapStyle] = useState("dark");
 
@@ -97,6 +98,7 @@ const Sandbox = ({
           onBaseMapStyleChange={handleBaseMapStyleChange}
           baseMapStyle={baseMapStyle}
           areSlidesLoading={areSlidesLoading}
+          errors={errors}
         />
       </div>
       <div css={baseMapWrapper}>

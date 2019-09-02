@@ -9,6 +9,7 @@ import SandboxDateSelector from "./SandboxDateSelector";
 import SandboxToggleSwitch from "./SandboxToggleSwitch";
 import SandboxMapLegend from "./SandboxMapLegend";
 import SandboxBaseMapSelector from "./SandboxBaseMapSelector";
+import Logo from "../Logo/Logo";
 
 const menuOpen = css(`
   position: absolute;
@@ -40,6 +41,19 @@ const menuClosed = css(`
   }
 `);
 
+const loadingContainer = css`
+  display: flex;
+  height: 250px;
+  width: 100%;
+  margin: auto;
+`;
+const loading = css`
+  font-size: 2rem;
+  margin: auto;
+  text-align: center;
+  font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
+`;
+
 const SandboxDrawer = ({
   data,
   onChange,
@@ -58,8 +72,16 @@ const SandboxDrawer = ({
   onBaseMapStyleChange,
   baseMapStyle,
   defaultSlides,
-  areSlidesLoading
+  areSlidesLoading,
+  errors
 }) => {
+  const loader = (
+    <div css={loadingContainer}>
+      <div css={loading}>
+        <Logo type="squareLogoAnimated" alt="Loading..." />
+      </div>
+    </div>
+  );
   return (
     <div css={drawerVisible ? menuOpen : menuClosed}>
       <div onClick={toggleDrawer}>
@@ -309,8 +331,12 @@ const SandboxDrawer = ({
               );
             })
           ) : (
-            <h3>Loading...</h3>
+            loader
           )}
+          { errors
+            ? <p>There was an error fetching the data...</p>
+            : null
+          }
         </div>
       )}
     </div>
