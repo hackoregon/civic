@@ -1,10 +1,15 @@
 import { Fragment } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
 import { resourceShape } from "reduxful/react-addons";
 import { isLoaded } from "reduxful";
 import { BaseMap, IconMap, ChartTitle } from "@hackoregon/component-library";
+
+import api from "../../state/you-and-your-neighbors-gorilla/api";
+import { youAndYourNeighborsSetCoords } from "../../state/you-and-your-neighbors-gorilla/local-api";
+import CoordsShakingInformation from "./CoordsShakingInformation";
 import {
   poiIconZoomScale,
   poiGetIconColor,
@@ -40,13 +45,44 @@ const mapGLOptions = {
   keyboard: false
 };
 
-const YouAndYourNeighborsGorillaVisualization = ({ data }) => {
-  const isLoading = !isLoaded(data.disasterNeighborhoodGrid);
+const YouAndYourNeighborsGorillaVisualization = ({
+  data,
+  setCoordinates,
+  selectedCoords,
+  coordsData
+}) => {
+  const isLoadingGrid = !isLoaded(data.disasterNeighborhoodGrid);
+  const coordsLoaded = isLoaded(coordsData);
   const disasterNeighborhoodGrid =
-    !isLoading && data.disasterNeighborhoodGrid.value;
+    !isLoadingGrid && data.disasterNeighborhoodGrid.value;
+
+  const geocoderChange = viewport => {
+    const stringCoordinates = {
+      latitude: viewport.latitude.toPrecision(6),
+      longitude: viewport.longitude.toPrecision(6)
+    };
+    const floatCoordinates = {
+      latitude: parseFloat(stringCoordinates.latitude),
+      longitude: parseFloat(stringCoordinates.longitude)
+    };
+    setCoordinates(stringCoordinates, floatCoordinates);
+  };
+
+  let coordsProperties = null;
+  let noCoordsData = null;
+  if (coordsLoaded) {
+    const { results } = coordsData.value;
+
+    coordsProperties =
+      results.features &&
+      results.features.length > 0 &&
+      results.features[0].properties;
+    noCoordsData = results.features && results.features.length < 1;
+  }
+
   return (
     <Fragment>
-      {!isLoading && data && (
+      {!isLoadingGrid && data && (
         <Fragment>
           <ChartTitle
             title="Your Personalized Earthquake Map"
@@ -54,15 +90,15 @@ const YouAndYourNeighborsGorillaVisualization = ({ data }) => {
           />
           <div css={mapContainer}>
             <BaseMap
-              // initialLongitude={selectedCoords.longitude}
-              // initialLatitude={selectedCoords.latitude}
+              initialLongitude={selectedCoords.longitude}
+              initialLatitude={selectedCoords.latitude}
               initialZoom={ZOOM}
               navigation={false}
               locationMarker
-              // locationMarkerCoord={selectedCoords}
-              // geocoder
-              // geocoderOptions={geocoderOptions}
-              // geocoderOnChange={geocoderChange}
+              locationMarkerCoord={selectedCoords}
+              geocoder
+              geocoderOptions={geocoderOptions}
+              geocoderOnChange={geocoderChange}
               mapGLOptions={mapGLOptions}
             >
               {disasterNeighborhoodGrid && (
@@ -85,6 +121,19 @@ const YouAndYourNeighborsGorillaVisualization = ({ data }) => {
               )}
             </BaseMap>
           </div>
+          {noCoordsData && (
+            <p>
+              {`We don't have complete information for your address. ${(
+                <a href="https://civicplatform.org/">
+                  Learn more about how your city can work to get their data in
+                  Civic.
+                </a>
+              )}`}
+            </p>
+          )}
+          {coordsProperties && (
+            <CoordsShakingInformation coordsProperties={coordsProperties} />
+          )}
         </Fragment>
       )}
     </Fragment>
@@ -92,7 +141,41 @@ const YouAndYourNeighborsGorillaVisualization = ({ data }) => {
 };
 
 YouAndYourNeighborsGorillaVisualization.propTypes = {
-  data: PropTypes.shape({ disasterNeighborhoodGrid: resourceShape })
+  data: PropTypes.shape({ disasterNeighborhoodGrid: resourceShape }),
+  selectedCoords: PropTypes.shape({
+    latitude: PropTypes.number,
+    longitude: PropTypes.number
+  }),
+  setCoordinates: PropTypes.func,
+  coordsData: PropTypes.shape({})
 };
 
-export default YouAndYourNeighborsGorillaVisualization;
+const mapStateToProps = state => {
+  const applicableState = state.package2018DisasterResilience || state;
+  const { selectedCoords } = applicableState.youAndYourNeighborsLocalData;
+  const stringCoordinates = {
+    latitude: selectedCoords.latitude.toString(),
+    longitude: selectedCoords.longitude.toString()
+  };
+  return {
+    coordsData: api.selectors.getYouAndYourNeighborsCoords(
+      applicableState,
+      stringCoordinates
+    ),
+    selectedCoords
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  setCoordinates(stringCoordinates = {}, floatCoordinates = {}) {
+    dispatch(
+      api.actionCreators.getYouAndYourNeighborsCoords(stringCoordinates)
+    );
+    dispatch(youAndYourNeighborsSetCoords(floatCoordinates));
+  }
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(YouAndYourNeighborsGorillaVisualization);
