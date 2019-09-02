@@ -14,12 +14,12 @@ import {
   RadioButtonGroup
 } from "@hackoregon/component-library";
 
-const RACE_MAP = {
+const RACE_DATA_MAP = {
   black: "lq_black_brks",
   white: "lq_white_brks",
   multi: "lq_multi_brks",
-  asian: "lq_aian_brks",
-  hispanic: "lq_hisp_brks",
+  aian: "lq_aian_brks",
+  hisp: "lq_hisp_brks",
   api: "lq_api_brks"
 };
 
@@ -28,7 +28,7 @@ const HomeLoanApprovalsVisualization = ({ isLoading, data }) => {
 
   if (isLoading) return <div>Data Loading...</div>;
 
-  const polygonFieldName = RACE_MAP[race];
+  const polygonFieldName = RACE_DATA_MAP[race];
   const totalLoans = at(data.totalLoans, "value.results.features")[0];
   const colorScale = scaleOrdinal(schemeCategory10)
     .domain([
@@ -100,7 +100,7 @@ const HomeLoanApprovalsVisualization = ({ isLoading, data }) => {
           >
             <RadioButtonGroup
               grpLabel="Race"
-              labels={Object.keys(RACE_MAP)}
+              labels={Object.keys(RACE_DATA_MAP)}
               onChange={e => setRace(e.target.value)}
               value={race}
             />
