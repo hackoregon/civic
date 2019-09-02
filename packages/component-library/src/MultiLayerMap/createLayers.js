@@ -93,8 +93,8 @@ const createDiscreteScale = (categories, colorRange) => {
   const range = createRange("", colorRange);
   return scaleOrdinal()
     .domain(categories)
-    .range(range)
-    .unknown([255, 255, 255, 128]);
+    .range(range);
+    // .unknown([255, 255, 255, 128]);
 };
 
 export const createColorScale = (
