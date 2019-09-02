@@ -84,10 +84,10 @@ const App = () => (
         <HousingDisplacement Layout={CivicCardLayoutClassic} />
       </section>
       <section className={sectionMarginMedium}>
-        <BlackPopulationChange Layout={CivicCardLayoutClassic} />
+        <HomeLoanApprovals Layout={CivicCardLayoutClassic} />
       </section>
       <section className={sectionMarginMedium}>
-        <HomeLoanApprovals Layout={CivicCardLayoutClassic} />
+        <BlackPopulationChange Layout={CivicCardLayoutClassic} />
       </section>
     </PageLayout>
   </Fragment>

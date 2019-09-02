@@ -13,35 +13,13 @@ import {
 const BlackPopulationChangeVisualization = ({ isLoading, data }) => {
   if (isLoading) return <div>Data Loading...</div>;
 
-  const featuresData = at(data.ncdbCensusTractMap.value, "results.features")[0];
   const polygonFieldName = "blackshare";
-
-  // --- 1990 ---
-  const housingData1990 = at(data.ncdbYearly1990.value, "results")[0];
-  const mergedData1990 = featuresData.map(feature => ({
-    ...feature,
-    properties: {
-      ...feature.properties,
-      housing: housingData1990.find(
-        el => el.fips_code === parseInt(feature.properties.fips, 10)
-      )
-    }
-  }));
-  // --- 2017 ---
-  const housingData2017 = at(data.ncdbYearly2017.value, "results")[0];
-  const mergedData2017 = featuresData.map(feature => ({
-    ...feature,
-    properties: {
-      ...feature.properties,
-      housing: housingData2017.find(
-        el => el.fips_code === parseInt(feature.properties.fips, 10)
-      )
-    }
-  }));
+  const housingData1990 = at(data.ncdbYearly1990, "value.results.features")[0];
+  const housingData2017 = at(data.ncdbYearly2017, "value.results.features")[0];
 
   // --- shared color scale ---
-  const findDataMinMax = extent([...mergedData1990, ...mergedData2017], f =>
-    parseFloat(f.properties.housing[polygonFieldName])
+  const findDataMinMax = extent([...housingData1990, ...housingData2017], f =>
+    parseFloat(f.properties[polygonFieldName])
   );
   const colorScale = scaleQuantize()
     .domain(findDataMinMax)
@@ -57,13 +35,6 @@ const BlackPopulationChangeVisualization = ({ isLoading, data }) => {
       [1, 70, 54]
     ]);
 
-  console.log("✨✨✨", {
-    featuresData,
-    data,
-    housingData1990,
-    mergedData1990
-  });
-
   return (
     data && (
       <div>
@@ -73,10 +44,8 @@ const BlackPopulationChangeVisualization = ({ isLoading, data }) => {
         >
           <BaseMap initialZoom={9.9} updateViewport={false}>
             <MapOverlay
-              data={mergedData1990}
-              getFillColor={f =>
-                colorScale(f.properties.housing[polygonFieldName])
-              }
+              data={housingData1990}
+              getFillColor={f => colorScale(f.properties[polygonFieldName])}
               onLayerClick={() => {}}
             />
           </BaseMap>
@@ -88,10 +57,8 @@ const BlackPopulationChangeVisualization = ({ isLoading, data }) => {
         >
           <BaseMap initialZoom={9.9} updateViewport={false}>
             <MapOverlay
-              data={mergedData2017}
-              getFillColor={f =>
-                colorScale(f.properties.housing[polygonFieldName])
-              }
+              data={housingData2017}
+              getFillColor={f => colorScale(f.properties[polygonFieldName])}
               onLayerClick={() => {}}
             />
           </BaseMap>
@@ -105,8 +72,7 @@ BlackPopulationChangeVisualization.propTypes = {
   isLoading: PropTypes.bool,
   data: PropTypes.shape({
     ncdbYearly1990: resourceShape,
-    ncdbYearly2017: resourceShape,
-    ncdbCensusTractMap: resourceShape
+    ncdbYearly2017: resourceShape
   })
 };
 

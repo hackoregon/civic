@@ -11,12 +11,6 @@ const apiDesc = {
     // you can apply any needed data transformations to value here
     // if complex, separate tranformation function to another file
     dataTransform: data => data
-  },
-  getNcdbCensusTractMap: {
-    url: `${HOST}/sandbox/api/PdxMsa2010CensusTracts/`,
-    // you can apply any needed data transformations to value here
-    // if complex, separate tranformation function to another file
-    dataTransform: data => data
   }
 };
 

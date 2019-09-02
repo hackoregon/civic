@@ -20,9 +20,7 @@ const BlackPopulationChange = ({ init, data, Layout }) => {
   ]);
 
   const loading =
-    !isLoaded(data.ncdbYearly1990) ||
-    !isLoaded(data.ncdbYearly2017) ||
-    !isLoaded(data.ncdbCensusTractMap);
+    !isLoaded(data.ncdbYearly1990) || !isLoaded(data.ncdbYearly2017);
 
   return (
     <CivicCard
@@ -40,7 +38,7 @@ BlackPopulationChange.propTypes = {
   init: PropTypes.func,
   data: PropTypes.shape({
     ncdbYearly1990: resourceShape,
-    ncdbCensusTractMap: resourceShape
+    ncdbYearly2017: resourceShape
   }),
   Layout: PropTypes.func
 };
@@ -63,10 +61,6 @@ export default connect(
           metroname: "Portland-Vancouver-Hillsboro, OR-WA",
           year: 2017
         }
-      ),
-      ncdbCensusTractMap: api.selectors.getNcdbCensusTractMap(
-        state.package2019Housing || state,
-        { limit: 500 }
       )
     }
     // state.packageProjectName || state needed to make work in the project package and 2018 package
@@ -85,11 +79,6 @@ export default connect(
           limit: 500,
           metroname: "Portland-Vancouver-Hillsboro, OR-WA",
           year: 2017
-        })
-      );
-      dispatch(
-        api.actionCreators.getNcdbCensusTractMap({
-          limit: 500
         })
       );
     }
