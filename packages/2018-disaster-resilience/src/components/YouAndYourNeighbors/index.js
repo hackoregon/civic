@@ -61,7 +61,7 @@ const mapGLOptions = {
   keyboard: false
 };
 
-export class YouAndYourNeighbors extends Component {
+class YouAndYourNeighbors extends Component {
   componentDidMount() {
     const { init } = this.props;
     init();

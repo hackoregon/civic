@@ -1,13 +1,15 @@
-/** @jsx jsx */
-import { PureComponent } from "react";
+import React, { PureComponent } from "react";
 import { PropTypes } from "prop-types";
+/** @jsx jsx */
 import { jsx, css } from "@emotion/core";
+import { TweenMax, Power2 } from "gsap/TweenMax";
 
 import { palette } from "../../constants/style";
 import RadialGauge from "./RadialGauge";
 
 const orbContainerStyle = css`
   position: relative;
+  opacity: 0;
 `;
 
 const circleDefaultStyle = css`
@@ -47,22 +49,56 @@ const defaultState = {
   isActive: false,
   isComplete: false,
   isCorrect: false,
-  percent: 0
+  percent: 0,
+  hasAnimated: false
 };
 
 export default class Orb extends PureComponent {
   constructor(props) {
     super(props);
     this.state = defaultState;
+    this.orbRef = React.createRef();
+  }
+
+  componentDidMount() {
+    // If this is the first render
+    const { hasAnimated } = this.state;
+    const { delay } = this.props;
+
+    if (!hasAnimated) {
+      // make the component 0 alpha, smaller, and slightly lower on the screen
+      // and animate it to full opacity, regular size, and to it's correct coordinates
+      TweenMax.fromTo(
+        this.orbRef.current,
+        1,
+        { autoAlpha: 0, y: 25, scale: 0 },
+        { autoAlpha: 1, ease: Power2.easeOut, delay, y: 0, scale: 1 }
+      );
+      // eslint-disable-next-line no-did-update-set-state
+      this.setState({ hasAnimated: true });
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
+    // What properties have changed?
+    // useful for debugging
+    // for (const i in prevProps) {
+    //   if (this.props[i] !== prevProps[i]) {
+    //     console.log(
+    //       i,
+    //       prevProps[i],
+    //       this.props[i],
+    //       this.props[i] === prevProps[i]
+    //     );
+    //   }
+    // }
+
     const { isComplete } = this.state;
-    const { addOrbScore, orb, setOrbComplete } = this.props;
+    const { addOrbScore, orbId, setOrbComplete } = this.props;
 
     if (!prevState.isComplete && isComplete) {
-      addOrbScore(orb);
-      setOrbComplete(orb);
+      addOrbScore(orbId);
+      setOrbComplete(orbId);
     }
   }
 
@@ -84,26 +120,26 @@ export default class Orb extends PureComponent {
 
   handleOrbPress = () => {
     const { isComplete } = this.state;
-    const { orb, setOrbTouched } = this.props;
+    const { orbId, setOrbTouched } = this.props;
     // if already pressed, do nothing
     if (isComplete) return;
 
     this.setState({ isActive: true }, () => {
       this.incrementGauge();
     });
-    setOrbTouched(orb, true);
+    setOrbTouched(orbId, true);
   };
 
   handleOrbRelease = () => {
     this.setState({ isActive: false });
-    const { orb, setOrbTouched } = this.props;
-    setOrbTouched(orb, false);
+    const { orbId, setOrbTouched } = this.props;
+    setOrbTouched(orbId, false);
   };
 
   render() {
     const { isActive, isComplete, percent } = this.state;
     // eslint-disable-next-line no-unused-vars
-    const { size, orb } = this.props;
+    const { size, imageSVG, imgAlt } = this.props;
 
     const sizeStyle = css`
       height: ${size}px;
@@ -124,6 +160,7 @@ export default class Orb extends PureComponent {
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
       <div
+        ref={this.orbRef}
         css={css`
           ${orbContainerStyle};
           ${sizeStyle};
@@ -145,7 +182,7 @@ export default class Orb extends PureComponent {
           `}
           className={orbClass}
         >
-          <img src={orb.imageSVG} alt={orb.imgAlt} css={iconStyle} />
+          <img src={imageSVG} alt={imgAlt} css={iconStyle} />
         </div>
       </div>
     );
@@ -154,9 +191,12 @@ export default class Orb extends PureComponent {
 }
 
 Orb.propTypes = {
+  orbId: PropTypes.string,
   setOrbTouched: PropTypes.func,
   setOrbComplete: PropTypes.func,
   addOrbScore: PropTypes.func,
-  orb: PropTypes.shape({}),
-  size: PropTypes.number
+  imageSVG: PropTypes.string,
+  imgAlt: PropTypes.string,
+  size: PropTypes.number,
+  delay: PropTypes.number
 };

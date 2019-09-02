@@ -25,6 +25,7 @@ const DemoJSONLoader = props => {
       .catch(error => {
         throw new Error(error);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [...props.urls]);
 
   if (data === null) {

@@ -1,6 +1,7 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import PropTypes from "prop-types";
-import { css } from "emotion";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 import shortid from "shortid";
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 
@@ -45,11 +46,11 @@ const DefaultColumn = ({
   columnClass,
   columnCellClass
 }) => (
-  <tr className={columnClass || defaultColumnClass}>
+  <tr css={columnClass || defaultColumnClass}>
     {columns.map(item => (
       <th
         key={shortid.generate()}
-        className={columnCellClass || defaultColumnCellClass(item)}
+        css={columnCellClass || defaultColumnCellClass(item)}
         colSpan={item.colSpan}
         onClick={() => sortTable(item.key)}
       >
@@ -70,12 +71,12 @@ DefaultColumn.propTypes = {
   sortTable: PropTypes.func.isRequired
 };
 
-const DefaultHeader = ({ className, columns }) => (
-  <tr className={className || defaultHeaderClass}>
+const DefaultHeader = ({ styles, columns }) => (
+  <tr css={styles || defaultHeaderClass}>
     {columns.map(item => (
       <th
         key={shortid.generate()}
-        className={defaultHeaderCellClass(item)}
+        css={defaultHeaderCellClass(item)}
         colSpan={item.colSpan || "1"}
       >
         {item.header}
@@ -90,15 +91,15 @@ DefaultHeader.propTypes = {
       key: PropTypes.string
     })
   ).isRequired,
-  className: PropTypes.string
+  styles: PropTypes.string
 };
 
 const DefaultRow = ({ data, columns, rowClass, rowCellClass }) => (
-  <tr className={rowClass || defaultRowClass}>
+  <tr css={rowClass || defaultRowClass}>
     {columns.map(item => (
       <td
         key={shortid.generate()}
-        className={rowCellClass || defaultRowCellClass(item)}
+        css={rowCellClass || defaultRowCellClass(item)}
       >
         {data[item.key]}
       </td>
@@ -221,7 +222,7 @@ export default class DataTable extends Component {
     const { sorted, flattenedColumns } = this.state;
     const Row = RowComponent || DefaultRow;
     return (
-      <table className={tableClass || defaultTableClass}>
+      <table css={tableClass || defaultTableClass}>
         {this.generateHeaderAndColumns(data.columns)}
         <tbody>
           {Object.keys(sorted).map(id => (

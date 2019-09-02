@@ -1,7 +1,6 @@
 ---
 to: packages/<%=package%>/src/state/<%=slug%>/index.js
 ---
-import importReducer from "../import-adapter-reducer";
 import { IMPORT_START, IMPORT_SUCCESS } from "./actions";
 
 const INITIAL_STATE = {
@@ -9,4 +8,22 @@ const INITIAL_STATE = {
   data: null
 };
 
-export default importReducer({ INITIAL_STATE, IMPORT_START, IMPORT_SUCCESS });
+const reducer = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    case IMPORT_START:
+      return {
+        ...state,
+        pending: true
+      };
+    case IMPORT_SUCCESS:
+      return {
+        ...state,
+        pending: false,
+        data: action.payload
+      };
+    default:
+      return state;
+  }
+};
+
+export default reducer;

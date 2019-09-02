@@ -1,6 +1,6 @@
-import React from "react";
 import PropTypes from "prop-types";
-import { css } from "emotion";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 
 const titleStyle = css`
   display: block;
@@ -30,8 +30,8 @@ const subtitleStyle = css`
 const ChartTitle = ({ title, subtitle }) =>
   title || subtitle ? (
     <figcaption>
-      {title ? <h2 className={titleStyle}>{title}</h2> : null}
-      {subtitle ? <h3 className={subtitleStyle}>{subtitle}</h3> : null}
+      {title ? <h2 css={titleStyle}>{title}</h2> : null}
+      {subtitle ? <h3 css={subtitleStyle}>{subtitle}</h3> : null}
     </figcaption>
   ) : null;
 

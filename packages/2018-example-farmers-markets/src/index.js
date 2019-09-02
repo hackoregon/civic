@@ -2,8 +2,8 @@ import App from "./components/App";
 import Routes from "./routes";
 import Reducers from "./state";
 
-import PortlandFarmersMarkets from "./components/PortlandFarmersMarkets";
 import FarmersMarketsOverTime from "./components/FarmersMarketsOverTime";
+import PortlandFarmersMarkets from "./components/PortlandFarmersMarkets";
 
 const CardRegistry = [
   {

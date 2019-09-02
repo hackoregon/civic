@@ -1,6 +1,6 @@
-import React from "react";
 import PropTypes from "prop-types";
-import { css } from "emotion";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 import CivicStoryFooter from "./CivicStoryFooter";
 import Logo from "../Logo/Logo";
 
@@ -86,23 +86,23 @@ const CivicStoryCard = ({
   let content = children;
   if (loading) {
     content = (
-      <div className={cardLoading}>
+      <div css={cardLoading}>
         <Logo type="squareLogoAnimated" alt="Loading..." />
       </div>
     );
   } else if (error) {
     content = (
-      <div className={cardError}>
+      <div css={cardError}>
         <h2>{error}</h2>
       </div>
     );
   }
 
   return (
-    <div className={cardClass}>
-      <div className={watermarkContainer}>
+    <div css={cardClass}>
+      <div css={watermarkContainer}>
         {watermark || (
-          <svg className={scaleCorner} xmlns="http://www.w3.org/2000/svg">
+          <svg css={scaleCorner} xmlns="http://www.w3.org/2000/svg">
             <g fill="none" fillRule="evenodd">
               <path d="M0 134.658V0l11.566 11.597v123.061H0z" fill="#191119" />
               <path
@@ -113,8 +113,8 @@ const CivicStoryCard = ({
           </svg>
         )}
       </div>
-      {title ? <h2 className={titleClass}>{title}</h2> : null}
-      <div className={descriptionClass}>{content}</div>
+      {title ? <h2 css={titleClass}>{title}</h2> : null}
+      <div css={descriptionClass}>{content}</div>
       {footer && <CivicStoryFooter slug={slug} source={source} />}
     </div>
   );

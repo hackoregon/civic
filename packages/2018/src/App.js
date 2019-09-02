@@ -11,7 +11,6 @@ import {
 } from "react-router-redux";
 import { reducer as reduxFormReducer } from "redux-form";
 import { composeWithDevTools } from "redux-devtools-extension";
-
 // Import routes, reducers, and root component from each project
 import {
   Routes as DisasterRoutes,
@@ -82,6 +81,10 @@ import {
 // hygen import injection (do not remove or modify this line)
 
 import { Reducers as SandboxReducers } from "@hackoregon/civic-sandbox";
+import {
+  CardDetailPage,
+  CardDetailPageEmbed
+} from "@hackoregon/component-library";
 
 import "./fonts.css";
 // eslint-disable-next-line import/no-named-as-default
@@ -91,8 +94,7 @@ import SandboxPage from "./components/SandboxPage";
 import PortlandCollectionPage from "./components/PortlandCollectionPage";
 import CityNotFoundPage from "./components/CityNotFoundPage";
 import StateNotFoundPage from "./components/StateNotFoundPage";
-import CardDetailPage from "./components/CardDetailPage";
-import CardDetailPageEmbed from "./components/CardDetailPageEmbed";
+import CardRegistry from "./card-registry";
 
 // Create a store by combining all project reducers and the routing reducer
 const configureStore = (initialState, history) => {
@@ -237,11 +239,15 @@ const routes = {
     },
     {
       path: "cards/:slug",
-      component: CardDetailPage
+      component: params => (
+        <CardDetailPage {...params} CardRegistry={CardRegistry} />
+      )
     },
     {
       path: "cards/:slug/embed",
-      component: CardDetailPageEmbed
+      component: params => (
+        <CardDetailPageEmbed {...params} CardRegistry={CardRegistry} />
+      )
     },
     {
       path: "sandbox",

@@ -9,6 +9,7 @@ import {
   CivicCardLayoutClassic,
   CivicCardLayoutVisualizationOnly
 } from "@hackoregon/component-library";
+import TemplateMinimalCard from "../TemplateMinimalCard";
 
 import TemplateAPICard from "../TemplateAPICard";
 import TemplateFileCard from "../TemplateFileCard";
@@ -93,6 +94,9 @@ const App = () => (
       </section>
       <section css={sectionMarginMedium}>
         <DemoCard Layout={CivicCardLayoutClassic} />
+      </section>
+      <section css={sectionMarginMedium}>
+        <TemplateMinimalCard Layout={CivicCardLayoutClassic} />
       </section>
     </PageLayout>
   </Fragment>

@@ -58,7 +58,7 @@ const GameGrid = styled.div`
 
   ${media.lg} {
     grid-template-rows: 1fr 24px 60px 250px;
-    min-height: 650px;
+    min-height: 800px;
   }
 
   ${media.xl} {
@@ -75,7 +75,11 @@ export const MapStyle = styled(Panel)`
 
 export const GUIStyle = styled(Panel)`
   display: block;
+  position: relative;
   background: pink;
+  /* uncomment for orbs to be on top of other elements */
+  /* overflow: visible; */
+  /* z-index: 101; */
 `;
 
 Game.propTypes = {

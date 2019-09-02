@@ -1,11 +1,11 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { mount } from "enzyme";
 
 import ChartTitle from "./ChartTitle";
 
 describe("ChartTitle", () => {
   it("should render a title and subtitle when provided", () => {
-    const wrapper = shallow(
+    const wrapper = mount(
       <ChartTitle title="Fun title" subtitle="Fun subtitle" />
     );
 
@@ -14,7 +14,7 @@ describe("ChartTitle", () => {
   });
 
   it("should neither render a title nor a subtitle when neither are provided", () => {
-    const wrapper = shallow(<ChartTitle />);
+    const wrapper = mount(<ChartTitle />);
 
     expect(wrapper.find("h2").length).to.eql(0);
     expect(wrapper.find("h3").length).to.eql(0);

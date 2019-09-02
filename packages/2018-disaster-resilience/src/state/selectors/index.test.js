@@ -1,4 +1,4 @@
-import { rootState } from "./index";
+import rootState from "./index";
 
 describe("rootState", () => {
   it("uses the full object when the disaster key is not present", () => {

@@ -1,5 +1,5 @@
-import React from "react";
-import { css } from "emotion";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
 import {
@@ -37,11 +37,11 @@ const customLegend = (legendData, theme) => {
   `;
 
   return (
-    <div className={legendContainer}>
+    <div css={legendContainer}>
       <SimpleLegend legendData={legendData} theme={theme} />
-      <legend className={legendStyle}>
+      <legend css={legendStyle}>
         <span
-          className={css`
+          css={css`
             margin-left: 5px;
           `}
         >
@@ -53,7 +53,7 @@ const customLegend = (legendData, theme) => {
             <circle cx="45" cy="5" r="5" />
           </svg>
           <span
-            className={css`
+            css={css`
               margin-left: 5px;
             `}
           >
