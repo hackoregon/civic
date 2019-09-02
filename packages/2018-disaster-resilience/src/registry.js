@@ -6,8 +6,13 @@ import WhatYouCanDoToPrepare from "./components/WhatYouCanDoToPrepare";
 import IncreasingSocialCapital from "./components/IncreasingSocialCapital";
 import ProactivePlanning from "./components/ProactivePlanning";
 import SignificantStructuralDamage from "./components/SignificantStructuralDamage";
+import YouAndYourNeighborsGorilla from "./components/YouAndYourNeighborsGorilla";
 
 export default [
+  {
+    slug: "you-and-your-neighbors-gorilla",
+    component: YouAndYourNeighborsGorilla
+  },
   {
     slug: "significant-structural-damage",
     component: SignificantStructuralDamage

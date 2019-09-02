@@ -7,6 +7,7 @@ import {
   PullQuote,
   CivicCardLayoutClassic
 } from "@hackoregon/component-library";
+import YouAndYourNeighborsGorilla from "../YouAndYourNeighborsGorilla";
 import SignificantStructuralDamage from "../SignificantStructuralDamage";
 import ProactivePlanning from "../ProactivePlanning";
 import YouAndYourNeighbors from "../YouAndYourNeighbors";
@@ -47,6 +48,9 @@ const App = () => (
       vicinity.
     </p>
     <YouAndYourNeighbors />
+    <section css={sectionMarginMedium}>
+      <YouAndYourNeighborsGorilla Layout={CivicCardLayoutClassic} />
+    </section>
     <PullQuote
       quoteText="Does your family have a plan for earthquake preparedness? Here are the steps to help you get started."
       url="https://civicplatform.org/cards/what-you-can-do-to-prepare-for-an-earthquake"
