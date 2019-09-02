@@ -7,7 +7,7 @@ const HOST = "https://service.civicpdx.org/housing2019/v1/api";
 
 const apiDesc = {
   getHomeownershipByRaceData: {
-    url: `${HOST}/card-one`,
+    url: `${HOST}/portland-metro-tract-population-by-race`,
     // Transform data into LineChart data points
     dataTransform: data =>
       Object.keys(data).reduce(
