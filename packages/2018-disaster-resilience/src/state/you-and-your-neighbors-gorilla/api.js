@@ -9,6 +9,9 @@ const apiDesc = {
   getYouAndYourNeighbors: {
     url: `${HOST}/sandbox/slides/poi/`,
     dataTransform: data => data.slide_data
+  },
+  getYouAndYourNeighborsCoords: {
+    url: `${HOST}/api/DisasterNeighborhoodGrid/?lat=:latitude&long=:longitude`
   }
 };
 
