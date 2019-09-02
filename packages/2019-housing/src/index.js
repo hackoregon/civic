@@ -4,8 +4,13 @@ import Reducers from "./state";
 import HousingDisplacement from "./components/HousingDisplacement";
 import BlackPopulationChange from "./components/BlackPopulationChange";
 import HomeLoanApprovals from "./components/HomeLoanApprovals";
+import HomeOwnershipRates from "./components/HomeOwnershipRates";
 
 const CardRegistry = [
+  {
+    slug: "home-ownership-rates",
+    component: HomeOwnershipRates
+  },
   {
     slug: "home-loan-approvals",
     component: HomeLoanApprovals
