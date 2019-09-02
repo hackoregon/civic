@@ -129,6 +129,7 @@ export class Packages extends React.Component {
     return (
       <div
         className={css(`
+          padding: 10px 0 0 0;
           font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
         `)}
       >
@@ -175,9 +176,6 @@ export class Packages extends React.Component {
 
         {this.state.mapIsOpen && (
           <div>
-            <p>
-              <a onClick={this.closeMap}>&lt; Back to Packages</a>
-            </p>
             <section style={{ position: "relative" }}>
               <SandboxComponent />
               {!isAllSandboxLoading && (
@@ -186,7 +184,7 @@ export class Packages extends React.Component {
                     position: absolute;
                     bottom: 2.5%;
                     left: 2.5%;
-                    width: 95%;
+                    width: 90%;
                     @media(max-width: 600px) {
                       position: absolute;
                       bottom: 1%;
@@ -202,6 +200,9 @@ export class Packages extends React.Component {
                 </div>
               )}
             </section>
+            <p>
+              <a onClick={this.closeMap}>&lt; Back to Packages</a>
+            </p>
           </div>
         )}
       </div>

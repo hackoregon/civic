@@ -437,7 +437,7 @@ export const getAllSlides = createSelector(
         endpoint: s.dataEndpoint,
         label: s.displayName,
         checked: !!selectedSlides.includes(s.displayName),
-        color: [220, 20, 60, 255],
+        color: [238, 73, 92, 255],
         civicColor: s.visualization.map.civicColor,
         mapType: s.visualization.map.mapType
       };
