@@ -17,7 +17,7 @@ const convertToRGB = colorArray => {
     .map(d => [d.r, d.g, d.b]);
 };
 
-const createRange = (civicColor, colorRange) => {
+export const createRange = (civicColor, colorRange) => {
   if (colorRange.length) {
     if (d3Color(colorRange[0])) {
       return convertToRGB(colorRange);

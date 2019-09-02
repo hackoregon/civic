@@ -63,7 +63,7 @@ const MultiChoroplethMap = props => {
 
   const getFillColor = feature => {
     const { color: fieldNameColor } = fieldName;
-    const value = feature.properties[fieldNameColor];
+    const value = feature.properties[`${fieldNameColor}`];
     return value ? choroplethColorScale(value) : [0, 0, 0, 128];
   };
 
