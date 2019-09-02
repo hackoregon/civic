@@ -44,13 +44,6 @@ const opacityOptions = {
   step: 0.05
 };
 
-const radiusScaleOptions = {
-  range: true,
-  min: 1,
-  max: 100,
-  step: 1
-};
-
 const iconSizeOptions = {
   range: true,
   min: 1,
@@ -228,12 +221,13 @@ export default () =>
           GROUP_IDS.DESIGN
         );
 
-        const circleRadiusScale = number(
+        const radiusScaleKnob = number(
           "Radius Scale:",
-          20,
-          radiusScaleOptions,
+          50,
+          {},
           GROUP_IDS.DESIGN
         );
+        const radiusScale = radiusScaleKnob || 1;
 
         const scatterPlotAPIURL =
           "https://service.civicpdx.org/neighborhood-development/api/trees" +
@@ -269,7 +263,7 @@ export default () =>
                   area: fieldNameArea,
                   color: fieldNameColor
                 },
-                radiusScale: circleRadiusScale,
+                radiusScale,
                 dataRange,
                 colorRange,
                 onLayerClick

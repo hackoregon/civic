@@ -51,11 +51,13 @@ const MapOverlay = props => {
 
   const tooltipRender = tooltipInfo && x && y ? tooltip : null;
 
-  const centroidData = circleFieldName
-    ? data.map(d =>
-        centerOfMass(d.geometry, { properties: { ...d.properties } })
-      )
-    : [];
+  const centroidData = React.useMemo(() => {
+    return circleFieldName
+      ? data.map(d =>
+          centerOfMass(d.geometry, { properties: { ...d.properties } })
+        )
+      : [];
+  }, [circleFieldName, data]);
 
   const radius = circleFieldName
     ? f => Math.sqrt(+f.properties[circleFieldName])
