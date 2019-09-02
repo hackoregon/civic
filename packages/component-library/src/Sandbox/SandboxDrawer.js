@@ -115,12 +115,12 @@ const SandboxDrawer = ({
           background: rgba(243,242,243,0.9);
           overflow-y: auto;
           min-height: 550px;
-          height: 74vh;
+          height: 75vh;
           border: 1px solid #ddd;
           border-radius: 2px;
           box-shadow: -10px 5px 15px -3px rgba(0, 0, 0, 0.2);
           @media (max-width: 850px) {
-            height: 60vh;
+            height: 65vh;
           }
         `)}
         >
@@ -253,7 +253,7 @@ const SandboxDrawer = ({
               margin: 0 10px;
             `)}
             >
-              Data Layers
+              Layers
             </h2>
           </div>
 
@@ -275,6 +275,17 @@ const SandboxDrawer = ({
                 slideBackGroundColor === defaultGray
                   ? blackTextColor
                   : whiteTextColor;
+                  
+              const mapLegend = Object.keys(foundationData).length !== 0 && foundationData[index] && foundationData[index].mapType === "ChoroplethMap" && foundationData[index].data
+                ? 
+                  (
+                    <SandboxMapLegend
+                      data={foundationData[index].data}
+                      mapProps={foundationMapProps[index]}
+                    />
+                  )
+                : null;
+
               return (
                 <div key={shortid.generate()}>
                   <div
@@ -295,6 +306,7 @@ const SandboxDrawer = ({
                       mapType={slide.mapType}
                     />
                   </div>
+                  { mapLegend }
                   <div
                     css={css(`
                     padding: .5rem 0 .5rem 0;
@@ -334,7 +346,14 @@ const SandboxDrawer = ({
             loader
           )}
           { errors
-            ? <p>There was an error fetching the data...</p>
+            ? <div
+                css={css(`
+                margin: auto;
+                width: 80%;
+              `)}
+              >
+                <p>There was an error fetching the data. Please try loading the page again.</p>
+              </div>
             : null
           }
         </div>

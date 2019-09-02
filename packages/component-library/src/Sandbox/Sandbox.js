@@ -21,7 +21,7 @@ const baseMapWrapper = css(`
   min-height: 700px;
   @media (max-width: 850px) {
     height: 65vh;
-    min-height: 600px;
+    min-height: 550px;
   }
 `);
 
@@ -70,10 +70,10 @@ const Sandbox = ({
           padding: 0;
           margin: 0;
           width: 100%;
-          height: 80vh;
+          height: 75vh;
           min-height: 600px;
           @media (max-width: 850px) {
-            height: 65vh;
+            height: 60vh;
             min-height: 500px;
           }
         `}
@@ -89,12 +89,12 @@ const Sandbox = ({
           slideData={slideData}
           fetchSlideByDate={fetchSlideDataByDate}
           selectedFoundation={selectedFoundation}
-          foundationData={foundationData}
+          foundationData={layerData}
           defaultFoundation={defaultFoundation}
           allSlides={allSlides}
           updatePackage={updatePackage}
           updateFoundation={updateFoundation}
-          foundationMapProps={foundationMapProps}
+          foundationMapProps={layerData}
           onBaseMapStyleChange={handleBaseMapStyleChange}
           baseMapStyle={baseMapStyle}
           areSlidesLoading={areSlidesLoading}

@@ -1,10 +1,16 @@
 /* eslint-disable no-nested-ternary */
 import PropTypes from "prop-types";
-import { scaleQuantize, extent, format } from "d3";
+import { format } from "d3";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import shortid from "shortid";
 import civicFormat from "../utils/civicFormat";
+import {
+  createColorScale,
+  updateQuantileScale,
+  updateEqualScale,
+  createRange
+} from "../MultiLayerMap/createLayers";
 
 const legendContainer = css(`
   border-top: 2px solid gainsboro;
@@ -49,19 +55,55 @@ const tickNumsOrdinal = css(`
 
 const SandboxMapLegend = props => {
   const { data, mapProps } = props;
+  const { civicColor, scaleType, dataRange, colorRange, fieldName } = mapProps;
+  
+  const { color: colorScaleType} = scaleType;
 
-  const createEqualBins = (slide, color, getPropValue) => {
-    const scale = scaleQuantize()
-      .domain(extent(slide.slide_data.features, getPropValue))
-      .range(color)
-      .nice();
-    return scale;
-  };
+  // const createEqualBins = (slide, color, getPropValue) => {
+  //   const scale = scaleQuantize()
+  //     .domain(extent(slide.features, getPropValue))
+  //     .range(color)
+  //     .nice();
+  //   return scale;
+  // };
 
-  const colorScale =
-    mapProps.scaleType === "ordinal" || mapProps.scaleType === "threshold"
-      ? mapProps.categories
-      : createEqualBins(data, mapProps.color, mapProps.getPropValue);
+  // const colorScale =
+  //   colorScaleType === "ordinal" || colorScaleType === "threshold"
+  //     ? colorRange
+  //     : createEqualBins(data, mapProps.color, mapProps.getPropValue);
+
+  let choroplethColorScale = createColorScale(
+    civicColor,
+    scaleType,
+    dataRange,
+    colorRange
+  );
+
+  if (colorScaleType === "equal") {
+    choroplethColorScale = updateEqualScale(
+      data,
+      choroplethColorScale,
+      civicColor,
+      dataRange,
+      colorRange,
+      fieldName
+    );
+  }
+
+  if (colorScaleType === "quantile") {
+    choroplethColorScale = updateQuantileScale(
+      data,
+      choroplethColorScale,
+      civicColor,
+      colorRange,
+      fieldName
+    );
+  }
+  
+  /* global console */
+  // console.log("legend-choroplethColorScale", choroplethColorScale);
+  console.log("legend-choroplethColorScale-domain", choroplethColorScale.domain());
+  console.log("legend-choroplethColorScale-range", choroplethColorScale.range());
 
   const formatColor = arr =>
     arr.reduce(
@@ -69,18 +111,21 @@ const SandboxMapLegend = props => {
       "rgba("
     );
 
-  const mapColorsArr =
-    mapProps.scaleType === "ordinal" || mapProps.scaleType === "threshold"
-      ? mapProps.color.map(arr => formatColor(arr))
-      : colorScale.range().map(arr => formatColor(arr));
+  const colorScaleRange = choroplethColorScale.range()[0].length === 4
+    ? choroplethColorScale.range()
+    : choroplethColorScale.range().map(c => [...c, 255]);
+  console.log("legend--colorScaleRange", mapColorsArr);
+
+  const mapColorsArr = colorScaleRange.map(arr => formatColor(arr));
+  console.log("legend--mapColorsArr", mapColorsArr);
 
   const bins =
-    mapProps.scaleType === "ordinal" || mapProps.scaleType === "threshold"
-      ? colorScale
-      : colorScale.range().map(d => colorScale.invertExtent(d));
+    colorScaleType === "ordinal" || colorScaleType === "threshold"
+      ? dataRange
+      : choroplethColorScale.range().map(d => choroplethColorScale.invertExtent(d));
 
   const ticks =
-    mapProps.scaleType === "ordinal" || mapProps.scaleType === "threshold"
+    colorScaleType === "ordinal" || colorScaleType === "threshold"
       ? bins
       : bins.reduce((a, c) => (c[1] ? [...a, c[1]] : [...a, ""]), []);
 
@@ -106,9 +151,9 @@ const SandboxMapLegend = props => {
   });
 
   const tickStyle =
-    mapProps.scaleType === "threshold"
+    colorScaleType === "threshold"
       ? tickNumsThreshold
-      : mapProps.scaleType === "ordinal"
+      : colorScaleType === "ordinal"
       ? tickNumsOrdinal
       : tickNums;
 
