@@ -10,17 +10,10 @@ import api from "../../state/home-loan-approvals/api";
 
 const HomeLoanApprovals = ({ init, data, Layout }) => {
   useEffect(() => {
-    init(data);
-  }, [
-    /*
-    https://reactjs.org/docs/hooks-effect.html#tip-optimizing-performance-by-skipping-effects
+    init();
+  }, [init]);
 
-    Add second argument to prevent useEffect running init() again
-    */
-  ]);
-
-  const loading =
-    !isLoaded(data.totalLoans) || !isLoaded(data.ncdbCensusTractMap);
+  const loading = !isLoaded(data.totalLoans);
 
   return (
     <CivicCard
@@ -44,25 +37,15 @@ export default connect(
   state => ({
     data: {
       totalLoans: api.selectors.getTotalLoansData(
-        state.package2019Housing || state
+        state.package2019Housing || state,
+        { limit: 500 }
       )
-    },
-    ncdbCensusTractMap: api.selectors.getNcdbCensusTractMap(
-      state.package2019Housing || state,
-      { limit: 500 }
-    )
+    }
     // state.packageProjectName || state needed to make work in the project package and 2018 package
   }),
   dispatch => ({
-    init(data) {
-      dispatch(api.actionCreators.getTotalLoansData());
-      if (!data.ncdbCensusTractMap) {
-        dispatch(
-          api.actionCreators.getNcdbCensusTractMap({
-            limit: 500
-          })
-        );
-      }
+    init(/* data */) {
+      dispatch(api.actionCreators.getTotalLoansData({ limit: 500 }));
     }
   })
 )(HomeLoanApprovals);
