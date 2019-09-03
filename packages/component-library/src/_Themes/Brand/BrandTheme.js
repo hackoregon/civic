@@ -7,10 +7,10 @@ export default {
   html: {
     fontSize: "1rem",
     lineHeight: "1.4",
-    backgroundColor: "#fffefe",
+    backgroundColor: colors.background.hex,
     fontFamily: "Merriweather",
     fontWeight: "400",
-    color: "#001732",
+    color: colors.primary.hex,
     minHeight: "100%" /* [3] */,
     WebkitTextSizeAdjust: "100%" /* [4] */,
     msTextSizeAdjust: "100%" /* [4] */,
@@ -34,7 +34,7 @@ export default {
     transition: "all 0.25s ease-in-out",
 
     ":hover": {
-      color: colors.action,
+      color: colors.action.hex,
       textDecoration: "none",
       cursor: "pointer",
       opacity: 1
@@ -46,7 +46,7 @@ export default {
   /* Typography */
   p: {
     fontSize: "1em",
-    color: "#706371"
+    color: colors.tertiary.hex
   },
 
   h1: {

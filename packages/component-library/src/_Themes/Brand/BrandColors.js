@@ -11,11 +11,11 @@ export default {
     rgba: "rgba(238,73,92,1)",
     hex: "#EE495C"
   },
-  // Plum Light
+  // Plum
   tertiary: {
-    rgb: "rgb(114,99,113)",
-    rgba: "rgba(114,99,113,1)",
-    hex: "#726371"
+    rgb: "rgb(34,15,37)",
+    rgba: "rgba(34,15,37,1)",
+    hex: "#201024"
   },
   medium: {
     rgb: "rgb(170,164,171)",
