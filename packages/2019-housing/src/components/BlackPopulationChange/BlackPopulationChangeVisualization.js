@@ -6,6 +6,7 @@ import { scaleQuantize, extent } from "d3";
 import {
   BaseMap,
   ChartContainer,
+  ComparisonMap,
   MapOverlay
 } from "@hackoregon/component-library";
 
@@ -20,7 +21,7 @@ const BlackPopulationChangeVisualization = ({ isLoading, data }) => {
   const findDataMinMax = extent([...housingData1990, ...housingData2017], f =>
     parseFloat(f.properties[polygonFieldName])
   );
-  const colorScale = scaleQuantize()
+  const warmColorScale = scaleQuantize()
     .domain(findDataMinMax)
     .range([
       // "Thermal"
@@ -34,6 +35,40 @@ const BlackPopulationChangeVisualization = ({ isLoading, data }) => {
       [189, 0, 38],
       [128, 0, 38]
     ]);
+  const coolColorScale = scaleQuantize()
+    .domain(findDataMinMax)
+    .range([
+      // "Space"
+      [247, 252, 253],
+      [224, 236, 244],
+      [191, 211, 230],
+      [158, 188, 218],
+      [140, 150, 198],
+      [140, 107, 177],
+      [136, 65, 157],
+      [129, 15, 124],
+      [77, 0, 75]
+    ]);
+
+  const height = 500;
+  const leftMap = (
+    <BaseMap civicMapStyle="light" height={height}>
+      <MapOverlay
+        data={housingData1990}
+        getFillColor={f => warmColorScale(f.properties[polygonFieldName])}
+        onLayerClick={() => {}}
+      />
+    </BaseMap>
+  );
+  const rightMap = (
+    <BaseMap civicMapStyle="light" height={height}>
+      <MapOverlay
+        data={housingData2017}
+        getFillColor={f => coolColorScale(f.properties[polygonFieldName])}
+        onLayerClick={() => {}}
+      />
+    </BaseMap>
+  );
 
   return (
     data && (
@@ -41,36 +76,28 @@ const BlackPopulationChangeVisualization = ({ isLoading, data }) => {
         <strong style={{ color: "crimson" }}>
           Visualization TODO:
           <ul>
-            <li>Make this a single composite map with a slider</li>
+            <li>Does this work with the slider?</li>
+            <li>Should we add some explanatory content about the slider?</li>
+            <li>Pick better color scales (should they be the same?)</li>
             <li>Add a map legend once they exist</li>
             <li>Should we use tooltips?</li>
+            <li>
+              NOTE: Turning this into a ComparisonMap caused a bunch of console
+              errors that look related to the CivicCard templates...
+            </li>
           </ul>
         </strong>
         <ChartContainer
-          title="Black Population Share by Census Tract, 1990"
+          title="Black Population Share by Census Tract, 1990 vs 2017"
           subtitle="subtitle"
-        >
-          <BaseMap initialZoom={9.9} updateViewport={false}>
-            <MapOverlay
-              data={housingData1990}
-              getFillColor={f => colorScale(f.properties[polygonFieldName])}
-              onLayerClick={() => {}}
-            />
-          </BaseMap>
-        </ChartContainer>
-        <br />
-        <ChartContainer
-          title="Black Population Share by Census Tract, 2017"
-          subtitle="subtitle"
-        >
-          <BaseMap initialZoom={9.9} updateViewport={false}>
-            <MapOverlay
-              data={housingData2017}
-              getFillColor={f => colorScale(f.properties[polygonFieldName])}
-              onLayerClick={() => {}}
-            />
-          </BaseMap>
-        </ChartContainer>
+        />
+        <ComparisonMap
+          leftMap={leftMap}
+          rightMap={rightMap}
+          height={height}
+          sliderStartPosition={70}
+          initialViewport={{ zoom: 9.9 }}
+        />
       </div>
     )
   );
