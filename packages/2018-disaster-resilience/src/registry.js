@@ -6,8 +6,13 @@ import WhatYouCanDoToPrepare from "./components/WhatYouCanDoToPrepare";
 import IncreasingSocialCapital from "./components/IncreasingSocialCapital";
 import ProactivePlanning from "./components/ProactivePlanning";
 import SignificantStructuralDamage from "./components/SignificantStructuralDamage";
+import WhatYouCanDoToPrepareOctopus from "./components/WhatYouCanDoToPrepareOctopus";
 
 export default [
+  {
+    slug: "what-you-can-do-to-prepare-octopus",
+    component: WhatYouCanDoToPrepareOctopus
+  },
   {
     slug: "significant-structural-damage",
     component: SignificantStructuralDamage
