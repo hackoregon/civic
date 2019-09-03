@@ -27,7 +27,8 @@ const MultiScatterPlotMap = props => {
     scaleType = {},
     fieldName = {},
     dataRange = [],
-    colorRange = []
+    colorRange = [],
+    index
   } = props;
 
   let colorScale = createColorScale(
@@ -101,7 +102,7 @@ const MultiScatterPlotMap = props => {
       radiusMinPixels={1}
       autoHighlight={autoHighlight}
       highlightColor={highlightColor}
-      onHover={onHoverSlide}
+      onHover={info => onHoverSlide(info, index)}
       onClick={onLayerClick}
       updateTriggers={{
         getColor,

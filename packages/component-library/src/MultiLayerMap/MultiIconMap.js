@@ -40,7 +40,8 @@ const MultiIconMap = props => {
     scaleType,
     fieldName = {},
     dataRange,
-    colorRange
+    colorRange,
+    index
   } = props;
 
   const colorScale = createColorScale(
@@ -93,7 +94,7 @@ const MultiIconMap = props => {
       getColor={getColor}
       autoHighlight={autoHighlight}
       highlightColor={highlightColor}
-      onHover={onHoverSlide}
+      onHover={info => onHoverSlide(info, index)}
       onClick={onLayerClick}
     />
   );

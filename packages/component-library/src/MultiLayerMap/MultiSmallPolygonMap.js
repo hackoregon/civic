@@ -23,7 +23,8 @@ const MultiSmallPolygonMap = props => {
     scaleType = {},
     fieldName = {},
     dataRange,
-    colorRange
+    colorRange,
+    index
   } = props;
 
   const colorScale = createColorScale(
@@ -58,7 +59,7 @@ const MultiSmallPolygonMap = props => {
       getLineColor={getFillColor}
       getLineWidth={getLineWidth}
       lineWidthMinPixels={1}
-      onHover={onHoverSlide}
+      onHover={info => onHoverSlide(info, index)}
       onClick={onLayerClick}
       autoHighlight={autoHighlight}
       highlightColor={highlightColor}

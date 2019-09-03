@@ -34,7 +34,8 @@ const MultiPathMap = props => {
     scaleType = {},
     fieldName = {},
     dataRange = [],
-    colorRange = []
+    colorRange = [],
+    index
   } = props;
 
   let colorScale = createColorScale(
@@ -91,7 +92,7 @@ const MultiPathMap = props => {
       rounded={rounded}
       autoHighlight={autoHighlight}
       highlightColor={highlightColor}
-      onHover={onHoverSlide}
+      onHover={info => onHoverSlide(info, index)}
       onClick={onLayerClick}
       updateTriggers={{
         getColor,
