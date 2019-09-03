@@ -36,5 +36,10 @@ export default {
     rgb: "rgb(255,254,254)",
     rgba: "rgba(255,254,254,1)",
     hex: "#FFFEFE"
+  },
+  plumLight: {
+    rgb: "rgb(114,99,113)",
+    rgba: "rgba(114,99,113,1)",
+    hex: "#726371"
   }
 };

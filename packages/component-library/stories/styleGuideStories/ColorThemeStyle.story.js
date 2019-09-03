@@ -16,7 +16,7 @@ const ColorThemeStyle = () => (
         })}
       />
       <div>
-        <h4>Plum (Primary)</h4>
+        <h4>Primary</h4>
         <p className="DataText">Hex: {BrandColors.primary.hex}</p>
         <p className="DataText">{BrandColors.primary.rgb} </p>
         <p className="DataText">
@@ -32,7 +32,7 @@ const ColorThemeStyle = () => (
         })}
       />
       <div>
-        <h4>Salmon (Secondary)</h4>
+        <h4>Secondary</h4>
         <p className="DataText">Hex: {BrandColors.secondary.hex}</p>
         <p className="DataText">{BrandColors.secondary.rgb} </p>
         <p className="DataText">
@@ -48,11 +48,12 @@ const ColorThemeStyle = () => (
         })}
       />
       <div>
-        <h4>Plum Light (Tertiary)</h4>
+        <h4>Tertiary</h4>
         <p className="DataText">Hex: {BrandColors.tertiary.hex}</p>
         <p className="DataText">{BrandColors.tertiary.rgb} </p>
         <p className="DataText">
-          Compliment to primary for paragraphs and secondary content.
+          Compliment to primary for paragraphs and secondary content. Currently
+          same as primary.
         </p>
       </div>
     </div>
@@ -100,6 +101,21 @@ const ColorThemeStyle = () => (
         <p className="DataText">Hex: {BrandColors.action.hex}</p>
         <p className="DataText">{BrandColors.action.rgb} </p>
         <p className="DataText">Used for action color within the platform.</p>
+      </div>
+    </div>
+
+    <h2>Brand: Other</h2>
+    <div style={storybookStyles.solidColorSample}>
+      <div
+        style={Object.assign({}, storybookStyles.colorBlock, {
+          backgroundColor: BrandColors.plumLight.rgba
+        })}
+      />
+      <div>
+        <h4>Plum Light</h4>
+        <p className="DataText">Hex: {BrandColors.plumLight.hex}</p>
+        <p className="DataText">{BrandColors.plumLight.rgb} </p>
+        <p className="DataText">Purpose undefined</p>
       </div>
     </div>
 
