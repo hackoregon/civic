@@ -10,7 +10,6 @@ import {
 import YouAndYourNeighborsGorilla from "../YouAndYourNeighborsGorilla";
 import SignificantStructuralDamage from "../SignificantStructuralDamage";
 import ProactivePlanning from "../ProactivePlanning";
-import YouAndYourNeighbors from "../YouAndYourNeighbors";
 import WhatYouCanDoToPrepare from "../WhatYouCanDoToPrepare";
 
 const sectionMarginMedium = css`
@@ -47,7 +46,6 @@ const App = () => (
       be to understand what the estimated impact is within their immediate
       vicinity.
     </p>
-    <YouAndYourNeighbors />
     <section css={sectionMarginMedium}>
       <YouAndYourNeighborsGorilla Layout={CivicCardLayoutClassic} />
     </section>
