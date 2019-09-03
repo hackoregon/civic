@@ -76,6 +76,7 @@ const AduDistributionsVisualization = ({ data }) => {
             <li>Add a real title etc..</li>
             <li>Figure out the appropriate color scale</li>
             <li>Add a map legend once they exist</li>
+            <li>Add a real loading indicator</li>
             <li>
               Should we also plot the census tract boundaries? (to go with the
               scatter plot below)

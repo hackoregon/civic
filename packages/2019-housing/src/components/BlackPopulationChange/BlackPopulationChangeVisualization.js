@@ -81,6 +81,7 @@ const BlackPopulationChangeVisualization = ({ isLoading, data }) => {
             <li>Pick better color scales (should they be the same?)</li>
             <li>Add a map legend once they exist</li>
             <li>Should we use tooltips?</li>
+            <li>Add a real loading indicator</li>
             <li>
               NOTE: Turning this into a ComparisonMap caused a bunch of console
               errors that look related to the CivicCard templates...

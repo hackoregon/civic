@@ -23,9 +23,14 @@ const HousingDisplacementVisualization = ({ isLoading, data }) => {
         <ul>
           <li>Are these too small side by side?</li>
           <li>Add more context about what the slider is doing</li>
+          <li>Add a real loading indicator</li>
         </ul>
       </strong>
-      <div>
+      <div
+        css={css`
+          display: block;
+        `}
+      >
         <div
           css={css`
             display: flex;
@@ -56,15 +61,18 @@ const HousingDisplacementVisualization = ({ isLoading, data }) => {
             />
           </div>
         </div>
-        <div
-          css={css`
-            display: flex;
-            flex-direction: "row";
-            @media screen and (max-width: 640px) {
-              flex-direction: column;
-            }
-          `}
-        >
+      </div>
+      <br />
+      <div
+        css={css`
+          display: flex;
+          flex-direction: "row";
+          @media screen and (max-width: 640px) {
+            flex-direction: column;
+          }
+        `}
+      >
+        <div style={{ width: "50%" }}>
           <LineChart
             data={data.homeownershipByRace.value}
             dataKey={xKey}
@@ -75,6 +83,8 @@ const HousingDisplacementVisualization = ({ isLoading, data }) => {
             yLabel={yLabel}
             xNumberFormatter={tick => tick.toString()}
           />
+        </div>
+        <div style={{ width: "50%" }}>
           <LineChart
             data={data[`homeownershipHistoricallyBlack${threshold}`].value}
             dataKey={xKey}

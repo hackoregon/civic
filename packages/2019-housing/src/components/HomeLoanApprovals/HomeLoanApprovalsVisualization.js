@@ -60,6 +60,7 @@ const HomeLoanApprovalsVisualization = ({ isLoading, data }) => {
             <li>Use tooltips? Yes? Fix tooltip labeling / No? Remove them</li>
             <li>Keep population data in tooltip? If so, what field?</li>
             <li>Fix error being thrown by inputProps on the Radio</li>
+            <li>Add a real loading indicator</li>
           </ul>
         </strong>
         <div
