@@ -8,6 +8,8 @@ import HomePageStyle from "./NewHomePage.styles";
 import placeholderIntroImg from "../assets/new-home-page-1.png";
 import placeholderWorkImg from "../assets/new-home-page-2.png";
 import placeholderContributorsImg from "../assets/new-home-page-3.png";
+import placeholderPlatformImg from "../assets/new-home-page-4.png";
+import placeholderCivicImg from "../assets/new-home-page-5.png";
 
 const sectionWorkLayout = css`
   padding-bottom: 150px;
@@ -15,6 +17,14 @@ const sectionWorkLayout = css`
 
 const sectionContributorLayout = css`
   padding-bottom: 118px;
+`;
+
+const sectionPlatformLayout = css`
+  padding-bottom: 77px;
+`;
+
+const sectionCivicLayout = css`
+  padding-bottom: 186px;
 `;
 
 const HomePage = () => {
@@ -122,6 +132,73 @@ const HomePage = () => {
           <img
             className="placeholder-section-image"
             src={placeholderContributorsImg}
+            alt="placeholder"
+          />
+        </div>
+
+        <h2>ABOUT</h2>
+
+        <div className="home-section" css={sectionPlatformLayout}>
+          <h3>CIVIC Platform</h3>
+          <p>
+            The CIVIC Platform is designed for making public information public
+            knowledge. In order to do that, we build applications to provide a
+            set of common frameworks for rapid development.
+            <br />
+            <br />
+            CIVIC is open-source which means it’s non-proprietary, and you’re
+            free to replicate or contribute to our code to develop with your own
+            teams or resources. If you’ve a developer, you don’t have to join a
+            team to start contributing.
+          </p>
+          <h4 className="platform-h4">CIVIC IS COMPRISED OF:</h4>
+          <div className="link-container">
+            <a className="platform-link" href="http://service.civicpdx.org/">
+              EXPLORE DATA
+            </a>
+            <a
+              className="platform-link"
+              href="https://github.com/hackoregon?type=source"
+            >
+              EXPLORE CODE
+            </a>
+            <a
+              className="platform-link"
+              href="https://hackoregon.github.io/civic/"
+            >
+              DOCUMENTATION
+            </a>
+          </div>
+          <img
+            css={css`
+              margin-left: -15px;
+              width: 100%;
+            `}
+            src={placeholderPlatformImg}
+            alt="placeholder"
+          />
+        </div>
+
+        <div className="home-section" css={sectionCivicLayout}>
+          <h3>Civic Software Foundation</h3>
+          <p>
+            The CIVIC Platform is made possible by the Civic Software
+            Foundation, a non-profit organization bringing data science, modern
+            tech, and civic willpower together to create a force for public
+            good.
+          </p>
+          <Button margin="40px 0 50px 0" bkgndColor={BrandColors.subdued.rgba}>
+            VISIT THE CIVIC SOFTWARE FOUNDATION
+          </Button>
+          <p className="quote-text">
+            &quot;When <span className="big-text">political will</span> meets{" "}
+            <span className="big-text">public imagination</span> the technology
+            we can create is unlike anything{" "}
+            <span className="big-text">the world has ever seen.&quot;</span>
+          </p>
+          <img
+            className="placeholder-section-image"
+            src={placeholderCivicImg}
             alt="placeholder"
           />
         </div>

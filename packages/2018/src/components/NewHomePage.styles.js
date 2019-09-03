@@ -1,6 +1,6 @@
 import { BrandColors } from "@hackoregon/component-library";
 
-const { primary, subdued } = BrandColors;
+const { primary, tertiary, action, subdued } = BrandColors;
 
 const introWidth = "800px";
 const browserDefaultSize = 16; // Don't modify
@@ -20,6 +20,11 @@ export default {
   },
 
   // Text
+  a: {
+    color: action.hex,
+    textDecoration: "underline"
+  },
+
   h1: {
     ...textStandard,
     fontSize: `${60 / defaultFontSize}rem`,
@@ -47,6 +52,7 @@ export default {
 
   h4: {
     ...textStandard,
+    color: tertiary.hex,
     fontSize: `${30 / defaultFontSize}rem`,
     fontWeight: "500",
     lineHeight: "118%",
@@ -67,6 +73,23 @@ export default {
     ...textStandard,
     fontSize: `${36 / defaultFontSize}rem`,
     lineHeight: `${60 / defaultFontSize}rem`
+  },
+
+  ".platform-h4": {
+    color: primary.hex,
+    margin: "81px 0"
+  },
+
+  ".quote-text": {
+    fontStyle: "normal",
+    fontWeight: "500",
+    fontSize: `${45 / defaultFontSize}rem`,
+    lineHeight: `${89 / defaultFontSize}rem`,
+    textAlign: "center"
+  },
+
+  ".big-text": {
+    fontSize: `${60 / defaultFontSize}rem`
   },
 
   // Wrappers
@@ -92,6 +115,13 @@ export default {
 
   ".section-button-container": {
     margin: "77px 0 52px"
+  },
+
+  ".link-container": {
+    display: "grid",
+    gridTemplateColumns: "repeat(3, minmax(max-content,20%))",
+    justifyContent: "space-between",
+    marginBottom: "20px"
   },
 
   // Placeholder styles
