@@ -2,7 +2,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import { at } from "lodash";
 import { resourceShape } from "reduxful/react-addons";
-import { scaleOrdinal, schemeCategory10 } from "d3";
+import { scaleOrdinal } from "d3";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 
@@ -30,7 +30,7 @@ const HomeLoanApprovalsVisualization = ({ isLoading, data }) => {
 
   const polygonFieldName = RACE_DATA_MAP[race];
   const totalLoans = at(data.totalLoans, "value.results.features")[0];
-  const colorScale = scaleOrdinal(schemeCategory10)
+  const colorScale = scaleOrdinal()
     .domain([
       null,
       "Not represented (< 0.50)",
@@ -40,13 +40,13 @@ const HomeLoanApprovalsVisualization = ({ isLoading, data }) => {
       "Over-represented (1.50-3.00)"
     ])
     .range([
-      // TODO: Pick a real categorical color scale
+      // TODO: Pick an official color scale
       [200, 200, 200],
-      [255, 0, 0],
-      [0, 255, 0],
-      [0, 0, 255],
-      [255, 0, 255],
-      [0, 255, 255]
+      [200, 0, 0],
+      [200, 150, 150],
+      [255, 255, 255],
+      [150, 150, 200],
+      [0, 0, 200]
     ]);
 
   return (
@@ -56,7 +56,7 @@ const HomeLoanApprovalsVisualization = ({ isLoading, data }) => {
           Visualization TODO:
           <ul>
             <li>Fix radio race labels</li>
-            <li>Pick a categorical color scale for map</li>
+            <li>Pick a better color scale for the map</li>
             <li>Add a map legend once they exist</li>
             <li>Use tooltips? Yes? Fix tooltip labeling / No? Remove them</li>
             <li>Keep population data in tooltip? If so, what field?</li>
