@@ -40,6 +40,7 @@ const ChartContainer = ({
   `;
   const fullHeight = css`
     padding-top: ${100 / aspectRatio}%;
+    height: 100%;
   `;
 
   let content = <Skeleton css={[wrapperStyle, fullHeight]} />;
