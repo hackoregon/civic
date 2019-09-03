@@ -2,7 +2,7 @@ import WhatYouCanDoToPrepareVisualization from "./WhatYouCanDoToPrepareVisualiza
 
 const WhatYouCanDoToPrepareMeta = (/* data */) => ({
   title: "What You Can Do To Prepare",
-  slug: "what-you-can-do-to-prepare",
+  slug: "what-you-can-do-to-prepare-for-an-earthquake",
   introText: null,
   visualization: WhatYouCanDoToPrepareVisualization, // data, isLoading are passed to this as props
   additionalText: null,
