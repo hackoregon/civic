@@ -90,13 +90,17 @@ export default {
     position: "relative"
   },
 
+  ".section-button-container": {
+    margin: "77px 0 52px"
+  },
+
   // Placeholder styles
   ".placeholder-intro-image": {
     width: introWidth,
     marginBottom: "28px"
   },
 
-  ".placeholder-work-image": {
+  ".placeholder-section-image": {
     width: "calc(100% - 2 * 120px)",
     position: "absolute"
   }

@@ -7,9 +7,14 @@ import HomePageStyle from "./NewHomePage.styles";
 // Placeholders
 import placeholderIntroImg from "../assets/new-home-page-1.png";
 import placeholderWorkImg from "../assets/new-home-page-2.png";
+import placeholderContributorsImg from "../assets/new-home-page-3.png";
 
 const sectionWorkLayout = css`
   padding-bottom: 150px;
+`;
+
+const sectionContributorLayout = css`
+  padding-bottom: 118px;
 `;
 
 const HomePage = () => {
@@ -40,7 +45,9 @@ const HomePage = () => {
           </p>
           <Button margin="26px 0 0 0">EXPLORE CIVIC</Button>
         </div>
+
         <h2>JOIN THE MOVEMENT</h2>
+
         <div className="home-section" css={sectionWorkLayout}>
           <h3>Work With Us</h3>
           <h4>
@@ -70,8 +77,51 @@ const HomePage = () => {
             WORK WITH US
           </Button>
           <img
-            className="placeholder-work-image"
+            className="placeholder-section-image"
             src={placeholderWorkImg}
+            alt="placeholder"
+          />
+        </div>
+
+        <div className="home-section" css={sectionContributorLayout}>
+          <h3>Become a Contributor</h3>
+          <h4>
+            DESIGNERS, DEVELOPERS,
+            <br />
+            WRITERS & COMMUNITY MEMBERS
+          </h4>
+          <p>
+            If you’re motivated to gain experience with cutting edge industry
+            technology, use your skills to give back, and work with a dream team
+            of talented people, you’ll love working on CIVIC. Collaborating on a
+            project is full of creative learning opportunities and experimental
+            R&D.
+            <br />
+            <br />
+            We’re looking for developers, designers, content creators, product
+            managers, community organizers and more to build with us. It all
+            starts by filling out an application, and we’ll be in touch when we
+            have a match for a project that fits your skills and interests.
+          </p>
+          <div className="section-button-container">
+            <Button
+              display="inline"
+              margin="0 10px 0 0"
+              bkgndColor={BrandColors.subdued.rgba}
+            >
+              APPLY NOW
+            </Button>
+            <Button
+              display="inline"
+              margin="0 0 0 0"
+              bkgndColor={BrandColors.subdued.rgba}
+            >
+              LEARN MORE
+            </Button>
+          </div>
+          <img
+            className="placeholder-section-image"
+            src={placeholderContributorsImg}
             alt="placeholder"
           />
         </div>
