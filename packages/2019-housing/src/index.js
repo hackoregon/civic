@@ -5,8 +5,13 @@ import HousingDisplacement from "./components/HousingDisplacement";
 import BlackPopulationChange from "./components/BlackPopulationChange";
 import HomeLoanApprovals from "./components/HomeLoanApprovals";
 import HomeOwnershipRates from "./components/HomeOwnershipRates";
+import AduDistributions from "./components/AduDistributions";
 
 const CardRegistry = [
+  {
+    slug: "adu-distributions",
+    component: AduDistributions
+  },
   {
     slug: "home-ownership-rates",
     component: HomeOwnershipRates
