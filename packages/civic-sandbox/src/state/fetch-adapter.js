@@ -78,11 +78,23 @@ export const fetchAllSlidesAdapter = (
       .all(layerUrls)
       .then(layerObjects => {
         // console.log("l:", l);
-        const dataURLS = layerObjects.map(l2 => l2.data.dataEndpoint);
-        // console.log("dataURLS:", dataURLS);
+        const dataURLS = [...layerObjects]
+          .map(l2 => l2.data.dataEndpoint);
+          // .filter(d => ![...layerObjects.map(d => d.dataEndpoint)].include(d) );
 
+          // .reduce((a,c) => a.indexOf(c) === -1 ? [...a, c] : [...a, ""], []);
+        // console.log("fetchAllSlidesAdapter-dataURLS:", dataURLS);
+
+        // if (dataURLS.length) {
+        //   console.log("fetchAllSlidesAdapter-dataURLS-leng:", dataURLS.length);
+        //   return;
+        // }
+
+        // const fetchData = dataURLS.map((url,i) => {
+        //   return slidesArray[i].defaultSlide ? axios.get(url) : [];
+        // });
         const fetchData = dataURLS.map((url,i) => {
-          return slidesArray[i].defaultSlide ? axios.get(url) : [];
+          return url && slidesArray[i].defaultSlide ? axios.get(url) : [];
         });
 
         return axios.all(fetchData).then(

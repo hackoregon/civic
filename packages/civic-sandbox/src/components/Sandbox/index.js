@@ -94,6 +94,9 @@ class SandboxComponent extends React.Component {
           this.props.selectedSlide.includes(d.slide.name)
         );
       });
+      // .filter(d => {
+      //   return this.props.slidesData.filter(e => e && e.slide.layerEndpoint !== d.slide.layerEndpoint);
+      // });
       console.log("sandbox-index-CDU-onlyFetchNewSlide", onlyFetchNewSlide);
 
       if (onlyFetchNewSlide.length) {
@@ -118,12 +121,20 @@ class SandboxComponent extends React.Component {
   }
 
   updateSlide = event => {
-    console.log("sandbox-index-updateSlide:");
+    console.log("sandbox-index-updateSlide:", event);
+    // console.log(
+    //   "sandbox-index-updateSlide-event-target:",
+    //   event.target
+    // );
+    // console.log(
+    //   "sandbox-index-updateSlide-event-target-name:",
+    //   event.target.name
+    // );
     console.log(
-      "sandbox-index-updateSlide-event-target-name:",
-      event.target.name
+      "sandbox-index-updateSlide-event-target-value:",
+      event.target.value
     );
-    const slideName = event.target.name;
+    const slideName = event.target.value;
 
     const selectedSlides = this.props.selectedSlide.includes(slideName)
       ? this.props.selectedSlide.filter(name => name !== slideName)
