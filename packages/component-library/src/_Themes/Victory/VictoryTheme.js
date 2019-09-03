@@ -7,7 +7,7 @@ const { victoryColors } = VisualizationColors;
 // Brand Colors
 const civicPrimary = BrandColors.primary.hex;
 const civicSecondary = BrandColors.secondary.hex;
-const civicTertiary = BrandColors.tertiary.hex;
+const civicTertiary = BrandColors.plumLight.hex; // keeping plumLight for bar fill
 const civicSecondaryLighter = BrandColors.medium.hex;
 const civicSecondaryLightest = BrandColors.subdued.hex;
 
