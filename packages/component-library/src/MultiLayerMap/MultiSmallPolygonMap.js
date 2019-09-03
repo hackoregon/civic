@@ -1,5 +1,5 @@
 import React from "react";
-import { PolygonLayer } from "deck.gl";
+import { GeoJsonLayer } from "deck.gl";
 import shortid from "shortid";
 import { number, string, bool, func, arrayOf, shape } from "prop-types";
 
@@ -15,7 +15,7 @@ const MultiSmallPolygonMap = props => {
     getPolygon = f => f.geometry.coordinates,
     filled = true,
     stroked = true,
-    polygonWidth = 5,
+    lineWidth = 5,
     autoHighlight = true,
     highlightColor = [255, 255, 0, 100],
     onHoverSlide,
@@ -43,10 +43,10 @@ const MultiSmallPolygonMap = props => {
     return colorScale();
   };
 
-  const getLineWidth = createSizeScale(polygonWidth);
+  const getLineWidth = createSizeScale(lineWidth);
 
   return (
-    <PolygonLayer
+    <GeoJsonLayer
       key={shortid.generate()}
       id={id}
       data={data}

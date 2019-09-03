@@ -19,7 +19,7 @@ const MultiChoroplethMap = props => {
     getPolygon = f => f.geometry.coordinates,
     filled = true,
     stroked = true,
-    polygonWidth = 1,
+    lineWidth = 1,
     polygonLineColor = [169, 169, 169],
     autoHighlight = true,
     highlightColor = [255, 255, 0, 100],
@@ -71,7 +71,7 @@ const MultiChoroplethMap = props => {
     return polygonLineColor;
   };
 
-  const getLineWidth = createSizeScale(polygonWidth);
+  const getLineWidth = createSizeScale(lineWidth);
 
   return (
     <GeoJsonLayer
