@@ -1,10 +1,10 @@
-import WhatYouCanDoToPrepareOctopusVisualization from "./WhatYouCanDoToPrepareOctopusVisualization";
+import WhatYouCanDoToPrepareVisualization from "./WhatYouCanDoToPrepareVisualization";
 
-const WhatYouCanDoToPrepareOctopusMeta = (/* data */) => ({
-  title: "What You Can Do To Prepare Octopus",
-  slug: "what-you-can-do-to-prepare-octopus",
+const WhatYouCanDoToPrepareMeta = (/* data */) => ({
+  title: "What You Can Do To Prepare",
+  slug: "what-you-can-do-to-prepare",
   introText: null,
-  visualization: WhatYouCanDoToPrepareOctopusVisualization, // data, isLoading are passed to this as props
+  visualization: WhatYouCanDoToPrepareVisualization, // data, isLoading are passed to this as props
   additionalText: null,
   shareText: null,
   tags: null,
@@ -28,4 +28,4 @@ const WhatYouCanDoToPrepareOctopusMeta = (/* data */) => ({
   authors: null
 });
 
-export default WhatYouCanDoToPrepareOctopusMeta;
+export default WhatYouCanDoToPrepareMeta;

@@ -5,12 +5,12 @@ import YouAndYourNeighbors from "./components/YouAndYourNeighbors";
 import IncreasingSocialCapital from "./components/IncreasingSocialCapital";
 import ProactivePlanning from "./components/ProactivePlanning";
 import SignificantStructuralDamage from "./components/SignificantStructuralDamage";
-import WhatYouCanDoToPrepareOctopus from "./components/WhatYouCanDoToPrepareOctopus";
+import WhatYouCanDoToPrepare from "./components/WhatYouCanDoToPrepare";
 
 export default [
   {
     slug: "what-you-can-do-to-prepare-for-an-earthquake",
-    component: WhatYouCanDoToPrepareOctopus
+    component: WhatYouCanDoToPrepare
   },
   {
     slug: "significant-structural-damage",
