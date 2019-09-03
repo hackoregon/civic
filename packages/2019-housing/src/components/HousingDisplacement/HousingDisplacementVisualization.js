@@ -18,7 +18,7 @@ const HousingDisplacementVisualization = ({ isLoading, data }) => {
 
   return (
     <Fragment>
-      <strong>
+      <strong style={{ color: "crimson" }}>
         Visualization TODO:
         <ul>
           <li>Make these side by side instead of stacked</li>

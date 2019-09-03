@@ -1,6 +1,5 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import { at } from "lodash";
 import { resourceShape } from "reduxful/react-addons";
 import { scaleOrdinal } from "d3";
 /** @jsx jsx */
@@ -29,7 +28,7 @@ const HomeLoanApprovalsVisualization = ({ isLoading, data }) => {
   if (isLoading) return <div>Data Loading...</div>;
 
   const polygonFieldName = RACE_DATA_MAP[race];
-  const totalLoans = at(data.totalLoans, "value.results.features")[0];
+  const totalLoans = data.totalLoans.value.results.features;
   const colorScale = scaleOrdinal()
     .domain([
       null,
@@ -52,7 +51,7 @@ const HomeLoanApprovalsVisualization = ({ isLoading, data }) => {
   return (
     data && (
       <span>
-        <strong>
+        <strong style={{ color: "crimson" }}>
           Visualization TODO:
           <ul>
             <li>Fix radio race labels</li>

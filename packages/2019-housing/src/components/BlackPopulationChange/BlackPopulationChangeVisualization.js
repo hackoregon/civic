@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { at } from "lodash";
 import { resourceShape } from "reduxful/react-addons";
 import { scaleQuantize, extent } from "d3";
 
@@ -14,8 +13,8 @@ const BlackPopulationChangeVisualization = ({ isLoading, data }) => {
   if (isLoading) return <div>Data Loading...</div>;
 
   const polygonFieldName = "blackshare";
-  const housingData1990 = at(data.ncdbYearly1990, "value.results.features")[0];
-  const housingData2017 = at(data.ncdbYearly2017, "value.results.features")[0];
+  const housingData1990 = data.ncdbYearly1990.value.results.features;
+  const housingData2017 = data.ncdbYearly2017.value.results.features;
 
   // --- shared color scale ---
   const findDataMinMax = extent([...housingData1990, ...housingData2017], f =>
@@ -39,7 +38,7 @@ const BlackPopulationChangeVisualization = ({ isLoading, data }) => {
   return (
     data && (
       <div>
-        <strong>
+        <strong style={{ color: "crimson" }}>
           Visualization TODO:
           <ul>
             <li>Make this a single composite map with a slider</li>
