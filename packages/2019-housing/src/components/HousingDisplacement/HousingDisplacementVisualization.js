@@ -21,61 +21,71 @@ const HousingDisplacementVisualization = ({ isLoading, data }) => {
       <strong style={{ color: "crimson" }}>
         Visualization TODO:
         <ul>
-          <li>Make these side by side instead of stacked</li>
+          <li>Are these too small side by side?</li>
           <li>Add more context about what the slider is doing</li>
         </ul>
       </strong>
-      <div
-        css={css`
-          display: flex;
-          justify-content: flex-end;
-          margin-bottom: 1rem;
-        `}
-      >
+      <div>
         <div
           css={css`
-            width: fit-content;
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 1rem;
           `}
         >
-          <h5
+          <div
             css={css`
-              margin-bottom: 0.75rem;
+              width: fit-content;
             `}
           >
-            1990 Black Population Threshold
-          </h5>
-          <Slider.SliderWithTooltip
-            min={20}
-            max={60}
-            defaultValue={threshold}
-            step={20}
-            tipFormatter={value => `${value}%`}
-            onChange={value => setThreshold(value)}
-            value={threshold}
+            <h5
+              css={css`
+                margin-bottom: 0.75rem;
+              `}
+            >
+              1990 Black Population Threshold
+            </h5>
+            <Slider.SliderWithTooltip
+              min={20}
+              max={60}
+              defaultValue={threshold}
+              step={20}
+              tipFormatter={value => `${value}%`}
+              onChange={value => setThreshold(value)}
+              value={threshold}
+            />
+          </div>
+        </div>
+        <div
+          css={css`
+            display: flex;
+            flex-direction: "row";
+            @media screen and (max-width: 640px) {
+              flex-direction: column;
+            }
+          `}
+        >
+          <LineChart
+            data={data.homeownershipByRace.value}
+            dataKey={xKey}
+            dataValue={yKey}
+            dataSeries={dataSeries}
+            title="All of Portland"
+            xLabel={xLabel}
+            yLabel={yLabel}
+            xNumberFormatter={tick => tick.toString()}
+          />
+          <LineChart
+            data={data[`homeownershipHistoricallyBlack${threshold}`].value}
+            dataKey={xKey}
+            dataValue={yKey}
+            dataSeries={dataSeries}
+            title="Historically Black Areas"
+            xLabel={xLabel}
+            yLabel={yLabel}
+            xNumberFormatter={tick => tick.toString()}
           />
         </div>
-      </div>
-      <div>
-        <LineChart
-          data={data[`homeownershipHistoricallyBlack${threshold}`].value}
-          dataKey={xKey}
-          dataValue={yKey}
-          dataSeries={dataSeries}
-          title="Historically Black Areas"
-          xLabel={xLabel}
-          yLabel={yLabel}
-          xNumberFormatter={tick => tick.toString()}
-        />
-        <LineChart
-          data={data.homeownershipByRace.value}
-          dataKey={xKey}
-          dataValue={yKey}
-          dataSeries={dataSeries}
-          title="All of Portland"
-          xLabel={xLabel}
-          yLabel={yLabel}
-          xNumberFormatter={tick => tick.toString()}
-        />
       </div>
     </Fragment>
   );
