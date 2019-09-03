@@ -68,6 +68,9 @@ const MultiScatterPlotMap = props => {
   };
 
   const memoizedData = React.useMemo(() => {
+    if (data.length === 0) {
+      return [];
+    }
     return data[0].geometry.type === "Polygon" ||
       data[0].geometry.type === "MultiPolygon"
       ? data

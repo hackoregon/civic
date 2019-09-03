@@ -1,6 +1,5 @@
 /* TODO: Fix linting errors */
 /* eslint-disable */
-
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import shortid from "shortid";
@@ -10,35 +9,39 @@ import SandboxToggleSwitch from "./SandboxToggleSwitch";
 import SandboxMapLegend from "./SandboxMapLegend";
 import SandboxBaseMapSelector from "./SandboxBaseMapSelector";
 import Logo from "../Logo/Logo";
+import Checkbox from '../Checkbox/Checkbox';
 
 const menuOpen = css(`
+  display: flex;
   position: absolute;
   top: 0;
   right: 0;
+  height: 75vh;
   width: 35%;
   z-index: 5;
   transition: 0.5s;
   @media (max-width: 850px) {
-    width: 90%;
+    width: 95%;
+    height: 65vh;
+    min-height: 550px;
   }
   @media (max-width: 500px) {
     width: 100%;
+    height: 65vh;
+    min-height: 550px;
   }
 `);
 
 const menuClosed = css(`
+  display: flex;
   position: absolute;
   top: 0;
   right: 0;
-  width: 7%;
+  height: 75vh;
+  width: 40px;
   z-index: 5;
   transition: 0.5s;
-  @media (max-width: 850px) {
-    width: 15%;
-  }
-  @media (max-width: 500px) {
-    width: 25%;
-  }
+
 `);
 
 const loadingContainer = css`
@@ -92,6 +95,8 @@ const SandboxDrawer = ({
           cursor: pointer;
           background: #EE495C;
           color: #F3F2F3;
+          min-width: 40px;
+          text-align: center;
         `)}
         >
           <div
@@ -99,13 +104,14 @@ const SandboxDrawer = ({
             font-size: 1.4rem;
             color: #F3F2F3;
             line-height: 1.5;
+            height: 35px;
             padding-left: 5px;
             @media (max-width: 850px) {
               font-size: 1.3rem;
             }
           `)}
           >
-            {drawerVisible ? "Close Menu" : "Open Menu"}
+            {drawerVisible ? ">" : "<"}
           </div>
         </div>
       </div>
@@ -114,16 +120,35 @@ const SandboxDrawer = ({
           css={css(`
           background: rgba(243,242,243,0.9);
           overflow-y: auto;
-          min-height: 550px;
-          height: 75vh;
+
           border: 1px solid #ddd;
+          border-left: 0;
           border-radius: 2px;
           box-shadow: -10px 5px 15px -3px rgba(0, 0, 0, 0.2);
+          flex-grow: 2;
           @media (max-width: 850px) {
-            height: 65vh;
           }
         `)}
         >
+          <div
+            css={css(`
+            margin: 0 0 10px 0;
+            padding: 0;
+            background-color: #201024;
+            color: white;
+            height: 35px;
+            text-align: center;
+          `)}
+          >
+            <h2
+              css={css(`
+              margin: 0;
+            `)}
+            >
+              CIVIC Sandbox
+            </h2>
+          </div>
+          
           {/* DATA COLLECTIONS */}
           <div
             css={css(`
@@ -131,7 +156,7 @@ const SandboxDrawer = ({
             z-index: 900;
           `)}
           >
-            <h2
+            <h3
               css={css(`
               color: #555;
               text-transform: uppercase;
@@ -139,7 +164,7 @@ const SandboxDrawer = ({
             `)}
             >
               Data Collections
-            </h2>
+            </h3>
             <Dropdown
               value={selectedPackage}
               options={data.packages.map(p => ({
@@ -246,7 +271,7 @@ const SandboxDrawer = ({
             z-index: 200;
           `)}
           >
-            <h2
+            <h3
               css={css(`
               color: #555;
               text-transform: uppercase;
@@ -254,7 +279,7 @@ const SandboxDrawer = ({
             `)}
             >
               Layers
-            </h2>
+            </h3>
           </div>
 
           {!areSlidesLoading && allSlides ? (
@@ -290,20 +315,21 @@ const SandboxDrawer = ({
                 <div key={shortid.generate()}>
                   <div
                     css={css(`
-                    border-top: 1px solid #ddd;
-                    padding: .3rem .5rem;
-                    text-transform: capitalize;
-                    font-weight: bold;
-                    background: ${slideBackGroundColor};
-                    color:${textColor}
+                    padding: 0.5rem 0 0 1rem;
                   `)}
                   >
-                    <SandboxToggleSwitch
+                    {/* <SandboxToggleSwitch
                       name={slide.label}
                       checked={slide.checked}
                       onChange={onChange}
                       label={slide.label}
                       mapType={slide.mapType}
+                    /> */}
+                    <Checkbox
+                      name={slide.label}
+                      value={slide.checked}
+                      onChange={onChange}
+                      label={slide.label}
                     />
                   </div>
                   { mapLegend }

@@ -13,13 +13,11 @@ import {
 } from "../MultiLayerMap/createLayers";
 
 const legendContainer = css(`
-  border-top: 2px solid gainsboro;
-  border-bottom: 2px solid gainsboro;
-  margin: 2% 0 8% 2%;
+  margin: 0.5rem 5% 1rem 5%;
   display: flex;
   flex-wrap: nowrap;
   height: 25px;
-  width: 96%;
+  width: 90%;
 `);
 
 const colorBox = css(`
