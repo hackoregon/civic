@@ -1,8 +1,8 @@
 import React from "react";
 
-import YouAndYourNeighborsGorillaVisualization from "./YouAndYourNeighborsGorillaVisualization";
+import YouAndYourNeighborsVisualization from "./YouAndYourNeighborsVisualization";
 
-const YouAndYourNeighborsGorillaMeta = (/* data */) => ({
+const YouAndYourNeighborsMeta = (/* data */) => ({
   title: "You and Your Neighbors in the Earthquake",
   slug: "you-and-your-neighbors-in-the-earthquake",
   introText: (
@@ -24,7 +24,7 @@ const YouAndYourNeighborsGorillaMeta = (/* data */) => ({
       expected impacts for your location.
     </p>
   ),
-  visualization: YouAndYourNeighborsGorillaVisualization, // data, isLoading are passed to this as props
+  visualization: YouAndYourNeighborsVisualization, // data, isLoading are passed to this as props
   additionalText: null,
   shareText: null,
   tags: null,
@@ -48,4 +48,4 @@ const YouAndYourNeighborsGorillaMeta = (/* data */) => ({
   authors: null
 });
 
-export default YouAndYourNeighborsGorillaMeta;
+export default YouAndYourNeighborsMeta;

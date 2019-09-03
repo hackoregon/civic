@@ -15,10 +15,10 @@ const apiDesc = {
   }
 };
 
-const youAndYourNeighborsGorillaData = new Reduxful(
-  "youAndYourNeighborsGorillaData",
+const youAndYourNeighborsData = new Reduxful(
+  "youAndYourNeighborsData",
   apiDesc,
   apiConfig
 );
 
-export default youAndYourNeighborsGorillaData;
+export default youAndYourNeighborsData;

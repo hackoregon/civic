@@ -4,27 +4,23 @@ import { connect } from "react-redux";
 import { resourceShape } from "reduxful/react-addons";
 import { CivicCard } from "@hackoregon/component-library";
 
-import youAndYourNeighborsGorillaMeta from "./youAndYourNeighborsGorillaMeta";
-import api from "../../state/you-and-your-neighbors-gorilla/api";
+import youAndYourNeighborsMeta from "./youAndYourNeighborsMeta";
+import api from "../../state/you-and-your-neighbors/api";
 
-const YouAndYourNeighborsGorilla = ({ init, data, Layout }) => {
+const YouAndYourNeighbors = ({ init, data, Layout }) => {
   useEffect(() => {
     init();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [init]);
 
   return (
-    <CivicCard
-      cardMeta={youAndYourNeighborsGorillaMeta}
-      data={data}
-      Layout={Layout}
-    />
+    <CivicCard cardMeta={youAndYourNeighborsMeta} data={data} Layout={Layout} />
   );
 };
 
-YouAndYourNeighborsGorilla.displayName = "YouAndYourNeighborsGorilla";
+YouAndYourNeighbors.displayName = "YouAndYourNeighbors";
 
-YouAndYourNeighborsGorilla.propTypes = {
+YouAndYourNeighbors.propTypes = {
   init: PropTypes.func,
   data: PropTypes.shape({ disasterNeighborhoodGrid: resourceShape }),
   Layout: PropTypes.func
@@ -48,4 +44,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(YouAndYourNeighborsGorilla);
+)(YouAndYourNeighbors);

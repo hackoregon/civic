@@ -7,8 +7,8 @@ import { resourceShape } from "reduxful/react-addons";
 import { isLoaded } from "reduxful";
 import { BaseMap, IconMap, ChartTitle } from "@hackoregon/component-library";
 
-import api from "../../state/you-and-your-neighbors-gorilla/api";
-import { youAndYourNeighborsSetCoords } from "../../state/you-and-your-neighbors-gorilla/local-api";
+import api from "../../state/you-and-your-neighbors/api";
+import { youAndYourNeighborsSetCoords } from "../../state/you-and-your-neighbors/local-api";
 import CoordsShakingInformation from "./CoordsShakingInformation";
 import {
   poiIconZoomScale,
@@ -45,7 +45,7 @@ const mapGLOptions = {
   keyboard: false
 };
 
-const YouAndYourNeighborsGorillaVisualization = ({
+const YouAndYourNeighborsVisualization = ({
   data,
   setCoordinates,
   selectedCoords,
@@ -140,7 +140,7 @@ const YouAndYourNeighborsGorillaVisualization = ({
   );
 };
 
-YouAndYourNeighborsGorillaVisualization.propTypes = {
+YouAndYourNeighborsVisualization.propTypes = {
   data: PropTypes.shape({ disasterNeighborhoodGrid: resourceShape }),
   selectedCoords: PropTypes.shape({
     latitude: PropTypes.number,
@@ -178,4 +178,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(YouAndYourNeighborsGorillaVisualization);
+)(YouAndYourNeighborsVisualization);
