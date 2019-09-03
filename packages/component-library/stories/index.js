@@ -111,13 +111,13 @@ storiesOf("Component Lib|Basic Inputs", module)
   .addDecorator(checkA11y)
   .add("UI Components Style Guide", () => <UIComponentsStyle />);
 buttonStory();
+buttonNewStory();
 checkboxStory();
 dropdownStory();
 selectStory();
 radioButtonGroupStory();
 sliderStory();
 
-buttonNewStory(); // TODO: Move this to the appropriate location
 // DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator story injection
 
 // charts

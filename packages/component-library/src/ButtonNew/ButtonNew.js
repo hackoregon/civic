@@ -1,26 +1,25 @@
-import { Fragment } from "react";
-import PropTypes from "prop-types";
-
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
+import PropTypes from "prop-types";
+import MaterialButton from "@material-ui/core/Button";
 
-const exampleStyle = css`
+const buttonClass = css`
   color: blue;
 `;
 
-const ButtonNew = ({ message }) => (
-  <Fragment>
-    <h1 css={exampleStyle}>{message}</h1>
-    <h1 css={exampleStyle}>This message is baked in!</h1>
-  </Fragment>
+const ButtonNew = ({ label, onClick }) => (
+  <MaterialButton variant="outlined" className={buttonClass} onClick={onClick}>
+    {label}
+  </MaterialButton>
 );
 
 ButtonNew.propTypes = {
-  message: PropTypes.string
+  label: PropTypes.string,
+  onClick: PropTypes.func
 };
 
 ButtonNew.defaultProps = {
-  message: "Hi! I'm a new blue component"
+  label: "Label"
 };
 
 ButtonNew.displayName = "ButtonNew";
