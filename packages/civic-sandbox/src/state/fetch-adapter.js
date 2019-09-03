@@ -55,12 +55,6 @@ export const fetchAllSlidesAdapter = (
   // console.log("fetchAllSlidesAdapter");
   console.log("fetchAllSlidesAdapter-slidesArray", slidesArray);
   dispatch(start());
-  // const layerURLS = slidesArray
-  //   .map(s => {
-  //     return s.layers.map(d => d.layerEndpoint);
-  //   })
-  //   .reduce((a, c) => [...a, ...c], []);
-  // console.log("fetchAllSlidesAdapter-layerURLS", layerURLS);
 
   const layerUrls = slidesArray.map(oneSlide => {
     // console.log("fetchAllSlidesAdapter-slide", slide);
@@ -80,19 +74,7 @@ export const fetchAllSlidesAdapter = (
         // console.log("l:", l);
         const dataURLS = [...layerObjects]
           .map(l2 => l2.data.dataEndpoint);
-          // .filter(d => ![...layerObjects.map(d => d.dataEndpoint)].include(d) );
 
-          // .reduce((a,c) => a.indexOf(c) === -1 ? [...a, c] : [...a, ""], []);
-        // console.log("fetchAllSlidesAdapter-dataURLS:", dataURLS);
-
-        // if (dataURLS.length) {
-        //   console.log("fetchAllSlidesAdapter-dataURLS-leng:", dataURLS.length);
-        //   return;
-        // }
-
-        // const fetchData = dataURLS.map((url,i) => {
-        //   return slidesArray[i].defaultSlide ? axios.get(url) : [];
-        // });
         const fetchData = dataURLS.map((url,i) => {
           return url && slidesArray[i].defaultSlide ? axios.get(url) : [];
         });
@@ -115,27 +97,6 @@ export const fetchAllSlidesAdapter = (
         });
 
       })
-      // .then(d2 => {
-      //   console.log("d2:", d2);
-
-      // })
-
-      // .then(
-      // axios.spread((...res) => {
-      //   console.log("resp:", res);
-      //   dispatch(
-      //     success(
-      //       res.map((r) => ({
-      //         ...r.data
-      //       }))
-      //     )
-      //   );
-      //   return res;
-      // })
-      // )
-      // .catch(err => {
-      //   dispatch(failure(err));
-      // })
   );
 };
 

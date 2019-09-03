@@ -96,58 +96,12 @@ export const getSelectedSlidesData = createSelector(
   sandbox => sandbox.slidesData
 );
 
-// export const getLayerSlides = createSelector(
-//   getSlidesData,
-//   getSelectedSlidesData,
-//   (defaultSlides, selectedSlides) => {
-//     if (
-//       defaultSlides &&
-//       defaultSlides.length &&
-//       selectedSlides &&
-//       selectedSlides.length
-//     ) {
-//       const formatSlideData = defaultSlides
-//         .map(slideDatum => {
-//           const slideData = selectedSlides.find(slide => {
-//             const fetchedSlideDataName = Object.keys(slide)[0];
-//             const endpointSlideDataName = slideDatum.name;
-//             return fetchedSlideDataName === endpointSlideDataName;
-//           });
-//           const slideDataObj = slideData
-//             ? slides(slideData[slideDatum.name])[slideDatum.name]
-//             : null;
-//           return [
-//             {
-//               data: slideDataObj ? slideDataObj.boundary : {}
-//             },
-//             {
-//               data: slideDataObj ? slideDataObj.map : {}
-//             }
-//           ];
-//         })
-//         .reduce((a, b) => a.concat(b), []);
-//       return [...formatSlideData];
-//     }
-//     return [{ data: {} }];
-//   }
-// );
-
 export const getLayerSlides = createSelector(
   getSelectedSlidesData,
   getSelectedSlides,
   (slidesData, selectedSlides) => {
     console.log("\nselector-getLayerSlides-slidesData:", slidesData);
     console.log("selector-getLayerSlides-selectedSlides:", selectedSlides);
-    
-    // const test1 = selectedSlides.map(d => {
-    //   const findSlide = slidesData.find(e => e.displayName === d);
-    //   return findSlide;
-    // });
-    // console.log("selector-getLayerSlides-test1:", test1);
-
-    // const filteredSliderVizData = slidesData
-    //   .filter(d => selectedSlides.includes(d.displayName));
-    // console.log("selector-getLayerSlides-filteredSliderVizData:", filteredSliderVizData);
 
     const filteredSliderVizData = selectedSlides.reduce((a,c) => {
       const findSlide = slidesData.find(e => e.displayName === c);
@@ -164,19 +118,6 @@ export const getLayerSlides = createSelector(
         };
       });
     console.log("selector-getLayerSlides-formattedSliderVizData:", formattedSliderVizData);
-
-    // const formattedSliderVizData = slidesData
-    //   .filter(d => selectedSlides.includes(d.displayName))
-    //   .map(d => {
-    //     return [
-    //       {
-    //         ...d.visualization.map,
-    //         data: d.results ? d.results.features : [],
-    //         layerInfo: d
-    //       }
-    //     ];
-    //   })
-    //   .reduce((a, b) => a.concat(b), []);
 
     return formattedSliderVizData;
   }
@@ -268,163 +209,65 @@ export const getSelectedFoundationDatum = createSelector(
 export const getSelectedSlideDatum = createSelector(
   getSandbox,
   getSelectedSlidesData,
-  ({ selectedSlideDatum }, slide) => {
-    if (!slide || !selectedSlideDatum || !selectedSlideDatum.object) return;
+  getSelectedSlides,
+  ({ selectedSlideDatum }, slides, selectedSlides) => {
+    // console.log("\nselector-getSelectedSlideDatum-selectedSlideDatum:", selectedSlideDatum);
+    // console.log("selector-getSelectedSlideDatum-slides:", slides);
+    // console.log("selector-getSelectedSlideDatum-selectedSlides:", selectedSlides);
 
-    const datumFieldNames = Object.keys(selectedSlideDatum.object.properties);
-    if (datumFieldNames.length < 1) return;
+    if (!selectedSlideDatum || !selectedSlideDatum.feature.object || !slides) return;
+    const { feature: slideFeature, index: slideIndex} = selectedSlideDatum;
 
-    const slideAttributes = slide.map((slideObject, index) => {
-      const [slideName] = Object.keys(slideObject);
-      const attrs = slideObject[slideName].slide_meta.attributes;
-      const slideAttrObj = {};
-      slideAttrObj.index = index;
-      if (attrs.primary.field) {
-        slideAttrObj.primary = attrs.primary;
-      }
-      if (attrs.secondary.field) {
-        slideAttrObj.secondary = attrs.secondary;
-      }
-      return slideAttrObj;
+
+    const activeLayerName = selectedSlides[slideIndex];
+    // console.log("selector-getSelectedSlideDatum-activeLayerName:", activeLayerName);
+
+    const activeLayer = slides.find(s => {
+      return s.displayName === activeLayerName;
     });
+    // console.log("selector-getSelectedSlideDatum-activeLayer:", activeLayer);
 
-    const findSlideIndex = slideAttributes.filter(d => {
-      const { primary } = d;
-      const { secondary } = d;
-      if (primary && secondary) {
-        return datumFieldNames.includes(d.primary.field && d.secondary.field);
-      }
-      if (primary) {
-        return datumFieldNames.includes(d.primary.field);
-      }
-      return false;
-    });
+    if (!activeLayer || !activeLayer.visualization || !activeLayer.visualization.tooltip) return;
+    const tooltipFields = activeLayer.visualization.tooltip;
+    // console.log("selector-getSelectedSlideDatum-tooltipFields:", tooltipFields);
 
-    if (findSlideIndex.length < 1) return;
-    const slideIndex = findSlideIndex[0].index;
-
-    const tooltipObj = {};
-    tooltipObj.x = selectedSlideDatum.x;
-    tooltipObj.y = selectedSlideDatum.y;
-    tooltipObj.content = [];
-
-    const [tooltipSlideName] = Object.keys(slide[slideIndex]);
-
-    const tooltipSlideAttrs =
-      slide[slideIndex][tooltipSlideName].slide_meta.attributes;
-    const tooltipPrimary = tooltipSlideAttrs.primary;
-    const tooltipSecondary = tooltipSlideAttrs.secondary;
-
-    const datumProps = selectedSlideDatum.object.properties;
-
-    if (tooltipPrimary && tooltipPrimary.field) {
-      tooltipObj.content.push({
-        name: tooltipPrimary.name,
-        value: datumProps[tooltipPrimary.field]
+    const tooltipInfo = {
+      x: slideFeature.x,
+      y: slideFeature.y,
+      content: [],
+    };
+    if (
+      tooltipFields && 
+      tooltipFields.primary && 
+      tooltipFields.primary.label &&
+      tooltipFields.primary.fieldName
+    ) {
+      tooltipInfo.content.push({
+        name: tooltipFields.primary.label,
+        value: slideFeature.object.properties[tooltipFields.primary.fieldName]
       });
     }
-    if (tooltipSecondary && tooltipSecondary.field) {
-      tooltipObj.content.push({
-        name: tooltipSecondary.name,
-        value: datumProps[tooltipSecondary.field]
+    if (
+      tooltipFields && 
+      tooltipFields.secondary && 
+      tooltipFields.secondary.label &&
+      tooltipFields.secondary.fieldName
+    ) {
+      tooltipInfo.content.push({
+        name: tooltipFields.secondary.label,
+        value: slideFeature.object.properties[tooltipFields.secondary.fieldName]
       });
     }
+    // console.log("selector-getSelectedSlideDatum-tooltipInfo:", tooltipInfo);
 
-    return tooltipObj;
+    return tooltipInfo;
   }
 );
 
-// export const getAllSlides = createSelector(
-//   getSandboxData,
-//   getSelectedPackageData,
-//   getSelectedSlides,
-//   (sandbox, packageData, selectedSlides) => {
-//     const allPackageSlideNumbers = isArray(packageData.slides)
-//       ? packageData.slides
-//       : [packageData.slides];
-//     const allSlidesArr = allPackageSlideNumbers.map(
-//       slide => sandbox.slides[slide]
-//     );
-//     const dataObj = { slide_data: {}, slide_meta: {} };
-//     const allSlides = allSlidesArr.map((slide, index) => {
-//       const mapObj = slides(dataObj)[slide.name];
-//       const gray = [238, 238, 238, 255];
-//       const color = mapObj.boundary.getLineColor
-//         ? mapObj.boundary.getLineColor()
-//         : gray;
-//       const mapType = mapObj.map.mapType;
-//       return {
-//         slideId: allPackageSlideNumbers[index],
-//         endpoint: slide.endpoint,
-//         label: slide.name,
-//         checked: selectedSlides.includes(allPackageSlideNumbers[index])
-//           ? true
-//           : false,
-//         color,
-//         mapType
-//       };
-//     });
-//     return allSlides;
-//   }
-// );
-
 export const getAllSlides = createSelector(
-  getSandboxData,
   getSelectedSlidesData,
   getSelectedSlides,
-  (sandbox, selectedSlidesData, selectedSlides) => {
-    // const allPackageSlideNumbers = isArray(packageData.slides)
-    //   ? packageData.slides
-    //   : [packageData.slides];
-    // const allSlidesArr = allPackageSlideNumbers.map(
-    //   slide => sandbox.slides[slide]
-    // );
-    // const dataObj = { slide_data: {}, slide_meta: {} };
-    // const allSlides = allSlidesArr.map((slide, index) => {
-    //   const mapObj = slides(dataObj)[slide.name];
-    //   const gray = [238, 238, 238, 255];
-    //   const color = mapObj.boundary.getLineColor
-    //     ? mapObj.boundary.getLineColor()
-    //     : gray;
-    //   const mapType = mapObj.map.mapType;
-    //   return {
-    //     slideId: allPackageSlideNumbers[index],
-    //     endpoint: slide.endpoint,
-    //     label: slide.name,
-    //     checked: selectedSlides.includes(allPackageSlideNumbers[index])
-    //       ? true
-    //       : false,
-    //     color,
-    //     mapType
-    //   };
-    // });
-    // const selectedSlideAll = sandbox.packages
-    //   .filter(p => {
-    //     console.log("selector-getAllSlides-pack:", p);
-    //     console.log("selector-getAllSlides-pack:", selectedPackage);
-    //     return p.displayName === selectedPackage;
-    //   }).map((d,i) => {
-    //     return {
-    //       ...d,
-    //       ...d.layers[i]
-    //     };
-    //   });
-    // console.log("selector-getAllSlides-selectedSlide", selectedSlide);
-    console.log("\n");
-
-    // const allSlides = []//packageData.map(d => d.name === )
-    // .layers.map((slide, indx) => {
-    //   console.log("selector-getAllSlides-slides:", slide);
-    //   return {
-    //     slideId: indx,
-    //     endpoint: slide.dataEndpoint,
-    //     label: slide.displayName,
-    //     // checked: !deSelectedSlides.includes(slide.displayName),
-    //     color: [220, 20, 60],
-    //     mapType: slide.visualization.map.mapType
-    //   };
-    // });
-
+  (selectedSlidesData, selectedSlides) => {
     console.log(
       "selector-getAllSlides-selectedSlidesData:",
       selectedSlidesData
@@ -447,27 +290,3 @@ export const getAllSlides = createSelector(
     return allSlides;
   }
 );
-
-// export const getfoundationMapProps = createSelector(
-//   getSandboxData,
-//   getSelectedFoundation,
-//   (sandbox, selectedFoundation) => {
-//     const dataObj = { slide_meta: {}, slide_data: {} };
-//     const foundationMapObj = foundations(dataObj)[
-//       sandbox.foundations[selectedFoundation].name
-//     ];
-//     const foundationMapProps = {
-//       color: foundationMapObj.color,
-//       getPropValue: foundationMapObj.getPropValue,
-//       propName: foundationMapObj.propName,
-//       scaleType: foundationMapObj.scaleType
-//     };
-//     if (
-//       foundationMapObj.scaleType === "ordinal" ||
-//       foundationMapObj.scaleType === "threshold"
-//     ) {
-//       foundationMapProps.categories = foundationMapObj.categories;
-//     }
-//     return foundationMapProps;
-//   }
-// );

@@ -106,28 +106,6 @@ const reducer = (state = INITIAL_STATE, action) => {
       console.log("a-SLIDES_SUCCESS");
       console.log("a-payload:", action.payload);
       console.log("a-state.slidesData:", state.slidesData);
-      // let { slidesData } = state;
-      // if (state.slidesData.findIndex(d => d.displayName === action.payload[0].displayName)) {
-      //   const slideIndex = state.slidesData.findIndex(d => d.displayName === action.payload[0].displayName);
-
-      //   slidesData = [
-      //     ...state.slidesData.slice(0, slideIndex),
-      //     ...action.payload,
-      //     ...state.slidesData.slice(slideIndex + 1)
-      //   ];
-      // }
-
-      // const payloadSlideIndex = state.slidesData.findIndex(d => {
-      //   return d.displayName === action.payload[0].displayName;
-      // });
-      // console.log("a-payloadSlideIndex:", payloadSlideIndex);
-
-      // const newSlidesData = payloadSlideIndex > -1
-      //   ? state.slidesData.map((d,i) => {
-      //       return i === payloadSlideIndex ? action.payload[0] : d;
-      //     })
-      //   : [...state.slidesData, ...action.payload];
-      // console.log("a-newSlidesData:", newSlidesData);
 
       return {
         ...state,
@@ -238,11 +216,13 @@ const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         selectedFoundationDatum: action.feature
       };
-    case SET_SLIDE_DATUM:
+    case SET_SLIDE_DATUM: {
+      console.log("a-SET_SLIDE_DATUM:", action);
       return {
         ...state,
-        selectedSlideDatum: action.feature
+        selectedSlideDatum: {feature: action.feature, index: action.index}
       };
+    }
     default:
       return state;
   }

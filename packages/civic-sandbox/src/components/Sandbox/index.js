@@ -15,8 +15,8 @@ import {
   setSlides,
   setPackage,
   fetchSlideByDate,
-  setSelectedFoundationDatum
-  // setSelectedSlideDatum
+  setSelectedFoundationDatum,
+  setSelectedSlideDatum
 } from "../../state/sandbox/actions";
 import {
   isAllSandboxLoading,
@@ -34,7 +34,7 @@ import {
   getSelectedFoundation,
   getSelectedSlides,
   getLayerSlides,
-  // getSelectedSlideDatum,
+  getSelectedSlideDatum,
   getAllSlides,
   // getfoundationMapProps,
   getSelectedFoundationDatum
@@ -172,7 +172,6 @@ class SandboxComponent extends React.Component {
     //   </div>
     // );
 
-    // const layerData = [this.props.layerFoundation, ...this.props.layerSlides];
     const layerData = [...this.props.layerSlides];
     return (
       // this.props.isLoading ? (
@@ -225,7 +224,7 @@ export default connect(
     // layerFoundation: getLayerFoundation(state),
     selectedSlide: getSelectedSlides(state),
     layerSlides: getLayerSlides(state),
-    // selectedSlideDatum: getSelectedSlideDatum(state),
+    selectedSlideDatum: getSelectedSlideDatum(state),
     allSlides: getAllSlides(state),
     // foundationMapProps: getfoundationMapProps(state),
     selectedFoundationDatum: getSelectedFoundationDatum(state)
@@ -251,9 +250,9 @@ export default connect(
     },
     foundationClick(feature) {
       dispatch(setSelectedFoundationDatum(feature));
+    },
+    slideHover(feature, slideIndex) {
+      dispatch(setSelectedSlideDatum(feature, slideIndex));
     }
-    // slideHover(feature) {
-    //   dispatch(setSelectedSlideDatum(feature));
-    // }
   })
 )(SandboxComponent);
