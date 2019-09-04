@@ -8,7 +8,7 @@ const buttonClass = css`
 `;
 
 const ButtonNew = ({ label, onClick }) => (
-  <MaterialButton variant="outlined" className={buttonClass} onClick={onClick}>
+  <MaterialButton variant="outlined" css={buttonClass} onClick={onClick}>
     {label}
   </MaterialButton>
 );
