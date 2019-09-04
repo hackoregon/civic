@@ -4,7 +4,8 @@ const { primary, tertiary, action, subdued } = BrandColors;
 
 const introWidth = "800px";
 const browserDefaultSize = 16; // Don't modify
-const defaultFontSize = 22; // all em based off of this default value
+export const defaultFontSize = 22; // all em based off of this default value
+const headerHeight = 115;
 
 const textStandard = {
   color: primary.hex,
@@ -97,7 +98,7 @@ export default {
     ...textStandard,
     width: "100%",
     maxWidth: "1000px",
-    margin: "60px auto"
+    margin: `${60 + headerHeight}px auto 60px`
   },
 
   ".intro-wrapper": {

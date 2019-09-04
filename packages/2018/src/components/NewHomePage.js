@@ -4,6 +4,7 @@ import emotionReset from "emotion-reset";
 import { Fragment } from "react";
 import { Button, BrandColors } from "@hackoregon/component-library";
 import HomePageStyle from "./NewHomePage.styles";
+import Header from './Header';
 // Placeholders
 import placeholderIntroImg from "../assets/new-home-page-1.png";
 import placeholderWorkImg from "../assets/new-home-page-2.png";
@@ -37,6 +38,7 @@ const HomePage = () => {
           ${HomePageStyle}
         `}
       />
+      <Header />
       <div className="content-wrapper">
         <h1>Civic</h1>
         <h2 className="page-subtitle">
