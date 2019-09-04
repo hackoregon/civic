@@ -11,7 +11,8 @@ import api from "../../state/template-api-data/api";
 const TemplateAPICard = ({ init, data, Layout }) => {
   useEffect(() => {
     init();
-  }, [init]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const loading = !isLoaded(data.ridershipOverTime);
 

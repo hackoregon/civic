@@ -31,7 +31,7 @@ const TemplateAPICardMeta = (/* data */) => ({
   ),
   shareText:
     "Ice cream candy canes brownie marzipan jelly chocolate bar marshmallow.",
-  tags: ["Transportation", "Bus", "Rail", "Portland", "Stuff"],
+  // tags: ["Transportation", "Bus", "Rail", "Portland", "Stuff"],
   selector: null,
   analysis: (
     <Collapsable>

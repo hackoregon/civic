@@ -10,8 +10,14 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import shortid from "shortid";
-// import useMediaQuery from "@material-ui/core/useMediaQuery";
-// import { PageLayout } from "../..";
+
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import Collapse from "@material-ui/core/Collapse";
+import ExpandLess from "@material-ui/icons/ExpandLess";
+import ExpandMore from "@material-ui/icons/ExpandMore";
+
 import { Checkbox, CivicCardLayoutPreview } from "../index";
 
 const drawerWidth = 240;
@@ -58,7 +64,6 @@ const useStyles = makeStyles(theme => ({
   content: {
     position: "absolute",
     top: headerHeight,
-    // border: '3px solid red',
     padding: theme.spacing(1),
     width: "100%",
     [theme.breakpoints.up("sm")]: {
@@ -80,8 +85,18 @@ const useStyles = makeStyles(theme => ({
     flexWrap: "wrap",
     listStyleType: "none",
     alignSelf: "stretch"
+  },
+  nested: {
+    paddingLeft: theme.spacing(4)
   }
 }));
+
+const tagsListExample = {
+  topics: ["Transportation", "Disaster Resilience", "Housing"],
+  locations: ["Portland", "Nationwide", "Your City"],
+  visualizations: ["Bar Chart", "Cloropleth Map", "Scatterplot"],
+  other: ["Bananas", "Walruses", "Flamingos"]
+};
 
 const checkTags = (entryTags, activeTags) => {
   if (!entryTags) return false;
@@ -92,14 +107,21 @@ const checkTags = (entryTags, activeTags) => {
 };
 
 const CardList = ({ CardRegistry }) => {
+  // eslint-disable-next-line no-unused-vars
   const { entries, tags } = CardRegistry;
 
   const initState = {};
-  Object.keys(tags).forEach(tag => {
-    initState[tag] = true;
+  Object.keys(tagsListExample).forEach(category => {
+    tagsListExample[category].forEach(tag => {
+      initState[tag] = true;
+    });
   });
   const classes = useStyles();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [openTopic, setOpenTopic] = React.useState(true);
+  const [openLocation, setOpenLocation] = React.useState(true);
+  const [openVisualization, setOpenVisualization] = React.useState(true);
+  const [openOther, setOpenOther] = React.useState(true);
   const theme = useTheme();
   const [activeTags, setActiveTags] = useState(initState);
 
@@ -107,23 +129,135 @@ const CardList = ({ CardRegistry }) => {
     setMobileOpen(!mobileOpen);
   }
 
+  function handleTopic() {
+    setOpenTopic(!openTopic);
+  }
+
+  function handleLocation() {
+    setOpenLocation(!openLocation);
+  }
+
+  function handleVisualization() {
+    setOpenVisualization(!openVisualization);
+  }
+
+  function handleOther() {
+    setOpenOther(!openOther);
+  }
+
   const drawer = (
     <div className={classes.toolbar}>
       <h1>Filters</h1>
-      <h2>Topic</h2>
-      <ul>
-        {Object.keys(tags).map(tag => (
-          <li key={shortid.generate()} className={classes.filterItem}>
-            <Checkbox
-              value={activeTags[tag]}
-              label={tag}
-              onChange={() =>
-                setActiveTags({ ...activeTags, [tag]: !activeTags[tag] })
-              }
-            />
-          </li>
-        ))}
-      </ul>
+      <List
+        component="nav"
+        aria-labelledby="nested-list-subheader"
+        className={classes.root}
+      >
+        <ListItem button onClick={handleTopic}>
+          <ListItemText primary="Topics" />
+          {openTopic ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+        <Collapse in={openTopic} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            {tagsListExample.topics.map(topic => (
+              <ListItem
+                key={shortid.generate()}
+                button
+                className={classes.nested}
+              >
+                <Checkbox
+                  value={activeTags[topic]}
+                  label={topic}
+                  onChange={() =>
+                    setActiveTags({
+                      ...activeTags,
+                      [topic]: !activeTags[topic]
+                    })
+                  }
+                />
+              </ListItem>
+            ))}
+          </List>
+        </Collapse>
+        <ListItem button onClick={handleLocation}>
+          <ListItemText primary="Locations" />
+          {openLocation ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+        <Collapse in={openLocation} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            {tagsListExample.locations.map(location => (
+              <ListItem
+                key={shortid.generate()}
+                button
+                className={classes.nested}
+              >
+                <Checkbox
+                  value={activeTags[location]}
+                  label={location}
+                  onChange={() =>
+                    setActiveTags({
+                      ...activeTags,
+                      [location]: !activeTags[location]
+                    })
+                  }
+                />
+              </ListItem>
+            ))}
+          </List>
+        </Collapse>
+        <ListItem button onClick={handleVisualization}>
+          <ListItemText primary="Visualizations" />
+          {openVisualization ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+        <Collapse in={openVisualization} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            {tagsListExample.visualizations.map(visualizations => (
+              <ListItem
+                key={shortid.generate()}
+                button
+                className={classes.nested}
+              >
+                <Checkbox
+                  value={activeTags[visualizations]}
+                  label={visualizations}
+                  onChange={() =>
+                    setActiveTags({
+                      ...activeTags,
+                      [visualizations]: !activeTags[visualizations]
+                    })
+                  }
+                />
+              </ListItem>
+            ))}
+          </List>
+        </Collapse>
+        <ListItem button onClick={handleOther}>
+          <ListItemText primary="Other" />
+          {openOther ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+        <Collapse in={openOther} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            {tagsListExample.other.map(other => (
+              <ListItem
+                key={shortid.generate()}
+                button
+                className={classes.nested}
+              >
+                <Checkbox
+                  value={activeTags[other]}
+                  label={other}
+                  onChange={() =>
+                    setActiveTags({
+                      ...activeTags,
+                      [other]: !activeTags[other]
+                    })
+                  }
+                />
+              </ListItem>
+            ))}
+          </List>
+        </Collapse>
+      </List>
     </div>
   );
 
