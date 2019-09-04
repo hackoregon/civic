@@ -1,11 +1,11 @@
 /* eslint-disable import/no-named-as-default */
 import LifeAlteringEvent from "./components/LifeAlteringEvent";
 import ViolentShakingAndGroundDeformation from "./components/ViolentShakingAndGroundDeformation";
-import YouAndYourNeighbors from "./components/YouAndYourNeighbors";
 import WhatYouCanDoToPrepare from "./components/WhatYouCanDoToPrepare";
 import IncreasingSocialCapital from "./components/IncreasingSocialCapital";
 import ProactivePlanning from "./components/ProactivePlanning";
 import SignificantStructuralDamage from "./components/SignificantStructuralDamage";
+import YouAndYourNeighbors from "./components/YouAndYourNeighbors";
 
 export default [
   {
