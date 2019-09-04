@@ -6,8 +6,13 @@ import BlackPopulationChange from "./components/BlackPopulationChange";
 import HomeLoanApprovals from "./components/HomeLoanApprovals";
 import HomeOwnershipRates from "./components/HomeOwnershipRates";
 import AduDistributions from "./components/AduDistributions";
+import HouseholdIncomeByRace from "./components/HouseholdIncomeByRace";
 
 const CardRegistry = [
+  {
+    slug: "household-income-by-race",
+    component: HouseholdIncomeByRace
+  },
   {
     slug: "adu-distributions",
     component: AduDistributions
