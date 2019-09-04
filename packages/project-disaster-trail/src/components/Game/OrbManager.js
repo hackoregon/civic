@@ -2,7 +2,7 @@
 import React, { useEffect, useState, memo, useRef, useCallback } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { map, find as _find } from "lodash";
+import { map, find as _find, filter } from "lodash";
 import styled from "@emotion/styled";
 
 import remove from "lodash/remove";
@@ -189,6 +189,17 @@ const OrbManager = ({
             currentOrb.y = Math.round(currentOrb.y * 10) / 10;
           }
         }
+
+        // WARNING: landmine
+        // if the orb is 'completed'
+        // and it is offscreen
+        // then it no longer needs to be rendered
+        // @techdebt: remove currentOrb from tempModels so it's no longer rendered
+      } else if (
+        !currentOrb.bypassRender &&
+        (currentOrb.y < -ORB_CONFIG.orbSize || currentOrb.y > bounds.height)
+      ) {
+        currentOrb.bypassRender = true;
       }
 
       // store the updated model.
@@ -203,11 +214,15 @@ const OrbManager = ({
 
   useAnimationFrame(() => animate());
 
+  // by default all orbs are rendered,
+  // until their `bypassRender` property is true
+  const renderableOrbs = filter(orbs, orb => !orb.bypassRender);
+
   return (
     <OrbsStyle ref={boundsRef}>
-      {map(orbs, (orb, index) => (
+      {map(renderableOrbs, orb => (
         <div
-          key={index}
+          key={orb.orbId}
           style={{
             position: "absolute",
             transform: `translate(${orb.x}px, ${orb.y}px)`
