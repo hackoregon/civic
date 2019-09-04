@@ -7,10 +7,10 @@ import {
   PullQuote,
   CivicCardLayoutClassic
 } from "@hackoregon/component-library";
-import YouAndYourNeighbors from "../YouAndYourNeighbors";
+import WhatYouCanDoToPrepare from "../WhatYouCanDoToPrepare";
 import SignificantStructuralDamage from "../SignificantStructuralDamage";
 import ProactivePlanning from "../ProactivePlanning";
-import WhatYouCanDoToPrepare from "../WhatYouCanDoToPrepare";
+import YouAndYourNeighbors from "../YouAndYourNeighbors";
 
 const sectionMarginMedium = css`
   display: block;
@@ -53,7 +53,9 @@ const App = () => (
       quoteText="Does your family have a plan for earthquake preparedness? Here are the steps to help you get started."
       url="https://civicplatform.org/cards/what-you-can-do-to-prepare-for-an-earthquake"
     />
-    <WhatYouCanDoToPrepare />
+    <section css={sectionMarginMedium}>
+      <WhatYouCanDoToPrepare Layout={CivicCardLayoutClassic} />
+    </section>
     <p className="transition">
       Social capital is a statistic derived from measuring community engagement.
       Disaster resilience, measuring the ability for an entity to bounce back
