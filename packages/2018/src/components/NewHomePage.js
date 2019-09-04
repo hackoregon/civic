@@ -2,9 +2,9 @@
 import { css, jsx, Global } from "@emotion/core";
 import emotionReset from "emotion-reset";
 import { Fragment } from "react";
-import { Button, BrandColors } from "@hackoregon/component-library";
+import { Button, BrandColors, Footer } from "@hackoregon/component-library";
 import HomePageStyle from "./NewHomePage.styles";
-import Header from './Header';
+import Header from "./Header";
 // Placeholders
 import placeholderIntroImg from "../assets/new-home-page-1.png";
 import placeholderWorkImg from "../assets/new-home-page-2.png";
@@ -40,7 +40,7 @@ const HomePage = () => {
       />
       <Header />
       <div className="content-wrapper">
-        <h1>Civic</h1>
+        <h1>CIVIC</h1>
         <h2 className="page-subtitle">
           A system for public data, built on collaboration
         </h2>
@@ -55,7 +55,9 @@ const HomePage = () => {
             system built for the needs of institutions managing important data
             systems with public value.
           </p>
-          <Button margin="26px 0 0 0">EXPLORE CIVIC</Button>
+          <div className="section-button-container">
+            <Button margin="0 0 0 0">EXPLORE CIVIC</Button>
+          </div>
         </div>
 
         <h2>JOIN THE MOVEMENT</h2>
@@ -85,9 +87,9 @@ const HomePage = () => {
             <br />
             We’re building the teams and systems to make it happen.
           </p>
-          <Button margin="96px 0 53px 0" bkgndColor={BrandColors.subdued.rgba}>
-            WORK WITH US
-          </Button>
+          <div className="section-button-container">
+            <Button bkgndColor={BrandColors.subdued.rgba}>WORK WITH US</Button>
+          </div>
           <img
             className="placeholder-section-image"
             src={placeholderWorkImg}
@@ -123,11 +125,7 @@ const HomePage = () => {
             >
               APPLY NOW
             </Button>
-            <Button
-              display="inline"
-              margin="0 0 0 0"
-              bkgndColor={BrandColors.subdued.rgba}
-            >
+            <Button display="inline" bkgndColor={BrandColors.subdued.rgba}>
               LEARN MORE
             </Button>
           </div>
@@ -154,7 +152,15 @@ const HomePage = () => {
             team to start contributing.
           </p>
           <h4 className="platform-h4">CIVIC IS COMPRISED OF:</h4>
-          <div className="link-container">
+          <img
+            css={css`
+              margin-left: -15px;
+              width: 100%;
+            `}
+            src={placeholderPlatformImg}
+            alt="placeholder"
+          />
+          {/* <div className="link-container">
             <a className="platform-link" href="http://service.civicpdx.org/">
               EXPLORE DATA
             </a>
@@ -170,19 +176,12 @@ const HomePage = () => {
             >
               DOCUMENTATION
             </a>
-          </div>
-          <img
-            css={css`
-              margin-left: -15px;
-              width: 100%;
-            `}
-            src={placeholderPlatformImg}
-            alt="placeholder"
-          />
+          </div> */}
         </div>
 
         <div className="home-section" css={sectionCivicLayout}>
           <h3>Civic Software Foundation</h3>
+          <h4>OUR BOTTOM LINE IS PUBLIC INTEREST</h4>
           <p>
             The CIVIC Platform is made possible by the Civic Software
             Foundation, a non-profit organization bringing data science, modern
@@ -192,19 +191,20 @@ const HomePage = () => {
           <Button margin="40px 0 50px 0" bkgndColor={BrandColors.subdued.rgba}>
             VISIT THE CIVIC SOFTWARE FOUNDATION
           </Button>
-          <p className="quote-text">
+          {/* <p className="quote-text">
             &quot;When <span className="big-text">political will</span> meets{" "}
-            <span className="big-text">public imagination</span> the technology
-            we can create is unlike anything{" "}
+            <span className="big-text">public imagination</span> the
+            technology we can create is unlike anything{" "}
             <span className="big-text">the world has ever seen.&quot;</span>
-          </p>
-          <img
+          </p> */}
+          {/* <img
             className="placeholder-section-image"
             src={placeholderCivicImg}
             alt="placeholder"
-          />
+          /> */}
         </div>
       </div>
+      <Footer />
     </Fragment>
   );
 };

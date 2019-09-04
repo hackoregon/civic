@@ -12,7 +12,7 @@ const textStandard = {
   fontFamily: "'Rubik', sans-serif",
   fontWeight: "normal",
   fontSize: `${defaultFontSize / browserDefaultSize}rem`,
-  lineHeight: `${36 / defaultFontSize}rem`
+  lineHeight: `${40 / defaultFontSize}rem`
 };
 
 export default {
@@ -24,6 +24,10 @@ export default {
   a: {
     color: action.hex,
     textDecoration: "underline"
+  },
+
+  p: {
+    lineHeight: `${40 / defaultFontSize}rem`
   },
 
   h1: {
@@ -47,7 +51,7 @@ export default {
     fontWeight: "500",
     lineHeight: "118%",
     position: "absolute",
-    top: `-${37 / defaultFontSize}rem`,
+    top: `-${60 / defaultFontSize}rem`,
     left: "0"
   },
 
@@ -115,7 +119,7 @@ export default {
   },
 
   ".section-button-container": {
-    margin: "77px 0 52px"
+    margin: "52px 0 52px"
   },
 
   ".link-container": {

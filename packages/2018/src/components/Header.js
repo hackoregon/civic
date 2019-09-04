@@ -33,7 +33,9 @@ const logoStyle = css`
 const linkContainer = css`
   display: grid;
   justify-self: end;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, max-content);
+  grid-gap: ${48 / defaultFontSize}em;
+
   justify-items: end;
 `;
 
