@@ -178,7 +178,7 @@ export class Packages extends React.Component {
           <div>
             <section style={{ position: "relative" }}>
               <SandboxComponent />
-              {!isAllSandboxLoading && (
+              {/*!isAllSandboxLoading && (
                 <div
                   className={css(`
                     position: absolute;
@@ -198,7 +198,7 @@ export class Packages extends React.Component {
                     isDashboardOpen={this.state.dashboardIsOpen}
                   />
                 </div>
-              )}
+              )*/}
             </section>
             <p>
               <a onClick={this.closeMap}>&lt; Back to Packages</a>

@@ -8,8 +8,7 @@ import civicFormat from "../utils/civicFormat";
 import {
   createColorScale,
   updateQuantileScale,
-  updateEqualScale,
-  createRange
+  updateEqualScale
 } from "../MultiLayerMap/createLayers";
 
 const legendContainer = css(`
@@ -173,7 +172,7 @@ const SandboxMapLegend = props => {
 };
 
 SandboxMapLegend.propTypes = {
-  data: PropTypes.shape({}).isRequired,
+  data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   mapProps: PropTypes.shape({}).isRequired
 };
 

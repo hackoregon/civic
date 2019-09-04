@@ -284,29 +284,39 @@ const SandboxDrawer = ({
 
           {!areSlidesLoading && allSlides ? (
             allSlides.map((slide, index) => {
-              const defaultGray = [238, 238, 238, 255];
-              const backgroundSlideColor = slide.color;
-              const formatBackgroundColor = arr =>
-                arr.reduce(
-                  (acc, cur, i) => (i < 3 ? `${acc + cur},` : `${acc}0.9)`),
-                  "rgba("
-                );
-              const slideBackGroundColor = formatBackgroundColor(
-                backgroundSlideColor
-              );
-              const blackTextColor = "rgba(0,0,0,1)";
-              const whiteTextColor = "rgba(255,255,255,1)";
-              const textColor =
-                slideBackGroundColor === defaultGray
-                  ? blackTextColor
-                  : whiteTextColor;
-                  
-              const mapLegend = Object.keys(foundationData).length !== 0 && foundationData[index] && foundationData[index].mapType === "ChoroplethMap" && foundationData[index].data
-                ? 
+              // const defaultGray = [238, 238, 238, 255];
+              // const backgroundSlideColor = slide.color;
+              // const formatBackgroundColor = arr =>
+              //   arr.reduce(
+              //     (acc, cur, i) => (i < 3 ? `${acc + cur},` : `${acc}0.9)`),
+              //     "rgba("
+              //   );
+              // const slideBackGroundColor = formatBackgroundColor(
+              //   backgroundSlideColor
+              // );
+              // const blackTextColor = "rgba(0,0,0,1)";
+              // const whiteTextColor = "rgba(255,255,255,1)";
+              // const textColor =
+              //   slideBackGroundColor === defaultGray
+              //     ? blackTextColor
+              //     : whiteTextColor;
+              // console.log("drawer-allSlides-slide:", slide);
+              // console.log("drawer-allSlides-index:", index);
+              // console.log("drawer-foundationData:", foundationData);
+              // console.log("drawer-foundationMapProps:", foundationMapProps);
+
+              const dataIndex = foundationData.findIndex(d => {
+                return d.layerInfo.displayName === slide.label && d.mapType === "ChoroplethMap"
+              });
+              // console.log("drawer-dataIndex:", dataIndex);
+              // console.log("drawer-[dataIndex]:", foundationMapProps[dataIndex]);
+
+              const mapLegend = dataIndex !== -1 && foundationData[dataIndex].data.length > 0
+                ?
                   (
                     <SandboxMapLegend
-                      data={foundationData[index].data}
-                      mapProps={foundationMapProps[index]}
+                      data={foundationData[dataIndex].data}
+                      mapProps={foundationMapProps[dataIndex]}
                     />
                   )
                 : null;
