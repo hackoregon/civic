@@ -20,7 +20,7 @@ const infographicImg = css`
   width: 100%;
 `;
 
-const TemplateMinimalCardVisualization = () => (
+const <%=StoryCardName%>Visualization = () => (
   <ChartContainer title="Critical Infrastructure Rendered Unusable">
     <div css={infographicContainer}>
       <div css={infographicItem}>
@@ -48,4 +48,4 @@ const TemplateMinimalCardVisualization = () => (
   </ChartContainer>
 );
 
-export default TemplateMinimalCardVisualization;
+export default <%=StoryCardName%>Visualization;

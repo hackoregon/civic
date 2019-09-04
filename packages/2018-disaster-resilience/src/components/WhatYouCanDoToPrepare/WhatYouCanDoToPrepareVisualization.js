@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Quiz from "./Quiz/Quiz";
 import Summary from "./Summary/Summary";
 
-const TemplateMinimalCardVisualization = () => {
+const WhatYouCanDoToPrepareVisualization = () => {
   const [quizFinished, setDone] = useState(false);
 
   const makeDone = e => {
@@ -19,4 +19,4 @@ const TemplateMinimalCardVisualization = () => {
   );
 };
 
-export default TemplateMinimalCardVisualization;
+export default WhatYouCanDoToPrepareVisualization;
