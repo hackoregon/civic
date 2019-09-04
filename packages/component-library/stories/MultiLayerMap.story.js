@@ -170,7 +170,8 @@ export default () =>
 
         const SCATTERPLOT_SCALE_TYPE_COLOR_OPTIONS = {
           none: "",
-          ordinal: "ordinal"
+          ordinal: "ordinal",
+          threshold: "threshold"
         };
 
         const circleColor = select(

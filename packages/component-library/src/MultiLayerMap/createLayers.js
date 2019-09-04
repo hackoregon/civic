@@ -94,7 +94,7 @@ const createDiscreteScale = (categories, colorRange) => {
   return scaleOrdinal()
     .domain(categories)
     .range(range);
-    // .unknown([255, 255, 255, 128]);
+  // .unknown([255, 255, 255, 128]);
 };
 
 export const createColorScale = (
@@ -125,7 +125,8 @@ export const createSizeScale = (width, scaleType = {}, fieldName = {}) => {
   const { area: areaFieldName } = fieldName;
 
   if (scaleType && areaScaleType === "circle area") {
-    return feature => Math.sqrt(feature.properties[areaFieldName] / Math.PI);
+    return feature =>
+      Math.sqrt(Math.abs(+feature.properties[areaFieldName]) / Math.PI);
   }
   return () => width;
 };
