@@ -34,6 +34,7 @@ export const getSandboxData = getSandboxProperty("sandbox");
 export const getFoundations = getSandboxProperty("foundations");
 export const getFoundationError = getSandboxProperty("foundationError");
 export const getSelectedPackage = getSandboxProperty("selectedPackage");
+export const getSelectedSlideKey = getSandboxProperty("selectedSlideKey");
 export const getPackages = getSandboxProperty("packages");
 export const getSlidesSuccess = getSandboxProperty("slidesSuccess");
 export const isAnyError = getSandboxProperty("slidesError");
@@ -99,25 +100,40 @@ export const getSelectedSlidesData = createSelector(
 export const getLayerSlides = createSelector(
   getSelectedSlidesData,
   getSelectedSlides,
-  (slidesData, selectedSlides) => {
-    console.log("\nselector-getLayerSlides-slidesData:", slidesData);
-    console.log("selector-getLayerSlides-selectedSlides:", selectedSlides);
+  getSelectedSlideKey,
+  (slidesData, selectedSlides, selectedSlideKey) => {
+    // console.log("selector-getLayerSlides-slidesData:", slidesData);
+    // console.log("selector-getLayerSlides-selectedSlides:", selectedSlides);
+    // console.log("selector-getLayerSlides-selectedSlideKey:", selectedSlideKey);
 
     const filteredSliderVizData = selectedSlides.reduce((a,c) => {
       const findSlide = slidesData.find(e => e.displayName === c);
       return findSlide ? [...a, findSlide] : a;
     }, []);
-    console.log("selector-getLayerSlides-filteredSliderVizData:", filteredSliderVizData);
+    // console.log("selector-getLayerSlides-filteredSliderVizData:", filteredSliderVizData);
+    // const hasSelectedSlideKeys = Object.keys(selectedSlideKey).length > 0;
+    // console.log("selector-getLayerSlides-hasSelectedSlideKeys:", hasSelectedSlideKeys);
 
     const formattedSliderVizData = filteredSliderVizData
       .map(d => {
-        return {
+        const mapProps = {
           ...d.visualization.map,
+          fieldName: {
+            color: selectedSlideKey[d.displayName]
+              ? selectedSlideKey[d.displayName]
+              : d.visualization.map.fieldName && d.visualization.map.fieldName.color
+              ? d.visualization.map.fieldName.color
+              : ""
+          }
+        };
+        // console.log("mapProps:", mapProps);
+        return {
+          ...mapProps,
           data: d.results ? d.results.features : [],
           layerInfo: d
         };
       });
-    console.log("selector-getLayerSlides-formattedSliderVizData:", formattedSliderVizData);
+    // console.log("selector-getLayerSlides-formattedSliderVizData:", formattedSliderVizData);
 
     return formattedSliderVizData;
   }

@@ -14,6 +14,7 @@ import {
   setFoundation,
   setSlides,
   setPackage,
+  setSlideKey,
   fetchSlideByDate,
   setSelectedFoundationDatum,
   setSelectedSlideDatum
@@ -201,6 +202,7 @@ class SandboxComponent extends React.Component {
         selectedFoundationDatum={this.props.selectedFoundationDatum}
         areSlidesLoading={this.props.isLoading}
         errors={this.props.isError}
+        updateSlideKey={this.props.setSlideKey}
       />
     );
   }
@@ -241,6 +243,9 @@ export default connect(
     },
     setPackage(selectedPackage = "") {
       dispatch(setPackage(selectedPackage));
+    },
+    setSlideKey(selectedSlideKey = {}) {
+      dispatch(setSlideKey(selectedSlideKey));
     },
     setFoundation(selectedFoundation = "") {
       dispatch(setFoundation(selectedFoundation));

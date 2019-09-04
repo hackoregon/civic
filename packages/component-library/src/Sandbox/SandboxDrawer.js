@@ -76,7 +76,8 @@ const SandboxDrawer = ({
   baseMapStyle,
   defaultSlides,
   areSlidesLoading,
-  errors
+  errors,
+  updateSlideKey
 }) => {
   const loader = (
     <div css={loadingContainer}>
@@ -306,7 +307,7 @@ const SandboxDrawer = ({
               // console.log("drawer-foundationMapProps:", foundationMapProps);
 
               const dataIndex = foundationData.findIndex(d => {
-                return d.layerInfo.displayName === slide.label && d.mapType === "ChoroplethMap"
+                return d.mapType === "ChoroplethMap" && d.layerInfo.displayName === slide.label;
               });
               // console.log("drawer-dataIndex:", dataIndex);
               // console.log("drawer-[dataIndex]:", foundationMapProps[dataIndex]);
@@ -320,6 +321,29 @@ const SandboxDrawer = ({
                     />
                   )
                 : null;
+
+              const keyOptions = dataIndex !== -1 && foundationData[dataIndex].data.length > 0
+                ? Object.keys(foundationData[dataIndex].data[0].properties).filter(d => d.includes(foundationData[dataIndex].fieldName.color.slice(0,5)))
+                : []
+
+              const keySelector = dataIndex !== -1 && foundationData[dataIndex].data.length > 0
+                ? (
+                    <Dropdown
+                      value={foundationData[dataIndex].fieldName.color}
+                      options={keyOptions.map(d => {
+                        return {
+                          value: d,
+                          label: d
+                        };
+                      })}
+                      onChange={name => {
+                        // console.log("drawer-key:", {[slide.label]: name});
+                        updateSlideKey({[slide.label]: name});
+                      }}
+                      simpleValue
+                    />
+                  )
+                  : null;
 
               return (
                 <div key={shortid.generate()}>
@@ -352,6 +376,9 @@ const SandboxDrawer = ({
                     z-index: ${10 - index};
                   `)}
                   >
+                    {/* Key Selector */}
+                    { keySelector }
+
                     {/*slide.checked &&
                     selectedSlideData.slide_meta &&
                     selectedSlideData.slide_meta.dates.date_granularity ? (
@@ -388,7 +415,7 @@ const SandboxDrawer = ({
                 width: 80%;
               `)}
               >
-                <p>There was an error fetching the data. Please try loading the page again.</p>
+                <p>There was an error fetching the data.</p>
               </div>
             : null
           }

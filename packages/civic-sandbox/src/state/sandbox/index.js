@@ -8,6 +8,7 @@ import {
   FOUNDATION_SUCCESS,
   FOUNDATION_FAILURE,
   SET_PACKAGE,
+  SET_SLIDE_KEY,
   SLIDES_START,
   SLIDES_FAILURE,
   SLIDES_SUCCESS,
@@ -33,7 +34,8 @@ const INITIAL_STATE = {
   slidesData: [],
   slidesSuccess: null,
   selectedFoundation: "",
-  selectedSlide: []
+  selectedSlide: [],
+  selectedSlideKey: {}
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -154,7 +156,17 @@ const reducer = (state = INITIAL_STATE, action) => {
           foundations: []
         },
         selectedFoundationDatum: null,
-        selectedSlideDatum: null
+        selectedSlideDatum: null,
+        selectedSlideKey: {}
+      };
+    case SET_SLIDE_KEY:
+      console.log("a-SET_SLIDE_KEY:", action);
+      return {
+        ...state,
+        selectedSlideKey: {
+          ...state.selectedSlideKey,
+          ...action.selectedSlideKey
+        },
       };
     case SET_FOUNDATION:
       return {

@@ -12,6 +12,7 @@ export const FOUNDATION_START = "SANDBOX/FOUNDATION_START";
 export const FOUNDATION_SUCCESS = "SANDBOX/FOUNDATION_SUCCESS";
 export const FOUNDATION_FAILURE = "SANDBOX/FOUNDATION_FAILURE";
 export const SET_PACKAGE = "SANDBOX/SET_PACKAGE";
+export const SET_SLIDE_KEY = "SANDBOX/SET_SLIDE_KEY"
 export const SET_FOUNDATION = "SANDBOX/SET_FOUNDATION";
 export const SLIDES_START = "SANDBOX/SLIDES_START";
 export const SLIDES_SUCCESS = "SANDBOX/SLIDES_SUCCESS";
@@ -42,7 +43,7 @@ export const SlideFailure = actionEmitter(SLIDE_FAILURE);
 
 // Thunk actions
 export const fetchSandbox = fetchAdapter(
-  "https://gist.githubusercontent.com/mendozaline/5f9b9157d031cb5fd505bcce098f3fc2/raw/83655ccf99e1e1b83a248025856b50dfe17889c8/packs.json",
+  "https://gist.githubusercontent.com/mendozaline/5f9b9157d031cb5fd505bcce098f3fc2/raw/a581ba3459c5d51ed58e70e20be7549e3ba0155a/packs.json",
   {
     start: SandboxStart,
     success: SandboxSuccess,
@@ -69,6 +70,11 @@ export const fetchSlides = slides => {
 export const setPackage = (selectedPackage = "") => ({
   type: SET_PACKAGE,
   selectedPackage
+});
+
+export const setSlideKey = (selectedSlideKey = {}) => ({
+  type: SET_SLIDE_KEY,
+  selectedSlideKey
 });
 
 export const setFoundation = (selectedFoundation = "") => ({
