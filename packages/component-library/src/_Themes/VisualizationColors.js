@@ -40,7 +40,7 @@ const victoryColors = [
   categorical.blue.hex,
   categorical.purple.hex,
   categorical.yellow.hex,
-  BrandColors.tertiary.hex
+  BrandColors.plumLight.hex
 ];
 
 const sequential = {

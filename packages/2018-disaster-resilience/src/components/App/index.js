@@ -46,7 +46,9 @@ const App = () => (
       be to understand what the estimated impact is within their immediate
       vicinity.
     </p>
-    <YouAndYourNeighbors />
+    <section css={sectionMarginMedium}>
+      <YouAndYourNeighbors Layout={CivicCardLayoutClassic} />
+    </section>
     <PullQuote
       quoteText="Does your family have a plan for earthquake preparedness? Here are the steps to help you get started."
       url="https://civicplatform.org/cards/what-you-can-do-to-prepare-for-an-earthquake"
