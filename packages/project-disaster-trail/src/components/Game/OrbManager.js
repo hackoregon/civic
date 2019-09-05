@@ -1,7 +1,5 @@
 /* eslint-disable import/no-named-as-default */
 import React, { useEffect, useState, memo, useRef, useCallback } from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import { map, find as _find, filter } from "lodash";
 import styled from "@emotion/styled";
 
@@ -9,7 +7,6 @@ import remove from "lodash/remove";
 import { palette } from "../../constants/style";
 import useBounds from "../../state/hooks/useBounds";
 import usePrevious from "../../state/hooks/usePrevious";
-import { getActiveTaskData } from "../../state/tasks";
 import useAnimationFrame from "../../state/hooks/useAnimationFrame";
 
 import Orb from "./Orb";
@@ -19,8 +16,6 @@ import {
   createRandomLayout,
   uncompletedOrbHandler
 } from "./OrbManagerHelpers";
-import { addItemToPlayerKit, getKitCreationItems } from "../../state/kit";
-import { addPoints } from "../../state/user";
 
 const ORB_CONFIG = {
   period: 1,
@@ -43,10 +38,10 @@ const ORB_CONFIG = {
  * @returns
  */
 const OrbManager = ({
-  kitItems,
-  activeTask,
-  addItemToPlayerKitInState,
-  addPointsToState,
+  activeScreen,
+  possibleItems,
+  onOrbSelection,
+  checkItemIsCorrect,
   frozenOrbInterface = false
 } = {}) => {
   const [hasInitialized, setHasInitialized] = useState(false);
@@ -60,37 +55,50 @@ const OrbManager = ({
   const boundsRef = useRef();
   const bounds = useBounds(boundsRef);
   const prevBounds = usePrevious(bounds);
+  // used to refresh orb state
+  const prevScreen = usePrevious(activeScreen);
 
   // a reference to the previous state's bounds
   // used to control when the orbs are initialized:
   // specifically when there were no bounds in prev state but there are bounds in current state
   // which should only happen once, after the component renders the very first time
 
-  // Initializes the orb data and placement. Only reexecutes when "bounds" is updated (screen resize)
+  // Initializes the orb data and placement. Only reexecutes when "bounds" is updated (screen resize) or when the activeScreen changes
   useEffect(() => {
     // ensure we only run this once
-    if (prevBounds && !prevBounds.width && bounds.width && !hasInitialized) {
+    const newScreen = prevScreen !== activeScreen;
+    const newBounds =
+      prevBounds && !prevBounds.width && bounds.width && !hasInitialized;
+
+    if (newScreen || newBounds) {
       const newOrbs = frozenOrbInterface
-        ? createFixedLayout(kitItems, bounds, ORB_CONFIG)
-        : createRandomLayout(kitItems, bounds, ORB_CONFIG);
+        ? createFixedLayout(possibleItems, bounds, ORB_CONFIG)
+        : createRandomLayout(possibleItems, bounds, ORB_CONFIG);
       setHasInitialized(true);
       setOrbsState(newOrbs);
     }
-  }, [bounds, frozenOrbInterface, hasInitialized, kitItems, prevBounds]);
+  }, [
+    activeScreen,
+    prevScreen,
+    bounds,
+    frozenOrbInterface,
+    hasInitialized,
+    possibleItems,
+    prevBounds
+  ]);
 
   const addOrbScore = useCallback(
     orbId => {
       const theOrb = _find(orbs, orb => orb.orbId === orbId);
       if (theOrb.good) {
-        addItemToPlayerKitInState(theOrb.type);
-        addPointsToState(theOrb.points);
+        onOrbSelection(theOrb);
       }
     },
     // update when orbs.length changes
     // if we udpate when orbs changes, the addOrbScore will continuously be recreated,
     // and, in turn, causes `Orb` to render continously.
     // eslint-disable-next-line
-    [addItemToPlayerKitInState, addPointsToState, orbs.length]
+    [onOrbSelection, orbs.length]
   );
 
   const setOrbTouched = useCallback(
@@ -136,9 +144,8 @@ const OrbManager = ({
 
       if (isOrbCompleted) {
         currentOrb = completedOrbHandler(
-          currentOrb,
-          activeTask,
-          frozenOrbInterface
+          checkItemIsCorrect(currentOrb),
+          currentOrb
         );
       } else {
         currentOrb = uncompletedOrbHandler(
@@ -254,18 +261,5 @@ const OrbsStyle = styled.div`
   background-color: ${palette.blue};
 `;
 
-const mapStateToProps = state => ({
-  kitItems: getKitCreationItems(state),
-  activeTask: getActiveTaskData(state) // This should be passed through from the parent component
-});
-
-const mapDispatchToProps = dispatch => ({
-  addPointsToState: bindActionCreators(addPoints, dispatch),
-  addItemToPlayerKitInState: bindActionCreators(addItemToPlayerKit, dispatch)
-});
-
 // use memo to not re-render OrbManager unless its props change
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(memo(OrbManager));
+export default memo(OrbManager);
