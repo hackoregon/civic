@@ -11,10 +11,11 @@ import { jsx, css } from "@emotion/core";
 import PropTypes from "prop-types";
 import createRef from "create-react-ref/lib/createRef";
 import Geocoder from "react-map-gl-geocoder";
+import mapboxgl from "./mapboxgl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { isEqual } from "lodash";
-
-import mapboxgl from "./mapboxgl";
+import bbox from "@turf/bbox";
+import WebMercatorViewport from "viewport-mercator-project";
 import { MapGLResources } from "../_Themes/index";
 
 const { MAPBOX_TOKEN, CIVIC_LIGHT, CIVIC_DARK, DISASTER_GAME } = MapGLResources;
@@ -57,6 +58,36 @@ class BaseMap extends Component {
   componentDidMount() {
     // Geocoder requires a ref to the map component
     this.setState({ mounted: true });
+
+    /*global console*/
+    if(this.props.useFitBounds && this.props.bboxData.length > 0) {
+      console.log("BM-CDM-uFB:",this.props.useFitBounds);
+      console.log("BM-CDM-bbData:",this.props.bboxData);
+      const toGeoJSON = {
+        "type": "FeatureCollection",
+        "features": [...this.props.bboxData]
+      };
+      const boundingbox = bbox(toGeoJSON);
+      /*
+        [
+          [swLongitude, swLatitude],
+          [neLongitude, neLatitude]
+        ]
+      */
+      console.log("BM-CDM-bbox:", boundingbox);
+  
+      const bboxViewport = new WebMercatorViewport({
+        width: this.state.viewport.width,
+        height: this.state.viewport.height
+      }).fitBounds([
+          [boundingbox[0], boundingbox[1]],
+          [boundingbox[2], boundingbox[3]]
+        ], {
+        padding: this.props.bboxPadding
+      });
+      console.log("BM-CDM-fb-vp:", bboxViewport);
+      this.onViewportChange(bboxViewport);
+    }
   }
 
   componentWillReceiveProps(props) {
@@ -106,6 +137,35 @@ class BaseMap extends Component {
       updatedProperties.forEach(p =>
         map.setPaintProperty(mapboxLayerId, p, mapboxLayerOptions[p])
       );
+    }
+
+    if(this.props.useFitBounds && this.props.bboxData.length > 0 && !isEqual(prevProps.bboxData,this.props.bboxData)) {
+      console.log("BM-CDU-uFB:",this.props.useFitBounds);
+      console.log("BM-CDU-bbData:",this.props.bboxData);
+      const toGeoJSON = {
+        "type": "FeatureCollection",
+        "features": [...this.props.bboxData]
+      };
+      const boundingbox = bbox(toGeoJSON);
+      /*
+        [
+          [swLongitude, swLatitude],
+          [neLongitude, neLatitude]
+        ]
+      */
+      console.log("BM-CDM-bbox:", boundingbox);
+  
+      const bboxViewport = new WebMercatorViewport({
+        width: this.state.viewport.width,
+        height: this.state.viewport.height
+      }).fitBounds([
+          [boundingbox[0], boundingbox[1]],
+          [boundingbox[2], boundingbox[3]]
+        ], {
+        padding: this.props.bboxPadding
+      });
+      console.log("BM-CDM-fb-vp:", bboxViewport);
+      this.onViewportChange(bboxViewport);
     }
   }
 
@@ -315,7 +375,10 @@ BaseMap.propTypes = {
     units: PropTypes.string
   }),
   sharedViewport: PropTypes.shape({}),
-  onSharedViewportChange: PropTypes.func
+  onSharedViewportChange: PropTypes.func,
+  useFitBounds: PropTypes.bool,
+  bboxData: PropTypes.arrayOf(PropTypes.shape({})),
+  bboxPadding: PropTypes.number
 };
 
 BaseMap.defaultProps = {
@@ -337,7 +400,10 @@ BaseMap.defaultProps = {
     longitude: 0
   },
   animationDuration: 1000,
-  scaleBar: false
+  scaleBar: false,
+  useFitBounds: false,
+  bboxData: {},
+  bboxPadding: 10
 };
 
 export default Dimensions()(BaseMap);

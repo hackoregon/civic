@@ -2958,6 +2958,14 @@
     "@svgr/plugin-svgo" "^4.2.0"
     loader-utils "^1.2.3"
 
+"@turf/bbox@^6.0.1":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/@turf/bbox/-/bbox-6.0.1.tgz#b966075771475940ee1c16be2a12cf389e6e923a"
+  integrity sha512-EGgaRLettBG25Iyx7VyUINsPpVj1x3nFQFiGS3ER8KCI1MximzNLsam3eXRabqQDjyAKyAE1bJ4EZEpGvspQxw==
+  dependencies:
+    "@turf/helpers" "6.x"
+    "@turf/meta" "6.x"
+
 "@turf/center-of-mass@^6.0.1":
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/@turf/center-of-mass/-/center-of-mass-6.0.1.tgz#be8904edfd6523683706429ea2f4adf5badd5b26"
@@ -16206,6 +16214,14 @@ victory@^32.0.2:
 viewport-mercator-project@6.1.1, viewport-mercator-project@^6.1.0:
   version "6.1.1"
   resolved "https://registry.yarnpkg.com/viewport-mercator-project/-/viewport-mercator-project-6.1.1.tgz#d7b2cb3cb772b819f1daab17cf4019102a9102a6"
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+    gl-matrix "^3.0.0"
+
+viewport-mercator-project@^6.2.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/viewport-mercator-project/-/viewport-mercator-project-6.2.0.tgz#46e6795551efb3376b88ff3fc6ad05b0a6e532ff"
+  integrity sha512-eXELMJmYPnMaqnd4fbye9wZlHZ4c5ktzgxSuIhqzFijP1qbT3/cMyVgyEq5glQS8GPc8HFYhHvdpAdNG+SxK6w==
   dependencies:
     "@babel/runtime" "^7.0.0"
     gl-matrix "^3.0.0"

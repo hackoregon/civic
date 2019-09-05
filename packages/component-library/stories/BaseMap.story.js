@@ -6,14 +6,16 @@ import {
   number,
   boolean,
   object,
-  button
+  button,
+  text
 } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
-import { BaseMap } from "../src";
+import { BaseMap, MapOverlay, DemoJSONLoader } from "../src";
 import notes from "./baseMap.notes.md";
 import StatefulWrapper from "../src/utils/StatefulWrapper";
+import { at } from "lodash";
 
 const GROUP_IDS = {
   DESIGN: "Design",
@@ -307,6 +309,37 @@ export default () =>
               }}
             />
           </div>
+        );
+      },
+      {
+        notes
+      }
+    )
+    .add(
+      "Example: Fit Bounds",
+      () => {
+        const CIVIC_API_URL = "http://service.civicpdx.org/disaster-resilience/api/DisasterNeighborhoodView/" +
+          "?format=json&offset=75&limit=1";
+        return (
+          <DemoJSONLoader urls={[CIVIC_API_URL]}>
+            {data => {
+              return (
+                <div css={containerWrapper}>
+                  <BaseMap
+                    useContainerHeight
+                    useFitBounds
+                    bboxData={data.results.features}
+                    bboxPadding={20}
+                  >
+                    <MapOverlay
+                      data={data.results.features}
+                      getFillColor={[25,183,170]}
+                    />
+                  </BaseMap>
+                </div>
+              );
+            }}
+          </DemoJSONLoader>
         );
       },
       {

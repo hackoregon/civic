@@ -111,6 +111,9 @@ const Sandbox = ({
           initialLongitude={-122.5765}
           useContainerHeight
           updateViewport={false}
+          useFitBounds
+          bboxData={layerData.length > 0 ? layerData[0].data : []}
+          bboxPadding={20}
         >
           <CivicSandboxMap
             mapLayers={layerData}

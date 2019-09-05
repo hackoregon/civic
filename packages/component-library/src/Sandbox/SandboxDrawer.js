@@ -355,13 +355,6 @@ const SandboxDrawer = ({
                     padding: 0.5rem 0 0 1rem;
                   `)}
                   >
-                    {/* <SandboxToggleSwitch
-                      name={slide.label}
-                      checked={slide.checked}
-                      onChange={onChange}
-                      label={slide.label}
-                      mapType={slide.mapType}
-                    /> */}
                     <Checkbox
                       name={slide.label}
                       value={slide.checked}
