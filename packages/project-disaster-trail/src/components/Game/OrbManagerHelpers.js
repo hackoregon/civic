@@ -1,22 +1,22 @@
 import { cloneDeep, sampleSize } from "lodash";
 
-export function createRandomLayout(kitItems, bounds, config) {
-  if (!kitItems.length) {
+export function createRandomLayout(possibleItems, bounds, config) {
+  if (!possibleItems.length) {
     return [];
   }
 
   // create an empty array.
   const orbCollection = [];
-  // create a number of orbs based on each kitItems weighting to achieve the correct distribution. Add the x, y, and velocity properties to its existing properties for that item
-  for (let i = 0; i < kitItems.length; i += 1) {
-    const kitData = kitItems[i];
-    const totalGeneratedOrbs = Math.round(config.orbCount * kitData.weighting);
+  // create a number of orbs based on each possibleItems weighting to achieve the correct distribution. Add the x, y, and velocity properties to its existing properties for that item
+  for (let i = 0; i < possibleItems.length; i += 1) {
+    const itemData = possibleItems[i];
+    const totalGeneratedOrbs = Math.round(config.orbCount * itemData.weighting);
 
     for (let j = 0; j < totalGeneratedOrbs; j += 1) {
-      const orbId = `${kitData.type}-${j}`;
-      kitData.x = Math.random() * bounds.width;
-      kitData.y = Math.random() * (bounds.height - config.orbSize * 2);
-      kitData.velocity = {
+      const orbId = `${itemData.type}-${j}`;
+      itemData.x = Math.random() * bounds.width;
+      itemData.y = Math.random() * (bounds.height - config.orbSize * 2);
+      itemData.velocity = {
         x:
           config.minVelocityX +
           Math.random() * (config.maxVelocityX - config.minVelocityX),
@@ -26,7 +26,7 @@ export function createRandomLayout(kitItems, bounds, config) {
       };
 
       orbCollection.push(
-        Object.assign({}, { orbId }, { touched: false }, kitData)
+        Object.assign({}, { orbId }, { touched: false }, itemData)
       );
     }
   }
@@ -40,39 +40,39 @@ export function createRandomLayout(kitItems, bounds, config) {
 // and setting a `delay` in each orb for sequential animations
 //
 // use `totalGeneratedOrbs` to control how many orbs should be made at once
-// note that this creates `n` number of orbs based on what's found in the kit
+// note that this creates `n` number of orbs based on what's found in the possibleItems
 //
 // use `columnsInRow` to define how many columns (ie instances across, remember columns hold things up)
 // the grid will auto populate the number of rows required to display all the orbs
 export function createFixedLayout(
-  kitItems,
+  possibleItems,
   bounds,
   config,
   totalGeneratedOrbs = 50,
   columnsInRow = 15
 ) {
-  if (!kitItems.length) {
+  if (!possibleItems.length) {
     return [];
   }
 
   // create an empty array.
   let orbCollection = [];
 
-  for (let i = 0, orbCount = kitItems.length; i < orbCount; i += 1) {
-    const kitData = kitItems[i];
+  for (let i = 0, orbCount = possibleItems.length; i < orbCount; i += 1) {
+    const itemData = possibleItems[i];
     const jCount = totalGeneratedOrbs / orbCount;
 
     for (let j = 0; j < jCount; j += 1) {
-      const orbId = `${kitData.type}-${j}`;
-      kitData.x = 0;
-      kitData.y = 0;
-      kitData.velocity = {
+      const orbId = `${itemData.type}-${j}`;
+      itemData.x = 0;
+      itemData.y = 0;
+      itemData.velocity = {
         x: 0,
         y: 0
       };
 
       orbCollection.push(
-        Object.assign({}, { orbId }, { touched: false }, kitData)
+        Object.assign({}, { orbId }, { touched: false }, itemData)
       );
     }
   }
