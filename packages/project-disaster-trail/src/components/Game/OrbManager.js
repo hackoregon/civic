@@ -1,7 +1,6 @@
 /* eslint-disable import/no-named-as-default */
 import React, { useEffect, useState, memo, useRef, useCallback } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import { map, find as _find } from "lodash";
 import styled from "@emotion/styled";
 
@@ -19,8 +18,6 @@ import {
   createRandomLayout,
   uncompletedOrbHandler
 } from "./OrbManagerHelpers";
-import { addItemToPlayerKit, getKitCreationItems } from "../../state/kit";
-import { addPoints } from "../../state/user";
 
 const ORB_CONFIG = {
   period: 1,
@@ -43,10 +40,9 @@ const ORB_CONFIG = {
  * @returns
  */
 const OrbManager = ({
-  kitItems,
+  possibleItems,
   activeTask,
-  addItemToPlayerKitInState,
-  addPointsToState,
+  onOrbSelection,
   frozenOrbInterface = false
 } = {}) => {
   const [hasInitialized, setHasInitialized] = useState(false);
@@ -71,26 +67,25 @@ const OrbManager = ({
     // ensure we only run this once
     if (prevBounds && !prevBounds.width && bounds.width && !hasInitialized) {
       const newOrbs = frozenOrbInterface
-        ? createFixedLayout(kitItems, bounds, ORB_CONFIG)
-        : createRandomLayout(kitItems, bounds, ORB_CONFIG);
+        ? createFixedLayout(possibleItems, bounds, ORB_CONFIG)
+        : createRandomLayout(possibleItems, bounds, ORB_CONFIG);
       setHasInitialized(true);
       setOrbsState(newOrbs);
     }
-  }, [bounds, frozenOrbInterface, hasInitialized, kitItems, prevBounds]);
+  }, [bounds, frozenOrbInterface, hasInitialized, possibleItems, prevBounds]);
 
   const addOrbScore = useCallback(
     orbId => {
       const theOrb = _find(orbs, orb => orb.orbId === orbId);
       if (theOrb.good) {
-        addItemToPlayerKitInState(theOrb.type);
-        addPointsToState(theOrb.points);
+        onOrbSelection(theOrb);
       }
     },
     // update when orbs.length changes
     // if we udpate when orbs changes, the addOrbScore will continuously be recreated,
     // and, in turn, causes `Orb` to render continously.
     // eslint-disable-next-line
-    [addItemToPlayerKitInState, addPointsToState, orbs.length]
+    [onOrbSelection, orbs.length]
   );
 
   const setOrbTouched = useCallback(
@@ -240,17 +235,8 @@ const OrbsStyle = styled.div`
 `;
 
 const mapStateToProps = state => ({
-  kitItems: getKitCreationItems(state),
   activeTask: getActiveTaskData(state) // This should be passed through from the parent component
 });
 
-const mapDispatchToProps = dispatch => ({
-  addPointsToState: bindActionCreators(addPoints, dispatch),
-  addItemToPlayerKitInState: bindActionCreators(addItemToPlayerKit, dispatch)
-});
-
 // use memo to not re-render OrbManager unless its props change
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(memo(OrbManager));
+export default connect(mapStateToProps)(memo(OrbManager));
