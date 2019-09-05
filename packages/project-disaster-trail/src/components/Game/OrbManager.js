@@ -43,6 +43,7 @@ const OrbManager = ({
   possibleItems,
   activeTask,
   onOrbSelection,
+  checkItemIsCorrect,
   frozenOrbInterface = false
 } = {}) => {
   const [hasInitialized, setHasInitialized] = useState(false);
@@ -131,9 +132,8 @@ const OrbManager = ({
 
       if (isOrbCompleted) {
         currentOrb = completedOrbHandler(
-          currentOrb,
-          activeTask,
-          frozenOrbInterface
+          checkItemIsCorrect(currentOrb),
+          currentOrb
         );
       } else {
         currentOrb = uncompletedOrbHandler(

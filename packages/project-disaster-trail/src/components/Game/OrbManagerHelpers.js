@@ -114,23 +114,11 @@ export function createFixedLayout(
   return orbCollection;
 }
 
-export function isCorrectCompletedOrb(currentOrb, activeTask) {
-  return activeTask && activeTask.requiredItem === currentOrb.type;
-}
-
-export function isIncorrectCompletedOrb(currentOrb, activeTask) {
-  return activeTask && activeTask.requiredItem !== currentOrb.type;
-}
-
-export function completedOrbHandler(
-  currentOrb,
-  activeTask,
-  frozenOrbInterface
-) {
+export function completedOrbHandler(correctChoice, currentOrb) {
   const orbCopy = cloneDeep(currentOrb);
-  if (isCorrectCompletedOrb(orbCopy, activeTask) || frozenOrbInterface) {
+  if (correctChoice) {
     orbCopy.y -= 2.0;
-  } else if (isIncorrectCompletedOrb(orbCopy, activeTask)) {
+  } else {
     orbCopy.y += 2.0;
   }
 

@@ -23,6 +23,8 @@ const KitScreen = ({
     return kitItem.good;
   };
 
+  const checkIfItemIsGood = kitItem => kitItem.good;
+
   return (
     <>
       <MapStyle>
@@ -34,6 +36,7 @@ const KitScreen = ({
         <OrbManager
           possibleItems={possibleItems}
           onOrbSelection={onKitItemSelection}
+          checkItemIsCorrect={checkIfItemIsGood}
         />
       </GUIStyle>
     </>
