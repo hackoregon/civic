@@ -1,6 +1,3 @@
----
-to: packages/<%=package%>/src/components/<%=StoryCardName%>/<%=StoryCardName%>Visualization.js
----
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import { ChartContainer } from "@hackoregon/component-library";
@@ -20,7 +17,7 @@ const infographicImg = css`
   width: 100%;
 `;
 
-const <%=StoryCardName%>Visualization = () => (
+const TemplateMinimalCardVisualization = () => (
   <ChartContainer title="Critical Infrastructure Rendered Unusable">
     <div css={infographicContainer}>
       <div css={infographicItem}>
@@ -48,4 +45,4 @@ const <%=StoryCardName%>Visualization = () => (
   </ChartContainer>
 );
 
-export default <%=StoryCardName%>Visualization;
+export default TemplateMinimalCardVisualization;

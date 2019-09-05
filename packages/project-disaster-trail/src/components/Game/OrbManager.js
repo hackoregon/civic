@@ -2,7 +2,7 @@
 import React, { useEffect, useState, memo, useRef, useCallback } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { map, find as _find } from "lodash";
+import { map, find as _find, filter } from "lodash";
 import styled from "@emotion/styled";
 
 import remove from "lodash/remove";
@@ -15,7 +15,8 @@ import useAnimationFrame from "../../state/hooks/useAnimationFrame";
 import Orb from "./Orb";
 import {
   completedOrbHandler,
-  createOrbsFromKit,
+  createFixedLayout,
+  createRandomLayout,
   uncompletedOrbHandler
 } from "./OrbManagerHelpers";
 import { addItemToPlayerKit, getKitCreationItems } from "../../state/kit";
@@ -45,7 +46,8 @@ const OrbManager = ({
   kitItems,
   activeTask,
   addItemToPlayerKitInState,
-  addPointsToState
+  addPointsToState,
+  frozenOrbInterface = false
 } = {}) => {
   const [hasInitialized, setHasInitialized] = useState(false);
   const [orbs, setOrbsState] = useState([]);
@@ -68,11 +70,13 @@ const OrbManager = ({
   useEffect(() => {
     // ensure we only run this once
     if (prevBounds && !prevBounds.width && bounds.width && !hasInitialized) {
-      const newOrbs = createOrbsFromKit(kitItems, bounds, ORB_CONFIG);
+      const newOrbs = frozenOrbInterface
+        ? createFixedLayout(kitItems, bounds, ORB_CONFIG)
+        : createRandomLayout(kitItems, bounds, ORB_CONFIG);
       setHasInitialized(true);
       setOrbsState(newOrbs);
     }
-  }, [bounds, hasInitialized, kitItems, prevBounds]);
+  }, [bounds, frozenOrbInterface, hasInitialized, kitItems, prevBounds]);
 
   const addOrbScore = useCallback(
     orbId => {
@@ -131,58 +135,71 @@ const OrbManager = ({
       }
 
       if (isOrbCompleted) {
-        currentOrb = completedOrbHandler(currentOrb, activeTask);
+        currentOrb = completedOrbHandler(
+          currentOrb,
+          activeTask,
+          frozenOrbInterface
+        );
       } else {
-        currentOrb = uncompletedOrbHandler(currentOrb, tick, i, ORB_CONFIG);
+        currentOrb = uncompletedOrbHandler(
+          currentOrb,
+          tick,
+          i,
+          ORB_CONFIG,
+          frozenOrbInterface
+        );
       }
 
       // is it offscreen?
-      if (currentOrb.x < -ORB_CONFIG.orbSize) {
-        currentOrb.x += bounds.width;
-      }
-
-      if (currentOrb.x > bounds.width) {
-        currentOrb.x -= bounds.width + ORB_CONFIG.orbSize;
-      }
-
-      if (currentOrb.y < -ORB_CONFIG.orbSize) {
-        if (isOrbCompleted) {
-          // eslint-disable-next-line no-continue
-          continue;
+      if (!isOrbCompleted) {
+        if (currentOrb.x < -ORB_CONFIG.orbSize) {
+          currentOrb.x += bounds.width;
         }
 
-        currentOrb.y += bounds.height;
-      }
-
-      if (currentOrb.y > bounds.height) {
-        if (isOrbCompleted) {
-          // eslint-disable-next-line no-continue
-          continue;
+        if (currentOrb.x > bounds.width) {
+          currentOrb.x -= bounds.width + ORB_CONFIG.orbSize;
         }
 
-        // keep the orb within vertical bounds
-        if (!isOrbCompleted) {
-          if (currentOrb.y < ORB_CONFIG.verticalBuffer)
-            currentOrb.y = ORB_CONFIG.verticalBuffer;
-          if (
-            currentOrb.y >
-            bounds.height - ORB_CONFIG.verticalBuffer - ORB_CONFIG.orbSize
-          )
-            currentOrb.y =
-              bounds.height - ORB_CONFIG.verticalBuffer - ORB_CONFIG.orbSize;
+        if (currentOrb.y < -ORB_CONFIG.orbSize) {
+          currentOrb.y += bounds.height;
+        }
 
-          // apply a 'force' that pulls the orbs vertically towards the center of the screen
-          const distanceFromCenter = currentOrb.y - centerY;
-          // if the orb is far enough away from the vertical center,
-          // the further the orb is from the center,
-          // the larger the distance
-          // and the greater the 'pull' towards the center
-          if (Math.abs(distanceFromCenter) > 80) {
-            currentOrb.y += -distanceFromCenter * 0.02;
+        if (currentOrb.y > bounds.height) {
+          // keep the orb within vertical bounds
+          if (!isOrbCompleted) {
+            if (currentOrb.y < ORB_CONFIG.verticalBuffer)
+              currentOrb.y = ORB_CONFIG.verticalBuffer;
+            if (
+              currentOrb.y >
+              bounds.height - ORB_CONFIG.verticalBuffer - ORB_CONFIG.orbSize
+            )
+              currentOrb.y =
+                bounds.height - ORB_CONFIG.verticalBuffer - ORB_CONFIG.orbSize;
+
+            // apply a 'force' that pulls the orbs vertically towards the center of the screen
+            const distanceFromCenter = currentOrb.y - centerY;
+            // if the orb is far enough away from the vertical center,
+            // the further the orb is from the center,
+            // the larger the distance
+            // and the greater the 'pull' towards the center
+            if (Math.abs(distanceFromCenter) > 80) {
+              currentOrb.y += -distanceFromCenter * 0.02;
+            }
+
+            currentOrb.y = Math.round(currentOrb.y * 10) / 10;
           }
-
-          currentOrb.y = Math.round(currentOrb.y * 10) / 10;
         }
+
+        // WARNING: landmine
+        // if the orb is 'completed'
+        // and it is offscreen
+        // then it no longer needs to be rendered
+        // @techdebt: remove currentOrb from tempModels so it's no longer rendered
+      } else if (
+        !currentOrb.bypassRender &&
+        (currentOrb.y < -ORB_CONFIG.orbSize || currentOrb.y > bounds.height)
+      ) {
+        currentOrb.bypassRender = true;
       }
 
       // store the updated model.
@@ -197,11 +214,15 @@ const OrbManager = ({
 
   useAnimationFrame(() => animate());
 
+  // by default all orbs are rendered,
+  // until their `bypassRender` property is true
+  const renderableOrbs = filter(orbs, orb => !orb.bypassRender);
+
   return (
     <OrbsStyle ref={boundsRef}>
-      {map(orbs, (orb, index) => (
+      {map(renderableOrbs, orb => (
         <div
-          key={index}
+          key={orb.orbId}
           style={{
             position: "absolute",
             transform: `translate(${orb.x}px, ${orb.y}px)`
@@ -215,6 +236,7 @@ const OrbManager = ({
             addOrbScore={addOrbScore}
             setOrbTouched={setOrbTouched}
             setOrbComplete={setOrbComplete}
+            delay={orb.delay}
           />
         </div>
       ))}

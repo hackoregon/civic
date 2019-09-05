@@ -7,10 +7,10 @@ import {
   PullQuote,
   CivicCardLayoutClassic
 } from "@hackoregon/component-library";
-import ProactivePlanning from "../ProactivePlanning";
-import SignificantStructuralDamage from "../SignificantStructuralDamage";
-import YouAndYourNeighbors from "../YouAndYourNeighbors";
 import WhatYouCanDoToPrepare from "../WhatYouCanDoToPrepare";
+import SignificantStructuralDamage from "../SignificantStructuralDamage";
+import ProactivePlanning from "../ProactivePlanning";
+import YouAndYourNeighbors from "../YouAndYourNeighbors";
 
 const sectionMarginMedium = css`
   display: block;
@@ -37,19 +37,25 @@ const App = () => (
       resilience.
     </p>
     {/* <ViolentShakingAndGroundDeformation /> */}
-    <SignificantStructuralDamage />
+    <section css={sectionMarginMedium}>
+      <SignificantStructuralDamage Layout={CivicCardLayoutClassic} />
+    </section>
     {/* <LifeAlteringEvent /> */}
     <p className="transition">
       The first step in increasing disaster resilience for most Portlanders will
       be to understand what the estimated impact is within their immediate
       vicinity.
     </p>
-    <YouAndYourNeighbors />
+    <section css={sectionMarginMedium}>
+      <YouAndYourNeighbors Layout={CivicCardLayoutClassic} />
+    </section>
     <PullQuote
       quoteText="Does your family have a plan for earthquake preparedness? Here are the steps to help you get started."
       url="https://civicplatform.org/cards/what-you-can-do-to-prepare-for-an-earthquake"
     />
-    <WhatYouCanDoToPrepare />
+    <section css={sectionMarginMedium}>
+      <WhatYouCanDoToPrepare Layout={CivicCardLayoutClassic} />
+    </section>
     <p className="transition">
       Social capital is a statistic derived from measuring community engagement.
       Disaster resilience, measuring the ability for an entity to bounce back

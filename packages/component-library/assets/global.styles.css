@@ -6,7 +6,7 @@ html {
   background-color: #fffefe;
   font-family: "Merriweather";
   font-weight: 400;
-  color: #001732;
+  color: #201024;
   min-height: 100% /* [3] */;
   -webkit-text-size-adjust: 100% /* [4] */;
   -ms-text-size-adjust: 100% /* [4] */;
@@ -102,7 +102,7 @@ h6 {
 
 p {
   font-size: 1em;
-  color: #706371;
+  color: #201024;
 }
 
 .Pullquote {
