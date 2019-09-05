@@ -37,6 +37,7 @@ const KitScreen = ({
           possibleItems={possibleItems}
           onOrbSelection={onKitItemSelection}
           checkItemIsCorrect={checkIfItemIsGood}
+          activeScreen="kit"
         />
       </GUIStyle>
     </>

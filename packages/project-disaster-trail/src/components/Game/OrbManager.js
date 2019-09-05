@@ -40,6 +40,7 @@ const ORB_CONFIG = {
  * @returns
  */
 const OrbManager = ({
+  activeScreen,
   possibleItems,
   activeTask,
   onOrbSelection,
@@ -57,6 +58,7 @@ const OrbManager = ({
   const boundsRef = useRef();
   const bounds = useBounds(boundsRef);
   const prevBounds = usePrevious(bounds);
+  const prevScreen = usePrevious(activeScreen);
 
   // a reference to the previous state's bounds
   // used to control when the orbs are initialized:
@@ -66,14 +68,26 @@ const OrbManager = ({
   // Initializes the orb data and placement. Only reexecutes when "bounds" is updated (screen resize)
   useEffect(() => {
     // ensure we only run this once
-    if (prevBounds && !prevBounds.width && bounds.width && !hasInitialized) {
+    const newScreen = prevScreen !== activeScreen;
+    const newBounds =
+      prevBounds && !prevBounds.width && bounds.width && !hasInitialized;
+
+    if (newScreen || newBounds) {
       const newOrbs = frozenOrbInterface
         ? createFixedLayout(possibleItems, bounds, ORB_CONFIG)
         : createRandomLayout(possibleItems, bounds, ORB_CONFIG);
       setHasInitialized(true);
       setOrbsState(newOrbs);
     }
-  }, [bounds, frozenOrbInterface, hasInitialized, possibleItems, prevBounds]);
+  }, [
+    activeScreen,
+    prevScreen,
+    bounds,
+    frozenOrbInterface,
+    hasInitialized,
+    possibleItems,
+    prevBounds
+  ]);
 
   const addOrbScore = useCallback(
     orbId => {

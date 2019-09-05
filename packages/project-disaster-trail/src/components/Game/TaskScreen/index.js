@@ -186,6 +186,7 @@ const TaskScreen = ({
   const possibleItems = isSolving ? playerKitItems : weightedTasks;
   const frozenOrbInterface = !isSolving;
   const onOrbSelection = isSolving ? onItemSelection : onTaskSelection;
+  const activeScreen = isSolving ? "solve" : "vote";
 
   return (
     <Fragment>
@@ -208,6 +209,7 @@ const TaskScreen = ({
         possibleItems={possibleItems}
         onOrbSelection={onOrbSelection}
         frozenOrbInterface={frozenOrbInterface}
+        activeScreen={activeScreen}
       />
     </Fragment>
   );
