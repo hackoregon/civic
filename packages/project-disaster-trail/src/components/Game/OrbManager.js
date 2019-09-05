@@ -1,6 +1,5 @@
 /* eslint-disable import/no-named-as-default */
 import React, { useEffect, useState, memo, useRef, useCallback } from "react";
-import { connect } from "react-redux";
 import { map, find as _find, filter } from "lodash";
 import styled from "@emotion/styled";
 
@@ -8,7 +7,6 @@ import remove from "lodash/remove";
 import { palette } from "../../constants/style";
 import useBounds from "../../state/hooks/useBounds";
 import usePrevious from "../../state/hooks/usePrevious";
-import { getActiveTaskData } from "../../state/tasks";
 import useAnimationFrame from "../../state/hooks/useAnimationFrame";
 
 import Orb from "./Orb";
@@ -42,7 +40,6 @@ const ORB_CONFIG = {
 const OrbManager = ({
   activeScreen,
   possibleItems,
-  activeTask,
   onOrbSelection,
   checkItemIsCorrect,
   frozenOrbInterface = false
@@ -264,9 +261,5 @@ const OrbsStyle = styled.div`
   background-color: ${palette.blue};
 `;
 
-const mapStateToProps = state => ({
-  activeTask: getActiveTaskData(state) // This should be passed through from the parent component
-});
-
 // use memo to not re-render OrbManager unless its props change
-export default connect(mapStateToProps)(memo(OrbManager));
+export default memo(OrbManager);
