@@ -48,11 +48,11 @@ export const getSelectedPackageData = createSelector(
   getSelectedPackage,
   (data, selectedPackage) => data.packages && data.packages[selectedPackage]
 );
-export const getFoundationData = createSelector(
-  getSandboxData,
-  getSelectedFoundation,
-  (sandbox, foundation) => sandbox.foundations[foundation]
-);
+// export const getFoundationData = createSelector(
+//   getSandboxData,
+//   getSelectedFoundation,
+//   (sandbox, foundation) => sandbox.foundations[foundation]
+// );
 
 export const getSlidesData = createSelector(
   getSandboxData,
@@ -119,14 +119,20 @@ export const getLayerSlides = createSelector(
         const mapProps = {
           ...d.visualization.map,
           fieldName: {
+            ...d.visualization.map.fieldName,
             color: selectedSlideKey[d.displayName]
               ? selectedSlideKey[d.displayName]
               : d.visualization.map.fieldName && d.visualization.map.fieldName.color
               ? d.visualization.map.fieldName.color
+              : "",
+            area: selectedSlideKey[d.displayName]
+              ? selectedSlideKey[d.displayName]
+              : d.visualization.map.fieldName && d.visualization.map.fieldName.area
+              ? d.visualization.map.fieldName.area
               : ""
           }
         };
-        // console.log("mapProps:", mapProps);
+        console.log("mapProps:", mapProps);
         return {
           ...mapProps,
           data: d.results ? d.results.features : [],
@@ -139,19 +145,19 @@ export const getLayerSlides = createSelector(
   }
 );
 
-export const getLayerFoundation = createSelector(
-  getFoundationData,
-  getSelectedFoundationData,
-  (defaultFn, selectedFn = {}) => {
-    const selectedFoundation = selectedFn || {};
-    const foundationLayerData = {
-      data: selectedFoundation.slide_data
-        ? foundations(selectedFn)[defaultFn.name]
-        : {}
-    };
-    return foundationLayerData;
-  }
-);
+// export const getLayerFoundation = createSelector(
+//   getFoundationData,
+//   getSelectedFoundationData,
+//   (defaultFn, selectedFn = {}) => {
+//     const selectedFoundation = selectedFn || {};
+//     const foundationLayerData = {
+//       data: selectedFoundation.slide_data
+//         ? foundations(selectedFn)[defaultFn.name]
+//         : {}
+//     };
+//     return foundationLayerData;
+//   }
+// );
 
 const makeVisFor = (spec, data) => {
   const { type } = spec.visualization;
@@ -226,7 +232,8 @@ export const getSelectedSlideDatum = createSelector(
   getSandbox,
   getSelectedSlidesData,
   getSelectedSlides,
-  ({ selectedSlideDatum }, slides, selectedSlides) => {
+  getSelectedSlideKey,
+  ({ selectedSlideDatum }, slides, selectedSlides, selectedSlideKey) => {
     // console.log("\nselector-getSelectedSlideDatum-selectedSlideDatum:", selectedSlideDatum);
     // console.log("selector-getSelectedSlideDatum-slides:", slides);
     // console.log("selector-getSelectedSlideDatum-selectedSlides:", selectedSlides);
@@ -258,9 +265,12 @@ export const getSelectedSlideDatum = createSelector(
       tooltipFields.primary.label &&
       tooltipFields.primary.fieldName
     ) {
+      const tooltipFieldName = selectedSlideKey[activeLayerName]
+        ? selectedSlideKey[activeLayerName]
+        : tooltipFields.primary.fieldName;
       tooltipInfo.content.push({
         name: tooltipFields.primary.label,
-        value: slideFeature.object.properties[tooltipFields.primary.fieldName]
+        value: slideFeature.object.properties[tooltipFieldName]
       });
     }
     if (
@@ -290,14 +300,15 @@ export const getAllSlides = createSelector(
     );
 
     const allSlides = selectedSlidesData.map((s, indx) => {
-      // console.log("selector-getAllSlides-slide:", s);
+      console.log("selector-getAllSlides-slide:", s);
+      const vizCheck = s.visualization && s.visualization.map;
       return {
         slideId: indx,
         endpoint: s.dataEndpoint,
         label: s.displayName,
         checked: !!selectedSlides.includes(s.displayName),
-        civicColor: s.visualization.map.civicColor,
-        mapType: s.visualization.map.mapType
+        civicColor: vizCheck && s.visualization.map.civicColor ? s.visualization.map.civicColor : "",
+        mapType: vizCheck && s.visualization.map.mapType ? s.visualization.map.mapType : ""
       };
     });
 
