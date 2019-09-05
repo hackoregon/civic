@@ -1,22 +1,32 @@
 import { createMuiTheme } from "@material-ui/core/styles";
+import BrandColors from "../Brand/BrandColors";
+
+// Brand Colors
+const civicPrimary = BrandColors.primary.hex;
+const civicSecondary = BrandColors.secondary.hex;
+
+// Typography
+const sansSerif = "Roboto Condensed, Helvetica Neue, Helvetica, sans-serif";
+const size = "1em";
 
 const muiTheme = createMuiTheme({
   palette: {
     primary: {
-      main: "#FFFFFF"
+      main: civicPrimary
     },
     secondary: {
-      main: "#FFFFFF"
+      main: civicSecondary
     },
     text: {
-      primary: "#FFFFFF"
+      primary: civicPrimary
     }
   },
   shape: {
     borderRadius: 2
   },
   typography: {
-    fontFamily: "serif"
+    fontFamily: sansSerif,
+    fontSize: size
   }
 });
 
