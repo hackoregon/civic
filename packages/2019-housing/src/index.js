@@ -8,8 +8,13 @@ import HomeOwnershipRates from "./components/HomeOwnershipRates";
 import AduDistributions from "./components/AduDistributions";
 import HouseholdIncomeByRace from "./components/HouseholdIncomeByRace";
 import HolcRedlining from "./components/HolcRedlining";
+import HomeAppreciation from "./components/HomeAppreciation";
 
 const CardRegistry = [
+  {
+    slug: "home-appreciation",
+    component: HomeAppreciation
+  },
   {
     slug: "holc-redlining",
     component: HolcRedlining

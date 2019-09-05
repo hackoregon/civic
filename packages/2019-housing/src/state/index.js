@@ -7,10 +7,12 @@ import homeOwnershipRatesData from "./home-ownership-rates/api";
 import aduDistributionsData from "./adu-distributions/api";
 import householdIncomeByRaceData from "./household-income-by-race/api";
 import holcRedliningData from "./holc-redlining/api";
+import homeAppreciationData from "./home-appreciation/api";
 
 export default function createReducer(asyncReducers) {
   return combineReducers({
     routing: routerReducer,
+    ...homeAppreciationData.reducers,
     ...holcRedliningData.reducers,
     ...householdIncomeByRaceData.reducers,
     ...aduDistributionsData.reducers,
