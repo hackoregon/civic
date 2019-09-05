@@ -41,9 +41,9 @@ const HomePage = () => {
       <Header />
       <div className="content-wrapper">
         <h1>CIVIC</h1>
-        <h2 className="page-subtitle">
+        <p className="page-subtitle">
           A system for public data, built on collaboration
-        </h2>
+        </p>
         <div className="intro-wrapper">
           <img
             className="placeholder-intro-image"
@@ -60,14 +60,14 @@ const HomePage = () => {
           </div>
         </div>
 
-        <h2>JOIN THE MOVEMENT</h2>
+        <p>JOIN THE MOVEMENT</p>
 
         <div className="home-section" css={sectionWorkLayout}>
-          <h3>Work With Us</h3>
-          <h4>
+          <h2>Work With Us</h2>
+          <p>
             CITIES, GOVERNMENTS &<br />
             ORGANIZATIONS
-          </h4>
+          </p>
           <p>
             We connect resources and a nationwide network of collaborators with
             complex information challenges in the public interest to build
@@ -98,12 +98,12 @@ const HomePage = () => {
         </div>
 
         <div className="home-section" css={sectionContributorLayout}>
-          <h3>Become a Contributor</h3>
-          <h4>
+          <h2>Become a Contributor</h2>
+          <p>
             DESIGNERS, DEVELOPERS,
             <br />
             WRITERS & COMMUNITY MEMBERS
-          </h4>
+          </p>
           <p>
             If you’re motivated to gain experience with cutting edge industry
             technology, use your skills to give back, and work with a dream team
@@ -136,10 +136,10 @@ const HomePage = () => {
           />
         </div>
 
-        <h2>ABOUT</h2>
+        <p>ABOUT</p>
 
         <div className="home-section" css={sectionPlatformLayout}>
-          <h3>CIVIC Platform</h3>
+          <h2>CIVIC Platform</h2>
           <p>
             The CIVIC Platform is designed for making public information public
             knowledge. In order to do that, we build applications to provide a
@@ -151,7 +151,7 @@ const HomePage = () => {
             teams or resources. If you’ve a developer, you don’t have to join a
             team to start contributing.
           </p>
-          <h4 className="platform-h4">CIVIC IS COMPRISED OF:</h4>
+          <h3 className="platform-h4">CIVIC PLATFORM IS COMPRISED OF:</h3>
           <img
             css={css`
               margin-left: -15px;
@@ -180,8 +180,8 @@ const HomePage = () => {
         </div>
 
         <div className="home-section" css={sectionCivicLayout}>
-          <h3>Civic Software Foundation</h3>
-          <h4>OUR BOTTOM LINE IS PUBLIC INTEREST</h4>
+          <h2>Civic Software Foundation</h2>
+          <p>OUR BOTTOM LINE IS PUBLIC INTEREST</p>
           <p>
             The CIVIC Platform is made possible by the Civic Software
             Foundation, a non-profit organization bringing data science, modern

@@ -50,18 +50,28 @@ const linkStyle = css`
 
 const Header = () => {
   return (
-    <div css={headerWrapper}>
+    <header css={headerWrapper}>
       <div css={contentWrapper}>
         <Logo css={logoStyle} type="squareLogo" />
         <div />
-        <div css={linkContainer}>
-          <a css={linkStyle}>EXPLORE CIVIC</a>
-          <a css={linkStyle}>JOIN THE MOVEMENT</a>
-          <a css={linkStyle}>ABOUT</a>
-          <a css={linkStyle}>CONTACT</a>
-        </div>
+        <nav css={linkContainer} aria-label="Site">
+          <ul>
+            <li>
+              <a css={linkStyle}>EXPLORE CIVIC</a>
+            </li>
+            <li>
+              <a css={linkStyle}>JOIN THE MOVEMENT</a>
+            </li>
+            <li>
+              <a css={linkStyle}>ABOUT</a>
+            </li>
+            <li>
+              <a css={linkStyle}>CONTACT</a>
+            </li>
+          </ul>
+        </nav>
       </div>
-    </div>
+    </header>
   );
 };
 
