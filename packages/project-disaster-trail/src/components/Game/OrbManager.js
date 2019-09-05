@@ -58,6 +58,7 @@ const OrbManager = ({
   const boundsRef = useRef();
   const bounds = useBounds(boundsRef);
   const prevBounds = usePrevious(bounds);
+  // used to refresh orb state
   const prevScreen = usePrevious(activeScreen);
 
   // a reference to the previous state's bounds
@@ -65,7 +66,7 @@ const OrbManager = ({
   // specifically when there were no bounds in prev state but there are bounds in current state
   // which should only happen once, after the component renders the very first time
 
-  // Initializes the orb data and placement. Only reexecutes when "bounds" is updated (screen resize)
+  // Initializes the orb data and placement. Only reexecutes when "bounds" is updated (screen resize) or when the activeScreen changes
   useEffect(() => {
     // ensure we only run this once
     const newScreen = prevScreen !== activeScreen;
