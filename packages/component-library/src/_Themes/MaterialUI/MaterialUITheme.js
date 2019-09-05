@@ -9,7 +9,7 @@ const civicSecondary = BrandColors.secondary.hex;
 const sansSerif = "Roboto Condensed, Helvetica Neue, Helvetica, sans-serif";
 const size = "1em";
 
-const muiTheme = createMuiTheme({
+const MaterialTheme = createMuiTheme({
   palette: {
     primary: {
       main: civicPrimary
@@ -30,4 +30,4 @@ const muiTheme = createMuiTheme({
   }
 });
 
-export default muiTheme;
+export default MaterialTheme;

@@ -3,5 +3,5 @@ export { default as BrandColors } from "./Brand/BrandColors";
 export { default as BrandTheme } from "./Brand/BrandTheme";
 export { default as VictoryTheme } from "./Victory/VictoryTheme";
 export { default as VictoryCrazyTheme } from "./Victory/VictoryCrazyTheme";
-export { default as muiTheme } from "./MaterialUI/MaterialUITheme";
+export { default as MaterialTheme } from "./MaterialUI/MaterialUITheme";
 export { default as MapGLResources } from "./MapGL/remoteResources";

@@ -66,9 +66,7 @@
       "git add"
     ]
   },
-  "dependencies": {
-    "@material-ui/styles": "^4.3.3"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.0",

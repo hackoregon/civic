@@ -12,7 +12,7 @@ import MaterialRadio from "@material-ui/core/Radio";
 import MaterialRadioGroup from "@material-ui/core/RadioGroup";
 
 import { ThemeProvider } from "@material-ui/styles";
-import { muiTheme } from "../_Themes/index";
+import { MaterialTheme } from "../_Themes/index";
 
 const RadioButtonGroup = ({
   labels,
@@ -24,7 +24,7 @@ const RadioButtonGroup = ({
   row,
   formHelperText
 }) => (
-  <ThemeProvider theme={muiTheme}>
+  <ThemeProvider theme={MaterialTheme}>
     <FormControl disabled={disabled}>
       <FormLabel>{grpLabel}</FormLabel>
       <MaterialRadioGroup
