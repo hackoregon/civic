@@ -30,7 +30,8 @@ const MultiChoroplethMap = props => {
     },
     fieldName,
     dataRange = [],
-    colorRange = []
+    colorRange = [],
+    index
   } = props;
 
   let choroplethColorScale = createColorScale(
@@ -90,7 +91,7 @@ const MultiChoroplethMap = props => {
       lineWidthScale={1}
       lineJointRounded={false}
       extruded={false}
-      onHover={onHoverSlide}
+      onHover={info => onHoverSlide(info, index)}
       onClick={onLayerClick}
       autoHighlight={autoHighlight}
       highlightColor={highlightColor}

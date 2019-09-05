@@ -36,8 +36,8 @@ export const updateEqualScale = (
   featuresData,
   equalScale,
   civicColorSelection,
-  equalDomain,
-  equalRange,
+  equalDomain = [],
+  equalRange = [],
   field
 ) => {
   const { color: colorFieldName } = field;
@@ -60,7 +60,7 @@ export const updateQuantileScale = (
   featuresData,
   quantileScale,
   civicColorSelection,
-  quantileRange,
+  quantileRange = [],
   field
 ) => {
   const { color: colorFieldName } = field;

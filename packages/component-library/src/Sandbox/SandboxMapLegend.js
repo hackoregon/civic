@@ -99,8 +99,8 @@ const SandboxMapLegend = props => {
   
   /* global console */
   // console.log("legend-choroplethColorScale", choroplethColorScale);
-  console.log("legend-choroplethColorScale-domain", choroplethColorScale.domain());
-  console.log("legend-choroplethColorScale-range", choroplethColorScale.range());
+  // console.log("legend-choroplethColorScale-domain", choroplethColorScale.domain());
+  // console.log("legend-choroplethColorScale-range", choroplethColorScale.range());
 
   const formatColor = arr =>
     arr.reduce(
@@ -111,10 +111,10 @@ const SandboxMapLegend = props => {
   const colorScaleRange = choroplethColorScale.range()[0].length === 4
     ? choroplethColorScale.range()
     : choroplethColorScale.range().map(c => [...c, 255]);
-  console.log("legend--colorScaleRange", mapColorsArr);
+  // console.log("legend--colorScaleRange", mapColorsArr);
 
   const mapColorsArr = colorScaleRange.map(arr => formatColor(arr));
-  console.log("legend--mapColorsArr", mapColorsArr);
+  // console.log("legend--mapColorsArr", mapColorsArr);
 
   const bins =
     colorScaleType === "ordinal" || colorScaleType === "threshold"

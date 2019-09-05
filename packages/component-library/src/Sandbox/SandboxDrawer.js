@@ -307,7 +307,9 @@ const SandboxDrawer = ({
               // console.log("drawer-foundationMapProps:", foundationMapProps);
 
               const dataIndex = foundationData.findIndex(d => {
-                return d.mapType === "ChoroplethMap" && d.layerInfo.displayName === slide.label;
+                const scatterplot = d.mapType === "ScatterPlotMap" && d.layerInfo.displayName === slide.label;
+                const choropleth = d.mapType === "ChoroplethMap" && d.layerInfo.displayName === slide.label;
+                return choropleth || scatterplot;
               });
               // console.log("drawer-dataIndex:", dataIndex);
               // console.log("drawer-[dataIndex]:", foundationMapProps[dataIndex]);
@@ -323,7 +325,8 @@ const SandboxDrawer = ({
                 : null;
 
               const keyOptions = dataIndex !== -1 && foundationData[dataIndex].data.length > 0
-                ? Object.keys(foundationData[dataIndex].data[0].properties).filter(d => d.includes(foundationData[dataIndex].fieldName.color.slice(0,5)))
+                ? Object.keys(foundationData[dataIndex].data[0].properties)
+                    .filter(d => d.includes(foundationData[dataIndex].fieldName.color.match(/^[a-zA-Z]+/)))
                 : []
 
               const keySelector = dataIndex !== -1 && foundationData[dataIndex].data.length > 0

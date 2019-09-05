@@ -48,7 +48,8 @@ const MultiLayerMap = props => {
       : mapType === "ChoroplethMap"
       ? MultiChoroplethMap({
           ...layerData,
-          index
+          index,
+          onHoverSlide
         })
       : null;
   });
