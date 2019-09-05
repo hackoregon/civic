@@ -103,9 +103,9 @@ const DisturbanceStopsVisualization = () => {
       "interpolate",
       ["linear"],
       ["get", "duration"],
-      0, // disturbanceStops2018Extent.length ? disturbanceStops2018Extent[0] : 0, // lowest duration in the disturbance stop dataset
+      disturbanceStops2018Extent.length ? disturbanceStops2018Extent[0] : 0, // lowest duration in the disturbance stop dataset
       0,
-      1, // disturbanceStops2018Extent.length ? disturbanceStops2018Extent[1] : 1, // highest duration in the disturbance stop dataset
+      disturbanceStops2018Extent.length ? disturbanceStops2018Extent[1] : 1, // highest duration in the disturbance stop dataset
       1
     ]
   };
