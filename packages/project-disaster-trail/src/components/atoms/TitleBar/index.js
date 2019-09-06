@@ -24,7 +24,7 @@ const ContainerStyle = css`
   z-index: 103;
   pointer-events: none;
   transform: translateY(-100%);
-  transition: transform 0.5s;
+  transition: transform 1s;
 `;
 
 const onScreenStyle = css`
