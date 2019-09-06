@@ -10,7 +10,8 @@ import {
   tent,
   water
 } from "./items";
-// Images
+
+// Task icons
 import cold from "../../assets/task_icons/cold.svg";
 import dust from "../../assets/task_icons/dust.svg";
 import fire from "../../assets/task_icons/fire.svg";
@@ -21,6 +22,18 @@ import lostPet from "../../assets/task_icons/lost-pet.svg";
 import rubble from "../../assets/task_icons/rubble.svg";
 import thirst from "../../assets/task_icons/thirst.svg";
 import weather from "../../assets/task_icons/weather.svg";
+
+// Task scenes
+import sceneCold from "../../assets/task_scenes/scene-cold.svg";
+import sceneDust from "../../assets/task_scenes/scene-dust.svg";
+import sceneFire from "../../assets/task_scenes/scene-fire.svg";
+import sceneHole from "../../assets/task_scenes/scene-hole.svg";
+import sceneHunger from "../../assets/task_scenes/scene-hunger.svg";
+import sceneInjury from "../../assets/task_scenes/scene-injury.svg";
+import sceneLostPet from "../../assets/task_scenes/scene-lost-pet.svg";
+import sceneRubble from "../../assets/task_scenes/scene-rubble.svg";
+import sceneThirst from "../../assets/task_scenes/scene-thirst.svg";
+import sceneWeather from "../../assets/task_scenes/scene-weather.svg";
 
 // Save yourself ids
 export const DUST = "dust";
@@ -49,6 +62,8 @@ export const tasks = {
     text: "I'm afraid I'll fall over the rubble.",
     imageSVG: rubble,
     imageAlt: "a rocky road",
+    sceneSVG: sceneRubble,
+    sceneAlt: "rubble in your way",
     locations: [[-122.664628, 45.507309]]
   },
   [DUST]: {
@@ -60,6 +75,8 @@ export const tasks = {
     text: "It's so dusty!",
     imageSVG: dust,
     imageAlt: "a person coughing in the dust",
+    sceneSVG: sceneDust,
+    sceneAlt: "a person coughing in the dust",
     locations: [[-122.648491, 45.51188]]
   },
   // Save Others
@@ -72,6 +89,8 @@ export const tasks = {
     text: "It's c-c-cold...",
     imageSVG: cold,
     imageAlt: "a shivering person",
+    sceneSVG: sceneCold,
+    sceneAlt: "a shivering person",
     locations: [[-122.65819, 45.515699]]
   },
   [FIRE]: {
@@ -82,7 +101,9 @@ export const tasks = {
     points: 5,
     text: "Uh oh! This fire could spread!",
     imageSVG: fire,
-    imageAlt: "stuff on fire",
+    imageAlt: "fire",
+    sceneSVG: sceneFire,
+    sceneAlt: "a fire that's spreading",
     locations: [[-122.656388, 45.516842]]
   },
   [HUNGER]: {
@@ -94,6 +115,8 @@ export const tasks = {
     text: "So. Hungry.",
     imageSVG: hunger,
     imageAlt: "a hungry person",
+    sceneSVG: sceneHunger,
+    sceneAlt: "a hungry person",
     locations: [[-122.651882, 45.514948]]
   },
   [HOLE]: {
@@ -105,6 +128,8 @@ export const tasks = {
     text: "Excuse me, sir. I seem to be stuck",
     imageSVG: hole,
     imageAlt: "a person reaching out of a hole",
+    sceneSVG: sceneHole,
+    sceneAlt: "a person reaching out of a crack in the road",
     locations: [[-122.676215, 45.514166]]
   },
   [INJURY]: {
@@ -116,6 +141,8 @@ export const tasks = {
     text: "That person looks hurt.",
     imageSVG: injury,
     imageAlt: "an injured person",
+    sceneSVG: sceneInjury,
+    sceneAlt: "an injured person",
     locations: [[-122.678618, 45.52018]]
   },
   [WEATHER]: {
@@ -127,6 +154,8 @@ export const tasks = {
     text: "Ah! Rain!",
     imageSVG: weather,
     imageAlt: "a thunderstorm",
+    sceneSVG: sceneWeather,
+    sceneAlt: "a thunderstorm",
     locations: [[-122.655916, 45.526043]]
   },
   [LOST_PET]: {
@@ -138,6 +167,8 @@ export const tasks = {
     text: "Where is my cat, Mr. Whiskers?",
     imageSVG: lostPet,
     imageAlt: "paw prints",
+    sceneSVG: sceneLostPet,
+    sceneAlt: "a place the pet may be hiding",
     locations: [[-122.667632, 45.523096]]
   },
   [THIRST]: {
@@ -148,7 +179,9 @@ export const tasks = {
     points: 5,
     text: "Oh no! I'm so thirsty. Whatever will I do?",
     imageSVG: thirst,
-    imageAlt: "a sweaty pineapple",
+    imageAlt: "a thirsty person",
+    sceneSVG: sceneThirst,
+    sceneAlt: "a thirsty person",
     locations: [[-122.681665, 45.530282]]
   }
 };
