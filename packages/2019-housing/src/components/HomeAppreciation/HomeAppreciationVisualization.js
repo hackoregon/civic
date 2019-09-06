@@ -33,8 +33,8 @@ const HomeAppreciationVisualization = ({ data }) => {
   const lineChartData = data.annualHomeAppreciation.value.results.flatMap(
     yearData => [
       {
-        series: "raw_appreciation_med",
-        value: yearData.raw_appreciation_med,
+        series: "raw_appreciation_med", // make this match the dataSeriesLabels
+        value: yearData.raw_appreciation_med, // make this match the dataSeriesLabels
         sale_year: yearData.sale_year
       },
       {
