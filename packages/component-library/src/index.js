@@ -6,7 +6,8 @@ export {
   BrandColors,
   BrandTheme,
   VictoryTheme,
-  VictoryCrazyTheme
+  VictoryCrazyTheme,
+  MaterialTheme
 } from "./_Themes/index";
 
 // COMPONENTS
