@@ -87,6 +87,7 @@ const LineChart = ({
   const lines = lineData
     ? Object.keys(lineData).map((category, index) => (
         <VictoryLine
+          title="Line Chart"
           key={shortid.generate()}
           data={lineData[category].map(d => ({
             dataKey: d[dataKey],
