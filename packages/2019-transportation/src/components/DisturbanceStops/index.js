@@ -6,6 +6,7 @@ import { resourceShape } from "reduxful/react-addons";
 import { CivicCard } from "@hackoregon/component-library";
 
 import disturbanceStopsMeta from "./disturbanceStopsMeta";
+import disturbanceStopsLineChartMeta from "./disturbanceStopsLineChartMeta";
 import api from "../../state/disturbance-stops/api";
 
 const limit = 2000;
@@ -17,7 +18,7 @@ const lines = "6,10,14";
 const bounds = "-122.665849,45.510867,-122.653650,45.514367";
 const testUrl = `http://service.civicpdx.org/transportation2019/v1/toad/disturbanceStops/?limit=${limit}&offset=${offset}&months=${months}&time_range=${timeRange}&years=${years}&lines=${lines}&service_key=W&bounds=${bounds}`;
 
-export const DataContext = React.createContext([]);
+export const DataContext = React.createContext({});
 
 const DisturbanceStops = ({ Layout }) => {
   const [loaded, setLoaded] = useState(false);
@@ -39,6 +40,7 @@ const DisturbanceStops = ({ Layout }) => {
     <>
       <DataContext.Provider value={{ loaded, features }}>
         <CivicCard cardMeta={disturbanceStopsMeta} Layout={Layout} />
+        <CivicCard cardMeta={disturbanceStopsLineChartMeta} Layout={Layout} />
       </DataContext.Provider>
     </>
   );
