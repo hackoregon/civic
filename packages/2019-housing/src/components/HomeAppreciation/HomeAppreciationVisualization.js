@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { resourceShape } from "reduxful/react-addons";
 import { isLoaded } from "reduxful";
-import { extent, scaleOrdinal } from "d3";
+import { extent, scaleQuantize } from "d3";
 
 import {
   BaseMap,
@@ -56,11 +56,11 @@ const HomeAppreciationVisualization = ({ data }) => {
 
   const polygonFieldName = "appreciation_estimates";
   const homeInflationFeatures = data.homeInflationData.value.results.features;
-  const findDataMinMax = extent(homeInflationFeatures, f =>
+  const minMax = extent(homeInflationFeatures, f =>
     parseFloat(f.properties[polygonFieldName])
   );
-  const colorScale = scaleOrdinal()
-    .domain(findDataMinMax)
+  const colorScale = scaleQuantize()
+    .domain(minMax)
     .range([
       // "Ocean"
       [255, 255, 217],
@@ -127,6 +127,8 @@ const HomeAppreciationVisualization = ({ data }) => {
           <MapOverlay
             data={homeInflationFeatures}
             getFillColor={f => colorScale(f.properties[polygonFieldName])}
+            stroked={false}
+            opacity={0.25}
           >
             <MapTooltip
               primaryName={polygonFieldName}
