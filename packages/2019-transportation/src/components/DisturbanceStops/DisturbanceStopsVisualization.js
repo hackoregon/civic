@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+import moment from "moment";
 import PropTypes from "prop-types";
 import { resourceShape } from "reduxful/react-addons";
 import { extent } from "d3-array";
@@ -111,11 +112,7 @@ const DisturbanceStopsVisualization = () => {
   useEffect(() => {
     setDisturbanceStops2017Extent(
       extent(disturbanceStops2017, d => {
-        const { duration } = d.properties;
-        return parseInt(
-          duration.slice(duration.length - 2, duration.length),
-          10
-        );
+        return moment.duration(d.properties.duration).asSeconds();
       })
     );
   }, [disturbanceStops2017]);
@@ -123,11 +120,7 @@ const DisturbanceStopsVisualization = () => {
   useEffect(() => {
     setDisturbanceStops2018Extent(
       extent(disturbanceStops2018, d => {
-        const { duration } = d.properties;
-        return parseInt(
-          duration.slice(duration.length - 2, duration.length),
-          10
-        );
+        return moment.duration(d.properties.duration).asSeconds();
       })
     );
   }, [disturbanceStops2018]);
