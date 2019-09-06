@@ -30,7 +30,7 @@ const offset = 0;
 const months = "9,10,11";
 const timeRange = "6.25,9.5";
 const years = "2017,2018";
-const lines = "14";
+const lines = "10,14";
 const testUrl = `http://service.civicpdx.org/transportation2019/v1/toad/disturbanceStops/?limit=${limit}&offset=${offset}&months=${months}&time_range=${timeRange}&years=${years}&lines=${lines}&service_key=W&bounds=${
   BOUNDING_BOX["Hawthorne Approach"]
 }&directions=${DIRECTION.INBOUND}`;
