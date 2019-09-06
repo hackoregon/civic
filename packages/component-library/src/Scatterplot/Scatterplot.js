@@ -12,6 +12,7 @@ import {
 import ChartContainer from "../ChartContainer";
 import SimpleLegend from "../SimpleLegend";
 import civicFormat from "../utils/civicFormat";
+import protectData from "../utils/protectData";
 import DataChecker from "../utils/DataChecker";
 import {
   chartEvents,
@@ -61,11 +62,18 @@ const Scatterplot = ({
   theme,
   loading
 }) => {
-  const safeData = data && data.length ? data : [{}];
+  const safeData =
+    data && data.length
+      ? protectData(data, { dataSeries, dataSeriesLabel })
+      : [{}];
+  const safeDataSeriesLabel =
+    dataSeriesLabel && dataSeriesLabel.length
+      ? protectData(dataSeriesLabel, { x: "category", y: "label" })
+      : null;
   const chartDomain = domain || getDefaultDomain(safeData, dataKey, dataValue);
 
   const dataSeriesLabels = dataSeries
-    ? dataSeriesLabel || getDefaultDataSeriesLabels(safeData, dataSeries)
+    ? safeDataSeriesLabel || getDefaultDataSeriesLabels(safeData, dataSeries)
     : null;
 
   const scatterPlotStyle =

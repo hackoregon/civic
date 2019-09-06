@@ -21,6 +21,7 @@ import {
 } from "../utils/chartHelpers";
 import groupByKey from "../utils/groupByKey";
 import DataChecker from "../utils/DataChecker";
+import protectData from "../utils/protectData";
 import { VictoryTheme } from "../_Themes/index";
 
 const HorizontalBarChart = ({
@@ -45,7 +46,10 @@ const HorizontalBarChart = ({
   legendComponent,
   theme
 }) => {
-  const safeData = data && data.length ? data : [{}];
+  const safeData =
+    data && data.length
+      ? protectData(data, { dataLabel, dataSeriesKey })
+      : [{}];
 
   const groupedDataIfStacked = () => {
     if (stacked) {
