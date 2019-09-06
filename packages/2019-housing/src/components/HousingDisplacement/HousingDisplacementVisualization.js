@@ -82,6 +82,7 @@ const HousingDisplacementVisualization = ({ isLoading, data }) => {
             xLabel={xLabel}
             yLabel={yLabel}
             xNumberFormatter={tick => tick.toString()}
+            protect
           />
         </div>
         <div style={{ width: "50%" }}>
@@ -94,6 +95,7 @@ const HousingDisplacementVisualization = ({ isLoading, data }) => {
             xLabel={xLabel}
             yLabel={yLabel}
             xNumberFormatter={tick => tick.toString()}
+            protect
           />
         </div>
       </div>

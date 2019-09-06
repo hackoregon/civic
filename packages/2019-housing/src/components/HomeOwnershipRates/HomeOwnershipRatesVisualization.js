@@ -33,6 +33,7 @@ const HomeOwnershipRatesVisualization = ({ data }) => {
         yLabel="Home Ownership Rate"
         xNumberFormatter={x => civicFormat.year(x)}
         yNumberFormatter={y => civicFormat.decimalToPercent(y)}
+        protect
       />
     )
   );
