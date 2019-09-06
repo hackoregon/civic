@@ -8,7 +8,7 @@ import { MaterialTheme } from "../_Themes/index";
 
 const ButtonNew = ({ label, onClick }) => (
   <ThemeProvider theme={MaterialTheme}>
-    <MaterialButton variant="outlined" onClick={onClick}>
+    <MaterialButton variant="outlined" onClick={onClick} color="secondary">
       {label}
     </MaterialButton>
   </ThemeProvider>

@@ -27,6 +27,14 @@ const MaterialTheme = createMuiTheme({
   typography: {
     fontFamily: sansSerif,
     fontSize: size
+  },
+  overrides: {
+    MuiButton: {
+      outlinedSecondary: {
+        color: civicPrimary,
+        border: "1px solid civicPrimary"
+      }
+    }
   }
 });
 
