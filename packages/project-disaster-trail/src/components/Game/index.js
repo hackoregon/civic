@@ -6,13 +6,14 @@ import styled from "@emotion/styled";
 
 // import * as SCREENS from "../../constants/screens";
 import { getActiveChapterId } from "../../state/chapters";
-import { ATTRACTOR, KIT, TASKS } from "../../constants/chapters";
+import { ATTRACTOR, KIT, TASKS, SUMMARY } from "../../constants/chapters";
 
 import TitleBar from "../atoms/TitleBar";
 import DefaultScreen from "./DefaultScreen/index";
 import AttractorScreen from "./AttractorScreen/index";
 import KitScreen from "./KitScreen/index";
 import TaskScreen from "./TaskScreen/index";
+import SummaryScreen from "./SummaryScreen/index";
 import Panel from "../atoms/Panel";
 import media from "../../utils/mediaQueries";
 
@@ -30,15 +31,19 @@ const Game = ({ activeChapterId }) => {
     }
   };
 
+  const isAttractorOrSummary =
+    activeChapterId === ATTRACTOR || activeChapterId === SUMMARY;
+
   return (
     <Fragment>
       {activeChapterId === ATTRACTOR && <AttractorScreen />}
-      {activeChapterId !== ATTRACTOR && (
+      {!isAttractorOrSummary && (
         <GameContainerStyle>
           {activeChapterId !== ATTRACTOR && <TitleBar />}
           <GameGrid>{renderChapter(activeChapterId)}</GameGrid>
         </GameContainerStyle>
       )}
+      {activeChapterId === SUMMARY && <SummaryScreen />}
     </Fragment>
   );
 };
