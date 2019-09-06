@@ -3,10 +3,10 @@ import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { css, jsx } from "@emotion/core";
 
-import Ticker from "../../atoms/Ticker";
-import DurationBar from "../../atoms/DurationBar";
+import Ticker from "../Ticker";
+import DurationBar from "../DurationBar";
 import OrbManager from "../OrbManager";
-import { GUIStyle } from "../index";
+import { GUIStyle } from "../../Game/index";
 import media from "../../../utils/mediaQueries";
 
 const containerStyle = css`

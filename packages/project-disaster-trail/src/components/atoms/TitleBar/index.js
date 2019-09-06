@@ -4,7 +4,7 @@ import { memo, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { css, jsx } from "@emotion/core";
 
-import ChapterButtons from "../../Game/ChapterButtons";
+import ChapterButtons from "../ChapterButtons";
 import billBoardPNG from "../../../../assets/billboard.png";
 
 import LevelView from "../LevelView";

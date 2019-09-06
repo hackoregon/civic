@@ -8,7 +8,7 @@ import { getKitCreationItems, addItemToPlayerKit } from "../../../state/kit";
 import { addPoints } from "../../../state/user";
 import { palette } from "../../../constants/style";
 import { MapStyle } from "../index";
-import MatchLockInterface from "../MatchLockInterface";
+import MatchLockInterface from "../../atoms/MatchLockInterface";
 import Kit from "./Kit";
 
 const slide = keyframes`

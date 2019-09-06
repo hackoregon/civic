@@ -4,17 +4,16 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import styled from "@emotion/styled";
 
-// import * as SCREENS from "../../constants/screens";
 import { getActiveChapterId } from "../../state/chapters";
 import { ATTRACTOR, KIT, TASKS } from "../../constants/chapters";
-
+import { palette } from "../../constants/style";
+import media from "../../utils/mediaQueries";
 import TitleBar from "../atoms/TitleBar";
+import Panel from "../atoms/Panel";
 import DefaultScreen from "./DefaultScreen/index";
 import AttractorScreen from "./AttractorScreen/index";
 import KitScreen from "./KitScreen/index";
 import TaskScreen from "./TaskScreen/index";
-import Panel from "../atoms/Panel";
-import media from "../../utils/mediaQueries";
 
 import "@hackoregon/component-library/assets/global.styles.css";
 
@@ -49,6 +48,7 @@ Game.displayName = "Game";
 const GameContainerStyle = styled(Panel)`
   position: relative;
   width: 100%;
+  background-color: ${palette.blue};
 `;
 
 const GameGrid = styled.div`
