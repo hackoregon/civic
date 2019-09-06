@@ -34,6 +34,16 @@ const MaterialTheme = createMuiTheme({
         color: civicPrimary,
         border: "1px solid civicPrimary"
       }
+    },
+    MuiSelect: {
+      root: {
+        color: civicPrimary
+      }
+    },
+    MuiList: {
+      root: {
+        color: civicSecondary
+      }
     }
   }
 });
