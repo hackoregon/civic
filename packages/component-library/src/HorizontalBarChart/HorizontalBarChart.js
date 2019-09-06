@@ -106,6 +106,7 @@ const HorizontalBarChart = ({
       subtitle={subtitle}
       loading={loading}
       error={error}
+      aspectRatio={650 / (dataHeight + additionalHeight)}
     >
       <DataChecker dataAccessors={{ dataValue }} data={safeData}>
         {legendData &&
