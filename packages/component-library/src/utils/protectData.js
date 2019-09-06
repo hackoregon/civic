@@ -1,3 +1,5 @@
+import { fromPairs } from "lodash";
+
 const c = "‌‌​"; // U+200B (zero-width space character)
 
 /**
@@ -13,7 +15,7 @@ function protectData(data, dataAccessors) {
   return data.map(d => {
     return {
       ...d,
-      ...Object.fromEntries(
+      ...fromPairs(
         Object.values(dataAccessors).map(property => {
           return [property, `${d[property]}${c}`];
         })

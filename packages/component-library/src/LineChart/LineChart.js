@@ -47,15 +47,22 @@ const LineChart = ({
   yNumberFormatter,
   legendComponent,
   loading,
-  theme
+  theme,
+  protect
 }) => {
   const safeData =
+    // eslint-disable-next-line no-nested-ternary
     data && data.length
-      ? protectData(data, { dataSeries, dataSeriesLabel })
+      ? protect
+        ? protectData(data, { dataSeries, dataSeriesLabel })
+        : data
       : [{}];
   const safeDataSeriesLabel =
+    // eslint-disable-next-line no-nested-ternary
     dataSeriesLabel && dataSeriesLabel.length
-      ? protectData(dataSeriesLabel, { x: "category", y: "label" })
+      ? protect
+        ? protectData(dataSeriesLabel, { x: "category", y: "label" })
+        : dataSeriesLabel
       : null;
   const chartDomain = domain || getDefaultDomain(safeData, dataKey, dataValue);
 
@@ -215,7 +222,8 @@ LineChart.propTypes = {
   yNumberFormatter: PropTypes.func,
   legendComponent: PropTypes.func,
   theme: PropTypes.shape({}),
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
+  protect: PropTypes.bool
 };
 
 LineChart.defaultProps = {
@@ -237,7 +245,8 @@ LineChart.defaultProps = {
   yNumberFormatter: civicFormat.numeric,
   legendComponent: null,
   theme: VictoryTheme,
-  loading: null
+  loading: null,
+  protect: false
 };
 
 export default LineChart;

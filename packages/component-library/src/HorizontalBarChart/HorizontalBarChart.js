@@ -44,11 +44,15 @@ const HorizontalBarChart = ({
   dataSeriesKey,
   dataSeriesLabel,
   legendComponent,
-  theme
+  theme,
+  protect
 }) => {
   const safeData =
+    // eslint-disable-next-line no-nested-ternary
     data && data.length
-      ? protectData(data, { dataLabel, dataSeriesKey })
+      ? protect
+        ? protectData(data, { dataLabel, dataSeriesKey })
+        : data
       : [{}];
 
   const groupedDataIfStacked = () => {
@@ -294,7 +298,8 @@ HorizontalBarChart.propTypes = {
   dataSeriesKey: PropTypes.string,
   dataSeriesLabel: PropTypes.shape({}),
   legendComponent: PropTypes.func,
-  theme: PropTypes.shape({})
+  theme: PropTypes.shape({}),
+  protect: PropTypes.bool
 };
 
 HorizontalBarChart.defaultProps = {
@@ -315,7 +320,8 @@ HorizontalBarChart.defaultProps = {
   dataSeriesKey: null,
   dataSeriesLabel: {},
   legendComponent: null,
-  theme: VictoryTheme
+  theme: VictoryTheme,
+  protect: false
 };
 
 export default HorizontalBarChart;
