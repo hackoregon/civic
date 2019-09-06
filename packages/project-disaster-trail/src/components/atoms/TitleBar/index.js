@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useState, useEffect } from "react";
 
 /** @jsx jsx */
 import PropTypes from "prop-types";
@@ -23,6 +23,12 @@ const ContainerStyle = css`
   align-items: flex-start;
   z-index: 103;
   pointer-events: none;
+  transform: translateY(-100%);
+  transition: transform 0.5s;
+`;
+
+const onScreenStyle = css`
+  transform: translateY(0%);
 `;
 
 const BillboardStyle = css`
@@ -37,8 +43,19 @@ const BillboardStyle = css`
 `;
 
 const TitleBar = ({ debug = true }) => {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    setOpen(true);
+  }, []);
+
   return (
-    <div css={ContainerStyle}>
+    <div
+      css={css`
+        ${ContainerStyle}
+        ${open && onScreenStyle}
+      `}
+    >
       <LevelView />
       <div css={BillboardStyle} />
       <PointsView />
