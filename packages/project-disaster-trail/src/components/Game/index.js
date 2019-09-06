@@ -56,19 +56,19 @@ const GameGrid = styled.div`
   width: 100%;
   height: 100vh;
   display: grid;
-  grid-template-rows: 1fr 24px 80px 200px;
+  grid-template-rows: 1fr 304px;
   grid-template-columns: 1fr;
   justify-content: center;
   align-items: center;
   min-height: 600px;
 
   ${media.lg} {
-    grid-template-rows: 1fr 24px 60px 250px;
+    grid-template-rows: 1fr 334px;
     min-height: 800px;
   }
 
   ${media.xl} {
-    grid-template-rows: 100px 1fr 40px 700px;
+    grid-template-rows: 1fr 784px;
   }
 `;
 

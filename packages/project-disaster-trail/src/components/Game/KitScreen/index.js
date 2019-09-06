@@ -7,10 +7,8 @@ import { bindActionCreators } from "redux";
 import { getKitCreationItems, addItemToPlayerKit } from "../../../state/kit";
 import { addPoints } from "../../../state/user";
 import { palette } from "../../../constants/style";
-import DurationBar from "../../atoms/DurationBar";
-import Ticker from "../../atoms/Ticker";
-import { MapStyle, GUIStyle } from "../index";
-import OrbManager from "../OrbManager";
+import { MapStyle } from "../index";
+import MatchLockInterface from "../MatchLockInterface";
 import Kit from "./Kit";
 
 const slide = keyframes`
@@ -69,16 +67,13 @@ const KitScreen = ({
         <div css={[bg, bg3]} />
         <Kit />
       </MapStyle>
-      <DurationBar step="Choose supplies" />
-      <Ticker text="Ticker tape text that goes across the screen to give instructions" />
-      <GUIStyle>
-        <OrbManager
-          possibleItems={possibleItems}
-          onOrbSelection={onKitItemSelection}
-          checkItemIsCorrect={checkIfItemIsGood}
-          activeScreen="kit"
-        />
-      </GUIStyle>
+      <MatchLockInterface
+        possibleItems={possibleItems}
+        onOrbSelection={onKitItemSelection}
+        checkItemIsCorrect={checkIfItemIsGood}
+        activeScreen="kit"
+        percentComplete={0}
+      />
     </Fragment>
   );
 };
