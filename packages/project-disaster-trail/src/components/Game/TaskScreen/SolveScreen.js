@@ -6,7 +6,6 @@ import { css, jsx } from "@emotion/core";
 
 import { completeTask, getActiveTaskData } from "../../../state/tasks";
 import { getKitCreationItems } from "../../../state/kit";
-import div from "../../atoms/Containers/TextContainer";
 
 const defaultState = {
   correctItemsChosen: 0
@@ -117,15 +116,6 @@ SolveScreen.propTypes = {
     id: PropTypes.string,
     imageSVG: PropTypes.string
   }),
-  // leaving this commented as it will likely be needed post merge
-  // possibleItems: PropTypes.arrayOf(
-  //   PropTypes.shape({
-  //     imageSVG: PropTypes.string,
-  //     good: PropTypes.bool,
-  //     onSelection: PropTypes.func,
-  //     weighting: PropTypes.number
-  //   })
-  // ),
   open: PropTypes.bool
 };
 

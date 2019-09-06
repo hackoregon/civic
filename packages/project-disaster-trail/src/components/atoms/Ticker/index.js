@@ -13,6 +13,7 @@ const containerStyle = css`
   align-items: center;
   justify-content: center;
   background: ${palette.blue};
+  z-index: 10;
 `;
 
 const textStyle = css`
