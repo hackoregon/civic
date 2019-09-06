@@ -11,11 +11,9 @@ import {
   getWeightedTasks
 } from "../../../state/tasks";
 import { getPlayerKitItems } from "../../../state/kit";
-import OrbManager from "../OrbManager";
 import ChooseScreen from "./ChooseScreen";
 import SolveScreen from "./SolveScreen";
-import DurationBar from "../../atoms/DurationBar";
-import Ticker from "../../atoms/Ticker";
+import MatchLockInterface from "../../atoms/MatchLockInterface";
 import TaskDebugger from "../../atoms/TaskDebugger";
 import Timer from "../../../utils/timer";
 
@@ -210,18 +208,14 @@ const TaskScreen = ({
         />
         {debug && <TaskDebugger activeTask={activeTask} action={action} />}
       </div>
-      <DurationBar
-        step="Choose a task"
-        debug
-        percentComplete={percentComplete}
-      />
-      <Ticker text="Ticker tape text that goes across the screen to give instructions" />
-      <OrbManager
+      <MatchLockInterface
         possibleItems={possibleItems}
         onOrbSelection={onOrbSelection}
         frozenOrbInterface={frozenOrbInterface}
-        activeScreen={activeScreen}
         checkItemIsCorrect={checkItemIsCorrect}
+        activeScreen={activeScreen}
+        debug
+        percentComplete={percentComplete}
       />
     </Fragment>
   );
