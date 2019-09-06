@@ -101,13 +101,13 @@ const App = () => (
         <AduDistributions Layout={CivicCardLayoutClassic} />
       </section>
       <section css={sectionMarginMedium}>
-        <HouseholdIncomeByRace Layout={CivicCardLayoutClassic} />
-      </section>
-      <section css={sectionMarginMedium}>
         <HolcRedlining Layout={CivicCardLayoutClassic} />
       </section>
       <section css={sectionMarginMedium}>
         <HomeAppreciation Layout={CivicCardLayoutClassic} />
+      </section>
+      <section css={sectionMarginMedium}>
+        <HouseholdIncomeByRace Layout={CivicCardLayoutClassic} />
       </section>
     </PageLayout>
   </Fragment>
