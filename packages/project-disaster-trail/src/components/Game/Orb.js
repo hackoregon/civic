@@ -39,8 +39,6 @@ const circleDefaultStyle = css`
 
 const iconStyle = css`
   position: relative;
-  width: 75%;
-  height: 75%;
 `;
 
 const defaultState = {
