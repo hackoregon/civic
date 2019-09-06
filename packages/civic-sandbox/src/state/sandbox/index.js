@@ -43,6 +43,7 @@ const reducer = (state = INITIAL_STATE, action) => {
   console.log("STATE:", state);
   switch (action.type) {
     case SANDBOX_START:
+      console.log("action-SANDBOX_START:", action);
       return {
         ...state,
         sandboxPending: true,
@@ -52,7 +53,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         selectedSlideDatum: null
       };
     case SANDBOX_SUCCESS:
-      console.log("a-SANDBOX_SUCCESS:", action);
+      console.log("action-SANDBOX_SUCCESS:", action);
       return {
         ...state,
         sandboxPending: false,

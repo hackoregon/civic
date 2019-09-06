@@ -106,14 +106,14 @@ const Sandbox = ({
       <div css={baseMapWrapper}>
         <BaseMap
           civicMapStyle={baseMapStyle}
-          initialZoom={10.5}
-          initialLatitude={45.5431}
-          initialLongitude={-122.5765}
+          initialZoom={4.5}
+          initialLatitude={38}
+          initialLongitude={-97}
           useContainerHeight
           updateViewport={false}
           useFitBounds
           bboxData={layerData.length > 0 ? layerData[0].data : []}
-          bboxPadding={20}
+          bboxPadding={50}
         >
           <CivicSandboxMap
             mapLayers={layerData}

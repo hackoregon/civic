@@ -52,6 +52,12 @@ export class Packages extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    if(!this.props.isLoading && prevProps.isLoading) {
+      // console.log("PACK-CDU");
+      this.props.setPackage(this.props.sandbox.packages[2]);
+      this.setState({ mapIsOpen: true });
+    };
+
     const [previousSelectedFoundation] = prevProps.selectedFoundationDatum;
     const [currentSelectedFoundation] = this.props.selectedFoundationDatum;
 
@@ -131,48 +137,13 @@ export class Packages extends React.Component {
         className={css(`
           padding: 10px 0 0 0;
           font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
+          border: 0px solid crimson;
+          width: 100%;
+          height: 80vh;
+          min-height: 600px;
         `)}
       >
-        {!this.state.mapIsOpen && (
-          <div>
-            <div
-              className={css(`
-                padding: 1.5rem;
-                text-align: center;
-                font-size: 1.2rem;
-              `)}
-            >
-              Select a data collection
-            </div>
-            <section
-              className={css(`
-                @media(min-width: 600px){
-                  display:flex;
-                  flex-wrap: wrap;
-                }`)}
-            >
-              {isLoading && loadingLogo}
-              {packages &&
-                packages.map(p => (
-                  <div
-                    key={p.title}
-                    className={css(`
-                      @media(min-width: 600px) {
-                        width: 33%;
-                      }`)}
-                  >
-                    <PackageSelectorBox
-                      title={p.title}
-                      description={p.description}
-                      onClick={() => this.handlePackageSelection(p)}
-                    />
-                  </div>
-                ))}
-            </section>
-          </div>
-        )}
-
-        <section>{isError && <ErrorMessage />}</section>
+        {/*!this.state.mapIsOpen && loadingLogo*/}
 
         {this.state.mapIsOpen && (
           <div>
@@ -201,10 +172,52 @@ export class Packages extends React.Component {
               )*/}
             </section>
             <p>
-              <a onClick={this.closeMap}>&lt; Back to Packages</a>
+              <a onClick={this.closeMap}>&lt; Go to Data Collections</a>
             </p>
           </div>
         )}
+
+        {!this.state.mapIsOpen && (
+          <div>
+            {/*<div
+              className={css(`
+                padding: 1.5rem;
+                text-align: center;
+                font-size: 1.2rem;
+              `)}
+            >
+              Select a data collection
+            </div> */}
+            <section
+              className={css(`
+                @media(min-width: 600px){
+                  display:flex;
+                  flex-wrap: wrap;
+                }`)}
+            >
+
+              {packages &&
+                packages.map(p => (
+                  <div
+                    key={p.title}
+                    className={css(`
+                      @media(min-width: 600px) {
+                        width: 33%;
+                      }`)}
+                  >
+                    <PackageSelectorBox
+                      title={p.title}
+                      description={p.description}
+                      onClick={() => this.handlePackageSelection(p)}
+                    />
+                  </div>
+                ))}
+            </section>
+          </div>
+        )}
+
+        <section>{isError && <ErrorMessage />}</section>
+
       </div>
     );
   }
