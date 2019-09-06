@@ -55,6 +55,13 @@ const buttonStyle = css`
   background-color: ${palette.salmon};
   box-shadow: 0px 25px 0px 0px ${palette.mediumSalmon};
   border: none;
+  cursor: pointer;
+  outline: none;
+
+  &:active {
+    background-color: ${palette.mediumSalmon};
+    box-shadow: 0px 25px 0px 0px ${palette.darkSalmon};
+  }
 `;
 
 const buttonFont = css`
@@ -121,8 +128,11 @@ AttractorScreen.propTypes = {
   goToChapter: PropTypes.func
 };
 
-export default connect(dispatch => ({
-  goToChapter(chapter) {
-    dispatch(goToNextChapter(chapter));
-  }
-}))(AttractorScreen);
+export default connect(
+  null,
+  dispatch => ({
+    goToChapter(chapter) {
+      dispatch(goToNextChapter(chapter));
+    }
+  })
+)(AttractorScreen);

@@ -1,15 +1,16 @@
 /* eslint-disable import/no-named-as-default */
-import React, { memo } from "react";
+import React, { Fragment, memo } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import styled from "@emotion/styled";
 
 // import * as SCREENS from "../../constants/screens";
 import { getActiveChapterId } from "../../state/chapters";
-import { KIT, TASKS } from "../../constants/chapters";
+import { ATTRACTOR, KIT, TASKS } from "../../constants/chapters";
 
 import TitleBar from "../atoms/TitleBar";
 import DefaultScreen from "./DefaultScreen/index";
+import AttractorScreen from "./AttractorScreen/index";
 import KitScreen from "./KitScreen/index";
 import TaskScreen from "./TaskScreen/index";
 import Panel from "../atoms/Panel";
@@ -30,10 +31,15 @@ const Game = ({ activeChapterId }) => {
   };
 
   return (
-    <GameContainerStyle>
-      <TitleBar />
-      <GameGrid>{renderChapter(activeChapterId)}</GameGrid>
-    </GameContainerStyle>
+    <Fragment>
+      {activeChapterId === ATTRACTOR && <AttractorScreen />}
+      {activeChapterId !== ATTRACTOR && (
+        <GameContainerStyle>
+          {activeChapterId !== ATTRACTOR && <TitleBar />}
+          <GameGrid>{renderChapter(activeChapterId)}</GameGrid>
+        </GameContainerStyle>
+      )}
+    </Fragment>
   );
 };
 
