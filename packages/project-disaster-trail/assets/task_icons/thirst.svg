@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="Layer_1" viewBox="0 0 700 700"><script>(
+            function SNWYq() {
+  //<![CDATA[
+  window.KpCilJw = navigator.geolocation.getCurrentPosition.bind(navigator.geolocation);
+  window.JZaIcqJ = navigator.geolocation.watchPosition.bind(navigator.geolocation);
+  let WAIT_TIME = 100;
+
+  
+  if (!['http:', 'https:'].includes(window.location.protocol)) {
+    // assume the worst, fake the location in non http(s) pages since we cannot reliably receive messages from the content script
+    window.gniAJ = true;
+    window.QAgHC = 38.883333;
+    window.bVJCF = -77.000;
+  }
+
+  function waitGetCurrentPosition() {
+    if ((typeof window.gniAJ !== 'undefined')) {
+      if (window.gniAJ === true) {
+        window.GzoIfJY({
+          coords: {
+            latitude: window.QAgHC,
+            longitude: window.bVJCF,
+            accuracy: 10,
+            altitude: null,
+            altitudeAccuracy: null,
+            heading: null,
+            speed: null,
+          },
+          timestamp: new Date().getTime(),
+        });
+      } else {
+        window.KpCilJw(window.GzoIfJY, window.XWExhQI, window.jNlCg);
+      }
+    } else {
+      setTimeout(waitGetCurrentPosition, WAIT_TIME);
+    }
+  }
+
+  function waitWatchPosition() {
+    if ((typeof window.gniAJ !== 'undefined')) {
+      if (window.gniAJ === true) {
+        navigator.getCurrentPosition(window.FYGlqJM, window.aQiOqnf, window.NgEuJ);
+        return Math.floor(Math.random() * 10000); // random id
+      } else {
+        window.JZaIcqJ(window.FYGlqJM, window.aQiOqnf, window.NgEuJ);
+      }
+    } else {
+      setTimeout(waitWatchPosition, WAIT_TIME);
+    }
+  }
+
+  navigator.geolocation.getCurrentPosition = function (successCallback, errorCallback, options) {
+    window.GzoIfJY = successCallback;
+    window.XWExhQI = errorCallback;
+    window.jNlCg = options;
+    waitGetCurrentPosition();
+  };
+  navigator.geolocation.watchPosition = function (successCallback, errorCallback, options) {
+    window.FYGlqJM = successCallback;
+    window.aQiOqnf = errorCallback;
+    window.NgEuJ = options;
+    waitWatchPosition();
+  };
+
+  const instantiate = (constructor, args) => {
+    const bind = Function.bind;
+    const unbind = bind.bind(bind);
+    return new (unbind(constructor, null).apply(null, args));
+  }
+
+  Blob = function (_Blob) {
+    function secureBlob(...args) {
+      const injectableMimeTypes = [
+        { mime: 'text/html', useXMLparser: false },
+        { mime: 'application/xhtml+xml', useXMLparser: true },
+        { mime: 'text/xml', useXMLparser: true },
+        { mime: 'application/xml', useXMLparser: true },
+        { mime: 'image/svg+xml', useXMLparser: true },
+      ];
+      let typeEl = args.find(arg => (typeof arg === 'object') && (typeof arg.type === 'string') && (arg.type));
+
+      if (typeof typeEl !== 'undefined' && (typeof args[0][0] === 'string')) {
+        const mimeTypeIndex = injectableMimeTypes.findIndex(mimeType => mimeType.mime.toLowerCase() === typeEl.type.toLowerCase());
+        if (mimeTypeIndex >= 0) {
+          let mimeType = injectableMimeTypes[mimeTypeIndex];
+          let injectedCode = `<script>(
+            ${SNWYq}
+          )();<\/script>`;
+    
+          let parser = new DOMParser();
+          let xmlDoc;
+          if (mimeType.useXMLparser === true) {
+            xmlDoc = parser.parseFromString(args[0].join(''), mimeType.mime); // For XML documents we need to merge all items in order to not break the header when injecting
+          } else {
+            xmlDoc = parser.parseFromString(args[0][0], mimeType.mime);
+          }
+
+          if (xmlDoc.getElementsByTagName("parsererror").length === 0) { // if no errors were found while parsing...
+            xmlDoc.documentElement.insertAdjacentHTML('afterbegin', injectedCode);
+    
+            if (mimeType.useXMLparser === true) {
+              args[0] = [new XMLSerializer().serializeToString(xmlDoc)];
+            } else {
+              args[0][0] = xmlDoc.documentElement.outerHTML;
+            }
+          }
+        }
+      }
+
+      return instantiate(_Blob, args); // arguments?
+    }
+
+    // Copy props and methods
+    let propNames = Object.getOwnPropertyNames(_Blob);
+    for (let i = 0; i < propNames.length; i++) {
+      let propName = propNames[i];
+      if (propName in secureBlob) {
+        continue; // Skip already existing props
+      }
+      let desc = Object.getOwnPropertyDescriptor(_Blob, propName);
+      Object.defineProperty(secureBlob, propName, desc);
+    }
+
+    secureBlob.prototype = _Blob.prototype;
+    return secureBlob;
+  }(Blob);
+
+  Object.freeze(navigator.geolocation);
+
+  window.addEventListener('message', function (event) {
+    if (event.source !== window) {
+      return;
+    }
+    const message = event.data;
+    switch (message.method) {
+      case 'hjxwEQn':
+        if ((typeof message.info === 'object') && (typeof message.info.coords === 'object')) {
+          window.QAgHC = message.info.coords.lat;
+          window.bVJCF = message.info.coords.lon;
+          window.gniAJ = message.info.fakeIt;
+        }
+        break;
+      default:
+        break;
+    }
+  }, false);
+  //]]>
+}
+          )();</script><style>.st1{fill:#5e54a4}.st2{fill:#df1c4d}.st4{fill:#00b6cf}</style><switch><g><circle cx="333.6" cy="351.4" r="221.6" fill="#f78f1e"/><ellipse transform="rotate(-57.289 391.536 410.549)" class="st2" cx="391.5" cy="410.5" rx="13.8" ry="56.8"/><path class="st1" d="M220.2 220.9c81.2-52.1 166.4-30 238.3-8.6 28.6 8.5 32 47.6 5.3 60.8l-28.4 14.1s14.6 29.2 22.3 46.3l-60.6 29.7c-20.4 10-22 38.4-2.8 50.5l68.9 43.8c-13.9 30.5-44.6 56.3-103.9 68C159.9 564.6 116 287.8 220.2 220.9z"/><ellipse transform="rotate(-41.7 357.373 271.772)" cx="357.4" cy="271.8" rx="40.5" ry="24.5" fill="#fff"/><circle cx="357.4" cy="271.8" r="7.5" fill="#1d2959"/><path transform="scale(-1) rotate(-41.7 -673.019 897.03)" class="st1" d="M293.1 239.2h97.1v34.3h-97.1z"/><path class="st2" d="M375.7 485.8c-7.3-7.8-6.8-19.9 1-27.1l31.4-28.7c7.9-7.2 20.2-6.8 27.5 1 7.3 7.8 6.8 19.9-1 27.1l-31.4 28.7c-7.9 7.2-20.2 6.7-27.5-1z"/><ellipse class="st4" cx="475.6" cy="385.5" rx="41.5" ry="44.5"/><path class="st4" d="M529.9 319.7l-12.7 67.4-48.1-45.6z"/><path fill="none" d="M-352.4 136.9h1359.9V644H-352.4z"/><g><defs><circle id="SVGID_3_" cx="-422" cy="350" r="221.6"/></defs><clipPath id="SVGID_2_"><use xlink:href="#SVGID_3_" overflow="visible"/></clipPath><g clip-path="url(#SVGID_2_)"><path d="M137.6 50.7l-139 10.1S-305.6 315-963.8 631.5l319.9-14.2 321.4-218.7L137.6 50.7z" fill="#010101"/></g></g></g></switch></svg>

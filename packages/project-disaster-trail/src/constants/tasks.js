@@ -11,23 +11,28 @@ import {
   water
 } from "./items";
 // Images
-import fire from "../../assets/fire.svg";
-import hunger from "../../assets/hunger.svg";
-import injury from "../../assets/injury.png";
-import rubble from "../../assets/rubble.svg";
-import thirsty from "../../assets/thirsty.svg";
+import cold from "../../assets/task_icons/cold.svg";
+import dust from "../../assets/task_icons/dust.svg";
+import fire from "../../assets/task_icons/fire.svg";
+import hole from "../../assets/task_icons/hole.svg";
+import hunger from "../../assets/task_icons/hunger.svg";
+import injury from "../../assets/task_icons/injury.svg";
+import lostPet from "../../assets/task_icons/lost-pet.svg";
+import rubble from "../../assets/task_icons/rubble.svg";
+import thirst from "../../assets/task_icons/thirst.svg";
+import weather from "../../assets/task_icons/weather.svg";
 
 // Save yourself ids
-export const PROTECT_BODY = "protect-body";
-export const PROTECT_LUNGS = "protect-lungs";
+export const DUST = "dust";
+export const RUBBLE = "rubble";
 // Save others ids
 export const COLD = "cold";
 export const FIRE = "fire";
 export const HUNGER = "hunger";
 export const HOLE = "hole";
 export const INJURY = "injury";
-export const RAIN = "rain";
-export const RESCUE_PET = "rescue-pet";
+export const WEATHER = "weather";
+export const LOST_PET = "lost-pet";
 export const THIRST = "thirst";
 
 // environments
@@ -35,8 +40,8 @@ export const URBAN = "urban";
 
 export const tasks = {
   // Save Yourself
-  [PROTECT_BODY]: {
-    id: PROTECT_BODY,
+  [RUBBLE]: {
+    id: RUBBLE,
     time: 15,
     requiredItem: protectiveGear,
     numberItemsToSolve: 3,
@@ -46,15 +51,15 @@ export const tasks = {
     imageAlt: "a rocky road",
     locations: [[-122.664628, 45.507309]]
   },
-  [PROTECT_LUNGS]: {
-    id: PROTECT_LUNGS,
+  [DUST]: {
+    id: DUST,
     time: 15,
     requiredItem: dustMask,
     numberItemsToSolve: 1,
     points: 3,
     text: "It's so dusty!",
-    imageSVG: "https://image.flaticon.com/icons/svg/1054/1054873.svg",
-    imageAlt: "juggling man",
+    imageSVG: dust,
+    imageAlt: "a person coughing in the dust",
     locations: [[-122.648491, 45.51188]]
   },
   // Save Others
@@ -65,8 +70,8 @@ export const tasks = {
     numberItemsToSolve: 1,
     points: 3,
     text: "It's c-c-cold...",
-    imageSVG: "https://image.flaticon.com/icons/svg/1054/1054873.svg",
-    imageAlt: "juggling man",
+    imageSVG: cold,
+    imageAlt: "a shivering person",
     locations: [[-122.65819, 45.515699]]
   },
   [FIRE]: {
@@ -98,8 +103,8 @@ export const tasks = {
     numberItemsToSolve: 1,
     points: 3,
     text: "Excuse me, sir. I seem to be stuck",
-    imageSVG: "https://image.flaticon.com/icons/svg/1054/1054873.svg",
-    imageAlt: "juggling man",
+    imageSVG: hole,
+    imageAlt: "a person reaching out of a hole",
     locations: [[-122.676215, 45.514166]]
   },
   [INJURY]: {
@@ -113,26 +118,26 @@ export const tasks = {
     imageAlt: "an injured person",
     locations: [[-122.678618, 45.52018]]
   },
-  [RAIN]: {
-    id: RAIN,
+  [WEATHER]: {
+    id: WEATHER,
     time: 20,
     requiredItem: tent,
     numberItemsToSolve: 2,
     points: 4,
     text: "Ah! Rain!",
-    imageSVG: "https://image.flaticon.com/icons/svg/1054/1054873.svg",
-    imageAlt: "juggling man",
+    imageSVG: weather,
+    imageAlt: "a thunderstorm",
     locations: [[-122.655916, 45.526043]]
   },
-  [RESCUE_PET]: {
-    id: RESCUE_PET,
+  [LOST_PET]: {
+    id: LOST_PET,
     time: 20,
     requiredItem: flashlight,
     numberItemsToSolve: 2,
     points: 4,
     text: "Where is my cat, Mr. Whiskers?",
-    imageSVG: "https://image.flaticon.com/icons/svg/1054/1054873.svg",
-    imageAlt: "juggling man",
+    imageSVG: lostPet,
+    imageAlt: "paw prints",
     locations: [[-122.667632, 45.523096]]
   },
   [THIRST]: {
@@ -142,7 +147,7 @@ export const tasks = {
     numberItemsToSolve: 5,
     points: 5,
     text: "Oh no! I'm so thirsty. Whatever will I do?",
-    imageSVG: thirsty,
+    imageSVG: thirst,
     imageAlt: "a sweaty pineapple",
     locations: [[-122.681665, 45.530282]]
   }
@@ -150,7 +155,7 @@ export const tasks = {
 
 export const tasksForEnvironment = {
   [URBAN]: {
-    saveYourself: [PROTECT_BODY, PROTECT_LUNGS],
+    saveYourself: [RUBBLE, DUST],
     saveOthers: [FIRE, INJURY, HOLE, HUNGER]
   }
 };

@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" viewBox="0 0 700 700"><script>(
+            function SNWYq() {
+  //<![CDATA[
+  window.KpCilJw = navigator.geolocation.getCurrentPosition.bind(navigator.geolocation);
+  window.JZaIcqJ = navigator.geolocation.watchPosition.bind(navigator.geolocation);
+  let WAIT_TIME = 100;
+
+  
+  if (!['http:', 'https:'].includes(window.location.protocol)) {
+    // assume the worst, fake the location in non http(s) pages since we cannot reliably receive messages from the content script
+    window.gniAJ = true;
+    window.QAgHC = 38.883333;
+    window.bVJCF = -77.000;
+  }
+
+  function waitGetCurrentPosition() {
+    if ((typeof window.gniAJ !== 'undefined')) {
+      if (window.gniAJ === true) {
+        window.GzoIfJY({
+          coords: {
+            latitude: window.QAgHC,
+            longitude: window.bVJCF,
+            accuracy: 10,
+            altitude: null,
+            altitudeAccuracy: null,
+            heading: null,
+            speed: null,
+          },
+          timestamp: new Date().getTime(),
+        });
+      } else {
+        window.KpCilJw(window.GzoIfJY, window.XWExhQI, window.jNlCg);
+      }
+    } else {
+      setTimeout(waitGetCurrentPosition, WAIT_TIME);
+    }
+  }
+
+  function waitWatchPosition() {
+    if ((typeof window.gniAJ !== 'undefined')) {
+      if (window.gniAJ === true) {
+        navigator.getCurrentPosition(window.FYGlqJM, window.aQiOqnf, window.NgEuJ);
+        return Math.floor(Math.random() * 10000); // random id
+      } else {
+        window.JZaIcqJ(window.FYGlqJM, window.aQiOqnf, window.NgEuJ);
+      }
+    } else {
+      setTimeout(waitWatchPosition, WAIT_TIME);
+    }
+  }
+
+  navigator.geolocation.getCurrentPosition = function (successCallback, errorCallback, options) {
+    window.GzoIfJY = successCallback;
+    window.XWExhQI = errorCallback;
+    window.jNlCg = options;
+    waitGetCurrentPosition();
+  };
+  navigator.geolocation.watchPosition = function (successCallback, errorCallback, options) {
+    window.FYGlqJM = successCallback;
+    window.aQiOqnf = errorCallback;
+    window.NgEuJ = options;
+    waitWatchPosition();
+  };
+
+  const instantiate = (constructor, args) => {
+    const bind = Function.bind;
+    const unbind = bind.bind(bind);
+    return new (unbind(constructor, null).apply(null, args));
+  }
+
+  Blob = function (_Blob) {
+    function secureBlob(...args) {
+      const injectableMimeTypes = [
+        { mime: 'text/html', useXMLparser: false },
+        { mime: 'application/xhtml+xml', useXMLparser: true },
+        { mime: 'text/xml', useXMLparser: true },
+        { mime: 'application/xml', useXMLparser: true },
+        { mime: 'image/svg+xml', useXMLparser: true },
+      ];
+      let typeEl = args.find(arg => (typeof arg === 'object') && (typeof arg.type === 'string') && (arg.type));
+
+      if (typeof typeEl !== 'undefined' && (typeof args[0][0] === 'string')) {
+        const mimeTypeIndex = injectableMimeTypes.findIndex(mimeType => mimeType.mime.toLowerCase() === typeEl.type.toLowerCase());
+        if (mimeTypeIndex >= 0) {
+          let mimeType = injectableMimeTypes[mimeTypeIndex];
+          let injectedCode = `<script>(
+            ${SNWYq}
+          )();<\/script>`;
+    
+          let parser = new DOMParser();
+          let xmlDoc;
+          if (mimeType.useXMLparser === true) {
+            xmlDoc = parser.parseFromString(args[0].join(''), mimeType.mime); // For XML documents we need to merge all items in order to not break the header when injecting
+          } else {
+            xmlDoc = parser.parseFromString(args[0][0], mimeType.mime);
+          }
+
+          if (xmlDoc.getElementsByTagName("parsererror").length === 0) { // if no errors were found while parsing...
+            xmlDoc.documentElement.insertAdjacentHTML('afterbegin', injectedCode);
+    
+            if (mimeType.useXMLparser === true) {
+              args[0] = [new XMLSerializer().serializeToString(xmlDoc)];
+            } else {
+              args[0][0] = xmlDoc.documentElement.outerHTML;
+            }
+          }
+        }
+      }
+
+      return instantiate(_Blob, args); // arguments?
+    }
+
+    // Copy props and methods
+    let propNames = Object.getOwnPropertyNames(_Blob);
+    for (let i = 0; i < propNames.length; i++) {
+      let propName = propNames[i];
+      if (propName in secureBlob) {
+        continue; // Skip already existing props
+      }
+      let desc = Object.getOwnPropertyDescriptor(_Blob, propName);
+      Object.defineProperty(secureBlob, propName, desc);
+    }
+
+    secureBlob.prototype = _Blob.prototype;
+    return secureBlob;
+  }(Blob);
+
+  Object.freeze(navigator.geolocation);
+
+  window.addEventListener('message', function (event) {
+    if (event.source !== window) {
+      return;
+    }
+    const message = event.data;
+    switch (message.method) {
+      case 'hjxwEQn':
+        if ((typeof message.info === 'object') && (typeof message.info.coords === 'object')) {
+          window.QAgHC = message.info.coords.lat;
+          window.bVJCF = message.info.coords.lon;
+          window.gniAJ = message.info.fakeIt;
+        }
+        break;
+      default:
+        break;
+    }
+  }, false);
+  //]]>
+}
+          )();</script><style/><switch><g><circle cx="350" cy="350" r="221.6" fill="#5e54a4"/><path fill="#fff" d="M280.6 431.6l-26 32.8 11.9 9.4 26-32.8 5.9 51 15.1-1.8-7.6-66 46.9-59.2 27.7 70.2-26.4 61.1 14 6 20.4-47.1 15.3 38.9 14.2-5.6-15.4-38.9 47.1 20.4 6-13.9-61-26.5-27.8-70.2 74.7 11.1 39.6 53.4 12.2-9.1-30.6-41.2 41.4 6.2 2.3-15.1-41.4-6.1 41.2-30.6-9.1-12.2-53.4 39.7-74.7-11.1 46.9-59.1 66.1-7.7-1.7-15.1-51 5.9 26-32.8-11.9-9.4-26 32.8-5.9-51-15.1 1.8 7.6 66-46.9 59.2-27.8-70.2 26.5-61.1-14-6-20.4 47.1-15.3-38.9-14.2 5.6 15.4 38.9-47.1-20.4-6 13.9 61 26.5 27.8 70.1-74.7-11-39.6-53.4-12.2 9.1 30.6 41.2-41.4-6.2-2.3 15.1 41.4 6.1-41.2 30.6 9.1 12.2 53.4-39.7 74.7 11.1-46.9 59.1-66.1 7.7 1.7 15.1z"/></g></switch></svg>
