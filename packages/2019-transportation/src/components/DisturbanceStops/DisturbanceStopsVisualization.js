@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect, useState, useContext } from "react";
 import PropTypes from "prop-types";
 import { resourceShape } from "reduxful/react-addons";
-// import { isLoaded } from "reduxful";
 import { extent } from "d3-array";
 import { BaseMap, ComparisonMap } from "@hackoregon/component-library";
+import { DataContext } from "./index";
 
 const infernoColorGradient = [
   0,
@@ -44,20 +43,8 @@ const baseMapProps = {
   // },
 };
 
-// http://service.civicpdx.org/transportation2019/v1/toad/disturbanceStops/?limit=100&offset=400&months=9&time_range=6.25%2C9.5&years=2017%2C2018&lines=6%2C10%2C14&service_key=W&bounds=-122.665849%2C45.510867%2C-122.653650%2C45.514367
-const limit = 2000;
-const offset = 0;
-const months = "9,10,11";
-const timeRange = "6.25,9.5";
-const years = "2017,2018";
-const lines = "6,10,14";
-const bounds = "-122.665849,45.510867,-122.653650,45.514367";
-const testUrl = `http://service.civicpdx.org/transportation2019/v1/toad/disturbanceStops/?limit=${limit}&offset=${offset}&months=${months}&time_range=${timeRange}&years=${years}&lines=${lines}&service_key=W&bounds=${bounds}`;
-
 const DisturbanceStopsVisualization = () => {
-  const [loaded, setLoaded] = useState(false);
-  const [requestUrl, setRequestUrl] = useState(testUrl);
-
+  const data = useContext(DataContext);
   const [disturbanceStops2017, setDisturbanceStops2017] = useState([]);
   const [disturbanceStops2018, setDisturbanceStops2018] = useState([]);
 
@@ -83,9 +70,9 @@ const DisturbanceStopsVisualization = () => {
       ["linear"],
       ["get", "duration"],
       disturbanceStops2017Extent.length ? disturbanceStops2017Extent[0] : 0, // lowest duration in the disturbance stop dataset
-      0,
+      0, // lowest value acts as a zero
       disturbanceStops2017Extent.length ? disturbanceStops2017Extent[1] : 1, // highest duration in the disturbance stop dataset
-      1
+      1 // highest value acts as a one
     ]
   };
 
@@ -111,26 +98,15 @@ const DisturbanceStopsVisualization = () => {
   };
 
   useEffect(() => {
-    axios.get(requestUrl).then(response => {
-      setDisturbanceStops2017([
-        ...disturbanceStops2017,
-        ...response.data.results.features.filter(
-          feature => feature.properties.year === 2017
-        )
-      ]);
-      setDisturbanceStops2018([
-        ...disturbanceStops2018,
-        ...response.data.results.features.filter(
-          feature => feature.properties.year === 2018
-        )
-      ]);
-      if (response.data.next) {
-        setRequestUrl(response.data.next);
-      } else {
-        setLoaded(true);
-      }
-    });
-  }, [requestUrl]); // eslint-disable-line
+    setDisturbanceStops2017([
+      ...disturbanceStops2017,
+      ...data.features.filter(feature => feature.properties.year === 2017)
+    ]);
+    setDisturbanceStops2018([
+      ...disturbanceStops2018,
+      ...data.features.filter(feature => feature.properties.year === 2018)
+    ]);
+  }, [data]); // eslint-disable-line
 
   useEffect(() => {
     setDisturbanceStops2017Extent(
@@ -156,8 +132,6 @@ const DisturbanceStopsVisualization = () => {
     );
   }, [disturbanceStops2018]);
 
-  // const isLoading = !isLoaded(data.disturbanceStops);
-
   const DisturbanceStopsMap2017 = disturbanceStops2017Extent.length ? (
     <BaseMap
       {...baseMapProps}
@@ -175,16 +149,14 @@ const DisturbanceStopsVisualization = () => {
     />
   ) : null;
 
-  return (
+  return data.loaded ? (
     <>
-      {loaded ? (
-        <ComparisonMap
-          leftMap={DisturbanceStopsMap2017}
-          rightMap={DisturbanceStopsMap2018}
-        />
-      ) : null}
+      <ComparisonMap
+        leftMap={DisturbanceStopsMap2017}
+        rightMap={DisturbanceStopsMap2018}
+      />
     </>
-  );
+  ) : null;
 };
 
 DisturbanceStopsVisualization.propTypes = {
