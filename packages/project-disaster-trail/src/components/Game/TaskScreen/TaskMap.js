@@ -10,62 +10,60 @@ const [omsiLon, omsiLat] = [-122.6655, 45.5081];
 const getPosition = f =>
   f.geometry ? f.geometry.coordinates : [omsiLon, omsiLat];
 
-const getIconColor = f => {
-  const mapping = {
-    BEECN: [238, 73, 92],
-    fire: [238, 73, 92],
-    injury: [238, 73, 92],
-    hunger: [238, 73, 92],
-    thirst: [238, 73, 92],
-    protection: [238, 73, 92]
-  };
-  return mapping[f.properties.type] || [25, 183, 170];
-};
-
-// This is a hacked together example mapping using last year's icon map
-// but with this year's task IDs.
 const poiIconMapping = {
-  fire: {
+  cold: {
     x: 0,
     y: 0,
-    width: 250,
-    height: 250,
-    mask: true
+    width: 445,
+    height: 445
   },
-  injury: {
-    x: 250,
+  dust: {
+    x: 445,
     y: 0,
-    width: 250,
-    height: 250,
-    mask: true
+    width: 445,
+    height: 445
   },
-  BEECN: {
-    x: 500,
+  fire: {
+    x: 890,
     y: 0,
-    width: 250,
-    height: 250,
-    mask: true
+    width: 445,
+    height: 445
+  },
+  hole: {
+    x: 0,
+    y: 445,
+    width: 445,
+    height: 445
   },
   hunger: {
+    x: 445,
+    y: 445,
+    width: 445,
+    height: 445
+  },
+  injury: {
+    x: 890,
+    y: 445,
+    width: 445,
+    height: 445
+  },
+  "lost-pet": {
     x: 0,
-    y: 250,
-    width: 250,
-    height: 250,
-    mask: true
+    y: 890,
+    width: 445,
+    height: 445
   },
   thirst: {
-    x: 250,
-    y: 250,
-    width: 250,
-    height: 250,
-    mask: true
+    x: 445,
+    y: 890,
+    width: 445,
+    height: 445
   },
-  protection: {
-    x: 500,
-    y: 250,
-    width: 250,
-    height: 250,
-    mask: true
+  weather: {
+    x: 890,
+    y: 890,
+    width: 445,
+    height: 445
   }
 };
 
@@ -126,12 +124,11 @@ const TaskMap = ({ activeTask, completedTasks, tasks }) => {
       <IconMap
         data={data}
         getPosition={getPosition}
-        iconAtlas="https://i.imgur.com/xgTAROe.png"
+        iconAtlas="https://i.imgur.com/ZKYqCqW.png"
         iconMapping={poiIconMapping}
         iconSizeScale={poiIconZoomScale}
         getIcon={d => d.properties.type}
         getSize={() => 7}
-        getColor={getIconColor}
       />
     </BaseMap>
   );
