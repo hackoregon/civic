@@ -82,14 +82,14 @@ const LineChart = ({
     ? groupBy(safeData, dataSeries)
     : { category: safeData };
 
-  // TODO: if you have line data with categories that don't have the same length,
-  // then the below won't work.
+  const dataSeriesList = dataSeriesLabels || [{ category: "category" }];
+
   const lines = lineData
-    ? Object.keys(lineData).map((category, index) => (
+    ? dataSeriesList.map((item, index) => (
         <VictoryLine
           title="Line Chart"
           key={shortid.generate()}
-          data={lineData[category].map(d => ({
+          data={lineData[item.category].map(d => ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],
             series: d[dataSeries]
