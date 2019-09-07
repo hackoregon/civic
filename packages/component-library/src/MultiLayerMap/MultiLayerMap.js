@@ -43,7 +43,8 @@ const MultiLayerMap = props => {
       ? MultiSmallPolygonMap({
           ...layerData,
           index,
-          onHoverSlide
+          onHoverSlide,
+          viewport
         })
       : mapType === "ChoroplethMap"
       ? MultiChoroplethMap({

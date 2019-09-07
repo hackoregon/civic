@@ -70,7 +70,7 @@ export const updateQuantileScale = (
     .reduce((a, c) => (a.indexOf(c) === -1 ? [...a, c] : a), []);
 
   const colorRange = quantileRange.length
-    ? quantileRange
+    ? createRange("", quantileRange)
     : CIVIC_MAP_COLORS[civicColorSelection]
     ? CIVIC_MAP_COLORS[civicColorSelection]
     : CIVIC_MAP_COLORS.earth;

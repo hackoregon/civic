@@ -4,6 +4,12 @@ import shortid from "shortid";
 import { number, string, bool, func, arrayOf, shape } from "prop-types";
 
 import { createColorScale, createSizeScale } from "./createLayers";
+import { scaleThreshold } from "d3";
+
+const getLineWidthScale = scaleThreshold()
+  .domain([6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13.5, 14])
+  .range([30, 24, 18, 12, 6.75, 5.75, 4.75, 3.75, 2.75, 1.75, 1.5, 1.25, 1, 0.75, 0.5, 0.25]);
+
 
 const MultiSmallPolygonMap = props => {
   const {
@@ -24,7 +30,8 @@ const MultiSmallPolygonMap = props => {
     fieldName = {},
     dataRange,
     colorRange,
-    index
+    index,
+    viewport
   } = props;
 
   const colorScale = createColorScale(
@@ -43,6 +50,9 @@ const MultiSmallPolygonMap = props => {
     return colorScale();
   };
 
+  const { zoom } = viewport;
+  const sizeScale = getLineWidthScale(zoom);
+
   const getLineWidth = createSizeScale(lineWidth);
 
   return (
@@ -59,6 +69,7 @@ const MultiSmallPolygonMap = props => {
       getLineColor={getFillColor}
       getLineWidth={getLineWidth}
       lineWidthMinPixels={1}
+      lineWidthScale={sizeScale}
       onHover={info => onHoverSlide(info, index)}
       onClick={onLayerClick}
       autoHighlight={autoHighlight}
