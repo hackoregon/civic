@@ -71,29 +71,12 @@ const ComparisonMap = props => {
     border: 1px solid white;
   `;
 
-  const leftMapLabel = css`
-    z-index: 1;
-    position: absolute;
-    width: 100%;
-    padding-top: 5px;
-    padding-left: 10px;
-    clip-path: inset(
-      0 calc(100% - ${sliderPosition}% + 2px) 0 0
-    ); // The 2px makes it so the label doesn't overlap the divider
+  const mapTitleWrapper = css`
+    padding: 5px 10px 0 10px;
+    display: flex;
+    justify-content: space-between;
   `;
 
-  const rightMapLabel = css`
-    z-index: 1;
-    position: absolute;
-    right: 0;
-    width: 100%;
-    padding-top: 5px;
-    padding-right: 10px;
-    text-align: right;
-    clip-path: inset(
-      0 0 0 calc(${sliderPosition}% + 2px)
-    ); // The 2px makes it so the label doesn't overlap the divider
-  `;
   const titleStyle = css`
     font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
     font-size: 18px;
@@ -115,6 +98,10 @@ const ComparisonMap = props => {
   return (
     <div css={container}>
       <div css={mapsWrapper}>
+        <div css={mapTitleWrapper}>
+          {leftMapTitle && <h2 css={titleStyle}>{leftMapTitle}</h2>}
+          {rightMapTitle && <h2 css={titleStyle}>{rightMapTitle}</h2>}
+        </div>
         {showDivider && <div css={divider} />}
         <div css={sliderWrapper}>
           <CompareSlider
@@ -126,16 +113,6 @@ const ComparisonMap = props => {
             }}
           />
         </div>
-        {leftMapTitle && (
-          <div css={leftMapLabel}>
-            <h2 css={titleStyle}>{leftMapTitle}</h2>
-          </div>
-        )}
-        {rightMapTitle && (
-          <div css={rightMapLabel}>
-            <h2 css={titleStyle}>{rightMapTitle}</h2>
-          </div>
-        )}
         <div css={leftMapWrapper}>{LeftMap}</div>
         <div css={rightMapWrapper}>{RightMap}</div>
       </div>
