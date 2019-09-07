@@ -1,8 +1,7 @@
 import PropTypes from "prop-types";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
-import Skeleton from "@material-ui/lab/Skeleton";
-
+import { BrandColors } from "../index";
 import ChartTitle from "../ChartTitle";
 import Logo from "../Logo/Logo";
 
@@ -12,8 +11,6 @@ const chartError = css`
   height: 100%;
 `;
 
-const defaultVictoryHeight = 350;
-const defaultVictoryWidth = 650;
 const defaultVictoryAspectRatio = 650 / 350;
 
 /**
@@ -47,20 +44,21 @@ const ChartContainer = ({
     height: 100%;
   `;
 
-  const centerContent = css`
-    img {
-      position: absolute;
-      left: 50%;
-      margin-left: -50px;
-      top: 50%;
-      margin-top: -50px;
-    }
+  const skeletonStyle = css`
+    margin: 0 auto;
+    width: 100%;
+    max-width: 900px;
+    height: calc(100vw / ${aspectRatio});
+    max-height: ${900 / aspectRatio}px;
+    background-color: ${BrandColors.subdued.hex};
+    display: grid;
+    justify-items: center;
+    align-items: center;
   `;
 
   let content = (
-    <div css={[wrapperStyle, centerContent]}>
+    <div css={skeletonStyle}>
       <Logo type="squareLogoAnimated" />
-      <Skeleton height={defaultVictoryHeight} width={defaultVictoryWidth} />
     </div>
   );
 
