@@ -273,6 +273,7 @@ export default () =>
           { display: "select" },
           GROUP_IDS.CUSTOM
         );
+        const loading = boolean("Loading", false, GROUP_IDS.CUSTOM);
 
         return (
           <Scatterplot
@@ -293,6 +294,7 @@ export default () =>
             invertY={invertY}
             legendComponent={customLegend}
             theme={(name => themes[name])(theme)}
+            loading={loading}
           />
         );
       },
