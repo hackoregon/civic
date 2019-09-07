@@ -1,16 +1,17 @@
 /** @jsx jsx */
-import { jsx, css } from "@emotion/core";
+import { jsx } from "@emotion/core";
 import PropTypes from "prop-types";
 import MaterialButton from "@material-ui/core/Button";
 
-const buttonClass = css`
-  color: blue;
-`;
+import { ThemeProvider } from "@material-ui/styles";
+import { MaterialTheme } from "../_Themes/index";
 
 const ButtonNew = ({ label, onClick }) => (
-  <MaterialButton variant="outlined" css={buttonClass} onClick={onClick}>
-    {label}
-  </MaterialButton>
+  <ThemeProvider theme={MaterialTheme}>
+    <MaterialButton variant="outlined" onClick={onClick} color="secondary">
+      {label}
+    </MaterialButton>
+  </ThemeProvider>
 );
 
 ButtonNew.propTypes = {
