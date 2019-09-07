@@ -54,7 +54,7 @@ export class Packages extends React.Component {
   componentDidUpdate(prevProps) {
     if(!this.props.isLoading && prevProps.isLoading) {
       // console.log("PACK-CDU");
-      this.props.setPackage(this.props.sandbox.packages[2]);
+      this.props.setPackage(this.props.sandbox.packages[1]);
       this.setState({ mapIsOpen: true });
     };
 

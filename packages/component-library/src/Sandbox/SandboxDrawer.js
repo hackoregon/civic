@@ -17,17 +17,17 @@ const menuOpen = css(`
   top: 0;
   right: 0;
   height: 75vh;
-  width: 35%;
+  width: 33%;
   z-index: 5;
   transition: 0.5s;
   @media (max-width: 850px) {
     width: 95%;
-    height: 65vh;
+    height: 64vh;
     min-height: 550px;
   }
   @media (max-width: 500px) {
     width: 100%;
-    height: 65vh;
+    height: 64vh;
     min-height: 550px;
   }
 `);
@@ -121,14 +121,11 @@ const SandboxDrawer = ({
           css={css(`
           background: rgba(243,242,243,0.9);
           overflow-y: auto;
-
           border: 1px solid #ddd;
           border-left: 0;
           border-radius: 2px;
           box-shadow: -10px 5px 15px -3px rgba(0, 0, 0, 0.2);
           flex-grow: 2;
-          @media (max-width: 850px) {
-          }
         `)}
         >
           <div

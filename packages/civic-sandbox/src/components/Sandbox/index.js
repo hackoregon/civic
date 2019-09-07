@@ -10,7 +10,7 @@ import { equals } from "ramda";
 
 import {
   fetchFoundation,
-  fetchSlides,
+  fetchLayers,
   setFoundation,
   setSlides,
   setPackage,
@@ -54,70 +54,44 @@ class SandboxComponent extends React.Component {
   componentDidMount() {
     // this.props.fetchFoundation(this.props.foundationData.endpoint);
     console.log("sandbox-index-CDM-slidesData:", this.props.slidesData);
-    const layerURLS = this.props.slidesData;
-    // .map(s => s.layerEndpoint);
-    console.log("sandbox-index-CDM-layerURLS;", layerURLS);
+    const layerURLs = this.props.slidesData;
+    console.log("sandbox-index-CDM-layerURLs:", layerURLs);
 
-    this.props.fetchSlides(layerURLS);
+    this.props.fetchLayers(layerURLs);
   }
 
   componentDidUpdate(prevProps) {
     console.log("sandbox-index-CDU-slidesData:", this.props.slidesData);
-
-    // if (!equals(this.props.selectedPackage, prevProps.selectedPackage)) {
-    // this.props.fetchFoundation(this.props.foundationData.endpoint);
-    // this.props.fetchSlides(this.props.slidesData);
-    // }
-    // if (
-    //   equals(this.props.selectedPackage, prevProps.selectedPackage) &&
-    //   !equals(this.props.selectedFoundation, prevProps.selectedFoundation)
-    // ) {
-    //   this.props.fetchFoundation(this.props.foundationData.endpoint);
-    // }
     if (
       equals(this.props.selectedPackage, prevProps.selectedPackage) &&
       !equals(this.props.selectedSlide, prevProps.selectedSlide)
     ) {
       console.log("sandbox-index-CDU-SAME PACK & NEW SLIDES");
-      // const layerURLS = this.props.slidesData;
-      // this.props.fetchSlides(layerURLS);
-
-      // const onlyFetchNewSlide = this.props.selectedSlidesData.filter(slideDatum => {
-      //   return slideDatum.defaultSlide;
-      // });
-      const onlyFetchNewSlide = this.props.slidesData.filter((d, index) => {
-        const previouslyFetched = this.props.selectedSlidesData[index].results;
-        console.log("sandbox-index-CDU-previouslyFetched", previouslyFetched);
-
+      const onlyFetchNewLayers = this.props.slidesData.map((layer, index) => {
+        const previouslyFetchedData = this.props.selectedSlidesData[index].results;
+        console.log("sandbox-index-CDU-previouslyFetchedData:", previouslyFetchedData);
         return (
-          !previouslyFetched &&
-          !prevProps.selectedSlide.includes(d.slide.name) &&
-          this.props.selectedSlide.includes(d.slide.name)
-        );
+          !previouslyFetchedData &&
+          !prevProps.selectedSlide.includes(layer.slide.name) &&
+          this.props.selectedSlide.includes(layer.slide.name)
+        )
+        ? layer
+        : {
+            ...layer,
+            geoJSON: previouslyFetchedData
+          };
       });
-      // .filter(d => {
-      //   return this.props.slidesData.filter(e => e && e.slide.layerEndpoint !== d.slide.layerEndpoint);
-      // });
-      console.log("sandbox-index-CDU-onlyFetchNewSlide", onlyFetchNewSlide);
+      console.log("sandbox-index-CDU-onlyFetchNewLayers", onlyFetchNewLayers);
 
-      if (onlyFetchNewSlide.length) {
-        this.props.fetchSlides(onlyFetchNewSlide);
+      if (onlyFetchNewLayers.length) {
+        this.props.fetchLayers(onlyFetchNewLayers);
       }
+      // this.props.fetchLayers(this.props.slidesData);
     }
 
     if (!equals(this.props.selectedPackage, prevProps.selectedPackage)) {
-      console.log("sandbox-index-CDU-NEW PACK & SLIDES");
-      // const fetchedSlideDataNames = this.props.selectedSlidesData.map(
-      //   slideDatum => {
-      //     return Object.keys(slideDatum)[0];
-      //   }
-      // );
-      // const onlyFetchNewSlide = this.props.slidesData.filter(
-      //   d => !fetchedSlideDataNames.includes(d.name)
-      // );
-      // this.props.fetchSlides(onlyFetchNewSlide);
-      const layerURLS = this.props.slidesData;
-      this.props.fetchSlides(layerURLS);
+      console.log("sandbox-index-CDU-NEW PACK & NEW SLIDES");
+      this.props.fetchLayers(this.props.slidesData);
     }
   }
 
@@ -235,8 +209,8 @@ export default connect(
     fetchFoundation(endpoint = "") {
       dispatch(fetchFoundation(endpoint)());
     },
-    fetchSlides(slides = []) {
-      dispatch(fetchSlides(slides)());
+    fetchLayers(slides = []) {
+      dispatch(fetchLayers(slides)());
     },
     fetchSlideByDate(slide, date = "", type = "") {
       dispatch(fetchSlideByDate(slide, date, type)());

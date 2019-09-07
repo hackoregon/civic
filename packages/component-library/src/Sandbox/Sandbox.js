@@ -106,7 +106,7 @@ const Sandbox = ({
       <div css={baseMapWrapper}>
         <BaseMap
           civicMapStyle={baseMapStyle}
-          initialZoom={4.5}
+          initialZoom={2}
           initialLatitude={38}
           initialLongitude={-97}
           useContainerHeight

@@ -25,7 +25,6 @@ export const fetchByDateAdapter = (
   { start, success, failure }
 ) => () => dispatch => {
   dispatch(start());
-  // const url = slide.endpoint;
   const url = slide.layerEndpoint;
   const secureURL = url.includes("https")
     ? url
@@ -47,55 +46,67 @@ export const fetchByDateAdapter = (
     });
 };
 
-export const fetchAllSlidesAdapter = (
-  slidesArray,
+export const fetchLayersAdapter = (
+  layersArr,
   { start, success, failure }
 ) => () => dispatch => {
-  // console.log("\n");
-  // console.log("fetchAllSlidesAdapter");
-  console.log("fetchAllSlidesAdapter-slidesArray", slidesArray);
+  console.log("fetchLayersAdapter-layersArr", layersArr);
   dispatch(start());
 
-  const layerUrls = slidesArray.map(oneSlide => {
-    // console.log("fetchAllSlidesAdapter-slide", slide);
-    const url = oneSlide.slide.layerEndpoint;
-    const secureURL = url.includes("https")
+  const fetchLayers = layersArr.map(layerObj => {
+    // console.log("fetchLayersAdapter-slide", slide);
+    const url = layerObj.slide.layerEndpoint;
+    const isSecureURL = url.includes("https")
       ? url
       : `${url.slice(0, 4)}s${url.slice(4)}`;
-    // console.log("fetchAllSlidesAdapter-secureURL", secureURL);
-    return axios.get(secureURL); //promise
+    return axios.get(isSecureURL);
   });
-  // console.log("fetchAllSlidesAdapter-layerUrls", layerUrls); //promises
-
+  // console.log("fetchLayersAdapter-fetchLayers", fetchLayers);
   return (
     axios
-      .all(layerUrls)
-      .then(layerObjects => {
-        // console.log("l:", l);
-        const dataURLS = [...layerObjects]
-          .map(l2 => l2.data.dataEndpoint);
+      .all(fetchLayers)
+      .then(layerDataArr => {
+        console.log("fetchLayersAdapter-layerDataArr:", layerDataArr);
 
-        const fetchData = dataURLS.map((url,i) => {
-          return url && slidesArray[i].defaultSlide ? axios.get(url) : [];
+        const geoDataURLs = layerDataArr.map((layer,i) => {
+          return {
+            url: layer.data.dataEndpoint,
+            prevData: layersArr[i].geoJSON
+          };
+        });
+        console.log("fetchLayersAdapter-geoDataURLs:", geoDataURLs);
+
+        const fetchGeoData = geoDataURLs.map((gd, i, arr) => {
+          const findMatch = arr.findIndex(d => d.url === gd.url && d.prevData);
+          console.log("fetchLayersAdapter-findMatch:", findMatch);
+
+          return findMatch > -1
+            ? ( { data: { results: layersArr[findMatch].geoJSON} } )
+            : gd.url && layersArr[i].defaultSlide && !layersArr[i].geoJSON
+            ? axios.get(gd.url)
+            : [];
         });
 
-        return axios.all(fetchData).then(
-          axios.spread((...layerData) => {
-            // console.log("layerData:", layerData);
-            dispatch(
-              success(
-                layerData.map((d, i) => ({
-                  ...d.data,
-                  ...layerObjects[i].data
-                }))
-              )
-            );
-            return layerData;
-          })
+        // console.log("fetchLayersAdapter-dispatched");
+
+        return axios.all(fetchGeoData).then(geoData => {
+        console.log("fetchLayersAdapter-geoData:", geoData);
+          const layerAndGeoData = geoData.map((g, i) => {
+            return {
+              ...g.data,
+              ...layerDataArr[i].data
+            };
+          });
+        console.log("fetchLayersAdapter-layerAndGeoData:", layerAndGeoData, "\n");
+
+          dispatch(
+            success(layerAndGeoData)
+          );
+          return geoData;
+        }
         ).catch(err => {
           dispatch(failure(err));
         });
-
       })
   );
 };

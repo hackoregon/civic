@@ -1,5 +1,5 @@
 import fetchAdapter, {
-  fetchAllSlidesAdapter,
+  fetchLayersAdapter,
   fetchByDateAdapter
 } from "../fetch-adapter";
 import actionEmitter from "../common-action-emitter";
@@ -58,9 +58,9 @@ export const fetchFoundation = endpoint =>
     failure: FoundationFailure
   });
 
-export const fetchSlides = slides => {
-  console.log("actions-fetchSlides-slides:", slides);
-  return fetchAllSlidesAdapter(slides, {
+export const fetchLayers = layers => {
+  console.log("actions-fetchLayers-layers:", layers);
+  return fetchLayersAdapter(layers, {
     start: SlidesStart,
     success: SlidesSuccess,
     failure: SlidesFailure
