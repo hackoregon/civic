@@ -6,43 +6,44 @@ import { BaseMap, IconMap } from "@hackoregon/component-library";
 
 import { getCompletedTasks } from "../../../state/tasks";
 
-const [omsiLon, omsiLat] = [-122.6655, 45.5081];
+const [initialLon, initialLat] = [-122.644588, 45.508415];
+
 const getPosition = f =>
-  f.geometry ? f.geometry.coordinates : [omsiLon, omsiLat];
+  f.geometry ? f.geometry.coordinates : [initialLon, initialLat];
 
 const poiIconMapping = {
   cold: {
     x: 0,
     y: 0,
-    width: 445,
+    width: 445 + 2,
     height: 445
   },
   dust: {
-    x: 445,
+    x: 445 + 4,
     y: 0,
     width: 445,
     height: 445
   },
   fire: {
-    x: 890,
+    x: 890 + 4,
     y: 0,
-    width: 445,
+    width: 447,
     height: 445
   },
   hole: {
     x: 0,
     y: 445,
-    width: 445,
+    width: 445 + 2,
     height: 445
   },
   hunger: {
-    x: 445,
+    x: 445 + 2,
     y: 445,
-    width: 445,
+    width: 445 + 2,
     height: 445
   },
   injury: {
-    x: 890,
+    x: 890 + 4,
     y: 445,
     width: 445,
     height: 445
@@ -50,19 +51,19 @@ const poiIconMapping = {
   "lost-pet": {
     x: 0,
     y: 890,
-    width: 445,
+    width: 445 + 2,
     height: 445
   },
   thirst: {
-    x: 445,
+    x: 445 + 4,
     y: 890,
     width: 445,
     height: 445
   },
   weather: {
-    x: 890,
+    x: 890 + 4,
     y: 890,
-    width: 445,
+    width: 445 + 2,
     height: 445
   }
 };
@@ -95,15 +96,17 @@ const asGeoJSON = (tasks, activeTask, completedTasks) =>
   }, []);
 
 const TaskMap = ({ activeTask, completedTasks, tasks }) => {
-  // TODO: This just takes the first location and that's no good
-  const lon = activeTask ? activeTask.locations[0][0] : omsiLon;
-  const lat = activeTask ? activeTask.locations[0][1] : omsiLat;
+  // TODO: Change lon / lat for task
+  // const lon = activeTask ? activeTask.locations[0][0] : initialLon;
+  // const lat = activeTask ? activeTask.locations[0][1] : initialLat;
+  const lon = initialLon;
+  const lat = initialLat;
 
   const data = asGeoJSON(tasks, activeTask, completedTasks);
 
   return (
     <BaseMap
-      initialZoom={14}
+      initialZoom={15}
       initialLongitude={lon}
       initialLatitude={lat}
       initialPitch={60}
@@ -128,7 +131,7 @@ const TaskMap = ({ activeTask, completedTasks, tasks }) => {
         iconMapping={poiIconMapping}
         iconSizeScale={poiIconZoomScale}
         getIcon={d => d.properties.type}
-        getSize={() => 7}
+        getSize={() => 12}
       />
     </BaseMap>
   );
