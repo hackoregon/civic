@@ -6,6 +6,7 @@ import {
   withKnobs,
   select,
   object,
+  optionsKnob as options,
   boolean,
   number,
   text
@@ -14,7 +15,14 @@ import { action } from "@storybook/addon-actions";
 import { checkA11y } from "@storybook/addon-a11y";
 import { scaleQuantize, extent } from "d3";
 import { at } from "lodash";
-import { BaseMap, MapOverlay, MapTooltip, DemoJSONLoader } from "../src";
+import {
+  civicFormat,
+  BaseMap,
+  MapOverlay,
+  MapTooltip,
+  DemoJSONLoader
+} from "../src";
+import { getKeyNames } from "./shared";
 import notes from "./mapOverlay.notes.md";
 
 const GROUP_IDS = {
@@ -96,7 +104,7 @@ const colorSchemeOptions = {
 };
 
 const CIVIC_API_URL =
-  "http://service.civicpdx.org/disaster-resilience/api/DisasterNeighborhoodView/?format=json&limit=100";
+  "https://service.civicpdx.org/disaster-resilience/api/DisasterNeighborhoodView/?format=json&limit=102";
 
 export default () =>
   storiesOf("Component Lib|Maps/Map Overlay", module)
@@ -379,6 +387,15 @@ export default () =>
       "Example: With Tooltip",
       () => {
         const onLayerClick = info => action("Layer Clicked:")(info);
+
+        const formatOption = options(
+          "Tooltip value format",
+          getKeyNames(civicFormat),
+          "numericShort",
+          { display: "select" },
+          GROUP_IDS.LABELS
+        );
+
         return (
           <DemoJSONLoader urls={[CIVIC_API_URL]}>
             {data => (
@@ -393,6 +410,8 @@ export default () =>
                     primaryField="injuriestotal_day"
                     secondaryName="Earthquake - Total Night Injuries"
                     secondaryField="injuriestotal_night"
+                    formatPrimaryField={f => civicFormat[formatOption](f)}
+                    formatSecondaryField={f => civicFormat[formatOption](f)}
                   />
                 </MapOverlay>
               </BaseMap>
