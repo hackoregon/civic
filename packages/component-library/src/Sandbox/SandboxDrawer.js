@@ -184,27 +184,6 @@ const SandboxDrawer = ({
             z-index: 400;
           `)}
           >
-            <h2
-              css={css(`
-              color: #555;
-              text-transform: uppercase;
-              margin: 0 10px;
-            `)}
-            >
-              Base Layers
-            </h2>
-            <Dropdown
-              value={selectedFoundation}
-              options={data.packages[selectedPackage].foundations.map(
-                foundation => ({
-                  value: foundation,
-                  label: data.foundations[foundation].name
-                })
-              )}
-              onChange={updateFoundation}
-              simpleValue
-            />
-          </div>
           {foundationData && (
             <div>
               <div
@@ -237,12 +216,7 @@ const SandboxDrawer = ({
                   </span>
                 ) : null}
               </div>
-              {foundationData.slide_data && foundationMapProps.scaleType && (
-                <SandboxMapLegend
-                  data={foundationData}
-                  mapProps={foundationMapProps}
-                />
-              )}
+
               <h2
                 css={css(`
                 color: #555;
@@ -300,50 +274,44 @@ const SandboxDrawer = ({
               //     : whiteTextColor;
               // console.log("drawer-allSlides-slide:", slide);
               // console.log("drawer-allSlides-index:", index);
-              // console.log("drawer-foundationData:", foundationData);
-              // console.log("drawer-foundationMapProps:", foundationMapProps);
-
+    
               const dataIndex = foundationData.findIndex(d => {
                 const scatterplot = d.mapType === "ScatterPlotMap" && d.layerInfo.displayName === slide.label;
                 const choropleth = d.mapType === "ChoroplethMap" && d.layerInfo.displayName === slide.label;
                 return choropleth || scatterplot;
               });
-              // console.log("drawer-dataIndex:", dataIndex);
-              // console.log("drawer-[dataIndex]:", foundationMapProps[dataIndex]);
 
-              const mapLegend = dataIndex !== -1 && foundationData[dataIndex].data.length > 0
-                ?
-                  (
-                    <SandboxMapLegend
-                      data={foundationData[dataIndex].data}
-                      mapProps={foundationMapProps[dataIndex]}
-                    />
-                  )
-                : null;
+              const matchFound = dataIndex > -1 && foundationData[dataIndex].data.length > 0
+              console.log("DRAWER-matchFound:", matchFound);
 
-              const keyOptions = dataIndex !== -1 && foundationData[dataIndex].data.length > 0
+              const mapLegend = matchFound && (
+                <SandboxMapLegend
+                  data={foundationData[dataIndex].data}
+                  mapProps={foundationMapProps[dataIndex]}
+                />
+              );
+
+              const keyOptions = matchFound
                 ? Object.keys(foundationData[dataIndex].data[0].properties)
-                    .filter(d => d.includes(foundationData[dataIndex].fieldName.color.match(/^[a-zA-Z]+/)))
+                    .reduce((a,c,i) => {
+                      const include = c.includes(foundationData[dataIndex].fieldName.color.match(/^[a-zA-Z]+/)) 
+                      const menuYear = ["1990", "2000", "2010", "2017"]
+                      return include ? [...a, {value: c, label: menuYear[i]} ] : a;
+                    }, [])
                 : []
+              console.log("keyOptions:", keyOptions);
 
-              const keySelector = dataIndex !== -1 && foundationData[dataIndex].data.length > 0
-                ? (
-                    <Dropdown
-                      value={foundationData[dataIndex].fieldName.color}
-                      options={keyOptions.map(d => {
-                        return {
-                          value: d,
-                          label: d
-                        };
-                      })}
-                      onChange={name => {
-                        // console.log("drawer-key:", {[slide.label]: name});
-                        updateSlideKey({[slide.label]: name});
-                      }}
-                      simpleValue
-                    />
-                  )
-                  : null;
+              const keySelector = matchFound && (
+                  <Dropdown
+                    value={foundationData[dataIndex].fieldName.color}
+                    options={keyOptions}
+                    onChange={name => {
+                      // console.log("drawer-key:", {[slide.label]: name});
+                      updateSlideKey({[slide.label]: name});
+                    }}
+                    simpleValue
+                  />
+              );
 
               return (
                 <div key={shortid.generate()}>

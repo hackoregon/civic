@@ -102,22 +102,25 @@ export const getLayerSlides = createSelector(
   getSelectedSlides,
   getSelectedSlideKey,
   (slidesData, selectedSlides, selectedSlideKey) => {
-    // console.log("selector-getLayerSlides-slidesData:", slidesData);
+    console.log("selector-getLayerSlides-slidesData:", slidesData);
     // console.log("selector-getLayerSlides-selectedSlides:", selectedSlides);
     // console.log("selector-getLayerSlides-selectedSlideKey:", selectedSlideKey);
 
-    const filteredSliderVizData = selectedSlides.reduce((a,c) => {
+    const filteredSlideVizData = selectedSlides.reduce((a,c) => {
       const findSlide = slidesData.find(e => e.displayName === c);
       return findSlide ? [...a, findSlide] : a;
     }, []);
-    // console.log("selector-getLayerSlides-filteredSliderVizData:", filteredSliderVizData);
+    console.log("selector-getLayerSlides-filteredSlideVizData:", filteredSlideVizData);
     // const hasSelectedSlideKeys = Object.keys(selectedSlideKey).length > 0;
     // console.log("selector-getLayerSlides-hasSelectedSlideKeys:", hasSelectedSlideKeys);
 
-    const formattedSliderVizData = filteredSliderVizData
+    const formattedSliderVizData = filteredSlideVizData
       .map(d => {
         const mapProps = {
           ...d.visualization.map,
+          tooltip: {
+            ...d.visualization.tooltip
+          },
           fieldName: {
             ...d.visualization.map.fieldName,
             color: selectedSlideKey[d.displayName]
@@ -139,7 +142,7 @@ export const getLayerSlides = createSelector(
           layerInfo: d
         };
       });
-    // console.log("selector-getLayerSlides-formattedSliderVizData:", formattedSliderVizData);
+    console.log("selector-getLayerSlides-formattedSliderVizData:", formattedSliderVizData);
 
     return formattedSliderVizData;
   }

@@ -1,6 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import PropTypes from "prop-types";
 import { format } from "d3";
+import { startCase } from "lodash";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import shortid from "shortid";
@@ -51,23 +52,11 @@ const tickNumsOrdinal = css(`
 `);
 
 const SandboxMapLegend = props => {
+  console.log("SandboxMapLegend-props:", props);
   const { data, mapProps } = props;
-  const { civicColor, scaleType, dataRange, colorRange, fieldName } = mapProps;
+  const { civicColor, scaleType, dataRange, colorRange, fieldName, tooltip } = mapProps;
   
   const { color: colorScaleType} = scaleType;
-
-  // const createEqualBins = (slide, color, getPropValue) => {
-  //   const scale = scaleQuantize()
-  //     .domain(extent(slide.features, getPropValue))
-  //     .range(color)
-  //     .nice();
-  //   return scale;
-  // };
-
-  // const colorScale =
-  //   colorScaleType === "ordinal" || colorScaleType === "threshold"
-  //     ? colorRange
-  //     : createEqualBins(data, mapProps.color, mapProps.getPropValue);
 
   let choroplethColorScale = createColorScale(
     civicColor,
@@ -96,11 +85,6 @@ const SandboxMapLegend = props => {
       fieldName
     );
   }
-  
-  /* global console */
-  // console.log("legend-choroplethColorScale", choroplethColorScale);
-  // console.log("legend-choroplethColorScale-domain", choroplethColorScale.domain());
-  // console.log("legend-choroplethColorScale-range", choroplethColorScale.range());
 
   const formatColor = arr =>
     arr.reduce(
@@ -126,26 +110,45 @@ const SandboxMapLegend = props => {
       ? bins
       : bins.reduce((a, c) => (c[1] ? [...a, c[1]] : [...a, ""]), []);
 
-  const thousandsFormat = format(".3s");
-  const percentFormat = format(".1%");
+  // const sandboxThousandsFormat = format(".3s");
+  const percentageFormat = format(".1%");
+  const sandboxPercentFormat = p => p < 1 && p > 0 ? percentageFormat(p) : p + "%";
+  const sandboxDecimalFormat = format(".2n"); //0.14
+  const sandboxMoneyFormat = d => `$${civicFormat.numericShort(d)}`;
+  const sandboxSentenceCase = str => str.length && str
+    .split(" ")
+    .reduce((full, word) => `${full} ${word[0].toUpperCase() + word.substring(1)}`, "")
+    .trim();
 
-  const ticksFormatted = ticks.map(d => {
-    return d === ""
-      ? ""
-      : d >= 1000000 || d <= -1000000
-      ? civicFormat.numeric(d)
-      : d >= 1000 || d <= -1000
-      ? thousandsFormat(d)
-      : d > 1 || d < -1
-      ? civicFormat.numeric(d)
-      : d === 0
-      ? "0  "
-      : d <= 1 && d >= -1
-      ? percentFormat(d)
-      : d && typeof d === "string"
-      ? d
-      : civicFormat.numeric(d);
-  });
+  const formatTicks = (arr, typeFormat) => {
+    const formatter = typeFormat === "numeric"
+      ? civicFormat.numeric
+      : typeFormat === "numericShort"
+      ? civicFormat.numericShort
+      : typeFormat === "decimal"
+      ? sandboxDecimalFormat
+      : typeFormat === "percent"
+      ? sandboxPercentFormat
+      : typeFormat === "dollars"
+      ? sandboxMoneyFormat
+      : typeFormat === "year"
+      ? civicFormat.year
+      : typeFormat === "monthYear"
+      ? civicFormat.monthYear
+      : typeFormat === "titleCase"
+      ? startCase
+      : typeFormat === "sentenceCase"
+      ? sandboxSentenceCase
+      : civicFormat.unformatted;
+    return arr.map(d => formatter(d));
+  };
+  
+  const formatType = mapProps.tooltip && mapProps.tooltip.primary && mapProps.tooltip.primary.format
+    ? mapProps.tooltip.primary.format
+    : "numeric";
+  console.log("formatType:", formatType);
+  const ticksFormatted = formatTicks(ticks, formatType);
+  console.log("ticksFormatted:", ticksFormatted);
 
   const tickStyle =
     colorScaleType === "threshold"

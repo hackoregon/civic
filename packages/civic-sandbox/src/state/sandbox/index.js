@@ -107,8 +107,8 @@ const reducer = (state = INITIAL_STATE, action) => {
       };
     case SLIDES_SUCCESS: {
       console.log("a-SLIDES_SUCCESS");
-      console.log("a-SLIDES_SUCCESS-state.slidesData:", state.slidesData);
-      console.log("a-SLIDES_SUCCESS-payload:", action.payload);
+      // console.log("a-SLIDES_SUCCESS-state.slidesData:", state.slidesData);
+      // console.log("a-SLIDES_SUCCESS-payload:", action.payload);
       return {
         ...state,
         slidesPending: false,
@@ -128,7 +128,6 @@ const reducer = (state = INITIAL_STATE, action) => {
     }
     case SLIDES_FAILURE: {
       console.log("a-SLIDES_FAILURE");
-      console.log("a-payload:", action.payload);
       return {
         ...state,
         slidesPending: false,
