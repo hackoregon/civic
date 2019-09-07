@@ -7,9 +7,9 @@ export default {
   },
   // Salmon
   secondary: {
-    rgb: "rgb(238,73,92)",
-    rgba: "rgba(238,73,92,1)",
-    hex: "#EE495C"
+    rgb: "rgb(220,69,86)",
+    rgba: "rgba(220,69,86,1)",
+    hex: "#DC4556"
   },
   // Plum
   tertiary: {
@@ -41,5 +41,10 @@ export default {
     rgb: "rgb(114,99,113)",
     rgba: "rgba(114,99,113,1)",
     hex: "#726371"
+  },
+  error: {
+    hex: "#DE3F8B",
+    rgb: "rgb(222,63,139)",
+    rgba: "rgb(222,63,139,1)"
   }
 };
