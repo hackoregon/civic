@@ -1,21 +1,19 @@
 import React from "react";
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
-import { node, number, shape } from "prop-types";
-import Slider from "../Slider/Slider";
-
-const sliderWrapper = css`
-  margin: 2em auto;
-  width: 90%;
-`;
+import { bool, node, number, shape, string } from "prop-types";
+import CompareSlider from "./CompareSlider";
 
 const ComparisonMap = props => {
   const {
-    leftMap,
-    rightMap,
     height,
-    sliderStartPosition,
-    initialViewport
+    initialViewport,
+    leftMap,
+    leftMapTitle,
+    rightMap,
+    rightMapTitle,
+    showDivider,
+    sliderStartPosition
   } = props;
 
   const [sliderPosition, setSliderPosition] = React.useState(
@@ -64,37 +62,103 @@ const ComparisonMap = props => {
     clip-path: inset(0 0 0 ${sliderPosition}%);
   `;
 
+  const divider = css`
+    z-index: 1;
+    position: absolute;
+    left: calc(${sliderPosition}% - 1px); // The 1px is to adjust for the border
+    width: 0px;
+    height: ${height}px;
+    border: 1px solid white;
+  `;
+
+  const leftMapLabel = css`
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+    padding-top: 5px;
+    padding-left: 10px;
+    clip-path: inset(
+      0 calc(100% - ${sliderPosition}% + 2px) 0 0
+    ); // The 2px makes it so the label doesn't overlap the divider
+  `;
+
+  const rightMapLabel = css`
+    z-index: 1;
+    position: absolute;
+    right: 0;
+    width: 100%;
+    padding-top: 5px;
+    padding-right: 10px;
+    text-align: right;
+    clip-path: inset(
+      0 0 0 calc(${sliderPosition}% + 2px)
+    ); // The 2px makes it so the label doesn't overlap the divider
+  `;
+  const titleStyle = css`
+    font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+  `;
+
+  const sliderMin = 5;
+  const sliderMax = 95;
+  const sliderWrapper = css`
+    z-index: 1;
+    position: absolute;
+    top: ${height / 2}px;
+    height: 0;
+    left: ${sliderMin}%;
+    width: ${sliderMax - sliderMin}%;
+  `;
+
   return (
     <div css={container}>
       <div css={mapsWrapper}>
+        {showDivider && <div css={divider} />}
+        <div css={sliderWrapper}>
+          <CompareSlider
+            min={sliderMin}
+            max={sliderMax}
+            value={sliderPosition}
+            onChange={value => {
+              setSliderPosition(value);
+            }}
+          />
+        </div>
+        {leftMapTitle && (
+          <div css={leftMapLabel}>
+            <h2 css={titleStyle}>{leftMapTitle}</h2>
+          </div>
+        )}
+        {rightMapTitle && (
+          <div css={rightMapLabel}>
+            <h2 css={titleStyle}>{rightMapTitle}</h2>
+          </div>
+        )}
         <div css={leftMapWrapper}>{LeftMap}</div>
         <div css={rightMapWrapper}>{RightMap}</div>
-      </div>
-      <div css={sliderWrapper}>
-        <Slider
-          min={5}
-          max={95}
-          step={5}
-          value={sliderPosition}
-          onChange={value => {
-            setSliderPosition(value);
-          }}
-        />
       </div>
     </div>
   );
 };
 
 ComparisonMap.propTypes = {
-  leftMap: node,
-  rightMap: node,
   height: number,
-  sliderStartPosition: number,
-  initialViewport: shape({})
+  initialViewport: shape({}),
+  leftMap: node.isRequired,
+  leftMapTitle: string,
+  rightMap: node.isRequired,
+  rightMapTitle: string,
+  showDivider: bool,
+  sliderStartPosition: number
 };
 
 ComparisonMap.defaultProps = {
   height: 550,
+  leftMapTitle: "",
+  rightMapTitle: "",
+  showDivider: true,
   sliderStartPosition: 50
 };
 
