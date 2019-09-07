@@ -3,47 +3,74 @@ import BrandColors from "../Brand/BrandColors";
 
 // Brand Colors
 const civicPrimary = BrandColors.primary.hex;
-const civicSecondary = BrandColors.secondary.hex;
+const civicPlumLight = BrandColors.plumLight.hex;
+const civicMedium = BrandColors.medium.hex;
+const civicSubdued = BrandColors.subdued.hex;
+const civicAction = BrandColors.action.hex;
+const civicError = BrandColors.error.hex;
 
 // Typography
-const sansSerif = "Roboto Condensed, Helvetica Neue, Helvetica, sans-serif";
-const size = "1em";
+const dataSanSerif = "Roboto Condensed, Helvetica Neue, Helvetica, sans-serif";
+const sanSerif = "Rubik, Helvetica Neue, Helvetica, sans-serif";
+
+// Animation
+const animationSpeed = 4;
 
 const MaterialTheme = createMuiTheme({
   palette: {
+    common: { black: "rgba(0, 0, 0, 1)", white: "#fff" },
+    background: {
+      paper: "rgba(243, 242, 243, 1)",
+      default: "rgba(255, 255, 255, 1)"
+    },
     primary: {
-      main: civicPrimary
+      light: civicPlumLight,
+      main: civicPrimary,
+      dark: civicPrimary,
+      contrastText: "#fff"
     },
     secondary: {
-      main: civicSecondary
+      light: civicAction,
+      main: civicAction,
+      dark: civicAction,
+      contrastText: "#fff"
+    },
+    error: {
+      light: civicError,
+      main: civicError,
+      dark: civicError,
+      contrastText: "#fff"
     },
     text: {
-      primary: civicPrimary
+      primary: civicPrimary,
+      secondary: civicPrimary,
+      disabled: civicSubdued,
+      hint: civicMedium
     }
   },
   shape: {
-    borderRadius: 2
+    borderRadius: 0
   },
   typography: {
-    fontFamily: sansSerif,
-    fontSize: size
+    fontFamily: dataSanSerif,
+    button: {
+      fontFamily: sanSerif
+    }
   },
-  overrides: {
-    MuiButton: {
-      outlinedSecondary: {
-        color: civicPrimary,
-        border: "1px solid civicPrimary"
-      }
-    },
-    MuiSelect: {
-      root: {
-        color: civicPrimary
-      }
-    },
-    MuiList: {
-      root: {
-        color: civicSecondary
-      }
+  transitions: {
+    duration: {
+      shortest: 150 / animationSpeed,
+      shorter: 200 / animationSpeed,
+      short: 250 / animationSpeed,
+      standard: 300 / animationSpeed,
+      complex: 375 / animationSpeed,
+      enteringScreen: 225 / animationSpeed,
+      leavingScreen: 195 / animationSpeed
+    }
+  },
+  props: {
+    MuiButtonBase: {
+      disableRipple: true // No more ripple, on the whole application 💣!
     }
   }
 });
