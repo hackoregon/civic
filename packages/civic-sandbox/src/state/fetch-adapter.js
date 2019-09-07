@@ -84,7 +84,7 @@ export const fetchLayersAdapter = (
             ? ( { data: { results: layersArr[findMatch].geoJSON} } )
             : gd.url && layersArr[i].defaultSlide && !layersArr[i].geoJSON
             ? axios.get(gd.url)
-            : [];
+            : {};
         });
 
         // console.log("fetchLayersAdapter-dispatched");

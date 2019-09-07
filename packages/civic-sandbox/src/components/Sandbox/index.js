@@ -111,10 +111,28 @@ class SandboxComponent extends React.Component {
     );
     const slideName = event.target.value;
 
-    const selectedSlides = this.props.selectedSlide.includes(slideName)
-      ? this.props.selectedSlide.filter(name => name !== slideName)
-      : [...this.props.selectedSlide, slideName];
-    this.props.setSlides(selectedSlides);
+    // const selectedSlides = this.props.selectedSlide.includes(slideName)
+      // ? this.props.selectedSlide.filter(name => name !== slideName)
+      // : [...this.props.selectedSlide, slideName];
+    // console.log("sandbox-index-selectedSlides:", selectedSlides);
+
+    // console.log("sandbox-index-allSlides:", this.props.allSlides);
+    const orderSelectedSlides = this.props.allSlides.reduce((a,c,i) => {
+      a[c.label] = i;
+      return a;
+      }, {});
+    console.log("sandbox-index-orderSelectedSlides:", orderSelectedSlides);
+
+    const reorderSelectedSlides = this.props.selectedSlide.includes(slideName)
+        ? this.props.selectedSlide.filter(name => name !== slideName)
+        : [
+            ...this.props.selectedSlide.slice(0, orderSelectedSlides[slideName]),
+            slideName,
+            ...this.props.selectedSlide.slice(orderSelectedSlides[slideName]),
+          ];
+    console.log("sandbox-index-reorderSelectedSlides:", reorderSelectedSlides);
+
+    this.props.setSlides(reorderSelectedSlides);
   };
 
   toggleDrawer = () => {
