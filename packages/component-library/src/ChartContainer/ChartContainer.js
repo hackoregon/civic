@@ -4,6 +4,7 @@ import { jsx, css } from "@emotion/core";
 import Skeleton from "@material-ui/lab/Skeleton";
 
 import ChartTitle from "../ChartTitle";
+import Logo from "../Logo/Logo";
 
 const chartError = css`
   text-align: center;
@@ -11,6 +12,8 @@ const chartError = css`
   height: 100%;
 `;
 
+const defaultVictoryHeight = 350;
+const defaultVictoryWidth = 650;
 const defaultVictoryAspectRatio = 650 / 350;
 
 /**
@@ -39,11 +42,27 @@ const ChartContainer = ({
     ${className};
   `;
   const fullHeight = css`
+    position: relative;
     padding-top: ${100 / aspectRatio}%;
     height: 100%;
   `;
 
-  let content = <Skeleton css={[wrapperStyle, fullHeight]} />;
+  const centerContent = css`
+    img {
+      position: absolute;
+      left: 50%;
+      margin-left: -50px;
+      top: 50%;
+      margin-top: -50px;
+    }
+  `;
+
+  let content = (
+    <div css={[wrapperStyle, centerContent]}>
+      <Logo type="squareLogoAnimated" />
+      <Skeleton height={defaultVictoryHeight} width={defaultVictoryWidth} />
+    </div>
+  );
 
   if (!loading) {
     content = <div css={wrapperStyle}>{children}</div>;
