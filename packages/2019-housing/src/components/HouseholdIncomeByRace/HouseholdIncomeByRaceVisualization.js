@@ -4,9 +4,10 @@ import { resourceShape } from "reduxful/react-addons";
 import { isLoaded } from "reduxful";
 
 import { civicFormat, LineChart } from "@hackoregon/component-library";
+import TempLoader from "../TempLoader/TempLoader";
 
 const HouseholdIncomeByRaceVisualization = ({ data }) => {
-  if (!isLoaded(data.householdIncomeByRace)) return <div>Data Loading...</div>;
+  if (!isLoaded(data.householdIncomeByRace)) return <TempLoader />;
 
   const dataSeriesLabels = [
     { category: "Asian/Pacific Islander", label: "Asian/Pacific Islander" },

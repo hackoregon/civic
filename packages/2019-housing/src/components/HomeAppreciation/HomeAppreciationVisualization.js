@@ -14,6 +14,7 @@ import {
   MapTooltip,
   VisualizationColors
 } from "@hackoregon/component-library";
+import TempLoader from "../TempLoader/TempLoader";
 
 const HomeAppreciationVisualization = ({ data }) => {
   if (
@@ -22,7 +23,7 @@ const HomeAppreciationVisualization = ({ data }) => {
     !isLoaded(data.homeownershipByRace) ||
     !isLoaded(data.homeInflationData)
   ) {
-    return <div>Data Loading...</div>;
+    return <TempLoader />;
   }
 
   const dataSeriesLabels = [

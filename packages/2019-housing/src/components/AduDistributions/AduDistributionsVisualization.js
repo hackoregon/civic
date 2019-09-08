@@ -14,10 +14,10 @@ import {
   ScreenGridMap
 } from "@hackoregon/component-library";
 
+import TempLoader from "../TempLoader/TempLoader";
+
 const AduDistributionsVisualization = ({ data }) => {
-  if (!isLoaded(data.residentialBuildingPermit)) {
-    return <div>Data Loading...</div>;
-  }
+  if (!isLoaded(data.residentialBuildingPermit)) return <TempLoader />;
 
   const pointGeoJsonData = data.residentialBuildingPermit.value.results;
   const featureData = {
@@ -86,7 +86,6 @@ const AduDistributionsVisualization = ({ data }) => {
             </li>
             <li>Add a real title etc..</li>
             <li>Add a map legend once they exist</li>
-            <li>Add a real loading indicator</li>
           </ul>
         </strong>
         <ChartContainer

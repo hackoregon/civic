@@ -13,11 +13,12 @@ import {
   MapTooltip,
   Slider
 } from "@hackoregon/component-library";
+import TempLoader from "../TempLoader/TempLoader";
 
 const HousingDisplacementVisualization = ({ isLoading, data }) => {
   const [threshold, setThreshold] = useState(30);
 
-  if (isLoading) return <div>Data Loading...</div>;
+  if (isLoading) return <TempLoader />;
 
   // Line Chart Props
   const dataSeries = "series";
@@ -36,13 +37,6 @@ const HousingDisplacementVisualization = ({ isLoading, data }) => {
 
   return (
     <Fragment>
-      <strong style={{ color: "crimson" }}>
-        Visualization TODO:
-        <ul>
-          <li>Make the slider black</li>
-          <li>Add a real loading indicator</li>
-        </ul>
-      </strong>
       <div
         css={css`
           display: flex;
@@ -83,7 +77,6 @@ const HousingDisplacementVisualization = ({ isLoading, data }) => {
           <div
             css={css`
               display: flex;
-              // justify-content: flex-end;
               margin-bottom: 1rem;
             `}
           >

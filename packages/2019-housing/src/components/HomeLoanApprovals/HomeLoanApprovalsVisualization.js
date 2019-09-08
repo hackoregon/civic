@@ -4,7 +4,6 @@ import { resourceShape } from "reduxful/react-addons";
 import { scaleOrdinal } from "d3";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
-
 import {
   BaseMap,
   ChartContainer,
@@ -12,6 +11,7 @@ import {
   MapTooltip,
   RadioButtonGroup
 } from "@hackoregon/component-library";
+import TempLoader from "../TempLoader/TempLoader";
 
 const RACE_DATA_MAP = {
   black: "lq_black_brks",
@@ -25,7 +25,7 @@ const RACE_DATA_MAP = {
 const HomeLoanApprovalsVisualization = ({ isLoading, data }) => {
   const [race, setRace] = useState("black");
 
-  if (isLoading) return <div>Data Loading...</div>;
+  if (isLoading) return <TempLoader />;
 
   const polygonFieldName = RACE_DATA_MAP[race];
   const totalLoans = data.totalLoans.value.results.features;

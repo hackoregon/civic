@@ -13,8 +13,10 @@ import {
   VisualizationColors
 } from "@hackoregon/component-library";
 
+import TempLoader from "../TempLoader/TempLoader";
+
 const BlackPopulationChangeVisualization = ({ isLoading, data }) => {
-  if (isLoading) return <div>Data Loading...</div>;
+  if (isLoading) return <TempLoader />;
 
   const polygonFieldName = "blackshare";
   const housingData1990 = data.ncdbYearly1990.value.results.features;

@@ -4,9 +4,10 @@ import { resourceShape } from "reduxful/react-addons";
 import { isLoaded } from "reduxful";
 
 // import { BaseMap } from "@hackoregon/component-library";
+import TempLoader from "../TempLoader/TempLoader";
 
 const HolcRedliningVisualization = ({ data }) => {
-  if (!isLoaded(data.redliningMap)) return <div>Data Loading...</div>;
+  if (!isLoaded(data.redliningMap)) return <TempLoader />;
 
   return (
     data && (
