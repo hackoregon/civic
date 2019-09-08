@@ -37,7 +37,7 @@ export default () => {
       };
     }, {});
 
-    setLineChartData([
+    const theLineChartData = [
       ...Object.entries(lineChartData2017).map(entry => ({
         series: "2017",
         start_quarter_hour: parseFloat(entry[0]),
@@ -48,29 +48,40 @@ export default () => {
         start_quarter_hour: parseFloat(entry[0]),
         total_duration: entry[1]
       }))
-    ]);
+    ];
+
+    setLineChartData(theLineChartData);
   }, [data.loaded]); // eslint-disable-line
 
   return (
     <>
-      {data.loaded ? (
-        <LineChart
-          data={lineChartData}
-          dataKey="start_quarter_hour"
-          dataValue="total_duration"
-          dataSeries="series"
-          dataSeriesLabel={[
-            { category: "2017", label: "2017" },
-            { category: "2018", label: "2018" }
-          ]}
-          subtitle="Accumulated weekday disturbance stop duration from all buses, Sept. - Nov."
-          title="Total Disturbance Stop Duration"
-          xLabel="Quarter hour"
-          yLabel="Duration (seconds)"
-          xNumberFormatter={x => x}
-          yNumberFormatter={y => y}
-        />
-      ) : null}
+      <LineChart
+        data={!data.loaded && lineChartData.length ? [{}] : lineChartData}
+        dataKey="start_quarter_hour"
+        dataValue="total_duration"
+        dataSeries="series"
+        dataSeriesLabel={[
+          { category: "2017", label: "2017" },
+          { category: "2018", label: "2018" }
+        ]}
+        loading={!data.loaded}
+        subtitle="Accumulated weekday disturbance stop duration from all buses, Sept. - Nov."
+        title="Total Disturbance Stop Duration"
+        xLabel="Quarter hour"
+        yLabel="Duration (seconds)"
+        xNumberFormatter={time => {
+          return time
+            ? `${Math.floor(time)}:${
+                (time % 1) * 60 === 0 ? "00" : (time % 1) * 60
+              } am`
+            : time;
+        }}
+        yNumberFormatter={duration => {
+          return typeof duration === "number"
+            ? duration.toLocaleString()
+            : duration;
+        }}
+      />
     </>
   );
 };
