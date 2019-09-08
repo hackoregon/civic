@@ -121,7 +121,6 @@ const mapDispatchToProps = dispatch => ({
   addPointsToState: bindActionCreators(addPoints, dispatch),
   addItemToPlayerKitInState: bindActionCreators(addItemToPlayerKit, dispatch),
   endChapter() {
-    console.log("Chapter complete");
     dispatch(goToNextChapter());
   }
 });
