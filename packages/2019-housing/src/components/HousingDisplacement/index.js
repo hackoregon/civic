@@ -15,9 +15,13 @@ const HousingDisplacement = ({ init, data, Layout }) => {
 
   const loading =
     !isLoaded(data.homeownershipByRace) ||
+    !isLoaded(data.homeownershipHistoricallyBlack10) ||
     !isLoaded(data.homeownershipHistoricallyBlack20) ||
+    !isLoaded(data.homeownershipHistoricallyBlack30) ||
     !isLoaded(data.homeownershipHistoricallyBlack40) ||
-    !isLoaded(data.homeownershipHistoricallyBlack60);
+    !isLoaded(data.homeownershipHistoricallyBlack50) ||
+    !isLoaded(data.homeownershipHistoricallyBlack60) ||
+    !isLoaded(data.ncdbYearly1990);
 
   return (
     <CivicCard
@@ -47,15 +51,27 @@ export default connect(
         state.package2019Housing || state,
         { "1990-black-pop-proportion-floor": 0.6 }
       ),
+      homeownershipHistoricallyBlack50: api.selectors.getHomeownershipByRaceData(
+        state.package2019Housing || state,
+        { "1990-black-pop-proportion-floor": 0.5 }
+      ),
       homeownershipHistoricallyBlack40: api.selectors.getHomeownershipByRaceData(
         state.package2019Housing || state,
         { "1990-black-pop-proportion-floor": 0.4 }
+      ),
+      homeownershipHistoricallyBlack30: api.selectors.getHomeownershipByRaceData(
+        state.package2019Housing || state,
+        { "1990-black-pop-proportion-floor": 0.3 }
       ),
       homeownershipHistoricallyBlack20: api.selectors.getHomeownershipByRaceData(
         state.package2019Housing || state,
         { "1990-black-pop-proportion-floor": 0.2 }
       ),
-      ncdbYearlyData: api.selectors.getNcdbYearlyData(
+      homeownershipHistoricallyBlack10: api.selectors.getHomeownershipByRaceData(
+        state.package2019Housing || state,
+        { "1990-black-pop-proportion-floor": 0.1 }
+      ),
+      ncdbYearly1990: api.selectors.getNcdbYearlyData(
         state.package2019Housing || state,
         {
           year: 1990,
@@ -76,12 +92,27 @@ export default connect(
       );
       dispatch(
         api.actionCreators.getHomeownershipByRaceData({
+          "1990-black-pop-proportion-floor": 0.5
+        })
+      );
+      dispatch(
+        api.actionCreators.getHomeownershipByRaceData({
           "1990-black-pop-proportion-floor": 0.4
         })
       );
       dispatch(
         api.actionCreators.getHomeownershipByRaceData({
+          "1990-black-pop-proportion-floor": 0.3
+        })
+      );
+      dispatch(
+        api.actionCreators.getHomeownershipByRaceData({
           "1990-black-pop-proportion-floor": 0.2
+        })
+      );
+      dispatch(
+        api.actionCreators.getHomeownershipByRaceData({
+          "1990-black-pop-proportion-floor": 0.1
         })
       );
       dispatch(

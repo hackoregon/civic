@@ -70,7 +70,6 @@ const BlackPopulationChangeVisualization = ({ isLoading, data }) => {
         <strong style={{ color: "crimson" }}>
           Visualization TODO:
           <ul>
-            <li>Does this work with the slider?</li>
             <li>Should we add some explanatory content about the slider?</li>
             <li>Pick better color scales (should they be the same?)</li>
             <li>Add a map legend once they exist</li>
