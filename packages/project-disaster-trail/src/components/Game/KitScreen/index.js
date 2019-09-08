@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { css, jsx, keyframes } from "@emotion/core";
-import { memo, Fragment } from "react";
+import { memo, Fragment, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -10,6 +10,8 @@ import { palette } from "../../../constants/style";
 import { MapStyle } from "../index";
 import MatchLockInterface from "../../atoms/MatchLockInterface";
 import Kit from "./Kit";
+import Timer from "../../../utils/timer";
+import { goToNextChapter } from "../../../state/chapters";
 
 const slide = keyframes`
   0% {
@@ -47,8 +49,26 @@ const bg3 = css`
 const KitScreen = ({
   possibleItems,
   addPointsToState,
-  addItemToPlayerKitInState
+  addItemToPlayerKitInState,
+  endChapter,
+  chapterDuration = 60
 }) => {
+  const [chapterTimer] = useState(new Timer());
+  const [percentComplete, setPercentComplete] = useState(0);
+
+  // start a timer for the _entire_ chapter
+  useEffect(() => {
+    chapterTimer.setDuration(chapterDuration);
+    chapterTimer.addCallback((t, p) => {
+      setPercentComplete(p);
+    });
+    chapterTimer.addCompleteCallback(() => endChapter());
+    chapterTimer.start();
+    return () => {
+      chapterTimer.stop();
+    };
+  }, [chapterDuration, chapterTimer, endChapter]);
+
   const onKitItemSelection = kitItem => {
     if (kitItem.good) {
       addItemToPlayerKitInState(kitItem.type);
@@ -72,7 +92,7 @@ const KitScreen = ({
         onOrbSelection={onKitItemSelection}
         checkItemIsCorrect={checkIfItemIsGood}
         activeScreen="kit"
-        percentComplete={0}
+        percentComplete={percentComplete}
       />
     </Fragment>
   );
@@ -88,7 +108,9 @@ KitScreen.propTypes = {
     })
   ),
   addPointsToState: PropTypes.func,
-  addItemToPlayerKitInState: PropTypes.func
+  addItemToPlayerKitInState: PropTypes.func,
+  endChapter: PropTypes.func,
+  chapterDuration: PropTypes.number
 };
 
 const mapStateToProps = state => ({
@@ -97,7 +119,11 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   addPointsToState: bindActionCreators(addPoints, dispatch),
-  addItemToPlayerKitInState: bindActionCreators(addItemToPlayerKit, dispatch)
+  addItemToPlayerKitInState: bindActionCreators(addItemToPlayerKit, dispatch),
+  endChapter() {
+    console.log("Chapter complete");
+    dispatch(goToNextChapter());
+  }
 });
 
 export default connect(
