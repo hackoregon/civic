@@ -181,7 +181,7 @@ const FullNav = () => {
                     ...dropdownStyles
                   }}
                 >
-                  <Paper id="menu-list-grow" square style={dropdownStyles.menu}>
+                  <Paper id="menu-list-grow" square>
                     <div css={arrowUp} />
                     <ClickAwayListener onClickAway={handleJoinClose}>
                       <MenuList>
@@ -241,7 +241,7 @@ const FullNav = () => {
                     ...dropdownStyles
                   }}
                 >
-                  <Paper id="menu-list-grow" square style={dropdownStyles.menu}>
+                  <Paper id="menu-list-grow" square>
                     <div css={arrowUp} />
                     <ClickAwayListener onClickAway={handleAboutClose}>
                       <MenuList>
