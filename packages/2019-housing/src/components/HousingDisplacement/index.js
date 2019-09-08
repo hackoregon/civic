@@ -11,7 +11,8 @@ import api from "../../state/housing-displacement/api";
 const HousingDisplacement = ({ init, data, Layout }) => {
   useEffect(() => {
     init();
-  }, [init]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const loading =
     !isLoaded(data.homeownershipByRace) ||

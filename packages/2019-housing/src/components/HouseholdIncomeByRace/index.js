@@ -11,7 +11,7 @@ const HouseholdIncomeByRace = ({ init, data, Layout }) => {
   useEffect(() => {
     init();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [init]);
+  }, []);
 
   return (
     <CivicCard
