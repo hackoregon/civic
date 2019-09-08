@@ -30,7 +30,7 @@ const sectionCivicLayout = css`
 `;
 
 const greatestWidth = 1200;
-const collapseWidth = 915;
+const collapseWidth = 845;
 
 const HomePage = () => {
   return (
