@@ -12,7 +12,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 import { defaultFontSize } from "./index.styles";
 import navCaret from "../../assets/nav-caret.svg";
 
-const hamburgerMaxWidth = 915;
 const { primary, action } = BrandColors;
 const menuColor = "#F3F2F3";
 
@@ -45,10 +44,6 @@ const logoStyle = css`
 const navStyle = css`
   display: grid;
   justify-self: end;
-
-  @media (max-width: ${hamburgerMaxWidth}px) {
-    display: none;
-  }
 `;
 
 const linkContainer = css`
