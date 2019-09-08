@@ -48,6 +48,7 @@ const OrbManager = ({
   const [orbs, setOrbsState] = useState([]);
   const [touchedOrbs, setTouchedOrb] = useState([]);
   const [completedOrbs, setCompletedOrbs] = useState([]);
+  const [orbsZIndex, setOrbsZIndex] = useState([]);
   // tick is used to modulate movement based on an incrementing value
   const [tick, setTick] = useState(0);
 
@@ -70,7 +71,7 @@ const OrbManager = ({
     const newBounds =
       prevBounds && !prevBounds.width && bounds.width && !hasInitialized;
 
-    if (newScreen || newBounds) {
+    if (newBounds || (bounds.width && newScreen)) {
       const newOrbs = frozenOrbInterface
         ? createFixedLayout(possibleItems, bounds, ORB_CONFIG)
         : createRandomLayout(possibleItems, bounds, ORB_CONFIG);
@@ -105,6 +106,20 @@ const OrbManager = ({
     (orbId, isTouched) => {
       if (isTouched) {
         setTouchedOrb(prevOrbs => [...prevOrbs, orbId]);
+
+        // Ensures that the last-touched orb is always on top of the others
+        // by using an array ordered by time-of-touch
+        // ie oldest touched is first in array
+        // newest touched is last in array
+        // until the oldest is touched again
+        // then it becomes the newest touched!
+
+        // create an array that does not contain the new orbId
+        const orbsByLastTouched = filter(orbsZIndex, id => id !== orbId);
+        // push the new orbId to the end
+        orbsByLastTouched.push(orbId);
+        setOrbsZIndex(orbsByLastTouched);
+
         return;
       }
 
@@ -114,7 +129,7 @@ const OrbManager = ({
       );
       setTouchedOrb(updatedOrbs);
     },
-    [touchedOrbs]
+    [touchedOrbs, orbsZIndex]
   );
 
   const setOrbComplete = useCallback(orbId => {
@@ -227,26 +242,31 @@ const OrbManager = ({
 
   return (
     <OrbsStyle ref={boundsRef}>
-      {map(renderableOrbs, orb => (
-        <div
-          key={orb.orbId}
-          style={{
-            position: "absolute",
-            transform: `translate(${orb.x}px, ${orb.y}px)`
-          }}
-        >
-          <Orb
-            orbId={orb.orbId}
-            imageSVG={orb.imageSVG}
-            imgAlt={orb.imgAlt}
-            size={ORB_CONFIG.orbSize}
-            addOrbScore={addOrbScore}
-            setOrbTouched={setOrbTouched}
-            setOrbComplete={setOrbComplete}
-            delay={orb.delay}
-          />
-        </div>
-      ))}
+      {map(renderableOrbs, orb => {
+        const zIndex = orbsZIndex.indexOf(orb.orbId) + 1;
+
+        return (
+          <div
+            key={orb.orbId}
+            style={{
+              position: "absolute",
+              transform: `translate(${orb.x}px, ${orb.y}px)`,
+              zIndex
+            }}
+          >
+            <Orb
+              orbId={orb.orbId}
+              imageSVG={orb.imageSVG}
+              imgAlt={orb.imgAlt}
+              size={ORB_CONFIG.orbSize}
+              addOrbScore={addOrbScore}
+              setOrbTouched={setOrbTouched}
+              setOrbComplete={setOrbComplete}
+              delay={orb.delay}
+            />
+          </div>
+        );
+      })}
     </OrbsStyle>
   );
 };
