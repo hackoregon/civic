@@ -2,7 +2,7 @@
 
 ## Standard
 
-The Demo Card story shows uses the standard usage of the Chip for the CIVIC platform. Chip includes standard styling.
+The Demo Card story shows the standard usage of the Chip for the CIVIC platform. Chip includes standard styling.
 
 ##Things it does
 

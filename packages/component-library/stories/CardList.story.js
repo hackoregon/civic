@@ -27,6 +27,26 @@ const CardRegistryMock = {
       slug: "demo-card",
       project: "@hackoregon/2019-template",
       component: SampleCardB
+    },
+    {
+      slug: "template-file-card-1",
+      project: "@hackoregon/2019-template",
+      component: SampleCard
+    },
+    {
+      slug: "demo-card-1",
+      project: "@hackoregon/2019-template",
+      component: SampleCardB
+    },
+    {
+      slug: "template-file-card-2",
+      project: "@hackoregon/2019-template",
+      component: SampleCard
+    },
+    {
+      slug: "demo-card-2",
+      project: "@hackoregon/2019-template",
+      component: SampleCardB
     }
   ]
 };

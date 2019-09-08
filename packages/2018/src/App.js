@@ -96,6 +96,7 @@ import PortlandCollectionPage from "./components/PortlandCollectionPage";
 import CityNotFoundPage from "./components/CityNotFoundPage";
 import StateNotFoundPage from "./components/StateNotFoundPage";
 import CardRegistry from "./card-registry";
+import tags from "./tags";
 
 // Create a store by combining all project reducers and the routing reducer
 const configureStore = (initialState, history) => {
@@ -240,7 +241,7 @@ const routes = {
     },
     {
       path: "cards",
-      component: () => <CardList CardRegistry={CardRegistry} />
+      component: () => <CardList CardRegistry={CardRegistry} tagsList={tags} />
     },
     {
       path: "cards/:slug",
