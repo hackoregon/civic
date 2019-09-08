@@ -21,6 +21,12 @@ const apiDesc = {
           ),
         []
       )
+  },
+  getNcdbYearlyData: {
+    url: `${HOST}/ncdbsampleyearly/`,
+    // you can apply any needed data transformations to value here
+    // if complex, separate tranformation function to another file
+    dataTransform: data => data
   }
 };
 

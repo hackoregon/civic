@@ -11,13 +11,7 @@ import api from "../../state/housing-displacement/api";
 const HousingDisplacement = ({ init, data, Layout }) => {
   useEffect(() => {
     init();
-  }, [
-    /*
-    https://reactjs.org/docs/hooks-effect.html#tip-optimizing-performance-by-skipping-effects
-
-    Add second argument to prevent useEffect running init() again
-    */
-  ]);
+  }, [init]);
 
   const loading =
     !isLoaded(data.homeownershipByRace) ||
@@ -60,6 +54,14 @@ export default connect(
       homeownershipHistoricallyBlack20: api.selectors.getHomeownershipByRaceData(
         state.package2019Housing || state,
         { "1990-black-pop-proportion-floor": 0.2 }
+      ),
+      ncdbYearlyData: api.selectors.getNcdbYearlyData(
+        state.package2019Housing || state,
+        {
+          year: 1990,
+          limit: 500,
+          metroname: "Portland-Vancouver-Hillsboro, OR-WA"
+        }
       )
     }
     // state.packageProjectName || state needed to make work in the project package and 2018 package
@@ -80,6 +82,13 @@ export default connect(
       dispatch(
         api.actionCreators.getHomeownershipByRaceData({
           "1990-black-pop-proportion-floor": 0.2
+        })
+      );
+      dispatch(
+        api.actionCreators.getNcdbYearlyData({
+          year: 1990,
+          limit: 500,
+          metroname: "Portland-Vancouver-Hillsboro, OR-WA"
         })
       );
     }

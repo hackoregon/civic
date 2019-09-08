@@ -21,8 +21,7 @@ const HousingDisplacementVisualization = ({ isLoading, data }) => {
       <strong style={{ color: "crimson" }}>
         Visualization TODO:
         <ul>
-          <li>Are these too small side by side?</li>
-          <li>Add more context about what the slider is doing</li>
+          <li>Add a small map that updates with the slider </li>
           <li>Add a real loading indicator</li>
         </ul>
       </strong>
@@ -48,7 +47,7 @@ const HousingDisplacementVisualization = ({ isLoading, data }) => {
                 margin-bottom: 0.75rem;
               `}
             >
-              1990 Black Population Threshold
+              {`Census Tract Black Population Threshold`}
             </h5>
             <Slider.SliderWithTooltip
               min={20}
@@ -90,7 +89,7 @@ const HousingDisplacementVisualization = ({ isLoading, data }) => {
             dataKey={xKey}
             dataValue={yKey}
             dataSeries={dataSeries}
-            title="Historically Black Areas"
+            title={`Population Changes In Areas >${threshold}% Black In 1990`}
             xLabel={xLabel}
             yLabel={yLabel}
             xNumberFormatter={tick => tick.toString()}
