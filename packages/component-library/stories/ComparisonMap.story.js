@@ -1,7 +1,13 @@
 import React from "react";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
-import { withKnobs, select, number, text } from "@storybook/addon-knobs";
+import {
+  withKnobs,
+  boolean,
+  select,
+  number,
+  text
+} from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 import { at } from "lodash";
 import { scaleQuantize, extent } from "d3";
@@ -95,6 +101,10 @@ export default () =>
           GROUP_IDS.DESIGN
         );
 
+        const showDivider = boolean("Show Divider", true, GROUP_IDS.DESIGN);
+        const leftMapTitle = text("Map Title - Left", "", GROUP_IDS.DESIGN);
+        const rightMapTitle = text("Map Title - Right", "", GROUP_IDS.DESIGN);
+
         const onLayerClick = info => action("Layer Clicked:")(info);
         const fetchURL = text("Data API URL:", API_URL, GROUP_IDS.DATA);
 
@@ -156,11 +166,14 @@ export default () =>
 
               return (
                 <ComparisonMap
-                  leftMap={leftMap}
-                  rightMap={rightMap}
                   height={height}
-                  sliderStartPosition={sliderStartPosition}
                   initialViewport={initialViewport}
+                  leftMap={leftMap}
+                  leftMapTitle={leftMapTitle}
+                  rightMap={rightMap}
+                  rightMapTitle={rightMapTitle}
+                  showDivider={showDivider}
+                  sliderStartPosition={sliderStartPosition}
                 />
               );
             }}

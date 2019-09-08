@@ -6,7 +6,8 @@ export {
   BrandColors,
   BrandTheme,
   VictoryTheme,
-  VictoryCrazyTheme
+  VictoryCrazyTheme,
+  MaterialTheme
 } from "./_Themes/index";
 
 // COMPONENTS
@@ -99,3 +100,4 @@ export { default as civicFormat } from "./utils/civicFormat";
 export { default as ungroupBy } from "./utils/ungroupBy";
 export { default as DemoJSONLoader } from "./DemoJSONLoader/DemoJSONLoader";
 export { default as Badge } from "./Badge/Badge";
+export { default as ErrorBoundary } from "./ErrorBoundary/ErrorBoundary";

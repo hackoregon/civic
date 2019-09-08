@@ -62,7 +62,7 @@ $ git clone git@github.com:hackoregon/civic.git
 
 $ cd civic
 
-# Sets your Node.js version to match what the project uses.
+# Sets your Node.js version to match what the project uses. You may need to install the appropriate version per npm instructions
 $ nvm use
 
 # Installs all package dependencies and links cross-dependencies.

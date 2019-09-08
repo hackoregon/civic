@@ -1,13 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router";
+import { get } from "lodash";
+import CivicCardLayoutVisualizationOnly from "../CivicCard/CivicCardLayoutVisualizationOnly";
+import CivicCardLayoutClassic from "../CivicCard/CivicCardLayoutClassic";
+import CivicCardLayoutPreview from "../CivicCard/CivicCardLayoutPreview";
+import CivicCardLayoutSideBySide from "../CivicCard/CivicCardLayoutSideBySide";
 
 const CardDetailPageEmbed = ({ params, CardRegistry }) => {
   const card = CardRegistry.find(params.slug);
+  const layouts = {
+    visualization: CivicCardLayoutVisualizationOnly,
+    classic: CivicCardLayoutClassic,
+    preview: CivicCardLayoutPreview,
+    comparison: CivicCardLayoutSideBySide
+  };
+  const Layout = get(layouts, params.layout) || layouts.classic;
 
   if (card && card.component) {
     const CardComponent = card.component;
-    return <CardComponent />;
+    return <CardComponent Layout={Layout} />;
   }
 
   return (

@@ -49,12 +49,6 @@ import {
 } from "@hackoregon/2018-example-farmers-markets";
 
 import {
-  Routes as Housing2019Routes,
-  Reducers as Housing2019Reducers,
-  App as Housing2019App
-} from "@hackoregon/2019-housing";
-
-import {
   Routes as Template2019Routes,
   Reducers as Template2019Reducers,
   App as Template2019App
@@ -77,6 +71,12 @@ import {
   Reducers as Elections2019Reducers,
   App as Elections2019App
 } from "@hackoregon/2019-elections";
+
+import {
+  Routes as Housing2019Routes,
+  Reducers as Housing2019Reducers,
+  App as Housing2019App
+} from "@hackoregon/2019-housing";
 
 // hygen import injection (do not remove or modify this line)
 
@@ -113,10 +113,10 @@ const configureStore = (initialState, history) => {
       package2018ExampleFarmersMarkets: FarmersMarketsReducers(),
       packageCivicSandbox: SandboxReducers(),
       // Temporarily Hidden 2019 Pages ⬇️
-      package2019Housing: Housing2019Reducers(),
       package2019Template: Template2019Reducers(),
       package2019Education: Education2019Reducers(),
       package2019Elections: Elections2019Reducers(),
+      package2019Housing: Housing2019Reducers(),
       // hygen store injection (do not remove or modify this line)
       package2019Transportation: Transportation2019Reducers()
     }),
@@ -138,10 +138,10 @@ const configureStore = (initialState, history) => {
         "@hackoregon/2018-example-farmers-markets",
         "@hackoregon/civic-sandbox",
         // Temporarily Hidden 2019 Pages ⬇️
-        "@hackoregon/2019-housing",
         "@hackoregon/2019-template",
         "@hackoregon/2019-education",
         "@hackoregon/2019-elections",
+        "@hackoregon/2019-housing",
         // hygen hot module injection (do not remove or modify this line)
         "@hackoregon/2019-transportation"
       ],
@@ -156,10 +156,10 @@ const configureStore = (initialState, history) => {
           package2018ExampleFarmersMarkets: require("@hackoregon/2018-example-farmers-markets").Reducers(),
           packageCivicSandbox: require("@hackoregon/civic-sandbox").Reducers(),
           // Temporarily Hidden 2019 Pages ⬇️
-          package2019Housing: require("@hackoregon/2019-housing").Reducers(),
           package2019Template: require("@hackoregon/2019-template").Reducers(),
           package2019Education: require("@hackoregon/2019-education").Reducers(),
           package2019Elections: require("@hackoregon/2019-elections").Reducers(),
+          package2019Housing: require("@hackoregon/2019-housing").Reducers(),
           // hygen reducer injection (do not remove or modify this line)
           package2019Transportation: require("@hackoregon/2019-transportation").Reducers()
         });
@@ -239,17 +239,17 @@ const routes = {
       component: StateNotFoundPage
     },
     {
+      path: "cards",
+      component: () => <CardList CardRegistry={CardRegistry} />
+    },
+    {
       path: "cards/:slug",
       component: params => (
         <CardDetailPage {...params} CardRegistry={CardRegistry} />
       )
     },
     {
-      path: "cards",
-      component: () => <CardList CardRegistry={CardRegistry} />
-    },
-    {
-      path: "cards/:slug/embed",
+      path: "cards/:slug/embed(/:layout)",
       component: params => (
         <CardDetailPageEmbed {...params} CardRegistry={CardRegistry} />
       )
@@ -262,11 +262,6 @@ const routes = {
     {
       path: "2019",
       childRoutes: [
-        {
-          path: "housing",
-          component: Housing2019App,
-          childRoutes: Housing2019Routes(store)
-        },
         {
           path: "template",
           component: Template2019App,
@@ -281,6 +276,11 @@ const routes = {
           path: "elections",
           component: Elections2019App,
           childRoutes: Elections2019Routes(store)
+        },
+        {
+          path: "housing",
+          component: Housing2019App,
+          childRoutes: Housing2019Routes(store)
         },
         // hygen route injection (do not remove or modify this line)
         {

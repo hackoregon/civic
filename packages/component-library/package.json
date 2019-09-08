@@ -84,8 +84,9 @@
   },
   "dependencies": {
     "@emotion/core": "^10.0.15",
-    "@material-ui/core": "^4.1.3",
-    "@material-ui/icons": "^4.2.1",
+    "@material-ui/core": "^4.4.0",
+    "@material-ui/icons": "^4.4.1",
+    "@material-ui/styles": "^4.3.3",
     "@turf/center-of-mass": "^6.0.1",
     "copy-to-clipboard": "^3.0.5",
     "create-react-ref": "^0.1.0",

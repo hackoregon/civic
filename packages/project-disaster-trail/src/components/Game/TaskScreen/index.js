@@ -11,11 +11,9 @@ import {
   getWeightedTasks
 } from "../../../state/tasks";
 import { getPlayerKitItems } from "../../../state/kit";
-import OrbManager from "../OrbManager";
 import ChooseScreen from "./ChooseScreen";
 import SolveScreen from "./SolveScreen";
-import DurationBar from "../../atoms/DurationBar";
-import Ticker from "../../atoms/Ticker";
+import MatchLockInterface from "../../atoms/MatchLockInterface";
 import TaskDebugger from "../../atoms/TaskDebugger";
 import Timer from "../../../utils/timer";
 
@@ -46,6 +44,7 @@ const TaskScreen = ({
   const [chapterTimer] = useState(new Timer());
   const [votingComplete, setVotingComplete] = useState(false);
   const [movingMapComplete, setMovingMapComplete] = useState(false);
+  const [numberCompletedTasks, setNumberCompletedTasks] = useState(0);
 
   const prevActiveTask = usePrevious(activeTask);
   const prevAction = usePrevious(action);
@@ -63,6 +62,7 @@ const TaskScreen = ({
       case ACTIONS.SOLVING:
         if (activeTask) {
           completeActiveTask(activeTask.id);
+          setNumberCompletedTasks(tasksCompleted => tasksCompleted + 1);
         }
         break;
       case ACTIONS.VOTING:
@@ -182,10 +182,20 @@ const TaskScreen = ({
     // return true;
   };
 
+  const checkVoteIsCorrect = () => true;
+
+  const checkSolutionIsCorrect = currentOrb =>
+    activeTask && activeTask.requiredItem === currentOrb.type;
+
   const isSolving = action === ACTIONS.SOLVING;
   const possibleItems = isSolving ? playerKitItems : weightedTasks;
   const frozenOrbInterface = !isSolving;
   const onOrbSelection = isSolving ? onItemSelection : onTaskSelection;
+  const checkItemIsCorrect = isSolving
+    ? checkSolutionIsCorrect
+    : checkVoteIsCorrect;
+  // "solve" screen needs unique identifier to trigger orb refresh in orbManager between sequential tasks
+  const activeScreen = isSolving ? `solve_${numberCompletedTasks}` : "vote";
 
   return (
     <Fragment>
@@ -198,16 +208,14 @@ const TaskScreen = ({
         />
         {debug && <TaskDebugger activeTask={activeTask} action={action} />}
       </div>
-      <DurationBar
-        step="Choose a task"
-        debug
-        percentComplete={percentComplete}
-      />
-      <Ticker text="Ticker tape text that goes across the screen to give instructions" />
-      <OrbManager
+      <MatchLockInterface
         possibleItems={possibleItems}
         onOrbSelection={onOrbSelection}
         frozenOrbInterface={frozenOrbInterface}
+        checkItemIsCorrect={checkItemIsCorrect}
+        activeScreen={activeScreen}
+        debug
+        percentComplete={percentComplete}
       />
     </Fragment>
   );

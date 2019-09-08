@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import Hidden from "@material-ui/core/Hidden";
-import IconButton from "@material-ui/core/IconButton";
+// import IconButton from "@material-ui/core/IconButton";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import MenuIcon from "@material-ui/icons/Menu";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
+// import MenuIcon from "@material-ui/icons/Menu";
+// import Toolbar from "@material-ui/core/Toolbar";
+// import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import shortid from "shortid";
 
@@ -18,7 +18,7 @@ import Collapse from "@material-ui/core/Collapse";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 
-import { Checkbox, CivicCardLayoutPreview } from "../index";
+import { Checkbox, CivicCardLayoutPreview, Header } from "../index";
 
 const drawerWidth = 240;
 const headerHeight = 120;
@@ -38,12 +38,13 @@ const useStyles = makeStyles(theme => ({
     }
   },
   appBar: {
-    backgroundColor: "#201024",
-    marginLeft: drawerWidth,
-    height: headerHeight,
-    [theme.breakpoints.up("sm")]: {
-      width: "100%"
-    }
+    backgroundColor: "white"
+    // backgroundColor: "#201024",
+    // marginLeft: drawerWidth,
+    // height: headerHeight,
+    // [theme.breakpoints.up("sm")]: {
+    //   width: "100%"
+    // }
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -88,6 +89,9 @@ const useStyles = makeStyles(theme => ({
   },
   nested: {
     paddingLeft: theme.spacing(4)
+  },
+  storyCard: {
+    height: "1000px"
   }
 }));
 
@@ -110,21 +114,28 @@ const CardList = ({ CardRegistry }) => {
   // eslint-disable-next-line no-unused-vars
   const { entries, tags } = CardRegistry;
 
-  const initState = {};
+  const allTagsFalse = {};
   Object.keys(tagsListExample).forEach(category => {
     tagsListExample[category].forEach(tag => {
-      initState[tag] = true;
+      allTagsFalse[tag] = false;
+    });
+  });
+  const allTagsTrue = {};
+  Object.keys(tagsListExample).forEach(category => {
+    tagsListExample[category].forEach(tag => {
+      allTagsTrue[tag] = true;
     });
   });
   const classes = useStyles();
+  const [hasFiltered, setHasFiltered] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openTopic, setOpenTopic] = React.useState(true);
-  const [openLocation, setOpenLocation] = React.useState(true);
-  const [openVisualization, setOpenVisualization] = React.useState(true);
-  const [openOther, setOpenOther] = React.useState(true);
+  // const [openLocation, setOpenLocation] = React.useState(false);
+  // const [openVisualization, setOpenVisualization] = React.useState(false);
+  // const [openOther, setOpenOther] = React.useState(false);
   const theme = useTheme();
-  const [activeTags, setActiveTags] = useState(initState);
-
+  const [activeTags, setActiveTags] = useState(allTagsTrue);
+  const [allFilter, setAllFilter] = useState(true);
   function handleDrawerToggle() {
     setMobileOpen(!mobileOpen);
   }
@@ -133,17 +144,22 @@ const CardList = ({ CardRegistry }) => {
     setOpenTopic(!openTopic);
   }
 
-  function handleLocation() {
-    setOpenLocation(!openLocation);
+  // function handleLocation() {
+  //   setOpenLocation(!openLocation);
+  // }
+
+  // function handleVisualization() {
+  //   setOpenVisualization(!openVisualization);
+  // }
+
+  function handleAllFilter() {
+    setActiveTags(allFilter ? allTagsFalse : allTagsTrue);
+    setAllFilter(!allFilter);
   }
 
-  function handleVisualization() {
-    setOpenVisualization(!openVisualization);
-  }
-
-  function handleOther() {
-    setOpenOther(!openOther);
-  }
+  // function handleOther() {
+  //   setOpenOther(!openOther);
+  // }
 
   const drawer = (
     <div className={classes.toolbar}>
@@ -153,94 +169,94 @@ const CardList = ({ CardRegistry }) => {
         aria-labelledby="nested-list-subheader"
         className={classes.root}
       >
+        <ListItem>
+          <Checkbox
+            value={allFilter}
+            label="All Cards Filter"
+            disabled={allFilter}
+            onChange={() => handleAllFilter()}
+          />
+        </ListItem>
         <ListItem button onClick={handleTopic}>
           <ListItemText primary="Topics" />
           {openTopic ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Collapse in={openTopic} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            {tagsListExample.topics.map(topic => (
-              <ListItem
-                key={shortid.generate()}
-                button
-                className={classes.nested}
-              >
+          <List component="li" disablePadding>
+            {tagsListExample.topics.sort().map(topic => (
+              <ListItem key={shortid.generate()} className={classes.nested}>
                 <Checkbox
-                  value={activeTags[topic]}
+                  value={hasFiltered ? activeTags[topic] : false}
                   label={topic}
-                  onChange={() =>
-                    setActiveTags({
-                      ...activeTags,
-                      [topic]: !activeTags[topic]
-                    })
-                  }
+                  onChange={() => {
+                    if (!hasFiltered) setHasFiltered(true);
+                    if (allFilter) {
+                      setAllFilter(false);
+                      setActiveTags(allTagsFalse);
+                      setActiveTags({
+                        ...activeTags,
+                        [topic]: !activeTags[topic]
+                      });
+                    }
+                  }}
                 />
               </ListItem>
             ))}
           </List>
         </Collapse>
-        <ListItem button onClick={handleLocation}>
-          <ListItemText primary="Locations" />
-          {openLocation ? <ExpandLess /> : <ExpandMore />}
-        </ListItem>
-        <Collapse in={openLocation} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            {tagsListExample.locations.map(location => (
-              <ListItem
-                key={shortid.generate()}
-                button
-                className={classes.nested}
-              >
-                <Checkbox
-                  value={activeTags[location]}
-                  label={location}
-                  onChange={() =>
-                    setActiveTags({
-                      ...activeTags,
-                      [location]: !activeTags[location]
-                    })
-                  }
-                />
-              </ListItem>
-            ))}
-          </List>
-        </Collapse>
-        <ListItem button onClick={handleVisualization}>
-          <ListItemText primary="Visualizations" />
-          {openVisualization ? <ExpandLess /> : <ExpandMore />}
-        </ListItem>
-        <Collapse in={openVisualization} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            {tagsListExample.visualizations.map(visualizations => (
-              <ListItem
-                key={shortid.generate()}
-                button
-                className={classes.nested}
-              >
-                <Checkbox
-                  value={activeTags[visualizations]}
-                  label={visualizations}
-                  onChange={() =>
-                    setActiveTags({
-                      ...activeTags,
-                      [visualizations]: !activeTags[visualizations]
-                    })
-                  }
-                />
-              </ListItem>
-            ))}
-          </List>
-        </Collapse>
-        <ListItem button onClick={handleOther}>
+        {/* <ListItem button onClick={handleLocation}>
+                    <ListItemText primary="Locations" />
+                    {openLocation ? <ExpandLess /> : <ExpandMore />}
+                  </ListItem>
+                  <Collapse in={openLocation} timeout="auto" unmountOnExit>
+                    <List component="div" disablePadding>
+                      {tagsListExample.locations.sort().map(location => (
+                        <ListItem key={shortid.generate()} className={classes.nested}>
+                          <Checkbox
+                            value={activeTags[location]}
+                            label={location}
+                            onChange={() =>
+                              setActiveTags({
+                                ...activeTags,
+                                [location]: !activeTags[location]
+                              })
+                            }
+                          />
+                        </ListItem>
+                      ))}
+                    </List>
+                  </Collapse>
+                  <ListItem button onClick={handleVisualization}>
+                    <ListItemText primary="Visualizations" />
+                    {openVisualization ? <ExpandLess /> : <ExpandMore />}
+                  </ListItem>
+                  <Collapse in={openVisualization} timeout="auto" unmountOnExit>
+                    <List component="div" disablePadding>
+                      {tagsListExample.visualizations.sort().map(visualizations => (
+                        <ListItem key={shortid.generate()} className={classes.nested}>
+                          <Checkbox
+                            value={activeTags[visualizations]}
+                            label={visualizations}
+                            onChange={() =>
+                              setActiveTags({
+                                ...activeTags,
+                                [visualizations]: !activeTags[visualizations]
+                              })
+                            }
+                          />
+                        </ListItem>
+                      ))}
+                    </List>
+                  </Collapse> */}
+        {/* <ListItem button onClick={handleOther}>
           <ListItemText primary="Other" />
           {openOther ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Collapse in={openOther} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            {tagsListExample.other.map(other => (
+            {tagsListExample.other.sort().map(other => (
               <ListItem
                 key={shortid.generate()}
-                button
                 className={classes.nested}
               >
                 <Checkbox
@@ -256,7 +272,7 @@ const CardList = ({ CardRegistry }) => {
               </ListItem>
             ))}
           </List>
-        </Collapse>
+        </Collapse> */}
       </List>
     </div>
   );
@@ -265,21 +281,23 @@ const CardList = ({ CardRegistry }) => {
     <div className={classes.root}>
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            className={classes.menuButton}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            Responsive drawer
-          </Typography>
-        </Toolbar>
+        <Header title="Story Cards" />
       </AppBar>
+      {/*
+        <Toolbar>
+        <IconButton
+        color="inherit"
+        aria-label="open drawer"
+        edge="start"
+        onClick={handleDrawerToggle}
+        className={classes.menuButton}
+      >
+        <MenuIcon />
+      </IconButton>
+      <Typography variant="h6" noWrap>
+        Responsive drawer
+      </Typography>
+    </Toolbar> */}
       <nav className={classes.drawer} aria-label="mailbox folders">
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Hidden smUp implementation="css">
@@ -318,7 +336,12 @@ const CardList = ({ CardRegistry }) => {
               .filter(entry => checkTags(entry.component.tags, activeTags))
               .map(entry => (
                 <li key={shortid.generate()} className={classes.entry}>
-                  {<entry.component Layout={CivicCardLayoutPreview} />}
+                  {
+                    <entry.component
+                      className={classes.storyCard}
+                      Layout={CivicCardLayoutPreview}
+                    />
+                  }
                 </li>
               ))}
           </ul>

@@ -107,11 +107,6 @@ export default () =>
           { experience: 17, students: 25, series: "elementary" },
           { experience: 18, students: 26, series: "elementary" }
         ];
-        const sampleDataSeriesLabel = [
-          { category: "high", label: "High School" },
-          { category: "middle", label: "Middle School" },
-          { category: "elementary", label: "Elementary School" }
-        ];
 
         const title = text(
           "Title",
@@ -144,11 +139,6 @@ export default () =>
         const dataKey = text("Data key", "experience", GROUP_IDS.DATA);
         const dataValue = text("Data value", "students", GROUP_IDS.DATA);
         const dataSeries = text("Data series", "series", GROUP_IDS.DATA);
-        const dataSeriesLabel = object(
-          "Data series labels",
-          sampleDataSeriesLabel,
-          GROUP_IDS.DATA
-        );
         const data = object("Data", sampleData, GROUP_IDS.DATA);
 
         return (
@@ -157,7 +147,6 @@ export default () =>
             dataKey={dataKey}
             dataValue={dataValue}
             dataSeries={dataSeries}
-            dataSeriesLabel={dataSeriesLabel}
             subtitle={subtitle}
             title={title}
             xLabel={xLabel}
@@ -273,6 +262,7 @@ export default () =>
           { display: "select" },
           GROUP_IDS.CUSTOM
         );
+        const loading = boolean("Loading", false, GROUP_IDS.CUSTOM);
 
         return (
           <Scatterplot
@@ -293,6 +283,7 @@ export default () =>
             invertY={invertY}
             legendComponent={customLegend}
             theme={(name => themes[name])(theme)}
+            loading={loading}
           />
         );
       },
