@@ -72,14 +72,11 @@ const BlackPopulationChangeVisualization = ({ isLoading, data }) => {
         <strong style={{ color: "crimson" }}>
           Visualization TODO:
           <ul>
-            <li>Should we add some explanatory content about the slider?</li>
-            <li>Pick better color scales (should they be the same?)</li>
             <li>Add a map legend once they exist</li>
-            <li>Should we use tooltips?</li>
-            <li>Add a real loading indicator</li>
             <li>
-              NOTE: Turning this into a ComparisonMap caused a bunch of console
-              errors that look related to the CivicCard templates...
+              Try moving the map titles to either side of the divider (with a
+              different look than the Chart title) & make the divider more
+              salient
             </li>
           </ul>
         </strong>
