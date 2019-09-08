@@ -2,9 +2,10 @@
 import { css, jsx, Global } from "@emotion/core";
 import emotionReset from "emotion-reset";
 import { Fragment } from "react";
-import { Button, BrandColors, Footer } from "@hackoregon/component-library";
+import { Button, BrandColors } from "@hackoregon/component-library";
 import indexStyle from "./index.styles";
 import Header from "./Header";
+import Footer from "./Footer";
 // Placeholders
 import placeholderIntroImg from "../../assets/new-home-page-1.png";
 import placeholderWorkImg from "../../assets/new-home-page-2.png";
@@ -28,6 +29,8 @@ const sectionCivicLayout = css`
   padding-bottom: 186px;
 `;
 
+const greatestWidth = 1200;
+
 const HomePage = () => {
   return (
     <Fragment>
@@ -35,10 +38,10 @@ const HomePage = () => {
         styles={css`
           font-size: 22px;
           ${emotionReset}
-          ${indexStyle}
+          ${indexStyle(greatestWidth)}
         `}
       />
-      <Header />
+      <Header greatestWidth={greatestWidth} />
       <div className="content-wrapper">
         <h1>CIVIC</h1>
         <p className="page-subtitle">
@@ -216,7 +219,7 @@ const HomePage = () => {
           /> */}
         </div>
       </div>
-      <Footer />
+      <Footer greatestWidth={greatestWidth} />
     </Fragment>
   );
 };

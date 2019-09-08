@@ -3,7 +3,7 @@ import { BrandColors } from "@hackoregon/component-library";
 const { primary, tertiary, action, subdued } = BrandColors;
 
 const introWidth = "800px";
-const browserDefaultSize = 16; // Don't modify
+export const browserDefaultSize = 16; // Don't modify
 export const defaultFontSize = 22; // all em based off of this default value
 const headerHeight = 115;
 
@@ -15,7 +15,7 @@ const textStandard = {
   lineHeight: `${40 / defaultFontSize}rem`
 };
 
-export default {
+export default greatestWidth => ({
   div: {
     boxSizing: "border-box"
   },
@@ -101,7 +101,7 @@ export default {
   ".content-wrapper": {
     ...textStandard,
     width: "100%",
-    maxWidth: "1000px",
+    maxWidth: `${greatestWidth}px`,
     margin: `${60 + headerHeight}px auto 60px`,
     padding: "0 20px"
   },
@@ -140,4 +140,4 @@ export default {
     width: "calc(100% - 2 * 120px)",
     position: "absolute"
   }
-};
+});

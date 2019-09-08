@@ -28,8 +28,8 @@ const optionText = {
   color: primary.hex
 };
 
-const contentWrapper = css`
-  max-width: 1000px;
+const contentWrapper = props => css`
+  max-width: ${props.greatestWidth}px;
   margin: 0 auto;
   display: grid;
   padding: 17px 20px 8px;
@@ -110,7 +110,7 @@ const menuLink = css`
   text-decoration: none;
 `;
 
-const FullNav = () => {
+const FullNav = props => {
   const [joinOpen, setJoinOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
   const joinAnchorRef = useRef(null);
@@ -142,7 +142,7 @@ const FullNav = () => {
   }
 
   return (
-    <div css={contentWrapper}>
+    <div css={contentWrapper(props)}>
       <Logo css={logoStyle} type="squareLogo" />
       <div />
       <nav css={navStyle} aria-label="Site">

@@ -21,7 +21,7 @@ const headerWrapper = css`
   }
 `;
 
-const Header = () => {
+const Header = props => {
   const [width, setWidth] = useState(window.innerWidth);
 
   const handleResize = () => {
@@ -37,7 +37,11 @@ const Header = () => {
 
   return (
     <header css={headerWrapper}>
-      {width > hamburgerMaxWidth ? <FullNav /> : <SmallNav />}
+      {width > hamburgerMaxWidth ? (
+        <FullNav {...props} />
+      ) : (
+        <SmallNav {...props} />
+      )}
     </header>
   );
 };
