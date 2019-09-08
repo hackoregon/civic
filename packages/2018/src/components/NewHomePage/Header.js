@@ -116,6 +116,11 @@ const arrowUp = css`
   border-bottom: 15px solid ${menuColor};
 `;
 
+const menuLink = css`
+  color: ${primary.hex};
+  text-decoration: none;
+`;
+
 const Header = () => {
   const [joinOpen, setJoinOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
@@ -201,14 +206,18 @@ const Header = () => {
                             style={optionText}
                             dense
                           >
-                            Work With Us
+                            <a css={menuLink} href="#work-with-us">
+                              Work With Us
+                            </a>
                           </MenuItem>
                           <MenuItem
                             onClick={handleJoinClose}
                             style={optionText}
                             dense
                           >
-                            Become a Contributor
+                            <a css={menuLink} href="#become-a-contributor">
+                              Become a Contributor
+                            </a>
                           </MenuItem>
                         </MenuList>
                       </ClickAwayListener>
@@ -261,14 +270,18 @@ const Header = () => {
                             style={optionText}
                             dense
                           >
-                            Civic Platform
+                            <a css={menuLink} href="#civic-platform">
+                              Civic Platform
+                            </a>
                           </MenuItem>
                           <MenuItem
                             onClick={handleAboutClose}
                             style={optionText}
                             dense
                           >
-                            Civic Software Foundation
+                            <a css={menuLink} href="#civic-software-foundation">
+                              Civic Software Foundation
+                            </a>
                           </MenuItem>
                         </MenuList>
                       </ClickAwayListener>
