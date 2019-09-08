@@ -26,7 +26,7 @@ const textStyle = css`
   color: ${palette.gold};
 
   ${media.md} {
-    font-size: 48px;
+    font-size: 6em;
     padding: 10px 25px;
   }
 `;

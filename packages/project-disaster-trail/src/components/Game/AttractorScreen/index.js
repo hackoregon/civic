@@ -31,7 +31,7 @@ const contentWrapper = css`
 const titleFont = css`
   font-family: "Boogaloo", cursive;
   color: ${palette.purple};
-  font-size: 5em;
+  font-size: 20em;
   margin: 0;
   align-self: center;
   justify-self: center;
@@ -53,23 +53,23 @@ const buttonStyle = css`
   border-radius: 40%;
   color: white;
   background-color: ${palette.salmon};
-  box-shadow: 0px 25px 0px 0px ${palette.mediumSalmon};
+  box-shadow: 0px 100px 0px 0px ${palette.mediumSalmon};
   border: none;
   cursor: pointer;
   outline: none;
 
   &:active {
     background-color: ${palette.mediumSalmon};
-    box-shadow: 0px 25px 0px 0px ${palette.darkSalmon};
+    box-shadow: 0px 100px 0px 0px ${palette.darkSalmon};
   }
 `;
 
 const buttonFont = css`
   position: absolute;
   width: 100%;
-  margin: -6% auto;
+  margin: 0 auto;
   font-family: "Boogaloo", cursive;
-  font-size: 6em;
+  font-size: 18em;
 `;
 
 // Background animation styles

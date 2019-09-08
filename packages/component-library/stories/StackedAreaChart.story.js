@@ -7,7 +7,8 @@ import {
   object,
   text,
   withKnobs,
-  optionsKnob as options
+  optionsKnob as options,
+  boolean
 } from "@storybook/addon-knobs";
 import { StackedAreaChart, civicFormat, SimpleLegend } from "../src";
 import { getKeyNames } from "./shared";
@@ -273,6 +274,7 @@ export default () =>
           { display: "select" },
           GROUP_IDS.CUSTOM
         );
+        const loading = boolean("Loading", false, GROUP_IDS.CUSTOM);
 
         return (
           <StackedAreaChart
@@ -290,6 +292,7 @@ export default () =>
             yNumberFormatter={y => civicFormat[optionSelectY](y)}
             legendComponent={customLegend}
             theme={(name => themes[name])(theme)}
+            loading={loading}
           />
         );
       },

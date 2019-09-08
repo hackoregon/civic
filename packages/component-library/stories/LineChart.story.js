@@ -7,7 +7,8 @@ import {
   text,
   number,
   withKnobs,
-  optionsKnob as options
+  optionsKnob as options,
+  boolean
 } from "@storybook/addon-knobs";
 import {
   LineChart,
@@ -95,11 +96,6 @@ export default () =>
           { year: 2005, ridership: 134569, series: "sunday" }
         ];
         const sampleDataSeries = "series";
-        const sampleDataSeriesLabel = [
-          { category: "weekday", label: "Weekday" },
-          { category: "saturday", label: "Saturday" },
-          { category: "sunday", label: "Sunday" }
-        ];
 
         const title = text(
           "Title",
@@ -135,11 +131,6 @@ export default () =>
           sampleDataSeries,
           GROUP_IDS.DATA
         );
-        const dataSeriesLabel = object(
-          "Data series labels",
-          sampleDataSeriesLabel,
-          GROUP_IDS.DATA
-        );
         const data = object("Data", sampleTransportationData, GROUP_IDS.DATA);
 
         return (
@@ -148,7 +139,6 @@ export default () =>
             dataKey={dataKey}
             dataValue={dataValue}
             dataSeries={dataSeries}
-            dataSeriesLabel={dataSeriesLabel}
             subtitle={subtitle}
             title={title}
             xLabel={xLabel}
@@ -250,6 +240,7 @@ export default () =>
           { display: "select" },
           GROUP_IDS.CUSTOM
         );
+        const loading = boolean("Loading", false, GROUP_IDS.CUSTOM);
 
         return (
           <LineChart
@@ -270,6 +261,7 @@ export default () =>
             yNumberFormatter={y => civicFormat[optionSelectY](y)}
             legendComponent={customLegend}
             theme={(name => themes[name])(theme)}
+            loading={loading}
           />
         );
       },

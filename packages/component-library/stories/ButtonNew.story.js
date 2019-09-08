@@ -2,7 +2,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { checkA11y } from "@storybook/addon-a11y";
-import { withKnobs, text } from "@storybook/addon-knobs";
+import { withKnobs, text, select } from "@storybook/addon-knobs";
 import { ButtonNew } from "../src";
 import { storybookStyles } from "./storyStyles";
 import notes from "./buttonNew.notes.md";
@@ -25,6 +25,22 @@ export default () =>
       () => {
         const label = text("Label", "Submit", GROUP_IDS.LABELS);
         return <ButtonNew onClick={action("clicked")} label={label} />;
+      },
+      { notes }
+    )
+    .add(
+      "Custom",
+      () => {
+        const label = text("Label", "Submit", GROUP_IDS.LABELS);
+        const type = select(
+          "Type",
+          ["primary", "secondary"],
+          "secondary",
+          GROUP_IDS.LABELS
+        );
+        return (
+          <ButtonNew onClick={action("clicked")} label={label} type={type} />
+        );
       },
       { notes }
     );

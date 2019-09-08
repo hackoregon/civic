@@ -55,7 +55,7 @@ export const tasks = {
   // Save Yourself
   [RUBBLE]: {
     id: RUBBLE,
-    time: 15,
+    time: 7,
     requiredItem: protectiveGear,
     numberItemsToSolve: 3,
     points: 3,
@@ -64,11 +64,11 @@ export const tasks = {
     imageAlt: "a rocky road",
     sceneSVG: sceneRubble,
     sceneAlt: "rubble in your way",
-    locations: [[-122.664628, 45.507309]]
+    locations: [[-122.6655, 45.5081]]
   },
   [DUST]: {
     id: DUST,
-    time: 15,
+    time: 7,
     requiredItem: dustMask,
     numberItemsToSolve: 1,
     points: 3,
@@ -77,12 +77,12 @@ export const tasks = {
     imageAlt: "a person coughing in the dust",
     sceneSVG: sceneDust,
     sceneAlt: "a person coughing in the dust",
-    locations: [[-122.648491, 45.51188]]
+    locations: [[-122.676169, 45.516485]]
   },
   // Save Others
   [COLD]: {
     id: COLD,
-    time: 20,
+    time: 7,
     requiredItem: blanket,
     numberItemsToSolve: 1,
     points: 3,
@@ -91,11 +91,11 @@ export const tasks = {
     imageAlt: "a shivering person",
     sceneSVG: sceneCold,
     sceneAlt: "a shivering person",
-    locations: [[-122.65819, 45.515699]]
+    locations: [[-122.610302, 45.504791], [-122.675011, 45.503044]]
   },
   [FIRE]: {
     id: FIRE,
-    time: 30,
+    time: 7,
     requiredItem: fireExtinguisher,
     numberItemsToSolve: 5,
     points: 5,
@@ -104,11 +104,11 @@ export const tasks = {
     imageAlt: "fire",
     sceneSVG: sceneFire,
     sceneAlt: "a fire that's spreading",
-    locations: [[-122.656388, 45.516842]]
+    locations: [[-122.615447, 45.514957], [-122.685672, 45.525356]]
   },
   [HUNGER]: {
     id: HUNGER,
-    time: 20,
+    time: 7,
     requiredItem: food,
     numberItemsToSolve: 5,
     points: 5,
@@ -117,11 +117,15 @@ export const tasks = {
     imageAlt: "a hungry person",
     sceneSVG: sceneHunger,
     sceneAlt: "a hungry person",
-    locations: [[-122.651882, 45.514948]]
+    locations: [
+      [-122.608228, 45.534321],
+      [-122.638366, 45.498539],
+      [-122.654591, 45.521335]
+    ]
   },
   [HOLE]: {
     id: HOLE,
-    time: 20,
+    time: 7,
     requiredItem: rope,
     numberItemsToSolve: 1,
     points: 3,
@@ -130,11 +134,15 @@ export const tasks = {
     imageAlt: "a person reaching out of a hole",
     sceneSVG: sceneHole,
     sceneAlt: "a person reaching out of a crack in the road",
-    locations: [[-122.676215, 45.514166]]
+    locations: [
+      [-122.623602, 45.511711],
+      [-122.672012, 45.521634],
+      [-122.665401, 45.511649]
+    ]
   },
   [INJURY]: {
     id: INJURY,
-    time: 30,
+    time: 7,
     requiredItem: firstAidKit,
     numberItemsToSolve: 5,
     points: 7,
@@ -147,7 +155,7 @@ export const tasks = {
   },
   [WEATHER]: {
     id: WEATHER,
-    time: 20,
+    time: 7,
     requiredItem: tent,
     numberItemsToSolve: 2,
     points: 4,
@@ -156,11 +164,11 @@ export const tasks = {
     imageAlt: "a thunderstorm",
     sceneSVG: sceneWeather,
     sceneAlt: "a thunderstorm",
-    locations: [[-122.655916, 45.526043]]
+    locations: [[-122.651841, 45.496852], [-122.638194, 45.503651]]
   },
   [LOST_PET]: {
     id: LOST_PET,
-    time: 20,
+    time: 7,
     requiredItem: flashlight,
     numberItemsToSolve: 2,
     points: 4,
@@ -169,11 +177,11 @@ export const tasks = {
     imageAlt: "paw prints",
     sceneSVG: sceneLostPet,
     sceneAlt: "a place the pet may be hiding",
-    locations: [[-122.667632, 45.523096]]
+    locations: [[-122.629352, 45.531557], [-122.651925, 45.507501]]
   },
   [THIRST]: {
     id: THIRST,
-    time: 30,
+    time: 7,
     requiredItem: water,
     numberItemsToSolve: 5,
     points: 5,
@@ -182,7 +190,7 @@ export const tasks = {
     imageAlt: "a thirsty person",
     sceneSVG: sceneThirst,
     sceneAlt: "a thirsty person",
-    locations: [[-122.681665, 45.530282]]
+    locations: [[-122.634761, 45.515922]]
   }
 };
 

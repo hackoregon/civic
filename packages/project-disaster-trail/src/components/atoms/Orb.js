@@ -4,7 +4,6 @@ import { PropTypes } from "prop-types";
 import { jsx, css } from "@emotion/core";
 import { TweenMax, Power2 } from "gsap/TweenMax";
 
-import { palette } from "../../constants/style";
 import RadialGauge from "./RadialGauge";
 
 const orbContainerStyle = css`
@@ -13,10 +12,7 @@ const orbContainerStyle = css`
 `;
 
 const circleDefaultStyle = css`
-  transition: transform 1s;
   z-index: 10;
-  background-color: ${palette.gold};
-  transition: background-color 1000ms linear;
   cursor: pointer;
   display: grid;
   align-items: center;
@@ -27,7 +23,6 @@ const circleDefaultStyle = css`
   }
 
   &.circle-press-style {
-    background-color: ${palette.lightGreen};
     transition: background-color 1000ms linear;
   }
 
@@ -175,7 +170,6 @@ export default class Orb extends PureComponent {
         <div
           css={css`
             ${circleDefaultStyle};
-            ${sizeStyle};
             ${sizeStyle};
           `}
           className={orbClass}

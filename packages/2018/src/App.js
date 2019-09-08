@@ -244,7 +244,7 @@ const routes = {
       )
     },
     {
-      path: "cards/:slug/embed",
+      path: "cards/:slug/embed(/:layout)",
       component: params => (
         <CardDetailPageEmbed {...params} CardRegistry={CardRegistry} />
       )

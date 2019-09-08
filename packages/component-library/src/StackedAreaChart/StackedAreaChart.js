@@ -44,13 +44,15 @@ const StackedAreaChart = ({
   xNumberFormatter,
   yNumberFormatter,
   legendComponent,
-  theme
+  theme,
+  loading
 }) => {
+  const safeData = data && data.length ? data : [{}];
   const chartDomain =
-    domain || getDefaultStackedDomain(data, dataKey, dataValue);
+    domain || getDefaultStackedDomain(safeData, dataKey, dataValue);
 
   const dataSeriesLabels = dataSeries
-    ? dataSeriesLabel || getDefaultDataSeriesLabels(data, dataSeries)
+    ? dataSeriesLabel || getDefaultDataSeriesLabels(safeData, dataSeries)
     : null;
 
   const scatterPlotStyle = style || {
@@ -62,7 +64,9 @@ const StackedAreaChart = ({
       ? dataSeriesLabels.map(series => ({ name: series.label }))
       : null;
 
-  const lineData = dataSeries ? groupBy(data, dataSeries) : { category: data };
+  const lineData = dataSeries
+    ? groupBy(safeData, dataSeries)
+    : { category: safeData };
 
   const areas = lineData
     ? Object.keys(lineData).map((category, index) => (
@@ -120,8 +124,8 @@ const StackedAreaChart = ({
     : null;
 
   return (
-    <ChartContainer title={title} subtitle={subtitle}>
-      <DataChecker dataAccessors={{ dataKey, dataValue }} data={data}>
+    <ChartContainer title={title} subtitle={subtitle} loading={loading}>
+      <DataChecker dataAccessors={{ dataKey, dataValue }} data={safeData}>
         {legendData &&
           (legendComponent ? (
             legendComponent(legendData, theme)
@@ -203,7 +207,8 @@ StackedAreaChart.propTypes = {
   xNumberFormatter: PropTypes.func,
   yNumberFormatter: PropTypes.func,
   legendComponent: PropTypes.func,
-  theme: PropTypes.shape({})
+  theme: PropTypes.shape({}),
+  loading: PropTypes.bool
 };
 
 StackedAreaChart.defaultProps = {
@@ -224,7 +229,8 @@ StackedAreaChart.defaultProps = {
   xNumberFormatter: civicFormat.numeric,
   yNumberFormatter: civicFormat.numeric,
   legendComponent: null,
-  theme: VictoryTheme
+  theme: VictoryTheme,
+  loading: null
 };
 
 export default StackedAreaChart;

@@ -12,6 +12,7 @@ import {
 import ChartContainer from "../ChartContainer";
 import SimpleLegend from "../SimpleLegend";
 import civicFormat from "../utils/civicFormat";
+import protectData from "../utils/protectData";
 import DataChecker from "../utils/DataChecker";
 import {
   chartEvents,
@@ -58,12 +59,28 @@ const Scatterplot = ({
   invertX,
   invertY,
   legendComponent,
-  theme
+  theme,
+  loading,
+  protect
 }) => {
-  const chartDomain = domain || getDefaultDomain(data, dataKey, dataValue);
+  const safeData =
+    // eslint-disable-next-line no-nested-ternary
+    data && data.length
+      ? protect
+        ? protectData(data, { dataSeries, dataSeriesLabel })
+        : data
+      : [{}];
+  const safeDataSeriesLabel =
+    // eslint-disable-next-line no-nested-ternary
+    dataSeriesLabel && dataSeriesLabel.length
+      ? protect
+        ? protectData(dataSeriesLabel, { x: "category", y: "label" })
+        : dataSeriesLabel
+      : null;
+  const chartDomain = domain || getDefaultDomain(safeData, dataKey, dataValue);
 
   const dataSeriesLabels = dataSeries
-    ? dataSeriesLabel || getDefaultDataSeriesLabels(data, dataSeries)
+    ? safeDataSeriesLabel || getDefaultDataSeriesLabels(safeData, dataSeries)
     : null;
 
   const scatterPlotStyle =
@@ -75,7 +92,7 @@ const Scatterplot = ({
       : null;
 
   return (
-    <ChartContainer title={title} subtitle={subtitle}>
+    <ChartContainer title={title} subtitle={subtitle} loading={loading}>
       {legendData &&
         (legendComponent ? (
           legendComponent(legendData, theme)
@@ -86,7 +103,7 @@ const Scatterplot = ({
             theme={theme}
           />
         ))}
-      <DataChecker dataAccessors={{ dataKey, dataValue }} data={data}>
+      <DataChecker dataAccessors={{ dataKey, dataValue }} data={safeData}>
         <VictoryChart
           domain={chartDomain}
           theme={theme}
@@ -134,7 +151,7 @@ const Scatterplot = ({
             minBubbleSize={size && size.minSize}
             maxBubbleSize={size && size.maxSize}
             //        categories={{ x: categoryData }}
-            data={data.map(d => ({
+            data={safeData.map(d => ({
               dataKey: d[dataKey],
               dataValue: d[dataValue],
               label: `${
@@ -199,7 +216,9 @@ Scatterplot.propTypes = {
   invertX: PropTypes.bool,
   invertY: PropTypes.bool,
   legendComponent: PropTypes.func,
-  theme: PropTypes.shape({})
+  theme: PropTypes.shape({}),
+  loading: PropTypes.bool,
+  protect: PropTypes.bool
 };
 
 Scatterplot.defaultProps = {
@@ -222,7 +241,9 @@ Scatterplot.defaultProps = {
   invertX: false,
   invertY: false,
   legendComponent: null,
-  theme: VictoryTheme
+  theme: VictoryTheme,
+  loading: null,
+  protect: false
 };
 
 export default Scatterplot;

@@ -1,4 +1,5 @@
 /** @jsx jsx */
+import { useState, useEffect } from "react";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
 import { map } from "lodash";
@@ -11,6 +12,12 @@ const containerStyle = css`
   flex-direction: column-reverse;
   width: 100vw;
   padding-top: 100px;
+  transform: translateX(+100%);
+  transition: transform 1s;
+`;
+
+const onScreenStyle = css`
+  transform: translateX(0%);
 `;
 
 const kitStyle = css`
@@ -39,9 +46,24 @@ function createKit(currentKit) {
 }
 
 const KitScreen = ({ currentKit }) => {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    setOpen(true);
+  }, []);
+
   const kit = createKit(currentKit);
 
-  return <div css={containerStyle}>{kit}</div>;
+  return (
+    <div
+      css={css`
+        ${containerStyle};
+        ${open && onScreenStyle}
+      `}
+    >
+      {kit}
+    </div>
+  );
 };
 
 KitScreen.propTypes = {
