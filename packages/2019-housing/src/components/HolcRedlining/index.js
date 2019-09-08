@@ -8,13 +8,10 @@ import holcRedliningMeta from "./holcRedliningMeta";
 import api from "../../state/holc-redlining/api";
 
 const HolcRedlining = ({ init, data, Layout }) => {
-  useEffect(
-    () => {
-      init();
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    },
-    [init]
-  );
+  useEffect(() => {
+    init();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [init]);
 
   return <CivicCard cardMeta={holcRedliningMeta} data={data} Layout={Layout} />;
 };
@@ -31,14 +28,15 @@ export default connect(
   state => ({
     data: {
       redliningMap: api.selectors.getRedliningMapData(
-        state.package2019Housing || state
+        state.package2019Housing || state,
+        { limit: 100 }
       )
     }
     // state.packageProjectName || state needed to make work in the project package and 2018 package
   }),
   dispatch => ({
     init() {
-      dispatch(api.actionCreators.getRedliningMapData());
+      dispatch(api.actionCreators.getRedliningMapData({ limit: 100 }));
     }
   })
 )(HolcRedlining);
