@@ -102,7 +102,8 @@ export default {
     ...textStandard,
     width: "100%",
     maxWidth: "1000px",
-    margin: `${60 + headerHeight}px auto 60px`
+    margin: `${60 + headerHeight}px auto 60px`,
+    padding: "0 20px"
   },
 
   ".intro-wrapper": {
