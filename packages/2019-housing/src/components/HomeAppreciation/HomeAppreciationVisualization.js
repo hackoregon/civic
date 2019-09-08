@@ -34,8 +34,8 @@ const HomeAppreciationVisualization = ({ data }) => {
   const lineChartData = data.annualHomeAppreciation.value.results.flatMap(
     yearData => [
       {
-        series: "raw_appreciation_med",
-        value: yearData.raw_appreciation_med,
+        series: "raw_appreciation_med", // make this match the dataSeriesLabels
+        value: yearData.raw_appreciation_med, // make this match the dataSeriesLabels
         sale_year: yearData.sale_year
       },
       {
@@ -81,12 +81,14 @@ const HomeAppreciationVisualization = ({ data }) => {
         xLabel="Home Ownership Rate"
         yLabel="Race"
         dataValueFormatter={x => civicFormat.percentage(x)}
+        protect
       />
       <strong style={{ color: "crimson" }}>
         LineChart Visualization TODO:
         <ul>
           <li>
             Make the confidence interval lines dashed & all lines the same color
+            (see note on lineChartData)
           </li>
         </ul>
       </strong>
@@ -102,6 +104,7 @@ const HomeAppreciationVisualization = ({ data }) => {
         yLabel="Appreciation ($)"
         xNumberFormatter={x => civicFormat.year(x)}
         yNumberFormatter={y => civicFormat.dollars(y)}
+        protect
       />
       <strong style={{ color: "crimson" }}>
         Map Visualization TODO:
