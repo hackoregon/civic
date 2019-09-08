@@ -32,7 +32,7 @@ const contentWrapper = css`
   max-width: 1000px;
   margin: 0 auto;
   display: grid;
-  padding: 22px 20px 8px;
+  padding: 17px 20px 8px;
   align-items: center;
   grid-template-columns: 80px 1fr 645px;
 `;
