@@ -4,32 +4,35 @@ import { jsx, css } from "@emotion/core";
 import { get } from "lodash";
 import window from "global/window";
 
-const tooltip = css`
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  position: absolute;
-  padding: 4px;
-  margin: 8px;
-  background: rgba(0, 0, 0, 0.75);
-  color: #ffffff;
-  max-width: 250px;
-  z-index: 9;
-  pointer-events: none;
-`;
-
 const MapTooltip = props => {
   const {
-    tooltipInfo,
     x,
     y,
     formatPrimaryField,
     formatSecondaryField,
+    isHex,
     primaryName,
     primaryField,
     secondaryName,
     secondaryField,
-    isHex
+    tooltipDataArray,
+    tooltipInfo,
+    wide
   } = props;
+
+  const tooltip = css`
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    position: absolute;
+    padding: 4px;
+    margin: 8px;
+    background: rgba(0, 0, 0, 0.75);
+    color: #ffffff;
+    // max-width: 250px;
+    max-width: ${wide ? "400px" : "250px"};
+    z-index: 9;
+    pointer-events: none;
+  `;
 
   const xPosition =
     x < get(window, "innerWidth", 1000) * 0.66
@@ -54,20 +57,28 @@ const MapTooltip = props => {
     >
       {primaryName && (
         <div>
-          {`${primaryName}: ${getProperty(
+          <strong>{`${primaryName}: `}</strong>
+          {getProperty(
             tooltipInfo.properties[primaryField],
             formatPrimaryField
-          )}`}
+          )}
         </div>
       )}
       {secondaryName && (
         <div>
-          {`${secondaryName}: ${getProperty(
+          <strong>{`${secondaryName}: `}</strong>
+          {getProperty(
             tooltipInfo.properties[secondaryField],
             formatSecondaryField
-          )}`}
+          )}
         </div>
       )}
+      {tooltipDataArray.map(el => (
+        <div>
+          <strong>{`${el.name}: `}</strong>
+          {getProperty(tooltipInfo.properties[el.field], el.formatField)}
+        </div>
+      ))}
       {isHex && (
         <div>
           <div>elevation: {tooltipInfo.elevationValue}</div>
@@ -88,12 +99,22 @@ MapTooltip.propTypes = {
   primaryField: PropTypes.string,
   secondaryName: PropTypes.string,
   secondaryField: PropTypes.string,
-  isHex: PropTypes.bool
+  tooltipDataArray: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      field: PropTypes.string.isRequired,
+      formatField: PropTypes.func
+    })
+  ),
+  isHex: PropTypes.bool,
+  wide: PropTypes.bool
 };
 
 MapTooltip.defaultProps = {
   formatPrimaryField: null,
-  formatSecondaryField: null
+  formatSecondaryField: null,
+  tooltipDataArray: [],
+  wide: false
 };
 
 export default MapTooltip;
