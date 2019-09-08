@@ -20,12 +20,12 @@ import {
 const ORB_CONFIG = {
   period: 1,
   orbCount: 10,
-  orbSize: 40,
+  orbSize: 120,
   maxVelocityY: 0,
   minVelocityX: 0.5,
   minVelocityY: 0,
   maxVelocityX: 2,
-  verticalBuffer: 25
+  verticalBuffer: 90
 };
 
 /**

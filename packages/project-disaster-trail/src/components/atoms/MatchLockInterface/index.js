@@ -19,11 +19,11 @@ const containerStyle = css`
   width: 100%;
 
   ${media.lg} {
-    grid-template-rows: 24px 60px 250px;
+    grid-template-rows: 24px 80px 250px;
   }
 
   ${media.xl} {
-    grid-template-rows: 24px 40px 700px;
+    grid-template-rows: 24px 120px 700px;
   }
 `;
 
