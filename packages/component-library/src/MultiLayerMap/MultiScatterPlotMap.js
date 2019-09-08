@@ -135,7 +135,8 @@ MultiScatterPlotMap.propTypes = {
     color: string
   }),
   dataRange: arrayOf(string),
-  colorRange: arrayOf(arrayOf(number))
+  colorRange: arrayOf(arrayOf(number)),
+  index: number
 };
 
 export default MultiScatterPlotMap;

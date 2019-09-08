@@ -122,7 +122,8 @@ MultiPathMap.propTypes = {
     color: string
   }),
   dataRange: oneOfType([arrayOf(number), arrayOf(string)]),
-  colorRange: arrayOf(arrayOf(number))
+  colorRange: arrayOf(arrayOf(number)),
+  index: number
 };
 
 export default MultiPathMap;

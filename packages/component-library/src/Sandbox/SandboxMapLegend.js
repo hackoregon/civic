@@ -54,9 +54,9 @@ const tickNumsOrdinal = css(`
 const SandboxMapLegend = props => {
   console.log("SandboxMapLegend-props:", props);
   const { data, mapProps } = props;
-  const { civicColor, scaleType, dataRange, colorRange, fieldName, tooltip } = mapProps;
-  
-  const { color: colorScaleType} = scaleType;
+  const { civicColor, scaleType, dataRange, colorRange, fieldName } = mapProps;
+
+  const { color: colorScaleType } = scaleType;
 
   let choroplethColorScale = createColorScale(
     civicColor,
@@ -92,9 +92,10 @@ const SandboxMapLegend = props => {
       "rgba("
     );
 
-  const colorScaleRange = choroplethColorScale.range()[0].length === 4
-    ? choroplethColorScale.range()
-    : choroplethColorScale.range().map(c => [...c, 255]);
+  const colorScaleRange =
+    choroplethColorScale.range()[0].length === 4
+      ? choroplethColorScale.range()
+      : choroplethColorScale.range().map(c => [...c, 255]);
   // console.log("legend--colorScaleRange", mapColorsArr);
 
   const mapColorsArr = colorScaleRange.map(arr => formatColor(arr));
@@ -103,7 +104,9 @@ const SandboxMapLegend = props => {
   const bins =
     colorScaleType === "ordinal" || colorScaleType === "threshold"
       ? dataRange
-      : choroplethColorScale.range().map(d => choroplethColorScale.invertExtent(d));
+      : choroplethColorScale
+          .range()
+          .map(d => choroplethColorScale.invertExtent(d));
 
   const ticks =
     colorScaleType === "ordinal" || colorScaleType === "threshold"
@@ -112,40 +115,50 @@ const SandboxMapLegend = props => {
 
   // const sandboxThousandsFormat = format(".3s");
   const percentageFormat = format(".1%");
-  const sandboxPercentFormat = p => p < 1 && p > 0 ? percentageFormat(p) : `${p.toFixed(1)}%`;
-  const sandboxDecimalFormat = format(".2n"); //0.14
+  const sandboxPercentFormat = p =>
+    p < 1 && p > 0 ? percentageFormat(p) : `${p.toFixed(1)}%`;
+  const sandboxDecimalFormat = format(".2n");
   const sandboxMoneyFormat = d => `$${civicFormat.numericShort(d)}`;
-  const sandboxSentenceCase = str => str.length && str
-    .split(" ")
-    .reduce((full, word) => `${full} ${word[0].toUpperCase() + word.substring(1)}`, "")
-    .trim();
+  const sandboxSentenceCase = str =>
+    str.length &&
+    str
+      .split(" ")
+      .reduce(
+        (full, word) => `${full} ${word[0].toUpperCase() + word.substring(1)}`,
+        ""
+      )
+      .trim();
 
   const formatTicks = (arr, typeFormat) => {
-    const formatter = typeFormat === "numeric"
-      ? civicFormat.numeric
-      : typeFormat === "numericShort"
-      ? civicFormat.numericShort
-      : typeFormat === "decimal"
-      ? sandboxDecimalFormat
-      : typeFormat === "percent"
-      ? sandboxPercentFormat
-      : typeFormat === "dollars"
-      ? sandboxMoneyFormat
-      : typeFormat === "year"
-      ? civicFormat.year
-      : typeFormat === "monthYear"
-      ? civicFormat.monthYear
-      : typeFormat === "titleCase"
-      ? startCase
-      : typeFormat === "sentenceCase"
-      ? sandboxSentenceCase
-      : civicFormat.unformatted;
+    const formatter =
+      typeFormat === "numeric"
+        ? civicFormat.numeric
+        : typeFormat === "numericShort"
+        ? civicFormat.numericShort
+        : typeFormat === "decimal"
+        ? sandboxDecimalFormat
+        : typeFormat === "percent"
+        ? sandboxPercentFormat
+        : typeFormat === "dollars"
+        ? sandboxMoneyFormat
+        : typeFormat === "year"
+        ? civicFormat.year
+        : typeFormat === "monthYear"
+        ? civicFormat.monthYear
+        : typeFormat === "titleCase"
+        ? startCase
+        : typeFormat === "sentenceCase"
+        ? sandboxSentenceCase
+        : civicFormat.unformatted;
     return arr.map(d => formatter(d));
   };
-  
-  const formatType = mapProps.tooltip && mapProps.tooltip.primary && mapProps.tooltip.primary.format
-    ? mapProps.tooltip.primary.format
-    : "numeric";
+
+  const formatType =
+    mapProps.tooltip &&
+    mapProps.tooltip.primary &&
+    mapProps.tooltip.primary.format
+      ? mapProps.tooltip.primary.format
+      : "numeric";
   console.log("formatType:", formatType);
   const ticksFormatted = formatTicks(ticks, formatType);
   console.log("ticksFormatted:", ticksFormatted);

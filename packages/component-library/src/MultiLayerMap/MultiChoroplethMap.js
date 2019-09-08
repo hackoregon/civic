@@ -114,7 +114,7 @@ MultiChoroplethMap.propTypes = {
   getPolygon: func,
   filled: bool,
   stroked: bool,
-  polygonWidth: number,
+  lineWidth: number,
   polygonLineColor: arrayOf(number),
   autoHighlight: bool,
   highlightColor: arrayOf(number),
@@ -127,7 +127,8 @@ MultiChoroplethMap.propTypes = {
     color: string
   }).isRequired,
   dataRange: arrayOf(string),
-  colorRange: arrayOf(arrayOf(number))
+  colorRange: arrayOf(arrayOf(number)),
+  index: number
 };
 
 export default MultiChoroplethMap;

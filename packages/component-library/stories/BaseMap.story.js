@@ -6,8 +6,7 @@ import {
   number,
   boolean,
   object,
-  button,
-  text
+  button
 } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 /** @jsx jsx */
@@ -15,7 +14,6 @@ import { jsx, css } from "@emotion/core";
 import { BaseMap, MapOverlay, DemoJSONLoader } from "../src";
 import notes from "./baseMap.notes.md";
 import StatefulWrapper from "../src/utils/StatefulWrapper";
-import { at } from "lodash";
 
 const GROUP_IDS = {
   DESIGN: "Design",
@@ -318,7 +316,8 @@ export default () =>
     .add(
       "Example: Fit Bounds",
       () => {
-        const CIVIC_API_URL = "http://service.civicpdx.org/disaster-resilience/api/DisasterNeighborhoodView/" +
+        const CIVIC_API_URL =
+          "http://service.civicpdx.org/disaster-resilience/api/DisasterNeighborhoodView/" +
           "?format=json&offset=75&limit=1";
         return (
           <DemoJSONLoader urls={[CIVIC_API_URL]}>
@@ -333,7 +332,7 @@ export default () =>
                   >
                     <MapOverlay
                       data={data.results.features}
-                      getFillColor={[25,183,170]}
+                      getFillColor={[25, 183, 170]}
                     />
                   </BaseMap>
                 </div>

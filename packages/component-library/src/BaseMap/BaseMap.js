@@ -11,11 +11,12 @@ import { jsx, css } from "@emotion/core";
 import PropTypes from "prop-types";
 import createRef from "create-react-ref/lib/createRef";
 import Geocoder from "react-map-gl-geocoder";
-import mapboxgl from "./mapboxgl";
-import "mapbox-gl/dist/mapbox-gl.css";
 import { isEqual } from "lodash";
 import bbox from "@turf/bbox";
 import WebMercatorViewport from "viewport-mercator-project";
+import mapboxgl from "./mapboxgl";
+import "mapbox-gl/dist/mapbox-gl.css";
+
 import { MapGLResources } from "../_Themes/index";
 
 const { MAPBOX_TOKEN, CIVIC_LIGHT, CIVIC_DARK, DISASTER_GAME } = MapGLResources;
@@ -58,22 +59,24 @@ class BaseMap extends Component {
   componentDidMount() {
     // Geocoder requires a ref to the map component
     this.setState({ mounted: true });
+    const { useFitBounds, bboxData, bboxPadding } = this.props;
+    const { viewport } = this.state;
 
-    if(this.props.useFitBounds && this.props.bboxData.length > 0) {
+    if (useFitBounds && bboxData.length > 0) {
       const toGeoJSON = {
-        "type": "FeatureCollection",
-        "features": [...this.props.bboxData]
+        type: "FeatureCollection",
+        features: [...bboxData]
       };
       const boundingbox = bbox(toGeoJSON);
       const bboxViewport = new WebMercatorViewport({
-        width: this.state.viewport.width,
-        height: this.state.viewport.height
-      }).fitBounds([
-          [boundingbox[0], boundingbox[1]],
-          [boundingbox[2], boundingbox[3]]
-        ], {
-        padding: this.props.bboxPadding
-      });
+        width: viewport.width,
+        height: viewport.height
+      }).fitBounds(
+        [[boundingbox[0], boundingbox[1]], [boundingbox[2], boundingbox[3]]],
+        {
+          padding: bboxPadding
+        }
+      );
       this.onViewportChange(bboxViewport);
     }
   }
@@ -110,8 +113,14 @@ class BaseMap extends Component {
       mapboxData,
       mapboxDataId,
       mapboxLayerOptions,
-      mapboxLayerId
+      mapboxLayerId,
+      useFitBounds,
+      bboxData,
+      bboxPadding
     } = this.props;
+
+    const { viewport } = this.state;
+
     if (!isEqual(previousMapboxData, mapboxData)) {
       const map = this.mapRef.current.getMap();
       map.getSource(mapboxDataId).setData(mapboxData);
@@ -127,21 +136,25 @@ class BaseMap extends Component {
       );
     }
 
-    if(this.props.useFitBounds && this.props.bboxData.length > 0 && !isEqual(prevProps.bboxData,this.props.bboxData)) {
+    if (
+      useFitBounds &&
+      bboxData.length > 0 &&
+      !isEqual(prevProps.bboxData, bboxData)
+    ) {
       const toGeoJSON = {
-        "type": "FeatureCollection",
-        "features": [...this.props.bboxData]
+        type: "FeatureCollection",
+        features: [...bboxData]
       };
       const boundingbox = bbox(toGeoJSON);
       const bboxViewport = new WebMercatorViewport({
-        width: this.state.viewport.width,
-        height: this.state.viewport.height
-      }).fitBounds([
-          [boundingbox[0], boundingbox[1]],
-          [boundingbox[2], boundingbox[3]]
-        ], {
-        padding: this.props.bboxPadding
-      });
+        width: viewport.width,
+        height: viewport.height
+      }).fitBounds(
+        [[boundingbox[0], boundingbox[1]], [boundingbox[2], boundingbox[3]]],
+        {
+          padding: bboxPadding
+        }
+      );
       this.onViewportChange(bboxViewport);
     }
   }

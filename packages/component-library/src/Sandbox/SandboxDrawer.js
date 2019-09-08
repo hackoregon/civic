@@ -1,13 +1,15 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import shortid from "shortid";
+import { string, bool, func, arrayOf, shape } from "prop-types";
 import Dropdown from "../Dropdown/Dropdown";
-import SandboxDateSelector from "./SandboxDateSelector";
-import SandboxToggleSwitch from "./SandboxToggleSwitch";
 import SandboxMapLegend from "./SandboxMapLegend";
-import SandboxBaseMapSelector from "./SandboxBaseMapSelector";
 import Logo from "../Logo/Logo";
-import Checkbox from '../Checkbox/Checkbox';
+import Checkbox from "../Checkbox/Checkbox";
+
+// import SandboxDateSelector from "./SandboxDateSelector";
+// import SandboxToggleSwitch from "./SandboxToggleSwitch";
+// import SandboxBaseMapSelector from "./SandboxBaseMapSelector";
 
 const menuOpen = css(`
   display: flex;
@@ -55,28 +57,31 @@ const loading = css`
   font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
 `;
 
-const SandboxDrawer = ({
-  data,
-  onChange,
-  selectedPackage,
-  toggleDrawer,
-  drawerVisible,
-  slideData,
-  fetchSlideByDate,
-  foundationData,
-  defaultFoundation,
-  allSlides,
-  updatePackage,
-  selectedFoundation,
-  updateFoundation,
-  foundationMapProps,
-  onBaseMapStyleChange,
-  baseMapStyle,
-  defaultSlides,
-  areSlidesLoading,
-  errors,
-  updateSlideKey
-}) => {
+const SandboxDrawer = props => {
+  console.log("SANDBOX-DRAWER:", props);
+  const {
+    data,
+    onChange,
+    selectedPackage,
+    toggleDrawer,
+    drawerVisible,
+    // slideData,
+    // fetchSlideByDate,
+    foundationData,
+    // defaultFoundation,
+    allSlides,
+    updatePackage,
+    // selectedFoundation,
+    // updateFoundation,
+    foundationMapProps,
+    // onBaseMapStyleChange,
+    // baseMapStyle,
+    // defaultSlides,
+    areSlidesLoading,
+    errors,
+    updateSlideKey
+  } = props;
+
   const loader = (
     <div css={loadingContainer}>
       <div css={loading}>
@@ -86,7 +91,12 @@ const SandboxDrawer = ({
   );
   return (
     <div css={drawerVisible ? menuOpen : menuClosed}>
-      <div onClick={toggleDrawer}>
+      <div
+        onClick={toggleDrawer}
+        onKeyPress={toggleDrawer}
+        role="button"
+        tabIndex={0}
+      >
         <div
           css={css(`
           text-transform: uppercase;
@@ -144,7 +154,7 @@ const SandboxDrawer = ({
               CIVIC Sandbox
             </h2>
           </div>
-          
+
           {/* DATA COLLECTIONS */}
           <div
             css={css(`
@@ -168,7 +178,7 @@ const SandboxDrawer = ({
                 label: p.displayName
               }))}
               onChange={name => {
-                console.log("sandbox-drawer-data-c-e:", name);
+                // console.log("sandbox-drawer-data-c-e:", name);
                 updatePackage({ displayName: name });
               }}
               simpleValue
@@ -176,7 +186,7 @@ const SandboxDrawer = ({
           </div>
 
           {/* FOUNDATIONS */}
-          {/*<div
+          {/* <div
             css={css(`
             position: relative;
             z-index: 400;
@@ -252,97 +262,121 @@ const SandboxDrawer = ({
             </h3>
           </div>
 
-          {!areSlidesLoading && allSlides ? (
-            allSlides.map((slide, index) => {
-              // const defaultGray = [238, 238, 238, 255];
-              // const backgroundSlideColor = slide.color;
-              // const formatBackgroundColor = arr =>
-              //   arr.reduce(
-              //     (acc, cur, i) => (i < 3 ? `${acc + cur},` : `${acc}0.9)`),
-              //     "rgba("
-              //   );
-              // const slideBackGroundColor = formatBackgroundColor(
-              //   backgroundSlideColor
-              // );
-              // const blackTextColor = "rgba(0,0,0,1)";
-              // const whiteTextColor = "rgba(255,255,255,1)";
-              // const textColor =
-              //   slideBackGroundColor === defaultGray
-              //     ? blackTextColor
-              //     : whiteTextColor;
-              // console.log("drawer-allSlides-slide:", slide);
-              // console.log("drawer-allSlides-index:", index);
-    
-              const dataIndex = foundationData.findIndex(d => {
-                const scatterplot = d.mapType === "ScatterPlotMap" && d.layerInfo.displayName === slide.label;
-                const choropleth = d.mapType === "ChoroplethMap" && d.layerInfo.displayName === slide.label;
-                return choropleth || scatterplot;
-              });
+          {!areSlidesLoading && allSlides
+            ? allSlides.map((slide, index) => {
+                // const defaultGray = [238, 238, 238, 255];
+                // const backgroundSlideColor = slide.color;
+                // const formatBackgroundColor = arr =>
+                //   arr.reduce(
+                //     (acc, cur, i) => (i < 3 ? `${acc + cur},` : `${acc}0.9)`),
+                //     "rgba("
+                //   );
+                // const slideBackGroundColor = formatBackgroundColor(
+                //   backgroundSlideColor
+                // );
+                // const blackTextColor = "rgba(0,0,0,1)";
+                // const whiteTextColor = "rgba(255,255,255,1)";
+                // const textColor =
+                //   slideBackGroundColor === defaultGray
+                //     ? blackTextColor
+                //     : whiteTextColor;
+                // console.log("drawer-allSlides-slide:", slide);
+                // console.log("drawer-allSlides-index:", index);
 
-              const matchFound = dataIndex > -1 && foundationData[dataIndex].data.length > 0
-              console.log("DRAWER-matchFound:", matchFound);
+                const dataIndex = foundationData.findIndex(d => {
+                  const scatterplot =
+                    d.mapType === "ScatterPlotMap" &&
+                    d.layerInfo.displayName === slide.label;
+                  const choropleth =
+                    d.mapType === "ChoroplethMap" &&
+                    d.layerInfo.displayName === slide.label;
+                  return choropleth || scatterplot;
+                });
 
-              const mapLegend = matchFound && (
-                <SandboxMapLegend
-                  data={foundationData[dataIndex].data}
-                  mapProps={foundationMapProps[dataIndex]}
-                />
-              );
+                const matchFound =
+                  dataIndex > -1 && foundationData[dataIndex].data.length > 0;
+                // console.log("DRAWER-matchFound:", matchFound);
 
-              const keyAllOptions = matchFound
-                ? Object.keys(foundationData[dataIndex].data[0].properties)
-                    .filter(c => c.includes(foundationData[dataIndex].fieldName.color.match(/^[a-zA-Z]+/)) )
-                : [];
-              console.log("keyAllOptions:", keyAllOptions);
-              const keyOptions = keyAllOptions.length > 3
-                ? keyAllOptions.slice(0,4)
-                : keyAllOptions;
+                const mapLegend = matchFound && (
+                  <SandboxMapLegend
+                    data={foundationData[dataIndex].data}
+                    mapProps={foundationMapProps[dataIndex]}
+                  />
+                );
 
-              const censusYears = ["1990", "2000", "2010", "2017"];
-              const censusChangeYears = ["1990-2017", "2000-2017", "2010-2017"];
-              const keySelector = matchFound && (
+                const keyAllOptions = matchFound
+                  ? Object.keys(
+                      foundationData[dataIndex].data[0].properties
+                    ).filter(c =>
+                      c.includes(
+                        foundationData[dataIndex].fieldName.color.match(
+                          /^[a-zA-Z]+/
+                        )
+                      )
+                    )
+                  : [];
+                // console.log("keyAllOptions:", keyAllOptions);
+                const keyOptions =
+                  keyAllOptions.length > 3
+                    ? keyAllOptions.slice(0, 4)
+                    : keyAllOptions;
+
+                const censusYears = ["1990", "2000", "2010", "2017"];
+                const censusChangeYears = [
+                  "1990-2017",
+                  "2000-2017",
+                  "2010-2017"
+                ];
+                const keySelector = matchFound && (
                   <Dropdown
                     value={foundationData[dataIndex].fieldName.color}
-                    options={keyOptions.length === 3
-                      ? keyOptions.map((k,i) => ({value: k, label: censusChangeYears[i]}) )
-                      : keyOptions.map((k,i) => ({value: k, label: censusYears[i]}) )
+                    options={
+                      keyOptions.length === 3
+                        ? keyOptions.map((k, i) => ({
+                            value: k,
+                            label: censusChangeYears[i]
+                          }))
+                        : keyOptions.map((k, i) => ({
+                            value: k,
+                            label: censusYears[i]
+                          }))
                     }
                     onChange={name => {
                       // console.log("drawer-key:", {[slide.label]: name});
-                      updateSlideKey({[slide.label]: name});
+                      updateSlideKey({ [slide.label]: name });
                     }}
                     simpleValue
                   />
-              );
+                );
 
-              return (
-                <div key={shortid.generate()}>
-                  <div
-                    css={css(`
+                return (
+                  <div key={shortid.generate()}>
+                    <div
+                      css={css(`
                     padding: 0.5rem 0 0 1rem;
                   `)}
-                  >
-                    <Checkbox
-                      name={slide.label}
-                      value={slide.checked}
-                      onChange={onChange}
-                      label={slide.label}
-                    />
-                  </div>
-                  { mapLegend }
-                  <div
-                    css={css(`
+                    >
+                      <Checkbox
+                        name={slide.label}
+                        value={slide.checked}
+                        onChange={onChange}
+                        label={slide.label}
+                      />
+                    </div>
+                    {mapLegend}
+                    <div
+                      css={css(`
                     padding: .5rem 0 .5rem 0;
                     font-size: .75rem;
                     color: #333;
                     position: relative;
                     z-index: ${10 - index};
                   `)}
-                  >
-                    {/* Key Selector */}
-                    { keySelector }
+                    >
+                      {/* Key Selector */}
+                      {keySelector}
 
-                    {/*slide.checked &&
+                      {/* slide.checked &&
                     selectedSlideData.slide_meta &&
                     selectedSlideData.slide_meta.dates.date_granularity ? (
                       <SandboxDateSelector
@@ -364,24 +398,21 @@ const SandboxDrawer = ({
                         {selectedSlideData.slide_meta.dates.default_date_filter}
                       </span>
                     ) : null */}
+                    </div>
                   </div>
-                </div>
-              );
-            })
-          ) : (
-            loader
-          )}
-          { errors
-            ? <div
-                css={css(`
+                );
+              })
+            : loader}
+          {errors ? (
+            <div
+              css={css(`
                 margin: auto;
                 width: 80%;
               `)}
-              >
-                <p>There was an error fetching the data.</p>
-              </div>
-            : null
-          }
+            >
+              <p>There was an error fetching the data.</p>
+            </div>
+          ) : null}
         </div>
       )}
     </div>
@@ -389,3 +420,26 @@ const SandboxDrawer = ({
 };
 
 export default SandboxDrawer;
+
+SandboxDrawer.propTypes = {
+  data: shape({}),
+  onChange: func,
+  selectedPackage: string,
+  toggleDrawer: func,
+  drawerVisible: bool,
+  // // slideData,
+  // // fetchSlideByDate,
+  foundationData: arrayOf(shape({})),
+  // // defaultFoundation,
+  allSlides: arrayOf(shape({})),
+  updatePackage: func,
+  // // selectedFoundation,
+  // // updateFoundation,
+  foundationMapProps: arrayOf(shape({})),
+  // // onBaseMapStyleChange,
+  // // baseMapStyle,
+  // // defaultSlides,
+  areSlidesLoading: bool,
+  errors: bool,
+  updateSlideKey: func
+};

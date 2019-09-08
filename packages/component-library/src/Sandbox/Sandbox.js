@@ -33,7 +33,7 @@ const Sandbox = ({
   selectedPackage,
   selectedFoundation,
   selectedSlide,
-  foundationData,
+  // foundationData,
   slideData,
   updatePackage,
   updateFoundation,
@@ -46,7 +46,7 @@ const Sandbox = ({
   onSlideHover,
   tooltipInfo,
   allSlides,
-  foundationMapProps,
+  // foundationMapProps,
   selectedFoundationDatum,
   areSlidesLoading,
   errors,
@@ -133,8 +133,8 @@ const Sandbox = ({
 
 Sandbox.propTypes = {
   data: shape({
-    packages: shape({}),
-    foundations: shape({}),
+    packages: arrayOf(shape({})),
+    // foundations: shape({}),
     slides: shape({})
   }).isRequired,
   layerData: arrayOf(shape({})).isRequired,
@@ -142,7 +142,7 @@ Sandbox.propTypes = {
     endpoint: string,
     name: string,
     visualization: string
-  }).isRequired,
+  }),
   defaultSlides: arrayOf(
     shape({
       endpoint: string,
@@ -153,10 +153,10 @@ Sandbox.propTypes = {
   selectedPackage: string.isRequired,
   selectedFoundation: string.isRequired,
   selectedSlide: arrayOf(string).isRequired,
-  foundationData: shape({
-    slide_data: shape({}),
-    slide_meta: shape({})
-  }).isRequired,
+  // foundationData: shape({
+  //   slide_data: shape({}),
+  //   slide_meta: shape({})
+  // }).isRequired,
   slideData: arrayOf(shape({})).isRequired,
   updatePackage: func.isRequired,
   updateFoundation: func.isRequired,
@@ -164,7 +164,7 @@ Sandbox.propTypes = {
   fetchSlideDataByDate: func.isRequired,
   drawerVisible: bool.isRequired,
   toggleDrawer: func.isRequired,
-  styles: shape({}),
+  styles: string,
   onFoundationClick: func,
   onSlideHover: func,
   tooltipInfo: shape({
@@ -179,15 +179,15 @@ Sandbox.propTypes = {
       endpoint: string,
       label: string,
       mapType: string,
-      slideId: string
+      slideId: oneOfType([string, number])
     })
   ).isRequired,
-  foundationMapProps: shape({
-    color: arrayOf(arrayOf(number)),
-    getPropValue: func,
-    propName: string,
-    scaleType: string
-  }).isRequired,
+  // foundationMapProps: shape({
+  //   color: arrayOf(arrayOf(number)),
+  //   getPropValue: func,
+  //   propName: string,
+  //   scaleType: string
+  // }).isRequired,
   selectedFoundationDatum: arrayOf(
     shape({
       data: oneOfType([arrayOf(shape({})), number, string]),
@@ -195,7 +195,10 @@ Sandbox.propTypes = {
       title: string,
       visualizationType: string
     })
-  )
+  ),
+  areSlidesLoading: bool,
+  updateSlideKey: func,
+  errors: bool
 };
 
 export default Sandbox;

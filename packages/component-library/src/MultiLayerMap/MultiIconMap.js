@@ -66,17 +66,18 @@ const MultiIconMap = props => {
 
   const sizeScale = getSizeScale(zoom);
 
-  const iconMap = Object.keys(iconMapping).length !== 0
-    ? iconMapping
-    : {
-        [dataRange[0]]: {
-          "x": 0,
-          "y": 0,
-          "width": 250,
-          "height": 250,
-          "mask": true
-        }
-      };
+  const iconMap =
+    Object.keys(iconMapping).length !== 0
+      ? iconMapping
+      : {
+          [dataRange[0]]: {
+            x: 0,
+            y: 0,
+            width: 250,
+            height: 250,
+            mask: true
+          }
+        };
 
   return (
     <IconLayer
@@ -89,7 +90,7 @@ const MultiIconMap = props => {
       iconAtlas={iconAtlas}
       iconMapping={iconMap}
       sizeScale={sizeScale}
-      getIcon={f => fieldName && fieldName.color ? f.properties.type : "icon"}
+      getIcon={f => (fieldName && fieldName.color ? f.properties.type : "icon")}
       getSize={getSize}
       getColor={getColor}
       autoHighlight={autoHighlight}
@@ -116,7 +117,6 @@ MultiIconMap.propTypes = {
     mask: bool
   }),
   getSizeScale: func,
-  getIcon: func,
   iconSize: number,
   autoHighlight: bool,
   highlightColor: arrayOf(number),
@@ -132,7 +132,8 @@ MultiIconMap.propTypes = {
   }),
   dataRange: arrayOf(string),
   colorRange: arrayOf(arrayOf(number)),
-  viewport: shape({})
+  viewport: shape({}),
+  index: number
 };
 
 export default MultiIconMap;
