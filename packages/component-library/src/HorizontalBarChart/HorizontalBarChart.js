@@ -21,6 +21,7 @@ import {
 } from "../utils/chartHelpers";
 import groupByKey from "../utils/groupByKey";
 import DataChecker from "../utils/DataChecker";
+import protectData from "../utils/protectData";
 import { VictoryTheme } from "../_Themes/index";
 
 const HorizontalBarChart = ({
@@ -43,26 +44,35 @@ const HorizontalBarChart = ({
   dataSeriesKey,
   dataSeriesLabel,
   legendComponent,
-  theme
+  theme,
+  protect
 }) => {
+  const safeData =
+    // eslint-disable-next-line no-nested-ternary
+    data && data.length
+      ? protect
+        ? protectData(data, { dataLabel, dataSeriesKey })
+        : data
+      : [{}];
+
   const groupedDataIfStacked = () => {
     if (stacked) {
       if (hundredPercentData) {
         return transformDatato100(
-          groupByKey(data, dataSeriesKey, dataLabel),
+          groupByKey(safeData, dataSeriesKey, dataLabel),
           dataLabel,
           dataValue
         );
       }
-      return groupByKey(data, dataSeriesKey, dataLabel);
+      return groupByKey(safeData, dataSeriesKey, dataLabel);
     }
-    return data;
+    return safeData;
   };
   const groupedData = groupedDataIfStacked();
   const barData =
     sortOrder && sortOrder.length
-      ? data
-      : data.map((d, index) => {
+      ? safeData
+      : safeData.map((d, index) => {
           return { ...d, defaultSort: index + 1 };
         });
   const sortOrderKey =
@@ -73,13 +83,13 @@ const HorizontalBarChart = ({
   const barHeight = theme.bar.style.data.width;
   const spaceHeight = theme.bar.style.data.padding * 2;
   const additionalHeight = padding.bottom + padding.top;
-  const minValue = Math.min(0, ...data.map(d => d[dataValue]));
+  const minValue = Math.min(0, ...safeData.map(d => d[dataValue]));
 
-  const bars = stacked ? groupedData.length : data.length;
+  const bars = stacked ? groupedData.length : safeData.length;
   const spaces = bars - 1;
   const dataHeight = bars * barHeight + spaces * spaceHeight;
   const dataSeriesLabels = dataSeriesKey
-    ? dataSeriesLabel || getDefaultDataSeriesLabels(data, dataSeriesKey)
+    ? dataSeriesLabel || getDefaultDataSeriesLabels(safeData, dataSeriesKey)
     : null;
   const legendData =
     dataSeriesLabels && dataSeriesLabels.length
@@ -100,8 +110,9 @@ const HorizontalBarChart = ({
       subtitle={subtitle}
       loading={loading}
       error={error}
+      aspectRatio={650 / (dataHeight + additionalHeight)}
     >
-      <DataChecker dataAccessors={{ dataValue }} data={data}>
+      <DataChecker dataAccessors={{ dataValue }} data={safeData}>
         {legendData &&
           (legendComponent ? (
             legendComponent(legendData)
@@ -287,7 +298,8 @@ HorizontalBarChart.propTypes = {
   dataSeriesKey: PropTypes.string,
   dataSeriesLabel: PropTypes.shape({}),
   legendComponent: PropTypes.func,
-  theme: PropTypes.shape({})
+  theme: PropTypes.shape({}),
+  protect: PropTypes.bool
 };
 
 HorizontalBarChart.defaultProps = {
@@ -308,7 +320,8 @@ HorizontalBarChart.defaultProps = {
   dataSeriesKey: null,
   dataSeriesLabel: {},
   legendComponent: null,
-  theme: VictoryTheme
+  theme: VictoryTheme,
+  protect: false
 };
 
 export default HorizontalBarChart;

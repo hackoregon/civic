@@ -118,6 +118,7 @@ export default () =>
           { display: "select" },
           GROUP_IDS.CUSTOM
         );
+        const loading = boolean("Loading", false, GROUP_IDS.CUSTOM);
 
         return (
           <HorizontalBarChart
@@ -133,6 +134,7 @@ export default () =>
             dataValueFormatter={x => civicFormat[optionSelectX](x)}
             minimalist={minimalist}
             theme={(name => themes[name])(theme)}
+            loading={loading}
           />
         );
       },

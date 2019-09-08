@@ -6,7 +6,6 @@ import { css, jsx } from "@emotion/core";
 
 import { completeTask, getActiveTaskData } from "../../../state/tasks";
 import { getKitCreationItems } from "../../../state/kit";
-import TextContainer from "../../atoms/Containers/TextContainer";
 
 const defaultState = {
   correctItemsChosen: 0
@@ -62,7 +61,6 @@ class SolveScreen extends PureComponent {
       width: 100%;
       height: 100%;
       grid-template-columns: 1fr;
-      padding-top: 100px;
       background: beige;
       z-index: 101;
       transform: translateY(-100%);
@@ -74,12 +72,11 @@ class SolveScreen extends PureComponent {
     `;
 
     const taskImage = css`
-      background-image: url(${taskToRender ? taskToRender.imageSVG : null});
+      background-image: url(${taskToRender ? taskToRender.sceneSVG : null});
       background-repeat: no-repeat;
       background-size: cover;
-      margin: 15px;
-      height: 150px;
-      width: 150px;
+      height: 100%;
+      width: 100%;
     `;
 
     // const taskDuration = taskToRender.time;
@@ -92,13 +89,12 @@ class SolveScreen extends PureComponent {
         `}
       >
         {taskToRender && (
-          <TextContainer>
+          <div css={taskImage}>
             <h2>{taskToRender.text}</h2>
             <h3>
               Correct items chosen: {correctItemsChosen} of{" "}
               {taskToRender.numberItemsToSolve}
             </h3>
-            <div css={taskImage} />
             <button
               type="button"
               onClick={() => {
@@ -107,7 +103,7 @@ class SolveScreen extends PureComponent {
             >
               Use {taskToRender.requiredItem}
             </button>
-          </TextContainer>
+          </div>
         )}
       </div>
     );
@@ -120,15 +116,6 @@ SolveScreen.propTypes = {
     id: PropTypes.string,
     imageSVG: PropTypes.string
   }),
-  // leaving this commented as it will likely be needed post merge
-  // possibleItems: PropTypes.arrayOf(
-  //   PropTypes.shape({
-  //     imageSVG: PropTypes.string,
-  //     good: PropTypes.bool,
-  //     onSelection: PropTypes.func,
-  //     weighting: PropTypes.number
-  //   })
-  // ),
   open: PropTypes.bool
 };
 

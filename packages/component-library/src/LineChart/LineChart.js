@@ -18,6 +18,7 @@ import { VictoryTheme } from "../_Themes/index";
 import ChartContainer from "../ChartContainer";
 import SimpleLegend from "../SimpleLegend";
 import civicFormat from "../utils/civicFormat";
+import protectData from "../utils/protectData";
 import DataChecker from "../utils/DataChecker";
 import {
   chartEvents,
@@ -45,12 +46,28 @@ const LineChart = ({
   xNumberFormatter,
   yNumberFormatter,
   legendComponent,
-  theme
+  loading,
+  theme,
+  protect
 }) => {
-  const chartDomain = domain || getDefaultDomain(data, dataKey, dataValue);
+  const safeData =
+    // eslint-disable-next-line no-nested-ternary
+    data && data.length
+      ? protect
+        ? protectData(data, { dataSeries, dataSeriesLabel })
+        : data
+      : [{}];
+  const safeDataSeriesLabel =
+    // eslint-disable-next-line no-nested-ternary
+    dataSeriesLabel && dataSeriesLabel.length
+      ? protect
+        ? protectData(dataSeriesLabel, { x: "category", y: "label" })
+        : dataSeriesLabel
+      : null;
+  const chartDomain = domain || getDefaultDomain(safeData, dataKey, dataValue);
 
   const dataSeriesLabels = dataSeries
-    ? dataSeriesLabel || getDefaultDataSeriesLabels(data, dataSeries)
+    ? safeDataSeriesLabel || getDefaultDataSeriesLabels(safeData, dataSeries)
     : null;
 
   const scatterPlotStyle =
@@ -61,13 +78,18 @@ const LineChart = ({
       ? dataSeriesLabels.map(series => ({ name: series.label }))
       : null;
 
-  const lineData = dataSeries ? groupBy(data, dataSeries) : { category: data };
+  const lineData = dataSeries
+    ? groupBy(safeData, dataSeries)
+    : { category: safeData };
+
+  const dataSeriesList = dataSeriesLabels || [{ category: "category" }];
 
   const lines = lineData
-    ? Object.keys(lineData).map((category, index) => (
+    ? dataSeriesList.map((item, index) => (
         <VictoryLine
+          title="Line Chart"
           key={shortid.generate()}
-          data={lineData[category].map(d => ({
+          data={lineData[item.category].map(d => ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],
             series: d[dataSeries]
@@ -87,8 +109,8 @@ const LineChart = ({
 
   return (
     <ThemeProvider theme={theme}>
-      <ChartContainer title={title} subtitle={subtitle}>
-        <DataChecker dataAccessors={{ dataKey, dataValue }} data={data}>
+      <ChartContainer title={title} subtitle={subtitle} loading={loading}>
+        <DataChecker dataAccessors={{ dataKey, dataValue }} data={safeData}>
           {legendData &&
             (legendComponent ? (
               legendComponent(legendData, theme)
@@ -140,7 +162,7 @@ const LineChart = ({
             {lines}
             <VictoryScatter
               //        categories={{ x: categoryData }}
-              data={data.map(d => ({
+              data={safeData.map(d => ({
                 dataKey: d[dataKey],
                 dataValue: d[dataValue],
                 label: `${dataKeyLabel || xLabel}: ${xNumberFormatter(
@@ -200,7 +222,9 @@ LineChart.propTypes = {
   xNumberFormatter: PropTypes.func,
   yNumberFormatter: PropTypes.func,
   legendComponent: PropTypes.func,
-  theme: PropTypes.shape({})
+  theme: PropTypes.shape({}),
+  loading: PropTypes.bool,
+  protect: PropTypes.bool
 };
 
 LineChart.defaultProps = {
@@ -221,7 +245,9 @@ LineChart.defaultProps = {
   xNumberFormatter: civicFormat.numeric,
   yNumberFormatter: civicFormat.numeric,
   legendComponent: null,
-  theme: VictoryTheme
+  theme: VictoryTheme,
+  loading: null,
+  protect: false
 };
 
 export default LineChart;

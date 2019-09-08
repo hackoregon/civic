@@ -6,17 +6,20 @@ export {
   BrandColors,
   BrandTheme,
   VictoryTheme,
-  VictoryCrazyTheme
+  VictoryCrazyTheme,
+  MaterialTheme
 } from "./_Themes/index";
 
 // COMPONENTS
 // DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator src injection
+
 export {
   default as HorizontalBarChart
 } from "./HorizontalBarChart/HorizontalBarChart";
 export { default as BarChart } from "./BarChart/BarChart";
 export { default as LineChart } from "./LineChart/LineChart";
 export { default as Button } from "./Button/Button";
+export { default as ButtonNew } from "./ButtonNew/ButtonNew";
 export { default as Checkbox } from "./Checkbox/Checkbox";
 export {
   default as RadioButtonGroup
@@ -95,3 +98,4 @@ export { default as civicFormat } from "./utils/civicFormat";
 export { default as ungroupBy } from "./utils/ungroupBy";
 export { default as DemoJSONLoader } from "./DemoJSONLoader/DemoJSONLoader";
 export { default as Badge } from "./Badge/Badge";
+export { default as ErrorBoundary } from "./ErrorBoundary/ErrorBoundary";

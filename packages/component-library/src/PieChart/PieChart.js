@@ -24,12 +24,14 @@ const PieChart = props => {
     theme
   } = props;
 
+  const safeData = data && data.length ? data : [{}];
   const startAngle = halfDoughnut ? -90 : 0;
   const endAngle = halfDoughnut ? 90 : 360;
   const adjustedHeight = halfDoughnut ? height / 2 : height;
-  const legendLabels = data.map(value => ({ name: value[dataLabel] }));
+  const legendLabels = safeData.map(value => ({ name: value[dataLabel] }));
   const legendProps = {};
   const colorScale = colors.length ? colors : theme.group.colorScale;
+  const aspectRatio = halfDoughnut ? 650 / 175 : 650 / 350;
 
   if (useLegend) {
     legendProps.labels = () => null;
@@ -42,8 +44,9 @@ const PieChart = props => {
       subtitle={subtitle}
       loading={loading}
       error={error}
+      aspectRatio={aspectRatio}
     >
-      <DataChecker dataAccessors={{ dataValue }} data={data}>
+      <DataChecker dataAccessors={{ dataValue }} data={safeData}>
         {useLegend && (
           <SimpleLegend
             className="legend"
@@ -54,7 +57,7 @@ const PieChart = props => {
         <VictoryPie
           width={width}
           height={height}
-          data={data}
+          data={safeData}
           innerRadius={innerRadius}
           colorScale={colorScale}
           theme={theme}

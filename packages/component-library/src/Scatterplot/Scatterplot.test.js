@@ -35,6 +35,20 @@ const unstructuredMultiSeriesData = [
   { amount: 200, rate: 3, type: "second" }
 ];
 
+const multiSeriesColorData = [
+  { amount: 100, rate: 1, series: "black" },
+  { amount: 200, rate: 2, series: "black" },
+  { amount: 100, rate: 3, series: "white" },
+  { amount: 200, rate: 3, series: "white" }
+];
+
+const unstructuredMultiSeriesColorData = [
+  { amount: 100, rate: 1, type: "black" },
+  { amount: 200, rate: 2, type: "black" },
+  { amount: 100, rate: 3, type: "white" },
+  { amount: 200, rate: 3, type: "white" }
+];
+
 describe("Scatterplot", () => {
   it("renders a VictoryChart", () => {
     const wrapper = shallow(<Scatterplot data={simpleData} />);
@@ -159,6 +173,85 @@ describe("Scatterplot", () => {
       { name: "second" }
     ]);
   });
+
+  // Tests for https://github.com/FormidableLabs/victory/issues/928 workaround
+  it("renders multi-series color data", () => {
+    const c = "‌‌​"; // U+200B (zero-width space character)
+    const props = {
+      data: multiSeriesColorData,
+      dataKey: "amount",
+      dataValue: "rate",
+      dataSeries: "series",
+      protect: true
+    };
+    const wrapper = shallow(<Scatterplot {...props} />);
+    expect(wrapper.find({ title: "Scatter Plot" }).props().data).to.eql([
+      {
+        dataKey: 100,
+        dataValue: 1,
+        label: "X: 100 • Y: 1",
+        series: `black${c}`
+      },
+      {
+        dataKey: 200,
+        dataValue: 2,
+        label: "X: 200 • Y: 2",
+        series: `black${c}`
+      },
+      {
+        dataKey: 100,
+        dataValue: 3,
+        label: "X: 100 • Y: 3",
+        series: `white${c}`
+      },
+      {
+        dataKey: 200,
+        dataValue: 3,
+        label: "X: 200 • Y: 3",
+        series: `white${c}`
+      }
+    ]);
+  });
+
+  it("renders unstructured multi-series color data", () => {
+    const c = "‌‌​"; // U+200B (zero-width space character)
+    const props = {
+      data: unstructuredMultiSeriesColorData,
+      dataKey: "amount",
+      dataValue: "rate",
+      dataSeries: "type",
+      protect: true
+    };
+    const wrapper = shallow(<Scatterplot {...props} />);
+    expect(wrapper.find({ title: "Scatter Plot" }).props().data).to.eql([
+      {
+        dataKey: 100,
+        dataValue: 1,
+        label: "X: 100 • Y: 1",
+        series: `black${c}`
+      },
+      {
+        dataKey: 200,
+        dataValue: 2,
+        label: "X: 200 • Y: 2",
+        series: `black${c}`
+      },
+      {
+        dataKey: 100,
+        dataValue: 3,
+        label: "X: 100 • Y: 3",
+        series: `white${c}`
+      },
+      {
+        dataKey: 200,
+        dataValue: 3,
+        label: "X: 200 • Y: 3",
+        series: `white${c}`
+      }
+    ]);
+  });
+
+  // End tests for https://github.com/FormidableLabs/victory/issues/928 workaround
 
   // TODO: make this test pass
 

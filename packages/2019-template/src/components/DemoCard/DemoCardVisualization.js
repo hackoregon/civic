@@ -76,19 +76,18 @@ export default function DemoCardVisualization({ isLoading, data }) {
           Late Gentrification
         </Button>
       </div>
-      {!isLoading && data[dataType] && (
-        <LineChart
-          data={data[dataType]}
-          dataKey="year"
-          dataValue="ridership"
-          dataSeries="series"
-          title={title}
-          xLabel="Year"
-          yLabel="Ridership"
-          xNumberFormatter={civicFormat.year}
-          subtitle={`Average daily ridership ${dataTypeDescription}`}
-        />
-      )}
+      <LineChart
+        loading={isLoading}
+        data={data[dataType]}
+        dataKey="year"
+        dataValue="ridership"
+        dataSeries="series"
+        title={title}
+        xLabel="Year"
+        yLabel="Ridership"
+        xNumberFormatter={civicFormat.year}
+        subtitle={`Average daily ridership ${dataTypeDescription}`}
+      />
     </Fragment>
   );
 }
