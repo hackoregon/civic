@@ -55,6 +55,7 @@ const HomeAppreciationVisualization = ({ data }) => {
     el => el.race === "black" || el.race === "white"
   );
 
+  // Map Data
   const polygonFieldName = "appreciation_estimates";
   const homeInflationFeatures = data.homeInflationData.value.results.features;
   const minMax = extent(homeInflationFeatures, f =>
@@ -81,6 +82,7 @@ const HomeAppreciationVisualization = ({ data }) => {
         xLabel="Home Ownership Rate"
         yLabel="Race"
         dataValueFormatter={x => civicFormat.percentage(x)}
+        protect
       />
       <strong style={{ color: "crimson" }}>
         LineChart Visualization TODO:
@@ -103,6 +105,7 @@ const HomeAppreciationVisualization = ({ data }) => {
         xNumberFormatter={x => civicFormat.year(x)}
         yNumberFormatter={y => civicFormat.dollars(y)}
       />
+      protect
       <strong style={{ color: "crimson" }}>
         Map Visualization TODO:
         <ul>

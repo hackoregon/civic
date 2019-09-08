@@ -42,6 +42,7 @@ const HouseholdIncomeByRaceVisualization = ({ data }) => {
           yLabel="Income"
           xNumberFormatter={x => civicFormat.year(x)}
           yNumberFormatter={y => civicFormat.dollars(y)}
+          protect
         />
       </span>
     )

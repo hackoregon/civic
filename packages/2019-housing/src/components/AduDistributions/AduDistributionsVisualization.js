@@ -63,7 +63,7 @@ const AduDistributionsVisualization = ({ data }) => {
       "interpolate",
       ["linear"],
       ["get", heatMapDataProperty],
-      0, // Lower threshold for showing heatmap (only 0 should be blank)
+      0, // Bottom threshold for showing heatmap (only 0 should be blank)
       0,
       max(featureData.features, d => d.properties[heatMapDataProperty]), // Upper threshold
       1
