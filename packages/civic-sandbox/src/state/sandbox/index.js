@@ -228,7 +228,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         selectedFoundationDatum: action.feature
       };
     case SET_SLIDE_DATUM: {
-      console.log("a-SET_SLIDE_DATUM:", action);
+      // console.log("a-SET_SLIDE_DATUM:", action);
       return {
         ...state,
         selectedSlideDatum: {feature: action.feature, index: action.index}

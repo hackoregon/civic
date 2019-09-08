@@ -7,12 +7,12 @@ import window from "global/window";
 
 const tooltip = css`
   font-family: Helvetica, Arial, sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   position: absolute;
   padding: 4px;
   margin: 8px;
   background: rgba(0, 0, 0, 0.75);
-  color: #ffffff;
+  color: #fff;
   max-width: 250px;
   z-index: 9;
   pointer-events: none;

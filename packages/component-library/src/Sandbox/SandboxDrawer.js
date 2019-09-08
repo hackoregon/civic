@@ -1,5 +1,3 @@
-/* TODO: Fix linting errors */
-/* eslint-disable */
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import shortid from "shortid";
@@ -291,20 +289,24 @@ const SandboxDrawer = ({
                 />
               );
 
-              const keyOptions = matchFound
+              const keyAllOptions = matchFound
                 ? Object.keys(foundationData[dataIndex].data[0].properties)
-                    .reduce((a,c,i) => {
-                      const include = c.includes(foundationData[dataIndex].fieldName.color.match(/^[a-zA-Z]+/)) 
-                      const menuYear = ["1990", "2000", "2010", "2017"]
-                      return include ? [...a, {value: c, label: menuYear[i]} ] : a;
-                    }, [])
-                : []
-              console.log("keyOptions:", keyOptions);
+                    .filter(c => c.includes(foundationData[dataIndex].fieldName.color.match(/^[a-zA-Z]+/)) )
+                : [];
+              console.log("keyAllOptions:", keyAllOptions);
+              const keyOptions = keyAllOptions.length > 3
+                ? keyAllOptions.slice(0,4)
+                : keyAllOptions;
 
+              const censusYears = ["1990", "2000", "2010", "2017"];
+              const censusChangeYears = ["1990-2017", "2000-2017", "2010-2017"];
               const keySelector = matchFound && (
                   <Dropdown
                     value={foundationData[dataIndex].fieldName.color}
-                    options={keyOptions}
+                    options={keyOptions.length === 3
+                      ? keyOptions.map((k,i) => ({value: k, label: censusChangeYears[i]}) )
+                      : keyOptions.map((k,i) => ({value: k, label: censusYears[i]}) )
+                    }
                     onChange={name => {
                       // console.log("drawer-key:", {[slide.label]: name});
                       updateSlideKey({[slide.label]: name});

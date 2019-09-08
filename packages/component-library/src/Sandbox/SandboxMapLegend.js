@@ -112,7 +112,7 @@ const SandboxMapLegend = props => {
 
   // const sandboxThousandsFormat = format(".3s");
   const percentageFormat = format(".1%");
-  const sandboxPercentFormat = p => p < 1 && p > 0 ? percentageFormat(p) : p + "%";
+  const sandboxPercentFormat = p => p < 1 && p > 0 ? percentageFormat(p) : `${p.toFixed(1)}%`;
   const sandboxDecimalFormat = format(".2n"); //0.14
   const sandboxMoneyFormat = d => `$${civicFormat.numericShort(d)}`;
   const sandboxSentenceCase = str => str.length && str

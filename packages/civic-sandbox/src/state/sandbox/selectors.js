@@ -62,14 +62,14 @@ export const getSlidesData = createSelector(
     // isArray(slides)
     // ? slides.map(slide => sandbox.slides[slide])
     // : [sandbox.slides[slides]]
-    console.log("\nselectors");
-    console.log("selector-getSlidesData-selectedPackage:", selectedPackage);
-    console.log("selector-getSlidesData-selectedSlides:", selectedSlides);
+    console.log("SELECTORS");
+    // console.log("selector-getSlidesData-selectedPackage:", selectedPackage);
+    // console.log("selector-getSlidesData-selectedSlides:", selectedSlides);
 
     const [packageMatch] = sandbox.packages.filter(d => {
       return d.displayName === selectedPackage;
     });
-    console.log("selector-getSlidesData-packageMatch:", packageMatch);
+    // console.log("selector-getSlidesData-packageMatch:", packageMatch);
 
     const selectedSlidesData = packageMatch.layers.map(d => {
       // console.log(d);
@@ -102,7 +102,7 @@ export const getLayerSlides = createSelector(
   getSelectedSlides,
   getSelectedSlideKey,
   (slidesData, selectedSlides, selectedSlideKey) => {
-    console.log("selector-getLayerSlides-slidesData:", slidesData);
+    // console.log("selector-getLayerSlides-slidesData:", slidesData);
     // console.log("selector-getLayerSlides-selectedSlides:", selectedSlides);
     // console.log("selector-getLayerSlides-selectedSlideKey:", selectedSlideKey);
 
@@ -110,7 +110,7 @@ export const getLayerSlides = createSelector(
       const findSlide = slidesData.find(e => e.displayName === c);
       return findSlide ? [...a, findSlide] : a;
     }, []);
-    console.log("selector-getLayerSlides-filteredSlideVizData:", filteredSlideVizData);
+    // console.log("selector-getLayerSlides-filteredSlideVizData:", filteredSlideVizData);
     // const hasSelectedSlideKeys = Object.keys(selectedSlideKey).length > 0;
     // console.log("selector-getLayerSlides-hasSelectedSlideKeys:", hasSelectedSlideKeys);
 
@@ -135,7 +135,7 @@ export const getLayerSlides = createSelector(
               : ""
           }
         };
-        console.log("mapProps:", mapProps);
+        // console.log("mapProps:", mapProps);
         return {
           ...mapProps,
           data: d.results ? d.results.features : [],
@@ -297,13 +297,13 @@ export const getAllSlides = createSelector(
   getSelectedSlidesData,
   getSelectedSlides,
   (selectedSlidesData, selectedSlides) => {
-    console.log(
-      "selector-getAllSlides-selectedSlidesData:",
-      selectedSlidesData
-    );
+    // console.log(
+    //   "selector-getAllSlides-selectedSlidesData:",
+    //   selectedSlidesData
+    // );
 
     const allSlides = selectedSlidesData.map((s, indx) => {
-      console.log("selector-getAllSlides-slide:", s);
+      // console.log("selector-getAllSlides-slide:", s);
       const vizCheck = s.visualization && s.visualization.map;
       return {
         slideId: indx,

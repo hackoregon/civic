@@ -59,23 +59,12 @@ class BaseMap extends Component {
     // Geocoder requires a ref to the map component
     this.setState({ mounted: true });
 
-    /*global console*/
     if(this.props.useFitBounds && this.props.bboxData.length > 0) {
-      console.log("BM-CDM-uFB:",this.props.useFitBounds);
-      console.log("BM-CDM-bbData:",this.props.bboxData);
       const toGeoJSON = {
         "type": "FeatureCollection",
         "features": [...this.props.bboxData]
       };
       const boundingbox = bbox(toGeoJSON);
-      /*
-        [
-          [swLongitude, swLatitude],
-          [neLongitude, neLatitude]
-        ]
-      */
-      console.log("BM-CDM-bbox:", boundingbox);
-  
       const bboxViewport = new WebMercatorViewport({
         width: this.state.viewport.width,
         height: this.state.viewport.height
@@ -85,7 +74,6 @@ class BaseMap extends Component {
         ], {
         padding: this.props.bboxPadding
       });
-      console.log("BM-CDM-fb-vp:", bboxViewport);
       this.onViewportChange(bboxViewport);
     }
   }
@@ -140,21 +128,11 @@ class BaseMap extends Component {
     }
 
     if(this.props.useFitBounds && this.props.bboxData.length > 0 && !isEqual(prevProps.bboxData,this.props.bboxData)) {
-      console.log("BM-CDU-uFB:",this.props.useFitBounds);
-      console.log("BM-CDU-bbData:",this.props.bboxData);
       const toGeoJSON = {
         "type": "FeatureCollection",
         "features": [...this.props.bboxData]
       };
       const boundingbox = bbox(toGeoJSON);
-      /*
-        [
-          [swLongitude, swLatitude],
-          [neLongitude, neLatitude]
-        ]
-      */
-      console.log("BM-CDM-bbox:", boundingbox);
-  
       const bboxViewport = new WebMercatorViewport({
         width: this.state.viewport.width,
         height: this.state.viewport.height
@@ -164,7 +142,6 @@ class BaseMap extends Component {
         ], {
         padding: this.props.bboxPadding
       });
-      console.log("BM-CDM-fb-vp:", bboxViewport);
       this.onViewportChange(bboxViewport);
     }
   }
