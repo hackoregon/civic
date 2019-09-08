@@ -171,7 +171,6 @@ export default class Orb extends PureComponent {
           css={css`
             ${circleDefaultStyle};
             ${sizeStyle};
-            ${sizeStyle};
           `}
           className={orbClass}
         >
