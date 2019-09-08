@@ -38,9 +38,9 @@ import {
   getSelectedSlides,
   getLayerSlides,
   getSelectedSlideDatum,
-  getAllSlides,
+  getAllSlides
   // getfoundationMapProps,
-  getSelectedFoundationDatum
+  // getSelectedFoundationDatum
 } from "../../state/sandbox/selectors";
 
 class SandboxComponent extends React.Component {
@@ -227,9 +227,9 @@ export default connect(
     selectedSlide: getSelectedSlides(state),
     layerSlides: getLayerSlides(state),
     selectedSlideDatum: getSelectedSlideDatum(state),
-    allSlides: getAllSlides(state),
+    allSlides: getAllSlides(state)
     // foundationMapProps: getfoundationMapProps(state),
-    selectedFoundationDatum: getSelectedFoundationDatum(state)
+    // selectedFoundationDatum: getSelectedFoundationDatum(state)
   }),
   dispatch => ({
     fetchFoundation(endpoint = "") {

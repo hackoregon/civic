@@ -1,9 +1,10 @@
+/* eslint-disable no-nested-ternary */
 import { createSelector } from "reselect";
-import { isArray } from "lodash";
+// import { isArray } from "lodash";
 import { rootState } from "../selectors";
 
-import { slides, foundations } from "../layerStyles";
-/* global console */
+// import { slides, foundations } from "../layerStyles";
+
 export const getState = createSelector(
   rootState,
   state => state
@@ -14,11 +15,11 @@ export const getSandbox = createSelector(
   ({ sandbox = {} }) => sandbox
 );
 
-const getProperty = key =>
-  createSelector(
-    getState,
-    state => state[key]
-  );
+// const getProperty = key =>
+//   createSelector(
+//     getState,
+//     state => state[key]
+//   );
 
 const getSandboxProperty = key =>
   createSelector(
@@ -106,7 +107,7 @@ export const getLayerSlides = createSelector(
     // console.log("selector-getLayerSlides-selectedSlides:", selectedSlides);
     // console.log("selector-getLayerSlides-selectedSlideKey:", selectedSlideKey);
 
-    const filteredSlideVizData = selectedSlides.reduce((a,c) => {
+    const filteredSlideVizData = selectedSlides.reduce((a, c) => {
       const findSlide = slidesData.find(e => e.displayName === c);
       return findSlide ? [...a, findSlide] : a;
     }, []);
@@ -114,35 +115,39 @@ export const getLayerSlides = createSelector(
     // const hasSelectedSlideKeys = Object.keys(selectedSlideKey).length > 0;
     // console.log("selector-getLayerSlides-hasSelectedSlideKeys:", hasSelectedSlideKeys);
 
-    const formattedSliderVizData = filteredSlideVizData
-      .map(d => {
-        const mapProps = {
-          ...d.visualization.map,
-          tooltip: {
-            ...d.visualization.tooltip
-          },
-          fieldName: {
-            ...d.visualization.map.fieldName,
-            color: selectedSlideKey[d.displayName]
-              ? selectedSlideKey[d.displayName]
-              : d.visualization.map.fieldName && d.visualization.map.fieldName.color
-              ? d.visualization.map.fieldName.color
-              : "",
-            area: selectedSlideKey[d.displayName]
-              ? selectedSlideKey[d.displayName]
-              : d.visualization.map.fieldName && d.visualization.map.fieldName.area
-              ? d.visualization.map.fieldName.area
-              : ""
-          }
-        };
-        // console.log("mapProps:", mapProps);
-        return {
-          ...mapProps,
-          data: d.results ? d.results.features : [],
-          layerInfo: d
-        };
-      });
-    console.log("selector-getLayerSlides-formattedSliderVizData:", formattedSliderVizData);
+    const formattedSliderVizData = filteredSlideVizData.map(d => {
+      const mapProps = {
+        ...d.visualization.map,
+        tooltip: {
+          ...d.visualization.tooltip
+        },
+        fieldName: {
+          ...d.visualization.map.fieldName,
+          color: selectedSlideKey[d.displayName]
+            ? selectedSlideKey[d.displayName]
+            : d.visualization.map.fieldName &&
+              d.visualization.map.fieldName.color
+            ? d.visualization.map.fieldName.color
+            : "",
+          area: selectedSlideKey[d.displayName]
+            ? selectedSlideKey[d.displayName]
+            : d.visualization.map.fieldName &&
+              d.visualization.map.fieldName.area
+            ? d.visualization.map.fieldName.area
+            : ""
+        }
+      };
+      // console.log("mapProps:", mapProps);
+      return {
+        ...mapProps,
+        data: d.results ? d.results.features : [],
+        layerInfo: d
+      };
+    });
+    console.log(
+      "selector-getLayerSlides-formattedSliderVizData:",
+      formattedSliderVizData
+    );
 
     return formattedSliderVizData;
   }
@@ -162,74 +167,75 @@ export const getLayerSlides = createSelector(
 //   }
 // );
 
-const makeVisFor = (spec, data) => {
-  const { type } = spec.visualization;
-  if (type === "PercentDonut") {
-    const val = data.object.properties[spec.field];
-    const comparisonName = spec.visualization.comparison_name
-      ? spec.visualization.comparison_name
-      : " ";
-    return {
-      id: data.object.id,
-      visualizationType: "PercentDonut",
-      title: spec.name,
-      data: [
-        { x: spec.name, y: val },
-        {
-          x: comparisonName,
-          y: val < 1 ? 1 - val : 100 - val
-        }
-      ]
-    };
-  }
-  if (type === "Text" || type === "ComparisonBar") {
-    return {
-      id: data.object.id,
-      visualizationType: "Text",
-      title: spec.name,
-      data:
-        data.object.properties[spec.field] !== null &&
-        data.object.properties[spec.field] !== undefined
-          ? data.object.properties[spec.field]
-          : "Data Not Available"
-    };
-  }
-};
+// const makeVisFor = (spec, data) => {
+//   const { type } = spec.visualization;
+//   if (type === "PercentDonut") {
+//     const val = data.object.properties[spec.field];
+//     const comparisonName = spec.visualization.comparison_name
+//       ? spec.visualization.comparison_name
+//       : " ";
+//     return {
+//       id: data.object.id,
+//       visualizationType: "PercentDonut",
+//       title: spec.name,
+//       data: [
+//         { x: spec.name, y: val },
+//         {
+//           x: comparisonName,
+//           y: val < 1 ? 1 - val : 100 - val
+//         }
+//       ]
+//     };
+//   }
+//   if (type === "Text" || type === "ComparisonBar") {
+//     return {
+//       id: data.object.id,
+//       visualizationType: "Text",
+//       title: spec.name,
+//       data:
+//         data.object.properties[spec.field] !== null &&
+//         data.object.properties[spec.field] !== undefined
+//           ? data.object.properties[spec.field]
+//           : "Data Not Available"
+//     };
+//   }
+//   return {};
+// };
 
-export const getSelectedFoundationDatum = createSelector(
-  getSandbox,
-  getSelectedFoundationData,
-  ({ selectedFoundationDatum }, foundation) => {
-    if (!foundation || !selectedFoundationDatum) return [];
+// export const getSelectedFoundationDatum = createSelector(
+//   getSandbox,
+//   getSelectedFoundationData,
+//   ({ selectedFoundationDatum }, foundation) => {
+//     if (!foundation || !selectedFoundationDatum) return [];
 
-    const attrs = foundation.slide_meta.attributes;
-    const visualizations = [];
+//     const attrs = foundation.slide_meta.attributes;
+//     const visualizations = [];
 
-    const selectedFoundationDatumProps =
-      selectedFoundationDatum.object.properties;
-    const primaryFieldMatch = selectedFoundationDatumProps.hasOwnProperty(
-      attrs.primary.field
-    );
-    const secondaryFieldMatch = selectedFoundationDatumProps.hasOwnProperty(
-      attrs.secondary.field
-    );
+//     const selectedFoundationDatumProps =
+//       selectedFoundationDatum.object.properties;
+//     const primaryFieldMatch = selectedFoundationDatumProps.hasOwnProperty(
+//       attrs.primary.field
+//     );
+//     const secondaryFieldMatch = selectedFoundationDatumProps.hasOwnProperty(
+//       attrs.secondary.field
+//     );
 
-    if (!primaryFieldMatch && !secondaryFieldMatch) return [];
+//     if (!primaryFieldMatch && !secondaryFieldMatch) return [];
 
-    if (attrs.primary && attrs.primary.field && attrs.primary.visualization) {
-      visualizations.push(makeVisFor(attrs.primary, selectedFoundationDatum));
-    }
-    if (
-      attrs.secondary &&
-      attrs.secondary.field &&
-      attrs.primary.visualization
-    ) {
-      visualizations.push(makeVisFor(attrs.secondary, selectedFoundationDatum));
-    }
+//     if (attrs.primary && attrs.primary.field && attrs.primary.visualization) {
+//       visualizations.push(makeVisFor(attrs.primary, selectedFoundationDatum));
+//     }
+//     if (
+//       attrs.secondary &&
+//       attrs.secondary.field &&
+//       attrs.primary.visualization
+//     ) {
+//       visualizations.push(makeVisFor(attrs.secondary, selectedFoundationDatum));
+//     }
 
-    return visualizations;
-  }
-);
+//     return visualizations;
+//   }
+// );
 
 export const getSelectedSlideDatum = createSelector(
   getSandbox,
@@ -241,9 +247,9 @@ export const getSelectedSlideDatum = createSelector(
     // console.log("selector-getSelectedSlideDatum-slides:", slides);
     // console.log("selector-getSelectedSlideDatum-selectedSlides:", selectedSlides);
 
-    if (!selectedSlideDatum || !selectedSlideDatum.feature.object || !slides) return;
-    const { feature: slideFeature, index: slideIndex} = selectedSlideDatum;
-
+    if (!selectedSlideDatum || !selectedSlideDatum.feature.object || !slides)
+      return;
+    const { feature: slideFeature, index: slideIndex } = selectedSlideDatum;
 
     const activeLayerName = selectedSlides[slideIndex];
     // console.log("selector-getSelectedSlideDatum-activeLayerName:", activeLayerName);
@@ -253,18 +259,23 @@ export const getSelectedSlideDatum = createSelector(
     });
     // console.log("selector-getSelectedSlideDatum-activeLayer:", activeLayer);
 
-    if (!activeLayer || !activeLayer.visualization || !activeLayer.visualization.tooltip) return;
+    if (
+      !activeLayer ||
+      !activeLayer.visualization ||
+      !activeLayer.visualization.tooltip
+    )
+      return;
     const tooltipFields = activeLayer.visualization.tooltip;
     // console.log("selector-getSelectedSlideDatum-tooltipFields:", tooltipFields);
 
     const tooltipInfo = {
       x: slideFeature.x,
       y: slideFeature.y,
-      content: [],
+      content: []
     };
     if (
-      tooltipFields && 
-      tooltipFields.primary && 
+      tooltipFields &&
+      tooltipFields.primary &&
       tooltipFields.primary.label &&
       tooltipFields.primary.fieldName
     ) {
@@ -277,8 +288,8 @@ export const getSelectedSlideDatum = createSelector(
       });
     }
     if (
-      tooltipFields && 
-      tooltipFields.secondary && 
+      tooltipFields &&
+      tooltipFields.secondary &&
       tooltipFields.secondary.label &&
       tooltipFields.secondary.fieldName
     ) {
@@ -289,6 +300,7 @@ export const getSelectedSlideDatum = createSelector(
     }
     // console.log("selector-getSelectedSlideDatum-tooltipInfo:", tooltipInfo);
 
+    // eslint-disable-next-line consistent-return
     return tooltipInfo;
   }
 );
@@ -310,8 +322,14 @@ export const getAllSlides = createSelector(
         endpoint: s.dataEndpoint,
         label: s.displayName,
         checked: !!selectedSlides.includes(s.displayName),
-        civicColor: vizCheck && s.visualization.map.civicColor ? s.visualization.map.civicColor : "",
-        mapType: vizCheck && s.visualization.map.mapType ? s.visualization.map.mapType : ""
+        civicColor:
+          vizCheck && s.visualization.map.civicColor
+            ? s.visualization.map.civicColor
+            : "",
+        mapType:
+          vizCheck && s.visualization.map.mapType
+            ? s.visualization.map.mapType
+            : ""
       };
     });
 

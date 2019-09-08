@@ -1,4 +1,4 @@
-import { isArray, findIndex } from "lodash";
+import { findIndex } from "lodash";
 
 import {
   SANDBOX_START,
@@ -165,7 +165,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         selectedSlideKey: {
           ...state.selectedSlideKey,
           ...action.selectedSlideKey
-        },
+        }
       };
     case SET_FOUNDATION:
       return {
@@ -231,7 +231,7 @@ const reducer = (state = INITIAL_STATE, action) => {
       // console.log("a-SET_SLIDE_DATUM:", action);
       return {
         ...state,
-        selectedSlideDatum: {feature: action.feature, index: action.index}
+        selectedSlideDatum: { feature: action.feature, index: action.index }
       };
     }
     default:

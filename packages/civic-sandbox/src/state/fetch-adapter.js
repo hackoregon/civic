@@ -1,7 +1,6 @@
+/* eslint-disable no-nested-ternary */
 import axios from "axios";
 
-const echo = a => a;
-/* global console */
 const apiAdapter = (url, { start, success, failure }) => () => dispatch => {
   dispatch(start());
   const secureURL = url.includes("https")
@@ -62,53 +61,53 @@ export const fetchLayersAdapter = (
     return axios.get(isSecureURL);
   });
   // console.log("fetchLayersAdapter-fetchLayers", fetchLayers);
-  return (
-    axios
-      .all(fetchLayers)
-      .then(layerDataArr => {
-        console.log("fetchLayersAdapter-layerDataArr:", layerDataArr);
+  return axios.all(fetchLayers).then(layerDataArr => {
+    console.log("fetchLayersAdapter-layerDataArr:", layerDataArr);
 
-        const geoDataURLs = layerDataArr.map((layer,i) => {
+    const geoDataURLs = layerDataArr.map((layer, i) => {
+      return {
+        url: layer.data.dataEndpoint,
+        prevData: layersArr[i].geoJSON
+      };
+    });
+    console.log("fetchLayersAdapter-geoDataURLs:", geoDataURLs);
+
+    const fetchGeoData = geoDataURLs.map((gd, i, arr) => {
+      const findMatch = arr.findIndex(d => d.url === gd.url && d.prevData);
+      console.log("fetchLayersAdapter-findMatch:", findMatch);
+
+      return findMatch > -1
+        ? { data: { results: layersArr[findMatch].geoJSON } }
+        : gd.url && layersArr[i].defaultSlide && !layersArr[i].geoJSON
+        ? axios.get(gd.url)
+        : {};
+    });
+
+    // console.log("fetchLayersAdapter-dispatched");
+
+    return axios
+      .all(fetchGeoData)
+      .then(geoData => {
+        console.log("fetchLayersAdapter-geoData:", geoData);
+        const layerAndGeoData = geoData.map((g, i) => {
           return {
-            url: layer.data.dataEndpoint,
-            prevData: layersArr[i].geoJSON
+            ...g.data,
+            ...layerDataArr[i].data
           };
         });
-        console.log("fetchLayersAdapter-geoDataURLs:", geoDataURLs);
+        console.log(
+          "fetchLayersAdapter-layerAndGeoData:",
+          layerAndGeoData,
+          "\n"
+        );
 
-        const fetchGeoData = geoDataURLs.map((gd, i, arr) => {
-          const findMatch = arr.findIndex(d => d.url === gd.url && d.prevData);
-          console.log("fetchLayersAdapter-findMatch:", findMatch);
-
-          return findMatch > -1
-            ? ( { data: { results: layersArr[findMatch].geoJSON} } )
-            : gd.url && layersArr[i].defaultSlide && !layersArr[i].geoJSON
-            ? axios.get(gd.url)
-            : {};
-        });
-
-        // console.log("fetchLayersAdapter-dispatched");
-
-        return axios.all(fetchGeoData).then(geoData => {
-        console.log("fetchLayersAdapter-geoData:", geoData);
-          const layerAndGeoData = geoData.map((g, i) => {
-            return {
-              ...g.data,
-              ...layerDataArr[i].data
-            };
-          });
-        console.log("fetchLayersAdapter-layerAndGeoData:", layerAndGeoData, "\n");
-
-          dispatch(
-            success(layerAndGeoData)
-          );
-          return geoData;
-        }
-        ).catch(err => {
-          dispatch(failure(err));
-        });
+        dispatch(success(layerAndGeoData));
+        return geoData;
       })
-  );
+      .catch(err => {
+        dispatch(failure(err));
+      });
+  });
 };
 
 export default apiAdapter;
