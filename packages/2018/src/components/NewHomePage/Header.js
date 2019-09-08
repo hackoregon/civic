@@ -4,9 +4,7 @@ import { useEffect, useState } from "react";
 import FullNav from "./FullNav";
 import SmallNav from "./SmallNav";
 
-const hamburgerMaxWidth = 915;
-
-const headerWrapper = css`
+const headerWrapper = props => css`
   height: 115px;
   width: 100vw;
   position: fixed;
@@ -16,12 +14,13 @@ const headerWrapper = css`
   top: 0;
   z-index: 100;
 
-  @media (max-width: ${hamburgerMaxWidth}px) {
+  @media (max-width: ${props.collapseWidth}px) {
     height: 72px;
   }
 `;
 
 const Header = props => {
+  const { collapseWidth } = props;
   const [width, setWidth] = useState(window.innerWidth);
 
   const handleResize = () => {
@@ -36,12 +35,8 @@ const Header = props => {
   });
 
   return (
-    <header css={headerWrapper}>
-      {width > hamburgerMaxWidth ? (
-        <FullNav {...props} />
-      ) : (
-        <SmallNav {...props} />
-      )}
+    <header css={headerWrapper(props)}>
+      {width > collapseWidth ? <FullNav {...props} /> : <SmallNav {...props} />}
     </header>
   );
 };

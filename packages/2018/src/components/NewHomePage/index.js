@@ -30,6 +30,7 @@ const sectionCivicLayout = css`
 `;
 
 const greatestWidth = 1200;
+const collapseWidth = 915;
 
 const HomePage = () => {
   return (
@@ -41,7 +42,7 @@ const HomePage = () => {
           ${indexStyle(greatestWidth)}
         `}
       />
-      <Header greatestWidth={greatestWidth} />
+      <Header greatestWidth={greatestWidth} collapseWidth={collapseWidth} />
       <div className="content-wrapper">
         <h1>CIVIC</h1>
         <p className="page-subtitle">
@@ -219,7 +220,7 @@ const HomePage = () => {
           /> */}
         </div>
       </div>
-      <Footer greatestWidth={greatestWidth} />
+      <Footer greatestWidth={greatestWidth} collapseWidth={collapseWidth} />
     </Fragment>
   );
 };
