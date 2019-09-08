@@ -9,30 +9,30 @@
 }
 
 .civic-slider-container .rc-slider-track {
-  background-color: black;
+  background-color: darkgray;
   height: 4px;
 }
 
 .civic-slider-container .rc-slider-handle {
-  border-color: black;
-  background-color: black;
+  border-color: dimgray;
+  background-color: dimgray;
   width: 14px;
   height: 14px;
 }
 
 .civic-slider-container .rc-slider-handle:active {
-  box-shadow: 0 0 5px black;
+  box-shadow: 0 0 5px dimgray;
 }
 
 .civic-slider-container .rc-slider-handle:hover {
-  border-color: black;
+  border-color: dimgray;
 }
 
 .civic-slider-container
   .rc-slider-tooltip-placement-points-bc-tc
   .rc-slider-tooltip-arrow {
-  border-top-color: black;
+  border-top-color: darkgray;
 }
 .civic-slider-container .rc-slider-dot-active {
-  border-color: black;
+  border-color: darkgray;
 }
