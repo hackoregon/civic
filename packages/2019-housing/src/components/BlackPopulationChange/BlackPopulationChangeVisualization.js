@@ -5,9 +5,12 @@ import { scaleQuantize, extent } from "d3";
 
 import {
   BaseMap,
+  civicFormat,
   ChartContainer,
   ComparisonMap,
-  MapOverlay
+  MapOverlay,
+  MapTooltip,
+  VisualizationColors
 } from "@hackoregon/component-library";
 
 const BlackPopulationChangeVisualization = ({ isLoading, data }) => {
@@ -21,52 +24,43 @@ const BlackPopulationChangeVisualization = ({ isLoading, data }) => {
   const findDataMinMax = extent([...housingData1990, ...housingData2017], f =>
     parseFloat(f.properties[polygonFieldName])
   );
-  const warmColorScale = scaleQuantize()
+  const colorScale = scaleQuantize()
     .domain(findDataMinMax)
-    .range([
-      // "Thermal"
-      [255, 255, 204],
-      [255, 237, 160],
-      [254, 217, 118],
-      [254, 178, 76],
-      [253, 141, 60],
-      [252, 78, 42],
-      [227, 26, 28],
-      [189, 0, 38],
-      [128, 0, 38]
-    ]);
-  const coolColorScale = scaleQuantize()
-    .domain(findDataMinMax)
-    .range([
-      // "Space"
-      [247, 252, 253],
-      [224, 236, 244],
-      [191, 211, 230],
-      [158, 188, 218],
-      [140, 150, 198],
-      [140, 107, 177],
-      [136, 65, 157],
-      [129, 15, 124],
-      [77, 0, 75]
-    ]);
+    .range(VisualizationColors.sequential.thermal);
 
   const height = 500;
   const leftMap = (
     <BaseMap civicMapStyle="light" height={height}>
       <MapOverlay
         data={housingData1990}
-        getFillColor={f => warmColorScale(f.properties[polygonFieldName])}
+        getFillColor={f => colorScale(f.properties[polygonFieldName])}
         onLayerClick={() => {}}
-      />
+      >
+        <MapTooltip
+          primaryName="Black Polulation Share"
+          primaryField={polygonFieldName}
+          formatPrimaryField={f => civicFormat.decimalToPercent(f)}
+          secondaryName="Year"
+          secondaryField="year"
+        />
+      </MapOverlay>
     </BaseMap>
   );
   const rightMap = (
     <BaseMap civicMapStyle="light" height={height}>
       <MapOverlay
         data={housingData2017}
-        getFillColor={f => coolColorScale(f.properties[polygonFieldName])}
+        getFillColor={f => colorScale(f.properties[polygonFieldName])}
         onLayerClick={() => {}}
-      />
+      >
+        <MapTooltip
+          primaryName="Black Polulation Share"
+          primaryField={polygonFieldName}
+          formatPrimaryField={f => civicFormat.decimalToPercent(f)}
+          secondaryName="Year"
+          secondaryField="year"
+        />
+      </MapOverlay>
     </BaseMap>
   );
 
@@ -93,11 +87,14 @@ const BlackPopulationChangeVisualization = ({ isLoading, data }) => {
           subtitle="subtitle"
         />
         <ComparisonMap
-          leftMap={leftMap}
-          rightMap={rightMap}
           height={height}
-          sliderStartPosition={70}
           initialViewport={{ zoom: 9.9 }}
+          leftMap={leftMap}
+          leftMapTitle="1990"
+          rightMap={rightMap}
+          rightMapTitle="2017"
+          sliderStartPosition={50}
+          showDivider
         />
       </div>
     )
