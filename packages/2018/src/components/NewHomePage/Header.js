@@ -11,13 +11,13 @@ import MenuItem from "@material-ui/core/MenuItem";
 
 import { defaultFontSize } from "./index.styles";
 import navCaret from "../../assets/nav-caret.svg";
-import menuVector from "../../assets/menu-vector.svg";
 
 const { primary, action } = BrandColors;
+const menuColor = "#F3F2F3";
 
 const dropdownStyles = {
   marginTop: "30px",
-  backgroundColor: "#F3F2F3"
+  backgroundColor: menuColor
 };
 
 const optionText = {
@@ -105,26 +105,46 @@ const caratStyle = css`
   padding-bottom: 2px;
 `;
 
-const vectorStyle = css`
+const arrowUp = css`
   position: absolute;
-  top: 12px;
+  top: 14px;
   right: 20px;
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 15px solid ${menuColor};
 `;
 
 const Header = () => {
-  const [open, setOpen] = useState(false);
-  const anchorRef = useRef(null);
+  const [joinOpen, setJoinOpen] = useState(false);
+  const [aboutOpen, setAboutOpen] = useState(false);
+  const joinAnchorRef = useRef(null);
+  const aboutAnchorRef = useRef(null);
 
-  function handleToggle() {
-    setOpen(prevOpen => !prevOpen);
+  function handleJoinToggle() {
+    setJoinOpen(prevOpen => !prevOpen);
   }
 
-  function handleClose(event) {
-    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+  function handleAboutToggle() {
+    setAboutOpen(prevOpen => !prevOpen);
+  }
+
+  function handleJoinClose(event) {
+    if (joinAnchorRef.current && joinAnchorRef.current.contains(event.target)) {
       return;
     }
+    setJoinOpen(false);
+  }
 
-    setOpen(false);
+  function handleAboutClose(event) {
+    if (
+      aboutAnchorRef.current &&
+      aboutAnchorRef.current.contains(event.target)
+    ) {
+      return;
+    }
+    setAboutOpen(false);
   }
 
   return (
@@ -141,10 +161,10 @@ const Header = () => {
               <button
                 css={menuButton}
                 type="button"
-                ref={anchorRef}
+                ref={joinAnchorRef}
                 aria-controls="menu-list-grow"
                 aria-haspopup="true"
-                onClick={handleToggle}
+                onClick={handleJoinToggle}
               >
                 <p css={buttonText}>
                   JOIN THE MOVEMENT
@@ -154,8 +174,8 @@ const Header = () => {
                 </p>
               </button>
               <Popper
-                open={open}
-                anchorEl={anchorRef.current}
+                open={joinOpen}
+                anchorEl={joinAnchorRef.current}
                 transition
                 disablePortal
               >
@@ -173,18 +193,18 @@ const Header = () => {
                       square
                       style={dropdownStyles.menu}
                     >
-                      <img src={menuVector} css={vectorStyle} alt="" />
-                      <ClickAwayListener onClickAway={handleClose}>
+                      <div css={arrowUp} />
+                      <ClickAwayListener onClickAway={handleJoinClose}>
                         <MenuList>
                           <MenuItem
-                            onClick={handleClose}
+                            onClick={handleJoinClose}
                             style={optionText}
                             dense
                           >
                             Work With Us
                           </MenuItem>
                           <MenuItem
-                            onClick={handleClose}
+                            onClick={handleJoinClose}
                             style={optionText}
                             dense
                           >
@@ -198,7 +218,64 @@ const Header = () => {
               </Popper>
             </li>
             <li>
-              <a css={linkStyle}>ABOUT</a>
+              <button
+                css={menuButton}
+                type="button"
+                ref={aboutAnchorRef}
+                aria-controls="menu-list-grow"
+                aria-haspopup="true"
+                onClick={handleAboutToggle}
+              >
+                <p css={buttonText}>
+                  ABOUT
+                  <span>
+                    <img css={caratStyle} src={navCaret} alt="" />
+                  </span>
+                </p>
+              </button>
+              <Popper
+                open={aboutOpen}
+                anchorEl={aboutAnchorRef.current}
+                transition
+                disablePortal
+              >
+                {({ TransitionProps, placement }) => (
+                  <Grow
+                    {...TransitionProps}
+                    style={{
+                      transformOrigin:
+                        placement === "bottom" ? "center top" : "center bottom",
+                      ...dropdownStyles
+                    }}
+                  >
+                    <Paper
+                      id="menu-list-grow"
+                      square
+                      style={dropdownStyles.menu}
+                    >
+                      <div css={arrowUp} />
+                      <ClickAwayListener onClickAway={handleAboutClose}>
+                        <MenuList>
+                          <MenuItem
+                            onClick={handleAboutClose}
+                            style={optionText}
+                            dense
+                          >
+                            Civic Platform
+                          </MenuItem>
+                          <MenuItem
+                            onClick={handleAboutClose}
+                            style={optionText}
+                            dense
+                          >
+                            Civic Software Foundation
+                          </MenuItem>
+                        </MenuList>
+                      </ClickAwayListener>
+                    </Paper>
+                  </Grow>
+                )}
+              </Popper>
             </li>
             <li>
               <a css={linkStyle}>CONTACT</a>
