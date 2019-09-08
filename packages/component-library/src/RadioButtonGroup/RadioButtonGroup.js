@@ -68,7 +68,7 @@ RadioButtonGroup.defaultProps = {
   value: "Label 1",
   grpLabel: "GroupLabel",
   labelPlacement: "end",
-  formHelperText: "Helper text",
+  formHelperText: "",
   row: false,
   disabled: false
 };
