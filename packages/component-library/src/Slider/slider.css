@@ -9,7 +9,7 @@
 }
 
 .civic-slider-container .rc-slider-track {
-  background-color: darkgray;
+  background-color: dimgray;
   height: 4px;
 }
 
@@ -31,8 +31,8 @@
 .civic-slider-container
   .rc-slider-tooltip-placement-points-bc-tc
   .rc-slider-tooltip-arrow {
-  border-top-color: darkgray;
+  border-top-color: dimgray;
 }
 .civic-slider-container .rc-slider-dot-active {
-  border-color: darkgray;
+  border-color: dimgray;
 }
