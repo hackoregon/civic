@@ -9,14 +9,32 @@ import disturbanceStopsMeta from "./disturbanceStopsMeta";
 import disturbanceStopsLineChartMeta from "./disturbanceStopsLineChartMeta";
 import api from "../../state/disturbance-stops/api";
 
+const CENTER_POINT = {
+  "Hawthorne Approach": {
+    latitude: 45.512,
+    longitude: -122.659
+  }
+};
+
+const BOUNDING_BOX = {
+  "Hawthorne Approach": "-122.665849,45.510867,-122.653650,45.514367"
+};
+
+const DIRECTION = {
+  INBOUND: "I",
+  OUTBOUND: "O"
+};
+
+// http://service.civicpdx.org/transportation2019/v1/toad/disturbanceStops/?limit=100&offset=400&months=9&time_range=6.25%2C9.5&years=2017%2C2018&lines=6%2C10%2C14&service_key=W&bounds=-122.665849%2C45.510867%2C-122.653650%2C45.514367
 const limit = 2000;
 const offset = 0;
 const months = "9,10,11";
 const timeRange = "6.25,9.5";
 const years = "2017,2018";
-const lines = "6,10,14";
-const bounds = "-122.665849,45.510867,-122.653650,45.514367";
-const testUrl = `http://service.civicpdx.org/transportation2019/v1/toad/disturbanceStops/?limit=${limit}&offset=${offset}&months=${months}&time_range=${timeRange}&years=${years}&lines=${lines}&service_key=W&bounds=${bounds}`;
+const lines = "14";
+const testUrl = `http://service.civicpdx.org/transportation2019/v1/toad/disturbanceStops/?limit=${limit}&offset=${offset}&months=${months}&time_range=${timeRange}&years=${years}&lines=${lines}&service_key=W&bounds=${
+  BOUNDING_BOX["Hawthorne Approach"]
+}&directions=${DIRECTION.INBOUND}`;
 
 export const DataContext = React.createContext({});
 
@@ -38,7 +56,9 @@ const DisturbanceStops = ({ Layout }) => {
 
   return (
     <>
-      <DataContext.Provider value={{ loaded, features }}>
+      <DataContext.Provider
+        value={{ loaded, features, center: CENTER_POINT["Hawthorne Approach"] }}
+      >
         <CivicCard cardMeta={disturbanceStopsMeta} Layout={Layout} />
         <CivicCard cardMeta={disturbanceStopsLineChartMeta} Layout={Layout} />
       </DataContext.Provider>
@@ -60,5 +80,4 @@ export default connect(state => ({
       state.package2019Transportation || state
     )
   }
-  // state.packageProjectName || state needed to make work in the project package and 2018 package
 }))(DisturbanceStops);
