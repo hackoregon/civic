@@ -3,6 +3,8 @@ import { jsx, css } from "@emotion/core";
 import { Logo, BrandColors } from "@hackoregon/component-library";
 import { defaultFontSize, browserDefaultSize } from "./index.styles";
 
+const condensedWidth = 715;
+
 const footerWrapper = css`
   height: 185px;
   width: 100%;
@@ -19,11 +21,39 @@ const contentWrapper = props => css`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: end;
+
+  @media (max-width: ${props.collapseWidth}px) {
+    grid-template-columns: 1fr auto auto;
+  }
+
+  @media (max-width: ${condensedWidth}px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-row-gap: 30px;
+  }
+`;
+
+const businessWrapper = props => css`
+  display: grid;
+  justify-content: center;
+
+  @media (max-width: ${props.collapseWidth}px) {
+    padding: 0 40px;
+  }
+
+  @media (max-width: ${condensedWidth}px) {
+    justify-content: start;
+    padding: 0;
+  }
 `;
 
 const logoStyle = css`
   height: 90px !important;
   justify-self: end;
+
+  @media (max-width: ${condensedWidth}px) {
+    justify-self: start;
+  }
 `;
 
 const textStyle = css`
@@ -42,6 +72,7 @@ const boldText = css`
 
 const header = css`
   ${textStyle};
+  font-weight: 500;
   font-size: ${30 / browserDefaultSize}rem;
 `;
 
@@ -59,12 +90,7 @@ const Footer = props => (
           +1-234-567-8901
         </a>
       </div>
-      <div
-        css={css`
-          display: grid;
-          justify-content: center;
-        `}
-      >
+      <div css={businessWrapper(props)}>
         <div>
           <p css={boldText}>Business HQ</p>
           <p css={textStyle}>Washington, DC</p>
