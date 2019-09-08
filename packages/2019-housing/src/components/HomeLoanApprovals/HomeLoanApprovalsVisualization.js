@@ -5,6 +5,7 @@ import { scaleOrdinal } from "d3";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import {
+  civicFormat,
   BaseMap,
   ChartContainer,
   MapOverlay,
@@ -92,10 +93,37 @@ const HomeLoanApprovalsVisualization = ({ isLoading, data }) => {
                   opacity={0.25}
                 >
                   <MapTooltip
-                    primaryName={RACE_LABEL_MAP[race]}
-                    primaryField={polygonFieldName}
-                    secondaryName={`${RACE_LABEL_MAP[race]} Homeowners`}
-                    secondaryField={`total_own_${race}`}
+                    tooltipDataArray={[
+                      {
+                        name: "Tract",
+                        field: `geoid`,
+                        formatField: f => Number(f.substring(6)) / 100 // 41067033101 --> 331.02
+                      },
+                      {
+                        name: `Total ${RACE_LABEL_MAP[race]} home loans`,
+                        field: `loans_${race}`,
+                        formatField: f => civicFormat.numeric(f)
+                      },
+                      {
+                        name: `${RACE_LABEL_MAP[race]} share of home loans`,
+                        field: `loans_share_${race}`,
+                        formatField: f => civicFormat.decimalToPercent(f)
+                      },
+                      {
+                        name: `Share of homeowners who are ${
+                          RACE_LABEL_MAP[race]
+                        }`,
+                        field: `share_total_own_${race}`,
+                        formatField: f => civicFormat.decimalToPercent(f)
+                      },
+                      {
+                        name: `Location quotient (loans to ${
+                          RACE_LABEL_MAP[race]
+                        } homeowners)`,
+                        field: `lq_${race}_brks`
+                      }
+                    ]}
+                    wide
                   />
                 </MapOverlay>
               </BaseMap>
