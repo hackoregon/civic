@@ -23,8 +23,8 @@ const dropdownStyles = {
 const optionText = {
   fontFamily: "Rubik, sans-serif",
   fontWeight: 500,
-  fontSize: `${16 / defaultFontSize}em`,
-  lineHeight: `${37 / defaultFontSize}em`,
+  fontSize: `${16 / defaultFontSize}rem`,
+  lineHeight: `${37 / defaultFontSize}rem`,
   color: primary.hex
 };
 
@@ -50,15 +50,15 @@ const linkContainer = css`
   display: grid;
   justify-self: end;
   grid-template-columns: repeat(4, max-content);
-  grid-gap: ${48 / defaultFontSize}em;
+  grid-gap: ${48 / defaultFontSize}rem;
   justify-items: end;
 `;
 
 const linkStyle = css`
   font-weight: 500;
   font-family: Rubik, sans-serif;
-  font-size: ${24 / defaultFontSize}em;
-  line-height: ${28 / defaultFontSize}em;
+  font-size: ${24 / defaultFontSize}rem;
+  line-height: ${28 / defaultFontSize}rem;
   color: ${primary.hex};
   text-decoration: none;
 `;
