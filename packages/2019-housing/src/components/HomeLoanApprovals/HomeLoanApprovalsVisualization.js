@@ -13,13 +13,23 @@ import {
 } from "@hackoregon/component-library";
 import TempLoader from "../TempLoader/TempLoader";
 
-const RACE_DATA_MAP = {
-  black: "lq_black_brks",
-  white: "lq_white_brks",
-  multi: "lq_multi_brks",
-  aian: "lq_aian_brks",
-  hisp: "lq_hisp_brks",
-  api: "lq_api_brks"
+const RACE_LABEL_MAP = {
+  black: "Black",
+  white: "White",
+  hisp: "Hispanic or Latino",
+  aian: "Native American",
+  api: "Asian/Pacific Islander",
+  multi: "Multiple Races"
+};
+
+const LABEL_RACE_MAP = {
+  // "Readable Name": "abbreviation"
+  Black: "black",
+  White: "white",
+  "Hispanic or Latino": "hisp",
+  "Native American": "aian",
+  "Asian/Pacific Islander": "api",
+  "Multiple Races": "multi"
 };
 
 const HomeLoanApprovalsVisualization = ({ isLoading, data }) => {
@@ -27,7 +37,7 @@ const HomeLoanApprovalsVisualization = ({ isLoading, data }) => {
 
   if (isLoading) return <TempLoader />;
 
-  const polygonFieldName = RACE_DATA_MAP[race];
+  const polygonFieldName = `lq_${race}_brks`;
   const totalLoans = data.totalLoans.value.results.features;
   const colorScale = scaleOrdinal()
     .domain([
@@ -39,13 +49,14 @@ const HomeLoanApprovalsVisualization = ({ isLoading, data }) => {
       "Over-represented (1.50-3.00)"
     ])
     .range([
-      // TODO: Pick an official color scale
+      // Nulls are a more translarent gray
       [200, 200, 200],
-      [200, 0, 0],
-      [200, 150, 150],
+      // Color-blind safe diverging color scale from ColorBrewer
+      [166, 97, 26],
+      [223, 194, 125],
       [255, 255, 255],
-      [150, 150, 200],
-      [0, 0, 200]
+      [128, 205, 193],
+      [1, 133, 113]
     ]);
 
   return (
@@ -54,13 +65,9 @@ const HomeLoanApprovalsVisualization = ({ isLoading, data }) => {
         <strong style={{ color: "crimson" }}>
           Visualization TODO:
           <ul>
-            <li>Fix radio race labels</li>
-            <li>Pick a better color scale for the map</li>
             <li>Add a map legend once they exist</li>
-            <li>Use tooltips? Yes? Fix tooltip labeling / No? Remove them</li>
-            <li>Keep population data in tooltip? If so, what field?</li>
-            <li>Fix error being thrown by inputProps on the Radio</li>
-            <li>Add a real loading indicator</li>
+            <li>Add a second map with updated data</li>
+            <li>Update Tooltip labeling</li>
           </ul>
         </strong>
         <div
@@ -70,7 +77,7 @@ const HomeLoanApprovalsVisualization = ({ isLoading, data }) => {
         >
           <div
             css={css`
-              width: 100%;
+              width: 75%;
             `}
           >
             <ChartContainer
@@ -82,11 +89,12 @@ const HomeLoanApprovalsVisualization = ({ isLoading, data }) => {
                   data={totalLoans}
                   getFillColor={f => colorScale(f.properties[polygonFieldName])}
                   onLayerClick={() => {}}
+                  opacity={0.25}
                 >
                   <MapTooltip
-                    primaryName={polygonFieldName}
+                    primaryName={RACE_LABEL_MAP[race]}
                     primaryField={polygonFieldName}
-                    secondaryName={`total_own_${race}`}
+                    secondaryName={`${RACE_LABEL_MAP[race]} Homeowners`}
                     secondaryField={`total_own_${race}`}
                   />
                 </MapOverlay>
@@ -100,9 +108,9 @@ const HomeLoanApprovalsVisualization = ({ isLoading, data }) => {
           >
             <RadioButtonGroup
               grpLabel="Race"
-              labels={Object.keys(RACE_DATA_MAP)}
-              onChange={e => setRace(e.target.value)}
-              value={race}
+              labels={Object.keys(LABEL_RACE_MAP)}
+              onChange={e => setRace(LABEL_RACE_MAP[e.target.value])}
+              value={RACE_LABEL_MAP[race]}
             />
           </div>
         </div>
