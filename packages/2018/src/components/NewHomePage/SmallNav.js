@@ -13,7 +13,7 @@ import hamburgerMenu from "../../assets/burger.svg";
 const contentWrapper = css`
   margin: 0 auto;
   display: grid;
-  padding: 16px 20px 0;
+  padding: 16px 20px 12px;
   align-items: center;
   justify-content: space-between;
   grid-template-columns: repeat(3, 1fr);
@@ -24,12 +24,14 @@ const logoStyle = css`
   justify-self: center;
 `;
 
+// Padding makes it easier to click
 const hamburgerStyle = css`
   background: none;
   border: none;
   margin: 0;
   padding: 0;
   cursor: pointer;
+  padding: 10px 10px 10px 0;
 
   :focus {
     outline: none;
@@ -59,7 +61,21 @@ const SmallNav = () => {
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
-      <List component="nav">
+      <div css={contentWrapper}>
+        <div>
+          <button
+            type="button"
+            onClick={toggleDrawer(false)}
+            css={hamburgerStyle}
+          >
+            <img src={hamburgerMenu} alt="Close menu" />
+          </button>
+        </div>
+        <Logo css={logoStyle} type="squareLogo" />
+        <div />
+      </div>
+      <List component="nav" style={{paddingTop: 0}}>
+        <Divider />
         <ListItem>
           <a>
             <ListItemText primary="EXPLORE CIVIC" />
@@ -113,7 +129,7 @@ const SmallNav = () => {
     <nav css={contentWrapper}>
       <div>
         <button type="button" onClick={toggleDrawer(true)} css={hamburgerStyle}>
-          <img src={hamburgerMenu} alt="Open or close menu" />
+          <img src={hamburgerMenu} alt="Open menu" />
         </button>
         <Drawer anchor="top" open={open} onClose={toggleDrawer(false)}>
           {fullList()}
