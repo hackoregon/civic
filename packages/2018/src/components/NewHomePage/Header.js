@@ -1,8 +1,8 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
 import { Logo, BrandColors } from "@hackoregon/component-library";
-import Select from "react-select";
-import { defaultFontSize } from "./NewHomePage.styles";
+// import Select from "react-select";
+import { defaultFontSize } from "./index.styles";
 
 const { primary } = BrandColors;
 
@@ -30,6 +30,11 @@ const logoStyle = css`
   height: 90px !important;
 `;
 
+const navStyle = css`
+  display: grid;
+  justify-self: end;
+`;
+
 const linkContainer = css`
   display: grid;
   justify-self: end;
@@ -54,8 +59,8 @@ const Header = () => {
       <div css={contentWrapper}>
         <Logo css={logoStyle} type="squareLogo" />
         <div />
-        <nav css={linkContainer} aria-label="Site">
-          <ul>
+        <nav css={navStyle} aria-label="Site">
+          <ul css={linkContainer}>
             <li>
               <a css={linkStyle}>EXPLORE CIVIC</a>
             </li>

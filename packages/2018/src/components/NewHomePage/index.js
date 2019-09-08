@@ -3,14 +3,14 @@ import { css, jsx, Global } from "@emotion/core";
 import emotionReset from "emotion-reset";
 import { Fragment } from "react";
 import { Button, BrandColors, Footer } from "@hackoregon/component-library";
-import HomePageStyle from "./NewHomePage.styles";
+import indexStyle from "./index.styles";
 import Header from "./Header";
 // Placeholders
-import placeholderIntroImg from "../assets/new-home-page-1.png";
-import placeholderWorkImg from "../assets/new-home-page-2.png";
-import placeholderContributorsImg from "../assets/new-home-page-3.png";
-import placeholderPlatformImg from "../assets/new-home-page-4.png";
-import placeholderCivicImg from "../assets/new-home-page-5.png";
+import placeholderIntroImg from "../../assets/new-home-page-1.png";
+import placeholderWorkImg from "../../assets/new-home-page-2.png";
+import placeholderContributorsImg from "../../assets/new-home-page-3.png";
+import placeholderPlatformImg from "../../assets/new-home-page-4.png";
+// import placeholderCivicImg from "../../assets/new-home-page-5.png";
 
 const sectionWorkLayout = css`
   padding-bottom: 150px;
@@ -35,7 +35,7 @@ const HomePage = () => {
         styles={css`
           font-size: 22px;
           ${emotionReset}
-          ${HomePageStyle}
+          ${indexStyle}
         `}
       />
       <Header />
@@ -60,11 +60,11 @@ const HomePage = () => {
           </div>
         </div>
 
-        <p>JOIN THE MOVEMENT</p>
+        <p className="section-header">JOIN THE MOVEMENT</p>
 
         <div className="home-section" css={sectionWorkLayout}>
           <h2>Work With Us</h2>
-          <p>
+          <p className="audience-content">
             CITIES, GOVERNMENTS &<br />
             ORGANIZATIONS
           </p>
@@ -99,7 +99,7 @@ const HomePage = () => {
 
         <div className="home-section" css={sectionContributorLayout}>
           <h2>Become a Contributor</h2>
-          <p>
+          <p className="audience-content">
             DESIGNERS, DEVELOPERS,
             <br />
             WRITERS & COMMUNITY MEMBERS
@@ -136,7 +136,7 @@ const HomePage = () => {
           />
         </div>
 
-        <p>ABOUT</p>
+        <p className="section-header">ABOUT</p>
 
         <div className="home-section" css={sectionPlatformLayout}>
           <h2>CIVIC Platform</h2>
@@ -181,7 +181,7 @@ const HomePage = () => {
 
         <div className="home-section" css={sectionCivicLayout}>
           <h2>Civic Software Foundation</h2>
-          <p>OUR BOTTOM LINE IS PUBLIC INTEREST</p>
+          <p className="audience-content">OUR BOTTOM LINE IS PUBLIC INTEREST</p>
           <p>
             The CIVIC Platform is made possible by the Civic Software
             Foundation, a non-profit organization bringing data science, modern

@@ -40,13 +40,6 @@ export default {
 
   h2: {
     ...textStandard,
-    fontSize: `${48 / defaultFontSize}rem`,
-    fontWeight: "300",
-    lineHeight: "118%"
-  },
-
-  h3: {
-    ...textStandard,
     fontSize: `${80 / defaultFontSize}rem`,
     fontWeight: "500",
     lineHeight: "118%",
@@ -55,7 +48,14 @@ export default {
     left: "0"
   },
 
-  h4: {
+  ".section-header": {
+    ...textStandard,
+    fontSize: `${48 / defaultFontSize}rem`,
+    fontWeight: "300",
+    lineHeight: "118%"
+  },
+
+  ".audience-content": {
     ...textStandard,
     color: tertiary.hex,
     fontSize: `${30 / defaultFontSize}rem`,
