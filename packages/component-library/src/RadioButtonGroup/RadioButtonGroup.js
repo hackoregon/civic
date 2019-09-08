@@ -33,7 +33,6 @@ const RadioButtonGroup = ({
         onChange={onChange}
         value={value}
         row={row}
-        inputProps={{ "aria-labelledby": { grpLabel } }}
       >
         {labels.map(label => (
           <FormControlLabel
