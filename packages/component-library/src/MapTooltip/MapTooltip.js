@@ -22,6 +22,8 @@ const MapTooltip = props => {
     tooltipInfo,
     x,
     y,
+    formatPrimaryField,
+    formatSecondaryField,
     primaryName,
     primaryField,
     secondaryName,
@@ -35,6 +37,13 @@ const MapTooltip = props => {
       : x - get(window, "innerWidth", 1000) * 0.1;
   const yPostition = y < 375 ? y : y - 50;
 
+  const getProperty = (property, formatFunction) => {
+    if (formatFunction) {
+      return formatFunction(property);
+    }
+    return property;
+  };
+
   return (
     <div
       css={tooltip}
@@ -43,22 +52,28 @@ const MapTooltip = props => {
         top: yPostition
       }}
     >
-      {primaryName ? (
+      {primaryName && (
         <div>
-          {primaryName}: {tooltipInfo.properties[primaryField]}
+          {`${primaryName}: ${getProperty(
+            tooltipInfo.properties[primaryField],
+            formatPrimaryField
+          )}`}
         </div>
-      ) : null}
-      {secondaryName ? (
+      )}
+      {secondaryName && (
         <div>
-          {secondaryName}: {tooltipInfo.properties[secondaryField]}
+          {`${secondaryName}: ${getProperty(
+            tooltipInfo.properties[secondaryField],
+            formatSecondaryField
+          )}`}
         </div>
-      ) : null}
-      {isHex ? (
+      )}
+      {isHex && (
         <div>
           <div>elevation: {tooltipInfo.elevationValue}</div>
           <div>coordinates: {tooltipInfo.centroid.join(", ")}</div>
         </div>
-      ) : null}
+      )}
     </div>
   );
 };
@@ -67,11 +82,18 @@ MapTooltip.propTypes = {
   tooltipInfo: PropTypes.shape({}),
   x: PropTypes.number,
   y: PropTypes.number,
+  formatPrimaryField: PropTypes.func,
+  formatSecondaryField: PropTypes.func,
   primaryName: PropTypes.string,
   primaryField: PropTypes.string,
   secondaryName: PropTypes.string,
   secondaryField: PropTypes.string,
   isHex: PropTypes.bool
+};
+
+MapTooltip.defaultProps = {
+  formatPrimaryField: null,
+  formatSecondaryField: null
 };
 
 export default MapTooltip;
