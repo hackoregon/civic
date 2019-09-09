@@ -144,7 +144,9 @@ const FullNav = props => {
 
   return (
     <div css={contentWrapper(props)}>
-      <Logo css={logoStyle} type="squareLogo" />
+      <Link to="/cards">
+        <Logo css={logoStyle} type="squareLogo" />
+      </Link>
       <div />
       <nav css={navStyle} aria-label="Site">
         <ul css={linkContainer}>

@@ -23,9 +23,12 @@ const contentWrapper = css`
   grid-template-columns: repeat(3, 1fr);
 `;
 
+const logoWrapper = css`
+  justify-self: center;
+`;
+
 const logoStyle = css`
   height: 45px !important;
-  justify-self: center;
 `;
 
 // Padding makes it easier to click
@@ -95,7 +98,9 @@ const SmallNav = () => {
             <img src={hamburgerMenu} alt="Close menu" />
           </button>
         </div>
-        <Logo css={logoStyle} type="squareLogo" />
+        <Link to="/cards" css={logoWrapper}>
+          <Logo type="squareLogo" css={logoStyle} />
+        </Link>
         <div />
       </div>
       <List component="nav" style={{ paddingTop: 0 }}>
@@ -159,7 +164,9 @@ const SmallNav = () => {
           {fullList()}
         </Drawer>
       </div>
-      <Logo css={logoStyle} type="squareLogo" />
+      <Link to="/cards" css={logoWrapper}>
+        <Logo type="squareLogo" css={logoStyle} />
+      </Link>
       <div />
     </nav>
   );
