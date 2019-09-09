@@ -23,6 +23,7 @@ const HouseholdIncomeByRace = ({ init, data, Layout }) => {
 };
 
 HouseholdIncomeByRace.displayName = "HouseholdIncomeByRace";
+HouseholdIncomeByRace.tags = householdIncomeByRaceMeta().tags;
 
 HouseholdIncomeByRace.propTypes = {
   init: PropTypes.func,

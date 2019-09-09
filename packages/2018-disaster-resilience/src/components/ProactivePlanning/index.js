@@ -19,6 +19,7 @@ const ProactivePlanning = ({ init, data, Layout }) => {
 };
 
 ProactivePlanning.displayName = "ProactivePlanning";
+ProactivePlanning.tags = proactivePlanningMeta().tags;
 
 ProactivePlanning.propTypes = {
   init: PropTypes.func,

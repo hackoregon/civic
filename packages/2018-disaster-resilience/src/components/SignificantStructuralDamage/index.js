@@ -9,6 +9,7 @@ const SignificantStructuralDamage = ({ Layout }) => (
 );
 
 SignificantStructuralDamage.displayName = "SignificantStructuralDamage";
+SignificantStructuralDamage.tags = significantStructuralDamageMeta().tags;
 
 SignificantStructuralDamage.propTypes = {
   Layout: PropTypes.func

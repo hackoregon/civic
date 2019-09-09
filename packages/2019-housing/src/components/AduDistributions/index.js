@@ -19,6 +19,7 @@ const AduDistributions = ({ init, data, Layout }) => {
 };
 
 AduDistributions.displayName = "AduDistributions";
+AduDistributions.tags = aduDistributionsMeta().tags;
 
 AduDistributions.propTypes = {
   init: PropTypes.func,

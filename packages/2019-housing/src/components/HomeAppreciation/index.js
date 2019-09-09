@@ -19,6 +19,7 @@ const HomeAppreciation = ({ init, data, Layout }) => {
 };
 
 HomeAppreciation.displayName = "HomeAppreciation";
+HomeAppreciation.tags = homeAppreciationMeta().tags;
 
 HomeAppreciation.propTypes = {
   init: PropTypes.func,

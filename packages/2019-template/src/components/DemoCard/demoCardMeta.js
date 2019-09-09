@@ -45,14 +45,7 @@ const demoCardMeta = (/* data */) => ({
   ),
   shareText:
     "TriMet has cited economic displacement as a main driver of ridership loss",
-  tags: [
-    "Transportation",
-    "Housing",
-    "Gentrification",
-    "Transit",
-    "Portland",
-    "Demo"
-  ],
+  tags: ["Transportation", "Housing", "Race", "Portland", "Chart"],
   selector: null,
   analysis: (
     <Collapsable>

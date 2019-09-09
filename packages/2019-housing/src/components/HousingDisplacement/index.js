@@ -31,6 +31,7 @@ const HousingDisplacement = ({ init, data, Layout }) => {
 };
 
 HousingDisplacement.displayName = "HousingDisplacement";
+HousingDisplacement.tags = housingDisplacementMeta().tags;
 
 HousingDisplacement.propTypes = {
   init: PropTypes.func,

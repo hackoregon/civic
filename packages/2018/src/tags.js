@@ -1,5 +1,5 @@
 export default {
-  topics: ["Transportation", "Disaster Resilience", "Housing"],
+  topics: ["Transportation", "Disaster Resilience", "Housing", "Race"],
   locations: ["Portland", "Nationwide", "Your City"],
-  visualizations: ["Bar Chart", "Cloropleth Map", "Scatterplot"]
+  visualizations: ["Chart", "Map", "Infographic", "Quiz"]
 };
