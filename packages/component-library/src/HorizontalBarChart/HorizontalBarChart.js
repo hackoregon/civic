@@ -98,7 +98,7 @@ const HorizontalBarChart = ({
 
   const NegativeAwareTickLabel = props => (
     <VictoryLabel
-      dx={props.scale.y(minValue) - 20} // eslint-disable-line
+      dx={props.scale.y(minValue) - 10} // eslint-disable-line
       {...props}
       textAnchor="end"
     />

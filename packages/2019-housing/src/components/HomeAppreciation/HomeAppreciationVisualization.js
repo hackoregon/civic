@@ -16,6 +16,13 @@ import {
 } from "@hackoregon/component-library";
 import TempLoader from "../TempLoader/TempLoader";
 
+const RACE_LABEL_MAP = {
+  black: "Black",
+  white: "White",
+  hisp: "Hispanic or Latino",
+  asian: "Asian/Pacific Islander"
+};
+
 const HomeAppreciationVisualization = ({ data }) => {
   if (
     !data ||
@@ -51,10 +58,11 @@ const HomeAppreciationVisualization = ({ data }) => {
       }
     ]
   );
-
-  const barChartData = data.homeownershipByRace.value.results.filter(
-    el => el.race === "black" || el.race === "white"
   );
+  const barChartData = data.homeownershipByRace.value.results.map(el => ({
+    ...el,
+    label: RACE_LABEL_MAP[el.race]
+  }));
 
   // Map Data
   const polygonFieldName = "appreciation_estimates";
@@ -68,18 +76,11 @@ const HomeAppreciationVisualization = ({ data }) => {
 
   return (
     <span>
-      <strong style={{ color: "crimson" }}>
-        BarChart Visualization TODO:
-        <ul>
-          <li>...why are the labels RGB values??</li>
-        </ul>
-      </strong>
       <HorizontalBarChart
         data={barChartData}
         dataValue="home_ownership_rate"
-        dataLabel="race"
+        dataLabel="label"
         title="Home Ownership By Race In Multhomah County (1990)"
-        subtitle="Subtitle"
         xLabel="Home Ownership Rate"
         yLabel="Race"
         dataValueFormatter={x => civicFormat.percentage(x)}
