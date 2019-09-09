@@ -74,7 +74,7 @@ const MapTooltip = props => {
         </div>
       )}
       {tooltipDataArray.map(el => (
-        <div>
+        <div key={el.name}>
           <strong>{`${el.name}: `}</strong>
           {getProperty(tooltipInfo.properties[el.field], el.formatField)}
         </div>
