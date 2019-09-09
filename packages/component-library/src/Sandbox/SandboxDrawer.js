@@ -307,13 +307,13 @@ const SandboxDrawer = props => {
                 const keyAllOptions = matchFound
                   ? Object.keys(
                       foundationData[dataIndex].data[0].properties
-                    ).filter(c =>
-                      c.includes(
-                        foundationData[dataIndex].fieldName.color.match(
-                          /^[a-zA-Z]+/
-                        )
-                      )
-                    )
+                    ).filter(c => {
+                      const fieldName =
+                        foundationData[dataIndex].fieldName.color;
+                      const a = c.match(/^[a-zA-Z]+/);
+                      const b = fieldName.match(/^[a-zA-Z]+/);
+                      return a[0] === b[0];
+                    })
                   : [];
                 // console.log("keyAllOptions:", keyAllOptions);
                 const keyOptions =
