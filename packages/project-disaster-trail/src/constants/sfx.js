@@ -27,8 +27,8 @@ const startRecordSFX = new Howl({
 });
 
 const SFX = {
-  BAD_CHOICE: goodChoiceSFX,
-  GOOD_CHOICE: badChoiceSFX,
+  GOOD_CHOICE: goodChoiceSFX,
+  BAD_CHOICE: badChoiceSFX,
   START_RECORD: startRecordSFX
 };
 
