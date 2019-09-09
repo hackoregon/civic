@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
-import moment from "moment";
 import PropTypes from "prop-types";
 import { resourceShape } from "reduxful/react-addons";
 import { extent } from "d3-array";
 import { BaseMap, ComparisonMap } from "@hackoregon/component-library";
+import durationStringToSeconds from "../../utils/duration-parser";
 import { DataContext } from "./index";
 
 const infernoColorGradient = [
@@ -112,7 +112,7 @@ const DisturbanceStopsVisualization = () => {
   useEffect(() => {
     setDisturbanceStops2017Extent(
       extent(disturbanceStops2017, d => {
-        return moment.duration(d.properties.duration).asSeconds();
+        return durationStringToSeconds(d.properties.duration);
       })
     );
   }, [disturbanceStops2017]);
@@ -120,7 +120,7 @@ const DisturbanceStopsVisualization = () => {
   useEffect(() => {
     setDisturbanceStops2018Extent(
       extent(disturbanceStops2018, d => {
-        return moment.duration(d.properties.duration).asSeconds();
+        return durationStringToSeconds(d.properties.duration);
       })
     );
   }, [disturbanceStops2018]);

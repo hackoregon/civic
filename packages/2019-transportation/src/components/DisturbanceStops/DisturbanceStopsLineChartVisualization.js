@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
-import moment from "moment";
 import { LineChart } from "@hackoregon/component-library";
+import durationStringToSeconds from "../../utils/duration-parser";
 import { DataContext } from "./index";
 
 export default () => {
@@ -19,7 +19,7 @@ export default () => {
       const startQuarterHour = `${stop.properties.start_quarter_hour}`;
       const accumulatedDuration =
         (acc[startQuarterHour] || 0) +
-        moment.duration(stop.properties.duration).asSeconds();
+        durationStringToSeconds(stop.properties.duration);
       return {
         ...acc,
         [startQuarterHour]: accumulatedDuration
@@ -30,7 +30,7 @@ export default () => {
       const startQuarterHour = `${stop.properties.start_quarter_hour}`;
       const accumulatedDuration =
         (acc[startQuarterHour] || 0) +
-        moment.duration(stop.properties.duration).asSeconds();
+        durationStringToSeconds(stop.properties.duration);
       return {
         ...acc,
         [startQuarterHour]: accumulatedDuration
