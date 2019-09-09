@@ -91,6 +91,7 @@ import "./fonts.css";
 // eslint-disable-next-line import/no-named-as-default
 import RootPage from "./components/RootPage";
 import HomePage from "./components/HomePage";
+import NewHomePage from "./components/NewHomePage";
 import SandboxPage from "./components/SandboxPage";
 import PortlandCollectionPage from "./components/PortlandCollectionPage";
 import CityNotFoundPage from "./components/CityNotFoundPage";
@@ -263,6 +264,10 @@ const routes = {
     {
       path: "2019",
       childRoutes: [
+        {
+          path: "new-home-page",
+          component: NewHomePage
+        },
         {
           path: "template",
           component: Template2019App,
