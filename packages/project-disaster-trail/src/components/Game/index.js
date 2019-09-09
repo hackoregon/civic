@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import styled from "@emotion/styled";
 
 import { getActiveChapterId } from "../../state/chapters";
-import { ATTRACTOR, KIT, TASKS } from "../../constants/chapters";
+import { ATTRACTOR, KIT, TASKS, QUAKE } from "../../constants/chapters";
 import { palette } from "../../constants/style";
 import media from "../../utils/mediaQueries";
 import TitleBar from "../atoms/TitleBar";
@@ -16,6 +16,7 @@ import KitScreen from "./KitScreen/index";
 import TaskScreen from "./TaskScreen/index";
 
 import "@hackoregon/component-library/assets/global.styles.css";
+import quakeSong from "../../../assets/audio/PWolfAfter_Earthquake1fadeinout.mp3";
 
 const Game = ({ activeChapterId }) => {
   const renderChapter = chapterId => {
@@ -24,6 +25,8 @@ const Game = ({ activeChapterId }) => {
         return <KitScreen />;
       case TASKS:
         return <TaskScreen />;
+      case QUAKE:
+        return <DefaultScreen chapterDuration={15} songFile={quakeSong} />;
       default:
         return <DefaultScreen />;
     }

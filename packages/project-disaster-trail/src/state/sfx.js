@@ -1,27 +1,27 @@
 import { createReducer } from "redux-starter-kit";
-// import { Howl, Howler } from "howler";
 
-import { actionTypes as ChapterActionTypes } from "./chapters";
+import SFX, { TYPES } from "../constants/sfx";
 
 const initialState = {};
 
 // CONSTANTS
-export const actionTypes = {};
+export const actionTypes = { PLAY_SFX: "PLAY_SFX" };
+
+// ACTIONS
+
+export const playSFX = id => dispatch => {
+  dispatch({ type: actionTypes.PLAY_SFX, id });
+};
 
 export const sfx = createReducer(initialState, {
-  [ChapterActionTypes.SET_ACTIVE_CHAPTER]: () => {}
+  [actionTypes.PLAY_SFX]: (state, action) => {
+    try {
+      SFX[TYPES[action.id]].play();
+    } catch (error) {
+      // eslint-disable-next-line
+      console.warn("Unknown SFX type requested ", action, error);
+    }
+  }
 });
 
 export default sfx;
-
-/*
-var sound = new Howl({
-  src: ['sound.webm', 'sound.mp3', 'sound.wav'],
-  autoplay: true,
-  loop: true,
-  volume: 0.5,
-  onend: function() {
-    console.log('Finished!');
-  }
-});
-*/

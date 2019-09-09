@@ -1,15 +1,18 @@
 /** @jsx jsx */
 import { css, jsx, keyframes } from "@emotion/core";
-import { memo, Fragment } from "react";
+import { memo, Fragment, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+
+import { goToNextChapter } from "../../../state/chapters";
 import { getKitCreationItems, addItemToPlayerKit } from "../../../state/kit";
 import { addPoints } from "../../../state/user";
 import { palette } from "../../../constants/style";
 import { MapStyle } from "../index";
 import MatchLockInterface from "../../atoms/MatchLockInterface";
 import Kit from "./Kit";
+import Timer from "../../../utils/timer";
 import Song from "../../atoms/Audio/Song";
 
 import kitSong from "../../../../assets/audio/HappyTheme1fadeinout.mp3";
@@ -50,8 +53,26 @@ const bg3 = css`
 const KitScreen = ({
   possibleItems,
   addPointsToState,
-  addItemToPlayerKitInState
+  addItemToPlayerKitInState,
+  endChapter,
+  chapterDuration = 60
 }) => {
+  const [chapterTimer] = useState(new Timer());
+  const [percentComplete, setPercentComplete] = useState(0);
+
+  // start a timer for the _entire_ chapter
+  useEffect(() => {
+    chapterTimer.setDuration(chapterDuration);
+    chapterTimer.addCallback((t, p) => {
+      setPercentComplete(p);
+    });
+    chapterTimer.addCompleteCallback(() => endChapter());
+    chapterTimer.start();
+    return () => {
+      chapterTimer.stop();
+    };
+  }, [chapterDuration, chapterTimer, endChapter]);
+
   const onKitItemSelection = kitItem => {
     if (kitItem.good) {
       addItemToPlayerKitInState(kitItem.type);
@@ -64,7 +85,7 @@ const KitScreen = ({
 
   return (
     <Fragment>
-      <Song track={kitSong} />
+      <Song songFile={kitSong} />
       <MapStyle>
         <div css={bg} />
         <div css={[bg, bg2]} />
@@ -76,7 +97,7 @@ const KitScreen = ({
         onOrbSelection={onKitItemSelection}
         checkItemIsCorrect={checkIfItemIsGood}
         activeScreen="kit"
-        percentComplete={0}
+        percentComplete={percentComplete}
       />
     </Fragment>
   );
@@ -92,7 +113,9 @@ KitScreen.propTypes = {
     })
   ),
   addPointsToState: PropTypes.func,
-  addItemToPlayerKitInState: PropTypes.func
+  addItemToPlayerKitInState: PropTypes.func,
+  endChapter: PropTypes.func,
+  chapterDuration: PropTypes.number
 };
 
 const mapStateToProps = state => ({
@@ -101,7 +124,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   addPointsToState: bindActionCreators(addPoints, dispatch),
-  addItemToPlayerKitInState: bindActionCreators(addItemToPlayerKit, dispatch)
+  addItemToPlayerKitInState: bindActionCreators(addItemToPlayerKit, dispatch),
+  endChapter() {
+    dispatch(goToNextChapter());
+  }
 });
 
 export default connect(

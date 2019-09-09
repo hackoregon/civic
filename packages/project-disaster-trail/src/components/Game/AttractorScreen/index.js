@@ -6,8 +6,10 @@ import PropTypes from "prop-types";
 
 import { palette } from "../../../constants/style";
 import { goToNextChapter } from "../../../state/chapters";
+import { playSFX as _playSFX } from "../../../state/sfx";
 import media from "../../../utils/mediaQueries";
 import Song from "../../atoms/Audio/Song";
+import { TYPES as SFX_TYPES } from "../../../constants/sfx";
 
 import attractorSong from "../../../../assets/audio/PWolf-happysong1wfadeinout.mp3";
 
@@ -110,17 +112,24 @@ const bg3 = css`
   animation-duration: 10s;
 `;
 
-const AttractorScreen = ({ goToChapter }) => {
+const AttractorScreen = ({ goToChapter, playSFX }) => {
   return (
     <div css={pageWrapper}>
-      <Song track={attractorSong} />
+      <Song songFile={attractorSong} />
       <div css={bg} />
       <div css={[bg, bg2]} />
       <div css={[bg, bg3]} />
       <div css={contentWrapper}>
         <h1 css={titleFont}>EARTHQUAKE HEROES</h1>
         <div css={buttonWrapper}>
-          <button type="button" onClick={goToChapter} css={buttonStyle}>
+          <button
+            type="button"
+            onClick={() => {
+              playSFX(SFX_TYPES.START_RECORD);
+              goToChapter();
+            }}
+            css={buttonStyle}
+          >
             <h2 css={buttonFont}>PLAY</h2>
           </button>
         </div>
@@ -130,7 +139,8 @@ const AttractorScreen = ({ goToChapter }) => {
 };
 
 AttractorScreen.propTypes = {
-  goToChapter: PropTypes.func
+  goToChapter: PropTypes.func,
+  playSFX: PropTypes.func
 };
 
 export default connect(
@@ -138,6 +148,9 @@ export default connect(
   dispatch => ({
     goToChapter(chapter) {
       dispatch(goToNextChapter(chapter));
+    },
+    playSFX(id) {
+      dispatch(_playSFX(id));
     }
   })
 )(memo(AttractorScreen));
