@@ -7,7 +7,8 @@ import {
   VictoryChart,
   VictoryLabel,
   VictoryPortal,
-  VictoryTooltip
+  VictoryTooltip,
+  VictoryGroup
 } from "victory";
 
 import { ThemeProvider } from "emotion-theming";
@@ -22,6 +23,7 @@ const BarChart = ({
   data,
   dataKey,
   dataValue,
+  dataSeries,
   domain,
   title,
   subtitle,
@@ -36,6 +38,9 @@ const BarChart = ({
 }) => {
   const safeData = data && data.length ? data : [{}];
   const chartDomain = domain || getDefaultDomain(safeData, dataKey, dataValue);
+  const categories = dataSeries && [
+    ...new Set(safeData.map(d => d[dataSeries]))
+  ];
 
   return (
     <ThemeProvider theme={theme}>
@@ -84,32 +89,73 @@ const BarChart = ({
                 y={295}
               />
             </VictoryPortal>
-            <VictoryBar
-              alignment="middle"
-              labelComponent={
-                <VictoryTooltip
-                  x={325}
-                  y={0}
-                  orientation="bottom"
-                  pointerLength={0}
-                  cornerRadius={0}
-                  theme={theme}
-                />
-              }
-              data={safeData.map(d => ({
-                dataKey: d[dataKey],
-                dataValue: d[dataValue],
-                label: `${xLabel}: ${xNumberFormatter(
-                  d[dataKey]
-                )} • ${yLabel}: ${yNumberFormatter(d[dataValue])}`
-              }))}
-              events={chartEvents(theme)}
-              x="dataKey"
-              y="dataValue"
-              title="Bar Chart"
-              style={{ data: { width: barWidth } }}
-              animate
-            />
+            {!dataSeries && (
+              <VictoryBar
+                alignment="middle"
+                labelComponent={
+                  <VictoryTooltip
+                    x={325}
+                    y={0}
+                    orientation="bottom"
+                    pointerLength={0}
+                    cornerRadius={0}
+                    theme={theme}
+                  />
+                }
+                data={safeData.map(d => ({
+                  dataKey: d[dataKey],
+                  dataValue: d[dataValue],
+                  label: `${xLabel}: ${xNumberFormatter(
+                    d[dataKey]
+                  )} • ${yLabel}: ${yNumberFormatter(d[dataValue])}`
+                }))}
+                events={chartEvents(theme)}
+                x="dataKey"
+                y="dataValue"
+                title="Bar Chart"
+                style={{ data: { width: barWidth } }}
+                animate
+              />
+            )}
+            {dataSeries && (
+              <VictoryGroup
+                offset={(barWidth || theme.bar.style.data.width) * 1.5}
+                colorScale={theme.group.colorScale}
+              >
+                {categories.map(category => (
+                  <VictoryBar
+                    alignment="middle"
+                    labelComponent={
+                      <VictoryTooltip
+                        x={325}
+                        y={0}
+                        orientation="bottom"
+                        pointerLength={0}
+                        cornerRadius={0}
+                        theme={theme}
+                      />
+                    }
+                    data={safeData
+                      .filter(d => d[dataSeries] === category)
+                      .map(d => ({
+                        dataKey: d[dataKey],
+                        dataValue: d[dataValue],
+                        label: `${xLabel}: ${xNumberFormatter(
+                          d[dataKey]
+                        )} • ${yLabel}: ${yNumberFormatter(d[dataValue])}`
+                      }))}
+                    events={chartEvents(theme)}
+                    x="dataKey"
+                    y="dataValue"
+                    title="Bar Chart"
+                    style={{
+                      data: { width: barWidth || theme.bar.style.data.width }
+                    }}
+                    animate
+                  />
+                ))}
+              </VictoryGroup>
+            )}
           </VictoryChart>
         </DataChecker>
       </ChartContainer>
@@ -123,6 +169,7 @@ BarChart.propTypes = {
   error: PropTypes.string,
   dataKey: PropTypes.string,
   dataValue: PropTypes.string,
+  dataSeries: PropTypes.string,
   domain: PropTypes.shape({
     x: PropTypes.arrayOf(PropTypes.number),
     y: PropTypes.arrayOf(PropTypes.number)
@@ -141,6 +188,7 @@ BarChart.defaultProps = {
   data: null,
   dataKey: "x",
   dataValue: "y",
+  dataSeries: null,
   domain: null,
   title: null,
   subtitle: null,
