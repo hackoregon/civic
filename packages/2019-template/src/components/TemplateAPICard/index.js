@@ -11,13 +11,8 @@ import api from "../../state/template-api-data/api";
 const TemplateAPICard = ({ init, data, Layout }) => {
   useEffect(() => {
     init();
-  }, [
-    /*
-    https://reactjs.org/docs/hooks-effect.html#tip-optimizing-performance-by-skipping-effects
-
-    Add second argument to prevent useEffect running init() again
-    */
-  ]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const loading = !isLoaded(data.ridershipOverTime);
 
@@ -38,6 +33,8 @@ TemplateAPICard.propTypes = {
   data: PropTypes.shape({ ridershipOverTime: resourceShape }),
   Layout: PropTypes.func
 };
+
+TemplateAPICard.tags = TemplateAPICardMeta().tags;
 
 export default connect(
   state => ({

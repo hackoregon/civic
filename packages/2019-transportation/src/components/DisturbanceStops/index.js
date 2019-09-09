@@ -8,13 +8,10 @@ import disturbanceStopsMeta from "./disturbanceStopsMeta";
 import api from "../../state/disturbance-stops/api";
 
 const DisturbanceStops = ({ init, data, Layout }) => {
-  useEffect(
-    () => {
-      init();
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    },
-    [init]
-  );
+  useEffect(() => {
+    init();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <CivicCard cardMeta={disturbanceStopsMeta} data={data} Layout={Layout} />

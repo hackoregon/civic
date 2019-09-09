@@ -42,6 +42,8 @@ import screenGridMapStory from "./ScreenGridMap.story";
 import selectStory from "./Select.story";
 import sliderStory from "./Slider.story";
 import stackedAreaChart from "./StackedAreaChart.story";
+import chipcomponentstory from "./ChipComponent.story";
+import cardListStory from "./CardList.story";
 
 import AccessibilityGuidelinesStyle from "./styleGuideStories/AccessibilityGuidelinesStyle.story";
 import CardsStyle from "./styleGuideStories/CardsStyle.story";
@@ -173,6 +175,8 @@ pdfStory();
 placeholderStory();
 pullQuoteStory();
 sandboxStory();
+chipcomponentstory();
+cardListStory();
 
 // Legacy components used in 2017 package. Not supported for ongoing development.
 // editableStory();

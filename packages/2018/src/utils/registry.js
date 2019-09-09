@@ -1,3 +1,5 @@
+import { flattenDeep, countBy } from "lodash";
+
 export default class Registry {
   constructor(entries) {
     this.entries = entries.slice();
@@ -6,6 +8,16 @@ export default class Registry {
 
   get length() {
     return this.entries.length;
+  }
+
+  get tags() {
+    return countBy(
+      flattenDeep(
+        this.entries.map(entry =>
+          entry.component.tags ? entry.component.tags : []
+        )
+      )
+    );
   }
 
   // Ensure that there are no duplicate entries in the registry
