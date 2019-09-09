@@ -16,6 +16,7 @@ const HolcRedlining = ({ init, data, Layout }) => {
 };
 
 HolcRedlining.displayName = "HolcRedlining";
+HolcRedlining.tags = holcRedliningMeta().tags;
 
 HolcRedlining.propTypes = {
   init: PropTypes.func,

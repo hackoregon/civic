@@ -18,6 +18,7 @@ const HomeOwnershipRates = ({ init, data, Layout }) => {
 };
 
 HomeOwnershipRates.displayName = "HomeOwnershipRates";
+HomeOwnershipRates.tags = homeOwnershipRatesMeta().tags;
 
 HomeOwnershipRates.propTypes = {
   init: PropTypes.func,

@@ -17,7 +17,7 @@ const BlackPopulationChangeMeta = (/* data */) => ({
   visualization: BlackPopulationChangeVisualization, // data, isLoading are passed to this as props
   additionalText: <p>ADDITIONAL TEXT: TBD</p>,
   shareText: "TODO: Add share text!",
-  tags: ["Housing", "Portland"],
+  tags: ["Housing", "Race", "Map", "Portland"],
   selector: null,
   analysis: (
     <Collapsable>

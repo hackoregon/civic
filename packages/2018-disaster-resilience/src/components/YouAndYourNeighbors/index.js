@@ -19,6 +19,7 @@ const YouAndYourNeighbors = ({ init, data, Layout }) => {
 };
 
 YouAndYourNeighbors.displayName = "YouAndYourNeighbors";
+YouAndYourNeighbors.tags = youAndYourNeighborsMeta().tags;
 
 YouAndYourNeighbors.propTypes = {
   init: PropTypes.func,

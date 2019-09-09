@@ -19,6 +19,7 @@ const DisturbanceStops = ({ init, data, Layout }) => {
 };
 
 DisturbanceStops.displayName = "DisturbanceStops";
+DisturbanceStops.tags = disturbanceStopsMeta().tags;
 
 DisturbanceStops.propTypes = {
   init: PropTypes.func,

@@ -27,6 +27,7 @@ const BlackPopulationChange = ({ init, data, Layout }) => {
 };
 
 BlackPopulationChange.displayName = "BlackPopulationChange";
+BlackPopulationChange.tags = blackPopulationChangeMeta().tags;
 
 BlackPopulationChange.propTypes = {
   init: PropTypes.func,

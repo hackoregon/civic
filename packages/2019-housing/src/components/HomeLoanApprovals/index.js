@@ -26,6 +26,7 @@ const HomeLoanApprovals = ({ init, data, Layout }) => {
 };
 
 HomeLoanApprovals.displayName = "HomeLoanApprovals";
+HomeLoanApprovals.tags = homeLoanApprovalsMeta().tags;
 
 HomeLoanApprovals.propTypes = {
   init: PropTypes.func,
