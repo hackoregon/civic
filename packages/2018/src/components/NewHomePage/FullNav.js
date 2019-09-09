@@ -144,7 +144,7 @@ const FullNav = props => {
 
   return (
     <div css={contentWrapper(props)}>
-      <Link to="/cards">
+      <Link to="/">
         <Logo css={logoStyle} type="squareLogo" />
       </Link>
       <div />

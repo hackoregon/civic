@@ -98,7 +98,7 @@ const SmallNav = () => {
             <img src={hamburgerMenu} alt="Close menu" />
           </button>
         </div>
-        <Link to="/cards" css={logoWrapper}>
+        <Link to="/" css={logoWrapper}>
           <Logo type="squareLogo" css={logoStyle} />
         </Link>
         <div />
@@ -164,7 +164,7 @@ const SmallNav = () => {
           {fullList()}
         </Drawer>
       </div>
-      <Link to="/cards" css={logoWrapper}>
+      <Link to="/" css={logoWrapper}>
         <Logo type="squareLogo" css={logoStyle} />
       </Link>
       <div />
