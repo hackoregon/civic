@@ -3,8 +3,6 @@ import { jsx, css } from "@emotion/core";
 import { Logo, BrandColors } from "@hackoregon/component-library";
 import { defaultFontSize, browserDefaultSize } from "./index.styles";
 
-const condensedWidth = 715;
-
 const footerWrapper = css`
   height: 185px;
   width: 100%;
@@ -26,7 +24,7 @@ const contentWrapper = props => css`
     grid-template-columns: 1fr auto auto;
   }
 
-  @media (max-width: ${condensedWidth}px) {
+  @media (max-width: ${props.condensedWidth}px) {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
     grid-row-gap: 30px;
@@ -41,17 +39,17 @@ const businessWrapper = props => css`
     padding: 0 40px;
   }
 
-  @media (max-width: ${condensedWidth}px) {
+  @media (max-width: ${props.condensedWidth}px) {
     justify-content: start;
     padding: 0;
   }
 `;
 
-const logoStyle = css`
+const logoStyle = props => css`
   height: 90px !important;
   justify-self: end;
 
-  @media (max-width: ${condensedWidth}px) {
+  @media (max-width: ${props.condensedWidth}px) {
     justify-self: start;
   }
 `;

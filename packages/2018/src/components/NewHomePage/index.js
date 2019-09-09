@@ -13,24 +13,46 @@ import placeholderContributorsImg from "../../assets/new-home-page-3.png";
 import placeholderPlatformImg from "../../assets/new-home-page-4.png";
 // import placeholderCivicImg from "../../assets/new-home-page-5.png";
 
+const greatestWidth = 1200;
+const collapseWidth = 845;
+const condensedWidth = 715;
+
 const sectionWorkLayout = css`
-  padding-bottom: 150px;
+  padding-bottom: 120px;
+
+  @media (min-width: ${condensedWidth}px) {
+    padding-bottom: 210px;
+  }
 `;
 
 const sectionContributorLayout = css`
-  padding-bottom: 118px;
+  padding-bottom: 40px;
+
+  @media (min-width: ${condensedWidth}px) {
+    padding-bottom: 95px;
+  }
+
+  @media (min-width: ${collapseWidth}px) {
+    padding-bottom: 150px;
+  }
 `;
 
 const sectionPlatformLayout = css`
-  padding-bottom: 77px;
+  margin-bottom: 60px;
+
+  @media (min-width: ${condensedWidth}px) {
+    margin-bottom: 100px;
+  }
+
+  @media (min-width: ${collapseWidth}px) {
+    padding-bottom: 77px;
+    margin-bottom: 160px;
+  }
 `;
 
 const sectionCivicLayout = css`
   padding-bottom: 186px;
 `;
-
-const greatestWidth = 1200;
-const collapseWidth = 845;
 
 const HomePage = () => {
   return (
@@ -39,7 +61,7 @@ const HomePage = () => {
         styles={css`
           font-size: 22px;
           ${emotionReset}
-          ${indexStyle(greatestWidth)}
+          ${indexStyle(greatestWidth, collapseWidth)}
         `}
       />
       <Header greatestWidth={greatestWidth} collapseWidth={collapseWidth} />
@@ -220,7 +242,11 @@ const HomePage = () => {
           /> */}
         </div>
       </div>
-      <Footer greatestWidth={greatestWidth} collapseWidth={collapseWidth} />
+      <Footer
+        greatestWidth={greatestWidth}
+        collapseWidth={collapseWidth}
+        condensedWidth={condensedWidth}
+      />
     </Fragment>
   );
 };

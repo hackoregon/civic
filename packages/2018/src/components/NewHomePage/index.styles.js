@@ -15,7 +15,7 @@ const textStandard = {
   lineHeight: `${40 / defaultFontSize}rem`
 };
 
-export default greatestWidth => ({
+export default (greatestWidth, collapseWidth) => ({
   div: {
     boxSizing: "border-box"
   },
@@ -35,7 +35,11 @@ export default greatestWidth => ({
     fontSize: `${60 / defaultFontSize}rem`,
     fontWeight: "500",
     lineHeight: "118%",
-    marginBottom: `${17 / defaultFontSize}rem`
+    marginBottom: `${17 / defaultFontSize}rem`,
+
+    [`@media (max-width: ${collapseWidth}px)`]: {
+      padding: "0 22px"
+    }
   },
 
   h2: {
@@ -45,14 +49,22 @@ export default greatestWidth => ({
     lineHeight: "118%",
     position: "absolute",
     top: `-${60 / defaultFontSize}rem`,
-    left: "0"
+    left: "0",
+
+    [`@media (max-width: ${collapseWidth}px)`]: {
+      padding: "0 22px"
+    }
   },
 
   ".section-header": {
     ...textStandard,
     fontSize: `${48 / defaultFontSize}rem`,
     fontWeight: "300",
-    lineHeight: "118%"
+    lineHeight: "118%",
+
+    [`@media (max-width: ${collapseWidth}px)`]: {
+      padding: "0 22px"
+    }
   },
 
   ".audience-content": {
@@ -70,8 +82,14 @@ export default greatestWidth => ({
     fontSize: `${40 / defaultFontSize}rem`,
     fontWeight: "300",
     lineHeight: "120%",
-    width: "600px",
-    marginBottom: `${60 / defaultFontSize}rem`
+    maxWidth: "600px",
+    width: "100%",
+    marginBottom: `${60 / defaultFontSize}rem`,
+
+    [`@media (max-width: ${collapseWidth}px)`]: {
+      padding: "0 22px",
+      fontSize: `${24 / defaultFontSize}rem`
+    }
   },
 
   ".intro-text": {
@@ -103,12 +121,21 @@ export default greatestWidth => ({
     width: "100%",
     maxWidth: `${greatestWidth}px`,
     margin: `${60 + headerHeight}px auto 60px`,
-    padding: "0 20px"
+    padding: "0 20px",
+
+    [`@media (max-width: ${collapseWidth}px)`]: {
+      margin: `107px auto 60px`,
+      padding: "0"
+    }
   },
 
   ".intro-wrapper": {
-    width: introWidth,
-    margin: "0 auto 84px"
+    maxWidth: introWidth,
+    margin: "0 auto 84px",
+
+    [`@media (max-width: ${collapseWidth}px)`]: {
+      padding: "0 22px"
+    }
   },
 
   ".home-section": {
@@ -116,11 +143,20 @@ export default greatestWidth => ({
     backgroundColor: subdued.rgba,
     margin: "53px auto 205px",
     padding: "88px 120px 0",
-    position: "relative"
+    position: "relative",
+
+    [`@media (max-width: ${collapseWidth}px)`]: {
+      margin: "53px 0 205px",
+      padding: "88px 22px 0"
+    }
   },
 
   ".section-button-container": {
-    margin: "52px 0 52px"
+    margin: "52px 0 52px",
+
+    [`@media (max-width: ${collapseWidth}px)`]: {
+      margin: "34px auto 34px"
+    }
   },
 
   ".link-container": {
@@ -132,12 +168,18 @@ export default greatestWidth => ({
 
   // Placeholder styles
   ".placeholder-intro-image": {
-    width: introWidth,
+    width: "100%",
+    maxWidth: introWidth,
     marginBottom: "28px"
   },
 
   ".placeholder-section-image": {
     width: "calc(100% - 2 * 120px)",
-    position: "absolute"
+    position: "absolute",
+
+    [`@media (max-width: ${collapseWidth}px)`]: {
+      width: "100%",
+      marginLeft: "-22px"
+    }
   }
 });
