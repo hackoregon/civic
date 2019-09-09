@@ -14,7 +14,9 @@ import Paper from "@material-ui/core/Paper";
 import Popper from "@material-ui/core/Popper";
 import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
+import { ThemeProvider } from "@material-ui/styles";
 
+import { MaterialTheme } from "../_Themes/index";
 import PullQuote from "../PullQuote/PullQuote";
 import Placeholder from "../Placeholder/Placeholder";
 import Chip from "../Chip/Chip";
@@ -48,6 +50,19 @@ const authorPhoto = css`
   width: 50%;
   filter: grayscale(100%);
   cursor: pointer;
+`;
+
+const headerStyle = css`
+  display: grid;
+  padding-bottom: 20px;
+`;
+
+const titleStyle = css`
+  margin: 30px 0 20px;
+`;
+
+const centerSelf = css`
+  justify-self: center;
 `;
 
 const demoAuthorPhotos = [
@@ -99,23 +114,26 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
   ];
 
   return (
-    <Fragment>
+    <ThemeProvider theme={MaterialTheme}>
       <article>
         {cardMeta.title && (
           <div css={[sectionMarginSmall, sectionMaxWidthSmall]}>
-            <header>
-              <h1 id="title">{cardMeta.title}</h1>
+            <header css={headerStyle}>
+              <h1 id="title" css={titleStyle}>
+                {cardMeta.title}
+              </h1>
               <ButtonGroup
                 variant="contained"
-                color="primary"
+                color="secondary"
                 ref={shareButtonAnchorRef}
                 aria-label="split button"
+                css={centerSelf}
               >
                 <Button onClick={handleShareButtonToggle}>
                   {shareButtonText}
                 </Button>
                 <Button
-                  color="primary"
+                  color="secondary"
                   size="small"
                   aria-owns={shareButtonOpen ? "menu-list-grow" : undefined}
                   aria-haspopup="true"
@@ -129,13 +147,14 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
                 anchorEl={shareButtonAnchorRef.current}
                 transition
                 disablePortal
+                placement="bottom-end"
               >
                 {({ TransitionProps, placement }) => (
                   <Grow
                     {...TransitionProps}
                     style={{
                       transformOrigin:
-                        placement === "bottom" ? "center top" : "center bottom"
+                        placement === "bottom" ? "center top" : "right bottom"
                     }}
                   >
                     <Paper id="menu-list-grow">
@@ -307,7 +326,7 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
           </h3>
         </Placeholder>
       </section>
-    </Fragment>
+    </ThemeProvider>
   );
 }
 
