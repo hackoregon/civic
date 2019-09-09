@@ -1,9 +1,8 @@
-/* TODO: Fix linting errors */
-/* eslint-disable */
-
-import React, { Component } from "react";
-import { css } from "emotion";
+import { Component } from "react";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 import PropTypes from "prop-types";
+import shortid from "shortid";
 import NavSubMenu from "./NavSubMenu";
 import NavLink from "./NavRouterLink";
 import Icon from "../Icon/Icon";
@@ -131,46 +130,55 @@ class Nav extends Component {
     e.preventDefault();
     const items = menu;
 
-    this.setState(() => ({ menuActive: !this.state.menuActive, items }));
+    this.setState(prevState => ({ menuActive: !prevState.menuActive, items }));
   };
 
   render() {
     const {
       menu = defaultMenu,
-      toggleNestedMenu = this.handleClick
+      toggleNestedMenu = this.handleClick,
+      toggleSubNav
     } = this.props;
+    const { menuActive, items } = this.state;
+    /* eslint-disable jsx-a11y/anchor-is-valid */
+    /* eslint-disable jsx-a11y/click-events-have-key-events */
+    /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
     return (
-      <div className={navClass}>
-        <a className={exClass}>
+      <div css={navClass}>
+        <a css={exClass}>
           <Icon
             key="nav-ex"
             className="fa fa-times"
-            handleClick={this.props.toggleSubNav}
+            handleClick={toggleSubNav}
           />
         </a>
         <ul>
-          {menu.map((item, idx) =>
+          {menu.map(item =>
             item.nestedMenu ? (
               <li
-                key={idx}
+                key={shortid.generate()}
                 onClick={e => toggleNestedMenu(item.name, item.nestedMenu, e)}
               >
                 <a className="nav-item">
                   {item.name}
                   <Icon className="fa fa-angle-down" />
                 </a>
-              </li> // eslint-disable-line
+              </li>
             ) : (
-              <NavLink key={idx} name={item.name} path={item.path} />
+              <NavLink
+                key={shortid.generate()}
+                name={item.name}
+                path={item.path}
+              />
             )
           )}
         </ul>
-        <NavSubMenu
-          isVisible={this.state.menuActive}
-          items={this.state.items}
-        />
+        <NavSubMenu isVisible={menuActive} items={items} />
       </div>
     );
+    /* eslint-enable jsx-a11y/anchor-is-valid */
+    /* eslint-disable jsx-a11y/click-events-have-key-events */
+    /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
   }
 }
 

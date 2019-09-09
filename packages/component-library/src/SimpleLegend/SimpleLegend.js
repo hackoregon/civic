@@ -1,9 +1,10 @@
 import PropTypes from "prop-types";
-import React from "react";
-import { css } from "emotion";
-import CivicVictoryTheme from "../VictoryTheme/VictoryThemeIndex";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
+import shortid from "shortid";
+import { VictoryTheme } from "../_Themes/index";
 
-const SimpleLegend = ({ colorScale, legendData }) => {
+const SimpleLegend = ({ colorScale, legendData, theme }) => {
   const legendStyle = css`
     font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
     font-size: 14px;
@@ -16,15 +17,15 @@ const SimpleLegend = ({ colorScale, legendData }) => {
     }
   `;
 
-  const colorMap = colorScale || CivicVictoryTheme.civic.group.colorScale;
+  const colorMap = colorScale || theme.group.colorScale;
 
   if (legendData.length) {
     return (
-      <div className={legendStyle}>
+      <div css={legendStyle}>
         {legendData.map((group, idx) => (
           <span
-            key={group.name}
-            className={css`
+            key={shortid.generate()}
+            css={css`
               margin-left: 10px;
             `}
           >
@@ -32,7 +33,7 @@ const SimpleLegend = ({ colorScale, legendData }) => {
               <circle cx="5" cy="5" r="5" fill={colorMap[idx]} />
             </svg>
             <span
-              className={css`
+              css={css`
                 margin-left: 5px;
               `}
             >
@@ -48,12 +49,14 @@ const SimpleLegend = ({ colorScale, legendData }) => {
 
 SimpleLegend.propTypes = {
   colorScale: PropTypes.arrayOf(PropTypes.string),
-  legendData: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+  legendData: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string })),
+  theme: PropTypes.shape({})
 };
 
 SimpleLegend.defaultProps = {
   colorScale: null,
-  legendData: null
+  legendData: null,
+  theme: VictoryTheme
 };
 
 export default SimpleLegend;

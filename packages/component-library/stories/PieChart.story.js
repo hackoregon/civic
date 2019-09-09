@@ -7,9 +7,12 @@ import {
   number,
   object,
   array,
-  boolean
+  boolean,
+  optionsKnob as options
 } from "@storybook/addon-knobs";
 import { PieChart } from "../src";
+import { VictoryCrazyTheme, VictoryTheme } from "../src/_Themes/index";
+import { getKeyNames } from "./shared";
 import notes from "./pieChart.notes.md";
 
 const GROUP_IDS = {
@@ -68,7 +71,7 @@ export default () =>
           "Contributions reported to ORESTAR by category",
           GROUP_IDS.LABELS
         );
-        const useLegend = boolean("Use legend", true, GROUP_IDS.DESIGN);
+        const useLegend = boolean("Use legend", false, GROUP_IDS.DESIGN);
         const halfDoughnut = boolean("Half doughnut", true, GROUP_IDS.DESIGN);
         const sampleData = [
           { contributor: "Business entity", amount: 35 },
@@ -82,19 +85,20 @@ export default () =>
         const chartHeight = number("Chart height", 350, {}, GROUP_IDS.CUSTOM);
         const chartWidth = number("Chart width", 650, {}, GROUP_IDS.CUSTOM);
         const innerRadius = number("Inner radius", 50, {}, GROUP_IDS.CUSTOM);
-        const categoricalColors = [
-          "#DC4556",
-          "#1E62BD",
-          "#19B7AA",
-          "#721D7C",
-          "#FFB226"
-        ];
-        const colors = array(
-          "Colors",
-          categoricalColors,
-          ",",
-          GROUP_IDS.CUSTOM
+        const loading = boolean("Loading", false, GROUP_IDS.CUSTOM);
+        const themes = {
+          VictoryTheme,
+          VictoryCrazyTheme
+        };
+        const themeOptions = getKeyNames(themes);
+        const theme = options(
+          "Visualization theme",
+          themeOptions,
+          "VictoryTheme",
+          { display: "select" },
+          GROUP_IDS.DESIGN
         );
+        const colors = array("Colors", [], ",", GROUP_IDS.DESIGN);
         return (
           <PieChart
             title={title}
@@ -108,6 +112,8 @@ export default () =>
             innerRadius={innerRadius}
             halfDoughnut={halfDoughnut}
             useLegend={useLegend}
+            theme={(name => themes[name])(theme)}
+            loading={loading}
           />
         );
       },

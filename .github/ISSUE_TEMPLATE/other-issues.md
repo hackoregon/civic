@@ -1,8 +1,9 @@
 ---
-name: Other Issues 🤷‍♀️
+name: "Other Issues \U0001F937‍♀️"
 about: For all other issues
 title: ""
 labels: ""
+assignees: ""
 ---
 
 <!--

@@ -32,7 +32,9 @@ const transportationCardMeta = (/* data */) => ({
   ),
   shareText:
     "Ice cream candy canes brownie marzipan jelly chocolate bar marshmallow.",
-  tags: ["Transportation", "Bus", "Rail", "Portland"],
+  tags: [
+    /* "Transportation", "Bus", "Rail", "Portland" */
+  ],
   selector: null,
   analysis: (
     <Collapsable>
@@ -113,18 +115,28 @@ const transportationCardMeta = (/* data */) => ({
     </Collapsable>
   ),
   resources: [
-    { link: "http://www.hackoregon.org", description: "Hack Oregon" },
     {
-      link: "https://www.civicsoftwarefoundation.org",
-      description: "Civic Software Foundation"
-    },
-    { link: "https://www.civicplatform.org", description: "Civic Platform" }
+      heading: "Organizations",
+      items: [
+        { link: "http://www.hackoregon.org", description: "Hack Oregon" },
+        {
+          link: "https://www.civicsoftwarefoundation.org",
+          description: "Civic Software Foundation"
+        },
+        { link: "https://www.civicplatform.org", description: "Civic Platform" }
+      ]
+    }
   ],
-  // authors likely an array of keys in the future
   authors: [
-    "https://civicsoftwarefoundation.org/static/human-grid-test-4c90bfc3f316f5d4e104320cb98c43c8.png",
-    "https://civicsoftwarefoundation.org/static/human-grid-test2-ea1849501456af341647068243fc72bb.png"
+    "scicampwinner07@gmail.com",
+    "jim.hopper@yahoo.com",
+    "byers0180@hotmail.com"
   ]
+  // authors likely an array of keys in the future
+  // authors: [
+  //   "https://civicsoftwarefoundation.org/static/human-grid-test-4c90bfc3f316f5d4e104320cb98c43c8.png",
+  //   "https://civicsoftwarefoundation.org/static/human-grid-test2-ea1849501456af341647068243fc72bb.png"
+  // ]
 });
 
 export default transportationCardMeta;

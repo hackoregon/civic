@@ -2,8 +2,8 @@ import App from "./components/App";
 
 const routes = () => [
   {
-    path: "housing",
-    name: "housing",
+    path: "2019-housing",
+    name: "2019-housing",
     component: App
   }
 ];

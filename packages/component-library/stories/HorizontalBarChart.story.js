@@ -10,7 +10,12 @@ import {
   select,
   optionsKnob as options
 } from "@storybook/addon-knobs";
-import { HorizontalBarChart, civicFormat } from "../src";
+import {
+  HorizontalBarChart,
+  civicFormat,
+  VictoryCrazyTheme,
+  VictoryTheme
+} from "../src";
 import { getKeyNames } from "./shared";
 import notes from "./horizontalBarChart.notes.md";
 
@@ -109,6 +114,19 @@ export default () =>
         const sampleDomain = { x: [1, 5], y: [0, 8000] };
         const domain = object("Domain", sampleDomain, GROUP_IDS.CUSTOM);
         const minimalist = boolean("Minimalist", false, GROUP_IDS.CUSTOM);
+        const themes = {
+          VictoryTheme,
+          VictoryCrazyTheme
+        };
+        const themeOptions = getKeyNames(themes);
+        const theme = options(
+          "Visualization theme",
+          themeOptions,
+          "VictoryTheme",
+          { display: "select" },
+          GROUP_IDS.CUSTOM
+        );
+        const loading = boolean("Loading", false, GROUP_IDS.CUSTOM);
 
         return (
           <HorizontalBarChart
@@ -123,6 +141,8 @@ export default () =>
             yLabel={yLabel}
             dataValueFormatter={x => civicFormat[optionSelectX](x)}
             minimalist={minimalist}
+            theme={(name => themes[name])(theme)}
+            loading={loading}
           />
         );
       },

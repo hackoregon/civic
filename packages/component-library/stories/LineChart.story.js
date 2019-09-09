@@ -1,5 +1,5 @@
-import React from "react";
-import { css } from "emotion";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
 import {
@@ -7,9 +7,16 @@ import {
   text,
   number,
   withKnobs,
-  optionsKnob as options
+  optionsKnob as options,
+  boolean
 } from "@storybook/addon-knobs";
-import { LineChart, SimpleLegend, civicFormat } from "../src";
+import {
+  LineChart,
+  SimpleLegend,
+  civicFormat,
+  VictoryCrazyTheme,
+  VictoryTheme
+} from "../src";
 import { getKeyNames } from "./shared";
 import notes from "./lineChart.notes.md";
 
@@ -22,7 +29,7 @@ const GROUP_IDS = {
 const xFormatterOptions = getKeyNames(civicFormat);
 const yFormatterOptions = getKeyNames(civicFormat);
 
-const customLegend = legendData => {
+const customLegend = (legendData, theme) => {
   const legendStyle = css`
     font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
     font-size: 14px;
@@ -37,11 +44,11 @@ const customLegend = legendData => {
   `;
 
   return (
-    <div className={legendContainer}>
-      <SimpleLegend legendData={legendData} />
-      <legend className={legendStyle}>
+    <div css={legendContainer}>
+      <SimpleLegend legendData={legendData} theme={theme} />
+      <legend css={legendStyle}>
         <span
-          className={css`
+          css={css`
             margin-left: 5px;
           `}
         >
@@ -53,7 +60,7 @@ const customLegend = legendData => {
             <circle cx="45" cy="5" r="5" />
           </svg>
           <span
-            className={css`
+            css={css`
               margin-left: 5px;
             `}
           >
@@ -89,11 +96,6 @@ export default () =>
           { year: 2005, ridership: 134569, series: "sunday" }
         ];
         const sampleDataSeries = "series";
-        const sampleDataSeriesLabel = [
-          { category: "weekday", label: "Weekday" },
-          { category: "saturday", label: "Saturday" },
-          { category: "sunday", label: "Sunday" }
-        ];
 
         const title = text(
           "Title",
@@ -129,11 +131,6 @@ export default () =>
           sampleDataSeries,
           GROUP_IDS.DATA
         );
-        const dataSeriesLabel = object(
-          "Data series labels",
-          sampleDataSeriesLabel,
-          GROUP_IDS.DATA
-        );
         const data = object("Data", sampleTransportationData, GROUP_IDS.DATA);
 
         return (
@@ -142,7 +139,6 @@ export default () =>
             dataKey={dataKey}
             dataValue={dataValue}
             dataSeries={dataSeries}
-            dataSeriesLabel={dataSeriesLabel}
             subtitle={subtitle}
             title={title}
             xLabel={xLabel}
@@ -232,6 +228,19 @@ export default () =>
         const domain = object("Domain", sampleDomain, GROUP_IDS.CUSTOM);
         // A separate issue will be created for the size knob.
         // const size = object("Size", sampleSize, GROUP_IDS.CUSTOM);
+        const themes = {
+          VictoryTheme,
+          VictoryCrazyTheme
+        };
+        const themeOptions = getKeyNames(themes);
+        const theme = options(
+          "Visualization theme",
+          themeOptions,
+          "VictoryTheme",
+          { display: "select" },
+          GROUP_IDS.CUSTOM
+        );
+        const loading = boolean("Loading", false, GROUP_IDS.CUSTOM);
 
         return (
           <LineChart
@@ -251,6 +260,8 @@ export default () =>
             xNumberFormatter={x => civicFormat[optionSelectX](x)}
             yNumberFormatter={y => civicFormat[optionSelectY](y)}
             legendComponent={customLegend}
+            theme={(name => themes[name])(theme)}
+            loading={loading}
           />
         );
       },

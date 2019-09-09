@@ -2,10 +2,10 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-console */
-import React from "react";
-import { css } from "emotion";
+import { Component } from "react";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 import { storiesOf } from "@storybook/react";
-import { withA11y } from "@storybook/addon-a11y";
 import "react-select/dist/react-select.css";
 import { isArray } from "lodash";
 import { Sandbox } from "../src";
@@ -13,7 +13,7 @@ import { foundations, slides } from "../src/Sandbox/constants";
 
 /* global fetch */
 
-class SandboxStory extends React.Component {
+class SandboxStory extends Component {
   constructor() {
     super();
     this.state = {

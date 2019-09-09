@@ -10,7 +10,7 @@ import {
   optionsKnob as options
 } from "@storybook/addon-knobs";
 import civicFormat from "../src/utils/civicFormat";
-import compareValues from "../src/utils/compareValues"
+import compareValues from "../src/utils/compareValues";
 
 import { getKeyNames } from "./shared";
 import notes from "./barchart.notes.md";
@@ -128,13 +128,16 @@ export default () =>
           dataList.sort(compareValues("population")),
           GROUP_IDS.DATA
         );
+
+        const themes = {
+          VictoryTheme,
+          VictoryCrazyTheme
+        };
+        const themeOptions = getKeyNames(themes);
         const theme = options(
-          "Choose theme",
-          {
-            VictoryCrazyTheme,
-            "Default - VictoryTheme": VictoryTheme
-          },
-          VictoryCrazyTheme,
+          "Visualization theme",
+          themeOptions,
+          "VictoryTheme",
           { display: "select" },
           GROUP_IDS.CUSTOM
         );
@@ -153,7 +156,7 @@ export default () =>
             error={error}
             xNumberFormatter={x => civicFormat[optionSelectX](x)}
             yNumberFormatter={y => civicFormat[optionSelectY](y)}
-            theme={theme}
+            theme={(name => themes[name])(theme)}
           />
         );
       },

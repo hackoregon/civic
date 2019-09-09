@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   arrayOf,
   bool,
@@ -10,7 +10,9 @@ import {
   shape,
   string
 } from "prop-types";
-import { css } from "emotion";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
+import shortid from "shortid";
 import PieChart from "../PieChart/PieChart";
 import HorizontalBarChart from "../HorizontalBarChart/HorizontalBarChart";
 import civicFormat from "../utils/civicFormat";
@@ -134,21 +136,21 @@ const donutPercent = css`
   text-align: center;
 `;
 
-const createTextViz = (text, index) => (
-  <div className={viz} key={index}>
+const createTextViz = text => (
+  <div css={viz} key={shortid.generate()}>
     <h2>{text.title}</h2>
     <h3>{text.data.toLocaleString()}</h3>
   </div>
 );
 
-const createDonutViz = (donut, index) => {
+const createDonutViz = donut => {
   const [percentValue] = donut.data;
   const salmon = "#EE495C";
   const gray = "#a9a9a9";
   return (
-    <div className={viz} key={index}>
+    <div css={viz} key={shortid.generate()}>
       <h2>{donut.title}</h2>
-      <h2 className={donutPercent}>
+      <h2 css={donutPercent}>
         {percentValue.y < 1
           ? civicFormat.percentage(percentValue.y)
           : `${percentValue.y.toFixed(1)}%`}
@@ -165,8 +167,8 @@ const createDonutViz = (donut, index) => {
   );
 };
 
-const createBarsViz = (bars, index) => (
-  <div className={viz} key={index}>
+const createBarsViz = bars => (
+  <div css={viz} key={shortid.generate()}>
     <h2>{bars.title}</h2>
     <HorizontalBarChart
       minimalist={bars.minimalist}
@@ -184,7 +186,7 @@ const createBarsViz = (bars, index) => (
 );
 
 const placeholder = (
-  <div className={viz}>
+  <div css={viz}>
     <h2>Please select a polygon</h2>
   </div>
 );
@@ -209,7 +211,7 @@ const CivicDashboard = props => {
   const visualizations = hasVisualizations ? createVisualizations : placeholder;
 
   const civicWatermark = (
-    <div className={watermarkContainer}>
+    <div css={watermarkContainer}>
       <svg width="134" height="135" xmlns="http://www.w3.org/2000/svg">
         <g fill="none" fillRule="evenodd">
           <path d="M0 134.658V0l11.566 11.597v123.061H0z" fill="#191119" />
@@ -223,9 +225,9 @@ const CivicDashboard = props => {
   );
 
   const visualizationButtons = (
-    <div className={buttonContainer}>
+    <div css={buttonContainer}>
       <div
-        className={display === "description" ? iconActive : icon}
+        css={display === "description" ? iconActive : icon}
         onClick={() => setDisplay("description")}
         onKeyPress={() => setDisplay("description")}
         tabIndex={0}
@@ -234,7 +236,7 @@ const CivicDashboard = props => {
         <div className={ICONS.info} />
       </div>
       <div
-        className={display === "visualizations" ? iconActive : icon}
+        css={display === "visualizations" ? iconActive : icon}
         onClick={() => setDisplay("visualizations")}
         onKeyPress={() => setDisplay("visualizations")}
         tabIndex={0}
@@ -247,25 +249,25 @@ const CivicDashboard = props => {
 
   const dashboardToggleButton = (
     <div
-      className={toggleContainer}
+      css={toggleContainer}
       onClick={() => onClick()}
       onKeyPress={() => onClick()}
       tabIndex={0}
       role="button"
     >
-      <div className={toggleTitle}>
+      <div css={toggleTitle}>
         {isDashboardOpen ? "" : "Please select a polygon"}
       </div>
-      <div className={toggleArrow}>
+      <div css={toggleArrow}>
         <div className={isDashboardOpen ? ICONS.arrowDown : ICONS.arrowUp} />
       </div>
     </div>
   );
 
   return (
-    <div className={container}>
-      <div className={isDashboardOpen ? dashboardOpen : dashboardClosed}>
-        <div className={contentContainer}>
+    <div css={container}>
+      <div css={isDashboardOpen ? dashboardOpen : dashboardClosed}>
+        <div css={contentContainer}>
           {display === "description" ? children : visualizations}
         </div>
         {civicWatermark}

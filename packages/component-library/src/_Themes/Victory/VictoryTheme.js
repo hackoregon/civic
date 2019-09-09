@@ -2,35 +2,19 @@ import { assign } from "lodash";
 import VisualizationColors from "../VisualizationColors";
 import BrandColors from "../Brand/BrandColors";
 
-const categoricalColors = VisualizationColors.categorical;
+const { victoryColors } = VisualizationColors;
 
 // Brand Colors
 const civicPrimary = BrandColors.primary.hex;
 const civicSecondary = BrandColors.secondary.hex;
-const civicTertiary = BrandColors.tertiary.hex;
+const civicTertiary = BrandColors.plumLight.hex; // keeping plumLight for bar fill
 const civicSecondaryLighter = BrandColors.medium.hex;
 const civicSecondaryLightest = BrandColors.subdued.hex;
-
-// Categorical Colors
-const civicCategoricalColor1 = categoricalColors.pink.hex;
-const civicCategoricalColor2 = categoricalColors.green.hex;
-const civicCategoricalColor3 = categoricalColors.blue.hex;
-const civicCategoricalColor4 = categoricalColors.purple.hex;
-const civicCategoricalColor5 = categoricalColors.yellow.hex;
-
-const colors = [
-  civicCategoricalColor1,
-  civicCategoricalColor2,
-  civicCategoricalColor3,
-  civicCategoricalColor4,
-  civicCategoricalColor5,
-  civicTertiary
-];
 
 // *
 // * Typography
 // *
-const sansSerif = "'Roboto Condensed', 'Helvetica Neue', Helvetica, sans-serif";
+const sansSerif = "Roboto Condensed, Helvetica Neue, Helvetica, sans-serif";
 const letterSpacing = "normal";
 const fontSize = 12;
 const fontWeight = "normal";
@@ -209,12 +193,12 @@ export default {
   ),
   group: assign(
     {
-      colorScale: colors
+      colorScale: victoryColors
     },
     baseProps
   ),
   legend: {
-    colorScale: colors,
+    colorScale: victoryColors,
     gutter: 10,
     orientation: "vertical",
     titleOrientation: "top",
@@ -246,7 +230,7 @@ export default {
   ),
   pie: assign(
     {
-      colorScale: colors,
+      colorScale: victoryColors,
       style: {
         data: {
           padding,
@@ -286,7 +270,7 @@ export default {
   ),
   stack: assign(
     {
-      colorScale: colors
+      colorScale: victoryColors
     },
     baseProps
   ),

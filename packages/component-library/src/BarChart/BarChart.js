@@ -34,7 +34,8 @@ const BarChart = ({
   error,
   theme
 }) => {
-  const chartDomain = domain || getDefaultDomain(data, dataKey, dataValue);
+  const safeData = data && data.length ? data : [{}];
+  const chartDomain = domain || getDefaultDomain(safeData, dataKey, dataValue);
 
   return (
     <ThemeProvider theme={theme}>
@@ -44,7 +45,7 @@ const BarChart = ({
         loading={loading}
         error={error}
       >
-        <DataChecker dataAccessors={{ dataKey, dataValue }} data={data}>
+        <DataChecker dataAccessors={{ dataKey, dataValue }} data={safeData}>
           <VictoryChart
             padding={{ left: 90, right: 50, bottom: 50, top: 50 }}
             domainPadding={{ x: [40, 40], y: [0, 0] }}
@@ -95,14 +96,14 @@ const BarChart = ({
                   theme={theme}
                 />
               }
-              data={data.map(d => ({
+              data={safeData.map(d => ({
                 dataKey: d[dataKey],
                 dataValue: d[dataValue],
                 label: `${xLabel}: ${xNumberFormatter(
                   d[dataKey]
                 )} • ${yLabel}: ${yNumberFormatter(d[dataValue])}`
               }))}
-              events={chartEvents}
+              events={chartEvents(theme)}
               x="dataKey"
               y="dataValue"
               title="Bar Chart"

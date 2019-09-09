@@ -20,3 +20,8 @@
 # Story Card Name
 <%title = h.changeCase.title(card)%> 
 
+# api
+<%API = h.changeCase.pascal(api)%>
+
+<%aPI = h.changeCase.camel(api)%>
+

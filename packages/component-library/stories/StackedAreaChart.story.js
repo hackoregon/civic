@@ -1,5 +1,5 @@
-import React from "react";
-import { css } from "emotion";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
@@ -7,11 +7,13 @@ import {
   object,
   text,
   withKnobs,
-  optionsKnob as options
+  optionsKnob as options,
+  boolean
 } from "@storybook/addon-knobs";
 import { StackedAreaChart, civicFormat, SimpleLegend } from "../src";
 import { getKeyNames } from "./shared";
 import notes from "./stackedAreaChart.notes.md";
+import { VictoryCrazyTheme, VictoryTheme } from "../src/_Themes/index";
 
 const GROUP_IDS = {
   LABELS: "Labels",
@@ -22,7 +24,7 @@ const GROUP_IDS = {
 const xFormatterOptions = getKeyNames(civicFormat);
 const yFormatterOptions = getKeyNames(civicFormat);
 
-const customLegend = legendData => {
+const customLegend = (legendData, theme) => {
   const legendStyle = css`
     font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
     font-size: 14px;
@@ -38,11 +40,11 @@ const customLegend = legendData => {
   `;
 
   return (
-    <div className={legendContainer}>
-      <SimpleLegend legendData={legendData} />
-      <legend className={legendStyle}>
+    <div css={legendContainer}>
+      <SimpleLegend legendData={legendData} theme={theme} />
+      <legend css={legendStyle}>
         <span
-          className={css`
+          css={css`
             margin-left: 5px;
           `}
         >
@@ -54,7 +56,7 @@ const customLegend = legendData => {
             <circle cx="45" cy="5" r="5" />
           </svg>
           <span
-            className={css`
+            css={css`
               margin-left: 5px;
             `}
           >
@@ -260,6 +262,20 @@ export default () =>
 
         const domain = object("Domain", sampleDomain, GROUP_IDS.CUSTOM);
 
+        const themes = {
+          VictoryTheme,
+          VictoryCrazyTheme
+        };
+        const themeOptions = getKeyNames(themes);
+        const theme = options(
+          "Visualization theme",
+          themeOptions,
+          "VictoryTheme",
+          { display: "select" },
+          GROUP_IDS.CUSTOM
+        );
+        const loading = boolean("Loading", false, GROUP_IDS.CUSTOM);
+
         return (
           <StackedAreaChart
             data={data}
@@ -275,6 +291,8 @@ export default () =>
             xNumberFormatter={x => civicFormat[optionSelectX](x)}
             yNumberFormatter={y => civicFormat[optionSelectY](y)}
             legendComponent={customLegend}
+            theme={(name => themes[name])(theme)}
+            loading={loading}
           />
         );
       },

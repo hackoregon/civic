@@ -36,6 +36,8 @@ const numeric = d => {
   return formatted;
 };
 
+const roundedDecimal = d => format(",.2f")(d);
+
 const scalesShort = [
   [1000000000000, "t"],
   [1000000000, "b"],
@@ -93,6 +95,7 @@ const monthYear = timeFormat("%B %Y");
 
 const civicFormat = {
   numeric,
+  roundedDecimal,
   year,
   percentage,
   dollars,

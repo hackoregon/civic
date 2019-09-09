@@ -1,8 +1,9 @@
 ---
-name: Feature Request 🚀
+name: "Feature Request \U0001F680"
 about: Suggest an idea for CIVIC
 title: ""
 labels: ""
+assignees: ""
 ---
 
 <!--

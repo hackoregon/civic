@@ -1,51 +1,35 @@
 /** @jsx jsx */
-import { jsx, css } from "@emotion/core";
+import { jsx } from "@emotion/core";
 import { Fragment } from "react";
 import PropTypes from "prop-types";
 import _ from "lodash";
 
 import Collapsable from "../Collapsable/Collapsable";
-import CivicVictoryTheme from "../VictoryTheme/CivicVictoryTheme";
 
-const chipStyle = index => css`
-  display: inline-block;
-  padding: 0 2em;
-  height: 2em;
-  line-height: 2em;
-  border-radius: 1em;
-  background-color: ${CivicVictoryTheme.group.colorScale[
-    index % CivicVictoryTheme.group.colorScale.length
-  ]};
-  margin: 0.5em 0.5em;
-  font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
-  font-weight: bold;
-  color: white;
-  cursor: pointer;
-`;
-
-export function Chip({ tag, index }) {
-  return <span css={chipStyle(index)}>{`#${tag}`}</span>;
-}
-
-Chip.propTypes = {
-  tag: PropTypes.string,
-  index: PropTypes.number
-};
-
-export function Resource({ item }) {
-  return _.has(item, "section") ? (
-    <h3>{item.section}</h3>
-  ) : (
-    <li>
-      <a href={item.link}>{item.description}</a>
-    </li>
+export function Resource({ section }) {
+  return (
+    <Fragment>
+      <h3>{section.heading}</h3>
+      <ul>
+        {section.items.map(item => (
+          <li>
+            <a href={item.link}>{item.description}</a>
+          </li>
+        ))}
+      </ul>
+    </Fragment>
   );
 }
 
 Resource.propTypes = {
-  item: PropTypes.shape({
-    link: PropTypes.string,
-    description: PropTypes.string
+  section: PropTypes.shape({
+    heading: PropTypes.string,
+    items: PropTypes.arrayOf(
+      PropTypes.shape({
+        link: PropTypes.string,
+        description: PropTypes.string
+      })
+    )
   })
 };
 

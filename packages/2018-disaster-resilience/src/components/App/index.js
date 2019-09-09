@@ -1,12 +1,21 @@
-/* eslint-disable import/no-named-as-default */
-import React from "react";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 
 import "@hackoregon/component-library/assets/global.styles.css";
-import { PageLayout, PullQuote } from "@hackoregon/component-library";
-import SignificantStructuralDamage from "../SignificantStructuralDamage";
-import YouAndYourNeighbors from "../YouAndYourNeighbors";
+import {
+  PageLayout,
+  PullQuote,
+  CivicCardLayoutClassic
+} from "@hackoregon/component-library";
 import WhatYouCanDoToPrepare from "../WhatYouCanDoToPrepare";
+import SignificantStructuralDamage from "../SignificantStructuralDamage";
 import ProactivePlanning from "../ProactivePlanning";
+import YouAndYourNeighbors from "../YouAndYourNeighbors";
+
+const sectionMarginMedium = css`
+  display: block;
+  margin: 64px auto;
+`;
 
 const App = () => (
   <PageLayout
@@ -28,19 +37,25 @@ const App = () => (
       resilience.
     </p>
     {/* <ViolentShakingAndGroundDeformation /> */}
-    <SignificantStructuralDamage />
+    <section css={sectionMarginMedium}>
+      <SignificantStructuralDamage Layout={CivicCardLayoutClassic} />
+    </section>
     {/* <LifeAlteringEvent /> */}
     <p className="transition">
       The first step in increasing disaster resilience for most Portlanders will
       be to understand what the estimated impact is within their immediate
       vicinity.
     </p>
-    <YouAndYourNeighbors />
+    <section css={sectionMarginMedium}>
+      <YouAndYourNeighbors Layout={CivicCardLayoutClassic} />
+    </section>
     <PullQuote
       quoteText="Does your family have a plan for earthquake preparedness? Here are the steps to help you get started."
       url="https://civicplatform.org/cards/what-you-can-do-to-prepare-for-an-earthquake"
     />
-    <WhatYouCanDoToPrepare />
+    <section css={sectionMarginMedium}>
+      <WhatYouCanDoToPrepare Layout={CivicCardLayoutClassic} />
+    </section>
     <p className="transition">
       Social capital is a statistic derived from measuring community engagement.
       Disaster resilience, measuring the ability for an entity to bounce back
@@ -49,7 +64,9 @@ const App = () => (
     </p>
     {/* <IncreasingSocialCapital /> */}
     <PullQuote quoteText="The #1 thing you can do to increase social capital is to meet your neighbors. Do you know 3 people within a 3 block radius of your house?" />
-    <ProactivePlanning />
+    <section className={sectionMarginMedium}>
+      <ProactivePlanning Layout={CivicCardLayoutClassic} />
+    </section>
   </PageLayout>
 );
 

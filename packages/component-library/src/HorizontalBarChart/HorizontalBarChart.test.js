@@ -18,6 +18,21 @@ const updatedSimpleData = [
   { x: 500, y: "bat" }
 ];
 
+const simpleColorData = [
+  { x: 100, y: "black" },
+  { x: 200, y: "white" },
+  { x: 300, y: "red" },
+  { x: 400, y: "rat" }
+];
+
+const updatedSimpleColorData = [
+  { x: 100, y: "black" },
+  { x: 200, y: "white" },
+  { x: 300, y: "red" },
+  { x: 400, y: "rat" },
+  { x: 500, y: "bat" }
+];
+
 const simpleDataDomain = { x: [0, 400], y: [0, 4] };
 
 const sampleUnstructuredData = [
@@ -148,6 +163,7 @@ describe("HorizontalBarChart", () => {
     const wrapper = shallow(<HorizontalBarChart data={simpleData} />);
     const dataProp = wrapper
       .find("VictoryBar")
+
       .first()
       .prop("data");
     expect(dataProp).to.have.length(4);
@@ -166,4 +182,45 @@ describe("HorizontalBarChart", () => {
     expect(xProp).to.eql("sortOrder");
     expect(yProp).to.eql("dataValue");
   });
+
+  // Tests for https://github.com/FormidableLabs/victory/issues/928 workaround
+
+  it("renders a HorizontalBarChart correctly with sample color data **invisible whitespace warning, see protectData util**", () => {
+    const c = "‌‌​"; // U+200B (zero-width space character)
+    const wrapper = shallow(
+      <HorizontalBarChart data={simpleColorData} protect />
+    );
+    expect(wrapper.find({ title: "Horizontal Bar Chart" }).length).to.eql(1);
+    expect(wrapper.find({ title: "Horizontal Bar Chart" }).props().data).to.eql(
+      // invisible whitespace character injected in label before :
+      [
+        { sortOrder: 1, dataValue: 100, label: `black${c}: 100` },
+        { sortOrder: 2, dataValue: 200, label: `white${c}: 200` },
+        { sortOrder: 3, dataValue: 300, label: `red${c}: 300` },
+        { sortOrder: 4, dataValue: 400, label: `rat${c}: 400` }
+      ]
+    );
+  });
+
+  it("renders an updated HorizontalBarChart when passed new data **invisible whitespace warning, see protectData util**", () => {
+    const c = "‌‌​"; // U+200B (zero-width space character)
+    const wrapper = shallow(
+      <HorizontalBarChart data={simpleColorData} protect />
+    );
+    expect(wrapper.find({ title: "Horizontal Bar Chart" }).length).to.eql(1);
+    wrapper.setProps({ data: updatedSimpleColorData });
+
+    expect(wrapper.find({ title: "Horizontal Bar Chart" }).props().data).to.eql(
+      // invisible whitespace character injected in label before :
+      [
+        { sortOrder: 1, dataValue: 100, label: `black${c}: 100` },
+        { sortOrder: 2, dataValue: 200, label: `white${c}: 200` },
+        { sortOrder: 3, dataValue: 300, label: `red${c}: 300` },
+        { sortOrder: 4, dataValue: 400, label: `rat${c}: 400` },
+        { sortOrder: 5, dataValue: 500, label: `bat${c}: 500` }
+      ]
+    );
+  });
+
+  // End tests for https://github.com/FormidableLabs/victory/issues/928 workaround
 });

@@ -1,7 +1,8 @@
-import React from "react";
 import { string, number, arrayOf, oneOfType, shape } from "prop-types";
-import { css } from "emotion";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 import { get } from "lodash";
+import shortid from "shortid";
 import window from "global/window";
 
 const tooltip = css`
@@ -31,7 +32,7 @@ const MapTooltip = props => {
   const tooltipContent = tooltipData.content.map(obj => {
     const value = obj.value ? obj.value : "No Data Available";
     return (
-      <div key={`${obj.name}-${value}`}>
+      <div key={shortid.generate()}>
         {`${obj.name}: ${value.toLocaleString()}`}
       </div>
     );
@@ -39,7 +40,7 @@ const MapTooltip = props => {
 
   return (
     <div
-      className={tooltip}
+      css={tooltip}
       style={{
         left: xPosition,
         top: yPostition

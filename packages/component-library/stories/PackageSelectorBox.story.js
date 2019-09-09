@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
-import React from "react";
-import { css } from "emotion";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
 import { withKnobs, object } from "@storybook/addon-knobs";
@@ -41,7 +41,7 @@ const PackageSelectorDemo = () => {
   ]);
   return (
     <div
-      className={css(`
+      css={css(`
     @media (min-width: 600px) {
       display: flex;
       flex-wrap: wrap;
@@ -50,7 +50,7 @@ const PackageSelectorDemo = () => {
     >
       {packageSelectorList.map(selector => (
         <div
-          className={css(`
+          css={css(`
           @media (min-width: 600px) {
             width: 33%;
           }

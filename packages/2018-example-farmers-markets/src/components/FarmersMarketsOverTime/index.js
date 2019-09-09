@@ -1,95 +1,52 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { css } from "emotion";
+import { CivicCard } from "@hackoregon/component-library";
 
-import { CivicStoryCard, LineChart } from "@hackoregon/component-library";
-
-import { fetchFarmersMarketsOverTime } from "../../state/farmers-markets-over-time/actions";
+import FarmersMarketsOverTimeMeta from "./farmersMarketsOverTimeMeta";
+import { fetchFarmersMarketsOverTimeData } from "../../state/farmers-markets-over-time/actions";
 import {
-  isFarmersMarketsOverTimePending,
+  isFarmersMarketsOverTimeDataPending,
   getFarmersMarketsOverTimeData
 } from "../../state/farmers-markets-over-time/selectors";
 
-const cardLoading = css`
-  width: 100%;
-  padding: 50px;
-  text-align: center;
-  background: #eee;
-`;
-
-const cardError = css`
-  width: 100%;
-  padding: 50px;
-  text-align: center;
-  background: #fdd;
-  border: 1px solid #c99;
-`;
-
-export class FarmersMarketsOverTime extends React.Component {
+class FarmersMarketsOverTime extends Component {
   componentDidMount() {
-    this.props.init();
+    const { init } = this.props;
+    init();
   }
 
   render() {
-    const { isLoading, farmersMarketsOverTime } = this.props;
-
-    if (isLoading) {
-      return <div className={cardLoading}>Loading...</div>;
-    } else if (!farmersMarketsOverTime) {
-      return (
-        <div className={cardError}>
-          Could not render Farmers Markets Over Time
-        </div>
-      );
-    }
+    const { isLoading, data, Layout } = this.props;
 
     return (
-      <div>
-        <CivicStoryCard
-          title="Farmers Markets Trending Upward"
-          slug="farmers-markets-over-time"
-        >
-          <p>
-            Farmers' markets saw steady growth through the 1990s into the
-            mid-2000s. The recession correlates with abnormal growth in the
-            total number of Farmers' Markets. The last two years have shown no
-            growth. Is this plateau expected to continue? What causes growth or
-            decline in Farmers' Markets?
-          </p>
-          <div>
-            <LineChart
-              title="Have we hit peak Farmers Markets?"
-              subtitle="US Farmers Markets, excluding farm stands"
-              data={farmersMarketsOverTime}
-              xLabel="Year"
-              yLabel="# Farmers Markets Nationally"
-              dataKey="Year"
-              dataValue="FarmersMarketCount"
-              dataKeyLabel="Year"
-            />
-          </div>
-        </CivicStoryCard>
-      </div>
+      <CivicCard
+        cardMeta={FarmersMarketsOverTimeMeta}
+        isLoading={isLoading}
+        data={data}
+        Layout={Layout}
+      />
     );
   }
 }
 
 FarmersMarketsOverTime.displayName = "FarmersMarketsOverTime";
+
 FarmersMarketsOverTime.propTypes = {
   init: PropTypes.func,
   isLoading: PropTypes.bool,
-  farmersMarketsOverTime: PropTypes.arrayOf(PropTypes.object)
+  data: PropTypes.arrayOf(PropTypes.shape({})),
+  Layout: PropTypes.func
 };
 
 export default connect(
   state => ({
-    isLoading: isFarmersMarketsOverTimePending(state),
-    farmersMarketsOverTime: getFarmersMarketsOverTimeData(state)
+    isLoading: isFarmersMarketsOverTimeDataPending(state),
+    data: getFarmersMarketsOverTimeData(state)
   }),
   dispatch => ({
     init() {
-      dispatch(fetchFarmersMarketsOverTime());
+      dispatch(fetchFarmersMarketsOverTimeData());
     }
   })
 )(FarmersMarketsOverTime);

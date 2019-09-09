@@ -1,13 +1,25 @@
-import CornEmpty from "../../assets/corn.svg";
-import CornColor from "../../assets/corn-color.svg";
-import WaterEmpty from "../../assets/water.svg";
-import WaterColor from "../../assets/water-color.svg";
+import FoodEmpty from "../../assets/kit_icons/unfilled-food.svg";
+import FoodColor from "../../assets/kit_icons/filled-food.svg";
+import WaterEmpty from "../../assets/kit_icons/unfilled-water.svg";
+import WaterColor from "../../assets/kit_icons/filled-water.svg";
+import FirstAidEmpty from "../../assets/kit_icons/unfilled-first-aid-kit.svg";
+import FirstAidColor from "../../assets/kit_icons/filled-first-aid-kit.svg";
+import FlashlightEmpty from "../../assets/kit_icons/unfilled-flashlight.svg";
+import FlashlightColor from "../../assets/kit_icons/filled-flashlight.svg";
+import BlanketEmpty from "../../assets/kit_icons/unfilled-blanket.svg";
+import BlanketColor from "../../assets/kit_icons/filled-blanket.svg";
+import DustMaskEmpty from "../../assets/kit_icons/unfilled-dust-mask.svg";
+import DustMaskColor from "../../assets/kit_icons/filled-dust-mask.svg";
+import ProtectiveGearEmpty from "../../assets/kit_icons/unfilled-protective-gear.svg";
+import ProtectiveGearColor from "../../assets/kit_icons/filled-protective-gear.svg";
+import RopeEmpty from "../../assets/kit_icons/unfilled-rope.svg";
+import RopeColor from "../../assets/kit_icons/filled-rope.svg";
+import TentEmpty from "../../assets/kit_icons/unfilled-tent.svg";
+import TentColor from "../../assets/kit_icons/filled-tent.svg";
+// Temporary good item icons
 import FireExtinguisherEmpty from "../../assets/fire-extinguisher.svg";
 import FireExtinguisherColor from "../../assets/fire-extinguisher-color.svg";
-import FirstAidEmpty from "../../assets/first-aid-kit.svg";
-import FirstAidColor from "../../assets/first-aid-kit-color.svg";
-import FlashlightEmpty from "../../assets/flashlight.svg";
-import FlashlightColor from "../../assets/flashlight-color.svg";
+// Temporary bad item icons
 import ComputerEmpty from "../../assets/laptop.svg";
 import ComputerColor from "../../assets/laptop-color.svg";
 
@@ -28,16 +40,16 @@ export const computer = "COMPUTER";
 // Good kit items
 export const BLANKET = {
   id: blanket,
-  emptySvg: "https://image.flaticon.com/icons/svg/1980/1980993.svg",
-  fullSvg: "https://image.flaticon.com/icons/svg/1981/1981086.svg",
+  emptySvg: BlanketEmpty,
+  fullSvg: BlanketColor,
   imgAlt: "blanket kit item",
   goodKitItem: true,
   pointsForPuttingInKit: 10
 };
 export const DUST_MASK = {
   id: dustMask,
-  emptySvg: "https://image.flaticon.com/icons/svg/1497/1497017.svg",
-  fullSvg: "https://image.flaticon.com/icons/svg/1497/1497119.svg",
+  emptySvg: DustMaskEmpty,
+  fullSvg: DustMaskColor,
   imgAlt: "dust mask kit item",
   goodKitItem: true,
   pointsForPuttingInKit: 10
@@ -68,32 +80,32 @@ export const FLASHLIGHT = {
 };
 export const FOOD = {
   id: food,
-  emptySvg: CornEmpty,
-  fullSvg: CornColor,
+  emptySvg: FoodEmpty,
+  fullSvg: FoodColor,
   imgAlt: "food kit item",
   goodKitItem: true,
   pointsForPuttingInKit: 10
 };
 export const PROTECTIVE_GEAR = {
   id: protectiveGear,
-  emptySvg: "https://image.flaticon.com/icons/svg/1705/1705460.svg",
-  fullSvg: "https://image.flaticon.com/icons/svg/1705/1705463.svg",
+  emptySvg: ProtectiveGearEmpty,
+  fullSvg: ProtectiveGearColor,
   imgAlt: "protective gear kit item",
   goodKitItem: true,
   pointsForPuttingInKit: 10
 };
 export const ROPE = {
   id: rope,
-  emptySvg: "https://image.flaticon.com/icons/svg/1980/1980979.svg",
-  fullSvg: "https://image.flaticon.com/icons/svg/1981/1981084.svg",
+  emptySvg: RopeEmpty,
+  fullSvg: RopeColor,
   imgAlt: "rope kit item",
   goodKitItem: true,
   pointsForPuttingInKit: 10
 };
 export const TENT = {
   id: tent,
-  emptySvg: "https://image.flaticon.com/icons/svg/1175/1175162.svg",
-  fullSvg: "https://image.flaticon.com/icons/svg/1175/1175009.svg",
+  emptySvg: TentEmpty,
+  fullSvg: TentColor,
   imgAlt: "tent kit item",
   goodKitItem: true,
   pointsForPuttingInKit: 10

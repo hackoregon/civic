@@ -1,8 +1,9 @@
 /* eslint-disable no-nested-ternary */
-import React from "react";
 import PropTypes from "prop-types";
 import { scaleQuantize, extent, format } from "d3";
-import { css } from "emotion";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
+import shortid from "shortid";
 import civicFormat from "../utils/civicFormat";
 
 const legendContainer = css(`
@@ -114,18 +115,18 @@ const SandboxMapLegend = props => {
   const legend = mapColorsArr.map((d, i) => {
     return (
       <div
-        key={`legend-pt-${d.slice(5, 12).replace(/,/g, "")}`}
-        className={colorBox}
+        key={shortid.generate()}
+        css={colorBox}
         style={{ backgroundColor: d }}
       >
-        <div className={tickStyle}>
+        <div css={tickStyle}>
           <span>{ticksFormatted[i]}</span>
         </div>
       </div>
     );
   });
 
-  return <div className={legendContainer}>{legend}</div>;
+  return <div css={legendContainer}>{legend}</div>;
 };
 
 SandboxMapLegend.propTypes = {

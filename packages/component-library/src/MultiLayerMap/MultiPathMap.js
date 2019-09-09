@@ -9,6 +9,7 @@ import {
   shape,
   oneOfType
 } from "prop-types";
+import shortid from "shortid";
 import {
   createColorScale,
   updateQuantileScale,
@@ -18,7 +19,6 @@ import {
 
 const MultiPathMap = props => {
   const {
-    index,
     id,
     pickable = true,
     data,
@@ -78,7 +78,7 @@ const MultiPathMap = props => {
 
   return (
     <PathLayer
-      key={`path-layer${index}`}
+      key={shortid.generate()}
       id={id}
       pickable={pickable}
       data={data}
@@ -102,7 +102,6 @@ const MultiPathMap = props => {
 };
 
 MultiPathMap.propTypes = {
-  index: number,
   id: string.isRequired,
   data: arrayOf(shape({})).isRequired,
   pickable: bool,

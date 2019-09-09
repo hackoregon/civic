@@ -14,7 +14,9 @@ describe("portland-farmers-markets", () => {
           type: actions.IMPORT_START
         };
 
-        expect(actions.portlandFarmersMarketsStart()).to.eql(expectedAction);
+        expect(actions.PortlandFarmersMarketsDataStart()).to.eql(
+          expectedAction
+        );
       });
 
       it("should have a success action", () => {
@@ -28,7 +30,7 @@ describe("portland-farmers-markets", () => {
           payload
         };
 
-        expect(actions.portlandFarmersMarketsSuccess(payload)).to.eql(
+        expect(actions.PortlandFarmersMarketsDataSuccess(payload)).to.eql(
           expectedAction
         );
       });
@@ -46,7 +48,7 @@ describe("portland-farmers-markets", () => {
         const action2 = { type: actions.IMPORT_SUCCESS };
 
         return store
-          .dispatch(actions.fetchPortlandFarmersMarkets())
+          .dispatch(actions.fetchPortlandFarmersMarketsData())
           .then(() => {
             const actionHistory = store.getActions();
 
@@ -57,24 +59,13 @@ describe("portland-farmers-markets", () => {
           });
       });
     });
-
-    describe("portland-farmers-markets setFarmersMarket", () => {
-      const selectedMarket = {
-        name: "first market"
-      };
-      const expectedAction = {
-        type: actions.SET_FARMERS_MARKET,
-        selectedMarket
-      };
-
-      expect(actions.setFarmersMarket(selectedMarket)).to.eql(expectedAction);
-    });
   });
 
   describe("portland-farmers-markets reducer", () => {
     const initialState = {
       pending: false,
-      data: null
+      data: null,
+      selectedMarket: null
     };
 
     it("should return the initial state", () => {
@@ -88,7 +79,8 @@ describe("portland-farmers-markets", () => {
         })
       ).to.eql({
         pending: true,
-        data: null
+        data: null,
+        selectedMarket: null
       });
     });
 
@@ -108,49 +100,6 @@ describe("portland-farmers-markets", () => {
         data: payload
       });
     });
-
-    it("should handle SET_FARMERS_MARKET", () => {
-      const market = { name: "first market" };
-
-      expect(
-        reducer(
-          {
-            pending: false,
-            data: null
-          },
-          {
-            type: actions.SET_FARMERS_MARKET,
-            selectedMarket: market
-          }
-        )
-      ).to.eql({
-        pending: false,
-        data: null,
-        selectedMarket: market
-      });
-    });
-
-    it("should not change any properties other than selectedMarket", () => {
-      const market = { name: "first market" };
-      const data = { do: "not", dis: "turb" };
-
-      expect(
-        reducer(
-          {
-            pending: false,
-            data
-          },
-          {
-            type: actions.SET_FARMERS_MARKET,
-            selectedMarket: market
-          }
-        )
-      ).to.eql({
-        pending: false,
-        data,
-        selectedMarket: market
-      });
-    });
   });
 
   describe("portland-farmers-markets selectors", () => {
@@ -160,16 +109,14 @@ describe("portland-farmers-markets", () => {
 
         expect(
           selectors.getPortlandFarmersMarketsRequest({
-            portlandFarmersMarkets: expectation
+            portlandFarmersMarketsData: expectation
           })
         ).to.eql(expectation);
 
         expect(
           selectors.getPortlandFarmersMarketsRequest({
             red: "herring",
-            package2018ExampleFarmersMarkets: {
-              portlandFarmersMarkets: expectation
-            }
+            portlandFarmersMarketsData: expectation
           })
         ).to.eql(expectation);
       });
@@ -177,35 +124,48 @@ describe("portland-farmers-markets", () => {
 
     describe("getPortlandFarmersMarketsData", () => {
       it("returns undefined when there is no data", () => {
+        // eslint-disable-next-line no-unused-expressions
         expect(
           selectors.getPortlandFarmersMarketsData({
-            portlandFarmersMarkets: {
-              no: "data to be seen"
+            portlandFarmersMarketsData: { no: "data to be seen" }
+          })
+        ).to.be.undefined;
+      });
+
+      it("returns undefined when data has no value for PortlandFarmersMarketsData", () => {
+        // eslint-disable-next-line no-unused-expressions
+        expect(
+          selectors.getPortlandFarmersMarketsData({
+            portlandFarmersMarketsData: {
+              data: { NotPortlandFarmersMarketsData: {} }
             }
           })
         ).to.be.undefined;
       });
 
-      it("returns the data when data has a value", () => {
+      it("returns the data when data has a value for PortlandFarmersMarketsData", () => {
         const data = {
           here: "it",
           i: "s"
         };
         expect(
           selectors.getPortlandFarmersMarketsData({
-            portlandFarmersMarkets: {
-              data
+            portlandFarmersMarketsData: {
+              data: {
+                PortlandFarmersMarketsData: data
+              }
             }
           })
         ).to.eql(data);
       });
     });
 
-    describe("isPortlandFarmersMarketsPending", () => {
+    describe("isPortlandFarmersMarketsDataPending", () => {
       it("returns false when there is no value for pending", () => {
+        // eslint-disable-next-line no-unused-expressions
         expect(
-          selectors.isPortlandFarmersMarketsPending({
-            portlandFarmersMarkets: {
+          selectors.isPortlandFarmersMarketsDataPending({
+            portlandFarmersMarketsData: {
               no: "pending property"
             }
           })
@@ -213,9 +173,10 @@ describe("portland-farmers-markets", () => {
       });
 
       it("returns false when the value for pending is false", () => {
+        // eslint-disable-next-line no-unused-expressions
         expect(
-          selectors.isPortlandFarmersMarketsPending({
-            portlandFarmersMarkets: {
+          selectors.isPortlandFarmersMarketsDataPending({
+            portlandFarmersMarketsData: {
               pending: false
             }
           })
@@ -223,55 +184,14 @@ describe("portland-farmers-markets", () => {
       });
 
       it("returns true when the value for pending is true", () => {
+        // eslint-disable-next-line no-unused-expressions
         expect(
-          selectors.isPortlandFarmersMarketsPending({
-            portlandFarmersMarkets: {
+          selectors.isPortlandFarmersMarketsDataPending({
+            portlandFarmersMarketsData: {
               pending: true
             }
           })
         ).to.be.true;
-      });
-    });
-
-    describe("getActiveFarmersMarket", () => {
-      it("returns nothing when there is no selectedMarket property", () => {
-        expect(
-          selectors.getActiveFarmersMarket({
-            portlandFarmersMarkets: {
-              no: "selected market"
-            }
-          })
-        ).to.be.undefined;
-      });
-
-      it("returns nothing when the selectedMarket property has no properties property", () => {
-        expect(
-          selectors.getActiveFarmersMarket({
-            portlandFarmersMarkets: {
-              selectedMarket: {
-                wrong: "format"
-              }
-            }
-          })
-        ).to.be.undefined;
-      });
-
-      it("returns the properties property from the selectedMarket property", () => {
-        const properties = {
-          color: "blue",
-          size: 12,
-          why: "because"
-        };
-        expect(
-          selectors.getActiveFarmersMarket({
-            portlandFarmersMarkets: {
-              selectedMarket: {
-                not: "interested in this",
-                properties
-              }
-            }
-          })
-        ).to.eql(properties);
       });
     });
   });

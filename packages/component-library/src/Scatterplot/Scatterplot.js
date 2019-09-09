@@ -12,6 +12,7 @@ import {
 import ChartContainer from "../ChartContainer";
 import SimpleLegend from "../SimpleLegend";
 import civicFormat from "../utils/civicFormat";
+import protectData from "../utils/protectData";
 import DataChecker from "../utils/DataChecker";
 import {
   chartEvents,
@@ -19,7 +20,7 @@ import {
   getDefaultDataSeriesLabels,
   getDefaultFillStyle
 } from "../utils/chartHelpers";
-import CivicVictoryTheme from "../VictoryTheme/VictoryThemeIndex";
+import { VictoryTheme } from "../_Themes/index";
 
 /*
  * @method Scatterplot
@@ -57,15 +58,33 @@ const Scatterplot = ({
   yNumberFormatter,
   invertX,
   invertY,
-  legendComponent
+  legendComponent,
+  theme,
+  loading,
+  protect
 }) => {
-  const chartDomain = domain || getDefaultDomain(data, dataKey, dataValue);
+  const safeData =
+    // eslint-disable-next-line no-nested-ternary
+    data && data.length
+      ? protect
+        ? protectData(data, { dataSeries, dataSeriesLabel })
+        : data
+      : [{}];
+  const safeDataSeriesLabel =
+    // eslint-disable-next-line no-nested-ternary
+    dataSeriesLabel && dataSeriesLabel.length
+      ? protect
+        ? protectData(dataSeriesLabel, { x: "category", y: "label" })
+        : dataSeriesLabel
+      : null;
+  const chartDomain = domain || getDefaultDomain(safeData, dataKey, dataValue);
 
   const dataSeriesLabels = dataSeries
-    ? dataSeriesLabel || getDefaultDataSeriesLabels(data, dataSeries)
+    ? safeDataSeriesLabel || getDefaultDataSeriesLabels(safeData, dataSeries)
     : null;
 
-  const scatterPlotStyle = style || getDefaultFillStyle(dataSeriesLabels);
+  const scatterPlotStyle =
+    style || getDefaultFillStyle(dataSeriesLabels, theme);
 
   const legendData =
     dataSeriesLabels && dataSeriesLabels.length
@@ -73,17 +92,21 @@ const Scatterplot = ({
       : null;
 
   return (
-    <ChartContainer title={title} subtitle={subtitle}>
+    <ChartContainer title={title} subtitle={subtitle} loading={loading}>
       {legendData &&
         (legendComponent ? (
-          legendComponent(legendData)
+          legendComponent(legendData, theme)
         ) : (
-          <SimpleLegend className="legend" legendData={legendData} />
+          <SimpleLegend
+            className="legend"
+            legendData={legendData}
+            theme={theme}
+          />
         ))}
-      <DataChecker dataAccessors={{ dataKey, dataValue }} data={data}>
+      <DataChecker dataAccessors={{ dataKey, dataValue }} data={safeData}>
         <VictoryChart
           domain={chartDomain}
-          theme={CivicVictoryTheme.civic}
+          theme={theme}
           animate={{ duration: 200 }}
         >
           <VictoryAxis
@@ -102,7 +125,7 @@ const Scatterplot = ({
           />
           <VictoryPortal>
             <VictoryLabel
-              style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
+              style={{ ...theme.axisLabel.style }}
               text={yLabel}
               textAnchor="middle"
               title="Y Axis Label"
@@ -113,7 +136,7 @@ const Scatterplot = ({
           </VictoryPortal>
           <VictoryPortal>
             <VictoryLabel
-              style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
+              style={{ ...theme.axisLabel.style }}
               text={xLabel}
               textAnchor="end"
               title="X Axis Label"
@@ -128,7 +151,7 @@ const Scatterplot = ({
             minBubbleSize={size && size.minSize}
             maxBubbleSize={size && size.maxSize}
             //        categories={{ x: categoryData }}
-            data={data.map(d => ({
+            data={safeData.map(d => ({
               dataKey: d[dataKey],
               dataValue: d[dataValue],
               label: `${
@@ -139,7 +162,7 @@ const Scatterplot = ({
               series: d[dataSeries],
               ...(size && { bubbleSize: d[size.key] })
             }))}
-            events={chartEvents}
+            events={chartEvents(theme)}
             labelComponent={
               <VictoryTooltip
                 x={325}
@@ -147,7 +170,7 @@ const Scatterplot = ({
                 orientation="bottom"
                 pointerLength={0}
                 cornerRadius={0}
-                theme={CivicVictoryTheme.civic}
+                theme={theme}
               />
             }
             size={3} // overridden by bubbleProperty
@@ -192,7 +215,10 @@ Scatterplot.propTypes = {
   yNumberFormatter: PropTypes.func,
   invertX: PropTypes.bool,
   invertY: PropTypes.bool,
-  legendComponent: PropTypes.func
+  legendComponent: PropTypes.func,
+  theme: PropTypes.shape({}),
+  loading: PropTypes.bool,
+  protect: PropTypes.bool
 };
 
 Scatterplot.defaultProps = {
@@ -214,7 +240,10 @@ Scatterplot.defaultProps = {
   yNumberFormatter: civicFormat.numeric,
   invertX: false,
   invertY: false,
-  legendComponent: null
+  legendComponent: null,
+  theme: VictoryTheme,
+  loading: null,
+  protect: false
 };
 
 export default Scatterplot;

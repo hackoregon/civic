@@ -1,5 +1,5 @@
-import React from "react";
-import { css } from "emotion";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
 import {
@@ -13,6 +13,7 @@ import { Scatterplot, SimpleLegend } from "../src";
 import notes from "./scatterplot.notes.md";
 import civicFormat from "../src/utils/civicFormat";
 import { getKeyNames } from "./shared";
+import { VictoryCrazyTheme, VictoryTheme } from "../src/_Themes/index";
 
 const GROUP_IDS = {
   LABELS: "Labels",
@@ -20,7 +21,7 @@ const GROUP_IDS = {
   CUSTOM: "Custom"
 };
 
-const customLegend = legendData => {
+const customLegend = (legendData, theme) => {
   const legendStyle = css`
     font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
     font-size: 14px;
@@ -36,11 +37,11 @@ const customLegend = legendData => {
   `;
 
   return (
-    <div className={legendContainer}>
-      <SimpleLegend legendData={legendData} />
-      <legend className={legendStyle}>
+    <div css={legendContainer}>
+      <SimpleLegend legendData={legendData} theme={theme} />
+      <legend css={legendStyle}>
         <span
-          className={css`
+          css={css`
             margin-left: 5px;
           `}
         >
@@ -52,7 +53,7 @@ const customLegend = legendData => {
             <circle cx="45" cy="5" r="5" />
           </svg>
           <span
-            className={css`
+            css={css`
               margin-left: 5px;
             `}
           >
@@ -106,11 +107,6 @@ export default () =>
           { experience: 17, students: 25, series: "elementary" },
           { experience: 18, students: 26, series: "elementary" }
         ];
-        const sampleDataSeriesLabel = [
-          { category: "high", label: "High School" },
-          { category: "middle", label: "Middle School" },
-          { category: "elementary", label: "Elementary School" }
-        ];
 
         const title = text(
           "Title",
@@ -143,11 +139,6 @@ export default () =>
         const dataKey = text("Data key", "experience", GROUP_IDS.DATA);
         const dataValue = text("Data value", "students", GROUP_IDS.DATA);
         const dataSeries = text("Data series", "series", GROUP_IDS.DATA);
-        const dataSeriesLabel = object(
-          "Data series labels",
-          sampleDataSeriesLabel,
-          GROUP_IDS.DATA
-        );
         const data = object("Data", sampleData, GROUP_IDS.DATA);
 
         return (
@@ -156,7 +147,6 @@ export default () =>
             dataKey={dataKey}
             dataValue={dataValue}
             dataSeries={dataSeries}
-            dataSeriesLabel={dataSeriesLabel}
             subtitle={subtitle}
             title={title}
             xLabel={xLabel}
@@ -260,6 +250,19 @@ export default () =>
         const domain = object("Domain", sampleDomain, GROUP_IDS.CUSTOM);
         const invertX = boolean("Invert X", false, GROUP_IDS.CUSTOM);
         const invertY = boolean("Invert Y", false, GROUP_IDS.CUSTOM);
+        const themes = {
+          VictoryTheme,
+          VictoryCrazyTheme
+        };
+        const themeOptions = getKeyNames(themes);
+        const theme = options(
+          "Visualization theme",
+          themeOptions,
+          "VictoryTheme",
+          { display: "select" },
+          GROUP_IDS.CUSTOM
+        );
+        const loading = boolean("Loading", false, GROUP_IDS.CUSTOM);
 
         return (
           <Scatterplot
@@ -279,6 +282,8 @@ export default () =>
             invertX={invertX}
             invertY={invertY}
             legendComponent={customLegend}
+            theme={(name => themes[name])(theme)}
+            loading={loading}
           />
         );
       },

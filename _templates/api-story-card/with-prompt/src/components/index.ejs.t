@@ -4,16 +4,16 @@ to: packages/<%=package%>/src/components/<%=StoryCardName%>/index.js
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { isLoaded } from "reduxful";
 import { resourceShape } from "reduxful/react-addons";
 import { CivicCard } from "@hackoregon/component-library";
 
-import <%=StoryCardName%>Meta from "./<%=storyCardName%>Meta";
+import <%=storyCardName%>Meta from "./<%=storyCardName%>Meta";
 import api from "../../state/<%=slug%>/api";
 
 const <%=StoryCardName%> = ({ init, data, Layout }) => {
   useEffect(() => {
     init();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     /*
     https://reactjs.org/docs/hooks-effect.html#tip-optimizing-performance-by-skipping-effects
@@ -22,13 +22,9 @@ const <%=StoryCardName%> = ({ init, data, Layout }) => {
     */
   ]);
 
-  // FIXME: mockRidershipOverTime should be a variable
-  const loading = !isLoaded(data.mockRidershipOverTime);
-
   return (
     <CivicCard
-      cardMeta={<%=StoryCardName%>Meta}
-      isLoading={loading}
+      cardMeta={<%=storyCardName%>Meta}
       data={data}
       Layout={Layout}
     />
@@ -39,15 +35,14 @@ const <%=StoryCardName%> = ({ init, data, Layout }) => {
 
 <%=StoryCardName%>.propTypes = {
   init: PropTypes.func,
-  data: PropTypes.shape({ mockRidershipOverTime: resourceShape }),
+  data: PropTypes.shape({ <%=aPI%>: resourceShape }),
   Layout: PropTypes.func
 };
 
 export default connect(
   state => ({
     data: {
-      // FIXME: mockRidershipOverTime should be a variable
-      mockRidershipOverTime: api.selectors.getMockRidershipData(
+      <%=aPI%>: api.selectors.get<%=API%>Data(
         state.package<%= h.changeCase.pascalCase(package)%> || state
       )
     }
@@ -55,8 +50,7 @@ export default connect(
   }),
   dispatch => ({
     init() {
-      // FIXME: mockRidershipOverTime should be a variable
-      dispatch(api.actionCreators.getMockRidershipData());
+      dispatch(api.actionCreators.get<%=API%>Data());
     }
   })
 )(<%=StoryCardName%>);

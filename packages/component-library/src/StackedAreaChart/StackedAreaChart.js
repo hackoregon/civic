@@ -12,6 +12,7 @@ import {
   VictoryArea
 } from "victory";
 
+import shortid from "shortid";
 import ChartContainer from "../ChartContainer";
 import SimpleLegend from "../SimpleLegend";
 import civicFormat from "../utils/civicFormat";
@@ -23,7 +24,7 @@ import {
   getDefaultDataSeriesLabels,
   getDefaultAreaStyle
 } from "../utils/chartHelpers";
-import CivicVictoryTheme from "../VictoryTheme/VictoryThemeIndex";
+import { VictoryTheme } from "../_Themes/index";
 
 const StackedAreaChart = ({
   data,
@@ -42,17 +43,20 @@ const StackedAreaChart = ({
   yLabel,
   xNumberFormatter,
   yNumberFormatter,
-  legendComponent
+  legendComponent,
+  theme,
+  loading
 }) => {
+  const safeData = data && data.length ? data : [{}];
   const chartDomain =
-    domain || getDefaultStackedDomain(data, dataKey, dataValue);
+    domain || getDefaultStackedDomain(safeData, dataKey, dataValue);
 
   const dataSeriesLabels = dataSeries
-    ? dataSeriesLabel || getDefaultDataSeriesLabels(data, dataSeries)
+    ? dataSeriesLabel || getDefaultDataSeriesLabels(safeData, dataSeries)
     : null;
 
   const scatterPlotStyle = style || {
-    ...CivicVictoryTheme.civic.areaScatter.style
+    ...theme.areaScatter.style
   };
 
   const legendData =
@@ -60,12 +64,14 @@ const StackedAreaChart = ({
       ? dataSeriesLabels.map(series => ({ name: series.label }))
       : null;
 
-  const lineData = dataSeries ? groupBy(data, dataSeries) : { category: data };
+  const lineData = dataSeries
+    ? groupBy(safeData, dataSeries)
+    : { category: safeData };
 
   const areas = lineData
     ? Object.keys(lineData).map((category, index) => (
         <VictoryArea
-          key={category}
+          key={shortid.generate()}
           data={lineData[category].map(d => ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],
@@ -73,7 +79,7 @@ const StackedAreaChart = ({
           }))}
           x="dataKey"
           y="dataValue"
-          style={getDefaultAreaStyle(index)}
+          style={getDefaultAreaStyle(index, theme)}
           standalone={false}
           animate
         />
@@ -83,7 +89,7 @@ const StackedAreaChart = ({
   const dots = lineData
     ? Object.keys(lineData).map(category => (
         <VictoryScatter
-          key={category}
+          key={shortid.generate()}
           data={lineData[category].map(d => ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],
@@ -101,7 +107,7 @@ const StackedAreaChart = ({
           size={d => d.size}
           style={scatterPlotStyle}
           title="Scatter Plot"
-          events={chartEvents}
+          events={chartEvents(theme)}
           labelComponent={
             <VictoryTooltip
               x={325}
@@ -109,7 +115,7 @@ const StackedAreaChart = ({
               orientation="bottom"
               pointerLength={0}
               cornerRadius={0}
-              theme={CivicVictoryTheme.civic}
+              theme={theme}
             />
           }
           animate
@@ -118,19 +124,23 @@ const StackedAreaChart = ({
     : null;
 
   return (
-    <ChartContainer title={title} subtitle={subtitle}>
-      <DataChecker dataAccessors={{ dataKey, dataValue }} data={data}>
+    <ChartContainer title={title} subtitle={subtitle} loading={loading}>
+      <DataChecker dataAccessors={{ dataKey, dataValue }} data={safeData}>
         {legendData &&
           (legendComponent ? (
-            legendComponent(legendData)
+            legendComponent(legendData, theme)
           ) : (
-            <SimpleLegend className="legend" legendData={legendData} />
+            <SimpleLegend
+              className="legend"
+              legendData={legendData}
+              theme={theme}
+            />
           ))}
 
         <VictoryChart
           domain={chartDomain}
           padding={{ left: 75, right: 50, bottom: 50, top: 50 }}
-          theme={CivicVictoryTheme.civic}
+          theme={theme}
         >
           <VictoryAxis
             style={{ grid: { stroke: "none" } }}
@@ -144,7 +154,7 @@ const StackedAreaChart = ({
           />
           <VictoryPortal>
             <VictoryLabel
-              style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
+              style={{ ...theme.axisLabel.style }}
               text={yLabel}
               textAnchor="middle"
               title="Y Axis Label"
@@ -155,7 +165,7 @@ const StackedAreaChart = ({
           </VictoryPortal>
           <VictoryPortal>
             <VictoryLabel
-              style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
+              style={{ ...theme.axisLabel.style }}
               text={xLabel}
               textAnchor="end"
               title="X Axis Label"
@@ -196,7 +206,9 @@ StackedAreaChart.propTypes = {
   yLabel: PropTypes.string,
   xNumberFormatter: PropTypes.func,
   yNumberFormatter: PropTypes.func,
-  legendComponent: PropTypes.func
+  legendComponent: PropTypes.func,
+  theme: PropTypes.shape({}),
+  loading: PropTypes.bool
 };
 
 StackedAreaChart.defaultProps = {
@@ -216,7 +228,9 @@ StackedAreaChart.defaultProps = {
   yLabel: "Y",
   xNumberFormatter: civicFormat.numeric,
   yNumberFormatter: civicFormat.numeric,
-  legendComponent: null
+  legendComponent: null,
+  theme: VictoryTheme,
+  loading: null
 };
 
 export default StackedAreaChart;

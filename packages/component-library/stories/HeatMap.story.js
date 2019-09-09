@@ -9,8 +9,8 @@ import {
   number
 } from "@storybook/addon-knobs";
 import { checkA11y } from "@storybook/addon-a11y";
-import { extent } from "d3";
-
+import { min, max } from "d3";
+import { at } from "lodash";
 import { BaseMap, DemoJSONLoader } from "../src";
 import notes from "./heatmap.notes.md";
 
@@ -173,12 +173,6 @@ export default () =>
           ...heatMapColorGradient
         ];
 
-        const heatMapColor = object(
-          "heatmap-color:",
-          heatMapColorExpression,
-          GROUP_IDS.HEAT_MAP
-        );
-
         const heatMapAPIURL = text(
           "API URL:",
           heatMapDataURL,
@@ -188,24 +182,27 @@ export default () =>
         return (
           <DemoJSONLoader urls={[heatMapAPIURL]}>
             {data => {
-              const heatMapDataProperty = text(
-                "Property Key:",
-                "time_diff",
+              const dataPath = text(
+                "GeoJSON Path:",
+                "results",
                 GROUP_IDS.HEAT_MAP_DATA
               );
+              const GeoJSONData = at(data, dataPath)[0];
 
-              const dataMinMax = extent(
-                data.results.features,
-                d => d.properties[heatMapDataProperty]
-              );
-
+              const heatMapDataProperty = "time_diff";
               const heatMapWeightExpression = [
                 "interpolate",
                 ["linear"],
                 ["get", heatMapDataProperty],
-                dataMinMax[0],
+                min(
+                  GeoJSONData.features,
+                  d => d.properties[heatMapDataProperty]
+                ),
                 0,
-                dataMinMax[1],
+                max(
+                  GeoJSONData.features,
+                  d => d.properties[heatMapDataProperty]
+                ),
                 1
               ];
 
@@ -219,30 +216,26 @@ export default () =>
                 "heatmap-radius": heatMapRadius,
                 "heatmap-opacity": heatMapOpacity,
                 "heatmap-intensity": heatMapIntensity,
-                "heatmap-color": heatMapColor,
+                "heatmap-color": heatMapColorExpression,
                 "heatmap-weight": heatMapWeight
               };
 
-              // eslint-disable-next-line
-              const singleFeatureObj = object(
-                "Data: First Feature Object from GeoJSON",
-                data.results.features.slice(0, 1),
-                GROUP_IDS.HEAT_MAP_DATA
-              );
-
               return (
-                <BaseMap
-                  updateViewport={false}
-                  initialZoom={11}
-                  initialLatitude={45.5141109}
-                  initialLongitude={-122.5398426}
-                  mapboxData={data.results}
-                  mapboxDataId="transit-stops-data"
-                  mapboxLayerType="heatmap"
-                  mapboxLayerOptions={heatmapLayer}
-                  mapboxLayerId="transit-stops-map"
-                  civicMapStyle="dark"
-                />
+                <div style={{ height: "100vh" }}>
+                  <BaseMap
+                    updateViewport={false}
+                    initialZoom={11}
+                    initialLatitude={45.5141109}
+                    initialLongitude={-122.5398426}
+                    mapboxData={GeoJSONData}
+                    mapboxDataId="transit-stops-data"
+                    mapboxLayerType="heatmap"
+                    mapboxLayerOptions={heatmapLayer}
+                    mapboxLayerId="transit-stops-map"
+                    civicMapStyle="dark"
+                    useContainerHeight
+                  />
+                </div>
               );
             }}
           </DemoJSONLoader>

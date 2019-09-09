@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import { Link } from "react-router";
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { cx, css } from "emotion";
+/** @jsx jsx */
+import { css, jsx } from "@emotion/core";
 import Carousel from "nuka-carousel";
 import {
   Footer,
@@ -12,7 +12,8 @@ import {
   PieChart,
   LineChart,
   HorizontalBarChart,
-  Logo
+  Logo,
+  BrandTheme
 } from "@hackoregon/component-library";
 import { civicFormat } from "@hackoregon/component-library/dist/utils";
 
@@ -73,6 +74,14 @@ const topBar = css`
   width: 100%;
   height: 25px;
   background-color: #240f27;
+`;
+
+const bannerBlock = css`
+  position: relative;
+  width: 100%;
+  background-color: #f3f2f3;
+  margin-top: 0;
+  padding: 0.1em;
 `;
 
 const logoWrapper = css`
@@ -438,45 +447,50 @@ class HomePage extends Component {
   render() {
     return (
       <div
-        className={appWrapper}
+        css={appWrapper}
         ref={node => {
           this.node = node;
         }}
       >
         <CanvasParticles />
-        <div className={contentWrapper}>
-          <div className={topBar} />
-          <div className={initialContentContainer}>
-            <div className={logoWrapper}>
+        <div css={contentWrapper}>
+          <div css={topBar} />
+          <section css={bannerBlock}>
+            <div css={[initialContentContainer, BrandTheme.h3]}>
+              <a href="https://www.civicsoftwarefoundation.org/">
+                {`Learn more about Civic Software Foundation and Demo Day >`}
+              </a>
+            </div>
+          </section>
+          <div css={initialContentContainer}>
+            <div css={logoWrapper}>
               <Logo />
             </div>
             <div
-              className={css`
+              css={css`
                 display: flex;
                 justify-content: space-between;
                 align-items: flex-end;
               `}
             >
-              <div className={titleStyle}>
+              <div css={titleStyle}>
                 Making Public Information
                 <br />
                 Public Knowledge
               </div>
             </div>
-            <div className={subtitleStyle}>
-              Reimagining open data for the web
-            </div>
-            <div className={buttonContainerStatic}>
+            <div css={subtitleStyle}>Reimagining open data for the web</div>
+            <div css={buttonContainerStatic}>
               <Link to="/cities/portland">
                 <button
                   type="button"
-                  className={cx(buttonStyle, buttonDropShadow)}
+                  css={[buttonStyle, buttonDropShadow]}
                 >{`Explore CIVIC >`}</button>
               </Link>
             </div>
           </div>
           <Link to="/cities/portland">
-            <div className={gridContainer}>
+            <div css={gridContainer}>
               <Carousel
                 autoGenerateStyleTag={false}
                 autoplay
@@ -487,10 +501,10 @@ class HomePage extends Component {
                 withoutControls
                 cellSpacing={20}
               >
-                <div className={gridItem}>
-                  <div className={issueStyle(0)}>Homelessness</div>
+                <div css={gridItem}>
+                  <div css={issueStyle(0)}>Homelessness</div>
                   <CivicCardStack cards={3}>
-                    <div className={chartWrapper}>
+                    <div css={chartWrapper}>
                       <BarChart
                         data={magnitudeOfUrbanCampsiteSweeps}
                         xLabel="Month"
@@ -502,14 +516,14 @@ class HomePage extends Component {
                     </div>
                   </CivicCardStack>
                 </div>
-                <div className={gridItem}>
-                  <div className={issueStyle(3)}>Neighborhoods</div>
+                <div css={gridItem}>
+                  <div css={issueStyle(3)}>Neighborhoods</div>
                   <CivicCardStack cards={3}>
-                    <div className={chartWrapper}>
+                    <div css={chartWrapper}>
                       <img
                         src={transportationMap}
                         alt="sample map"
-                        className={cardImage}
+                        css={cardImage}
                       />
                     </div>
                   </CivicCardStack>
@@ -525,10 +539,10 @@ class HomePage extends Component {
                 withoutControls
                 cellSpacing={20}
               >
-                <div className={gridItem}>
-                  <div className={issueStyle(1)}>Disaster Resilience</div>
+                <div css={gridItem}>
+                  <div css={issueStyle(1)}>Disaster Resilience</div>
                   <CivicCardStack cards={3}>
-                    <div className={chartWrapper}>
+                    <div css={chartWrapper}>
                       <Scatterplot
                         data={proactivePlanning}
                         xLabel="Resilience"
@@ -550,10 +564,10 @@ class HomePage extends Component {
                     </div>
                   </CivicCardStack>
                 </div>
-                <div className={gridItem}>
-                  <div className={issueStyle(2)}>Education</div>
+                <div css={gridItem}>
+                  <div css={issueStyle(2)}>Education</div>
                   <CivicCardStack cards={3}>
-                    <div className={chartWrapper}>
+                    <div css={chartWrapper}>
                       <StackedAreaChart
                         data={processedSchoolData}
                         xLabel="Year"
@@ -579,10 +593,10 @@ class HomePage extends Component {
                 withoutControls
                 cellSpacing={20}
               >
-                <div className={gridItem}>
-                  <div className={issueStyle(2)}>Transportation</div>
+                <div css={gridItem}>
+                  <div css={issueStyle(2)}>Transportation</div>
                   <CivicCardStack cards={3}>
-                    <div className={chartWrapper}>
+                    <div css={chartWrapper}>
                       <LineChart
                         data={ridershipData}
                         xLabel="Year"
@@ -596,10 +610,10 @@ class HomePage extends Component {
                     </div>
                   </CivicCardStack>
                 </div>
-                <div className={gridItem}>
-                  <div className={issueStyle(1)}>Affordable Housing</div>
+                <div css={gridItem}>
+                  <div css={issueStyle(1)}>Affordable Housing</div>
                   <CivicCardStack cards={3}>
-                    <div className={chartWrapper}>
+                    <div css={chartWrapper}>
                       <PieChart
                         data={chartData}
                         innerRadius={90}
@@ -620,10 +634,10 @@ class HomePage extends Component {
                 withoutControls
                 cellSpacing={20}
               >
-                <div className={gridItem}>
-                  <div className={issueStyle(3)}>Local Elections</div>
+                <div css={gridItem}>
+                  <div css={issueStyle(3)}>Local Elections</div>
                   <CivicCardStack cards={3}>
-                    <div className={chartWrapper}>
+                    <div css={chartWrapper}>
                       <HorizontalBarChart
                         xLabel="Influence"
                         yLabel="Category"
@@ -638,14 +652,14 @@ class HomePage extends Component {
                     </div>
                   </CivicCardStack>
                 </div>
-                <div className={gridItem}>
-                  <div className={issueStyle(0)}>Development</div>
+                <div css={gridItem}>
+                  <div css={issueStyle(0)}>Development</div>
                   <CivicCardStack cards={3}>
-                    <div className={chartWrapper}>
+                    <div css={chartWrapper}>
                       <img
                         src={evictionsMap}
                         alt="sample map"
-                        className={cardImage}
+                        css={cardImage}
                       />
                     </div>
                   </CivicCardStack>
@@ -653,27 +667,22 @@ class HomePage extends Component {
               </Carousel>
             </div>
           </Link>
-          <div className={initialContentContainer}>
-            <div className={buttonContainerStatic}>
+          <div css={initialContentContainer}>
+            <div css={buttonContainerStatic}>
               <a href="#getStarted">
-                <button
-                  type="button"
-                  className={cx(buttonStyle, buttonDropShadow)}
-                >
+                <button type="button" css={[buttonStyle, buttonDropShadow]}>
                   Get started with your city &gt;
                 </button>
               </a>
             </div>
-            <div className={aboutCivicWrapper} id="aboutCivic">
-              <div className={sectionHeaderWrapper}>
-                <div className={smallLogoWrapper}>
+            <div css={aboutCivicWrapper} id="aboutCivic">
+              <div css={sectionHeaderWrapper}>
+                <div css={smallLogoWrapper}>
                   <Logo type="squareLogoInverted" />
                 </div>
-                <div className={sectionRightContainer}>
-                  <div className={sectionHeaderTitle}>
-                    Civic Software Foundation
-                  </div>
-                  <div className={sectionHeaderSubtitle}>
+                <div css={sectionRightContainer}>
+                  <div css={sectionHeaderTitle}>Civic Software Foundation</div>
+                  <div css={sectionHeaderSubtitle}>
                     CIVIC is a fully open source project. The Civic Software
                     Foundation supports a network of people, cities, and
                     organizations who are dedicated to innovating on the CIVIC
@@ -681,47 +690,47 @@ class HomePage extends Component {
                   </div>
                 </div>
               </div>
-              <div className={cx(sectionContentWrapper, one)}>
-                <div className={contentLeftContainer}>
-                  <div className={listTitle}>Supporting People</div>
-                  <div className={listSubTitle}>Vision</div>
-                  <p className={listText}>
+              <div css={[sectionContentWrapper, one]}>
+                <div css={contentLeftContainer}>
+                  <div css={listTitle}>Supporting People</div>
+                  <div css={listSubTitle}>Vision</div>
+                  <p css={listText}>
                     Empowering cities to create technology that is a reflection
                     of their ambition, their values, and their priorities.
                   </p>
-                  <div className={listSubTitle}>Workflow</div>
-                  <p className={listText}>
+                  <div css={listSubTitle}>Workflow</div>
+                  <p css={listText}>
                     Bringing our experience to existing partnerships to reshape
                     and modernize current infrastructure and create a process to
                     ensure sustainable outcomes.
                   </p>
-                  <div className={listSubTitle}>Tactics</div>
-                  <p className={listText}>
+                  <div css={listSubTitle}>Tactics</div>
+                  <p css={listText}>
                     Helping teams solve technical challenges with proven
                     implementation strategies.
                   </p>
                 </div>
-                <div className={brainWrapper}>
+                <div css={brainWrapper}>
                   <img src={brain} alt="" />
                 </div>
-                <div className={brainWrapperMobile}>
+                <div css={brainWrapperMobile}>
                   <img src={brainMobile} alt="" />
                 </div>
-                <div className={contentRightContainer}>
-                  <div className={listTitle}>Supporting Technology</div>
-                  <div className={listSubTitle}>Open Data</div>
-                  <p className={listText}>
+                <div css={contentRightContainer}>
+                  <div css={listTitle}>Supporting Technology</div>
+                  <div css={listSubTitle}>Open Data</div>
+                  <p css={listText}>
                     Lowering the barrier to entry for information to be
                     accessible and secure from the internet so data can be
                     actionable in many ways.
                   </p>
-                  <div className={listSubTitle}>Open Code</div>
-                  <p className={listText}>
+                  <div css={listSubTitle}>Open Code</div>
+                  <p css={listText}>
                     Designing for maximum interoperability between systems with
                     reproducible standards that are built to scale.
                   </p>
-                  <div className={listSubTitle}>Open Outcomes</div>
-                  <p className={listText}>
+                  <div css={listSubTitle}>Open Outcomes</div>
+                  <p css={listText}>
                     Enabling transparency in analytical models with live data
                     sources that power shareable visualizations on the web.
                   </p>
@@ -729,47 +738,45 @@ class HomePage extends Component {
               </div>
             </div>
 
-            <div className={aboutCivicWrapper} id="getStarted">
-              <div className={cx(sectionHeaderWrapper, mediumBackground)}>
-                <div className={cx(sectionHeaderTitle, centered)}>
+            <div css={aboutCivicWrapper} id="getStarted">
+              <div css={[sectionHeaderWrapper, mediumBackground]}>
+                <div css={[sectionHeaderTitle, centered]}>
                   Join us in building CIVIC
                 </div>
               </div>
-              <div className={cx(sectionContentWrapper, leftThirdGrid)}>
-                <div className={leftThirdWrapper}>
-                  <div className={listTitle}>Membership Model for Cities</div>
-                  <p className={listText}>
+              <div css={[sectionContentWrapper, leftThirdGrid]}>
+                <div css={leftThirdWrapper}>
+                  <div css={listTitle}>Membership Model for Cities</div>
+                  <p css={listText}>
                     The code for CIVIC is open source and free, but we recognize
                     cities will be most successful through a supported process.
                   </p>
-                  <p className={listText}>
+                  <p css={listText}>
                     We have resources to help navigate the technical challenges
                     and strategic opportunities that facilitate long-term goals
                     for cities engaging with modern data systems.
                   </p>
-                  <p className={listText}>
+                  <p css={listText}>
                     We’re announcing a call to action for cities who want to
                     work closely with people who are building the CIVIC Platform
                     to become members and benefit from hands-on collaboration
                     with our partner network.
                   </p>
                   <a href="http://hackoregon.org/membership">
-                    <button type="button" className={buttonStyle}>
+                    <button type="button" css={buttonStyle}>
                       Start the conversation
                     </button>
                   </a>
                 </div>
-                <div className={rightThirdWrapper}>
-                  <div className={listTitle}>
+                <div css={rightThirdWrapper}>
+                  <div css={listTitle}>
                     Get Involved{" "}
                     <span role="img" aria-label="sparkles">
                       ✨
                     </span>
                   </div>
-                  <div className={listSubTitle}>
-                    Teamwork and building on CIVIC
-                  </div>
-                  <p className={listText}>
+                  <div css={listSubTitle}>Teamwork and building on CIVIC</div>
+                  <p css={listText}>
                     You can help make CIVIC! We’re actively building focus teams
                     across the country to develop new stories, new features, and
                     better functionality on the platform. If you’re interested
@@ -781,14 +788,14 @@ class HomePage extends Component {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <button type="button" className={buttonStyle}>
+                    <button type="button" css={buttonStyle}>
                       Apply now
                     </button>
                   </a>
-                  <div className={listSubTitle}>
+                  <div css={listSubTitle}>
                     Collaborate as an industry partner
                   </div>
-                  <p className={listText}>
+                  <p css={listText}>
                     We work with a variety of companies and organizations
                     dedicated to empowering data driven innovation in cities.
                     It’s important that CIVIC includes diverse perspectives
@@ -801,7 +808,7 @@ class HomePage extends Component {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <button type="button" className={buttonStyle}>
+                    <button type="button" css={buttonStyle}>
                       Apply now
                     </button>
                   </a>
@@ -809,48 +816,45 @@ class HomePage extends Component {
               </div>
             </div>
 
-            <div className={aboutCivicWrapper} id="aboutCivic">
-              <div className={cx(sectionHeaderWrapper, treesBackground)}>
-                <div className={cx(sectionHeaderTitle, hackOregonLogoWrapper)}>
+            <div css={aboutCivicWrapper} id="aboutCivic">
+              <div css={[sectionHeaderWrapper, treesBackground]}>
+                <div css={[sectionHeaderTitle, hackOregonLogoWrapper]}>
                   <img
                     src={hackOregonLogo}
-                    className={hackOregonLogoStyle}
+                    css={hackOregonLogoStyle}
                     alt="Hack Oregon logo"
                   />
                 </div>
               </div>
-              <div className={cx(sectionContentWrapper, rightThirdGrid)}>
-                <div className={cx(rightThirdWrapper, talkToUs)}>
-                  <div className={listTitle}>
+              <div css={[sectionContentWrapper, rightThirdGrid]}>
+                <div css={[rightThirdWrapper, talkToUs]}>
+                  <div css={listTitle}>
                     CIVIC launched to the world June 21st, 2018 at Hack Oregon’s
                     live Demo Day in Portland, Oregon.
                   </div>
-                  <div className={listTitle}>
+                  <div css={listTitle}>
                     <a href="mailto:hi@civicsoftwarefoundation.org">
                       Talk to us
                     </a>
                   </div>
-                  <div className={listText}>
+                  <div css={listText}>
                     Please be patient while our website is under construction
                     and stay tuned as we are able to share new things from the
                     Civic Software Foundation.
                   </div>
-                  <div className={iconAndTextWrapper}>
+                  <div css={iconAndTextWrapper}>
                     <img src={heartMail} width="60" alt="Mail Heart" />
                     <span>Subscribe for updates!</span>
                   </div>
-                  <div className={iconAndTextWrapper}>
+                  <div css={iconAndTextWrapper}>
                     <a href="https://secure.squarespace.com/checkout/donate?donatePageId=551721b2e4b057e153f5c1cc">
-                      <button
-                        type="button"
-                        className={cx(buttonStyle, donateButton)}
-                      >
+                      <button type="button" css={[buttonStyle, donateButton]}>
                         Donate
                       </button>
                     </a>
                     <span>Help us continue to maintain and develop CIVIC.</span>
                   </div>
-                  <div className={iconAndTextWrapper}>
+                  <div css={iconAndTextWrapper}>
                     <img src={twitterLogo} width="40" alt="Twitter Logo" />
                     <span>
                       <a href="https://twitter.com/civicsoftware">
@@ -860,26 +864,24 @@ class HomePage extends Component {
                     </span>
                   </div>
                 </div>
-                <div className={leftThirdWrapper}>
-                  <div className={listTitle}>
-                    CIVIC was developed by Hack Oregon.
-                  </div>
-                  <p className={listText}>
+                <div css={leftThirdWrapper}>
+                  <div css={listTitle}>CIVIC was developed by Hack Oregon.</div>
+                  <p css={listText}>
                     The original concept, design, and source code for the CIVIC
                     platform was developed by volunteer teams at Hack Oregon, a
                     rapid-prototyping lab dedicated to creating open data
                     projects that bring insight to local information challenges.
                   </p>
-                  <p className={listText}>
+                  <p css={listText}>
                     Hack Oregon is a non-profit program of the Civic Software
                     Foundation.
                   </p>
-                  <p className={listText}>
+                  <p css={listText}>
                     If you live in Portland, you can volunteer to join a team
                     for our next cycle.
                   </p>
                   <a href="http://hackoregon.org/civicpdx">
-                    <button type="button" className={buttonStyle}>
+                    <button type="button" css={buttonStyle}>
                       Learn more
                     </button>
                   </a>

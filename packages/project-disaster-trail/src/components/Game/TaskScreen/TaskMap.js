@@ -6,66 +6,65 @@ import { BaseMap, IconMap } from "@hackoregon/component-library";
 
 import { getCompletedTasks } from "../../../state/tasks";
 
-const [omsiLon, omsiLat] = [-122.6655, 45.5081];
+const [initialLon, initialLat] = [-122.644588, 45.508415];
+
 const getPosition = f =>
-  f.geometry ? f.geometry.coordinates : [omsiLon, omsiLat];
+  f.geometry ? f.geometry.coordinates : [initialLon, initialLat];
 
-const getIconColor = f => {
-  const mapping = {
-    BEECN: [238, 73, 92],
-    fire: [238, 73, 92],
-    injury: [238, 73, 92],
-    hunger: [238, 73, 92],
-    thirst: [238, 73, 92],
-    protection: [238, 73, 92]
-  };
-  return mapping[f.properties.type] || [25, 183, 170];
-};
-
-// This is a hacked together example mapping using last year's icon map
-// but with this year's task IDs.
 const poiIconMapping = {
-  fire: {
+  cold: {
     x: 0,
     y: 0,
-    width: 250,
-    height: 250,
-    mask: true
+    width: 445 + 2,
+    height: 445
   },
-  injury: {
-    x: 250,
+  dust: {
+    x: 445 + 4,
     y: 0,
-    width: 250,
-    height: 250,
-    mask: true
+    width: 445,
+    height: 445
   },
-  BEECN: {
-    x: 500,
+  fire: {
+    x: 890 + 4,
     y: 0,
-    width: 250,
-    height: 250,
-    mask: true
+    width: 447,
+    height: 445
+  },
+  hole: {
+    x: 0,
+    y: 445,
+    width: 445 + 2,
+    height: 445
   },
   hunger: {
+    x: 445 + 2,
+    y: 445,
+    width: 445 + 2,
+    height: 445
+  },
+  injury: {
+    x: 890 + 4,
+    y: 445,
+    width: 445,
+    height: 445
+  },
+  "lost-pet": {
     x: 0,
-    y: 250,
-    width: 250,
-    height: 250,
-    mask: true
+    y: 890,
+    width: 445 + 2,
+    height: 445
   },
   thirst: {
-    x: 250,
-    y: 250,
-    width: 250,
-    height: 250,
-    mask: true
+    x: 445 + 4,
+    y: 890,
+    width: 445,
+    height: 445
   },
-  protection: {
-    x: 500,
-    y: 250,
-    width: 250,
-    height: 250,
-    mask: true
+  weather: {
+    x: 890 + 4,
+    y: 890,
+    width: 445 + 2,
+    height: 445
   }
 };
 
@@ -97,15 +96,17 @@ const asGeoJSON = (tasks, activeTask, completedTasks) =>
   }, []);
 
 const TaskMap = ({ activeTask, completedTasks, tasks }) => {
-  // TODO: This just takes the first location and that's no good
-  const lon = activeTask ? activeTask.locations[0][0] : omsiLon;
-  const lat = activeTask ? activeTask.locations[0][1] : omsiLat;
+  // TODO: Change lon / lat for task
+  // const lon = activeTask ? activeTask.locations[0][0] : initialLon;
+  // const lat = activeTask ? activeTask.locations[0][1] : initialLat;
+  const lon = initialLon;
+  const lat = initialLat;
 
   const data = asGeoJSON(tasks, activeTask, completedTasks);
 
   return (
     <BaseMap
-      initialZoom={14}
+      initialZoom={15}
       initialLongitude={lon}
       initialLatitude={lat}
       initialPitch={60}
@@ -121,16 +122,16 @@ const TaskMap = ({ activeTask, completedTasks, tasks }) => {
         keyboard: false
       }}
       animate
+      civicMapStyle="disaster-game"
     >
       <IconMap
         data={data}
         getPosition={getPosition}
-        iconAtlas="https://i.imgur.com/xgTAROe.png"
+        iconAtlas="https://i.imgur.com/ZKYqCqW.png"
         iconMapping={poiIconMapping}
         iconSizeScale={poiIconZoomScale}
         getIcon={d => d.properties.type}
-        getSize={() => 7}
-        getColor={getIconColor}
+        getSize={() => 12}
       />
     </BaseMap>
   );

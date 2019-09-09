@@ -9,6 +9,7 @@ import {
   VictoryTooltip,
   VictoryStack
 } from "victory";
+import shortid from "shortid";
 import compareValues from "../utils/compareValues";
 import SimpleLegend from "../SimpleLegend";
 import ChartContainer from "../ChartContainer";
@@ -20,8 +21,9 @@ import {
   transformDatato100
 } from "../utils/chartHelpers";
 import groupByKey from "../utils/groupByKey";
-import CivicVictoryTheme from "../VictoryTheme/VictoryThemeIndex";
 import DataChecker from "../utils/DataChecker";
+import protectData from "../utils/protectData";
+import { VictoryTheme } from "../_Themes/index";
 
 const HorizontalBarChart = ({
   data,
@@ -43,41 +45,51 @@ const HorizontalBarChart = ({
   dataSeriesKey,
   dataSeriesLabel,
   legendComponent,
-  sortBy
+  sortBy,
+  theme,
+  protect
 }) => {
+  const safeData =
+    // eslint-disable-next-line no-nested-ternary
+    data && data.length
+      ? protect
+        ? protectData(data, { dataLabel, dataSeriesKey })
+        : data
+      : [{}];
+
   const groupedDataIfStacked = () => {
     if (stacked) {
       if (hundredPercentData) {
         return transformDatato100(
-          groupByKey(data, dataSeriesKey, dataLabel),
+          groupByKey(safeData, dataSeriesKey, dataLabel),
           dataLabel,
           dataValue
         );
       }
-      return groupByKey(data, dataSeriesKey, dataLabel);
+      return groupByKey(safeData, dataSeriesKey, dataLabel);
     }
-    return data;
+    return safeData;
   };
   const groupedData = groupedDataIfStacked();
   const barData =
     sortOrder && sortOrder.length
-      ? data
-      : data.sort(compareValues(dataValue, sortBy));
+      ? safeData
+      : safeData.sort(compareValues(dataValue, sortBy));
   const sortOrderKey =
     sortOrder && sortOrder.length ? sortOrder : "defaultSort";
   const padding = minimalist
     ? { left: 115, right: 50, bottom: 25, top: 40 }
     : { left: 115, right: 50, bottom: 50, top: 70 };
-  const barHeight = CivicVictoryTheme.civic.bar.style.data.width;
-  const spaceHeight = CivicVictoryTheme.civic.bar.style.data.padding * 2;
+  const barHeight = theme.bar.style.data.width;
+  const spaceHeight = theme.bar.style.data.padding * 2;
   const additionalHeight = padding.bottom + padding.top;
-  const minValue = Math.min(0, ...data.map(d => d[dataValue]));
+  const minValue = Math.min(0, ...safeData.map(d => d[dataValue]));
 
-  const bars = stacked ? groupedData.length : data.length;
+  const bars = stacked ? groupedData.length : safeData.length;
   const spaces = bars - 1;
   const dataHeight = bars * barHeight + spaces * spaceHeight;
   const dataSeriesLabels = dataSeriesKey
-    ? dataSeriesLabel || getDefaultDataSeriesLabels(data, dataSeriesKey)
+    ? dataSeriesLabel || getDefaultDataSeriesLabels(safeData, dataSeriesKey)
     : null;
   const legendData =
     dataSeriesLabels && dataSeriesLabels.length
@@ -98,8 +110,9 @@ const HorizontalBarChart = ({
       subtitle={subtitle}
       loading={loading}
       error={error}
+      aspectRatio={650 / (dataHeight + additionalHeight)}
     >
-      <DataChecker dataAccessors={{ dataValue }} data={data}>
+      <DataChecker dataAccessors={{ dataValue }} data={safeData}>
         {legendData &&
           (legendComponent ? (
             legendComponent(legendData)
@@ -111,7 +124,7 @@ const HorizontalBarChart = ({
           domain={domain}
           domainPadding={{ x: 11, y: 20 }}
           padding={padding}
-          theme={CivicVictoryTheme.civic}
+          theme={theme}
         >
           <VictoryAxis
             style={{
@@ -133,7 +146,7 @@ const HorizontalBarChart = ({
           {!minimalist && (
             <VictoryPortal>
               <VictoryLabel
-                style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
+                style={{ ...theme.axisLabel.style }}
                 text={yLabel}
                 textAnchor="middle"
                 title="Y Axis Label"
@@ -145,7 +158,7 @@ const HorizontalBarChart = ({
           )}
           <VictoryPortal>
             <VictoryLabel
-              style={{ ...CivicVictoryTheme.civic.axisLabel.style }}
+              style={{ ...theme.axisLabel.style }}
               text={xLabel}
               textAnchor={minimalist ? "middle" : "end"}
               title="X Axis Label"
@@ -161,7 +174,7 @@ const HorizontalBarChart = ({
                 <NegativeAwareTickLabel
                   x={0}
                   orientation="left"
-                  theme={CivicVictoryTheme.civic}
+                  theme={theme}
                 />
               }
               domainPadding={0}
@@ -172,7 +185,7 @@ const HorizontalBarChart = ({
               }))}
               x="sortOrder"
               y="dataValue"
-              events={chartEvents}
+              events={chartEvents(theme)}
               animate
             />
           )}
@@ -186,7 +199,7 @@ const HorizontalBarChart = ({
                   orientation="bottom"
                   pointerLength={0}
                   cornerRadius={0}
-                  theme={CivicVictoryTheme.civic}
+                  theme={theme}
                 />
               }
               domainPadding={0}
@@ -203,13 +216,13 @@ const HorizontalBarChart = ({
               title="Horizontal Bar Chart"
               x="sortOrder"
               y="dataValue"
-              events={chartEvents}
+              events={chartEvents(theme)}
               animate
             />
           )}
           {stacked && (
             <VictoryStack colorScale={categoricalColors(groupedData.length)}>
-              {groupedData.map((arr, i) => {
+              {groupedData.map(arr => {
                 return (
                   <VictoryBar
                     title="Horizontal Bar Chart"
@@ -221,8 +234,8 @@ const HorizontalBarChart = ({
                     }))}
                     x="dataKey"
                     y="dataValue"
-                    events={chartEvents}
-                    key={arr[i][dataValue]}
+                    events={chartEvents(theme)}
+                    key={shortid.generate()}
                     labels={arr.map(
                       d => `${d[dataSeriesKey]}: ${d[dataValue]}`
                     )}
@@ -234,7 +247,7 @@ const HorizontalBarChart = ({
                         orientation="bottom"
                         pointerLength={0}
                         cornerRadius={0}
-                        theme={CivicVictoryTheme.civic}
+                        theme={theme}
                       />
                     }
                     animate
@@ -252,7 +265,7 @@ const HorizontalBarChart = ({
                     ticks: { stroke: "none" },
                     grid: { stroke: "none" }
                   }}
-                  key={arr[i]}
+                  key={shortid.generate()}
                 />
               );
             })}
@@ -285,7 +298,9 @@ HorizontalBarChart.propTypes = {
   dataSeriesKey: PropTypes.string,
   dataSeriesLabel: PropTypes.shape({}),
   legendComponent: PropTypes.func,
-  sortBy: PropTypes.string
+  sortBy: PropTypes.string,
+  theme: PropTypes.shape({}),
+  protect: PropTypes.bool
 };
 
 HorizontalBarChart.defaultProps = {
@@ -306,7 +321,9 @@ HorizontalBarChart.defaultProps = {
   dataSeriesKey: null,
   dataSeriesLabel: {},
   legendComponent: null,
-  sortBy: "Descending"
+  sortBy: "Descending",
+  theme: VictoryTheme,
+  protect: false
 };
 
 export default HorizontalBarChart;

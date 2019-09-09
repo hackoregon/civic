@@ -1,4 +1,3 @@
-import React from "react";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
 import {
@@ -10,7 +9,8 @@ import {
   button
 } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
-import { css } from "emotion";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 import { BaseMap } from "../src";
 import notes from "./baseMap.notes.md";
 import StatefulWrapper from "../src/utils/StatefulWrapper";
@@ -285,7 +285,7 @@ export default () =>
         );
 
         return (
-          <div className={containerWrapper}>
+          <div css={containerWrapper}>
             <BaseMap useContainerHeight={useContainerHeight} />
           </div>
         );
@@ -298,7 +298,7 @@ export default () =>
       "Example: With Scale Bar",
       () => {
         return (
-          <div className={containerWrapper}>
+          <div css={containerWrapper}>
             <BaseMap
               scaleBar
               scaleBarOptions={{

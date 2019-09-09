@@ -1,4 +1,5 @@
 /** @jsx jsx */
+import { Fragment } from "react";
 import { jsx, css } from "@emotion/core";
 import PropTypes from "prop-types";
 import _ from "lodash";
@@ -7,8 +8,8 @@ import PullQuote from "../PullQuote/PullQuote";
 import Placeholder from "../Placeholder/Placeholder";
 import cardMetaTypes from "./cardMetaTypes";
 import cardMetaDescription from "./cardMetaDescriptions";
+import { Chip } from "../index";
 import {
-  Chip,
   Resource,
   MetadataQuestion,
   CollapsableSection
@@ -50,6 +51,11 @@ const description = css`
   max-width: 700px;
   margin: auto;
 `;
+
+const demoAuthorPhotos = [
+  "https://civicsoftwarefoundation.org/static/human-grid-test-4c90bfc3f316f5d4e104320cb98c43c8.png",
+  "https://civicsoftwarefoundation.org/static/human-grid-test2-ea1849501456af341647068243fc72bb.png"
+];
 
 function Desc({ id }) {
   return (
@@ -150,28 +156,39 @@ function CivicCardLayoutFullWithDescriptions({ isLoading, data, cardMeta }) {
             </p>
             <CollapsableSection
               items={cardMeta.resources.map(item => (
-                <Resource item={item} key={generate()} />
+                <Resource section={item} key={generate()} />
               ))}
               collapseAfter={7}
             />
           </section>
           <Desc id="resources" />
-          <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
-          <section
-            css={[sectionMarginSmall, sectionMaxWidthSmall, cardMetaItem]}
-            id="authors"
-          >
-            <h2>Who made this?</h2>
-            {cardMeta.authors.map(photo => (
-              <img
-                css={authorPhoto}
-                src={photo}
-                alt="Pictures of people who worked on this"
-                key={generate()}
-              />
-            ))}
-          </section>
-          <Desc id="authors" />
+          {((cardMeta.authors && cardMeta.authors === "demo") ||
+            cardMeta.authors.length > 0) && (
+            <Fragment>
+              <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
+              <section
+                css={[sectionMarginSmall, sectionMaxWidthSmall]}
+                id="authors"
+              >
+                <h2>Who made this?</h2>
+                {cardMeta.authors === "demo"
+                  ? demoAuthorPhotos.map(photo => (
+                      <img
+                        css={authorPhoto}
+                        src={photo}
+                        alt="Pictures of people who worked on this"
+                        key={generate()}
+                      />
+                    ))
+                  : cardMeta.authors.map(authorEmail => (
+                      <p key={authorEmail}>
+                        <a href={`mailto:${authorEmail}`}>{authorEmail}</a>
+                      </p>
+                    ))}
+              </section>
+              <Desc id="authors" />
+            </Fragment>
+          )}
           <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
           <section
             css={[sectionMarginSmall, sectionMaxWidthSmall, platformItem]}

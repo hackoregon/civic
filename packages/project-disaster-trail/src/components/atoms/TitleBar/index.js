@@ -1,10 +1,10 @@
-import { memo } from "react";
+import { memo, useState, useEffect } from "react";
 
 /** @jsx jsx */
 import PropTypes from "prop-types";
 import { css, jsx } from "@emotion/core";
 
-import ChapterButtons from "../../Game/ChapterButtons";
+import ChapterButtons from "../ChapterButtons";
 import billBoardPNG from "../../../../assets/billboard.png";
 
 import LevelView from "../LevelView";
@@ -18,11 +18,17 @@ const ContainerStyle = css`
   width: calc(100% - 200px);
   padding: 0 100px;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: 300px 1fr 300px;
   justify-content: center;
   align-items: flex-start;
   z-index: 103;
   pointer-events: none;
+  transform: translateY(-100%);
+  transition: transform 1s;
+`;
+
+const onScreenStyle = css`
+  transform: translateY(0%);
 `;
 
 const BillboardStyle = css`
@@ -37,8 +43,19 @@ const BillboardStyle = css`
 `;
 
 const TitleBar = ({ debug = true }) => {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    setOpen(true);
+  }, []);
+
   return (
-    <div css={ContainerStyle}>
+    <div
+      css={css`
+        ${ContainerStyle}
+        ${open && onScreenStyle}
+      `}
+    >
       <LevelView />
       <div css={BillboardStyle} />
       <PointsView />

@@ -1,20 +1,17 @@
-import React from "react";
 import PropTypes from "prop-types";
-import { css } from "emotion";
-
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
+import { BrandColors } from "../index";
 import ChartTitle from "../ChartTitle";
-
-const chartLoading = css`
-  text-align: center;
-  background: #eee;
-  height: 100%;
-`;
+import Logo from "../Logo/Logo";
 
 const chartError = css`
   text-align: center;
   background: #fdd;
   height: 100%;
 `;
+
+const defaultVictoryAspectRatio = 650 / 350;
 
 /**
   ChartContainer renders titles, subtitles, and provides some default styling for charts.
@@ -29,7 +26,8 @@ const ChartContainer = ({
   loading,
   subtitle,
   children,
-  className
+  className,
+  aspectRatio
 }) => {
   const figureWrapper = css`
     margin: 0;
@@ -40,21 +38,42 @@ const ChartContainer = ({
     width: 100%;
     ${className};
   `;
+  const fullHeight = css`
+    position: relative;
+    padding-top: ${100 / aspectRatio}%;
+    height: 100%;
+  `;
+
+  const skeletonStyle = css`
+    margin: 0 auto;
+    width: 100%;
+    max-width: 900px;
+    height: calc(100vw / ${aspectRatio});
+    max-height: ${900 / aspectRatio}px;
+    background-color: ${BrandColors.subdued.hex};
+    display: grid;
+    justify-items: center;
+    align-items: center;
+  `;
 
   let content = (
-    <figure className={figureWrapper}>
-      <ChartTitle title={title} subtitle={subtitle} />
-      <div className={wrapperStyle}>{children}</div>
-    </figure>
+    <div css={skeletonStyle}>
+      <Logo type="squareLogoAnimated" />
+    </div>
   );
 
-  if (loading) {
-    content = <div className={chartLoading}>Loading...</div>;
+  if (!loading) {
+    content = <div css={wrapperStyle}>{children}</div>;
   } else if (error) {
-    content = <div className={chartError}>{error}</div>;
+    content = <div css={[wrapperStyle, fullHeight, chartError]}>{error}</div>;
   }
 
-  return content;
+  return (
+    <figure css={figureWrapper}>
+      <ChartTitle title={title} subtitle={subtitle} />
+      {content}
+    </figure>
+  );
 };
 
 ChartContainer.propTypes = {
@@ -63,9 +82,12 @@ ChartContainer.propTypes = {
   loading: PropTypes.bool,
   children: PropTypes.node,
   subtitle: PropTypes.string,
-  className: PropTypes.string
+  className: PropTypes.string,
+  aspectRatio: PropTypes.number
 };
 
-ChartContainer.defaultProps = {};
+ChartContainer.defaultProps = {
+  aspectRatio: defaultVictoryAspectRatio
+};
 
 export default ChartContainer;

@@ -1,10 +1,8 @@
-/* TODO: Fix linting errors */
-/* eslint-disable */
-
 import PropTypes from "prop-types";
-import React from "react";
 import { Link } from "react-router";
-import { css } from "emotion";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
+import shortid from "shortid";
 
 const visibleClass = css`
   visibility: visible;
@@ -75,10 +73,13 @@ const pathOrName = (p, n) => p || `/${n.toLowerCase()}`;
 
 const NavSubMenu = ({ items, isVisible }) => (
   <div
-    className={`${nestedMenuClass} ${isVisible ? visibleClass : hiddenClass}`}
+    css={css`
+      ${nestedMenuClass};
+      ${isVisible ? visibleClass : hiddenClass}
+    `}
   >
-    {items.map((item, index) => (
-      <Link key={index} to={pathOrName(item.path, item.name)}>
+    {items.map(item => (
+      <Link key={shortid.generate()} to={pathOrName(item.path, item.name)}>
         <span className="nested-menu-link">{item.name}</span>
       </Link>
     ))}
