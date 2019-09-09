@@ -44,7 +44,7 @@ const baseMapProps = {
   // },
 };
 
-const DisturbanceStopsVisualization = () => {
+const SoutheastHawthorneComparisonMap = () => {
   const data = useContext(DataContext);
   const [disturbanceStops2017, setDisturbanceStops2017] = useState([]);
   const [disturbanceStops2018, setDisturbanceStops2018] = useState([]);
@@ -152,8 +152,8 @@ const DisturbanceStopsVisualization = () => {
   ) : null;
 };
 
-DisturbanceStopsVisualization.propTypes = {
+SoutheastHawthorneComparisonMap.propTypes = {
   data: PropTypes.shape({ disturbanceStops: resourceShape })
 };
 
-export default DisturbanceStopsVisualization;
+export default SoutheastHawthorneComparisonMap;

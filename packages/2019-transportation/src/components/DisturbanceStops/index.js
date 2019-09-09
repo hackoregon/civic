@@ -6,7 +6,6 @@ import { resourceShape } from "reduxful/react-addons";
 import { CivicCard } from "@hackoregon/component-library";
 
 import disturbanceStopsMeta from "./disturbanceStopsMeta";
-import disturbanceStopsLineChartMeta from "./disturbanceStopsLineChartMeta";
 import api from "../../state/disturbance-stops/api";
 
 const CENTER_POINT = {
@@ -60,7 +59,6 @@ const DisturbanceStops = ({ Layout }) => {
         value={{ loaded, features, center: CENTER_POINT["Hawthorne Approach"] }}
       >
         <CivicCard cardMeta={disturbanceStopsMeta} Layout={Layout} />
-        <CivicCard cardMeta={disturbanceStopsLineChartMeta} Layout={Layout} />
       </DataContext.Provider>
     </>
   );
