@@ -7,8 +7,8 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Collapse from "@material-ui/core/Collapse";
-import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
+import ChevronRight from "@material-ui/icons/ChevronRight";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import Hidden from "@material-ui/core/Hidden";
@@ -36,12 +36,14 @@ const useStyles = makeStyles(theme => ({
   },
   drawer: {
     [theme.breakpoints.up("sm")]: {
+      zIndex: "998",
       width: drawerWidth,
       flexShrink: 0
     }
   },
   appBar: {
     backgroundColor: "white",
+    zIndex: "999",
     [theme.breakpoints.up("sm")]: {
       width: "100%"
     }
@@ -187,7 +189,7 @@ const CardList = ({ CardRegistry, tagsList = tagsListExample }) => {
                 className={classes.categoryListText}
                 primary={category.replace(/^\w/, c => c.toUpperCase())}
               />
-              {categoryOpeners[category] ? <ExpandLess /> : <ExpandMore />}
+              {categoryOpeners[category] ? <ExpandMore /> : <ChevronRight />}
             </ListItem>
             <Collapse
               in={categoryOpeners[category]}
