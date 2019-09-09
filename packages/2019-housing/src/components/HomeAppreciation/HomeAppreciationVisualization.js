@@ -1,8 +1,10 @@
-import React from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import { resourceShape } from "reduxful/react-addons";
 import { isLoaded } from "reduxful";
-import { extent, scaleQuantize } from "d3";
+import { scaleQuantize } from "d3";
+import { css, jsx } from "@emotion/core";
+/** @jsx jsx */
 
 import {
   BaseMap,
@@ -12,6 +14,7 @@ import {
   LineChart,
   MapOverlay,
   MapTooltip,
+  Slider,
   VisualizationColors
 } from "@hackoregon/component-library";
 import TempLoader from "../TempLoader/TempLoader";
@@ -24,6 +27,8 @@ const RACE_LABEL_MAP = {
 };
 
 const HomeAppreciationVisualization = ({ data }) => {
+  const [threshold, setThreshold] = useState(200000);
+
   if (
     !data ||
     !isLoaded(data.annualHomeAppreciation) ||
@@ -67,12 +72,13 @@ const HomeAppreciationVisualization = ({ data }) => {
   // Map Data
   const polygonFieldName = "appreciation_estimates";
   const homeInflationFeatures = data.homeInflationData.value.results.features;
-  const minMax = extent(homeInflationFeatures, f =>
-    parseFloat(f.properties[polygonFieldName])
-  );
+  // Binary color scale for above or below the threshold
   const colorScale = scaleQuantize()
-    .domain(minMax)
-    .range(VisualizationColors.sequential.ocean);
+    .domain([threshold - 0.1, threshold])
+    .range([
+      [114, 99, 113, 100], // Brand Plum Light
+      VisualizationColors.categorical.pink.mapFormatRGBA
+    ]);
 
   return (
     <span>
@@ -109,16 +115,33 @@ const HomeAppreciationVisualization = ({ data }) => {
         yNumberFormatter={y => civicFormat.dollars(y)}
         protect
       />
-      protect
-      <strong style={{ color: "crimson" }}>
-        Map Visualization TODO:
-        <ul>
-          <li>Figure out what is wrong with this map... </li>
-        </ul>
-      </strong>
+      <div
+        css={css`
+          width: fit-content;
+        `}
+      >
+        <h5
+          css={css`
+            margin-bottom: 0.75rem;
+          `}
+        >
+          {`Per-House Appreciation Threshold`}
+        </h5>
+        <Slider.SliderWithTooltip
+          min={0}
+          max={1000000}
+          defaultValue={threshold}
+          step={100000}
+          tipFormatter={value => civicFormat.dollars(value)}
+          onChange={value => setThreshold(value)}
+          value={threshold}
+        />
+      </div>
       <ChartContainer
-        title="Per-House Appreciation For Houses Last Sold Between 1987 and 1993"
-        subtitle="Median inflation adjusted sale price ($) for sold between 1987-1993 and again 2015-2016"
+        title={`Areas with >${civicFormat.dollars(
+          threshold
+        )} Appreciation Per-House Between ~1990 and ~2015`}
+        subtitle="Median inflation adjusted sale price for houses sold between 1987-1993 and again 2015-2016 (Use the slider above to adjust the threshold)"
       >
         <BaseMap initialZoom={9.9} maxZoom={13} minZoom={6} updateViewport>
           <MapOverlay
@@ -128,8 +151,13 @@ const HomeAppreciationVisualization = ({ data }) => {
             opacity={0.25}
           >
             <MapTooltip
-              primaryName={polygonFieldName}
-              primaryField={polygonFieldName}
+              tooltipDataArray={[
+                {
+                  name: "Median Appreciation Per-House",
+                  field: polygonFieldName,
+                  formatField: f => civicFormat.dollars(f)
+                }
+              ]}
             />
           </MapOverlay>
         </BaseMap>
