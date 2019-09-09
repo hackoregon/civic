@@ -82,7 +82,7 @@ const BlackPopulationChangeVisualization = ({ isLoading, data }) => {
         </strong>
         <ChartContainer
           title="Black Population Share by Census Tract, 1990 vs 2017"
-          subtitle="subtitle"
+          subtitle="Slide to compare 1990 to 2017"
         />
         <ComparisonMap
           height={height}
