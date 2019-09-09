@@ -56,8 +56,8 @@ const HomeLoanApprovalsVisualization = ({ isLoading, data }) => {
       [166, 97, 26],
       [223, 194, 125],
       [255, 255, 255],
-      [128, 205, 193],
-      [1, 133, 113]
+      [143, 240, 232],
+      [25, 183, 170]
     ]);
 
   return (
