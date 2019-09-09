@@ -76,7 +76,7 @@ export default connect(
         {
           year: 1990,
           limit: 500,
-          metroname: "Portland-Vancouver-Hillsboro, OR-WA"
+          "tract-region": "pdx"
         }
       )
     }
@@ -119,7 +119,7 @@ export default connect(
         api.actionCreators.getNcdbYearlyData({
           year: 1990,
           limit: 500,
-          metroname: "Portland-Vancouver-Hillsboro, OR-WA"
+          "tract-region": "pdx"
         })
       );
     }
