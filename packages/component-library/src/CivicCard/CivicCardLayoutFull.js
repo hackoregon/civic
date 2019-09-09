@@ -17,6 +17,7 @@ import MenuList from "@material-ui/core/MenuList";
 import { ThemeProvider } from "@material-ui/styles";
 
 import { MaterialTheme } from "../_Themes/index";
+import ButtonNew from "../ButtonNew/ButtonNew";
 import PullQuote from "../PullQuote/PullQuote";
 import Placeholder from "../Placeholder/Placeholder";
 import Chip from "../Chip/Chip";
@@ -65,6 +66,14 @@ const centerSelf = css`
   justify-self: center;
 `;
 
+const buttonImproveContainer = css`
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 200px 200px;
+  justify-content: center;
+  justify-items: center;
+`;
+
 const demoAuthorPhotos = [
   "https://civicsoftwarefoundation.org/static/human-grid-test-4c90bfc3f316f5d4e104320cb98c43c8.png",
   "https://civicsoftwarefoundation.org/static/human-grid-test2-ea1849501456af341647068243fc72bb.png"
@@ -74,6 +83,9 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
   const [shareButtonText, setShareButtonText] = useState("Share");
   const [shareButtonOpen, setShareButtonOpen] = useState(false);
   const shareButtonAnchorRef = useRef(null);
+  const issueLink = `https://github.com/hackoregon/civic/issues/new?labels=type%3Astory-card&template=story-card-improve.md&title=[FEEDBACK] ${
+    cardMeta.slug
+  }`;
 
   function handleShareItemClick(option) {
     const linkLocation = `${_.get(window, "location.origin", "")}/cards/${
@@ -306,13 +318,13 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
             visualization, or have context to add about the dataset, we want you
             to contribute.
           </p>
-          <ul>
-            <li>
-              <a href="https://civicsoftwarefoundation.org/#volunteers">
-                Get Started!
-              </a>
-            </li>
-          </ul>
+          <div css={buttonImproveContainer}>
+            <ButtonNew
+              href="https://civicsoftwarefoundation.org/#volunteers"
+              label="Get Involved!"
+            />
+            <ButtonNew href={issueLink} label="File an Issue" />
+          </div>
         </section>
       </article>
       <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
