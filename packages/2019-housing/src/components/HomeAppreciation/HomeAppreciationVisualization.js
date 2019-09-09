@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { resourceShape } from "reduxful/react-addons";
 import { isLoaded } from "reduxful";
 import { scaleQuantize } from "d3";
+import { VictoryArea } from "victory";
 import { css, jsx } from "@emotion/core";
 /** @jsx jsx */
 
@@ -38,31 +39,18 @@ const HomeAppreciationVisualization = ({ data }) => {
     return <TempLoader />;
   }
 
-  const dataSeriesLabels = [
-    { category: "adj_appreciation_med", label: "adj_appreciation_med" },
-    { category: "adj_appreciation_25th", label: "adj_appreciation_25th" },
-    { category: "adj_appreciation_75th", label: "adj_appreciation_75th" }
-  ];
-
-  const lineChartData = data.annualHomeAppreciation.value.results.flatMap(
-    yearData => [
-      {
-        series: "raw_appreciation_med", // make this match the dataSeriesLabels
-        value: yearData.raw_appreciation_med, // make this match the dataSeriesLabels
-        sale_year: yearData.sale_year
-      },
-      {
-        series: "adj_appreciation_25th",
-        value: yearData.adj_appreciation_25th,
-        sale_year: yearData.sale_year
-      },
-      {
-        series: "adj_appreciation_75th",
-        value: yearData.adj_appreciation_75th,
-        sale_year: yearData.sale_year
-      }
-    ]
+  const lineChartData = data.annualHomeAppreciation.value.results.map(
+    yearData => ({
+      value: yearData.adj_appreciation_med,
+      sale_year: yearData.sale_year
+    })
   );
+  const areaChartData = data.annualHomeAppreciation.value.results.flatMap(
+    yearData => ({
+      y0: yearData.adj_appreciation_75th,
+      y: yearData.adj_appreciation_25th,
+      x: yearData.sale_year
+    })
   );
   const barChartData = data.homeownershipByRace.value.results.map(el => ({
     ...el,
@@ -92,28 +80,30 @@ const HomeAppreciationVisualization = ({ data }) => {
         dataValueFormatter={x => civicFormat.percentage(x)}
         protect
       />
-      <strong style={{ color: "crimson" }}>
-        LineChart Visualization TODO:
-        <ul>
-          <li>
-            Make the confidence interval lines dashed & all lines the same color
-            (see note on lineChartData)
-          </li>
-        </ul>
-      </strong>
       <LineChart
         data={lineChartData}
-        dataSeriesLabel={dataSeriesLabels}
         dataKey="sale_year"
         dataValue="value"
-        dataSeries="series"
+        dataKeyLabel="Year"
+        dataValueLabel="Median Appreciation"
+        domain={{ x: [1997, 2017], y: [0, 370000] }}
         title="Per-House Appreciation For Houses Last Sold Between 1987 and 1993"
-        subtitle="Median inflation adjusted appreciation ($) with 25th and 75th percentile ranges"
+        subtitle="Median inflation adjusted appreciation with 25th to 75th percentile range (pink)"
         xLabel="Sale Year"
         yLabel="Appreciation ($)"
         xNumberFormatter={x => civicFormat.year(x)}
         yNumberFormatter={y => civicFormat.dollars(y)}
-        protect
+        customBackgroundPlot={
+          <VictoryArea
+            style={{
+              data: {
+                fill: `${VisualizationColors.categorical.pink.hex}10`,
+                stroke: "none"
+              }
+            }}
+            data={areaChartData}
+          />
+        }
       />
       <div
         css={css`
