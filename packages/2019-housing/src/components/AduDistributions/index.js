@@ -8,13 +8,9 @@ import aduDistributionsMeta from "./aduDistributionsMeta";
 import api from "../../state/adu-distributions/api";
 
 const AduDistributions = ({ init, data, Layout }) => {
-  useEffect(
-    () => {
-      init();
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    },
-    [init]
-  );
+  useEffect(() => {
+    init();
+  }, [init]);
 
   return (
     <CivicCard cardMeta={aduDistributionsMeta} data={data} Layout={Layout} />
