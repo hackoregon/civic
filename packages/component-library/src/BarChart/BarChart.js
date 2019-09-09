@@ -15,15 +15,22 @@ import { ThemeProvider } from "emotion-theming";
 import { VictoryTheme } from "../_Themes/index";
 
 import ChartContainer from "../ChartContainer";
+import SimpleLegend from "../SimpleLegend";
 import DataChecker from "../utils/DataChecker";
 import civicFormat from "../utils/civicFormat";
-import { chartEvents, getDefaultDomain } from "../utils/chartHelpers";
+import protectData from "../utils/protectData";
+import {
+  chartEvents,
+  getDefaultDomain,
+  getDefaultDataSeriesLabels
+} from "../utils/chartHelpers";
 
 const BarChart = ({
   data,
   dataKey,
   dataValue,
   dataSeries,
+  dataSeriesLabel,
   domain,
   title,
   subtitle,
@@ -34,13 +41,32 @@ const BarChart = ({
   barWidth,
   loading,
   error,
-  theme
+  theme,
+  legendComponent,
+  protect
 }) => {
   const safeData = data && data.length ? data : [{}];
   const chartDomain = domain || getDefaultDomain(safeData, dataKey, dataValue);
   const categories = dataSeries && [
     ...new Set(safeData.map(d => d[dataSeries]))
   ];
+
+  const safeDataSeriesLabel =
+    // eslint-disable-next-line no-nested-ternary
+    dataSeriesLabel && dataSeriesLabel.length
+      ? protect
+        ? protectData(dataSeriesLabel, { x: "category", y: "label" })
+        : dataSeriesLabel
+      : null;
+
+  const dataSeriesLabels = dataSeries
+    ? safeDataSeriesLabel || getDefaultDataSeriesLabels(safeData, dataSeries)
+    : null;
+
+  const legendData =
+    dataSeriesLabels && dataSeriesLabels.length
+      ? dataSeriesLabels.map(series => ({ name: series.label }))
+      : null;
 
   return (
     <ThemeProvider theme={theme}>
@@ -50,6 +76,16 @@ const BarChart = ({
         loading={loading}
         error={error}
       >
+        {legendData &&
+          (legendComponent ? (
+            legendComponent(legendData, theme)
+          ) : (
+            <SimpleLegend
+              className="legend"
+              legendData={legendData}
+              theme={theme}
+            />
+          ))}
         <DataChecker dataAccessors={{ dataKey, dataValue }} data={safeData}>
           <VictoryChart
             padding={{ left: 90, right: 50, bottom: 50, top: 50 }}
@@ -119,7 +155,7 @@ const BarChart = ({
             )}
             {dataSeries && (
               <VictoryGroup
-                offset={(barWidth || theme.bar.style.data.width) * 1.5}
+                offset={(barWidth || theme.bar.style.data.width) * 1.2}
                 colorScale={theme.group.colorScale}
               >
                 {categories.map(category => (
@@ -170,6 +206,9 @@ BarChart.propTypes = {
   dataKey: PropTypes.string,
   dataValue: PropTypes.string,
   dataSeries: PropTypes.string,
+  dataSeriesLabel: PropTypes.arrayOf(
+    PropTypes.shape({ category: PropTypes.string, label: PropTypes.string })
+  ),
   domain: PropTypes.shape({
     x: PropTypes.arrayOf(PropTypes.number),
     y: PropTypes.arrayOf(PropTypes.number)
@@ -181,7 +220,9 @@ BarChart.propTypes = {
   xNumberFormatter: PropTypes.func,
   yNumberFormatter: PropTypes.func,
   barWidth: PropTypes.number,
-  theme: PropTypes.shape({})
+  theme: PropTypes.shape({}),
+  legendComponent: PropTypes.node,
+  protect: PropTypes.bool
 };
 
 BarChart.defaultProps = {
@@ -197,7 +238,9 @@ BarChart.defaultProps = {
   xNumberFormatter: civicFormat.year,
   yNumberFormatter: civicFormat.numeric,
   barWidth: null,
-  theme: VictoryTheme
+  theme: VictoryTheme,
+  legendComponent: null,
+  protect: false
 };
 
 export default BarChart;

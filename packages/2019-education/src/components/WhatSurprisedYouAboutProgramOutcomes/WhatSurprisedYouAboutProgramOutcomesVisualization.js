@@ -4,15 +4,12 @@ import { BarChart, civicFormat } from "@hackoregon/component-library";
 import DataCollaborativeVictoryTheme from "../../common/DataCollaborativeVictoryTheme";
 
 const data = [
-  { x: 5, y: 0.13, grade: 2 },
-  { x: 10, y: 0.1, grade: 2 },
-  { x: 15, y: 0.09, grade: 2 },
-  { x: 5, y: 0.07, grade: 4 },
-  { x: 10, y: 0.1, grade: 4 },
-  { x: 15, y: 0.15, grade: 4 },
-  { x: 5, y: 0.08, grade: 6 },
-  { x: 10, y: 0.09, grade: 6 },
-  { x: 15, y: 0.1, grade: 6 }
+  { x: 5, y: 0.13, grade: "1st - 3rd graders" },
+  { x: 10, y: 0.1, grade: "1st - 3rd graders" },
+  { x: 15, y: 0.09, grade: "1st - 3rd graders" },
+  { x: 5, y: 0.07, grade: "4th- 6th graders" },
+  { x: 10, y: 0.1, grade: "4th- 6th graders" },
+  { x: 15, y: 0.11, grade: "4th- 6th graders" }
 ];
 
 const WhatSurprisedYouAboutProgramOutcomesVisualization = () => (
@@ -26,12 +23,15 @@ const WhatSurprisedYouAboutProgramOutcomesVisualization = () => (
     `}
   >
     <BarChart
+      title="In What Circumstances Does It Work Better Or Worse?"
+      subtitle="RIT score improvement by Navigation hours and grade"
       data={data}
       dataSeries="grade"
       theme={DataCollaborativeVictoryTheme}
       yNumberFormatter={civicFormat.percentage}
       xLabel="Hours Per Week"
-      yLabel="RIT Score"
+      yLabel="Improvement in RIT Score"
+      domain={{ x: [0, 20] }}
     />
   </div>
 );
