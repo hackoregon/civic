@@ -11,7 +11,6 @@ const HouseholdIncomeByRace = ({ init, data, Layout }) => {
   useEffect(() => {
     init();
   }, [init]);
-
   return (
     <CivicCard
       cardMeta={householdIncomeByRaceMeta}
