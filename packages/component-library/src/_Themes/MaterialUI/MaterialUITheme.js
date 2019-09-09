@@ -72,6 +72,14 @@ const MaterialTheme = createMuiTheme({
     MuiButtonBase: {
       disableRipple: true // No more ripple, on the whole application 💣!
     }
+  },
+  overrides: {
+    MuiMenuItem: {
+      root: {
+        minHeight: "unset",
+        lineHeight: "unset"
+      }
+    }
   }
 });
 
