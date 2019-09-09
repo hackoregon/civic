@@ -151,12 +151,6 @@ const OrbManager = ({
       const currentOrbId = currentOrb.orbId;
       const isOrbCompleted = completedOrbs.indexOf(currentOrbId) > -1;
 
-      if (touchedOrbs.indexOf(currentOrbId) > -1) {
-        tempModels.push(currentOrb);
-        // eslint-disable-next-line no-continue
-        continue;
-      }
-
       if (isOrbCompleted) {
         currentOrb = completedOrbHandler(
           checkItemIsCorrect(currentOrb),

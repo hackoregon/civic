@@ -102,7 +102,7 @@ export default class Orb extends PureComponent {
         this.setState({ isComplete: true });
         clearInterval(timer);
       } else if (percent < 100 && isActive) {
-        const update = percent + 10;
+        const update = percent + 20;
         this.setState({ percent: update });
       } else if (percent < 100 && !isActive) {
         this.setState({ isActive: false, percent: 0 });
