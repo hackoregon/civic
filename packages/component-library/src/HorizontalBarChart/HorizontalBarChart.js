@@ -74,7 +74,13 @@ const HorizontalBarChart = ({
   const barData =
     sortOrder && sortOrder.length
       ? safeData
-      : safeData.sort(compareValues(dataValue, sortBy));
+      : safeData.sort(
+          compareValues(
+            dataValue,
+            sortBy === "Ascending" ? "Descending" : "Ascending"
+          )
+        );
+  // Victory's sortOrder is flipped from what makes sense, hence this ^^
   const sortOrderKey =
     sortOrder && sortOrder.length ? sortOrder : "defaultSort";
   const padding = minimalist
@@ -203,13 +209,18 @@ const HorizontalBarChart = ({
                 />
               }
               domainPadding={0}
-              data={barData.map(d => ({
-                sortOrder: d[sortOrderKey],
-                dataValue: d[dataValue],
-                label: `${dataLabelFormatter(
-                  d[dataLabel]
-                )}: ${dataValueFormatter(d[dataValue])}`
-              }))}
+              data={barData.map(d => {
+                const datum = {
+                  dataValue: d[dataValue],
+                  label: `${dataLabelFormatter(
+                    d[dataLabel]
+                  )}: ${dataValueFormatter(d[dataValue])}`
+                };
+                if (d[sortOrderKey]) {
+                  datum.sortOrder = d[sortOrderKey];
+                }
+                return datum;
+              })}
               style={{
                 data: { fill: "none" }
               }}

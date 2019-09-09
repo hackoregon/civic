@@ -4,10 +4,10 @@ import { shallow } from "enzyme";
 import HorizontalBarChart from "./HorizontalBarChart";
 
 const simpleData = [
-  { x: 100, y: "cat" },
-  { x: 200, y: "dog" },
   { x: 300, y: "fish" },
-  { x: 400, y: "rat" }
+  { x: 400, y: "rat" },
+  { x: 100, y: "cat" },
+  { x: 200, y: "dog" }
 ];
 
 const updatedSimpleData = [
@@ -52,10 +52,10 @@ describe("HorizontalBarChart", () => {
     expect(wrapper.find({ title: "Horizontal Bar Chart" }).length).to.eql(1);
     expect(wrapper.find({ title: "Horizontal Bar Chart" }).props().data).to.eql(
       [
-        { sortOrder: -1, dataValue: 400, label: "rat: 400" },
-        { sortOrder: -2, dataValue: 300, label: "fish: 300" },
-        { sortOrder: -3, dataValue: 200, label: "dog: 200" },
-        { sortOrder: -4, dataValue: 100, label: "cat: 100" }
+        { dataValue: 100, label: "cat: 100" },
+        { dataValue: 200, label: "dog: 200" },
+        { dataValue: 300, label: "fish: 300" },
+        { dataValue: 400, label: "rat: 400" }
       ]
     );
   });
@@ -67,11 +67,11 @@ describe("HorizontalBarChart", () => {
 
     expect(wrapper.find({ title: "Horizontal Bar Chart" }).props().data).to.eql(
       [
-        { sortOrder: -1, dataValue: 500, label: "bat: 500" },
-        { sortOrder: -2, dataValue: 400, label: "rat: 400" },
-        { sortOrder: -3, dataValue: 300, label: "fish: 300" },
-        { sortOrder: -4, dataValue: 200, label: "dog: 200" },
-        { sortOrder: -5, dataValue: 100, label: "cat: 100" }
+        { dataValue: 100, label: "cat: 100" },
+        { dataValue: 200, label: "dog: 200" },
+        { dataValue: 300, label: "fish: 300" },
+        { dataValue: 400, label: "rat: 400" },
+        { dataValue: 500, label: "bat: 500" }
       ]
     );
   });
@@ -152,9 +152,9 @@ describe("HorizontalBarChart", () => {
     const wrapper = shallow(<HorizontalBarChart {...props} />);
     expect(wrapper.find({ title: "Horizontal Bar Chart" }).props().data).to.eql(
       [
-        { sortOrder: -1, dataValue: 8000, label: "Standard Poodle: 8,000" },
-        { sortOrder: -2, dataValue: 6000, label: "French Bulldog: 6,000" },
-        { sortOrder: -3, dataValue: 2000, label: "Labrador Retriever: 2,000" }
+        { dataValue: 2000, label: "Labrador Retriever: 2,000" },
+        { dataValue: 6000, label: "French Bulldog: 6,000" },
+        { dataValue: 8000, label: "Standard Poodle: 8,000" }
       ]
     );
   });
@@ -194,10 +194,10 @@ describe("HorizontalBarChart", () => {
     expect(wrapper.find({ title: "Horizontal Bar Chart" }).props().data).to.eql(
       // invisible whitespace character injected in label before :
       [
-        { sortOrder: 1, dataValue: 100, label: `black${c}: 100` },
-        { sortOrder: 2, dataValue: 200, label: `white${c}: 200` },
-        { sortOrder: 3, dataValue: 300, label: `red${c}: 300` },
-        { sortOrder: 4, dataValue: 400, label: `rat${c}: 400` }
+        { dataValue: 100, label: `black${c}: 100` },
+        { dataValue: 200, label: `white${c}: 200` },
+        { dataValue: 300, label: `red${c}: 300` },
+        { dataValue: 400, label: `rat${c}: 400` }
       ]
     );
   });
@@ -213,11 +213,11 @@ describe("HorizontalBarChart", () => {
     expect(wrapper.find({ title: "Horizontal Bar Chart" }).props().data).to.eql(
       // invisible whitespace character injected in label before :
       [
-        { sortOrder: 1, dataValue: 100, label: `black${c}: 100` },
-        { sortOrder: 2, dataValue: 200, label: `white${c}: 200` },
-        { sortOrder: 3, dataValue: 300, label: `red${c}: 300` },
-        { sortOrder: 4, dataValue: 400, label: `rat${c}: 400` },
-        { sortOrder: 5, dataValue: 500, label: `bat${c}: 500` }
+        { dataValue: 100, label: `black${c}: 100` },
+        { dataValue: 200, label: `white${c}: 200` },
+        { dataValue: 300, label: `red${c}: 300` },
+        { dataValue: 400, label: `rat${c}: 400` },
+        { dataValue: 500, label: `bat${c}: 500` }
       ]
     );
   });

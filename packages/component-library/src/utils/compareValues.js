@@ -5,10 +5,11 @@
  */
 
 function compareValues(key, order = "Ascending") {
-  console.log(order);
-
-  return function(a, b) {
-    if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+  function compareFunction(a, b) {
+    if (
+      !Object.prototype.hasOwnProperty.call(a, key) ||
+      !Object.prototype.hasOwnProperty.call(b, key)
+    ) {
       return 0;
     }
 
@@ -21,8 +22,9 @@ function compareValues(key, order = "Ascending") {
     } else if (varA < varB) {
       comparison = -1;
     }
-    return order === "Descending" ? comparison : comparison * -1;
-  };
+    return order === "Descending" ? comparison * -1 : comparison;
+  }
+  return compareFunction;
 }
 
 export default compareValues;
