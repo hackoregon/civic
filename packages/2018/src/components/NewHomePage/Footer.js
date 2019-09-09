@@ -77,7 +77,7 @@ const header = css`
 const Footer = props => (
   <footer css={footerWrapper}>
     <div css={contentWrapper(props)}>
-      <div>
+      <div id="contact-us">
         <p css={header}>Contact</p>
         <a css={textStyle} href="mailto:hi@civicsoftwarefoundation.org">
           hi@civicsoftwarefoundation.org

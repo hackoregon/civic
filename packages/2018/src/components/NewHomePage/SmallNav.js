@@ -8,6 +8,7 @@ import ListSubheader from "@material-ui/core/ListSubheader";
 import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import { Link } from "react-router";
 import hamburgerMenu from "../../assets/burger.svg";
 import { defaultFontSize } from "./index.styles";
 
@@ -100,9 +101,9 @@ const SmallNav = () => {
       <List component="nav" style={{ paddingTop: 0 }}>
         <Divider />
         <ListItem>
-          <a css={linkStyle}>
+          <Link to="/cards" css={linkStyle}>
             <ListItemText primary="EXPLORE CIVIC" />
-          </a>
+          </Link>
         </ListItem>
 
         <Divider />
@@ -140,7 +141,7 @@ const SmallNav = () => {
         <Divider />
 
         <ListItem>
-          <a css={linkStyle}>
+          <a css={linkStyle} href="#contact-us">
             <ListItemText primary="CONTACT" />
           </a>
         </ListItem>

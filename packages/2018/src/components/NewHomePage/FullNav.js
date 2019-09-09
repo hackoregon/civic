@@ -8,6 +8,7 @@ import Paper from "@material-ui/core/Paper";
 import Popper from "@material-ui/core/Popper";
 import MenuList from "@material-ui/core/MenuList";
 import MenuItem from "@material-ui/core/MenuItem";
+import { Link } from "react-router";
 
 import { defaultFontSize } from "./index.styles";
 import navCaret from "../../assets/nav-caret.svg";
@@ -148,7 +149,9 @@ const FullNav = props => {
       <nav css={navStyle} aria-label="Site">
         <ul css={linkContainer}>
           <li>
-            <a css={linkStyle}>EXPLORE CIVIC</a>
+            <Link to="/cards" css={linkStyle}>
+              EXPLORE CIVIC
+            </Link>
           </li>
           <li>
             <button
@@ -271,7 +274,9 @@ const FullNav = props => {
             </Popper>
           </li>
           <li>
-            <a css={linkStyle}>CONTACT</a>
+            <a css={linkStyle} href="#contact-us">
+              CONTACT
+            </a>
           </li>
         </ul>
       </nav>
