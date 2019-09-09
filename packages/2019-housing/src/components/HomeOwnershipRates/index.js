@@ -10,8 +10,7 @@ import api from "../../state/home-ownership-rates/api";
 const HomeOwnershipRates = ({ init, data, Layout }) => {
   useEffect(() => {
     init();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [init]);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <CivicCard cardMeta={homeOwnershipRatesMeta} data={data} Layout={Layout} />

@@ -3,11 +3,11 @@ import requestAdapter from "../request-adapter";
 
 const apiConfig = { requestAdapter };
 
-const HOST = "https://service.civicpdx.org/transportation-systems";
+const HOST = "https://service.civicpdx.org/housing2019/v1/api";
 
 const apiDesc = {
   getRedliningMapData: {
-    url: `${HOST}/passenger-census/system/annual/averages/?format=json`,
+    url: `${HOST}/holcportlandredlining/`,
     // you can apply any needed data transformations to value here
     // if complex, separate tranformation function to another file
     dataTransform: data => data

@@ -29,6 +29,7 @@ import {
 } from "../utils/chartHelpers";
 
 const LineChart = ({
+  customBackgroundPlot,
   data,
   dataKey,
   dataKeyLabel,
@@ -162,6 +163,7 @@ const LineChart = ({
                 y={295}
               />
             </VictoryPortal>
+            {customBackgroundPlot}
             {lines}
             <VictoryScatter
               //        categories={{ x: categoryData }}
@@ -201,6 +203,7 @@ const LineChart = ({
 };
 
 LineChart.propTypes = {
+  customBackgroundPlot: PropTypes.node,
   data: PropTypes.arrayOf(
     PropTypes.shape({ x: PropTypes.number, y: PropTypes.number })
   ),
@@ -231,6 +234,7 @@ LineChart.propTypes = {
 };
 
 LineChart.defaultProps = {
+  customBackgroundPlot: null,
   data: null,
   dataKey: "x",
   dataKeyLabel: null,

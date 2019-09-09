@@ -56,7 +56,8 @@
     "redux-form": "^8.1.0",
     "redux-thunk": "^2.1.0",
     "reduxful": "^1.2.2",
-    "reselect": "^3.0.0"
+    "reselect": "^3.0.0",
+    "victory": "^32.0.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",

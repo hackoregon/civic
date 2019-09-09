@@ -11,14 +11,17 @@ import api from "../../state/housing-displacement/api";
 const HousingDisplacement = ({ init, data, Layout }) => {
   useEffect(() => {
     init();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const loading =
     !isLoaded(data.homeownershipByRace) ||
+    !isLoaded(data.homeownershipHistoricallyBlack10) ||
     !isLoaded(data.homeownershipHistoricallyBlack20) ||
+    !isLoaded(data.homeownershipHistoricallyBlack30) ||
     !isLoaded(data.homeownershipHistoricallyBlack40) ||
-    !isLoaded(data.homeownershipHistoricallyBlack60);
+    !isLoaded(data.homeownershipHistoricallyBlack50) ||
+    !isLoaded(data.homeownershipHistoricallyBlack60) ||
+    !isLoaded(data.ncdbYearly1990);
 
   return (
     <CivicCard
@@ -48,13 +51,33 @@ export default connect(
         state.package2019Housing || state,
         { "1990-black-pop-proportion-floor": 0.6 }
       ),
+      homeownershipHistoricallyBlack50: api.selectors.getHomeownershipByRaceData(
+        state.package2019Housing || state,
+        { "1990-black-pop-proportion-floor": 0.5 }
+      ),
       homeownershipHistoricallyBlack40: api.selectors.getHomeownershipByRaceData(
         state.package2019Housing || state,
         { "1990-black-pop-proportion-floor": 0.4 }
       ),
+      homeownershipHistoricallyBlack30: api.selectors.getHomeownershipByRaceData(
+        state.package2019Housing || state,
+        { "1990-black-pop-proportion-floor": 0.3 }
+      ),
       homeownershipHistoricallyBlack20: api.selectors.getHomeownershipByRaceData(
         state.package2019Housing || state,
         { "1990-black-pop-proportion-floor": 0.2 }
+      ),
+      homeownershipHistoricallyBlack10: api.selectors.getHomeownershipByRaceData(
+        state.package2019Housing || state,
+        { "1990-black-pop-proportion-floor": 0.1 }
+      ),
+      ncdbYearly1990: api.selectors.getNcdbYearlyData(
+        state.package2019Housing || state,
+        {
+          year: 1990,
+          limit: 500,
+          "tract-region": "pdx"
+        }
       )
     }
     // state.packageProjectName || state needed to make work in the project package and 2018 package
@@ -69,12 +92,34 @@ export default connect(
       );
       dispatch(
         api.actionCreators.getHomeownershipByRaceData({
+          "1990-black-pop-proportion-floor": 0.5
+        })
+      );
+      dispatch(
+        api.actionCreators.getHomeownershipByRaceData({
           "1990-black-pop-proportion-floor": 0.4
         })
       );
       dispatch(
         api.actionCreators.getHomeownershipByRaceData({
+          "1990-black-pop-proportion-floor": 0.3
+        })
+      );
+      dispatch(
+        api.actionCreators.getHomeownershipByRaceData({
           "1990-black-pop-proportion-floor": 0.2
+        })
+      );
+      dispatch(
+        api.actionCreators.getHomeownershipByRaceData({
+          "1990-black-pop-proportion-floor": 0.1
+        })
+      );
+      dispatch(
+        api.actionCreators.getNcdbYearlyData({
+          year: 1990,
+          limit: 500,
+          "tract-region": "pdx"
         })
       );
     }
