@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import styled from "@emotion/styled";
 
 import { getActiveChapterId } from "../../state/chapters";
-import { ATTRACTOR, KIT, TASKS } from "../../constants/chapters";
+import { ATTRACTOR, KIT, TASKS, QUAKE } from "../../constants/chapters";
 import { palette } from "../../constants/style";
 import media from "../../utils/mediaQueries";
 import TitleBar from "../atoms/TitleBar";
@@ -24,6 +24,8 @@ const Game = ({ activeChapterId }) => {
         return <KitScreen />;
       case TASKS:
         return <TaskScreen />;
+      case QUAKE:
+        return <DefaultScreen chapterDuration={15} />;
       default:
         return <DefaultScreen />;
     }
