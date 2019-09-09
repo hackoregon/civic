@@ -83,7 +83,8 @@ import {
 import { Reducers as SandboxReducers } from "@hackoregon/civic-sandbox";
 import {
   CardDetailPage,
-  CardDetailPageEmbed
+  CardDetailPageEmbed,
+  CardList
 } from "@hackoregon/component-library";
 
 import "./fonts.css";
@@ -95,6 +96,7 @@ import PortlandCollectionPage from "./components/PortlandCollectionPage";
 import CityNotFoundPage from "./components/CityNotFoundPage";
 import StateNotFoundPage from "./components/StateNotFoundPage";
 import CardRegistry from "./card-registry";
+import tags from "./tags";
 
 // Create a store by combining all project reducers and the routing reducer
 const configureStore = (initialState, history) => {
@@ -236,6 +238,10 @@ const routes = {
     {
       path: "states/:state",
       component: StateNotFoundPage
+    },
+    {
+      path: "cards",
+      component: () => <CardList CardRegistry={CardRegistry} tagsList={tags} />
     },
     {
       path: "cards/:slug",

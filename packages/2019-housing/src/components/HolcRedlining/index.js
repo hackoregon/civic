@@ -10,7 +10,7 @@ import api from "../../state/holc-redlining/api";
 const HolcRedlining = ({ init, data, Layout }) => {
   useEffect(() => {
     init();
-  }, [init]);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return <CivicCard cardMeta={holcRedliningMeta} data={data} Layout={Layout} />;
 };

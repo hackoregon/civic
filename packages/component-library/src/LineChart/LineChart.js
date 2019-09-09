@@ -78,8 +78,11 @@ const LineChart = ({
       ? dataSeriesLabels.map(series => ({ name: series.label }))
       : null;
 
+  // eslint-disable-next-line no-nested-ternary
   const lineData = dataSeries
-    ? groupBy(safeData, dataSeries)
+    ? data && data.length
+      ? groupBy(safeData, dataSeries)
+      : null
     : { category: safeData };
 
   const dataSeriesList = dataSeriesLabels || [{ category: "category" }];

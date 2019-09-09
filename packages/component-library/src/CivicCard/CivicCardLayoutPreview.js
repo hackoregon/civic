@@ -7,7 +7,7 @@ import { generate } from "shortid";
 
 import cardMetaTypes from "./cardMetaTypes";
 import CivicCardLink from "./CivicCardLink";
-import { Chip } from "./LayoutComponents";
+import { Chip } from "../..";
 
 function CivicCardLayoutPreview({ cardMeta }) {
   return (

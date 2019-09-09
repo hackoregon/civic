@@ -9,30 +9,30 @@
 }
 
 .civic-slider-container .rc-slider-track {
-  background-color: #1e62bd;
+  background-color: #726371; /* BrandColors.plumLight.hex  */
   height: 4px;
 }
 
 .civic-slider-container .rc-slider-handle {
-  border-color: #1e62bd;
-  background-color: #1e62bd;
+  border-color: #726371;
+  background-color: #726371;
   width: 14px;
   height: 14px;
 }
 
 .civic-slider-container .rc-slider-handle:active {
-  box-shadow: 0 0 5px #1e62bd;
+  box-shadow: 0 0 5px #726371;
 }
 
 .civic-slider-container .rc-slider-handle:hover {
-  border-color: #1e62bd;
+  border-color: #726371;
 }
 
 .civic-slider-container
   .rc-slider-tooltip-placement-points-bc-tc
   .rc-slider-tooltip-arrow {
-  border-top-color: #1e62bd;
+  border-top-color: #726371;
 }
 .civic-slider-container .rc-slider-dot-active {
-  border-color: #1e62bd;
+  border-color: #726371;
 }
