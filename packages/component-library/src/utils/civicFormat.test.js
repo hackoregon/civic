@@ -12,6 +12,16 @@ describe("civicFormat", () => {
     expect(civicFormat.numeric(73000000000)).to.eql("73 billion");
   });
 
+  it("should format to rounded decimal correctly", () => {
+    expect(civicFormat.roundedDecimal(1)).to.eql("1.00");
+    expect(civicFormat.roundedDecimal(0.5)).to.eql("0.50");
+    expect(civicFormat.roundedDecimal(1.001)).to.eql("1.00");
+    expect(civicFormat.roundedDecimal(0.1501)).to.eql("0.15");
+    expect(civicFormat.roundedDecimal(100000.0000001)).to.eql("100,000.00");
+    expect(civicFormat.roundedDecimal(1000000.0000001)).to.eql("1,000,000.00");
+    expect(civicFormat.roundedDecimal(-0.7300001)).to.eql("-0.73");
+  });
+
   it("should abbriviate numbers correctly", () => {
     expect(civicFormat.numericShort(0.1)).to.eql("0");
     expect(civicFormat.numericShort(0.5)).to.eql("1");

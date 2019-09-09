@@ -1,15 +1,12 @@
 /** @jsx jsx */
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { jsx, css } from "@emotion/core";
+import { jsx } from "@emotion/core";
 import PropTypes from "prop-types";
 import MaterialCheckbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 
-const checkboxClass = css`
-  background-color: #fff;
-  color: #1e62bd;
-  cursor: pointer;
-`;
+import { ThemeProvider } from "@material-ui/styles";
+import { MaterialTheme } from "../_Themes/index";
 
 const Checkbox = ({
   variant,
@@ -19,21 +16,22 @@ const Checkbox = ({
   label,
   labelPlacement
 }) => (
-  <FormControlLabel
-    value={label}
-    control={
-      <MaterialCheckbox
-        checked={value}
-        variant={variant}
-        onChange={onChange}
-        disabled={disabled}
-        css={checkboxClass}
-        inputProps={{ "aria-label": { label } }}
-      />
-    }
-    label={label}
-    labelPlacement={labelPlacement}
-  />
+  <ThemeProvider theme={MaterialTheme}>
+    <FormControlLabel
+      value={label}
+      control={
+        <MaterialCheckbox
+          checked={value}
+          variant={variant}
+          onChange={onChange}
+          disabled={disabled}
+          inputProps={{ "aria-label": { label } }}
+        />
+      }
+      label={label}
+      labelPlacement={labelPlacement}
+    />
+  </ThemeProvider>
 );
 
 Checkbox.displayName = "Checkbox";

@@ -1,201 +1,48 @@
-import { Component } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-/** @jsx jsx */
-import { css, jsx } from "@emotion/core";
+import { resourceShape } from "reduxful/react-addons";
+import { CivicCard } from "@hackoregon/component-library";
 
-import {
-  CivicStoryCard,
-  BaseMap,
-  IconMap,
-  ChartTitle
-} from "@hackoregon/component-library";
-import CoordsShakingInformation from "./CoordsShakingInformation";
+import youAndYourNeighborsMeta from "./youAndYourNeighborsMeta";
+import api from "../../state/you-and-your-neighbors/api";
 
-import {
-  fetchYouAndYourNeighbors,
-  fetchYouAndYourNeighborsCoords,
-  youAndYourNeighborsSetCoords
-} from "../../state/you-and-your-neighbors/actions";
-import {
-  isYouAndYourNeighborsPending,
-  catchYouAndYourNeighborsErrors,
-  getYouAndYourNeighborsData,
-  isYouAndYourNeighborsCoordsPending,
-  catchYouAndYourNeighborsCoordsErrors,
-  getYouAndYourNeighborsCoordsData,
-  getSelectedCoords
-} from "../../state/you-and-your-neighbors/selectors";
-import {
-  poiIconZoomScale,
-  poiGetIconColor,
-  poiIconMapping
-} from "./layerStyles";
-
-const mapContainer = css`
-  display: flex;
-  justifycontent: center;
-  width: 500px;
-  margin: 0 auto;
-  padding-bottom: 40px;
-  @media (max-width: 640px) {
-    width: 100%;
-  }
-`;
-
-const ZOOM = 13.5;
-
-const geocoderOptions = {
-  bbox: [-123.1847001376, 45.2458284187, -122.2151566806, 45.8544896021],
-  zoom: 13.5,
-  placeholder: "Enter your address"
-};
-
-const mapGLOptions = {
-  scrollZoom: false,
-  dragPan: false,
-  dragRotate: false,
-  doubleClickZoom: false,
-  touchZoom: false,
-  touchRotate: false,
-  keyboard: false
-};
-
-export class YouAndYourNeighbors extends Component {
-  componentDidMount() {
-    const { init } = this.props;
+const YouAndYourNeighbors = ({ init, data, Layout }) => {
+  useEffect(() => {
     init();
-  }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [init]);
 
-  render() {
-    const {
-      isLoading,
-      error,
-      data,
-      coordsData,
-      selectedCoords,
-      setCoordinates
-    } = this.props;
-
-    const geocoderChange = viewport =>
-      setCoordinates({
-        latitude: viewport.latitude,
-        longitude: viewport.longitude
-      });
-    const coordsProperties =
-      coordsData &&
-      coordsData.features.length > 0 &&
-      coordsData.features[0].properties;
-    const noCoordsData = coordsData && coordsData.features.length < 1;
-
-    return (
-      <CivicStoryCard
-        title="You and Your Neighbors in the Earthquake"
-        slug="you-and-your-neighbors-in-the-earthquake"
-        loading={isLoading}
-        error={error && "Error loading data"}
-      >
-        <div>
-          <p>
-            It will be critical for individuals to understand their location
-            relative to key resources immediately following an earthquake. The{" "}
-            <a
-              href="https://www.portlandoregon.gov/pbem/59630"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              BEECN site
-            </a>{" "}
-            is a place to go in Portland after a major earthquake to ask for
-            emergency assistance or report severe damage/injury. Places like
-            hospitals, fire stations and schools will be rallying areas for the
-            community and crucial for recovery efforts. Input your address, or a
-            friend/family member’s address below to generate a personalized map
-            and information about expected impacts for your location.
-          </p>
-          <ChartTitle
-            title="Your Personalized Earthquake Map"
-            subtitle="BEECN locations, Schools, Hospitals, and Fire Stations"
-          />
-          <div css={mapContainer}>
-            <BaseMap
-              initialLongitude={selectedCoords.longitude}
-              initialLatitude={selectedCoords.latitude}
-              initialZoom={ZOOM}
-              navigation={false}
-              locationMarker
-              locationMarkerCoord={selectedCoords}
-              geocoder
-              geocoderOptions={geocoderOptions}
-              geocoderOnChange={geocoderChange}
-              mapGLOptions={mapGLOptions}
-            >
-              {data && (
-                <IconMap
-                  data={data.features}
-                  pickable
-                  opacity={0.5}
-                  iconAtlas="https://i.imgur.com/xgTAROe.png"
-                  iconMapping={poiIconMapping}
-                  iconSizeScale={poiIconZoomScale}
-                  getPosition={f =>
-                    f.geometry === null ? [0, 0] : f.geometry.coordinates
-                  }
-                  getIcon={f => f.properties.type}
-                  getSize={() => 7}
-                  getColor={poiGetIconColor}
-                  autoHighlight={false}
-                  highlightColor={[0, 0, 0, 0]}
-                />
-              )}
-            </BaseMap>
-          </div>
-          {noCoordsData && (
-            <p>
-              We don&apos;t have complete information for your address.{" "}
-              <a href="https://civicplatform.org/">
-                Learn more about how your city can work to get their data in
-                Civic.
-              </a>
-            </p>
-          )}
-          {coordsProperties && (
-            <CoordsShakingInformation coordsProperties={coordsProperties} />
-          )}
-        </div>
-      </CivicStoryCard>
-    );
-  }
-}
+  return (
+    <CivicCard cardMeta={youAndYourNeighborsMeta} data={data} Layout={Layout} />
+  );
+};
 
 YouAndYourNeighbors.displayName = "YouAndYourNeighbors";
+YouAndYourNeighbors.tags = youAndYourNeighborsMeta().tags;
+
 YouAndYourNeighbors.propTypes = {
   init: PropTypes.func,
-  isLoading: PropTypes.bool,
-  error: PropTypes.shape({}),
-  data: PropTypes.shape({}),
-  coordsData: PropTypes.shape({}),
-  selectedCoords: PropTypes.shape({}),
-  setCoordinates: PropTypes.func
+  data: PropTypes.shape({ disasterNeighborhoodGrid: resourceShape }),
+  Layout: PropTypes.func
 };
 
+const mapStateToProps = state => ({
+  data: {
+    disasterNeighborhoodGrid: api.selectors.getYouAndYourNeighbors(
+      state.package2018DisasterResilience || state
+    )
+  }
+  // state.packageProjectName || state needed to make work in the project package and 2018 package
+});
+
+const mapDispatchToProps = dispatch => ({
+  init() {
+    dispatch(api.actionCreators.getYouAndYourNeighbors());
+  }
+});
+
 export default connect(
-  state => ({
-    isLoading: isYouAndYourNeighborsPending(state),
-    error: catchYouAndYourNeighborsErrors(state),
-    data: getYouAndYourNeighborsData(state),
-    isCoordsLoading: isYouAndYourNeighborsCoordsPending(state),
-    coordsError: catchYouAndYourNeighborsCoordsErrors(state),
-    coordsData: getYouAndYourNeighborsCoordsData(state),
-    selectedCoords: getSelectedCoords(state)
-  }),
-  dispatch => ({
-    init() {
-      dispatch(fetchYouAndYourNeighbors());
-    },
-    setCoordinates(coordinates = {}) {
-      dispatch(fetchYouAndYourNeighborsCoords(coordinates));
-      dispatch(youAndYourNeighborsSetCoords(coordinates));
-    }
-  })
+  mapStateToProps,
+  mapDispatchToProps
 )(YouAndYourNeighbors);

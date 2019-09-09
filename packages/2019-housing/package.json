@@ -34,11 +34,17 @@
   "dependencies": {
     "@emotion/core": "^10.0.10",
     "@hackoregon/component-library": "^4.0.0",
+    "@hackoregon/dev-server": "^3.0.0",
+    "@hackoregon/mock-wrapper": "^3.0.0",
+    "@hackoregon/webpack-common": "^3.0.0",
     "axios": "^0.18.0",
     "compression": "^1.6.2",
     "cross-env": "^5.2.0",
+    "cross-fetch": "^3.0.4",
+    "d3": "^5.11.0",
     "express": "^4.14.1",
     "invariant": "^2.2.2",
+    "lodash": "^4.17.11",
     "prop-types": "^15.7.2",
     "ramda": "^0.23.0",
     "react": "^16.8.4",
@@ -49,7 +55,9 @@
     "redux": "^4.0.1",
     "redux-form": "^8.1.0",
     "redux-thunk": "^2.1.0",
-    "reselect": "^3.0.0"
+    "reduxful": "^1.2.2",
+    "reselect": "^3.0.0",
+    "victory": "^32.0.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",
@@ -57,8 +65,6 @@
     "@babel/node": "^7.0.0",
     "@babel/register": "^7.0.0",
     "@hackoregon/civic-babel-presets": "^3.0.0",
-    "@hackoregon/mock-wrapper": "^3.0.0",
-    "@hackoregon/webpack-common": "^3.0.0",
     "autoprefixer": "^9.4.10",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",

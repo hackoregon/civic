@@ -1,46 +1,18 @@
 import React from "react";
+import PropTypes from "prop-types";
+import { CivicCard } from "@hackoregon/component-library";
 
-import { CivicStoryCard } from "@hackoregon/component-library";
-import Quiz from "./Quiz/Quiz";
-import Summary from "./Summary/Summary";
+import whatYouCanDoToPrepareMeta from "./whatYouCanDoToPrepareMeta";
 
-export class WhatYouCanDoToPrepare extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      quizFinished: false
-    };
-  }
-
-  done(e) {
-    e.preventDefault();
-    e.stopPropagation();
-
-    this.setState({ quizFinished: true });
-  }
-
-  renderSection() {
-    const { quizFinished } = this.state;
-    return !quizFinished ? (
-      <Quiz done={e => this.done(e)} />
-    ) : (
-      <Summary quizFinished={quizFinished} />
-    );
-  }
-
-  render() {
-    return (
-      <CivicStoryCard
-        title="What You Can Do to Prepare for an Earthquake"
-        slug="what-you-can-do-to-prepare-for-an-earthquake"
-      >
-        {this.renderSection()}
-      </CivicStoryCard>
-    );
-  }
-}
+const WhatYouCanDoToPrepare = ({ Layout }) => (
+  <CivicCard cardMeta={whatYouCanDoToPrepareMeta} Layout={Layout} />
+);
 
 WhatYouCanDoToPrepare.displayName = "WhatYouCanDoToPrepare";
+WhatYouCanDoToPrepare.tags = whatYouCanDoToPrepareMeta().tags;
 
-// Connect this to the redux store when necessary
+WhatYouCanDoToPrepare.propTypes = {
+  Layout: PropTypes.func
+};
+
 export default WhatYouCanDoToPrepare;

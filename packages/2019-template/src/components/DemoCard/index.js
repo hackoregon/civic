@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { CivicCard } from "@hackoregon/component-library";
-
 import demoCardMeta from "./demoCardMeta";
 import { fetchDemoData } from "../../state/demo-data/actions";
 import {
@@ -33,6 +32,7 @@ class DemoCard extends Component {
 }
 
 DemoCard.displayName = "DemoCard";
+DemoCard.tags = demoCardMeta().tags;
 
 DemoCard.propTypes = {
   init: PropTypes.func,

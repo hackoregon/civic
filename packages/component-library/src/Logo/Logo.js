@@ -8,7 +8,7 @@ import CivicLogoC from "./CivicLogoC";
 import CivicLogoCAnimated from "./CivicLogoCAnimated";
 import CivicLogoCInverted from "./CivicLogoCInverted";
 
-function Logo({ type, alt }) {
+function Logo({ type, alt, ...other }) {
   switch (type) {
     case "standardLogo":
       return <CivicLogo alt={alt} />;
@@ -19,7 +19,7 @@ function Logo({ type, alt }) {
     case "standardLogoAnimatedInverted":
       return <CivicLogoAnimatedInverted alt={alt} />;
     case "squareLogo":
-      return <CivicLogoC alt={alt} />;
+      return <CivicLogoC alt={alt} {...other} />;
     case "squareLogoAnimated":
       return <CivicLogoCAnimated alt={alt} />;
     case "squareLogoInverted":

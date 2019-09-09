@@ -45,14 +45,7 @@ const demoCardMeta = (/* data */) => ({
   ),
   shareText:
     "TriMet has cited economic displacement as a main driver of ridership loss",
-  tags: [
-    "Transportation",
-    "Housing",
-    "Gentrification",
-    "Transit",
-    "Portland",
-    "Demo"
-  ],
+  tags: ["Transportation", "Housing", "Race", "Portland", "Chart"],
   selector: null,
   analysis: (
     <Collapsable>
@@ -508,16 +501,7 @@ const demoCardMeta = (/* data */) => ({
       ]
     }
   ],
-  authors: [
-    "scicampwinner07@gmail.com",
-    "jim.hopper@yahoo.com",
-    "byers0180@hotmail.com"
-  ]
-  // authors likely an array of keys in the future
-  // authors: [
-  //   "https://civicsoftwarefoundation.org/static/human-grid-test-4c90bfc3f316f5d4e104320cb98c43c8.png",
-  //   "https://civicsoftwarefoundation.org/static/human-grid-test2-ea1849501456af341647068243fc72bb.png"
-  // ]
+  authors: "demo"
 });
 
 export default demoCardMeta;

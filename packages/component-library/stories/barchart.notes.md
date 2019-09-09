@@ -21,3 +21,7 @@ The Custom story shows all possible properties that can be passed to the BarChar
 - Bar width
 - Loading
 - Error
+
+## Example: Grouped Data
+
+This example shows the use of the dataSeries prop to show different categories of in bar chart groups

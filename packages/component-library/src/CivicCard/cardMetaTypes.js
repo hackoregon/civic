@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
 const cardMetaObjectProperties = {
-  title: PropTypes.string,
+  title: PropTypes.string.isRequired,
   slug: PropTypes.string,
   introText: PropTypes.node,
   additionalText: PropTypes.node,
@@ -27,13 +27,15 @@ const cardMetaObjectProperties = {
       )
     })
   ),
-  // authors: PropTypes.arrayOf(PropTypes.string /* image url */)
-  authors: PropTypes.arrayOf(PropTypes.string /* author email */)
+  authors: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.string /* author email */),
+    PropTypes.oneOf(["Demo"])
+  ])
 };
 
 export const optionalCardMetaKeys = {
-  metadataQA: true,
-  selector: true
+  selector: true,
+  metadataQA: true
 };
 
 const getKeyNames = obj => {

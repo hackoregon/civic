@@ -1,19 +1,19 @@
 /* eslint-disable import/no-named-as-default */
-import React, { memo } from "react";
+import React, { Fragment, memo } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import styled from "@emotion/styled";
 
-// import * as SCREENS from "../../constants/screens";
 import { getActiveChapterId } from "../../state/chapters";
-import { KIT, TASKS } from "../../constants/chapters";
-
+import { ATTRACTOR, KIT, TASKS, QUAKE } from "../../constants/chapters";
+import { palette } from "../../constants/style";
+import media from "../../utils/mediaQueries";
 import TitleBar from "../atoms/TitleBar";
+import Panel from "../atoms/Panel";
 import DefaultScreen from "./DefaultScreen/index";
+import AttractorScreen from "./AttractorScreen/index";
 import KitScreen from "./KitScreen/index";
 import TaskScreen from "./TaskScreen/index";
-import Panel from "../atoms/Panel";
-import media from "../../utils/mediaQueries";
 
 import "@hackoregon/component-library/assets/global.styles.css";
 
@@ -24,16 +24,23 @@ const Game = ({ activeChapterId }) => {
         return <KitScreen />;
       case TASKS:
         return <TaskScreen />;
+      case QUAKE:
+        return <DefaultScreen chapterDuration={15} />;
       default:
         return <DefaultScreen />;
     }
   };
 
   return (
-    <GameContainerStyle>
-      <TitleBar />
-      <GameGrid>{renderChapter(activeChapterId)}</GameGrid>
-    </GameContainerStyle>
+    <Fragment>
+      {activeChapterId === ATTRACTOR && <AttractorScreen />}
+      {activeChapterId !== ATTRACTOR && (
+        <GameContainerStyle>
+          {activeChapterId !== ATTRACTOR && <TitleBar />}
+          <GameGrid>{renderChapter(activeChapterId)}</GameGrid>
+        </GameContainerStyle>
+      )}
+    </Fragment>
   );
 };
 
@@ -43,6 +50,7 @@ Game.displayName = "Game";
 const GameContainerStyle = styled(Panel)`
   position: relative;
   width: 100%;
+  background-color: ${palette.blue};
 `;
 
 const GameGrid = styled.div`
@@ -50,19 +58,19 @@ const GameGrid = styled.div`
   width: 100%;
   height: 100vh;
   display: grid;
-  grid-template-rows: 1fr 24px 80px 200px;
+  grid-template-rows: 1fr 304px;
   grid-template-columns: 1fr;
   justify-content: center;
   align-items: center;
   min-height: 600px;
 
   ${media.lg} {
-    grid-template-rows: 1fr 24px 60px 250px;
+    grid-template-rows: 1fr 334px;
     min-height: 800px;
   }
 
   ${media.xl} {
-    grid-template-rows: 100px 1fr 40px 700px;
+    grid-template-rows: 1fr 784px;
   }
 `;
 
@@ -75,7 +83,11 @@ export const MapStyle = styled(Panel)`
 
 export const GUIStyle = styled(Panel)`
   display: block;
+  position: relative;
   background: pink;
+  /* uncomment for orbs to be on top of other elements */
+  /* overflow: visible; */
+  /* z-index: 101; */
 `;
 
 Game.propTypes = {

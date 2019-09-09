@@ -7,21 +7,30 @@ import {
   VictoryChart,
   VictoryLabel,
   VictoryPortal,
-  VictoryTooltip
+  VictoryTooltip,
+  VictoryGroup
 } from "victory";
 
 import { ThemeProvider } from "emotion-theming";
 import { VictoryTheme } from "../_Themes/index";
 
 import ChartContainer from "../ChartContainer";
+import SimpleLegend from "../SimpleLegend";
 import DataChecker from "../utils/DataChecker";
 import civicFormat from "../utils/civicFormat";
-import { chartEvents, getDefaultDomain } from "../utils/chartHelpers";
+import protectData from "../utils/protectData";
+import {
+  chartEvents,
+  getDefaultDomain,
+  getDefaultDataSeriesLabels
+} from "../utils/chartHelpers";
 
 const BarChart = ({
   data,
   dataKey,
   dataValue,
+  dataSeries,
+  dataSeriesLabel,
   domain,
   title,
   subtitle,
@@ -32,9 +41,32 @@ const BarChart = ({
   barWidth,
   loading,
   error,
-  theme
+  theme,
+  legendComponent,
+  protect
 }) => {
-  const chartDomain = domain || getDefaultDomain(data, dataKey, dataValue);
+  const safeData = data && data.length ? data : [{}];
+  const chartDomain = domain || getDefaultDomain(safeData, dataKey, dataValue);
+  const categories = dataSeries && [
+    ...new Set(safeData.map(d => d[dataSeries]))
+  ];
+
+  const safeDataSeriesLabel =
+    // eslint-disable-next-line no-nested-ternary
+    dataSeriesLabel && dataSeriesLabel.length
+      ? protect
+        ? protectData(dataSeriesLabel, { x: "category", y: "label" })
+        : dataSeriesLabel
+      : null;
+
+  const dataSeriesLabels = dataSeries
+    ? safeDataSeriesLabel || getDefaultDataSeriesLabels(safeData, dataSeries)
+    : null;
+
+  const legendData =
+    dataSeriesLabels && dataSeriesLabels.length
+      ? dataSeriesLabels.map(series => ({ name: series.label }))
+      : null;
 
   return (
     <ThemeProvider theme={theme}>
@@ -44,7 +76,17 @@ const BarChart = ({
         loading={loading}
         error={error}
       >
-        <DataChecker dataAccessors={{ dataKey, dataValue }} data={data}>
+        {legendData &&
+          (legendComponent ? (
+            legendComponent(legendData, theme)
+          ) : (
+            <SimpleLegend
+              className="legend"
+              legendData={legendData}
+              theme={theme}
+            />
+          ))}
+        <DataChecker dataAccessors={{ dataKey, dataValue }} data={safeData}>
           <VictoryChart
             padding={{ left: 90, right: 50, bottom: 50, top: 50 }}
             domainPadding={{ x: [40, 40], y: [0, 0] }}
@@ -83,32 +125,73 @@ const BarChart = ({
                 y={295}
               />
             </VictoryPortal>
-            <VictoryBar
-              alignment="middle"
-              labelComponent={
-                <VictoryTooltip
-                  x={325}
-                  y={0}
-                  orientation="bottom"
-                  pointerLength={0}
-                  cornerRadius={0}
-                  theme={theme}
-                />
-              }
-              data={data.map(d => ({
-                dataKey: d[dataKey],
-                dataValue: d[dataValue],
-                label: `${xLabel}: ${xNumberFormatter(
-                  d[dataKey]
-                )} • ${yLabel}: ${yNumberFormatter(d[dataValue])}`
-              }))}
-              events={chartEvents(theme)}
-              x="dataKey"
-              y="dataValue"
-              title="Bar Chart"
-              style={{ data: { width: barWidth } }}
-              animate
-            />
+            {!dataSeries && (
+              <VictoryBar
+                alignment="middle"
+                labelComponent={
+                  <VictoryTooltip
+                    x={325}
+                    y={0}
+                    orientation="bottom"
+                    pointerLength={0}
+                    cornerRadius={0}
+                    theme={theme}
+                  />
+                }
+                data={safeData.map(d => ({
+                  dataKey: d[dataKey],
+                  dataValue: d[dataValue],
+                  label: `${xLabel}: ${xNumberFormatter(
+                    d[dataKey]
+                  )} • ${yLabel}: ${yNumberFormatter(d[dataValue])}`
+                }))}
+                events={chartEvents(theme)}
+                x="dataKey"
+                y="dataValue"
+                title="Bar Chart"
+                style={{ data: { width: barWidth } }}
+                animate
+              />
+            )}
+            {dataSeries && (
+              <VictoryGroup
+                offset={(barWidth || theme.bar.style.data.width) * 1.2}
+                colorScale={theme.group.colorScale}
+              >
+                {categories.map(category => (
+                  <VictoryBar
+                    alignment="middle"
+                    labelComponent={
+                      <VictoryTooltip
+                        x={325}
+                        y={0}
+                        orientation="bottom"
+                        pointerLength={0}
+                        cornerRadius={0}
+                        theme={theme}
+                      />
+                    }
+                    data={safeData
+                      .filter(d => d[dataSeries] === category)
+                      .map(d => ({
+                        dataKey: d[dataKey],
+                        dataValue: d[dataValue],
+                        label: `${xLabel}: ${xNumberFormatter(
+                          d[dataKey]
+                        )} • ${yLabel}: ${yNumberFormatter(d[dataValue])}`
+                      }))}
+                    events={chartEvents(theme)}
+                    x="dataKey"
+                    y="dataValue"
+                    title="Bar Chart"
+                    style={{
+                      data: { width: barWidth || theme.bar.style.data.width }
+                    }}
+                    animate
+                  />
+                ))}
+              </VictoryGroup>
+            )}
           </VictoryChart>
         </DataChecker>
       </ChartContainer>
@@ -122,6 +205,10 @@ BarChart.propTypes = {
   error: PropTypes.string,
   dataKey: PropTypes.string,
   dataValue: PropTypes.string,
+  dataSeries: PropTypes.string,
+  dataSeriesLabel: PropTypes.arrayOf(
+    PropTypes.shape({ category: PropTypes.string, label: PropTypes.string })
+  ),
   domain: PropTypes.shape({
     x: PropTypes.arrayOf(PropTypes.number),
     y: PropTypes.arrayOf(PropTypes.number)
@@ -133,13 +220,16 @@ BarChart.propTypes = {
   xNumberFormatter: PropTypes.func,
   yNumberFormatter: PropTypes.func,
   barWidth: PropTypes.number,
-  theme: PropTypes.shape({})
+  theme: PropTypes.shape({}),
+  legendComponent: PropTypes.node,
+  protect: PropTypes.bool
 };
 
 BarChart.defaultProps = {
   data: null,
   dataKey: "x",
   dataValue: "y",
+  dataSeries: null,
   domain: null,
   title: null,
   subtitle: null,
@@ -148,7 +238,9 @@ BarChart.defaultProps = {
   xNumberFormatter: civicFormat.year,
   yNumberFormatter: civicFormat.numeric,
   barWidth: null,
-  theme: VictoryTheme
+  theme: VictoryTheme,
+  legendComponent: null,
+  protect: false
 };
 
 export default BarChart;

@@ -13,6 +13,7 @@ const containerStyle = css`
   align-items: center;
   justify-content: center;
   background: ${palette.blue};
+  z-index: 10;
 `;
 
 const textStyle = css`
@@ -25,7 +26,7 @@ const textStyle = css`
   color: ${palette.gold};
 
   ${media.md} {
-    font-size: 48px;
+    font-size: 6em;
     padding: 10px 25px;
   }
 `;

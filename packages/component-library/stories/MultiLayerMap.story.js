@@ -311,6 +311,12 @@ export default () =>
           GROUP_IDS.DESIGN
         );
 
+        const fieldNameWeight = text(
+          "Field Name (weight):",
+          "",
+          GROUP_IDS.DESIGN
+        );
+
         const screenGridMapAPIURL =
           "https://service.civicpdx.org/neighborhood-development/api/retail_locations" +
           "?format=json&limit=500";
@@ -336,6 +342,9 @@ export default () =>
                 mapType: "ScreenGridMap",
                 id: "storybook-screengridmap-00",
                 data: featuresData,
+                fieldName: {
+                  weight: fieldNameWeight
+                },
                 squareSize,
                 opacity: squareOpacity,
                 civicColor: squareColor

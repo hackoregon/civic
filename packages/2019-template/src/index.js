@@ -6,8 +6,13 @@ import Reducers from "./state";
 import TemplateFileCard from "./components/TemplateFileCard";
 import DemoCard from "./components/DemoCard";
 import TemplateAPICard from "./components/TemplateAPICard";
+import TemplateMinimalCard from "./components/TemplateMinimalCard";
 
 const CardRegistry = [
+  {
+    slug: "template-minimal-card",
+    component: TemplateMinimalCard
+  },
   {
     slug: "template-file-card",
     component: TemplateFileCard

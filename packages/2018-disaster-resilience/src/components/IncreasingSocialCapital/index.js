@@ -2,7 +2,7 @@ import React from "react";
 
 import { CivicStoryCard, Placeholder } from "@hackoregon/component-library";
 
-export class IncreasingSocialCapital extends React.Component {
+class IncreasingSocialCapital extends React.Component {
   componentDidMount() {
     // initialize data here
   }

@@ -4,6 +4,8 @@ import { storiesOf } from "@storybook/react";
 import { checkA11y } from "@storybook/addon-a11y";
 
 // DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator import injection
+
+import buttonNewStory from "./ButtonNew.story"; // TODO: Move this to the appropriate location
 import badgeStory from "./Badge.story";
 import BarChartStory from "./BarChart.story";
 import baseMapStory from "./BaseMap.story";
@@ -40,6 +42,8 @@ import screenGridMapStory from "./ScreenGridMap.story";
 import selectStory from "./Select.story";
 import sliderStory from "./Slider.story";
 import stackedAreaChart from "./StackedAreaChart.story";
+import chipcomponentstory from "./ChipComponent.story";
+import cardListStory from "./CardList.story";
 
 import AccessibilityGuidelinesStyle from "./styleGuideStories/AccessibilityGuidelinesStyle.story";
 import CardsStyle from "./styleGuideStories/CardsStyle.story";
@@ -110,10 +114,12 @@ storiesOf("Component Lib|Basic Inputs", module)
   .addDecorator(checkA11y)
   .add("UI Components Style Guide", () => <UIComponentsStyle />);
 buttonStory();
+buttonNewStory();
 checkboxStory();
 radioButtonGroupStory();
 selectStory();
 sliderStory();
+
 // DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator story injection
 
 // charts
@@ -169,6 +175,8 @@ pdfStory();
 placeholderStory();
 pullQuoteStory();
 sandboxStory();
+chipcomponentstory();
+cardListStory();
 
 // Legacy components used in 2017 package. Not supported for ongoing development.
 // editableStory();

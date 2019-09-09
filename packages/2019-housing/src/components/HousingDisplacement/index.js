@@ -1,124 +1,128 @@
-import { Component } from "react";
-import {
-  CivicStoryCard,
-  LineChart,
-  Slider
-} from "@hackoregon/component-library";
-/** @jsx jsx */
-import { css, jsx } from "@emotion/core";
+import React, { useEffect } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { isLoaded } from "reduxful";
+import { resourceShape } from "reduxful/react-addons";
+import { CivicCard } from "@hackoregon/component-library";
 
-// TODO: Wire this up the the API when it is built
-import data from "./test-housing-displacement.json";
+import housingDisplacementMeta from "./housingDisplacementMeta";
+import api from "../../state/housing-displacement/api";
 
-class TestDisplacementCard extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { threshold: 30 };
-  }
+const HousingDisplacement = ({ init, data, Layout }) => {
+  useEffect(() => {
+    init();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  componentDidMount() {
-    // initialize data here
-  }
+  const loading =
+    !isLoaded(data.homeownershipByRace) ||
+    !isLoaded(data.homeownershipHistoricallyBlack10) ||
+    !isLoaded(data.homeownershipHistoricallyBlack20) ||
+    !isLoaded(data.homeownershipHistoricallyBlack30) ||
+    !isLoaded(data.homeownershipHistoricallyBlack40) ||
+    !isLoaded(data.homeownershipHistoricallyBlack50) ||
+    !isLoaded(data.homeownershipHistoricallyBlack60) ||
+    !isLoaded(data.ncdbYearly1990);
 
-  render() {
-    const { threshold } = this.state;
+  return (
+    <CivicCard
+      cardMeta={housingDisplacementMeta}
+      isLoading={loading}
+      data={data}
+      Layout={Layout}
+    />
+  );
+};
 
-    // Make these getter FNs
-    const fullData = data
-      .filter(row => {
-        return row[1] === "full_pop";
-      })
-      .map(row => {
-        return { x: row[2], y: row[4], series: row[3] };
-      });
+HousingDisplacement.displayName = "HousingDisplacement";
+HousingDisplacement.tags = housingDisplacementMeta().tags;
 
-    const historicallyBlackData = data
-      .filter(row => {
-        return row[1] === `black_gt${threshold}`;
-      })
-      .map(row => {
-        return { x: row[2], y: row[4], series: row[3] };
-      });
+HousingDisplacement.propTypes = {
+  init: PropTypes.func,
+  data: PropTypes.shape({ homeownershipByRace: resourceShape }),
+  Layout: PropTypes.func
+};
 
-    const dataSeries = "series";
-    const xKey = "x";
-    const xLabel = "Year";
-    const yKey = "y";
-    const yLabel = "Population";
-
-    return (
-      <CivicStoryCard
-        title="(Story Card 1, Issue #481) Portland Population Change Over Time, by Demographic"
-        slug="portland-population-change-over-time"
-      >
-        {/* DEV STATUS NOTES */}
-        <em>Local mock data only / not wired up to an API</em>
-        {/* DEV STATUS NOTES */}
-
-        <p>
-          As Portland has gentrified, neighborhoods that were historically black
-          have seen decreases in black populations. Further, the black
-          population in the Portland MSA has proportionally decreased over time,
-          demonstrating that the people displaced in these neighborhoods have
-          not stayed within the Portland MSA.
-        </p>
-        <div
-          css={css`
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 1rem;
-          `}
-        >
-          <div
-            css={css`
-              width: fit-content;
-            `}
-          >
-            <h5
-              css={css`
-                margin-bottom: 0.75rem;
-              `}
-            >
-              1990 Black Population Threshold
-            </h5>
-            <Slider.SliderWithTooltip
-              min={20}
-              max={40}
-              defaultValue={30}
-              step={10}
-              tipFormatter={value => `${value}%`}
-              onChange={value => this.setState({ threshold: value })}
-              value={threshold}
-            />
-          </div>
-        </div>
-        <div>
-          <LineChart
-            data={historicallyBlackData}
-            dataKey={xKey}
-            dataValue={yKey}
-            dataSeries={dataSeries}
-            title="Historically Black Areas"
-            xLabel={xLabel}
-            yLabel={yLabel}
-            xNumberFormatter={tick => tick.toString()}
-          />
-          <LineChart
-            data={fullData}
-            dataKey={xKey}
-            dataValue={yKey}
-            dataSeries={dataSeries}
-            title="All of Portland"
-            xLabel={xLabel}
-            yLabel={yLabel}
-            xNumberFormatter={tick => tick.toString()}
-          />
-        </div>
-      </CivicStoryCard>
-    );
-  }
-}
-
-TestDisplacementCard.displayName = "TestDisplacementCard";
-
-export default TestDisplacementCard;
+export default connect(
+  state => ({
+    data: {
+      homeownershipByRace: api.selectors.getHomeownershipByRaceData(
+        state.package2019Housing || state
+      ),
+      homeownershipHistoricallyBlack60: api.selectors.getHomeownershipByRaceData(
+        state.package2019Housing || state,
+        { "1990-black-pop-proportion-floor": 0.6 }
+      ),
+      homeownershipHistoricallyBlack50: api.selectors.getHomeownershipByRaceData(
+        state.package2019Housing || state,
+        { "1990-black-pop-proportion-floor": 0.5 }
+      ),
+      homeownershipHistoricallyBlack40: api.selectors.getHomeownershipByRaceData(
+        state.package2019Housing || state,
+        { "1990-black-pop-proportion-floor": 0.4 }
+      ),
+      homeownershipHistoricallyBlack30: api.selectors.getHomeownershipByRaceData(
+        state.package2019Housing || state,
+        { "1990-black-pop-proportion-floor": 0.3 }
+      ),
+      homeownershipHistoricallyBlack20: api.selectors.getHomeownershipByRaceData(
+        state.package2019Housing || state,
+        { "1990-black-pop-proportion-floor": 0.2 }
+      ),
+      homeownershipHistoricallyBlack10: api.selectors.getHomeownershipByRaceData(
+        state.package2019Housing || state,
+        { "1990-black-pop-proportion-floor": 0.1 }
+      ),
+      ncdbYearly1990: api.selectors.getNcdbYearlyData(
+        state.package2019Housing || state,
+        {
+          year: 1990,
+          limit: 500,
+          "tract-region": "pdx"
+        }
+      )
+    }
+    // state.packageProjectName || state needed to make work in the project package and 2018 package
+  }),
+  dispatch => ({
+    init() {
+      dispatch(api.actionCreators.getHomeownershipByRaceData());
+      dispatch(
+        api.actionCreators.getHomeownershipByRaceData({
+          "1990-black-pop-proportion-floor": 0.6
+        })
+      );
+      dispatch(
+        api.actionCreators.getHomeownershipByRaceData({
+          "1990-black-pop-proportion-floor": 0.5
+        })
+      );
+      dispatch(
+        api.actionCreators.getHomeownershipByRaceData({
+          "1990-black-pop-proportion-floor": 0.4
+        })
+      );
+      dispatch(
+        api.actionCreators.getHomeownershipByRaceData({
+          "1990-black-pop-proportion-floor": 0.3
+        })
+      );
+      dispatch(
+        api.actionCreators.getHomeownershipByRaceData({
+          "1990-black-pop-proportion-floor": 0.2
+        })
+      );
+      dispatch(
+        api.actionCreators.getHomeownershipByRaceData({
+          "1990-black-pop-proportion-floor": 0.1
+        })
+      );
+      dispatch(
+        api.actionCreators.getNcdbYearlyData({
+          year: 1990,
+          limit: 500,
+          "tract-region": "pdx"
+        })
+      );
+    }
+  })
+)(HousingDisplacement);

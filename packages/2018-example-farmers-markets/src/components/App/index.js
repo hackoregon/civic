@@ -1,9 +1,12 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
-import { PageLayout, PullQuote } from "@hackoregon/component-library";
-
-import FarmersMarketsOverTime from "../FarmersMarketsOverTime";
+import {
+  PageLayout,
+  PullQuote,
+  CivicCardLayoutClassic
+} from "@hackoregon/component-library";
 import PortlandFarmersMarkets from "../PortlandFarmersMarkets";
+import FarmersMarketsOverTime from "../FarmersMarketsOverTime";
 
 import "@hackoregon/component-library/assets/global.styles.css";
 
@@ -78,8 +81,8 @@ const App = () => (
         farmers may choose to forgo the farmers market.
       </p>
     </section>
-    <section css={sectionMarginMedium}>
-      <FarmersMarketsOverTime />
+    <section className={sectionMarginMedium}>
+      <FarmersMarketsOverTime Layout={CivicCardLayoutClassic} />
     </section>
     <section css={[sectionBodyHeading, sectionMaxWidthSmall]}>
       <h2>How does Portland look today?</h2>
@@ -92,8 +95,8 @@ const App = () => (
         this city that attracts grassroot and local initiatives.
       </p>
     </section>
-    <section css={sectionMarginMedium}>
-      <PortlandFarmersMarkets />
+    <section className={sectionMarginMedium}>
+      <PortlandFarmersMarkets Layout={CivicCardLayoutClassic} />
     </section>
     <section css={[sectionBodyHeading, sectionMaxWidthSmall]}>
       <h2>There is room for more</h2>
