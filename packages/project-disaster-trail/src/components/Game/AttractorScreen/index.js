@@ -1,3 +1,4 @@
+import { memo } from "react";
 /** @jsx jsx */
 import { css, jsx, keyframes } from "@emotion/core";
 import { connect } from "react-redux";
@@ -6,6 +7,9 @@ import PropTypes from "prop-types";
 import { palette } from "../../../constants/style";
 import { goToNextChapter } from "../../../state/chapters";
 import media from "../../../utils/mediaQueries";
+import Song from "../../atoms/Audio/Song";
+
+import attractorSong from "../../../../assets/audio/PWolf-happysong1wfadeinout.mp3";
 
 const pageWrapper = css`
   display: grid;
@@ -109,6 +113,7 @@ const bg3 = css`
 const AttractorScreen = ({ goToChapter }) => {
   return (
     <div css={pageWrapper}>
+      <Song track={attractorSong} />
       <div css={bg} />
       <div css={[bg, bg2]} />
       <div css={[bg, bg3]} />
@@ -135,4 +140,4 @@ export default connect(
       dispatch(goToNextChapter(chapter));
     }
   })
-)(AttractorScreen);
+)(memo(AttractorScreen));

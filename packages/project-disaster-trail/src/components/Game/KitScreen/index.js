@@ -10,6 +10,9 @@ import { palette } from "../../../constants/style";
 import { MapStyle } from "../index";
 import MatchLockInterface from "../../atoms/MatchLockInterface";
 import Kit from "./Kit";
+import Song from "../../atoms/Audio/Song";
+
+import kitSong from "../../../../assets/audio/HappyTheme1fadeinout.mp3";
 
 const slide = keyframes`
   0% {
@@ -61,6 +64,7 @@ const KitScreen = ({
 
   return (
     <Fragment>
+      <Song track={kitSong} />
       <MapStyle>
         <div css={bg} />
         <div css={[bg, bg2]} />
