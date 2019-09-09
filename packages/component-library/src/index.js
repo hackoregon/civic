@@ -55,6 +55,8 @@ export { default as CivicSandboxMap } from "./CivicSandboxMap/CivicSandboxMap";
 export { default as MultiLayerMap } from "./MultiLayerMap/MultiLayerMap";
 export { default as ComparisonMap } from "./ComparisonMap/ComparisonMap";
 export { default as GradientScale } from "./GradientScale/GradientScale";
+export { default as Chip } from "./Chip/Chip";
+export { default as CardList } from "./CardList/CardList";
 export {
   default as PackageSelectorBox
 } from "./PackageSelectorBox/PackageSelectorBox";

@@ -11,13 +11,8 @@ import api from "../../state/housing-displacement/api";
 const HousingDisplacement = ({ init, data, Layout }) => {
   useEffect(() => {
     init();
-  }, [
-    /*
-    https://reactjs.org/docs/hooks-effect.html#tip-optimizing-performance-by-skipping-effects
-
-    Add second argument to prevent useEffect running init() again
-    */
-  ]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const loading =
     !isLoaded(data.homeownershipByRace) ||
