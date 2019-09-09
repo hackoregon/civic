@@ -11,8 +11,7 @@ import api from "../../state/black-population-change/api";
 const BlackPopulationChange = ({ init, data, Layout }) => {
   useEffect(() => {
     init();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const loading =
     !isLoaded(data.ncdbYearly1990) || !isLoaded(data.ncdbYearly2017);
