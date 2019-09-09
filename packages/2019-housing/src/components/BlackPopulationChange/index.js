@@ -11,7 +11,7 @@ import api from "../../state/black-population-change/api";
 const BlackPopulationChange = ({ init, data, Layout }) => {
   useEffect(() => {
     init();
-  }, [init]);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const loading =
     !isLoaded(data.ncdbYearly1990) || !isLoaded(data.ncdbYearly2017);
@@ -27,6 +27,7 @@ const BlackPopulationChange = ({ init, data, Layout }) => {
 };
 
 BlackPopulationChange.displayName = "BlackPopulationChange";
+BlackPopulationChange.tags = blackPopulationChangeMeta().tags;
 
 BlackPopulationChange.propTypes = {
   init: PropTypes.func,
@@ -44,7 +45,7 @@ export default connect(
         state.package2019Housing || state,
         {
           limit: 500,
-          metroname: "Portland-Vancouver-Hillsboro, OR-WA",
+          "tract-region": "pdx",
           year: 1990
         }
       ),
@@ -52,7 +53,7 @@ export default connect(
         state.package2019Housing || state,
         {
           limit: 500,
-          metroname: "Portland-Vancouver-Hillsboro, OR-WA",
+          "tract-region": "pdx",
           year: 2017
         }
       )
@@ -64,14 +65,14 @@ export default connect(
       dispatch(
         api.actionCreators.getNcdbYearlyData({
           limit: 500,
-          metroname: "Portland-Vancouver-Hillsboro, OR-WA",
+          "tract-region": "pdx",
           year: 1990
         })
       );
       dispatch(
         api.actionCreators.getNcdbYearlyData({
           limit: 500,
-          metroname: "Portland-Vancouver-Hillsboro, OR-WA",
+          "tract-region": "pdx",
           year: 2017
         })
       );

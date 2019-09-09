@@ -29,6 +29,7 @@ import {
 } from "../utils/chartHelpers";
 
 const LineChart = ({
+  customBackgroundPlot,
   data,
   dataKey,
   dataKeyLabel,
@@ -78,8 +79,11 @@ const LineChart = ({
       ? dataSeriesLabels.map(series => ({ name: series.label }))
       : null;
 
+  // eslint-disable-next-line no-nested-ternary
   const lineData = dataSeries
-    ? groupBy(safeData, dataSeries)
+    ? data && data.length
+      ? groupBy(safeData, dataSeries)
+      : null
     : { category: safeData };
 
   const dataSeriesList = dataSeriesLabels || [{ category: "category" }];
@@ -159,6 +163,7 @@ const LineChart = ({
                 y={295}
               />
             </VictoryPortal>
+            {customBackgroundPlot}
             {lines}
             <VictoryScatter
               //        categories={{ x: categoryData }}
@@ -198,6 +203,7 @@ const LineChart = ({
 };
 
 LineChart.propTypes = {
+  customBackgroundPlot: PropTypes.node,
   data: PropTypes.arrayOf(
     PropTypes.shape({ x: PropTypes.number, y: PropTypes.number })
   ),
@@ -228,6 +234,7 @@ LineChart.propTypes = {
 };
 
 LineChart.defaultProps = {
+  customBackgroundPlot: null,
   data: null,
   dataKey: "x",
   dataKeyLabel: null,

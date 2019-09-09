@@ -6,9 +6,10 @@ import _ from "lodash";
 import { generate } from "shortid";
 import PullQuote from "../PullQuote/PullQuote";
 import Placeholder from "../Placeholder/Placeholder";
+import Chip from "../Chip/Chip";
 import cardMetaTypes from "./cardMetaTypes";
+
 import {
-  Chip,
   Resource,
   MetadataQuestion,
   CollapsableSection

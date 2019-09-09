@@ -15,10 +15,20 @@ const MultiScreenGridMap = props => {
     getPosition = f => f.geometry.coordinates,
     squareSize = 10,
     autoHighlight = true,
-    highlightColor = [255, 255, 0, 100]
+    highlightColor = [255, 255, 0, 100],
+    fieldName = {}
   } = props;
 
   const colorRange = CIVIC_MAP_COLORS[civicColor];
+
+  const getWeight = feature => {
+    const { weight: fieldNameWeight } = fieldName;
+    if (fieldName && fieldNameWeight) {
+      const weight = feature.properties[fieldNameWeight];
+      return weight || 1;
+    }
+    return 1;
+  };
 
   return (
     <ScreenGridLayer
@@ -34,6 +44,7 @@ const MultiScreenGridMap = props => {
       highlightColor={highlightColor}
       gpuAggregation={false}
       updateTriggers={{ colorRange }}
+      getWeight={getWeight}
     />
   );
 };
@@ -47,7 +58,10 @@ MultiScreenGridMap.propTypes = {
   getPosition: func,
   squareSize: number,
   autoHighlight: bool,
-  highlightColor: arrayOf(number)
+  highlightColor: arrayOf(number),
+  fieldName: shape({
+    weight: string
+  })
 };
 
 export default MultiScreenGridMap;

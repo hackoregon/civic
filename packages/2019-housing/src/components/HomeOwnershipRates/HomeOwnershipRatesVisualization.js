@@ -4,9 +4,10 @@ import { resourceShape } from "reduxful/react-addons";
 import { isLoaded } from "reduxful";
 
 import { civicFormat, LineChart } from "@hackoregon/component-library";
+import TempLoader from "../TempLoader/TempLoader";
 
 const HomeOwnershipRatesVisualization = ({ data }) => {
-  if (!isLoaded(data.homeownershipByRace)) return <div>Data Loading...</div>;
+  if (!isLoaded(data.homeownershipByRace)) return <TempLoader />;
 
   const dataSeriesLabels = [
     { category: "white", label: "white" },

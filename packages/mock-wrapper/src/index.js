@@ -90,7 +90,7 @@ export default function MockWrapper(
       component: CardDetailWrapper
     };
     const cardDetailEmbedRoute = {
-      path: "cards/:slug/embed",
+      path: "cards/:slug/embed(/:layout)",
       component: CardDetailEmbedWrapper
     };
 

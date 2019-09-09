@@ -4,9 +4,10 @@ import { resourceShape } from "reduxful/react-addons";
 import { isLoaded } from "reduxful";
 
 import { civicFormat, LineChart } from "@hackoregon/component-library";
+import TempLoader from "../TempLoader/TempLoader";
 
 const HouseholdIncomeByRaceVisualization = ({ data }) => {
-  if (!isLoaded(data.householdIncomeByRace)) return <div>Data Loading...</div>;
+  if (!isLoaded(data.householdIncomeByRace)) return <TempLoader />;
 
   const dataSeriesLabels = [
     { category: "Asian/Pacific Islander", label: "Asian/Pacific Islander" },
@@ -19,32 +20,24 @@ const HouseholdIncomeByRaceVisualization = ({ data }) => {
 
   return (
     data && (
-      <span>
-        <strong style={{ color: "crimson" }}>
-          Visualization TODO:
-          <ul>
-            <li>Figure out why dot colors do not match lines...</li>
-          </ul>
-        </strong>
-        <LineChart
-          data={data.householdIncomeByRace.value.results}
-          dataKey="year"
-          dataValue="adjusted_median_income"
-          dataSeries="race_explicit"
-          dataSeriesLabel={dataSeriesLabels}
-          domain={{
-            x: [1990, 2017],
-            y: [30000, 80200]
-          }}
-          subtitle="Portland 7-county MSA, 1990 to 2017, adjusted for inflation to 2018"
-          title="Median Household Income by Race over Time"
-          xLabel="Census Year"
-          yLabel="Income"
-          xNumberFormatter={x => civicFormat.year(x)}
-          yNumberFormatter={y => civicFormat.dollars(y)}
-          protect
-        />
-      </span>
+      <LineChart
+        data={data.householdIncomeByRace.value.results}
+        dataKey="year"
+        dataValue="adjusted_median_income"
+        dataSeries="race_explicit"
+        dataSeriesLabel={dataSeriesLabels}
+        domain={{
+          x: [1990, 2017],
+          y: [30000, 80200]
+        }}
+        subtitle="Portland 7-county MSA, 1990 to 2017, adjusted for inflation to 2018"
+        title="Median Household Income by Race over Time"
+        xLabel="Census Year"
+        yLabel="Income"
+        xNumberFormatter={x => civicFormat.year(x)}
+        yNumberFormatter={y => civicFormat.dollars(y)}
+        protect
+      />
     )
   );
 };

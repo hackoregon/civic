@@ -11,7 +11,7 @@ import api from "../../state/home-loan-approvals/api";
 const HomeLoanApprovals = ({ init, data, Layout }) => {
   useEffect(() => {
     init();
-  }, [init]);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const loading = !isLoaded(data.totalLoans);
 
@@ -26,6 +26,7 @@ const HomeLoanApprovals = ({ init, data, Layout }) => {
 };
 
 HomeLoanApprovals.displayName = "HomeLoanApprovals";
+HomeLoanApprovals.tags = homeLoanApprovalsMeta().tags;
 
 HomeLoanApprovals.propTypes = {
   init: PropTypes.func,

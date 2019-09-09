@@ -9,6 +9,7 @@ const WhatYouCanDoToPrepare = ({ Layout }) => (
 );
 
 WhatYouCanDoToPrepare.displayName = "WhatYouCanDoToPrepare";
+WhatYouCanDoToPrepare.tags = whatYouCanDoToPrepareMeta().tags;
 
 WhatYouCanDoToPrepare.propTypes = {
   Layout: PropTypes.func
