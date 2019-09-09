@@ -137,19 +137,20 @@ const reducer = (state = INITIAL_STATE, action) => {
         selectedSlideDatum: null
       };
     }
-    case SET_PACKAGE:
+    case SET_PACKAGE: {
       console.log("a-SET_PACKAGE:", action);
+      const [findDefaultLayers] = state.sandbox.packages.filter(
+        d => d.displayName === action.selectedPackage.displayName
+      );
+      console.log("SET_PACKAGE-findDefaultLayers:", findDefaultLayers);
       return {
         ...state,
         selectedPackage: action.selectedPackage.displayName,
         foundationData: {},
         slidesData: [],
-        // selectedFoundation:
-        //   state.sandbox.packages[action.selectedPackage].default_foundation,
-        selectedSlide: state.sandbox.packages
-          .filter(d => d.displayName === action.selectedPackage.displayName)
-          .reduce((a, c) => [...a, ...c.layers.map(d => d.name)], [])
-          .slice(0, 1),
+        selectedSlide: findDefaultLayers.defaultLayers
+          ? findDefaultLayers.defaultLayers
+          : [],
         sandbox: {
           ...state.sandbox,
           foundations: []
@@ -158,6 +159,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         selectedSlideDatum: null,
         selectedSlideKey: {}
       };
+    }
     case SET_SLIDE_KEY:
       console.log("a-SET_SLIDE_KEY:", action);
       return {
