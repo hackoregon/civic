@@ -1,9 +1,23 @@
 /** @jsx jsx */
-import { Fragment } from "react";
+import { Fragment, useState, useRef } from "react";
 import { jsx, css } from "@emotion/core";
 import PropTypes from "prop-types";
 import _ from "lodash";
 import { generate } from "shortid";
+import copy from "copy-to-clipboard";
+import Button from "@material-ui/core/Button";
+import ButtonGroup from "@material-ui/core/ButtonGroup";
+import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+import ClickAwayListener from "@material-ui/core/ClickAwayListener";
+import Grow from "@material-ui/core/Grow";
+import Paper from "@material-ui/core/Paper";
+import Popper from "@material-ui/core/Popper";
+import MenuItem from "@material-ui/core/MenuItem";
+import MenuList from "@material-ui/core/MenuList";
+import { ThemeProvider } from "@material-ui/styles";
+
+import { MaterialTheme } from "../_Themes/index";
+import ButtonNew from "../ButtonNew/ButtonNew";
 import PullQuote from "../PullQuote/PullQuote";
 import Placeholder from "../Placeholder/Placeholder";
 import cardMetaTypes from "./cardMetaTypes";
@@ -52,6 +66,27 @@ const description = css`
   margin: auto;
 `;
 
+const headerStyle = css`
+  display: grid;
+  padding-bottom: 20px;
+`;
+
+const titleStyle = css`
+  margin: 30px 0 20px;
+`;
+
+const centerSelf = css`
+  justify-self: center;
+`;
+
+const buttonImproveContainer = css`
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 200px 200px;
+  justify-content: center;
+  justify-items: center;
+`;
+
 const demoAuthorPhotos = [
   "https://civicsoftwarefoundation.org/static/human-grid-test-4c90bfc3f316f5d4e104320cb98c43c8.png",
   "https://civicsoftwarefoundation.org/static/human-grid-test2-ea1849501456af341647068243fc72bb.png"
@@ -72,17 +107,116 @@ Desc.propTypes = {
 };
 
 function CivicCardLayoutFullWithDescriptions({ isLoading, data, cardMeta }) {
+  const [shareButtonText, setShareButtonText] = useState("Share");
+  const [shareButtonOpen, setShareButtonOpen] = useState(false);
+  const shareButtonAnchorRef = useRef(null);
+  const issueLink = `https://github.com/hackoregon/civic/issues/new?labels=type%3Astory-card&template=story-card-improve.md&title=[FEEDBACK] ${
+    cardMeta.slug
+  }`;
+
+  function handleShareItemClick(option) {
+    const linkLocation = `${_.get(window, "location.origin", "")}/cards/${
+      cardMeta.slug
+    }`;
+
+    if (option === "link") {
+      copy(linkLocation);
+    } else {
+      copy(`${linkLocation}/embed`);
+    }
+
+    setShareButtonText("Copied!");
+    setTimeout(() => {
+      setShareButtonText("Share");
+    }, 2000);
+    setShareButtonOpen(false);
+  }
+
+  function handleShareButtonToggle() {
+    setShareButtonOpen(prevOpen => !prevOpen);
+  }
+
+  function handleShareButtonClose(event) {
+    if (
+      shareButtonAnchorRef.current &&
+      shareButtonAnchorRef.current.contains(event.target)
+    ) {
+      return;
+    }
+
+    setShareButtonOpen(false);
+  }
+
+  const shareButtonOptions = [
+    { text: "Link", linkTo: "link" },
+    { text: "Embed", linkTo: "embed" }
+  ];
+
   return (
     <div>
-      <div>
+      <ThemeProvider theme={MaterialTheme}>
         <article>
           <div css={[sectionMarginSmall, sectionMaxWidthSmall]}>
-            <header>
-              <h1 css={cardMetaItem} id="title">
+            <header css={headerStyle}>
+              <h1 id="title" css={titleStyle}>
                 {cardMeta.title}
               </h1>
-              <Desc id="title" />
+              <ButtonGroup
+                variant="contained"
+                color="secondary"
+                ref={shareButtonAnchorRef}
+                aria-label="split button"
+                css={centerSelf}
+              >
+                <Button onClick={handleShareButtonToggle}>
+                  {shareButtonText}
+                </Button>
+                <Button
+                  color="secondary"
+                  size="small"
+                  aria-owns={shareButtonOpen ? "menu-list-grow" : undefined}
+                  aria-haspopup="true"
+                  onClick={handleShareButtonToggle}
+                >
+                  <ArrowDropDownIcon />
+                </Button>
+              </ButtonGroup>
+              <Popper
+                open={shareButtonOpen}
+                anchorEl={shareButtonAnchorRef.current}
+                transition
+                disablePortal
+                placement="bottom-end"
+              >
+                {({ TransitionProps, placement }) => (
+                  <Grow
+                    {...TransitionProps}
+                    style={{
+                      transformOrigin:
+                        placement === "bottom" ? "center top" : "right bottom"
+                    }}
+                  >
+                    <Paper id="menu-list-grow">
+                      <ClickAwayListener onClickAway={handleShareButtonClose}>
+                        <MenuList>
+                          {shareButtonOptions.map(option => (
+                            <MenuItem
+                              key={option.text}
+                              onClick={() =>
+                                handleShareItemClick(option.linkTo)
+                              }
+                            >
+                              {option.text}
+                            </MenuItem>
+                          ))}
+                        </MenuList>
+                      </ClickAwayListener>
+                    </Paper>
+                  </Grow>
+                )}
+              </Popper>
             </header>
+            <Desc id="title" />
             <hr />
             <section css={cardMetaItem} id="tags">
               {cardMeta.tags.map((tag, index) => (
@@ -201,13 +335,13 @@ function CivicCardLayoutFullWithDescriptions({ isLoading, data, cardMeta }) {
               data visualization, or have context to add about the dataset, we
               want you to contribute.
             </p>
-            <ul>
-              <li>
-                <a href="https://civicsoftwarefoundation.org/#volunteers">
-                  Get Started!
-                </a>
-              </li>
-            </ul>
+            <div css={buttonImproveContainer}>
+              <ButtonNew
+                href="https://civicsoftwarefoundation.org/#volunteers"
+                label="Get Involved!"
+              />
+              <ButtonNew href={issueLink} label="File an Issue" />
+            </div>
           </section>
         </article>
         <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
@@ -224,7 +358,7 @@ function CivicCardLayoutFullWithDescriptions({ isLoading, data, cardMeta }) {
             </h3>
           </Placeholder>
         </section>
-      </div>
+      </ThemeProvider>
     </div>
   );
 }
