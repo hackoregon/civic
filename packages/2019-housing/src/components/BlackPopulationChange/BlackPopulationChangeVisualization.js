@@ -32,7 +32,7 @@ const BlackPopulationChangeVisualization = ({ isLoading, data }) => {
 
   const height = 500;
   const leftMap = (
-    <BaseMap civicMapStyle="light" height={height}>
+    <BaseMap civicMapStyle="light" height={height} maxZoom={13} minZoom={6}>
       <MapOverlay
         data={housingData1990}
         getFillColor={f => colorScale(f.properties[polygonFieldName])}
@@ -49,7 +49,7 @@ const BlackPopulationChangeVisualization = ({ isLoading, data }) => {
     </BaseMap>
   );
   const rightMap = (
-    <BaseMap civicMapStyle="light" height={height}>
+    <BaseMap civicMapStyle="light" height={height} maxZoom={13} minZoom={6}>
       <MapOverlay
         data={housingData2017}
         getFillColor={f => colorScale(f.properties[polygonFieldName])}

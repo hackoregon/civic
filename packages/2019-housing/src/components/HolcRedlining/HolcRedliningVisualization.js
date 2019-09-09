@@ -61,7 +61,7 @@ const HolcRedliningVisualization = ({ data }) => {
         </strong>
         <br />
         <ChartContainer title="HOLC Redlining Areas" subtitle="Portland, 1938">
-          <BaseMap initialZoom={10.5} updateViewport>
+          <BaseMap initialZoom={10.5} maxZoom={13} minZoom={6} updateViewport>
             <MapOverlay
               data={redliningMap}
               getFillColor={f => colorScale(f.properties[polygonFieldName])}

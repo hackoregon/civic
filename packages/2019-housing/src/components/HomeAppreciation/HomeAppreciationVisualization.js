@@ -119,7 +119,7 @@ const HomeAppreciationVisualization = ({ data }) => {
         title="Per-House Appreciation For Houses Last Sold Between 1987 and 1993"
         subtitle="Median inflation adjusted sale price ($) for sold between 1987-1993 and again 2015-2016"
       >
-        <BaseMap initialZoom={9.9} updateViewport>
+        <BaseMap initialZoom={9.9} maxZoom={13} minZoom={6} updateViewport>
           <MapOverlay
             data={homeInflationFeatures}
             getFillColor={f => colorScale(f.properties[polygonFieldName])}

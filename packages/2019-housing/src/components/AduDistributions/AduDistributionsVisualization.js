@@ -77,6 +77,8 @@ const AduDistributionsVisualization = ({ data }) => {
           <BaseMap
             updateViewport={false}
             initialZoom={10}
+            maxZoom={13}
+            minZoom={6}
             mapboxData={featureData}
             mapboxDataId="adu-distribution-data"
             mapboxLayerType="heatmap"

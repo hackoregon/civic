@@ -85,7 +85,12 @@ const HomeLoanApprovalsVisualization = ({ isLoading, data }) => {
               title="Home Loan Approval Rates by Race"
               subtitle="Comparing Tract-Level Approval Rates to the Share of Existing Homeowners of Color"
             >
-              <BaseMap initialZoom={9.9} updateViewport>
+              <BaseMap
+                initialZoom={9.9}
+                maxZoom={13}
+                minZoom={6}
+                updateViewport
+              >
                 <MapOverlay
                   data={totalLoans}
                   getFillColor={f => colorScale(f.properties[polygonFieldName])}

@@ -140,10 +140,12 @@ const HousingDisplacementVisualization = ({ isLoading, data }) => {
           >
             <BaseMap
               civicMapStyle="light"
-              initialZoom={10}
               height={275}
               initialLongitude={-122.666237}
               initialLatitude={45.562383}
+              initialZoom={10}
+              maxZoom={13}
+              minZoom={6}
             >
               <MapOverlay
                 data={housingData1990}
