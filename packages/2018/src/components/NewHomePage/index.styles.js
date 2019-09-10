@@ -98,11 +98,6 @@ export default (greatestWidth, collapseWidth) => ({
     lineHeight: `${60 / defaultFontSize}rem`
   },
 
-  ".platform-h4": {
-    color: primary.hex,
-    margin: "81px 0"
-  },
-
   ".quote-text": {
     fontStyle: "normal",
     fontWeight: "500",
