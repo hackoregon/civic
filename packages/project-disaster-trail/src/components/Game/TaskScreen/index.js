@@ -57,6 +57,7 @@ const TaskScreen = ({
   const [movingMapComplete, setMovingMapComplete] = useState(false);
   const [numberCompletedTasks, setNumberCompletedTasks] = useState(0);
   const [taskVotes, setTaskVotes] = useState({});
+  const [correctItemsChosen, setCorrectItemsChosen] = useState(0);
 
   const prevActiveTask = usePrevious(activeTask);
   const prevAction = usePrevious(action);
@@ -74,19 +75,6 @@ const TaskScreen = ({
     }
     addNextTask(mostVotesId);
   }, [activeEnvironment, addNextTask, taskVotes, tasksForEnvironment]);
-
-  const onTaskSelection = orbModel => {
-    const voteCount = taskVotes[orbModel.type]
-      ? taskVotes[orbModel.type] + 1
-      : 1;
-    const newVotes = {
-      ...taskVotes,
-      [orbModel.type]: voteCount
-    };
-    setTaskVotes(newVotes);
-    // Return true so Orb knows how to animate
-    return true;
-  };
 
   // 1) Solve Screen
   // 2) Vote
@@ -129,6 +117,7 @@ const TaskScreen = ({
   // when the component mounts, start a timer of the active task's time
   useEffect(() => {
     if (timer && activeTask && action === ACTIONS.SOLVING) {
+      setCorrectItemsChosen(0);
       startTimer(activeTask.time);
     }
 
@@ -166,6 +155,7 @@ const TaskScreen = ({
       case ACTIONS.MOVING_MAP:
         if (movingMapComplete) {
           setTaskVotes({}); // reset for next vote
+          setCorrectItemsChosen(0); // reset for next task
           setAction(ACTIONS.SOLVING);
         }
         break;
@@ -203,14 +193,28 @@ const TaskScreen = ({
     }
   }, [action, prevAction, startTimer]);
 
+  const onTaskSelection = orbModel => {
+    const voteCount = taskVotes[orbModel.type]
+      ? taskVotes[orbModel.type] + 1
+      : 1;
+    const newVotes = {
+      ...taskVotes,
+      [orbModel.type]: voteCount
+    };
+    setTaskVotes(newVotes);
+    // Return true so Orb knows how to animate
+    return true;
+  };
+
   const onItemSelection = orbModel => {
-    // eslint-disable-next-line no-console
-    console.log("orbModel ", orbModel);
-    // if (orbModel.type === activeTask.requiredorbModel) {
-    //   this.setState(state => ({
-    //     correctorbModelsChosen: state.correctorbModelsChosen + 1
-    //   }));
-    // }
+    if (orbModel.type === activeTask.requiredItem) {
+      setCorrectItemsChosen(correctItemsChosen + 1);
+      if (correctItemsChosen >= activeTask.numberItemsToSolve) {
+        timer.stopEarly();
+      }
+      return true;
+    }
+    return false;
   };
 
   const checkVoteIsCorrect = () => true;
@@ -231,7 +235,11 @@ const TaskScreen = ({
   return (
     <Fragment>
       <div css={mapAndInfoStyle}>
-        <SolveScreen activeTask={activeTask} open={isSolving} />
+        <SolveScreen
+          activeTask={activeTask}
+          open={isSolving}
+          correctItemsChosen={correctItemsChosen}
+        />
         <TaskMap
           activeTask={activeTask}
           votingComplete={votingComplete}

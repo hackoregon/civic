@@ -55,6 +55,15 @@ class Timer {
       this.tween.kill();
     }
   };
+
+  stopEarly = () => {
+    if (this.tween) {
+      for (let i = 0; i < this.completeCallbacks.length; i += 1) {
+        this.completeCallbacks[i]();
+      }
+      this.tween.kill();
+    }
+  };
 }
 
 export default Timer;
