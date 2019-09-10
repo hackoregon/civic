@@ -141,7 +141,7 @@ const NorthwestEverettComparisonMap = () => {
   ) : null;
 
   return data.loaded ? (
-    <>
+    <div style={{ marginBottom: "16px" }}>
       <ComparisonMap
         height={500}
         leftMap={DisturbanceStopsMap2018}
@@ -151,7 +151,7 @@ const NorthwestEverettComparisonMap = () => {
         rightMapTitle="2019"
         rightTitleColor="white !important"
       />
-    </>
+    </div>
   ) : null;
 };
 
