@@ -145,6 +145,7 @@ const SoutheastHawthorneComparisonMap = () => {
   return data.loaded ? (
     <>
       <ComparisonMap
+        height={500}
         leftMap={DisturbanceStopsMap2017}
         leftMapTitle="2017"
         leftTitleColor="black !important"

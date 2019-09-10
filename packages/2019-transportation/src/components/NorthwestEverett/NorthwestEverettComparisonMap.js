@@ -143,6 +143,7 @@ const NorthwestEverettComparisonMap = () => {
   return data.loaded ? (
     <>
       <ComparisonMap
+        height={500}
         leftMap={DisturbanceStopsMap2018}
         leftMapTitle="2018"
         leftTitleColor="black !important"
