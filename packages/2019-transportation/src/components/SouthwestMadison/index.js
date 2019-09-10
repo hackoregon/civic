@@ -20,7 +20,7 @@ const offset = 0;
 const months = "5,7";
 const timeRange = "14.5,18.75";
 const years = "2018,2019";
-const lines = "6,10,14,30";
+const lines = "6,14";
 const initialUrl = `http://service.civicpdx.org/transportation2019/v1/toad/disturbanceStops/?limit=${limit}&offset=${offset}&months=${months}&time_range=${timeRange}&years=${years}&lines=${lines}&service_key=W&bounds=${
   BOUNDING_BOX.SOUTHWEST_MADISON
 }&directions=${DIRECTION.OUTBOUND}`;
