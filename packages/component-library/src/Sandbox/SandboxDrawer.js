@@ -6,10 +6,10 @@ import Dropdown from "../Dropdown/Dropdown";
 import SandboxMapLegend from "./SandboxMapLegend";
 import Logo from "../Logo/Logo";
 import Checkbox from "../Checkbox/Checkbox";
+import SandboxBaseMapSelector from "./SandboxBaseMapSelector";
 
 // import SandboxDateSelector from "./SandboxDateSelector";
 // import SandboxToggleSwitch from "./SandboxToggleSwitch";
-// import SandboxBaseMapSelector from "./SandboxBaseMapSelector";
 
 const menuOpen = css(`
   display: flex;
@@ -58,28 +58,21 @@ const loading = css`
 `;
 
 const SandboxDrawer = props => {
-  console.log("SANDBOX-DRAWER:", props);
   const {
     data,
     onChange,
     selectedPackage,
     toggleDrawer,
     drawerVisible,
-    // slideData,
-    // fetchSlideByDate,
     foundationData,
-    // defaultFoundation,
     allSlides,
     updatePackage,
-    // selectedFoundation,
-    // updateFoundation,
     foundationMapProps,
-    // onBaseMapStyleChange,
-    // baseMapStyle,
-    // defaultSlides,
     areSlidesLoading,
     errors,
-    updateSlideKey
+    updateSlideKey,
+    baseMapStyle,
+    onBaseMapStyleChange
   } = props;
 
   const loader = (
@@ -154,8 +147,6 @@ const SandboxDrawer = props => {
               CIVIC Sandbox
             </h2>
           </div>
-
-          {/* DATA COLLECTIONS */}
           <div
             css={css(`
             position: relative;
@@ -178,73 +169,26 @@ const SandboxDrawer = props => {
                 label: p.displayName
               }))}
               onChange={name => {
-                // console.log("sandbox-drawer-data-c-e:", name);
                 updatePackage({ displayName: name });
               }}
               simpleValue
             />
           </div>
-
-          {/* FOUNDATIONS */}
-          {/* <div
+          <h3
             css={css(`
-            position: relative;
-            z-index: 400;
+            color: #555;
+            text-transform: uppercase;
+            margin: 0 10px;
           `)}
           >
-          {foundationData && (
-            <div>
-              <div
-                css={css(`
-                position: relative;
-                font-size: .75rem;
-                color: #333;
-                z-index: 300;
-              `)}
-              >
-                {foundationData.slide_meta &&
-                foundationData.slide_meta.dates.date_granularity ? (
-                  <SandboxDateSelector
-                    slide={defaultFoundation}
-                    selectedSlideData={foundationData}
-                    fetchSlideByDate={fetchSlideByDate}
-                    type="foundation"
-                  />
-                ) : foundationData.slide_meta &&
-                  foundationData.slide_meta.dates.default_date_filter ? (
-                  <span
-                    css={css(`
-                      font-size: 22px;
-                      font-weight: 400;
-                      padding: 0 0 0 16px;
-                      margin: 0;
-                    `)}
-                  >
-                    {foundationData.slide_meta.dates.default_date_filter}
-                  </span>
-                ) : null}
-              </div>
-
-              <h2
-                css={css(`
-                color: #555;
-                text-transform: uppercase;
-                margin: 0 10px;
-              `)}
-              >
-                Base map style
-              </h2>
-              {onBaseMapStyleChange && baseMapStyle && (
-                <SandboxBaseMapSelector
-                  onBaseMapStyleChange={onBaseMapStyleChange}
-                  baseMapStyle={baseMapStyle}
-                />
-              )}
-            </div>
+            Base Map Style
+          </h3>
+          {onBaseMapStyleChange && baseMapStyle && (
+            <SandboxBaseMapSelector
+              onBaseMapStyleChange={onBaseMapStyleChange}
+              baseMapStyle={baseMapStyle}
+            />
           )}
-          */}
-
-          {/* SLIDES */}
           <div
             css={css(`
             position: relative;
@@ -264,25 +208,6 @@ const SandboxDrawer = props => {
 
           {!areSlidesLoading && allSlides
             ? allSlides.map((slide, index) => {
-                // const defaultGray = [238, 238, 238, 255];
-                // const backgroundSlideColor = slide.color;
-                // const formatBackgroundColor = arr =>
-                //   arr.reduce(
-                //     (acc, cur, i) => (i < 3 ? `${acc + cur},` : `${acc}0.9)`),
-                //     "rgba("
-                //   );
-                // const slideBackGroundColor = formatBackgroundColor(
-                //   backgroundSlideColor
-                // );
-                // const blackTextColor = "rgba(0,0,0,1)";
-                // const whiteTextColor = "rgba(255,255,255,1)";
-                // const textColor =
-                //   slideBackGroundColor === defaultGray
-                //     ? blackTextColor
-                //     : whiteTextColor;
-                // console.log("drawer-allSlides-slide:", slide);
-                // console.log("drawer-allSlides-index:", index);
-
                 const dataIndex = foundationData.findIndex(d => {
                   const scatterplot =
                     d.mapType === "ScatterPlotMap" &&
@@ -295,7 +220,6 @@ const SandboxDrawer = props => {
 
                 const matchFound =
                   dataIndex > -1 && foundationData[dataIndex].data.length > 0;
-                // console.log("DRAWER-matchFound:", matchFound);
 
                 const mapLegend = matchFound && (
                   <SandboxMapLegend
@@ -315,7 +239,7 @@ const SandboxDrawer = props => {
                       return a[0] === b[0];
                     })
                   : [];
-                // console.log("keyAllOptions:", keyAllOptions);
+
                 const keyOptions =
                   keyAllOptions.length > 3
                     ? keyAllOptions.slice(0, 4)
@@ -342,7 +266,6 @@ const SandboxDrawer = props => {
                           }))
                     }
                     onChange={name => {
-                      // console.log("drawer-key:", {[slide.label]: name});
                       updateSlideKey({ [slide.label]: name });
                     }}
                     simpleValue
@@ -373,31 +296,7 @@ const SandboxDrawer = props => {
                     z-index: ${10 - index};
                   `)}
                     >
-                      {/* Key Selector */}
                       {keySelector}
-
-                      {/* slide.checked &&
-                    selectedSlideData.slide_meta &&
-                    selectedSlideData.slide_meta.dates.date_granularity ? (
-                      <SandboxDateSelector
-                        selectedSlideData={selectedSlideData}
-                        slide={slide}
-                        fetchSlideByDate={fetchSlideByDate}
-                        type="slide"
-                      />
-                    ) : slide.checked &&
-                      selectedSlideData.slide_meta &&
-                      selectedSlideData.slide_meta.dates.default_date_filter ? (
-                      <span
-                        css={css(`
-                            font-size: 18px;
-                            padding: 0 0 0 17px;
-                            margin: 0;
-                          `)}
-                      >
-                        {selectedSlideData.slide_meta.dates.default_date_filter}
-                      </span>
-                    ) : null */}
                     </div>
                   </div>
                 );
@@ -427,19 +326,13 @@ SandboxDrawer.propTypes = {
   selectedPackage: string,
   toggleDrawer: func,
   drawerVisible: bool,
-  // // slideData,
-  // // fetchSlideByDate,
   foundationData: arrayOf(shape({})),
-  // // defaultFoundation,
   allSlides: arrayOf(shape({})),
   updatePackage: func,
-  // // selectedFoundation,
-  // // updateFoundation,
   foundationMapProps: arrayOf(shape({})),
-  // // onBaseMapStyleChange,
-  // // baseMapStyle,
-  // // defaultSlides,
   areSlidesLoading: bool,
   errors: bool,
-  updateSlideKey: func
+  updateSlideKey: func,
+  baseMapStyle: string,
+  onBaseMapStyleChange: func
 };

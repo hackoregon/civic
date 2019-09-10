@@ -52,10 +52,8 @@ const tickNumsOrdinal = css(`
 `);
 
 const SandboxMapLegend = props => {
-  console.log("SandboxMapLegend-props:", props);
   const { data, mapProps } = props;
   const { civicColor, scaleType, dataRange, colorRange, fieldName } = mapProps;
-
   const { color: colorScaleType } = scaleType;
 
   let choroplethColorScale = createColorScale(
@@ -96,10 +94,8 @@ const SandboxMapLegend = props => {
     choroplethColorScale.range()[0].length === 4
       ? choroplethColorScale.range()
       : choroplethColorScale.range().map(c => [...c, 255]);
-  // console.log("legend--colorScaleRange", mapColorsArr);
 
   const mapColorsArr = colorScaleRange.map(arr => formatColor(arr));
-  // console.log("legend--mapColorsArr", mapColorsArr);
 
   const bins =
     colorScaleType === "ordinal" || colorScaleType === "threshold"
@@ -113,7 +109,6 @@ const SandboxMapLegend = props => {
       ? bins
       : bins.reduce((a, c) => (c[1] ? [...a, c[1]] : [...a, ""]), []);
 
-  // const sandboxThousandsFormat = format(".3s");
   const percentageFormat = format(".1%");
   const sandboxPercentFormat = p =>
     p < 1 && p > 0 ? percentageFormat(p) : `${p.toFixed(1)}%`;
@@ -159,9 +154,7 @@ const SandboxMapLegend = props => {
     mapProps.tooltip.primary.format
       ? mapProps.tooltip.primary.format
       : "numeric";
-  console.log("formatType:", formatType);
   const ticksFormatted = formatTicks(ticks, formatType);
-  console.log("ticksFormatted:", ticksFormatted);
 
   const tickStyle =
     colorScaleType === "threshold"

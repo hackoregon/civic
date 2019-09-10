@@ -11,7 +11,6 @@ import {
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import BaseMap from "../BaseMap/BaseMap";
-// import CivicSandboxMap from "../CivicSandboxMap/CivicSandboxMap";
 import CivicSandboxMap from "../MultiLayerMap/MultiLayerMap";
 import CivicSandboxTooltip from "../CivicSandboxMap/CivicSandboxTooltip";
 import SandboxDrawer from "./SandboxDrawer";
@@ -33,7 +32,6 @@ const Sandbox = ({
   selectedPackage,
   selectedFoundation,
   selectedSlide,
-  // foundationData,
   slideData,
   updatePackage,
   updateFoundation,
@@ -46,7 +44,6 @@ const Sandbox = ({
   onSlideHover,
   tooltipInfo,
   allSlides,
-  // foundationMapProps,
   selectedFoundationDatum,
   areSlidesLoading,
   errors,
@@ -134,7 +131,6 @@ const Sandbox = ({
 Sandbox.propTypes = {
   data: shape({
     packages: arrayOf(shape({})),
-    // foundations: shape({}),
     slides: shape({})
   }).isRequired,
   layerData: arrayOf(shape({})).isRequired,
@@ -153,10 +149,6 @@ Sandbox.propTypes = {
   selectedPackage: string.isRequired,
   selectedFoundation: string.isRequired,
   selectedSlide: arrayOf(string).isRequired,
-  // foundationData: shape({
-  //   slide_data: shape({}),
-  //   slide_meta: shape({})
-  // }).isRequired,
   slideData: arrayOf(shape({})).isRequired,
   updatePackage: func.isRequired,
   updateFoundation: func.isRequired,
@@ -182,12 +174,6 @@ Sandbox.propTypes = {
       slideId: oneOfType([string, number])
     })
   ).isRequired,
-  // foundationMapProps: shape({
-  //   color: arrayOf(arrayOf(number)),
-  //   getPropValue: func,
-  //   propName: string,
-  //   scaleType: string
-  // }).isRequired,
   selectedFoundationDatum: arrayOf(
     shape({
       data: oneOfType([arrayOf(shape({})), number, string]),
