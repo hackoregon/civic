@@ -411,7 +411,7 @@ BaseMap.defaultProps = {
   animationDuration: 1000,
   scaleBar: false,
   useFitBounds: false,
-  bboxData: {},
+  bboxData: [],
   bboxPadding: 10,
   useScrollZoom: false
 };

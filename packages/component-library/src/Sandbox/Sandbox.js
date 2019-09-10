@@ -113,6 +113,7 @@ const Sandbox = ({
           useFitBounds
           bboxData={layerData.length > 0 ? layerData[0].data : []}
           bboxPadding={50}
+          useScrollZoom
         >
           <CivicSandboxMap
             mapLayers={layerData}
