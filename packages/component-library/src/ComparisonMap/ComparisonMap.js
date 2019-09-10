@@ -10,8 +10,10 @@ const ComparisonMap = props => {
     initialViewport,
     leftMap,
     leftMapTitle,
+    leftTitleColor,
     rightMap,
     rightMapTitle,
+    rightTitleColor,
     showDivider,
     sliderStartPosition
   } = props;
@@ -73,17 +75,32 @@ const ComparisonMap = props => {
     box-shadow: -3px 0px 4px gray;
   `;
 
-  const mapTitleWrapper = css`
-    padding: 5px 10px 0 10px;
-    display: flex;
-    justify-content: space-between;
-  `;
-
-  const titleStyle = css`
+  const leftTitleStyle = css`
+    z-index: 1;
+    position: absolute;
     font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
     font-size: 18px;
     font-weight: bold;
     margin: 0;
+
+    // Left Specific Formatting
+    right: calc(100% - ${sliderPosition}% + 20px);
+    color: ${leftTitleColor};
+    text-align: right;
+  `;
+
+  const rightTitleStyle = css`
+    z-index: 1;
+    position: absolute;
+    font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+
+    // Right Specific Formatting
+    left: calc(${sliderPosition}% + 20px);
+    color: ${rightTitleColor};
+    text-align: left;
   `;
 
   const sliderMin = 5;
@@ -100,10 +117,8 @@ const ComparisonMap = props => {
   return (
     <div css={container}>
       <div css={mapsWrapper}>
-        <div css={mapTitleWrapper}>
-          {leftMapTitle && <h2 css={titleStyle}>{leftMapTitle}</h2>}
-          {rightMapTitle && <h2 css={titleStyle}>{rightMapTitle}</h2>}
-        </div>
+        {leftMapTitle && <h2 css={leftTitleStyle}>{leftMapTitle}</h2>}
+        {rightMapTitle && <h2 css={rightTitleStyle}>{rightMapTitle}</h2>}
         {showDivider && <div css={divider} />}
         <div css={sliderWrapper}>
           <CompareSlider
@@ -127,8 +142,10 @@ ComparisonMap.propTypes = {
   initialViewport: shape({}),
   leftMap: node.isRequired,
   leftMapTitle: string,
+  leftTitleColor: string,
   rightMap: node.isRequired,
   rightMapTitle: string,
+  rightTitleColor: string,
   showDivider: bool,
   sliderStartPosition: number
 };
@@ -136,7 +153,9 @@ ComparisonMap.propTypes = {
 ComparisonMap.defaultProps = {
   height: 550,
   leftMapTitle: "",
+  leftTitleColor: "black",
   rightMapTitle: "",
+  rightTitleColor: "black",
   showDivider: true,
   sliderStartPosition: 50
 };
