@@ -8,6 +8,7 @@ import {
   PullQuote,
   CivicCardLayoutClassic // eslint-disable-line
 } from "@hackoregon/component-library";
+import WhatElseSurprisedYouAboutProgramOutcomes from "../WhatElseSurprisedYouAboutProgramOutcomes";
 import WhatSurprisedYouAboutProgramOutcomes from "../WhatSurprisedYouAboutProgramOutcomes";
 import IsThereEvidenceTheProgramWorked from "../IsThereEvidenceTheProgramWorked";
 
@@ -84,6 +85,11 @@ const App = () => (
       </section>
       <section css={sectionMarginMedium}>
         <WhatSurprisedYouAboutProgramOutcomes Layout={CivicCardLayoutClassic} />
+      </section>
+      <section css={sectionMarginMedium}>
+        <WhatElseSurprisedYouAboutProgramOutcomes
+          Layout={CivicCardLayoutClassic}
+        />
       </section>
     </PageLayout>
   </Fragment>

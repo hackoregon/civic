@@ -3,8 +3,13 @@ import Routes from "./routes";
 import Reducers from "./state";
 import IsThereEvidenceTheProgramWorked from "./components/IsThereEvidenceTheProgramWorked";
 import WhatSurprisedYouAboutProgramOutcomes from "./components/WhatSurprisedYouAboutProgramOutcomes";
+import WhatElseSurprisedYouAboutProgramOutcomes from "./components/WhatElseSurprisedYouAboutProgramOutcomes";
 
 const CardRegistry = [
+  {
+    slug: "what-else-surprised-you-about-program-outcomes",
+    component: WhatElseSurprisedYouAboutProgramOutcomes
+  },
   {
     slug: "what-surprised-you-about-program-outcomes",
     component: WhatSurprisedYouAboutProgramOutcomes
