@@ -25,7 +25,7 @@ const screenLayout = css`
   background: beige;
 `;
 
-const TaskMap = ({ activeTask, completedTasks, tasks }) => {
+const TaskMap = ({ activeTask, completedTasks, tasks, taskVotes }) => {
   // TODO: Change lon / lat for task
   // const lon = activeTask ? activeTask.locations[0][0] : initialLon;
   // const lat = activeTask ? activeTask.locations[0][1] : initialLat;
@@ -34,6 +34,18 @@ const TaskMap = ({ activeTask, completedTasks, tasks }) => {
 
   const selectedTask = activeTask || tasks[0];
   const data = asGeoJSON(tasks, selectedTask, completedTasks);
+
+  // Would be cool to size these relative to each other in the future
+  const sizeForVote = dataThing => {
+    const mapPropType =
+      dataThing && dataThing.properties && dataThing.properties.type;
+
+    const votesForTask = taskVotes[mapPropType] || 0;
+    const mostVotesForAnyTask = taskVotes.mostVotesTotal || 1;
+    const baseSize = 12;
+
+    return baseSize + 2 * (votesForTask - mostVotesForAnyTask);
+  };
 
   return (
     <div css={screenLayout}>
@@ -63,7 +75,7 @@ const TaskMap = ({ activeTask, completedTasks, tasks }) => {
           iconMapping={poiIconMapping}
           iconSizeScale={poiIconZoomScale}
           getIcon={d => d.properties.type}
-          getSize={() => 12}
+          getSize={sizeForVote}
         />
       </BaseMap>
     </div>
@@ -76,7 +88,12 @@ TaskMap.propTypes = {
     locations: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number))
   }),
   completedTasks: PropTypes.arrayOf(PropTypes.string),
-  tasks: PropTypes.arrayOf(PropTypes.object)
+  tasks: PropTypes.arrayOf(PropTypes.object),
+  taskVotes: PropTypes.shape({
+    mostVotesId: PropTypes.string,
+    mostVotesTotal: PropTypes.number,
+    totalVotes: PropTypes.number
+  })
 };
 
 const mapStateToProps = state => ({

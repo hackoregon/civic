@@ -24,7 +24,7 @@ import MatchLockInterface from "../../atoms/MatchLockInterface";
 import TaskDebugger from "../../atoms/TaskDebugger";
 import Song from "../../atoms/Audio/Song";
 
-import { tallyVotes, chooseRandomTask } from "./voteUtils";
+import { chooseRandomTask } from "./voteUtils";
 import TaskMap from "./TaskMap";
 import SolveScreen from "./SolveScreen";
 
@@ -37,6 +37,12 @@ const mapAndInfoStyle = css`
   grid-template-columns: 1fr;
   background: beige;
 `;
+
+const taskVotesDefault = {
+  mostVotesId: null,
+  mostVotesTotal: 0,
+  totalVotes: 0
+};
 
 const TaskScreen = ({
   addNextTask,
@@ -56,7 +62,7 @@ const TaskScreen = ({
   const [votingComplete, setVotingComplete] = useState(false);
   const [movingMapComplete, setMovingMapComplete] = useState(false);
   const [numberCompletedTasks, setNumberCompletedTasks] = useState(0);
-  const [taskVotes, setTaskVotes] = useState({});
+  const [taskVotes, setTaskVotes] = useState(taskVotesDefault);
   const [correctItemsChosen, setCorrectItemsChosen] = useState(0);
 
   const prevActiveTask = usePrevious(activeTask);
@@ -67,10 +73,9 @@ const TaskScreen = ({
   const chapterDuration = 60;
 
   const goToTask = useCallback(() => {
-    const voteResults = tallyVotes(taskVotes);
-    // eslint-disable-next-line prefer-const
-    let [mostVotesCount, mostVotesId] = voteResults;
-    if (mostVotesCount < 1) {
+    const mostVotes = taskVotes.mostVotesTotal;
+    let { mostVotesId } = taskVotes;
+    if (mostVotes < 1) {
       mostVotesId = chooseRandomTask(tasksForEnvironment, activeEnvironment);
     }
     addNextTask(mostVotesId);
@@ -154,7 +159,7 @@ const TaskScreen = ({
         break;
       case ACTIONS.MOVING_MAP:
         if (movingMapComplete) {
-          setTaskVotes({}); // reset for next vote
+          setTaskVotes(taskVotesDefault); // reset for next vote
           setCorrectItemsChosen(0); // reset for next task
           setAction(ACTIONS.SOLVING);
         }
@@ -199,8 +204,13 @@ const TaskScreen = ({
       : 1;
     const newVotes = {
       ...taskVotes,
+      totalVotes: taskVotes.totalVotes + 1,
       [orbModel.type]: voteCount
     };
+    if (voteCount > taskVotes.mostVotesTotal) {
+      newVotes.mostVotesId = orbModel.type;
+      newVotes.mostVotesTotal = voteCount;
+    }
     setTaskVotes(newVotes);
     // Return true so Orb knows how to animate
     return true;
@@ -245,6 +255,7 @@ const TaskScreen = ({
           votingComplete={votingComplete}
           movingMapComplete={movingMapComplete}
           tasks={weightedTasks}
+          taskVotes={taskVotes}
         />
         {debug && <TaskDebugger activeTask={activeTask} action={action} />}
       </div>
