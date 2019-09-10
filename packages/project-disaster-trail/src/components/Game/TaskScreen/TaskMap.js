@@ -42,9 +42,9 @@ const TaskMap = ({ activeTask, completedTasks, tasks, taskVotes }) => {
 
     const votesForTask = taskVotes[mapPropType] || 0;
     const mostVotesForAnyTask = taskVotes.mostVotesTotal || 1;
-    const baseSize = 12;
+    const baseSize = 18;
 
-    return baseSize + 2 * (votesForTask - mostVotesForAnyTask);
+    return baseSize + 2 * (1.5 * votesForTask - mostVotesForAnyTask);
   };
 
   return (
