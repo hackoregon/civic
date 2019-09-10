@@ -1,20 +1,34 @@
 /** @jsx jsx */
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { css, jsx } from "@emotion/core";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 
 import { palette } from "../../constants/style";
+import usePrevious from "../../state/hooks/usePrevious";
 
-const progressBarStyle = {
-  pathColor: palette.turqoise,
-  trailColor: "transparent",
-  // Whether to use rounded or flat corners on the ends
-  strokeLinecap: "butt",
-  // How long animation takes to go from one percent to another, in seconds
-  pathTransitionDuration: 0.5
-};
+const RadialGauge = ({ isActive, size, duration }) => {
+  const [percent, setPercent] = useState(0);
+  const prevIsActive = usePrevious(isActive);
+  const progressBarStyle = {
+    pathColor: palette.turqoise,
+    trailColor: "transparent",
+    // Whether to use rounded or flat corners on the ends
+    strokeLinecap: "butt",
+    // How long animation takes to go from one percent to another, in seconds
+    pathTransitionDuration: duration
+  };
 
-const RadialGauge = ({ isActive, size, percent }) => {
+  useEffect(() => {
+    if (prevIsActive !== isActive) {
+      if (isActive) {
+        setPercent(100);
+      } else {
+        setPercent(0);
+      }
+    }
+  }, [prevIsActive, isActive]);
+
   const gaugeDefaultStyle = css`
     transition: transform 1s;
     position: absolute;
@@ -51,7 +65,7 @@ const RadialGauge = ({ isActive, size, percent }) => {
 RadialGauge.propTypes = {
   isActive: PropTypes.bool,
   size: PropTypes.number,
-  percent: PropTypes.number
+  duration: PropTypes.number
 };
 
 export default RadialGauge;
