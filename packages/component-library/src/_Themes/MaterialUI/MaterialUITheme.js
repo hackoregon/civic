@@ -27,19 +27,19 @@ const MaterialTheme = createMuiTheme({
       light: civicPlumLight,
       main: civicPrimary,
       dark: civicPrimary,
-      contrastText: "#fff !important" // must override emotion theme if link
+      contrastText: "#fff" // must override emotion theme if link
     },
     secondary: {
       light: civicAction,
       main: civicAction,
       dark: civicAction,
-      contrastText: "#fff !important"
+      contrastText: "#fff"
     },
     error: {
       light: civicError,
       main: civicError,
       dark: civicError,
-      contrastText: "#fff !important"
+      contrastText: "#fff"
     },
     text: {
       primary: civicPrimary,
