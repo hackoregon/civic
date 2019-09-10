@@ -6,9 +6,13 @@ import { makeStyles } from "@material-ui/styles";
 import Label from "@material-ui/icons/Label";
 
 const useStyles = makeStyles({
-  tag: props => ({
-    color: props.color
-  })
+  tag: props => {
+    const style = {};
+    if (props.color) {
+      style.color = props.color;
+    }
+    return style;
+  }
 });
 
 function Chip({ tag, color, clickable }) {
