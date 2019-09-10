@@ -7,6 +7,7 @@ import { scaleOrdinal } from "d3";
 import {
   BaseMap,
   ChartContainer,
+  MapLegend,
   MapOverlay,
   MapTooltip
 } from "@hackoregon/component-library";
@@ -18,13 +19,13 @@ const HolcRedliningVisualization = ({ data }) => {
   const polygonFieldName = "holc_grade";
   const redliningMap = data.redliningMap.value.results.features;
   const colorScale = scaleOrdinal()
-    .domain([null, "A", "B", "C", "D"])
+    .domain(["A", "B", "C", "D"])
     .range([
       // Color-blind safe diverging color scale from ColorBrewer
-      [220, 69, 86],
       [77, 175, 74],
       [30, 98, 189],
-      [255, 178, 31]
+      [255, 178, 31],
+      [220, 69, 86]
     ]);
 
   const REDLINING_GRADES = {
@@ -37,29 +38,6 @@ const HolcRedliningVisualization = ({ data }) => {
   return (
     data && (
       <span>
-        <strong style={{ color: "crimson" }}>
-          Visualization TODO:
-          <ul>
-            <li>
-              I copied the basic grade labels from
-              dsl.richmond.edu/panorama/redlining (Best, Still Desirable,
-              Definitely Declining, & Hazardous) Should we also add more detail
-              about them? An example of the ones on that site:
-              <br />
-              <code>
-                HOLC describes grade D areas as “characterized by detrimental
-                influences in a pronounced degree, underdesirable population or
-                infiltration of it.” The recommended lenders “refuse to make
-                loans in these areas [or] only on a conservative basis.”
-              </code>
-            </li>
-            <li>
-              All the map-level descriptions (area_descr) in the API call are
-              truncated & formatted strangely
-            </li>
-          </ul>
-        </strong>
-        <br />
         <ChartContainer title="HOLC Redlining Areas" subtitle="Portland, 1938">
           <BaseMap initialZoom={10.5} maxZoom={13} minZoom={6} updateViewport>
             <MapOverlay
@@ -80,6 +58,21 @@ const HolcRedliningVisualization = ({ data }) => {
               />
             </MapOverlay>
           </BaseMap>
+          <br />
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "center"
+            }}
+          >
+            <MapLegend
+              colorScale={colorScale}
+              formatValues={f => `${f}: ${REDLINING_GRADES[f]}`}
+              label="Black Population Share"
+              vertical={false}
+            />
+          </div>
         </ChartContainer>
       </span>
     )
