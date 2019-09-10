@@ -27,6 +27,8 @@ These props can be set in the Custom story:
   - This prop expects a number
 - **navigation:** whether the Base Map should include zoom and compass buttons
   - This property expects a boolean
+- **useScrollZoom**: whether to enable scroll to zoom
+  - This property expects a boolean
 - **onBaseMapClick:** this function will be called when the Base Map is clicked
   - This prop expects a function
 

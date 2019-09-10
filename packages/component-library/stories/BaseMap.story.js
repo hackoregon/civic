@@ -119,6 +119,8 @@ export default () =>
 
         const navigation = boolean("Navigation:", true, GROUP_IDS.CUSTOM);
 
+        const useScrollZoom = boolean("Scroll Zoom:", false, GROUP_IDS.CUSTOM);
+
         const onBaseMapClick = info => action("Base Map Clicked")(info);
 
         return (
@@ -131,6 +133,7 @@ export default () =>
             height={height}
             navigation={navigation}
             onBaseMapClick={onBaseMapClick}
+            useScrollZoom={useScrollZoom}
           />
         );
       },
