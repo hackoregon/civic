@@ -10,8 +10,6 @@ import {
 } from "@hackoregon/component-library";
 import DisturbanceStops from "../DisturbanceStops";
 
-import TransportationCard from "../TransportationCard";
-
 const sectionMarginSmall = css`
   display: block;
   margin: 12px auto;
@@ -79,9 +77,6 @@ const App = () => (
           tellus rutrum. Sed turpis tincidunt id aliquet risus feugiat. Aliquet
           enim tortor at auctor.
         </p>
-      </section>
-      <section css={sectionMarginMedium}>
-        <TransportationCard Layout={CivicCardLayoutClassic} />
       </section>
       <section css={sectionMarginMedium}>
         <DisturbanceStops Layout={CivicCardLayoutClassic} />
