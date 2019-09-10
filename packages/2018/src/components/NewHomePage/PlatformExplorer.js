@@ -53,72 +53,72 @@ const textStyle = css`
 `;
 
 const sections = {
-  section1: [
+  section3: [
     {
-      header: "Thing 1",
+      header: "Managed Cloud Services",
       imgSrc: placeholderCivicImg,
       imgAlt: "altText",
-      text: "Text 1 about thing 1",
+      text: "Continuous Cloud Deployment",
       id: "thing1"
     },
     {
-      header: "Thing 2",
+      header: "Scalable API Frameworks",
       imgSrc: placeholderCivicImg,
       imgAlt: "altText",
-      text: "Text 2 about thing 2",
+      text: "Scalable API Frameworks",
       id: "thing2"
     },
     {
-      header: "Thing 3",
+      header: "Structured Context Documentation",
       imgSrc: placeholderCivicImg,
       imgAlt: "altText",
-      text: "Text 3 about thing 3",
+      text: "Structured Context Documentation",
       id: "thing3"
     }
   ],
   section2: [
     {
-      header: "Thing 4",
+      header: "Rigorous Ethical Standards",
       imgSrc: placeholderCivicImg,
       imgAlt: "altText",
-      text: "Text 4 about thing 4",
+      text: "Rigorous Ethical Standards",
       id: "thing4"
     },
     {
-      header: "Thing 5",
+      header: "Transparent Methodology",
       imgSrc: placeholderCivicImg,
       imgAlt: "altText",
-      text: "Text 5 about thing 5",
+      text: "Transparent Methodology",
       id: "thing5"
     },
     {
-      header: "Thing 6",
+      header: "Connected Data Science Notebooks",
       imgSrc: placeholderCivicImg,
       imgAlt: "altText",
-      text: "Text 6 about thing 6",
+      text: "Connected Data Science Notebooks",
       id: "thing6"
     }
   ],
-  section3: [
+  section1: [
     {
-      header: "Thing 7",
+      header: "Reusable Component Library",
       imgSrc: placeholderCivicImg,
       imgAlt: "altText",
-      text: "Text 7 about thing 7",
+      text: "Reusable Component Library",
       id: "thing7"
     },
     {
-      header: "Thing 8",
+      header: "Embeddable Interactive Visualizations",
       imgSrc: placeholderCivicImg,
       imgAlt: "altText",
-      text: "Text 8 about thing 8",
+      text: "Embeddable Interactive Visualizations",
       id: "thing8"
     },
     {
-      header: "Thing 9",
+      header: "Exploratory Mapping Tools",
       imgSrc: placeholderCivicImg,
       imgAlt: "altText",
-      text: "Text 9 about thing 9",
+      text: "Exploratory Mapping Tools",
       id: "thing9"
     }
   ]
@@ -192,21 +192,21 @@ const PlatformExplorer = () => {
           aria-label="simple tabs example wrapped"
         >
           <Tab
-            label="Item One"
+            label="Design Systems"
             {...a11yProps(0)}
             disableRipple
             disableFocusRipple
             wrapped
           />
           <Tab
-            label="Item Two"
+            label="Analytics"
             {...a11yProps(1)}
             disableRipple
             disableFocusRipple
             wrapped
           />
           <Tab
-            label="Item Three"
+            label="Infrastructure"
             {...a11yProps(2)}
             disableRipple
             disableFocusRipple

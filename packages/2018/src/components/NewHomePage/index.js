@@ -71,7 +71,7 @@ const HomePage = () => {
       <div className="content-wrapper">
         <h1>CIVIC</h1>
         <p className="page-subtitle">
-          A system for public data, built on collaboration
+          A system for public data, built on public collaboration
         </p>
         <div className="intro-wrapper">
           <img
@@ -80,12 +80,11 @@ const HomePage = () => {
             alt="placeholder"
           />
           <p className="intro-text">
-            CIVIC brings technology, teamwork, and creativity together in a
-            system built for the needs of institutions managing important data
-            systems with public value.
+            CIVIC Platform is a technology environment that makes institutional
+            data more accessible, enabling creative applications and analysis.
           </p>
           <div className="section-button-container">
-            <Button margin="0 0 0 0">EXPLORE CIVIC</Button>
+            <Button margin="0 0 0 0">{`SEE WHAT'S POSSIBLE >`}</Button>
           </div>
         </div>
 
