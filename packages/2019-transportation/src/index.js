@@ -6,8 +6,13 @@ import Reducers from "./state";
 import DisturbanceStops from "./components/DisturbanceStops";
 import SouthwestMadison from "./components/SouthwestMadison";
 import NorthwestEverett from "./components/NorthwestEverett";
+import MorningRush from "./components/MorningRush";
 
 const CardRegistry = [
+  {
+    slug: "morning-rush",
+    component: MorningRush
+  },
   {
     slug: "northwest-everett",
     component: NorthwestEverett

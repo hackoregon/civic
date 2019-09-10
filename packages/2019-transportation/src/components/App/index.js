@@ -8,6 +8,7 @@ import {
   PullQuote,
   CivicCardLayoutClassic
 } from "@hackoregon/component-library";
+import MorningRush from "../MorningRush";
 import NorthwestEverett from "../NorthwestEverett";
 import SouthwestMadison from "../SouthwestMadison";
 import DisturbanceStops from "../DisturbanceStops";
@@ -88,6 +89,9 @@ const App = () => (
       </section>
       <section css={sectionMarginMedium}>
         <NorthwestEverett Layout={CivicCardLayoutClassic} />
+      </section>
+      <section css={sectionMarginMedium}>
+        <MorningRush Layout={CivicCardLayoutClassic} />
       </section>
     </PageLayout>
   </Fragment>
