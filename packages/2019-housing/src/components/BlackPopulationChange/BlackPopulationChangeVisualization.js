@@ -70,38 +70,37 @@ const BlackPopulationChangeVisualization = ({ isLoading, data }) => {
   return (
     data && (
       <div>
-        <strong style={{ color: "crimson" }}>
-          Visualization TODO:
-          <ul>
-            <li>Add a map legend once they exist</li>
-            <li>
-              Try moving the map titles to either side of the divider (with a
-              different look than the Chart title) & make the divider more
-              salient
-            </li>
-          </ul>
-        </strong>
         <ChartContainer
           title="Black Population Share by Census Tract, 1990 vs 2017"
           subtitle="Slide to compare 1990 to 2017"
-        />
-        <ComparisonMap
-          height={height}
-          initialViewport={{ zoom: 9.9 }}
-          leftMap={leftMap}
-          leftMapTitle="1990"
-          rightMap={rightMap}
-          rightMapTitle="2017"
-          sliderStartPosition={50}
-          showDivider
-        />
+        >
+          <ComparisonMap
+            height={height}
+            initialViewport={{ zoom: 9.9 }}
+            leftMap={leftMap}
+            leftMapTitle="1990"
+            rightMap={rightMap}
+            rightMapTitle="2017"
+            sliderStartPosition={50}
+            showDivider
+          />
+        </ChartContainer>
         <br />
-        <MapLegend
-          colorScale={colorScale}
-          formatValues={f => civicFormat.decimalToPercent(f / 100)}
-          label="Black Population Share"
-          vertical={false}
-        />
+        <div
+          style={{
+            width: "100%",
+            paddingTop: "30px",
+            display: "flex",
+            justifyContent: "center"
+          }}
+        >
+          <MapLegend
+            colorScale={colorScale}
+            formatValues={f => civicFormat.decimalToPercent(f / 100)}
+            label="Black Population Share"
+            vertical={false}
+          />
+        </div>
       </div>
     )
   );
