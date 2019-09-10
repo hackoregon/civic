@@ -85,16 +85,16 @@ const Footer = props => (
         </a>
         <p css={boldText}>Creative and Tech HQ</p>
         <p css={textStyle}>Portland, OR</p>
-        <a css={textStyle} href="tel:12345678901">
-          +1-234-567-8901
+        <a css={textStyle} href="tel:5033839131">
+          +1-503-383-9131‬
         </a>
       </div>
       <div css={businessWrapper(props)}>
         <div>
           <p css={boldText}>Business HQ</p>
           <p css={textStyle}>Washington, DC</p>
-          <a css={textStyle} href="tel:12345678901">
-            +1-234-567-8901
+          <a css={textStyle} href="tel:12026641223">
+            +1-202-664-1223
           </a>
         </div>
       </div>
