@@ -15,6 +15,13 @@ import {
 } from "@hackoregon/component-library";
 import TempLoader from "../TempLoader/TempLoader";
 
+const dataSeriesLabel = [
+  { category: "asoth", label: "Another Race" },
+  { category: "black", label: "Black" },
+  { category: "hisp", label: "Hispanic or Latino" },
+  { category: "white", label: "White" }
+];
+
 const HousingDisplacementVisualization = ({ isLoading, data }) => {
   const [threshold, setThreshold] = useState(30);
 
@@ -61,6 +68,7 @@ const HousingDisplacementVisualization = ({ isLoading, data }) => {
             dataKey={xKey}
             dataValue={yKey}
             dataSeries={dataSeries}
+            dataSeriesLabel={dataSeriesLabel}
             title="Population Changes In All Of Portland"
             xLabel={xLabel}
             yLabel={yLabel}
@@ -72,11 +80,17 @@ const HousingDisplacementVisualization = ({ isLoading, data }) => {
           css={css`
             display: block;
             margin-left: 35px;
+            width: 50%;
+            @media screen and (max-width: 640px) {
+              width: 100%;
+            }
           `}
         >
           <div
             css={css`
               display: flex;
+              width: 100%;
+              justify-content: center;
               margin-bottom: 1rem;
             `}
           >
@@ -115,17 +129,27 @@ const HousingDisplacementVisualization = ({ isLoading, data }) => {
           }
         `}
       >
-        <LineChart
-          data={data[`homeownershipHistoricallyBlack${threshold}`].value}
-          dataKey={xKey}
-          dataValue={yKey}
-          dataSeries={dataSeries}
-          title={`Population Changes In Areas >${threshold}% Black In 1990`}
-          xLabel={xLabel}
-          yLabel={yLabel}
-          xNumberFormatter={tick => tick.toString()}
-          protect
-        />
+        <div
+          css={css`
+            width: 50%;
+            @media screen and (max-width: 640px) {
+              width: 100%;
+            }
+          `}
+        >
+          <LineChart
+            data={data[`homeownershipHistoricallyBlack${threshold}`].value}
+            dataKey={xKey}
+            dataValue={yKey}
+            dataSeries={dataSeries}
+            dataSeriesLabel={dataSeriesLabel}
+            title={`Population Changes In Areas >${threshold}% Black In 1990`}
+            xLabel={xLabel}
+            yLabel={yLabel}
+            xNumberFormatter={tick => tick.toString()}
+            protect
+          />
+        </div>
         <div
           css={css`
             width: 50%;
