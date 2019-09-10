@@ -1,13 +1,15 @@
-import WhatSurprisedYouAboutProgramOutcomesVisualization from "./WhatSurprisedYouAboutProgramOutcomesVisualization";
+import WhatElseSurprisedYouAboutProgramOutcomesVisualization from "./WhatElseSurprisedYouAboutProgramOutcomesVisualization";
 
-const WhatSurprisedYouAboutProgramOutcomesMeta = (/* data */) => ({
+const WhatElseSurprisedYouAboutProgramOutcomesMeta = (/* data */) => ({
   title: "What Surprised You About Program Outcomes?",
-  slug: "what-surprised-you-about-program-outcomes",
+  slug: "what-else-surprised-you-about-program-outcomes",
   introText: null,
-  visualization: WhatSurprisedYouAboutProgramOutcomesVisualization, // data, isLoading are passed to this as props
+  visualization: WhatElseSurprisedYouAboutProgramOutcomesVisualization, // data, isLoading are passed to this as props
   additionalText: null,
   shareText: null,
-  tags: null,
+  tags: [
+    /* "Transportation", "Bus", "Rail", "Portland" */
+  ],
   selector: null,
   analysis: null,
   metadata: null,
@@ -28,4 +30,4 @@ const WhatSurprisedYouAboutProgramOutcomesMeta = (/* data */) => ({
   authors: []
 });
 
-export default WhatSurprisedYouAboutProgramOutcomesMeta;
+export default WhatElseSurprisedYouAboutProgramOutcomesMeta;

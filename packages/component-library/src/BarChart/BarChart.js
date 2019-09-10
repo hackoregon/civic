@@ -8,7 +8,8 @@ import {
   VictoryLabel,
   VictoryPortal,
   VictoryTooltip,
-  VictoryGroup
+  VictoryGroup,
+  VictoryLine
 } from "victory";
 
 import { ThemeProvider } from "emotion-theming";
@@ -43,7 +44,8 @@ const BarChart = ({
   error,
   theme,
   legendComponent,
-  protect
+  protect,
+  annotations
 }) => {
   const safeData = data && data.length ? data : [{}];
   const chartDomain = domain || getDefaultDomain(safeData, dataKey, dataValue);
@@ -125,6 +127,17 @@ const BarChart = ({
                 y={295}
               />
             </VictoryPortal>
+            {annotations && (
+              <VictoryLine
+                style={{
+                  data: { stroke: "red", strokeWidth: 2 },
+                  labels: { angle: -90, fill: "red", fontSize: 20 }
+                }}
+                labels={["Important"]}
+                labelComponent={<VictoryLabel y={100} />}
+                x={() => 5000}
+              />
+            )}
             {!dataSeries && (
               <VictoryBar
                 alignment="middle"
@@ -222,7 +235,10 @@ BarChart.propTypes = {
   barWidth: PropTypes.number,
   theme: PropTypes.shape({}),
   legendComponent: PropTypes.node,
-  protect: PropTypes.bool
+  protect: PropTypes.bool,
+  annotations: PropTypes.arrayOf(
+    PropTypes.shape({ value: PropTypes.number, label: PropTypes.string })
+  )
 };
 
 BarChart.defaultProps = {
@@ -240,7 +256,8 @@ BarChart.defaultProps = {
   barWidth: null,
   theme: VictoryTheme,
   legendComponent: null,
-  protect: false
+  protect: false,
+  annotations: null
 };
 
 export default BarChart;

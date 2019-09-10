@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, css } from "@emotion/core";
+import { jsx } from "@emotion/core";
 import { BarChart, civicFormat } from "@hackoregon/component-library";
 import DataCollaborativeVictoryTheme from "../../common/DataCollaborativeVictoryTheme";
 
@@ -13,27 +13,17 @@ const data = [
 ];
 
 const WhatSurprisedYouAboutProgramOutcomesVisualization = () => (
-  <div
-    css={css`
-      display: flex;
-      flex-direction: "row";
-      @media screen and (max-width: 640px) {
-        flex-direction: column;
-      }
-    `}
-  >
-    <BarChart
-      title="In What Circumstances Does It Work Better Or Worse?"
-      subtitle="RIT score improvement by Navigation hours and grade"
-      data={data}
-      dataSeries="grade"
-      theme={DataCollaborativeVictoryTheme}
-      yNumberFormatter={civicFormat.percentage}
-      xLabel="Hours Per Week"
-      yLabel="Improvement in RIT Score"
-      domain={{ x: [0, 20] }}
-    />
-  </div>
+  <BarChart
+    title="In What Circumstances Does It Work Better Or Worse?"
+    subtitle="RIT score improvement by Navigation hours and grade"
+    data={data}
+    dataSeries="grade"
+    theme={DataCollaborativeVictoryTheme}
+    yNumberFormatter={civicFormat.percentage}
+    xLabel="Hours Per Week"
+    yLabel="Improvement in RIT Score"
+    domain={{ x: [0, 20] }}
+  />
 );
 
 export default WhatSurprisedYouAboutProgramOutcomesVisualization;
