@@ -27,7 +27,7 @@ const MaterialTheme = createMuiTheme({
       light: civicPlumLight,
       main: civicPrimary,
       dark: civicPrimary,
-      contrastText: "#fff"
+      contrastText: "#fff" // must override emotion theme if link
     },
     secondary: {
       light: civicAction,
@@ -71,6 +71,14 @@ const MaterialTheme = createMuiTheme({
   props: {
     MuiButtonBase: {
       disableRipple: true // No more ripple, on the whole application 💣!
+    }
+  },
+  overrides: {
+    MuiMenuItem: {
+      root: {
+        minHeight: "unset",
+        lineHeight: "unset"
+      }
     }
   }
 });

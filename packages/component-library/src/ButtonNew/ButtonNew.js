@@ -11,9 +11,14 @@ const variant = {
   secondary: "text"
 };
 
-const ButtonNew = ({ label, onClick, type }) => (
+const ButtonNew = ({ label, onClick, type, href }) => (
   <ThemeProvider theme={MaterialTheme}>
-    <MaterialButton onClick={onClick} color="secondary" variant={variant[type]}>
+    <MaterialButton
+      onClick={onClick}
+      color="secondary"
+      variant={variant[type]}
+      href={href || undefined}
+    >
       {label}
     </MaterialButton>
   </ThemeProvider>
@@ -22,7 +27,8 @@ const ButtonNew = ({ label, onClick, type }) => (
 ButtonNew.propTypes = {
   label: PropTypes.string,
   onClick: PropTypes.func,
-  type: PropTypes.string
+  type: PropTypes.string,
+  href: PropTypes.string
 };
 
 ButtonNew.defaultProps = {

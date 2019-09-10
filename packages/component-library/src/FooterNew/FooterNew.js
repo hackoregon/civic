@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
-import { Logo, BrandColors } from "@hackoregon/component-library";
-import { defaultFontSize, browserDefaultSize } from "./index.styles";
+import { Logo, BrandColors } from "../index";
+import { defaultFontSize, browserDefaultSize } from "../../constants/styles";
 
 const footerWrapper = css`
   height: 185px;
@@ -61,6 +61,7 @@ const textStyle = css`
   font-size: ${defaultFontSize / browserDefaultSize}rem;
   line-height: ${50 / defaultFontSize}rem;
   text-decoration: none;
+  margin: 0;
 `;
 
 const boldText = css`
@@ -97,10 +98,16 @@ const Footer = props => (
           </a>
         </div>
       </div>
-      <Logo css={logoStyle} type="squareLogo" />
+      <Logo css={logoStyle(props)} type="squareLogo" />
     </div>
   </footer>
 );
+
+Footer.defaultProps = {
+  greatestWidth: 1200,
+  collapseWidth: 845,
+  condensedWidth: 715
+};
 
 Footer.displayName = "Footer";
 

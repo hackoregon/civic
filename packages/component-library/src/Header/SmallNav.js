@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
 import { useState } from "react";
-import { Logo, BrandColors } from "@hackoregon/component-library";
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
 import ListSubheader from "@material-ui/core/ListSubheader";
@@ -9,8 +8,10 @@ import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import { Link } from "react-router";
+
 import hamburgerMenu from "../../assets/burger.svg";
-import { defaultFontSize } from "./index.styles";
+import { defaultFontSize } from "../../constants/styles";
+import { Logo, BrandColors } from "../index";
 
 const { primary, secondary } = BrandColors;
 
@@ -58,6 +59,7 @@ const subHeaderStyle = css`
   ${linkStyle};
   color: ${secondary.hex};
   padding-top: 8px;
+  margin: 0;
 `;
 
 const subLinkStyle = css`

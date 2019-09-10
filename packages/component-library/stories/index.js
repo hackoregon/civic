@@ -5,7 +5,7 @@ import { checkA11y } from "@storybook/addon-a11y";
 
 // DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator import injection
 
-import buttonNewStory from "./ButtonNew.story"; // TODO: Move this to the appropriate location
+import buttonNewStory from "./ButtonNew.story";
 import badgeStory from "./Badge.story";
 import BarChartStory from "./BarChart.story";
 import baseMapStory from "./BaseMap.story";
@@ -22,6 +22,8 @@ import civicStorycardStory from "./CivicStoryCard.story";
 import dataTable from "./DataTable.story";
 import gradientScaleStory from "./GradientScale.story";
 import headerStory from "./Header.story";
+import headerNewStory from "./HeaderNew.story";
+import footerNewStory from "./FooterNew.story";
 import heatMapStory from "./HeatMap.story";
 import horizontalBarChartStory from "./HorizontalBarChart.story";
 import iconMapStory from "./IconMap.story";
@@ -119,7 +121,6 @@ checkboxStory();
 radioButtonGroupStory();
 selectStory();
 sliderStory();
-
 // DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator story injection
 
 // charts
@@ -168,7 +169,9 @@ badgeStory();
 civicSandboxDashboardStory();
 civicStorycardStory();
 collapsableStory();
+headerNewStory();
 headerStory();
+footerNewStory();
 packageSelectorBox();
 pageLayoutStory();
 pdfStory();

@@ -22,7 +22,9 @@ const GROUP_IDS = {
 
 const MAP_STYLE_OPTIONS = {
   light: "light",
-  dark: "dark"
+  dark: "dark",
+  disaster: "disaster-game",
+  pencil: "pencil"
 };
 
 const ZOOM_OPTIONS = {
