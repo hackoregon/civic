@@ -52,8 +52,7 @@ class BaseMap extends Component {
         minZoom: props.minZoom,
         maxZoom: props.maxZoom,
         pitch: props.initialPitch,
-        bearing: 0,
-        scrollZoom: true
+        bearing: 0
       },
       tooltipInfo: null,
       x: null,
@@ -208,7 +207,8 @@ class BaseMap extends Component {
       scaleBar,
       scaleBarOptions,
       sharedViewport,
-      onSharedViewportChange
+      onSharedViewportChange,
+      useScrollZoom
     } = this.props;
 
     viewport.width = containerWidth || 500;
@@ -301,6 +301,7 @@ class BaseMap extends Component {
           {...mapGLOptions}
           onClick={onBaseMapClick}
           onLoad={onMapLoad}
+          scrollZoom={useScrollZoom}
         >
           <div css={navControl}>{navigation && <NavigationControl />}</div>
           {locationMarker && (
@@ -385,7 +386,8 @@ BaseMap.propTypes = {
   onSharedViewportChange: PropTypes.func,
   useFitBounds: PropTypes.bool,
   bboxData: PropTypes.arrayOf(PropTypes.shape({})),
-  bboxPadding: PropTypes.number
+  bboxPadding: PropTypes.number,
+  useScrollZoom: PropTypes.bool
 };
 
 BaseMap.defaultProps = {
@@ -409,8 +411,9 @@ BaseMap.defaultProps = {
   animationDuration: 1000,
   scaleBar: false,
   useFitBounds: false,
-  bboxData: {},
-  bboxPadding: 10
+  bboxData: [],
+  bboxPadding: 10,
+  useScrollZoom: false
 };
 
 export default Dimensions()(BaseMap);
