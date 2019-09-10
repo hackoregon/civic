@@ -41,6 +41,7 @@ const sectionContributorLayout = css`
 `;
 
 const sectionPlatformLayout = css`
+  padding-bottom: 35px;
   margin-bottom: 60px;
 
   @media (min-width: ${condensedWidth}px) {
@@ -48,7 +49,6 @@ const sectionPlatformLayout = css`
   }
 
   @media (min-width: ${collapseWidth}px) {
-    padding-bottom: 77px;
     margin-bottom: 160px;
   }
 `;
@@ -188,7 +188,6 @@ const HomePage = () => {
             teams or resources. If you’ve a developer, you don’t have to join a
             team to start contributing.
           </p>
-          <h3 className="platform-h4">CIVIC PLATFORM IS COMPRISED OF:</h3>
           <PlatformExplorer />
         </div>
 
