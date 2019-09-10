@@ -87,79 +87,6 @@ const HomeLoanApprovalsVisualization = ({ isLoading, data }) => {
   return (
     data && (
       <span>
-        {/* -------- HOMEOWNER MAP -------- */}
-        <div
-          css={css`
-            display: flex;
-          `}
-        >
-          <div
-            css={css`
-              width: 75%;
-            `}
-          >
-            <ChartContainer
-              title={`Home Loan Approval Rates for ${
-                RACE_LABEL_MAP[hoRace]
-              } Homeowners`}
-              subtitle="Comparing Tract-Level Approval Rates to the Share of Existing Homeowners of Color"
-            >
-              <BaseMap initialZoom={9} maxZoom={13} minZoom={6}>
-                <MapOverlay
-                  data={totalLoans}
-                  getFillColor={f =>
-                    colorScale(f.properties[polygonFieldNameHomeOwners])
-                  }
-                  onLayerClick={() => {}}
-                  opacity={0.25}
-                >
-                  <MapTooltip
-                    tooltipDataArray={[
-                      ...getSharedTooltipDataArray(hoRace),
-                      {
-                        name: `Share of homeowners who are ${
-                          RACE_LABEL_MAP[hoRace]
-                        }`,
-                        field: `share_total_own_${hoRace}`,
-                        formatField: f => civicFormat.decimalToPercent(f)
-                      },
-                      {
-                        name: `Location quotient (loans to ${
-                          RACE_LABEL_MAP[hoRace]
-                        } homeowners)`,
-                        field: polygonFieldNameHomeOwners
-                      }
-                    ]}
-                    wide
-                  />
-                </MapOverlay>
-              </BaseMap>
-            </ChartContainer>
-          </div>
-          <div
-            css={css`
-              padding: 75px 0 0 15px;
-              display: flex;
-              flex-direction: column;
-              justify-content: space-between;
-            `}
-          >
-            <RadioButtonGroup
-              grpLabel="Race"
-              labels={Object.keys(LABEL_RACE_MAP)}
-              onChange={e => setHoRace(LABEL_RACE_MAP[e.target.value])}
-              value={RACE_LABEL_MAP[hoRace]}
-            />
-            <MapLegend
-              colorScale={colorScale}
-              label={`Location quotient (loans to ${
-                RACE_LABEL_MAP[hoRace]
-              } homeowners)`}
-              vertical
-            />
-          </div>
-        </div>
-        <br />
         {/* -------- HOUSEHOLD MAP -------- */}
         <div
           css={css`
@@ -228,6 +155,79 @@ const HomeLoanApprovalsVisualization = ({ isLoading, data }) => {
               label={`Location quotient (loans to ${
                 RACE_LABEL_MAP[hhRace]
               } households)`}
+              vertical
+            />
+          </div>
+        </div>
+        {/* -------- HOMEOWNER MAP -------- */}
+        <br />
+        <div
+          css={css`
+            display: flex;
+          `}
+        >
+          <div
+            css={css`
+              width: 75%;
+            `}
+          >
+            <ChartContainer
+              title={`Home Loan Approval Rates for ${
+                RACE_LABEL_MAP[hoRace]
+              } Homeowners`}
+              subtitle="Comparing Tract-Level Approval Rates to the Share of Existing Homeowners of Color"
+            >
+              <BaseMap initialZoom={9} maxZoom={13} minZoom={6}>
+                <MapOverlay
+                  data={totalLoans}
+                  getFillColor={f =>
+                    colorScale(f.properties[polygonFieldNameHomeOwners])
+                  }
+                  onLayerClick={() => {}}
+                  opacity={0.25}
+                >
+                  <MapTooltip
+                    tooltipDataArray={[
+                      ...getSharedTooltipDataArray(hoRace),
+                      {
+                        name: `Share of homeowners who are ${
+                          RACE_LABEL_MAP[hoRace]
+                        }`,
+                        field: `share_total_own_${hoRace}`,
+                        formatField: f => civicFormat.decimalToPercent(f)
+                      },
+                      {
+                        name: `Location quotient (loans to ${
+                          RACE_LABEL_MAP[hoRace]
+                        } homeowners)`,
+                        field: polygonFieldNameHomeOwners
+                      }
+                    ]}
+                    wide
+                  />
+                </MapOverlay>
+              </BaseMap>
+            </ChartContainer>
+          </div>
+          <div
+            css={css`
+              padding: 75px 0 0 15px;
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+            `}
+          >
+            <RadioButtonGroup
+              grpLabel="Race"
+              labels={Object.keys(LABEL_RACE_MAP)}
+              onChange={e => setHoRace(LABEL_RACE_MAP[e.target.value])}
+              value={RACE_LABEL_MAP[hoRace]}
+            />
+            <MapLegend
+              colorScale={colorScale}
+              label={`Location quotient (loans to ${
+                RACE_LABEL_MAP[hoRace]
+              } homeowners)`}
               vertical
             />
           </div>
