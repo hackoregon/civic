@@ -98,10 +98,16 @@ const Footer = props => (
           </a>
         </div>
       </div>
-      <Logo css={logoStyle} type="squareLogo" />
+      <Logo css={logoStyle(props)} type="squareLogo" />
     </div>
   </footer>
 );
+
+Footer.defaultProps = {
+  greatestWidth: 1200,
+  collapseWidth: 845,
+  condensedWidth: 715
+};
 
 Footer.displayName = "Footer";
 

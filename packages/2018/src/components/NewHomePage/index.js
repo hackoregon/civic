@@ -5,10 +5,10 @@ import { Fragment } from "react";
 import {
   Button,
   BrandColors,
-  HeaderNew as Header
+  HeaderNew as Header,
+  FooterNew as Footer
 } from "@hackoregon/component-library";
 import indexStyle from "./index.styles";
-import Footer from "./Footer";
 // Placeholders
 import placeholderIntroImg from "../../assets/new-home-page-1.png";
 import placeholderWorkImg from "../../assets/new-home-page-2.png";
