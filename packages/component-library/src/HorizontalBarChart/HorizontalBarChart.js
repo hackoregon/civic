@@ -16,7 +16,6 @@ import ChartContainer from "../ChartContainer";
 import civicFormat from "../utils/civicFormat";
 import {
   chartEvents,
-  categoricalColors,
   getDefaultDataSeriesLabels,
   transformDatato100
 } from "../utils/chartHelpers";
@@ -224,7 +223,7 @@ const HorizontalBarChart = ({
             />
           )}
           {stacked && (
-            <VictoryStack colorScale={categoricalColors(groupedData.length)}>
+            <VictoryStack colorScale={theme.stack.colorScale}>
               {groupedData.map(arr => {
                 return (
                   <VictoryBar
@@ -274,7 +273,7 @@ const HorizontalBarChart = ({
             })}
           {grouped && (
             <VictoryGroup
-              colorScale={categoricalColors(groupedData.length)}
+              colorScale={theme.group.colorScale}
               offset={barHeight * 1.2}
             >
               {groupedData.map(arr => {
