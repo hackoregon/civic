@@ -113,6 +113,11 @@ const bg3 = css`
 `;
 
 const AttractorScreen = ({ goToChapter, playSFX }) => {
+  const play = () => {
+    playSFX(SFX_TYPES.START_RECORD);
+    goToChapter();
+  };
+
   return (
     <div css={pageWrapper}>
       <Song songFile={attractorSong} />
@@ -124,10 +129,8 @@ const AttractorScreen = ({ goToChapter, playSFX }) => {
         <div css={buttonWrapper}>
           <button
             type="button"
-            onClick={() => {
-              playSFX(SFX_TYPES.START_RECORD);
-              goToChapter();
-            }}
+            onClick={play}
+            onTouchEnd={play}
             css={buttonStyle}
           >
             <h2 css={buttonFont}>PLAY</h2>
