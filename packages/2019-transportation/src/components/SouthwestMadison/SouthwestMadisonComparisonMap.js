@@ -123,7 +123,7 @@ const SouthwestMadisonComparisonMap = () => {
     );
   }, [disturbanceStops2019]);
 
-  const DisturbanceStopsMap2017 = disturbanceStops2017Extent.length ? (
+  const DisturbanceStopsMap2018 = disturbanceStops2017Extent.length ? (
     <BaseMap
       {...baseMapProps}
       civicMapStyle="light"
@@ -131,7 +131,7 @@ const SouthwestMadisonComparisonMap = () => {
       mapboxLayerOptions={heatmapLayer2017}
     />
   ) : null;
-  const DisturbanceStopsMap2018 = disturbanceStops2018Extent.length ? (
+  const DisturbanceStopsMap2019 = disturbanceStops2018Extent.length ? (
     <BaseMap
       {...baseMapProps}
       civicMapStyle="dark"
@@ -143,8 +143,12 @@ const SouthwestMadisonComparisonMap = () => {
   return data.loaded ? (
     <>
       <ComparisonMap
-        leftMap={DisturbanceStopsMap2017}
-        rightMap={DisturbanceStopsMap2018}
+        leftMap={DisturbanceStopsMap2018}
+        leftMapTitle="2018"
+        leftTitleColor="black !important"
+        rightMap={DisturbanceStopsMap2019}
+        rightMapTitle="2019"
+        rightTitleColor="white !important"
       />
     </>
   ) : null;
