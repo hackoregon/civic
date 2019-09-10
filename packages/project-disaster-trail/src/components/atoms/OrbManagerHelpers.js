@@ -117,9 +117,9 @@ export function createFixedLayout(
 export function completedOrbHandler(correctChoice, currentOrb) {
   const orbCopy = cloneDeep(currentOrb);
   if (correctChoice) {
-    orbCopy.y -= 2.0;
+    orbCopy.y -= 20.0;
   } else {
-    orbCopy.y += 2.0;
+    orbCopy.y += 20.0;
   }
 
   return orbCopy;
