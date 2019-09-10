@@ -13,6 +13,7 @@ import {
   civicFormat,
   HorizontalBarChart,
   LineChart,
+  MapLegend,
   MapOverlay,
   MapTooltip,
   Slider,
@@ -64,7 +65,7 @@ const HomeAppreciationVisualization = ({ data }) => {
   const colorScale = scaleQuantize()
     .domain([threshold - 0.1, threshold])
     .range([
-      [114, 99, 113, 100], // Brand Plum Light
+      [170, 164, 171], // Brand Medium
       VisualizationColors.categorical.pink.mapFormatRGBA
     ]);
 
@@ -105,33 +106,12 @@ const HomeAppreciationVisualization = ({ data }) => {
           />
         }
       />
-      <div
-        css={css`
-          width: fit-content;
-        `}
-      >
-        <h5
-          css={css`
-            margin-bottom: 0.75rem;
-          `}
-        >
-          {`Per-House Appreciation Threshold`}
-        </h5>
-        <Slider.SliderWithTooltip
-          min={0}
-          max={1000000}
-          defaultValue={threshold}
-          step={100000}
-          tipFormatter={value => civicFormat.dollars(value)}
-          onChange={value => setThreshold(value)}
-          value={threshold}
-        />
-      </div>
+      <br />
       <ChartContainer
         title={`Areas with >${civicFormat.dollars(
           threshold
         )} Appreciation Per-House Between ~1990 and ~2015`}
-        subtitle="Median inflation adjusted sale price for houses sold between 1987-1993 and again 2015-2016 (Use the slider above to adjust the threshold)"
+        subtitle="Median inflation adjusted sale price for houses sold between 1987-1993 and again 2015-2016 (Adjust the threshold using the slider below)"
       >
         <BaseMap initialZoom={9.9} maxZoom={13} minZoom={6} updateViewport>
           <MapOverlay
@@ -151,6 +131,49 @@ const HomeAppreciationVisualization = ({ data }) => {
             />
           </MapOverlay>
         </BaseMap>
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-end"
+          }}
+        >
+          <div
+            css={css`
+              width: fit-content;
+            `}
+          >
+            <h5
+              css={css`
+                font-family: "Roboto Condensed", "Helvetica Neue", Helvetica,
+                  sans-serif;
+                font-weight: bold;
+                margin-bottom: 0.75rem;
+              `}
+            >
+              Threshold For Per-House Appreciation
+            </h5>
+            <Slider.SliderWithTooltip
+              min={0}
+              max={1000000}
+              defaultValue={threshold}
+              step={100000}
+              tipFormatter={value => civicFormat.dollars(value)}
+              onChange={value => setThreshold(value)}
+              value={threshold}
+            />
+          </div>
+          <MapLegend
+            colorScale={colorScale}
+            formatValues={f => {
+              if (f === threshold) return `> ${civicFormat.dollars(f)}`;
+              return `≤ ${civicFormat.dollars(f - 1)}`;
+            }}
+            label="Median Appreciation Per-House"
+            vertical={false}
+          />
+        </div>
       </ChartContainer>
     </span>
   );
