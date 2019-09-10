@@ -43,7 +43,7 @@ export const SlideFailure = actionEmitter(SLIDE_FAILURE);
 
 // Thunk actions
 export const fetchSandbox = fetchAdapter(
-  "https://gist.githubusercontent.com/mendozaline/5f9b9157d031cb5fd505bcce098f3fc2/raw/329b1d633d990f2625b83c78657ebc26d10af1dc/packages.json",
+  "https://gist.githubusercontent.com/mendozaline/5f9b9157d031cb5fd505bcce098f3fc2/raw/e7d5f02fab4fbf382c54e92b35e4408cfeefcdea/packages.json",
   {
     start: SandboxStart,
     success: SandboxSuccess,
@@ -59,7 +59,6 @@ export const fetchFoundation = endpoint =>
   });
 
 export const fetchLayers = layers => {
-  // console.log("actions-fetchLayers-layers:", layers);
   return fetchLayersAdapter(layers, {
     start: SlidesStart,
     success: SlidesSuccess,
@@ -100,8 +99,6 @@ export const setSelectedFoundationDatum = (feature = {}) => ({
 });
 
 export const setSelectedSlideDatum = (feature = {}, index) => {
-  // console.log("actions-setSelectedSlideDatum-f:", feature);
-  // console.log("actions-setSelectedSlideDatum-i:", index);
   return {
     type: SET_SLIDE_DATUM,
     feature,
