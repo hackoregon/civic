@@ -80,11 +80,17 @@ const HousingDisplacementVisualization = ({ isLoading, data }) => {
           css={css`
             display: block;
             margin-left: 35px;
+            width: 50%;
+            @media screen and (max-width: 640px) {
+              width: 100%;
+            }
           `}
         >
           <div
             css={css`
               display: flex;
+              width: 100%;
+              justify-content: center;
               margin-bottom: 1rem;
             `}
           >
