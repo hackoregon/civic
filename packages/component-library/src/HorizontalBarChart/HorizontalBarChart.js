@@ -8,7 +8,8 @@ import {
   VictoryPortal,
   VictoryTooltip,
   VictoryStack,
-  VictoryGroup
+  VictoryGroup,
+  VictoryLine
 } from "victory";
 import shortid from "shortid";
 import SimpleLegend from "../SimpleLegend";
@@ -46,7 +47,8 @@ const HorizontalBarChart = ({
   dataSeriesLabel,
   legendComponent,
   theme,
-  protect
+  protect,
+  annotations
 }) => {
   const safeData =
     // eslint-disable-next-line no-nested-ternary
@@ -119,7 +121,11 @@ const HorizontalBarChart = ({
           (legendComponent ? (
             legendComponent(legendData)
           ) : (
-            <SimpleLegend className="legend" legendData={legendData} />
+            <SimpleLegend
+              className="legend"
+              legendData={legendData}
+              theme={theme}
+            />
           ))}
         <VictoryChart
           height={dataHeight + additionalHeight}
@@ -136,6 +142,16 @@ const HorizontalBarChart = ({
             }}
             title="Y Axis"
           />
+          {annotations &&
+            annotations.length &&
+            annotations.map(annotation => (
+              <VictoryLine
+                style={{ data: { strokeDasharray: "10,5" } }}
+                labels={[annotation.label]}
+                labelComponent={<VictoryLabel y={annotation.y} />}
+                y={() => annotation.x}
+              />
+            ))}
           {!minimalist && (
             <VictoryAxis
               dependentAxis
@@ -355,7 +371,14 @@ HorizontalBarChart.propTypes = {
   dataSeriesLabel: PropTypes.shape({}),
   legendComponent: PropTypes.func,
   theme: PropTypes.shape({}),
-  protect: PropTypes.bool
+  protect: PropTypes.bool,
+  annotations: PropTypes.arrayOf(
+    PropTypes.shape({
+      x: PropTypes.number,
+      y: PropTypes.number,
+      label: PropTypes.string
+    })
+  )
 };
 
 HorizontalBarChart.defaultProps = {
