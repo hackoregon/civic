@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import FullNav from "./FullNav";
 import SmallNav from "./SmallNav";
 
@@ -35,10 +36,24 @@ const Header = props => {
   });
 
   return (
-    <header css={headerWrapper(props)}>
+    <header css={headerWrapper(props)} {...props}>
       {width > collapseWidth ? <FullNav {...props} /> : <SmallNav {...props} />}
     </header>
   );
 };
+
+Header.propTypes = {
+  greatestWidth: PropTypes.number,
+  collapseWidth: PropTypes.number,
+  condensedWidth: PropTypes.number
+};
+
+Header.defaultProps = {
+  greatestWidth: 1200,
+  collapseWidth: 845,
+  condensedWidth: 715
+};
+
+Header.displayName = "Header";
 
 export default Header;

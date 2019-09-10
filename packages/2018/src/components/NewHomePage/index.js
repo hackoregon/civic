@@ -2,10 +2,13 @@
 import { css, jsx, Global } from "@emotion/core";
 import emotionReset from "emotion-reset";
 import { Fragment } from "react";
-import { Button, BrandColors } from "@hackoregon/component-library";
+import {
+  Button,
+  BrandColors,
+  HeaderNew as Header,
+  FooterNew as Footer
+} from "@hackoregon/component-library";
 import indexStyle from "./index.styles";
-import Header from "./Header";
-import Footer from "./Footer";
 // Placeholders
 import placeholderIntroImg from "../../assets/new-home-page-1.png";
 import placeholderWorkImg from "../../assets/new-home-page-2.png";
