@@ -25,7 +25,7 @@ const {
   CIVIC_DARK,
   CIVIC_PENCIL,
   DISASTER_GAME,
-  CIVIC_DARK2
+  SANDBOX_DARK
 } = MapGLResources;
 
 const mapWrapper = css`
@@ -262,8 +262,8 @@ class BaseMap extends Component {
       baseMapboxStyleURL = CIVIC_PENCIL;
     } else if (civicMapStyle === "disaster-game") {
       baseMapboxStyleURL = DISASTER_GAME;
-    } else if (civicMapStyle === "dark_2") {
-      baseMapboxStyleURL = CIVIC_DARK2;
+    } else if (civicMapStyle === "sandbox-dark") {
+      baseMapboxStyleURL = SANDBOX_DARK;
     }
 
     const animationProps = !animate
@@ -345,7 +345,13 @@ BaseMap.propTypes = {
   containerHeight: PropTypes.number,
   containerWidth: PropTypes.number,
   mapboxToken: PropTypes.string,
-  civicMapStyle: PropTypes.oneOf(["light", "dark", "pencil", "disaster-game"]),
+  civicMapStyle: PropTypes.oneOf([
+    "light",
+    "dark",
+    "pencil",
+    "disaster-game",
+    "sandbox-dark"
+  ]),
   navigation: PropTypes.bool,
   locationMarker: PropTypes.bool,
   locationMarkerCoord: PropTypes.shape({

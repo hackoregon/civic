@@ -55,7 +55,7 @@ const Sandbox = ({
     // eslint-disable-next-line no-unused-expressions
     baseMapStyleChangeEvent.target.value === "light"
       ? setBaseMapStyle("light")
-      : setBaseMapStyle("dark");
+      : setBaseMapStyle("sandbox-dark");
   };
 
   return (
