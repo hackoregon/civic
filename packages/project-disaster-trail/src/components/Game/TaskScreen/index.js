@@ -19,6 +19,8 @@ import Timer from "../../../utils/timer";
 
 import * as ACTIONS from "../../../constants/actions";
 import usePrevious from "../../../state/hooks/usePrevious";
+import taskSong from "../../../../assets/audio/PWolfAfter_Earthquake1fadeinout.mp3";
+import Song from "../../atoms/Audio/Song";
 
 const mapAndInfoStyle = css`
   position: relative;
@@ -217,6 +219,7 @@ const TaskScreen = ({
         debug
         percentComplete={percentComplete}
       />
+      <Song songFile={taskSong} />
     </Fragment>
   );
 };

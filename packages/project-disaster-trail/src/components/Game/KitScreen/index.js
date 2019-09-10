@@ -4,6 +4,8 @@ import { memo, Fragment, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+
+import { goToNextChapter } from "../../../state/chapters";
 import { getKitCreationItems, addItemToPlayerKit } from "../../../state/kit";
 import { addPoints } from "../../../state/user";
 import { palette } from "../../../constants/style";
@@ -11,7 +13,9 @@ import { MapStyle } from "../index";
 import MatchLockInterface from "../../atoms/MatchLockInterface";
 import Kit from "./Kit";
 import Timer from "../../../utils/timer";
-import { goToNextChapter } from "../../../state/chapters";
+import Song from "../../atoms/Audio/Song";
+
+import kitSong from "../../../../assets/audio/HappyTheme1fadeinout.mp3";
 
 const slide = keyframes`
   0% {
@@ -81,6 +85,7 @@ const KitScreen = ({
 
   return (
     <Fragment>
+      <Song songFile={kitSong} />
       <MapStyle>
         <div css={bg} />
         <div css={[bg, bg2]} />

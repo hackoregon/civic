@@ -59,7 +59,7 @@ module.exports = {
           })
         ]
       ),
-      match(["*.svg", "*.png", "*.gif", "*.jpg", "*.jpeg"], [file()]),
+      match(["*.svg", "*.png", "*.gif", "*.jpg", "*.jpeg", "*.mp3"], [file()]),
       setEnv({
         NODE_ENV: process.env.NODE_ENV
       }),
