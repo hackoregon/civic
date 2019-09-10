@@ -8,6 +8,7 @@ import {
   civicFormat,
   BaseMap,
   ChartContainer,
+  MapLegend,
   MapOverlay,
   MapTooltip,
   RadioButtonGroup
@@ -53,8 +54,8 @@ const HomeLoanApprovalsVisualization = ({ isLoading, data }) => {
       // Nulls are a more translarent gray
       [200, 200, 200],
       // Color-blind safe diverging color scale from ColorBrewer
-      [166, 97, 26],
-      [223, 194, 125],
+      [254, 153, 41],
+      [254, 217, 142],
       [255, 255, 255],
       [143, 240, 232],
       [25, 183, 170]
@@ -66,9 +67,7 @@ const HomeLoanApprovalsVisualization = ({ isLoading, data }) => {
         <strong style={{ color: "crimson" }}>
           Visualization TODO:
           <ul>
-            <li>Add a map legend once they exist</li>
             <li>Add a second map with updated data</li>
-            <li>Update Tooltip labeling</li>
           </ul>
         </strong>
         <div
@@ -136,7 +135,10 @@ const HomeLoanApprovalsVisualization = ({ isLoading, data }) => {
           </div>
           <div
             css={css`
-              margin: 75px 0 0 25px;
+              padding: 75px 0 0 15px;
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
             `}
           >
             <RadioButtonGroup
@@ -144,6 +146,13 @@ const HomeLoanApprovalsVisualization = ({ isLoading, data }) => {
               labels={Object.keys(LABEL_RACE_MAP)}
               onChange={e => setRace(LABEL_RACE_MAP[e.target.value])}
               value={RACE_LABEL_MAP[race]}
+            />
+            <MapLegend
+              colorScale={colorScale}
+              label={`Location quotient (loans to ${
+                RACE_LABEL_MAP[race]
+              } homeowners`}
+              vertical
             />
           </div>
         </div>
