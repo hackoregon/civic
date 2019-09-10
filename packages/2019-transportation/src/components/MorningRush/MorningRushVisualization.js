@@ -49,7 +49,7 @@ const MorningRushVisualization = ({ data }) => {
         extent(data.busAmRushSummary.value.results.features, samplesAccessor)
       );
     }
-  }, [data.busAmRushSummary.value.results.features, isLoading]);
+  }, [isLoading]); // eslint-disable-line
 
   return !isLoading && data ? (
     <>
