@@ -67,6 +67,17 @@ export default (greatestWidth, collapseWidth) => ({
     }
   },
 
+  ".nav-div": {
+    "::before": {
+      display: "block",
+      content: "' '",
+      marginTop: "-110px",
+      height: "110px",
+      visibility: "hidden",
+      pointerEvents: "none"
+    }
+  },
+
   ".audience-content": {
     ...textStandard,
     color: tertiary.hex,

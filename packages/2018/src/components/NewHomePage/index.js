@@ -91,7 +91,8 @@ const HomePage = () => {
 
         <p className="section-header">JOIN THE MOVEMENT</p>
 
-        <div className="home-section" css={sectionWorkLayout} id="work-with-us">
+        <div className="nav-div" id="work-with-us" />
+        <div className="home-section" css={sectionWorkLayout}>
           <h2>Work With Us</h2>
           <p className="audience-content">
             CITIES, GOVERNMENTS &<br />
@@ -126,11 +127,8 @@ const HomePage = () => {
           />
         </div>
 
-        <div
-          className="home-section"
-          css={sectionContributorLayout}
-          id="become-a-contributor"
-        >
+        <div className="nav-div" id="become-a-contributor" />
+        <div className="home-section" css={sectionContributorLayout}>
           <h2>Become a Contributor</h2>
           <p className="audience-content">
             DESIGNERS, DEVELOPERS,
@@ -171,11 +169,8 @@ const HomePage = () => {
 
         <p className="section-header">ABOUT</p>
 
-        <div
-          className="home-section"
-          css={sectionPlatformLayout}
-          id="civic-platform"
-        >
+        <div className="nav-div" id="civic-platform" />
+        <div className="home-section" css={sectionPlatformLayout}>
           <h2>CIVIC Platform</h2>
           <p>
             The CIVIC Platform is designed for making public information public
@@ -191,11 +186,8 @@ const HomePage = () => {
           <PlatformExplorer />
         </div>
 
-        <div
-          className="home-section"
-          css={sectionCivicLayout}
-          id="civic-software-foundation"
-        >
+        <div className="nav-div" id="civic-software-foundation" />
+        <div className="home-section" css={sectionCivicLayout}>
           <h2>Civic Software Foundation</h2>
           <p className="audience-content">OUR BOTTOM LINE IS PUBLIC INTEREST</p>
           <p>
