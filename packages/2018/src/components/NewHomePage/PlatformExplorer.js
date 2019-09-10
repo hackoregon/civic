@@ -17,6 +17,7 @@ const componentWrapper = css`
   width: 100%;
   display: grid;
   grid-template-rows: 50px 370px;
+  margin-top: 36px;
 `;
 
 const contentWrapper = css`
