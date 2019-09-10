@@ -69,7 +69,7 @@ const HolcRedliningVisualization = ({ data }) => {
             <MapLegend
               colorScale={colorScale}
               formatValues={f => `${f}: ${REDLINING_GRADES[f]}`}
-              label="Black Population Share"
+              label="HOLC Grade"
               vertical={false}
             />
           </div>
