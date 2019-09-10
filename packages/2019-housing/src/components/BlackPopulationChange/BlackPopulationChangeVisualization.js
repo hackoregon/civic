@@ -8,6 +8,7 @@ import {
   civicFormat,
   ChartContainer,
   ComparisonMap,
+  MapLegend,
   MapOverlay,
   MapTooltip,
   VisualizationColors
@@ -41,7 +42,7 @@ const BlackPopulationChangeVisualization = ({ isLoading, data }) => {
         <MapTooltip
           primaryName="Black Polulation Share"
           primaryField={polygonFieldName}
-          formatPrimaryField={f => civicFormat.decimalToPercent(f)}
+          formatPrimaryField={f => civicFormat.decimalToPercent(f / 100)}
           secondaryName="Year"
           secondaryField="year"
         />
@@ -58,7 +59,7 @@ const BlackPopulationChangeVisualization = ({ isLoading, data }) => {
         <MapTooltip
           primaryName="Black Polulation Share"
           primaryField={polygonFieldName}
-          formatPrimaryField={f => civicFormat.decimalToPercent(f)}
+          formatPrimaryField={f => civicFormat.decimalToPercent(f / 100)}
           secondaryName="Year"
           secondaryField="year"
         />
@@ -93,6 +94,13 @@ const BlackPopulationChangeVisualization = ({ isLoading, data }) => {
           rightMapTitle="2017"
           sliderStartPosition={50}
           showDivider
+        />
+        <br />
+        <MapLegend
+          colorScale={colorScale}
+          formatValues={f => civicFormat.decimalToPercent(f / 100)}
+          label="Black Population Share"
+          vertical={false}
         />
       </div>
     )
