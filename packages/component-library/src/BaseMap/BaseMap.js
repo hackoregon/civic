@@ -17,7 +17,13 @@ import { isEqual } from "lodash";
 import mapboxgl from "./mapboxgl";
 import { MapGLResources } from "../_Themes/index";
 
-const { MAPBOX_TOKEN, CIVIC_LIGHT, CIVIC_DARK, DISASTER_GAME } = MapGLResources;
+const {
+  MAPBOX_TOKEN,
+  CIVIC_LIGHT,
+  CIVIC_DARK,
+  CIVIC_PENCIL,
+  DISASTER_GAME
+} = MapGLResources;
 
 const mapWrapper = css`
   margin: 0 auto;
@@ -201,6 +207,8 @@ class BaseMap extends Component {
     let baseMapboxStyleURL = CIVIC_LIGHT;
     if (civicMapStyle === "dark") {
       baseMapboxStyleURL = CIVIC_DARK;
+    } else if (civicMapStyle === "pencil") {
+      baseMapboxStyleURL = CIVIC_PENCIL;
     } else if (civicMapStyle === "disaster-game") {
       baseMapboxStyleURL = DISASTER_GAME;
     }
@@ -284,7 +292,7 @@ BaseMap.propTypes = {
   containerHeight: PropTypes.number,
   containerWidth: PropTypes.number,
   mapboxToken: PropTypes.string,
-  civicMapStyle: PropTypes.string,
+  civicMapStyle: PropTypes.oneOf(["light", "dark", "pencil", "disaster-game"]),
   navigation: PropTypes.bool,
   locationMarker: PropTypes.bool,
   locationMarkerCoord: PropTypes.shape({
