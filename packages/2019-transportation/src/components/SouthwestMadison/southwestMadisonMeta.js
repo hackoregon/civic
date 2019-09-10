@@ -1,11 +1,11 @@
 import React from "react";
 import { Collapsable } from "@hackoregon/component-library";
 
-import SoutheastHawthorneVisualization from "./SoutheastHawthorneVisualization";
+import SouthwestMadisonVisualization from "./SouthwestMadisonVisualization";
 
-const DisturbanceStopsMeta = (/* data */) => ({
-  title: "Southeast Hawthorne",
-  slug: "disturbance-stops",
+const SouthwestMadisonMeta = (/* data */) => ({
+  title: "Southwest Madison",
+  slug: "southwest-madison",
   introText: (
     <p>
       This template card loads data from an API using Reduxful, and can be used
@@ -13,7 +13,7 @@ const DisturbanceStopsMeta = (/* data */) => ({
       template! For example, the loading state of the card needs to be improved.
     </p>
   ),
-  visualization: SoutheastHawthorneVisualization, // data, isLoading are passed to this as props
+  visualization: SouthwestMadisonVisualization, // data, isLoading are passed to this as props
   additionalText: (
     <p>
       Pastry sweet roll candy chocolate bar cupcake gingerbread. Chocolate jelly
@@ -31,7 +31,9 @@ const DisturbanceStopsMeta = (/* data */) => ({
   ),
   shareText:
     "Ice cream candy canes brownie marzipan jelly chocolate bar marshmallow.",
-  tags: ["Transportation", "Portland", "Map"],
+  tags: [
+    /* "Transportation", "Bus", "Rail", "Portland" */
+  ],
   selector: null,
   analysis: (
     <Collapsable>
@@ -128,4 +130,4 @@ const DisturbanceStopsMeta = (/* data */) => ({
   authors: []
 });
 
-export default DisturbanceStopsMeta;
+export default SouthwestMadisonMeta;
