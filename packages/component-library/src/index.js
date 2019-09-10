@@ -28,6 +28,7 @@ export { default as CivicStoryCard } from "./CivicStoryCard/CivicStoryCard";
 export { default as PageLayout } from "./PageLayout/PageLayout";
 export { default as PieChart } from "./PieChart/PieChart";
 export { default as Slider } from "./Slider";
+export { default as FooterNew } from "./FooterNew/FooterNew";
 export { default as Footer } from "./Footer/Footer";
 export { default as ScrollToTop } from "./ScrollToTop/ScrollToTop";
 export { default as Header } from "./Navigation/Header";
