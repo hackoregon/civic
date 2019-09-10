@@ -22,6 +22,7 @@ import civicStorycardStory from "./CivicStoryCard.story";
 import dataTable from "./DataTable.story";
 import gradientScaleStory from "./GradientScale.story";
 import headerStory from "./Header.story";
+import headerNewStory from "./HeaderNew.story"; // TODO: Move this to the appropriate location
 import heatMapStory from "./HeatMap.story";
 import horizontalBarChartStory from "./HorizontalBarChart.story";
 import iconMapStory from "./IconMap.story";
@@ -119,7 +120,6 @@ checkboxStory();
 radioButtonGroupStory();
 selectStory();
 sliderStory();
-
 // DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator story injection
 
 // charts
@@ -168,6 +168,7 @@ badgeStory();
 civicSandboxDashboardStory();
 civicStorycardStory();
 collapsableStory();
+headerNewStory();
 headerStory();
 packageSelectorBox();
 pageLayoutStory();
