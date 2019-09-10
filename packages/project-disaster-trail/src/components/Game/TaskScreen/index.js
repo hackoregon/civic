@@ -7,20 +7,26 @@ import { css, jsx } from "@emotion/core";
 import { goToNextChapter } from "../../../state/chapters";
 import {
   getActiveTaskData,
+  getWeightedTasks,
+  getActiveEnvironment,
+  getTasksForEnvironment,
   completeTask,
-  getWeightedTasks
+  addTask
 } from "../../../state/tasks";
 import { getPlayerKitItems } from "../../../state/kit";
-import ChooseScreen from "./ChooseScreen";
-import SolveScreen from "./SolveScreen";
+import usePrevious from "../../../state/hooks/usePrevious";
+
+import Timer from "../../../utils/timer";
+import * as ACTIONS from "../../../constants/actions";
+import taskSong from "../../../../assets/audio/PWolfAfter_Earthquake1fadeinout.mp3";
+
 import MatchLockInterface from "../../atoms/MatchLockInterface";
 import TaskDebugger from "../../atoms/TaskDebugger";
-import Timer from "../../../utils/timer";
-
-import * as ACTIONS from "../../../constants/actions";
-import usePrevious from "../../../state/hooks/usePrevious";
-import taskSong from "../../../../assets/audio/PWolfAfter_Earthquake1fadeinout.mp3";
 import Song from "../../atoms/Audio/Song";
+
+import { tallyVotes, chooseRandomTask } from "./voteUtils";
+import TaskMap from "./TaskMap";
+import SolveScreen from "./SolveScreen";
 
 const mapAndInfoStyle = css`
   position: relative;
@@ -33,12 +39,15 @@ const mapAndInfoStyle = css`
 `;
 
 const TaskScreen = ({
+  addNextTask,
   activeTask,
   completeActiveTask,
   endChapter,
   debug = true,
   playerKitItems,
-  weightedTasks
+  weightedTasks,
+  tasksForEnvironment,
+  activeEnvironment
 }) => {
   const [percentComplete, setPercentComplete] = useState(0);
   const [action, setAction] = useState(ACTIONS.SOLVING);
@@ -47,6 +56,7 @@ const TaskScreen = ({
   const [votingComplete, setVotingComplete] = useState(false);
   const [movingMapComplete, setMovingMapComplete] = useState(false);
   const [numberCompletedTasks, setNumberCompletedTasks] = useState(0);
+  const [taskVotes, setTaskVotes] = useState({});
 
   const prevActiveTask = usePrevious(activeTask);
   const prevAction = usePrevious(action);
@@ -54,6 +64,29 @@ const TaskScreen = ({
   const votingDuration = 20;
   const mapTransitionDuration = 5;
   const chapterDuration = 60;
+
+  const goToTask = () => {
+    const voteResults = tallyVotes(taskVotes);
+    // eslint-disable-next-line prefer-const
+    let [mostVotesCount, mostVotesId] = voteResults;
+    if (mostVotesCount < 1) {
+      mostVotesId = chooseRandomTask(tasksForEnvironment, activeEnvironment);
+    }
+    addNextTask(mostVotesId);
+  };
+
+  const onTaskSelection = orbModel => {
+    const voteCount = taskVotes[orbModel.type]
+      ? taskVotes[orbModel.type] + 1
+      : 1;
+    const newVotes = {
+      ...taskVotes,
+      [orbModel.type]: voteCount
+    };
+    setTaskVotes(newVotes);
+    // Return true so Orb knows how to animate
+    return true;
+  };
 
   // 1) Solve Screen
   // 2) Vote
@@ -125,12 +158,14 @@ const TaskScreen = ({
         break;
       case ACTIONS.VOTING:
         if (votingComplete) {
+          goToTask();
           setMovingMapComplete(false);
           setAction(ACTIONS.MOVING_MAP);
         }
         break;
       case ACTIONS.MOVING_MAP:
         if (movingMapComplete) {
+          setTaskVotes({}); // reset for next vote
           setAction(ACTIONS.SOLVING);
         }
         break;
@@ -139,7 +174,7 @@ const TaskScreen = ({
         console.warn("Unknown action: ", action);
         break;
     }
-  }, [prevActiveTask, activeTask, votingComplete, movingMapComplete, action]);
+  }, [prevActiveTask, activeTask, votingComplete, movingMapComplete, action, goToTask]);
 
   // when the user transitions from one action to another,
   // start a timer
@@ -161,27 +196,14 @@ const TaskScreen = ({
     }
   }, [action, prevAction, startTimer]);
 
-  const onItemSelection = item => {
+  const onItemSelection = orbModel => {
     // eslint-disable-next-line no-console
-    console.log("item ", item);
-    // if (item.type === activeTask.requiredItem) {
+    console.log("orbModel ", orbModel);
+    // if (orbModel.type === activeTask.requiredorbModel) {
     //   this.setState(state => ({
-    //     correctItemsChosen: state.correctItemsChosen + 1
+    //     correctorbModelsChosen: state.correctorbModelsChosen + 1
     //   }));
     // }
-  };
-
-  const onTaskSelection = task => {
-    // eslint-disable-next-line no-console
-    console.log("onTaskSelection ", task);
-    // const { taskVotes } = this.state;
-    // taskVotes[task.type] += 1;
-
-    // this.setState({
-    //   taskVotes
-    // });
-    // // Return true so Orb knows how to animate
-    // return true;
   };
 
   const checkVoteIsCorrect = () => true;
@@ -203,10 +225,11 @@ const TaskScreen = ({
     <Fragment>
       <div css={mapAndInfoStyle}>
         <SolveScreen activeTask={activeTask} open={isSolving} />
-        <ChooseScreen
+        <TaskMap
           activeTask={activeTask}
           votingComplete={votingComplete}
           movingMapComplete={movingMapComplete}
+          tasks={weightedTasks}
         />
         {debug && <TaskDebugger activeTask={activeTask} action={action} />}
       </div>
@@ -225,26 +248,34 @@ const TaskScreen = ({
 };
 
 TaskScreen.propTypes = {
+  addNextTask: PropTypes.func,
   activeTask: PropTypes.shape({}),
   completeActiveTask: PropTypes.func,
   endChapter: PropTypes.func,
   debug: PropTypes.bool,
   playerKitItems: PropTypes.arrayOf(PropTypes.shape({})),
-  weightedTasks: PropTypes.arrayOf(PropTypes.shape({}))
+  weightedTasks: PropTypes.arrayOf(PropTypes.shape({})),
+  activeEnvironment: PropTypes.string,
+  tasksForEnvironment: PropTypes.shape({})
 };
 
 const mapStateToProps = state => ({
   activeTask: getActiveTaskData(state),
   playerKitItems: getPlayerKitItems(state),
-  weightedTasks: getWeightedTasks(state)
+  weightedTasks: getWeightedTasks(state),
+  activeEnvironment: getActiveEnvironment(state),
+  tasksForEnvironment: getTasksForEnvironment(state)
 });
 
 const mapDispatchToProps = dispatch => ({
   endChapter() {
     dispatch(goToNextChapter());
   },
-  completeActiveTask(taskChoice, taskId) {
-    dispatch(completeTask(taskChoice, taskId));
+  completeActiveTask(taskChoice) {
+    dispatch(completeTask(taskChoice));
+  },
+  addNextTask(taskChoice) {
+    dispatch(addTask(taskChoice));
   }
 });
 
