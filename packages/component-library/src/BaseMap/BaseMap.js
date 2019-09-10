@@ -19,7 +19,13 @@ import "mapbox-gl/dist/mapbox-gl.css";
 
 import { MapGLResources } from "../_Themes/index";
 
-const { MAPBOX_TOKEN, CIVIC_LIGHT, CIVIC_DARK, DISASTER_GAME } = MapGLResources;
+const {
+  MAPBOX_TOKEN,
+  CIVIC_LIGHT,
+  CIVIC_DARK,
+  DISASTER_GAME,
+  CIVIC_DARK2
+} = MapGLResources;
 
 const mapWrapper = css`
   margin: 0 auto;
@@ -253,6 +259,8 @@ class BaseMap extends Component {
       baseMapboxStyleURL = CIVIC_DARK;
     } else if (civicMapStyle === "disaster-game") {
       baseMapboxStyleURL = DISASTER_GAME;
+    } else if (civicMapStyle === "dark_2") {
+      baseMapboxStyleURL = CIVIC_DARK2;
     }
 
     const animationProps = !animate
