@@ -81,7 +81,7 @@ const BlackPopulationChangeVisualization = ({ isLoading, data }) => {
             leftMapTitle="1990"
             rightMap={rightMap}
             rightMapTitle="2017"
-            sliderStartPosition={50}
+            sliderStartPosition={75}
             showDivider
           />
         </ChartContainer>
@@ -89,7 +89,6 @@ const BlackPopulationChangeVisualization = ({ isLoading, data }) => {
         <div
           style={{
             width: "100%",
-            paddingTop: "30px",
             display: "flex",
             justifyContent: "center"
           }}
