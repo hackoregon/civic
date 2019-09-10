@@ -65,7 +65,7 @@ const TaskScreen = ({
   const mapTransitionDuration = 5;
   const chapterDuration = 60;
 
-  const goToTask = () => {
+  const goToTask = useCallback(() => {
     const voteResults = tallyVotes(taskVotes);
     // eslint-disable-next-line prefer-const
     let [mostVotesCount, mostVotesId] = voteResults;
@@ -73,7 +73,7 @@ const TaskScreen = ({
       mostVotesId = chooseRandomTask(tasksForEnvironment, activeEnvironment);
     }
     addNextTask(mostVotesId);
-  };
+  }, [activeEnvironment, addNextTask, taskVotes, tasksForEnvironment]);
 
   const onTaskSelection = orbModel => {
     const voteCount = taskVotes[orbModel.type]
@@ -174,7 +174,14 @@ const TaskScreen = ({
         console.warn("Unknown action: ", action);
         break;
     }
-  }, [prevActiveTask, activeTask, votingComplete, movingMapComplete, action, goToTask]);
+  }, [
+    prevActiveTask,
+    activeTask,
+    votingComplete,
+    movingMapComplete,
+    action,
+    goToTask
+  ]);
 
   // when the user transitions from one action to another,
   // start a timer
