@@ -84,12 +84,7 @@ const SandboxDrawer = props => {
   );
   return (
     <div css={drawerVisible ? menuOpen : menuClosed}>
-      <div
-        onClick={toggleDrawer}
-        onKeyPress={toggleDrawer}
-        role="button"
-        tabIndex={0}
-      >
+      <div>
         <div
           css={css(`
           text-transform: uppercase;
@@ -102,6 +97,10 @@ const SandboxDrawer = props => {
         `)}
         >
           <div
+            onClick={toggleDrawer}
+            onKeyPress={toggleDrawer}
+            role="button"
+            tabIndex={0}
             css={css(`
             font-size: 1.4rem;
             color: #F3F2F3;
