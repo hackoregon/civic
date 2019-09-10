@@ -2,27 +2,6 @@ import PropTypes from "prop-types";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 
-const verticalContainer = css`
-  display: block;
-`;
-const horizontalContainer = css`
-  display: flex;
-`;
-const labelContainer = css`
-  font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: bold;
-  margin-bottom: 5px;
-`;
-
-const formatColor = colorArray => {
-  const rgba = colorArray.length === 3 ? [...colorArray, 1] : colorArray;
-  return rgba.reduce(
-    (acc, cur, i) => (i < 3 ? `${acc + cur},` : `${acc}1)`),
-    "rgba("
-  );
-};
-
 /**
  * Simple Map Legend for use with d3 color scales
  * (If a color scale using scaleQuantize() is passed in, the legend will be a range)
@@ -34,6 +13,27 @@ const formatColor = colorArray => {
  */
 const MapLegend = props => {
   const { colorScale, formatValues, label, vertical } = props;
+
+  const verticalContainer = css`
+    display: block;
+  `;
+  const horizontalContainer = css`
+    display: flex;
+  `;
+  const labelContainer = css`
+    font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  `;
+
+  const formatColor = colorArray => {
+    const rgba = colorArray.length === 3 ? [...colorArray, 1] : colorArray;
+    return rgba.reduce(
+      (acc, cur, i) => (i < 3 ? `${acc + cur},` : `${acc}1)`),
+      "rgba("
+    );
+  };
 
   let colors = colorScale.range().map(color => formatColor(color));
   let bins = colorScale.domain().map(arr => formatValues(arr));
@@ -61,6 +61,7 @@ const MapLegend = props => {
     const partialBorder = i < colors.length - 1;
     return (
       <div
+        key={color}
         css={css`
           display: flex;
           align-items: center;
@@ -110,6 +111,7 @@ const MapLegend = props => {
     const partialBorder = vertical && i < colors.length - 1;
     return (
       <div
+        key={color}
         css={css`
           display: flex;
           align-items: center;
