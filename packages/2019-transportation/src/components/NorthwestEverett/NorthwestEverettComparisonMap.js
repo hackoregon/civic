@@ -123,7 +123,7 @@ const NorthwestEverettComparisonMap = () => {
     );
   }, [disturbanceStops2019]);
 
-  const DisturbanceStopsMap2017 = disturbanceStops2018Extent.length ? (
+  const DisturbanceStopsMap2018 = disturbanceStops2018Extent.length ? (
     <BaseMap
       {...baseMapProps}
       civicMapStyle="light"
@@ -131,7 +131,7 @@ const NorthwestEverettComparisonMap = () => {
       mapboxLayerOptions={heatmapLayer2017}
     />
   ) : null;
-  const DisturbanceStopsMap2018 = disturbanceStops2019Extent.length ? (
+  const DisturbanceStopsMap2019 = disturbanceStops2019Extent.length ? (
     <BaseMap
       {...baseMapProps}
       civicMapStyle="dark"
@@ -141,12 +141,17 @@ const NorthwestEverettComparisonMap = () => {
   ) : null;
 
   return data.loaded ? (
-    <>
+    <div style={{ marginBottom: "16px" }}>
       <ComparisonMap
-        leftMap={DisturbanceStopsMap2017}
-        rightMap={DisturbanceStopsMap2018}
+        height={500}
+        leftMap={DisturbanceStopsMap2018}
+        leftMapTitle="2018"
+        leftTitleColor="black !important"
+        rightMap={DisturbanceStopsMap2019}
+        rightMapTitle="2019"
+        rightTitleColor="white !important"
       />
-    </>
+    </div>
   ) : null;
 };
 

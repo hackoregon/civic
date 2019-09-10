@@ -143,12 +143,18 @@ const SoutheastHawthorneComparisonMap = () => {
   ) : null;
 
   return data.loaded ? (
-    <>
+    <div style={{ marginBottom: "16px" }}>
       <ComparisonMap
+        height={500}
         leftMap={DisturbanceStopsMap2017}
+        leftMapTitle="2017"
+        leftTitleColor="black !important"
         rightMap={DisturbanceStopsMap2018}
+        rightMapTitle="2018"
+        rightTitleColor="white !important"
       />
-    </>
+      `
+    </div>
   ) : null;
 };
 
