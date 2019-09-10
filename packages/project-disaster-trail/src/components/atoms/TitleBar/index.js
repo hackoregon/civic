@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { css, jsx } from "@emotion/core";
 
 import ChapterButtons from "../ChapterButtons";
-import billBoardPNG from "../../../../assets/billboard.png";
+import billBoardPNG from "../../../../assets/earthquake-heroes.svg";
 
 import LevelView from "../LevelView";
 import PointsView from "../PointsView";
@@ -34,8 +34,8 @@ const onScreenStyle = css`
 const BillboardStyle = css`
   position: relative;
   justify-self: center;
-  width: 400px;
-  height: 160px;
+  width: 645px;
+  height: 300px;
   background-image: url(${billBoardPNG});
   background-repeat: no-repeat;
   background-size: contain;

@@ -10,7 +10,7 @@ import { palette } from "../../../constants/style";
 const LevelContainer = styled.div`
   display: grid;
   align-items: center;
-  height: 100%;
+  height: 160px;
   margin-top: 20px;
   padding: 20px;
   background: ${palette.white};
