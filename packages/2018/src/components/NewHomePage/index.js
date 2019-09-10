@@ -8,12 +8,12 @@ import {
   HeaderNew as Header,
   FooterNew as Footer
 } from "@hackoregon/component-library";
+import PlatformExplorer from "./PlatformExplorer";
 import indexStyle from "./index.styles";
 // Placeholders
 import placeholderIntroImg from "../../assets/new-home-page-1.png";
 import placeholderWorkImg from "../../assets/new-home-page-2.png";
 import placeholderContributorsImg from "../../assets/new-home-page-3.png";
-import placeholderPlatformImg from "../../assets/new-home-page-4.png";
 // import placeholderCivicImg from "../../assets/new-home-page-5.png";
 
 const greatestWidth = 1200;
@@ -189,31 +189,7 @@ const HomePage = () => {
             team to start contributing.
           </p>
           <h3 className="platform-h4">CIVIC PLATFORM IS COMPRISED OF:</h3>
-          <img
-            css={css`
-              margin-left: -15px;
-              width: 100%;
-            `}
-            src={placeholderPlatformImg}
-            alt="placeholder"
-          />
-          {/* <div className="link-container">
-            <a className="platform-link" href="http://service.civicpdx.org/">
-              EXPLORE DATA
-            </a>
-            <a
-              className="platform-link"
-              href="https://github.com/hackoregon?type=source"
-            >
-              EXPLORE CODE
-            </a>
-            <a
-              className="platform-link"
-              href="https://hackoregon.github.io/civic/"
-            >
-              DOCUMENTATION
-            </a>
-          </div> */}
+          <PlatformExplorer />
         </div>
 
         <div

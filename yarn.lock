@@ -2245,6 +2245,30 @@
     prop-types "^15.7.2"
     warning "^4.0.1"
 
+"@material-ui/styles@^4.4.1":
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/@material-ui/styles/-/styles-4.4.1.tgz#a53fb39e373636bd2c296a78c54afecb80f68446"
+  integrity sha512-wXASlta7G+N8NeihbAKQjL6E1XMkS3SWpksNKn1cxhmKYQ+5pkMAUW/rChC5ovG7C/C2ZIdajYgOz977m3xlBA==
+  dependencies:
+    "@babel/runtime" "^7.4.4"
+    "@emotion/hash" "^0.7.1"
+    "@material-ui/types" "^4.1.1"
+    "@material-ui/utils" "^4.1.0"
+    clsx "^1.0.2"
+    csstype "^2.5.2"
+    deepmerge "^4.0.0"
+    hoist-non-react-statics "^3.2.1"
+    jss "10.0.0-alpha.24"
+    jss-plugin-camel-case "10.0.0-alpha.24"
+    jss-plugin-default-unit "10.0.0-alpha.24"
+    jss-plugin-global "10.0.0-alpha.24"
+    jss-plugin-nested "10.0.0-alpha.24"
+    jss-plugin-props-sort "10.0.0-alpha.24"
+    jss-plugin-rule-value-function "10.0.0-alpha.24"
+    jss-plugin-vendor-prefixer "10.0.0-alpha.24"
+    prop-types "^15.7.2"
+    warning "^4.0.1"
+
 "@material-ui/system@^4.3.3":
   version "4.3.3"
   resolved "https://registry.yarnpkg.com/@material-ui/system/-/system-4.3.3.tgz#8534fe76adbd3938a8dea833e69d84a7a143ecff"
