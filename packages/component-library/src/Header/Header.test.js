@@ -6,6 +6,5 @@ describe("Header", () => {
   it("should render Header", () => {
     const wrapper = mount(<Header />);
     expect(wrapper.find("Header")).to.have.length(1);
-    expect(wrapper.find("Header").children()).to.have.length(2);
   });
 });
