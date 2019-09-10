@@ -1,9 +1,30 @@
 import React from "react";
-import { PolygonLayer } from "deck.gl";
+import { GeoJsonLayer } from "deck.gl";
 import shortid from "shortid";
 import { number, string, bool, func, arrayOf, shape } from "prop-types";
+import { scaleThreshold } from "d3";
 
 import { createColorScale, createSizeScale } from "./createLayers";
+
+const getLineWidthScale = scaleThreshold()
+  .domain([7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13.5, 14])
+  .range([
+    24,
+    18,
+    12,
+    6.75,
+    5.75,
+    4.75,
+    3.75,
+    2.75,
+    1.75,
+    1.5,
+    1.25,
+    1,
+    0.75,
+    0.5,
+    0.25
+  ]);
 
 const MultiSmallPolygonMap = props => {
   const {
@@ -15,7 +36,7 @@ const MultiSmallPolygonMap = props => {
     getPolygon = f => f.geometry.coordinates,
     filled = true,
     stroked = true,
-    polygonWidth = 5,
+    lineWidth = 5,
     autoHighlight = true,
     highlightColor = [255, 255, 0, 100],
     onHoverSlide,
@@ -23,7 +44,9 @@ const MultiSmallPolygonMap = props => {
     scaleType = {},
     fieldName = {},
     dataRange,
-    colorRange
+    colorRange,
+    index,
+    viewport
   } = props;
 
   const colorScale = createColorScale(
@@ -42,10 +65,13 @@ const MultiSmallPolygonMap = props => {
     return colorScale();
   };
 
-  const getLineWidth = createSizeScale(polygonWidth);
+  const { zoom } = viewport;
+  const sizeScale = getLineWidthScale(zoom);
+
+  const getLineWidth = createSizeScale(lineWidth);
 
   return (
-    <PolygonLayer
+    <GeoJsonLayer
       key={shortid.generate()}
       id={id}
       data={data}
@@ -58,7 +84,8 @@ const MultiSmallPolygonMap = props => {
       getLineColor={getFillColor}
       getLineWidth={getLineWidth}
       lineWidthMinPixels={1}
-      onHover={onHoverSlide}
+      lineWidthScale={sizeScale}
+      onHover={info => onHoverSlide(info, index)}
       onClick={onLayerClick}
       autoHighlight={autoHighlight}
       highlightColor={highlightColor}
@@ -80,7 +107,7 @@ MultiSmallPolygonMap.propTypes = {
   getPolygon: func,
   filled: bool,
   stroked: bool,
-  polygonWidth: number,
+  lineWidth: number,
   autoHighlight: bool,
   highlightColor: arrayOf(number),
   onHoverSlide: func,
@@ -92,7 +119,9 @@ MultiSmallPolygonMap.propTypes = {
     color: string
   }),
   dataRange: arrayOf(string),
-  colorRange: arrayOf(arrayOf(number))
+  colorRange: arrayOf(arrayOf(number)),
+  index: number,
+  viewport: shape({})
 };
 
 export default MultiSmallPolygonMap;

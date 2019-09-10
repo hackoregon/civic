@@ -1,4 +1,4 @@
-import { isArray, findIndex } from "lodash";
+import { findIndex } from "lodash";
 
 import {
   SANDBOX_START,
@@ -8,6 +8,7 @@ import {
   FOUNDATION_SUCCESS,
   FOUNDATION_FAILURE,
   SET_PACKAGE,
+  SET_SLIDE_KEY,
   SLIDES_START,
   SLIDES_FAILURE,
   SLIDES_SUCCESS,
@@ -33,7 +34,8 @@ const INITIAL_STATE = {
   slidesData: [],
   slidesSuccess: null,
   selectedFoundation: "",
-  selectedSlide: []
+  selectedSlide: [],
+  selectedSlideKey: {}
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -52,7 +54,9 @@ const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         sandboxPending: false,
         sandboxError: null,
-        sandbox: action.payload.body,
+        sandbox: {
+          packages: action.payload
+        },
         selectedFoundationDatum: null,
         selectedSlideDatum: null
       };
@@ -97,15 +101,28 @@ const reducer = (state = INITIAL_STATE, action) => {
         slidesPending: true,
         slidesError: null
       };
-    case SLIDES_SUCCESS:
+    case SLIDES_SUCCESS: {
+      console.log("a-SLIDES_SUCCESS");
+      // console.log("a-SLIDES_SUCCESS-state.slidesData:", state.slidesData);
+      // console.log("a-SLIDES_SUCCESS-payload:", action.payload);
       return {
         ...state,
         slidesPending: false,
         slidesError: null,
         slidesSuccess: true,
-        slidesData: [...state.slidesData, ...action.payload]
+        // slidesData: state.slidesData.length
+        //   ? [
+        //       ...state.slidesData.map(d => {
+        //         return d.displayName === action.payload[0].displayName
+        //           ? action.payload[0]
+        //           : d;
+        //       })
+        //     ]
+        //   : [...state.slidesData, ...action.payload]
+        slidesData: [...action.payload]
       };
-    case SLIDES_FAILURE:
+    }
+    case SLIDES_FAILURE: {
       return {
         ...state,
         slidesPending: false,
@@ -114,21 +131,35 @@ const reducer = (state = INITIAL_STATE, action) => {
         selectedFoundationDatum: null,
         selectedSlideDatum: null
       };
-    case SET_PACKAGE:
+    }
+    case SET_PACKAGE: {
+      const [findDefaultLayers] = state.sandbox.packages.filter(
+        d => d.displayName === action.selectedPackage.displayName
+      );
       return {
         ...state,
-        selectedPackage: action.selectedPackage,
+        selectedPackage: action.selectedPackage.displayName,
         foundationData: {},
         slidesData: [],
-        selectedFoundation:
-          state.sandbox.packages[action.selectedPackage].default_foundation,
-        selectedSlide: isArray(
-          state.sandbox.packages[action.selectedPackage].default_slide
-        )
-          ? state.sandbox.packages[action.selectedPackage].default_slide
-          : [state.sandbox.packages[action.selectedPackage].default_slide],
+        selectedSlide: findDefaultLayers.defaultLayers
+          ? findDefaultLayers.defaultLayers
+          : [],
+        sandbox: {
+          ...state.sandbox,
+          foundations: []
+        },
         selectedFoundationDatum: null,
-        selectedSlideDatum: null
+        selectedSlideDatum: null,
+        selectedSlideKey: {}
+      };
+    }
+    case SET_SLIDE_KEY:
+      return {
+        ...state,
+        selectedSlideKey: {
+          ...state.selectedSlideKey,
+          ...action.selectedSlideKey
+        }
       };
     case SET_FOUNDATION:
       return {
@@ -189,11 +220,12 @@ const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         selectedFoundationDatum: action.feature
       };
-    case SET_SLIDE_DATUM:
+    case SET_SLIDE_DATUM: {
       return {
         ...state,
-        selectedSlideDatum: action.feature
+        selectedSlideDatum: { feature: action.feature, index: action.index }
       };
+    }
     default:
       return state;
   }

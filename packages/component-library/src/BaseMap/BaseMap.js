@@ -11,10 +11,12 @@ import { jsx, css } from "@emotion/core";
 import PropTypes from "prop-types";
 import createRef from "create-react-ref/lib/createRef";
 import Geocoder from "react-map-gl-geocoder";
-import "mapbox-gl/dist/mapbox-gl.css";
 import { isEqual } from "lodash";
-
+import bbox from "@turf/bbox";
+import WebMercatorViewport from "viewport-mercator-project";
 import mapboxgl from "./mapboxgl";
+import "mapbox-gl/dist/mapbox-gl.css";
+
 import { MapGLResources } from "../_Themes/index";
 
 const {
@@ -22,7 +24,8 @@ const {
   CIVIC_LIGHT,
   CIVIC_DARK,
   CIVIC_PENCIL,
-  DISASTER_GAME
+  DISASTER_GAME,
+  SANDBOX_DARK
 } = MapGLResources;
 
 const mapWrapper = css`
@@ -63,6 +66,26 @@ class BaseMap extends Component {
   componentDidMount() {
     // Geocoder requires a ref to the map component
     this.setState({ mounted: true });
+    const { useFitBounds, bboxData, bboxPadding } = this.props;
+    const { viewport } = this.state;
+
+    if (useFitBounds && bboxData.length > 0) {
+      const toGeoJSON = {
+        type: "FeatureCollection",
+        features: [...bboxData]
+      };
+      const boundingbox = bbox(toGeoJSON);
+      const bboxViewport = new WebMercatorViewport({
+        width: viewport.width,
+        height: viewport.height
+      }).fitBounds(
+        [[boundingbox[0], boundingbox[1]], [boundingbox[2], boundingbox[3]]],
+        {
+          padding: bboxPadding
+        }
+      );
+      this.onViewportChange(bboxViewport);
+    }
   }
 
   componentWillReceiveProps(props) {
@@ -97,8 +120,14 @@ class BaseMap extends Component {
       mapboxData,
       mapboxDataId,
       mapboxLayerOptions,
-      mapboxLayerId
+      mapboxLayerId,
+      useFitBounds,
+      bboxData,
+      bboxPadding
     } = this.props;
+
+    const { viewport } = this.state;
+
     if (!isEqual(previousMapboxData, mapboxData)) {
       const map = this.mapRef.current.getMap();
       map.getSource(mapboxDataId).setData(mapboxData);
@@ -112,6 +141,28 @@ class BaseMap extends Component {
       updatedProperties.forEach(p =>
         map.setPaintProperty(mapboxLayerId, p, mapboxLayerOptions[p])
       );
+    }
+
+    if (
+      useFitBounds &&
+      bboxData.length > 0 &&
+      !isEqual(prevProps.bboxData, bboxData)
+    ) {
+      const toGeoJSON = {
+        type: "FeatureCollection",
+        features: [...bboxData]
+      };
+      const boundingbox = bbox(toGeoJSON);
+      const bboxViewport = new WebMercatorViewport({
+        width: viewport.width,
+        height: viewport.height
+      }).fitBounds(
+        [[boundingbox[0], boundingbox[1]], [boundingbox[2], boundingbox[3]]],
+        {
+          padding: bboxPadding
+        }
+      );
+      this.onViewportChange(bboxViewport);
     }
   }
 
@@ -211,6 +262,8 @@ class BaseMap extends Component {
       baseMapboxStyleURL = CIVIC_PENCIL;
     } else if (civicMapStyle === "disaster-game") {
       baseMapboxStyleURL = DISASTER_GAME;
+    } else if (civicMapStyle === "sandbox-dark") {
+      baseMapboxStyleURL = SANDBOX_DARK;
     }
 
     const animationProps = !animate
@@ -292,7 +345,13 @@ BaseMap.propTypes = {
   containerHeight: PropTypes.number,
   containerWidth: PropTypes.number,
   mapboxToken: PropTypes.string,
-  civicMapStyle: PropTypes.oneOf(["light", "dark", "pencil", "disaster-game"]),
+  civicMapStyle: PropTypes.oneOf([
+    "light",
+    "dark",
+    "pencil",
+    "disaster-game",
+    "sandbox-dark"
+  ]),
   navigation: PropTypes.bool,
   locationMarker: PropTypes.bool,
   locationMarkerCoord: PropTypes.shape({
@@ -323,7 +382,10 @@ BaseMap.propTypes = {
     units: PropTypes.string
   }),
   sharedViewport: PropTypes.shape({}),
-  onSharedViewportChange: PropTypes.func
+  onSharedViewportChange: PropTypes.func,
+  useFitBounds: PropTypes.bool,
+  bboxData: PropTypes.arrayOf(PropTypes.shape({})),
+  bboxPadding: PropTypes.number
 };
 
 BaseMap.defaultProps = {
@@ -345,7 +407,10 @@ BaseMap.defaultProps = {
     longitude: 0
   },
   animationDuration: 1000,
-  scaleBar: false
+  scaleBar: false,
+  useFitBounds: false,
+  bboxData: {},
+  bboxPadding: 10
 };
 
 export default Dimensions()(BaseMap);

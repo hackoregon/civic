@@ -1,66 +1,90 @@
-/* TODO: Fix linting errors */
-/* eslint-disable */
-
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import shortid from "shortid";
+import { string, bool, func, arrayOf, shape } from "prop-types";
 import Dropdown from "../Dropdown/Dropdown";
-import SandboxDateSelector from "./SandboxDateSelector";
-import SandboxToggleSwitch from "./SandboxToggleSwitch";
 import SandboxMapLegend from "./SandboxMapLegend";
+import Logo from "../Logo/Logo";
+import Checkbox from "../Checkbox/Checkbox";
 import SandboxBaseMapSelector from "./SandboxBaseMapSelector";
 
+// import SandboxDateSelector from "./SandboxDateSelector";
+// import SandboxToggleSwitch from "./SandboxToggleSwitch";
+
 const menuOpen = css(`
+  display: flex;
   position: absolute;
   top: 0;
   right: 0;
-  width: 35%;
+  height: 75vh;
+  width: 33%;
   z-index: 5;
   transition: 0.5s;
   @media (max-width: 850px) {
-    width: 90%;
+    width: 95%;
+    height: 64vh;
+    min-height: 550px;
   }
   @media (max-width: 500px) {
     width: 100%;
+    height: 64vh;
+    min-height: 550px;
   }
 `);
 
 const menuClosed = css(`
+  display: flex;
   position: absolute;
   top: 0;
   right: 0;
-  width: 7%;
+  height: 75vh;
+  width: 40px;
   z-index: 5;
   transition: 0.5s;
-  @media (max-width: 850px) {
-    width: 15%;
-  }
-  @media (max-width: 500px) {
-    width: 25%;
-  }
+
 `);
 
-const SandboxDrawer = ({
-  data,
-  onChange,
-  selectedPackage,
-  toggleDrawer,
-  drawerVisible,
-  slideData,
-  fetchSlideByDate,
-  foundationData,
-  defaultFoundation,
-  allSlides,
-  updatePackage,
-  selectedFoundation,
-  updateFoundation,
-  foundationMapProps,
-  onBaseMapStyleChange,
-  baseMapStyle
-}) => {
+const loadingContainer = css`
+  display: flex;
+  height: 250px;
+  width: 100%;
+  margin: auto;
+`;
+const loading = css`
+  font-size: 2rem;
+  margin: auto;
+  text-align: center;
+  font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
+`;
+
+const SandboxDrawer = props => {
+  const {
+    data,
+    onChange,
+    selectedPackage,
+    toggleDrawer,
+    drawerVisible,
+    foundationData,
+    allSlides,
+    updatePackage,
+    foundationMapProps,
+    areSlidesLoading,
+    errors,
+    updateSlideKey,
+    baseMapStyle,
+    onBaseMapStyleChange
+  } = props;
+
+  const loader = (
+    <div css={loadingContainer}>
+      <div css={loading}>
+        <Logo type="squareLogoAnimated" alt="Loading..." />
+      </div>
+    </div>
+  );
   return (
     <div css={drawerVisible ? menuOpen : menuClosed}>
-      <div onClick={toggleDrawer}>
+      <div>
         <div
           css={css(`
           text-transform: uppercase;
@@ -68,20 +92,27 @@ const SandboxDrawer = ({
           cursor: pointer;
           background: #EE495C;
           color: #F3F2F3;
+          min-width: 40px;
+          text-align: center;
         `)}
         >
           <div
+            onClick={toggleDrawer}
+            onKeyPress={toggleDrawer}
+            role="button"
+            tabIndex={0}
             css={css(`
             font-size: 1.4rem;
             color: #F3F2F3;
             line-height: 1.5;
+            height: 35px;
             padding-left: 5px;
             @media (max-width: 850px) {
               font-size: 1.3rem;
             }
           `)}
           >
-            {drawerVisible ? "Close Menu" : "Open Menu"}
+            {drawerVisible ? ">" : "<"}
           </div>
         </div>
       </div>
@@ -90,23 +121,38 @@ const SandboxDrawer = ({
           css={css(`
           background: rgba(243,242,243,0.9);
           overflow-y: auto;
-          min-height: 550px;
-          height: 74vh;
           border: 1px solid #ddd;
+          border-left: 0;
           border-radius: 2px;
           box-shadow: -10px 5px 15px -3px rgba(0, 0, 0, 0.2);
-          @media (max-width: 850px) {
-            height: 60vh;
-          }
+          flex-grow: 2;
         `)}
         >
+          <div
+            css={css(`
+            margin: 0 0 10px 0;
+            padding: 0;
+            background-color: #201024;
+            color: white;
+            height: 35px;
+            text-align: center;
+          `)}
+          >
+            <h2
+              css={css(`
+              margin: 0;
+            `)}
+            >
+              CIVIC Sandbox
+            </h2>
+          </div>
           <div
             css={css(`
             position: relative;
             z-index: 900;
           `)}
           >
-            <h2
+            <h3
               css={css(`
               color: #555;
               text-transform: uppercase;
@@ -114,98 +160,33 @@ const SandboxDrawer = ({
             `)}
             >
               Data Collections
-            </h2>
+            </h3>
             <Dropdown
               value={selectedPackage}
-              options={Object.keys(data.packages).map(p => ({
-                value: p,
-                label: p
+              options={data.packages.map(p => ({
+                value: p.displayName,
+                label: p.displayName
               }))}
-              onChange={updatePackage}
+              onChange={name => {
+                updatePackage({ displayName: name });
+              }}
               simpleValue
             />
           </div>
-          <div
+          <h3
             css={css(`
-            position: relative;
-            z-index: 400;
+            color: #555;
+            text-transform: uppercase;
+            margin: 0 10px;
           `)}
           >
-            <h2
-              css={css(`
-              color: #555;
-              text-transform: uppercase;
-              margin: 0 10px;
-            `)}
-            >
-              Base Layers
-            </h2>
-            <Dropdown
-              value={selectedFoundation}
-              options={data.packages[selectedPackage].foundations.map(
-                foundation => ({
-                  value: foundation,
-                  label: data.foundations[foundation].name
-                })
-              )}
-              onChange={updateFoundation}
-              simpleValue
+            Base Map Style
+          </h3>
+          {onBaseMapStyleChange && baseMapStyle && (
+            <SandboxBaseMapSelector
+              onBaseMapStyleChange={onBaseMapStyleChange}
+              baseMapStyle={baseMapStyle}
             />
-          </div>
-          {foundationData && (
-            <div>
-              <div
-                css={css(`
-                position: relative;
-                font-size: .75rem;
-                color: #333;
-                z-index: 300;
-              `)}
-              >
-                {foundationData.slide_meta &&
-                foundationData.slide_meta.dates.date_granularity ? (
-                  <SandboxDateSelector
-                    slide={defaultFoundation}
-                    selectedSlideData={foundationData}
-                    fetchSlideByDate={fetchSlideByDate}
-                    type="foundation"
-                  />
-                ) : foundationData.slide_meta &&
-                  foundationData.slide_meta.dates.default_date_filter ? (
-                  <span
-                    css={css(`
-                      font-size: 22px;
-                      font-weight: 400;
-                      padding: 0 0 0 16px;
-                      margin: 0;
-                    `)}
-                  >
-                    {foundationData.slide_meta.dates.default_date_filter}
-                  </span>
-                ) : null}
-              </div>
-              {foundationData.slide_data && foundationMapProps.scaleType && (
-                <SandboxMapLegend
-                  data={foundationData}
-                  mapProps={foundationMapProps}
-                />
-              )}
-              <h2
-                css={css(`
-                color: #555;
-                text-transform: uppercase;
-                margin: 0 10px;
-              `)}
-              >
-                Base map style
-              </h2>
-              {onBaseMapStyleChange && baseMapStyle && (
-                <SandboxBaseMapSelector
-                  onBaseMapStyleChange={onBaseMapStyleChange}
-                  baseMapStyle={baseMapStyle}
-                />
-              )}
-            </div>
           )}
           <div
             css={css(`
@@ -213,96 +194,123 @@ const SandboxDrawer = ({
             z-index: 200;
           `)}
           >
-            <h2
+            <h3
               css={css(`
               color: #555;
               text-transform: uppercase;
               margin: 0 10px;
             `)}
             >
-              Slide Layers
-            </h2>
+              Layers
+            </h3>
           </div>
-          {allSlides.map((slide, index) => {
-            // eslint-disable-next-line no-extra-boolean-cast
-            const selectedSlideData = !!slideData.find(
-              slideDatum => slideDatum[slide.label]
-            )
-              ? slideData.find(slideDatum => slideDatum[slide.label])[
-                  slide.label
-                ]
-              : {};
-            const defaultGray = [238, 238, 238, 255];
-            const backgroundSlideColor = slide.color;
-            const formatBackgroundColor = arr =>
-              arr.reduce(
-                (acc, cur, i) => (i < 3 ? `${acc + cur},` : `${acc}0.9)`),
-                "rgba("
-              );
-            const slideBackGroundColor = formatBackgroundColor(
-              backgroundSlideColor
-            );
-            const blackTextColor = "rgba(0,0,0,1)";
-            const whiteTextColor = "rgba(255,255,255,1)";
-            const textColor =
-              slideBackGroundColor === defaultGray
-                ? blackTextColor
-                : whiteTextColor;
-            return (
-              <div key={shortid.generate()}>
-                <div
-                  css={css(`
-                  border-top: 1px solid #ddd;
-                  padding: .3rem .5rem;
-                  text-transform: capitalize;
-                  font-weight: bold;
-                  background: ${slideBackGroundColor};
-                  color:${textColor}
-                `)}
-                >
-                  <SandboxToggleSwitch
-                    name={slide.slideId}
-                    checked={slide.checked}
-                    onChange={onChange}
-                    label={slide.label}
-                    mapType={slide.mapType}
+
+          {!areSlidesLoading && allSlides
+            ? allSlides.map((slide, index) => {
+                const dataIndex = foundationData.findIndex(d => {
+                  const scatterplot =
+                    d.mapType === "ScatterPlotMap" &&
+                    d.layerInfo.displayName === slide.label;
+                  const choropleth =
+                    d.mapType === "ChoroplethMap" &&
+                    d.layerInfo.displayName === slide.label;
+                  return choropleth || scatterplot;
+                });
+
+                const matchFound =
+                  dataIndex > -1 && foundationData[dataIndex].data.length > 0;
+
+                const mapLegend = matchFound && (
+                  <SandboxMapLegend
+                    data={foundationData[dataIndex].data}
+                    mapProps={foundationMapProps[dataIndex]}
                   />
-                </div>
-                <div
-                  css={css(`
-                  padding: .5rem 0 .5rem 0;
-                  font-size: .75rem;
-                  color: #333;
-                  position: relative;
-                  z-index: ${10 - index};
-                `)}
-                >
-                  {slide.checked &&
-                  selectedSlideData.slide_meta &&
-                  selectedSlideData.slide_meta.dates.date_granularity ? (
-                    <SandboxDateSelector
-                      selectedSlideData={selectedSlideData}
-                      slide={slide}
-                      fetchSlideByDate={fetchSlideByDate}
-                      type="slide"
-                    />
-                  ) : slide.checked &&
-                    selectedSlideData.slide_meta &&
-                    selectedSlideData.slide_meta.dates.default_date_filter ? (
-                    <span
+                );
+
+                const keyAllOptions = matchFound
+                  ? Object.keys(
+                      foundationData[dataIndex].data[0].properties
+                    ).filter(c => {
+                      const fieldName =
+                        foundationData[dataIndex].fieldName.color;
+                      const a = c.match(/^[a-zA-Z]+/);
+                      const b = fieldName.match(/^[a-zA-Z]+/);
+                      return a[0] === b[0];
+                    })
+                  : [];
+
+                const keyOptions =
+                  keyAllOptions.length > 3
+                    ? keyAllOptions.slice(0, 4)
+                    : keyAllOptions;
+
+                const censusYears = ["1990", "2000", "2010", "2017"];
+                const censusChangeYears = [
+                  "1990-2017",
+                  "2000-2017",
+                  "2010-2017"
+                ];
+                const keySelector = matchFound && (
+                  <Dropdown
+                    value={foundationData[dataIndex].fieldName.color}
+                    options={
+                      keyOptions.length === 3
+                        ? keyOptions.map((k, i) => ({
+                            value: k,
+                            label: censusChangeYears[i]
+                          }))
+                        : keyOptions.map((k, i) => ({
+                            value: k,
+                            label: censusYears[i]
+                          }))
+                    }
+                    onChange={name => {
+                      updateSlideKey({ [slide.label]: name });
+                    }}
+                    simpleValue
+                  />
+                );
+
+                return (
+                  <div key={shortid.generate()}>
+                    <div
                       css={css(`
-                          font-size: 18px;
-                          padding: 0 0 0 17px;
-                          margin: 0;
-                        `)}
+                    padding: 0.5rem 0 0 1rem;
+                  `)}
                     >
-                      {selectedSlideData.slide_meta.dates.default_date_filter}
-                    </span>
-                  ) : null}
-                </div>
-              </div>
-            );
-          })}
+                      <Checkbox
+                        name={slide.label}
+                        value={slide.checked}
+                        onChange={onChange}
+                        label={slide.label}
+                      />
+                    </div>
+                    {mapLegend}
+                    <div
+                      css={css(`
+                    padding: .5rem 0 .5rem 0;
+                    font-size: .75rem;
+                    color: #333;
+                    position: relative;
+                    z-index: ${10 - index};
+                  `)}
+                    >
+                      {keySelector}
+                    </div>
+                  </div>
+                );
+              })
+            : loader}
+          {errors ? (
+            <div
+              css={css(`
+                margin: auto;
+                width: 80%;
+              `)}
+            >
+              <p>There was an error fetching the data.</p>
+            </div>
+          ) : null}
         </div>
       )}
     </div>
@@ -310,3 +318,20 @@ const SandboxDrawer = ({
 };
 
 export default SandboxDrawer;
+
+SandboxDrawer.propTypes = {
+  data: shape({}),
+  onChange: func,
+  selectedPackage: string,
+  toggleDrawer: func,
+  drawerVisible: bool,
+  foundationData: arrayOf(shape({})),
+  allSlides: arrayOf(shape({})),
+  updatePackage: func,
+  foundationMapProps: arrayOf(shape({})),
+  areSlidesLoading: bool,
+  errors: bool,
+  updateSlideKey: func,
+  baseMapStyle: string,
+  onBaseMapStyleChange: func
+};

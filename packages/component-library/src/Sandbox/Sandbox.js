@@ -11,7 +11,7 @@ import {
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import BaseMap from "../BaseMap/BaseMap";
-import CivicSandboxMap from "../CivicSandboxMap/CivicSandboxMap";
+import CivicSandboxMap from "../MultiLayerMap/MultiLayerMap";
 import CivicSandboxTooltip from "../CivicSandboxMap/CivicSandboxTooltip";
 import SandboxDrawer from "./SandboxDrawer";
 
@@ -20,7 +20,7 @@ const baseMapWrapper = css(`
   min-height: 700px;
   @media (max-width: 850px) {
     height: 65vh;
-    min-height: 600px;
+    min-height: 550px;
   }
 `);
 
@@ -32,7 +32,6 @@ const Sandbox = ({
   selectedPackage,
   selectedFoundation,
   selectedSlide,
-  foundationData,
   slideData,
   updatePackage,
   updateFoundation,
@@ -45,8 +44,10 @@ const Sandbox = ({
   onSlideHover,
   tooltipInfo,
   allSlides,
-  foundationMapProps,
-  selectedFoundationDatum
+  selectedFoundationDatum,
+  areSlidesLoading,
+  errors,
+  updateSlideKey
 }) => {
   const [baseMapStyle, setBaseMapStyle] = useState("light");
 
@@ -54,7 +55,7 @@ const Sandbox = ({
     // eslint-disable-next-line no-unused-expressions
     baseMapStyleChangeEvent.target.value === "light"
       ? setBaseMapStyle("light")
-      : setBaseMapStyle("dark");
+      : setBaseMapStyle("sandbox-dark");
   };
 
   return (
@@ -67,10 +68,10 @@ const Sandbox = ({
           padding: 0;
           margin: 0;
           width: 100%;
-          height: 80vh;
+          height: 75vh;
           min-height: 600px;
           @media (max-width: 850px) {
-            height: 65vh;
+            height: 60vh;
             min-height: 500px;
           }
         `}
@@ -86,24 +87,32 @@ const Sandbox = ({
           slideData={slideData}
           fetchSlideByDate={fetchSlideDataByDate}
           selectedFoundation={selectedFoundation}
-          foundationData={foundationData}
+          foundationData={layerData}
           defaultFoundation={defaultFoundation}
           allSlides={allSlides}
           updatePackage={updatePackage}
           updateFoundation={updateFoundation}
-          foundationMapProps={foundationMapProps}
+          foundationMapProps={layerData}
           onBaseMapStyleChange={handleBaseMapStyleChange}
           baseMapStyle={baseMapStyle}
+          areSlidesLoading={areSlidesLoading}
+          errors={errors}
+          updateSlideKey={updateSlideKey}
         />
       </div>
       <div css={baseMapWrapper}>
         <BaseMap
           civicMapStyle={baseMapStyle}
-          initialZoom={10.5}
-          initialLatitude={45.5431}
-          initialLongitude={-122.5765}
+          initialZoom={5}
+          minZoom={5}
+          maxZoom={16.5}
+          initialLatitude={38}
+          initialLongitude={-97}
           useContainerHeight
           updateViewport={false}
+          useFitBounds
+          bboxData={layerData.length > 0 ? layerData[0].data : []}
+          bboxPadding={50}
         >
           <CivicSandboxMap
             mapLayers={layerData}
@@ -121,20 +130,15 @@ const Sandbox = ({
 
 Sandbox.propTypes = {
   data: shape({
-    packages: shape({}),
-    foundations: shape({}),
+    packages: arrayOf(shape({})),
     slides: shape({})
   }).isRequired,
-  layerData: arrayOf(
-    shape({
-      data: shape({})
-    })
-  ).isRequired,
+  layerData: arrayOf(shape({})).isRequired,
   defaultFoundation: shape({
     endpoint: string,
     name: string,
     visualization: string
-  }).isRequired,
+  }),
   defaultSlides: arrayOf(
     shape({
       endpoint: string,
@@ -145,10 +149,6 @@ Sandbox.propTypes = {
   selectedPackage: string.isRequired,
   selectedFoundation: string.isRequired,
   selectedSlide: arrayOf(string).isRequired,
-  foundationData: shape({
-    slide_data: shape({}),
-    slide_meta: shape({})
-  }).isRequired,
   slideData: arrayOf(shape({})).isRequired,
   updatePackage: func.isRequired,
   updateFoundation: func.isRequired,
@@ -156,7 +156,7 @@ Sandbox.propTypes = {
   fetchSlideDataByDate: func.isRequired,
   drawerVisible: bool.isRequired,
   toggleDrawer: func.isRequired,
-  styles: shape({}),
+  styles: string,
   onFoundationClick: func,
   onSlideHover: func,
   tooltipInfo: shape({
@@ -171,15 +171,9 @@ Sandbox.propTypes = {
       endpoint: string,
       label: string,
       mapType: string,
-      slideId: string
+      slideId: oneOfType([string, number])
     })
   ).isRequired,
-  foundationMapProps: shape({
-    color: arrayOf(arrayOf(number)),
-    getPropValue: func,
-    propName: string,
-    scaleType: string
-  }).isRequired,
   selectedFoundationDatum: arrayOf(
     shape({
       data: oneOfType([arrayOf(shape({})), number, string]),
@@ -187,7 +181,10 @@ Sandbox.propTypes = {
       title: string,
       visualizationType: string
     })
-  )
+  ),
+  areSlidesLoading: bool,
+  updateSlideKey: func,
+  errors: bool
 };
 
 export default Sandbox;

@@ -1,42 +1,23 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React from "react";
 import { connect } from "react-redux";
 import { css } from "emotion";
+import { bool, func, shape } from "prop-types";
 
-import {
-  PackageSelectorBox,
-  CivicSandboxDashboard,
-  Logo
-} from "@hackoregon/component-library";
+import { PackageSelectorBox } from "@hackoregon/component-library";
 import SandboxComponent from "../Sandbox";
 import { fetchSandbox, setPackage } from "../../state/sandbox/actions";
 import {
   isSandboxLoading,
   getSandboxData,
-  getSandboxError,
-  getSelectedFoundationDatum,
-  isAllSandboxLoading
+  getSandboxError
 } from "../../state/sandbox/selectors";
-
-const loadingStyle = css`
-  text-align: center;
-  margin: auto;
-`;
 
 const error = css`
   background: #fee;
   color: #c00;
   padding: 30px;
 `;
-
-const capitalize = str =>
-  str.length &&
-  str
-    .split(" ")
-    .reduce(
-      (full, word) => `${full} ${word[0].toUpperCase() + word.substring(1)}`,
-      ""
-    )
-    .trim();
 
 export class Packages extends React.Component {
   constructor() {
@@ -46,26 +27,18 @@ export class Packages extends React.Component {
       dashboardIsOpen: false
     };
   }
+
   componentDidMount() {
-    this.props.fetchSandbox();
+    const { fetchSandbox: cdmFetchSandbox } = this.props;
+    cdmFetchSandbox();
   }
 
   componentDidUpdate(prevProps) {
-    const [previousSelectedFoundation] = prevProps.selectedFoundationDatum;
-    const [currentSelectedFoundation] = this.props.selectedFoundationDatum;
-
-    const previousID = previousSelectedFoundation
-      ? previousSelectedFoundation.id
-      : null;
-    const currentID = currentSelectedFoundation
-      ? currentSelectedFoundation.id
-      : null;
-
-    if (previousID !== currentID) {
-      this.toggleDashboardOpen();
-    }
-    if (previousID !== null && currentID === null) {
-      this.toggleDashboardClose();
+    const { isLoading, sandbox, setPackage: cduSetPackage } = this.props;
+    if (!isLoading && prevProps.isLoading) {
+      cduSetPackage(sandbox.packages[6]);
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({ mapIsOpen: true });
     }
   }
 
@@ -74,7 +47,8 @@ export class Packages extends React.Component {
   };
 
   handlePackageSelection = selectedPackage => {
-    this.props.setPackage(selectedPackage);
+    const { setPackage: hpsSetPackage } = this.props;
+    hpsSetPackage(selectedPackage);
     this.setState({ mapIsOpen: true });
   };
 
@@ -93,26 +67,18 @@ export class Packages extends React.Component {
   };
 
   render() {
-    const {
-      isLoading,
-      isError,
-      sandbox,
-      selectedFoundationDatum,
-      isAllSandboxLoading
-    } = this.props;
+    const { isError, sandbox } = this.props;
+
+    const { mapIsOpen } = this.state;
 
     const packages = sandbox.packages
-      ? Object.keys(sandbox.packages).map(p => ({
-          description: sandbox.packages[p].description,
-          title: capitalize(p)
+      ? sandbox.packages.map(p => ({
+          ...p,
+          description: p.description,
+          title: p.displayName
         }))
       : [];
 
-    const loadingLogo = (
-      <div className={loadingStyle}>
-        <Logo type="squareLogoAnimated" alt="Loading..." />
-      </div>
-    );
     const ErrorMessage = () => (
       <div className={error}>Could not load data for the sandbox.</div>
     );
@@ -120,20 +86,29 @@ export class Packages extends React.Component {
     return (
       <div
         className={css(`
+          padding: 10px 0 0 0;
           font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
+          border: 0px solid crimson;
+          width: 100%;
+          height: 80vh;
+          min-height: 600px;
         `)}
       >
-        {!this.state.mapIsOpen && (
+        {mapIsOpen && (
           <div>
-            <div
-              className={css(`
-                padding: 1.5rem;
-                text-align: center;
-                font-size: 1.2rem;
-              `)}
-            >
-              Select a data collection
-            </div>
+            <section style={{ position: "relative" }}>
+              <SandboxComponent />
+            </section>
+            <p>
+              {/* <Button onClick={this.closeMap}>
+                &lt; Go to Data Collections
+              </Button> */}
+            </p>
+          </div>
+        )}
+
+        {!mapIsOpen && (
+          <div>
             <section
               className={css(`
                 @media(min-width: 600px){
@@ -141,7 +116,6 @@ export class Packages extends React.Component {
                   flex-wrap: wrap;
                 }`)}
             >
-              {isLoading && loadingLogo}
               {packages &&
                 packages.map(p => (
                   <div
@@ -154,7 +128,7 @@ export class Packages extends React.Component {
                     <PackageSelectorBox
                       title={p.title}
                       description={p.description}
-                      onClick={() => this.handlePackageSelection(p.title)}
+                      onClick={() => this.handlePackageSelection(p)}
                     />
                   </div>
                 ))}
@@ -163,38 +137,6 @@ export class Packages extends React.Component {
         )}
 
         <section>{isError && <ErrorMessage />}</section>
-
-        {this.state.mapIsOpen && (
-          <div>
-            <p>
-              <a onClick={this.closeMap}>&lt; Back to Packages</a>
-            </p>
-            <section style={{ position: "relative" }}>
-              <SandboxComponent />
-              {!isAllSandboxLoading && (
-                <div
-                  className={css(`
-                    position: absolute;
-                    bottom: 2.5%;
-                    left: 2.5%;
-                    width: 95%;
-                    @media(max-width: 600px) {
-                      position: absolute;
-                      bottom: 1%;
-                      left: 0;
-                    }
-                `)}
-                >
-                  <CivicSandboxDashboard
-                    data={selectedFoundationDatum}
-                    onClick={this.toggleDashboard}
-                    isDashboardOpen={this.state.dashboardIsOpen}
-                  />
-                </div>
-              )}
-            </section>
-          </div>
-        )}
       </div>
     );
   }
@@ -207,9 +149,7 @@ export default connect(
   state => ({
     isLoading: isSandboxLoading(state),
     isError: getSandboxError(state),
-    sandbox: getSandboxData(state),
-    selectedFoundationDatum: getSelectedFoundationDatum(state),
-    isAllSandboxLoading: isAllSandboxLoading(state)
+    sandbox: getSandboxData(state)
   }),
   dispatch => ({
     fetchSandbox() {
@@ -220,3 +160,11 @@ export default connect(
     }
   })
 )(Packages);
+
+Packages.propTypes = {
+  sandbox: shape({}),
+  fetchSandbox: func,
+  isLoading: bool,
+  setPackage: func,
+  isError: bool
+};

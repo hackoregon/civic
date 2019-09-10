@@ -2,7 +2,6 @@
 import React from "react";
 import { arrayOf, func, node, shape } from "prop-types";
 import DeckGL from "deck.gl";
-
 import MultiPathMap from "./MultiPathMap";
 import MultiScatterPlotMap from "./MultiScatterPlotMap";
 import MultiScreenGridMap from "./MultiScreenGridMap";
@@ -11,6 +10,7 @@ import MultiSmallPolygonMap from "./MultiSmallPolygonMap";
 import MultiChoroplethMap from "./MultiChoroplethMap";
 
 const MultiLayerMap = props => {
+
   const { viewport, mapLayers, children, onHoverSlide } = props;
 
   const renderMaps = mapLayers.map((layerData, index) => {
@@ -43,12 +43,14 @@ const MultiLayerMap = props => {
       ? MultiSmallPolygonMap({
           ...layerData,
           index,
-          onHoverSlide
+          onHoverSlide,
+          viewport
         })
       : mapType === "ChoroplethMap"
       ? MultiChoroplethMap({
           ...layerData,
-          index
+          index,
+          onHoverSlide
         })
       : null;
   });
