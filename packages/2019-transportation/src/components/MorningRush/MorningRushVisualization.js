@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { resourceShape } from "reduxful/react-addons";
 import { isLoaded } from "reduxful";
 import { extent } from "d3-array";
-import { scaleLinear, scaleLog } from "d3-scale";
+import { scaleLinear, scalePow } from "d3-scale";
 
 import {
   BaseMap,
@@ -49,7 +49,7 @@ const MorningRushVisualization = ({ data }) => {
         extent(data.busAmRushSummary.value.results.features, samplesAccessor)
       );
     }
-  }, [data.busAmRushSummary.value.results.features, isLoading]);
+  }, [isLoading]); // eslint-disable-line
 
   return !isLoading && data ? (
     <>
@@ -80,9 +80,9 @@ const MorningRushVisualization = ({ data }) => {
           getRadius={feature => {
             const totalOnOffs = totalOnsOffsAccessor(feature);
             // const scale = scaleLinear().domain(totalOnsOffsExtent).range([25, 100]);
-            const scale = scaleLog()
+            const scale = scalePow()
               .domain(totalOnsOffsExtent)
-              .range([25, 50]);
+              .range([25, 100]);
             return scale(totalOnOffs);
           }}
         >
