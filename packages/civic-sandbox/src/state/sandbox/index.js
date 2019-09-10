@@ -39,11 +39,8 @@ const INITIAL_STATE = {
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
-  /* global console */
-  console.log("STATE:", state);
   switch (action.type) {
     case SANDBOX_START:
-      console.log("action-SANDBOX_START:", action);
       return {
         ...state,
         sandboxPending: true,
@@ -53,7 +50,6 @@ const reducer = (state = INITIAL_STATE, action) => {
         selectedSlideDatum: null
       };
     case SANDBOX_SUCCESS:
-      console.log("action-SANDBOX_SUCCESS:", action);
       return {
         ...state,
         sandboxPending: false,
@@ -127,7 +123,6 @@ const reducer = (state = INITIAL_STATE, action) => {
       };
     }
     case SLIDES_FAILURE: {
-      console.log("a-SLIDES_FAILURE");
       return {
         ...state,
         slidesPending: false,
@@ -138,11 +133,9 @@ const reducer = (state = INITIAL_STATE, action) => {
       };
     }
     case SET_PACKAGE: {
-      console.log("a-SET_PACKAGE:", action);
       const [findDefaultLayers] = state.sandbox.packages.filter(
         d => d.displayName === action.selectedPackage.displayName
       );
-      console.log("SET_PACKAGE-findDefaultLayers:", findDefaultLayers);
       return {
         ...state,
         selectedPackage: action.selectedPackage.displayName,
@@ -161,7 +154,6 @@ const reducer = (state = INITIAL_STATE, action) => {
       };
     }
     case SET_SLIDE_KEY:
-      console.log("a-SET_SLIDE_KEY:", action);
       return {
         ...state,
         selectedSlideKey: {
@@ -178,7 +170,6 @@ const reducer = (state = INITIAL_STATE, action) => {
         selectedSlideDatum: null
       };
     case SET_SLIDES:
-      console.log("a-SET_SLIDESSSSS:", action);
       return {
         ...state,
         selectedSlide: action.selectedSlides
@@ -230,7 +221,6 @@ const reducer = (state = INITIAL_STATE, action) => {
         selectedFoundationDatum: action.feature
       };
     case SET_SLIDE_DATUM: {
-      // console.log("a-SET_SLIDE_DATUM:", action);
       return {
         ...state,
         selectedSlideDatum: { feature: action.feature, index: action.index }

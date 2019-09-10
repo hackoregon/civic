@@ -49,33 +49,25 @@ export const fetchLayersAdapter = (
   layersArr,
   { start, success, failure }
 ) => () => dispatch => {
-  console.log("fetchLayersAdapter-layersArr", layersArr);
   dispatch(start());
 
   const fetchLayers = layersArr.map(layerObj => {
-    // console.log("fetchLayersAdapter-slide", slide);
     const url = layerObj.slide.layerEndpoint;
     const isSecureURL = url.includes("https")
       ? url
       : `${url.slice(0, 4)}s${url.slice(4)}`;
     return axios.get(isSecureURL);
   });
-  // console.log("fetchLayersAdapter-fetchLayers", fetchLayers);
   return axios.all(fetchLayers).then(layerDataArr => {
-    console.log("fetchLayersAdapter-layerDataArr:", layerDataArr);
-
     const geoDataURLs = layerDataArr.map((layer, i) => {
       return {
         url: layer.data.dataEndpoint,
         prevData: layersArr[i].geoJSON
       };
     });
-    console.log("fetchLayersAdapter-geoDataURLs:", geoDataURLs);
 
     const fetchGeoData = geoDataURLs.map((gd, i, arr) => {
       const findMatch = arr.findIndex(d => d.url === gd.url && d.prevData);
-      console.log("fetchLayersAdapter-findMatch:", findMatch);
-
       return findMatch > -1
         ? { data: { results: layersArr[findMatch].geoJSON } }
         : gd.url && layersArr[i].defaultSlide && !layersArr[i].geoJSON
@@ -83,24 +75,15 @@ export const fetchLayersAdapter = (
         : {};
     });
 
-    // console.log("fetchLayersAdapter-dispatched");
-
     return axios
       .all(fetchGeoData)
       .then(geoData => {
-        console.log("fetchLayersAdapter-geoData:", geoData);
         const layerAndGeoData = geoData.map((g, i) => {
           return {
             ...g.data,
             ...layerDataArr[i].data
           };
         });
-        console.log(
-          "fetchLayersAdapter-layerAndGeoData:",
-          layerAndGeoData,
-          "\n"
-        );
-
         dispatch(success(layerAndGeoData));
         return geoData;
       })

@@ -1,9 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import { createSelector } from "reselect";
-// import { isArray } from "lodash";
 import { rootState } from "../selectors";
-
-// import { slides, foundations } from "../layerStyles";
 
 export const getState = createSelector(
   rootState,
@@ -14,12 +11,6 @@ export const getSandbox = createSelector(
   rootState,
   ({ sandbox = {} }) => sandbox
 );
-
-// const getProperty = key =>
-//   createSelector(
-//     getState,
-//     state => state[key]
-//   );
 
 const getSandboxProperty = key =>
   createSelector(
@@ -41,48 +32,28 @@ export const getSlidesSuccess = getSandboxProperty("slidesSuccess");
 export const isAnyError = getSandboxProperty("slidesError");
 export const getSelectedFoundation = getSandboxProperty("selectedFoundation");
 export const getSelectedSlides = getSandboxProperty("selectedSlide");
-// export const isAllSandboxLoading = isFoundationLoading || areSlidesLoading;
-export const isAllSandboxLoading = areSlidesLoading; // getSlidesSuccess;
+export const isAllSandboxLoading = areSlidesLoading;
 
 export const getSelectedPackageData = createSelector(
   getSandboxData,
   getSelectedPackage,
   (data, selectedPackage) => data.packages && data.packages[selectedPackage]
 );
-// export const getFoundationData = createSelector(
-//   getSandboxData,
-//   getSelectedFoundation,
-//   (sandbox, foundation) => sandbox.foundations[foundation]
-// );
 
 export const getSlidesData = createSelector(
   getSandboxData,
   getSelectedSlides,
   getSelectedPackage,
   (sandbox, selectedSlides, selectedPackage) => {
-    // isArray(slides)
-    // ? slides.map(slide => sandbox.slides[slide])
-    // : [sandbox.slides[slides]]
-    console.log("SELECTORS");
-    // console.log("selector-getSlidesData-selectedPackage:", selectedPackage);
-    // console.log("selector-getSlidesData-selectedSlides:", selectedSlides);
-
     const [packageMatch] = sandbox.packages.filter(d => {
       return d.displayName === selectedPackage;
     });
-    // console.log("selector-getSlidesData-packageMatch:", packageMatch);
 
     const selectedSlidesData = packageMatch.layers.map(d => {
-      // console.log(d);
-      // console.log(selectedSlides.includes(d.name));
       return selectedSlides.includes(d.name)
         ? { slide: d, defaultSlide: true }
         : { slide: d, defaultSlide: false };
     });
-    console.log(
-      "selector-getSlidesData-selectedSlidesData:",
-      selectedSlidesData
-    );
 
     return selectedSlidesData;
   }
@@ -103,17 +74,10 @@ export const getLayerSlides = createSelector(
   getSelectedSlides,
   getSelectedSlideKey,
   (slidesData, selectedSlides, selectedSlideKey) => {
-    // console.log("selector-getLayerSlides-slidesData:", slidesData);
-    // console.log("selector-getLayerSlides-selectedSlides:", selectedSlides);
-    // console.log("selector-getLayerSlides-selectedSlideKey:", selectedSlideKey);
-
     const filteredSlideVizData = selectedSlides.reduce((a, c) => {
       const findSlide = slidesData.find(e => e.displayName === c);
       return findSlide ? [...a, findSlide] : a;
     }, []);
-    // console.log("selector-getLayerSlides-filteredSlideVizData:", filteredSlideVizData);
-    // const hasSelectedSlideKeys = Object.keys(selectedSlideKey).length > 0;
-    // console.log("selector-getLayerSlides-hasSelectedSlideKeys:", hasSelectedSlideKeys);
 
     const formattedSliderVizData = filteredSlideVizData.map(d => {
       const mapProps = {
@@ -137,105 +101,17 @@ export const getLayerSlides = createSelector(
             : ""
         }
       };
-      // console.log("mapProps:", mapProps);
+
       return {
         ...mapProps,
         data: d.results ? d.results.features : [],
         layerInfo: d
       };
     });
-    console.log(
-      "selector-getLayerSlides-formattedSliderVizData:",
-      formattedSliderVizData
-    );
 
     return formattedSliderVizData;
   }
 );
-
-// export const getLayerFoundation = createSelector(
-//   getFoundationData,
-//   getSelectedFoundationData,
-//   (defaultFn, selectedFn = {}) => {
-//     const selectedFoundation = selectedFn || {};
-//     const foundationLayerData = {
-//       data: selectedFoundation.slide_data
-//         ? foundations(selectedFn)[defaultFn.name]
-//         : {}
-//     };
-//     return foundationLayerData;
-//   }
-// );
-
-// const makeVisFor = (spec, data) => {
-//   const { type } = spec.visualization;
-//   if (type === "PercentDonut") {
-//     const val = data.object.properties[spec.field];
-//     const comparisonName = spec.visualization.comparison_name
-//       ? spec.visualization.comparison_name
-//       : " ";
-//     return {
-//       id: data.object.id,
-//       visualizationType: "PercentDonut",
-//       title: spec.name,
-//       data: [
-//         { x: spec.name, y: val },
-//         {
-//           x: comparisonName,
-//           y: val < 1 ? 1 - val : 100 - val
-//         }
-//       ]
-//     };
-//   }
-//   if (type === "Text" || type === "ComparisonBar") {
-//     return {
-//       id: data.object.id,
-//       visualizationType: "Text",
-//       title: spec.name,
-//       data:
-//         data.object.properties[spec.field] !== null &&
-//         data.object.properties[spec.field] !== undefined
-//           ? data.object.properties[spec.field]
-//           : "Data Not Available"
-//     };
-//   }
-//   return {};
-// };
-
-// export const getSelectedFoundationDatum = createSelector(
-//   getSandbox,
-//   getSelectedFoundationData,
-//   ({ selectedFoundationDatum }, foundation) => {
-//     if (!foundation || !selectedFoundationDatum) return [];
-
-//     const attrs = foundation.slide_meta.attributes;
-//     const visualizations = [];
-
-//     const selectedFoundationDatumProps =
-//       selectedFoundationDatum.object.properties;
-//     const primaryFieldMatch = selectedFoundationDatumProps.hasOwnProperty(
-//       attrs.primary.field
-//     );
-//     const secondaryFieldMatch = selectedFoundationDatumProps.hasOwnProperty(
-//       attrs.secondary.field
-//     );
-
-//     if (!primaryFieldMatch && !secondaryFieldMatch) return [];
-
-//     if (attrs.primary && attrs.primary.field && attrs.primary.visualization) {
-//       visualizations.push(makeVisFor(attrs.primary, selectedFoundationDatum));
-//     }
-//     if (
-//       attrs.secondary &&
-//       attrs.secondary.field &&
-//       attrs.primary.visualization
-//     ) {
-//       visualizations.push(makeVisFor(attrs.secondary, selectedFoundationDatum));
-//     }
-
-//     return visualizations;
-//   }
-// );
 
 export const getSelectedSlideDatum = createSelector(
   getSandbox,
@@ -243,21 +119,15 @@ export const getSelectedSlideDatum = createSelector(
   getSelectedSlides,
   getSelectedSlideKey,
   ({ selectedSlideDatum }, slides, selectedSlides, selectedSlideKey) => {
-    // console.log("\nselector-getSelectedSlideDatum-selectedSlideDatum:", selectedSlideDatum);
-    // console.log("selector-getSelectedSlideDatum-slides:", slides);
-    // console.log("selector-getSelectedSlideDatum-selectedSlides:", selectedSlides);
-
     if (!selectedSlideDatum || !selectedSlideDatum.feature.object || !slides)
       return;
     const { feature: slideFeature, index: slideIndex } = selectedSlideDatum;
 
     const activeLayerName = selectedSlides[slideIndex];
-    // console.log("selector-getSelectedSlideDatum-activeLayerName:", activeLayerName);
 
     const activeLayer = slides.find(s => {
       return s.displayName === activeLayerName;
     });
-    // console.log("selector-getSelectedSlideDatum-activeLayer:", activeLayer);
 
     if (
       !activeLayer ||
@@ -266,7 +136,6 @@ export const getSelectedSlideDatum = createSelector(
     )
       return;
     const tooltipFields = activeLayer.visualization.tooltip;
-    // console.log("selector-getSelectedSlideDatum-tooltipFields:", tooltipFields);
 
     const tooltipInfo = {
       x: slideFeature.x,
@@ -298,7 +167,6 @@ export const getSelectedSlideDatum = createSelector(
         value: slideFeature.object.properties[tooltipFields.secondary.fieldName]
       });
     }
-    // console.log("selector-getSelectedSlideDatum-tooltipInfo:", tooltipInfo);
 
     // eslint-disable-next-line consistent-return
     return tooltipInfo;
@@ -309,13 +177,7 @@ export const getAllSlides = createSelector(
   getSelectedSlidesData,
   getSelectedSlides,
   (selectedSlidesData, selectedSlides) => {
-    // console.log(
-    //   "selector-getAllSlides-selectedSlidesData:",
-    //   selectedSlidesData
-    // );
-
     const allSlides = selectedSlidesData.map((s, indx) => {
-      // console.log("selector-getAllSlides-slide:", s);
       const vizCheck = s.visualization && s.visualization.map;
       return {
         slideId: indx,
@@ -333,7 +195,6 @@ export const getAllSlides = createSelector(
       };
     });
 
-    console.log("selector-getAllSlides-allSlides", allSlides);
     return allSlides;
   }
 );

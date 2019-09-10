@@ -24,23 +24,17 @@ import {
 import {
   isAllSandboxLoading,
   getSandboxData,
-  // isFoundationLoading,
   getSelectedPackageData,
-  // getFoundationError,
   isAnyError,
-  // getFoundationData,
   getSlidesData,
   getSelectedFoundationData,
   getSelectedSlidesData,
-  // getLayerFoundation,
   getSelectedPackage,
   getSelectedFoundation,
   getSelectedSlides,
   getLayerSlides,
   getSelectedSlideDatum,
   getAllSlides
-  // getfoundationMapProps,
-  // getSelectedFoundationDatum
 } from "../../state/sandbox/selectors";
 
 class SandboxComponent extends React.Component {
@@ -55,11 +49,7 @@ class SandboxComponent extends React.Component {
 
   componentDidMount() {
     const { slidesData, fetchLayers: cdmFetchLayers } = this.props;
-    // this.props.fetchFoundation(this.props.foundationData.endpoint);
-    // console.log("sandbox-index-CDM-slidesData:", slidesData);
     const layerURLs = slidesData;
-    // console.log("sandbox-index-CDM-layerURLs:", layerURLs);
-
     cdmFetchLayers(layerURLs);
   }
 
@@ -71,15 +61,13 @@ class SandboxComponent extends React.Component {
       selectedSlidesData,
       fetchLayers: cduFetchLayers
     } = this.props;
-    // console.log("sandbox-index-CDU-slidesData:", slidesData);
+
     if (
       equals(selectedPackage, prevProps.selectedPackage) &&
       !equals(selectedSlide, prevProps.selectedSlide)
     ) {
-      console.log("sandbox-index-CDU-SAME PACK & NEW SLIDES");
       const onlyFetchNewLayers = slidesData.map((layer, index) => {
         const previouslyFetchedData = selectedSlidesData[index].results;
-        // console.log("sandbox-index-CDU-previouslyFetchedData:", previouslyFetchedData);
         return !previouslyFetchedData &&
           !prevProps.selectedSlide.includes(layer.slide.name) &&
           selectedSlide.includes(layer.slide.name)
@@ -89,41 +77,26 @@ class SandboxComponent extends React.Component {
               geoJSON: previouslyFetchedData
             };
       });
-      // console.log("sandbox-index-CDU-onlyFetchNewLayers", onlyFetchNewLayers);
 
       if (onlyFetchNewLayers.length) {
         cduFetchLayers(onlyFetchNewLayers);
       }
-      // cduFetchLayers(slidesData);
     }
 
     if (!equals(selectedPackage, prevProps.selectedPackage)) {
-      console.log("sandbox-index-CDU-NEW PACK & NEW SLIDES");
       cduFetchLayers(slidesData);
     }
   }
 
   updateSlide = event => {
     const { selectedSlide, allSlides, setSlides: updateSetSlides } = this.props;
-    // console.log("sandbox-index-updateSlide:", event);
-    // console.log(
-    //   "sandbox-index-updateSlide-event-target-value:",
-    //   event.target.value
-    // );
     const slideName = event.target.value;
 
-    // const selectedSlides = selectedSlide.includes(slideName)
-    // ? selectedSlide.filter(name => name !== slideName)
-    // : [...selectedSlide, slideName];
-    // console.log("sandbox-index-selectedSlides:", selectedSlides);
-
-    // console.log("sandbox-index-allSlides:", allSlides);
     const orderSelectedSlides = [...allSlides].reduce((a, c, i) => {
       // eslint-disable-next-line no-param-reassign
       a[c.label] = i;
       return a;
     }, {});
-    console.log("sandbox-index-orderSelectedSlides:", orderSelectedSlides);
 
     const reorderSelectedSlides = selectedSlide.includes(slideName)
       ? selectedSlide.filter(name => name !== slideName)
@@ -132,13 +105,11 @@ class SandboxComponent extends React.Component {
           slideName,
           ...selectedSlide.slice(orderSelectedSlides[slideName])
         ];
-    console.log("sandbox-index-reorderSelectedSlides:", reorderSelectedSlides);
 
     updateSetSlides(reorderSelectedSlides);
   };
 
   toggleDrawer = () => {
-    // this.setState({ drawerVisible: !this.state.drawerVisible });
     this.setState(prevState => {
       return {
         drawerVisible: !prevState.drawerVisible
@@ -147,8 +118,6 @@ class SandboxComponent extends React.Component {
   };
 
   render() {
-    /* global console */
-    console.log("SANDBOX-INDEX-PROPS:", this.props);
     const {
       layerSlides,
       setFoundation: renderSetFoundation,
@@ -165,7 +134,6 @@ class SandboxComponent extends React.Component {
       slideHover,
       selectedSlideDatum,
       allSlides,
-      // selectedFoundationDatum,
       isLoading,
       isError,
       setSlideKey: renderSetSlideKey
@@ -198,8 +166,6 @@ class SandboxComponent extends React.Component {
         onSlideHover={slideHover}
         tooltipInfo={selectedSlideDatum}
         allSlides={allSlides}
-        // foundationMapProps={this.props.foundationMapProps}
-        // selectedFoundationDatum={selectedFoundationDatum}
         areSlidesLoading={isLoading}
         errors={isError}
         updateSlideKey={renderSetSlideKey}
@@ -219,17 +185,13 @@ export default connect(
     selectedPackage: getSelectedPackage(state),
     selectedPackageData: getSelectedPackageData(state),
     selectedFoundation: getSelectedFoundation(state),
-    // foundationData: getFoundationData(state),
     slidesData: getSlidesData(state),
     selectedFoundationData: getSelectedFoundationData(state),
     selectedSlidesData: getSelectedSlidesData(state),
-    // layerFoundation: getLayerFoundation(state),
     selectedSlide: getSelectedSlides(state),
     layerSlides: getLayerSlides(state),
     selectedSlideDatum: getSelectedSlideDatum(state),
     allSlides: getAllSlides(state)
-    // foundationMapProps: getfoundationMapProps(state),
-    // selectedFoundationDatum: getSelectedFoundationDatum(state)
   }),
   dispatch => ({
     fetchFoundation(endpoint = "") {
@@ -273,20 +235,16 @@ SandboxComponent.propTypes = {
   allSlides: arrayOf(shape({})),
   layerSlides: arrayOf(shape({})),
   selectedSlideDatum: shape({}),
-
   slideHover: func,
   fetchLayers: func,
   fetchSlideByDate: func,
   setPackage: func,
   setSlides: func,
   setSlideKey: func,
-
   isLoading: bool,
   isError: bool,
-
   selectedFoundation: string,
   selectedFoundationData: shape({}),
-  // selectedFoundationDatum: arrayOf(),
   foundationData: arrayOf(),
   setFoundation: func
 };
