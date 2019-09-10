@@ -18,7 +18,7 @@ const ContainerStyle = css`
   width: calc(100% - 200px);
   padding: 0 100px;
   display: grid;
-  grid-template-columns: 300px 1fr 300px;
+  grid-template-columns: 600px 1fr 600px;
   justify-content: center;
   align-items: flex-start;
   z-index: 103;
