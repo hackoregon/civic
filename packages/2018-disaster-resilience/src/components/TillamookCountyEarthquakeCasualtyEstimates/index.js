@@ -11,9 +11,8 @@ const TillamookCountyEarthquakeCasualtyEstimates = ({ init, data, Layout }) => {
   useEffect(
     () => {
       init();
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     },
-    [init]
+    [] // eslint-disable-line react-hooks/exhaustive-deps
   );
 
   return (
