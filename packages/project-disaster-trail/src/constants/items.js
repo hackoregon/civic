@@ -17,16 +17,17 @@ import RopeColor from "../../assets/kit_icons/filled-rope.svg";
 import TentEmpty from "../../assets/kit_icons/unfilled-tent.svg";
 import TentColor from "../../assets/kit_icons/filled-tent.svg";
 // Temporary good item icons
-import FireExtinguisherEmpty from "../../assets/fire-extinguisher.svg";
-import FireExtinguisherColor from "../../assets/fire-extinguisher-color.svg";
+// import FireExtinguisherEmpty from "../../assets/fire-extinguisher.svg";
+// import FireExtinguisherColor from "../../assets/fire-extinguisher-color.svg";
+
 // Temporary bad item icons
-import ComputerEmpty from "../../assets/laptop.svg";
-import ComputerColor from "../../assets/laptop-color.svg";
+import BasketballColor from "../../assets/kit_icons/filled-basketball.svg";
+import PhoneColor from "../../assets/kit_icons/filled-phone.svg";
 
 // Good kit items
 export const blanket = "BLANKET";
 export const dustMask = "DUST_MASK";
-export const fireExtinguisher = "FIRE_EXTINGUISHER";
+// export const fireExtinguisher = "FIRE_EXTINGUISHER";
 export const firstAidKit = "FIRST_AID_KIT";
 export const flashlight = "FLASHLIGHT";
 export const food = "FOOD";
@@ -35,7 +36,8 @@ export const rope = "ROPE";
 export const tent = "TENT";
 export const water = "WATER";
 // Bad kit items
-export const computer = "COMPUTER";
+export const basketball = "BASKETBALL";
+export const phone = "PHONE";
 
 // Good kit items
 export const BLANKET = {
@@ -54,14 +56,14 @@ export const DUST_MASK = {
   goodKitItem: true,
   pointsForPuttingInKit: 10
 };
-export const FIRE_EXTINGUISHER = {
-  id: fireExtinguisher,
-  emptySvg: FireExtinguisherEmpty,
-  fullSvg: FireExtinguisherColor,
-  imgAlt: "fire extinguisher kit item",
-  goodKitItem: true,
-  pointsForPuttingInKit: 10
-};
+// export const FIRE_EXTINGUISHER = {
+//   id: fireExtinguisher,
+//   emptySvg: FireExtinguisherEmpty,
+//   fullSvg: FireExtinguisherColor,
+//   imgAlt: "fire extinguisher kit item",
+//   goodKitItem: true,
+//   pointsForPuttingInKit: 10
+// };
 export const FIRST_AID_KIT = {
   id: firstAidKit,
   emptySvg: FirstAidEmpty,
@@ -120,11 +122,18 @@ export const WATER = {
 };
 
 // Bad kit items
-export const COMPUTER = {
-  id: computer,
-  emptySvg: ComputerEmpty,
-  fullSvg: ComputerColor,
-  imgAlt: "cell phone kit item",
+export const BASKETBALL = {
+  id: basketball,
+  fullSvg: BasketballColor,
+  imgAlt: "basketball kit item",
+  goodKitItem: false,
+  pointsForPuttingInKit: 0
+};
+
+export const PHONE = {
+  id: phone,
+  fullSvg: PhoneColor,
+  imgAlt: "phone kit item",
   goodKitItem: false,
   pointsForPuttingInKit: 0
 };
@@ -132,7 +141,7 @@ export const COMPUTER = {
 export default {
   BLANKET,
   DUST_MASK,
-  FIRE_EXTINGUISHER,
+  // FIRE_EXTINGUISHER,
   FIRST_AID_KIT,
   FLASHLIGHT,
   FOOD,
@@ -140,5 +149,6 @@ export default {
   ROPE,
   TENT,
   WATER,
-  COMPUTER
+  BASKETBALL,
+  PHONE
 };

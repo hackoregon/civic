@@ -8,7 +8,7 @@ import ChapterButtons from "../ChapterButtons";
 import billBoardPNG from "../../../../assets/earthquake-heroes.svg";
 
 import LevelView from "../LevelView";
-import PointsView from "../PointsView";
+// import PointsView from "../PointsView";
 
 const ContainerStyle = css`
   position: absolute;
@@ -42,7 +42,7 @@ const BillboardStyle = css`
   pointer-events: none;
 `;
 
-const TitleBar = ({ debug = true }) => {
+const TitleBar = ({ debug = false }) => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -58,7 +58,7 @@ const TitleBar = ({ debug = true }) => {
     >
       <LevelView />
       <div css={BillboardStyle} />
-      <PointsView />
+      {/* <PointsView /> */}
       {debug && <ChapterButtons />}
     </div>
   );

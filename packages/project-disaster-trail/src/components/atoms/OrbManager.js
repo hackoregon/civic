@@ -9,6 +9,7 @@ import { palette } from "../../constants/style";
 import useBounds from "../../state/hooks/useBounds";
 import usePrevious from "../../state/hooks/usePrevious";
 import useAnimationFrame from "../../state/hooks/useAnimationFrame";
+import { MOVING_MAP } from "../../constants/actions";
 
 import Orb from "./Orb";
 import {
@@ -241,31 +242,32 @@ const OrbManager = ({
 
   return (
     <OrbsStyle ref={boundsRef}>
-      {map(renderableOrbs, orb => {
-        const zIndex = orbsZIndex.indexOf(orb.orbId) + 1;
+      {activeScreen !== MOVING_MAP &&
+        map(renderableOrbs, orb => {
+          const zIndex = orbsZIndex.indexOf(orb.orbId) + 1;
 
-        return (
-          <div
-            key={orb.orbId}
-            style={{
-              position: "absolute",
-              transform: `translate(${orb.x}px, ${orb.y}px)`,
-              zIndex
-            }}
-          >
-            <Orb
-              orbId={orb.orbId}
-              imageSVG={orb.imageSVG}
-              imgAlt={orb.imgAlt}
-              size={ORB_CONFIG.orbSize}
-              addOrbScore={addOrbScore}
-              setOrbTouched={setOrbTouched}
-              setOrbComplete={setOrbComplete}
-              delay={orb.delay}
-            />
-          </div>
-        );
-      })}
+          return (
+            <div
+              key={orb.orbId}
+              style={{
+                position: "absolute",
+                transform: `translate(${orb.x}px, ${orb.y}px)`,
+                zIndex
+              }}
+            >
+              <Orb
+                orbId={orb.orbId}
+                imageSVG={orb.imageSVG}
+                imgAlt={orb.imgAlt}
+                size={ORB_CONFIG.orbSize}
+                addOrbScore={addOrbScore}
+                setOrbTouched={setOrbTouched}
+                setOrbComplete={setOrbComplete}
+                delay={orb.delay}
+              />
+            </div>
+          );
+        })}
     </OrbsStyle>
   );
 };

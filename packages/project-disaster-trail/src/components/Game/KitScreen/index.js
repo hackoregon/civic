@@ -98,6 +98,7 @@ const KitScreen = ({
         checkItemIsCorrect={checkIfItemIsGood}
         activeScreen="kit"
         percentComplete={percentComplete}
+        tickerTapeText="Choose your earthquake preparation kit"
       />
     </Fragment>
   );

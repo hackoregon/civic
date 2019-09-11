@@ -17,7 +17,7 @@ const videoStyles = css`
   height: auto;
 `;
 
-const QuakeScreen = ({ endChapter, chapterDuration = 15 }) => {
+const QuakeScreen = ({ endChapter, chapterDuration = 13 }) => {
   const [chapterTimer] = useState(new Timer());
 
   // start a timer for the _entire_ chapter
