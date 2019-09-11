@@ -98,6 +98,10 @@ const HomeAppreciationMeta = (/* data */) => ({
               https://github.com/hackoregon/2019-housing-data-science/blob/master/rscripts/tract_home_ownership_rates_by_race_1990.R
             </li>
           </ul>
+        </section>
+      </Collapsable.Section>
+      <Collapsable.Section hidden>
+        <section>
           <h2>Taxlot data cleaning</h2>
           <p>
             Before calculating same-property appreciation, historical taxlot
@@ -191,9 +195,6 @@ const HomeAppreciationMeta = (/* data */) => ({
             .
           </p>
         </section>
-      </Collapsable.Section>
-      <Collapsable.Section hidden>
-        <p>ADD DETAILS HERE</p>
       </Collapsable.Section>
     </Collapsable>
   ),
