@@ -6,7 +6,7 @@ import HomeLoanApprovalsVisualization from "./HomeLoanApprovalsVisualization";
 const HomeLoanApprovalsMeta = (/* data */) => ({
   title: "Card #2: Racial Demographics of Home Loan Approvals",
   slug: "home-loan-approvals",
-  introText: <p>INTRO TEXT: TBD</p>,
+  introText: <p />,
   visualization: HomeLoanApprovalsVisualization, // data, isLoading are passed to this as props
   additionalText: <p>ADDITIONAL TEXT: TBD</p>,
   shareText: "TODO: Add share text!",

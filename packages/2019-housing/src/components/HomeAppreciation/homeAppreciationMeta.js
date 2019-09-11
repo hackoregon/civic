@@ -6,7 +6,7 @@ import HomeAppreciationVisualization from "./HomeAppreciationVisualization";
 const HomeAppreciationMeta = (/* data */) => ({
   title: "Card #9: Home Ownership, Race, and Appreciation",
   slug: "home-appreciation",
-  introText: <p>INTRO: TBD</p>,
+  introText: <p />,
   visualization: HomeAppreciationVisualization, // data, isLoading are passed to this as props
   additionalText: <p>ADDITIONAL TEXT: TBD</p>,
   shareText: "TODO: Add share text!",
