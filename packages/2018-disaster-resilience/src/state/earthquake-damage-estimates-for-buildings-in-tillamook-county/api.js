@@ -3,14 +3,16 @@ import requestAdapter from "../request-adapter";
 
 const apiConfig = { requestAdapter };
 
-const HOST = "https://service.civicpdx.org/transportation-systems";
+const HOST = "http://service.civicpdx.org/disaster-resilience";
 
 const apiDesc = {
   getDamageEstimatesData: {
-    url: `${HOST}/passenger-census/system/annual/averages/?format=json`,
+    url: `${HOST}/api/AebmResults/?format=json&limit=27371`,
     // you can apply any needed data transformations to value here
     // if complex, separate tranformation function to another file
-    dataTransform: data => data
+    dataTransform: data => {
+      return data.results.features;
+    }
   }
 };
 
