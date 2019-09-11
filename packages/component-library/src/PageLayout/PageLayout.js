@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
-import Header from "../Navigation/Header";
-import Footer from "../Footer/Footer";
+import Header from "../Header/Header";
+import Footer from "../FooterNew/FooterNew";
 import CollectionHero from "../Hero/CollectionHero";
 
 const defaultStyles = css`
@@ -47,18 +47,10 @@ const PageLayout = ({
   heroSubtitle,
   mainProjectColor,
   teamTitle,
-  overlay,
-  children,
-  attribution
+  children
 }) => (
   <div>
-    {header && (
-      <Header
-        title="Civic homepage"
-        mainProjectColor={mainProjectColor}
-        overlay={overlay || false}
-      />
-    )}
+    {header && <Header title="Civic homepage" />}
     {heroTitle && (
       <CollectionHero
         teamTitle={teamTitle}
@@ -68,7 +60,7 @@ const PageLayout = ({
       />
     )}
     <div css={defaultStyles}>{children}</div>
-    <Footer attribution={attribution} />
+    <Footer />
   </div>
 );
 
@@ -76,13 +68,11 @@ PageLayout.displayName = "PageLayout";
 
 PageLayout.propTypes = {
   header: PropTypes.bool,
-  overlay: PropTypes.bool,
   teamTitle: PropTypes.string,
   heroTitle: PropTypes.string,
   heroSubtitle: PropTypes.string,
   mainProjectColor: PropTypes.string,
-  children: PropTypes.node,
-  attribution: PropTypes.node
+  children: PropTypes.node
 };
 
 PageLayout.defaultProps = {
