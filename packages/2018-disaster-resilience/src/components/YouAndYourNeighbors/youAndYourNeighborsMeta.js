@@ -30,7 +30,7 @@ const YouAndYourNeighborsMeta = (/* data */) => ({
   tags: ["Disaster Resilience", "Portland", "Oregon", "Map"],
   selector: null,
   analysis: null,
-  metadata: null,
+  metadata: null, // earthquake_regional_impact_analysis_for_clackamas_multnomah_and_washington_counties_oregon
   resources: [
     {
       heading: "Organizations",

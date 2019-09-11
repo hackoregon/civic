@@ -55,7 +55,7 @@ const SignificantStructuralDamageMeta = (/* data */) => ({
   tags: ["Disaster Resilience", "Portland", "Oregon", "Infographic"],
   selector: null,
   analysis: null, // TODO
-  metadata: null, // TODO
+  metadata: null, // n/a
   resources: [
     {
       heading: "Organizations",

@@ -81,36 +81,7 @@ const DisturbanceStopsMeta = (/* data */) => ({
       </Collapsable.Section>
     </Collapsable>
   ),
-  metadata: (
-    <Collapsable>
-      <Collapsable.Section>
-        <p>
-          Sweet roll wafer muffin caramels. Bonbon marshmallow pudding topping
-          pastry. Sweet roll cake bonbon croissant lollipop gummies cheesecake.
-          Chocolate bar bear claw liquorice candy canes cake sweet. Cake dessert
-          marshmallow liquorice croissant chocolate wafer brownie powder. Oat
-          cake chocolate bar bonbon jelly-o pastry candy canes. Candy canes ice
-          cream ice cream jelly-o.
-        </p>
-      </Collapsable.Section>
-      <Collapsable.Section hidden>
-        <p>
-          Macaroon donut croissant pudding marshmallow lemon drops wafer. Pastry
-          caramels cake muffin chocolate topping danish dragée dragée. Pudding
-          croissant pie pudding muffin gingerbread donut. Sweet roll bonbon
-          soufflé danish cake danish bear claw croissant. Cotton candy donut
-          jelly beans caramels halvah cupcake chocolate cake bonbon. Lollipop
-          marzipan jelly beans gummies gummies tart fruitcake halvah. Croissant
-          dragée muffin soufflé chocolate bar. Cookie croissant danish sweet
-          roll pie lemon drops. Candy candy canes cookie macaroon icing gummies.
-          Gummi bears gummi bears marzipan pudding brownie bear claw lollipop
-          brownie pie. Sugar plum topping oat cake sweet roll. Brownie topping
-          caramels sweet cupcake oat cake. Sugar plum topping pastry. Biscuit
-          dessert wafer chocolate danish.
-        </p>
-      </Collapsable.Section>
-    </Collapsable>
-  ),
+  metadata: null, // toad
   resources: [
     {
       heading: "Organizations",

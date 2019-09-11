@@ -1,5 +1,7 @@
 import IsThereEvidenceTheProgramWorkedVisualization from "./IsThereEvidenceTheProgramWorkedVisualization";
 
+// USED FOR EMBED ONLY ON CIVICDATACOLLABORATIVE, NO META NEEDED
+
 const IsThereEvidenceTheProgramWorkedMeta = (/* data */) => ({
   title: "Is There Evidence The Program Worked?",
   slug: "is-there-evidence-the-program-worked",

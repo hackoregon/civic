@@ -139,14 +139,7 @@ const demoCardMeta = (/* data */) => ({
       </Collapsable.Section>
     </Collapsable>
   ),
-  metadata: (
-    <p>
-      <em>
-        Note: This dataset documentation is for demonstration purposes only and
-        is not peer-reviewed.
-      </em>
-    </p>
-  ),
+  metadata: null, // toad
   metadataQA: [
     { section: "Dataset Name and History" },
     {
