@@ -31,7 +31,7 @@ const DisturbanceStopsMeta = (/* data */) => ({
   ),
   shareText:
     "Ice cream candy canes brownie marzipan jelly chocolate bar marshmallow.",
-  tags: ["Transportation", "Portland", "Map"],
+  tags: ["Transportation", "Portland", "Oregon", "Map"],
   selector: null,
   analysis: (
     <Collapsable>

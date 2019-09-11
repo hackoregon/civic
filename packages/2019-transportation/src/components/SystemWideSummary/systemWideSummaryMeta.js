@@ -31,9 +31,7 @@ const SystemWideSummaryMeta = (/* data */) => ({
   ),
   shareText:
     "Ice cream candy canes brownie marzipan jelly chocolate bar marshmallow.",
-  tags: [
-    /* "Transportation", "Bus", "Rail", "Portland" */
-  ],
+  tags: ["Transportation", "Chart", "Portland", "Oregon"],
   selector: null,
   analysis: (
     <Collapsable>

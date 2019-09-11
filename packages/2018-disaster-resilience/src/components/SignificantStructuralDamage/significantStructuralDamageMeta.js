@@ -52,7 +52,7 @@ const SignificantStructuralDamageMeta = (/* data */) => ({
     </Collapsable>
   ),
   shareText: null, // TODO
-  tags: ["Disaster Resilience", "Portland", "Infographic"],
+  tags: ["Disaster Resilience", "Portland", "Oregon", "Infographic"],
   selector: null,
   analysis: null, // TODO
   metadata: null, // TODO

@@ -18,7 +18,7 @@ const HousingDisplacementMeta = (/* data */) => ({
   visualization: HousingDisplacementVisualization, // data, isLoading are passed to this as props
   additionalText: <p>ADDITIONAL TEXT: TBD</p>,
   shareText: "TODO: Add share text!",
-  tags: ["Housing", "Race", "Portland", "Chart"],
+  tags: ["Housing", "Race", "Portland", "Oregon", "Chart"],
   selector: null,
   analysis: (
     <Collapsable>
