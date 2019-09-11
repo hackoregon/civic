@@ -7,10 +7,12 @@ const ProactivePlanningMeta = (/* data */) => ({
   visualization: ProactivePlanningVisualization, // data is passed to this as props
   additionalText: null, // TODO
   shareText: null, // TODO
-  tags: ["Disaster Resilience", "Portland", "Chart"],
+  tags: ["Disaster Resilience", "Portland", "Oregon", "Chart"],
   selector: null,
   analysis: null, // TODO
-  metadata: null, // TODO
+  metadata: null,
+  metadataQA:
+    "earthquake_regional_impact_analysis_for_clackamas_multnomah_and_washington_counties_oregon",
   resources: [
     {
       heading: "Organizations",
@@ -25,7 +27,7 @@ const ProactivePlanningMeta = (/* data */) => ({
     }
   ],
   // authors likely an array of keys in the future
-  authors: []
+  authors: "demo"
 });
 
 export default ProactivePlanningMeta;

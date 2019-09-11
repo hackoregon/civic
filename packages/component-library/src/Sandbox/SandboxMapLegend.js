@@ -16,7 +16,7 @@ const legendHeight = 65;
 const legendContainer = css(`
   margin: 0.5rem 5% 1rem 5%;
   display: flex;
-  align-items: end;
+  align-items: baseline;
   flex-wrap: nowrap;
   height: ${legendHeight}px;
   width: 90%;

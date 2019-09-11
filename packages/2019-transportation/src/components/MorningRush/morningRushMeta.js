@@ -36,16 +36,8 @@ const MorningRushMeta = (/* data */) => ({
       </Collapsable.Section>
     </Collapsable>
   ),
-  metadata: (
-    <Collapsable>
-      <Collapsable.Section>
-        <p />
-      </Collapsable.Section>
-      <Collapsable.Section hidden>
-        <p />
-      </Collapsable.Section>
-    </Collapsable>
-  ),
+  metadata: null,
+  metadataQA: "toads",
   resources: [
     {
       heading: "Organizations",
@@ -60,7 +52,7 @@ const MorningRushMeta = (/* data */) => ({
     }
   ],
   // authors likely an array of keys in the future
-  authors: []
+  authors: "demo"
 });
 
 export default MorningRushMeta;

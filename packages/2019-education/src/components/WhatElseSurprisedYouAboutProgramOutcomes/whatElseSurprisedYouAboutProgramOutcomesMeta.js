@@ -1,5 +1,7 @@
 import WhatElseSurprisedYouAboutProgramOutcomesVisualization from "./WhatElseSurprisedYouAboutProgramOutcomesVisualization";
 
+// USED FOR EMBED ONLY ON CIVICDATACOLLABORATIVE, NO META NEEDED
+
 const WhatElseSurprisedYouAboutProgramOutcomesMeta = (/* data */) => ({
   title: "What Surprised You About Program Outcomes?",
   slug: "what-else-surprised-you-about-program-outcomes",
@@ -27,7 +29,7 @@ const WhatElseSurprisedYouAboutProgramOutcomesMeta = (/* data */) => ({
     }
   ],
   // authors likely an array of keys in the future
-  authors: []
+  authors: "demo"
 });
 
 export default WhatElseSurprisedYouAboutProgramOutcomesMeta;

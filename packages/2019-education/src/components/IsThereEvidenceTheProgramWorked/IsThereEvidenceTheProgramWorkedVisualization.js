@@ -16,15 +16,16 @@ const data = [
 
 const IsThereEvidenceTheProgramWorkedVisualization = () => (
   <LineChart
-    title="Navigator Program Participant Achievement Growth"
-    subtitle="Annual RIT score improvement, 2015 cohort -- All Schools"
+    title="Student Academic Growth"
+    subtitle="Percentage RIT Score Gains, All Student/Schools, 2015-2018"
     xLabel="Year"
-    yLabel="RIT Growth"
+    yLabel="Growth"
     data={data}
     dataSeries="type"
     xNumberFormatter={civicFormat.year}
     yNumberFormatter={civicFormat.percentage}
     theme={DataCollaborativeVictoryTheme}
+    xTickCount={3}
   />
 );
 

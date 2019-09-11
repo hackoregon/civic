@@ -21,7 +21,7 @@ const HolcRedliningMeta = (/* data */) => ({
   visualization: HolcRedliningVisualization, // data, isLoading are passed to this as props
   additionalText: <p>ADDITIONAL TEXT: TBD</p>,
   shareText: "TODO: Add share text!",
-  tags: ["Housing", "Portland", "Map"],
+  tags: ["Housing", "Portland", "Oregon", "Map"],
   selector: null,
   analysis: (
     <Collapsable>
@@ -33,16 +33,8 @@ const HolcRedliningMeta = (/* data */) => ({
       </Collapsable.Section>
     </Collapsable>
   ),
-  metadata: (
-    <Collapsable>
-      <Collapsable.Section>
-        <p>METADATA: TBD</p>
-      </Collapsable.Section>
-      <Collapsable.Section hidden>
-        <p>ADD DETAILS HERE</p>
-      </Collapsable.Section>
-    </Collapsable>
-  ),
+  metadata: null,
+  metadataQA: "mapping_inequality_redlining_in_new_deal_america",
   resources: [
     {
       heading: "Organizations",
@@ -57,7 +49,7 @@ const HolcRedliningMeta = (/* data */) => ({
     }
   ],
   // authors likely an array of keys in the future
-  authors: []
+  authors: "demo"
 });
 
 export default HolcRedliningMeta;

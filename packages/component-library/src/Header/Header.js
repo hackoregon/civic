@@ -5,19 +5,15 @@ import PropTypes from "prop-types";
 import FullNav from "./FullNav";
 import SmallNav from "./SmallNav";
 
-const headerWrapper = props => css`
-  height: 115px;
+const headerWrapper = css`
+  height: 72px;
   width: 100vw;
   position: fixed;
   background: #fdfdfd;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
   margin: 0;
   top: 0;
-  z-index: 100;
-
-  @media (max-width: ${props.collapseWidth}px) {
-    height: 72px;
-  }
+  z-index: 999;
 `;
 
 const Header = props => {
@@ -36,7 +32,7 @@ const Header = props => {
   });
 
   return (
-    <header css={headerWrapper(props)} {...props}>
+    <header css={headerWrapper} {...props}>
       {width > collapseWidth ? <FullNav {...props} /> : <SmallNav {...props} />}
     </header>
   );

@@ -1,5 +1,7 @@
 import IsThereEvidenceTheProgramWorkedVisualization from "./IsThereEvidenceTheProgramWorkedVisualization";
 
+// USED FOR EMBED ONLY ON CIVICDATACOLLABORATIVE, NO META NEEDED
+
 const IsThereEvidenceTheProgramWorkedMeta = (/* data */) => ({
   title: "Is There Evidence The Program Worked?",
   slug: "is-there-evidence-the-program-worked",
@@ -7,7 +9,7 @@ const IsThereEvidenceTheProgramWorkedMeta = (/* data */) => ({
   visualization: IsThereEvidenceTheProgramWorkedVisualization, // data, isLoading are passed to this as props
   additionalText: null,
   shareText: null,
-  tags: ["Education", "Portland", "Chart"],
+  tags: ["Education", "Portland", "Oregon", "Chart"],
   selector: null,
   analysis: null,
   metadata: null,
@@ -25,7 +27,7 @@ const IsThereEvidenceTheProgramWorkedMeta = (/* data */) => ({
     }
   ],
   // authors likely an array of keys in the future
-  authors: []
+  authors: "demo"
 });
 
 export default IsThereEvidenceTheProgramWorkedMeta;

@@ -52,10 +52,10 @@ const SignificantStructuralDamageMeta = (/* data */) => ({
     </Collapsable>
   ),
   shareText: null, // TODO
-  tags: ["Disaster Resilience", "Portland", "Infographic"],
+  tags: ["Disaster Resilience", "Portland", "Oregon", "Infographic"],
   selector: null,
   analysis: null, // TODO
-  metadata: null, // TODO
+  metadata: null, // n/a
   resources: [
     {
       heading: "Organizations",
@@ -70,7 +70,7 @@ const SignificantStructuralDamageMeta = (/* data */) => ({
     }
   ],
   // authors likely an array of keys in the future
-  authors: []
+  authors: "demo"
 });
 
 export default SignificantStructuralDamageMeta;

@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+/** @jsx jsx */
+import { css, jsx } from "@emotion/core";
+import { useState, Fragment } from "react";
 import PropTypes from "prop-types";
-
 import shortid from "shortid";
+import { Link } from "react-router";
 
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -10,22 +12,35 @@ import Collapse from "@material-ui/core/Collapse";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import ChevronRight from "@material-ui/icons/ChevronRight";
 import Drawer from "@material-ui/core/Drawer";
-import AppBar from "@material-ui/core/AppBar";
 import Hidden from "@material-ui/core/Hidden";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 
+import Header from "../Header/Header";
+import BrandColors from "../_Themes/Brand/BrandColors";
+
 import {
   Checkbox,
   CivicCardLayoutPreview,
-  Header,
   MaterialTheme,
   Button
 } from "../index";
 
+const emptyState = css`
+  display: grid;
+  justify-content: center;
+  font-size: 1.2rem;
+
+  > p {
+    > a {
+      color: ${BrandColors.action.hex};
+    }
+  }
+`;
+
 const drawerWidth = 240;
-const headerHeight = 120;
+const headerHeight = 72;
 const drawerGap = 0;
 const useStyles = makeStyles(theme => ({
   root: {
@@ -39,13 +54,6 @@ const useStyles = makeStyles(theme => ({
       zIndex: "998",
       width: drawerWidth,
       flexShrink: 0
-    }
-  },
-  appBar: {
-    backgroundColor: "white",
-    zIndex: "999",
-    [theme.breakpoints.up("sm")]: {
-      width: "100%"
     }
   },
   filtersButton: {
@@ -116,7 +124,7 @@ const useStyles = makeStyles(theme => ({
 
 const tagsListExample = {
   topics: ["Transportation", "Disaster Resilience", "Housing"],
-  locations: ["Portland", "Nationwide", "Your City"],
+  locations: ["Portland", "Oregon", "Nationwide", "Your City"],
   visualizations: ["Bar Chart", "Cloropleth Map", "Scatterplot"]
 };
 
@@ -138,9 +146,9 @@ const CardList = ({ CardRegistry, tagsList = tagsListExample }) => {
 
   const [showAllStories, setShowAllStories] = useState(true);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [openTopic, setOpenTopic] = React.useState(true);
-  const [openLocation, setOpenLocation] = React.useState(false);
-  const [openVisualization, setOpenVisualization] = React.useState(false);
+  const [openTopic, setOpenTopic] = useState(true);
+  const [openLocation, setOpenLocation] = useState(false);
+  const [openVisualization, setOpenVisualization] = useState(false);
   const theme = useTheme();
   const [activeTags, setActiveTags] = useState(allTagsFalse);
 
@@ -183,7 +191,7 @@ const CardList = ({ CardRegistry, tagsList = tagsListExample }) => {
         className={classes.filtersList}
       >
         {Object.keys(tagsList).map(category => (
-          <>
+          <Fragment>
             <ListItem button onClick={categoryHandlers[`${category}Handler`]}>
               <ListItemText
                 className={classes.categoryListText}
@@ -214,7 +222,7 @@ const CardList = ({ CardRegistry, tagsList = tagsListExample }) => {
                 ))}
               </List>
             </Collapse>
-          </>
+          </Fragment>
         ))}
       </List>
     </div>
@@ -230,68 +238,89 @@ const CardList = ({ CardRegistry, tagsList = tagsListExample }) => {
     return false;
   };
 
+  const filteredEntries = entries.filter(entry =>
+    filterCardsBasedOnActiveTags(entry.component.tags)
+  );
+
   return (
-    <ThemeProvider theme={MaterialTheme}>
-      <div className={classes.root}>
-        <CssBaseline />
-        <AppBar position="fixed" className={classes.appBar}>
-          <Header title="Story Cards" />
-        </AppBar>
-        <nav className={classes.drawer} aria-label="mailbox folders">
-          <Hidden smUp implementation="css">
-            <Drawer
-              variant="temporary"
-              anchor={theme.direction === "rtl" ? "right" : "left"}
-              open={mobileOpen}
-              onClose={handleDrawerToggle}
-              classes={{
-                paper: classes.drawerPaper
-              }}
-              ModalProps={{
-                keepMounted: true // Better open performance on mobile.
-              }}
-            >
-              {drawer}
-            </Drawer>
-          </Hidden>
-          <Hidden xsDown implementation="css">
-            <Drawer
-              classes={{
-                paper: classes.drawerPaper
-              }}
-              variant="permanent"
-              open
-            >
-              {drawer}
-            </Drawer>
-          </Hidden>
-        </nav>
-        <main className={classes.content}>
-          <h1>Cards Under Construction</h1>
-          <section className={classes.filtersButton}>
-            <Button aria-label="open filters list" onClick={handleDrawerToggle}>
-              Filter Stories
-            </Button>
-          </section>
-          <ul className={classes.entriesList}>
-            {entries
-              .filter(entry =>
-                filterCardsBasedOnActiveTags(entry.component.tags)
-              )
-              .map(entry => (
-                <li key={shortid.generate()} className={classes.entry}>
-                  {
-                    <entry.component
-                      className={classes.storyCard}
-                      Layout={CivicCardLayoutPreview}
-                    />
-                  }
-                </li>
-              ))}
-          </ul>
-        </main>
-      </div>
-    </ThemeProvider>
+    <Fragment>
+      <Header />
+      <ThemeProvider theme={MaterialTheme}>
+        <div className={classes.root}>
+          <CssBaseline />
+          <nav className={classes.drawer} aria-label="mailbox folders">
+            <Hidden smUp implementation="css">
+              <Drawer
+                variant="temporary"
+                anchor={theme.direction === "rtl" ? "right" : "left"}
+                open={mobileOpen}
+                onClose={handleDrawerToggle}
+                classes={{
+                  paper: classes.drawerPaper
+                }}
+                ModalProps={{
+                  keepMounted: true // Better open performance on mobile.
+                }}
+              >
+                {drawer}
+              </Drawer>
+            </Hidden>
+            <Hidden xsDown implementation="css">
+              <Drawer
+                classes={{
+                  paper: classes.drawerPaper
+                }}
+                variant="permanent"
+                open
+              >
+                {drawer}
+              </Drawer>
+            </Hidden>
+          </nav>
+          <main className={classes.content}>
+            <h1>Cards Under Construction</h1>
+            <section className={classes.filtersButton}>
+              <Button
+                aria-label="open filters list"
+                onClick={handleDrawerToggle}
+              >
+                Filter Stories
+              </Button>
+            </section>
+            {filteredEntries.length > 0 ? (
+              <ul className={classes.entriesList}>
+                {filteredEntries.map(entry => (
+                  <li key={shortid.generate()} className={classes.entry}>
+                    {
+                      <entry.component
+                        className={classes.storyCard}
+                        Layout={CivicCardLayoutPreview}
+                      />
+                    }
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <div css={emptyState}>
+                <p>
+                  {`We haven't yet made any cards matching your selection.`}
+                  <br />
+                  <Link
+                    to={{
+                      pathname: "/",
+                      hash: "#become-a-contributor"
+                    }}
+                  >
+                    Join us
+                  </Link>{" "}
+                  to make it happen!
+                </p>
+              </div>
+            )}
+          </main>
+        </div>
+      </ThemeProvider>
+    </Fragment>
   );
 };
 

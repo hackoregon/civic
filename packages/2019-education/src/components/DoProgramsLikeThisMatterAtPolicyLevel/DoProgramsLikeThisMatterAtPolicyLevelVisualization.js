@@ -12,8 +12,8 @@ const data = [
 
 const DoProgramsLikeThisMatterAtPolicyLevelVisualization = () => (
   <HorizontalBarChart
-    title="Navigator Program Policy Implications"
-    subtitle="Improvement in RIT score, 2015 - 2018"
+    title="Comparing Student Academic Growth"
+    subtitle="Percentage RIT Score Gains in Six Schools, 2015 - 2018"
     data={data}
     dataLabel="x"
     dataValue="y"
@@ -28,7 +28,7 @@ const DoProgramsLikeThisMatterAtPolicyLevelVisualization = () => (
     domain={{ y: [0, 0.2] }}
     theme={DataCollaborativeVictoryTheme}
     grouped
-    annotations={[{ x: 0.14, y: 140, label: "Statewide Average" }]}
+    annotations={[{ x: 0.14, y: 140, label: "Statewide Average (n=81)" }]}
   />
 );
 

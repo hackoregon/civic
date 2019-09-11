@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, css } from "@emotion/core";
+import { jsx } from "@emotion/core";
 import { Fragment } from "react";
 import PropTypes from "prop-types";
 import _ from "lodash";
@@ -33,24 +33,18 @@ Resource.propTypes = {
   })
 };
 
-export function MetadataQuestion({ item }) {
-  return _.has(item, "section") ? (
-    <h3>{item.section}</h3>
-  ) : (
-    item.answer.length > 0 && (
-      <Fragment>
-        <h4>{item.question}</h4>
-        <p>{item.answer}</p>
-      </Fragment>
-    )
+export function MetadataQuestion({ question, answer }) {
+  return (
+    <Fragment>
+      <h4>{question}</h4>
+      <p>{answer}</p>
+    </Fragment>
   );
 }
 
 MetadataQuestion.propTypes = {
-  item: PropTypes.shape({
-    question: PropTypes.string,
-    answer: PropTypes.string
-  })
+  question: PropTypes.string,
+  answer: PropTypes.string
 };
 
 export function CollapsableSection({ items, collapseAfter }) {

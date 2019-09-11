@@ -7,7 +7,7 @@ const WhatYouCanDoToPrepareMeta = (/* data */) => ({
   visualization: WhatYouCanDoToPrepareVisualization, // data, isLoading are passed to this as props
   additionalText: null,
   shareText: null,
-  tags: ["Disaster Resilience", "Portland", "Quiz"],
+  tags: ["Disaster Resilience", "Portland", "Oregon", "Quiz"],
   selector: null,
   analysis: null,
   metadata: null,

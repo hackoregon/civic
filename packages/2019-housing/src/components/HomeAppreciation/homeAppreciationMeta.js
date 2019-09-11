@@ -10,7 +10,7 @@ const HomeAppreciationMeta = (/* data */) => ({
   visualization: HomeAppreciationVisualization, // data, isLoading are passed to this as props
   additionalText: <p>ADDITIONAL TEXT: TBD</p>,
   shareText: "TODO: Add share text!",
-  tags: ["Housing", "Portland", "Map"],
+  tags: ["Housing", "Portland", "Oregon", "Map"],
   selector: null,
   analysis: (
     <Collapsable>
@@ -22,16 +22,8 @@ const HomeAppreciationMeta = (/* data */) => ({
       </Collapsable.Section>
     </Collapsable>
   ),
-  metadata: (
-    <Collapsable>
-      <Collapsable.Section>
-        <p>METADATA: TBD</p>
-      </Collapsable.Section>
-      <Collapsable.Section hidden>
-        <p>ADD DETAILS HERE</p>
-      </Collapsable.Section>
-    </Collapsable>
-  ),
+  metadata: null,
+  metadataQA: "hmda",
   resources: [
     {
       heading: "Organizations",
@@ -46,7 +38,7 @@ const HomeAppreciationMeta = (/* data */) => ({
     }
   ],
   // authors likely an array of keys in the future
-  authors: []
+  authors: "demo"
 });
 
 export default HomeAppreciationMeta;

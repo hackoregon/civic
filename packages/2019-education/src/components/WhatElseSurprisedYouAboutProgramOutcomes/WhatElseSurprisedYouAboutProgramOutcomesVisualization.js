@@ -20,14 +20,15 @@ const data = [
 
 const WhatElseSurprisedYouAboutProgramOutcomesVisualization = () => (
   <LineChart
-    title="Context Of Navigation And Performance"
-    subtitle="Annual RIT score improvement, 2015 cohort -- All Schools"
+    title="Student Academic Growth: Context of Navigation Support"
+    subtitle="Percentage RIT Score Gains, Participating Students, 2015-2018"
     xLabel="Year"
     yLabel="RIT Growth"
     data={data}
     dataSeries="type"
     xNumberFormatter={civicFormat.year}
     yNumberFormatter={civicFormat.percentage}
+    dataLabelFormatter={civicFormat.percentage}
     theme={DataCollaborativeVictoryTheme}
   />
 );

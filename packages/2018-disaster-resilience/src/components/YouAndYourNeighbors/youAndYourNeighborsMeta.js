@@ -27,10 +27,12 @@ const YouAndYourNeighborsMeta = (/* data */) => ({
   visualization: YouAndYourNeighborsVisualization, // data, isLoading are passed to this as props
   additionalText: null,
   shareText: null,
-  tags: ["Disaster Resilience", "Portland", "Map"],
+  tags: ["Disaster Resilience", "Portland", "Oregon", "Map"],
   selector: null,
   analysis: null,
   metadata: null,
+  metadataQA:
+    "earthquake_regional_impact_analysis_for_clackamas_multnomah_and_washington_counties_oregon",
   resources: [
     {
       heading: "Organizations",

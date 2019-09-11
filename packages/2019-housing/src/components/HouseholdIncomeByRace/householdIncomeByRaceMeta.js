@@ -25,7 +25,7 @@ const HouseholdIncomeByRaceMeta = (/* data */) => ({
   visualization: HouseholdIncomeByRaceVisualization, // data, isLoading are passed to this as props
   additionalText: <p>ADDITIONAL TEXT: TBD</p>,
   shareText: "TODO: Add share text!",
-  tags: ["Housing", "Race", "Chart", "Portland"],
+  tags: ["Housing", "Race", "Chart", "Portland", "Oregon"],
   selector: null,
   analysis: (
     <Collapsable>
@@ -37,16 +37,8 @@ const HouseholdIncomeByRaceMeta = (/* data */) => ({
       </Collapsable.Section>
     </Collapsable>
   ),
-  metadata: (
-    <Collapsable>
-      <Collapsable.Section>
-        <p>METADATA: TBD</p>
-      </Collapsable.Section>
-      <Collapsable.Section hidden>
-        <p>ADD DETAILS HERE</p>
-      </Collapsable.Section>
-    </Collapsable>
-  ),
+  metadata: null,
+  metadataQA: "median_household_income_by_race_1990_to_2017",
   resources: [
     {
       heading: "Organizations",
@@ -61,7 +53,7 @@ const HouseholdIncomeByRaceMeta = (/* data */) => ({
     }
   ],
   // authors likely an array of keys in the future
-  authors: []
+  authors: "demo"
 });
 
 export default HouseholdIncomeByRaceMeta;

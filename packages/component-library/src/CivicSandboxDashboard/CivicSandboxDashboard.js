@@ -13,8 +13,9 @@ import {
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import shortid from "shortid";
-import PieChart from "../PieChart/PieChart";
-import HorizontalBarChart from "../HorizontalBarChart/HorizontalBarChart";
+import LineChart from "../LineChart/LineChart";
+// import PieChart from "../PieChart/PieChart";
+// import HorizontalBarChart from "../HorizontalBarChart/HorizontalBarChart";
 import civicFormat from "../utils/civicFormat";
 import { ICONS } from "../styleConstants";
 
@@ -24,15 +25,16 @@ const container = css`
   left: 25px;
   display: flex;
   flex-direction: column;
-  width: 500px;
+  width: 575px;
   background: rgba(243, 242, 243, 0.9);
   color: rgb(85, 85, 85);
   border: 1px solid #ddd;
   border-radius: 2px;
   box-shadow: 5px 5px 15px -3px rgba(0, 0, 0, 0.2);
   @media (max-width: 900px) {
-    width: 92%;
-    left: 1%;
+    width: 90%;
+    bottom: 30px;
+    left: 8%;
   }
 `;
 
@@ -42,6 +44,9 @@ const dashboardOpen = css`
   overflow-x: hidden;
   opacity: 0.9;
   transition: height 750ms ease-out, opacity 1.5s ease-in;
+  @media (max-width: 500px) {
+    height: 265px;
+  }
 `;
 
 const dashboardClosed = css`
@@ -73,6 +78,7 @@ const toggleContainer = css`
 `;
 
 const toggleTitle = css`
+  font-size: 17px;
   flex: 3;
   margin auto 20px;
 `;
@@ -122,68 +128,83 @@ const iconActive = css`
 
 const viz = css`
   width: 90%;
-  margin: 2% 2% 2% 8%;
-  padding-bottom: 25px;
   overflow-y: hidden;
+  padding-left: 5%;
 `;
 
-const donutPercent = css`
-  position: absolute;
-  bottom: 35px;
-  left: 28%;
-  width: 50%;
-  margin: auto;
-  text-align: center;
-`;
+// const donutPercent = css`
+//   position: absolute;
+//   bottom: 35px;
+//   left: 28%;
+//   width: 50%;
+//   margin: auto;
+//   text-align: center;
+// `;
 
-const createTextViz = text => (
-  <div css={viz} key={shortid.generate()}>
-    <h2>{text.title}</h2>
-    <h3>{text.data.toLocaleString()}</h3>
-  </div>
-);
+// const createTextViz = text => (
+//   <div css={viz} key={shortid.generate()}>
+//     <h2>{text.title}</h2>
+//     <h3>{text.data.toLocaleString()}</h3>
+//   </div>
+// );
 
-const createDonutViz = donut => {
-  const [percentValue] = donut.data;
-  const salmon = "#EE495C";
-  const gray = "#a9a9a9";
+// const createDonutViz = donut => {
+//   const [percentValue] = donut.data;
+//   const salmon = "#EE495C";
+//   const gray = "#a9a9a9";
+//   return (
+//     <div css={viz} key={shortid.generate()}>
+//       <h2>{donut.title}</h2>
+//       <h2 css={donutPercent}>
+//         {percentValue.y < 1
+//           ? civicFormat.percentage(percentValue.y)
+//           : `${percentValue.y.toFixed(1)}%`}
+//       </h2>
+//       <PieChart
+//         data={donut.data}
+//         colors={[salmon, gray]}
+//         width={400}
+//         height={400}
+//         innerRadius={110}
+//         halfDoughnut
+//       />
+//     </div>
+//   );
+// };
+
+// const createBarsViz = bars => (
+//   <div css={viz} key={shortid.generate()}>
+//     <h2>{bars.title}</h2>
+//     <HorizontalBarChart
+//       minimalist={bars.minimalist}
+//       data={bars.data}
+//       sortOrder={bars.sortOrder}
+//       dataValue={bars.dataValue}
+//       dataLabel={bars.dataLabel}
+//       dataKeyLabel=""
+//       title=""
+//       subtitle=""
+//       xLabel=""
+//       yLabel=""
+//     />
+//   </div>
+// );
+
+const createLineViz = (data, title, xLabel, yLabel, xFormat, yFormat) => {
+  const yForm = yFormat === "percent" ? "percentage" : yFormat;
   return (
     <div css={viz} key={shortid.generate()}>
-      <h2>{donut.title}</h2>
-      <h2 css={donutPercent}>
-        {percentValue.y < 1
-          ? civicFormat.percentage(percentValue.y)
-          : `${percentValue.y.toFixed(1)}%`}
-      </h2>
-      <PieChart
-        data={donut.data}
-        colors={[salmon, gray]}
-        width={400}
-        height={400}
-        innerRadius={110}
-        halfDoughnut
+      <h3>{title}</h3>
+      <LineChart
+        data={data}
+        xLabel={xLabel}
+        yLabel={`${yLabel.slice(0, 1).toUpperCase()}${yLabel.slice(1)}`}
+        xNumberFormatter={x => civicFormat[xFormat](x)}
+        yNumberFormatter={y => civicFormat[yForm](y)}
       />
     </div>
   );
 };
-
-const createBarsViz = bars => (
-  <div css={viz} key={shortid.generate()}>
-    <h2>{bars.title}</h2>
-    <HorizontalBarChart
-      minimalist={bars.minimalist}
-      data={bars.data}
-      sortOrder={bars.sortOrder}
-      dataValue={bars.dataValue}
-      dataLabel={bars.dataLabel}
-      dataKeyLabel=""
-      title=""
-      subtitle=""
-      xLabel=""
-      yLabel=""
-    />
-  </div>
-);
 
 const placeholder = (
   <div css={viz}>
@@ -193,22 +214,60 @@ const placeholder = (
 
 const CivicDashboard = props => {
   const { data, children, isDashboardOpen, onClick } = props;
-
   const [display, setDisplay] = useState("visualizations");
 
-  const createVisualizations = data.map((object, index) => {
-    const vizType = object.visualizationType;
-    return vizType === "Text"
-      ? createTextViz(object, index)
-      : vizType === "PercentDonut"
-      ? createDonutViz(object, index)
-      : vizType === "ComparisonBar"
-      ? createBarsViz(object, index)
-      : null;
-  });
+  const createVisualizations =
+    data && data.feature && data.feature.object
+      ? Object.entries(data.feature.object.properties).filter(c => {
+          const colorFieldName = data.visualization.map.fieldName.color;
+          const a = c[0].match(/^[a-zA-Z]+/);
+          const b = colorFieldName.match(/^[a-zA-Z]+/);
+          return a[0] === b[0];
+        })
+      : [];
 
-  const [hasVisualizations] = createVisualizations;
-  const visualizations = hasVisualizations ? createVisualizations : placeholder;
+  const censusYears3 = [1990, 2000, 2010];
+  const censusYears4 = [1990, 2000, 2010, 2017];
+  const lineData =
+    createVisualizations.length === 3
+      ? createVisualizations.map((d, i) => {
+          const yFormatType = data.visualization.tooltip.primary.format;
+          return {
+            x: censusYears3[i],
+            y:
+              d[1] && yFormatType !== "percent"
+                ? d[1]
+                : d[1] && yFormatType === "percent"
+                ? d[1] / 100
+                : 0
+          };
+        })
+      : createVisualizations.length === 4
+      ? createVisualizations.map((d, i) => {
+          const yFormatType = data.visualization.tooltip.primary.format;
+          return {
+            x: censusYears4[i],
+            y:
+              d[1] && yFormatType !== "percent"
+                ? d[1]
+                : d[1] && yFormatType === "percent"
+                ? d[1] / 100
+                : 0
+          };
+        })
+      : null;
+
+  const visualizations =
+    createVisualizations.length > 0
+      ? createLineViz(
+          lineData,
+          data.displayName,
+          "Year",
+          data.visualization.tooltip.primary.format,
+          "year",
+          data.visualization.tooltip.primary.format
+        )
+      : placeholder;
 
   const civicWatermark = (
     <div css={watermarkContainer}>

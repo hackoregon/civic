@@ -10,7 +10,7 @@ const HomeLoanApprovalsMeta = (/* data */) => ({
   visualization: HomeLoanApprovalsVisualization, // data, isLoading are passed to this as props
   additionalText: <p>ADDITIONAL TEXT: TBD</p>,
   shareText: "TODO: Add share text!",
-  tags: ["Housing", "Portland"],
+  tags: ["Housing", "Portland", "Oregon"],
   selector: null,
   analysis: (
     <Collapsable>
@@ -22,16 +22,8 @@ const HomeLoanApprovalsMeta = (/* data */) => ({
       </Collapsable.Section>
     </Collapsable>
   ),
-  metadata: (
-    <Collapsable>
-      <Collapsable.Section>
-        <p>METADATA: TBD</p>
-      </Collapsable.Section>
-      <Collapsable.Section hidden>
-        <p>ADD DETAILS HERE</p>
-      </Collapsable.Section>
-    </Collapsable>
-  ),
+  metadata: null,
+  metadataQA: "hmda",
   resources: [
     {
       heading: "Organizations",
@@ -46,10 +38,7 @@ const HomeLoanApprovalsMeta = (/* data */) => ({
     }
   ],
   // authors likely an array of keys in the future
-  authors: [
-    "https://civicsoftwarefoundation.org/static/human-grid-test-4c90bfc3f316f5d4e104320cb98c43c8.png",
-    "https://civicsoftwarefoundation.org/static/human-grid-test2-ea1849501456af341647068243fc72bb.png"
-  ]
+  authors: []
 });
 
 export default HomeLoanApprovalsMeta;

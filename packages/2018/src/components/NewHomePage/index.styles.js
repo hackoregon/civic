@@ -5,7 +5,7 @@ const { primary, tertiary, action, subdued } = BrandColors;
 const introWidth = "800px";
 export const browserDefaultSize = 16; // Don't modify
 export const defaultFontSize = 22; // all em based off of this default value
-const headerHeight = 115;
+const headerHeight = 72;
 
 const textStandard = {
   color: primary.hex,

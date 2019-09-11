@@ -98,6 +98,7 @@ const TillamookCountyEarthquakeCasualtyEstimatesMeta = (/* data */) => ({
     </Collapsable>
   ),
   metadata: null,
+  metadataQA: "hazus_aebm_tillamook_building_earthquake_damage",
   resources: [
     {
       heading: "Resources",
@@ -132,7 +133,7 @@ const TillamookCountyEarthquakeCasualtyEstimatesMeta = (/* data */) => ({
     }
   ],
   // authors likely an array of keys in the future
-  authors: []
+  authors: "demo"
 });
 
 export default TillamookCountyEarthquakeCasualtyEstimatesMeta;
