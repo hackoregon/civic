@@ -33,13 +33,13 @@ const contentWrapper = props => css`
   max-width: ${props.greatestWidth}px;
   margin: 0 auto;
   display: grid;
-  padding: 17px 20px 8px;
+  padding: 8px 20px 0;
   align-items: center;
   grid-template-columns: 80px 1fr 645px;
 `;
 
 const logoStyle = css`
-  height: 90px !important;
+  height: 60px !important;
 `;
 
 const navStyle = css`
@@ -105,7 +105,7 @@ const caratStyle = css`
 
 const arrowUp = css`
   position: absolute;
-  top: 14px;
+  top: 15px;
   right: 20px;
   width: 0;
   height: 0;
