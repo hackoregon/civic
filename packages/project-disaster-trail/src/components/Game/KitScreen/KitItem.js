@@ -7,14 +7,14 @@ import { getPlayerKit } from "../../../state/kit";
 
 const ImagesContainer = css`
   position: relative;
-  width: 100px;
-  height: 100px;
+  width: 300px;
+  height: 300px;
 `;
 
 const KitItemStyle = css`
   display: block;
-  width: 100px;
-  height: 100px;
+  width: 300px;
+  height: 300px;
   position: absolute;
 `;
 

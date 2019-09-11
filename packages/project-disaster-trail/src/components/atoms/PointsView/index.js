@@ -7,10 +7,13 @@ import styled from "@emotion/styled";
 import { palette } from "../../../constants/style";
 
 const PointsContainer = styled.div`
+  display: grid;
+  align-items: center;
+  height: 160px;
   margin-top: 20px;
   padding: 20px;
   background: ${palette.white};
-  border-radius: 50px;
+  border-radius: 150px;
   text-align: center;
   /* Just guessing here as shadow is baked into raster in comp */
   box-shadow: 10px 10px 10px 0px rgba(0, 0, 0, 0.15);
@@ -18,7 +21,7 @@ const PointsContainer = styled.div`
   h2 {
     margin: 0;
     font-family: "Boogaloo", cursive;
-    font-size: 48px;
+    font-size: 10rem;
     color: ${palette.blue};
   }
 

@@ -42,9 +42,10 @@ const defaultState = {
   isActive: false,
   isComplete: false,
   isCorrect: false,
-  percent: 0,
   hasAnimated: false
 };
+
+const pressSuccessDuration = 1;
 
 export default class Orb extends PureComponent {
   constructor(props) {
@@ -73,19 +74,6 @@ export default class Orb extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // What properties have changed?
-    // useful for debugging
-    // for (const i in prevProps) {
-    //   if (this.props[i] !== prevProps[i]) {
-    //     console.log(
-    //       i,
-    //       prevProps[i],
-    //       this.props[i],
-    //       this.props[i] === prevProps[i]
-    //     );
-    //   }
-    // }
-
     const { isComplete } = this.state;
     const { addOrbScore, orbId, setOrbComplete } = this.props;
 
@@ -96,19 +84,16 @@ export default class Orb extends PureComponent {
   }
 
   incrementGauge = () => {
-    const timer = setInterval(() => {
-      const { isActive, percent } = this.state;
-      if (percent === 100) {
+    const timer = setTimeout(() => {
+      const { isActive } = this.state;
+      if (isActive) {
         this.setState({ isComplete: true });
-        clearInterval(timer);
-      } else if (percent < 100 && isActive) {
-        const update = percent + 20;
-        this.setState({ percent: update });
-      } else if (percent < 100 && !isActive) {
-        this.setState({ isActive: false, percent: 0 });
-        clearInterval(timer);
+        clearTimeout(timer);
+      } else {
+        this.setState({ isActive: false });
+        clearTimeout(timer);
       }
-    }, 200);
+    }, pressSuccessDuration * 1000);
   };
 
   handleOrbPress = () => {
@@ -130,7 +115,7 @@ export default class Orb extends PureComponent {
   };
 
   render() {
-    const { isActive, isComplete, percent } = this.state;
+    const { isActive, isComplete } = this.state;
     // eslint-disable-next-line no-unused-vars
     const { size, imageSVG, imgAlt } = this.props;
 
@@ -165,7 +150,11 @@ export default class Orb extends PureComponent {
         onTouchEnd={this.handleOrbRelease}
       >
         <div css={absoluteStyle}>
-          <RadialGauge percent={percent} isActive={isActive} size={size} />
+          <RadialGauge
+            isActive={isActive}
+            size={size}
+            duration={pressSuccessDuration}
+          />
         </div>
         <div
           css={css`

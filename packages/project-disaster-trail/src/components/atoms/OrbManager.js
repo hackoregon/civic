@@ -95,9 +95,7 @@ const OrbManager = ({
   const addOrbScore = useCallback(
     orbId => {
       const theOrb = _find(orbs, orb => orb.orbId === orbId);
-      if (theOrb.good) {
-        onOrbSelection(theOrb);
-      }
+      onOrbSelection(theOrb);
     },
     // update when orbs.length changes
     // if we udpate when orbs changes, the addOrbScore will continuously be recreated,

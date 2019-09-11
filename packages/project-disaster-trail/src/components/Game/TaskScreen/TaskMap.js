@@ -1,139 +1,84 @@
-import React from "react";
+/** @jsx jsx */
+import { css, jsx } from "@emotion/core";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
 
 import { BaseMap, IconMap } from "@hackoregon/component-library";
 
 import { getCompletedTasks } from "../../../state/tasks";
+import {
+  poiIconMapping,
+  poiIconZoomScale,
+  getPosition,
+  asGeoJSON,
+  initialLon,
+  initialLat
+} from "./mapUtils";
 
-const [initialLon, initialLat] = [-122.644588, 45.508415];
+const screenLayout = css`
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  background: beige;
+`;
 
-const getPosition = f =>
-  f.geometry ? f.geometry.coordinates : [initialLon, initialLat];
-
-const poiIconMapping = {
-  cold: {
-    x: 0,
-    y: 0,
-    width: 445 + 2,
-    height: 445
-  },
-  dust: {
-    x: 445 + 4,
-    y: 0,
-    width: 445,
-    height: 445
-  },
-  fire: {
-    x: 890 + 4,
-    y: 0,
-    width: 447,
-    height: 445
-  },
-  hole: {
-    x: 0,
-    y: 445,
-    width: 445 + 2,
-    height: 445
-  },
-  hunger: {
-    x: 445 + 2,
-    y: 445,
-    width: 445 + 2,
-    height: 445
-  },
-  injury: {
-    x: 890 + 4,
-    y: 445,
-    width: 445,
-    height: 445
-  },
-  "lost-pet": {
-    x: 0,
-    y: 890,
-    width: 445 + 2,
-    height: 445
-  },
-  thirst: {
-    x: 445 + 4,
-    y: 890,
-    width: 445,
-    height: 445
-  },
-  weather: {
-    x: 890 + 4,
-    y: 890,
-    width: 445 + 2,
-    height: 445
-  }
-};
-
-const poiIconZoomScale = zoom => {
-  const sizes = [[0, 1], [7.5, 2], [8.5, 4], [9.5, 6], [10.5, 8], [11.5, 10]];
-
-  let size = 0;
-  for (let i = 0; i < sizes.length; i += 1) {
-    if (sizes[i][0] > zoom) break;
-    [, size] = sizes[i];
-  }
-  return size;
-};
-
-const asGeoJSON = (tasks, activeTask, completedTasks) =>
-  tasks.reduce((features, task) => {
-    const props = { ...task, isCompleted: completedTasks.includes(task.type) };
-    if (task.type === activeTask.type) {
-      props.isActive = true;
-    }
-    delete props.locations;
-    const points = task.locations.map(location => ({
-      geometry: {
-        coordinates: location
-      },
-      properties: props
-    }));
-    return features.concat(points);
-  }, []);
-
-const TaskMap = ({ activeTask, completedTasks, tasks }) => {
+const TaskMap = ({ activeTask, completedTasks, tasks, taskVotes }) => {
   // TODO: Change lon / lat for task
   // const lon = activeTask ? activeTask.locations[0][0] : initialLon;
   // const lat = activeTask ? activeTask.locations[0][1] : initialLat;
   const lon = initialLon;
   const lat = initialLat;
 
-  const data = asGeoJSON(tasks, activeTask, completedTasks);
+  const selectedTask = activeTask || tasks[0];
+  const data = asGeoJSON(tasks, selectedTask, completedTasks);
+
+  // Would be cool to size these relative to each other in the future
+  const sizeForVote = dataThing => {
+    const mapPropType =
+      dataThing && dataThing.properties && dataThing.properties.type;
+
+    const votesForTask = taskVotes[mapPropType] || 0;
+    const mostVotesForAnyTask = taskVotes.mostVotesTotal || 1;
+    const baseSize = 18;
+
+    return baseSize + 2 * (1.5 * votesForTask - mostVotesForAnyTask);
+  };
 
   return (
-    <BaseMap
-      initialZoom={15}
-      initialLongitude={lon}
-      initialLatitude={lat}
-      initialPitch={60}
-      navigation={false}
-      useContainerHeight
-      mapGLOptions={{
-        scrollZoom: false,
-        dragPan: false,
-        dragRotate: false,
-        doubleClickZoom: false,
-        touchZoom: false,
-        touchRotate: false,
-        keyboard: false
-      }}
-      animate
-      civicMapStyle="disaster-game"
-    >
-      <IconMap
-        data={data}
-        getPosition={getPosition}
-        iconAtlas="https://i.imgur.com/ZKYqCqW.png"
-        iconMapping={poiIconMapping}
-        iconSizeScale={poiIconZoomScale}
-        getIcon={d => d.properties.type}
-        getSize={() => 12}
-      />
-    </BaseMap>
+    <div css={screenLayout}>
+      <BaseMap
+        initialZoom={15}
+        initialLongitude={lon}
+        initialLatitude={lat}
+        initialPitch={60}
+        navigation={false}
+        useContainerHeight
+        mapGLOptions={{
+          scrollZoom: false,
+          dragPan: false,
+          dragRotate: false,
+          doubleClickZoom: false,
+          touchZoom: false,
+          touchRotate: false,
+          keyboard: false
+        }}
+        animate
+        civicMapStyle="disaster-game"
+      >
+        <IconMap
+          data={data}
+          getPosition={getPosition}
+          iconAtlas="https://i.imgur.com/ZKYqCqW.png"
+          iconMapping={poiIconMapping}
+          iconSizeScale={poiIconZoomScale}
+          getIcon={d => d.properties.type}
+          getSize={sizeForVote}
+        />
+      </BaseMap>
+    </div>
   );
 };
 
@@ -143,7 +88,12 @@ TaskMap.propTypes = {
     locations: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number))
   }),
   completedTasks: PropTypes.arrayOf(PropTypes.string),
-  tasks: PropTypes.arrayOf(PropTypes.object)
+  tasks: PropTypes.arrayOf(PropTypes.object),
+  taskVotes: PropTypes.shape({
+    mostVotesId: PropTypes.string,
+    mostVotesTotal: PropTypes.number,
+    totalVotes: PropTypes.number
+  })
 };
 
 const mapStateToProps = state => ({
