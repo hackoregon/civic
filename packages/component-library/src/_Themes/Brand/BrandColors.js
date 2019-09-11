@@ -42,6 +42,11 @@ export default {
     rgba: "rgba(114,99,113,1)",
     hex: "#726371"
   },
+  heroPurple: {
+    rgb: "rgb(70,34,99)",
+    rgba: "rgba(70,34,99,1)",
+    hex: "#462263"
+  },
   error: {
     hex: "#DE3F8B",
     rgb: "rgb(222,63,139)",

@@ -199,18 +199,30 @@ const FullNav = props => {
                           style={optionText}
                           dense
                         >
-                          <a css={menuLink} href="#work-with-us">
+                          <Link
+                            to={{
+                              pathname: "/",
+                              hash: "#work-with-us"
+                            }}
+                            css={menuLink}
+                          >
                             Work With Us
-                          </a>
+                          </Link>
                         </MenuItem>
                         <MenuItem
                           onClick={handleJoinClose}
                           style={optionText}
                           dense
                         >
-                          <a css={menuLink} href="#become-a-contributor">
+                          <Link
+                            to={{
+                              pathname: "/",
+                              hash: "#become-a-contributor"
+                            }}
+                            css={menuLink}
+                          >
                             Become a Contributor
-                          </a>
+                          </Link>
                         </MenuItem>
                       </MenuList>
                     </ClickAwayListener>
@@ -259,18 +271,30 @@ const FullNav = props => {
                           style={optionText}
                           dense
                         >
-                          <a css={menuLink} href="#civic-platform">
+                          <Link
+                            to={{
+                              pathname: "/",
+                              hash: "#civic-platform"
+                            }}
+                            css={menuLink}
+                          >
                             Civic Platform
-                          </a>
+                          </Link>
                         </MenuItem>
                         <MenuItem
                           onClick={handleAboutClose}
                           style={optionText}
                           dense
                         >
-                          <a css={menuLink} href="#civic-software-foundation">
+                          <Link
+                            to={{
+                              pathname: "/",
+                              hash: "#civic-software-foundation"
+                            }}
+                            css={menuLink}
+                          >
                             Civic Software Foundation
-                          </a>
+                          </Link>
                         </MenuItem>
                       </MenuList>
                     </ClickAwayListener>
@@ -280,9 +304,15 @@ const FullNav = props => {
             </Popper>
           </li>
           <li css={listStyle}>
-            <a css={linkStyle} href="#contact-us">
+            <Link
+              to={{
+                pathname: "/",
+                hash: "#contact-us"
+              }}
+              css={linkStyle}
+            >
               CONTACT
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>

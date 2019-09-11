@@ -21,7 +21,6 @@ const housingExample = () => (
     teamTitle="Transportation"
     heroTitle="Housing"
     heroSubtitle="A look into the housing rental income disparity."
-    mainProjectColor="#7CD"
   >
     <section style={{ margin: "80px 0" }} id="chart-1">
       <p
@@ -94,7 +93,6 @@ const campaignFinanceExample = () => (
   <PageLayout
     heroTitle="Campaign Finance"
     heroSubtitle="A look into how money is raised and distributed in Portland's political campaigns."
-    mainProjectColor="#b2df8a"
   >
     <section style={{ margin: "80px 0" }} id="pullquote-1">
       <blockquote
