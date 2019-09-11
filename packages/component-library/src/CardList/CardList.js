@@ -279,7 +279,6 @@ const CardList = ({ CardRegistry, tagsList = tagsListExample }) => {
             </Hidden>
           </nav>
           <main className={classes.content}>
-            <h1>Cards Under Construction</h1>
             <section className={classes.filtersButton}>
               <Button
                 aria-label="open filters list"

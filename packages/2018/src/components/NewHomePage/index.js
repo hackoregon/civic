@@ -9,6 +9,8 @@ import {
   HeaderNew as Header,
   FooterNew as Footer
 } from "@hackoregon/component-library";
+import { Link } from "react-router";
+
 import PlatformExplorer from "./PlatformExplorer";
 import indexStyle from "./index.styles";
 // Placeholders
@@ -87,7 +89,14 @@ const HomePage = () => {
             data more accessible, enabling creative applications and analysis.
           </p>
           <div className="section-button-container">
-            <Button margin="0 0 0 0">{`SEE WHAT'S POSSIBLE >`}</Button>
+            <Link
+              css={css`
+                text-decoration: none;
+              `}
+              to="/cards"
+            >
+              <Button margin="0 0 0 0">{`SEE WHAT'S POSSIBLE >`}</Button>
+            </Link>
           </div>
         </div>
 
@@ -120,7 +129,16 @@ const HomePage = () => {
             We’re building the teams and systems to make it happen.
           </p>
           <div className="section-button-container">
-            <Button bkgndColor={BrandColors.subdued.rgba}>WORK WITH US</Button>
+            <Link
+              css={css`
+                text-decoration: none;
+              `}
+              to="https://ven386248.typeform.com/to/WVYtVF"
+            >
+              <Button bkgndColor={BrandColors.subdued.rgba}>
+                WORK WITH US
+              </Button>
+            </Link>
           </div>
           <img
             className="placeholder-section-image"
@@ -151,16 +169,31 @@ const HomePage = () => {
             have a match for a project that fits your skills and interests.
           </p>
           <div className="section-button-container">
-            <Button
-              display="inline"
-              margin="0 10px 0 0"
-              bkgndColor={BrandColors.subdued.rgba}
+            <Link
+              css={css`
+                text-decoration: none;
+              `}
+              to="https://ven386248.typeform.com/to/rEhanV"
             >
-              APPLY NOW
-            </Button>
-            <Button display="inline" bkgndColor={BrandColors.subdued.rgba}>
-              LEARN MORE
-            </Button>
+              <Button
+                display="inline"
+                margin="0 10px 0 0"
+                bkgndColor={BrandColors.subdued.rgba}
+              >
+                APPLY NOW
+              </Button>
+            </Link>
+
+            <Link
+              css={css`
+                text-decoration: none;
+              `}
+              to="https://civicsoftwarefoundation.org/"
+            >
+              <Button display="inline" bkgndColor={BrandColors.subdued.rgba}>
+                LEARN MORE
+              </Button>
+            </Link>
           </div>
           <img
             className="placeholder-section-image"
@@ -198,9 +231,19 @@ const HomePage = () => {
             tech, and civic willpower together to create a force for public
             good.
           </p>
-          <Button margin="40px 0 50px 0" bkgndColor={BrandColors.subdued.rgba}>
-            VISIT THE CIVIC SOFTWARE FOUNDATION
-          </Button>
+          <Link
+            css={css`
+              text-decoration: none;
+            `}
+            to="https://civicsoftwarefoundation.org/"
+          >
+            <Button
+              margin="40px 0 50px 0"
+              bkgndColor={BrandColors.subdued.rgba}
+            >
+              VISIT THE CIVIC SOFTWARE FOUNDATION
+            </Button>
+          </Link>
           {/* <p className="quote-text">
             &quot;When <span className="big-text">political will</span> meets{" "}
             <span className="big-text">public imagination</span> the
