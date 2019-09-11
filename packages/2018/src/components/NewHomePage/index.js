@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/media-has-caption */
 /** @jsx jsx */
 import { css, jsx, Global } from "@emotion/core";
 import emotionReset from "emotion-reset";
@@ -11,9 +12,9 @@ import {
 import PlatformExplorer from "./PlatformExplorer";
 import indexStyle from "./index.styles";
 // Placeholders
-import placeholderIntroImg from "../../assets/new-home-page-1.png";
 import placeholderWorkImg from "../../assets/new-home-page-2.png";
 import placeholderContributorsImg from "../../assets/new-home-page-3.png";
+import test from "../../assets/test.mp4";
 // import placeholderCivicImg from "../../assets/new-home-page-5.png";
 
 const greatestWidth = 1200;
@@ -74,11 +75,9 @@ const HomePage = () => {
           A system for public data, built on public collaboration
         </p>
         <div className="intro-wrapper">
-          <img
-            className="placeholder-intro-image"
-            src={placeholderIntroImg}
-            alt="placeholder"
-          />
+          <video className="placeholder-intro-image" autoPlay muted loop>
+            <source type="video/mp4" src={test} />
+          </video>
           <p className="intro-text">
             CIVIC Platform is a technology environment that makes institutional
             data more accessible, enabling creative applications and analysis.
