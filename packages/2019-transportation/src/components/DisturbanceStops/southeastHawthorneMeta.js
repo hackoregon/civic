@@ -1,12 +1,12 @@
 import React from "react";
 import { Collapsable } from "@hackoregon/component-library";
 
-import NorthwestEverettVisualization from "./NorthwestEverettVisualization";
+import SoutheastHawthorneVisualization from "./SoutheastHawthorneVisualization";
 import ComparisonMapAdditionalText from "../ComparisonMapAdditionalText";
 
-const NorthwestEverettMeta = (/* data */) => ({
-  title: "Northwest Everett",
-  slug: "northwest-everett",
+const SoutheastHawthorneMeta = (/* data */) => ({
+  title: "Hawthorne Bridge - Westbound Approach",
+  slug: "southeast-hawthorne",
   introText: (
     <p>
       Modest changes to public transit infrastructure can lead to significant
@@ -15,7 +15,7 @@ const NorthwestEverettMeta = (/* data */) => ({
       better understand the impacts of these changes on service performance.
     </p>
   ),
-  visualization: NorthwestEverettVisualization, // data, isLoading are passed to this as props
+  visualization: SoutheastHawthorneVisualization, // data, isLoading are passed to this as props
   additionalText: <ComparisonMapAdditionalText />,
   shareText: "",
   tags: ["Transportation", "Portland", "Map", "Chart"],
@@ -31,8 +31,16 @@ const NorthwestEverettMeta = (/* data */) => ({
       </Collapsable.Section>
     </Collapsable>
   ),
-  metadata: null,
-  metadataQA: "toads",
+  metadata: (
+    <Collapsable>
+      <Collapsable.Section>
+        <p />
+      </Collapsable.Section>
+      <Collapsable.Section hidden>
+        <p />
+      </Collapsable.Section>
+    </Collapsable>
+  ),
   resources: [
     {
       heading: "Organizations",
@@ -47,7 +55,7 @@ const NorthwestEverettMeta = (/* data */) => ({
     }
   ],
   // authors likely an array of keys in the future
-  authors: "demo"
+  authors: []
 });
 
-export default NorthwestEverettMeta;
+export default SoutheastHawthorneMeta;

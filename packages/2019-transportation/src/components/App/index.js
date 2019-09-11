@@ -49,9 +49,26 @@ const App = () => (
         <SystemWideSummary Layout={CivicCardLayoutClassic} />
       </section>
 
+      <section css={sectionMarginMedium}>
+        <MorningRush Layout={CivicCardLayoutClassic} />
+      </section>
+
+      <section css={sectionMarginMedium}>
+        <DisturbanceStops Layout={CivicCardLayoutClassic} />
+      </section>
+
+      <section css={sectionMarginMedium}>
+        <SouthwestMadison Layout={CivicCardLayoutClassic} />
+      </section>
+
+      <section css={sectionMarginMedium}>
+        <NorthwestEverett Layout={CivicCardLayoutClassic} />
+      </section>
+
       <section css={[sectionBodyHeading, sectionMaxWidthSmall]}>
         <h2>Ullamcorper dignissim cras tincidunt?</h2>
       </section>
+
       <section css={[sectionMarginSmall, sectionMaxWidthSmall]}>
         <p css={paragraphStyle}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -85,18 +102,6 @@ const App = () => (
           tellus rutrum. Sed turpis tincidunt id aliquet risus feugiat. Aliquet
           enim tortor at auctor.
         </p>
-      </section>
-      <section css={sectionMarginMedium}>
-        <DisturbanceStops Layout={CivicCardLayoutClassic} />
-      </section>
-      <section css={sectionMarginMedium}>
-        <SouthwestMadison Layout={CivicCardLayoutClassic} />
-      </section>
-      <section css={sectionMarginMedium}>
-        <NorthwestEverett Layout={CivicCardLayoutClassic} />
-      </section>
-      <section css={sectionMarginMedium}>
-        <MorningRush Layout={CivicCardLayoutClassic} />
       </section>
     </PageLayout>
   </Fragment>

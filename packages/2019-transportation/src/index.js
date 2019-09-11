@@ -27,7 +27,7 @@ const CardRegistry = [
     component: SouthwestMadison
   },
   {
-    slug: "disturbance-stops",
+    slug: "southeast-hawthorne",
     component: DisturbanceStops
   }
 ];
