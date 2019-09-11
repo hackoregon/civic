@@ -55,15 +55,13 @@ const MorningRushVisualization = ({ data }) => {
     <>
       <BaseMap>
         <ScatterPlotMap
-          data={data.busAmRushSummary.value.results.features
-            .filter(feature => feature.properties.samples > 100)
-            .map(feature => {
-              const featureWithTotalOnOffs = feature;
-              featureWithTotalOnOffs.properties.total_ons_offs = totalOnsOffsAccessor(
-                feature
-              );
-              return featureWithTotalOnOffs;
-            })}
+          data={data.busAmRushSummary.value.results.features.map(feature => {
+            const featureWithTotalOnOffs = feature;
+            featureWithTotalOnOffs.properties.total_ons_offs = totalOnsOffsAccessor(
+              feature
+            );
+            return featureWithTotalOnOffs;
+          })}
           getFillColor={feature => {
             const medianSecondsLate = secondsLateAccessor(feature);
             const scale = scaleLinear()
