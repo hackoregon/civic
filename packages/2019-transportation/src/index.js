@@ -7,8 +7,13 @@ import DisturbanceStops from "./components/DisturbanceStops";
 import SouthwestMadison from "./components/SouthwestMadison";
 import NorthwestEverett from "./components/NorthwestEverett";
 import MorningRush from "./components/MorningRush";
+import SystemWideSummary from "./components/SystemWideSummary";
 
 const CardRegistry = [
+  {
+    slug: "system-wide-summary",
+    component: SystemWideSummary
+  },
   {
     slug: "morning-rush",
     component: MorningRush
