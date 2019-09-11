@@ -3,9 +3,9 @@ import { Collapsable } from "@hackoregon/component-library";
 
 import SoutheastHawthorneVisualization from "./SoutheastHawthorneVisualization";
 
-const DisturbanceStopsMeta = (/* data */) => ({
+const SoutheastHawthorneMeta = (/* data */) => ({
   title: "Southeast Hawthorne",
-  slug: "disturbance-stops",
+  slug: "southeast-hawthorne",
   introText: (
     <p>
       This template card loads data from an API using Reduxful, and can be used
@@ -128,4 +128,4 @@ const DisturbanceStopsMeta = (/* data */) => ({
   authors: []
 });
 
-export default DisturbanceStopsMeta;
+export default SoutheastHawthorneMeta;

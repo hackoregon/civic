@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { resourceShape } from "reduxful/react-addons";
 import { CivicCard } from "@hackoregon/component-library";
 
-import disturbanceStopsMeta from "./disturbanceStopsMeta";
+import disturbanceStopsMeta from "./southeastHawthorneMeta";
 import api from "../../state/disturbance-stops/api";
 
 const CENTER_POINT = {
