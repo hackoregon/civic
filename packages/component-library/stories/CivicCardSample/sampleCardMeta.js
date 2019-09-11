@@ -49,6 +49,7 @@ const sampleCardMeta = (/* data */) => ({
     "Gentrification",
     "Transit",
     "Portland",
+    "Oregon",
     "Demo"
   ],
   selector: null, // optional, to be added later

@@ -25,7 +25,7 @@ const HouseholdIncomeByRaceMeta = (/* data */) => ({
   visualization: HouseholdIncomeByRaceVisualization, // data, isLoading are passed to this as props
   additionalText: <p>ADDITIONAL TEXT: TBD</p>,
   shareText: "TODO: Add share text!",
-  tags: ["Housing", "Race", "Chart", "Portland"],
+  tags: ["Housing", "Race", "Chart", "Portland", "Oregon"],
   selector: null,
   analysis: (
     <Collapsable>

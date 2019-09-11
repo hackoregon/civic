@@ -108,7 +108,7 @@ const useStyles = makeStyles(theme => ({
 
 const tagsListExample = {
   topics: ["Transportation", "Disaster Resilience", "Housing"],
-  locations: ["Portland", "Nationwide", "Your City"],
+  locations: ["Portland", "Oregon", "Nationwide", "Your City"],
   visualizations: ["Bar Chart", "Cloropleth Map", "Scatterplot"]
 };
 

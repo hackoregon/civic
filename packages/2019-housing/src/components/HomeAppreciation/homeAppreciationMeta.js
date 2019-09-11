@@ -10,7 +10,7 @@ const HomeAppreciationMeta = (/* data */) => ({
   visualization: HomeAppreciationVisualization, // data, isLoading are passed to this as props
   additionalText: <p>ADDITIONAL TEXT: TBD</p>,
   shareText: "TODO: Add share text!",
-  tags: ["Housing", "Portland", "Map"],
+  tags: ["Housing", "Portland", "Oregon", "Map"],
   selector: null,
   analysis: (
     <Collapsable>

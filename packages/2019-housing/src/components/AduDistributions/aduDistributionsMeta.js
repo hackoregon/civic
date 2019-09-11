@@ -10,7 +10,7 @@ const AduDistributionsMeta = (/* data */) => ({
   visualization: AduDistributionsVisualization, // data, isLoading are passed to this as props
   additionalText: <p>ADDITIONAL TEXT: TBD</p>,
   shareText: "TODO: Add share text!",
-  tags: ["Housing", "Portland", "Chart", "Map"],
+  tags: ["Housing", "Portland", "Oregon", "Chart", "Map"],
   selector: null,
   analysis: (
     <Collapsable>
