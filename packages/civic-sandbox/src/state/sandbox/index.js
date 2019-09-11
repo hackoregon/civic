@@ -102,23 +102,11 @@ const reducer = (state = INITIAL_STATE, action) => {
         slidesError: null
       };
     case SLIDES_SUCCESS: {
-      console.log("a-SLIDES_SUCCESS");
-      // console.log("a-SLIDES_SUCCESS-state.slidesData:", state.slidesData);
-      // console.log("a-SLIDES_SUCCESS-payload:", action.payload);
       return {
         ...state,
         slidesPending: false,
         slidesError: null,
         slidesSuccess: true,
-        // slidesData: state.slidesData.length
-        //   ? [
-        //       ...state.slidesData.map(d => {
-        //         return d.displayName === action.payload[0].displayName
-        //           ? action.payload[0]
-        //           : d;
-        //       })
-        //     ]
-        //   : [...state.slidesData, ...action.payload]
         slidesData: [...action.payload]
       };
     }
