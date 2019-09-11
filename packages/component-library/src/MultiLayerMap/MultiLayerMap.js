@@ -10,7 +10,14 @@ import MultiSmallPolygonMap from "./MultiSmallPolygonMap";
 import MultiChoroplethMap from "./MultiChoroplethMap";
 
 const MultiLayerMap = props => {
-  const { viewport, mapLayers, children, onHoverSlide } = props;
+  const {
+    viewport,
+    mapLayers,
+    children,
+    onHoverSlide,
+    onLayerClick,
+    selectedFoundationDatum
+  } = props;
 
   const renderMaps = mapLayers.map((layerData, index) => {
     const { mapType } = layerData;
@@ -49,7 +56,9 @@ const MultiLayerMap = props => {
       ? MultiChoroplethMap({
           ...layerData,
           index,
-          onHoverSlide
+          onHoverSlide,
+          onLayerClick,
+          selectedFoundationDatum
         })
       : null;
   });
@@ -70,8 +79,9 @@ MultiLayerMap.propTypes = {
   viewport: shape({}),
   mapLayers: arrayOf(shape({})).isRequired,
   onHoverSlide: func,
-  onClick: func,
-  children: node
+  onLayerClick: func,
+  children: node,
+  selectedFoundationDatum: shape({})
 };
 
 MultiLayerMap.defaultProps = {};

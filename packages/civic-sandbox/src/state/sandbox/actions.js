@@ -93,10 +93,13 @@ export const fetchSlideByDate = (slide, date, type) =>
     failure: SlideFailure
   });
 
-export const setSelectedFoundationDatum = (feature = {}) => ({
-  type: SET_FOUNDATION_DATUM,
-  feature
-});
+export const setSelectedFoundationDatum = (feature = {}, index) => {
+  return {
+    type: SET_FOUNDATION_DATUM,
+    feature,
+    index
+  };
+};
 
 export const setSelectedSlideDatum = (feature = {}, index) => {
   return {

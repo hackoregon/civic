@@ -127,7 +127,7 @@ const Sandbox = ({
         >
           <CivicSandboxMap
             mapLayers={layerData}
-            onClick={onFoundationClick}
+            onLayerClick={onFoundationClick}
             onHoverSlide={onSlideHover}
             selectedFoundationDatum={selectedFoundationDatum}
           >

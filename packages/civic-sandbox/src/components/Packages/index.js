@@ -4,13 +4,17 @@ import { connect } from "react-redux";
 import { css } from "emotion";
 import { bool, func, shape } from "prop-types";
 
-import { PackageSelectorBox } from "@hackoregon/component-library";
+import {
+  PackageSelectorBox,
+  CivicSandboxDashboard
+} from "@hackoregon/component-library";
 import SandboxComponent from "../Sandbox";
 import { fetchSandbox, setPackage } from "../../state/sandbox/actions";
 import {
   isSandboxLoading,
   getSandboxData,
-  getSandboxError
+  getSandboxError,
+  getSelectedFoundationDatum
 } from "../../state/sandbox/selectors";
 
 const error = css`
@@ -40,6 +44,29 @@ export class Packages extends React.Component {
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({ mapIsOpen: true });
     }
+
+    const { selectedFoundationDatum: previousSelectedFoundation } = prevProps;
+    const { selectedFoundationDatum: currentSelectedFoundation } = this.props;
+
+    const previousID =
+      previousSelectedFoundation &&
+      previousSelectedFoundation.feature &&
+      previousSelectedFoundation.feature.object
+        ? previousSelectedFoundation.feature.object.id
+        : null;
+    const currentID =
+      currentSelectedFoundation &&
+      currentSelectedFoundation.feature &&
+      currentSelectedFoundation.feature.object
+        ? currentSelectedFoundation.feature.object.id
+        : null;
+
+    if (previousID !== currentID) {
+      this.toggleDashboardOpen();
+    }
+    if (previousID !== null && currentID === null) {
+      this.toggleDashboardClose();
+    }
   }
 
   closeMap = () => {
@@ -67,9 +94,9 @@ export class Packages extends React.Component {
   };
 
   render() {
-    const { isError, sandbox } = this.props;
+    const { isError, sandbox, selectedFoundationDatum } = this.props;
 
-    const { mapIsOpen } = this.state;
+    const { mapIsOpen, dashboardIsOpen } = this.state;
 
     const packages = sandbox.packages
       ? sandbox.packages.map(p => ({
@@ -98,6 +125,25 @@ export class Packages extends React.Component {
           <div>
             <section style={{ position: "relative" }}>
               <SandboxComponent />
+              <div
+                className={css(`
+                  position: absolute;
+                  bottom: 2.5%;
+                  left: 2.5%;
+                  width: 95%;
+                  @media(max-width: 600px) {
+                    position: absolute;
+                    bottom: 1%;
+                    left: 0;
+                  }
+              `)}
+              >
+                <CivicSandboxDashboard
+                  data={selectedFoundationDatum}
+                  onClick={this.toggleDashboard}
+                  isDashboardOpen={dashboardIsOpen}
+                />
+              </div>
             </section>
             <p>
               {/* <Button onClick={this.closeMap}>
@@ -149,7 +195,8 @@ export default connect(
   state => ({
     isLoading: isSandboxLoading(state),
     isError: getSandboxError(state),
-    sandbox: getSandboxData(state)
+    sandbox: getSandboxData(state),
+    selectedFoundationDatum: getSelectedFoundationDatum(state)
   }),
   dispatch => ({
     fetchSandbox() {
@@ -166,5 +213,6 @@ Packages.propTypes = {
   fetchSandbox: func,
   isLoading: bool,
   setPackage: func,
-  isError: bool
+  isError: bool,
+  selectedFoundationDatum: shape({})
 };
