@@ -19,6 +19,7 @@ import { ThemeProvider } from "@material-ui/styles";
 
 import Header from "../Header/Header";
 import BrandColors from "../_Themes/Brand/BrandColors";
+import SandboxCard from "./SandboxCard";
 
 import {
   Checkbox,
@@ -289,6 +290,9 @@ const CardList = ({ CardRegistry, tagsList = tagsListExample }) => {
             </section>
             {filteredEntries.length > 0 ? (
               <ul className={classes.entriesList}>
+                <li key="sandbox" className={classes.entry}>
+                  <SandboxCard />
+                </li>
                 {filteredEntries.map(entry => (
                   <li key={shortid.generate()} className={classes.entry}>
                     {
@@ -302,6 +306,7 @@ const CardList = ({ CardRegistry, tagsList = tagsListExample }) => {
               </ul>
             ) : (
               <div css={emptyState}>
+                <SandboxCard />
                 <p>
                   {`We haven't yet made any cards matching your selection.`}
                   <br />
