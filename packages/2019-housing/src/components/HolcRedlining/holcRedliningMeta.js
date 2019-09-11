@@ -33,16 +33,7 @@ const HolcRedliningMeta = (/* data */) => ({
       </Collapsable.Section>
     </Collapsable>
   ),
-  metadata: (
-    <Collapsable>
-      <Collapsable.Section>
-        <p>METADATA: TBD</p>
-      </Collapsable.Section>
-      <Collapsable.Section hidden>
-        <p>ADD DETAILS HERE</p>
-      </Collapsable.Section>
-    </Collapsable>
-  ),
+  metadata: null, // mapping_inequality_redlining_in_new_deal_america
   resources: [
     {
       heading: "Organizations",

@@ -22,16 +22,7 @@ const AduDistributionsMeta = (/* data */) => ({
       </Collapsable.Section>
     </Collapsable>
   ),
-  metadata: (
-    <Collapsable>
-      <Collapsable.Section>
-        <p>METADATA: TBD</p>
-      </Collapsable.Section>
-      <Collapsable.Section hidden>
-        <p>ADD DETAILS HERE</p>
-      </Collapsable.Section>
-    </Collapsable>
-  ),
+  metadata: null, // no metadata
   resources: [
     {
       heading: "Organizations",
