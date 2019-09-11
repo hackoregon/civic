@@ -1,7 +1,9 @@
-import React, { useState, Fragment } from "react";
+/** @jsx jsx */
+import { css, jsx } from "@emotion/core";
+import { useState, Fragment } from "react";
 import PropTypes from "prop-types";
-
 import shortid from "shortid";
+import { Link } from "react-router";
 
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -14,7 +16,9 @@ import Hidden from "@material-ui/core/Hidden";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
+
 import Header from "../Header/Header";
+import BrandColors from "../_Themes/Brand/BrandColors";
 
 import {
   Checkbox,
@@ -22,6 +26,18 @@ import {
   MaterialTheme,
   Button
 } from "../index";
+
+const emptyState = css`
+  display: grid;
+  justify-content: center;
+  font-size: 1.2rem;
+
+  > p {
+    > a {
+      color: ${BrandColors.action.hex};
+    }
+  }
+`;
 
 const drawerWidth = 240;
 const headerHeight = 72;
@@ -130,9 +146,9 @@ const CardList = ({ CardRegistry, tagsList = tagsListExample }) => {
 
   const [showAllStories, setShowAllStories] = useState(true);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [openTopic, setOpenTopic] = React.useState(true);
-  const [openLocation, setOpenLocation] = React.useState(false);
-  const [openVisualization, setOpenVisualization] = React.useState(false);
+  const [openTopic, setOpenTopic] = useState(true);
+  const [openLocation, setOpenLocation] = useState(false);
+  const [openVisualization, setOpenVisualization] = useState(false);
   const theme = useTheme();
   const [activeTags, setActiveTags] = useState(allTagsFalse);
 
@@ -175,7 +191,7 @@ const CardList = ({ CardRegistry, tagsList = tagsListExample }) => {
         className={classes.filtersList}
       >
         {Object.keys(tagsList).map(category => (
-          <>
+          <Fragment>
             <ListItem button onClick={categoryHandlers[`${category}Handler`]}>
               <ListItemText
                 className={classes.categoryListText}
@@ -206,7 +222,7 @@ const CardList = ({ CardRegistry, tagsList = tagsListExample }) => {
                 ))}
               </List>
             </Collapse>
-          </>
+          </Fragment>
         ))}
       </List>
     </div>
@@ -221,6 +237,10 @@ const CardList = ({ CardRegistry, tagsList = tagsListExample }) => {
     }
     return false;
   };
+
+  const filteredEntries = entries.filter(entry =>
+    filterCardsBasedOnActiveTags(entry.component.tags)
+  );
 
   return (
     <Fragment>
@@ -267,12 +287,9 @@ const CardList = ({ CardRegistry, tagsList = tagsListExample }) => {
                 Filter Stories
               </Button>
             </section>
-            <ul className={classes.entriesList}>
-              {entries
-                .filter(entry =>
-                  filterCardsBasedOnActiveTags(entry.component.tags)
-                )
-                .map(entry => (
+            {filteredEntries.length > 0 ? (
+              <ul className={classes.entriesList}>
+                {filteredEntries.map(entry => (
                   <li key={shortid.generate()} className={classes.entry}>
                     {
                       <entry.component
@@ -282,7 +299,24 @@ const CardList = ({ CardRegistry, tagsList = tagsListExample }) => {
                     }
                   </li>
                 ))}
-            </ul>
+              </ul>
+            ) : (
+              <div css={emptyState}>
+                <p>
+                  {`We haven't yet made any cards matching your selection.`}
+                  <br />
+                  <Link
+                    to={{
+                      pathname: "/",
+                      hash: "#become-a-contributor"
+                    }}
+                  >
+                    Join us
+                  </Link>{" "}
+                  to make it happen!
+                </p>
+              </div>
+            )}
           </main>
         </div>
       </ThemeProvider>
