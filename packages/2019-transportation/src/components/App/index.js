@@ -8,6 +8,7 @@ import {
   PullQuote,
   CivicCardLayoutClassic
 } from "@hackoregon/component-library";
+import SystemWideSummary from "../SystemWideSummary";
 import MorningRush from "../MorningRush";
 import NorthwestEverett from "../NorthwestEverett";
 import SouthwestMadison from "../SouthwestMadison";
@@ -44,6 +45,10 @@ const App = () => (
       heroSubtitle="Playground for building out the 2019 Transportation team frontend"
       overlay
     >
+      <section css={sectionMarginMedium}>
+        <SystemWideSummary Layout={CivicCardLayoutClassic} />
+      </section>
+
       <section css={[sectionBodyHeading, sectionMaxWidthSmall]}>
         <h2>Ullamcorper dignissim cras tincidunt?</h2>
       </section>
