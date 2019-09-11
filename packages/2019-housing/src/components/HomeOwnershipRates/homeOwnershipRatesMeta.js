@@ -10,7 +10,7 @@ const HomeOwnershipRatesMeta = (/* data */) => ({
     <p>
       There is a long & storied history of how residents of color have been
       disadvantaged or denied access to homeownership. The realities of this are
-      clear - the areas of Portland with larger proportions black residents have
+      clear - the areas of Portland with larger proportions Black residents have
       markedly lower rates of homeownership.
     </p>
   ),

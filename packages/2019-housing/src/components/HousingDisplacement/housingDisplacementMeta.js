@@ -8,8 +8,8 @@ const HousingDisplacementMeta = (/* data */) => ({
   slug: "housing-displacement",
   introText: (
     <p>
-      As Portland has gentrified, neighborhoods that were historically black
-      have seen decreases in black populations. Further, the black population in
+      As Portland has gentrified, neighborhoods that were historically Black
+      have seen decreases in Black populations. Further, the Black population in
       the Portland Metropolitan Statistical Area has proportionally decreased
       over time, demonstrating that the people displaced in these neighborhoods
       have not stayed within the Portland MSA.

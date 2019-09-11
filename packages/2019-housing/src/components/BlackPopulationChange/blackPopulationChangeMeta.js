@@ -9,9 +9,9 @@ const BlackPopulationChangeMeta = (/* data */) => ({
   introText: (
     <p>
       Portland has historically had very few neighborhoods with proportionally
-      large shares of black residents, and this trend has grown more pronounced
+      large shares of Black residents, and this trend has grown more pronounced
       over time. The small handful of census tracts with significant proportions
-      of black residents have all but vanished in the past 30 years.
+      of Black residents have all but vanished in the past 30 years.
     </p>
   ),
   visualization: BlackPopulationChangeVisualization, // data, isLoading are passed to this as props
