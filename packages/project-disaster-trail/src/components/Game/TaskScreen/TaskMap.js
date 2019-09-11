@@ -27,10 +27,8 @@ const screenLayout = css`
 
 const TaskMap = ({ activeTask, completedTasks, tasks, taskVotes }) => {
   // TODO: Change lon / lat for task
-  // const lon = activeTask ? activeTask.locations[0][0] : initialLon;
-  // const lat = activeTask ? activeTask.locations[0][1] : initialLat;
-  const lon = initialLon;
-  const lat = initialLat;
+  const lon = activeTask ? activeTask.locations[0][0] : initialLon;
+  const lat = activeTask ? activeTask.locations[0][1] : initialLat;
 
   const selectedTask = activeTask || tasks[0];
   const data = asGeoJSON(tasks, selectedTask, completedTasks);
@@ -66,6 +64,7 @@ const TaskMap = ({ activeTask, completedTasks, tasks, taskVotes }) => {
           keyboard: false
         }}
         animate
+        animationDuration={3000}
         civicMapStyle="disaster-game"
       >
         <IconMap
