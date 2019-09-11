@@ -101,8 +101,3 @@ MorningRushVisualization.propTypes = {
 };
 
 export default MorningRushVisualization;
-
-//
-// <>
-//   {!isLoading && data && (<div>loaded and has data</div>)}
-//   <>
