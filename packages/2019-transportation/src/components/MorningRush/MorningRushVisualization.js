@@ -86,8 +86,8 @@ const MorningRushVisualization = ({ data }) => {
           radiusScale={7}
         >
           <MapTooltip
-            primaryName="Total Ons and Offs"
-            primaryField="total_ons_offs"
+            primaryName="Stop Name"
+            primaryField="stop_name"
             secondaryName="Median seconds late"
             secondaryField="median_seconds_late"
           />
