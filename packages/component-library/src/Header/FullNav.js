@@ -82,10 +82,6 @@ const menuButton = css`
   padding: 0;
   color: inherit;
   cursor: pointer;
-
-  :focus {
-    outline: none;
-  }
 `;
 
 const buttonText = css`
@@ -153,7 +149,7 @@ const FullNav = props => {
   return (
     <div css={contentWrapper(props)}>
       <Link to="/">
-        <Logo css={logoStyle} type="squareLogo" />
+        <Logo alt="CIVIC home page" css={logoStyle} type="squareLogo" />
       </Link>
       <div />
       <nav css={navStyle} aria-label="Site">
