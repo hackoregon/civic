@@ -56,6 +56,10 @@ const sectionPlatformLayout = css`
 
 const sectionCivicLayout = css`
   padding-bottom: 186px;
+
+  @media (max-width: 460px) {
+    padding-top: 170px;
+  }
 `;
 
 const HomePage = () => {
