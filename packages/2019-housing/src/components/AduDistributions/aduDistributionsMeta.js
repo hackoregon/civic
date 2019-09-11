@@ -6,7 +6,7 @@ import AduDistributionsVisualization from "./AduDistributionsVisualization";
 const AduDistributionsMeta = (/* data */) => ({
   title: "Adu Permit Distributionin Portland",
   slug: "adu-distributions",
-  introText: <p />,
+  introText: null,
   visualization: AduDistributionsVisualization, // data, isLoading are passed to this as props
   additionalText: <p>ADDITIONAL TEXT: TBD</p>,
   shareText: "TODO: Add share text!",
