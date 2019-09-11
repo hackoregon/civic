@@ -84,7 +84,7 @@ export default (greatestWidth, collapseWidth) => ({
     fontSize: `${30 / defaultFontSize}rem`,
     fontWeight: "500",
     lineHeight: "118%",
-    width: "472px",
+    maxWidth: "472px",
     marginBottom: "28px"
   },
 

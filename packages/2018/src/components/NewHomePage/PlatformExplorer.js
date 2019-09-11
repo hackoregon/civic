@@ -26,6 +26,11 @@ const componentWrapper = css`
   display: grid;
   grid-template-rows: 50px 370px;
   margin-top: 36px;
+
+  @media (max-width: 720px) {
+    grid-template-rows: 70px 370px;
+    overflow: scroll;
+  }
 `;
 
 const contentWrapper = css`
@@ -139,6 +144,9 @@ const PlatformExplorerTheme = createMuiTheme({
   },
   overrides: {
     MuiTabs: {
+      root: {
+        minWidth: "650px"
+      },
       flexContainer: {
         width: "100%",
         display: "grid",
