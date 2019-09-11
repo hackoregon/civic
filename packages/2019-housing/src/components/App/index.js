@@ -44,8 +44,8 @@ const App = () => (
     <Global styles={BrandTheme} />
     <PageLayout
       teamTitle="Housing"
-      heroTitle="🚧 Site Under Construction 🚜"
-      heroSubtitle="Playground for building out the 2019 Housing team frontend"
+      heroTitle="The Changing Complexion of Housing in Portland"
+      heroSubtitle="Examining the Demographic Shifts of Populations and Disparities in Homeownership"
       overlay
     >
       <section css={[sectionBodyHeading, sectionMaxWidthSmall]}>
