@@ -8,10 +8,10 @@ const BlackPopulationChangeMeta = (/* data */) => ({
   slug: "black-population-change",
   introText: (
     <p>
-      Portland has historically had very few neighborhoods with proportionally
-      large shares of Black residents, and this trend has grown more pronounced
-      over time. The small handful of census tracts with significant proportions
-      of Black residents have all but vanished in the past 30 years.
+      Portland has historically had few neighborhoods with proportionally large
+      shares of Black residents, and this trend has grown more pronounced over
+      time. The small handful of census tracts with significant proportions of
+      Black residents nearly vanished in the past 30 years.
     </p>
   ),
   visualization: BlackPopulationChangeVisualization, // data, isLoading are passed to this as props
