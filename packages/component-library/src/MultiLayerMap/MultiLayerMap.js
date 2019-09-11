@@ -10,7 +10,6 @@ import MultiSmallPolygonMap from "./MultiSmallPolygonMap";
 import MultiChoroplethMap from "./MultiChoroplethMap";
 
 const MultiLayerMap = props => {
-
   const { viewport, mapLayers, children, onHoverSlide } = props;
 
   const renderMaps = mapLayers.map((layerData, index) => {
