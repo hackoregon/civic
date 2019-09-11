@@ -22,7 +22,8 @@ const HomeLoanApprovalsMeta = (/* data */) => ({
       </Collapsable.Section>
     </Collapsable>
   ),
-  metadata: null, // hmda
+  metadata: null,
+  metadataQA: "hmda",
   resources: [
     {
       heading: "Organizations",

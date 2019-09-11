@@ -16,6 +16,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
 import { ThemeProvider } from "@material-ui/styles";
 
+import MetaDataQAData from "../../assets/metadataQA.json";
+import MetaDataQAQuestions from "../../assets/metadataQAQuestions.json";
 import { MaterialTheme } from "../_Themes/index";
 import ButtonNew from "../ButtonNew/ButtonNew";
 import PullQuote from "../PullQuote/PullQuote";
@@ -86,6 +88,10 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
   const issueLink = `https://github.com/hackoregon/civic/issues/new?labels=type%3Astory-card&template=story-card-improve.md&title=[FEEDBACK] ${
     cardMeta.slug
   }`;
+
+  const relatedMetadataQA = cardMeta.metadataQA
+    ? MetaDataQAData[cardMeta.metadataQA]
+    : null;
 
   function handleShareItemClick(option) {
     const linkLocation = `${_.get(window, "location.origin", "")}/cards/${
@@ -241,26 +247,45 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
             </section>
           </Fragment>
         )}
-        {(cardMeta.metadata || cardMeta.metadataQA) && (
-          <Fragment>
-            <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
-            <section
-              css={[sectionMarginSmall, sectionMaxWidthSmall]}
-              id="metadata"
-            >
-              <h2>About this data</h2>
-              {cardMeta.metadata}
-              {_.has(cardMeta, "metadataQA") && (
+
+        <Fragment>
+          <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
+          <section
+            css={[sectionMarginSmall, sectionMaxWidthSmall]}
+            id="metadata"
+          >
+            <h2>About this data</h2>
+            {relatedMetadataQA ? (
+              <Fragment>
+                {cardMeta.metadata}
                 <CollapsableSection
-                  items={cardMeta.metadataQA.map(item => (
-                    <MetadataQuestion item={item} key={generate()} />
+                  items={Object.keys(relatedMetadataQA).map(key => (
+                    <MetadataQuestion
+                      question={MetaDataQAQuestions[key]}
+                      answer={relatedMetadataQA[key]}
+                      key={generate()}
+                    />
                   ))}
                   collapseAfter={5}
                 />
-              )}
-            </section>
-          </Fragment>
-        )}
+              </Fragment>
+            ) : (
+              <p>
+                <em>This dataset is missing context documentation</em>
+                <br />
+                <br />
+                Documenting how and why a dataset was created, what information
+                it contains, its limitations, and possible ethical or legal
+                concerns is paramount for data that informs decision making. If
+                you’re an expert on this dataset, you can{" "}
+                <a href="https://forms.gle/rggpgLGRtfaQDm5f7">
+                  add documentation
+                </a>
+                .
+              </p>
+            )}
+          </section>
+        </Fragment>
         {cardMeta.resources && (
           <Fragment>
             <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />

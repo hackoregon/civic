@@ -10,7 +10,9 @@ const ProactivePlanningMeta = (/* data */) => ({
   tags: ["Disaster Resilience", "Portland", "Oregon", "Chart"],
   selector: null,
   analysis: null, // TODO
-  metadata: null, // earthquake_regional_impact_analysis_for_clackamas_multnomah_and_washington_counties_oregon
+  metadata: null,
+  metadataQA:
+    "earthquake_regional_impact_analysis_for_clackamas_multnomah_and_washington_counties_oregon",
   resources: [
     {
       heading: "Organizations",
