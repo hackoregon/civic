@@ -55,7 +55,7 @@ const KitScreen = ({
   addPointsToState,
   addItemToPlayerKitInState,
   endChapter,
-  chapterDuration = 60
+  chapterDuration = 30
 }) => {
   const [chapterTimer] = useState(new Timer());
   const [percentComplete, setPercentComplete] = useState(0);
