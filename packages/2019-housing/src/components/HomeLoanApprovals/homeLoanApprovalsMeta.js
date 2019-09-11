@@ -76,8 +76,7 @@ const HomeLoanApprovalsMeta = (/* data */) => ({
       </p>
     </section>
   ),
-  shareText:
-    "TriMet has cited economic displacement as a main driver of ridership loss",
+  shareText: null,
   tags: [
     "Housing",
     "Portland",
