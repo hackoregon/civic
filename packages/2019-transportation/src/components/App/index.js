@@ -42,7 +42,7 @@ const App = () => (
     <Global styles={BrandTheme} />
     <PageLayout
       teamTitle="Transportation"
-      heroTitle="Transit Operations Analytics Dataset (TOAD)"
+      heroTitle="Transit Operations Analytics Data (TOAD)"
       heroSubtitle="Visualizing transit operations data"
       overlay
     >
