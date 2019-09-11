@@ -38,10 +38,7 @@ const HomeLoanApprovalsMeta = (/* data */) => ({
     }
   ],
   // authors likely an array of keys in the future
-  authors: [
-    "https://civicsoftwarefoundation.org/static/human-grid-test-4c90bfc3f316f5d4e104320cb98c43c8.png",
-    "https://civicsoftwarefoundation.org/static/human-grid-test2-ea1849501456af341647068243fc72bb.png"
-  ]
+  authors: []
 });
 
 export default HomeLoanApprovalsMeta;
