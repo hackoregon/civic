@@ -90,7 +90,6 @@ import {
 import "./fonts.css";
 // eslint-disable-next-line import/no-named-as-default
 import RootPage from "./components/RootPage";
-import HomePage from "./components/HomePage";
 import NewHomePage from "./components/NewHomePage";
 import SandboxPage from "./components/SandboxPage";
 import PortlandCollectionPage from "./components/PortlandCollectionPage";
@@ -187,7 +186,7 @@ const routes = {
   path: "/",
   component: RootPage,
   indexRoute: {
-    component: HomePage
+    component: NewHomePage
   },
   childRoutes: [
     {
@@ -265,10 +264,6 @@ const routes = {
       path: "2019",
       childRoutes: [
         {
-          path: "new-home-page",
-          component: NewHomePage
-        },
-        {
           path: "template",
           component: Template2019App,
           childRoutes: Template2019Routes(store)
@@ -299,14 +294,26 @@ const routes = {
   ]
 };
 
+function hashLinkScroll() {
+  const { hash } = window.location;
+  if (hash !== "") {
+    // Push onto callback queue so it runs after the DOM is updated,
+    // this is required when navigating from a different page so that
+    // the element is rendered on the page before trying to getElementById.
+    setTimeout(() => {
+      const id = hash.replace("#", "");
+      const element = document.getElementById(id);
+      if (element) element.scrollIntoView();
+    }, 0);
+  } else {
+    window.scrollTo(0, 0);
+  }
+}
+
 // Finally create the application component and render it into the #content element
 const App = () => (
   <Provider store={store}>
-    <Router
-      onUpdate={() => window.scrollTo(0, 0)}
-      history={history}
-      routes={routes}
-    />
+    <Router onUpdate={hashLinkScroll} history={history} routes={routes} />
   </Provider>
 );
 
