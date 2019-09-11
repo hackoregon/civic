@@ -4,7 +4,7 @@ import { Collapsable } from "@hackoregon/component-library";
 import HomeAppreciationVisualization from "./HomeAppreciationVisualization";
 
 const HomeAppreciationMeta = (/* data */) => ({
-  title: "Card #9: Home Ownership, Race, and Appreciation",
+  title: "Home Ownership, Race, and Appreciation",
   slug: "home-appreciation",
   introText: <p />,
   visualization: HomeAppreciationVisualization, // data, isLoading are passed to this as props

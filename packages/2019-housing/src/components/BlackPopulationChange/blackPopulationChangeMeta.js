@@ -4,7 +4,7 @@ import { Collapsable } from "@hackoregon/component-library";
 import BlackPopulationChangeVisualization from "./BlackPopulationChangeVisualization";
 
 const BlackPopulationChangeMeta = (/* data */) => ({
-  title: "Card #4: Black Population Share Change Over Time",
+  title: "Black Population Share Change Over Time",
   slug: "black-population-change",
   introText: (
     <p>

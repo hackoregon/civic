@@ -4,7 +4,7 @@ import { Collapsable } from "@hackoregon/component-library";
 import AduDistributionsVisualization from "./AduDistributionsVisualization";
 
 const AduDistributionsMeta = (/* data */) => ({
-  title: "Card #6: Adu Distributions (TODO: Make a real title)",
+  title: "Adu Permit Distributionin Portland",
   slug: "adu-distributions",
   introText: <p />,
   visualization: AduDistributionsVisualization, // data, isLoading are passed to this as props
