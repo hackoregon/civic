@@ -75,7 +75,7 @@ const HomePage = () => {
           A system for public data, built on public collaboration
         </p>
         <div className="intro-wrapper">
-          <video className="placeholder-intro-image" autoPlay loop>
+          <video className="placeholder-intro-image" autoPlay muted loop>
             <source type="video/mp4" src={test} />
           </video>
           <p className="intro-text">
