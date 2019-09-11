@@ -47,7 +47,7 @@ const SolveScreen = ({
     >
       {activeTask && (
         <div css={taskImage}>
-          <h2>{activeTask.text}</h2>
+          {/* <h2>{activeTask.text}</h2>
           <h3>
             Correct items chosen: {correctItemsChosen} of{" "}
             {activeTask.numberItemsToSolve}
@@ -59,7 +59,7 @@ const SolveScreen = ({
             }}
           >
             Use {activeTask.requiredItem}
-          </button>
+          </button> */}
         </div>
       )}
     </div>
