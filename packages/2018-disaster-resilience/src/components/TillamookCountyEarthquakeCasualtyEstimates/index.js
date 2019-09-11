@@ -33,6 +33,8 @@ TillamookCountyEarthquakeCasualtyEstimates.propTypes = {
   Layout: PropTypes.func
 };
 
+TillamookCountyEarthquakeCasualtyEstimates.tags = tillamookCountyEarthquakeCasualtyEstimatesMeta().tags;
+
 export default connect(
   state => ({
     data: {
