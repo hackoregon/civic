@@ -12,6 +12,7 @@ const allContent = css`
   display: grid;
   align-content: center;
   justify-content: center;
+  margin-top: 400px;
 `;
 
 const contentWrapper = css`
@@ -29,6 +30,7 @@ const titleFont = css`
   font-size: 8em;
   margin-bottom: 0.5em;
   justify-self: start;
+  margin-top: 0;
 `;
 
 const contentFont = css`
@@ -39,7 +41,8 @@ const contentFont = css`
   text-align: right;
   max-width: 60%;
   justify-self: end;
-  margin-bottom: 1.5em;
+  margin-bottom: 1em;
+  margin-top: 0.25rem;
 `;
 
 // Background animation styles
