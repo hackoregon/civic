@@ -38,7 +38,8 @@ const MatchLockInterface = ({
   activeScreen,
   percentComplete,
   frozenOrbInterface = false,
-  debug = false
+  debug = false,
+  tickerTapeText
 }) => {
   const [open, setOpen] = useState(false);
 
@@ -54,10 +55,7 @@ const MatchLockInterface = ({
       `}
     >
       <DurationBar step="Choose supplies" percentComplete={percentComplete} />
-      <Ticker
-        debug={debug}
-        text="Ticker tape text that goes across the screen to give instructions"
-      />
+      <Ticker debug={debug} text={tickerTapeText} />
       <GUIStyle>
         <OrbManager
           possibleItems={possibleItems}
@@ -78,7 +76,8 @@ MatchLockInterface.propTypes = {
   activeScreen: PropTypes.string,
   percentComplete: PropTypes.number,
   debug: PropTypes.bool,
-  frozenOrbInterface: PropTypes.bool
+  frozenOrbInterface: PropTypes.bool,
+  tickerTapeText: PropTypes.string
 };
 
 export default MatchLockInterface;

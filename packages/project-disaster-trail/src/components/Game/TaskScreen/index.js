@@ -243,6 +243,7 @@ const TaskScreen = ({
 
   const isSolving = action === ACTIONS.SOLVING;
   const isMovingMap = action === ACTIONS.MOVING_MAP;
+  const isVoting = action === ACTIONS.VOTING;
   // const frozenOrbInterface = !isSolving;
   const frozenOrbInterface = false;
   const onOrbSelection = isSolving ? onItemSelection : onTaskSelection;
@@ -251,8 +252,12 @@ const TaskScreen = ({
     : checkVoteIsCorrect;
   // "solve" screen needs unique identifier to trigger orb refresh in orbManager between sequential tasks
   let activeScreen = action;
+  let tickerTapeText = "";
   if (isSolving) {
     activeScreen = `solve_${numberCompletedTasks}`;
+    tickerTapeText = "How can we help this person?";
+  } else if (isVoting) {
+    tickerTapeText = "Who should we help next?";
   }
 
   return (
@@ -279,6 +284,7 @@ const TaskScreen = ({
         checkItemIsCorrect={checkItemIsCorrect}
         activeScreen={activeScreen}
         percentComplete={isMovingMap ? 100 : percentComplete}
+        tickerTapeText={tickerTapeText}
       />
       <Song songFile={taskSong} />
     </Fragment>
