@@ -18,6 +18,7 @@ import { ThemeProvider } from "@material-ui/styles";
 
 import MetaDataQAData from "../../assets/metadataQA.json";
 import MetaDataQAQuestions from "../../assets/metadataQAQuestions.json";
+import authorsSrc from "../../assets/authors.png";
 import { MaterialTheme } from "../_Themes/index";
 import ButtonNew from "../ButtonNew/ButtonNew";
 import PullQuote from "../PullQuote/PullQuote";
@@ -50,7 +51,7 @@ const sectionMaxWidthMedium = css`
 `;
 
 const authorPhoto = css`
-  width: 50%;
+  width: 100%;
   filter: grayscale(100%);
   cursor: pointer;
 `;
@@ -75,11 +76,6 @@ const buttonImproveContainer = css`
   justify-content: center;
   justify-items: center;
 `;
-
-const demoAuthorPhotos = [
-  "https://civicsoftwarefoundation.org/static/human-grid-test-4c90bfc3f316f5d4e104320cb98c43c8.png",
-  "https://civicsoftwarefoundation.org/static/human-grid-test2-ea1849501456af341647068243fc72bb.png"
-];
 
 function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
   const [shareButtonText, setShareButtonText] = useState("Share");
@@ -308,32 +304,20 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
             </section>
           </Fragment>
         )}
-        {((cardMeta.authors && cardMeta.authors === "demo") ||
-          (cardMeta.authors && cardMeta.authors.length > 0)) && (
-          <Fragment>
-            <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
-            <section
-              css={[sectionMarginSmall, sectionMaxWidthSmall]}
-              id="authors"
-            >
-              <h2>Who made this?</h2>
-              {cardMeta.authors === "demo"
-                ? demoAuthorPhotos.map(photo => (
-                    <img
-                      css={authorPhoto}
-                      src={photo}
-                      alt="Pictures of people who worked on this"
-                      key={generate()}
-                    />
-                  ))
-                : cardMeta.authors.map(authorEmail => (
-                    <p key={authorEmail}>
-                      <a href={`mailto:${authorEmail}`}>{authorEmail}</a>
-                    </p>
-                  ))}
-            </section>
-          </Fragment>
-        )}
+        <Fragment>
+          <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
+          <section
+            css={[sectionMarginSmall, sectionMaxWidthSmall]}
+            id="authors"
+          >
+            <h2>Who made this?</h2>
+            <img
+              css={authorPhoto}
+              src={authorsSrc}
+              alt="Pictures of people who worked on this"
+            />
+          </section>
+        </Fragment>
         <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
         <section css={[sectionMarginSmall, sectionMaxWidthSmall]} id="improve">
           <h2>Help make this better</h2>
