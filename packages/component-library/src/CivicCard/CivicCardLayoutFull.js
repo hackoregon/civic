@@ -273,6 +273,7 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
               <p>
                 <em>This dataset is missing context documentation</em>
                 <br />
+                <br />
                 Documenting how and why a dataset was created, what information
                 it contains, its limitations, and possible ethical or legal
                 concerns is paramount for data that informs decision making. If

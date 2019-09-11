@@ -81,7 +81,8 @@ const SystemWideSummaryMeta = (/* data */) => ({
       </Collapsable.Section>
     </Collapsable>
   ),
-  metadata: null, // toad
+  metadata: null,
+  metadataQA: "toads",
   resources: [
     {
       heading: "Organizations",
