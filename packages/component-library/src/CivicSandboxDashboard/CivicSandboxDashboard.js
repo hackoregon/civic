@@ -32,8 +32,9 @@ const container = css`
   border-radius: 2px;
   box-shadow: 5px 5px 15px -3px rgba(0, 0, 0, 0.2);
   @media (max-width: 900px) {
-    width: 92%;
-    left: 1%;
+    width: 90%;
+    bottom: 30px;
+    left: 8%;
   }
 `;
 
@@ -43,6 +44,9 @@ const dashboardOpen = css`
   overflow-x: hidden;
   opacity: 0.9;
   transition: height 750ms ease-out, opacity 1.5s ease-in;
+  @media (max-width: 500px) {
+    height: 265px;
+  }
 `;
 
 const dashboardClosed = css`
@@ -74,6 +78,7 @@ const toggleContainer = css`
 `;
 
 const toggleTitle = css`
+  font-size: 17px;
   flex: 3;
   margin auto 20px;
 `;
@@ -189,7 +194,7 @@ const createLineViz = (data, title, xLabel, yLabel, xFormat, yFormat) => {
   const yForm = yFormat === "percent" ? "percentage" : yFormat;
   return (
     <div css={viz} key={shortid.generate()}>
-      <h2>{title}</h2>
+      <h3>{title}</h3>
       <LineChart
         data={data}
         xLabel={xLabel}
