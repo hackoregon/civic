@@ -72,13 +72,8 @@ const BlackPopulationChangeMeta = (/* data */) => ({
       </Collapsable.Section>
     </Collapsable>
   ),
-  metadata: (
-    <section>
-      <p>
-        Harvard Joint Center for Housing Studies Neighborhood Change Database
-      </p>
-    </section>
-  ), // TODO, not sure which meta
+  metadata:
+    "Harvard Joint Center for Housing Studies Neighborhood Change Database", // TODO, not sure which meta
   resources: [
     {
       heading: "Organizations",
