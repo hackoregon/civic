@@ -19,10 +19,10 @@ import Panel from "../atoms/Panel";
 import DefaultScreen from "./DefaultScreen/index";
 import AttractorScreen from "./AttractorScreen/index";
 import KitScreen from "./KitScreen/index";
+import QuakeScreen from "./QuakeScreen/index";
 import TaskScreen from "./TaskScreen/index";
 
 import "@hackoregon/component-library/assets/global.styles.css";
-import quakeSong from "../../../assets/audio/PWolfEarthquakesound15secmp3.mp3";
 import summarySong from "../../../assets/audio/PWolf-happysong1wfadeinout.mp3";
 
 const Game = ({ activeChapterId }) => {
@@ -33,7 +33,7 @@ const Game = ({ activeChapterId }) => {
       case TASKS:
         return <TaskScreen />;
       case QUAKE:
-        return <DefaultScreen chapterDuration={15} songFile={quakeSong} />;
+        return <QuakeScreen />;
       case SUMMARY:
         return <DefaultScreen songFile={summarySong} />;
       default:
