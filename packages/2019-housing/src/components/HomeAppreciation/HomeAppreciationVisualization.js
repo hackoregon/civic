@@ -53,10 +53,14 @@ const HomeAppreciationVisualization = ({ data }) => {
       x: yearData.sale_year
     })
   );
-  const barChartData = data.homeownershipByRace.value.results.map(el => ({
+  const homeownershipData = data.homeownershipByRace.value.results.map(el => ({
     ...el,
     label: RACE_LABEL_MAP[el.race]
   }));
+
+  const barChartData = homeownershipData.filter(el => {
+    return el.race === "white" || el.race === "black";
+  });
 
   // Map Data
   const polygonFieldName = "appreciation_estimates";
@@ -75,7 +79,7 @@ const HomeAppreciationVisualization = ({ data }) => {
         data={barChartData}
         dataValue="home_ownership_rate"
         dataLabel="label"
-        title="Home Ownership By Race In Multhomah County (1990)"
+        title="Black and White Home Ownership in Portland in 1990"
         xLabel="Home Ownership Rate"
         yLabel="Race"
         dataValueFormatter={x => civicFormat.percentage(x)}

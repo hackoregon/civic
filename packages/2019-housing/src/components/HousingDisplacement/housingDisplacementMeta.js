@@ -4,7 +4,7 @@ import { Collapsable } from "@hackoregon/component-library";
 import HousingDisplacementVisualization from "./HousingDisplacementVisualization";
 
 const HousingDisplacementMeta = (/* data */) => ({
-  title: "Card #1: Displacement in Historically Black Portland Census Tracts",
+  title: "Displacement in Historically Black Portland Census Tracts",
   slug: "housing-displacement",
   introText: (
     <p>

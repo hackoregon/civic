@@ -4,8 +4,7 @@ import { Collapsable } from "@hackoregon/component-library";
 import HomeOwnershipRatesVisualization from "./HomeOwnershipRatesVisualization";
 
 const HomeOwnershipRatesMeta = (/* data */) => ({
-  title:
-    "Card #5: Population Demographics and Home Ownership Rates  (Over Time?)",
+  title: "Population Demographics and Home Ownership Rates",
   slug: "home-ownership-rates",
   introText: (
     <p>

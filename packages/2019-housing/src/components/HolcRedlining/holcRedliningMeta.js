@@ -4,7 +4,7 @@ import { Collapsable } from "@hackoregon/component-library";
 import HolcRedliningVisualization from "./HolcRedliningVisualization";
 
 const HolcRedliningMeta = (/* data */) => ({
-  title: "Card #8: HOLC Redlining Map",
+  title: "HOLC Redlining Map",
   slug: "holc-redlining",
   introText: (
     <p>

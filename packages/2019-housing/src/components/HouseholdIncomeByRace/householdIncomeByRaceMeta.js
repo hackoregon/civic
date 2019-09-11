@@ -4,8 +4,7 @@ import { Collapsable } from "@hackoregon/component-library";
 import HouseholdIncomeByRaceVisualization from "./HouseholdIncomeByRaceVisualization";
 
 const HouseholdIncomeByRaceMeta = (/* data */) => ({
-  title:
-    "Card #10: Households of Color Earn Substantially Less than White Households",
+  title: "Households of Color Earn Substantially Less than White Households",
   slug: "household-income-by-race",
   introText: (
     <p>

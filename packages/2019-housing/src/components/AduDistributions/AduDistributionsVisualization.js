@@ -70,7 +70,7 @@ const AduDistributionsVisualization = ({ data }) => {
   return (
     data && (
       <ChartContainer
-        title="ADU Distribution"
+        title="Portland ADU Permits"
         subtitle="ADU permits issued, 1994-2019"
       >
         <div style={{ height: "50vh" }}>
