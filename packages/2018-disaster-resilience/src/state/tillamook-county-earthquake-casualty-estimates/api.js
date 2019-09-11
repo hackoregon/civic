@@ -7,7 +7,7 @@ const HOST = "https://service.civicpdx.org/disaster-resilience";
 
 const apiDesc = {
   getEarthquakeCasualtiesData: {
-    url: `${HOST}/api/AebmResults/?format=json&limit=2737`,
+    url: `${HOST}/api/AebmResults/?format=json&limit=27371`,
     // you can apply any needed data transformations to value here
     // if complex, separate tranformation function to another file
     dataTransform: data => {

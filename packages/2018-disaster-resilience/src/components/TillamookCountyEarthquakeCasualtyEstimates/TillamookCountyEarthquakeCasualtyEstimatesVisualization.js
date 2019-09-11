@@ -16,24 +16,28 @@ const TillamookCountyEarthquakeCasualtyEstimatesVisualization = ({ data }) => {
 
   const mapStyles = {
     "Daytime - Injury": {
-      field: "Daytime_injury",
+      field: "daytime_in",
       color: VisualizationColors.categorical.yellow.mapFormatRGBA,
-      opacity: 0.1
+      opacity: 0.1,
+      map: "light"
     },
     "Daytime - Death": {
-      field: "Daytime_death",
+      field: "daytime_de",
       color: VisualizationColors.categorical.pink.mapFormatRGBA,
-      opacity: 0.3
+      opacity: 0.3,
+      map: "light"
     },
     "Nighttime - Injury": {
-      field: "Nighttime_injury",
+      field: "nighttim_1",
       color: VisualizationColors.categorical.green.mapFormatRGBA,
-      opacity: 0.1
+      opacity: 0.1,
+      map: "dark"
     },
-    "Nighttime - death": {
-      field: "Nighttime_death",
+    "Nighttime - Death": {
+      field: "nighttime_field",
       color: VisualizationColors.categorical.green.mapFormatRGBA,
-      opacity: 0.3
+      opacity: 0.3,
+      map: "dark"
     }
   };
 
@@ -48,16 +52,20 @@ const TillamookCountyEarthquakeCasualtyEstimatesVisualization = ({ data }) => {
         }}
         row
       />
+      {console.log(data)}
       {hasLoaded && data && (
-        <BaseMap initialLongitude={-123.8093} initialLatitude={45.6956}>
+        <BaseMap
+          initialLongitude={-123.844}
+          initialLatitude={45.4562}
+          initialZoom={8}
+          civicMapStyle={mapStyles[dataType].map}
+        >
           <ScatterPlotMap
             data={data.earthquakeCasualties.value}
-            getPosition={f =>
-              f.geometry ? f.geometry.coordinates : [-124.664355, 45.615779]
-            }
-            opacity={1}
+            getPosition={f => f.geometry && f.geometry.coordinates}
+            opacity={mapStyles[dataType].opacity}
             getFillColor={mapStyles[dataType].color}
-            getRadius={f => f[mapStyles[dataType].field]}
+            getRadius={f => f.properties[mapStyles[dataType].field]}
             radiusScale={65}
           />
         </BaseMap>
