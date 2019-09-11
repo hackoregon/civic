@@ -34,7 +34,8 @@ import {
   getSelectedSlides,
   getLayerSlides,
   getSelectedSlideDatum,
-  getAllSlides
+  getAllSlides,
+  getSelectedFoundationDatum
 } from "../../state/sandbox/selectors";
 
 class SandboxComponent extends React.Component {
@@ -136,7 +137,9 @@ class SandboxComponent extends React.Component {
       allSlides,
       isLoading,
       isError,
-      setSlideKey: renderSetSlideKey
+      setSlideKey: renderSetSlideKey,
+      selectedFoundationDatum,
+      foundationClick
     } = this.props;
     const { drawerVisible } = this.state;
 
@@ -164,11 +167,13 @@ class SandboxComponent extends React.Component {
         foundationData={selectedFoundationData}
         defaultFoundation={foundationData}
         onSlideHover={slideHover}
+        onFoundationClick={foundationClick}
         tooltipInfo={selectedSlideDatum}
         allSlides={allSlides}
         areSlidesLoading={isLoading}
         errors={isError}
         updateSlideKey={renderSetSlideKey}
+        selectedFoundationDatum={selectedFoundationDatum}
       />
     );
   }
@@ -191,7 +196,8 @@ export default connect(
     selectedSlide: getSelectedSlides(state),
     layerSlides: getLayerSlides(state),
     selectedSlideDatum: getSelectedSlideDatum(state),
-    allSlides: getAllSlides(state)
+    allSlides: getAllSlides(state),
+    selectedFoundationDatum: getSelectedFoundationDatum(state)
   }),
   dispatch => ({
     fetchFoundation(endpoint = "") {
@@ -215,8 +221,8 @@ export default connect(
     setSlides(selectedSlides = []) {
       dispatch(setSlides(selectedSlides));
     },
-    foundationClick(feature) {
-      dispatch(setSelectedFoundationDatum(feature));
+    foundationClick(feature, foundationIndex) {
+      dispatch(setSelectedFoundationDatum(feature, foundationIndex));
     },
     slideHover(feature, slideIndex) {
       dispatch(setSelectedSlideDatum(feature, slideIndex));
@@ -236,6 +242,7 @@ SandboxComponent.propTypes = {
   layerSlides: arrayOf(shape({})),
   selectedSlideDatum: shape({}),
   slideHover: func,
+  foundationClick: func,
   fetchLayers: func,
   fetchSlideByDate: func,
   setPackage: func,
@@ -246,5 +253,6 @@ SandboxComponent.propTypes = {
   selectedFoundation: string,
   selectedFoundationData: shape({}),
   foundationData: arrayOf(),
-  setFoundation: func
+  setFoundation: func,
+  selectedFoundationDatum: shape({})
 };

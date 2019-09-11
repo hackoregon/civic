@@ -5,8 +5,7 @@ import { number, string, bool, func, arrayOf, shape } from "prop-types";
 import {
   createColorScale,
   updateQuantileScale,
-  updateEqualScale,
-  createSizeScale
+  updateEqualScale
 } from "./createLayers";
 
 const MultiChoroplethMap = props => {
@@ -31,7 +30,8 @@ const MultiChoroplethMap = props => {
     fieldName,
     dataRange = [],
     colorRange = [],
-    index
+    index,
+    selectedFoundationDatum
   } = props;
 
   let choroplethColorScale = createColorScale(
@@ -68,11 +68,31 @@ const MultiChoroplethMap = props => {
     return value ? choroplethColorScale(value) : [0, 0, 0, 128];
   };
 
-  const getLineColor = () => {
+  const getLineColor = f => {
+    if (
+      selectedFoundationDatum &&
+      selectedFoundationDatum.feature &&
+      selectedFoundationDatum.feature.object
+    ) {
+      const selectedId = selectedFoundationDatum.feature.object.id;
+      const featureId = f.id;
+      return featureId === selectedId ? [255, 178, 31, 255] : polygonLineColor;
+    }
     return polygonLineColor;
   };
 
-  const getLineWidth = createSizeScale(lineWidth);
+  const getLineWidth = f => {
+    if (
+      selectedFoundationDatum &&
+      selectedFoundationDatum.feature &&
+      selectedFoundationDatum.feature.object
+    ) {
+      const selectedId = selectedFoundationDatum.feature.object.id;
+      const featureId = f.id;
+      return featureId === selectedId ? 125 : lineWidth;
+    }
+    return lineWidth;
+  };
 
   return (
     <GeoJsonLayer
@@ -92,7 +112,7 @@ const MultiChoroplethMap = props => {
       lineJointRounded={false}
       extruded={false}
       onHover={info => onHoverSlide(info, index)}
-      onClick={onLayerClick}
+      onClick={info => onLayerClick(info, index)}
       autoHighlight={autoHighlight}
       highlightColor={highlightColor}
       parameters={{ depthTest: false }}
@@ -128,7 +148,8 @@ MultiChoroplethMap.propTypes = {
   }).isRequired,
   dataRange: arrayOf(string),
   colorRange: arrayOf(arrayOf(number)),
-  index: number
+  index: number,
+  selectedFoundationDatum: shape({})
 };
 
 export default MultiChoroplethMap;

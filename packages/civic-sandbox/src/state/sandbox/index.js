@@ -35,7 +35,8 @@ const INITIAL_STATE = {
   slidesSuccess: null,
   selectedFoundation: "",
   selectedSlide: [],
-  selectedSlideKey: {}
+  selectedSlideKey: {},
+  selectedFoundationDatum: null
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -203,11 +204,15 @@ const reducer = (state = INITIAL_STATE, action) => {
         selectedFoundationDatum: null,
         selectedSlideDatum: null
       };
-    case SET_FOUNDATION_DATUM:
+    case SET_FOUNDATION_DATUM: {
       return {
         ...state,
-        selectedFoundationDatum: action.feature
+        selectedFoundationDatum: {
+          feature: action.feature,
+          index: action.index
+        }
       };
+    }
     case SET_SLIDE_DATUM: {
       return {
         ...state,

@@ -173,6 +173,34 @@ export const getSelectedSlideDatum = createSelector(
   }
 );
 
+export const getSelectedFoundationDatum = createSelector(
+  getSandbox,
+  getSelectedSlidesData,
+  getSelectedSlides,
+  getSelectedSlideKey,
+  ({ selectedFoundationDatum }, slides, selectedSlides) => {
+    if (!selectedFoundationDatum) {
+      return;
+    }
+    const { index } = selectedFoundationDatum;
+
+    const activeLayerName = selectedSlides[index];
+
+    const activeLayer = slides.find(s => {
+      return s.displayName === activeLayerName;
+    });
+
+    if (!activeLayer || !activeLayer.visualization) return;
+
+    if (activeLayer.visualization.map.mapType !== "ChoroplethMap") return;
+    // eslint-disable-next-line consistent-return
+    return {
+      ...selectedFoundationDatum,
+      ...activeLayer
+    };
+  }
+);
+
 export const getAllSlides = createSelector(
   getSelectedSlidesData,
   getSelectedSlides,
