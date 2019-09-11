@@ -121,6 +121,12 @@ const SystemWideSummaryVisualization = ({ data }) => {
             }}
             yLabel="Ons and Offs"
           />
+          {/*
+              This line chart would display the breakdown of delay times by the major buckets we have
+              it currently is NOT in the demo script so it is commented out. We may add it at the last minute.
+              If not:
+          */}
+          {/* TODO: remove this chart */}
           {/* <LineChart */}
           {/*  data={secondsLateSeries} */}
           {/*  dataKey="arrive_quarter_hour" */}
