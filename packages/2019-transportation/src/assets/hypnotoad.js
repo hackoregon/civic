@@ -33,7 +33,16 @@ Civic Software Foundation
 `;
 
 export default () => (
-  <div style={{ display: "flex", justifyContent: "center" }}>
+  <div
+    style={{
+      color: "white",
+      display: "flex",
+      fontWeight: 700,
+      justifyContent: "center",
+      backgroundColor: "#462263",
+      margin: "-320px -24px 0 -24px"
+    }}
+  >
     <pre>{hypnotoad}</pre>
   </div>
 );
