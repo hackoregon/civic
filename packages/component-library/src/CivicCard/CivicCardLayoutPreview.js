@@ -3,6 +3,7 @@ import { jsx, css } from "@emotion/core";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
+import { makeStyles } from "@material-ui/core/styles";
 import { generate } from "shortid";
 
 import cardMetaTypes from "./cardMetaTypes";
@@ -32,6 +33,15 @@ const scaleCorner = css`
   max-height: 134px;
 `;
 
+const useStyles = makeStyles({
+  card: {
+    "&:hover": {
+      boxShadow:
+        "0px 2px 6px 0px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 4px 2px -1px rgba(0,0,0,0.12)"
+    }
+  }
+});
+
 const Watermark = () => (
   <div css={watermarkContainer}>
     <svg css={scaleCorner} xmlns="http://www.w3.org/2000/svg">
@@ -47,33 +57,35 @@ const Watermark = () => (
 );
 
 function CivicCardLayoutPreview({ cardMeta }) {
+  const classes = useStyles();
+
   return (
-    <Card css={contentContainer}>
-      <Watermark />
-      <div
-        css={css`
-          padding: 0 15px 0 27px;
-        `}
-      >
-        <CardContent>
-          <h2>{cardMeta.title}</h2>
-          <p>{cardMeta.introText}</p>
-          <section id={`${cardMeta.slug}-tags`}>
-            {cardMeta.tags.map((tag, index) => (
-              <Chip
-                tag={tag}
-                index={index}
-                key={generate()}
-                color={secondary.hex}
-              />
-            ))}
-          </section>
-        </CardContent>
-        <CardActions>
-          <CivicCardLink slug={cardMeta.slug}>Learn more</CivicCardLink>
-        </CardActions>
-      </div>
-    </Card>
+    <CivicCardLink slug={cardMeta.slug}>
+      <Card css={contentContainer} className={classes.card}>
+        <Watermark />
+        <div
+          css={css`
+            padding: 0 15px 0 27px;
+          `}
+        >
+          <CardContent>
+            <h2>{cardMeta.title}</h2>
+            <p>{cardMeta.introText}</p>
+            <section id={`${cardMeta.slug}-tags`}>
+              {cardMeta.tags.map((tag, index) => (
+                <Chip
+                  tag={tag}
+                  index={index}
+                  key={generate()}
+                  color={secondary.hex}
+                />
+              ))}
+            </section>
+          </CardContent>
+          <CardActions>Learn more</CardActions>
+        </div>
+      </Card>
+    </CivicCardLink>
   );
 }
 
