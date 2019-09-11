@@ -64,12 +64,13 @@ const TaskScreen = ({
   const [numberCompletedTasks, setNumberCompletedTasks] = useState(0);
   const [taskVotes, setTaskVotes] = useState(taskVotesDefault);
   const [correctItemsChosen, setCorrectItemsChosen] = useState(0);
+  const [possibleItems, setPossibleItems] = useState(playerKitItems);
 
   const prevActiveTask = usePrevious(activeTask);
   const prevAction = usePrevious(action);
 
   const votingDuration = 20;
-  const mapTransitionDuration = 5;
+  const mapTransitionDuration = 3;
   const chapterDuration = 60;
 
   const goToTask = useCallback(() => {
@@ -144,23 +145,29 @@ const TaskScreen = ({
   // when an action is complete, what should happen next?
   useEffect(() => {
     switch (action) {
+      // Finished solving task
       case ACTIONS.SOLVING:
         if (prevActiveTask && !activeTask) {
           setVotingComplete(false);
+          setPossibleItems(weightedTasks);
           setAction(ACTIONS.VOTING);
         }
         break;
+      // Finished voting for next task
       case ACTIONS.VOTING:
         if (votingComplete) {
+          setPossibleItems([]);
           goToTask();
           setMovingMapComplete(false);
           setAction(ACTIONS.MOVING_MAP);
         }
         break;
+      // Finished moving the map
       case ACTIONS.MOVING_MAP:
         if (movingMapComplete) {
           setTaskVotes(taskVotesDefault); // reset for next vote
           setCorrectItemsChosen(0); // reset for next task
+          setPossibleItems(playerKitItems);
           setAction(ACTIONS.SOLVING);
         }
         break;
@@ -175,7 +182,9 @@ const TaskScreen = ({
     votingComplete,
     movingMapComplete,
     action,
-    goToTask
+    goToTask,
+    weightedTasks,
+    playerKitItems
   ]);
 
   // when the user transitions from one action to another,
@@ -233,14 +242,18 @@ const TaskScreen = ({
     activeTask && activeTask.requiredItem === currentOrb.type;
 
   const isSolving = action === ACTIONS.SOLVING;
-  const possibleItems = isSolving ? playerKitItems : weightedTasks;
-  const frozenOrbInterface = !isSolving;
+  const isMovingMap = action === ACTIONS.MOVING_MAP;
+  // const frozenOrbInterface = !isSolving;
+  const frozenOrbInterface = false;
   const onOrbSelection = isSolving ? onItemSelection : onTaskSelection;
   const checkItemIsCorrect = isSolving
     ? checkSolutionIsCorrect
     : checkVoteIsCorrect;
   // "solve" screen needs unique identifier to trigger orb refresh in orbManager between sequential tasks
-  const activeScreen = isSolving ? `solve_${numberCompletedTasks}` : "vote";
+  let activeScreen = action;
+  if (isSolving) {
+    activeScreen = `solve_${numberCompletedTasks}`;
+  }
 
   return (
     <Fragment>
@@ -265,8 +278,7 @@ const TaskScreen = ({
         frozenOrbInterface={frozenOrbInterface}
         checkItemIsCorrect={checkItemIsCorrect}
         activeScreen={activeScreen}
-        debug
-        percentComplete={percentComplete}
+        percentComplete={isMovingMap ? 100 : percentComplete}
       />
       <Song songFile={taskSong} />
     </Fragment>
