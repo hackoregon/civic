@@ -113,6 +113,9 @@ const App = () => (
           the lived realities of Portland residents.
         </p>
       </section>
+      <section css={sectionMarginMedium}>
+        <HolcRedlining Layout={CivicCardLayoutClassic} /> {/* SC 8 */}
+      </section>
       <section className={sectionMarginMedium}>
         <BlackPopulationChange Layout={CivicCardLayoutClassic} /> {/* SC 4 */}
       </section>
@@ -124,9 +127,6 @@ const App = () => (
       </section>
       <section className={sectionMarginMedium}>
         <HomeLoanApprovals Layout={CivicCardLayoutClassic} /> {/* SC 2 */}
-      </section>
-      <section css={sectionMarginMedium}>
-        <HolcRedlining Layout={CivicCardLayoutClassic} /> {/* SC 8 */}
       </section>
       <section css={sectionMarginMedium}>
         <HouseholdIncomeByRace Layout={CivicCardLayoutClassic} /> {/* SC 10 */}
