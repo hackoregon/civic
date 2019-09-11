@@ -1,10 +1,10 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import { Logo, BrandColors } from "../index";
-import { defaultFontSize, browserDefaultSize } from "../../constants/styles";
+import { browserDefaultSize } from "../../constants/styles";
 
 const footerWrapper = css`
-  height: 185px;
+  height: 93px;
   width: 100%;
   background: #fff;
 
@@ -15,14 +15,10 @@ const footerWrapper = css`
 const contentWrapper = props => css`
   margin: 0 auto;
   max-width: ${props.greatestWidth}px;
-  padding: 55px 20px;
+  padding: 27px 20px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: end;
-
-  @media (max-width: ${props.collapseWidth}px) {
-    grid-template-columns: 1fr auto auto;
-  }
 
   @media (max-width: ${props.condensedWidth}px) {
     grid-template-columns: 1fr;
@@ -34,10 +30,6 @@ const contentWrapper = props => css`
 const businessWrapper = props => css`
   display: grid;
   justify-content: center;
-
-  @media (max-width: ${props.collapseWidth}px) {
-    padding: 0 40px;
-  }
 
   @media (max-width: ${props.condensedWidth}px) {
     justify-content: start;
@@ -58,8 +50,8 @@ const textStyle = css`
   color: ${BrandColors.primary.hex};
   font-family: Rubik, sans-serif;
   font-weight: normal;
-  font-size: ${defaultFontSize / browserDefaultSize}rem;
-  line-height: ${50 / defaultFontSize}rem;
+  font-size: ${15 / browserDefaultSize}rem;
+  line-height: 150%;
   text-decoration: none;
   margin: 0;
 `;
@@ -72,7 +64,7 @@ const boldText = css`
 const header = css`
   ${textStyle};
   font-weight: 500;
-  font-size: ${30 / browserDefaultSize}rem;
+  font-size: ${20 / browserDefaultSize}rem;
 `;
 
 const Footer = props => (
@@ -105,8 +97,7 @@ const Footer = props => (
 
 Footer.defaultProps = {
   greatestWidth: 1200,
-  collapseWidth: 845,
-  condensedWidth: 715
+  condensedWidth: 580
 };
 
 Footer.displayName = "Footer";
