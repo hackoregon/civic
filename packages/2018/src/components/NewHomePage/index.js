@@ -2,15 +2,18 @@
 import { css, jsx, Global } from "@emotion/core";
 import emotionReset from "emotion-reset";
 import { Fragment } from "react";
-import { Button, BrandColors } from "@hackoregon/component-library";
+import {
+  Button,
+  BrandColors,
+  HeaderNew as Header,
+  FooterNew as Footer
+} from "@hackoregon/component-library";
+import PlatformExplorer from "./PlatformExplorer";
 import indexStyle from "./index.styles";
-import Header from "./Header";
-import Footer from "./Footer";
 // Placeholders
 import placeholderIntroImg from "../../assets/new-home-page-1.png";
 import placeholderWorkImg from "../../assets/new-home-page-2.png";
 import placeholderContributorsImg from "../../assets/new-home-page-3.png";
-import placeholderPlatformImg from "../../assets/new-home-page-4.png";
 // import placeholderCivicImg from "../../assets/new-home-page-5.png";
 
 const greatestWidth = 1200;
@@ -38,6 +41,7 @@ const sectionContributorLayout = css`
 `;
 
 const sectionPlatformLayout = css`
+  padding-bottom: 35px;
   margin-bottom: 60px;
 
   @media (min-width: ${condensedWidth}px) {
@@ -45,7 +49,6 @@ const sectionPlatformLayout = css`
   }
 
   @media (min-width: ${collapseWidth}px) {
-    padding-bottom: 77px;
     margin-bottom: 160px;
   }
 `;
@@ -68,7 +71,7 @@ const HomePage = () => {
       <div className="content-wrapper">
         <h1>CIVIC</h1>
         <p className="page-subtitle">
-          A system for public data, built on collaboration
+          A system for public data, built on public collaboration
         </p>
         <div className="intro-wrapper">
           <img
@@ -77,18 +80,18 @@ const HomePage = () => {
             alt="placeholder"
           />
           <p className="intro-text">
-            CIVIC brings technology, teamwork, and creativity together in a
-            system built for the needs of institutions managing important data
-            systems with public value.
+            CIVIC Platform is a technology environment that makes institutional
+            data more accessible, enabling creative applications and analysis.
           </p>
           <div className="section-button-container">
-            <Button margin="0 0 0 0">EXPLORE CIVIC</Button>
+            <Button margin="0 0 0 0">{`SEE WHAT'S POSSIBLE >`}</Button>
           </div>
         </div>
 
         <p className="section-header">JOIN THE MOVEMENT</p>
 
-        <div className="home-section" css={sectionWorkLayout} id="work-with-us">
+        <div className="nav-div" id="work-with-us" />
+        <div className="home-section" css={sectionWorkLayout}>
           <h2>Work With Us</h2>
           <p className="audience-content">
             CITIES, GOVERNMENTS &<br />
@@ -123,11 +126,8 @@ const HomePage = () => {
           />
         </div>
 
-        <div
-          className="home-section"
-          css={sectionContributorLayout}
-          id="become-a-contributor"
-        >
+        <div className="nav-div" id="become-a-contributor" />
+        <div className="home-section" css={sectionContributorLayout}>
           <h2>Become a Contributor</h2>
           <p className="audience-content">
             DESIGNERS, DEVELOPERS,
@@ -168,11 +168,8 @@ const HomePage = () => {
 
         <p className="section-header">ABOUT</p>
 
-        <div
-          className="home-section"
-          css={sectionPlatformLayout}
-          id="civic-platform"
-        >
+        <div className="nav-div" id="civic-platform" />
+        <div className="home-section" css={sectionPlatformLayout}>
           <h2>CIVIC Platform</h2>
           <p>
             The CIVIC Platform is designed for making public information public
@@ -185,39 +182,11 @@ const HomePage = () => {
             teams or resources. If you’ve a developer, you don’t have to join a
             team to start contributing.
           </p>
-          <h3 className="platform-h4">CIVIC PLATFORM IS COMPRISED OF:</h3>
-          <img
-            css={css`
-              margin-left: -15px;
-              width: 100%;
-            `}
-            src={placeholderPlatformImg}
-            alt="placeholder"
-          />
-          {/* <div className="link-container">
-            <a className="platform-link" href="http://service.civicpdx.org/">
-              EXPLORE DATA
-            </a>
-            <a
-              className="platform-link"
-              href="https://github.com/hackoregon?type=source"
-            >
-              EXPLORE CODE
-            </a>
-            <a
-              className="platform-link"
-              href="https://hackoregon.github.io/civic/"
-            >
-              DOCUMENTATION
-            </a>
-          </div> */}
+          <PlatformExplorer />
         </div>
 
-        <div
-          className="home-section"
-          css={sectionCivicLayout}
-          id="civic-software-foundation"
-        >
+        <div className="nav-div" id="civic-software-foundation" />
+        <div className="home-section" css={sectionCivicLayout}>
           <h2>Civic Software Foundation</h2>
           <p className="audience-content">OUR BOTTOM LINE IS PUBLIC INTEREST</p>
           <p>

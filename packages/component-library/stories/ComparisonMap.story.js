@@ -105,6 +105,17 @@ export default () =>
         const leftMapTitle = text("Map Title - Left", "", GROUP_IDS.DESIGN);
         const rightMapTitle = text("Map Title - Right", "", GROUP_IDS.DESIGN);
 
+        const leftTitleColor = text(
+          "Map color - Left",
+          "black",
+          GROUP_IDS.DESIGN
+        );
+        const rightTitleColor = text(
+          "Title Color - Right",
+          "white",
+          GROUP_IDS.DESIGN
+        );
+
         const onLayerClick = info => action("Layer Clicked:")(info);
         const fetchURL = text("Data API URL:", API_URL, GROUP_IDS.DATA);
 
@@ -170,8 +181,10 @@ export default () =>
                   initialViewport={initialViewport}
                   leftMap={leftMap}
                   leftMapTitle={leftMapTitle}
+                  leftTitleColor={leftTitleColor}
                   rightMap={rightMap}
                   rightMapTitle={rightMapTitle}
+                  rightTitleColor={rightTitleColor}
                   showDivider={showDivider}
                   sliderStartPosition={sliderStartPosition}
                 />

@@ -44,7 +44,7 @@ const RadioButtonGroup = ({
           />
         ))}
       </MaterialRadioGroup>
-      <FormHelperText>{formHelperText}</FormHelperText>
+      {formHelperText && <FormHelperText>{formHelperText}</FormHelperText>}
     </FormControl>
   </ThemeProvider>
 );

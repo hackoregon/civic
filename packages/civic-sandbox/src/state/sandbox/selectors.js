@@ -1,8 +1,6 @@
+/* eslint-disable no-nested-ternary */
 import { createSelector } from "reselect";
-import { isArray } from "lodash";
 import { rootState } from "../selectors";
-
-import { slides, foundations } from "../layerStyles";
 
 export const getState = createSelector(
   rootState,
@@ -13,12 +11,6 @@ export const getSandbox = createSelector(
   rootState,
   ({ sandbox = {} }) => sandbox
 );
-
-const getProperty = key =>
-  createSelector(
-    getState,
-    state => state[key]
-  );
 
 const getSandboxProperty = key =>
   createSelector(
@@ -34,32 +26,37 @@ export const getSandboxData = getSandboxProperty("sandbox");
 export const getFoundations = getSandboxProperty("foundations");
 export const getFoundationError = getSandboxProperty("foundationError");
 export const getSelectedPackage = getSandboxProperty("selectedPackage");
+export const getSelectedSlideKey = getSandboxProperty("selectedSlideKey");
 export const getPackages = getSandboxProperty("packages");
 export const getSlidesSuccess = getSandboxProperty("slidesSuccess");
-export const isAnyError =
-  getSandboxProperty("foundationError") || getSandboxProperty("slidesError");
+export const isAnyError = getSandboxProperty("slidesError");
 export const getSelectedFoundation = getSandboxProperty("selectedFoundation");
 export const getSelectedSlides = getSandboxProperty("selectedSlide");
-export const isAllSandboxLoading = isFoundationLoading || areSlidesLoading;
+export const isAllSandboxLoading = areSlidesLoading;
 
 export const getSelectedPackageData = createSelector(
   getSandboxData,
   getSelectedPackage,
   (data, selectedPackage) => data.packages && data.packages[selectedPackage]
 );
-export const getFoundationData = createSelector(
-  getSandboxData,
-  getSelectedFoundation,
-  (sandbox, foundation) => sandbox.foundations[foundation]
-);
 
 export const getSlidesData = createSelector(
   getSandboxData,
   getSelectedSlides,
-  (sandbox, slides) =>
-    isArray(slides)
-      ? slides.map(slide => sandbox.slides[slide])
-      : [sandbox.slides[slides]]
+  getSelectedPackage,
+  (sandbox, selectedSlides, selectedPackage) => {
+    const [packageMatch] = sandbox.packages.filter(d => {
+      return d.displayName === selectedPackage;
+    });
+
+    const selectedSlidesData = packageMatch.layers.map(d => {
+      return selectedSlides.includes(d.name)
+        ? { slide: d, defaultSlide: true }
+        : { slide: d, defaultSlide: false };
+    });
+
+    return selectedSlidesData;
+  }
 );
 
 export const getSelectedFoundationData = createSelector(
@@ -73,247 +70,131 @@ export const getSelectedSlidesData = createSelector(
 );
 
 export const getLayerSlides = createSelector(
-  getSlidesData,
   getSelectedSlidesData,
-  (defaultSlides, selectedSlides) => {
-    if (
-      defaultSlides &&
-      defaultSlides.length &&
-      selectedSlides &&
-      selectedSlides.length
-    ) {
-      const formatSlideData = defaultSlides
-        .map(slideDatum => {
-          const slideData = selectedSlides.find(slide => {
-            const fetchedSlideDataName = Object.keys(slide)[0];
-            const endpointSlideDataName = slideDatum.name;
-            return fetchedSlideDataName === endpointSlideDataName;
-          });
-          const slideDataObj = slideData
-            ? slides(slideData[slideDatum.name])[slideDatum.name]
-            : null;
-          return [
-            {
-              data: slideDataObj ? slideDataObj.boundary : {}
-            },
-            {
-              data: slideDataObj ? slideDataObj.map : {}
-            }
-          ];
-        })
-        .reduce((a, b) => a.concat(b), []);
-      return [...formatSlideData];
-    }
-    return [{ data: {} }];
-  }
-);
+  getSelectedSlides,
+  getSelectedSlideKey,
+  (slidesData, selectedSlides, selectedSlideKey) => {
+    const filteredSlideVizData = selectedSlides.reduce((a, c) => {
+      const findSlide = slidesData.find(e => e.displayName === c);
+      return findSlide ? [...a, findSlide] : a;
+    }, []);
 
-export const getLayerFoundation = createSelector(
-  getFoundationData,
-  getSelectedFoundationData,
-  (defaultFn, selectedFn = {}) => {
-    const selectedFoundation = selectedFn || {};
-    const foundationLayerData = {
-      data: selectedFoundation.slide_data
-        ? foundations(selectedFn)[defaultFn.name]
-        : {}
-    };
-    return foundationLayerData;
-  }
-);
-
-const makeVisFor = (spec, data) => {
-  const type = spec.visualization.type;
-  if (type === "PercentDonut") {
-    const val = data.object.properties[spec.field];
-    const comparisonName = spec.visualization.comparison_name
-      ? spec.visualization.comparison_name
-      : " ";
-    return {
-      id: data.object.id,
-      visualizationType: "PercentDonut",
-      title: spec.name,
-      data: [
-        { x: spec.name, y: val },
-        {
-          x: comparisonName,
-          y: val < 1 ? 1 - val : 100 - val
+    const formattedSliderVizData = filteredSlideVizData.map(d => {
+      const mapProps = {
+        ...d.visualization.map,
+        tooltip: {
+          ...d.visualization.tooltip
+        },
+        fieldName: {
+          ...d.visualization.map.fieldName,
+          color: selectedSlideKey[d.displayName]
+            ? selectedSlideKey[d.displayName]
+            : d.visualization.map.fieldName &&
+              d.visualization.map.fieldName.color
+            ? d.visualization.map.fieldName.color
+            : "",
+          area: selectedSlideKey[d.displayName]
+            ? selectedSlideKey[d.displayName]
+            : d.visualization.map.fieldName &&
+              d.visualization.map.fieldName.area
+            ? d.visualization.map.fieldName.area
+            : ""
         }
-      ]
-    };
-  }
-  if (type === "Text" || type === "ComparisonBar") {
-    return {
-      id: data.object.id,
-      visualizationType: "Text",
-      title: spec.name,
-      data:
-        data.object.properties[spec.field] !== null &&
-        data.object.properties[spec.field] !== undefined
-          ? data.object.properties[spec.field]
-          : "Data Not Available"
-    };
-  }
-};
+      };
 
-export const getSelectedFoundationDatum = createSelector(
-  getSandbox,
-  getSelectedFoundationData,
-  ({ selectedFoundationDatum }, foundation) => {
-    if (!foundation || !selectedFoundationDatum) return [];
+      return {
+        ...mapProps,
+        data: d.results ? d.results.features : [],
+        layerInfo: d
+      };
+    });
 
-    const attrs = foundation.slide_meta.attributes;
-    const visualizations = [];
-
-    const selectedFoundationDatumProps =
-      selectedFoundationDatum.object.properties;
-    const primaryFieldMatch = selectedFoundationDatumProps.hasOwnProperty(
-      attrs.primary.field
-    );
-    const secondaryFieldMatch = selectedFoundationDatumProps.hasOwnProperty(
-      attrs.secondary.field
-    );
-
-    if (!primaryFieldMatch && !secondaryFieldMatch) return [];
-
-    if (attrs.primary && attrs.primary.field && attrs.primary.visualization) {
-      visualizations.push(makeVisFor(attrs.primary, selectedFoundationDatum));
-    }
-    if (
-      attrs.secondary &&
-      attrs.secondary.field &&
-      attrs.primary.visualization
-    ) {
-      visualizations.push(makeVisFor(attrs.secondary, selectedFoundationDatum));
-    }
-
-    return visualizations;
+    return formattedSliderVizData;
   }
 );
 
 export const getSelectedSlideDatum = createSelector(
   getSandbox,
   getSelectedSlidesData,
-  ({ selectedSlideDatum }, slide) => {
-    if (!slide || !selectedSlideDatum || !selectedSlideDatum.object) return;
+  getSelectedSlides,
+  getSelectedSlideKey,
+  ({ selectedSlideDatum }, slides, selectedSlides, selectedSlideKey) => {
+    if (!selectedSlideDatum || !selectedSlideDatum.feature.object || !slides)
+      return;
+    const { feature: slideFeature, index: slideIndex } = selectedSlideDatum;
 
-    const datumFieldNames = Object.keys(selectedSlideDatum.object.properties);
-    if (datumFieldNames.length < 1) return;
+    const activeLayerName = selectedSlides[slideIndex];
 
-    const slideAttributes = slide.map((slideObject, index) => {
-      const [slideName] = Object.keys(slideObject);
-      const attrs = slideObject[slideName].slide_meta.attributes;
-      const slideAttrObj = {};
-      slideAttrObj["index"] = index;
-      if (attrs.primary.field) {
-        slideAttrObj["primary"] = attrs.primary;
-      }
-      if (attrs.secondary.field) {
-        slideAttrObj["secondary"] = attrs.secondary;
-      }
-      return slideAttrObj;
+    const activeLayer = slides.find(s => {
+      return s.displayName === activeLayerName;
     });
 
-    const findSlideIndex = slideAttributes.filter(d => {
-      const primary = d.primary;
-      const secondary = d.secondary;
-      if (primary && secondary) {
-        return datumFieldNames.includes(d.primary.field && d.secondary.field);
-      } else if (primary) {
-        return datumFieldNames.includes(d.primary.field);
-      } else {
-        return false;
-      }
-    });
+    if (
+      !activeLayer ||
+      !activeLayer.visualization ||
+      !activeLayer.visualization.tooltip
+    )
+      return;
+    const tooltipFields = activeLayer.visualization.tooltip;
 
-    if (findSlideIndex.length < 1) return;
-    const slideIndex = findSlideIndex[0].index;
-
-    const tooltipObj = {};
-    tooltipObj["x"] = selectedSlideDatum.x;
-    tooltipObj["y"] = selectedSlideDatum.y;
-    tooltipObj["content"] = [];
-
-    const [tooltipSlideName] = Object.keys(slide[slideIndex]);
-
-    const tooltipSlideAttrs =
-      slide[slideIndex][tooltipSlideName].slide_meta.attributes;
-    const tooltipPrimary = tooltipSlideAttrs.primary;
-    const tooltipSecondary = tooltipSlideAttrs.secondary;
-
-    const datumProps = selectedSlideDatum.object.properties;
-
-    if (tooltipPrimary && tooltipPrimary.field) {
-      tooltipObj.content.push({
-        name: tooltipPrimary.name,
-        value: datumProps[tooltipPrimary.field]
+    const tooltipInfo = {
+      x: slideFeature.x,
+      y: slideFeature.y,
+      content: []
+    };
+    if (
+      tooltipFields &&
+      tooltipFields.primary &&
+      tooltipFields.primary.label &&
+      tooltipFields.primary.fieldName
+    ) {
+      const tooltipFieldName = selectedSlideKey[activeLayerName]
+        ? selectedSlideKey[activeLayerName]
+        : tooltipFields.primary.fieldName;
+      tooltipInfo.content.push({
+        name: tooltipFields.primary.label,
+        value: slideFeature.object.properties[tooltipFieldName]
       });
     }
-    if (tooltipSecondary && tooltipSecondary.field) {
-      tooltipObj.content.push({
-        name: tooltipSecondary.name,
-        value: datumProps[tooltipSecondary.field]
+    if (
+      tooltipFields &&
+      tooltipFields.secondary &&
+      tooltipFields.secondary.label &&
+      tooltipFields.secondary.fieldName
+    ) {
+      tooltipInfo.content.push({
+        name: tooltipFields.secondary.label,
+        value: slideFeature.object.properties[tooltipFields.secondary.fieldName]
       });
     }
 
-    return tooltipObj;
+    // eslint-disable-next-line consistent-return
+    return tooltipInfo;
   }
 );
 
 export const getAllSlides = createSelector(
-  getSandboxData,
-  getSelectedPackageData,
+  getSelectedSlidesData,
   getSelectedSlides,
-  (sandbox, packageData, selectedSlides) => {
-    const allPackageSlideNumbers = isArray(packageData.slides)
-      ? packageData.slides
-      : [packageData.slides];
-    const allSlidesArr = allPackageSlideNumbers.map(
-      slide => sandbox.slides[slide]
-    );
-    const dataObj = { slide_data: {}, slide_meta: {} };
-    const allSlides = allSlidesArr.map((slide, index) => {
-      const mapObj = slides(dataObj)[slide.name];
-      const gray = [238, 238, 238, 255];
-      const color = mapObj.boundary.getLineColor
-        ? mapObj.boundary.getLineColor()
-        : gray;
-      const mapType = mapObj.map.mapType;
+  (selectedSlidesData, selectedSlides) => {
+    const allSlides = selectedSlidesData.map((s, indx) => {
+      const vizCheck = s.visualization && s.visualization.map;
       return {
-        slideId: allPackageSlideNumbers[index],
-        endpoint: slide.endpoint,
-        label: slide.name,
-        checked: selectedSlides.includes(allPackageSlideNumbers[index])
-          ? true
-          : false,
-        color,
-        mapType
+        slideId: indx,
+        endpoint: s.dataEndpoint,
+        label: s.displayName,
+        checked: !!selectedSlides.includes(s.displayName),
+        civicColor:
+          vizCheck && s.visualization.map.civicColor
+            ? s.visualization.map.civicColor
+            : "",
+        mapType:
+          vizCheck && s.visualization.map.mapType
+            ? s.visualization.map.mapType
+            : ""
       };
     });
-    return allSlides;
-  }
-);
 
-export const getfoundationMapProps = createSelector(
-  getSandboxData,
-  getSelectedFoundation,
-  (sandbox, selectedFoundation) => {
-    const dataObj = { slide_meta: {}, slide_data: {} };
-    const foundationMapObj = foundations(dataObj)[
-      sandbox.foundations[selectedFoundation].name
-    ];
-    const foundationMapProps = {
-      color: foundationMapObj.color,
-      getPropValue: foundationMapObj.getPropValue,
-      propName: foundationMapObj.propName,
-      scaleType: foundationMapObj.scaleType
-    };
-    if (
-      foundationMapObj.scaleType === "ordinal" ||
-      foundationMapObj.scaleType === "threshold"
-    ) {
-      foundationMapProps.categories = foundationMapObj.categories;
-    }
-    return foundationMapProps;
+    return allSlides;
   }
 );

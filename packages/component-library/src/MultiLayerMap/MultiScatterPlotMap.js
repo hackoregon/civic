@@ -2,6 +2,7 @@ import React from "react";
 import { ScatterplotLayer } from "deck.gl";
 import { number, string, bool, func, arrayOf, shape } from "prop-types";
 import shortid from "shortid";
+import centerOfMass from "@turf/center-of-mass";
 import {
   createColorScale,
   updateQuantileScale,
@@ -26,7 +27,8 @@ const MultiScatterPlotMap = props => {
     scaleType = {},
     fieldName = {},
     dataRange = [],
-    colorRange = []
+    colorRange = [],
+    index
   } = props;
 
   let colorScale = createColorScale(
@@ -66,6 +68,20 @@ const MultiScatterPlotMap = props => {
     return colorScale();
   };
 
+  const memoizedData = React.useMemo(() => {
+    if (data.length === 0) {
+      return [];
+    }
+    return data[0].geometry.type === "Polygon" ||
+      data[0].geometry.type === "MultiPolygon"
+      ? data
+          .map(d =>
+            centerOfMass(d.geometry, { properties: { ...d.properties } })
+          )
+          .filter(d => d.geometry)
+      : data;
+  }, [data]);
+
   const getRadius = createSizeScale(radius, scaleType, fieldName);
 
   const { area: scaleTypeArea } = scaleType;
@@ -77,7 +93,7 @@ const MultiScatterPlotMap = props => {
       key={shortid.generate()}
       id={id}
       pickable={pickable}
-      data={data}
+      data={memoizedData}
       getPosition={getPosition}
       opacity={opacity}
       getFillColor={getColor}
@@ -86,7 +102,7 @@ const MultiScatterPlotMap = props => {
       radiusMinPixels={1}
       autoHighlight={autoHighlight}
       highlightColor={highlightColor}
-      onHover={onHoverSlide}
+      onHover={info => onHoverSlide(info, index)}
       onClick={onLayerClick}
       updateTriggers={{
         getColor,
@@ -119,7 +135,8 @@ MultiScatterPlotMap.propTypes = {
     color: string
   }),
   dataRange: arrayOf(string),
-  colorRange: arrayOf(arrayOf(number))
+  colorRange: arrayOf(arrayOf(number)),
+  index: number
 };
 
 export default MultiScatterPlotMap;

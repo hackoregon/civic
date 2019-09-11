@@ -1,6 +1,5 @@
+/* eslint-disable no-nested-ternary */
 import axios from "axios";
-
-const echo = a => a;
 
 const apiAdapter = (url, { start, success, failure }) => () => dispatch => {
   dispatch(start());
@@ -25,7 +24,7 @@ export const fetchByDateAdapter = (
   { start, success, failure }
 ) => () => dispatch => {
   dispatch(start());
-  const url = slide.endpoint;
+  const url = slide.layerEndpoint;
   const secureURL = url.includes("https")
     ? url
     : `${url.slice(0, 4)}s${url.slice(4)}`;
@@ -46,36 +45,52 @@ export const fetchByDateAdapter = (
     });
 };
 
-export const fetchAllSlidesAdapter = (
-  slides,
+export const fetchLayersAdapter = (
+  layersArr,
   { start, success, failure }
 ) => () => dispatch => {
   dispatch(start());
-  const fullUrls = slides.map(slide => {
-    const url = slide.endpoint;
-    const secureURL = url.includes("https")
+
+  const fetchLayers = layersArr.map(layerObj => {
+    const url = layerObj.slide.layerEndpoint;
+    const isSecureURL = url.includes("https")
       ? url
       : `${url.slice(0, 4)}s${url.slice(4)}`;
-    return axios.get(secureURL);
+    return axios.get(isSecureURL);
   });
-
-  return axios
-    .all(fullUrls)
-    .then(
-      axios.spread((...res) => {
-        dispatch(
-          success(
-            res.map((r, i) => ({
-              [slides[i].name]: r.data
-            }))
-          )
-        );
-        return res;
-      })
-    )
-    .catch(err => {
-      dispatch(failure(err));
+  return axios.all(fetchLayers).then(layerDataArr => {
+    const geoDataURLs = layerDataArr.map((layer, i) => {
+      return {
+        url: layer.data.dataEndpoint,
+        prevData: layersArr[i].geoJSON
+      };
     });
+
+    const fetchGeoData = geoDataURLs.map((gd, i, arr) => {
+      const findMatch = arr.findIndex(d => d.url === gd.url && d.prevData);
+      return findMatch > -1
+        ? { data: { results: layersArr[findMatch].geoJSON } }
+        : gd.url && layersArr[i].defaultSlide && !layersArr[i].geoJSON
+        ? axios.get(gd.url)
+        : {};
+    });
+
+    return axios
+      .all(fetchGeoData)
+      .then(geoData => {
+        const layerAndGeoData = geoData.map((g, i) => {
+          return {
+            ...g.data,
+            ...layerDataArr[i].data
+          };
+        });
+        dispatch(success(layerAndGeoData));
+        return geoData;
+      })
+      .catch(err => {
+        dispatch(failure(err));
+      });
+  });
 };
 
 export default apiAdapter;

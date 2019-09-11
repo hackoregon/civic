@@ -24,9 +24,9 @@ const SandboxBaseMapSelector = ({ onBaseMapStyleChange, baseMapStyle }) => {
         />
         <label htmlFor="light">Light</label>
         <input
-          checked={baseMapStyle === "dark"}
+          checked={baseMapStyle === "sandbox-dark"}
           type="radio"
-          value="dark"
+          value="sandbox-dark"
           onChange={onBaseMapStyleChange}
         />
         <label htmlFor="dark">Dark</label>

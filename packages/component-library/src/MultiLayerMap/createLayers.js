@@ -17,7 +17,7 @@ const convertToRGB = colorArray => {
     .map(d => [d.r, d.g, d.b]);
 };
 
-const createRange = (civicColor, colorRange) => {
+export const createRange = (civicColor, colorRange) => {
   if (colorRange.length) {
     if (d3Color(colorRange[0])) {
       return convertToRGB(colorRange);
@@ -36,8 +36,8 @@ export const updateEqualScale = (
   featuresData,
   equalScale,
   civicColorSelection,
-  equalDomain,
-  equalRange,
+  equalDomain = [],
+  equalRange = [],
   field
 ) => {
   const { color: colorFieldName } = field;
@@ -60,7 +60,7 @@ export const updateQuantileScale = (
   featuresData,
   quantileScale,
   civicColorSelection,
-  quantileRange,
+  quantileRange = [],
   field
 ) => {
   const { color: colorFieldName } = field;
@@ -70,7 +70,7 @@ export const updateQuantileScale = (
     .reduce((a, c) => (a.indexOf(c) === -1 ? [...a, c] : a), []);
 
   const colorRange = quantileRange.length
-    ? quantileRange
+    ? createRange("", quantileRange)
     : CIVIC_MAP_COLORS[civicColorSelection]
     ? CIVIC_MAP_COLORS[civicColorSelection]
     : CIVIC_MAP_COLORS.earth;
@@ -93,8 +93,8 @@ const createDiscreteScale = (categories, colorRange) => {
   const range = createRange("", colorRange);
   return scaleOrdinal()
     .domain(categories)
-    .range(range)
-    .unknown([255, 255, 255, 128]);
+    .range(range);
+  // .unknown([255, 255, 255, 128]);
 };
 
 export const createColorScale = (
@@ -125,7 +125,8 @@ export const createSizeScale = (width, scaleType = {}, fieldName = {}) => {
   const { area: areaFieldName } = fieldName;
 
   if (scaleType && areaScaleType === "circle area") {
-    return feature => Math.sqrt(feature.properties[areaFieldName] / Math.PI);
+    return feature =>
+      Math.sqrt(Math.abs(+feature.properties[areaFieldName]) / Math.PI);
   }
   return () => width;
 };

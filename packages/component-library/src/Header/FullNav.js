@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
 import { useState, useRef } from "react";
-import { Logo, BrandColors } from "@hackoregon/component-library";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Grow from "@material-ui/core/Grow";
 import Paper from "@material-ui/core/Paper";
@@ -10,8 +9,9 @@ import MenuList from "@material-ui/core/MenuList";
 import MenuItem from "@material-ui/core/MenuItem";
 import { Link } from "react-router";
 
-import { defaultFontSize } from "./index.styles";
 import navCaret from "../../assets/nav-caret.svg";
+import { defaultFontSize } from "../../constants/styles";
+import { Logo, BrandColors } from "../index";
 
 const { primary, action } = BrandColors;
 const menuColor = "#F3F2F3";
@@ -53,6 +53,13 @@ const linkContainer = css`
   grid-template-columns: repeat(4, max-content);
   grid-gap: ${48 / defaultFontSize}rem;
   justify-items: end;
+  margin: 0;
+  padding: 0;
+`;
+
+const listStyle = css`
+  display: unset;
+  text-align: unset;
 `;
 
 const linkStyle = css`
@@ -83,6 +90,7 @@ const menuButton = css`
 
 const buttonText = css`
   line-height: unset;
+  margin: 0;
 
   :hover {
     color: ${action.hex};
@@ -150,12 +158,12 @@ const FullNav = props => {
       <div />
       <nav css={navStyle} aria-label="Site">
         <ul css={linkContainer}>
-          <li>
+          <li css={listStyle}>
             <Link to="/cards" css={linkStyle}>
               EXPLORE CIVIC
             </Link>
           </li>
-          <li>
+          <li css={listStyle}>
             <button
               css={menuButton}
               type="button"
@@ -215,7 +223,7 @@ const FullNav = props => {
               )}
             </Popper>
           </li>
-          <li>
+          <li css={listStyle}>
             <button
               css={menuButton}
               type="button"
@@ -275,7 +283,7 @@ const FullNav = props => {
               )}
             </Popper>
           </li>
-          <li>
+          <li css={listStyle}>
             <a css={linkStyle} href="#contact-us">
               CONTACT
             </a>

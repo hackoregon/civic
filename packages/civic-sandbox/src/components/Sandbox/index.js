@@ -1,144 +1,174 @@
 /* eslint-disable no-console */
-import React from "react";
-import { css } from "emotion";
-import { connect } from "react-redux";
 /* eslint-disable import/no-extraneous-dependencies */
-import "react-select/dist/react-select.css";
-import { isArray } from "lodash";
-import { Sandbox, Logo } from "@hackoregon/component-library";
+import React from "react";
+import { connect } from "react-redux";
+import { css } from "emotion";
+import { Sandbox } from "@hackoregon/component-library";
+import { arrayOf, shape, func, string, bool } from "prop-types";
 import { equals } from "ramda";
+
+import "react-select/dist/react-select.css";
 
 import {
   fetchFoundation,
-  fetchSlides,
+  fetchLayers,
   setFoundation,
   setSlides,
   setPackage,
+  setSlideKey,
   fetchSlideByDate,
   setSelectedFoundationDatum,
   setSelectedSlideDatum
 } from "../../state/sandbox/actions";
+
 import {
   isAllSandboxLoading,
   getSandboxData,
-  isFoundationLoading,
   getSelectedPackageData,
-  getFoundationError,
   isAnyError,
-  getFoundationData,
   getSlidesData,
   getSelectedFoundationData,
   getSelectedSlidesData,
-  getLayerFoundation,
   getSelectedPackage,
   getSelectedFoundation,
   getSelectedSlides,
   getLayerSlides,
   getSelectedSlideDatum,
-  getAllSlides,
-  getfoundationMapProps,
-  getSelectedFoundationDatum
+  getAllSlides
 } from "../../state/sandbox/selectors";
 
 class SandboxComponent extends React.Component {
-  constructor(props) {
+  constructor() {
     super();
     this.state = {
-      drawerVisible: false
+      drawerVisible: true
     };
     this.updateSlide = this.updateSlide.bind(this);
     this.toggleDrawer = this.toggleDrawer.bind(this);
   }
+
   componentDidMount() {
-    this.props.fetchFoundation(this.props.foundationData.endpoint);
-    this.props.fetchSlides(this.props.slidesData);
+    const { slidesData, fetchLayers: cdmFetchLayers } = this.props;
+    const layerURLs = slidesData;
+    cdmFetchLayers(layerURLs);
   }
+
   componentDidUpdate(prevProps) {
-    if (!equals(this.props.selectedPackage, prevProps.selectedPackage)) {
-      this.props.fetchFoundation(this.props.foundationData.endpoint);
-      this.props.fetchSlides(this.props.slidesData);
-    }
+    const {
+      slidesData,
+      selectedPackage,
+      selectedSlide,
+      selectedSlidesData,
+      fetchLayers: cduFetchLayers
+    } = this.props;
+
     if (
-      equals(this.props.selectedPackage, prevProps.selectedPackage) &&
-      !equals(this.props.selectedFoundation, prevProps.selectedFoundation)
+      equals(selectedPackage, prevProps.selectedPackage) &&
+      !equals(selectedSlide, prevProps.selectedSlide)
     ) {
-      this.props.fetchFoundation(this.props.foundationData.endpoint);
+      const onlyFetchNewLayers = slidesData.map((layer, index) => {
+        const previouslyFetchedData = selectedSlidesData[index].results;
+        return !previouslyFetchedData &&
+          !prevProps.selectedSlide.includes(layer.slide.name) &&
+          selectedSlide.includes(layer.slide.name)
+          ? layer
+          : {
+              ...layer,
+              geoJSON: previouslyFetchedData
+            };
+      });
+
+      if (onlyFetchNewLayers.length) {
+        cduFetchLayers(onlyFetchNewLayers);
+      }
     }
-    if (
-      equals(this.props.selectedPackage, prevProps.selectedPackage) &&
-      !equals(this.props.selectedSlide, prevProps.selectedSlide)
-    ) {
-      const fetchedSlideDataNames = this.props.selectedSlidesData.map(
-        slideDatum => {
-          return Object.keys(slideDatum)[0];
-        }
-      );
-      const onlyFetchNewSlide = this.props.slidesData.filter(
-        d => !fetchedSlideDataNames.includes(d.name)
-      );
-      this.props.fetchSlides(onlyFetchNewSlide);
+
+    if (!equals(selectedPackage, prevProps.selectedPackage)) {
+      cduFetchLayers(slidesData);
     }
   }
+
   updateSlide = event => {
-    const slideNumber = event.target.name;
-    const selectedSlides = this.props.selectedSlide.includes(slideNumber)
-      ? this.props.selectedSlide.filter(num => num !== slideNumber)
-      : [...this.props.selectedSlide, slideNumber];
-    this.props.setSlides(selectedSlides);
+    const { selectedSlide, allSlides, setSlides: updateSetSlides } = this.props;
+    const slideName = event.target.value;
+
+    const orderSelectedSlides = [...allSlides].reduce((a, c, i) => {
+      // eslint-disable-next-line no-param-reassign
+      a[c.label] = i;
+      return a;
+    }, {});
+
+    const reorderSelectedSlides = selectedSlide.includes(slideName)
+      ? selectedSlide.filter(name => name !== slideName)
+      : [
+          ...selectedSlide.slice(0, orderSelectedSlides[slideName]),
+          slideName,
+          ...selectedSlide.slice(orderSelectedSlides[slideName])
+        ];
+
+    updateSetSlides(reorderSelectedSlides);
   };
+
   toggleDrawer = () => {
-    this.setState({ drawerVisible: !this.state.drawerVisible });
+    this.setState(prevState => {
+      return {
+        drawerVisible: !prevState.drawerVisible
+      };
+    });
   };
+
   render() {
+    const {
+      layerSlides,
+      setFoundation: renderSetFoundation,
+      fetchSlideByDate: renderFetchSlideByDate,
+      setPackage: renderSetPackage,
+      sandboxData,
+      selectedPackage,
+      selectedFoundation,
+      selectedSlide,
+      selectedSlidesData,
+      slidesData,
+      selectedFoundationData,
+      foundationData,
+      slideHover,
+      selectedSlideDatum,
+      allSlides,
+      isLoading,
+      isError,
+      setSlideKey: renderSetSlideKey
+    } = this.props;
+    const { drawerVisible } = this.state;
+
     const styles = css(`
       font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
     `);
 
-    const loadingContainer = css`
-      display: flex;
-      height: 300px;
-    `;
-    const loading = css`
-      font-size: 1.5rem;
-      margin: auto;
-      text-align: center;
-      font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
-    `;
-    const loader = (
-      <div className={loadingContainer}>
-        <div className={loading}>
-          <Logo type="squareLogoAnimated" alt="Loading..." />
-        </div>
-      </div>
-    );
-
-    const layerData = [this.props.layerFoundation, ...this.props.layerSlides];
-    return this.props.isLoading ? (
-      loader
-    ) : (
+    const layerData = [...layerSlides];
+    return (
       <Sandbox
         layerData={layerData}
-        updateFoundation={this.props.setFoundation}
+        updateFoundation={renderSetFoundation}
         updateSlide={this.updateSlide}
         toggleDrawer={this.toggleDrawer}
-        fetchSlideDataByDate={this.props.fetchSlideByDate}
-        updatePackage={this.props.setPackage}
+        fetchSlideDataByDate={renderFetchSlideByDate}
+        updatePackage={renderSetPackage}
         styles={styles}
-        data={this.props.sandboxData}
-        selectedPackage={this.props.selectedPackage}
-        selectedFoundation={this.props.selectedFoundation}
-        selectedSlide={this.props.selectedSlide}
-        drawerVisible={this.state.drawerVisible}
-        slideData={this.props.selectedSlidesData}
-        defaultSlides={this.props.slidesData}
-        foundationData={this.props.selectedFoundationData}
-        defaultFoundation={this.props.foundationData}
-        onFoundationClick={this.props.foundationClick}
-        onSlideHover={this.props.slideHover}
-        tooltipInfo={this.props.selectedSlideDatum}
-        allSlides={this.props.allSlides}
-        foundationMapProps={this.props.foundationMapProps}
-        selectedFoundationDatum={this.props.selectedFoundationDatum}
+        data={sandboxData}
+        selectedPackage={selectedPackage}
+        selectedFoundation={selectedFoundation}
+        selectedSlide={selectedSlide}
+        drawerVisible={drawerVisible}
+        slideData={selectedSlidesData}
+        defaultSlides={slidesData}
+        foundationData={selectedFoundationData}
+        defaultFoundation={foundationData}
+        onSlideHover={slideHover}
+        tooltipInfo={selectedSlideDatum}
+        allSlides={allSlides}
+        areSlidesLoading={isLoading}
+        errors={isError}
+        updateSlideKey={renderSetSlideKey}
       />
     );
   }
@@ -155,30 +185,29 @@ export default connect(
     selectedPackage: getSelectedPackage(state),
     selectedPackageData: getSelectedPackageData(state),
     selectedFoundation: getSelectedFoundation(state),
-    foundationData: getFoundationData(state),
     slidesData: getSlidesData(state),
     selectedFoundationData: getSelectedFoundationData(state),
     selectedSlidesData: getSelectedSlidesData(state),
-    layerFoundation: getLayerFoundation(state),
     selectedSlide: getSelectedSlides(state),
     layerSlides: getLayerSlides(state),
     selectedSlideDatum: getSelectedSlideDatum(state),
-    allSlides: getAllSlides(state),
-    foundationMapProps: getfoundationMapProps(state),
-    selectedFoundationDatum: getSelectedFoundationDatum(state)
+    allSlides: getAllSlides(state)
   }),
   dispatch => ({
     fetchFoundation(endpoint = "") {
       dispatch(fetchFoundation(endpoint)());
     },
-    fetchSlides(slides = []) {
-      dispatch(fetchSlides(slides)());
+    fetchLayers(slides = []) {
+      dispatch(fetchLayers(slides)());
     },
     fetchSlideByDate(slide, date = "", type = "") {
       dispatch(fetchSlideByDate(slide, date, type)());
     },
     setPackage(selectedPackage = "") {
       dispatch(setPackage(selectedPackage));
+    },
+    setSlideKey(selectedSlideKey = {}) {
+      dispatch(setSlideKey(selectedSlideKey));
     },
     setFoundation(selectedFoundation = "") {
       dispatch(setFoundation(selectedFoundation));
@@ -189,8 +218,33 @@ export default connect(
     foundationClick(feature) {
       dispatch(setSelectedFoundationDatum(feature));
     },
-    slideHover(feature) {
-      dispatch(setSelectedSlideDatum(feature));
+    slideHover(feature, slideIndex) {
+      dispatch(setSelectedSlideDatum(feature, slideIndex));
     }
   })
 )(SandboxComponent);
+
+SandboxComponent.propTypes = {
+  sandboxData: shape({
+    packages: arrayOf(shape({}))
+  }),
+  slidesData: arrayOf(shape({})),
+  selectedPackage: string,
+  selectedSlide: arrayOf(string),
+  selectedSlidesData: arrayOf(shape({})),
+  allSlides: arrayOf(shape({})),
+  layerSlides: arrayOf(shape({})),
+  selectedSlideDatum: shape({}),
+  slideHover: func,
+  fetchLayers: func,
+  fetchSlideByDate: func,
+  setPackage: func,
+  setSlides: func,
+  setSlideKey: func,
+  isLoading: bool,
+  isError: bool,
+  selectedFoundation: string,
+  selectedFoundationData: shape({}),
+  foundationData: arrayOf(),
+  setFoundation: func
+};

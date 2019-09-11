@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
-import { Logo, BrandColors } from "@hackoregon/component-library";
-import { defaultFontSize, browserDefaultSize } from "./index.styles";
+import { Logo, BrandColors } from "../index";
+import { defaultFontSize, browserDefaultSize } from "../../constants/styles";
 
 const footerWrapper = css`
   height: 185px;
@@ -61,6 +61,7 @@ const textStyle = css`
   font-size: ${defaultFontSize / browserDefaultSize}rem;
   line-height: ${50 / defaultFontSize}rem;
   text-decoration: none;
+  margin: 0;
 `;
 
 const boldText = css`
@@ -84,23 +85,29 @@ const Footer = props => (
         </a>
         <p css={boldText}>Creative and Tech HQ</p>
         <p css={textStyle}>Portland, OR</p>
-        <a css={textStyle} href="tel:12345678901">
-          +1-234-567-8901
+        <a css={textStyle} href="tel:5033839131">
+          +1-503-383-9131‬
         </a>
       </div>
       <div css={businessWrapper(props)}>
         <div>
           <p css={boldText}>Business HQ</p>
           <p css={textStyle}>Washington, DC</p>
-          <a css={textStyle} href="tel:12345678901">
-            +1-234-567-8901
+          <a css={textStyle} href="tel:12026641223">
+            +1-202-664-1223
           </a>
         </div>
       </div>
-      <Logo css={logoStyle} type="squareLogo" />
+      <Logo css={logoStyle(props)} type="squareLogo" />
     </div>
   </footer>
 );
+
+Footer.defaultProps = {
+  greatestWidth: 1200,
+  collapseWidth: 845,
+  condensedWidth: 715
+};
 
 Footer.displayName = "Footer";
 

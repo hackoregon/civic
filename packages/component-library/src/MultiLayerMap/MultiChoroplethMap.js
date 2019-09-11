@@ -19,7 +19,7 @@ const MultiChoroplethMap = props => {
     getPolygon = f => f.geometry.coordinates,
     filled = true,
     stroked = true,
-    polygonWidth = 1,
+    lineWidth = 1,
     polygonLineColor = [169, 169, 169],
     autoHighlight = true,
     highlightColor = [255, 255, 0, 100],
@@ -30,7 +30,8 @@ const MultiChoroplethMap = props => {
     },
     fieldName,
     dataRange = [],
-    colorRange = []
+    colorRange = [],
+    index
   } = props;
 
   let choroplethColorScale = createColorScale(
@@ -63,7 +64,7 @@ const MultiChoroplethMap = props => {
 
   const getFillColor = feature => {
     const { color: fieldNameColor } = fieldName;
-    const value = feature.properties[fieldNameColor];
+    const value = feature.properties[`${fieldNameColor}`];
     return value ? choroplethColorScale(value) : [0, 0, 0, 128];
   };
 
@@ -71,7 +72,7 @@ const MultiChoroplethMap = props => {
     return polygonLineColor;
   };
 
-  const getLineWidth = createSizeScale(polygonWidth);
+  const getLineWidth = createSizeScale(lineWidth);
 
   return (
     <GeoJsonLayer
@@ -90,7 +91,7 @@ const MultiChoroplethMap = props => {
       lineWidthScale={1}
       lineJointRounded={false}
       extruded={false}
-      onHover={onHoverSlide}
+      onHover={info => onHoverSlide(info, index)}
       onClick={onLayerClick}
       autoHighlight={autoHighlight}
       highlightColor={highlightColor}
@@ -113,7 +114,7 @@ MultiChoroplethMap.propTypes = {
   getPolygon: func,
   filled: bool,
   stroked: bool,
-  polygonWidth: number,
+  lineWidth: number,
   polygonLineColor: arrayOf(number),
   autoHighlight: bool,
   highlightColor: arrayOf(number),
@@ -126,7 +127,8 @@ MultiChoroplethMap.propTypes = {
     color: string
   }).isRequired,
   dataRange: arrayOf(string),
-  colorRange: arrayOf(arrayOf(number))
+  colorRange: arrayOf(arrayOf(number)),
+  index: number
 };
 
 export default MultiChoroplethMap;

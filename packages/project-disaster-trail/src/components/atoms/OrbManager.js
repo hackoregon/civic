@@ -1,5 +1,6 @@
 /* eslint-disable import/no-named-as-default */
 import React, { useEffect, useState, memo, useRef, useCallback } from "react";
+import { connect } from "react-redux";
 import { map, find as _find, filter } from "lodash";
 import styled from "@emotion/styled";
 
@@ -16,6 +17,8 @@ import {
   createRandomLayout,
   uncompletedOrbHandler
 } from "./OrbManagerHelpers";
+import { playSFX as _playSFX } from "../../state/sfx";
+import { TYPES as SFX_TYPES } from "../../constants/sfx";
 
 const ORB_CONFIG = {
   period: 1,
@@ -42,7 +45,8 @@ const OrbManager = ({
   possibleItems,
   onOrbSelection,
   checkItemIsCorrect,
-  frozenOrbInterface = false
+  frozenOrbInterface = false,
+  playSFX
 } = {}) => {
   const [hasInitialized, setHasInitialized] = useState(false);
   const [orbs, setOrbsState] = useState([]);
@@ -120,6 +124,9 @@ const OrbManager = ({
         orbsByLastTouched.push(orbId);
         setOrbsZIndex(orbsByLastTouched);
 
+        // play orb sound
+        playSFX(SFX_TYPES.GOOD_CHOICE);
+
         return;
       }
 
@@ -129,7 +136,7 @@ const OrbManager = ({
       );
       setTouchedOrb(updatedOrbs);
     },
-    [touchedOrbs, orbsZIndex]
+    [touchedOrbs, orbsZIndex, playSFX]
   );
 
   const setOrbComplete = useCallback(orbId => {
@@ -276,4 +283,11 @@ const OrbsStyle = styled.div`
 `;
 
 // use memo to not re-render OrbManager unless its props change
-export default memo(OrbManager);
+export default connect(
+  null,
+  dispatch => ({
+    playSFX(id) {
+      dispatch(_playSFX(id));
+    }
+  })
+)(memo(OrbManager));

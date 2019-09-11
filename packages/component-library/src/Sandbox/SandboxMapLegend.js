@@ -1,19 +1,23 @@
 /* eslint-disable no-nested-ternary */
 import PropTypes from "prop-types";
-import { scaleQuantize, extent, format } from "d3";
+import { format } from "d3";
+import { startCase } from "lodash";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import shortid from "shortid";
 import civicFormat from "../utils/civicFormat";
+import {
+  createColorScale,
+  updateQuantileScale,
+  updateEqualScale
+} from "../MultiLayerMap/createLayers";
 
 const legendContainer = css(`
-  border-top: 2px solid gainsboro;
-  border-bottom: 2px solid gainsboro;
-  margin: 2% 0 8% 2%;
+  margin: 0.5rem 5% 1rem 5%;
   display: flex;
   flex-wrap: nowrap;
   height: 25px;
-  width: 96%;
+  width: 90%;
 `);
 
 const colorBox = css(`
@@ -49,19 +53,36 @@ const tickNumsOrdinal = css(`
 
 const SandboxMapLegend = props => {
   const { data, mapProps } = props;
+  const { civicColor, scaleType, dataRange, colorRange, fieldName } = mapProps;
+  const { color: colorScaleType } = scaleType;
 
-  const createEqualBins = (slide, color, getPropValue) => {
-    const scale = scaleQuantize()
-      .domain(extent(slide.slide_data.features, getPropValue))
-      .range(color)
-      .nice();
-    return scale;
-  };
+  let choroplethColorScale = createColorScale(
+    civicColor,
+    scaleType,
+    dataRange,
+    colorRange
+  );
 
-  const colorScale =
-    mapProps.scaleType === "ordinal" || mapProps.scaleType === "threshold"
-      ? mapProps.categories
-      : createEqualBins(data, mapProps.color, mapProps.getPropValue);
+  if (colorScaleType === "equal") {
+    choroplethColorScale = updateEqualScale(
+      data,
+      choroplethColorScale,
+      civicColor,
+      dataRange,
+      colorRange,
+      fieldName
+    );
+  }
+
+  if (colorScaleType === "quantile") {
+    choroplethColorScale = updateQuantileScale(
+      data,
+      choroplethColorScale,
+      civicColor,
+      colorRange,
+      fieldName
+    );
+  }
 
   const formatColor = arr =>
     arr.reduce(
@@ -69,46 +90,76 @@ const SandboxMapLegend = props => {
       "rgba("
     );
 
-  const mapColorsArr =
-    mapProps.scaleType === "ordinal" || mapProps.scaleType === "threshold"
-      ? mapProps.color.map(arr => formatColor(arr))
-      : colorScale.range().map(arr => formatColor(arr));
+  const colorScaleRange =
+    choroplethColorScale.range()[0].length === 4
+      ? choroplethColorScale.range()
+      : choroplethColorScale.range().map(c => [...c, 255]);
+
+  const mapColorsArr = colorScaleRange.map(arr => formatColor(arr));
 
   const bins =
-    mapProps.scaleType === "ordinal" || mapProps.scaleType === "threshold"
-      ? colorScale
-      : colorScale.range().map(d => colorScale.invertExtent(d));
+    colorScaleType === "ordinal" || colorScaleType === "threshold"
+      ? dataRange
+      : choroplethColorScale
+          .range()
+          .map(d => choroplethColorScale.invertExtent(d));
 
   const ticks =
-    mapProps.scaleType === "ordinal" || mapProps.scaleType === "threshold"
+    colorScaleType === "ordinal" || colorScaleType === "threshold"
       ? bins
       : bins.reduce((a, c) => (c[1] ? [...a, c[1]] : [...a, ""]), []);
 
-  const thousandsFormat = format(".3s");
-  const percentFormat = format(".1%");
+  const percentageFormat = format(".1%");
+  const sandboxPercentFormat = p =>
+    p < 1 && p > 0 ? percentageFormat(p) : `${p.toFixed(1)}%`;
+  const sandboxDecimalFormat = format(".2n");
+  const sandboxMoneyFormat = d => `$${civicFormat.numericShort(d)}`;
+  const sandboxSentenceCase = str =>
+    str.length &&
+    str
+      .split(" ")
+      .reduce(
+        (full, word) => `${full} ${word[0].toUpperCase() + word.substring(1)}`,
+        ""
+      )
+      .trim();
 
-  const ticksFormatted = ticks.map(d => {
-    return d === ""
-      ? ""
-      : d >= 1000000 || d <= -1000000
-      ? civicFormat.numeric(d)
-      : d >= 1000 || d <= -1000
-      ? thousandsFormat(d)
-      : d > 1 || d < -1
-      ? civicFormat.numeric(d)
-      : d === 0
-      ? "0  "
-      : d <= 1 && d >= -1
-      ? percentFormat(d)
-      : d && typeof d === "string"
-      ? d
-      : civicFormat.numeric(d);
-  });
+  const formatTicks = (arr, typeFormat) => {
+    const formatter =
+      typeFormat === "numeric"
+        ? civicFormat.numeric
+        : typeFormat === "numericShort"
+        ? civicFormat.numericShort
+        : typeFormat === "decimal"
+        ? sandboxDecimalFormat
+        : typeFormat === "percent"
+        ? sandboxPercentFormat
+        : typeFormat === "dollars"
+        ? sandboxMoneyFormat
+        : typeFormat === "year"
+        ? civicFormat.year
+        : typeFormat === "monthYear"
+        ? civicFormat.monthYear
+        : typeFormat === "titleCase"
+        ? startCase
+        : typeFormat === "sentenceCase"
+        ? sandboxSentenceCase
+        : civicFormat.unformatted;
+    return arr.map(d => formatter(d));
+  };
+
+  const formatType =
+    mapProps.tooltip &&
+    mapProps.tooltip.primary &&
+    mapProps.tooltip.primary.format
+      ? mapProps.tooltip.primary.format
+      : "numeric";
+  const ticksFormatted = formatTicks(ticks, formatType);
 
   const tickStyle =
-    mapProps.scaleType === "threshold"
+    colorScaleType === "threshold"
       ? tickNumsThreshold
-      : mapProps.scaleType === "ordinal"
+      : colorScaleType === "ordinal"
       ? tickNumsOrdinal
       : tickNums;
 
@@ -130,7 +181,7 @@ const SandboxMapLegend = props => {
 };
 
 SandboxMapLegend.propTypes = {
-  data: PropTypes.shape({}).isRequired,
+  data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   mapProps: PropTypes.shape({}).isRequired
 };
 

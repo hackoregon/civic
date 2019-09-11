@@ -1,20 +1,19 @@
 import React from "react";
 import { Collapsable } from "@hackoregon/component-library";
 
-import TransportationCardVisualization from "./TransportationCardVisualization";
+import SouthwestMadisonVisualization from "./SouthwestMadisonVisualization";
 
-const transportationCardMeta = (/* data */) => ({
-  title: "(Story Card #1, Issue #000) Transportation Card Title",
-  slug: "transportation-card",
+const SouthwestMadisonMeta = (/* data */) => ({
+  title: "Southwest Madison",
+  slug: "southwest-madison",
   introText: (
     <p>
-      Ice cream candy canes brownie marzipan jelly chocolate bar marshmallow.
-      Toffee cotton candy candy canes danish soufflé tootsie roll tiramisu
-      cupcake candy. Liquorice jujubes chocolate cake chupa chups. Halvah oat
-      cake jelly beans sugar plum chocolate cupcake tiramisu cake.
+      This template card loads data from an API using Reduxful, and can be used
+      as a starting point for API based cards. You can improve this card
+      template! For example, the loading state of the card needs to be improved.
     </p>
   ),
-  visualization: TransportationCardVisualization,
+  visualization: SouthwestMadisonVisualization, // data, isLoading are passed to this as props
   additionalText: (
     <p>
       Pastry sweet roll candy chocolate bar cupcake gingerbread. Chocolate jelly
@@ -127,16 +126,8 @@ const transportationCardMeta = (/* data */) => ({
       ]
     }
   ],
-  authors: [
-    "scicampwinner07@gmail.com",
-    "jim.hopper@yahoo.com",
-    "byers0180@hotmail.com"
-  ]
   // authors likely an array of keys in the future
-  // authors: [
-  //   "https://civicsoftwarefoundation.org/static/human-grid-test-4c90bfc3f316f5d4e104320cb98c43c8.png",
-  //   "https://civicsoftwarefoundation.org/static/human-grid-test2-ea1849501456af341647068243fc72bb.png"
-  // ]
+  authors: []
 });
 
-export default transportationCardMeta;
+export default SouthwestMadisonMeta;

@@ -67,6 +67,17 @@ export default (greatestWidth, collapseWidth) => ({
     }
   },
 
+  ".nav-div": {
+    "::before": {
+      display: "block",
+      content: "' '",
+      marginTop: "-110px",
+      height: "110px",
+      visibility: "hidden",
+      pointerEvents: "none"
+    }
+  },
+
   ".audience-content": {
     ...textStandard,
     color: tertiary.hex,
@@ -96,11 +107,6 @@ export default (greatestWidth, collapseWidth) => ({
     ...textStandard,
     fontSize: `${36 / defaultFontSize}rem`,
     lineHeight: `${60 / defaultFontSize}rem`
-  },
-
-  ".platform-h4": {
-    color: primary.hex,
-    margin: "81px 0"
   },
 
   ".quote-text": {

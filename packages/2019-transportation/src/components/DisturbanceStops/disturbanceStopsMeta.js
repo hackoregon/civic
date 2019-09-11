@@ -1,10 +1,10 @@
 import React from "react";
 import { Collapsable } from "@hackoregon/component-library";
 
-import DisturbanceStopsVisualization from "./DisturbanceStopsVisualization";
+import SoutheastHawthorneVisualization from "./SoutheastHawthorneVisualization";
 
 const DisturbanceStopsMeta = (/* data */) => ({
-  title: "Disturbance Stops",
+  title: "Southeast Hawthorne",
   slug: "disturbance-stops",
   introText: (
     <p>
@@ -13,7 +13,7 @@ const DisturbanceStopsMeta = (/* data */) => ({
       template! For example, the loading state of the card needs to be improved.
     </p>
   ),
-  visualization: DisturbanceStopsVisualization, // data, isLoading are passed to this as props
+  visualization: SoutheastHawthorneVisualization, // data, isLoading are passed to this as props
   additionalText: (
     <p>
       Pastry sweet roll candy chocolate bar cupcake gingerbread. Chocolate jelly
