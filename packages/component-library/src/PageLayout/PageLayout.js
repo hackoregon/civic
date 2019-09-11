@@ -5,6 +5,8 @@ import Header from "../Header/Header";
 import Footer from "../FooterNew/FooterNew";
 import CollectionHero from "../Hero/CollectionHero";
 
+const headerHeight = 72;
+
 const defaultStyles = css`
   padding: 0px 24px;
   @media (max-width: 640px) {
@@ -41,22 +43,24 @@ const defaultStyles = css`
   }
 `;
 
+const headerMargin = css`
+  padding-top: ${headerHeight}px;
+`;
+
 const PageLayout = ({
   header,
   heroTitle,
   heroSubtitle,
-  mainProjectColor,
   teamTitle,
   children
 }) => (
-  <div>
+  <div css={header && headerMargin}>
     {header && <Header />}
     {heroTitle && (
       <CollectionHero
         teamTitle={teamTitle}
         heroTitle={heroTitle}
         heroSubtitle={heroSubtitle}
-        mainProjectColor={mainProjectColor}
       />
     )}
     <div css={defaultStyles}>{children}</div>
@@ -71,7 +75,6 @@ PageLayout.propTypes = {
   teamTitle: PropTypes.string,
   heroTitle: PropTypes.string,
   heroSubtitle: PropTypes.string,
-  mainProjectColor: PropTypes.string,
   children: PropTypes.node
 };
 
