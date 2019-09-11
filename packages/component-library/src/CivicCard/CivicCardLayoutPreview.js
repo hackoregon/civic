@@ -7,7 +7,9 @@ import { generate } from "shortid";
 
 import cardMetaTypes from "./cardMetaTypes";
 import CivicCardLink from "./CivicCardLink";
-import { Chip } from "../..";
+import { Chip, BrandColors } from "../..";
+
+const { secondary } = BrandColors;
 
 function CivicCardLayoutPreview({ cardMeta }) {
   return (
@@ -17,7 +19,12 @@ function CivicCardLayoutPreview({ cardMeta }) {
         <p>{cardMeta.introText}</p>
         <section id={`${cardMeta.slug}-tags`}>
           {cardMeta.tags.map((tag, index) => (
-            <Chip tag={tag} index={index} key={generate()} />
+            <Chip
+              tag={tag}
+              index={index}
+              key={generate()}
+              color={secondary.hex}
+            />
           ))}
         </section>
       </CardContent>
