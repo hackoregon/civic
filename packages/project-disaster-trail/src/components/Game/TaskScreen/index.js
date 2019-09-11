@@ -18,7 +18,7 @@ import usePrevious from "../../../state/hooks/usePrevious";
 
 import Timer from "../../../utils/timer";
 import * as ACTIONS from "../../../constants/actions";
-import taskSong from "../../../../assets/audio/PWolfAfter_Earthquake1fadeinout.mp3";
+import taskSong from "../../../../assets/audio/HappyTheme2fadeinout.mp3";
 
 import MatchLockInterface from "../../atoms/MatchLockInterface";
 import TaskDebugger from "../../atoms/TaskDebugger";
@@ -49,7 +49,7 @@ const TaskScreen = ({
   activeTask,
   completeActiveTask,
   endChapter,
-  debug = true,
+  debug = false,
   playerKitItems,
   weightedTasks,
   tasksForEnvironment,

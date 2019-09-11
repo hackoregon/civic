@@ -42,7 +42,7 @@ const BillboardStyle = css`
   pointer-events: none;
 `;
 
-const TitleBar = ({ debug = true }) => {
+const TitleBar = ({ debug = false }) => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
