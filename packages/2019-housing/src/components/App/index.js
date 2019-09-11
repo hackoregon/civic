@@ -85,29 +85,29 @@ const App = () => (
           enim tortor at auctor.
         </p>
       </section>
-      <section className={sectionMarginMedium}>
-        <HousingDisplacement Layout={CivicCardLayoutClassic} />
-      </section>
-      <section className={sectionMarginMedium}>
-        <HomeLoanApprovals Layout={CivicCardLayoutClassic} />
+      <section css={sectionMarginMedium}>
+        <HolcRedlining Layout={CivicCardLayoutClassic} /> {/* SC 8 */}
       </section>
       <section className={sectionMarginMedium}>
-        <BlackPopulationChange Layout={CivicCardLayoutClassic} />
+        <BlackPopulationChange Layout={CivicCardLayoutClassic} /> {/* SC 4 */}
+      </section>
+      <section className={sectionMarginMedium}>
+        <HousingDisplacement Layout={CivicCardLayoutClassic} /> {/* SC 1 */}
       </section>
       <section css={sectionMarginMedium}>
-        <HomeOwnershipRates Layout={CivicCardLayoutClassic} />
+        <HomeAppreciation Layout={CivicCardLayoutClassic} /> {/* SC 9 */}
+      </section>
+      <section className={sectionMarginMedium}>
+        <HomeLoanApprovals Layout={CivicCardLayoutClassic} /> {/* SC 2 */}
       </section>
       <section css={sectionMarginMedium}>
-        <AduDistributions Layout={CivicCardLayoutClassic} />
+        <HouseholdIncomeByRace Layout={CivicCardLayoutClassic} /> {/* SC 10 */}
       </section>
       <section css={sectionMarginMedium}>
-        <HolcRedlining Layout={CivicCardLayoutClassic} />
+        <HomeOwnershipRates Layout={CivicCardLayoutClassic} /> {/* SC 5 */}
       </section>
       <section css={sectionMarginMedium}>
-        <HomeAppreciation Layout={CivicCardLayoutClassic} />
-      </section>
-      <section css={sectionMarginMedium}>
-        <HouseholdIncomeByRace Layout={CivicCardLayoutClassic} />
+        <AduDistributions Layout={CivicCardLayoutClassic} /> {/* SC 6 */}
       </section>
     </PageLayout>
   </Fragment>
