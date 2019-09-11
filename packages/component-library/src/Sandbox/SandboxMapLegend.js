@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import PropTypes from "prop-types";
-import { format } from "d3";
+import { format, scaleLinear, max } from "d3";
 import { startCase } from "lodash";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
@@ -12,11 +12,13 @@ import {
   updateEqualScale
 } from "../MultiLayerMap/createLayers";
 
+const legendHeight = 65;
 const legendContainer = css(`
   margin: 0.5rem 5% 1rem 5%;
   display: flex;
+  align-items: end;
   flex-wrap: nowrap;
-  height: 25px;
+  height: ${legendHeight}px;
   width: 90%;
 `);
 
@@ -24,7 +26,7 @@ const colorBox = css(`
   display: flex;
   position: relative;
   flex-basis: 100%;
-  border-left: 2px solid gainsboro;
+  border: 1px solid #AAA4AB;
   justify-content: end;
   align-items: end;
 `);
@@ -49,6 +51,14 @@ const tickNumsOrdinal = css(`
   right: unset;
   left: 0;
   font-size: 14px;
+`);
+
+const barLabelStyle = css(`
+  position: absolute;
+  top: -18px;
+  width: 100%;
+  text-align: center;
+  font-size: 15px;
 `);
 
 const SandboxMapLegend = props => {
@@ -163,13 +173,38 @@ const SandboxMapLegend = props => {
       ? tickNumsOrdinal
       : tickNums;
 
+  const { color: fieldNameColor } = fieldName;
+  const colorCount = data.reduce((acc, d) => {
+    const color = choroplethColorScale(d.properties[fieldNameColor]);
+    if (acc[color]) {
+      // eslint-disable-next-line no-plusplus
+      acc[color]++;
+    } else {
+      acc[color] = {};
+      acc[color] = 1;
+    }
+    return acc;
+  }, {});
+
+  const barScale = scaleLinear()
+    .domain([0, max(Object.values(colorCount), d => d)])
+    .range([0, legendHeight]);
+
+  const barHeights = mapColorsArr.map(d => {
+    const count = colorCount[d.slice(5, -3)];
+    return count ? { h: barScale(count), c: count } : { h: 0, c: "" };
+  });
+
   const legend = mapColorsArr.map((d, i) => {
     return (
       <div
         key={shortid.generate()}
         css={colorBox}
-        style={{ backgroundColor: d }}
+        style={{ backgroundColor: d, height: `${barHeights[i].h}px` }}
       >
+        <div css={barLabelStyle}>
+          <span>{barHeights[i].c}</span>
+        </div>
         <div css={tickStyle}>
           <span>{ticksFormatted[i]}</span>
         </div>

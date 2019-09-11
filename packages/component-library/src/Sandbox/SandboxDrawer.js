@@ -16,19 +16,20 @@ const menuOpen = css(`
   position: absolute;
   top: 0;
   right: 0;
-  height: 75vh;
+  height: 78vh;
+  min-height: 640px;
   width: 33%;
   z-index: 5;
   transition: 0.5s;
   @media (max-width: 850px) {
     width: 95%;
-    height: 64vh;
-    min-height: 550px;
+    height: 78vh;
+    min-height: 590px;
   }
   @media (max-width: 500px) {
     width: 100%;
-    height: 64vh;
-    min-height: 550px;
+    height: 75vh;
+    min-height: 390px;
   }
 `);
 
