@@ -1,16 +1,21 @@
 import React from "react";
 import { Collapsable } from "@hackoregon/component-library";
+import { isLoaded } from "reduxful";
 
 import SystemWideSummaryVisualization from "./SystemWideSummaryVisualization";
 
-const SystemWideSummaryMeta = (/* data */) => ({
+const SystemWideSummaryMeta = data => ({
   title: "System Wide Summary",
   slug: "system-wide-summary",
   introText: (
     <p>
-      This template card loads data from an API using Reduxful, and can be used
-      as a starting point for API based cards. You can improve this card
-      template! For example, the loading state of the card needs to be improved.
+      {isLoaded(data.busSystemWideSummary)
+        ? `This chart is generated from ${data.busSystemWideSummary.value.results
+            .reduce((acc, result) => acc + result.total_ons, 0)
+            .toLocaleString()} total onboarding events and ${data.busSystemWideSummary.value.results
+            .reduce((acc, result) => acc + result.total_offs, 0)
+            .toLocaleString()} total offboarding events. Morning rush hour peaks just before 8:00 a.m., while the evening rush hour stretches from about 3:30 p.m. to 5:30 p.m.`
+        : null}
     </p>
   ),
   visualization: SystemWideSummaryVisualization, // data, isLoading are passed to this as props
