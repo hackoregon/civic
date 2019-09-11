@@ -119,14 +119,26 @@ const SmallNav = () => {
           <p css={subHeaderStyle}>JOIN THE MOVEMENT</p>
         </ListSubheader>
         <ListItem>
-          <a css={subLinkStyle} href="#work-with-us">
+          <Link
+            to={{
+              pathname: "/",
+              hash: "#work-with-us"
+            }}
+            css={subLinkStyle}
+          >
             <ListItemText primary="Work With Us" />
-          </a>
+          </Link>
         </ListItem>
         <ListItem>
-          <a css={subLinkStyle} href="#become-a-contributor">
+          <Link
+            to={{
+              pathname: "/",
+              hash: "#become-a-contributor"
+            }}
+            css={subLinkStyle}
+          >
             <ListItemText primary="Become a Contributor" />
-          </a>
+          </Link>
         </ListItem>
 
         <Divider />
@@ -135,22 +147,40 @@ const SmallNav = () => {
           <p css={subHeaderStyle}>ABOUT</p>
         </ListSubheader>
         <ListItem>
-          <a css={subLinkStyle} href="#civic-platform">
+          <Link
+            to={{
+              pathname: "/",
+              hash: "#civic-platform"
+            }}
+            css={subLinkStyle}
+          >
             <ListItemText primary="Civic Platform" />
-          </a>
+          </Link>
         </ListItem>
         <ListItem>
-          <a css={subLinkStyle} href="#civic-software-foundation">
+          <Link
+            to={{
+              pathname: "/",
+              hash: "#civic-software-foundation"
+            }}
+            css={subLinkStyle}
+          >
             <ListItemText primary="Civic Software Foundation" />
-          </a>
+          </Link>
         </ListItem>
 
         <Divider />
 
         <ListItem>
-          <a css={linkStyle} href="#contact-us">
+          <Link
+            to={{
+              pathname: "/",
+              hash: "#contact-us"
+            }}
+            css={subLinkStyle}
+          >
             <ListItemText primary="CONTACT" />
-          </a>
+          </Link>
         </ListItem>
       </List>
     </div>
