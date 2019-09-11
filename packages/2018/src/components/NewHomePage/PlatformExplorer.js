@@ -69,10 +69,10 @@ const sections = {
       id: "thing2"
     },
     {
-      header: "Structured Context Documentation",
+      header: "Secure Identity and Access",
       imgSrc: placeholderCivicImg,
       imgAlt: "altText",
-      text: "Structured Context Documentation",
+      text: "Secure Identity and Access",
       id: "thing3"
     }
   ],
