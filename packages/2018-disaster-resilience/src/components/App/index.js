@@ -7,6 +7,7 @@ import {
   PullQuote,
   CivicCardLayoutClassic
 } from "@hackoregon/component-library";
+import TillamookCountyEarthquakeCasualtyEstimates from "../TillamookCountyEarthquakeCasualtyEstimates";
 import WhatYouCanDoToPrepare from "../WhatYouCanDoToPrepare";
 import SignificantStructuralDamage from "../SignificantStructuralDamage";
 import ProactivePlanning from "../ProactivePlanning";
@@ -66,6 +67,11 @@ const App = () => (
     <PullQuote quoteText="The #1 thing you can do to increase social capital is to meet your neighbors. Do you know 3 people within a 3 block radius of your house?" />
     <section className={sectionMarginMedium}>
       <ProactivePlanning Layout={CivicCardLayoutClassic} />
+    </section>
+    <section css={sectionMarginMedium}>
+      <TillamookCountyEarthquakeCasualtyEstimates
+        Layout={CivicCardLayoutClassic}
+      />
     </section>
   </PageLayout>
 );
