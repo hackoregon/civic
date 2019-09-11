@@ -217,7 +217,7 @@ const TaskScreen = ({
   };
 
   const onItemSelection = orbModel => {
-    if (orbModel.type === activeTask.requiredItem) {
+    if (activeTask && orbModel.type === activeTask.requiredItem) {
       setCorrectItemsChosen(correctItemsChosen + 1);
       if (correctItemsChosen >= activeTask.numberItemsToSolve) {
         timer.stopEarly();
