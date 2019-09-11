@@ -13,6 +13,7 @@ import MorningRush from "../MorningRush";
 import NorthwestEverett from "../NorthwestEverett";
 import SouthwestMadison from "../SouthwestMadison";
 import DisturbanceStops from "../DisturbanceStops";
+import Hypnotoad from "../../assets/hypnotoad";
 
 const sectionMarginSmall = css`
   display: block;
@@ -45,6 +46,7 @@ const App = () => (
       heroSubtitle="Playground for building out the 2019 Transportation team frontend"
       overlay
     >
+      <Hypnotoad />
       <section css={sectionMarginMedium}>
         <SystemWideSummary Layout={CivicCardLayoutClassic} />
       </section>
