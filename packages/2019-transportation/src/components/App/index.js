@@ -49,6 +49,10 @@ const App = () => (
         <SystemWideSummary Layout={CivicCardLayoutClassic} />
       </section>
 
+      <section css={sectionMarginMedium}>
+        <MorningRush Layout={CivicCardLayoutClassic} />
+      </section>
+
       <section css={[sectionBodyHeading, sectionMaxWidthSmall]}>
         <h2>Ullamcorper dignissim cras tincidunt?</h2>
       </section>
@@ -94,9 +98,6 @@ const App = () => (
       </section>
       <section css={sectionMarginMedium}>
         <NorthwestEverett Layout={CivicCardLayoutClassic} />
-      </section>
-      <section css={sectionMarginMedium}>
-        <MorningRush Layout={CivicCardLayoutClassic} />
       </section>
     </PageLayout>
   </Fragment>
