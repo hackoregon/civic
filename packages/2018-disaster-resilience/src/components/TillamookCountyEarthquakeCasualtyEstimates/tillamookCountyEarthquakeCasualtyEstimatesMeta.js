@@ -1,4 +1,5 @@
-import React from "react";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 import { Collapsable } from "@hackoregon/component-library";
 import MathJax from "react-mathjax";
 
@@ -66,21 +67,33 @@ const TillamookCountyEarthquakeCasualtyEstimatesMeta = (/* data */) => ({
           during the time of the earthquake, and the probability of the severity
           of damage and the probability of complete structural damage. See [3]
         </p>
-        <MathJax.Provider>
-          <p>
+        <p
+          css={css`
+            line-height: 1.6;
+          `}
+        >
+          <MathJax.Provider>
             <MathJax.Node
               block
-              formula="SLENDOi =NDO P(Si|Col)P(Col|PSTR5) PSTR5"
+              formula="SL_{ENDOi} = N_{DO} \times P(S_i|Col)P(Col|PSTR_5) \times PSTR_5"
             />
-            SLENDOi =NDO P(Si|Col)P(Col|PSTR5) PSTR5 Where: SLENDOi = Expected
-            number of daytime casualties of Severity Level i P(Si|Col) =
-            Probability of Severity Level i given full building collapse
-            P(Col|PSTR5)= Probability of full building collapse given Complete
-            structural damage (STR5) PSTR5 = Probability of Complete structural
-            damage NDO= Number of occupants in the building during the time of
-            the earthquake
-          </p>
-        </MathJax.Provider>
+            Where:
+            <br />
+            <MathJax.Node inline formula="SL_{ENDOi}" /> = Expected number of
+            daytime casualties of Severity Level i<br />
+            <MathJax.Node inline formula="P(S_i|Col)" /> = Probability of
+            Severity Level i given full building collapse
+            <br />
+            <MathJax.Node inline formula="P(Col|PSTR_5)" /> = Probability of
+            full building collapse given Complete structural damage (STR5)
+            <br />
+            <MathJax.Node inline formula="PSTR5" /> = Probability of Complete
+            structural damage
+            <br />
+            <MathJax.Node inline formula="N_{DO}" /> = Number of occupants in
+            the building during the time of the earthquake
+          </MathJax.Provider>
+        </p>
       </Collapsable.Section>
     </Collapsable>
   ),
