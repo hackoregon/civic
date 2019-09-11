@@ -9,7 +9,15 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import { BrandColors } from "@hackoregon/component-library";
-import placeholderCivicImg from "../../assets/new-home-page-5.png";
+import methods from "../../assets/methods.svg";
+import secure from "../../assets/secure.svg";
+import api from "../../assets/api.svg";
+import ethical from "../../assets/ethical.svg";
+import component from "../../assets/component.svg";
+import exploratory from "../../assets/exploratory.svg";
+import embeddable from "../../assets/embeddable.svg";
+import cloud from "../../assets/cloud.svg";
+import notebooks from "../../assets/notebooks.svg";
 
 const { plumLight, action } = BrandColors;
 
@@ -41,7 +49,8 @@ const panelStyle = css`
 `;
 
 const imgStyle = css`
-  max-width: 100%;
+  width: 60%;
+  margin: auto;
 `;
 
 const textStyle = css`
@@ -56,21 +65,21 @@ const sections = {
   section3: [
     {
       header: "Managed Cloud Services",
-      imgSrc: placeholderCivicImg,
+      imgSrc: cloud,
       imgAlt: "altText",
       text: "Continuous Cloud Deployment",
       id: "thing1"
     },
     {
       header: "Scalable API Frameworks",
-      imgSrc: placeholderCivicImg,
+      imgSrc: api,
       imgAlt: "altText",
       text: "Scalable API Frameworks",
       id: "thing2"
     },
     {
       header: "Secure Identity and Access",
-      imgSrc: placeholderCivicImg,
+      imgSrc: secure,
       imgAlt: "altText",
       text: "Secure Identity and Access",
       id: "thing3"
@@ -79,21 +88,21 @@ const sections = {
   section2: [
     {
       header: "Rigorous Ethical Standards",
-      imgSrc: placeholderCivicImg,
+      imgSrc: ethical,
       imgAlt: "altText",
       text: "Rigorous Ethical Standards",
       id: "thing4"
     },
     {
       header: "Transparent Methodology",
-      imgSrc: placeholderCivicImg,
+      imgSrc: methods,
       imgAlt: "altText",
       text: "Transparent Methodology",
       id: "thing5"
     },
     {
       header: "Connected Data Science Notebooks",
-      imgSrc: placeholderCivicImg,
+      imgSrc: notebooks,
       imgAlt: "altText",
       text: "Connected Data Science Notebooks",
       id: "thing6"
@@ -102,21 +111,21 @@ const sections = {
   section1: [
     {
       header: "Reusable Component Library",
-      imgSrc: placeholderCivicImg,
+      imgSrc: component,
       imgAlt: "altText",
       text: "Reusable Component Library",
       id: "thing7"
     },
     {
       header: "Embeddable Interactive Visualizations",
-      imgSrc: placeholderCivicImg,
+      imgSrc: embeddable,
       imgAlt: "altText",
       text: "Embeddable Interactive Visualizations",
       id: "thing8"
     },
     {
       header: "Exploratory Mapping Tools",
-      imgSrc: placeholderCivicImg,
+      imgSrc: exploratory,
       imgAlt: "altText",
       text: "Exploratory Mapping Tools",
       id: "thing9"
