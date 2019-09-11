@@ -55,7 +55,7 @@ export const tasks = {
   // Save Yourself
   [RUBBLE]: {
     id: RUBBLE,
-    time: 7,
+    time: 15,
     requiredItem: protectiveGear,
     numberItemsToSolve: 3,
     points: 3,
@@ -68,7 +68,7 @@ export const tasks = {
   },
   [DUST]: {
     id: DUST,
-    time: 7,
+    time: 15,
     requiredItem: dustMask,
     numberItemsToSolve: 1,
     points: 3,
@@ -82,7 +82,7 @@ export const tasks = {
   // Save Others
   [COLD]: {
     id: COLD,
-    time: 7,
+    time: 15,
     requiredItem: blanket,
     numberItemsToSolve: 1,
     points: 3,
@@ -95,7 +95,7 @@ export const tasks = {
   },
   [FIRE]: {
     id: FIRE,
-    time: 7,
+    time: 15,
     requiredItem: fireExtinguisher,
     numberItemsToSolve: 5,
     points: 5,
@@ -108,7 +108,7 @@ export const tasks = {
   },
   [HUNGER]: {
     id: HUNGER,
-    time: 7,
+    time: 15,
     requiredItem: food,
     numberItemsToSolve: 5,
     points: 5,
@@ -125,7 +125,7 @@ export const tasks = {
   },
   [HOLE]: {
     id: HOLE,
-    time: 7,
+    time: 15,
     requiredItem: rope,
     numberItemsToSolve: 1,
     points: 3,
@@ -142,7 +142,7 @@ export const tasks = {
   },
   [INJURY]: {
     id: INJURY,
-    time: 7,
+    time: 15,
     requiredItem: firstAidKit,
     numberItemsToSolve: 5,
     points: 7,
@@ -155,7 +155,7 @@ export const tasks = {
   },
   [WEATHER]: {
     id: WEATHER,
-    time: 7,
+    time: 15,
     requiredItem: tent,
     numberItemsToSolve: 2,
     points: 4,
@@ -168,7 +168,7 @@ export const tasks = {
   },
   [LOST_PET]: {
     id: LOST_PET,
-    time: 7,
+    time: 15,
     requiredItem: flashlight,
     numberItemsToSolve: 2,
     points: 4,
@@ -181,7 +181,7 @@ export const tasks = {
   },
   [THIRST]: {
     id: THIRST,
-    time: 7,
+    time: 15,
     requiredItem: water,
     numberItemsToSolve: 5,
     points: 5,

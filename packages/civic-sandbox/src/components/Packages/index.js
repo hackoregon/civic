@@ -45,7 +45,6 @@ export class Packages extends React.Component {
       this.setState({ mapIsOpen: true });
     }
 
-    console.log("prevProps:", prevProps);
     const { selectedFoundationDatum: previousSelectedFoundation } = prevProps;
     const { selectedFoundationDatum: currentSelectedFoundation } = this.props;
 

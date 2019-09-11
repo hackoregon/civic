@@ -22,7 +22,7 @@ import { TYPES as SFX_TYPES } from "../../constants/sfx";
 
 const ORB_CONFIG = {
   period: 1,
-  orbCount: 10,
+  orbCount: 50,
   orbSize: 120,
   maxVelocityY: 0,
   minVelocityX: 0.5,

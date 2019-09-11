@@ -105,7 +105,7 @@ export function createFixedLayout(
     orb.y = config.verticalBuffer + rowIndex * rowHeight - config.orbSize / 2;
 
     // also pass a delay for sequential animations
-    orb.delay = i * 0.05;
+    orb.delay = Math.random() * 0.5;
 
     // store the data
     orbCollection[i] = orb;
@@ -119,7 +119,7 @@ export function completedOrbHandler(correctChoice, currentOrb) {
   if (correctChoice) {
     orbCopy.y -= 20.0;
   } else {
-    orbCopy.y += 20.0;
+    orbCopy.y += 35.0;
   }
 
   return orbCopy;

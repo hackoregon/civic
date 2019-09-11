@@ -12,6 +12,9 @@ const useStyles = makeStyles({
       style.color = props.color;
     }
     return style;
+  },
+  chip: {
+    margin: "3px"
   }
 });
 

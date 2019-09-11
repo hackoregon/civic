@@ -10,8 +10,7 @@ import Nav from "./Nav";
 import Logo from "../Logo/Logo";
 import Icon from "../Icon/Icon";
 import { ICONS } from "../styleConstants";
-
-const primaryColor = "rgb(34, 15, 37)";
+import { BrandColors } from "../_Themes/index";
 
 const containerClass = css`
   width: 100%;
@@ -25,7 +24,7 @@ const overlayContainerClass = css`
 `;
 
 const headerClass = css`
-  background-color: ${primaryColor};
+  background-color: ${BrandColors.heroPurple.hex};
   display: flex;
   z-index: 1;
   align-items: center;
@@ -93,14 +92,7 @@ class Header extends Component {
     this.setState({ menuActive: !this.state.menuActive });
 
   render() {
-    const {
-      children,
-      menu,
-      title,
-      overlay,
-      mainProjectColor,
-      logoType
-    } = this.props;
+    const { children, menu, title, overlay, logoType } = this.props;
     return (
       <header
         css={overlay ? overlayContainerClass : containerClass}
@@ -108,7 +100,7 @@ class Header extends Component {
       >
         <nav
           css={overlay ? overlayHeaderClass : headerClass}
-          style={{ backgroundColor: mainProjectColor || primaryColor }}
+          style={{ backgroundColor: BrandColors.heroPurple.hex }}
         >
           <div css={logoClass}>
             <Link css={logoLinkClass} to="/">
@@ -147,7 +139,6 @@ Header.propTypes = {
   title: PropTypes.string,
   children: PropTypes.node,
   overlay: PropTypes.bool,
-  mainProjectColor: PropTypes.string,
   logoType: PropTypes.string
 };
 

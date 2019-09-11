@@ -33,13 +33,13 @@ const contentWrapper = props => css`
   max-width: ${props.greatestWidth}px;
   margin: 0 auto;
   display: grid;
-  padding: 17px 20px 8px;
+  padding: 8px 20px 0;
   align-items: center;
   grid-template-columns: 80px 1fr 645px;
 `;
 
 const logoStyle = css`
-  height: 90px !important;
+  height: 60px !important;
 `;
 
 const navStyle = css`
@@ -82,10 +82,6 @@ const menuButton = css`
   padding: 0;
   color: inherit;
   cursor: pointer;
-
-  :focus {
-    outline: none;
-  }
 `;
 
 const buttonText = css`
@@ -105,7 +101,7 @@ const caratStyle = css`
 
 const arrowUp = css`
   position: absolute;
-  top: 14px;
+  top: 15px;
   right: 20px;
   width: 0;
   height: 0;
@@ -153,7 +149,7 @@ const FullNav = props => {
   return (
     <div css={contentWrapper(props)}>
       <Link to="/">
-        <Logo css={logoStyle} type="squareLogo" />
+        <Logo alt="CIVIC home page" css={logoStyle} type="squareLogo" />
       </Link>
       <div />
       <nav css={navStyle} aria-label="Site">
@@ -203,18 +199,30 @@ const FullNav = props => {
                           style={optionText}
                           dense
                         >
-                          <a css={menuLink} href="#work-with-us">
+                          <Link
+                            to={{
+                              pathname: "/",
+                              hash: "#work-with-us"
+                            }}
+                            css={menuLink}
+                          >
                             Work With Us
-                          </a>
+                          </Link>
                         </MenuItem>
                         <MenuItem
                           onClick={handleJoinClose}
                           style={optionText}
                           dense
                         >
-                          <a css={menuLink} href="#become-a-contributor">
+                          <Link
+                            to={{
+                              pathname: "/",
+                              hash: "#become-a-contributor"
+                            }}
+                            css={menuLink}
+                          >
                             Become a Contributor
-                          </a>
+                          </Link>
                         </MenuItem>
                       </MenuList>
                     </ClickAwayListener>
@@ -263,18 +271,30 @@ const FullNav = props => {
                           style={optionText}
                           dense
                         >
-                          <a css={menuLink} href="#civic-platform">
+                          <Link
+                            to={{
+                              pathname: "/",
+                              hash: "#civic-platform"
+                            }}
+                            css={menuLink}
+                          >
                             Civic Platform
-                          </a>
+                          </Link>
                         </MenuItem>
                         <MenuItem
                           onClick={handleAboutClose}
                           style={optionText}
                           dense
                         >
-                          <a css={menuLink} href="#civic-software-foundation">
+                          <Link
+                            to={{
+                              pathname: "/",
+                              hash: "#civic-software-foundation"
+                            }}
+                            css={menuLink}
+                          >
                             Civic Software Foundation
-                          </a>
+                          </Link>
                         </MenuItem>
                       </MenuList>
                     </ClickAwayListener>
@@ -284,9 +304,15 @@ const FullNav = props => {
             </Popper>
           </li>
           <li css={listStyle}>
-            <a css={linkStyle} href="#contact-us">
+            <Link
+              to={{
+                pathname: "/",
+                hash: "#contact-us"
+              }}
+              css={linkStyle}
+            >
               CONTACT
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>
