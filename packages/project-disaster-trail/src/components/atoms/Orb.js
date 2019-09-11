@@ -88,10 +88,10 @@ export default class Orb extends PureComponent {
       const { isActive } = this.state;
       if (isActive) {
         this.setState({ isComplete: true });
-        clearInterval(timer);
+        clearTimeout(timer);
       } else {
         this.setState({ isActive: false });
-        clearInterval(timer);
+        clearTimeout(timer);
       }
     }, pressSuccessDuration * 1000);
   };
