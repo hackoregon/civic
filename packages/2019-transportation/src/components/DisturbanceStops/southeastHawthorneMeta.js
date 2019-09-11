@@ -31,7 +31,7 @@ const SoutheastHawthorneMeta = (/* data */) => ({
   ),
   shareText:
     "Ice cream candy canes brownie marzipan jelly chocolate bar marshmallow.",
-  tags: ["Transportation", "Portland", "Map"],
+  tags: ["Transportation", "Portland", "Map", "Chart"],
   selector: null,
   analysis: (
     <Collapsable>

@@ -23,9 +23,7 @@ const MorningRushMeta = (/* data */) => ({
     </p>
   ),
   shareText: "",
-  tags: [
-    /* "Transportation", "Bus", "Rail", "Portland" */
-  ],
+  tags: ["Transportation", "Bus", "Portland"],
   selector: null,
   analysis: (
     <Collapsable>

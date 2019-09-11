@@ -31,9 +31,7 @@ const SouthwestMadisonMeta = (/* data */) => ({
   ),
   shareText:
     "Ice cream candy canes brownie marzipan jelly chocolate bar marshmallow.",
-  tags: [
-    /* "Transportation", "Bus", "Rail", "Portland" */
-  ],
+  tags: ["Transportation", "Portland", "Map", "Chart"],
   selector: null,
   analysis: (
     <Collapsable>
