@@ -87,6 +87,9 @@ export {
   default as CivicCardLayoutVisualizationOnly
 } from "./CivicCard/CivicCardLayoutVisualizationOnly";
 export {
+  default as CivicCardLayoutVisualizationOnlyNoLink
+} from "./CivicCard/CivicCardLayoutVisualizationOnlyNoLink";
+export {
   default as CivicCardLayoutSideBySide
 } from "./CivicCard/CivicCardLayoutSideBySide";
 export {

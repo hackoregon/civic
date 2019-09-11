@@ -8,6 +8,7 @@ import {
   LineChart,
   CivicCardLayoutClassic,
   CivicCardLayoutVisualizationOnly,
+  CivicCardLayoutVisualizationOnlyNoLink,
   CivicCardLayoutSideBySide,
   RadioButtonGroup,
   CivicCardLayoutFullWithDescriptions,
@@ -232,6 +233,14 @@ export default () =>
         data={sampleCardData}
         isLoading={false}
         Layout={CivicCardLayoutVisualizationOnly}
+      />
+    ))
+    .add("Layout: Visualization Only No Link", () => (
+      <CivicCard
+        cardMeta={sampleCardMeta}
+        data={sampleCardData}
+        isLoading={false}
+        Layout={CivicCardLayoutVisualizationOnlyNoLink}
       />
     ))
     .add("Layout: Preview", () => (
