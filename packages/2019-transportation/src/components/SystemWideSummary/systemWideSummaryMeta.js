@@ -14,7 +14,7 @@ const SystemWideSummaryMeta = data => ({
             .reduce((acc, result) => acc + result.total_ons, 0)
             .toLocaleString()} total onboarding events and ${data.busSystemWideSummary.value.results
             .reduce((acc, result) => acc + result.total_offs, 0)
-            .toLocaleString()} total offboarding events. Morning rush hour peaks just before 8:00 a.m., while the evening rush hour peaks from about 3:30 p.m. to about 5:30 p.m. Identifying these peak hours gives us the ability to focus on local and system-wide trends that affect the most people.`
+            .toLocaleString()} total offboarding events. Morning and evening rush hour peaks are defined as an hour before and after their respective peaks with a.m rush being 6:30 a.m to 9 a.m. and p.m. rush being 2:30 p.m. to 6:45 p.m. Identifying these peak hours gives us the ability to focus on local and system-wide trends that affect the most people.`
         : null}
     </p>
   ),
