@@ -27,7 +27,7 @@ const WhatSurprisedYouAboutProgramOutcomesMeta = (/* data */) => ({
     }
   ],
   // authors likely an array of keys in the future
-  authors: []
+  authors: "demo"
 });
 
 export default WhatSurprisedYouAboutProgramOutcomesMeta;
