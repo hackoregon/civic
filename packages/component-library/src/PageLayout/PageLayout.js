@@ -50,7 +50,7 @@ const PageLayout = ({
   children
 }) => (
   <div>
-    {header && <Header title="Civic homepage" />}
+    {header && <Header />}
     {heroTitle && (
       <CollectionHero
         teamTitle={teamTitle}

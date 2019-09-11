@@ -13,7 +13,7 @@ const headerWrapper = css`
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
   margin: 0;
   top: 0;
-  z-index: 100;
+  z-index: 999;
 `;
 
 const Header = props => {
