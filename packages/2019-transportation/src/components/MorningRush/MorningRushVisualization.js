@@ -53,7 +53,7 @@ const MorningRushVisualization = ({ data }) => {
 
   return !isLoading && data ? (
     <>
-      <BaseMap civicMapStyle="dark">
+      <BaseMap civicMapStyle="light">
         <ScatterPlotMap
           data={data.busAmRushSummary.value.results.features.map(feature => {
             const featureWithTotalOnOffs = feature;
@@ -66,7 +66,7 @@ const MorningRushVisualization = ({ data }) => {
             const medianSecondsLate = secondsLateAccessor(feature);
             const scale = scaleLinear()
               .domain([0, 180])
-              .range(["lightblue", "red"]);
+              .range(["blue", "red"]);
             const colorOut = scale(medianSecondsLate);
             const colorArray = colorOut
               .replace("rgb(", "")
@@ -83,7 +83,7 @@ const MorningRushVisualization = ({ data }) => {
               .range([25, 100]);
             return scale(totalOnOffs);
           }}
-          radiusScale={7}
+          radiusScale={1}
         >
           <MapTooltip
             primaryName="Stop Name"
