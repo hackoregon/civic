@@ -21,6 +21,7 @@ import AttractorScreen from "./AttractorScreen/index";
 import KitScreen from "./KitScreen/index";
 import QuakeScreen from "./QuakeScreen/index";
 import TaskScreen from "./TaskScreen/index";
+import SummaryScreen from "./SummaryScreen/index";
 
 import "@hackoregon/component-library/assets/global.styles.css";
 import summarySong from "../../../assets/audio/PWolf-happysong1wfadeinout.mp3";
@@ -35,7 +36,7 @@ const Game = ({ activeChapterId }) => {
       case QUAKE:
         return <QuakeScreen />;
       case SUMMARY:
-        return <DefaultScreen songFile={summarySong} />;
+        return <SummaryScreen songFile={summarySong} />;
       default:
         return <DefaultScreen />;
     }
