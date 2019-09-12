@@ -90,6 +90,12 @@ const MorningRushVisualization = ({ data }) => {
             primaryField="stop_name"
             secondaryName="Median seconds late"
             secondaryField="median_seconds_late"
+            tooltipDataArray={[
+              {
+                name: "Total Ons and Offs",
+                field: "total_ons_offs"
+              }
+            ]}
           />
         </ScatterPlotMap>
       </BaseMap>
