@@ -4,7 +4,7 @@ import { Collapsable } from "@hackoregon/component-library";
 import HomeOwnershipRatesVisualization from "./HomeOwnershipRatesVisualization";
 
 const HomeOwnershipRatesMeta = (/* data */) => ({
-  title: "Population Demographics and Home Ownership Rates",
+  title: "Population Demographics and Home Ownership Rates (Over Time)",
   slug: "home-ownership-rates",
   introText: (
     <p>
@@ -16,8 +16,17 @@ const HomeOwnershipRatesMeta = (/* data */) => ({
   ),
   visualization: HomeOwnershipRatesVisualization, // data, isLoading are passed to this as props
   additionalText: <p>ADDITIONAL TEXT: TBD</p>,
-  shareText: "TODO: Add share text!",
-  tags: ["Housing", "Race", "Portland", "Oregon", "Chart"],
+  shareText: null,
+  tags: [
+    "Housing",
+    "Race",
+    "Portland",
+    "Oregon",
+    "Chart",
+    "Homeownership",
+    "Black",
+    "Gentrification"
+  ],
   selector: null,
   analysis: (
     <Collapsable>
