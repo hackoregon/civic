@@ -38,7 +38,7 @@
     "new-card:local-data": "yarn hygen local-data-story-card with-prompt && yarn",
     "new-card:minimal": "yarn hygen minimal-story-card with-prompt && yarn",
     "new-component": "yarn hygen component-generator with-prompt",
-    "new-package": "yarn hygen package-generator with-prompt && yarn",
+    "new-package": "yarn hygen package-generator with-prompt && yarn && node scripts/new-package",
     "pretty": "prettier --write \"./**/*.{js,jsx,css,md}\"",
     "publish-canary": "lerna publish --canary --yes --preid ci --npm-tag=ci -m '(🐦ci-canary): publish %s'",
     "publish-major": "lerna publish bump major --yes",
