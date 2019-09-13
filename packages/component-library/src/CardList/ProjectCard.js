@@ -1,12 +1,15 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
+import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import { Link } from "react-router";
+import { startCase } from "lodash";
 
-const sandboxContentContainer = css`
+const projectContentContainer = css`
   position: relative;
 `;
 
@@ -27,7 +30,7 @@ const scaleCorner = css`
   max-height: 134px;
 `;
 
-const useSandboxStyles = makeStyles({
+const useProjectStyles = makeStyles({
   card: {
     "&:hover": {
       boxShadow:
@@ -50,12 +53,17 @@ const Watermark = () => (
   </div>
 );
 
-const SandboxCard = () => {
-  const classes = useSandboxStyles();
+const types = {
+  collection: { action: "View collection" },
+  application: { action: "Check it out!" }
+};
+
+const ProjectCard = ({ title, description, link, type }) => {
+  const classes = useProjectStyles();
 
   return (
-    <Link to="/sandbox">
-      <Card css={sandboxContentContainer} className={classes.card}>
+    <Link to={link}>
+      <Card css={projectContentContainer} className={classes.card}>
         <Watermark />
         <div
           css={css`
@@ -63,17 +71,25 @@ const SandboxCard = () => {
           `}
         >
           <CardContent>
-            <h2>Application: CIVIC Sandbox</h2>
-            <p>
-              A common resource that can power ethical data exploration through
-              interactive maps
-            </p>
+            <h2>
+              {startCase(type)}: {title}
+            </h2>
+            <p>{description}</p>
           </CardContent>
-          <CardActions>Check it out!</CardActions>
+          <CardActions>
+            <Button size="small">{types[type].action}</Button>
+          </CardActions>
         </div>
       </Card>
     </Link>
   );
 };
 
-export default SandboxCard;
+ProjectCard.propTypes = {
+  title: PropTypes.string,
+  description: PropTypes.string,
+  link: PropTypes.string,
+  type: PropTypes.oneOf("collection", "application")
+};
+
+export default ProjectCard;

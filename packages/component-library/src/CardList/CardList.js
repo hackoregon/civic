@@ -19,7 +19,7 @@ import { ThemeProvider } from "@material-ui/styles";
 
 import Header from "../Header/Header";
 import BrandColors from "../_Themes/Brand/BrandColors";
-import SandboxCard from "./SandboxCard";
+import ProjectCard from "./ProjectCard";
 
 import {
   Checkbox,
@@ -123,13 +123,19 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const tagsListExample = {
-  topics: ["Transportation", "Disaster Resilience", "Housing"],
-  locations: ["Portland", "Oregon", "Nationwide", "Your City"],
-  visualizations: ["Bar Chart", "Cloropleth Map", "Scatterplot"]
-};
+const filterPadding = css`
+  padding-top: 1rem;
+  margin-bottom: 0;
+  padding-left: 1rem;
+  font-size: 1.5rem;
+`;
 
-const CardList = ({ CardRegistry, tagsList = tagsListExample }) => {
+const headingPadding = css`
+  padding-left: 1rem;
+  padding-right: 1rem;
+`;
+
+const CardList = ({ CardRegistry, tagsList, projects }) => {
   // eslint-disable-next-line no-unused-vars
   const { entries, tags } = CardRegistry;
 
@@ -185,7 +191,7 @@ const CardList = ({ CardRegistry, tagsList = tagsListExample }) => {
 
   const drawer = (
     <div className={classes.toolbar}>
-      <h1>Filters</h1>
+      <h1 css={filterPadding}>Filters</h1>
       <List
         component="aside"
         aria-labelledby="nested-list-subheader"
@@ -284,28 +290,48 @@ const CardList = ({ CardRegistry, tagsList = tagsListExample }) => {
                 aria-label="open filters list"
                 onClick={handleDrawerToggle}
               >
-                Filter Stories
+                Filters
               </Button>
             </section>
-            {filteredEntries.length > 0 ? (
-              <ul className={classes.entriesList}>
-                <li key="sandbox" className={classes.entry}>
-                  <SandboxCard />
-                </li>
-                {filteredEntries.map(entry => (
-                  <li key={shortid.generate()} className={classes.entry}>
-                    {
-                      <entry.component
-                        className={classes.storyCard}
-                        Layout={CivicCardLayoutPreview}
+            {noFiltersSelected() && (
+              <section>
+                <h2 css={headingPadding}>
+                  <strong>Featured Projects: Hack Oregon Demo Day</strong>
+                </h2>
+                <ul className={classes.entriesList}>
+                  {projects.map(entry => (
+                    <li key={shortid.generate()} className={classes.entry}>
+                      <ProjectCard
+                        title={entry.title}
+                        description={entry.description}
+                        link={entry.link}
+                        type={entry.type}
                       />
-                    }
-                  </li>
-                ))}
-              </ul>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+            {filteredEntries.length > 0 ? (
+              <section>
+                <h2 css={headingPadding}>
+                  <strong>Cards:</strong>
+                </h2>
+                <ul className={classes.entriesList}>
+                  {filteredEntries.map(entry => (
+                    <li key={shortid.generate()} className={classes.entry}>
+                      {
+                        <entry.component
+                          className={classes.storyCard}
+                          Layout={CivicCardLayoutPreview}
+                        />
+                      }
+                    </li>
+                  ))}
+                </ul>
+              </section>
             ) : (
               <div css={emptyState}>
-                <SandboxCard />
                 <p>
                   {`We haven't yet made any cards matching your selection.`}
                   <br />
@@ -335,7 +361,14 @@ CardList.propTypes = {
     topics: PropTypes.arrayOf(PropTypes.string),
     locations: PropTypes.arrayOf(PropTypes.string),
     visualizations: PropTypes.arrayOf(PropTypes.string)
-  })
+  }),
+  projects: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.title,
+      description: PropTypes.description,
+      link: PropTypes.link
+    })
+  )
 };
 
 export default CardList;

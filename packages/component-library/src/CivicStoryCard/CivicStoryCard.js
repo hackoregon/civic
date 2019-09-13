@@ -1,8 +1,12 @@
 import PropTypes from "prop-types";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
+import { Link } from "react-router";
 import CivicStoryFooter from "./CivicStoryFooter";
 import Logo from "../Logo/Logo";
+import BrandColors from "../_Themes/Brand/BrandColors";
+
+const { action } = BrandColors;
 
 const cardClass = css`
   text-align: center;
@@ -73,6 +77,15 @@ const scaleCorner = css`
   max-height: 134px;
 `;
 
+const linkHeader = css`
+  color: #000;
+  cursor: pointer;
+
+  &:hover {
+    color: ${action.hex};
+  }
+`;
+
 const CivicStoryCard = ({
   slug,
   title,
@@ -113,7 +126,13 @@ const CivicStoryCard = ({
           </svg>
         )}
       </div>
-      {title ? <h2 css={titleClass}>{title}</h2> : null}
+      {title ? (
+        <h2 css={titleClass}>
+          <Link to={`/cards/${slug}`} css={linkHeader}>
+            {title}
+          </Link>
+        </h2>
+      ) : null}
       <div css={descriptionClass}>{content}</div>
       {footer && <CivicStoryFooter slug={slug} source={source} />}
     </div>
