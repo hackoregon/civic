@@ -28,7 +28,10 @@ const cardHeadlineLink = css`
     right: 0;
     top: 0;
   }
-  &:focus {
+  &:focus-visible {
+    outline: 2px solid hsl(300, 5%, 55%);
+  }
+  &:-moz-focusring {
     outline: 2px solid hsl(300, 5%, 55%);
   }
   &:hover {
