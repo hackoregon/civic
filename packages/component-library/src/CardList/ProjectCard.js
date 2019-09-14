@@ -41,7 +41,7 @@ const useProjectStyles = makeStyles({
 
 const Watermark = () => (
   <div css={watermarkContainer}>
-    <svg css={scaleCorner} xmlns="http://www.w3.org/2000/svg">
+    <svg aria-hidden="true" css={scaleCorner}>
       <g fill="none" fillRule="evenodd">
         <path d="M0 134.658V0l11.566 11.597v123.061H0z" fill="#191119" />
         <path
