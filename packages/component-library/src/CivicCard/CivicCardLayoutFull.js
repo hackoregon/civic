@@ -77,6 +77,17 @@ const buttonImproveContainer = css`
   justify-items: center;
 `;
 
+const hiddenVisually = css`
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+`;
+
 function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
   const [shareButtonText, setShareButtonText] = useState("Share");
   const [shareButtonOpen, setShareButtonOpen] = useState(false);
@@ -93,6 +104,7 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
     const linkLocation = `${_.get(window, "location.origin", "")}/cards/${
       cardMeta.slug
     }`;
+    const scrOutput = document.querySelector("#scr-only");
 
     if (option === "link") {
       copy(linkLocation);
@@ -101,8 +113,10 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
     }
 
     setShareButtonText("Copied!");
+    scrOutput.textContent = "Copied";
     setTimeout(() => {
       setShareButtonText("Share");
+      scrOutput.textContent = "";
     }, 2000);
     setShareButtonOpen(false);
   }
@@ -129,6 +143,7 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
 
   return (
     <ThemeProvider theme={MaterialTheme}>
+      <output css={hiddenVisually} id="scr-only" />
       <article>
         {cardMeta.title && (
           <div css={[sectionMarginSmall, sectionMaxWidthSmall]}>
