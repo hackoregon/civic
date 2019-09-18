@@ -47,10 +47,6 @@ export const INJURY = "injury";
 export const WEATHER = "weather";
 export const LOST_PET = "lost-pet";
 export const THIRST = "thirst";
-// Community task ids
-export const DONATE_BLOOD = "donate-blood";
-export const VOLUNTEER_SHELTER = "volunteer-shelter";
-export const VOLUNTEER_FOOD = "volunteer-food";
 
 // environments
 export const URBAN = "urban";
@@ -211,69 +207,12 @@ export const tasks = {
     clue: "I'm so thirsty!",
     tickerTape: "Kits should contain 1 gallon of water per person per day.",
     locations: [[-122.634761, 45.515922]]
-  },
-  // TODO: Community tasks
-  [DONATE_BLOOD]: {
-    id: DONATE_BLOOD,
-    time: 15,
-    requiredItem: water, // TODO
-    numberItemsToSolve: 1,
-    points: 5,
-    imageSVG: thirst, // TODO
-    imageAlt: "TODO", // TODO
-    sceneSVG: sceneThirst, // TODO
-    sceneAlt: "TODO", // TODO
-    clue: "We need more people to donate!",
-    tickerTape:
-      "Donating blood after disasters helps keep blood banks full. Redcross.org",
-    locations: [[-122.634777, 45.515922]] // TODO
-  },
-  [VOLUNTEER_SHELTER]: {
-    id: VOLUNTEER_SHELTER,
-    time: 15,
-    requiredItem: water, // TODO
-    numberItemsToSolve: 1,
-    points: 5,
-    imageSVG: thirst, // TODO
-    imageAlt: "TODO", // TODO
-    sceneSVG: sceneThirst, // TODO
-    sceneAlt: "TODO", // TODO
-    clue: "So many people's homes were destroyed!",
-    tickerTape:
-      "After a major earthquake, up to 85,000 people in Portland will need shelter.",
-    locations: [[-122.634799, 45.515922]] // TODO
-  },
-  [VOLUNTEER_FOOD]: {
-    id: VOLUNTEER_FOOD,
-    time: 15,
-    requiredItem: water, // TODO
-    numberItemsToSolve: 1,
-    points: 5,
-    imageSVG: thirst, // TODO
-    imageAlt: "TODO", // TODO
-    sceneSVG: sceneThirst, // TODO
-    sceneAlt: "TODO", // TODO
-    clue: "All these people are hungry!",
-    tickerTape:
-      "Make sure your disaster preparations meet any dietary restrictions in your family!",
-    locations: [[-122.634766, 45.515922]] // TODO
   }
 };
 
 export const tasksForEnvironment = {
   [URBAN]: {
     saveYourself: [RUBBLE, DUST],
-    saveOthers: [
-      INJURY,
-      HOLE,
-      HUNGER,
-      COLD,
-      WEATHER,
-      LOST_PET,
-      THIRST,
-      DONATE_BLOOD,
-      VOLUNTEER_SHELTER,
-      VOLUNTEER_FOOD
-    ]
+    saveOthers: [INJURY, HOLE, HUNGER, COLD, WEATHER, LOST_PET, THIRST]
   }
 };
