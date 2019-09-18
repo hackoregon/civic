@@ -1,5 +1,5 @@
 {
-  "name": "@hackoregon/2019-disaster-trail",
+  "name": "@hackoregon/2019-disaster-game",
   "version": "3.0.0",
   "description": "Hack Oregon Front-end React + Redux Starter",
   "main": "src/index.js",

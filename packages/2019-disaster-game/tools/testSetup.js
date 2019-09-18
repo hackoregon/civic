@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 process.env.NODE_ENV = "test";
 
-const identity = require("ramda").identity;
+const {identity} = require("ramda");
 
 [".css", ".png", ".jpg", ".svg", ".gif"].forEach(ext => {
   require.extensions[ext] = identity;
