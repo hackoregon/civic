@@ -2,7 +2,7 @@
 /** @jsx jsx */
 import { css, jsx, Global } from "@emotion/core";
 import emotionReset from "emotion-reset";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import {
   Button,
   BrandColors,
@@ -65,6 +65,15 @@ const sectionCivicLayout = css`
 `;
 
 const HomePage = () => {
+  const [controlSettings, setControlSettings] = useState(false);
+
+  const showControls = () => {
+    setControlSettings(true);
+  };
+  const hideControls = () => {
+    setControlSettings(false);
+  };
+
   return (
     <Fragment>
       <Global
@@ -81,7 +90,19 @@ const HomePage = () => {
           A system for public data, built on public collaboration
         </p>
         <div className="intro-wrapper">
-          <video className="placeholder-intro-image" autoPlay playsInline muted loop>
+          <video
+            className="placeholder-intro-image"
+            autoPlay
+            controls={controlSettings}
+            playsInline
+            muted
+            loop
+            tabIndex="0"
+            onMouseEnter={showControls}
+            onMouseLeave={hideControls}
+            onFocus={showControls}
+            onBlur={hideControls}
+          >
             <source type="video/mp4" src={test} />
           </video>
           <p className="intro-text">
