@@ -54,7 +54,7 @@ const sampleCardMeta = (/* data */) => ({
   ],
   selector: null, // optional, to be added later
   analysis: (
-    <Collapsable>
+    <Collapsable description="about this analysis">
       <Collapsable.Section>
         <p>
           <em>

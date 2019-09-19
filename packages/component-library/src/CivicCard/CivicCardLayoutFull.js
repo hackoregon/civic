@@ -270,6 +270,7 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
               <Fragment>
                 {cardMeta.metadata}
                 <CollapsableSection
+                  description="metadata questions"
                   items={Object.keys(relatedMetadataQA).map(key => (
                     <MetadataQuestion
                       question={MetaDataQAQuestions[key]}
@@ -311,6 +312,7 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
                 this data visualization.
               </p>
               <CollapsableSection
+                description="resources"
                 items={cardMeta.resources.map(item => (
                   <Resource section={item} key={generate()} />
                 ))}

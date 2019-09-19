@@ -71,7 +71,7 @@ function CivicCardLayoutPreview({ cardMeta }) {
         >
           <CardContent>
             <h2>{cardMeta.title}</h2>
-            <p>{cardMeta.introText}</p>
+            <div>{cardMeta.introText}</div>
             <section id={`${cardMeta.slug}-tags`}>
               {cardMeta.tags.map((tag, index) => (
                 <Chip

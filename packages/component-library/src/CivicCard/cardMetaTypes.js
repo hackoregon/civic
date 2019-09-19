@@ -29,7 +29,7 @@ const cardMetaObjectProperties = {
   ),
   authors: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.string /* author email */),
-    PropTypes.oneOf(["Demo"])
+    PropTypes.string
   ])
 };
 
