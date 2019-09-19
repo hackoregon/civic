@@ -20,6 +20,7 @@ const contentContainer = css`
     outline: 1px solid transparent; /* needed for Windows high-contrast mode */  
 `;
 
+/* this is an accessibility feature to make the entire card clickable without wrapping all the content in a link. */
 const cardHeadlineLink = css`
   display: inline-block;
   color: unset;
