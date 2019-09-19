@@ -12,10 +12,12 @@ const EarthquakeDamageEstimatesForBuildingsInTillamookCounty = ({
   data,
   Layout
 }) => {
-  useEffect(() => {
-    init();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [init]);
+  useEffect(
+    () => {
+      init();
+    },
+    [] // eslint-disable-line react-hooks/exhaustive-deps
+  );
 
   return (
     <CivicCard
