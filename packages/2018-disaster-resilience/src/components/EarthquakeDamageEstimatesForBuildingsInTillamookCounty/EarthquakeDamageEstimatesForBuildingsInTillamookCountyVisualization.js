@@ -42,6 +42,14 @@ const EarthquakeDamageEstimatesForBuildingsInTillamookCountyVisualization = ({
         }}
         row
       />
+      {!hasLoaded && (
+        <p>
+          <small>
+            <strong>Note:</strong> This visualization uses a large dataset that
+            has not been optimized and takes a long time to load
+          </small>
+        </p>
+      )}
       <ChartContainer loading={!hasLoaded}>
         {hasLoaded && data && (
           <>
