@@ -22,6 +22,7 @@ const contentContainer = css`
 
 const cardHeadlineLink = css`
   display: inline-block;
+  color: unset;
   &::before {
     bottom: 0;
     content: "";
