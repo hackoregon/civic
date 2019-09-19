@@ -4,7 +4,7 @@ import { Collapsable } from "@hackoregon/component-library";
 import EarthquakeDamageEstimatesForBuildingsInTillamookCountyVisualization from "./EarthquakeDamageEstimatesForBuildingsInTillamookCountyVisualization";
 
 const EarthquakeDamageEstimatesForBuildingsInTillamookCountyMeta = (/* data */) => ({
-  title: "Earthquake Damage Estimates For Buildings In Tillamook County",
+  title: "Earthquake Damage Estimates for Buildings In Tillamook County",
   slug: "earthquake-damage-estimates-for-buildings-in-tillamook-county",
   introText: (
     <p>
