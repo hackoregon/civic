@@ -13,7 +13,7 @@ import {
 
 const TillamookCountyEarthquakeCasualtyEstimatesVisualization = ({ data }) => {
   const hasLoaded = isLoaded(data.earthquakeCasualties);
-  const [dataType, setData] = useState("Daytime - Injury");
+  const [dataType, setData] = useState("Nighttime - Injury");
 
   const mapStyles = {
     "Daytime - Injury": {
@@ -68,6 +68,7 @@ const TillamookCountyEarthquakeCasualtyEstimatesVisualization = ({ data }) => {
             initialLatitude={45.4562}
             initialZoom={8}
             civicMapStyle={mapStyles[dataType].map}
+            minZoom={8}
           >
             <ScatterPlotMap
               data={data.earthquakeCasualties.value}

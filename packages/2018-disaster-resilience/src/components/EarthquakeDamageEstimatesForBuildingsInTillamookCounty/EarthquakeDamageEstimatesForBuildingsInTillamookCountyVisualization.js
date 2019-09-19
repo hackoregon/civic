@@ -57,6 +57,7 @@ const EarthquakeDamageEstimatesForBuildingsInTillamookCountyVisualization = ({
               initialLongitude={-123.844}
               initialLatitude={45.4562}
               initialZoom={8}
+              minZoom={8}
               civicMapStyle={mapStyles[dataType].map}
             >
               <ScreenGridMap
