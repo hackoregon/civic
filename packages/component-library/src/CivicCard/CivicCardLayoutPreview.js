@@ -3,7 +3,6 @@ import { jsx, css } from "@emotion/core";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import { generate } from "shortid";
 
@@ -15,6 +14,31 @@ const { secondary } = BrandColors;
 
 const contentContainer = css`
   position: relative;
+  &:focus-within {
+    box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.2),
+      0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 4px 2px -1px rgba(0, 0, 0, 0.12);
+    outline: 1px solid transparent; /* needed for Windows high-contrast mode */  
+`;
+
+const cardHeadlineLink = css`
+  display: inline-block;
+  &::before {
+    bottom: 0;
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  &:focus-visible {
+    outline: 2px solid hsl(300, 5%, 55%);
+  }
+  &:-moz-focusring {
+    outline: 2px solid hsl(300, 5%, 55%);
+  }
+  &:hover {
+    color: currentColor;
+  }
 `;
 
 const watermarkContainer = css`
@@ -34,6 +58,23 @@ const scaleCorner = css`
   max-height: 134px;
 `;
 
+const nonInteractiveCta = css`
+  font-family: Rubik, Helvetica Neue, Helvetica, sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.75;
+  padding: 0.307692308em 0.615384615em;
+  text-transform: uppercase;
+  transition: background-color 63ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    box-shadow 63ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    border 63ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  z-index: 2;
+  &:hover {
+    background-color: rgba(32, 16, 36, 0.08);
+    cursor: pointer;
+  }
+`;
+
 const useStyles = makeStyles({
   card: {
     "&:hover": {
@@ -45,7 +86,7 @@ const useStyles = makeStyles({
 
 const Watermark = () => (
   <div css={watermarkContainer}>
-    <svg css={scaleCorner} xmlns="http://www.w3.org/2000/svg">
+    <svg css={scaleCorner}>
       <g fill="none" fillRule="evenodd">
         <path d="M0 134.658V0l11.566 11.597v123.061H0z" fill="#191119" />
         <path
@@ -61,34 +102,36 @@ function CivicCardLayoutPreview({ cardMeta }) {
   const classes = useStyles();
 
   return (
-    <CivicCardLink slug={cardMeta.slug}>
-      <Card css={contentContainer} className={classes.card}>
-        <Watermark />
-        <div
-          css={css`
-            padding: 0 15px 0 27px;
-          `}
-        >
-          <CardContent>
-            <h2>{cardMeta.title}</h2>
-            <p>{cardMeta.introText}</p>
-            <section id={`${cardMeta.slug}-tags`}>
-              {cardMeta.tags.map((tag, index) => (
-                <Chip
-                  tag={tag}
-                  index={index}
-                  key={generate()}
-                  color={secondary.hex}
-                />
-              ))}
-            </section>
-          </CardContent>
-          <CardActions>
-            <Button size="small">Learn more</Button>
-          </CardActions>
-        </div>
-      </Card>
-    </CivicCardLink>
+    <Card css={contentContainer} className={classes.card}>
+      <Watermark />
+      <div
+        css={css`
+          padding: 0 15px 0 27px;
+        `}
+      >
+        <CardContent>
+          <h2>
+            <CivicCardLink css={cardHeadlineLink} slug={cardMeta.slug}>
+              {cardMeta.title}
+            </CivicCardLink>
+          </h2>
+          <p>{cardMeta.introText}</p>
+          <section id={`${cardMeta.slug}-tags`}>
+            {cardMeta.tags.map((tag, index) => (
+              <Chip
+                tag={tag}
+                index={index}
+                key={generate()}
+                color={secondary.hex}
+              />
+            ))}
+          </section>
+        </CardContent>
+        <CardActions>
+          <span css={nonInteractiveCta}>Learn more</span>
+        </CardActions>
+      </div>
+    </Card>
   );
 }
 

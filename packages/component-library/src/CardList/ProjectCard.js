@@ -2,7 +2,6 @@
 import { css, jsx } from "@emotion/core";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
-// import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -114,7 +113,7 @@ const ProjectCard = ({ title, description, link, type }) => {
       >
         <CardContent>
           <h2>
-            <Link css={cardHeadlineLink} to={link} tabindex="0">
+            <Link css={cardHeadlineLink} to={link}>
               {startCase(type)}: {title}
             </Link>
           </h2>
