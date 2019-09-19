@@ -159,8 +159,17 @@ const TillamookCountyEarthquakeCasualtyEstimatesMeta = (/* data */) => ({
       ]
     }
   ],
-  // authors likely an array of keys in the future
-  authors: "demo"
+  // authors likely an array of EMAILS in the future
+  authors: [
+    <a href="mailto:dbausch@niyamit.com">Doug Bausch</a>,
+    <a href="mailto:jburns@niyamit.com">Jordan Burns</a>,
+    <a href="mailto:usharma@niyamit.com">Ujvala K Sharma</a>,
+    <a href="mailto:scott.tse@hackoregon.org">Scott Tse</a>,
+    <a href="mailto:sagi.shaier@hackoregon.org">Sagi Shaier</a>,
+    <a href="mailto:erin.cooper@civicsoftwarefoundation.org">Erin Cooper</a>,
+    <a href="mailto:karen.ng@civicsoftwarefoundation.org">Karen Ng</a>,
+    <a href="mailto:jaron@civicsoftwarefoundation.org">Jaron Heard</a>
+  ]
 });
 
 export default TillamookCountyEarthquakeCasualtyEstimatesMeta;
