@@ -12,13 +12,10 @@ const EarthquakeDamageEstimatesForBuildingsInTillamookCounty = ({
   data,
   Layout
 }) => {
-  useEffect(
-    () => {
-      init();
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    },
-    [init]
-  );
+  useEffect(() => {
+    init();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [init]);
 
   return (
     <CivicCard
@@ -37,6 +34,8 @@ EarthquakeDamageEstimatesForBuildingsInTillamookCounty.propTypes = {
   data: PropTypes.shape({ damageEstimates: resourceShape }),
   Layout: PropTypes.func
 };
+
+EarthquakeDamageEstimatesForBuildingsInTillamookCounty.tags = earthquakeDamageEstimatesForBuildingsInTillamookCountyMeta().tags;
 
 export default connect(
   state => ({
