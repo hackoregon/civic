@@ -113,7 +113,7 @@
     "viewport-mercator-project": "^6.2.0"
   },
   "peerDependencies": {
-    "react-router": "^3.0.0"
+    "react-router": "^3.2.4"
   },
   "gitHead": "b50f7a7fca617964ade5a3ecb5225fee17b20fe4"
 }
