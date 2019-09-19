@@ -75,6 +75,14 @@ const nonInteractiveCta = css`
   }
 `;
 
+const tagList = css`
+  list-style: unset;
+  padding: unset;
+  & li {
+    display: unset;
+  }
+`;
+
 const useStyles = makeStyles({
   card: {
     "&:hover": {
@@ -116,16 +124,18 @@ function CivicCardLayoutPreview({ cardMeta }) {
             </CivicCardLink>
           </h2>
           <p>{cardMeta.introText}</p>
-          <section id={`${cardMeta.slug}-tags`}>
+          <ul css={tagList} id={`${cardMeta.slug}-tags`}>
             {cardMeta.tags.map((tag, index) => (
-              <Chip
-                tag={tag}
-                index={index}
-                key={generate()}
-                color={secondary.hex}
-              />
+              <li>
+                <Chip
+                  tag={tag}
+                  index={index}
+                  key={generate()}
+                  color={secondary.hex}
+                />
+              </li>
             ))}
-          </section>
+          </ul>
         </CardContent>
         <CardActions>
           <span css={nonInteractiveCta}>Learn more</span>
