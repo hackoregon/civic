@@ -62,12 +62,15 @@ const TillamookCountyEarthquakeCasualtyEstimatesMeta = (/* data */) => ({
           well as the probability of sustaining less severe damage - is
           calculated using the relationship between the type and intensity of
           physical shaking and the impacts to a building’s structural
-          components. The relationship between shaking and damage for a building
-          varies according to building characteristics like number of stories,
-          construction material, age, etc. If these characteristics are not
-          documented for individual buildings across an area, they are estimated
-          using broad building categories like census occupancy type and code
-          adoption dates.
+          components.
+          <p>
+            The relationship between shaking and damage for a building varies
+            according to building characteristics like number of stories,
+            construction material, age, etc. If these characteristics are not
+            documented for individual buildings across an area, they are
+            estimated using broad building categories like census occupancy type
+            and code adoption dates.
+          </p>
         </p>
         <h3>Data Used</h3>
       </Collapsable.Section>
