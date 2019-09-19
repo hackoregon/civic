@@ -7,7 +7,8 @@ import {
   BaseMap,
   ScatterPlotMap,
   VisualizationColors,
-  RadioButtonGroup
+  RadioButtonGroup,
+  ChartContainer
 } from "@hackoregon/component-library";
 
 const TillamookCountyEarthquakeCasualtyEstimatesVisualization = ({ data }) => {
@@ -53,23 +54,25 @@ const TillamookCountyEarthquakeCasualtyEstimatesVisualization = ({ data }) => {
         row
       />
       {console.log(data)}
-      {hasLoaded && data && (
-        <BaseMap
-          initialLongitude={-123.844}
-          initialLatitude={45.4562}
-          initialZoom={8}
-          civicMapStyle={mapStyles[dataType].map}
-        >
-          <ScatterPlotMap
-            data={data.earthquakeCasualties.value}
-            getPosition={f => f.geometry && f.geometry.coordinates}
-            opacity={mapStyles[dataType].opacity}
-            getFillColor={mapStyles[dataType].color}
-            getRadius={f => f.properties[mapStyles[dataType].field]}
-            radiusScale={65}
-          />
-        </BaseMap>
-      )}
+      <ChartContainer loading={!hasLoaded}>
+        {hasLoaded && data && (
+          <BaseMap
+            initialLongitude={-123.844}
+            initialLatitude={45.4562}
+            initialZoom={8}
+            civicMapStyle={mapStyles[dataType].map}
+          >
+            <ScatterPlotMap
+              data={data.earthquakeCasualties.value}
+              getPosition={f => f.geometry && f.geometry.coordinates}
+              opacity={mapStyles[dataType].opacity}
+              getFillColor={mapStyles[dataType].color}
+              getRadius={f => f.properties[mapStyles[dataType].field]}
+              radiusScale={65}
+            />
+          </BaseMap>
+        )}
+      </ChartContainer>
     </>
   );
 };

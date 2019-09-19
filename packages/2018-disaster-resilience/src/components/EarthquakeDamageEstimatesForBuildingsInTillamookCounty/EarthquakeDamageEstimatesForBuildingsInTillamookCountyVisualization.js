@@ -8,7 +8,8 @@ import {
   BaseMap,
   VisualizationColors,
   RadioButtonGroup,
-  ScreenGridMap
+  ScreenGridMap,
+  ChartContainer
 } from "@hackoregon/component-library";
 
 const EarthquakeDamageEstimatesForBuildingsInTillamookCountyVisualization = ({
@@ -41,26 +42,28 @@ const EarthquakeDamageEstimatesForBuildingsInTillamookCountyVisualization = ({
         }}
         row
       />
-      {hasLoaded && data && (
-        <>
-          <BaseMap
-            initialLongitude={-123.844}
-            initialLatitude={45.4562}
-            initialZoom={8}
-            civicMapStyle={mapStyles[dataType].map}
-          >
-            <ScreenGridMap
-              data={data.damageEstimates.value}
-              getPosition={f => f.geometry && f.geometry.coordinates}
-              opacity={mapStyles[dataType].opacity}
-              getWeight={f => f.properties[mapStyles[dataType].field]}
-              getSize={() => 15}
-              colorRange={VisualizationColors.sequential.space}
-            />
-          </BaseMap>
-          <Link to="/sandbox">See more in the Civic Sandbox</Link>
-        </>
-      )}
+      <ChartContainer loading={!hasLoaded}>
+        {hasLoaded && data && (
+          <>
+            <BaseMap
+              initialLongitude={-123.844}
+              initialLatitude={45.4562}
+              initialZoom={8}
+              civicMapStyle={mapStyles[dataType].map}
+            >
+              <ScreenGridMap
+                data={data.damageEstimates.value}
+                getPosition={f => f.geometry && f.geometry.coordinates}
+                opacity={mapStyles[dataType].opacity}
+                getWeight={f => f.properties[mapStyles[dataType].field]}
+                getSize={() => 15}
+                colorRange={VisualizationColors.sequential.space}
+              />
+            </BaseMap>
+            <Link to="/sandbox">See more in the Civic Sandbox</Link>
+          </>
+        )}
+      </ChartContainer>
     </>
   );
 };
