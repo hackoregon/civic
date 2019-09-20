@@ -22,12 +22,14 @@ const EarthquakeDamageEstimatesForBuildingsInTillamookCountyVisualization = ({
     Commercial: {
       field: "com_loss_r",
       opacity: 0.5,
-      map: "light"
+      map: "light",
+      buildingType: "commercial"
     },
     Residential: {
       field: "res_loss_r",
       opacity: 0.5,
-      map: "light"
+      map: "light",
+      buildingType: "residential"
     }
   };
 
@@ -45,12 +47,18 @@ const EarthquakeDamageEstimatesForBuildingsInTillamookCountyVisualization = ({
       {!hasLoaded && (
         <p>
           <small>
-            <strong>Note:</strong> This visualization uses a large dataset that
-            has not been optimized and takes a long time to load
+            <strong>Note:</strong> This visualization uses a large dataset and
+            takes a long time to load
           </small>
         </p>
       )}
-      <ChartContainer loading={!hasLoaded}>
+      <ChartContainer
+        loading={!hasLoaded}
+        title="Building Impact of a 9.0 Cascadia Earthquake"
+        subtitle={`Estimated financial damage to ${
+          mapStyles[dataType].buildingType
+        } buildings in a Cascadia 9.0 earthquake.`}
+      >
         {hasLoaded && data && (
           <>
             <BaseMap
@@ -58,6 +66,7 @@ const EarthquakeDamageEstimatesForBuildingsInTillamookCountyVisualization = ({
               initialLatitude={45.4562}
               initialZoom={8}
               minZoom={8}
+              updateViewport={false}
               civicMapStyle={mapStyles[dataType].map}
             >
               <ScreenGridMap
@@ -66,7 +75,8 @@ const EarthquakeDamageEstimatesForBuildingsInTillamookCountyVisualization = ({
                 opacity={mapStyles[dataType].opacity}
                 getWeight={f => f.properties[mapStyles[dataType].field]}
                 getSize={() => 15}
-                colorRange={VisualizationColors.sequential.space}
+                colorRange={VisualizationColors.sequential.thermal}
+                getCursor={() => "default"}
               />
             </BaseMap>
             <Link to="/sandbox">See more in the Civic Sandbox</Link>
