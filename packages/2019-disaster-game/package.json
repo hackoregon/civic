@@ -1,5 +1,5 @@
 {
-  "name": "@hackoregon/2019-disaster-trail",
+  "name": "@hackoregon/2019-disaster-game",
   "version": "3.0.0",
   "description": "Hack Oregon Front-end React + Redux Starter",
   "main": "src/index.js",
@@ -26,8 +26,8 @@
     "clean": "rimraf ./build && mkdir build",
     "start": "yarn start:dev",
     "build": "rimraf dist && cross-env NODE_ENV=production webpack --config ./webpack.config.js",
-    "start:dev": "cross-env NODE_ENV=development babel-node server",
-    "start:prod": "cross-env NODE_ENV=production node server",
+    "start:dev": "cross-env NODE_ENV=development babel-node server/dev.js",
+    "start:prod": "yarn run build && cross-env NODE_ENV=production node server",
     "test": "cross-env BABEL_ENV=test mocha --opts ./mocha.opts 'src/**/*.test.js'",
     "test:watch": "yarn test -w",
     "lint": "eslint src"
@@ -38,6 +38,7 @@
     "@hackoregon/component-library": "^4.0.0",
     "@hackoregon/mock-wrapper": "^3.0.0",
     "@hackoregon/webpack-common": "^3.0.0",
+    "@hackoregon/dev-server": "^3.0.0",    
     "axios": "^0.18.0",
     "compression": "^1.6.2",
     "cross-env": "^5.2.0",
