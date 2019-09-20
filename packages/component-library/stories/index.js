@@ -4,6 +4,7 @@ import { storiesOf } from "@storybook/react";
 import { checkA11y } from "@storybook/addon-a11y";
 
 // DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator import injection
+import notebookPreviewStory from "./NotebookPreview.story"; // TODO: Move this to the appropriate location
 
 import buttonNewStory from "./ButtonNew.story";
 import badgeStory from "./Badge.story";
@@ -121,6 +122,7 @@ checkboxStory();
 radioButtonGroupStory();
 selectStory();
 sliderStory();
+notebookPreviewStory(); // TODO: Move this to the appropriate location
 // DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator story injection
 
 // charts

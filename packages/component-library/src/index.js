@@ -12,6 +12,7 @@ export {
 
 // COMPONENTS
 // DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator src injection
+export { default as NotebookPreview } from "./NotebookPreview/NotebookPreview"; // TODO: Move to correct location
 
 export {
   default as HorizontalBarChart
