@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
-import { Collapsable } from "@hackoregon/component-library";
+import { Collapsable, NotebookPreview } from "@hackoregon/component-library";
 import MathJax from "react-mathjax";
 
 import { Fragment } from "react";
@@ -63,15 +63,16 @@ const TillamookCountyEarthquakeCasualtyEstimatesMeta = (/* data */) => ({
           calculated using the relationship between the type and intensity of
           physical shaking and the impacts to a building’s structural
           components.
-          <p>
-            The relationship between shaking and damage for a building varies
-            according to building characteristics like number of stories,
-            construction material, age, etc. If these characteristics are not
-            documented for individual buildings across an area, they are
-            estimated using broad building categories like census occupancy type
-            and code adoption dates.
-          </p>
         </p>
+        <p>
+          The relationship between shaking and damage for a building varies
+          according to building characteristics like number of stories,
+          construction material, age, etc. If these characteristics are not
+          documented for individual buildings across an area, they are estimated
+          using broad building categories like census occupancy type and code
+          adoption dates.
+        </p>
+        <NotebookPreview link="https://github.com/hackoregon/2019-disaster-resilience-data-science/blob/master/notebooks/AEBM_Casualties_Analysis.ipynb" />
         <h3>Data Used</h3>
       </Collapsable.Section>
       <Collapsable.Section hidden>

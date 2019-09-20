@@ -1,5 +1,5 @@
 import React from "react";
-import { Collapsable } from "@hackoregon/component-library";
+import { Collapsable, NotebookPreview } from "@hackoregon/component-library";
 
 import EarthquakeDamageEstimatesForBuildingsInTillamookCountyVisualization from "./EarthquakeDamageEstimatesForBuildingsInTillamookCountyVisualization";
 
@@ -21,10 +21,7 @@ const EarthquakeDamageEstimatesForBuildingsInTillamookCountyMeta = (/* data */) 
       higher loss ratio than other types of buildings. Residential wood frame
       buildings tend to sustain less damage, but the model still predicts that
       half of these types of structures in Tillamook County could experience
-      repair costs up to ~30% of their value during a Cascadia 9.0 earthquake.{" "}
-      <a href="https://github.com/hackoregon/2019-disaster-resilience-data-science/blob/master/notebooks/hazus_aebm_output.ipynb">
-        https://github.com/hackoregon/2019-disaster-resilience-data-science/blob/master/notebooks/hazus_aebm_output.ipynb
-      </a>
+      repair costs up to ~30% of their value during a Cascadia 9.0 earthquake.
     </p>
   ),
   shareText:
@@ -52,6 +49,7 @@ const EarthquakeDamageEstimatesForBuildingsInTillamookCountyMeta = (/* data */) 
           sustained due to both acceleration and drift that occurs during
           earthquake shaking.
         </p>
+        <NotebookPreview link="https://github.com/hackoregon/2019-disaster-resilience-data-science/blob/master/notebooks/hazus_aebm_output.ipynb" />
       </Collapsable.Section>
     </Collapsable>
   ),
