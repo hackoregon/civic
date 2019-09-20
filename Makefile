@@ -70,7 +70,7 @@ deploy:
 			fi; \
 			if [ "$$SUITE" = "COMPONENT_LIBRARY" ]; then \
 				make deploy-component-library; \
-			fi \
+			fi; \
 			if [ "$$SUITE" = "2019_DISASTER_GAME" ]; then \
 				make deploy-2019-disaster-game; \
 			fi \
