@@ -3,14 +3,39 @@ import PropTypes from "prop-types";
 import { Link } from "react-router";
 import { PageLayout } from "../..";
 
+const matchRelatedCardsByTags = (slug, baseTags, entries) => {
+  // console.log(entries[0].component.tags);
+  const relatedCards = entries
+    .map(entry => {
+      // console.log("TAGS", entry.component.tags);
+      return {
+        numOfSimilarTags: entry.component.tags.filter(tag => {
+          return baseTags.includes(tag);
+        }).length,
+        ...entry
+      };
+    })
+    .filter(entry => {
+      return entry.slug !== slug;
+    })
+    .sort((a, b) => {
+      return b.numOfSimilarTags - a.numOfSimilarTags;
+    })
+    .slice(0, 4);
+
+  return relatedCards;
+};
+
 const ExploreRelated = ({ slug, CardRegistry }) => {
   const card = CardRegistry.find(slug);
-  // const card = {
-  //   component: true
-  // }
+  const relatedCards = matchRelatedCardsByTags(
+    slug,
+    card.component.tags,
+    CardRegistry.entries
+  );
+  console.log("RELATED CARDS", relatedCards);
 
   if (card && card.component) {
-    // const CardComponent = card.component;
     return <h1>Hello World</h1>;
   }
 
