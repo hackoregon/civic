@@ -44,14 +44,19 @@ const EarthquakeDamageEstimatesForBuildingsInTillamookCountyVisualization = ({
         }}
         row
       />
-      {!hasLoaded && (
-        <p>
+      <p>
+        {hasLoaded ? (
+          <small>
+            Zoom for more granular details. A brighter color indicates more
+            costly damage.
+          </small>
+        ) : (
           <small>
             <strong>Note:</strong> This visualization uses a large dataset and
             takes a long time to load
           </small>
-        </p>
-      )}
+        )}
+      </p>
       <ChartContainer
         loading={!hasLoaded}
         title="Building Impact of a 9.0 Cascadia Earthquake"

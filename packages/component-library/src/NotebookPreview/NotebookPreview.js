@@ -24,7 +24,7 @@ const NotebookPreview = ({ message, link }) => {
   const classes = useProjectStyles();
 
   return (
-    <a href={link}>
+    <a href={link} target="_blank" rel="noopener noreferrer">
       <Card className={classes.card}>
         <h3 css={header}>
           <Icon className="fa fa-book" />

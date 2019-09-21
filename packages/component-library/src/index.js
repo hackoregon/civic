@@ -12,7 +12,6 @@ export {
 
 // COMPONENTS
 // DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator src injection
-export { default as NotebookPreview } from "./NotebookPreview/NotebookPreview"; // TODO: Move to correct location
 
 export {
   default as HorizontalBarChart
@@ -108,3 +107,4 @@ export { default as ungroupBy } from "./utils/ungroupBy";
 export { default as DemoJSONLoader } from "./DemoJSONLoader/DemoJSONLoader";
 export { default as Badge } from "./Badge/Badge";
 export { default as ErrorBoundary } from "./ErrorBoundary/ErrorBoundary";
+export { default as NotebookPreview } from "./NotebookPreview/NotebookPreview";

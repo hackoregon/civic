@@ -6,11 +6,10 @@ describe("NotebookPreview", () => {
   it("should render NotebookPreview", () => {
     const wrapper = mount(<NotebookPreview />);
     expect(wrapper.find("NotebookPreview")).to.have.length(1);
-    expect(wrapper.find("NotebookPreview").children()).to.have.length(2);
+    expect(wrapper.find("NotebookPreview").children()).to.have.length(1);
   });
-  it("should have the appropriate default and static messages", () => {
-    const defaultMessage = "Hi! I'm a new blue component";
-    const staticMessage = "This message is baked in!";
+  it("should have the appropriate default message", () => {
+    const defaultMessage = "See the data science notebook";
     const wrapper = mount(<NotebookPreview />);
     expect(
       wrapper
@@ -18,14 +17,7 @@ describe("NotebookPreview", () => {
         .children()
         .first()
         .text()
-    ).to.eql(defaultMessage);
-    expect(
-      wrapper
-        .find("NotebookPreview")
-        .children()
-        .last()
-        .text()
-    ).to.eql(staticMessage);
+    ).to.eql(` ${defaultMessage}`);
   });
   it("should have the appropriate prop message", () => {
     const messageProp = "Oooh! Dynamic text";
@@ -36,6 +28,6 @@ describe("NotebookPreview", () => {
         .children()
         .first()
         .text()
-    ).to.eql(messageProp);
+    ).to.eql(` ${messageProp}`);
   });
 });

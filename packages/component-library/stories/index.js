@@ -4,8 +4,6 @@ import { storiesOf } from "@storybook/react";
 import { checkA11y } from "@storybook/addon-a11y";
 
 // DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator import injection
-import notebookPreviewStory from "./NotebookPreview.story"; // TODO: Move this to the appropriate location
-
 import buttonNewStory from "./ButtonNew.story";
 import badgeStory from "./Badge.story";
 import BarChartStory from "./BarChart.story";
@@ -30,6 +28,7 @@ import horizontalBarChartStory from "./HorizontalBarChart.story";
 import iconMapStory from "./IconMap.story";
 import lineChartStory from "./LineChart.story";
 import mapOverlayStory from "./MapOverlay.story";
+import notebookPreviewStory from "./NotebookPreview.story";
 import packageSelectorBox from "./PackageSelectorBox.story";
 import pageLayoutStory from "./PageLayout.story";
 import pathMapStory from "./PathMap.story";
