@@ -1,10 +1,10 @@
 import React from "react";
-import { Collapsable } from "@hackoregon/component-library";
+import { Collapsable, NotebookPreview } from "@hackoregon/component-library";
 
 import EarthquakeDamageEstimatesForBuildingsInTillamookCountyVisualization from "./EarthquakeDamageEstimatesForBuildingsInTillamookCountyVisualization";
 
 const EarthquakeDamageEstimatesForBuildingsInTillamookCountyMeta = (/* data */) => ({
-  title: "Earthquake Damage Estimates For Buildings In Tillamook County",
+  title: "Earthquake Damage Estimates for Buildings In Tillamook County",
   slug: "earthquake-damage-estimates-for-buildings-in-tillamook-county",
   introText: (
     <p>
@@ -21,10 +21,7 @@ const EarthquakeDamageEstimatesForBuildingsInTillamookCountyMeta = (/* data */) 
       higher loss ratio than other types of buildings. Residential wood frame
       buildings tend to sustain less damage, but the model still predicts that
       half of these types of structures in Tillamook County could experience
-      repair costs up to ~30% of their value during a Cascadia 9.0 earthquake.{" "}
-      <a href="https://github.com/hackoregon/2019-disaster-resilience-data-science/blob/master/notebooks/hazus_aebm_output.ipynb">
-        https://github.com/hackoregon/2019-disaster-resilience-data-science/blob/master/notebooks/hazus_aebm_output.ipynb
-      </a>
+      repair costs up to ~30% of their value during a Cascadia 9.0 earthquake.
     </p>
   ),
   shareText:
@@ -52,6 +49,7 @@ const EarthquakeDamageEstimatesForBuildingsInTillamookCountyMeta = (/* data */) 
           sustained due to both acceleration and drift that occurs during
           earthquake shaking.
         </p>
+        <NotebookPreview link="https://github.com/hackoregon/2019-disaster-resilience-data-science/blob/master/notebooks/hazus_aebm_output.ipynb" />
       </Collapsable.Section>
     </Collapsable>
   ),
@@ -121,7 +119,16 @@ const EarthquakeDamageEstimatesForBuildingsInTillamookCountyMeta = (/* data */) 
     }
   ],
   // authors likely an array of keys in the future
-  authors: "demo"
+  authors: [
+    <a href="mailto:dbausch@niyamit.com">Doug Bausch</a>,
+    <a href="mailto:jburns@niyamit.com">Jordan Burns</a>,
+    <a href="mailto:usharma@niyamit.com">Ujvala K Sharma</a>,
+    <a href="mailto:scott.tse@hackoregon.org">Scott Tse</a>,
+    <a href="mailto:sagi.shaier@hackoregon.org">Sagi Shaier</a>,
+    <a href="mailto:erin.cooper@civicsoftwarefoundation.org">Erin Cooper</a>,
+    <a href="mailto:karen.ng@civicsoftwarefoundation.org">Karen Ng</a>,
+    <a href="mailto:jaron@civicsoftwarefoundation.org">Jaron Heard</a>
+  ]
 });
 
 export default EarthquakeDamageEstimatesForBuildingsInTillamookCountyMeta;

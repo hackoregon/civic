@@ -6,45 +6,56 @@ import { isLoaded } from "reduxful";
 import {
   BaseMap,
   ScatterPlotMap,
+  MapTooltip,
   VisualizationColors,
-  RadioButtonGroup
+  RadioButtonGroup,
+  ChartContainer,
+  civicFormat
 } from "@hackoregon/component-library";
 
 const TillamookCountyEarthquakeCasualtyEstimatesVisualization = ({ data }) => {
   const hasLoaded = isLoaded(data.earthquakeCasualties);
-  const [dataType, setData] = useState("Daytime - Injury");
+  const [dataType, setData] = useState("Nighttime - Injuries");
 
   const mapStyles = {
-    "Daytime - Injury": {
+    "Daytime - Injuries": {
       field: "daytime_in",
       color: VisualizationColors.categorical.yellow.mapFormatRGBA,
       opacity: 0.1,
-      map: "light"
+      map: "light",
+      timeOfDay: "daytime",
+      impact: "injuries"
     },
-    "Daytime - Death": {
+    "Daytime - Casualties": {
       field: "daytime_de",
       color: VisualizationColors.categorical.pink.mapFormatRGBA,
       opacity: 0.3,
-      map: "light"
+      map: "light",
+      timeOfDay: "daytime",
+      impact: "casualties"
     },
-    "Nighttime - Injury": {
+    "Nighttime - Injuries": {
       field: "nighttim_1",
       color: VisualizationColors.categorical.green.mapFormatRGBA,
       opacity: 0.1,
-      map: "dark"
+      map: "dark",
+      timeOfDay: "nighttime",
+      impact: "injuries"
     },
-    "Nighttime - Death": {
+    "Nighttime - Casualties": {
       field: "nighttime_field",
       color: VisualizationColors.categorical.green.mapFormatRGBA,
       opacity: 0.3,
-      map: "dark"
+      map: "dark",
+      timeOfDay: "nighttime",
+      impact: "casualties"
     }
   };
 
   return (
     <>
       <RadioButtonGroup
-        grpLabel="Type"
+        grpLabel="Scenario"
         labels={Object.keys(mapStyles)}
         value={dataType}
         onChange={event => {
@@ -52,24 +63,50 @@ const TillamookCountyEarthquakeCasualtyEstimatesVisualization = ({ data }) => {
         }}
         row
       />
-      {console.log(data)}
-      {hasLoaded && data && (
-        <BaseMap
-          initialLongitude={-123.844}
-          initialLatitude={45.4562}
-          initialZoom={8}
-          civicMapStyle={mapStyles[dataType].map}
-        >
-          <ScatterPlotMap
-            data={data.earthquakeCasualties.value}
-            getPosition={f => f.geometry && f.geometry.coordinates}
-            opacity={mapStyles[dataType].opacity}
-            getFillColor={mapStyles[dataType].color}
-            getRadius={f => f.properties[mapStyles[dataType].field]}
-            radiusScale={65}
-          />
-        </BaseMap>
+      {!hasLoaded && (
+        <p>
+          <small>
+            <strong>Note:</strong> This visualization uses a large dataset and
+            takes a long time to load
+          </small>
+        </p>
       )}
+      <ChartContainer
+        loading={!hasLoaded}
+        title="Human Impact of a 9.0 Cascadia Earthquake"
+        subtitle={`Estimated ${
+          mapStyles[dataType].impact
+        } in Tillamook County in a ${
+          mapStyles[dataType].timeOfDay
+        } Cascadia 9.0 earthquake.`}
+      >
+        {hasLoaded && data && (
+          <BaseMap
+            initialLongitude={-123.844}
+            initialLatitude={45.4562}
+            initialZoom={8}
+            civicMapStyle={mapStyles[dataType].map}
+            minZoom={8}
+            maxZoom={14}
+            updateViewport={false}
+          >
+            <ScatterPlotMap
+              data={data.earthquakeCasualties.value}
+              getPosition={f => f.geometry && f.geometry.coordinates}
+              opacity={mapStyles[dataType].opacity}
+              getFillColor={mapStyles[dataType].color}
+              getRadius={f => f.properties[mapStyles[dataType].field]}
+              radiusScale={65}
+            >
+              <MapTooltip
+                primaryName={dataType}
+                primaryField={mapStyles[dataType].field}
+                formatPrimaryField={f => civicFormat.roundedDecimal(f)}
+              />
+            </ScatterPlotMap>
+          </BaseMap>
+        )}
+      </ChartContainer>
     </>
   );
 };
