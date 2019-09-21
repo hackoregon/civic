@@ -87,6 +87,7 @@ const TillamookCountyEarthquakeCasualtyEstimatesVisualization = ({ data }) => {
             initialZoom={8}
             civicMapStyle={mapStyles[dataType].map}
             minZoom={8}
+            maxZoom={14}
             updateViewport={false}
           >
             <ScatterPlotMap
