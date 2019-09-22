@@ -34,7 +34,7 @@ const EarthquakeDamageEstimatesForBuildingsInTillamookCountyMeta = (/* data */) 
         <p>
           The building loss ratio used in this visualization is a ratio of
           (Building Structural Loss estimate + Building Non-Structural
-          Acceleration Loss estimate + Non Structural Drift Loss estimate) to
+          Acceleration Loss estimate + Non-Structural Drift Loss estimate) to
           the Building Replacement Value. Building structural and non-structural
           loss estimates are calculated using the cumulative probability of
           several damage states (slight, moderate, extensive and complete) and
