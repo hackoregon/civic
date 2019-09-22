@@ -174,9 +174,30 @@ class BaseMap extends Component {
   };
 
   onViewportChange = viewport => {
-    this.setState(prevState => ({
-      viewport: { ...prevState.viewport, ...viewport }
-    }));
+    const { minZoom, maxZoom } = this.props;
+    const { zoom } = viewport;
+    if (zoom >= minZoom && zoom <= maxZoom) {
+      this.setState(prevState => ({
+        viewport: {
+          ...prevState.viewport,
+          ...viewport
+        }
+      }));
+    } else if (zoom < minZoom) {
+      this.setState(prevState => ({
+        viewport: {
+          ...prevState.viewport,
+          zoom: minZoom
+        }
+      }));
+    } else if (zoom > maxZoom) {
+      this.setState(prevState => ({
+        viewport: {
+          ...prevState.viewport,
+          zoom: maxZoom
+        }
+      }));
+    }
   };
 
   render() {
