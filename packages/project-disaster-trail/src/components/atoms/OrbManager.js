@@ -23,7 +23,7 @@ import Orb from "./Orb";
 import {
   completedOrbHandler,
   createRandomLayout,
-  uncompletedOrbHandler
+  incompleteOrbHandler
 } from "./OrbManagerHelpers";
 import { playSFX as _playSFX } from "../../state/sfx";
 
@@ -51,7 +51,6 @@ const OrbManager = ({
   possibleItems,
   onOrbSelection,
   checkItemIsCorrect,
-  frozenOrbInterface = false,
   playSFX,
   taskPhase
 } = {}) => {
@@ -167,13 +166,7 @@ const OrbManager = ({
         //   continue;
         // }
       } else {
-        currentOrb = uncompletedOrbHandler(
-          currentOrb,
-          tick,
-          i,
-          ORB_CONFIG,
-          frozenOrbInterface
-        );
+        currentOrb = incompleteOrbHandler(currentOrb, tick, i, ORB_CONFIG);
       }
 
       // is it offscreen?

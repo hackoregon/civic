@@ -37,7 +37,6 @@ const MatchLockInterface = ({
   checkItemIsCorrect,
   activeScreen,
   percentComplete = 100,
-  frozenOrbInterface = false,
   debug = false,
   tickerTapeText
 }) => {
@@ -62,7 +61,6 @@ const MatchLockInterface = ({
           onOrbSelection={onOrbSelection}
           checkItemIsCorrect={checkItemIsCorrect}
           activeScreen={activeScreen}
-          frozenOrbInterface={frozenOrbInterface}
         />
       </GUIStyle>
     </div>
@@ -76,7 +74,6 @@ MatchLockInterface.propTypes = {
   activeScreen: PropTypes.string,
   percentComplete: PropTypes.number,
   debug: PropTypes.bool,
-  frozenOrbInterface: PropTypes.bool,
   tickerTapeText: PropTypes.string
 };
 

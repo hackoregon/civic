@@ -42,7 +42,7 @@ const TaskScreen = ({
   activeEnvironment,
   addNextTask,
   weightedPlayerKitItems,
-  weightedTasks,
+  weightedTasks
 }) => {
   const [chapterTimer] = useState(new Timer());
   const [possibleItems, setPossibleItems] = useState(weightedPlayerKitItems);
@@ -56,20 +56,23 @@ const TaskScreen = ({
       mostVotesId = chooseRandomTask(tasksForEnvironment, activeEnvironment);
     }
     addNextTask(mostVotesId);
-  }, [taskVotes, chooseRandomTask, tasksForEnvironment, activeEnvironment, addNextTask]);
+  }, [taskVotes, tasksForEnvironment, activeEnvironment, addNextTask]);
 
-  const startTimer = useCallback((duration, callback, completeTask, items) => {
-    phaseTimer.reset();
-    phaseTimer.setDuration(duration);
-    phaseTimer.addCompleteCallback(() => {
-      setPossibleItems(items);
-      if (callback) {
-        callback();
-      }
-      goToNextPhase(completeTask);
-    });
-    phaseTimer.start();
-  }, [phaseTimer, goToNextPhase]);
+  const startTimer = useCallback(
+    (duration, callback, completeTask, items) => {
+      phaseTimer.reset();
+      phaseTimer.setDuration(duration);
+      phaseTimer.addCompleteCallback(() => {
+        setPossibleItems(items);
+        if (callback) {
+          callback();
+        }
+        goToNextPhase(completeTask);
+      });
+      phaseTimer.start();
+    },
+    [phaseTimer, goToNextPhase]
+  );
 
   // Timer: chapter duration
   useEffect(() => {
@@ -83,13 +86,23 @@ const TaskScreen = ({
 
   // Timer: game phase
   useEffect(() => {
-    if (taskPhase === SOLVING) startTimer(activeTask.time, null, true, weightedTasks);
-    if (taskPhase === VOTING) startTimer(votingDuration, goToTask, null,weightedPlayerKitItems );
+    if (taskPhase === SOLVING)
+      startTimer(activeTask.time, null, true, weightedTasks);
+    if (taskPhase === VOTING)
+      startTimer(votingDuration, goToTask, null, weightedPlayerKitItems);
 
     return () => {
       phaseTimer.stop();
     };
-  }, [activeTask, goToTask, phaseTimer, startTimer, taskPhase, weightedPlayerKitItems, weightedTasks]);
+  }, [
+    activeTask,
+    goToTask,
+    phaseTimer,
+    startTimer,
+    taskPhase,
+    weightedPlayerKitItems,
+    weightedTasks
+  ]);
 
   // Timer: trigger timer when switching between tasks, not gameplay phases
   useEffect(() => {
@@ -100,15 +113,22 @@ const TaskScreen = ({
     return () => {
       phaseTimer.stop();
     };
-  }, [activeTask, activeTaskIndex, phaseTimer, startTimer, taskPhase, weightedTasks]);
+  }, [
+    activeTask,
+    activeTaskIndex,
+    phaseTimer,
+    startTimer,
+    taskPhase,
+    weightedTasks
+  ]);
 
   const onItemSelection = () => {
-    console.log('item selected')
-  }
+    console.log("item selected");
+  };
 
   const onTaskSelection = orbModel => {
-    console.log('task selected')
-  }
+    console.log("task selected");
+  };
 
   const checkVoteIsCorrect = () => true;
 
@@ -150,22 +170,19 @@ const TaskScreen = ({
           tasks={weightedTasks}
         />
       </div>
-        <MatchLockInterface
-          possibleItems={possibleItems}
-          onOrbSelection={onOrbSelection}
-          checkItemIsCorrect={checkItemIsCorrect}
-          activeScreen={activeScreen}
-          tickerTapeText={tickerTapeText}
-        />
+      <MatchLockInterface
+        possibleItems={possibleItems}
+        onOrbSelection={onOrbSelection}
+        checkItemIsCorrect={checkItemIsCorrect}
+        activeScreen={activeScreen}
+        tickerTapeText={tickerTapeText}
+      />
     </Fragment>
   );
 };
 
 TaskScreen.propTypes = {
-  taskPhase: PropTypes.oneOf([
-    SOLVING,
-    VOTING
-  ]),
+  taskPhase: PropTypes.oneOf([SOLVING, VOTING]),
   activeTask: PropTypes.shape({}),
   activeTaskIndex: PropTypes.number,
   endChapter: PropTypes.func,
@@ -174,7 +191,7 @@ TaskScreen.propTypes = {
   weightedTasks: PropTypes.arrayOf(PropTypes.shape({})),
   weightedPlayerKitItems: PropTypes.arrayOf(PropTypes.shape({})),
   activeEnvironment: PropTypes.string,
-  tasksForEnvironment: PropTypes.shape({}),
+  tasksForEnvironment: PropTypes.shape({})
 };
 
 const mapStateToProps = state => ({
@@ -184,7 +201,7 @@ const mapStateToProps = state => ({
   weightedTasks: getWeightedTasks(state),
   weightedPlayerKitItems: getPlayerKitItems(state),
   activeEnvironment: getActiveEnvironment(state),
-  tasksForEnvironment: getTasksForEnvironment(state),
+  tasksForEnvironment: getTasksForEnvironment(state)
 });
 
 const mapDispatchToProps = dispatch => ({
