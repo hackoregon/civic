@@ -1,5 +1,11 @@
 /* eslint-disable import/no-named-as-default */
-import React, { useLayoutEffect, useState, memo, useRef, useCallback } from "react";
+import React, {
+  useLayoutEffect,
+  useState,
+  memo,
+  useRef,
+  useCallback
+} from "react";
 import { connect } from "react-redux";
 import { map, find as _find, filter } from "lodash";
 import styled from "@emotion/styled";
@@ -11,14 +17,11 @@ import { TYPES as SFX_TYPES } from "../../constants/sfx";
 import useBounds from "../../state/hooks/useBounds";
 import usePrevious from "../../state/hooks/usePrevious";
 import useAnimationFrame from "../../state/hooks/useAnimationFrame";
-import {
-  getTaskPhase
-} from "../../state/tasks";
+import { getTaskPhase } from "../../state/tasks";
 
 import Orb from "./Orb";
 import {
   completedOrbHandler,
-  createFixedLayout,
   createRandomLayout,
   uncompletedOrbHandler
 } from "./OrbManagerHelpers";
@@ -68,7 +71,7 @@ const OrbManager = ({
 
   /* Generate new orbModels when the interface bounds change, usually only on load. Most often, generate new orbModels when switching between voting and solving. This catalyzes orb data and placement */
   useLayoutEffect(() => {
-    const newTaskPhase = (prevTaskPhase !== taskPhase) && !!bounds.width;
+    const newTaskPhase = prevTaskPhase !== taskPhase && !!bounds.width;
 
     const newBounds =
       prevBounds && !prevBounds.width && bounds.width && !hasInitialized;
@@ -83,6 +86,7 @@ const OrbManager = ({
     hasInitialized,
     possibleItems,
     prevBounds,
+    prevTaskPhase,
     taskPhase
   ]);
 
@@ -155,6 +159,13 @@ const OrbManager = ({
           checkItemIsCorrect(currentOrb),
           currentOrb
         );
+        /* This fixes removing the orb when it has gone off screen, but it makes all the other orbs animate like they're appearing for the first time */
+        // currentOrb.frameRerenders = currentOrb.frameRerenders ? (currentOrb.frameRerenders + 1) : 1;
+        // if (currentOrb.frameRerenders === 50) {
+        //   i = i - 1;
+        //   setOrbsState(orbs.splice(i, 1));
+        //   continue;
+        // }
       } else {
         currentOrb = uncompletedOrbHandler(
           currentOrb,
@@ -276,7 +287,7 @@ const OrbsStyle = styled.div`
 
 const mapStateToProps = state => ({
   taskPhase: getTaskPhase(state)
-})
+});
 
 // use memo to not re-render OrbManager unless its props change
 export default connect(
