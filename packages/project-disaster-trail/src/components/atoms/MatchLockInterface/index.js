@@ -36,7 +36,7 @@ const MatchLockInterface = ({
   onOrbSelection,
   checkItemIsCorrect,
   activeScreen,
-  percentComplete,
+  percentComplete = 100,
   frozenOrbInterface = false,
   debug = false,
   tickerTapeText

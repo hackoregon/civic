@@ -1,15 +1,19 @@
 /* eslint-disable import/no-named-as-default */
-import React, { useEffect, useState, memo, useRef, useCallback } from "react";
+import React, { useLayoutEffect, useState, memo, useRef, useCallback } from "react";
 import { connect } from "react-redux";
 import { map, find as _find, filter } from "lodash";
 import styled from "@emotion/styled";
-
 import remove from "lodash/remove";
+
 import { palette } from "../../constants/style";
+import { TYPES as SFX_TYPES } from "../../constants/sfx";
+
 import useBounds from "../../state/hooks/useBounds";
 import usePrevious from "../../state/hooks/usePrevious";
 import useAnimationFrame from "../../state/hooks/useAnimationFrame";
-import { MOVING_MAP } from "../../constants/actions";
+import {
+  getTaskPhase
+} from "../../state/tasks";
 
 import Orb from "./Orb";
 import {
@@ -19,7 +23,6 @@ import {
   uncompletedOrbHandler
 } from "./OrbManagerHelpers";
 import { playSFX as _playSFX } from "../../state/sfx";
-import { TYPES as SFX_TYPES } from "../../constants/sfx";
 
 const ORB_CONFIG = {
   period: 1,
@@ -42,12 +45,12 @@ const ORB_CONFIG = {
  * @returns
  */
 const OrbManager = ({
-  activeScreen,
   possibleItems,
   onOrbSelection,
   checkItemIsCorrect,
   frozenOrbInterface = false,
-  playSFX
+  playSFX,
+  taskPhase
 } = {}) => {
   const [hasInitialized, setHasInitialized] = useState(false);
   const [orbs, setOrbsState] = useState([]);
@@ -61,36 +64,26 @@ const OrbManager = ({
   const boundsRef = useRef();
   const bounds = useBounds(boundsRef);
   const prevBounds = usePrevious(bounds);
-  // used to refresh orb state
-  const prevScreen = usePrevious(activeScreen);
+  const prevTaskPhase = usePrevious(taskPhase);
 
-  // a reference to the previous state's bounds
-  // used to control when the orbs are initialized:
-  // specifically when there were no bounds in prev state but there are bounds in current state
-  // which should only happen once, after the component renders the very first time
+  /* Generate new orbModels when the interface bounds change, usually only on load. Most often, generate new orbModels when switching between voting and solving. This catalyzes orb data and placement */
+  useLayoutEffect(() => {
+    const newTaskPhase = (prevTaskPhase !== taskPhase) && !!bounds.width;
 
-  // Initializes the orb data and placement. Only reexecutes when "bounds" is updated (screen resize) or when the activeScreen changes
-  useEffect(() => {
-    // ensure we only run this once
-    const newScreen = prevScreen !== activeScreen;
     const newBounds =
       prevBounds && !prevBounds.width && bounds.width && !hasInitialized;
 
-    if (newBounds || (bounds.width && newScreen)) {
-      const newOrbs = frozenOrbInterface
-        ? createFixedLayout(possibleItems, bounds, ORB_CONFIG)
-        : createRandomLayout(possibleItems, bounds, ORB_CONFIG);
+    if (newBounds || newTaskPhase) {
+      const newOrbs = createRandomLayout(possibleItems, bounds, ORB_CONFIG);
       setHasInitialized(true);
       setOrbsState(newOrbs);
     }
   }, [
-    activeScreen,
-    prevScreen,
     bounds,
-    frozenOrbInterface,
     hasInitialized,
     possibleItems,
-    prevBounds
+    prevBounds,
+    taskPhase
   ]);
 
   const addOrbScore = useCallback(
@@ -242,32 +235,31 @@ const OrbManager = ({
 
   return (
     <OrbsStyle ref={boundsRef}>
-      {activeScreen !== MOVING_MAP &&
-        map(renderableOrbs, orb => {
-          const zIndex = orbsZIndex.indexOf(orb.orbId) + 1;
+      {map(renderableOrbs, orb => {
+        const zIndex = orbsZIndex.indexOf(orb.orbId) + 1;
 
-          return (
-            <div
-              key={orb.orbId}
-              style={{
-                position: "absolute",
-                transform: `translate(${orb.x}px, ${orb.y}px)`,
-                zIndex
-              }}
-            >
-              <Orb
-                orbId={orb.orbId}
-                imageSVG={orb.imageSVG}
-                imgAlt={orb.imgAlt}
-                size={ORB_CONFIG.orbSize}
-                addOrbScore={addOrbScore}
-                setOrbTouched={setOrbTouched}
-                setOrbComplete={setOrbComplete}
-                delay={orb.delay}
-              />
-            </div>
-          );
-        })}
+        return (
+          <div
+            key={orb.orbId}
+            style={{
+              position: "absolute",
+              transform: `translate(${orb.x}px, ${orb.y}px)`,
+              zIndex
+            }}
+          >
+            <Orb
+              orbId={orb.orbId}
+              imageSVG={orb.imageSVG}
+              imgAlt={orb.imgAlt}
+              size={ORB_CONFIG.orbSize}
+              addOrbScore={addOrbScore}
+              setOrbTouched={setOrbTouched}
+              setOrbComplete={setOrbComplete}
+              delay={orb.delay}
+            />
+          </div>
+        );
+      })}
     </OrbsStyle>
   );
 };
@@ -282,9 +274,13 @@ const OrbsStyle = styled.div`
   background-color: ${palette.blue};
 `;
 
+const mapStateToProps = state => ({
+  taskPhase: getTaskPhase(state)
+})
+
 // use memo to not re-render OrbManager unless its props change
 export default connect(
-  null,
+  mapStateToProps,
   dispatch => ({
     playSFX(id) {
       dispatch(_playSFX(id));
