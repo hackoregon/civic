@@ -2,7 +2,6 @@
 import { css, jsx } from "@emotion/core";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -11,6 +10,34 @@ import { startCase } from "lodash";
 
 const projectContentContainer = css`
   position: relative;
+  &:focus-within {
+    box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.2),
+      0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 4px 2px -1px rgba(0, 0, 0, 0.12);
+    outline: 1px solid transparent; /* needed for Windows high-contrast mode */
+  }
+`;
+
+/* this is an accessibility feature to make the entire card clickable without wrapping all the content in a link. */
+const cardHeadlineLink = css`
+  display: inline-block;
+  color: unset;
+  &::before {
+    bottom: 0;
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  &:focus-visible {
+    outline: 2px solid hsl(300, 5%, 55%);
+  }
+  &:-moz-focusring {
+    outline: 2px solid hsl(300, 5%, 55%);
+  }
+  &:hover {
+    color: currentColor;
+  }
 `;
 
 const watermarkContainer = css`
@@ -30,6 +57,23 @@ const scaleCorner = css`
   max-height: 134px;
 `;
 
+const nonInteractiveCta = css`
+  font-family: Rubik, Helvetica Neue, Helvetica, sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.75;
+  padding: 0.307692308em 0.615384615em;
+  text-transform: uppercase;
+  transition: background-color 63ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    box-shadow 63ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    border 63ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  z-index: 2;
+  &:hover {
+    background-color: rgba(32, 16, 36, 0.08);
+    cursor: pointer;
+  }
+`;
+
 const useProjectStyles = makeStyles({
   card: {
     "&:hover": {
@@ -41,7 +85,7 @@ const useProjectStyles = makeStyles({
 
 const Watermark = () => (
   <div css={watermarkContainer}>
-    <svg css={scaleCorner} xmlns="http://www.w3.org/2000/svg">
+    <svg aria-hidden="true" css={scaleCorner}>
       <g fill="none" fillRule="evenodd">
         <path d="M0 134.658V0l11.566 11.597v123.061H0z" fill="#191119" />
         <path
@@ -62,26 +106,26 @@ const ProjectCard = ({ title, description, link, type }) => {
   const classes = useProjectStyles();
 
   return (
-    <Link to={link}>
-      <Card css={projectContentContainer} className={classes.card}>
-        <Watermark />
-        <div
-          css={css`
-            padding: 0 15px 0 27px;
-          `}
-        >
-          <CardContent>
-            <h2>
+    <Card css={projectContentContainer} className={classes.card}>
+      <Watermark />
+      <div
+        css={css`
+          padding: 0 0.9375rem 0 1.6875rem;
+        `}
+      >
+        <CardContent>
+          <h2>
+            <Link css={cardHeadlineLink} to={link}>
               {startCase(type)}: {title}
-            </h2>
-            <p>{description}</p>
-          </CardContent>
-          <CardActions>
-            <Button size="small">{types[type].action}</Button>
-          </CardActions>
-        </div>
-      </Card>
-    </Link>
+            </Link>
+          </h2>
+          <p>{description}</p>
+        </CardContent>
+        <CardActions>
+          <span css={nonInteractiveCta}>{types[type].action}</span>
+        </CardActions>
+      </div>
+    </Card>
   );
 };
 

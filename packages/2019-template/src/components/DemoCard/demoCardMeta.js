@@ -17,7 +17,7 @@ const demoCardMeta = (/* data */) => ({
   additionalText: (
     <Fragment>
       <p>
-        TriMet, the transit agency serving the Portland, OR, metro area, has
+        TriMet, the transit agency serving the Portland, Oregon metro area, has
         seen recent declines in bus ridership, similar to other agencies across
         the country.{" "}
         <a href="http://transitcenter.org/2017/11/14/in-portland-economic-displacement-may-be-a-driver-of-transit-ridership-loss/">

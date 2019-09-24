@@ -8,6 +8,7 @@ const ScatterPlotMap = props => {
     getLineWidth,
     getFillColor,
     getLineColor,
+    getCursor,
     viewport,
     data,
     getPosition,
@@ -37,7 +38,7 @@ const ScatterPlotMap = props => {
 
   return (
     <div>
-      <DeckGL className="DeckGL" {...viewport} getCursor={() => "crosshair"}>
+      <DeckGL className="DeckGL" {...viewport} getCursor={getCursor}>
         <ScatterplotLayer
           className="ScatterPlotMap"
           id="scatterplot-layer"
@@ -85,7 +86,8 @@ ScatterPlotMap.propTypes = {
   stroked: PropTypes.bool,
   getLineColor: PropTypes.oneOfType([PropTypes.func, PropTypes.array]),
   getLineWidth: PropTypes.oneOfType([PropTypes.func, PropTypes.number]),
-  getFillColor: PropTypes.oneOfType([PropTypes.func, PropTypes.array])
+  getFillColor: PropTypes.oneOfType([PropTypes.func, PropTypes.array]),
+  getCursor: PropTypes.func
 };
 
 ScatterPlotMap.defaultProps = {
@@ -98,7 +100,8 @@ ScatterPlotMap.defaultProps = {
   stroked: false,
   getLineColor: () => [0, 0, 0],
   getLineWidth: () => 1,
-  getFillColor: () => [0, 0, 0]
+  getFillColor: () => [0, 0, 0],
+  getCursor: () => "crosshair"
 };
 
 export default ScatterPlotMap;

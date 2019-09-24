@@ -326,6 +326,18 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
             id="authors"
           >
             <h2>Who made this?</h2>
+            {/* temporary implementation, length > 4 to exclude authors: "demo" */}
+            {cardMeta.authors.length > 4 && (
+              <Fragment>
+                <h3>Primary Authors</h3>
+                <ul>
+                  {cardMeta.authors.map(author => (
+                    <li>{author}</li>
+                  ))}
+                </ul>
+              </Fragment>
+            )}
+            <h3>2019 Hack Oregon Team</h3>
             <img
               css={authorPhoto}
               src={authorsSrc}
