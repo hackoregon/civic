@@ -17,6 +17,7 @@ import {
   addTask
 } from "../../../state/tasks";
 import { getPlayerKitItems } from "../../../state/kit";
+import usePrevious from "../../../state/hooks/usePrevious";
 import { SOLVING, VOTING } from "../../../constants/actions";
 import { chooseRandomTask } from "./voteUtils";
 
@@ -45,9 +46,11 @@ const TaskScreen = ({
   weightedTasks
 }) => {
   const [chapterTimer] = useState(new Timer());
-  const [possibleItems, setPossibleItems] = useState(weightedPlayerKitItems);
   const [phaseTimer] = useState(new Timer());
+  const [possibleItems, setPossibleItems] = useState(weightedPlayerKitItems);
   const [taskVotes, setTaskVotes] = useState(taskVotesDefault);
+  const [correctItemsChosen, setCorrectItemsChosen] = useState(0);
+  const prevTaskPhase = usePrevious(taskPhase);
 
   const goToTask = useCallback(() => {
     const mostVotes = taskVotes.mostVotesTotal;
@@ -74,7 +77,7 @@ const TaskScreen = ({
     [phaseTimer, goToNextPhase]
   );
 
-  // Timer: chapter duration
+  // Timer: on chapter start
   useEffect(() => {
     chapterTimer.setDuration(chapterDuration);
     chapterTimer.addCompleteCallback(() => endChapter());
@@ -84,13 +87,19 @@ const TaskScreen = ({
     };
   }, [chapterTimer, endChapter]);
 
-  // Timer: game phase
+  // Timer: on game phase change
   useEffect(() => {
-    if (taskPhase === SOLVING)
-      startTimer(activeTask.time, null, true, weightedTasks);
-    if (taskPhase === VOTING)
-      startTimer(votingDuration, goToTask, null, weightedPlayerKitItems);
-
+    if (prevTaskPhase !== taskPhase) {
+      if (taskPhase === SOLVING) {
+        setCorrectItemsChosen(0); // reset chosen items
+        startTimer(activeTask.time, null, true, weightedTasks);
+      }
+      if (taskPhase === VOTING) {
+        setTaskVotes(taskVotesDefault); // reset chosen tasks
+        startTimer(votingDuration, goToTask, null, weightedPlayerKitItems);
+      }
+    }
+    // TODO: Currently broken. This should not execute when a task is chosen...
     return () => {
       phaseTimer.stop();
     };
@@ -98,15 +107,19 @@ const TaskScreen = ({
     activeTask,
     goToTask,
     phaseTimer,
+    prevTaskPhase,
     startTimer,
     taskPhase,
     weightedPlayerKitItems,
-    weightedTasks
+    weightedTasks,
+    setCorrectItemsChosen,
+    setTaskVotes
   ]);
 
-  // Timer: trigger timer when switching between tasks, not gameplay phases
+  // Timer: on switch from one solve task to another solve task (triggers for sequential tasks — save yourself tasks in this case)
   useEffect(() => {
     if (taskPhase === SOLVING && activeTaskIndex === 1) {
+      setCorrectItemsChosen(0);
       startTimer(activeTask.time, null, true, weightedTasks);
     }
 
@@ -122,12 +135,35 @@ const TaskScreen = ({
     weightedTasks
   ]);
 
-  const onItemSelection = () => {
+  const onItemSelection = orbModel => {
     console.log("item selected");
+    if (orbModel.type === activeTask.requiredItem) {
+      setCorrectItemsChosen(correctItemsChosen + 1);
+      if (correctItemsChosen >= activeTask.numberItemsToSolve) {
+        phaseTimer.stopEarly();
+      }
+      return true;
+    }
+    return false;
   };
 
   const onTaskSelection = orbModel => {
     console.log("task selected");
+    const voteCount = taskVotes[orbModel.type]
+      ? taskVotes[orbModel.type] + 1
+      : 1;
+    const newVotes = {
+      ...taskVotes,
+      totalVotes: taskVotes.totalVotes + 1,
+      [orbModel.type]: voteCount
+    };
+    if (voteCount > taskVotes.mostVotesTotal) {
+      newVotes.mostVotesId = orbModel.type;
+      newVotes.mostVotesTotal = voteCount;
+    }
+    setTaskVotes(newVotes);
+    // Return true so Orb knows how to animate
+    return true;
   };
 
   const checkVoteIsCorrect = () => true;
