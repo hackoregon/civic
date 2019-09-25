@@ -21,9 +21,17 @@ import usePrevious from "../../../state/hooks/usePrevious";
 import { SOLVING, VOTING } from "../../../constants/actions";
 import { chooseRandomTask } from "./voteUtils";
 
+import taskSong from "../../../../assets/audio/HappyTheme2fadeinout.mp3";
+import Song from "../../atoms/Audio/Song";
+
 import MatchLockInterface from "../../atoms/MatchLockInterface";
 import SolveScreen from "./SolveScreen";
 import VoteMapScreen from "./VoteMapScreen";
+
+const screenLayout = css`
+  position: relative;
+  height: 100%;
+`;
 
 const chapterDuration = 300;
 const votingDuration = 5;
@@ -181,7 +189,6 @@ const TaskScreen = ({
   const activeScreen = taskPhase;
   let tickerTapeText = "";
   if (isSolving) {
-    // activeScreen = `solve_${numberCompletedTasks}`;
     tickerTapeText = "How can we help this person?";
   } else if (isVoting) {
     tickerTapeText = "Who should we help next?";
@@ -189,12 +196,7 @@ const TaskScreen = ({
 
   return (
     <Fragment>
-      <div
-        css={css`
-          position: relative;
-          height: 100%;
-        `}
-      >
+      <div css={screenLayout}>
         <SolveScreen
           open={taskPhase === SOLVING}
           activeTask={activeTask}
@@ -213,6 +215,7 @@ const TaskScreen = ({
         activeScreen={activeScreen}
         tickerTapeText={tickerTapeText}
       />
+      <Song songFile={taskSong} />
     </Fragment>
   );
 };
