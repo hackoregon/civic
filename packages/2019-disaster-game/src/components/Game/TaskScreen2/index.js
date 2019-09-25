@@ -61,14 +61,14 @@ const TaskScreen = ({
   const [correctItemsChosen, setCorrectItemsChosen] = useState(0);
   const prevTaskPhase = usePrevious(taskPhase);
 
-  const goToTask = useCallback(() => {
+  const goToTask = () => {
     const mostVotes = taskVotes.mostVotesTotal;
     let { mostVotesId } = taskVotes;
     if (mostVotes < 1) {
       mostVotesId = chooseRandomTask(tasksForEnvironment, activeEnvironment);
     }
     addNextTask(mostVotesId);
-  }, [taskVotes, tasksForEnvironment, activeEnvironment, addNextTask]);
+  };
 
   const startTimer = useCallback(
     (duration, callback, completeTask, items) => {
@@ -96,21 +96,28 @@ const TaskScreen = ({
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const solvingCallback = () => {
+    setCorrectItemsChosen(0); // reset chosen items
+  };
+
+  const movingMapCallback = () => {
+    goToTask();
+    setTaskVotes(taskVotesDefault); // reset chosen tasks
+  };
+
   // Timer: on game phase change
   useEffect(() => {
     if (prevTaskPhase !== taskPhase) {
       if (taskPhase === SOLVING) {
-        setCorrectItemsChosen(0); // reset chosen items
-        startTimer(activeTask.time, null, true, weightedTasks);
+        startTimer(activeTask.time, solvingCallback, true, weightedTasks);
       }
       if (taskPhase === VOTING) {
-        setTaskVotes(taskVotesDefault); // reset chosen tasks
-        startTimer(votingDuration, goToTask, null, []);
+        startTimer(votingDuration, null, null, []);
       }
       if (taskPhase === MOVING_MAP) {
         startTimer(
           mapTransitionDuration,
-          goToTask,
+          movingMapCallback,
           null,
           weightedPlayerKitItems
         );
@@ -135,7 +142,6 @@ const TaskScreen = ({
   }, [activeTaskIndex, taskPhase]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onItemSelection = orbModel => {
-    console.log("item selected");
     if (orbModel.type === activeTask.requiredItem) {
       setCorrectItemsChosen(correctItemsChosen + 1);
       if (correctItemsChosen >= activeTask.numberItemsToSolve) {
@@ -147,7 +153,6 @@ const TaskScreen = ({
   };
 
   const onTaskSelection = orbModel => {
-    console.log("task selected");
     const voteCount = taskVotes[orbModel.type]
       ? taskVotes[orbModel.type] + 1
       : 1;
