@@ -1,25 +1,32 @@
 /* eslint-disable import/no-named-as-default */
-import React, { useEffect, useState, memo, useRef, useCallback } from "react";
+import React, {
+  useLayoutEffect,
+  useState,
+  memo,
+  useRef,
+  useCallback
+} from "react";
 import { connect } from "react-redux";
 import { map, find as _find, filter } from "lodash";
 import styled from "@emotion/styled";
-
 import remove from "lodash/remove";
+
 import { palette } from "../../constants/style";
+import { TYPES as SFX_TYPES } from "../../constants/sfx";
+
 import useBounds from "../../state/hooks/useBounds";
 import usePrevious from "../../state/hooks/usePrevious";
 import useAnimationFrame from "../../state/hooks/useAnimationFrame";
+import { getTaskPhase } from "../../state/tasks";
 import { MOVING_MAP } from "../../constants/actions";
 
 import Orb from "./Orb";
 import {
   completedOrbHandler,
-  createFixedLayout,
   createRandomLayout,
-  uncompletedOrbHandler
+  incompleteOrbHandler
 } from "./OrbManagerHelpers";
 import { playSFX as _playSFX } from "../../state/sfx";
-import { TYPES as SFX_TYPES } from "../../constants/sfx";
 
 const ORB_CONFIG = {
   period: 1,
@@ -35,22 +42,21 @@ const ORB_CONFIG = {
 /**
  * OrbManager is responsible for moving Orbs
  *
- * @param {*} { orbCount=2 } how many orbs should be rendered?
+ * @param {*} { orbCount=2 } how many orbModels should be rendered?
  * @param {*} { velocityX=2 } how fast does the orb move horizontally
  * @param {*} { velocityY=0 } how fast does the orb move vertically
  * @param {*} { period=2 } how much vertical modulation per frame should the orb move? Higher number = more 'wobbly'
  * @returns
  */
 const OrbManager = ({
-  activeScreen,
   possibleItems,
   onOrbSelection,
   checkItemIsCorrect,
-  frozenOrbInterface = false,
-  playSFX
+  playSFX,
+  taskPhase
 } = {}) => {
   const [hasInitialized, setHasInitialized] = useState(false);
-  const [orbs, setOrbsState] = useState([]);
+  const [orbModels, setOrbModelsState] = useState([]);
   const [touchedOrbs, setTouchedOrb] = useState([]);
   const [completedOrbs, setCompletedOrbs] = useState([]);
   const [orbsZIndex, setOrbsZIndex] = useState([]);
@@ -61,48 +67,40 @@ const OrbManager = ({
   const boundsRef = useRef();
   const bounds = useBounds(boundsRef);
   const prevBounds = usePrevious(bounds);
-  // used to refresh orb state
-  const prevScreen = usePrevious(activeScreen);
+  const prevTaskPhase = usePrevious(taskPhase);
 
-  // a reference to the previous state's bounds
-  // used to control when the orbs are initialized:
-  // specifically when there were no bounds in prev state but there are bounds in current state
-  // which should only happen once, after the component renders the very first time
+  /* Generate new orbModels when the interface bounds change, usually only on load. Most often, generate new orbModels when switching between voting and solving. This catalyzes orb data and placement */
+  useLayoutEffect(() => {
+    const newTaskPhase = prevTaskPhase !== taskPhase && !!bounds.width;
 
-  // Initializes the orb data and placement. Only reexecutes when "bounds" is updated (screen resize) or when the activeScreen changes
-  useEffect(() => {
-    // ensure we only run this once
-    const newScreen = prevScreen !== activeScreen;
     const newBounds =
       prevBounds && !prevBounds.width && bounds.width && !hasInitialized;
 
-    if (newBounds || (bounds.width && newScreen)) {
-      const newOrbs = frozenOrbInterface
-        ? createFixedLayout(possibleItems, bounds, ORB_CONFIG)
-        : createRandomLayout(possibleItems, bounds, ORB_CONFIG);
+    if (newBounds || newTaskPhase) {
+      const newOrbs = createRandomLayout(possibleItems, bounds, ORB_CONFIG);
       setHasInitialized(true);
-      setOrbsState(newOrbs);
+      setCompletedOrbs([]);
+      setOrbModelsState(newOrbs);
     }
   }, [
-    activeScreen,
-    prevScreen,
     bounds,
-    frozenOrbInterface,
     hasInitialized,
     possibleItems,
-    prevBounds
+    prevBounds,
+    prevTaskPhase,
+    taskPhase
   ]);
 
   const addOrbScore = useCallback(
     orbId => {
-      const theOrb = _find(orbs, orb => orb.orbId === orbId);
+      const theOrb = _find(orbModels, orb => orb.orbId === orbId);
       onOrbSelection(theOrb);
     },
-    // update when orbs.length changes
-    // if we udpate when orbs changes, the addOrbScore will continuously be recreated,
+    // update when orbModels.length changes
+    // if we udpate when orbModels changes, the addOrbScore will continuously be recreated,
     // and, in turn, causes `Orb` to render continously.
     // eslint-disable-next-line
-    [onOrbSelection, orbs.length]
+    [onOrbSelection, orbModels.length]
   );
 
   const setOrbTouched = useCallback(
@@ -151,9 +149,9 @@ const OrbManager = ({
     const centerY = (bounds.height - ORB_CONFIG.verticalBuffer * 2) / 2;
 
     // we re-use tempModels by pushing updated data in to it.
-    for (let i = 0; i < orbs.length; i += 1) {
+    for (let i = 0; i < orbModels.length; i += 1) {
       // get the model
-      let currentOrb = { ...orbs[i] };
+      let currentOrb = { ...orbModels[i] };
       const currentOrbId = currentOrb.orbId;
       const isOrbCompleted = completedOrbs.indexOf(currentOrbId) > -1;
 
@@ -162,14 +160,15 @@ const OrbManager = ({
           checkItemIsCorrect(currentOrb),
           currentOrb
         );
+        /* This fixes removing the orb when it has gone off screen, but it makes all the other orbModels animate like they're appearing for the first time */
+        // currentOrb.frameRerenders = currentOrb.frameRerenders ? (currentOrb.frameRerenders + 1) : 1;
+        // if (currentOrb.frameRerenders === 50) {
+        //   i = i - 1;
+        //   setOrbModelsState(orbModels.splice(i, 1));
+        //   continue;
+        // }
       } else {
-        currentOrb = uncompletedOrbHandler(
-          currentOrb,
-          tick,
-          i,
-          ORB_CONFIG,
-          frozenOrbInterface
-        );
+        currentOrb = incompleteOrbHandler(currentOrb, tick, i, ORB_CONFIG);
       }
 
       // is it offscreen?
@@ -198,7 +197,7 @@ const OrbManager = ({
               currentOrb.y =
                 bounds.height - ORB_CONFIG.verticalBuffer - ORB_CONFIG.orbSize;
 
-            // apply a 'force' that pulls the orbs vertically towards the center of the screen
+            // apply a 'force' that pulls the orbModels vertically towards the center of the screen
             const distanceFromCenter = currentOrb.y - centerY;
             // if the orb is far enough away from the vertical center,
             // the further the orb is from the center,
@@ -229,20 +228,20 @@ const OrbManager = ({
     }
 
     // store all models in state
-    setOrbsState(tempModels);
+    setOrbModelsState(tempModels);
 
     setTick(tick + 1);
   };
 
   useAnimationFrame(() => animate());
 
-  // by default all orbs are rendered,
+  // by default all orbModels are rendered,
   // until their `bypassRender` property is true
-  const renderableOrbs = filter(orbs, orb => !orb.bypassRender);
+  const renderableOrbs = filter(orbModels, orb => !orb.bypassRender);
 
   return (
     <OrbsStyle ref={boundsRef}>
-      {activeScreen !== MOVING_MAP &&
+      {taskPhase !== MOVING_MAP &&
         map(renderableOrbs, orb => {
           const zIndex = orbsZIndex.indexOf(orb.orbId) + 1;
 
@@ -282,9 +281,13 @@ const OrbsStyle = styled.div`
   background-color: ${palette.blue};
 `;
 
+const mapStateToProps = state => ({
+  taskPhase: getTaskPhase(state)
+});
+
 // use memo to not re-render OrbManager unless its props change
 export default connect(
-  null,
+  mapStateToProps,
   dispatch => ({
     playSFX(id) {
       dispatch(_playSFX(id));

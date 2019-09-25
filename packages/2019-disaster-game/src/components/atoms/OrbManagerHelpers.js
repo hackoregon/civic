@@ -125,14 +125,7 @@ export function completedOrbHandler(correctChoice, currentOrb) {
   return orbCopy;
 }
 
-export function uncompletedOrbHandler(
-  currentOrb,
-  tick,
-  index,
-  orbConfig,
-  frozenOrbInterface
-) {
-  if (frozenOrbInterface) return currentOrb;
+export function incompleteOrbHandler(currentOrb, tick, index, orbConfig) {
   const orbCopy = cloneDeep(currentOrb);
 
   orbCopy.x += orbCopy.velocity.x; // + Math.cos(tick * 0.1) * period;

@@ -3,6 +3,7 @@ import { shuffle } from "lodash";
 import size from "lodash/size";
 
 import { tasks, tasksForEnvironment, URBAN } from "../constants/tasks";
+import { SOLVING, VOTING, MOVING_MAP, DONE } from "../constants/actions";
 
 const defaultEnv = URBAN;
 const defaultSaveYourself = tasksForEnvironment[defaultEnv].saveYourself;
@@ -13,59 +14,74 @@ const initialState = {
   tasksForEnvironment,
   activeEnvironment: defaultEnv,
   taskOrder: shuffle(defaultSaveYourself),
-  activeTask: 0,
+  activeTaskIndex: 0,
   completedTasks: [],
-  outOfTime: false
+  taskPhase: SOLVING,
+  saveYourself: true
 };
 
 // CONSTANTS
 const actionTypes = {
   CHANGE_ENVIRONMENT: "CHANGE_ENVIRONMENT",
   ADD_TASK: "ADD_TASK",
-  INCREASE_ACTIVE_TASK: "INCREASE_ACTIVE_TASK",
   COMPLETE_TASK: "COMPLETE_TASK",
-  START_TASK: "START_TASK",
-  OUT_OF_TIME: "OUT_OF_TIME"
+  GO_TO_NEXT_TASK_PHASE: "GO_TO_NEXT_TASK_PHASE",
+  SOLVING,
+  VOTING,
+  MOVING_MAP,
+  DONE
 };
 
 // ACTIONS
-export const changeEnvironment = nextEnvironmentId => dispatch => {
-  dispatch({ type: actionTypes.CHANGE_ENVIRONMENT, nextEnvironmentId });
+export const goToNextTaskPhase = completeTask => dispatch => {
+  dispatch({ type: actionTypes.GO_TO_NEXT_TASK_PHASE, completeTask });
 };
 export const addTask = taskChoice => dispatch => {
   dispatch({ type: actionTypes.ADD_TASK, taskChoice });
 };
-export const increaseActiveTask = () => dispatch => {
-  dispatch({ type: actionTypes.INCREASE_ACTIVE_TASK });
-};
-export const startTask = task => dispatch => {
-  dispatch({ type: actionTypes.START_TASK, task });
-};
-export const completeTask = completedTask => dispatch => {
-  dispatch({ type: actionTypes.COMPLETE_TASK, completedTask });
-};
+// export const changeEnvironment = nextEnvironmentId => dispatch => {
+//   dispatch({ type: actionTypes.CHANGE_ENVIRONMENT, nextEnvironmentId });
+// };
+// export const completeTask = completedTask => dispatch => {
+//   dispatch({ type: actionTypes.COMPLETE_TASK, completedTask });
+// };
 
 // REDUCERS
 /* eslint-disable no-param-reassign */
 export const tasksReducer = createReducer(initialState, {
-  [actionTypes.CHANGE_ENVIRONMENT]: (state, action) => {
-    const newTasks = tasksForEnvironment[action.nextEnvironmentId].saveYourself;
+  [actionTypes.GO_TO_NEXT_TASK_PHASE]: (state, action) => {
+    if (action.completeTask) {
+      state.activeTaskIndex += 1;
+    }
+    // Save others after 2 tasks
+    if (state.saveYourself && state.activeTaskIndex === 2) {
+      state.saveYourself = false;
+    }
 
-    state.activeEnvironment = action.nextEnvironmentId;
-    state.taskOrder = shuffle(newTasks);
-    state.activeTask = 0;
+    if (state.taskPhase === SOLVING && !state.saveYourself) {
+      state.taskPhase = VOTING;
+    } else if (state.taskPhase === VOTING) {
+      state.taskPhase = MOVING_MAP;
+    } else if (state.taskPhase === MOVING_MAP) {
+      state.taskPhase = SOLVING;
+    }
   },
   [actionTypes.ADD_TASK]: (state, action) => {
     state.taskOrder.push(action.taskChoice);
-  },
-  [actionTypes.INCREASE_ACTIVE_TASK]: state => {
-    state.activeTask += 1;
-  },
-  [actionTypes.COMPLETE_TASK]: (state, action) => {
-    state.activeTask += 1;
-    // Log completed task
-    state.completedTasks.push(action.completedTask);
   }
+  // [actionTypes.COMPLETE_TASK]: (state, action) => {
+  //   console.log('COMPLETE_TASK')
+  //   state.activeTaskIndex += 1;
+  //   // Log completed task
+  //   state.completedTasks.push(action.completedTask);
+  // },
+  // [actionTypes.CHANGE_ENVIRONMENT]: (state, action) => {
+  //   const newTasks = tasksForEnvironment[action.nextEnvironmentId].saveYourself;
+
+  //   state.activeEnvironment = action.nextEnvironmentId;
+  //   state.taskOrder = shuffle(newTasks);
+  //   state.activeTaskIndex = 0;
+  // },
 });
 /* eslint-enable no-param-reassign */
 
@@ -73,44 +89,22 @@ export default tasksReducer;
 
 // SELECTORS
 
-export const getTaskOrder = createSelector(
-  ["tasks.taskOrder"],
-  taskOrder => taskOrder
-);
-
-export const getActiveTaskId = createSelector(
-  ["tasks.activeTask"],
-  activeTaskId => activeTaskId
+export const getActiveTaskIndex = createSelector(
+  ["tasks.activeTaskIndex"],
+  activeTaskIndex => activeTaskIndex
 );
 
 export const getActiveTaskData = createSelector(
-  ["tasks.tasks", "tasks.taskOrder", "tasks.activeTask"],
-  (allTasks, taskOrder, activeTask) => {
-    const taskId = taskOrder[activeTask];
+  ["tasks.tasks", "tasks.taskOrder", "tasks.activeTaskIndex"],
+  (allTasks, taskOrder, activeTaskIndex) => {
+    const taskId = taskOrder[activeTaskIndex];
     return allTasks[taskId];
   }
 );
 
-export const getActiveEnvironment = createSelector(
-  ["tasks.activeEnvironment"],
-  activeEnvironment => activeEnvironment
-);
-
-export const getTasksForEnvironment = createSelector(
-  ["tasks.tasksForEnvironment"],
-  foundTasks => foundTasks
-);
-
-export const getCompletedTasks = createSelector(
-  ["tasks.completedTasks"],
-  completedTasks => completedTasks
-);
-
-export const getHasSavedSelf = createSelector(
-  ["tasks.taskOrder", "tasks.activeTask"],
-  (taskOrder, activeTask) => {
-    return activeTask >= taskOrder.length;
-  }
+export const getTaskPhase = createSelector(
+  ["tasks.taskPhase"],
+  taskPhase => taskPhase
 );
 
 export const getWeightedTasks = createSelector(
@@ -146,7 +140,22 @@ export const getWeightedTasks = createSelector(
   }
 );
 
-export const getOutOfTime = createSelector(
-  ["outOfTime"],
-  outOfTime => outOfTime
+export const getActiveEnvironment = createSelector(
+  ["tasks.activeEnvironment"],
+  activeEnvironment => activeEnvironment
 );
+
+export const getTasksForEnvironment = createSelector(
+  ["tasks.tasksForEnvironment"],
+  foundTasks => foundTasks
+);
+
+// export const getTaskOrder = createSelector(
+//   ["tasks.taskOrder"],
+//   taskOrder => taskOrder
+// );
+
+// export const getCompletedTasks = createSelector(
+//   ["tasks.completedTasks"],
+//   completedTasks => completedTasks
+// );

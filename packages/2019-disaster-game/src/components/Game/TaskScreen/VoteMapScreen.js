@@ -1,11 +1,11 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
 import { PropTypes } from "prop-types";
-import { connect } from "react-redux";
-
+// import { connect } from "react-redux";
+import { useEffect, useState } from "react";
 import { BaseMap, IconMap } from "@hackoregon/component-library";
 
-import { getCompletedTasks } from "../../../state/tasks";
+// import { getCompletedTasks } from "../../../state/tasks";
 import {
   poiIconMapping,
   poiIconZoomScale,
@@ -25,32 +25,50 @@ const screenLayout = css`
   background: beige;
 `;
 
-const TaskMap = ({ activeTask, completedTasks, tasks, taskVotes }) => {
-  // TODO: Change lon / lat for task
-  const lon = activeTask ? activeTask.locations[0][0] : initialLon;
-  const lat = activeTask ? activeTask.locations[0][1] : initialLat;
+const VoteMapScreen = ({
+  activeTask,
+  activeTaskId,
+  completedTasks = [],
+  tasks,
+  taskVotes,
+  mapTransitionDuration
+}) => {
+  const [longitude, setLongitude] = useState(initialLon);
+  const [latitude, setLatitude] = useState(initialLat);
 
-  const selectedTask = activeTask || tasks[0];
-  const data = asGeoJSON(tasks, selectedTask, completedTasks);
+  const data = asGeoJSON(tasks, activeTask, completedTasks);
+
+  useEffect(() => {
+    const saveYourselfMode = activeTaskId > 1;
+    if (!saveYourselfMode) {
+      if (activeTask) {
+        setLatitude(activeTask.locations[0][1]);
+        setLongitude(activeTask.locations[0][0]);
+      } else {
+        setLatitude(initialLat);
+        setLongitude(initialLon);
+      }
+    }
+  }, [activeTask, activeTaskId]);
 
   // Would be cool to size these relative to each other in the future
-  const sizeForVote = dataThing => {
+  const sizeForVote = feature => {
     const mapPropType =
-      dataThing && dataThing.properties && dataThing.properties.type;
+      feature && feature.properties && feature.properties.type;
 
     const votesForTask = taskVotes[mapPropType] || 0;
     const mostVotesForAnyTask = taskVotes.mostVotesTotal || 1;
     const baseSize = 18;
 
-    return baseSize + 2 * (1.5 * votesForTask - mostVotesForAnyTask);
+    return baseSize + 2 * (2 * votesForTask - mostVotesForAnyTask);
   };
 
   return (
     <div css={screenLayout}>
       <BaseMap
         initialZoom={15}
-        initialLongitude={lon}
-        initialLatitude={lat}
+        initialLongitude={longitude}
+        initialLatitude={latitude}
         initialPitch={60}
         navigation={false}
         useContainerHeight
@@ -64,7 +82,7 @@ const TaskMap = ({ activeTask, completedTasks, tasks, taskVotes }) => {
           keyboard: false
         }}
         animate
-        animationDuration={3000}
+        animationDuration={mapTransitionDuration * 1000}
         civicMapStyle="disaster-game"
       >
         <IconMap
@@ -81,7 +99,8 @@ const TaskMap = ({ activeTask, completedTasks, tasks, taskVotes }) => {
   );
 };
 
-TaskMap.propTypes = {
+VoteMapScreen.propTypes = {
+  activeTaskId: PropTypes.number,
   activeTask: PropTypes.shape({
     task: PropTypes.string,
     locations: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number))
@@ -92,11 +111,14 @@ TaskMap.propTypes = {
     mostVotesId: PropTypes.string,
     mostVotesTotal: PropTypes.number,
     totalVotes: PropTypes.number
-  })
+  }),
+  mapTransitionDuration: PropTypes.number
 };
 
-const mapStateToProps = state => ({
-  completedTasks: getCompletedTasks(state)
-});
+export default VoteMapScreen;
 
-export default connect(mapStateToProps)(TaskMap);
+// const mapStateToProps = state => ({
+// completedTasks: getCompletedTasks(state)
+// });
+
+// export default connect(mapStateToProps)(VoteMapScreen);
