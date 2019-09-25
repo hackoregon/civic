@@ -61,6 +61,8 @@ export const tasksReducer = createReducer(initialState, {
     if (state.taskPhase === SOLVING && !state.saveYourself) {
       state.taskPhase = VOTING;
     } else if (state.taskPhase === VOTING) {
+      state.taskPhase = MOVING_MAP;
+    } else if (state.taskPhase === MOVING_MAP) {
       state.taskPhase = SOLVING;
     }
   },

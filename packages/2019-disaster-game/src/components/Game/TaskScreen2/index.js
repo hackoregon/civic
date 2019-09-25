@@ -33,8 +33,8 @@ const screenLayout = css`
   height: 100%;
 `;
 
-const chapterDuration = 300;
-const votingDuration = 15;
+const chapterDuration = 120;
+const votingDuration = 20;
 const mapTransitionDuration = 3;
 const taskVotesDefault = {
   mostVotesId: null,
