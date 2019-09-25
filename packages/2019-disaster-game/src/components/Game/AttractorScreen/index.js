@@ -12,6 +12,7 @@ import Song from "../../atoms/Audio/Song";
 import { TYPES as SFX_TYPES } from "../../../constants/sfx";
 
 import attractorSong from "../../../../assets/audio/PWolf-happysong1wfadeinout.mp3";
+import earthquakeHeroesLogo from "../../../../assets/earthquake_heroes_logo.svg";
 
 const pageWrapper = css`
   display: grid;
@@ -34,13 +35,11 @@ const contentWrapper = css`
   }
 `;
 
-const titleFont = css`
-  font-family: "Boogaloo", cursive;
-  color: ${palette.purple};
-  font-size: 20em;
+const logoStyle = css`
   margin: 0;
   align-self: center;
   justify-self: center;
+  width: 2500px;
 `;
 
 const buttonWrapper = css`
@@ -53,29 +52,30 @@ const buttonWrapper = css`
 
 const buttonStyle = css`
   position: relative;
-  height: 80%;
-  padding-right: 30%;
-  padding-left: 0;
-  border-radius: 40%;
-  color: white;
-  background-color: ${palette.salmon};
-  box-shadow: 0px 100px 0px 0px ${palette.mediumSalmon};
+  width: 630px;
+  height: 480px;
+  display: grid;
+  align-content: center;
+  border-radius: 100%;
+  background-color: ${palette.red};
+  box-shadow: 0px 50px 0px 0px ${palette.darkRed};
   border: none;
   cursor: pointer;
   outline: none;
 
   &:active {
-    background-color: ${palette.mediumSalmon};
-    box-shadow: 0px 100px 0px 0px ${palette.darkSalmon};
+    background-color: ${palette.darkRed};
+    box-shadow: 0px 50px 0px 0px ${palette.darkestRed};
   }
 `;
 
 const buttonFont = css`
-  position: absolute;
   width: 100%;
   margin: 0 auto;
-  font-family: "Boogaloo", cursive;
-  font-size: 18em;
+  font-family: "Boogaloo", sans-serif;
+  font-size: 12rem;
+  font-weight: 900;
+  color: white;
 `;
 
 // Background animation styles
@@ -125,7 +125,11 @@ const AttractorScreen = ({ goToChapter, playSFX }) => {
       <div css={[bg, bg2]} />
       <div css={[bg, bg3]} />
       <div css={contentWrapper}>
-        <h1 css={titleFont}>EARTHQUAKE HEROES</h1>
+        <img
+          src={earthquakeHeroesLogo}
+          css={logoStyle}
+          alt="Earthquake Heroes"
+        />
         <div css={buttonWrapper}>
           <button
             type="button"
@@ -133,7 +137,7 @@ const AttractorScreen = ({ goToChapter, playSFX }) => {
             onTouchEnd={play}
             css={buttonStyle}
           >
-            <h2 css={buttonFont}>PLAY</h2>
+            <p css={buttonFont}>PLAY</p>
           </button>
         </div>
       </div>

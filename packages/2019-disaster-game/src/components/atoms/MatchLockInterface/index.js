@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import { css, jsx } from "@emotion/core";
 
 import Ticker from "../Ticker";
-import DurationBar from "../DurationBar";
 import OrbManager from "../OrbManager";
 import { GUIStyle } from "../../Game/index";
 import media from "../../../utils/mediaQueries";
@@ -14,16 +13,16 @@ const containerStyle = css`
   transition: transform 1s;
   display: grid;
   align-items: center;
-  grid-template-rows: 24px 80px 200px;
+  grid-template-rows: 80px 200px;
   height: 100%;
   width: 100%;
 
   ${media.lg} {
-    grid-template-rows: 24px 80px 250px;
+    grid-template-rows: 80px 250px;
   }
 
   ${media.xl} {
-    grid-template-rows: 24px 120px 700px;
+    grid-template-rows: 120px 700px;
   }
 `;
 
@@ -36,7 +35,6 @@ const MatchLockInterface = ({
   onOrbSelection,
   checkItemIsCorrect,
   activeScreen,
-  percentComplete = 100,
   debug = false,
   tickerTapeText
 }) => {
@@ -53,7 +51,6 @@ const MatchLockInterface = ({
         ${open && onScreenStyle}
       `}
     >
-      <DurationBar step="Choose supplies" percentComplete={percentComplete} />
       <Ticker debug={debug} text={tickerTapeText} />
       <GUIStyle>
         <OrbManager
@@ -72,7 +69,6 @@ MatchLockInterface.propTypes = {
   onOrbSelection: PropTypes.func,
   checkItemIsCorrect: PropTypes.func,
   activeScreen: PropTypes.string,
-  percentComplete: PropTypes.number,
   debug: PropTypes.bool,
   tickerTapeText: PropTypes.string
 };

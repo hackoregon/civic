@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 import { css, jsx } from "@emotion/core";
 
 import ChapterButtons from "../ChapterButtons";
-import billBoardPNG from "../../../../assets/earthquake-heroes.svg";
 
 import LevelView from "../LevelView";
 // import PointsView from "../PointsView";
@@ -31,17 +30,6 @@ const onScreenStyle = css`
   transform: translateY(0%);
 `;
 
-const BillboardStyle = css`
-  position: relative;
-  justify-self: center;
-  width: 645px;
-  height: 300px;
-  background-image: url(${billBoardPNG});
-  background-repeat: no-repeat;
-  background-size: contain;
-  pointer-events: none;
-`;
-
 const TitleBar = ({ debug = false }) => {
   const [open, setOpen] = useState(false);
 
@@ -57,7 +45,6 @@ const TitleBar = ({ debug = false }) => {
       `}
     >
       <LevelView />
-      <div css={BillboardStyle} />
       {/* <PointsView /> */}
       {debug && <ChapterButtons />}
     </div>

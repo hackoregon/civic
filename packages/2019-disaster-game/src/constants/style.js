@@ -2,6 +2,8 @@ export const palette = {
   blue: "#068FB2",
   gold: "#FBD403",
   red: "#EE3F3A",
+  darkRed: "#AB312D",
+  darkestRed: "#550000",
   lightLime: "#D8E159",
   lemon: "#FCF290",
   salmon: "#ED5862",
