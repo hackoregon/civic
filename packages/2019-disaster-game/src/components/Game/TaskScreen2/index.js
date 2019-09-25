@@ -34,7 +34,7 @@ const screenLayout = css`
 `;
 
 const chapterDuration = 300;
-const votingDuration = 5;
+const votingDuration = 15;
 const mapTransitionDuration = 3;
 const taskVotesDefault = {
   mostVotesId: null,
@@ -94,7 +94,7 @@ const TaskScreen = ({
     return () => {
       chapterTimer.stop();
     };
-  }, [chapterTimer, endChapter]);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Timer: on game phase change
   useEffect(() => {
@@ -116,22 +116,11 @@ const TaskScreen = ({
         );
       }
     }
-    // TODO: Currently broken. This should not execute when a task is chosen...
+
     return () => {
       phaseTimer.stop();
     };
-  }, [
-    activeTask,
-    goToTask,
-    phaseTimer,
-    prevTaskPhase,
-    startTimer,
-    taskPhase,
-    weightedPlayerKitItems,
-    weightedTasks,
-    setCorrectItemsChosen,
-    setTaskVotes
-  ]);
+  }, [taskPhase]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Timer: on switch from one solve task to another solve task (triggers for sequential tasks — save yourself tasks in this case)
   useEffect(() => {
@@ -143,14 +132,7 @@ const TaskScreen = ({
     return () => {
       phaseTimer.stop();
     };
-  }, [
-    activeTask,
-    activeTaskIndex,
-    phaseTimer,
-    startTimer,
-    taskPhase,
-    weightedTasks
-  ]);
+  }, [activeTaskIndex, taskPhase]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onItemSelection = orbModel => {
     console.log("item selected");
