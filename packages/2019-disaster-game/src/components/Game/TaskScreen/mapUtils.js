@@ -74,7 +74,7 @@ export const getPosition = f =>
 export const asGeoJSON = (tasks, activeTask, completedTasks) =>
   tasks.reduce((features, task) => {
     const props = { ...task, isCompleted: completedTasks.includes(task.type) };
-    if (task.type === activeTask.type) {
+    if (activeTask && task.type === activeTask.type) {
       props.isActive = true;
     }
     delete props.locations;

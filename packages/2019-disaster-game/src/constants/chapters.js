@@ -1,3 +1,9 @@
+import {
+  KitTickerTape,
+  SelectionTickerTape,
+  GeneralTickerTape
+} from "./tickerTape";
+
 export const ATTRACTOR = "ATTRACTOR";
 export const KIT = "KIT";
 export const QUAKE = "QUAKE";
@@ -7,13 +13,13 @@ export const TASKS = "TASKS";
 export const SUMMARY = "SUMMARY";
 
 const CHAPTERS = [
-  { id: ATTRACTOR, title: "Attractor" },
-  { id: KIT, title: "Kit" },
-  { id: QUAKE, title: "Quake" },
-  // { id: PLAN, title: "Plan" },
-  // { id: MEET, title: "Meet" },
-  { id: TASKS, title: "Tasks" },
-  { id: SUMMARY, title: "Summary" }
+  { id: ATTRACTOR, title: "Attractor", tickerTape: null },
+  { id: KIT, title: "Kit", tickerTape: KitTickerTape },
+  { id: QUAKE, title: "Quake", tickerTape: GeneralTickerTape },
+  // { id: PLAN, title: "Plan", tickerTape: null },
+  // { id: MEET, title: "Meet", tickerTape: null },
+  { id: TASKS, title: "Tasks", tickerTape: SelectionTickerTape },
+  { id: SUMMARY, title: "Summary", tickerTape: GeneralTickerTape }
 ];
 
 export default CHAPTERS;

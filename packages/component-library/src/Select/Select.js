@@ -69,12 +69,12 @@ Select.propTypes = {
   formLabel: PropTypes.string,
   formHelperText: PropTypes.string,
   disabled: PropTypes.bool,
-  options: PropTypes.oneOf(
+  options: PropTypes.oneOf([
     PropTypes.arrayOf(PropTypes.string),
     PropTypes.arrayOf(
       PropTypes.shape({ value: PropTypes.any, label: PropTypes.string })
     )
-  ).isRequired
+  ]).isRequired
 };
 
 Select.defaultProps = {

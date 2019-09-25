@@ -59,11 +59,13 @@ export const tasks = {
     requiredItem: protectiveGear,
     numberItemsToSolve: 3,
     points: 3,
-    text: "I'm afraid I'll fall over the rubble.",
     imageSVG: rubble,
     imageAlt: "a rocky road",
     sceneSVG: sceneRubble,
     sceneAlt: "rubble in your way",
+    clue: "Lots of sharp rocks and broken glass around here!",
+    tickerTape:
+      "Gloves, boots, and goggles can help prevent injury when earthquakes cause large amounts of debris.",
     locations: [[-122.6655, 45.5081]]
   },
   [DUST]: {
@@ -72,11 +74,13 @@ export const tasks = {
     requiredItem: dustMask,
     numberItemsToSolve: 3,
     points: 3,
-    text: "It's so dusty!",
     imageSVG: dust,
     imageAlt: "a person coughing in the dust",
     sceneSVG: sceneDust,
     sceneAlt: "a person coughing in the dust",
+    clue: "It's getting hard to breathe here!",
+    tickerTape:
+      "When buildings collapse, lots of debris is thrown into the air. Air quality can be very poor after an earthquake.",
     locations: [[-122.676169, 45.516485]]
   },
   // Save Others
@@ -86,11 +90,12 @@ export const tasks = {
     requiredItem: blanket,
     numberItemsToSolve: 3,
     points: 3,
-    text: "It's c-c-cold...",
     imageSVG: cold,
     imageAlt: "a shivering person",
     sceneSVG: sceneCold,
     sceneAlt: "a shivering person",
+    clue: "Brrr... It's c-c-cold out here!",
+    tickerTape: "Be prepared for all potential weather conditions!",
     locations: [[-122.610302, 45.504791], [-122.675011, 45.503044]]
   },
   // [FIRE]: {
@@ -99,11 +104,12 @@ export const tasks = {
   //   requiredItem: fireExtinguisher,
   //   numberItemsToSolve: 5,
   //   points: 5,
-  //   text: "Uh oh! This fire could spread!",
   //   imageSVG: fire,
   //   imageAlt: "fire",
   //   sceneSVG: sceneFire,
   //   sceneAlt: "a fire that's spreading",
+  // clue: "Fire! Fire!",
+  // tickerTape: "Keep fire extinguishers up-to-date and serviced annually!",
   //   locations: [[-122.615447, 45.514957], [-122.685672, 45.525356]]
   // },
   [HUNGER]: {
@@ -112,11 +118,12 @@ export const tasks = {
     requiredItem: food,
     numberItemsToSolve: 5,
     points: 5,
-    text: "So. Hungry.",
     imageSVG: hunger,
     imageAlt: "a hungry person",
     sceneSVG: sceneHunger,
     sceneAlt: "a hungry person",
+    clue: "I'm so hungry!",
+    tickerTape: "Don't forget to pack comfort foods like coffee and chocolate!",
     locations: [
       [-122.608228, 45.534321],
       [-122.638366, 45.498539],
@@ -129,11 +136,13 @@ export const tasks = {
     requiredItem: rope,
     numberItemsToSolve: 3,
     points: 3,
-    text: "Excuse me, sir. I seem to be stuck",
     imageSVG: hole,
     imageAlt: "a person reaching out of a hole",
     sceneSVG: sceneHole,
     sceneAlt: "a person reaching out of a crack in the road",
+    clue: "Help! I can't get out!",
+    tickerTape:
+      "NET members are Portland volunteers trained in urban search & rescue.",
     locations: [
       [-122.623602, 45.511711],
       [-122.672012, 45.521634],
@@ -146,11 +155,13 @@ export const tasks = {
     requiredItem: firstAidKit,
     numberItemsToSolve: 5,
     points: 7,
-    text: "That person looks hurt.",
     imageSVG: injury,
     imageAlt: "an injured person",
     sceneSVG: sceneInjury,
     sceneAlt: "an injured person",
+    clue: "Ow!",
+    tickerTape:
+      "After a major earthquake, there could be 27,000 injured people in Portland.",
     locations: [[-122.678618, 45.52018]]
   },
   [WEATHER]: {
@@ -159,11 +170,13 @@ export const tasks = {
     requiredItem: tent,
     numberItemsToSolve: 2,
     points: 4,
-    text: "Ah! Rain!",
     imageSVG: weather,
     imageAlt: "a thunderstorm",
     sceneSVG: sceneWeather,
     sceneAlt: "a thunderstorm",
+    clue: "Brrrr… It's c-c-cold and wet out here!",
+    tickerTape:
+      "If possible, plan to shelter in place without gas, water, or electricity!",
     locations: [[-122.651841, 45.496852], [-122.638194, 45.503651]]
   },
   [LOST_PET]: {
@@ -172,11 +185,13 @@ export const tasks = {
     requiredItem: flashlight,
     numberItemsToSolve: 2,
     points: 4,
-    text: "Where is my cat, Mr. Whiskers?",
     imageSVG: lostPet,
     imageAlt: "paw prints",
     sceneSVG: sceneLostPet,
     sceneAlt: "a place the pet may be hiding",
+    clue: "Help! I can't find my cat!",
+    tickerTape:
+      "Do not enter buildings after an earthquake, even to rescue lost pets!",
     locations: [[-122.629352, 45.531557], [-122.651925, 45.507501]]
   },
   [THIRST]: {
@@ -185,11 +200,12 @@ export const tasks = {
     requiredItem: water,
     numberItemsToSolve: 5,
     points: 5,
-    text: "Oh no! I'm so thirsty. Whatever will I do?",
     imageSVG: thirst,
     imageAlt: "a thirsty person",
     sceneSVG: sceneThirst,
     sceneAlt: "a thirsty person",
+    clue: "I'm so thirsty!",
+    tickerTape: "Kits should contain 1 gallon of water per person per day.",
     locations: [[-122.634761, 45.515922]]
   }
 };
