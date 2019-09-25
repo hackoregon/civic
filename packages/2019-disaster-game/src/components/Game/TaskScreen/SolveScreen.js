@@ -1,93 +1,73 @@
 /** @jsx jsx */
-import { connect } from "react-redux";
-import { PropTypes } from "prop-types";
 import { css, jsx } from "@emotion/core";
+import { PropTypes } from "prop-types";
+import { connect } from "react-redux";
+import { useState, useEffect } from "react";
+import { getActiveTaskData } from "../../../state/tasks";
 
-import { completeTask, getActiveTaskData } from "../../../state/tasks";
-import { getKitCreationItems } from "../../../state/kit";
+const screenLayout = css`
+  position: absolute;
+  left: 0;
+  display: grid;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: 1fr;
+  background: beige;
+  z-index: 101;
+  transform: translateY(-100%);
+  transition: transform 1s;
+`;
 
-const SolveScreen = ({
-  correctItemsChosen,
-  completeActiveTask,
-  activeTask,
-  open
-}) => {
-  const screenLayout = css`
-    position: absolute;
-    left: 0;
-    display: grid;
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
-    grid-template-columns: 1fr;
-    background: beige;
-    z-index: 101;
-    transform: translateY(-100%);
-    transition: transform 0.5s;
-  `;
+const onScreenStyle = css`
+  transform: translateY(0%);
+`;
 
-  const onScreenStyle = css`
-    transform: translateY(0%);
-  `;
+const SolveScreen = ({ activeTask, activeTaskIndex, open }) => {
+  const taskImageGenerator = currentTask => {
+    if (currentTask) {
+      return css`
+        background-image: url(${currentTask.sceneSVG});
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100%;
+        width: 100%;
+      `;
+    }
+    return null;
+  };
 
-  const taskImage = css`
-    background-image: url(${activeTask ? activeTask.sceneSVG : null});
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100%;
-    width: 100%;
-  `;
+  const [taskImageCSS, setTaskImageCss] = useState(
+    taskImageGenerator(activeTask)
+  );
+
+  // When the task changes, update the image
+  useEffect(() => {
+    if (activeTask) {
+      setTaskImageCss(taskImageGenerator(activeTask));
+    }
+  }, [activeTaskIndex, activeTask]);
 
   return (
     <div
       css={css`
         ${screenLayout}
-        ${open ? onScreenStyle : {}}
+        ${open && onScreenStyle}
       `}
     >
-      {activeTask && (
-        <div css={taskImage}>
-          {/* <h2>{activeTask.text}</h2>
-          <h3>
-            Correct items chosen: {correctItemsChosen} of{" "}
-            {activeTask.numberItemsToSolve}
-          </h3>
-          <button
-            type="button"
-            onClick={() => {
-              completeActiveTask(activeTask.id);
-            }}
-          >
-            Use {activeTask.requiredItem}
-          </button> */}
-        </div>
-      )}
+      <div css={taskImageCSS} />
     </div>
   );
 };
 
 SolveScreen.propTypes = {
-  completeActiveTask: PropTypes.func,
-  activeTask: PropTypes.shape({
-    id: PropTypes.string,
-    imageSVG: PropTypes.string
-  }),
-  open: PropTypes.bool,
-  correctItemsChosen: PropTypes.number
+  activeTaskIndex: PropTypes.number,
+  activeTask: PropTypes.shape({}),
+  open: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
-  activeTask: getActiveTaskData(state),
-  possibleItems: getKitCreationItems(state)
+  activeTask: getActiveTaskData(state)
 });
 
-const mapDispatchToProps = dispatch => ({
-  completeActiveTask(taskChoice, taskId) {
-    dispatch(completeTask(taskChoice, taskId));
-  }
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SolveScreen);
+export default connect(mapStateToProps)(SolveScreen);

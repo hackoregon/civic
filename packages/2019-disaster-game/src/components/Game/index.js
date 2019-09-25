@@ -20,8 +20,7 @@ import DefaultScreen from "./DefaultScreen/index";
 import AttractorScreen from "./AttractorScreen/index";
 import KitScreen from "./KitScreen/index";
 import QuakeScreen from "./QuakeScreen/index";
-import TaskScreen from "./TaskScreen2/index";
-// import TaskScreen from "./TaskScreen/index";
+import TaskScreen from "./TaskScreen/index";
 import SummaryScreen from "./SummaryScreen/index";
 
 import "@hackoregon/component-library/assets/global.styles.css";
