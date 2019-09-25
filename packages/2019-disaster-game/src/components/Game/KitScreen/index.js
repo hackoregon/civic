@@ -91,6 +91,7 @@ const KitScreen = ({
         <div css={[bg, bg2]} />
         <div css={[bg, bg3]} />
         <Kit />
+        {/* somehow adding this comment fixes the production build -- it's related to @babel/plugin-transform-react-constant-elements */}
       </MapStyle>
       <MatchLockInterface
         possibleItems={possibleItems}
