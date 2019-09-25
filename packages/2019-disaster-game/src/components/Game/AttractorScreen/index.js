@@ -12,6 +12,7 @@ import Song from "../../atoms/Audio/Song";
 import { TYPES as SFX_TYPES } from "../../../constants/sfx";
 
 import attractorSong from "../../../../assets/audio/PWolf-happysong1wfadeinout.mp3";
+import earthquakeHeroesLogo from "../../../../assets/earthquake_heroes_logo.svg";
 
 const pageWrapper = css`
   display: grid;
@@ -34,13 +35,11 @@ const contentWrapper = css`
   }
 `;
 
-const titleFont = css`
-  font-family: "Boogaloo", cursive;
-  color: ${palette.purple};
-  font-size: 20em;
+const logoStyle = css`
   margin: 0;
   align-self: center;
   justify-self: center;
+  width: 2500px;
 `;
 
 const buttonWrapper = css`
@@ -125,7 +124,11 @@ const AttractorScreen = ({ goToChapter, playSFX }) => {
       <div css={[bg, bg2]} />
       <div css={[bg, bg3]} />
       <div css={contentWrapper}>
-        <h1 css={titleFont}>EARTHQUAKE HEROES</h1>
+        <img
+          src={earthquakeHeroesLogo}
+          css={logoStyle}
+          alt="Earthquake Heroes"
+        />
         <div css={buttonWrapper}>
           <button
             type="button"
