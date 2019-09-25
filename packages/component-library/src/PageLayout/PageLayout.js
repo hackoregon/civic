@@ -9,6 +9,10 @@ const headerHeight = 72;
 
 const defaultStyles = css`
   padding: 0px 24px;
+
+  main:focus {
+    outline: none;
+  }
   @media (max-width: 640px) {
     padding: 0px 6px;
   }
@@ -54,7 +58,7 @@ const PageLayout = ({
   teamTitle,
   children
 }) => (
-  <div css={header && headerMargin}>
+  <main id="main" tabIndex="-1" css={header && headerMargin}>
     {header && <Header />}
     {heroTitle && (
       <CollectionHero
@@ -65,7 +69,7 @@ const PageLayout = ({
     )}
     <div css={defaultStyles}>{children}</div>
     <Footer />
-  </div>
+  </main>
 );
 
 PageLayout.displayName = "PageLayout";
