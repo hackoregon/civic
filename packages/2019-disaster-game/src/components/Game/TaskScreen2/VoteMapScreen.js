@@ -29,7 +29,8 @@ const VoteMapScreen = ({
   activeTask,
   activeTaskId,
   completedTasks = [],
-  tasks /* taskVotes */
+  tasks,
+  taskVotes
 }) => {
   const [longitude, setLongitude] = useState(initialLon);
   const [latitude, setLatitude] = useState(initialLat);
@@ -50,16 +51,16 @@ const VoteMapScreen = ({
   }, [activeTask, activeTaskId]);
 
   // Would be cool to size these relative to each other in the future
-  // const sizeForVote = dataThing => {
-  //   const mapPropType =
-  //     dataThing && dataThing.properties && dataThing.properties.type;
+  const sizeForVote = feature => {
+    const mapPropType =
+      feature && feature.properties && feature.properties.type;
 
-  //   const votesForTask = taskVotes[mapPropType] || 0;
-  //   const mostVotesForAnyTask = taskVotes.mostVotesTotal || 1;
-  //   const baseSize = 18;
+    const votesForTask = taskVotes[mapPropType] || 0;
+    const mostVotesForAnyTask = taskVotes.mostVotesTotal || 1;
+    const baseSize = 18;
 
-  //   return baseSize + 2 * (1.5 * votesForTask - mostVotesForAnyTask);
-  // };
+    return baseSize + 2 * (2 * votesForTask - mostVotesForAnyTask);
+  };
 
   return (
     <div css={screenLayout}>
@@ -90,8 +91,7 @@ const VoteMapScreen = ({
           iconMapping={poiIconMapping}
           iconSizeScale={poiIconZoomScale}
           getIcon={d => d.properties.type}
-          getSize={() => 18}
-          // getSize={sizeForVote}
+          getSize={sizeForVote}
         />
       </BaseMap>
     </div>
@@ -105,12 +105,12 @@ VoteMapScreen.propTypes = {
     locations: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number))
   }),
   completedTasks: PropTypes.arrayOf(PropTypes.string),
-  tasks: PropTypes.arrayOf(PropTypes.object)
-  // taskVotes: PropTypes.shape({
-  //   mostVotesId: PropTypes.string,
-  //   mostVotesTotal: PropTypes.number,
-  //   totalVotes: PropTypes.number
-  // })
+  tasks: PropTypes.arrayOf(PropTypes.object),
+  taskVotes: PropTypes.shape({
+    mostVotesId: PropTypes.string,
+    mostVotesTotal: PropTypes.number,
+    totalVotes: PropTypes.number
+  })
 };
 
 export default VoteMapScreen;
