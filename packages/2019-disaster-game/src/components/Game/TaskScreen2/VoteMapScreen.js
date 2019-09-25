@@ -30,7 +30,8 @@ const VoteMapScreen = ({
   activeTaskId,
   completedTasks = [],
   tasks,
-  taskVotes
+  taskVotes,
+  mapTransitionDuration
 }) => {
   const [longitude, setLongitude] = useState(initialLon);
   const [latitude, setLatitude] = useState(initialLat);
@@ -81,7 +82,7 @@ const VoteMapScreen = ({
           keyboard: false
         }}
         animate
-        animationDuration={3000}
+        animationDuration={mapTransitionDuration * 1000}
         civicMapStyle="disaster-game"
       >
         <IconMap
@@ -110,7 +111,8 @@ VoteMapScreen.propTypes = {
     mostVotesId: PropTypes.string,
     mostVotesTotal: PropTypes.number,
     totalVotes: PropTypes.number
-  })
+  }),
+  mapTransitionDuration: PropTypes.number
 };
 
 export default VoteMapScreen;

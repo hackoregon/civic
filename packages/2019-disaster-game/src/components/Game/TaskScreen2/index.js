@@ -203,6 +203,7 @@ const TaskScreen = ({
           activeTaskIndex={activeTaskIndex}
           tasks={weightedTasks}
           taskVotes={taskVotes}
+          mapTransitionDuration={mapTransitionDuration}
         />
       </div>
       <MatchLockInterface
