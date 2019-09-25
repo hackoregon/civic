@@ -78,6 +78,7 @@ const OrbManager = ({
     if (newBounds || newTaskPhase) {
       const newOrbs = createRandomLayout(possibleItems, bounds, ORB_CONFIG);
       setHasInitialized(true);
+      setCompletedOrbs([]);
       setOrbsState(newOrbs);
     }
   }, [
