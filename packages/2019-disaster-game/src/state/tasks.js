@@ -29,7 +29,8 @@ const actionTypes = {
   SOLVING,
   VOTING,
   MOVING_MAP,
-  DONE
+  DONE,
+  RESET_STATE: "RESET_STATE"
 };
 
 // ACTIONS
@@ -38,6 +39,9 @@ export const goToNextTaskPhase = completeTask => dispatch => {
 };
 export const addTask = taskChoice => dispatch => {
   dispatch({ type: actionTypes.ADD_TASK, taskChoice });
+};
+export const resetState = () => dispatch => {
+  dispatch({ type: actionTypes.RESET_STATE });
 };
 // export const changeEnvironment = nextEnvironmentId => dispatch => {
 //   dispatch({ type: actionTypes.CHANGE_ENVIRONMENT, nextEnvironmentId });
@@ -68,6 +72,9 @@ export const tasksReducer = createReducer(initialState, {
   },
   [actionTypes.ADD_TASK]: (state, action) => {
     state.taskOrder.push(action.taskChoice);
+  },
+  [actionTypes.RESET_STATE]: () => {
+    return initialState;
   }
   // [actionTypes.COMPLETE_TASK]: (state, action) => {
   //   console.log('COMPLETE_TASK')

@@ -14,7 +14,8 @@ const initialState = {
 
 export const actionTypes = {
   ADD_ITEM: "ADD_ITEM",
-  ADD_ITEM_TO_PLAYER_KIT: "ADD_ITEM_TO_PLAYER_KIT"
+  ADD_ITEM_TO_PLAYER_KIT: "ADD_ITEM_TO_PLAYER_KIT",
+  RESET_STATE: "RESET_STATE"
 };
 
 // ACTIONS
@@ -26,11 +27,18 @@ export const addItemToPlayerKit = itemId => dispatch => {
   dispatch({ type: actionTypes.ADD_ITEM_TO_PLAYER_KIT, itemId });
 };
 
+export const resetState = () => dispatch => {
+  dispatch({ type: actionTypes.RESET_STATE });
+};
+
 // REDUCERS
 /* eslint-disable no-param-reassign */
 export const kit = createReducer(initialState, {
   [actionTypes.ADD_ITEM_TO_PLAYER_KIT]: (state, action) => {
     state.playerKit[action.itemId] = true;
+  },
+  [actionTypes.RESET_STATE]: () => {
+    return initialState;
   }
 });
 /* eslint-enable no-param-reassign */
