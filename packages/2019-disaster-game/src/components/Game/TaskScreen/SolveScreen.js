@@ -52,7 +52,7 @@ const SolveScreen = ({ activeTask, activeTaskIndex, open }) => {
     <div
       css={css`
         ${screenLayout}
-        ${open && onScreenStyle}
+        ${open ? onScreenStyle : {}}
       `}
     >
       <div css={taskImageCSS} />
