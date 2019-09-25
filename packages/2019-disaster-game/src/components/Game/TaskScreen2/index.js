@@ -18,7 +18,7 @@ import {
 } from "../../../state/tasks";
 import { getPlayerKitItems } from "../../../state/kit";
 import usePrevious from "../../../state/hooks/usePrevious";
-import { SOLVING, VOTING } from "../../../constants/actions";
+import { SOLVING, VOTING, MOVING_MAP } from "../../../constants/actions";
 import { chooseRandomTask } from "./voteUtils";
 
 import taskSong from "../../../../assets/audio/HappyTheme2fadeinout.mp3";
@@ -35,6 +35,7 @@ const screenLayout = css`
 
 const chapterDuration = 300;
 const votingDuration = 5;
+const mapTransitionDuration = 3;
 const taskVotesDefault = {
   mostVotesId: null,
   mostVotesTotal: 0,
@@ -104,7 +105,15 @@ const TaskScreen = ({
       }
       if (taskPhase === VOTING) {
         setTaskVotes(taskVotesDefault); // reset chosen tasks
-        startTimer(votingDuration, goToTask, null, weightedPlayerKitItems);
+        startTimer(votingDuration, goToTask, null, []);
+      }
+      if (taskPhase === MOVING_MAP) {
+        startTimer(
+          mapTransitionDuration,
+          goToTask,
+          null,
+          weightedPlayerKitItems
+        );
       }
     }
     // TODO: Currently broken. This should not execute when a task is chosen...
@@ -206,6 +215,7 @@ const TaskScreen = ({
           activeTask={activeTask}
           activeTaskIndex={activeTaskIndex}
           tasks={weightedTasks}
+          taskVotes={taskVotes}
         />
       </div>
       <MatchLockInterface
@@ -221,7 +231,7 @@ const TaskScreen = ({
 };
 
 TaskScreen.propTypes = {
-  taskPhase: PropTypes.oneOf([SOLVING, VOTING]),
+  taskPhase: PropTypes.oneOf([SOLVING, VOTING, MOVING_MAP]),
   activeTask: PropTypes.shape({}),
   activeTaskIndex: PropTypes.number,
   endChapter: PropTypes.func,

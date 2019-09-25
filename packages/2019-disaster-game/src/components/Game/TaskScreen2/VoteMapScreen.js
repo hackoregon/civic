@@ -37,11 +37,15 @@ const VoteMapScreen = ({
   const data = asGeoJSON(tasks, activeTask, completedTasks);
 
   useEffect(() => {
-    const choosingTask = !activeTask;
     const saveYourselfMode = activeTaskId > 1;
-    if (choosingTask && saveYourselfMode) {
-      setLatitude(activeTask.locations[0][0]);
-      setLongitude(activeTask.locations[0][1]);
+    if (!saveYourselfMode) {
+      if (activeTask) {
+        setLatitude(activeTask.locations[0][1]);
+        setLongitude(activeTask.locations[0][0]);
+      } else {
+        setLatitude(initialLat);
+        setLongitude(initialLon);
+      }
     }
   }, [activeTask, activeTaskId]);
 
@@ -112,7 +116,7 @@ VoteMapScreen.propTypes = {
 export default VoteMapScreen;
 
 // const mapStateToProps = state => ({
-  // completedTasks: getCompletedTasks(state)
+// completedTasks: getCompletedTasks(state)
 // });
 
 // export default connect(mapStateToProps)(VoteMapScreen);
