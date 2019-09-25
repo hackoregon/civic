@@ -98,7 +98,6 @@ const KitScreen = ({
         onOrbSelection={onKitItemSelection}
         checkItemIsCorrect={checkIfItemIsGood}
         activeScreen="kit"
-        percentComplete={percentComplete}
         tickerTapeText="Choose your earthquake preparation kit"
       />
     </Fragment>
