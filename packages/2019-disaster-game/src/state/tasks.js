@@ -25,7 +25,8 @@ const actionTypes = {
   INCREASE_ACTIVE_TASK: "INCREASE_ACTIVE_TASK",
   COMPLETE_TASK: "COMPLETE_TASK",
   START_TASK: "START_TASK",
-  OUT_OF_TIME: "OUT_OF_TIME"
+  OUT_OF_TIME: "OUT_OF_TIME",
+  RESET_STATE: "RESET_STATE"
 };
 
 // ACTIONS
@@ -43,6 +44,9 @@ export const startTask = task => dispatch => {
 };
 export const completeTask = completedTask => dispatch => {
   dispatch({ type: actionTypes.COMPLETE_TASK, completedTask });
+};
+export const resetState = () => dispatch => {
+  dispatch({ type: actionTypes.RESET_STATE });
 };
 
 // REDUCERS
@@ -65,6 +69,9 @@ export const tasksReducer = createReducer(initialState, {
     state.activeTask += 1;
     // Log completed task
     state.completedTasks.push(action.completedTask);
+  },
+  [actionTypes.RESET_STATE]: () => {
+    return initialState;
   }
 });
 /* eslint-enable no-param-reassign */

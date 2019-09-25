@@ -35,8 +35,11 @@ export const chapters = createReducer(initialState, {
   },
 
   [actionTypes.GO_TO_NEXT_CHAPTER]: state => {
-    if (state.activeChapterIndex >= lastChapterIndex) return;
-    state.activeChapterIndex += 1;
+    if (state.activeChapterIndex >= lastChapterIndex) {
+      state.activeChapterIndex = 0;
+    } else {
+      state.activeChapterIndex += 1;
+    }
   }
 });
 /* eslint-enable no-param-reassign */

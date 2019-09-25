@@ -11,7 +11,8 @@ const initialState = {
 
 export const actionTypes = {
   SET_POINTS: "SET_POINTS",
-  ADD_POINTS: "ADD_POINTS"
+  ADD_POINTS: "ADD_POINTS",
+  RESET_STATE: "RESET_STATE"
 };
 
 // ACTIONS
@@ -23,6 +24,10 @@ export const addPoints = points => dispatch => {
   dispatch({ type: actionTypes.ADD_POINTS, points });
 };
 
+export const resetState = () => dispatch => {
+  dispatch({ type: actionTypes.RESET_STATE });
+};
+
 // REDUCERS
 /* eslint-disable no-param-reassign */
 export const user = createReducer(initialState, {
@@ -31,6 +36,9 @@ export const user = createReducer(initialState, {
   },
   [actionTypes.ADD_POINTS]: (state, action) => {
     state.points += action.points;
+  },
+  [actionTypes.RESET_STATE]: () => {
+    return initialState;
   }
 });
 /* eslint-enable no-param-reassign */

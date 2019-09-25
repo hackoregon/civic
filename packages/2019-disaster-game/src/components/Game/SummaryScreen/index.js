@@ -1,5 +1,15 @@
 /** @jsx jsx */
 import { css, jsx, keyframes } from "@emotion/core";
+import { useState, useEffect } from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { PropTypes } from "prop-types";
+
+import { resetState as resetStateTasks } from "../../../state/tasks";
+import { resetState as resetStateKit } from "../../../state/kit";
+import { resetState as resetStateUser } from "../../../state/user";
+import { goToNextChapter } from "../../../state/chapters";
+import Timer from "../../../utils/timer";
 import Song from "../../atoms/Audio/Song";
 import { palette } from "../../../constants/style";
 
@@ -79,7 +89,32 @@ const bg3 = css`
   animation-duration: 10s;
 `;
 
-const SummaryScreen = ({ songFile }) => {
+const chapterDuration = 30;
+
+const SummaryScreen = ({
+  songFile,
+  endChapter,
+  resetKitState,
+  resetTasksState,
+  resetUserState
+}) => {
+  const [chapterTimer] = useState(new Timer());
+
+  // Timer: on chapter start
+  useEffect(() => {
+    chapterTimer.setDuration(chapterDuration);
+    chapterTimer.addCompleteCallback(() => {
+      resetKitState();
+      resetTasksState();
+      resetUserState();
+      endChapter();
+    });
+    chapterTimer.start();
+    return () => {
+      chapterTimer.stop();
+    };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
     <div css={pageWrapper}>
       <div css={bg} />
@@ -111,4 +146,22 @@ const SummaryScreen = ({ songFile }) => {
   );
 };
 
-export default SummaryScreen;
+SummaryScreen.propTypes = {
+  endChapter: PropTypes.func,
+  songFile: PropTypes.string,
+  resetKitState: PropTypes.func,
+  resetTasksState: PropTypes.func,
+  resetUserState: PropTypes.func
+};
+
+const mapDispatchToProps = dispatch => ({
+  endChapter: bindActionCreators(goToNextChapter, dispatch),
+  resetKitState: bindActionCreators(resetStateKit, dispatch),
+  resetTasksState: bindActionCreators(resetStateTasks, dispatch),
+  resetUserState: bindActionCreators(resetStateUser, dispatch)
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(SummaryScreen);
