@@ -18,6 +18,7 @@ import useBounds from "../../state/hooks/useBounds";
 import usePrevious from "../../state/hooks/usePrevious";
 import useAnimationFrame from "../../state/hooks/useAnimationFrame";
 import { getTaskPhase } from "../../state/tasks";
+import { MOVING_MAP } from "../../constants/actions";
 
 import Orb from "./Orb";
 import {
@@ -41,7 +42,7 @@ const ORB_CONFIG = {
 /**
  * OrbManager is responsible for moving Orbs
  *
- * @param {*} { orbCount=2 } how many orbs should be rendered?
+ * @param {*} { orbCount=2 } how many orbModels should be rendered?
  * @param {*} { velocityX=2 } how fast does the orb move horizontally
  * @param {*} { velocityY=0 } how fast does the orb move vertically
  * @param {*} { period=2 } how much vertical modulation per frame should the orb move? Higher number = more 'wobbly'
@@ -55,7 +56,7 @@ const OrbManager = ({
   taskPhase
 } = {}) => {
   const [hasInitialized, setHasInitialized] = useState(false);
-  const [orbs, setOrbsState] = useState([]);
+  const [orbModels, setOrbModelsState] = useState([]);
   const [touchedOrbs, setTouchedOrb] = useState([]);
   const [completedOrbs, setCompletedOrbs] = useState([]);
   const [orbsZIndex, setOrbsZIndex] = useState([]);
@@ -79,7 +80,7 @@ const OrbManager = ({
       const newOrbs = createRandomLayout(possibleItems, bounds, ORB_CONFIG);
       setHasInitialized(true);
       setCompletedOrbs([]);
-      setOrbsState(newOrbs);
+      setOrbModelsState(newOrbs);
     }
   }, [
     bounds,
@@ -92,14 +93,14 @@ const OrbManager = ({
 
   const addOrbScore = useCallback(
     orbId => {
-      const theOrb = _find(orbs, orb => orb.orbId === orbId);
+      const theOrb = _find(orbModels, orb => orb.orbId === orbId);
       onOrbSelection(theOrb);
     },
-    // update when orbs.length changes
-    // if we udpate when orbs changes, the addOrbScore will continuously be recreated,
+    // update when orbModels.length changes
+    // if we udpate when orbModels changes, the addOrbScore will continuously be recreated,
     // and, in turn, causes `Orb` to render continously.
     // eslint-disable-next-line
-    [onOrbSelection, orbs.length]
+    [onOrbSelection, orbModels.length]
   );
 
   const setOrbTouched = useCallback(
@@ -148,9 +149,9 @@ const OrbManager = ({
     const centerY = (bounds.height - ORB_CONFIG.verticalBuffer * 2) / 2;
 
     // we re-use tempModels by pushing updated data in to it.
-    for (let i = 0; i < orbs.length; i += 1) {
+    for (let i = 0; i < orbModels.length; i += 1) {
       // get the model
-      let currentOrb = { ...orbs[i] };
+      let currentOrb = { ...orbModels[i] };
       const currentOrbId = currentOrb.orbId;
       const isOrbCompleted = completedOrbs.indexOf(currentOrbId) > -1;
 
@@ -159,11 +160,11 @@ const OrbManager = ({
           checkItemIsCorrect(currentOrb),
           currentOrb
         );
-        /* This fixes removing the orb when it has gone off screen, but it makes all the other orbs animate like they're appearing for the first time */
+        /* This fixes removing the orb when it has gone off screen, but it makes all the other orbModels animate like they're appearing for the first time */
         // currentOrb.frameRerenders = currentOrb.frameRerenders ? (currentOrb.frameRerenders + 1) : 1;
         // if (currentOrb.frameRerenders === 50) {
         //   i = i - 1;
-        //   setOrbsState(orbs.splice(i, 1));
+        //   setOrbModelsState(orbModels.splice(i, 1));
         //   continue;
         // }
       } else {
@@ -196,7 +197,7 @@ const OrbManager = ({
               currentOrb.y =
                 bounds.height - ORB_CONFIG.verticalBuffer - ORB_CONFIG.orbSize;
 
-            // apply a 'force' that pulls the orbs vertically towards the center of the screen
+            // apply a 'force' that pulls the orbModels vertically towards the center of the screen
             const distanceFromCenter = currentOrb.y - centerY;
             // if the orb is far enough away from the vertical center,
             // the further the orb is from the center,
@@ -227,44 +228,45 @@ const OrbManager = ({
     }
 
     // store all models in state
-    setOrbsState(tempModels);
+    setOrbModelsState(tempModels);
 
     setTick(tick + 1);
   };
 
   useAnimationFrame(() => animate());
 
-  // by default all orbs are rendered,
+  // by default all orbModels are rendered,
   // until their `bypassRender` property is true
-  const renderableOrbs = filter(orbs, orb => !orb.bypassRender);
+  const renderableOrbs = filter(orbModels, orb => !orb.bypassRender);
 
   return (
     <OrbsStyle ref={boundsRef}>
-      {map(renderableOrbs, orb => {
-        const zIndex = orbsZIndex.indexOf(orb.orbId) + 1;
+      {taskPhase !== MOVING_MAP &&
+        map(renderableOrbs, orb => {
+          const zIndex = orbsZIndex.indexOf(orb.orbId) + 1;
 
-        return (
-          <div
-            key={orb.orbId}
-            style={{
-              position: "absolute",
-              transform: `translate(${orb.x}px, ${orb.y}px)`,
-              zIndex
-            }}
-          >
-            <Orb
-              orbId={orb.orbId}
-              imageSVG={orb.imageSVG}
-              imgAlt={orb.imgAlt}
-              size={ORB_CONFIG.orbSize}
-              addOrbScore={addOrbScore}
-              setOrbTouched={setOrbTouched}
-              setOrbComplete={setOrbComplete}
-              delay={orb.delay}
-            />
-          </div>
-        );
-      })}
+          return (
+            <div
+              key={orb.orbId}
+              style={{
+                position: "absolute",
+                transform: `translate(${orb.x}px, ${orb.y}px)`,
+                zIndex
+              }}
+            >
+              <Orb
+                orbId={orb.orbId}
+                imageSVG={orb.imageSVG}
+                imgAlt={orb.imgAlt}
+                size={ORB_CONFIG.orbSize}
+                addOrbScore={addOrbScore}
+                setOrbTouched={setOrbTouched}
+                setOrbComplete={setOrbComplete}
+                delay={orb.delay}
+              />
+            </div>
+          );
+        })}
     </OrbsStyle>
   );
 };
