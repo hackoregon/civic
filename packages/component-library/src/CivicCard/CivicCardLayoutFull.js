@@ -22,7 +22,6 @@ import authorsSrc from "../../assets/authors.png";
 import { MaterialTheme } from "../_Themes/index";
 import ButtonNew from "../ButtonNew/ButtonNew";
 import PullQuote from "../PullQuote/PullQuote";
-import Placeholder from "../Placeholder/Placeholder";
 import Chip from "../Chip/Chip";
 import cardMetaTypes from "./cardMetaTypes";
 
@@ -364,16 +363,6 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
         </section>
       </article>
       <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
-      <section css={[sectionMarginSmall, sectionMaxWidthSmall]} id="explore">
-        <h2>Explore related data</h2>
-        <Placeholder>
-          <h3>
-            <a href="https://civicsoftwarefoundation.org/#cities">
-              See your data here!
-            </a>
-          </h3>
-        </Placeholder>
-      </section>
     </ThemeProvider>
   );
 }

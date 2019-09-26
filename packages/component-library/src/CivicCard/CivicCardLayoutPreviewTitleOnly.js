@@ -108,7 +108,7 @@ const Watermark = () => (
   </div>
 );
 
-function CivicCardLayoutPreview({ cardMeta }) {
+function CivicCardLayoutPreviewNoTitle({ cardMeta }) {
   const classes = useStyles();
 
   return (
@@ -125,7 +125,6 @@ function CivicCardLayoutPreview({ cardMeta }) {
               {cardMeta.title}
             </CivicCardLink>
           </h2>
-          <p>{cardMeta.introText}</p>
           <ul css={tagList} id={`${cardMeta.slug}-tags`}>
             {cardMeta.tags.map((tag, index) => (
               <li>
@@ -147,10 +146,10 @@ function CivicCardLayoutPreview({ cardMeta }) {
   );
 }
 
-CivicCardLayoutPreview.propTypes = {
+CivicCardLayoutPreviewNoTitle.propTypes = {
   cardMeta: cardMetaTypes
 };
 
-CivicCardLayoutPreview.displayName = "CivicCardLayoutPreview";
+CivicCardLayoutPreviewNoTitle.displayName = "CivicCardLayoutPreviewNoTitle";
 
-export default CivicCardLayoutPreview;
+export default CivicCardLayoutPreviewNoTitle;

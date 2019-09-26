@@ -3,7 +3,6 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { checkA11y } from "@storybook/addon-a11y";
 import { ExploreRelated } from "../src/index";
-import { storybookStyles } from "./storyStyles";
 import {
   SampleCard,
   SampleCardB,
@@ -58,11 +57,7 @@ const CardRegistryMock = {
 export default () =>
   storiesOf("Component Lib|CIVIC Platform/Explore Related", module)
     .addDecorator(checkA11y)
-    .addDecorator(story => (
-      <div style={storybookStyles.storyGrid}>
-        <div style={storybookStyles.storyGridItem}>{story()}</div>
-      </div>
-    ))
+    .addDecorator(story => <div>{story()}</div>)
     .add("Default", () => (
       <ExploreRelated
         CardRegistry={CardRegistryMock}

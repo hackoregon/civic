@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router";
-import { PageLayout } from "../..";
+import { PageLayout, ExploreRelated } from "../..";
 
 const CardDetailPage = ({ params, CardRegistry }) => {
   const card = CardRegistry.find(params.slug);
@@ -11,19 +10,12 @@ const CardDetailPage = ({ params, CardRegistry }) => {
     return (
       <PageLayout>
         <CardComponent />
+        <ExploreRelated slug={params.slug} CardRegistry={CardRegistry} />
       </PageLayout>
     );
   }
 
-  return (
-    <PageLayout>
-      <h1>Card not found</h1>
-      <p>
-        The card you are looking for doesn&apos;t exist.
-        <Link to="/cities/portland">View the Portland Collection</Link>
-      </p>
-    </PageLayout>
-  );
+  return null;
 };
 
 CardDetailPage.propTypes = {
