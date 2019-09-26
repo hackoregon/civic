@@ -133,7 +133,7 @@ ProjectCard.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   link: PropTypes.string,
-  type: PropTypes.oneOf("collection", "application")
+  type: PropTypes.oneOf(["collection", "application"])
 };
 
 export default ProjectCard;
