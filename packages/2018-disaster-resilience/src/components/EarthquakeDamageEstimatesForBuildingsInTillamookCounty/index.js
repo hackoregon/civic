@@ -15,9 +15,8 @@ const EarthquakeDamageEstimatesForBuildingsInTillamookCounty = ({
   useEffect(
     () => {
       init();
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     },
-    [init]
+    [] // eslint-disable-line react-hooks/exhaustive-deps
   );
 
   return (
@@ -37,6 +36,8 @@ EarthquakeDamageEstimatesForBuildingsInTillamookCounty.propTypes = {
   data: PropTypes.shape({ damageEstimates: resourceShape }),
   Layout: PropTypes.func
 };
+
+EarthquakeDamageEstimatesForBuildingsInTillamookCounty.tags = earthquakeDamageEstimatesForBuildingsInTillamookCountyMeta().tags;
 
 export default connect(
   state => ({

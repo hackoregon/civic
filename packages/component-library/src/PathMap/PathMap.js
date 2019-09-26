@@ -7,6 +7,7 @@ const PathMap = props => {
     viewport,
     data,
     getColor,
+    getCursor,
     opacity,
     getPath,
     getWidth,
@@ -35,7 +36,7 @@ const PathMap = props => {
 
   return (
     <div>
-      <DeckGL className="DeckGL" {...viewport} getCursor={() => "crosshair"}>
+      <DeckGL className="DeckGL" {...viewport} getCursor={getCursor}>
         <PathLayer
           id="path-layer"
           className="PathMap"
@@ -69,6 +70,7 @@ PathMap.propTypes = {
     PropTypes.func,
     PropTypes.arrayOf(PropTypes.number)
   ]),
+  getCursor: PropTypes.func,
   opacity: PropTypes.number,
   getPath: PropTypes.func,
   getWidth: PropTypes.oneOfType([PropTypes.func, PropTypes.number]),
@@ -87,6 +89,7 @@ PathMap.propTypes = {
 
 PathMap.defaultProps = {
   getColor: () => [0, 0, 0],
+  getCursor: () => "crosshair",
   opacity: 0.9,
   getPath: d => d.geometry.coordinates,
   getWidth: () => 10,

@@ -14,6 +14,7 @@ const IconMap = props => {
     getIcon,
     getSize,
     getColor,
+    getCursor,
     autoHighlight,
     onLayerClick,
     visible,
@@ -39,7 +40,7 @@ const IconMap = props => {
 
   return (
     <div>
-      <DeckGL className="DeckGL" {...viewport} getCursor={() => "crosshair"}>
+      <DeckGL className="DeckGL" {...viewport} getCursor={getCursor}>
         <IconLayer
           id="icon-layer"
           className="IconMap"
@@ -53,6 +54,7 @@ const IconMap = props => {
           getIcon={getIcon}
           getSize={getSize}
           getColor={getColor}
+          getCursor={getCursor}
           autoHighlight={autoHighlight}
           onClick={onLayerClick}
           onHover={onHover}
@@ -77,6 +79,7 @@ IconMap.propTypes = {
   getIcon: PropTypes.func,
   getSize: PropTypes.func,
   getColor: PropTypes.func,
+  getCursor: PropTypes.func,
   autoHighlight: PropTypes.bool,
   onLayerClick: PropTypes.func,
   onClick: PropTypes.func,
@@ -94,6 +97,7 @@ IconMap.defaultProps = {
   getPosition: d => d.geometry.coordinates,
   getSize: () => 10,
   getColor: () => [0, 0, 0],
+  getCursor: () => "crosshair",
   visible: true
 };
 

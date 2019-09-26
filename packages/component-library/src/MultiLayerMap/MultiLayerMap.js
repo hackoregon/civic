@@ -14,6 +14,7 @@ const MultiLayerMap = props => {
     viewport,
     mapLayers,
     children,
+    getCursor,
     onHoverSlide,
     onLayerClick,
     selectedFoundationDatum
@@ -64,11 +65,7 @@ const MultiLayerMap = props => {
   });
 
   return (
-    <DeckGL
-      className="DeckGL-Map-Layer"
-      getCursor={() => "crosshair"}
-      {...viewport}
-    >
+    <DeckGL className="DeckGL-Map-Layer" getCursor={getCursor} {...viewport}>
       {renderMaps}
       {children}
     </DeckGL>
@@ -80,6 +77,7 @@ MultiLayerMap.propTypes = {
   mapLayers: arrayOf(shape({})).isRequired,
   onHoverSlide: func,
   onLayerClick: func,
+  getCursor: () => "crosshair",
   children: node,
   selectedFoundationDatum: shape({})
 };

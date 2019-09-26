@@ -84,7 +84,7 @@ export default () =>
           "CIVIC Map Styles:",
           MAP_STYLE_OPTIONS,
           MAP_STYLE_OPTIONS["Hack Oregon Dark"],
-          GROUP_IDS.DESIGN
+          GROUP_IDS.CUSTOM
         );
 
         const initialLongitude = number(
