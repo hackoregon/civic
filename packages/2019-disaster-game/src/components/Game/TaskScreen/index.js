@@ -22,6 +22,7 @@ import { SOLVING, VOTING, MOVING_MAP } from "../../../constants/actions";
 import { chooseRandomTask } from "./voteUtils";
 
 import taskSong from "../../../../assets/audio/HappyTheme2fadeinout.mp3";
+import instructionalVoteAudio from "../../../../assets/audio/task_screen/6_boy_who_should_we_help_next.mp3";
 import Song from "../../atoms/Audio/Song";
 
 import MatchLockInterface from "../../atoms/MatchLockInterface";
@@ -214,6 +215,13 @@ const TaskScreen = ({
         tickerTapeText={tickerTapeText}
       />
       <Song songFile={taskSong} />
+      {taskPhase === VOTING && (
+        <Song
+          songFile={instructionalVoteAudio}
+          shouldLoop={false}
+          volume={1.0}
+        />
+      )}
     </Fragment>
   );
 };

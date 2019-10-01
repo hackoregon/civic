@@ -11,6 +11,7 @@ import Song from "../../atoms/Audio/Song";
 
 import songFile from "../../../../assets/audio/PWolfEarthquakesound15secmp3.mp3";
 import videoFile from "../../../../assets/video/OMG_EARTHQUAKE.mp4";
+import instructionalAudio from "../../../../assets/audio/earthquake_screen/5_boy_its_an_earthquake_drop.mp3";
 
 const videoStyles = css`
   width: 100vw;
@@ -37,6 +38,7 @@ const QuakeScreen = ({ endChapter, chapterDuration = 13 }) => {
         <source type="video/mp4" src={videoFile} />
       </video>
       <Song songFile={songFile} />
+      <Song songFile={instructionalAudio} shouldLoop={false} volume={1.0} />
     </div>
   );
 };
