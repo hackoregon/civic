@@ -22,7 +22,7 @@ import { SOLVING, VOTING, MOVING_MAP } from "../../../constants/actions";
 import { chooseRandomTask } from "./voteUtils";
 
 import taskSong from "../../../../assets/audio/HappyTheme2fadeinout.mp3";
-import instructionalVoteAudio from "../../../../assets/audio/task_screen/6_boy_who_should_we_help_next.mp3";
+import instructionalVoteAudio from "../../../../assets/audio/task_screen_instructional/6_boy_who_should_we_help_next.mp3";
 import Song from "../../atoms/Audio/Song";
 
 import MatchLockInterface from "../../atoms/MatchLockInterface";
@@ -218,6 +218,22 @@ const TaskScreen = ({
       {taskPhase === VOTING && (
         <Song
           songFile={instructionalVoteAudio}
+          shouldLoop={false}
+          volume={1.0}
+        />
+      )}
+      {taskPhase === SOLVING && (
+        <Song
+          songFile={activeTask.audioInstructional}
+          shouldLoop={false}
+          volume={1.0}
+          playing={taskPhase === SOLVING}
+        />
+      )}
+      {/* Hack around to get audio for 2nd save yourself task. Can be done programatically but coding fast */}
+      {activeTaskIndex === 1 && (
+        <Song
+          songFile={activeTask.audioInstructional}
           shouldLoop={false}
           volume={1.0}
         />
