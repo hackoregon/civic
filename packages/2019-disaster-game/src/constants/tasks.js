@@ -36,23 +36,23 @@ import sceneThirst from "../../assets/task_scenes/scene-thirst.svg";
 import sceneWeather from "../../assets/task_scenes/scene-weather.svg";
 
 // Task instructional audio
-import rubbleInstructional from "../../assets/audio/task_screen_instructional/12_boy_theres_a_lot_of_rubble.mp3";
-import dustInstructional from "../../assets/audio/task_screen_instructional/13_boy_its_getting_hard_to_breathe_here.mp3";
-import hungerInstructional from "../../assets/audio/task_screen_instructional/11_boy_all_these_people_are_hungry.mp3";
-import holeInstructional from "../../assets/audio/task_screen_instructional/15_boy_help_i_cant_get_out.mp3";
-import coldInstructional from "../../assets/audio/task_screen_instructional/17_boy_its_cold_out_here.mp3";
-import lostPetInstructional from "../../assets/audio/task_screen_instructional/19_boy_help_i_cant_find_my_cat.mp3";
-// import injuryInstructional from "../../assets/audio/task_screen_instructional/21_boy_how_can_i_help_more_injured_people.mp3";
-import injuryInstructional from "../../assets/audio/task_screen_instructional/16_boy_ow.mp3";
-import weatherInstructional from "../../assets/audio/task_screen_instructional/22_boy_how_can_i_help_people_with_no_place_to_stay.mp3";
-// import fireInstructional from "../../assets/audio/task_screen_instructional/26_boy_how_can_i_put_out_a_fire.mp3";
-import fireInstructional from "../../assets/audio/task_screen_instructional/18_boy_fire_fire.mp3";
-import thirstInstructional from "../../assets/audio/task_screen_instructional/im_so_thirsty_child2.mp3";
+import rubbleInstructional from "../../assets/audio/task_screen/12_boy_theres_a_lot_of_rubble.mp3";
+import dustInstructional from "../../assets/audio/task_screen/13_boy_its_getting_hard_to_breathe_here.mp3";
+import hungerInstructional from "../../assets/audio/task_screen/11_boy_all_these_people_are_hungry.mp3";
+import holeInstructional from "../../assets/audio/task_screen/15_boy_help_i_cant_get_out.mp3";
+import coldInstructional from "../../assets/audio/task_screen/17_boy_its_cold_out_here.mp3";
+import lostPetInstructional from "../../assets/audio/task_screen/19_boy_help_i_cant_find_my_cat.mp3";
+// import injuryInstructional from "../../assets/audio/task_screen/21_boy_how_can_i_help_more_injured_people.mp3";
+import injuryInstructional from "../../assets/audio/task_screen/16_boy_ow.mp3";
+import weatherInstructional from "../../assets/audio/task_screen/22_boy_how_can_i_help_people_with_no_place_to_stay.mp3";
+// import fireInstructional from "../../assets/audio/task_screen/26_boy_how_can_i_put_out_a_fire.mp3";
+import fireInstructional from "../../assets/audio/task_screen/18_boy_fire_fire.mp3";
+import thirstInstructional from "../../assets/audio/task_screen/im_so_thirsty_child2.mp3";
 
 // Task question audio
-import defaultQuestion from "../../assets/audio/task_screen_instructional/7_boy_how_can_i_help.mp3";
-import dustQuestion from "../../assets/audio/task_screen_instructional/24_boy_what_can_I_use_to_breathe.mp3";
-import rubbleQuestion from "../../assets/audio/task_screen_instructional/23_boy_how_can_i_prevent_getting_cut.mp3";
+import defaultQuestion from "../../assets/audio/task_screen/7_boy_how_can_i_help.mp3";
+import dustQuestion from "../../assets/audio/task_screen/24_boy_what_can_I_use_to_breathe.mp3";
+import rubbleQuestion from "../../assets/audio/task_screen/23_boy_how_can_i_prevent_getting_cut.mp3";
 
 // Save yourself ids
 export const DUST = "dust";
