@@ -1,7 +1,7 @@
 import { useEffect, useState, memo } from "react";
 import { Howl } from "howler";
 
-const Song = ({ songFile, volume = 0.5, shouldLoop = true }) => {
+const Song = ({ songFile, volume = 0.5, shouldLoop = true, ...other }) => {
   const [audio] = useState(
     new Howl({
       src: [songFile],
@@ -10,7 +10,8 @@ const Song = ({ songFile, volume = 0.5, shouldLoop = true }) => {
       volume,
       onfade: () => {
         audio.stop();
-      }
+      },
+      ...other
     })
   );
   const [audioId, setAudioId] = useState();
