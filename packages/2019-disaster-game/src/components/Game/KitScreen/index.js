@@ -9,11 +9,11 @@ import { goToNextChapter } from "../../../state/chapters";
 import { getKitCreationItems, addItemToPlayerKit } from "../../../state/kit";
 import { addPoints } from "../../../state/user";
 import { palette } from "../../../constants/style";
-import { MapStyle } from "../index";
-import MatchLockInterface from "../../atoms/MatchLockInterface";
-import Kit from "./Kit";
 import Timer from "../../../utils/timer";
+import MatchLockInterface from "../../atoms/MatchLockInterface";
 import Song from "../../atoms/Audio/Song";
+import { MapStyle } from "../index";
+import Kit from "./Kit";
 
 import kitSong from "../../../../assets/audio/HappyTheme1fadeinout.mp3";
 import instructionalAudio from "../../../../assets/audio/kit_screen/1_boy_lets_prepare_for_an_earthquake.mp3";
@@ -100,7 +100,7 @@ const KitScreen = ({
         onOrbSelection={onKitItemSelection}
         checkItemIsCorrect={checkIfItemIsGood}
         activeScreen="kit"
-        tickerTapeText="Choose your earthquake preparation kit"
+        interfaceMessage="What do we need?"
       />
     </Fragment>
   );
