@@ -22,6 +22,8 @@ import { SOLVING, VOTING, MOVING_MAP } from "../../../constants/actions";
 import { chooseRandomTask } from "./voteUtils";
 
 import taskSong from "../../../../assets/audio/HappyTheme2fadeinout.mp3";
+import audioVoteInstruction from "../../../../assets/audio/task_screen/6_boy_who_should_we_help_next.mp3";
+import audioVoteMotivate from "../../../../assets/audio/task_screen/4_boy_lets_go_do_it_enthusiastic.mp3";
 import Song from "../../atoms/Audio/Song";
 
 import MatchLockInterface from "../../atoms/MatchLockInterface";
@@ -59,6 +61,10 @@ const TaskScreen = ({
   const [possibleItems, setPossibleItems] = useState(weightedPlayerKitItems);
   const [taskVotes, setTaskVotes] = useState(taskVotesDefault);
   const [correctItemsChosen, setCorrectItemsChosen] = useState(0);
+  const [
+    finishedTaskInstructionalAudio,
+    setFinishedTaskInstructionalAudio
+  ] = useState(false);
   const prevTaskPhase = usePrevious(taskPhase);
 
   const goToTask = () => {
@@ -175,6 +181,14 @@ const TaskScreen = ({
   const checkSolutionIsCorrect = currentOrb =>
     activeTask.requiredItem === currentOrb.type;
 
+  const playHowCanIHelp = () => {
+    setFinishedTaskInstructionalAudio(true);
+  };
+
+  const resetQuestion = () => {
+    setFinishedTaskInstructionalAudio(false);
+  };
+
   /* RENDER CONDITIONS */
   const isSolving = taskPhase === SOLVING;
   const isVoting = taskPhase === VOTING;
@@ -214,6 +228,38 @@ const TaskScreen = ({
         tickerTapeText={tickerTapeText}
       />
       <Song songFile={taskSong} />
+      {taskPhase === VOTING && (
+        <Song songFile={audioVoteInstruction} shouldLoop={false} volume={1.0} />
+      )}
+      {taskPhase === MOVING_MAP && (
+        <Song songFile={audioVoteMotivate} shouldLoop={false} volume={1.0} />
+      )}
+      {taskPhase === SOLVING && (
+        <Song
+          songFile={activeTask.audioInstruction}
+          shouldLoop={false}
+          volume={1.0}
+          onend={playHowCanIHelp}
+        />
+      )}
+      {/* Hack around to get audio for 2nd save yourself task. Can be done programatically but coding fast */}
+      {activeTaskIndex === 1 && (
+        <Song
+          songFile={activeTask.audioInstruction}
+          shouldLoop={false}
+          volume={1.0}
+          onend={playHowCanIHelp}
+        />
+      )}
+      {/* Task question plays after instructional audio */}
+      {finishedTaskInstructionalAudio && (
+        <Song
+          songFile={activeTask.audioQuestion}
+          shouldLoop={false}
+          volume={1.0}
+          onend={resetQuestion}
+        />
+      )}
     </Fragment>
   );
 };

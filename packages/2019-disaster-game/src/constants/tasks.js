@@ -1,7 +1,7 @@
 import {
   blanket,
   dustMask,
-  // fireExtinguisher,
+  fireExtinguisher,
   firstAidKit,
   flashlight,
   food,
@@ -14,7 +14,7 @@ import {
 // Task icons
 import cold from "../../assets/task_icons/cold.svg";
 import dust from "../../assets/task_icons/dust.svg";
-// import fire from "../../assets/task_icons/fire.svg";
+import fire from "../../assets/task_icons/fire.svg";
 import hole from "../../assets/task_icons/hole.svg";
 import hunger from "../../assets/task_icons/hunger.svg";
 import injury from "../../assets/task_icons/injury.svg";
@@ -26,7 +26,7 @@ import weather from "../../assets/task_icons/weather.svg";
 // Task scenes
 import sceneCold from "../../assets/task_scenes/scene-cold.svg";
 import sceneDust from "../../assets/task_scenes/scene-dust.svg";
-// import sceneFire from "../../assets/task_scenes/scene-fire.svg";
+import sceneFire from "../../assets/task_scenes/scene-fire.svg";
 import sceneHole from "../../assets/task_scenes/scene-hole.svg";
 import sceneHunger from "../../assets/task_scenes/scene-hunger.svg";
 import sceneInjury from "../../assets/task_scenes/scene-injury.svg";
@@ -35,12 +35,31 @@ import sceneRubble from "../../assets/task_scenes/scene-rubble.svg";
 import sceneThirst from "../../assets/task_scenes/scene-thirst.svg";
 import sceneWeather from "../../assets/task_scenes/scene-weather.svg";
 
+// Task instruction audio
+import rubbleInstruction from "../../assets/audio/task_screen/12_boy_theres_a_lot_of_rubble.mp3";
+import dustInstruction from "../../assets/audio/task_screen/13_boy_its_getting_hard_to_breathe_here.mp3";
+import hungerInstruction from "../../assets/audio/task_screen/11_boy_all_these_people_are_hungry.mp3";
+import holeInstruction from "../../assets/audio/task_screen/15_boy_help_i_cant_get_out.mp3";
+import coldInstruction from "../../assets/audio/task_screen/17_boy_its_cold_out_here.mp3";
+import lostPetInstruction from "../../assets/audio/task_screen/19_boy_help_i_cant_find_my_cat.mp3";
+// import injuryInstruction from "../../assets/audio/task_screen/21_boy_how_can_i_help_more_injured_people.mp3";
+import injuryInstruction from "../../assets/audio/task_screen/16_boy_ow.mp3";
+import weatherQuestion from "../../assets/audio/task_screen/22_boy_how_can_i_help_people_with_no_place_to_stay.mp3";
+// import fireInstruction from "../../assets/audio/task_screen/26_boy_how_can_i_put_out_a_fire.mp3";
+import fireInstruction from "../../assets/audio/task_screen/18_boy_fire_fire.mp3";
+import thirstInstruction from "../../assets/audio/task_screen/im_so_thirsty_child2.mp3";
+
+// Task question audio
+import defaultQuestion from "../../assets/audio/task_screen/7_boy_how_can_i_help.mp3";
+import dustQuestion from "../../assets/audio/task_screen/24_boy_what_can_I_use_to_breathe.mp3";
+import rubbleQuestion from "../../assets/audio/task_screen/23_boy_how_can_i_prevent_getting_cut.mp3";
+
 // Save yourself ids
 export const DUST = "dust";
 export const RUBBLE = "rubble";
 // Save others ids
 export const COLD = "cold";
-// export const FIRE = "fire";
+export const FIRE = "fire";
 export const HUNGER = "hunger";
 export const HOLE = "hole";
 export const INJURY = "injury";
@@ -56,6 +75,8 @@ export const tasks = {
   [RUBBLE]: {
     id: RUBBLE,
     time: 15,
+    audioInstruction: rubbleInstruction,
+    audioQuestion: rubbleQuestion,
     requiredItem: protectiveGear,
     numberItemsToSolve: 3,
     points: 3,
@@ -71,6 +92,8 @@ export const tasks = {
   [DUST]: {
     id: DUST,
     time: 15,
+    audioInstruction: dustInstruction,
+    audioQuestion: dustQuestion,
     requiredItem: dustMask,
     numberItemsToSolve: 3,
     points: 3,
@@ -87,6 +110,8 @@ export const tasks = {
   [COLD]: {
     id: COLD,
     time: 15,
+    audioInstruction: coldInstruction,
+    audioQuestion: defaultQuestion,
     requiredItem: blanket,
     numberItemsToSolve: 3,
     points: 3,
@@ -98,23 +123,27 @@ export const tasks = {
     tickerTape: "Be prepared for all potential weather conditions!",
     locations: [[-122.610302, 45.504791], [-122.675011, 45.503044]]
   },
-  // [FIRE]: {
-  //   id: FIRE,
-  //   time: 15,
-  //   requiredItem: fireExtinguisher,
-  //   numberItemsToSolve: 5,
-  //   points: 5,
-  //   imageSVG: fire,
-  //   imageAlt: "fire",
-  //   sceneSVG: sceneFire,
-  //   sceneAlt: "a fire that's spreading",
-  // clue: "Fire! Fire!",
-  // tickerTape: "Keep fire extinguishers up-to-date and serviced annually!",
-  //   locations: [[-122.615447, 45.514957], [-122.685672, 45.525356]]
-  // },
+  [FIRE]: {
+    id: FIRE,
+    time: 15,
+    audioInstruction: fireInstruction,
+    audioQuestion: defaultQuestion,
+    requiredItem: fireExtinguisher,
+    numberItemsToSolve: 5,
+    points: 5,
+    imageSVG: fire,
+    imageAlt: "fire",
+    sceneSVG: sceneFire,
+    sceneAlt: "a fire that's spreading",
+    clue: "Fire! Fire!",
+    tickerTape: "Keep fire extinguishers up-to-date and serviced annually!",
+    locations: [[-122.615447, 45.514957], [-122.685672, 45.525356]]
+  },
   [HUNGER]: {
     id: HUNGER,
     time: 15,
+    audioInstruction: hungerInstruction,
+    audioQuestion: defaultQuestion,
     requiredItem: food,
     numberItemsToSolve: 5,
     points: 5,
@@ -133,6 +162,8 @@ export const tasks = {
   [HOLE]: {
     id: HOLE,
     time: 15,
+    audioInstruction: holeInstruction,
+    audioQuestion: defaultQuestion,
     requiredItem: rope,
     numberItemsToSolve: 3,
     points: 3,
@@ -152,6 +183,8 @@ export const tasks = {
   [INJURY]: {
     id: INJURY,
     time: 15,
+    audioInstruction: injuryInstruction,
+    audioQuestion: defaultQuestion,
     requiredItem: firstAidKit,
     numberItemsToSolve: 5,
     points: 7,
@@ -167,6 +200,8 @@ export const tasks = {
   [WEATHER]: {
     id: WEATHER,
     time: 15,
+    audioInstruction: coldInstruction,
+    audioQuestion: weatherQuestion,
     requiredItem: tent,
     numberItemsToSolve: 2,
     points: 4,
@@ -182,6 +217,8 @@ export const tasks = {
   [LOST_PET]: {
     id: LOST_PET,
     time: 15,
+    audioInstruction: lostPetInstruction,
+    audioQuestion: defaultQuestion,
     requiredItem: flashlight,
     numberItemsToSolve: 2,
     points: 4,
@@ -197,6 +234,8 @@ export const tasks = {
   [THIRST]: {
     id: THIRST,
     time: 15,
+    audioInstruction: thirstInstruction,
+    audioQuestion: defaultQuestion,
     requiredItem: water,
     numberItemsToSolve: 5,
     points: 5,
@@ -213,6 +252,6 @@ export const tasks = {
 export const tasksForEnvironment = {
   [URBAN]: {
     saveYourself: [RUBBLE, DUST],
-    saveOthers: [INJURY, HOLE, HUNGER, COLD, WEATHER, LOST_PET, THIRST]
+    saveOthers: [INJURY, HOLE, HUNGER, COLD, WEATHER, LOST_PET, THIRST, FIRE]
   }
 };

@@ -16,6 +16,7 @@ import Timer from "../../../utils/timer";
 import Song from "../../atoms/Audio/Song";
 
 import kitSong from "../../../../assets/audio/HappyTheme1fadeinout.mp3";
+import instructionalAudio from "../../../../assets/audio/kit_screen/1_boy_lets_prepare_for_an_earthquake.mp3";
 
 const slide = keyframes`
   0% {
@@ -86,6 +87,7 @@ const KitScreen = ({
   return (
     <Fragment>
       <Song songFile={kitSong} />
+      <Song songFile={instructionalAudio} shouldLoop={false} volume={1.0} />
       <MapStyle>
         <div css={bg} />
         <div css={[bg, bg2]} />

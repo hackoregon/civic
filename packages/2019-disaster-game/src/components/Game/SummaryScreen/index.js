@@ -10,6 +10,7 @@ import { resetState as resetStateKit } from "../../../state/kit";
 import { resetState as resetStateUser } from "../../../state/user";
 import { goToNextChapter } from "../../../state/chapters";
 import Timer from "../../../utils/timer";
+import motivationalAudio from "../../../../assets/audio/summary_screen/8_boy_you_did_great.mp3";
 import Song from "../../atoms/Audio/Song";
 import { palette } from "../../../constants/style";
 
@@ -142,6 +143,7 @@ const SummaryScreen = ({
         </div>
       </div>
       {songFile && <Song songFile={songFile} />}
+      <Song songFile={motivationalAudio} shouldLoop={false} volume={1.0} />
     </div>
   );
 };
