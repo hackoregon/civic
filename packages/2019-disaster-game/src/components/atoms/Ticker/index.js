@@ -1,8 +1,9 @@
-import { memo } from "react";
+import { memo, useEffect, useState } from "react";
 import { PropTypes } from "prop-types";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 
+import Timer from "../../../utils/timer";
 import { palette } from "../../../constants/style";
 import media from "../../../utils/mediaQueries";
 
@@ -26,21 +27,43 @@ const textStyle = css`
   color: ${palette.gold};
 
   ${media.md} {
-    font-size: 6em;
+    font-size: 4.5rem;
     padding: 10px 25px;
   }
 `;
 
-const Ticker = ({ text }) => {
+const Ticker = ({ messages }) => {
+  const [messageToDisplayIndex, setMessageToDisplayIndex] = useState(0);
+  const [messageTimer] = useState(new Timer());
+
+  useEffect(() => {
+    messageTimer.reset();
+    messageTimer.setDuration(10);
+    messageTimer.addCompleteCallback(() => {
+      const nextIndex = messageToDisplayIndex + 1;
+      if (nextIndex >= messages.length) {
+        setMessageToDisplayIndex(0);
+      } else {
+        setMessageToDisplayIndex(nextIndex);
+      }
+    });
+    messageTimer.start();
+  }, [
+    messageTimer,
+    setMessageToDisplayIndex,
+    messageToDisplayIndex,
+    messages.length
+  ]);
+
   return (
     <div css={containerStyle}>
-      <p css={textStyle}>{text}</p>
+      <p css={textStyle}>{messages[messageToDisplayIndex]}</p>
     </div>
   );
 };
 
 Ticker.propTypes = {
-  text: PropTypes.string
+  messages: PropTypes.arrayOf(PropTypes.string)
 };
 
 export default memo(Ticker);

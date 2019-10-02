@@ -47,7 +47,9 @@ const Game = ({ activeChapterId }) => {
       {activeChapterId === ATTRACTOR && <AttractorScreen />}
       {activeChapterId !== ATTRACTOR && (
         <GameContainerStyle>
-          {activeChapterId !== ATTRACTOR && <TitleBar />}
+          {activeChapterId !== ATTRACTOR && activeChapterId !== QUAKE && (
+            <TitleBar />
+          )}
           <GameGrid>{renderChapter(activeChapterId)}</GameGrid>
         </GameContainerStyle>
       )}

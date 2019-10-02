@@ -86,7 +86,7 @@ export const tasks = {
     sceneAlt: "rubble in your way",
     clue: "Lots of sharp rocks and broken glass around here!",
     tickerTape:
-      "Gloves, boots, and goggles can help prevent injury when earthquakes cause large amounts of debris.",
+      "Gloves, boots, and goggles can help prevent injury when there’s lots of debris.",
     locations: [[-122.6655, 45.5081]]
   },
   [DUST]: {
@@ -103,7 +103,7 @@ export const tasks = {
     sceneAlt: "a person coughing in the dust",
     clue: "It's getting hard to breathe here!",
     tickerTape:
-      "When buildings collapse, lots of debris is thrown into the air. Air quality can be very poor after an earthquake.",
+      "Lots of debris will cause poor air quality after an earthquake.",
     locations: [[-122.676169, 45.516485]]
   },
   // Save Others
@@ -120,7 +120,7 @@ export const tasks = {
     sceneSVG: sceneCold,
     sceneAlt: "a shivering person",
     clue: "Brrr... It's c-c-cold out here!",
-    tickerTape: "Be prepared for all potential weather conditions!",
+    tickerTape: "Plan for all potential weather conditions!",
     locations: [[-122.610302, 45.504791], [-122.675011, 45.503044]]
   },
   [FIRE]: {
@@ -194,7 +194,7 @@ export const tasks = {
     sceneAlt: "an injured person",
     clue: "Ow!",
     tickerTape:
-      "After a major earthquake, there could be 27,000 injured people in Portland.",
+      "There could be 27,000 injured people in the Portland area after a major earthquake.",
     locations: [[-122.678618, 45.52018]]
   },
   [WEATHER]: {
@@ -210,8 +210,7 @@ export const tasks = {
     sceneSVG: sceneWeather,
     sceneAlt: "a thunderstorm",
     clue: "Brrrr… It's c-c-cold and wet out here!",
-    tickerTape:
-      "If possible, plan to shelter in place without gas, water, or electricity!",
+    tickerTape: "Plan for all potential weather conditions!",
     locations: [[-122.651841, 45.496852], [-122.638194, 45.503651]]
   },
   [LOST_PET]: {
@@ -227,8 +226,7 @@ export const tasks = {
     sceneSVG: sceneLostPet,
     sceneAlt: "a place the pet may be hiding",
     clue: "Help! I can't find my cat!",
-    tickerTape:
-      "Do not enter buildings after an earthquake, even to rescue lost pets!",
+    tickerTape: "Pack supplies for pets with your disaster kit.",
     locations: [[-122.629352, 45.531557], [-122.651925, 45.507501]]
   },
   [THIRST]: {
