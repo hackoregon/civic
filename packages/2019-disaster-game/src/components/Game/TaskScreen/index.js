@@ -22,7 +22,8 @@ import { SOLVING, VOTING, MOVING_MAP } from "../../../constants/actions";
 import { chooseRandomTask } from "./voteUtils";
 
 import taskSong from "../../../../assets/audio/HappyTheme2fadeinout.mp3";
-import instructionalVoteAudio from "../../../../assets/audio/task_screen_instructional/6_boy_who_should_we_help_next.mp3";
+import audioVoteInstruction from "../../../../assets/audio/task_screen_instructional/6_boy_who_should_we_help_next.mp3";
+import audioVoteMotivate from "../../../../assets/audio/task_screen_instructional/4_boy_lets_go_do_it_enthusiastic.mp3";
 import Song from "../../atoms/Audio/Song";
 
 import MatchLockInterface from "../../atoms/MatchLockInterface";
@@ -228,11 +229,10 @@ const TaskScreen = ({
       />
       <Song songFile={taskSong} />
       {taskPhase === VOTING && (
-        <Song
-          songFile={instructionalVoteAudio}
-          shouldLoop={false}
-          volume={1.0}
-        />
+        <Song songFile={audioVoteInstruction} shouldLoop={false} volume={1.0} />
+      )}
+      {taskPhase === MOVING_MAP && (
+        <Song songFile={audioVoteMotivate} shouldLoop={false} volume={1.0} />
       )}
       {taskPhase === SOLVING && (
         <Song
