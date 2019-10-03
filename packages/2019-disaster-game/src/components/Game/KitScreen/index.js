@@ -5,7 +5,10 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { goToNextChapter } from "../../../state/chapters";
+import {
+  goToNextChapter,
+  getActiveChapterDuration
+} from "../../../state/chapters";
 import { getKitCreationItems, addItemToPlayerKit } from "../../../state/kit";
 import { addPoints } from "../../../state/user";
 import { palette } from "../../../constants/style";
@@ -56,17 +59,13 @@ const KitScreen = ({
   addPointsToState,
   addItemToPlayerKitInState,
   endChapter,
-  chapterDuration = 30
+  chapterDuration
 }) => {
   const [chapterTimer] = useState(new Timer());
-  const [percentComplete, setPercentComplete] = useState(0);
 
   // start a timer for the _entire_ chapter
   useEffect(() => {
     chapterTimer.setDuration(chapterDuration);
-    chapterTimer.addCallback((t, p) => {
-      setPercentComplete(p);
-    });
     chapterTimer.addCompleteCallback(() => endChapter());
     chapterTimer.start();
     return () => {
@@ -122,7 +121,8 @@ KitScreen.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  possibleItems: getKitCreationItems(state)
+  possibleItems: getKitCreationItems(state),
+  chapterDuration: getActiveChapterDuration(state)
 });
 
 const mapDispatchToProps = dispatch => ({

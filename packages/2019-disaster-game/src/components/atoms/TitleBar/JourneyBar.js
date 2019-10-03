@@ -2,14 +2,16 @@
 import { css, jsx } from "@emotion/core";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { memo } from "react";
+import { memo, useState, useEffect } from "react";
 
 import { palette } from "../../../constants/style";
 import { KIT, QUAKE, TASKS } from "../../../constants/chapters";
 import {
   getActiveChapterId,
-  getActiveChapterIndex
+  getActiveChapterIndex,
+  getActiveChapterData
 } from "../../../state/chapters";
+import { getActiveTaskData } from "../../../state/tasks";
 import CheckmarkSVG from "../../../../assets/title_bar_checkmark.svg";
 
 const containerStyle = css`
@@ -65,7 +67,45 @@ const checkmarkStyle = css`
   margin-right: 20px;
 `;
 
-const JourneyBar = ({ activeChapterId, activeChapterIndex }) => {
+const coundownContainer = css`
+  height: 100px;
+  width: 100px;
+  position: relative;
+  margin-right: 20px;
+  background: #fff;
+  border-radius: 100%;
+  display: grid;
+  align-content: center;
+  justify-content: center;
+
+  > p {
+    font-size: 5rem;
+    font-family: "Boogaloo", sans-serif;
+    margin: 0;
+    color: ${palette.red};
+  }
+`;
+
+const JourneyBar = ({
+  activeChapterId,
+  activeChapterIndex,
+  activeChapterData,
+  activeTaskData
+}) => {
+  const [chapterDuration, setChapterDuration] = useState(0);
+
+  useEffect(() => {
+    if (activeChapterId === TASKS) {
+      if (activeTaskData) {
+        setChapterDuration(activeTaskData.time);
+      } else {
+        setChapterDuration(activeChapterData.voteDuration);
+      }
+    } else {
+      setChapterDuration(activeChapterData.duration);
+    }
+  }, [activeChapterData, activeChapterId, activeTaskData]);
+
   return (
     <div css={containerStyle}>
       <div
@@ -75,12 +115,17 @@ const JourneyBar = ({ activeChapterId, activeChapterIndex }) => {
           ${activeChapterIndex > 1 && completedSectionStyle}
         `}
       >
-        {activeChapterIndex > 1 ? (
+        {activeChapterId === KIT && (
+          <div css={coundownContainer}>
+            <p>{chapterDuration}</p>
+          </div>
+        )}
+        {activeChapterIndex > 1 && (
           <img src={CheckmarkSVG} alt="checkmark" css={checkmarkStyle} />
-        ) : (
+        )}
+        {activeChapterId !== KIT && activeChapterIndex <= 1 && (
           <div css={circleStyle} />
         )}
-
         <p>PREPARE A KIT</p>
       </div>
 
@@ -91,9 +136,15 @@ const JourneyBar = ({ activeChapterId, activeChapterIndex }) => {
           ${activeChapterIndex > 2 && completedSectionStyle}
         `}
       >
-        {activeChapterIndex > 2 ? (
+        {activeChapterId === QUAKE && (
+          <div css={coundownContainer}>
+            <p>{chapterDuration}</p>
+          </div>
+        )}
+        {activeChapterIndex > 2 && (
           <img src={CheckmarkSVG} alt="checkmark" css={checkmarkStyle} />
-        ) : (
+        )}
+        {activeChapterId !== QUAKE && activeChapterIndex <= 2 && (
           <div css={circleStyle} />
         )}
         <p>GET READY</p>
@@ -106,9 +157,15 @@ const JourneyBar = ({ activeChapterId, activeChapterIndex }) => {
           ${activeChapterIndex > 3 && completedSectionStyle}
         `}
       >
-        {activeChapterIndex > 3 ? (
+        {activeChapterId === TASKS && (
+          <div css={coundownContainer}>
+            <p>{chapterDuration}</p>
+          </div>
+        )}
+        {activeChapterIndex > 3 && (
           <img src={CheckmarkSVG} alt="checkmark" css={checkmarkStyle} />
-        ) : (
+        )}
+        {activeChapterId !== TASKS && activeChapterIndex <= 3 && (
           <div css={circleStyle} />
         )}
         <p>HELP NEIGHBORS</p>
@@ -119,12 +176,16 @@ const JourneyBar = ({ activeChapterId, activeChapterIndex }) => {
 
 JourneyBar.propTypes = {
   activeChapterId: PropTypes.string,
-  activeChapterIndex: PropTypes.number
+  activeChapterIndex: PropTypes.number,
+  activeChapterData: PropTypes.shape({}),
+  activeTaskData: PropTypes.shape({})
 };
 
 const mapStateToProps = state => ({
   activeChapterId: getActiveChapterId(state),
-  activeChapterIndex: getActiveChapterIndex(state)
+  activeChapterIndex: getActiveChapterIndex(state),
+  activeChapterData: getActiveChapterData(state),
+  activeTaskData: getActiveTaskData(state)
 });
 
 export default connect(mapStateToProps)(memo(JourneyBar));

@@ -31,10 +31,10 @@ const Game = ({ activeChapterId }) => {
     switch (chapterId) {
       case KIT:
         return <KitScreen />;
-      case TASKS:
-        return <TaskScreen />;
       case QUAKE:
         return <QuakeScreen />;
+      case TASKS:
+        return <TaskScreen />;
       case SUMMARY:
         return <SummaryScreen songFile={summarySong} />;
       default:
@@ -47,9 +47,7 @@ const Game = ({ activeChapterId }) => {
       {activeChapterId === ATTRACTOR && <AttractorScreen />}
       {activeChapterId !== ATTRACTOR && (
         <GameContainerStyle>
-          {activeChapterId !== ATTRACTOR && activeChapterId !== QUAKE && (
-            <TitleBar />
-          )}
+          {activeChapterId !== ATTRACTOR && <TitleBar />}
           <GameGrid>{renderChapter(activeChapterId)}</GameGrid>
         </GameContainerStyle>
       )}
