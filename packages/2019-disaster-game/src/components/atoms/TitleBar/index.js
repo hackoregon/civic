@@ -83,7 +83,7 @@ const TitleBar = ({ activeChapterId, activeTaskData }) => {
       <div css={infoContainer}>
         <img src={EHLogo} alt="Earthquake Heroes logo" css={logoStyle} />
         <JourneyBar />
-        <SavedBar />
+        {activeChapterId === TASKS && <SavedBar />}
       </div>
     </div>
   );
