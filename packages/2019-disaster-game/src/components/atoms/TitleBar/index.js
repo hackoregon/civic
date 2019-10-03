@@ -1,22 +1,22 @@
 import { memo, useState, useEffect } from "react";
 import { connect } from "react-redux";
 /** @jsx jsx */
-import PropTypes from "prop-types";
 import { css, jsx } from "@emotion/core";
+import PropTypes from "prop-types";
 import { shuffle } from "lodash";
 
 import { getActiveChapterId } from "../../../state/chapters";
 import { getActiveTaskData } from "../../../state/tasks";
 import { KIT, TASKS, SUMMARY } from "../../../constants/chapters";
+import EHLogo from "../../../../assets/short-logo.svg";
 import {
   KitTickerTape,
   SelectionTickerTape,
   GeneralTickerTape
 } from "../../../constants/tickerTape";
-import ChapterButtons from "../ChapterButtons";
-import LevelView from "../LevelView";
 import Ticker from "../Ticker";
 // import PointsView from "../PointsView";
+import JourneyBar from "./JourneyBar";
 
 const ContainerStyle = css`
   position: absolute;
@@ -36,16 +36,21 @@ const onScreenStyle = css`
 `;
 
 const infoContainer = css`
-  /* 100px padding on each side */
-  width: calc(100% - 200px);
-  padding: 0 100px;
+  /* 40px padding on each side */
+  width: calc(100% - 80px);
+  padding: 0 40px;
   display: grid;
-  grid-template-columns: 600px 1fr 600px;
-  justify-content: center;
-  align-items: flex-start;
+  grid-template-columns: repeat(3, auto);
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
 `;
 
-const TitleBar = ({ activeChapterId, activeTaskData, debug = false }) => {
+const logoStyle = css`
+  height: 160px;
+`;
+
+const TitleBar = ({ activeChapterId, activeTaskData }) => {
   const [open, setOpen] = useState(false);
   const [screenMessages, setScreenMessages] = useState([]);
 
@@ -75,16 +80,15 @@ const TitleBar = ({ activeChapterId, activeTaskData, debug = false }) => {
     >
       <Ticker messages={shuffle(screenMessages)} />
       <div css={infoContainer}>
-        <LevelView />
-        {/* <PointsView /> */}
-        {debug && <ChapterButtons />}
+        <img src={EHLogo} alt="Earthquake Heroes logo" css={logoStyle} />
+        <JourneyBar />
+        <div />
       </div>
     </div>
   );
 };
 
 TitleBar.propTypes = {
-  debug: PropTypes.bool,
   activeChapterId: PropTypes.string,
   activeTaskData: PropTypes.shape({})
 };
