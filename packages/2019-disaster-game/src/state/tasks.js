@@ -15,7 +15,6 @@ const initialState = {
   activeEnvironment: defaultEnv,
   taskOrder: shuffle(defaultSaveYourself),
   activeTaskIndex: 0,
-  completedTasks: [],
   taskPhase: SOLVING,
   saveYourself: true
 };
@@ -43,11 +42,11 @@ export const addTask = taskChoice => dispatch => {
 export const resetState = () => dispatch => {
   dispatch({ type: actionTypes.RESET_STATE });
 };
+// export const scoreTask = (taskToScore, itemsUsed) => dispatch => {
+//   dispatch({ type: actionTypes.SCORE_TASK, taskToScore, itemsUsed });
+// };
 // export const changeEnvironment = nextEnvironmentId => dispatch => {
 //   dispatch({ type: actionTypes.CHANGE_ENVIRONMENT, nextEnvironmentId });
-// };
-// export const completeTask = completedTask => dispatch => {
-//   dispatch({ type: actionTypes.COMPLETE_TASK, completedTask });
 // };
 
 // REDUCERS
@@ -76,11 +75,7 @@ export const tasksReducer = createReducer(initialState, {
   [actionTypes.RESET_STATE]: () => {
     return initialState;
   }
-  // [actionTypes.COMPLETE_TASK]: (state, action) => {
-  //   console.log('COMPLETE_TASK')
-  //   state.activeTaskIndex += 1;
-  //   // Log completed task
-  //   state.completedTasks.push(action.completedTask);
+  // [actionTypes.SCORE_TASK]: (state, action) => {
   // },
   // [actionTypes.CHANGE_ENVIRONMENT]: (state, action) => {
   //   const newTasks = tasksForEnvironment[action.nextEnvironmentId].saveYourself;
