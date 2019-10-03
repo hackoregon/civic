@@ -13,8 +13,14 @@ import {
 } from "../../../state/chapters";
 import { getActiveTaskData, getActiveTaskIndex } from "../../../state/tasks";
 import CheckmarkSVG from "../../../../assets/title_bar_checkmark.svg";
+import BadgesDrawer from "./BadgesDrawer";
 
 const containerStyle = css`
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+`;
+
+const journeyBarContainerStyle = css`
   height: 175px;
   width: 2200px;
   background-color: ${palette.lime};
@@ -24,6 +30,7 @@ const containerStyle = css`
   border-radius: 80px;
   align-content: center;
   justify-content: space-between;
+  z-index: 10;
 `;
 
 const sectionStyle = css`
@@ -130,70 +137,73 @@ const JourneyBar = ({
 
   return (
     <div css={containerStyle}>
-      {/* Build Kit */}
-      <div
-        css={css`
-          ${sectionStyle};
-          ${activeChapterId === KIT && activeSectionStyle}
-          ${activeChapterIndex > 1 && completedSectionStyle}
-        `}
-      >
-        {activeChapterId !== KIT && activeChapterIndex <= 1 && (
-          <div css={circleStyle} />
-        )}
-        {activeChapterId === KIT && (
-          <div css={coundownContainer}>
-            <p>{chapterTimeLeft}</p>
-          </div>
-        )}
-        {activeChapterIndex > 1 && (
-          <img src={CheckmarkSVG} alt="checkmark" css={checkmarkStyle} />
-        )}
-        <p>PREPARE A KIT</p>
-      </div>
+      <div css={journeyBarContainerStyle}>
+        {/* Build Kit */}
+        <div
+          css={css`
+            ${sectionStyle};
+            ${activeChapterId === KIT && activeSectionStyle}
+            ${activeChapterIndex > 1 && completedSectionStyle}
+          `}
+        >
+          {activeChapterId !== KIT && activeChapterIndex <= 1 && (
+            <div css={circleStyle} />
+          )}
+          {activeChapterId === KIT && (
+            <div css={coundownContainer}>
+              <p>{chapterTimeLeft}</p>
+            </div>
+          )}
+          {activeChapterIndex > 1 && (
+            <img src={CheckmarkSVG} alt="checkmark" css={checkmarkStyle} />
+          )}
+          <p>PREPARE A KIT</p>
+        </div>
 
-      {/* Save Yourself */}
-      <div
-        css={css`
-          ${sectionStyle};
-          ${savingYourself && activeSectionStyle};
-          ${(activeChapterIndex > 3 || !savingYourself) &&
-            completedSectionStyle};
-        `}
-      >
-        {activeChapterId !== TASKS && activeChapterIndex < 4 && (
-          <div css={circleStyle} />
-        )}
-        {savingYourself && (
-          <div css={coundownContainer}>
-            <p>{chapterTimeLeft}</p>
-          </div>
-        )}
-        {(savingOthers || activeChapterIndex > 3) && (
-          <img src={CheckmarkSVG} alt="checkmark" css={checkmarkStyle} />
-        )}
-        <p>GET READY</p>
-      </div>
+        {/* Save Yourself */}
+        <div
+          css={css`
+            ${sectionStyle};
+            ${savingYourself && activeSectionStyle};
+            ${(activeChapterIndex > 3 || !savingYourself) &&
+              completedSectionStyle};
+          `}
+        >
+          {activeChapterId !== TASKS && activeChapterIndex < 4 && (
+            <div css={circleStyle} />
+          )}
+          {savingYourself && (
+            <div css={coundownContainer}>
+              <p>{chapterTimeLeft}</p>
+            </div>
+          )}
+          {(savingOthers || activeChapterIndex > 3) && (
+            <img src={CheckmarkSVG} alt="checkmark" css={checkmarkStyle} />
+          )}
+          <p>GET READY</p>
+        </div>
 
-      {/* Save Others */}
-      <div
-        css={css`
-          ${sectionStyle};
-          ${savingOthers && activeSectionStyle}
-          ${activeChapterIndex > 3 && completedSectionStyle}
-        `}
-      >
-        {!savingOthers && activeChapterIndex < 4 && <div css={circleStyle} />}
-        {savingOthers && (
-          <div css={coundownContainer}>
-            <p>{chapterTimeLeft}</p>
-          </div>
-        )}
-        {activeChapterIndex > 3 && (
-          <img src={CheckmarkSVG} alt="checkmark" css={checkmarkStyle} />
-        )}
-        <p>HELP NEIGHBORS</p>
+        {/* Save Others */}
+        <div
+          css={css`
+            ${sectionStyle};
+            ${savingOthers && activeSectionStyle}
+            ${activeChapterIndex > 3 && completedSectionStyle}
+          `}
+        >
+          {!savingOthers && activeChapterIndex < 4 && <div css={circleStyle} />}
+          {savingOthers && (
+            <div css={coundownContainer}>
+              <p>{chapterTimeLeft}</p>
+            </div>
+          )}
+          {activeChapterIndex > 3 && (
+            <img src={CheckmarkSVG} alt="checkmark" css={checkmarkStyle} />
+          )}
+          <p>HELP NEIGHBORS</p>
+        </div>
       </div>
+      <BadgesDrawer journeyBarContainerStyle={journeyBarContainerStyle} />
     </div>
   );
 };
