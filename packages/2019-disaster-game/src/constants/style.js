@@ -12,6 +12,7 @@ export const palette = {
   darkSalmon: "#A10C16",
   purple: "#6E54A4",
   yellow: "#FAEB12",
+  green: "#0FA84C",
   // Old colors
   lightGreen: "#BBD155",
   darkGreen: "#64BB43",

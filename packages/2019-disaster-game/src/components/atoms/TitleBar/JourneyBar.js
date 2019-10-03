@@ -6,7 +6,11 @@ import { memo } from "react";
 
 import { palette } from "../../../constants/style";
 import { KIT, QUAKE, TASKS } from "../../../constants/chapters";
-import { getActiveChapterId } from "../../../state/chapters";
+import {
+  getActiveChapterId,
+  getActiveChapterIndex
+} from "../../../state/chapters";
+import CheckmarkSVG from "../../../../assets/title_bar_checkmark.svg";
 
 const containerStyle = css`
   height: 175px;
@@ -42,6 +46,12 @@ const activeSectionStyle = css`
   }
 `;
 
+const completedSectionStyle = css`
+  > p {
+    color: ${palette.green};
+  }
+`;
+
 const circleStyle = css`
   height: 100px;
   width: 100px;
@@ -50,34 +60,57 @@ const circleStyle = css`
   margin-right: 20px;
 `;
 
-const JourneyBar = ({ activeChapterId }) => {
+const checkmarkStyle = css`
+  height: 100px;
+  margin-right: 20px;
+`;
+
+const JourneyBar = ({ activeChapterId, activeChapterIndex }) => {
   return (
     <div css={containerStyle}>
       <div
         css={css`
           ${sectionStyle};
           ${activeChapterId === KIT && activeSectionStyle}
+          ${activeChapterIndex > 1 && completedSectionStyle}
         `}
       >
-        <div css={circleStyle} />
+        {activeChapterIndex > 1 ? (
+          <img src={CheckmarkSVG} alt="checkmark" css={checkmarkStyle} />
+        ) : (
+          <div css={circleStyle} />
+        )}
+
         <p>PREPARE A KIT</p>
       </div>
+
       <div
         css={css`
           ${sectionStyle};
           ${activeChapterId === QUAKE && activeSectionStyle}
+          ${activeChapterIndex > 2 && completedSectionStyle}
         `}
       >
-        <div css={circleStyle} />
+        {activeChapterIndex > 2 ? (
+          <img src={CheckmarkSVG} alt="checkmark" css={checkmarkStyle} />
+        ) : (
+          <div css={circleStyle} />
+        )}
         <p>GET READY</p>
       </div>
+
       <div
         css={css`
           ${sectionStyle};
           ${activeChapterId === TASKS && activeSectionStyle}
+          ${activeChapterIndex > 3 && completedSectionStyle}
         `}
       >
-        <div css={circleStyle} />
+        {activeChapterIndex > 3 ? (
+          <img src={CheckmarkSVG} alt="checkmark" css={checkmarkStyle} />
+        ) : (
+          <div css={circleStyle} />
+        )}
         <p>HELP NEIGHBORS</p>
       </div>
     </div>
@@ -85,11 +118,13 @@ const JourneyBar = ({ activeChapterId }) => {
 };
 
 JourneyBar.propTypes = {
-  activeChapterId: PropTypes.string
+  activeChapterId: PropTypes.string,
+  activeChapterIndex: PropTypes.number
 };
 
 const mapStateToProps = state => ({
-  activeChapterId: getActiveChapterId(state)
+  activeChapterId: getActiveChapterId(state),
+  activeChapterIndex: getActiveChapterIndex(state)
 });
 
 export default connect(mapStateToProps)(memo(JourneyBar));
