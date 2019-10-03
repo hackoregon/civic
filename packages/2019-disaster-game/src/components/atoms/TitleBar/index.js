@@ -17,6 +17,7 @@ import {
 import Ticker from "../Ticker";
 // import PointsView from "../PointsView";
 import JourneyBar from "./JourneyBar";
+import SavedBar from "./SavedBar";
 
 const ContainerStyle = css`
   position: absolute;
@@ -82,7 +83,7 @@ const TitleBar = ({ activeChapterId, activeTaskData }) => {
       <div css={infoContainer}>
         <img src={EHLogo} alt="Earthquake Heroes logo" css={logoStyle} />
         <JourneyBar />
-        <div />
+        <SavedBar />
       </div>
     </div>
   );
