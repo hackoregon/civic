@@ -5,13 +5,13 @@ import { connect } from "react-redux";
 import { memo, useState, useEffect, useCallback } from "react";
 
 import { palette } from "../../../constants/style";
-import { KIT, QUAKE, TASKS } from "../../../constants/chapters";
+import { KIT, TASKS } from "../../../constants/chapters";
 import {
   getActiveChapterId,
   getActiveChapterIndex,
   getActiveChapterData
 } from "../../../state/chapters";
-import { getActiveTaskData } from "../../../state/tasks";
+import { getActiveTaskData, getActiveTaskIndex } from "../../../state/tasks";
 import CheckmarkSVG from "../../../../assets/title_bar_checkmark.svg";
 
 const containerStyle = css`
@@ -90,9 +90,12 @@ const JourneyBar = ({
   activeChapterId,
   activeChapterIndex,
   activeChapterData,
-  activeTaskData
+  activeTaskData,
+  activeTaskIndex
 }) => {
   const [chapterTimeLeft, setChapterTimeLeft] = useState(0);
+  const [savingYourself, setSavingYourself] = useState(false);
+  const [savingOthers, setSavingOthers] = useState(false);
 
   const tick = useCallback(() => {
     if (chapterTimeLeft > 0) {
@@ -120,8 +123,14 @@ const JourneyBar = ({
     };
   }, [chapterTimeLeft, tick]);
 
+  useEffect(() => {
+    setSavingYourself(activeChapterId === TASKS && activeTaskIndex < 2);
+    setSavingOthers(activeChapterId === TASKS && activeTaskIndex >= 2);
+  }, [activeChapterId, activeTaskIndex]);
+
   return (
     <div css={containerStyle}>
+      {/* Build Kit */}
       <div
         css={css`
           ${sectionStyle};
@@ -129,6 +138,9 @@ const JourneyBar = ({
           ${activeChapterIndex > 1 && completedSectionStyle}
         `}
       >
+        {activeChapterId !== KIT && activeChapterIndex <= 1 && (
+          <div css={circleStyle} />
+        )}
         {activeChapterId === KIT && (
           <div css={coundownContainer}>
             <p>{chapterTimeLeft}</p>
@@ -137,50 +149,48 @@ const JourneyBar = ({
         {activeChapterIndex > 1 && (
           <img src={CheckmarkSVG} alt="checkmark" css={checkmarkStyle} />
         )}
-        {activeChapterId !== KIT && activeChapterIndex <= 1 && (
-          <div css={circleStyle} />
-        )}
         <p>PREPARE A KIT</p>
       </div>
 
+      {/* Save Yourself */}
       <div
         css={css`
           ${sectionStyle};
-          ${activeChapterId === QUAKE && activeSectionStyle}
-          ${activeChapterIndex > 2 && completedSectionStyle}
+          ${savingYourself && activeSectionStyle};
+          ${(activeChapterIndex > 3 || !savingYourself) &&
+            completedSectionStyle};
         `}
       >
-        {activeChapterId === QUAKE && (
+        {activeChapterId !== TASKS && activeChapterIndex < 4 && (
+          <div css={circleStyle} />
+        )}
+        {savingYourself && (
           <div css={coundownContainer}>
             <p>{chapterTimeLeft}</p>
           </div>
         )}
-        {activeChapterIndex > 2 && (
+        {(savingOthers || activeChapterIndex > 3) && (
           <img src={CheckmarkSVG} alt="checkmark" css={checkmarkStyle} />
-        )}
-        {activeChapterId !== QUAKE && activeChapterIndex <= 2 && (
-          <div css={circleStyle} />
         )}
         <p>GET READY</p>
       </div>
 
+      {/* Save Others */}
       <div
         css={css`
           ${sectionStyle};
-          ${activeChapterId === TASKS && activeSectionStyle}
+          ${savingOthers && activeSectionStyle}
           ${activeChapterIndex > 3 && completedSectionStyle}
         `}
       >
-        {activeChapterId === TASKS && (
+        {!savingOthers && activeChapterIndex < 4 && <div css={circleStyle} />}
+        {savingOthers && (
           <div css={coundownContainer}>
             <p>{chapterTimeLeft}</p>
           </div>
         )}
         {activeChapterIndex > 3 && (
           <img src={CheckmarkSVG} alt="checkmark" css={checkmarkStyle} />
-        )}
-        {activeChapterId !== TASKS && activeChapterIndex <= 3 && (
-          <div css={circleStyle} />
         )}
         <p>HELP NEIGHBORS</p>
       </div>
@@ -192,14 +202,16 @@ JourneyBar.propTypes = {
   activeChapterId: PropTypes.string,
   activeChapterIndex: PropTypes.number,
   activeChapterData: PropTypes.shape({}),
-  activeTaskData: PropTypes.shape({})
+  activeTaskData: PropTypes.shape({}),
+  activeTaskIndex: PropTypes.number
 };
 
 const mapStateToProps = state => ({
   activeChapterId: getActiveChapterId(state),
   activeChapterIndex: getActiveChapterIndex(state),
   activeChapterData: getActiveChapterData(state),
-  activeTaskData: getActiveTaskData(state)
+  activeTaskData: getActiveTaskData(state),
+  activeTaskIndex: getActiveTaskIndex(state)
 });
 
 export default connect(mapStateToProps)(memo(JourneyBar));
