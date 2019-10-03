@@ -2,7 +2,7 @@
 import { css, jsx } from "@emotion/core";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { memo, useState, useEffect } from "react";
+import { memo, useState, useEffect, useCallback } from "react";
 
 import { palette } from "../../../constants/style";
 import { KIT, QUAKE, TASKS } from "../../../constants/chapters";
@@ -36,7 +36,7 @@ const sectionStyle = css`
     font-size: 5.5rem;
     line-height: 100px;
     color: ${palette.yellow};
-    // For some reason, p won't align center and using just one of these methods doesn't work
+    // For some reason, <p/> won't align center and using just one of these methods doesn't work
     margin: 0 0 -10px;
     padding-top: 10px;
   }
@@ -92,19 +92,33 @@ const JourneyBar = ({
   activeChapterData,
   activeTaskData
 }) => {
-  const [chapterDuration, setChapterDuration] = useState(0);
+  const [chapterTimeLeft, setChapterTimeLeft] = useState(0);
+
+  const tick = useCallback(() => {
+    if (chapterTimeLeft > 0) {
+      setChapterTimeLeft(chapterTimeLeft - 1);
+    }
+  }, [chapterTimeLeft]);
 
   useEffect(() => {
     if (activeChapterId === TASKS) {
       if (activeTaskData) {
-        setChapterDuration(activeTaskData.time);
+        setChapterTimeLeft(activeTaskData.time);
       } else {
-        setChapterDuration(activeChapterData.voteDuration);
+        setChapterTimeLeft(activeChapterData.voteDuration);
       }
     } else {
-      setChapterDuration(activeChapterData.duration);
+      setChapterTimeLeft(activeChapterData.duration);
     }
   }, [activeChapterData, activeChapterId, activeTaskData]);
+
+  useEffect(() => {
+    const countdownInterval = setInterval(tick, 1000);
+
+    return () => {
+      clearInterval(countdownInterval);
+    };
+  }, [chapterTimeLeft, tick]);
 
   return (
     <div css={containerStyle}>
@@ -117,7 +131,7 @@ const JourneyBar = ({
       >
         {activeChapterId === KIT && (
           <div css={coundownContainer}>
-            <p>{chapterDuration}</p>
+            <p>{chapterTimeLeft}</p>
           </div>
         )}
         {activeChapterIndex > 1 && (
@@ -138,7 +152,7 @@ const JourneyBar = ({
       >
         {activeChapterId === QUAKE && (
           <div css={coundownContainer}>
-            <p>{chapterDuration}</p>
+            <p>{chapterTimeLeft}</p>
           </div>
         )}
         {activeChapterIndex > 2 && (
@@ -159,7 +173,7 @@ const JourneyBar = ({
       >
         {activeChapterId === TASKS && (
           <div css={coundownContainer}>
-            <p>{chapterDuration}</p>
+            <p>{chapterTimeLeft}</p>
           </div>
         )}
         {activeChapterIndex > 3 && (
