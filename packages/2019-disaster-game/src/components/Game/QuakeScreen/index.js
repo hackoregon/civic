@@ -4,7 +4,10 @@ import { memo, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
 
-import { goToNextChapter } from "../../../state/chapters";
+import {
+  goToNextChapter,
+  getActiveChapterDuration
+} from "../../../state/chapters";
 import Timer from "../../../utils/timer";
 
 import Song from "../../atoms/Audio/Song";
@@ -18,7 +21,7 @@ const videoStyles = css`
   height: auto;
 `;
 
-const QuakeScreen = ({ endChapter, chapterDuration = 13 }) => {
+const QuakeScreen = ({ endChapter, chapterDuration }) => {
   const [chapterTimer] = useState(new Timer());
 
   // start a timer for the _entire_ chapter
@@ -48,6 +51,10 @@ QuakeScreen.propTypes = {
   chapterDuration: PropTypes.number
 };
 
+const mapStateToProps = state => ({
+  chapterDuration: getActiveChapterDuration(state)
+});
+
 const mapDispatchToProps = dispatch => ({
   endChapter() {
     dispatch(goToNextChapter());
@@ -55,6 +62,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(memo(QuakeScreen));

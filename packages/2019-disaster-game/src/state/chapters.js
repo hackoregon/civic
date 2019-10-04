@@ -53,14 +53,19 @@ export const getActiveChapterIndex = createSelector(
   activeChapterIndex => activeChapterIndex
 );
 
+export const getActiveChapterData = createSelector(
+  ["chapters.activeChapterIndex"],
+  activeChapterIndex => CHAPTERS[activeChapterIndex]
+);
+
 export const getActiveChapterId = createSelector(
   ["chapters.activeChapterIndex"],
   activeChapterIndex => CHAPTERS[activeChapterIndex].id
 );
 
-export const getActiveChapterData = createSelector(
+export const getActiveChapterDuration = createSelector(
   ["chapters.activeChapterIndex"],
-  activeChapterIndex => CHAPTERS[activeChapterIndex]
+  activeChapterIndex => CHAPTERS[activeChapterIndex].duration
 );
 
 export const getChapterById = createSelector(

@@ -197,11 +197,14 @@ const TaskScreen = ({
     ? checkSolutionIsCorrect
     : checkVoteIsCorrect;
   const activeScreen = taskPhase;
-  let tickerTapeText = "";
-  if (isSolving) {
-    tickerTapeText = "How can we help this person?";
+  // Save yourself message
+  let interfaceMessage = "Prepare yourself to help others!";
+  if (isSolving && activeTaskIndex > 1) {
+    // Save others message
+    interfaceMessage = "How can I help?";
   } else if (isVoting) {
-    tickerTapeText = "Who should we help next?";
+    // Choose next task message
+    interfaceMessage = "Who should we help next?";
   }
 
   return (
@@ -225,7 +228,7 @@ const TaskScreen = ({
         onOrbSelection={onOrbSelection}
         checkItemIsCorrect={checkItemIsCorrect}
         activeScreen={activeScreen}
-        tickerTapeText={tickerTapeText}
+        interfaceMessage={interfaceMessage}
       />
       <Song songFile={taskSong} />
       {taskPhase === VOTING && (
