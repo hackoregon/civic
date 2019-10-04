@@ -1,6 +1,5 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
-import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { palette } from "../../../constants/style";
 import Badge from "../Badge";
@@ -38,19 +37,7 @@ const badgesContainer = css`
   align-content: center;
 `;
 
-const BadgesDrawer = ({ journeyBarContainerStyle }) => {
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    const drawerOpenTimeout = setTimeout(() => {
-      setOpen(!open);
-    }, 5 * 1000);
-
-    return () => {
-      clearTimeout(drawerOpenTimeout);
-    };
-  }, [open]);
-
+const BadgesDrawer = ({ journeyBarContainerStyle, open }) => {
   return (
     <div
       css={css`
@@ -74,7 +61,8 @@ const BadgesDrawer = ({ journeyBarContainerStyle }) => {
 };
 
 BadgesDrawer.propTypes = {
-  journeyBarContainerStyle: PropTypes.shape({})
+  journeyBarContainerStyle: PropTypes.shape({}),
+  open: PropTypes.bool
 };
 
 export default BadgesDrawer;

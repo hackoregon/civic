@@ -18,6 +18,14 @@ import BadgesDrawer from "./BadgesDrawer";
 const containerStyle = css`
   display: grid;
   grid-template-columns: repeat(2, auto);
+  max-width: 2200px;
+  justify-self: end;
+  margin-right: 50px;
+`;
+
+const openContainerStyle = css`
+  max-width: unset;
+  margin-right: 60px;
 `;
 
 const journeyBarContainerStyle = css`
@@ -98,7 +106,8 @@ const JourneyBar = ({
   activeChapterIndex,
   activeChapterData,
   activeTaskData,
-  activeTaskIndex
+  activeTaskIndex,
+  badgeDrawerOpen
 }) => {
   const [chapterTimeLeft, setChapterTimeLeft] = useState(0);
   const [savingYourself, setSavingYourself] = useState(false);
@@ -136,7 +145,12 @@ const JourneyBar = ({
   }, [activeChapterId, activeTaskIndex]);
 
   return (
-    <div css={containerStyle}>
+    <div
+      css={css`
+        ${containerStyle};
+        ${badgeDrawerOpen && openContainerStyle}
+      `}
+    >
       <div css={journeyBarContainerStyle}>
         {/* Build Kit */}
         <div
@@ -203,7 +217,10 @@ const JourneyBar = ({
           <p>HELP NEIGHBORS</p>
         </div>
       </div>
-      <BadgesDrawer journeyBarContainerStyle={journeyBarContainerStyle} />
+      <BadgesDrawer
+        journeyBarContainerStyle={journeyBarContainerStyle}
+        open={badgeDrawerOpen}
+      />
     </div>
   );
 };
@@ -213,7 +230,8 @@ JourneyBar.propTypes = {
   activeChapterIndex: PropTypes.number,
   activeChapterData: PropTypes.shape({}),
   activeTaskData: PropTypes.shape({}),
-  activeTaskIndex: PropTypes.number
+  activeTaskIndex: PropTypes.number,
+  badgeDrawerOpen: PropTypes.bool
 };
 
 const mapStateToProps = state => ({

@@ -1,4 +1,4 @@
-import { memo, useState, useEffect } from "react";
+import { memo, useState, useEffect, Fragment } from "react";
 import { connect } from "react-redux";
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
@@ -15,7 +15,6 @@ import {
   GeneralTickerTape
 } from "../../../constants/tickerTape";
 import Ticker from "../Ticker";
-// import PointsView from "../PointsView";
 import JourneyBar from "./JourneyBar";
 import SavedBar from "./SavedBar";
 
@@ -41,10 +40,14 @@ const infoContainer = css`
   width: calc(100% - 80px);
   padding: 0 40px;
   display: grid;
-  grid-template-columns: repeat(3, auto);
-  justify-content: space-between;
+  grid-template-columns: 355px 2360px 1025px;
   align-items: center;
   margin-top: 10px;
+`;
+
+const fullInfoContainer = css`
+  grid-template-rows: repeat(2, auto);
+  grid-template-columns: 355px 3380px;
 `;
 
 const logoStyle = css`
@@ -53,6 +56,7 @@ const logoStyle = css`
 
 const TitleBar = ({ activeChapterId, activeTaskData }) => {
   const [open, setOpen] = useState(false);
+  const [badgeDrawerOpen, setBadgeDrawerOpen] = useState(false);
   const [screenMessages, setScreenMessages] = useState([]);
 
   useEffect(() => {
@@ -72,6 +76,16 @@ const TitleBar = ({ activeChapterId, activeTaskData }) => {
     }
   }, [activeChapterId, activeTaskData]);
 
+  useEffect(() => {
+    const badgeDrawerOpenTimeout = setTimeout(() => {
+      setBadgeDrawerOpen(!badgeDrawerOpen);
+    }, 5 * 1000);
+
+    return () => {
+      clearTimeout(badgeDrawerOpenTimeout);
+    };
+  }, [badgeDrawerOpen]);
+
   return (
     <div
       css={css`
@@ -80,10 +94,20 @@ const TitleBar = ({ activeChapterId, activeTaskData }) => {
       `}
     >
       <Ticker messages={shuffle(screenMessages)} />
-      <div css={infoContainer}>
+      <div
+        css={css`
+          ${infoContainer};
+          ${badgeDrawerOpen && fullInfoContainer}
+        `}
+      >
         <img src={EHLogo} alt="Earthquake Heroes logo" css={logoStyle} />
-        <JourneyBar />
-        {activeChapterId === TASKS && <SavedBar />}
+        <JourneyBar badgeDrawerOpen={badgeDrawerOpen} />
+        {activeChapterId === TASKS && (
+          <Fragment>
+            {badgeDrawerOpen && <div />}
+            <SavedBar justifyRight={badgeDrawerOpen} />
+          </Fragment>
+        )}
       </div>
     </div>
   );

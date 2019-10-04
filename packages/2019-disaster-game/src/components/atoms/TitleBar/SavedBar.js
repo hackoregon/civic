@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 // import { connect } from "react-redux";
 // import { memo, useState, useEffect, useCallback } from "react";
 
@@ -16,23 +16,14 @@ const containerStyle = css`
   border-radius: 80px;
   align-content: center;
   justify-content: space-between;
+  justify-self: end;
+  z-index: 10;
 `;
 
-// const sectionStyle = css`
-//   display: grid;
-//   grid-template-columns: repeat(2, auto);
-//   align-items: center;
-
-//   > p {
-//     font-family: "Luckiest Guy", sans-serif;
-//     font-size: 5.5rem;
-//     line-height: 100px;
-//     color: ${palette.yellow};
-//     // For some reason, <p/> won't align center and using just one of these methods doesn't work
-//     margin: 0 0 -10px;
-//     padding-top: 10px;
-//   }
-// `;
+const justifyRightStyle = css`
+  margin-top: 10px;
+  margin-right: 60px;
+`;
 
 const headerStyle = css`
   font-family: "Luckiest Guy", sans-serif;
@@ -58,9 +49,14 @@ const savedNumber = css`
   color: ${palette.red};
 `;
 
-const SavedBar = () => {
+const SavedBar = ({ justifyRight }) => {
   return (
-    <div css={containerStyle}>
+    <div
+      css={css`
+        ${containerStyle}
+        ${justifyRight && justifyRightStyle}
+      `}
+    >
       <p css={headerStyle}>
         You
         <br />
@@ -76,9 +72,11 @@ const SavedBar = () => {
   );
 };
 
-export default SavedBar;
+SavedBar.propTypes = {
+  justifyRight: PropTypes.bool
+};
 
-// SavedBar.propTypes = {};
+export default SavedBar;
 
 // const mapStateToProps = state => ({});
 
