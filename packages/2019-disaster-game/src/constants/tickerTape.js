@@ -10,8 +10,8 @@ export const SelectionTickerTape = [
   "The Portland airport will be heavily affected by an earthquake, which will delay emergency response.",
   "Many freeway overpasses and ramps will collapse in an earthquake.",
   "The Cascadia earthquake may create up to 17 million tons of debris in the greater Portland area.",
-  "The Cascadia earthquake may cause up to $37 billion in building damage in the greater Portland area.",
-  "After a Cascadia earthquake, Portland may be without electricity for 1-3 months, without running water for 1-12 months, and it could take 6-12 months to repair highways."
+  "The Cascadia earthquake may cause up to $37 billion in building damage in the greater Portland area."
+  // "After a Cascadia earthquake, Portland may be without electricity for 1-3 months, without running water for 1-12 months, and it could take 6-12 months to repair highways."
 ];
 
 export const GeneralTickerTape = [
