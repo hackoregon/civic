@@ -4,7 +4,8 @@ import { Link } from "react-router";
 import { jsx, css } from "@emotion/core";
 
 const storyLinkClass = css`
-  & a {
+  & a,
+  button {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
@@ -12,6 +13,12 @@ const storyLinkClass = css`
     padding: 8px 12px;
     border-bottom: none;
     color: #000;
+    border: none;
+    background-color: #eee;
+
+    &:focus {
+      outline: 0;
+    }
 
     &:hover {
       background-color: rgba(0, 0, 0, 0.1);
@@ -21,6 +28,12 @@ const storyLinkClass = css`
     & i {
       margin-right: 12px;
       opacity: 0.8;
+    }
+
+    & span {
+      font-size: 1rem;
+      font-family: Merriweather;
+      color: #000;
     }
   }
 
@@ -50,10 +63,10 @@ const StoryLink = ({ children, icon, route, action, link, embed }) => (
         <span>{children}</span>
       </a>
     ) : (
-      <a tabIndex="0" onClick={action} role="button">
+      <button tabIndex="0" onClick={action} type="button">
         <i aria-hidden="true" className={icon} />
         <span>{children}</span>
-      </a>
+      </button>
     )}
   </div>
 );
