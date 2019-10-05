@@ -37,6 +37,10 @@ const storyLinkClass = css`
     }
   }
 
+  & button {
+    padding: 10px 12px 8px 12px;
+  }
+
   & span {
     flex-wrap: nowrap;
   }
