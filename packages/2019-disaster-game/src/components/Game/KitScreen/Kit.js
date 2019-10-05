@@ -23,7 +23,8 @@ const onScreenStyle = css`
 const kitStyle = css`
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 0 50px 0 100px;
 `;
 
 function createKit(currentKit) {

@@ -4,11 +4,12 @@ import { connect } from "react-redux";
 import { css, jsx } from "@emotion/core";
 import { PropTypes } from "prop-types";
 import { getPlayerKit } from "../../../state/kit";
+import Gauge from "./Gauge";
 
 const ImagesContainer = css`
   position: relative;
-  width: 300px;
-  height: 300px;
+  width: 350px;
+  height: 350px;
 `;
 
 const KitItemStyle = css`
@@ -18,12 +19,31 @@ const KitItemStyle = css`
   position: absolute;
 `;
 
+const absoluteStyle = css`
+  display: block;
+  width: 250px;
+  height: 250px;
+  position: absolute;
+  transition: transform 1s;
+  right: 75px;
+  top: 15px;
+`;
+
+const scaleUpStyle = css`
+  left: 25px;
+  top: 25px;
+  right: 0;
+  transform: scale(1.4);
+`;
+
 const KitItem = ({ emptySvg, fullSvg, playerKit, itemType }) => {
   const [filledItem, setFilledItem] = useState(false);
+  const [animateGauge, setAnimateGauge] = useState(false);
 
   useEffect(() => {
     if (playerKit[itemType] && !filledItem) {
       setFilledItem(true);
+      setAnimateGauge(true);
     }
   }, [playerKit, itemType, filledItem]);
 
@@ -53,6 +73,20 @@ const KitItem = ({ emptySvg, fullSvg, playerKit, itemType }) => {
   /* eslint-disable jsx-a11y/no-static-element-interactions */
   return (
     <div css={ImagesContainer}>
+      <div
+        css={css`
+          ${absoluteStyle}
+          ${animateGauge && scaleUpStyle}
+        `}
+      >
+        <Gauge
+          valueStart={0}
+          valueEnd={100}
+          duration={2}
+          repeat={false}
+          makeAnimate={animateGauge}
+        />
+      </div>
       <div
         css={css`
           ${KitItemStyle};

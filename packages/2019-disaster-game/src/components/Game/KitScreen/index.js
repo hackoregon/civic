@@ -75,7 +75,7 @@ const KitScreen = ({
 
   const onKitItemSelection = kitItem => {
     if (kitItem.good) {
-      addItemToPlayerKitInState(kitItem.type);
+      addItemToPlayerKitInState(kitItem);
       addPointsToState(kitItem.points);
     }
     return kitItem.good;

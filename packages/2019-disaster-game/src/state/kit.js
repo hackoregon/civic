@@ -23,8 +23,8 @@ export const addItem = (itemId, quantity = 1) => dispatch => {
   dispatch({ type: actionTypes.ADD_ITEM, itemId, quantity });
 };
 
-export const addItemToPlayerKit = itemId => dispatch => {
-  dispatch({ type: actionTypes.ADD_ITEM_TO_PLAYER_KIT, itemId });
+export const addItemToPlayerKit = kitItem => dispatch => {
+  dispatch({ type: actionTypes.ADD_ITEM_TO_PLAYER_KIT, kitItem });
 };
 
 export const resetState = () => dispatch => {
@@ -35,7 +35,7 @@ export const resetState = () => dispatch => {
 /* eslint-disable no-param-reassign */
 export const kit = createReducer(initialState, {
   [actionTypes.ADD_ITEM_TO_PLAYER_KIT]: (state, action) => {
-    state.playerKit[action.itemId] = true;
+    state.playerKit[action.kitItem.type] = action.kitItem;
   },
   [actionTypes.RESET_STATE]: () => {
     return initialState;
