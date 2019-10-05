@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { css, jsx } from "@emotion/core";
 import { PropTypes } from "prop-types";
 import { getPlayerKit } from "../../../state/kit";
+import { food, water, firstAidKit } from "../../../constants/items";
 import Gauge from "./Gauge";
 
 const ImagesContainer = css`
@@ -36,16 +37,25 @@ const scaleUpStyle = css`
   transform: scale(1.4);
 `;
 
+const matchLockItems = [food, water, firstAidKit];
+
 const KitItem = ({ emptySvg, fullSvg, playerKit, itemType }) => {
+  const isMatchLockItem = matchLockItems.indexOf(itemType) > -1;
   const [filledItem, setFilledItem] = useState(false);
   const [animateGauge, setAnimateGauge] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [halfFill, setHalfFill] = useState(isMatchLockItem);
 
   useEffect(() => {
     if (playerKit[itemType] && !filledItem) {
-      setFilledItem(true);
-      setAnimateGauge(true);
+      if (isMatchLockItem) {
+        setAnimateGauge(true);
+      } else {
+        setFilledItem(true);
+        setAnimateGauge(true);
+      }
     }
-  }, [playerKit, itemType, filledItem]);
+  }, [playerKit, itemType, filledItem, isMatchLockItem]);
 
   const EmptyKitItem = css`
     background-image: url(${emptySvg});
@@ -80,11 +90,10 @@ const KitItem = ({ emptySvg, fullSvg, playerKit, itemType }) => {
         `}
       >
         <Gauge
-          valueStart={0}
-          valueEnd={100}
           duration={2}
           repeat={false}
           makeAnimate={animateGauge}
+          halfFill={halfFill}
         />
       </div>
       <div

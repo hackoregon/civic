@@ -6,17 +6,29 @@ import AnimatedProgressProvider from "./AnimatedProgressProvider";
 
 /* eslint-disable */
 const easeQuadInOut = t => ((t *= 2) <= 1 ? t * t : --t * (2 - t) + 1) / 2;
+
+const overshoot = 2.5;
+const backOut = (function custom(s) {
+  s = +s;
+
+  function backOut(t) {
+    return --t * t * ((s + 1) * t + s) + 1;
+  }
+
+  backOut.overshoot = custom;
+
+  return backOut;
+})(overshoot);
 /* eslint-enable */
 
-const Gauge = ({ valueStart, valueEnd, duration, repeat, makeAnimate }) => {
+const Gauge = ({ duration, repeat, makeAnimate, halfFill }) => {
   return (
     <AnimatedProgressProvider
-      valueStart={valueStart}
-      valueEnd={valueEnd}
       duration={duration}
-      easingFunction={easeQuadInOut}
+      easingFunction={halfFill ? backOut : easeQuadInOut}
       repeat={repeat}
       makeAnimate={makeAnimate}
+      halfFill={halfFill}
     >
       {value => {
         return (
@@ -41,11 +53,10 @@ const Gauge = ({ valueStart, valueEnd, duration, repeat, makeAnimate }) => {
 };
 
 Gauge.propTypes = {
-  valueStart: PropTypes.number,
-  valueEnd: PropTypes.number,
   duration: PropTypes.number,
   repeat: PropTypes.bool,
-  makeAnimate: PropTypes.bool
+  makeAnimate: PropTypes.bool,
+  halfFill: PropTypes.bool
 };
 
 export default Gauge;

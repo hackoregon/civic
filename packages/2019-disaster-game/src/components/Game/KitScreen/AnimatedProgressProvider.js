@@ -5,13 +5,14 @@ import { Animate } from "react-move";
 const AnimatedProgressProvider = ({
   repeat,
   duration,
-  valueStart = 0,
-  valueEnd,
   easingFunction,
   makeAnimate,
+  halfFill,
   children
 }) => {
   const [isAnimated, setIsAnimated] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [modifiedValueEnd, setModifiedValueEnd] = useState(halfFill ? 50 : 100);
 
   useEffect(() => {
     let interval = null;
@@ -31,10 +32,10 @@ const AnimatedProgressProvider = ({
   return (
     <Animate
       start={() => ({
-        value: valueStart
+        value: 0
       })}
       update={() => ({
-        value: [isAnimated ? valueEnd : valueStart],
+        value: [isAnimated ? modifiedValueEnd : 0],
         timing: {
           duration: duration * 1000,
           ease: easingFunction
@@ -49,10 +50,9 @@ const AnimatedProgressProvider = ({
 AnimatedProgressProvider.propTypes = {
   repeat: PropTypes.bool,
   duration: PropTypes.number,
-  valueStart: PropTypes.number,
-  valueEnd: PropTypes.number,
   easingFunction: PropTypes.func,
   makeAnimate: PropTypes.bool,
+  halfFill: PropTypes.bool,
   children: PropTypes.node
 };
 
