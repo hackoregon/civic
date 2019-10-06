@@ -36,22 +36,22 @@ const StoryLink = ({ children, icon, route, action, link, embed }) => (
   <div css={storyLinkClass}>
     {route ? (
       <Link to={route}>
-        <i className={icon} />
+        <i aria-hidden="true" className={icon} />
         <span>{children}</span>
       </Link>
     ) : embed ? (
       <a href={link} target="_blank" rel="noopener noreferrer">
-        <i className={icon} />
+        <i aria-hidden="true" className={icon} />
         <span>{children}</span>
       </a>
     ) : link ? (
       <a href={link}>
-        <i className={icon} />
+        <i aria-hidden="true" className={icon} />
         <span>{children}</span>
       </a>
     ) : (
       <a tabIndex="0" onClick={action} role="button">
-        <i className={icon} />
+        <i aria-hidden="true" className={icon} />
         <span>{children}</span>
       </a>
     )}
