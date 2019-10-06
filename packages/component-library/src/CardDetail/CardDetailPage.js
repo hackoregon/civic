@@ -17,11 +17,11 @@ const CardDetailPage = ({ params, CardRegistry }) => {
 
   return (
     <PageLayout>
-      <h1>Card not found</h1>
-      <p>
-        The card you are looking for doesn&apos;t exist.
-        <Link to="/cities/portland">View the Portland Collection</Link>
-      </p>
+      <section>
+        <h1>Card not found</h1>
+        <p>The card you are looking for doesn&apos;t exist.</p>
+        <Link to="/cards">Other cards</Link>
+      </section>
     </PageLayout>
   );
 };
