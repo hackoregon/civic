@@ -20,13 +20,13 @@ const EarthquakeDamageEstimatesForBuildingsInTillamookCountyVisualization = ({
 
   const mapStyles = {
     Commercial: {
-      field: "com_loss_r",
+      field: "ComLossRatio",
       opacity: 0.5,
       map: "light",
       buildingType: "commercial"
     },
     Residential: {
-      field: "res_loss_r",
+      field: "ResLossRatio",
       opacity: 0.5,
       map: "light",
       buildingType: "residential"
