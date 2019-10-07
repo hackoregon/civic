@@ -107,3 +107,4 @@ export { default as ungroupBy } from "./utils/ungroupBy";
 export { default as DemoJSONLoader } from "./DemoJSONLoader/DemoJSONLoader";
 export { default as Badge } from "./Badge/Badge";
 export { default as ErrorBoundary } from "./ErrorBoundary/ErrorBoundary";
+export { default as NotebookPreview } from "./NotebookPreview/NotebookPreview";

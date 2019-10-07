@@ -15,12 +15,14 @@ const ScreenGridMap = props => {
     visible,
     gpuAggregation,
     getSize,
-    getWeight
+    getWeight,
+    getCursor,
+    onHover
   } = props;
 
   return (
     <div>
-      <DeckGL className="DeckGL" {...viewport}>
+      <DeckGL className="DeckGL" {...viewport} getCursor={getCursor}>
         <ScreenGridLayer
           id="screengrid-layer"
           className="ScreenGridMap"
@@ -37,6 +39,7 @@ const ScreenGridMap = props => {
           gpuAggregation={gpuAggregation}
           getSize={getSize}
           getWeight={getWeight}
+          onHover={onHover}
         />
       </DeckGL>
     </div>
@@ -55,7 +58,9 @@ ScreenGridMap.propTypes = {
   visible: PropTypes.bool,
   gpuAggregation: PropTypes.bool,
   getSize: PropTypes.func,
-  getWeight: PropTypes.func
+  getWeight: PropTypes.func,
+  getCursor: PropTypes.func,
+  onHover: PropTypes.func
 };
 
 ScreenGridMap.defaultProps = {
@@ -67,7 +72,8 @@ ScreenGridMap.defaultProps = {
   visible: true,
   gpuAggregation: false,
   getSize: () => 1,
-  getWeight: null
+  getWeight: null,
+  getCursor: () => "crosshair"
 };
 
 export default ScreenGridMap;

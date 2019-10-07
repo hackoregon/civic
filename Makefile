@@ -55,6 +55,10 @@ travis:
 		cd packages/component-library && yarn test && cd -; \
 	fi
 
+	@if [ "$$SUITE" = "2019_DISASTER_GAME" ]; then \
+		cd packages/2019-disaster-game && yarn test && cd -; \
+	fi
+
 deploy:
 	@if [ -z "$$TRAVIS_PULL_REQUEST" ] || [ "$$TRAVIS_PULL_REQUEST" = "false" ]; then \
 		if [ "$$TRAVIS_BRANCH" = "master" ]; then \
@@ -66,6 +70,9 @@ deploy:
 			fi; \
 			if [ "$$SUITE" = "COMPONENT_LIBRARY" ]; then \
 				make deploy-component-library; \
+			fi; \
+			if [ "$$SUITE" = "2019_DISASTER_GAME" ]; then \
+				make deploy-2019-disaster-game; \
 			fi \
 		else \
 			echo "No deploys on branches other than 'master'"; \
@@ -105,6 +112,18 @@ deploy-2018: setup-aws access-ecr
 	@echo "Deploying latest for $$ECS_SERVICE_2018"
 	docker push $$REMOTE_IMAGE_URL/civic-2018:latest
 	./bin/ecs-deploy.sh --cluster $$ECS_CLUSTER --service-name $$ECS_SERVICE_2018 --image $$REMOTE_IMAGE_URL/civic-2018:latest --timeout 10
+
+deploy-2019-disaster-game: setup-aws access-ecr
+	@echo "Deploying the 2019-disaster-game Container"
+	cd packages/2019-disaster-game && yarn run build
+	cd packages/2019-disaster-game && docker build -t civic-2019-disaster-game .
+	@echo "Pushing civic-2019-disaster-game:latest"
+	cd packages/2019-disaster-game && docker tag civic-2019-disaster-game:latest "$$REMOTE_IMAGE_URL/civic-2019-disaster-game:latest"
+	cd packages/2019-disaster-game && docker push "$$REMOTE_IMAGE_URL/civic-2019-disaster-game:latest"
+	@echo "Pushed civic-2019-disaster-game:latest"
+	@echo "Deploying latest for $$ECS_SERVICE_2019_DISASTER_GAME"
+	docker push $$REMOTE_IMAGE_URL/civic-2019-disaster-game:latest
+	./bin/ecs-deploy.sh --cluster $$ECS_CLUSTER --service-name $$ECS_SERVICE_2019_DISASTER_GAME --image $$REMOTE_IMAGE_URL/civic-2019-disaster-game:latest --timeout 10
 
 deploy-component-library:
 	@echo "Deploying the component library storybook"
