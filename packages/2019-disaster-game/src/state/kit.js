@@ -3,15 +3,20 @@ import size from "lodash/size";
 import itemTypes, { food, water, firstAidKit } from "../constants/items";
 
 // INITIAL STATE
-// items will be a list of objects, where each object is an id and a quantity
-// the id is related to the items reducer
+
 const initialState = {
   items: itemTypes,
   playerKit: {},
-  matchLockItemsInKit: {
-    [food]: 0,
-    [water]: 0,
-    [firstAidKit]: 0
+  // TODO: Remove when done testing
+  // playerKit: {
+  //   FOOD: true,
+  //   WATER: true,
+  //   FIRST_AID_KIT: true
+  // },
+  matchLockackbleKitItems: {
+    [food]: true,
+    [water]: true,
+    [firstAidKit]: true
   }
 };
 
@@ -68,8 +73,8 @@ export const getPlayerKit = createSelector(
 );
 
 export const getMatchLockableTypes = createSelector(
-  ["kit.matchLockItemsInKit"],
-  matchLockItemsInKit => Object.keys(matchLockItemsInKit)
+  ["kit.matchLockackbleKitItems"],
+  matchLockackbleItems => Object.keys(matchLockackbleItems)
 );
 
 export const getKitCreationItems = createSelector(
@@ -92,7 +97,8 @@ export const getKitCreationItems = createSelector(
 
       return result;
     }, []);
-    // TODO: Remove when done with testing
+
+    // // TODO: Remove when done with testing
     // const kitCreationItems = [{
     //   type: items[water].id,
     //   imageSVG: items[water].fullSvg,

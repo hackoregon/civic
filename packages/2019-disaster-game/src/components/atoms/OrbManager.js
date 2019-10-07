@@ -56,15 +56,22 @@ const OrbManager = ({
 } = {}) => {
   const [hasInitialized, setHasInitialized] = useState(false);
   const [orbModels, setOrbModelsState] = useState([]);
-  const [touchedOrbsByType, setTouchedOrbsByType] = useState(
-    possibleItems.reduce((orbsByType, possibleItem) => {
+  const defaultTouchedOrbsByType = {
+    multiTouchType: null,
+    multiTouchDurationLeft: null
+  };
+  const touchedOrbReducer = useCallback(
+    (orbsByType, possibleItem) => {
       return {
-        multiTouchType: null,
-        multiTouchDurationLeft: null,
+        ...defaultTouchedOrbsByType,
         ...orbsByType,
         [possibleItem.type]: new Set()
       };
-    }, {})
+    },
+    [defaultTouchedOrbsByType]
+  );
+  const [touchedOrbsByType, setTouchedOrbsByType] = useState(
+    possibleItems.reduce(touchedOrbReducer, {})
   );
   const [completedOrbs, setCompletedOrbs] = useState([]);
   const [orbsZIndex, setOrbsZIndex] = useState([]);
@@ -76,6 +83,7 @@ const OrbManager = ({
   const bounds = useBounds(boundsRef);
   const prevBounds = usePrevious(bounds);
   const prevTaskPhase = usePrevious(taskPhase);
+  const prevPossibleItems = usePrevious(possibleItems);
 
   /* Generate new orbModels when the interface bounds change, usually only on load. Most often, generate new orbModels when switching between voting and solving. This catalyzes orb data and placement */
   useLayoutEffect(() => {
@@ -89,14 +97,23 @@ const OrbManager = ({
       setHasInitialized(true);
       setCompletedOrbs([]);
       setOrbModelsState(newOrbs);
+
+      if (possibleItems.length) {
+        setTouchedOrbsByType(possibleItems.reduce(touchedOrbReducer, {}));
+      } else {
+        setTouchedOrbsByType({ ...defaultTouchedOrbsByType });
+      }
     }
   }, [
     bounds,
+    defaultTouchedOrbsByType,
     hasInitialized,
     possibleItems,
     prevBounds,
+    prevPossibleItems,
     prevTaskPhase,
-    taskPhase
+    taskPhase,
+    touchedOrbReducer
   ]);
 
   const addOrbScore = useCallback(

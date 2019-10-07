@@ -16,7 +16,8 @@ const initialState = {
   taskOrder: shuffle(defaultSaveYourself),
   activeTaskIndex: 0,
   taskPhase: SOLVING,
-  saveYourself: true
+  saveYourself: true,
+  matchLockableTypes: []
 };
 
 // CONSTANTS
@@ -42,9 +43,6 @@ export const addTask = taskChoice => dispatch => {
 export const resetState = () => dispatch => {
   dispatch({ type: actionTypes.RESET_STATE });
 };
-// export const scoreTask = (taskToScore, itemsUsed) => dispatch => {
-//   dispatch({ type: actionTypes.SCORE_TASK, taskToScore, itemsUsed });
-// };
 // export const changeEnvironment = nextEnvironmentId => dispatch => {
 //   dispatch({ type: actionTypes.CHANGE_ENVIRONMENT, nextEnvironmentId });
 // };
@@ -61,11 +59,18 @@ export const tasksReducer = createReducer(initialState, {
       state.saveYourself = false;
     }
 
+    // Update the taskPhase and matchLockableTypes in state
     if (state.taskPhase === SOLVING && !state.saveYourself) {
+      state.matchLockableTypes = [];
       state.taskPhase = VOTING;
     } else if (state.taskPhase === VOTING) {
+      state.matchLockableTypes = [];
       state.taskPhase = MOVING_MAP;
     } else if (state.taskPhase === MOVING_MAP) {
+      const { taskOrder, activeTaskIndex, tasks: allTasks } = state;
+      const taskId = taskOrder[activeTaskIndex];
+      const activeTask = allTasks[taskId];
+      state.matchLockableTypes = [activeTask.requiredItem];
       state.taskPhase = SOLVING;
     }
   },
@@ -75,8 +80,6 @@ export const tasksReducer = createReducer(initialState, {
   [actionTypes.RESET_STATE]: () => {
     return initialState;
   }
-  // [actionTypes.SCORE_TASK]: (state, action) => {
-  // },
   // [actionTypes.CHANGE_ENVIRONMENT]: (state, action) => {
   //   const newTasks = tasksForEnvironment[action.nextEnvironmentId].saveYourself;
 
@@ -152,10 +155,10 @@ export const getTasksForEnvironment = createSelector(
   foundTasks => foundTasks
 );
 
-// export const getTaskOrder = createSelector(
-//   ["tasks.taskOrder"],
-//   taskOrder => taskOrder
-// );
+export const getMatchLockableTypes = createSelector(
+  ["tasks.matchLockableTypes"],
+  activeMatchLockableTypes => activeMatchLockableTypes
+);
 
 // export const getCompletedTasks = createSelector(
 //   ["tasks.completedTasks"],

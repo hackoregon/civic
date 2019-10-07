@@ -14,7 +14,8 @@ import {
   goToNextTaskPhase,
   getActiveEnvironment,
   getTasksForEnvironment,
-  addTask
+  addTask,
+  getMatchLockableTypes
 } from "../../../state/tasks";
 import { getPlayerKitItems } from "../../../state/kit";
 import usePrevious from "../../../state/hooks/usePrevious";
@@ -54,7 +55,8 @@ const TaskScreen = ({
   activeEnvironment,
   addNextTask,
   weightedPlayerKitItems,
-  weightedTasks
+  weightedTasks,
+  matchLockableTypes
 }) => {
   const [chapterTimer] = useState(new Timer());
   const [phaseTimer] = useState(new Timer());
@@ -224,6 +226,7 @@ const TaskScreen = ({
         />
       </div>
       <MatchLockInterface
+        matchLockableTypes={matchLockableTypes}
         possibleItems={possibleItems}
         onOrbSelection={onOrbSelection}
         checkItemIsCorrect={checkItemIsCorrect}
@@ -277,7 +280,8 @@ TaskScreen.propTypes = {
   weightedTasks: PropTypes.arrayOf(PropTypes.shape({})),
   weightedPlayerKitItems: PropTypes.arrayOf(PropTypes.shape({})),
   activeEnvironment: PropTypes.string,
-  tasksForEnvironment: PropTypes.shape({})
+  tasksForEnvironment: PropTypes.shape({}),
+  matchLockableTypes: PropTypes.arrayOf(PropTypes.string)
 };
 
 const mapStateToProps = state => ({
@@ -287,7 +291,8 @@ const mapStateToProps = state => ({
   weightedTasks: getWeightedTasks(state),
   weightedPlayerKitItems: getPlayerKitItems(state),
   activeEnvironment: getActiveEnvironment(state),
-  tasksForEnvironment: getTasksForEnvironment(state)
+  tasksForEnvironment: getTasksForEnvironment(state),
+  matchLockableTypes: getMatchLockableTypes(state)
 });
 
 const mapDispatchToProps = dispatch => ({
