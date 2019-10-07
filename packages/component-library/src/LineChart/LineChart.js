@@ -235,8 +235,8 @@ LineChart.propTypes = {
   theme: PropTypes.shape({}),
   loading: PropTypes.bool,
   protect: PropTypes.bool,
-  xTickCount: null,
-  yTickCount: null
+  xTickCount: PropTypes.func,
+  yTickCount: PropTypes.func
 };
 
 LineChart.defaultProps = {
