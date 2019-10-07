@@ -12,12 +12,12 @@ import styled from "@emotion/styled";
 
 import { palette } from "../../constants/style";
 import { TYPES as SFX_TYPES } from "../../constants/sfx";
-
+import { MOVING_MAP } from "../../constants/actions";
 import useBounds from "../../state/hooks/useBounds";
 import usePrevious from "../../state/hooks/usePrevious";
 import useAnimationFrame from "../../state/hooks/useAnimationFrame";
 import { getTaskPhase } from "../../state/tasks";
-import { MOVING_MAP } from "../../constants/actions";
+import { playSFX as _playSFX } from "../../state/sfx";
 
 import Orb from "./Orb";
 import {
@@ -25,7 +25,6 @@ import {
   createRandomLayout,
   incompleteOrbHandler
 } from "./OrbManagerHelpers";
-import { playSFX as _playSFX } from "../../state/sfx";
 
 const ORB_CONFIG = {
   period: 1,
@@ -61,6 +60,7 @@ const OrbManager = ({
     possibleItems.reduce((orbsByType, possibleItem) => {
       return {
         multiTouchType: null,
+        multiTouchDurationLeft: null,
         ...orbsByType,
         [possibleItem.type]: new Set()
       };
@@ -144,17 +144,26 @@ const OrbManager = ({
 
       // If type is current multiTouchType and no longer eligible, replace with null
       if (multiTouchedTypeIsInputType && !typeEligibleForMultiTouch) {
-        return null;
+        return {
+          multiTouchType: null,
+          multiTouchDurationLeft: null
+        };
         // If there is no multiTouchType and the type is eligible, replace with the type
         // eslint-disable-next-line no-else-return
       } else if (
         !touchedOrbsByType.multiTouchType &&
         typeEligibleForMultiTouch
       ) {
-        return type;
+        return {
+          multiTouchType: type,
+          multiTouchDurationLeft: 1
+        };
       }
       // Default: return same multiTouchType
-      return touchedOrbsByType.multiTouchType;
+      return {
+        multiTouchType: touchedOrbsByType.multiTouchType,
+        multiTouchDurationLeft: touchedOrbsByType.multiTouchDurationLeft
+      };
     },
     [matchLockableTypes, touchedOrbsByType]
   );
@@ -166,7 +175,7 @@ const OrbManager = ({
         setTouchedOrbsByType(prevTouchedOrbsByType => ({
           ...prevTouchedOrbsByType,
           [type]: prevTouchedOrbsByType[type].add(orbId),
-          multiTouchType: checkAndUpdateMultiTouch(type)
+          ...checkAndUpdateMultiTouch(type)
         }));
         changeOrbZIndex(orbId);
         return;
@@ -176,7 +185,7 @@ const OrbManager = ({
         prevTouchedOrbsByType[type].delete(orbId);
         return {
           ...prevTouchedOrbsByType,
-          multiTouchType: checkAndUpdateMultiTouch(type)
+          ...checkAndUpdateMultiTouch(type)
         };
       });
     },
@@ -313,6 +322,7 @@ const OrbManager = ({
                 setOrbComplete={setOrbComplete}
                 delay={orb.delay}
                 isMultiTouchType={isMultiTouchType}
+                multiTouchDuration={touchedOrbsByType.multiTouchDurationLeft}
               />
             </div>
           );

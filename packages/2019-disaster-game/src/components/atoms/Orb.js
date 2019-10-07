@@ -128,7 +128,13 @@ export default class Orb extends PureComponent {
   render() {
     const { isActive, isComplete } = this.state;
     // eslint-disable-next-line no-unused-vars
-    const { size, imageSVG, imgAlt, isMultiTouchType } = this.props;
+    const {
+      size,
+      imageSVG,
+      imgAlt,
+      isMultiTouchType,
+      multiTouchDuration
+    } = this.props;
 
     const sizeStyle = css`
       height: ${size}px;
@@ -175,8 +181,9 @@ export default class Orb extends PureComponent {
             isActive={isActive}
             size={size}
             duration={pressSuccessDuration}
-            scaleForMultiTouch={isMultiTouchType}
+            isMultiTouchType={isMultiTouchType}
             multiTouchMultiplier={multiTouchMultiplier}
+            multiTouchDuration={multiTouchDuration}
           />
         </div>
         <div
@@ -204,5 +211,6 @@ Orb.propTypes = {
   imgAlt: PropTypes.string,
   size: PropTypes.number,
   delay: PropTypes.number,
-  isMultiTouchType: PropTypes.bool
+  isMultiTouchType: PropTypes.bool,
+  multiTouchDuration: PropTypes.number
 };

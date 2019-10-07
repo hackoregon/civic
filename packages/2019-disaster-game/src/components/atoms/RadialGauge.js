@@ -11,29 +11,47 @@ const RadialGauge = ({
   isActive,
   size,
   duration,
-  scaleForMultiTouch,
-  multiTouchMultiplier
+  isMultiTouchType,
+  multiTouchMultiplier,
+  multiTouchDuration
 }) => {
   const [percent, setPercent] = useState(0);
   const prevIsActive = usePrevious(isActive);
+  const [activeDuration, setActiveDuration] = useState(duration);
+
   const progressBarStyle = {
     pathColor: palette.turqoise,
     trailColor: "transparent",
     // Whether to use rounded or flat corners on the ends
     strokeLinecap: "butt",
     // How long animation takes to go from one percent to another, in seconds
-    pathTransitionDuration: duration
+    pathTransitionDuration: activeDuration
   };
 
+  /*
+    Start the dial by setting it to 100%. If the type is the matchlock type,
+    first set it to the same percentage as the other matchlock items.
+  */
   useEffect(() => {
     if (prevIsActive !== isActive) {
       if (isActive) {
-        setPercent(100);
+        if (isMultiTouchType) {
+          setPercent(Math.round(multiTouchDuration / duration));
+          setPercent(100);
+        } else {
+          setPercent(100);
+        }
       } else {
         setPercent(0);
       }
     }
-  }, [prevIsActive, isActive]);
+  }, [prevIsActive, isActive, isMultiTouchType, multiTouchDuration, duration]);
+
+  useEffect(() => {
+    if (isMultiTouchType) {
+      setActiveDuration(multiTouchDuration);
+    }
+  }, [isMultiTouchType, multiTouchDuration]);
 
   const gaugeDefaultStyle = css`
     transition: transform 1s;
@@ -62,7 +80,7 @@ const RadialGauge = ({
       strokeWidth={isActive ? 20 : 4}
       css={css`
         ${gaugeDefaultStyle};
-        ${scaleForMultiTouch && multiTouchScale}
+        ${isMultiTouchType && multiTouchScale}
       `}
       className={isActive ? "gauge-animate-style" : ""}
       styles={buildStyles(progressBarStyle)}
@@ -74,8 +92,9 @@ RadialGauge.propTypes = {
   isActive: PropTypes.bool,
   size: PropTypes.number,
   duration: PropTypes.number,
-  scaleForMultiTouch: PropTypes.bool,
-  multiTouchMultiplier: PropTypes.number
+  isMultiTouchType: PropTypes.bool,
+  multiTouchMultiplier: PropTypes.number,
+  multiTouchDuration: PropTypes.number
 };
 
 export default RadialGauge;
