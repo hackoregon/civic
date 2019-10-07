@@ -36,9 +36,9 @@
     "@emotion/core": "^10.0.10",
     "@emotion/styled": "^10.0.14",
     "@hackoregon/component-library": "^4.0.0",
+    "@hackoregon/dev-server": "^3.0.0",
     "@hackoregon/mock-wrapper": "^3.0.0",
     "@hackoregon/webpack-common": "^3.0.0",
-    "@hackoregon/dev-server": "^3.0.0",    
     "axios": "^0.18.0",
     "chalk": "^1.1.3",
     "compression": "^1.6.2",
@@ -62,7 +62,8 @@
     "redux-form": "^8.1.0",
     "redux-starter-kit": "^0.5.1",
     "redux-thunk": "^2.1.0",
-    "reselect": "^3.0.0"
+    "reselect": "^3.0.0",
+    "shortid": "^2.2.15"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",
