@@ -57,6 +57,7 @@ const textStyle = css`
 
 const MatchLockInterface = ({
   possibleItems,
+  matchLockableTypes,
   onOrbSelection,
   checkItemIsCorrect,
   activeScreen,
@@ -81,6 +82,7 @@ const MatchLockInterface = ({
       <GUIStyle>
         <OrbManager
           possibleItems={possibleItems}
+          matchLockableTypes={matchLockableTypes}
           onOrbSelection={onOrbSelection}
           checkItemIsCorrect={checkItemIsCorrect}
           activeScreen={activeScreen}
@@ -92,6 +94,7 @@ const MatchLockInterface = ({
 
 MatchLockInterface.propTypes = {
   possibleItems: PropTypes.arrayOf(PropTypes.shape({})),
+  matchLockableTypes: PropTypes.arrayOf(PropTypes.string),
   onOrbSelection: PropTypes.func,
   checkItemIsCorrect: PropTypes.func,
   activeScreen: PropTypes.string,

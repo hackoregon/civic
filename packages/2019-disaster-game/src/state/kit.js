@@ -1,13 +1,18 @@
 import { createReducer, createSelector } from "redux-starter-kit";
 import size from "lodash/size";
-import itemTypes from "../constants/items";
+import itemTypes, { food, water, firstAidKit } from "../constants/items";
 
 // INITIAL STATE
 // items will be a list of objects, where each object is an id and a quantity
 // the id is related to the items reducer
 const initialState = {
   items: itemTypes,
-  playerKit: {}
+  playerKit: {},
+  matchLockItemsInKit: {
+    [food]: 0,
+    [water]: 0,
+    [firstAidKit]: 0
+  }
 };
 
 // CONSTANTS
@@ -62,6 +67,11 @@ export const getPlayerKit = createSelector(
   playerKit => playerKit
 );
 
+export const getMatchLockableTypes = createSelector(
+  ["kit.matchLockItemsInKit"],
+  matchLockItemsInKit => Object.keys(matchLockItemsInKit)
+);
+
 export const getKitCreationItems = createSelector(
   ["kit.items"],
   items => {
@@ -82,6 +92,23 @@ export const getKitCreationItems = createSelector(
 
       return result;
     }, []);
+    // TODO: Remove when done with testing
+    // const kitCreationItems = [{
+    //   type: items[water].id,
+    //   imageSVG: items[water].fullSvg,
+    //   imgAlt: items[water].imgAlt,
+    //   good: items[water].goodKitItem,
+    //   weighting: 1,
+    //   points: items[water].pointsForPuttingInKit
+    // },
+    // {
+    //   type: items[food].id,
+    //   imageSVG: items[food].fullSvg,
+    //   imgAlt: items[food].imgAlt,
+    //   good: items[food].goodKitItem,
+    //   weighting: 1,
+    //   points: items[food].pointsForPuttingInKit
+    // }]
 
     return kitCreationItems;
   }

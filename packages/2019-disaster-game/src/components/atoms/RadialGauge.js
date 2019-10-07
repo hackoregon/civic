@@ -7,7 +7,13 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { palette } from "../../constants/style";
 import usePrevious from "../../state/hooks/usePrevious";
 
-const RadialGauge = ({ isActive, size, duration }) => {
+const RadialGauge = ({
+  isActive,
+  size,
+  duration,
+  scaleForMultiTouch,
+  multiTouchMultiplier
+}) => {
   const [percent, setPercent] = useState(0);
   const prevIsActive = usePrevious(isActive);
   const progressBarStyle = {
@@ -34,19 +40,20 @@ const RadialGauge = ({ isActive, size, duration }) => {
     position: absolute;
     top: ${size / 2}px;
     left: ${size / 2}px;
+    pointer-events: none;
     height: ${size}px;
     width: ${size}px;
-    pointer-events: none;
+    border-radius: ${size}px;
 
     &.gauge-animate-style {
       transform: scale(1.5);
     }
   `;
 
-  const gaugeSizeStyle = css`
-    height: ${size}px;
-    width: ${size}px;
-    border-radius: ${size}px;
+  const multiTouchScale = css`
+    height: ${size * multiTouchMultiplier}px;
+    width: ${size * multiTouchMultiplier}px;
+    border-radius: ${size * multiTouchMultiplier}px;
   `;
 
   return (
@@ -54,7 +61,8 @@ const RadialGauge = ({ isActive, size, duration }) => {
       value={percent}
       strokeWidth={isActive ? 20 : 4}
       css={css`
-        ${gaugeDefaultStyle}, ${gaugeSizeStyle}
+        ${gaugeDefaultStyle};
+        ${scaleForMultiTouch && multiTouchScale}
       `}
       className={isActive ? "gauge-animate-style" : ""}
       styles={buildStyles(progressBarStyle)}
@@ -65,7 +73,9 @@ const RadialGauge = ({ isActive, size, duration }) => {
 RadialGauge.propTypes = {
   isActive: PropTypes.bool,
   size: PropTypes.number,
-  duration: PropTypes.number
+  duration: PropTypes.number,
+  scaleForMultiTouch: PropTypes.bool,
+  multiTouchMultiplier: PropTypes.number
 };
 
 export default RadialGauge;

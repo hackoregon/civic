@@ -34,6 +34,7 @@ const circleDefaultStyle = css`
 
 const iconStyle = css`
   position: relative;
+  transition: width 0.5s, height 0.5s;
 `;
 
 const defaultState = {
@@ -46,12 +47,14 @@ const defaultState = {
 };
 
 const pressSuccessDuration = 1;
+const multiTouchMultiplier = 1.5;
 
 export default class Orb extends PureComponent {
   constructor(props) {
     super(props);
     this.state = defaultState;
     this.orbRef = React.createRef();
+    this.timer = null;
   }
 
   componentDidMount() {
@@ -75,16 +78,23 @@ export default class Orb extends PureComponent {
 
   componentDidUpdate(prevProps, prevState) {
     const { isComplete } = this.state;
-    const { addOrbScore, orbId, setOrbComplete } = this.props;
+    const { addOrbScore, orbModel, setOrbComplete } = this.props;
 
     if (!prevState.isComplete && isComplete) {
-      addOrbScore(orbId);
-      setOrbComplete(orbId);
+      this.handleOrbRelease();
+      addOrbScore(orbModel.orbId);
+      setOrbComplete(orbModel.orbId);
     }
   }
 
+  componentWillUnmount() {
+    const { timer } = this.state;
+    clearTimeout(timer);
+  }
+
   incrementGauge = () => {
-    const timer = setTimeout(() => {
+    const { timer } = this.state;
+    const gaugeTimer = setTimeout(() => {
       const { isActive } = this.state;
       if (isActive) {
         this.setState({ isComplete: true });
@@ -94,41 +104,51 @@ export default class Orb extends PureComponent {
         clearTimeout(timer);
       }
     }, pressSuccessDuration * 1000);
+    this.setState({ timer: gaugeTimer });
   };
 
   handleOrbPress = () => {
     const { isComplete } = this.state;
-    const { orbId, setOrbTouched } = this.props;
+    const { orbModel, setOrbTouched } = this.props;
     // if already pressed, do nothing
     if (isComplete) return;
 
     this.setState({ isActive: true }, () => {
       this.incrementGauge();
     });
-    setOrbTouched(orbId, true);
+    setOrbTouched(orbModel, true);
   };
 
   handleOrbRelease = () => {
     this.setState({ isActive: false });
-    const { orbId, setOrbTouched } = this.props;
-    setOrbTouched(orbId, false);
+    const { orbModel, setOrbTouched } = this.props;
+    setOrbTouched(orbModel, false);
   };
 
   render() {
     const { isActive, isComplete } = this.state;
     // eslint-disable-next-line no-unused-vars
-    const { size, imageSVG, imgAlt } = this.props;
+    const { size, imageSVG, imgAlt, isMultiTouchType } = this.props;
 
     const sizeStyle = css`
       height: ${size}px;
       width: ${size}px;
       border-radius: ${size}px;
+      transition: width 0.5s, height 0.5s;
     `;
 
     const absoluteStyle = css`
       position: absolute;
       top: -${size / 2}px;
       left: -${size / 2}px;
+    `;
+
+    const multiTouchScale = css`
+      height: ${size * multiTouchMultiplier}px;
+      width: ${size * multiTouchMultiplier}px;
+      border-radius: ${size * multiTouchMultiplier}px;
+      top: -${size / 4}px;
+      left: -${size / 4}px;
     `;
 
     let orbClass = "";
@@ -142,6 +162,7 @@ export default class Orb extends PureComponent {
         css={css`
           ${orbContainerStyle};
           ${sizeStyle};
+          ${isMultiTouchType && multiTouchScale};
         `}
         onMouseDown={this.handleOrbPress}
         onMouseUp={this.handleOrbRelease}
@@ -154,12 +175,15 @@ export default class Orb extends PureComponent {
             isActive={isActive}
             size={size}
             duration={pressSuccessDuration}
+            scaleForMultiTouch={isMultiTouchType}
+            multiTouchMultiplier={multiTouchMultiplier}
           />
         </div>
         <div
           css={css`
             ${circleDefaultStyle};
             ${sizeStyle};
+            ${isMultiTouchType && multiTouchScale};
           `}
           className={orbClass}
         >
@@ -172,12 +196,13 @@ export default class Orb extends PureComponent {
 }
 
 Orb.propTypes = {
-  orbId: PropTypes.string,
+  orbModel: PropTypes.shape({}),
   setOrbTouched: PropTypes.func,
   setOrbComplete: PropTypes.func,
   addOrbScore: PropTypes.func,
   imageSVG: PropTypes.string,
   imgAlt: PropTypes.string,
   size: PropTypes.number,
-  delay: PropTypes.number
+  delay: PropTypes.number,
+  isMultiTouchType: PropTypes.bool
 };

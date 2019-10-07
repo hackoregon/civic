@@ -9,7 +9,11 @@ import {
   goToNextChapter,
   getActiveChapterDuration
 } from "../../../state/chapters";
-import { getKitCreationItems, addItemToPlayerKit } from "../../../state/kit";
+import {
+  getKitCreationItems,
+  addItemToPlayerKit,
+  getMatchLockableTypes
+} from "../../../state/kit";
 import { addPoints } from "../../../state/user";
 import { palette } from "../../../constants/style";
 import Timer from "../../../utils/timer";
@@ -56,6 +60,7 @@ const bg3 = css`
 
 const KitScreen = ({
   possibleItems,
+  matchLockableKitItems,
   addPointsToState,
   addItemToPlayerKitInState,
   endChapter,
@@ -95,6 +100,7 @@ const KitScreen = ({
         {/* somehow adding this comment fixes the production build -- it's related to @babel/plugin-transform-react-constant-elements */}
       </MapStyle>
       <MatchLockInterface
+        matchLockableTypes={matchLockableKitItems}
         possibleItems={possibleItems}
         onOrbSelection={onKitItemSelection}
         checkItemIsCorrect={checkIfItemIsGood}
@@ -114,6 +120,7 @@ KitScreen.propTypes = {
       weighting: PropTypes.number
     })
   ),
+  matchLockableKitItems: PropTypes.arrayOf(PropTypes.string),
   addPointsToState: PropTypes.func,
   addItemToPlayerKitInState: PropTypes.func,
   endChapter: PropTypes.func,
@@ -122,6 +129,7 @@ KitScreen.propTypes = {
 
 const mapStateToProps = state => ({
   possibleItems: getKitCreationItems(state),
+  matchLockableKitItems: getMatchLockableTypes(state),
   chapterDuration: getActiveChapterDuration(state)
 });
 

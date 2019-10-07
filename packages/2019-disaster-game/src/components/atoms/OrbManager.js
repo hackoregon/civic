@@ -9,7 +9,6 @@ import React, {
 import { connect } from "react-redux";
 import { map, find as _find, filter } from "lodash";
 import styled from "@emotion/styled";
-import remove from "lodash/remove";
 
 import { palette } from "../../constants/style";
 import { TYPES as SFX_TYPES } from "../../constants/sfx";
@@ -50,6 +49,7 @@ const ORB_CONFIG = {
  */
 const OrbManager = ({
   possibleItems,
+  matchLockableTypes,
   onOrbSelection,
   checkItemIsCorrect,
   playSFX,
@@ -57,7 +57,15 @@ const OrbManager = ({
 } = {}) => {
   const [hasInitialized, setHasInitialized] = useState(false);
   const [orbModels, setOrbModelsState] = useState([]);
-  const [touchedOrbs, setTouchedOrb] = useState([]);
+  const [touchedOrbsByType, setTouchedOrbsByType] = useState(
+    possibleItems.reduce((orbsByType, possibleItem) => {
+      return {
+        multiTouchType: null,
+        ...orbsByType,
+        [possibleItem.type]: new Set()
+      };
+    }, {})
+  );
   const [completedOrbs, setCompletedOrbs] = useState([]);
   const [orbsZIndex, setOrbsZIndex] = useState([]);
   // tick is used to modulate movement based on an incrementing value
@@ -103,37 +111,76 @@ const OrbManager = ({
     [onOrbSelection, orbModels.length]
   );
 
+  /*
+    Ensures that the last-touched orb is always on top of the others
+    by using an array ordered by time-of-touch
+    ie oldest touched is first in array
+    newest touched is last in array
+    until the oldest is touched again
+    then it becomes the newest touched!
+  */
+  const changeOrbZIndex = useCallback(
+    orbId => {
+      // create an array that does not contain the new orbId
+      const orbsByLastTouched = filter(orbsZIndex, id => id !== orbId);
+      // push the new orbId to the end
+      orbsByLastTouched.push(orbId);
+      setOrbsZIndex(orbsByLastTouched);
+
+      // play orb sound
+      playSFX(SFX_TYPES.GOOD_CHOICE);
+    },
+    [orbsZIndex, playSFX]
+  );
+
+  const checkAndUpdateMultiTouch = useCallback(
+    type => {
+      const threeOrMoreOfTypeTouched = touchedOrbsByType[type].size >= 3;
+      const isMatchLockableType = matchLockableTypes.indexOf(type) > -1;
+      const typeEligibleForMultiTouch =
+        isMatchLockableType && threeOrMoreOfTypeTouched;
+      const multiTouchedTypeIsInputType =
+        type === touchedOrbsByType.multiTouchType;
+
+      // If type is current multiTouchType and no longer eligible, replace with null
+      if (multiTouchedTypeIsInputType && !typeEligibleForMultiTouch) {
+        return null;
+        // If there is no multiTouchType and the type is eligible, replace with the type
+        // eslint-disable-next-line no-else-return
+      } else if (
+        !touchedOrbsByType.multiTouchType &&
+        typeEligibleForMultiTouch
+      ) {
+        return type;
+      }
+      // Default: return same multiTouchType
+      return touchedOrbsByType.multiTouchType;
+    },
+    [matchLockableTypes, touchedOrbsByType]
+  );
+
   const setOrbTouched = useCallback(
-    (orbId, isTouched) => {
+    (orbModel, isTouched) => {
+      const { orbId, type } = orbModel;
       if (isTouched) {
-        setTouchedOrb(prevOrbs => [...prevOrbs, orbId]);
-
-        // Ensures that the last-touched orb is always on top of the others
-        // by using an array ordered by time-of-touch
-        // ie oldest touched is first in array
-        // newest touched is last in array
-        // until the oldest is touched again
-        // then it becomes the newest touched!
-
-        // create an array that does not contain the new orbId
-        const orbsByLastTouched = filter(orbsZIndex, id => id !== orbId);
-        // push the new orbId to the end
-        orbsByLastTouched.push(orbId);
-        setOrbsZIndex(orbsByLastTouched);
-
-        // play orb sound
-        playSFX(SFX_TYPES.GOOD_CHOICE);
-
+        setTouchedOrbsByType(prevTouchedOrbsByType => ({
+          ...prevTouchedOrbsByType,
+          [type]: prevTouchedOrbsByType[type].add(orbId),
+          multiTouchType: checkAndUpdateMultiTouch(type)
+        }));
+        changeOrbZIndex(orbId);
         return;
       }
 
-      const updatedOrbs = remove(
-        touchedOrbs,
-        touchedOrb => touchedOrb.orbId === orbId
-      );
-      setTouchedOrb(updatedOrbs);
+      setTouchedOrbsByType(prevTouchedOrbsByType => {
+        prevTouchedOrbsByType[type].delete(orbId);
+        return {
+          ...prevTouchedOrbsByType,
+          multiTouchType: checkAndUpdateMultiTouch(type)
+        };
+      });
     },
-    [touchedOrbs, orbsZIndex, playSFX]
+    [changeOrbZIndex, checkAndUpdateMultiTouch]
   );
 
   const setOrbComplete = useCallback(orbId => {
@@ -244,6 +291,8 @@ const OrbManager = ({
       {taskPhase !== MOVING_MAP &&
         map(renderableOrbs, orb => {
           const zIndex = orbsZIndex.indexOf(orb.orbId) + 1;
+          const isMultiTouchType =
+            touchedOrbsByType.multiTouchType === orb.type;
 
           return (
             <div
@@ -255,7 +304,7 @@ const OrbManager = ({
               }}
             >
               <Orb
-                orbId={orb.orbId}
+                orbModel={orb}
                 imageSVG={orb.imageSVG}
                 imgAlt={orb.imgAlt}
                 size={ORB_CONFIG.orbSize}
@@ -263,6 +312,7 @@ const OrbManager = ({
                 setOrbTouched={setOrbTouched}
                 setOrbComplete={setOrbComplete}
                 delay={orb.delay}
+                isMultiTouchType={isMultiTouchType}
               />
             </div>
           );
