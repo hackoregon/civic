@@ -123,22 +123,21 @@ const SummaryScreen = ({
       <div css={[bg, bg3]} />
       <div css={allContent}>
         <div css={contentWrapper}>
-          <h1 css={titleFont}>Plan with your family!</h1>
+          <h1 css={titleFont}>Make A Plan</h1>
           <h2 css={contentFont}>
-            Ask your parents where to meet after an earthquake.
+            Talk to your family about where you will meet after an earthquake.
           </h2>
         </div>
         <div css={contentWrapper}>
-          <h1 css={titleFont}>Talk to neighbors</h1>
+          <h1 css={titleFont}>Meet Your Neighbors</h1>
           <h2 css={contentFont}>
-            Do you have an elderly neighbor who might need help after an
-            earthquake?
+            Do you have neighbors who will need extra help after a disaster?
           </h2>
         </div>
         <div css={contentWrapper}>
-          <h1 css={titleFont}>Prepare your home, car, and school</h1>
+          <h1 css={titleFont}>Build A Disaster Kit</h1>
           <h2 css={contentFont}>
-            Does your family have water supplies in the car and the house?
+            Gather enough supplies for your family for at least seven days!
           </h2>
         </div>
       </div>

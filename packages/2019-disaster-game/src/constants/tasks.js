@@ -96,7 +96,7 @@ export const tasks = {
     imageAlt: "a rocky road",
     sceneSVG: sceneRubble,
     sceneAlt: "rubble in your way",
-    clue: "Lots of sharp rocks and broken glass around here!",
+    clue: "There’s a lot of rubble and broken glass around here.",
     tickerTape:
       "Gloves, boots, and goggles can help prevent injury when there’s lots of debris.",
     locations: [[-122.6655, 45.5081]]
@@ -115,7 +115,7 @@ export const tasks = {
     imageAlt: "a person coughing in the dust",
     sceneSVG: sceneDust,
     sceneAlt: "a person coughing in the dust",
-    clue: "It's getting hard to breathe here!",
+    clue: "It's getting hard to breathe here.",
     tickerTape:
       "Lots of debris will cause poor air quality after an earthquake.",
     locations: [[-122.676169, 45.516485]]
@@ -135,7 +135,7 @@ export const tasks = {
     imageAlt: "a shivering person",
     sceneSVG: sceneCold,
     sceneAlt: "a shivering person",
-    clue: "Brrr... It's c-c-cold out here!",
+    clue: "It's cold out here!",
     tickerTape: "Plan for all potential weather conditions!",
     locations: [[-122.610302, 45.504791], [-122.675011, 45.503044]]
   },
@@ -217,8 +217,7 @@ export const tasks = {
     sceneSVG: sceneInjury,
     sceneAlt: "an injured person",
     clue: "Ow!",
-    tickerTape:
-      "There could be 27,000 injured people in the Portland area after a major earthquake.",
+    tickerTape: "Disaster kits should contain first aid kits and medications.",
     locations: [[-122.678618, 45.52018]]
   },
   [WEATHER]: {
@@ -235,7 +234,7 @@ export const tasks = {
     imageAlt: "a thunderstorm",
     sceneSVG: sceneWeather,
     sceneAlt: "a thunderstorm",
-    clue: "Brrrr… It's c-c-cold and wet out here!",
+    clue: "It's cold out here!",
     tickerTape: "Plan for all potential weather conditions!",
     locations: [[-122.651841, 45.496852], [-122.638194, 45.503651]]
   },

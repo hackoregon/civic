@@ -192,19 +192,23 @@ const TaskScreen = ({
   /* RENDER CONDITIONS */
   const isSolving = taskPhase === SOLVING;
   const isVoting = taskPhase === VOTING;
+  const movingMap = taskPhase === MOVING_MAP;
   const onOrbSelection = isSolving ? onItemSelection : onTaskSelection;
   const checkItemIsCorrect = isSolving
     ? checkSolutionIsCorrect
     : checkVoteIsCorrect;
   const activeScreen = taskPhase;
   // Save yourself message
-  let interfaceMessage = "Prepare yourself to help others!";
+  let interfaceMessage = "Help yourself first!";
   if (isSolving && activeTaskIndex > 1) {
     // Save others message
     interfaceMessage = "How can I help?";
   } else if (isVoting) {
     // Choose next task message
     interfaceMessage = "Who should we help next?";
+  } else if (movingMap) {
+    // Going to next task message...
+    interfaceMessage = "Let's go do it!";
   }
 
   return (
