@@ -22,8 +22,8 @@ import { SOLVING, VOTING, MOVING_MAP } from "../../../constants/actions";
 import { chooseRandomTask } from "./voteUtils";
 
 import taskSong from "../../../../assets/audio/HappyTheme2fadeinout.mp3";
-import audioVoteInstruction from "../../../../assets/audio/task_screen/6_boy_who_should_we_help_next.mp3";
-import audioVoteMotivate from "../../../../assets/audio/task_screen/4_boy_lets_go_do_it_enthusiastic.mp3";
+import audioVoteInstruction from "../../../../assets/audio/task_screen/boy/who_should_we_help_next.mp3";
+import audioVoteMotivate from "../../../../assets/audio/task_screen/boy/lets_go_do_it_enthusiastic.mp3";
 import Song from "../../atoms/Audio/Song";
 
 import MatchLockInterface from "../../atoms/MatchLockInterface";

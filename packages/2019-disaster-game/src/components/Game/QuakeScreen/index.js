@@ -3,6 +3,7 @@ import { css, jsx } from "@emotion/core";
 import { memo, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
+import { sample } from "lodash";
 
 import {
   goToNextChapter,
@@ -14,7 +15,8 @@ import Song from "../../atoms/Audio/Song";
 
 import songFile from "../../../../assets/audio/PWolfEarthquakesound15secmp3.mp3";
 import videoFile from "../../../../assets/video/OMG_EARTHQUAKE.mp4";
-import instructionalAudio from "../../../../assets/audio/earthquake_screen/5_boy_its_an_earthquake_drop.mp3";
+import instructionalAudioBoy from "../../../../assets/audio/earthquake_screen/boy_earthquake.mp3";
+import instructionalAudioGirl from "../../../../assets/audio/earthquake_screen/girl_earthquake.mp3";
 
 const videoStyles = css`
   width: 100vw;
@@ -33,6 +35,11 @@ const QuakeScreen = ({ endChapter, chapterDuration }) => {
       chapterTimer.stop();
     };
   }, [chapterDuration, chapterTimer, endChapter]);
+
+  const instructionalAudio = sample([
+    instructionalAudioBoy,
+    instructionalAudioGirl
+  ]);
 
   return (
     <div>
