@@ -79,7 +79,7 @@ const EarthquakeDamageEstimatesForBuildingsInTillamookCountyVisualization = ({
                 data={data.damageEstimates.value}
                 getPosition={f => f.geometry && f.geometry.coordinates}
                 opacity={mapStyles[dataType].opacity}
-                getWeight={f => f.properties[mapStyles[dataType].field]}
+                getWeight={f => f.properties[mapStyles[dataType].field] || 0}
                 getSize={() => 15}
                 colorRange={VisualizationColors.sequential.thermal}
                 getCursor={() => "default"}
