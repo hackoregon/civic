@@ -16,9 +16,8 @@ import RopeEmpty from "../../assets/kit_icons/unfilled-rope.svg";
 import RopeColor from "../../assets/kit_icons/filled-rope.svg";
 import TentEmpty from "../../assets/kit_icons/unfilled-tent.svg";
 import TentColor from "../../assets/kit_icons/filled-tent.svg";
-// Temporary good item icons
-import FireExtinguisherEmpty from "../../assets/fire-extinguisher.svg";
-import FireExtinguisherColor from "../../assets/fire-extinguisher-color.svg";
+import FireExtinguisherEmpty from "../../assets/kit_icons/unfilled-fire-extinguisher.svg";
+import FireExtinguisherColor from "../../assets/kit_icons/filled-fire-extinguisher.svg";
 
 // Temporary bad item icons
 import BasketballColor from "../../assets/kit_icons/filled-basketball.svg";
