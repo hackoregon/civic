@@ -61,7 +61,6 @@ const bg3 = css`
 const KitScreen = ({
   possibleItems,
   matchLockableKitItems,
-  addPointsToState,
   addItemToPlayerKitInState,
   endChapter,
   chapterDuration
@@ -81,7 +80,6 @@ const KitScreen = ({
   const onKitItemSelection = kitItem => {
     if (kitItem.good) {
       addItemToPlayerKitInState(kitItem.type);
-      addPointsToState(kitItem.points);
     }
     return kitItem.good;
   };
@@ -121,7 +119,6 @@ KitScreen.propTypes = {
     })
   ),
   matchLockableKitItems: PropTypes.arrayOf(PropTypes.string),
-  addPointsToState: PropTypes.func,
   addItemToPlayerKitInState: PropTypes.func,
   endChapter: PropTypes.func,
   chapterDuration: PropTypes.number

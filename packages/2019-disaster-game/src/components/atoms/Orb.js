@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import { PureComponent, createRef } from "react";
 import { PropTypes } from "prop-types";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
@@ -38,22 +38,19 @@ const iconStyle = css`
 `;
 
 const defaultState = {
-  pressTimeout: null,
-  pressedStart: null,
   isActive: false,
   isComplete: false,
-  isCorrect: false,
   hasAnimated: false
 };
 
 const pressSuccessDuration = 1;
 const multiTouchMultiplier = 1.5;
 
-export default class Orb extends PureComponent {
+class Orb extends PureComponent {
   constructor(props) {
     super(props);
     this.state = defaultState;
-    this.orbRef = React.createRef();
+    this.orbRef = createRef();
     this.timer = null;
   }
 
@@ -78,11 +75,11 @@ export default class Orb extends PureComponent {
 
   componentDidUpdate(prevProps, prevState) {
     const { isComplete } = this.state;
-    const { addOrbScore, orbModel, setOrbComplete } = this.props;
+    const { orbModel, setOrbComplete, onOrbSelection } = this.props;
 
     if (!prevState.isComplete && isComplete) {
       this.handleOrbRelease();
-      addOrbScore(orbModel.orbId);
+      onOrbSelection(orbModel.orbId);
       setOrbComplete(orbModel.orbId);
     }
   }
@@ -204,9 +201,9 @@ export default class Orb extends PureComponent {
 
 Orb.propTypes = {
   orbModel: PropTypes.shape({}),
+  onOrbSelection: PropTypes.func,
   setOrbTouched: PropTypes.func,
   setOrbComplete: PropTypes.func,
-  addOrbScore: PropTypes.func,
   imageSVG: PropTypes.string,
   imgAlt: PropTypes.string,
   size: PropTypes.number,
@@ -214,3 +211,5 @@ Orb.propTypes = {
   isMultiTouchType: PropTypes.bool,
   multiTouchDuration: PropTypes.number
 };
+
+export default Orb;

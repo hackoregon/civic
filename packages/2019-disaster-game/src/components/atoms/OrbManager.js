@@ -116,7 +116,7 @@ const OrbManager = ({
     touchedOrbReducer
   ]);
 
-  const addOrbScore = useCallback(
+  const onOrbSelectionCallback = useCallback(
     orbId => {
       const theOrb = _find(orbModels, orb => orb.orbId === orbId);
       onOrbSelection(theOrb);
@@ -334,7 +334,7 @@ const OrbManager = ({
                 imageSVG={orb.imageSVG}
                 imgAlt={orb.imgAlt}
                 size={ORB_CONFIG.orbSize}
-                addOrbScore={addOrbScore}
+                onOrbSelection={onOrbSelectionCallback}
                 setOrbTouched={setOrbTouched}
                 setOrbComplete={setOrbComplete}
                 delay={orb.delay}
