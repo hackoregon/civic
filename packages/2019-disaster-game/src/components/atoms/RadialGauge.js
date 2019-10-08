@@ -17,6 +17,7 @@ const RadialGauge = ({
 }) => {
   const [percent, setPercent] = useState(0);
   const prevIsActive = usePrevious(isActive);
+  const prevIsMultiTouchType = usePrevious(isMultiTouchType);
   const [activeDuration, setActiveDuration] = useState(duration);
 
   const progressBarStyle = {
@@ -44,8 +45,18 @@ const RadialGauge = ({
       } else {
         setPercent(0);
       }
+    } else if (prevIsMultiTouchType !== isMultiTouchType && isMultiTouchType) {
+      setPercent(Math.round(multiTouchDuration / duration));
+      setPercent(100);
     }
-  }, [prevIsActive, isActive, isMultiTouchType, multiTouchDuration, duration]);
+  }, [
+    prevIsActive,
+    isActive,
+    isMultiTouchType,
+    multiTouchDuration,
+    duration,
+    prevIsMultiTouchType
+  ]);
 
   useEffect(() => {
     if (isMultiTouchType) {
