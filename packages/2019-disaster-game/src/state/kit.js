@@ -7,7 +7,7 @@ import itemTypes, { food, water, firstAidKit } from "../constants/items";
 const initialState = {
   items: itemTypes,
   playerKit: {},
-  // TODO: Remove when done testing
+  // // TODO: Remove when done testing
   // playerKit: {
   //   FOOD: true,
   //   WATER: true,
@@ -80,41 +80,43 @@ export const getMatchLockableTypes = createSelector(
 export const getKitCreationItems = createSelector(
   ["kit.items"],
   items => {
-    const genericWeighting = 1 / size(items);
+    // const genericWeighting = 1 / size(items);
 
-    const kitCreationItems = Object.keys(items).reduce((result, itemKey) => {
-      const itemData = items[itemKey];
+    // const kitCreationItems = Object.keys(items).reduce((result, itemKey) => {
+    //   const itemData = items[itemKey];
 
-      const genericItem = {
-        type: itemData.id,
-        imageSVG: itemData.fullSvg,
-        imgAlt: itemData.imgAlt,
-        good: itemData.goodKitItem,
-        weighting: genericWeighting,
-        points: itemData.pointsForPuttingInKit
-      };
-      result.push(genericItem);
+    //   const genericItem = {
+    //     type: itemData.id,
+    //     imageSVG: itemData.fullSvg,
+    //     imgAlt: itemData.imgAlt,
+    //     good: itemData.goodKitItem,
+    //     weighting: genericWeighting,
+    //     points: itemData.pointsForPuttingInKit
+    //   };
+    //   result.push(genericItem);
 
-      return result;
-    }, []);
+    //   return result;
+    // }, []);
 
-    // // TODO: Remove when done with testing
-    // const kitCreationItems = [{
-    //   type: items[water].id,
-    //   imageSVG: items[water].fullSvg,
-    //   imgAlt: items[water].imgAlt,
-    //   good: items[water].goodKitItem,
-    //   weighting: 1,
-    //   points: items[water].pointsForPuttingInKit
-    // },
-    // {
-    //   type: items[food].id,
-    //   imageSVG: items[food].fullSvg,
-    //   imgAlt: items[food].imgAlt,
-    //   good: items[food].goodKitItem,
-    //   weighting: 1,
-    //   points: items[food].pointsForPuttingInKit
-    // }]
+    // TODO: Remove when done with testing
+    const kitCreationItems = [
+      {
+        type: items[water].id,
+        imageSVG: items[water].fullSvg,
+        imgAlt: items[water].imgAlt,
+        good: items[water].goodKitItem,
+        weighting: 1,
+        points: items[water].pointsForPuttingInKit
+      },
+      {
+        type: items[food].id,
+        imageSVG: items[food].fullSvg,
+        imgAlt: items[food].imgAlt,
+        good: items[food].goodKitItem,
+        weighting: 1,
+        points: items[food].pointsForPuttingInKit
+      }
+    ];
 
     return kitCreationItems;
   }

@@ -130,7 +130,7 @@ class Orb extends PureComponent {
       imageSVG,
       imgAlt,
       isMultiTouchType,
-      multiTouchDuration
+      MultiTouchRadialGauge
     } = this.props;
 
     const sizeStyle = css`
@@ -174,14 +174,17 @@ class Orb extends PureComponent {
         onTouchEnd={this.handleOrbRelease}
       >
         <div css={absoluteStyle}>
-          <RadialGauge
-            isActive={isActive}
-            size={size}
-            duration={pressSuccessDuration}
-            isMultiTouchType={isMultiTouchType}
-            multiTouchMultiplier={multiTouchMultiplier}
-            multiTouchDuration={multiTouchDuration}
-          />
+          {isMultiTouchType ? (
+            MultiTouchRadialGauge(isActive, size, isMultiTouchType)
+          ) : (
+              <RadialGauge
+                isActive={isActive}
+                size={size}
+                duration={pressSuccessDuration}
+                isMultiTouchType={isMultiTouchType}
+                multiTouchMultiplier={multiTouchMultiplier}
+              />
+            )}
         </div>
         <div
           css={css`
@@ -209,7 +212,7 @@ Orb.propTypes = {
   size: PropTypes.number,
   delay: PropTypes.number,
   isMultiTouchType: PropTypes.bool,
-  multiTouchDuration: PropTypes.number
+  MultiTouchRadialGauge: PropTypes.node
 };
 
 export default Orb;

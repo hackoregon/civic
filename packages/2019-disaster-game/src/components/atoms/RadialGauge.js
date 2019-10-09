@@ -13,12 +13,10 @@ const RadialGauge = ({
   duration,
   isMultiTouchType,
   multiTouchMultiplier,
-  multiTouchDuration
 }) => {
   const [percent, setPercent] = useState(0);
   const prevIsActive = usePrevious(isActive);
   const prevIsMultiTouchType = usePrevious(isMultiTouchType);
-  const [activeDuration, setActiveDuration] = useState(duration);
 
   const progressBarStyle = {
     pathColor: palette.turqoise,
@@ -26,7 +24,7 @@ const RadialGauge = ({
     // Whether to use rounded or flat corners on the ends
     strokeLinecap: "butt",
     // How long animation takes to go from one percent to another, in seconds
-    pathTransitionDuration: activeDuration
+    pathTransitionDuration: duration
   };
 
   /*
@@ -36,33 +34,12 @@ const RadialGauge = ({
   useEffect(() => {
     if (prevIsActive !== isActive) {
       if (isActive) {
-        if (isMultiTouchType) {
-          setPercent(Math.round(multiTouchDuration / duration));
-          setPercent(100);
-        } else {
-          setPercent(100);
-        }
+        setPercent(100);
       } else {
         setPercent(0);
       }
-    } else if (prevIsMultiTouchType !== isMultiTouchType && isMultiTouchType) {
-      setPercent(Math.round(multiTouchDuration / duration));
-      setPercent(100);
     }
-  }, [
-    prevIsActive,
-    isActive,
-    isMultiTouchType,
-    multiTouchDuration,
-    duration,
-    prevIsMultiTouchType
-  ]);
-
-  useEffect(() => {
-    if (isMultiTouchType) {
-      setActiveDuration(multiTouchDuration);
-    }
-  }, [isMultiTouchType, multiTouchDuration]);
+  }, [prevIsActive, isActive, isMultiTouchType, duration, prevIsMultiTouchType]);
 
   const gaugeDefaultStyle = css`
     transition: transform 1s;
@@ -105,7 +82,6 @@ RadialGauge.propTypes = {
   duration: PropTypes.number,
   isMultiTouchType: PropTypes.bool,
   multiTouchMultiplier: PropTypes.number,
-  multiTouchDuration: PropTypes.number
 };
 
 export default RadialGauge;

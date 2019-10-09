@@ -1,6 +1,7 @@
 /* eslint-disable import/no-named-as-default */
 import React, {
   useLayoutEffect,
+  useEffect,
   useState,
   memo,
   useRef,
@@ -20,6 +21,8 @@ import { getTaskPhase } from "../../state/tasks";
 import { playSFX as _playSFX } from "../../state/sfx";
 
 import Orb from "./Orb";
+import RadialGauge from "./RadialGauge";
+
 import {
   completedOrbHandler,
   createRandomLayout,
@@ -58,7 +61,6 @@ const OrbManager = ({
   const [orbModels, setOrbModelsState] = useState([]);
   const defaultTouchedOrbsByType = {
     multiTouchType: null,
-    multiTouchDurationLeft: null
   };
   const touchedOrbReducer = useCallback(
     (orbsByType, possibleItem) => {
@@ -77,6 +79,8 @@ const OrbManager = ({
   const [orbsZIndex, setOrbsZIndex] = useState([]);
   // tick is used to modulate movement based on an incrementing value
   const [tick, setTick] = useState(0);
+  const [multiTouchTimeout, setMultiTouchTimeout] = useState(null);
+  const [MultiTouchRadialGauge, setMultiTouchRadialGauge] = useState(null);
 
   // the boundaries of the OrbManagers area
   const boundsRef = useRef();
@@ -84,6 +88,7 @@ const OrbManager = ({
   const prevBounds = usePrevious(bounds);
   const prevTaskPhase = usePrevious(taskPhase);
   const prevPossibleItems = usePrevious(possibleItems);
+  const prevMultiTouchType = usePrevious(touchedOrbsByType.multiTouchType);
 
   /* Generate new orbModels when the interface bounds change, usually only on load. Most often, generate new orbModels when switching between voting and solving. This catalyzes orb data and placement */
   useLayoutEffect(() => {
@@ -115,6 +120,22 @@ const OrbManager = ({
     taskPhase,
     touchedOrbReducer
   ]);
+
+  // Every second, decrease the saved multiTouchDurationLeft
+  useEffect(() => {
+    const newType = touchedOrbsByType.multiTouchType !== prevMultiTouchType;
+    if (touchedOrbsByType.multiTouchType && newType) {
+      const curriedRadialGauge = (isActive, size, isMultiTouchType) => {
+        return (<RadialGauge
+          isActive={isActive}
+          size={size}
+          duration={1}
+          isMultiTouchType={isMultiTouchType}
+          multiTouchMultiplier={multiTouchMultiplier}
+        />);
+      };
+      setMultiTouchRadialGauge(curriedRadialGauge)
+    }, [multiTouchTimeout, prevMultiTouchType, touchedOrbsByType.multiTouchDurationLeft, touchedOrbsByType.multiTouchType]);
 
   const onOrbSelectionCallback = useCallback(
     orbId => {
@@ -150,63 +171,69 @@ const OrbManager = ({
     [orbsZIndex, playSFX]
   );
 
-  const checkAndUpdateMultiTouch = useCallback(
-    type => {
-      const threeOrMoreOfTypeTouched = touchedOrbsByType[type].size >= 3;
-      const isMatchLockableType = matchLockableTypes.indexOf(type) > -1;
-      const typeEligibleForMultiTouch =
-        isMatchLockableType && threeOrMoreOfTypeTouched;
-      const multiTouchedTypeIsInputType =
-        type === touchedOrbsByType.multiTouchType;
+  useEffect(() => {
+    console.log(touchedOrbsByType.multiTouchType);
+  }, [touchedOrbsByType.multiTouchType])
 
-      // If type is current multiTouchType and no longer eligible, replace with null
-      if (multiTouchedTypeIsInputType && !typeEligibleForMultiTouch) {
-        return {
-          multiTouchType: null,
-          multiTouchDurationLeft: null
-        };
-        // If there is no multiTouchType and the type is eligible, replace with the type
-        // eslint-disable-next-line no-else-return
-      } else if (
-        !touchedOrbsByType.multiTouchType &&
-        typeEligibleForMultiTouch
-      ) {
-        return {
-          multiTouchType: type,
-          multiTouchDurationLeft: 1
-        };
-      }
-      // Default: return same multiTouchType
-      return {
-        multiTouchType: touchedOrbsByType.multiTouchType,
-        multiTouchDurationLeft: touchedOrbsByType.multiTouchDurationLeft
+  // UPPDATE MULTITOUCH ON TOUCH CHANGE
+  const touchChangeUpdateMultiTouch = useCallback(
+    (orbModel, addOrb) => {
+      const { type, orbId } = orbModel;
+      const newTouchedByType = {
+        ...touchedOrbsByType,
+        [type]: new Set(touchedOrbsByType[type])
       };
+
+      // Add the orb, set to multiTouch if applicable
+      if (addOrb) {
+        newTouchedByType[type].add(orbId);
+
+        const noCurrentMultiTouch = !touchedOrbsByType.multiTouchType;
+        const isMatchLockableType = matchLockableTypes.indexOf(type) > -1;
+        const threeOrMoreOfTypeTouched = newTouchedByType[type].size >= 3;
+
+        if (noCurrentMultiTouch && isMatchLockableType && threeOrMoreOfTypeTouched) {
+          newTouchedByType.multiTouchType = type;
+          newTouchedByType.multiTouchDurationLeft = 1;
+          // Tick should auto start
+          console.log('TOUCH: new multitouch type on start', type)
+        }
+      } else { // Do remove orb operations
+        newTouchedByType[type].delete(orbId);
+
+        const isCurrentMultiTouch = touchedOrbsByType.multiTouchType === type;
+        const threeOrMoreOfTypeTouched = newTouchedByType[type].size >= 3;
+        if (isCurrentMultiTouch && !threeOrMoreOfTypeTouched) {
+          // Check if there's a different multitouchable type with 3+ entries and set to that, or if none set to null state
+          const nextMatchLockableTypes = matchLockableTypes.filter(matchLockableType => newTouchedByType[matchLockableType] && newTouchedByType[matchLockableType].size >= 3);
+          if (nextMatchLockableTypes.length > 0) {
+            newTouchedByType.multiTouchType = nextMatchLockableTypes[0];
+            newTouchedByType.multiTouchDurationLeft = 1;
+            // Tick should auto start
+            console.log('TOUCH: new multitouch type after stop', nextMatchLockableTypes[0])
+          } else {
+            newTouchedByType.multiTouchType = null;
+            newTouchedByType.multiTouchDurationLeft = null;
+          }
+        }
+      }
+      setTouchedOrbsByType(newTouchedByType);
     },
     [matchLockableTypes, touchedOrbsByType]
   );
 
   const setOrbTouched = useCallback(
     (orbModel, isTouched) => {
-      const { orbId, type } = orbModel;
+      const { orbId } = orbModel;
       if (isTouched) {
-        setTouchedOrbsByType(prevTouchedOrbsByType => ({
-          ...prevTouchedOrbsByType,
-          [type]: prevTouchedOrbsByType[type].add(orbId),
-          ...checkAndUpdateMultiTouch(type)
-        }));
+        touchChangeUpdateMultiTouch(orbModel, true);
         changeOrbZIndex(orbId);
         return;
       }
 
-      setTouchedOrbsByType(prevTouchedOrbsByType => {
-        prevTouchedOrbsByType[type].delete(orbId);
-        return {
-          ...prevTouchedOrbsByType,
-          ...checkAndUpdateMultiTouch(type)
-        };
-      });
+      touchChangeUpdateMultiTouch(orbModel, false);
     },
-    [changeOrbZIndex, checkAndUpdateMultiTouch]
+    [changeOrbZIndex, touchChangeUpdateMultiTouch]
   );
 
   const setOrbComplete = useCallback(orbId => {
@@ -340,6 +367,7 @@ const OrbManager = ({
                 delay={orb.delay}
                 isMultiTouchType={isMultiTouchType}
                 multiTouchDuration={touchedOrbsByType.multiTouchDurationLeft}
+                MultiTouchRadialGauge={MultiTouchRadialGauge}
               />
             </div>
           );
