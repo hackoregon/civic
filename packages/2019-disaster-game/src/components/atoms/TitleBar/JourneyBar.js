@@ -179,7 +179,8 @@ const JourneyBar = ({
           css={css`
             ${sectionStyle};
             ${savingYourself && activeSectionStyle};
-            ${(activeChapterIndex > 3 || !savingYourself) &&
+            ${(activeChapterIndex > 3 ||
+              (activeChapterIndex === 3 && !savingYourself)) &&
               completedSectionStyle};
           `}
         >
