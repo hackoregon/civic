@@ -22,8 +22,8 @@ import { SOLVING, VOTING, MOVING_MAP } from "../../../constants/actions";
 import { chooseRandomTask } from "./voteUtils";
 
 import taskSong from "../../../../assets/audio/HappyTheme2fadeinout.mp3";
-import audioVoteInstruction from "../../../../assets/audio/task_screen/6_boy_who_should_we_help_next.mp3";
-import audioVoteMotivate from "../../../../assets/audio/task_screen/4_boy_lets_go_do_it_enthusiastic.mp3";
+import audioVoteInstruction from "../../../../assets/audio/task_screen/boy/who_should_we_help_next.mp3";
+import audioVoteMotivate from "../../../../assets/audio/task_screen/boy/lets_go_do_it_enthusiastic.mp3";
 import Song from "../../atoms/Audio/Song";
 
 import MatchLockInterface from "../../atoms/MatchLockInterface";
@@ -192,19 +192,23 @@ const TaskScreen = ({
   /* RENDER CONDITIONS */
   const isSolving = taskPhase === SOLVING;
   const isVoting = taskPhase === VOTING;
+  const movingMap = taskPhase === MOVING_MAP;
   const onOrbSelection = isSolving ? onItemSelection : onTaskSelection;
   const checkItemIsCorrect = isSolving
     ? checkSolutionIsCorrect
     : checkVoteIsCorrect;
   const activeScreen = taskPhase;
   // Save yourself message
-  let interfaceMessage = "Prepare yourself to help others!";
+  let interfaceMessage = "Help yourself first!";
   if (isSolving && activeTaskIndex > 1) {
     // Save others message
     interfaceMessage = "How can I help?";
   } else if (isVoting) {
     // Choose next task message
     interfaceMessage = "Who should we help next?";
+  } else if (movingMap) {
+    // Going to next task message...
+    interfaceMessage = "Let's go do it!";
   }
 
   return (
