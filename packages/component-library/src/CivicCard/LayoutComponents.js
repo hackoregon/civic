@@ -3,6 +3,7 @@ import { jsx } from "@emotion/core";
 import { Fragment } from "react";
 import PropTypes from "prop-types";
 import _ from "lodash";
+import { generate } from "shortid";
 
 import Collapsable from "../Collapsable/Collapsable";
 
@@ -12,7 +13,7 @@ export function Resource({ section }) {
       <h3>{section.heading}</h3>
       <ul>
         {section.items.map(item => (
-          <li>
+          <li key={generate()}>
             <a href={item.link}>{item.description}</a>
           </li>
         ))}
@@ -47,11 +48,11 @@ MetadataQuestion.propTypes = {
   answer: PropTypes.string
 };
 
-export function CollapsableSection({ items, collapseAfter }) {
+export function CollapsableSection({ items, collapseAfter, description }) {
   const beforeFold = _.slice(items, 0, collapseAfter);
   const afterFold = _.slice(items, collapseAfter);
   return (afterFold && afterFold.length) > 0 ? (
-    <Collapsable>
+    <Collapsable description={description}>
       <Collapsable.Section>{beforeFold}</Collapsable.Section>
       <Collapsable.Section hidden>{afterFold}</Collapsable.Section>
     </Collapsable>
@@ -62,5 +63,6 @@ export function CollapsableSection({ items, collapseAfter }) {
 
 CollapsableSection.propTypes = {
   items: PropTypes.arrayOf(PropTypes.node),
-  collapseAfter: PropTypes.number
+  collapseAfter: PropTypes.number,
+  description: PropTypes.string
 };

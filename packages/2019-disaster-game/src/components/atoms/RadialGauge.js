@@ -11,7 +11,7 @@ const RadialGauge = ({ isActive, size, duration }) => {
   const [percent, setPercent] = useState(0);
   const prevIsActive = usePrevious(isActive);
   const progressBarStyle = {
-    pathColor: palette.turqoise,
+    pathColor: palette.lightBlue,
     trailColor: "transparent",
     // Whether to use rounded or flat corners on the ends
     strokeLinecap: "butt",

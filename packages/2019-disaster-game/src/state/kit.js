@@ -1,13 +1,18 @@
 import { createReducer, createSelector } from "redux-starter-kit";
 import size from "lodash/size";
-import itemTypes from "../constants/items";
+import itemTypes, { food, water, firstAidKit } from "../constants/items";
 
 // INITIAL STATE
 // items will be a list of objects, where each object is an id and a quantity
 // the id is related to the items reducer
 const initialState = {
   items: itemTypes,
-  playerKit: {}
+  playerKit: {},
+  matchLockItemsInKit: {
+    [food]: 0,
+    [water]: 0,
+    [firstAidKit]: 0
+  }
 };
 
 // CONSTANTS
@@ -23,8 +28,8 @@ export const addItem = (itemId, quantity = 1) => dispatch => {
   dispatch({ type: actionTypes.ADD_ITEM, itemId, quantity });
 };
 
-export const addItemToPlayerKit = itemId => dispatch => {
-  dispatch({ type: actionTypes.ADD_ITEM_TO_PLAYER_KIT, itemId });
+export const addItemToPlayerKit = kitItem => dispatch => {
+  dispatch({ type: actionTypes.ADD_ITEM_TO_PLAYER_KIT, kitItem });
 };
 
 export const resetState = () => dispatch => {
@@ -35,7 +40,11 @@ export const resetState = () => dispatch => {
 /* eslint-disable no-param-reassign */
 export const kit = createReducer(initialState, {
   [actionTypes.ADD_ITEM_TO_PLAYER_KIT]: (state, action) => {
-    state.playerKit[action.itemId] = true;
+    const isMatchLockItem = !!state.matchLockItemsInKit[action.kitItem.type];
+    if (isMatchLockItem) {
+      state.matchLockItemsInKit[action.kitItem.type] += 1;
+    }
+    state.playerKit[action.kitItem.type] = action.kitItem;
   },
   [actionTypes.RESET_STATE]: () => {
     return initialState;
@@ -60,6 +69,11 @@ export const getItemCount = createSelector(
 export const getPlayerKit = createSelector(
   ["kit.playerKit"],
   playerKit => playerKit
+);
+
+export const getMatchLockItemsInKit = createSelector(
+  ["kit.matchLockItemsInKit"],
+  matchLockItemsInKit => matchLockItemsInKit
 );
 
 export const getKitCreationItems = createSelector(

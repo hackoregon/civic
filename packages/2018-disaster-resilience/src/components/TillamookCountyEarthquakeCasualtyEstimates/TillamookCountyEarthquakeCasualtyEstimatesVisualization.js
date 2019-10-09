@@ -19,7 +19,7 @@ const TillamookCountyEarthquakeCasualtyEstimatesVisualization = ({ data }) => {
 
   const mapStyles = {
     "Daytime - Injuries": {
-      field: "daytime_in",
+      field: "DaytimeInjuries",
       color: VisualizationColors.categorical.yellow.mapFormatRGBA,
       opacity: 0.1,
       map: "light",
@@ -27,7 +27,7 @@ const TillamookCountyEarthquakeCasualtyEstimatesVisualization = ({ data }) => {
       impact: "injuries"
     },
     "Daytime - Casualties": {
-      field: "daytime_de",
+      field: "DaytimeDeaths",
       color: VisualizationColors.categorical.pink.mapFormatRGBA,
       opacity: 0.3,
       map: "light",
@@ -35,7 +35,7 @@ const TillamookCountyEarthquakeCasualtyEstimatesVisualization = ({ data }) => {
       impact: "casualties"
     },
     "Nighttime - Injuries": {
-      field: "nighttim_1",
+      field: "NighttimeInjuries",
       color: VisualizationColors.categorical.green.mapFormatRGBA,
       opacity: 0.1,
       map: "dark",
@@ -43,7 +43,7 @@ const TillamookCountyEarthquakeCasualtyEstimatesVisualization = ({ data }) => {
       impact: "injuries"
     },
     "Nighttime - Casualties": {
-      field: "nighttime_field",
+      field: "NighttimeDeaths",
       color: VisualizationColors.categorical.green.mapFormatRGBA,
       opacity: 0.3,
       map: "dark",

@@ -3,22 +3,27 @@ import { css, jsx } from "@emotion/core";
 import { memo, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
+import { sample } from "lodash";
 
-import { goToNextChapter } from "../../../state/chapters";
+import {
+  goToNextChapter,
+  getActiveChapterDuration
+} from "../../../state/chapters";
 import Timer from "../../../utils/timer";
 
 import Song from "../../atoms/Audio/Song";
 
 import songFile from "../../../../assets/audio/PWolfEarthquakesound15secmp3.mp3";
 import videoFile from "../../../../assets/video/OMG_EARTHQUAKE.mp4";
-import instructionalAudio from "../../../../assets/audio/earthquake_screen/5_boy_its_an_earthquake_drop.mp3";
+import instructionalAudioBoy from "../../../../assets/audio/earthquake_screen/boy_earthquake.mp3";
+import instructionalAudioGirl from "../../../../assets/audio/earthquake_screen/girl_earthquake.mp3";
 
 const videoStyles = css`
   width: 100vw;
   height: auto;
 `;
 
-const QuakeScreen = ({ endChapter, chapterDuration = 13 }) => {
+const QuakeScreen = ({ endChapter, chapterDuration }) => {
   const [chapterTimer] = useState(new Timer());
 
   // start a timer for the _entire_ chapter
@@ -30,6 +35,11 @@ const QuakeScreen = ({ endChapter, chapterDuration = 13 }) => {
       chapterTimer.stop();
     };
   }, [chapterDuration, chapterTimer, endChapter]);
+
+  const instructionalAudio = sample([
+    instructionalAudioBoy,
+    instructionalAudioGirl
+  ]);
 
   return (
     <div>
@@ -48,6 +58,10 @@ QuakeScreen.propTypes = {
   chapterDuration: PropTypes.number
 };
 
+const mapStateToProps = state => ({
+  chapterDuration: getActiveChapterDuration(state)
+});
+
 const mapDispatchToProps = dispatch => ({
   endChapter() {
     dispatch(goToNextChapter());
@@ -55,6 +69,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(memo(QuakeScreen));

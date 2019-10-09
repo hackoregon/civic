@@ -113,14 +113,7 @@ A single story file can include multiple scenarios. Use this to your advantage t
 When making a new component, that component needs to be re-exported in [`packages/component-library/src/index.js`](packages/component-library/src/index.js).
 This makes the component accessible to anyone importing the component via npm.
 
-When making any change to a component in the component library, the changes need to be built and committed to source control. Since
-the components are authored in ES6 but not necessarily imported with ES6, the components are prebuilt.
-
-Build with `yarn build` while in the `packages/component-library` directory. This will generate changes in the `es` and `dist` directories.
-Commit those changes.
-
-Please make sure to commit changes to source code and changes to build artifacts in _separate commits_. This makes it much easier to read
-through the git log and revert bad changes when necessary.
+Build with `yarn build` while in the `packages/component-library` directory (or run `yarn bootstrap` from the project root). This will generate changes in the `es` and `dist` directories. These build directories are not committed to source control.
 
 ## Creating Story Cards
 

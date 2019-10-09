@@ -4,19 +4,24 @@ import { memo, Fragment, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { sample } from "lodash";
 
-import { goToNextChapter } from "../../../state/chapters";
+import {
+  goToNextChapter,
+  getActiveChapterDuration
+} from "../../../state/chapters";
 import { getKitCreationItems, addItemToPlayerKit } from "../../../state/kit";
 import { addPoints } from "../../../state/user";
 import { palette } from "../../../constants/style";
-import { MapStyle } from "../index";
-import MatchLockInterface from "../../atoms/MatchLockInterface";
-import Kit from "./Kit";
 import Timer from "../../../utils/timer";
+import MatchLockInterface from "../../atoms/MatchLockInterface";
 import Song from "../../atoms/Audio/Song";
+import { MapStyle } from "../index";
+import Kit from "./Kit";
 
 import kitSong from "../../../../assets/audio/HappyTheme1fadeinout.mp3";
-import instructionalAudio from "../../../../assets/audio/kit_screen/1_boy_lets_prepare_for_an_earthquake.mp3";
+import instructionalAudioBoy from "../../../../assets/audio/kit_screen/boy_lets_prepare_for_an_earthquake.mp3";
+import instructionalAudioGirl from "../../../../assets/audio/kit_screen/girl_lets_prepare_for_an_earthquake.mp3";
 
 const slide = keyframes`
   0% {
@@ -56,17 +61,13 @@ const KitScreen = ({
   addPointsToState,
   addItemToPlayerKitInState,
   endChapter,
-  chapterDuration = 30
+  chapterDuration
 }) => {
   const [chapterTimer] = useState(new Timer());
-  const [percentComplete, setPercentComplete] = useState(0);
 
   // start a timer for the _entire_ chapter
   useEffect(() => {
     chapterTimer.setDuration(chapterDuration);
-    chapterTimer.addCallback((t, p) => {
-      setPercentComplete(p);
-    });
     chapterTimer.addCompleteCallback(() => endChapter());
     chapterTimer.start();
     return () => {
@@ -76,13 +77,17 @@ const KitScreen = ({
 
   const onKitItemSelection = kitItem => {
     if (kitItem.good) {
-      addItemToPlayerKitInState(kitItem.type);
+      addItemToPlayerKitInState(kitItem);
       addPointsToState(kitItem.points);
     }
     return kitItem.good;
   };
 
   const checkIfItemIsGood = kitItem => kitItem.good;
+  const instructionalAudio = sample([
+    instructionalAudioBoy,
+    instructionalAudioGirl
+  ]);
 
   return (
     <Fragment>
@@ -100,7 +105,7 @@ const KitScreen = ({
         onOrbSelection={onKitItemSelection}
         checkItemIsCorrect={checkIfItemIsGood}
         activeScreen="kit"
-        tickerTapeText="Choose your earthquake preparation kit"
+        interfaceMessage="What do we need?"
       />
     </Fragment>
   );
@@ -122,7 +127,8 @@ KitScreen.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  possibleItems: getKitCreationItems(state)
+  possibleItems: getKitCreationItems(state),
+  chapterDuration: getActiveChapterDuration(state)
 });
 
 const mapDispatchToProps = dispatch => ({
