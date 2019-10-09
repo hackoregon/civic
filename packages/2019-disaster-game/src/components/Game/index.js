@@ -42,12 +42,15 @@ const Game = ({ activeChapterId }) => {
     }
   };
 
+  const showTitleBar =
+    activeChapterId !== ATTRACTOR && activeChapterId !== QUAKE;
+
   return (
     <Fragment>
       {activeChapterId === ATTRACTOR && <AttractorScreen />}
       {activeChapterId !== ATTRACTOR && (
         <GameContainerStyle>
-          {activeChapterId !== ATTRACTOR && <TitleBar />}
+          {showTitleBar && <TitleBar />}
           <GameGrid>{renderChapter(activeChapterId)}</GameGrid>
         </GameContainerStyle>
       )}
