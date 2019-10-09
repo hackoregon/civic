@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 import { palette } from "../../../constants/style";
 
 const containerStyle = css`
-  height: 175px;
+  height: 130px;
   width: 700px;
   background-color: ${palette.lemon};
   display: grid;
@@ -28,10 +28,10 @@ const justifyRightStyle = css`
 const headerStyle = css`
   font-family: "Luckiest Guy", sans-serif;
   font-size: 4rem;
-  line-height: initial;
+  line-height: 3.75rem;
   color: ${palette.blue};
   margin: 0;
-  padding-top: 15px;
+  padding: 0;
 `;
 
 const labelStyle = css`

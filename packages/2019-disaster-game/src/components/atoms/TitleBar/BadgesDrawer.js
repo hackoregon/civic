@@ -24,11 +24,10 @@ const openStyle = css`
 
 const headerStyle = css`
   font-family: "Luckiest Guy", sans-serif;
-  font-size: 4rem;
+  font-size: 3.75rem;
   line-height: initial;
   color: ${palette.blue};
   margin: 0;
-  padding-top: 15px;
 `;
 
 const badgesContainer = css`
