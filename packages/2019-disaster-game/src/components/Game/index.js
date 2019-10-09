@@ -24,7 +24,7 @@ import TaskScreen from "./TaskScreen/index";
 import SummaryScreen from "./SummaryScreen/index";
 
 import "@hackoregon/component-library/assets/global.styles.css";
-import summarySong from "../../../assets/audio/PWolf-happysong1wfadeinout.mp3";
+import summarySong from "../../../assets/audio/summary_screen/summary_song.mp3";
 
 const Game = ({ activeChapterId }) => {
   const renderChapter = chapterId => {
