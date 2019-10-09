@@ -14,9 +14,6 @@ const storyLinkClass = css`
     color: #000;
     border: none;
     background-color: #eee;
-    &:focus {
-      outline: 0;
-    }
 
     &:hover {
       background-color: rgba(0, 0, 0, 0.1);
