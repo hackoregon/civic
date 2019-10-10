@@ -8,7 +8,7 @@ import { shuffle } from "lodash";
 import { getActiveChapterId } from "../../../state/chapters";
 import { getActiveTaskData } from "../../../state/tasks";
 import { KIT, TASKS, SUMMARY } from "../../../constants/chapters";
-import EHLogo from "../../../../assets/short-logo.svg";
+import QRCode from "../../../../assets/earthquake-heroes-qr-code.svg";
 import {
   KitTickerTape,
   SelectionTickerTape,
@@ -50,12 +50,13 @@ const fullInfoContainer = css`
   grid-template-columns: 355px 3380px;
 `;
 
-const logoStyle = css`
+const QRCodeStyle = css`
   height: 160px;
 `;
 
 const TitleBar = ({ activeChapterId, activeTaskData }) => {
   const [open, setOpen] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [badgeDrawerOpen, setBadgeDrawerOpen] = useState(false);
   const [screenMessages, setScreenMessages] = useState([]);
 
@@ -76,16 +77,6 @@ const TitleBar = ({ activeChapterId, activeTaskData }) => {
     }
   }, [activeChapterId, activeTaskData]);
 
-  useEffect(() => {
-    const badgeDrawerOpenTimeout = setTimeout(() => {
-      setBadgeDrawerOpen(!badgeDrawerOpen);
-    }, 5 * 1000);
-
-    return () => {
-      clearTimeout(badgeDrawerOpenTimeout);
-    };
-  }, [badgeDrawerOpen]);
-
   return (
     <div
       css={css`
@@ -100,7 +91,11 @@ const TitleBar = ({ activeChapterId, activeTaskData }) => {
           ${badgeDrawerOpen && fullInfoContainer}
         `}
       >
-        <img src={EHLogo} alt="Earthquake Heroes logo" css={logoStyle} />
+        <img
+          src={QRCode}
+          alt="QR code for civicplatform.org"
+          css={QRCodeStyle}
+        />
         <JourneyBar badgeDrawerOpen={badgeDrawerOpen} />
         {activeChapterId === TASKS && (
           <Fragment>

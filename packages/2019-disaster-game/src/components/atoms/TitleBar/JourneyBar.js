@@ -29,7 +29,7 @@ const openContainerStyle = css`
 `;
 
 const journeyBarContainerStyle = css`
-  height: 175px;
+  height: 130px;
   width: 2200px;
   background-color: ${palette.lime};
   display: grid;
@@ -171,7 +171,7 @@ const JourneyBar = ({
           {activeChapterIndex > 1 && (
             <img src={CheckmarkSVG} alt="checkmark" css={checkmarkStyle} />
           )}
-          <p>PREPARE A KIT</p>
+          <p>COLLECT A KIT</p>
         </div>
 
         {/* Save Yourself */}
@@ -179,7 +179,8 @@ const JourneyBar = ({
           css={css`
             ${sectionStyle};
             ${savingYourself && activeSectionStyle};
-            ${(activeChapterIndex > 3 || !savingYourself) &&
+            ${(activeChapterIndex > 3 ||
+              (activeChapterIndex === 3 && !savingYourself)) &&
               completedSectionStyle};
           `}
         >
@@ -194,7 +195,7 @@ const JourneyBar = ({
           {(savingOthers || activeChapterIndex > 3) && (
             <img src={CheckmarkSVG} alt="checkmark" css={checkmarkStyle} />
           )}
-          <p>GET READY</p>
+          <p>HELP YOURSELF</p>
         </div>
 
         {/* Save Others */}

@@ -72,9 +72,8 @@ const buttonStyle = css`
 const buttonFont = css`
   width: 100%;
   margin: 0 auto;
-  font-family: "Boogaloo", sans-serif;
+  font-family: "Luckiest Guy", sans-serif;
   font-size: 12rem;
-  font-weight: 900;
   color: white;
 `;
 
