@@ -218,6 +218,7 @@ const TaskScreen = ({
           open={taskPhase === SOLVING}
           activeTask={activeTask}
           activeTaskIndex={activeTaskIndex}
+          correctItemsChosen={correctItemsChosen}
         />
         <VoteMapScreen
           activeTask={activeTask}
