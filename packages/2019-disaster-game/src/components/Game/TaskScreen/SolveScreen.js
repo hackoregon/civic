@@ -4,6 +4,7 @@ import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
 import { useState, useEffect } from "react";
 import { getActiveTaskData } from "../../../state/tasks";
+import RequiredItemsOrbs from "./RequiredItemsOrbs";
 
 const screenLayout = css`
   position: absolute;
@@ -23,7 +24,18 @@ const onScreenStyle = css`
   transform: translateY(0%);
 `;
 
-const SolveScreen = ({ activeTask, activeTaskIndex, open }) => {
+const requiredItemsStyle = css`
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+`;
+
+const SolveScreen = ({
+  activeTask,
+  activeTaskIndex,
+  open,
+  correctItemsChosen
+}) => {
   const taskImageGenerator = currentTask => {
     if (currentTask) {
       return css`
@@ -56,6 +68,14 @@ const SolveScreen = ({ activeTask, activeTaskIndex, open }) => {
       `}
     >
       <div css={taskImageCSS} />
+      {activeTask && (
+        <RequiredItemsOrbs
+          css={requiredItemsStyle}
+          numberRequiredItems={activeTask.numberItemsToSolve}
+          correctItemsChosen={correctItemsChosen}
+          requiredItem={activeTask.requiredItem}
+        />
+      )}
     </div>
   );
 };
@@ -63,7 +83,8 @@ const SolveScreen = ({ activeTask, activeTaskIndex, open }) => {
 SolveScreen.propTypes = {
   activeTaskIndex: PropTypes.number,
   activeTask: PropTypes.shape({}),
-  open: PropTypes.bool
+  open: PropTypes.bool,
+  correctItemsChosen: PropTypes.number
 };
 
 const mapStateToProps = state => ({
