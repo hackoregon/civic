@@ -104,7 +104,8 @@ const OrbManager = ({
   );
 
   const setOrbTouched = useCallback(
-    (orbId, isTouched) => {
+    (orbModel, isTouched) => {
+      const { orbId, good } = orbModel;
       if (isTouched) {
         setTouchedOrb(prevOrbs => [...prevOrbs, orbId]);
 
@@ -122,7 +123,11 @@ const OrbManager = ({
         setOrbsZIndex(orbsByLastTouched);
 
         // play orb sound
-        playSFX(SFX_TYPES.GOOD_CHOICE);
+        if (good) {
+          playSFX(SFX_TYPES.GOOD_CHOICE);
+        } else {
+          playSFX(SFX_TYPES.BAD_CHOICE);
+        }
 
         return;
       }
@@ -136,9 +141,15 @@ const OrbManager = ({
     [touchedOrbs, orbsZIndex, playSFX]
   );
 
-  const setOrbComplete = useCallback(orbId => {
-    setCompletedOrbs(prevOrbs => [...prevOrbs, orbId]);
-  }, []);
+  const setOrbComplete = useCallback(
+    orbModel => {
+      setCompletedOrbs(prevOrbs => [...prevOrbs, orbModel.orbId]);
+      if (orbModel.good === false && SFX_TYPES[orbModel.type]) {
+        playSFX(orbModel.type);
+      }
+    },
+    [playSFX]
+  );
 
   // `animate` is called every frame
   // eslint-disable-next-line consistent-return
@@ -255,14 +266,11 @@ const OrbManager = ({
               }}
             >
               <Orb
-                orbId={orb.orbId}
-                imageSVG={orb.imageSVG}
-                imgAlt={orb.imgAlt}
+                orbModel={orb}
                 size={ORB_CONFIG.orbSize}
                 addOrbScore={addOrbScore}
                 setOrbTouched={setOrbTouched}
                 setOrbComplete={setOrbComplete}
-                delay={orb.delay}
               />
             </div>
           );

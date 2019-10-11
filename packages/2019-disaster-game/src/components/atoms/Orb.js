@@ -57,7 +57,8 @@ export default class Orb extends PureComponent {
   componentDidMount() {
     // If this is the first render
     const { hasAnimated } = this.state;
-    const { delay } = this.props;
+    const { orbModel } = this.props;
+    const { delay } = orbModel;
 
     if (!hasAnimated) {
       // make the component 0 alpha, smaller, and slightly lower on the screen
@@ -75,11 +76,12 @@ export default class Orb extends PureComponent {
 
   componentDidUpdate(prevProps, prevState) {
     const { isComplete } = this.state;
-    const { addOrbScore, orbId, setOrbComplete } = this.props;
+    const { addOrbScore, orbModel, setOrbComplete } = this.props;
+    const { orbId } = orbModel;
 
     if (!prevState.isComplete && isComplete) {
       addOrbScore(orbId);
-      setOrbComplete(orbId);
+      setOrbComplete(orbModel);
     }
   }
 
@@ -98,26 +100,28 @@ export default class Orb extends PureComponent {
 
   handleOrbPress = () => {
     const { isComplete } = this.state;
-    const { orbId, setOrbTouched } = this.props;
+    const { orbModel, setOrbTouched } = this.props;
+
     // if already pressed, do nothing
     if (isComplete) return;
 
     this.setState({ isActive: true }, () => {
       this.incrementGauge();
     });
-    setOrbTouched(orbId, true);
+    setOrbTouched(orbModel, true);
   };
 
   handleOrbRelease = () => {
     this.setState({ isActive: false });
-    const { orbId, setOrbTouched } = this.props;
-    setOrbTouched(orbId, false);
+    const { orbModel, setOrbTouched } = this.props;
+    setOrbTouched(orbModel, false);
   };
 
   render() {
     const { isActive, isComplete } = this.state;
     // eslint-disable-next-line no-unused-vars
-    const { size, imageSVG, imgAlt } = this.props;
+    const { size, orbModel } = this.props;
+    const { imageSVG, imgAlt, good } = orbModel;
 
     const sizeStyle = css`
       height: ${size}px;
@@ -133,7 +137,7 @@ export default class Orb extends PureComponent {
 
     let orbClass = "";
     if (isActive) orbClass = "circle-press-style";
-    if (isComplete) orbClass = "circle-bad-item-style";
+    if (isComplete && !good) orbClass = "circle-bad-item-style";
 
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
@@ -172,12 +176,14 @@ export default class Orb extends PureComponent {
 }
 
 Orb.propTypes = {
-  orbId: PropTypes.string,
+  orbModel: PropTypes.shape({
+    orbId: PropTypes.string,
+    imageSVG: PropTypes.string,
+    imgAlt: PropTypes.string,
+    delay: PropTypes.number
+  }),
   setOrbTouched: PropTypes.func,
   setOrbComplete: PropTypes.func,
   addOrbScore: PropTypes.func,
-  imageSVG: PropTypes.string,
-  imgAlt: PropTypes.string,
-  size: PropTypes.number,
-  delay: PropTypes.number
+  size: PropTypes.number
 };
