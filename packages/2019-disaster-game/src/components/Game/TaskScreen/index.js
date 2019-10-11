@@ -70,6 +70,7 @@ const TaskScreen = ({
   const [solvingTransitionTimeout, setSolvingTransitionTimeout] = useState(
     null
   );
+  const [animatingTaskTransition, setAnimatingTaskTransition] = useState(false);
   const prevTaskPhase = usePrevious(taskPhase);
 
   const goToTask = () => {
@@ -90,11 +91,13 @@ const TaskScreen = ({
         if (callback) {
           callback();
         }
-        goToNextPhase(wasTaskCompleted);
+        if (!animatingTaskTransition) {
+          goToNextPhase(wasTaskCompleted);
+        }
       });
       phaseTimer.start();
     },
-    [phaseTimer, goToNextPhase]
+    [phaseTimer, animatingTaskTransition, goToNextPhase]
   );
 
   // Timer: on chapter start
@@ -160,11 +163,13 @@ const TaskScreen = ({
       const itemsNowChosen = correctItemsChosen + 1;
       setCorrectItemsChosen(itemsNowChosen);
       if (itemsNowChosen >= activeTask.numberItemsToSolve) {
+        setAnimatingTaskTransition(true);
         completeActiveTask(activeTask);
         if (solvingTransitionTimeout) clearTimeout(solvingTransitionTimeout);
         const newTimeout = setTimeout(() => {
           phaseTimer.stopEarly();
           setCorrectItemsChosen(0);
+          setAnimatingTaskTransition(false);
         }, 1000);
         setSolvingTransitionTimeout(newTimeout);
       }
