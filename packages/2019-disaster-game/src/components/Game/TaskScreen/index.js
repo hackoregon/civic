@@ -14,7 +14,8 @@ import {
   goToNextTaskPhase,
   getActiveEnvironment,
   getTasksForEnvironment,
-  addTask
+  addTask,
+  completeTask
 } from "../../../state/tasks";
 import { getPlayerKitItems } from "../../../state/kit";
 import usePrevious from "../../../state/hooks/usePrevious";
@@ -54,7 +55,8 @@ const TaskScreen = ({
   activeEnvironment,
   addNextTask,
   weightedPlayerKitItems,
-  weightedTasks
+  weightedTasks,
+  completeActiveTask
 }) => {
   const [chapterTimer] = useState(new Timer());
   const [phaseTimer] = useState(new Timer());
@@ -77,7 +79,7 @@ const TaskScreen = ({
   };
 
   const startTimer = useCallback(
-    (duration, callback, completeTask, items) => {
+    (duration, callback, wasTaskCompleted, items) => {
       phaseTimer.reset();
       phaseTimer.setDuration(duration);
       phaseTimer.addCompleteCallback(() => {
@@ -85,7 +87,7 @@ const TaskScreen = ({
         if (callback) {
           callback();
         }
-        goToNextPhase(completeTask);
+        goToNextPhase(wasTaskCompleted);
       });
       phaseTimer.start();
     },
@@ -151,6 +153,7 @@ const TaskScreen = ({
     if (orbModel.type === activeTask.requiredItem) {
       setCorrectItemsChosen(correctItemsChosen + 1);
       if (correctItemsChosen >= activeTask.numberItemsToSolve) {
+        completeActiveTask(activeTask);
         phaseTimer.stopEarly();
       }
       return true;
@@ -259,7 +262,7 @@ const TaskScreen = ({
         />
       )}
       {/* Task question plays after instructional audio */}
-      {finishedTaskInstructionalAudio && (
+      {finishedTaskInstructionalAudio && activeTask && (
         <Song
           songFile={activeTask.audioQuestion}
           shouldLoop={false}
@@ -278,6 +281,7 @@ TaskScreen.propTypes = {
   endChapter: PropTypes.func,
   goToNextPhase: PropTypes.func,
   addNextTask: PropTypes.func,
+  completeActiveTask: PropTypes.func,
   weightedTasks: PropTypes.arrayOf(PropTypes.shape({})),
   weightedPlayerKitItems: PropTypes.arrayOf(PropTypes.shape({})),
   activeEnvironment: PropTypes.string,
@@ -298,11 +302,14 @@ const mapDispatchToProps = dispatch => ({
   endChapter() {
     dispatch(goToNextChapter());
   },
-  goToNextPhase(completeTask) {
-    dispatch(goToNextTaskPhase(completeTask));
+  goToNextPhase(taskToComplete) {
+    dispatch(goToNextTaskPhase(taskToComplete));
   },
   addNextTask(taskChoice) {
     dispatch(addTask(taskChoice));
+  },
+  completeActiveTask(activeTask) {
+    dispatch(completeTask(activeTask));
   }
 });
 
