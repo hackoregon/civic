@@ -3,7 +3,8 @@ import CHAPTERS from "../constants/chapters";
 
 const lastChapterIndex = CHAPTERS.length - 1;
 const initialState = {
-  activeChapterIndex: 0
+  activeChapterIndex: 1
+  // activeChapterIndex: 0
 };
 
 // CONSTANTS

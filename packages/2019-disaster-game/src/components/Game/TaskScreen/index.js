@@ -67,6 +67,9 @@ const TaskScreen = ({
     finishedTaskInstructionalAudio,
     setFinishedTaskInstructionalAudio
   ] = useState(false);
+  const [solvingTransitionTimeout, setSolvingTransitionTimeout] = useState(
+    null
+  );
   const prevTaskPhase = usePrevious(taskPhase);
 
   const goToTask = () => {
@@ -120,7 +123,10 @@ const TaskScreen = ({
         startTimer(activeTask.time, solvingCallback, true, weightedTasks);
       }
       if (taskPhase === VOTING) {
-        startTimer(votingDuration, null, null, []);
+        const newTimeout = setTimeout(() => {
+          startTimer(votingDuration, null, null, []);
+        }, 1000);
+        setSolvingTransitionTimeout(newTimeout);
       }
       if (taskPhase === MOVING_MAP) {
         startTimer(
@@ -151,10 +157,16 @@ const TaskScreen = ({
 
   const onItemSelection = orbModel => {
     if (orbModel.type === activeTask.requiredItem) {
-      setCorrectItemsChosen(correctItemsChosen + 1);
-      if (correctItemsChosen >= activeTask.numberItemsToSolve) {
+      const itemsNowChosen = correctItemsChosen + 1;
+      setCorrectItemsChosen(itemsNowChosen);
+      if (itemsNowChosen >= activeTask.numberItemsToSolve) {
         completeActiveTask(activeTask);
-        phaseTimer.stopEarly();
+        if (solvingTransitionTimeout) clearTimeout(solvingTransitionTimeout);
+        const newTimeout = setTimeout(() => {
+          phaseTimer.stopEarly();
+          setCorrectItemsChosen(0);
+        }, 1000);
+        setSolvingTransitionTimeout(newTimeout);
       }
       return true;
     }
@@ -221,6 +233,7 @@ const TaskScreen = ({
           open={taskPhase === SOLVING}
           activeTask={activeTask}
           activeTaskIndex={activeTaskIndex}
+          correctItemsChosen={correctItemsChosen}
         />
         <VoteMapScreen
           activeTask={activeTask}
