@@ -45,9 +45,8 @@ const VoteMapScreen = ({
       for (let i = 0; i < taskLocations.length; i += 1) {
         const taskAtLocation = taskLocations[i];
         if (taskAtLocation.type === currentTask.id) {
-          if (taskAtLocation.completed) {
-            possibleTaskLocation = taskAtLocation.location;
-          } else {
+          possibleTaskLocation = taskAtLocation.location;
+          if (!taskAtLocation.completed) {
             possibleTaskLocation = taskAtLocation.location;
             break;
           }
