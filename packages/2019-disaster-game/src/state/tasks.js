@@ -2,7 +2,12 @@ import { createReducer, createSelector } from "redux-starter-kit";
 import { shuffle } from "lodash";
 import size from "lodash/size";
 
-import { tasks, tasksForEnvironment, URBAN } from "../constants/tasks";
+import {
+  tasks,
+  tasksForEnvironment,
+  URBAN,
+  hardcodedTaskLocations
+} from "../constants/tasks";
 import { SOLVING, VOTING, MOVING_MAP, DONE } from "../constants/actions";
 
 const defaultEnv = URBAN;
@@ -11,6 +16,7 @@ const defaultSaveYourself = tasksForEnvironment[defaultEnv].saveYourself;
 // INITIAL STATE
 const initialState = {
   tasks,
+  taskLocations: hardcodedTaskLocations,
   tasksForEnvironment,
   activeEnvironment: defaultEnv,
   taskOrder: shuffle(defaultSaveYourself),
@@ -42,6 +48,10 @@ export const addTask = taskChoice => dispatch => {
 export const resetState = () => dispatch => {
   dispatch({ type: actionTypes.RESET_STATE });
 };
+export const completeTask = completedTask => dispatch => {
+  dispatch({ type: actionTypes.COMPLETE_TASK, completedTask });
+};
+
 // export const scoreTask = (taskToScore, itemsUsed) => dispatch => {
 //   dispatch({ type: actionTypes.SCORE_TASK, taskToScore, itemsUsed });
 // };
@@ -74,6 +84,17 @@ export const tasksReducer = createReducer(initialState, {
   },
   [actionTypes.RESET_STATE]: () => {
     return initialState;
+  },
+  [actionTypes.COMPLETE_TASK]: (state, action) => {
+    const { id } = action.completedTask;
+
+    for (let i = 0; i < state.taskLocations.length; i += 1) {
+      const taskAtLocation = state.taskLocations[i];
+      if (taskAtLocation.type === id && !taskAtLocation.completed) {
+        state.taskLocations[i].completed = true;
+        break;
+      }
+    }
   }
   // [actionTypes.SCORE_TASK]: (state, action) => {
   // },
@@ -152,12 +173,7 @@ export const getTasksForEnvironment = createSelector(
   foundTasks => foundTasks
 );
 
-// export const getTaskOrder = createSelector(
-//   ["tasks.taskOrder"],
-//   taskOrder => taskOrder
-// );
-
-// export const getCompletedTasks = createSelector(
-//   ["tasks.completedTasks"],
-//   completedTasks => completedTasks
-// );
+export const getTaskLocations = createSelector(
+  ["tasks.taskLocations"],
+  taskLocations => taskLocations
+);

@@ -14,7 +14,8 @@ import {
   goToNextTaskPhase,
   getActiveEnvironment,
   getTasksForEnvironment,
-  addTask
+  addTask,
+  completeTask
 } from "../../../state/tasks";
 import { getPlayerKitItems } from "../../../state/kit";
 import usePrevious from "../../../state/hooks/usePrevious";
@@ -54,7 +55,8 @@ const TaskScreen = ({
   activeEnvironment,
   addNextTask,
   weightedPlayerKitItems,
-  weightedTasks
+  weightedTasks,
+  completeActiveTask
 }) => {
   const [chapterTimer] = useState(new Timer());
   const [phaseTimer] = useState(new Timer());
@@ -68,6 +70,7 @@ const TaskScreen = ({
   const [solvingTransitionTimeout, setSolvingTransitionTimeout] = useState(
     null
   );
+  const [animatingTaskTransition, setAnimatingTaskTransition] = useState(false);
   const prevTaskPhase = usePrevious(taskPhase);
 
   const goToTask = () => {
@@ -80,7 +83,7 @@ const TaskScreen = ({
   };
 
   const startTimer = useCallback(
-    (duration, callback, completeTask, items) => {
+    (duration, callback, wasTaskCompleted, items) => {
       phaseTimer.reset();
       phaseTimer.setDuration(duration);
       phaseTimer.addCompleteCallback(() => {
@@ -88,11 +91,13 @@ const TaskScreen = ({
         if (callback) {
           callback();
         }
-        goToNextPhase(completeTask);
+        if (!animatingTaskTransition) {
+          goToNextPhase(wasTaskCompleted);
+        }
       });
       phaseTimer.start();
     },
-    [phaseTimer, goToNextPhase]
+    [phaseTimer, animatingTaskTransition, goToNextPhase]
   );
 
   // Timer: on chapter start
@@ -158,10 +163,13 @@ const TaskScreen = ({
       const itemsNowChosen = correctItemsChosen + 1;
       setCorrectItemsChosen(itemsNowChosen);
       if (itemsNowChosen >= activeTask.numberItemsToSolve) {
+        setAnimatingTaskTransition(true);
+        completeActiveTask(activeTask);
         if (solvingTransitionTimeout) clearTimeout(solvingTransitionTimeout);
         const newTimeout = setTimeout(() => {
           phaseTimer.stopEarly();
           setCorrectItemsChosen(0);
+          setAnimatingTaskTransition(false);
         }, 1000);
         setSolvingTransitionTimeout(newTimeout);
       }
@@ -272,7 +280,7 @@ const TaskScreen = ({
         />
       )}
       {/* Task question plays after instructional audio */}
-      {finishedTaskInstructionalAudio && (
+      {finishedTaskInstructionalAudio && activeTask && (
         <Song
           songFile={activeTask.audioQuestion}
           shouldLoop={false}
@@ -291,6 +299,7 @@ TaskScreen.propTypes = {
   endChapter: PropTypes.func,
   goToNextPhase: PropTypes.func,
   addNextTask: PropTypes.func,
+  completeActiveTask: PropTypes.func,
   weightedTasks: PropTypes.arrayOf(PropTypes.shape({})),
   weightedPlayerKitItems: PropTypes.arrayOf(PropTypes.shape({})),
   activeEnvironment: PropTypes.string,
@@ -311,11 +320,14 @@ const mapDispatchToProps = dispatch => ({
   endChapter() {
     dispatch(goToNextChapter());
   },
-  goToNextPhase(completeTask) {
-    dispatch(goToNextTaskPhase(completeTask));
+  goToNextPhase(taskToComplete) {
+    dispatch(goToNextTaskPhase(taskToComplete));
   },
   addNextTask(taskChoice) {
     dispatch(addTask(taskChoice));
+  },
+  completeActiveTask(activeTask) {
+    dispatch(completeTask(activeTask));
   }
 });
 

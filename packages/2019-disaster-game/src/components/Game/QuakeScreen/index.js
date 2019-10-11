@@ -80,8 +80,7 @@ const QuakeScreen = ({ endChapter, chapterDuration }) => {
 
   // start a timer for the _entire_ chapter
   useEffect(() => {
-    chapterTimer.setDuration(300);
-    // chapterTimer.setDuration(chapterDuration);
+    chapterTimer.setDuration(chapterDuration);
     chapterTimer.addCompleteCallback(() => endChapter());
     chapterTimer.start();
     return () => {
