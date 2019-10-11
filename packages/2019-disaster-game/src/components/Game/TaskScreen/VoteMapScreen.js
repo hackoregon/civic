@@ -88,7 +88,7 @@ const VoteMapScreen = ({
         <IconMap
           data={data}
           getPosition={getPosition}
-          iconAtlas="https://i.imgur.com/ZKYqCqW.png"
+          iconAtlas="https://i.imgur.com/3nUNo65.png"
           iconMapping={poiIconMapping}
           iconSizeScale={poiIconZoomScale}
           getIcon={d => d.properties.type}
