@@ -119,7 +119,7 @@ export const hardcodedTaskLocations = [
     completed: false
   },
   {
-    location: [-122.608228, 45.534321],
+    location: [-122.608228, 45.514321],
     type: HUNGER,
     completed: false
   },
@@ -164,7 +164,7 @@ export const hardcodedTaskLocations = [
     completed: false
   },
   {
-    location: [-122.629352, 45.531557],
+    location: [-122.629352, 45.521557],
     type: LOST_PET,
     completed: false
   },
