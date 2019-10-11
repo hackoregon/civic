@@ -80,6 +80,106 @@ export const THIRST = "thirst";
 // environments
 export const URBAN = "urban";
 
+export const hardcodedTaskLocations = [
+  // OMSI location
+  {
+    location: [-122.6655, 45.5081],
+    type: "omsi",
+    completed: false
+  },
+  // Tasks by location
+  {
+    location: [-122.665401, 45.511649],
+    type: RUBBLE,
+    completed: false
+  },
+  {
+    location: [-122.662176, 45.508898],
+    type: DUST,
+    completed: false
+  },
+  {
+    location: [-122.610302, 45.504791],
+    type: COLD,
+    completed: false
+  },
+  {
+    location: [-122.675011, 45.503044],
+    type: COLD,
+    completed: false
+  },
+  {
+    location: [-122.615447, 45.514957],
+    type: FIRE,
+    completed: false
+  },
+  {
+    location: [-122.685672, 45.525356],
+    type: FIRE,
+    completed: false
+  },
+  {
+    location: [-122.608228, 45.534321],
+    type: HUNGER,
+    completed: false
+  },
+  {
+    location: [-122.638366, 45.498539],
+    type: HUNGER,
+    completed: false
+  },
+  {
+    location: [-122.654591, 45.521335],
+    type: HUNGER,
+    completed: false
+  },
+  {
+    location: [-122.662656, 45.503654],
+    type: HOLE,
+    completed: false
+  },
+  {
+    location: [-122.623602, 45.511711],
+    type: HOLE,
+    completed: false
+  },
+  {
+    location: [-122.672012, 45.521634],
+    type: HOLE,
+    completed: false
+  },
+  {
+    location: [-122.678618, 45.52018],
+    type: INJURY,
+    completed: false
+  },
+  {
+    location: [-122.651841, 45.496852],
+    type: WEATHER,
+    completed: false
+  },
+  {
+    location: [-122.638194, 45.503651],
+    type: WEATHER,
+    completed: false
+  },
+  {
+    location: [-122.629352, 45.531557],
+    type: LOST_PET,
+    completed: false
+  },
+  {
+    location: [-122.651925, 45.507501],
+    type: LOST_PET,
+    completed: false
+  },
+  {
+    location: [-122.634761, 45.515922],
+    type: THIRST,
+    completed: false
+  }
+];
+
 export const tasks = {
   // Save Yourself
   [RUBBLE]: {
@@ -98,8 +198,7 @@ export const tasks = {
     sceneAlt: "rubble in your way",
     clue: "There’s a lot of rubble and broken glass around here.",
     tickerTape:
-      "Gloves, boots, and goggles can help prevent injury when there’s lots of debris.",
-    locations: [[-122.6655, 45.5081]]
+      "Gloves, boots, and goggles can help prevent injury when there’s lots of debris."
   },
   [DUST]: {
     id: DUST,
@@ -117,8 +216,7 @@ export const tasks = {
     sceneAlt: "a person coughing in the dust",
     clue: "It's getting hard to breathe here.",
     tickerTape:
-      "Lots of debris will cause poor air quality after an earthquake.",
-    locations: [[-122.676169, 45.516485]]
+      "Lots of debris will cause poor air quality after an earthquake."
   },
   // Save Others
   [COLD]: {
@@ -136,8 +234,7 @@ export const tasks = {
     sceneSVG: sceneCold,
     sceneAlt: "a shivering person",
     clue: "It's cold out here!",
-    tickerTape: "Plan for all potential weather conditions!",
-    locations: [[-122.610302, 45.504791], [-122.675011, 45.503044]]
+    tickerTape: "Plan for all potential weather conditions!"
   },
   [FIRE]: {
     id: FIRE,
@@ -154,8 +251,7 @@ export const tasks = {
     sceneSVG: sceneFire,
     sceneAlt: "a fire that's spreading",
     clue: "Fire! Fire!",
-    tickerTape: "Keep fire extinguishers up-to-date and serviced annually!",
-    locations: [[-122.615447, 45.514957], [-122.685672, 45.525356]]
+    tickerTape: "Keep fire extinguishers up-to-date and serviced annually!"
   },
   [HUNGER]: {
     id: HUNGER,
@@ -172,12 +268,7 @@ export const tasks = {
     sceneSVG: sceneHunger,
     sceneAlt: "a hungry person",
     clue: "I'm so hungry!",
-    tickerTape: "Don't forget to pack comfort foods like coffee and chocolate!",
-    locations: [
-      [-122.608228, 45.534321],
-      [-122.638366, 45.498539],
-      [-122.654591, 45.521335]
-    ]
+    tickerTape: "Don't forget to pack comfort foods like coffee and chocolate!"
   },
   [HOLE]: {
     id: HOLE,
@@ -195,12 +286,7 @@ export const tasks = {
     sceneAlt: "a person reaching out of a crack in the road",
     clue: "Help! I can't get out!",
     tickerTape:
-      "NET members are Portland volunteers trained in urban search & rescue.",
-    locations: [
-      [-122.623602, 45.511711],
-      [-122.672012, 45.521634],
-      [-122.665401, 45.511649]
-    ]
+      "NET members are Portland volunteers trained in urban search & rescue."
   },
   [INJURY]: {
     id: INJURY,
@@ -217,8 +303,7 @@ export const tasks = {
     sceneSVG: sceneInjury,
     sceneAlt: "an injured person",
     clue: "Ow!",
-    tickerTape: "Disaster kits should contain first aid kits and medications.",
-    locations: [[-122.678618, 45.52018]]
+    tickerTape: "Disaster kits should contain first aid kits and medications."
   },
   [WEATHER]: {
     id: WEATHER,
@@ -235,8 +320,7 @@ export const tasks = {
     sceneSVG: sceneWeather,
     sceneAlt: "a thunderstorm",
     clue: "It's cold out here!",
-    tickerTape: "Plan for all potential weather conditions!",
-    locations: [[-122.651841, 45.496852], [-122.638194, 45.503651]]
+    tickerTape: "Plan for all potential weather conditions!"
   },
   [LOST_PET]: {
     id: LOST_PET,
@@ -253,8 +337,7 @@ export const tasks = {
     sceneSVG: sceneLostPet,
     sceneAlt: "a place the pet may be hiding",
     clue: "Help! I can't find my cat!",
-    tickerTape: "Pack supplies for pets with your disaster kit.",
-    locations: [[-122.629352, 45.531557], [-122.651925, 45.507501]]
+    tickerTape: "Pack supplies for pets with your disaster kit."
   },
   [THIRST]: {
     id: THIRST,
@@ -271,8 +354,7 @@ export const tasks = {
     sceneSVG: sceneThirst,
     sceneAlt: "a thirsty person",
     clue: "I'm so thirsty!",
-    tickerTape: "Kits should contain 1 gallon of water per person per day.",
-    locations: [[-122.634761, 45.515922]]
+    tickerTape: "Kits should contain 1 gallon of water per person per day."
   }
 };
 
