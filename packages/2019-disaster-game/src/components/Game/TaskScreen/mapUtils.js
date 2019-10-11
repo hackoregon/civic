@@ -1,6 +1,7 @@
 const iconSize = 445;
 
 export const poiIconMapping = {
+  // INCOMPLETE TASKS
   // Row 1 --> y: 0
   cold: {
     x: iconSize,
@@ -69,6 +70,70 @@ export const poiIconMapping = {
     y: iconSize * 2,
     width: iconSize,
     height: iconSize
+  },
+  // COMPLETE TASKS
+  // Row 4 --> y: iconSize * 3
+  "complete-cold": {
+    x: 0,
+    y: iconSize * 3,
+    width: iconSize,
+    height: iconSize
+  },
+  "complete-dust": {
+    x: iconSize,
+    y: iconSize * 3,
+    width: iconSize,
+    height: iconSize
+  },
+  "complete-fire": {
+    x: iconSize * 2,
+    y: iconSize * 3,
+    width: iconSize,
+    height: iconSize
+  },
+  "complete-hole": {
+    x: 0,
+    y: iconSize * 3,
+    width: iconSize,
+    height: iconSize
+  },
+  // Row 5 --> y: iconSize * 4
+  "complete-hunger": {
+    x: 0,
+    y: iconSize * 4,
+    width: iconSize,
+    height: iconSize
+  },
+  "complete-injury": {
+    x: iconSize,
+    y: iconSize * 4,
+    width: iconSize,
+    height: iconSize
+  },
+  "complete-lost-pet": {
+    x: iconSize * 2,
+    y: iconSize * 4,
+    width: iconSize,
+    height: iconSize
+  },
+  "complete-rubble": {
+    x: iconSize * 3,
+    y: iconSize * 4,
+    width: iconSize,
+    height: iconSize
+  },
+  // Row 6 --> y: iconSize * 5
+  "complete-thirst": {
+    x: 0,
+    y: iconSize * 5,
+    width: iconSize,
+    height: iconSize
+  },
+  "complete-weather": {
+    x: iconSize,
+    y: iconSize * 5,
+    width: iconSize,
+    height: iconSize
   }
 };
 
@@ -83,20 +148,26 @@ export const poiIconZoomScale = zoom => {
   return size;
 };
 
-export const [initialLon, initialLat] = [-122.644588, 45.508415];
+const centralLonLat = [-122.644588, 45.508415];
+
+export const [initialLon, initialLat] = centralLonLat;
 
 export const getPosition = f =>
   f.geometry ? f.geometry.coordinates : [initialLon, initialLat];
 
-export const asGeoJSON = tasks =>
-  tasks.reduce((features, task) => {
-    const props = { ...task };
-    delete props.locations;
-    const points = task.locations.map(location => ({
+export const asGeoJSON = tasksByLocation =>
+  tasksByLocation.reduce((features, taskAtLocation) => {
+    const props = {
+      ...taskAtLocation,
+      type: taskAtLocation.type,
+      id: `${taskAtLocation.completed ? "complete-" : ""}${taskAtLocation.type}`
+    };
+    delete props.location;
+    const points = {
       geometry: {
-        coordinates: location
+        coordinates: taskAtLocation.location
       },
       properties: props
-    }));
+    };
     return features.concat(points);
   }, []);
