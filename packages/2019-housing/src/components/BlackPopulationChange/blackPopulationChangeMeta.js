@@ -45,7 +45,8 @@ const BlackPopulationChangeMeta = (/* data */) => ({
       </p>
     </p>
   ),
-  shareText: "TODO: Add share text!",
+  shareText:
+    "Gentrification and displacement disproportionately impact communities of color. The small handful of census tracts with significant proportions of Black residents nearly vanished in the past 30 years.",
   tags: [
     "Housing",
     "Race",
