@@ -1,5 +1,6 @@
 import * as SCREENS from "../../constants/screens";
 import * as MODES from "../../constants/modes";
+import ENV from "../../constants/env";
 
 class SETTINGS_FACTORY {}
 
@@ -18,6 +19,7 @@ SETTINGS_FACTORY.getInitialSettings = () => {
     maxVelocityX: -2,
     minVelocityY: 0,
     maxVelocityY: 0,
+    tileServerApi: ENV.TILESERVER,
     mode
   };
 

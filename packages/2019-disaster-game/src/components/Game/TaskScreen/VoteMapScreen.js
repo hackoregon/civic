@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { useEffect, useState, useCallback } from "react";
 import { BaseMap, IconMap } from "@hackoregon/component-library";
 import { getTaskLocations } from "../../../state/tasks";
+import { getTileServerApi } from "../../../state/settings";
 
 import {
   poiIconMapping,
@@ -30,6 +31,7 @@ const VoteMapScreen = ({
   activeTaskId,
   taskLocations,
   taskVotes,
+  tileServerApi,
   mapTransitionDuration
 }) => {
   const [longitude, setLongitude] = useState(initialLon);
@@ -37,6 +39,12 @@ const VoteMapScreen = ({
   const [data, setData] = useState(asGeoJSON(taskLocations));
 
   const getIcon = d => d.properties.id;
+
+  const offlineMapboxOptions = {};
+  if (tileServerApi) {
+    offlineMapboxOptions.mapboxApiUrl = tileServerApi;
+    offlineMapboxOptions.mapStyle = "mapbox://styles/disaster";
+  }
 
   // Returns a location that hasn't been completed if possible
   const getActiveTaskLocation = useCallback(
@@ -115,7 +123,8 @@ const VoteMapScreen = ({
           doubleClickZoom: false,
           touchZoom: false,
           touchRotate: false,
-          keyboard: false
+          keyboard: false,
+          ...offlineMapboxOptions
         }}
         animate
         animationDuration={mapTransitionDuration * 1000}
@@ -153,11 +162,13 @@ VoteMapScreen.propTypes = {
     mostVotesTotal: PropTypes.number,
     totalVotes: PropTypes.number
   }),
+  tileServerApi: PropTypes.string,
   mapTransitionDuration: PropTypes.number
 };
 
 const mapStateToProps = state => ({
-  taskLocations: getTaskLocations(state)
+  taskLocations: getTaskLocations(state),
+  tileServerApi: getTileServerApi(state)
 });
 
 export default connect(mapStateToProps)(VoteMapScreen);
