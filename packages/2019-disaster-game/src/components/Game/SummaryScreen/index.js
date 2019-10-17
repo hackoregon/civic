@@ -8,52 +8,99 @@ import { PropTypes } from "prop-types";
 import { resetState as resetStateTasks } from "../../../state/tasks";
 import { resetState as resetStateKit } from "../../../state/kit";
 import { resetState as resetStateUser } from "../../../state/user";
-import { goToNextChapter } from "../../../state/chapters";
+import { goToChapter, goToNextChapter } from "../../../state/chapters";
 import Timer from "../../../utils/timer";
+
 import motivationalAudio from "../../../../assets/audio/summary_screen/8_boy_you_did_great.mp3";
+import summarySong from "../../../../assets/audio/summary_screen/summary_song.mp3";
 import Song from "../../atoms/Audio/Song";
+
 import { palette } from "../../../constants/style";
+import QRCode from "../../../../assets/earthquake-heroes-qr-code.svg";
+import BadgesBar from "../../atoms/TitleBar/BadgesDrawer";
+import SavedBar from "../../atoms/TitleBar/SavedBar";
 
 const pageWrapper = css`
   display: grid;
   height: 100vh;
+  grid-template-rows: 300px auto 650px;
+  z-index: 10;
 `;
 
-const allContent = css`
+const titleBarContainer = css`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-content: center;
+  padding: 0 40px;
+`;
+
+const QRCodeStyle = css`
+  height: 160px;
+  z-index: 10;
+`;
+
+const accomplishmentsContainer = css`
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+`;
+
+const contentContainer = css`
   display: grid;
   align-content: center;
   justify-content: center;
-  margin-top: 400px;
+  position: relative;
+  text-align: center;
+  max-width: 80vw;
+  margin: 0 auto;
 `;
 
-const contentWrapper = css`
-  width: 60vw;
-  z-index: 10;
-  display: grid;
-  align-content: center;
-  padding: 0 10%;
+const contentTitle = css`
+  font-family: "Luckiest Guy", sans-serif;
+  font-size: 16rem;
+  color: ${palette.salmon};
   margin: 0;
 `;
 
-const titleFont = css`
-  font-family: "Boogaloo", cursive;
+const contentText = css`
+  font-family: "Boogaloo", sans-serif;
+  font-size: 12rem;
+  line-height: 14rem;
   color: ${palette.purple};
-  font-size: 8em;
-  margin-bottom: 0.5em;
-  justify-self: start;
-  margin-top: 0;
+  margin: 0;
 `;
 
-const contentFont = css`
-  font-family: "Boogaloo", cursive;
-  color: ${palette.salmon};
-  font-size: 6em;
-  line-height: 1.3em;
-  text-align: right;
-  max-width: 60%;
-  justify-self: end;
-  margin-bottom: 1em;
-  margin-top: 0.25rem;
+const buttonWrapper = css`
+  display: grid;
+  align-items: start;
+  justify-items: center;
+  align-self: center;
+`;
+
+const buttonStyle = css`
+  position: relative;
+  width: 600px;
+  height: 400px;
+  display: grid;
+  align-content: center;
+  border-radius: 100%;
+  background-color: ${palette.red};
+  box-shadow: 0px 50px 0px 0px ${palette.darkRed};
+  border: none;
+  cursor: pointer;
+  outline: none;
+
+  &:active {
+    background-color: ${palette.darkRed};
+    box-shadow: 0px 50px 0px 0px ${palette.darkestRed};
+  }
+`;
+
+const buttonFont = css`
+  width: 100%;
+  margin: 0 auto;
+  font-family: "Luckiest Guy", sans-serif;
+  font-size: 8rem;
+  color: white;
 `;
 
 // Background animation styles
@@ -93,22 +140,32 @@ const bg3 = css`
 const chapterDuration = 30;
 
 const SummaryScreen = ({
-  songFile,
   endChapter,
   resetKitState,
   resetTasksState,
-  resetUserState
+  resetUserState,
+  replay
 }) => {
   const [chapterTimer] = useState(new Timer());
+  const [restartingGame, setRestartingGame] = useState(false);
+
+  const restartGame = toAttractorScreen => {
+    setRestartingGame(true);
+    resetKitState();
+    resetTasksState();
+    resetUserState();
+    if (toAttractorScreen === true) {
+      endChapter();
+    } else {
+      replay(1);
+    }
+  };
 
   // Timer: on chapter start
   useEffect(() => {
     chapterTimer.setDuration(chapterDuration);
     chapterTimer.addCompleteCallback(() => {
-      resetKitState();
-      resetTasksState();
-      resetUserState();
-      endChapter();
+      if (!restartingGame) restartGame(true);
     });
     chapterTimer.start();
     return () => {
@@ -121,27 +178,39 @@ const SummaryScreen = ({
       <div css={bg} />
       <div css={[bg, bg2]} />
       <div css={[bg, bg3]} />
-      <div css={allContent}>
-        <div css={contentWrapper}>
-          <h1 css={titleFont}>Make A Plan</h1>
-          <h2 css={contentFont}>
-            Talk to your family about where you will meet after an earthquake.
-          </h2>
-        </div>
-        <div css={contentWrapper}>
-          <h1 css={titleFont}>Meet Your Neighbors</h1>
-          <h2 css={contentFont}>
-            Do you have neighbors who will need extra help after a disaster?
-          </h2>
-        </div>
-        <div css={contentWrapper}>
-          <h1 css={titleFont}>Build A Disaster Kit</h1>
-          <h2 css={contentFont}>
-            Gather enough supplies for your family for at least seven days!
-          </h2>
+      <div css={titleBarContainer}>
+        <img
+          src={QRCode}
+          alt="QR code for civicplatform.org"
+          css={QRCodeStyle}
+        />
+        <div css={accomplishmentsContainer}>
+          <div
+            css={css`
+              justify-self: stretch;
+            `}
+          />
+          <BadgesBar isSummary />
+          <SavedBar isSummary />
         </div>
       </div>
-      {songFile && <Song songFile={songFile} />}
+      <div css={contentContainer}>
+        <p css={contentTitle}>MEET YOUR NEIGHBORS</p>
+        <p css={contentText}>
+          Do you have neighbors who will need extra help after a disaster?
+        </p>
+      </div>
+      <div css={buttonWrapper}>
+        <button
+          type="button"
+          css={buttonStyle}
+          onClick={restartGame}
+          onTouchEnd={restartGame}
+        >
+          <p css={buttonFont}>PLAY AGAIN</p>
+        </button>
+      </div>
+      <Song songFile={summarySong} />
       <Song songFile={motivationalAudio} shouldLoop={false} volume={1.0} />
     </div>
   );
@@ -149,7 +218,7 @@ const SummaryScreen = ({
 
 SummaryScreen.propTypes = {
   endChapter: PropTypes.func,
-  songFile: PropTypes.string,
+  replay: PropTypes.func,
   resetKitState: PropTypes.func,
   resetTasksState: PropTypes.func,
   resetUserState: PropTypes.func
@@ -157,6 +226,7 @@ SummaryScreen.propTypes = {
 
 const mapDispatchToProps = dispatch => ({
   endChapter: bindActionCreators(goToNextChapter, dispatch),
+  replay: bindActionCreators(goToChapter, dispatch),
   resetKitState: bindActionCreators(resetStateKit, dispatch),
   resetTasksState: bindActionCreators(resetStateTasks, dispatch),
   resetUserState: bindActionCreators(resetStateUser, dispatch)

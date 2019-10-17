@@ -18,6 +18,7 @@ const containerStyle = css`
   justify-content: space-between;
   justify-self: end;
   z-index: 10;
+  box-shadow: 0px 4px 2px 0px rgba(0, 0, 0, 0.15);
 `;
 
 const justifyRightStyle = css`
