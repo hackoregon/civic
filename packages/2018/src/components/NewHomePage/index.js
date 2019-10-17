@@ -2,7 +2,7 @@
 /** @jsx jsx */
 import { css, jsx, Global } from "@emotion/core";
 import emotionReset from "emotion-reset";
-import { Fragment } from "react";
+import { Fragment, useState, useRef, useEffect } from "react";
 import {
   Button,
   BrandColors,
@@ -17,7 +17,7 @@ import indexStyle from "./index.styles";
 import placeholderWorkImg from "../../assets/new-home-page-2.png";
 import placeholderContributorsImg from "../../assets/new-home-page-3.png";
 import test from "../../assets/test.mp4";
-// import placeholderCivicImg from "../../assets/new-home-page-5.png";
+import videoPoster from "../../assets/main_video_poster.png";
 
 const greatestWidth = 1200;
 const collapseWidth = 845;
@@ -65,6 +65,32 @@ const sectionCivicLayout = css`
 `;
 
 const HomePage = () => {
+  // Make controls accessible
+  const [controlSettings, setControlSettings] = useState(false);
+
+  const showControls = () => {
+    setControlSettings(true);
+  };
+  const hideControls = () => {
+    setControlSettings(false);
+  };
+
+  // Pause the video for reduced motion users & show a poster instead
+  // prefersReducedMotion has incorrect value on firefox only
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion)");
+  const videoRef = useRef(null);
+
+  const toggleMotion = () => {
+    if (prefersReducedMotion.matches) {
+      videoRef.current.pause();
+      // TODO: Should now show the poster... but it shows the first frame which is a white screen
+    } else {
+      videoRef.current.play();
+    }
+  };
+
+  useEffect(toggleMotion, []);
+
   return (
     <Fragment>
       <Global
@@ -81,7 +107,21 @@ const HomePage = () => {
           A system for public data, built on public collaboration
         </p>
         <div className="intro-wrapper">
-          <video className="placeholder-intro-image" autoPlay playsInline muted loop>
+          <video
+            className="placeholder-intro-image"
+            ref={videoRef}
+            autoPlay
+            poster={videoPoster}
+            controls={controlSettings}
+            playsInline
+            muted
+            loop
+            tabIndex="0"
+            onMouseEnter={showControls}
+            onMouseLeave={hideControls}
+            onFocus={showControls}
+            onBlur={hideControls}
+          >
             <source type="video/mp4" src={test} />
           </video>
           <p className="intro-text">
