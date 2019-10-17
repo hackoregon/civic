@@ -325,10 +325,9 @@ const SummaryScreen = ({
 
       <div
         css={css`
-        ${contentContainer}
-        ${animationPhaseIndex === 4 ? centerContent : ""}
-        ${animationPhaseIndex > 4 ? exitContent : ""}
-      `}
+          ${contentContainer}
+          ${animationPhaseIndex >= 4 ? centerContent : ""}
+        `}
       >
         <p css={contentText}>
           For more information about earthquake preparedness in Portland, visit{" "}
