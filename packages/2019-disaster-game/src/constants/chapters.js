@@ -22,7 +22,7 @@ const CHAPTERS = [
     id: TASKS,
     title: "Tasks",
     tickerTape: SelectionTickerTape,
-    voteDuration: 20
+    voteDuration: 15
   },
   { id: SUMMARY, title: "Summary", tickerTape: GeneralTickerTape, duration: 0 }
 ];

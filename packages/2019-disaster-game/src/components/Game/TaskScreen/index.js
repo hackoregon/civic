@@ -3,6 +3,7 @@ import { css, jsx } from "@emotion/core";
 import { useState, useEffect, useCallback, memo, Fragment } from "react";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 import Timer from "../../../utils/timer";
 import { goToNextChapter } from "../../../state/chapters";
@@ -17,16 +18,21 @@ import {
   addTask,
   completeTask
 } from "../../../state/tasks";
+import {
+  addBadge,
+  // getTeamworkBadge,
+  getPreparedBadge,
+  getHeroBadge
+} from "../../../state/user";
 import { getPlayerKitItems } from "../../../state/kit";
 import usePrevious from "../../../state/hooks/usePrevious";
 import { SOLVING, VOTING, MOVING_MAP } from "../../../constants/actions";
 import { chooseRandomTask } from "./voteUtils";
-
 import taskSong from "../../../../assets/audio/HappyTheme2fadeinout.mp3";
 import audioVoteInstruction from "../../../../assets/audio/task_screen/boy/who_should_we_help_next.mp3";
 import audioVoteMotivate from "../../../../assets/audio/task_screen/boy/lets_go_do_it_enthusiastic.mp3";
 import Song from "../../atoms/Audio/Song";
-
+import NewBadge from "../../atoms/NewBadge";
 import MatchLockInterface from "../../atoms/MatchLockInterface";
 import SolveScreen from "./SolveScreen";
 import VoteMapScreen from "./VoteMapScreen";
@@ -56,7 +62,9 @@ const TaskScreen = ({
   addNextTask,
   weightedPlayerKitItems,
   weightedTasks,
-  completeActiveTask
+  completeActiveTask,
+  badges,
+  addHeroBadge
 }) => {
   const [chapterTimer] = useState(new Timer());
   const [phaseTimer] = useState(new Timer());
@@ -71,7 +79,13 @@ const TaskScreen = ({
     null
   );
   const [animatingTaskTransition, setAnimatingTaskTransition] = useState(false);
+  const [completedSaveYourselfTasks, setCompletedSaveYourselfTasks] = useState(
+    0
+  );
+  const [displayBadge, setDisplayBadge] = useState(false);
+  const [displayBadgeTimer] = useState(new Timer());
   const prevTaskPhase = usePrevious(taskPhase);
+  const prevHeroBadge = usePrevious(badges.hero);
 
   const goToTask = () => {
     const mostVotes = taskVotes.mostVotesTotal;
@@ -107,6 +121,7 @@ const TaskScreen = ({
     chapterTimer.start();
     return () => {
       chapterTimer.stop();
+      displayBadgeTimer.stop();
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -158,24 +173,58 @@ const TaskScreen = ({
     };
   }, [activeTaskIndex, taskPhase]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const setEndSolvingChapterAnimationTimeouts = () => {
-    const newTimeout = setTimeout(() => {
-      setCorrectItemsChosen(0);
-      setAnimatingTaskTransition(false);
-      phaseTimer.stopEarly();
-    }, 1000);
-    setSolvingTransitionTimeout(newTimeout);
-  };
+  const setBadgeDisplayTimer = useCallback(() => {
+    displayBadgeTimer.reset();
+    displayBadgeTimer.setDuration(10);
+    displayBadgeTimer.addCompleteCallback(() => {
+      setDisplayBadge(false);
+    });
+    displayBadgeTimer.start();
+  }, [displayBadgeTimer]);
+
+  // If the player just acquired a hero badge, delay ending the solve screen to show new badge
+  useEffect(() => {
+    const earnedNewBadge = badges.hero && prevHeroBadge !== badges.hero;
+    if (earnedNewBadge) {
+      setDisplayBadge(true);
+      setBadgeDisplayTimer();
+      const newTimeout = setTimeout(() => {
+        setCorrectItemsChosen(0);
+        setAnimatingTaskTransition(false);
+        phaseTimer.stopEarly();
+      }, 10000);
+      setSolvingTransitionTimeout(newTimeout);
+    }
+  }, [badges, phaseTimer, prevHeroBadge, setBadgeDisplayTimer]);
 
   const onItemSelection = orbModel => {
     if (orbModel.type === activeTask.requiredItem) {
       const itemsNowChosen = correctItemsChosen + 1;
       setCorrectItemsChosen(itemsNowChosen);
       if (itemsNowChosen >= activeTask.numberItemsToSolve) {
+        if (solvingTransitionTimeout) clearTimeout(solvingTransitionTimeout);
+
+        let earnedSurvivorBadge = false;
+        if (activeTaskIndex < 2) {
+          const nextTotalSaveYourself = completedSaveYourselfTasks + 1;
+          earnedSurvivorBadge =
+            activeTaskIndex === 1 && nextTotalSaveYourself === 2;
+          setCompletedSaveYourselfTasks(nextTotalSaveYourself);
+        }
+
         setAnimatingTaskTransition(true);
         completeActiveTask(activeTask);
-        if (solvingTransitionTimeout) clearTimeout(solvingTransitionTimeout);
-        setEndSolvingChapterAnimationTimeouts();
+
+        if (earnedSurvivorBadge) {
+          addHeroBadge("hero", "taskSurvivorBadge");
+        } else {
+          const newTimeout = setTimeout(() => {
+            setCorrectItemsChosen(0);
+            setAnimatingTaskTransition(false);
+            phaseTimer.stopEarly();
+          }, 1000);
+          setSolvingTransitionTimeout(newTimeout);
+        }
       }
       return true;
     }
@@ -237,6 +286,7 @@ const TaskScreen = ({
 
   return (
     <Fragment>
+      {displayBadge && <NewBadge type="hero" />}
       <div css={screenLayout}>
         <SolveScreen
           open={taskPhase === SOLVING}
@@ -307,7 +357,9 @@ TaskScreen.propTypes = {
   weightedTasks: PropTypes.arrayOf(PropTypes.shape({})),
   weightedPlayerKitItems: PropTypes.arrayOf(PropTypes.shape({})),
   activeEnvironment: PropTypes.string,
-  tasksForEnvironment: PropTypes.shape({})
+  tasksForEnvironment: PropTypes.shape({}),
+  badges: PropTypes.shape({}),
+  addHeroBadge: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -317,22 +369,20 @@ const mapStateToProps = state => ({
   weightedTasks: getWeightedTasks(state),
   weightedPlayerKitItems: getPlayerKitItems(state),
   activeEnvironment: getActiveEnvironment(state),
-  tasksForEnvironment: getTasksForEnvironment(state)
+  tasksForEnvironment: getTasksForEnvironment(state),
+  badges: {
+    // teamwork: getTeamworkBadge(state),
+    prepared: getPreparedBadge(state),
+    hero: getHeroBadge(state)
+  }
 });
 
 const mapDispatchToProps = dispatch => ({
-  endChapter() {
-    dispatch(goToNextChapter());
-  },
-  goToNextPhase(taskToComplete) {
-    dispatch(goToNextTaskPhase(taskToComplete));
-  },
-  addNextTask(taskChoice) {
-    dispatch(addTask(taskChoice));
-  },
-  completeActiveTask(activeTask) {
-    dispatch(completeTask(activeTask));
-  }
+  endChapter: bindActionCreators(goToNextChapter, dispatch),
+  goToNextPhase: bindActionCreators(goToNextTaskPhase, dispatch),
+  addNextTask: bindActionCreators(addTask, dispatch),
+  completeActiveTask: bindActionCreators(completeTask, dispatch),
+  addHeroBadge: bindActionCreators(addBadge, dispatch)
 });
 
 export default connect(
