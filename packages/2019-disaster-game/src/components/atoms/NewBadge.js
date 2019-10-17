@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { palette } from "../../constants/style";
 import {
-  getTeamworkBadge,
+  // getTeamworkBadge,
   getPreparedBadge,
   getHeroBadge
 } from "../../state/user";
@@ -92,7 +92,7 @@ NewBadge.propTypes = {
 
 const mapStateToProps = state => ({
   badges: {
-    teamwork: getTeamworkBadge(state),
+    // teamwork: getTeamworkBadge(state),
     prepared: getPreparedBadge(state),
     hero: getHeroBadge(state)
   }

@@ -10,10 +10,16 @@ import {
   goToNextChapter,
   getActiveChapterDuration
 } from "../../../state/chapters";
-import { getKitCreationItems, addItemToPlayerKit } from "../../../state/kit";
-import { addPoints } from "../../../state/user";
+import {
+  getKitCreationItems,
+  addItemToPlayerKit,
+  getPlayerKit
+} from "../../../state/kit";
+import { addPoints, addBadge } from "../../../state/user";
+import usePrevious from "../../../state/hooks/usePrevious";
 import { palette } from "../../../constants/style";
 import Timer from "../../../utils/timer";
+import NewBadge from "../../atoms/NewBadge";
 import MatchLockInterface from "../../atoms/MatchLockInterface";
 import Song from "../../atoms/Audio/Song";
 import { MapStyle } from "../index";
@@ -58,12 +64,16 @@ const bg3 = css`
 
 const KitScreen = ({
   possibleItems,
+  playerKit,
+  addPreparerBadge,
   addPointsToState,
   addItemToPlayerKitInState,
   endChapter,
   chapterDuration
 }) => {
   const [chapterTimer] = useState(new Timer());
+  const [displayBadge, setDisplayBadge] = useState(false);
+  const prevPlayerKit = usePrevious(playerKit);
 
   // start a timer for the _entire_ chapter
   useEffect(() => {
@@ -74,6 +84,31 @@ const KitScreen = ({
       chapterTimer.stop();
     };
   }, [chapterDuration, chapterTimer, endChapter]);
+
+  useEffect(() => {
+    const playerKitChanged =
+      prevPlayerKit &&
+      Object.keys(prevPlayerKit).length !== Object.keys(playerKit).length;
+    // minus the 2 bad items
+    const allItemsChosen =
+      Object.keys(playerKit).length === Object.keys(possibleItems).length - 2;
+
+    if (playerKitChanged && allItemsChosen) {
+      chapterTimer.reset();
+      addPreparerBadge("prepared", "preparerBadge");
+      setDisplayBadge(true);
+      chapterTimer.setDuration(9);
+      chapterTimer.addCompleteCallback(() => endChapter());
+      chapterTimer.start();
+    }
+  }, [
+    addPreparerBadge,
+    chapterTimer,
+    endChapter,
+    playerKit,
+    possibleItems,
+    prevPlayerKit
+  ]);
 
   const onKitItemSelection = kitItem => {
     if (kitItem.good) {
@@ -93,6 +128,7 @@ const KitScreen = ({
     <Fragment>
       <Song songFile={kitSong} />
       <Song songFile={instructionalAudio} shouldLoop={false} volume={1.0} />
+      {displayBadge && <NewBadge type="prepared" />}
       <MapStyle>
         <div css={bg} />
         <div css={[bg, bg2]} />
@@ -123,17 +159,21 @@ KitScreen.propTypes = {
   addPointsToState: PropTypes.func,
   addItemToPlayerKitInState: PropTypes.func,
   endChapter: PropTypes.func,
-  chapterDuration: PropTypes.number
+  chapterDuration: PropTypes.number,
+  playerKit: PropTypes.shape({}),
+  addPreparerBadge: PropTypes.func
 };
 
 const mapStateToProps = state => ({
   possibleItems: getKitCreationItems(state),
-  chapterDuration: getActiveChapterDuration(state)
+  chapterDuration: getActiveChapterDuration(state),
+  playerKit: getPlayerKit(state)
 });
 
 const mapDispatchToProps = dispatch => ({
   addPointsToState: bindActionCreators(addPoints, dispatch),
   addItemToPlayerKitInState: bindActionCreators(addItemToPlayerKit, dispatch),
+  addPreparerBadge: bindActionCreators(addBadge, dispatch),
   endChapter() {
     dispatch(goToNextChapter());
   }

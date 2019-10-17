@@ -1,6 +1,15 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
+import { useEffect } from "react";
+import PropTypes from "prop-types";
 import { palette } from "../../constants/style";
+import usePrevious from "../../state/hooks/usePrevious";
+
+const containerStyle = css`
+  position: relative;
+  height: 120px;
+  width: 120px;
+`;
 
 const circleStyle = css`
   height: 120px;
@@ -8,10 +17,74 @@ const circleStyle = css`
   border-radius: 100%;
   background-color: ${palette.gold};
   margin-right: 20px;
+  transition: all 0.5s 5s;
+  position: absolute;
 `;
 
-const Badge = () => {
-  return <div css={circleStyle} />;
+const badgeStyle = css`
+  height: 130px;
+  opacity: 0;
+  transition: all 2s 5s;
+  position: absolute;
+  transform: scale(3);
+  margin-left: -90px;
+  margin-top: 90px;
+`;
+
+const showBadge = css`
+  opacity: 1;
+  transform: scale(1);
+  margin-left: 0;
+  margin-top: -5px;
+`;
+
+const hideCircle = css`
+  opacity: 0;
+`;
+
+const Badge = ({ badgeInfo, openBadgeDrawer }) => {
+  const prevBadgeInfo = usePrevious(badgeInfo);
+
+  useEffect(() => {
+    if (badgeInfo !== prevBadgeInfo) {
+      openBadgeDrawer();
+    }
+  });
+
+  return (
+    <div css={containerStyle}>
+      <div
+        css={css`
+          ${badgeStyle};
+          ${badgeInfo ? showBadge : ""};
+        `}
+      >
+        {badgeInfo && (
+          <img
+            src={badgeInfo.badgeSVG}
+            alt="Badge"
+            css={css`
+              ${badgeStyle};
+              ${badgeInfo ? showBadge : ""};
+            `}
+          />
+        )}
+      </div>
+      <div
+        css={css`
+          ${circleStyle};
+          ${badgeInfo ? hideCircle : ""};
+        `}
+      />
+    </div>
+  );
+};
+
+Badge.propTypes = {
+  badgeInfo: PropTypes.shape({
+    badgeSVG: PropTypes.string
+  }),
+  openBadgeDrawer: PropTypes.func
 };
 
 export default Badge;

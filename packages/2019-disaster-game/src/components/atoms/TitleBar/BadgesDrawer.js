@@ -1,17 +1,23 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { palette } from "../../../constants/style";
+import {
+  // getTeamworkBadge,
+  getPreparedBadge,
+  getHeroBadge
+} from "../../../state/user";
 import Badge from "../Badge";
 
 const drawerContainer = css`
   width: 700px;
   background-color: ${palette.lemon};
-  grid-template-columns: repeat(2, auto);
+  grid-template-columns: auto 430px;
   padding-left: 200px;
   margin-left: -130px;
   z-index: unset;
-  transition: transform 1s;
+  transition: all 1s;
   box-shadow: 0px 4px 2px 0px rgba(0, 0, 0, 0.15);
 `;
 
@@ -33,7 +39,7 @@ const summaryStyle = css`
   transform: none;
 
   display: grid;
-  grid-template-columns: repeat(2, auto);
+  grid-template-columns: auto 430px;
   padding: 0 80px;
   border-radius: 80px;
   align-content: center;
@@ -58,16 +64,18 @@ const badgesContainer = css`
 
 const BadgesDrawer = ({
   journeyBarContainerStyle,
-  open,
+  isOpen,
   isSummary,
-  initialSummaryStyle
+  initialSummaryStyle,
+  badges,
+  openBadgeDrawer
 }) => {
   return (
     <div
       css={css`
         ${journeyBarContainerStyle};
         ${drawerContainer};
-        ${open ? openStyle : closedStyle};
+        ${isOpen ? openStyle : closedStyle};
         ${isSummary ? summaryStyle : ""};
         ${initialSummaryStyle || ""};
       `}
@@ -78,8 +86,10 @@ const BadgesDrawer = ({
         Earned
       </p>
       <div css={badgesContainer}>
-        <Badge />
-        <Badge />
+        {/* <Badge badgeInfo={badges.teamwork} openBadgeDrawer={openBadgeDrawer}/> */}
+        <Badge badgeInfo={badges.prepared} openBadgeDrawer={openBadgeDrawer} />
+        <Badge badgeInfo={badges.hero} openBadgeDrawer={openBadgeDrawer} />
+        {/* TODO: Add hero badge */}
         <Badge />
       </div>
     </div>
@@ -88,9 +98,19 @@ const BadgesDrawer = ({
 
 BadgesDrawer.propTypes = {
   journeyBarContainerStyle: PropTypes.shape({}),
-  open: PropTypes.bool,
   isSummary: PropTypes.bool,
-  initialSummaryStyle: PropTypes.shape({})
+  initialSummaryStyle: PropTypes.shape({}),
+  badges: PropTypes.shape({}),
+  isOpen: PropTypes.bool,
+  openBadgeDrawer: PropTypes.func
 };
 
-export default BadgesDrawer;
+const mapStateToProps = state => ({
+  badges: {
+    // teamwork: getTeamworkBadge(state),
+    prepared: getPreparedBadge(state),
+    hero: getHeroBadge(state)
+  }
+});
+
+export default connect(mapStateToProps)(BadgesDrawer);
