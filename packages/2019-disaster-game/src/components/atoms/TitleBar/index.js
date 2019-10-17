@@ -16,7 +16,7 @@ import {
 } from "../../../constants/tickerTape";
 import Ticker from "../Ticker";
 import JourneyBar from "./JourneyBar";
-import SavedBar from "./SavedBar";
+// import SavedBar from "./SavedBar";
 
 const ContainerStyle = css`
   position: absolute;
@@ -97,12 +97,12 @@ const TitleBar = ({ activeChapterId, activeTaskData }) => {
           css={QRCodeStyle}
         />
         <JourneyBar badgeDrawerOpen={badgeDrawerOpen} />
-        {activeChapterId === TASKS && (
+        {/* {activeChapterId === TASKS && (
           <Fragment>
             {badgeDrawerOpen && <div />}
             <SavedBar justifyRight={badgeDrawerOpen} />
           </Fragment>
-        )}
+        )} */}
       </div>
     </div>
   );
