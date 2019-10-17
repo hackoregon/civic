@@ -123,6 +123,7 @@ const TaskScreen = ({
   useEffect(() => {
     if (prevTaskPhase !== taskPhase) {
       if (taskPhase === SOLVING) {
+        setCorrectItemsChosen(0);
         startTimer(activeTask.time, solvingCallback, true, weightedTasks);
       }
       if (taskPhase === VOTING) {
