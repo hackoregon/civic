@@ -266,6 +266,12 @@ const routes = {
       path: "sandbox",
       component: SandboxPage
     },
+    // Route for OMSI QR Code for Installation
+    {
+      path: "earthquakeheroes",
+      component: DisasterApp,
+      childRoutes: DisasterRoutes(store)
+    },
     // Temporarily Hidden 2019 Pages ⬇️
     {
       path: "2019",
