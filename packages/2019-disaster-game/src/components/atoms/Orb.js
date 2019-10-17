@@ -21,15 +21,6 @@ const circleDefaultStyle = css`
   &:hover {
     opacity: 1;
   }
-
-  &.circle-press-style {
-    transition: background-color 1000ms linear;
-  }
-
-  &.circle-bad-item-style {
-    transition: filter 0.5s ease-in-out;
-    filter: grayscale(100%);
-  }
 `;
 
 const iconStyle = css`
@@ -123,17 +114,39 @@ export default class Orb extends PureComponent {
       height: ${size}px;
       width: ${size}px;
       border-radius: ${size}px;
+
+      &.circle-press-style {
+        transition: background-color 1000ms linear;
+      }
+
+      &.circle-complete-item-style {
+        transition: filter 0.5s ease-in-out;
+        transition: opacity 3s cubic-bezier(0.95, 0.05, 0.795, 0.035);
+        // filter: grayscale(100%);
+        opacity: 0;
+      }
     `;
 
     const absoluteStyle = css`
       position: absolute;
       top: -${size / 2}px;
       left: -${size / 2}px;
+
+      &.circle-press-style {
+        transition: background-color 1000ms linear;
+      }
+
+      &.circle-complete-item-style {
+        transition: filter 0.5s ease-in-out;
+        transition: opacity 3s cubic-bezier(0.95, 0.05, 0.795, 0.035);
+        // filter: grayscale(100%);
+        opacity: 0;
+      }
     `;
 
     let orbClass = "";
     if (isActive) orbClass = "circle-press-style";
-    if (isComplete) orbClass = "circle-bad-item-style";
+    if (isComplete) orbClass = "circle-complete-item-style";
 
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
@@ -149,7 +162,7 @@ export default class Orb extends PureComponent {
         onTouchStart={this.handleOrbPress}
         onTouchEnd={this.handleOrbRelease}
       >
-        <div css={absoluteStyle}>
+        <div css={absoluteStyle} className={orbClass}>
           <RadialGauge
             isActive={isActive}
             size={size}
