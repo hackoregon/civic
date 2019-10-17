@@ -82,6 +82,7 @@ const TaskScreen = ({
   const [completedSaveYourselfTasks, setCompletedSaveYourselfTasks] = useState(
     0
   );
+  const [completedSaveOthersTasks, setCompletedSaveOthersTasks] = useState(0);
   const [displayBadge, setDisplayBadge] = useState(false);
   const [displayBadgeTimer] = useState(new Timer());
   const prevTaskPhase = usePrevious(taskPhase);
@@ -184,8 +185,9 @@ const TaskScreen = ({
 
   // If the player just acquired a hero badge, delay ending the solve screen to show new badge
   useEffect(() => {
-    const earnedNewBadge = badges.hero && prevHeroBadge !== badges.hero;
-    if (earnedNewBadge) {
+    const earnedNewHeroBadge = badges.hero && prevHeroBadge !== badges.hero;
+
+    if (earnedNewHeroBadge) {
       setDisplayBadge(true);
       setBadgeDisplayTimer();
       const newTimeout = setTimeout(() => {
@@ -204,19 +206,23 @@ const TaskScreen = ({
       if (itemsNowChosen >= activeTask.numberItemsToSolve) {
         if (solvingTransitionTimeout) clearTimeout(solvingTransitionTimeout);
 
-        let earnedSurvivorBadge = false;
+        let earnedBadge = null;
         if (activeTaskIndex < 2) {
           const nextTotalSaveYourself = completedSaveYourselfTasks + 1;
-          earnedSurvivorBadge =
-            activeTaskIndex === 1 && nextTotalSaveYourself === 2;
+          earnedBadge = nextTotalSaveYourself === 2 && "taskSurvivorBadge";
           setCompletedSaveYourselfTasks(nextTotalSaveYourself);
+        } else {
+          const nextTotalSaveOthers = completedSaveOthersTasks + 1;
+          earnedBadge =
+            nextTotalSaveOthers === 2 && "taskNeighborhoodHeroBadge";
+          setCompletedSaveOthersTasks(nextTotalSaveOthers);
         }
 
         setAnimatingTaskTransition(true);
         completeActiveTask(activeTask);
 
-        if (earnedSurvivorBadge) {
-          addHeroBadge("hero", "taskSurvivorBadge");
+        if (earnedBadge) {
+          addHeroBadge("hero", earnedBadge);
         } else {
           const newTimeout = setTimeout(() => {
             setCorrectItemsChosen(0);
