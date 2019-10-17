@@ -24,7 +24,6 @@ import TaskScreen from "./TaskScreen/index";
 import SummaryScreen from "./SummaryScreen/index";
 
 import "@hackoregon/component-library/assets/global.styles.css";
-import summarySong from "../../../assets/audio/summary_screen/summary_song.mp3";
 
 const Game = ({ activeChapterId }) => {
   const renderChapter = chapterId => {
@@ -35,8 +34,6 @@ const Game = ({ activeChapterId }) => {
         return <QuakeScreen />;
       case TASKS:
         return <TaskScreen />;
-      case SUMMARY:
-        return <SummaryScreen songFile={summarySong} />;
       default:
         return <DefaultScreen />;
     }
@@ -48,12 +45,13 @@ const Game = ({ activeChapterId }) => {
   return (
     <Fragment>
       {activeChapterId === ATTRACTOR && <AttractorScreen />}
-      {activeChapterId !== ATTRACTOR && (
+      {activeChapterId !== ATTRACTOR && activeChapterId !== SUMMARY && (
         <GameContainerStyle>
           {showTitleBar && <TitleBar />}
           <GameGrid>{renderChapter(activeChapterId)}</GameGrid>
         </GameContainerStyle>
       )}
+      {activeChapterId === SUMMARY && <SummaryScreen />}
     </Fragment>
   );
 };

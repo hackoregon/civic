@@ -48,6 +48,10 @@ const Ticker = ({ messages }) => {
       }
     });
     messageTimer.start();
+
+    return () => {
+      messageTimer.stop();
+    };
   }, [
     messageTimer,
     setMessageToDisplayIndex,

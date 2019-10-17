@@ -53,7 +53,7 @@ AnimatedProgressProvider.propTypes = {
   easingFunction: PropTypes.func,
   makeAnimate: PropTypes.bool,
   halfFill: PropTypes.bool,
-  children: PropTypes.node
+  children: PropTypes.func
 };
 
 export default AnimatedProgressProvider;
