@@ -23,6 +23,12 @@ const containerStyle = css`
   justify-content: center;
   text-align: center;
   z-index: 900;
+  opacity: 1;
+  transition: all 1s;
+`;
+
+const hideBadgeStyle = css`
+  opacity: 0;
 `;
 
 const badgeStyle = css`
@@ -51,13 +57,26 @@ const titleText = css`
 
 const NewBadge = ({ type, badges }) => {
   const [badgeInfo, setBadgeInfo] = useState(badges[type]);
+  const [hideBadge, setHideBadge] = useState(false);
 
   useEffect(() => {
     setBadgeInfo(badges[type]);
+    const hideBadgeTimeout = setTimeout(() => {
+      setHideBadge(true);
+    }, 4000);
+
+    return () => {
+      clearTimeout(hideBadgeTimeout);
+    };
   }, [badges, type]);
 
   return (
-    <div css={containerStyle}>
+    <div
+      css={css`
+        ${containerStyle};
+        ${hideBadge ? hideBadgeStyle : ""};
+      `}
+    >
       <p css={[badgeText, titleText]}>NEW BADGE EARNED!</p>
       <img src={badgeInfo.badgeSVG} alt="Badge" css={badgeStyle} />
       <p css={badgeText}>{badgeInfo.title}</p>
