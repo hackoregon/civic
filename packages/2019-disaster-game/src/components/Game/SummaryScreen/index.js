@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { css, jsx, keyframes } from "@emotion/core";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
@@ -9,6 +9,7 @@ import { resetState as resetStateTasks } from "../../../state/tasks";
 import { resetState as resetStateKit } from "../../../state/kit";
 import { resetState as resetStateUser } from "../../../state/user";
 import { goToChapter, goToNextChapter } from "../../../state/chapters";
+import usePrevious from "../../../state/hooks/usePrevious";
 import Timer from "../../../utils/timer";
 
 import motivationalAudio from "../../../../assets/audio/summary_screen/8_boy_you_did_great.mp3";
@@ -23,7 +24,7 @@ import SavedBar from "../../atoms/TitleBar/SavedBar";
 const pageWrapper = css`
   display: grid;
   height: 100vh;
-  grid-template-rows: 300px auto 650px;
+  grid-template-rows: 300px auto;
   z-index: 10;
 `;
 
@@ -34,24 +35,50 @@ const titleBarContainer = css`
   padding: 0 40px;
 `;
 
+const bigBadgesStyle = css`
+  position: absolute;
+  top: 43%;
+  right: 38%;
+  transform: scale(2);
+`;
+
+const bigSavedStyle = css`
+  position: absolute;
+  top: 60%;
+  right: 38%;
+  transform: scale(2);
+`;
+
 const QRCodeStyle = css`
   height: 160px;
   z-index: 10;
 `;
 
-const accomplishmentsContainer = css`
-  display: grid;
-  grid-template-columns: repeat(3, auto);
+const centeredQRCode = css`
+  height: 300px;
+  margin: 50px auto 0;
 `;
 
 const contentContainer = css`
+  position: absolute;
+  transform: translateX(+200%);
+  transition: transform 3s;
+  top: 500px;
+  left: 10vw;
+
   display: grid;
   align-content: center;
   justify-content: center;
-  position: relative;
   text-align: center;
-  max-width: 80vw;
-  margin: 0 auto;
+  width: 80vw;
+`;
+
+const centerContent = css`
+  transform: translateX(0%);
+`;
+
+const exitContent = css`
+  transform: translateX(-300%);
 `;
 
 const contentTitle = css`
@@ -67,13 +94,18 @@ const contentText = css`
   line-height: 14rem;
   color: ${palette.purple};
   margin: 0;
+
+  > span {
+    color: ${palette.red};
+  }
 `;
 
 const buttonWrapper = css`
   display: grid;
   align-items: start;
   justify-items: center;
-  align-self: center;
+  align-self: end;
+  margin-bottom: 100px;
 `;
 
 const buttonStyle = css`
@@ -137,8 +169,6 @@ const bg3 = css`
   animation-duration: 10s;
 `;
 
-const chapterDuration = 30;
-
 const SummaryScreen = ({
   endChapter,
   resetKitState,
@@ -146,30 +176,68 @@ const SummaryScreen = ({
   resetUserState,
   replay
 }) => {
-  const [chapterTimer] = useState(new Timer());
-  const [restartingGame, setRestartingGame] = useState(false);
+  const [animationTimer] = useState(new Timer());
+  const [animationPhaseIndex, setAnimationPhaseIndex] = useState(-1);
+  const animationPhases = [
+    { duration: 10 },
+    { duration: 10 },
+    { duration: 10 },
+    { duration: 10 },
+    { duration: 10 }
+  ];
+  const prevAnimationPhaseIndex = usePrevious(animationPhaseIndex);
 
-  const restartGame = toAttractorScreen => {
-    setRestartingGame(true);
-    resetKitState();
-    resetTasksState();
-    resetUserState();
-    if (toAttractorScreen === true) {
-      endChapter();
-    } else {
-      replay(1);
+  const restartGame = useCallback(
+    toAttractorScreen => {
+      resetKitState();
+      resetTasksState();
+      resetUserState();
+      if (toAttractorScreen === true) {
+        endChapter();
+      } else {
+        replay(1);
+      }
+    },
+    [endChapter, replay, resetKitState, resetTasksState, resetUserState]
+  );
+
+  const transitionAnimation = useCallback(() => {
+    setAnimationPhaseIndex(
+      lastAnimationPhaseIndex => lastAnimationPhaseIndex + 1
+    );
+  }, []);
+
+  useEffect(() => {
+    if (
+      prevAnimationPhaseIndex !== animationPhaseIndex &&
+      animationPhaseIndex > -1
+    ) {
+      if (animationPhaseIndex < animationPhases.length) {
+        const nextPhase = animationPhases[animationPhaseIndex];
+        animationTimer.reset();
+        animationTimer.setDuration(nextPhase.duration);
+        animationTimer.addCompleteCallback(transitionAnimation);
+        animationTimer.start();
+      } else {
+        animationTimer.stop();
+        restartGame(true);
+      }
     }
-  };
+  }, [
+    animationPhaseIndex,
+    animationPhases,
+    animationPhases.length,
+    animationTimer,
+    prevAnimationPhaseIndex,
+    restartGame,
+    transitionAnimation
+  ]);
 
   // Timer: on chapter start
   useEffect(() => {
-    chapterTimer.setDuration(chapterDuration);
-    chapterTimer.addCompleteCallback(() => {
-      if (!restartingGame) restartGame(true);
-    });
-    chapterTimer.start();
+    transitionAnimation();
     return () => {
-      chapterTimer.stop();
+      animationTimer.stop();
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -181,25 +249,86 @@ const SummaryScreen = ({
       <div css={titleBarContainer}>
         <img
           src={QRCode}
-          alt="QR code for civicplatform.org"
+          alt="QR code for civicplatform.org/EarthquakeHeroes"
           css={QRCodeStyle}
         />
-        <div css={accomplishmentsContainer}>
-          <div
-            css={css`
-              justify-self: stretch;
-            `}
-          />
-          <BadgesBar isSummary />
-          <SavedBar isSummary />
-        </div>
+        <BadgesBar
+          isSummary
+          initialSummaryStyle={animationPhaseIndex <= 0 ? bigBadgesStyle : null}
+        />
+        <SavedBar
+          isSummary
+          initialSummaryStyle={animationPhaseIndex <= 0 ? bigSavedStyle : null}
+        />
       </div>
-      <div css={contentContainer}>
+
+      <div
+        css={css`
+        ${contentContainer}
+        ${animationPhaseIndex <= 0 ? centerContent : ""}
+        ${animationPhaseIndex > 0 ? exitContent : ""}
+      `}
+      >
+        <p css={contentTitle}>YOUR ACTS OF HEROISM</p>
+      </div>
+
+      <div
+        css={css`
+        ${contentContainer}
+        ${animationPhaseIndex === 1 ? centerContent : ""}
+        ${animationPhaseIndex > 1 ? exitContent : ""}
+      `}
+      >
+        <p css={contentTitle}>MAKE A PLAN</p>
+        <p css={contentText}>
+          Talk to your family about where you will meet after an earthquake.
+        </p>
+      </div>
+
+      <div
+        css={css`
+        ${contentContainer}
+        ${animationPhaseIndex === 2 ? centerContent : ""}
+        ${animationPhaseIndex > 2 ? exitContent : ""}
+      `}
+      >
         <p css={contentTitle}>MEET YOUR NEIGHBORS</p>
         <p css={contentText}>
           Do you have neighbors who will need extra help after a disaster?
         </p>
       </div>
+
+      <div
+        css={css`
+        ${contentContainer}
+        ${animationPhaseIndex === 3 ? centerContent : ""}
+        ${animationPhaseIndex > 3 ? exitContent : ""}
+      `}
+      >
+        <p css={contentTitle}>BUILD A DISASTER KIT</p>
+        <p css={contentText}>
+          Gather enough supplies for your family for at least seven days!
+        </p>
+      </div>
+
+      <div
+        css={css`
+        ${contentContainer}
+        ${animationPhaseIndex === 4 ? centerContent : ""}
+        ${animationPhaseIndex > 4 ? exitContent : ""}
+      `}
+      >
+        <p css={contentText}>
+          For more information about earthquake preparedness in Portland, visit{" "}
+          <span>CivicPlatform.org/EarthquakeHeroes</span>
+        </p>
+        <img
+          src={QRCode}
+          alt="QR code for civicplatform.org/EarthquakeHeroes"
+          css={centeredQRCode}
+        />
+      </div>
+
       <div css={buttonWrapper}>
         <button
           type="button"

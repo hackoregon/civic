@@ -24,10 +24,12 @@ const openStyle = css`
 `;
 
 const summaryStyle = css`
-  padding-left: 0;
-  margin-left: 0;
+  top: 90px;
+  right: 950px;
+  position: absolute;
+
   z-index: 10;
-  transition: none;
+  transition: all 1s;
   transform: none;
 
   display: grid;
@@ -54,7 +56,12 @@ const badgesContainer = css`
   align-content: center;
 `;
 
-const BadgesDrawer = ({ journeyBarContainerStyle, open, isSummary }) => {
+const BadgesDrawer = ({
+  journeyBarContainerStyle,
+  open,
+  isSummary,
+  initialSummaryStyle
+}) => {
   return (
     <div
       css={css`
@@ -62,6 +69,7 @@ const BadgesDrawer = ({ journeyBarContainerStyle, open, isSummary }) => {
         ${drawerContainer};
         ${open ? openStyle : closedStyle};
         ${isSummary ? summaryStyle : ""};
+        ${initialSummaryStyle || ""};
       `}
     >
       <p css={headerStyle}>
@@ -81,7 +89,8 @@ const BadgesDrawer = ({ journeyBarContainerStyle, open, isSummary }) => {
 BadgesDrawer.propTypes = {
   journeyBarContainerStyle: PropTypes.shape({}),
   open: PropTypes.bool,
-  isSummary: PropTypes.bool
+  isSummary: PropTypes.bool,
+  initialSummaryStyle: PropTypes.shape({})
 };
 
 export default BadgesDrawer;

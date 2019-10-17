@@ -21,6 +21,13 @@ const containerStyle = css`
   box-shadow: 0px 4px 2px 0px rgba(0, 0, 0, 0.15);
 `;
 
+const summaryStyle = css`
+  top: 90px;
+  right: 40px;
+  position: absolute;
+  transition: all 1s;
+`;
+
 const justifyRightStyle = css`
   margin-top: 10px;
   margin-right: 60px;
@@ -50,12 +57,14 @@ const savedNumber = css`
   color: ${palette.red};
 `;
 
-const SavedBar = ({ justifyRight }) => {
+const SavedBar = ({ justifyRight, isSummary, initialSummaryStyle }) => {
   return (
     <div
       css={css`
-        ${containerStyle}
-        ${justifyRight && justifyRightStyle}
+        ${containerStyle};
+        ${justifyRight && justifyRightStyle};
+        ${isSummary ? summaryStyle : ""}
+        ${initialSummaryStyle || ""}
       `}
     >
       <p css={headerStyle}>
@@ -74,11 +83,9 @@ const SavedBar = ({ justifyRight }) => {
 };
 
 SavedBar.propTypes = {
-  justifyRight: PropTypes.bool
+  justifyRight: PropTypes.bool,
+  isSummary: PropTypes.bool,
+  initialSummaryStyle: PropTypes.shape({})
 };
 
 export default SavedBar;
-
-// const mapStateToProps = state => ({});
-
-// export default connect(mapStateToProps)(memo(SavedBar));
