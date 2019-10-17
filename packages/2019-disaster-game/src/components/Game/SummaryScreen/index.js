@@ -13,6 +13,9 @@ import usePrevious from "../../../state/hooks/usePrevious";
 import Timer from "../../../utils/timer";
 
 import motivationalAudio from "../../../../assets/audio/summary_screen/8_boy_you_did_great.mp3";
+import buildKitAudio from "../../../../assets/audio/summary_screen/buildKit.mp3";
+import makePlanAudio from "../../../../assets/audio/summary_screen/makePlan.mp3";
+import meetNeighborsAudio from "../../../../assets/audio/summary_screen/meetNeighbors.mp3";
 import summarySong from "../../../../assets/audio/summary_screen/summary_song.mp3";
 import Song from "../../atoms/Audio/Song";
 
@@ -180,10 +183,10 @@ const SummaryScreen = ({
   const [animationPhaseIndex, setAnimationPhaseIndex] = useState(-1);
   const animationPhases = [
     { duration: 10 },
-    { duration: 10 },
-    { duration: 10 },
-    { duration: 10 },
-    { duration: 10 }
+    { duration: 7 },
+    { duration: 7 },
+    { duration: 7 },
+    { duration: 7 }
   ];
   const prevAnimationPhaseIndex = usePrevious(animationPhaseIndex);
 
@@ -283,6 +286,9 @@ const SummaryScreen = ({
         <p css={contentText}>
           Talk to your family about where you will meet after an earthquake.
         </p>
+        {animationPhaseIndex === 1 && (
+          <Song songFile={makePlanAudio} shouldLoop={false} volume={1.0} />
+        )}
       </div>
 
       <div
@@ -296,6 +302,9 @@ const SummaryScreen = ({
         <p css={contentText}>
           Do you have neighbors who will need extra help after a disaster?
         </p>
+        {animationPhaseIndex === 2 && (
+          <Song songFile={meetNeighborsAudio} shouldLoop={false} volume={1.0} />
+        )}
       </div>
 
       <div
@@ -309,6 +318,9 @@ const SummaryScreen = ({
         <p css={contentText}>
           Gather enough supplies for your family for at least seven days!
         </p>
+        {animationPhaseIndex === 3 && (
+          <Song songFile={buildKitAudio} shouldLoop={false} volume={1.0} />
+        )}
       </div>
 
       <div
@@ -339,7 +351,7 @@ const SummaryScreen = ({
           <p css={buttonFont}>PLAY AGAIN</p>
         </button>
       </div>
-      <Song songFile={summarySong} />
+      <Song songFile={summarySong} volume={0.5} />
       <Song songFile={motivationalAudio} shouldLoop={false} volume={1.0} />
     </div>
   );
