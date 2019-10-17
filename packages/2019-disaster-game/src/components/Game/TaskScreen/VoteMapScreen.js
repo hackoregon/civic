@@ -6,6 +6,7 @@ import { useEffect, useState, useCallback } from "react";
 import { BaseMap, IconMap } from "@hackoregon/component-library";
 import { getTaskLocations } from "../../../state/tasks";
 import { getTileServerApi } from "../../../state/settings";
+import iconAtlas from "../../../../assets/icon-atlas.png";
 
 import {
   poiIconMapping,
@@ -133,7 +134,7 @@ const VoteMapScreen = ({
         <IconMap
           data={data}
           getPosition={getPosition}
-          iconAtlas="https://i.imgur.com/899qI6L.png"
+          iconAtlas={iconAtlas}
           iconMapping={poiIconMapping}
           iconSizeScale={poiIconZoomScale}
           getIcon={getIcon}
