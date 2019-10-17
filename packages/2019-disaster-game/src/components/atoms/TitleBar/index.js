@@ -93,7 +93,7 @@ const TitleBar = ({ activeChapterId, activeTaskData }) => {
       >
         <img
           src={QRCode}
-          alt="QR code for civicplatform.org"
+          alt="QR code for civicplatform.org/EarthquakeHeroes"
           css={QRCodeStyle}
         />
         <JourneyBar badgeDrawerOpen={badgeDrawerOpen} />
