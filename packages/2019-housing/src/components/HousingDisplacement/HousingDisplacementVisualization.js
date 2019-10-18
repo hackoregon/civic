@@ -180,7 +180,7 @@ const HousingDisplacementVisualization = ({ isLoading, data }) => {
                 <MapTooltip
                   primaryName="Year"
                   primaryField="year"
-                  secondaryName="Black Polulation Share"
+                  secondaryName="Black Population Share"
                   secondaryField={polygonFieldName}
                   formatSecondaryField={f =>
                     civicFormat.decimalToPercent(f / 100)

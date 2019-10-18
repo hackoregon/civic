@@ -125,10 +125,10 @@ function CivicCardLayoutPreview({ cardMeta }) {
               {cardMeta.title}
             </CivicCardLink>
           </h2>
-          <p>{cardMeta.introText}</p>
+          <section>{cardMeta.introText}</section>
           <ul css={tagList} id={`${cardMeta.slug}-tags`}>
             {cardMeta.tags.map((tag, index) => (
-              <li>
+              <li key={generate()}>
                 <Chip
                   tag={tag}
                   index={index}

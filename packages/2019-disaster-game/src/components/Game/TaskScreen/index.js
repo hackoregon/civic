@@ -14,7 +14,8 @@ import {
   goToNextTaskPhase,
   getActiveEnvironment,
   getTasksForEnvironment,
-  addTask
+  addTask,
+  completeTask
 } from "../../../state/tasks";
 import { getPlayerKitItems } from "../../../state/kit";
 import usePrevious from "../../../state/hooks/usePrevious";
@@ -22,6 +23,8 @@ import { SOLVING, VOTING, MOVING_MAP } from "../../../constants/actions";
 import { chooseRandomTask } from "./voteUtils";
 
 import taskSong from "../../../../assets/audio/HappyTheme2fadeinout.mp3";
+import audioVoteInstruction from "../../../../assets/audio/task_screen/boy/who_should_we_help_next.mp3";
+import audioVoteMotivate from "../../../../assets/audio/task_screen/boy/lets_go_do_it_enthusiastic.mp3";
 import Song from "../../atoms/Audio/Song";
 
 import MatchLockInterface from "../../atoms/MatchLockInterface";
@@ -52,13 +55,22 @@ const TaskScreen = ({
   activeEnvironment,
   addNextTask,
   weightedPlayerKitItems,
-  weightedTasks
+  weightedTasks,
+  completeActiveTask
 }) => {
   const [chapterTimer] = useState(new Timer());
   const [phaseTimer] = useState(new Timer());
   const [possibleItems, setPossibleItems] = useState(weightedPlayerKitItems);
   const [taskVotes, setTaskVotes] = useState(taskVotesDefault);
   const [correctItemsChosen, setCorrectItemsChosen] = useState(0);
+  const [
+    finishedTaskInstructionalAudio,
+    setFinishedTaskInstructionalAudio
+  ] = useState(false);
+  const [solvingTransitionTimeout, setSolvingTransitionTimeout] = useState(
+    null
+  );
+  const [animatingTaskTransition, setAnimatingTaskTransition] = useState(false);
   const prevTaskPhase = usePrevious(taskPhase);
 
   const goToTask = () => {
@@ -71,7 +83,7 @@ const TaskScreen = ({
   };
 
   const startTimer = useCallback(
-    (duration, callback, completeTask, items) => {
+    (duration, callback, wasTaskCompleted, items) => {
       phaseTimer.reset();
       phaseTimer.setDuration(duration);
       phaseTimer.addCompleteCallback(() => {
@@ -79,11 +91,13 @@ const TaskScreen = ({
         if (callback) {
           callback();
         }
-        goToNextPhase(completeTask);
+        if (!animatingTaskTransition) {
+          goToNextPhase(wasTaskCompleted);
+        }
       });
       phaseTimer.start();
     },
-    [phaseTimer, goToNextPhase]
+    [phaseTimer, animatingTaskTransition, goToNextPhase]
   );
 
   // Timer: on chapter start
@@ -109,10 +123,14 @@ const TaskScreen = ({
   useEffect(() => {
     if (prevTaskPhase !== taskPhase) {
       if (taskPhase === SOLVING) {
+        setCorrectItemsChosen(0);
         startTimer(activeTask.time, solvingCallback, true, weightedTasks);
       }
       if (taskPhase === VOTING) {
-        startTimer(votingDuration, null, null, []);
+        const newTimeout = setTimeout(() => {
+          startTimer(votingDuration, null, null, []);
+        }, 1000);
+        setSolvingTransitionTimeout(newTimeout);
       }
       if (taskPhase === MOVING_MAP) {
         startTimer(
@@ -141,11 +159,24 @@ const TaskScreen = ({
     };
   }, [activeTaskIndex, taskPhase]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const setEndSolvingChapterAnimationTimeouts = () => {
+    const newTimeout = setTimeout(() => {
+      setCorrectItemsChosen(0);
+      setAnimatingTaskTransition(false);
+      phaseTimer.stopEarly();
+    }, 1000);
+    setSolvingTransitionTimeout(newTimeout);
+  };
+
   const onItemSelection = orbModel => {
     if (orbModel.type === activeTask.requiredItem) {
-      setCorrectItemsChosen(correctItemsChosen + 1);
-      if (correctItemsChosen >= activeTask.numberItemsToSolve) {
-        phaseTimer.stopEarly();
+      const itemsNowChosen = correctItemsChosen + 1;
+      setCorrectItemsChosen(itemsNowChosen);
+      if (itemsNowChosen >= activeTask.numberItemsToSolve) {
+        setAnimatingTaskTransition(true);
+        completeActiveTask(activeTask);
+        if (solvingTransitionTimeout) clearTimeout(solvingTransitionTimeout);
+        setEndSolvingChapterAnimationTimeouts();
       }
       return true;
     }
@@ -175,19 +206,34 @@ const TaskScreen = ({
   const checkSolutionIsCorrect = currentOrb =>
     activeTask.requiredItem === currentOrb.type;
 
+  const playHowCanIHelp = () => {
+    setFinishedTaskInstructionalAudio(true);
+  };
+
+  const resetQuestion = () => {
+    setFinishedTaskInstructionalAudio(false);
+  };
+
   /* RENDER CONDITIONS */
   const isSolving = taskPhase === SOLVING;
   const isVoting = taskPhase === VOTING;
+  const movingMap = taskPhase === MOVING_MAP;
   const onOrbSelection = isSolving ? onItemSelection : onTaskSelection;
   const checkItemIsCorrect = isSolving
     ? checkSolutionIsCorrect
     : checkVoteIsCorrect;
   const activeScreen = taskPhase;
-  let tickerTapeText = "";
-  if (isSolving) {
-    tickerTapeText = "How can we help this person?";
+  // Save yourself message
+  let interfaceMessage = "Help yourself first!";
+  if (isSolving && activeTaskIndex > 1) {
+    // Save others message
+    interfaceMessage = "How can I help?";
   } else if (isVoting) {
-    tickerTapeText = "Who should we help next?";
+    // Choose next task message
+    interfaceMessage = "Who should we help next?";
+  } else if (movingMap) {
+    // Going to next task message...
+    interfaceMessage = "Let's go do it!";
   }
 
   return (
@@ -197,6 +243,7 @@ const TaskScreen = ({
           open={taskPhase === SOLVING}
           activeTask={activeTask}
           activeTaskIndex={activeTaskIndex}
+          correctItemsChosen={correctItemsChosen}
         />
         <VoteMapScreen
           activeTask={activeTask}
@@ -211,9 +258,41 @@ const TaskScreen = ({
         onOrbSelection={onOrbSelection}
         checkItemIsCorrect={checkItemIsCorrect}
         activeScreen={activeScreen}
-        tickerTapeText={tickerTapeText}
+        interfaceMessage={interfaceMessage}
       />
       <Song songFile={taskSong} />
+      {taskPhase === VOTING && (
+        <Song songFile={audioVoteInstruction} shouldLoop={false} volume={1.0} />
+      )}
+      {taskPhase === MOVING_MAP && (
+        <Song songFile={audioVoteMotivate} shouldLoop={false} volume={1.0} />
+      )}
+      {taskPhase === SOLVING && (
+        <Song
+          songFile={activeTask.audioInstruction}
+          shouldLoop={false}
+          volume={1.0}
+          onend={playHowCanIHelp}
+        />
+      )}
+      {/* Hack around to get audio for 2nd save yourself task. Can be done programatically but coding fast */}
+      {activeTaskIndex === 1 && (
+        <Song
+          songFile={activeTask.audioInstruction}
+          shouldLoop={false}
+          volume={1.0}
+          onend={playHowCanIHelp}
+        />
+      )}
+      {/* Task question plays after instructional audio */}
+      {finishedTaskInstructionalAudio && activeTask && (
+        <Song
+          songFile={activeTask.audioQuestion}
+          shouldLoop={false}
+          volume={1.0}
+          onend={resetQuestion}
+        />
+      )}
     </Fragment>
   );
 };
@@ -225,6 +304,7 @@ TaskScreen.propTypes = {
   endChapter: PropTypes.func,
   goToNextPhase: PropTypes.func,
   addNextTask: PropTypes.func,
+  completeActiveTask: PropTypes.func,
   weightedTasks: PropTypes.arrayOf(PropTypes.shape({})),
   weightedPlayerKitItems: PropTypes.arrayOf(PropTypes.shape({})),
   activeEnvironment: PropTypes.string,
@@ -245,11 +325,14 @@ const mapDispatchToProps = dispatch => ({
   endChapter() {
     dispatch(goToNextChapter());
   },
-  goToNextPhase(completeTask) {
-    dispatch(goToNextTaskPhase(completeTask));
+  goToNextPhase(taskToComplete) {
+    dispatch(goToNextTaskPhase(taskToComplete));
   },
   addNextTask(taskChoice) {
     dispatch(addTask(taskChoice));
+  },
+  completeActiveTask(activeTask) {
+    dispatch(completeTask(activeTask));
   }
 });
 

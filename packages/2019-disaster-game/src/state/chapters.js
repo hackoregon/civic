@@ -10,7 +10,8 @@ const initialState = {
 
 export const actionTypes = {
   SET_ACTIVE_CHAPTER: "SET_ACTIVE_CHAPTER",
-  GO_TO_NEXT_CHAPTER: "GO_TO_NEXT_CHAPTER"
+  GO_TO_NEXT_CHAPTER: "GO_TO_NEXT_CHAPTER",
+  GO_TO_CHAPTER: "GO_TO_CHAPTER"
 };
 
 // ACTIONS
@@ -21,6 +22,10 @@ export const setActiveChapter = chapterIndex => dispatch => {
 
 export const goToNextChapter = () => dispatch => {
   dispatch({ type: actionTypes.GO_TO_NEXT_CHAPTER });
+};
+
+export const goToChapter = customChapter => dispatch => {
+  dispatch({ type: actionTypes.GO_TO_CHAPTER, customChapter });
 };
 
 // REDUCERS
@@ -40,6 +45,11 @@ export const chapters = createReducer(initialState, {
     } else {
       state.activeChapterIndex += 1;
     }
+  },
+
+  [actionTypes.GO_TO_CHAPTER]: (state, action) => {
+    const { customChapter } = action;
+    state.activeChapterIndex = customChapter;
   }
 });
 /* eslint-enable no-param-reassign */
@@ -53,14 +63,19 @@ export const getActiveChapterIndex = createSelector(
   activeChapterIndex => activeChapterIndex
 );
 
+export const getActiveChapterData = createSelector(
+  ["chapters.activeChapterIndex"],
+  activeChapterIndex => CHAPTERS[activeChapterIndex]
+);
+
 export const getActiveChapterId = createSelector(
   ["chapters.activeChapterIndex"],
   activeChapterIndex => CHAPTERS[activeChapterIndex].id
 );
 
-export const getActiveChapterData = createSelector(
+export const getActiveChapterDuration = createSelector(
   ["chapters.activeChapterIndex"],
-  activeChapterIndex => CHAPTERS[activeChapterIndex]
+  activeChapterIndex => CHAPTERS[activeChapterIndex].duration
 );
 
 export const getChapterById = createSelector(

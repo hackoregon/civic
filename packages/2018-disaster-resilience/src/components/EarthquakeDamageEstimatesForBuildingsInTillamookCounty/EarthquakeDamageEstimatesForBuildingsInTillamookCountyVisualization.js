@@ -20,13 +20,13 @@ const EarthquakeDamageEstimatesForBuildingsInTillamookCountyVisualization = ({
 
   const mapStyles = {
     Commercial: {
-      field: "com_loss_r",
+      field: "ComLossRatio",
       opacity: 0.5,
       map: "light",
       buildingType: "commercial"
     },
     Residential: {
-      field: "res_loss_r",
+      field: "ResLossRatio",
       opacity: 0.5,
       map: "light",
       buildingType: "residential"
@@ -79,7 +79,7 @@ const EarthquakeDamageEstimatesForBuildingsInTillamookCountyVisualization = ({
                 data={data.damageEstimates.value}
                 getPosition={f => f.geometry && f.geometry.coordinates}
                 opacity={mapStyles[dataType].opacity}
-                getWeight={f => f.properties[mapStyles[dataType].field]}
+                getWeight={f => f.properties[mapStyles[dataType].field] || 0}
                 getSize={() => 15}
                 colorRange={VisualizationColors.sequential.thermal}
                 getCursor={() => "default"}

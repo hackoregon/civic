@@ -1,1 +1,2 @@
-require("@hackoregon/dev-server")();
+const { TILESERVER } = process.env;
+require("@hackoregon/dev-server")(TILESERVER ? { TILESERVER } : {});

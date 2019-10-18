@@ -24,33 +24,34 @@ import TaskScreen from "./TaskScreen/index";
 import SummaryScreen from "./SummaryScreen/index";
 
 import "@hackoregon/component-library/assets/global.styles.css";
-import summarySong from "../../../assets/audio/PWolf-happysong1wfadeinout.mp3";
 
 const Game = ({ activeChapterId }) => {
   const renderChapter = chapterId => {
     switch (chapterId) {
       case KIT:
         return <KitScreen />;
-      case TASKS:
-        return <TaskScreen />;
       case QUAKE:
         return <QuakeScreen />;
-      case SUMMARY:
-        return <SummaryScreen songFile={summarySong} />;
+      case TASKS:
+        return <TaskScreen />;
       default:
         return <DefaultScreen />;
     }
   };
 
+  const showTitleBar =
+    activeChapterId !== ATTRACTOR && activeChapterId !== QUAKE;
+
   return (
     <Fragment>
       {activeChapterId === ATTRACTOR && <AttractorScreen />}
-      {activeChapterId !== ATTRACTOR && (
+      {activeChapterId !== ATTRACTOR && activeChapterId !== SUMMARY && (
         <GameContainerStyle>
-          {activeChapterId !== ATTRACTOR && <TitleBar />}
+          {showTitleBar && <TitleBar />}
           <GameGrid>{renderChapter(activeChapterId)}</GameGrid>
         </GameContainerStyle>
       )}
+      {activeChapterId === SUMMARY && <SummaryScreen />}
     </Fragment>
   );
 };

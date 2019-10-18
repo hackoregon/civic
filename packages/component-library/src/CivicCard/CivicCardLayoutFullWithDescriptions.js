@@ -269,6 +269,7 @@ function CivicCardLayoutFullWithDescriptions({ isLoading, data, cardMeta }) {
             {cardMeta.metadata}
             {_.has(cardMeta, "metadataQA") && (
               <CollapsableSection
+                description="metadata questions"
                 items={cardMeta.metadataQA.map(item => (
                   <MetadataQuestion item={item} key={generate()} />
                 ))}
@@ -289,6 +290,7 @@ function CivicCardLayoutFullWithDescriptions({ isLoading, data, cardMeta }) {
               data visualization.
             </p>
             <CollapsableSection
+              description="resources"
               items={cardMeta.resources.map(item => (
                 <Resource section={item} key={generate()} />
               ))}

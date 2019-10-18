@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router";
 import { PageLayout, ExploreRelated } from "../..";
 
 const CardDetailPage = ({ params, CardRegistry }) => {
@@ -15,7 +16,15 @@ const CardDetailPage = ({ params, CardRegistry }) => {
     );
   }
 
-  return null;
+  return (
+    <PageLayout>
+      <section>
+        <h1>Card not found</h1>
+        <p>The card you are looking for doesn&apos;t exist.</p>
+        <Link to="/cards">Other cards</Link>
+      </section>
+    </PageLayout>
+  );
 };
 
 CardDetailPage.propTypes = {

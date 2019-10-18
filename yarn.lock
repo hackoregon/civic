@@ -13374,6 +13374,15 @@ react-move@^5.0.0:
     prop-types "^15.7.2"
     react-lifecycles-compat "^3.0.4"
 
+react-move@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/react-move/-/react-move-6.0.0.tgz#4d499aa121f38f4b23ef792538b3a68af16bb680"
+  integrity sha512-Hl8XGIphEc6oNCNSCV2h5BJkXpTwBE88eWjtsNvNHz77VlncHyGgZF1oMk4QuIuyGGDQ40miLh4+46fbG0ujlw==
+  dependencies:
+    "@babel/runtime" "^7.4.5"
+    kapellmeister "^3.0.1"
+    prop-types "^15.7.2"
+
 react-player@^0.15.0:
   version "0.15.0"
   resolved "https://registry.yarnpkg.com/react-player/-/react-player-0.15.0.tgz#ce76415132ecd17c44e5495c5b558faba233107c"

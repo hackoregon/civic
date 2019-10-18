@@ -41,7 +41,7 @@ const matchRelatedCardsByTags = (slug, baseTags, entries) => {
         numOfSimilarTags: entry.component.tags
           ? entry.component.tags.filter(tag => {
               return baseTags.includes(tag);
-            }).length / entry.component.tags.length
+            }).length
           : 0,
         ...entry
       };

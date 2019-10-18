@@ -72,9 +72,8 @@ const buttonStyle = css`
 const buttonFont = css`
   width: 100%;
   margin: 0 auto;
-  font-family: "Boogaloo", sans-serif;
+  font-family: "Luckiest Guy", sans-serif;
   font-size: 12rem;
-  font-weight: 900;
   color: white;
 `;
 
@@ -120,7 +119,7 @@ const AttractorScreen = ({ goToChapter, playSFX }) => {
 
   return (
     <div css={pageWrapper}>
-      <Song songFile={attractorSong} />
+      <Song songFile={attractorSong} volume={0.25} />
       <div css={bg} />
       <div css={[bg, bg2]} />
       <div css={[bg, bg3]} />

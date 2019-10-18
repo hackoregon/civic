@@ -1,11 +1,13 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
 import { PropTypes } from "prop-types";
-// import { connect } from "react-redux";
-import { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { useEffect, useState, useCallback } from "react";
 import { BaseMap, IconMap } from "@hackoregon/component-library";
+import { getTaskLocations } from "../../../state/tasks";
+import { getTileServerApi } from "../../../state/settings";
+import iconAtlas from "../../../../assets/icon-atlas.png";
 
-// import { getCompletedTasks } from "../../../state/tasks";
 import {
   poiIconMapping,
   poiIconZoomScale,
@@ -28,39 +30,82 @@ const screenLayout = css`
 const VoteMapScreen = ({
   activeTask,
   activeTaskId,
-  completedTasks = [],
-  tasks,
+  taskLocations,
   taskVotes,
+  tileServerApi,
   mapTransitionDuration
 }) => {
   const [longitude, setLongitude] = useState(initialLon);
   const [latitude, setLatitude] = useState(initialLat);
+  const [data, setData] = useState(asGeoJSON(taskLocations));
 
-  const data = asGeoJSON(tasks, activeTask, completedTasks);
+  const getIcon = d => d.properties.id;
+
+  const offlineMapboxOptions = {};
+  if (tileServerApi) {
+    offlineMapboxOptions.mapboxApiUrl = tileServerApi;
+    offlineMapboxOptions.mapStyle = "mapbox://styles/disaster";
+  }
+
+  // Returns a location that hasn't been completed if possible
+  const getActiveTaskLocation = useCallback(
+    currentTask => {
+      let possibleTaskLocation = null;
+      for (let i = 0; i < taskLocations.length; i += 1) {
+        const taskAtLocation = taskLocations[i];
+        if (taskAtLocation.type === currentTask.id) {
+          possibleTaskLocation = taskAtLocation.location;
+          if (!taskAtLocation.completed) {
+            possibleTaskLocation = taskAtLocation.location;
+            break;
+          }
+        }
+      }
+      return possibleTaskLocation;
+    },
+    [taskLocations]
+  );
+
+  useEffect(() => {
+    setData(asGeoJSON(taskLocations));
+  }, [taskLocations]);
 
   useEffect(() => {
     const saveYourselfMode = activeTaskId > 1;
     if (!saveYourselfMode) {
       if (activeTask) {
-        setLatitude(activeTask.locations[0][1]);
-        setLongitude(activeTask.locations[0][0]);
+        const activeTaskLocation = getActiveTaskLocation(activeTask);
+        setLatitude(activeTaskLocation[1]);
+        setLongitude(activeTaskLocation[0]);
       } else {
         setLatitude(initialLat);
         setLongitude(initialLon);
       }
     }
-  }, [activeTask, activeTaskId]);
+  }, [activeTask, activeTaskId, getActiveTaskLocation]);
 
   // Would be cool to size these relative to each other in the future
   const sizeForVote = feature => {
+    // Completed tasks always 20
+    const isCompletedTaskLocation =
+      feature && feature.properties && feature && feature.properties.completed;
+    if (isCompletedTaskLocation) {
+      return 20;
+    }
+    // OMSI location always 30
+    const isOMSI =
+      feature && feature.properties && feature.properties.type === "omsi";
+    if (isOMSI) {
+      return 30;
+    }
+    // Incomplete tasks
     const mapPropType =
       feature && feature.properties && feature.properties.type;
-
     const votesForTask = taskVotes[mapPropType] || 0;
     const mostVotesForAnyTask = taskVotes.mostVotesTotal || 1;
     const baseSize = 18;
 
-    return baseSize + 2 * (2 * votesForTask - mostVotesForAnyTask);
+    return baseSize + 2 * (4 * votesForTask - mostVotesForAnyTask);
   };
 
   return (
@@ -79,7 +124,8 @@ const VoteMapScreen = ({
           doubleClickZoom: false,
           touchZoom: false,
           touchRotate: false,
-          keyboard: false
+          keyboard: false,
+          ...offlineMapboxOptions
         }}
         animate
         animationDuration={mapTransitionDuration * 1000}
@@ -88,10 +134,10 @@ const VoteMapScreen = ({
         <IconMap
           data={data}
           getPosition={getPosition}
-          iconAtlas="https://i.imgur.com/ZKYqCqW.png"
+          iconAtlas={iconAtlas}
           iconMapping={poiIconMapping}
           iconSizeScale={poiIconZoomScale}
-          getIcon={d => d.properties.type}
+          getIcon={getIcon}
           getSize={sizeForVote}
         />
       </BaseMap>
@@ -105,20 +151,25 @@ VoteMapScreen.propTypes = {
     task: PropTypes.string,
     locations: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number))
   }),
-  completedTasks: PropTypes.arrayOf(PropTypes.string),
-  tasks: PropTypes.arrayOf(PropTypes.object),
+  taskLocations: PropTypes.arrayOf(
+    PropTypes.shape({
+      location: PropTypes.arrayOf(PropTypes.number),
+      type: PropTypes.string,
+      completed: PropTypes.bool
+    })
+  ),
   taskVotes: PropTypes.shape({
     mostVotesId: PropTypes.string,
     mostVotesTotal: PropTypes.number,
     totalVotes: PropTypes.number
   }),
+  tileServerApi: PropTypes.string,
   mapTransitionDuration: PropTypes.number
 };
 
-export default VoteMapScreen;
+const mapStateToProps = state => ({
+  taskLocations: getTaskLocations(state),
+  tileServerApi: getTileServerApi(state)
+});
 
-// const mapStateToProps = state => ({
-// completedTasks: getCompletedTasks(state)
-// });
-
-// export default connect(mapStateToProps)(VoteMapScreen);
+export default connect(mapStateToProps)(VoteMapScreen);

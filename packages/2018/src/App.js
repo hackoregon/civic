@@ -90,7 +90,7 @@ import {
 import "./fonts.css";
 // eslint-disable-next-line import/no-named-as-default
 import RootPage from "./components/RootPage";
-import NewHomePage from "./components/NewHomePage";
+import HomePage from "./components/HomePage";
 import SandboxPage from "./components/SandboxPage";
 import PortlandCollectionPage from "./components/PortlandCollectionPage";
 import CityNotFoundPage from "./components/CityNotFoundPage";
@@ -187,7 +187,7 @@ const routes = {
   path: "/",
   component: RootPage,
   indexRoute: {
-    component: NewHomePage
+    component: HomePage
   },
   childRoutes: [
     {
@@ -265,6 +265,12 @@ const routes = {
     {
       path: "sandbox",
       component: SandboxPage
+    },
+    // Route for OMSI QR Code for Installation
+    {
+      path: "earthquakeheroes",
+      component: DisasterApp,
+      childRoutes: DisasterRoutes(store)
     },
     // Temporarily Hidden 2019 Pages ⬇️
     {
