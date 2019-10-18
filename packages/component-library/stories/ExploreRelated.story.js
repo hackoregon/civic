@@ -63,4 +63,11 @@ export default () =>
         CardRegistry={CardRegistryMock}
         slug="template-file-card"
       />
+    ))
+    .add("Less Entries", () => (
+      <ExploreRelated
+        CardRegistry={CardRegistryMock}
+        slug="template-file-card"
+        numOfRelatedCards={2}
+      />
     ));

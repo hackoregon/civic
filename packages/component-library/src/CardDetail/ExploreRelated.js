@@ -2,11 +2,9 @@
 import { jsx, css } from "@emotion/core";
 import PropTypes from "prop-types";
 import shortid from "shortid";
-import { Link } from "react-router";
 import { ThemeProvider } from "@material-ui/styles";
 
 import { MaterialTheme } from "../_Themes/index";
-import { PageLayout } from "../..";
 import { CivicCardLayoutPreviewTitleOnly } from "../index";
 
 const sectionMarginSmall = css`
@@ -34,7 +32,12 @@ const listItemStyle = css`
   list-style-type: none;
 `;
 
-const matchRelatedCardsByTags = (slug, baseTags, entries) => {
+const matchRelatedCardsByTags = (
+  slug,
+  baseTags,
+  entries,
+  numOfRelatedCards
+) => {
   const relatedCards = entries
     .map(entry => {
       return {
@@ -52,17 +55,18 @@ const matchRelatedCardsByTags = (slug, baseTags, entries) => {
     .sort((a, b) => {
       return b.numOfSimilarTags - a.numOfSimilarTags;
     })
-    .slice(0, 4);
+    .slice(0, numOfRelatedCards);
 
   return relatedCards;
 };
 
-const ExploreRelated = ({ slug, CardRegistry }) => {
+const ExploreRelated = ({ slug, CardRegistry, numOfRelatedCards = 4 }) => {
   const card = CardRegistry.find(slug);
   const relatedCards = matchRelatedCardsByTags(
     slug,
     card.component.tags,
-    CardRegistry.entries
+    CardRegistry.entries,
+    numOfRelatedCards
   );
 
   const relatedCardList = relatedCards.map(relatedCard => (
@@ -82,15 +86,7 @@ const ExploreRelated = ({ slug, CardRegistry }) => {
     );
   }
 
-  return (
-    <PageLayout>
-      <h1>Card not found</h1>
-      <p>
-        The card you are looking for doesn&apos;t exist.
-        <Link to="/cities/portland">View the Portland Collection</Link>
-      </p>
-    </PageLayout>
-  );
+  return null;
 };
 
 ExploreRelated.propTypes = {
@@ -103,7 +99,8 @@ ExploreRelated.propTypes = {
         slug: PropTypes.string.isRequired
       })
     )
-  }).isRequired
+  }).isRequired,
+  numOfRelatedCards: PropTypes.number
 };
 
 ExploreRelated.displayName = "ExploreRelated";
