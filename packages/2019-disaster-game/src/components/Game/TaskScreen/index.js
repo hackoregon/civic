@@ -123,6 +123,7 @@ const TaskScreen = ({
   useEffect(() => {
     if (prevTaskPhase !== taskPhase) {
       if (taskPhase === SOLVING) {
+        setCorrectItemsChosen(0);
         startTimer(activeTask.time, solvingCallback, true, weightedTasks);
       }
       if (taskPhase === VOTING) {
@@ -158,6 +159,15 @@ const TaskScreen = ({
     };
   }, [activeTaskIndex, taskPhase]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const setEndSolvingChapterAnimationTimeouts = () => {
+    const newTimeout = setTimeout(() => {
+      setCorrectItemsChosen(0);
+      setAnimatingTaskTransition(false);
+      phaseTimer.stopEarly();
+    }, 1000);
+    setSolvingTransitionTimeout(newTimeout);
+  };
+
   const onItemSelection = orbModel => {
     if (orbModel.type === activeTask.requiredItem) {
       const itemsNowChosen = correctItemsChosen + 1;
@@ -166,12 +176,7 @@ const TaskScreen = ({
         setAnimatingTaskTransition(true);
         completeActiveTask(activeTask);
         if (solvingTransitionTimeout) clearTimeout(solvingTransitionTimeout);
-        const newTimeout = setTimeout(() => {
-          phaseTimer.stopEarly();
-          setCorrectItemsChosen(0);
-          setAnimatingTaskTransition(false);
-        }, 1000);
-        setSolvingTransitionTimeout(newTimeout);
+        setEndSolvingChapterAnimationTimeouts();
       }
       return true;
     }
