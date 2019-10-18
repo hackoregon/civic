@@ -135,16 +135,16 @@ const HomePage = () => {
             We’re building the teams and systems to make it happen.
           </p>
           <div className="section-button-container">
-            <Link
+            <a
               css={css`
                 text-decoration: none;
               `}
-              to="https://ven386248.typeform.com/to/WVYtVF"
+              href="https://ven386248.typeform.com/to/WVYtVF"
             >
               <Button bkgndColor={BrandColors.subdued.rgba}>
                 WORK WITH US
               </Button>
-            </Link>
+            </a>
           </div>
           <img
             className="placeholder-section-image"
@@ -175,11 +175,11 @@ const HomePage = () => {
             have a match for a project that fits your skills and interests.
           </p>
           <div className="section-button-container">
-            <Link
+            <a
               css={css`
                 text-decoration: none;
               `}
-              to="https://ven386248.typeform.com/to/rEhanV"
+              href="https://ven386248.typeform.com/to/rEhanV"
             >
               <Button
                 display="inline"
@@ -188,9 +188,9 @@ const HomePage = () => {
               >
                 APPLY NOW
               </Button>
-            </Link>
+            </a>
 
-            <Link
+            <a
               css={css`
                 text-decoration: none;
               `}
@@ -199,7 +199,7 @@ const HomePage = () => {
               <Button display="inline" bkgndColor={BrandColors.subdued.rgba}>
                 LEARN MORE
               </Button>
-            </Link>
+            </a>
           </div>
           <img
             className="placeholder-section-image"
@@ -237,11 +237,11 @@ const HomePage = () => {
             tech, and civic willpower together to create a force for public
             good.
           </p>
-          <Link
+          <a
             css={css`
               text-decoration: none;
             `}
-            to="https://civicsoftwarefoundation.org/"
+            href="https://civicsoftwarefoundation.org/"
           >
             <Button
               margin="40px 0 50px 0"
@@ -249,7 +249,7 @@ const HomePage = () => {
             >
               VISIT THE CIVIC SOFTWARE FOUNDATION
             </Button>
-          </Link>
+          </a>
           {/* <p className="quote-text">
             &quot;When <span className="big-text">political will</span> meets{" "}
             <span className="big-text">public imagination</span> the
