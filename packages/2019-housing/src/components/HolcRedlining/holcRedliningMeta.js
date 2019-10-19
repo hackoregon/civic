@@ -44,16 +44,7 @@ const HolcRedliningMeta = (/* data */) => ({
   ),
   shareText:
     "The principal reason a “hazardous” grade was because of higher concentrations of immigrants and people of color.",
-  tags: [
-    "Housing",
-    "Portland",
-    "Oregon",
-    "Map",
-    "Race",
-    "discrimination",
-    "redlining",
-    "HOLC"
-  ],
+  tags: ["Housing", "Portland", "Oregon", "Map", "Race", "Redlining", "HOLC"],
   selector: null,
   analysis: (
     <Collapsable>

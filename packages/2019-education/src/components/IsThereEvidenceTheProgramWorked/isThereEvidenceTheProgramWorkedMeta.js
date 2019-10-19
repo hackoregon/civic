@@ -9,7 +9,9 @@ const IsThereEvidenceTheProgramWorkedMeta = (/* data */) => ({
   visualization: IsThereEvidenceTheProgramWorkedVisualization, // data, isLoading are passed to this as props
   additionalText: null,
   shareText: null,
-  tags: ["Education", "Portland", "Oregon", "Chart"],
+  tags: [
+    /* "Education", "Portland", "Oregon", "Chart" */
+  ],
   selector: null,
   analysis: null,
   metadata: null,

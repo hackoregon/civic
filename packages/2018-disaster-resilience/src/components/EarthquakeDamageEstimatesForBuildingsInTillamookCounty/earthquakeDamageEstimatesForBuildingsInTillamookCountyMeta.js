@@ -26,7 +26,13 @@ const EarthquakeDamageEstimatesForBuildingsInTillamookCountyMeta = (/* data */) 
   ),
   shareText:
     "A Cascadia 9.0 earthquake event would likely produce devastating destruction of buildings in the Tillamook County area. We provide an interactive visualization of the projected financial damage to buildings as a loss ratio after such an event. The loss ratio of a building is the dollar cost of likely damages sustained during an earthquake divided by the total value of the building.",
-  tags: ["Disaster Resilience", "Oregon", "Map"],
+  tags: [
+    "Disaster Resilience",
+    "Earthquake",
+    "Tillamook County",
+    "Oregon",
+    "Map"
+  ],
   selector: null,
   analysis: (
     <Collapsable>

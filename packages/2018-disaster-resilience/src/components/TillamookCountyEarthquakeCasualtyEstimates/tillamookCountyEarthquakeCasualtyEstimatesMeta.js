@@ -50,7 +50,13 @@ const TillamookCountyEarthquakeCasualtyEstimatesMeta = (/* data */) => ({
       Cascadia 9.0 earthquake will result in much higher numbers of casualties
       and a higher need for medical response resources than a nighttime
       earthquake.`,
-  tags: ["Disaster Resilience", "Oregon", "Map"],
+  tags: [
+    "Disaster Resilience",
+    "Earthquake",
+    "Tillamook County",
+    "Oregon",
+    "Map"
+  ],
   selector: null,
   analysis: (
     <Collapsable>

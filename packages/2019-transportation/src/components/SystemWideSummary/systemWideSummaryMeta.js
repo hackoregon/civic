@@ -21,7 +21,7 @@ const SystemWideSummaryMeta = data => ({
   visualization: SystemWideSummaryVisualization, // data, isLoading are passed to this as props
   additionalText: <p />,
   shareText: "",
-  tags: ["Transportation", "Bus", "Portland"],
+  tags: ["Transportation", "Bus", "Portland", "Oregon"],
   selector: null,
   analysis: (
     <Collapsable>
