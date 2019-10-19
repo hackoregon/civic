@@ -12,7 +12,8 @@ import {
   CivicCardLayoutSideBySide,
   RadioButtonGroup,
   CivicCardLayoutFullWithDescriptions,
-  CivicCardLayoutPreview
+  CivicCardLayoutPreview,
+  CivicCardLayoutPreviewTitleOnly
 } from "../src";
 import {
   sampleCardMeta,
@@ -249,6 +250,14 @@ export default () =>
         data={sampleCardData}
         isLoading={false}
         Layout={CivicCardLayoutPreview}
+      />
+    ))
+    .add("Layout: Preview (Title Only)", () => (
+      <CivicCard
+        cardMeta={sampleCardMeta}
+        data={sampleCardData}
+        isLoading={false}
+        Layout={CivicCardLayoutPreviewTitleOnly}
       />
     ))
     .add("Layout: SideBySide", () => (

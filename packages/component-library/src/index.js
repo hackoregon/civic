@@ -60,6 +60,7 @@ export { default as ComparisonMap } from "./ComparisonMap/ComparisonMap";
 export { default as GradientScale } from "./GradientScale/GradientScale";
 export { default as Chip } from "./Chip/Chip";
 export { default as CardList } from "./CardList/CardList";
+export { default as ExploreRelated } from "./CardDetail/ExploreRelated";
 export {
   default as PackageSelectorBox
 } from "./PackageSelectorBox/PackageSelectorBox";
@@ -98,6 +99,9 @@ export {
 export {
   default as CivicCardLayoutPreview
 } from "./CivicCard/CivicCardLayoutPreview";
+export {
+  default as CivicCardLayoutPreviewTitleOnly
+} from "./CivicCard/CivicCardLayoutPreviewTitleOnly";
 export { default as CardDetailPage } from "./CardDetail/CardDetailPage";
 export {
   default as CardDetailPageEmbed

@@ -19,7 +19,6 @@ import { ThemeProvider } from "@material-ui/styles";
 import { MaterialTheme } from "../_Themes/index";
 import ButtonNew from "../ButtonNew/ButtonNew";
 import PullQuote from "../PullQuote/PullQuote";
-import Placeholder from "../Placeholder/Placeholder";
 import cardMetaTypes from "./cardMetaTypes";
 import cardMetaDescription from "./cardMetaDescriptions";
 import { Chip } from "../index";
@@ -347,19 +346,6 @@ function CivicCardLayoutFullWithDescriptions({ isLoading, data, cardMeta }) {
           </section>
         </article>
         <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
-        <section
-          css={[sectionMarginSmall, sectionMaxWidthSmall, platformItem]}
-          id="explore"
-        >
-          <h2>Explore related data</h2>
-          <Placeholder>
-            <h3>
-              <a href="https://civicsoftwarefoundation.org/#cities">
-                See your data here!
-              </a>
-            </h3>
-          </Placeholder>
-        </section>
       </ThemeProvider>
     </div>
   );
