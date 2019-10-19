@@ -7,7 +7,9 @@ const ProactivePlanningMeta = (/* data */) => ({
   visualization: ProactivePlanningVisualization, // data is passed to this as props
   additionalText: null, // TODO
   shareText: null, // TODO
-  tags: ["Disaster Resilience", "Portland", "Oregon", "Chart"],
+  tags: [
+    /* "Disaster Resilience", "Portland", "Oregon", "Chart" */
+  ],
   selector: null,
   analysis: null, // TODO
   metadata: null,

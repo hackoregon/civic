@@ -5,7 +5,7 @@ import shortid from "shortid";
 import { ThemeProvider } from "@material-ui/styles";
 
 import { MaterialTheme } from "../_Themes/index";
-import { CivicCardLayoutPreviewTitleOnly } from "../index";
+import { CivicCardLayoutPreviewTitleOnly, Placeholder } from "../index";
 
 const sectionMarginSmall = css`
   display: block;
@@ -38,24 +38,27 @@ const matchRelatedCardsByTags = (
   entries,
   numOfRelatedCards
 ) => {
-  const relatedCards = entries
-    .map(entry => {
-      return {
-        numOfSimilarTags: entry.component.tags
-          ? entry.component.tags.filter(tag => {
-              return baseTags.includes(tag);
-            }).length
-          : 0,
-        ...entry
-      };
-    })
-    .filter(entry => {
-      return entry.slug !== slug;
-    })
-    .sort((a, b) => {
-      return b.numOfSimilarTags - a.numOfSimilarTags;
-    })
-    .slice(0, numOfRelatedCards);
+  const relatedCards =
+    baseTags && baseTags.length
+      ? entries
+          .map(entry => {
+            return {
+              numOfSimilarTags: entry.component.tags
+                ? entry.component.tags.filter(tag => {
+                    return baseTags.includes(tag);
+                  }).length
+                : 0,
+              ...entry
+            };
+          })
+          .filter(entry => {
+            return entry.slug !== slug;
+          })
+          .sort((a, b) => {
+            return b.numOfSimilarTags - a.numOfSimilarTags;
+          })
+          .slice(0, numOfRelatedCards)
+      : [];
 
   return relatedCards;
 };
@@ -69,11 +72,22 @@ const ExploreRelated = ({ slug, CardRegistry, numOfRelatedCards = 4 }) => {
     numOfRelatedCards
   );
 
-  const relatedCardList = relatedCards.map(relatedCard => (
-    <li key={shortid.generate()} css={listItemStyle}>
-      <relatedCard.component Layout={CivicCardLayoutPreviewTitleOnly} />
-    </li>
-  ));
+  const relatedCardList =
+    relatedCards.length > 0 ? (
+      relatedCards.map(relatedCard => (
+        <li key={shortid.generate()} css={listItemStyle}>
+          <relatedCard.component Layout={CivicCardLayoutPreviewTitleOnly} />
+        </li>
+      ))
+    ) : (
+      <Placeholder>
+        <h3>
+          <a href="https://civicsoftwarefoundation.org/#cities">
+            See your data here!
+          </a>
+        </h3>
+      </Placeholder>
+    );
 
   if (card && card.component) {
     return (
