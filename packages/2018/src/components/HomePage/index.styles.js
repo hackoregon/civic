@@ -53,6 +53,10 @@ export default (greatestWidth, collapseWidth) => ({
 
     [`@media (max-width: ${collapseWidth}px)`]: {
       padding: "0 22px"
+    },
+
+    "@media (max-width: 460px)": {
+      fontSize: `${70 / defaultFontSize}rem`
     }
   },
 
@@ -128,6 +132,7 @@ export default (greatestWidth, collapseWidth) => ({
     maxWidth: `${greatestWidth}px`,
     margin: `${60 + headerHeight}px auto 60px`,
     padding: "0 20px",
+    overflow: "hidden",
 
     [`@media (max-width: ${collapseWidth}px)`]: {
       margin: `107px auto 60px`,

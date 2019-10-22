@@ -61,6 +61,8 @@ const sectionCivicLayout = css`
 
   @media (max-width: 460px) {
     padding-top: 170px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
   }
 `;
 
@@ -174,18 +176,20 @@ const HomePage = () => {
             starts by filling out an application, and we’ll be in touch when we
             have a match for a project that fits your skills and interests.
           </p>
-          <div className="section-button-container">
+          <div
+            className="section-button-container"
+            css={css`
+              grid-template-columns: auto auto;
+              grid-column-gap: 10px;
+            `}
+          >
             <a
               css={css`
                 text-decoration: none;
               `}
               href="https://ven386248.typeform.com/to/rEhanV"
             >
-              <Button
-                display="inline"
-                margin="0 10px 0 0"
-                bkgndColor={BrandColors.subdued.rgba}
-              >
+              <Button display="inline" bkgndColor={BrandColors.subdued.rgba}>
                 APPLY NOW
               </Button>
             </a>
