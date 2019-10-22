@@ -71,10 +71,16 @@ const Footer = props => (
   <footer css={footerWrapper}>
     <div css={contentWrapper(props)}>
       <div id="contact-us">
-        <p css={header}>Contact</p>
-        <a css={textStyle} href="mailto:hi@civicsoftwarefoundation.org">
-          hi@civicsoftwarefoundation.org
-        </a>
+        <div
+          css={css`
+            margin-bottom: 10px;
+          `}
+        >
+          <p css={header}>Contact</p>
+          <a css={[textStyle]} href="mailto:hi@civicsoftwarefoundation.org">
+            hi@civicsoftwarefoundation.org
+          </a>
+        </div>
         <p css={boldText}>Creative and Tech HQ</p>
         <p css={textStyle}>Portland, OR</p>
         <a css={textStyle} href="tel:5033839131">
