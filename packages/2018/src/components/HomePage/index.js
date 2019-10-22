@@ -12,7 +12,7 @@ import {
 import { Link } from "react-router";
 
 import PlatformExplorer from "./PlatformExplorer";
-import indexStyle from "./index.styles";
+import indexStyle, { defaultFontSize } from "./index.styles";
 // Placeholders
 import placeholderWorkImg from "../../assets/new-home-page-2.png";
 import placeholderContributorsImg from "../../assets/new-home-page-3.png";
@@ -33,6 +33,10 @@ const sectionWorkLayout = css`
 
 const sectionContributorLayout = css`
   padding-bottom: 40px;
+
+  @media (max-width: 662px) {
+    padding-top: 135px;
+  }
 
   @media (min-width: ${condensedWidth}px) {
     padding-bottom: 95px;
@@ -61,10 +65,17 @@ const sectionCivicLayout = css`
   padding-bottom: 10px;
   margin-bottom: 10px;
 
+  @media (max-width: 787px) {
+    padding-top: 80px;
+  }
+
   @media (max-width: 460px) {
-    padding-top: 170px;
     padding-bottom: 10px;
     margin-bottom: 10px;
+  }
+
+  @media (max-width: 402px) {
+    padding-top: 125px;
   }
 `;
 
@@ -235,7 +246,15 @@ const HomePage = () => {
 
         <div className="nav-div" id="civic-software-foundation" />
         <div className="home-section" css={sectionCivicLayout}>
-          <h2>Civic Software Foundation</h2>
+          <h2
+            css={css`
+              @media (max-width: 787px) {
+                top: -${(60 * 2) / defaultFontSize}rem;
+              }
+            `}
+          >
+            Civic Software Foundation
+          </h2>
           <p className="audience-content">OUR BOTTOM LINE IS PUBLIC INTEREST</p>
           <p>
             The CIVIC Platform is made possible by the Civic Software
