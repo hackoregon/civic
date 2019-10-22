@@ -58,6 +58,8 @@ const sectionPlatformLayout = css`
 
 const sectionCivicLayout = css`
   padding-bottom: 186px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
 
   @media (max-width: 460px) {
     padding-top: 170px;
