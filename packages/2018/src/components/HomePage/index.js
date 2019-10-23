@@ -12,6 +12,7 @@ import {
 import { Link } from "react-router";
 
 import PlatformExplorer from "./PlatformExplorer";
+import PlatformExplorerSmall from "./PlatformExplorer.small";
 import indexStyle, { defaultFontSize } from "./index.styles";
 // Placeholders
 import placeholderWorkImg from "../../assets/new-home-page-2.png";
@@ -241,7 +242,24 @@ const HomePage = () => {
             teams or resources. If you’ve a developer, you don’t have to join a
             team to start contributing.
           </p>
-          <PlatformExplorer />
+          <div
+            css={css`
+              @media (max-width: 693px) {
+                display: none;
+              }
+            `}
+          >
+            <PlatformExplorer />
+          </div>
+          <div
+            css={css`
+              @media (min-width: 693px) {
+                display: none;
+              }
+            `}
+          >
+            <PlatformExplorerSmall />
+          </div>
         </div>
 
         <div className="nav-div" id="civic-software-foundation" />
