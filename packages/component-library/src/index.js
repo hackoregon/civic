@@ -57,6 +57,7 @@ export { default as MapLegend } from "./MapLegend/MapLegend";
 export { default as CivicSandboxMap } from "./CivicSandboxMap/CivicSandboxMap";
 export { default as MultiLayerMap } from "./MultiLayerMap/MultiLayerMap";
 export { default as ComparisonMap } from "./ComparisonMap/ComparisonMap";
+export { default as VectorTilesMap } from "./VectorTilesMap/VectorTilesMap";
 export { default as GradientScale } from "./GradientScale/GradientScale";
 export { default as Chip } from "./Chip/Chip";
 export { default as CardList } from "./CardList/CardList";
