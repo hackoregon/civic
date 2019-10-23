@@ -46,6 +46,7 @@ import sliderStory from "./Slider.story";
 import stackedAreaChart from "./StackedAreaChart.story";
 import chipcomponentstory from "./ChipComponent.story";
 import cardListStory from "./CardList.story";
+import exploreRelatedStory from "./ExploreRelated.story";
 import vectorTilesMapStory from "./VectorTilesMap.story";
 
 import AccessibilityGuidelinesStyle from "./styleGuideStories/AccessibilityGuidelinesStyle.story";
@@ -178,6 +179,7 @@ footerNewStory();
 packageSelectorBox();
 pageLayoutStory();
 pdfStory();
+exploreRelatedStory();
 placeholderStory();
 pullQuoteStory();
 sandboxStory();

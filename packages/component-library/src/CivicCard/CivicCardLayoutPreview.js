@@ -17,7 +17,7 @@ const contentContainer = css`
   &:focus-within {
     box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.2),
       0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 4px 2px -1px rgba(0, 0, 0, 0.12);
-    outline: 1px solid transparent; /* needed for Windows high-contrast mode */  
+    outline: 1px solid transparent; /* needed for Windows high-contrast mode */
 `;
 
 /* this is an accessibility feature to make the entire card clickable without wrapping all the content in a link. */

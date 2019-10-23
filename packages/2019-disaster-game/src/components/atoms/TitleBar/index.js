@@ -1,4 +1,4 @@
-import { memo, useState, useEffect, Fragment } from "react";
+import { memo, useState, useEffect } from "react";
 import { connect } from "react-redux";
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
