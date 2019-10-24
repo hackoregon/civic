@@ -12,7 +12,8 @@ import {
 import { Link } from "react-router";
 
 import PlatformExplorer from "./PlatformExplorer";
-import indexStyle from "./index.styles";
+import PlatformExplorerSmall from "./PlatformExplorer.small";
+import indexStyle, { defaultFontSize } from "./index.styles";
 // Placeholders
 import placeholderWorkImg from "../../assets/new-home-page-2.png";
 import placeholderContributorsImg from "../../assets/new-home-page-3.png";
@@ -33,6 +34,10 @@ const sectionWorkLayout = css`
 
 const sectionContributorLayout = css`
   padding-bottom: 40px;
+
+  @media (max-width: 662px) {
+    padding-top: 135px;
+  }
 
   @media (min-width: ${condensedWidth}px) {
     padding-bottom: 95px;
@@ -58,9 +63,20 @@ const sectionPlatformLayout = css`
 
 const sectionCivicLayout = css`
   padding-bottom: 186px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+
+  @media (max-width: 787px) {
+    padding-top: 80px;
+  }
 
   @media (max-width: 460px) {
-    padding-top: 170px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }
+
+  @media (max-width: 402px) {
+    padding-top: 125px;
   }
 `;
 
@@ -174,18 +190,20 @@ const HomePage = () => {
             starts by filling out an application, and we’ll be in touch when we
             have a match for a project that fits your skills and interests.
           </p>
-          <div className="section-button-container">
+          <div
+            className="section-button-container"
+            css={css`
+              grid-template-columns: auto auto;
+              grid-column-gap: 10px;
+            `}
+          >
             <a
               css={css`
                 text-decoration: none;
               `}
               href="https://ven386248.typeform.com/to/rEhanV"
             >
-              <Button
-                display="inline"
-                margin="0 10px 0 0"
-                bkgndColor={BrandColors.subdued.rgba}
-              >
+              <Button display="inline" bkgndColor={BrandColors.subdued.rgba}>
                 APPLY NOW
               </Button>
             </a>
@@ -224,12 +242,37 @@ const HomePage = () => {
             teams or resources. If you’ve a developer, you don’t have to join a
             team to start contributing.
           </p>
-          <PlatformExplorer />
+          <div
+            css={css`
+              @media (max-width: 693px) {
+                display: none;
+              }
+            `}
+          >
+            <PlatformExplorer />
+          </div>
+          <div
+            css={css`
+              @media (min-width: 693px) {
+                display: none;
+              }
+            `}
+          >
+            <PlatformExplorerSmall />
+          </div>
         </div>
 
         <div className="nav-div" id="civic-software-foundation" />
         <div className="home-section" css={sectionCivicLayout}>
-          <h2>Civic Software Foundation</h2>
+          <h2
+            css={css`
+              @media (max-width: 787px) {
+                top: -${(60 * 2) / defaultFontSize}rem;
+              }
+            `}
+          >
+            Civic Software Foundation
+          </h2>
           <p className="audience-content">OUR BOTTOM LINE IS PUBLIC INTEREST</p>
           <p>
             The CIVIC Platform is made possible by the Civic Software
