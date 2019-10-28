@@ -182,7 +182,7 @@ const SummaryScreen = ({
   const [animationTimer] = useState(new Timer());
   const [animationPhaseIndex, setAnimationPhaseIndex] = useState(-1);
   const animationPhases = [
-    { duration: 10 },
+    { duration: 3 },
     { duration: 7 },
     { duration: 7 },
     { duration: 7 },
