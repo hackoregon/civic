@@ -86,9 +86,17 @@ const BadgesDrawer = ({
         Earned
       </p>
       <div css={badgesContainer}>
-        {/* <Badge badgeInfo={badges.teamwork} openBadgeDrawer={openBadgeDrawer}/> */}
-        <Badge badgeInfo={badges.prepared} openBadgeDrawer={openBadgeDrawer} />
-        <Badge badgeInfo={badges.hero} openBadgeDrawer={openBadgeDrawer} />
+        {/* <Badge badgeInfo={badges.teamwork} openBadgeDrawer={openBadgeDrawer} isSummary={isSummary}/> */}
+        <Badge
+          badgeInfo={badges.prepared}
+          openBadgeDrawer={openBadgeDrawer}
+          isSummary={isSummary}
+        />
+        <Badge
+          badgeInfo={badges.hero}
+          openBadgeDrawer={openBadgeDrawer}
+          isSummary={isSummary}
+        />
         {/* TODO: Add hero badge */}
         <Badge />
       </div>

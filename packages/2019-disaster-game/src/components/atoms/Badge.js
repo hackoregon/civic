@@ -42,11 +42,11 @@ const hideCircle = css`
   opacity: 0;
 `;
 
-const Badge = ({ badgeInfo, openBadgeDrawer }) => {
+const Badge = ({ badgeInfo, openBadgeDrawer, isSummary }) => {
   const prevBadgeInfo = usePrevious(badgeInfo);
 
   useEffect(() => {
-    if (badgeInfo !== prevBadgeInfo) {
+    if (!isSummary && badgeInfo !== prevBadgeInfo) {
       openBadgeDrawer();
     }
   });
@@ -84,7 +84,8 @@ Badge.propTypes = {
   badgeInfo: PropTypes.shape({
     badgeSVG: PropTypes.string
   }),
-  openBadgeDrawer: PropTypes.func
+  openBadgeDrawer: PropTypes.func,
+  isSummary: PropTypes.bool
 };
 
 export default Badge;
