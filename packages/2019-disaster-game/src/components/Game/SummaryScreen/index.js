@@ -29,6 +29,8 @@ const pageWrapper = css`
   height: 100vh;
   grid-template-rows: 300px auto;
   z-index: 10;
+  overflow: hidden;
+  position: relative;
 `;
 
 const titleBarContainer = css`

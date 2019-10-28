@@ -57,11 +57,8 @@ const HomeAppreciationMeta = (/* data */) => ({
     "Oregon",
     "Map",
     "Homeownership",
-    "race",
-    "wealth",
-    "disparities",
-    "home values",
-    "appreciation"
+    "Race",
+    "Wealth"
   ],
   selector: null,
   analysis: (

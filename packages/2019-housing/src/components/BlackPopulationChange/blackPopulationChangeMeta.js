@@ -54,10 +54,7 @@ const BlackPopulationChangeMeta = (/* data */) => ({
     "Portland",
     "Oregon",
     "Gentrification",
-    "displacement",
-    "race",
-    "Black",
-    "demographic change"
+    "Displacement"
   ],
   selector: null,
   analysis: (

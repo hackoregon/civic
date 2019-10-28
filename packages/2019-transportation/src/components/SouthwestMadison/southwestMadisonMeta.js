@@ -18,7 +18,7 @@ const SouthwestMadisonMeta = (/* data */) => ({
   visualization: SouthwestMadisonVisualization, // data, isLoading are passed to this as props
   additionalText: <ComparisonMapAdditionalText />,
   shareText: "",
-  tags: ["Transportation", "Portland", "Map", "Chart"],
+  tags: ["Transportation", "Portland", "Oregon", "Map", "Chart"],
   selector: null,
   analysis: (
     <Collapsable>

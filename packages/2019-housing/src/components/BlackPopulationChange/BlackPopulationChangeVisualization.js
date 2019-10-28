@@ -57,7 +57,7 @@ const BlackPopulationChangeVisualization = ({ isLoading, data }) => {
         onLayerClick={() => {}}
       >
         <MapTooltip
-          primaryName="Black Polulation Share"
+          primaryName="Black Population Share"
           primaryField={polygonFieldName}
           formatPrimaryField={f => civicFormat.decimalToPercent(f / 100)}
           secondaryName="Year"

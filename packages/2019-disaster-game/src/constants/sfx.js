@@ -11,19 +11,22 @@ const START_RECORD = "START_RECORD";
 const badChoiceSFX = new Howl({
   src: [badChoice],
   autoplay: false,
-  loop: false
+  loop: false,
+  volume: 0.35
 });
 
 const goodChoiceSFX = new Howl({
   src: [goodChoice],
   autoplay: false,
-  loop: false
+  loop: false,
+  volume: 0.35
 });
 
 const startRecordSFX = new Howl({
   src: [startRecord],
   autoplay: false,
-  loop: false
+  loop: false,
+  volume: 1
 });
 
 const SFX = {

@@ -72,7 +72,7 @@ ScreenGridMap.defaultProps = {
   visible: true,
   gpuAggregation: false,
   getSize: () => 1,
-  getWeight: null,
+  getWeight: () => 1,
   getCursor: () => "crosshair"
 };
 
