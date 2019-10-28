@@ -1,11 +1,12 @@
 import { createReducer, createSelector } from "redux-starter-kit";
-import teamworkBadge from "../../assets/badges/teamwork.svg";
-import superTeamBadge from "../../assets/badges/super-team.svg";
+// import teamworkBadge from "../../assets/badges/teamwork.svg";
+// import superTeamBadge from "../../assets/badges/super-team.svg";
 import preparerBadge from "../../assets/badges/preparer.svg";
-import masterPreparerBadge from "../../assets/badges/master-preparer.svg";
+// import masterPreparerBadge from "../../assets/badges/master-preparer.svg";
 import taskSurvivorBadge from "../../assets/badges/task-survivor.svg";
 import taskNeighborhoodHeroBadge from "../../assets/badges/task-neighborhood-hero.svg";
 import taskCitySuperheroBadge from "../../assets/badges/task-city-superhero.svg";
+import earthquakeHeroBadge from "../../assets/badges/earthquake-hero.svg";
 
 // INITIAL STATE
 // items will be a list of objects, where each object is an id and a quantity
@@ -13,33 +14,35 @@ import taskCitySuperheroBadge from "../../assets/badges/task-city-superhero.svg"
 const initialState = {
   points: 0,
   badges: {
-    teamwork: {
-      teamworkBadge: {
-        title: "Teamwork",
-        id: "teamworkBadge",
-        badgeSVG: teamworkBadge,
-        acquired: false
-      },
-      superTeamBadge: {
-        title: "Super Team",
-        id: "superTeamBadge",
-        badgeSVG: superTeamBadge,
-        acquired: false
-      }
-    },
+    badgesAcquired: 0,
+    // teamwork: {
+    //   teamworkBadge: {
+    //     title: "Teamwork",
+    //     id: "teamworkBadge",
+    //     badgeSVG: teamworkBadge,
+    //     acquired: false
+    //   },
+    //   superTeamBadge: {
+    //     title: "Super Team",
+    //     id: "superTeamBadge",
+    //     badgeSVG: superTeamBadge,
+    //     acquired: false
+    //   }
+    // },
     prepared: {
       preparerBadge: {
         title: "Preparer",
         id: "preparerBadge",
         badgeSVG: preparerBadge,
         acquired: false
-      },
-      masterPreparerBadge: {
-        title: "Master Preparer",
-        id: "masterPreparerBadge",
-        badgeSVG: masterPreparerBadge,
-        acquired: false
       }
+      // Maybe do if has 3 of each special item
+      // masterPreparerBadge: {
+      //   title: "Master Preparer",
+      //   id: "masterPreparerBadge",
+      //   badgeSVG: masterPreparerBadge,
+      //   acquired: false
+      // }
     },
     hero: {
       taskSurvivorBadge: {
@@ -58,6 +61,12 @@ const initialState = {
         title: "City Superhero",
         id: "taskCitySuperheroBadge",
         badgeSVG: taskCitySuperheroBadge,
+        acquired: false
+      },
+      earthquakeHeroBadge: {
+        title: "Earthquake Hero",
+        id: "earthquakeHeroBadge",
+        badgeSVG: earthquakeHeroBadge,
         acquired: false
       }
     }
@@ -101,7 +110,13 @@ export const user = createReducer(initialState, {
   },
   [actionTypes.ADD_BADGE]: (state, action) => {
     const { badgeFamily, badgeId } = action;
-    state.badges[badgeFamily][badgeId].acquired = true;
+    const notYetAcquired =
+      state.badges[badgeFamily][badgeId].acquired === false;
+
+    if (notYetAcquired) {
+      state.badges[badgeFamily][badgeId].acquired = true;
+      state.badges.badgesAcquired += 1;
+    }
   },
   [actionTypes.RESET_STATE]: () => {
     return initialState;
@@ -118,25 +133,31 @@ export const getPoints = createSelector(
   points => points
 );
 
-/* eslint-disable no-else-return */
-export const getTeamworkBadge = createSelector(
-  ["user.badges.teamwork"],
-  teamworkBadges => {
-    if (teamworkBadges.superTeamBadge.acquired) {
-      return teamworkBadges.superTeamBadge;
-    } else if (teamworkBadges.teamworkBadge.acquired) {
-      return teamworkBadges.teamworkBadge;
-    }
-    return null;
-  }
+export const getAllBadges = createSelector(
+  ["user.badges"],
+  allBadges => allBadges
 );
+
+/* eslint-disable no-else-return */
+// export const getTeamworkBadge = createSelector(
+//   ["user.badges.teamwork"],
+//   teamworkBadges => {
+//     if (teamworkBadges.superTeamBadge.acquired) {
+//       return teamworkBadges.superTeamBadge;
+//     } else if (teamworkBadges.teamworkBadge.acquired) {
+//       return teamworkBadges.teamworkBadge;
+//     }
+//     return null;
+//   }
+// );
 
 export const getPreparedBadge = createSelector(
   ["user.badges.prepared"],
   preparedBadges => {
-    if (preparedBadges.masterPreparerBadge.acquired) {
-      return preparedBadges.masterPreparerBadge;
-    } else if (preparedBadges.preparerBadge.acquired) {
+    // if (preparedBadges.masterPreparerBadge.acquired) {
+    //   return preparedBadges.masterPreparerBadge;
+    // } else
+    if (preparedBadges.preparerBadge.acquired) {
       return preparedBadges.preparerBadge;
     }
     return null;
@@ -146,7 +167,9 @@ export const getPreparedBadge = createSelector(
 export const getHeroBadge = createSelector(
   ["user.badges.hero"],
   heroBadges => {
-    if (heroBadges.taskCitySuperheroBadge.acquired) {
+    if (heroBadges.earthquakeHeroBadge.acquired) {
+      return heroBadges.earthquakeHeroBadge;
+    } else if (heroBadges.taskCitySuperheroBadge.acquired) {
       return heroBadges.taskCitySuperheroBadge;
     } else if (heroBadges.taskNeighborhoodHeroBadge.acquired) {
       return heroBadges.taskNeighborhoodHeroBadge;
