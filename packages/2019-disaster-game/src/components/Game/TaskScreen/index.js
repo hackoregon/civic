@@ -16,7 +16,7 @@ import {
   completeTask,
   getSaveYourselfCompleted
 } from "../../../state/tasks";
-import { addBadge, getAllBadges, addSaved } from "../../../state/user";
+import { addBadge, getHeroBadge, addSaved } from "../../../state/user";
 import { getPlayerKitItems } from "../../../state/kit";
 import usePrevious from "../../../state/hooks/usePrevious";
 import { SOLVING, VOTING, MOVING_MAP } from "../../../constants/actions";
@@ -47,7 +47,7 @@ const TaskScreenContainer = ({
   saveYourselfCompleted,
   endChapter,
   completeActiveTask,
-  badges,
+  latestHeroBadge,
   addNextTask,
   tasksForEnvironment,
   activeEnvironment,
@@ -72,7 +72,7 @@ const TaskScreenContainer = ({
   // Track previous values
   const prevActiveTaskIndex = usePrevious(activeTaskIndex);
   const prevTaskPhase = usePrevious(taskPhase);
-  const prevBadgesAcquired = usePrevious(badges.badgesAcquired);
+  const prevHeroBadgeAcquired = usePrevious(latestHeroBadge);
 
   const onTaskSelection = orbModel => {
     const voteCount = taskVotes[orbModel.type]
@@ -215,13 +215,13 @@ const TaskScreenContainer = ({
 
   // If the player just acquired a hero badge, delay ending the solve screen to show new badge
   useEffect(() => {
-    const earnedNewBadge =
-      badges.badgesAcquired &&
-      prevBadgesAcquired !== badges.badgesAcquired &&
+    const earnedNewHeroBadge =
+      latestHeroBadge &&
+      prevHeroBadgeAcquired !== latestHeroBadge &&
       !shouldEndChapter;
     const earnedFinalBadge = shouldEndChapter && finishedFinalSolvePhase;
 
-    if (earnedNewBadge || earnedFinalBadge) {
+    if (earnedNewHeroBadge || earnedFinalBadge) {
       setDisplayBadge(true);
     }
     if (earnedFinalBadge) {
@@ -229,14 +229,14 @@ const TaskScreenContainer = ({
       startTimer(5, false);
     }
   }, [
-    badges,
     endChapter,
     finishedFinalSolvePhase,
     phaseTimer,
-    prevBadgesAcquired,
     shouldEndChapter,
     startTimer,
-    taskPhase
+    taskPhase,
+    latestHeroBadge,
+    prevHeroBadgeAcquired
   ]);
 
   // Audio
@@ -306,10 +306,10 @@ TaskScreenContainer.propTypes = {
   completeActiveTask: PropTypes.func,
   activeEnvironment: PropTypes.string,
   tasksForEnvironment: PropTypes.shape({}),
-  badges: PropTypes.shape({}),
   saveYourselfCompleted: PropTypes.bool,
   addHeroBadge: PropTypes.func,
-  addToSaved: PropTypes.func
+  addToSaved: PropTypes.func,
+  latestHeroBadge: PropTypes.oneOf([PropTypes.shape({}), null])
 };
 
 const mapStateToProps = state => ({
@@ -320,7 +320,7 @@ const mapStateToProps = state => ({
   weightedPlayerKitItems: getPlayerKitItems(state),
   activeEnvironment: getActiveEnvironment(state),
   tasksForEnvironment: getTasksForEnvironment(state),
-  badges: getAllBadges(state),
+  latestHeroBadge: getHeroBadge(state),
   saveYourselfCompleted: getSaveYourselfCompleted(state)
 });
 
