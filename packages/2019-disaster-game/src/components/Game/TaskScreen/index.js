@@ -16,7 +16,7 @@ import {
   completeTask,
   getSaveYourselfCompleted
 } from "../../../state/tasks";
-import { addBadge, getAllBadges } from "../../../state/user";
+import { addBadge, getAllBadges, addSaved } from "../../../state/user";
 import { getPlayerKitItems } from "../../../state/kit";
 import usePrevious from "../../../state/hooks/usePrevious";
 import { SOLVING, VOTING, MOVING_MAP } from "../../../constants/actions";
@@ -51,7 +51,8 @@ const TaskScreenContainer = ({
   addNextTask,
   tasksForEnvironment,
   activeEnvironment,
-  addHeroBadge
+  addHeroBadge,
+  addToSaved
 }) => {
   const [shouldEndChapter, setShouldEndChapter] = useState(false);
   const [displayedFinalBadge, setDisplayedFinalBadge] = useState(false);
@@ -123,6 +124,9 @@ const TaskScreenContainer = ({
 
     setIsAnimatingToNextPhase(true);
     completeActiveTask(activeTask);
+    if (saveYourselfCompleted) {
+      addToSaved(activeTask, saveYourselfCompleted);
+    }
     phaseTimer.stop();
     // Allow time to complete the animation
     animationTimer.setDuration(animationDuration);
@@ -304,7 +308,8 @@ TaskScreenContainer.propTypes = {
   tasksForEnvironment: PropTypes.shape({}),
   badges: PropTypes.shape({}),
   saveYourselfCompleted: PropTypes.bool,
-  addHeroBadge: PropTypes.func
+  addHeroBadge: PropTypes.func,
+  addToSaved: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -324,7 +329,8 @@ const mapDispatchToProps = dispatch => ({
   goToNextPhase: bindActionCreators(goToNextTaskPhase, dispatch),
   addNextTask: bindActionCreators(addTask, dispatch),
   completeActiveTask: bindActionCreators(completeTask, dispatch),
-  addHeroBadge: bindActionCreators(addBadge, dispatch)
+  addHeroBadge: bindActionCreators(addBadge, dispatch),
+  addToSaved: bindActionCreators(addSaved, dispatch)
 });
 
 export default connect(

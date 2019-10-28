@@ -13,6 +13,8 @@ import earthquakeHeroBadge from "../../assets/badges/earthquake-hero.svg";
 // the id is related to the items reducer
 const initialState = {
   points: 0,
+  petsSaved: 0,
+  peopleSaved: 0,
   badges: {
     badgesAcquired: 0,
     // teamwork: {
@@ -79,7 +81,8 @@ export const actionTypes = {
   SET_POINTS: "SET_POINTS",
   ADD_POINTS: "ADD_POINTS",
   RESET_STATE: "RESET_STATE",
-  ADD_BADGE: "ADD_BADGE"
+  ADD_BADGE: "ADD_BADGE",
+  ADD_SAVED: "ADD_SAVED"
 };
 
 // ACTIONS
@@ -97,6 +100,16 @@ export const resetState = () => dispatch => {
 
 export const addBadge = (badgeFamily, badgeId) => dispatch => {
   dispatch({ type: actionTypes.ADD_BADGE, badgeId, badgeFamily });
+};
+
+export const addSaved = completedTask => dispatch => {
+  dispatch({ type: actionTypes.ADD_SAVED, completedTask });
+};
+
+const getRandomNumberFromRange = range => {
+  const min = Math.ceil(range[0]);
+  const max = Math.floor(range[1]);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
 // REDUCERS
@@ -120,6 +133,13 @@ export const user = createReducer(
         state.badges.badgesAcquired += 1;
       }
     },
+    [actionTypes.ADD_SAVED]: (state, action) => {
+      const { completedTask } = action;
+      state.petsSaved += completedTask.petsSaved;
+      state.peopleSaved += getRandomNumberFromRange(
+        completedTask.peopleSavedRange
+      );
+    },
     [actionTypes.RESET_STATE]: () => {
       return { ...initialState };
     }
@@ -139,6 +159,14 @@ export const getPoints = createSelector(
 export const getAllBadges = createSelector(
   ["user.badges"],
   allBadges => allBadges
+);
+
+export const getSavedMetrics = createSelector(
+  ["user.petsSaved", "user.peopleSaved"],
+  (pets, people) => ({
+    petsSaved: pets,
+    peopleSaved: people
+  })
 );
 
 /* eslint-disable no-else-return */
