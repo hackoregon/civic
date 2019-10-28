@@ -184,7 +184,7 @@ export const tasks = {
   // Save Yourself
   [RUBBLE]: {
     id: RUBBLE,
-    time: 15,
+    time: 20,
     audioInstruction: rubbleInstructionBoy,
     audioQuestion: sample([rubbleQuestionGirl, rubbleQuestionBoy]),
     requiredItem: protectiveGear,
@@ -201,7 +201,7 @@ export const tasks = {
   },
   [DUST]: {
     id: DUST,
-    time: 15,
+    time: 20,
     audioInstruction: sample([dustInstructionGirl, dustInstructionBoy]),
     audioQuestion: dustQuestionBoy,
     requiredItem: dustMask,
@@ -219,7 +219,7 @@ export const tasks = {
   // Save Others
   [COLD]: {
     id: COLD,
-    time: 15,
+    time: 20,
     audioInstruction: coldInstructionBoy,
     audioQuestion: sample([defaultQuestionGirl, defaultQuestionBoy]),
     requiredItem: blanket,
@@ -235,7 +235,7 @@ export const tasks = {
   },
   [FIRE]: {
     id: FIRE,
-    time: 15,
+    time: 20,
     audioInstruction: fireInstructionBoy,
     audioQuestion: sample([defaultQuestionGirl, defaultQuestionBoy]),
     requiredItem: fireExtinguisher,
@@ -251,7 +251,7 @@ export const tasks = {
   },
   [HUNGER]: {
     id: HUNGER,
-    time: 15,
+    time: 20,
     audioInstruction: sample([hungerInstructionGirl, hungerInstructionBoy]),
     audioQuestion: sample([defaultQuestionGirl, defaultQuestionBoy]),
     requiredItem: food,
@@ -267,7 +267,7 @@ export const tasks = {
   },
   [HOLE]: {
     id: HOLE,
-    time: 15,
+    time: 20,
     audioInstruction: holeInstructionBoy,
     audioQuestion: sample([defaultQuestionGirl, defaultQuestionBoy]),
     requiredItem: rope,
@@ -284,7 +284,7 @@ export const tasks = {
   },
   [INJURY]: {
     id: INJURY,
-    time: 15,
+    time: 20,
     audioInstruction: injuryInstructionBoy,
     audioQuestion: sample([defaultQuestionGirl, defaultQuestionBoy]),
     requiredItem: firstAidKit,
@@ -300,7 +300,7 @@ export const tasks = {
   },
   [WEATHER]: {
     id: WEATHER,
-    time: 15,
+    time: 20,
     audioInstruction: coldInstructionBoy,
     audioQuestion: coldQuestionBoy,
     requiredItem: tent,
@@ -316,7 +316,7 @@ export const tasks = {
   },
   [LOST_PET]: {
     id: LOST_PET,
-    time: 15,
+    time: 20,
     audioInstruction: lostPetInstructionBoy,
     audioQuestion: sample([defaultQuestionGirl, defaultQuestionBoy]),
     requiredItem: flashlight,
@@ -332,7 +332,7 @@ export const tasks = {
   },
   [THIRST]: {
     id: THIRST,
-    time: 15,
+    time: 20,
     audioInstruction: thirstInstructionGirl,
     audioQuestion: sample([defaultQuestionGirl, defaultQuestionBoy]),
     requiredItem: water,
