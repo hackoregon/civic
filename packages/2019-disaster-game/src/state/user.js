@@ -101,27 +101,30 @@ export const addBadge = (badgeFamily, badgeId) => dispatch => {
 
 // REDUCERS
 /* eslint-disable no-param-reassign */
-export const user = createReducer(initialState, {
-  [actionTypes.SET_POINTS]: (state, action) => {
-    state.points = action.points;
-  },
-  [actionTypes.ADD_POINTS]: (state, action) => {
-    state.points += action.points;
-  },
-  [actionTypes.ADD_BADGE]: (state, action) => {
-    const { badgeFamily, badgeId } = action;
-    const notYetAcquired =
-      state.badges[badgeFamily][badgeId].acquired === false;
+export const user = createReducer(
+  { ...initialState },
+  {
+    [actionTypes.SET_POINTS]: (state, action) => {
+      state.points = action.points;
+    },
+    [actionTypes.ADD_POINTS]: (state, action) => {
+      state.points += action.points;
+    },
+    [actionTypes.ADD_BADGE]: (state, action) => {
+      const { badgeFamily, badgeId } = action;
+      const notYetAcquired =
+        state.badges[badgeFamily][badgeId].acquired === false;
 
-    if (notYetAcquired) {
-      state.badges[badgeFamily][badgeId].acquired = true;
-      state.badges.badgesAcquired += 1;
+      if (notYetAcquired) {
+        state.badges[badgeFamily][badgeId].acquired = true;
+        state.badges.badgesAcquired += 1;
+      }
+    },
+    [actionTypes.RESET_STATE]: () => {
+      return { ...initialState };
     }
-  },
-  [actionTypes.RESET_STATE]: () => {
-    return initialState;
   }
-});
+);
 /* eslint-enable no-param-reassign */
 
 export default user;
