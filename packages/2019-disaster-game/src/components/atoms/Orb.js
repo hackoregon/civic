@@ -36,7 +36,7 @@ const defaultState = {
   hasAnimated: false
 };
 
-const pressSuccessDuration = 1;
+const pressSuccessDuration = 0.5;
 
 export default class Orb extends PureComponent {
   constructor(props) {
@@ -75,21 +75,16 @@ export default class Orb extends PureComponent {
   }
 
   incrementGauge = () => {
-    const timer = setTimeout(() => {
-      const { isActive } = this.state;
-      if (isActive) {
-        this.setState({ isComplete: true });
-        clearTimeout(timer);
-      } else {
-        this.setState({ isActive: false });
-        clearTimeout(timer);
-      }
-    }, pressSuccessDuration * 1000);
+    const { isActive } = this.state;
+    if (isActive) {
+      this.setState({ isComplete: true });
+    }
   };
 
-  handleOrbPress = () => {
+  handleOrbRelease = () => {
     const { isComplete } = this.state;
     const { orbId, setOrbTouched } = this.props;
+
     // if already pressed, do nothing
     if (isComplete) return;
 
@@ -97,12 +92,6 @@ export default class Orb extends PureComponent {
       this.incrementGauge();
     });
     setOrbTouched(orbId, true);
-  };
-
-  handleOrbRelease = () => {
-    this.setState({ isActive: false });
-    const { orbId, setOrbTouched } = this.props;
-    setOrbTouched(orbId, false);
   };
 
   render() {
@@ -121,8 +110,7 @@ export default class Orb extends PureComponent {
 
       &.circle-complete-item-style {
         transition: filter 0.5s ease-in-out;
-        transition: opacity 3s cubic-bezier(0.95, 0.05, 0.795, 0.035);
-        // filter: grayscale(100%);
+        transition: opacity 2s cubic-bezier(0.95, 0.05, 0.795, 0.035);
         opacity: 0;
       }
     `;
@@ -138,8 +126,7 @@ export default class Orb extends PureComponent {
 
       &.circle-complete-item-style {
         transition: filter 0.5s ease-in-out;
-        transition: opacity 3s cubic-bezier(0.95, 0.05, 0.795, 0.035);
-        // filter: grayscale(100%);
+        transition: opacity 2s cubic-bezier(0.95, 0.05, 0.795, 0.035);
         opacity: 0;
       }
     `;
@@ -149,6 +136,7 @@ export default class Orb extends PureComponent {
     if (isComplete) orbClass = "circle-complete-item-style";
 
     /* eslint-disable jsx-a11y/no-static-element-interactions */
+    /* eslint-disable jsx-a11y/click-events-have-key-events */
     return (
       <div
         ref={this.orbRef}
@@ -156,11 +144,9 @@ export default class Orb extends PureComponent {
           ${orbContainerStyle};
           ${sizeStyle};
         `}
-        onMouseDown={this.handleOrbPress}
-        onMouseUp={this.handleOrbRelease}
-        onMouseLeave={this.handleOrbRelease}
-        onTouchStart={this.handleOrbPress}
-        onTouchEnd={this.handleOrbRelease}
+        onMouseDown={this.handleOrbRelease}
+        onTouchStart={this.handleOrbRelease}
+        onClick={this.handleOrbRelease}
       >
         <div css={absoluteStyle} className={orbClass}>
           <RadialGauge
@@ -181,6 +167,7 @@ export default class Orb extends PureComponent {
       </div>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
+    /* eslint-enable jsx-a11y/click-events-have-key-events */
   }
 }
 
