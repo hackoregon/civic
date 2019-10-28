@@ -55,8 +55,11 @@ const TaskScreen = ({
           setCompletedSaveYourselfTasks(nextTotalSaveYourself);
         } else {
           const nextTotalSaveOthers = completedSaveOthersTasks + 1;
-          earnedBadge =
-            nextTotalSaveOthers === 2 && "taskNeighborhoodHeroBadge";
+          if (nextTotalSaveOthers === 4) {
+            earnedBadge = "taskCitySuperheroBadge";
+          } else if (nextTotalSaveOthers === 2) {
+            earnedBadge = "taskNeighborhoodHeroBadge";
+          }
           setCompletedSaveOthersTasks(nextTotalSaveOthers);
         }
 
