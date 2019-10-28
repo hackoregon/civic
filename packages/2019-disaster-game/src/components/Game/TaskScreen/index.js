@@ -114,7 +114,7 @@ const TaskScreenContainer = ({
   };
 
   const defaultCompleteSolvingAnimationDuration = 1;
-  const badgeEarnedAnimationDuration = 10;
+  const badgeEarnedAnimationDuration = 5;
 
   const onCompleteActiveTask = earnedBadge => {
     const animationDuration = earnedBadge
@@ -128,8 +128,7 @@ const TaskScreenContainer = ({
     animationTimer.setDuration(animationDuration);
     animationTimer.addCompleteCallback(() => {
       setIsAnimatingToNextPhase(false);
-      setCorrectItemsChosen(0);
-      setDisplayBadge(false);
+      solveCallback();
       animationTimer.reset();
       goToNextPhase(true);
     });

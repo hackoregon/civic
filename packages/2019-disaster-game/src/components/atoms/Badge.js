@@ -21,12 +21,12 @@ const circleStyle = css`
   position: absolute;
 `;
 
-const badgeStyle = isEarthquakeHeroBadge => css`
+const badgeStyle = css`
   height: 130px;
   opacity: 0;
   transition: all 2s 5s;
   position: absolute;
-  ${isEarthquakeHeroBadge ? "" : "transform: scale(3);"}
+  transform: scale(3);
   margin-left: -90px;
   margin-top: 90px;
 `;
@@ -46,6 +46,7 @@ const Badge = ({ badgeInfo, openBadgeDrawer, isSummary }) => {
   const prevBadgeInfo = usePrevious(badgeInfo);
   const badgeAcquired = badgeInfo && badgeInfo.acquired;
   const isEarthquakeHeroBadge = badgeInfo.id === "earthquakeHeroBadge";
+  const hideBadge = isEarthquakeHeroBadge && !isSummary;
 
   useEffect(() => {
     if (!isSummary && badgeInfo !== prevBadgeInfo && !isEarthquakeHeroBadge) {
@@ -57,8 +58,8 @@ const Badge = ({ badgeInfo, openBadgeDrawer, isSummary }) => {
     <div css={containerStyle}>
       <div
         css={css`
-          ${badgeStyle(isEarthquakeHeroBadge)};
-          ${badgeAcquired ? showBadge : ""};
+          ${badgeStyle};
+          ${badgeAcquired && !hideBadge ? showBadge : ""};
         `}
       >
         {badgeAcquired && (
@@ -66,8 +67,8 @@ const Badge = ({ badgeInfo, openBadgeDrawer, isSummary }) => {
             src={badgeInfo.badgeSVG}
             alt="Badge"
             css={css`
-              ${badgeStyle(isEarthquakeHeroBadge)};
-              ${badgeAcquired ? showBadge : ""};
+              ${badgeStyle};
+              ${badgeAcquired && !hideBadge ? showBadge : ""};
             `}
           />
         )}
