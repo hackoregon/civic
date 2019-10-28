@@ -11,12 +11,7 @@ import {
   getActiveTaskIndex,
   getWeightedTasks
 } from "../../../state/tasks";
-import {
-  addBadge,
-  // getTeamworkBadge,
-  getPreparedBadge,
-  getHeroBadge
-} from "../../../state/user";
+import { addBadge } from "../../../state/user";
 import { getPlayerKitItems } from "../../../state/kit";
 import { SOLVING, VOTING, MOVING_MAP } from "../../../constants/actions";
 import MatchLockInterface from "../../atoms/MatchLockInterface";
@@ -155,12 +150,7 @@ const mapStateToProps = state => ({
   activeTask: getActiveTaskData(state),
   activeTaskIndex: getActiveTaskIndex(state),
   weightedTasks: getWeightedTasks(state),
-  weightedPlayerKitItems: getPlayerKitItems(state),
-  badges: {
-    // teamwork: getTeamworkBadge(state),
-    prepared: getPreparedBadge(state),
-    hero: getHeroBadge(state)
-  }
+  weightedPlayerKitItems: getPlayerKitItems(state)
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -16,18 +16,13 @@ import {
   completeTask,
   getSaveYourselfCompleted
 } from "../../../state/tasks";
-import {
-  addBadge,
-  // getTeamworkBadge,
-  getPreparedBadge,
-  getHeroBadge
-} from "../../../state/user";
+import { addBadge, getAllBadges } from "../../../state/user";
 import { getPlayerKitItems } from "../../../state/kit";
 import usePrevious from "../../../state/hooks/usePrevious";
 import { SOLVING, VOTING, MOVING_MAP } from "../../../constants/actions";
 import NewBadge from "../../atoms/NewBadge";
 import { chooseRandomTask } from "./voteUtils";
-import TaskScreen from './TaskScreen';
+import TaskScreen from "./TaskScreen";
 // Audio
 import taskSong from "../../../../assets/audio/HappyTheme2fadeinout.mp3";
 import audioVoteInstruction from "../../../../assets/audio/task_screen/boy/who_should_we_help_next.mp3";
@@ -55,9 +50,11 @@ const TaskScreenContainer = ({
   badges,
   addNextTask,
   tasksForEnvironment,
-  activeEnvironment
+  activeEnvironment,
+  addHeroBadge
 }) => {
   const [shouldEndChapter, setShouldEndChapter] = useState(false);
+  const [displayedFinalBadge, setDisplayedFinalBadge] = useState(false);
   const [displayBadge, setDisplayBadge] = useState(false);
   const [isAnimatingToNextPhase, setIsAnimatingToNextPhase] = useState(null);
   const [taskVotes, setTaskVotes] = useState(taskVotesDefault);
@@ -67,13 +64,14 @@ const TaskScreenContainer = ({
     finishedTaskInstructionalAudio,
     setFinishedTaskInstructionalAudio
   ] = useState(false);
+  const [finishedFinalSolvePhase, setFinishedFinalSolvePhase] = useState(false);
   const [chapterTimer] = useState(new Timer());
   const [phaseTimer] = useState(new Timer());
   const [animationTimer] = useState(new Timer());
   // Track previous values
   const prevActiveTaskIndex = usePrevious(activeTaskIndex);
   const prevTaskPhase = usePrevious(taskPhase);
-  const prevHeroBadge = usePrevious(badges.hero);
+  const prevBadgesAcquired = usePrevious(badges.badgesAcquired);
 
   const onTaskSelection = orbModel => {
     const voteCount = taskVotes[orbModel.type]
@@ -106,17 +104,22 @@ const TaskScreenContainer = ({
   const solveCallback = () => {
     setCorrectItemsChosen(0);
     setDisplayBadge(false);
-  }
+    if (shouldEndChapter && taskPhase === SOLVING) {
+      setFinishedFinalSolvePhase(true);
+    }
+  };
 
   const moveMapCallback = () => {
     setTaskVotes(taskVotesDefault);
-  }
+  };
 
   const defaultCompleteSolvingAnimationDuration = 1;
   const badgeEarnedAnimationDuration = 10;
 
-  const onCompleteActiveTask = (earnedBadge) => {
-    const animationDuration = earnedBadge ? badgeEarnedAnimationDuration : defaultCompleteSolvingAnimationDuration;
+  const onCompleteActiveTask = earnedBadge => {
+    const animationDuration = earnedBadge
+      ? badgeEarnedAnimationDuration
+      : defaultCompleteSolvingAnimationDuration;
 
     setIsAnimatingToNextPhase(true);
     completeActiveTask(activeTask);
@@ -131,7 +134,7 @@ const TaskScreenContainer = ({
       goToNextPhase(true);
     });
     animationTimer.start();
-  }
+  };
 
   /* TIMERS */
   const startTimer = useCallback(
@@ -139,14 +142,27 @@ const TaskScreenContainer = ({
       phaseTimer.reset();
       phaseTimer.setDuration(duration);
       phaseTimer.addCompleteCallback(() => {
-        if (!isAnimatingToNextPhase) {
+        if (displayedFinalBadge) {
+          endChapter();
+        }
+        if (shouldEndChapter && taskPhase === SOLVING) {
+          setFinishedFinalSolvePhase(true);
+        } else if (!isAnimatingToNextPhase) {
           if (callback) callback();
           goToNextPhase(taskWasCompleted);
         }
       });
       phaseTimer.start();
     },
-    [goToNextPhase, isAnimatingToNextPhase, phaseTimer]
+    [
+      displayedFinalBadge,
+      endChapter,
+      goToNextPhase,
+      isAnimatingToNextPhase,
+      phaseTimer,
+      shouldEndChapter,
+      taskPhase
+    ]
   );
 
   // Callback must be triggered after state update
@@ -155,12 +171,15 @@ const TaskScreenContainer = ({
       votingCallback();
       setDoVoteCallback(false);
     }
-  }, [doVoteCallback, votingCallback])
+  }, [doVoteCallback, votingCallback]);
 
   // Timer: For whole task chapter
   useEffect(() => {
     chapterTimer.setDuration(chapterDuration);
-    chapterTimer.addCompleteCallback(() => { setShouldEndChapter(true) });
+    chapterTimer.addCompleteCallback(() => {
+      setShouldEndChapter(true);
+      addHeroBadge("hero", "earthquakeHeroBadge");
+    });
     chapterTimer.start();
     return () => {
       chapterTimer.stop();
@@ -172,19 +191,18 @@ const TaskScreenContainer = ({
   // Timer: on game phase change
   useEffect(() => {
     const onDifferentPhase = prevTaskPhase !== taskPhase;
-    const onNextSaveYourself = !saveYourselfCompleted && (activeTaskIndex > prevActiveTaskIndex);
-    const switchedToSolving = onDifferentPhase && (taskPhase === SOLVING);
+    const onNextSaveYourself =
+      !saveYourselfCompleted && activeTaskIndex > prevActiveTaskIndex;
+    const switchedToSolving = onDifferentPhase && taskPhase === SOLVING;
 
     // Do same thing when going to next save yourself task or a new save others task
     if (onNextSaveYourself || switchedToSolving) {
       startTimer(activeTask.time, true, solveCallback);
     } else if (onDifferentPhase) {
       if (taskPhase === VOTING) {
-        if (shouldEndChapter) {
-          endChapter();
-        } else {
-          startTimer(votingDuration, false, () => { setDoVoteCallback(true) });
-        }
+        startTimer(votingDuration, false, () => {
+          setDoVoteCallback(true);
+        });
       }
       if (taskPhase === MOVING_MAP) {
         startTimer(mapTransitionDuration, false, moveMapCallback);
@@ -194,12 +212,29 @@ const TaskScreenContainer = ({
 
   // If the player just acquired a hero badge, delay ending the solve screen to show new badge
   useEffect(() => {
-    const earnedNewHeroBadge = badges.hero && prevHeroBadge !== badges.hero;
+    const earnedNewBadge =
+      badges.badgesAcquired &&
+      prevBadgesAcquired !== badges.badgesAcquired &&
+      !shouldEndChapter;
+    const earnedFinalBadge = shouldEndChapter && finishedFinalSolvePhase;
 
-    if (earnedNewHeroBadge) {
+    if (earnedNewBadge || earnedFinalBadge) {
       setDisplayBadge(true);
     }
-  }, [badges, phaseTimer, prevHeroBadge]);
+    if (earnedFinalBadge) {
+      setDisplayedFinalBadge(true);
+      startTimer(5, false);
+    }
+  }, [
+    badges,
+    endChapter,
+    finishedFinalSolvePhase,
+    phaseTimer,
+    prevBadgesAcquired,
+    shouldEndChapter,
+    startTimer,
+    taskPhase
+  ]);
 
   // Audio
   const playHowCanIHelp = () => {
@@ -222,7 +257,7 @@ const TaskScreenContainer = ({
         onTaskSelection={onTaskSelection}
       />
       <Song songFile={taskSong} />
-      {taskPhase === VOTING && (
+      {!shouldEndChapter && taskPhase === VOTING && (
         <Song songFile={audioVoteInstruction} shouldLoop={false} volume={1.0} />
       )}
       {taskPhase === MOVING_MAP && (
@@ -246,7 +281,7 @@ const TaskScreenContainer = ({
         />
       )}
       {/* Task question plays after instructional audio */}
-      {finishedTaskInstructionalAudio && activeTask && (
+      {!shouldEndChapter && finishedTaskInstructionalAudio && activeTask && (
         <Song
           songFile={activeTask.audioQuestion}
           shouldLoop={false}
@@ -269,7 +304,8 @@ TaskScreenContainer.propTypes = {
   activeEnvironment: PropTypes.string,
   tasksForEnvironment: PropTypes.shape({}),
   badges: PropTypes.shape({}),
-  saveYourselfCompleted: PropTypes.bool
+  saveYourselfCompleted: PropTypes.bool,
+  addHeroBadge: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -280,11 +316,7 @@ const mapStateToProps = state => ({
   weightedPlayerKitItems: getPlayerKitItems(state),
   activeEnvironment: getActiveEnvironment(state),
   tasksForEnvironment: getTasksForEnvironment(state),
-  badges: {
-    // teamwork: getTeamworkBadge(state),
-    prepared: getPreparedBadge(state),
-    hero: getHeroBadge(state)
-  },
+  badges: getAllBadges(state),
   saveYourselfCompleted: getSaveYourselfCompleted(state)
 });
 
@@ -293,6 +325,7 @@ const mapDispatchToProps = dispatch => ({
   goToNextPhase: bindActionCreators(goToNextTaskPhase, dispatch),
   addNextTask: bindActionCreators(addTask, dispatch),
   completeActiveTask: bindActionCreators(completeTask, dispatch),
+  addHeroBadge: bindActionCreators(addBadge, dispatch)
 });
 
 export default connect(
