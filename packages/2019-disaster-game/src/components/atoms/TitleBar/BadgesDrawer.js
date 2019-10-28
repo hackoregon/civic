@@ -3,17 +3,13 @@ import { css, jsx } from "@emotion/core";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { palette } from "../../../constants/style";
-import {
-  // getTeamworkBadge,
-  getPreparedBadge,
-  getHeroBadge
-} from "../../../state/user";
+import { getAllBadges } from "../../../state/user";
 import Badge from "../Badge";
 
 const drawerContainer = css`
-  width: 700px;
+  width: 950px;
   background-color: ${palette.lemon};
-  grid-template-columns: auto 430px;
+  grid-template-columns: auto 700px;
   padding-left: 200px;
   margin-left: -130px;
   z-index: unset;
@@ -39,7 +35,7 @@ const summaryStyle = css`
   transform: none;
 
   display: grid;
-  grid-template-columns: auto 430px;
+  grid-template-columns: auto 630px;
   padding: 0 80px;
   border-radius: 80px;
   align-content: center;
@@ -58,7 +54,7 @@ const headerStyle = css`
 
 const badgesContainer = css`
   display: grid;
-  grid-template-columns: repeat(3, auto);
+  grid-template-columns: repeat(5, auto);
   align-content: center;
 `;
 
@@ -86,19 +82,31 @@ const BadgesDrawer = ({
         Earned
       </p>
       <div css={badgesContainer}>
-        {/* <Badge badgeInfo={badges.teamwork} openBadgeDrawer={openBadgeDrawer} isSummary={isSummary}/> */}
         <Badge
-          badgeInfo={badges.prepared}
+          badgeInfo={badges.prepared.preparerBadge}
           openBadgeDrawer={openBadgeDrawer}
           isSummary={isSummary}
         />
         <Badge
-          badgeInfo={badges.hero}
+          badgeInfo={badges.hero.taskSurvivorBadge}
           openBadgeDrawer={openBadgeDrawer}
           isSummary={isSummary}
         />
-        {/* TODO: Add hero badge */}
-        <Badge />
+        <Badge
+          badgeInfo={badges.hero.taskNeighborhoodHeroBadge}
+          openBadgeDrawer={openBadgeDrawer}
+          isSummary={isSummary}
+        />
+        <Badge
+          badgeInfo={badges.hero.taskCitySuperheroBadge}
+          openBadgeDrawer={openBadgeDrawer}
+          isSummary={isSummary}
+        />
+        <Badge
+          badgeInfo={badges.hero.earthquakeHeroBadge}
+          openBadgeDrawer={openBadgeDrawer}
+          isSummary={isSummary}
+        />
       </div>
     </div>
   );
@@ -114,11 +122,7 @@ BadgesDrawer.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  badges: {
-    // teamwork: getTeamworkBadge(state),
-    prepared: getPreparedBadge(state),
-    hero: getHeroBadge(state)
-  }
+  badges: getAllBadges(state)
 });
 
 export default connect(mapStateToProps)(BadgesDrawer);

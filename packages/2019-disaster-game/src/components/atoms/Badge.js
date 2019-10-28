@@ -44,6 +44,7 @@ const hideCircle = css`
 
 const Badge = ({ badgeInfo, openBadgeDrawer, isSummary }) => {
   const prevBadgeInfo = usePrevious(badgeInfo);
+  const badgeAcquired = badgeInfo && badgeInfo.acquired;
 
   useEffect(() => {
     if (!isSummary && badgeInfo !== prevBadgeInfo) {
@@ -56,16 +57,16 @@ const Badge = ({ badgeInfo, openBadgeDrawer, isSummary }) => {
       <div
         css={css`
           ${badgeStyle};
-          ${badgeInfo ? showBadge : ""};
+          ${badgeAcquired ? showBadge : ""};
         `}
       >
-        {badgeInfo && (
+        {badgeAcquired && (
           <img
             src={badgeInfo.badgeSVG}
             alt="Badge"
             css={css`
               ${badgeStyle};
-              ${badgeInfo ? showBadge : ""};
+              ${badgeAcquired ? showBadge : ""};
             `}
           />
         )}
@@ -73,7 +74,7 @@ const Badge = ({ badgeInfo, openBadgeDrawer, isSummary }) => {
       <div
         css={css`
           ${circleStyle};
-          ${badgeInfo ? hideCircle : ""};
+          ${badgeAcquired ? hideCircle : ""};
         `}
       />
     </div>
@@ -82,7 +83,8 @@ const Badge = ({ badgeInfo, openBadgeDrawer, isSummary }) => {
 
 Badge.propTypes = {
   badgeInfo: PropTypes.shape({
-    badgeSVG: PropTypes.string
+    badgeSVG: PropTypes.string,
+    acquired: PropTypes.bool
   }),
   openBadgeDrawer: PropTypes.func,
   isSummary: PropTypes.bool
