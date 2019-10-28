@@ -21,8 +21,8 @@ import Song from "../../atoms/Audio/Song";
 
 import { palette } from "../../../constants/style";
 import QRCode from "../../../../assets/earthquake-heroes-qr-code.svg";
-// import BadgesBar from "../../atoms/TitleBar/BadgesDrawer";
-// import SavedBar from "../../atoms/TitleBar/SavedBar";
+import BadgesBar from "../../atoms/TitleBar/BadgesDrawer";
+import SavedBar from "../../atoms/TitleBar/SavedBar";
 
 const pageWrapper = css`
   display: grid;
@@ -40,19 +40,19 @@ const titleBarContainer = css`
   padding: 0 40px;
 `;
 
-// const bigBadgesStyle = css`
-//   position: absolute;
-//   top: 43%;
-//   right: 38%;
-//   transform: scale(2);
-// `;
+const bigBadgesStyle = css`
+  position: absolute;
+  top: 43%;
+  right: 38%;
+  transform: scale(2);
+`;
 
-// const bigSavedStyle = css`
-//   position: absolute;
-//   top: 60%;
-//   right: 38%;
-//   transform: scale(2);
-// `;
+const bigSavedStyle = css`
+  position: absolute;
+  top: 60%;
+  right: 38%;
+  transform: scale(2);
+`;
 
 const QRCodeStyle = css`
   height: 160px;
@@ -257,14 +257,14 @@ const SummaryScreen = ({
           alt="QR code for civicplatform.org/EarthquakeHeroes"
           css={QRCodeStyle}
         />
-        {/* <BadgesBar
+        <BadgesBar
           isSummary
           initialSummaryStyle={animationPhaseIndex <= 0 ? bigBadgesStyle : null}
         />
         <SavedBar
           isSummary
           initialSummaryStyle={animationPhaseIndex <= 0 ? bigSavedStyle : null}
-        /> */}
+        />
       </div>
 
       <div

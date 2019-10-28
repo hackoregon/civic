@@ -1,4 +1,4 @@
-import { memo, useState, useEffect } from "react";
+import { memo, useState, useEffect, Fragment } from "react";
 import { connect } from "react-redux";
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
@@ -16,7 +16,7 @@ import {
 } from "../../../constants/tickerTape";
 import Ticker from "../Ticker";
 import JourneyBar from "./JourneyBar";
-// import SavedBar from "./SavedBar";
+import SavedBar from "./SavedBar";
 
 const ContainerStyle = css`
   position: absolute;
@@ -58,11 +58,31 @@ const TitleBar = ({ activeChapterId, activeTaskData }) => {
   const [open, setOpen] = useState(false);
   // eslint-disable-next-line no-unused-vars
   const [badgeDrawerOpen, setBadgeDrawerOpen] = useState(false);
+  const [startAnimateTimeout, setStartAnimateTimeout] = useState(null);
+  const [endAnimateTimeout, setEndAnimateTimeout] = useState(null);
   const [screenMessages, setScreenMessages] = useState([]);
+
+  const openBadgeDrawer = () => {
+    const newStartTimeout = setTimeout(() => {
+      setBadgeDrawerOpen(true);
+    }, 4000);
+    const newEndTimeout = setTimeout(() => {
+      setBadgeDrawerOpen(false);
+    }, 10000);
+    setStartAnimateTimeout(newStartTimeout);
+    setEndAnimateTimeout(newEndTimeout);
+  };
 
   useEffect(() => {
     setOpen(true);
-  }, []);
+
+    return () => {
+      setOpen(false);
+      setBadgeDrawerOpen(false);
+      if (startAnimateTimeout) clearTimeout(startAnimateTimeout);
+      if (endAnimateTimeout) clearTimeout(endAnimateTimeout);
+    };
+  }, [endAnimateTimeout, startAnimateTimeout]);
 
   useEffect(() => {
     if (activeChapterId === KIT) {
@@ -96,13 +116,16 @@ const TitleBar = ({ activeChapterId, activeTaskData }) => {
           alt="QR code for civicplatform.org/EarthquakeHeroes"
           css={QRCodeStyle}
         />
-        <JourneyBar badgeDrawerOpen={badgeDrawerOpen} />
-        {/* {activeChapterId === TASKS && (
+        <JourneyBar
+          badgeDrawerOpen={badgeDrawerOpen}
+          openBadgeDrawer={openBadgeDrawer}
+        />
+        {activeChapterId === TASKS && (
           <Fragment>
             {badgeDrawerOpen && <div />}
             <SavedBar justifyRight={badgeDrawerOpen} />
           </Fragment>
-        )} */}
+        )}
       </div>
     </div>
   );

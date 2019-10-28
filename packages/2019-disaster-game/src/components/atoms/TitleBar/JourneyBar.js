@@ -108,7 +108,8 @@ const JourneyBar = ({
   activeChapterData,
   activeTaskData,
   activeTaskIndex,
-  badgeDrawerOpen
+  badgeDrawerOpen,
+  openBadgeDrawer
 }) => {
   const [chapterTimeLeft, setChapterTimeLeft] = useState(0);
   const [savingYourself, setSavingYourself] = useState(false);
@@ -221,7 +222,8 @@ const JourneyBar = ({
       </div>
       <BadgesDrawer
         journeyBarContainerStyle={journeyBarContainerStyle}
-        open={badgeDrawerOpen}
+        isOpen={badgeDrawerOpen}
+        openBadgeDrawer={openBadgeDrawer}
       />
     </div>
   );
@@ -233,7 +235,8 @@ JourneyBar.propTypes = {
   activeChapterData: PropTypes.shape({}),
   activeTaskData: PropTypes.shape({}),
   activeTaskIndex: PropTypes.number,
-  badgeDrawerOpen: PropTypes.bool
+  badgeDrawerOpen: PropTypes.bool,
+  openBadgeDrawer: PropTypes.func
 };
 
 const mapStateToProps = state => ({

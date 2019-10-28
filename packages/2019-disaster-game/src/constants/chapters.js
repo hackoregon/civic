@@ -14,7 +14,7 @@ export const SUMMARY = "SUMMARY";
 
 const CHAPTERS = [
   { id: ATTRACTOR, title: "Attractor", tickerTape: null },
-  { id: KIT, title: "Kit", tickerTape: KitTickerTape, duration: 30 },
+  { id: KIT, title: "Kit", tickerTape: KitTickerTape, duration: 25 },
   { id: QUAKE, title: "Quake", tickerTape: GeneralTickerTape, duration: 15 },
   // { id: PLAN, title: "Plan", tickerTape: null },
   // { id: MEET, title: "Meet", tickerTape: null },
@@ -22,7 +22,7 @@ const CHAPTERS = [
     id: TASKS,
     title: "Tasks",
     tickerTape: SelectionTickerTape,
-    voteDuration: 20
+    voteDuration: 15
   },
   { id: SUMMARY, title: "Summary", tickerTape: GeneralTickerTape, duration: 0 }
 ];

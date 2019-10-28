@@ -22,7 +22,7 @@ const initialState = {
   taskOrder: shuffle(defaultSaveYourself),
   activeTaskIndex: 0,
   taskPhase: SOLVING,
-  saveYourself: true
+  isSaveYourselfPhase: true
 };
 
 // CONSTANTS
@@ -67,11 +67,11 @@ export const tasksReducer = createReducer(initialState, {
       state.activeTaskIndex += 1;
     }
     // Save others after 2 tasks
-    if (state.saveYourself && state.activeTaskIndex === 2) {
-      state.saveYourself = false;
+    if (state.isSaveYourselfPhase && state.activeTaskIndex === 2) {
+      state.isSaveYourselfPhase = false;
     }
 
-    if (state.taskPhase === SOLVING && !state.saveYourself) {
+    if (state.taskPhase === SOLVING && !state.isSaveYourselfPhase) {
       state.taskPhase = VOTING;
     } else if (state.taskPhase === VOTING) {
       state.taskPhase = MOVING_MAP;
@@ -176,4 +176,9 @@ export const getTasksForEnvironment = createSelector(
 export const getTaskLocations = createSelector(
   ["tasks.taskLocations"],
   taskLocations => taskLocations
+);
+
+export const getSaveYourselfCompleted = createSelector(
+  ["tasks.isSaveYourselfPhase"],
+  isSaveYourselfPhase => !isSaveYourselfPhase
 );
