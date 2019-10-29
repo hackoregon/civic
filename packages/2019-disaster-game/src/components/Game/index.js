@@ -4,10 +4,11 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import styled from "@emotion/styled";
 
-import { getActiveChapterId } from "../../state/chapters";
+import { getActiveChapterId, getActiveChapterData } from "../../state/chapters";
 import {
   ATTRACTOR,
   KIT,
+  KIT_OUTRO,
   TASKS,
   QUAKE,
   SUMMARY
@@ -22,14 +23,22 @@ import KitScreen from "./KitScreen/index";
 import QuakeScreen from "./QuakeScreen/index";
 import TaskScreen from "./TaskScreen/index";
 import SummaryScreen from "./SummaryScreen/index";
+import Outro from "./Outro/index";
+import KitOutro from "./Outro/kit";
 
 import "@hackoregon/component-library/assets/global.styles.css";
 
-const Game = ({ activeChapterId }) => {
+const Game = ({ activeChapterId, activeChapterData }) => {
   const renderChapter = chapterId => {
     switch (chapterId) {
       case KIT:
         return <KitScreen />;
+      case KIT_OUTRO:
+        return (
+          <Outro chapterDuration={activeChapterData.duration}>
+            <KitOutro />
+          </Outro>
+        );
       case QUAKE:
         return <QuakeScreen />;
       case TASKS:
@@ -39,18 +48,16 @@ const Game = ({ activeChapterId }) => {
     }
   };
 
-  const showTitleBar =
-    activeChapterId !== ATTRACTOR && activeChapterId !== QUAKE;
-
   return (
     <Fragment>
       {activeChapterId === ATTRACTOR && <AttractorScreen />}
       {activeChapterId !== ATTRACTOR && activeChapterId !== SUMMARY && (
         <GameContainerStyle>
-          {showTitleBar && <TitleBar />}
+          {activeChapterData.showTitleBar && <TitleBar />}
           <GameGrid>{renderChapter(activeChapterId)}</GameGrid>
         </GameContainerStyle>
       )}
+
       {activeChapterId === SUMMARY && <SummaryScreen />}
     </Fragment>
   );
@@ -113,10 +120,14 @@ Game.propTypes = {
     maxVelocityY: PropTypes.number,
     mode: PropTypes.string
   }),
-  activeChapterId: PropTypes.string
+  activeChapterId: PropTypes.string,
+  activeChapterData: PropTypes.shape({
+    showTitleBar: PropTypes.bool
+  })
 };
 
 export default connect(state => ({
   settings: state.settings,
-  activeChapterId: getActiveChapterId(state)
+  activeChapterId: getActiveChapterId(state),
+  activeChapterData: getActiveChapterData(state)
 }))(memo(Game));
