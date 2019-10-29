@@ -23,20 +23,29 @@ const orbsList = numberRequiredItems => css`
   padding: 0 0 50px 50px;
 `;
 
-// eslint-disable-next-line react/prop-types
-const ItemOrb = ({ index, correctItemsChosen, requiredItemSVG }) => {
+/* eslint-disable react/prop-types */
+const ItemOrb = ({
+  index,
+  correctItemsChosen,
+  requiredItemSVG,
+  requiredItemSVGEmpty
+}) => {
+  const unfilledOrbImage =
+    correctItemsChosen > 0 ? requiredItemSVGEmpty : questionOrb;
+
   return (
     <div
       alt="unknown kit item"
       css={css`
         ${kitItemStyle};
         background-image: url("${
-          index < correctItemsChosen ? requiredItemSVG : questionOrb
+          index < correctItemsChosen ? requiredItemSVG : unfilledOrbImage
         }");
       `}
     />
   );
 };
+/* eslint-enable react/prop-types */
 
 const RequiredItemsOrbs = ({
   numberRequiredItems,
@@ -46,6 +55,7 @@ const RequiredItemsOrbs = ({
 }) => {
   const orbs = [];
   const requiredItemSVG = possibleItems[requiredItem].fullSvg;
+  const requiredItemSVGEmpty = possibleItems[requiredItem].emptySvg;
 
   for (let i = 0; i < numberRequiredItems; i += 1) {
     orbs.push(
@@ -53,6 +63,7 @@ const RequiredItemsOrbs = ({
         index={i}
         correctItemsChosen={correctItemsChosen}
         requiredItemSVG={requiredItemSVG}
+        requiredItemSVGEmpty={requiredItemSVGEmpty}
         key={`${requiredItem}_${i}`}
       />
     );
