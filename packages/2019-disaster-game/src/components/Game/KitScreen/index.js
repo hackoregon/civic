@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { css, jsx, keyframes } from "@emotion/core";
-import { memo, Fragment, useState, useEffect } from "react";
+import { memo, Fragment, useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -20,6 +20,7 @@ import usePrevious from "../../../state/hooks/usePrevious";
 import { palette } from "../../../constants/style";
 import Timer from "../../../utils/timer";
 import NewBadge from "../../atoms/NewBadge";
+import RestartModal from "../../atoms/RestartModal";
 import MatchLockInterface from "../../atoms/MatchLockInterface";
 import Song from "../../atoms/Audio/Song";
 import { MapStyle } from "../index";
@@ -69,11 +70,15 @@ const KitScreen = ({
   addPointsToState,
   addItemToPlayerKitInState,
   endChapter,
-  chapterDuration
+  chapterDuration,
+  restartGame
 }) => {
   const [chapterTimer] = useState(new Timer());
+  const [restartTimer] = useState(new Timer());
   const [displayBadge, setDisplayBadge] = useState(false);
+  const [showRestart, setShowRestart] = useState(false);
   const prevPlayerKit = usePrevious(playerKit);
+  const prevShowRestart = usePrevious(showRestart);
 
   // start a timer for the _entire_ chapter
   useEffect(() => {
@@ -124,11 +129,44 @@ const KitScreen = ({
     instructionalAudioGirl
   ]);
 
+  const startRestartTimer = useCallback(() => {
+    restartTimer.setDuration(10);
+    restartTimer.addCompleteCallback(() => {
+      restartGame();
+    });
+    restartTimer.start();
+  }, [restartGame, restartTimer]);
+
+  useEffect(() => {
+    if (showRestart && prevShowRestart !== showRestart) {
+      startRestartTimer();
+    }
+  }, [prevShowRestart, showRestart, startRestartTimer]);
+
+  // Clean up only on dismount
+  useEffect(() => {
+    return () => {
+      restartTimer.reset();
+    };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const noInteractionCallback = () => {
+    setShowRestart(true);
+  };
+
+  const cancelRestart = () => {
+    restartTimer.reset();
+    setShowRestart(false);
+  };
+
   return (
     <Fragment>
       <Song songFile={kitSong} />
       <Song songFile={instructionalAudio} shouldLoop={false} volume={1.0} />
       {displayBadge && <NewBadge type="prepared" />}
+      {showRestart && (
+        <RestartModal cancelRestart={cancelRestart} restartGame={restartGame} />
+      )}
       <MapStyle>
         <div css={bg} />
         <div css={[bg, bg2]} />
@@ -142,6 +180,8 @@ const KitScreen = ({
         checkItemIsCorrect={checkIfItemIsGood}
         activeScreen="kit"
         interfaceMessage="What do we need?"
+        noInteractionCallback={noInteractionCallback}
+        noInteractionDuration={15}
       />
     </Fragment>
   );
@@ -161,7 +201,8 @@ KitScreen.propTypes = {
   endChapter: PropTypes.func,
   chapterDuration: PropTypes.number,
   playerKit: PropTypes.shape({}),
-  addPreparerBadge: PropTypes.func
+  addPreparerBadge: PropTypes.func,
+  restartGame: PropTypes.func
 };
 
 const mapStateToProps = state => ({
