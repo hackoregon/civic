@@ -85,6 +85,7 @@ export const getKitCreationItems = createSelector(
       const itemData = items[itemKey];
 
       const genericItem = {
+        ...itemData,
         type: itemData.id,
         imageSVG: itemData.fullSvg,
         imgAlt: itemData.imgAlt,
@@ -110,6 +111,7 @@ export const getPlayerKitItems = createSelector(
       const itemData = allItems[itemKey];
 
       const genericItem = {
+        ...itemData,
         type: itemData.id,
         imageSVG: itemData.fullSvg,
         imgAlt: itemData.imgAlt,
