@@ -45,7 +45,7 @@ export const BLANKET = {
   fullSvg: BlanketColor,
   imgAlt: "blanket kit item",
   goodKitItem: true,
-  pointsForPuttingInKit: 10
+  itemTitle: "a blanket"
 };
 export const DUST_MASK = {
   id: dustMask,
@@ -53,7 +53,7 @@ export const DUST_MASK = {
   fullSvg: DustMaskColor,
   imgAlt: "dust mask kit item",
   goodKitItem: true,
-  pointsForPuttingInKit: 10
+  itemTitle: "a dust mask"
 };
 export const FIRE_EXTINGUISHER = {
   id: fireExtinguisher,
@@ -61,7 +61,7 @@ export const FIRE_EXTINGUISHER = {
   fullSvg: FireExtinguisherColor,
   imgAlt: "fire extinguisher kit item",
   goodKitItem: true,
-  pointsForPuttingInKit: 10
+  itemTitle: "a fire extinguisher"
 };
 export const FIRST_AID_KIT = {
   id: firstAidKit,
@@ -69,7 +69,7 @@ export const FIRST_AID_KIT = {
   fullSvg: FirstAidColor,
   imgAlt: "first aid kit kit item",
   goodKitItem: true,
-  pointsForPuttingInKit: 10
+  itemTitle: "a first aid kit"
 };
 export const FLASHLIGHT = {
   id: flashlight,
@@ -77,7 +77,7 @@ export const FLASHLIGHT = {
   fullSvg: FlashlightColor,
   imgAlt: "flashlight kit item",
   goodKitItem: true,
-  pointsForPuttingInKit: 10
+  itemTitle: "a flashlight"
 };
 export const FOOD = {
   id: food,
@@ -85,7 +85,7 @@ export const FOOD = {
   fullSvg: FoodColor,
   imgAlt: "food kit item",
   goodKitItem: true,
-  pointsForPuttingInKit: 10
+  itemTitle: "some food"
 };
 export const PROTECTIVE_GEAR = {
   id: protectiveGear,
@@ -93,7 +93,7 @@ export const PROTECTIVE_GEAR = {
   fullSvg: ProtectiveGearColor,
   imgAlt: "protective gear kit item",
   goodKitItem: true,
-  pointsForPuttingInKit: 10
+  itemTitle: "protective gear"
 };
 export const ROPE = {
   id: rope,
@@ -101,7 +101,7 @@ export const ROPE = {
   fullSvg: RopeColor,
   imgAlt: "rope kit item",
   goodKitItem: true,
-  pointsForPuttingInKit: 10
+  itemTitle: "a rope"
 };
 export const TENT = {
   id: tent,
@@ -109,7 +109,7 @@ export const TENT = {
   fullSvg: TentColor,
   imgAlt: "tent kit item",
   goodKitItem: true,
-  pointsForPuttingInKit: 10
+  itemTitle: "a tent"
 };
 export const WATER = {
   id: water,
@@ -117,7 +117,7 @@ export const WATER = {
   fullSvg: WaterColor,
   imgAlt: "water kit item",
   goodKitItem: true,
-  pointsForPuttingInKit: 10
+  itemTitle: "some water"
 };
 
 // Bad kit items
@@ -126,7 +126,7 @@ export const BASKETBALL = {
   fullSvg: BasketballColor,
   imgAlt: "basketball kit item",
   goodKitItem: false,
-  pointsForPuttingInKit: 0
+  itemTitle: "a basketball"
 };
 
 export const PHONE = {
@@ -134,7 +134,7 @@ export const PHONE = {
   fullSvg: PhoneColor,
   imgAlt: "phone kit item",
   goodKitItem: false,
-  pointsForPuttingInKit: 0
+  itemTitle: "a phone"
 };
 
 export default {

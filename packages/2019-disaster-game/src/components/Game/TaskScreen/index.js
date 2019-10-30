@@ -17,7 +17,7 @@ import {
   getSaveYourselfCompleted
 } from "../../../state/tasks";
 import { addBadge, getAllBadges, addSaved } from "../../../state/user";
-import { getPlayerKitItems } from "../../../state/kit";
+import { getPlayerKitItems, getPlayerKit } from "../../../state/kit";
 import usePrevious from "../../../state/hooks/usePrevious";
 import { SOLVING, VOTING, MOVING_MAP } from "../../../constants/actions";
 import NewBadge from "../../atoms/NewBadge";
@@ -52,7 +52,8 @@ const TaskScreenContainer = ({
   tasksForEnvironment,
   activeEnvironment,
   addHeroBadge,
-  addToSaved
+  addToSaved,
+  playerKit
 }) => {
   const [shouldEndChapter, setShouldEndChapter] = useState(false);
   const [displayedFinalBadge, setDisplayedFinalBadge] = useState(false);
@@ -117,6 +118,13 @@ const TaskScreenContainer = ({
   const defaultCompleteSolvingAnimationDuration = 1;
   const badgeEarnedAnimationDuration = 5;
 
+  const earlyFinishTask = () => {
+    setIsAnimatingToNextPhase(false);
+    solveCallback();
+    animationTimer.reset();
+    goToNextPhase(true);
+  };
+
   const onCompleteActiveTask = earnedBadge => {
     const animationDuration = earnedBadge
       ? badgeEarnedAnimationDuration
@@ -131,10 +139,7 @@ const TaskScreenContainer = ({
     // Allow time to complete the animation
     animationTimer.setDuration(animationDuration);
     animationTimer.addCompleteCallback(() => {
-      setIsAnimatingToNextPhase(false);
-      solveCallback();
-      animationTimer.reset();
-      goToNextPhase(true);
+      earlyFinishTask();
     });
     animationTimer.start();
   };
@@ -248,6 +253,10 @@ const TaskScreenContainer = ({
     setFinishedTaskInstructionalAudio(false);
   };
 
+  const correctItem = activeTask && activeTask.requiredItem;
+  const playerHasCorrectItemInKit =
+    activeTask && playerKit[correctItem] === true;
+
   return (
     <Fragment>
       {displayBadge && <NewBadge type="hero" />}
@@ -258,6 +267,8 @@ const TaskScreenContainer = ({
         setCorrectItemsChosen={setCorrectItemsChosen}
         taskVotes={taskVotes}
         onTaskSelection={onTaskSelection}
+        playerHasCorrectItemInKit={playerHasCorrectItemInKit}
+        earlyFinishTask={earlyFinishTask}
       />
       <Song songFile={taskSong} />
       {!shouldEndChapter && taskPhase === VOTING && (
@@ -309,7 +320,8 @@ TaskScreenContainer.propTypes = {
   badges: PropTypes.shape({}),
   saveYourselfCompleted: PropTypes.bool,
   addHeroBadge: PropTypes.func,
-  addToSaved: PropTypes.func
+  addToSaved: PropTypes.func,
+  playerKit: PropTypes.shape({})
 };
 
 const mapStateToProps = state => ({
@@ -318,6 +330,7 @@ const mapStateToProps = state => ({
   activeTaskIndex: getActiveTaskIndex(state),
   weightedTasks: getWeightedTasks(state),
   weightedPlayerKitItems: getPlayerKitItems(state),
+  playerKit: getPlayerKit(state),
   activeEnvironment: getActiveEnvironment(state),
   tasksForEnvironment: getTasksForEnvironment(state),
   badges: getAllBadges(state),
