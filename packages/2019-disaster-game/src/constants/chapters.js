@@ -8,8 +8,7 @@ export const ATTRACTOR = "ATTRACTOR";
 export const KIT = "KIT";
 export const KIT_OUTRO = "KIT_OUTRO";
 export const QUAKE = "QUAKE";
-// export const PLAN = "PLAN";
-// export const MEET = "MEET";
+export const TASKS_INTRO = "TASKS_INTRO";
 export const TASKS = "TASKS";
 export const SUMMARY = "SUMMARY";
 
@@ -25,12 +24,14 @@ const CHAPTERS = [
   {
     id: KIT_OUTRO,
     title: "Kit Outro",
-    tickerTape: KitTickerTape,
     duration: 1000
   },
   { id: QUAKE, title: "Quake", tickerTape: GeneralTickerTape, duration: 15 },
-  // { id: PLAN, title: "Plan", tickerTape: null },
-  // { id: MEET, title: "Meet", tickerTape: null },
+  {
+    id: TASKS_INTRO,
+    title: "Tasks Intro",
+    duration: 10
+  },
   {
     id: TASKS,
     title: "Tasks",

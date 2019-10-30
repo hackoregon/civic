@@ -17,8 +17,9 @@ import {
   ATTRACTOR,
   KIT,
   KIT_OUTRO,
-  TASKS,
   QUAKE,
+  TASKS_INTRO,
+  TASKS,
   SUMMARY
 } from "../../constants/chapters";
 import { palette } from "../../constants/style";
@@ -31,8 +32,9 @@ import KitScreen from "./KitScreen/index";
 import QuakeScreen from "./QuakeScreen/index";
 import TaskScreen from "./TaskScreen/index";
 import SummaryScreen from "./SummaryScreen/index";
-import Outro from "./Outro/index";
-import KitOutro from "./Outro/kit";
+import BetweenScreen from "./BetweenScreen/index";
+import KitOutro from "./BetweenScreen/KitOutro";
+import TaskIntro from "./BetweenScreen/TasksIntro";
 
 import "@hackoregon/component-library/assets/global.styles.css";
 
@@ -57,12 +59,18 @@ const Game = ({
         return <KitScreen restartGame={restartGame} />;
       case KIT_OUTRO:
         return (
-          <Outro chapterDuration={activeChapterData.duration}>
+          <BetweenScreen chapterDuration={activeChapterData.duration}>
             <KitOutro />
-          </Outro>
+          </BetweenScreen>
         );
       case QUAKE:
         return <QuakeScreen />;
+      case TASKS_INTRO:
+        return (
+          <BetweenScreen chapterDuration={activeChapterData.duration}>
+            <TaskIntro />
+          </BetweenScreen>
+        );
       case TASKS:
         return <TaskScreen restartGame={restartGame} />;
       default:
