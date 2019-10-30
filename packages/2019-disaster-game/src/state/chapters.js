@@ -49,7 +49,7 @@ export const chapters = createReducer(initialState, {
 
   [actionTypes.GO_TO_CHAPTER]: (state, action) => {
     const { customChapter } = action;
-    state.activeChapterIndex = customChapter;
+    state.activeChapterIndex = customChapter || 0;
   }
 });
 /* eslint-enable no-param-reassign */

@@ -159,10 +159,10 @@ const JourneyBar = ({
           css={css`
             ${sectionStyle};
             ${activeChapterId === KIT && activeSectionStyle}
-            ${activeChapterIndex > 1 && completedSectionStyle}
+            ${activeChapterIndex > 2 && completedSectionStyle}
           `}
         >
-          {activeChapterId !== KIT && activeChapterIndex <= 1 && (
+          {activeChapterId !== KIT && activeChapterIndex <= 2 && (
             <div css={circleStyle} />
           )}
           {activeChapterId === KIT && (
@@ -170,7 +170,7 @@ const JourneyBar = ({
               <p>{chapterTimeLeft}</p>
             </div>
           )}
-          {activeChapterIndex > 1 && (
+          {activeChapterIndex > 2 && (
             <img src={CheckmarkSVG} alt="checkmark" css={checkmarkStyle} />
           )}
           <p>COLLECT A KIT</p>
@@ -181,12 +181,12 @@ const JourneyBar = ({
           css={css`
             ${sectionStyle};
             ${savingYourself && activeSectionStyle};
-            ${(activeChapterIndex > 4 ||
-              (activeChapterIndex === 4 && !savingYourself)) &&
+            ${(activeChapterIndex > 6 ||
+              (activeChapterIndex === 6 && !savingYourself)) &&
               completedSectionStyle};
           `}
         >
-          {activeChapterId !== TASKS && activeChapterIndex < 5 && (
+          {activeChapterId !== TASKS && activeChapterIndex < 7 && (
             <div css={circleStyle} />
           )}
           {savingYourself && (
@@ -194,7 +194,7 @@ const JourneyBar = ({
               <p>{chapterTimeLeft}</p>
             </div>
           )}
-          {(savingOthers || activeChapterIndex > 4) && (
+          {(savingOthers || activeChapterIndex > 6) && (
             <img src={CheckmarkSVG} alt="checkmark" css={checkmarkStyle} />
           )}
           <p>HELP YOURSELF</p>
@@ -205,16 +205,16 @@ const JourneyBar = ({
           css={css`
             ${sectionStyle};
             ${savingOthers && activeSectionStyle}
-            ${activeChapterIndex > 4 && completedSectionStyle}
+            ${activeChapterIndex > 6 && completedSectionStyle}
           `}
         >
-          {!savingOthers && activeChapterIndex < 5 && <div css={circleStyle} />}
+          {!savingOthers && activeChapterIndex < 7 && <div css={circleStyle} />}
           {savingOthers && (
             <div css={coundownContainer}>
               <p>{chapterTimeLeft}</p>
             </div>
           )}
-          {activeChapterIndex > 4 && (
+          {activeChapterIndex > 6 && (
             <img src={CheckmarkSVG} alt="checkmark" css={checkmarkStyle} />
           )}
           <p>HELP NEIGHBORS</p>

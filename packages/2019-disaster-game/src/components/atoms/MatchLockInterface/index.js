@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 /** @jsx jsx */
 import PropTypes from "prop-types";
 import { css, jsx } from "@emotion/core";
 
 import { palette } from "../../../constants/style";
 import media from "../../../utils/mediaQueries";
+import usePrevious from "../../../state/hooks/usePrevious";
 import { GUIStyle } from "../../Game/index";
 import OrbManager from "../OrbManager";
 
@@ -60,13 +61,51 @@ const MatchLockInterface = ({
   onOrbSelection,
   checkItemIsCorrect,
   activeScreen,
-  interfaceMessage
+  interfaceMessage,
+  noInteractionCallback,
+  restartNoInteractionTimer,
+  noInteractionDuration
 }) => {
   const [open, setOpen] = useState(false);
+  const [interactionTimeout, setInteractionTimeout] = useState(null);
+  const prevRestartNoInteractionTimer = usePrevious(restartNoInteractionTimer);
+
+  const startInteractionTimeout = useCallback(() => {
+    if (interactionTimeout) clearInterval(interactionTimeout);
+
+    const newTimeout = setTimeout(() => {
+      noInteractionCallback();
+    }, noInteractionDuration * 1000);
+
+    setInteractionTimeout(newTimeout);
+  }, [interactionTimeout, noInteractionCallback, noInteractionDuration]);
+
+  const doOrbSelection = (...args) => {
+    onOrbSelection(...args);
+    startInteractionTimeout();
+  };
+
+  useEffect(() => {
+    if (
+      restartNoInteractionTimer &&
+      restartNoInteractionTimer !== prevRestartNoInteractionTimer
+    ) {
+      startInteractionTimeout();
+    }
+  }, [
+    prevRestartNoInteractionTimer,
+    restartNoInteractionTimer,
+    startInteractionTimeout
+  ]);
 
   useEffect(() => {
     setOpen(true);
-  }, []);
+    startInteractionTimeout();
+
+    return () => {
+      clearInterval(interactionTimeout);
+    };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div
@@ -81,7 +120,7 @@ const MatchLockInterface = ({
       <GUIStyle>
         <OrbManager
           possibleItems={possibleItems}
-          onOrbSelection={onOrbSelection}
+          onOrbSelection={doOrbSelection}
           checkItemIsCorrect={checkItemIsCorrect}
           activeScreen={activeScreen}
         />
@@ -95,7 +134,10 @@ MatchLockInterface.propTypes = {
   onOrbSelection: PropTypes.func,
   checkItemIsCorrect: PropTypes.func,
   activeScreen: PropTypes.string,
-  interfaceMessage: PropTypes.string
+  interfaceMessage: PropTypes.string,
+  noInteractionCallback: PropTypes.func,
+  restartNoInteractionTimer: PropTypes.bool,
+  noInteractionDuration: PropTypes.number
 };
 
 export default MatchLockInterface;
