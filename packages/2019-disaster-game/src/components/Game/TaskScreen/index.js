@@ -53,7 +53,8 @@ const TaskScreenContainer = ({
   activeEnvironment,
   addHeroBadge,
   addToSaved,
-  playerKit
+  playerKit,
+  restartGame
 }) => {
   const [shouldEndChapter, setShouldEndChapter] = useState(false);
   const [displayedFinalBadge, setDisplayedFinalBadge] = useState(false);
@@ -268,6 +269,8 @@ const TaskScreenContainer = ({
         onTaskSelection={onTaskSelection}
         playerHasCorrectItemInKit={playerHasCorrectItemInKit}
         earlyFinishTask={earlyFinishTask}
+        restartGame={restartGame}
+        isDisplayingBadge={displayBadge}
       />
       <Song songFile={taskSong} />
       {!shouldEndChapter && taskPhase === VOTING && (
@@ -320,7 +323,8 @@ TaskScreenContainer.propTypes = {
   addHeroBadge: PropTypes.func,
   addToSaved: PropTypes.func,
   playerKit: PropTypes.shape({}),
-  latestHeroBadge: PropTypes.oneOf([PropTypes.shape({}), null])
+  latestHeroBadge: PropTypes.oneOf([PropTypes.shape({}), null]),
+  restartGame: PropTypes.func
 };
 
 const mapStateToProps = state => ({

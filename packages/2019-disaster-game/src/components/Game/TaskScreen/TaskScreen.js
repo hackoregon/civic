@@ -15,7 +15,9 @@ import { addBadge } from "../../../state/user";
 import { getPlayerKitItems, getItems } from "../../../state/kit";
 import usePrevious from "../../../state/hooks/usePrevious";
 import { SOLVING, VOTING, MOVING_MAP } from "../../../constants/actions";
+import Timer from "../../../utils/timer";
 import MatchLockInterface from "../../atoms/MatchLockInterface";
+import RestartModal from "../../atoms/RestartModal";
 import SolveScreen from "./SolveScreen";
 import VoteMapScreen from "./VoteMapScreen";
 import { palette } from "../../../constants/style";
@@ -73,8 +75,12 @@ const TaskScreen = ({
   taskVotes,
   playerHasCorrectItemInKit,
   allKitItems,
-  earlyFinishTask
+  earlyFinishTask,
+  restartGame,
+  isDisplayingBadge
 }) => {
+  const [restartTimer] = useState(new Timer());
+  const [showRestartModal, setShowRestartModal] = useState(false);
   const [completedSaveYourselfTasks, setCompletedSaveYourselfTasks] = useState(
     0
   );
@@ -86,6 +92,7 @@ const TaskScreen = ({
   ] = useState(null);
   const [endTaskEarlyTimeout, setEndTaskEarlyTimeout] = useState(null);
   const prevActiveTaskIndex = usePrevious(activeTaskIndex);
+  const prevShowRestart = usePrevious(showRestartModal);
 
   const onItemSelection = orbModel => {
     if (orbModel.type === activeTask.requiredItem) {
@@ -124,6 +131,35 @@ const TaskScreen = ({
   const checkSolutionIsCorrect = currentOrb =>
     activeTask.requiredItem === currentOrb.type;
 
+  /* STILL PLAYING MODAL */
+  const startRestartTimer = useCallback(() => {
+    restartTimer.setDuration(10);
+    restartTimer.addCompleteCallback(() => {
+      restartGame();
+    });
+    restartTimer.start();
+  }, [restartGame, restartTimer]);
+
+  // Auto restart when showing modal after x time passed
+  useEffect(() => {
+    if (showRestartModal && prevShowRestart !== showRestartModal) {
+      startRestartTimer();
+    }
+  }, [prevShowRestart, showRestartModal, startRestartTimer]);
+
+  const cancelRestart = () => {
+    restartTimer.reset();
+    setShowRestartModal(false);
+  };
+
+  const noInteractionCallback = () => {
+    if (!isDisplayingBadge) {
+      setShowRestartModal(true);
+    }
+  };
+
+  /* NO REQUIRED ITEM MODAL */
+
   const clearTimeouts = useCallback(() => {
     setShowRequiredItemMessageTimeout(null);
     if (showRequiredItemMessageTimeout) {
@@ -139,11 +175,17 @@ const TaskScreen = ({
     earlyFinishTask();
   }, [earlyFinishTask]);
 
-  const showMessage = useCallback(() => {
-    setShowRequiredItemMessage(true);
-    const newTimeout = setTimeout(finishTaskEarly, 7000);
-    setEndTaskEarlyTimeout(newTimeout);
-  }, [finishTaskEarly]);
+  const showRequiredItemModal = useCallback(() => {
+    // If the other modal is showing, wait till after it's closed
+    if (showRestartModal) {
+      const newTimeout = setTimeout(showRequiredItemModal, 10000);
+      setShowRequiredItemMessageTimeout(newTimeout);
+    } else {
+      setShowRequiredItemMessage(true);
+      const newTimeout = setTimeout(finishTaskEarly, 7000);
+      setEndTaskEarlyTimeout(newTimeout);
+    }
+  }, [finishTaskEarly, showRestartModal]);
 
   useEffect(() => {
     if (
@@ -151,13 +193,13 @@ const TaskScreen = ({
       !playerHasCorrectItemInKit &&
       !showRequiredItemMessageTimeout
     ) {
-      const newTimeout = setTimeout(showMessage, 10000);
+      const newTimeout = setTimeout(showRequiredItemModal, 10000);
       setShowRequiredItemMessageTimeout(newTimeout);
     }
   }, [
     earlyFinishTask,
     playerHasCorrectItemInKit,
-    showMessage,
+    showRequiredItemModal,
     showRequiredItemMessageTimeout,
     taskPhase
   ]);
@@ -174,6 +216,7 @@ const TaskScreen = ({
   useEffect(() => {
     return () => {
       clearTimeouts();
+      restartTimer.reset();
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -226,6 +269,9 @@ const TaskScreen = ({
           </div>
         </div>
       )}
+      {showRestartModal && (
+        <RestartModal cancelRestart={cancelRestart} restartGame={restartGame} />
+      )}
       <div css={screenLayout}>
         <SolveScreen
           open={taskPhase === SOLVING}
@@ -247,6 +293,9 @@ const TaskScreen = ({
         checkItemIsCorrect={checkItemIsCorrect}
         activeScreen={activeScreen}
         interfaceMessage={interfaceMessage}
+        noInteractionCallback={noInteractionCallback}
+        restartNoInteractionTimer={!showRestartModal}
+        noInteractionDuration={30}
       />
     </Fragment>
   );
@@ -268,7 +317,9 @@ TaskScreen.propTypes = {
   taskVotes: PropTypes.shape({}),
   playerHasCorrectItemInKit: PropTypes.bool,
   allKitItems: PropTypes.shape({}),
-  earlyFinishTask: PropTypes.func
+  earlyFinishTask: PropTypes.func,
+  restartGame: PropTypes.func,
+  isDisplayingBadge: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
