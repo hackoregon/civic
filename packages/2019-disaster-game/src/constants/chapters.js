@@ -5,6 +5,7 @@ import {
 } from "./tickerTape";
 
 export const ATTRACTOR = "ATTRACTOR";
+export const KIT_INTRO = "KIT_INTRO";
 export const KIT = "KIT";
 export const KIT_OUTRO = "KIT_OUTRO";
 export const QUAKE = "QUAKE";
@@ -14,6 +15,11 @@ export const SUMMARY = "SUMMARY";
 
 const CHAPTERS = [
   { id: ATTRACTOR, title: "Attractor", tickerTape: null },
+  {
+    id: KIT_INTRO,
+    title: "Kit Intro",
+    duration: 5
+  },
   {
     id: KIT,
     title: "Kit",

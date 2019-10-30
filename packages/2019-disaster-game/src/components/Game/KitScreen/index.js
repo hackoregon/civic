@@ -4,7 +4,6 @@ import { memo, Fragment, useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { sample } from "lodash";
 
 import {
   goToNextChapter,
@@ -27,8 +26,6 @@ import { MapStyle } from "../index";
 import Kit from "./Kit";
 
 import kitSong from "../../../../assets/audio/HappyTheme1fadeinout.mp3";
-import instructionalAudioBoy from "../../../../assets/audio/kit_screen/boy_lets_prepare_for_an_earthquake.mp3";
-import instructionalAudioGirl from "../../../../assets/audio/kit_screen/girl_lets_prepare_for_an_earthquake.mp3";
 
 const slide = keyframes`
   0% {
@@ -124,10 +121,6 @@ const KitScreen = ({
   };
 
   const checkIfItemIsGood = kitItem => kitItem.good;
-  const instructionalAudio = sample([
-    instructionalAudioBoy,
-    instructionalAudioGirl
-  ]);
 
   const startRestartTimer = useCallback(() => {
     restartTimer.setDuration(10);
@@ -162,7 +155,6 @@ const KitScreen = ({
   return (
     <Fragment>
       <Song songFile={kitSong} />
-      <Song songFile={instructionalAudio} shouldLoop={false} volume={1.0} />
       {displayBadge && <NewBadge type="prepared" />}
       {showRestart && (
         <RestartModal cancelRestart={cancelRestart} restartGame={restartGame} />

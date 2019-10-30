@@ -15,6 +15,7 @@ import {
 } from "../../state/chapters";
 import {
   ATTRACTOR,
+  KIT_INTRO,
   KIT,
   KIT_OUTRO,
   QUAKE,
@@ -33,6 +34,7 @@ import QuakeScreen from "./QuakeScreen/index";
 import TaskScreen from "./TaskScreen/index";
 import SummaryScreen from "./SummaryScreen/index";
 import BetweenScreen from "./BetweenScreen/index";
+import KitIntro from "./BetweenScreen/KitIntro";
 import KitOutro from "./BetweenScreen/KitOutro";
 import TaskIntro from "./BetweenScreen/TasksIntro";
 
@@ -55,6 +57,12 @@ const Game = ({
 
   const renderChapter = chapterId => {
     switch (chapterId) {
+      case KIT_INTRO:
+        return (
+          <BetweenScreen chapterDuration={activeChapterData.duration}>
+            <KitIntro />
+          </BetweenScreen>
+        );
       case KIT:
         return <KitScreen restartGame={restartGame} />;
       case KIT_OUTRO:
