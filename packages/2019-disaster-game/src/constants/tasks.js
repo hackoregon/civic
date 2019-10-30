@@ -184,7 +184,7 @@ export const tasks = {
   // Save Yourself
   [RUBBLE]: {
     id: RUBBLE,
-    time: 20,
+    time: 30,
     audioInstruction: rubbleInstructionBoy,
     audioQuestion: sample([rubbleQuestionGirl, rubbleQuestionBoy]),
     requiredItem: protectiveGear,
@@ -196,12 +196,13 @@ export const tasks = {
     sceneSVG: sceneRubble,
     sceneAlt: "rubble in your way",
     clue: "There’s a lot of rubble and broken glass around here.",
+    saveYourselfClue: "How can my friends and I get over this rubble safely?",
     tickerTape:
       "Gloves, boots, and goggles can help prevent injury when there’s lots of debris."
   },
   [DUST]: {
     id: DUST,
-    time: 20,
+    time: 30,
     audioInstruction: sample([dustInstructionGirl, dustInstructionBoy]),
     audioQuestion: dustQuestionBoy,
     requiredItem: dustMask,
@@ -213,6 +214,8 @@ export const tasks = {
     sceneSVG: sceneDust,
     sceneAlt: "a person coughing in the dust",
     clue: "It's getting hard to breathe here.",
+    saveYourselfClue:
+      "There's lots of dust! What will help my friends and I breathe cleaner air?",
     tickerTape:
       "Lots of debris will cause poor air quality after an earthquake."
   },

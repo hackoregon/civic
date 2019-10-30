@@ -88,12 +88,18 @@ const TaskScreen = ({
     ? checkSolutionIsCorrect
     : checkVoteIsCorrect;
   const activeScreen = taskPhase;
-  // Save yourself message
-  let interfaceMessage = "Help yourself first!";
+
+  let interfaceMessage = "";
   let possibleItems = weightedPlayerKitItems;
-  if (isSolving && activeTaskIndex > 1) {
-    // Save others message
-    interfaceMessage = "How can I help?";
+
+  if (isSolving) {
+    if (activeTaskIndex > 1) {
+      // Save others message
+      interfaceMessage = activeTask.clue;
+    } else {
+      // Save yourself message
+      interfaceMessage = activeTask.saveYourselfClue;
+    }
   } else if (isVoting) {
     // Choose next task message
     interfaceMessage = "Who should we help next?";
