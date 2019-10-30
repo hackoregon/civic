@@ -3,8 +3,16 @@ import React, { Fragment, memo } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import styled from "@emotion/styled";
+import { bindActionCreators } from "redux";
 
-import { getActiveChapterId, getActiveChapterData } from "../../state/chapters";
+import { resetState as resetStateTasks } from "../../state/tasks";
+import { resetState as resetStateKit } from "../../state/kit";
+import { resetState as resetStateUser } from "../../state/user";
+import {
+  goToChapter,
+  getActiveChapterId,
+  getActiveChapterData
+} from "../../state/chapters";
 import {
   ATTRACTOR,
   KIT,
@@ -28,11 +36,25 @@ import KitOutro from "./Outro/kit";
 
 import "@hackoregon/component-library/assets/global.styles.css";
 
-const Game = ({ activeChapterId, activeChapterData }) => {
+const Game = ({
+  activeChapterId,
+  activeChapterData,
+  resetKitState,
+  resetTasksState,
+  resetUserState,
+  endChapter
+}) => {
+  const restartGame = () => {
+    resetKitState();
+    resetTasksState();
+    resetUserState();
+    endChapter();
+  };
+
   const renderChapter = chapterId => {
     switch (chapterId) {
       case KIT:
-        return <KitScreen />;
+        return <KitScreen restartGame={restartGame} />;
       case KIT_OUTRO:
         return (
           <Outro chapterDuration={activeChapterData.duration}>
@@ -42,7 +64,7 @@ const Game = ({ activeChapterId, activeChapterData }) => {
       case QUAKE:
         return <QuakeScreen />;
       case TASKS:
-        return <TaskScreen />;
+        return <TaskScreen restartGame={restartGame} />;
       default:
         return <DefaultScreen />;
     }
@@ -123,11 +145,27 @@ Game.propTypes = {
   activeChapterId: PropTypes.string,
   activeChapterData: PropTypes.shape({
     showTitleBar: PropTypes.bool
-  })
+  }),
+  endChapter: PropTypes.func,
+  resetKitState: PropTypes.func,
+  resetTasksState: PropTypes.func,
+  resetUserState: PropTypes.func
 };
 
-export default connect(state => ({
+const mapStateToProps = state => ({
   settings: state.settings,
   activeChapterId: getActiveChapterId(state),
   activeChapterData: getActiveChapterData(state)
-}))(memo(Game));
+});
+
+const mapDispatchToProps = dispatch => ({
+  endChapter: bindActionCreators(goToChapter, dispatch),
+  resetKitState: bindActionCreators(resetStateKit, dispatch),
+  resetTasksState: bindActionCreators(resetStateTasks, dispatch),
+  resetUserState: bindActionCreators(resetStateUser, dispatch)
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(memo(Game));
