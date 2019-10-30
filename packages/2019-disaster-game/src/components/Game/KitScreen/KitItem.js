@@ -82,7 +82,7 @@ const KitItem = ({ emptySvg, fullSvg, playerKit, itemType }) => {
   /* eslint-disable jsx-a11y/click-events-have-key-events */
   /* eslint-disable jsx-a11y/no-static-element-interactions */
   return (
-    <div css={ImagesContainer}>
+    <div css={ImagesContainer} className="kit-item">
       <div
         css={css`
           ${absoluteStyle}

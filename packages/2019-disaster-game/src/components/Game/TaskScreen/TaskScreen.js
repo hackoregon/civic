@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
-import { useState, memo, Fragment } from "react";
+import { useState, useCallback, useEffect, memo, Fragment } from "react";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -12,15 +12,50 @@ import {
   getWeightedTasks
 } from "../../../state/tasks";
 import { addBadge } from "../../../state/user";
-import { getPlayerKitItems } from "../../../state/kit";
+import { getPlayerKitItems, getItems } from "../../../state/kit";
+import usePrevious from "../../../state/hooks/usePrevious";
 import { SOLVING, VOTING, MOVING_MAP } from "../../../constants/actions";
 import MatchLockInterface from "../../atoms/MatchLockInterface";
 import SolveScreen from "./SolveScreen";
 import VoteMapScreen from "./VoteMapScreen";
+import { palette } from "../../../constants/style";
 
 const screenLayout = css`
   position: relative;
   height: 100%;
+`;
+
+const requiredMessageContainer = css`
+  postion: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: ${palette.blueRGBA};
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 900;
+  opacity: 1;
+  transition: all 1s;
+`;
+
+const messageStyle = css`
+  background-color: ${palette.lightLime};
+  padding: 100px;
+  border-radius: 50px;
+`;
+
+const titleText = css`
+  font-family: "Boogaloo", sans-serif;
+  font-size: 12rem;
+  margin: 0;
+  color: ${palette.red};
+`;
+
+const requiredItemStyle = css`
+  height: 500px;
+  justify-self: center;
+  margin-top: 100px;
 `;
 
 const TaskScreen = ({
@@ -35,12 +70,22 @@ const TaskScreen = ({
   correctItemsChosen,
   setCorrectItemsChosen,
   onTaskSelection,
-  taskVotes
+  taskVotes,
+  playerHasCorrectItemInKit,
+  allKitItems,
+  earlyFinishTask
 }) => {
   const [completedSaveYourselfTasks, setCompletedSaveYourselfTasks] = useState(
     0
   );
   const [completedSaveOthersTasks, setCompletedSaveOthersTasks] = useState(0);
+  const [showRequiredItemMessage, setShowRequiredItemMessage] = useState(false);
+  const [
+    showRequiredItemMessageTimeout,
+    setShowRequiredItemMessageTimeout
+  ] = useState(null);
+  const [endTaskEarlyTimeout, setEndTaskEarlyTimeout] = useState(null);
+  const prevActiveTaskIndex = usePrevious(activeTaskIndex);
 
   const onItemSelection = orbModel => {
     if (orbModel.type === activeTask.requiredItem) {
@@ -79,6 +124,59 @@ const TaskScreen = ({
   const checkSolutionIsCorrect = currentOrb =>
     activeTask.requiredItem === currentOrb.type;
 
+  const clearTimeouts = useCallback(() => {
+    setShowRequiredItemMessageTimeout(null);
+    if (showRequiredItemMessageTimeout) {
+      clearTimeout(showRequiredItemMessageTimeout);
+    }
+    if (endTaskEarlyTimeout) {
+      clearTimeout(endTaskEarlyTimeout);
+    }
+  }, [endTaskEarlyTimeout, showRequiredItemMessageTimeout]);
+
+  const finishTaskEarly = useCallback(() => {
+    setShowRequiredItemMessage(false);
+    earlyFinishTask();
+  }, [earlyFinishTask]);
+
+  const showMessage = useCallback(() => {
+    setShowRequiredItemMessage(true);
+    const newTimeout = setTimeout(finishTaskEarly, 7000);
+    setEndTaskEarlyTimeout(newTimeout);
+  }, [finishTaskEarly]);
+
+  useEffect(() => {
+    if (
+      taskPhase === SOLVING &&
+      !playerHasCorrectItemInKit &&
+      !showRequiredItemMessageTimeout
+    ) {
+      const newTimeout = setTimeout(showMessage, 10000);
+      setShowRequiredItemMessageTimeout(newTimeout);
+    }
+  }, [
+    earlyFinishTask,
+    playerHasCorrectItemInKit,
+    showMessage,
+    showRequiredItemMessageTimeout,
+    taskPhase
+  ]);
+
+  useEffect(() => {
+    const movedOnFromTask = activeTaskIndex !== prevActiveTaskIndex;
+    if (movedOnFromTask) {
+      setShowRequiredItemMessage(false);
+      clearTimeouts();
+    }
+  }, [activeTaskIndex, clearTimeouts, prevActiveTaskIndex, taskPhase]);
+
+  // End of entire task chapter clean up
+  useEffect(() => {
+    return () => {
+      clearTimeouts();
+    };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   /* RENDER CONDITIONS */
   const isSolving = taskPhase === SOLVING;
   const isVoting = taskPhase === VOTING;
@@ -110,8 +208,24 @@ const TaskScreen = ({
     possibleItems = [];
   }
 
+  const requiredItemData = isSolving && allKitItems[activeTask.requiredItem];
+
   return (
     <Fragment>
+      {isSolving && showRequiredItemMessage && (
+        <div css={requiredMessageContainer}>
+          <div css={messageStyle}>
+            <p css={titleText}>
+              Next time we should bring {requiredItemData.itemTitle}.
+            </p>
+            <img
+              src={requiredItemData.fullSvg}
+              alt="required item"
+              css={requiredItemStyle}
+            />
+          </div>
+        </div>
+      )}
       <div css={screenLayout}>
         <SolveScreen
           open={taskPhase === SOLVING}
@@ -151,7 +265,10 @@ TaskScreen.propTypes = {
   correctItemsChosen: PropTypes.number,
   setCorrectItemsChosen: PropTypes.func,
   onTaskSelection: PropTypes.func,
-  taskVotes: PropTypes.shape({})
+  taskVotes: PropTypes.shape({}),
+  playerHasCorrectItemInKit: PropTypes.bool,
+  allKitItems: PropTypes.shape({}),
+  earlyFinishTask: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -159,7 +276,8 @@ const mapStateToProps = state => ({
   activeTask: getActiveTaskData(state),
   activeTaskIndex: getActiveTaskIndex(state),
   weightedTasks: getWeightedTasks(state),
-  weightedPlayerKitItems: getPlayerKitItems(state)
+  weightedPlayerKitItems: getPlayerKitItems(state),
+  allKitItems: getItems(state)
 });
 
 const mapDispatchToProps = dispatch => ({
