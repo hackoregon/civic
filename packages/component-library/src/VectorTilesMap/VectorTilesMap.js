@@ -24,6 +24,14 @@ const VectorTilesMap = props => {
   });
 
   React.useEffect(() => {
+    if (mapboxMap.getLayer(layerID)) {
+      mapboxMap.removeLayer(layerID);
+    }
+
+    if (mapboxMap.getSource(vectorTilesID)) {
+      mapboxMap.removeSource(vectorTilesID);
+    }
+
     if (!mapboxMap.getSource(vectorTilesID)) {
       mapboxMap.addSource(vectorTilesID, {
         type: "vector",
@@ -43,15 +51,6 @@ const VectorTilesMap = props => {
         layerPosition
       );
     }
-
-    return () => {
-      if (mapboxMap.getLayer(layerID)) {
-        mapboxMap.removeLayer(layerID);
-      }
-      if (mapboxMap.getSource(vectorTilesID)) {
-        mapboxMap.removeSource(vectorTilesID);
-      }
-    };
   }, [
     layerID,
     layerType,
