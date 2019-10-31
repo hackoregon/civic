@@ -30,8 +30,7 @@ const VectorTilesMap = props => {
         url: vectorTilesURL
       });
     }
-    console.log("GET LAYER:");
-    console.log(mapboxMap.getLayer(layerID));
+
     if (!mapboxMap.getLayer(layerID)) {
       mapboxMap.addLayer(
         {
@@ -43,7 +42,6 @@ const VectorTilesMap = props => {
         },
         layerPosition
       );
-      console.log(mapboxMap.getLayer(layerID));
     }
 
     return () => {
