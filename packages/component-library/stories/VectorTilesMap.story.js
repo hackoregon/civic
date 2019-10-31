@@ -1,6 +1,5 @@
-// import React from "react";
 import { storiesOf } from "@storybook/react";
-import { withKnobs, text, object } from "@storybook/addon-knobs";
+import { withKnobs, text, object, select } from "@storybook/addon-knobs";
 import { checkA11y } from "@storybook/addon-a11y";
 import { jsx, css } from "@emotion/core";
 import { BaseMap, VectorTilesMap } from "../src";
@@ -16,6 +15,12 @@ const containerWrapper = css`
   min-height: 500px;
 `;
 
+const MAP_STYLE_OPTIONS = {
+  "CIVIC Light": "light",
+  "Sandbox Dark": "sandbox-dark",
+  "CIVIC Dark": "dark"
+};
+
 export default () =>
   storiesOf("Component Lib|Maps/Vector Tiles Map", module)
     .addDecorator(withKnobs)
@@ -23,13 +28,20 @@ export default () =>
     .add(
       "Standard",
       () => {
+        const civicMapStyle = select(
+          "CIVIC Map Styles:",
+          MAP_STYLE_OPTIONS,
+          MAP_STYLE_OPTIONS["CIVIC Dark"],
+          GROUP_IDS.DESIGN
+        );
+
         const vectorTilesURL = text(
           "Mapbox Tileset URL:",
           "mapbox://themendozaline.dgpl66sy",
           GROUP_IDS.DESIGN
         );
 
-        const type = text("Type:", "fill", GROUP_IDS.DESIGN);
+        const layerType = text("Layer Type:", "fill", GROUP_IDS.DESIGN);
 
         const sourceLayer = text(
           "Source Layer:",
@@ -44,8 +56,8 @@ export default () =>
               "match",
               ["get", "STATEFP"],
               "41",
-              "#DC4556",
-              "#201024"
+              "#FFB226",
+              "#19B7AA"
             ],
             "fill-opacity": 0.75
           },
@@ -58,27 +70,23 @@ export default () =>
           GROUP_IDS.DESIGN
         );
 
-        const LebanonKS = {
-          latitude: 39.810492,
-          longitude: -98.556061
-        };
-
         return (
           <div css={containerWrapper}>
             <BaseMap
-              initialLatitude={LebanonKS.latitude}
-              initialLongitude={LebanonKS.longitude}
+              initialLatitude={39.810492}
+              initialLongitude={-98.556061}
               initialZoom={4}
               minZoom={1}
               useScrollZoom
               useContainerHeight
               updateViewport={false}
+              civicMapStyle={civicMapStyle}
             >
               <VectorTilesMap
                 vectorTilesID="source-id-01"
                 vectorTilesURL={vectorTilesURL}
                 layerID="layer-id-01"
-                layerType={type}
+                layerType={layerType}
                 sourceLayer={sourceLayer}
                 paint={paint}
                 layerPosition={layerPosition}
