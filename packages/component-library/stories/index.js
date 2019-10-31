@@ -47,6 +47,7 @@ import stackedAreaChart from "./StackedAreaChart.story";
 import chipcomponentstory from "./ChipComponent.story";
 import cardListStory from "./CardList.story";
 import exploreRelatedStory from "./ExploreRelated.story";
+import vectorTilesMapStory from "./VectorTilesMap.story";
 
 import AccessibilityGuidelinesStyle from "./styleGuideStories/AccessibilityGuidelinesStyle.story";
 import CardsStyle from "./styleGuideStories/CardsStyle.story";
@@ -154,6 +155,7 @@ scatterPlotMapStory();
 screenGridMapStory();
 multiLayerMapStory();
 comparisonMapStory();
+vectorTilesMapStory();
 
 // Civic story cards
 storiesOf("Component Lib|Story Cards", module)
