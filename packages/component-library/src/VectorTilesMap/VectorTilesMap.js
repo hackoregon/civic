@@ -13,42 +13,25 @@ const VectorTilesMap = props => {
     layerPosition
   } = props;
 
-  React.useEffect(() => {
-    if (mapboxMap.getSource(vectorTilesID)) {
-      mapboxMap.removeLayer(layerID);
+  const [mapStyle, setMapStyle] = React.useState(mapboxMap.getStyle().name);
 
-      mapboxMap.removeSource(vectorTilesID);
-
-      mapboxMap.addSource(vectorTilesID, {
-        type: "vector",
-        url: vectorTilesURL
-      });
+  mapboxMap.on("styledata", () => {
+    const nextStyle = mapboxMap.getStyle().name;
+    const currentStyle = mapStyle;
+    if (nextStyle !== currentStyle) {
+      setMapStyle(mapboxMap.getStyle().name);
     }
+  });
 
+  React.useEffect(() => {
     if (!mapboxMap.getSource(vectorTilesID)) {
       mapboxMap.addSource(vectorTilesID, {
         type: "vector",
         url: vectorTilesURL
       });
     }
-  }, [layerID, mapboxMap, vectorTilesID, vectorTilesURL]);
-
-  React.useEffect(() => {
-    if (mapboxMap.getLayer(layerID)) {
-      mapboxMap.removeLayer(layerID);
-
-      mapboxMap.addLayer(
-        {
-          id: layerID,
-          type: layerType,
-          source: vectorTilesID,
-          "source-layer": sourceLayer,
-          paint
-        },
-        layerPosition
-      );
-    }
-
+    console.log("GET LAYER:");
+    console.log(mapboxMap.getLayer(layerID));
     if (!mapboxMap.getLayer(layerID)) {
       mapboxMap.addLayer(
         {
@@ -60,15 +43,27 @@ const VectorTilesMap = props => {
         },
         layerPosition
       );
+      console.log(mapboxMap.getLayer(layerID));
     }
+
+    return () => {
+      if (mapboxMap.getLayer(layerID)) {
+        mapboxMap.removeLayer(layerID);
+      }
+      if (mapboxMap.getSource(vectorTilesID)) {
+        mapboxMap.removeSource(vectorTilesID);
+      }
+    };
   }, [
     layerID,
     layerType,
     vectorTilesID,
+    vectorTilesURL,
     sourceLayer,
     paint,
     layerPosition,
-    mapboxMap
+    mapboxMap,
+    mapStyle
   ]);
 
   return null;
