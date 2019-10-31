@@ -7,7 +7,9 @@ import { BaseMap, VectorTilesMap } from "../src";
 import notes from "./vectorTilesMap.notes.md";
 
 const GROUP_IDS = {
-  DESIGN: "Design"
+  DESIGN: "Design",
+  "VECTOR TILES MAP 1": "Vector Tiles Map 1",
+  "VECTOR TILES MAP 2": "Vector Tiles Map 2"
 };
 
 const containerWrapper = css`
@@ -90,6 +92,115 @@ export default () =>
                 sourceLayer={sourceLayer}
                 paint={paint}
                 layerPosition={layerPosition}
+              />
+            </BaseMap>
+          </div>
+        );
+      },
+      { notes }
+    )
+    .add(
+      "Example: Two Sources",
+      () => {
+        const vectorTilesURL01 = text(
+          "Mapbox Tileset URL - 01:",
+          "mapbox://mapbox.mapbox-terrain-v2",
+          GROUP_IDS["VECTOR TILES MAP 01"]
+        );
+
+        const layerType01 = text(
+          "Type - 01:",
+          "line",
+          GROUP_IDS["VECTOR TILES MAP 01"]
+        );
+
+        const sourceLayer01 = text(
+          "Source Layer - 01:",
+          "contour",
+          GROUP_IDS["VECTOR TILES MAP 01"]
+        );
+
+        const paint01 = object(
+          "Paint - 01:",
+          {
+            "line-color": "fuchsia",
+            "line-width": 1
+          },
+          GROUP_IDS["VECTOR TILES MAP 01"]
+        );
+
+        const layerPosition01 = text(
+          "Layer Position - 01:",
+          "waterway-label",
+          GROUP_IDS["VECTOR TILES MAP 01"]
+        );
+
+        const vectorTilesURL02 = text(
+          "Mapbox Tileset URL - 02:",
+          "mapbox://mapbox.mapbox-streets-v8",
+          GROUP_IDS["VECTOR TILES MAP 02"]
+        );
+
+        const layerType02 = text(
+          "Type - 02:",
+          "fill",
+          GROUP_IDS["VECTOR TILES MAP 02"]
+        );
+
+        const sourceLayer02 = text(
+          "Source Layer - 02:",
+          "water",
+          GROUP_IDS["VECTOR TILES MAP 02"]
+        );
+
+        const paint02 = object(
+          "Paint - 02:",
+          {
+            "fill-color": "yellow",
+            "fill-opacity": 0.75
+          },
+          GROUP_IDS["VECTOR TILES MAP 02"]
+        );
+
+        const layerPosition02 = text(
+          "Layer Position - 02:",
+          "bridge-path",
+          GROUP_IDS["VECTOR TILES MAP 02"]
+        );
+
+        const civicMapStyle = select(
+          "CIVIC Map Styles - 01:",
+          MAP_STYLE_OPTIONS,
+          MAP_STYLE_OPTIONS["CIVIC Dark"],
+          GROUP_IDS.DESIGN
+        );
+
+        return (
+          <div css={containerWrapper}>
+            <BaseMap
+              initialZoom={14}
+              useScrollZoom
+              useContainerHeight
+              updateViewport={false}
+              civicMapStyle={civicMapStyle}
+            >
+              <VectorTilesMap
+                vectorTilesID="source-01"
+                vectorTilesURL={vectorTilesURL01}
+                layerID="layer-01"
+                layerType={layerType01}
+                sourceLayer={sourceLayer01}
+                paint={paint01}
+                layerPosition={layerPosition01}
+              />
+              <VectorTilesMap
+                vectorTilesID="source-02"
+                vectorTilesURL={vectorTilesURL02}
+                layerID="layer-02"
+                layerType={layerType02}
+                sourceLayer={sourceLayer02}
+                paint={paint02}
+                layerPosition={layerPosition02}
               />
             </BaseMap>
           </div>
