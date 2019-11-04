@@ -58,7 +58,15 @@ class Summary extends Component {
 
         <div style={summaryFormat}>
           For more information about disaster preparedness and building
-          neighborhood resilence see our resource page.
+          neighborhood resilence check out the{" "}
+          <a href="https://www.redcross.org/get-help/how-to-prepare-for-emergencies.html">
+            Red Cross guide to preparedness steps
+          </a>{" "}
+          and{" "}
+          <a href="https://training.fema.gov/is/crslist.aspx">
+            {`FEMA's online courses`}
+          </a>
+          .
         </div>
 
         <div style={summaryFormat}>What else can you do?</div>
