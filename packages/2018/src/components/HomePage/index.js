@@ -207,17 +207,6 @@ const HomePage = () => {
                 APPLY NOW
               </Button>
             </a>
-
-            <a
-              css={css`
-                text-decoration: none;
-              `}
-              to="https://civicsoftwarefoundation.org/"
-            >
-              <Button display="inline" bkgndColor={BrandColors.subdued.rgba}>
-                LEARN MORE
-              </Button>
-            </a>
           </div>
           <img
             className="placeholder-section-image"
