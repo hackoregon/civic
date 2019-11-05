@@ -4,7 +4,7 @@ import React from "react";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
 import { CivicStoryCard, HorizontalBarChart, Collapsable } from "../src";
-import { wallOfRichText, wallOfText } from "./shared";
+import { WallOfRichText, wallOfText } from "./shared";
 
 const data = [
   { sortOrder: 1, population: 2000, label: "Labrador Retriever" },
@@ -24,7 +24,9 @@ const Container = ({ children }) => (
 const tdDemo = () => (
   <Container>
     <CivicStoryCard title="A title goes here">
-      <p className="Description">{wallOfRichText}</p>
+      <p className="Description">
+        <WallOfRichText />
+      </p>
     </CivicStoryCard>
   </Container>
 );
@@ -39,7 +41,9 @@ const tdvDemo = () => (
           dataLabel={dataKeyLabel}
         />
       </div>
-      <p className="Description">{wallOfRichText}</p>
+      <p className="Description">
+        <WallOfRichText />
+      </p>
     </CivicStoryCard>
   </Container>
 );
@@ -58,7 +62,9 @@ const collapsableDemo = () => (
           </div>
         </Collapsable.Section>
         <Collapsable.Section hidden>
-          <p className="Description">{wallOfRichText}</p>
+          <p className="Description">
+            <WallOfRichText />
+          </p>
         </Collapsable.Section>
       </Collapsable>
     </CivicStoryCard>
