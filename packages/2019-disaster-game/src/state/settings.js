@@ -52,6 +52,6 @@ export const getTileServerApi = createSelector(
 );
 
 export const getSentryDSNApi = createSelector(
-  ["settings.sentryDSNApi"],
+  ["settings.sentryDSN"],
   api => api
 );

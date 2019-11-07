@@ -1,8 +1,10 @@
 import MockWrapper from "@hackoregon/mock-wrapper";
 import { init } from "@sentry/browser";
 import { App, Routes, Reducers } from "./index";
-import { getSentryDSNApi } from "./state/settings";
+import env from "./constants/env";
 
-init({ dsn: getSentryDSNApi() });
+if (env.SENTRYDSN) {
+  init({ dsn: env.SENTRYDSN });
+}
 
 MockWrapper(App, Reducers, Routes);
