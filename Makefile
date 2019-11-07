@@ -116,7 +116,7 @@ deploy-2018: setup-aws access-ecr
 deploy-2019-disaster-game: setup-aws access-ecr
 	@echo "Deploying the 2019-disaster-game Container"
 	cd packages/2019-disaster-game && yarn run build
-	cd packages/2019-disaster-game && docker build -t civic-2019-disaster-game .
+	cd packages/2019-disaster-game && docker build --build-arg SENTRYDSN=$$SENTRYDSN -t civic-2019-disaster-game .
 	@echo "Pushing civic-2019-disaster-game:latest"
 	cd packages/2019-disaster-game && docker tag civic-2019-disaster-game:latest "$$REMOTE_IMAGE_URL/civic-2019-disaster-game:latest"
 	cd packages/2019-disaster-game && docker push "$$REMOTE_IMAGE_URL/civic-2019-disaster-game:latest"

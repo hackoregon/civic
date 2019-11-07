@@ -3,6 +3,9 @@ FROM node:10.15.3-stretch
 # Create app directory
 WORKDIR /usr/src/app
 
+# Secret value provided in CI/CD
+ARG SENTRYDSN
+
 # Install yarn
 RUN apt-get update && apt-get install -y apt-transport-https
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
@@ -27,4 +30,5 @@ EXPOSE 3000
 
 # Always use production env
 ENV NODE_ENV production
+ENV SENTRYDSN=${SENTRYDSN}
 CMD [ "node", "server" ]
