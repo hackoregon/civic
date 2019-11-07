@@ -12,6 +12,9 @@ const config = {};
 if (process.env.TILESERVER) {
   config.TILESERVER = process.env.TILESERVER;
 }
+if (process.env.SENTRYDSN) {
+  config.SENTRYDSN = process.env.SENTRYDSN;
+}
 
 // eslint-disable-next-line no-console
 console.log(chalk.gray("\nStarting the production server..."));

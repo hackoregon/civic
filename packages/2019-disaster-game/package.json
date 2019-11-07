@@ -39,6 +39,7 @@
     "@hackoregon/dev-server": "^3.0.0",
     "@hackoregon/mock-wrapper": "^3.0.0",
     "@hackoregon/webpack-common": "^3.0.0",
+    "@sentry/browser": "^5.7.1",
     "axios": "^0.18.0",
     "chalk": "^1.1.3",
     "compression": "^1.6.2",
