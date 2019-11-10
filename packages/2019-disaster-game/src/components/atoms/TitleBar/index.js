@@ -3,18 +3,10 @@ import { connect } from "react-redux";
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
 import PropTypes from "prop-types";
-import { shuffle } from "lodash";
 
 import { getActiveChapterId } from "../../../state/chapters";
-import { getActiveTaskData } from "../../../state/tasks";
-import { KIT, TASKS, SUMMARY } from "../../../constants/chapters";
+import { TASKS } from "../../../constants/chapters";
 import QRCode from "../../../../assets/earthquake-heroes-qr-code.svg";
-import {
-  KitTickerTape,
-  SelectionTickerTape,
-  GeneralTickerTape
-} from "../../../constants/tickerTape";
-import Ticker from "../Ticker";
 import JourneyBar from "./JourneyBar";
 import SavedBar from "./SavedBar";
 
@@ -28,7 +20,7 @@ const ContainerStyle = css`
   transform: translateY(-100%);
   transition: transform 1s;
   display: grid;
-  grid-template-rows: 100px auto;
+  grid-template-rows: auto;
 `;
 
 const onScreenStyle = css`
@@ -54,13 +46,12 @@ const QRCodeStyle = css`
   height: 160px;
 `;
 
-const TitleBar = ({ activeChapterId, activeTaskData }) => {
+const TitleBar = ({ activeChapterId }) => {
   const [open, setOpen] = useState(false);
   // eslint-disable-next-line no-unused-vars
   const [badgeDrawerOpen, setBadgeDrawerOpen] = useState(false);
   const [startAnimateTimeout, setStartAnimateTimeout] = useState(null);
   const [endAnimateTimeout, setEndAnimateTimeout] = useState(null);
-  const [screenMessages, setScreenMessages] = useState([]);
 
   const openBadgeDrawer = () => {
     const newStartTimeout = setTimeout(() => {
@@ -84,19 +75,6 @@ const TitleBar = ({ activeChapterId, activeTaskData }) => {
     };
   }, [endAnimateTimeout, startAnimateTimeout]);
 
-  useEffect(() => {
-    if (activeChapterId === KIT) {
-      setScreenMessages(KitTickerTape);
-    } else if (activeChapterId === TASKS) {
-      setScreenMessages(SelectionTickerTape);
-      if (activeTaskData) {
-        setScreenMessages([activeTaskData.tickerTape]);
-      }
-    } else if (activeChapterId === SUMMARY) {
-      setScreenMessages(GeneralTickerTape);
-    }
-  }, [activeChapterId, activeTaskData]);
-
   return (
     <div
       css={css`
@@ -104,7 +82,6 @@ const TitleBar = ({ activeChapterId, activeTaskData }) => {
         ${open && onScreenStyle}
       `}
     >
-      <Ticker messages={shuffle(screenMessages)} />
       <div
         css={css`
           ${infoContainer};
@@ -132,13 +109,11 @@ const TitleBar = ({ activeChapterId, activeTaskData }) => {
 };
 
 TitleBar.propTypes = {
-  activeChapterId: PropTypes.string,
-  activeTaskData: PropTypes.shape({})
+  activeChapterId: PropTypes.string
 };
 
 const mapStateToProps = state => ({
-  activeChapterId: getActiveChapterId(state),
-  activeTaskData: getActiveTaskData(state)
+  activeChapterId: getActiveChapterId(state)
 });
 
 export default connect(mapStateToProps)(memo(TitleBar));
