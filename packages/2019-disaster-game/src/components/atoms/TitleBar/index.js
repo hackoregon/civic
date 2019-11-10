@@ -21,6 +21,7 @@ const ContainerStyle = css`
   transition: transform 1s;
   display: grid;
   grid-template-rows: auto;
+  padding-top: 25px;
 `;
 
 const onScreenStyle = css`
