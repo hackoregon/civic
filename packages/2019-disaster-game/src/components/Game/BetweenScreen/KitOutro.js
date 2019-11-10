@@ -58,7 +58,6 @@ const messageStyle = css`
 `;
 
 const forgottenItem = css`
-  color: ${palette.purple};
   font-weight: 500;
   text-decoration: underline;
 `;
