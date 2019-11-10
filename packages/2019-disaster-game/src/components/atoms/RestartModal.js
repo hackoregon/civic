@@ -107,7 +107,7 @@ const RestartModal = ({ cancelRestart, restartGame, playSFX }) => {
             type="button"
             css={[buttonStyle, restartButton]}
           >
-            <p css={buttonFont}>Restart</p>
+            <p css={buttonFont}>Start Over</p>
           </button>
           <button
             onMouseDown={doCancelRestart}
@@ -116,7 +116,7 @@ const RestartModal = ({ cancelRestart, restartGame, playSFX }) => {
             type="button"
             css={[buttonStyle, playButton]}
           >
-            <p css={buttonFont}>Play</p>
+            <p css={buttonFont}>Continue</p>
           </button>
         </div>
       </div>

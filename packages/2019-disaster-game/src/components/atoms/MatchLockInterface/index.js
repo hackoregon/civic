@@ -5,6 +5,7 @@ import { css, jsx } from "@emotion/core";
 
 import { palette } from "../../../constants/style";
 import media from "../../../utils/mediaQueries";
+import Timer from "../../../utils/timer";
 import usePrevious from "../../../state/hooks/usePrevious";
 import { GUIStyle } from "../../Game/index";
 import OrbManager from "../OrbManager";
@@ -66,18 +67,18 @@ const MatchLockInterface = ({
   restartNoInteractionTimer,
   noInteractionDuration
 }) => {
+  const [interactionTimeout] = useState(new Timer());
   const [open, setOpen] = useState(false);
-  const [interactionTimeout, setInteractionTimeout] = useState(null);
   const prevRestartNoInteractionTimer = usePrevious(restartNoInteractionTimer);
 
   const startInteractionTimeout = useCallback(() => {
-    if (interactionTimeout) clearInterval(interactionTimeout);
+    interactionTimeout.stop();
 
-    const newTimeout = setTimeout(() => {
+    interactionTimeout.setDuration(noInteractionDuration);
+    interactionTimeout.addCompleteCallback(() => {
       noInteractionCallback();
-    }, noInteractionDuration * 1000);
-
-    setInteractionTimeout(newTimeout);
+    });
+    interactionTimeout.start();
   }, [interactionTimeout, noInteractionCallback, noInteractionDuration]);
 
   const doOrbSelection = (...args) => {
@@ -103,7 +104,7 @@ const MatchLockInterface = ({
     startInteractionTimeout();
 
     return () => {
-      clearInterval(interactionTimeout);
+      interactionTimeout.stop();
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
