@@ -17,7 +17,7 @@ import {
   getSaveYourselfCompleted
 } from "../../../state/tasks";
 import { addBadge, getHeroBadge, addSaved } from "../../../state/user";
-import { getPlayerKitItems, getPlayerKit } from "../../../state/kit";
+import { getPlayerKit } from "../../../state/kit";
 import usePrevious from "../../../state/hooks/usePrevious";
 import { SOLVING, VOTING, MOVING_MAP } from "../../../constants/actions";
 import NewBadge from "../../atoms/NewBadge";
@@ -332,7 +332,6 @@ const mapStateToProps = state => ({
   activeTask: getActiveTaskData(state),
   activeTaskIndex: getActiveTaskIndex(state),
   weightedTasks: getWeightedTasks(state),
-  weightedPlayerKitItems: getPlayerKitItems(state),
   playerKit: getPlayerKit(state),
   activeEnvironment: getActiveEnvironment(state),
   tasksForEnvironment: getTasksForEnvironment(state),

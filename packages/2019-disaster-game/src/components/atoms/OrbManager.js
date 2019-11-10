@@ -17,7 +17,7 @@ import { TYPES as SFX_TYPES } from "../../constants/sfx";
 import useBounds from "../../state/hooks/useBounds";
 import usePrevious from "../../state/hooks/usePrevious";
 import useAnimationFrame from "../../state/hooks/useAnimationFrame";
-import { getTaskPhase } from "../../state/tasks";
+import { getTaskPhase, getActiveTaskIndex } from "../../state/tasks";
 import { MOVING_MAP } from "../../constants/actions";
 
 import Orb from "./Orb";
@@ -53,7 +53,8 @@ const OrbManager = ({
   onOrbSelection,
   checkItemIsCorrect,
   playSFX,
-  taskPhase
+  taskPhase,
+  activeTaskIndex
 } = {}) => {
   const [hasInitialized, setHasInitialized] = useState(false);
   const [orbModels, setOrbModelsState] = useState([]);
@@ -68,6 +69,7 @@ const OrbManager = ({
   const bounds = useBounds(boundsRef);
   const prevBounds = usePrevious(bounds);
   const prevTaskPhase = usePrevious(taskPhase);
+  const prevActiveTaskIndex = usePrevious(activeTaskIndex);
 
   /* Generate new orbModels when the interface bounds change, usually only on load. Most often, generate new orbModels when switching between voting and solving. This catalyzes orb data and placement */
   useLayoutEffect(() => {
@@ -76,16 +78,21 @@ const OrbManager = ({
     const newBounds =
       prevBounds && !prevBounds.width && bounds.width && !hasInitialized;
 
-    if (newBounds || newTaskPhase) {
+    const resetForSaveYourself =
+      prevActiveTaskIndex !== activeTaskIndex && activeTaskIndex === 1;
+
+    if (newBounds || newTaskPhase || resetForSaveYourself) {
       const newOrbs = createRandomLayout(possibleItems, bounds, ORB_CONFIG);
       setHasInitialized(true);
       setCompletedOrbs([]);
       setOrbModelsState(newOrbs);
     }
   }, [
+    activeTaskIndex,
     bounds,
     hasInitialized,
     possibleItems,
+    prevActiveTaskIndex,
     prevBounds,
     prevTaskPhase,
     taskPhase
@@ -123,10 +130,10 @@ const OrbManager = ({
         setOrbsZIndex(orbsByLastTouched);
 
         // play orb sound
-        if (good) {
-          playSFX(SFX_TYPES.GOOD_CHOICE);
-        } else {
+        if (good === false) {
           playSFX(SFX_TYPES.BAD_CHOICE);
+        } else {
+          playSFX(SFX_TYPES.GOOD_CHOICE);
         }
 
         return;
@@ -290,7 +297,8 @@ const OrbsStyle = styled.div`
 `;
 
 const mapStateToProps = state => ({
-  taskPhase: getTaskPhase(state)
+  taskPhase: getTaskPhase(state),
+  activeTaskIndex: getActiveTaskIndex(state)
 });
 
 // use memo to not re-render OrbManager unless its props change
