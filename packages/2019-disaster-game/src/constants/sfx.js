@@ -1,7 +1,7 @@
 import { Howl } from "howler";
 
 import badChoice from "../../assets/audio/Bad_Choice.mp3";
-import goodChoice from "../../assets/audio/Good_Choice.mp3";
+import goodChoice from "../../assets/audio/good_choice_short.mp3";
 import startRecord from "../../assets/audio/Start_Record.mp3";
 
 const BAD_CHOICE = "BAD_CHOICE";
