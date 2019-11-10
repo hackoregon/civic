@@ -2,7 +2,7 @@ import { Howl } from "howler";
 import { basketball, phone } from "./items";
 
 import badChoice from "../../assets/audio/bad_choice_short.mp3";
-import goodChoice from "../../assets/audio/Good_Choice.mp3";
+import goodChoice from "../../assets/audio/good_choice_short.mp3";
 import startRecord from "../../assets/audio/Start_Record.mp3";
 import badBasketball from "../../assets/audio/bad-basketball.mp3";
 import badPhone from "../../assets/audio/bad-phone.mp3";
