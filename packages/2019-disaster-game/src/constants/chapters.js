@@ -32,7 +32,7 @@ const CHAPTERS = [
     title: "Kit Outro",
     duration: 1000
   },
-  { id: QUAKE, title: "Quake", tickerTape: GeneralTickerTape, duration: 15 },
+  { id: QUAKE, title: "Quake", tickerTape: GeneralTickerTape, duration: 12 },
   {
     id: TASKS_INTRO,
     title: "Tasks Intro",
