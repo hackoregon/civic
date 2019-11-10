@@ -80,7 +80,7 @@ const NewBadge = ({ type, badges }) => {
       <p css={[badgeText, titleText]}>NEW BADGE EARNED!</p>
       <img src={badgeInfo.badgeSVG} alt="Badge" css={badgeStyle} />
       <p css={badgeText}>{badgeInfo.title}</p>
-      <Song songFile={BadgeEarnedSFX} shouldLoop={false} volume={1.0} />
+      <Song songFile={BadgeEarnedSFX} shouldLoop={false} volume={0.25} />
     </div>
   );
 };
