@@ -63,7 +63,7 @@ const NewBadge = ({ type, badges }) => {
     setBadgeInfo(badges[type]);
     const hideBadgeTimeout = setTimeout(() => {
       setHideBadge(true);
-    }, 4000);
+    }, 8000);
 
     return () => {
       clearTimeout(hideBadgeTimeout);

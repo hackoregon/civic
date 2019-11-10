@@ -232,7 +232,7 @@ const TaskScreenContainer = ({
     }
     if (earnedFinalBadge) {
       setDisplayedFinalBadge(true);
-      startTimer(5, false);
+      startTimer(8, false);
     }
   }, [
     endChapter,

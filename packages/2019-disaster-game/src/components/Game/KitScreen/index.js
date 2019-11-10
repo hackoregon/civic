@@ -99,7 +99,7 @@ const KitScreen = ({
       chapterTimer.reset();
       addPreparerBadge("prepared", "preparerBadge");
       setDisplayBadge(true);
-      chapterTimer.setDuration(9);
+      chapterTimer.setDuration(8);
       chapterTimer.addCompleteCallback(() => endChapter());
       chapterTimer.start();
     }
