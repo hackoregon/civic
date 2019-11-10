@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 // Static site configuration as set in the environment of the server
 // TODO: This is currently written under the assumption that this module
 // will be lazy-evaluated after the DOM is ready. This isn't necessarily

@@ -17,7 +17,7 @@ import { TYPES as SFX_TYPES } from "../../constants/sfx";
 import useBounds from "../../state/hooks/useBounds";
 import usePrevious from "../../state/hooks/usePrevious";
 import useAnimationFrame from "../../state/hooks/useAnimationFrame";
-import { getTaskPhase } from "../../state/tasks";
+import { getTaskPhase, getActiveTaskIndex } from "../../state/tasks";
 import { MOVING_MAP } from "../../constants/actions";
 
 import Orb from "./Orb";
@@ -53,7 +53,8 @@ const OrbManager = ({
   onOrbSelection,
   checkItemIsCorrect,
   playSFX,
-  taskPhase
+  taskPhase,
+  activeTaskIndex
 } = {}) => {
   const [hasInitialized, setHasInitialized] = useState(false);
   const [orbModels, setOrbModelsState] = useState([]);
@@ -62,12 +63,14 @@ const OrbManager = ({
   const [orbsZIndex, setOrbsZIndex] = useState([]);
   // tick is used to modulate movement based on an incrementing value
   const [tick, setTick] = useState(0);
+  const [badKitItemTypesPlayed, setBadKitItemTypesPlayed] = useState({});
 
   // the boundaries of the OrbManagers area
   const boundsRef = useRef();
   const bounds = useBounds(boundsRef);
   const prevBounds = usePrevious(bounds);
   const prevTaskPhase = usePrevious(taskPhase);
+  const prevActiveTaskIndex = usePrevious(activeTaskIndex);
 
   /* Generate new orbModels when the interface bounds change, usually only on load. Most often, generate new orbModels when switching between voting and solving. This catalyzes orb data and placement */
   useLayoutEffect(() => {
@@ -76,16 +79,21 @@ const OrbManager = ({
     const newBounds =
       prevBounds && !prevBounds.width && bounds.width && !hasInitialized;
 
-    if (newBounds || newTaskPhase) {
+    const resetForSaveYourself =
+      prevActiveTaskIndex !== activeTaskIndex && activeTaskIndex === 1;
+
+    if (newBounds || newTaskPhase || resetForSaveYourself) {
       const newOrbs = createRandomLayout(possibleItems, bounds, ORB_CONFIG);
       setHasInitialized(true);
       setCompletedOrbs([]);
       setOrbModelsState(newOrbs);
     }
   }, [
+    activeTaskIndex,
     bounds,
     hasInitialized,
     possibleItems,
+    prevActiveTaskIndex,
     prevBounds,
     prevTaskPhase,
     taskPhase
@@ -104,7 +112,8 @@ const OrbManager = ({
   );
 
   const setOrbTouched = useCallback(
-    (orbId, isTouched) => {
+    (orbModel, isTouched) => {
+      const { orbId, good } = orbModel;
       if (isTouched) {
         setTouchedOrb(prevOrbs => [...prevOrbs, orbId]);
 
@@ -122,7 +131,11 @@ const OrbManager = ({
         setOrbsZIndex(orbsByLastTouched);
 
         // play orb sound
-        playSFX(SFX_TYPES.GOOD_CHOICE);
+        if (good === false) {
+          playSFX(SFX_TYPES.BAD_CHOICE);
+        } else {
+          playSFX(SFX_TYPES.GOOD_CHOICE);
+        }
 
         return;
       }
@@ -136,9 +149,25 @@ const OrbManager = ({
     [touchedOrbs, orbsZIndex, playSFX]
   );
 
-  const setOrbComplete = useCallback(orbId => {
-    setCompletedOrbs(prevOrbs => [...prevOrbs, orbId]);
-  }, []);
+  const setOrbComplete = useCallback(
+    orbModel => {
+      setCompletedOrbs(prevOrbs => [...prevOrbs, orbModel.orbId]);
+      const alreadyPlayedBadKitItemMessage =
+        badKitItemTypesPlayed[orbModel.type] === true;
+      if (
+        orbModel.good === false &&
+        SFX_TYPES[orbModel.type] &&
+        !alreadyPlayedBadKitItemMessage
+      ) {
+        setBadKitItemTypesPlayed({
+          ...badKitItemTypesPlayed,
+          [orbModel.type]: true
+        });
+        playSFX(orbModel.type);
+      }
+    },
+    [badKitItemTypesPlayed, playSFX]
+  );
 
   // `animate` is called every frame
   // eslint-disable-next-line consistent-return
@@ -255,14 +284,11 @@ const OrbManager = ({
               }}
             >
               <Orb
-                orbId={orb.orbId}
-                imageSVG={orb.imageSVG}
-                imgAlt={orb.imgAlt}
+                orbModel={orb}
                 size={ORB_CONFIG.orbSize}
                 addOrbScore={addOrbScore}
                 setOrbTouched={setOrbTouched}
                 setOrbComplete={setOrbComplete}
-                delay={orb.delay}
               />
             </div>
           );
@@ -282,7 +308,8 @@ const OrbsStyle = styled.div`
 `;
 
 const mapStateToProps = state => ({
-  taskPhase: getTaskPhase(state)
+  taskPhase: getTaskPhase(state),
+  activeTaskIndex: getActiveTaskIndex(state)
 });
 
 // use memo to not re-render OrbManager unless its props change

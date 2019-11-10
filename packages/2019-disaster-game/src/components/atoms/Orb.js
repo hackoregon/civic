@@ -48,7 +48,8 @@ export default class Orb extends PureComponent {
   componentDidMount() {
     // If this is the first render
     const { hasAnimated } = this.state;
-    const { delay } = this.props;
+    const { orbModel } = this.props;
+    const { delay } = orbModel;
 
     if (!hasAnimated) {
       // make the component 0 alpha, smaller, and slightly lower on the screen
@@ -66,11 +67,12 @@ export default class Orb extends PureComponent {
 
   componentDidUpdate(prevProps, prevState) {
     const { isComplete } = this.state;
-    const { addOrbScore, orbId, setOrbComplete } = this.props;
+    const { addOrbScore, orbModel, setOrbComplete } = this.props;
+    const { orbId } = orbModel;
 
     if (!prevState.isComplete && isComplete) {
       addOrbScore(orbId);
-      setOrbComplete(orbId);
+      setOrbComplete(orbModel);
     }
   }
 
@@ -83,7 +85,7 @@ export default class Orb extends PureComponent {
 
   handleOrbRelease = () => {
     const { isComplete } = this.state;
-    const { orbId, setOrbTouched } = this.props;
+    const { orbModel, setOrbTouched } = this.props;
 
     // if already pressed, do nothing
     if (isComplete) return;
@@ -91,13 +93,14 @@ export default class Orb extends PureComponent {
     this.setState({ isActive: true }, () => {
       this.incrementGauge();
     });
-    setOrbTouched(orbId, true);
+    setOrbTouched(orbModel, true);
   };
 
   render() {
     const { isActive, isComplete } = this.state;
     // eslint-disable-next-line no-unused-vars
-    const { size, imageSVG, imgAlt } = this.props;
+    const { size, orbModel } = this.props;
+    const { imageSVG, imgAlt } = orbModel;
 
     const sizeStyle = css`
       height: ${size}px;
@@ -172,12 +175,14 @@ export default class Orb extends PureComponent {
 }
 
 Orb.propTypes = {
-  orbId: PropTypes.string,
+  orbModel: PropTypes.shape({
+    orbId: PropTypes.string,
+    imageSVG: PropTypes.string,
+    imgAlt: PropTypes.string,
+    delay: PropTypes.number
+  }),
   setOrbTouched: PropTypes.func,
   setOrbComplete: PropTypes.func,
   addOrbScore: PropTypes.func,
-  imageSVG: PropTypes.string,
-  imgAlt: PropTypes.string,
-  size: PropTypes.number,
-  delay: PropTypes.number
+  size: PropTypes.number
 };

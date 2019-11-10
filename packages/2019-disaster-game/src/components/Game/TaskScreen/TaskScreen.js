@@ -234,6 +234,12 @@ const TaskScreen = ({
   let possibleItems = weightedPlayerKitItems;
 
   if (isSolving) {
+    /* eslint-disable no-return-assign */
+    possibleItems.map(
+      // eslint-disable-next-line no-param-reassign
+      item => (item.good = activeTask.requiredItem === item.id)
+    );
+    /* eslint-enable no-return-assign */
     if (activeTaskIndex > 1) {
       // Save others message
       interfaceMessage = activeTask.clue;
