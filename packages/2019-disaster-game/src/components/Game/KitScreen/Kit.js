@@ -46,20 +46,21 @@ function createKit(currentKit) {
   return <div css={kitStyle}>{items}</div>;
 }
 
-const KitScreen = ({ currentKit }) => {
+const KitRow = ({ currentKit, customContent, customStyle }) => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
     setOpen(true);
   }, []);
 
-  const kit = createKit(currentKit);
+  const kit = createKit(customContent || currentKit);
 
   return (
     <div
       css={css`
         ${containerStyle};
-        ${open && onScreenStyle}
+        ${open ? onScreenStyle : ""};
+        ${customStyle || ""};
       `}
     >
       {kit}
@@ -67,10 +68,12 @@ const KitScreen = ({ currentKit }) => {
   );
 };
 
-KitScreen.propTypes = {
-  currentKit: PropTypes.shape({})
+KitRow.propTypes = {
+  currentKit: PropTypes.shape({}),
+  customContent: PropTypes.shape({}),
+  customStyle: PropTypes.shape({})
 };
 
 export default connect(state => ({
   currentKit: getItems(state)
-}))(KitScreen);
+}))(KitRow);

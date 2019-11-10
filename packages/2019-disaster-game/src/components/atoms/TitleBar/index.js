@@ -58,11 +58,31 @@ const TitleBar = ({ activeChapterId, activeTaskData }) => {
   const [open, setOpen] = useState(false);
   // eslint-disable-next-line no-unused-vars
   const [badgeDrawerOpen, setBadgeDrawerOpen] = useState(false);
+  const [startAnimateTimeout, setStartAnimateTimeout] = useState(null);
+  const [endAnimateTimeout, setEndAnimateTimeout] = useState(null);
   const [screenMessages, setScreenMessages] = useState([]);
+
+  const openBadgeDrawer = () => {
+    const newStartTimeout = setTimeout(() => {
+      setBadgeDrawerOpen(true);
+    }, 4000);
+    const newEndTimeout = setTimeout(() => {
+      setBadgeDrawerOpen(false);
+    }, 10000);
+    setStartAnimateTimeout(newStartTimeout);
+    setEndAnimateTimeout(newEndTimeout);
+  };
 
   useEffect(() => {
     setOpen(true);
-  }, []);
+
+    return () => {
+      setOpen(false);
+      setBadgeDrawerOpen(false);
+      if (startAnimateTimeout) clearTimeout(startAnimateTimeout);
+      if (endAnimateTimeout) clearTimeout(endAnimateTimeout);
+    };
+  }, [endAnimateTimeout, startAnimateTimeout]);
 
   useEffect(() => {
     if (activeChapterId === KIT) {
@@ -93,10 +113,13 @@ const TitleBar = ({ activeChapterId, activeTaskData }) => {
       >
         <img
           src={QRCode}
-          alt="QR code for civicplatform.org"
+          alt="QR code for civicplatform.org/EarthquakeHeroes"
           css={QRCodeStyle}
         />
-        <JourneyBar badgeDrawerOpen={badgeDrawerOpen} />
+        <JourneyBar
+          badgeDrawerOpen={badgeDrawerOpen}
+          openBadgeDrawer={openBadgeDrawer}
+        />
         {activeChapterId === TASKS && (
           <Fragment>
             {badgeDrawerOpen && <div />}

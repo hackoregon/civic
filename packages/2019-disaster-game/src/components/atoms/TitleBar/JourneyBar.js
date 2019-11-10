@@ -39,6 +39,7 @@ const journeyBarContainerStyle = css`
   align-content: center;
   justify-content: space-between;
   z-index: 10;
+  box-shadow: 0px 4px 2px 0px rgba(0, 0, 0, 0.15);
 `;
 
 const sectionStyle = css`
@@ -107,7 +108,8 @@ const JourneyBar = ({
   activeChapterData,
   activeTaskData,
   activeTaskIndex,
-  badgeDrawerOpen
+  badgeDrawerOpen,
+  openBadgeDrawer
 }) => {
   const [chapterTimeLeft, setChapterTimeLeft] = useState(0);
   const [savingYourself, setSavingYourself] = useState(false);
@@ -157,10 +159,10 @@ const JourneyBar = ({
           css={css`
             ${sectionStyle};
             ${activeChapterId === KIT && activeSectionStyle}
-            ${activeChapterIndex > 1 && completedSectionStyle}
+            ${activeChapterIndex > 2 && completedSectionStyle}
           `}
         >
-          {activeChapterId !== KIT && activeChapterIndex <= 1 && (
+          {activeChapterId !== KIT && activeChapterIndex <= 2 && (
             <div css={circleStyle} />
           )}
           {activeChapterId === KIT && (
@@ -168,7 +170,7 @@ const JourneyBar = ({
               <p>{chapterTimeLeft}</p>
             </div>
           )}
-          {activeChapterIndex > 1 && (
+          {activeChapterIndex > 2 && (
             <img src={CheckmarkSVG} alt="checkmark" css={checkmarkStyle} />
           )}
           <p>COLLECT A KIT</p>
@@ -179,12 +181,12 @@ const JourneyBar = ({
           css={css`
             ${sectionStyle};
             ${savingYourself && activeSectionStyle};
-            ${(activeChapterIndex > 3 ||
-              (activeChapterIndex === 3 && !savingYourself)) &&
+            ${(activeChapterIndex > 6 ||
+              (activeChapterIndex === 6 && !savingYourself)) &&
               completedSectionStyle};
           `}
         >
-          {activeChapterId !== TASKS && activeChapterIndex < 4 && (
+          {activeChapterId !== TASKS && activeChapterIndex < 7 && (
             <div css={circleStyle} />
           )}
           {savingYourself && (
@@ -192,7 +194,7 @@ const JourneyBar = ({
               <p>{chapterTimeLeft}</p>
             </div>
           )}
-          {(savingOthers || activeChapterIndex > 3) && (
+          {(savingOthers || activeChapterIndex > 6) && (
             <img src={CheckmarkSVG} alt="checkmark" css={checkmarkStyle} />
           )}
           <p>HELP YOURSELF</p>
@@ -203,16 +205,16 @@ const JourneyBar = ({
           css={css`
             ${sectionStyle};
             ${savingOthers && activeSectionStyle}
-            ${activeChapterIndex > 3 && completedSectionStyle}
+            ${activeChapterIndex > 6 && completedSectionStyle}
           `}
         >
-          {!savingOthers && activeChapterIndex < 4 && <div css={circleStyle} />}
+          {!savingOthers && activeChapterIndex < 7 && <div css={circleStyle} />}
           {savingOthers && (
             <div css={coundownContainer}>
               <p>{chapterTimeLeft}</p>
             </div>
           )}
-          {activeChapterIndex > 3 && (
+          {activeChapterIndex > 6 && (
             <img src={CheckmarkSVG} alt="checkmark" css={checkmarkStyle} />
           )}
           <p>HELP NEIGHBORS</p>
@@ -220,7 +222,8 @@ const JourneyBar = ({
       </div>
       <BadgesDrawer
         journeyBarContainerStyle={journeyBarContainerStyle}
-        open={badgeDrawerOpen}
+        isOpen={badgeDrawerOpen}
+        openBadgeDrawer={openBadgeDrawer}
       />
     </div>
   );
@@ -232,7 +235,8 @@ JourneyBar.propTypes = {
   activeChapterData: PropTypes.shape({}),
   activeTaskData: PropTypes.shape({}),
   activeTaskIndex: PropTypes.number,
-  badgeDrawerOpen: PropTypes.bool
+  badgeDrawerOpen: PropTypes.bool,
+  openBadgeDrawer: PropTypes.func
 };
 
 const mapStateToProps = state => ({

@@ -4,7 +4,7 @@ import { Collapsable } from "@hackoregon/component-library";
 import BlackPopulationChangeVisualization from "./BlackPopulationChangeVisualization";
 
 const BlackPopulationChangeMeta = (/* data */) => ({
-  title: "Portland’s Black Population Displaced throughout Region",
+  title: "Portland’s Black Population Displaced Throughout Region",
   slug: "black-population-change",
   introText: (
     <p>
@@ -45,7 +45,8 @@ const BlackPopulationChangeMeta = (/* data */) => ({
       </p>
     </p>
   ),
-  shareText: "TODO: Add share text!",
+  shareText:
+    "Gentrification and displacement disproportionately impact communities of color. The small handful of census tracts with significant proportions of Black residents nearly vanished in the past 30 years.",
   tags: [
     "Housing",
     "Race",
@@ -53,10 +54,7 @@ const BlackPopulationChangeMeta = (/* data */) => ({
     "Portland",
     "Oregon",
     "Gentrification",
-    "displacement",
-    "race",
-    "Black",
-    "demographic change"
+    "Displacement"
   ],
   selector: null,
   analysis: (

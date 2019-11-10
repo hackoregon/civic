@@ -9,7 +9,7 @@ export const GeneralTickerTape = [
   // "At least 40 Cascadia earthquakes have occurred in the last 10,000 years.",
   "Liquefaction is when an earthquake causes solid ground to shake like a liquid.",
   "The Cascadia quake will be caused by a subduction zone, where one tectonic plate moves beneath another.",
-  "Visit PortlandPrepares.com for information on planning your family.",
+  "Visit PortlandPrepares.com for information on planning for your family.",
   "Talk to your elected officials about preparing infrastructure for an earthquake!"
 ];
 

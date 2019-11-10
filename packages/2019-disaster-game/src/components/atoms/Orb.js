@@ -21,15 +21,6 @@ const circleDefaultStyle = css`
   &:hover {
     opacity: 1;
   }
-
-  &.circle-press-style {
-    transition: background-color 1000ms linear;
-  }
-
-  &.circle-bad-item-style {
-    transition: filter 0.5s ease-in-out;
-    filter: grayscale(100%);
-  }
 `;
 
 const iconStyle = css`
@@ -45,7 +36,7 @@ const defaultState = {
   hasAnimated: false
 };
 
-const pressSuccessDuration = 1;
+const pressSuccessDuration = 0.5;
 
 export default class Orb extends PureComponent {
   constructor(props) {
@@ -86,19 +77,13 @@ export default class Orb extends PureComponent {
   }
 
   incrementGauge = () => {
-    const timer = setTimeout(() => {
-      const { isActive } = this.state;
-      if (isActive) {
-        this.setState({ isComplete: true });
-        clearTimeout(timer);
-      } else {
-        this.setState({ isActive: false });
-        clearTimeout(timer);
-      }
-    }, pressSuccessDuration * 1000);
+    const { isActive } = this.state;
+    if (isActive) {
+      this.setState({ isComplete: true });
+    }
   };
 
-  handleOrbPress = () => {
+  handleOrbRelease = () => {
     const { isComplete } = this.state;
     const { orbModel, setOrbTouched } = this.props;
 
@@ -111,35 +96,50 @@ export default class Orb extends PureComponent {
     setOrbTouched(orbModel, true);
   };
 
-  handleOrbRelease = () => {
-    this.setState({ isActive: false });
-    const { orbModel, setOrbTouched } = this.props;
-    setOrbTouched(orbModel, false);
-  };
-
   render() {
     const { isActive, isComplete } = this.state;
     // eslint-disable-next-line no-unused-vars
     const { size, orbModel } = this.props;
-    const { imageSVG, imgAlt, good } = orbModel;
+    const { imageSVG, imgAlt } = orbModel;
 
     const sizeStyle = css`
       height: ${size}px;
       width: ${size}px;
       border-radius: ${size}px;
+
+      &.circle-press-style {
+        transition: background-color 1000ms linear;
+      }
+
+      &.circle-complete-item-style {
+        transition: filter 0.5s ease-in-out;
+        transition: opacity 2s cubic-bezier(0.95, 0.05, 0.795, 0.035);
+        opacity: 0;
+      }
     `;
 
     const absoluteStyle = css`
       position: absolute;
       top: -${size / 2}px;
       left: -${size / 2}px;
+
+      &.circle-press-style {
+        transition: background-color 1000ms linear;
+      }
+
+      &.circle-complete-item-style {
+        transition: filter 0.5s ease-in-out;
+        transition: opacity 2s cubic-bezier(0.95, 0.05, 0.795, 0.035);
+        opacity: 0;
+      }
     `;
 
     let orbClass = "";
     if (isActive) orbClass = "circle-press-style";
-    if (isComplete && !good) orbClass = "circle-bad-item-style";
+    if (isComplete) orbClass = "circle-complete-item-style";
 
     /* eslint-disable jsx-a11y/no-static-element-interactions */
+    /* eslint-disable jsx-a11y/click-events-have-key-events */
     return (
       <div
         ref={this.orbRef}
@@ -147,13 +147,11 @@ export default class Orb extends PureComponent {
           ${orbContainerStyle};
           ${sizeStyle};
         `}
-        onMouseDown={this.handleOrbPress}
-        onMouseUp={this.handleOrbRelease}
-        onMouseLeave={this.handleOrbRelease}
-        onTouchStart={this.handleOrbPress}
-        onTouchEnd={this.handleOrbRelease}
+        onMouseDown={this.handleOrbRelease}
+        onTouchStart={this.handleOrbRelease}
+        onClick={this.handleOrbRelease}
       >
-        <div css={absoluteStyle}>
+        <div css={absoluteStyle} className={orbClass}>
           <RadialGauge
             isActive={isActive}
             size={size}
@@ -172,6 +170,7 @@ export default class Orb extends PureComponent {
       </div>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
+    /* eslint-enable jsx-a11y/click-events-have-key-events */
   }
 }
 

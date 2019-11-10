@@ -1,7 +1,7 @@
 import { Howl } from "howler";
 import { basketball, phone } from "./items";
 
-import badChoice from "../../assets/audio/Bad_Choice.mp3";
+import badChoice from "../../assets/audio/bad_choice_short.mp3";
 import goodChoice from "../../assets/audio/Good_Choice.mp3";
 import startRecord from "../../assets/audio/Start_Record.mp3";
 import badBasketball from "../../assets/audio/bad-basketball.mp3";
@@ -14,19 +14,22 @@ const START_RECORD = "START_RECORD";
 const badChoiceSFX = new Howl({
   src: [badChoice],
   autoplay: false,
-  loop: false
+  loop: false,
+  volume: 1
 });
 
 const goodChoiceSFX = new Howl({
   src: [goodChoice],
   autoplay: false,
-  loop: false
+  loop: false,
+  volume: 0.35
 });
 
 const startRecordSFX = new Howl({
   src: [startRecord],
   autoplay: false,
-  loop: false
+  loop: false,
+  volume: 1
 });
 
 const badPhoneSFX = new Howl({

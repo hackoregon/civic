@@ -119,7 +119,7 @@ const AttractorScreen = ({ goToChapter, playSFX }) => {
 
   return (
     <div css={pageWrapper}>
-      <Song songFile={attractorSong} />
+      <Song songFile={attractorSong} volume={0.25} />
       <div css={bg} />
       <div css={[bg, bg2]} />
       <div css={[bg, bg3]} />

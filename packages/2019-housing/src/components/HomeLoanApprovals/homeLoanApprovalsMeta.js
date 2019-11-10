@@ -77,16 +77,7 @@ const HomeLoanApprovalsMeta = (/* data */) => ({
     </section>
   ),
   shareText: null,
-  tags: [
-    "Housing",
-    "Portland",
-    "Oregon",
-    "mortgage",
-    "maps",
-    "loans",
-    "race",
-    "demographics"
-  ],
+  tags: ["Housing", "Portland", "Oregon", "Mortgage", "Maps", "Loans", "Race"],
   selector: null,
   analysis: (
     <Collapsable>

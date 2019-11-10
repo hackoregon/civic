@@ -3,13 +3,24 @@ import React, { Fragment, memo } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import styled from "@emotion/styled";
+import { bindActionCreators } from "redux";
 
-import { getActiveChapterId } from "../../state/chapters";
+import { resetState as resetStateTasks } from "../../state/tasks";
+import { resetState as resetStateKit } from "../../state/kit";
+import { resetState as resetStateUser } from "../../state/user";
+import {
+  goToChapter,
+  getActiveChapterId,
+  getActiveChapterData
+} from "../../state/chapters";
 import {
   ATTRACTOR,
+  KIT_INTRO,
   KIT,
-  TASKS,
+  KIT_OUTRO,
   QUAKE,
+  TASKS_INTRO,
+  TASKS,
   SUMMARY
 } from "../../constants/chapters";
 import { palette } from "../../constants/style";
@@ -22,38 +33,70 @@ import KitScreen from "./KitScreen/index";
 import QuakeScreen from "./QuakeScreen/index";
 import TaskScreen from "./TaskScreen/index";
 import SummaryScreen from "./SummaryScreen/index";
+import BetweenScreen from "./BetweenScreen/index";
+import KitIntro from "./BetweenScreen/KitIntro";
+import KitOutro from "./BetweenScreen/KitOutro";
+import TaskIntro from "./BetweenScreen/TasksIntro";
 
 import "@hackoregon/component-library/assets/global.styles.css";
-import summarySong from "../../../assets/audio/summary_screen/summary_song.mp3";
 
-const Game = ({ activeChapterId }) => {
+const Game = ({
+  activeChapterId,
+  activeChapterData,
+  resetKitState,
+  resetTasksState,
+  resetUserState,
+  endChapter
+}) => {
+  const restartGame = () => {
+    resetKitState();
+    resetTasksState();
+    resetUserState();
+    endChapter();
+  };
+
   const renderChapter = chapterId => {
     switch (chapterId) {
+      case KIT_INTRO:
+        return (
+          <BetweenScreen chapterDuration={activeChapterData.duration}>
+            <KitIntro />
+          </BetweenScreen>
+        );
       case KIT:
-        return <KitScreen />;
+        return <KitScreen restartGame={restartGame} />;
+      case KIT_OUTRO:
+        return (
+          <BetweenScreen chapterDuration={activeChapterData.duration}>
+            <KitOutro />
+          </BetweenScreen>
+        );
       case QUAKE:
         return <QuakeScreen />;
+      case TASKS_INTRO:
+        return (
+          <BetweenScreen chapterDuration={activeChapterData.duration}>
+            <TaskIntro />
+          </BetweenScreen>
+        );
       case TASKS:
-        return <TaskScreen />;
-      case SUMMARY:
-        return <SummaryScreen songFile={summarySong} />;
+        return <TaskScreen restartGame={restartGame} />;
       default:
         return <DefaultScreen />;
     }
   };
 
-  const showTitleBar =
-    activeChapterId !== ATTRACTOR && activeChapterId !== QUAKE;
-
   return (
     <Fragment>
       {activeChapterId === ATTRACTOR && <AttractorScreen />}
-      {activeChapterId !== ATTRACTOR && (
+      {activeChapterId !== ATTRACTOR && activeChapterId !== SUMMARY && (
         <GameContainerStyle>
-          {showTitleBar && <TitleBar />}
+          {activeChapterData.showTitleBar && <TitleBar />}
           <GameGrid>{renderChapter(activeChapterId)}</GameGrid>
         </GameContainerStyle>
       )}
+
+      {activeChapterId === SUMMARY && <SummaryScreen />}
     </Fragment>
   );
 };
@@ -115,10 +158,30 @@ Game.propTypes = {
     maxVelocityY: PropTypes.number,
     mode: PropTypes.string
   }),
-  activeChapterId: PropTypes.string
+  activeChapterId: PropTypes.string,
+  activeChapterData: PropTypes.shape({
+    showTitleBar: PropTypes.bool
+  }),
+  endChapter: PropTypes.func,
+  resetKitState: PropTypes.func,
+  resetTasksState: PropTypes.func,
+  resetUserState: PropTypes.func
 };
 
-export default connect(state => ({
+const mapStateToProps = state => ({
   settings: state.settings,
-  activeChapterId: getActiveChapterId(state)
-}))(memo(Game));
+  activeChapterId: getActiveChapterId(state),
+  activeChapterData: getActiveChapterData(state)
+});
+
+const mapDispatchToProps = dispatch => ({
+  endChapter: bindActionCreators(goToChapter, dispatch),
+  resetKitState: bindActionCreators(resetStateKit, dispatch),
+  resetTasksState: bindActionCreators(resetStateTasks, dispatch),
+  resetUserState: bindActionCreators(resetStateUser, dispatch)
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(memo(Game));

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const chalk = require("chalk");
 const express = require("express");
 const webpack = require("webpack");
@@ -16,12 +17,21 @@ const hotMiddleware = require("webpack-hot-middleware");
 // eslint-disable-next-line import/no-dynamic-require
 const config = require(resolve(process.cwd(), "webpack.config.js"));
 
-module.exports = () => {
+module.exports = (localEnv = {}) => {
   console.log(
     chalk.yellow(
       `\nStarting the ${isProd ? `PRODUCTION` : `DEVELOPMENT`} server...`
     )
   );
+
+  // Static configuration that gets passed into the SPA via the
+  // config/environment meta element
+  const staticSiteConfig = Object.assign({}, localEnv);
+
+  if (Object.keys(staticSiteConfig).length) {
+    console.log(chalk.yellow(`\n\nStatic Site Config:`));
+    console.log(chalk.yellow(JSON.stringify(staticSiteConfig, null, 2)));
+  }
 
   const openBrowser = () =>
     isProd
@@ -73,6 +83,9 @@ module.exports = () => {
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       <meta charset="utf-8"/>
+      <meta name="config/environment" content="${encodeURIComponent(
+        JSON.stringify(staticSiteConfig)
+      )}">
       <style>html, body { padding: 0; margin: 0; }</style>
       <!-- FontAwesome -->
       <script src="https://use.fontawesome.com/031ebbe0c7.js"></script>

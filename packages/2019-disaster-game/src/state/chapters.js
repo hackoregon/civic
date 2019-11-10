@@ -10,7 +10,8 @@ const initialState = {
 
 export const actionTypes = {
   SET_ACTIVE_CHAPTER: "SET_ACTIVE_CHAPTER",
-  GO_TO_NEXT_CHAPTER: "GO_TO_NEXT_CHAPTER"
+  GO_TO_NEXT_CHAPTER: "GO_TO_NEXT_CHAPTER",
+  GO_TO_CHAPTER: "GO_TO_CHAPTER"
 };
 
 // ACTIONS
@@ -21,6 +22,10 @@ export const setActiveChapter = chapterIndex => dispatch => {
 
 export const goToNextChapter = () => dispatch => {
   dispatch({ type: actionTypes.GO_TO_NEXT_CHAPTER });
+};
+
+export const goToChapter = customChapter => dispatch => {
+  dispatch({ type: actionTypes.GO_TO_CHAPTER, customChapter });
 };
 
 // REDUCERS
@@ -40,6 +45,11 @@ export const chapters = createReducer(initialState, {
     } else {
       state.activeChapterIndex += 1;
     }
+  },
+
+  [actionTypes.GO_TO_CHAPTER]: (state, action) => {
+    const { customChapter } = action;
+    state.activeChapterIndex = customChapter || 0;
   }
 });
 /* eslint-enable no-param-reassign */

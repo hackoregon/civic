@@ -8,6 +8,14 @@ const app = express();
 const isProd = process.env.NODE_ENV === "production";
 const outputPath = resolve(process.cwd(), isProd ? "dist" : "build");
 
+const config = {};
+if (process.env.TILESERVER) {
+  config.TILESERVER = process.env.TILESERVER;
+}
+if (process.env.SENTRYDSN) {
+  config.SENTRYDSN = process.env.SENTRYDSN;
+}
+
 // eslint-disable-next-line no-console
 console.log(chalk.gray("\nStarting the production server..."));
 
@@ -33,6 +41,9 @@ app.get(
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta charset="utf-8"/>
+    <meta name="config/environment" content="${encodeURIComponent(
+      JSON.stringify(config)
+    )}">
     <style>html, body { padding: 0; margin: 0; }</style>
     <!-- FontAwesome -->
     <script src="https://use.fontawesome.com/031ebbe0c7.js"></script>

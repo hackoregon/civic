@@ -45,3 +45,13 @@ export const getVelocityRange = createSelector(
     minVelocityX, minVelocityY, maxVelocityX, maxVelocityY;
   }
 );
+
+export const getTileServerApi = createSelector(
+  ["settings.tileServerApi"],
+  api => api
+);
+
+export const getSentryDSNApi = createSelector(
+  ["settings.sentryDSN"],
+  api => api
+);
