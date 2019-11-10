@@ -63,6 +63,7 @@ const OrbManager = ({
   const [orbsZIndex, setOrbsZIndex] = useState([]);
   // tick is used to modulate movement based on an incrementing value
   const [tick, setTick] = useState(0);
+  const [badKitItemTypesPlayed, setBadKitItemTypesPlayed] = useState({});
 
   // the boundaries of the OrbManagers area
   const boundsRef = useRef();
@@ -151,11 +152,21 @@ const OrbManager = ({
   const setOrbComplete = useCallback(
     orbModel => {
       setCompletedOrbs(prevOrbs => [...prevOrbs, orbModel.orbId]);
-      if (orbModel.good === false && SFX_TYPES[orbModel.type]) {
+      const alreadyPlayedBadKitItemMessage =
+        badKitItemTypesPlayed[orbModel.type] === true;
+      if (
+        orbModel.good === false &&
+        SFX_TYPES[orbModel.type] &&
+        !alreadyPlayedBadKitItemMessage
+      ) {
+        setBadKitItemTypesPlayed({
+          ...badKitItemTypesPlayed,
+          [orbModel.type]: true
+        });
         playSFX(orbModel.type);
       }
     },
-    [playSFX]
+    [badKitItemTypesPlayed, playSFX]
   );
 
   // `animate` is called every frame
