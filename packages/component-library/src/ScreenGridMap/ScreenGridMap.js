@@ -17,8 +17,23 @@ const ScreenGridMap = props => {
     getSize,
     getWeight,
     getCursor,
-    onHover
+    aggregation,
+    tooltipInfo,
+    x,
+    y,
+    onHover,
+    children
   } = props;
+
+  const tooltip = React.Children.map(children, child => {
+    return React.cloneElement(child, {
+      tooltipInfo,
+      x,
+      y
+    });
+  });
+
+  const tooltipRender = tooltipInfo && x && y ? tooltip : null;
 
   return (
     <div>
@@ -40,8 +55,10 @@ const ScreenGridMap = props => {
           getSize={getSize}
           getWeight={getWeight}
           onHover={onHover}
+          aggregation={aggregation}
         />
       </DeckGL>
+      {tooltipRender}
     </div>
   );
 };
@@ -60,7 +77,12 @@ ScreenGridMap.propTypes = {
   getSize: PropTypes.func,
   getWeight: PropTypes.func,
   getCursor: PropTypes.func,
-  onHover: PropTypes.func
+  aggregation: PropTypes.oneOf(["SUM", "MIN", "MEAN", "MAX"]),
+  tooltipInfo: PropTypes.shape({}),
+  x: PropTypes.number,
+  y: PropTypes.number,
+  onHover: PropTypes.func,
+  children: PropTypes.node
 };
 
 ScreenGridMap.defaultProps = {
@@ -73,7 +95,8 @@ ScreenGridMap.defaultProps = {
   gpuAggregation: false,
   getSize: () => 1,
   getWeight: () => 1,
-  getCursor: () => "crosshair"
+  getCursor: () => "crosshair",
+  aggregation: "SUM"
 };
 
 export default ScreenGridMap;

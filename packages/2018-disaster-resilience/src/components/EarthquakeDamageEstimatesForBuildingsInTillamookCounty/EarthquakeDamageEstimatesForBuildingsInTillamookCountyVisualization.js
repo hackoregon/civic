@@ -9,7 +9,9 @@ import {
   VisualizationColors,
   RadioButtonGroup,
   ScreenGridMap,
-  ChartContainer
+  MapTooltip,
+  ChartContainer,
+  civicFormat
 } from "@hackoregon/component-library";
 
 const EarthquakeDamageEstimatesForBuildingsInTillamookCountyVisualization = ({
@@ -76,14 +78,37 @@ const EarthquakeDamageEstimatesForBuildingsInTillamookCountyVisualization = ({
               civicMapStyle={mapStyles[dataType].map}
             >
               <ScreenGridMap
-                data={data.damageEstimates.value}
+                data={data.damageEstimates.value.filter(
+                  feature => feature.properties[mapStyles[dataType].field]
+                )}
                 getPosition={f => f.geometry && f.geometry.coordinates}
                 opacity={mapStyles[dataType].opacity}
-                getWeight={f => f.properties[mapStyles[dataType].field] || 0}
+                getWeight={f => f.properties[mapStyles[dataType].field]}
                 getSize={() => 15}
                 colorRange={VisualizationColors.sequential.thermal}
                 getCursor={() => "default"}
-              />
+                aggregation="SUM"
+              >
+                <MapTooltip
+                  tooltipDataArray={[
+                    {
+                      name: `Number of ${
+                        mapStyles[dataType].buildingType
+                      } buildings`,
+                      field: "cellCount",
+                      formatField: civicFormat.numeric
+                    },
+                    {
+                      name: `Average loss ratio`,
+                      field: "cellWeight",
+                      totalField: "cellCount",
+                      formatField: civicFormat.percentage
+                    }
+                  ]}
+                  isScreenGrid
+                  wide
+                />
+              </ScreenGridMap>
             </BaseMap>
             <Link to="/sandbox">See more in the Civic Sandbox</Link>
           </>
