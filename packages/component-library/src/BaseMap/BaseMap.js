@@ -172,7 +172,6 @@ class BaseMap extends Component {
   }
 
   onHover = ({ object, x, y }) => {
-    console.log(object, x, y);
     this.setState({
       tooltipInfo: object,
       x,
