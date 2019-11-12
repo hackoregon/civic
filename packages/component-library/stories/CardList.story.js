@@ -4,7 +4,21 @@ import { storiesOf } from "@storybook/react";
 import { checkA11y } from "@storybook/addon-a11y";
 import { CardList } from "../src/index";
 import { storybookStyles } from "./storyStyles";
-import { SampleCard, SampleCardB } from "./CivicCardSample";
+import {
+  FilterSampleCard,
+  FilterSampleCardB,
+  FilterSampleCardC,
+  FilterSampleCardD,
+  FilterSampleCardE,
+  FilterSampleCardF,
+  FilterSampleCardG,
+  FilterSampleCardH,
+  FilterSampleCardJ,
+  FilterSampleCardK,
+  FilterSampleCardL,
+  FilterSampleCardM,
+  FilterSampleCardN
+} from "./CivicCardSampleFilter";
 
 const CardRegistryMock = {
   tags: {
@@ -21,40 +35,75 @@ const CardRegistryMock = {
     {
       slug: "template-file-card",
       project: "@hackoregon/2019-template",
-      component: SampleCard
+      component: FilterSampleCard
     },
     {
       slug: "demo-card",
       project: "@hackoregon/2019-template",
-      component: SampleCardB
+      component: FilterSampleCardB
     },
     {
       slug: "template-file-card-1",
       project: "@hackoregon/2019-template",
-      component: SampleCard
+      component: FilterSampleCardC
     },
     {
       slug: "demo-card-1",
       project: "@hackoregon/2019-template",
-      component: SampleCardB
+      component: FilterSampleCardD
     },
     {
       slug: "template-file-card-2",
       project: "@hackoregon/2019-template",
-      component: SampleCard
+      component: FilterSampleCardE
     },
     {
       slug: "demo-card-2",
       project: "@hackoregon/2019-template",
-      component: SampleCardB
+      component: FilterSampleCardF
+    },
+    {
+      slug: "template-file-card",
+      project: "@hackoregon/2019-template",
+      component: FilterSampleCardG
+    },
+    {
+      slug: "demo-card",
+      project: "@hackoregon/2019-template",
+      component: FilterSampleCardH
+    },
+    {
+      slug: "template-file-card-1",
+      project: "@hackoregon/2019-template",
+      component: FilterSampleCardJ
+    },
+    {
+      slug: "demo-card-1",
+      project: "@hackoregon/2019-template",
+      component: FilterSampleCardK
+    },
+    {
+      slug: "template-file-card-2",
+      project: "@hackoregon/2019-template",
+      component: FilterSampleCardL
+    },
+    {
+      slug: "demo-card-2",
+      project: "@hackoregon/2019-template",
+      component: FilterSampleCardM
+    },
+    {
+      slug: "template-file-card-2",
+      project: "@hackoregon/2019-template",
+      component: FilterSampleCardN
     }
   ]
 };
 
 const tagsListExample = {
-  topics: ["Transportation", "Disaster Resilience", "Housing"],
+  topics: ["Race", "Transportation", "Disaster Resilience", "Housing"],
   locations: ["Portland", "Oregon", "Nationwide", "Your City"],
-  visualizations: ["Bar Chart", "Cloropleth Map", "Scatterplot"]
+  visualizations: ["Chart", "Infographic", "Cloropleth Map", "Scatterplot"]
 };
 
 const projectsMock = [

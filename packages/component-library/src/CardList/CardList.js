@@ -159,6 +159,7 @@ const CardList = ({ CardRegistry, tagsList, projects }) => {
   const theme = useTheme();
   const [activeTags, setActiveTags] = useState(allTagsFalse);
 
+  // returns boolean if no filters selected
   const noFiltersSelected = () => {
     const tagNames = Object.keys(activeTags);
     for (let i = 0; i < tagNames.length; i += 1) {
@@ -167,12 +168,14 @@ const CardList = ({ CardRegistry, tagsList, projects }) => {
     return true;
   };
 
+  // holds state for category accordions being open
   const categoryOpeners = {
     topics: openTopic,
     locations: openLocation,
     visualizations: openVisualization
   };
 
+  // sets category state to opposite
   const categoryHandlers = {
     topicsHandler() {
       setOpenTopic(!openTopic);
@@ -185,6 +188,7 @@ const CardList = ({ CardRegistry, tagsList, projects }) => {
     }
   };
 
+  // handles mobile filter drawer open / close
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -235,6 +239,7 @@ const CardList = ({ CardRegistry, tagsList, projects }) => {
     </div>
   );
 
+  // filter by tags logic
   const filterCardsBasedOnActiveTags = entryTags => {
     if (!entryTags) return false;
     if (showAllStories) return true;
