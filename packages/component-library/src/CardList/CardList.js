@@ -142,40 +142,52 @@ const CardList = ({ CardRegistry, tagsList, projects }) => {
   // eslint-disable-next-line no-console
   console.log("Tag Count:", tags);
 
-  const allTagsFalse = {};
-  Object.keys(tagsList).forEach(category => {
+  const categoryNames = Object.keys(tagsList);
+
+  const allTagsFalse = {
+    topics: {},
+    locations: {},
+    visualizations: {}
+  };
+  categoryNames.forEach(category => {
     tagsList[category].forEach(tag => {
-      allTagsFalse[tag] = false;
+      allTagsFalse[category][tag] = false;
     });
   });
 
   const classes = useStyles();
+  const theme = useTheme();
 
   const [showAllStories, setShowAllStories] = useState(true);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openTopic, setOpenTopic] = useState(true);
   const [openLocation, setOpenLocation] = useState(false);
   const [openVisualization, setOpenVisualization] = useState(false);
-  const theme = useTheme();
-  const [activeTags, setActiveTags] = useState(allTagsFalse);
+  const [filterStatus, setFilterStatus] = useState(allTagsFalse);
+  const [activeTagsList, setActiveTagsList] = useState([]);
+  const [activeTagsByCategory, setActiveTagsByCategory] = useState(
+    categoryNames.reduce(
+      (accumulator, categoryName) => ({
+        [categoryName]: [],
+        ...accumulator
+      }),
+      {}
+    )
+  );
 
-  // returns boolean if no filters selected
   const noFiltersSelected = () => {
-    const tagNames = Object.keys(activeTags);
-    for (let i = 0; i < tagNames.length; i += 1) {
-      if (activeTags[tagNames[i]]) return false;
+    if (activeTagsList.length === 0) {
+      return true;
     }
-    return true;
+    return false;
   };
 
-  // holds state for category accordions being open
   const categoryOpeners = {
     topics: openTopic,
     locations: openLocation,
     visualizations: openVisualization
   };
 
-  // sets category state to opposite
   const categoryHandlers = {
     topicsHandler() {
       setOpenTopic(!openTopic);
@@ -188,7 +200,6 @@ const CardList = ({ CardRegistry, tagsList, projects }) => {
     }
   };
 
-  // handles mobile filter drawer open / close
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -201,7 +212,7 @@ const CardList = ({ CardRegistry, tagsList, projects }) => {
         aria-labelledby="nested-list-subheader"
         className={classes.filtersList}
       >
-        {Object.keys(tagsList).map(category => (
+        {categoryNames.map(category => (
           <Fragment>
             <ListItem button onClick={categoryHandlers[`${category}Handler`]}>
               <ListItemText
@@ -219,14 +230,44 @@ const CardList = ({ CardRegistry, tagsList, projects }) => {
                 {tagsList[category].sort().map(topic => (
                   <ListItem key={shortid.generate()} className={classes.nested}>
                     <Checkbox
-                      value={activeTags[topic]}
+                      value={filterStatus[category][topic]}
                       label={topic}
                       onChange={() => {
                         if (showAllStories) setShowAllStories(false);
-                        setActiveTags({
-                          ...activeTags,
-                          [topic]: !activeTags[topic]
+                        setFilterStatus({
+                          ...filterStatus,
+                          [category]: {
+                            ...filterStatus[category],
+                            [topic]: !filterStatus[category][topic]
+                          }
                         });
+                        if (activeTagsList.includes(topic)) {
+                          setActiveTagsList(
+                            activeTagsList.filter(
+                              activeTag => activeTag !== topic
+                            )
+                          );
+                        } else {
+                          setActiveTagsList([...activeTagsList, topic]);
+                        }
+                        if (!activeTagsByCategory[category].includes(topic)) {
+                          setActiveTagsByCategory({
+                            ...activeTagsByCategory,
+                            [category]: [
+                              ...activeTagsByCategory[category],
+                              topic
+                            ]
+                          });
+                        } else {
+                          setActiveTagsByCategory({
+                            ...activeTagsByCategory,
+                            [category]: [
+                              ...activeTagsByCategory[category].filter(
+                                activeTag => activeTag !== topic
+                              )
+                            ]
+                          });
+                        }
                       }}
                     />
                   </ListItem>
@@ -240,18 +281,48 @@ const CardList = ({ CardRegistry, tagsList, projects }) => {
   );
 
   // filter by tags logic
-  const filterCardsBasedOnActiveTags = entryTags => {
-    if (!entryTags) return false;
+  const filterCardsBasedOnFilterStatus = storyCardTags => {
+    if (!storyCardTags) return false;
     if (showAllStories) return true;
     if (noFiltersSelected()) return true;
-    for (let i = 0; i < entryTags.length; i += 1) {
-      if (activeTags[entryTags[i]]) return true;
+
+    const targetActiveCategories = categoryNames.reduce(
+      (accumulator, categoryName) => ({
+        [categoryName]: activeTagsByCategory[categoryName].length > 0,
+        ...accumulator
+      }),
+      {}
+    );
+
+    const fulfilledActiveCategories = categoryNames.reduce(
+      (accumulator, categoryName) => ({
+        [categoryName]: false,
+        ...accumulator
+      }),
+      {}
+    );
+
+    storyCardTags.forEach(storyTag => {
+      categoryNames.forEach(category => {
+        if (activeTagsByCategory[category].includes(storyTag)) {
+          fulfilledActiveCategories[category] = true;
+        }
+      });
+    });
+
+    for (let i = 0; i < categoryNames.length; i += 1) {
+      if (
+        fulfilledActiveCategories[categoryNames[i]] !==
+        targetActiveCategories[categoryNames[i]]
+      ) {
+        return false;
+      }
     }
-    return false;
+    return true;
   };
 
   const filteredEntries = entries.filter(entry =>
-    filterCardsBasedOnActiveTags(entry.component.tags)
+    filterCardsBasedOnFilterStatus(entry.component.tags)
   );
 
   return (
