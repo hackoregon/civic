@@ -23,52 +23,48 @@ const MultiLayerMap = props => {
   console.log("MLM-props:", props);
   const renderMaps = mapLayers.map((layerData, index) => {
     const { mapType } = layerData;
-    return mapType === "PathMap"
-      ? MultiPathMap({
-          ...layerData,
-          index,
-          onHoverSlide
-        })
-      : mapType === "ScatterPlotMap"
-      ? MultiScatterPlotMap({
-          ...layerData,
-          index,
-          onHoverSlide
-        })
-      : mapType === "ScreenGridMap"
-      ? MultiScreenGridMap({
-          ...layerData,
-          index
-        })
-      : mapType === "IconMap"
-      ? MultiIconMap({
-          ...layerData,
-          index,
-          onHoverSlide,
-          viewport
-        })
-      : mapType === "SmallPolygonMap"
-      ? MultiSmallPolygonMap({
-          ...layerData,
-          index,
-          onHoverSlide,
-          viewport
-        })
-      : mapType === "ChoroplethMap"
-      ? MultiChoroplethMap({
-          ...layerData,
-          index,
-          onHoverSlide,
-          onLayerClick,
-          selectedFoundationDatum
-        })
-      : mapType === "VectorTilesMap"
-      ? VectorTilesMap({
-          ...layerData,
-          index,
-          onHoverSlide
-        })
-      : null;
+    return mapType === "PathMap" ? (
+      MultiPathMap({
+        ...layerData,
+        index,
+        onHoverSlide
+      })
+    ) : mapType === "ScatterPlotMap" ? (
+      MultiScatterPlotMap({
+        ...layerData,
+        index,
+        onHoverSlide
+      })
+    ) : mapType === "ScreenGridMap" ? (
+      MultiScreenGridMap({
+        ...layerData,
+        index
+      })
+    ) : mapType === "IconMap" ? (
+      MultiIconMap({
+        ...layerData,
+        index,
+        onHoverSlide,
+        viewport
+      })
+    ) : mapType === "SmallPolygonMap" ? (
+      MultiSmallPolygonMap({
+        ...layerData,
+        index,
+        onHoverSlide,
+        viewport
+      })
+    ) : mapType === "ChoroplethMap" ? (
+      MultiChoroplethMap({
+        ...layerData,
+        index,
+        onHoverSlide,
+        onLayerClick,
+        selectedFoundationDatum
+      })
+    ) : mapType === "VectorTilesMap" ? (
+      <VectorTilesMap {...layerData} />
+    ) : null;
   });
   console.log("renderMaps:", renderMaps);
   return (
