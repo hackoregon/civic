@@ -8,6 +8,7 @@ import MultiScreenGridMap from "./MultiScreenGridMap";
 import MultiIconMap from "./MultiIconMap";
 import MultiSmallPolygonMap from "./MultiSmallPolygonMap";
 import MultiChoroplethMap from "./MultiChoroplethMap";
+import VectorTilesMap from "../VectorTilesMap/VectorTilesMap";
 
 const MultiLayerMap = props => {
   const {
@@ -19,7 +20,7 @@ const MultiLayerMap = props => {
     onLayerClick,
     selectedFoundationDatum
   } = props;
-
+  console.log("MLM-props:", props);
   const renderMaps = mapLayers.map((layerData, index) => {
     const { mapType } = layerData;
     return mapType === "PathMap"
@@ -61,9 +62,15 @@ const MultiLayerMap = props => {
           onLayerClick,
           selectedFoundationDatum
         })
+      : mapType === "VectorTilesMap"
+      ? VectorTilesMap({
+          ...layerData,
+          index,
+          onHoverSlide
+        })
       : null;
   });
-
+  console.log("renderMaps:", renderMaps);
   return (
     <DeckGL className="DeckGL-Map-Layer" getCursor={getCursor} {...viewport}>
       {renderMaps}
@@ -77,11 +84,13 @@ MultiLayerMap.propTypes = {
   mapLayers: arrayOf(shape({})).isRequired,
   onHoverSlide: func,
   onLayerClick: func,
-  getCursor: () => "crosshair",
+  getCursor: func,
   children: node,
   selectedFoundationDatum: shape({})
 };
 
-MultiLayerMap.defaultProps = {};
+MultiLayerMap.defaultProps = {
+  getCursor: () => "crosshair"
+};
 
 export default MultiLayerMap;
