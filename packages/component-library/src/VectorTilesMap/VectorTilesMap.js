@@ -12,10 +12,11 @@ const VectorTilesMap = React.memo(props => {
     paint,
     layerPosition
   } = props;
-  console.log("VT-PROPS:", props);
+
   const sourceLayerProp = {
     "source-layer": sourceLayer
   };
+
   return (
     <Source
       type="vector"

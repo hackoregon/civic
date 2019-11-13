@@ -20,7 +20,7 @@ const MultiLayerMap = props => {
     onLayerClick,
     selectedFoundationDatum
   } = props;
-  console.log("MLM-props:", props);
+
   const renderMaps = mapLayers.map((layerData, index) => {
     const { mapType } = layerData;
     return mapType === "PathMap" ? (
@@ -63,10 +63,10 @@ const MultiLayerMap = props => {
         selectedFoundationDatum
       })
     ) : mapType === "VectorTilesMap" ? (
-      <VectorTilesMap {...layerData} />
+      <VectorTilesMap {...layerData} key={layerData.vectorTilesID} />
     ) : null;
   });
-  console.log("renderMaps:", renderMaps);
+
   return (
     <DeckGL className="DeckGL-Map-Layer" getCursor={getCursor} {...viewport}>
       {renderMaps}
