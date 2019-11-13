@@ -2,7 +2,7 @@ import React from "react";
 import { Source, Layer } from "react-map-gl";
 import { string, shape } from "prop-types";
 
-const VectorTilesMap = props => {
+const VectorTilesMap = React.memo(props => {
   const {
     vectorTilesID,
     vectorTilesURL,
@@ -17,7 +17,12 @@ const VectorTilesMap = props => {
     "source-layer": sourceLayer
   };
   return (
-    <Source type="vector" id={vectorTilesID} url={vectorTilesURL}>
+    <Source
+      type="vector"
+      id={vectorTilesID}
+      url={vectorTilesURL}
+      key={vectorTilesID}
+    >
       <Layer
         beforeId={layerPosition}
         id={layerID}
@@ -28,7 +33,7 @@ const VectorTilesMap = props => {
       />
     </Source>
   );
-};
+});
 
 VectorTilesMap.propTypes = {
   vectorTilesURL: string,
