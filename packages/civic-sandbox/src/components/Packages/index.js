@@ -40,7 +40,7 @@ export class Packages extends React.Component {
   componentDidUpdate(prevProps) {
     const { isLoading, sandbox, setPackage: cduSetPackage } = this.props;
     if (!isLoading && prevProps.isLoading) {
-      cduSetPackage(sandbox.packages[6]);
+      cduSetPackage(sandbox.packages[0]);
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({ mapIsOpen: true });
     }

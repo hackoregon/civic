@@ -1,9 +1,9 @@
 import React from "react";
+import { Source, Layer } from "react-map-gl";
 import { string, shape } from "prop-types";
 
-const VectorTilesMap = props => {
+const VectorTilesMap = React.memo(props => {
   const {
-    mapboxMap,
     vectorTilesID,
     vectorTilesURL,
     layerID,
@@ -13,58 +13,28 @@ const VectorTilesMap = props => {
     layerPosition
   } = props;
 
-  const [mapStyle, setMapStyle] = React.useState(mapboxMap.getStyle().name);
+  const sourceLayerProp = {
+    "source-layer": sourceLayer
+  };
 
-  mapboxMap.on("styledata", () => {
-    const nextStyle = mapboxMap.getStyle().name;
-    const currentStyle = mapStyle;
-    if (nextStyle !== currentStyle) {
-      setMapStyle(mapboxMap.getStyle().name);
-    }
-  });
-
-  React.useEffect(() => {
-    if (mapboxMap.getLayer(layerID)) {
-      mapboxMap.removeLayer(layerID);
-    }
-
-    if (mapboxMap.getSource(vectorTilesID)) {
-      mapboxMap.removeSource(vectorTilesID);
-    }
-
-    if (!mapboxMap.getSource(vectorTilesID)) {
-      mapboxMap.addSource(vectorTilesID, {
-        type: "vector",
-        url: vectorTilesURL
-      });
-    }
-
-    if (!mapboxMap.getLayer(layerID)) {
-      mapboxMap.addLayer(
-        {
-          id: layerID,
-          type: layerType,
-          source: vectorTilesID,
-          "source-layer": sourceLayer,
-          paint
-        },
-        layerPosition
-      );
-    }
-  }, [
-    layerID,
-    layerType,
-    vectorTilesID,
-    vectorTilesURL,
-    sourceLayer,
-    paint,
-    layerPosition,
-    mapboxMap,
-    mapStyle
-  ]);
-
-  return null;
-};
+  return (
+    <Source
+      type="vector"
+      id={vectorTilesID}
+      url={vectorTilesURL}
+      key={vectorTilesID}
+    >
+      <Layer
+        beforeId={layerPosition}
+        id={layerID}
+        type={layerType}
+        source={vectorTilesID}
+        paint={paint}
+        {...sourceLayerProp}
+      />
+    </Source>
+  );
+});
 
 VectorTilesMap.propTypes = {
   vectorTilesURL: string,

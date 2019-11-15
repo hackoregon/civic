@@ -8,6 +8,7 @@ import MultiScreenGridMap from "./MultiScreenGridMap";
 import MultiIconMap from "./MultiIconMap";
 import MultiSmallPolygonMap from "./MultiSmallPolygonMap";
 import MultiChoroplethMap from "./MultiChoroplethMap";
+import VectorTilesMap from "../VectorTilesMap/VectorTilesMap";
 
 const MultiLayerMap = props => {
   const {
@@ -22,46 +23,48 @@ const MultiLayerMap = props => {
 
   const renderMaps = mapLayers.map((layerData, index) => {
     const { mapType } = layerData;
-    return mapType === "PathMap"
-      ? MultiPathMap({
-          ...layerData,
-          index,
-          onHoverSlide
-        })
-      : mapType === "ScatterPlotMap"
-      ? MultiScatterPlotMap({
-          ...layerData,
-          index,
-          onHoverSlide
-        })
-      : mapType === "ScreenGridMap"
-      ? MultiScreenGridMap({
-          ...layerData,
-          index
-        })
-      : mapType === "IconMap"
-      ? MultiIconMap({
-          ...layerData,
-          index,
-          onHoverSlide,
-          viewport
-        })
-      : mapType === "SmallPolygonMap"
-      ? MultiSmallPolygonMap({
-          ...layerData,
-          index,
-          onHoverSlide,
-          viewport
-        })
-      : mapType === "ChoroplethMap"
-      ? MultiChoroplethMap({
-          ...layerData,
-          index,
-          onHoverSlide,
-          onLayerClick,
-          selectedFoundationDatum
-        })
-      : null;
+    return mapType === "PathMap" ? (
+      MultiPathMap({
+        ...layerData,
+        index,
+        onHoverSlide
+      })
+    ) : mapType === "ScatterPlotMap" ? (
+      MultiScatterPlotMap({
+        ...layerData,
+        index,
+        onHoverSlide
+      })
+    ) : mapType === "ScreenGridMap" ? (
+      MultiScreenGridMap({
+        ...layerData,
+        index
+      })
+    ) : mapType === "IconMap" ? (
+      MultiIconMap({
+        ...layerData,
+        index,
+        onHoverSlide,
+        viewport
+      })
+    ) : mapType === "SmallPolygonMap" ? (
+      MultiSmallPolygonMap({
+        ...layerData,
+        index,
+        onHoverSlide,
+        viewport
+      })
+    ) : mapType === "ChoroplethMap" ? (
+      MultiChoroplethMap({
+        ...layerData,
+        index,
+        onHoverSlide,
+        onLayerClick,
+        selectedFoundationDatum
+      })
+    ) : mapType === "VectorTilesMap" ? (
+      <VectorTilesMap {...layerData} key={layerData.vectorTilesID} />
+    ) : null;
   });
 
   return (
@@ -77,11 +80,13 @@ MultiLayerMap.propTypes = {
   mapLayers: arrayOf(shape({})).isRequired,
   onHoverSlide: func,
   onLayerClick: func,
-  getCursor: () => "crosshair",
+  getCursor: func,
   children: node,
   selectedFoundationDatum: shape({})
 };
 
-MultiLayerMap.defaultProps = {};
+MultiLayerMap.defaultProps = {
+  getCursor: () => "crosshair"
+};
 
 export default MultiLayerMap;
