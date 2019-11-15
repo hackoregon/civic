@@ -94,12 +94,16 @@ const MultiChoroplethMap = props => {
     return lineWidth;
   };
 
+  const noNullGeometryData = data.filter(
+    d => d.geometry && d.geometry.coordinates.length
+  );
+
   return (
     <GeoJsonLayer
       key={shortid.generate()}
       id={id}
       pickable={pickable}
-      data={data}
+      data={noNullGeometryData}
       opacity={opacity}
       getPolygon={getPolygon}
       filled={filled}
