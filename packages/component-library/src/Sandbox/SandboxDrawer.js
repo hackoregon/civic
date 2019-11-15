@@ -251,7 +251,9 @@ const SandboxDrawer = props => {
                   "2000-2017",
                   "2010-2017"
                 ];
-                const keySelector = matchFound && (
+                const notYear =
+                  keyAllOptions[0] && keyAllOptions[0].search(/[0-9]/) > -1;
+                const keySelector = matchFound && notYear && (
                   <Dropdown
                     value={foundationData[dataIndex].fieldName.color}
                     options={
