@@ -1,3 +1,10 @@
-/* Boggaloo for Game */
-@import url("https://fonts.googleapis.com/css?family=Boogaloo&display=swap");
-@import url("https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap");
+/* Offline fonts for Game */
+@font-face {
+  font-family: "Luckiest Guy";
+  src: url("../assets/fonts/LuckiestGuy-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Boogaloo";
+  src: url("../assets/fonts/Boogaloo-Regular.ttf") format("truetype");
+}
