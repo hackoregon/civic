@@ -9,6 +9,7 @@ import { resetState as resetStateTasks } from "../../../state/tasks";
 import { resetState as resetStateKit } from "../../../state/kit";
 import { resetState as resetStateUser } from "../../../state/user";
 import { goToChapter, goToNextChapter } from "../../../state/chapters";
+import { getReloadMode } from "../../../state/settings";
 import usePrevious from "../../../state/hooks/usePrevious";
 import Timer from "../../../utils/timer";
 
@@ -179,7 +180,10 @@ const SummaryScreen = ({
   resetKitState,
   resetTasksState,
   resetUserState,
-  replay
+  replay,
+  increasePlayCount,
+  playCount,
+  reloadMode
 }) => {
   const [animationTimer] = useState(new Timer());
   const [animationPhaseIndex, setAnimationPhaseIndex] = useState(-1);
@@ -197,13 +201,25 @@ const SummaryScreen = ({
       resetKitState();
       resetTasksState();
       resetUserState();
-      if (toAttractorScreen === true) {
+      if (reloadMode && playCount === 5) {
+        /* eslint-disable */
+        location.reload();
+        /* eslint-enable */
+      } else if (toAttractorScreen === true) {
         endChapter();
       } else {
         replay(1);
       }
     },
-    [endChapter, replay, resetKitState, resetTasksState, resetUserState]
+    [
+      endChapter,
+      playCount,
+      reloadMode,
+      replay,
+      resetKitState,
+      resetTasksState,
+      resetUserState
+    ]
   );
 
   const transitionAnimation = useCallback(() => {
@@ -240,6 +256,7 @@ const SummaryScreen = ({
 
   // Timer: on chapter start
   useEffect(() => {
+    increasePlayCount();
     transitionAnimation();
     return () => {
       animationTimer.stop();
@@ -363,8 +380,15 @@ SummaryScreen.propTypes = {
   replay: PropTypes.func,
   resetKitState: PropTypes.func,
   resetTasksState: PropTypes.func,
-  resetUserState: PropTypes.func
+  resetUserState: PropTypes.func,
+  increasePlayCount: PropTypes.func,
+  playCount: PropTypes.number,
+  reloadMode: PropTypes.bool
 };
+
+const mapStateToProps = state => ({
+  reloadMode: getReloadMode(state)
+});
 
 const mapDispatchToProps = dispatch => ({
   endChapter: bindActionCreators(goToNextChapter, dispatch),
@@ -375,6 +399,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(SummaryScreen);

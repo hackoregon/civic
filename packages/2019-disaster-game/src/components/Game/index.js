@@ -1,5 +1,5 @@
 /* eslint-disable import/no-named-as-default */
-import React, { Fragment, memo } from "react";
+import React, { Fragment, memo, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import styled from "@emotion/styled";
@@ -48,6 +48,13 @@ const Game = ({
   resetUserState,
   endChapter
 }) => {
+  const [playCount, setPlayCount] = useState(0);
+
+  const increasePlayCount = () => {
+    console.log("increasing play count from", playCount);
+    setPlayCount(prevPlayCount => prevPlayCount + 1);
+  };
+
   const restartGame = () => {
     resetKitState();
     resetTasksState();
@@ -96,7 +103,12 @@ const Game = ({
         </GameContainerStyle>
       )}
 
-      {activeChapterId === SUMMARY && <SummaryScreen />}
+      {activeChapterId === SUMMARY && (
+        <SummaryScreen
+          increasePlayCount={increasePlayCount}
+          playCount={playCount}
+        />
+      )}
     </Fragment>
   );
 };
