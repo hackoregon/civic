@@ -20,6 +20,7 @@ import {
 } from "../../../state/kit";
 import { addPoints, addBadge } from "../../../state/user";
 import usePrevious from "../../../state/hooks/usePrevious";
+import { TYPES as SFX_TYPES } from "../../../constants/sfx";
 import { palette } from "../../../constants/style";
 import Timer from "../../../utils/timer";
 import NewBadge from "../../atoms/NewBadge";
@@ -141,11 +142,11 @@ const KitScreen = ({
 
   // Clean up only on dismount
   useEffect(() => {
-    playTheme("themeKit");
+    playTheme(SFX_TYPES.THEME_KIT);
 
     return () => {
       restartTimer.reset();
-      stopTheme("themeKit");
+      stopTheme(SFX_TYPES.THEME_KIT);
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
