@@ -6,6 +6,10 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import {
+  playTheme as _playTheme,
+  stopTheme as _stopTheme
+} from "../../../state/sfx";
+import {
   goToNextChapter,
   getActiveChapterDuration
 } from "../../../state/chapters";
@@ -21,11 +25,8 @@ import Timer from "../../../utils/timer";
 import NewBadge from "../../atoms/NewBadge";
 import RestartModal from "../../atoms/RestartModal";
 import MatchLockInterface from "../../atoms/MatchLockInterface";
-import Song from "../../atoms/Audio/Song";
 import { MapStyle } from "../index";
 import Kit from "./Kit";
-
-import kitSong from "../../../../assets/audio/HappyTheme1fadeinout.mp3";
 
 const slide = keyframes`
   0% {
@@ -68,7 +69,9 @@ const KitScreen = ({
   addItemToPlayerKitInState,
   endChapter,
   chapterDuration,
-  restartGame
+  restartGame,
+  playTheme,
+  stopTheme
 }) => {
   const [chapterTimer] = useState(new Timer());
   const [restartTimer] = useState(new Timer());
@@ -138,8 +141,11 @@ const KitScreen = ({
 
   // Clean up only on dismount
   useEffect(() => {
+    playTheme("themeKit");
+
     return () => {
       restartTimer.reset();
+      stopTheme("themeKit");
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -154,7 +160,6 @@ const KitScreen = ({
 
   return (
     <Fragment>
-      <Song songFile={kitSong} />
       {displayBadge && <NewBadge type="prepared" />}
       {showRestart && (
         <RestartModal cancelRestart={cancelRestart} restartGame={restartGame} />
@@ -194,7 +199,9 @@ KitScreen.propTypes = {
   chapterDuration: PropTypes.number,
   playerKit: PropTypes.shape({}),
   addPreparerBadge: PropTypes.func,
-  restartGame: PropTypes.func
+  restartGame: PropTypes.func,
+  playTheme: PropTypes.func,
+  stopTheme: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -207,9 +214,9 @@ const mapDispatchToProps = dispatch => ({
   addPointsToState: bindActionCreators(addPoints, dispatch),
   addItemToPlayerKitInState: bindActionCreators(addItemToPlayerKit, dispatch),
   addPreparerBadge: bindActionCreators(addBadge, dispatch),
-  endChapter() {
-    dispatch(goToNextChapter());
-  }
+  endChapter: bindActionCreators(goToNextChapter, dispatch),
+  playTheme: bindActionCreators(_playTheme, dispatch),
+  stopTheme: bindActionCreators(_stopTheme, dispatch)
 });
 
 export default connect(

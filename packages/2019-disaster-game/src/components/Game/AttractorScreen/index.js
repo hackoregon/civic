@@ -119,10 +119,10 @@ const AttractorScreen = ({ goToChapter, playSFX, playTheme, stopTheme }) => {
   };
 
   useEffect(() => {
-    playTheme("themeAttractor");
+    playTheme(SFX_TYPES.THEME_ATTRACTOR);
 
     return () => {
-      stopTheme("themeAttractor");
+      stopTheme(SFX_TYPES.THEME_ATTRACTOR);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

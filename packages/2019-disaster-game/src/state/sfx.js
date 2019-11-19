@@ -1,22 +1,7 @@
 import { createReducer } from "redux-starter-kit";
-import { Howl } from "howler";
 import SFX, { TYPES } from "../constants/sfx";
-import attractorSong from "../../assets/audio/PWolf-happysong1wfadeinout.mp3";
 
-const attractorHowl = (() =>
-  new Howl({
-    src: [attractorSong],
-    autoplay: false,
-    loop: true,
-    volume: 0.25,
-    onfade: () => {
-      attractorHowl.stop();
-    }
-  }))();
-
-const initialState = {
-  themeAttractor: attractorHowl
-};
+const initialState = {};
 
 // CONSTANTS
 export const actionTypes = {
@@ -54,10 +39,10 @@ export const sfx = createReducer(initialState, {
   [actionTypes.PLAY_THEME]: (state, action) => {
     try {
       const { themeName } = action;
-      const howlObj = state[themeName];
+      const howlObj = SFX[TYPES[action.themeName]];
       howlObj.stop();
-      const howlId = state[themeName].play();
-      state[`${themeName}Id`] = howlId;
+      const howlId = howlObj.play();
+      state[`${themeName}_ID`] = howlId;
     } catch (error) {
       // eslint-disable-next-line
       console.warn("Unknown SFX theme requested to play ", action, error);
@@ -66,8 +51,8 @@ export const sfx = createReducer(initialState, {
   [actionTypes.STOP_THEME]: (state, action) => {
     try {
       const { themeName } = action;
-      const howlObj = state[themeName];
-      howlObj.fade(howlObj.volume(), 0, 750, state[`${themeName}Id`]);
+      const howlObj = SFX[TYPES[action.themeName]];
+      howlObj.fade(howlObj.volume(), 0, 750, state[`${themeName}_ID`]);
     } catch (error) {
       // eslint-disable-next-line
       console.warn("Unknown SFX theme requested to stop ", action, error);
