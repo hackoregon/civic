@@ -11,11 +11,16 @@ import attractorSong from "../../assets/audio/PWolf-happysong1wfadeinout.mp3";
 import neutralMood from "../../assets/audio/neutral-mood.mp3";
 import kitSong from "../../assets/audio/HappyTheme1fadeinout.mp3";
 import earthquakeSong from "../../assets/audio/PWolfEarthquakesound15secmp3.mp3";
+import summarySong from "../../assets/audio/summary_screen/summary_song.mp3";
 // Voice
 import letsPrepareBoyVoice from "../../assets/audio/kit_screen/boy_lets_prepare_for_an_earthquake.mp3";
 import letsPrepareGirlVoice from "../../assets/audio/kit_screen/girl_lets_prepare_for_an_earthquake.mp3";
 import earthquakeBoyVoice from "../../assets/audio/earthquake_screen/boy_earthquake.mp3";
 import earthquakeGirlVoice from "../../assets/audio/earthquake_screen/girl_earthquake.mp3";
+import summaryMotivationalVoice from "../../assets/audio/summary_screen/8_boy_you_did_great.mp3";
+import summaryPlanVoice from "../../assets/audio/summary_screen/makePlan.mp3";
+import summaryCommunityVoice from "../../assets/audio/summary_screen/meetNeighbors.mp3";
+import summaryKitVoice from "../../assets/audio/summary_screen/buildKit.mp3";
 
 // SFX
 const BAD_CHOICE = "BAD_CHOICE";
@@ -26,11 +31,16 @@ const THEME_ATTRACTOR = "THEME_ATTRACTOR";
 const THEME_NEUTRAL = "THEME_NEUTRAL";
 const THEME_KIT = "THEME_KIT";
 const THEME_EARTHQUAKE = "THEME_EARTHQUAKE";
+const THEME_SUMMARY = "THEME_SUMMARY";
 // Voice
 const LETS_PREPARE_BOY = "LETS_PREPARE_BOY";
 const LETS_PREPARE_GIRL = "LETS_PREPARE_GIRL";
 const EARTHQUAKE_BOY = "EARTHQUAKE_BOY";
 const EARTHQUAKE_GIRL = "EARTHQUAKE_GIRL";
+const SUMMARY_MOTIVATION = "SUMMARY_MOTIVATION";
+const SUMMARY_PLAN = "SUMMARY_PLAN";
+const SUMMARY_COMMUNITY = "SUMMARY_COMMUNITY";
+const SUMMARY_KIT = "SUMMARY_KIT";
 
 const defaultHowl = {
   autoplay: false,
@@ -110,6 +120,17 @@ const earthquakeHowl = (() =>
     }
   }))();
 
+const summaryHowl = (() =>
+  new Howl({
+    src: [summarySong],
+    autoplay: false,
+    loop: true,
+    volume: 0.5,
+    onfade: () => {
+      summaryHowl.stop();
+    }
+  }))();
+
 // Voice
 const letsPrepareGirl = new Howl({
   ...defaultHowl,
@@ -131,6 +152,26 @@ const earthquakeBoy = new Howl({
   src: [earthquakeBoyVoice]
 });
 
+const summaryMotivation = new Howl({
+  ...defaultHowl,
+  src: [summaryMotivationalVoice]
+});
+
+const summaryPlan = new Howl({
+  ...defaultHowl,
+  src: [summaryPlanVoice]
+});
+
+const summaryCommunity = new Howl({
+  ...defaultHowl,
+  src: [summaryCommunityVoice]
+});
+
+const summaryKit = new Howl({
+  ...defaultHowl,
+  src: [summaryKitVoice]
+});
+
 const SFX = {
   // SFX
   GOOD_CHOICE: goodChoiceSFX,
@@ -143,11 +184,16 @@ const SFX = {
   THEME_NEUTRAL: neutralHowl,
   THEME_KIT: kitHowl,
   THEME_EARTHQUAKE: earthquakeHowl,
+  THEME_SUMMARY: summaryHowl,
   // Voice
   LETS_PREPARE_GIRL: letsPrepareGirl,
   LETS_PREPARE_BOY: letsPrepareBoy,
   EARTHQUAKE_GIRL: earthquakeGirl,
-  EARTHQUAKE_BOY: earthquakeBoy
+  EARTHQUAKE_BOY: earthquakeBoy,
+  SUMMARY_MOTIVATION: summaryMotivation,
+  SUMMARY_PLAN: summaryPlan,
+  SUMMARY_COMMUNITY: summaryCommunity,
+  SUMMARY_KIT: summaryKit
 };
 
 export const TYPES = {
@@ -162,11 +208,16 @@ export const TYPES = {
   THEME_NEUTRAL,
   THEME_KIT,
   THEME_EARTHQUAKE,
+  THEME_SUMMARY,
   // Voice
   LETS_PREPARE_GIRL,
   LETS_PREPARE_BOY,
   EARTHQUAKE_GIRL,
-  EARTHQUAKE_BOY
+  EARTHQUAKE_BOY,
+  SUMMARY_MOTIVATION,
+  SUMMARY_PLAN,
+  SUMMARY_COMMUNITY,
+  SUMMARY_KIT
 };
 
 export default SFX;
