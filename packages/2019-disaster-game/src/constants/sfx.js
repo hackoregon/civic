@@ -32,38 +32,37 @@ const LETS_PREPARE_GIRL = "LETS_PREPARE_GIRL";
 const EARTHQUAKE_BOY = "EARTHQUAKE_BOY";
 const EARTHQUAKE_GIRL = "EARTHQUAKE_GIRL";
 
-// SFX
-const badChoiceSFX = new Howl({
-  src: [badChoice],
+const defaultHowl = {
   autoplay: false,
   loop: false,
   volume: 1
+};
+
+// SFX
+const badChoiceSFX = new Howl({
+  ...defaultHowl,
+  src: [badChoice]
 });
 
 const goodChoiceSFX = new Howl({
+  ...defaultHowl,
   src: [goodChoice],
-  autoplay: false,
-  loop: false,
   volume: 0.35
 });
 
 const startRecordSFX = new Howl({
-  src: [startRecord],
-  autoplay: false,
-  loop: false,
-  volume: 1
+  ...defaultHowl,
+  src: [startRecord]
 });
 
 const badPhoneSFX = new Howl({
-  src: [badPhone],
-  autoplay: false,
-  loop: false
+  ...defaultHowl,
+  src: [badPhone]
 });
 
 const badBasketballSFX = new Howl({
-  src: [badBasketball],
-  autoplay: false,
-  loop: false
+  ...defaultHowl,
+  src: [badBasketball]
 });
 
 // Themes
@@ -113,31 +112,23 @@ const earthquakeHowl = (() =>
 
 // Voice
 const letsPrepareGirl = new Howl({
-  src: [letsPrepareGirlVoice],
-  autoplay: false,
-  loop: false,
-  volume: 1
+  ...defaultHowl,
+  src: [letsPrepareGirlVoice]
 });
 
 const letsPrepareBoy = new Howl({
-  src: [letsPrepareBoyVoice],
-  autoplay: false,
-  loop: false,
-  volume: 1
+  ...defaultHowl,
+  src: [letsPrepareBoyVoice]
 });
 
 const earthquakeGirl = new Howl({
-  src: [earthquakeGirlVoice],
-  autoplay: false,
-  loop: false,
-  volume: 1
+  ...defaultHowl,
+  src: [earthquakeGirlVoice]
 });
 
 const earthquakeBoy = new Howl({
-  src: [earthquakeBoyVoice],
-  autoplay: false,
-  loop: false,
-  volume: 1
+  ...defaultHowl,
+  src: [earthquakeBoyVoice]
 });
 
 const SFX = {
