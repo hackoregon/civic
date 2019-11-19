@@ -1,23 +1,23 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
 import { memo, useEffect, useState } from "react";
+import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
 import { sample } from "lodash";
 
 import { palette } from "../../../constants/style";
+import { TYPES as SFX_TYPES } from "../../../constants/sfx";
+import {
+  playTheme as _playTheme,
+  stopTheme as _stopTheme
+} from "../../../state/sfx";
 import {
   goToNextChapter,
   getActiveChapterDuration
 } from "../../../state/chapters";
 import Timer from "../../../utils/timer";
-
-import Song from "../../atoms/Audio/Song";
-
-import songFile from "../../../../assets/audio/PWolfEarthquakesound15secmp3.mp3";
 import videoFile from "../../../../assets/video/OMG_EARTHQUAKE.mp4";
-import instructionalAudioBoy from "../../../../assets/audio/earthquake_screen/boy_earthquake.mp3";
-import instructionalAudioGirl from "../../../../assets/audio/earthquake_screen/girl_earthquake.mp3";
 
 const containerStyle = css`
   position: relative;
@@ -72,7 +72,7 @@ const visibleMessage = css`
   opacity: 1;
 `;
 
-const QuakeScreen = ({ endChapter, chapterDuration }) => {
+const QuakeScreen = ({ endChapter, chapterDuration, playTheme, stopTheme }) => {
   const [chapterTimer] = useState(new Timer());
   const [showDrop, setShowDrop] = useState(false);
   const [showTakeCover, setShowTakeCover] = useState(false);
@@ -87,6 +87,23 @@ const QuakeScreen = ({ endChapter, chapterDuration }) => {
       chapterTimer.stop();
     };
   }, [chapterDuration, chapterTimer, endChapter]);
+
+  // Music
+  useEffect(() => {
+    const instructionalAudio = sample([
+      SFX_TYPES.EARTHQUAKE_BOY,
+      SFX_TYPES.EARTHQUAKE_GIRL
+    ]);
+
+    playTheme(SFX_TYPES.THEME_EARTHQUAKE);
+    playTheme(instructionalAudio);
+
+    return () => {
+      stopTheme(SFX_TYPES.THEME_EARTHQUAKE);
+      stopTheme(instructionalAudio);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Message timers
   useEffect(() => {
@@ -111,11 +128,6 @@ const QuakeScreen = ({ endChapter, chapterDuration }) => {
       clearTimeout(hideHoldOnTimeout);
     };
   }, []);
-
-  const instructionalAudio = sample([
-    instructionalAudioBoy,
-    instructionalAudioGirl
-  ]);
 
   return (
     <div css={containerStyle}>
@@ -150,15 +162,15 @@ const QuakeScreen = ({ endChapter, chapterDuration }) => {
       >
         <p>HOLD ON</p>
       </div>
-      <Song songFile={songFile} />
-      <Song songFile={instructionalAudio} shouldLoop={false} volume={1.0} />
     </div>
   );
 };
 
 QuakeScreen.propTypes = {
   endChapter: PropTypes.func,
-  chapterDuration: PropTypes.number
+  chapterDuration: PropTypes.number,
+  playTheme: PropTypes.func,
+  stopTheme: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -166,9 +178,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  endChapter() {
-    dispatch(goToNextChapter());
-  }
+  endChapter: bindActionCreators(goToNextChapter, dispatch),
+  playTheme: bindActionCreators(_playTheme, dispatch),
+  stopTheme: bindActionCreators(_stopTheme, dispatch)
 });
 
 export default connect(

@@ -10,9 +10,12 @@ import badPhone from "../../assets/audio/bad-phone.mp3";
 import attractorSong from "../../assets/audio/PWolf-happysong1wfadeinout.mp3";
 import neutralMood from "../../assets/audio/neutral-mood.mp3";
 import kitSong from "../../assets/audio/HappyTheme1fadeinout.mp3";
+import earthquakeSong from "../../assets/audio/PWolfEarthquakesound15secmp3.mp3";
 // Voice
 import letsPrepareBoyVoice from "../../assets/audio/kit_screen/boy_lets_prepare_for_an_earthquake.mp3";
 import letsPrepareGirlVoice from "../../assets/audio/kit_screen/girl_lets_prepare_for_an_earthquake.mp3";
+import earthquakeBoyVoice from "../../assets/audio/earthquake_screen/boy_earthquake.mp3";
+import earthquakeGirlVoice from "../../assets/audio/earthquake_screen/girl_earthquake.mp3";
 
 // SFX
 const BAD_CHOICE = "BAD_CHOICE";
@@ -22,9 +25,12 @@ const START_RECORD = "START_RECORD";
 const THEME_ATTRACTOR = "THEME_ATTRACTOR";
 const THEME_NEUTRAL = "THEME_NEUTRAL";
 const THEME_KIT = "THEME_KIT";
+const THEME_EARTHQUAKE = "THEME_EARTHQUAKE";
 // Voice
 const LETS_PREPARE_BOY = "LETS_PREPARE_BOY";
 const LETS_PREPARE_GIRL = "LETS_PREPARE_GIRL";
+const EARTHQUAKE_BOY = "EARTHQUAKE_BOY";
+const EARTHQUAKE_GIRL = "EARTHQUAKE_GIRL";
 
 // SFX
 const badChoiceSFX = new Howl({
@@ -94,6 +100,17 @@ const kitHowl = (() =>
     }
   }))();
 
+const earthquakeHowl = (() =>
+  new Howl({
+    src: [earthquakeSong],
+    autoplay: false,
+    loop: true,
+    volume: 0.25,
+    onfade: () => {
+      earthquakeHowl.stop();
+    }
+  }))();
+
 // Voice
 const letsPrepareGirl = new Howl({
   src: [letsPrepareGirlVoice],
@@ -104,6 +121,20 @@ const letsPrepareGirl = new Howl({
 
 const letsPrepareBoy = new Howl({
   src: [letsPrepareBoyVoice],
+  autoplay: false,
+  loop: false,
+  volume: 1
+});
+
+const earthquakeGirl = new Howl({
+  src: [earthquakeGirlVoice],
+  autoplay: false,
+  loop: false,
+  volume: 1
+});
+
+const earthquakeBoy = new Howl({
+  src: [earthquakeBoyVoice],
   autoplay: false,
   loop: false,
   volume: 1
@@ -120,9 +151,12 @@ const SFX = {
   THEME_ATTRACTOR: attractorHowl,
   THEME_NEUTRAL: neutralHowl,
   THEME_KIT: kitHowl,
+  THEME_EARTHQUAKE: earthquakeHowl,
   // Voice
   LETS_PREPARE_GIRL: letsPrepareGirl,
-  LETS_PREPARE_BOY: letsPrepareBoy
+  LETS_PREPARE_BOY: letsPrepareBoy,
+  EARTHQUAKE_GIRL: earthquakeGirl,
+  EARTHQUAKE_BOY: earthquakeBoy
 };
 
 export const TYPES = {
@@ -136,9 +170,12 @@ export const TYPES = {
   THEME_ATTRACTOR,
   THEME_NEUTRAL,
   THEME_KIT,
+  THEME_EARTHQUAKE,
   // Voice
   LETS_PREPARE_GIRL,
-  LETS_PREPARE_BOY
+  LETS_PREPARE_BOY,
+  EARTHQUAKE_GIRL,
+  EARTHQUAKE_BOY
 };
 
 export default SFX;
