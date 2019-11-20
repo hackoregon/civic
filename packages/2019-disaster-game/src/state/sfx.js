@@ -68,7 +68,6 @@ export const sfx = createReducer(initialState, {
       // eslint-disable-next-line array-callback-return
       Object.keys(tasksAudio).map(key => {
         const howlObj = tasksAudio[key];
-        console.log(howlObj);
         howlObj.stop();
       });
     } catch (error) {
