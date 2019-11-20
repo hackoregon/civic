@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -66,20 +66,22 @@ class Form extends React.Component {
             ? formikProps.values._visibleIf
             : {};
           const form = (
-            <>{formFromFields(fields, formikProps, dynamicRequire)}</>
+            <Fragment>
+              {formFromFields(fields, formikProps, dynamicRequire)}
+            </Fragment>
           );
           const formSections =
             sections && sections.length > 0
               ? Object.fromEntries(
                   sections.map(section => [
                     section,
-                    <>
+                    <Fragment>
                       {formFromFields(
                         _.pickBy(fields, field => field.section === section),
                         formikProps,
                         dynamicRequire
                       )}
-                    </>
+                    </Fragment>
                   ])
                 )
               : {};
@@ -88,13 +90,13 @@ class Form extends React.Component {
               ? Object.fromEntries(
                   fieldIds.map(id => [
                     id,
-                    <>
+                    <Fragment>
                       {formFromFields(
                         _.pick(fields, id),
                         formikProps,
                         dynamicRequire
                       )}
-                    </>
+                    </Fragment>
                   ])
                 )
               : {};

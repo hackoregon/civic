@@ -1,9 +1,40 @@
 /* eslint-disable no-console */
 /* eslint-disable import/no-extraneous-dependencies */
-import React from "react";
 
-function LayerCreateComponent() {
-  return <div> This is not a form. </div>;
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
+import React, { Fragment } from "react";
+import TestForm from "./TestForm";
+
+const formTitle = css`
+  font-size: 35px;
+  letter-spacing: -2px;
+  margin: 10px 0px;
+`;
+
+class LayerCreateComponent extends React.Component {
+  render() {
+    return (
+      <TestForm
+        onSubmit={values => {
+          console.log(values);
+        }}
+        initialValues={{
+          email: ""
+        }}
+      >
+        {({ formSections }) => (
+          <Fragment>
+            <p css={formTitle}>Test Form</p>
+            <p>This is a test form with a text field.</p>
+            {formSections.testSection}
+          </Fragment>
+        )}
+      </TestForm>
+    );
+  }
 }
+
+LayerCreateComponent.displayName = "LayerCreateComponent";
 
 export default LayerCreateComponent;
