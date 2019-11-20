@@ -10,8 +10,8 @@ import usePrevious from "../../../state/hooks/usePrevious";
 import { palette } from "../../../constants/style";
 import { TYPES as SFX_TYPES } from "../../../constants/sfx";
 import {
-  playTheme as _playTheme,
-  stopTheme as _stopTheme
+  playAudio as _playAudio,
+  stopAudio as _stopAudio
 } from "../../../state/sfx";
 
 const containerStyle = css`
@@ -79,8 +79,8 @@ const SavedBar = ({
   isSummary,
   initialSummaryStyle,
   savedMetrics,
-  playTheme,
-  stopTheme
+  playAudio,
+  stopAudio
 }) => {
   const [playPointsSound, setPlayPointsSound] = useState(false);
   const [soundTimeout, setSoundTimeout] = useState(null);
@@ -93,11 +93,11 @@ const SavedBar = ({
     const savedPets = prevPetsSaved < savedMetrics.petsSaved;
     if (savedMorePeople || savedPets) {
       setPlayPointsSound(true);
-      playTheme(SFX_TYPES.POINTS_EARNED_SFX);
+      playAudio(SFX_TYPES.POINTS_EARNED_SFX);
       const newTimeout = setTimeout(() => {
         setPlayPointsSound(false);
         setSavedType(null);
-        stopTheme(SFX_TYPES.POINTS_EARNED_SFX);
+        stopAudio(SFX_TYPES.POINTS_EARNED_SFX);
       }, 2000);
       setSoundTimeout(newTimeout);
       let saved = "both";
@@ -113,18 +113,18 @@ const SavedBar = ({
       if (soundTimeout) clearTimeout(soundTimeout);
     };
   }, [
-    playTheme,
+    playAudio,
     prevPeopleSaved,
     prevPetsSaved,
     savedMetrics.peopleSaved,
     savedMetrics.petsSaved,
     soundTimeout,
-    stopTheme
+    stopAudio
   ]);
 
   useEffect(() => {
     return () => {
-      stopTheme(SFX_TYPES.POINTS_EARNED_SFX);
+      stopAudio(SFX_TYPES.POINTS_EARNED_SFX);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -180,8 +180,8 @@ SavedBar.propTypes = {
     petsSaved: PropTypes.number,
     peopleSaved: PropTypes.number
   }),
-  playTheme: PropTypes.func,
-  stopTheme: PropTypes.func
+  playAudio: PropTypes.func,
+  stopAudio: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -189,8 +189,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  playTheme: bindActionCreators(_playTheme, dispatch),
-  stopTheme: bindActionCreators(_stopTheme, dispatch)
+  playAudio: bindActionCreators(_playAudio, dispatch),
+  stopAudio: bindActionCreators(_stopAudio, dispatch)
 });
 
 export default connect(

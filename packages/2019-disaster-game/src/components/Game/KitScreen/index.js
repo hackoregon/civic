@@ -6,8 +6,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import {
-  playTheme as _playTheme,
-  stopTheme as _stopTheme
+  playAudio as _playAudio,
+  stopAudio as _stopAudio
 } from "../../../state/sfx";
 import {
   goToNextChapter,
@@ -71,8 +71,8 @@ const KitScreen = ({
   endChapter,
   chapterDuration,
   restartGame,
-  playTheme,
-  stopTheme
+  playAudio,
+  stopAudio
 }) => {
   const [chapterTimer] = useState(new Timer());
   const [restartTimer] = useState(new Timer());
@@ -142,11 +142,11 @@ const KitScreen = ({
 
   // Clean up only on dismount
   useEffect(() => {
-    playTheme(SFX_TYPES.THEME_KIT);
+    playAudio(SFX_TYPES.THEME_KIT);
 
     return () => {
       restartTimer.reset();
-      stopTheme(SFX_TYPES.THEME_KIT);
+      stopAudio(SFX_TYPES.THEME_KIT);
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -201,8 +201,8 @@ KitScreen.propTypes = {
   playerKit: PropTypes.shape({}),
   addPreparerBadge: PropTypes.func,
   restartGame: PropTypes.func,
-  playTheme: PropTypes.func,
-  stopTheme: PropTypes.func
+  playAudio: PropTypes.func,
+  stopAudio: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -216,8 +216,8 @@ const mapDispatchToProps = dispatch => ({
   addItemToPlayerKitInState: bindActionCreators(addItemToPlayerKit, dispatch),
   addPreparerBadge: bindActionCreators(addBadge, dispatch),
   endChapter: bindActionCreators(goToNextChapter, dispatch),
-  playTheme: bindActionCreators(_playTheme, dispatch),
-  stopTheme: bindActionCreators(_stopTheme, dispatch)
+  playAudio: bindActionCreators(_playAudio, dispatch),
+  stopAudio: bindActionCreators(_stopAudio, dispatch)
 });
 
 export default connect(

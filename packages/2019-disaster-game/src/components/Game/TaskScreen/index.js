@@ -20,8 +20,8 @@ import { addBadge, getHeroBadge, addSaved } from "../../../state/user";
 import { getPlayerKit } from "../../../state/kit";
 import usePrevious from "../../../state/hooks/usePrevious";
 import {
-  playTheme as _playTheme,
-  stopTheme as _stopTheme,
+  playAudio as _playAudio,
+  stopAudio as _stopAudio,
   stopAllTaskAudio as _stopAllTaskAudio
 } from "../../../state/sfx";
 import { SOLVING, VOTING, MOVING_MAP } from "../../../constants/actions";
@@ -56,8 +56,8 @@ const TaskScreenContainer = ({
   addToSaved,
   playerKit,
   restartGame,
-  playTheme,
-  stopTheme,
+  playAudio,
+  stopAudio,
   stopAllTaskAudio
 }) => {
   const [shouldEndChapter, setShouldEndChapter] = useState(false);
@@ -191,16 +191,16 @@ const TaskScreenContainer = ({
       addHeroBadge("hero", "earthquakeHeroBadge");
     });
     chapterTimer.start();
-    playTheme(SFX_TYPES.THEME_TASKS);
+    playAudio(SFX_TYPES.THEME_TASKS);
 
     return () => {
       chapterTimer.stop();
       phaseTimer.stop();
       animationTimer.stop();
       audioDelay.stop();
-      stopTheme(SFX_TYPES.THEME_TASKS);
-      stopTheme(SFX_TYPES.TASKS_VOTE_INSTRUCTION);
-      stopTheme(SFX_TYPES.TASKS_MOTIVATE);
+      stopAudio(SFX_TYPES.THEME_TASKS);
+      stopAudio(SFX_TYPES.TASKS_VOTE_INSTRUCTION);
+      stopAudio(SFX_TYPES.TASKS_MOTIVATE);
       stopAllTaskAudio();
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -209,7 +209,7 @@ const TaskScreenContainer = ({
     audioDelay.reset();
     audioDelay.setDuration(4);
     audioDelay.addCompleteCallback(() => {
-      playTheme(SFX_TYPES[activeTask.audioQuestion]);
+      playAudio(SFX_TYPES[activeTask.audioQuestion]);
     });
     audioDelay.start();
   };
@@ -224,18 +224,18 @@ const TaskScreenContainer = ({
     // Do same thing when going to next save yourself task or a new save others task
     if (onNextSaveYourself || switchedToSolving) {
       startTimer(activeTask.time, true, solveCallback);
-      playTheme(SFX_TYPES[activeTask.audioInstruction]);
+      playAudio(SFX_TYPES[activeTask.audioInstruction]);
       startQuestionAudioDelay();
     } else if (onDifferentPhase) {
       if (taskPhase === VOTING) {
         startTimer(votingDuration, false, () => {
           setDoVoteCallback(true);
         });
-        playTheme(SFX_TYPES.TASKS_VOTE_INSTRUCTION);
+        playAudio(SFX_TYPES.TASKS_VOTE_INSTRUCTION);
       }
       if (taskPhase === MOVING_MAP) {
         startTimer(mapTransitionDuration, false, moveMapCallback);
-        playTheme(SFX_TYPES.TASKS_MOTIVATE);
+        playAudio(SFX_TYPES.TASKS_MOTIVATE);
       }
     }
   }, [taskPhase, activeTaskIndex, prevActiveTaskIndex]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -304,8 +304,8 @@ TaskScreenContainer.propTypes = {
   playerKit: PropTypes.shape({}),
   latestHeroBadge: PropTypes.oneOf([PropTypes.shape({}), null]),
   restartGame: PropTypes.func,
-  playTheme: PropTypes.func,
-  stopTheme: PropTypes.func,
+  playAudio: PropTypes.func,
+  stopAudio: PropTypes.func,
   stopAllTaskAudio: PropTypes.func
 };
 
@@ -328,8 +328,8 @@ const mapDispatchToProps = dispatch => ({
   completeActiveTask: bindActionCreators(completeTask, dispatch),
   addHeroBadge: bindActionCreators(addBadge, dispatch),
   addToSaved: bindActionCreators(addSaved, dispatch),
-  playTheme: bindActionCreators(_playTheme, dispatch),
-  stopTheme: bindActionCreators(_stopTheme, dispatch),
+  playAudio: bindActionCreators(_playAudio, dispatch),
+  stopAudio: bindActionCreators(_stopAudio, dispatch),
   stopAllTaskAudio: bindActionCreators(_stopAllTaskAudio, dispatch)
 });
 

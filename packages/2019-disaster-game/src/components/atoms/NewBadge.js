@@ -7,8 +7,8 @@ import { bindActionCreators } from "redux";
 import { palette } from "../../constants/style";
 import { TYPES as SFX_TYPES } from "../../constants/sfx";
 import {
-  playTheme as _playTheme,
-  stopTheme as _stopTheme
+  playAudio as _playAudio,
+  stopAudio as _stopAudio
 } from "../../state/sfx";
 import {
   // getTeamworkBadge,
@@ -59,7 +59,7 @@ const titleText = css`
   font-size: 14rem;
 `;
 
-const NewBadge = ({ type, badges, playTheme, stopTheme }) => {
+const NewBadge = ({ type, badges, playAudio, stopAudio }) => {
   const [badgeInfo, setBadgeInfo] = useState(badges[type]);
   const [hideBadge, setHideBadge] = useState(false);
 
@@ -75,10 +75,10 @@ const NewBadge = ({ type, badges, playTheme, stopTheme }) => {
   }, [badges, type]);
 
   useEffect(() => {
-    playTheme(SFX_TYPES.BADGE_EARNED_SFX);
+    playAudio(SFX_TYPES.BADGE_EARNED_SFX);
 
     return () => {
-      stopTheme(SFX_TYPES.BADGE_EARNED_SFX);
+      stopAudio(SFX_TYPES.BADGE_EARNED_SFX);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -100,8 +100,8 @@ const NewBadge = ({ type, badges, playTheme, stopTheme }) => {
 NewBadge.propTypes = {
   type: PropTypes.string,
   badges: PropTypes.shape({}),
-  playTheme: PropTypes.func,
-  stopTheme: PropTypes.func
+  playAudio: PropTypes.func,
+  stopAudio: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -113,8 +113,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  playTheme: bindActionCreators(_playTheme, dispatch),
-  stopTheme: bindActionCreators(_stopTheme, dispatch)
+  playAudio: bindActionCreators(_playAudio, dispatch),
+  stopAudio: bindActionCreators(_stopAudio, dispatch)
 });
 
 export default connect(

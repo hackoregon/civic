@@ -9,8 +9,8 @@ import PropTypes from "prop-types";
 import { palette } from "../../../constants/style";
 import { TYPES as SFX_TYPES } from "../../../constants/sfx";
 import {
-  playTheme as _playTheme,
-  stopTheme as _stopTheme
+  playAudio as _playAudio,
+  stopAudio as _stopAudio
 } from "../../../state/sfx";
 
 const contentWrapper = css`
@@ -30,17 +30,17 @@ const contentTitle = css`
   margin: 0;
 `;
 
-const TasksIntro = ({ playTheme, stopTheme }) => {
+const TasksIntro = ({ playAudio, stopAudio }) => {
   const instructionalAudio = sample([
     SFX_TYPES.LETS_PREPARE_GIRL,
     SFX_TYPES.LETS_PREPARE_BOY
   ]);
 
   useEffect(() => {
-    playTheme(instructionalAudio);
+    playAudio(instructionalAudio);
 
     return () => {
-      stopTheme(instructionalAudio);
+      stopAudio(instructionalAudio);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -53,13 +53,13 @@ const TasksIntro = ({ playTheme, stopTheme }) => {
 };
 
 TasksIntro.propTypes = {
-  playTheme: PropTypes.func,
-  stopTheme: PropTypes.func
+  playAudio: PropTypes.func,
+  stopAudio: PropTypes.func
 };
 
 const mapDispatchToProps = dispatch => ({
-  playTheme: bindActionCreators(_playTheme, dispatch),
-  stopTheme: bindActionCreators(_stopTheme, dispatch)
+  playAudio: bindActionCreators(_playAudio, dispatch),
+  stopAudio: bindActionCreators(_stopAudio, dispatch)
 });
 
 export default connect(

@@ -8,8 +8,8 @@ import { palette } from "../../../constants/style";
 import { goToNextChapter } from "../../../state/chapters";
 import {
   playSFX as _playSFX,
-  playTheme as _playTheme,
-  stopTheme as _stopTheme
+  playAudio as _playAudio,
+  stopAudio as _stopAudio
 } from "../../../state/sfx";
 import media from "../../../utils/mediaQueries";
 import { TYPES as SFX_TYPES } from "../../../constants/sfx";
@@ -112,17 +112,17 @@ const bg3 = css`
   animation-duration: 10s;
 `;
 
-const AttractorScreen = ({ goToChapter, playSFX, playTheme, stopTheme }) => {
+const AttractorScreen = ({ goToChapter, playSFX, playAudio, stopAudio }) => {
   const play = () => {
     playSFX(SFX_TYPES.START_RECORD);
     goToChapter();
   };
 
   useEffect(() => {
-    playTheme(SFX_TYPES.THEME_ATTRACTOR);
+    playAudio(SFX_TYPES.THEME_ATTRACTOR);
 
     return () => {
-      stopTheme(SFX_TYPES.THEME_ATTRACTOR);
+      stopAudio(SFX_TYPES.THEME_ATTRACTOR);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -156,8 +156,8 @@ const AttractorScreen = ({ goToChapter, playSFX, playTheme, stopTheme }) => {
 AttractorScreen.propTypes = {
   goToChapter: PropTypes.func,
   playSFX: PropTypes.func,
-  playTheme: PropTypes.func,
-  stopTheme: PropTypes.func
+  playAudio: PropTypes.func,
+  stopAudio: PropTypes.func
 };
 
 export default connect(
@@ -169,11 +169,11 @@ export default connect(
     playSFX(id) {
       dispatch(_playSFX(id));
     },
-    playTheme(themeName) {
-      dispatch(_playTheme(themeName));
+    playAudio(themeName) {
+      dispatch(_playAudio(themeName));
     },
-    stopTheme(themeName) {
-      dispatch(_stopTheme(themeName));
+    stopAudio(themeName) {
+      dispatch(_stopAudio(themeName));
     }
   })
 )(memo(AttractorScreen));

@@ -6,8 +6,8 @@ const initialState = {};
 // CONSTANTS
 export const actionTypes = {
   PLAY_SFX: "PLAY_SFX",
-  PLAY_THEME: "PLAY_THEME",
-  STOP_THEME: "STOP_THEME",
+  PLAY_AUDIO: "PLAY_AUDIO",
+  STOP_AUDIO: "STOP_AUDIO",
   STOP_ALL_TASK_AUDIO: "STOP_ALL_TASK_AUDIO"
 };
 
@@ -17,12 +17,12 @@ export const playSFX = id => dispatch => {
   dispatch({ type: actionTypes.PLAY_SFX, id });
 };
 
-export const playTheme = themeName => dispatch => {
-  dispatch({ type: actionTypes.PLAY_THEME, themeName });
+export const playAudio = themeName => dispatch => {
+  dispatch({ type: actionTypes.PLAY_AUDIO, themeName });
 };
 
-export const stopTheme = themeName => dispatch => {
-  dispatch({ type: actionTypes.STOP_THEME, themeName });
+export const stopAudio = themeName => dispatch => {
+  dispatch({ type: actionTypes.STOP_AUDIO, themeName });
 };
 
 export const stopAllTaskAudio = () => dispatch => {
@@ -41,7 +41,7 @@ export const sfx = createReducer(initialState, {
       console.warn("Unknown SFX type requested to play ", action, error);
     }
   },
-  [actionTypes.PLAY_THEME]: (state, action) => {
+  [actionTypes.PLAY_AUDIO]: (state, action) => {
     try {
       const { themeName } = action;
       const howlObj = SFX[TYPES[action.themeName]];
@@ -53,7 +53,7 @@ export const sfx = createReducer(initialState, {
       console.warn("Unknown SFX theme requested to play ", action, error);
     }
   },
-  [actionTypes.STOP_THEME]: (state, action) => {
+  [actionTypes.STOP_AUDIO]: (state, action) => {
     try {
       const { themeName } = action;
       const howlObj = SFX[TYPES[action.themeName]];

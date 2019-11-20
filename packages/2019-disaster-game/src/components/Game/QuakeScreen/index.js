@@ -9,8 +9,8 @@ import { sample } from "lodash";
 import { palette } from "../../../constants/style";
 import { TYPES as SFX_TYPES } from "../../../constants/sfx";
 import {
-  playTheme as _playTheme,
-  stopTheme as _stopTheme
+  playAudio as _playAudio,
+  stopAudio as _stopAudio
 } from "../../../state/sfx";
 import {
   goToNextChapter,
@@ -72,7 +72,7 @@ const visibleMessage = css`
   opacity: 1;
 `;
 
-const QuakeScreen = ({ endChapter, chapterDuration, playTheme, stopTheme }) => {
+const QuakeScreen = ({ endChapter, chapterDuration, playAudio, stopAudio }) => {
   const [chapterTimer] = useState(new Timer());
   const [showDrop, setShowDrop] = useState(false);
   const [showTakeCover, setShowTakeCover] = useState(false);
@@ -95,12 +95,12 @@ const QuakeScreen = ({ endChapter, chapterDuration, playTheme, stopTheme }) => {
       SFX_TYPES.EARTHQUAKE_GIRL
     ]);
 
-    playTheme(SFX_TYPES.THEME_EARTHQUAKE);
-    playTheme(instructionalAudio);
+    playAudio(SFX_TYPES.THEME_EARTHQUAKE);
+    playAudio(instructionalAudio);
 
     return () => {
-      stopTheme(SFX_TYPES.THEME_EARTHQUAKE);
-      stopTheme(instructionalAudio);
+      stopAudio(SFX_TYPES.THEME_EARTHQUAKE);
+      stopAudio(instructionalAudio);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -169,8 +169,8 @@ const QuakeScreen = ({ endChapter, chapterDuration, playTheme, stopTheme }) => {
 QuakeScreen.propTypes = {
   endChapter: PropTypes.func,
   chapterDuration: PropTypes.number,
-  playTheme: PropTypes.func,
-  stopTheme: PropTypes.func
+  playAudio: PropTypes.func,
+  stopAudio: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -179,8 +179,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   endChapter: bindActionCreators(goToNextChapter, dispatch),
-  playTheme: bindActionCreators(_playTheme, dispatch),
-  stopTheme: bindActionCreators(_stopTheme, dispatch)
+  playAudio: bindActionCreators(_playAudio, dispatch),
+  stopAudio: bindActionCreators(_stopAudio, dispatch)
 });
 
 export default connect(

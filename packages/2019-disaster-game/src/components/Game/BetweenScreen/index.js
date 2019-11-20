@@ -6,8 +6,8 @@ import { bindActionCreators } from "redux";
 import PropTypes from "prop-types";
 
 import {
-  playTheme as _playTheme,
-  stopTheme as _stopTheme
+  playAudio as _playAudio,
+  stopAudio as _stopAudio
 } from "../../../state/sfx";
 import { TYPES as SFX_TYPES } from "../../../constants/sfx";
 import { goToNextChapter } from "../../../state/chapters";
@@ -57,8 +57,8 @@ const Outro = ({
   endChapter,
   children,
   chapterDuration,
-  playTheme,
-  stopTheme
+  playAudio,
+  stopAudio
 }) => {
   const [chapterTimer] = useState(new Timer());
 
@@ -73,10 +73,10 @@ const Outro = ({
   }, [chapterTimer, endChapter, chapterDuration]);
 
   useEffect(() => {
-    playTheme(SFX_TYPES.THEME_NEUTRAL);
+    playAudio(SFX_TYPES.THEME_NEUTRAL);
 
     return () => {
-      stopTheme(SFX_TYPES.THEME_NEUTRAL);
+      stopAudio(SFX_TYPES.THEME_NEUTRAL);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -95,14 +95,14 @@ Outro.propTypes = {
   children: PropTypes.shape({}),
   endChapter: PropTypes.func,
   chapterDuration: PropTypes.number,
-  playTheme: PropTypes.func,
-  stopTheme: PropTypes.func
+  playAudio: PropTypes.func,
+  stopAudio: PropTypes.func
 };
 
 const mapDispatchToProps = dispatch => ({
   endChapter: bindActionCreators(goToNextChapter, dispatch),
-  playTheme: bindActionCreators(_playTheme, dispatch),
-  stopTheme: bindActionCreators(_stopTheme, dispatch)
+  playAudio: bindActionCreators(_playAudio, dispatch),
+  stopAudio: bindActionCreators(_stopAudio, dispatch)
 });
 
 export default connect(

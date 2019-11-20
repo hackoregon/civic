@@ -12,8 +12,8 @@ import { goToChapter, goToNextChapter } from "../../../state/chapters";
 import { getReloadMode } from "../../../state/settings";
 import usePrevious from "../../../state/hooks/usePrevious";
 import {
-  playTheme as _playTheme,
-  stopTheme as _stopTheme
+  playAudio as _playAudio,
+  stopAudio as _stopAudio
 } from "../../../state/sfx";
 import Timer from "../../../utils/timer";
 
@@ -182,8 +182,8 @@ const SummaryScreen = ({
   increasePlayCount,
   playCount,
   reloadMode,
-  playTheme,
-  stopTheme
+  playAudio,
+  stopAudio
 }) => {
   const [animationTimer] = useState(new Timer());
   const [animationPhaseIndex, setAnimationPhaseIndex] = useState(-1);
@@ -269,14 +269,14 @@ const SummaryScreen = ({
       prevAnimationPhaseIndex !== animationPhaseIndex;
     if (increasedAnimationIndex) {
       if (animationPhaseIndex === -1) {
-        playTheme(SFX_TYPES.SUMMARY_MOTIVATION);
+        playAudio(SFX_TYPES.SUMMARY_MOTIVATION);
       }
       if (animationPhaseIndex === 1) {
-        playTheme(SFX_TYPES.SUMMARY_PLAN);
+        playAudio(SFX_TYPES.SUMMARY_PLAN);
       } else if (animationPhaseIndex === 2) {
-        playTheme(SFX_TYPES.SUMMARY_COMMUNITY);
+        playAudio(SFX_TYPES.SUMMARY_COMMUNITY);
       } else if (animationPhaseIndex === 3) {
-        playTheme(SFX_TYPES.SUMMARY_KIT);
+        playAudio(SFX_TYPES.SUMMARY_KIT);
       }
     }
     /* eslint-disable react-hooks/exhaustive-deps */
@@ -284,14 +284,14 @@ const SummaryScreen = ({
   /* eslint-enable react-hooks/exhaustive-deps */
 
   useEffect(() => {
-    playTheme(SFX_TYPES.THEME_SUMMARY);
+    playAudio(SFX_TYPES.THEME_SUMMARY);
 
     return () => {
-      stopTheme(SFX_TYPES.THEME_SUMMARY);
-      stopTheme(SFX_TYPES.SUMMARY_MOTIVATION);
-      stopTheme(SFX_TYPES.SUMMARY_PLAN);
-      stopTheme(SFX_TYPES.SUMMARY_COMMUNITY);
-      stopTheme(SFX_TYPES.SUMMARY_KIT);
+      stopAudio(SFX_TYPES.THEME_SUMMARY);
+      stopAudio(SFX_TYPES.SUMMARY_MOTIVATION);
+      stopAudio(SFX_TYPES.SUMMARY_PLAN);
+      stopAudio(SFX_TYPES.SUMMARY_COMMUNITY);
+      stopAudio(SFX_TYPES.SUMMARY_KIT);
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -405,8 +405,8 @@ SummaryScreen.propTypes = {
   increasePlayCount: PropTypes.func,
   playCount: PropTypes.number,
   reloadMode: PropTypes.bool,
-  playTheme: PropTypes.func,
-  stopTheme: PropTypes.func
+  playAudio: PropTypes.func,
+  stopAudio: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -419,8 +419,8 @@ const mapDispatchToProps = dispatch => ({
   resetKitState: bindActionCreators(resetStateKit, dispatch),
   resetTasksState: bindActionCreators(resetStateTasks, dispatch),
   resetUserState: bindActionCreators(resetStateUser, dispatch),
-  playTheme: bindActionCreators(_playTheme, dispatch),
-  stopTheme: bindActionCreators(_stopTheme, dispatch)
+  playAudio: bindActionCreators(_playAudio, dispatch),
+  stopAudio: bindActionCreators(_stopAudio, dispatch)
 });
 
 export default connect(
