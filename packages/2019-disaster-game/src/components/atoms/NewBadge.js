@@ -3,14 +3,18 @@ import { css, jsx } from "@emotion/core";
 import { connect } from "react-redux";
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { bindActionCreators } from "redux";
 import { palette } from "../../constants/style";
+import { TYPES as SFX_TYPES } from "../../constants/sfx";
+import {
+  playTheme as _playTheme,
+  stopTheme as _stopTheme
+} from "../../state/sfx";
 import {
   // getTeamworkBadge,
   getPreparedBadge,
   getHeroBadge
 } from "../../state/user";
-import Song from "./Audio/Song";
-import BadgeEarnedSFX from "../../../assets/audio/badge-earned.mp3";
 
 // background color is blue
 const containerStyle = css`
@@ -55,7 +59,7 @@ const titleText = css`
   font-size: 14rem;
 `;
 
-const NewBadge = ({ type, badges }) => {
+const NewBadge = ({ type, badges, playTheme, stopTheme }) => {
   const [badgeInfo, setBadgeInfo] = useState(badges[type]);
   const [hideBadge, setHideBadge] = useState(false);
 
@@ -70,6 +74,15 @@ const NewBadge = ({ type, badges }) => {
     };
   }, [badges, type]);
 
+  useEffect(() => {
+    playTheme(SFX_TYPES.BADGE_EARNED_SFX);
+
+    return () => {
+      stopTheme(SFX_TYPES.BADGE_EARNED_SFX);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div
       css={css`
@@ -80,14 +93,15 @@ const NewBadge = ({ type, badges }) => {
       <p css={[badgeText, titleText]}>NEW BADGE EARNED!</p>
       <img src={badgeInfo.badgeSVG} alt="Badge" css={badgeStyle} />
       <p css={badgeText}>{badgeInfo.title}</p>
-      <Song songFile={BadgeEarnedSFX} shouldLoop={false} volume={0.25} />
     </div>
   );
 };
 
 NewBadge.propTypes = {
   type: PropTypes.string,
-  badges: PropTypes.shape({})
+  badges: PropTypes.shape({}),
+  playTheme: PropTypes.func,
+  stopTheme: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -98,4 +112,12 @@ const mapStateToProps = state => ({
   }
 });
 
-export default connect(mapStateToProps)(NewBadge);
+const mapDispatchToProps = dispatch => ({
+  playTheme: bindActionCreators(_playTheme, dispatch),
+  stopTheme: bindActionCreators(_stopTheme, dispatch)
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NewBadge);

@@ -6,6 +6,7 @@ import goodChoice from "../../assets/audio/good_choice_short.mp3";
 import startRecord from "../../assets/audio/Start_Record.mp3";
 import badBasketball from "../../assets/audio/bad-basketball.mp3";
 import badPhone from "../../assets/audio/bad-phone.mp3";
+import badgeEarned from "../../assets/audio/badge-earned.mp3";
 // Themes
 import attractorSong from "../../assets/audio/PWolf-happysong1wfadeinout.mp3";
 import neutralMood from "../../assets/audio/neutral-mood.mp3";
@@ -53,6 +54,7 @@ import rubbleQuestionGirlVoice from "../../assets/audio/task_screen/girl/rubble.
 const BAD_CHOICE = "BAD_CHOICE";
 const GOOD_CHOICE = "GOOD_CHOICE";
 const START_RECORD = "START_RECORD";
+const BADGE_EARNED_SFX = "BADGE_EARNED_SFX";
 // Themes
 const THEME_ATTRACTOR = "THEME_ATTRACTOR";
 const THEME_NEUTRAL = "THEME_NEUTRAL";
@@ -121,6 +123,12 @@ const badPhoneSFX = new Howl({
 const badBasketballSFX = new Howl({
   ...defaultHowl,
   src: [badBasketball]
+});
+
+const badgeEarnedSFX = new Howl({
+  ...defaultHowl,
+  src: [badgeEarned],
+  volume: 0.25
 });
 
 // Themes
@@ -354,6 +362,7 @@ const SFX = {
   START_RECORD: startRecordSFX,
   [phone]: badPhoneSFX,
   [basketball]: badBasketballSFX,
+  BADGE_EARNED_SFX: badgeEarnedSFX,
   // Themes
   THEME_ATTRACTOR: attractorHowl,
   THEME_NEUTRAL: neutralHowl,
@@ -383,6 +392,7 @@ export const TYPES = {
   START_RECORD,
   [phone]: phone,
   [basketball]: basketball,
+  BADGE_EARNED_SFX,
   // Themes
   THEME_ATTRACTOR,
   THEME_NEUTRAL,
