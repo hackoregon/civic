@@ -1,5 +1,5 @@
 import { createReducer } from "redux-starter-kit";
-import SFX, { TYPES } from "../constants/sfx";
+import SFX, { TYPES, tasksAudio } from "../constants/sfx";
 
 const initialState = {};
 
@@ -7,7 +7,8 @@ const initialState = {};
 export const actionTypes = {
   PLAY_SFX: "PLAY_SFX",
   PLAY_THEME: "PLAY_THEME",
-  STOP_THEME: "STOP_THEME"
+  STOP_THEME: "STOP_THEME",
+  STOP_ALL_TASK_AUDIO: "STOP_ALL_TASK_AUDIO"
 };
 
 // ACTIONS
@@ -22,6 +23,10 @@ export const playTheme = themeName => dispatch => {
 
 export const stopTheme = themeName => dispatch => {
   dispatch({ type: actionTypes.STOP_THEME, themeName });
+};
+
+export const stopAllTaskAudio = () => dispatch => {
+  dispatch({ type: actionTypes.STOP_ALL_TASK_AUDIO });
 };
 
 // REDUCER
@@ -53,6 +58,19 @@ export const sfx = createReducer(initialState, {
       const { themeName } = action;
       const howlObj = SFX[TYPES[action.themeName]];
       howlObj.fade(howlObj.volume(), 0, 750, state[`${themeName}_ID`]);
+    } catch (error) {
+      // eslint-disable-next-line
+      console.warn("Unknown SFX theme requested to stop ", action, error);
+    }
+  },
+  [actionTypes.STOP_ALL_TASK_AUDIO]: (state, action) => {
+    try {
+      // eslint-disable-next-line array-callback-return
+      Object.keys(tasksAudio).map(key => {
+        const howlObj = tasksAudio[key];
+        console.log(howlObj);
+        howlObj.stop();
+      });
     } catch (error) {
       // eslint-disable-next-line
       console.warn("Unknown SFX theme requested to stop ", action, error);
