@@ -43,7 +43,7 @@ export const SlideFailure = actionEmitter(SLIDE_FAILURE);
 
 // Thunk actions
 export const fetchSandbox = fetchAdapter(
-  "https://service.civicpdx.org/sandbox/api/package_info/",
+  "https://gist.githubusercontent.com/mendozaline/459cafee30b77de696bf48e5bbaec347/raw/8d5ef752c734dcd0a32d321a578177ee670ad6a8/vt-packages.json",
   {
     start: SandboxStart,
     success: SandboxSuccess,
