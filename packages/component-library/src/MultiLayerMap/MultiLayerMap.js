@@ -63,7 +63,11 @@ const MultiLayerMap = props => {
         selectedFoundationDatum
       })
     ) : mapType === "VectorTilesMap" ? (
-      <VectorTilesMap {...layerData} key={layerData.vectorTilesID} />
+      <VectorTilesMap
+        {...layerData}
+        key={layerData.vectorTilesID}
+        index={index}
+      />
     ) : null;
   });
 

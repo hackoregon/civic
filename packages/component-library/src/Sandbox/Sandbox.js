@@ -124,6 +124,7 @@ const Sandbox = ({
           bboxData={layerData.length > 0 ? layerData[0].data : []}
           bboxPadding={50}
           useScrollZoom
+          onBaseMapClick={info => console.log(info)}
         >
           <CivicSandboxMap
             mapLayers={layerData}

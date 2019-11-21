@@ -1,6 +1,6 @@
 import React from "react";
 import { Source, Layer } from "react-map-gl";
-import { string, shape } from "prop-types";
+import { string, shape, number } from "prop-types";
 
 const VectorTilesMap = React.memo(props => {
   const {
@@ -10,7 +10,8 @@ const VectorTilesMap = React.memo(props => {
     layerType,
     sourceLayer,
     paint,
-    layerPosition
+    layerPosition,
+    index
   } = props;
 
   const sourceLayerProp = {
@@ -18,17 +19,12 @@ const VectorTilesMap = React.memo(props => {
   };
 
   return (
-    <Source
-      type="vector"
-      id={vectorTilesID}
-      url={vectorTilesURL}
-      key={vectorTilesID}
-    >
+    <Source type="vector" id={vectorTilesID + index} url={vectorTilesURL}>
       <Layer
         beforeId={layerPosition}
         id={layerID}
         type={layerType}
-        source={vectorTilesID}
+        source={vectorTilesID + index}
         paint={paint}
         {...sourceLayerProp}
       />
@@ -43,7 +39,8 @@ VectorTilesMap.propTypes = {
   layerType: string,
   sourceLayer: string,
   paint: shape({}),
-  layerPosition: string
+  layerPosition: string,
+  index: number
 };
 
 export default VectorTilesMap;
