@@ -8,6 +8,7 @@ const ScreenGridMap = props => {
     data,
     getPosition,
     opacity,
+    colorDomain,
     colorRange,
     cellSizePixels,
     autoHighlight,
@@ -45,6 +46,7 @@ const ScreenGridMap = props => {
           data={data}
           getPosition={getPosition}
           opacity={opacity}
+          colorDomain={colorDomain}
           colorRange={colorRange}
           cellSizePixels={cellSizePixels}
           autoHighlight={autoHighlight}
@@ -68,6 +70,7 @@ ScreenGridMap.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   getPosition: PropTypes.func,
   opacity: PropTypes.number,
+  colorDomain: PropTypes.arrayOf(PropTypes.number),
   colorRange: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
   cellSizePixels: PropTypes.number,
   autoHighlight: PropTypes.bool,
