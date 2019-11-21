@@ -19,15 +19,16 @@ import {
 import { addBadge, getHeroBadge, addSaved } from "../../../state/user";
 import { getPlayerKit } from "../../../state/kit";
 import usePrevious from "../../../state/hooks/usePrevious";
+import {
+  playAudio as _playAudio,
+  stopAudio as _stopAudio,
+  stopAllTaskAudio as _stopAllTaskAudio
+} from "../../../state/sfx";
 import { SOLVING, VOTING, MOVING_MAP } from "../../../constants/actions";
+import { TYPES as SFX_TYPES } from "../../../constants/sfx";
 import NewBadge from "../../atoms/NewBadge";
 import { chooseRandomTask } from "./voteUtils";
 import TaskScreen from "./TaskScreen";
-// Audio
-import taskSong from "../../../../assets/audio/HappyTheme2fadeinout.mp3";
-import audioVoteInstruction from "../../../../assets/audio/task_screen/boy/who_should_we_help_next.mp3";
-import audioVoteMotivate from "../../../../assets/audio/task_screen/boy/lets_go_do_it_enthusiastic.mp3";
-import Song from "../../atoms/Audio/Song";
 
 const chapterDuration = 120;
 const votingDuration = 15;
@@ -54,7 +55,10 @@ const TaskScreenContainer = ({
   addHeroBadge,
   addToSaved,
   playerKit,
-  restartGame
+  restartGame,
+  playAudio,
+  stopAudio,
+  stopAllTaskAudio
 }) => {
   const [shouldEndChapter, setShouldEndChapter] = useState(false);
   const [displayedFinalBadge, setDisplayedFinalBadge] = useState(false);
@@ -63,11 +67,8 @@ const TaskScreenContainer = ({
   const [taskVotes, setTaskVotes] = useState(taskVotesDefault);
   const [correctItemsChosen, setCorrectItemsChosen] = useState(0);
   const [doVoteCallback, setDoVoteCallback] = useState(false);
-  const [
-    finishedTaskInstructionalAudio,
-    setFinishedTaskInstructionalAudio
-  ] = useState(false);
   const [finishedFinalSolvePhase, setFinishedFinalSolvePhase] = useState(false);
+  const [audioDelay] = useState(new Timer());
   const [chapterTimer] = useState(new Timer());
   const [phaseTimer] = useState(new Timer());
   const [animationTimer] = useState(new Timer());
@@ -190,12 +191,28 @@ const TaskScreenContainer = ({
       addHeroBadge("hero", "earthquakeHeroBadge");
     });
     chapterTimer.start();
+    playAudio(SFX_TYPES.THEME_TASKS);
+
     return () => {
       chapterTimer.stop();
       phaseTimer.stop();
       animationTimer.stop();
+      audioDelay.stop();
+      stopAudio(SFX_TYPES.THEME_TASKS);
+      stopAudio(SFX_TYPES.TASKS_VOTE_INSTRUCTION);
+      stopAudio(SFX_TYPES.TASKS_MOTIVATE);
+      stopAllTaskAudio();
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const startQuestionAudioDelay = () => {
+    audioDelay.reset();
+    audioDelay.setDuration(4);
+    audioDelay.addCompleteCallback(() => {
+      playAudio(SFX_TYPES[activeTask.audioQuestion]);
+    });
+    audioDelay.start();
+  };
 
   // Timer: on game phase change
   useEffect(() => {
@@ -207,14 +224,18 @@ const TaskScreenContainer = ({
     // Do same thing when going to next save yourself task or a new save others task
     if (onNextSaveYourself || switchedToSolving) {
       startTimer(activeTask.time, true, solveCallback);
+      playAudio(SFX_TYPES[activeTask.audioInstruction]);
+      startQuestionAudioDelay();
     } else if (onDifferentPhase) {
       if (taskPhase === VOTING) {
         startTimer(votingDuration, false, () => {
           setDoVoteCallback(true);
         });
+        playAudio(SFX_TYPES.TASKS_VOTE_INSTRUCTION);
       }
       if (taskPhase === MOVING_MAP) {
         startTimer(mapTransitionDuration, false, moveMapCallback);
+        playAudio(SFX_TYPES.TASKS_MOTIVATE);
       }
     }
   }, [taskPhase, activeTaskIndex, prevActiveTaskIndex]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -245,15 +266,6 @@ const TaskScreenContainer = ({
     prevHeroBadgeAcquired
   ]);
 
-  // Audio
-  const playHowCanIHelp = () => {
-    setFinishedTaskInstructionalAudio(true);
-  };
-
-  const resetQuestion = () => {
-    setFinishedTaskInstructionalAudio(false);
-  };
-
   const correctItem = activeTask && activeTask.requiredItem;
   const playerHasCorrectItemInKit = !!(activeTask && playerKit[correctItem]);
 
@@ -272,39 +284,6 @@ const TaskScreenContainer = ({
         restartGame={restartGame}
         isDisplayingBadge={displayBadge}
       />
-      <Song songFile={taskSong} />
-      {!shouldEndChapter && taskPhase === VOTING && (
-        <Song songFile={audioVoteInstruction} shouldLoop={false} volume={1.0} />
-      )}
-      {taskPhase === MOVING_MAP && (
-        <Song songFile={audioVoteMotivate} shouldLoop={false} volume={1.0} />
-      )}
-      {taskPhase === SOLVING && (
-        <Song
-          songFile={activeTask.audioInstruction}
-          shouldLoop={false}
-          volume={1.0}
-          onend={playHowCanIHelp}
-        />
-      )}
-      {/* Hack around to get audio for 2nd save yourself task. Can be done programatically but coding fast */}
-      {activeTaskIndex === 1 && (
-        <Song
-          songFile={activeTask.audioInstruction}
-          shouldLoop={false}
-          volume={1.0}
-          onend={playHowCanIHelp}
-        />
-      )}
-      {/* Task question plays after instructional audio */}
-      {!shouldEndChapter && finishedTaskInstructionalAudio && activeTask && (
-        <Song
-          songFile={activeTask.audioQuestion}
-          shouldLoop={false}
-          volume={1.0}
-          onend={resetQuestion}
-        />
-      )}
     </Fragment>
   );
 };
@@ -324,7 +303,10 @@ TaskScreenContainer.propTypes = {
   addToSaved: PropTypes.func,
   playerKit: PropTypes.shape({}),
   latestHeroBadge: PropTypes.oneOf([PropTypes.shape({}), null]),
-  restartGame: PropTypes.func
+  restartGame: PropTypes.func,
+  playAudio: PropTypes.func,
+  stopAudio: PropTypes.func,
+  stopAllTaskAudio: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -345,7 +327,10 @@ const mapDispatchToProps = dispatch => ({
   addNextTask: bindActionCreators(addTask, dispatch),
   completeActiveTask: bindActionCreators(completeTask, dispatch),
   addHeroBadge: bindActionCreators(addBadge, dispatch),
-  addToSaved: bindActionCreators(addSaved, dispatch)
+  addToSaved: bindActionCreators(addSaved, dispatch),
+  playAudio: bindActionCreators(_playAudio, dispatch),
+  stopAudio: bindActionCreators(_stopAudio, dispatch),
+  stopAllTaskAudio: bindActionCreators(_stopAllTaskAudio, dispatch)
 });
 
 export default connect(

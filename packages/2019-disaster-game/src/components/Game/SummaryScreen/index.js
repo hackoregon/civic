@@ -11,15 +11,13 @@ import { resetState as resetStateUser } from "../../../state/user";
 import { goToChapter, goToNextChapter } from "../../../state/chapters";
 import { getReloadMode } from "../../../state/settings";
 import usePrevious from "../../../state/hooks/usePrevious";
+import {
+  playAudio as _playAudio,
+  stopAudio as _stopAudio
+} from "../../../state/sfx";
 import Timer from "../../../utils/timer";
 
-import motivationalAudio from "../../../../assets/audio/summary_screen/8_boy_you_did_great.mp3";
-import buildKitAudio from "../../../../assets/audio/summary_screen/buildKit.mp3";
-import makePlanAudio from "../../../../assets/audio/summary_screen/makePlan.mp3";
-import meetNeighborsAudio from "../../../../assets/audio/summary_screen/meetNeighbors.mp3";
-import summarySong from "../../../../assets/audio/summary_screen/summary_song.mp3";
-import Song from "../../atoms/Audio/Song";
-
+import { TYPES as SFX_TYPES } from "../../../constants/sfx";
 import { palette } from "../../../constants/style";
 import QRCode from "../../../../assets/earthquake-heroes-qr-code.svg";
 import BadgesBar from "../../atoms/TitleBar/BadgesDrawer";
@@ -183,7 +181,9 @@ const SummaryScreen = ({
   replay,
   increasePlayCount,
   playCount,
-  reloadMode
+  reloadMode,
+  playAudio,
+  stopAudio
 }) => {
   const [animationTimer] = useState(new Timer());
   const [animationPhaseIndex, setAnimationPhaseIndex] = useState(-1);
@@ -263,6 +263,38 @@ const SummaryScreen = ({
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // Music
+  useEffect(() => {
+    const increasedAnimationIndex =
+      prevAnimationPhaseIndex !== animationPhaseIndex;
+    if (increasedAnimationIndex) {
+      if (animationPhaseIndex === -1) {
+        playAudio(SFX_TYPES.SUMMARY_MOTIVATION);
+      }
+      if (animationPhaseIndex === 1) {
+        playAudio(SFX_TYPES.SUMMARY_PLAN);
+      } else if (animationPhaseIndex === 2) {
+        playAudio(SFX_TYPES.SUMMARY_COMMUNITY);
+      } else if (animationPhaseIndex === 3) {
+        playAudio(SFX_TYPES.SUMMARY_KIT);
+      }
+    }
+    /* eslint-disable react-hooks/exhaustive-deps */
+  }, [prevAnimationPhaseIndex, animationPhaseIndex, animationPhaseIndex]);
+  /* eslint-enable react-hooks/exhaustive-deps */
+
+  useEffect(() => {
+    playAudio(SFX_TYPES.THEME_SUMMARY);
+
+    return () => {
+      stopAudio(SFX_TYPES.THEME_SUMMARY);
+      stopAudio(SFX_TYPES.SUMMARY_MOTIVATION);
+      stopAudio(SFX_TYPES.SUMMARY_PLAN);
+      stopAudio(SFX_TYPES.SUMMARY_COMMUNITY);
+      stopAudio(SFX_TYPES.SUMMARY_KIT);
+    };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
     <div css={pageWrapper}>
       <div css={bg} />
@@ -305,9 +337,6 @@ const SummaryScreen = ({
         <p css={contentText}>
           Talk to your family about where you will meet after an earthquake.
         </p>
-        {animationPhaseIndex === 1 && (
-          <Song songFile={makePlanAudio} shouldLoop={false} volume={1.0} />
-        )}
       </div>
 
       <div
@@ -321,9 +350,6 @@ const SummaryScreen = ({
         <p css={contentText}>
           Do you have neighbors who will need extra help after a disaster?
         </p>
-        {animationPhaseIndex === 2 && (
-          <Song songFile={meetNeighborsAudio} shouldLoop={false} volume={1.0} />
-        )}
       </div>
 
       <div
@@ -337,9 +363,6 @@ const SummaryScreen = ({
         <p css={contentText}>
           Gather enough supplies for your family for at least seven days!
         </p>
-        {animationPhaseIndex === 3 && (
-          <Song songFile={buildKitAudio} shouldLoop={false} volume={1.0} />
-        )}
       </div>
 
       <div
@@ -369,8 +392,6 @@ const SummaryScreen = ({
           <p css={buttonFont}>PLAY AGAIN</p>
         </button>
       </div>
-      <Song songFile={summarySong} volume={0.5} />
-      <Song songFile={motivationalAudio} shouldLoop={false} volume={1.0} />
     </div>
   );
 };
@@ -383,7 +404,9 @@ SummaryScreen.propTypes = {
   resetUserState: PropTypes.func,
   increasePlayCount: PropTypes.func,
   playCount: PropTypes.number,
-  reloadMode: PropTypes.bool
+  reloadMode: PropTypes.bool,
+  playAudio: PropTypes.func,
+  stopAudio: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -395,7 +418,9 @@ const mapDispatchToProps = dispatch => ({
   replay: bindActionCreators(goToChapter, dispatch),
   resetKitState: bindActionCreators(resetStateKit, dispatch),
   resetTasksState: bindActionCreators(resetStateTasks, dispatch),
-  resetUserState: bindActionCreators(resetStateUser, dispatch)
+  resetUserState: bindActionCreators(resetStateUser, dispatch),
+  playAudio: bindActionCreators(_playAudio, dispatch),
+  stopAudio: bindActionCreators(_stopAudio, dispatch)
 });
 
 export default connect(
