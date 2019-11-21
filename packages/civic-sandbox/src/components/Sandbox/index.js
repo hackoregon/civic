@@ -101,15 +101,12 @@ class SandboxComponent extends React.Component {
 
     const reorderSelectedSlides = selectedSlide.includes(slideName)
       ? selectedSlide.filter(name => name !== slideName)
-      : [
-        ...selectedSlide,
-        slideName
-      ];
-      // : [
-      //     ...selectedSlide.slice(0, orderSelectedSlides[slideName]),
-      //     slideName,
-      //     ...selectedSlide.slice(orderSelectedSlides[slideName])
-      //   ];
+      : [...selectedSlide, slideName];
+    // : [
+    //     ...selectedSlide.slice(0, orderSelectedSlides[slideName]),
+    //     slideName,
+    //     ...selectedSlide.slice(orderSelectedSlides[slideName])
+    //   ];
 
     updateSetSlides(reorderSelectedSlides);
   };
