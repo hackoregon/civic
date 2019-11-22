@@ -1,6 +1,5 @@
 import React from "react";
 import { GeoJsonLayer } from "deck.gl";
-import shortid from "shortid";
 import { number, string, bool, func, arrayOf, shape } from "prop-types";
 import {
   createColorScale,
@@ -96,7 +95,7 @@ const MultiChoroplethMap = props => {
 
   return (
     <GeoJsonLayer
-      key={shortid.generate()}
+      key={id}
       id={id}
       pickable={pickable}
       data={data}

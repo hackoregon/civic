@@ -27,23 +27,27 @@ const MultiLayerMap = props => {
     return mapType === "PathMap" ? (
       MultiPathMap({
         ...layerData,
+        id: mapType + index,
         index,
         onHoverSlide
       })
     ) : mapType === "ScatterPlotMap" ? (
       MultiScatterPlotMap({
         ...layerData,
+        id: mapType + index,
         index,
         onHoverSlide
       })
     ) : mapType === "ScreenGridMap" ? (
       MultiScreenGridMap({
         ...layerData,
+        id: mapType + index,
         index
       })
     ) : mapType === "IconMap" ? (
       MultiIconMap({
         ...layerData,
+        id: mapType + index,
         index,
         onHoverSlide,
         viewport
@@ -51,6 +55,7 @@ const MultiLayerMap = props => {
     ) : mapType === "SmallPolygonMap" ? (
       MultiSmallPolygonMap({
         ...layerData,
+        id: mapType + index,
         index,
         onHoverSlide,
         viewport
@@ -58,6 +63,7 @@ const MultiLayerMap = props => {
     ) : mapType === "ChoroplethMap" ? (
       MultiChoroplethMap({
         ...layerData,
+        id: mapType + index,
         index,
         onHoverSlide,
         onLayerClick,
