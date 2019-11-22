@@ -2,6 +2,7 @@
 import React from "react";
 import { arrayOf, func, node, shape } from "prop-types";
 import DeckGL from "deck.gl";
+
 import MultiPathMap from "./MultiPathMap";
 import MultiScatterPlotMap from "./MultiScatterPlotMap";
 import MultiScreenGridMap from "./MultiScreenGridMap";
