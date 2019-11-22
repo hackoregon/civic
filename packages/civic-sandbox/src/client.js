@@ -1,4 +1,4 @@
 import MockWrapper from "@hackoregon/mock-wrapper";
-import { App, Reducers } from "./index";
+import { App, Routes, Reducers } from "./index";
 
-MockWrapper(App, Reducers);
+MockWrapper(App, Reducers, Routes);

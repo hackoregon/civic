@@ -78,9 +78,14 @@ import {
   App as Housing2019App
 } from "@hackoregon/2019-housing";
 
+import {
+  Routes as SandboxRoutes,
+  Reducers as SandboxReducers,
+  App as SandboxApp
+} from "@hackoregon/civic-sandbox";
+
 // hygen import injection (do not remove or modify this line)
 
-import { Reducers as SandboxReducers } from "@hackoregon/civic-sandbox";
 import {
   CardDetailPage,
   CardDetailPageEmbed,
@@ -91,7 +96,6 @@ import "./fonts.css";
 // eslint-disable-next-line import/no-named-as-default
 import RootPage from "./components/RootPage";
 import HomePage from "./components/HomePage";
-import SandboxPage from "./components/SandboxPage";
 import PortlandCollectionPage from "./components/PortlandCollectionPage";
 import CityNotFoundPage from "./components/CityNotFoundPage";
 import StateNotFoundPage from "./components/StateNotFoundPage";
@@ -264,8 +268,10 @@ const routes = {
     },
     {
       path: "sandbox",
-      component: SandboxPage
+      indexRoute: { component: SandboxApp },
+      childRoutes: SandboxRoutes(store)
     },
+
     // Route for OMSI QR Code for Installation
     {
       path: "earthquakeheroes",
