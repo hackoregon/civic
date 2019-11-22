@@ -37,7 +37,7 @@ const EarthquakeDamageEstimatesForBuildingsInTillamookCountyVisualization = ({
   return (
     <>
       <RadioButtonGroup
-        grpLabel="Type"
+        grpLabel="Building Type"
         labels={Object.keys(mapStyles)}
         value={dataType}
         onChange={event => {
@@ -48,8 +48,8 @@ const EarthquakeDamageEstimatesForBuildingsInTillamookCountyVisualization = ({
       <p>
         {hasLoaded ? (
           <small>
-            Zoom for more granular details. A brighter color indicates more
-            costly damage.
+            Zoom for more granular details. A darker color indicates a greater
+            proportion of financial losses.
           </small>
         ) : (
           <small>
@@ -61,7 +61,7 @@ const EarthquakeDamageEstimatesForBuildingsInTillamookCountyVisualization = ({
       <ChartContainer
         loading={!hasLoaded}
         title="Building Impact of a 9.0 Cascadia Earthquake"
-        subtitle={`Estimated financial damage to ${
+        subtitle={`Projected financial damage to ${
           mapStyles[dataType].buildingType
         } buildings in a Cascadia 9.0 earthquake.`}
       >
