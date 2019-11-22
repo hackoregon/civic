@@ -4,7 +4,7 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import React, { Fragment } from "react";
-import TestForm from "./TestForm";
+import LayerCreateForm from "./LayerCreateForm";
 
 const formTitle = css`
   font-size: 35px;
@@ -15,7 +15,7 @@ const formTitle = css`
 class LayerCreateComponent extends React.Component {
   render() {
     return (
-      <TestForm
+      <LayerCreateForm
         onSubmit={values => {
           console.log(values);
         }}
@@ -30,7 +30,7 @@ class LayerCreateComponent extends React.Component {
             {formSections.testSection}
           </Fragment>
         )}
-      </TestForm>
+      </LayerCreateForm>
     );
   }
 }

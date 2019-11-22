@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
-import { Formik } from "formik";
 import * as Yup from "yup";
 import _ from "lodash";
+import { Formik } from "formik";
 
 export const formFromFields = (fields, formikProps, dynamicRequire) =>
   Object.keys(fields).map(id =>
