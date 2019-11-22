@@ -9,12 +9,9 @@ const isProd = process.env.NODE_ENV === "production";
 const outputPath = resolve(process.cwd(), isProd ? "dist" : "build");
 
 const config = {};
-if (process.env.TILESERVER) {
-  config.TILESERVER = process.env.TILESERVER;
-}
-if (process.env.SENTRYDSN) {
-  config.SENTRYDSN = process.env.SENTRYDSN;
-}
+if (process.env.TILESERVER) config.TILESERVER = process.env.TILESERVER;
+if (process.env.SENTRYDSN) config.SENTRYDSN = process.env.SENTRYDSN;
+if (process.env.RELOADMODE) config.RELOADMODE = process.env.RELOADMODE;
 
 // eslint-disable-next-line no-console
 console.log(chalk.gray("\nStarting the production server..."));

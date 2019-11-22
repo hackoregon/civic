@@ -8,6 +8,7 @@ const ScreenGridMap = props => {
     data,
     getPosition,
     opacity,
+    colorDomain,
     colorRange,
     cellSizePixels,
     autoHighlight,
@@ -17,8 +18,23 @@ const ScreenGridMap = props => {
     getSize,
     getWeight,
     getCursor,
-    onHover
+    aggregation,
+    tooltipInfo,
+    x,
+    y,
+    onHover,
+    children
   } = props;
+
+  const tooltip = React.Children.map(children, child => {
+    return React.cloneElement(child, {
+      tooltipInfo,
+      x,
+      y
+    });
+  });
+
+  const tooltipRender = tooltipInfo && x && y ? tooltip : null;
 
   return (
     <div>
@@ -30,6 +46,7 @@ const ScreenGridMap = props => {
           data={data}
           getPosition={getPosition}
           opacity={opacity}
+          colorDomain={colorDomain}
           colorRange={colorRange}
           cellSizePixels={cellSizePixels}
           autoHighlight={autoHighlight}
@@ -40,8 +57,10 @@ const ScreenGridMap = props => {
           getSize={getSize}
           getWeight={getWeight}
           onHover={onHover}
+          aggregation={aggregation}
         />
       </DeckGL>
+      {tooltipRender}
     </div>
   );
 };
@@ -51,6 +70,7 @@ ScreenGridMap.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   getPosition: PropTypes.func,
   opacity: PropTypes.number,
+  colorDomain: PropTypes.arrayOf(PropTypes.number),
   colorRange: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
   cellSizePixels: PropTypes.number,
   autoHighlight: PropTypes.bool,
@@ -60,7 +80,12 @@ ScreenGridMap.propTypes = {
   getSize: PropTypes.func,
   getWeight: PropTypes.func,
   getCursor: PropTypes.func,
-  onHover: PropTypes.func
+  aggregation: PropTypes.oneOf(["SUM", "MIN", "MEAN", "MAX"]),
+  tooltipInfo: PropTypes.shape({}),
+  x: PropTypes.number,
+  y: PropTypes.number,
+  onHover: PropTypes.func,
+  children: PropTypes.node
 };
 
 ScreenGridMap.defaultProps = {
@@ -73,7 +98,8 @@ ScreenGridMap.defaultProps = {
   gpuAggregation: false,
   getSize: () => 1,
   getWeight: () => 1,
-  getCursor: () => "crosshair"
+  getCursor: () => "crosshair",
+  aggregation: "SUM"
 };
 
 export default ScreenGridMap;

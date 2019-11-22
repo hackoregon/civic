@@ -21,6 +21,7 @@ SETTINGS_FACTORY.getInitialSettings = () => {
     maxVelocityY: 0,
     tileServerApi: ENV.TILESERVER,
     sentryDSN: ENV.SENTRYDSN,
+    reloadMode: !!ENV.RELOADMODE,
     mode
   };
 

@@ -55,3 +55,8 @@ export const getSentryDSNApi = createSelector(
   ["settings.sentryDSN"],
   api => api
 );
+
+export const getReloadMode = createSelector(
+  ["settings.reloadMode"],
+  reloadMode => reloadMode
+);

@@ -5,14 +5,7 @@ import { PropTypes } from "prop-types";
 import { getActiveChapterData, goToNextChapter } from "../../../state/chapters";
 import Timer from "../../../utils/timer";
 
-import Song from "../../atoms/Audio/Song";
-
-const DefaultScreen = ({
-  activeChapter,
-  endChapter,
-  chapterDuration = 60,
-  songFile
-}) => {
+const DefaultScreen = ({ activeChapter, endChapter, chapterDuration = 60 }) => {
   const [chapterTimer] = useState(new Timer());
 
   // start a timer for the _entire_ chapter
@@ -28,7 +21,6 @@ const DefaultScreen = ({
   return (
     <>
       <h1>{activeChapter.title} screen</h1>
-      {songFile && <Song songFile={songFile} />}
     </>
   );
 };
@@ -38,8 +30,7 @@ DefaultScreen.propTypes = {
     title: PropTypes.string
   }),
   endChapter: PropTypes.func,
-  chapterDuration: PropTypes.number,
-  songFile: PropTypes.node
+  chapterDuration: PropTypes.number
 };
 
 const mapStateToProps = state => ({

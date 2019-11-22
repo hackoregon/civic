@@ -2,13 +2,17 @@ import { memo, useState, useEffect } from "react";
 /** @jsx jsx */
 import { css, jsx, keyframes } from "@emotion/core";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import PropTypes from "prop-types";
 
-import { palette } from "../../../constants/style";
+import {
+  playAudio as _playAudio,
+  stopAudio as _stopAudio
+} from "../../../state/sfx";
+import { TYPES as SFX_TYPES } from "../../../constants/sfx";
 import { goToNextChapter } from "../../../state/chapters";
+import { palette } from "../../../constants/style";
 import Timer from "../../../utils/timer";
-import Song from "../../atoms/Audio/Song";
-import neutralMood from "../../../../assets/audio/neutral-mood.mp3";
 
 const pageWrapper = css`
   display: grid;
@@ -49,7 +53,13 @@ const bg3 = css`
   animation-duration: 10s;
 `;
 
-const Outro = ({ endChapter, children, chapterDuration }) => {
+const Outro = ({
+  endChapter,
+  children,
+  chapterDuration,
+  playAudio,
+  stopAudio
+}) => {
   const [chapterTimer] = useState(new Timer());
 
   // start a timer for the _entire_ chapter
@@ -62,13 +72,21 @@ const Outro = ({ endChapter, children, chapterDuration }) => {
     };
   }, [chapterTimer, endChapter, chapterDuration]);
 
+  useEffect(() => {
+    playAudio(SFX_TYPES.THEME_NEUTRAL);
+
+    return () => {
+      stopAudio(SFX_TYPES.THEME_NEUTRAL);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div css={pageWrapper}>
       <div css={bg} />
       <div css={[bg, bg2]} />
       <div css={[bg, bg3]} />
       {children}
-      <Song songFile={neutralMood} />
     </div>
   );
 };
@@ -76,13 +94,15 @@ const Outro = ({ endChapter, children, chapterDuration }) => {
 Outro.propTypes = {
   children: PropTypes.shape({}),
   endChapter: PropTypes.func,
-  chapterDuration: PropTypes.number
+  chapterDuration: PropTypes.number,
+  playAudio: PropTypes.func,
+  stopAudio: PropTypes.func
 };
 
 const mapDispatchToProps = dispatch => ({
-  endChapter() {
-    dispatch(goToNextChapter());
-  }
+  endChapter: bindActionCreators(goToNextChapter, dispatch),
+  playAudio: bindActionCreators(_playAudio, dispatch),
+  stopAudio: bindActionCreators(_stopAudio, dispatch)
 });
 
 export default connect(
