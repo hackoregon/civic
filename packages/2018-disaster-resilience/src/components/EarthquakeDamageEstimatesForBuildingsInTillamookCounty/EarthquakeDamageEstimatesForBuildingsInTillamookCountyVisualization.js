@@ -6,7 +6,6 @@ import { Link } from "react-router";
 
 import {
   BaseMap,
-  VisualizationColors,
   RadioButtonGroup,
   ScreenGridMap,
   MapTooltip,
@@ -85,24 +84,35 @@ const EarthquakeDamageEstimatesForBuildingsInTillamookCountyVisualization = ({
                 opacity={mapStyles[dataType].opacity}
                 getWeight={f => f.properties[mapStyles[dataType].field]}
                 getSize={() => 15}
-                colorRange={VisualizationColors.sequential.thermal}
+                colorRange={
+                  /* temporary implementation until #1152 is resolved */
+
+                  [
+                    [255, 255, 178],
+                    [254, 217, 118],
+                    [254, 178, 76],
+                    [253, 141, 60],
+                    [240, 59, 32],
+                    [189, 0, 38]
+                  ]
+                }
+                colorDomain={[0, 1]}
                 getCursor={() => "default"}
-                aggregation="SUM"
+                aggregation="MEAN"
               >
                 <MapTooltip
                   tooltipDataArray={[
+                    {
+                      name: `Average loss ratio`,
+                      field: "cellWeight",
+                      formatField: civicFormat.percentage
+                    },
                     {
                       name: `Number of ${
                         mapStyles[dataType].buildingType
                       } buildings`,
                       field: "cellCount",
                       formatField: civicFormat.numeric
-                    },
-                    {
-                      name: `Average loss ratio`,
-                      field: "cellWeight",
-                      totalField: "cellCount",
-                      formatField: civicFormat.percentage
                     }
                   ]}
                   isScreenGrid
