@@ -73,8 +73,8 @@ class Summary extends Component {
 
         <div style={summaryFormat}>
           Get involved and advocate for better policies and disaster
-          preparedness and more funding for agencies like the return Portland
-          Bureau of Emergency Managment.
+          preparedness and more funding for agencies like the Portland
+          Bureau of Emergency Management.
         </div>
 
         <div style={summaryFormat}>Contact City Council members:</div>
