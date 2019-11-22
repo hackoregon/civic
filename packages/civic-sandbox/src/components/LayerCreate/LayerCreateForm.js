@@ -15,7 +15,7 @@ const fields = {
   },
   email2: {
     label: "Email",
-    section: "testSection2",
+    section: "testSection",
     component: TextField,
     validation: Yup.string("Enter your email")
       .email("Enter a valid email")
@@ -27,7 +27,7 @@ const LayerCreateForm = ({ initialValues, onSubmit, children }) => (
   <Fragment>
     <Form
       fields={fields}
-      sections={["testSection", "testSection2"]}
+      sections={["testSection"]}
       initialValues={initialValues}
       onSubmit={onSubmit}
     >
