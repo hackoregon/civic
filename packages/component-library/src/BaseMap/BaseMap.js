@@ -57,8 +57,7 @@ class BaseMap extends Component {
       tooltipInfo: null,
       x: null,
       y: null,
-      mounted: false,
-      mapboxRef: null
+      mounted: false
     };
     this.mapRef = createRef();
   }
@@ -86,11 +85,6 @@ class BaseMap extends Component {
       );
       this.onViewportChange(bboxViewport);
     }
-
-    const map = this.mapRef.current.getMap();
-    map.on("load", () => {
-      this.setState({ mapboxRef: map });
-    });
   }
 
   componentWillReceiveProps(props) {
@@ -207,7 +201,7 @@ class BaseMap extends Component {
   };
 
   render() {
-    const { viewport, tooltipInfo, x, y, mounted, mapboxRef } = this.state;
+    const { viewport, tooltipInfo, x, y, mounted } = this.state;
     const {
       height,
       containerHeight,
@@ -250,8 +244,7 @@ class BaseMap extends Component {
         tooltipInfo,
         x,
         y,
-        onHover: info => this.onHover(info),
-        mapboxMap: mapboxRef
+        onHover: info => this.onHover(info)
       });
     });
 
@@ -356,7 +349,7 @@ class BaseMap extends Component {
               options={{ ...geocoderOptions }}
             />
           )}
-          {mapboxRef && childrenLayers}
+          {childrenLayers}
         </MapGL>
       </div>
     );
@@ -415,8 +408,7 @@ BaseMap.propTypes = {
   useFitBounds: PropTypes.bool,
   bboxData: PropTypes.arrayOf(PropTypes.shape({})),
   bboxPadding: PropTypes.number,
-  useScrollZoom: PropTypes.bool,
-  mapboxRef: PropTypes.shape({})
+  useScrollZoom: PropTypes.bool
 };
 
 BaseMap.defaultProps = {
@@ -442,8 +434,7 @@ BaseMap.defaultProps = {
   useFitBounds: false,
   bboxData: [],
   bboxPadding: 10,
-  useScrollZoom: false,
-  mapboxRef: null
+  useScrollZoom: false
 };
 
 export default Dimensions()(BaseMap);
