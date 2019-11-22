@@ -6,10 +6,11 @@ import { Link } from "react-router";
 
 import {
   BaseMap,
-  VisualizationColors,
   RadioButtonGroup,
   ScreenGridMap,
-  ChartContainer
+  MapTooltip,
+  ChartContainer,
+  civicFormat
 } from "@hackoregon/component-library";
 
 const EarthquakeDamageEstimatesForBuildingsInTillamookCountyVisualization = ({
@@ -36,7 +37,7 @@ const EarthquakeDamageEstimatesForBuildingsInTillamookCountyVisualization = ({
   return (
     <>
       <RadioButtonGroup
-        grpLabel="Type"
+        grpLabel="Building Type"
         labels={Object.keys(mapStyles)}
         value={dataType}
         onChange={event => {
@@ -47,8 +48,8 @@ const EarthquakeDamageEstimatesForBuildingsInTillamookCountyVisualization = ({
       <p>
         {hasLoaded ? (
           <small>
-            Zoom for more granular details. A brighter color indicates more
-            costly damage.
+            Zoom for more granular details. A darker color indicates a greater
+            proportion of financial losses.
           </small>
         ) : (
           <small>
@@ -60,7 +61,7 @@ const EarthquakeDamageEstimatesForBuildingsInTillamookCountyVisualization = ({
       <ChartContainer
         loading={!hasLoaded}
         title="Building Impact of a 9.0 Cascadia Earthquake"
-        subtitle={`Estimated financial damage to ${
+        subtitle={`Projected financial damage to ${
           mapStyles[dataType].buildingType
         } buildings in a Cascadia 9.0 earthquake.`}
       >
@@ -76,14 +77,48 @@ const EarthquakeDamageEstimatesForBuildingsInTillamookCountyVisualization = ({
               civicMapStyle={mapStyles[dataType].map}
             >
               <ScreenGridMap
-                data={data.damageEstimates.value}
+                data={data.damageEstimates.value.filter(
+                  feature => feature.properties[mapStyles[dataType].field]
+                )}
                 getPosition={f => f.geometry && f.geometry.coordinates}
                 opacity={mapStyles[dataType].opacity}
-                getWeight={f => f.properties[mapStyles[dataType].field] || 0}
+                getWeight={f => f.properties[mapStyles[dataType].field]}
                 getSize={() => 15}
-                colorRange={VisualizationColors.sequential.thermal}
+                colorRange={
+                  /* temporary implementation until #1152 is resolved */
+
+                  [
+                    [255, 255, 178],
+                    [254, 217, 118],
+                    [254, 178, 76],
+                    [253, 141, 60],
+                    [240, 59, 32],
+                    [189, 0, 38]
+                  ]
+                }
+                colorDomain={[0, 1]}
                 getCursor={() => "default"}
-              />
+                aggregation="MEAN"
+              >
+                <MapTooltip
+                  tooltipDataArray={[
+                    {
+                      name: `Average loss ratio`,
+                      field: "cellWeight",
+                      formatField: civicFormat.percentage
+                    },
+                    {
+                      name: `Number of ${
+                        mapStyles[dataType].buildingType
+                      } buildings`,
+                      field: "cellCount",
+                      formatField: civicFormat.numeric
+                    }
+                  ]}
+                  isScreenGrid
+                  wide
+                />
+              </ScreenGridMap>
             </BaseMap>
             <Link to="/sandbox">See more in the Civic Sandbox</Link>
           </>

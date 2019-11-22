@@ -9,8 +9,8 @@ const EarthquakeDamageEstimatesForBuildingsInTillamookCountyMeta = (/* data */) 
   introText: (
     <p>
       The severity of building damage from an earthquake varies depending on
-      building type. This card highlights opportunities for mitigation actions
-      that may reduce damages in residential and commercial structures.
+      building type. This visualization highlights opportunities for mitigation
+      actions that may reduce damages in residential and commercial structures.
     </p>
   ),
   visualization: EarthquakeDamageEstimatesForBuildingsInTillamookCountyVisualization, // data, isLoading are passed to this as props
@@ -25,7 +25,7 @@ const EarthquakeDamageEstimatesForBuildingsInTillamookCountyMeta = (/* data */) 
     </p>
   ),
   shareText:
-    "A Cascadia 9.0 earthquake event would likely produce devastating destruction of buildings in the Tillamook County area. We provide an interactive visualization of the projected financial damage to buildings as a loss ratio after such an event. The loss ratio of a building is the dollar cost of likely damages sustained during an earthquake divided by the total value of the building.",
+    "A Cascadia 9.0 earthquake event would likely produce devastating destruction of buildings in the Tillamook County area. This visualization shows projected financial damage to buildings in this scenario as a loss ratio — the dollar cost of damage divided by the total value of the building.",
   tags: [
     "Disaster Resilience",
     "Earthquake",
