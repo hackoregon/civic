@@ -173,6 +173,68 @@ export const getSelectedSlideDatum = createSelector(
   }
 );
 
+export const getSelectedBaseMapDatum = createSelector(
+  getSandbox,
+  getSelectedSlidesData,
+  getSelectedSlides,
+  ({ selectedBaseMapDatum }, slides, selectedSlides) => {
+    if (
+      !selectedBaseMapDatum ||
+      !selectedBaseMapDatum.feature.object ||
+      !slides
+    )
+      return;
+
+    const { feature: slideFeature, index: slideIndex } = selectedBaseMapDatum;
+
+    const activeLayerName = selectedSlides[slideIndex];
+
+    const activeLayer = slides.find(s => {
+      return s.displayName === activeLayerName;
+    });
+
+    if (
+      !activeLayer ||
+      !activeLayer.visualization ||
+      !activeLayer.visualization.tooltip
+    )
+      return;
+    const tooltipFields = activeLayer.visualization.tooltip;
+
+    const tooltipInfo = {
+      x: slideFeature.x,
+      y: slideFeature.y,
+      content: []
+    };
+    if (
+      tooltipFields &&
+      tooltipFields.primary &&
+      tooltipFields.primary.label &&
+      tooltipFields.primary.fieldName
+    ) {
+      const tooltipFieldName = tooltipFields.primary.fieldName;
+      tooltipInfo.content.push({
+        name: tooltipFields.primary.label,
+        value: slideFeature.object.properties[tooltipFieldName]
+      });
+    }
+    if (
+      tooltipFields &&
+      tooltipFields.secondary &&
+      tooltipFields.secondary.label &&
+      tooltipFields.secondary.fieldName
+    ) {
+      tooltipInfo.content.push({
+        name: tooltipFields.secondary.label,
+        value: slideFeature.object.properties[tooltipFields.secondary.fieldName]
+      });
+    }
+
+    // eslint-disable-next-line consistent-return
+    return tooltipInfo;
+  }
+);
+
 export const getSelectedFoundationDatum = createSelector(
   getSandbox,
   getSelectedSlidesData,

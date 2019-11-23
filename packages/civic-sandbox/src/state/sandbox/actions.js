@@ -23,6 +23,7 @@ export const SLIDE_FAILURE = "SANDBOX/SLIDE_FAILURE";
 export const SET_SLIDES = "SANDBOX/SET_SLIDES";
 export const SET_FOUNDATION_DATUM = "SANDBOX/SET_FOUNDATION_DATUM";
 export const SET_SLIDE_DATUM = "SANDBOX/SET_SLIDE_DATUM";
+export const SET_BASE_MAP_DATUM = "SANDBOX/SET_BASE_MAP_DATUM";
 
 // Simple actions
 export const SandboxStart = actionEmitter(SANDBOX_START);
@@ -104,6 +105,14 @@ export const setSelectedFoundationDatum = (feature = {}, index) => {
 export const setSelectedSlideDatum = (feature = {}, index) => {
   return {
     type: SET_SLIDE_DATUM,
+    feature,
+    index
+  };
+};
+
+export const setSelectedBaseMapDatum = (feature = {}, index) => {
+  return {
+    type: SET_BASE_MAP_DATUM,
     feature,
     index
   };
