@@ -47,7 +47,7 @@ const Sandbox = ({
   styles,
   onFoundationClick,
   onSlideHover,
-  onBaseMapClick,
+  onBaseMapHover,
   tooltipInfo,
   tooltipInfoVector,
   allSlides,
@@ -84,10 +84,10 @@ const Sandbox = ({
         x: info.point[0],
         y: info.point[1]
       };
-      onBaseMapClick(selectedDatum, selectedIndex);
+      onBaseMapHover(selectedDatum, selectedIndex);
     } else {
       const selectedDatum = {};
-      onBaseMapClick(selectedDatum, selectedIndex);
+      onBaseMapHover(selectedDatum, selectedIndex);
     }
   };
 
@@ -95,7 +95,7 @@ const Sandbox = ({
     const selectedDatum = {
       object: {}
     };
-    onBaseMapClick(selectedDatum);
+    onBaseMapHover(selectedDatum);
   };
 
   return (
@@ -210,7 +210,7 @@ Sandbox.propTypes = {
   styles: string,
   onFoundationClick: func,
   onSlideHover: func,
-  onBaseMapClick: func,
+  onBaseMapHover: func,
   tooltipInfo: shape({
     content: arrayOf(shape({})),
     x: number,
