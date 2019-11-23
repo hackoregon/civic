@@ -234,6 +234,8 @@ class BaseMap extends Component {
       children,
       useContainerHeight,
       onBaseMapClick,
+      onBaseMapHover,
+      onBaseMapMouseOut,
       mapboxData,
       mapboxDataId,
       mapboxLayerType,
@@ -338,6 +340,9 @@ class BaseMap extends Component {
           ref={this.mapRef}
           {...mapGLOptions}
           onClick={onBaseMapClick}
+          onHover={onBaseMapHover}
+          onMouseOut={onBaseMapMouseOut}
+          onBlur={onBaseMapMouseOut}
           onLoad={onMapLoad}
           scrollZoom={useScrollZoom}
         >
@@ -407,6 +412,8 @@ BaseMap.propTypes = {
   animate: PropTypes.bool,
   animationDuration: PropTypes.number,
   onBaseMapClick: PropTypes.func,
+  onBaseMapHover: PropTypes.func,
+  onBaseMapMouseOut: PropTypes.func,
   mapboxDataId: PropTypes.string,
   mapboxData: PropTypes.shape({
     type: PropTypes.string,
