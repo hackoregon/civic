@@ -63,6 +63,9 @@ const Sandbox = ({
       : setBaseMapStyle("sandbox-dark");
   };
 
+  const featuresArr = layerData.length ? layerData[0].data : [];
+  const boundBox = layerData.length ? layerData[0].boundBox : [];
+
   return (
     <div css={styles}>
       <div
@@ -120,8 +123,8 @@ const Sandbox = ({
           initialLongitude={-97}
           useContainerHeight
           updateViewport={false}
-          useFitBounds
-          bboxData={layerData.length > 0 ? layerData[0].data : []}
+          boundBox={boundBox}
+          bboxData={featuresArr}
           bboxPadding={50}
           useScrollZoom
           onBaseMapClick={info => console.log(info)}
