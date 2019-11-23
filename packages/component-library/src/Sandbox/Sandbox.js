@@ -47,7 +47,9 @@ const Sandbox = ({
   styles,
   onFoundationClick,
   onSlideHover,
+  onBaseMapClick,
   tooltipInfo,
+  tooltipInfoVector,
   allSlides,
   selectedFoundationDatum,
   areSlidesLoading,
@@ -65,6 +67,36 @@ const Sandbox = ({
 
   const featuresArr = layerData.length ? layerData[0].data : [];
   const boundBox = layerData.length ? layerData[0].boundBox : [];
+
+  const onHoverVectorLayer = info => {
+    const [selectedFeature] = info.features;
+    const selectedProps = selectedFeature.properties;
+    const selectedIndex =
+      selectedFeature.layer &&
+      selectedFeature.layer.metadata &&
+      selectedFeature.layer.metadata["sandbox:index"];
+
+    if (selectedProps && selectedIndex !== undefined) {
+      const selectedDatum = {
+        object: {
+          properties: selectedProps
+        },
+        x: info.point[0],
+        y: info.point[1]
+      };
+      onBaseMapClick(selectedDatum, selectedIndex);
+    } else {
+      const selectedDatum = {};
+      onBaseMapClick(selectedDatum, selectedIndex);
+    }
+  };
+
+  const mouseOutVectorLayer = () => {
+    const selectedDatum = {
+      object: {}
+    };
+    onBaseMapClick(selectedDatum);
+  };
 
   return (
     <div css={styles}>
@@ -127,7 +159,8 @@ const Sandbox = ({
           bboxData={featuresArr}
           bboxPadding={50}
           useScrollZoom
-          onBaseMapClick={info => console.log(info)}
+          onBaseMapHover={onHoverVectorLayer}
+          onBaseMapMouseOut={mouseOutVectorLayer}
         >
           <CivicSandboxMap
             mapLayers={layerData}
@@ -136,6 +169,9 @@ const Sandbox = ({
             selectedFoundationDatum={selectedFoundationDatum}
           >
             {tooltipInfo && <CivicSandboxTooltip tooltipData={tooltipInfo} />}
+            {tooltipInfoVector && (
+              <CivicSandboxTooltip tooltipData={tooltipInfoVector} />
+            )}
           </CivicSandboxMap>
         </BaseMap>
       </div>
@@ -174,7 +210,13 @@ Sandbox.propTypes = {
   styles: string,
   onFoundationClick: func,
   onSlideHover: func,
+  onBaseMapClick: func,
   tooltipInfo: shape({
+    content: arrayOf(shape({})),
+    x: number,
+    y: number
+  }),
+  tooltipInfoVector: shape({
     content: arrayOf(shape({})),
     x: number,
     y: number
