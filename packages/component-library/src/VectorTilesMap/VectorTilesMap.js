@@ -18,6 +18,10 @@ const VectorTilesMap = React.memo(props => {
     "source-layer": sourceLayer
   };
 
+  const metaProps = {
+    "sandbox:index": index
+  };
+
   return (
     <Source type="vector" id={vectorTilesID + index} url={vectorTilesURL}>
       <Layer
@@ -27,6 +31,7 @@ const VectorTilesMap = React.memo(props => {
         source={vectorTilesID + index}
         paint={paint}
         {...sourceLayerProp}
+        metadata={metaProps}
       />
     </Source>
   );
