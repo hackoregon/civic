@@ -6,6 +6,6 @@ before: //\s+hygen\s+route\s+injection\s+\(do\s+not\s+remove\s+or\s+modify\s+thi
 ---
         {
           path: "<%=packageTitle%>",
-          component: <%=pascalTitle%><%=year%>App,
+          indexRoute: { component: <%=pascalTitle%><%=year%>App },
           childRoutes: <%=pascalTitle%><%=year%>Routes(store)
         },
