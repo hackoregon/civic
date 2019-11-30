@@ -43,10 +43,12 @@ class SandboxComponent extends React.Component {
   constructor() {
     super();
     this.state = {
-      drawerVisible: true
+      drawerVisible: true,
+      dialogVisible: true
     };
     this.updateSlide = this.updateSlide.bind(this);
     this.toggleDrawer = this.toggleDrawer.bind(this);
+    this.toggleDialog = this.toggleDialog.bind(this);
   }
 
   componentDidMount() {
@@ -124,6 +126,14 @@ class SandboxComponent extends React.Component {
     });
   };
 
+  toggleDialog = () => {
+    this.setState(prevState => {
+      return {
+        dialogVisible: !prevState.dialogVisible
+      };
+    });
+  };
+
   render() {
     const {
       layerSlides,
@@ -149,7 +159,7 @@ class SandboxComponent extends React.Component {
       selectedFoundationDatum,
       foundationClick
     } = this.props;
-    const { drawerVisible } = this.state;
+    const { drawerVisible, dialogVisible } = this.state;
 
     const styles = css(`
       font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
@@ -162,6 +172,7 @@ class SandboxComponent extends React.Component {
         updateFoundation={renderSetFoundation}
         updateSlide={this.updateSlide}
         toggleDrawer={this.toggleDrawer}
+        toggleDialog={this.toggleDialog}
         fetchSlideDataByDate={renderFetchSlideByDate}
         updatePackage={renderSetPackage}
         styles={styles}
@@ -170,6 +181,7 @@ class SandboxComponent extends React.Component {
         selectedFoundation={selectedFoundation}
         selectedSlide={selectedSlide}
         drawerVisible={drawerVisible}
+        dialogVisible={dialogVisible}
         slideData={selectedSlidesData}
         defaultSlides={slidesData}
         foundationData={selectedFoundationData}
