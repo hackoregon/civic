@@ -14,7 +14,7 @@ import BaseMap from "../BaseMap/BaseMap";
 import CivicSandboxMap from "../MultiLayerMap/MultiLayerMap";
 import CivicSandboxTooltip from "../CivicSandboxMap/CivicSandboxTooltip";
 import SandboxDrawer from "./SandboxDrawer";
-import Dialog from "../Dialog/Dialog";
+import SandboxIntroDialog from "./SandboxIntroDialog";
 
 const baseMapWrapper = css(`
   height: 80vh;
@@ -160,6 +160,7 @@ const Sandbox = ({
           }
         `}
       >
+        <SandboxIntroDialog open={dialogVisible} onClose={toggleDialog} />
         <SandboxDrawer
           data={data}
           selectedSlide={selectedSlide}
@@ -213,9 +214,6 @@ const Sandbox = ({
             )}
           </CivicSandboxMap>
         </BaseMap>
-        <Dialog open={dialogVisible} onClose={toggleDialog}>
-          <h1>Welcome to Civic Sandbox</h1>
-        </Dialog>
       </div>
     </div>
   );
