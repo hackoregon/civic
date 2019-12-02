@@ -15,6 +15,7 @@ import CivicSandboxMap from "../MultiLayerMap/MultiLayerMap";
 import CivicSandboxTooltip from "../CivicSandboxMap/CivicSandboxTooltip";
 import SandboxDrawer from "./SandboxDrawer";
 import SandboxIntroDialog from "./SandboxIntroDialog";
+import SandboxLegend from "./SandboxLegend";
 
 const baseMapWrapper = css(`
   height: 100vh;
@@ -183,6 +184,7 @@ const Sandbox = ({
           areSlidesLoading={areSlidesLoading}
           errors={errors}
           updateSlideKey={updateSlideKey}
+          selectedFoundationDatum={selectedFoundationDatum}
         />
       </div>
       <div css={baseMapWrapper}>
@@ -214,6 +216,13 @@ const Sandbox = ({
             )}
           </CivicSandboxMap>
         </BaseMap>
+        <SandboxLegend
+          foundationData={layerData}
+          allSlides={allSlides}
+          foundationMapProps={layerData}
+          areSlidesLoading={areSlidesLoading}
+          errors={errors}
+        />
       </div>
     </div>
   );
