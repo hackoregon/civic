@@ -16,12 +16,29 @@ const buttonWrapper = css`
 
 const SandboxIntroDialog = ({ open, onClose }) => (
   <Dialog open={open} onClose={onClose}>
+    <div
+      css={css(`
+            margin: 0;
+            padding: 0;
+            background-color: #201024;
+            color: white;
+            height: 35px;
+            text-align: center;
+          `)}
+    >
+      <h2
+        css={css(`
+              margin: 0;
+            `)}
+      >
+        CIVIC Sandbox
+      </h2>
+    </div>
     <div css={contentWrapper}>
-      <h1>CIVIC Sandbox</h1>
-      <h2>
+      <h3>
         The CIVIC Sandbox is a curated data exploration tool to encourage
         exploration, enable comparison, and impact decision making.
-      </h2>
+      </h3>
       <div css={buttonWrapper}>
         <ButtonNew label="Add Your Data" />
         <ButtonNew label="Explore Data" onClick={onClose} />

@@ -44,11 +44,15 @@ class SandboxComponent extends React.Component {
     super();
     this.state = {
       drawerVisible: true,
-      dialogVisible: true
+      dialogVisible: true,
+      drawerVisualization: true,
+      drawerLayerSelector: false
     };
     this.updateSlide = this.updateSlide.bind(this);
     this.toggleDrawer = this.toggleDrawer.bind(this);
     this.toggleDialog = this.toggleDialog.bind(this);
+    this.toggleDrawerVisualization = this.toggleDrawerVisualization.bind(this);
+    this.toggleDrawerLayerSelector = this.toggleDrawerLayerSelector.bind(this);
   }
 
   componentDidMount() {
@@ -134,6 +138,30 @@ class SandboxComponent extends React.Component {
     });
   };
 
+  toggleDrawerVisualization = () => {
+    this.setState(prevState => {
+      return {
+        drawerVisualization: true,
+        drawerLayerSelector: false,
+        drawerVisible: !(
+          prevState.drawerVisible && prevState.drawerVisualization
+        )
+      };
+    });
+  };
+
+  toggleDrawerLayerSelector = () => {
+    this.setState(prevState => {
+      return {
+        drawerVisualization: false,
+        drawerLayerSelector: true,
+        drawerVisible: !(
+          prevState.drawerVisible && prevState.drawerLayerSelector
+        )
+      };
+    });
+  };
+
   render() {
     const {
       layerSlides,
@@ -159,7 +187,12 @@ class SandboxComponent extends React.Component {
       selectedFoundationDatum,
       foundationClick
     } = this.props;
-    const { drawerVisible, dialogVisible } = this.state;
+    const {
+      drawerVisible,
+      dialogVisible,
+      drawerVisualization,
+      drawerLayerSelector
+    } = this.state;
 
     const styles = css(`
       font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
@@ -173,6 +206,8 @@ class SandboxComponent extends React.Component {
         updateSlide={this.updateSlide}
         toggleDrawer={this.toggleDrawer}
         toggleDialog={this.toggleDialog}
+        toggleDrawerLayerSelector={this.toggleDrawerLayerSelector}
+        toggleDrawerVisualization={this.toggleDrawerVisualization}
         fetchSlideDataByDate={renderFetchSlideByDate}
         updatePackage={renderSetPackage}
         styles={styles}
@@ -182,6 +217,8 @@ class SandboxComponent extends React.Component {
         selectedSlide={selectedSlide}
         drawerVisible={drawerVisible}
         dialogVisible={dialogVisible}
+        drawerVisualization={drawerVisualization}
+        drawerLayerSelector={drawerLayerSelector}
         slideData={selectedSlidesData}
         defaultSlides={slidesData}
         foundationData={selectedFoundationData}
