@@ -109,11 +109,11 @@ export class Packages extends React.Component {
     return (
       <div
         className={css(`
-          padding: 10px 0 0 0;
+          padding: 0 0 0 0;
           font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
           border: 0px solid crimson;
           width: 100%;
-          height: 80vh;
+          height: 100vh;
           min-height: 600px;
         `)}
       >

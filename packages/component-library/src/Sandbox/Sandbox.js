@@ -17,15 +17,15 @@ import SandboxDrawer from "./SandboxDrawer";
 import SandboxIntroDialog from "./SandboxIntroDialog";
 
 const baseMapWrapper = css(`
-  height: 80vh;
+  height: 100vh;
   min-height: 650px;
   @media (max-width: 850px) {
-    height: 80vh;
+    height: 100vh;
     min-height: 600px;
   }
   @media (max-width: 500px) {
     width: 100%;
-    height: 75vh;
+    height: 100vh;
     min-height: 390px;
   }
 `);
@@ -147,15 +147,15 @@ const Sandbox = ({
           padding: 0;
           margin: 0;
           width: 100%;
-          height: 80vh;
+          height: 100vh;
           min-height: 650px;
           @media (max-width: 850px) {
-            height: 80vh;
+            height: 100vh;
             min-height: 600px;
           }
           @media (max-width: 500px) {
             width: 100%;
-            height: 75vh;
+            height: 100vh;
             min-height: 390px;
           }
         `}
