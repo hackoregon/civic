@@ -40,7 +40,7 @@ export class Packages extends React.Component {
   componentDidUpdate(prevProps) {
     const { isLoading, sandbox, setPackage: cduSetPackage } = this.props;
     if (!isLoading && prevProps.isLoading) {
-      cduSetPackage(sandbox.packages[0]);
+      cduSetPackage(sandbox.packages[10]);
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({ mapIsOpen: true });
     }
@@ -49,16 +49,12 @@ export class Packages extends React.Component {
     const { selectedFoundationDatum: currentSelectedFoundation } = this.props;
 
     const previousID =
-      previousSelectedFoundation &&
-      previousSelectedFoundation.feature &&
-      previousSelectedFoundation.feature.object
-        ? previousSelectedFoundation.feature.object.id
+      previousSelectedFoundation && previousSelectedFoundation.id
+        ? previousSelectedFoundation.id
         : null;
     const currentID =
-      currentSelectedFoundation &&
-      currentSelectedFoundation.feature &&
-      currentSelectedFoundation.feature.object
-        ? currentSelectedFoundation.feature.object.id
+      currentSelectedFoundation && currentSelectedFoundation.id
+        ? currentSelectedFoundation.id
         : null;
 
     if (previousID !== currentID) {
