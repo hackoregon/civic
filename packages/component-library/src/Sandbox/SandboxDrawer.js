@@ -7,6 +7,7 @@ import SandboxMapLegend from "./SandboxMapLegend";
 import Logo from "../Logo/Logo";
 import Checkbox from "../Checkbox/Checkbox";
 import SandboxBaseMapSelector from "./SandboxBaseMapSelector";
+import CivicSandboxDashboard from "../CivicSandboxDashboard/CivicSandboxDashboard";
 
 // import SandboxDateSelector from "./SandboxDateSelector";
 // import SandboxToggleSwitch from "./SandboxToggleSwitch";
@@ -73,7 +74,8 @@ const SandboxDrawer = props => {
     errors,
     updateSlideKey,
     baseMapStyle,
-    onBaseMapStyleChange
+    onBaseMapStyleChange,
+    selectedFoundationDatum
   } = props;
 
   const loader = (
@@ -91,7 +93,7 @@ const SandboxDrawer = props => {
           text-transform: uppercase;
           font-size: 1rem;
           cursor: pointer;
-          background: #EE495C;
+          background: #1E62BD;
           color: #F3F2F3;
           min-width: 40px;
           text-align: center;
@@ -122,9 +124,6 @@ const SandboxDrawer = props => {
           css={css(`
           background: rgba(243,242,243,0.9);
           overflow-y: auto;
-          border: 1px solid #ddd;
-          border-left: 0;
-          border-radius: 2px;
           box-shadow: -10px 5px 15px -3px rgba(0, 0, 0, 0.2);
           flex-grow: 2;
         `)}
@@ -153,16 +152,22 @@ const SandboxDrawer = props => {
             z-index: 900;
           `)}
           >
-            <h3
-              css={css(`
+            <div css={css(`margin: 0 10px;`)}>
+              {/* <h3
+                css={css(`
               color: #555;
               text-transform: uppercase;
-              margin: 0 10px;
             `)}
-            >
-              Data Collections
-            </h3>
-            <Dropdown
+              >
+                Data Collection
+              </h3> */}
+              <h2>{selectedPackage}</h2>
+              <p>
+                This is a brief description of the selected package, what data
+                sets it uses
+              </p>
+            </div>
+            {/* <Dropdown
               value={selectedPackage}
               options={data.packages.map(p => ({
                 value: p.displayName,
@@ -172,9 +177,9 @@ const SandboxDrawer = props => {
                 updatePackage({ displayName: name });
               }}
               simpleValue
-            />
+            /> */}
           </div>
-          <h3
+          {/* <h3
             css={css(`
             color: #555;
             text-transform: uppercase;
@@ -188,8 +193,8 @@ const SandboxDrawer = props => {
               onBaseMapStyleChange={onBaseMapStyleChange}
               baseMapStyle={baseMapStyle}
             />
-          )}
-          <div
+          )} */}
+          {/* <div
             css={css(`
             position: relative;
             z-index: 200;
@@ -204,9 +209,9 @@ const SandboxDrawer = props => {
             >
               Layers
             </h3>
-          </div>
+          </div> */}
 
-          {!areSlidesLoading && allSlides
+          {/* {!areSlidesLoading && allSlides
             ? allSlides.map((slide, index) => {
                 const dataIndex = foundationData.findIndex(d => {
                   const scatterplot =
@@ -327,7 +332,12 @@ const SandboxDrawer = props => {
             >
               <p>There was an error fetching the data.</p>
             </div>
-          ) : null}
+          ) : null} */}
+          <CivicSandboxDashboard
+            data={selectedFoundationDatum}
+            isDashboardOpen
+            standalone
+          />
         </div>
       )}
     </div>
@@ -350,5 +360,6 @@ SandboxDrawer.propTypes = {
   errors: bool,
   updateSlideKey: func,
   baseMapStyle: string,
-  onBaseMapStyleChange: func
+  onBaseMapStyleChange: func,
+  selectedFoundationDatum: shape({})
 };
