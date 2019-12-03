@@ -139,26 +139,18 @@ class SandboxComponent extends React.Component {
   };
 
   toggleDrawerVisualization = () => {
-    this.setState(prevState => {
-      return {
-        drawerVisualization: true,
-        drawerLayerSelector: false,
-        drawerVisible: !(
-          prevState.drawerVisible && prevState.drawerVisualization
-        )
-      };
+    this.setState({
+      drawerVisualization: true,
+      drawerLayerSelector: false,
+      drawerVisible: true
     });
   };
 
   toggleDrawerLayerSelector = () => {
-    this.setState(prevState => {
-      return {
-        drawerVisualization: false,
-        drawerLayerSelector: true,
-        drawerVisible: !(
-          prevState.drawerVisible && prevState.drawerLayerSelector
-        )
-      };
+    this.setState({
+      drawerVisualization: false,
+      drawerLayerSelector: true,
+      drawerVisible: true
     });
   };
 

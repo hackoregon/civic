@@ -44,6 +44,7 @@ const SandboxDrawer = props => {
     onChange,
     selectedPackage,
     toggleDialog,
+    toggleDrawer,
     toggleVisualization,
     toggleLayerSelector,
     dialogVisible,
@@ -72,6 +73,10 @@ const SandboxDrawer = props => {
     }
   `);
 
+  const on = css(`
+    opacity: 1;
+  `);
+
   const active = css(`
     opacity: 1;
     box-shadow: inset 0px 0px 3px 2px rgba(255, 255, 255, 1);
@@ -91,15 +96,15 @@ const SandboxDrawer = props => {
             text-align: center;
           `)}
         >
-          {/* <div
+          <div
             onClick={toggleDrawer}
             onKeyPress={toggleDrawer}
             role="button"
             tabIndex={0}
-            css={[buttonStyle, active]}
+            css={[buttonStyle, on]}
           >
             {drawerVisible ? ">" : "<"}
-          </div> */}
+          </div>
           <div
             onClick={toggleVisualization}
             onKeyPress={toggleVisualization}
@@ -195,6 +200,7 @@ SandboxDrawer.propTypes = {
   onChange: func,
   selectedPackage: string,
   toggleDialog: func,
+  toggleDrawer: func,
   toggleVisualization: func,
   toggleLayerSelector: func,
   drawerVisible: bool,

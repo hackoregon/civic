@@ -50,13 +50,19 @@ const SandboxDrawerLayerSelector = props => {
           `)}
       >
         <div css={css(`margin: 0 10px;`)}>
+          <h2>
+            <span role="img" aria-label="Map Layers">
+              🥞
+            </span>{" "}
+            Map Layers
+          </h2>
           <h3
             css={css(`
               color: #555;
               text-transform: uppercase;
             `)}
           >
-            Data Collection
+            Collection
           </h3>
         </div>
         <Dropdown

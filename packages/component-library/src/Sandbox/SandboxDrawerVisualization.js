@@ -16,7 +16,13 @@ const SandboxDrawerVisualization = props => {
           `)}
       >
         <div css={css(`margin: 0 10px;`)}>
-          <h2>{selectedPackage}</h2>
+          <h2>
+            <span role="img" aria-label="Map Layers">
+              📉
+            </span>{" "}
+            Data Detail
+          </h2>
+          <h3>{selectedPackage}</h3>
           <p>
             This is a brief description of the selected package, what data sets
             it uses
