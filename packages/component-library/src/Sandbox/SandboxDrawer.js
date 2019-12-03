@@ -20,6 +20,7 @@ const menuOpen = css(`
     min-height: 590px;
   }
   @media (max-width: 500px) {
+    flex-direction: column;
     width: 100%;
     height: 75vh;
     min-height: 390px;
@@ -35,7 +36,11 @@ const menuClosed = css(`
   width: 40px;
   z-index: 5;
   transition: 0.5s;
-
+  @media (max-width: 500px) {
+    flex-direction: column;
+    width: 100%;
+    height: 40px;
+  }
 `);
 
 const SandboxDrawer = props => {
@@ -82,6 +87,12 @@ const SandboxDrawer = props => {
     box-shadow: inset 0px 0px 3px 2px rgba(255, 255, 255, 1);
   `);
 
+  const rotate = css(`
+    @media (max-width: 500px) {
+      transform: rotate(-90deg);
+    }
+  `);
+
   return (
     <div css={drawerVisible ? menuOpen : menuClosed}>
       <div>
@@ -94,6 +105,10 @@ const SandboxDrawer = props => {
             color: #F3F2F3;
             min-width: 40px;
             text-align: center;
+            @media (max-width: 500px) {
+              display: grid;
+              grid-template-columns: repeat(4, auto);
+            }
           `)}
         >
           <div
@@ -101,7 +116,7 @@ const SandboxDrawer = props => {
             onKeyPress={toggleDrawer}
             role="button"
             tabIndex={0}
-            css={[buttonStyle, on]}
+            css={[buttonStyle, on, rotate]}
           >
             {drawerVisible ? ">" : "<"}
           </div>

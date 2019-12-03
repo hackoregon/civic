@@ -25,8 +25,9 @@ const baseMapWrapper = css(`
     min-height: 600px;
   }
   @media (max-width: 500px) {
+    padding-top: 35px;
     width: 100%;
-    height: 100vh;
+    height: calc(100vh - 35px);
     min-height: 390px;
   }
 `);
