@@ -21,13 +21,4 @@ describe("Dialog", () => {
     expect(wrapper.find("Dialog")).to.have.length(1);
     expect(wrapper.find("Dialog").children()).to.have.length(1);
   });
-  it("should render Dialog with children", () => {
-    const wrapper = mount(
-      <Dialog>
-        <h1>Something in the dialog</h1>
-      </Dialog>
-    );
-    expect(wrapper.find("Dialog")).to.have.length(1);
-    expect(wrapper.find("Dialog").children()).to.have.length(1);
-  });
 });
