@@ -38,7 +38,7 @@ const VectorTilesMap = React.memo(props => {
           type={l.layerType}
           source={vectorTilesID + index}
           paint={l.paint}
-          metadata={l.metaProps}
+          metadata={metaProps}
           {...multiSourceLayerProp}
         />
       );

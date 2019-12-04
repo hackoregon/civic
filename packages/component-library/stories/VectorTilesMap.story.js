@@ -32,9 +32,9 @@ const containerWrapper = css`
 `;
 
 const MAP_STYLE_OPTIONS = {
+  "CIVIC Dark": "dark",
   "CIVIC Light": "light",
-  "Sandbox Dark": "sandbox-dark",
-  "CIVIC Dark": "dark"
+  "Sandbox Dark": "sandbox-dark"
 };
 
 export default () =>
@@ -86,6 +86,12 @@ export default () =>
           GROUP_IDS.DESIGN
         );
 
+        const vectorTilesID = text(
+          "Vector Tiles ID:",
+          "source-id-01",
+          GROUP_IDS.DESIGN
+        );
+
         return (
           <div css={containerWrapper}>
             <BaseMap
@@ -99,7 +105,7 @@ export default () =>
               civicMapStyle={civicMapStyle}
             >
               <VectorTilesMap
-                vectorTilesID="source-id-01"
+                vectorTilesID={vectorTilesID}
                 vectorTilesURL={vectorTilesURL}
                 layerID="layer-id-01"
                 layerType={layerType}
@@ -119,19 +125,19 @@ export default () =>
         const vectorTilesURL01 = text(
           "Mapbox Tileset URL - 01:",
           "mapbox://mapbox.mapbox-terrain-v2",
-          GROUP_IDS["VECTOR TILES MAP"]
+          GROUP_IDS["VECTOR TILES MAP 1"]
         );
 
         const layerType01 = text(
           "Type - 01:",
           "line",
-          GROUP_IDS["VECTOR TILES MAP"]
+          GROUP_IDS["VECTOR TILES MAP 1"]
         );
 
         const sourceLayer01 = text(
           "Source Layer - 01:",
           "contour",
-          GROUP_IDS["VECTOR TILES MAP"]
+          GROUP_IDS["VECTOR TILES MAP 1"]
         );
 
         const paint01 = object(
@@ -140,13 +146,19 @@ export default () =>
             "line-color": "fuchsia",
             "line-width": 1
           },
-          GROUP_IDS["VECTOR TILES MAP"]
+          GROUP_IDS["VECTOR TILES MAP 1"]
         );
 
         const layerPosition01 = text(
           "Layer Position - 01:",
           "waterway-label",
-          GROUP_IDS["VECTOR TILES MAP"]
+          GROUP_IDS["VECTOR TILES MAP 1"]
+        );
+
+        const vectorTilesID01 = text(
+          "Vector Tiles ID - 01:",
+          "source-01",
+          GROUP_IDS["VECTOR TILES MAP 1"]
         );
 
         const vectorTilesURL02 = text(
@@ -182,6 +194,12 @@ export default () =>
           GROUP_IDS["VECTOR TILES MAP 2"]
         );
 
+        const vectorTilesID02 = text(
+          "Vector Tiles ID - 02:",
+          "source-02",
+          GROUP_IDS["VECTOR TILES MAP 2"]
+        );
+
         const civicMapStyle = select(
           "CIVIC Map Styles - 01:",
           MAP_STYLE_OPTIONS,
@@ -200,7 +218,7 @@ export default () =>
               civicMapStyle={civicMapStyle}
             >
               <VectorTilesMap
-                vectorTilesID="source-01"
+                vectorTilesID={vectorTilesID01}
                 vectorTilesURL={vectorTilesURL01}
                 layerID="layer-01"
                 layerType={layerType01}
@@ -209,7 +227,7 @@ export default () =>
                 layerPosition={layerPosition01}
               />
               <VectorTilesMap
-                vectorTilesID="source-02"
+                vectorTilesID={vectorTilesID02}
                 vectorTilesURL={vectorTilesURL02}
                 layerID="layer-02"
                 layerType={layerType02}
@@ -272,6 +290,12 @@ export default () =>
           GROUP_IDS["VECTOR TILES MAP"]
         );
 
+        const vectorTilesID = text(
+          "Vector Tiles ID:",
+          "source-03",
+          GROUP_IDS["VECTOR TILES MAP"]
+        );
+
         const getFillColor = object(
           "Fill Color",
           [220, 20, 60, 255],
@@ -328,7 +352,7 @@ export default () =>
                     civicMapStyle={civicMapStyle}
                   >
                     <VectorTilesMap
-                      vectorTilesID="source-03"
+                      vectorTilesID={vectorTilesID}
                       vectorTilesURL={vectorTilesURL}
                       layerID="layer-03"
                       layerType={layerType}
@@ -359,7 +383,68 @@ export default () =>
       () => {
         const vectorTilesURL = text(
           "Mapbox Tileset URL:",
-          "mapbox://themendozaline.census-counties",
+          "mapbox://hackoregon.computers-household-b28010",
+          GROUP_IDS.DESIGN
+        );
+
+        const multipleLayers = object(
+          "Multiple Layers",
+          [
+            {
+              layerID: "layer-counties",
+              layerType: "fill",
+              sourceLayer: "us-counties",
+              paint: {
+                "fill-color": [
+                  "case",
+                  ["==", ["get", "total"], 0],
+                  "transparent",
+                  [
+                    "step",
+                    ["/", ["get", "total_no_computer"], ["get", "total"]],
+                    "#ffffcc",
+                    0.2,
+                    "#a1dab4",
+                    0.4,
+                    "#41b6c4",
+                    0.6,
+                    "#2c7fb8",
+                    0.8,
+                    "#253494"
+                  ]
+                ],
+                "fill-outline-color": "gray",
+                "fill-opacity": 0.75
+              }
+            },
+            {
+              layerID: "layer-census-tracts",
+              layerType: "fill",
+              sourceLayer: "us-census-tracts",
+              paint: {
+                "fill-color": [
+                  "case",
+                  ["==", ["get", "total"], 0],
+                  "transparent",
+                  [
+                    "step",
+                    ["/", ["get", "total_no_computer"], ["get", "total"]],
+                    "#ffffcc",
+                    0.2,
+                    "#a1dab4",
+                    0.4,
+                    "#41b6c4",
+                    0.6,
+                    "#2c7fb8",
+                    0.8,
+                    "#253494"
+                  ]
+                ],
+                "fill-outline-color": "gray",
+                "fill-opacity": 0.75
+              }
+            }
+          ],
           GROUP_IDS.DESIGN
         );
 
@@ -376,58 +461,9 @@ export default () =>
         );
 
         const civicMapStyle = select(
-          "CIVIC Map Styles - 01:",
+          "CIVIC Map Styles:",
           MAP_STYLE_OPTIONS,
           MAP_STYLE_OPTIONS["CIVIC Dark"],
-          GROUP_IDS.DESIGN
-        );
-
-        const multipleLayers = object(
-          "Multiple Layers",
-          [
-            {
-              layerID: "layer-01",
-              layerType: "fill",
-              sourceLayer: "us-census-tracts",
-              paint: {
-                "fill-color": [
-                  "step",
-                  ["get", "b28002_001e"],
-                  "#ffffd9",
-                  2500,
-                  "#edf8b1",
-                  5000,
-                  "#c7e9b4",
-                  7500,
-                  "#7fcdbb",
-                  10000,
-                  "#41b6c4",
-                  12500,
-                  "#1d91c0",
-                  15000,
-                  "#225ea8",
-                  17500,
-                  "#253494",
-                  20000,
-                  "#081d58",
-                  22000,
-                  "red"
-                ],
-                "fill-outline-color": "gray",
-                "fill-opacity": 0.89
-              }
-            },
-            {
-              layerID: "layer-02",
-              layerType: "fill",
-              sourceLayer: "us-counties",
-              paint: {
-                "fill-color": "green",
-                "fill-outline-color": "gray",
-                "fill-opacity": 0.9
-              }
-            }
-          ],
           GROUP_IDS.DESIGN
         );
 
@@ -443,6 +479,7 @@ export default () =>
               useContainerHeight
               updateViewport={false}
               civicMapStyle={civicMapStyle}
+              onBaseMapClick={e => console.log(e)}
             >
               <VectorTilesMap
                 vectorTilesID={vectorTilesID}
