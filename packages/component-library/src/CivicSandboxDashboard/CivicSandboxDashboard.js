@@ -11,6 +11,7 @@ import LineChart from "../LineChart/LineChart";
 import civicFormat from "../utils/civicFormat";
 import { ICONS } from "../styleConstants";
 import Placeholder from "../Placeholder/Placeholder";
+import PolygonPreview from "../PolygonPreview/PolygonPreview";
 
 const container = css`
   position: absolute;
@@ -183,7 +184,10 @@ const createLineViz = (data, title, xLabel, yLabel, xFormat, yFormat, id) => {
   const yForm = yFormat === "percent" ? "percentage" : yFormat;
   return (
     <div css={viz} key={id}>
-      <h3>{title}</h3>
+      <h3>
+        <PolygonPreview />
+        {title}
+      </h3>
       <p>
         This is a brief description of the layer, including what data is being
         represented.

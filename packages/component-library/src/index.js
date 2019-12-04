@@ -12,6 +12,7 @@ export {
 
 // COMPONENTS
 // DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator src injection
+export { default as PolygonPreview } from "./PolygonPreview/PolygonPreview"; // TODO: Move to correct location
 export { default as Dialog } from "./Dialog/Dialog"; // TODO: Move to correct location
 
 export {

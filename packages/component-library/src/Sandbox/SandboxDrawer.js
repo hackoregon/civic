@@ -111,6 +111,15 @@ const SandboxDrawer = props => {
           `)}
         >
           <div
+            onClick={toggleDrawer}
+            onKeyPress={toggleDrawer}
+            role="button"
+            tabIndex={0}
+            css={[buttonStyle, on, rotate]}
+          >
+            {drawerVisible ? ">" : "<"}
+          </div>
+          <div
             onClick={toggleVisualization}
             onKeyPress={toggleVisualization}
             role="button"
@@ -132,15 +141,6 @@ const SandboxDrawer = props => {
               🥞
             </span>
           </div>
-        </div>
-        <div
-          onClick={toggleDrawer}
-          onKeyPress={toggleDrawer}
-          role="button"
-          tabIndex={0}
-          css={[buttonStyle, on, rotate]}
-        >
-          {drawerVisible ? ">" : "<"}
         </div>
       </div>
       {drawerVisible && (
@@ -172,10 +172,7 @@ const SandboxDrawer = props => {
                 margin: 0;
             `)}
             >
-              CIVIC Sandbox{" "}
-              <span role="img" aria-label="Information">
-                ℹ️
-              </span>
+              CIVIC Sandbox
             </h2>
           </div>
           {drawerVisualization && (
