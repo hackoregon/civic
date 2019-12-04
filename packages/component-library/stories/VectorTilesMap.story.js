@@ -193,6 +193,7 @@ export default () =>
           <div css={containerWrapper}>
             <BaseMap
               initialZoom={14}
+              minZoom={1}
               useScrollZoom
               useContainerHeight
               updateViewport={false}
@@ -348,6 +349,108 @@ export default () =>
                 );
               }}
             </DemoJSONLoader>
+          </div>
+        );
+      },
+      { notes }
+    )
+    .add(
+      "Example: One Source and Two Layers",
+      () => {
+        const vectorTilesURL = text(
+          "Mapbox Tileset URL:",
+          "mapbox://themendozaline.census-counties",
+          GROUP_IDS.DESIGN
+        );
+
+        const vectorTilesID = text(
+          "Vector Tiles ID:",
+          "vector-tile-id-01",
+          GROUP_IDS.DESIGN
+        );
+
+        const layerPosition = text(
+          "Layer Position:",
+          "waterway-label",
+          GROUP_IDS.DESIGN
+        );
+
+        const civicMapStyle = select(
+          "CIVIC Map Styles - 01:",
+          MAP_STYLE_OPTIONS,
+          MAP_STYLE_OPTIONS["CIVIC Dark"],
+          GROUP_IDS.DESIGN
+        );
+
+        const multipleLayers = object(
+          "Multiple Layers",
+          [
+            {
+              layerID: "layer-01",
+              layerType: "fill",
+              sourceLayer: "us-census-tracts",
+              paint: {
+                "fill-color": [
+                  "step",
+                  ["get", "b28002_001e"],
+                  "#ffffd9",
+                  2500,
+                  "#edf8b1",
+                  5000,
+                  "#c7e9b4",
+                  7500,
+                  "#7fcdbb",
+                  10000,
+                  "#41b6c4",
+                  12500,
+                  "#1d91c0",
+                  15000,
+                  "#225ea8",
+                  17500,
+                  "#253494",
+                  20000,
+                  "#081d58",
+                  22000,
+                  "red"
+                ],
+                "fill-outline-color": "gray",
+                "fill-opacity": 0.89
+              }
+            },
+            {
+              layerID: "layer-02",
+              layerType: "fill",
+              sourceLayer: "us-counties",
+              paint: {
+                "fill-color": "green",
+                "fill-outline-color": "gray",
+                "fill-opacity": 0.9
+              }
+            }
+          ],
+          GROUP_IDS.DESIGN
+        );
+
+        return (
+          <div css={containerWrapper}>
+            <BaseMap
+              initialLatitude={39.810492}
+              initialLongitude={-98.556061}
+              initialZoom={4}
+              minZoom={3}
+              maxZoom={14}
+              useScrollZoom
+              useContainerHeight
+              updateViewport={false}
+              civicMapStyle={civicMapStyle}
+            >
+              <VectorTilesMap
+                vectorTilesID={vectorTilesID}
+                vectorTilesURL={vectorTilesURL}
+                layerPosition={layerPosition}
+                multipleLayers={multipleLayers}
+              />
+            </BaseMap>
           </div>
         );
       },

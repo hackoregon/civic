@@ -1,6 +1,6 @@
 import React from "react";
 import { Source, Layer } from "react-map-gl";
-import { string, shape, number } from "prop-types";
+import { string, shape, number, arrayOf } from "prop-types";
 
 const VectorTilesMap = React.memo(props => {
   const {
@@ -11,7 +11,8 @@ const VectorTilesMap = React.memo(props => {
     sourceLayer,
     paint,
     layerPosition,
-    index
+    index,
+    multipleLayers
   } = props;
 
   const sourceLayerProp = {
@@ -22,17 +23,40 @@ const VectorTilesMap = React.memo(props => {
     "sandbox:index": index
   };
 
+  // console.log("VECT-multipleLayers", multipleLayers);
+  const showMultiLayers =
+    multipleLayers.length > 0 &&
+    multipleLayers.map(l => {
+      const multiSourceLayerProp = {
+        "source-layer": l.sourceLayer
+      };
+      return (
+        <Layer
+          beforeId={layerPosition}
+          id={l.layerID}
+          type={l.layerType}
+          source={l.vectorTilesID + index}
+          paint={l.paint}
+          metadata={l.metaProps}
+          {...multiSourceLayerProp}
+        />
+      );
+    });
+  // console.log("VECT-showMultiLayers", showMultiLayers);
+
   return (
     <Source type="vector" id={vectorTilesID + index} url={vectorTilesURL}>
-      <Layer
-        beforeId={layerPosition}
-        id={layerID}
-        type={layerType}
-        source={vectorTilesID + index}
-        paint={paint}
-        {...sourceLayerProp}
-        metadata={metaProps}
-      />
+      {showMultiLayers || (
+        <Layer
+          beforeId={layerPosition}
+          id={layerID}
+          type={layerType}
+          source={vectorTilesID + index}
+          paint={paint}
+          {...sourceLayerProp}
+          metadata={metaProps}
+        />
+      )}
     </Source>
   );
 });
@@ -45,7 +69,19 @@ VectorTilesMap.propTypes = {
   sourceLayer: string,
   paint: shape({}),
   layerPosition: string,
-  index: number
+  index: number,
+  multipleLayers: arrayOf(
+    shape({
+      layerID: string,
+      layerType: string,
+      sourceLayer: string,
+      paint: shape({})
+    })
+  )
+};
+
+VectorTilesMap.defaultProps = {
+  multipleLayers: []
 };
 
 export default VectorTilesMap;
