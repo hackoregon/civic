@@ -22,7 +22,7 @@ const menuOpen = css(`
   @media (max-width: 500px) {
     flex-direction: column;
     width: 100%;
-    height: 75vh;
+    height: 100%;
     min-height: 390px;
   }
 `);
@@ -52,7 +52,6 @@ const SandboxDrawer = props => {
     toggleDrawer,
     toggleVisualization,
     toggleLayerSelector,
-    dialogVisible,
     drawerVisible,
     drawerVisualization,
     drawerLayerSelector,
@@ -107,19 +106,10 @@ const SandboxDrawer = props => {
             text-align: center;
             @media (max-width: 500px) {
               display: grid;
-              grid-template-columns: repeat(4, auto);
+              grid-template-columns: repeat(3, auto);
             }
           `)}
         >
-          <div
-            onClick={toggleDrawer}
-            onKeyPress={toggleDrawer}
-            role="button"
-            tabIndex={0}
-            css={[buttonStyle, on, rotate]}
-          >
-            {drawerVisible ? ">" : "<"}
-          </div>
           <div
             onClick={toggleVisualization}
             onKeyPress={toggleVisualization}
@@ -142,17 +132,15 @@ const SandboxDrawer = props => {
               🥞
             </span>
           </div>
-          <div
-            onClick={toggleDialog}
-            onKeyPress={toggleDialog}
-            role="button"
-            tabIndex={0}
-            css={[buttonStyle, dialogVisible && active]}
-          >
-            <span role="img" aria-label="Information">
-              ℹ️
-            </span>
-          </div>
+        </div>
+        <div
+          onClick={toggleDrawer}
+          onKeyPress={toggleDrawer}
+          role="button"
+          tabIndex={0}
+          css={[buttonStyle, on, rotate]}
+        >
+          {drawerVisible ? ">" : "<"}
         </div>
       </div>
       {drawerVisible && (
@@ -160,26 +148,34 @@ const SandboxDrawer = props => {
           css={css(`
           background: rgba(255,255,255,0.9);
           overflow-y: auto;
-          box-shadow: -10px 5px 15px -3px rgba(0, 0, 0, 0.2);
-          flex-grow: 2;
+            box-shadow: -10px 5px 15px -3px rgba(0, 0, 0, 0.2);
+            flex-grow: 2;
         `)}
         >
           <div
+            onClick={toggleDialog}
+            onKeyPress={toggleDialog}
+            role="button"
+            tabIndex={0}
             css={css(`
-            margin: 0 0 10px 0;
-            padding: 0;
-            background-color: #201024;
-            color: white;
-            height: 35px;
-            text-align: center;
+              margin: 0 0 10px 0;
+              padding: 0;
+              background-color: #201024;
+              color: white;
+              height: 35px;
+              text-align: center;
+              cursor: pointer;
           `)}
           >
             <h2
               css={css(`
-              margin: 0;
+                margin: 0;
             `)}
             >
-              CIVIC Sandbox
+              CIVIC Sandbox{" "}
+              <span role="img" aria-label="Information">
+                ℹ️
+              </span>
             </h2>
           </div>
           {drawerVisualization && (
@@ -221,7 +217,6 @@ SandboxDrawer.propTypes = {
   drawerVisible: bool,
   drawerVisualization: bool,
   drawerLayerSelector: bool,
-  dialogVisible: bool,
   foundationData: arrayOf(shape({})),
   allSlides: arrayOf(shape({})),
   updatePackage: func,
