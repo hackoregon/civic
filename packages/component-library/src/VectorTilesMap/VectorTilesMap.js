@@ -23,7 +23,6 @@ const VectorTilesMap = React.memo(props => {
     "sandbox:index": index
   };
 
-  // console.log("VECT-multipleLayers", multipleLayers);
   const showMultiLayers =
     multipleLayers.length > 0 &&
     multipleLayers.map(l => {
@@ -43,7 +42,6 @@ const VectorTilesMap = React.memo(props => {
         />
       );
     });
-  // console.log("VECT-showMultiLayers", showMultiLayers);
 
   return (
     <Source type="vector" id={vectorTilesID + index} url={vectorTilesURL}>
