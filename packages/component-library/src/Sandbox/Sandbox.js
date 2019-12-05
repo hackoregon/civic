@@ -56,13 +56,13 @@ const Sandbox = ({
   errors,
   updateSlideKey
 }) => {
-  const [baseMapStyle, setBaseMapStyle] = useState("light");
+  const [baseMapStyle, setBaseMapStyle] = useState("dark");
 
   const handleBaseMapStyleChange = baseMapStyleChangeEvent => {
     // eslint-disable-next-line no-unused-expressions
     baseMapStyleChangeEvent.target.value === "light"
       ? setBaseMapStyle("light")
-      : setBaseMapStyle("sandbox-dark");
+      : setBaseMapStyle("dark");
   };
 
   const featuresArr = layerData.length ? layerData[0].data : [];
@@ -150,9 +150,9 @@ const Sandbox = ({
           civicMapStyle={baseMapStyle}
           initialLatitude={39.810492}
           initialLongitude={-98.556061}
-          initialZoom={4}
+          initialZoom={3.5}
           minZoom={3}
-          maxZoom={15}
+          maxZoom={14}
           useContainerHeight
           updateViewport={false}
           boundBox={boundBox}
