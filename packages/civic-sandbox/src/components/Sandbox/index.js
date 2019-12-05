@@ -93,21 +93,25 @@ class SandboxComponent extends React.Component {
   updateSlide = event => {
     const { selectedSlide, allSlides, setSlides: updateSetSlides } = this.props;
     const slideName = event.target.value;
-    // eslint-disable-next-line no-unused-vars
-    const orderSelectedSlides = [...allSlides].reduce((a, c, i) => {
-      // eslint-disable-next-line no-param-reassign
-      a[c.label] = i;
-      return a;
-    }, {});
+
+    const originalSelectedSlideOrder = [...allSlides].map(s => {
+      if (s.label === slideName) {
+        return {
+          label: s.label,
+          checked: !s.checked
+        };
+      }
+      return {
+        label: s.label,
+        checked: s.checked
+      };
+    });
 
     const reorderSelectedSlides = selectedSlide.includes(slideName)
       ? selectedSlide.filter(name => name !== slideName)
-      : [...selectedSlide, slideName];
-    // : [
-    //     ...selectedSlide.slice(0, orderSelectedSlides[slideName]),
-    //     slideName,
-    //     ...selectedSlide.slice(orderSelectedSlides[slideName])
-    //   ];
+      : [
+          ...originalSelectedSlideOrder.filter(s => s.checked).map(s => s.label)
+        ];
 
     updateSetSlides(reorderSelectedSlides);
   };
