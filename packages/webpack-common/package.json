@@ -10,7 +10,7 @@
   "scripts": {
     "lint": "eslint index.js",
     "test": "echo 'No tests!'",
-    "test:watch": "echo 'No tests!'"    
+    "test:watch": "echo 'No tests!'"
   },
   "keywords": [
     "civic",
@@ -21,6 +21,7 @@
   "license": "MIT",
   "dependencies": {
     "autoprefixer": "^9.4.10",
+    "html-webpack-plugin": "^3.2.0",
     "lodash-webpack-plugin": "^0.11.5",
     "webpack": "^4.29.6",
     "webpack-blocks": "^2.0.0-rc",
