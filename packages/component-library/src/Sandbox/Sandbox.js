@@ -231,14 +231,13 @@ Sandbox.propTypes = {
       slideId: oneOfType([string, number])
     })
   ).isRequired,
-  selectedFoundationDatum: arrayOf(
-    shape({
-      data: oneOfType([arrayOf(shape({})), number, string]),
-      id: oneOfType([number, string]),
-      title: string,
-      visualizationType: string
-    })
-  ),
+  selectedFoundationDatum: shape({
+    id: number,
+    displayName: string,
+    featureProperties: shape({}),
+    colorKey: string,
+    primaryFormat: string
+  }),
   areSlidesLoading: bool,
   updateSlideKey: func,
   errors: bool

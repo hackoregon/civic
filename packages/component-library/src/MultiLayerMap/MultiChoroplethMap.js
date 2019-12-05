@@ -73,12 +73,8 @@ const MultiChoroplethMap = props => {
   };
 
   const getLineColor = f => {
-    if (
-      selectedFoundationDatum &&
-      selectedFoundationDatum.feature &&
-      selectedFoundationDatum.feature.object
-    ) {
-      const selectedId = selectedFoundationDatum.feature.object.id;
+    if (selectedFoundationDatum) {
+      const selectedId = selectedFoundationDatum.id;
       const featureId = f.id;
       return featureId === selectedId ? [255, 178, 31, 255] : polygonLineColor;
     }
@@ -86,12 +82,8 @@ const MultiChoroplethMap = props => {
   };
 
   const getLineWidth = f => {
-    if (
-      selectedFoundationDatum &&
-      selectedFoundationDatum.feature &&
-      selectedFoundationDatum.feature.object
-    ) {
-      const selectedId = selectedFoundationDatum.feature.object.id;
+    if (selectedFoundationDatum) {
+      const selectedId = selectedFoundationDatum.id;
       const featureId = f.id;
       return featureId === selectedId ? 125 : lineWidth;
     }
@@ -155,7 +147,13 @@ MultiChoroplethMap.propTypes = {
   dataRange: arrayOf(string),
   colorRange: arrayOf(arrayOf(number)),
   index: number,
-  selectedFoundationDatum: shape({})
+  selectedFoundationDatum: shape({
+    id: number,
+    displayName: string,
+    featureProperties: shape({}),
+    colorKey: string,
+    primaryFormat: string
+  })
 };
 
 export default MultiChoroplethMap;

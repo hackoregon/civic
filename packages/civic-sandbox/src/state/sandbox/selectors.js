@@ -242,9 +242,9 @@ export const getSelectedFoundationDatum = createSelector(
   getSelectedSlideKey,
   ({ selectedFoundationDatum }, slides, selectedSlides) => {
     if (!selectedFoundationDatum) {
-      return;
+      return null;
     }
-    const { index } = selectedFoundationDatum;
+    const { index, feature: selectedFeature } = selectedFoundationDatum;
 
     const activeLayerName = selectedSlides[index];
 
@@ -252,13 +252,36 @@ export const getSelectedFoundationDatum = createSelector(
       return s.displayName === activeLayerName;
     });
 
-    if (!activeLayer || !activeLayer.visualization) return;
+    if (!activeLayer || !activeLayer.visualization) return null;
 
-    if (activeLayer.visualization.map.mapType !== "ChoroplethMap") return;
-    // eslint-disable-next-line consistent-return
+    if (activeLayer.visualization.map.mapType !== "ChoroplethMap") return null;
+
+    const id =
+      selectedFeature && selectedFeature.object && selectedFeature.object.id;
+    const featureProperties =
+      selectedFeature &&
+      selectedFeature.object &&
+      selectedFeature.object.properties;
+
+    const { displayName } = activeLayer;
+
+    const { visualization: vizProperties } = activeLayer;
+
+    const { map: mapProperties } = vizProperties;
+    const colorKey = mapProperties.fieldName && mapProperties.fieldName.color;
+
+    const { tooltip: tooltipProperties } = vizProperties;
+    const primaryFormat =
+      tooltipProperties &&
+      tooltipProperties.primary &&
+      tooltipProperties.primary.format;
+
     return {
-      ...selectedFoundationDatum,
-      ...activeLayer
+      id,
+      displayName,
+      featureProperties,
+      colorKey,
+      primaryFormat
     };
   }
 );
