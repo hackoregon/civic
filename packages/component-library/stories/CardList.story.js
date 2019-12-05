@@ -4,21 +4,7 @@ import { storiesOf } from "@storybook/react";
 import { checkA11y } from "@storybook/addon-a11y";
 import { CardList } from "../src/index";
 import { storybookStyles } from "./storyStyles";
-import {
-  FilterSampleCard,
-  FilterSampleCardB,
-  FilterSampleCardC,
-  FilterSampleCardD,
-  FilterSampleCardE,
-  FilterSampleCardF,
-  FilterSampleCardG,
-  FilterSampleCardH,
-  FilterSampleCardJ,
-  FilterSampleCardK,
-  FilterSampleCardL,
-  FilterSampleCardM,
-  FilterSampleCardN
-} from "./CivicCardSampleFilter";
+import sampleFilterCardsWithTags from "./CivicCardSample/SampleCardFilterData";
 
 const CardRegistryMock = {
   tags: {
@@ -31,73 +17,13 @@ const CardRegistryMock = {
     Transit: 1,
     Demo: 1
   },
-  entries: [
-    {
+  entries: sampleFilterCardsWithTags.map(sampleCard => {
+    return {
       slug: "template-file-card",
       project: "@hackoregon/2019-template",
-      component: FilterSampleCard
-    },
-    {
-      slug: "demo-card",
-      project: "@hackoregon/2019-template",
-      component: FilterSampleCardB
-    },
-    {
-      slug: "template-file-card-1",
-      project: "@hackoregon/2019-template",
-      component: FilterSampleCardC
-    },
-    {
-      slug: "demo-card-1",
-      project: "@hackoregon/2019-template",
-      component: FilterSampleCardD
-    },
-    {
-      slug: "template-file-card-2",
-      project: "@hackoregon/2019-template",
-      component: FilterSampleCardE
-    },
-    {
-      slug: "demo-card-2",
-      project: "@hackoregon/2019-template",
-      component: FilterSampleCardF
-    },
-    {
-      slug: "template-file-card",
-      project: "@hackoregon/2019-template",
-      component: FilterSampleCardG
-    },
-    {
-      slug: "demo-card",
-      project: "@hackoregon/2019-template",
-      component: FilterSampleCardH
-    },
-    {
-      slug: "template-file-card-1",
-      project: "@hackoregon/2019-template",
-      component: FilterSampleCardJ
-    },
-    {
-      slug: "demo-card-1",
-      project: "@hackoregon/2019-template",
-      component: FilterSampleCardK
-    },
-    {
-      slug: "template-file-card-2",
-      project: "@hackoregon/2019-template",
-      component: FilterSampleCardL
-    },
-    {
-      slug: "demo-card-2",
-      project: "@hackoregon/2019-template",
-      component: FilterSampleCardM
-    },
-    {
-      slug: "template-file-card-2",
-      project: "@hackoregon/2019-template",
-      component: FilterSampleCardN
-    }
-  ]
+      component: sampleCard
+    };
+  })
 };
 
 const tagsListExample = {
