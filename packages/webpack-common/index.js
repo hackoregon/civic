@@ -1,5 +1,7 @@
 const webpack = require("webpack");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
 const {
   createConfig,
   entryPoint,
@@ -68,6 +70,12 @@ module.exports = {
       setEnv({
         NODE_ENV: process.env.NODE_ENV
       }),
+      addPlugins([
+        new HtmlWebpackPlugin({
+          inject: true,
+          template: "./index.html"
+        })
+      ]),
       env("development", [
         sourceMaps(),
         addPlugins([
