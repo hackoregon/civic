@@ -20,6 +20,9 @@ import { ThemeProvider } from "@material-ui/styles";
 import Header from "../Header/Header";
 import BrandColors from "../_Themes/Brand/BrandColors";
 import ProjectCard from "./ProjectCard";
+import cardListStyling from "./cardListStyling";
+import deriveActiveTagsListsFromFilterStatus from "./deriveActiveTagsList";
+import filterCardsBasedOnFilterStatus from "./filterCardsByActiveTags";
 
 import {
   Checkbox,
@@ -40,88 +43,7 @@ const emptyState = css`
   }
 `;
 
-const drawerWidth = 240;
-const headerHeight = 72;
-const drawerGap = 0;
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: "flex",
-    flexDirection: "column",
-    width: "95vw",
-    margin: "0px"
-  },
-  drawer: {
-    [theme.breakpoints.up("sm")]: {
-      zIndex: "998",
-      width: drawerWidth,
-      flexShrink: 0
-    }
-  },
-  filtersButton: {
-    [theme.breakpoints.up("sm")]: {
-      display: "none"
-    }
-  },
-  toolbar: {
-    width: "calc(100% - 10px)",
-    marginLeft: "10px"
-  },
-  drawerPaper: {
-    width: drawerWidth,
-    [theme.breakpoints.up("sm")]: {
-      top: `calc(${headerHeight}px - 30px + ${drawerGap}px)`,
-      height: `calc(100vh - ${headerHeight}px + 30px - ${drawerGap}px)`
-    }
-  },
-  filtersList: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    alignSelf: "center",
-    margin: "0px",
-    width: "100%"
-  },
-  categoryListText: {
-    [theme.breakpoints.up("sm")]: {
-      flexGrow: 0
-    }
-  },
-  content: {
-    position: "absolute",
-    top: headerHeight,
-    padding: theme.spacing(1),
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      left: drawerWidth,
-      width: `calc(100% - ${drawerWidth}px)`,
-      alignSelf: "flex-end"
-    }
-  },
-  filterItem: {
-    listStyleType: "none"
-  },
-  entriesList: {
-    padding: "0px",
-    display: "flex",
-    flexWrap: "wrap"
-  },
-  entry: {
-    margin: "10px",
-    flexWrap: "wrap",
-    listStyleType: "none",
-    alignSelf: "stretch",
-    width: "90%",
-    [theme.breakpoints.up("lg")]: {
-      width: "45%"
-    }
-  },
-  nested: {
-    paddingLeft: theme.spacing(4)
-  },
-  storyCard: {
-    height: "1000px"
-  }
-}));
+const useStyles = makeStyles(cardListStyling);
 
 const filterPadding = css`
   padding-top: 1rem;
@@ -144,6 +66,7 @@ const CardList = ({ CardRegistry, tagsList, projects }) => {
 
   const categoryNames = Object.keys(tagsList);
 
+  // sets an initial value for the state of filter checkboxes where all boxes are unchecked
   const allTagsFalse = {
     topics: {},
     locations: {},
@@ -158,25 +81,28 @@ const CardList = ({ CardRegistry, tagsList, projects }) => {
   const classes = useStyles();
   const theme = useTheme();
 
+  // Nested List and Drawer open / close handlers
   const [showAllStories, setShowAllStories] = useState(true);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openTopic, setOpenTopic] = useState(true);
   const [openLocation, setOpenLocation] = useState(false);
   const [openVisualization, setOpenVisualization] = useState(false);
-  const [filterStatus, setFilterStatus] = useState(allTagsFalse);
-  const [activeTagsList, setActiveTagsList] = useState([]);
-  const [activeTagsByCategory, setActiveTagsByCategory] = useState(
-    categoryNames.reduce(
-      (accumulator, categoryName) => ({
-        [categoryName]: [],
-        ...accumulator
-      }),
-      {}
-    )
-  );
 
-  const noFiltersSelected = () => {
-    if (activeTagsList.length === 0) {
+  // holds state for checkboxes (nested object where specific tags are boolean)
+  const [filterStatus, setFilterStatus] = useState(allTagsFalse);
+  // flat array of active tags
+  const activeTagsList = deriveActiveTagsListsFromFilterStatus(
+    filterStatus,
+    categoryNames
+  )[0];
+  // arrays of active tags separated by category
+  const activeTagsByCategory = deriveActiveTagsListsFromFilterStatus(
+    filterStatus,
+    categoryNames
+  )[1];
+
+  const noFiltersSelected = activeTags => {
+    if (!activeTags || activeTags.length === 0) {
       return true;
     }
     return false;
@@ -241,33 +167,6 @@ const CardList = ({ CardRegistry, tagsList, projects }) => {
                             [topic]: !filterStatus[category][topic]
                           }
                         });
-                        if (activeTagsList.includes(topic)) {
-                          setActiveTagsList(
-                            activeTagsList.filter(
-                              activeTag => activeTag !== topic
-                            )
-                          );
-                        } else {
-                          setActiveTagsList([...activeTagsList, topic]);
-                        }
-                        if (!activeTagsByCategory[category].includes(topic)) {
-                          setActiveTagsByCategory({
-                            ...activeTagsByCategory,
-                            [category]: [
-                              ...activeTagsByCategory[category],
-                              topic
-                            ]
-                          });
-                        } else {
-                          setActiveTagsByCategory({
-                            ...activeTagsByCategory,
-                            [category]: [
-                              ...activeTagsByCategory[category].filter(
-                                activeTag => activeTag !== topic
-                              )
-                            ]
-                          });
-                        }
                       }}
                     />
                   </ListItem>
@@ -280,49 +179,14 @@ const CardList = ({ CardRegistry, tagsList, projects }) => {
     </div>
   );
 
-  // filter by tags logic
-  const filterCardsBasedOnFilterStatus = storyCardTags => {
-    if (!storyCardTags) return false;
-    if (showAllStories) return true;
-    if (noFiltersSelected()) return true;
-
-    const targetActiveCategories = categoryNames.reduce(
-      (accumulator, categoryName) => ({
-        [categoryName]: activeTagsByCategory[categoryName].length > 0,
-        ...accumulator
-      }),
-      {}
-    );
-
-    const fulfilledActiveCategories = categoryNames.reduce(
-      (accumulator, categoryName) => ({
-        [categoryName]: false,
-        ...accumulator
-      }),
-      {}
-    );
-
-    storyCardTags.forEach(storyTag => {
-      categoryNames.forEach(category => {
-        if (activeTagsByCategory[category].includes(storyTag)) {
-          fulfilledActiveCategories[category] = true;
-        }
-      });
-    });
-
-    for (let i = 0; i < categoryNames.length; i += 1) {
-      if (
-        fulfilledActiveCategories[categoryNames[i]] !==
-        targetActiveCategories[categoryNames[i]]
-      ) {
-        return false;
-      }
-    }
-    return true;
-  };
-
   const filteredEntries = entries.filter(entry =>
-    filterCardsBasedOnFilterStatus(entry.component.tags)
+    filterCardsBasedOnFilterStatus(
+      entry.component.tags,
+      showAllStories,
+      noFiltersSelected(activeTagsList),
+      categoryNames,
+      activeTagsByCategory
+    )
   );
 
   return (
@@ -369,7 +233,7 @@ const CardList = ({ CardRegistry, tagsList, projects }) => {
                 Filters
               </Button>
             </section>
-            {noFiltersSelected() && (
+            {noFiltersSelected(activeTagsList) && (
               <section>
                 <h2 css={headingPadding}>
                   <strong>Featured Projects: Hack Oregon Demo Day</strong>

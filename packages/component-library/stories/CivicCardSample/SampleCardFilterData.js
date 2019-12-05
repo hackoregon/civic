@@ -38,7 +38,6 @@ const sampleFilterCardsWithTags = tagsList.map(tags => {
   );
 
   SampleCard.tags = tags;
-  console.log("TAGS TAGS TAGS", SampleCard.tags);
   return SampleCard;
 });
 
