@@ -23,7 +23,8 @@
   ],
   "scripts": {
     "bootstrap": "yarn install --frozen-lockfile && yarn --cwd ./packages/component-library/ build && yarn --cwd ./packages/mock-wrapper/ build",
-    "build": "yarn workspaces run build",
+    "build": "yarn workspace @hackoregon/2018 build",
+    "prebuild": "yarn workspace @hackoregon/component-library build && yarn workspace @hackoregon/mock-wrapper build",
     "card": "yarn new-card",
     "card:local-data": "yarn new-card:local-data",
     "card:minimal": "yarn new-card:minimal",
