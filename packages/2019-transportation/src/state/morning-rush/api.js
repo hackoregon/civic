@@ -8,7 +8,7 @@ const HOST = "https://service.civicpdx.org/transportation-systems";
 const apiDesc = {
   getBusAmRushSummaryData: {
     url:
-      "http://service.civicpdx.org/transportation2019/v1/toad/busAmRushSummary/?limit=10000",
+      "https://service.civicpdx.org/transportation2019/v1/toad/busAmRushSummary/?limit=10000",
     dataTransform: data => data
   },
   getOnOffsData: {

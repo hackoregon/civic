@@ -85,7 +85,7 @@ const AduDistributionsMeta = (/* data */) => ({
           description:
             "2019 State of the Nation’s Housing Report from Harvard’s Joint Center for Housing Studies"
         },
-        { link: "http://www.hackoregon.org", description: "Hack Oregon" },
+        { link: "https://www.hackoregon.org", description: "Hack Oregon" },
         {
           link: "https://www.civicsoftwarefoundation.org",
           description: "Civic Software Foundation"

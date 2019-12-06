@@ -322,7 +322,7 @@ export default () =>
       "Example: Fit Bounds",
       () => {
         const CIVIC_API_URL =
-          "http://service.civicpdx.org/disaster-resilience/api/DisasterNeighborhoodView/" +
+          "https://service.civicpdx.org/disaster-resilience/api/DisasterNeighborhoodView/" +
           "?format=json&offset=75&limit=1";
         return (
           <DemoJSONLoader urls={[CIVIC_API_URL]}>
