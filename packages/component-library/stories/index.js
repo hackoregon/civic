@@ -4,6 +4,7 @@ import { storiesOf } from "@storybook/react";
 import { checkA11y } from "@storybook/addon-a11y";
 
 // DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator import injection
+import selectFieldStory from "./SelectField.story"; // TODO: Move this to the appropriate location
 import textFieldStory from "./TextField.story"; // TODO: Move this to the appropriate location
 import formStory from "./Form.story"; // TODO: Move this to the appropriate location
 import buttonNewStory from "./ButtonNew.story";
@@ -128,6 +129,7 @@ sliderStory();
 notebookPreviewStory(); // TODO: Move this to the appropriate location
 formStory(); // TODO: Move this to the appropriate location
 textFieldStory(); // TODO: Move this to the appropriate location
+selectFieldStory(); // TODO: Move this to the appropriate location
 // DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator story injection
 
 // charts
