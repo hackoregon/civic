@@ -118,7 +118,7 @@ const <%=StoryCardName%>Meta = (/* data */) => ({
     {
       heading: "Organizations",
       items: [
-        { link: "http://www.hackoregon.org", description: "Hack Oregon" },
+        { link: "https://www.hackoregon.org", description: "Hack Oregon" },
         {
           link: "https://www.civicsoftwarefoundation.org",
           description: "Civic Software Foundation"

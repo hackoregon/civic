@@ -3,7 +3,7 @@ import requestAdapter from "../request-adapter";
 
 const apiConfig = { requestAdapter };
 
-const HOST = "http://service.civicpdx.org/disaster-resilience";
+const HOST = "https://service.civicpdx.org/disaster-resilience";
 
 const apiDesc = {
   getDamageEstimatesData: {

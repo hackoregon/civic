@@ -73,7 +73,7 @@ const HousingDisplacementMeta = (/* data */) => ({
           link: "https://www.census.gov/topics/population/race/about.html",
           description: "Official Census race category definitions"
         },
-        { link: "http://www.hackoregon.org", description: "Hack Oregon" },
+        { link: "https://www.hackoregon.org", description: "Hack Oregon" },
         {
           link: "https://www.civicsoftwarefoundation.org",
           description: "Civic Software Foundation"
