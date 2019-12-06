@@ -1,8 +1,8 @@
-import React from 'react'; // eslint-disable-line no-unused-vars
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import { isEmpty } from 'lodash';
+import React from "react"; // eslint-disable-line no-unused-vars
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import { isEmpty } from "lodash";
 
 /**
  *
@@ -39,9 +39,9 @@ import { isEmpty } from 'lodash';
 
 const useStyles = makeStyles(() => ({
   root: {
-    display: 'block !important',
-    padding: '5px !important',
-  },
+    display: "block !important",
+    padding: "5px !important"
+  }
 }));
 
 const SelectField = ({ id, label, options, formik, isRequired }) => {
@@ -64,9 +64,9 @@ const SelectField = ({ id, label, options, formik, isRequired }) => {
     // Default to empty string if value is not in list
     if (
       !optionValues.some(e => e.value === formik.values[id]) &&
-      formik.values[id] !== ''
+      formik.values[id] !== ""
     ) {
-      formik.values[id] = '';
+      formik.values[id] = "";
     }
   }
   return (
@@ -74,14 +74,14 @@ const SelectField = ({ id, label, options, formik, isRequired }) => {
       required={isRequired}
       select
       SelectProps={{
-        native: true,
+        native: true
       }}
       InputLabelProps={{ shrink: true }}
       id={id}
       label={label}
-      helperText={formik.touched[id] ? formik.errors[id] : ''}
+      helperText={formik.touched[id] ? formik.errors[id] : ""}
       error={formik.touched[id] && Boolean(formik.errors[id])}
-      value={formik.values[id] || ''}
+      value={formik.values[id] || ""}
       onChange={formik.handleChange}
       onBlur={() => {
         formik.touched[id] = true;
@@ -89,7 +89,7 @@ const SelectField = ({ id, label, options, formik, isRequired }) => {
       }}
       inputProps={{
         name: id,
-        id,
+        id
       }}
       fullWidth
     >
@@ -113,13 +113,13 @@ SelectField.propTypes = {
     limitByValues(props, propName) {
       if (props.limitByField !== undefined && props[propName] === undefined) {
         return new Error(
-          'limitByValues array is required when limitByField is set'
+          "limitByValues array is required when limitByField is set"
         );
       }
     },
-    values: PropTypes.array,
+    values: PropTypes.array
   }),
-  formik: PropTypes.shape({}),
+  formik: PropTypes.shape({})
 };
 
 export default SelectField;

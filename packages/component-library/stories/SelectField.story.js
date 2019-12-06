@@ -19,7 +19,7 @@ export default () =>
       "Standard",
       () => {
         const message = text("Message");
-        return <SelectField message={message} />
+        return <SelectField message={message} />;
       },
       { notes }
     );
