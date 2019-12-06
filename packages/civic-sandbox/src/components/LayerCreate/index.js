@@ -7,6 +7,12 @@ import React, { Fragment } from "react";
 import LayerCreateForm from "./LayerCreateForm";
 import "@hackoregon/component-library/assets/global.styles.css";
 
+import iconMapSrc from "../../assets/icon_map.png";
+import pathMapSrc from "../../assets/path_map.png";
+import scatterplotMapSrc from "../../assets/scatterplot_map.png";
+import screenGridMapSrc from "../../assets/screen_grid_map.png";
+import smallPolygonMapSrc from "../../assets/small_polygon_map.png";
+
 const formTitle = css`
   font-size: 35px;
   letter-spacing: -2px;
@@ -18,6 +24,20 @@ const sectionHeader = css`
   letter-spacing: -0.5px;
   margin: 80px 0px 10px 0px;
   font-weight: bold;
+`;
+
+const imgCss = css`
+  width: 400px;
+`;
+
+const mapSection = css`
+  text-align: center;
+`;
+
+const mapType = css`
+  font-size: 16px;
+  letter-spacing: -0.5px;
+  padding-bottom: 30px;
 `;
 
 const container = css`
@@ -74,7 +94,36 @@ class LayerCreateComponent extends React.Component {
               <p css={sectionHeader}>
                 Next, let&#39;s choose the best type of map for your data:
               </p>
-              {formSections.mapType}
+              <div css={mapSection}>
+                <img
+                  src={screenGridMapSrc}
+                  css={imgCss}
+                  alt="screen grid map"
+                />
+                <p css={mapType}>
+                  Screen Grid map: these maps are good for xxx
+                </p>
+                <img
+                  src={scatterplotMapSrc}
+                  css={imgCss}
+                  alt="scatterplot map"
+                />
+                <p css={mapType}>
+                  Scatterplot map: these maps are good for xxx
+                </p>
+                <img
+                  src={smallPolygonMapSrc}
+                  css={imgCss}
+                  alt="small polygon map"
+                />
+                <p css={mapType}>
+                  Small Polygon map: these maps are good for xxx
+                </p>
+                <img src={pathMapSrc} css={imgCss} alt="path map" />
+                <p css={mapType}>Path map: these maps are good for xxx</p>
+                <img src={iconMapSrc} css={imgCss} alt="icon map" />
+                <p css={mapType}>Icon map: these maps are good for xxx</p>
+              </div>
             </Fragment>
           )}
         </LayerCreateForm>
