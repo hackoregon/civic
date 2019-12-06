@@ -12,6 +12,7 @@ import pathMapSrc from "../../assets/path_map.png";
 import scatterplotMapSrc from "../../assets/scatterplot_map.png";
 import screenGridMapSrc from "../../assets/screen_grid_map.png";
 import smallPolygonMapSrc from "../../assets/small_polygon_map.png";
+import choroplethMapSrc from "../../assets/choropleth_map.png";
 
 const formTitle = css`
   font-size: 35px;
@@ -27,11 +28,11 @@ const sectionHeader = css`
 `;
 
 const imgCss = css`
-  width: 400px;
+  width: 400px; 
 `;
 
 const mapSection = css`
-  text-align: center;
+  text-align: center; 
 `;
 
 const mapType = css`
@@ -81,7 +82,7 @@ class LayerCreateComponent extends React.Component {
                 it. Currently we support GeoJSON datasets.
               </p>
               <p>
-                If you have a question, get in touch at *insert email here*.{" "}
+                If you have a question, get in touch at sandbox-grp@civicsoftwarefoundation.org
               </p>
               <p css={sectionHeader}>
                 First, let&#39;s get the basics out of the way:
@@ -95,34 +96,18 @@ class LayerCreateComponent extends React.Component {
                 Next, let&#39;s choose the best type of map for your data:
               </p>
               <div css={mapSection}>
-                <img
-                  src={screenGridMapSrc}
-                  css={imgCss}
-                  alt="screen grid map"
-                />
-                <p css={mapType}>
-                  Screen Grid map: these maps are good for xxx
-                </p>
-                <img
-                  src={scatterplotMapSrc}
-                  css={imgCss}
-                  alt="scatterplot map"
-                />
-                <p css={mapType}>
-                  Scatterplot map: these maps are good for xxx
-                </p>
-                <img
-                  src={smallPolygonMapSrc}
-                  css={imgCss}
-                  alt="small polygon map"
-                />
-                <p css={mapType}>
-                  Small Polygon map: these maps are good for xxx
-                </p>
-                <img src={pathMapSrc} css={imgCss} alt="path map" />
-                <p css={mapType}>Path map: these maps are good for xxx</p>
-                <img src={iconMapSrc} css={imgCss} alt="icon map" />
-                <p css={mapType}>Icon map: these maps are good for xxx</p>
+              <img src={screenGridMapSrc} css={imgCss} alt="screen grid map" />
+              <p css={mapType}>Screen Grid map: these maps are good for xxx</p>
+              <img src={choroplethMapSrc} css={imgCss} alt="choropleth map" />
+              <p css={mapType}>Choropleth map: these maps are good for xxx</p>
+              <img src={scatterplotMapSrc} css={imgCss} alt="scatterplot map" />
+              <p css={mapType}>Scatterplot map: these maps are good for xxx</p>
+              <img src={smallPolygonMapSrc} css={imgCss} alt="small polygon map" />
+              <p css={mapType}>Small Polygon map: these maps are good for xxx</p>
+              <img src={pathMapSrc} css={imgCss} alt="path map" />
+              <p css={mapType}>Path map: these maps are good for xxx</p>
+              <img src={iconMapSrc} css={imgCss} alt="icon map" />
+              <p css={mapType}>Icon map: these maps are good for xxx</p>
               </div>
             </Fragment>
           )}

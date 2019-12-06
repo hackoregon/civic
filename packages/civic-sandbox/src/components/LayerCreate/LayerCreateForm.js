@@ -7,7 +7,7 @@ import { Fragment } from "react";
 import PropTypes from "prop-types";
 import * as Yup from "yup";
 
-import { Form, TextField, ButtonNew } from "@hackoregon/component-library";
+import { Form, TextField, SelectField, ButtonNew } from "@hackoregon/component-library";
 
 const wrapper = css`
   padding-bottom: 80px;
@@ -38,9 +38,12 @@ const fields = {
     component: TextField
   },
   affiliation: {
-    label: "Affiliation",
+    label: 'Affiliation',
     section: "baseData",
-    component: TextField
+    component: SelectField,
+    options: {
+      values: ['Transportation', 'Housing', 'Disaster Resilience', 'Education', 'Elections', 'Sandbox', 'Other'],
+    }
   },
   rating: {
     label: "Rating",
