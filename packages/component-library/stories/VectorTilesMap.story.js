@@ -284,6 +284,8 @@ export default () =>
           GROUP_IDS["VECTOR TILES MAP"]
         );
 
+        const filter = object("Filter:", [], GROUP_IDS["VECTOR TILES MAP"]);
+
         const layerPosition = text(
           "Layer Position:",
           "waterway-label",
@@ -316,11 +318,11 @@ export default () =>
 
         const getRadius = number(
           "Radius:",
-          10,
+          150,
           {
             range: true,
             min: 1,
-            max: 150,
+            max: 500,
             step: 1
           },
           GROUP_IDS["DECK GL MAP"]
@@ -345,7 +347,8 @@ export default () =>
 
                 return (
                   <BaseMap
-                    initialZoom={14}
+                    initialZoom={10}
+                    minZoom={3}
                     useScrollZoom
                     useContainerHeight
                     updateViewport={false}
@@ -359,6 +362,7 @@ export default () =>
                       sourceLayer={sourceLayer}
                       paint={paint}
                       layerPosition={layerPosition}
+                      filter={filter}
                     />
                     <ScatterPlotMap
                       data={featuresData}
@@ -454,6 +458,18 @@ export default () =>
           GROUP_IDS.DESIGN
         );
 
+        const index = number(
+          "index:",
+          77,
+          {
+            range: false,
+            min: 0,
+            max: 100,
+            step: 1
+          },
+          GROUP_IDS.DESIGN
+        );
+
         const layerPosition = text(
           "Layer Position:",
           "waterway-label",
@@ -486,6 +502,7 @@ export default () =>
                 vectorTilesURL={vectorTilesURL}
                 layerPosition={layerPosition}
                 multipleLayers={multipleLayers}
+                index={index}
               />
             </BaseMap>
           </div>
