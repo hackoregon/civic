@@ -124,27 +124,52 @@ export default () =>
       () => {
         const vectorTilesURL01 = text(
           "Mapbox Tileset URL - 01:",
-          "mapbox://mapbox.mapbox-terrain-v2",
+          "mapbox://hackoregon.internet-types-b28002-two",
           GROUP_IDS["VECTOR TILES MAP 1"]
         );
 
         const layerType01 = text(
           "Type - 01:",
-          "line",
+          "fill",
           GROUP_IDS["VECTOR TILES MAP 1"]
         );
 
         const sourceLayer01 = text(
           "Source Layer - 01:",
-          "contour",
+          "us-census-tracts",
           GROUP_IDS["VECTOR TILES MAP 1"]
         );
 
         const paint01 = object(
           "Paint - 01:",
           {
-            "line-color": "fuchsia",
-            "line-width": 1
+            "fill-color": [
+              "case",
+              ["==", ["get", "total"], 0],
+              "transparent",
+              [
+                "step",
+                [
+                  "/",
+                  [
+                    "get",
+                    "total_with_an_internet_subscription_broadband_of_any_type"
+                  ],
+                  ["get", "total"]
+                ],
+                "#ffffcc",
+                0.2,
+                "#a1dab4",
+                0.4,
+                "#41b6c4",
+                0.6,
+                "#2c7fb8",
+                0.8,
+                "#253494"
+              ]
+            ],
+            "fill-outline-color": "gray",
+            "fill-opacity": 0.75
           },
           GROUP_IDS["VECTOR TILES MAP 1"]
         );
@@ -163,34 +188,43 @@ export default () =>
 
         const vectorTilesURL02 = text(
           "Mapbox Tileset URL - 02:",
-          "mapbox://mapbox.mapbox-streets-v8",
+          "mapbox://hackoregon.demographic-tracts-centroids",
           GROUP_IDS["VECTOR TILES MAP 2"]
         );
 
         const layerType02 = text(
           "Type - 02:",
-          "fill",
+          "circle",
           GROUP_IDS["VECTOR TILES MAP 2"]
         );
 
         const sourceLayer02 = text(
           "Source Layer - 02:",
-          "water",
+          "us-census-tracts",
           GROUP_IDS["VECTOR TILES MAP 2"]
         );
 
         const paint02 = object(
           "Paint - 02:",
           {
-            "fill-color": "yellow",
-            "fill-opacity": 0.75
+            "circle-color": "gold",
+            "circle-radius": [
+              "interpolate",
+              ["linear"],
+              ["get", "Race: Share Black"],
+              0,
+              0,
+              100,
+              20
+            ],
+            "circle-opacity": 0.9
           },
           GROUP_IDS["VECTOR TILES MAP 2"]
         );
 
         const layerPosition02 = text(
           "Layer Position - 02:",
-          "bridge-path",
+          "waterway-label",
           GROUP_IDS["VECTOR TILES MAP 2"]
         );
 
@@ -210,7 +244,9 @@ export default () =>
         return (
           <div css={containerWrapper}>
             <BaseMap
-              initialZoom={14}
+              initialZoom={12}
+              initialLatitude={33.749}
+              initialLongitude={-84.388}
               minZoom={1}
               useScrollZoom
               useContainerHeight
@@ -387,7 +423,7 @@ export default () =>
       () => {
         const vectorTilesURL = text(
           "Mapbox Tileset URL:",
-          "mapbox://hackoregon.computers-household-b28010",
+          "mapbox://hackoregon.computers-household-b28010-two",
           GROUP_IDS.DESIGN
         );
 
