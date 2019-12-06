@@ -56,13 +56,13 @@ const Sandbox = ({
   errors,
   updateSlideKey
 }) => {
-  const [baseMapStyle, setBaseMapStyle] = useState("dark");
+  const [baseMapStyle, setBaseMapStyle] = useState("light");
 
   const handleBaseMapStyleChange = baseMapStyleChangeEvent => {
     // eslint-disable-next-line no-unused-expressions
     baseMapStyleChangeEvent.target.value === "light"
       ? setBaseMapStyle("light")
-      : setBaseMapStyle("dark");
+      : setBaseMapStyle("sandbox-dark");
   };
 
   const featuresArr = layerData.length ? layerData[0].data : [];
