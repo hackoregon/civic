@@ -1,0 +1,109 @@
+html {
+  font-size: 16px;
+  line-height: 1.35em;
+  background-color: offwhite;
+  font-family: "Merriweather", sans-serif;
+  font-weight: 400;
+  color: midnight;
+  min-height: 100% /* [3] */;
+  -webkit-text-size-adjust: 100% /* [4] */;
+  -ms-text-size-adjust: 100% /* [4] */;
+  -moz-osx-font-smoothing: grayscale /* [5] */;
+  -webkit-font-smoothing: antialiased /* [5] */;
+  -webkit-overflow-scrolling: touch;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Links and Buttons */
+
+button,
+:global(a.button) {
+  appearance: none;
+  background-color: transparent;
+  color: secondary;
+}
+
+a {
+  color: secondary;
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 0.9;
+  transition: all 0.25s ease-in-out;
+}
+
+a:hover {
+  color: secondary;
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 1;
+}
+
+/* Global Styles from product_design */
+
+/* Typography */
+
+:global(.h1),
+h1 {
+  font-size: 36px;
+  font-size: 2.25rem;
+  line-height: 2.625rem;
+  font-family: "Rubik", sans-serif;
+  font-weight: 100;
+}
+
+:global(.h2),
+h2 {
+  font-size: 26px;
+  font-size: 1.625rem;
+  line-height: 2.125rem;
+  font-family: "Rubik", sans-serif;
+  font-weight: 700;
+}
+
+:global(.h3),
+h3 {
+  font-size: 18px;
+  font-size: 1.125rem;
+  line-height: 1.625rem;
+  font-family: "Rubik", sans-serif;
+  font-weight: 700;
+}
+
+:global(.h4),
+h4 {
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 1.375rem;
+  font-family: "Rubik", sans-serif;
+  font-weight: 700;
+}
+
+:global(.h5),
+h5 {
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 1.125rem;
+  font-family: "Rubik", sans-serif;
+  font-weight: 500;
+}
+
+:global(.h6),
+h6 {
+  font-size: 12px;
+  font-size: 0.75rem;
+  line-height: 0.9375rem;
+  font-family: "Rubik", sans-serif;
+  font-weight: 500;
+}
+
+p {
+  font-family: "Merriweather", serif;
+  font-size: 1em;
+  color: #706371;
+}

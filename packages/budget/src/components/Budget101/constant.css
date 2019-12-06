@@ -1,0 +1,60 @@
+@value small: (max-width: 640px);
+@value desktop: (min-width: 641px);
+
+/* Color */
+@value primary: rgba(34,15,37,1);
+@value secondary: rgba(238,73,92,1);
+@value tertiary: rgba(114,99,113,1);
+@value medium: rgba(170,164,171,1);
+@value subdued: rgba(243,242,243,1);
+@value offwhite: rgba(255,254,254,1);
+@value midnight: rgba(0,23,50,1);
+
+.primary-color {
+  color: primary;
+  fill: primary;
+}
+
+.primary-background-color {
+  background-color: primary;
+}
+
+.secondary-color {
+  color: secondary;
+  fill: secondary;
+}
+
+.tertiary-color {
+  color: tertiary;
+  fill: tertiary;
+}
+
+.medium-color {
+  color: medium;
+  fill: medium;
+}
+
+.subdued-color {
+  color: subdued;
+  fill: subdued;
+}
+
+/* Phone Breakpoint */
+
+@media screen and small {
+}
+
+/* Tablet Portrait Breakpoint */
+
+@media screen and desktop and (max-width: 768px) {
+}
+
+/* Tablet Landscape Breakpoint */
+
+@media screen and (min-width: 769px) and (max-width: 1024) {
+}
+
+/* Desktop Breakpoint */
+
+@media screen and (min-width: 1025px) {
+}

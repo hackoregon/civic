@@ -1,0 +1,50 @@
+/* budget-heading green : #329f7c */
+
+.budget-card-collection__intro-hero {
+  padding: 1rem;
+  background: #f0f0f0;
+  color: #999;
+}
+
+.budget-heading {
+  color: #329f7c;
+  font-weight: bold;
+}
+
+.budget-card-collection__sticky-container {
+  position: relative;
+  z-index: 0;
+}
+
+.budget-card-collection__sticky-controller {
+  position: relative;
+  padding: 0.5rem;
+  padding-bottom: 2rem;
+  background: white;
+  z-index: 5000;
+}
+
+.Card {
+  margin-top: 2rem;
+  max-width: 800px;
+  /* puts card children behind sticky controller */
+  position: relative;
+  z-index: -1;
+}
+
+.Card .Title.Rubik {
+}
+
+.budget-green {
+  color: #329f7c;
+}
+
+.budget-current-year {
+  font-weight: bold;
+}
+
+.rc-slider {
+  width: 93%;
+  display: block;
+  margin: 0 auto;
+}
