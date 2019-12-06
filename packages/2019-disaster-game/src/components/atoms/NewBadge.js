@@ -83,18 +83,23 @@ const NewBadge = ({ type, badges, playAudio, stopAudio }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
-    <div
-      css={css`
-        ${containerStyle};
-        ${hideBadge ? hideBadgeStyle : ""};
-      `}
-    >
-      <p css={[badgeText, titleText]}>NEW BADGE EARNED!</p>
-      <img src={badgeInfo.badgeSVG} alt="Badge" css={badgeStyle} />
-      <p css={badgeText}>{badgeInfo.title}</p>
-    </div>
-  );
+  const badgeInfoComplete = badgeInfo && badgeInfo.badgeSVG && badgeInfo.title;
+
+  if (badgeInfoComplete) {
+    return (
+      <div
+        css={css`
+          ${containerStyle};
+          ${hideBadge ? hideBadgeStyle : ""};
+        `}
+      >
+        <p css={[badgeText, titleText]}>NEW BADGE EARNED!</p>
+        <img src={badgeInfo.badgeSVG} alt="Badge" css={badgeStyle} />
+        <p css={badgeText}>{badgeInfo.title}</p>
+      </div>
+    );
+  }
+  return null;
 };
 
 NewBadge.propTypes = {

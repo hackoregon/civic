@@ -44,8 +44,9 @@ const hideCircle = css`
 
 const Badge = ({ badgeInfo, openBadgeDrawer, isSummary }) => {
   const prevBadgeInfo = usePrevious(badgeInfo);
-  const badgeAcquired = badgeInfo && badgeInfo.acquired;
-  const isEarthquakeHeroBadge = badgeInfo.id === "earthquakeHeroBadge";
+  const badgeAcquired = badgeInfo && badgeInfo.badgeSVG && badgeInfo.acquired;
+  const isEarthquakeHeroBadge =
+    badgeInfo && badgeInfo.id === "earthquakeHeroBadge";
   const hideBadge = isEarthquakeHeroBadge && !isSummary;
 
   useEffect(() => {
