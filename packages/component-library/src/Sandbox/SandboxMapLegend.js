@@ -68,8 +68,8 @@ const SandboxMapLegend = React.memo(props => {
   const {
     civicColor,
     scaleType = {},
-    dataRange,
-    colorRange,
+    dataRange = [],
+    colorRange = [],
     fieldName,
     mapType,
     layerInfo
@@ -180,6 +180,7 @@ const SandboxMapLegend = React.memo(props => {
     mapProps.tooltip.primary.format
       ? mapProps.tooltip.primary.format
       : "numeric";
+
   const ticksFormatted = formatTicks(ticks, formatType);
 
   const tickStyle =
