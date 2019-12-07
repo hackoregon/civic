@@ -141,7 +141,7 @@ MatchLockInterface.propTypes = {
   noInteractionCallback: PropTypes.func,
   restartNoInteractionTimer: PropTypes.bool,
   noInteractionDuration: PropTypes.number,
-  requiredItem: PropTypes.shape({})
+  requiredItem: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.string])
 };
 
 export default MatchLockInterface;
