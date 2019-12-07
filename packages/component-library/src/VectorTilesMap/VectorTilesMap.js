@@ -26,6 +26,7 @@ const VectorTilesMap = React.memo(props => {
 
   const greaterThan = /&gt;/;
   const lessThan = /&lt;/;
+
   const formatFilter = arr => {
     const [filterKey, ...rest] = arr;
     if (filterKey.search(greaterThan) > -1) {
@@ -39,19 +40,31 @@ const VectorTilesMap = React.memo(props => {
 
   const showMultiLayers =
     multipleLayers.length > 0 &&
-    multipleLayers.map(l => {
+    multipleLayers.map(layer => {
+      const {
+        layerPosition: multiLayerPosition,
+        sourceLayer: multiSourceLayer,
+        layerID: multiLayerID,
+        layerType: multiLayerType,
+        paint: multiPaint,
+        hover = false
+      } = layer;
+
       const multiSourceLayerProp = {
-        "source-layer": l.sourceLayer
+        "source-layer": multiSourceLayer
       };
-      const filterProp = l.filter ? { filter: formatFilter(l.filter) } : {};
+
+      const filterProp =
+        filter.length > 0 && hover ? { filter: formatFilter(filter) } : {};
+
       return (
         <Layer
-          beforeId={layerPosition}
-          id={l.layerID}
-          key={l.layerID}
-          type={l.layerType}
+          beforeId={multiLayerPosition}
+          id={multiLayerID}
+          key={multiLayerID}
+          type={multiLayerType}
           source={vectorTilesID + index}
-          paint={l.paint}
+          paint={multiPaint}
           metadata={metaProps}
           {...multiSourceLayerProp}
           {...filterProp}

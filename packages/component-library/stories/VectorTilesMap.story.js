@@ -494,18 +494,6 @@ export default () =>
           GROUP_IDS.DESIGN
         );
 
-        const index = number(
-          "index:",
-          77,
-          {
-            range: false,
-            min: 0,
-            max: 100,
-            step: 1
-          },
-          GROUP_IDS.DESIGN
-        );
-
         const layerPosition = text(
           "Layer Position:",
           "waterway-label",
@@ -516,6 +504,24 @@ export default () =>
           "CIVIC Map Styles:",
           MAP_STYLE_OPTIONS,
           MAP_STYLE_OPTIONS["CIVIC Dark"],
+          GROUP_IDS.DESIGN
+        );
+
+        const filter = object(
+          "Filter:",
+          ["==", "name", null],
+          GROUP_IDS.DESIGN
+        );
+
+        const index = number(
+          "index:",
+          77,
+          {
+            range: false,
+            min: 0,
+            max: 100,
+            step: 1
+          },
           GROUP_IDS.DESIGN
         );
 
@@ -539,6 +545,7 @@ export default () =>
                 layerPosition={layerPosition}
                 multipleLayers={multipleLayers}
                 index={index}
+                filter={filter}
               />
             </BaseMap>
           </div>

@@ -69,17 +69,47 @@ export const getSelectedSlidesData = createSelector(
   sandbox => sandbox.slidesData
 );
 
+export const getBaseMapDatum = createSelector(
+  getSandbox,
+  sandbox => sandbox.selectedBaseMapDatum
+);
+
 export const getLayerSlides = createSelector(
   getSelectedSlidesData,
   getSelectedSlides,
   getSelectedSlideKey,
-  (slidesData, selectedSlides, selectedSlideKey) => {
+  getBaseMapDatum,
+  (slidesData, selectedSlides, selectedSlideKey, baseMapDatum) => {
     const filteredSlideVizData = selectedSlides.reduce((a, c) => {
       const findSlide = slidesData.find(e => e.displayName === c);
       return findSlide ? [...a, findSlide] : a;
     }, []);
 
+    const createFilter = mapOptions => {
+      const { filter = [], fieldName } = mapOptions;
+      if (!filter.length || !fieldName.hover) return filter;
+
+      if (!baseMapDatum) return filter;
+      const { feature } = baseMapDatum;
+      if (!feature) return filter;
+
+      const { object } = feature;
+      if (!object || !object.properties) return filter;
+
+      const { properties } = object;
+      if (!properties[fieldName.hover]) return filter;
+      const hoverPropValue = properties[fieldName.hover];
+      const finalFilter = [...filter.slice(0, 2), hoverPropValue];
+
+      return finalFilter;
+    };
+
     const formattedSliderVizData = filteredSlideVizData.map(d => {
+      const filter =
+        d.visualization.map.mapType === "VectorTilesMap"
+          ? createFilter(d.visualization.map)
+          : [];
+
       const mapProps = {
         ...d.visualization.map,
         tooltip: {
@@ -99,7 +129,8 @@ export const getLayerSlides = createSelector(
               d.visualization.map.fieldName.area
             ? d.visualization.map.fieldName.area
             : ""
-        }
+        },
+        filter
       };
 
       return {
