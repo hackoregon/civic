@@ -279,6 +279,7 @@ export const getSelectedFoundationDatum = createSelector(
 
     if (activeLayer.visualization.map.mapType !== "ChoroplethMap") return null;
 
+    const feature = selectedFeature && selectedFeature.object;
     const id =
       selectedFeature && selectedFeature.object && selectedFeature.object.id;
     const featureProperties =
@@ -302,6 +303,7 @@ export const getSelectedFoundationDatum = createSelector(
     return {
       id,
       displayName,
+      feature,
       featureProperties,
       colorKey,
       primaryFormat

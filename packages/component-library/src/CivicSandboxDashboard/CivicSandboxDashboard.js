@@ -180,12 +180,21 @@ const viz = css`
 //   </div>
 // );
 
-const createLineViz = (data, title, xLabel, yLabel, xFormat, yFormat, id) => {
+const createLineViz = (
+  data,
+  title,
+  xLabel,
+  yLabel,
+  xFormat,
+  yFormat,
+  id,
+  feature
+) => {
   const yForm = yFormat === "percent" ? "percentage" : yFormat;
   return (
     <div css={viz} key={id}>
       <h3>
-        <PolygonPreview />
+        <PolygonPreview feature={feature} />
         {title}
       </h3>
       <p>
@@ -269,7 +278,8 @@ const CivicDashboard = props => {
           data.primaryFormat,
           "year",
           data.primaryFormat,
-          data.id
+          data.id,
+          data.feature
         )
       : placeholder;
 
@@ -352,6 +362,7 @@ CivicDashboard.propTypes = {
   data: shape({
     id: number,
     displayName: string,
+    feature: shape({}),
     featureProperties: shape({}),
     colorKey: string,
     primaryFormat: string
