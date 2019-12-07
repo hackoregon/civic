@@ -294,7 +294,7 @@ const TaskScreen = ({
         />
       </div>
       <MatchLockInterface
-        requiredItem={activeTask.requiredItem}
+        requiredItem={activeTask ? activeTask.requiredItem : null}
         possibleItems={possibleItems}
         onOrbSelection={onOrbSelection}
         checkItemIsCorrect={checkItemIsCorrect}
