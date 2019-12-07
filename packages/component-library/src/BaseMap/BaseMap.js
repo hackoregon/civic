@@ -340,9 +340,24 @@ class BaseMap extends Component {
           ref={this.mapRef}
           {...mapGLOptions}
           onClick={onBaseMapClick}
-          onHover={onBaseMapHover}
-          onMouseOut={onBaseMapMouseOut}
-          onBlur={onBaseMapMouseOut}
+          onHover={baseInfo => {
+            const baseMapboxRef = this.mapRef.current.getMap();
+            if (onBaseMapHover) {
+              onBaseMapHover(baseInfo, baseMapboxRef);
+            }
+          }}
+          onMouseOut={() => {
+            const baseMapboxRef = this.mapRef.current.getMap();
+            if (onBaseMapMouseOut) {
+              onBaseMapMouseOut(baseMapboxRef);
+            }
+          }}
+          onBlur={() => {
+            const baseMapboxRef = this.mapRef.current.getMap();
+            if (onBaseMapMouseOut) {
+              onBaseMapMouseOut(baseMapboxRef);
+            }
+          }}
           onLoad={onMapLoad}
           scrollZoom={useScrollZoom}
         >

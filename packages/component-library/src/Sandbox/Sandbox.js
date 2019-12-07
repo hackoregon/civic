@@ -68,13 +68,44 @@ const Sandbox = ({
   const featuresArr = layerData.length ? layerData[0].data : [];
   const boundBox = layerData.length ? layerData[0].boundBox : [];
 
-  const onHoverVectorLayer = info => {
+  const [highlightFeatureStateID, setHighlightFeatureStateID] = useState(null);
+  const [vectorSource, setVectorSource] = useState(null);
+  const [vectorSourceLayer, setVectorSourceLayer] = useState(null);
+
+  const onHoverVectorLayer = (info, mapboxRef) => {
     const [selectedFeature] = info.features;
-    const selectedProps = selectedFeature.properties;
     const selectedIndex =
       selectedFeature.layer &&
       selectedFeature.layer.metadata &&
       selectedFeature.layer.metadata["sandbox:index"];
+
+    const hoverVectorSource = selectedFeature.source;
+    const hoverVectorSourceLayer = selectedFeature.sourceLayer;
+
+    if (highlightFeatureStateID) {
+      mapboxRef.removeFeatureState({
+        source: vectorSource,
+        sourceLayer: vectorSourceLayer
+      });
+    }
+
+    if (selectedIndex >= 0) {
+      setHighlightFeatureStateID(selectedFeature.id);
+      setVectorSource(hoverVectorSource);
+      setVectorSourceLayer(hoverVectorSourceLayer);
+      mapboxRef.setFeatureState(
+        {
+          source: hoverVectorSource,
+          sourceLayer: hoverVectorSourceLayer,
+          id: selectedFeature.id
+        },
+        {
+          highlight: true
+        }
+      );
+    }
+
+    const selectedProps = selectedFeature.properties;
 
     if (selectedProps && selectedIndex !== undefined) {
       const selectedDatum = {
@@ -91,7 +122,12 @@ const Sandbox = ({
     }
   };
 
-  const mouseOutVectorLayer = () => {
+  const mouseOutVectorLayer = mapboxRef => {
+    mapboxRef.removeFeatureState({
+      source: vectorSource,
+      sourceLayer: vectorSourceLayer
+    });
+
     const selectedDatum = {
       object: {}
     };
