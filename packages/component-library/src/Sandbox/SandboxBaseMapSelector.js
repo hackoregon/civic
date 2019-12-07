@@ -29,7 +29,7 @@ const SandboxBaseMapSelector = ({ onBaseMapStyleChange, baseMapStyle }) => {
           value="sandbox-dark"
           onChange={onBaseMapStyleChange}
         />
-        <label htmlFor="sandbox-dark">Dark</label>
+        <label htmlFor="dark">Dark</label>
       </div>
     </Fragment>
   );

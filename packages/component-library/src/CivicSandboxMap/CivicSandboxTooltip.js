@@ -9,11 +9,10 @@ const tooltip = css`
   font-family: Helvetica, Arial, sans-serif;
   font-size: 16px;
   position: absolute;
-  padding: 4px;
-  margin: 8px;
+  padding: 0 10px 0 5px;
   background: rgba(0, 0, 0, 0.75);
   color: #fff;
-  max-width: 250px;
+  max-width: 275px;
   z-index: 9;
   pointer-events: none;
 `;
@@ -23,11 +22,14 @@ const MapTooltip = props => {
   const { x } = tooltipData;
   const { y } = tooltipData;
 
+  const xPositionOffset = 25;
   const xPosition =
     x < get(window, "innerWidth", 1000) * 0.66
-      ? x
-      : x - get(window, "innerWidth", 1000) * 0.1;
-  const yPostition = y < 375 ? y : y - 50;
+      ? x + xPositionOffset
+      : x - xPositionOffset * 3;
+
+  const yPositionOffset = 45;
+  const yPostition = y < 375 ? y + yPositionOffset : y - yPositionOffset * 4;
 
   const tooltipContent = tooltipData.content.map(obj => {
     const value = obj.value ? obj.value : "No Data Available";
