@@ -12,6 +12,7 @@ import civicFormat from "../utils/civicFormat";
 import { ICONS } from "../styleConstants";
 import Placeholder from "../Placeholder/Placeholder";
 import PolygonPreview from "../PolygonPreview/PolygonPreview";
+import VisualizationColors from "../_Themes/VisualizationColors";
 
 const container = css`
   position: absolute;
@@ -194,13 +195,15 @@ const createLineViz = (
   return (
     <div css={viz} key={id}>
       <h3>
-        <PolygonPreview feature={feature} />
+        <PolygonPreview
+          feature={feature}
+          stroke={VisualizationColors.categorical.pink.hex}
+          strokeWidth={30}
+          svgCss={css(`height: 1.125rem;`)}
+          padding={30}
+        />
         {title}
       </h3>
-      <p>
-        This is a brief description of the layer, including what data is being
-        represented.
-      </p>
       <LineChart
         data={data}
         xLabel={xLabel}

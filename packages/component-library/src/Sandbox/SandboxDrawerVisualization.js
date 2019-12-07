@@ -5,7 +5,11 @@ import { Fragment } from "react";
 import CivicSandboxDashboard from "../CivicSandboxDashboard/CivicSandboxDashboard";
 
 const SandboxDrawerVisualization = props => {
-  const { selectedPackage, selectedFoundationDatum } = props;
+  const {
+    selectedPackage,
+    selectedPackageDescription,
+    selectedFoundationDatum
+  } = props;
 
   return (
     <Fragment>
@@ -23,10 +27,7 @@ const SandboxDrawerVisualization = props => {
             Data Detail
           </h2>
           <h3>{selectedPackage}</h3>
-          <p>
-            This is a brief description of the selected package, what data sets
-            it uses
-          </p>
+          <p>{selectedPackageDescription}</p>
         </div>
       </div>
       <CivicSandboxDashboard
@@ -42,5 +43,6 @@ export default SandboxDrawerVisualization;
 
 SandboxDrawerVisualization.propTypes = {
   selectedPackage: string,
+  selectedPackageDescription: string,
   selectedFoundationDatum: shape({})
 };

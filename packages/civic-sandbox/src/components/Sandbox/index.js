@@ -30,6 +30,7 @@ import {
   getSelectedFoundationData,
   getSelectedSlidesData,
   getSelectedPackage,
+  getSelectedPackageDescription,
   getSelectedFoundation,
   getSelectedSlides,
   getLayerSlides,
@@ -162,6 +163,7 @@ class SandboxComponent extends React.Component {
       setPackage: renderSetPackage,
       sandboxData,
       selectedPackage,
+      selectedPackageDescription,
       selectedFoundation,
       selectedSlide,
       selectedSlidesData,
@@ -205,6 +207,7 @@ class SandboxComponent extends React.Component {
         styles={styles}
         data={sandboxData}
         selectedPackage={selectedPackage}
+        selectedPackageDescription={selectedPackageDescription}
         selectedFoundation={selectedFoundation}
         selectedSlide={selectedSlide}
         drawerVisible={drawerVisible}
@@ -239,6 +242,7 @@ export default connect(
     isError: isAnyError(state),
     sandboxData: getSandboxData(state),
     selectedPackage: getSelectedPackage(state),
+    selectedPackageDescription: getSelectedPackageDescription(state),
     selectedPackageData: getSelectedPackageData(state),
     selectedFoundation: getSelectedFoundation(state),
     slidesData: getSlidesData(state),
@@ -291,6 +295,7 @@ SandboxComponent.propTypes = {
   }),
   slidesData: arrayOf(shape({})),
   selectedPackage: string,
+  selectedPackageDescription: string,
   selectedSlide: arrayOf(string),
   selectedSlidesData: arrayOf(shape({})),
   allSlides: arrayOf(shape({})),

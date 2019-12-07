@@ -48,6 +48,7 @@ const SandboxDrawer = props => {
     data,
     onChange,
     selectedPackage,
+    selectedPackageDescription,
     toggleDialog,
     toggleDrawer,
     toggleVisualization,
@@ -178,6 +179,7 @@ const SandboxDrawer = props => {
           {drawerVisualization && (
             <SandboxDrawerVisualization
               selectedPackage={selectedPackage}
+              selectedPackageDescription={selectedPackageDescription}
               selectedFoundationDatum={selectedFoundationDatum}
             />
           )}
@@ -207,6 +209,7 @@ SandboxDrawer.propTypes = {
   data: shape({}),
   onChange: func,
   selectedPackage: string,
+  selectedPackageDescription: string,
   toggleDialog: func,
   toggleDrawer: func,
   toggleVisualization: func,

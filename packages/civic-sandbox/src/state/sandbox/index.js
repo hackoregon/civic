@@ -30,11 +30,13 @@ const INITIAL_STATE = {
   slidesPending: false,
   slidesError: null,
   selectedPackage: "",
+  selectedPackageDescription: "",
   sandbox: {},
   foundationData: {},
   slidesData: [],
   slidesSuccess: null,
   selectedFoundation: "",
+  selectedFoundationDescription: "",
   selectedSlide: [],
   selectedSlideKey: {},
   selectedFoundationDatum: null,
@@ -138,6 +140,9 @@ const reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         selectedPackage: action.selectedPackage.displayName,
+        selectedPackageDescription: action.selectedPackage.description
+          ? action.selectedPackage.description
+          : "A brief description of the selected data collection",
         foundationData: {},
         slidesData: [],
         selectedSlide: findDefaultLayers.defaultLayers
