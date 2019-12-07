@@ -94,32 +94,43 @@ const TaskScreen = ({
   const prevActiveTaskIndex = usePrevious(activeTaskIndex);
   const prevShowRestart = usePrevious(showRestartModal);
 
+  const determineBadgeToAward = () => {
+    let earnedBadge = null;
+
+    if (activeTaskIndex < 2) {
+      const nextTotalSaveYourself = completedSaveYourselfTasks + 1;
+      earnedBadge = nextTotalSaveYourself === 2 && "taskSurvivorBadge";
+      setCompletedSaveYourselfTasks(nextTotalSaveYourself);
+    } else {
+      const nextTotalSaveOthers = completedSaveOthersTasks + 1;
+      if (nextTotalSaveOthers === 4) {
+        earnedBadge = "taskCitySuperheroBadge";
+      } else if (nextTotalSaveOthers === 2) {
+        earnedBadge = "taskNeighborhoodHeroBadge";
+      }
+      setCompletedSaveOthersTasks(nextTotalSaveOthers);
+    }
+
+    return earnedBadge;
+  };
+
+  const awardBadgeIfApplicable = () => {
+    const earnedBadge = determineBadgeToAward();
+
+    completeActiveTask(earnedBadge);
+
+    if (earnedBadge) {
+      addHeroBadge("hero", earnedBadge);
+    }
+  };
+
   const onItemSelection = orbModel => {
     if (orbModel.type === activeTask.requiredItem) {
       const itemsNowChosen = correctItemsChosen + 1;
       setCorrectItemsChosen(itemsNowChosen);
 
       if (itemsNowChosen >= activeTask.numberItemsToSolve) {
-        let earnedBadge = null;
-        if (activeTaskIndex < 2) {
-          const nextTotalSaveYourself = completedSaveYourselfTasks + 1;
-          earnedBadge = nextTotalSaveYourself === 2 && "taskSurvivorBadge";
-          setCompletedSaveYourselfTasks(nextTotalSaveYourself);
-        } else {
-          const nextTotalSaveOthers = completedSaveOthersTasks + 1;
-          if (nextTotalSaveOthers === 4) {
-            earnedBadge = "taskCitySuperheroBadge";
-          } else if (nextTotalSaveOthers === 2) {
-            earnedBadge = "taskNeighborhoodHeroBadge";
-          }
-          setCompletedSaveOthersTasks(nextTotalSaveOthers);
-        }
-
-        completeActiveTask(earnedBadge);
-
-        if (earnedBadge) {
-          addHeroBadge("hero", earnedBadge);
-        }
+        awardBadgeIfApplicable();
       }
       return true;
     }
