@@ -98,7 +98,12 @@ class SandboxComponent extends React.Component {
   }
 
   updateSlide = event => {
-    const { selectedSlide, allSlides, setSlides: updateSetSlides } = this.props;
+    const {
+      selectedSlide,
+      allSlides,
+      setSlides: updateSetSlides,
+      selectedSlidesData
+    } = this.props;
     const slideName = event.target.value;
 
     const originalSelectedSlideOrder = [...allSlides].map(s => {
@@ -120,7 +125,22 @@ class SandboxComponent extends React.Component {
           ...originalSelectedSlideOrder.filter(s => s.checked).map(s => s.label)
         ];
 
-    updateSetSlides(reorderSelectedSlides);
+    const choroplethSlidesData = selectedSlidesData.filter(
+      slideDatum => slideDatum.visualization.map.mapType === "ChoroplethMap"
+    );
+    const choroplethSlides = choroplethSlidesData.map(
+      slideDatum => slideDatum.displayName
+    );
+    // Only allow one choropleth to be selected at a time
+    const reorderSelectedSlidesOnlyOneChoropleth = choroplethSlides.includes(
+      slideName
+    )
+      ? reorderSelectedSlides.filter(
+          slide => slide === slideName || !choroplethSlides.includes(slide)
+        )
+      : reorderSelectedSlides;
+
+    updateSetSlides(reorderSelectedSlidesOnlyOneChoropleth);
   };
 
   toggleDrawer = () => {
