@@ -72,9 +72,20 @@ const SandboxMapLegend = React.memo(props => {
     colorRange = [],
     fieldName,
     mapType,
-    layerInfo
+    layerInfo,
+    legend
   } = mapProps;
   const { color: colorScaleType } = scaleType;
+  // console.log("LEGEND-legend:", legend);
+
+  const {
+    format: legendFormat,
+    colorRange: legendColorRange,
+    dataRange: legendDataRange
+    // type: legendType,
+    // fieldName: legendFieldName,
+    // label: legendLabel,
+  } = legend;
 
   let choroplethColorScale = createColorScale(
     civicColor,
@@ -112,7 +123,7 @@ const SandboxMapLegend = React.memo(props => {
 
   const colorScaleRange =
     mapType === "VectorTilesMap"
-      ? createRange("", colorRange).map(c => [...c, 255])
+      ? createRange("", legendColorRange).map(c => [...c, 255])
       : choroplethColorScale.range()[0].length === 4
       ? choroplethColorScale.range()
       : choroplethColorScale.range().map(c => [...c, 255]);
@@ -120,10 +131,10 @@ const SandboxMapLegend = React.memo(props => {
   const mapColorsArr = colorScaleRange.map(arr => formatColor(arr));
 
   const bins =
-    colorScaleType === "ordinal" ||
-    colorScaleType === "threshold" ||
-    mapType === "VectorTilesMap"
+    colorScaleType === "ordinal" || colorScaleType === "threshold"
       ? dataRange
+      : mapType === "VectorTilesMap"
+      ? legendDataRange
       : choroplethColorScale
           .range()
           .map(d => choroplethColorScale.invertExtent(d));
@@ -152,36 +163,31 @@ const SandboxMapLegend = React.memo(props => {
 
   const formatTicks = (arr, typeFormat) => {
     const formatter =
-      typeFormat === "numeric"
-        ? civicFormat.numeric
-        : typeFormat === "numericShort"
-        ? civicFormat.numericShort
-        : typeFormat === "decimal"
-        ? sandboxDecimalFormat
-        : typeFormat === "percent" || typeFormat === "percentage"
+      typeFormat === "percentage"
         ? sandboxPercentFormat
         : typeFormat === "dollars"
         ? sandboxMoneyFormat
-        : typeFormat === "year"
-        ? civicFormat.year
-        : typeFormat === "monthYear"
-        ? civicFormat.monthYear
-        : typeFormat === "titleCase"
-        ? startCase
+        : typeFormat === "decimal"
+        ? sandboxDecimalFormat
         : typeFormat === "sentenceCase"
         ? sandboxSentenceCase
-        : civicFormat.unformatted;
+        : typeFormat === "titleCase"
+        ? startCase
+        : civicFormat.typeFormat || civicFormat.unformatted;
     return arr.map(d => formatter(d));
   };
 
-  const formatType =
+  const oldLegendFormat =
     mapProps.tooltip &&
     mapProps.tooltip.primary &&
-    mapProps.tooltip.primary.format
-      ? mapProps.tooltip.primary.format
-      : "numeric";
+    mapProps.tooltip.primary.format;
+  // console.log("LEGNED-oldLegendFormat:", oldLegendFormat);
+
+  const formatType = legendFormat || oldLegendFormat;
+  // console.log("LEGNED-formatType:", formatType);
 
   const ticksFormatted = formatTicks(ticks, formatType);
+  // console.log("LEGNED-ticksFormatted:", ticksFormatted);
 
   const tickStyle =
     colorScaleType === "threshold"
@@ -216,7 +222,7 @@ const SandboxMapLegend = React.memo(props => {
       : { h: 0, c: "0" };
   });
 
-  const legend = mapColorsArr.map((d, i) => {
+  const legendContents = mapColorsArr.map((d, i) => {
     return (
       <div
         key={layerInfo.displayName + d}
@@ -233,7 +239,7 @@ const SandboxMapLegend = React.memo(props => {
     );
   });
 
-  return <div css={legendContainer}>{legend}</div>;
+  return <div css={legendContainer}>{legendContents}</div>;
 });
 
 SandboxMapLegend.propTypes = {

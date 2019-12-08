@@ -217,7 +217,8 @@ const SandboxDrawer = props => {
                     d.layerInfo.displayName === slide.label;
                   const vectorTilesMap =
                     d.mapType === "VectorTilesMap" &&
-                    d.type === "fill" &&
+                    d.legend &&
+                    d.legend.type === "choropleth" &&
                     d.layerInfo.displayName === slide.label;
                   return choropleth || scatterplot || vectorTilesMap;
                 });
