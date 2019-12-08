@@ -117,7 +117,6 @@ export class Packages extends React.Component {
           border: 0px solid crimson;
           width: 100%;
           height: 100vh;
-          min-height: 600px;
         `)}
       >
         {mapIsOpen && (
