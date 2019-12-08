@@ -53,7 +53,7 @@ const SandboxLegend = props => {
                 key={shortid.generate()}
                 css={css(`
                   position: absolute;
-                  bottom: 30px;
+                  bottom: ${30 + dataIndex * 150}px;
                   width: 500px;
                   left: 0px;
                   background-color: rgba(255,255,255,0.9);

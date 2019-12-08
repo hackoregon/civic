@@ -3,6 +3,7 @@ import { jsx, css } from "@emotion/core";
 import { string, bool, func, arrayOf, shape } from "prop-types";
 import SandboxDrawerLayerSelector from "./SandboxDrawerLayerSelector";
 import SandboxDrawerVisualization from "./SandboxDrawerVisualization";
+import Logo from "../Logo/Logo";
 
 const menuOpen = css(`
   display: flex;
@@ -162,7 +163,7 @@ const SandboxDrawer = props => {
             tabIndex={0}
             css={css(`
               margin: 0 0 10px 0;
-              padding: 0;
+              padding-top: 5px;
               background-color: #201024;
               color: white;
               height: 35px;
@@ -170,13 +171,7 @@ const SandboxDrawer = props => {
               cursor: pointer;
           `)}
           >
-            <h2
-              css={css(`
-                margin: 0;
-            `)}
-            >
-              CIVIC Sandbox
-            </h2>
+            <Logo type="sandboxLogoInverted" />
           </div>
           {drawerVisualization && (
             <SandboxDrawerVisualization

@@ -47,6 +47,9 @@ const LogosStyle = () => (
     <div style={storybookStyles.invertedLogo}>
       <Logo type="squareLogoInverted" />
     </div>
+    <div style={storybookStyles.invertedLogo}>
+      <Logo type="sandboxLogoInverted" />
+    </div>
   </div>
 );
 
