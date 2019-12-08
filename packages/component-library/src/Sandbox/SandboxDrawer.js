@@ -90,6 +90,8 @@ const SandboxDrawer = props => {
   const rotate = css(`
     @media (max-width: 500px) {
       transform: rotate(-90deg);
+      width: fit-content;
+      margin: 0 auto;
     }
   `);
 
@@ -116,9 +118,9 @@ const SandboxDrawer = props => {
             onKeyPress={toggleDrawer}
             role="button"
             tabIndex={0}
-            css={[buttonStyle, on, rotate]}
+            css={[buttonStyle, on]}
           >
-            {drawerVisible ? ">" : "<"}
+            <div css={rotate}>{drawerVisible ? ">" : "<"}</div>
           </div>
           <div
             onClick={toggleVisualization}
