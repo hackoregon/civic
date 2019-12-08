@@ -1,6 +1,5 @@
 import React from "react";
 import { GeoJsonLayer } from "deck.gl";
-import shortid from "shortid";
 import { number, string, bool, func, arrayOf, shape } from "prop-types";
 import { scaleThreshold } from "d3";
 
@@ -72,7 +71,7 @@ const MultiSmallPolygonMap = props => {
 
   return (
     <GeoJsonLayer
-      key={shortid.generate()}
+      key={id}
       id={id}
       data={data}
       pickable={pickable}

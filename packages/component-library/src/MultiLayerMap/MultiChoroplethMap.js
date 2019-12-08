@@ -1,12 +1,16 @@
 import React from "react";
 import { GeoJsonLayer } from "deck.gl";
-import shortid from "shortid";
+import { memoize } from "lodash";
 import { number, string, bool, func, arrayOf, shape } from "prop-types";
 import {
   createColorScale,
   updateQuantileScale,
   updateEqualScale
 } from "./createLayers";
+
+const memoizeData = memoize(featuresArr => {
+  return featuresArr.filter(f => f.geometry && f.geometry.coordinates.length);
+});
 
 const MultiChoroplethMap = props => {
   const {
@@ -86,16 +90,14 @@ const MultiChoroplethMap = props => {
     return lineWidth;
   };
 
-  const noNullGeometryData = data.filter(
-    d => d.geometry && d.geometry.coordinates.length
-  );
+  const filteredData = memoizeData(data);
 
   return (
     <GeoJsonLayer
-      key={shortid.generate()}
+      key={id}
       id={id}
       pickable={pickable}
-      data={noNullGeometryData}
+      data={filteredData}
       opacity={opacity}
       getPolygon={getPolygon}
       filled={filled}

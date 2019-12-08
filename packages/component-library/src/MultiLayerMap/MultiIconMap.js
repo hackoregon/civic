@@ -1,7 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import React from "react";
 import { IconLayer } from "deck.gl";
-import shortid from "shortid";
 import { number, string, bool, func, arrayOf, shape } from "prop-types";
 
 import { createColorScale, createSizeScale } from "./createLayers";
@@ -81,7 +80,7 @@ const MultiIconMap = props => {
 
   return (
     <IconLayer
-      key={shortid.generate()}
+      key={id}
       id={id}
       data={data.filter(d => d.geometry)}
       pickable={pickable}
