@@ -112,6 +112,9 @@ export const getLayerSlides = createSelector(
 
       const mapProps = {
         ...d.visualization.map,
+        legend: {
+          ...d.visualization.legend
+        },
         tooltip: {
           ...d.visualization.tooltip
         },
@@ -132,7 +135,7 @@ export const getLayerSlides = createSelector(
         },
         filter
       };
-
+      // console.log("SELECT-mapProps:", mapProps);
       return {
         ...mapProps,
         data: d.results ? d.results.features : [],
@@ -209,12 +212,9 @@ export const getSelectedBaseMapDatum = createSelector(
   getSelectedSlidesData,
   getSelectedSlides,
   ({ selectedBaseMapDatum }, slides, selectedSlides) => {
-    if (
-      !selectedBaseMapDatum ||
-      !selectedBaseMapDatum.feature.object ||
-      !slides
-    )
-      return;
+    const noBaseMapDatum =
+      !selectedBaseMapDatum || !selectedBaseMapDatum.feature.object || !slides;
+    if (noBaseMapDatum) return null;
 
     const { feature: slideFeature, index: slideIndex } = selectedBaseMapDatum;
 
@@ -224,45 +224,37 @@ export const getSelectedBaseMapDatum = createSelector(
       return s.displayName === activeLayerName;
     });
 
-    if (
+    const noTooltip =
       !activeLayer ||
       !activeLayer.visualization ||
-      !activeLayer.visualization.tooltip
-    )
-      return;
-    const tooltipFields = activeLayer.visualization.tooltip;
+      !activeLayer.visualization.tooltip ||
+      activeLayer.visualization.tooltip.length < 0;
 
-    const tooltipInfo = {
+    if (noTooltip) return null;
+
+    const tooltipArr = activeLayer.visualization.tooltip;
+
+    const { object: slideObject } = slideFeature;
+
+    const tooltipContent = tooltipArr.map(t => {
+      const { fieldName: rawValueName, fieldNameTotal: totalValueName } = t;
+      const rawValue = slideObject.properties[rawValueName];
+      const calcValue =
+        t.format === "percentage" && t.fieldNameTotal && rawValue
+          ? rawValue / slideObject.properties[totalValueName]
+          : rawValue;
+      return {
+        ...t,
+        label: t.label,
+        value: calcValue
+      };
+    });
+
+    return {
       x: slideFeature.x,
       y: slideFeature.y,
-      content: []
+      content: tooltipContent
     };
-    if (
-      tooltipFields &&
-      tooltipFields.primary &&
-      tooltipFields.primary.label &&
-      tooltipFields.primary.fieldName
-    ) {
-      const tooltipFieldName = tooltipFields.primary.fieldName;
-      tooltipInfo.content.push({
-        name: tooltipFields.primary.label,
-        value: slideFeature.object.properties[tooltipFieldName]
-      });
-    }
-    if (
-      tooltipFields &&
-      tooltipFields.secondary &&
-      tooltipFields.secondary.label &&
-      tooltipFields.secondary.fieldName
-    ) {
-      tooltipInfo.content.push({
-        name: tooltipFields.secondary.label,
-        value: slideFeature.object.properties[tooltipFields.secondary.fieldName]
-      });
-    }
-
-    // eslint-disable-next-line consistent-return
-    return tooltipInfo;
   }
 );
 

@@ -1,9 +1,12 @@
+/* eslint-disable no-nested-ternary */
 import { string, number, arrayOf, oneOfType, shape } from "prop-types";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
+import { format } from "d3";
 import { get } from "lodash";
 import shortid from "shortid";
 import window from "global/window";
+import civicFormat from "../utils/civicFormat";
 
 const tooltip = css`
   font-family: Helvetica, Arial, sans-serif;
@@ -28,15 +31,33 @@ const MapTooltip = props => {
       ? x + xPositionOffset
       : x - xPositionOffset * 3;
 
-  const yPositionOffset = 45;
-  const yPostition = y < 375 ? y + yPositionOffset : y - yPositionOffset * 4;
+  const yPositionOffset = 40;
+  const yPostition = y < 375 ? y + yPositionOffset : y - yPositionOffset * 3;
 
-  const tooltipContent = tooltipData.content.map(obj => {
-    const value = obj.value ? obj.value : "No Data Available";
+  const percentageFormat = format(".1%");
+  const sandboxPercentFormat = p =>
+    p < 1 && p > 0 ? percentageFormat(p) : `${p.toFixed(1)}%`;
+  const sandboxDecimalFormat = format(".2n");
+  const sandboxMoneyFormat = d => `$${civicFormat.numericShort(d)}`;
+
+  const tooltipContent = tooltipData.content.map(t => {
+    const formatType = t.format;
+
+    const formattedValue =
+      t.value && formatType === "percentage"
+        ? sandboxPercentFormat(t.value)
+        : t.value && formatType === "dollars"
+        ? sandboxMoneyFormat(t.value)
+        : t.value && formatType === "decimal"
+        ? sandboxDecimalFormat(t.value)
+        : t.value && formatType && civicFormat[formatType]
+        ? civicFormat[formatType](t.value)
+        : t.value
+        ? t.value
+        : "No Data Available";
+
     return (
-      <div key={shortid.generate()}>
-        {`${obj.name}: ${value.toLocaleString()}`}
-      </div>
+      <div key={shortid.generate()}>{`${t.label}: ${formattedValue}`}</div>
     );
   });
 
@@ -59,7 +80,7 @@ MapTooltip.propTypes = {
     y: number,
     content: arrayOf(
       shape({
-        name: string,
+        label: string,
         value: oneOfType([number, string])
       })
     )
