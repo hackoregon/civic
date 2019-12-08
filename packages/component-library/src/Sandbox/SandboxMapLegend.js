@@ -22,6 +22,7 @@ const legendContainer = css(`
   flex-wrap: nowrap;
   height: ${legendHeight}px;
   width: 90%;
+  padding-bottom: 10px;  
 `);
 
 const colorBox = css(`

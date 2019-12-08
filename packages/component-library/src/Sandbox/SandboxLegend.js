@@ -56,7 +56,6 @@ const SandboxLegend = props => {
                   bottom: 30px;
                   width: 500px;
                   left: 0px;
-                  padding-bottom: 10px;
                   background-color: rgba(255,255,255,0.9);
                   @media (max-width: 500px) {
                     width: 100%
