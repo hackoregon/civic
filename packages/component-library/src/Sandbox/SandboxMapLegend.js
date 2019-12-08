@@ -36,7 +36,7 @@ const colorBox = css(`
 const tickNums = css(`
   position: absolute;
   bottom: -20px;
-  right: 0;
+  right: -20px;
   font-size: 14px;
 `);
 
@@ -173,7 +173,7 @@ const SandboxMapLegend = React.memo(props => {
         ? sandboxSentenceCase
         : typeFormat === "titleCase"
         ? startCase
-        : civicFormat.typeFormat || civicFormat.unformatted;
+        : civicFormat.typeFormat || civicFormat.numeric;
     return arr.map(d => formatter(d));
   };
 

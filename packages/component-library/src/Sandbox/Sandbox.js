@@ -195,7 +195,6 @@ const Sandbox = ({
           bboxData={featuresArr}
           bboxPadding={50}
           useScrollZoom
-          onBaseMapClick={e => console.log(e)}
           onBaseMapHover={onHoverVectorLayer}
           onBaseMapMouseOut={mouseOutVectorLayer}
         >

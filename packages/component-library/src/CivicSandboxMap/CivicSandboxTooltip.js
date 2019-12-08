@@ -20,6 +20,10 @@ const tooltip = css`
   pointer-events: none;
 `;
 
+const tooltipText = css`
+  margin: 2.5px 0 5px 0;
+`;
+
 const MapTooltip = props => {
   const { tooltipData } = props;
   const { x } = tooltipData;
@@ -31,8 +35,8 @@ const MapTooltip = props => {
       ? x + xPositionOffset
       : x - xPositionOffset * 3;
 
-  const yPositionOffset = 40;
-  const yPostition = y < 375 ? y + yPositionOffset : y - yPositionOffset * 3;
+  const yPositionOffset = 50;
+  const yPostition = y < 375 ? y + yPositionOffset : y - yPositionOffset * 2.75;
 
   const percentageFormat = format(".1%");
   const sandboxPercentFormat = p =>
@@ -57,7 +61,8 @@ const MapTooltip = props => {
         : "No Data Available";
 
     return (
-      <div key={shortid.generate()}>{`${t.label}: ${formattedValue}`}</div>
+      <div css={tooltipText} key={shortid.generate()}>{`${t.label ||
+        t.name}: ${formattedValue}`}</div>
     );
   });
 
