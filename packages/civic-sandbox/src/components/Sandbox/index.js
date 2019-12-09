@@ -128,7 +128,9 @@ class SandboxComponent extends React.Component {
         ];
 
     const choroplethSlidesData = selectedSlidesData.filter(
-      slideDatum => slideDatum.visualization.map.mapType === "ChoroplethMap"
+      slideDatum =>
+        slideDatum.visualization.map.mapType === "ChoroplethMap" ||
+        slideDatum.visualization.map.mapType === "vtChoroplethMap"
     );
     const choroplethSlides = choroplethSlidesData.map(
       slideDatum => slideDatum.displayName
