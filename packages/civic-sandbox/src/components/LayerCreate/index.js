@@ -44,12 +44,10 @@ const imgCss = css`
 `;
 
 const mapSection = css`
-  text-align: center;
+  align-items: center;
   padding-top: 20px;
-`;
-
-const mapType = css`
-  display: block;
+  display: flex;
+  flex-direction: column;
   font-size: 16px;
   letter-spacing: -0.5px;
   padding-bottom: 30px;
@@ -124,47 +122,39 @@ function LayerCreateComponent() {
             </p>
             <div css={mapSection}>
               <img src={pathMapSrc} css={imgCss} alt="path map" />
-              <p css={mapType}>
-                Path map: these maps are good for xxx
-                <Collapsable description="form section for path map">
-                  <Collapsable.Section hidden>
-                    {formSections.pathMapType}
-                  </Collapsable.Section>
-                </Collapsable>
-              </p>
+              Path map: these maps are good for xxx
+              <Collapsable description="form section for path map">
+                <Collapsable.Section hidden>
+                  {formSections.pathMapType}
+                </Collapsable.Section>
+              </Collapsable>
             </div>
             <div css={mapSection}>
               <img src={screenGridMapSrc} css={imgCss} alt="screen grid map" />
-              <p css={mapType}>
-                Screen Grid map: these maps are good for xxx
-                <Collapsable description="form section for screen grid map">
-                  <Collapsable.Section hidden>
-                    {formSections.pathMapType}
-                  </Collapsable.Section>
-                </Collapsable>
-              </p>
+              Screen Grid map: these maps are good for xxx
+              <Collapsable description="form section for screen grid map">
+                <Collapsable.Section hidden>
+                  {formSections.pathMapType}
+                </Collapsable.Section>
+              </Collapsable>
             </div>
             <div css={mapSection}>
               <img src={choroplethMapSrc} css={imgCss} alt="choropleth map" />
-              <p css={mapType}>
-                Choropleth map: these maps are good for xxx
-                <Collapsable>
-                  <Collapsable.Section hidden>
-                    {formSections.pathMapType}
-                  </Collapsable.Section>
-                </Collapsable>
-              </p>
+              Choropleth map: these maps are good for xxx
+              <Collapsable description="form section for choropleth map">
+                <Collapsable.Section hidden>
+                  {formSections.pathMapType}
+                </Collapsable.Section>
+              </Collapsable>
             </div>
             <div css={mapSection}>
               <img src={scatterplotMapSrc} css={imgCss} alt="scatterplot map" />
-              <p css={mapType}>
-                Scatterplot map: these maps are good for xxx
-                <Collapsable>
-                  <Collapsable.Section hidden>
-                    {formSections.pathMapType}
-                  </Collapsable.Section>
-                </Collapsable>
-              </p>
+              Scatterplot map: these maps are good for xxx
+              <Collapsable description="form section for scatterplot map">
+                <Collapsable.Section hidden>
+                  {formSections.pathMapType}
+                </Collapsable.Section>
+              </Collapsable>
             </div>
             <div css={mapSection}>
               <img
@@ -172,25 +162,21 @@ function LayerCreateComponent() {
                 css={imgCss}
                 alt="small polygon map"
               />
-              <p css={mapType}>
-                Small Polygon map: these maps are good for xxx
-                <Collapsable>
-                  <Collapsable.Section hidden>
-                    {formSections.pathMapType}
-                  </Collapsable.Section>
-                </Collapsable>
-              </p>
+              Small Polygon map: these maps are good for xxx
+              <Collapsable description="form section for small polygon map">
+                <Collapsable.Section hidden>
+                  {formSections.pathMapType}
+                </Collapsable.Section>
+              </Collapsable>
             </div>
             <div css={mapSection}>
               <img src={iconMapSrc} css={imgCss} alt="icon map" />
-              <p css={mapType}>
-                Icon map: these maps are good for xxx
-                <Collapsable>
-                  <Collapsable.Section hidden>
-                    {formSections.pathMapType}
-                  </Collapsable.Section>
-                </Collapsable>
-              </p>
+              Icon map: these maps are good for xxx
+              <Collapsable description="form section for icon map">
+                <Collapsable.Section hidden>
+                  {formSections.pathMapType}
+                </Collapsable.Section>
+              </Collapsable>
             </div>
           </Fragment>
         )}
