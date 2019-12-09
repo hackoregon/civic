@@ -7,7 +7,12 @@ import { Fragment } from "react";
 import PropTypes from "prop-types";
 import * as Yup from "yup";
 
-import { Form, TextField, SelectField, ButtonNew } from "@hackoregon/component-library";
+import {
+  Form,
+  TextField,
+  SelectField,
+  ButtonNew
+} from "@hackoregon/component-library";
 
 const wrapper = css`
   padding-bottom: 80px;
@@ -38,11 +43,19 @@ const fields = {
     component: TextField
   },
   affiliation: {
-    label: 'Affiliation',
+    label: "Affiliation",
     section: "baseData",
     component: SelectField,
     options: {
-      values: ['Transportation', 'Housing', 'Disaster Resilience', 'Education', 'Elections', 'Sandbox', 'Other'],
+      values: [
+        "Transportation",
+        "Housing",
+        "Disaster Resilience",
+        "Education",
+        "Elections",
+        "Sandbox",
+        "Other"
+      ]
     }
   },
   rating: {
@@ -66,18 +79,43 @@ const fields = {
     component: TextField
   },
   dateGranularity: {
-    label: "Data Endpoint",
+    label: "Date Granularity",
     section: "dataDetails",
     component: TextField
   },
   defaultDate: {
-    label: "Data Endpoint",
+    label: "Default Date",
     section: "dataDetails",
     component: TextField
   },
   mapType: {
     label: "Map Type",
     section: "mapType",
+    component: TextField
+  },
+  lineWidth: {
+    label: "Line Width",
+    section: "pathMapType",
+    component: TextField
+  },
+  opacity: {
+    label: "Opacity",
+    section: "pathMapType",
+    component: TextField
+  },
+  color: {
+    label: "Color",
+    section: "pathMapType",
+    component: TextField
+  },
+  fieldName: {
+    label: "Field Name",
+    section: "pathMapType",
+    component: TextField
+  },
+  scaleType: {
+    label: "Scale Type",
+    section: "pathMapType",
     component: TextField
   }
 };
@@ -87,14 +125,14 @@ const LayerCreateForm = ({ initialValues, onSubmit, children }) => (
     <div css={wrapper}>
       <Form
         fields={fields}
-        sections={["baseData", "dataDetails", "mapType"]}
+        sections={["baseData", "dataDetails", "mapType", "pathMapType"]}
         initialValues={initialValues}
         onSubmit={onSubmit}
       >
         {children}
       </Form>
     </div>
-    <ButtonNew label="Next" />
+    <ButtonNew label="Submit" />
   </Fragment>
 );
 
