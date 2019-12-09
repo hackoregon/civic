@@ -9,7 +9,6 @@ import {
   shape,
   oneOfType
 } from "prop-types";
-import shortid from "shortid";
 import {
   createColorScale,
   updateQuantileScale,
@@ -79,7 +78,7 @@ const MultiPathMap = props => {
 
   return (
     <PathLayer
-      key={shortid.generate()}
+      key={id}
       id={id}
       pickable={pickable}
       data={data}

@@ -11,6 +11,7 @@ const MapTooltip = props => {
     formatPrimaryField,
     formatSecondaryField,
     isHex,
+    isScreenGrid,
     primaryName,
     primaryField,
     secondaryName,
@@ -38,7 +39,7 @@ const MapTooltip = props => {
     x < get(window, "innerWidth", 1000) * 0.66
       ? x
       : x - get(window, "innerWidth", 1000) * 0.1;
-  const yPostition = y < 375 ? y : y - 50;
+  const yPosition = y < 375 ? y : y - 50;
 
   const getProperty = (property, formatFunction) => {
     if (formatFunction) {
@@ -52,7 +53,7 @@ const MapTooltip = props => {
       css={tooltip}
       style={{
         left: xPosition,
-        top: yPostition
+        top: yPosition
       }}
     >
       {primaryName && (
@@ -73,12 +74,26 @@ const MapTooltip = props => {
           )}
         </div>
       )}
-      {tooltipDataArray.map(el => (
-        <div key={el.name}>
-          <strong>{`${el.name}: `}</strong>
-          {getProperty(tooltipInfo.properties[el.field], el.formatField)}
-        </div>
-      ))}
+      {!isScreenGrid &&
+        tooltipDataArray.map(el => (
+          <div key={el.name}>
+            <strong>{`${el.name}: `}</strong>
+            {getProperty(tooltipInfo.properties[el.field], el.formatField)}
+          </div>
+        ))}
+      {isScreenGrid &&
+        tooltipDataArray.map(el => (
+          <div key={el.name}>
+            <strong>{`${el.name}: `}</strong>
+            {!el.totalField &&
+              getProperty(tooltipInfo[el.field], el.formatField)}
+            {el.totalField &&
+              getProperty(
+                tooltipInfo[el.field] / tooltipInfo[el.totalField],
+                el.formatField
+              )}
+          </div>
+        ))}
       {isHex && (
         <div>
           <div>elevation: {tooltipInfo.elevationValue}</div>
@@ -103,10 +118,12 @@ MapTooltip.propTypes = {
     PropTypes.shape({
       name: PropTypes.string.isRequired,
       field: PropTypes.string.isRequired,
+      totalField: PropTypes.string,
       formatField: PropTypes.func
     })
   ),
   isHex: PropTypes.bool,
+  isScreenGrid: PropTypes.bool,
   wide: PropTypes.bool
 };
 

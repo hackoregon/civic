@@ -1,7 +1,6 @@
 import React from "react";
 import { ScatterplotLayer } from "deck.gl";
 import { number, string, bool, func, arrayOf, shape } from "prop-types";
-import shortid from "shortid";
 import centerOfMass from "@turf/center-of-mass";
 import {
   createColorScale,
@@ -90,7 +89,7 @@ const MultiScatterPlotMap = props => {
 
   return (
     <ScatterplotLayer
-      key={shortid.generate()}
+      key={id}
       id={id}
       pickable={pickable}
       data={memoizedData}

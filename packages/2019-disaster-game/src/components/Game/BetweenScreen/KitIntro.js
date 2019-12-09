@@ -1,10 +1,17 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
+import { useEffect, memo } from "react";
 import { sample } from "lodash";
-import instructionalAudioBoy from "../../../../assets/audio/kit_screen/boy_lets_prepare_for_an_earthquake.mp3";
-import instructionalAudioGirl from "../../../../assets/audio/kit_screen/girl_lets_prepare_for_an_earthquake.mp3";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+
 import { palette } from "../../../constants/style";
-import Song from "../../atoms/Audio/Song";
+import { TYPES as SFX_TYPES } from "../../../constants/sfx";
+import {
+  playAudio as _playAudio,
+  stopAudio as _stopAudio
+} from "../../../state/sfx";
 
 const contentWrapper = css`
   height: 100vh;
@@ -23,17 +30,39 @@ const contentTitle = css`
   margin: 0;
 `;
 
-const TasksIntro = () => {
+const TasksIntro = ({ playAudio, stopAudio }) => {
   const instructionalAudio = sample([
-    instructionalAudioBoy,
-    instructionalAudioGirl
+    SFX_TYPES.LETS_PREPARE_GIRL,
+    SFX_TYPES.LETS_PREPARE_BOY
   ]);
+
+  useEffect(() => {
+    playAudio(instructionalAudio);
+
+    return () => {
+      stopAudio(instructionalAudio);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div css={contentWrapper}>
       <p css={contentTitle}>Let&apos;s prepare for an earthquake</p>
-      <Song songFile={instructionalAudio} shouldLoop={false} volume={1.0} />
     </div>
   );
 };
 
-export default TasksIntro;
+TasksIntro.propTypes = {
+  playAudio: PropTypes.func,
+  stopAudio: PropTypes.func
+};
+
+const mapDispatchToProps = dispatch => ({
+  playAudio: bindActionCreators(_playAudio, dispatch),
+  stopAudio: bindActionCreators(_stopAudio, dispatch)
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(memo(TasksIntro));

@@ -49,16 +49,12 @@ export class Packages extends React.Component {
     const { selectedFoundationDatum: currentSelectedFoundation } = this.props;
 
     const previousID =
-      previousSelectedFoundation &&
-      previousSelectedFoundation.feature &&
-      previousSelectedFoundation.feature.object
-        ? previousSelectedFoundation.feature.object.id
+      previousSelectedFoundation && previousSelectedFoundation.id
+        ? previousSelectedFoundation.id
         : null;
     const currentID =
-      currentSelectedFoundation &&
-      currentSelectedFoundation.feature &&
-      currentSelectedFoundation.feature.object
-        ? currentSelectedFoundation.feature.object.id
+      currentSelectedFoundation && currentSelectedFoundation.id
+        ? currentSelectedFoundation.id
         : null;
 
     if (previousID !== currentID) {

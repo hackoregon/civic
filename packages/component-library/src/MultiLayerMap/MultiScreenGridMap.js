@@ -1,6 +1,5 @@
 import React from "react";
 import { ScreenGridLayer } from "deck.gl";
-import shortid from "shortid";
 import { number, string, bool, func, arrayOf, shape } from "prop-types";
 
 import CIVIC_MAP_COLORS from "./mapStyles";
@@ -32,7 +31,7 @@ const MultiScreenGridMap = props => {
 
   return (
     <ScreenGridLayer
-      key={shortid.generate()}
+      key={id}
       id={id}
       pickable={pickable}
       data={data}

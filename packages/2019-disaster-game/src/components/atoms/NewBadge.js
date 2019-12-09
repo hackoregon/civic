@@ -3,14 +3,18 @@ import { css, jsx } from "@emotion/core";
 import { connect } from "react-redux";
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { bindActionCreators } from "redux";
 import { palette } from "../../constants/style";
+import { TYPES as SFX_TYPES } from "../../constants/sfx";
+import {
+  playAudio as _playAudio,
+  stopAudio as _stopAudio
+} from "../../state/sfx";
 import {
   // getTeamworkBadge,
   getPreparedBadge,
   getHeroBadge
 } from "../../state/user";
-import Song from "./Audio/Song";
-import BadgeEarnedSFX from "../../../assets/audio/badge-earned.mp3";
 
 // background color is blue
 const containerStyle = css`
@@ -55,7 +59,7 @@ const titleText = css`
   font-size: 14rem;
 `;
 
-const NewBadge = ({ type, badges }) => {
+const NewBadge = ({ type, badges, playAudio, stopAudio }) => {
   const [badgeInfo, setBadgeInfo] = useState(badges[type]);
   const [hideBadge, setHideBadge] = useState(false);
 
@@ -70,24 +74,39 @@ const NewBadge = ({ type, badges }) => {
     };
   }, [badges, type]);
 
-  return (
-    <div
-      css={css`
-        ${containerStyle};
-        ${hideBadge ? hideBadgeStyle : ""};
-      `}
-    >
-      <p css={[badgeText, titleText]}>NEW BADGE EARNED!</p>
-      <img src={badgeInfo.badgeSVG} alt="Badge" css={badgeStyle} />
-      <p css={badgeText}>{badgeInfo.title}</p>
-      <Song songFile={BadgeEarnedSFX} shouldLoop={false} volume={0.25} />
-    </div>
-  );
+  useEffect(() => {
+    playAudio(SFX_TYPES.BADGE_EARNED_SFX);
+
+    return () => {
+      stopAudio(SFX_TYPES.BADGE_EARNED_SFX);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const badgeInfoComplete = badgeInfo && badgeInfo.badgeSVG && badgeInfo.title;
+
+  if (badgeInfoComplete) {
+    return (
+      <div
+        css={css`
+          ${containerStyle};
+          ${hideBadge ? hideBadgeStyle : ""};
+        `}
+      >
+        <p css={[badgeText, titleText]}>NEW BADGE EARNED!</p>
+        <img src={badgeInfo.badgeSVG} alt="Badge" css={badgeStyle} />
+        <p css={badgeText}>{badgeInfo.title}</p>
+      </div>
+    );
+  }
+  return null;
 };
 
 NewBadge.propTypes = {
   type: PropTypes.string,
-  badges: PropTypes.shape({})
+  badges: PropTypes.shape({}),
+  playAudio: PropTypes.func,
+  stopAudio: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -98,4 +117,12 @@ const mapStateToProps = state => ({
   }
 });
 
-export default connect(mapStateToProps)(NewBadge);
+const mapDispatchToProps = dispatch => ({
+  playAudio: bindActionCreators(_playAudio, dispatch),
+  stopAudio: bindActionCreators(_stopAudio, dispatch)
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NewBadge);

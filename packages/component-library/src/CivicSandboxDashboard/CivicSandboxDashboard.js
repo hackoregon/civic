@@ -1,18 +1,10 @@
 /* eslint-disable no-nested-ternary */
-import { useState } from "react";
-import {
-  arrayOf,
-  bool,
-  func,
-  node,
-  number,
-  oneOfType,
-  shape,
-  string
-} from "prop-types";
+import React, { useState } from "react";
+import { bool, func, node, number, shape, string } from "prop-types";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
-import shortid from "shortid";
+// import shortid from "shortid";
+import { isEqual } from "lodash";
 import LineChart from "../LineChart/LineChart";
 // import PieChart from "../PieChart/PieChart";
 // import HorizontalBarChart from "../HorizontalBarChart/HorizontalBarChart";
@@ -190,10 +182,10 @@ const viz = css`
 //   </div>
 // );
 
-const createLineViz = (data, title, xLabel, yLabel, xFormat, yFormat) => {
+const createLineViz = (data, title, xLabel, yLabel, xFormat, yFormat, id) => {
   const yForm = yFormat === "percent" ? "percentage" : yFormat;
   return (
-    <div css={viz} key={shortid.generate()}>
+    <div css={viz} key={id}>
       <h3>{title}</h3>
       <LineChart
         data={data}
@@ -217,9 +209,9 @@ const CivicDashboard = props => {
   const [display, setDisplay] = useState("visualizations");
 
   const createVisualizations =
-    data && data.feature && data.feature.object
-      ? Object.entries(data.feature.object.properties).filter(c => {
-          const colorFieldName = data.visualization.map.fieldName.color;
+    data && data.featureProperties
+      ? Object.entries(data.featureProperties).filter(c => {
+          const colorFieldName = data.colorKey;
           const a = c[0].match(/^[a-zA-Z]+/);
           const b = colorFieldName.match(/^[a-zA-Z]+/);
           return a[0] === b[0];
@@ -228,10 +220,16 @@ const CivicDashboard = props => {
 
   const censusYears3 = [1990, 2000, 2010];
   const censusYears4 = [1990, 2000, 2010, 2017];
+
+  const isYear =
+    createVisualizations[0] &&
+    createVisualizations[0][0] &&
+    createVisualizations[0][0].search(/[0-9]/) > -1;
+
   const lineData =
-    createVisualizations.length === 3
+    createVisualizations.length === 3 && isYear
       ? createVisualizations.map((d, i) => {
-          const yFormatType = data.visualization.tooltip.primary.format;
+          const yFormatType = data.primaryFormat;
           return {
             x: censusYears3[i],
             y:
@@ -242,9 +240,9 @@ const CivicDashboard = props => {
                 : 0
           };
         })
-      : createVisualizations.length === 4
+      : createVisualizations.length === 4 && isYear
       ? createVisualizations.map((d, i) => {
-          const yFormatType = data.visualization.tooltip.primary.format;
+          const yFormatType = data.primaryFormat;
           return {
             x: censusYears4[i],
             y:
@@ -255,17 +253,18 @@ const CivicDashboard = props => {
                 : 0
           };
         })
-      : null;
+      : [];
 
   const visualizations =
-    createVisualizations.length > 0
+    createVisualizations.length && lineData.length
       ? createLineViz(
           lineData,
           data.displayName,
           "Year",
-          data.visualization.tooltip.primary.format,
+          data.primaryFormat,
           "year",
-          data.visualization.tooltip.primary.format
+          data.primaryFormat,
+          data.id
         )
       : placeholder;
 
@@ -338,17 +337,34 @@ const CivicDashboard = props => {
 };
 
 CivicDashboard.propTypes = {
-  data: arrayOf(
-    shape({
-      data: oneOfType([arrayOf(shape({})), number, string]),
-      id: oneOfType([number, string]),
-      title: string,
-      visualizationType: string
-    })
-  ),
+  data: shape({
+    id: number,
+    displayName: string,
+    featureProperties: shape({}),
+    colorKey: string,
+    primaryFormat: string
+  }),
   children: node,
   isDashboardOpen: bool,
   onClick: func
 };
 
-export default CivicDashboard;
+function arePropsEqual(prevProps, nextProps) {
+  const {
+    data: prevData,
+    children: prevChildren,
+    isDashboardOpen: prevIsDashboardOpen,
+    onClick: prevOnClick
+  } = prevProps;
+
+  const { data, children, isDashboardOpen, onClick } = nextProps;
+
+  return (
+    isEqual(prevData, data) &&
+    prevChildren === children &&
+    prevIsDashboardOpen === isDashboardOpen &&
+    prevOnClick === onClick
+  );
+}
+
+export default React.memo(CivicDashboard, arePropsEqual);

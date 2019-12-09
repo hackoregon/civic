@@ -15,6 +15,7 @@ import {
   SET_FOUNDATION,
   SET_FOUNDATION_DATUM,
   SET_SLIDE_DATUM,
+  SET_BASE_MAP_DATUM,
   SET_SLIDES,
   SLIDE_START,
   SLIDE_FAILURE,
@@ -36,7 +37,9 @@ const INITIAL_STATE = {
   selectedFoundation: "",
   selectedSlide: [],
   selectedSlideKey: {},
-  selectedFoundationDatum: null
+  selectedFoundationDatum: null,
+  selectedSlideDatum: null,
+  selectedBaseMapDatum: null
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -48,7 +51,8 @@ const reducer = (state = INITIAL_STATE, action) => {
         sandboxError: null,
         sandbox: {},
         selectedFoundationDatum: null,
-        selectedSlideDatum: null
+        selectedSlideDatum: null,
+        selectedBaseMapDatum: null
       };
     case SANDBOX_SUCCESS:
       return {
@@ -59,7 +63,8 @@ const reducer = (state = INITIAL_STATE, action) => {
           packages: action.payload
         },
         selectedFoundationDatum: null,
-        selectedSlideDatum: null
+        selectedSlideDatum: null,
+        selectedBaseMapDatum: null
       };
     case SANDBOX_FAILURE:
       return {
@@ -68,7 +73,8 @@ const reducer = (state = INITIAL_STATE, action) => {
         sandboxError: action.payload,
         sandbox: {},
         selectedFoundationDatum: null,
-        selectedSlideDatum: null
+        selectedSlideDatum: null,
+        selectedBaseMapDatum: null
       };
     case FOUNDATION_START:
       return {
@@ -76,7 +82,8 @@ const reducer = (state = INITIAL_STATE, action) => {
         foundationPending: true,
         foundationError: null,
         selectedFoundationDatum: null,
-        selectedSlideDatum: null
+        selectedSlideDatum: null,
+        selectedBaseMapDatum: null
       };
     case FOUNDATION_SUCCESS:
       return {
@@ -85,7 +92,8 @@ const reducer = (state = INITIAL_STATE, action) => {
         foundationError: null,
         foundationData: action.payload,
         selectedFoundationDatum: null,
-        selectedSlideDatum: null
+        selectedSlideDatum: null,
+        selectedBaseMapDatum: null
       };
     case FOUNDATION_FAILURE:
       return {
@@ -94,7 +102,8 @@ const reducer = (state = INITIAL_STATE, action) => {
         foundationError: action.payload,
         foundationData: null,
         selectedFoundationDatum: null,
-        selectedSlideDatum: null
+        selectedSlideDatum: null,
+        selectedBaseMapDatum: null
       };
     case SLIDES_START:
       return {
@@ -118,7 +127,8 @@ const reducer = (state = INITIAL_STATE, action) => {
         slidesError: action.payload,
         slidesData: [],
         selectedFoundationDatum: null,
-        selectedSlideDatum: null
+        selectedSlideDatum: null,
+        selectedBaseMapDatum: null
       };
     }
     case SET_PACKAGE: {
@@ -139,6 +149,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         },
         selectedFoundationDatum: null,
         selectedSlideDatum: null,
+        selectedBaseMapDatum: null,
         selectedSlideKey: {}
       };
     }
@@ -156,7 +167,8 @@ const reducer = (state = INITIAL_STATE, action) => {
         selectedFoundation: action.selectedFoundation,
         foundationData: {},
         selectedFoundationDatum: null,
-        selectedSlideDatum: null
+        selectedSlideDatum: null,
+        selectedBaseMapDatum: null
       };
     case SET_SLIDES:
       return {
@@ -191,6 +203,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         slidesError: null,
         slidesSuccess: true,
         selectedSlideDatum: null,
+        selectedBaseMapDatum: null,
         slidesData,
         foundationData
       };
@@ -202,7 +215,8 @@ const reducer = (state = INITIAL_STATE, action) => {
         slidesError: action.payload,
         slidesData: null,
         selectedFoundationDatum: null,
-        selectedSlideDatum: null
+        selectedSlideDatum: null,
+        selectedBaseMapDatum: null
       };
     case SET_FOUNDATION_DATUM: {
       return {
@@ -217,6 +231,12 @@ const reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         selectedSlideDatum: { feature: action.feature, index: action.index }
+      };
+    }
+    case SET_BASE_MAP_DATUM: {
+      return {
+        ...state,
+        selectedBaseMapDatum: { feature: action.feature, index: action.index }
       };
     }
     default:

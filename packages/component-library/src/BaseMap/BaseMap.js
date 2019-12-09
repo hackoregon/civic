@@ -29,6 +29,7 @@ const {
 } = MapGLResources;
 
 const mapWrapper = css`
+  position: relative;
   margin: 0 auto;
   padding: 0;
   width: 100%;
@@ -39,6 +40,31 @@ const navControl = css`
   position: absolute;
   left: 0;
   z-index: 1;
+`;
+
+const geoCoderWrapper = css`
+  position: absolute;
+  margin: 5px 25px 35px 45px;
+`;
+
+const topRight = css`
+  top: 0;
+  right: 0;
+`;
+
+const topLeft = css`
+  top: 0;
+  left: 0;
+`;
+
+const bottomLeft = css`
+  bottom: 0;
+  left: 0;
+`;
+
+const bottomRight = css`
+  bottom: 0;
+  right: 0;
 `;
 
 class BaseMap extends Component {
@@ -57,29 +83,29 @@ class BaseMap extends Component {
       tooltipInfo: null,
       x: null,
       y: null,
-      mounted: false,
-      mapboxRef: null
+      mounted: false
     };
     this.mapRef = createRef();
+    this.geocoderContainerRef = createRef();
   }
 
   componentDidMount() {
     // Geocoder requires a ref to the map component
     this.setState({ mounted: true });
-    const { useFitBounds, bboxData, bboxPadding } = this.props;
+    const { bboxData, bboxPadding, boundBox } = this.props;
     const { viewport } = this.state;
 
-    if (useFitBounds && bboxData.length > 0) {
+    if (bboxData.length > 0) {
       const toGeoJSON = {
         type: "FeatureCollection",
         features: [...bboxData]
       };
-      const boundingbox = bbox(toGeoJSON);
+      const boundingBox = bbox(toGeoJSON);
       const bboxViewport = new WebMercatorViewport({
         width: viewport.width,
         height: viewport.height
       }).fitBounds(
-        [[boundingbox[0], boundingbox[1]], [boundingbox[2], boundingbox[3]]],
+        [[boundingBox[0], boundingBox[1]], [boundingBox[2], boundingBox[3]]],
         {
           padding: bboxPadding
         }
@@ -87,10 +113,15 @@ class BaseMap extends Component {
       this.onViewportChange(bboxViewport);
     }
 
-    const map = this.mapRef.current.getMap();
-    map.on("load", () => {
-      this.setState({ mapboxRef: map });
-    });
+    if (boundBox.length === 4) {
+      const bboxViewport = new WebMercatorViewport({
+        width: viewport.width,
+        height: viewport.height
+      }).fitBounds([[boundBox[0], boundBox[1]], [boundBox[2], boundBox[3]]], {
+        padding: bboxPadding
+      });
+      this.onViewportChange(bboxViewport);
+    }
   }
 
   componentWillReceiveProps(props) {
@@ -118,41 +149,38 @@ class BaseMap extends Component {
 
   componentDidUpdate(prevProps) {
     const {
-      mapboxData: previousMapboxData,
-      mapboxLayerOptions: previousMapboxLayerOptions
+      mapboxData: prevMapboxData,
+      mapboxLayerOptions: prevMapboxLayerOptions,
+      boundBox: prevBoundBox
     } = prevProps;
     const {
       mapboxData,
       mapboxDataId,
       mapboxLayerOptions,
       mapboxLayerId,
-      useFitBounds,
       bboxData,
-      bboxPadding
+      bboxPadding,
+      boundBox
     } = this.props;
 
     const { viewport } = this.state;
 
-    if (!isEqual(previousMapboxData, mapboxData)) {
+    if (!isEqual(prevMapboxData, mapboxData)) {
       const map = this.mapRef.current.getMap();
       map.getSource(mapboxDataId).setData(mapboxData);
     }
 
-    if (!isEqual(previousMapboxLayerOptions, mapboxLayerOptions)) {
+    if (!isEqual(prevMapboxLayerOptions, mapboxLayerOptions)) {
       const map = this.mapRef.current.getMap();
       const updatedProperties = Object.keys(mapboxLayerOptions).filter(
-        m => !isEqual(previousMapboxLayerOptions[m], mapboxLayerOptions[m])
+        m => !isEqual(prevMapboxLayerOptions[m], mapboxLayerOptions[m])
       );
       updatedProperties.forEach(p =>
         map.setPaintProperty(mapboxLayerId, p, mapboxLayerOptions[p])
       );
     }
 
-    if (
-      useFitBounds &&
-      bboxData.length > 0 &&
-      !isEqual(prevProps.bboxData, bboxData)
-    ) {
+    if (bboxData.length > 0 && !isEqual(prevProps.bboxData, bboxData)) {
       const toGeoJSON = {
         type: "FeatureCollection",
         features: [...bboxData]
@@ -167,6 +195,16 @@ class BaseMap extends Component {
           padding: bboxPadding
         }
       );
+      this.onViewportChange(bboxViewport);
+    }
+
+    if (boundBox.length === 4 && !isEqual(prevBoundBox, boundBox)) {
+      const bboxViewport = new WebMercatorViewport({
+        width: viewport.width,
+        height: viewport.height
+      }).fitBounds([[boundBox[0], boundBox[1]], [boundBox[2], boundBox[3]]], {
+        padding: bboxPadding
+      });
       this.onViewportChange(bboxViewport);
     }
   }
@@ -207,7 +245,7 @@ class BaseMap extends Component {
   };
 
   render() {
-    const { viewport, tooltipInfo, x, y, mounted, mapboxRef } = this.state;
+    const { viewport, tooltipInfo, x, y, mounted } = this.state;
     const {
       height,
       containerHeight,
@@ -219,10 +257,13 @@ class BaseMap extends Component {
       locationMarker,
       geocoderOptions,
       geocoderOnChange,
+      geocoderPosition,
       mapGLOptions,
       children,
       useContainerHeight,
       onBaseMapClick,
+      onBaseMapHover,
+      onBaseMapMouseOut,
       mapboxData,
       mapboxDataId,
       mapboxLayerType,
@@ -250,8 +291,7 @@ class BaseMap extends Component {
         tooltipInfo,
         x,
         y,
-        onHover: info => this.onHover(info),
-        mapboxMap: mapboxRef
+        onHover: info => this.onHover(info)
       });
     });
 
@@ -310,8 +350,19 @@ class BaseMap extends Component {
         }
       : viewport;
 
+    const geocoderPositions = {
+      "top-left": topLeft,
+      "top-right": topRight,
+      "bottom-left": bottomLeft,
+      "bottom-right": bottomRight
+    };
+
     return (
       <div css={mapWrapper}>
+        <div
+          ref={this.geocoderContainerRef}
+          css={[geoCoderWrapper, geocoderPositions[geocoderPosition]]}
+        />
         <MapGL
           className="MapGL"
           {...finalViewport}
@@ -328,6 +379,24 @@ class BaseMap extends Component {
           ref={this.mapRef}
           {...mapGLOptions}
           onClick={onBaseMapClick}
+          onHover={baseInfo => {
+            const baseMapboxRef = this.mapRef.current.getMap();
+            if (onBaseMapHover) {
+              onBaseMapHover(baseInfo, baseMapboxRef);
+            }
+          }}
+          onMouseOut={() => {
+            const baseMapboxRef = this.mapRef.current.getMap();
+            if (onBaseMapMouseOut) {
+              onBaseMapMouseOut(baseMapboxRef);
+            }
+          }}
+          onBlur={() => {
+            const baseMapboxRef = this.mapRef.current.getMap();
+            if (onBaseMapMouseOut) {
+              onBaseMapMouseOut(baseMapboxRef);
+            }
+          }}
           onLoad={onMapLoad}
           scrollZoom={useScrollZoom}
         >
@@ -347,6 +416,7 @@ class BaseMap extends Component {
           {geocoder && mounted && (
             <Geocoder
               mapRef={{ current: this.mapRef.current }}
+              containerRef={this.geocoderContainerRef}
               mapboxApiAccessToken={mapboxToken}
               onViewportChange={newViewport => {
                 this.onViewportChange(newViewport);
@@ -356,7 +426,7 @@ class BaseMap extends Component {
               options={{ ...geocoderOptions }}
             />
           )}
-          {mapboxRef && childrenLayers}
+          {childrenLayers}
         </MapGL>
       </div>
     );
@@ -390,6 +460,12 @@ BaseMap.propTypes = {
   geocoder: PropTypes.bool,
   geocoderOptions: PropTypes.shape({}),
   geocoderOnChange: PropTypes.func,
+  geocoderPosition: PropTypes.oneOf([
+    "top-left",
+    "top-right",
+    "bottom-left",
+    "bottom-right"
+  ]),
   mapGLOptions: PropTypes.shape({}),
   children: PropTypes.node,
   useContainerHeight: PropTypes.bool,
@@ -397,6 +473,8 @@ BaseMap.propTypes = {
   animate: PropTypes.bool,
   animationDuration: PropTypes.number,
   onBaseMapClick: PropTypes.func,
+  onBaseMapHover: PropTypes.func,
+  onBaseMapMouseOut: PropTypes.func,
   mapboxDataId: PropTypes.string,
   mapboxData: PropTypes.shape({
     type: PropTypes.string,
@@ -412,17 +490,17 @@ BaseMap.propTypes = {
   }),
   sharedViewport: PropTypes.shape({}),
   onSharedViewportChange: PropTypes.func,
-  useFitBounds: PropTypes.bool,
   bboxData: PropTypes.arrayOf(PropTypes.shape({})),
   bboxPadding: PropTypes.number,
-  useScrollZoom: PropTypes.bool,
-  mapboxRef: PropTypes.shape({})
+  boundBox: PropTypes.arrayOf(PropTypes.number),
+  useScrollZoom: PropTypes.bool
 };
 
 BaseMap.defaultProps = {
   mapboxToken: MAPBOX_TOKEN,
   navigation: true,
   geocoder: false,
+  geocoderPosition: "top-right",
   useContainerHeight: false,
   updateViewport: true,
   animate: false,
@@ -439,11 +517,10 @@ BaseMap.defaultProps = {
   },
   animationDuration: 1000,
   scaleBar: false,
-  useFitBounds: false,
   bboxData: [],
   bboxPadding: 10,
-  useScrollZoom: false,
-  mapboxRef: null
+  boundBox: [],
+  useScrollZoom: false
 };
 
 export default Dimensions()(BaseMap);

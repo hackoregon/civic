@@ -12,6 +12,7 @@ import {
   tent,
   water
 } from "./items";
+import { TYPES as SFX_TYPES } from "./sfx";
 
 // Task icons
 import cold from "../../assets/task_icons/cold.svg";
@@ -36,33 +37,6 @@ import sceneLostPet from "../../assets/task_scenes/scene-lost-pet-2.svg";
 import sceneRubble from "../../assets/task_scenes/scene-rubble.svg";
 import sceneThirst from "../../assets/task_scenes/scene-thirst.svg";
 import sceneWeather from "../../assets/task_scenes/scene-weather.svg";
-
-/* BOY VOICE AUDIO */
-// Task instruction audio
-import rubbleInstructionBoy from "../../assets/audio/task_screen/boy/rubble.mp3";
-import dustInstructionBoy from "../../assets/audio/task_screen/boy/dust.mp3";
-import hungerInstructionBoy from "../../assets/audio/task_screen/boy/hunger.mp3";
-import holeInstructionBoy from "../../assets/audio/task_screen/boy/hole.mp3";
-import coldInstructionBoy from "../../assets/audio/task_screen/boy/cold.mp3";
-import lostPetInstructionBoy from "../../assets/audio/task_screen/boy/lost_pet.mp3";
-import injuryInstructionBoy from "../../assets/audio/task_screen/boy/injury.mp3";
-import fireInstructionBoy from "../../assets/audio/task_screen/boy/fire.mp3";
-
-// Task question audio
-import defaultQuestionBoy from "../../assets/audio/task_screen/boy/how_can_i_help.mp3";
-import dustQuestionBoy from "../../assets/audio/task_screen/boy/question_dust.mp3";
-import rubbleQuestionBoy from "../../assets/audio/task_screen/boy/question_rubble.mp3";
-import coldQuestionBoy from "../../assets/audio/task_screen/boy/question_cold.mp3";
-
-/* GIRL VOICE AUDIO */
-// Task instruction audio
-import dustInstructionGirl from "../../assets/audio/task_screen/girl/dust.mp3";
-import hungerInstructionGirl from "../../assets/audio/task_screen/girl/hunger.mp3";
-import thirstInstructionGirl from "../../assets/audio/task_screen/girl/thirst.mp3";
-
-// Task question audio
-import defaultQuestionGirl from "../../assets/audio/task_screen/girl/how_can_i_help.mp3";
-import rubbleQuestionGirl from "../../assets/audio/task_screen/girl/rubble.mp3";
 
 // Save yourself ids
 export const DUST = "dust";
@@ -185,8 +159,11 @@ export const tasks = {
   [RUBBLE]: {
     id: RUBBLE,
     time: 30,
-    audioInstruction: rubbleInstructionBoy,
-    audioQuestion: sample([rubbleQuestionGirl, rubbleQuestionBoy]),
+    audioInstruction: SFX_TYPES.rubbleInstructionBoy,
+    audioQuestion: sample([
+      SFX_TYPES.rubbleQuestionGirl,
+      SFX_TYPES.rubbleQuestionBoy
+    ]),
     requiredItem: protectiveGear,
     numberItemsToSolve: 3,
     peopleSavedRange: [1, 3],
@@ -203,8 +180,11 @@ export const tasks = {
   [DUST]: {
     id: DUST,
     time: 30,
-    audioInstruction: sample([dustInstructionGirl, dustInstructionBoy]),
-    audioQuestion: dustQuestionBoy,
+    audioInstruction: sample([
+      SFX_TYPES.dustInstructionGirl,
+      SFX_TYPES.dustInstructionBoy
+    ]),
+    audioQuestion: SFX_TYPES.dustQuestionBoy,
     requiredItem: dustMask,
     numberItemsToSolve: 3,
     peopleSavedRange: [1, 3],
@@ -223,8 +203,11 @@ export const tasks = {
   [COLD]: {
     id: COLD,
     time: 20,
-    audioInstruction: coldInstructionBoy,
-    audioQuestion: sample([defaultQuestionGirl, defaultQuestionBoy]),
+    audioInstruction: SFX_TYPES.coldInstructionBoy,
+    audioQuestion: sample([
+      SFX_TYPES.defaultQuestionGirl,
+      SFX_TYPES.defaultQuestionBoy
+    ]),
     requiredItem: blanket,
     numberItemsToSolve: 3,
     peopleSavedRange: [1, 3],
@@ -239,8 +222,11 @@ export const tasks = {
   [FIRE]: {
     id: FIRE,
     time: 20,
-    audioInstruction: fireInstructionBoy,
-    audioQuestion: sample([defaultQuestionGirl, defaultQuestionBoy]),
+    audioInstruction: SFX_TYPES.fireInstructionBoy,
+    audioQuestion: sample([
+      SFX_TYPES.defaultQuestionGirl,
+      SFX_TYPES.defaultQuestionBoy
+    ]),
     requiredItem: fireExtinguisher,
     numberItemsToSolve: 5,
     peopleSavedRange: [5, 15],
@@ -255,8 +241,14 @@ export const tasks = {
   [HUNGER]: {
     id: HUNGER,
     time: 20,
-    audioInstruction: sample([hungerInstructionGirl, hungerInstructionBoy]),
-    audioQuestion: sample([defaultQuestionGirl, defaultQuestionBoy]),
+    audioInstruction: sample([
+      SFX_TYPES.hungerInstructionGirl,
+      SFX_TYPES.hungerInstructionBoy
+    ]),
+    audioQuestion: sample([
+      SFX_TYPES.defaultQuestionGirl,
+      SFX_TYPES.defaultQuestionBoy
+    ]),
     requiredItem: food,
     numberItemsToSolve: 5,
     peopleSavedRange: [1, 5],
@@ -271,8 +263,11 @@ export const tasks = {
   [HOLE]: {
     id: HOLE,
     time: 20,
-    audioInstruction: holeInstructionBoy,
-    audioQuestion: sample([defaultQuestionGirl, defaultQuestionBoy]),
+    audioInstruction: SFX_TYPES.holeInstructionBoy,
+    audioQuestion: sample([
+      SFX_TYPES.defaultQuestionGirl,
+      SFX_TYPES.defaultQuestionBoy
+    ]),
     requiredItem: rope,
     numberItemsToSolve: 3,
     peopleSavedRange: [1, 1],
@@ -288,8 +283,11 @@ export const tasks = {
   [INJURY]: {
     id: INJURY,
     time: 20,
-    audioInstruction: injuryInstructionBoy,
-    audioQuestion: sample([defaultQuestionGirl, defaultQuestionBoy]),
+    audioInstruction: SFX_TYPES.injuryInstructionBoy,
+    audioQuestion: sample([
+      SFX_TYPES.defaultQuestionGirl,
+      SFX_TYPES.defaultQuestionBoy
+    ]),
     requiredItem: firstAidKit,
     numberItemsToSolve: 5,
     peopleSavedRange: [1, 5],
@@ -304,8 +302,8 @@ export const tasks = {
   [WEATHER]: {
     id: WEATHER,
     time: 20,
-    audioInstruction: coldInstructionBoy,
-    audioQuestion: coldQuestionBoy,
+    audioInstruction: SFX_TYPES.coldInstructionBoy,
+    audioQuestion: SFX_TYPES.coldQuestionBoy,
     requiredItem: tent,
     numberItemsToSolve: 2,
     peopleSavedRange: [1, 3],
@@ -320,8 +318,11 @@ export const tasks = {
   [LOST_PET]: {
     id: LOST_PET,
     time: 20,
-    audioInstruction: lostPetInstructionBoy,
-    audioQuestion: sample([defaultQuestionGirl, defaultQuestionBoy]),
+    audioInstruction: SFX_TYPES.lostPetInstructionBoy,
+    audioQuestion: sample([
+      SFX_TYPES.defaultQuestionGirl,
+      SFX_TYPES.defaultQuestionBoy
+    ]),
     requiredItem: flashlight,
     numberItemsToSolve: 2,
     peopleSavedRange: [0, 0],
@@ -336,8 +337,11 @@ export const tasks = {
   [THIRST]: {
     id: THIRST,
     time: 20,
-    audioInstruction: thirstInstructionGirl,
-    audioQuestion: sample([defaultQuestionGirl, defaultQuestionBoy]),
+    audioInstruction: SFX_TYPES.thirstInstructionGirl,
+    audioQuestion: sample([
+      SFX_TYPES.defaultQuestionGirl,
+      SFX_TYPES.defaultQuestionBoy
+    ]),
     requiredItem: water,
     numberItemsToSolve: 5,
     peopleSavedRange: [1, 5],

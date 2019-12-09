@@ -3,11 +3,16 @@ import { css, jsx } from "@emotion/core";
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+
 import { getSavedMetrics } from "../../../state/user";
 import usePrevious from "../../../state/hooks/usePrevious";
 import { palette } from "../../../constants/style";
-import savedPeople from "../../../../assets/audio/task_screen/add-points.mp3";
-import Song from "../Audio/Song";
+import { TYPES as SFX_TYPES } from "../../../constants/sfx";
+import {
+  playAudio as _playAudio,
+  stopAudio as _stopAudio
+} from "../../../state/sfx";
 
 const containerStyle = css`
   height: 130px;
@@ -73,7 +78,9 @@ const SavedBar = ({
   justifyRight,
   isSummary,
   initialSummaryStyle,
-  savedMetrics
+  savedMetrics,
+  playAudio,
+  stopAudio
 }) => {
   const [playPointsSound, setPlayPointsSound] = useState(false);
   const [soundTimeout, setSoundTimeout] = useState(null);
@@ -86,9 +93,11 @@ const SavedBar = ({
     const savedPets = prevPetsSaved < savedMetrics.petsSaved;
     if (savedMorePeople || savedPets) {
       setPlayPointsSound(true);
+      playAudio(SFX_TYPES.POINTS_EARNED_SFX);
       const newTimeout = setTimeout(() => {
         setPlayPointsSound(false);
         setSavedType(null);
+        stopAudio(SFX_TYPES.POINTS_EARNED_SFX);
       }, 2000);
       setSoundTimeout(newTimeout);
       let saved = "both";
@@ -104,12 +113,21 @@ const SavedBar = ({
       if (soundTimeout) clearTimeout(soundTimeout);
     };
   }, [
+    playAudio,
     prevPeopleSaved,
     prevPetsSaved,
     savedMetrics.peopleSaved,
     savedMetrics.petsSaved,
-    soundTimeout
+    soundTimeout,
+    stopAudio
   ]);
+
+  useEffect(() => {
+    return () => {
+      stopAudio(SFX_TYPES.POINTS_EARNED_SFX);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const savedMorePeople = savedType === "people" || savedType === "both";
   const savedPets = savedType === "pets" || savedType === "both";
@@ -150,9 +168,6 @@ const SavedBar = ({
           {savedMetrics.petsSaved}
         </span>
       </p>
-      {playPointsSound && (
-        <Song songFile={savedPeople} shouldLoop={false} volume={1.0} />
-      )}
     </div>
   );
 };
@@ -164,11 +179,21 @@ SavedBar.propTypes = {
   savedMetrics: PropTypes.shape({
     petsSaved: PropTypes.number,
     peopleSaved: PropTypes.number
-  })
+  }),
+  playAudio: PropTypes.func,
+  stopAudio: PropTypes.func
 };
 
 const mapStateToProps = state => ({
   savedMetrics: getSavedMetrics(state)
 });
 
-export default connect(mapStateToProps)(SavedBar);
+const mapDispatchToProps = dispatch => ({
+  playAudio: bindActionCreators(_playAudio, dispatch),
+  stopAudio: bindActionCreators(_stopAudio, dispatch)
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SavedBar);

@@ -54,7 +54,8 @@ const OrbManager = ({
   checkItemIsCorrect,
   playSFX,
   taskPhase,
-  activeTaskIndex
+  activeTaskIndex,
+  requiredItem
 } = {}) => {
   const [hasInitialized, setHasInitialized] = useState(false);
   const [orbModels, setOrbModelsState] = useState([]);
@@ -83,7 +84,12 @@ const OrbManager = ({
       prevActiveTaskIndex !== activeTaskIndex && activeTaskIndex === 1;
 
     if (newBounds || newTaskPhase || resetForSaveYourself) {
-      const newOrbs = createRandomLayout(possibleItems, bounds, ORB_CONFIG);
+      const newOrbs = createRandomLayout(
+        possibleItems,
+        bounds,
+        ORB_CONFIG,
+        requiredItem
+      );
       setHasInitialized(true);
       setCompletedOrbs([]);
       setOrbModelsState(newOrbs);
@@ -96,7 +102,8 @@ const OrbManager = ({
     prevActiveTaskIndex,
     prevBounds,
     prevTaskPhase,
-    taskPhase
+    taskPhase,
+    requiredItem
   ]);
 
   const addOrbScore = useCallback(
