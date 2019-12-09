@@ -13,11 +13,12 @@ const contentWrapper = css`
 const buttonWrapper = css`
   display: flex;
   justify-content: space-evenly;
+  padding: 1rem 0 1rem 0;
 `;
 
 const hideOnMobile = css`
   @media (max-width: 500px) {
-    width: 100%;
+    display: none;
   }
 `;
 
@@ -25,7 +26,7 @@ const SandboxIntroDialog = ({ open, onClose }) => (
   <Dialog open={open} onClose={onClose}>
     <div
       css={css(`
-              margin: 0 0 10px 0;
+              margin: 0;
               padding-top: 5px;
               background-color: #201024;
               color: white;
@@ -37,13 +38,22 @@ const SandboxIntroDialog = ({ open, onClose }) => (
       <Logo type="sandboxLogoInverted" />
     </div>
     <div css={contentWrapper}>
+      <h2>An exploratory data resource you can contribute to</h2>
       <h3>
-        The CIVIC Sandbox is a curated data exploration tool to encourage
-        exploration, enable comparison, and impact decision making.
+        Work with us to prepare and document your dataset, and see it as map
+        layers.
+      </h3>
+      <h3>
+        Explore curated collections to see patterns and relationships, then dig
+        deeper into the context.
       </h3>
       <div css={buttonWrapper}>
-        <ButtonNew label="Add Your Data" css={hideOnMobile} />
-        <ButtonNew label="Explore Data" onClick={onClose} />
+        <div css={hideOnMobile}>
+          <ButtonNew label="Contribute Data" />
+        </div>
+        <div>
+          <ButtonNew label="Explore Data" onClick={onClose} />
+        </div>
       </div>
     </div>
   </Dialog>

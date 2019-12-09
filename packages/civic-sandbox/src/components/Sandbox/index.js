@@ -139,7 +139,6 @@ class SandboxComponent extends React.Component {
           slide => slide === slideName || !choroplethSlides.includes(slide)
         )
       : reorderSelectedSlides;
-
     updateSetSlides(reorderSelectedSlidesOnlyOneChoropleth);
   };
 
