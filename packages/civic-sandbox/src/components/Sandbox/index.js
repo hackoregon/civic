@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable import/no-extraneous-dependencies */
 import React from "react";
 import { connect } from "react-redux";
@@ -18,7 +17,8 @@ import {
   setSlideKey,
   fetchSlideByDate,
   setSelectedFoundationDatum,
-  setSelectedSlideDatum
+  setSelectedSlideDatum,
+  setSelectedBaseMapDatum
 } from "../../state/sandbox/actions";
 
 import {
@@ -34,6 +34,7 @@ import {
   getSelectedSlides,
   getLayerSlides,
   getSelectedSlideDatum,
+  getSelectedBaseMapDatum,
   getAllSlides,
   getSelectedFoundationDatum
 } from "../../state/sandbox/selectors";
@@ -93,18 +94,23 @@ class SandboxComponent extends React.Component {
     const { selectedSlide, allSlides, setSlides: updateSetSlides } = this.props;
     const slideName = event.target.value;
 
-    const orderSelectedSlides = [...allSlides].reduce((a, c, i) => {
-      // eslint-disable-next-line no-param-reassign
-      a[c.label] = i;
-      return a;
-    }, {});
+    const originalSelectedSlideOrder = [...allSlides].map(s => {
+      if (s.label === slideName) {
+        return {
+          label: s.label,
+          checked: !s.checked
+        };
+      }
+      return {
+        label: s.label,
+        checked: s.checked
+      };
+    });
 
     const reorderSelectedSlides = selectedSlide.includes(slideName)
       ? selectedSlide.filter(name => name !== slideName)
       : [
-          ...selectedSlide.slice(0, orderSelectedSlides[slideName]),
-          slideName,
-          ...selectedSlide.slice(orderSelectedSlides[slideName])
+          ...originalSelectedSlideOrder.filter(s => s.checked).map(s => s.label)
         ];
 
     updateSetSlides(reorderSelectedSlides);
@@ -133,7 +139,9 @@ class SandboxComponent extends React.Component {
       selectedFoundationData,
       foundationData,
       slideHover,
+      baseMapHover,
       selectedSlideDatum,
+      selectedBaseMapDatum,
       allSlides,
       isLoading,
       isError,
@@ -167,8 +175,10 @@ class SandboxComponent extends React.Component {
         foundationData={selectedFoundationData}
         defaultFoundation={foundationData}
         onSlideHover={slideHover}
+        onBaseMapHover={baseMapHover}
         onFoundationClick={foundationClick}
         tooltipInfo={selectedSlideDatum}
+        tooltipInfoVector={selectedBaseMapDatum}
         allSlides={allSlides}
         areSlidesLoading={isLoading}
         errors={isError}
@@ -196,6 +206,7 @@ export default connect(
     selectedSlide: getSelectedSlides(state),
     layerSlides: getLayerSlides(state),
     selectedSlideDatum: getSelectedSlideDatum(state),
+    selectedBaseMapDatum: getSelectedBaseMapDatum(state),
     allSlides: getAllSlides(state),
     selectedFoundationDatum: getSelectedFoundationDatum(state)
   }),
@@ -226,6 +237,9 @@ export default connect(
     },
     slideHover(feature, slideIndex) {
       dispatch(setSelectedSlideDatum(feature, slideIndex));
+    },
+    baseMapHover(feature, slideIndex) {
+      dispatch(setSelectedBaseMapDatum(feature, slideIndex));
     }
   })
 )(SandboxComponent);
@@ -241,7 +255,9 @@ SandboxComponent.propTypes = {
   allSlides: arrayOf(shape({})),
   layerSlides: arrayOf(shape({})),
   selectedSlideDatum: shape({}),
+  selectedBaseMapDatum: shape({}),
   slideHover: func,
+  baseMapHover: func,
   foundationClick: func,
   fetchLayers: func,
   fetchSlideByDate: func,

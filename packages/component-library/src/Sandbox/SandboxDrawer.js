@@ -215,7 +215,12 @@ const SandboxDrawer = props => {
                   const choropleth =
                     d.mapType === "ChoroplethMap" &&
                     d.layerInfo.displayName === slide.label;
-                  return choropleth || scatterplot;
+                  const vectorTilesMap =
+                    d.mapType === "VectorTilesMap" &&
+                    d.legend &&
+                    d.legend.type === "choropleth" &&
+                    d.layerInfo.displayName === slide.label;
+                  return choropleth || scatterplot || vectorTilesMap;
                 });
 
                 const matchFound =
@@ -226,6 +231,14 @@ const SandboxDrawer = props => {
                     data={foundationData[dataIndex].data}
                     mapProps={foundationMapProps[dataIndex]}
                   />
+                );
+
+                const matchFoundVector =
+                  dataIndex > -1 &&
+                  foundationData[dataIndex].mapType === "VectorTilesMap";
+
+                const mapLegendVector = matchFoundVector && (
+                  <SandboxMapLegend mapProps={foundationMapProps[dataIndex]} />
                 );
 
                 const keyAllOptions = matchFound
@@ -289,6 +302,7 @@ const SandboxDrawer = props => {
                       />
                     </div>
                     {mapLegend}
+                    {mapLegendVector}
                     <div
                       css={css(`
                     padding: .5rem 0 .5rem 0;

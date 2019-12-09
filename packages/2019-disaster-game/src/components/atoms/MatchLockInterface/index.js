@@ -65,7 +65,8 @@ const MatchLockInterface = ({
   interfaceMessage,
   noInteractionCallback,
   restartNoInteractionTimer,
-  noInteractionDuration
+  noInteractionDuration,
+  requiredItem
 }) => {
   const [interactionTimeout] = useState(new Timer());
   const [open, setOpen] = useState(false);
@@ -124,6 +125,7 @@ const MatchLockInterface = ({
           onOrbSelection={doOrbSelection}
           checkItemIsCorrect={checkItemIsCorrect}
           activeScreen={activeScreen}
+          requiredItem={requiredItem}
         />
       </GUIStyle>
     </div>
@@ -138,7 +140,8 @@ MatchLockInterface.propTypes = {
   interfaceMessage: PropTypes.string,
   noInteractionCallback: PropTypes.func,
   restartNoInteractionTimer: PropTypes.bool,
-  noInteractionDuration: PropTypes.number
+  noInteractionDuration: PropTypes.number,
+  requiredItem: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.string])
 };
 
 export default MatchLockInterface;

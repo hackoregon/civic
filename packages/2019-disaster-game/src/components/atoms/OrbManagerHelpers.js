@@ -1,29 +1,45 @@
 import { cloneDeep, sampleSize } from "lodash";
 
-export function createRandomLayout(possibleItems, bounds, config) {
+const addPositionVelocityToItemData = (itemData, bounds, config) => {
+  const augmentedItem = { ...itemData };
+  augmentedItem.x = Math.random() * bounds.width;
+  augmentedItem.y = Math.random() * (bounds.height - config.orbSize * 2);
+  augmentedItem.velocity = {
+    x:
+      config.minVelocityX +
+      Math.random() * (config.maxVelocityX - config.minVelocityX),
+    y:
+      config.minVelocityY +
+      Math.random() * (config.maxVelocityY - config.minVelocityY)
+  };
+
+  return augmentedItem;
+};
+
+export function createRandomLayout(
+  possibleItems,
+  bounds,
+  config,
+  requiredItem
+) {
   if (!possibleItems.length) {
     return [];
   }
 
   // create an empty array.
   const orbCollection = [];
-  // create a number of orbs based on each possibleItems weighting to achieve the correct distribution. Add the x, y, and velocity properties to its existing properties for that item
+
+  // create a number of orbs based on each possibleItem's weighting to achieve the correct distribution. Add the x, y, and velocity properties to its existing properties for that item
   for (let i = 0; i < possibleItems.length; i += 1) {
-    const itemData = possibleItems[i];
-    const totalGeneratedOrbs = Math.round(config.orbCount * itemData.weighting);
+    let itemData = possibleItems[i];
+    const isRequiredItem = possibleItems.id === requiredItem;
+    const totalGeneratedOrbs = isRequiredItem
+      ? 10
+      : Math.round(config.orbCount * itemData.weighting);
 
     for (let j = 0; j < totalGeneratedOrbs; j += 1) {
       const orbId = `${itemData.type}-${j}`;
-      itemData.x = Math.random() * bounds.width;
-      itemData.y = Math.random() * (bounds.height - config.orbSize * 2);
-      itemData.velocity = {
-        x:
-          config.minVelocityX +
-          Math.random() * (config.maxVelocityX - config.minVelocityX),
-        y:
-          config.minVelocityY +
-          Math.random() * (config.maxVelocityY - config.minVelocityY)
-      };
+      itemData = addPositionVelocityToItemData(itemData, bounds, config);
 
       orbCollection.push(
         Object.assign({}, { orbId }, { touched: false }, itemData)

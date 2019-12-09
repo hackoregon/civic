@@ -1,15 +1,17 @@
 /* eslint-disable no-nested-ternary */
+import React from "react";
 import PropTypes from "prop-types";
 import { format, scaleLinear, max } from "d3";
 import { startCase } from "lodash";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
-import shortid from "shortid";
+// import shortid from "shortid";
 import civicFormat from "../utils/civicFormat";
 import {
   createColorScale,
   updateQuantileScale,
-  updateEqualScale
+  updateEqualScale,
+  createRange
 } from "../MultiLayerMap/createLayers";
 
 const legendHeight = 65;
@@ -34,7 +36,7 @@ const colorBox = css(`
 const tickNums = css(`
   position: absolute;
   bottom: -20px;
-  right: 0;
+  right: -20px;
   font-size: 14px;
 `);
 
@@ -61,10 +63,29 @@ const barLabelStyle = css(`
   font-size: 15px;
 `);
 
-const SandboxMapLegend = props => {
+const SandboxMapLegend = React.memo(props => {
   const { data, mapProps } = props;
-  const { civicColor, scaleType, dataRange, colorRange, fieldName } = mapProps;
+  const {
+    civicColor,
+    scaleType = {},
+    dataRange = [],
+    colorRange = [],
+    fieldName,
+    mapType,
+    layerInfo,
+    legend
+  } = mapProps;
   const { color: colorScaleType } = scaleType;
+  // console.log("LEGEND-legend:", legend);
+
+  const {
+    format: legendFormat,
+    colorRange: legendColorRange,
+    dataRange: legendDataRange
+    // type: legendType,
+    // fieldName: legendFieldName,
+    // label: legendLabel,
+  } = legend;
 
   let choroplethColorScale = createColorScale(
     civicColor,
@@ -101,7 +122,9 @@ const SandboxMapLegend = props => {
     );
 
   const colorScaleRange =
-    choroplethColorScale.range()[0].length === 4
+    mapType === "VectorTilesMap"
+      ? createRange("", legendColorRange).map(c => [...c, 255])
+      : choroplethColorScale.range()[0].length === 4
       ? choroplethColorScale.range()
       : choroplethColorScale.range().map(c => [...c, 255]);
 
@@ -110,12 +133,16 @@ const SandboxMapLegend = props => {
   const bins =
     colorScaleType === "ordinal" || colorScaleType === "threshold"
       ? dataRange
+      : mapType === "VectorTilesMap"
+      ? legendDataRange
       : choroplethColorScale
           .range()
           .map(d => choroplethColorScale.invertExtent(d));
 
   const ticks =
-    colorScaleType === "ordinal" || colorScaleType === "threshold"
+    colorScaleType === "ordinal" ||
+    colorScaleType === "threshold" ||
+    mapType === "VectorTilesMap"
       ? bins
       : bins.reduce((a, c) => (c[1] ? [...a, c[1]] : [...a, ""]), []);
 
@@ -136,35 +163,31 @@ const SandboxMapLegend = props => {
 
   const formatTicks = (arr, typeFormat) => {
     const formatter =
-      typeFormat === "numeric"
-        ? civicFormat.numeric
-        : typeFormat === "numericShort"
-        ? civicFormat.numericShort
-        : typeFormat === "decimal"
-        ? sandboxDecimalFormat
-        : typeFormat === "percent"
+      typeFormat === "percentage"
         ? sandboxPercentFormat
         : typeFormat === "dollars"
         ? sandboxMoneyFormat
-        : typeFormat === "year"
-        ? civicFormat.year
-        : typeFormat === "monthYear"
-        ? civicFormat.monthYear
-        : typeFormat === "titleCase"
-        ? startCase
+        : typeFormat === "decimal"
+        ? sandboxDecimalFormat
         : typeFormat === "sentenceCase"
         ? sandboxSentenceCase
-        : civicFormat.unformatted;
+        : typeFormat === "titleCase"
+        ? startCase
+        : civicFormat.typeFormat || civicFormat.numeric;
     return arr.map(d => formatter(d));
   };
 
-  const formatType =
+  const oldLegendFormat =
     mapProps.tooltip &&
     mapProps.tooltip.primary &&
-    mapProps.tooltip.primary.format
-      ? mapProps.tooltip.primary.format
-      : "numeric";
+    mapProps.tooltip.primary.format;
+  // console.log("LEGNED-oldLegendFormat:", oldLegendFormat);
+
+  const formatType = legendFormat || oldLegendFormat;
+  // console.log("LEGNED-formatType:", formatType);
+
   const ticksFormatted = formatTicks(ticks, formatType);
+  // console.log("LEGNED-ticksFormatted:", ticksFormatted);
 
   const tickStyle =
     colorScaleType === "threshold"
@@ -192,13 +215,17 @@ const SandboxMapLegend = props => {
 
   const barHeights = mapColorsArr.map(d => {
     const count = colorCount[d.slice(5, -3)];
-    return count ? { h: barScale(count), c: count } : { h: 0, c: "" };
+    return mapType === "VectorTilesMap"
+      ? { h: 28, c: "" }
+      : count
+      ? { h: barScale(count), c: count }
+      : { h: 0, c: "0" };
   });
 
-  const legend = mapColorsArr.map((d, i) => {
+  const legendContents = mapColorsArr.map((d, i) => {
     return (
       <div
-        key={shortid.generate()}
+        key={layerInfo.displayName + d}
         css={colorBox}
         style={{ backgroundColor: d, height: `${barHeights[i].h}px` }}
       >
@@ -212,12 +239,16 @@ const SandboxMapLegend = props => {
     );
   });
 
-  return <div css={legendContainer}>{legend}</div>;
-};
+  return <div css={legendContainer}>{legendContents}</div>;
+});
 
 SandboxMapLegend.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  data: PropTypes.arrayOf(PropTypes.shape({})),
   mapProps: PropTypes.shape({}).isRequired
+};
+
+SandboxMapLegend.defaultProps = {
+  data: []
 };
 
 export default SandboxMapLegend;
