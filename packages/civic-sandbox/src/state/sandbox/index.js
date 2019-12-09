@@ -137,6 +137,11 @@ const reducer = (state = INITIAL_STATE, action) => {
       const [findDefaultLayers] = state.sandbox.packages.filter(
         d => d.displayName === action.selectedPackage.displayName
       );
+
+      if (state.selectedPackage === action.selectedPackage.displayName) {
+        return state;
+      }
+
       return {
         ...state,
         selectedPackage: action.selectedPackage.displayName,
