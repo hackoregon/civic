@@ -46,14 +46,16 @@ class SandboxComponent extends React.Component {
     this.state = {
       drawerVisible: true,
       dialogVisible: true,
-      drawerVisualization: true,
-      drawerLayerSelector: false
+      drawerVisualization: false,
+      drawerLayerSelector: false,
+      drawerExplore: true
     };
     this.updateSlide = this.updateSlide.bind(this);
     this.toggleDrawer = this.toggleDrawer.bind(this);
     this.toggleDialog = this.toggleDialog.bind(this);
     this.toggleDrawerVisualization = this.toggleDrawerVisualization.bind(this);
     this.toggleDrawerLayerSelector = this.toggleDrawerLayerSelector.bind(this);
+    this.toggleDrawerExplore = this.toggleDrawerExplore.bind(this);
   }
 
   componentDidMount() {
@@ -162,6 +164,7 @@ class SandboxComponent extends React.Component {
     this.setState({
       drawerVisualization: true,
       drawerLayerSelector: false,
+      drawerExplore: false,
       drawerVisible: true
     });
   };
@@ -170,6 +173,16 @@ class SandboxComponent extends React.Component {
     this.setState({
       drawerVisualization: false,
       drawerLayerSelector: true,
+      drawerExplore: false,
+      drawerVisible: true
+    });
+  };
+
+  toggleDrawerExplore = () => {
+    this.setState({
+      drawerVisualization: false,
+      drawerLayerSelector: false,
+      drawerExplore: true,
       drawerVisible: true
     });
   };
@@ -204,7 +217,8 @@ class SandboxComponent extends React.Component {
       drawerVisible,
       dialogVisible,
       drawerVisualization,
-      drawerLayerSelector
+      drawerLayerSelector,
+      drawerExplore
     } = this.state;
 
     const styles = css(`
@@ -221,6 +235,7 @@ class SandboxComponent extends React.Component {
         toggleDialog={this.toggleDialog}
         toggleDrawerLayerSelector={this.toggleDrawerLayerSelector}
         toggleDrawerVisualization={this.toggleDrawerVisualization}
+        toggleDrawerExplore={this.toggleDrawerExplore}
         fetchSlideDataByDate={renderFetchSlideByDate}
         updatePackage={renderSetPackage}
         styles={styles}
@@ -233,6 +248,7 @@ class SandboxComponent extends React.Component {
         dialogVisible={dialogVisible}
         drawerVisualization={drawerVisualization}
         drawerLayerSelector={drawerLayerSelector}
+        drawerExplore={drawerExplore}
         slideData={selectedSlidesData}
         defaultSlides={slidesData}
         foundationData={selectedFoundationData}

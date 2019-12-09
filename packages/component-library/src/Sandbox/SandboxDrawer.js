@@ -1,8 +1,13 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import { string, bool, func, arrayOf, shape } from "prop-types";
+import MenuIcon from "@material-ui/icons/Menu";
+import TimelineIcon from "@material-ui/icons/Timeline";
+import LayersIcon from "@material-ui/icons/Layers";
+import CollectionsIcon from "@material-ui/icons/Collections";
 import SandboxDrawerLayerSelector from "./SandboxDrawerLayerSelector";
 import SandboxDrawerVisualization from "./SandboxDrawerVisualization";
+import SandboxDrawerExplore from "./SandboxDrawerExplore";
 import Logo from "../Logo/Logo";
 
 const menuOpen = css(`
@@ -54,9 +59,11 @@ const SandboxDrawer = props => {
     toggleDrawer,
     toggleVisualization,
     toggleLayerSelector,
+    toggleExplore,
     drawerVisible,
     drawerVisualization,
     drawerLayerSelector,
+    drawerExplore,
     foundationData,
     allSlides,
     updatePackage,
@@ -68,15 +75,14 @@ const SandboxDrawer = props => {
   } = props;
 
   const buttonStyle = css(`
-    font-size: 1.4rem;
     color: #F3F2F3;
-    line-height: 1.5;
-    height: 35px;
-    padding-left: 5px;
+    height: 40px;
     opacity: 0.6;
-    @media (max-width: 850px) {
-      font-size: 1.3rem;
-    }
+    display: flex;
+  `);
+
+  const buttonIcon = css(`
+    margin: auto;
   `);
 
   const on = css(`
@@ -85,14 +91,12 @@ const SandboxDrawer = props => {
 
   const active = css(`
     opacity: 1;
-    box-shadow: inset 0px 0px 3px 2px rgba(255, 255, 255, 1);
-  `);
-
-  const rotate = css(`
+    @media (min-width: 500px) {
+      border-left: 4px solid #F3F2F3;
+    }
     @media (max-width: 500px) {
-      transform: rotate(-90deg);
-      width: fit-content;
-      margin: 0 auto;
+      border-bottom: 4px solid #F3F2F3;
+      box-sizing: border-box;
     }
   `);
 
@@ -110,7 +114,7 @@ const SandboxDrawer = props => {
             text-align: center;
             @media (max-width: 500px) {
               display: grid;
-              grid-template-columns: repeat(3, auto);
+              grid-template-columns: repeat(4, auto);
             }
           `)}
         >
@@ -121,7 +125,7 @@ const SandboxDrawer = props => {
             tabIndex={0}
             css={[buttonStyle, on]}
           >
-            <div css={rotate}>{drawerVisible ? ">" : "<"}</div>
+            <MenuIcon css={buttonIcon} />
           </div>
           <div
             onClick={toggleVisualization}
@@ -130,9 +134,7 @@ const SandboxDrawer = props => {
             tabIndex={0}
             css={[buttonStyle, drawerVisible && drawerVisualization && active]}
           >
-            <span role="img" aria-label="Charts">
-              📉
-            </span>
+            <TimelineIcon css={buttonIcon} />
           </div>
           <div
             onClick={toggleLayerSelector}
@@ -141,9 +143,16 @@ const SandboxDrawer = props => {
             tabIndex={0}
             css={[buttonStyle, drawerVisible && drawerLayerSelector && active]}
           >
-            <span role="img" aria-label="Map Layers">
-              🥞
-            </span>
+            <LayersIcon css={buttonIcon} />
+          </div>
+          <div
+            onClick={toggleExplore}
+            onKeyPress={toggleExplore}
+            role="button"
+            tabIndex={0}
+            css={[buttonStyle, drawerVisible && drawerExplore && active]}
+          >
+            <CollectionsIcon css={buttonIcon} />
           </div>
         </div>
       </div>
@@ -162,16 +171,20 @@ const SandboxDrawer = props => {
             role="button"
             tabIndex={0}
             css={css(`
-              margin: 0 0 10px 0;
-              padding-top: 5px;
+              display: flex;
               background-color: #201024;
               color: white;
-              height: 35px;
+              height: 50px;
               text-align: center;
               cursor: pointer;
+              position: sticky;
+              top: 0;
+              z-index: 999;
           `)}
           >
-            <Logo type="sandboxLogoInverted" />
+            <div css={css(`margin: auto; padding-top: 5px;`)}>
+              <Logo type="sandboxLogoInverted" />
+            </div>
           </div>
           {drawerVisualization && (
             <SandboxDrawerVisualization
@@ -194,6 +207,15 @@ const SandboxDrawer = props => {
               updateSlideKey={updateSlideKey}
             />
           )}
+          {drawerExplore && (
+            <SandboxDrawerExplore
+              data={data}
+              selectedPackage={selectedPackage}
+              updatePackage={updatePackage}
+              errors={errors}
+              toggleLayerSelector={toggleLayerSelector}
+            />
+          )}
         </div>
       )}
     </div>
@@ -211,9 +233,11 @@ SandboxDrawer.propTypes = {
   toggleDrawer: func,
   toggleVisualization: func,
   toggleLayerSelector: func,
+  toggleExplore: func,
   drawerVisible: bool,
   drawerVisualization: bool,
   drawerLayerSelector: bool,
+  drawerExplore: bool,
   foundationData: arrayOf(shape({})),
   allSlides: arrayOf(shape({})),
   updatePackage: func,

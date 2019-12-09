@@ -3,21 +3,20 @@ import { jsx, css } from "@emotion/core";
 import shortid from "shortid";
 import { string, bool, func, arrayOf, shape } from "prop-types";
 import { Fragment } from "react";
+import LayersIcon from "@material-ui/icons/Layers";
 import Dropdown from "../Dropdown/Dropdown";
 import Logo from "../Logo/Logo";
 import Checkbox from "../Checkbox/Checkbox";
 
 const SandboxDrawerLayerSelector = props => {
   const {
-    data,
     onChange,
-    selectedPackage,
     foundationData,
     allSlides,
-    updatePackage,
     areSlidesLoading,
     errors,
-    updateSlideKey
+    updateSlideKey,
+    selectedPackage
   } = props;
 
   const loadingContainer = css`
@@ -51,31 +50,10 @@ const SandboxDrawerLayerSelector = props => {
       >
         <div css={css(`margin: 0 10px;`)}>
           <h2>
-            <span role="img" aria-label="Map Layers">
-              🥞
-            </span>{" "}
-            Map Layers
+            <LayersIcon fontSize="large" /> Map Layers
           </h2>
-          <h3
-            css={css(`
-              color: #555;
-              text-transform: uppercase;
-            `)}
-          >
-            Collection
-          </h3>
+          <h3>{selectedPackage}</h3>
         </div>
-        <Dropdown
-          value={selectedPackage}
-          options={data.packages.map(p => ({
-            value: p.displayName,
-            label: p.displayName
-          }))}
-          onChange={name => {
-            updatePackage({ displayName: name });
-          }}
-          simpleValue
-        />
       </div>
       <div
         css={css(`
@@ -196,13 +174,11 @@ const SandboxDrawerLayerSelector = props => {
 export default SandboxDrawerLayerSelector;
 
 SandboxDrawerLayerSelector.propTypes = {
-  data: shape({}),
   onChange: func,
-  selectedPackage: string,
   foundationData: arrayOf(shape({})),
   allSlides: arrayOf(shape({})),
-  updatePackage: func,
   areSlidesLoading: bool,
   errors: bool,
-  updateSlideKey: func
+  updateSlideKey: func,
+  selectedPackage: string
 };

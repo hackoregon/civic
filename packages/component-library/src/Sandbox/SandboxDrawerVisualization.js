@@ -2,6 +2,7 @@
 import { jsx, css } from "@emotion/core";
 import { string, shape } from "prop-types";
 import { Fragment } from "react";
+import TimelineIcon from "@material-ui/icons/Timeline";
 import CivicSandboxDashboard from "../CivicSandboxDashboard/CivicSandboxDashboard";
 
 const SandboxDrawerVisualization = props => {
@@ -21,9 +22,7 @@ const SandboxDrawerVisualization = props => {
       >
         <div css={css(`margin: 0 10px;`)}>
           <h2>
-            <span role="img" aria-label="Map Layers">
-              📉
-            </span>{" "}
+            <TimelineIcon fontSize="large" />
             Data Detail
           </h2>
           <h3>{selectedPackage}</h3>

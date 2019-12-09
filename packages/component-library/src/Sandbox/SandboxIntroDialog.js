@@ -4,7 +4,6 @@ import { jsx, css } from "@emotion/core";
 
 import Dialog from "../Dialog/Dialog";
 import ButtonNew from "../ButtonNew/ButtonNew";
-import Logo from "../Logo/Logo";
 
 const contentWrapper = css`
   margin: 20px;
@@ -24,19 +23,6 @@ const hideOnMobile = css`
 
 const SandboxIntroDialog = ({ open, onClose }) => (
   <Dialog open={open} onClose={onClose}>
-    <div
-      css={css(`
-              margin: 0;
-              padding-top: 5px;
-              background-color: #201024;
-              color: white;
-              height: 35px;
-              text-align: center;
-              cursor: pointer;
-          `)}
-    >
-      <Logo type="sandboxLogoInverted" />
-    </div>
     <div css={contentWrapper}>
       <h2>An exploratory data resource you can contribute to</h2>
       <h3>

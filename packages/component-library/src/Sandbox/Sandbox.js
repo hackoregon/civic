@@ -26,9 +26,9 @@ const baseMapWrapper = css(`
     min-height: 600px;
   }
   @media (max-width: 500px) {
-    padding-top: 35px;
+    padding-top: 40px;
     width: 100%;
-    height: calc(100vh - 35px);
+    height: calc(100vh - 40px);
     min-height: 390px;
   }
 `);
@@ -50,9 +50,11 @@ const Sandbox = ({
   drawerVisible,
   drawerVisualization,
   drawerLayerSelector,
+  drawerExplore,
   toggleDrawer,
   toggleDrawerLayerSelector,
   toggleDrawerVisualization,
+  toggleDrawerExplore,
   dialogVisible,
   toggleDialog,
   styles,
@@ -179,10 +181,12 @@ const Sandbox = ({
           toggleDrawer={toggleDrawer}
           toggleLayerSelector={toggleDrawerLayerSelector}
           toggleVisualization={toggleDrawerVisualization}
+          toggleExplore={toggleDrawerExplore}
           drawerVisible={drawerVisible}
           dialogVisible={dialogVisible}
           drawerVisualization={drawerVisualization}
           drawerLayerSelector={drawerLayerSelector}
+          drawerExplore={drawerExplore}
           defaultSlides={defaultSlides}
           slideData={slideData}
           fetchSlideByDate={fetchSlideDataByDate}
@@ -274,10 +278,12 @@ Sandbox.propTypes = {
   fetchSlideDataByDate: func.isRequired,
   drawerVisible: bool.isRequired,
   drawerVisualization: bool.isRequired,
+  drawerExplore: bool.isRequired,
   drawerLayerSelector: bool.isRequired,
   toggleDrawer: func.isRequired,
   toggleDrawerLayerSelector: func.isRequired,
   toggleDrawerVisualization: func.isRequired,
+  toggleDrawerExplore: func.isRequired,
   dialogVisible: bool.isRequired,
   toggleDialog: func.isRequired,
   styles: string,
