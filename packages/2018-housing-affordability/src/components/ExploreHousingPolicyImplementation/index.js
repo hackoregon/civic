@@ -124,7 +124,7 @@ export class ExploreHousingPolicyImplementation extends Component {
         </p>
         <p>
           In the spring and summer of 2018,{" "}
-          <a href="http://www.hackoregon.org/">Hack Oregon</a> volunteers
+          <a href="https://www.hackoregon.org/">Hack Oregon</a> volunteers
           surveyed local governments to understand what policies were being
           implemented. Taking inspiration from the{" "}
           <a href="https://www.housingconsortium.org/maps/">

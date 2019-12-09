@@ -92,7 +92,7 @@ const BlackPopulationChangeMeta = (/* data */) => ({
           description:
             "Bleeding Albina: A History of Community Disinvestment, 1940-2000"
         },
-        { link: "http://www.hackoregon.org", description: "Hack Oregon" },
+        { link: "https://www.hackoregon.org", description: "Hack Oregon" },
         {
           link: "https://www.civicsoftwarefoundation.org",
           description: "Civic Software Foundation"
