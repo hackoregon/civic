@@ -29,6 +29,7 @@ const {
 } = MapGLResources;
 
 const mapWrapper = css`
+  position: relative;
   margin: 0 auto;
   padding: 0;
   width: 100%;
@@ -39,6 +40,31 @@ const navControl = css`
   position: absolute;
   left: 0;
   z-index: 1;
+`;
+
+const geoCoderWrapper = css`
+  position: absolute;
+  margin: 5px 25px 35px 45px;
+`;
+
+const topRight = css`
+  top: 0;
+  right: 0;
+`;
+
+const topLeft = css`
+  top: 0;
+  left: 0;
+`;
+
+const bottomLeft = css`
+  bottom: 0;
+  left: 0;
+`;
+
+const bottomRight = css`
+  bottom: 0;
+  right: 0;
 `;
 
 class BaseMap extends Component {
@@ -60,6 +86,7 @@ class BaseMap extends Component {
       mounted: false
     };
     this.mapRef = createRef();
+    this.geocoderContainerRef = createRef();
   }
 
   componentDidMount() {
@@ -230,6 +257,7 @@ class BaseMap extends Component {
       locationMarker,
       geocoderOptions,
       geocoderOnChange,
+      geocoderPosition,
       mapGLOptions,
       children,
       useContainerHeight,
@@ -322,8 +350,19 @@ class BaseMap extends Component {
         }
       : viewport;
 
+    const geocoderPositions = {
+      "top-left": topLeft,
+      "top-right": topRight,
+      "bottom-left": bottomLeft,
+      "bottom-right": bottomRight
+    };
+
     return (
       <div css={mapWrapper}>
+        <div
+          ref={this.geocoderContainerRef}
+          css={[geoCoderWrapper, geocoderPositions[geocoderPosition]]}
+        />
         <MapGL
           className="MapGL"
           {...finalViewport}
@@ -377,6 +416,7 @@ class BaseMap extends Component {
           {geocoder && mounted && (
             <Geocoder
               mapRef={{ current: this.mapRef.current }}
+              containerRef={this.geocoderContainerRef}
               mapboxApiAccessToken={mapboxToken}
               onViewportChange={newViewport => {
                 this.onViewportChange(newViewport);
@@ -420,6 +460,12 @@ BaseMap.propTypes = {
   geocoder: PropTypes.bool,
   geocoderOptions: PropTypes.shape({}),
   geocoderOnChange: PropTypes.func,
+  geocoderPosition: PropTypes.oneOf([
+    "top-left",
+    "top-right",
+    "bottom-left",
+    "bottom-right"
+  ]),
   mapGLOptions: PropTypes.shape({}),
   children: PropTypes.node,
   useContainerHeight: PropTypes.bool,
@@ -454,6 +500,7 @@ BaseMap.defaultProps = {
   mapboxToken: MAPBOX_TOKEN,
   navigation: true,
   geocoder: false,
+  geocoderPosition: "top-right",
   useContainerHeight: false,
   updateViewport: true,
   animate: false,
