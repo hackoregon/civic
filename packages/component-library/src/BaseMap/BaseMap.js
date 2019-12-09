@@ -41,6 +41,12 @@ const navControl = css`
   z-index: 1;
 `;
 
+const geoCoderContainer = css`
+  position: absolute;
+  left: 5px;
+  height: 15px;
+`;
+
 class BaseMap extends Component {
   constructor(props) {
     super(props);
@@ -60,6 +66,7 @@ class BaseMap extends Component {
       mounted: false
     };
     this.mapRef = createRef();
+    this.geocoderContainerRef = createRef();
   }
 
   componentDidMount() {
@@ -336,6 +343,7 @@ class BaseMap extends Component {
 
     return (
       <div css={mapWrapper}>
+        <div ref={this.geocoderContainerRef} css={geoCoderContainer} />
         <MapGL
           className="MapGL"
           {...finalViewport}
@@ -389,6 +397,7 @@ class BaseMap extends Component {
           {geocoder && mounted && (
             <Geocoder
               mapRef={{ current: this.mapRef.current }}
+              containerRef={this.geocoderContainerRef}
               mapboxApiAccessToken={mapboxToken}
               onViewportChange={newViewport => {
                 this.onViewportChange(newViewport);
