@@ -74,6 +74,8 @@ const Sandbox = ({
 
   const onHoverVectorLayer = (info, mapboxRef) => {
     const [selectedFeature] = info.features;
+    if (!selectedFeature) return;
+
     const selectedIndex =
       selectedFeature.layer &&
       selectedFeature.layer.metadata &&
@@ -82,17 +84,24 @@ const Sandbox = ({
     const hoverVectorSource = selectedFeature.source;
     const hoverVectorSourceLayer = selectedFeature.sourceLayer;
 
-    if (highlightFeatureStateID) {
-      mapboxRef.removeFeatureState({
-        source: vectorSource,
-        sourceLayer: vectorSourceLayer
-      });
+    const hasSource = mapboxRef.getSource(vectorSource);
+    if (highlightFeatureStateID && hasSource) {
+      mapboxRef.setFeatureState(
+        {
+          source: vectorSource,
+          sourceLayer: vectorSourceLayer,
+          id: highlightFeatureStateID
+        },
+        {
+          highlight: false
+        }
+      );
     }
 
     if (selectedIndex >= 0) {
-      setHighlightFeatureStateID(selectedFeature.id);
       setVectorSource(hoverVectorSource);
       setVectorSourceLayer(hoverVectorSourceLayer);
+      setHighlightFeatureStateID(selectedFeature.id);
       mapboxRef.setFeatureState(
         {
           source: hoverVectorSource,
@@ -106,7 +115,6 @@ const Sandbox = ({
     }
 
     const selectedProps = selectedFeature.properties;
-
     if (selectedProps && selectedIndex !== undefined) {
       const selectedDatum = {
         object: {
@@ -123,10 +131,13 @@ const Sandbox = ({
   };
 
   const mouseOutVectorLayer = mapboxRef => {
-    mapboxRef.removeFeatureState({
-      source: vectorSource,
-      sourceLayer: vectorSourceLayer
-    });
+    const hasSource = mapboxRef.getSource(vectorSource);
+    if (hasSource) {
+      mapboxRef.removeFeatureState({
+        source: vectorSource,
+        sourceLayer: vectorSourceLayer
+      });
+    }
 
     const selectedDatum = {
       object: {}
