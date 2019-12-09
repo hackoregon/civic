@@ -69,7 +69,9 @@ const MultiLayerMap = props => {
         onLayerClick,
         selectedFoundationDatum
       })
-    ) : mapType === "VectorTilesMap" ? (
+    ) : mapType === "VectorTilesMap" ||
+      mapType === "vtChoroplethMap" ||
+      mapType === "vtScatterPlotMap" ? (
       <VectorTilesMap
         {...layerData}
         key={layerData.vectorTilesID}
