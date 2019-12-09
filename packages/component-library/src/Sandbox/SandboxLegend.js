@@ -26,13 +26,32 @@ const SandboxLegend = props => {
               const choropleth =
                 d.mapType === "ChoroplethMap" &&
                 d.layerInfo.displayName === slide.label;
-              return choropleth || scatterplot;
+              const vectorTilesMap =
+                d.mapType === "VectorTilesMap" &&
+                d.legend &&
+                d.legend.type === "choropleth" &&
+                d.layerInfo.displayName === slide.label;
+              return choropleth || scatterplot || vectorTilesMap;
             });
 
             const matchFound =
               dataIndex > -1 && foundationData[dataIndex].data.length > 0;
 
             const mapLegend = matchFound && (
+              <SandboxMapLegend
+                data={foundationData[dataIndex].data}
+                mapProps={foundationMapProps[dataIndex]}
+              />
+            );
+
+            const matchFoundVector =
+              dataIndex > -1 &&
+              foundationData[dataIndex].mapType === "VectorTilesMap";
+
+            const mapLegendVector = matchFoundVector && (
+              <SandboxMapLegend mapProps={foundationMapProps[dataIndex]} />
+            );
+            const mapLegendBox = (matchFound || matchFoundVector) && (
               <div>
                 <h3
                   css={css`
@@ -41,10 +60,8 @@ const SandboxLegend = props => {
                 >
                   {slide.label}
                 </h3>
-                <SandboxMapLegend
-                  data={foundationData[dataIndex].data}
-                  mapProps={foundationMapProps[dataIndex]}
-                />
+                {mapLegend}
+                {mapLegendVector}
               </div>
             );
 
@@ -62,7 +79,7 @@ const SandboxLegend = props => {
                   }
                 `)}
               >
-                {mapLegend}
+                {mapLegendBox}
               </div>
             );
           })
