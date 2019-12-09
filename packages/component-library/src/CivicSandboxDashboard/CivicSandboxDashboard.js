@@ -217,7 +217,7 @@ const createLineViz = (
 
 const placeholder = (
   <div css={viz}>
-    <Placeholder>Select a region on the map</Placeholder>
+    <Placeholder>Select a region on the map for more detail</Placeholder>
   </div>
 );
 
