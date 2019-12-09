@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useEffect } from "react";
 /** @jsx jsx */
 import { css, jsx, keyframes } from "@emotion/core";
 import { connect } from "react-redux";
@@ -6,12 +6,13 @@ import PropTypes from "prop-types";
 
 import { palette } from "../../../constants/style";
 import { goToNextChapter } from "../../../state/chapters";
-import { playSFX as _playSFX } from "../../../state/sfx";
+import {
+  playSFX as _playSFX,
+  playAudio as _playAudio,
+  stopAudio as _stopAudio
+} from "../../../state/sfx";
 import media from "../../../utils/mediaQueries";
-import Song from "../../atoms/Audio/Song";
 import { TYPES as SFX_TYPES } from "../../../constants/sfx";
-
-import attractorSong from "../../../../assets/audio/PWolf-happysong1wfadeinout.mp3";
 import earthquakeHeroesLogo from "../../../../assets/earthquake_heroes_logo.svg";
 
 const pageWrapper = css`
@@ -111,15 +112,23 @@ const bg3 = css`
   animation-duration: 10s;
 `;
 
-const AttractorScreen = ({ goToChapter, playSFX }) => {
+const AttractorScreen = ({ goToChapter, playSFX, playAudio, stopAudio }) => {
   const play = () => {
     playSFX(SFX_TYPES.START_RECORD);
     goToChapter();
   };
 
+  useEffect(() => {
+    playAudio(SFX_TYPES.THEME_ATTRACTOR);
+
+    return () => {
+      stopAudio(SFX_TYPES.THEME_ATTRACTOR);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div css={pageWrapper}>
-      <Song songFile={attractorSong} volume={0.25} />
       <div css={bg} />
       <div css={[bg, bg2]} />
       <div css={[bg, bg3]} />
@@ -146,7 +155,9 @@ const AttractorScreen = ({ goToChapter, playSFX }) => {
 
 AttractorScreen.propTypes = {
   goToChapter: PropTypes.func,
-  playSFX: PropTypes.func
+  playSFX: PropTypes.func,
+  playAudio: PropTypes.func,
+  stopAudio: PropTypes.func
 };
 
 export default connect(
@@ -157,6 +168,12 @@ export default connect(
     },
     playSFX(id) {
       dispatch(_playSFX(id));
+    },
+    playAudio(themeName) {
+      dispatch(_playAudio(themeName));
+    },
+    stopAudio(themeName) {
+      dispatch(_stopAudio(themeName));
     }
   })
 )(memo(AttractorScreen));

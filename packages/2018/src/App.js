@@ -202,32 +202,32 @@ const routes = {
       childRoutes: [
         {
           path: "disaster",
-          component: DisasterApp,
+          indexRoute: { component: DisasterApp },
           childRoutes: DisasterRoutes(store)
         },
         {
           path: "housing",
-          component: HousingApp,
+          indexRoute: { component: HousingApp },
           childRoutes: HousingRoutes(store)
         },
         {
           path: "elections",
-          component: ElectionsApp,
+          indexRoute: { component: ElectionsApp },
           childRoutes: ElectionsRoutes(store)
         },
         {
           path: "neighborhood",
-          component: NeighborhoodApp,
+          indexRoute: { component: NeighborhoodApp },
           childRoutes: NeighborhoodRoutes(store)
         },
         {
           path: "transportation",
-          component: TransportationApp,
+          indexRoute: { component: TransportationApp },
           childRoutes: TransportationRoutes(store)
         },
         {
           path: "farmers-markets",
-          component: FarmersMarketsApp,
+          indexRoute: { component: FarmersMarketsApp },
           childRoutes: FarmersMarketsRoutes(store)
         }
       ]
@@ -275,7 +275,7 @@ const routes = {
     // Route for OMSI QR Code for Installation
     {
       path: "earthquakeheroes",
-      component: DisasterApp,
+      indexRoute: { component: DisasterApp },
       childRoutes: DisasterRoutes(store)
     },
     // Temporarily Hidden 2019 Pages ⬇️
@@ -284,28 +284,28 @@ const routes = {
       childRoutes: [
         {
           path: "template",
-          component: Template2019App,
+          indexRoute: { component: Template2019App },
           childRoutes: Template2019Routes(store)
         },
         {
           path: "education",
-          component: Education2019App,
+          indexRoute: { component: Education2019App },
           childRoutes: Education2019Routes(store)
         },
         {
           path: "elections",
-          component: Elections2019App,
+          indexRoute: { component: Elections2019App },
           childRoutes: Elections2019Routes(store)
         },
         {
           path: "housing",
-          component: Housing2019App,
+          indexRoute: { component: Housing2019App },
           childRoutes: Housing2019Routes(store)
         },
         // hygen route injection (do not remove or modify this line)
         {
           path: "transportation",
-          component: Transportation2019App,
+          indexRoute: { component: Transportation2019App },
           childRoutes: Transportation2019Routes(store)
         }
       ]

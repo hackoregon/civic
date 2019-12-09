@@ -47,7 +47,9 @@ const Sandbox = ({
   styles,
   onFoundationClick,
   onSlideHover,
+  onBaseMapHover,
   tooltipInfo,
+  tooltipInfoVector,
   allSlides,
   selectedFoundationDatum,
   areSlidesLoading,
@@ -61,6 +63,86 @@ const Sandbox = ({
     baseMapStyleChangeEvent.target.value === "light"
       ? setBaseMapStyle("light")
       : setBaseMapStyle("sandbox-dark");
+  };
+
+  const featuresArr = layerData.length ? layerData[0].data : [];
+  const boundBox = layerData.length ? layerData[0].boundBox : [];
+
+  const [highlightFeatureStateID, setHighlightFeatureStateID] = useState(null);
+  const [vectorSource, setVectorSource] = useState(null);
+  const [vectorSourceLayer, setVectorSourceLayer] = useState(null);
+
+  const onHoverVectorLayer = (info, mapboxRef) => {
+    const [selectedFeature] = info.features;
+    if (!selectedFeature) return;
+
+    const selectedIndex =
+      selectedFeature.layer &&
+      selectedFeature.layer.metadata &&
+      selectedFeature.layer.metadata["sandbox:index"];
+
+    const hoverVectorSource = selectedFeature.source;
+    const hoverVectorSourceLayer = selectedFeature.sourceLayer;
+
+    const hasSource = mapboxRef.getSource(vectorSource);
+    if (highlightFeatureStateID && hasSource) {
+      mapboxRef.setFeatureState(
+        {
+          source: vectorSource,
+          sourceLayer: vectorSourceLayer,
+          id: highlightFeatureStateID
+        },
+        {
+          highlight: false
+        }
+      );
+    }
+
+    if (selectedIndex >= 0) {
+      setVectorSource(hoverVectorSource);
+      setVectorSourceLayer(hoverVectorSourceLayer);
+      setHighlightFeatureStateID(selectedFeature.id);
+      mapboxRef.setFeatureState(
+        {
+          source: hoverVectorSource,
+          sourceLayer: hoverVectorSourceLayer,
+          id: selectedFeature.id
+        },
+        {
+          highlight: true
+        }
+      );
+    }
+
+    const selectedProps = selectedFeature.properties;
+    if (selectedProps && selectedIndex !== undefined) {
+      const selectedDatum = {
+        object: {
+          properties: selectedProps
+        },
+        x: info.point[0],
+        y: info.point[1]
+      };
+      onBaseMapHover(selectedDatum, selectedIndex);
+    } else {
+      const selectedDatum = {};
+      onBaseMapHover(selectedDatum, selectedIndex);
+    }
+  };
+
+  const mouseOutVectorLayer = mapboxRef => {
+    const hasSource = mapboxRef.getSource(vectorSource);
+    if (hasSource) {
+      mapboxRef.removeFeatureState({
+        source: vectorSource,
+        sourceLayer: vectorSourceLayer
+      });
+    }
+
+    const selectedDatum = {
+      object: {}
+    };
+    onBaseMapHover(selectedDatum);
   };
 
   return (
@@ -113,17 +195,19 @@ const Sandbox = ({
       <div css={baseMapWrapper}>
         <BaseMap
           civicMapStyle={baseMapStyle}
-          initialZoom={5}
-          minZoom={5}
-          maxZoom={16.5}
-          initialLatitude={38}
-          initialLongitude={-97}
+          initialLatitude={39.810492}
+          initialLongitude={-98.556061}
+          initialZoom={3.5}
+          minZoom={3}
+          maxZoom={14}
           useContainerHeight
           updateViewport={false}
-          useFitBounds
-          bboxData={layerData.length > 0 ? layerData[0].data : []}
+          boundBox={boundBox}
+          bboxData={featuresArr}
           bboxPadding={50}
           useScrollZoom
+          onBaseMapHover={onHoverVectorLayer}
+          onBaseMapMouseOut={mouseOutVectorLayer}
         >
           <CivicSandboxMap
             mapLayers={layerData}
@@ -132,6 +216,9 @@ const Sandbox = ({
             selectedFoundationDatum={selectedFoundationDatum}
           >
             {tooltipInfo && <CivicSandboxTooltip tooltipData={tooltipInfo} />}
+            {tooltipInfoVector && (
+              <CivicSandboxTooltip tooltipData={tooltipInfoVector} />
+            )}
           </CivicSandboxMap>
         </BaseMap>
       </div>
@@ -170,7 +257,13 @@ Sandbox.propTypes = {
   styles: string,
   onFoundationClick: func,
   onSlideHover: func,
+  onBaseMapHover: func,
   tooltipInfo: shape({
+    content: arrayOf(shape({})),
+    x: number,
+    y: number
+  }),
+  tooltipInfoVector: shape({
     content: arrayOf(shape({})),
     x: number,
     y: number
@@ -185,14 +278,13 @@ Sandbox.propTypes = {
       slideId: oneOfType([string, number])
     })
   ).isRequired,
-  selectedFoundationDatum: arrayOf(
-    shape({
-      data: oneOfType([arrayOf(shape({})), number, string]),
-      id: oneOfType([number, string]),
-      title: string,
-      visualizationType: string
-    })
-  ),
+  selectedFoundationDatum: shape({
+    id: number,
+    displayName: string,
+    featureProperties: shape({}),
+    colorKey: string,
+    primaryFormat: string
+  }),
   areSlidesLoading: bool,
   updateSlideKey: func,
   errors: bool

@@ -6,6 +6,10 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import {
+  playAudio as _playAudio,
+  stopAudio as _stopAudio
+} from "../../../state/sfx";
+import {
   goToNextChapter,
   getActiveChapterDuration
 } from "../../../state/chapters";
@@ -16,16 +20,14 @@ import {
 } from "../../../state/kit";
 import { addPoints, addBadge } from "../../../state/user";
 import usePrevious from "../../../state/hooks/usePrevious";
+import { TYPES as SFX_TYPES } from "../../../constants/sfx";
 import { palette } from "../../../constants/style";
 import Timer from "../../../utils/timer";
 import NewBadge from "../../atoms/NewBadge";
 import RestartModal from "../../atoms/RestartModal";
 import MatchLockInterface from "../../atoms/MatchLockInterface";
-import Song from "../../atoms/Audio/Song";
 import { MapStyle } from "../index";
 import Kit from "./Kit";
-
-import kitSong from "../../../../assets/audio/HappyTheme1fadeinout.mp3";
 
 const slide = keyframes`
   0% {
@@ -68,7 +70,9 @@ const KitScreen = ({
   addItemToPlayerKitInState,
   endChapter,
   chapterDuration,
-  restartGame
+  restartGame,
+  playAudio,
+  stopAudio
 }) => {
   const [chapterTimer] = useState(new Timer());
   const [restartTimer] = useState(new Timer());
@@ -138,8 +142,11 @@ const KitScreen = ({
 
   // Clean up only on dismount
   useEffect(() => {
+    playAudio(SFX_TYPES.THEME_KIT);
+
     return () => {
       restartTimer.reset();
+      stopAudio(SFX_TYPES.THEME_KIT);
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -154,7 +161,6 @@ const KitScreen = ({
 
   return (
     <Fragment>
-      <Song songFile={kitSong} />
       {displayBadge && <NewBadge type="prepared" />}
       {showRestart && (
         <RestartModal cancelRestart={cancelRestart} restartGame={restartGame} />
@@ -194,7 +200,9 @@ KitScreen.propTypes = {
   chapterDuration: PropTypes.number,
   playerKit: PropTypes.shape({}),
   addPreparerBadge: PropTypes.func,
-  restartGame: PropTypes.func
+  restartGame: PropTypes.func,
+  playAudio: PropTypes.func,
+  stopAudio: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -207,9 +215,9 @@ const mapDispatchToProps = dispatch => ({
   addPointsToState: bindActionCreators(addPoints, dispatch),
   addItemToPlayerKitInState: bindActionCreators(addItemToPlayerKit, dispatch),
   addPreparerBadge: bindActionCreators(addBadge, dispatch),
-  endChapter() {
-    dispatch(goToNextChapter());
-  }
+  endChapter: bindActionCreators(goToNextChapter, dispatch),
+  playAudio: bindActionCreators(_playAudio, dispatch),
+  stopAudio: bindActionCreators(_stopAudio, dispatch)
 });
 
 export default connect(

@@ -69,19 +69,52 @@ export const getSelectedSlidesData = createSelector(
   sandbox => sandbox.slidesData
 );
 
+export const getBaseMapDatum = createSelector(
+  getSandbox,
+  sandbox => sandbox.selectedBaseMapDatum
+);
+
 export const getLayerSlides = createSelector(
   getSelectedSlidesData,
   getSelectedSlides,
   getSelectedSlideKey,
-  (slidesData, selectedSlides, selectedSlideKey) => {
+  getBaseMapDatum,
+  (slidesData, selectedSlides, selectedSlideKey, baseMapDatum) => {
     const filteredSlideVizData = selectedSlides.reduce((a, c) => {
       const findSlide = slidesData.find(e => e.displayName === c);
       return findSlide ? [...a, findSlide] : a;
     }, []);
 
+    const createFilter = mapOptions => {
+      const { filter = [], fieldName } = mapOptions;
+      if (!filter.length || !fieldName.hover) return filter;
+
+      if (!baseMapDatum) return filter;
+      const { feature } = baseMapDatum;
+      if (!feature) return filter;
+
+      const { object } = feature;
+      if (!object || !object.properties) return filter;
+
+      const { properties } = object;
+      if (!properties[fieldName.hover]) return filter;
+      const hoverPropValue = properties[fieldName.hover];
+      const finalFilter = [...filter.slice(0, 2), hoverPropValue];
+
+      return finalFilter;
+    };
+
     const formattedSliderVizData = filteredSlideVizData.map(d => {
+      const filter =
+        d.visualization.map.mapType === "VectorTilesMap"
+          ? createFilter(d.visualization.map)
+          : [];
+
       const mapProps = {
         ...d.visualization.map,
+        legend: {
+          ...d.visualization.legend
+        },
         tooltip: {
           ...d.visualization.tooltip
         },
@@ -99,9 +132,10 @@ export const getLayerSlides = createSelector(
               d.visualization.map.fieldName.area
             ? d.visualization.map.fieldName.area
             : ""
-        }
+        },
+        filter
       };
-
+      // console.log("SELECT-mapProps:", mapProps);
       return {
         ...mapProps,
         data: d.results ? d.results.features : [],
@@ -173,6 +207,57 @@ export const getSelectedSlideDatum = createSelector(
   }
 );
 
+export const getSelectedBaseMapDatum = createSelector(
+  getSandbox,
+  getSelectedSlidesData,
+  getSelectedSlides,
+  ({ selectedBaseMapDatum }, slides, selectedSlides) => {
+    const noBaseMapDatum =
+      !selectedBaseMapDatum || !selectedBaseMapDatum.feature.object || !slides;
+    if (noBaseMapDatum) return null;
+
+    const { feature: slideFeature, index: slideIndex } = selectedBaseMapDatum;
+
+    const activeLayerName = selectedSlides[slideIndex];
+
+    const activeLayer = slides.find(s => {
+      return s.displayName === activeLayerName;
+    });
+
+    const noTooltip =
+      !activeLayer ||
+      !activeLayer.visualization ||
+      !activeLayer.visualization.tooltip ||
+      activeLayer.visualization.tooltip.length < 0;
+
+    if (noTooltip) return null;
+
+    const tooltipArr = activeLayer.visualization.tooltip;
+
+    const { object: slideObject } = slideFeature;
+
+    const tooltipContent = tooltipArr.map(t => {
+      const { fieldName: rawValueName, fieldNameTotal: totalValueName } = t;
+      const rawValue = slideObject.properties[rawValueName];
+      const calcValue =
+        t.format === "percentage" && t.fieldNameTotal && rawValue
+          ? rawValue / slideObject.properties[totalValueName]
+          : rawValue;
+      return {
+        ...t,
+        label: t.label,
+        value: calcValue
+      };
+    });
+
+    return {
+      x: slideFeature.x,
+      y: slideFeature.y,
+      content: tooltipContent
+    };
+  }
+);
+
 export const getSelectedFoundationDatum = createSelector(
   getSandbox,
   getSelectedSlidesData,
@@ -180,9 +265,9 @@ export const getSelectedFoundationDatum = createSelector(
   getSelectedSlideKey,
   ({ selectedFoundationDatum }, slides, selectedSlides) => {
     if (!selectedFoundationDatum) {
-      return;
+      return null;
     }
-    const { index } = selectedFoundationDatum;
+    const { index, feature: selectedFeature } = selectedFoundationDatum;
 
     const activeLayerName = selectedSlides[index];
 
@@ -190,13 +275,36 @@ export const getSelectedFoundationDatum = createSelector(
       return s.displayName === activeLayerName;
     });
 
-    if (!activeLayer || !activeLayer.visualization) return;
+    if (!activeLayer || !activeLayer.visualization) return null;
 
-    if (activeLayer.visualization.map.mapType !== "ChoroplethMap") return;
-    // eslint-disable-next-line consistent-return
+    if (activeLayer.visualization.map.mapType !== "ChoroplethMap") return null;
+
+    const id =
+      selectedFeature && selectedFeature.object && selectedFeature.object.id;
+    const featureProperties =
+      selectedFeature &&
+      selectedFeature.object &&
+      selectedFeature.object.properties;
+
+    const { displayName } = activeLayer;
+
+    const { visualization: vizProperties } = activeLayer;
+
+    const { map: mapProperties } = vizProperties;
+    const colorKey = mapProperties.fieldName && mapProperties.fieldName.color;
+
+    const { tooltip: tooltipProperties } = vizProperties;
+    const primaryFormat =
+      tooltipProperties &&
+      tooltipProperties.primary &&
+      tooltipProperties.primary.format;
+
     return {
-      ...selectedFoundationDatum,
-      ...activeLayer
+      id,
+      displayName,
+      featureProperties,
+      colorKey,
+      primaryFormat
     };
   }
 );

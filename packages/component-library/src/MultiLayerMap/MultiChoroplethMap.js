@@ -1,12 +1,16 @@
 import React from "react";
 import { GeoJsonLayer } from "deck.gl";
-import shortid from "shortid";
+import { memoize } from "lodash";
 import { number, string, bool, func, arrayOf, shape } from "prop-types";
 import {
   createColorScale,
   updateQuantileScale,
   updateEqualScale
 } from "./createLayers";
+
+const memoizeData = memoize(featuresArr => {
+  return featuresArr.filter(f => f.geometry && f.geometry.coordinates.length);
+});
 
 const MultiChoroplethMap = props => {
   const {
@@ -69,12 +73,8 @@ const MultiChoroplethMap = props => {
   };
 
   const getLineColor = f => {
-    if (
-      selectedFoundationDatum &&
-      selectedFoundationDatum.feature &&
-      selectedFoundationDatum.feature.object
-    ) {
-      const selectedId = selectedFoundationDatum.feature.object.id;
+    if (selectedFoundationDatum) {
+      const selectedId = selectedFoundationDatum.id;
       const featureId = f.id;
       return featureId === selectedId ? [255, 178, 31, 255] : polygonLineColor;
     }
@@ -82,28 +82,22 @@ const MultiChoroplethMap = props => {
   };
 
   const getLineWidth = f => {
-    if (
-      selectedFoundationDatum &&
-      selectedFoundationDatum.feature &&
-      selectedFoundationDatum.feature.object
-    ) {
-      const selectedId = selectedFoundationDatum.feature.object.id;
+    if (selectedFoundationDatum) {
+      const selectedId = selectedFoundationDatum.id;
       const featureId = f.id;
       return featureId === selectedId ? 125 : lineWidth;
     }
     return lineWidth;
   };
 
-  const noNullGeometryData = data.filter(
-    d => d.geometry && d.geometry.coordinates.length
-  );
+  const filteredData = memoizeData(data);
 
   return (
     <GeoJsonLayer
-      key={shortid.generate()}
+      key={id}
       id={id}
       pickable={pickable}
-      data={noNullGeometryData}
+      data={filteredData}
       opacity={opacity}
       getPolygon={getPolygon}
       filled={filled}
@@ -153,7 +147,13 @@ MultiChoroplethMap.propTypes = {
   dataRange: arrayOf(string),
   colorRange: arrayOf(arrayOf(number)),
   index: number,
-  selectedFoundationDatum: shape({})
+  selectedFoundationDatum: shape({
+    id: number,
+    displayName: string,
+    featureProperties: shape({}),
+    colorKey: string,
+    primaryFormat: string
+  })
 };
 
 export default MultiChoroplethMap;

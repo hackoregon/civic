@@ -32,9 +32,9 @@ const containerWrapper = css`
 `;
 
 const MAP_STYLE_OPTIONS = {
+  "CIVIC Dark": "dark",
   "CIVIC Light": "light",
-  "Sandbox Dark": "sandbox-dark",
-  "CIVIC Dark": "dark"
+  "Sandbox Dark": "sandbox-dark"
 };
 
 export default () =>
@@ -86,6 +86,12 @@ export default () =>
           GROUP_IDS.DESIGN
         );
 
+        const vectorTilesID = text(
+          "Vector Tiles ID:",
+          "source-id-01",
+          GROUP_IDS.DESIGN
+        );
+
         return (
           <div css={containerWrapper}>
             <BaseMap
@@ -99,7 +105,7 @@ export default () =>
               civicMapStyle={civicMapStyle}
             >
               <VectorTilesMap
-                vectorTilesID="source-id-01"
+                vectorTilesID={vectorTilesID}
                 vectorTilesURL={vectorTilesURL}
                 layerID="layer-id-01"
                 layerType={layerType}
@@ -118,67 +124,113 @@ export default () =>
       () => {
         const vectorTilesURL01 = text(
           "Mapbox Tileset URL - 01:",
-          "mapbox://mapbox.mapbox-terrain-v2",
-          GROUP_IDS["VECTOR TILES MAP"]
+          "mapbox://hackoregon.internet-types-b28002-two",
+          GROUP_IDS["VECTOR TILES MAP 1"]
         );
 
         const layerType01 = text(
           "Type - 01:",
-          "line",
-          GROUP_IDS["VECTOR TILES MAP"]
+          "fill",
+          GROUP_IDS["VECTOR TILES MAP 1"]
         );
 
         const sourceLayer01 = text(
           "Source Layer - 01:",
-          "contour",
-          GROUP_IDS["VECTOR TILES MAP"]
+          "us-census-tracts",
+          GROUP_IDS["VECTOR TILES MAP 1"]
         );
 
         const paint01 = object(
           "Paint - 01:",
           {
-            "line-color": "fuchsia",
-            "line-width": 1
+            "fill-color": [
+              "case",
+              ["==", ["get", "total"], 0],
+              "transparent",
+              [
+                "step",
+                [
+                  "/",
+                  [
+                    "get",
+                    "total_with_an_internet_subscription_broadband_of_any_type"
+                  ],
+                  ["get", "total"]
+                ],
+                "#ffffcc",
+                0.2,
+                "#a1dab4",
+                0.4,
+                "#41b6c4",
+                0.6,
+                "#2c7fb8",
+                0.8,
+                "#253494"
+              ]
+            ],
+            "fill-outline-color": "gray",
+            "fill-opacity": 0.75
           },
-          GROUP_IDS["VECTOR TILES MAP"]
+          GROUP_IDS["VECTOR TILES MAP 1"]
         );
 
         const layerPosition01 = text(
           "Layer Position - 01:",
           "waterway-label",
-          GROUP_IDS["VECTOR TILES MAP"]
+          GROUP_IDS["VECTOR TILES MAP 1"]
+        );
+
+        const vectorTilesID01 = text(
+          "Vector Tiles ID - 01:",
+          "source-01",
+          GROUP_IDS["VECTOR TILES MAP 1"]
         );
 
         const vectorTilesURL02 = text(
           "Mapbox Tileset URL - 02:",
-          "mapbox://mapbox.mapbox-streets-v8",
+          "mapbox://hackoregon.demographic-tracts-centroids",
           GROUP_IDS["VECTOR TILES MAP 2"]
         );
 
         const layerType02 = text(
           "Type - 02:",
-          "fill",
+          "circle",
           GROUP_IDS["VECTOR TILES MAP 2"]
         );
 
         const sourceLayer02 = text(
           "Source Layer - 02:",
-          "water",
+          "us-census-tracts",
           GROUP_IDS["VECTOR TILES MAP 2"]
         );
 
         const paint02 = object(
           "Paint - 02:",
           {
-            "fill-color": "yellow",
-            "fill-opacity": 0.75
+            "circle-color": "gold",
+            "circle-radius": [
+              "interpolate",
+              ["linear"],
+              ["get", "Race: Share Black"],
+              0,
+              0,
+              100,
+              20
+            ],
+            "circle-opacity": 0.9
           },
           GROUP_IDS["VECTOR TILES MAP 2"]
         );
 
         const layerPosition02 = text(
           "Layer Position - 02:",
-          "bridge-path",
+          "waterway-label",
+          GROUP_IDS["VECTOR TILES MAP 2"]
+        );
+
+        const vectorTilesID02 = text(
+          "Vector Tiles ID - 02:",
+          "source-02",
           GROUP_IDS["VECTOR TILES MAP 2"]
         );
 
@@ -192,14 +244,17 @@ export default () =>
         return (
           <div css={containerWrapper}>
             <BaseMap
-              initialZoom={14}
+              initialZoom={12}
+              initialLatitude={33.749}
+              initialLongitude={-84.388}
+              minZoom={1}
               useScrollZoom
               useContainerHeight
               updateViewport={false}
               civicMapStyle={civicMapStyle}
             >
               <VectorTilesMap
-                vectorTilesID="source-01"
+                vectorTilesID={vectorTilesID01}
                 vectorTilesURL={vectorTilesURL01}
                 layerID="layer-01"
                 layerType={layerType01}
@@ -208,7 +263,7 @@ export default () =>
                 layerPosition={layerPosition01}
               />
               <VectorTilesMap
-                vectorTilesID="source-02"
+                vectorTilesID={vectorTilesID02}
                 vectorTilesURL={vectorTilesURL02}
                 layerID="layer-02"
                 layerType={layerType02}
@@ -265,9 +320,17 @@ export default () =>
           GROUP_IDS["VECTOR TILES MAP"]
         );
 
+        const filter = object("Filter:", [], GROUP_IDS["VECTOR TILES MAP"]);
+
         const layerPosition = text(
           "Layer Position:",
           "waterway-label",
+          GROUP_IDS["VECTOR TILES MAP"]
+        );
+
+        const vectorTilesID = text(
+          "Vector Tiles ID:",
+          "source-03",
           GROUP_IDS["VECTOR TILES MAP"]
         );
 
@@ -291,11 +354,11 @@ export default () =>
 
         const getRadius = number(
           "Radius:",
-          10,
+          150,
           {
             range: true,
             min: 1,
-            max: 150,
+            max: 500,
             step: 1
           },
           GROUP_IDS["DECK GL MAP"]
@@ -320,20 +383,22 @@ export default () =>
 
                 return (
                   <BaseMap
-                    initialZoom={14}
+                    initialZoom={10}
+                    minZoom={3}
                     useScrollZoom
                     useContainerHeight
                     updateViewport={false}
                     civicMapStyle={civicMapStyle}
                   >
                     <VectorTilesMap
-                      vectorTilesID="source-03"
+                      vectorTilesID={vectorTilesID}
                       vectorTilesURL={vectorTilesURL}
                       layerID="layer-03"
                       layerType={layerType}
                       sourceLayer={sourceLayer}
                       paint={paint}
                       layerPosition={layerPosition}
+                      filter={filter}
                     />
                     <ScatterPlotMap
                       data={featuresData}
@@ -348,6 +413,141 @@ export default () =>
                 );
               }}
             </DemoJSONLoader>
+          </div>
+        );
+      },
+      { notes }
+    )
+    .add(
+      "Example: One Source and Two Layers",
+      () => {
+        const vectorTilesURL = text(
+          "Mapbox Tileset URL:",
+          "mapbox://hackoregon.computers-household-b28010-two",
+          GROUP_IDS.DESIGN
+        );
+
+        const multipleLayers = object(
+          "Multiple Layers",
+          [
+            {
+              layerID: "layer-counties",
+              layerType: "fill",
+              sourceLayer: "us-counties",
+              paint: {
+                "fill-color": [
+                  "case",
+                  ["==", ["get", "total"], 0],
+                  "transparent",
+                  [
+                    "step",
+                    ["/", ["get", "total_no_computer"], ["get", "total"]],
+                    "#ffffcc",
+                    0.2,
+                    "#a1dab4",
+                    0.4,
+                    "#41b6c4",
+                    0.6,
+                    "#2c7fb8",
+                    0.8,
+                    "#253494"
+                  ]
+                ],
+                "fill-outline-color": "gray",
+                "fill-opacity": 0.75
+              }
+            },
+            {
+              layerID: "layer-census-tracts",
+              layerType: "fill",
+              sourceLayer: "us-census-tracts",
+              paint: {
+                "fill-color": [
+                  "case",
+                  ["==", ["get", "total"], 0],
+                  "transparent",
+                  [
+                    "step",
+                    ["/", ["get", "total_no_computer"], ["get", "total"]],
+                    "#ffffcc",
+                    0.2,
+                    "#a1dab4",
+                    0.4,
+                    "#41b6c4",
+                    0.6,
+                    "#2c7fb8",
+                    0.8,
+                    "#253494"
+                  ]
+                ],
+                "fill-outline-color": "gray",
+                "fill-opacity": 0.75
+              }
+            }
+          ],
+          GROUP_IDS.DESIGN
+        );
+
+        const vectorTilesID = text(
+          "Vector Tiles ID:",
+          "vector-tile-id-01",
+          GROUP_IDS.DESIGN
+        );
+
+        const layerPosition = text(
+          "Layer Position:",
+          "waterway-label",
+          GROUP_IDS.DESIGN
+        );
+
+        const civicMapStyle = select(
+          "CIVIC Map Styles:",
+          MAP_STYLE_OPTIONS,
+          MAP_STYLE_OPTIONS["CIVIC Dark"],
+          GROUP_IDS.DESIGN
+        );
+
+        const filter = object(
+          "Filter:",
+          ["==", "name", null],
+          GROUP_IDS.DESIGN
+        );
+
+        const index = number(
+          "index:",
+          77,
+          {
+            range: false,
+            min: 0,
+            max: 100,
+            step: 1
+          },
+          GROUP_IDS.DESIGN
+        );
+
+        return (
+          <div css={containerWrapper}>
+            <BaseMap
+              initialLatitude={39.810492}
+              initialLongitude={-98.556061}
+              initialZoom={4}
+              minZoom={3}
+              maxZoom={14}
+              useScrollZoom
+              useContainerHeight
+              updateViewport={false}
+              civicMapStyle={civicMapStyle}
+              onBaseMapClick={e => console.log(e)}
+            >
+              <VectorTilesMap
+                vectorTilesID={vectorTilesID}
+                vectorTilesURL={vectorTilesURL}
+                layerPosition={layerPosition}
+                multipleLayers={multipleLayers}
+                index={index}
+                filter={filter}
+              />
+            </BaseMap>
           </div>
         );
       },
