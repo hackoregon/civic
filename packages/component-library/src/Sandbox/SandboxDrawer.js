@@ -4,7 +4,7 @@ import { string, bool, func, arrayOf, shape } from "prop-types";
 import MenuIcon from "@material-ui/icons/Menu";
 import TimelineIcon from "@material-ui/icons/Timeline";
 import LayersIcon from "@material-ui/icons/Layers";
-import CollectionsIcon from "@material-ui/icons/Collections";
+import BookIcon from "@material-ui/icons/Book";
 import SandboxDrawerLayerSelector from "./SandboxDrawerLayerSelector";
 import SandboxDrawerVisualization from "./SandboxDrawerVisualization";
 import SandboxDrawerExplore from "./SandboxDrawerExplore";
@@ -92,10 +92,10 @@ const SandboxDrawer = props => {
   const active = css(`
     opacity: 1;
     @media (min-width: 500px) {
-      border-left: 4px solid #F3F2F3;
+      border-left: 4px solid #201024;
     }
     @media (max-width: 500px) {
-      border-bottom: 4px solid #F3F2F3;
+      border-bottom: 4px solid #201024;
       box-sizing: border-box;
     }
   `);
@@ -152,7 +152,7 @@ const SandboxDrawer = props => {
             tabIndex={0}
             css={[buttonStyle, drawerVisible && drawerExplore && active]}
           >
-            <CollectionsIcon css={buttonIcon} />
+            <BookIcon css={buttonIcon} />
           </div>
         </div>
       </div>

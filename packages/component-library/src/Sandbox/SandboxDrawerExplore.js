@@ -2,7 +2,7 @@
 import { jsx, css } from "@emotion/core";
 import { string, bool, func, shape } from "prop-types";
 import { Fragment } from "react";
-import CollectionsIcon from "@material-ui/icons/Collections";
+import BookIcon from "@material-ui/icons/Book";
 import PackageSelectorBox from "../PackageSelectorBox/PackageSelectorBox";
 import ButtonNew from "../ButtonNew/ButtonNew";
 import Placeholder from "../Placeholder/Placeholder";
@@ -26,7 +26,13 @@ const SandboxDrawerExplore = props => {
       >
         <div css={css(`margin: 0 10px;`)}>
           <h2>
-            <CollectionsIcon fontSize="large" />
+            <BookIcon
+              fontSize="large"
+              css={css(`
+                vertical-align: middle;
+                padding-right: 2px;
+              `)}
+            />
             Collections
           </h2>
           <Placeholder>

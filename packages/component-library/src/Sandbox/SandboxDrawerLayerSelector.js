@@ -32,6 +32,12 @@ const SandboxDrawerLayerSelector = props => {
     font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
   `;
 
+  const scatterplotHelperText = css`
+    font-size: 0.8rem;
+    margin: -10px 0px 0px 31px;
+    font-style: italic;
+  `;
+
   const loader = (
     <div css={loadingContainer}>
       <div css={loading}>
@@ -50,7 +56,13 @@ const SandboxDrawerLayerSelector = props => {
       >
         <div css={css(`margin: 0 10px;`)}>
           <h2>
-            <LayersIcon fontSize="large" /> Map Layers
+            <LayersIcon
+              fontSize="large"
+              css={css(`
+                vertical-align: middle;
+              `)}
+            />{" "}
+            Map Layers
           </h2>
           <h3>{selectedPackage}</h3>
         </div>
@@ -141,10 +153,15 @@ const SandboxDrawerLayerSelector = props => {
                     onChange={onChange}
                     label={slide.label}
                   />
+                  {slide.mapType === "vtScatterPlotMap" ? (
+                    <div css={scatterplotHelperText}>Zoom in to view</div>
+                  ) : (
+                    ""
+                  )}
                 </div>
                 <div
                   css={css(`
-                    padding: .5rem 0 .5rem 0;
+                    padding: 0;
                     font-size: .75rem;
                     color: #333;
                     position: relative;
