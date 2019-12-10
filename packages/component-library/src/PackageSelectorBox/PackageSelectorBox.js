@@ -5,13 +5,12 @@ import { jsx, css } from "@emotion/core";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import Typography from "@material-ui/core/Typography";
 import Collapse from "@material-ui/core/Collapse";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
-import Badge from "@material-ui/core/Badge";
 import { ThemeProvider } from "@material-ui/styles";
-import LayersIcon from "@material-ui/icons/Layers";
-import CollectionsIcon from "@material-ui/icons/Collections";
+import BookIcon from "@material-ui/icons/Book";
 import { groupBy } from "lodash";
 import { generate } from "shortid";
 import { MaterialTheme } from "../_Themes/index";
@@ -75,17 +74,14 @@ const PackageSelector = ({ packages, onChange }) => {
                   })
                 }
               >
-                <Badge
-                  color="secondary"
-                  anchorOrigin={{
-                    horizontal: "left",
-                    vertical: "top"
-                  }}
-                  badgeContent={packagesByLocation[location].length}
-                >
-                  <CollectionsIcon />
-                </Badge>
-                <ListItemText primary={location} />
+                <ListItemText
+                  disableTypography
+                  primary={
+                    <Typography style={{ fontWeight: "600" }}>
+                      {location}
+                    </Typography>
+                  }
+                />
                 {!collapsedItems[location] ? <ExpandLess /> : <ExpandMore />}
               </ListItem>
               <Collapse
@@ -105,11 +101,19 @@ const PackageSelector = ({ packages, onChange }) => {
                           css={css(
                             `padding-left: ${MaterialTheme.spacing(
                               4
-                            )}px !important;`
+                            )}px !important;
+                            margin: 0px inherit;`
                           )}
                         >
-                          <LayersIcon color="secondary" fontSize="small" />
-                          <ListItemText primary={name} />
+                          <BookIcon color="secondary" fontSize="small" />
+                          <ListItemText
+                            disableTypography
+                            primary={
+                              <Typography style={{ paddingLeft: "4px" }}>
+                                {name}
+                              </Typography>
+                            }
+                          />
                         </ListItem>
                       ))}
                 </List>
