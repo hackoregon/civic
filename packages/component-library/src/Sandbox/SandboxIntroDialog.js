@@ -15,12 +15,6 @@ const buttonWrapper = css`
   padding: 1rem 0 1rem 0;
 `;
 
-const hideOnMobile = css`
-  @media (max-width: 500px) {
-    display: none;
-  }
-`;
-
 const SandboxIntroDialog = ({ open, onClose }) => (
   <Dialog open={open} onClose={onClose}>
     <div css={contentWrapper}>
@@ -34,9 +28,6 @@ const SandboxIntroDialog = ({ open, onClose }) => (
         deeper into the context.
       </h3>
       <div css={buttonWrapper}>
-        <div css={hideOnMobile}>
-          <ButtonNew label="Contribute Data" />
-        </div>
         <div>
           <ButtonNew label="Explore Data" onClick={onClose} />
         </div>
