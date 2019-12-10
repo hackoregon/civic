@@ -26,6 +26,9 @@ export const getSandboxData = getSandboxProperty("sandbox");
 export const getFoundations = getSandboxProperty("foundations");
 export const getFoundationError = getSandboxProperty("foundationError");
 export const getSelectedPackage = getSandboxProperty("selectedPackage");
+export const getSelectedPackageDescription = getSandboxProperty(
+  "selectedPackageDescription"
+);
 export const getSelectedSlideKey = getSandboxProperty("selectedSlideKey");
 export const getPackages = getSandboxProperty("packages");
 export const getSlidesSuccess = getSandboxProperty("slidesSuccess");
@@ -279,6 +282,7 @@ export const getSelectedFoundationDatum = createSelector(
 
     if (activeLayer.visualization.map.mapType !== "ChoroplethMap") return null;
 
+    const feature = selectedFeature && selectedFeature.object;
     const id =
       selectedFeature && selectedFeature.object && selectedFeature.object.id;
     const featureProperties =
@@ -302,6 +306,7 @@ export const getSelectedFoundationDatum = createSelector(
     return {
       id,
       displayName,
+      feature,
       featureProperties,
       colorKey,
       primaryFormat

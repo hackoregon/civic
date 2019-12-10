@@ -55,6 +55,9 @@ const MaterialTheme = createMuiTheme({
     fontFamily: dataSanSerif,
     button: {
       fontFamily: sanSerif
+    },
+    h6: {
+      fontFamily: sanSerif
     }
   },
   transitions: {

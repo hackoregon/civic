@@ -1,15 +1,9 @@
 import React from "react";
-import { PageLayout } from "@hackoregon/component-library";
 import "@hackoregon/component-library/assets/global.styles.css";
+// eslint-disable-next-line import/no-named-as-default
 import Packages from "../Packages";
 
-const attribution = <a href="https://service.civicpdx.org">Data Sources</a>;
-
-const App = () => (
-  <PageLayout attribution={attribution}>
-    <Packages />
-  </PageLayout>
-);
+const App = () => <Packages />;
 
 App.displayName = "App";
 

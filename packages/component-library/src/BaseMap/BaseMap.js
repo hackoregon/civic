@@ -276,7 +276,9 @@ class BaseMap extends Component {
       scaleBarOptions,
       sharedViewport,
       onSharedViewportChange,
-      useScrollZoom
+      useScrollZoom,
+      useFitBounds,
+      bboxData
     } = this.props;
 
     viewport.width = containerWidth || 500;
@@ -340,6 +342,15 @@ class BaseMap extends Component {
           transitionDuration: animationDuration,
           transitionInterpolator: new FlyToInterpolator()
         };
+
+    let boundingbox;
+    if (useFitBounds && bboxData.length > 0) {
+      const toGeoJSON = {
+        type: "FeatureCollection",
+        features: [...bboxData]
+      };
+      boundingbox = bbox(toGeoJSON);
+    }
 
     const finalViewport = sharedViewport
       ? {
@@ -423,6 +434,8 @@ class BaseMap extends Component {
                 // eslint-disable-next-line no-unused-expressions
                 !!geocoderOnChange && geocoderOnChange(newViewport);
               }}
+              bbox={boundingbox}
+              position={geocoderPosition}
               options={{ ...geocoderOptions }}
             />
           )}
@@ -493,7 +506,8 @@ BaseMap.propTypes = {
   bboxData: PropTypes.arrayOf(PropTypes.shape({})),
   bboxPadding: PropTypes.number,
   boundBox: PropTypes.arrayOf(PropTypes.number),
-  useScrollZoom: PropTypes.bool
+  useScrollZoom: PropTypes.bool,
+  useFitBounds: PropTypes.bool
 };
 
 BaseMap.defaultProps = {

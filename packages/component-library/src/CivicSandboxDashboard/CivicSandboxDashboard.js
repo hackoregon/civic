@@ -10,6 +10,9 @@ import LineChart from "../LineChart/LineChart";
 // import HorizontalBarChart from "../HorizontalBarChart/HorizontalBarChart";
 import civicFormat from "../utils/civicFormat";
 import { ICONS } from "../styleConstants";
+import Placeholder from "../Placeholder/Placeholder";
+import PolygonPreview from "../PolygonPreview/PolygonPreview";
+import VisualizationColors from "../_Themes/VisualizationColors";
 
 const container = css`
   position: absolute;
@@ -20,8 +23,6 @@ const container = css`
   width: 575px;
   background: rgba(243, 242, 243, 0.9);
   color: rgb(85, 85, 85);
-  border: 1px solid #ddd;
-  border-radius: 2px;
   box-shadow: 5px 5px 15px -3px rgba(0, 0, 0, 0.2);
   @media (max-width: 900px) {
     width: 90%;
@@ -61,11 +62,9 @@ const toggleContainer = css`
   flex-direction: row;
   height: 100%;
   width: 100%;
-  color: #dc4556;
+  color: #1e62bd;
   z-index: 4;
   opacity: 0.9;
-  border: 1px solid #ddd;
-  border-radius: 2px;
   box-shadow: 5px 5px 15px -3px rgba(0, 0, 0, 0.2);
 `;
 
@@ -182,11 +181,29 @@ const viz = css`
 //   </div>
 // );
 
-const createLineViz = (data, title, xLabel, yLabel, xFormat, yFormat, id) => {
+const createLineViz = (
+  data,
+  title,
+  xLabel,
+  yLabel,
+  xFormat,
+  yFormat,
+  id,
+  feature
+) => {
   const yForm = yFormat === "percent" ? "percentage" : yFormat;
   return (
     <div css={viz} key={id}>
-      <h3>{title}</h3>
+      <h3>
+        <PolygonPreview
+          feature={feature}
+          stroke={VisualizationColors.categorical.pink.hex}
+          strokeWidth={30}
+          svgCss={css(`height: 1.125rem;`)}
+          padding={30}
+        />
+        {title}
+      </h3>
       <LineChart
         data={data}
         xLabel={xLabel}
@@ -200,12 +217,12 @@ const createLineViz = (data, title, xLabel, yLabel, xFormat, yFormat, id) => {
 
 const placeholder = (
   <div css={viz}>
-    <h2>Please select a polygon</h2>
+    <Placeholder>Select a region on the map for more detail</Placeholder>
   </div>
 );
 
 const CivicDashboard = props => {
-  const { data, children, isDashboardOpen, onClick } = props;
+  const { data, children, isDashboardOpen, onClick, standalone } = props;
   const [display, setDisplay] = useState("visualizations");
 
   const createVisualizations =
@@ -264,7 +281,8 @@ const CivicDashboard = props => {
           data.primaryFormat,
           "year",
           data.primaryFormat,
-          data.id
+          data.id,
+          data.feature
         )
       : placeholder;
 
@@ -322,7 +340,14 @@ const CivicDashboard = props => {
     </div>
   );
 
-  return (
+  return standalone ? (
+    <div>
+      <div css={contentContainer}>
+        {display === "description" ? children : visualizations}
+      </div>
+      {children ? visualizationButtons : null}
+    </div>
+  ) : (
     <div css={container}>
       <div css={isDashboardOpen ? dashboardOpen : dashboardClosed}>
         <div css={contentContainer}>
@@ -340,13 +365,19 @@ CivicDashboard.propTypes = {
   data: shape({
     id: number,
     displayName: string,
+    feature: shape({}),
     featureProperties: shape({}),
     colorKey: string,
     primaryFormat: string
   }),
   children: node,
   isDashboardOpen: bool,
-  onClick: func
+  onClick: func,
+  standalone: bool
+};
+
+CivicDashboard.defaultProps = {
+  standalone: false
 };
 
 function arePropsEqual(prevProps, nextProps) {

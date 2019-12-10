@@ -30,11 +30,13 @@ const INITIAL_STATE = {
   slidesPending: false,
   slidesError: null,
   selectedPackage: "",
+  selectedPackageDescription: "",
   sandbox: {},
   foundationData: {},
   slidesData: [],
   slidesSuccess: null,
   selectedFoundation: "",
+  selectedFoundationDescription: "",
   selectedSlide: [],
   selectedSlideKey: {},
   selectedFoundationDatum: null,
@@ -135,9 +137,17 @@ const reducer = (state = INITIAL_STATE, action) => {
       const [findDefaultLayers] = state.sandbox.packages.filter(
         d => d.displayName === action.selectedPackage.displayName
       );
+
+      if (state.selectedPackage === action.selectedPackage.displayName) {
+        return state;
+      }
+
       return {
         ...state,
         selectedPackage: action.selectedPackage.displayName,
+        selectedPackageDescription:
+          findDefaultLayers.description ||
+          "A brief description of the selected data collection",
         foundationData: {},
         slidesData: [],
         selectedSlide: findDefaultLayers.defaultLayers

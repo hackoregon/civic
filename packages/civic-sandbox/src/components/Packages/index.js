@@ -1,4 +1,7 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable import/no-extraneous-dependencies */
+
+/* TODO: Remove no-unused-vars if tracking dashboard open status isn't needed */
 import React from "react";
 import { connect } from "react-redux";
 import { css } from "emotion";
@@ -109,43 +112,18 @@ export class Packages extends React.Component {
     return (
       <div
         className={css(`
-          padding: 10px 0 0 0;
+          padding: 0 0 0 0;
           font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
           border: 0px solid crimson;
           width: 100%;
-          height: 80vh;
-          min-height: 600px;
+          height: 100vh;
         `)}
       >
         {mapIsOpen && (
           <div>
             <section style={{ position: "relative" }}>
               <SandboxComponent />
-              <div
-                className={css(`
-                  position: absolute;
-                  bottom: 2.5%;
-                  left: 2.5%;
-                  width: 95%;
-                  @media(max-width: 600px) {
-                    position: absolute;
-                    bottom: 1%;
-                    left: 0;
-                  }
-              `)}
-              >
-                <CivicSandboxDashboard
-                  data={selectedFoundationDatum}
-                  onClick={this.toggleDashboard}
-                  isDashboardOpen={dashboardIsOpen}
-                />
-              </div>
             </section>
-            <p>
-              {/* <Button onClick={this.closeMap}>
-                &lt; Go to Data Collections
-              </Button> */}
-            </p>
           </div>
         )}
 

@@ -1,11 +1,11 @@
 /* eslint-disable no-nested-ternary */
 import React from "react";
 import PropTypes from "prop-types";
-import { format, scaleLinear, max } from "d3";
+import { format, scaleLinear, max, range as d3Range } from "d3";
 import { startCase } from "lodash";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
-// import shortid from "shortid";
+import shortid from "shortid";
 import civicFormat from "../utils/civicFormat";
 import {
   createColorScale,
@@ -16,12 +16,13 @@ import {
 
 const legendHeight = 65;
 const legendContainer = css(`
-  margin: 0.5rem 5% 1rem 5%;
+  margin: 9px 5%;
   display: flex;
   align-items: baseline;
   flex-wrap: nowrap;
   height: ${legendHeight}px;
   width: 90%;
+  padding-bottom: 10px;  
 `);
 
 const colorBox = css(`
@@ -55,6 +56,13 @@ const tickNumsOrdinal = css(`
   font-size: 14px;
 `);
 
+const tickNumsCircle = css(`
+  position: absolute;
+  bottom: -25px;
+  left: 31px;
+  font-size: 14px;
+`);
+
 const barLabelStyle = css(`
   position: absolute;
   top: -18px;
@@ -73,18 +81,15 @@ const SandboxMapLegend = React.memo(props => {
     fieldName,
     mapType,
     layerInfo,
-    legend
+    legend,
+    multipleLayers
   } = mapProps;
   const { color: colorScaleType } = scaleType;
-  // console.log("LEGEND-legend:", legend);
 
   const {
     format: legendFormat,
     colorRange: legendColorRange,
-    dataRange: legendDataRange
-    // type: legendType,
-    // fieldName: legendFieldName,
-    // label: legendLabel,
+    dataRange: legendDataRange = []
   } = legend;
 
   let choroplethColorScale = createColorScale(
@@ -121,9 +126,16 @@ const SandboxMapLegend = React.memo(props => {
       "rgba("
     );
 
+  const spColor =
+    multipleLayers && multipleLayers[0]
+      ? multipleLayers[0].paint["circle-color"]
+      : "#000";
+  const spColorRange = d3Range(5).map(() => spColor);
   const colorScaleRange =
-    mapType === "VectorTilesMap"
+    mapType === "vtChoroplethMap"
       ? createRange("", legendColorRange).map(c => [...c, 255])
+      : mapType === "vtScatterPlotMap"
+      ? createRange("", spColorRange).map(c => [...c, 255])
       : choroplethColorScale.range()[0].length === 4
       ? choroplethColorScale.range()
       : choroplethColorScale.range().map(c => [...c, 255]);
@@ -133,8 +145,10 @@ const SandboxMapLegend = React.memo(props => {
   const bins =
     colorScaleType === "ordinal" || colorScaleType === "threshold"
       ? dataRange
-      : mapType === "VectorTilesMap"
+      : mapType === "vtChoroplethMap"
       ? legendDataRange
+      : mapType === "vtScatterPlotMap"
+      ? ["Less", "", "", "", "More"]
       : choroplethColorScale
           .range()
           .map(d => choroplethColorScale.invertExtent(d));
@@ -142,7 +156,8 @@ const SandboxMapLegend = React.memo(props => {
   const ticks =
     colorScaleType === "ordinal" ||
     colorScaleType === "threshold" ||
-    mapType === "VectorTilesMap"
+    mapType === "vtChoroplethMap" ||
+    mapType === "vtScatterPlotMap"
       ? bins
       : bins.reduce((a, c) => (c[1] ? [...a, c[1]] : [...a, ""]), []);
 
@@ -163,7 +178,9 @@ const SandboxMapLegend = React.memo(props => {
 
   const formatTicks = (arr, typeFormat) => {
     const formatter =
-      typeFormat === "percentage"
+      mapType === "vtScatterPlotMap"
+        ? startCase
+        : typeFormat === "percentage"
         ? sandboxPercentFormat
         : typeFormat === "dollars"
         ? sandboxMoneyFormat
@@ -181,19 +198,18 @@ const SandboxMapLegend = React.memo(props => {
     mapProps.tooltip &&
     mapProps.tooltip.primary &&
     mapProps.tooltip.primary.format;
-  // console.log("LEGNED-oldLegendFormat:", oldLegendFormat);
 
   const formatType = legendFormat || oldLegendFormat;
-  // console.log("LEGNED-formatType:", formatType);
 
   const ticksFormatted = formatTicks(ticks, formatType);
-  // console.log("LEGNED-ticksFormatted:", ticksFormatted);
 
   const tickStyle =
     colorScaleType === "threshold"
       ? tickNumsThreshold
       : colorScaleType === "ordinal"
       ? tickNumsOrdinal
+      : mapType === "vtScatterPlotMap"
+      ? tickNumsCircle
       : tickNums;
 
   const { color: fieldNameColor } = fieldName;
@@ -215,19 +231,28 @@ const SandboxMapLegend = React.memo(props => {
 
   const barHeights = mapColorsArr.map(d => {
     const count = colorCount[d.slice(5, -3)];
-    return mapType === "VectorTilesMap"
+    return mapType === "vtChoroplethMap"
       ? { h: 28, c: "" }
+      : mapType === "vtScatterPlotMap"
+      ? { h: "auto", c: "" }
       : count
       ? { h: barScale(count), c: count }
       : { h: 0, c: "0" };
   });
 
   const legendContents = mapColorsArr.map((d, i) => {
+    const borderColor =
+      mapType === "vtScatterPlotMap" ? "transparent" : "#AAA4AB";
+    const bgColor = mapType === "vtScatterPlotMap" ? "transparent" : d;
     return (
       <div
-        key={layerInfo.displayName + d}
+        key={layerInfo.displayName + shortid.generate()}
         css={colorBox}
-        style={{ backgroundColor: d, height: `${barHeights[i].h}px` }}
+        style={{
+          borderColor,
+          backgroundColor: bgColor,
+          height: `${barHeights[i].h}px`
+        }}
       >
         <div css={barLabelStyle}>
           <span>{barHeights[i].c}</span>
@@ -235,6 +260,17 @@ const SandboxMapLegend = React.memo(props => {
         <div css={tickStyle}>
           <span>{ticksFormatted[i]}</span>
         </div>
+        {mapType === "vtScatterPlotMap" && (
+          <div
+            style={{
+              margin: "auto",
+              backgroundColor: d,
+              borderRadius: "50%",
+              height: `${i * 8 + 10}px`,
+              width: `${i * 8 + 10}px`
+            }}
+          />
+        )}
       </div>
     );
   });

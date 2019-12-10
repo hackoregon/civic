@@ -6,7 +6,8 @@ import {
   number,
   string,
   shape,
-  oneOfType
+  oneOfType,
+  node
 } from "prop-types";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
@@ -14,17 +15,21 @@ import BaseMap from "../BaseMap/BaseMap";
 import CivicSandboxMap from "../MultiLayerMap/MultiLayerMap";
 import CivicSandboxTooltip from "../CivicSandboxMap/CivicSandboxTooltip";
 import SandboxDrawer from "./SandboxDrawer";
+import SandboxIntroDialog from "./SandboxIntroDialog";
+import SandboxLegend from "./SandboxLegend";
+import "./sandboxGeocoder.css";
 
 const baseMapWrapper = css(`
-  height: 80vh;
+  height: 100vh;
   min-height: 650px;
   @media (max-width: 850px) {
-    height: 80vh;
+    height: 100vh;
     min-height: 600px;
   }
   @media (max-width: 500px) {
+    padding-top: 40px;
     width: 100%;
-    height: 75vh;
+    height: calc(100vh - 40px);
     min-height: 390px;
   }
 `);
@@ -35,6 +40,7 @@ const Sandbox = ({
   defaultFoundation,
   defaultSlides,
   selectedPackage,
+  selectedPackageDescription,
   selectedFoundation,
   selectedSlide,
   slideData,
@@ -43,7 +49,18 @@ const Sandbox = ({
   updateSlide,
   fetchSlideDataByDate,
   drawerVisible,
+  drawerVisualization,
+  drawerLayerSelector,
+  drawerExplore,
   toggleDrawer,
+  toggleDrawerLayerSelector,
+  toggleDrawerVisualization,
+  toggleDrawerExplore,
+  dialogVisible,
+  toggleDialog,
+  contributeDialogVisible,
+  toggleContributeDialog,
+  ContributeDialogComponent,
   styles,
   onFoundationClick,
   onSlideHover,
@@ -155,26 +172,41 @@ const Sandbox = ({
           padding: 0;
           margin: 0;
           width: 100%;
-          height: 80vh;
+          height: 100vh;
           min-height: 650px;
           @media (max-width: 850px) {
-            height: 80vh;
+            height: 100vh;
             min-height: 600px;
           }
           @media (max-width: 500px) {
             width: 100%;
-            height: 75vh;
+            height: 100vh;
             min-height: 390px;
           }
         `}
       >
+        <SandboxIntroDialog open={dialogVisible} onClose={toggleDialog} />
+        <ContributeDialogComponent
+          open={contributeDialogVisible}
+          onClose={toggleContributeDialog}
+        />
         <SandboxDrawer
           data={data}
           selectedSlide={selectedSlide}
           onChange={updateSlide}
           selectedPackage={selectedPackage}
+          selectedPackageDescription={selectedPackageDescription}
+          toggleDialog={toggleDialog}
+          toggleContributeDialog={toggleContributeDialog}
           toggleDrawer={toggleDrawer}
+          toggleLayerSelector={toggleDrawerLayerSelector}
+          toggleVisualization={toggleDrawerVisualization}
+          toggleExplore={toggleDrawerExplore}
           drawerVisible={drawerVisible}
+          dialogVisible={dialogVisible}
+          drawerVisualization={drawerVisualization}
+          drawerLayerSelector={drawerLayerSelector}
+          drawerExplore={drawerExplore}
           defaultSlides={defaultSlides}
           slideData={slideData}
           fetchSlideByDate={fetchSlideDataByDate}
@@ -190,6 +222,7 @@ const Sandbox = ({
           areSlidesLoading={areSlidesLoading}
           errors={errors}
           updateSlideKey={updateSlideKey}
+          selectedFoundationDatum={selectedFoundationDatum}
         />
       </div>
       <div css={baseMapWrapper}>
@@ -208,6 +241,9 @@ const Sandbox = ({
           useScrollZoom
           onBaseMapHover={onHoverVectorLayer}
           onBaseMapMouseOut={mouseOutVectorLayer}
+          geocoder
+          geocoderOptions={{ zoom: 13 }}
+          geocoderPosition="top-left"
         >
           <CivicSandboxMap
             mapLayers={layerData}
@@ -221,6 +257,13 @@ const Sandbox = ({
             )}
           </CivicSandboxMap>
         </BaseMap>
+        <SandboxLegend
+          foundationData={layerData}
+          allSlides={allSlides}
+          foundationMapProps={layerData}
+          areSlidesLoading={areSlidesLoading}
+          errors={errors}
+        />
       </div>
     </div>
   );
@@ -245,6 +288,7 @@ Sandbox.propTypes = {
     })
   ).isRequired,
   selectedPackage: string.isRequired,
+  selectedPackageDescription: string.isRequired,
   selectedFoundation: string.isRequired,
   selectedSlide: arrayOf(string).isRequired,
   slideData: arrayOf(shape({})).isRequired,
@@ -253,7 +297,18 @@ Sandbox.propTypes = {
   updateSlide: func.isRequired,
   fetchSlideDataByDate: func.isRequired,
   drawerVisible: bool.isRequired,
+  drawerVisualization: bool.isRequired,
+  drawerExplore: bool.isRequired,
+  drawerLayerSelector: bool.isRequired,
   toggleDrawer: func.isRequired,
+  toggleDrawerLayerSelector: func.isRequired,
+  toggleDrawerVisualization: func.isRequired,
+  toggleDrawerExplore: func.isRequired,
+  dialogVisible: bool.isRequired,
+  toggleDialog: func.isRequired,
+  contributeDialogVisible: bool.isRequired,
+  toggleContributeDialog: func.isRequired,
+  ContributeDialogComponent: node.isRequired,
   styles: string,
   onFoundationClick: func,
   onSlideHover: func,
