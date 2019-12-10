@@ -18,7 +18,7 @@ const buttonWrapper = css`
 
 const headerLogoContainer = css`
   display: flex;
-  padding: 1rem 0 1rem 0;
+  padding: 0 0 1rem 0;
 `;
 
 const logoContainer = css`
@@ -33,15 +33,15 @@ const SandboxIntroDialog = ({ open, onClose }) => (
         <div css={logoContainer}>
           <Logo type="squareLogo" />
         </div>
-        <h2>An exploratory data resource where you could see your data</h2>
+        <h2>Sandbox is an exploratory data resource</h2>
       </div>
-      <h3>
-        Work with us to prepare and document your dataset, and see it as map
-        layers.
-      </h3>
       <h3>
         Explore curated collections to see patterns and relationships, then dig
         deeper into the context.
+      </h3>
+      <h3>
+        Work with us to prepare and document your dataset, and see it as map
+        layers.
       </h3>
       <div css={buttonWrapper}>
         <div>
