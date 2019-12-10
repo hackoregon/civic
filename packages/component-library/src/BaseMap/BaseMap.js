@@ -506,7 +506,8 @@ BaseMap.propTypes = {
   bboxData: PropTypes.arrayOf(PropTypes.shape({})),
   bboxPadding: PropTypes.number,
   boundBox: PropTypes.arrayOf(PropTypes.number),
-  useScrollZoom: PropTypes.bool
+  useScrollZoom: PropTypes.bool,
+  useFitBounds: PropTypes.bool
 };
 
 BaseMap.defaultProps = {

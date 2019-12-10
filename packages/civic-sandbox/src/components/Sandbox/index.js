@@ -6,6 +6,7 @@ import { Sandbox } from "@hackoregon/component-library";
 import { arrayOf, shape, func, string, bool } from "prop-types";
 import { equals } from "ramda";
 
+import ContributeDialogComponent from "../LayerCreate/index";
 import "react-select/dist/react-select.css";
 
 import {
@@ -46,6 +47,7 @@ class SandboxComponent extends React.Component {
     this.state = {
       drawerVisible: true,
       dialogVisible: true,
+      contributeDialogVisible: false,
       drawerVisualization: false,
       drawerLayerSelector: false,
       drawerExplore: true
@@ -53,6 +55,7 @@ class SandboxComponent extends React.Component {
     this.updateSlide = this.updateSlide.bind(this);
     this.toggleDrawer = this.toggleDrawer.bind(this);
     this.toggleDialog = this.toggleDialog.bind(this);
+    this.toggleContributeDialog = this.toggleContributeDialog.bind(this);
     this.toggleDrawerVisualization = this.toggleDrawerVisualization.bind(this);
     this.toggleDrawerLayerSelector = this.toggleDrawerLayerSelector.bind(this);
     this.toggleDrawerExplore = this.toggleDrawerExplore.bind(this);
@@ -162,6 +165,14 @@ class SandboxComponent extends React.Component {
     });
   };
 
+  toggleContributeDialog = () => {
+    this.setState(prevState => {
+      return {
+        contributeDialogVisible: !prevState.contributeDialogVisible
+      };
+    });
+  };
+
   toggleDrawerVisualization = () => {
     this.setState({
       drawerVisualization: true,
@@ -218,6 +229,7 @@ class SandboxComponent extends React.Component {
     const {
       drawerVisible,
       dialogVisible,
+      contributeDialogVisible,
       drawerVisualization,
       drawerLayerSelector,
       drawerExplore
@@ -235,6 +247,7 @@ class SandboxComponent extends React.Component {
         updateSlide={this.updateSlide}
         toggleDrawer={this.toggleDrawer}
         toggleDialog={this.toggleDialog}
+        toggleContributeDialog={this.toggleContributeDialog}
         toggleDrawerLayerSelector={this.toggleDrawerLayerSelector}
         toggleDrawerVisualization={this.toggleDrawerVisualization}
         toggleDrawerExplore={this.toggleDrawerExplore}
@@ -248,6 +261,8 @@ class SandboxComponent extends React.Component {
         selectedSlide={selectedSlide}
         drawerVisible={drawerVisible}
         dialogVisible={dialogVisible}
+        contributeDialogVisible={contributeDialogVisible}
+        ContributeDialogComponent={ContributeDialogComponent}
         drawerVisualization={drawerVisualization}
         drawerLayerSelector={drawerLayerSelector}
         drawerExplore={drawerExplore}

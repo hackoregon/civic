@@ -56,6 +56,7 @@ const SandboxDrawer = props => {
     selectedPackage,
     selectedPackageDescription,
     toggleDialog,
+    toggleContributeDialog,
     toggleDrawer,
     toggleVisualization,
     toggleLayerSelector,
@@ -214,6 +215,7 @@ const SandboxDrawer = props => {
               updatePackage={updatePackage}
               errors={errors}
               toggleLayerSelector={toggleLayerSelector}
+              toggleContributeDialog={toggleContributeDialog}
             />
           )}
         </div>
@@ -231,6 +233,7 @@ SandboxDrawer.propTypes = {
   selectedPackageDescription: string,
   toggleDialog: func,
   toggleDrawer: func,
+  toggleContributeDialog: func,
   toggleVisualization: func,
   toggleLayerSelector: func,
   toggleExplore: func,
