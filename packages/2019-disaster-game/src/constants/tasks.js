@@ -166,6 +166,7 @@ export const tasks = {
     ]),
     requiredItem: protectiveGear,
     numberItemsToSolve: 3,
+    numberCorrectChosen: 0,
     peopleSavedRange: [1, 3],
     petsSaved: 0,
     imageSVG: rubble,
@@ -174,8 +175,11 @@ export const tasks = {
     sceneAlt: "rubble in your way",
     clue: "There’s a lot of rubble and broken glass around here.",
     saveYourselfClue: "How can my friends and I get over this rubble safely?",
-    tickerTape:
-      "Gloves, boots, and goggles can help prevent injury when there’s lots of debris."
+    completed: false,
+    completedResults: {
+      people: 0,
+      pets: 0
+    }
   },
   [DUST]: {
     id: DUST,
@@ -187,6 +191,7 @@ export const tasks = {
     audioQuestion: SFX_TYPES.dustQuestionBoy,
     requiredItem: dustMask,
     numberItemsToSolve: 3,
+    numberCorrectChosen: 0,
     peopleSavedRange: [1, 3],
     petsSaved: 0,
     imageSVG: dust,
@@ -196,8 +201,11 @@ export const tasks = {
     clue: "It's getting hard to breathe here.",
     saveYourselfClue:
       "There's lots of dust! What will help my friends and I breathe cleaner air?",
-    tickerTape:
-      "Lots of debris will cause poor air quality after an earthquake."
+    completed: false,
+    completedResults: {
+      people: 0,
+      pets: 0
+    }
   },
   // Save Others
   [COLD]: {
@@ -210,6 +218,7 @@ export const tasks = {
     ]),
     requiredItem: blanket,
     numberItemsToSolve: 3,
+    numberCorrectChosen: 0,
     peopleSavedRange: [1, 3],
     petsSaved: 0,
     imageSVG: cold,
@@ -217,7 +226,11 @@ export const tasks = {
     sceneSVG: sceneCold,
     sceneAlt: "a shivering person",
     clue: "It's cold out here!",
-    tickerTape: "Plan for all potential weather conditions!"
+    completed: false,
+    completedResults: {
+      people: 0,
+      pets: 0
+    }
   },
   [FIRE]: {
     id: FIRE,
@@ -229,6 +242,7 @@ export const tasks = {
     ]),
     requiredItem: fireExtinguisher,
     numberItemsToSolve: 5,
+    numberCorrectChosen: 0,
     peopleSavedRange: [5, 15],
     petsSaved: 3,
     imageSVG: fire,
@@ -236,7 +250,11 @@ export const tasks = {
     sceneSVG: sceneFire,
     sceneAlt: "a fire that's spreading",
     clue: "Fire! Fire!",
-    tickerTape: "Keep fire extinguishers up-to-date and serviced annually!"
+    completed: false,
+    completedResults: {
+      people: 0,
+      pets: 0
+    }
   },
   [HUNGER]: {
     id: HUNGER,
@@ -251,6 +269,7 @@ export const tasks = {
     ]),
     requiredItem: food,
     numberItemsToSolve: 5,
+    numberCorrectChosen: 0,
     peopleSavedRange: [1, 5],
     petsSaved: 1,
     imageSVG: hunger,
@@ -258,7 +277,11 @@ export const tasks = {
     sceneSVG: sceneHunger,
     sceneAlt: "a hungry person",
     clue: "I'm so hungry!",
-    tickerTape: "Don't forget to pack comfort foods like coffee and chocolate!"
+    completed: false,
+    completedResults: {
+      people: 0,
+      pets: 0
+    }
   },
   [HOLE]: {
     id: HOLE,
@@ -270,6 +293,7 @@ export const tasks = {
     ]),
     requiredItem: rope,
     numberItemsToSolve: 3,
+    numberCorrectChosen: 0,
     peopleSavedRange: [1, 1],
     petsSaved: 0,
     imageSVG: hole,
@@ -277,8 +301,11 @@ export const tasks = {
     sceneSVG: sceneHole,
     sceneAlt: "a person reaching out of a crack in the road",
     clue: "Help! I can't get out!",
-    tickerTape:
-      "NET members are Portland volunteers trained in urban search & rescue."
+    completed: false,
+    completedResults: {
+      people: 0,
+      pets: 0
+    }
   },
   [INJURY]: {
     id: INJURY,
@@ -290,6 +317,7 @@ export const tasks = {
     ]),
     requiredItem: firstAidKit,
     numberItemsToSolve: 5,
+    numberCorrectChosen: 0,
     peopleSavedRange: [1, 5],
     petsSaved: 0,
     imageSVG: injury,
@@ -297,7 +325,11 @@ export const tasks = {
     sceneSVG: sceneInjury,
     sceneAlt: "an injured person",
     clue: "Ow!",
-    tickerTape: "Disaster kits should contain first aid kits and medications."
+    completed: false,
+    completedResults: {
+      people: 0,
+      pets: 0
+    }
   },
   [WEATHER]: {
     id: WEATHER,
@@ -306,6 +338,7 @@ export const tasks = {
     audioQuestion: SFX_TYPES.coldQuestionBoy,
     requiredItem: tent,
     numberItemsToSolve: 2,
+    numberCorrectChosen: 0,
     peopleSavedRange: [1, 3],
     petsSaved: 0,
     imageSVG: weather,
@@ -313,7 +346,11 @@ export const tasks = {
     sceneSVG: sceneWeather,
     sceneAlt: "a thunderstorm",
     clue: "It's cold out here!",
-    tickerTape: "Plan for all potential weather conditions!"
+    completed: false,
+    completedResults: {
+      people: 0,
+      pets: 0
+    }
   },
   [LOST_PET]: {
     id: LOST_PET,
@@ -325,6 +362,7 @@ export const tasks = {
     ]),
     requiredItem: flashlight,
     numberItemsToSolve: 2,
+    numberCorrectChosen: 0,
     peopleSavedRange: [0, 0],
     petsSaved: 1,
     imageSVG: lostPet,
@@ -332,7 +370,11 @@ export const tasks = {
     sceneSVG: sceneLostPet,
     sceneAlt: "a place the pet may be hiding",
     clue: "Help! I can't find my cat!",
-    tickerTape: "Pack supplies for pets with your disaster kit."
+    completed: false,
+    completedResults: {
+      people: 0,
+      pets: 0
+    }
   },
   [THIRST]: {
     id: THIRST,
@@ -344,6 +386,7 @@ export const tasks = {
     ]),
     requiredItem: water,
     numberItemsToSolve: 5,
+    numberCorrectChosen: 0,
     peopleSavedRange: [1, 5],
     petsSaved: 1,
     imageSVG: thirst,
@@ -351,13 +394,26 @@ export const tasks = {
     sceneSVG: sceneThirst,
     sceneAlt: "a thirsty person",
     clue: "I'm so thirsty!",
-    tickerTape: "Kits should contain 1 gallon of water per person per day."
+    completed: false,
+    completedResults: {
+      people: 0,
+      pets: 0
+    }
   }
 };
 
 export const tasksForEnvironment = {
   [URBAN]: {
-    saveYourself: [RUBBLE, DUST],
-    saveOthers: [INJURY, HOLE, HUNGER, COLD, WEATHER, LOST_PET, THIRST, FIRE]
+    saveYourself: [tasks[RUBBLE], tasks[DUST]],
+    saveOthers: [
+      tasks[INJURY],
+      tasks[HOLE],
+      tasks[HUNGER],
+      tasks[COLD],
+      tasks[WEATHER],
+      tasks[LOST_PET],
+      tasks[THIRST],
+      tasks[FIRE]
+    ]
   }
 };
