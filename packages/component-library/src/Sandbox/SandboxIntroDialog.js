@@ -4,6 +4,7 @@ import { jsx, css } from "@emotion/core";
 
 import Dialog from "../Dialog/Dialog";
 import ButtonNew from "../ButtonNew/ButtonNew";
+import Logo from "../Logo/Logo";
 
 const contentWrapper = css`
   margin: 20px;
@@ -15,10 +16,25 @@ const buttonWrapper = css`
   padding: 1rem 0 1rem 0;
 `;
 
+const headerLogoContainer = css`
+  display: flex;
+  padding: 1rem 0 1rem 0;
+`;
+
+const logoContainer = css`
+  margin: auto;
+  padding-right: 1em;
+`;
+
 const SandboxIntroDialog = ({ open, onClose }) => (
   <Dialog open={open} onClose={onClose}>
     <div css={contentWrapper}>
-      <h2>An exploratory data resource you can contribute to</h2>
+      <div css={headerLogoContainer}>
+        <div css={logoContainer}>
+          <Logo type="squareLogo" />
+        </div>
+        <h2>An exploratory data resource where you could see your data</h2>
+      </div>
       <h3>
         Work with us to prepare and document your dataset, and see it as map
         layers.
