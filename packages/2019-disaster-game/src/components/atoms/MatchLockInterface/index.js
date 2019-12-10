@@ -1,12 +1,12 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 /** @jsx jsx */
 import PropTypes from "prop-types";
 import { css, jsx } from "@emotion/core";
 
 import { palette } from "../../../constants/style";
 import media from "../../../utils/mediaQueries";
-import Timer from "../../../utils/timer";
-import usePrevious from "../../../state/hooks/usePrevious";
+// import Timer from "../../../utils/timer";
+// import usePrevious from "../../../state/hooks/usePrevious";
 import { GUIStyle } from "../../Game/index";
 import OrbManager from "../OrbManager";
 
@@ -58,55 +58,54 @@ const textStyle = css`
 `;
 
 const MatchLockInterface = ({
-  possibleItems,
   onOrbSelection,
   checkItemIsCorrect,
   activeScreen,
   interfaceMessage,
-  noInteractionCallback,
-  restartNoInteractionTimer,
-  noInteractionDuration,
+  // noInteractionCallback,
+  // restartNoInteractionTimer,
+  // noInteractionDuration,
   requiredItem
 }) => {
-  const [interactionTimeout] = useState(new Timer());
+  // const [interactionTimeout] = useState(new Timer());
   const [open, setOpen] = useState(false);
-  const prevRestartNoInteractionTimer = usePrevious(restartNoInteractionTimer);
+  // const prevRestartNoInteractionTimer = usePrevious(restartNoInteractionTimer);
 
-  const startInteractionTimeout = useCallback(() => {
-    interactionTimeout.stop();
+  // const startInteractionTimeout = useCallback(() => {
+  //   interactionTimeout.stop();
 
-    interactionTimeout.setDuration(noInteractionDuration);
-    interactionTimeout.addCompleteCallback(() => {
-      noInteractionCallback();
-    });
-    interactionTimeout.start();
-  }, [interactionTimeout, noInteractionCallback, noInteractionDuration]);
+  //   interactionTimeout.setDuration(noInteractionDuration);
+  //   interactionTimeout.addCompleteCallback(() => {
+  //     noInteractionCallback();
+  //   });
+  //   interactionTimeout.start();
+  // }, [interactionTimeout, noInteractionCallback, noInteractionDuration]);
 
   const doOrbSelection = (...args) => {
     onOrbSelection(...args);
-    startInteractionTimeout();
+    // startInteractionTimeout();
   };
 
-  useEffect(() => {
-    if (
-      restartNoInteractionTimer &&
-      restartNoInteractionTimer !== prevRestartNoInteractionTimer
-    ) {
-      startInteractionTimeout();
-    }
-  }, [
-    prevRestartNoInteractionTimer,
-    restartNoInteractionTimer,
-    startInteractionTimeout
-  ]);
+  // useEffect(() => {
+  //   if (
+  //     restartNoInteractionTimer &&
+  //     restartNoInteractionTimer !== prevRestartNoInteractionTimer
+  //   ) {
+  //     startInteractionTimeout();
+  //   }
+  // }, [
+  //   prevRestartNoInteractionTimer,
+  //   restartNoInteractionTimer,
+  //   startInteractionTimeout
+  // ]);
 
   useEffect(() => {
     setOpen(true);
-    startInteractionTimeout();
+    //   startInteractionTimeout();
 
-    return () => {
-      interactionTimeout.stop();
-    };
+    //   return () => {
+    //     interactionTimeout.stop();
+    //   };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
@@ -121,7 +120,6 @@ const MatchLockInterface = ({
       </div>
       <GUIStyle>
         <OrbManager
-          possibleItems={possibleItems}
           onOrbSelection={doOrbSelection}
           checkItemIsCorrect={checkItemIsCorrect}
           activeScreen={activeScreen}
@@ -133,14 +131,13 @@ const MatchLockInterface = ({
 };
 
 MatchLockInterface.propTypes = {
-  possibleItems: PropTypes.arrayOf(PropTypes.shape({})),
   onOrbSelection: PropTypes.func,
   checkItemIsCorrect: PropTypes.func,
   activeScreen: PropTypes.string,
   interfaceMessage: PropTypes.string,
-  noInteractionCallback: PropTypes.func,
-  restartNoInteractionTimer: PropTypes.bool,
-  noInteractionDuration: PropTypes.number,
+  // noInteractionCallback: PropTypes.func,
+  // restartNoInteractionTimer: PropTypes.bool,
+  // noInteractionDuration: PropTypes.number,
   requiredItem: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.string])
 };
 

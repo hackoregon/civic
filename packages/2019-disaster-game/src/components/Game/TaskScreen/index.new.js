@@ -4,12 +4,14 @@ import { useState, useEffect, memo, Fragment } from "react";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+
 import {
   goToNextTaskPhase as _goToNextTaskPhase,
   getTaskPhase,
   getActiveTask,
   taskPhaseKeys
 } from "../../../state/newTasks";
+import MatchLockInterface from "../../atoms/MatchLockInterface";
 import SolveScreen from "./SolveScreen";
 
 const screenLayout = css`
@@ -25,9 +27,9 @@ const TaskScreenContainer = ({
   const [solveScreenOpen, setSolveScreenOpen] = useState(true);
   const {
     SOLVING_SAVE_YOURSELF,
-    SOLVING_SAVE_OTHERS
+    SOLVING_SAVE_OTHERS,
     // MODAL_SAVE_OTHERS_INTRO,
-    // CHOOSE_TASK,
+    // CHOOSE_TASK
     // MODAL_CHOSEN_TASK,
     // MODAL_SOLVED_TASK,
     // MODAL_UNSOLVED_TASK,
@@ -36,11 +38,25 @@ const TaskScreenContainer = ({
 
   useEffect(initializeTaskPhaseTimers, []);
 
+  /*
+    Phase: Change to solving
+      - open solving screen
+  */
   useEffect(() => {
     const shouldBeOpen =
       taskPhase === SOLVING_SAVE_YOURSELF || taskPhase === SOLVING_SAVE_OTHERS;
     setSolveScreenOpen(shouldBeOpen);
   }, [SOLVING_SAVE_OTHERS, SOLVING_SAVE_YOURSELF, taskPhase]);
+
+  const onOrbSelection = () => {
+    console.log("selected orb");
+  };
+  const checkItemIsCorrect = () => true;
+  const interfaceMessage = "interfaceMessage";
+  const noInteractionCallback = () => {
+    console.log("noInteractionCallback");
+  };
+  const showRestartModal = false;
 
   return (
     <Fragment>
@@ -54,17 +70,14 @@ const TaskScreenContainer = ({
           mapTransitionDuration={mapTransitionDuration}
         /> */}
       </div>
-      {/* <MatchLockInterface
-        requiredItem={activeTask ? activeTask.requiredItem : null}
-        possibleItems={possibleItems}
+      <MatchLockInterface
         onOrbSelection={onOrbSelection}
         checkItemIsCorrect={checkItemIsCorrect}
-        activeScreen={activeScreen}
         interfaceMessage={interfaceMessage}
         noInteractionCallback={noInteractionCallback}
         restartNoInteractionTimer={!showRestartModal}
         noInteractionDuration={25}
-      /> */}
+      />
     </Fragment>
   );
 };

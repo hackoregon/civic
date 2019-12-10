@@ -1,11 +1,5 @@
 /* eslint-disable import/no-named-as-default */
-import React, {
-  useLayoutEffect,
-  useState,
-  memo,
-  useRef,
-  useCallback
-} from "react";
+import React, { useEffect, useState, memo, useRef, useCallback } from "react";
 import { connect } from "react-redux";
 import { map, find as _find, filter } from "lodash";
 import styled from "@emotion/styled";
@@ -17,8 +11,14 @@ import { TYPES as SFX_TYPES } from "../../constants/sfx";
 import useBounds from "../../state/hooks/useBounds";
 import usePrevious from "../../state/hooks/usePrevious";
 import useAnimationFrame from "../../state/hooks/useAnimationFrame";
-import { getTaskPhase, getActiveTaskIndex } from "../../state/tasks";
-import { MOVING_MAP } from "../../constants/actions";
+import { getActiveTaskIndex } from "../../state/tasks";
+import {
+  getTaskPhase,
+  taskPhaseKeys,
+  getWeightedTasks,
+  getActiveTask
+} from "../../state/newTasks";
+import { getPlayerKitItems } from "../../state/kit";
 
 import Orb from "./Orb";
 import {
@@ -39,6 +39,12 @@ const ORB_CONFIG = {
   verticalBuffer: 90
 };
 
+const {
+  SOLVING_SAVE_YOURSELF,
+  SOLVING_SAVE_OTHERS,
+  CHOOSE_TASK
+} = taskPhaseKeys;
+
 /**
  * OrbManager is responsible for moving Orbs
  *
@@ -49,13 +55,14 @@ const ORB_CONFIG = {
  * @returns
  */
 const OrbManager = ({
-  possibleItems,
   onOrbSelection,
   checkItemIsCorrect,
   playSFX,
   taskPhase,
   activeTaskIndex,
-  requiredItem
+  weightedPlayerKitItems,
+  weightedTasks,
+  activeTask
 } = {}) => {
   const [hasInitialized, setHasInitialized] = useState(false);
   const [orbModels, setOrbModelsState] = useState([]);
@@ -71,24 +78,34 @@ const OrbManager = ({
   const bounds = useBounds(boundsRef);
   const prevBounds = usePrevious(bounds);
   const prevTaskPhase = usePrevious(taskPhase);
-  const prevActiveTaskIndex = usePrevious(activeTaskIndex);
+  // const prevActiveTaskIndex = usePrevious(activeTaskIndex);
 
   /* Generate new orbModels when the interface bounds change, usually only on load. Most often, generate new orbModels when switching between voting and solving. This catalyzes orb data and placement */
-  useLayoutEffect(() => {
+  useEffect(() => {
     const newTaskPhase = prevTaskPhase !== taskPhase && !!bounds.width;
-
     const newBounds =
       prevBounds && !prevBounds.width && bounds.width && !hasInitialized;
 
-    const resetForSaveYourself =
-      prevActiveTaskIndex !== activeTaskIndex && activeTaskIndex === 1;
+    // const resetForSaveYourself =
+    // prevActiveTaskIndex !== activeTaskIndex && activeTaskIndex === 1;
 
-    if (newBounds || newTaskPhase || resetForSaveYourself) {
+    // if (newBounds || newTaskPhase || resetForSaveYourself) {
+    if (newBounds || newTaskPhase) {
+      let possibleItems = [];
+
+      if (taskPhase === CHOOSE_TASK) {
+        possibleItems = weightedTasks;
+      } else if (
+        taskPhase === SOLVING_SAVE_YOURSELF ||
+        taskPhase === SOLVING_SAVE_OTHERS
+      ) {
+        possibleItems = weightedPlayerKitItems;
+      }
       const newOrbs = createRandomLayout(
         possibleItems,
         bounds,
         ORB_CONFIG,
-        requiredItem
+        activeTask ? activeTask.requiredItem : null
       );
       setHasInitialized(true);
       setCompletedOrbs([]);
@@ -98,12 +115,12 @@ const OrbManager = ({
     activeTaskIndex,
     bounds,
     hasInitialized,
-    possibleItems,
-    prevActiveTaskIndex,
     prevBounds,
-    prevTaskPhase,
     taskPhase,
-    requiredItem
+    prevTaskPhase,
+    weightedTasks,
+    weightedPlayerKitItems,
+    activeTask
   ]);
 
   const addOrbScore = useCallback(
@@ -196,13 +213,6 @@ const OrbManager = ({
           checkItemIsCorrect(currentOrb),
           currentOrb
         );
-        /* This fixes removing the orb when it has gone off screen, but it makes all the other orbModels animate like they're appearing for the first time */
-        // currentOrb.frameRerenders = currentOrb.frameRerenders ? (currentOrb.frameRerenders + 1) : 1;
-        // if (currentOrb.frameRerenders === 50) {
-        //   i = i - 1;
-        //   setOrbModelsState(orbModels.splice(i, 1));
-        //   continue;
-        // }
       } else {
         currentOrb = incompleteOrbHandler(currentOrb, tick, i, ORB_CONFIG);
       }
@@ -274,10 +284,14 @@ const OrbManager = ({
   // by default all orbModels are rendered,
   // until their `bypassRender` property is true
   const renderableOrbs = filter(orbModels, orb => !orb.bypassRender);
+  const shouldRenderOrbs =
+    taskPhase === SOLVING_SAVE_YOURSELF ||
+    taskPhase === SOLVING_SAVE_OTHERS ||
+    taskPhase === CHOOSE_TASK;
 
   return (
     <OrbsStyle ref={boundsRef}>
-      {taskPhase !== MOVING_MAP &&
+      {shouldRenderOrbs &&
         map(renderableOrbs, orb => {
           const zIndex = orbsZIndex.indexOf(orb.orbId) + 1;
 
@@ -316,7 +330,10 @@ const OrbsStyle = styled.div`
 
 const mapStateToProps = state => ({
   taskPhase: getTaskPhase(state),
-  activeTaskIndex: getActiveTaskIndex(state)
+  activeTask: getActiveTask(state),
+  activeTaskIndex: getActiveTaskIndex(state),
+  weightedPlayerKitItems: getPlayerKitItems(state),
+  weightedTasks: getWeightedTasks(state)
 });
 
 // use memo to not re-render OrbManager unless its props change
