@@ -100,7 +100,7 @@ const SandboxDrawer = props => {
       border-left: 4px solid #201024;
     }
     @media (max-width: 500px) {
-      border-bottom: 4px solid #201024;
+      border-bottom: 4px solid #F3F2F3;
       box-sizing: border-box;
     }
   `);
