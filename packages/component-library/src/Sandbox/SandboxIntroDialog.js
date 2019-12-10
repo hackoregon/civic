@@ -33,7 +33,7 @@ const SandboxIntroDialog = ({ open, onClose }) => (
         <div css={logoContainer}>
           <Logo type="squareLogo" />
         </div>
-        <h2>An exploratory data resource</h2>
+        <h2>Sandbox is an exploratory data resource</h2>
       </div>
       <h3>
         Explore curated collections to see patterns and relationships, then dig
