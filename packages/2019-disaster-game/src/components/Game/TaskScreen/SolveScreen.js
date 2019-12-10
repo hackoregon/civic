@@ -30,12 +30,7 @@ const requiredItemsStyle = css`
   width: 100%;
 `;
 
-const SolveScreen = ({
-  activeTask,
-  activeTaskIndex,
-  open,
-  correctItemsChosen
-}) => {
+const SolveScreen = ({ activeTask, open }) => {
   const taskImageGenerator = currentTask => {
     if (currentTask) {
       return css`
@@ -58,7 +53,7 @@ const SolveScreen = ({
     if (activeTask) {
       setTaskImageCss(taskImageGenerator(activeTask));
     }
-  }, [activeTaskIndex, activeTask]);
+  }, [activeTask]);
 
   return (
     <div
@@ -72,7 +67,7 @@ const SolveScreen = ({
         <RequiredItemsOrbs
           css={requiredItemsStyle}
           numberRequiredItems={activeTask.numberItemsToSolve}
-          correctItemsChosen={correctItemsChosen}
+          correctItemsChosen={activeTask.numberCorrectChosen} // TODO
           requiredItem={activeTask.requiredItem}
         />
       )}
@@ -81,10 +76,8 @@ const SolveScreen = ({
 };
 
 SolveScreen.propTypes = {
-  activeTaskIndex: PropTypes.number,
   activeTask: PropTypes.shape({}),
-  open: PropTypes.bool,
-  correctItemsChosen: PropTypes.number
+  open: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
