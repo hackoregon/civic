@@ -7,6 +7,7 @@ import LayersIcon from "@material-ui/icons/Layers";
 import Dropdown from "../Dropdown/Dropdown";
 import Logo from "../Logo/Logo";
 import Checkbox from "../Checkbox/Checkbox";
+import ButtonNew from "../ButtonNew/ButtonNew";
 
 const SandboxDrawerLayerSelector = props => {
   const {
@@ -16,7 +17,8 @@ const SandboxDrawerLayerSelector = props => {
     areSlidesLoading,
     errors,
     updateSlideKey,
-    selectedPackage
+    selectedPackage,
+    toggleDrawer
   } = props;
 
   const loadingContainer = css`
@@ -36,6 +38,13 @@ const SandboxDrawerLayerSelector = props => {
     font-size: 0.8rem;
     margin: -10px 0px 0px 31px;
     font-style: italic;
+  `;
+
+  const mobileOnly = css`
+    padding-bottom: 1rem;
+    @media (min-width: 500px) {
+      display: none;
+    }
   `;
 
   const loader = (
@@ -61,10 +70,13 @@ const SandboxDrawerLayerSelector = props => {
               css={css(`
                 vertical-align: middle;
               `)}
-            />{" "}
+            />
             Map Layers
           </h2>
           <h3>{selectedPackage}</h3>
+          <div css={mobileOnly}>
+            <ButtonNew label="View Map" onClick={toggleDrawer} />
+          </div>
         </div>
       </div>
       <div
@@ -197,5 +209,6 @@ SandboxDrawerLayerSelector.propTypes = {
   areSlidesLoading: bool,
   errors: bool,
   updateSlideKey: func,
-  selectedPackage: string
+  selectedPackage: string,
+  toggleDrawer: func
 };
