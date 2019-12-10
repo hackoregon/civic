@@ -90,6 +90,10 @@ const SandboxDrawer = props => {
     opacity: 1;
   `);
 
+  const disabled = css(`
+    background: #AAA4AB;
+  `);
+
   const active = css(`
     opacity: 1;
     @media (min-width: 500px) {
@@ -100,6 +104,15 @@ const SandboxDrawer = props => {
       box-sizing: border-box;
     }
   `);
+
+  const allVectorTileLayers =
+    !areSlidesLoading && allSlides
+      ? !foundationData.every(slide =>
+          ["vtChoroplethMap", "vtScatterPlotMap"].includes(slide)
+        )
+      : true;
+
+  const nothing = () => {};
 
   return (
     <div css={drawerVisible ? menuOpen : menuClosed}>
@@ -129,11 +142,15 @@ const SandboxDrawer = props => {
             <MenuIcon css={buttonIcon} />
           </div>
           <div
-            onClick={toggleVisualization}
-            onKeyPress={toggleVisualization}
+            onClick={allVectorTileLayers ? nothing : toggleVisualization}
+            onKeyPress={allVectorTileLayers ? nothing : toggleVisualization}
             role="button"
             tabIndex={0}
-            css={[buttonStyle, drawerVisible && drawerVisualization && active]}
+            css={[
+              buttonStyle,
+              drawerVisible && drawerVisualization && active,
+              allVectorTileLayers && disabled
+            ]}
           >
             <TimelineIcon css={buttonIcon} />
           </div>
