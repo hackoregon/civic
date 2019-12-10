@@ -145,9 +145,9 @@ const reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         selectedPackage: action.selectedPackage.displayName,
-        selectedPackageDescription: action.selectedPackage.description
-          ? action.selectedPackage.description
-          : "A brief description of the selected data collection",
+        selectedPackageDescription:
+          findDefaultLayers.description ||
+          "A brief description of the selected data collection",
         foundationData: {},
         slidesData: [],
         selectedSlide: findDefaultLayers.defaultLayers
