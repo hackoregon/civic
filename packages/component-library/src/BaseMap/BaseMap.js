@@ -29,6 +29,7 @@ const {
 } = MapGLResources;
 
 const mapWrapper = css`
+  position: relative;
   margin: 0 auto;
   padding: 0;
   width: 100%;
@@ -41,10 +42,29 @@ const navControl = css`
   z-index: 1;
 `;
 
-const geoCoderContainer = css`
+const geoCoderWrapper = css`
   position: absolute;
-  left: 5px;
-  height: 15px;
+  margin: 5px 25px 35px 45px;
+`;
+
+const topRight = css`
+  top: 0;
+  right: 0;
+`;
+
+const topLeft = css`
+  top: 0;
+  left: 0;
+`;
+
+const bottomLeft = css`
+  bottom: 0;
+  left: 0;
+`;
+
+const bottomRight = css`
+  bottom: 0;
+  right: 0;
 `;
 
 class BaseMap extends Component {
@@ -341,9 +361,19 @@ class BaseMap extends Component {
         }
       : viewport;
 
+    const geocoderPositions = {
+      "top-left": topLeft,
+      "top-right": topRight,
+      "bottom-left": bottomLeft,
+      "bottom-right": bottomRight
+    };
+
     return (
       <div css={mapWrapper}>
-        <div ref={this.geocoderContainerRef} css={geoCoderContainer} />
+        <div
+          ref={this.geocoderContainerRef}
+          css={[geoCoderWrapper, geocoderPositions[geocoderPosition]]}
+        />
         <MapGL
           className="MapGL"
           {...finalViewport}
@@ -476,13 +506,15 @@ BaseMap.propTypes = {
   bboxData: PropTypes.arrayOf(PropTypes.shape({})),
   bboxPadding: PropTypes.number,
   boundBox: PropTypes.arrayOf(PropTypes.number),
-  useScrollZoom: PropTypes.bool
+  useScrollZoom: PropTypes.bool,
+  useFitBounds: PropTypes.bool
 };
 
 BaseMap.defaultProps = {
   mapboxToken: MAPBOX_TOKEN,
   navigation: true,
   geocoder: false,
+  geocoderPosition: "top-right",
   useContainerHeight: false,
   updateViewport: true,
   animate: false,

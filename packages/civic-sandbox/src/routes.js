@@ -1,17 +1,9 @@
-import App from "./components/App";
-import Sandbox from "./components/Sandbox";
+import LayerCreate from "./components/LayerCreate";
 
 const routes = () => [
   {
-    path: "sandbox",
-    name: "sandbox",
-    component: App,
-    childRoutes: [
-      {
-        path: "map",
-        component: Sandbox
-      }
-    ]
+    path: "layercreate",
+    component: LayerCreate
   }
 ];
 

@@ -6,6 +6,9 @@ import { checkA11y } from "@storybook/addon-a11y";
 // DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator import injection
 import polygonPreviewStory from "./PolygonPreview.story"; // TODO: Move this to the appropriate location
 import dialogStory from "./Dialog.story"; // TODO: Move this to the appropriate location
+import selectFieldStory from "./SelectField.story"; // TODO: Move this to the appropriate location
+import textFieldStory from "./TextField.story"; // TODO: Move this to the appropriate location
+import formStory from "./Form.story"; // TODO: Move this to the appropriate location
 import buttonNewStory from "./ButtonNew.story";
 import badgeStory from "./Badge.story";
 import BarChartStory from "./BarChart.story";
@@ -128,6 +131,9 @@ sliderStory();
 notebookPreviewStory(); // TODO: Move this to the appropriate location
 dialogStory(); // TODO: Move this to the appropriate location
 polygonPreviewStory(); // TODO: Move this to the appropriate location
+formStory(); // TODO: Move this to the appropriate location
+textFieldStory(); // TODO: Move this to the appropriate location
+selectFieldStory(); // TODO: Move this to the appropriate location
 // DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator story injection
 
 // charts
