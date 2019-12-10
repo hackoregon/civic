@@ -27,11 +27,16 @@ const SandboxLegend = props => {
                 d.mapType === "ChoroplethMap" &&
                 d.layerInfo.displayName === slide.label;
               const vectorTilesMap =
-                d.mapType === "VectorTilesMap" &&
+                d.mapType === "vtChoroplethMap" &&
                 d.legend &&
-                d.legend.type === "choropleth" &&
                 d.layerInfo.displayName === slide.label;
-              return choropleth || scatterplot || vectorTilesMap;
+              const vtScatterPlotMap =
+                d.mapType === "vtScatterPlotMap" &&
+                d.legend &&
+                d.layerInfo.displayName === slide.label;
+              return (
+                choropleth || scatterplot || vectorTilesMap || vtScatterPlotMap
+              );
             });
 
             const matchFound =
@@ -45,12 +50,15 @@ const SandboxLegend = props => {
             );
 
             const matchFoundVector =
-              dataIndex > -1 &&
-              foundationData[dataIndex].mapType === "VectorTilesMap";
+              (dataIndex > -1 &&
+                foundationData[dataIndex].mapType === "vtChoroplethMap") ||
+              (dataIndex > -1 &&
+                foundationData[dataIndex].mapType === "vtScatterPlotMap");
 
             const mapLegendVector = matchFoundVector && (
               <SandboxMapLegend mapProps={foundationMapProps[dataIndex]} />
             );
+
             const mapLegendBox = (matchFound || matchFoundVector) && (
               <div>
                 <h3
