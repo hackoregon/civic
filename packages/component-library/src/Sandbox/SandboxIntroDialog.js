@@ -23,7 +23,7 @@ const headerLogoContainer = css`
 
 const logoContainer = css`
   margin: auto;
-  padding-right: 1em;
+  padding-right: 1rem;
 `;
 
 const SandboxIntroDialog = ({ open, onClose }) => (
