@@ -223,6 +223,7 @@ const SandboxDrawer = props => {
               areSlidesLoading={areSlidesLoading}
               errors={errors}
               updateSlideKey={updateSlideKey}
+              toggleDrawer={toggleDrawer}
             />
           )}
           {drawerExplore && (

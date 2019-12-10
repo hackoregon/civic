@@ -14,6 +14,10 @@ const buttonWrapper = css`
   display: flex;
   justify-content: space-evenly;
   padding: 1rem 0 1rem 0;
+  @media (max-width: 500px) {
+    flex-direction: column;
+    padding: 0;
+  }
 `;
 
 const headerLogoContainer = css`
