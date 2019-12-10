@@ -100,9 +100,8 @@ const PackageSelector = ({ packages, onChange }) => {
                           onClick={() => onChange(displayName)}
                           css={css(
                             `padding-left: ${MaterialTheme.spacing(
-                              4
-                            )}px !important;
-                            margin: 0px inherit;`
+                              3
+                            )}px !important;`
                           )}
                         >
                           <BookIcon color="secondary" fontSize="small" />

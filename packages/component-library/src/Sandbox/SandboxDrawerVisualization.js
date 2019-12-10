@@ -22,7 +22,13 @@ const SandboxDrawerVisualization = props => {
       >
         <div css={css(`margin: 0 10px;`)}>
           <h2>
-            <TimelineIcon fontSize="large" />
+            <TimelineIcon
+              fontSize="large"
+              css={css(`
+                vertical-align: middle;
+                padding-right: 4px;
+              `)}
+            />
             Data Detail
           </h2>
           <h3>{selectedPackage}</h3>

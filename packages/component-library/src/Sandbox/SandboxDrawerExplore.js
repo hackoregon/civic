@@ -26,7 +26,13 @@ const SandboxDrawerExplore = props => {
       >
         <div css={css(`margin: 0 10px;`)}>
           <h2>
-            <BookIcon fontSize="large" />
+            <BookIcon
+              fontSize="large"
+              css={css(`
+                vertical-align: middle;
+                padding-right: 2px;
+              `)}
+            />
             Collections
           </h2>
           <Placeholder>

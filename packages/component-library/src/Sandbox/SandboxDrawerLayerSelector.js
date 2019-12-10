@@ -50,7 +50,13 @@ const SandboxDrawerLayerSelector = props => {
       >
         <div css={css(`margin: 0 10px;`)}>
           <h2>
-            <LayersIcon fontSize="large" /> Map Layers
+            <LayersIcon
+              fontSize="large"
+              css={css(`
+                vertical-align: middle;
+              `)}
+            />{" "}
+            Map Layers
           </h2>
           <h3>{selectedPackage}</h3>
         </div>
