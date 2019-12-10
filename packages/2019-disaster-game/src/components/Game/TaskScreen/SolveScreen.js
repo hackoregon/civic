@@ -3,7 +3,7 @@ import { css, jsx } from "@emotion/core";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
 import { useState, useEffect } from "react";
-import { getActiveTaskData } from "../../../state/tasks";
+import { getActiveTask } from "../../../state/newTasks";
 import RequiredItemsOrbs from "./RequiredItemsOrbs";
 
 const screenLayout = css`
@@ -81,7 +81,7 @@ SolveScreen.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  activeTask: getActiveTaskData(state)
+  activeTask: getActiveTask(state)
 });
 
 export default connect(mapStateToProps)(SolveScreen);
