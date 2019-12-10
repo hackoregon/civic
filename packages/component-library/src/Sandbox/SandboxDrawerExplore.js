@@ -13,7 +13,8 @@ const SandboxDrawerExplore = props => {
     selectedPackage,
     toggleLayerSelector,
     updatePackage,
-    errors
+    errors,
+    toggleContributeDialog
   } = props;
 
   return (
@@ -30,7 +31,10 @@ const SandboxDrawerExplore = props => {
             Collections
           </h2>
           <Placeholder>
-            <ButtonNew label="Contribute Your Data" />
+            <ButtonNew
+              label="Learn How To Add Your Data"
+              onClick={toggleContributeDialog}
+            />
           </Placeholder>
         </div>
         <PackageSelectorBox
@@ -63,5 +67,6 @@ SandboxDrawerExplore.propTypes = {
   selectedPackage: string,
   updatePackage: func,
   toggleLayerSelector: func,
+  toggleContributeDialog: bool,
   errors: bool
 };

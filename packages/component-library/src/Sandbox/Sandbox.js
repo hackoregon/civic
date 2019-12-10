@@ -6,7 +6,8 @@ import {
   number,
   string,
   shape,
-  oneOfType
+  oneOfType,
+  node
 } from "prop-types";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
@@ -57,6 +58,9 @@ const Sandbox = ({
   toggleDrawerExplore,
   dialogVisible,
   toggleDialog,
+  contributeDialogVisible,
+  toggleContributeDialog,
+  ContributeDialogComponent,
   styles,
   onFoundationClick,
   onSlideHover,
@@ -182,6 +186,10 @@ const Sandbox = ({
         `}
       >
         <SandboxIntroDialog open={dialogVisible} onClose={toggleDialog} />
+        <ContributeDialogComponent
+          open={contributeDialogVisible}
+          onClose={toggleContributeDialog}
+        />
         <SandboxDrawer
           data={data}
           selectedSlide={selectedSlide}
@@ -189,6 +197,7 @@ const Sandbox = ({
           selectedPackage={selectedPackage}
           selectedPackageDescription={selectedPackageDescription}
           toggleDialog={toggleDialog}
+          toggleContributeDialog={toggleContributeDialog}
           toggleDrawer={toggleDrawer}
           toggleLayerSelector={toggleDrawerLayerSelector}
           toggleVisualization={toggleDrawerVisualization}
@@ -297,6 +306,9 @@ Sandbox.propTypes = {
   toggleDrawerExplore: func.isRequired,
   dialogVisible: bool.isRequired,
   toggleDialog: func.isRequired,
+  contributeDialogVisible: bool.isRequired,
+  toggleContributeDialog: func.isRequired,
+  ContributeDialogComponent: node.isRequired,
   styles: string,
   onFoundationClick: func,
   onSlideHover: func,

@@ -4,7 +4,9 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import { Fragment } from "react";
-import { ButtonNew } from "@hackoregon/component-library";
+import PropTypes from "prop-types";
+import { ButtonNew, Dialog } from "@hackoregon/component-library";
+
 import LayerCreateForm from "./LayerCreateForm";
 import "@hackoregon/component-library/assets/global.styles.css";
 import Collapsable from "./CustomCollapsable";
@@ -55,9 +57,6 @@ const mapSection = css`
 `;
 
 const container = css`
-  position: absolute;
-  top: 50px;
-  left: 25px;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -74,7 +73,13 @@ const container = css`
   }
 `;
 
-function LayerCreateComponent() {
+const helperText = css`
+  font-size: 0.8rem;
+  line-height: 2rem;
+  font-style: italic;
+`;
+
+function LayerCreateComponent({ open, onClose }) {
   // const [formToggled, setFormToggled] = useState('all');
 
   // function handleClick(mapTypeSelected) {
@@ -88,102 +93,122 @@ function LayerCreateComponent() {
   }
 
   return (
-    <div css={container}>
-      <LayerCreateForm
-        onSubmit={values => {
-          console.log(values);
-        }}
-        initialValues={{
-          email: ""
-        }}
-      >
-        {({ formSections }) => (
-          <Fragment>
-            <p css={formTitle}>Create a New CIVIC Sandbox Layer</p>
-            <p css={body}>
-              Let CIVIC Sandbox tell the story of your data. This form will help
-              you upload your dataset and choose the best way to display it.
-              Currently we support GeoJSON datasets.
-            </p>
-            <div css={buttonContainer}>
-              <ButtonNew
-                label="Questions? Click here to email us!"
-                onClick={handleEmailButtonClick}
-              />
-            </div>
-            <p css={sectionHeader}>
-              First, let&#39;s get the basics out of the way:
-            </p>
-            {formSections.baseData}
-            <p css={sectionHeader}>Okay, tell us more about the data itself:</p>
-            {formSections.dataDetails}
-            <p css={sectionHeader}>
-              Next, let&#39;s choose the best type of map for your data:
-            </p>
-            <div css={mapSection}>
-              <img src={pathMapSrc} css={imgCss} alt="path map" />
-              Path map: these maps are good for xxx
-              <Collapsable description="form section for path map">
-                <Collapsable.Section hidden>
-                  {formSections.pathMapType}
-                </Collapsable.Section>
-              </Collapsable>
-            </div>
-            <div css={mapSection}>
-              <img src={screenGridMapSrc} css={imgCss} alt="screen grid map" />
-              Screen Grid map: these maps are good for xxx
-              <Collapsable description="form section for screen grid map">
-                <Collapsable.Section hidden>
-                  {formSections.pathMapType}
-                </Collapsable.Section>
-              </Collapsable>
-            </div>
-            <div css={mapSection}>
-              <img src={choroplethMapSrc} css={imgCss} alt="choropleth map" />
-              Choropleth map: these maps are good for xxx
-              <Collapsable description="form section for choropleth map">
-                <Collapsable.Section hidden>
-                  {formSections.pathMapType}
-                </Collapsable.Section>
-              </Collapsable>
-            </div>
-            <div css={mapSection}>
-              <img src={scatterplotMapSrc} css={imgCss} alt="scatterplot map" />
-              Scatterplot map: these maps are good for xxx
-              <Collapsable description="form section for scatterplot map">
-                <Collapsable.Section hidden>
-                  {formSections.pathMapType}
-                </Collapsable.Section>
-              </Collapsable>
-            </div>
-            <div css={mapSection}>
-              <img
-                src={smallPolygonMapSrc}
-                css={imgCss}
-                alt="small polygon map"
-              />
-              Small Polygon map: these maps are good for xxx
-              <Collapsable description="form section for small polygon map">
-                <Collapsable.Section hidden>
-                  {formSections.pathMapType}
-                </Collapsable.Section>
-              </Collapsable>
-            </div>
-            <div css={mapSection}>
-              <img src={iconMapSrc} css={imgCss} alt="icon map" />
-              Icon map: these maps are good for xxx
-              <Collapsable description="form section for icon map">
-                <Collapsable.Section hidden>
-                  {formSections.pathMapType}
-                </Collapsable.Section>
-              </Collapsable>
-            </div>
-          </Fragment>
-        )}
-      </LayerCreateForm>
-    </div>
+    <Dialog open={open} onClose={onClose}>
+      <div css={container}>
+        <LayerCreateForm
+          onSubmit={values => {
+            console.log(values);
+          }}
+          initialValues={{
+            email: ""
+          }}
+        >
+          {({ formSections }) => (
+            <Fragment>
+              <p css={formTitle}>Create a New CIVIC Sandbox Layer</p>
+              <p css={body}>
+                You might be able to see your data in the CIVIC Sandbox! We are
+                looking for early adopters to work with us to ensure documented,
+                accurate data, and see it as map layers.
+              </p>
+              <p css={helperText}>
+                <em>The form below is for sample purposes only</em>
+              </p>
+              <div css={buttonContainer}>
+                <ButtonNew
+                  label="Tell us about your data"
+                  onClick={handleEmailButtonClick}
+                />
+              </div>
+              <p css={sectionHeader}>
+                First, let&#39;s get the basics out of the way:
+              </p>
+              {formSections.baseData}
+              <p css={sectionHeader}>
+                Okay, tell us more about the data itself:
+              </p>
+              {formSections.dataDetails}
+              <p css={sectionHeader}>
+                Next, let&#39;s choose the best type of map for your data:
+              </p>
+              <div css={mapSection}>
+                <img src={pathMapSrc} css={imgCss} alt="path map" />
+                Path map: these maps are good for xxx
+                <Collapsable description="form section for path map">
+                  <Collapsable.Section hidden>
+                    {formSections.pathMapType}
+                  </Collapsable.Section>
+                </Collapsable>
+              </div>
+              <div css={mapSection}>
+                <img
+                  src={screenGridMapSrc}
+                  css={imgCss}
+                  alt="screen grid map"
+                />
+                Screen Grid map: these maps are good for xxx
+                <Collapsable description="form section for screen grid map">
+                  <Collapsable.Section hidden>
+                    {formSections.pathMapType}
+                  </Collapsable.Section>
+                </Collapsable>
+              </div>
+              <div css={mapSection}>
+                <img src={choroplethMapSrc} css={imgCss} alt="choropleth map" />
+                Choropleth map: these maps are good for xxx
+                <Collapsable description="form section for choropleth map">
+                  <Collapsable.Section hidden>
+                    {formSections.pathMapType}
+                  </Collapsable.Section>
+                </Collapsable>
+              </div>
+              <div css={mapSection}>
+                <img
+                  src={scatterplotMapSrc}
+                  css={imgCss}
+                  alt="scatterplot map"
+                />
+                Scatterplot map: these maps are good for xxx
+                <Collapsable description="form section for scatterplot map">
+                  <Collapsable.Section hidden>
+                    {formSections.pathMapType}
+                  </Collapsable.Section>
+                </Collapsable>
+              </div>
+              <div css={mapSection}>
+                <img
+                  src={smallPolygonMapSrc}
+                  css={imgCss}
+                  alt="small polygon map"
+                />
+                Small Polygon map: these maps are good for xxx
+                <Collapsable description="form section for small polygon map">
+                  <Collapsable.Section hidden>
+                    {formSections.pathMapType}
+                  </Collapsable.Section>
+                </Collapsable>
+              </div>
+              <div css={mapSection}>
+                <img src={iconMapSrc} css={imgCss} alt="icon map" />
+                Icon map: these maps are good for xxx
+                <Collapsable description="form section for icon map">
+                  <Collapsable.Section hidden>
+                    {formSections.pathMapType}
+                  </Collapsable.Section>
+                </Collapsable>
+              </div>
+            </Fragment>
+          )}
+        </LayerCreateForm>
+      </div>
+    </Dialog>
   );
 }
+
+LayerCreateComponent.propTypes = {
+  open: PropTypes.bool,
+  onClose: PropTypes.func
+};
 
 LayerCreateComponent.displayName = "LayerCreateComponent";
 

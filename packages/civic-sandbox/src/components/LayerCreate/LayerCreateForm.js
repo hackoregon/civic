@@ -132,7 +132,7 @@ const LayerCreateForm = ({ initialValues, onSubmit, children }) => (
         {children}
       </Form>
     </div>
-    <ButtonNew label="Submit" />
+    <ButtonNew label="Submit" disabled />
   </Fragment>
 );
 
