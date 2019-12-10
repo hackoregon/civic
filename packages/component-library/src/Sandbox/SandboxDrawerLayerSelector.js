@@ -142,7 +142,6 @@ const SandboxDrawerLayerSelector = props => {
 
             return (
               <div key={shortid.generate()}>
-                {console.log(slide)}
                 <div
                   css={css(`
                     padding: 0.5rem 0 0 1rem;
@@ -162,7 +161,7 @@ const SandboxDrawerLayerSelector = props => {
                 </div>
                 <div
                   css={css(`
-                    padding: .5rem 0 .5rem 0;
+                    padding: 0;
                     font-size: .75rem;
                     color: #333;
                     position: relative;
