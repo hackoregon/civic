@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { css, jsx } from "@emotion/core";
+import { css, jsx, keyframes } from "@emotion/core";
 import { useState, useEffect, memo, Fragment } from "react";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
@@ -12,11 +12,46 @@ import {
   taskPhaseKeys
 } from "../../../state/newTasks";
 import MatchLockInterface from "../../atoms/MatchLockInterface";
+import { palette } from "../../../constants/style";
 import SolveScreen from "./SolveScreen";
+import ChooseTaskScreen from "./ChooseTaskScreen";
 
 const screenLayout = css`
   position: relative;
   height: 100%;
+`;
+
+const slide = keyframes`
+  0% {
+    transform: translateX(-25%);
+  }
+  100% {
+    transform: translateX(25%);
+  }
+`;
+
+const bg = css`
+  animation: ${slide} 6s ease-in-out infinite alternate;
+  background-image: linear-gradient(
+    -60deg,
+    ${palette.lightLime} 50%,
+    ${palette.lemon} 50%
+  );
+  bottom: 0;
+  left: -50%;
+  opacity: 0.5;
+  position: fixed;
+  right: -50%;
+  top: 0;
+`;
+
+const bg2 = css`
+  animation-direction: alternate-reverse;
+  animation-duration: 8s;
+`;
+
+const bg3 = css`
+  animation-duration: 10s;
 `;
 
 const TaskScreenContainer = ({
@@ -58,13 +93,10 @@ const TaskScreenContainer = ({
     <Fragment>
       <div css={screenLayout}>
         <SolveScreen open={solveScreenOpen} activeTask={activeTask} />
-        {/* <VoteMapScreen
-          activeTask={activeTask}
-          activeTaskIndex={activeTaskIndex}
-          tasks={weightedTasks}
-          taskVotes={taskVotes}
-          mapTransitionDuration={mapTransitionDuration}
-        /> */}
+        <ChooseTaskScreen />
+        <div css={bg} />
+        <div css={[bg, bg2]} />
+        <div css={[bg, bg3]} />
       </div>
       <MatchLockInterface
         interfaceMessage={interfaceMessage}
