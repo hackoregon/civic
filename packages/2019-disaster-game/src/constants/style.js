@@ -1,4 +1,5 @@
 export const palette = {
+  darkGrey: "#4F4F4F",
   blue: "#068FB2",
   blueRGBA: "rgba(6, 143, 178, 0.8)",
   lightBlue: "#64CAE5",
