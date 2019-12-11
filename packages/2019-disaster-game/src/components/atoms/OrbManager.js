@@ -1,7 +1,7 @@
 /* eslint-disable import/no-named-as-default */
 import React, { useEffect, useState, memo, useRef, useCallback } from "react";
 import { connect } from "react-redux";
-import { map, find as _find, filter } from "lodash";
+import { map, filter } from "lodash";
 import styled from "@emotion/styled";
 import remove from "lodash/remove";
 
@@ -106,9 +106,9 @@ const OrbManager = ({
         ORB_CONFIG,
         activeTask ? activeTask.requiredItem : null
       );
-      setHasInitialized(true);
       setCompletedOrbs([]);
       setOrbModelsState(newOrbs);
+      setHasInitialized(true);
     }
   }, [
     activeTaskIndex,
@@ -124,9 +124,8 @@ const OrbManager = ({
   ]);
 
   const addOrbScore = useCallback(
-    orbId => {
-      const theOrb = _find(orbModels, orb => orb.orbId === orbId);
-      onOrbSelection(theOrb);
+    orbModel => {
+      onOrbSelection(orbModel);
     },
     // update when orbModels.length changes
     // if we udpate when orbModels changes, the addOrbScore will continuously be recreated,

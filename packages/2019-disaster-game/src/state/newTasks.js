@@ -48,7 +48,8 @@ const taskPhases = {
 
 const actionTypes = {
   GO_TO_NEXT_TASK_PHASE_NEW: "GO_TO_NEXT_TASK_PHASE_NEW",
-  CHOSE_CORRECT_ITEM_FOR_TASK: "CHOSE_CORRECT_ITEM_FOR_TASK"
+  CHOSE_CORRECT_ITEM_FOR_TASK: "CHOSE_CORRECT_ITEM_FOR_TASK",
+  CHOOSE_NEXT_TASK: "CHOOSE_NEXT_TASK"
 };
 
 const phaseTimer = new Timer();
@@ -82,6 +83,11 @@ export const choseCorrectItemForTask = activeTask => dispatch => {
   if (willCompleteTask) {
     goToNextTaskPhase()(dispatch);
   }
+};
+
+export const chooseTask = chosenTaskId => dispatch => {
+  dispatch({ type: actionTypes.CHOOSE_NEXT_TASK, chosenTaskId, phaseTimer });
+  goToNextTaskPhase()(dispatch);
 };
 
 // REDUCER HELPERS
@@ -152,6 +158,10 @@ export const tasksReducer = createReducer(initialState, {
         pets: currentTask.petsSaved
       };
     }
+  },
+  [actionTypes.CHOOSE_NEXT_TASK]: (state, action) => {
+    const nextTask = state.tasks[action.chosenTaskId];
+    state.taskOrder.push(nextTask);
   }
 });
 /* eslint-enable no-param-reassign */
