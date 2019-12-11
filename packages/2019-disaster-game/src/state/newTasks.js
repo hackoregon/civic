@@ -160,6 +160,11 @@ export default tasksReducer;
 
 // SELECTORS
 
+export const getAllTasks = createSelector(
+  ["newTasks.tasks"],
+  _tasks => _tasks
+);
+
 export const getActiveTask = createSelector(
   ["newTasks.taskOrder", "newTasks.activeTaskIndex"],
   (taskOrder, activeTaskIndex) => {
