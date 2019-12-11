@@ -1,7 +1,7 @@
 export const palette = {
+  modalBackgroundGrey: "rgba(49, 49, 49, 0.8)",
   darkGrey: "#4F4F4F",
   blue: "#068FB2",
-  blueRGBA: "rgba(6, 143, 178, 0.8)",
   lightBlue: "#64CAE5",
   darkBlue: "#004366",
   gold: "#FBD403",
