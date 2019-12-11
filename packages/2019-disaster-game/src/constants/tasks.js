@@ -194,7 +194,7 @@ export const tasks = {
     requiredItem: dustMask,
     numberItemsToSolve: 3,
     numberCorrectChosen: 0,
-    peopleSavedRange: [1, 3],
+    peopleSavedRange: [1, 1],
     petsSaved: 0,
     imageSVG: dust,
     imageAlt: "a person coughing in the dust",

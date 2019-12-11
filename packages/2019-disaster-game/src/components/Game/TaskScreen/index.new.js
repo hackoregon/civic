@@ -17,6 +17,7 @@ import SolveScreen from "./SolveScreen";
 import ChooseTaskScreen from "./ChooseTaskScreen";
 import HelpOthersIntroModal from "../../atoms/HelpOthersIntroModal";
 import ChosenTaskModal from "../../atoms/ChosenTaskModal";
+import SuccessfulCompleteTaskModal from "../../atoms/SuccessfulCompleteTaskModal";
 
 const screenLayout = css`
   position: relative;
@@ -66,9 +67,9 @@ const TaskScreenContainer = ({
     SOLVING_SAVE_YOURSELF,
     SOLVING_SAVE_OTHERS,
     MODAL_SAVE_OTHERS_INTRO,
-    // CHOOSE_TASK
-    MODAL_CHOSEN_TASK
-    // MODAL_SOLVED_TASK,
+    // CHOOSE_TASK,
+    MODAL_CHOSEN_TASK,
+    MODAL_SOLVED_TASK
     // MODAL_UNSOLVED_TASK,
     // MODAL_NO_ITEM
   } = taskPhaseKeys;
@@ -92,11 +93,13 @@ const TaskScreenContainer = ({
   const showRestartModal = false;
   const showHelpOthersIntroModal = taskPhase === MODAL_SAVE_OTHERS_INTRO;
   const showChosenTaskModal = taskPhase === MODAL_CHOSEN_TASK;
+  const showSuccessfulCompleteTaskModal = taskPhase === MODAL_SOLVED_TASK;
 
   return (
     <Fragment>
       {showHelpOthersIntroModal && <HelpOthersIntroModal />}
       {showChosenTaskModal && <ChosenTaskModal />}
+      {showSuccessfulCompleteTaskModal && <SuccessfulCompleteTaskModal />}
       <div css={screenLayout}>
         <SolveScreen open={solveScreenOpen} activeTask={activeTask} />
         <ChooseTaskScreen />

@@ -96,7 +96,7 @@ export const chooseTask = chosenTaskId => dispatch => {
 // Mark task as completed, increase activeTaskIndex, change to next phase if applicable, and start timer
 const completeSaveYourselfTask = state => {
   if (state.taskOrder[state.activeTaskIndex])
-    state.taskOrder[state.activeTaskIndex].completed = true;
+    state.taskOrder[state.activeTaskIndex].completed = false;
   if (state.activeTaskIndex === 1) {
     state.activeTaskPhase = MODAL_SAVE_OTHERS_INTRO;
     phaseTimer.setDuration(taskPhases[MODAL_SAVE_OTHERS_INTRO].time);
@@ -128,10 +128,11 @@ export const tasksReducer = createReducer(initialState, {
       state.activeTaskPhase = SOLVING_SAVE_OTHERS;
       phaseTimer.setDuration(taskPhases[SOLVING_SAVE_OTHERS].time);
     } else if (state.activeTaskPhase === SOLVING_SAVE_OTHERS) {
-      if (action.solved === true) {
+      const activeTask = state.taskOrder[state.activeTaskIndex];
+      if (activeTask.completed === true) {
         state.activeTaskPhase = MODAL_SOLVED_TASK;
         phaseTimer.setDuration(taskPhases[MODAL_SOLVED_TASK].time);
-      } else if (action.solved === false) {
+      } else if (activeTask.completed === false) {
         state.activeTaskPhase = MODAL_UNSOLVED_TASK;
         phaseTimer.setDuration(taskPhases[MODAL_UNSOLVED_TASK].time);
       } else {
