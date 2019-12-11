@@ -21,7 +21,7 @@ const containerStyle = css`
   height: 100vh;
   width: 100vw;
   position: absolute;
-  background-color: ${palette.blueRGBA};
+  background-color: ${palette.modalBackgroundGrey};
   display: grid;
   align-content: center;
   justify-content: center;

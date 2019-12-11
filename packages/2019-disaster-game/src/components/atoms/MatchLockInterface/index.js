@@ -53,7 +53,7 @@ const textStyle = css`
   margin: 0;
   padding: 5px 15px;
   text-align: center;
-  font-family: "Boogaloo", cursive;
+  font-family: "Boogaloo", sans-serif;
   font-size: 16px;
   line-height: 1;
   color: ${palette.gold};

@@ -11,7 +11,7 @@ const modalContainer = css`
   position: absolute;
   width: 100vw;
   height: 100vh;
-  background-color: ${palette.blueRGBA};
+  background-color: ${palette.modalBackgroundGrey};
   display: grid;
   align-content: center;
   justify-content: center;
@@ -22,7 +22,7 @@ const modalContainer = css`
 `;
 
 const messageStyle = css`
-  background-color: ${palette.lightLime};
+  background-color: ${palette.white};
   padding: 100px;
   border-radius: 50px;
   justify-items: center;
@@ -34,7 +34,7 @@ const titleText = css`
   font-family: "Luckiest Guy", sans-serif;
   font-size: 14rem;
   margin: 50px 0 0;
-  color: ${palette.red};
+  color: ${palette.darkGrey};
 `;
 
 const buttonContainer = css`
