@@ -11,12 +11,12 @@ import { TYPES as SFX_TYPES } from "../../constants/sfx";
 import useBounds from "../../state/hooks/useBounds";
 import usePrevious from "../../state/hooks/usePrevious";
 import useAnimationFrame from "../../state/hooks/useAnimationFrame";
-import { getActiveTaskIndex } from "../../state/tasks";
 import {
   getTaskPhase,
   taskPhaseKeys,
   getWeightedTasks,
-  getActiveTask
+  getActiveTask,
+  getActiveTaskIndex
 } from "../../state/newTasks";
 import { getPlayerKitItems } from "../../state/kit";
 
@@ -78,7 +78,7 @@ const OrbManager = ({
   const bounds = useBounds(boundsRef);
   const prevBounds = usePrevious(bounds);
   const prevTaskPhase = usePrevious(taskPhase);
-  // const prevActiveTaskIndex = usePrevious(activeTaskIndex);
+  const prevActiveTaskIndex = usePrevious(activeTaskIndex);
 
   /* Generate new orbModels when the interface bounds change, usually only on load. Most often, generate new orbModels when switching between voting and solving. This catalyzes orb data and placement */
   useEffect(() => {
@@ -86,11 +86,10 @@ const OrbManager = ({
     const newBounds =
       prevBounds && !prevBounds.width && bounds.width && !hasInitialized;
 
-    // const resetForSaveYourself =
-    // prevActiveTaskIndex !== activeTaskIndex && activeTaskIndex === 1;
+    const resetForSaveYourself =
+      prevActiveTaskIndex !== activeTaskIndex && activeTaskIndex === 1;
 
-    // if (newBounds || newTaskPhase || resetForSaveYourself) {
-    if (newBounds || newTaskPhase) {
+    if (newBounds || newTaskPhase || resetForSaveYourself) {
       let possibleItems = [];
 
       if (taskPhase === CHOOSE_TASK) {
@@ -120,7 +119,8 @@ const OrbManager = ({
     prevTaskPhase,
     weightedTasks,
     weightedPlayerKitItems,
-    activeTask
+    activeTask,
+    prevActiveTaskIndex
   ]);
 
   const addOrbScore = useCallback(

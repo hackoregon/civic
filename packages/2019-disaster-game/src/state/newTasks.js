@@ -163,6 +163,11 @@ export const getActiveTask = createSelector(
   }
 );
 
+export const getActiveTaskIndex = createSelector(
+  ["newTasks.activeTaskIndex"],
+  activeTaskIndex => activeTaskIndex
+);
+
 export const getTaskPhase = createSelector(
   ["newTasks.activeTaskPhase"],
   activeTaskPhase => activeTaskPhase
