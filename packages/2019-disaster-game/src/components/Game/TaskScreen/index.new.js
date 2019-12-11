@@ -27,7 +27,7 @@ const TaskScreenContainer = ({
   const [solveScreenOpen, setSolveScreenOpen] = useState(true);
   const {
     SOLVING_SAVE_YOURSELF,
-    SOLVING_SAVE_OTHERS,
+    SOLVING_SAVE_OTHERS
     // MODAL_SAVE_OTHERS_INTRO,
     // CHOOSE_TASK
     // MODAL_CHOSEN_TASK,
@@ -48,10 +48,6 @@ const TaskScreenContainer = ({
     setSolveScreenOpen(shouldBeOpen);
   }, [SOLVING_SAVE_OTHERS, SOLVING_SAVE_YOURSELF, taskPhase]);
 
-  const onOrbSelection = () => {
-    console.log("selected orb");
-  };
-  const checkItemIsCorrect = () => true;
   const interfaceMessage = "interfaceMessage";
   const noInteractionCallback = () => {
     console.log("noInteractionCallback");
@@ -71,8 +67,6 @@ const TaskScreenContainer = ({
         /> */}
       </div>
       <MatchLockInterface
-        onOrbSelection={onOrbSelection}
-        checkItemIsCorrect={checkItemIsCorrect}
         interfaceMessage={interfaceMessage}
         noInteractionCallback={noInteractionCallback}
         restartNoInteractionTimer={!showRestartModal}

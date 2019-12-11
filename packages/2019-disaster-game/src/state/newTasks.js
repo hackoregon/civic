@@ -48,7 +48,7 @@ const taskPhases = {
 
 const actionTypes = {
   GO_TO_NEXT_TASK_PHASE_NEW: "GO_TO_NEXT_TASK_PHASE_NEW",
-  COMPLETE_TASK_NEW: "COMPLETE_TASK_NEW"
+  CHOSE_CORRECT_ITEM_FOR_TASK: "CHOSE_CORRECT_ITEM_FOR_TASK"
 };
 
 const phaseTimer = new Timer();
@@ -74,13 +74,14 @@ export const goToNextTaskPhase = () => dispatch => {
   dispatch({ type: actionTypes.GO_TO_NEXT_TASK_PHASE_NEW, phaseTimer });
 };
 
-export const completeTask = () => dispatch => {
-  phaseTimer.reset();
-  phaseTimer.addCompleteCallback(() => {
+export const choseCorrectItemForTask = activeTask => dispatch => {
+  const willCompleteTask =
+    activeTask.numberCorrectChosen + 1 >= activeTask.numberItemsToSolve;
+
+  dispatch({ type: actionTypes.CHOSE_CORRECT_ITEM_FOR_TASK });
+  if (willCompleteTask) {
     goToNextTaskPhase()(dispatch);
-  });
-  dispatch({ type: actionTypes.COMPLETE_TASK_NEW });
-  dispatch({ type: actionTypes.GO_TO_NEXT_TASK_PHASE_NEW, phaseTimer });
+  }
 };
 
 // REDUCER HELPERS
@@ -141,13 +142,16 @@ export const tasksReducer = createReducer(initialState, {
     }
     phaseTimer.start();
   },
-  [actionTypes.COMPLETE_TASK_NEW]: state => {
-    const completedTask = state.taskOrder[state.activeTaskIndex];
-    completedTask.completed = true;
-    completedTask.completedResults = {
-      people: getRandomNumberFromRange(completedTask.peopleSavedRange),
-      pets: completedTask.petsSaved
-    };
+  [actionTypes.CHOSE_CORRECT_ITEM_FOR_TASK]: state => {
+    const currentTask = state.taskOrder[state.activeTaskIndex];
+    currentTask.numberCorrectChosen += 1;
+    if (currentTask.numberCorrectChosen >= currentTask.numberItemsToSolve) {
+      currentTask.completed = true;
+      currentTask.completedResults = {
+        people: getRandomNumberFromRange(currentTask.peopleSavedRange),
+        pets: currentTask.petsSaved
+      };
+    }
   }
 });
 /* eslint-enable no-param-reassign */

@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 /** @jsx jsx */
 import PropTypes from "prop-types";
 import { css, jsx } from "@emotion/core";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 import { palette } from "../../../constants/style";
 import media from "../../../utils/mediaQueries";
@@ -9,6 +11,12 @@ import media from "../../../utils/mediaQueries";
 // import usePrevious from "../../../state/hooks/usePrevious";
 import { GUIStyle } from "../../Game/index";
 import OrbManager from "../OrbManager";
+import {
+  getTaskPhase,
+  taskPhaseKeys,
+  getActiveTask,
+  choseCorrectItemForTask as _choseCorrectItemForTask
+} from "../../../state/newTasks";
 
 const containerStyle = css`
   transform: translateY(1000%);
@@ -57,15 +65,21 @@ const textStyle = css`
   }
 `;
 
+const {
+  SOLVING_SAVE_YOURSELF,
+  SOLVING_SAVE_OTHERS,
+  CHOOSE_TASK
+} = taskPhaseKeys;
+
 const MatchLockInterface = ({
-  onOrbSelection,
-  checkItemIsCorrect,
   activeScreen,
   interfaceMessage,
   // noInteractionCallback,
   // restartNoInteractionTimer,
   // noInteractionDuration,
-  requiredItem
+  taskPhase,
+  activeTask,
+  choseCorrectItemForTask
 }) => {
   // const [interactionTimeout] = useState(new Timer());
   const [open, setOpen] = useState(false);
@@ -81,10 +95,10 @@ const MatchLockInterface = ({
   //   interactionTimeout.start();
   // }, [interactionTimeout, noInteractionCallback, noInteractionDuration]);
 
-  const doOrbSelection = (...args) => {
-    onOrbSelection(...args);
-    // startInteractionTimeout();
-  };
+  // const doOrbSelection = (...args) => {
+  // onOrbSelection(...args);
+  // startInteractionTimeout();
+  // };
 
   // useEffect(() => {
   //   if (
@@ -108,6 +122,40 @@ const MatchLockInterface = ({
     //   };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const onKitItemSelection = orbModel => {
+    if (orbModel.type === activeTask.requiredItem) {
+      choseCorrectItemForTask(activeTask);
+      return true;
+    }
+    return false;
+  };
+
+  const onTaskSelection = () => {
+    console.log("task selection");
+  };
+
+  const onOrbSelection = orbModel => {
+    if (
+      taskPhase === SOLVING_SAVE_YOURSELF ||
+      taskPhase === SOLVING_SAVE_OTHERS
+    ) {
+      onKitItemSelection(orbModel);
+    } else if (taskPhase === CHOOSE_TASK) {
+      onTaskSelection(orbModel);
+    }
+  };
+
+  const checkItemIsCorrect = orbModel => {
+    if (
+      taskPhase === SOLVING_SAVE_YOURSELF ||
+      taskPhase === SOLVING_SAVE_OTHERS
+    ) {
+      return activeTask.requiredItem === orbModel.type;
+    } if (taskPhase === CHOOSE_TASK) {
+      return true;
+    }
+  };
+
   return (
     <div
       css={css`
@@ -120,10 +168,9 @@ const MatchLockInterface = ({
       </div>
       <GUIStyle>
         <OrbManager
-          onOrbSelection={doOrbSelection}
+          onOrbSelection={onOrbSelection}
           checkItemIsCorrect={checkItemIsCorrect}
           activeScreen={activeScreen}
-          requiredItem={requiredItem}
         />
       </GUIStyle>
     </div>
@@ -131,14 +178,29 @@ const MatchLockInterface = ({
 };
 
 MatchLockInterface.propTypes = {
-  onOrbSelection: PropTypes.func,
-  checkItemIsCorrect: PropTypes.func,
   activeScreen: PropTypes.string,
   interfaceMessage: PropTypes.string,
   // noInteractionCallback: PropTypes.func,
   // restartNoInteractionTimer: PropTypes.bool,
-  // noInteractionDuration: PropTypes.number,
-  requiredItem: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.string])
+  // noInteractionDuration: PropTypes.number,,
+  taskPhase: PropTypes.oneOf([...Object.values(taskPhaseKeys)]),
+  activeTask: PropTypes.shape({}),
+  choseCorrectItemForTask: PropTypes.func
 };
 
-export default MatchLockInterface;
+const mapStateToProps = state => ({
+  taskPhase: getTaskPhase(state),
+  activeTask: getActiveTask(state)
+});
+
+const mapDispatchToProps = dispatch => ({
+  choseCorrectItemForTask: bindActionCreators(
+    _choseCorrectItemForTask,
+    dispatch
+  )
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MatchLockInterface);
