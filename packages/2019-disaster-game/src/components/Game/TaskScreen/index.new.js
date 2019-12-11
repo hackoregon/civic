@@ -15,6 +15,7 @@ import MatchLockInterface from "../../atoms/MatchLockInterface";
 import { palette } from "../../../constants/style";
 import SolveScreen from "./SolveScreen";
 import ChooseTaskScreen from "./ChooseTaskScreen";
+import HelpOthersIntroModal from "../../atoms/HelpOthersIntroModal";
 
 const screenLayout = css`
   position: relative;
@@ -62,8 +63,8 @@ const TaskScreenContainer = ({
   const [solveScreenOpen, setSolveScreenOpen] = useState(true);
   const {
     SOLVING_SAVE_YOURSELF,
-    SOLVING_SAVE_OTHERS
-    // MODAL_SAVE_OTHERS_INTRO,
+    SOLVING_SAVE_OTHERS,
+    MODAL_SAVE_OTHERS_INTRO
     // CHOOSE_TASK
     // MODAL_CHOSEN_TASK,
     // MODAL_SOLVED_TASK,
@@ -88,9 +89,11 @@ const TaskScreenContainer = ({
     console.log("noInteractionCallback");
   };
   const showRestartModal = false;
+  const showHelpOthersIntroModal = taskPhase === MODAL_SAVE_OTHERS_INTRO;
 
   return (
     <Fragment>
+      {showHelpOthersIntroModal && <HelpOthersIntroModal />}
       <div css={screenLayout}>
         <SolveScreen open={solveScreenOpen} activeTask={activeTask} />
         <ChooseTaskScreen />
