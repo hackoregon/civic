@@ -104,6 +104,20 @@ const completeSaveYourselfTask = state => {
   state.activeTaskIndex += 1;
 };
 
+const completeSaveOthersTask = state => {
+  const activeTask = state.taskOrder[state.activeTaskIndex];
+  if (activeTask.completed === true) {
+    state.activeTaskPhase = MODAL_SOLVED_TASK;
+    phaseTimer.setDuration(taskPhases[MODAL_SOLVED_TASK].time);
+  } else if (activeTask.completed === false) {
+    state.activeTaskPhase = MODAL_UNSOLVED_TASK;
+    phaseTimer.setDuration(taskPhases[MODAL_UNSOLVED_TASK].time);
+  } else {
+    state.activeTaskPhase = MODAL_NO_ITEM;
+    phaseTimer.setDuration(taskPhases[MODAL_NO_ITEM].time);
+  }
+};
+
 const getRandomNumberFromRange = range => {
   const min = Math.ceil(range[0]);
   const max = Math.floor(range[1]);
@@ -112,10 +126,10 @@ const getRandomNumberFromRange = range => {
 
 // REDUCERS
 export const tasksReducer = createReducer(initialState, {
-  [actionTypes.GO_TO_NEXT_TASK_PHASE_NEW]: (state, action) => {
+  [actionTypes.GO_TO_NEXT_TASK_PHASE_NEW]: state => {
     // add check at start if game should end
     if (state.activeTaskPhase === SOLVING_SAVE_YOURSELF) {
-      completeSaveYourselfTask(state, action);
+      completeSaveYourselfTask(state);
     } else if (state.activeTaskPhase === MODAL_SAVE_OTHERS_INTRO) {
       state.activeTaskPhase = CHOOSE_TASK;
       phaseTimer.setDuration(taskPhases[CHOOSE_TASK].time);
@@ -126,17 +140,7 @@ export const tasksReducer = createReducer(initialState, {
       state.activeTaskPhase = SOLVING_SAVE_OTHERS;
       phaseTimer.setDuration(taskPhases[SOLVING_SAVE_OTHERS].time);
     } else if (state.activeTaskPhase === SOLVING_SAVE_OTHERS) {
-      const activeTask = state.taskOrder[state.activeTaskIndex];
-      if (activeTask.completed === true) {
-        state.activeTaskPhase = MODAL_SOLVED_TASK;
-        phaseTimer.setDuration(taskPhases[MODAL_SOLVED_TASK].time);
-      } else if (activeTask.completed === false) {
-        state.activeTaskPhase = MODAL_UNSOLVED_TASK;
-        phaseTimer.setDuration(taskPhases[MODAL_UNSOLVED_TASK].time);
-      } else {
-        state.activeTaskPhase = MODAL_NO_ITEM;
-        phaseTimer.setDuration(taskPhases[MODAL_NO_ITEM].time);
-      }
+      completeSaveOthersTask(state);
     } else if (
       state.activeTaskPhase === MODAL_SOLVED_TASK ||
       state.activeTaskPhase === MODAL_UNSOLVED_TASK ||
