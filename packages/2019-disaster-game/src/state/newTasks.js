@@ -144,6 +144,7 @@ export const tasksReducer = createReducer(initialState, {
     ) {
       state.activeTaskPhase = CHOOSE_TASK;
       phaseTimer.setDuration(taskPhases[CHOOSE_TASK].time);
+      state.activeTaskIndex += 1;
     }
     phaseTimer.start();
   },
