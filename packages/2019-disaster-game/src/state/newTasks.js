@@ -90,6 +90,32 @@ export const chooseTask = chosenTaskId => dispatch => {
   goToNextTaskPhase()(dispatch);
 };
 
+// UTILITY FUNCTIONS
+
+const getRandomNumberFromRange = range => {
+  const min = Math.ceil(range[0]);
+  const max = Math.floor(range[1]);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+export const getPossibleTasks = (_tasksForEnvironment, activeEnvironment) => {
+  // All possible tasks for the game environment
+  const saveYourselfTasks =
+    _tasksForEnvironment[activeEnvironment].saveYourself;
+  const saveOthersTasks = _tasksForEnvironment[activeEnvironment].saveOthers;
+  return [].concat(saveYourselfTasks, saveOthersTasks);
+};
+
+export const chooseRandomTaskId = (_tasksForEnvironment, activeEnvironment) => {
+  const possibleTasks = getPossibleTasks(
+    _tasksForEnvironment,
+    activeEnvironment
+  );
+  const randomIndex = Math.floor(Math.random() * possibleTasks.length);
+  const randomTask = possibleTasks[randomIndex];
+  return randomTask.id;
+};
+
 // REDUCER HELPERS
 /* eslint-disable no-param-reassign */
 
@@ -118,10 +144,20 @@ const completeSaveOthersTask = state => {
   }
 };
 
-const getRandomNumberFromRange = range => {
-  const min = Math.ceil(range[0]);
-  const max = Math.floor(range[1]);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+const applyChosenTask = (state, action) => {
+  const nextTask = state.tasks[action.chosenTaskId];
+  state.taskOrder.push(nextTask);
+};
+
+const chooseTaskIfNecessary = state => {
+  const nextTaskNotChosen = !state.taskOrder[state.activeTaskIndex];
+  if (nextTaskNotChosen) {
+    const randomTaskId = chooseRandomTaskId(
+      state.tasksForEnvironment,
+      state.activeEnvironment
+    );
+    applyChosenTask(state, { chosenTaskId: randomTaskId });
+  }
 };
 
 // REDUCERS
@@ -134,6 +170,7 @@ export const tasksReducer = createReducer(initialState, {
       state.activeTaskPhase = CHOOSE_TASK;
       phaseTimer.setDuration(taskPhases[CHOOSE_TASK].time);
     } else if (state.activeTaskPhase === CHOOSE_TASK) {
+      chooseTaskIfNecessary(state);
       state.activeTaskPhase = MODAL_CHOSEN_TASK;
       phaseTimer.setDuration(taskPhases[MODAL_CHOSEN_TASK].time);
     } else if (state.activeTaskPhase === MODAL_CHOSEN_TASK) {
@@ -164,8 +201,7 @@ export const tasksReducer = createReducer(initialState, {
     }
   },
   [actionTypes.CHOOSE_NEXT_TASK]: (state, action) => {
-    const nextTask = state.tasks[action.chosenTaskId];
-    state.taskOrder.push(nextTask);
+    applyChosenTask(state, action);
   }
 });
 /* eslint-enable no-param-reassign */
