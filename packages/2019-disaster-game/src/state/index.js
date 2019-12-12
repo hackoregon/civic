@@ -6,6 +6,7 @@ import { user } from "./user";
 import { settings } from "./settings";
 import { sfx } from "./sfx";
 import tasks from "./tasks";
+import newTasks from "./newTasks";
 
 export default function createReducer(asyncReducers) {
   return combineReducers({
@@ -16,6 +17,7 @@ export default function createReducer(asyncReducers) {
     settings,
     sfx,
     tasks,
+    newTasks,
     ...asyncReducers
   });
 }
