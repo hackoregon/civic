@@ -95,8 +95,6 @@ export const chooseTask = chosenTaskId => dispatch => {
 
 // Mark task as completed, increase activeTaskIndex, change to next phase if applicable, and start timer
 const completeSaveYourselfTask = state => {
-  if (state.taskOrder[state.activeTaskIndex])
-    state.taskOrder[state.activeTaskIndex].completed = false;
   if (state.activeTaskIndex === 1) {
     state.activeTaskPhase = MODAL_SAVE_OTHERS_INTRO;
     phaseTimer.setDuration(taskPhases[MODAL_SAVE_OTHERS_INTRO].time);
