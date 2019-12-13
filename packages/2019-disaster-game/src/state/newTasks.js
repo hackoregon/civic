@@ -155,12 +155,9 @@ const completeSaveOthersTask = state => {
   if (activeTask.completed === true) {
     state.activeTaskPhase = MODAL_SOLVED_TASK;
     phaseTimer.setDuration(taskPhases[MODAL_SOLVED_TASK].time);
-  } else if (activeTask.completed === false) {
+  } else {
     state.activeTaskPhase = MODAL_UNSOLVED_TASK;
     phaseTimer.setDuration(taskPhases[MODAL_UNSOLVED_TASK].time);
-  } else {
-    state.activeTaskPhase = MODAL_NO_ITEM;
-    phaseTimer.setDuration(taskPhases[MODAL_NO_ITEM].time);
   }
 };
 

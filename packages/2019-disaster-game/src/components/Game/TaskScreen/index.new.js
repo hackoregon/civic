@@ -19,6 +19,7 @@ import HelpOthersIntroModal from "../../atoms/HelpOthersIntroModal";
 import ChosenTaskModal from "../../atoms/ChosenTaskModal";
 import SuccessfulCompleteTaskModal from "../../atoms/SuccessfulCompleteTaskModal";
 import NeedRequiredItemModal from "../../atoms/NeedRequiredItemModal";
+import ShowCorrectItemModal from "../../atoms/ShowCorrectItemModal";
 import SolveScreen from "./SolveScreen";
 import ChooseTaskScreen from "./ChooseTaskScreen";
 
@@ -75,7 +76,7 @@ const TaskScreenContainer = ({
     // CHOOSE_TASK,
     MODAL_CHOSEN_TASK,
     MODAL_SOLVED_TASK,
-    // MODAL_UNSOLVED_TASK,
+    MODAL_UNSOLVED_TASK,
     MODAL_NO_ITEM
   } = taskPhaseKeys;
 
@@ -90,6 +91,7 @@ const TaskScreenContainer = ({
       SOLVING_SAVE_YOURSELF,
       SOLVING_SAVE_OTHERS,
       MODAL_SOLVED_TASK,
+      MODAL_UNSOLVED_TASK,
       MODAL_NO_ITEM
     ];
     const shouldBeOpen = phasesToBeOpenFor.indexOf(taskPhase) > -1;
@@ -97,6 +99,7 @@ const TaskScreenContainer = ({
   }, [
     MODAL_NO_ITEM,
     MODAL_SOLVED_TASK,
+    MODAL_UNSOLVED_TASK,
     SOLVING_SAVE_OTHERS,
     SOLVING_SAVE_YOURSELF,
     taskPhase
@@ -126,6 +129,7 @@ const TaskScreenContainer = ({
   const showChosenTaskModal = taskPhase === MODAL_CHOSEN_TASK;
   const showSuccessfulCompleteTaskModal = taskPhase === MODAL_SOLVED_TASK;
   const showNeedRequiredItemModal = taskPhase === MODAL_NO_ITEM;
+  const showShowCorrectItemModal = taskPhase === MODAL_UNSOLVED_TASK;
 
   return (
     <Fragment>
@@ -133,6 +137,7 @@ const TaskScreenContainer = ({
       {showChosenTaskModal && <ChosenTaskModal />}
       {showSuccessfulCompleteTaskModal && <SuccessfulCompleteTaskModal />}
       {showNeedRequiredItemModal && <NeedRequiredItemModal />}
+      {showShowCorrectItemModal && <ShowCorrectItemModal />}
       <div css={screenLayout}>
         <SolveScreen open={solveScreenOpen} activeTask={activeTask} />
         <ChooseTaskScreen />
