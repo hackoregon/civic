@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 /** @jsx jsx */
 import PropTypes from "prop-types";
 import { css, jsx } from "@emotion/core";
@@ -7,6 +7,8 @@ import { bindActionCreators } from "redux";
 
 import { palette } from "../../../constants/style";
 import media from "../../../utils/mediaQueries";
+import Timer from "../../../utils/timer";
+import usePrevious from "../../../state/hooks/usePrevious";
 import {
   getTaskPhase,
   taskPhaseKeys,
@@ -80,13 +82,46 @@ const MatchLockInterface = ({
   choseCorrectItemForTask,
   chooseTask,
   addPointsToState,
-  addItemToPlayerKitInState
+  addItemToPlayerKitInState,
+  restartNoInteractionTimer,
+  noInteractionDuration,
+  noInteractionCallback
 }) => {
   const [open, setOpen] = useState(false);
+  const [interactionTimeout] = useState(new Timer());
+  const prevRestartNoInteractionTimer = usePrevious(restartNoInteractionTimer);
+
+  const restartInteractionTimeout = useCallback(() => {
+    interactionTimeout.stop();
+
+    interactionTimeout.setDuration(noInteractionDuration);
+    interactionTimeout.addCompleteCallback(() => {
+      noInteractionCallback();
+    });
+    interactionTimeout.start();
+  }, [interactionTimeout, noInteractionCallback, noInteractionDuration]);
 
   useEffect(() => {
     setOpen(true);
+    restartInteractionTimeout();
+
+    return () => {
+      interactionTimeout.stop();
+    };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (
+      restartNoInteractionTimer &&
+      restartNoInteractionTimer !== prevRestartNoInteractionTimer
+    ) {
+      restartInteractionTimeout();
+    }
+  }, [
+    prevRestartNoInteractionTimer,
+    restartNoInteractionTimer,
+    restartInteractionTimeout
+  ]);
 
   const onKitItemSelection = orbModel => {
     if (orbModel.type === activeTask.requiredItem) {
@@ -120,6 +155,7 @@ const MatchLockInterface = ({
   };
 
   const onOrbSelection = orbModel => {
+    restartInteractionTimeout();
     if (activeScreen === "kit") {
       kitOnOrbSelection(orbModel);
     } else {
@@ -176,7 +212,10 @@ MatchLockInterface.propTypes = {
   choseCorrectItemForTask: PropTypes.func,
   chooseTask: PropTypes.func,
   addPointsToState: PropTypes.func,
-  addItemToPlayerKitInState: PropTypes.func
+  addItemToPlayerKitInState: PropTypes.func,
+  restartNoInteractionTimer: PropTypes.bool,
+  noInteractionDuration: PropTypes.number,
+  noInteractionCallback: PropTypes.func
 };
 
 const mapStateToProps = state => ({

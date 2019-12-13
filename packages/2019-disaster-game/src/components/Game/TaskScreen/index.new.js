@@ -1,10 +1,11 @@
 /** @jsx jsx */
 import { css, jsx, keyframes } from "@emotion/core";
-import { useState, useEffect, memo, Fragment } from "react";
+import { useState, useEffect, useCallback, memo, Fragment } from "react";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
+import Timer from "../../../utils/timer";
 import {
   goToNextTaskPhase as _goToNextTaskPhase,
   finishSolveTaskEarly as _finishSolveTaskEarly,
@@ -13,6 +14,7 @@ import {
   taskPhaseKeys
 } from "../../../state/newTasks";
 import { getPlayerKit } from "../../../state/kit";
+import usePrevious from "../../../state/hooks/usePrevious";
 import { palette } from "../../../constants/style";
 import MatchLockInterface from "../../atoms/MatchLockInterface";
 import HelpOthersIntroModal from "../../atoms/HelpOthersIntroModal";
@@ -20,6 +22,7 @@ import ChosenTaskModal from "../../atoms/ChosenTaskModal";
 import SuccessfulCompleteTaskModal from "../../atoms/SuccessfulCompleteTaskModal";
 import NeedRequiredItemModal from "../../atoms/NeedRequiredItemModal";
 import ShowCorrectItemModal from "../../atoms/ShowCorrectItemModal";
+import RestartModal from "../../atoms/RestartModal";
 import SolveScreen from "./SolveScreen";
 import ChooseTaskScreen from "./ChooseTaskScreen";
 
@@ -66,9 +69,12 @@ const TaskScreenContainer = ({
   finishSolveTaskEarly,
   taskPhase,
   activeTask,
-  playerKit
+  playerKit,
+  restartGame
 }) => {
   const [solveScreenOpen, setSolveScreenOpen] = useState(true);
+  const [showRestartModal, setShowRestartModal] = useState(false);
+  const prevShowRestart = usePrevious(showRestartModal);
   const {
     SOLVING_SAVE_YOURSELF,
     SOLVING_SAVE_OTHERS,
@@ -79,6 +85,7 @@ const TaskScreenContainer = ({
     MODAL_UNSOLVED_TASK,
     MODAL_NO_ITEM
   } = taskPhaseKeys;
+  const [restartTimer] = useState(new Timer());
 
   useEffect(initializeTaskPhaseTimers, []);
 
@@ -120,10 +127,33 @@ const TaskScreenContainer = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [SOLVING_SAVE_OTHERS, finishSolveTaskEarly, playerKit, taskPhase]);
 
-  const noInteractionCallback = () => {
-    console.log("noInteractionCallback");
+  /* RESTART MODAL TIMER
+    After 10s, restart the game unless the cancel callback is called in the RestartModal
+  */
+  const startRestartTimer = useCallback(() => {
+    restartTimer.setDuration(10);
+    restartTimer.addCompleteCallback(() => {
+      restartGame();
+    });
+    restartTimer.start();
+  }, [restartGame, restartTimer]);
+
+  // Auto restart when showing modal after x time passed
+  useEffect(() => {
+    if (showRestartModal && prevShowRestart !== showRestartModal) {
+      startRestartTimer();
+    }
+  }, [prevShowRestart, showRestartModal, startRestartTimer]);
+
+  const cancelRestart = () => {
+    restartTimer.reset();
+    setShowRestartModal(false);
   };
-  const showRestartModal = false;
+
+  const noInteractionCallback = () => {
+    setShowRestartModal(true);
+  };
+
   const showHelpOthersIntroModal = taskPhase === MODAL_SAVE_OTHERS_INTRO;
   const showChosenTaskModal = taskPhase === MODAL_CHOSEN_TASK;
   const showSuccessfulCompleteTaskModal = taskPhase === MODAL_SOLVED_TASK;
@@ -147,6 +177,9 @@ const TaskScreenContainer = ({
       {showSuccessfulCompleteTaskModal && <SuccessfulCompleteTaskModal />}
       {showNeedRequiredItemModal && <NeedRequiredItemModal />}
       {showShowCorrectItemModal && <ShowCorrectItemModal />}
+      {showRestartModal && (
+        <RestartModal cancelRestart={cancelRestart} restartGame={restartGame} />
+      )}
       <div css={screenLayout}>
         <SolveScreen open={solveScreenOpen} activeTask={activeTask} />
         <ChooseTaskScreen />
@@ -192,7 +225,8 @@ TaskScreenContainer.propTypes = {
       people: PropTypes.number,
       pets: PropTypes.number
     })
-  })
+  }),
+  restartGame: PropTypes.func
 };
 
 const mapStateToProps = state => ({
