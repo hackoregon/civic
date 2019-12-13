@@ -73,7 +73,7 @@ const TaskScreenContainer = ({
     SOLVING_SAVE_YOURSELF,
     SOLVING_SAVE_OTHERS,
     MODAL_SAVE_OTHERS_INTRO,
-    // CHOOSE_TASK,
+    CHOOSE_TASK,
     MODAL_CHOSEN_TASK,
     MODAL_SOLVED_TASK,
     MODAL_UNSOLVED_TASK,
@@ -120,7 +120,6 @@ const TaskScreenContainer = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [SOLVING_SAVE_OTHERS, finishSolveTaskEarly, playerKit, taskPhase]);
 
-  const interfaceMessage = "interfaceMessage";
   const noInteractionCallback = () => {
     console.log("noInteractionCallback");
   };
@@ -130,6 +129,16 @@ const TaskScreenContainer = ({
   const showSuccessfulCompleteTaskModal = taskPhase === MODAL_SOLVED_TASK;
   const showNeedRequiredItemModal = taskPhase === MODAL_NO_ITEM;
   const showShowCorrectItemModal = taskPhase === MODAL_UNSOLVED_TASK;
+
+  let interfaceMessage = "";
+
+  if (taskPhase === SOLVING_SAVE_YOURSELF && activeTask) {
+    interfaceMessage = activeTask.saveYourselfClue;
+  } else if (taskPhase === SOLVING_SAVE_OTHERS && activeTask) {
+    interfaceMessage = activeTask.clue;
+  } else if (taskPhase === CHOOSE_TASK) {
+    interfaceMessage = "Who should we help next?";
+  }
 
   return (
     <Fragment>
