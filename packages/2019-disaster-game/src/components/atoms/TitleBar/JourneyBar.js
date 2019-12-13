@@ -137,12 +137,14 @@ const JourneyBar = ({
       SOLVING_SAVE_OTHERS,
       CHOOSE_TASK
     ];
-    if (showTimerPhases.indexOf(activeTaskPhase) > -1) {
+    const phaseShouldHaveTimer = showTimerPhases.indexOf(activeTaskPhase) > -1;
+    const resetForSecondSaveYourselfTask = activeTaskIndex === 1;
+    if (phaseShouldHaveTimer || resetForSecondSaveYourselfTask) {
       setChapterTimeLeft(allTaskPhaseData[activeTaskPhase].time - 1);
     } else {
       setChapterTimeLeft(0);
     }
-  }, [activeTaskPhase, allTaskPhaseData]);
+  }, [activeTaskPhase, allTaskPhaseData, activeTaskIndex]);
 
   useEffect(() => {
     const countdownInterval = setInterval(tick, 1000);
