@@ -35,15 +35,16 @@ const {
   MODAL_NO_ITEM
 } = taskPhaseKeys;
 
+// +1 added to times because it makes the timer look nicer
 const taskPhases = {
-  [SOLVING_SAVE_YOURSELF]: { time: 30 },
-  [SOLVING_SAVE_OTHERS]: { time: 20 },
-  [MODAL_SAVE_OTHERS_INTRO]: { time: 10 },
-  [CHOOSE_TASK]: { time: 20 },
-  [MODAL_CHOSEN_TASK]: { time: 10 },
-  [MODAL_SOLVED_TASK]: { time: 10 },
-  [MODAL_UNSOLVED_TASK]: { time: 10 },
-  [MODAL_NO_ITEM]: { time: 10 }
+  [SOLVING_SAVE_YOURSELF]: { time: 31 },
+  [SOLVING_SAVE_OTHERS]: { time: 21 },
+  [MODAL_SAVE_OTHERS_INTRO]: { time: 11 },
+  [CHOOSE_TASK]: { time: 21 },
+  [MODAL_CHOSEN_TASK]: { time: 11 },
+  [MODAL_SOLVED_TASK]: { time: 11 },
+  [MODAL_UNSOLVED_TASK]: { time: 11 },
+  [MODAL_NO_ITEM]: { time: 11 }
 };
 
 const actionTypes = {
@@ -251,6 +252,11 @@ export const getActiveTaskIndex = createSelector(
 export const getTaskPhase = createSelector(
   ["newTasks.activeTaskPhase"],
   activeTaskPhase => activeTaskPhase
+);
+
+export const getAllTaskPhaseData = createSelector(
+  ["newTasks.taskPhases"],
+  allTaskPhaseData => allTaskPhaseData
 );
 
 export const getWeightedTasks = createSelector(
