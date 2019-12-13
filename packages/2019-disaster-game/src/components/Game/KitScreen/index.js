@@ -134,9 +134,9 @@ const KitScreen = ({
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // const noInteractionCallback = () => {
-  //   setShowRestart(true);
-  // };
+  const noInteractionCallback = () => {
+    setShowRestart(true);
+  };
 
   const cancelRestart = () => {
     restartTimer.reset();
@@ -159,6 +159,8 @@ const KitScreen = ({
       <MatchLockInterface
         activeScreen="kit"
         interfaceMessage="What do we need?"
+        noInteractionCallback={noInteractionCallback}
+        noInteractionDuration={14}
       />
     </Fragment>
   );
