@@ -6,12 +6,14 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import Timer from "../../../utils/timer";
+import { goToNextChapter } from "../../../state/chapters";
 import {
-  goToNextTaskPhase as _goToNextTaskPhase,
+  startChapterAndPhaseTimers,
   finishSolveTaskEarly as _finishSolveTaskEarly,
   getTaskPhase,
   getActiveTask,
-  taskPhaseKeys
+  taskPhaseKeys,
+  getEndingChapter
 } from "../../../state/newTasks";
 import { getPlayerKit } from "../../../state/kit";
 import usePrevious from "../../../state/hooks/usePrevious";
@@ -65,15 +67,18 @@ const bg3 = css`
 `;
 
 const TaskScreenContainer = ({
-  initializeTaskPhaseTimers,
+  init,
   finishSolveTaskEarly,
   taskPhase,
   activeTask,
   playerKit,
-  restartGame
+  restartGame,
+  endingChapter,
+  endChapter
 }) => {
   const [solveScreenOpen, setSolveScreenOpen] = useState(true);
   const [showRestartModal, setShowRestartModal] = useState(false);
+  const [shouldEndChapter, setShouldEndChapter] = useState(false);
   const prevShowRestart = usePrevious(showRestartModal);
   const {
     SOLVING_SAVE_YOURSELF,
@@ -87,7 +92,22 @@ const TaskScreenContainer = ({
   } = taskPhaseKeys;
   const [restartTimer] = useState(new Timer());
 
-  useEffect(initializeTaskPhaseTimers, []);
+  // Start chapter timer and phase timer
+  useEffect(init, []);
+
+  // End chapter
+  useEffect(() => {
+    if (endingChapter) {
+      setShouldEndChapter(true);
+    }
+  }, [endingChapter, endChapter]);
+
+  useEffect(() => {
+    const hasSeenSolvingResults = taskPhase === CHOOSE_TASK;
+    if (hasSeenSolvingResults && shouldEndChapter) {
+      endChapter();
+    }
+  }, [CHOOSE_TASK, endChapter, shouldEndChapter, taskPhase]);
 
   /*
     Phase: Change to solving
@@ -198,7 +218,7 @@ const TaskScreenContainer = ({
 };
 
 TaskScreenContainer.propTypes = {
-  initializeTaskPhaseTimers: PropTypes.func,
+  init: PropTypes.func,
   finishSolveTaskEarly: PropTypes.func,
   taskPhase: PropTypes.oneOf([...Object.values(taskPhaseKeys)]),
   playerKit: PropTypes.shape({}),
@@ -226,18 +246,22 @@ TaskScreenContainer.propTypes = {
       pets: PropTypes.number
     })
   }),
-  restartGame: PropTypes.func
+  restartGame: PropTypes.func,
+  endingChapter: PropTypes.bool,
+  endChapter: PropTypes.func
 };
 
 const mapStateToProps = state => ({
   taskPhase: getTaskPhase(state),
   activeTask: getActiveTask(state),
-  playerKit: getPlayerKit(state)
+  playerKit: getPlayerKit(state),
+  endingChapter: getEndingChapter(state)
 });
 
 const mapDispatchToProps = dispatch => ({
-  initializeTaskPhaseTimers: bindActionCreators(_goToNextTaskPhase, dispatch),
-  finishSolveTaskEarly: bindActionCreators(_finishSolveTaskEarly, dispatch)
+  init: bindActionCreators(startChapterAndPhaseTimers, dispatch),
+  finishSolveTaskEarly: bindActionCreators(_finishSolveTaskEarly, dispatch),
+  endChapter: bindActionCreators(goToNextChapter, dispatch)
 });
 
 export default connect(

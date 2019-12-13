@@ -52,9 +52,12 @@ const actionTypes = {
   CHOSE_CORRECT_ITEM_FOR_TASK: "CHOSE_CORRECT_ITEM_FOR_TASK",
   CHOOSE_NEXT_TASK: "CHOOSE_NEXT_TASK",
   MANUAL_CHANGE_TASK_PHASE: "MANUAL_CHANGE_TASK_PHASE",
-  RESET_STATE: "RESET_STATE"
+  RESET_STATE: "RESET_STATE",
+  START_CHAPTER_TIMER: "START_CHAPTER_TIMER",
+  END_CHAPTER: "END_CHAPTER"
 };
 
+const chapterTimer = new Timer();
 const phaseTimer = new Timer();
 
 // INITIAL STATE
@@ -66,7 +69,8 @@ const initialState = {
   taskOrder: shuffle(tasksForEnvironment[defaultEnv].saveYourself),
   activeTaskIndex: -1,
   activeTaskPhase: SOLVING_SAVE_YOURSELF,
-  taskPhases
+  taskPhases,
+  endingChapter: false
 };
 
 // ACTIONS
@@ -114,6 +118,11 @@ export const finishSolveTaskEarly = duration => dispatch => {
 
 export const resetState = () => dispatch => {
   dispatch({ type: actionTypes.RESET_STATE });
+};
+
+export const startChapterAndPhaseTimers = () => dispatch => {
+  dispatch({ type: actionTypes.START_CHAPTER_TIMER, dispatch });
+  goToNextTaskPhase()(dispatch);
 };
 
 // UTILITY FUNCTIONS
@@ -185,12 +194,23 @@ const chooseTaskIfNecessary = state => {
 
 // REDUCERS
 export const tasksReducer = createReducer(initialState, {
+  [actionTypes.START_CHAPTER_TIMER]: (state, action) => {
+    chapterTimer.reset();
+    chapterTimer.setDuration(120);
+
+    chapterTimer.addCompleteCallback(() => {
+      action.dispatch({ type: actionTypes.END_CHAPTER });
+    });
+    chapterTimer.start();
+  },
+  [actionTypes.END_CHAPTER]: state => {
+    state.endingChapter = true;
+  },
   [actionTypes.MANUAL_CHANGE_TASK_PHASE]: (state, action) => {
     const { phase } = action;
     state.activeTaskPhase = phase;
   },
   [actionTypes.GO_TO_NEXT_TASK_PHASE_NEW]: state => {
-    // add check at start if game should end
     if (state.activeTaskPhase === SOLVING_SAVE_YOURSELF) {
       completeSaveYourselfTask(state);
     } else if (state.activeTaskPhase === MODAL_SAVE_OTHERS_INTRO) {
@@ -232,6 +252,7 @@ export const tasksReducer = createReducer(initialState, {
   },
   [actionTypes.RESET_STATE]: () => {
     phaseTimer.reset();
+    chapterTimer.reset();
     return initialState;
   }
 });
@@ -240,6 +261,11 @@ export const tasksReducer = createReducer(initialState, {
 export default tasksReducer;
 
 // SELECTORS
+
+export const getEndingChapter = createSelector(
+  ["newTasks.endingChapter"],
+  endingChapter => endingChapter
+);
 
 export const getAllTasks = createSelector(
   ["newTasks.tasks"],
