@@ -7,8 +7,6 @@ import { bindActionCreators } from "redux";
 
 import { palette } from "../../../constants/style";
 import media from "../../../utils/mediaQueries";
-import { GUIStyle } from "../../Game/index";
-import OrbManager from "../OrbManager";
 import {
   getTaskPhase,
   taskPhaseKeys,
@@ -16,6 +14,10 @@ import {
   choseCorrectItemForTask as _choseCorrectItemForTask,
   chooseTask as _chooseTask
 } from "../../../state/newTasks";
+import { addPoints } from "../../../state/user";
+import { addItemToPlayerKit } from "../../../state/kit";
+import { GUIStyle } from "../../Game/index";
+import OrbManager from "../OrbManager";
 
 const containerStyle = css`
   transform: translateY(1000%);
@@ -76,7 +78,9 @@ const MatchLockInterface = ({
   taskPhase,
   activeTask,
   choseCorrectItemForTask,
-  chooseTask
+  chooseTask,
+  addPointsToState,
+  addItemToPlayerKitInState
 }) => {
   const [open, setOpen] = useState(false);
 
@@ -96,7 +100,15 @@ const MatchLockInterface = ({
     chooseTask(taskId);
   };
 
-  const onOrbSelection = orbModel => {
+  const kitOnOrbSelection = orbModel => {
+    if (orbModel.good) {
+      addItemToPlayerKitInState(orbModel);
+      addPointsToState(orbModel.points);
+    }
+    return orbModel.good;
+  };
+
+  const taskPhaseOnOrbSelection = orbModel => {
     if (
       taskPhase === SOLVING_SAVE_YOURSELF ||
       taskPhase === SOLVING_SAVE_OTHERS
@@ -107,7 +119,16 @@ const MatchLockInterface = ({
     }
   };
 
-  const checkItemIsCorrect = orbModel => {
+  const onOrbSelection = orbModel => {
+    if (activeScreen === "kit") {
+      kitOnOrbSelection(orbModel);
+    } else {
+      taskPhaseOnOrbSelection(orbModel);
+    }
+  };
+
+  // eslint-disable-next-line consistent-return
+  const taskPhaseCheckItemIsCorrect = orbModel => {
     if (
       taskPhase === SOLVING_SAVE_YOURSELF ||
       taskPhase === SOLVING_SAVE_OTHERS
@@ -117,6 +138,13 @@ const MatchLockInterface = ({
     if (taskPhase === CHOOSE_TASK) {
       return true;
     }
+  };
+
+  const checkItemIsCorrect = orbModel => {
+    if (activeScreen === "kit") {
+      return true;
+    }
+    return taskPhaseCheckItemIsCorrect(orbModel);
   };
 
   return (
@@ -146,7 +174,9 @@ MatchLockInterface.propTypes = {
   taskPhase: PropTypes.oneOf([...Object.values(taskPhaseKeys)]),
   activeTask: PropTypes.shape({}),
   choseCorrectItemForTask: PropTypes.func,
-  chooseTask: PropTypes.func
+  chooseTask: PropTypes.func,
+  addPointsToState: PropTypes.func,
+  addItemToPlayerKitInState: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -155,6 +185,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  addPointsToState: bindActionCreators(addPoints, dispatch),
+  addItemToPlayerKitInState: bindActionCreators(addItemToPlayerKit, dispatch),
   choseCorrectItemForTask: bindActionCreators(
     _choseCorrectItemForTask,
     dispatch
