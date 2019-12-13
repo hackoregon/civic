@@ -49,7 +49,8 @@ const taskPhases = {
 const actionTypes = {
   GO_TO_NEXT_TASK_PHASE_NEW: "GO_TO_NEXT_TASK_PHASE_NEW",
   CHOSE_CORRECT_ITEM_FOR_TASK: "CHOSE_CORRECT_ITEM_FOR_TASK",
-  CHOOSE_NEXT_TASK: "CHOOSE_NEXT_TASK"
+  CHOOSE_NEXT_TASK: "CHOOSE_NEXT_TASK",
+  MANUAL_CHANGE_TASK_PHASE: "MANUAL_CHANGE_TASK_PHASE"
 };
 
 const phaseTimer = new Timer();
@@ -88,6 +89,25 @@ export const choseCorrectItemForTask = activeTask => dispatch => {
 export const chooseTask = chosenTaskId => dispatch => {
   dispatch({ type: actionTypes.CHOOSE_NEXT_TASK, chosenTaskId, phaseTimer });
   goToNextTaskPhase()(dispatch);
+};
+
+export const finishSolveTaskEarly = duration => dispatch => {
+  phaseTimer.reset();
+  phaseTimer.setDuration(duration);
+  phaseTimer.addCompleteCallback(() => {
+    dispatch({
+      type: actionTypes.MANUAL_CHANGE_TASK_PHASE,
+      phase: MODAL_NO_ITEM,
+      dispatch
+    });
+    phaseTimer.reset();
+    phaseTimer.setDuration(taskPhases[MODAL_NO_ITEM].time);
+    phaseTimer.addCompleteCallback(() => {
+      goToNextTaskPhase()(dispatch);
+    });
+    phaseTimer.start();
+  });
+  phaseTimer.start();
 };
 
 // UTILITY FUNCTIONS
@@ -162,6 +182,10 @@ const chooseTaskIfNecessary = state => {
 
 // REDUCERS
 export const tasksReducer = createReducer(initialState, {
+  [actionTypes.MANUAL_CHANGE_TASK_PHASE]: (state, action) => {
+    const { phase } = action;
+    state.activeTaskPhase = phase;
+  },
   [actionTypes.GO_TO_NEXT_TASK_PHASE_NEW]: state => {
     // add check at start if game should end
     if (state.activeTaskPhase === SOLVING_SAVE_YOURSELF) {
