@@ -13,12 +13,8 @@ import {
   goToNextChapter,
   getActiveChapterDuration
 } from "../../../state/chapters";
-import {
-  getKitCreationItems,
-  addItemToPlayerKit,
-  getPlayerKit
-} from "../../../state/kit";
-import { addPoints, addBadge } from "../../../state/user";
+import { getKitCreationItems, getPlayerKit } from "../../../state/kit";
+import { addBadge } from "../../../state/user";
 import usePrevious from "../../../state/hooks/usePrevious";
 import { TYPES as SFX_TYPES } from "../../../constants/sfx";
 import { palette } from "../../../constants/style";
@@ -66,8 +62,6 @@ const KitScreen = ({
   possibleItems,
   playerKit,
   addPreparerBadge,
-  addPointsToState,
-  addItemToPlayerKitInState,
   endChapter,
   chapterDuration,
   restartGame,
@@ -116,16 +110,6 @@ const KitScreen = ({
     prevPlayerKit
   ]);
 
-  const onKitItemSelection = kitItem => {
-    if (kitItem.good) {
-      addItemToPlayerKitInState(kitItem);
-      addPointsToState(kitItem.points);
-    }
-    return kitItem.good;
-  };
-
-  const checkIfItemIsGood = kitItem => kitItem.good;
-
   const startRestartTimer = useCallback(() => {
     restartTimer.setDuration(10);
     restartTimer.addCompleteCallback(() => {
@@ -150,9 +134,9 @@ const KitScreen = ({
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const noInteractionCallback = () => {
-    setShowRestart(true);
-  };
+  // const noInteractionCallback = () => {
+  //   setShowRestart(true);
+  // };
 
   const cancelRestart = () => {
     restartTimer.reset();
@@ -173,13 +157,8 @@ const KitScreen = ({
         {/* somehow adding this comment fixes the production build -- it's related to @babel/plugin-transform-react-constant-elements */}
       </MapStyle>
       <MatchLockInterface
-        possibleItems={possibleItems}
-        onOrbSelection={onKitItemSelection}
-        checkItemIsCorrect={checkIfItemIsGood}
         activeScreen="kit"
         interfaceMessage="What do we need?"
-        noInteractionCallback={noInteractionCallback}
-        noInteractionDuration={15}
       />
     </Fragment>
   );
@@ -194,8 +173,6 @@ KitScreen.propTypes = {
       weighting: PropTypes.number
     })
   ),
-  addPointsToState: PropTypes.func,
-  addItemToPlayerKitInState: PropTypes.func,
   endChapter: PropTypes.func,
   chapterDuration: PropTypes.number,
   playerKit: PropTypes.shape({}),
@@ -212,8 +189,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addPointsToState: bindActionCreators(addPoints, dispatch),
-  addItemToPlayerKitInState: bindActionCreators(addItemToPlayerKit, dispatch),
   addPreparerBadge: bindActionCreators(addBadge, dispatch),
   endChapter: bindActionCreators(goToNextChapter, dispatch),
   playAudio: bindActionCreators(_playAudio, dispatch),
