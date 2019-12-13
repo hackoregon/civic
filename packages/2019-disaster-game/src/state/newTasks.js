@@ -289,3 +289,23 @@ export const getWeightedTasks = createSelector(
     return possibleTasks;
   }
 );
+
+// Returns pets / people save obj. Doesn't include first 2 "Save Yourself" tasks
+export const getSavedMetrics = createSelector(
+  ["newTasks.taskOrder"],
+  taskOrder => {
+    return taskOrder.reduce(
+      (accumulator, task, index) => {
+        if (index > 1) {
+          accumulator.people += task.completedResults.people;
+          accumulator.pets += task.completedResults.pets;
+        }
+        return accumulator;
+      },
+      {
+        people: 0,
+        pets: 0
+      }
+    );
+  }
+);
