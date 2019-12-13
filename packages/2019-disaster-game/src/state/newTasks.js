@@ -51,7 +51,8 @@ const actionTypes = {
   GO_TO_NEXT_TASK_PHASE_NEW: "GO_TO_NEXT_TASK_PHASE_NEW",
   CHOSE_CORRECT_ITEM_FOR_TASK: "CHOSE_CORRECT_ITEM_FOR_TASK",
   CHOOSE_NEXT_TASK: "CHOOSE_NEXT_TASK",
-  MANUAL_CHANGE_TASK_PHASE: "MANUAL_CHANGE_TASK_PHASE"
+  MANUAL_CHANGE_TASK_PHASE: "MANUAL_CHANGE_TASK_PHASE",
+  RESET_STATE: "RESET_STATE"
 };
 
 const phaseTimer = new Timer();
@@ -109,6 +110,10 @@ export const finishSolveTaskEarly = duration => dispatch => {
     phaseTimer.start();
   });
   phaseTimer.start();
+};
+
+export const resetState = () => dispatch => {
+  dispatch({ type: actionTypes.RESET_STATE });
 };
 
 // UTILITY FUNCTIONS
@@ -224,6 +229,10 @@ export const tasksReducer = createReducer(initialState, {
   },
   [actionTypes.CHOOSE_NEXT_TASK]: (state, action) => {
     applyChosenTask(state, action);
+  },
+  [actionTypes.RESET_STATE]: () => {
+    phaseTimer.reset();
+    return initialState;
   }
 });
 /* eslint-enable no-param-reassign */
