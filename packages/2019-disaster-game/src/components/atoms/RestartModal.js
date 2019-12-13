@@ -67,12 +67,12 @@ const restartButton = css`
 `;
 
 const playButton = css`
-  background-color: ${palette.lightBlue};
-  box-shadow: 0px 50px 0px 0px ${palette.blue};
+  background-color: ${palette.lightLime};
+  box-shadow: 0px 50px 0px 0px ${palette.lime};
 
   &:active {
-    background-color: ${palette.blue};
-    box-shadow: 0px 50px 0px 0px ${palette.darkBlue};
+    background-color: ${palette.lime};
+    box-shadow: 0px 50px 0px 0px ${palette.darkLime};
   }
 `;
 
@@ -82,6 +82,8 @@ const buttonFont = css`
   font-family: "Luckiest Guy", sans-serif;
   font-size: 7rem;
   color: white;
+  text-shadow: 1px 1px 3px ${palette.darkGrey}, 1px -1px 3px ${palette.darkGrey},
+    -1px 1px 3px ${palette.darkGrey}, -1px -1px 3px ${palette.darkGrey};
 `;
 
 const RestartModal = ({ cancelRestart, restartGame, playSFX }) => {
