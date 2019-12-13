@@ -18,7 +18,7 @@ import {
   getActiveTask,
   getActiveTaskIndex
 } from "../../state/newTasks";
-import { getPlayerKitItems } from "../../state/kit";
+import { getPlayerKitItems, getKitCreationItems } from "../../state/kit";
 
 import Orb from "./Orb";
 import {
@@ -62,7 +62,9 @@ const OrbManager = ({
   activeTaskIndex,
   weightedPlayerKitItems,
   weightedTasks,
-  activeTask
+  activeTask,
+  activeScreen,
+  possibleKitItems
 } = {}) => {
   const [hasInitialized, setHasInitialized] = useState(false);
   const [orbModels, setOrbModelsState] = useState([]);
@@ -92,7 +94,9 @@ const OrbManager = ({
     if (newBounds || newTaskPhase || resetForSaveYourself) {
       let possibleItems = [];
 
-      if (taskPhase === CHOOSE_TASK) {
+      if (activeScreen === "kit") {
+        possibleItems = possibleKitItems;
+      } else if (taskPhase === CHOOSE_TASK) {
         possibleItems = weightedTasks;
       } else if (
         taskPhase === SOLVING_SAVE_YOURSELF ||
@@ -120,7 +124,9 @@ const OrbManager = ({
     weightedTasks,
     weightedPlayerKitItems,
     activeTask,
-    prevActiveTaskIndex
+    prevActiveTaskIndex,
+    activeScreen,
+    possibleKitItems
   ]);
 
   const addOrbScore = useCallback(
@@ -332,7 +338,8 @@ const mapStateToProps = state => ({
   activeTask: getActiveTask(state),
   activeTaskIndex: getActiveTaskIndex(state),
   weightedPlayerKitItems: getPlayerKitItems(state),
-  weightedTasks: getWeightedTasks(state)
+  weightedTasks: getWeightedTasks(state),
+  possibleKitItems: getKitCreationItems(state)
 });
 
 // use memo to not re-render OrbManager unless its props change
