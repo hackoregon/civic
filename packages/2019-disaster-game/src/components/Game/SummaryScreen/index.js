@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
 
-import { resetState as resetStateTasks } from "../../../state/tasks";
+import { resetState as resetStateTasks } from "../../../state/newTasks";
 import { resetState as resetStateKit } from "../../../state/kit";
 import { resetState as resetStateUser } from "../../../state/user";
 import { goToChapter, goToNextChapter } from "../../../state/chapters";
