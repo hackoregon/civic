@@ -5,7 +5,6 @@ import { kit } from "./kit";
 import { user } from "./user";
 import { settings } from "./settings";
 import { sfx } from "./sfx";
-import tasks from "./tasks";
 import newTasks from "./newTasks";
 
 export default function createReducer(asyncReducers) {
@@ -16,7 +15,6 @@ export default function createReducer(asyncReducers) {
     user,
     settings,
     sfx,
-    tasks,
     newTasks,
     ...asyncReducers
   });
