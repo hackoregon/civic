@@ -3,9 +3,9 @@ import { css, jsx } from "@emotion/core";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import { palette } from "../../constants/style";
-import { getActiveTask } from "../../state/newTasks";
-import { getItems } from "../../state/kit";
+import { palette } from "../../../../constants/style";
+import { getActiveTask } from "../../../../state/newTasks";
+import { getItems } from "../../../../state/kit";
 
 const modalContainer = css`
   position: absolute;
@@ -54,7 +54,7 @@ const NeedRequiredItemModal = ({ activeTask, allItems }) => {
     <div css={modalContainer}>
       <div css={messageStyle}>
         <p css={textStyle}>
-          Next time we should bring {requiredItemData.itemTitle}.
+          Next time use {requiredItemData.itemTitle} from your kit.
         </p>
         <img
           src={requiredItemData.fullSvg}

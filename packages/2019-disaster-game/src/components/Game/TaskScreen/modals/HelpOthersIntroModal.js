@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
-import neighborsSVG from "../../../assets/neighbors.svg";
-import { palette } from "../../constants/style";
+import neighborsSVG from "../../../../../assets/neighbors.svg";
+import { palette } from "../../../../constants/style";
 
 const modalContainer = css`
   position: absolute;

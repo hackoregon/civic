@@ -19,12 +19,12 @@ import { getPlayerKit } from "../../../state/kit";
 import usePrevious from "../../../state/hooks/usePrevious";
 import { palette } from "../../../constants/style";
 import MatchLockInterface from "../../atoms/MatchLockInterface";
-import HelpOthersIntroModal from "../../atoms/HelpOthersIntroModal";
-import ChosenTaskModal from "../../atoms/ChosenTaskModal";
-import SuccessfulCompleteTaskModal from "../../atoms/SuccessfulCompleteTaskModal";
-import NeedRequiredItemModal from "../../atoms/NeedRequiredItemModal";
-import ShowCorrectItemModal from "../../atoms/ShowCorrectItemModal";
 import RestartModal from "../../atoms/RestartModal";
+import HelpOthersIntroModal from "./modals/HelpOthersIntroModal";
+import ChosenTaskModal from "./modals/ChosenTaskModal";
+import SuccessfulCompleteTaskModal from "./modals/SuccessfulCompleteTaskModal";
+import NeedRequiredItemModal from "./modals/NeedRequiredItemModal";
+import ShowCorrectItemModal from "./modals/ShowCorrectItemModal";
 import SolveScreen from "./SolveScreen";
 import ChooseTaskScreen from "./ChooseTaskScreen";
 

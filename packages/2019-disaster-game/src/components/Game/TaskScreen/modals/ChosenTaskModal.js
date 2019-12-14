@@ -2,8 +2,8 @@
 import { css, jsx } from "@emotion/core";
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
-import { getActiveTask } from "../../state/newTasks";
-import { palette } from "../../constants/style";
+import { getActiveTask } from "../../../../state/newTasks";
+import { palette } from "../../../../constants/style";
 
 const modalContainer = css`
   position: absolute;
