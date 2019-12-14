@@ -17,7 +17,7 @@ import {
   getWeightedTasks,
   getActiveTask,
   getActiveTaskIndex
-} from "../../state/newTasks";
+} from "../../state/tasks";
 import { getPlayerKitItems, getKitCreationItems } from "../../state/kit";
 
 import Orb from "./Orb";

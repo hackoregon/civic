@@ -3,7 +3,7 @@ import { css, jsx } from "@emotion/core";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import { getAllTasks } from "../../../state/newTasks";
+import { getAllTasks } from "../../../state/tasks";
 import { palette } from "../../../constants/style";
 
 const screenLayout = css`

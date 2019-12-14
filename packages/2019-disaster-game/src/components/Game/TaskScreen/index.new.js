@@ -14,7 +14,7 @@ import {
   getActiveTask,
   taskPhaseKeys,
   getEndingChapter
-} from "../../../state/newTasks";
+} from "../../../state/tasks";
 import { getPlayerKit } from "../../../state/kit";
 import usePrevious from "../../../state/hooks/usePrevious";
 import { palette } from "../../../constants/style";

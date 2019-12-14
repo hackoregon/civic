@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import styled from "@emotion/styled";
 import { bindActionCreators } from "redux";
 
-import { resetState as resetStateTasks } from "../../state/newTasks";
+import { resetState as resetStateTasks } from "../../state/tasks";
 import { resetState as resetStateKit } from "../../state/kit";
 import { resetState as resetStateUser } from "../../state/user";
 import {

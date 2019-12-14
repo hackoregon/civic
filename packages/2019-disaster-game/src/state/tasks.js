@@ -263,43 +263,39 @@ export default tasksReducer;
 // SELECTORS
 
 export const getEndingChapter = createSelector(
-  ["newTasks.endingChapter"],
+  ["tasks.endingChapter"],
   endingChapter => endingChapter
 );
 
 export const getAllTasks = createSelector(
-  ["newTasks.tasks"],
+  ["tasks.tasks"],
   _tasks => _tasks
 );
 
 export const getActiveTask = createSelector(
-  ["newTasks.taskOrder", "newTasks.activeTaskIndex"],
+  ["tasks.taskOrder", "tasks.activeTaskIndex"],
   (taskOrder, activeTaskIndex) => {
     return taskOrder[activeTaskIndex];
   }
 );
 
 export const getActiveTaskIndex = createSelector(
-  ["newTasks.activeTaskIndex"],
+  ["tasks.activeTaskIndex"],
   activeTaskIndex => activeTaskIndex
 );
 
 export const getTaskPhase = createSelector(
-  ["newTasks.activeTaskPhase"],
+  ["tasks.activeTaskPhase"],
   activeTaskPhase => activeTaskPhase
 );
 
 export const getAllTaskPhaseData = createSelector(
-  ["newTasks.taskPhases"],
+  ["tasks.taskPhases"],
   allTaskPhaseData => allTaskPhaseData
 );
 
 export const getWeightedTasks = createSelector(
-  [
-    "newTasks.tasks",
-    "newTasks.tasksForEnvironment",
-    "newTasks.activeEnvironment"
-  ],
+  ["tasks.tasks", "tasks.tasksForEnvironment", "tasks.activeEnvironment"],
   (allTasks, tasksForEnv, activeEnvironment) => {
     const environmentTasks = tasksForEnv[activeEnvironment];
     const environmentTasksArray = [].concat(
@@ -333,7 +329,7 @@ export const getWeightedTasks = createSelector(
 
 // Returns pets / people save obj. Doesn't include first 2 "Save Yourself" tasks
 export const getSavedMetrics = createSelector(
-  ["newTasks.taskOrder"],
+  ["tasks.taskOrder"],
   taskOrder => {
     return taskOrder.reduce(
       (accumulator, task, index) => {

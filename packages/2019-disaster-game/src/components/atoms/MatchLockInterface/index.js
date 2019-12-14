@@ -15,7 +15,7 @@ import {
   getActiveTask,
   choseCorrectItemForTask as _choseCorrectItemForTask,
   chooseTask as _chooseTask
-} from "../../../state/newTasks";
+} from "../../../state/tasks";
 import { addPoints } from "../../../state/user";
 import { addItemToPlayerKit } from "../../../state/kit";
 import { GUIStyle } from "../../Game/index";

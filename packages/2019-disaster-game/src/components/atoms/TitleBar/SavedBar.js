@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import { getSavedMetrics as _getSavedMetrics } from "../../../state/newTasks";
+import { getSavedMetrics as _getSavedMetrics } from "../../../state/tasks";
 import { palette } from "../../../constants/style";
 
 const containerStyle = css`

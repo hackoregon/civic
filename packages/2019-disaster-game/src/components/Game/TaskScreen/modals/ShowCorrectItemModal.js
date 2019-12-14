@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import { palette } from "../../../../constants/style";
-import { getActiveTask } from "../../../../state/newTasks";
+import { getActiveTask } from "../../../../state/tasks";
 import { getItems } from "../../../../state/kit";
 
 const modalContainer = css`

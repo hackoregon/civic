@@ -15,7 +15,7 @@ import {
   taskPhaseKeys,
   getAllTaskPhaseData,
   getActiveTaskIndex
-} from "../../../state/newTasks";
+} from "../../../state/tasks";
 import CheckmarkSVG from "../../../../assets/title_bar_checkmark.svg";
 import BadgesDrawer from "./BadgesDrawer";
 
