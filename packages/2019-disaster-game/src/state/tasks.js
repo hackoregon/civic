@@ -73,7 +73,8 @@ const initialState = {
   numberSolvedSaveYourselfTasks: 0,
   numberSolvedSaveOthersTasks: 0,
   prevTaskPhase: null,
-  badgesEarned: []
+  badgesEarned: [],
+  lastEarnedBadge: null
 };
 
 // ACTIONS
@@ -158,8 +159,24 @@ export const chooseRandomTaskId = (_tasksForEnvironment, activeEnvironment) => {
 /* eslint-disable no-param-reassign */
 
 // Mark task as completed, increase activeTaskIndex, change to next phase if applicable, and start timer
+const earnedNewBadge = state => {
+  const earnedNeighborhoodHeroBadge = state.numberSolvedSaveOthersTasks === 2;
+  const earnedCitySuperheroBadge = state.numberSolvedSaveOthersTasks === 4;
+  if (
+    earnedCitySuperheroBadge &&
+    state.lastEarnedBadge !== "taskCitySuperheroBadge"
+  ) {
+    return true;
+  } if (
+    earnedNeighborhoodHeroBadge &&
+    state.lastEarnedBadge !== "taskNeighborhoodHeroBadge"
+  ) {
+    return true;
+  }
+  return false;
+};
+
 const completeSaveYourselfTask = state => {
-  state.numberSolvedSaveYourselfTasks += 1;
   if (state.badgesEarned.length === 1) {
     state.activeTaskPhase = MODAL_BADGE_EARNED;
     phaseTimer.setDuration(taskPhases[MODAL_BADGE_EARNED].time);
@@ -174,7 +191,10 @@ const completeSaveYourselfTask = state => {
 
 const completeSaveOthersTask = state => {
   const activeTask = state.taskOrder[state.activeTaskIndex];
-  if (activeTask.completed === true) {
+  if (earnedNewBadge(state)) {
+    state.activeTaskPhase = MODAL_BADGE_EARNED;
+    phaseTimer.setDuration(taskPhases[MODAL_BADGE_EARNED].time);
+  } else if (activeTask.completed === true) {
     state.activeTaskPhase = MODAL_SOLVED_TASK;
     phaseTimer.setDuration(taskPhases[MODAL_SOLVED_TASK].time);
   } else {
@@ -222,10 +242,12 @@ export const tasksReducer = createReducer(initialState, {
     if (state.activeTaskPhase === SOLVING_SAVE_YOURSELF) {
       completeSaveYourselfTask(state, action.dispatch);
     } else if (state.activeTaskPhase === MODAL_BADGE_EARNED) {
-      if (
-        state.badgesEarned[state.badgesEarned.length - 1].id === "preparerBadge"
-      ) {
+      state.lastEarnedBadge =
+        state.badgesEarned[state.badgesEarned.length - 1].id;
+      if (state.lastEarnedBadge === "taskSurvivorBadge") {
         state.activeTaskPhase = MODAL_SAVE_OTHERS_INTRO;
+      } else {
+        state.activeTaskPhase = CHOOSE_TASK;
       }
     } else if (state.activeTaskPhase === MODAL_SAVE_OTHERS_INTRO) {
       state.activeTaskPhase = CHOOSE_TASK;
@@ -263,13 +285,35 @@ export const tasksReducer = createReducer(initialState, {
   },
   [actionTypes.ADD_BADGE_IF_BADGE_EARNED]: state => {
     const { activeTaskPhase } = state;
+    if (activeTaskPhase === SOLVING_SAVE_OTHERS) {
+      state.numberSolvedSaveOthersTasks += 1;
+    } else {
+      state.numberSolvedSaveYourselfTasks += 1;
+    }
     const completedAllSaveYourselfTasks =
       state.numberSolvedSaveYourselfTasks === 2;
+    const earnedNeighborhoodHeroBadge = state.numberSolvedSaveOthersTasks === 2;
+    const earnedCitySuperheroBadge = state.numberSolvedSaveOthersTasks === 4;
     if (
       activeTaskPhase === SOLVING_SAVE_YOURSELF &&
       completedAllSaveYourselfTasks
     ) {
-      state.badgesEarned.push(badges.prepared.preparerBadge);
+      state.badgesEarned.push(badges.hero.taskSurvivorBadge);
+      state.lastEarnedBadge = "taskSurvivorBadge";
+    } else if (activeTaskPhase === SOLVING_SAVE_OTHERS) {
+      const { lastEarnedBadge } = state;
+      const alreadyEarnedNeighborhoodHeroBadge =
+        lastEarnedBadge === "taskNeighborhoodHeroBadge";
+      const alreadyEarnedCitySuperheroBadge =
+        lastEarnedBadge === "taskCitySuperheroBadge";
+      if (earnedCitySuperheroBadge && !alreadyEarnedCitySuperheroBadge) {
+        state.badgesEarned.push(badges.hero.taskCitySuperheroBadge);
+      } else if (
+        earnedNeighborhoodHeroBadge &&
+        !alreadyEarnedNeighborhoodHeroBadge
+      ) {
+        state.badgesEarned.push(badges.hero.taskNeighborhoodHeroBadge);
+      }
     }
   },
   [actionTypes.CHOOSE_NEXT_TASK]: (state, action) => {
