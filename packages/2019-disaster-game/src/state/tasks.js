@@ -2,12 +2,8 @@ import { createReducer, createSelector } from "redux-starter-kit";
 import { shuffle } from "lodash";
 import size from "lodash/size";
 
-import {
-  tasks,
-  tasksForEnvironment,
-  URBAN,
-  hardcodedTaskLocations
-} from "../constants/tasks";
+import { tasks, tasksForEnvironment, URBAN } from "../constants/tasks";
+import badges from "../constants/badges";
 import Timer from "../utils/timer";
 
 // CONSTANTS
@@ -21,7 +17,8 @@ export const taskPhaseKeys = {
   MODAL_CHOSEN_TASK: "MODAL_CHOSEN_TASK",
   MODAL_SOLVED_TASK: "MODAL_SOLVED_TASK",
   MODAL_UNSOLVED_TASK: "MODAL_UNSOLVED_TASK",
-  MODAL_NO_ITEM: "MODAL_NO_ITEM"
+  MODAL_NO_ITEM: "MODAL_NO_ITEM",
+  MODAL_BADGE_EARNED: "MODAL_BADGE_EARNED"
 };
 
 const {
@@ -32,7 +29,8 @@ const {
   MODAL_CHOSEN_TASK,
   MODAL_SOLVED_TASK,
   MODAL_UNSOLVED_TASK,
-  MODAL_NO_ITEM
+  MODAL_NO_ITEM,
+  MODAL_BADGE_EARNED
 } = taskPhaseKeys;
 
 // +1 added to times because it makes the timer look nicer
@@ -44,7 +42,8 @@ const taskPhases = {
   [MODAL_CHOSEN_TASK]: { time: 11 },
   [MODAL_SOLVED_TASK]: { time: 11 },
   [MODAL_UNSOLVED_TASK]: { time: 11 },
-  [MODAL_NO_ITEM]: { time: 11 }
+  [MODAL_NO_ITEM]: { time: 11 },
+  [MODAL_BADGE_EARNED]: { time: 11 }
 };
 
 const actionTypes = {
@@ -54,7 +53,8 @@ const actionTypes = {
   MANUAL_CHANGE_TASK_PHASE: "MANUAL_CHANGE_TASK_PHASE",
   RESET_STATE: "RESET_STATE",
   START_CHAPTER_TIMER: "START_CHAPTER_TIMER",
-  END_CHAPTER: "END_CHAPTER"
+  END_CHAPTER: "END_CHAPTER",
+  ADD_BADGE_IF_BADGE_EARNED: "ADD_BADGE_IF_BADGE_EARNED"
 };
 
 const chapterTimer = new Timer();
@@ -63,14 +63,17 @@ const phaseTimer = new Timer();
 // INITIAL STATE
 const initialState = {
   tasks,
-  taskLocations: hardcodedTaskLocations,
   tasksForEnvironment,
   activeEnvironment: defaultEnv,
   taskOrder: shuffle(tasksForEnvironment[defaultEnv].saveYourself),
   activeTaskIndex: -1,
   activeTaskPhase: SOLVING_SAVE_YOURSELF,
   taskPhases,
-  endingChapter: false
+  endingChapter: false,
+  numberSolvedSaveYourselfTasks: 0,
+  numberSolvedSaveOthersTasks: 0,
+  prevTaskPhase: null,
+  badgesEarned: []
 };
 
 // ACTIONS
@@ -85,9 +88,9 @@ export const goToNextTaskPhase = () => dispatch => {
 export const choseCorrectItemForTask = activeTask => dispatch => {
   const willCompleteTask =
     activeTask.numberCorrectChosen + 1 >= activeTask.numberItemsToSolve;
-
   dispatch({ type: actionTypes.CHOSE_CORRECT_ITEM_FOR_TASK });
   if (willCompleteTask) {
+    dispatch({ type: actionTypes.ADD_BADGE_IF_BADGE_EARNED });
     goToNextTaskPhase()(dispatch);
   }
 };
@@ -156,7 +159,11 @@ export const chooseRandomTaskId = (_tasksForEnvironment, activeEnvironment) => {
 
 // Mark task as completed, increase activeTaskIndex, change to next phase if applicable, and start timer
 const completeSaveYourselfTask = state => {
-  if (state.activeTaskIndex === 1) {
+  state.numberSolvedSaveYourselfTasks += 1;
+  if (state.badgesEarned.length === 1) {
+    state.activeTaskPhase = MODAL_BADGE_EARNED;
+    phaseTimer.setDuration(taskPhases[MODAL_BADGE_EARNED].time);
+  } else if (state.activeTaskIndex === 1) {
     state.activeTaskPhase = MODAL_SAVE_OTHERS_INTRO;
     phaseTimer.setDuration(taskPhases[MODAL_SAVE_OTHERS_INTRO].time);
   } else {
@@ -210,9 +217,16 @@ export const tasksReducer = createReducer(initialState, {
     const { phase } = action;
     state.activeTaskPhase = phase;
   },
-  [actionTypes.GO_TO_NEXT_TASK_PHASE_NEW]: state => {
+  [actionTypes.GO_TO_NEXT_TASK_PHASE_NEW]: (state, action) => {
+    state.prevTaskPhase = state.activeTaskPhase;
     if (state.activeTaskPhase === SOLVING_SAVE_YOURSELF) {
-      completeSaveYourselfTask(state);
+      completeSaveYourselfTask(state, action.dispatch);
+    } else if (state.activeTaskPhase === MODAL_BADGE_EARNED) {
+      if (
+        state.badgesEarned[state.badgesEarned.length - 1].id === "preparerBadge"
+      ) {
+        state.activeTaskPhase = MODAL_SAVE_OTHERS_INTRO;
+      }
     } else if (state.activeTaskPhase === MODAL_SAVE_OTHERS_INTRO) {
       state.activeTaskPhase = CHOOSE_TASK;
       phaseTimer.setDuration(taskPhases[CHOOSE_TASK].time);
@@ -226,9 +240,9 @@ export const tasksReducer = createReducer(initialState, {
     } else if (state.activeTaskPhase === SOLVING_SAVE_OTHERS) {
       completeSaveOthersTask(state);
     } else if (
-      state.activeTaskPhase === MODAL_SOLVED_TASK ||
       state.activeTaskPhase === MODAL_UNSOLVED_TASK ||
-      state.activeTaskPhase === MODAL_NO_ITEM
+      state.activeTaskPhase === MODAL_NO_ITEM ||
+      state.activeTaskPhase === MODAL_SOLVED_TASK
     ) {
       state.activeTaskPhase = CHOOSE_TASK;
       phaseTimer.setDuration(taskPhases[CHOOSE_TASK].time);
@@ -245,6 +259,17 @@ export const tasksReducer = createReducer(initialState, {
         people: getRandomNumberFromRange(currentTask.peopleSavedRange),
         pets: currentTask.petsSaved
       };
+    }
+  },
+  [actionTypes.ADD_BADGE_IF_BADGE_EARNED]: state => {
+    const { activeTaskPhase } = state;
+    const completedAllSaveYourselfTasks =
+      state.numberSolvedSaveYourselfTasks === 2;
+    if (
+      activeTaskPhase === SOLVING_SAVE_YOURSELF &&
+      completedAllSaveYourselfTasks
+    ) {
+      state.badgesEarned.push(badges.prepared.preparerBadge);
     }
   },
   [actionTypes.CHOOSE_NEXT_TASK]: (state, action) => {
@@ -345,4 +370,9 @@ export const getSavedMetrics = createSelector(
       }
     );
   }
+);
+
+export const getBadges = createSelector(
+  ["tasks.badgesEarned"],
+  badgesEarned => badgesEarned
 );

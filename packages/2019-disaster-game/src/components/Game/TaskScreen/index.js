@@ -27,6 +27,7 @@ import NeedRequiredItemModal from "./modals/NeedRequiredItemModal";
 import ShowCorrectItemModal from "./modals/ShowCorrectItemModal";
 import SolveScreen from "./SolveScreen";
 import ChooseTaskScreen from "./ChooseTaskScreen";
+import NewBadge from "../../atoms/NewBadge";
 
 const screenLayout = css`
   position: relative;
@@ -88,7 +89,8 @@ const TaskScreenContainer = ({
     MODAL_CHOSEN_TASK,
     MODAL_SOLVED_TASK,
     MODAL_UNSOLVED_TASK,
-    MODAL_NO_ITEM
+    MODAL_NO_ITEM,
+    MODAL_BADGE_EARNED
   } = taskPhaseKeys;
   const [restartTimer] = useState(new Timer());
 
@@ -179,6 +181,7 @@ const TaskScreenContainer = ({
   const showSuccessfulCompleteTaskModal = taskPhase === MODAL_SOLVED_TASK;
   const showNeedRequiredItemModal = taskPhase === MODAL_NO_ITEM;
   const showShowCorrectItemModal = taskPhase === MODAL_UNSOLVED_TASK;
+  const showBadgeEarned = taskPhase === MODAL_BADGE_EARNED;
 
   let interfaceMessage = "";
 
@@ -200,6 +203,7 @@ const TaskScreenContainer = ({
       {showRestartModal && (
         <RestartModal cancelRestart={cancelRestart} restartGame={restartGame} />
       )}
+      {showBadgeEarned && <NewBadge />}
       <div css={screenLayout}>
         <SolveScreen open={solveScreenOpen} activeTask={activeTask} />
         <ChooseTaskScreen />
