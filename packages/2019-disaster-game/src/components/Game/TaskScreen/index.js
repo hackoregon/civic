@@ -10,10 +10,12 @@ import { goToNextChapter } from "../../../state/chapters";
 import {
   startChapterAndPhaseTimers,
   finishSolveTaskEarly as _finishSolveTaskEarly,
+  showEndChapterSequence as _showEndChapterSequence,
   getTaskPhase,
   getActiveTask,
   taskPhaseKeys,
-  getEndingChapter
+  getEndingChapter,
+  getFinalBadgeShown
 } from "../../../state/tasks";
 import { getPlayerKit } from "../../../state/kit";
 import usePrevious from "../../../state/hooks/usePrevious";
@@ -75,7 +77,9 @@ const TaskScreenContainer = ({
   playerKit,
   restartGame,
   endingChapter,
-  endChapter
+  endChapter,
+  showEndChapterSequence,
+  finalBadgeShown
 }) => {
   const [solveScreenOpen, setSolveScreenOpen] = useState(true);
   const [showRestartModal, setShowRestartModal] = useState(false);
@@ -106,10 +110,19 @@ const TaskScreenContainer = ({
 
   useEffect(() => {
     const hasSeenSolvingResults = taskPhase === CHOOSE_TASK;
-    if (hasSeenSolvingResults && shouldEndChapter) {
+    if (finalBadgeShown) {
       endChapter();
+    } else if (hasSeenSolvingResults && shouldEndChapter) {
+      showEndChapterSequence();
     }
-  }, [CHOOSE_TASK, endChapter, shouldEndChapter, taskPhase]);
+  }, [
+    CHOOSE_TASK,
+    endChapter,
+    finalBadgeShown,
+    shouldEndChapter,
+    showEndChapterSequence,
+    taskPhase
+  ]);
 
   /*
     Phase: Change to solving
@@ -155,10 +168,12 @@ const TaskScreenContainer = ({
   const startRestartTimer = useCallback(() => {
     restartTimer.setDuration(10);
     restartTimer.addCompleteCallback(() => {
-      restartGame();
+      if (!shouldEndChapter) {
+        restartGame();
+      }
     });
     restartTimer.start();
-  }, [restartGame, restartTimer]);
+  }, [restartGame, restartTimer, shouldEndChapter]);
 
   // Auto restart when showing modal after x time passed
   useEffect(() => {
@@ -200,7 +215,7 @@ const TaskScreenContainer = ({
       {showSuccessfulCompleteTaskModal && <SuccessfulCompleteTaskModal />}
       {showNeedRequiredItemModal && <NeedRequiredItemModal />}
       {showShowCorrectItemModal && <ShowCorrectItemModal />}
-      {showRestartModal && (
+      {showRestartModal && !shouldEndChapter && (
         <RestartModal cancelRestart={cancelRestart} restartGame={restartGame} />
       )}
       {showBadgeEarned && <NewBadge />}
@@ -252,19 +267,23 @@ TaskScreenContainer.propTypes = {
   }),
   restartGame: PropTypes.func,
   endingChapter: PropTypes.bool,
-  endChapter: PropTypes.func
+  endChapter: PropTypes.func,
+  showEndChapterSequence: PropTypes.func,
+  finalBadgeShown: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
   taskPhase: getTaskPhase(state),
   activeTask: getActiveTask(state),
   playerKit: getPlayerKit(state),
-  endingChapter: getEndingChapter(state)
+  endingChapter: getEndingChapter(state),
+  finalBadgeShown: getFinalBadgeShown(state)
 });
 
 const mapDispatchToProps = dispatch => ({
   init: bindActionCreators(startChapterAndPhaseTimers, dispatch),
   finishSolveTaskEarly: bindActionCreators(_finishSolveTaskEarly, dispatch),
+  showEndChapterSequence: bindActionCreators(_showEndChapterSequence, dispatch),
   endChapter: bindActionCreators(goToNextChapter, dispatch)
 });
 

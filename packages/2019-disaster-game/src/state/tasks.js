@@ -54,6 +54,7 @@ const actionTypes = {
   RESET_STATE: "RESET_STATE",
   START_CHAPTER_TIMER: "START_CHAPTER_TIMER",
   END_CHAPTER: "END_CHAPTER",
+  SET_FINAL_BADGE_AS_SHOWN: "SET_FINAL_BADGE_AS_SHOWN",
   ADD_BADGE_IF_BADGE_EARNED: "ADD_BADGE_IF_BADGE_EARNED"
 };
 
@@ -74,7 +75,8 @@ const initialState = {
   numberSolvedSaveOthersTasks: 0,
   prevTaskPhase: null,
   badgesEarned: [],
-  lastEarnedBadge: null
+  lastEarnedBadge: null,
+  finalBadgeShown: false
 };
 
 // ACTIONS
@@ -129,6 +131,17 @@ export const startChapterAndPhaseTimers = () => dispatch => {
   goToNextTaskPhase()(dispatch);
 };
 
+export const showEndChapterSequence = () => dispatch => {
+  dispatch({
+    type: actionTypes.MANUAL_CHANGE_TASK_PHASE,
+    phase: MODAL_BADGE_EARNED
+  });
+  phaseTimer.setDuration(taskPhases[MODAL_BADGE_EARNED].time);
+  phaseTimer.addCompleteCallback(() => {
+    dispatch({ type: actionTypes.SET_FINAL_BADGE_AS_SHOWN });
+  });
+};
+
 // UTILITY FUNCTIONS
 
 const getRandomNumberFromRange = range => {
@@ -167,7 +180,8 @@ const earnedNewBadge = state => {
     state.lastEarnedBadge !== "taskCitySuperheroBadge"
   ) {
     return true;
-  } if (
+  }
+  if (
     earnedNeighborhoodHeroBadge &&
     state.lastEarnedBadge !== "taskNeighborhoodHeroBadge"
   ) {
@@ -224,7 +238,6 @@ export const tasksReducer = createReducer(initialState, {
   [actionTypes.START_CHAPTER_TIMER]: (state, action) => {
     chapterTimer.reset();
     chapterTimer.setDuration(120);
-
     chapterTimer.addCompleteCallback(() => {
       action.dispatch({ type: actionTypes.END_CHAPTER });
     });
@@ -232,6 +245,11 @@ export const tasksReducer = createReducer(initialState, {
   },
   [actionTypes.END_CHAPTER]: state => {
     state.endingChapter = true;
+    state.badgesEarned.push(badges.hero.earthquakeHeroBadge);
+    state.lastEarnedBadge = "earthquakeHeroBadge";
+  },
+  [actionTypes.SET_FINAL_BADGE_AS_SHOWN]: state => {
+    state.finalBadgeShown = true;
   },
   [actionTypes.MANUAL_CHANGE_TASK_PHASE]: (state, action) => {
     const { phase } = action;
@@ -419,4 +437,9 @@ export const getSavedMetrics = createSelector(
 export const getBadges = createSelector(
   ["tasks.badgesEarned"],
   badgesEarned => badgesEarned
+);
+
+export const getFinalBadgeShown = createSelector(
+  ["tasks.finalBadgeShown"],
+  finalBadgeShown => finalBadgeShown
 );
