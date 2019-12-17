@@ -1,23 +1,12 @@
-import { useState, useEffect, useCallback } from "react";
 /** @jsx jsx */
+import { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import { css, jsx } from "@emotion/core";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 
 import { palette } from "../../../constants/style";
 import media from "../../../utils/mediaQueries";
 import Timer from "../../../utils/timer";
 import usePrevious from "../../../state/hooks/usePrevious";
-import {
-  getTaskPhase,
-  taskPhaseKeys,
-  getActiveTask,
-  choseCorrectItemForTask as _choseCorrectItemForTask,
-  chooseTask as _chooseTask
-} from "../../../state/tasks";
-import { addPoints } from "../../../state/user";
-import { addItemToPlayerKit } from "../../../state/kit";
 import { GUIStyle } from "../../Game/index";
 import OrbManager from "../OrbManager";
 
@@ -68,30 +57,23 @@ const textStyle = css`
   }
 `;
 
-const {
-  SOLVING_SAVE_YOURSELF,
-  SOLVING_SAVE_OTHERS,
-  CHOOSE_TASK
-} = taskPhaseKeys;
-
 const MatchLockInterface = ({
+  possibleItems,
+  onOrbSelection,
+  checkItemIsCorrect,
   activeScreen,
   interfaceMessage,
-  taskPhase,
-  activeTask,
-  choseCorrectItemForTask,
-  chooseTask,
-  addPointsToState,
-  addItemToPlayerKitInState,
+  noInteractionCallback,
   restartNoInteractionTimer,
   noInteractionDuration,
-  noInteractionCallback
+  requiredItem,
+  screensForOrbDisplay
 }) => {
-  const [open, setOpen] = useState(false);
   const [interactionTimeout] = useState(new Timer());
+  const [open, setOpen] = useState(false);
   const prevRestartNoInteractionTimer = usePrevious(restartNoInteractionTimer);
 
-  const restartInteractionTimeout = useCallback(() => {
+  const startInteractionTimeout = useCallback(() => {
     interactionTimeout.stop();
 
     interactionTimeout.setDuration(noInteractionDuration);
@@ -101,87 +83,32 @@ const MatchLockInterface = ({
     interactionTimeout.start();
   }, [interactionTimeout, noInteractionCallback, noInteractionDuration]);
 
-  useEffect(() => {
-    setOpen(true);
-    restartInteractionTimeout();
-
-    return () => {
-      interactionTimeout.stop();
-    };
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  const doOrbSelection = (...args) => {
+    onOrbSelection(...args);
+    startInteractionTimeout();
+  };
 
   useEffect(() => {
     if (
       restartNoInteractionTimer &&
       restartNoInteractionTimer !== prevRestartNoInteractionTimer
     ) {
-      restartInteractionTimeout();
+      startInteractionTimeout();
     }
   }, [
     prevRestartNoInteractionTimer,
     restartNoInteractionTimer,
-    restartInteractionTimeout
+    startInteractionTimeout
   ]);
 
-  const onKitItemSelection = orbModel => {
-    if (orbModel.type === activeTask.requiredItem) {
-      choseCorrectItemForTask(activeTask);
-      return true;
-    }
-    return false;
-  };
+  useEffect(() => {
+    setOpen(true);
+    startInteractionTimeout();
 
-  const onTaskSelection = taskId => {
-    chooseTask(taskId);
-  };
-
-  const kitOnOrbSelection = orbModel => {
-    if (orbModel.good) {
-      addItemToPlayerKitInState(orbModel);
-      addPointsToState(orbModel.points);
-    }
-    return orbModel.good;
-  };
-
-  const taskPhaseOnOrbSelection = orbModel => {
-    if (
-      taskPhase === SOLVING_SAVE_YOURSELF ||
-      taskPhase === SOLVING_SAVE_OTHERS
-    ) {
-      onKitItemSelection(orbModel);
-    } else if (taskPhase === CHOOSE_TASK) {
-      onTaskSelection(orbModel.type);
-    }
-  };
-
-  const onOrbSelection = orbModel => {
-    restartInteractionTimeout();
-    if (activeScreen === "kit") {
-      kitOnOrbSelection(orbModel);
-    } else {
-      taskPhaseOnOrbSelection(orbModel);
-    }
-  };
-
-  // eslint-disable-next-line consistent-return
-  const taskPhaseCheckItemIsCorrect = orbModel => {
-    if (
-      taskPhase === SOLVING_SAVE_YOURSELF ||
-      taskPhase === SOLVING_SAVE_OTHERS
-    ) {
-      return activeTask.requiredItem === orbModel.type;
-    }
-    if (taskPhase === CHOOSE_TASK) {
-      return true;
-    }
-  };
-
-  const checkItemIsCorrect = orbModel => {
-    if (activeScreen === "kit") {
-      return true;
-    }
-    return taskPhaseCheckItemIsCorrect(orbModel);
-  };
+    return () => {
+      interactionTimeout.stop();
+    };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div
@@ -195,9 +122,12 @@ const MatchLockInterface = ({
       </div>
       <GUIStyle>
         <OrbManager
-          onOrbSelection={onOrbSelection}
+          possibleItems={possibleItems}
+          onOrbSelection={doOrbSelection}
           checkItemIsCorrect={checkItemIsCorrect}
           activeScreen={activeScreen}
+          requiredItem={requiredItem}
+          screensForOrbDisplay={screensForOrbDisplay}
         />
       </GUIStyle>
     </div>
@@ -205,35 +135,16 @@ const MatchLockInterface = ({
 };
 
 MatchLockInterface.propTypes = {
+  possibleItems: PropTypes.arrayOf(PropTypes.shape({})),
+  onOrbSelection: PropTypes.func,
+  checkItemIsCorrect: PropTypes.func,
   activeScreen: PropTypes.string,
   interfaceMessage: PropTypes.string,
-  taskPhase: PropTypes.oneOf([...Object.values(taskPhaseKeys)]),
-  activeTask: PropTypes.shape({}),
-  choseCorrectItemForTask: PropTypes.func,
-  chooseTask: PropTypes.func,
-  addPointsToState: PropTypes.func,
-  addItemToPlayerKitInState: PropTypes.func,
+  noInteractionCallback: PropTypes.func,
   restartNoInteractionTimer: PropTypes.bool,
   noInteractionDuration: PropTypes.number,
-  noInteractionCallback: PropTypes.func
+  requiredItem: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.string]),
+  screensForOrbDisplay: PropTypes.arrayOf(PropTypes.string)
 };
 
-const mapStateToProps = state => ({
-  taskPhase: getTaskPhase(state),
-  activeTask: getActiveTask(state)
-});
-
-const mapDispatchToProps = dispatch => ({
-  addPointsToState: bindActionCreators(addPoints, dispatch),
-  addItemToPlayerKitInState: bindActionCreators(addItemToPlayerKit, dispatch),
-  choseCorrectItemForTask: bindActionCreators(
-    _choseCorrectItemForTask,
-    dispatch
-  ),
-  chooseTask: bindActionCreators(_chooseTask, dispatch)
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MatchLockInterface);
+export default MatchLockInterface;

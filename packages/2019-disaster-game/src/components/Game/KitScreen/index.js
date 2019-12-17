@@ -13,7 +13,11 @@ import {
   goToNextChapter,
   getActiveChapterDuration
 } from "../../../state/chapters";
-import { getKitCreationItems, getPlayerKit } from "../../../state/kit";
+import {
+  getKitCreationItems,
+  getPlayerKit,
+  addItemToPlayerKit
+} from "../../../state/kit";
 import { addBadge } from "../../../state/user";
 import usePrevious from "../../../state/hooks/usePrevious";
 import { TYPES as SFX_TYPES } from "../../../constants/sfx";
@@ -66,7 +70,8 @@ const KitScreen = ({
   chapterDuration,
   restartGame,
   playAudio,
-  stopAudio
+  stopAudio,
+  addItemToPlayerKitInState
 }) => {
   const [chapterTimer] = useState(new Timer());
   const [restartTimer] = useState(new Timer());
@@ -143,6 +148,15 @@ const KitScreen = ({
     setShowRestart(false);
   };
 
+  const onKitItemSelection = kitItem => {
+    if (kitItem.good) {
+      addItemToPlayerKitInState(kitItem);
+    }
+    return kitItem.good;
+  };
+
+  const checkIfItemIsGood = kitItem => kitItem.good;
+
   return (
     <Fragment>
       {displayBadge && <NewBadge type="prepared" />}
@@ -157,10 +171,14 @@ const KitScreen = ({
         {/* somehow adding this comment fixes the production build -- it's related to @babel/plugin-transform-react-constant-elements */}
       </MapStyle>
       <MatchLockInterface
+        possibleItems={possibleItems}
+        onOrbSelection={onKitItemSelection}
+        checkItemIsCorrect={checkIfItemIsGood}
         activeScreen="kit"
+        screensForOrbDisplay={["kit"]}
         interfaceMessage="What do we need?"
         noInteractionCallback={noInteractionCallback}
-        noInteractionDuration={14}
+        noInteractionDuration={15}
       />
     </Fragment>
   );
@@ -181,7 +199,8 @@ KitScreen.propTypes = {
   addPreparerBadge: PropTypes.func,
   restartGame: PropTypes.func,
   playAudio: PropTypes.func,
-  stopAudio: PropTypes.func
+  stopAudio: PropTypes.func,
+  addItemToPlayerKitInState: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -194,7 +213,8 @@ const mapDispatchToProps = dispatch => ({
   addPreparerBadge: bindActionCreators(addBadge, dispatch),
   endChapter: bindActionCreators(goToNextChapter, dispatch),
   playAudio: bindActionCreators(_playAudio, dispatch),
-  stopAudio: bindActionCreators(_stopAudio, dispatch)
+  stopAudio: bindActionCreators(_stopAudio, dispatch),
+  addItemToPlayerKitInState: bindActionCreators(addItemToPlayerKit, dispatch)
 });
 
 export default connect(

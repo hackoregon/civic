@@ -11,12 +11,15 @@ import {
   startChapterAndPhaseTimers,
   finishSolveTaskEarly as _finishSolveTaskEarly,
   showEndChapterSequence as _showEndChapterSequence,
+  choseCorrectItemForTask as _choseCorrectItemForTask,
+  chooseTask as _chooseTask,
   getTaskPhase,
   getActiveTask,
   taskPhaseKeys,
   getEndingChapter,
   getFinalBadgeShown,
-  getActiveTaskIndex
+  getActiveTaskIndex,
+  getWeightedTasks
 } from "../../../state/tasks";
 import {
   playAudio as _playAudio,
@@ -24,7 +27,7 @@ import {
   stopAllTaskAudio as _stopAllTaskAudio
 } from "../../../state/sfx";
 import { TYPES as SFX_TYPES } from "../../../constants/sfx";
-import { getPlayerKit } from "../../../state/kit";
+import { getPlayerKit, getPlayerKitItems } from "../../../state/kit";
 import usePrevious from "../../../state/hooks/usePrevious";
 import { palette } from "../../../constants/style";
 import MatchLockInterface from "../../atoms/MatchLockInterface";
@@ -90,7 +93,11 @@ const TaskScreenContainer = ({
   playAudio,
   stopAudio,
   stopAllTaskAudio,
-  activeTaskIndex
+  activeTaskIndex,
+  weightedPlayerKitItems,
+  weightedTasks,
+  choseCorrectItemForTask,
+  chooseTask
 }) => {
   const [solveScreenOpen, setSolveScreenOpen] = useState(true);
   const [showRestartModal, setShowRestartModal] = useState(false);
@@ -183,7 +190,21 @@ const TaskScreenContainer = ({
         }
       }
     }
-  }, [CHOOSE_TASK, MODAL_CHOSEN_TASK, SOLVING_SAVE_OTHERS, SOLVING_SAVE_YOURSELF, activeTask, activeTaskIndex, endingChapter, finalBadgeShown, playAudio, prevActiveTaskIndex, prevTaskPhase, startQuestionAudioDelay, taskPhase]);
+  }, [
+    CHOOSE_TASK,
+    MODAL_CHOSEN_TASK,
+    SOLVING_SAVE_OTHERS,
+    SOLVING_SAVE_YOURSELF,
+    activeTask,
+    activeTaskIndex,
+    endingChapter,
+    finalBadgeShown,
+    playAudio,
+    prevActiveTaskIndex,
+    prevTaskPhase,
+    startQuestionAudioDelay,
+    taskPhase
+  ]);
 
   /*
     Phase: Change to solving or related modal
@@ -252,6 +273,20 @@ const TaskScreenContainer = ({
     setShowRestartModal(true);
   };
 
+  const onTaskSelection = orbModel => {
+    chooseTask(orbModel.type);
+    // Return true so Orb knows how to animate
+    return true;
+  };
+
+  const onItemSelection = orbModel => {
+    if (orbModel.type === activeTask.requiredItem) {
+      choseCorrectItemForTask(activeTask);
+      return true;
+    }
+    return false;
+  };
+
   const showHelpOthersIntroModal = taskPhase === MODAL_SAVE_OTHERS_INTRO;
   const showChosenTaskModal = taskPhase === MODAL_CHOSEN_TASK;
   const showSuccessfulCompleteTaskModal = taskPhase === MODAL_SOLVED_TASK;
@@ -260,14 +295,41 @@ const TaskScreenContainer = ({
   const showBadgeEarned = taskPhase === MODAL_BADGE_EARNED;
 
   let interfaceMessage = "";
+  let possibleItems = [];
+  let onOrbSelection = onItemSelection;
+  let checkItemIsCorrect = orbModel =>
+    !!activeTask && activeTask.requiredItem === orbModel.type;
 
+  /* eslint-disable no-return-assign */
   if (taskPhase === SOLVING_SAVE_YOURSELF && activeTask) {
     interfaceMessage = activeTask.saveYourselfClue;
+    possibleItems = weightedPlayerKitItems.map(
+      // eslint-disable-next-line no-param-reassign
+      item => ({
+        ...item,
+        good: activeTask.requiredItem === item.id
+      })
+    );
   } else if (taskPhase === SOLVING_SAVE_OTHERS && activeTask) {
     interfaceMessage = activeTask.clue;
+    possibleItems = weightedPlayerKitItems.map(
+      // eslint-disable-next-line no-param-reassign
+      item => {
+        return {
+          ...item,
+          good: activeTask.requiredItem === item.id
+        };
+      }
+    );
   } else if (taskPhase === CHOOSE_TASK) {
     interfaceMessage = "Who should we help next?";
+    possibleItems = weightedTasks;
+    onOrbSelection = onTaskSelection;
+    checkItemIsCorrect = () => {
+      return true;
+    };
   }
+  /* eslint-enable no-return-assign */
 
   return (
     <Fragment>
@@ -288,6 +350,16 @@ const TaskScreenContainer = ({
         <div css={[bg, bg3]} />
       </div>
       <MatchLockInterface
+        requiredItem={activeTask ? activeTask.requiredItem : null}
+        possibleItems={possibleItems}
+        onOrbSelection={onOrbSelection}
+        checkItemIsCorrect={checkItemIsCorrect}
+        activeScreen={taskPhase}
+        screensForOrbDisplay={[
+          SOLVING_SAVE_YOURSELF,
+          SOLVING_SAVE_OTHERS,
+          CHOOSE_TASK
+        ]}
         interfaceMessage={interfaceMessage}
         noInteractionCallback={noInteractionCallback}
         restartNoInteractionTimer={!showRestartModal}
@@ -331,7 +403,11 @@ TaskScreenContainer.propTypes = {
   playAudio: PropTypes.func,
   stopAudio: PropTypes.func,
   stopAllTaskAudio: PropTypes.func,
-  activeTaskIndex: PropTypes.number
+  activeTaskIndex: PropTypes.number,
+  weightedTasks: PropTypes.arrayOf(PropTypes.shape({})),
+  weightedPlayerKitItems: PropTypes.arrayOf(PropTypes.shape({})),
+  choseCorrectItemForTask: PropTypes.func,
+  chooseTask: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -340,7 +416,9 @@ const mapStateToProps = state => ({
   playerKit: getPlayerKit(state),
   endingChapter: getEndingChapter(state),
   finalBadgeShown: getFinalBadgeShown(state),
-  activeTaskIndex: getActiveTaskIndex(state)
+  activeTaskIndex: getActiveTaskIndex(state),
+  weightedTasks: getWeightedTasks(state),
+  weightedPlayerKitItems: getPlayerKitItems(state)
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -350,7 +428,12 @@ const mapDispatchToProps = dispatch => ({
   endChapter: bindActionCreators(goToNextChapter, dispatch),
   playAudio: bindActionCreators(_playAudio, dispatch),
   stopAudio: bindActionCreators(_stopAudio, dispatch),
-  stopAllTaskAudio: bindActionCreators(_stopAllTaskAudio, dispatch)
+  stopAllTaskAudio: bindActionCreators(_stopAllTaskAudio, dispatch),
+  choseCorrectItemForTask: bindActionCreators(
+    _choseCorrectItemForTask,
+    dispatch
+  ),
+  chooseTask: bindActionCreators(_chooseTask, dispatch)
 });
 
 export default connect(
