@@ -15,7 +15,8 @@ import {
   getActiveTask,
   taskPhaseKeys,
   getEndingChapter,
-  getFinalBadgeShown
+  getFinalBadgeShown,
+  getActiveTaskIndex
 } from "../../../state/tasks";
 import {
   playAudio as _playAudio,
@@ -88,13 +89,15 @@ const TaskScreenContainer = ({
   finalBadgeShown,
   playAudio,
   stopAudio,
-  stopAllTaskAudio
+  stopAllTaskAudio,
+  activeTaskIndex
 }) => {
   const [solveScreenOpen, setSolveScreenOpen] = useState(true);
   const [showRestartModal, setShowRestartModal] = useState(false);
   const [shouldEndChapter, setShouldEndChapter] = useState(false);
   const prevShowRestart = usePrevious(showRestartModal);
   const prevTaskPhase = usePrevious(taskPhase);
+  const prevActiveTaskIndex = usePrevious(activeTaskIndex);
   const {
     SOLVING_SAVE_YOURSELF,
     SOLVING_SAVE_OTHERS,
@@ -133,6 +136,7 @@ const TaskScreenContainer = ({
   useEffect(() => {
     const hasSeenSolvingResults = taskPhase === CHOOSE_TASK;
     if (finalBadgeShown) {
+      stopAllTaskAudio();
       endChapter();
     } else if (hasSeenSolvingResults && shouldEndChapter) {
       showEndChapterSequence();
@@ -143,6 +147,7 @@ const TaskScreenContainer = ({
     finalBadgeShown,
     shouldEndChapter,
     showEndChapterSequence,
+    stopAllTaskAudio,
     taskPhase
   ]);
 
@@ -151,10 +156,10 @@ const TaskScreenContainer = ({
     audioDelay.reset();
     audioDelay.setDuration(4);
     audioDelay.addCompleteCallback(() => {
-      playAudio(SFX_TYPES[activeTask.audioQuestion]);
+      if (!finalBadgeShown) playAudio(SFX_TYPES[activeTask.audioQuestion]);
     });
     audioDelay.start();
-  }, [activeTask, audioDelay, playAudio]);
+  }, [activeTask, audioDelay, finalBadgeShown, playAudio]);
 
   /*
     Phase: Change to solving
@@ -164,29 +169,21 @@ const TaskScreenContainer = ({
     const onDifferentPhase = prevTaskPhase !== taskPhase;
     const isSolvingPhase =
       taskPhase === SOLVING_SAVE_YOURSELF || taskPhase === SOLVING_SAVE_OTHERS;
+    const onNextSaveYourself = activeTaskIndex > prevActiveTaskIndex;
 
-    if (onDifferentPhase) {
-      // TODO: make save yourself 1 and 2 play
-      if (isSolvingPhase && activeTask) {
+    if (!finalBadgeShown) {
+      if (isSolvingPhase && onNextSaveYourself) {
         playAudio(SFX_TYPES[activeTask.audioInstruction]);
         startQuestionAudioDelay();
-      } else if (taskPhase === CHOOSE_TASK) {
-        playAudio(SFX_TYPES.TASKS_VOTE_INSTRUCTION);
-      } else if (taskPhase === MODAL_CHOSEN_TASK) {
-        playAudio(SFX_TYPES.TASKS_MOTIVATE);
+      } else if (onDifferentPhase) {
+        if (taskPhase === CHOOSE_TASK && !endingChapter) {
+          playAudio(SFX_TYPES.TASKS_VOTE_INSTRUCTION);
+        } else if (taskPhase === MODAL_CHOSEN_TASK) {
+          playAudio(SFX_TYPES.TASKS_MOTIVATE);
+        }
       }
     }
-  }, [
-    CHOOSE_TASK,
-    MODAL_CHOSEN_TASK,
-    SOLVING_SAVE_OTHERS,
-    SOLVING_SAVE_YOURSELF,
-    activeTask,
-    playAudio,
-    prevTaskPhase,
-    startQuestionAudioDelay,
-    taskPhase
-  ]);
+  }, [CHOOSE_TASK, MODAL_CHOSEN_TASK, SOLVING_SAVE_OTHERS, SOLVING_SAVE_YOURSELF, activeTask, activeTaskIndex, endingChapter, finalBadgeShown, playAudio, prevActiveTaskIndex, prevTaskPhase, startQuestionAudioDelay, taskPhase]);
 
   /*
     Phase: Change to solving or related modal
@@ -333,7 +330,8 @@ TaskScreenContainer.propTypes = {
   finalBadgeShown: PropTypes.bool,
   playAudio: PropTypes.func,
   stopAudio: PropTypes.func,
-  stopAllTaskAudio: PropTypes.func
+  stopAllTaskAudio: PropTypes.func,
+  activeTaskIndex: PropTypes.number
 };
 
 const mapStateToProps = state => ({
@@ -341,7 +339,8 @@ const mapStateToProps = state => ({
   activeTask: getActiveTask(state),
   playerKit: getPlayerKit(state),
   endingChapter: getEndingChapter(state),
-  finalBadgeShown: getFinalBadgeShown(state)
+  finalBadgeShown: getFinalBadgeShown(state),
+  activeTaskIndex: getActiveTaskIndex(state)
 });
 
 const mapDispatchToProps = dispatch => ({
