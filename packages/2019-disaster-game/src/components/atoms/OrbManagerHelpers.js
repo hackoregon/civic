@@ -32,11 +32,13 @@ export function createRandomLayout(
   // create a number of orbs based on each possibleItem's weighting to achieve the correct distribution. Add the x, y, and velocity properties to its existing properties for that item
   for (let i = 0; i < possibleItems.length; i += 1) {
     let itemData = possibleItems[i];
-    const isRequiredItem = itemData.id === requiredItem;
+    const isRequiredItem = requiredItem
+      ? !!(itemData.id === requiredItem)
+      : true;
     const totalGeneratedOrbs = isRequiredItem
       ? 10
       : Math.round(config.orbCount * itemData.weighting);
-    const good = requiredItem ? !!isRequiredItem : false;
+    const good = requiredItem ? !!isRequiredItem : true;
 
     for (let j = 0; j < totalGeneratedOrbs; j += 1) {
       const orbId = `${itemData.type}-${j}`;

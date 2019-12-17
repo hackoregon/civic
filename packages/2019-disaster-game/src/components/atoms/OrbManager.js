@@ -74,6 +74,8 @@ const OrbManager = ({
   // tick is used to modulate movement based on an incrementing value
   const [tick, setTick] = useState(0);
   const [badKitItemTypesPlayed, setBadKitItemTypesPlayed] = useState({});
+  const [, updateState] = React.useState();
+  const forceUpdate = useCallback(() => updateState({}), []);
 
   // the boundaries of the OrbManagers area
   const boundsRef = useRef();
@@ -113,6 +115,7 @@ const OrbManager = ({
       setCompletedOrbs([]);
       setOrbModelsState(newOrbs);
       setHasInitialized(true);
+      forceUpdate();
     }
   }, [
     activeTaskIndex,
@@ -126,7 +129,8 @@ const OrbManager = ({
     activeTask,
     prevActiveTaskIndex,
     activeScreen,
-    possibleKitItems
+    possibleKitItems,
+    forceUpdate
   ]);
 
   const addOrbScore = useCallback(
