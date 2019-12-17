@@ -17,6 +17,12 @@ import {
   getEndingChapter,
   getFinalBadgeShown
 } from "../../../state/tasks";
+import {
+  playAudio as _playAudio,
+  stopAudio as _stopAudio,
+  stopAllTaskAudio as _stopAllTaskAudio
+} from "../../../state/sfx";
+import { TYPES as SFX_TYPES } from "../../../constants/sfx";
 import { getPlayerKit } from "../../../state/kit";
 import usePrevious from "../../../state/hooks/usePrevious";
 import { palette } from "../../../constants/style";
@@ -79,12 +85,16 @@ const TaskScreenContainer = ({
   endingChapter,
   endChapter,
   showEndChapterSequence,
-  finalBadgeShown
+  finalBadgeShown,
+  playAudio,
+  stopAudio,
+  stopAllTaskAudio
 }) => {
   const [solveScreenOpen, setSolveScreenOpen] = useState(true);
   const [showRestartModal, setShowRestartModal] = useState(false);
   const [shouldEndChapter, setShouldEndChapter] = useState(false);
   const prevShowRestart = usePrevious(showRestartModal);
+  const prevTaskPhase = usePrevious(taskPhase);
   const {
     SOLVING_SAVE_YOURSELF,
     SOLVING_SAVE_OTHERS,
@@ -97,9 +107,21 @@ const TaskScreenContainer = ({
     MODAL_BADGE_EARNED
   } = taskPhaseKeys;
   const [restartTimer] = useState(new Timer());
+  const [audioDelay] = useState(new Timer());
 
   // Start chapter timer and phase timer
-  useEffect(init, []);
+  useEffect(() => {
+    init();
+    playAudio(SFX_TYPES.THEME_TASKS);
+
+    return () => {
+      audioDelay.stop();
+      stopAudio(SFX_TYPES.THEME_TASKS);
+      stopAudio(SFX_TYPES.TASKS_VOTE_INSTRUCTION);
+      stopAudio(SFX_TYPES.TASKS_MOTIVATE);
+      stopAllTaskAudio();
+    };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // End chapter
   useEffect(() => {
@@ -124,9 +146,51 @@ const TaskScreenContainer = ({
     taskPhase
   ]);
 
+  // Sounds
+  const startQuestionAudioDelay = useCallback(() => {
+    audioDelay.reset();
+    audioDelay.setDuration(4);
+    audioDelay.addCompleteCallback(() => {
+      playAudio(SFX_TYPES[activeTask.audioQuestion]);
+    });
+    audioDelay.start();
+  }, [activeTask, audioDelay, playAudio]);
+
   /*
     Phase: Change to solving
-      - open solving screen
+      - play audio
+  */
+  useEffect(() => {
+    const onDifferentPhase = prevTaskPhase !== taskPhase;
+    const isSolvingPhase =
+      taskPhase === SOLVING_SAVE_YOURSELF || taskPhase === SOLVING_SAVE_OTHERS;
+
+    if (onDifferentPhase) {
+      // TODO: make save yourself 1 and 2 play
+      if (isSolvingPhase && activeTask) {
+        playAudio(SFX_TYPES[activeTask.audioInstruction]);
+        startQuestionAudioDelay();
+      } else if (taskPhase === CHOOSE_TASK) {
+        playAudio(SFX_TYPES.TASKS_VOTE_INSTRUCTION);
+      } else if (taskPhase === MODAL_CHOSEN_TASK) {
+        playAudio(SFX_TYPES.TASKS_MOTIVATE);
+      }
+    }
+  }, [
+    CHOOSE_TASK,
+    MODAL_CHOSEN_TASK,
+    SOLVING_SAVE_OTHERS,
+    SOLVING_SAVE_YOURSELF,
+    activeTask,
+    playAudio,
+    prevTaskPhase,
+    startQuestionAudioDelay,
+    taskPhase
+  ]);
+
+  /*
+    Phase: Change to solving or related modal
+      - open solving screen & leave open
   */
   useEffect(() => {
     const phasesToBeOpenFor = [
@@ -244,11 +308,8 @@ TaskScreenContainer.propTypes = {
   activeTask: PropTypes.shape({
     id: PropTypes.string,
     time: PropTypes.number,
-    // audioInstruction: SFX_TYPES.rubbleInstructionBoy,
-    // audioQuestion: sample([
-    //   SFX_TYPES.rubbleQuestionGirl,
-    //   SFX_TYPES.rubbleQuestionBoy
-    // ]),
+    audioInstruction: PropTypes.string,
+    audioQuestion: PropTypes.string,
     requiredItem: PropTypes.string,
     numberItemsToSolve: PropTypes.number,
     peopleSavedRange: PropTypes.arrayOf(PropTypes.number),
@@ -269,7 +330,10 @@ TaskScreenContainer.propTypes = {
   endingChapter: PropTypes.bool,
   endChapter: PropTypes.func,
   showEndChapterSequence: PropTypes.func,
-  finalBadgeShown: PropTypes.bool
+  finalBadgeShown: PropTypes.bool,
+  playAudio: PropTypes.func,
+  stopAudio: PropTypes.func,
+  stopAllTaskAudio: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -284,7 +348,10 @@ const mapDispatchToProps = dispatch => ({
   init: bindActionCreators(startChapterAndPhaseTimers, dispatch),
   finishSolveTaskEarly: bindActionCreators(_finishSolveTaskEarly, dispatch),
   showEndChapterSequence: bindActionCreators(_showEndChapterSequence, dispatch),
-  endChapter: bindActionCreators(goToNextChapter, dispatch)
+  endChapter: bindActionCreators(goToNextChapter, dispatch),
+  playAudio: bindActionCreators(_playAudio, dispatch),
+  stopAudio: bindActionCreators(_stopAudio, dispatch),
+  stopAllTaskAudio: bindActionCreators(_stopAllTaskAudio, dispatch)
 });
 
 export default connect(
