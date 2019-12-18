@@ -285,19 +285,19 @@ const TaskScreenContainer = ({
   /* RESTART MODAL TIMER
     After 10s, restart the game unless the cancel callback is called in the RestartModal
   */
-  const checkIfEndingChapterfAndRestart = useCallback(() => {
+  const checkIfEndingChapterAndRestart = useCallback(() => {
     if (!endingChapter) {
       restartGame();
     }
   }, [endingChapter, restartGame]);
 
   const startRestartTimer = useCallback(() => {
-    restartTimer.setDuration(10);
+    restartTimer.setDuration(35);
     restartTimer.addCompleteCallback(() => {
-      checkIfEndingChapterfAndRestart();
+      checkIfEndingChapterAndRestart();
     });
     restartTimer.start();
-  }, [checkIfEndingChapterfAndRestart, restartTimer]);
+  }, [checkIfEndingChapterAndRestart, restartTimer]);
 
   // Auto restart when showing modal after x time passed
   useEffect(() => {
