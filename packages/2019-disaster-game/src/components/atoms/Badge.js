@@ -44,7 +44,7 @@ const hideCircle = css`
 
 const Badge = ({ badgeInfo, openBadgeDrawer, isSummary }) => {
   const prevBadgeInfo = usePrevious(badgeInfo);
-  const badgeAcquired = badgeInfo && badgeInfo.badgeSVG && badgeInfo.acquired;
+  const badgeEarned = badgeInfo && badgeInfo.activeTaskIndexWhenEarned;
   const isEarthquakeHeroBadge =
     badgeInfo && badgeInfo.id === "earthquakeHeroBadge";
   const hideBadge = isEarthquakeHeroBadge && !isSummary;
@@ -60,16 +60,16 @@ const Badge = ({ badgeInfo, openBadgeDrawer, isSummary }) => {
       <div
         css={css`
           ${badgeStyle};
-          ${badgeAcquired && !hideBadge ? showBadge : ""};
+          ${badgeEarned && !hideBadge ? showBadge : ""};
         `}
       >
-        {badgeAcquired && (
+        {badgeEarned && (
           <img
             src={badgeInfo.badgeSVG}
             alt="Badge"
             css={css`
               ${badgeStyle};
-              ${badgeAcquired && !hideBadge ? showBadge : ""};
+              ${badgeEarned && !hideBadge ? showBadge : ""};
             `}
           />
         )}
@@ -77,7 +77,7 @@ const Badge = ({ badgeInfo, openBadgeDrawer, isSummary }) => {
       <div
         css={css`
           ${circleStyle};
-          ${badgeAcquired ? hideCircle : ""};
+          ${badgeEarned ? hideCircle : ""};
         `}
       />
     </div>

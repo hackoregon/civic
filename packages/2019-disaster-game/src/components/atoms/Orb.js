@@ -68,10 +68,9 @@ export default class Orb extends PureComponent {
   componentDidUpdate(prevProps, prevState) {
     const { isComplete } = this.state;
     const { addOrbScore, orbModel, setOrbComplete } = this.props;
-    const { orbId } = orbModel;
 
     if (!prevState.isComplete && isComplete) {
-      addOrbScore(orbId);
+      addOrbScore(orbModel);
       setOrbComplete(orbModel);
     }
   }

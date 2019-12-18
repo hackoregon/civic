@@ -8,10 +8,14 @@ import { palette } from "../../../constants/style";
 import { KIT, TASKS } from "../../../constants/chapters";
 import {
   getActiveChapterId,
-  getActiveChapterIndex,
-  getActiveChapterData
+  getActiveChapterIndex
 } from "../../../state/chapters";
-import { getActiveTaskData, getActiveTaskIndex } from "../../../state/tasks";
+import {
+  getTaskPhase,
+  taskPhaseKeys,
+  getAllTaskPhaseData,
+  getActiveTaskIndex
+} from "../../../state/tasks";
 import CheckmarkSVG from "../../../../assets/title_bar_checkmark.svg";
 import BadgesDrawer from "./BadgesDrawer";
 
@@ -102,14 +106,20 @@ const coundownContainer = css`
   }
 `;
 
+const {
+  SOLVING_SAVE_YOURSELF,
+  SOLVING_SAVE_OTHERS,
+  CHOOSE_TASK
+} = taskPhaseKeys;
+
 const JourneyBar = ({
   activeChapterId,
   activeChapterIndex,
-  activeChapterData,
-  activeTaskData,
   activeTaskIndex,
   badgeDrawerOpen,
-  openBadgeDrawer
+  openBadgeDrawer,
+  activeTaskPhase,
+  allTaskPhaseData
 }) => {
   const [chapterTimeLeft, setChapterTimeLeft] = useState(0);
   const [savingYourself, setSavingYourself] = useState(false);
@@ -122,16 +132,19 @@ const JourneyBar = ({
   }, [chapterTimeLeft]);
 
   useEffect(() => {
-    if (activeChapterId === TASKS) {
-      if (activeTaskData) {
-        setChapterTimeLeft(activeTaskData.time);
-      } else {
-        setChapterTimeLeft(activeChapterData.voteDuration);
-      }
+    const showTimerPhases = [
+      SOLVING_SAVE_YOURSELF,
+      SOLVING_SAVE_OTHERS,
+      CHOOSE_TASK
+    ];
+    const phaseShouldHaveTimer = showTimerPhases.indexOf(activeTaskPhase) > -1;
+    const resetForSecondSaveYourselfTask = activeTaskIndex === 1;
+    if (phaseShouldHaveTimer || resetForSecondSaveYourselfTask) {
+      setChapterTimeLeft(allTaskPhaseData[activeTaskPhase].time - 1);
     } else {
-      setChapterTimeLeft(activeChapterData.duration);
+      setChapterTimeLeft(0);
     }
-  }, [activeChapterData, activeChapterId, activeTaskData]);
+  }, [activeTaskPhase, allTaskPhaseData, activeTaskIndex]);
 
   useEffect(() => {
     const countdownInterval = setInterval(tick, 1000);
@@ -232,19 +245,19 @@ const JourneyBar = ({
 JourneyBar.propTypes = {
   activeChapterId: PropTypes.string,
   activeChapterIndex: PropTypes.number,
-  activeChapterData: PropTypes.shape({}),
-  activeTaskData: PropTypes.shape({}),
   activeTaskIndex: PropTypes.number,
   badgeDrawerOpen: PropTypes.bool,
-  openBadgeDrawer: PropTypes.func
+  openBadgeDrawer: PropTypes.func,
+  activeTaskPhase: PropTypes.string,
+  allTaskPhaseData: PropTypes.shape({})
 };
 
 const mapStateToProps = state => ({
   activeChapterId: getActiveChapterId(state),
   activeChapterIndex: getActiveChapterIndex(state),
-  activeChapterData: getActiveChapterData(state),
-  activeTaskData: getActiveTaskData(state),
-  activeTaskIndex: getActiveTaskIndex(state)
+  activeTaskIndex: getActiveTaskIndex(state),
+  activeTaskPhase: getTaskPhase(state),
+  allTaskPhaseData: getAllTaskPhaseData(state)
 });
 
 export default connect(mapStateToProps)(memo(JourneyBar));

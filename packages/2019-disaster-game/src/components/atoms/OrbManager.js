@@ -7,7 +7,7 @@ import React, {
   useCallback
 } from "react";
 import { connect } from "react-redux";
-import { map, find as _find, filter } from "lodash";
+import { map, filter } from "lodash";
 import styled from "@emotion/styled";
 import remove from "lodash/remove";
 
@@ -17,8 +17,7 @@ import { TYPES as SFX_TYPES } from "../../constants/sfx";
 import useBounds from "../../state/hooks/useBounds";
 import usePrevious from "../../state/hooks/usePrevious";
 import useAnimationFrame from "../../state/hooks/useAnimationFrame";
-import { getTaskPhase, getActiveTaskIndex } from "../../state/tasks";
-import { MOVING_MAP } from "../../constants/actions";
+import { getActiveTaskIndex } from "../../state/tasks";
 
 import Orb from "./Orb";
 import {
@@ -53,9 +52,10 @@ const OrbManager = ({
   onOrbSelection,
   checkItemIsCorrect,
   playSFX,
-  taskPhase,
   activeTaskIndex,
-  requiredItem
+  requiredItem,
+  activeScreen,
+  screensForOrbDisplay
 } = {}) => {
   const [hasInitialized, setHasInitialized] = useState(false);
   const [orbModels, setOrbModelsState] = useState([]);
@@ -70,12 +70,12 @@ const OrbManager = ({
   const boundsRef = useRef();
   const bounds = useBounds(boundsRef);
   const prevBounds = usePrevious(bounds);
-  const prevTaskPhase = usePrevious(taskPhase);
+  const prevActiveScreen = usePrevious(activeScreen);
   const prevActiveTaskIndex = usePrevious(activeTaskIndex);
 
   /* Generate new orbModels when the interface bounds change, usually only on load. Most often, generate new orbModels when switching between voting and solving. This catalyzes orb data and placement */
   useLayoutEffect(() => {
-    const newTaskPhase = prevTaskPhase !== taskPhase && !!bounds.width;
+    const newActiveScreen = prevActiveScreen !== activeScreen && !!bounds.width;
 
     const newBounds =
       prevBounds && !prevBounds.width && bounds.width && !hasInitialized;
@@ -83,12 +83,13 @@ const OrbManager = ({
     const resetForSaveYourself =
       prevActiveTaskIndex !== activeTaskIndex && activeTaskIndex === 1;
 
-    if (newBounds || newTaskPhase || resetForSaveYourself) {
+    if (newBounds || newActiveScreen || resetForSaveYourself) {
       const newOrbs = createRandomLayout(
         possibleItems,
         bounds,
         ORB_CONFIG,
-        requiredItem
+        requiredItem,
+        activeScreen
       );
       setHasInitialized(true);
       setCompletedOrbs([]);
@@ -101,15 +102,14 @@ const OrbManager = ({
     possibleItems,
     prevActiveTaskIndex,
     prevBounds,
-    prevTaskPhase,
-    taskPhase,
+    prevActiveScreen,
+    activeScreen,
     requiredItem
   ]);
 
   const addOrbScore = useCallback(
-    orbId => {
-      const theOrb = _find(orbModels, orb => orb.orbId === orbId);
-      onOrbSelection(theOrb);
+    orbModel => {
+      onOrbSelection(orbModel);
     },
     // update when orbModels.length changes
     // if we udpate when orbModels changes, the addOrbScore will continuously be recreated,
@@ -196,13 +196,6 @@ const OrbManager = ({
           checkItemIsCorrect(currentOrb),
           currentOrb
         );
-        /* This fixes removing the orb when it has gone off screen, but it makes all the other orbModels animate like they're appearing for the first time */
-        // currentOrb.frameRerenders = currentOrb.frameRerenders ? (currentOrb.frameRerenders + 1) : 1;
-        // if (currentOrb.frameRerenders === 50) {
-        //   i = i - 1;
-        //   setOrbModelsState(orbModels.splice(i, 1));
-        //   continue;
-        // }
       } else {
         currentOrb = incompleteOrbHandler(currentOrb, tick, i, ORB_CONFIG);
       }
@@ -274,10 +267,12 @@ const OrbManager = ({
   // by default all orbModels are rendered,
   // until their `bypassRender` property is true
   const renderableOrbs = filter(orbModels, orb => !orb.bypassRender);
+  const shouldRenderOrbs =
+    screensForOrbDisplay && screensForOrbDisplay.indexOf(activeScreen) > -1;
 
   return (
     <OrbsStyle ref={boundsRef}>
-      {taskPhase !== MOVING_MAP &&
+      {shouldRenderOrbs &&
         map(renderableOrbs, orb => {
           const zIndex = orbsZIndex.indexOf(orb.orbId) + 1;
 
@@ -315,7 +310,6 @@ const OrbsStyle = styled.div`
 `;
 
 const mapStateToProps = state => ({
-  taskPhase: getTaskPhase(state),
   activeTaskIndex: getActiveTaskIndex(state)
 });
 

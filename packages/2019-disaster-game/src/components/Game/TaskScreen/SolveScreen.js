@@ -3,7 +3,7 @@ import { css, jsx } from "@emotion/core";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
 import { useState, useEffect } from "react";
-import { getActiveTaskData } from "../../../state/tasks";
+import { getActiveTask } from "../../../state/tasks";
 import RequiredItemsOrbs from "./RequiredItemsOrbs";
 
 const screenLayout = css`
@@ -30,12 +30,7 @@ const requiredItemsStyle = css`
   width: 100%;
 `;
 
-const SolveScreen = ({
-  activeTask,
-  activeTaskIndex,
-  open,
-  correctItemsChosen
-}) => {
+const SolveScreen = ({ activeTask, open }) => {
   const taskImageGenerator = currentTask => {
     if (currentTask) {
       return css`
@@ -58,7 +53,7 @@ const SolveScreen = ({
     if (activeTask) {
       setTaskImageCss(taskImageGenerator(activeTask));
     }
-  }, [activeTaskIndex, activeTask]);
+  }, [activeTask]);
 
   return (
     <div
@@ -72,7 +67,7 @@ const SolveScreen = ({
         <RequiredItemsOrbs
           css={requiredItemsStyle}
           numberRequiredItems={activeTask.numberItemsToSolve}
-          correctItemsChosen={correctItemsChosen}
+          correctItemsChosen={activeTask.numberCorrectChosen}
           requiredItem={activeTask.requiredItem}
         />
       )}
@@ -81,14 +76,12 @@ const SolveScreen = ({
 };
 
 SolveScreen.propTypes = {
-  activeTaskIndex: PropTypes.number,
   activeTask: PropTypes.shape({}),
-  open: PropTypes.bool,
-  correctItemsChosen: PropTypes.number
+  open: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
-  activeTask: getActiveTaskData(state)
+  activeTask: getActiveTask(state)
 });
 
 export default connect(mapStateToProps)(SolveScreen);

@@ -1,22 +1,30 @@
 import React, { memo, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
+import { bindActionCreators } from "redux";
 
-import { getActiveChapterData, goToNextChapter } from "../../../state/chapters";
+import {
+  getActiveChapterData,
+  goToNextChapter as _goToNextChapter
+} from "../../../state/chapters";
 import Timer from "../../../utils/timer";
 
-const DefaultScreen = ({ activeChapter, endChapter, chapterDuration = 60 }) => {
+const DefaultScreen = ({
+  activeChapter,
+  goToNextChapter,
+  chapterDuration = 60
+}) => {
   const [chapterTimer] = useState(new Timer());
 
   // start a timer for the _entire_ chapter
   useEffect(() => {
     chapterTimer.setDuration(chapterDuration);
-    chapterTimer.addCompleteCallback(() => endChapter());
+    chapterTimer.addCompleteCallback(() => goToNextChapter());
     chapterTimer.start();
     return () => {
       chapterTimer.stop();
     };
-  }, [chapterDuration, chapterTimer, endChapter]);
+  }, [chapterDuration, chapterTimer, goToNextChapter]);
 
   return (
     <>
@@ -29,7 +37,7 @@ DefaultScreen.propTypes = {
   activeChapter: PropTypes.shape({
     title: PropTypes.string
   }),
-  endChapter: PropTypes.func,
+  goToNextChapter: PropTypes.func,
   chapterDuration: PropTypes.number
 };
 
@@ -38,9 +46,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  endChapter() {
-    dispatch(goToNextChapter());
-  }
+  goToNextChapter: bindActionCreators(_goToNextChapter, dispatch)
 });
 
 export default connect(

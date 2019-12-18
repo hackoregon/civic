@@ -2,6 +2,7 @@
 import { css, jsx } from "@emotion/core";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 import { palette } from "../../constants/style";
 import { playSFX as _playSFX } from "../../state/sfx";
@@ -11,7 +12,7 @@ const modalContainer = css`
   position: absolute;
   width: 100vw;
   height: 100vh;
-  background-color: ${palette.blueRGBA};
+  background-color: ${palette.modalBackgroundGrey};
   display: grid;
   align-content: center;
   justify-content: center;
@@ -22,7 +23,7 @@ const modalContainer = css`
 `;
 
 const messageStyle = css`
-  background-color: ${palette.lightLime};
+  background-color: ${palette.white};
   padding: 100px;
   border-radius: 50px;
   justify-items: center;
@@ -34,7 +35,7 @@ const titleText = css`
   font-family: "Luckiest Guy", sans-serif;
   font-size: 14rem;
   margin: 50px 0 0;
-  color: ${palette.red};
+  color: ${palette.darkGrey};
 `;
 
 const buttonContainer = css`
@@ -67,12 +68,12 @@ const restartButton = css`
 `;
 
 const playButton = css`
-  background-color: ${palette.lightBlue};
-  box-shadow: 0px 50px 0px 0px ${palette.blue};
+  background-color: ${palette.lightLime};
+  box-shadow: 0px 50px 0px 0px ${palette.lime};
 
   &:active {
-    background-color: ${palette.blue};
-    box-shadow: 0px 50px 0px 0px ${palette.darkBlue};
+    background-color: ${palette.lime};
+    box-shadow: 0px 50px 0px 0px ${palette.darkLime};
   }
 `;
 
@@ -82,6 +83,8 @@ const buttonFont = css`
   font-family: "Luckiest Guy", sans-serif;
   font-size: 7rem;
   color: white;
+  text-shadow: 1px 1px 3px ${palette.darkGrey}, 1px -1px 3px ${palette.darkGrey},
+    -1px 1px 3px ${palette.darkGrey}, -1px -1px 3px ${palette.darkGrey};
 `;
 
 const RestartModal = ({ cancelRestart, restartGame, playSFX }) => {
@@ -131,9 +134,7 @@ RestartModal.propTypes = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  playSFX(id) {
-    dispatch(_playSFX(id));
-  }
+  playSFX: bindActionCreators(_playSFX, dispatch)
 });
 
 export default connect(

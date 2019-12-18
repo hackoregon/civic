@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback } from "react";
 /** @jsx jsx */
+import { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import { css, jsx } from "@emotion/core";
 
@@ -46,7 +46,7 @@ const textStyle = css`
   margin: 0;
   padding: 5px 15px;
   text-align: center;
-  font-family: "Boogaloo", cursive;
+  font-family: "Boogaloo", sans-serif;
   font-size: 16px;
   line-height: 1;
   color: ${palette.gold};
@@ -66,7 +66,8 @@ const MatchLockInterface = ({
   noInteractionCallback,
   restartNoInteractionTimer,
   noInteractionDuration,
-  requiredItem
+  requiredItem,
+  screensForOrbDisplay
 }) => {
   const [interactionTimeout] = useState(new Timer());
   const [open, setOpen] = useState(false);
@@ -126,6 +127,7 @@ const MatchLockInterface = ({
           checkItemIsCorrect={checkItemIsCorrect}
           activeScreen={activeScreen}
           requiredItem={requiredItem}
+          screensForOrbDisplay={screensForOrbDisplay}
         />
       </GUIStyle>
     </div>
@@ -141,7 +143,8 @@ MatchLockInterface.propTypes = {
   noInteractionCallback: PropTypes.func,
   restartNoInteractionTimer: PropTypes.bool,
   noInteractionDuration: PropTypes.number,
-  requiredItem: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.string])
+  requiredItem: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.string]),
+  screensForOrbDisplay: PropTypes.arrayOf(PropTypes.string)
 };
 
 export default MatchLockInterface;

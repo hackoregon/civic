@@ -5,11 +5,15 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 
-import { goToNextChapter } from "../../../state/chapters";
+import { goToNextChapter as _goToNextChapter } from "../../../state/chapters";
 import Timer from "../../../utils/timer";
 import { palette } from "../../../constants/style";
 import { dustMask, protectiveGear } from "../../../constants/items";
-import { getPlayerKit, getItems, addItemToPlayerKit } from "../../../state/kit";
+import {
+  getPlayerKit,
+  getItems,
+  addItemToPlayerKit as _addItemToPlayerKit
+} from "../../../state/kit";
 import KitRow from "../KitScreen/Kit";
 
 const contentWrapper = css`
@@ -80,8 +84,8 @@ const buildMessage = (noDustMask, noProtectiveGear, missingBoth) => (
 const KitOutro = ({
   playerKit,
   allPossibleItems,
-  addItemToKit,
-  endChapter
+  addItemToPlayerKit,
+  goToNextChapter
 }) => {
   const customContent = {};
   const dustMaskKey = dustMask;
@@ -91,7 +95,7 @@ const KitOutro = ({
   const missingBoth = noDustMask && noProtectiveGear;
 
   const [augmentKitTimer] = useState(new Timer());
-  const [endChapterTimer] = useState(new Timer());
+  const [goToNextChapterTimer] = useState(new Timer());
   const [augmentMessage] = useState(
     buildMessage(noDustMask, noProtectiveGear, missingBoth)
   );
@@ -107,14 +111,14 @@ const KitOutro = ({
   const augmentKit = useCallback(() => {
     if (noDustMask) {
       const dustMaskDataShape = allPossibleItems[dustMaskKey];
-      addItemToKit(dustMaskDataShape);
+      addItemToPlayerKit(dustMaskDataShape);
     }
     if (noProtectiveGear) {
       const dustMaskDataShape = allPossibleItems[protectiveGearKey];
-      addItemToKit(dustMaskDataShape);
+      addItemToPlayerKit(dustMaskDataShape);
     }
   }, [
-    addItemToKit,
+    addItemToPlayerKit,
     allPossibleItems,
     dustMaskKey,
     noDustMask,
@@ -122,13 +126,13 @@ const KitOutro = ({
     protectiveGearKey
   ]);
 
-  const startEndChapterTimer = useCallback(() => {
-    endChapterTimer.setDuration(7);
-    endChapterTimer.addCompleteCallback(() => {
-      endChapter();
+  const startgoToNextChapterTimer = useCallback(() => {
+    goToNextChapterTimer.setDuration(7);
+    goToNextChapterTimer.addCompleteCallback(() => {
+      goToNextChapter();
     });
-    endChapterTimer.start();
-  }, [endChapter, endChapterTimer]);
+    goToNextChapterTimer.start();
+  }, [goToNextChapter, goToNextChapterTimer]);
 
   useEffect(() => {
     augmentKitTimer.setDuration(7);
@@ -136,15 +140,15 @@ const KitOutro = ({
       if (noDustMask || noProtectiveGear) {
         augmentKit();
         setAddingToKit(true);
-        startEndChapterTimer();
+        startgoToNextChapterTimer();
       } else {
-        endChapter();
+        goToNextChapter();
       }
     });
     augmentKitTimer.start();
     return () => {
       augmentKitTimer.stop();
-      endChapterTimer.stop();
+      goToNextChapterTimer.stop();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -170,8 +174,8 @@ const KitOutro = ({
 KitOutro.propTypes = {
   playerKit: PropTypes.shape({}),
   allPossibleItems: PropTypes.shape({}),
-  addItemToKit: PropTypes.func,
-  endChapter: PropTypes.func
+  addItemToPlayerKit: PropTypes.func,
+  goToNextChapter: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -180,8 +184,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addItemToKit: bindActionCreators(addItemToPlayerKit, dispatch),
-  endChapter: bindActionCreators(goToNextChapter, dispatch)
+  addItemToPlayerKit: bindActionCreators(_addItemToPlayerKit, dispatch),
+  goToNextChapter: bindActionCreators(_goToNextChapter, dispatch)
 });
 
 export default connect(

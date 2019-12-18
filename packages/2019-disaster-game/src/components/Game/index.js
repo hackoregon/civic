@@ -5,11 +5,10 @@ import { connect } from "react-redux";
 import styled from "@emotion/styled";
 import { bindActionCreators } from "redux";
 
-import { resetState as resetStateTasks } from "../../state/tasks";
-import { resetState as resetStateKit } from "../../state/kit";
-import { resetState as resetStateUser } from "../../state/user";
+import { resetState as _resetStateTasks } from "../../state/tasks";
+import { resetState as _resetStateKit } from "../../state/kit";
 import {
-  goToChapter,
+  goToChapter as _goToChapter,
   getActiveChapterId,
   getActiveChapterData
 } from "../../state/chapters";
@@ -43,23 +42,20 @@ import "@hackoregon/component-library/assets/global.styles.css";
 const Game = ({
   activeChapterId,
   activeChapterData,
-  resetKitState,
-  resetTasksState,
-  resetUserState,
-  endChapter
+  resetStateKit,
+  resetStateTasks,
+  goToChapter
 }) => {
   const [playCount, setPlayCount] = useState(0);
 
   const increasePlayCount = () => {
-    console.log("increasing play count from", playCount);
     setPlayCount(prevPlayCount => prevPlayCount + 1);
   };
 
   const restartGame = () => {
-    resetKitState();
-    resetTasksState();
-    resetUserState();
-    endChapter();
+    resetStateKit();
+    resetStateTasks();
+    goToChapter();
   };
 
   const renderChapter = chapterId => {
@@ -174,10 +170,9 @@ Game.propTypes = {
   activeChapterData: PropTypes.shape({
     showTitleBar: PropTypes.bool
   }),
-  endChapter: PropTypes.func,
-  resetKitState: PropTypes.func,
-  resetTasksState: PropTypes.func,
-  resetUserState: PropTypes.func
+  goToChapter: PropTypes.func,
+  resetStateKit: PropTypes.func,
+  resetStateTasks: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -187,10 +182,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  endChapter: bindActionCreators(goToChapter, dispatch),
-  resetKitState: bindActionCreators(resetStateKit, dispatch),
-  resetTasksState: bindActionCreators(resetStateTasks, dispatch),
-  resetUserState: bindActionCreators(resetStateUser, dispatch)
+  goToChapter: bindActionCreators(_goToChapter, dispatch),
+  resetStateKit: bindActionCreators(_resetStateKit, dispatch),
+  resetStateTasks: bindActionCreators(_resetStateTasks, dispatch)
 });
 
 export default connect(

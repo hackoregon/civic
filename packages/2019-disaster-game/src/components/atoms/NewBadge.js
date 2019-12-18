@@ -10,18 +10,13 @@ import {
   playAudio as _playAudio,
   stopAudio as _stopAudio
 } from "../../state/sfx";
-import {
-  // getTeamworkBadge,
-  getPreparedBadge,
-  getHeroBadge
-} from "../../state/user";
 
 // background color is blue
 const containerStyle = css`
   height: 100vh;
   width: 100vw;
   position: absolute;
-  background-color: ${palette.blueRGBA};
+  background-color: ${palette.modalBackgroundGrey};
   display: grid;
   align-content: center;
   justify-content: center;
@@ -59,63 +54,61 @@ const titleText = css`
   font-size: 14rem;
 `;
 
-const NewBadge = ({ type, badges, playAudio, stopAudio }) => {
-  const [badgeInfo, setBadgeInfo] = useState(badges[type]);
+const NewBadge = ({
+  badgeData,
+  displayBadgeTime = 11,
+  playAudio,
+  stopAudio,
+  finishDisplayCallback,
+  fade = true
+}) => {
+  const [badgeInfo, setBadgeInfo] = useState(badgeData);
   const [hideBadge, setHideBadge] = useState(false);
+  const fadeBadgeTimeout = (displayBadgeTime - 1) * 1000;
 
   useEffect(() => {
-    setBadgeInfo(badges[type]);
+    setBadgeInfo(badgeData);
     const hideBadgeTimeout = setTimeout(() => {
-      setHideBadge(true);
-    }, 8000);
-
-    return () => {
-      clearTimeout(hideBadgeTimeout);
-    };
-  }, [badges, type]);
-
-  useEffect(() => {
+      if (fade) setHideBadge(true);
+      if (finishDisplayCallback) finishDisplayCallback();
+    }, fadeBadgeTimeout);
     playAudio(SFX_TYPES.BADGE_EARNED_SFX);
 
     return () => {
       stopAudio(SFX_TYPES.BADGE_EARNED_SFX);
+      clearTimeout(hideBadgeTimeout);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const badgeInfoComplete = badgeInfo && badgeInfo.badgeSVG && badgeInfo.title;
-
-  if (badgeInfoComplete) {
-    return (
-      <div
-        css={css`
-          ${containerStyle};
-          ${hideBadge ? hideBadgeStyle : ""};
-        `}
-      >
-        <p css={[badgeText, titleText]}>NEW BADGE EARNED!</p>
-        <img src={badgeInfo.badgeSVG} alt="Badge" css={badgeStyle} />
-        <p css={badgeText}>{badgeInfo.title}</p>
-      </div>
-    );
-  }
-  return null;
+  return (
+    <div
+      css={css`
+        ${containerStyle};
+        ${hideBadge ? hideBadgeStyle : ""};
+      `}
+    >
+      <p css={[badgeText, titleText]}>NEW BADGE EARNED!</p>
+      <img src={badgeInfo.badgeSVG} alt="Badge" css={badgeStyle} />
+      <p css={badgeText}>{badgeInfo.title}</p>
+    </div>
+  );
 };
 
 NewBadge.propTypes = {
-  type: PropTypes.string,
-  badges: PropTypes.shape({}),
+  badgeData: PropTypes.shape({
+    badgeSVG: PropTypes.string,
+    title: PropTypes.string,
+    id: PropTypes.string,
+    shown: PropTypes.bool,
+    activeTaskIndexWhenEarned: PropTypes.oneOfType([null, PropTypes.number])
+  }),
   playAudio: PropTypes.func,
-  stopAudio: PropTypes.func
+  stopAudio: PropTypes.func,
+  displayBadgeTime: PropTypes.number,
+  finishDisplayCallback: PropTypes.func,
+  fade: PropTypes.bool
 };
-
-const mapStateToProps = state => ({
-  badges: {
-    // teamwork: getTeamworkBadge(state),
-    prepared: getPreparedBadge(state),
-    hero: getHeroBadge(state)
-  }
-});
 
 const mapDispatchToProps = dispatch => ({
   playAudio: bindActionCreators(_playAudio, dispatch),
@@ -123,6 +116,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(NewBadge);
