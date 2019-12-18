@@ -7,7 +7,6 @@ import { PropTypes } from "prop-types";
 
 import { resetState as resetStateTasks } from "../../../state/tasks";
 import { resetState as resetStateKit } from "../../../state/kit";
-import { resetState as resetStateUser } from "../../../state/user";
 import { goToChapter, goToNextChapter } from "../../../state/chapters";
 import { getReloadMode } from "../../../state/settings";
 import usePrevious from "../../../state/hooks/usePrevious";
@@ -177,7 +176,6 @@ const SummaryScreen = ({
   endChapter,
   resetKitState,
   resetTasksState,
-  resetUserState,
   replay,
   increasePlayCount,
   playCount,
@@ -200,7 +198,6 @@ const SummaryScreen = ({
     toAttractorScreen => {
       resetKitState();
       resetTasksState();
-      resetUserState();
       if (reloadMode && playCount === 5) {
         /* eslint-disable */
         location.reload();
@@ -211,15 +208,7 @@ const SummaryScreen = ({
         replay(1);
       }
     },
-    [
-      endChapter,
-      playCount,
-      reloadMode,
-      replay,
-      resetKitState,
-      resetTasksState,
-      resetUserState
-    ]
+    [endChapter, playCount, reloadMode, replay, resetKitState, resetTasksState]
   );
 
   const transitionAnimation = useCallback(() => {
@@ -401,7 +390,6 @@ SummaryScreen.propTypes = {
   replay: PropTypes.func,
   resetKitState: PropTypes.func,
   resetTasksState: PropTypes.func,
-  resetUserState: PropTypes.func,
   increasePlayCount: PropTypes.func,
   playCount: PropTypes.number,
   reloadMode: PropTypes.bool,
@@ -418,7 +406,6 @@ const mapDispatchToProps = dispatch => ({
   replay: bindActionCreators(goToChapter, dispatch),
   resetKitState: bindActionCreators(resetStateKit, dispatch),
   resetTasksState: bindActionCreators(resetStateTasks, dispatch),
-  resetUserState: bindActionCreators(resetStateUser, dispatch),
   playAudio: bindActionCreators(_playAudio, dispatch),
   stopAudio: bindActionCreators(_stopAudio, dispatch)
 });

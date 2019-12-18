@@ -7,7 +7,6 @@ import { bindActionCreators } from "redux";
 
 import { resetState as resetStateTasks } from "../../state/tasks";
 import { resetState as resetStateKit } from "../../state/kit";
-import { resetState as resetStateUser } from "../../state/user";
 import {
   goToChapter,
   getActiveChapterId,
@@ -45,20 +44,17 @@ const Game = ({
   activeChapterData,
   resetKitState,
   resetTasksState,
-  resetUserState,
   endChapter
 }) => {
   const [playCount, setPlayCount] = useState(0);
 
   const increasePlayCount = () => {
-    console.log("increasing play count from", playCount);
     setPlayCount(prevPlayCount => prevPlayCount + 1);
   };
 
   const restartGame = () => {
     resetKitState();
     resetTasksState();
-    resetUserState();
     endChapter();
   };
 
@@ -176,8 +172,7 @@ Game.propTypes = {
   }),
   endChapter: PropTypes.func,
   resetKitState: PropTypes.func,
-  resetTasksState: PropTypes.func,
-  resetUserState: PropTypes.func
+  resetTasksState: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -189,8 +184,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   endChapter: bindActionCreators(goToChapter, dispatch),
   resetKitState: bindActionCreators(resetStateKit, dispatch),
-  resetTasksState: bindActionCreators(resetStateTasks, dispatch),
-  resetUserState: bindActionCreators(resetStateUser, dispatch)
+  resetTasksState: bindActionCreators(resetStateTasks, dispatch)
 });
 
 export default connect(
