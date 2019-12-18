@@ -10,7 +10,6 @@ import { goToNextChapter } from "../../../state/chapters";
 import {
   startChapterAndPhaseTimers,
   finishSolveTaskEarly as _finishSolveTaskEarly,
-  showEndChapterSequence as _showEndChapterSequence,
   choseCorrectItemForTask as _choseCorrectItemForTask,
   chooseTask as _chooseTask,
   getTaskPhase,
@@ -19,7 +18,8 @@ import {
   getEndingChapter,
   getFinalBadgeShown,
   getActiveTaskIndex,
-  getWeightedTasks
+  getWeightedTasks,
+  getBadges
 } from "../../../state/tasks";
 import {
   playAudio as _playAudio,
@@ -88,7 +88,6 @@ const TaskScreenContainer = ({
   restartGame,
   endingChapter,
   endChapter,
-  showEndChapterSequence,
   finalBadgeShown,
   playAudio,
   stopAudio,
@@ -97,11 +96,11 @@ const TaskScreenContainer = ({
   weightedPlayerKitItems,
   weightedTasks,
   choseCorrectItemForTask,
-  chooseTask
+  chooseTask,
+  badges
 }) => {
   const [solveScreenOpen, setSolveScreenOpen] = useState(true);
   const [showRestartModal, setShowRestartModal] = useState(false);
-  const [shouldEndChapter, setShouldEndChapter] = useState(false);
   const prevShowRestart = usePrevious(showRestartModal);
   const prevTaskPhase = usePrevious(taskPhase);
   const prevActiveTaskIndex = usePrevious(activeTaskIndex);
@@ -118,6 +117,7 @@ const TaskScreenContainer = ({
   } = taskPhaseKeys;
   const [restartTimer] = useState(new Timer());
   const [audioDelay] = useState(new Timer());
+  const [finalModalTimer] = useState(new Timer());
 
   // Start chapter timer and phase timer
   useEffect(() => {
@@ -126,6 +126,7 @@ const TaskScreenContainer = ({
 
     return () => {
       audioDelay.stop();
+      finalModalTimer.stop();
       stopAudio(SFX_TYPES.THEME_TASKS);
       stopAudio(SFX_TYPES.TASKS_VOTE_INSTRUCTION);
       stopAudio(SFX_TYPES.TASKS_MOTIVATE);
@@ -135,27 +136,25 @@ const TaskScreenContainer = ({
 
   // End chapter
   useEffect(() => {
-    if (endingChapter) {
-      setShouldEndChapter(true);
-    }
-  }, [endingChapter, endChapter]);
-
-  useEffect(() => {
-    const hasSeenSolvingResults = taskPhase === CHOOSE_TASK;
-    if (finalBadgeShown) {
-      stopAllTaskAudio();
-      endChapter();
-    } else if (hasSeenSolvingResults && shouldEndChapter) {
-      showEndChapterSequence();
+    if (
+      endingChapter &&
+      taskPhase === MODAL_BADGE_EARNED &&
+      badges.earthquakeHeroBadge.shown
+    ) {
+      finalModalTimer.setDuration(11);
+      finalModalTimer.addCompleteCallback(() => {
+        endChapter();
+      });
+      finalModalTimer.start();
     }
   }, [
+    endingChapter,
+    taskPhase,
     CHOOSE_TASK,
+    badges.earthquakeHeroBadge.shown,
     endChapter,
-    finalBadgeShown,
-    shouldEndChapter,
-    showEndChapterSequence,
-    stopAllTaskAudio,
-    taskPhase
+    MODAL_BADGE_EARNED,
+    finalModalTimer
   ]);
 
   // Sounds
@@ -247,15 +246,19 @@ const TaskScreenContainer = ({
   /* RESTART MODAL TIMER
     After 10s, restart the game unless the cancel callback is called in the RestartModal
   */
+  const checkIfEndingChapterfAndRestart = useCallback(() => {
+    if (!endingChapter) {
+      restartGame();
+    }
+  }, [endingChapter, restartGame]);
+
   const startRestartTimer = useCallback(() => {
     restartTimer.setDuration(10);
     restartTimer.addCompleteCallback(() => {
-      if (!shouldEndChapter) {
-        restartGame();
-      }
+      checkIfEndingChapterfAndRestart();
     });
     restartTimer.start();
-  }, [restartGame, restartTimer, shouldEndChapter]);
+  }, [checkIfEndingChapterfAndRestart, restartTimer]);
 
   // Auto restart when showing modal after x time passed
   useEffect(() => {
@@ -338,7 +341,7 @@ const TaskScreenContainer = ({
       {showSuccessfulCompleteTaskModal && <SuccessfulCompleteTaskModal />}
       {showNeedRequiredItemModal && <NeedRequiredItemModal />}
       {showShowCorrectItemModal && <ShowCorrectItemModal />}
-      {showRestartModal && !shouldEndChapter && (
+      {showRestartModal && !endingChapter && (
         <RestartModal cancelRestart={cancelRestart} restartGame={restartGame} />
       )}
       {showBadgeEarned && <NewBadge />}
@@ -398,7 +401,6 @@ TaskScreenContainer.propTypes = {
   restartGame: PropTypes.func,
   endingChapter: PropTypes.bool,
   endChapter: PropTypes.func,
-  showEndChapterSequence: PropTypes.func,
   finalBadgeShown: PropTypes.bool,
   playAudio: PropTypes.func,
   stopAudio: PropTypes.func,
@@ -407,7 +409,8 @@ TaskScreenContainer.propTypes = {
   weightedTasks: PropTypes.arrayOf(PropTypes.shape({})),
   weightedPlayerKitItems: PropTypes.arrayOf(PropTypes.shape({})),
   choseCorrectItemForTask: PropTypes.func,
-  chooseTask: PropTypes.func
+  chooseTask: PropTypes.func,
+  badges: PropTypes.shape({})
 };
 
 const mapStateToProps = state => ({
@@ -418,13 +421,13 @@ const mapStateToProps = state => ({
   finalBadgeShown: getFinalBadgeShown(state),
   activeTaskIndex: getActiveTaskIndex(state),
   weightedTasks: getWeightedTasks(state),
-  weightedPlayerKitItems: getPlayerKitItems(state)
+  weightedPlayerKitItems: getPlayerKitItems(state),
+  badges: getBadges(state)
 });
 
 const mapDispatchToProps = dispatch => ({
   init: bindActionCreators(startChapterAndPhaseTimers, dispatch),
   finishSolveTaskEarly: bindActionCreators(_finishSolveTaskEarly, dispatch),
-  showEndChapterSequence: bindActionCreators(_showEndChapterSequence, dispatch),
   endChapter: bindActionCreators(goToNextChapter, dispatch),
   playAudio: bindActionCreators(_playAudio, dispatch),
   stopAudio: bindActionCreators(_stopAudio, dispatch),

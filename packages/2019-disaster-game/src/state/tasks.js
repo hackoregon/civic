@@ -33,6 +33,13 @@ const {
   MODAL_BADGE_EARNED
 } = taskPhaseKeys;
 
+const taskPhasesChapterCanEndAfter = [
+  MODAL_SOLVED_TASK,
+  MODAL_UNSOLVED_TASK,
+  MODAL_NO_ITEM,
+  MODAL_BADGE_EARNED
+];
+
 // +1 added to times because it makes the timer look nicer
 const taskPhases = {
   [SOLVING_SAVE_YOURSELF]: { time: 31 },
@@ -127,7 +134,7 @@ export const resetState = () => dispatch => {
 
 export const startChapterAndPhaseTimers = () => dispatch => {
   chapterTimer.reset();
-  chapterTimer.setDuration(12000);
+  chapterTimer.setDuration(120);
   chapterTimer.addCompleteCallback(() => {
     dispatch({ type: actionTypes.END_CHAPTER });
   });
@@ -201,10 +208,7 @@ const getNewBadgeEarned = state => {
     !taskCitySuperheroBadge.shown
   ) {
     newBadgeEarned = taskCitySuperheroBadge;
-  } else if (
-    earthquakeHeroBadge.activeTaskIndexWhenEarned &&
-    !earthquakeHeroBadge.shown
-  ) {
+  } else if (earthquakeHeroBadge.activeTaskIndexWhenEarned) {
     newBadgeEarned = earthquakeHeroBadge;
   }
   return newBadgeEarned;
@@ -263,8 +267,6 @@ const chooseTaskIfNecessary = state => {
 export const tasksReducer = createReducer(initialState, {
   [actionTypes.END_CHAPTER]: state => {
     state.endingChapter = true;
-    state.badges.earthquakeHeroBadge.activeTaskIndexWhenEarned =
-      state.activeTaskIndex;
   },
   [actionTypes.SET_FINAL_BADGE_AS_SHOWN]: state => {
     state.finalBadgeShown = true;
@@ -275,14 +277,20 @@ export const tasksReducer = createReducer(initialState, {
   },
   [actionTypes.GO_TO_NEXT_TASK_PHASE_NEW]: state => {
     state.prevTaskPhase = state.activeTaskPhase;
-    if (state.activeTaskPhase === SOLVING_SAVE_YOURSELF) {
+    const canBeFinalPhase =
+      taskPhasesChapterCanEndAfter.indexOf(state.activeTaskPhase) > -1;
+    if (canBeFinalPhase && state.endingChapter) {
+      state.badges.earthquakeHeroBadge.activeTaskIndexWhenEarned =
+        state.activeTaskIndex;
+      state.badges.earthquakeHeroBadge.shown = true;
+      state.activeTaskPhase = MODAL_BADGE_EARNED;
+    } else if (state.activeTaskPhase === SOLVING_SAVE_YOURSELF) {
       completeSaveYourselfTask(state);
     } else if (state.activeTaskPhase === MODAL_BADGE_EARNED) {
       const newBadgeEarned = getNewBadgeEarned(state);
       newBadgeEarned.shown = true;
       if (state.activeTaskIndex === 2) {
         state.activeTaskPhase = MODAL_SAVE_OTHERS_INTRO;
-        // TODO: ADD A CHECK FOR IF THE CHAPTER IS OVER?
       } else {
         state.activeTaskIndex += 1;
         state.activeTaskPhase = CHOOSE_TASK;
