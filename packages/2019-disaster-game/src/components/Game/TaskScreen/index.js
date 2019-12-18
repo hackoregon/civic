@@ -8,7 +8,7 @@ import { bindActionCreators } from "redux";
 import Timer from "../../../utils/timer";
 import { goToNextChapter } from "../../../state/chapters";
 import {
-  startChapterAndPhaseTimers,
+  startChapterAndPhaseTimers as _startChapterAndPhaseTimers,
   finishSolveTaskEarly as _finishSolveTaskEarly,
   choseCorrectItemForTask as _choseCorrectItemForTask,
   chooseTask as _chooseTask,
@@ -81,7 +81,7 @@ const bg3 = css`
 `;
 
 const TaskScreenContainer = ({
-  init,
+  startChapterAndPhaseTimers,
   finishSolveTaskEarly,
   taskPhase,
   activeTask,
@@ -124,7 +124,7 @@ const TaskScreenContainer = ({
 
   // Start chapter timer and phase timer
   useEffect(() => {
-    init();
+    startChapterAndPhaseTimers();
     playAudio(SFX_TYPES.THEME_TASKS);
 
     return () => {
@@ -420,7 +420,7 @@ const TaskScreenContainer = ({
 };
 
 TaskScreenContainer.propTypes = {
-  init: PropTypes.func,
+  startChapterAndPhaseTimers: PropTypes.func,
   finishSolveTaskEarly: PropTypes.func,
   taskPhase: PropTypes.oneOf([...Object.values(taskPhaseKeys)]),
   playerKit: PropTypes.shape({}),
@@ -481,7 +481,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  init: bindActionCreators(startChapterAndPhaseTimers, dispatch),
+  startChapterAndPhaseTimers: bindActionCreators(
+    _startChapterAndPhaseTimers,
+    dispatch
+  ),
   finishSolveTaskEarly: bindActionCreators(_finishSolveTaskEarly, dispatch),
   endChapter: bindActionCreators(goToNextChapter, dispatch),
   playAudio: bindActionCreators(_playAudio, dispatch),

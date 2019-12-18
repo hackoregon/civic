@@ -10,13 +10,13 @@ import {
   stopAudio as _stopAudio
 } from "../../../state/sfx";
 import {
-  goToNextChapter,
+  goToNextChapter as _goToNextChapter,
   getActiveChapterDuration
 } from "../../../state/chapters";
 import {
   getKitCreationItems,
   getPlayerKit,
-  addItemToPlayerKit
+  addItemToPlayerKit as _addItemToPlayerKit
 } from "../../../state/kit";
 import { earnBadge as _earnBadge, getBadges } from "../../../state/tasks";
 import usePrevious from "../../../state/hooks/usePrevious";
@@ -65,12 +65,12 @@ const bg3 = css`
 const KitScreen = ({
   possibleItems,
   playerKit,
-  endChapter,
+  goToNextChapter,
   chapterDuration,
   restartGame,
   playAudio,
   stopAudio,
-  addItemToPlayerKitInState,
+  addItemToPlayerKit,
   earnBadge,
   badges
 }) => {
@@ -84,12 +84,12 @@ const KitScreen = ({
   // start a timer for the _entire_ chapter
   useEffect(() => {
     chapterTimer.setDuration(chapterDuration);
-    chapterTimer.addCompleteCallback(() => endChapter());
+    chapterTimer.addCompleteCallback(() => goToNextChapter());
     chapterTimer.start();
     return () => {
       chapterTimer.stop();
     };
-  }, [chapterDuration, chapterTimer, endChapter]);
+  }, [chapterDuration, chapterTimer, goToNextChapter]);
 
   useEffect(() => {
     const playerKitChanged =
@@ -106,7 +106,7 @@ const KitScreen = ({
   }, [
     chapterTimer,
     earnBadge,
-    endChapter,
+    goToNextChapter,
     playerKit,
     possibleItems,
     prevPlayerKit
@@ -116,13 +116,13 @@ const KitScreen = ({
     if (badges.preparerBadge.activeTaskIndexWhenEarned) {
       setDisplayBadge(true);
       chapterTimer.setDuration(8);
-      chapterTimer.addCompleteCallback(() => endChapter());
+      chapterTimer.addCompleteCallback(() => goToNextChapter());
       chapterTimer.start();
     }
   }, [
     badges.preparerBadge.activeTaskIndexWhenEarned,
     chapterTimer,
-    endChapter
+    goToNextChapter
   ]);
 
   const startRestartTimer = useCallback(() => {
@@ -160,7 +160,7 @@ const KitScreen = ({
 
   const onKitItemSelection = kitItem => {
     if (kitItem.good) {
-      addItemToPlayerKitInState(kitItem);
+      addItemToPlayerKit(kitItem);
     }
     return kitItem.good;
   };
@@ -203,13 +203,13 @@ KitScreen.propTypes = {
       weighting: PropTypes.number
     })
   ),
-  endChapter: PropTypes.func,
+  goToNextChapter: PropTypes.func,
   chapterDuration: PropTypes.number,
   playerKit: PropTypes.shape({}),
   restartGame: PropTypes.func,
   playAudio: PropTypes.func,
   stopAudio: PropTypes.func,
-  addItemToPlayerKitInState: PropTypes.func,
+  addItemToPlayerKit: PropTypes.func,
   earnBadge: PropTypes.func,
   badges: PropTypes.shape({})
 };
@@ -222,10 +222,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  endChapter: bindActionCreators(goToNextChapter, dispatch),
+  goToNextChapter: bindActionCreators(_goToNextChapter, dispatch),
   playAudio: bindActionCreators(_playAudio, dispatch),
   stopAudio: bindActionCreators(_stopAudio, dispatch),
-  addItemToPlayerKitInState: bindActionCreators(addItemToPlayerKit, dispatch),
+  addItemToPlayerKit: bindActionCreators(_addItemToPlayerKit, dispatch),
   earnBadge: bindActionCreators(_earnBadge, dispatch)
 });
 

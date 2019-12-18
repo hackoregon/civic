@@ -2,6 +2,7 @@
 import { css, jsx } from "@emotion/core";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 import { palette } from "../../constants/style";
 import { playSFX as _playSFX } from "../../state/sfx";
@@ -133,9 +134,7 @@ RestartModal.propTypes = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  playSFX(id) {
-    dispatch(_playSFX(id));
-  }
+  playSFX: bindActionCreators(_playSFX, dispatch)
 });
 
 export default connect(

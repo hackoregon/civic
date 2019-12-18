@@ -13,7 +13,7 @@ import {
   stopAudio as _stopAudio
 } from "../../../state/sfx";
 import {
-  goToNextChapter,
+  goToNextChapter as _goToNextChapter,
   getActiveChapterDuration
 } from "../../../state/chapters";
 import Timer from "../../../utils/timer";
@@ -72,7 +72,12 @@ const visibleMessage = css`
   opacity: 1;
 `;
 
-const QuakeScreen = ({ endChapter, chapterDuration, playAudio, stopAudio }) => {
+const QuakeScreen = ({
+  goToNextChapter,
+  chapterDuration,
+  playAudio,
+  stopAudio
+}) => {
   const [chapterTimer] = useState(new Timer());
   const [showDrop, setShowDrop] = useState(false);
   const [showTakeCover, setShowTakeCover] = useState(false);
@@ -81,12 +86,12 @@ const QuakeScreen = ({ endChapter, chapterDuration, playAudio, stopAudio }) => {
   // start a timer for the _entire_ chapter
   useEffect(() => {
     chapterTimer.setDuration(chapterDuration);
-    chapterTimer.addCompleteCallback(() => endChapter());
+    chapterTimer.addCompleteCallback(() => goToNextChapter());
     chapterTimer.start();
     return () => {
       chapterTimer.stop();
     };
-  }, [chapterDuration, chapterTimer, endChapter]);
+  }, [chapterDuration, chapterTimer, goToNextChapter]);
 
   // Music
   useEffect(() => {
@@ -167,7 +172,7 @@ const QuakeScreen = ({ endChapter, chapterDuration, playAudio, stopAudio }) => {
 };
 
 QuakeScreen.propTypes = {
-  endChapter: PropTypes.func,
+  goToNextChapter: PropTypes.func,
   chapterDuration: PropTypes.number,
   playAudio: PropTypes.func,
   stopAudio: PropTypes.func
@@ -178,7 +183,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  endChapter: bindActionCreators(goToNextChapter, dispatch),
+  goToNextChapter: bindActionCreators(_goToNextChapter, dispatch),
   playAudio: bindActionCreators(_playAudio, dispatch),
   stopAudio: bindActionCreators(_stopAudio, dispatch)
 });

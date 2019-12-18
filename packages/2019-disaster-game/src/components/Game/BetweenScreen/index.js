@@ -10,7 +10,7 @@ import {
   stopAudio as _stopAudio
 } from "../../../state/sfx";
 import { TYPES as SFX_TYPES } from "../../../constants/sfx";
-import { goToNextChapter } from "../../../state/chapters";
+import { goToNextChapter as _goToNextChapter } from "../../../state/chapters";
 import { palette } from "../../../constants/style";
 import Timer from "../../../utils/timer";
 
@@ -54,7 +54,7 @@ const bg3 = css`
 `;
 
 const Outro = ({
-  endChapter,
+  goToNextChapter,
   children,
   chapterDuration,
   playAudio,
@@ -65,12 +65,12 @@ const Outro = ({
   // start a timer for the _entire_ chapter
   useEffect(() => {
     chapterTimer.setDuration(chapterDuration);
-    chapterTimer.addCompleteCallback(() => endChapter());
+    chapterTimer.addCompleteCallback(() => goToNextChapter());
     chapterTimer.start();
     return () => {
       chapterTimer.stop();
     };
-  }, [chapterTimer, endChapter, chapterDuration]);
+  }, [chapterTimer, goToNextChapter, chapterDuration]);
 
   useEffect(() => {
     playAudio(SFX_TYPES.THEME_NEUTRAL);
@@ -93,14 +93,14 @@ const Outro = ({
 
 Outro.propTypes = {
   children: PropTypes.shape({}),
-  endChapter: PropTypes.func,
+  goToNextChapter: PropTypes.func,
   chapterDuration: PropTypes.number,
   playAudio: PropTypes.func,
   stopAudio: PropTypes.func
 };
 
 const mapDispatchToProps = dispatch => ({
-  endChapter: bindActionCreators(goToNextChapter, dispatch),
+  goToNextChapter: bindActionCreators(_goToNextChapter, dispatch),
   playAudio: bindActionCreators(_playAudio, dispatch),
   stopAudio: bindActionCreators(_stopAudio, dispatch)
 });

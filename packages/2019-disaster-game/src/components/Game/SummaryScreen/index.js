@@ -5,9 +5,12 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
 
-import { resetState as resetStateTasks } from "../../../state/tasks";
-import { resetState as resetStateKit } from "../../../state/kit";
-import { goToChapter, goToNextChapter } from "../../../state/chapters";
+import { resetState as _resetStateTasks } from "../../../state/tasks";
+import { resetState as _resetStateKit } from "../../../state/kit";
+import {
+  goToChapter as _goToChapter,
+  goToNextChapter as _goToNextChapter
+} from "../../../state/chapters";
 import { getReloadMode } from "../../../state/settings";
 import usePrevious from "../../../state/hooks/usePrevious";
 import {
@@ -173,10 +176,10 @@ const bg3 = css`
 `;
 
 const SummaryScreen = ({
-  endChapter,
-  resetKitState,
-  resetTasksState,
-  replay,
+  goToNextChapter,
+  resetStateKit,
+  resetStateTasks,
+  goToChapter,
   increasePlayCount,
   playCount,
   reloadMode,
@@ -196,19 +199,26 @@ const SummaryScreen = ({
 
   const restartGame = useCallback(
     toAttractorScreen => {
-      resetKitState();
-      resetTasksState();
+      resetStateKit();
+      resetStateTasks();
       if (reloadMode && playCount === 5) {
         /* eslint-disable */
         location.reload();
         /* eslint-enable */
       } else if (toAttractorScreen === true) {
-        endChapter();
+        goToNextChapter();
       } else {
-        replay(1);
+        goToChapter(1);
       }
     },
-    [endChapter, playCount, reloadMode, replay, resetKitState, resetTasksState]
+    [
+      goToNextChapter,
+      playCount,
+      reloadMode,
+      goToChapter,
+      resetStateKit,
+      resetStateTasks
+    ]
   );
 
   const transitionAnimation = useCallback(() => {
@@ -386,10 +396,10 @@ const SummaryScreen = ({
 };
 
 SummaryScreen.propTypes = {
-  endChapter: PropTypes.func,
-  replay: PropTypes.func,
-  resetKitState: PropTypes.func,
-  resetTasksState: PropTypes.func,
+  goToNextChapter: PropTypes.func,
+  goToChapter: PropTypes.func,
+  resetStateKit: PropTypes.func,
+  resetStateTasks: PropTypes.func,
   increasePlayCount: PropTypes.func,
   playCount: PropTypes.number,
   reloadMode: PropTypes.bool,
@@ -402,10 +412,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  endChapter: bindActionCreators(goToNextChapter, dispatch),
-  replay: bindActionCreators(goToChapter, dispatch),
-  resetKitState: bindActionCreators(resetStateKit, dispatch),
-  resetTasksState: bindActionCreators(resetStateTasks, dispatch),
+  goToNextChapter: bindActionCreators(_goToNextChapter, dispatch),
+  goToChapter: bindActionCreators(_goToChapter, dispatch),
+  resetStateKit: bindActionCreators(_resetStateKit, dispatch),
+  resetStateTasks: bindActionCreators(_resetStateTasks, dispatch),
   playAudio: bindActionCreators(_playAudio, dispatch),
   stopAudio: bindActionCreators(_stopAudio, dispatch)
 });
