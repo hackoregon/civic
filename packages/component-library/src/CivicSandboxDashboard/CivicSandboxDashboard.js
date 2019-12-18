@@ -199,8 +199,8 @@ const createLineViz = (
           feature={feature}
           stroke={VisualizationColors.categorical.pink.hex}
           strokeWidth={30}
-          svgCss={css(`height: 1.125rem;`)}
-          padding={30}
+          svgCss={css(`height: 2.25rem;`)}
+          padding={45}
         />
         {title}
       </h3>
