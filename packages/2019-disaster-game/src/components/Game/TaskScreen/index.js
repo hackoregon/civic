@@ -19,7 +19,8 @@ import {
   getFinalBadgeShown,
   getActiveTaskIndex,
   getWeightedTasks,
-  getBadges
+  getBadges,
+  getNextBadgeToShow
 } from "../../../state/tasks";
 import {
   playAudio as _playAudio,
@@ -97,10 +98,12 @@ const TaskScreenContainer = ({
   weightedTasks,
   choseCorrectItemForTask,
   chooseTask,
-  badges
+  badges,
+  nextBadgeToShow
 }) => {
   const [solveScreenOpen, setSolveScreenOpen] = useState(true);
   const [showRestartModal, setShowRestartModal] = useState(false);
+  const [showFinalBadge, setShowFinalBadge] = useState(false);
   const prevShowRestart = usePrevious(showRestartModal);
   const prevTaskPhase = usePrevious(taskPhase);
   const prevActiveTaskIndex = usePrevious(activeTaskIndex);
@@ -135,17 +138,27 @@ const TaskScreenContainer = ({
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // End chapter
+  // This use effect will set the condition to end the chapter only if no modal is / should be displaying
   useEffect(() => {
     if (
       endingChapter &&
       taskPhase === MODAL_BADGE_EARNED &&
       badges.earthquakeHeroBadge.shown
     ) {
-      finalModalTimer.setDuration(11);
-      finalModalTimer.addCompleteCallback(() => {
-        endChapter();
-      });
-      finalModalTimer.start();
+      // if not displaying other badge, end chapter
+      const shouldDisplayNeighborhoodHeroBadge =
+        badges.taskNeighborhoodHeroBadge.activeTaskIndex &&
+        !badges.taskNeighborhoodHeroBadge.shown;
+      const shouldDisplayCitySuperheroBadge =
+        badges.taskCitySuperheroBadge.activeTaskIndex &&
+        !badges.taskCitySuperheroBadge.shown;
+
+      if (
+        !shouldDisplayCitySuperheroBadge ||
+        !shouldDisplayNeighborhoodHeroBadge
+      ) {
+        setShowFinalBadge(true);
+      }
     }
   }, [
     endingChapter,
@@ -154,8 +167,34 @@ const TaskScreenContainer = ({
     badges.earthquakeHeroBadge.shown,
     endChapter,
     MODAL_BADGE_EARNED,
-    finalModalTimer
+    finalModalTimer,
+    badges.taskNeighborhoodHeroBadge.activeTaskIndex,
+    badges.taskNeighborhoodHeroBadge.shown,
+    badges.taskCitySuperheroBadge.activeTaskIndex,
+    badges.taskCitySuperheroBadge.shown
   ]);
+
+  // This use effect ends the chapter when a condition is met
+  useEffect(() => {
+    if (showFinalBadge) {
+      finalModalTimer.setDuration(11);
+      finalModalTimer.addCompleteCallback(() => {
+        endChapter();
+      });
+      finalModalTimer.start();
+    }
+  }, [endChapter, finalModalTimer, showFinalBadge]);
+
+  // This callback sets the condition to end the chapter if a modal was displaying or should be displayed before the Earthquake Heroes badge
+  const badgeFinishedDisplay = () => {
+    if (
+      endingChapter &&
+      taskPhase === MODAL_BADGE_EARNED &&
+      badges.earthquakeHeroBadge.shown
+    ) {
+      setShowFinalBadge(true);
+    }
+  };
 
   // Sounds
   const startQuestionAudioDelay = useCallback(() => {
@@ -344,7 +383,15 @@ const TaskScreenContainer = ({
       {showRestartModal && !endingChapter && (
         <RestartModal cancelRestart={cancelRestart} restartGame={restartGame} />
       )}
-      {showBadgeEarned && <NewBadge />}
+      {showBadgeEarned && (
+        <NewBadge
+          badgeData={nextBadgeToShow}
+          finishDisplayCallback={badgeFinishedDisplay}
+        />
+      )}
+      {showFinalBadge && (
+        <NewBadge badgeData={badges.earthquakeHeroBadge} fade={false} />
+      )}
       <div css={screenLayout}>
         <SolveScreen open={solveScreenOpen} activeTask={activeTask} />
         <ChooseTaskScreen />
@@ -410,7 +457,14 @@ TaskScreenContainer.propTypes = {
   weightedPlayerKitItems: PropTypes.arrayOf(PropTypes.shape({})),
   choseCorrectItemForTask: PropTypes.func,
   chooseTask: PropTypes.func,
-  badges: PropTypes.shape({})
+  badges: PropTypes.shape({}),
+  nextBadgeToShow: PropTypes.shape({
+    badgeSVG: PropTypes.string,
+    title: PropTypes.string,
+    id: PropTypes.string,
+    shown: PropTypes.bool,
+    activeTaskIndexWhenEarned: PropTypes.oneOfType([null, PropTypes.number])
+  })
 };
 
 const mapStateToProps = state => ({
@@ -422,7 +476,8 @@ const mapStateToProps = state => ({
   activeTaskIndex: getActiveTaskIndex(state),
   weightedTasks: getWeightedTasks(state),
   weightedPlayerKitItems: getPlayerKitItems(state),
-  badges: getBadges(state)
+  badges: getBadges(state),
+  nextBadgeToShow: getNextBadgeToShow(state)
 });
 
 const mapDispatchToProps = dispatch => ({

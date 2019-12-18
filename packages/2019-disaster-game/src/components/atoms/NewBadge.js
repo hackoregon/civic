@@ -10,11 +10,6 @@ import {
   playAudio as _playAudio,
   stopAudio as _stopAudio
 } from "../../state/sfx";
-import {
-  getNextBadgeToShow,
-  getAllTaskPhaseData,
-  taskPhaseKeys
-} from "../../state/tasks";
 
 // background color is blue
 const containerStyle = css`
@@ -59,28 +54,29 @@ const titleText = css`
   font-size: 14rem;
 `;
 
-const NewBadge = ({ nextBadgeToShow, taskPhaseData, playAudio, stopAudio }) => {
-  const [badgeInfo, setBadgeInfo] = useState(nextBadgeToShow);
+const NewBadge = ({
+  badgeData,
+  displayBadgeTime = 11,
+  playAudio,
+  stopAudio,
+  finishDisplayCallback,
+  fade = true
+}) => {
+  const [badgeInfo, setBadgeInfo] = useState(badgeData);
   const [hideBadge, setHideBadge] = useState(false);
-  const displayBadgeTime = taskPhaseData[taskPhaseKeys.MODAL_BADGE_EARNED].time;
   const fadeBadgeTimeout = (displayBadgeTime - 1) * 1000;
 
   useEffect(() => {
-    setBadgeInfo(nextBadgeToShow);
+    setBadgeInfo(badgeData);
     const hideBadgeTimeout = setTimeout(() => {
-      setHideBadge(true);
+      if (fade) setHideBadge(true);
+      if (finishDisplayCallback) finishDisplayCallback();
     }, fadeBadgeTimeout);
-
-    return () => {
-      clearTimeout(hideBadgeTimeout);
-    };
-  }, [fadeBadgeTimeout, nextBadgeToShow]);
-
-  useEffect(() => {
     playAudio(SFX_TYPES.BADGE_EARNED_SFX);
 
     return () => {
       stopAudio(SFX_TYPES.BADGE_EARNED_SFX);
+      clearTimeout(hideBadgeTimeout);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -100,22 +96,19 @@ const NewBadge = ({ nextBadgeToShow, taskPhaseData, playAudio, stopAudio }) => {
 };
 
 NewBadge.propTypes = {
-  nextBadgeToShow: PropTypes.shape({
+  badgeData: PropTypes.shape({
     badgeSVG: PropTypes.string,
     title: PropTypes.string,
     id: PropTypes.string,
     shown: PropTypes.bool,
     activeTaskIndexWhenEarned: PropTypes.oneOfType([null, PropTypes.number])
   }),
-  taskPhaseData: PropTypes.shape({}),
   playAudio: PropTypes.func,
-  stopAudio: PropTypes.func
+  stopAudio: PropTypes.func,
+  displayBadgeTime: PropTypes.number,
+  finishDisplayCallback: PropTypes.func,
+  fade: PropTypes.bool
 };
-
-const mapStateToProps = state => ({
-  taskPhaseData: getAllTaskPhaseData(state),
-  nextBadgeToShow: getNextBadgeToShow(state)
-});
 
 const mapDispatchToProps = dispatch => ({
   playAudio: bindActionCreators(_playAudio, dispatch),
@@ -123,6 +116,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(NewBadge);
