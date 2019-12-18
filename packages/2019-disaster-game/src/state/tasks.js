@@ -54,6 +54,7 @@ const taskPhases = {
 };
 
 const actionTypes = {
+  EARN_BADGE: "EARN_BADGE",
   GO_TO_NEXT_TASK_PHASE_NEW: "GO_TO_NEXT_TASK_PHASE_NEW",
   TRACK_ITEM_USED: "TRACK_ITEM_USED",
   CHOOSE_NEXT_TASK: "CHOOSE_NEXT_TASK",
@@ -82,10 +83,13 @@ const initialState = {
   numberSolvedSaveOthersTasks: 0,
   prevTaskPhase: null,
   badges
-  // finalBadgeShown: false
 };
 
 // ACTIONS
+export const earnBadge = badge => dispatch => {
+  dispatch({ type: actionTypes.EARN_BADGE, badge });
+};
+
 export const goToNextTaskPhase = () => dispatch => {
   phaseTimer.reset();
   phaseTimer.addCompleteCallback(() => {
@@ -265,6 +269,11 @@ const chooseTaskIfNecessary = state => {
 
 // REDUCERS
 export const tasksReducer = createReducer(initialState, {
+  [actionTypes.EARN_BADGE]: (state, action) => {
+    // Just need a truthy value to work
+    state.badges[action.badge].activeTaskIndexWhenEarned = true;
+    state.badges[action.badge].shown = true;
+  },
   [actionTypes.END_CHAPTER]: state => {
     state.endingChapter = true;
   },

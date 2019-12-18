@@ -18,7 +18,7 @@ import {
   getPlayerKit,
   addItemToPlayerKit
 } from "../../../state/kit";
-import { addBadge } from "../../../state/user";
+import { earnBadge as _earnBadge, getBadges } from "../../../state/tasks";
 import usePrevious from "../../../state/hooks/usePrevious";
 import { TYPES as SFX_TYPES } from "../../../constants/sfx";
 import { palette } from "../../../constants/style";
@@ -65,13 +65,14 @@ const bg3 = css`
 const KitScreen = ({
   possibleItems,
   playerKit,
-  addPreparerBadge,
   endChapter,
   chapterDuration,
   restartGame,
   playAudio,
   stopAudio,
-  addItemToPlayerKitInState
+  addItemToPlayerKitInState,
+  earnBadge,
+  badges
 }) => {
   const [chapterTimer] = useState(new Timer());
   const [restartTimer] = useState(new Timer());
@@ -100,19 +101,28 @@ const KitScreen = ({
 
     if (playerKitChanged && allItemsChosen) {
       chapterTimer.reset();
-      addPreparerBadge("prepared", "preparerBadge");
+      earnBadge("preparerBadge");
+    }
+  }, [
+    chapterTimer,
+    earnBadge,
+    endChapter,
+    playerKit,
+    possibleItems,
+    prevPlayerKit
+  ]);
+
+  useEffect(() => {
+    if (badges.preparerBadge.activeTaskIndexWhenEarned) {
       setDisplayBadge(true);
       chapterTimer.setDuration(8);
       chapterTimer.addCompleteCallback(() => endChapter());
       chapterTimer.start();
     }
   }, [
-    addPreparerBadge,
+    badges.preparerBadge.activeTaskIndexWhenEarned,
     chapterTimer,
-    endChapter,
-    playerKit,
-    possibleItems,
-    prevPlayerKit
+    endChapter
   ]);
 
   const startRestartTimer = useCallback(() => {
@@ -159,7 +169,7 @@ const KitScreen = ({
 
   return (
     <Fragment>
-      {displayBadge && <NewBadge type="prepared" />}
+      {displayBadge && <NewBadge badgeData={badges.preparerBadge} />}
       {showRestart && (
         <RestartModal cancelRestart={cancelRestart} restartGame={restartGame} />
       )}
@@ -196,25 +206,27 @@ KitScreen.propTypes = {
   endChapter: PropTypes.func,
   chapterDuration: PropTypes.number,
   playerKit: PropTypes.shape({}),
-  addPreparerBadge: PropTypes.func,
   restartGame: PropTypes.func,
   playAudio: PropTypes.func,
   stopAudio: PropTypes.func,
-  addItemToPlayerKitInState: PropTypes.func
+  addItemToPlayerKitInState: PropTypes.func,
+  earnBadge: PropTypes.func,
+  badges: PropTypes.shape({})
 };
 
 const mapStateToProps = state => ({
   possibleItems: getKitCreationItems(state),
   chapterDuration: getActiveChapterDuration(state),
-  playerKit: getPlayerKit(state)
+  playerKit: getPlayerKit(state),
+  badges: getBadges(state)
 });
 
 const mapDispatchToProps = dispatch => ({
-  addPreparerBadge: bindActionCreators(addBadge, dispatch),
   endChapter: bindActionCreators(goToNextChapter, dispatch),
   playAudio: bindActionCreators(_playAudio, dispatch),
   stopAudio: bindActionCreators(_stopAudio, dispatch),
-  addItemToPlayerKitInState: bindActionCreators(addItemToPlayerKit, dispatch)
+  addItemToPlayerKitInState: bindActionCreators(addItemToPlayerKit, dispatch),
+  earnBadge: bindActionCreators(_earnBadge, dispatch)
 });
 
 export default connect(
