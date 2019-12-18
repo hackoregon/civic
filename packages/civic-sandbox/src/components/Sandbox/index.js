@@ -73,8 +73,28 @@ class SandboxComponent extends React.Component {
       selectedPackage,
       selectedSlide,
       selectedSlidesData,
-      fetchLayers: cduFetchLayers
+      fetchLayers: cduFetchLayers,
+      selectedFoundationDatum: currentSelectedFoundation
     } = this.props;
+
+    const { drawerVisualization } = this.state;
+    const { selectedFoundationDatum: previousSelectedFoundation } = prevProps;
+
+    const previousID =
+      previousSelectedFoundation && previousSelectedFoundation.id
+        ? previousSelectedFoundation.id
+        : null;
+    const currentID =
+      currentSelectedFoundation && currentSelectedFoundation.id
+        ? currentSelectedFoundation.id
+        : null;
+
+    if (previousID !== currentID && currentID !== null) {
+      this.toggleDrawerVisualization();
+    }
+    if (previousID !== null && currentID === null && drawerVisualization) {
+      this.toggleDrawerLayerSelector();
+    }
 
     if (
       equals(selectedPackage, prevProps.selectedPackage) &&
