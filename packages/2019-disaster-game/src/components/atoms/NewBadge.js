@@ -11,7 +11,7 @@ import {
   stopAudio as _stopAudio
 } from "../../state/sfx";
 import {
-  getBadges,
+  getNextBadgeToShow,
   getAllTaskPhaseData,
   taskPhaseKeys
 } from "../../state/tasks";
@@ -59,14 +59,14 @@ const titleText = css`
   font-size: 14rem;
 `;
 
-const NewBadge = ({ badges, taskPhaseData, playAudio, stopAudio }) => {
-  const [badgeInfo, setBadgeInfo] = useState(badges[badges.length - 1]);
+const NewBadge = ({ nextBadgeToShow, taskPhaseData, playAudio, stopAudio }) => {
+  const [badgeInfo, setBadgeInfo] = useState(nextBadgeToShow);
   const [hideBadge, setHideBadge] = useState(false);
   const displayBadgeTime = taskPhaseData[taskPhaseKeys.MODAL_BADGE_EARNED].time;
   const fadeBadgeTimeout = (displayBadgeTime - 1) * 1000;
 
   useEffect(() => {
-    setBadgeInfo(badges[badges.length - 1]);
+    setBadgeInfo(nextBadgeToShow);
     const hideBadgeTimeout = setTimeout(() => {
       setHideBadge(true);
     }, fadeBadgeTimeout);
@@ -74,7 +74,7 @@ const NewBadge = ({ badges, taskPhaseData, playAudio, stopAudio }) => {
     return () => {
       clearTimeout(hideBadgeTimeout);
     };
-  }, [badges, fadeBadgeTimeout]);
+  }, [fadeBadgeTimeout, nextBadgeToShow]);
 
   useEffect(() => {
     playAudio(SFX_TYPES.BADGE_EARNED_SFX);
@@ -100,20 +100,21 @@ const NewBadge = ({ badges, taskPhaseData, playAudio, stopAudio }) => {
 };
 
 NewBadge.propTypes = {
-  badges: PropTypes.arrayOf(
-    PropTypes.shape({
-      badgeSVG: PropTypes.string,
-      title: PropTypes.string
-    })
-  ),
+  nextBadgeToShow: PropTypes.shape({
+    badgeSVG: PropTypes.string,
+    title: PropTypes.string,
+    id: PropTypes.string,
+    shown: PropTypes.bool,
+    activeTaskIndexWhenEarned: PropTypes.oneOfType([null, PropTypes.number])
+  }),
   taskPhaseData: PropTypes.shape({}),
   playAudio: PropTypes.func,
   stopAudio: PropTypes.func
 };
 
 const mapStateToProps = state => ({
-  badges: getBadges(state),
-  taskPhaseData: getAllTaskPhaseData(state)
+  taskPhaseData: getAllTaskPhaseData(state),
+  nextBadgeToShow: getNextBadgeToShow(state)
 });
 
 const mapDispatchToProps = dispatch => ({
