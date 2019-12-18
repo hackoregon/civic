@@ -88,7 +88,8 @@ const OrbManager = ({
         possibleItems,
         bounds,
         ORB_CONFIG,
-        requiredItem
+        requiredItem,
+        activeScreen
       );
       setHasInitialized(true);
       setCompletedOrbs([]);
