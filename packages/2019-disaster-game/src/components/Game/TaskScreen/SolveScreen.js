@@ -67,7 +67,7 @@ const SolveScreen = ({ activeTask, open }) => {
         <RequiredItemsOrbs
           css={requiredItemsStyle}
           numberRequiredItems={activeTask.numberItemsToSolve}
-          correctItemsChosen={activeTask.numberCorrectChosen} // TODO
+          correctItemsChosen={activeTask.numberCorrectChosen}
           requiredItem={activeTask.requiredItem}
         />
       )}
