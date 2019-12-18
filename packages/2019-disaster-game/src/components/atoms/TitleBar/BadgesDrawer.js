@@ -3,7 +3,7 @@ import { css, jsx } from "@emotion/core";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { palette } from "../../../constants/style";
-import { getAllBadges } from "../../../state/user";
+import { getBadges } from "../../../state/tasks";
 import Badge from "../Badge";
 
 const drawerContainer = css`
@@ -83,27 +83,27 @@ const BadgesDrawer = ({
       </p>
       <div css={badgesContainer}>
         <Badge
-          badgeInfo={badges.prepared.preparerBadge}
+          badgeInfo={badges.preparerBadge}
           openBadgeDrawer={openBadgeDrawer}
           isSummary={isSummary}
         />
         <Badge
-          badgeInfo={badges.hero.taskSurvivorBadge}
+          badgeInfo={badges.taskSurvivorBadge}
           openBadgeDrawer={openBadgeDrawer}
           isSummary={isSummary}
         />
         <Badge
-          badgeInfo={badges.hero.taskNeighborhoodHeroBadge}
+          badgeInfo={badges.taskNeighborhoodHeroBadge}
           openBadgeDrawer={openBadgeDrawer}
           isSummary={isSummary}
         />
         <Badge
-          badgeInfo={badges.hero.taskCitySuperheroBadge}
+          badgeInfo={badges.taskCitySuperheroBadge}
           openBadgeDrawer={openBadgeDrawer}
           isSummary={isSummary}
         />
         <Badge
-          badgeInfo={badges.hero.earthquakeHeroBadge}
+          badgeInfo={badges.earthquakeHeroBadge}
           openBadgeDrawer={openBadgeDrawer}
           isSummary={isSummary}
         />
@@ -122,7 +122,7 @@ BadgesDrawer.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  badges: getAllBadges(state)
+  badges: getBadges(state)
 });
 
 export default connect(mapStateToProps)(BadgesDrawer);
