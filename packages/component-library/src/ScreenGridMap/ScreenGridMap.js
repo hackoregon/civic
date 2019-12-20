@@ -8,18 +8,37 @@ const ScreenGridMap = props => {
     data,
     getPosition,
     opacity,
+    colorDomain,
     colorRange,
     cellSizePixels,
     autoHighlight,
     onLayerClick,
     visible,
     gpuAggregation,
-    getSize
+    getSize,
+    getWeight,
+    getCursor,
+    aggregation,
+    tooltipInfo,
+    x,
+    y,
+    onHover,
+    children
   } = props;
+
+  const tooltip = React.Children.map(children, child => {
+    return React.cloneElement(child, {
+      tooltipInfo,
+      x,
+      y
+    });
+  });
+
+  const tooltipRender = tooltipInfo && x && y ? tooltip : null;
 
   return (
     <div>
-      <DeckGL className="DeckGL" {...viewport}>
+      <DeckGL className="DeckGL" {...viewport} getCursor={getCursor}>
         <ScreenGridLayer
           id="screengrid-layer"
           className="ScreenGridMap"
@@ -27,6 +46,7 @@ const ScreenGridMap = props => {
           data={data}
           getPosition={getPosition}
           opacity={opacity}
+          colorDomain={colorDomain}
           colorRange={colorRange}
           cellSizePixels={cellSizePixels}
           autoHighlight={autoHighlight}
@@ -35,8 +55,12 @@ const ScreenGridMap = props => {
           visible={visible}
           gpuAggregation={gpuAggregation}
           getSize={getSize}
-        />
+          getWeight={getWeight}
+          onHover={onHover}
+          aggregation={aggregation}
+å        />
       </DeckGL>
+      {tooltipRender}
     </div>
   );
 };
@@ -46,13 +70,22 @@ ScreenGridMap.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   getPosition: PropTypes.func,
   opacity: PropTypes.number,
+  colorDomain: PropTypes.arrayOf(PropTypes.number),
   colorRange: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
   cellSizePixels: PropTypes.number,
   autoHighlight: PropTypes.bool,
   onLayerClick: PropTypes.func,
   visible: PropTypes.bool,
   gpuAggregation: PropTypes.bool,
-  getSize: PropTypes.func
+  getSize: PropTypes.func,
+  getWeight: PropTypes.func,
+  getCursor: PropTypes.func,
+  aggregation: PropTypes.oneOf(["SUM", "MIN", "MEAN", "MAX"]),
+  tooltipInfo: PropTypes.shape({}),
+  x: PropTypes.number,
+  y: PropTypes.number,
+  onHover: PropTypes.func,
+  children: PropTypes.node
 };
 
 ScreenGridMap.defaultProps = {
@@ -63,7 +96,10 @@ ScreenGridMap.defaultProps = {
   autoHighlight: true,
   visible: true,
   gpuAggregation: false,
-  getSize: () => 1
+  getSize: () => 1,
+  getWeight: () => 1,
+  getCursor: () => "crosshair",
+  aggregation: "SUM"
 };
 
 export default ScreenGridMap;

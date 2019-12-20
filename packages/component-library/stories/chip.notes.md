@@ -6,12 +6,10 @@ The Demo Card story shows the standard usage of the Chip for the CIVIC platform.
 
 ##Things it does
 
-1. why index is anumber [corresponds to an array]
+Props:
 
-index: index is a number that represents the position of the tag in a relevant outer list (tags are never alone/has a list of tags it gets mapped into). Index is a number because the colors correspond to ordinal position in the array.
+1. tag: Takes a string and displays it in the chip component.
 
-2. best practices around index
+2. color: Takes a color string (rgb or hex code) and sets the color of the tag icon to that value.
 
-Assign a value for corresponding color
-
-tag: the tag words verbatim
+3. clickable: Boolean toggle that makes the tag look "clickable". Adds hover shading / mouse turns into pointer.

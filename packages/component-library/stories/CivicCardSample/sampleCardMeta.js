@@ -49,11 +49,12 @@ const sampleCardMeta = (/* data */) => ({
     "Gentrification",
     "Transit",
     "Portland",
+    "Oregon",
     "Demo"
   ],
   selector: null, // optional, to be added later
   analysis: (
-    <Collapsable>
+    <Collapsable description="about this analysis">
       <Collapsable.Section>
         <p>
           <em>
@@ -278,7 +279,7 @@ const sampleCardMeta = (/* data */) => ({
     }
   ],
   // authors likely an array of keys in the future
-  authors: "demo"
+  authors: "Demo"
 });
 
 export default sampleCardMeta;

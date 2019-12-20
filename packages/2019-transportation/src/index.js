@@ -3,17 +3,32 @@ import Routes from "./routes";
 import Reducers from "./state";
 
 // TODO: Update me before commiting a new card
-import TransportationCard from "./components/TransportationCard";
 import DisturbanceStops from "./components/DisturbanceStops";
+import SouthwestMadison from "./components/SouthwestMadison";
+import NorthwestEverett from "./components/NorthwestEverett";
+import MorningRush from "./components/MorningRush";
+import SystemWideSummary from "./components/SystemWideSummary";
 
 const CardRegistry = [
   {
-    slug: "disturbance-stops",
-    component: DisturbanceStops
+    slug: "system-wide-summary",
+    component: SystemWideSummary
   },
   {
-    slug: "transportation-card",
-    component: TransportationCard
+    slug: "morning-rush",
+    component: MorningRush
+  },
+  {
+    slug: "northwest-everett",
+    component: NorthwestEverett
+  },
+  {
+    slug: "southwest-madison",
+    component: SouthwestMadison
+  },
+  {
+    slug: "southeast-hawthorne",
+    component: DisturbanceStops
   }
 ];
 

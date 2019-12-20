@@ -7,7 +7,7 @@ import sampleCardData from "./sampleCardData";
 const sampleCardMetaB = data => {
   return {
     ...sampleCardMeta(data),
-    tags: ["Housing", "Gentrification", "Portland", "Rail"]
+    tags: ["Housing", "Gentrification", "Portland", "Oregon", "Rail"]
   };
 };
 

@@ -7,7 +7,9 @@ import {
   VictoryLabel,
   VictoryPortal,
   VictoryTooltip,
-  VictoryStack
+  VictoryStack,
+  VictoryGroup,
+  VictoryLine
 } from "victory";
 import shortid from "shortid";
 import compareValues from "../utils/compareValues";
@@ -16,7 +18,6 @@ import ChartContainer from "../ChartContainer";
 import civicFormat from "../utils/civicFormat";
 import {
   chartEvents,
-  categoricalColors,
   getDefaultDataSeriesLabels,
   transformDatato100
 } from "../utils/chartHelpers";
@@ -41,13 +42,15 @@ const HorizontalBarChart = ({
   dataLabelFormatter,
   minimalist,
   stacked,
+  grouped,
   hundredPercentData,
   dataSeriesKey,
   dataSeriesLabel,
   legendComponent,
   sortBy,
   theme,
-  protect
+  protect,
+  annotations
 }) => {
   const safeData =
     // eslint-disable-next-line no-nested-ternary
@@ -57,8 +60,8 @@ const HorizontalBarChart = ({
         : data
       : [{}];
 
-  const groupedDataIfStacked = () => {
-    if (stacked) {
+  const groupedDataIfStackedOrGrouped = () => {
+    if (stacked || grouped) {
       if (hundredPercentData) {
         return transformDatato100(
           groupByKey(safeData, dataSeriesKey, dataLabel),
@@ -70,7 +73,7 @@ const HorizontalBarChart = ({
     }
     return safeData;
   };
-  const groupedData = groupedDataIfStacked();
+  const groupedData = groupedDataIfStackedOrGrouped();
   const barData =
     sortOrder && sortOrder.length
       ? safeData
@@ -88,7 +91,8 @@ const HorizontalBarChart = ({
     : { left: 115, right: 50, bottom: 50, top: 70 };
   const barHeight = theme.bar.style.data.width;
   const spaceHeight = theme.bar.style.data.padding * 2;
-  const additionalHeight = padding.bottom + padding.top;
+  const groupPadding = grouped ? barHeight * 1.2 : 0;
+  const additionalHeight = padding.bottom + padding.top + groupPadding * 2;
   const minValue = Math.min(0, ...safeData.map(d => d[dataValue]));
 
   const bars = stacked ? groupedData.length : safeData.length;
@@ -104,7 +108,7 @@ const HorizontalBarChart = ({
 
   const NegativeAwareTickLabel = props => (
     <VictoryLabel
-      dx={props.scale.y(minValue) - 20} // eslint-disable-line
+      dx={props.scale.y(minValue) - 10} // eslint-disable-line
       {...props}
       textAnchor="end"
     />
@@ -123,12 +127,16 @@ const HorizontalBarChart = ({
           (legendComponent ? (
             legendComponent(legendData)
           ) : (
-            <SimpleLegend className="legend" legendData={legendData} />
+            <SimpleLegend
+              className="legend"
+              legendData={legendData}
+              theme={theme}
+            />
           ))}
         <VictoryChart
           height={dataHeight + additionalHeight}
           domain={domain}
-          domainPadding={{ x: 11, y: 20 }}
+          domainPadding={{ x: 11 + groupPadding * 1.2, y: 20 }}
           padding={padding}
           theme={theme}
         >
@@ -140,6 +148,16 @@ const HorizontalBarChart = ({
             }}
             title="Y Axis"
           />
+          {annotations &&
+            annotations.length &&
+            annotations.map(annotation => (
+              <VictoryLine
+                style={{ data: { strokeDasharray: "10,5" } }}
+                labels={[annotation.label]}
+                labelComponent={<VictoryLabel y={annotation.y} />}
+                y={() => annotation.x}
+              />
+            ))}
           {!minimalist && (
             <VictoryAxis
               dependentAxis
@@ -173,7 +191,7 @@ const HorizontalBarChart = ({
               y={minimalist ? 20 : 85}
             />
           </VictoryPortal>
-          {!stacked && (
+          {!stacked && !grouped && (
             <VictoryBar
               horizontal
               labelComponent={
@@ -195,7 +213,7 @@ const HorizontalBarChart = ({
               animate
             />
           )}
-          {!stacked && (
+          {!stacked && !grouped && (
             <VictoryBar
               horizontal
               labelComponent={
@@ -232,7 +250,7 @@ const HorizontalBarChart = ({
             />
           )}
           {stacked && (
-            <VictoryStack colorScale={categoricalColors(groupedData.length)}>
+            <VictoryStack colorScale={theme.stack.colorScale}>
               {groupedData.map(arr => {
                 return (
                   <VictoryBar
@@ -280,6 +298,59 @@ const HorizontalBarChart = ({
                 />
               );
             })}
+          {grouped && (
+            <VictoryGroup
+              colorScale={theme.group.colorScale}
+              offset={barHeight * 1.2}
+            >
+              {groupedData.map(arr => {
+                return (
+                  <VictoryBar
+                    title="Horizontal Bar Chart"
+                    barWidth={barHeight}
+                    domainPadding={0}
+                    data={arr.map(d => ({
+                      dataKey: d[dataLabel],
+                      dataValue: d[dataValue],
+                      series: d[dataSeriesKey]
+                    }))}
+                    x="dataKey"
+                    y="dataValue"
+                    events={chartEvents(theme)}
+                    key={shortid.generate()}
+                    labels={arr.map(
+                      d => `${d[dataSeriesKey]}: ${d[dataValue]}`
+                    )}
+                    horizontal
+                    labelComponent={
+                      <VictoryTooltip
+                        x={325}
+                        y={0}
+                        orientation="bottom"
+                        pointerLength={0}
+                        cornerRadius={0}
+                        theme={theme}
+                      />
+                    }
+                    animate
+                  />
+                );
+              })}
+            </VictoryGroup>
+          )}
+          {grouped &&
+            groupedData.map((arr, i) => {
+              return (
+                <VictoryAxis
+                  style={{
+                    tickFormat: arr[i][dataLabel],
+                    ticks: { stroke: "none" },
+                    grid: { stroke: "none" }
+                  }}
+                  key={shortid.generate()}
+                />
+              );
+            })}
         </VictoryChart>
       </DataChecker>
     </ChartContainer>
@@ -305,13 +376,21 @@ HorizontalBarChart.propTypes = {
   dataLabelFormatter: PropTypes.func,
   minimalist: PropTypes.bool,
   stacked: PropTypes.bool,
+  grouped: PropTypes.bool,
   hundredPercentData: PropTypes.bool,
   dataSeriesKey: PropTypes.string,
   dataSeriesLabel: PropTypes.shape({}),
   legendComponent: PropTypes.func,
   sortBy: PropTypes.string,
   theme: PropTypes.shape({}),
-  protect: PropTypes.bool
+  protect: PropTypes.bool,
+  annotations: PropTypes.arrayOf(
+    PropTypes.shape({
+      x: PropTypes.number,
+      y: PropTypes.number,
+      label: PropTypes.string
+    })
+  )
 };
 
 HorizontalBarChart.defaultProps = {
@@ -328,6 +407,7 @@ HorizontalBarChart.defaultProps = {
   dataLabelFormatter: civicFormat.unformatted,
   minimalist: false,
   stacked: false,
+  grouped: false,
   hundredPercentData: false,
   dataSeriesKey: null,
   dataSeriesLabel: {},

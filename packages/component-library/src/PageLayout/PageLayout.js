@@ -1,12 +1,18 @@
 import PropTypes from "prop-types";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
-import Header from "../Navigation/Header";
-import Footer from "../Footer/Footer";
+import Header from "../Header/Header";
+import Footer from "../FooterNew/FooterNew";
 import CollectionHero from "../Hero/CollectionHero";
+
+const headerHeight = 72;
 
 const defaultStyles = css`
   padding: 0px 24px;
+
+  main:focus {
+    outline: none;
+  }
   @media (max-width: 640px) {
     padding: 0px 6px;
   }
@@ -41,48 +47,39 @@ const defaultStyles = css`
   }
 `;
 
+const headerMargin = css`
+  padding-top: ${headerHeight}px;
+`;
+
 const PageLayout = ({
   header,
   heroTitle,
   heroSubtitle,
-  mainProjectColor,
   teamTitle,
-  overlay,
-  children,
-  attribution
+  children
 }) => (
-  <div>
-    {header && (
-      <Header
-        title="Civic homepage"
-        mainProjectColor={mainProjectColor}
-        overlay={overlay || false}
-      />
-    )}
+  <main id="main" tabIndex="-1" css={header && headerMargin}>
+    {header && <Header />}
     {heroTitle && (
       <CollectionHero
         teamTitle={teamTitle}
         heroTitle={heroTitle}
         heroSubtitle={heroSubtitle}
-        mainProjectColor={mainProjectColor}
       />
     )}
     <div css={defaultStyles}>{children}</div>
-    <Footer attribution={attribution} />
-  </div>
+    <Footer />
+  </main>
 );
 
 PageLayout.displayName = "PageLayout";
 
 PageLayout.propTypes = {
   header: PropTypes.bool,
-  overlay: PropTypes.bool,
   teamTitle: PropTypes.string,
   heroTitle: PropTypes.string,
   heroSubtitle: PropTypes.string,
-  mainProjectColor: PropTypes.string,
-  children: PropTypes.node,
-  attribution: PropTypes.node
+  children: PropTypes.node
 };
 
 PageLayout.defaultProps = {

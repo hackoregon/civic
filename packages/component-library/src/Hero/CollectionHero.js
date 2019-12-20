@@ -22,13 +22,8 @@ const titleStyle = css`
   }
 `;
 
-const CollectionHero = ({
-  heroTitle,
-  heroSubtitle,
-  mainProjectColor,
-  teamTitle
-}) => (
-  <Hero mainProjectColor={mainProjectColor}>
+const CollectionHero = ({ heroTitle, heroSubtitle, teamTitle }) => (
+  <Hero>
     <div>
       <span css={teamTitleStyle}>{teamTitle}</span>
       <h1 css={titleStyle}>{heroTitle}</h1>
@@ -40,8 +35,7 @@ const CollectionHero = ({
 CollectionHero.propTypes = {
   teamTitle: PropTypes.string,
   heroTitle: PropTypes.string,
-  heroSubtitle: PropTypes.string,
-  mainProjectColor: PropTypes.string
+  heroSubtitle: PropTypes.string
 };
 
 export default CollectionHero;

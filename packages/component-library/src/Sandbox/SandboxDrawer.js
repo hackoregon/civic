@@ -1,308 +1,241 @@
-/* TODO: Fix linting errors */
-/* eslint-disable */
-
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
-import shortid from "shortid";
-import Dropdown from "../Dropdown/Dropdown";
-import SandboxDateSelector from "./SandboxDateSelector";
-import SandboxToggleSwitch from "./SandboxToggleSwitch";
-import SandboxMapLegend from "./SandboxMapLegend";
-import SandboxBaseMapSelector from "./SandboxBaseMapSelector";
+import { string, bool, func, arrayOf, shape } from "prop-types";
+import MenuIcon from "@material-ui/icons/Menu";
+import TimelineIcon from "@material-ui/icons/Timeline";
+import LayersIcon from "@material-ui/icons/Layers";
+import BookIcon from "@material-ui/icons/Book";
+import SandboxDrawerLayerSelector from "./SandboxDrawerLayerSelector";
+import SandboxDrawerVisualization from "./SandboxDrawerVisualization";
+import SandboxDrawerExplore from "./SandboxDrawerExplore";
+import Logo from "../Logo/Logo";
 
 const menuOpen = css(`
+  display: flex;
   position: absolute;
   top: 0;
   right: 0;
-  width: 35%;
+  height: 78vh;
+  min-height: 640px;
+  width: 33%;
   z-index: 5;
   transition: 0.5s;
   @media (max-width: 850px) {
-    width: 90%;
+    width: 95%;
+    height: 78vh;
+    min-height: 590px;
   }
   @media (max-width: 500px) {
+    flex-direction: column;
     width: 100%;
+    height: 100%;
+    min-height: 390px;
   }
 `);
 
 const menuClosed = css(`
+  display: flex;
   position: absolute;
   top: 0;
   right: 0;
-  width: 7%;
+  height: 75vh;
+  width: 40px;
   z-index: 5;
   transition: 0.5s;
-  @media (max-width: 850px) {
-    width: 15%;
-  }
   @media (max-width: 500px) {
-    width: 25%;
+    flex-direction: column;
+    width: 100%;
+    height: 40px;
   }
 `);
 
-const SandboxDrawer = ({
-  data,
-  onChange,
-  selectedPackage,
-  toggleDrawer,
-  drawerVisible,
-  slideData,
-  fetchSlideByDate,
-  foundationData,
-  defaultFoundation,
-  allSlides,
-  updatePackage,
-  selectedFoundation,
-  updateFoundation,
-  foundationMapProps,
-  onBaseMapStyleChange,
-  baseMapStyle
-}) => {
+const SandboxDrawer = props => {
+  const {
+    data,
+    onChange,
+    selectedPackage,
+    selectedPackageDescription,
+    toggleDialog,
+    toggleContributeDialog,
+    toggleDrawer,
+    toggleVisualization,
+    toggleLayerSelector,
+    toggleExplore,
+    drawerVisible,
+    drawerVisualization,
+    drawerLayerSelector,
+    drawerExplore,
+    foundationData,
+    allSlides,
+    updatePackage,
+    foundationMapProps,
+    areSlidesLoading,
+    errors,
+    updateSlideKey,
+    selectedFoundationDatum
+  } = props;
+
+  const buttonStyle = css(`
+    color: #F3F2F3;
+    height: 40px;
+    opacity: 0.6;
+    display: flex;
+  `);
+
+  const buttonIcon = css(`
+    margin: auto;
+  `);
+
+  const on = css(`
+    opacity: 1;
+  `);
+
+  const disabled = css(`
+    background: #AAA4AB;
+  `);
+
+  const active = css(`
+    opacity: 1;
+    @media (min-width: 500px) {
+      border-left: 4px solid #201024;
+    }
+    @media (max-width: 500px) {
+      border-bottom: 4px solid #F3F2F3;
+      box-sizing: border-box;
+    }
+  `);
+
+  const allVectorTileLayers =
+    !areSlidesLoading && allSlides
+      ? !foundationData.every(slide =>
+          ["vtChoroplethMap", "vtScatterPlotMap"].includes(slide)
+        )
+      : true;
+
+  const nothing = () => {};
+
   return (
     <div css={drawerVisible ? menuOpen : menuClosed}>
-      <div onClick={toggleDrawer}>
+      <div>
         <div
           css={css(`
-          text-transform: uppercase;
-          font-size: 1rem;
-          cursor: pointer;
-          background: #EE495C;
-          color: #F3F2F3;
-        `)}
-        >
-          <div
-            css={css(`
-            font-size: 1.4rem;
+            text-transform: uppercase;
+            font-size: 1rem;
+            cursor: pointer;
+            background: #1E62BD;
             color: #F3F2F3;
-            line-height: 1.5;
-            padding-left: 5px;
-            @media (max-width: 850px) {
-              font-size: 1.3rem;
+            min-width: 40px;
+            text-align: center;
+            @media (max-width: 500px) {
+              display: grid;
+              grid-template-columns: repeat(4, auto);
             }
           `)}
+        >
+          <div
+            onClick={toggleDrawer}
+            onKeyPress={toggleDrawer}
+            role="button"
+            tabIndex={0}
+            css={[buttonStyle, on]}
           >
-            {drawerVisible ? "Close Menu" : "Open Menu"}
+            <MenuIcon css={buttonIcon} />
+          </div>
+          <div
+            onClick={allVectorTileLayers ? nothing : toggleVisualization}
+            onKeyPress={allVectorTileLayers ? nothing : toggleVisualization}
+            role="button"
+            tabIndex={0}
+            css={[
+              buttonStyle,
+              drawerVisible && drawerVisualization && active,
+              allVectorTileLayers && disabled
+            ]}
+          >
+            <TimelineIcon css={buttonIcon} />
+          </div>
+          <div
+            onClick={toggleLayerSelector}
+            onKeyPress={toggleLayerSelector}
+            role="button"
+            tabIndex={0}
+            css={[buttonStyle, drawerVisible && drawerLayerSelector && active]}
+          >
+            <LayersIcon css={buttonIcon} />
+          </div>
+          <div
+            onClick={toggleExplore}
+            onKeyPress={toggleExplore}
+            role="button"
+            tabIndex={0}
+            css={[buttonStyle, drawerVisible && drawerExplore && active]}
+          >
+            <BookIcon css={buttonIcon} />
           </div>
         </div>
       </div>
       {drawerVisible && (
         <div
           css={css(`
-          background: rgba(243,242,243,0.9);
+          background: rgba(255,255,255,0.9);
           overflow-y: auto;
-          min-height: 550px;
-          height: 74vh;
-          border: 1px solid #ddd;
-          border-radius: 2px;
-          box-shadow: -10px 5px 15px -3px rgba(0, 0, 0, 0.2);
-          @media (max-width: 850px) {
-            height: 60vh;
-          }
+            box-shadow: -10px 5px 15px -3px rgba(0, 0, 0, 0.2);
+            flex-grow: 2;
         `)}
         >
           <div
+            onClick={toggleDialog}
+            onKeyPress={toggleDialog}
+            role="button"
+            tabIndex={0}
             css={css(`
-            position: relative;
-            z-index: 900;
+              display: flex;
+              background-color: #201024;
+              color: white;
+              height: 50px;
+              text-align: center;
+              cursor: pointer;
+              position: sticky;
+              top: 0;
+              z-index: 999;
           `)}
           >
-            <h2
-              css={css(`
-              color: #555;
-              text-transform: uppercase;
-              margin: 0 10px;
-            `)}
-            >
-              Data Collections
-            </h2>
-            <Dropdown
-              value={selectedPackage}
-              options={Object.keys(data.packages).map(p => ({
-                value: p,
-                label: p
-              }))}
-              onChange={updatePackage}
-              simpleValue
-            />
-          </div>
-          <div
-            css={css(`
-            position: relative;
-            z-index: 400;
-          `)}
-          >
-            <h2
-              css={css(`
-              color: #555;
-              text-transform: uppercase;
-              margin: 0 10px;
-            `)}
-            >
-              Base Layers
-            </h2>
-            <Dropdown
-              value={selectedFoundation}
-              options={data.packages[selectedPackage].foundations.map(
-                foundation => ({
-                  value: foundation,
-                  label: data.foundations[foundation].name
-                })
-              )}
-              onChange={updateFoundation}
-              simpleValue
-            />
-          </div>
-          {foundationData && (
-            <div>
-              <div
-                css={css(`
-                position: relative;
-                font-size: .75rem;
-                color: #333;
-                z-index: 300;
-              `)}
-              >
-                {foundationData.slide_meta &&
-                foundationData.slide_meta.dates.date_granularity ? (
-                  <SandboxDateSelector
-                    slide={defaultFoundation}
-                    selectedSlideData={foundationData}
-                    fetchSlideByDate={fetchSlideByDate}
-                    type="foundation"
-                  />
-                ) : foundationData.slide_meta &&
-                  foundationData.slide_meta.dates.default_date_filter ? (
-                  <span
-                    css={css(`
-                      font-size: 22px;
-                      font-weight: 400;
-                      padding: 0 0 0 16px;
-                      margin: 0;
-                    `)}
-                  >
-                    {foundationData.slide_meta.dates.default_date_filter}
-                  </span>
-                ) : null}
-              </div>
-              {foundationData.slide_data && foundationMapProps.scaleType && (
-                <SandboxMapLegend
-                  data={foundationData}
-                  mapProps={foundationMapProps}
-                />
-              )}
-              <h2
-                css={css(`
-                color: #555;
-                text-transform: uppercase;
-                margin: 0 10px;
-              `)}
-              >
-                Base map style
-              </h2>
-              {onBaseMapStyleChange && baseMapStyle && (
-                <SandboxBaseMapSelector
-                  onBaseMapStyleChange={onBaseMapStyleChange}
-                  baseMapStyle={baseMapStyle}
-                />
-              )}
+            <div css={css(`margin: auto; padding-top: 5px;`)}>
+              <Logo type="sandboxLogoInverted" />
             </div>
-          )}
-          <div
-            css={css(`
-            position: relative;
-            z-index: 200;
-          `)}
-          >
-            <h2
-              css={css(`
-              color: #555;
-              text-transform: uppercase;
-              margin: 0 10px;
-            `)}
-            >
-              Slide Layers
-            </h2>
           </div>
-          {allSlides.map((slide, index) => {
-            // eslint-disable-next-line no-extra-boolean-cast
-            const selectedSlideData = !!slideData.find(
-              slideDatum => slideDatum[slide.label]
-            )
-              ? slideData.find(slideDatum => slideDatum[slide.label])[
-                  slide.label
-                ]
-              : {};
-            const defaultGray = [238, 238, 238, 255];
-            const backgroundSlideColor = slide.color;
-            const formatBackgroundColor = arr =>
-              arr.reduce(
-                (acc, cur, i) => (i < 3 ? `${acc + cur},` : `${acc}0.9)`),
-                "rgba("
-              );
-            const slideBackGroundColor = formatBackgroundColor(
-              backgroundSlideColor
-            );
-            const blackTextColor = "rgba(0,0,0,1)";
-            const whiteTextColor = "rgba(255,255,255,1)";
-            const textColor =
-              slideBackGroundColor === defaultGray
-                ? blackTextColor
-                : whiteTextColor;
-            return (
-              <div key={shortid.generate()}>
-                <div
-                  css={css(`
-                  border-top: 1px solid #ddd;
-                  padding: .3rem .5rem;
-                  text-transform: capitalize;
-                  font-weight: bold;
-                  background: ${slideBackGroundColor};
-                  color:${textColor}
-                `)}
-                >
-                  <SandboxToggleSwitch
-                    name={slide.slideId}
-                    checked={slide.checked}
-                    onChange={onChange}
-                    label={slide.label}
-                    mapType={slide.mapType}
-                  />
-                </div>
-                <div
-                  css={css(`
-                  padding: .5rem 0 .5rem 0;
-                  font-size: .75rem;
-                  color: #333;
-                  position: relative;
-                  z-index: ${10 - index};
-                `)}
-                >
-                  {slide.checked &&
-                  selectedSlideData.slide_meta &&
-                  selectedSlideData.slide_meta.dates.date_granularity ? (
-                    <SandboxDateSelector
-                      selectedSlideData={selectedSlideData}
-                      slide={slide}
-                      fetchSlideByDate={fetchSlideByDate}
-                      type="slide"
-                    />
-                  ) : slide.checked &&
-                    selectedSlideData.slide_meta &&
-                    selectedSlideData.slide_meta.dates.default_date_filter ? (
-                    <span
-                      css={css(`
-                          font-size: 18px;
-                          padding: 0 0 0 17px;
-                          margin: 0;
-                        `)}
-                    >
-                      {selectedSlideData.slide_meta.dates.default_date_filter}
-                    </span>
-                  ) : null}
-                </div>
-              </div>
-            );
-          })}
+          {drawerVisualization && (
+            <SandboxDrawerVisualization
+              selectedPackage={selectedPackage}
+              selectedPackageDescription={selectedPackageDescription}
+              selectedFoundationDatum={selectedFoundationDatum}
+            />
+          )}
+          {drawerLayerSelector && (
+            <SandboxDrawerLayerSelector
+              data={data}
+              onChange={onChange}
+              selectedPackage={selectedPackage}
+              foundationData={foundationData}
+              allSlides={allSlides}
+              updatePackage={updatePackage}
+              foundationMapProps={foundationMapProps}
+              areSlidesLoading={areSlidesLoading}
+              errors={errors}
+              updateSlideKey={updateSlideKey}
+              toggleDrawer={toggleDrawer}
+            />
+          )}
+          {drawerExplore && (
+            <SandboxDrawerExplore
+              data={data}
+              selectedPackage={selectedPackage}
+              updatePackage={updatePackage}
+              errors={errors}
+              toggleLayerSelector={toggleLayerSelector}
+              toggleContributeDialog={toggleContributeDialog}
+            />
+          )}
         </div>
       )}
     </div>
@@ -310,3 +243,28 @@ const SandboxDrawer = ({
 };
 
 export default SandboxDrawer;
+
+SandboxDrawer.propTypes = {
+  data: shape({}),
+  onChange: func,
+  selectedPackage: string,
+  selectedPackageDescription: string,
+  toggleDialog: func,
+  toggleDrawer: func,
+  toggleContributeDialog: func,
+  toggleVisualization: func,
+  toggleLayerSelector: func,
+  toggleExplore: func,
+  drawerVisible: bool,
+  drawerVisualization: bool,
+  drawerLayerSelector: bool,
+  drawerExplore: bool,
+  foundationData: arrayOf(shape({})),
+  allSlides: arrayOf(shape({})),
+  updatePackage: func,
+  foundationMapProps: arrayOf(shape({})),
+  areSlidesLoading: bool,
+  errors: bool,
+  updateSlideKey: func,
+  selectedFoundationDatum: shape({})
+};

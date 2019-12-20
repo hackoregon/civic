@@ -44,34 +44,22 @@ export default class StoryFooter extends Component {
     source: PropTypes.string
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      copied: false
-    };
-  }
-
-  setToFalse = () => this.setState({ copied: false });
-
   handleCopy = () => {
     const { slug } = this.props;
     // NOTE: we need to make sure this will work on all browsers
     copy(`${get(window, "location.origin", "")}/cards/${slug}`);
     this.switchState(MS_TO_SWITCH_TEXT);
-    this.setState({ copied: true });
   };
 
   switchState = ms => setTimeout(this.setToFalse, ms);
 
   render() {
     const { slug, source } = this.props;
-    const { copied } = this.state;
-    const shareTxt = copied ? "Copied!" : "Share"; // if copied, show Link copied, otherwise, show Share card
-    const shareIcon = copied ? ICONS.check : ICONS.link;
     const isEmbedded =
       `${get(window, "location.origin", "")}/cards/${slug}/embed/` ===
       get(window, "location.href", "");
     const issue = `https://github.com/hackoregon/civic/issues/new?labels=type%3Astory-card&template=story-card-improve.md&title=[FEEDBACK] ${slug}`;
+    const fullView = `https://civicplatform.org/cards/${slug}`;
 
     return (
       <div css={actionsClass}>
@@ -96,10 +84,11 @@ export default class StoryFooter extends Component {
           </CivicStoryLink>
           <CivicStoryLink
             additionalClassName={alignRight}
-            action={this.handleCopy}
-            icon={shareIcon}
+            route={isEmbedded ? undefined : `/cards/${slug}`}
+            link={isEmbedded ? fullView : undefined}
+            icon={ICONS.info}
           >
-            {shareTxt}
+            More
           </CivicStoryLink>
         </div>
       </div>

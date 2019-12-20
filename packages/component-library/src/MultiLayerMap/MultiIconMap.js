@@ -1,7 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import React from "react";
 import { IconLayer } from "deck.gl";
-import shortid from "shortid";
 import { number, string, bool, func, arrayOf, shape } from "prop-types";
 
 import { createColorScale, createSizeScale } from "./createLayers";
@@ -28,9 +27,8 @@ const MultiIconMap = props => {
     opacity = 0.7,
     getPosition = f => f.geometry.coordinates,
     iconAtlas,
-    iconMapping,
+    iconMapping = {},
     getSizeScale = getIconSizeScale,
-    getIcon = f => f.properties.type,
     iconSize = 10,
     autoHighlight = true,
     highlightColor = [0, 0, 128, 128],
@@ -41,7 +39,8 @@ const MultiIconMap = props => {
     scaleType,
     fieldName = {},
     dataRange,
-    colorRange
+    colorRange,
+    index
   } = props;
 
   const colorScale = createColorScale(
@@ -57,7 +56,7 @@ const MultiIconMap = props => {
       const value = feature.properties[fieldNameColor];
       return value ? colorScale(value) : [0, 0, 0, 128];
     }
-    return colorScale();
+    return colorScale("icon");
   };
 
   const getSize = createSizeScale(iconSize, scaleType, fieldName);
@@ -66,23 +65,36 @@ const MultiIconMap = props => {
 
   const sizeScale = getSizeScale(zoom);
 
+  const iconMap =
+    Object.keys(iconMapping).length !== 0
+      ? iconMapping
+      : {
+          [dataRange[0]]: {
+            x: 0,
+            y: 0,
+            width: 250,
+            height: 250,
+            mask: true
+          }
+        };
+
   return (
     <IconLayer
-      key={shortid.generate()}
+      key={id}
       id={id}
-      data={data}
+      data={data.filter(d => d.geometry)}
       pickable={pickable}
       opacity={opacity}
       getPosition={getPosition}
       iconAtlas={iconAtlas}
-      iconMapping={iconMapping}
+      iconMapping={iconMap}
       sizeScale={sizeScale}
-      getIcon={getIcon}
+      getIcon={f => (fieldName && fieldName.color ? f.properties.type : "icon")}
       getSize={getSize}
       getColor={getColor}
       autoHighlight={autoHighlight}
       highlightColor={highlightColor}
-      onHover={onHoverSlide}
+      onHover={info => onHoverSlide(info, index)}
       onClick={onLayerClick}
     />
   );
@@ -104,7 +116,6 @@ MultiIconMap.propTypes = {
     mask: bool
   }),
   getSizeScale: func,
-  getIcon: func,
   iconSize: number,
   autoHighlight: bool,
   highlightColor: arrayOf(number),
@@ -120,7 +131,8 @@ MultiIconMap.propTypes = {
   }),
   dataRange: arrayOf(string),
   colorRange: arrayOf(arrayOf(number)),
-  viewport: shape({})
+  viewport: shape({}),
+  index: number
 };
 
 export default MultiIconMap;

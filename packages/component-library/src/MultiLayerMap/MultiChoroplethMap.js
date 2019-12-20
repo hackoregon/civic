@@ -1,13 +1,16 @@
 import React from "react";
 import { GeoJsonLayer } from "deck.gl";
-import shortid from "shortid";
+import { memoize } from "lodash";
 import { number, string, bool, func, arrayOf, shape } from "prop-types";
 import {
   createColorScale,
   updateQuantileScale,
-  updateEqualScale,
-  createSizeScale
+  updateEqualScale
 } from "./createLayers";
+
+const memoizeData = memoize(featuresArr => {
+  return featuresArr.filter(f => f.geometry && f.geometry.coordinates.length);
+});
 
 const MultiChoroplethMap = props => {
   const {
@@ -19,7 +22,7 @@ const MultiChoroplethMap = props => {
     getPolygon = f => f.geometry.coordinates,
     filled = true,
     stroked = true,
-    polygonWidth = 1,
+    lineWidth = 1,
     polygonLineColor = [169, 169, 169],
     autoHighlight = true,
     highlightColor = [255, 255, 0, 100],
@@ -30,7 +33,9 @@ const MultiChoroplethMap = props => {
     },
     fieldName,
     dataRange = [],
-    colorRange = []
+    colorRange = [],
+    index,
+    selectedFoundationDatum
   } = props;
 
   let choroplethColorScale = createColorScale(
@@ -63,22 +68,36 @@ const MultiChoroplethMap = props => {
 
   const getFillColor = feature => {
     const { color: fieldNameColor } = fieldName;
-    const value = feature.properties[fieldNameColor];
+    const value = feature.properties[`${fieldNameColor}`];
     return value ? choroplethColorScale(value) : [0, 0, 0, 128];
   };
 
-  const getLineColor = () => {
+  const getLineColor = f => {
+    if (selectedFoundationDatum) {
+      const selectedId = selectedFoundationDatum.id;
+      const featureId = f.id;
+      return featureId === selectedId ? [255, 178, 31, 255] : polygonLineColor;
+    }
     return polygonLineColor;
   };
 
-  const getLineWidth = createSizeScale(polygonWidth);
+  const getLineWidth = f => {
+    if (selectedFoundationDatum) {
+      const selectedId = selectedFoundationDatum.id;
+      const featureId = f.id;
+      return featureId === selectedId ? 125 : lineWidth;
+    }
+    return lineWidth;
+  };
+
+  const filteredData = memoizeData(data);
 
   return (
     <GeoJsonLayer
-      key={shortid.generate()}
+      key={id}
       id={id}
       pickable={pickable}
-      data={data}
+      data={filteredData}
       opacity={opacity}
       getPolygon={getPolygon}
       filled={filled}
@@ -90,8 +109,8 @@ const MultiChoroplethMap = props => {
       lineWidthScale={1}
       lineJointRounded={false}
       extruded={false}
-      onHover={onHoverSlide}
-      onClick={onLayerClick}
+      onHover={info => onHoverSlide(info, index)}
+      onClick={info => onLayerClick(info, index)}
       autoHighlight={autoHighlight}
       highlightColor={highlightColor}
       parameters={{ depthTest: false }}
@@ -113,7 +132,7 @@ MultiChoroplethMap.propTypes = {
   getPolygon: func,
   filled: bool,
   stroked: bool,
-  polygonWidth: number,
+  lineWidth: number,
   polygonLineColor: arrayOf(number),
   autoHighlight: bool,
   highlightColor: arrayOf(number),
@@ -126,7 +145,15 @@ MultiChoroplethMap.propTypes = {
     color: string
   }).isRequired,
   dataRange: arrayOf(string),
-  colorRange: arrayOf(arrayOf(number))
+  colorRange: arrayOf(arrayOf(number)),
+  index: number,
+  selectedFoundationDatum: shape({
+    id: number,
+    displayName: string,
+    featureProperties: shape({}),
+    colorKey: string,
+    primaryFormat: string
+  })
 };
 
 export default MultiChoroplethMap;

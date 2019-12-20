@@ -10,8 +10,7 @@ import api from "../../state/home-appreciation/api";
 const HomeAppreciation = ({ init, data, Layout }) => {
   useEffect(() => {
     init();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <CivicCard cardMeta={homeAppreciationMeta} data={data} Layout={Layout} />
@@ -19,6 +18,7 @@ const HomeAppreciation = ({ init, data, Layout }) => {
 };
 
 HomeAppreciation.displayName = "HomeAppreciation";
+HomeAppreciation.tags = homeAppreciationMeta().tags;
 
 HomeAppreciation.propTypes = {
   init: PropTypes.func,

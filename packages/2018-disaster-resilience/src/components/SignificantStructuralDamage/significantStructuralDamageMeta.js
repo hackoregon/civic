@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Collapsable } from "@hackoregon/component-library";
 
 import SignificantStructuralDamageVisualization from "./SignificantStructuralDamageVisualization";
@@ -7,13 +7,15 @@ const SignificantStructuralDamageMeta = (/* data */) => ({
   title: "Significant Structural Damage",
   slug: "significant-structural-damage",
   introText: (
-    <p>
-      {`Key pieces of Portland's infrastructure are estimated to be
-        destroyed or damaged beyond a usable state in a 9.0 Cascadia
-        Subduction Zone earthquake. Three specific weaknesses will
-        severely inhibit the ability to rescue people, distribute
-        services, and rebuild after a Cascadia quake.`}
-    </p>
+    <Fragment>
+      <p>
+        {`The Cascadia Subduction Zone fault, running 100 miles off the coast from northern California to British Columbia, has the potential to cause a 9.0+ magnitude earthquake. Scientists estimate there is a 40% chance this event will occur within the next 50 years. Portland is well within the affected zone for this earthquake.`}
+      </p>
+      <p>
+        {`Key pieces of Portland's infrastructure are estimated to be destroyed or damaged beyond a usable state in a 9.0 Cascadia Subduction Zone earthquake. Three specific weaknesses will severely inhibit the ability to rescue people, distribute services, and rebuild after a Cascadia quake:
+        `}
+      </p>
+    </Fragment>
   ),
   visualization: SignificantStructuralDamageVisualization, // data, isLoading are passed to this as props
   additionalText: (
@@ -52,10 +54,16 @@ const SignificantStructuralDamageMeta = (/* data */) => ({
     </Collapsable>
   ),
   shareText: null, // TODO
-  tags: null, // TODO
+  tags: [
+    "Disaster Resilience",
+    "Earthquake",
+    "Portland",
+    "Oregon",
+    "Infographic"
+  ],
   selector: null,
   analysis: null, // TODO
-  metadata: null, // TODO
+  metadata: null, // n/a
   resources: [
     {
       heading: "Organizations",
@@ -70,7 +78,7 @@ const SignificantStructuralDamageMeta = (/* data */) => ({
     }
   ],
   // authors likely an array of keys in the future
-  authors: []
+  authors: "demo"
 });
 
 export default SignificantStructuralDamageMeta;

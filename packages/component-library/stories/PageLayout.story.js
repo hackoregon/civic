@@ -3,7 +3,7 @@ import React from "react";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
 import { CivicStoryCard, HorizontalBarChart, PageLayout } from "../src";
-import { wallOfRichText } from "./shared";
+import { WallOfRichText } from "./shared";
 
 const data = [
   { sortOrder: 1, population: 2000, label: "Labrador Retriever" },
@@ -21,7 +21,6 @@ const housingExample = () => (
     teamTitle="Transportation"
     heroTitle="Housing"
     heroSubtitle="A look into the housing rental income disparity."
-    mainProjectColor="#7CD"
   >
     <section style={{ margin: "80px 0" }} id="chart-1">
       <p
@@ -46,7 +45,9 @@ const housingExample = () => (
             title="Dogs x Income"
           />
         </div>
-        <p className="Description">{wallOfRichText}</p>
+        <p className="Description">
+          <WallOfRichText />
+        </p>
       </CivicStoryCard>
     </section>
     <section style={{ margin: "80px 0" }} id="pullquote-1">
@@ -76,7 +77,9 @@ const housingExample = () => (
             title="Dogs x Income"
           />
         </div>
-        <p className="Description">{wallOfRichText}</p>
+        <p className="Description">
+          <WallOfRichText />
+        </p>
       </CivicStoryCard>
     </section>
     <section style={{ margin: "80px 0" }} id="transition-narrative-2">
@@ -84,7 +87,7 @@ const housingExample = () => (
         className="Description"
         style={{ maxWidth: "1000px", margin: "100px auto" }}
       >
-        {wallOfRichText}
+        <WallOfRichText />
       </p>
     </section>
   </PageLayout>
@@ -94,7 +97,6 @@ const campaignFinanceExample = () => (
   <PageLayout
     heroTitle="Campaign Finance"
     heroSubtitle="A look into how money is raised and distributed in Portland's political campaigns."
-    mainProjectColor="#b2df8a"
   >
     <section style={{ margin: "80px 0" }} id="pullquote-1">
       <blockquote
@@ -144,7 +146,9 @@ const campaignFinanceExample = () => (
             title="Dogs x Income"
           />
         </div>
-        <p className="Description">{wallOfRichText}</p>
+        <p className="Description">
+          <WallOfRichText />
+        </p>
       </CivicStoryCard>
     </section>
     <section style={{ margin: "80px 0" }} id="transition-narrative-2">
@@ -152,7 +156,7 @@ const campaignFinanceExample = () => (
         className="Description"
         style={{ maxWidth: "1000px", margin: "100px auto" }}
       >
-        {wallOfRichText}
+        <WallOfRichText />
       </p>
     </section>
   </PageLayout>

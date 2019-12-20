@@ -4,7 +4,7 @@ import { Link } from "react-router";
 import { jsx, css } from "@emotion/core";
 
 const storyLinkClass = css`
-  & a {
+  & a, button {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
@@ -12,9 +12,17 @@ const storyLinkClass = css`
     padding: 8px 12px;
     border-bottom: none;
     color: #000;
+    border: none;
+    background-color: #eee;
 
     &:hover {
       background-color: rgba(0, 0, 0, 0.1);
+      color: #000;
+    }
+
+    & span {
+      font-size: 1rem;
+      font-family: Merriweather;
       color: #000;
     }
 
@@ -23,6 +31,10 @@ const storyLinkClass = css`
       opacity: 0.8;
     }
   }
+
+  & button {
+    padding: 10px 12px 8px 12px;
+  }	  }
 
   & span {
     flex-wrap: nowrap;
@@ -36,24 +48,24 @@ const StoryLink = ({ children, icon, route, action, link, embed }) => (
   <div css={storyLinkClass}>
     {route ? (
       <Link to={route}>
-        <i className={icon} />
+        <i aria-hidden="true" className={icon} />
         <span>{children}</span>
       </Link>
     ) : embed ? (
       <a href={link} target="_blank" rel="noopener noreferrer">
-        <i className={icon} />
+        <i aria-hidden="true" className={icon} />
         <span>{children}</span>
       </a>
     ) : link ? (
       <a href={link}>
-        <i className={icon} />
+        <i aria-hidden="true" className={icon} />
         <span>{children}</span>
       </a>
     ) : (
-      <a tabIndex="0" onClick={action} role="button">
-        <i className={icon} />
+      <button tabIndex="0" onClick={action} type="button">
+        <i aria-hidden="true" className={icon} />
         <span>{children}</span>
-      </a>
+      </button>
     )}
   </div>
 );

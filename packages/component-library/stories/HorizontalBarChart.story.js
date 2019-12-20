@@ -324,4 +324,71 @@ export default () =>
         );
       },
       { notes }
+    )
+    .add(
+      "Example: Grouped bar chart",
+      () => {
+        const sampleGroupedData = [
+          { breed: "Poodle", year: "2017", numberOfDogs: 7 },
+          { breed: "Poodle", year: "2018", numberOfDogs: 2 },
+          { breed: "Poodle", year: "2019", numberOfDogs: 3 },
+          { breed: "Bulldog", year: "2017", numberOfDogs: 2 },
+          { breed: "Bulldog", year: "2018", numberOfDogs: 5 },
+          { breed: "Bulldog", year: "2019", numberOfDogs: 4 }
+        ];
+        const dataValue = text("Data value", "numberOfDogs", GROUP_IDS.DATA);
+        const dataLabel = text("Data label", "year", GROUP_IDS.DATA);
+        const dataSeriesKey = text(
+          "Value to group data by",
+          "breed",
+          GROUP_IDS.DATA
+        );
+        const hundredPercentData = boolean(
+          "Format data to 100%",
+          false,
+          GROUP_IDS.DATA
+        );
+        const data = object("Data", sampleGroupedData, GROUP_IDS.DATA);
+        const dataValueFormatter = getKeyNames(civicFormat);
+        const optionSelectX = options(
+          "X-axis value format",
+          dataValueFormatter,
+          "numeric",
+          { display: "select" },
+          GROUP_IDS.LABELS
+        );
+        const minimalist = boolean("Minimalist", false, GROUP_IDS.CUSTOM);
+        const xLabel = text("X-axis label", "Number of Dogs", GROUP_IDS.LABELS);
+        const yLabel = text("Y-axis label", "Year", GROUP_IDS.LABELS);
+        const title = text("Title", "Number of Dogs", GROUP_IDS.LABELS);
+        const subtitle = text("Subtitle", "By Year", GROUP_IDS.LABELS);
+        const dogDataSeriesLabels = [
+          { category: "Poodle", label: "Poodle" },
+          { category: "Bulldog", label: "Bulldog" }
+        ];
+        const dataSeriesLabel = object(
+          "Data series labels:",
+          dogDataSeriesLabels,
+          GROUP_IDS.DATA
+        );
+
+        return (
+          <HorizontalBarChart
+            data={data}
+            dataValueFormatter={x => civicFormat[optionSelectX](x)}
+            dataValue={dataValue}
+            dataLabel={dataLabel}
+            xLabel={xLabel}
+            yLabel={yLabel}
+            title={title}
+            subtitle={subtitle}
+            minimalist={minimalist}
+            dataSeriesKey={dataSeriesKey}
+            grouped
+            hundredPercentData={hundredPercentData}
+            dataSeriesLabel={dataSeriesLabel}
+          />
+        );
+      },
+      { notes }
     );

@@ -9,7 +9,6 @@ import {
   shape,
   oneOfType
 } from "prop-types";
-import shortid from "shortid";
 import {
   createColorScale,
   updateQuantileScale,
@@ -34,7 +33,8 @@ const MultiPathMap = props => {
     scaleType = {},
     fieldName = {},
     dataRange = [],
-    colorRange = []
+    colorRange = [],
+    index
   } = props;
 
   let colorScale = createColorScale(
@@ -78,7 +78,7 @@ const MultiPathMap = props => {
 
   return (
     <PathLayer
-      key={shortid.generate()}
+      key={id}
       id={id}
       pickable={pickable}
       data={data}
@@ -91,7 +91,7 @@ const MultiPathMap = props => {
       rounded={rounded}
       autoHighlight={autoHighlight}
       highlightColor={highlightColor}
-      onHover={onHoverSlide}
+      onHover={info => onHoverSlide(info, index)}
       onClick={onLayerClick}
       updateTriggers={{
         getColor,
@@ -121,7 +121,8 @@ MultiPathMap.propTypes = {
     color: string
   }),
   dataRange: oneOfType([arrayOf(number), arrayOf(string)]),
-  colorRange: arrayOf(arrayOf(number))
+  colorRange: arrayOf(arrayOf(number)),
+  index: number
 };
 
 export default MultiPathMap;

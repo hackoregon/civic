@@ -1,11 +1,27 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
-import { Fragment } from "react";
+import { Fragment, useState, useRef } from "react";
 import PropTypes from "prop-types";
 import _ from "lodash";
 import { generate } from "shortid";
+import copy from "copy-to-clipboard";
+import Button from "@material-ui/core/Button";
+import ButtonGroup from "@material-ui/core/ButtonGroup";
+import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+import ClickAwayListener from "@material-ui/core/ClickAwayListener";
+import Grow from "@material-ui/core/Grow";
+import Paper from "@material-ui/core/Paper";
+import Popper from "@material-ui/core/Popper";
+import MenuItem from "@material-ui/core/MenuItem";
+import MenuList from "@material-ui/core/MenuList";
+import { ThemeProvider } from "@material-ui/styles";
+
+import MetaDataQAData from "../../assets/metadataQA.json";
+import MetaDataQAQuestions from "../../assets/metadataQAQuestions.json";
+import authorsSrc from "../../assets/authors.png";
+import { MaterialTheme } from "../_Themes/index";
+import ButtonNew from "../ButtonNew/ButtonNew";
 import PullQuote from "../PullQuote/PullQuote";
-import Placeholder from "../Placeholder/Placeholder";
 import Chip from "../Chip/Chip";
 import cardMetaTypes from "./cardMetaTypes";
 
@@ -34,24 +50,160 @@ const sectionMaxWidthMedium = css`
 `;
 
 const authorPhoto = css`
-  width: 50%;
+  width: 100%;
   filter: grayscale(100%);
   cursor: pointer;
 `;
 
-const demoAuthorPhotos = [
-  "https://civicsoftwarefoundation.org/static/human-grid-test-4c90bfc3f316f5d4e104320cb98c43c8.png",
-  "https://civicsoftwarefoundation.org/static/human-grid-test2-ea1849501456af341647068243fc72bb.png"
-];
+const headerStyle = css`
+  display: grid;
+  padding-bottom: 20px;
+`;
+
+const titleStyle = css`
+  margin: 30px 0 20px;
+`;
+
+const centerSelf = css`
+  justify-self: center;
+`;
+
+const buttonImproveContainer = css`
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 200px 200px;
+  justify-content: center;
+  justify-items: center;
+`;
+
+const hiddenVisually = css`
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+`;
 
 function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
+  const [shareButtonText, setShareButtonText] = useState("Share");
+  const [shareButtonOpen, setShareButtonOpen] = useState(false);
+  const shareButtonAnchorRef = useRef(null);
+  const issueLink = `https://github.com/hackoregon/civic/issues/new?labels=type%3Astory-card&template=story-card-improve.md&title=[FEEDBACK] ${
+    cardMeta.slug
+  }`;
+
+  const relatedMetadataQA = cardMeta.metadataQA
+    ? MetaDataQAData[cardMeta.metadataQA]
+    : null;
+
+  function handleShareItemClick(option) {
+    const linkLocation = `${_.get(window, "location.origin", "")}/cards/${
+      cardMeta.slug
+    }`;
+    const scrOutput = document.querySelector("#scr-only");
+
+    if (option === "link") {
+      copy(linkLocation);
+    } else {
+      copy(`${linkLocation}/embed`);
+    }
+
+    setShareButtonText("Copied!");
+    scrOutput.textContent = "Copied";
+    setTimeout(() => {
+      setShareButtonText("Share");
+      scrOutput.textContent = "";
+    }, 2000);
+    setShareButtonOpen(false);
+  }
+
+  function handleShareButtonToggle() {
+    setShareButtonOpen(prevOpen => !prevOpen);
+  }
+
+  function handleShareButtonClose(event) {
+    if (
+      shareButtonAnchorRef.current &&
+      shareButtonAnchorRef.current.contains(event.target)
+    ) {
+      return;
+    }
+
+    setShareButtonOpen(false);
+  }
+
+  const shareButtonOptions = [
+    { text: "Link", linkTo: "link" },
+    { text: "Embed", linkTo: "embed" }
+  ];
+
   return (
-    <Fragment>
+    <ThemeProvider theme={MaterialTheme}>
+      <output css={hiddenVisually} id="scr-only" />
       <article>
         {cardMeta.title && (
           <div css={[sectionMarginSmall, sectionMaxWidthSmall]}>
-            <header>
-              <h1 id="title">{cardMeta.title}</h1>
+            <header css={headerStyle}>
+              <h1 id="title" css={titleStyle}>
+                {cardMeta.title}
+              </h1>
+              <ButtonGroup
+                variant="contained"
+                color="secondary"
+                ref={shareButtonAnchorRef}
+                aria-label="split button"
+                css={centerSelf}
+              >
+                <Button onClick={handleShareButtonToggle}>
+                  {shareButtonText}
+                </Button>
+                <Button
+                  color="secondary"
+                  size="small"
+                  aria-owns={shareButtonOpen ? "menu-list-grow" : undefined}
+                  aria-haspopup="true"
+                  onClick={handleShareButtonToggle}
+                >
+                  <ArrowDropDownIcon />
+                </Button>
+              </ButtonGroup>
+              <Popper
+                open={shareButtonOpen}
+                anchorEl={shareButtonAnchorRef.current}
+                transition
+                disablePortal
+                placement="bottom-end"
+              >
+                {({ TransitionProps, placement }) => (
+                  <Grow
+                    {...TransitionProps}
+                    style={{
+                      transformOrigin:
+                        placement === "bottom" ? "center top" : "right bottom"
+                    }}
+                  >
+                    <Paper id="menu-list-grow">
+                      <ClickAwayListener onClickAway={handleShareButtonClose}>
+                        <MenuList>
+                          {shareButtonOptions.map(option => (
+                            <MenuItem
+                              key={option.text}
+                              onClick={() =>
+                                handleShareItemClick(option.linkTo)
+                              }
+                            >
+                              {option.text}
+                            </MenuItem>
+                          ))}
+                        </MenuList>
+                      </ClickAwayListener>
+                    </Paper>
+                  </Grow>
+                )}
+              </Popper>
             </header>
             <hr />
             {cardMeta.tags && cardMeta.tags.length > 0 && (
@@ -105,26 +257,46 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
             </section>
           </Fragment>
         )}
-        {(cardMeta.metadata || cardMeta.metadataQA) && (
-          <Fragment>
-            <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
-            <section
-              css={[sectionMarginSmall, sectionMaxWidthSmall]}
-              id="metadata"
-            >
-              <h2>About this data</h2>
-              {cardMeta.metadata}
-              {_.has(cardMeta, "metadataQA") && (
+
+        <Fragment>
+          <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
+          <section
+            css={[sectionMarginSmall, sectionMaxWidthSmall]}
+            id="metadata"
+          >
+            <h2>About this data</h2>
+            {relatedMetadataQA ? (
+              <Fragment>
+                {cardMeta.metadata}
                 <CollapsableSection
-                  items={cardMeta.metadataQA.map(item => (
-                    <MetadataQuestion item={item} key={generate()} />
+                  description="metadata questions"
+                  items={Object.keys(relatedMetadataQA).map(key => (
+                    <MetadataQuestion
+                      question={MetaDataQAQuestions[key]}
+                      answer={relatedMetadataQA[key]}
+                      key={generate()}
+                    />
                   ))}
                   collapseAfter={5}
                 />
-              )}
-            </section>
-          </Fragment>
-        )}
+              </Fragment>
+            ) : (
+              <p>
+                <em>This dataset is missing context documentation</em>
+                <br />
+                <br />
+                Documenting how and why a dataset was created, what information
+                it contains, its limitations, and possible ethical or legal
+                concerns is paramount for data that informs decision making. If
+                you’re an expert on this dataset, you can{" "}
+                <a href="https://forms.gle/rggpgLGRtfaQDm5f7">
+                  add documentation
+                </a>
+                .
+              </p>
+            )}
+          </section>
+        </Fragment>
         {cardMeta.resources && (
           <Fragment>
             <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
@@ -139,6 +311,7 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
                 this data visualization.
               </p>
               <CollapsableSection
+                description="resources"
                 items={cardMeta.resources.map(item => (
                   <Resource section={item} key={generate()} />
                 ))}
@@ -147,32 +320,32 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
             </section>
           </Fragment>
         )}
-        {((cardMeta.authors && cardMeta.authors === "demo") ||
-          (cardMeta.authors && cardMeta.authors.length > 0)) && (
-          <Fragment>
-            <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
-            <section
-              css={[sectionMarginSmall, sectionMaxWidthSmall]}
-              id="authors"
-            >
-              <h2>Who made this?</h2>
-              {cardMeta.authors === "demo"
-                ? demoAuthorPhotos.map(photo => (
-                    <img
-                      css={authorPhoto}
-                      src={photo}
-                      alt="Pictures of people who worked on this"
-                      key={generate()}
-                    />
-                  ))
-                : cardMeta.authors.map(authorEmail => (
-                    <p key={authorEmail}>
-                      <a href={`mailto:${authorEmail}`}>{authorEmail}</a>
-                    </p>
+        <Fragment>
+          <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
+          <section
+            css={[sectionMarginSmall, sectionMaxWidthSmall]}
+            id="authors"
+          >
+            <h2>Who made this?</h2>
+            {/* temporary implementation, length > 4 to exclude authors: "demo" */}
+            {cardMeta.authors && cardMeta.authors.length > 4 && (
+              <Fragment>
+                <h3>Primary Authors</h3>
+                <ul>
+                  {cardMeta.authors.map(author => (
+                    <li>{author}</li>
                   ))}
-            </section>
-          </Fragment>
-        )}
+                </ul>
+              </Fragment>
+            )}
+            <h3>2019 Hack Oregon Team</h3>
+            <img
+              css={authorPhoto}
+              src={authorsSrc}
+              alt="Pictures of people who worked on this"
+            />
+          </section>
+        </Fragment>
         <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
         <section css={[sectionMarginSmall, sectionMaxWidthSmall]} id="improve">
           <h2>Help make this better</h2>
@@ -182,27 +355,17 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
             visualization, or have context to add about the dataset, we want you
             to contribute.
           </p>
-          <ul>
-            <li>
-              <a href="https://civicsoftwarefoundation.org/#volunteers">
-                Get Started!
-              </a>
-            </li>
-          </ul>
+          <div css={buttonImproveContainer}>
+            <ButtonNew
+              href="https://civicsoftwarefoundation.org/#volunteers"
+              label="Get Involved!"
+            />
+            <ButtonNew href={issueLink} label="File an Issue" />
+          </div>
         </section>
       </article>
       <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
-      <section css={[sectionMarginSmall, sectionMaxWidthSmall]} id="explore">
-        <h2>Explore related data</h2>
-        <Placeholder>
-          <h3>
-            <a href="https://civicsoftwarefoundation.org/#cities">
-              See your data here!
-            </a>
-          </h3>
-        </Placeholder>
-      </section>
-    </Fragment>
+    </ThemeProvider>
   );
 }
 

@@ -6,8 +6,14 @@ import IncreasingSocialCapital from "./components/IncreasingSocialCapital";
 import ProactivePlanning from "./components/ProactivePlanning";
 import SignificantStructuralDamage from "./components/SignificantStructuralDamage";
 import WhatYouCanDoToPrepare from "./components/WhatYouCanDoToPrepare";
+import TillamookCountyEarthquakeCasualtyEstimates from "./components/TillamookCountyEarthquakeCasualtyEstimates";
+import EarthquakeDamageEstimatesForBuildingsInTillamookCounty from "./components/EarthquakeDamageEstimatesForBuildingsInTillamookCounty";
 
 export default [
+  {
+    slug: "earthquake-damage-estimates-for-buildings-in-tillamook-county",
+    component: EarthquakeDamageEstimatesForBuildingsInTillamookCounty
+  },
   {
     slug: "what-you-can-do-to-prepare-for-an-earthquake",
     component: WhatYouCanDoToPrepare
@@ -35,5 +41,9 @@ export default [
   {
     slug: "increasing-social-capital",
     component: IncreasingSocialCapital
+  },
+  {
+    slug: "tillamook-county-earthquake-casualty-estimates",
+    component: TillamookCountyEarthquakeCasualtyEstimates
   }
 ];

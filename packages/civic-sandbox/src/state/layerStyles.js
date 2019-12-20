@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { scaleThreshold } from "d3";
 
 /* COLOR SCHEME OPTIONS */

@@ -7,8 +7,9 @@ import CivicLogoAnimatedInverted from "./CivicLogoAnimatedInverted";
 import CivicLogoC from "./CivicLogoC";
 import CivicLogoCAnimated from "./CivicLogoCAnimated";
 import CivicLogoCInverted from "./CivicLogoCInverted";
+import CivicSandboxLogoInverted from "./CivicSandboxLogoInverted";
 
-function Logo({ type, alt }) {
+function Logo({ type, alt, ...other }) {
   switch (type) {
     case "standardLogo":
       return <CivicLogo alt={alt} />;
@@ -19,11 +20,13 @@ function Logo({ type, alt }) {
     case "standardLogoAnimatedInverted":
       return <CivicLogoAnimatedInverted alt={alt} />;
     case "squareLogo":
-      return <CivicLogoC alt={alt} />;
+      return <CivicLogoC alt={alt} {...other} />;
     case "squareLogoAnimated":
       return <CivicLogoCAnimated alt={alt} />;
     case "squareLogoInverted":
       return <CivicLogoCInverted alt={alt} />;
+    case "sandboxLogoInverted":
+      return <CivicSandboxLogoInverted alt={alt} />;
     default:
       return <CivicLogoAnimated alt={alt} />;
   }

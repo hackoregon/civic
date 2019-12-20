@@ -1,26 +1,35 @@
 /* eslint-disable no-nested-ternary */
+import React from "react";
 import PropTypes from "prop-types";
-import { scaleQuantize, extent, format } from "d3";
+import { format, scaleLinear, max, range as d3Range } from "d3";
+import { startCase } from "lodash";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import shortid from "shortid";
 import civicFormat from "../utils/civicFormat";
+import {
+  createColorScale,
+  updateQuantileScale,
+  updateEqualScale,
+  createRange
+} from "../MultiLayerMap/createLayers";
 
+const legendHeight = 65;
 const legendContainer = css(`
-  border-top: 2px solid gainsboro;
-  border-bottom: 2px solid gainsboro;
-  margin: 2% 0 8% 2%;
+  margin: 9px 5%;
   display: flex;
+  align-items: baseline;
   flex-wrap: nowrap;
-  height: 25px;
-  width: 96%;
+  height: ${legendHeight}px;
+  width: 90%;
+  padding-bottom: 10px;  
 `);
 
 const colorBox = css(`
   display: flex;
   position: relative;
   flex-basis: 100%;
-  border-left: 2px solid gainsboro;
+  border: 1px solid #AAA4AB;
   justify-content: end;
   align-items: end;
 `);
@@ -28,7 +37,7 @@ const colorBox = css(`
 const tickNums = css(`
   position: absolute;
   bottom: -20px;
-  right: 0;
+  right: -20px;
   font-size: 14px;
 `);
 
@@ -47,21 +56,69 @@ const tickNumsOrdinal = css(`
   font-size: 14px;
 `);
 
-const SandboxMapLegend = props => {
+const tickNumsCircle = css(`
+  position: absolute;
+  bottom: -25px;
+  left: 31px;
+  font-size: 14px;
+`);
+
+const barLabelStyle = css(`
+  position: absolute;
+  top: -18px;
+  width: 100%;
+  text-align: center;
+  font-size: 15px;
+`);
+
+const SandboxMapLegend = React.memo(props => {
   const { data, mapProps } = props;
+  const {
+    civicColor,
+    scaleType = {},
+    dataRange = [],
+    colorRange = [],
+    fieldName,
+    mapType,
+    layerInfo,
+    legend,
+    multipleLayers
+  } = mapProps;
+  const { color: colorScaleType } = scaleType;
 
-  const createEqualBins = (slide, color, getPropValue) => {
-    const scale = scaleQuantize()
-      .domain(extent(slide.slide_data.features, getPropValue))
-      .range(color)
-      .nice();
-    return scale;
-  };
+  const {
+    format: legendFormat,
+    colorRange: legendColorRange,
+    dataRange: legendDataRange = []
+  } = legend;
 
-  const colorScale =
-    mapProps.scaleType === "ordinal" || mapProps.scaleType === "threshold"
-      ? mapProps.categories
-      : createEqualBins(data, mapProps.color, mapProps.getPropValue);
+  let choroplethColorScale = createColorScale(
+    civicColor,
+    scaleType,
+    dataRange,
+    colorRange
+  );
+
+  if (colorScaleType === "equal") {
+    choroplethColorScale = updateEqualScale(
+      data,
+      choroplethColorScale,
+      civicColor,
+      dataRange,
+      colorRange,
+      fieldName
+    );
+  }
+
+  if (colorScaleType === "quantile") {
+    choroplethColorScale = updateQuantileScale(
+      data,
+      choroplethColorScale,
+      civicColor,
+      colorRange,
+      fieldName
+    );
+  }
 
   const formatColor = arr =>
     arr.reduce(
@@ -69,69 +126,165 @@ const SandboxMapLegend = props => {
       "rgba("
     );
 
-  const mapColorsArr =
-    mapProps.scaleType === "ordinal" || mapProps.scaleType === "threshold"
-      ? mapProps.color.map(arr => formatColor(arr))
-      : colorScale.range().map(arr => formatColor(arr));
+  const spColor =
+    multipleLayers && multipleLayers[0]
+      ? multipleLayers[0].paint["circle-color"]
+      : "#000";
+  const spColorRange = d3Range(5).map(() => spColor);
+  const colorScaleRange =
+    mapType === "vtChoroplethMap"
+      ? createRange("", legendColorRange).map(c => [...c, 255])
+      : mapType === "vtScatterPlotMap"
+      ? createRange("", spColorRange).map(c => [...c, 255])
+      : choroplethColorScale.range()[0].length === 4
+      ? choroplethColorScale.range()
+      : choroplethColorScale.range().map(c => [...c, 255]);
+
+  const mapColorsArr = colorScaleRange.map(arr => formatColor(arr));
 
   const bins =
-    mapProps.scaleType === "ordinal" || mapProps.scaleType === "threshold"
-      ? colorScale
-      : colorScale.range().map(d => colorScale.invertExtent(d));
+    colorScaleType === "ordinal" || colorScaleType === "threshold"
+      ? dataRange
+      : mapType === "vtChoroplethMap"
+      ? legendDataRange
+      : mapType === "vtScatterPlotMap"
+      ? ["Less", "", "", "", "More"]
+      : choroplethColorScale
+          .range()
+          .map(d => choroplethColorScale.invertExtent(d));
 
   const ticks =
-    mapProps.scaleType === "ordinal" || mapProps.scaleType === "threshold"
+    colorScaleType === "ordinal" ||
+    colorScaleType === "threshold" ||
+    mapType === "vtChoroplethMap" ||
+    mapType === "vtScatterPlotMap"
       ? bins
       : bins.reduce((a, c) => (c[1] ? [...a, c[1]] : [...a, ""]), []);
 
-  const thousandsFormat = format(".3s");
-  const percentFormat = format(".1%");
+  const percentageFormat = format(".1%");
+  const sandboxPercentFormat = p =>
+    p < 1 && p > 0 ? percentageFormat(p) : `${p.toFixed(1)}%`;
+  const sandboxDecimalFormat = format(".2n");
+  const sandboxMoneyFormat = d => `$${civicFormat.numericShort(d)}`;
+  const sandboxSentenceCase = str =>
+    str.length &&
+    str
+      .split(" ")
+      .reduce(
+        (full, word) => `${full} ${word[0].toUpperCase() + word.substring(1)}`,
+        ""
+      )
+      .trim();
 
-  const ticksFormatted = ticks.map(d => {
-    return d === ""
-      ? ""
-      : d >= 1000000 || d <= -1000000
-      ? civicFormat.numeric(d)
-      : d >= 1000 || d <= -1000
-      ? thousandsFormat(d)
-      : d > 1 || d < -1
-      ? civicFormat.numeric(d)
-      : d === 0
-      ? "0  "
-      : d <= 1 && d >= -1
-      ? percentFormat(d)
-      : d && typeof d === "string"
-      ? d
-      : civicFormat.numeric(d);
-  });
+  const formatTicks = (arr, typeFormat) => {
+    const formatter =
+      mapType === "vtScatterPlotMap"
+        ? startCase
+        : typeFormat === "percentage"
+        ? sandboxPercentFormat
+        : typeFormat === "dollars"
+        ? sandboxMoneyFormat
+        : typeFormat === "decimal"
+        ? sandboxDecimalFormat
+        : typeFormat === "sentenceCase"
+        ? sandboxSentenceCase
+        : typeFormat === "titleCase"
+        ? startCase
+        : civicFormat.typeFormat || civicFormat.numeric;
+    return arr.map(d => formatter(d));
+  };
+
+  const oldLegendFormat =
+    mapProps.tooltip &&
+    mapProps.tooltip.primary &&
+    mapProps.tooltip.primary.format;
+
+  const formatType = legendFormat || oldLegendFormat;
+
+  const ticksFormatted = formatTicks(ticks, formatType);
 
   const tickStyle =
-    mapProps.scaleType === "threshold"
+    colorScaleType === "threshold"
       ? tickNumsThreshold
-      : mapProps.scaleType === "ordinal"
+      : colorScaleType === "ordinal"
       ? tickNumsOrdinal
+      : mapType === "vtScatterPlotMap"
+      ? tickNumsCircle
       : tickNums;
 
-  const legend = mapColorsArr.map((d, i) => {
+  const { color: fieldNameColor } = fieldName;
+  const colorCount = data.reduce((acc, d) => {
+    const color = choroplethColorScale(d.properties[fieldNameColor]);
+    if (acc[color]) {
+      // eslint-disable-next-line no-plusplus
+      acc[color]++;
+    } else {
+      acc[color] = {};
+      acc[color] = 1;
+    }
+    return acc;
+  }, {});
+
+  const barScale = scaleLinear()
+    .domain([0, max(Object.values(colorCount), d => d)])
+    .range([0, legendHeight]);
+
+  const barHeights = mapColorsArr.map(d => {
+    const count = colorCount[d.slice(5, -3)];
+    return mapType === "vtChoroplethMap"
+      ? { h: 28, c: "" }
+      : mapType === "vtScatterPlotMap"
+      ? { h: "auto", c: "" }
+      : count
+      ? { h: barScale(count), c: count }
+      : { h: 0, c: "0" };
+  });
+
+  const legendContents = mapColorsArr.map((d, i) => {
+    const borderColor =
+      mapType === "vtScatterPlotMap" ? "transparent" : "#AAA4AB";
+    const bgColor = mapType === "vtScatterPlotMap" ? "transparent" : d;
     return (
       <div
-        key={shortid.generate()}
+        key={layerInfo.displayName + shortid.generate()}
         css={colorBox}
-        style={{ backgroundColor: d }}
+        style={{
+          borderColor,
+          backgroundColor: bgColor,
+          height: `${barHeights[i].h}px`
+        }}
       >
+        <div css={barLabelStyle}>
+          <span>{barHeights[i].c}</span>
+        </div>
         <div css={tickStyle}>
           <span>{ticksFormatted[i]}</span>
         </div>
+        {mapType === "vtScatterPlotMap" && (
+          <div
+            style={{
+              margin: "auto",
+              backgroundColor: d,
+              borderRadius: "50%",
+              height: `${i * 8 + 10}px`,
+              width: `${i * 8 + 10}px`
+            }}
+          />
+        )}
       </div>
     );
   });
 
-  return <div css={legendContainer}>{legend}</div>;
-};
+  return <div css={legendContainer}>{legendContents}</div>;
+});
 
 SandboxMapLegend.propTypes = {
-  data: PropTypes.shape({}).isRequired,
+  data: PropTypes.arrayOf(PropTypes.shape({})),
   mapProps: PropTypes.shape({}).isRequired
+};
+
+SandboxMapLegend.defaultProps = {
+  data: []
 };
 
 export default SandboxMapLegend;

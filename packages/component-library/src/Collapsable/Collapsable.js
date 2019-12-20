@@ -98,6 +98,8 @@ Collapsable.Section = Section;
 Collapsable.propTypes = {
   children: PropTypes.node,
   description: PropTypes.string.isRequired
+  // description for screen readers
+  // will announce as "more (description)" or "less (description)"
 };
 
 export default Collapsable;

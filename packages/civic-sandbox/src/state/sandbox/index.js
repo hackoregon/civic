@@ -1,4 +1,4 @@
-import { isArray, findIndex } from "lodash";
+import { findIndex } from "lodash";
 
 import {
   SANDBOX_START,
@@ -8,12 +8,14 @@ import {
   FOUNDATION_SUCCESS,
   FOUNDATION_FAILURE,
   SET_PACKAGE,
+  SET_SLIDE_KEY,
   SLIDES_START,
   SLIDES_FAILURE,
   SLIDES_SUCCESS,
   SET_FOUNDATION,
   SET_FOUNDATION_DATUM,
   SET_SLIDE_DATUM,
+  SET_BASE_MAP_DATUM,
   SET_SLIDES,
   SLIDE_START,
   SLIDE_FAILURE,
@@ -28,12 +30,18 @@ const INITIAL_STATE = {
   slidesPending: false,
   slidesError: null,
   selectedPackage: "",
+  selectedPackageDescription: "",
   sandbox: {},
   foundationData: {},
   slidesData: [],
   slidesSuccess: null,
   selectedFoundation: "",
-  selectedSlide: []
+  selectedFoundationDescription: "",
+  selectedSlide: [],
+  selectedSlideKey: {},
+  selectedFoundationDatum: null,
+  selectedSlideDatum: null,
+  selectedBaseMapDatum: null
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -45,16 +53,20 @@ const reducer = (state = INITIAL_STATE, action) => {
         sandboxError: null,
         sandbox: {},
         selectedFoundationDatum: null,
-        selectedSlideDatum: null
+        selectedSlideDatum: null,
+        selectedBaseMapDatum: null
       };
     case SANDBOX_SUCCESS:
       return {
         ...state,
         sandboxPending: false,
         sandboxError: null,
-        sandbox: action.payload.body,
+        sandbox: {
+          packages: action.payload
+        },
         selectedFoundationDatum: null,
-        selectedSlideDatum: null
+        selectedSlideDatum: null,
+        selectedBaseMapDatum: null
       };
     case SANDBOX_FAILURE:
       return {
@@ -63,7 +75,8 @@ const reducer = (state = INITIAL_STATE, action) => {
         sandboxError: action.payload,
         sandbox: {},
         selectedFoundationDatum: null,
-        selectedSlideDatum: null
+        selectedSlideDatum: null,
+        selectedBaseMapDatum: null
       };
     case FOUNDATION_START:
       return {
@@ -71,7 +84,8 @@ const reducer = (state = INITIAL_STATE, action) => {
         foundationPending: true,
         foundationError: null,
         selectedFoundationDatum: null,
-        selectedSlideDatum: null
+        selectedSlideDatum: null,
+        selectedBaseMapDatum: null
       };
     case FOUNDATION_SUCCESS:
       return {
@@ -80,7 +94,8 @@ const reducer = (state = INITIAL_STATE, action) => {
         foundationError: null,
         foundationData: action.payload,
         selectedFoundationDatum: null,
-        selectedSlideDatum: null
+        selectedSlideDatum: null,
+        selectedBaseMapDatum: null
       };
     case FOUNDATION_FAILURE:
       return {
@@ -89,7 +104,8 @@ const reducer = (state = INITIAL_STATE, action) => {
         foundationError: action.payload,
         foundationData: null,
         selectedFoundationDatum: null,
-        selectedSlideDatum: null
+        selectedSlideDatum: null,
+        selectedBaseMapDatum: null
       };
     case SLIDES_START:
       return {
@@ -97,38 +113,63 @@ const reducer = (state = INITIAL_STATE, action) => {
         slidesPending: true,
         slidesError: null
       };
-    case SLIDES_SUCCESS:
+    case SLIDES_SUCCESS: {
       return {
         ...state,
         slidesPending: false,
         slidesError: null,
         slidesSuccess: true,
-        slidesData: [...state.slidesData, ...action.payload]
+        slidesData: [...action.payload]
       };
-    case SLIDES_FAILURE:
+    }
+    case SLIDES_FAILURE: {
       return {
         ...state,
         slidesPending: false,
         slidesError: action.payload,
         slidesData: [],
         selectedFoundationDatum: null,
-        selectedSlideDatum: null
+        selectedSlideDatum: null,
+        selectedBaseMapDatum: null
       };
-    case SET_PACKAGE:
+    }
+    case SET_PACKAGE: {
+      const [findDefaultLayers] = state.sandbox.packages.filter(
+        d => d.displayName === action.selectedPackage.displayName
+      );
+
+      if (state.selectedPackage === action.selectedPackage.displayName) {
+        return state;
+      }
+
       return {
         ...state,
-        selectedPackage: action.selectedPackage,
+        selectedPackage: action.selectedPackage.displayName,
+        selectedPackageDescription:
+          findDefaultLayers.description ||
+          "A brief description of the selected data collection",
         foundationData: {},
         slidesData: [],
-        selectedFoundation:
-          state.sandbox.packages[action.selectedPackage].default_foundation,
-        selectedSlide: isArray(
-          state.sandbox.packages[action.selectedPackage].default_slide
-        )
-          ? state.sandbox.packages[action.selectedPackage].default_slide
-          : [state.sandbox.packages[action.selectedPackage].default_slide],
+        selectedSlide: findDefaultLayers.defaultLayers
+          ? findDefaultLayers.defaultLayers
+          : [],
+        sandbox: {
+          ...state.sandbox,
+          foundations: []
+        },
         selectedFoundationDatum: null,
-        selectedSlideDatum: null
+        selectedSlideDatum: null,
+        selectedBaseMapDatum: null,
+        selectedSlideKey: {}
+      };
+    }
+    case SET_SLIDE_KEY:
+      return {
+        ...state,
+        selectedSlideKey: {
+          ...state.selectedSlideKey,
+          ...action.selectedSlideKey
+        }
       };
     case SET_FOUNDATION:
       return {
@@ -136,7 +177,8 @@ const reducer = (state = INITIAL_STATE, action) => {
         selectedFoundation: action.selectedFoundation,
         foundationData: {},
         selectedFoundationDatum: null,
-        selectedSlideDatum: null
+        selectedSlideDatum: null,
+        selectedBaseMapDatum: null
       };
     case SET_SLIDES:
       return {
@@ -171,6 +213,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         slidesError: null,
         slidesSuccess: true,
         selectedSlideDatum: null,
+        selectedBaseMapDatum: null,
         slidesData,
         foundationData
       };
@@ -182,18 +225,30 @@ const reducer = (state = INITIAL_STATE, action) => {
         slidesError: action.payload,
         slidesData: null,
         selectedFoundationDatum: null,
-        selectedSlideDatum: null
+        selectedSlideDatum: null,
+        selectedBaseMapDatum: null
       };
-    case SET_FOUNDATION_DATUM:
+    case SET_FOUNDATION_DATUM: {
       return {
         ...state,
-        selectedFoundationDatum: action.feature
+        selectedFoundationDatum: {
+          feature: action.feature,
+          index: action.index
+        }
       };
-    case SET_SLIDE_DATUM:
+    }
+    case SET_SLIDE_DATUM: {
       return {
         ...state,
-        selectedSlideDatum: action.feature
+        selectedSlideDatum: { feature: action.feature, index: action.index }
       };
+    }
+    case SET_BASE_MAP_DATUM: {
+      return {
+        ...state,
+        selectedBaseMapDatum: { feature: action.feature, index: action.index }
+      };
+    }
     default:
       return state;
   }

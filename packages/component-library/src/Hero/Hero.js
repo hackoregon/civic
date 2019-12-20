@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
+import { BrandColors } from "../_Themes/index";
 
 const heroClass = css`
   display: flex;
@@ -43,8 +44,8 @@ const DefaultChildren = () => (
   </h1>
 );
 
-const Hero = ({ children, mainProjectColor }) => (
-  <div css={heroClass} style={{ backgroundColor: mainProjectColor }}>
+const Hero = ({ children }) => (
+  <div css={heroClass} style={{ backgroundColor: BrandColors.heroPurple.hex }}>
     <div css={containerClass}>
       <div css={contentClass}>{children || <DefaultChildren />}</div>
     </div>
@@ -54,7 +55,6 @@ const Hero = ({ children, mainProjectColor }) => (
 Hero.displayName = "Hero";
 
 Hero.propTypes = {
-  mainProjectColor: PropTypes.string,
   children: PropTypes.node
 };
 

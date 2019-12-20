@@ -1,10 +1,10 @@
 import React from "react";
 import { Collapsable } from "@hackoregon/component-library";
 
-import DisturbanceStopsVisualization from "./DisturbanceStopsVisualization";
+import SoutheastHawthorneVisualization from "./SoutheastHawthorneVisualization";
 
 const DisturbanceStopsMeta = (/* data */) => ({
-  title: "Disturbance Stops",
+  title: "Southeast Hawthorne",
   slug: "disturbance-stops",
   introText: (
     <p>
@@ -13,7 +13,7 @@ const DisturbanceStopsMeta = (/* data */) => ({
       template! For example, the loading state of the card needs to be improved.
     </p>
   ),
-  visualization: DisturbanceStopsVisualization, // data, isLoading are passed to this as props
+  visualization: SoutheastHawthorneVisualization, // data, isLoading are passed to this as props
   additionalText: (
     <p>
       Pastry sweet roll candy chocolate bar cupcake gingerbread. Chocolate jelly
@@ -31,9 +31,7 @@ const DisturbanceStopsMeta = (/* data */) => ({
   ),
   shareText:
     "Ice cream candy canes brownie marzipan jelly chocolate bar marshmallow.",
-  tags: [
-    /* "Transportation", "Bus", "Rail", "Portland" */
-  ],
+  tags: ["Transportation", "Portland", "Oregon", "Map"],
   selector: null,
   analysis: (
     <Collapsable>
@@ -83,36 +81,8 @@ const DisturbanceStopsMeta = (/* data */) => ({
       </Collapsable.Section>
     </Collapsable>
   ),
-  metadata: (
-    <Collapsable>
-      <Collapsable.Section>
-        <p>
-          Sweet roll wafer muffin caramels. Bonbon marshmallow pudding topping
-          pastry. Sweet roll cake bonbon croissant lollipop gummies cheesecake.
-          Chocolate bar bear claw liquorice candy canes cake sweet. Cake dessert
-          marshmallow liquorice croissant chocolate wafer brownie powder. Oat
-          cake chocolate bar bonbon jelly-o pastry candy canes. Candy canes ice
-          cream ice cream jelly-o.
-        </p>
-      </Collapsable.Section>
-      <Collapsable.Section hidden>
-        <p>
-          Macaroon donut croissant pudding marshmallow lemon drops wafer. Pastry
-          caramels cake muffin chocolate topping danish dragée dragée. Pudding
-          croissant pie pudding muffin gingerbread donut. Sweet roll bonbon
-          soufflé danish cake danish bear claw croissant. Cotton candy donut
-          jelly beans caramels halvah cupcake chocolate cake bonbon. Lollipop
-          marzipan jelly beans gummies gummies tart fruitcake halvah. Croissant
-          dragée muffin soufflé chocolate bar. Cookie croissant danish sweet
-          roll pie lemon drops. Candy candy canes cookie macaroon icing gummies.
-          Gummi bears gummi bears marzipan pudding brownie bear claw lollipop
-          brownie pie. Sugar plum topping oat cake sweet roll. Brownie topping
-          caramels sweet cupcake oat cake. Sugar plum topping pastry. Biscuit
-          dessert wafer chocolate danish.
-        </p>
-      </Collapsable.Section>
-    </Collapsable>
-  ),
+  metadata: null,
+  metadataQA: "toads",
   resources: [
     {
       heading: "Organizations",
@@ -127,7 +97,7 @@ const DisturbanceStopsMeta = (/* data */) => ({
     }
   ],
   // authors likely an array of keys in the future
-  authors: []
+  authors: "demo"
 });
 
 export default DisturbanceStopsMeta;

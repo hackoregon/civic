@@ -13,7 +13,8 @@ const {
   setEnv,
   env,
   addPlugins,
-  sourceMaps
+  sourceMaps,
+  url
 } = require("webpack-blocks");
 
 const autoprefixer = require("autoprefixer");
@@ -59,7 +60,11 @@ module.exports = {
           })
         ]
       ),
-      match(["*.svg", "*.png", "*.gif", "*.jpg", "*.jpeg"], [file()]),
+      match(
+        ["*.svg", "*.png", "*.gif", "*.jpg", "*.jpeg", "*.mp3", "*.mp4"],
+        [file()]
+      ),
+      match(["*.ttf", "*.woff", "*.woff2", "*.eot"], [url({ limit: 100000 })]),
       setEnv({
         NODE_ENV: process.env.NODE_ENV
       }),

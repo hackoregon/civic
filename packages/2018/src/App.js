@@ -78,9 +78,14 @@ import {
   App as Housing2019App
 } from "@hackoregon/2019-housing";
 
+import {
+  Routes as SandboxRoutes,
+  Reducers as SandboxReducers,
+  App as SandboxApp
+} from "@hackoregon/civic-sandbox";
+
 // hygen import injection (do not remove or modify this line)
 
-import { Reducers as SandboxReducers } from "@hackoregon/civic-sandbox";
 import {
   CardDetailPage,
   CardDetailPageEmbed,
@@ -91,12 +96,12 @@ import "./fonts.css";
 // eslint-disable-next-line import/no-named-as-default
 import RootPage from "./components/RootPage";
 import HomePage from "./components/HomePage";
-import SandboxPage from "./components/SandboxPage";
 import PortlandCollectionPage from "./components/PortlandCollectionPage";
 import CityNotFoundPage from "./components/CityNotFoundPage";
 import StateNotFoundPage from "./components/StateNotFoundPage";
 import CardRegistry from "./card-registry";
 import tags from "./tags";
+import projects from "./projects";
 
 // Create a store by combining all project reducers and the routing reducer
 const configureStore = (initialState, history) => {
@@ -197,32 +202,32 @@ const routes = {
       childRoutes: [
         {
           path: "disaster",
-          component: DisasterApp,
+          indexRoute: { component: DisasterApp },
           childRoutes: DisasterRoutes(store)
         },
         {
           path: "housing",
-          component: HousingApp,
+          indexRoute: { component: HousingApp },
           childRoutes: HousingRoutes(store)
         },
         {
           path: "elections",
-          component: ElectionsApp,
+          indexRoute: { component: ElectionsApp },
           childRoutes: ElectionsRoutes(store)
         },
         {
           path: "neighborhood",
-          component: NeighborhoodApp,
+          indexRoute: { component: NeighborhoodApp },
           childRoutes: NeighborhoodRoutes(store)
         },
         {
           path: "transportation",
-          component: TransportationApp,
+          indexRoute: { component: TransportationApp },
           childRoutes: TransportationRoutes(store)
         },
         {
           path: "farmers-markets",
-          component: FarmersMarketsApp,
+          indexRoute: { component: FarmersMarketsApp },
           childRoutes: FarmersMarketsRoutes(store)
         }
       ]
@@ -241,7 +246,13 @@ const routes = {
     },
     {
       path: "cards",
-      component: () => <CardList CardRegistry={CardRegistry} tagsList={tags} />
+      component: () => (
+        <CardList
+          CardRegistry={CardRegistry}
+          tagsList={tags}
+          projects={projects}
+        />
+      )
     },
     {
       path: "cards/:slug",
@@ -257,7 +268,15 @@ const routes = {
     },
     {
       path: "sandbox",
-      component: SandboxPage
+      indexRoute: { component: SandboxApp },
+      childRoutes: SandboxRoutes(store)
+    },
+
+    // Route for OMSI QR Code for Installation
+    {
+      path: "earthquakeheroes",
+      indexRoute: { component: DisasterApp },
+      childRoutes: DisasterRoutes(store)
     },
     // Temporarily Hidden 2019 Pages ⬇️
     {
@@ -265,28 +284,28 @@ const routes = {
       childRoutes: [
         {
           path: "template",
-          component: Template2019App,
+          indexRoute: { component: Template2019App },
           childRoutes: Template2019Routes(store)
         },
         {
           path: "education",
-          component: Education2019App,
+          indexRoute: { component: Education2019App },
           childRoutes: Education2019Routes(store)
         },
         {
           path: "elections",
-          component: Elections2019App,
+          indexRoute: { component: Elections2019App },
           childRoutes: Elections2019Routes(store)
         },
         {
           path: "housing",
-          component: Housing2019App,
+          indexRoute: { component: Housing2019App },
           childRoutes: Housing2019Routes(store)
         },
         // hygen route injection (do not remove or modify this line)
         {
           path: "transportation",
-          component: Transportation2019App,
+          indexRoute: { component: Transportation2019App },
           childRoutes: Transportation2019Routes(store)
         }
       ]
@@ -294,14 +313,26 @@ const routes = {
   ]
 };
 
+function hashLinkScroll() {
+  const { hash } = window.location;
+  if (hash !== "") {
+    // Push onto callback queue so it runs after the DOM is updated,
+    // this is required when navigating from a different page so that
+    // the element is rendered on the page before trying to getElementById.
+    setTimeout(() => {
+      const id = hash.replace("#", "");
+      const element = document.getElementById(id);
+      if (element) element.scrollIntoView();
+    }, 0);
+  } else {
+    window.scrollTo(0, 0);
+  }
+}
+
 // Finally create the application component and render it into the #content element
 const App = () => (
   <Provider store={store}>
-    <Router
-      onUpdate={() => window.scrollTo(0, 0)}
-      history={history}
-      routes={routes}
-    />
+    <Router onUpdate={hashLinkScroll} history={history} routes={routes} />
   </Provider>
 );
 

@@ -1,5 +1,5 @@
 import fetchAdapter, {
-  fetchAllSlidesAdapter,
+  fetchLayersAdapter,
   fetchByDateAdapter
 } from "../fetch-adapter";
 import actionEmitter from "../common-action-emitter";
@@ -12,6 +12,7 @@ export const FOUNDATION_START = "SANDBOX/FOUNDATION_START";
 export const FOUNDATION_SUCCESS = "SANDBOX/FOUNDATION_SUCCESS";
 export const FOUNDATION_FAILURE = "SANDBOX/FOUNDATION_FAILURE";
 export const SET_PACKAGE = "SANDBOX/SET_PACKAGE";
+export const SET_SLIDE_KEY = "SANDBOX/SET_SLIDE_KEY";
 export const SET_FOUNDATION = "SANDBOX/SET_FOUNDATION";
 export const SLIDES_START = "SANDBOX/SLIDES_START";
 export const SLIDES_SUCCESS = "SANDBOX/SLIDES_SUCCESS";
@@ -22,6 +23,7 @@ export const SLIDE_FAILURE = "SANDBOX/SLIDE_FAILURE";
 export const SET_SLIDES = "SANDBOX/SET_SLIDES";
 export const SET_FOUNDATION_DATUM = "SANDBOX/SET_FOUNDATION_DATUM";
 export const SET_SLIDE_DATUM = "SANDBOX/SET_SLIDE_DATUM";
+export const SET_BASE_MAP_DATUM = "SANDBOX/SET_BASE_MAP_DATUM";
 
 // Simple actions
 export const SandboxStart = actionEmitter(SANDBOX_START);
@@ -42,7 +44,7 @@ export const SlideFailure = actionEmitter(SLIDE_FAILURE);
 
 // Thunk actions
 export const fetchSandbox = fetchAdapter(
-  "https://sandbox.civicpdx.org/civic-sandbox",
+  "https://service.civicpdx.org/sandbox/api/package_info/",
   {
     start: SandboxStart,
     success: SandboxSuccess,
@@ -57,16 +59,22 @@ export const fetchFoundation = endpoint =>
     failure: FoundationFailure
   });
 
-export const fetchSlides = slides =>
-  fetchAllSlidesAdapter(slides, {
+export const fetchLayers = layers => {
+  return fetchLayersAdapter(layers, {
     start: SlidesStart,
     success: SlidesSuccess,
     failure: SlidesFailure
   });
+};
 
 export const setPackage = (selectedPackage = "") => ({
   type: SET_PACKAGE,
   selectedPackage
+});
+
+export const setSlideKey = (selectedSlideKey = {}) => ({
+  type: SET_SLIDE_KEY,
+  selectedSlideKey
 });
 
 export const setFoundation = (selectedFoundation = "") => ({
@@ -86,12 +94,26 @@ export const fetchSlideByDate = (slide, date, type) =>
     failure: SlideFailure
   });
 
-export const setSelectedFoundationDatum = (feature = {}) => ({
-  type: SET_FOUNDATION_DATUM,
-  feature
-});
+export const setSelectedFoundationDatum = (feature = {}, index) => {
+  return {
+    type: SET_FOUNDATION_DATUM,
+    feature,
+    index
+  };
+};
 
-export const setSelectedSlideDatum = (feature = {}) => ({
-  type: SET_SLIDE_DATUM,
-  feature
-});
+export const setSelectedSlideDatum = (feature = {}, index) => {
+  return {
+    type: SET_SLIDE_DATUM,
+    feature,
+    index
+  };
+};
+
+export const setSelectedBaseMapDatum = (feature = {}, index) => {
+  return {
+    type: SET_BASE_MAP_DATUM,
+    feature,
+    index
+  };
+};

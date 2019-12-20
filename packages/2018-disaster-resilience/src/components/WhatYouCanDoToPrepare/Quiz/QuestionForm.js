@@ -1,7 +1,7 @@
 /* TODO: fix linting errors */
 /* eslint-disable */
 import PropTypes from "prop-types";
-import React from "react";
+import React, { Fragment } from "react";
 import { Field, reduxForm } from "redux-form";
 import { Button } from "@hackoregon/component-library";
 import { css } from "emotion";
@@ -26,9 +26,21 @@ const formClass = css`
 const QuestionForm = ({ back, next, done, questionId }) => (
   <div>
     {questionId === 1 ? (
-      <h2>
-        Create your individual check list by answering the following questions:
-      </h2>
+      <Fragment>
+        <p>
+          In the event of a catastrophic earthquake or other disaster, official
+          first responders such as fire fighters will need to contend with large
+          incidents throughout the region. While they’re occupied with those,
+          citizens may need to handle small and mid-sized problems themselves
+          for days or weeks. Cell phone service, power, water, and other
+          utilities may be disrupted indefinitely, so people will need to be
+          able to care for themselves and their neighbors.
+        </p>
+        <p>
+          The key is preparation, so take this Earthquake Preparedness Quiz and
+          see how ready you are:
+        </p>
+      </Fragment>
     ) : null}
     <Question
       question={QRMap[questionId - 1].question}

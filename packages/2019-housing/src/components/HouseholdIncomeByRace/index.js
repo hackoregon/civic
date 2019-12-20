@@ -10,8 +10,7 @@ import api from "../../state/household-income-by-race/api";
 const HouseholdIncomeByRace = ({ init, data, Layout }) => {
   useEffect(() => {
     init();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <CivicCard
@@ -23,6 +22,7 @@ const HouseholdIncomeByRace = ({ init, data, Layout }) => {
 };
 
 HouseholdIncomeByRace.displayName = "HouseholdIncomeByRace";
+HouseholdIncomeByRace.tags = householdIncomeByRaceMeta().tags;
 
 HouseholdIncomeByRace.propTypes = {
   init: PropTypes.func,

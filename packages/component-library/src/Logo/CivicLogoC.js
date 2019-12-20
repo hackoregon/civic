@@ -8,8 +8,8 @@ const styles = {
   width: "auto"
 };
 
-const CivicLogoC = ({ alt }) =>
-  isClient && <img style={styles} src={logoC} alt={alt} />;
+const CivicLogoC = ({ alt, ...other }) =>
+  isClient && <img style={styles} src={logoC} alt={alt} {...other} />;
 
 CivicLogoC.displayName = "Logo";
 CivicLogoC.propTypes = {

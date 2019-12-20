@@ -29,6 +29,7 @@ import {
 } from "../utils/chartHelpers";
 
 const LineChart = ({
+  customBackgroundPlot,
   data,
   dataKey,
   dataKeyLabel,
@@ -48,7 +49,9 @@ const LineChart = ({
   legendComponent,
   loading,
   theme,
-  protect
+  protect,
+  xTickCount,
+  yTickCount
 }) => {
   const safeData =
     // eslint-disable-next-line no-nested-ternary
@@ -134,11 +137,13 @@ const LineChart = ({
               style={{ grid: { stroke: "none" } }}
               tickFormat={x => xNumberFormatter(x)}
               title="X Axis"
+              tickCount={xTickCount}
             />
             <VictoryAxis
               dependentAxis
               tickFormat={y => yNumberFormatter(y)}
               title="Y Axis"
+              tickCount={yTickCount}
             />
             <VictoryPortal>
               <VictoryLabel
@@ -162,6 +167,7 @@ const LineChart = ({
                 y={295}
               />
             </VictoryPortal>
+            {customBackgroundPlot}
             {lines}
             <VictoryScatter
               //        categories={{ x: categoryData }}
@@ -201,6 +207,7 @@ const LineChart = ({
 };
 
 LineChart.propTypes = {
+  customBackgroundPlot: PropTypes.node,
   data: PropTypes.arrayOf(
     PropTypes.shape({ x: PropTypes.number, y: PropTypes.number })
   ),
@@ -227,10 +234,13 @@ LineChart.propTypes = {
   legendComponent: PropTypes.func,
   theme: PropTypes.shape({}),
   loading: PropTypes.bool,
-  protect: PropTypes.bool
+  protect: PropTypes.bool,
+  xTickCount: PropTypes.func,
+  yTickCount: PropTypes.func
 };
 
 LineChart.defaultProps = {
+  customBackgroundPlot: null,
   data: null,
   dataKey: "x",
   dataKeyLabel: null,
@@ -250,7 +260,9 @@ LineChart.defaultProps = {
   legendComponent: null,
   theme: VictoryTheme,
   loading: null,
-  protect: false
+  protect: false,
+  xTickCount: null,
+  yTickCount: null
 };
 
 export default LineChart;

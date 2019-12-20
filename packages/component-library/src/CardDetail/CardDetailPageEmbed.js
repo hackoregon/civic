@@ -6,11 +6,13 @@ import CivicCardLayoutVisualizationOnly from "../CivicCard/CivicCardLayoutVisual
 import CivicCardLayoutClassic from "../CivicCard/CivicCardLayoutClassic";
 import CivicCardLayoutPreview from "../CivicCard/CivicCardLayoutPreview";
 import CivicCardLayoutSideBySide from "../CivicCard/CivicCardLayoutSideBySide";
+import CivicCardLayoutVisualizationOnlyNoLink from "../CivicCard/CivicCardLayoutVisualizationOnlyNoLink";
 
 const CardDetailPageEmbed = ({ params, CardRegistry }) => {
   const card = CardRegistry.find(params.slug);
   const layouts = {
     visualization: CivicCardLayoutVisualizationOnly,
+    visualizationnolink: CivicCardLayoutVisualizationOnlyNoLink,
     classic: CivicCardLayoutClassic,
     preview: CivicCardLayoutPreview,
     comparison: CivicCardLayoutSideBySide

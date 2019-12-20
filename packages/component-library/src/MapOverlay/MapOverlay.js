@@ -23,6 +23,7 @@ const MapOverlay = props => {
     pickable,
     opacity,
     filled,
+    getCursor,
     getFillColor,
     stroked,
     getLineColor,
@@ -51,11 +52,13 @@ const MapOverlay = props => {
 
   const tooltipRender = tooltipInfo && x && y ? tooltip : null;
 
-  const centroidData = circleFieldName
-    ? data.map(d =>
-        centerOfMass(d.geometry, { properties: { ...d.properties } })
-      )
-    : [];
+  const centroidData = React.useMemo(() => {
+    return circleFieldName
+      ? data.map(d =>
+          centerOfMass(d.geometry, { properties: { ...d.properties } })
+        )
+      : [];
+  }, [circleFieldName, data]);
 
   const radius = circleFieldName
     ? f => Math.sqrt(+f.properties[circleFieldName])
@@ -63,7 +66,7 @@ const MapOverlay = props => {
 
   return (
     <div>
-      <DeckGL {...viewport} className="DeckGL" getCursor={() => "crosshair"}>
+      <DeckGL {...viewport} className="DeckGL" getCursor={getCursor}>
         <GeoJsonLayer
           id={id}
           className="GeoJSONMap"
@@ -106,6 +109,7 @@ MapOverlay.propTypes = {
   data: arrayOf(shape({})).isRequired,
   pickable: bool,
   opacity: number,
+  getCursor: func,
   filled: bool,
   getFillColor: oneOfType([arrayOf(number), func]),
   stroked: bool,
@@ -128,6 +132,7 @@ MapOverlay.propTypes = {
 MapOverlay.defaultProps = {
   pickable: true,
   opacity: 0.8,
+  getCursor: () => "crosshair",
   filled: true,
   getFillColor: [0, 0, 0],
   stroked: true,

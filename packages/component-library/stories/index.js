@@ -4,8 +4,12 @@ import { storiesOf } from "@storybook/react";
 import { checkA11y } from "@storybook/addon-a11y";
 
 // DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator import injection
-
-import buttonNewStory from "./ButtonNew.story"; // TODO: Move this to the appropriate location
+import polygonPreviewStory from "./PolygonPreview.story"; // TODO: Move this to the appropriate location
+import dialogStory from "./Dialog.story"; // TODO: Move this to the appropriate location
+import selectFieldStory from "./SelectField.story"; // TODO: Move this to the appropriate location
+import textFieldStory from "./TextField.story"; // TODO: Move this to the appropriate location
+import formStory from "./Form.story"; // TODO: Move this to the appropriate location
+import buttonNewStory from "./ButtonNew.story";
 import badgeStory from "./Badge.story";
 import BarChartStory from "./BarChart.story";
 import baseMapStory from "./BaseMap.story";
@@ -22,11 +26,14 @@ import civicStorycardStory from "./CivicStoryCard.story";
 import dataTable from "./DataTable.story";
 import gradientScaleStory from "./GradientScale.story";
 import headerStory from "./Header.story";
+import headerNewStory from "./HeaderNew.story";
+import footerNewStory from "./FooterNew.story";
 import heatMapStory from "./HeatMap.story";
 import horizontalBarChartStory from "./HorizontalBarChart.story";
 import iconMapStory from "./IconMap.story";
 import lineChartStory from "./LineChart.story";
 import mapOverlayStory from "./MapOverlay.story";
+import notebookPreviewStory from "./NotebookPreview.story";
 import packageSelectorBox from "./PackageSelectorBox.story";
 import pageLayoutStory from "./PageLayout.story";
 import pathMapStory from "./PathMap.story";
@@ -44,6 +51,8 @@ import sliderStory from "./Slider.story";
 import stackedAreaChart from "./StackedAreaChart.story";
 import chipcomponentstory from "./ChipComponent.story";
 import cardListStory from "./CardList.story";
+import exploreRelatedStory from "./ExploreRelated.story";
+import vectorTilesMapStory from "./VectorTilesMap.story";
 
 import AccessibilityGuidelinesStyle from "./styleGuideStories/AccessibilityGuidelinesStyle.story";
 import CardsStyle from "./styleGuideStories/CardsStyle.story";
@@ -119,7 +128,12 @@ checkboxStory();
 radioButtonGroupStory();
 selectStory();
 sliderStory();
-
+notebookPreviewStory(); // TODO: Move this to the appropriate location
+dialogStory(); // TODO: Move this to the appropriate location
+polygonPreviewStory(); // TODO: Move this to the appropriate location
+formStory(); // TODO: Move this to the appropriate location
+textFieldStory(); // TODO: Move this to the appropriate location
+selectFieldStory(); // TODO: Move this to the appropriate location
 // DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator story injection
 
 // charts
@@ -151,6 +165,7 @@ scatterPlotMapStory();
 screenGridMapStory();
 multiLayerMapStory();
 comparisonMapStory();
+vectorTilesMapStory();
 
 // Civic story cards
 storiesOf("Component Lib|Story Cards", module)
@@ -168,10 +183,13 @@ badgeStory();
 civicSandboxDashboardStory();
 civicStorycardStory();
 collapsableStory();
+headerNewStory();
 headerStory();
+footerNewStory();
 packageSelectorBox();
 pageLayoutStory();
 pdfStory();
+exploreRelatedStory();
 placeholderStory();
 pullQuoteStory();
 sandboxStory();
