@@ -9,8 +9,8 @@ import { getBadges, getSavedMetrics } from "../../../state/tasks";
 
 const containerStyle = css`
   position: relative;
-  display: inline-block;
-  float: right;
+  display: inline-grid;
+  justify-content: end;
   padding-top: 20px;
 `;
 
