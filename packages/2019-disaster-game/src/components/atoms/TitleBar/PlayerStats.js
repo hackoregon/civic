@@ -15,6 +15,8 @@ const containerStyle = css`
 `;
 
 const statsContainer = css`
+  text-align: center;
+
   > p {
     display: inline-block;
     color: ${Palette.lightGrey};
@@ -48,6 +50,7 @@ const badgesContainer = css`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-column-gap: 10px;
+  max-width: 390px;
 `;
 
 const PlayerStats = ({ badges, savedMetrics }) => {

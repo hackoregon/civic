@@ -13,11 +13,6 @@ const badgeStyle = css`
   height: 75px;
 `;
 
-const filledBadgeStyle = css`
-  height: 80px;
-  margin-top: -3px;
-`;
-
 const Badge = ({ badge }) => {
   return (
     <div css={badgeContainer}>
@@ -25,7 +20,7 @@ const Badge = ({ badge }) => {
         <img
           src={badge.badgeSVG}
           alt={`${badge.title} badge`}
-          css={filledBadgeStyle}
+          css={badgeStyle}
         />
       ) : (
         <img src={EmptyBadgeSVG} alt="Badge slot" css={badgeStyle} />
