@@ -10,15 +10,17 @@ import Palette from "../../../constants/style";
 import { getTaskPhase, taskPhaseKeys } from "../../../state/tasks";
 import {
   getActiveChapterIndex,
-  getActiveChapterId
+  getActiveChapterId,
+  getActiveChapterDuration
 } from "../../../state/chapters";
-import { TASKS } from "../../../constants/chapters";
+import { TASKS, KIT } from "../../../constants/chapters";
+import Countdown from "./Coundown";
 
 const containerStyle = css`
   margin: 0 auto;
   display: inline-grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-column-gap: 65px;
+  grid-template-columns: repeat(3, auto);
+  grid-column-gap: 90px;
   width: fit-content;
   align-items: center;
 `;
@@ -39,7 +41,11 @@ const journeyStage = css`
   }
 `;
 
-const checkmarkStyle = css`
+const activeJourneyStage = css`
+  grid-template-columns: auto auto;
+`;
+
+const iconStyle = css`
   height: 65px;
   display: inline-block;
 `;
@@ -49,49 +55,24 @@ const { SOLVING_SAVE_YOURSELF } = taskPhaseKeys;
 const JourneyBar = ({
   activeChapterId,
   activeChapterIndex,
-  activeTaskPhase
+  activeTaskPhase,
+  activeChapterDuration
 }) => {
-  // const [chapterTimeLeft, setChapterTimeLeft] = useState(0);
-  // const [savingYourself, setSavingYourself] = useState(false);
+  const [savingYourself, setSavingYourself] = useState(false);
   const [savingOthers, setSavingOthers] = useState(false);
 
-  // const tick = useCallback(() => {
-  //   if (chapterTimeLeft > 0) {
-  //     setChapterTimeLeft(chapterTimeLeft - 1);
-  //   }
-  // }, [chapterTimeLeft]);
-
-  // useEffect(() => {
-  //   const showTimerPhases = [
-  //     SOLVING_SAVE_YOURSELF,
-  //     SOLVING_SAVE_OTHERS,
-  //     CHOOSE_TASK
-  //   ];
-  //   const phaseShouldHaveTimer = showTimerPhases.indexOf(activeTaskPhase) > -1;
-  //   const resetForSecondSaveYourselfTask = activeTaskIndex === 1;
-  //   if (phaseShouldHaveTimer || resetForSecondSaveYourselfTask) {
-  //     setChapterTimeLeft(allTaskPhaseData[activeTaskPhase].time - 1);
-  //   } else {
-  //     setChapterTimeLeft(0);
-  //   }
-  // }, [activeTaskPhase, allTaskPhaseData, activeTaskIndex]);
-
-  // useEffect(() => {
-  //   const countdownInterval = setInterval(tick, 1000);
-
-  //   return () => {
-  //     clearInterval(countdownInterval);
-  //   };
-  // }, [chapterTimeLeft, tick]);
-
+  // Update whether saving yourself or saving others during task phase
   useEffect(() => {
-    // setSavingYourself(activeChapterId === TASKS && activeTaskPhase === SOLVING_SAVE_YOURSELF);
+    setSavingYourself(
+      activeChapterId === TASKS && activeTaskPhase === SOLVING_SAVE_YOURSELF
+    );
     setSavingOthers(
       activeChapterId === TASKS && activeTaskPhase !== SOLVING_SAVE_YOURSELF
     );
   }, [activeChapterId, activeTaskPhase]);
 
   // COLLECT A KIT
+  const collectAKitActive = activeChapterId === KIT;
   const collectAKitCompleted = activeChapterIndex > 2;
   // HELP YOURSELF
   const helpYourselfInFuture =
@@ -104,11 +85,19 @@ const JourneyBar = ({
 
   return (
     <div css={containerStyle}>
-      <div css={journeyStage}>
+      <div
+        css={css`
+          ${journeyStage};
+          ${collectAKitActive ? activeJourneyStage : ""}
+        `}
+      >
         {/* COLLECT A KIT */}
         {/* Note: no ellipse for this phase because never needs to be shown */}
+        {collectAKitActive && (
+          <Countdown iconStyle={iconStyle} duration={activeChapterDuration} />
+        )}
         {collectAKitCompleted && (
-          <img src={CheckmarkSVG} alt="Checkmark" css={checkmarkStyle} />
+          <img src={CheckmarkSVG} alt="Checkmark" css={iconStyle} />
         )}
         <p>COLLECT A KIT</p>
       </div>
@@ -118,11 +107,15 @@ const JourneyBar = ({
           <img
             src={NoCheckEllipseSVG}
             alt="not yet checked stage"
-            css={checkmarkStyle}
+            css={iconStyle}
           />
         )}
+        {/* TODO: fix so the duration is based on the phase */}
+        {savingYourself && (
+          <Countdown iconStyle={iconStyle} duration={activeChapterDuration} />
+        )}
         {helpYourselfCompleted && (
-          <img src={CheckmarkSVG} alt="Checkmark" css={checkmarkStyle} />
+          <img src={CheckmarkSVG} alt="Checkmark" css={iconStyle} />
         )}
         <p>HELP YOURSELF</p>
       </div>
@@ -132,11 +125,11 @@ const JourneyBar = ({
           <img
             src={NoCheckEllipseSVG}
             alt="not yet checked stage"
-            css={checkmarkStyle}
+            css={iconStyle}
           />
         )}
         {helpNeighborsCompleted && (
-          <img src={CheckmarkSVG} alt="Checkmark" css={checkmarkStyle} />
+          <img src={CheckmarkSVG} alt="Checkmark" css={iconStyle} />
         )}
         <p>HELP NEIGHBORS</p>
       </div>
@@ -152,16 +145,17 @@ JourneyBar.propTypes = {
     shown: PropTypes.bool,
     activeTaskIndexWhenEarned: PropTypes.oneOfType([null, PropTypes.number])
   }),
-  activeChapterIndex: PropTypes.func,
+  activeChapterIndex: PropTypes.number,
   activeChapterId: PropTypes.string,
-  activeTaskPhase: PropTypes.string
-  // allTaskPhaseData: PropTypes.shape({})
+  activeTaskPhase: PropTypes.string,
+  activeChapterDuration: PropTypes.number
 };
 
 const mapStateToProps = state => ({
   activeChapterIndex: getActiveChapterIndex(state),
   activeChapterId: getActiveChapterId(state),
-  activeTaskPhase: getTaskPhase(state)
+  activeTaskPhase: getTaskPhase(state),
+  activeChapterDuration: getActiveChapterDuration(state)
 });
 
 export default connect(mapStateToProps)(JourneyBar);
