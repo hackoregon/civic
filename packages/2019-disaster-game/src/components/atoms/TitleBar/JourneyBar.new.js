@@ -37,12 +37,13 @@ const journeyStage = css`
   align-items: center;
 
   > p {
-    font-family: "Luckiest Guy", sans-serif;
+    font-family: "Akkurat", sans-serif;
     font-size: 80px;
     line-height: 80px;
     display: inline-block;
     color: ${Palette.lightGrey};
-    margin: 0 0 -25px;
+    margin: -15px 0 -25px;
+    font-weight: bold;
   }
 `;
 
@@ -103,7 +104,7 @@ const JourneyBar = ({
     activeChapterId !== TASKS && activeChapterIndex < 7;
   const helpYourselfCompleted = savingOthers || activeChapterIndex > 6;
   // HELP NEIGHBORS
-  const helpNeighborsInFuture = !savingOthers; // && activeChapterIndex < 7;
+  const helpNeighborsInFuture = !savingOthers;
   const helpNeighborsActive = savingOthers;
   const choosingTask = activeTaskPhase === taskPhaseKeys.CHOOSE_TASK;
   const solvingSaveOthers =

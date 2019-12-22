@@ -20,7 +20,6 @@ const statsContainer = css`
   > p {
     display: inline-block;
     color: ${Palette.lightGrey};
-    font-family: "Luckiest Guy", sans-serif;
   }
 `;
 
@@ -31,26 +30,30 @@ const leftStatGroup = css`
   > p {
     display: inline-block;
     color: ${Palette.lightGrey};
-    font-family: "Luckiest Guy", sans-serif;
   }
 `;
 
 const statText = css`
-  font-size: 50px;
+  font-size: 60px;
+  line-height: 60px;
   margin: 0 10px 0 0;
+  font-family: "Akkurat", sans-serif;
 `;
 
 const statNumber = css`
-  font-size: 65px;
+  font-size: 90px;
+  line-height: 90px;
   margin: 0;
+  font-family: "Boogaloo", sans-serif;
 `;
 
 const badgesContainer = css`
-  margin-top: 20px;
+  padding-bottom: 10px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-column-gap: 10px;
+  grid-column-gap: 15px;
   max-width: 390px;
+  justify-self: center;
 `;
 
 const PlayerStats = ({ badges, savedMetrics }) => {

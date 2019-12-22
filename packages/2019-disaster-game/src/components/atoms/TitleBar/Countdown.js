@@ -8,14 +8,15 @@ const timerStyle = css`
   background-color: ${Palette.lightestGrey};
   border-radius: 15px;
   padding: 15px;
-  width: 222px;
+  width: 210px;
 
   > p {
-    font-family: "Luckiest Guy", sans-serif;
+    font-family: "Akkurat", sans-serif;
     font-size: 80px;
     line-height: 80px;
     color: ${Palette.red};
-    margin: 0;
+    margin: -10px 0 0;
+    font-weight: bold;
   }
 `;
 
