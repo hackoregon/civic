@@ -19,7 +19,7 @@ import {
   getActiveChapterDuration
 } from "../../../state/chapters";
 import { TASKS, KIT } from "../../../constants/chapters";
-import Countdown from "./Coundown";
+import Countdown from "./Countdown";
 
 const containerStyle = css`
   margin: 0 auto;

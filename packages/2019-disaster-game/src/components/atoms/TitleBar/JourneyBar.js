@@ -87,7 +87,7 @@ const checkmarkStyle = css`
   margin-right: 20px;
 `;
 
-const coundownContainer = css`
+const countdownContainer = css`
   height: 100px;
   width: 100px;
   position: relative;
@@ -179,7 +179,7 @@ const JourneyBar = ({
             <div css={circleStyle} />
           )}
           {activeChapterId === KIT && (
-            <div css={coundownContainer}>
+            <div css={countdownContainer}>
               <p>{chapterTimeLeft}</p>
             </div>
           )}
@@ -203,7 +203,7 @@ const JourneyBar = ({
             <div css={circleStyle} />
           )}
           {savingYourself && (
-            <div css={coundownContainer}>
+            <div css={countdownContainer}>
               <p>{chapterTimeLeft}</p>
             </div>
           )}
@@ -223,7 +223,7 @@ const JourneyBar = ({
         >
           {!savingOthers && activeChapterIndex < 7 && <div css={circleStyle} />}
           {savingOthers && (
-            <div css={coundownContainer}>
+            <div css={countdownContainer}>
               <p>{chapterTimeLeft}</p>
             </div>
           )}
