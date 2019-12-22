@@ -7,7 +7,12 @@ import { useState, useEffect } from "react";
 import CheckmarkSVG from "../../../../assets/checkmark.svg";
 import NoCheckEllipseSVG from "../../../../assets/no-check-ellipse.svg";
 import Palette from "../../../constants/style";
-import { getTaskPhase, taskPhaseKeys } from "../../../state/tasks";
+import {
+  getTaskPhase,
+  taskPhaseKeys,
+  getAllTaskPhaseData,
+  getActiveTaskIndex
+} from "../../../state/tasks";
 import {
   getActiveChapterIndex,
   getActiveChapterId,
@@ -56,20 +61,38 @@ const JourneyBar = ({
   activeChapterId,
   activeChapterIndex,
   activeTaskPhase,
-  activeChapterDuration
+  activeChapterDuration,
+  allTaskPhaseData,
+  activeTaskIndex
 }) => {
   const [savingYourself, setSavingYourself] = useState(false);
   const [savingOthers, setSavingOthers] = useState(false);
+  const [
+    rerenderForSecondSaveYourselfTask,
+    setRerenderForSecondSaveYourselfTask
+  ] = useState(false);
 
   // Update whether saving yourself or saving others during task phase
   useEffect(() => {
-    setSavingYourself(
-      activeChapterId === TASKS && activeTaskPhase === SOLVING_SAVE_YOURSELF
-    );
-    setSavingOthers(
-      activeChapterId === TASKS && activeTaskPhase !== SOLVING_SAVE_YOURSELF
-    );
-  }, [activeChapterId, activeTaskPhase]);
+    const isSavingYourselfPhase =
+      activeChapterId === TASKS && activeTaskPhase === SOLVING_SAVE_YOURSELF;
+    const isSavingOthersPhase =
+      activeChapterId === TASKS && activeTaskPhase !== SOLVING_SAVE_YOURSELF;
+    const shouldResetCountdownForSecondSaveYourselfTask =
+      activeTaskIndex === 1 && isSavingYourselfPhase;
+
+    setSavingYourself(isSavingYourselfPhase);
+    setSavingOthers(isSavingOthersPhase);
+    if (shouldResetCountdownForSecondSaveYourselfTask) {
+      setRerenderForSecondSaveYourselfTask(true);
+    }
+  }, [activeChapterId, activeTaskPhase, activeTaskIndex]);
+
+  // Trigger resetting the countdown for the second save yourself task
+  useEffect(() => {
+    if (rerenderForSecondSaveYourselfTask)
+      setRerenderForSecondSaveYourselfTask(false);
+  }, [rerenderForSecondSaveYourselfTask]);
 
   // COLLECT A KIT
   const collectAKitActive = activeChapterId === KIT;
@@ -79,7 +102,7 @@ const JourneyBar = ({
     activeChapterId !== TASKS && activeChapterIndex < 7;
   const helpYourselfCompleted = savingOthers || activeChapterIndex > 6;
   // HELP NEIGHBORS
-  const helpNeighborsInFuture = !savingOthers && activeChapterIndex < 7;
+  const helpNeighborsInFuture = !savingOthers; // && activeChapterIndex < 7;
   // TODO: is this case ever present?
   const helpNeighborsCompleted = activeChapterIndex > 6;
 
@@ -102,7 +125,12 @@ const JourneyBar = ({
         <p>COLLECT A KIT</p>
       </div>
       {/* HELP YOURSELF */}
-      <div css={journeyStage}>
+      <div
+        css={css`
+          ${journeyStage};
+          ${savingYourself ? activeJourneyStage : ""}
+        `}
+      >
         {helpYourselfInFuture && (
           <img
             src={NoCheckEllipseSVG}
@@ -110,9 +138,11 @@ const JourneyBar = ({
             css={iconStyle}
           />
         )}
-        {/* TODO: fix so the duration is based on the phase */}
-        {savingYourself && (
-          <Countdown iconStyle={iconStyle} duration={activeChapterDuration} />
+        {savingYourself && !rerenderForSecondSaveYourselfTask && (
+          <Countdown
+            iconStyle={iconStyle}
+            duration={allTaskPhaseData[activeTaskPhase].time}
+          />
         )}
         {helpYourselfCompleted && (
           <img src={CheckmarkSVG} alt="Checkmark" css={iconStyle} />
@@ -148,14 +178,22 @@ JourneyBar.propTypes = {
   activeChapterIndex: PropTypes.number,
   activeChapterId: PropTypes.string,
   activeTaskPhase: PropTypes.string,
-  activeChapterDuration: PropTypes.number
+  activeChapterDuration: PropTypes.number,
+  allTaskPhaseData: PropTypes.objectOf(
+    PropTypes.shape({
+      time: PropTypes.number
+    })
+  ),
+  activeTaskIndex: PropTypes.number
 };
 
 const mapStateToProps = state => ({
   activeChapterIndex: getActiveChapterIndex(state),
   activeChapterId: getActiveChapterId(state),
   activeTaskPhase: getTaskPhase(state),
-  activeChapterDuration: getActiveChapterDuration(state)
+  activeChapterDuration: getActiveChapterDuration(state),
+  allTaskPhaseData: getAllTaskPhaseData(state),
+  activeTaskIndex: getActiveTaskIndex(state)
 });
 
 export default connect(mapStateToProps)(JourneyBar);
