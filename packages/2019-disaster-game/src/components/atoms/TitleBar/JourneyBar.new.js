@@ -98,11 +98,16 @@ const JourneyBar = ({
   const collectAKitActive = activeChapterId === KIT;
   const collectAKitCompleted = activeChapterIndex > 2;
   // HELP YOURSELF
+  const helpYourselfActive = savingYourself;
   const helpYourselfInFuture =
     activeChapterId !== TASKS && activeChapterIndex < 7;
   const helpYourselfCompleted = savingOthers || activeChapterIndex > 6;
   // HELP NEIGHBORS
   const helpNeighborsInFuture = !savingOthers; // && activeChapterIndex < 7;
+  const helpNeighborsActive = savingOthers;
+  const choosingTask = activeTaskPhase === taskPhaseKeys.CHOOSE_TASK;
+  const solvingSaveOthers =
+    activeTaskPhase === taskPhaseKeys.SOLVING_SAVE_OTHERS;
   // TODO: is this case ever present?
   const helpNeighborsCompleted = activeChapterIndex > 6;
 
@@ -128,7 +133,7 @@ const JourneyBar = ({
       <div
         css={css`
           ${journeyStage};
-          ${savingYourself ? activeJourneyStage : ""}
+          ${helpYourselfActive ? activeJourneyStage : ""}
         `}
       >
         {helpYourselfInFuture && (
@@ -138,7 +143,7 @@ const JourneyBar = ({
             css={iconStyle}
           />
         )}
-        {savingYourself && !rerenderForSecondSaveYourselfTask && (
+        {helpYourselfActive && !rerenderForSecondSaveYourselfTask && (
           <Countdown
             iconStyle={iconStyle}
             duration={allTaskPhaseData[activeTaskPhase].time}
@@ -150,7 +155,12 @@ const JourneyBar = ({
         <p>HELP YOURSELF</p>
       </div>
       {/* HELP NEIGHBORS */}
-      <div css={journeyStage}>
+      <div
+        css={css`
+          ${journeyStage};
+          ${helpNeighborsActive ? activeJourneyStage : ""}
+        `}
+      >
         {helpNeighborsInFuture && (
           <img
             src={NoCheckEllipseSVG}
@@ -158,6 +168,18 @@ const JourneyBar = ({
             css={iconStyle}
           />
         )}
+        {/* Countdown: choosing task or solving task */}
+        {helpNeighborsActive && (choosingTask || solvingSaveOthers) && (
+          <Countdown
+            iconStyle={iconStyle}
+            duration={allTaskPhaseData[activeTaskPhase].time}
+          />
+        )}
+        {/* Countdown: show 0 when on modal */}
+        {helpNeighborsActive && (!choosingTask && !solvingSaveOthers) && (
+          <Countdown iconStyle={iconStyle} duration={0} />
+        )}
+
         {helpNeighborsCompleted && (
           <img src={CheckmarkSVG} alt="Checkmark" css={iconStyle} />
         )}
