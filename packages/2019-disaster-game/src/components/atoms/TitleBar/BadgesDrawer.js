@@ -8,7 +8,7 @@ import Badge from "./Badge";
 const container = css`
   width: 885px;
   top: 90px;
-  right: 950px;
+  right: 800px;
   position: absolute;
   z-index: 10;
   transition: all 1s;

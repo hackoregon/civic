@@ -50,8 +50,8 @@ const bigBadgesStyle = css`
 
 const bigSavedStyle = css`
   position: absolute;
-  top: 60%;
-  right: 38%;
+  top: 63%;
+  right: 43%;
   transform: scale(2);
 `;
 
@@ -88,17 +88,18 @@ const exitContent = css`
 `;
 
 const contentTitle = css`
-  font-family: "Luckiest Guy", sans-serif;
-  font-size: 16rem;
-  color: ${palette.salmon};
+  font-family: "Akkurat", sans-serif;
+  font-weight: bold;
+  font-size: 14rem;
+  color: ${palette.darkBlue};
   margin: 0;
 `;
 
 const contentText = css`
-  font-family: "Boogaloo", sans-serif;
+  font-family: "Akkurat", sans-serif;
   font-size: 12rem;
   line-height: 14rem;
-  color: ${palette.purple};
+  color: ${palette.darkGrey};
   margin: 0;
 
   > span {
@@ -155,8 +156,8 @@ const bg = css`
   animation: ${slide} 6s ease-in-out infinite alternate;
   background-image: linear-gradient(
     -60deg,
-    ${palette.lightLime} 50%,
-    ${palette.lemon} 50%
+    ${palette.mediumGrey} 50%,
+    ${palette.lightestGrey} 50%
   );
   bottom: 0;
   left: -50%;
@@ -306,11 +307,9 @@ const SummaryScreen = ({
           css={QRCodeStyle}
         />
         <BadgesBar
-          isSummary
           initialSummaryStyle={animationPhaseIndex <= 0 ? bigBadgesStyle : null}
         />
         <SavedBar
-          isSummary
           initialSummaryStyle={animationPhaseIndex <= 0 ? bigSavedStyle : null}
         />
       </div>
