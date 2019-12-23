@@ -413,7 +413,7 @@ const TaskScreenContainer = ({
         interfaceMessage={interfaceMessage}
         noInteractionCallback={noInteractionCallback}
         restartNoInteractionTimer={!showRestartModal}
-        noInteractionDuration={25}
+        noInteractionDuration={35}
       />
     </Fragment>
   );
