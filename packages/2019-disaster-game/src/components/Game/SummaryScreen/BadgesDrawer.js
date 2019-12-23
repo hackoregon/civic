@@ -3,7 +3,7 @@ import { css, jsx } from "@emotion/core";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getBadges } from "../../../state/tasks";
-import Badge from "./Badge";
+import Badge from "../../atoms/TitleBar/Badge";
 
 const container = css`
   width: 885px;

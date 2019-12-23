@@ -22,8 +22,8 @@ import Timer from "../../../utils/timer";
 import { TYPES as SFX_TYPES } from "../../../constants/sfx";
 import { palette } from "../../../constants/style";
 import QRCode from "../../../../assets/earthquake-heroes-qr-code.svg";
-import BadgesBar from "../../atoms/TitleBar/BadgesDrawer";
-import SavedBar from "../../atoms/TitleBar/SavedBar";
+import BadgesBar from "./BadgesDrawer";
+import SavedBar from "./SavedBar";
 
 const pageWrapper = css`
   display: grid;
