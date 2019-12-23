@@ -14,6 +14,7 @@ export const palette = {
   lightLime: "#D8E159",
   lime: "#C0D630",
   darkLime: "#A7BD17",
+  darkestLime: "#819700",
   lemon: "#FCF290",
   salmon: "#ED5862",
   mediumSalmon: "#D43F49",
