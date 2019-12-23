@@ -10,7 +10,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import { Link } from "react-router";
 
 import hamburgerMenu from "../../assets/burger.svg";
-import { defaultFontSize } from "../../constants/styles";
+import { defaultFontSize } from "../_Constants/styles";
 import { Logo, BrandColors } from "../index";
 
 const { primary, secondary } = BrandColors;
