@@ -6,7 +6,7 @@ import { getBadges } from "../../../state/tasks";
 import Badge from "../../atoms/TitleBar/Badge";
 
 const container = css`
-  width: 885px;
+  width: fit-content;
   top: 90px;
   right: 800px;
   position: absolute;
@@ -14,8 +14,6 @@ const container = css`
   transition: all 1s;
   transform: none;
   display: grid;
-  grid-template-columns: auto 630px;
-  padding: 0 80px;
   border-radius: 20px;
   align-content: center;
   justify-content: space-between;
@@ -25,7 +23,7 @@ const container = css`
 
 const badgesContainer = css`
   display: grid;
-  grid-template-columns: repeat(5, auto);
+  grid-template-columns: repeat(5, 170px);
   align-content: center;
   grid-column-gap: 40px;
   justify-items: center;

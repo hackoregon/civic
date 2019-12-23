@@ -44,7 +44,7 @@ const titleBarContainer = css`
 const bigBadgesStyle = css`
   position: absolute;
   top: 45%;
-  right: 38%;
+  right: 37%;
   transform: scale(2);
 `;
 
