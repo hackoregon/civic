@@ -96,10 +96,14 @@ const contentTitle = css`
   margin: 0;
 `;
 
+const topStyle = css`
+  margin-top: -65px;
+`;
+
 const contentText = css`
   font-family: "Akkurat", sans-serif;
-  font-size: 10rem;
-  line-height: 12rem;
+  font-size: 9rem;
+  line-height: 11rem;
   color: ${palette.darkGrey};
   margin: 0;
 
@@ -322,7 +326,7 @@ const SummaryScreen = ({
         ${animationPhaseIndex > 0 ? exitContent : ""}
       `}
       >
-        <p css={contentTitle}>YOUR ACTS OF HEROISM</p>
+        <p css={[contentTitle, topStyle]}>YOUR ACTS OF HEROISM</p>
       </div>
 
       <div
