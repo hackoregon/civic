@@ -38,7 +38,7 @@ const textContainerStyle = css`
   display: grid;
   align-items: center;
   justify-content: center;
-  background: ${palette.blue};
+  background: ${palette.lightLime};
   z-index: 10;
 `;
 
@@ -46,10 +46,11 @@ const textStyle = css`
   margin: 0;
   padding: 5px 15px;
   text-align: center;
-  font-family: "Boogaloo", sans-serif;
-  font-size: 16px;
+  font-family: "Akkurat", sans-serif;
+  font-weight: bold;
+  font-size: 20px;
   line-height: 1;
-  color: ${palette.gold};
+  color: ${palette.darkGrey};
 
   ${media.md} {
     font-size: 6em;

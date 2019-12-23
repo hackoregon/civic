@@ -44,13 +44,13 @@ const taskPhasesChapterCanEndAfter = [
 const taskPhases = {
   [SOLVING_SAVE_YOURSELF]: { time: 31 },
   [SOLVING_SAVE_OTHERS]: { time: 21 },
-  [MODAL_SAVE_OTHERS_INTRO]: { time: 11 },
+  [MODAL_SAVE_OTHERS_INTRO]: { time: 8 },
   [CHOOSE_TASK]: { time: 21 },
-  [MODAL_CHOSEN_TASK]: { time: 11 },
-  [MODAL_SOLVED_TASK]: { time: 11 },
-  [MODAL_UNSOLVED_TASK]: { time: 11 },
-  [MODAL_NO_ITEM]: { time: 11 },
-  [MODAL_BADGE_EARNED]: { time: 11 }
+  [MODAL_CHOSEN_TASK]: { time: 8 },
+  [MODAL_SOLVED_TASK]: { time: 8 },
+  [MODAL_UNSOLVED_TASK]: { time: 8 },
+  [MODAL_NO_ITEM]: { time: 8 },
+  [MODAL_BADGE_EARNED]: { time: 8 }
 };
 
 const actionTypes = {

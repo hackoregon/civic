@@ -1,263 +1,222 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
-import PropTypes from "prop-types";
+import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
-import { memo, useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 
-import { palette } from "../../../constants/style";
-import { KIT, TASKS } from "../../../constants/chapters";
-import {
-  getActiveChapterId,
-  getActiveChapterIndex
-} from "../../../state/chapters";
+import CheckmarkSVG from "../../../../assets/checkmark.svg";
+import NoCheckEllipseSVG from "../../../../assets/no-check-ellipse.svg";
+import Palette from "../../../constants/style";
 import {
   getTaskPhase,
   taskPhaseKeys,
   getAllTaskPhaseData,
   getActiveTaskIndex
 } from "../../../state/tasks";
-import CheckmarkSVG from "../../../../assets/title_bar_checkmark.svg";
-import BadgesDrawer from "./BadgesDrawer";
+import {
+  getActiveChapterIndex,
+  getActiveChapterId,
+  getActiveChapterDuration
+} from "../../../state/chapters";
+import { TASKS, KIT } from "../../../constants/chapters";
+import Countdown from "./Countdown";
 
 const containerStyle = css`
-  display: grid;
-  grid-template-columns: repeat(2, auto);
-  max-width: 2200px;
-  justify-self: end;
-  margin-right: 50px;
-`;
-
-const openContainerStyle = css`
-  max-width: unset;
-  margin-right: 60px;
-`;
-
-const journeyBarContainerStyle = css`
-  height: 130px;
-  width: 2200px;
-  background-color: ${palette.lime};
-  display: grid;
+  margin: 0 auto;
+  display: inline-grid;
   grid-template-columns: repeat(3, auto);
-  padding: 0 80px;
-  border-radius: 80px;
-  align-content: center;
-  justify-content: space-between;
-  z-index: 10;
-  box-shadow: 0px 4px 2px 0px rgba(0, 0, 0, 0.15);
+  grid-column-gap: 90px;
+  width: fit-content;
+  align-items: center;
 `;
 
-const sectionStyle = css`
+const journeyStage = css`
   display: grid;
-  grid-template-columns: repeat(2, auto);
+  grid-template-columns: 71px auto;
+  grid-column-gap: 20px;
   align-items: center;
 
   > p {
-    font-family: "Luckiest Guy", sans-serif;
-    font-size: 5.5rem;
-    line-height: 100px;
-    color: ${palette.yellow};
-    // For some reason, <p/> won't align center and using just one of these methods doesn't work
-    margin: 0 0 -10px;
-    padding-top: 10px;
+    font-family: "Akkurat", sans-serif;
+    font-size: 80px;
+    line-height: 80px;
+    display: inline-block;
+    color: ${Palette.lightGrey};
+    margin: -15px 0 -25px;
+    font-weight: bold;
   }
 `;
 
-const activeSectionStyle = css`
-  > p {
-    color: ${palette.red};
-  }
+const activeJourneyStage = css`
+  grid-template-columns: auto auto;
 `;
 
-const completedSectionStyle = css`
-  > p {
-    color: ${palette.green};
-  }
+const iconStyle = css`
+  height: 65px;
+  display: inline-block;
 `;
 
-const circleStyle = css`
-  height: 100px;
-  width: 100px;
-  border-radius: 100%;
-  background-color: ${palette.yellow};
-  margin-right: 20px;
-`;
-
-const checkmarkStyle = css`
-  height: 100px;
-  margin-right: 20px;
-`;
-
-const coundownContainer = css`
-  height: 100px;
-  width: 100px;
-  position: relative;
-  margin-right: 20px;
-  background: #fff;
-  border-radius: 100%;
-  display: grid;
-  align-content: center;
-  justify-content: center;
-
-  > p {
-    font-size: 5rem;
-    font-family: "Boogaloo", sans-serif;
-    margin: 0;
-    color: ${palette.red};
-  }
-`;
-
-const {
-  SOLVING_SAVE_YOURSELF,
-  SOLVING_SAVE_OTHERS,
-  CHOOSE_TASK
-} = taskPhaseKeys;
+const { SOLVING_SAVE_YOURSELF } = taskPhaseKeys;
 
 const JourneyBar = ({
   activeChapterId,
   activeChapterIndex,
-  activeTaskIndex,
-  badgeDrawerOpen,
-  openBadgeDrawer,
   activeTaskPhase,
-  allTaskPhaseData
+  activeChapterDuration,
+  allTaskPhaseData,
+  activeTaskIndex
 }) => {
-  const [chapterTimeLeft, setChapterTimeLeft] = useState(0);
   const [savingYourself, setSavingYourself] = useState(false);
   const [savingOthers, setSavingOthers] = useState(false);
+  const [
+    rerenderForSecondSaveYourselfTask,
+    setRerenderForSecondSaveYourselfTask
+  ] = useState(false);
 
-  const tick = useCallback(() => {
-    if (chapterTimeLeft > 0) {
-      setChapterTimeLeft(chapterTimeLeft - 1);
+  // Update whether saving yourself or saving others during task phase
+  useEffect(() => {
+    const isSavingYourselfPhase =
+      activeChapterId === TASKS && activeTaskPhase === SOLVING_SAVE_YOURSELF;
+    const isSavingOthersPhase =
+      activeChapterId === TASKS && activeTaskPhase !== SOLVING_SAVE_YOURSELF;
+    const shouldResetCountdownForSecondSaveYourselfTask =
+      activeTaskIndex === 1 && isSavingYourselfPhase;
+
+    setSavingYourself(isSavingYourselfPhase);
+    setSavingOthers(isSavingOthersPhase);
+    if (shouldResetCountdownForSecondSaveYourselfTask) {
+      setRerenderForSecondSaveYourselfTask(true);
     }
-  }, [chapterTimeLeft]);
+  }, [activeChapterId, activeTaskPhase, activeTaskIndex]);
 
+  // Trigger resetting the countdown for the second save yourself task
   useEffect(() => {
-    const showTimerPhases = [
-      SOLVING_SAVE_YOURSELF,
-      SOLVING_SAVE_OTHERS,
-      CHOOSE_TASK
-    ];
-    const phaseShouldHaveTimer = showTimerPhases.indexOf(activeTaskPhase) > -1;
-    const resetForSecondSaveYourselfTask = activeTaskIndex === 1;
-    if (phaseShouldHaveTimer || resetForSecondSaveYourselfTask) {
-      setChapterTimeLeft(allTaskPhaseData[activeTaskPhase].time - 1);
-    } else {
-      setChapterTimeLeft(0);
-    }
-  }, [activeTaskPhase, allTaskPhaseData, activeTaskIndex]);
+    if (rerenderForSecondSaveYourselfTask)
+      setRerenderForSecondSaveYourselfTask(false);
+  }, [rerenderForSecondSaveYourselfTask]);
 
-  useEffect(() => {
-    const countdownInterval = setInterval(tick, 1000);
-
-    return () => {
-      clearInterval(countdownInterval);
-    };
-  }, [chapterTimeLeft, tick]);
-
-  useEffect(() => {
-    setSavingYourself(activeChapterId === TASKS && activeTaskIndex < 2);
-    setSavingOthers(activeChapterId === TASKS && activeTaskIndex >= 2);
-  }, [activeChapterId, activeTaskIndex]);
+  // COLLECT A KIT
+  const collectAKitActive = activeChapterId === KIT;
+  const collectAKitCompleted = activeChapterIndex > 2;
+  // HELP YOURSELF
+  const helpYourselfActive = savingYourself;
+  const helpYourselfInFuture =
+    activeChapterId !== TASKS && activeChapterIndex < 7;
+  const helpYourselfCompleted = savingOthers || activeChapterIndex > 6;
+  // HELP NEIGHBORS
+  const helpNeighborsInFuture = !savingOthers;
+  const helpNeighborsActive = savingOthers;
+  const choosingTask = activeTaskPhase === taskPhaseKeys.CHOOSE_TASK;
+  const solvingSaveOthers =
+    activeTaskPhase === taskPhaseKeys.SOLVING_SAVE_OTHERS;
+  // TODO: is this case ever present?
+  const helpNeighborsCompleted = activeChapterIndex > 6;
 
   return (
-    <div
-      css={css`
-        ${containerStyle};
-        ${badgeDrawerOpen && openContainerStyle}
-      `}
-    >
-      <div css={journeyBarContainerStyle}>
-        {/* Build Kit */}
-        <div
-          css={css`
-            ${sectionStyle};
-            ${activeChapterId === KIT && activeSectionStyle}
-            ${activeChapterIndex > 2 && completedSectionStyle}
-          `}
-        >
-          {activeChapterId !== KIT && activeChapterIndex <= 2 && (
-            <div css={circleStyle} />
-          )}
-          {activeChapterId === KIT && (
-            <div css={coundownContainer}>
-              <p>{chapterTimeLeft}</p>
-            </div>
-          )}
-          {activeChapterIndex > 2 && (
-            <img src={CheckmarkSVG} alt="checkmark" css={checkmarkStyle} />
-          )}
-          <p>COLLECT A KIT</p>
-        </div>
-
-        {/* Save Yourself */}
-        <div
-          css={css`
-            ${sectionStyle};
-            ${savingYourself && activeSectionStyle};
-            ${(activeChapterIndex > 6 ||
-              (activeChapterIndex === 6 && !savingYourself)) &&
-              completedSectionStyle};
-          `}
-        >
-          {activeChapterId !== TASKS && activeChapterIndex < 7 && (
-            <div css={circleStyle} />
-          )}
-          {savingYourself && (
-            <div css={coundownContainer}>
-              <p>{chapterTimeLeft}</p>
-            </div>
-          )}
-          {(savingOthers || activeChapterIndex > 6) && (
-            <img src={CheckmarkSVG} alt="checkmark" css={checkmarkStyle} />
-          )}
-          <p>HELP YOURSELF</p>
-        </div>
-
-        {/* Save Others */}
-        <div
-          css={css`
-            ${sectionStyle};
-            ${savingOthers && activeSectionStyle}
-            ${activeChapterIndex > 6 && completedSectionStyle}
-          `}
-        >
-          {!savingOthers && activeChapterIndex < 7 && <div css={circleStyle} />}
-          {savingOthers && (
-            <div css={coundownContainer}>
-              <p>{chapterTimeLeft}</p>
-            </div>
-          )}
-          {activeChapterIndex > 6 && (
-            <img src={CheckmarkSVG} alt="checkmark" css={checkmarkStyle} />
-          )}
-          <p>HELP NEIGHBORS</p>
-        </div>
+    <div css={containerStyle}>
+      <div
+        css={css`
+          ${journeyStage};
+          ${collectAKitActive ? activeJourneyStage : ""}
+        `}
+      >
+        {/* COLLECT A KIT */}
+        {/* Note: no ellipse for this phase because never needs to be shown */}
+        {collectAKitActive && (
+          <Countdown iconStyle={iconStyle} duration={activeChapterDuration} />
+        )}
+        {collectAKitCompleted && (
+          <img src={CheckmarkSVG} alt="Checkmark" css={iconStyle} />
+        )}
+        <p>COLLECT A KIT</p>
       </div>
-      <BadgesDrawer
-        journeyBarContainerStyle={journeyBarContainerStyle}
-        isOpen={badgeDrawerOpen}
-        openBadgeDrawer={openBadgeDrawer}
-      />
+      {/* HELP YOURSELF */}
+      <div
+        css={css`
+          ${journeyStage};
+          ${helpYourselfActive ? activeJourneyStage : ""}
+        `}
+      >
+        {helpYourselfInFuture && (
+          <img
+            src={NoCheckEllipseSVG}
+            alt="not yet checked stage"
+            css={iconStyle}
+          />
+        )}
+        {helpYourselfActive && !rerenderForSecondSaveYourselfTask && (
+          <Countdown
+            iconStyle={iconStyle}
+            duration={allTaskPhaseData[activeTaskPhase].time}
+          />
+        )}
+        {helpYourselfCompleted && (
+          <img src={CheckmarkSVG} alt="Checkmark" css={iconStyle} />
+        )}
+        <p>HELP YOURSELF</p>
+      </div>
+      {/* HELP NEIGHBORS */}
+      <div
+        css={css`
+          ${journeyStage};
+          ${helpNeighborsActive ? activeJourneyStage : ""}
+        `}
+      >
+        {helpNeighborsInFuture && (
+          <img
+            src={NoCheckEllipseSVG}
+            alt="not yet checked stage"
+            css={iconStyle}
+          />
+        )}
+        {/* Countdown: choosing task or solving task */}
+        {helpNeighborsActive && (choosingTask || solvingSaveOthers) && (
+          <Countdown
+            iconStyle={iconStyle}
+            duration={allTaskPhaseData[activeTaskPhase].time}
+          />
+        )}
+        {/* Countdown: show 0 when on modal */}
+        {helpNeighborsActive && (!choosingTask && !solvingSaveOthers) && (
+          <Countdown iconStyle={iconStyle} duration={0} />
+        )}
+
+        {helpNeighborsCompleted && (
+          <img src={CheckmarkSVG} alt="Checkmark" css={iconStyle} />
+        )}
+        <p>HELP NEIGHBORS</p>
+      </div>
     </div>
   );
 };
 
 JourneyBar.propTypes = {
-  activeChapterId: PropTypes.string,
+  badge: PropTypes.shape({
+    badgeSVG: PropTypes.string,
+    title: PropTypes.string,
+    id: PropTypes.string,
+    shown: PropTypes.bool,
+    activeTaskIndexWhenEarned: PropTypes.oneOfType([null, PropTypes.number])
+  }),
   activeChapterIndex: PropTypes.number,
-  activeTaskIndex: PropTypes.number,
-  badgeDrawerOpen: PropTypes.bool,
-  openBadgeDrawer: PropTypes.func,
+  activeChapterId: PropTypes.string,
   activeTaskPhase: PropTypes.string,
-  allTaskPhaseData: PropTypes.shape({})
+  activeChapterDuration: PropTypes.number,
+  allTaskPhaseData: PropTypes.objectOf(
+    PropTypes.shape({
+      time: PropTypes.number
+    })
+  ),
+  activeTaskIndex: PropTypes.number
 };
 
 const mapStateToProps = state => ({
-  activeChapterId: getActiveChapterId(state),
   activeChapterIndex: getActiveChapterIndex(state),
-  activeTaskIndex: getActiveTaskIndex(state),
+  activeChapterId: getActiveChapterId(state),
   activeTaskPhase: getTaskPhase(state),
-  allTaskPhaseData: getAllTaskPhaseData(state)
+  activeChapterDuration: getActiveChapterDuration(state),
+  allTaskPhaseData: getAllTaskPhaseData(state),
+  activeTaskIndex: getActiveTaskIndex(state)
 });
 
-export default connect(mapStateToProps)(memo(JourneyBar));
+export default connect(mapStateToProps)(JourneyBar);

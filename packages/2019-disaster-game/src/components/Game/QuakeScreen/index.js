@@ -42,14 +42,10 @@ const messageStyle = css`
     line-height: normal;
 
     color: #ffffff;
-    text-shadow: 0 10px 0px ${palette.red}, 10px 0 0px ${palette.darkRed},
-      10px 20px 10px ${palette.red}, 20px 10px 10px ${palette.darkRed},
-      20px 30px 20px ${palette.red}, 30px 20px 20px ${palette.darkRed},
-      30px 40px 20px ${palette.red}, 40px 30px 30px ${palette.darkRed},
-      40px 50px 30px ${palette.red}, 50px 40px 20px ${palette.darkRed},
-      50px 60px 20px ${palette.red}, 60px 50px 20px ${palette.darkRed},
-      60px 70px 10px ${palette.red}, 70px 60px 10px ${palette.darkRed},
-      70px 80px 0px ${palette.red}, 80px 70px 0px ${palette.darkRed};
+    text-shadow: 0 10px 13px ${palette.darkGrey}, 7px 0 0px ${palette.darkGrey},
+      19px 20px 10px ${palette.darkGrey}, 20px 10px 10px ${palette.darkGrey},
+      20px 30px 0px ${palette.darkGrey};
+    letter-spacing: 0.5rem;
   }
 `;
 

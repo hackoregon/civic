@@ -31,27 +31,23 @@ const hideBadgeStyle = css`
 `;
 
 const badgeStyle = css`
-  height: 60vh;
+  height: 50vh;
   justify-self: center;
 `;
 
 const badgeText = css`
   font-family: "Luckiest Guy", sans-serif;
-  font-size: 12rem;
+  font-size: 9rem;
   margin: 0;
   color: #fff;
-  text-shadow: 0 5px 0px ${palette.red}, 5px 0 0px ${palette.darkRed},
-    5px 10px 5px ${palette.red}, 10px 5px 5px ${palette.darkRed},
-    10px 15px 10px ${palette.red}, 15px 10px 10px ${palette.darkRed},
-    15px 20px 10px ${palette.red}, 20px 15px 15px ${palette.darkRed},
-    20px 25px 15px ${palette.red}, 25px 20px 10px ${palette.darkRed},
-    25px 30px 10px ${palette.red}, 30px 25px 10px ${palette.darkRed},
-    30px 35px 5px ${palette.red}, 35px 30px 5px ${palette.darkRed},
-    35px 40px 0px ${palette.red}, 40px 35px 0px ${palette.darkRed};
+  text-shadow: 0 5px 7px ${palette.darkGrey}, 4px 0 0px ${palette.darkGrey},
+    11px 10px 3px ${palette.darkGrey}, 10px 5px 5px ${palette.darkGrey},
+    10px 15px 0px ${palette.darkGrey};
+  letter-spacing: 0.5rem;
 `;
 
 const titleText = css`
-  font-size: 14rem;
+  font-size: 11rem;
 `;
 
 const NewBadge = ({

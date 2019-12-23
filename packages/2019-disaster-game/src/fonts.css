@@ -8,3 +8,8 @@
   font-family: "Boogaloo";
   src: url("../assets/fonts/Boogaloo-Regular.ttf") format("truetype");
 }
+
+@font-face {
+  font-family: "Akkurat";
+  src: url("../assets/fonts/Akkurat-Regular.ttf") format("truetype");
+}

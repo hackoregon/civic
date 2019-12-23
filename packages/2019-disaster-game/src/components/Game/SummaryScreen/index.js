@@ -22,8 +22,8 @@ import Timer from "../../../utils/timer";
 import { TYPES as SFX_TYPES } from "../../../constants/sfx";
 import { palette } from "../../../constants/style";
 import QRCode from "../../../../assets/earthquake-heroes-qr-code.svg";
-import BadgesBar from "../../atoms/TitleBar/BadgesDrawer";
-import SavedBar from "../../atoms/TitleBar/SavedBar";
+import BadgesBar from "./BadgesDrawer";
+import SavedBar from "./SavedBar";
 
 const pageWrapper = css`
   display: grid;
@@ -43,15 +43,15 @@ const titleBarContainer = css`
 
 const bigBadgesStyle = css`
   position: absolute;
-  top: 43%;
-  right: 38%;
+  top: 45%;
+  right: 37%;
   transform: scale(2);
 `;
 
 const bigSavedStyle = css`
   position: absolute;
-  top: 60%;
-  right: 38%;
+  top: 63%;
+  right: 43%;
   transform: scale(2);
 `;
 
@@ -69,14 +69,15 @@ const contentContainer = css`
   position: absolute;
   transform: translateX(+200%);
   transition: transform 3s;
-  top: 500px;
-  left: 10vw;
+  top: 570px;
+  left: 15vw;
 
   display: grid;
   align-content: center;
   justify-content: center;
   text-align: center;
-  width: 80vw;
+  width: 70vw;
+  grid-row-gap: 50px;
 `;
 
 const centerContent = css`
@@ -88,17 +89,22 @@ const exitContent = css`
 `;
 
 const contentTitle = css`
-  font-family: "Luckiest Guy", sans-serif;
-  font-size: 16rem;
-  color: ${palette.salmon};
+  font-family: "Akkurat", sans-serif;
+  font-weight: bold;
+  font-size: 14rem;
+  color: ${palette.darkBlue};
   margin: 0;
 `;
 
+const topStyle = css`
+  margin-top: -65px;
+`;
+
 const contentText = css`
-  font-family: "Boogaloo", sans-serif;
-  font-size: 12rem;
-  line-height: 14rem;
-  color: ${palette.purple};
+  font-family: "Akkurat", sans-serif;
+  font-size: 9rem;
+  line-height: 11rem;
+  color: ${palette.darkGrey};
   margin: 0;
 
   > span {
@@ -155,8 +161,8 @@ const bg = css`
   animation: ${slide} 6s ease-in-out infinite alternate;
   background-image: linear-gradient(
     -60deg,
-    ${palette.lightLime} 50%,
-    ${palette.lemon} 50%
+    ${palette.mediumGrey} 50%,
+    ${palette.lightestGrey} 50%
   );
   bottom: 0;
   left: -50%;
@@ -193,7 +199,7 @@ const SummaryScreen = ({
     { duration: 7 },
     { duration: 7 },
     { duration: 7 },
-    { duration: 7 }
+    { duration: 20 }
   ];
   const prevAnimationPhaseIndex = usePrevious(animationPhaseIndex);
 
@@ -306,11 +312,9 @@ const SummaryScreen = ({
           css={QRCodeStyle}
         />
         <BadgesBar
-          isSummary
           initialSummaryStyle={animationPhaseIndex <= 0 ? bigBadgesStyle : null}
         />
         <SavedBar
-          isSummary
           initialSummaryStyle={animationPhaseIndex <= 0 ? bigSavedStyle : null}
         />
       </div>
@@ -322,7 +326,7 @@ const SummaryScreen = ({
         ${animationPhaseIndex > 0 ? exitContent : ""}
       `}
       >
-        <p css={contentTitle}>YOUR ACTS OF HEROISM</p>
+        <p css={[contentTitle, topStyle]}>YOUR ACTS OF HEROISM</p>
       </div>
 
       <div

@@ -42,8 +42,8 @@ const bg = css`
   animation: ${slide} 6s ease-in-out infinite alternate;
   background-image: linear-gradient(
     -60deg,
-    ${palette.lightLime} 50%,
-    ${palette.lemon} 50%
+    ${palette.mediumGrey} 50%,
+    ${palette.lightestGrey} 50%
   );
   bottom: 0;
   left: -50%;

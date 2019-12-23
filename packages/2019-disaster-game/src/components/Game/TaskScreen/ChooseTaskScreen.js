@@ -35,13 +35,14 @@ const taskImage = css`
 `;
 
 const taskLabel = css`
+  font-size: 58px;
+  line-height: 80px;
+  font-weight: bold;
   margin: 0;
   max-width: 250px;
-  font-size: 70px;
-  line-height: 90px;
   text-align: center;
   margin-top: 20px;
-  font-family: "Boogaloo", sans-serif;
+  font-family: "Akkurat", sans-serif;
   color: ${palette.darkGrey};
 `;
 

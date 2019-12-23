@@ -34,8 +34,10 @@ const messageStyle = css`
 `;
 
 const textStyle = css`
-  font-family: "Boogaloo", sans-serif;
-  font-size: 7rem;
+  font-weight: bold;
+  font-size: 7em;
+  line-height: 1.3em;
+  font-family: "Akkurat", sans-serif;
   color: ${palette.darkGrey};
   margin: 0;
 `;
