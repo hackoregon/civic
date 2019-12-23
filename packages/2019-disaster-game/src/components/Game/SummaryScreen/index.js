@@ -43,7 +43,7 @@ const titleBarContainer = css`
 
 const bigBadgesStyle = css`
   position: absolute;
-  top: 43%;
+  top: 45%;
   right: 38%;
   transform: scale(2);
 `;
@@ -69,14 +69,15 @@ const contentContainer = css`
   position: absolute;
   transform: translateX(+200%);
   transition: transform 3s;
-  top: 500px;
-  left: 10vw;
+  top: 570px;
+  left: 15vw;
 
   display: grid;
   align-content: center;
   justify-content: center;
   text-align: center;
-  width: 80vw;
+  width: 70vw;
+  grid-row-gap: 50px;
 `;
 
 const centerContent = css`
@@ -97,8 +98,8 @@ const contentTitle = css`
 
 const contentText = css`
   font-family: "Akkurat", sans-serif;
-  font-size: 12rem;
-  line-height: 14rem;
+  font-size: 10rem;
+  line-height: 12rem;
   color: ${palette.darkGrey};
   margin: 0;
 
