@@ -29,8 +29,8 @@ import { playSFX as _playSFX } from "../../state/sfx";
 
 const ORB_CONFIG = {
   period: 1,
-  orbCount: 50,
-  orbSize: 120,
+  orbCount: 20,
+  orbSize: 180,
   maxVelocityY: 0,
   minVelocityX: 0.5,
   minVelocityY: 0,

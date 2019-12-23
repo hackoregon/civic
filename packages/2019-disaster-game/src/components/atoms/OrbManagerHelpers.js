@@ -37,7 +37,8 @@ export function createRandomLayout(
     const isKitChapter = activeScreen === "kit";
     const weightedCount = Math.round(config.orbCount * itemData.weighting);
     const useWeightedCount = !(isRequiredItem && !isKitChapter);
-    const greaterOfWeightedAndTen = weightedCount > 10 ? weightedCount : 10;
+    const greaterOfWeightedAndTen = weightedCount > 8 ? weightedCount : 8;
+
     const totalGeneratedOrbs = useWeightedCount
       ? weightedCount
       : greaterOfWeightedAndTen;
