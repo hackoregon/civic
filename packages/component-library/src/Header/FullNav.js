@@ -10,7 +10,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import { Link } from "react-router";
 
 import navCaret from "../../assets/nav-caret.svg";
-import { defaultFontSize } from "../../constants/styles";
+import { defaultFontSize } from "../_Constants/styles";
 import { Logo, BrandColors } from "../index";
 
 const { primary, action } = BrandColors;

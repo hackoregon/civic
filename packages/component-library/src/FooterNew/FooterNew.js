@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import { Logo, BrandColors } from "../index";
-import { browserDefaultSize } from "../../constants/styles";
+import { browserDefaultSize } from "../_Constants/styles";
 
 const footerWrapper = css`
   height: 93px;
