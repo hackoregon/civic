@@ -115,7 +115,7 @@ Game.displayName = "Game";
 const GameContainerStyle = styled(Panel)`
   position: relative;
   width: 100%;
-  background-color: ${palette.blue};
+  background-color: ${palette.mediumGrey};
 `;
 
 const GameGrid = styled.div`
