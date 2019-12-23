@@ -59,7 +59,7 @@ const showMessageContainter = css`
 const messageStyle = css`
   font-family: "Akkurat", sans-serif;
   font-size: 10rem;
-  color: ${palette.red};
+  color: ${palette.darkGrey};
   margin: 0;
 `;
 
