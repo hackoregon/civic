@@ -31,13 +31,13 @@ const hideBadgeStyle = css`
 `;
 
 const badgeStyle = css`
-  height: 60vh;
+  height: 50vh;
   justify-self: center;
 `;
 
 const badgeText = css`
   font-family: "Luckiest Guy", sans-serif;
-  font-size: 12rem;
+  font-size: 9rem;
   margin: 0;
   color: #fff;
   text-shadow: 0 5px 7px ${palette.darkGrey}, 4px 0 0px ${palette.darkGrey},
@@ -47,7 +47,7 @@ const badgeText = css`
 `;
 
 const titleText = css`
-  font-size: 14rem;
+  font-size: 11rem;
 `;
 
 const NewBadge = ({
