@@ -33,9 +33,10 @@ const messageStyle = css`
 `;
 
 const textStyle = css`
-  font-family: "Boogaloo", sans-serif;
-  font-size: 9rem;
-  line-height: 11rem;
+  font-weight: bold;
+  font-size: 7em;
+  line-height: 1.3em;
+  font-family: "Akkurat", sans-serif;
   color: ${palette.darkGrey};
   margin: 0;
 `;
@@ -45,11 +46,12 @@ const imgStyle = css`
 `;
 
 const taskLabel = css`
-  font-family: "Boogaloo", sans-serif;
+  font-weight: bold;
+  font-size: 5em;
+  line-height: 1.3em;
+  font-family: "Akkurat", sans-serif;
   color: ${palette.darkGrey};
   margin: 0;
-  font-size: 6.75rem;
-  line-height: 7rem;
   max-width: 400px;
   margin-top: 30px;
 `;
