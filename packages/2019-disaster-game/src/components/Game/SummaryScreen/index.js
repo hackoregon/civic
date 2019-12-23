@@ -199,7 +199,7 @@ const SummaryScreen = ({
     { duration: 7 },
     { duration: 7 },
     { duration: 7 },
-    { duration: 7 }
+    { duration: 20 }
   ];
   const prevAnimationPhaseIndex = usePrevious(animationPhaseIndex);
 
