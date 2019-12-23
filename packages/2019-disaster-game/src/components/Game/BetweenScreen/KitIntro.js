@@ -15,17 +15,19 @@ import {
 
 const contentWrapper = css`
   height: 100vh;
-  width: 100vw;
+  width: 70vw;
   z-index: 10;
   display: grid;
   justify-items: center;
   align-items: center;
+  justify-self: center;
 `;
 
 const contentTitle = css`
-  font-family: "Boogaloo", sans-serif;
+  font-family: "Akkurat", sans-serif;
+  font-weight: 600;
   font-size: 16rem;
-  color: ${palette.salmon};
+  color: ${palette.darkBlue};
   text-align: center;
   margin: 0;
 `;

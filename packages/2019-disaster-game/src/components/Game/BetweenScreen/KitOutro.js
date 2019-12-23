@@ -23,12 +23,14 @@ const contentWrapper = css`
   display: grid;
   justify-items: center;
   align-items: center;
+  justify-self: center;
 `;
 
 const contentTitle = css`
-  font-family: "Luckiest Guy", sans-serif;
+  font-family: "Akkurat", sans-serif;
+  font-weight: bold;
   font-size: 16rem;
-  color: ${palette.salmon};
+  color: ${palette.darkBlue};
   text-align: center;
   margin: 0;
 `;
@@ -55,9 +57,9 @@ const showMessageContainter = css`
 `;
 
 const messageStyle = css`
-  font-family: "Boogaloo", sans-serif;
+  font-family: "Akkurat", sans-serif;
   font-size: 10rem;
-  color: ${palette.salmon};
+  color: ${palette.red};
   margin: 0;
 `;
 
@@ -156,7 +158,7 @@ const KitOutro = ({
   return (
     <div css={contentWrapper}>
       <div>
-        <p css={contentTitle}>YOU MADE THIS KIT</p>
+        <p css={contentTitle}>You made this kit</p>
         <KitRow customContent={customContent} customStyle={kitStyle} />
         <div
           css={css`
