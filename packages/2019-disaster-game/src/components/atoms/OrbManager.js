@@ -306,7 +306,7 @@ const OrbsStyle = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background-color: ${palette.blue};
+  background-color: ${palette.lightLime};
 `;
 
 const mapStateToProps = state => ({
