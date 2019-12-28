@@ -69,12 +69,12 @@ function deriveInitialFilterStateFromCategories(categories) {
 }
 
 function numberOfFiltersSelected(activeFilters, categories) {
-  const flatListOfFilters = categories.reduce(
+  const flatListOfActiveFilters = categories.reduce(
     (accumulator, category) => [...accumulator, activeFilters[category]],
     []
   );
 
-  return flatListOfFilters.length;
+  return flatListOfActiveFilters.length;
 }
 
 const CardList = ({ CardRegistry, tagsList, projects }) => {
