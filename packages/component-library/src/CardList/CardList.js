@@ -57,8 +57,7 @@ const headingPadding = css`
 `;
 
 function deriveCategoryNamesFromTagsList(tagsList) {
-  const allCategories = new Set(tagsList.map(tag => tag.category));
-  return [...allCategories];
+  return Object.keys(tagsList);
 }
 
 function deriveInitialFilterStateFromCategories(categories) {
@@ -67,20 +66,6 @@ function deriveInitialFilterStateFromCategories(categories) {
     stateObject[category] = [];
   });
   return stateObject;
-}
-
-function sortAllAvailableTagsByCategory(tagsList, categories) {
-  const tagsByCategory = categories.reduce(
-    (accumulator, category) => ({
-      [category]: [],
-      ...accumulator
-    }),
-    {}
-  );
-  tagsList.forEach(tag => {
-    tagsByCategory[tag.category].push(tag.id);
-  });
-  return tagsByCategory;
 }
 
 function numberOfFiltersSelected(activeFilters, categories) {
@@ -92,13 +77,6 @@ function numberOfFiltersSelected(activeFilters, categories) {
   return flatListOfFilters.length;
 }
 
-function isFilterSelected(id, category, activeFilters) {
-  for (let i = 0; i < activeFilters[category].length; i += 1) {
-    if (activeFilters[category][i] === id) return true;
-  }
-  return false;
-}
-
 const CardList = ({ CardRegistry, tagsList, projects }) => {
   // eslint-disable-next-line no-unused-vars
   const { entries, tags } = CardRegistry;
@@ -107,10 +85,6 @@ const CardList = ({ CardRegistry, tagsList, projects }) => {
   console.log("Tag Count:", tags);
 
   const categories = deriveCategoryNamesFromTagsList(tagsList);
-  const tagsListByCategory = sortAllAvailableTagsByCategory(
-    tagsList,
-    categories
-  );
 
   const classes = useStyles();
   const theme = useTheme();
@@ -172,14 +146,14 @@ const CardList = ({ CardRegistry, tagsList, projects }) => {
               unmountOnExit
             >
               <List component="ul" disablePadding>
-                {tagsListByCategory[category].sort().map(id => (
+                {tagsList[category].sort().map(id => (
                   <ListItem key={shortid.generate()} className={classes.nested}>
                     <Checkbox
-                      value={isFilterSelected(id, category, activeFilters)}
+                      value={activeFilters[category].includes(id)}
                       label={id}
                       onChange={() => {
                         if (showAllStories) setShowAllStories(false);
-                        if (isFilterSelected(id, category, activeFilters)) {
+                        if (activeFilters[category].includes(id)) {
                           setActiveFilters({
                             ...activeFilters,
                             [category]: activeFilters[category].filter(

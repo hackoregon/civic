@@ -26,18 +26,11 @@ const CardRegistryMock = {
   })
 };
 
-const tagsListExample = [
-  ...["Race", "Transportation", "Disaster Resilience", "Housing"].map(
-    topic => ({ id: topic, category: "topics" })
-  ),
-  ...["Portland", "Oregon", "Nationwide", "Your City"].map(location => ({
-    id: location,
-    category: "locations"
-  })),
-  ...["Chart", "Infographic", "Cloropleth Map", "Scatterplot"].map(
-    visualization => ({ id: visualization, category: "visualizations" })
-  )
-];
+const tagsListExample = {
+  topics: ["Race", "Transportation", "Disaster Resilience", "Housing"],
+  locations: ["Portland", "Oregon", "Nationwide", "Your City"],
+  visualizations: ["Chart", "Infographic", "Cloropleth Map", "Scatterplot"]
+};
 
 const projectsMock = [
   {

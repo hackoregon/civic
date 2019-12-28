@@ -20,18 +20,7 @@ export default (
   if (showAllStories) return true;
   if (numberOfFiltersSelected === 0) return true;
 
-  /*
-  ACTIVE FILTERS
-  {
-    topics: ['race'],
-    visualizations: ['chart'],
-    locations: []
-  }
-
-  TARGET CATEGORIES
-  ['topics', 'visualizations']
-*/
-
+  // flat array containing all categories that have filters selected
   const targetCategories = categories.reduce((accumulator, category) => {
     if (activeFilters[category].length > 0) {
       return [...accumulator, category];
@@ -39,7 +28,8 @@ export default (
     return accumulator;
   }, []);
 
-  for (let i = 0; i < Object.keys(targetCategories).length; i += 1) {
+  // returns false if there is no matching tag on a story card within any one target category
+  for (let i = 0; i < targetCategories.length; i += 1) {
     let fulfillsTargetCategory = false;
     activeFilters[targetCategories[i]].forEach(tag => {
       if (storyCardTags.includes(tag)) {
