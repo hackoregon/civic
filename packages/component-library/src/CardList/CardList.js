@@ -21,7 +21,6 @@ import Header from "../Header/Header";
 import BrandColors from "../_Themes/Brand/BrandColors";
 import ProjectCard from "./ProjectCard";
 import cardListStyling from "./cardListStyling";
-import deriveActiveTagsListsFromFilterStatus from "./deriveActiveTagsList";
 import filterCardsBasedOnFilterStatus from "./filterCardsByActiveTags";
 
 import {
@@ -57,6 +56,49 @@ const headingPadding = css`
   padding-right: 1rem;
 `;
 
+function deriveCategoryNamesFromTagsList(tagsList) {
+  const allCategories = new Set(tagsList.map(tag => tag.category));
+  return [...allCategories];
+}
+
+function deriveInitialFilterStateFromCategories(categories) {
+  const stateObject = {};
+  categories.forEach(category => {
+    stateObject[category] = [];
+  });
+  return stateObject;
+}
+
+function sortAllAvailableTagsByCategory(tagsList, categories) {
+  const tagsByCategory = categories.reduce(
+    (accumulator, category) => ({
+      [category]: [],
+      ...accumulator
+    }),
+    {}
+  );
+  tagsList.forEach(tag => {
+    tagsByCategory[tag.category].push(tag.id);
+  });
+  return tagsByCategory;
+}
+
+function numberOfFiltersSelected(activeFilters, categories) {
+  const flatListOfFilters = categories.reduce(
+    (accumulator, category) => [...accumulator, activeFilters[category]],
+    []
+  );
+
+  return flatListOfFilters.length;
+}
+
+function isFilterSelected(id, category, activeFilters) {
+  for (let i = 0; i < activeFilters[category].length; i += 1) {
+    if (activeFilters[category][i] === id) return true;
+  }
+  return false;
+}
+
 const CardList = ({ CardRegistry, tagsList, projects }) => {
   // eslint-disable-next-line no-unused-vars
   const { entries, tags } = CardRegistry;
@@ -64,19 +106,11 @@ const CardList = ({ CardRegistry, tagsList, projects }) => {
   // eslint-disable-next-line no-console
   console.log("Tag Count:", tags);
 
-  const categoryNames = Object.keys(tagsList);
-
-  // sets an initial value for the state of filter checkboxes where all boxes are unchecked
-  const allTagsFalse = {
-    topics: {},
-    locations: {},
-    visualizations: {}
-  };
-  categoryNames.forEach(category => {
-    tagsList[category].forEach(tag => {
-      allTagsFalse[category][tag] = false;
-    });
-  });
+  const categories = deriveCategoryNamesFromTagsList(tagsList);
+  const tagsListByCategory = sortAllAvailableTagsByCategory(
+    tagsList,
+    categories
+  );
 
   const classes = useStyles();
   const theme = useTheme();
@@ -89,24 +123,9 @@ const CardList = ({ CardRegistry, tagsList, projects }) => {
   const [openVisualization, setOpenVisualization] = useState(false);
 
   // holds state for checkboxes (nested object where specific tags are boolean)
-  const [filterStatus, setFilterStatus] = useState(allTagsFalse);
-  // flat array of active tags
-  const activeTagsList = deriveActiveTagsListsFromFilterStatus(
-    filterStatus,
-    categoryNames
-  )[0];
-  // arrays of active tags separated by category
-  const activeTagsByCategory = deriveActiveTagsListsFromFilterStatus(
-    filterStatus,
-    categoryNames
-  )[1];
-
-  const noFiltersSelected = activeTags => {
-    if (!activeTags || activeTags.length === 0) {
-      return true;
-    }
-    return false;
-  };
+  const [activeFilters, setActiveFilters] = useState(
+    deriveInitialFilterStateFromCategories(categories)
+  );
 
   const categoryOpeners = {
     topics: openTopic,
@@ -138,7 +157,7 @@ const CardList = ({ CardRegistry, tagsList, projects }) => {
         aria-labelledby="nested-list-subheader"
         className={classes.filtersList}
       >
-        {categoryNames.map(category => (
+        {categories.map(category => (
           <Fragment>
             <ListItem button onClick={categoryHandlers[`${category}Handler`]}>
               <ListItemText
@@ -153,20 +172,26 @@ const CardList = ({ CardRegistry, tagsList, projects }) => {
               unmountOnExit
             >
               <List component="ul" disablePadding>
-                {tagsList[category].sort().map(topic => (
+                {tagsListByCategory[category].sort().map(id => (
                   <ListItem key={shortid.generate()} className={classes.nested}>
                     <Checkbox
-                      value={filterStatus[category][topic]}
-                      label={topic}
+                      value={isFilterSelected(id, category, activeFilters)}
+                      label={id}
                       onChange={() => {
                         if (showAllStories) setShowAllStories(false);
-                        setFilterStatus({
-                          ...filterStatus,
-                          [category]: {
-                            ...filterStatus[category],
-                            [topic]: !filterStatus[category][topic]
-                          }
-                        });
+                        if (isFilterSelected(id, category, activeFilters)) {
+                          setActiveFilters({
+                            ...activeFilters,
+                            [category]: activeFilters[category].filter(
+                              tag => tag !== id
+                            )
+                          });
+                        } else {
+                          setActiveFilters({
+                            ...activeFilters,
+                            [category]: [...activeFilters[category], id]
+                          });
+                        }
                       }}
                     />
                   </ListItem>
@@ -182,10 +207,10 @@ const CardList = ({ CardRegistry, tagsList, projects }) => {
   const filteredEntries = entries.filter(entry =>
     filterCardsBasedOnFilterStatus(
       entry.component.tags,
+      categories,
+      activeFilters,
       showAllStories,
-      noFiltersSelected(activeTagsList),
-      categoryNames,
-      activeTagsByCategory
+      numberOfFiltersSelected(activeFilters, categories)
     )
   );
 
@@ -233,7 +258,7 @@ const CardList = ({ CardRegistry, tagsList, projects }) => {
                 Filters
               </Button>
             </section>
-            {noFiltersSelected(activeTagsList) && (
+            {numberOfFiltersSelected(activeFilters, categories) === 0 && (
               <section>
                 <h2 css={headingPadding}>
                   <strong>Featured Projects: Hack Oregon Demo Day</strong>

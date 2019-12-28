@@ -11,50 +11,43 @@
 
 export default (
   storyCardTags,
+  categories,
+  activeFilters,
   showAllStories,
-  noFiltersSelected,
-  categoryNames,
-  activeTagsByCategory
+  numberOfFiltersSelected
 ) => {
   if (!storyCardTags) return false;
   if (showAllStories) return true;
-  if (noFiltersSelected) return true;
+  if (numberOfFiltersSelected === 0) return true;
 
-  // if at least one filter in a category is active, that category becomes bool true
-  const targetActiveCategories = categoryNames.reduce(
-    (accumulator, categoryName) => ({
-      [categoryName]: activeTagsByCategory[categoryName].length > 0,
-      ...accumulator
-    }),
-    {}
-  );
+  /*
+  ACTIVE FILTERS
+  {
+    topics: ['race'],
+    visualizations: ['chart'],
+    locations: []
+  }
 
-  // sets up an all false init object for tag categories
-  const fulfilledActiveCategories = categoryNames.reduce(
-    (accumulator, categoryName) => ({
-      [categoryName]: false,
-      ...accumulator
-    }),
-    {}
-  );
+  TARGET CATEGORIES
+  ['topics', 'visualizations']
+*/
 
-  // determines which of the target categories have been fulfilled by the story card
-  storyCardTags.forEach(storyTag => {
-    categoryNames.forEach(category => {
-      if (activeTagsByCategory[category].includes(storyTag)) {
-        fulfilledActiveCategories[category] = true;
+  const targetCategories = categories.reduce((accumulator, category) => {
+    if (activeFilters[category].length > 0) {
+      return [...accumulator, category];
+    }
+    return accumulator;
+  }, []);
+
+  for (let i = 0; i < Object.keys(targetCategories).length; i += 1) {
+    let fulfillsTargetCategory = false;
+    activeFilters[targetCategories[i]].forEach(tag => {
+      if (storyCardTags.includes(tag)) {
+        fulfillsTargetCategory = true;
       }
     });
-  });
-
-  // compares the target object to the result object
-  for (let i = 0; i < categoryNames.length; i += 1) {
-    if (
-      fulfilledActiveCategories[categoryNames[i]] !==
-      targetActiveCategories[categoryNames[i]]
-    ) {
-      return false;
-    }
+    if (!fulfillsTargetCategory) return false;
   }
+
   return true;
 };
