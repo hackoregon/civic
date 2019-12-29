@@ -145,5 +145,5 @@
     "webpack-md5-hash": "^0.0.6",
     "webpack-node-externals": "^1.5.4"
   },
-  "version": "v1.21.1"
+  "version": "2.0.0"
 }
