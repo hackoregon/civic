@@ -107,8 +107,8 @@ const SandboxDrawer = props => {
 
   const allVectorTileLayers =
     !areSlidesLoading && allSlides
-      ? !foundationData.every(slide =>
-          ["vtChoroplethMap", "vtScatterPlotMap"].includes(slide)
+      ? foundationData.every(slide =>
+          ["vtChoroplethMap", "vtScatterPlotMap"].includes(slide.mapType)
         )
       : true;
 

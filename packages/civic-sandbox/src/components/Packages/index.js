@@ -1,16 +1,16 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable import/no-extraneous-dependencies */
 
-/* TODO: Remove no-unused-vars if tracking dashboard open status isn't needed */
+/**
+ * Note, this component doesn't really do much at this point other than render the SandboxComponent
+ * If package selector is added back mapIsOpen could be useful again
+ */
+
 import React from "react";
 import { connect } from "react-redux";
 import { css } from "emotion";
 import { bool, func, shape } from "prop-types";
 
-import {
-  PackageSelectorBox,
-  CivicSandboxDashboard
-} from "@hackoregon/component-library";
+import { PackageSelectorBox } from "@hackoregon/component-library";
 import SandboxComponent from "../Sandbox";
 import { fetchSandbox, setPackage } from "../../state/sandbox/actions";
 import {
@@ -30,8 +30,7 @@ export class Packages extends React.Component {
   constructor() {
     super();
     this.state = {
-      mapIsOpen: false,
-      dashboardIsOpen: false
+      mapIsOpen: false
     };
   }
 
@@ -47,30 +46,7 @@ export class Packages extends React.Component {
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({ mapIsOpen: true });
     }
-
-    const { selectedFoundationDatum: previousSelectedFoundation } = prevProps;
-    const { selectedFoundationDatum: currentSelectedFoundation } = this.props;
-
-    const previousID =
-      previousSelectedFoundation && previousSelectedFoundation.id
-        ? previousSelectedFoundation.id
-        : null;
-    const currentID =
-      currentSelectedFoundation && currentSelectedFoundation.id
-        ? currentSelectedFoundation.id
-        : null;
-
-    if (previousID !== currentID) {
-      this.toggleDashboardOpen();
-    }
-    if (previousID !== null && currentID === null) {
-      this.toggleDashboardClose();
-    }
   }
-
-  closeMap = () => {
-    this.setState({ mapIsOpen: false });
-  };
 
   handlePackageSelection = selectedPackage => {
     const { setPackage: hpsSetPackage } = this.props;
@@ -78,24 +54,10 @@ export class Packages extends React.Component {
     this.setState({ mapIsOpen: true });
   };
 
-  toggleDashboard = () => {
-    this.setState(prevState => ({
-      dashboardIsOpen: !prevState.dashboardIsOpen
-    }));
-  };
-
-  toggleDashboardOpen = () => {
-    this.setState({ dashboardIsOpen: true });
-  };
-
-  toggleDashboardClose = () => {
-    this.setState({ dashboardIsOpen: false });
-  };
-
   render() {
-    const { isError, sandbox, selectedFoundationDatum } = this.props;
+    const { isError, sandbox } = this.props;
 
-    const { mapIsOpen, dashboardIsOpen } = this.state;
+    const { mapIsOpen } = this.state;
 
     const packages = sandbox.packages
       ? sandbox.packages.map(p => ({
@@ -187,6 +149,5 @@ Packages.propTypes = {
   fetchSandbox: func,
   isLoading: bool,
   setPackage: func,
-  isError: bool,
-  selectedFoundationDatum: shape({})
+  isError: bool
 };
