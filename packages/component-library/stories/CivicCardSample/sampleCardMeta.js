@@ -279,7 +279,7 @@ const sampleCardMeta = (/* data */) => ({
     }
   ],
   // authors likely an array of keys in the future
-  authors: "Demo"
+  authors: []
 });
 
 export default sampleCardMeta;
