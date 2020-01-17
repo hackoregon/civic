@@ -4,7 +4,7 @@ import { storiesOf } from "@storybook/react";
 import { checkA11y } from "@storybook/addon-a11y";
 import { CardList } from "../src/index";
 import { storybookStyles } from "./storyStyles";
-import { SampleCard, SampleCardB } from "./CivicCardSample";
+import sampleFilterCardsWithTags from "./CivicCardSample/SampleCardFilterData";
 
 const CardRegistryMock = {
   tags: {
@@ -17,44 +17,19 @@ const CardRegistryMock = {
     Transit: 1,
     Demo: 1
   },
-  entries: [
-    {
+  entries: sampleFilterCardsWithTags.map(sampleCard => {
+    return {
       slug: "template-file-card",
       project: "@hackoregon/2019-template",
-      component: SampleCard
-    },
-    {
-      slug: "demo-card",
-      project: "@hackoregon/2019-template",
-      component: SampleCardB
-    },
-    {
-      slug: "template-file-card-1",
-      project: "@hackoregon/2019-template",
-      component: SampleCard
-    },
-    {
-      slug: "demo-card-1",
-      project: "@hackoregon/2019-template",
-      component: SampleCardB
-    },
-    {
-      slug: "template-file-card-2",
-      project: "@hackoregon/2019-template",
-      component: SampleCard
-    },
-    {
-      slug: "demo-card-2",
-      project: "@hackoregon/2019-template",
-      component: SampleCardB
-    }
-  ]
+      component: sampleCard
+    };
+  })
 };
 
 const tagsListExample = {
-  topics: ["Transportation", "Disaster Resilience", "Housing"],
+  topics: ["Race", "Transportation", "Disaster Resilience", "Housing"],
   locations: ["Portland", "Oregon", "Nationwide", "Your City"],
-  visualizations: ["Bar Chart", "Cloropleth Map", "Scatterplot"]
+  visualizations: ["Chart", "Infographic", "Cloropleth Map", "Scatterplot"]
 };
 
 const projectsMock = [
