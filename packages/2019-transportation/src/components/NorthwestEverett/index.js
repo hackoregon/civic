@@ -22,11 +22,11 @@ const timeRange = "14.5,18.75";
 const years = "2018,2019";
 const lines = "4,8,16,35,44,77";
 
-const initialUrl = `http://service.civicpdx.org/transportation2019/v1/toad/disturbanceStops/?limit=${limit}&offset=${offset}&months=${months}&time_range=${timeRange}&years=${years}&lines=${lines}&service_key=W&bounds=${
+const initialUrl = `https://service.civicpdx.org/transportation2019/v1/toad/disturbanceStops/?limit=${limit}&offset=${offset}&months=${months}&time_range=${timeRange}&years=${years}&lines=${lines}&service_key=W&bounds=${
   BOUNDING_BOX.NORTHWEST_EVERETT
 }&directions=${DIRECTION.OUTBOUND}`;
 
-// http://service.civicpdx.org/transportation2019/v1/toad/disturbanceStops/?months=8&directions=O&time_range=6.5,9&years=2018&lines=4,8,16,35,44,77&service_key=W
+// https://service.civicpdx.org/transportation2019/v1/toad/disturbanceStops/?months=8&directions=O&time_range=6.5,9&years=2018&lines=4,8,16,35,44,77&service_key=W
 
 export const NorthwestEverettContext = React.createContext({});
 

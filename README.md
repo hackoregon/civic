@@ -1,6 +1,6 @@
 # Civic [![Build Status](https://travis-ci.org/hackoregon/civic.svg?branch=master)](https://travis-ci.org/hackoregon/civic)
 
-This is the home of the front-end code for the [CIVIC Platform](http://civicplatform.org/). It's organized in a monorepo using Yarn Workspaces, but it's ok if you don't know what that means yet.
+This is the home of the front-end code for the [CIVIC Platform](https://civicplatform.org/). It's organized in a monorepo using Yarn Workspaces, but it's ok if you don't know what that means yet.
 
 **✨Demo Day⁇✨** _You may notice a lot of references to Demo Day! Our most recent Demo Day was September 11, 2019 in Portland, OR. [See highlights!](https://www.youtube.com/watch?v=99RFAwCJg-o)_
 
@@ -22,7 +22,7 @@ Fantastic! Share it with us by [opening a pull request](https://github.com/hacko
 
 🦚 **I want to explore more things:**
 
-[CIVIC Platform](http://civicplatform.org/) 👏 [Components and Style Guide (Storybook)](https://hackoregon.github.io/civic/) 👏 [Platform Architecture Guide](https://github.com/hackoregon/civic/blob/master/ARCHITECTURE.md) 👏 [Redux Guide](https://github.com/hackoregon/civic/blob/master/WORKING_WITH_REDUX.md) 👏 [Contributing Guide](https://github.com/hackoregon/civic/blob/master/CONTRIBUTING.md)
+[CIVIC Platform](https://civicplatform.org/) 👏 [Components and Style Guide (Storybook)](https://hackoregon.github.io/civic/) 👏 [Platform Architecture Guide](https://github.com/hackoregon/civic/blob/master/ARCHITECTURE.md) 👏 [Redux Guide](https://github.com/hackoregon/civic/blob/master/WORKING_WITH_REDUX.md) 👏 [Contributing Guide](https://github.com/hackoregon/civic/blob/master/CONTRIBUTING.md)
 
 # Setup
 

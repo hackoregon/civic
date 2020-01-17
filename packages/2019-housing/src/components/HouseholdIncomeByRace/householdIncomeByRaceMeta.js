@@ -128,7 +128,7 @@ const HouseholdIncomeByRaceMeta = (/* data */) => ({
           description:
             "Parento median interpolation method which is used by the census bureau for economical data"
         },
-        { link: "http://www.hackoregon.org", description: "Hack Oregon" },
+        { link: "https://www.hackoregon.org", description: "Hack Oregon" },
         {
           link: "https://www.civicsoftwarefoundation.org",
           description: "Civic Software Foundation"

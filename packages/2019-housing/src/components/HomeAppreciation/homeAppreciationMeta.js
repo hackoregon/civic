@@ -216,7 +216,7 @@ const HomeAppreciationMeta = (/* data */) => ({
           link: "https://cran.r-project.org/web/packages/geoR/geoR.pdf",
           description: "GeoR library R manual"
         },
-        { link: "http://www.hackoregon.org", description: "Hack Oregon" },
+        { link: "https://www.hackoregon.org", description: "Hack Oregon" },
         {
           link: "https://www.civicsoftwarefoundation.org",
           description: "Civic Software Foundation"

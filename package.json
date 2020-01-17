@@ -24,11 +24,13 @@
   "scripts": {
     "bootstrap": "yarn install --frozen-lockfile && yarn --cwd ./packages/component-library/ build && yarn --cwd ./packages/mock-wrapper/ build",
     "build": "lerna run build",
+    "build-netlify": "yarn workspace @hackoregon/component-library build && yarn workspace @hackoregon/mock-wrapper build && yarn workspace @hackoregon/2018 build && yarn copy-redirects",
     "card": "yarn new-card",
     "card:local-data": "yarn new-card:local-data",
     "card:minimal": "yarn new-card:minimal",
     "clean": "lerna clean && rimraf node_modules",
     "component": "yarn new-component",
+    "copy-redirects": "cp packages/2018/_redirects packages/2018/dist",
     "deploy-storybook": "NODE_OPTIONS=--max_old_space_size=4096 BABEL_ENV=esm storybook-to-ghpages",
     "eslint-check": "eslint --print-config . | eslint-config-prettier-check",
     "in": "lerna run --scope",

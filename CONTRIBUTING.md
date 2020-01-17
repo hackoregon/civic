@@ -18,8 +18,8 @@ contributor may want to learn more about. Here's a list of resources:
 Our testing tools are:
 
 1. [Mocha](https://mochajs.org/)
-2. [Chai](http://www.chaijs.com/)
-3. [Enzyme](http://airbnb.io/enzyme/)
+2. [Chai](https://www.chaijs.com/)
+3. [Enzyme](https://airbnb.io/enzyme/)
 4. [JSDom](https://github.com/jsdom/jsdom)
 
 We use the following tools to ensure code quality and consistency:
