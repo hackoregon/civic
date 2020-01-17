@@ -98,9 +98,6 @@ const Footer = props => (
       </div>
       <Logo css={logoStyle(props)} type="squareLogo" />
     </div>
-    <a href="https://www.netlify.com">
-      <img src="https://www.netlify.com/img/global/badges/netlify-color-bg.svg"/>
-    </a>                 
   </footer>
 );
 
