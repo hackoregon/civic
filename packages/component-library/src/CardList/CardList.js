@@ -123,6 +123,21 @@ const CardList = ({ CardRegistry, tagsList, projects }) => {
     setMobileOpen(!mobileOpen);
   };
 
+  const handleCheckboxChange = (category, id) => {
+    if (showAllStories) setShowAllStories(false);
+    if (activeFilters[category].includes(id)) {
+      setActiveFilters({
+        ...activeFilters,
+        [category]: activeFilters[category].filter(tag => tag !== id)
+      });
+    } else {
+      setActiveFilters({
+        ...activeFilters,
+        [category]: [...activeFilters[category], id]
+      });
+    }
+  };
+
   const drawer = (
     <div className={classes.toolbar}>
       <h1 css={filterPadding}>Filters</h1>
@@ -151,22 +166,7 @@ const CardList = ({ CardRegistry, tagsList, projects }) => {
                     <Checkbox
                       value={activeFilters[category].includes(id)}
                       label={id}
-                      onChange={() => {
-                        if (showAllStories) setShowAllStories(false);
-                        if (activeFilters[category].includes(id)) {
-                          setActiveFilters({
-                            ...activeFilters,
-                            [category]: activeFilters[category].filter(
-                              tag => tag !== id
-                            )
-                          });
-                        } else {
-                          setActiveFilters({
-                            ...activeFilters,
-                            [category]: [...activeFilters[category], id]
-                          });
-                        }
-                      }}
+                      onChange={() => handleCheckboxChange(category, id)}
                     />
                   </ListItem>
                 ))}
