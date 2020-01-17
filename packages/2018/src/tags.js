@@ -11,7 +11,6 @@ export default {
     "HOLC",
     "Permits",
     "ADUs",
-    "Black",
     "Gentrification"
   ],
   locations: [
