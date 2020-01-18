@@ -166,6 +166,9 @@ const HomePage = () => {
             className="placeholder-section-image"
             src={placeholderWorkImg}
             alt="placeholder"
+            css={css`
+              filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.2));
+            `}
           />
         </div>
 
