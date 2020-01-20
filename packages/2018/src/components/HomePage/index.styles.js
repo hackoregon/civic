@@ -98,7 +98,6 @@ export default (greatestWidth, collapseWidth) => ({
     fontWeight: "300",
     lineHeight: "120%",
     maxWidth: "600px",
-    width: "100%",
     marginBottom: `${60 / defaultFontSize}rem`,
 
     [`@media (max-width: ${collapseWidth}px)`]: {
