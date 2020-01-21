@@ -24,11 +24,11 @@ const panelsContainer = css`
 
 const panelStyle = css`
   display: grid;
-  grid-template-columns: 1fr 200px;
+  grid-template-columns: 1fr 100px;
 `;
 
 const imgStyle = css`
-  width: 150px;
+  width: 100px;
   justify-self: center;
 `;
 
