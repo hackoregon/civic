@@ -232,25 +232,23 @@ const CardList = ({ CardRegistry, tagsList, projects }) => {
                 Filters
               </Button>
             </section>
-            {numberOfFiltersSelected(activeFilters, categories) === 0 && (
-              <section>
-                <h2 css={headingPadding}>
-                  <strong>Featured Projects: Hack Oregon Demo Day</strong>
-                </h2>
-                <ul className={classes.entriesList}>
-                  {projects.map(entry => (
-                    <li key={shortid.generate()} className={classes.entry}>
-                      <ProjectCard
-                        title={entry.title}
-                        description={entry.description}
-                        link={entry.link}
-                        type={entry.type}
-                      />
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            )}
+            <section>
+              <h2 css={headingPadding}>
+                <strong>Featured Projects: Hack Oregon Demo Day</strong>
+              </h2>
+              <ul className={classes.entriesList}>
+                {projects.map(entry => (
+                  <li key={shortid.generate()} className={classes.entry}>
+                    <ProjectCard
+                      title={entry.title}
+                      description={entry.description}
+                      link={entry.link}
+                      type={entry.type}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </section>
             {filteredEntries.length > 0 ? (
               <section>
                 <h2 css={headingPadding}>
