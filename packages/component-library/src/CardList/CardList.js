@@ -21,7 +21,7 @@ import Header from "../Header/Header";
 import BrandColors from "../_Themes/Brand/BrandColors";
 import ProjectCard from "./ProjectCard";
 import cardListStyling from "./cardListStyling";
-import filterCardsBasedOnFilterStatus from "./filterCardsByActiveTags";
+import cardShouldShow from "./displayUtils";
 
 import {
   Checkbox,
@@ -60,17 +60,17 @@ function deriveCategoryNamesFromTagsList(tagsList) {
   return Object.keys(tagsList);
 }
 
-function deriveInitialFilterStateFromCategories(categories) {
+function deriveInitialFilterStateFromCategories(filterCategories) {
   const stateObject = {};
-  categories.forEach(category => {
+  filterCategories.forEach(category => {
     stateObject[category] = [];
   });
   return stateObject;
 }
 
-function numberOfFiltersSelected(activeFilters, categories) {
-  const flatListOfActiveFilters = categories.reduce(
-    (accumulator, category) => [...accumulator, activeFilters[category]],
+function numberOfFiltersSelected(activeFilters, filterCategories) {
+  const flatListOfActiveFilters = filterCategories.reduce(
+    (accumulator, category) => [...accumulator, ...activeFilters[category]],
     []
   );
 
@@ -84,7 +84,7 @@ const CardList = ({ CardRegistry, tagsList, projects }) => {
   // eslint-disable-next-line no-console
   console.log("Tag Count:", tags);
 
-  const categories = deriveCategoryNamesFromTagsList(tagsList);
+  const filterCategories = deriveCategoryNamesFromTagsList(tagsList);
 
   const classes = useStyles();
   const theme = useTheme();
@@ -98,7 +98,7 @@ const CardList = ({ CardRegistry, tagsList, projects }) => {
 
   // holds state for checkboxes (nested object where specific tags are boolean)
   const [activeFilters, setActiveFilters] = useState(
-    deriveInitialFilterStateFromCategories(categories)
+    deriveInitialFilterStateFromCategories(filterCategories)
   );
 
   const categoryOpeners = {
@@ -146,7 +146,7 @@ const CardList = ({ CardRegistry, tagsList, projects }) => {
         aria-labelledby="nested-list-subheader"
         className={classes.filtersList}
       >
-        {categories.map(category => (
+        {filterCategories.map(category => (
           <Fragment>
             <ListItem button onClick={categoryHandlers[`${category}Handler`]}>
               <ListItemText
@@ -179,12 +179,12 @@ const CardList = ({ CardRegistry, tagsList, projects }) => {
   );
 
   const filteredEntries = entries.filter(entry =>
-    filterCardsBasedOnFilterStatus(
+    cardShouldShow(
       entry.component.tags,
-      categories,
+      filterCategories,
       activeFilters,
       showAllStories,
-      numberOfFiltersSelected(activeFilters, categories)
+      numberOfFiltersSelected(activeFilters, filterCategories)
     )
   );
 
@@ -232,23 +232,25 @@ const CardList = ({ CardRegistry, tagsList, projects }) => {
                 Filters
               </Button>
             </section>
-            <section>
-              <h2 css={headingPadding}>
-                <strong>Featured Projects: Hack Oregon Demo Day</strong>
-              </h2>
-              <ul className={classes.entriesList}>
-                {projects.map(entry => (
-                  <li key={shortid.generate()} className={classes.entry}>
-                    <ProjectCard
-                      title={entry.title}
-                      description={entry.description}
-                      link={entry.link}
-                      type={entry.type}
-                    />
-                  </li>
-                ))}
-              </ul>
-            </section>
+            {numberOfFiltersSelected(activeFilters, filterCategories) === 0 && (
+              <section>
+                <h2 css={headingPadding}>
+                  <strong>Featured Projects: Hack Oregon Demo Day</strong>
+                </h2>
+                <ul className={classes.entriesList}>
+                  {projects.map(entry => (
+                    <li key={shortid.generate()} className={classes.entry}>
+                      <ProjectCard
+                        title={entry.title}
+                        description={entry.description}
+                        link={entry.link}
+                        type={entry.type}
+                      />
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
             {filteredEntries.length > 0 ? (
               <section>
                 <h2 css={headingPadding}>
