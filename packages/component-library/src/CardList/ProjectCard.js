@@ -113,17 +113,17 @@ const ProjectCard = ({ title, description, link, type }) => {
           padding: 0 0.9375rem 0 1.6875rem;
         `}
       >
-        <CardContent>
-          <h2>
-            <Link css={cardHeadlineLink} to={link}>
+        <Link css={cardHeadlineLink} to={link}>
+          <CardContent>
+            <h2>
               {startCase(type)}: {title}
-            </Link>
-          </h2>
-          <p>{description}</p>
-        </CardContent>
-        <CardActions>
-          <span css={nonInteractiveCta}>{types[type].action}</span>
-        </CardActions>
+            </h2>
+            <p>{description}</p>
+          </CardContent>
+          <CardActions>
+            <span css={nonInteractiveCta}>{types[type].action}</span>
+          </CardActions>
+        </Link>
       </div>
     </Card>
   );
