@@ -17,6 +17,7 @@ export default (
   numberOfFiltersSelected
 ) => {
   if (!storyCardTags) return false;
+  if (!storyCardTags.length) return false;
   if (showAllStories) return true;
   if (numberOfFiltersSelected === 0) return true;
 

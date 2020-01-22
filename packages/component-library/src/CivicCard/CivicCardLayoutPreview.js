@@ -43,6 +43,10 @@ const cardHeadlineLink = css`
   }
 `;
 
+const cardActionLink = css`
+  color: unset;
+`;
+
 const watermarkContainer = css`
   position: absolute;
   left: 0;
@@ -140,7 +144,9 @@ function CivicCardLayoutPreview({ cardMeta }) {
           </ul>
         </CardContent>
         <CardActions>
-          <span css={nonInteractiveCta}>Learn more</span>
+          <CivicCardLink slug={cardMeta.slug} css={cardActionLink}>
+            <span css={nonInteractiveCta}>Learn more</span>
+          </CivicCardLink>
         </CardActions>
       </div>
     </Card>
