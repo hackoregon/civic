@@ -81,7 +81,7 @@ const PieChart = props => {
               tooltip={tooltip}
             />
           }
-          events={chartEvents(theme, true)}
+          events={tooltip ? chartEvents(theme, true) : null}
           containerComponent={
             <VictoryContainer height={adjustedHeight} width={width} />
           }
