@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { VictoryPie, VictoryLabel, VictoryContainer } from "victory";
+import { VictoryPie, VictoryContainer } from "victory";
 import ChartContainer from "../ChartContainer";
 import { VictoryTheme } from "../_Themes/index";
 import SimpleLegend from "../SimpleLegend";
+import PieChartLabels from "./PieChartLabels";
 import DataChecker from "../utils/DataChecker";
 
 const PieChart = props => {
@@ -19,6 +20,7 @@ const PieChart = props => {
     error,
     halfDoughnut,
     useLegend,
+    tooltip,
     width,
     height,
     theme
@@ -32,9 +34,9 @@ const PieChart = props => {
   const legendProps = {};
   const colorScale = colors.length ? colors : theme.group.colorScale;
   const aspectRatio = halfDoughnut ? 650 / 175 : 650 / 350;
+  const totalValue = safeData.reduce((acc, datum) => acc + datum[dataValue], 0);
 
   if (useLegend) {
-    legendProps.labels = () => null;
     legendProps.padding = 25;
   }
 
@@ -68,11 +70,20 @@ const PieChart = props => {
           y={dataValue}
           startAngle={startAngle}
           endAngle={endAngle}
-          labelComponent={<VictoryLabel style={{ ...theme.pieLabel.style }} />}
-          {...legendProps}
+          labelComponent={
+            <PieChartLabels
+              dataLabel={dataLabel}
+              dataValue={dataValue}
+              totalValue={totalValue}
+              useLegend={useLegend}
+              theme={theme}
+              tooltip={tooltip}
+            />
+          }
           containerComponent={
             <VictoryContainer height={adjustedHeight} width={width} />
           }
+          {...legendProps}
         />
       </DataChecker>
     </ChartContainer>
@@ -96,6 +107,7 @@ PieChart.propTypes = {
   subtitle: PropTypes.string,
   title: PropTypes.string,
   useLegend: PropTypes.bool,
+  tooltip: PropTypes.bool,
   width: PropTypes.number,
   theme: PropTypes.shape({})
 };
@@ -104,7 +116,8 @@ PieChart.defaultProps = {
   dataLabel: "x",
   dataValue: "y",
   theme: VictoryTheme,
-  colors: []
+  colors: [],
+  tooltip: true
 };
 
 export default PieChart;
