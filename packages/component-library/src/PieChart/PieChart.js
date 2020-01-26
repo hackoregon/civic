@@ -6,6 +6,7 @@ import { VictoryTheme } from "../_Themes/index";
 import SimpleLegend from "../SimpleLegend";
 import PieChartLabels from "./PieChartLabels";
 import DataChecker from "../utils/DataChecker";
+import { chartEvents } from "../utils/chartHelpers";
 
 const PieChart = props => {
   const {
@@ -80,6 +81,7 @@ const PieChart = props => {
               tooltip={tooltip}
             />
           }
+          events={chartEvents(theme, true)}
           containerComponent={
             <VictoryContainer height={adjustedHeight} width={width} />
           }

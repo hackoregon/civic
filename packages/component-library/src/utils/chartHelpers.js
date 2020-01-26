@@ -1,7 +1,15 @@
 import { VictoryTheme } from "../_Themes/index";
 
-const chartEvents = (theme = VictoryTheme) => {
+const chartEvents = (theme = VictoryTheme, replaceMutationStyles) => {
   const tooltipColor = theme.tooltip.style.customHoverColor;
+  const defaultMutation = props => ({
+    style: Object.assign(props.style, { fill: tooltipColor })
+  });
+  const replaceStyleMutation = () => ({ style: { fill: tooltipColor } });
+  const tooltipMutation = replaceMutationStyles
+    ? replaceStyleMutation
+    : defaultMutation;
+
   return [
     {
       target: "data",
@@ -10,9 +18,7 @@ const chartEvents = (theme = VictoryTheme) => {
           return [
             {
               target: "data",
-              mutation: props => ({
-                style: Object.assign(props.style, { fill: tooltipColor })
-              })
+              mutation: tooltipMutation
             },
             {
               target: "labels",
