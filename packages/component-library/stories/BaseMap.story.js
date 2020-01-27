@@ -108,6 +108,20 @@ export default () =>
           GROUP_IDS.CUSTOM
         );
 
+        const minZoom = number(
+          "Minimum Zoom:",
+          6,
+          ZOOM_OPTIONS,
+          GROUP_IDS.CUSTOM
+        );
+
+        const maxZoom = number(
+          "Maximum Zoom:",
+          20,
+          ZOOM_OPTIONS,
+          GROUP_IDS.CUSTOM
+        );
+
         const initialPitch = number(
           "Initial Pitch:",
           0,
@@ -134,6 +148,8 @@ export default () =>
             navigation={navigation}
             onBaseMapClick={onBaseMapClick}
             useScrollZoom={useScrollZoom}
+            minZoom={minZoom}
+            maxZoom={maxZoom}
           />
         );
       },

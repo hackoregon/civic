@@ -21,6 +21,10 @@ These props can be set in the Custom story:
   - This prop expects a decimal between -90 and 90
 - **initialZoom:** the initial zoom level of the Base Map
   - This prop expects a number between 0 and 24
+- **minZoom:** the initial zoom level of the Base Map
+  - This prop expects a number between 0 and 24
+- **maxZoom:** the initial zoom level of the Base Map
+  - This prop expects a number between 0 and 24
 - **initialPitch:** the initial pitch (tilt) of the Base Map
   - This prop expects a number between 0 and 60
 - **height:** the height of the Base Map
