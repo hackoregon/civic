@@ -9,6 +9,7 @@ These properties can be set in the Standard story:
 - Title
 - Subtitle
 - Use legend
+- Tooltip
 - Half doughnut
 - Data label
 - Data value

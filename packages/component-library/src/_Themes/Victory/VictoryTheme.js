@@ -6,7 +6,6 @@ const { victoryColors } = VisualizationColors;
 
 // Brand Colors
 const civicPrimary = BrandColors.primary.hex;
-const civicSecondary = BrandColors.secondary.hex;
 const civicTertiary = BrandColors.plumLight.hex; // keeping plumLight for bar fill
 const civicSecondaryLighter = BrandColors.medium.hex;
 const civicSecondaryLightest = BrandColors.subdued.hex;
@@ -283,11 +282,11 @@ export default {
           strokeWidth: 0
         },
         labels: centeredLabelStyles,
-        customHoverColor: civicSecondary
+        customHoverColor: civicPrimary
       },
       flyoutStyle: {
-        stroke: "transparent",
-        strokeWidth: 1,
+        stroke: civicPrimary,
+        strokeWidth: 0.25,
         fill: civicSecondaryLightest
       },
       flyoutProps: {

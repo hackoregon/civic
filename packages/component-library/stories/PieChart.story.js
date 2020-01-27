@@ -36,6 +36,7 @@ export default () =>
         );
         const halfDoughnut = boolean("Half doughnut", true, GROUP_IDS.DESIGN);
         const useLegend = boolean("Use legend", true, GROUP_IDS.DESIGN);
+        const tooltip = boolean("Tooltip", true, GROUP_IDS.DESIGN);
         const dataLabel = text("Data label", "x", GROUP_IDS.DATA);
         const dataValue = text("Data value", "y", GROUP_IDS.DATA);
         const sampleData = [
@@ -57,6 +58,7 @@ export default () =>
             height={350}
             halfDoughnut={halfDoughnut}
             useLegend={useLegend}
+            tooltip={tooltip}
           />
         );
       },
@@ -72,6 +74,7 @@ export default () =>
           GROUP_IDS.LABELS
         );
         const useLegend = boolean("Use legend", false, GROUP_IDS.DESIGN);
+        const tooltip = boolean("Tooltip", true, GROUP_IDS.DESIGN);
         const halfDoughnut = boolean("Half doughnut", true, GROUP_IDS.DESIGN);
         const sampleData = [
           { contributor: "Business entity", amount: 35 },
@@ -112,6 +115,7 @@ export default () =>
             innerRadius={innerRadius}
             halfDoughnut={halfDoughnut}
             useLegend={useLegend}
+            tooltip={tooltip}
             theme={(name => themes[name])(theme)}
             loading={loading}
           />
