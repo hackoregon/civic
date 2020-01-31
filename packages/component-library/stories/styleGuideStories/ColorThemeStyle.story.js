@@ -1,8 +1,12 @@
 import React from "react";
+import { scaleQuantize } from "d3";
 import { storybookStyles } from "../storyStyles";
 import { BrandColors, VisualizationColors } from "../../src/_Themes/index";
+import { civicFormat, MapLegend } from "../..";
 
 const categoricalColors = VisualizationColors.categorical;
+const sequentialColors = VisualizationColors.sequential;
+const { titleCase } = civicFormat;
 
 const ColorThemeStyle = () => (
   <div style={storybookStyles.main}>
@@ -180,6 +184,24 @@ const ColorThemeStyle = () => (
         <p className="DataText">{categoricalColors.yellow.rgb} </p>
       </div>
     </div>
+    <h2>Visualizations: Sequential</h2>
+    {Object.keys(sequentialColors).map(name => (
+      <div style={storybookStyles.solidColorSample}>
+        <div style={storybookStyles.colorBlock}>
+          <MapLegend
+            colorScale={scaleQuantize()
+              .domain([0, 1])
+              .range(sequentialColors[name])}
+            formatValues={() => ``}
+            label=""
+            vertical={false}
+          />
+        </div>
+        <div>
+          <h4>{titleCase(name)}</h4>
+        </div>
+      </div>
+    ))}
   </div>
 );
 
