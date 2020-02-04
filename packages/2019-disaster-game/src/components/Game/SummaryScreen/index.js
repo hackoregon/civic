@@ -142,7 +142,7 @@ const buttonStyle = css`
 const buttonFont = css`
   width: 100%;
   margin: 0 auto;
-  font-family: "Luckiest Guy", sans-serif;
+  font-family: "Akkurat", sans-serif;
   font-size: 8rem;
   color: white;
 `;

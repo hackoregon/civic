@@ -32,7 +32,7 @@ const labelStyle = css`
 `;
 
 const savedNumber = css`
-  font-family: "Boogaloo", sans-serif;
+  font-family: "Akkurat", sans-serif;
   font-size: 4.5rem;
   color: ${palette.darkGrey};
   display: inline-block;

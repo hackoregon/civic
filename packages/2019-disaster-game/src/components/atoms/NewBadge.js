@@ -36,7 +36,7 @@ const badgeStyle = css`
 `;
 
 const badgeText = css`
-  font-family: "Luckiest Guy", sans-serif;
+  font-family: "Akkurat", sans-serif;
   font-size: 9rem;
   margin: 0;
   color: #fff;

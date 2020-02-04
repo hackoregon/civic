@@ -32,7 +32,7 @@ const messageStyle = css`
 `;
 
 const titleText = css`
-  font-family: "Luckiest Guy", sans-serif;
+  font-family: "Akkurat", sans-serif;
   font-size: 14rem;
   margin: 50px 0 0;
   color: ${palette.darkGrey};
@@ -81,7 +81,7 @@ const playButton = css`
 const buttonFont = css`
   width: 100%;
   margin: 0 auto;
-  font-family: "Luckiest Guy", sans-serif;
+  font-family: "Akkurat", sans-serif;
   font-size: 7rem;
   color: white;
 `;

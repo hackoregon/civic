@@ -44,7 +44,7 @@ const statNumber = css`
   font-size: 90px;
   line-height: 90px;
   margin: 0;
-  font-family: "Boogaloo", sans-serif;
+  font-family: "Akkurat", sans-serif;
 `;
 
 const badgesContainer = css`

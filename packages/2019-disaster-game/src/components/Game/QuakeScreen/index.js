@@ -36,7 +36,7 @@ const messageStyle = css`
   transition: opacity 0.5s;
 
   > p {
-    font-family: "Luckiest Guy", sans-serif;
+    font-family: "Akkurat", sans-serif;
     font-size: 20rem;
     margin: 0;
     line-height: normal;
