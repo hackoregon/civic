@@ -92,10 +92,6 @@ const PieChart = props => {
   );
 };
 
-PieChart.defaultProps = {
-  useLegend: false
-};
-
 PieChart.propTypes = {
   colors: PropTypes.arrayOf(PropTypes.string),
   data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
@@ -119,7 +115,8 @@ PieChart.defaultProps = {
   dataValue: "y",
   theme: VictoryTheme,
   colors: [],
-  tooltip: true
+  tooltip: true,
+  useLegend: false
 };
 
 export default PieChart;
