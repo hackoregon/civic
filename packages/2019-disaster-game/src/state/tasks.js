@@ -50,7 +50,7 @@ const taskPhases = {
   [MODAL_SOLVED_TASK]: { time: 6 },
   [MODAL_UNSOLVED_TASK]: { time: 6 },
   [MODAL_NO_ITEM]: { time: 6 },
-  [MODAL_BADGE_EARNED]: { time: 6 }
+  [MODAL_BADGE_EARNED]: { time: 7 }
 };
 
 const actionTypes = {

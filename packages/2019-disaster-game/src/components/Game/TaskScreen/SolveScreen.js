@@ -17,11 +17,12 @@ const screenLayout = css`
   background: beige;
   z-index: 101;
   transform: translateY(-100%);
-  transition: transform 1s;
+  transition: transform 3s;
 `;
 
 const onScreenStyle = css`
   transform: translateY(0%);
+  transition: transform 1s;
 `;
 
 const requiredItemsStyle = css`
