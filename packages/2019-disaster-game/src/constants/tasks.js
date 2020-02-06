@@ -58,7 +58,6 @@ export const tasks = {
   // Save Yourself
   [RUBBLE]: {
     id: RUBBLE,
-    time: 30,
     audioInstruction: SFX_TYPES.rubbleInstructionBoy,
     audioQuestion: sample([
       SFX_TYPES.rubbleQuestionGirl,
@@ -85,7 +84,6 @@ export const tasks = {
   },
   [DUST]: {
     id: DUST,
-    time: 30,
     audioInstruction: sample([
       SFX_TYPES.dustInstructionGirl,
       SFX_TYPES.dustInstructionBoy
@@ -114,7 +112,6 @@ export const tasks = {
   // Save Others
   [COLD]: {
     id: COLD,
-    time: 20,
     audioInstruction: SFX_TYPES.coldInstructionBoy,
     audioQuestion: sample([
       SFX_TYPES.defaultQuestionGirl,
@@ -140,7 +137,6 @@ export const tasks = {
   },
   [FIRE]: {
     id: FIRE,
-    time: 20,
     audioInstruction: SFX_TYPES.fireInstructionBoy,
     audioQuestion: sample([
       SFX_TYPES.defaultQuestionGirl,
@@ -166,7 +162,6 @@ export const tasks = {
   },
   [HUNGER]: {
     id: HUNGER,
-    time: 20,
     audioInstruction: sample([
       SFX_TYPES.hungerInstructionGirl,
       SFX_TYPES.hungerInstructionBoy
@@ -195,7 +190,6 @@ export const tasks = {
   },
   [HOLE]: {
     id: HOLE,
-    time: 20,
     audioInstruction: SFX_TYPES.holeInstructionBoy,
     audioQuestion: sample([
       SFX_TYPES.defaultQuestionGirl,
@@ -221,7 +215,6 @@ export const tasks = {
   },
   [INJURY]: {
     id: INJURY,
-    time: 20,
     audioInstruction: SFX_TYPES.injuryInstructionBoy,
     audioQuestion: sample([
       SFX_TYPES.defaultQuestionGirl,
@@ -247,7 +240,6 @@ export const tasks = {
   },
   [WEATHER]: {
     id: WEATHER,
-    time: 20,
     audioInstruction: SFX_TYPES.coldInstructionBoy,
     audioQuestion: SFX_TYPES.coldQuestionBoy,
     requiredItem: tent,
@@ -270,7 +262,6 @@ export const tasks = {
   },
   [LOST_PET]: {
     id: LOST_PET,
-    time: 20,
     audioInstruction: SFX_TYPES.lostPetInstructionBoy,
     audioQuestion: sample([
       SFX_TYPES.defaultQuestionGirl,
@@ -296,7 +287,6 @@ export const tasks = {
   },
   [THIRST]: {
     id: THIRST,
-    time: 20,
     audioInstruction: SFX_TYPES.thirstInstructionGirl,
     audioQuestion: sample([
       SFX_TYPES.defaultQuestionGirl,
