@@ -50,18 +50,31 @@ const SuccessfulCompleteTaskModal = ({ completedTask, allItems }) => {
   const { requiredItem } = completedTask;
   const requiredItemData = allItems[requiredItem];
   const { people, pets } = completedTask.completedResults;
-  const savedMessage = `
-    You helped
-    ${people ? ` ${people} ${people > 1 ? "people" : "person"}` : ""}
-    ${people && pets ? " and " : ""}
-    ${pets ? ` ${pets} pet${pets > 1 ? "s" : ""}` : ""}
-    by using ${requiredItemData.itemTitle}.
-  `;
 
   return (
     <div css={modalContainer}>
       <div css={messageStyle}>
-        <p css={textStyle}>{savedMessage}</p>
+        <p css={textStyle}>
+          You helped
+          {people ? (
+            <span>
+              {" "}
+              {people}&nbsp;{people > 1 ? "people" : "person"}
+            </span>
+          ) : (
+            ""
+          )}
+          {people && pets ? " and " : ""}
+          {pets ? (
+            <span>
+              {" "}
+              {pets}&nbsp;pet{pets > 1 ? "s" : ""}
+            </span>
+          ) : (
+            ""
+          )}
+          <span> by using {requiredItemData.itemTitle}.</span>
+        </p>
         <img
           css={imgStyle}
           src={requiredItemData.fullSvg}
