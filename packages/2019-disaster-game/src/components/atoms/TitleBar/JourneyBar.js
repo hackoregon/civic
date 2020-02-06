@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 
 import CheckmarkSVG from "../../../../assets/checkmark.svg";
 import NoCheckEllipseSVG from "../../../../assets/no-check-ellipse.svg";
-import Palette from "../../../constants/style";
+import Palette, { palette } from "../../../constants/style";
 import {
   getTaskPhase,
   taskPhaseKeys,
@@ -49,6 +49,8 @@ const journeyStage = css`
 
 const activeJourneyStage = css`
   grid-template-columns: auto auto;
+  border-bottom: 10px solid ${palette.lightGreen};
+  padding: 15px 0;
 `;
 
 const iconStyle = css`
