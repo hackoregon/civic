@@ -37,6 +37,7 @@ const messageStyle = css`
 
   > p {
     font-family: "Akkurat", sans-serif;
+    font-weight: 900;
     font-size: 20rem;
     margin: 0;
     line-height: normal;
@@ -45,7 +46,6 @@ const messageStyle = css`
     text-shadow: 0 10px 13px ${palette.darkGrey}, 7px 0 0px ${palette.darkGrey},
       19px 20px 10px ${palette.darkGrey}, 20px 10px 10px ${palette.darkGrey},
       20px 30px 0px ${palette.darkGrey};
-    letter-spacing: 0.5rem;
   }
 `;
 

@@ -37,6 +37,7 @@ const badgeStyle = css`
 
 const badgeText = css`
   font-family: "Akkurat", sans-serif;
+  font-weight: 600;
   font-size: 9rem;
   margin: 0;
   color: #fff;

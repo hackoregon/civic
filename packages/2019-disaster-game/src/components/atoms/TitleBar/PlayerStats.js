@@ -35,6 +35,7 @@ const leftStatGroup = css`
 
 const statText = css`
   font-size: 60px;
+  font-weight: 600;
   line-height: 60px;
   margin: 0 10px 0 0;
   font-family: "Akkurat", sans-serif;

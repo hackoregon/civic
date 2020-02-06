@@ -149,6 +149,7 @@ const buttonFont = css`
   font-family: "Akkurat", sans-serif;
   font-size: 8rem;
   color: white;
+  font-weight: 600;
 `;
 
 // Background animation styles

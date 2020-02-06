@@ -33,10 +33,10 @@ const messageStyle = css`
 
 const titleText = css`
   font-family: "Akkurat", sans-serif;
+  font-weight: 600;
   font-size: 14rem;
   margin: 50px 0 0;
   color: ${palette.darkGrey};
-  letter-spacing: 5px;
 `;
 
 const buttonContainer = css`
@@ -82,6 +82,7 @@ const buttonFont = css`
   width: 100%;
   margin: 0 auto;
   font-family: "Akkurat", sans-serif;
+  font-weight: 600;
   font-size: 7rem;
   color: white;
 `;
@@ -100,7 +101,7 @@ const RestartModal = ({ cancelRestart, restartGame, playSFX }) => {
   return (
     <div css={modalContainer}>
       <div css={messageStyle}>
-        <p css={titleText}>Still Playing?</p>
+        <p css={titleText}>STILL PLAYING?</p>
         <div css={buttonContainer}>
           <button
             onMouseDown={doRestartGame}
@@ -109,7 +110,7 @@ const RestartModal = ({ cancelRestart, restartGame, playSFX }) => {
             type="button"
             css={[buttonStyle, restartButton]}
           >
-            <p css={buttonFont}>Start Over</p>
+            <p css={buttonFont}>START OVER</p>
           </button>
           <button
             onMouseDown={doCancelRestart}
@@ -118,7 +119,7 @@ const RestartModal = ({ cancelRestart, restartGame, playSFX }) => {
             type="button"
             css={[buttonStyle, playButton]}
           >
-            <p css={buttonFont}>Continue</p>
+            <p css={buttonFont}>CONTINUE</p>
           </button>
         </div>
       </div>
