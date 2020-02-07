@@ -298,7 +298,8 @@ export const tasksReducer = createReducer(initialState, {
     } else if (state.activeTaskPhase === MODAL_BADGE_EARNED) {
       const newBadgeEarned = getNewBadgeEarned(state);
       newBadgeEarned.shown = true;
-      if (state.activeTaskIndex === 2) {
+      if (state.activeTaskIndex === 1) {
+        phaseTimer.setDuration(taskPhases[MODAL_SAVE_OTHERS_INTRO].time);
         state.activeTaskPhase = MODAL_SAVE_OTHERS_INTRO;
       } else {
         state.activeTaskIndex += 1;
