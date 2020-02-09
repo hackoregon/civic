@@ -72,7 +72,7 @@ const buttonStyle = css`
 
 const buttonFont = css`
   width: 100%;
-  margin: 0 auto;
+  margin: 1.5rem auto 0;
   font-family: "Akkurat", sans-serif;
   font-size: 12rem;
   color: white;
