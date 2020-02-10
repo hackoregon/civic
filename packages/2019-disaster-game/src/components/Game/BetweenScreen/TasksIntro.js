@@ -25,11 +25,9 @@ const TasksIntro = () => {
   return (
     <div css={contentWrapper}>
       <div>
-        <p css={contentTitle}>Help yourself after an earthquake first...</p>
+        <p css={contentTitle}>Help yourself after an earthquake first,</p>
         <br />
-        <p css={contentTitle}>
-          <em>then help your neighbors!</em>
-        </p>
+        <p css={contentTitle}>then help your neighbors!</p>
       </div>
     </div>
   );

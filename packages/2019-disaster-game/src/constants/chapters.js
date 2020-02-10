@@ -24,7 +24,7 @@ const CHAPTERS = [
     id: KIT,
     title: "Kit",
     tickerTape: KitTickerTape,
-    duration: 25,
+    duration: 30,
     showTitleBar: true
   },
   {

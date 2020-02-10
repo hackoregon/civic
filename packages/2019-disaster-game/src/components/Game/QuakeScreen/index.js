@@ -36,16 +36,16 @@ const messageStyle = css`
   transition: opacity 0.5s;
 
   > p {
-    font-family: "Luckiest Guy", sans-serif;
+    font-family: "Akkurat", sans-serif;
+    font-weight: 900;
     font-size: 20rem;
     margin: 0;
     line-height: normal;
 
     color: #ffffff;
-    text-shadow: 0 10px 13px ${palette.darkGrey}, 7px 0 0px ${palette.darkGrey},
-      19px 20px 10px ${palette.darkGrey}, 20px 10px 10px ${palette.darkGrey},
-      20px 30px 0px ${palette.darkGrey};
-    letter-spacing: 0.5rem;
+    text-shadow: 0 5px 7px ${palette.darkGrey}, 4px 0 0px ${palette.darkGrey},
+      11px 10px 3px ${palette.darkGrey}, 10px 5px 5px ${palette.darkGrey},
+      10px 15px 0px ${palette.darkGrey};
   }
 `;
 

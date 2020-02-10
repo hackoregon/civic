@@ -36,7 +36,8 @@ const badgeStyle = css`
 `;
 
 const badgeText = css`
-  font-family: "Luckiest Guy", sans-serif;
+  font-family: "Akkurat", sans-serif;
+  font-weight: 600;
   font-size: 9rem;
   margin: 0;
   color: #fff;
@@ -59,11 +60,14 @@ const NewBadge = ({
   fade = true
 }) => {
   const [badgeInfo, setBadgeInfo] = useState(badgeData);
-  const [hideBadge, setHideBadge] = useState(false);
+  const [hideBadge, setHideBadge] = useState(true);
   const fadeBadgeTimeout = (displayBadgeTime - 1) * 1000;
 
   useEffect(() => {
     setBadgeInfo(badgeData);
+    const showBadgeTimeout = setTimeout(() => {
+      setHideBadge(false);
+    }, 500);
     const hideBadgeTimeout = setTimeout(() => {
       if (fade) setHideBadge(true);
       if (finishDisplayCallback) finishDisplayCallback();
@@ -72,6 +76,7 @@ const NewBadge = ({
 
     return () => {
       stopAudio(SFX_TYPES.BADGE_EARNED_SFX);
+      clearTimeout(showBadgeTimeout);
       clearTimeout(hideBadgeTimeout);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -72,10 +72,11 @@ const buttonStyle = css`
 
 const buttonFont = css`
   width: 100%;
-  margin: 0 auto;
-  font-family: "Luckiest Guy", sans-serif;
+  margin: 1.5rem auto 0;
+  font-family: "Akkurat", sans-serif;
   font-size: 12rem;
   color: white;
+  font-weight: 600;
 `;
 
 // Background animation styles

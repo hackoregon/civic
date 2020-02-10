@@ -70,7 +70,7 @@ const contentContainer = css`
   transform: translateX(+200%);
   transition: transform 3s;
   top: 570px;
-  left: 15vw;
+  left: 13vw;
 
   display: grid;
   align-content: center;
@@ -78,6 +78,10 @@ const contentContainer = css`
   text-align: center;
   width: 70vw;
   grid-row-gap: 50px;
+
+  background-color: ${palette.lightLime};
+  border-radius: 40px;
+  padding: 70px 80px 130px;
 `;
 
 const centerContent = css`
@@ -142,9 +146,10 @@ const buttonStyle = css`
 const buttonFont = css`
   width: 100%;
   margin: 0 auto;
-  font-family: "Luckiest Guy", sans-serif;
+  font-family: "Akkurat", sans-serif;
   font-size: 8rem;
   color: white;
+  font-weight: 600;
 `;
 
 // Background animation styles
@@ -321,10 +326,11 @@ const SummaryScreen = ({
 
       <div
         css={css`
-        ${contentContainer}
-        ${animationPhaseIndex <= 0 ? centerContent : ""}
-        ${animationPhaseIndex > 0 ? exitContent : ""}
-      `}
+          ${contentContainer};
+          background-color: inherit;
+          ${animationPhaseIndex <= 0 ? centerContent : ""}
+          ${animationPhaseIndex > 0 ? exitContent : ""}
+        `}
       >
         <p css={[contentTitle, topStyle]}>YOUR ACTS OF HEROISM</p>
       </div>
@@ -370,7 +376,8 @@ const SummaryScreen = ({
 
       <div
         css={css`
-          ${contentContainer}
+          ${contentContainer};
+          padding-bottom: 60px;
           ${animationPhaseIndex >= 4 ? centerContent : ""}
         `}
       >

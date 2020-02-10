@@ -6,12 +6,13 @@ import { useState, useEffect } from "react";
 
 import CheckmarkSVG from "../../../../assets/checkmark.svg";
 import NoCheckEllipseSVG from "../../../../assets/no-check-ellipse.svg";
-import Palette from "../../../constants/style";
+import Palette, { palette } from "../../../constants/style";
 import {
   getTaskPhase,
   taskPhaseKeys,
   getAllTaskPhaseData,
-  getActiveTaskIndex
+  getActiveTaskIndex,
+  getBadges
 } from "../../../state/tasks";
 import {
   getActiveChapterIndex,
@@ -49,6 +50,8 @@ const journeyStage = css`
 
 const activeJourneyStage = css`
   grid-template-columns: auto auto;
+  border-bottom: 10px solid ${palette.lightGreen};
+  padding: 15px 0;
 `;
 
 const iconStyle = css`
@@ -64,7 +67,8 @@ const JourneyBar = ({
   activeTaskPhase,
   activeChapterDuration,
   allTaskPhaseData,
-  activeTaskIndex
+  activeTaskIndex,
+  badges
 }) => {
   const [savingYourself, setSavingYourself] = useState(false);
   const [savingOthers, setSavingOthers] = useState(false);
@@ -98,6 +102,7 @@ const JourneyBar = ({
   // COLLECT A KIT
   const collectAKitActive = activeChapterId === KIT;
   const collectAKitCompleted = activeChapterIndex > 2;
+  const badgeWasEarned = badges.preparerBadge.activeTaskIndexWhenEarned;
   // HELP YOURSELF
   const helpYourselfActive = savingYourself;
   const helpYourselfInFuture =
@@ -122,8 +127,11 @@ const JourneyBar = ({
       >
         {/* COLLECT A KIT */}
         {/* Note: no ellipse for this phase because never needs to be shown */}
-        {collectAKitActive && (
+        {collectAKitActive && !badgeWasEarned && (
           <Countdown iconStyle={iconStyle} duration={activeChapterDuration} />
+        )}
+        {collectAKitActive && badgeWasEarned && (
+          <Countdown iconStyle={iconStyle} duration={0} />
         )}
         {collectAKitCompleted && (
           <img src={CheckmarkSVG} alt="Checkmark" css={iconStyle} />
@@ -207,7 +215,8 @@ JourneyBar.propTypes = {
       time: PropTypes.number
     })
   ),
-  activeTaskIndex: PropTypes.number
+  activeTaskIndex: PropTypes.number,
+  badges: PropTypes.shape({})
 };
 
 const mapStateToProps = state => ({
@@ -216,7 +225,8 @@ const mapStateToProps = state => ({
   activeTaskPhase: getTaskPhase(state),
   activeChapterDuration: getActiveChapterDuration(state),
   allTaskPhaseData: getAllTaskPhaseData(state),
-  activeTaskIndex: getActiveTaskIndex(state)
+  activeTaskIndex: getActiveTaskIndex(state),
+  badges: getBadges(state)
 });
 
 export default connect(mapStateToProps)(JourneyBar);

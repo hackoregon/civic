@@ -58,7 +58,6 @@ export const tasks = {
   // Save Yourself
   [RUBBLE]: {
     id: RUBBLE,
-    time: 30,
     audioInstruction: SFX_TYPES.rubbleInstructionBoy,
     audioQuestion: sample([
       SFX_TYPES.rubbleQuestionGirl,
@@ -85,7 +84,6 @@ export const tasks = {
   },
   [DUST]: {
     id: DUST,
-    time: 30,
     audioInstruction: sample([
       SFX_TYPES.dustInstructionGirl,
       SFX_TYPES.dustInstructionBoy
@@ -99,7 +97,7 @@ export const tasks = {
     imageSVG: dust,
     imageAlt: "a person coughing in the dust",
     imageLabel: "Unsafe Air",
-    callToAction: "Let's help those people coughing from the dust.",
+    callToAction: "Let's help these people coughing from the dust.",
     sceneSVG: sceneDust,
     sceneAlt: "a person coughing in the dust",
     clue: "It's getting hard to breathe here.",
@@ -114,7 +112,6 @@ export const tasks = {
   // Save Others
   [COLD]: {
     id: COLD,
-    time: 20,
     audioInstruction: SFX_TYPES.coldInstructionBoy,
     audioQuestion: sample([
       SFX_TYPES.defaultQuestionGirl,
@@ -128,7 +125,7 @@ export const tasks = {
     imageSVG: cold,
     imageAlt: "a shivering person",
     imageLabel: "Cold People",
-    callToAction: "Let's help those cold people.",
+    callToAction: "Let's help these cold people.",
     sceneSVG: sceneCold,
     sceneAlt: "a shivering person",
     clue: "It's cold out here!",
@@ -140,7 +137,6 @@ export const tasks = {
   },
   [FIRE]: {
     id: FIRE,
-    time: 20,
     audioInstruction: SFX_TYPES.fireInstructionBoy,
     audioQuestion: sample([
       SFX_TYPES.defaultQuestionGirl,
@@ -154,7 +150,7 @@ export const tasks = {
     imageSVG: fire,
     imageAlt: "fire",
     imageLabel: "House on Fire",
-    callToAction: "Let's help put out that fire!",
+    callToAction: "Let's help put out this fire!",
     sceneSVG: sceneFire,
     sceneAlt: "a fire that's spreading",
     clue: "Fire! Fire!",
@@ -166,7 +162,6 @@ export const tasks = {
   },
   [HUNGER]: {
     id: HUNGER,
-    time: 20,
     audioInstruction: sample([
       SFX_TYPES.hungerInstructionGirl,
       SFX_TYPES.hungerInstructionBoy
@@ -183,7 +178,7 @@ export const tasks = {
     imageSVG: hunger,
     imageAlt: "a hungry person",
     imageLabel: "Hungry People",
-    callToAction: "Let's help those hungry people.",
+    callToAction: "Let's help these hungry people.",
     sceneSVG: sceneHunger,
     sceneAlt: "a hungry person",
     clue: "I'm so hungry!",
@@ -195,7 +190,6 @@ export const tasks = {
   },
   [HOLE]: {
     id: HOLE,
-    time: 20,
     audioInstruction: SFX_TYPES.holeInstructionBoy,
     audioQuestion: sample([
       SFX_TYPES.defaultQuestionGirl,
@@ -209,7 +203,7 @@ export const tasks = {
     imageSVG: hole,
     imageAlt: "a person reaching out of a hole",
     imageLabel: "Trapped People",
-    callToAction: "Let's help that trapped person!",
+    callToAction: "Let's help this trapped person!",
     sceneSVG: sceneHole,
     sceneAlt: "a person reaching out of a crack in the road",
     clue: "Help! I can't get out!",
@@ -221,7 +215,6 @@ export const tasks = {
   },
   [INJURY]: {
     id: INJURY,
-    time: 20,
     audioInstruction: SFX_TYPES.injuryInstructionBoy,
     audioQuestion: sample([
       SFX_TYPES.defaultQuestionGirl,
@@ -235,7 +228,7 @@ export const tasks = {
     imageSVG: injury,
     imageAlt: "an injured person",
     imageLabel: "Hurt People",
-    callToAction: "Let's help those hurt people.",
+    callToAction: "Let's help these hurt people.",
     sceneSVG: sceneInjury,
     sceneAlt: "an injured person",
     clue: "Ow!",
@@ -247,7 +240,6 @@ export const tasks = {
   },
   [WEATHER]: {
     id: WEATHER,
-    time: 20,
     audioInstruction: SFX_TYPES.coldInstructionBoy,
     audioQuestion: SFX_TYPES.coldQuestionBoy,
     requiredItem: tent,
@@ -258,7 +250,7 @@ export const tasks = {
     imageSVG: weather,
     imageAlt: "a thunderstorm",
     imageLabel: "People in Rain",
-    callToAction: "Let's help those people get out of the rain.",
+    callToAction: "Let's help these people get out of the rain.",
     sceneSVG: sceneWeather,
     sceneAlt: "a thunderstorm",
     clue: "It's cold out here!",
@@ -270,7 +262,6 @@ export const tasks = {
   },
   [LOST_PET]: {
     id: LOST_PET,
-    time: 20,
     audioInstruction: SFX_TYPES.lostPetInstructionBoy,
     audioQuestion: sample([
       SFX_TYPES.defaultQuestionGirl,
@@ -296,7 +287,6 @@ export const tasks = {
   },
   [THIRST]: {
     id: THIRST,
-    time: 20,
     audioInstruction: SFX_TYPES.thirstInstructionGirl,
     audioQuestion: sample([
       SFX_TYPES.defaultQuestionGirl,
