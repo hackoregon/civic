@@ -50,6 +50,19 @@ const LogosStyle = () => (
     <div style={storybookStyles.invertedLogo}>
       <Logo type="sandboxLogoInverted" />
     </div>
+
+    <h3>Other Logos</h3>
+    <h4>Hack Oregon Logo</h4>
+    <p>Used for Hack Oregon</p>
+    <div style={storybookStyles.logo}>
+      <Logo type="hackOregon" />
+    </div>
+
+    <h4>CIVIC Master Builders</h4>
+    <p>Used for the CIVIC Master Builders program</p>
+    <div style={storybookStyles.logo}>
+      <Logo type="masterBuilders" />
+    </div>
   </div>
 );
 
