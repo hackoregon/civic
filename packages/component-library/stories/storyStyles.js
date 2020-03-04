@@ -9,8 +9,8 @@ const storybookStyles = {
   // The display area for components
   main: {
     backgroundColor: "white",
-    margin: 15,
-    maxWidth: 800
+    margin: "0 auto",
+    maxWidth: 600
   },
 
   // Use CSS grid to center UI components in the Storybook display area
@@ -41,7 +41,10 @@ const storybookStyles = {
 
   // Display a solid color
   solidColorSample: {
-    display: "flex"
+    display: "grid",
+    gridTemplateColumns: "auto 1fr",
+    justifySelf: "start",
+    alignSelf: "center"
   },
 
   // Brand color palette
@@ -49,9 +52,9 @@ const storybookStyles = {
     height: 125,
     width: 300,
     marginLeft: 0,
-    marginTop: 10,
+    marginTop: "auto",
     marginRight: 20,
-    marginBottom: 10
+    marginBottom: "auto"
   }
 };
 
