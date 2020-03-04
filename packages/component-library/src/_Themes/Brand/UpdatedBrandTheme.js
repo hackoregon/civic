@@ -60,27 +60,27 @@ export default {
     fontSize: "4rem",
     lineHeight: "1.0375",
     fontFamily: "'Rubik', sans-serif",
-    fontWeight: "600",
-    marginBlockStart: "4.5rem",
-    marginBlockEnd: "4.5rem"
+    fontWeight: "500",
+    marginBlockStart: "4rem",
+    marginBlockEnd: "4rem"
   },
 
   h2: {
     fontSize: "2rem",
     lineHeight: "1.10722",
     fontFamily: "'Rubik', sans-serif",
-    fontWeight: "500",
-    marginBlockStart: "2.25em",
-    marginBlockEnd: "2.25em"
+    fontWeight: "400",
+    marginBlockStart: "2rem",
+    marginBlockEnd: "2rem"
   },
 
   h3: {
     fontSize: "1.5rem",
     lineHeight: "1.381",
     fontFamily: "'Rubik', sans-serif",
-    fontWeight: "400",
-    marginBlockStart: "1.6875rem",
-    marginBlockEnd: "1.6875rem"
+    fontWeight: "500",
+    marginBlockStart: "1.5rem",
+    marginBlockEnd: "1.5rem"
   },
 
   h4: {
@@ -88,8 +88,8 @@ export default {
     lineHeight: "1.381",
     fontFamily: "'Rubik', sans-serif",
     fontWeight: "400",
-    marginBlockStart: "1.40625rem",
-    marginBlockEnd: "1.40625rem"
+    marginBlockStart: "1.25rem",
+    marginBlockEnd: "1.25rem"
   },
 
   h5: {
@@ -97,8 +97,8 @@ export default {
     lineHeight: "1.125rem",
     fontFamily: "'Rubik', sans-serif",
     fontWeight: "400",
-    marginBlockStart: "1.125rem",
-    marginBlockEnd: "1.125rem"
+    marginBlockStart: "1rem",
+    marginBlockEnd: "1rem"
   },
 
   h6: {
@@ -106,18 +106,19 @@ export default {
     lineHeight: "0.9375rem",
     fontFamily: "'Rubik', sans-serif",
     fontWeight: "300",
-    marginBlockStart: "1.125rem",
-    marginBlockEnd: "1.125rem"
+    marginBlockStart: "1rem",
+    marginBlockEnd: "1rem"
   },
 
   code: {
-    fontSize: "0.75rem",
-    lineHeight: "0.9375rem",
+    fontSize: "0.86rem",
+    lineHeight: "1.204rem",
     fontFamily: "'Roboto Mono', sans-serif",
     fontWeight: "300",
     marginBlockStart: "0.28125rem",
     marginBlockEnd: "0.28125rem",
-    letterSpacing: "-0.025em"
+    letterSpacing: "-0.025em",
+    backgroundColor: colors.subdued.hex
   },
 
   ".Description": {
