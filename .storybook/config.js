@@ -4,7 +4,6 @@
 import React from "react";
 import { addDecorator, addParameters, configure } from "@storybook/react";
 import { Global } from "@emotion/core";
-import { BrandTheme } from "@hackoregon/component-library";
 
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 import themeCIVIC from "./themeCIVIC";
@@ -25,6 +24,8 @@ addParameters({
 function loadStories() {
   require("../packages/component-library/stories");
 }
+
+const { BrandTheme } = require("../packages/component-library/src/index");
 
 const withGlobal = cb => (
   <>
