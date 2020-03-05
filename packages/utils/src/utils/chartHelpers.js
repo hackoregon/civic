@@ -153,7 +153,7 @@ const transformDatato100 = (dataset, value, label) => {
   return newData;
 };
 
-export {
+export default {
   chartEvents,
   getDefaultDomain,
   getDefaultDataSeriesLabels,

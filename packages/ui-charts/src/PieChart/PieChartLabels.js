@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { VictoryLabel, VictoryTooltip } from "victory";
-import civicFormat from "../utils/civicFormat";
+import { civicFormat } from "@hackoregon/utils";
 
 const PieChartLabel = props => {
   const { dataLabel, dataValue, totalValue, useLegend, tooltip, theme } = props;

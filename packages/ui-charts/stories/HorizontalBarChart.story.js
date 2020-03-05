@@ -9,14 +9,11 @@ import {
   boolean,
   optionsKnob as options
 } from "@storybook/addon-knobs";
-import {
-  HorizontalBarChart,
-  civicFormat,
-  VictoryCrazyTheme,
-  VictoryTheme
-} from "../src";
-import { getKeyNames } from "./shared";
+import { civicFormat, getKeyNames } from "@hackoregon/utils";
+import { VictoryCrazyTheme, VictoryTheme } from "@hackoregon/ui-themes";
+
 import notes from "./horizontalBarChart.notes.md";
+import { HorizontalBarChart } from "../src";
 
 const GROUP_IDS = {
   LABELS: "Labels",

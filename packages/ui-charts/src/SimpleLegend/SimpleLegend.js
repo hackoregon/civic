@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import shortid from "shortid";
-import { VictoryTheme } from "../_Themes/index";
+import { VictoryTheme } from "@hackoregon/ui-themes";
 
 const SimpleLegend = ({ colorScale, legendData, theme }) => {
   const legendStyle = css`

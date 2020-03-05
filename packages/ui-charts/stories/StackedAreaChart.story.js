@@ -10,10 +10,10 @@ import {
   optionsKnob as options,
   boolean
 } from "@storybook/addon-knobs";
-import { StackedAreaChart, civicFormat, SimpleLegend } from "../src";
-import { getKeyNames } from "./shared";
+import { VictoryCrazyTheme, VictoryTheme } from "@hackoregon/ui-themes";
+import { civicFormat, getKeyNames } from "@hackoregon/utils";
+import { StackedAreaChart, SimpleLegend } from "../src";
 import notes from "./stackedAreaChart.notes.md";
-import { VictoryCrazyTheme, VictoryTheme } from "../src/_Themes/index";
 
 const GROUP_IDS = {
   LABELS: "Labels",

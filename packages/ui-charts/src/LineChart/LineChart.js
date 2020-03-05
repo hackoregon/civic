@@ -13,20 +13,24 @@ import {
 } from "victory";
 
 import { ThemeProvider } from "emotion-theming";
-import { VictoryTheme } from "../_Themes/index";
+import { VictoryTheme } from "@hackoregon/ui-themes";
+import {
+  chartHelpers,
+  civicFormat,
+  protectData,
+  DataChecker
+} from "@hackoregon/utils";
 
 import ChartContainer from "../ChartContainer";
 import SimpleLegend from "../SimpleLegend";
-import civicFormat from "../utils/civicFormat";
-import protectData from "../utils/protectData";
-import DataChecker from "../utils/DataChecker";
-import {
+
+const {
   chartEvents,
   getDefaultDomain,
   getDefaultDataSeriesLabels,
   getDefaultFillStyle,
   getDefaultLineStyle
-} from "../utils/chartHelpers";
+} = chartHelpers;
 
 const LineChart = ({
   customBackgroundPlot,

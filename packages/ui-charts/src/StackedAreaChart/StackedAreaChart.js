@@ -11,20 +11,19 @@ import {
   VictoryStack,
   VictoryArea
 } from "victory";
+import { VictoryTheme } from "@hackoregon/ui-themes";
+import { chartHelpers, DataChecker, civicFormat } from "@hackoregon/utils";
 
 import shortid from "shortid";
 import ChartContainer from "../ChartContainer";
 import SimpleLegend from "../SimpleLegend";
-import civicFormat from "../utils/civicFormat";
-import DataChecker from "../utils/DataChecker";
 
-import {
+const {
   chartEvents,
   getDefaultStackedDomain,
   getDefaultDataSeriesLabels,
   getDefaultAreaStyle
-} from "../utils/chartHelpers";
-import { VictoryTheme } from "../_Themes/index";
+} = chartHelpers;
 
 const StackedAreaChart = ({
   data,

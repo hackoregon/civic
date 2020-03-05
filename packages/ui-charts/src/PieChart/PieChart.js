@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { VictoryPie, VictoryContainer } from "victory";
+import { VictoryTheme } from "@hackoregon/ui-themes";
+import { chartEvents, DataChecker } from "@hackoregon/utils";
+
 import ChartContainer from "../ChartContainer";
-import { VictoryTheme } from "../_Themes/index";
 import SimpleLegend from "../SimpleLegend";
 import PieChartLabels from "./PieChartLabels";
-import DataChecker from "../utils/DataChecker";
-import { chartEvents } from "../utils/chartHelpers";
 
 const PieChart = props => {
   const {

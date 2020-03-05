@@ -10,14 +10,10 @@ import {
   optionsKnob as options,
   boolean
 } from "@storybook/addon-knobs";
-import {
-  LineChart,
-  SimpleLegend,
-  civicFormat,
-  VictoryCrazyTheme,
-  VictoryTheme
-} from "../src";
-import { getKeyNames } from "./shared";
+import { VictoryCrazyTheme, VictoryTheme } from "@hackoregon/ui-themes";
+import { civicFormat, getKeyNames } from "@hackoregon/utils";
+
+import { LineChart, SimpleLegend } from "../src";
 import notes from "./lineChart.notes.md";
 
 const GROUP_IDS = {

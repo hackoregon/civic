@@ -13,18 +13,22 @@ import {
 } from "victory";
 
 import { ThemeProvider } from "emotion-theming";
-import { VictoryTheme } from "../_Themes/index";
+import { VictoryTheme } from "@hackoregon/ui-themes";
+import {
+  DataChecker,
+  civicFormat,
+  protectData,
+  chartHelpers
+} from "@hackoregon/utils";
 
 import ChartContainer from "../ChartContainer";
 import SimpleLegend from "../SimpleLegend";
-import DataChecker from "../utils/DataChecker";
-import civicFormat from "../utils/civicFormat";
-import protectData from "../utils/protectData";
-import {
+
+const {
   chartEvents,
   getDefaultDomain,
   getDefaultDataSeriesLabels
-} from "../utils/chartHelpers";
+} = chartHelpers;
 
 const BarChart = ({
   data,

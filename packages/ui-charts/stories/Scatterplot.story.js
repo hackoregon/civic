@@ -9,11 +9,10 @@ import {
   withKnobs,
   optionsKnob as options
 } from "@storybook/addon-knobs";
+import { civicFormat, getKeyNames } from "@hackoregon/utils";
+import { VictoryTheme, VictoryCrazyTheme } from "@hackoregon/ui-themes";
 import { Scatterplot, SimpleLegend } from "../src";
 import notes from "./scatterplot.notes.md";
-import civicFormat from "../src/utils/civicFormat";
-import { getKeyNames } from "./shared";
-import { VictoryCrazyTheme, VictoryTheme } from "../src/_Themes/index";
 
 const GROUP_IDS = {
   LABELS: "Labels",

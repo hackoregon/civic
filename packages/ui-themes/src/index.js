@@ -1,5 +1,8 @@
 import "./fonts.css";
 
+// CONSTANTS
+export { browserDefaultSize, defaultFontSize } from "./_Constants";
+
 // THEMES
 export {
   VisualizationColors,
@@ -8,6 +11,6 @@ export {
   VictoryTheme,
   VictoryCrazyTheme,
   MaterialTheme
-} from "./_Themes/index";
+} from "./_Themes";
 
 export { default as storybookStyles } from "./_Storybook/storyStyles";

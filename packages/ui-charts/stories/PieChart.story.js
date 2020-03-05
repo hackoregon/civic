@@ -10,9 +10,10 @@ import {
   boolean,
   optionsKnob as options
 } from "@storybook/addon-knobs";
+import { VictoryCrazyTheme, VictoryTheme } from "@hackoregon/ui-themes";
+import { getKeyNames } from "@hackoregon/utils";
+
 import { PieChart } from "../src";
-import { VictoryCrazyTheme, VictoryTheme } from "../src/_Themes/index";
-import { getKeyNames } from "./shared";
 import notes from "./pieChart.notes.md";
 
 const GROUP_IDS = {

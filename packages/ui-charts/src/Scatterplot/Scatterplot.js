@@ -8,19 +8,23 @@ import {
   VictoryScatter,
   VictoryTooltip
 } from "victory";
+import { VictoryTheme } from "@hackoregon/ui-themes";
+import {
+  chartHelpers,
+  civicFormat,
+  protectData,
+  DataChecker
+} from "@hackoregon/utils";
 
 import ChartContainer from "../ChartContainer";
 import SimpleLegend from "../SimpleLegend";
-import civicFormat from "../utils/civicFormat";
-import protectData from "../utils/protectData";
-import DataChecker from "../utils/DataChecker";
-import {
+
+const {
   chartEvents,
   getDefaultDomain,
   getDefaultDataSeriesLabels,
   getDefaultFillStyle
-} from "../utils/chartHelpers";
-import { VictoryTheme } from "../_Themes/index";
+} = chartHelpers;
 
 /*
  * @method Scatterplot

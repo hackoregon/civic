@@ -12,18 +12,23 @@ import {
   VictoryLine
 } from "victory";
 import shortid from "shortid";
+import {
+  chartHelpers,
+  groupByKey,
+  DataChecker,
+  protectData,
+  civicFormat
+} from "@hackoregon/utils";
+import { VictoryTheme } from "@hackoregon/ui-themes";
+
 import SimpleLegend from "../SimpleLegend";
 import ChartContainer from "../ChartContainer";
-import civicFormat from "../utils/civicFormat";
-import {
+
+const {
   chartEvents,
   getDefaultDataSeriesLabels,
   transformDatato100
-} from "../utils/chartHelpers";
-import groupByKey from "../utils/groupByKey";
-import DataChecker from "../utils/DataChecker";
-import protectData from "../utils/protectData";
-import { VictoryTheme } from "../_Themes/index";
+} = chartHelpers;
 
 const HorizontalBarChart = ({
   data,

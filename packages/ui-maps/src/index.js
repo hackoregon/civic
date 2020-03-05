@@ -32,6 +32,7 @@ export {
 } from "./CivicSandboxDashboard/CivicSandboxDashboard";
 export { default as Sandbox } from "./Sandbox/Sandbox";
 export { default as PolygonPreview } from "./PolygonPreview/PolygonPreview";
+export { default as MapLegend } from "./MapLegend/MapLegend";
 
 export {
   DemoJSONLoader,

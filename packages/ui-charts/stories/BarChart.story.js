@@ -9,12 +9,11 @@ import {
   number,
   optionsKnob as options
 } from "@storybook/addon-knobs";
-import civicFormat from "../src/utils/civicFormat";
+import { VictoryCrazyTheme, VictoryTheme } from "@hackoregon/ui-themes";
+import { civicFormat, getKeyNames } from "@hackoregon/utils";
 
-import { getKeyNames } from "./shared";
 import notes from "./barchart.notes.md";
 import { BarChart } from "../src";
-import { VictoryCrazyTheme, VictoryTheme } from "../src/_Themes/index";
 
 const GROUP_IDS = {
   LABELS: "Labels",

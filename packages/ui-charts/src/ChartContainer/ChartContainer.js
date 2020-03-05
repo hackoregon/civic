@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
-import { BrandColors } from "../index";
+import { BrandColors } from "@hackoregon/ui-themes";
+import { Logo } from "@hackoregon/ui-brand";
 import ChartTitle from "../ChartTitle";
-import Logo from "../Logo/Logo";
 
 const chartError = css`
   text-align: center;
