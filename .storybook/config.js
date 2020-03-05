@@ -26,7 +26,7 @@ function loadStories() {
   const req = require.context(
     "../packages",
     true,
-    /^\.\/[^\/]+\/stories\/.*story\.jsx?$/
+    /^\.\/[^\/]+\/stories\/index.story.js$/
   );
   req.keys().forEach(filename => req(filename));
 }
