@@ -1,16 +1,13 @@
-/* TODO: Fix linting errors */
-/* eslint-disable */
-
 import { Component } from "react";
 import { Link } from "react-router";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import PropTypes from "prop-types";
+import { Logo } from "@hackoregon/ui-brand";
+import { BrandColors } from "@hackoregon/ui-themes";
 import Nav from "./Nav";
-import Logo from "../Logo/Logo";
 import Icon from "../Icon/Icon";
 import { ICONS } from "../styleConstants";
-import { BrandColors } from "@hackoregon/ui-themes";
 
 const containerClass = css`
   width: 100%;
@@ -88,11 +85,15 @@ class Header extends Component {
     };
   }
 
-  togglesNestedMenu = () =>
-    this.setState({ menuActive: !this.state.menuActive });
+  togglesNestedMenu = () => {
+    const { menuActive } = this.state;
+    this.setState({ menuActive: !menuActive });
+  };
 
   render() {
     const { children, menu, title, overlay, logoType } = this.props;
+    const { menuActive, nestedMenu } = this.state;
+
     return (
       <header
         css={overlay ? overlayContainerClass : containerClass}
@@ -107,26 +108,23 @@ class Header extends Component {
               <Logo type={logoType} alt={title} />
             </Link>
           </div>
-          <div
-            css={navClass}
-            className={this.state.menuActive ? "active" : "inactive"}
-          >
+          <div css={navClass} className={menuActive ? "active" : "inactive"}>
             <Nav
               menu={menu}
               toggleSubNav={this.togglesNestedMenu}
-              showNestedMenu={this.state.nestedMenu}
+              showNestedMenu={nestedMenu}
               togglesNestedMenu={this.togglesNestedMenu}
             />
 
             {children}
           </div>
-          <a css={burgerClass}>
+          <button type="button" css={burgerClass}>
             <Icon
               key="nav-burger"
               className={ICONS.hamburger}
               handleClick={this.togglesNestedMenu}
             />
-          </a>
+          </button>
         </nav>
       </header>
     );

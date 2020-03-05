@@ -3,7 +3,7 @@
 
 import React from "react";
 import { rangeRight } from "lodash";
-import Dropdown from "../Dropdown/Dropdown";
+import { Dropdown } from "@hackoregon/ui-core";
 
 const months = [
   "Jan",
@@ -103,7 +103,7 @@ class DateDropdown extends React.Component {
         options={options}
         simpleValue
         onChange={this.handleChange}
-        placeholder={"Please select a date"}
+        placeholder="Please select a date"
       />
     );
   }

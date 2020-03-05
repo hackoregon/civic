@@ -1,7 +1,8 @@
 /* TODO: Fix linting errors */
 /* eslint-disable */
+
 import { scaleThreshold } from "d3";
-import { VisualizationColors } from "..";
+import { VisualizationColors } from "@hackoregon/ui-themes";
 
 const categoricalColors = VisualizationColors.categorical;
 
