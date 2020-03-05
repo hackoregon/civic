@@ -4,7 +4,6 @@ import { storiesOf } from "@storybook/react";
 import { checkA11y } from "@storybook/addon-a11y";
 
 // DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator import injection
-import polygonPreviewStory from "./PolygonPreview.story"; // TODO: Move this to the appropriate location
 import dialogStory from "./Dialog.story"; // TODO: Move this to the appropriate location
 import selectFieldStory from "./SelectField.story"; // TODO: Move this to the appropriate location
 import textFieldStory from "./TextField.story"; // TODO: Move this to the appropriate location
@@ -12,47 +11,34 @@ import formStory from "./Form.story"; // TODO: Move this to the appropriate loca
 import buttonNewStory from "./ButtonNew.story";
 import badgeStory from "./Badge.story";
 import BarChartStory from "./BarChart.story";
-import baseMapStory from "./BaseMap.story";
-import boundaryMapStory from "./BoundaryMap.story";
 import buttonStory from "./Button.story";
 import checkboxStory from "./Checkbox.story";
 import collapsableStory from "./Collapsable.story";
 import civicCardStory from "./CivicCard.story";
 import civicCardStackStory from "./CivicCardStack.story";
-import civicSandboxDashboardStory from "./CivicSandboxDashboard.story";
-import multiLayerMapStory from "./MultiLayerMap.story";
-import comparisonMapStory from "./ComparisonMap.story";
 import civicStorycardStory from "./CivicStoryCard.story";
 import dataTable from "./DataTable.story";
 import gradientScaleStory from "./GradientScale.story";
 import headerStory from "./Header.story";
 import headerNewStory from "./HeaderNew.story";
 import footerNewStory from "./FooterNew.story";
-import heatMapStory from "./HeatMap.story";
 import horizontalBarChartStory from "./HorizontalBarChart.story";
-import iconMapStory from "./IconMap.story";
 import lineChartStory from "./LineChart.story";
-import mapOverlayStory from "./MapOverlay.story";
 import notebookPreviewStory from "./NotebookPreview.story";
 import packageSelectorBox from "./PackageSelectorBox.story";
 import pageLayoutStory from "./PageLayout.story";
-import pathMapStory from "./PathMap.story";
 import pdfStory from "./PDF.story";
 import pieStory from "./PieChart.story";
 import placeholderStory from "./Placeholder.story";
 import pullQuoteStory from "./PullQuote.story";
 import radioButtonGroupStory from "./RadioButtonGroup.story";
-import sandboxStory from "./Sandbox.story";
-import scatterPlotMapStory from "./ScatterPlotMap.story";
 import ScatterplotStory from "./Scatterplot.story";
-import screenGridMapStory from "./ScreenGridMap.story";
 import selectStory from "./Select.story";
 import sliderStory from "./Slider.story";
 import stackedAreaChart from "./StackedAreaChart.story";
 import chipcomponentstory from "./ChipComponent.story";
 import cardListStory from "./CardList.story";
 import exploreRelatedStory from "./ExploreRelated.story";
-import vectorTilesMapStory from "./VectorTilesMap.story";
 
 import AccessibilityGuidelinesStyle from "./styleGuideStories/AccessibilityGuidelinesStyle.story";
 import CardsStyle from "./styleGuideStories/CardsStyle.story";
@@ -64,7 +50,6 @@ import FormsStyle from "./styleGuideStories/FormsStyle.story";
 import IconographyStyle from "./styleGuideStories/IconographyStyle.story";
 import Introduction from "./styleGuideStories/Introduction.story";
 import LogosStyle from "./styleGuideStories/LogosStyle.story";
-import MapsStyle from "./styleGuideStories/MapsStyle.story";
 import MotionStyle from "./styleGuideStories/MotionStyle.story";
 import NavigationStyle from "./styleGuideStories/NavigationStyle.story";
 import ResponsiveDesignStyle from "./styleGuideStories/ResponsiveDesignStyle.story";
@@ -128,9 +113,8 @@ checkboxStory();
 radioButtonGroupStory();
 selectStory();
 sliderStory();
-notebookPreviewStory(); // TODO: Move this to the appropriate location
+notebookPreviewStory();
 dialogStory(); // TODO: Move this to the appropriate location
-polygonPreviewStory(); // TODO: Move this to the appropriate location
 formStory(); // TODO: Move this to the appropriate location
 textFieldStory(); // TODO: Move this to the appropriate location
 selectFieldStory(); // TODO: Move this to the appropriate location
@@ -150,23 +134,6 @@ pieStory();
 ScatterplotStory();
 stackedAreaChart();
 
-// maps
-storiesOf("Component Lib|Maps", module)
-  .addParameters({ options: { showPanel: false } })
-  .addDecorator(checkA11y)
-  .add("Maps Style Guide", () => <MapsStyle />);
-baseMapStory();
-boundaryMapStory();
-heatMapStory();
-iconMapStory();
-mapOverlayStory();
-pathMapStory();
-scatterPlotMapStory();
-screenGridMapStory();
-multiLayerMapStory();
-comparisonMapStory();
-vectorTilesMapStory();
-
 // Civic story cards
 storiesOf("Component Lib|Story Cards", module)
   .addParameters({ options: { showPanel: false } })
@@ -180,7 +147,6 @@ storiesOf("Component Lib|CIVIC Platform", module)
   .add("Platform Components Style Guide", () => <CivicPlatformStyle />);
 civicCardStackStory();
 badgeStory();
-civicSandboxDashboardStory();
 civicStorycardStory();
 collapsableStory();
 headerNewStory();
@@ -192,7 +158,6 @@ pdfStory();
 exploreRelatedStory();
 placeholderStory();
 pullQuoteStory();
-sandboxStory();
 chipcomponentstory();
 cardListStory();
 

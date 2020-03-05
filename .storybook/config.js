@@ -23,7 +23,7 @@ addParameters({
 });
 
 function loadStories() {
-  require("../packages/component-library/stories");
+  require("../packages/ui-notmaps/stories");
 }
 
 const withGlobal = cb => (
