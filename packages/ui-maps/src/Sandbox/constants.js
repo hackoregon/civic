@@ -1,7 +1,7 @@
 /* TODO: Fix linting errors */
 /* eslint-disable */
 import { scaleThreshold } from "d3";
-import { VisualizationColors } from "../_Themes/index";
+import { VisualizationColors } from "..";
 
 const categoricalColors = VisualizationColors.categorical;
 

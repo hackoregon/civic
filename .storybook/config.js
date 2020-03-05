@@ -23,7 +23,12 @@ addParameters({
 });
 
 function loadStories() {
-  require("../packages/ui-notmaps/stories");
+  const req = require.context(
+    "../packages",
+    true,
+    /^\.\/[^\/]+\/stories\/.*story\.jsx?$/
+  );
+  req.keys().forEach(filename => req(filename));
 }
 
 const withGlobal = cb => (
