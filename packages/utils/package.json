@@ -1,6 +1,6 @@
 {
   "name": "@hackoregon/utils",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Common utils for CIVIC",
   "main": "dist/index.js",
   "modules": "es/index.js",
@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "@emotion/core": "^10.0.15",
-    "@hackoregon/ui-themes": "^0.0.1",
+    "@hackoregon/ui-themes": "^0.0.2",
     "d3-format": "1.3.0",
     "d3-time-format": "^2.1.3",
     "lodash": "^4.17.11",
