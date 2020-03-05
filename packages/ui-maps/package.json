@@ -1,6 +1,6 @@
 {
   "name": "@hackoregon/ui-maps",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Common library for CIVIC map components",
   "main": "dist/index.js",
   "modules": "es/index.js",

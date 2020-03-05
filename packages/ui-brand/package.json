@@ -1,6 +1,6 @@
 {
   "name": "@hackoregon/ui-brand",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Brand assets for CIVIC",
   "main": "dist/index.js",
   "modules": "es/index.js",
@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "@emotion/core": "^10.0.15",
-    "@hackoregon/utils": "^0.0.0",
+    "@hackoregon/utils": "^0.0.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4"
