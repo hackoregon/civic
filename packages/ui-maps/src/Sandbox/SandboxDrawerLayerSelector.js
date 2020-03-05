@@ -4,10 +4,7 @@ import shortid from "shortid";
 import { string, bool, func, arrayOf, shape } from "prop-types";
 import { Fragment } from "react";
 import LayersIcon from "@material-ui/icons/Layers";
-import Dropdown from "../Dropdown/Dropdown";
-import Logo from "../Logo/Logo";
-import Checkbox from "../Checkbox/Checkbox";
-import ButtonNew from "../ButtonNew/ButtonNew";
+import { Dropdown, Logo, Checkbox, ButtonNew } from "..";
 
 const SandboxDrawerLayerSelector = props => {
   const {

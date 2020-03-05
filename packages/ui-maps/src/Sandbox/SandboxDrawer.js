@@ -8,7 +8,7 @@ import BookIcon from "@material-ui/icons/Book";
 import SandboxDrawerLayerSelector from "./SandboxDrawerLayerSelector";
 import SandboxDrawerVisualization from "./SandboxDrawerVisualization";
 import SandboxDrawerExplore from "./SandboxDrawerExplore";
-import Logo from "../Logo/Logo";
+import { Logo } from "..";
 
 const menuOpen = css(`
   display: flex;

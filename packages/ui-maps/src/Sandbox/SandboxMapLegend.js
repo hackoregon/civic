@@ -6,7 +6,7 @@ import { startCase } from "lodash";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import shortid from "shortid";
-import civicFormat from "../utils/civicFormat";
+import { civicFormat } from "..";
 import {
   createColorScale,
   updateQuantileScale,

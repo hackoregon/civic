@@ -1,10 +1,7 @@
 import PropTypes from "prop-types";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
-
-import Dialog from "../Dialog/Dialog";
-import ButtonNew from "../ButtonNew/ButtonNew";
-import Logo from "../Logo/Logo";
+import { Dialog, ButtonNew, Logo } from "..";
 
 const contentWrapper = css`
   margin: 20px;

@@ -5,14 +5,16 @@ import { bool, func, node, number, shape, string } from "prop-types";
 import { jsx, css } from "@emotion/core";
 // import shortid from "shortid";
 import { isEqual } from "lodash";
-import LineChart from "../LineChart/LineChart";
+import {
+  LineChart,
+  civicFormat,
+  Placeholder,
+  VisualizationColors,
+  PolygonPreview
+} from "..";
 // import PieChart from "../PieChart/PieChart";
 // import HorizontalBarChart from "../HorizontalBarChart/HorizontalBarChart";
-import civicFormat from "../utils/civicFormat";
 import { ICONS } from "../styleConstants";
-import Placeholder from "../Placeholder/Placeholder";
-import PolygonPreview from "../PolygonPreview/PolygonPreview";
-import VisualizationColors from "../_Themes/VisualizationColors";
 
 const container = css`
   position: absolute;

@@ -6,7 +6,7 @@ import { format } from "d3";
 import { get } from "lodash";
 import shortid from "shortid";
 import window from "global/window";
-import civicFormat from "../utils/civicFormat";
+import { civicFormat } from "..";
 
 const tooltip = css`
   font-family: Helvetica, Arial, sans-serif;

@@ -1,8 +1,8 @@
 import React from "react";
 import { shallow } from "enzyme";
+import { MapGLResources } from "@hackoregon/component-library";
 import BaseMap from "./BaseMap";
 import ScatterPlotMap from "../ScatterPlotMap/ScatterPlotMap";
-import { MapGLResources } from "../_Themes/index";
 
 const { MAPBOX_TOKEN } = MapGLResources;
 

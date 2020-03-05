@@ -3,7 +3,7 @@
   Only styles that are needed exclusively in Storybook are defined here.
 */
 
-import { BrandColors } from "../src/_Themes/index";
+import { BrandColors } from "../src";
 
 const storybookStyles = {
   // The display area for components

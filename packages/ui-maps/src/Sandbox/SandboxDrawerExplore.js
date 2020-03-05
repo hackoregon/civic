@@ -3,9 +3,7 @@ import { jsx, css } from "@emotion/core";
 import { string, bool, func, shape } from "prop-types";
 import { Fragment } from "react";
 import BookIcon from "@material-ui/icons/Book";
-import PackageSelectorBox from "../PackageSelectorBox/PackageSelectorBox";
-import ButtonNew from "../ButtonNew/ButtonNew";
-import Placeholder from "../Placeholder/Placeholder";
+import { PackageSelectorBox, ButtonNew, Placeholder } from "..";
 
 const SandboxDrawerExplore = props => {
   const {
