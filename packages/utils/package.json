@@ -39,8 +39,8 @@
     "source-map-support": "^0.4.11"
   },
   "dependencies": {
-    "@hackoregon/ui-themes": "^0.0.0",
     "@emotion/core": "^10.0.15",
+    "@hackoregon/ui-themes": "^0.0.0",
     "d3-format": "1.3.0",
     "d3-time-format": "^2.1.3",
     "lodash": "^4.17.11",
@@ -48,5 +48,8 @@
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "shortid": "^2.2.14"
+  },
+    "publishConfig": {
+    "access": "public"
   }
 }

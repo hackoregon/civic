@@ -40,10 +40,10 @@
     "source-map-support": "^0.4.11"
   },
   "dependencies": {
+    "@emotion/core": "^10.0.15",
     "@hackoregon/ui-brand": "^0.0.0",
     "@hackoregon/ui-themes": "^0.0.0",
     "@hackoregon/utils": "^0.0.0",
-    "@emotion/core": "^10.0.15",
     "emotion-theming": "^10.0.14",
     "lodash": "^4.17.11",
     "prop-types": "^15.7.2",
@@ -51,5 +51,8 @@
     "react-dom": "^16.8.4",
     "shortid": "^2.2.14",
     "victory": "^32.0.2"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
