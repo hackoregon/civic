@@ -1,7 +1,7 @@
 {
-  "name": "@hackoregon/ui-theme",
+  "name": "@hackoregon/utils",
   "version": "0.0.0",
-  "description": "Common library for CIVIC theme components",
+  "description": "Common utils for CIVIC",
   "main": "dist/index.js",
   "modules": "es/index.js",
   "scripts": {
@@ -22,14 +22,31 @@
   "devDependencies": {
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.0",
+    "@babel/register": "^7.0.0",
+    "@storybook/addon-a11y": "^5.0.6",
+    "@storybook/react": "^5.0.6",
+    "chai": "^4.2.0",
+    "chai-enzyme": "^1.0.0-beta.1",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.11.2",
     "eslint": "^5.15.1",
+    "ignore-styles": "^5.0.1",
+    "jsdom": "^14.0.0",
     "mocha": "^6.0.2",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.2",
+    "sinon": "^7.2.7",
+    "sinon-chai": "^3.3.0",
+    "source-map-support": "^0.4.11"
   },
   "dependencies": {
-    "@material-ui/core": "^4.4.0",
+    "@hackoregon/ui-themes": "^0.0.0",
+    "@emotion/core": "^10.0.15",
+    "d3-format": "1.3.0",
+    "d3-time-format": "^2.1.3",
     "lodash": "^4.17.11",
+    "prop-types": "^15.7.2",
     "react": "^16.8.4",
-    "react-dom": "^16.8.4"
+    "react-dom": "^16.8.4",
+    "shortid": "^2.2.14"
   }
 }
