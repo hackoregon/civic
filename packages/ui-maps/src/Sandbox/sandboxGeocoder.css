@@ -1,0 +1,11 @@
+.mapboxgl-map {
+  font: 12px/20px "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif !important;
+}
+
+.mapboxgl-ctrl-geocoder {
+  font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif !important;
+}
+
+input {
+  font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif !important;
+}
