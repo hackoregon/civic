@@ -1,0 +1,43 @@
+{
+  "name": "@hackoregon/ui-docs",
+  "version": "0.0.3",
+  "sideEffects": false,
+  "description": "Common library for CIVIC UI documentation, including style guides",
+  "main": "dist/index.js",
+  "modules": "es/index.js",
+  "scripts": {
+    "build:esm": "rimraf es && babel src --out-dir es --copy-files --no-comments",
+    "build:cjs": "rimraf dist && babel src --out-dir dist --copy-files --no-comments",
+    "build": "BABEL_ENV=esm yarn run build:esm && BABEL_ENV=cjs yarn run build:cjs",
+    "configure": "yarn run build",
+    "test": "BABEL_ENV=test mocha --opts ./mocha.options ./src/**/*.test.js",
+    "test:watch": "yarn test -w",
+    "lint": "eslint src stories",
+    "storybook": "node scripts/storybook.js",
+    "start": "node scripts/start.js"
+  },
+  "repository": "git+https://github.com/hackoregon/civic.git",
+  "author": "jaron@civicsoftwarefoundation.org",
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@storybook/addon-a11y": "^5.0.6",
+    "@storybook/react": "^5.0.6",
+    "eslint": "^5.15.1",
+    "mocha": "^6.0.2",
+    "rimraf": "^2.6.2"
+  },
+  "dependencies": {
+    "@hackoregon/ui-themes": "^0.0.3",
+    "@hackoregon/ui-brand": "^0.0.3",
+    "@material-ui/core": "^4.4.0",
+    "lodash": "^4.17.11",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4"
+  },  
+  "publishConfig": {
+    "access": "public"
+  }
+}

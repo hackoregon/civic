@@ -1,16 +1,11 @@
+import { storiesOf } from "@storybook/react";
+import { checkA11y } from "@storybook/addon-a11y";
+
 // DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator import injection
 import civicCardStory from "./CivicCard.story";
-import civicCardStackStory from "./CivicCardStack.story";
-import civicStorycardStory from "./CivicStoryCard.story";
-import cardListStory from "./CardList.story";
-import exploreRelatedStory from "./ExploreRelated.story";
 
 // Civic story cards
+storiesOf("Component Lib|Story Cards", module)
+  .addParameters({ options: { showPanel: false } })
+  .addDecorator(checkA11y);
 civicCardStory();
-
-// Civic platform components and page layout
-civicCardStackStory();
-civicStorycardStory();
-exploreRelatedStory();
-cardListStory();
-// DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator story injection

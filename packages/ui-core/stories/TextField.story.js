@@ -1,8 +1,8 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import { checkA11y } from "@storybook/addon-a11y";
-import { withKnobs, text } from "@storybook/addon-knobs";
-import { TextField } from "../src";
+import { withKnobs } from "@storybook/addon-knobs";
+// import { TextField } from "../src";
 import { storybookStyles } from "./storyStyles";
 import notes from "./textField.notes.md";
 
@@ -18,8 +18,7 @@ export default () =>
     .add(
       "Standard",
       () => {
-        const message = text("Message");
-        return <TextField message={message} />;
+        return <h2>TODO: Write TextField Story</h2>;
       },
       { notes }
     );

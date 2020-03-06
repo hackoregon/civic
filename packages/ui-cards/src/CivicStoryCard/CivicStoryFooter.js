@@ -5,8 +5,19 @@ import copy from "copy-to-clipboard";
 import { jsx, css } from "@emotion/core";
 import { get } from "lodash";
 import window from "global/window";
-import { ICONS } from "@hackoregon/ui-core";
 import CivicStoryLink from "./CivicStoryLink";
+
+export const ICONS = {
+  eye: "fa fa-eye",
+  link: "fa fa-link",
+  check: "fa fa-check",
+  download: "fa fa-cloud-download",
+  hamburger: "fa fa-bars",
+  info: "fa fa-info-circle",
+  arrowDown: "fa fa-arrow-down",
+  arrowUp: "fa fa-arrow-up",
+  improve: "fa fa-commenting-o"
+};
 
 const MS_TO_SWITCH_TEXT = 3000; // 3 seconds
 
