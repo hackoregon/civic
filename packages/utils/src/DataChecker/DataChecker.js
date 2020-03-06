@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import shortid from "shortid";
-import checkData from "./checkData";
+import checkData from "../utils/checkData";
 
 const wrapperStyle = css`
   margin: 0 auto;

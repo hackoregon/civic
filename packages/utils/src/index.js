@@ -1,6 +1,7 @@
 export { default as DemoJSONLoader } from "./DemoJSONLoader/DemoJSONLoader";
 export { default as ErrorBoundary } from "./ErrorBoundary/ErrorBoundary";
-
+export { default as StatefulWrapper } from "./StatefulWrapper/StatefulWrapper";
+export { default as DataChecker } from "./DataChecker/DataChecker";
 export { default as chartHelpers } from "./utils/chartHelpers";
 export { default as civicFormat } from "./utils/civicFormat";
 export { default as ungroupBy } from "./utils/ungroupBy";
