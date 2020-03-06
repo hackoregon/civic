@@ -8,6 +8,7 @@ export {
   VisualizationColors,
   BrandColors,
   BrandTheme,
+  UpdatedBrandTheme,
   VictoryTheme,
   VictoryCrazyTheme,
   MaterialTheme
