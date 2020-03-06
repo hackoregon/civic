@@ -1,5 +1,6 @@
 {
   "name": "@hackoregon/ui-brand",
+  "sideEffects": false,  
   "version": "0.0.3",
   "description": "Brand assets for CIVIC",
   "main": "dist/index.js",

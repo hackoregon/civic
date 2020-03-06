@@ -1,5 +1,6 @@
 {
   "name": "@hackoregon/ui-cards",
+  "sideEffects": false,
   "version": "0.0.3",
   "description": "Common library for CIVIC non-map components",
   "main": "dist/index.js",

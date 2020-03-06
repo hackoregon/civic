@@ -1,6 +1,7 @@
 {
   "name": "@hackoregon/ui-core",
   "version": "0.0.3",
+  "sideEffects": false,
   "description": "Common library for CIVIC non-map components",
   "main": "dist/index.js",
   "modules": "es/index.js",
