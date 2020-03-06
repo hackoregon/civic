@@ -1,6 +1,6 @@
 {
   "name": "@hackoregon/ui-docs",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "sideEffects": false,
   "description": "Common library for CIVIC UI documentation, including style guides",
   "main": "dist/index.js",
@@ -30,8 +30,8 @@
     "rimraf": "^2.6.2"
   },
   "dependencies": {
-    "@hackoregon/ui-themes": "^0.0.3",
-    "@hackoregon/ui-brand": "^0.0.3",
+    "@hackoregon/ui-themes": "^0.0.4",
+    "@hackoregon/ui-brand": "^0.0.4",
     "react": "^16.8.4",
     "react-dom": "^16.8.4"
   },  
