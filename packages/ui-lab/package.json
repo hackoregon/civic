@@ -1,8 +1,8 @@
 {
-  "name": "@hackoregon/ui-maps",
+  "name": "@hackoregon/ui-lab",
   "version": "0.0.3",
   "sideEffects": false,
-  "description": "Common library for CIVIC map components",
+  "description": "Common library for CIVIC non-map components",
   "main": "dist/index.js",
   "modules": "es/index.js",
   "scripts": {
@@ -25,7 +25,6 @@
     "@babel/core": "^7.0.0",
     "@babel/register": "^7.0.0",
     "@storybook/addon-a11y": "^5.0.6",
-    "@storybook/addon-actions": "^5.0.6",
     "@storybook/addon-knobs": "^5.0.6",
     "@storybook/react": "^5.0.6",
     "chai": "^4.2.0",
@@ -42,30 +41,15 @@
     "source-map-support": "^0.4.11"
   },
   "dependencies": {
-    "@emotion/core": "^10.0.15",
-    "@hackoregon/ui-themes": "^0.0.3",
-    "@hackoregon/ui-core": "^0.0.3",
-    "@hackoregon/component-library": "^4.0.0",
+    "@hackoregon/ui-docs": "^0.0.3",
     "@material-ui/core": "^4.4.0",
-    "@material-ui/icons": "^4.4.1",
-    "@turf/bbox": "^6.0.1",
-    "@turf/center-of-mass": "^6.0.1",
-    "create-react-ref": "^0.1.0",
-    "d3": "^4.8.0",
-    "deck.gl": "^6.4.7",
-    "global": "^4.3.2",
+    "formik": "^2.0.4",
     "lodash": "^4.17.11",
-    "mapbox-gl": "^1.5.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
-    "react-dimensions": "^1.3.1",
     "react-dom": "^16.8.4",
-    "react-map-gl": "5.1.2",
-    "react-map-gl-geocoder": "^1.7.0",
-    "react-select": "^1.0.0-rc.3",
-    "shortid": "^2.2.14",
-    "viewport-mercator-project": "^6.2.0"
-  },
+    "yup": "^0.27.0"
+  }, 
   "publishConfig": {
     "access": "public"
   }

@@ -4,8 +4,6 @@ import { checkA11y } from "@storybook/addon-a11y";
 // DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator import injection
 import dialogStory from "./Dialog.story"; // TODO: Move this to the appropriate location
 import selectFieldStory from "./SelectField.story"; // TODO: Move this to the appropriate location
-import textFieldStory from "./TextField.story"; // TODO: Move this to the appropriate location
-import formStory from "./Form.story"; // TODO: Move this to the appropriate location
 import buttonNewStory from "./ButtonNew.story";
 import badgeStory from "./Badge.story";
 import buttonStory from "./Button.story";
@@ -28,7 +26,6 @@ checkboxStory();
 radioButtonGroupStory();
 selectStory();
 selectFieldStory();
-textFieldStory();
 sliderStory();
 // DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator story injection
 
@@ -42,4 +39,3 @@ collapsableStory();
 placeholderStory();
 pullQuoteStory();
 chipcomponentstory();
-formStory();

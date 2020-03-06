@@ -2,12 +2,12 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { checkA11y } from "@storybook/addon-a11y";
 import { withKnobs } from "@storybook/addon-knobs";
+import { storybookStyles } from "@hackoregon/ui-docs";
 // import { TextField } from "../src";
-import { storybookStyles } from "./storyStyles";
 import notes from "./textField.notes.md";
 
 export default () =>
-  storiesOf("Component Lib|Basic Inputs/TextField", module)
+  storiesOf("Component Lib|Lab/TextField", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .addDecorator(story => (

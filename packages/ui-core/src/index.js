@@ -7,7 +7,6 @@ export { default as Checkbox } from "./Checkbox/Checkbox";
 export { default as Chip } from "./Chip/Chip";
 export { default as Collapsable } from "./Collapsable/Collapsable";
 export { default as Dialog } from "./Dialog/Dialog";
-export { default as Form } from "./Form/Form";
 export { default as Icon } from "./Icon/Icon";
 export { default as NotebookPreview } from "./NotebookPreview/NotebookPreview";
 export { default as Placeholder } from "./Placeholder/Placeholder";
@@ -18,4 +17,3 @@ export {
 export { default as Select } from "./Select/Select";
 export { default as SelectField } from "./SelectField/SelectField";
 export { default as Slider } from "./Slider";
-export { default as TextField } from "./TextField/TextField";
