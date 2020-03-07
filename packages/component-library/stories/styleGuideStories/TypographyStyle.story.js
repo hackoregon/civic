@@ -59,6 +59,26 @@ const TypographyStyle = () => (
     <h5>Heading 5 Rubik</h5>
     <h6>Heading 6 Rubik</h6>
     <hr />
+    <h2>Levels:</h2>
+    <h3>Paragraph Levels</h3>
+    <code>className: p-sm, p-md, p-lg</code>
+    <p className="p-sm">Level p-sm Merriweather</p>
+    <p className="p-md">Level p-md Merriweather</p>
+    <p className="p-lg">Level p-lg Merriweather</p>
+    <h3>Data Levels</h3>
+    <code>className: data-sm, data-md, data-lg</code>
+    <p className="data-sm">Level data-sm Rubik</p>
+    <p className="data-md">Level data-md Rubik</p>
+    <p className="data-lg">Level data-lg Rubik</p>
+    <h3>Heading Levels</h3>
+    <code>className: h-1, h-2, h-3, h-4, h-5, h-6</code>
+    <p className="h-1">Level h-1 Rubik</p>
+    <p className="h-2">Level h-2 Rubik</p>
+    <p className="h-3">Level h-3 Rubik</p>
+    <p className="h-4">Level h-4 Rubik</p>
+    <p className="h-5">Level h-5 Rubik</p>
+    <p className="h-6">Level h-6 Rubik</p>
+    <hr />
     <h2>Paragraphs:</h2>
     <div style={paragraphStyle}>
       <p>

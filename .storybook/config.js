@@ -25,11 +25,13 @@ function loadStories() {
   require("../packages/component-library/stories");
 }
 
-const { BrandTheme } = require("../packages/component-library/src/index");
+const {
+  UpdatedBrandTheme
+} = require("../packages/component-library/src/index");
 
 const withGlobal = cb => (
   <>
-    <Global styles={BrandTheme} />
+    <Global styles={UpdatedBrandTheme} />
     {cb()}
   </>
 );

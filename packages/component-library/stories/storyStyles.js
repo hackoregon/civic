@@ -10,7 +10,8 @@ const storybookStyles = {
   main: {
     backgroundColor: "white",
     margin: "0 auto",
-    maxWidth: 600
+    maxWidth: 600,
+    padding: "1em"
   },
 
   // Use CSS grid to center UI components in the Storybook display area

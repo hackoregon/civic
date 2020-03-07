@@ -73,6 +73,7 @@ import TheBrandStyle from "./styleGuideStories/TheBrandStyle.story";
 import ThePlatformStyle from "./styleGuideStories/ThePlatformStyle.story";
 import UIComponentsStyle from "./styleGuideStories/UIComponentsStyle.story";
 import TypographyStyle from "./styleGuideStories/TypographyStyle.story";
+import SpacingStyle from "./styleGuideStories/SpacingStyle.story";
 // Legacy components used in 2017 package. Not supported for ongoing development.
 // import editableStory from './Editable.story';
 // import landingPage from './LandingPage.story';
@@ -91,7 +92,8 @@ storiesOf("Design|Brand", module)
   .addDecorator(checkA11y)
   .add("Logos", () => <LogosStyle />)
   .add("Color Theme", () => <ColorThemeStyle />)
-  .add("Typography", () => <TypographyStyle />);
+  .add("Typography", () => <TypographyStyle />)
+  .add("Spacing", () => <SpacingStyle />);
 
 // UX Style Guide
 storiesOf("Design|UX Style Guide", module)
