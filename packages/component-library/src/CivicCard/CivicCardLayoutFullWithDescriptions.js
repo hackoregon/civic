@@ -114,9 +114,11 @@ function CivicCardLayoutFullWithDescriptions({ isLoading, data, cardMeta }) {
   }`;
 
   function handleShareItemClick(option) {
-    const linkLocation = `${_.get(window, "location.origin", "")}/cards/${
-      cardMeta.slug
-    }`;
+    const linkLocation = `https://${_.get(
+      window,
+      "location.hostname",
+      ""
+    )}/cards/${cardMeta.slug}`;
 
     if (option === "link") {
       copy(linkLocation);

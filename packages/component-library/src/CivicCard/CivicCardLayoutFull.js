@@ -100,9 +100,11 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
     : null;
 
   function handleShareItemClick(option) {
-    const linkLocation = `${_.get(window, "location.origin", "")}/cards/${
-      cardMeta.slug
-    }`;
+    const linkLocation = `https://${_.get(
+      window,
+      "location.hostname",
+      ""
+    )}/cards/${cardMeta.slug}`;
     const scrOutput = document.querySelector("#scr-only");
 
     if (option === "link") {
