@@ -1,39 +1,19 @@
-## Hack Oregon's React Component Library
+# @hackoregon/ui-platform
 
 ---
 
-Hack Oregon's [React](http://facebook.github.io/react/) Component Library encompasses platform components, a style guide, as well as data visualization components to be shared across projects.
+This package contains UI components used for civicplatform.org. It should generally not be relied upon outside the civic repo.
 
-For styling, we are using [Emotion](https://emotion.sh/).
+This package is in alpha, and may have breaking changes.
 
-The components that end up here are either built using [React Storybook](https://getstorybook.io) or were ported into the Storybook dev environment. This allows us to make cross project compatibile components. Additionally, this allows us to iterate on design outside the context of a specific project.
-
-Documentation for usage of these components and visual examples will be available on the [Hack Oregon's Storybook](https://hackoregon.github.io/civic/).
-
-# Installation
-
-_Stable version:_
-
-```
-yarn add @hackoregon/component-library
-```
+## Installation
 
 _Latest version:_
 
 ```
-yarn add @hackoregon/component-library@ci
+yarn add @hackoregon/ui-platform@ci
 ```
 
-# Usage
+## Documentation
 
-```
-// import components individually
-import {
-  Button,
-  BarChart,
-  CivicStoryCard,
-} from "@hackoregon/component-library";
-
-// global styles
-import "@hackoregon/component-library/assets/global.styles.css";
-```
+Documentation is in [Storybook](https://hackoregon.github.io/civic/)

@@ -1,3 +1,5 @@
+> This package is being split up into smaller modules, and will be deprecated. See [this pull request](https://github.com/hackoregon/civic/pull/1200) for more details.
+
 ## Hack Oregon's React Component Library
 
 ---
@@ -12,12 +14,14 @@ Documentation for usage of these components and visual examples will be availabl
 
 # Installation
 
-*Stable version:*
+_Stable version:_
+
 ```
 yarn add @hackoregon/component-library
 ```
 
-*Latest version:*
+_Latest version:_
+
 ```
 yarn add @hackoregon/component-library@ci
 ```
@@ -35,4 +39,3 @@ import {
 // global styles
 import "@hackoregon/component-library/assets/global.styles.css";
 ```
-
