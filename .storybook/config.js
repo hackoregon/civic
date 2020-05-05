@@ -9,6 +9,8 @@ import { BrandTheme } from "@hackoregon/component-library";
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 import themeCIVIC from "./themeCIVIC";
 
+const STORYBOOK_ENV = process.env.STORYBOOK_ENV || "default";
+
 addParameters({
   options: {
     showPanel: true,
@@ -23,12 +25,16 @@ addParameters({
 });
 
 function loadStories() {
-  const req = require.context(
-    "../packages",
-    true,
-    /^\.\/[^\/]+\/stories\/index.story.js$/
-  );
-  req.keys().forEach(filename => req(filename));
+  if (STORYBOOK_ENV === "new") {
+    const req = require.context(
+      "../packages",
+      true,
+      /^\.\/[^\/]+\/stories\/index.story.js$/
+    );
+    req.keys().forEach(filename => req(filename));
+  } else {
+    require("../packages/component-library/stories");
+  }
 }
 
 const withGlobal = cb => (
