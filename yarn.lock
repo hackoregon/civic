@@ -1433,6 +1433,16 @@
   resolved "https://registry.yarnpkg.com/@emotion/weak-memoize/-/weak-memoize-0.2.3.tgz#dfa0c92efe44a1d1a7974fb49ffeb40ef2da5a27"
   integrity sha512-zVgvPwGK7c1aVdUVc9Qv7SqepOGRDrqCw7KZPSZziWGxSlbII3gmvGLPzLX4d0n0BMbamBacUrN22zOMyFFEkQ==
 
+"@hackoregon/ui-themes@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@hackoregon/ui-themes/-/ui-themes-0.0.4.tgz#d22f102e0259788043af6d145aa984df0078debe"
+  integrity sha512-Ph4qJn5UoUK616rmshfqWAh3hgJ9lCCa0HLmVH7VeJIyXR5Om7coKfDGcpOFqu9W+6vG8CANmZ6sB8yvBSbrrw==
+  dependencies:
+    "@material-ui/core" "^4.4.0"
+    lodash "^4.17.11"
+    react "^16.8.4"
+    react-dom "^16.8.4"
+
 "@hackoregon/webpack-common@3.0.1-ci.137":
   version "3.0.1-ci.137"
   resolved "https://registry.yarnpkg.com/@hackoregon/webpack-common/-/webpack-common-3.0.1-ci.137.tgz#6f9e3811bf45d920cd89adbdc0e06565670faf8b"
