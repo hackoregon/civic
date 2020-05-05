@@ -17,9 +17,10 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import { BrandColors, MaterialTheme } from "@hackoregon/ui-themes";
-import { Header, Checkbox, Button } from "@hackoregon/ui-core";
+import { Checkbox, Button } from "@hackoregon/ui-core";
 import { CivicCardLayoutPreview } from "@hackoregon/ui-cards";
 
+import Header from "../Header/Header";
 import ProjectCard from "./ProjectCard";
 import cardListStyling from "./cardListStyling";
 import cardShouldShow from "./displayUtils";
