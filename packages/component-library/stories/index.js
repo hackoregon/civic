@@ -71,11 +71,9 @@ import ResponsiveDesignStyle from "./styleGuideStories/ResponsiveDesignStyle.sto
 import TerminologyStyle from "./styleGuideStories/TerminologyStyle.story";
 import TheBrandStyle from "./styleGuideStories/TheBrandStyle.story";
 import ThePlatformStyle from "./styleGuideStories/ThePlatformStyle.story";
-import TypographyStyleCommonSample from "./styleGuideStories/TypographyStyleCommonSample.story";
-import TypographyStyleQuickUsage from "./styleGuideStories/TypographyStyleQuickUsage.story";
-import TypographyStyleHeadings from "./styleGuideStories/TypographyStyleHeadings.story";
-import TypographyStyleParagraphs from "./styleGuideStories/TypographyStyleParagraphs.story";
 import UIComponentsStyle from "./styleGuideStories/UIComponentsStyle.story";
+import TypographyStyle from "./styleGuideStories/TypographyStyle.story";
+import SpacingStyle from "./styleGuideStories/SpacingStyle.story";
 // Legacy components used in 2017 package. Not supported for ongoing development.
 // import editableStory from './Editable.story';
 // import landingPage from './LandingPage.story';
@@ -94,14 +92,8 @@ storiesOf("Design|Brand", module)
   .addDecorator(checkA11y)
   .add("Logos", () => <LogosStyle />)
   .add("Color Theme", () => <ColorThemeStyle />)
-  .add("Typography", () => (
-    <>
-      <TypographyStyleQuickUsage />
-      <TypographyStyleCommonSample />
-      <TypographyStyleHeadings />
-      <TypographyStyleParagraphs />
-    </>
-  ));
+  .add("Typography", () => <TypographyStyle />)
+  .add("Spacing", () => <SpacingStyle />);
 
 // UX Style Guide
 storiesOf("Design|UX Style Guide", module)
