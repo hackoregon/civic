@@ -8,6 +8,9 @@ import notes from "./notebookPreview.notes.md";
 
 export default () =>
   storiesOf("Component Lib|Common UI/NotebookPreview", module)
+    .addParameters({
+      component: NotebookPreview
+    })
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .addDecorator(story => (

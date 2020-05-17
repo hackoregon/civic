@@ -22,6 +22,9 @@ const GROUP_IDS = {
 
 export default () =>
   storiesOf("Component Lib|Basic Inputs/Select", module)
+    .addParameters({
+      component: Select
+    })
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .addDecorator(story => (

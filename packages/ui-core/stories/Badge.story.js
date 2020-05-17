@@ -9,6 +9,9 @@ import notes from "./badge.notes.md";
 
 export default () =>
   storiesOf("Component Lib|Common UI/Badge", module)
+    .addParameters({
+      component: Badge
+    })
     .addDecorator(checkA11y)
     .addDecorator(withKnobs)
     .addDecorator(story => (
