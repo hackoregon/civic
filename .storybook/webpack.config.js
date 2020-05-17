@@ -27,7 +27,7 @@ module.exports = createConfig([
       }
     ]
   }),
-  match(["*.js"], [storySourceLoader()])
+  match(["*.story.js"], [storySourceLoader()])
 ]);
 
 function storySourceLoader() {
@@ -38,6 +38,7 @@ function storySourceLoader() {
           Object.assign(
             {
               test: /\.stories\.jsx?$/,
+              exclude: /\.node_modules\./,
               loaders: [require.resolve("@storybook/addon-storysource/loader")],
               enforce: "pre"
             },
