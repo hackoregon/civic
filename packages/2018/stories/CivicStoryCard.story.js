@@ -88,7 +88,7 @@ const errorDemo = () => (
 );
 
 export default () =>
-  storiesOf("Component Lib|CIVIC Platform/CIVIC Story Card", module)
+  storiesOf("Projects|civicplatform•org/CIVIC Story Card", module)
     .add(
       "Simple usage",
       // 'This is some basic usage with the CivicStoryCard with just a title and descriptions')(

@@ -4,7 +4,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { WallOfRichText } from "@hackoregon/utils";
 import { Placeholder } from "@hackoregon/ui-core";
-import { PageLayout } from "../src";
+import { PageLayout } from "../src/components";
 
 const housingExample = () => (
   <PageLayout
@@ -129,7 +129,7 @@ const campaignFinanceExample = () => (
 );
 
 export default () =>
-  storiesOf("Component Lib|CIVIC Platform/Page Layout", module)
+  storiesOf("Projects|civicplatform•org/Page Layout", module)
     .add("A potential example of Housing Project", housingExample)
     .add(
       "A potential example of Campaign Finance Project",

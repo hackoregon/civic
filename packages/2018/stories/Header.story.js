@@ -2,8 +2,8 @@ import React from "react";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
 import { checkA11y } from "@storybook/addon-a11y";
-import { Header } from "../src";
-import Hero from "../src/Hero/Hero";
+import { Header } from "../src/components";
+import Hero from "../src/components/Hero/Hero";
 
 const title = "Simple usage";
 
@@ -37,7 +37,7 @@ const overlayDemo = () => (
 // const propDocs = { inline: true, propTables: [Header] };
 
 export default () =>
-  storiesOf("Component Lib|CIVIC Platform/Header", module)
+  storiesOf("Projects|civicplatform•org/Header", module)
     .addDecorator(checkA11y)
     .add(title, demoCode)
     .add(altTitle, altDemo)

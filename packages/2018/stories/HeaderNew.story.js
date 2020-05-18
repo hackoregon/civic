@@ -1,20 +1,19 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import { checkA11y } from "@storybook/addon-a11y";
-import { withKnobs, text } from "@storybook/addon-knobs";
-import { FooterNew as Footer } from "../src";
-import notes from "./footerNew.notes.md";
+import { withKnobs } from "@storybook/addon-knobs";
+import { HeaderNew as Header } from "../src/components";
+import notes from "./headerNew.notes.md";
 
 export default () =>
-  storiesOf("Component Lib|CIVIC Platform/Footer New", module)
+  storiesOf("Projects|civicplatform•org/HeaderNew", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .addDecorator(story => story())
     .add(
       "Standard",
       () => {
-        const message = text("Message");
-        return <Footer message={message} />;
+        return <Header />;
       },
       { notes }
     );

@@ -3,7 +3,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { text, withKnobs } from "@storybook/addon-knobs";
 
-import { PDF } from "../src";
+import { PDF } from "../src/components";
 
 const title = "Simple usage";
 
@@ -16,6 +16,6 @@ const demoCode = () => {
 };
 
 export default () =>
-  storiesOf("Component Lib|CIVIC Platform/PDF", module)
+  storiesOf("Projects|civicplatform•org/PDF", module)
     .addDecorator(withKnobs)
     .add(title, demoCode);

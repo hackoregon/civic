@@ -6,14 +6,14 @@ import { storiesOf } from "@storybook/react";
 import { number, withKnobs } from "@storybook/addon-knobs";
 import { checkA11y } from "@storybook/addon-a11y";
 import { wallOfText } from "@hackoregon/utils";
-import { CivicCardStack } from "../src";
+import { CivicCardStack } from "../src/components";
 
 const Container = ({ children }) => (
   <div style={{ padding: "30px" }}>{children}</div>
 );
 
 export default () =>
-  storiesOf("Component Lib|CIVIC Platform/CIVIC Card Stack", module)
+  storiesOf("Projects|civicplatform•org/CIVIC Card Stack", module)
     .addDecorator(checkA11y)
     .addDecorator(withKnobs)
     .add(

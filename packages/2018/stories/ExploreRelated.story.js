@@ -2,7 +2,7 @@ import React from "react";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
 import { checkA11y } from "@storybook/addon-a11y";
-import { ExploreRelated } from "../src/index";
+import { ExploreRelated } from "../src/components/index";
 import {
   SampleCard,
   SampleCardB,
@@ -55,7 +55,7 @@ const CardRegistryMock = {
 };
 
 export default () =>
-  storiesOf("Component Lib|CIVIC Platform/Explore Related", module)
+  storiesOf("Projects|civicplatform•org/Explore Related", module)
     .addDecorator(checkA11y)
     .addDecorator(story => <div>{story()}</div>)
     .add("Default", () => (

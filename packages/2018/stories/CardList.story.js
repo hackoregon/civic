@@ -3,7 +3,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { checkA11y } from "@storybook/addon-a11y";
 import { storybookStyles } from "@hackoregon/ui-themes";
-import { CardList } from "../src/index";
+import { CardList } from "../src/components/index";
 import sampleFilterCardsWithTags from "./CivicCardSample/SampleCardFilterData";
 
 const CardRegistryMock = {
@@ -63,7 +63,7 @@ const projectsMock = [
 ];
 
 export default () =>
-  storiesOf("Component Lib|CIVIC Platform/Card List", module)
+  storiesOf("Projects|civicplatform•org/Card List", module)
     .addDecorator(checkA11y)
     .addDecorator(story => (
       <div style={storybookStyles.storyGrid}>
