@@ -10,9 +10,6 @@ import { storybookStyles } from "./storyStyles";
 
 export default () =>
   storiesOf("Component Lib|Basic Inputs/Button", module)
-    .addParameters({
-      component: Button
-    })
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .addDecorator(story => (

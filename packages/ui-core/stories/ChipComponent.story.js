@@ -9,9 +9,6 @@ import { storybookStyles } from "./storyStyles";
 
 export default () => {
   storiesOf("Component Lib|Common UI/Chip", module)
-    .addParameters({
-      component: Chip
-    })
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .addDecorator(story => (

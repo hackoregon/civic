@@ -26,9 +26,6 @@ const GROUP_IDS = {
 
 export default () =>
   storiesOf("Component Lib|Basic Inputs/Checkbox", module)
-    .addParameters({
-      component: Checkbox
-    })
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .addDecorator(story => (

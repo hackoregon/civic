@@ -38,9 +38,6 @@ const overlayDemo = () => (
 
 export default () =>
   storiesOf("Component Lib|CIVIC Platform/Header", module)
-    .addParameters({
-      component: Header
-    })
     .addDecorator(checkA11y)
     .add(title, demoCode)
     .add(altTitle, altDemo)

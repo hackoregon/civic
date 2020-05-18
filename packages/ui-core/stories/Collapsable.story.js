@@ -6,9 +6,6 @@ import { Collapsable } from "../src";
 
 export default () =>
   storiesOf("Component Lib|Common UI/Collapsable", module)
-    .addParameters({
-      component: Collapsable
-    })
     .add(
       "Standard",
       () => {

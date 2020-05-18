@@ -9,9 +9,6 @@ import notes from "./dialog.notes.md";
 
 export default () =>
   storiesOf("Component Lib|Common UI/Dialog", module)
-    .addParameters({
-      component: Dialog
-    })
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .addDecorator(story => (

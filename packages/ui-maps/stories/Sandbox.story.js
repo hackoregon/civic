@@ -407,8 +407,7 @@ class SandboxStory extends Component {
 }
 
 export default () =>
-  storiesOf("Component Lib|CIVIC Platform/Sandbox", module)
-    .addParameters({
-      component: Sandbox
-    })
-    .add("Sandbox", () => <SandboxStory />);
+  storiesOf("Component Lib|CIVIC Platform/Sandbox", module).add(
+    "Sandbox",
+    () => <SandboxStory />
+  );
