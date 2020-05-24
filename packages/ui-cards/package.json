@@ -24,6 +24,7 @@
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.0",
     "@babel/register": "^7.0.0",
+    "@hackoregon/ui-charts": "^0.0.4",
     "@storybook/addon-a11y": "^5.3.18",
     "@storybook/react": "^5.3.18",
     "chai": "^4.2.0",
@@ -42,7 +43,6 @@
   "dependencies": {
     "@emotion/core": "^10.0.15",
     "@hackoregon/ui-brand": "^0.0.4",
-    "@hackoregon/ui-charts": "^0.0.4",
     "@hackoregon/ui-core": "^0.0.4",
     "@hackoregon/ui-themes": "^0.0.4",
     "@hackoregon/utils": "^0.0.4",
