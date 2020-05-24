@@ -13,7 +13,6 @@ import {
 } from "victory";
 import shortid from "shortid";
 import {
-  chartHelpers,
   groupByKey,
   DataChecker,
   protectData,
@@ -23,6 +22,7 @@ import { VictoryTheme } from "@hackoregon/ui-themes";
 
 import SimpleLegend from "../SimpleLegend";
 import ChartContainer from "../ChartContainer";
+import chartHelpers from "../chartHelpers";
 
 const {
   chartEvents,

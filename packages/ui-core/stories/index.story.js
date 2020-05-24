@@ -9,6 +9,7 @@ import badgeStory from "./Badge.story";
 import buttonStory from "./Button.story";
 import checkboxStory from "./Checkbox.story";
 import collapsableStory from "./Collapsable.story";
+import dropdownStory from "./Dropdown.story";
 import notebookPreviewStory from "./NotebookPreview.story";
 import placeholderStory from "./Placeholder.story";
 import pullQuoteStory from "./PullQuote.story";
@@ -23,6 +24,7 @@ storiesOf("Component Lib|Basic Inputs", module)
 buttonStory();
 buttonNewStory();
 checkboxStory();
+dropdownStory();
 radioButtonGroupStory();
 selectStory();
 selectFieldStory();

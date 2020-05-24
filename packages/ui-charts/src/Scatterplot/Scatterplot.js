@@ -9,15 +9,11 @@ import {
   VictoryTooltip
 } from "victory";
 import { VictoryTheme } from "@hackoregon/ui-themes";
-import {
-  chartHelpers,
-  civicFormat,
-  protectData,
-  DataChecker
-} from "@hackoregon/utils";
+import { civicFormat, protectData, DataChecker } from "@hackoregon/utils";
 
 import ChartContainer from "../ChartContainer";
 import SimpleLegend from "../SimpleLegend";
+import chartHelpers from "../chartHelpers";
 
 const {
   chartEvents,

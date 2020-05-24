@@ -69,6 +69,7 @@
     "rc-slider": "^7.0.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
+    "react-select": "^1.0.0-rc.3",
     "react-share": "^2.2.0",
     "shortid": "^2.2.14"
   },

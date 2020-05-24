@@ -11,9 +11,6 @@ export { default as Footer } from "./Footer/Footer";
 export { default as FooterNew } from "./FooterNew/FooterNew";
 export { default as Header } from "./Navigation/Header";
 export { default as Hero } from "./Hero/Hero";
-export {
-  default as PackageSelectorBox
-} from "./PackageSelectorBox/PackageSelectorBox";
 export { default as PageLayout } from "./PageLayout/PageLayout";
 export { default as PDF } from "./PDF/PDF";
 export { default as ScrollToTop } from "./ScrollToTop/ScrollToTop";

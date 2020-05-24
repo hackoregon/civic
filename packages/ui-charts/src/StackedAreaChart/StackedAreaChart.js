@@ -12,11 +12,12 @@ import {
   VictoryArea
 } from "victory";
 import { VictoryTheme } from "@hackoregon/ui-themes";
-import { chartHelpers, DataChecker, civicFormat } from "@hackoregon/utils";
+import { DataChecker, civicFormat } from "@hackoregon/utils";
 
 import shortid from "shortid";
 import ChartContainer from "../ChartContainer";
 import SimpleLegend from "../SimpleLegend";
+import chartHelpers from "../chartHelpers";
 
 const {
   chartEvents,

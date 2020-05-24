@@ -6,6 +6,7 @@ export { default as ButtonNew } from "./ButtonNew/ButtonNew";
 export { default as Checkbox } from "./Checkbox/Checkbox";
 export { default as Chip } from "./Chip/Chip";
 export { default as Collapsable } from "./Collapsable/Collapsable";
+export { default as Dropdown } from "./Dropdown/Dropdown";
 export { default as Dialog } from "./Dialog/Dialog";
 export { default as Icon } from "./Icon/Icon";
 export { default as NotebookPreview } from "./NotebookPreview/NotebookPreview";

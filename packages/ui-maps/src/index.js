@@ -1,19 +1,14 @@
-import * as componentLibrary from "@hackoregon/component-library";
-
-const {
-  DemoJSONLoader,
-  VisualizationColors,
-  civicFormat,
-  BrandColors,
-  LineChart,
-  Placeholder,
-  Logo,
+import { DemoJSONLoader, civicFormat } from "@hackoregon/utils";
+import { VisualizationColors, BrandColors } from "@hackoregon/ui-themes";
+import { LineChart } from "@hackoregon/ui-charts";
+import {
   Checkbox,
+  Placeholder,
   ButtonNew,
   Dialog,
-  PackageSelectorBox,
   Dropdown
-} = componentLibrary;
+} from "@hackoregon/ui-core";
+import { Logo } from "@hackoregon/ui-brand";
 
 export { default as BaseMap } from "./BaseMap/BaseMap";
 export { default as ScatterPlotMap } from "./ScatterPlotMap/ScatterPlotMap";
@@ -33,6 +28,9 @@ export {
 export { default as Sandbox } from "./Sandbox/Sandbox";
 export { default as PolygonPreview } from "./PolygonPreview/PolygonPreview";
 export { default as MapLegend } from "./MapLegend/MapLegend";
+export {
+  default as PackageSelectorBox
+} from "./PackageSelectorBox/PackageSelectorBox";
 
 export {
   DemoJSONLoader,
@@ -45,6 +43,5 @@ export {
   Checkbox,
   ButtonNew,
   Dialog,
-  PackageSelectorBox,
   Dropdown
 };

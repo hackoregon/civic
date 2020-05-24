@@ -14,15 +14,11 @@ import {
 
 import { ThemeProvider } from "emotion-theming";
 import { VictoryTheme } from "@hackoregon/ui-themes";
-import {
-  DataChecker,
-  civicFormat,
-  protectData,
-  chartHelpers
-} from "@hackoregon/utils";
+import { DataChecker, civicFormat, protectData } from "@hackoregon/utils";
 
 import ChartContainer from "../ChartContainer";
 import SimpleLegend from "../SimpleLegend";
+import chartHelpers from "../chartHelpers";
 
 const {
   chartEvents,

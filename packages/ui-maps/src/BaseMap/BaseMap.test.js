@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { MapGLResources } from "@hackoregon/component-library";
+import { MapGLResources } from "@hackoregon/ui-themes";
 import BaseMap from "./BaseMap";
 import ScatterPlotMap from "../ScatterPlotMap/ScatterPlotMap";
 
