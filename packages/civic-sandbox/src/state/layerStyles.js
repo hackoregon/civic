@@ -1,5 +1,5 @@
-/* eslint-disable */
-import { scaleThreshold } from "d3";
+/* eslint-disable no-nested-ternary */
+import { scaleThreshold } from "d3-scale";
 
 /* COLOR SCHEME OPTIONS */
 const thermal = [

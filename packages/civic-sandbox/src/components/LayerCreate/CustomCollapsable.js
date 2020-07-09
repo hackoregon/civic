@@ -1,5 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-
 /** @jsx jsx */
 import { useState, Children, useRef, Fragment } from "react";
 import PropTypes from "prop-types";

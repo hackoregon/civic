@@ -1,13 +1,12 @@
-/* eslint-disable import/no-extraneous-dependencies */
-
 /**
  * Note, this component doesn't really do much at this point other than render the SandboxComponent
  * If package selector is added back mapIsOpen could be useful again
  */
 
-import React from "react";
+/** @jsx jsx */
+import { Component } from "react";
 import { connect } from "react-redux";
-import { css } from "emotion";
+import { jsx, css } from "@emotion/core";
 import { bool, func, shape } from "prop-types";
 
 import { PackageSelectorBox } from "@hackoregon/component-library";
@@ -26,7 +25,7 @@ const error = css`
   padding: 30px;
 `;
 
-export class Packages extends React.Component {
+export class Packages extends Component {
   constructor() {
     super();
     this.state = {

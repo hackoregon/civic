@@ -1,7 +1,7 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import React from "react";
+/** @jsx jsx */
+import { Component } from "react";
 import { connect } from "react-redux";
-import { css } from "emotion";
+import { css, jsx } from "@emotion/core";
 import { Sandbox } from "@hackoregon/component-library";
 import { arrayOf, shape, func, string, bool } from "prop-types";
 import { equals } from "ramda";
@@ -41,7 +41,7 @@ import {
   getSelectedFoundationDatum
 } from "../../state/sandbox/selectors";
 
-class SandboxComponent extends React.Component {
+class SandboxComponent extends Component {
   constructor() {
     super();
     this.state = {

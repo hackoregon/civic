@@ -3765,8 +3765,10 @@ __metadata:
     "@babel/core": ^7.0.0
     "@babel/node": ^7.0.0
     "@babel/register": ^7.0.0
+    "@emotion/core": ^10.0.10
     "@hackoregon/civic-babel-presets": ^3.0.0
     "@hackoregon/component-library": ^4.0.0
+    "@hackoregon/dev-server": "workspace:packages/dev-server"
     "@hackoregon/mock-wrapper": ^3.0.0
     "@hackoregon/webpack-common": ^3.0.0
     autoprefixer: ^9.4.10
@@ -3783,6 +3785,7 @@ __metadata:
     coveralls: ^3.0.3
     cross-env: ^5.2.0
     css-loader: ^2.1.1
+    d3-scale: ^3.1.0
     enzyme: ^3.9.0
     eslint: ^5.15.1
     eslint-config-airbnb: ^17.1.0
@@ -3817,6 +3820,7 @@ __metadata:
     react-redux: ^6.0.1
     react-router: ^3.2.4
     react-router-redux: ^4.0.8
+    react-select: ^1.0.0-rc.3
     react-transform-hmr: ^1.0.4
     redux: ^4.0.1
     redux-form: ^8.1.0
