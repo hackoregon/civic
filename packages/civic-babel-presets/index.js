@@ -11,9 +11,9 @@ const preset = {
     require.resolve("@babel/preset-react")
   ],
   plugins: [
-    require.resolve("@babel/plugin-transform-class-properties"),
+    require.resolve("@babel/plugin-proposal-class-properties"),
     [
-      require.resolve("babel-plugin-transform-object-rest-spread"),
+      require.resolve("@babel/plugin-proposal-object-rest-spread"),
       {
         useBuiltIns: true
       }
@@ -45,9 +45,9 @@ if (env === "development" || env === "test") {
 
 if (env === "test") {
   preset.plugins.push.apply(preset.plugins, [
-    require.resolve("@babel/plugin-dynamic-import-node"),
+    require.resolve("babel-plugin-dynamic-import-node"),
     [
-      require.resolve("@babel/plugin-transform-es2015-modules-commonjs"),
+      require.resolve("babel-plugin-transform-es2015-modules-commonjs"),
       {
         loose: true
       }
@@ -57,7 +57,7 @@ if (env === "test") {
 
 if (env === "production") {
   preset.plugins.push.apply(preset.plugins, [
-    require.resolve("@babel/plugin-transform-react-remove-prop-types")
+    require.resolve("babel-plugin-transform-react-remove-prop-types")
   ]);
 }
 
