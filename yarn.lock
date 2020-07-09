@@ -3277,6 +3277,7 @@ __metadata:
     jsdom-global: ^3.0.2
     json-loader: ^0.5.4
     lerna: ^3.13.1
+    lodash: ^4.17.15
     lodash-webpack-plugin: ^0.11.2
     mocha: ^6.0.2
     mocha-clean: ^1.0.0

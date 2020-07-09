@@ -1,7 +1,7 @@
-import React, { useState, Fragment } from "react";
+/** @jsx jsx */
+import { useState, Fragment } from "react";
 import PropTypes from "prop-types";
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { css } from "emotion"; // eslint-disable-line emotion/no-vanilla
+import { jsx, css } from "@emotion/core";
 
 import {
   LineChart,
