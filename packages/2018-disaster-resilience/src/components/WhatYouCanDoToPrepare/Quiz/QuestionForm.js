@@ -1,10 +1,11 @@
-/* TODO: fix linting errors */
+// TODO: Fix accessibility linting errors
 /* eslint-disable */
+/** @jsx jsx */
 import PropTypes from "prop-types";
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import { Field, reduxForm } from "redux-form";
 import { Button } from "@hackoregon/component-library";
-import { css } from "@emotion/core";
+import { jsx, css } from "@emotion/core";
 
 import QRMap from "../QR";
 import Question from "./Question";
