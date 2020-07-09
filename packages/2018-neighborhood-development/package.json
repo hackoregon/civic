@@ -61,6 +61,7 @@
     "@babel/node": "^7.0.0",
     "@babel/register": "^7.0.0",
     "@hackoregon/civic-babel-presets": "^3.0.0",
+    "@hackoregon/dev-server": "workspace:packages/dev-server",
     "@hackoregon/webpack-common": "^3.0.0",
     "autoprefixer": "^9.4.10",
     "babel-jest": "^24.5.0",
