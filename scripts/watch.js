@@ -3,7 +3,7 @@
 const { resolve } = require("path");
 const { writeFile, existsSync, mkdirSync } = require("fs");
 const { createMonitor, walk } = require("watch");
-const { transformFileSync } = require("babel-core");
+const { transformFileSync } = require("@babel/core");
 const colors = require("colors/safe");
 
 // resolves
