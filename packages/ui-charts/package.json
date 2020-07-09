@@ -45,7 +45,7 @@
     "@hackoregon/ui-themes": "^0.0.4",
     "@hackoregon/utils": "^0.0.4",
     "emotion-theming": "^10.0.14",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",

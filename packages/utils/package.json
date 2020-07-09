@@ -42,7 +42,7 @@
     "@emotion/core": "^10.0.15",
     "d3-format": "1.3.0",
     "d3-time-format": "^2.1.3",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
