@@ -21,7 +21,6 @@
     "type": "git",
     "url": "git+https://github.com/hackoregon/civic.git"
   },
-  "private": false,
   "keywords": [
     "civic",
     "hackoregon",

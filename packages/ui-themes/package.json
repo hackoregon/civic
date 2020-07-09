@@ -19,7 +19,6 @@
   "repository": "git+https://github.com/hackoregon/civic.git",
   "author": "jaron@civicsoftwarefoundation.org",
   "license": "MIT",
-  "private": false,
   "devDependencies": {
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.0",
@@ -32,7 +31,7 @@
     "lodash": "^4.17.11",
     "react": "^16.8.4",
     "react-dom": "^16.8.4"
-  },  
+  },
   "publishConfig": {
     "access": "public"
   }

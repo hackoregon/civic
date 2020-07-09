@@ -16,7 +16,6 @@
     "civic",
     "hackoregon"
   ],
-  "private": false,
   "author": "",
   "license": "MIT",
   "dependencies": {

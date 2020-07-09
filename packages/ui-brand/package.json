@@ -19,12 +19,11 @@
   "repository": "git+https://github.com/hackoregon/civic.git",
   "author": "jaron@civicsoftwarefoundation.org",
   "license": "MIT",
-  "private": false,
   "devDependencies": {
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.0",
     "@babel/register": "^7.0.0",
-    "@hackoregon/ui-docs": "^0.0.4",    
+    "@hackoregon/ui-docs": "^0.0.4",
     "@storybook/addon-a11y": "^5.3.18",
     "@storybook/react": "^5.3.18",
     "chai": "^4.2.0",
