@@ -2758,6 +2758,7 @@ __metadata:
     "@babel/register": ^7.0.0
     "@hackoregon/civic-babel-presets": ^3.0.0
     "@hackoregon/component-library": ^4.0.0
+    "@hackoregon/dev-server": "workspace:packages/dev-server"
     "@hackoregon/mock-wrapper": ^3.0.0
     "@hackoregon/webpack-common": ^3.0.0
     autoprefixer: ^9.4.10
