@@ -37,6 +37,8 @@ A couple other libraries in use in the background are:
 These libraries in the background aren't necessary to really understand, but knowing that the tools
 are in use and how they work can help when debugging issues. Read more in our [Architecture guide](ARCHITECTURE.md).
 
+Prior to adding a new dependency, use the tooling to check if there's a version in use in other packages. For example, if you `yarn add -i lodash`, it will check for other versions of `lodash` in the workspace.
+
 ## Code style and linting
 
 We use automated tools to ensure code quality. You don't need to install anything, but you can configure your editor to make working with these automated tools easier.

@@ -41,7 +41,7 @@ Before you install and build, you'll need the following.
    You will need the following tools installed in your Unix shell:
 
    - [nvm](https://github.com/creationix/nvm)
-   - [yarn](https://yarnpkg.com/) > 1.0
+   - [yarn](https://yarnpkg.com/) > 2.0
 
    These tools make sure every contributor has identical dependency versions, include node and node packages.
 
