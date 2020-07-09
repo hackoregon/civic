@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router";
-import { PageLayout, ExploreRelated } from "../..";
+import { PageLayout, ExploreRelated } from "..";
 
 const CardDetailPage = ({ params, CardRegistry }) => {
   const card = CardRegistry.find(params.slug);

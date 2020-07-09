@@ -8,7 +8,7 @@ import { generate } from "shortid";
 
 import cardMetaTypes from "./cardMetaTypes";
 import CivicCardLink from "./CivicCardLink";
-import { Chip, BrandColors } from "../..";
+import { Chip, BrandColors } from "..";
 
 const { secondary } = BrandColors;
 

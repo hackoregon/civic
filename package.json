@@ -48,6 +48,7 @@
     "publish-patch": "lerna publish bump patch --yes",
     "start": "node scripts/start",
     "storybook": "BABEL_ENV=esm start-storybook -p 6006",
+    "storybook-new": "BABEL_ENV=esm STORYBOOK_ENV=new start-storybook -p 6006",
     "test": "lerna exec yarn test --no-bail",
     "travis": "make travis",
     "watch": "node scripts/watch"
@@ -78,7 +79,7 @@
     "@storybook/addon-knobs": "^5.0.6",
     "@storybook/addon-links": "^5.0.6",
     "@storybook/addon-notes": "^5.0.6",
-    "@storybook/addon-storysource": "5.0.6",
+    "@storybook/addon-storysource": "^5.0.6",
     "@storybook/addon-viewport": "^5.0.11",
     "@storybook/react": "^5.0.6",
     "@storybook/storybook-deployer": "^2.3.0",

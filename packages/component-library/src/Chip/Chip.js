@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import MaterialChip from "@material-ui/core/Chip";
 import { makeStyles } from "@material-ui/styles";
 import Label from "@material-ui/icons/Label";
-import { BrandColors } from "../..";
+import { BrandColors } from "..";
 
 const { secondary } = BrandColors;
 

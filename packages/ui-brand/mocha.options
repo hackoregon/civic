@@ -1,0 +1,6 @@
+--require ignore-styles
+--require source-map-support/register
+--colors
+--recursive
+--require ./mocha.conf.js
+--ui bdd
