@@ -7,6 +7,7 @@ services:
 install:
 - npm i -g rimraf
 - npm i -g cross-env
+- yarn
 - yarn bootstrap
 matrix:
   include:
