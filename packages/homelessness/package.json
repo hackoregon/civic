@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "@hackoregon/component-library": "^4.0.0",
+    "axios": "^0.18.0",
     "compression": "^1.6.2",
     "cross-env": "^5.2.0",
     "d3-format": "^1.2.0",
@@ -86,6 +87,7 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "7.0.0",
     "@hackoregon/civic-babel-presets": "^3.0.0",
+    "@hackoregon/dev-server": "workspace:packages/dev-server",
     "@hackoregon/mock-wrapper": "^3.0.0",
     "@hackoregon/webpack-common": "^3.0.0",
     "autoprefixer": "^9.4.10",
@@ -109,6 +111,7 @@
     "css-loader": "^2.1.1",
     "enzyme": "3.9.0",
     "enzyme-adapter-react-16": "1.11.2",
+    "eslint": "^5.15.1",
     "jest": "^24.5.0",
     "jsdom": "^14.0.0",
     "jsdom-global": "^3.0.2",
@@ -133,6 +136,7 @@
     "version-bump-prompt": "^3.1.0",
     "webpack": "^4.29.6",
     "webpack-blocks": "^2.0.0-rc",
+    "webpack-bundle-analyzer": "^3.1.0",
     "webpack-cli": "3.2.3"
   }
 }

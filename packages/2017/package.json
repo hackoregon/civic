@@ -24,6 +24,11 @@
   },
   "homepage": "https://github.com/hackoregon/civic#readme",
   "dependencies": {
+    "@hackoregon/civic-budget": "workspace:packages/budget",
+    "@hackoregon/civic-emergency-response": "workspace:packages/emergency-response",
+    "@hackoregon/civic-homelessness": "workspace:packages/homelessness",
+    "@hackoregon/civic-housing": "workspace:packages/housing",
+    "@hackoregon/transportation": "workspace:packages/transportation",
     "add": "^2.0.6",
     "chalk": "^1.1.3",
     "compression": "^1.6.2",

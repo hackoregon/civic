@@ -2310,8 +2310,13 @@ __metadata:
     "@babel/node": ^7.0.0
     "@babel/register": ^7.0.0
     "@hackoregon/civic-babel-presets": ^3.0.0
+    "@hackoregon/civic-budget": "workspace:packages/budget"
+    "@hackoregon/civic-emergency-response": "workspace:packages/emergency-response"
+    "@hackoregon/civic-homelessness": "workspace:packages/homelessness"
+    "@hackoregon/civic-housing": "workspace:packages/housing"
     "@hackoregon/component-library": ^4.0.0
     "@hackoregon/dev-server": ^3.0.0
+    "@hackoregon/transportation": "workspace:packages/transportation"
     "@hackoregon/webpack-common": ^3.0.0
     add: ^2.0.6
     autoprefixer: ^9.4.10
@@ -3416,6 +3421,7 @@ __metadata:
     babel-plugin-dynamic-import-node: ^2.2.0
     babel-plugin-emotion: ^10.0.9
     babel-plugin-lodash: ^3.3.2
+    babel-plugin-transform-es2015-modules-commonjs: ^6.26.2
     babel-plugin-transform-react-remove-prop-types: ^0.4.24
   languageName: unknown
   linkType: soft
@@ -3430,6 +3436,7 @@ __metadata:
     "@babel/register": ^7.0.0
     "@hackoregon/civic-babel-presets": ^3.0.0
     "@hackoregon/component-library": ^4.0.0
+    "@hackoregon/dev-server": "workspace:packages/dev-server"
     "@hackoregon/mock-wrapper": ^3.0.0
     "@hackoregon/webpack-common": ^3.0.0
     autoprefixer: ^9.4.10
@@ -3493,7 +3500,10 @@ __metadata:
     version-bump-prompt: ^3.1.0
     webpack: ^4.29.6
     webpack-blocks: ^2.0.0-rc
+    webpack-bundle-analyzer: ^3.1.0
     webpack-cli: ^3.2.3
+    webpack-dev-middleware: ^3.6.1
+    webpack-hot-middleware: ^2.24.3
   languageName: unknown
   linkType: soft
 
@@ -3507,6 +3517,7 @@ __metadata:
     "@babel/register": ^7.0.0
     "@hackoregon/civic-babel-presets": ^3.0.0
     "@hackoregon/component-library": ^4.0.0
+    "@hackoregon/dev-server": "workspace:packages/dev-server"
     "@hackoregon/mock-wrapper": ^3.0.0
     "@hackoregon/webpack-common": ^3.0.0
     autoprefixer: ^9.4.10
@@ -3543,6 +3554,7 @@ __metadata:
     jsdom-global: ^3.0.2
     json-loader: ^0.5.4
     lerna: ^3.13.1
+    lodash: ^4.17.19
     lodash-webpack-plugin: ^0.11.2
     mocha: ^6.0.2
     mocha-clean: ^1.0.0
@@ -3583,6 +3595,8 @@ __metadata:
     webpack: ^4.29.6
     webpack-blocks: ^2.0.0-rc
     webpack-cli: ^3.2.3
+    webpack-dev-middleware: ^3.6.1
+    webpack-hot-middleware: ^2.24.3
   languageName: unknown
   linkType: soft
 
@@ -3618,9 +3632,11 @@ __metadata:
     "@babel/register": 7.0.0
     "@hackoregon/civic-babel-presets": ^3.0.0
     "@hackoregon/component-library": ^4.0.0
+    "@hackoregon/dev-server": "workspace:packages/dev-server"
     "@hackoregon/mock-wrapper": ^3.0.0
     "@hackoregon/webpack-common": ^3.0.0
     autoprefixer: ^9.4.10
+    axios: ^0.18.0
     babel-eslint: ^10.0.1
     babel-jest: ^24.5.0
     babel-loader: ^8.0.0
@@ -3645,6 +3661,7 @@ __metadata:
     emotion: ^10.0.9
     enzyme: 3.9.0
     enzyme-adapter-react-16: 1.11.2
+    eslint: ^5.15.1
     express: ^4.14.1
     invariant: ^2.2.2
     isomorphic-fetch: ^2.2.1
@@ -3686,6 +3703,7 @@ __metadata:
     version-bump-prompt: ^3.1.0
     webpack: ^4.29.6
     webpack-blocks: ^2.0.0-rc
+    webpack-bundle-analyzer: ^3.1.0
     webpack-cli: 3.2.3
   languageName: unknown
   linkType: soft
@@ -3700,6 +3718,7 @@ __metadata:
     "@babel/register": ^7.0.0
     "@hackoregon/civic-babel-presets": ^3.0.0
     "@hackoregon/component-library": ^4.0.0
+    "@hackoregon/dev-server": "workspace:packages/dev-server"
     "@hackoregon/mock-wrapper": ^3.0.0
     "@hackoregon/webpack-common": ^3.0.0
     autoprefixer: ^9.4.10
@@ -4069,6 +4088,7 @@ __metadata:
     "@babel/register": 7.0.0
     "@hackoregon/civic-babel-presets": ^3.0.0
     "@hackoregon/component-library": ^4.0.0
+    "@hackoregon/dev-server": "workspace:packages/dev-server"
     "@hackoregon/mock-wrapper": ^3.0.0
     "@hackoregon/webpack-common": ^3.0.0
     autoprefixer: ^9.4.10
@@ -4135,7 +4155,10 @@ __metadata:
     version-bump-prompt: ^3.1.0
     webpack: ^4.29.6
     webpack-blocks: ^2.0.0-rc
+    webpack-bundle-analyzer: ^3.1.0
     webpack-cli: ^3.2.3
+    webpack-dev-middleware: ^3.6.1
+    webpack-hot-middleware: ^2.24.3
   languageName: unknown
   linkType: soft
 
@@ -8558,6 +8581,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"babel-messages@npm:^6.23.0":
+  version: 6.23.0
+  resolution: "babel-messages@npm:6.23.0"
+  dependencies:
+    babel-runtime: ^6.22.0
+  checksum: 9a04e1b86bf68f0469efc7d09d04dbcd69d386ae0347d71c67b8867d6763f0b46616856ca3669b982e9e000642b0546271ecda51c1e1a321fc8cf179ad6d65ad
+  languageName: node
+  linkType: hard
+
 "babel-plugin-add-module-exports@npm:^1.0.0":
   version: 1.0.0
   resolution: "babel-plugin-add-module-exports@npm:1.0.0"
@@ -8818,6 +8850,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"babel-plugin-transform-es2015-modules-commonjs@npm:^6.26.2":
+  version: 6.26.2
+  resolution: "babel-plugin-transform-es2015-modules-commonjs@npm:6.26.2"
+  dependencies:
+    babel-plugin-transform-strict-mode: ^6.24.1
+    babel-runtime: ^6.26.0
+    babel-template: ^6.26.0
+    babel-types: ^6.26.0
+  checksum: 90d922e12ea3f91031e9a79664d40047857b9fe88d66230f0e92843ef93f1e35421408792a86cf34a4fda0142aed6adcbfbdfba04dfb1b7982144fe308a4982e
+  languageName: node
+  linkType: hard
+
 "babel-plugin-transform-inline-consecutive-adds@npm:^0.4.3":
   version: 0.4.3
   resolution: "babel-plugin-transform-inline-consecutive-adds@npm:0.4.3"
@@ -8933,6 +8977,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"babel-plugin-transform-strict-mode@npm:^6.24.1":
+  version: 6.24.1
+  resolution: "babel-plugin-transform-strict-mode@npm:6.24.1"
+  dependencies:
+    babel-runtime: ^6.22.0
+    babel-types: ^6.24.1
+  checksum: aaad892238085565a07efad8c389395aa24dcec8a5190e60cd779f97bbe5d24daa5cc19669c34840f622bc5bb59b04df1a86520520c578fee6a8c3c3b5d64ca6
+  languageName: node
+  linkType: hard
+
 "babel-plugin-transform-undefined-to-void@npm:^6.9.4":
   version: 6.9.4
   resolution: "babel-plugin-transform-undefined-to-void@npm:6.9.4"
@@ -9014,6 +9068,57 @@ __metadata:
     core-js: ^2.4.0
     regenerator-runtime: ^0.11.0
   checksum: 5010bf1d81e484d9c6a5b4e4c32564a0dc180c2dc5a65f999729c3cb63b9c6e805d3d10c19a4ccc2112bce084e39e51e52daf5c21df0141ce8e6e37727af2e0b
+  languageName: node
+  linkType: hard
+
+"babel-template@npm:^6.26.0":
+  version: 6.26.0
+  resolution: "babel-template@npm:6.26.0"
+  dependencies:
+    babel-runtime: ^6.26.0
+    babel-traverse: ^6.26.0
+    babel-types: ^6.26.0
+    babylon: ^6.18.0
+    lodash: ^4.17.4
+  checksum: 3c76998a19c90e1aa2c37c4fd6a83b01db685df169f83669a40c459deda30792c40de1f2a1ffe405c9c8c25e4cd00733c0185244f5c457e94579bbe272bb22ef
+  languageName: node
+  linkType: hard
+
+"babel-traverse@npm:^6.26.0":
+  version: 6.26.0
+  resolution: "babel-traverse@npm:6.26.0"
+  dependencies:
+    babel-code-frame: ^6.26.0
+    babel-messages: ^6.23.0
+    babel-runtime: ^6.26.0
+    babel-types: ^6.26.0
+    babylon: ^6.18.0
+    debug: ^2.6.8
+    globals: ^9.18.0
+    invariant: ^2.2.2
+    lodash: ^4.17.4
+  checksum: 05030a5152139565a2fe1d277d6ff337df33fe406b9eedb04c8fb740d2c26008d051457437fbf32faace5ea3cee968dcfba0bc4f359743917a03d1ee945ca5f3
+  languageName: node
+  linkType: hard
+
+"babel-types@npm:^6.24.1, babel-types@npm:^6.26.0":
+  version: 6.26.0
+  resolution: "babel-types@npm:6.26.0"
+  dependencies:
+    babel-runtime: ^6.26.0
+    esutils: ^2.0.2
+    lodash: ^4.17.4
+    to-fast-properties: ^1.0.3
+  checksum: 9fb4b712afe5c19bfd2ab77e9888062d1b4888be22d8b21934fee03dbbd6add8d89ce9e435b7321a1047776c14f713301666112a5c5e505cb673e88d63076cca
+  languageName: node
+  linkType: hard
+
+"babylon@npm:^6.18.0":
+  version: 6.18.0
+  resolution: "babylon@npm:6.18.0"
+  bin:
+    babylon: ./bin/babylon.js
+  checksum: af38302e3fd8b01004ab03e7f42e00d3d6b3e85190102a1ad7ffbed87bc025d96413a7c165b2b5f0b78e576b71e5306a67c1ae0368f6d12bef40fd00b0dbc7b5
   languageName: node
   linkType: hard
 
@@ -15442,6 +15547,13 @@ fsevents@~2.1.2:
   version: 11.11.0
   resolution: "globals@npm:11.11.0"
   checksum: 41ead5d35fb9fa6eb56da9efd1dce5ddb39fdc05d01312780c22de620e473fa7613d7631b9c4c1fabc99a093b11303f9dafa47db9138a4858bd879b3a58abc41
+  languageName: node
+  linkType: hard
+
+"globals@npm:^9.18.0":
+  version: 9.18.0
+  resolution: "globals@npm:9.18.0"
+  checksum: ad86a4b4d7348a259c4a0748c5f4c7c1c51c624567a48538092b7fc0b6cba7d9de9d16e7b788c693b590856608f9a697af2295ff278ff442d8fa705dd1240164
   languageName: node
   linkType: hard
 
@@ -27389,6 +27501,13 @@ resolve@^1.4.0:
   version: 1.0.1
   resolution: "to-arraybuffer@npm:1.0.1"
   checksum: 23e72a6636e32fa992a4ad952564af136460b8b9ac603737fd8e7ecefe762284c4368f3f455b4252c95401cb2d3c8e356da1ef915a7c40152b62592ee38911c4
+  languageName: node
+  linkType: hard
+
+"to-fast-properties@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "to-fast-properties@npm:1.0.3"
+  checksum: bfe41c936705c9d82ed21ac6f39384c323d860f74b55d2354bc511eeb5f5729849f70ea4c1fab8ad71ca5717fa184c94899778e4959ef09e7316708086cf04c6
   languageName: node
   linkType: hard
 
