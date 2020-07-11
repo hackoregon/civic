@@ -22,7 +22,7 @@
     "packages/*"
   ],
   "scripts": {
-    "bootstrap": "yarn install && yarn workspace @hackoregon/component-library build && yarn workspace @hackoregon/mock-wrapper build",
+    "bootstrap": "yarn && yarn workspace @hackoregon/component-library build && yarn workspace @hackoregon/mock-wrapper build",
     "build": "lerna run build",
     "build-netlify": "yarn workspace @hackoregon/component-library build && yarn workspace @hackoregon/mock-wrapper build && yarn workspace @hackoregon/2018 build && yarn copy-redirects",
     "card": "yarn new-card",
