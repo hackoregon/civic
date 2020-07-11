@@ -15,7 +15,7 @@ civic.iml
 .vscode
 package-lock.json
 
-.yarn/*git a
+.yarn/*
 !.yarn/cache
 !.yarn/releases
 !.yarn/plugins
@@ -24,4 +24,3 @@ package-lock.json
 .pnp.*
 .yarn/build-state.yml
 .yarn/install-state.gz
-.yarn/cache
