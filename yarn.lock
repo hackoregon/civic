@@ -2863,8 +2863,10 @@ __metadata:
     chai-as-promised: ^7.1.1
     chai-enzyme: ^1.0.0-beta.1
     chalk: ^1.1.3
+    cheerio: ^0.22.0
     compression: ^1.6.2
     emotion-reset: ^2.0.2
+    enzyme: ^3.9.0
     express: ^4.14.1
     jsdom: ^14.0.0
     lodash: ^4.17.19
@@ -3857,6 +3859,7 @@ __metadata:
     "@storybook/addon-storysource": ^5.0.6
     "@storybook/addon-viewport": ^5.0.11
     "@storybook/react": ^5.0.6
+    "@storybook/source-loader": ^5.3.19
     "@storybook/storybook-deployer": ^2.3.0
     autoprefixer: ^9.4.10
     babel-eslint: ^10.0.1
@@ -4149,8 +4152,10 @@ __metadata:
     "@hackoregon/utils": ^0.0.4
     "@storybook/addon-a11y": ^5.3.18
     "@storybook/react": ^5.3.18
+    babel-loader: ^8.0.0
     chai: ^4.2.0
     chai-enzyme: ^1.0.0-beta.1
+    cheerio: ^0.22.0
     enzyme: ^3.9.0
     enzyme-adapter-react-16: ^1.11.2
     eslint: ^5.15.1
@@ -4164,6 +4169,7 @@ __metadata:
     sinon: ^7.2.7
     sinon-chai: ^3.3.0
     source-map-support: ^0.4.11
+    webpack: ^4.29.6
   languageName: unknown
   linkType: soft
 
@@ -4185,8 +4191,10 @@ __metadata:
     "@material-ui/styles": ^4.3.3
     "@storybook/addon-a11y": ^5.3.18
     "@storybook/react": ^5.3.18
+    babel-loader: ^8.0.0
     chai: ^4.2.0
     chai-enzyme: ^1.0.0-beta.1
+    cheerio: ^0.22.0
     copy-to-clipboard: ^3.0.5
     enzyme: ^3.9.0
     enzyme-adapter-react-16: ^1.11.2
@@ -4204,6 +4212,7 @@ __metadata:
     sinon: ^7.2.7
     sinon-chai: ^3.3.0
     source-map-support: ^0.4.11
+    webpack: ^4.29.6
   peerDependencies:
     react-router: ^3.2.4
   languageName: unknown
@@ -4223,8 +4232,10 @@ __metadata:
     "@storybook/addon-a11y": ^5.3.18
     "@storybook/addon-knobs": ^5.3.18
     "@storybook/react": ^5.3.18
+    babel-loader: ^8.0.0
     chai: ^4.2.0
     chai-enzyme: ^1.0.0-beta.1
+    cheerio: ^0.22.0
     emotion-theming: ^10.0.14
     enzyme: ^3.9.0
     enzyme-adapter-react-16: ^1.11.2
@@ -4242,6 +4253,7 @@ __metadata:
     sinon-chai: ^3.3.0
     source-map-support: ^0.4.11
     victory: ^32.0.2
+    webpack: ^4.29.6
   languageName: unknown
   linkType: soft
 
@@ -4277,8 +4289,10 @@ __metadata:
     "@storybook/addon-actions": ^5.3.18
     "@storybook/addon-knobs": ^5.3.18
     "@storybook/react": ^5.3.18
+    babel-loader: ^8.0.0
     chai: ^4.2.0
     chai-enzyme: ^1.0.0-beta.1
+    cheerio: ^0.22.0
     enzyme: ^3.9.0
     enzyme-adapter-react-16: ^1.11.2
     eslint: ^5.15.1
@@ -4298,6 +4312,7 @@ __metadata:
     sinon: ^7.2.7
     sinon-chai: ^3.3.0
     source-map-support: ^0.4.11
+    webpack: ^4.29.6
   languageName: unknown
   linkType: soft
 
@@ -4311,11 +4326,13 @@ __metadata:
     "@hackoregon/ui-themes": ^0.0.4
     "@storybook/addon-a11y": ^5.3.18
     "@storybook/react": ^5.3.18
+    babel-loader: ^8.0.0
     eslint: ^5.15.1
     mocha: ^6.0.2
     react: ^16.8.4
     react-dom: ^16.8.4
     rimraf: ^2.6.2
+    webpack: ^4.29.6
   languageName: unknown
   linkType: soft
 
@@ -4341,8 +4358,10 @@ __metadata:
     "@storybook/react": ^5.3.18
     "@turf/bbox": ^6.0.1
     "@turf/center-of-mass": ^6.0.1
+    babel-loader: ^8.0.0
     chai: ^4.2.0
     chai-enzyme: ^1.0.0-beta.1
+    cheerio: ^0.22.0
     create-react-ref: ^0.1.0
     d3: ^4.8.0
     deck.gl: ^6.4.7
@@ -4361,12 +4380,14 @@ __metadata:
     react-dom: ^16.8.4
     react-map-gl: 5.1.2
     react-map-gl-geocoder: ^1.7.0
+    react-select: ^1.0.0-rc.3
     rimraf: ^2.6.2
     shortid: ^2.2.14
     sinon: ^7.2.7
     sinon-chai: ^3.3.0
     source-map-support: ^0.4.11
     viewport-mercator-project: ^6.2.0
+    webpack: ^4.29.6
   languageName: unknown
   linkType: soft
 
@@ -4408,8 +4429,10 @@ __metadata:
     "@emotion/core": ^10.0.15
     "@storybook/addon-a11y": ^5.3.18
     "@storybook/react": ^5.3.18
+    babel-loader: ^8.0.0
     chai: ^4.2.0
     chai-enzyme: ^1.0.0-beta.1
+    cheerio: ^0.22.0
     d3-format: 1.3.0
     d3-time-format: ^2.1.3
     enzyme: ^3.9.0
@@ -4427,6 +4450,7 @@ __metadata:
     sinon: ^7.2.7
     sinon-chai: ^3.3.0
     source-map-support: ^0.4.11
+    webpack: ^4.29.6
   languageName: unknown
   linkType: soft
 

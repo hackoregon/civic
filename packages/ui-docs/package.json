@@ -25,9 +25,11 @@
     "@hackoregon/ui-brand": "^0.0.4",
     "@storybook/addon-a11y": "^5.3.18",
     "@storybook/react": "^5.3.18",
+    "babel-loader": "^8.0.0",
     "eslint": "^5.15.1",
     "mocha": "^6.0.2",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.2",
+    "webpack": "^4.29.6"
   },
   "dependencies": {
     "@hackoregon/ui-themes": "^0.0.4",

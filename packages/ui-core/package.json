@@ -42,8 +42,10 @@
     "@storybook/addon-actions": "^5.3.18",
     "@storybook/addon-knobs": "^5.3.18",
     "@storybook/react": "^5.3.18",
+    "babel-loader": "^8.0.0",
     "chai": "^4.2.0",
     "chai-enzyme": "^1.0.0-beta.1",
+    "cheerio": "^0.22.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.11.2",
     "eslint": "^5.15.1",
@@ -53,7 +55,8 @@
     "rimraf": "^2.6.2",
     "sinon": "^7.2.7",
     "sinon-chai": "^3.3.0",
-    "source-map-support": "^0.4.11"
+    "source-map-support": "^0.4.11",
+    "webpack": "^4.29.6"
   },
   "dependencies": {
     "@emotion/core": "^10.0.15",
