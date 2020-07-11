@@ -34,7 +34,8 @@
     "babel-plugin-emotion": "^10.0.9",
     "babel-plugin-lodash": "^3.3.2",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
-    "require": "^2.4.20"
+    "require": "^2.4.20",
+    "resolve": "^1.17.0"
   },
   "devDependencies": {
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2"
