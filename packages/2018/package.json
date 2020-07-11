@@ -61,10 +61,10 @@
     "redux-thunk": "^2.1.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.3.4",
-    "@babel/node": "^7.2.2",
-    "@babel/register": "^7.0.0",
+    "@babel/cli": "^7.10.4",
+    "@babel/core": "^7.10.4",
+    "@babel/node": "^7.10.4",
+    "@babel/register": "^7.10.4",
     "@emotion/core": "^10.0.10",
     "@emotion/styled": "^10.0.10",
     "@hackoregon/civic-babel-presets": "^3.0.0",

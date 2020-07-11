@@ -5,7 +5,7 @@ __metadata:
   version: 4
   cacheKey: 5
 
-"@babel/cli@npm:^7.0.0, @babel/cli@npm:^7.2.3":
+"@babel/cli@npm:^7.10.4":
   version: 7.10.4
   resolution: "@babel/cli@npm:7.10.4"
   dependencies:
@@ -59,7 +59,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:^7.0.0, @babel/core@npm:^7.1.0, @babel/core@npm:^7.3.4, @babel/core@npm:^7.4.5, @babel/core@npm:^7.7.5":
+"@babel/core@npm:^7.1.0, @babel/core@npm:^7.10.4, @babel/core@npm:^7.4.5, @babel/core@npm:^7.7.5":
   version: 7.10.4
   resolution: "@babel/core@npm:7.10.4"
   dependencies:
@@ -371,7 +371,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/node@npm:^7.0.0, @babel/node@npm:^7.2.2":
+"@babel/node@npm:^7.10.4":
   version: 7.10.4
   resolution: "@babel/node@npm:7.10.4"
   dependencies:
@@ -412,7 +412,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-proposal-class-properties@npm:^7.0.0, @babel/plugin-proposal-class-properties@npm:^7.10.4, @babel/plugin-proposal-class-properties@npm:^7.7.0":
+"@babel/plugin-proposal-class-properties@npm:^7.10.4, @babel/plugin-proposal-class-properties@npm:^7.7.0":
   version: 7.10.4
   resolution: "@babel/plugin-proposal-class-properties@npm:7.10.4"
   dependencies:
@@ -424,7 +424,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-proposal-decorators@npm:^7.0.0":
+"@babel/plugin-proposal-decorators@npm:^7.10.4":
   version: 7.10.4
   resolution: "@babel/plugin-proposal-decorators@npm:7.10.4"
   dependencies:
@@ -437,7 +437,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-proposal-do-expressions@npm:^7.0.0":
+"@babel/plugin-proposal-do-expressions@npm:^7.10.4":
   version: 7.10.4
   resolution: "@babel/plugin-proposal-do-expressions@npm:7.10.4"
   dependencies:
@@ -461,7 +461,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-proposal-export-default-from@npm:^7.0.0":
+"@babel/plugin-proposal-export-default-from@npm:^7.10.4":
   version: 7.10.4
   resolution: "@babel/plugin-proposal-export-default-from@npm:7.10.4"
   dependencies:
@@ -473,7 +473,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-proposal-export-namespace-from@npm:^7.0.0":
+"@babel/plugin-proposal-export-namespace-from@npm:^7.10.4":
   version: 7.10.4
   resolution: "@babel/plugin-proposal-export-namespace-from@npm:7.10.4"
   dependencies:
@@ -485,7 +485,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-proposal-function-bind@npm:^7.0.0":
+"@babel/plugin-proposal-function-bind@npm:^7.10.4":
   version: 7.10.4
   resolution: "@babel/plugin-proposal-function-bind@npm:7.10.4"
   dependencies:
@@ -497,7 +497,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-proposal-function-sent@npm:^7.0.0":
+"@babel/plugin-proposal-function-sent@npm:^7.10.4":
   version: 7.10.4
   resolution: "@babel/plugin-proposal-function-sent@npm:7.10.4"
   dependencies:
@@ -510,7 +510,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-proposal-json-strings@npm:^7.0.0, @babel/plugin-proposal-json-strings@npm:^7.10.4":
+"@babel/plugin-proposal-json-strings@npm:^7.10.4":
   version: 7.10.4
   resolution: "@babel/plugin-proposal-json-strings@npm:7.10.4"
   dependencies:
@@ -522,7 +522,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-proposal-logical-assignment-operators@npm:^7.0.0":
+"@babel/plugin-proposal-logical-assignment-operators@npm:^7.10.4":
   version: 7.10.4
   resolution: "@babel/plugin-proposal-logical-assignment-operators@npm:7.10.4"
   dependencies:
@@ -534,7 +534,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-proposal-nullish-coalescing-operator@npm:^7.0.0, @babel/plugin-proposal-nullish-coalescing-operator@npm:^7.10.4":
+"@babel/plugin-proposal-nullish-coalescing-operator@npm:^7.10.4":
   version: 7.10.4
   resolution: "@babel/plugin-proposal-nullish-coalescing-operator@npm:7.10.4"
   dependencies:
@@ -546,7 +546,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-proposal-numeric-separator@npm:^7.0.0, @babel/plugin-proposal-numeric-separator@npm:^7.10.4":
+"@babel/plugin-proposal-numeric-separator@npm:^7.10.4":
   version: 7.10.4
   resolution: "@babel/plugin-proposal-numeric-separator@npm:7.10.4"
   dependencies:
@@ -558,7 +558,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-proposal-object-rest-spread@npm:^7.0.0, @babel/plugin-proposal-object-rest-spread@npm:^7.10.4, @babel/plugin-proposal-object-rest-spread@npm:^7.6.2":
+"@babel/plugin-proposal-object-rest-spread@npm:^7.10.4, @babel/plugin-proposal-object-rest-spread@npm:^7.6.2":
   version: 7.10.4
   resolution: "@babel/plugin-proposal-object-rest-spread@npm:7.10.4"
   dependencies:
@@ -583,7 +583,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-proposal-optional-chaining@npm:^7.0.0, @babel/plugin-proposal-optional-chaining@npm:^7.10.4":
+"@babel/plugin-proposal-optional-chaining@npm:^7.10.4":
   version: 7.10.4
   resolution: "@babel/plugin-proposal-optional-chaining@npm:7.10.4"
   dependencies:
@@ -595,7 +595,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-proposal-pipeline-operator@npm:^7.0.0":
+"@babel/plugin-proposal-pipeline-operator@npm:^7.10.4":
   version: 7.10.4
   resolution: "@babel/plugin-proposal-pipeline-operator@npm:7.10.4"
   dependencies:
@@ -619,7 +619,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-proposal-throw-expressions@npm:^7.0.0":
+"@babel/plugin-proposal-throw-expressions@npm:^7.10.4":
   version: 7.10.4
   resolution: "@babel/plugin-proposal-throw-expressions@npm:7.10.4"
   dependencies:
@@ -687,7 +687,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-syntax-dynamic-import@npm:^7.0.0, @babel/plugin-syntax-dynamic-import@npm:^7.2.0, @babel/plugin-syntax-dynamic-import@npm:^7.8.0":
+"@babel/plugin-syntax-dynamic-import@npm:^7.2.0, @babel/plugin-syntax-dynamic-import@npm:^7.8.0, @babel/plugin-syntax-dynamic-import@npm:^7.8.3":
   version: 7.8.3
   resolution: "@babel/plugin-syntax-dynamic-import@npm:7.8.3"
   dependencies:
@@ -753,7 +753,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-syntax-import-meta@npm:^7.0.0":
+"@babel/plugin-syntax-import-meta@npm:^7.10.4":
   version: 7.10.4
   resolution: "@babel/plugin-syntax-import-meta@npm:7.10.4"
   dependencies:
@@ -1077,7 +1077,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-transform-modules-commonjs@npm:^7.0.0, @babel/plugin-transform-modules-commonjs@npm:^7.10.4":
+"@babel/plugin-transform-modules-commonjs@npm:^7.10.4":
   version: 7.10.4
   resolution: "@babel/plugin-transform-modules-commonjs@npm:7.10.4"
   dependencies:
@@ -1174,7 +1174,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-transform-react-constant-elements@npm:^7.0.0, @babel/plugin-transform-react-constant-elements@npm:^7.2.0, @babel/plugin-transform-react-constant-elements@npm:^7.6.3":
+"@babel/plugin-transform-react-constant-elements@npm:^7.0.0, @babel/plugin-transform-react-constant-elements@npm:^7.10.4, @babel/plugin-transform-react-constant-elements@npm:^7.2.0, @babel/plugin-transform-react-constant-elements@npm:^7.6.3":
   version: 7.10.4
   resolution: "@babel/plugin-transform-react-constant-elements@npm:7.10.4"
   dependencies:
@@ -1196,7 +1196,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-transform-react-inline-elements@npm:^7.0.0":
+"@babel/plugin-transform-react-inline-elements@npm:^7.10.4":
   version: 7.10.4
   resolution: "@babel/plugin-transform-react-inline-elements@npm:7.10.4"
   dependencies:
@@ -1233,7 +1233,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-transform-react-jsx-source@npm:^7.0.0, @babel/plugin-transform-react-jsx-source@npm:^7.10.4":
+"@babel/plugin-transform-react-jsx-source@npm:^7.10.4":
   version: 7.10.4
   resolution: "@babel/plugin-transform-react-jsx-source@npm:7.10.4"
   dependencies:
@@ -1293,7 +1293,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-transform-runtime@npm:^7.0.0":
+"@babel/plugin-transform-runtime@npm:^7.10.4":
   version: 7.10.4
   resolution: "@babel/plugin-transform-runtime@npm:7.10.4"
   dependencies:
@@ -1396,7 +1396,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/preset-env@npm:^7.0.0, @babel/preset-env@npm:^7.4.5":
+"@babel/preset-env@npm:^7.10.4, @babel/preset-env@npm:^7.4.5":
   version: 7.10.4
   resolution: "@babel/preset-env@npm:7.10.4"
   dependencies:
@@ -1497,7 +1497,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/preset-react@npm:^7.0.0":
+"@babel/preset-react@npm:^7.0.0, @babel/preset-react@npm:^7.10.4":
   version: 7.10.4
   resolution: "@babel/preset-react@npm:7.10.4"
   dependencies:
@@ -1514,24 +1514,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/register@npm:7.0.0":
-  version: 7.0.0
-  resolution: "@babel/register@npm:7.0.0"
-  dependencies:
-    core-js: ^2.5.7
-    find-cache-dir: ^1.0.0
-    home-or-tmp: ^3.0.0
-    lodash: ^4.17.10
-    mkdirp: ^0.5.1
-    pirates: ^4.0.0
-    source-map-support: ^0.5.9
-  peerDependencies:
-    "@babel/core": ^7.0.0-0
-  checksum: 2fe95b783bd0a13c929a24d583f22ddf5bc276b74963cb734e52cc10fc307f4fc7fa09e67459e086356cf65c0e0c367d105cd1c1fe3c0ebb18a71f0e70fac871
-  languageName: node
-  linkType: hard
-
-"@babel/register@npm:^7.0.0, @babel/register@npm:^7.10.4":
+"@babel/register@npm:7.10.4, @babel/register@npm:^7.10.4":
   version: 7.10.4
   resolution: "@babel/register@npm:7.10.4"
   dependencies:
@@ -1901,10 +1884,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@hackoregon/2017@workspace:packages/2017"
   dependencies:
-    "@babel/cli": ^7.0.0
-    "@babel/core": ^7.3.4
-    "@babel/node": ^7.0.0
-    "@babel/register": ^7.0.0
+    "@babel/cli": ^7.10.4
+    "@babel/core": ^7.10.4
+    "@babel/node": ^7.10.4
+    "@babel/register": ^7.10.4
     "@hackoregon/civic-babel-presets": ^3.0.0
     "@hackoregon/civic-budget": "workspace:packages/budget"
     "@hackoregon/civic-emergency-response": "workspace:packages/emergency-response"
@@ -1942,10 +1925,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@hackoregon/2018-disaster-resilience@workspace:packages/2018-disaster-resilience"
   dependencies:
-    "@babel/cli": ^7.0.0
-    "@babel/core": ^7.0.0
-    "@babel/node": ^7.0.0
-    "@babel/register": ^7.0.0
+    "@babel/cli": ^7.10.4
+    "@babel/core": ^7.10.4
+    "@babel/node": ^7.10.4
+    "@babel/register": ^7.10.4
     "@emotion/core": ^10.0.10
     "@hackoregon/civic-babel-presets": ^3.0.0
     "@hackoregon/component-library": ^4.0.0
@@ -2026,10 +2009,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@hackoregon/2018-example-farmers-markets@workspace:packages/2018-example-farmers-markets"
   dependencies:
-    "@babel/cli": ^7.0.0
-    "@babel/core": ^7.0.0
-    "@babel/node": ^7.0.0
-    "@babel/register": ^7.0.0
+    "@babel/cli": ^7.10.4
+    "@babel/core": ^7.10.4
+    "@babel/node": ^7.10.4
+    "@babel/register": ^7.10.4
     "@emotion/core": ^10.0.10
     "@hackoregon/civic-babel-presets": ^3.0.0
     "@hackoregon/component-library": ^4.0.0
@@ -2106,10 +2089,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@hackoregon/2018-housing-affordability@workspace:packages/2018-housing-affordability"
   dependencies:
-    "@babel/cli": ^7.0.0
-    "@babel/core": ^7.0.0
-    "@babel/node": ^7.0.0
-    "@babel/register": ^7.0.0
+    "@babel/cli": ^7.10.4
+    "@babel/core": ^7.10.4
+    "@babel/node": ^7.10.4
+    "@babel/register": ^7.10.4
     "@emotion/core": ^10.0.10
     "@hackoregon/civic-babel-presets": ^3.0.0
     "@hackoregon/component-library": ^4.0.0
@@ -2188,10 +2171,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@hackoregon/2018-local-elections@workspace:packages/2018-local-elections"
   dependencies:
-    "@babel/cli": ^7.0.0
-    "@babel/core": ^7.0.0
-    "@babel/node": ^7.0.0
-    "@babel/register": ^7.0.0
+    "@babel/cli": ^7.10.4
+    "@babel/core": ^7.10.4
+    "@babel/node": ^7.10.4
+    "@babel/register": ^7.10.4
     "@emotion/core": ^10.0.10
     "@hackoregon/civic-babel-presets": ^3.0.0
     "@hackoregon/component-library": ^4.0.0
@@ -2270,10 +2253,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@hackoregon/2018-neighborhood-development@workspace:packages/2018-neighborhood-development"
   dependencies:
-    "@babel/cli": ^7.0.0
-    "@babel/core": ^7.0.0
-    "@babel/node": ^7.0.0
-    "@babel/register": ^7.0.0
+    "@babel/cli": ^7.10.4
+    "@babel/core": ^7.10.4
+    "@babel/node": ^7.10.4
+    "@babel/register": ^7.10.4
     "@emotion/core": ^10.0.10
     "@hackoregon/civic-babel-presets": ^3.0.0
     "@hackoregon/component-library": ^4.0.0
@@ -2353,10 +2336,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@hackoregon/2018-transportation-systems@workspace:packages/2018-transportation-systems"
   dependencies:
-    "@babel/cli": ^7.0.0
-    "@babel/core": ^7.0.0
-    "@babel/node": ^7.0.0
-    "@babel/register": ^7.0.0
+    "@babel/cli": ^7.10.4
+    "@babel/core": ^7.10.4
+    "@babel/node": ^7.10.4
+    "@babel/register": ^7.10.4
     "@hackoregon/civic-babel-presets": ^3.0.0
     "@hackoregon/component-library": ^4.0.0
     "@hackoregon/dev-server": "workspace:packages/dev-server"
@@ -2434,10 +2417,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@hackoregon/2018@workspace:packages/2018"
   dependencies:
-    "@babel/cli": ^7.2.3
-    "@babel/core": ^7.3.4
-    "@babel/node": ^7.2.2
-    "@babel/register": ^7.0.0
+    "@babel/cli": ^7.10.4
+    "@babel/core": ^7.10.4
+    "@babel/node": ^7.10.4
+    "@babel/register": ^7.10.4
     "@emotion/core": ^10.0.10
     "@emotion/styled": ^10.0.10
     "@hackoregon/2018-disaster-resilience": ^3.0.0
@@ -2498,10 +2481,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@hackoregon/2019-disaster-game@workspace:packages/2019-disaster-game"
   dependencies:
-    "@babel/cli": ^7.0.0
-    "@babel/core": ^7.0.0
-    "@babel/node": ^7.0.0
-    "@babel/register": ^7.0.0
+    "@babel/cli": ^7.10.4
+    "@babel/core": ^7.10.4
+    "@babel/node": ^7.10.4
+    "@babel/register": ^7.10.4
     "@emotion/core": ^10.0.10
     "@emotion/styled": ^10.0.14
     "@hackoregon/civic-babel-presets": ^3.0.0
@@ -2588,10 +2571,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@hackoregon/2019-education@workspace:packages/2019-education"
   dependencies:
-    "@babel/cli": ^7.0.0
-    "@babel/core": ^7.0.0
-    "@babel/node": ^7.0.0
-    "@babel/register": ^7.0.0
+    "@babel/cli": ^7.10.4
+    "@babel/core": ^7.10.4
+    "@babel/node": ^7.10.4
+    "@babel/register": ^7.10.4
     "@emotion/core": ^10.0.10
     "@hackoregon/civic-babel-presets": ^3.0.0
     "@hackoregon/component-library": ^4.0.0
@@ -2671,10 +2654,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@hackoregon/2019-elections@workspace:packages/2019-elections"
   dependencies:
-    "@babel/cli": ^7.0.0
-    "@babel/core": ^7.0.0
-    "@babel/node": ^7.0.0
-    "@babel/register": ^7.0.0
+    "@babel/cli": ^7.10.4
+    "@babel/core": ^7.10.4
+    "@babel/node": ^7.10.4
+    "@babel/register": ^7.10.4
     "@emotion/core": ^10.0.10
     "@hackoregon/civic-babel-presets": ^3.0.0
     "@hackoregon/component-library": ^4.0.0
@@ -2753,10 +2736,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@hackoregon/2019-housing@workspace:packages/2019-housing"
   dependencies:
-    "@babel/cli": ^7.0.0
-    "@babel/core": ^7.0.0
-    "@babel/node": ^7.0.0
-    "@babel/register": ^7.0.0
+    "@babel/cli": ^7.10.4
+    "@babel/core": ^7.10.4
+    "@babel/node": ^7.10.4
+    "@babel/register": ^7.10.4
     "@emotion/core": ^10.0.10
     "@hackoregon/civic-babel-presets": ^3.0.0
     "@hackoregon/component-library": ^4.0.0
@@ -2838,10 +2821,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@hackoregon/2019-template@workspace:packages/2019-template"
   dependencies:
-    "@babel/cli": ^7.0.0
-    "@babel/core": ^7.0.0
-    "@babel/node": ^7.0.0
-    "@babel/register": ^7.0.0
+    "@babel/cli": ^7.10.4
+    "@babel/core": ^7.10.4
+    "@babel/node": ^7.10.4
+    "@babel/register": ^7.10.4
     "@emotion/core": ^10.0.10
     "@hackoregon/civic-babel-presets": ^3.0.0
     "@hackoregon/component-library": ^4.0.0
@@ -2921,10 +2904,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@hackoregon/2019-transportation@workspace:packages/2019-transportation"
   dependencies:
-    "@babel/cli": ^7.0.0
-    "@babel/core": ^7.0.0
-    "@babel/node": ^7.0.0
-    "@babel/register": ^7.0.0
+    "@babel/cli": ^7.10.4
+    "@babel/core": ^7.10.4
+    "@babel/node": ^7.10.4
+    "@babel/register": ^7.10.4
     "@emotion/core": ^10.0.10
     "@hackoregon/civic-babel-presets": ^3.0.0
     "@hackoregon/component-library": ^4.0.0
@@ -3005,15 +2988,15 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@hackoregon/civic-babel-presets@workspace:packages/civic-babel-presets"
   dependencies:
-    "@babel/core": ^7.0.0
-    "@babel/plugin-proposal-class-properties": ^7.0.0
-    "@babel/plugin-proposal-object-rest-spread": ^7.0.0
-    "@babel/plugin-syntax-dynamic-import": ^7.0.0
-    "@babel/plugin-transform-modules-commonjs": ^7.0.0
-    "@babel/plugin-transform-react-jsx-source": ^7.0.0
-    "@babel/plugin-transform-runtime": ^7.0.0
-    "@babel/preset-env": ^7.0.0
-    "@babel/preset-react": ^7.0.0
+    "@babel/core": ^7.10.4
+    "@babel/plugin-proposal-class-properties": ^7.10.4
+    "@babel/plugin-proposal-object-rest-spread": ^7.10.4
+    "@babel/plugin-syntax-dynamic-import": ^7.8.3
+    "@babel/plugin-transform-modules-commonjs": ^7.10.4
+    "@babel/plugin-transform-react-jsx-source": ^7.10.4
+    "@babel/plugin-transform-runtime": ^7.10.4
+    "@babel/preset-env": ^7.10.4
+    "@babel/preset-react": ^7.10.4
     babel-plugin-dynamic-import-node: ^2.2.0
     babel-plugin-emotion: ^10.0.9
     babel-plugin-lodash: ^3.3.2
@@ -3028,10 +3011,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@hackoregon/civic-budget@workspace:packages/budget"
   dependencies:
-    "@babel/cli": ^7.0.0
-    "@babel/core": ^7.0.0
-    "@babel/node": ^7.0.0
-    "@babel/register": ^7.0.0
+    "@babel/cli": ^7.10.4
+    "@babel/core": ^7.10.4
+    "@babel/node": ^7.10.4
+    "@babel/register": ^7.10.4
     "@hackoregon/civic-babel-presets": ^3.0.0
     "@hackoregon/component-library": ^4.0.0
     "@hackoregon/dev-server": "workspace:packages/dev-server"
@@ -3109,10 +3092,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@hackoregon/civic-emergency-response@workspace:packages/emergency-response"
   dependencies:
-    "@babel/cli": ^7.0.0
-    "@babel/core": ^7.0.0
-    "@babel/node": ^7.0.0
-    "@babel/register": ^7.0.0
+    "@babel/cli": ^7.10.4
+    "@babel/core": ^7.10.4
+    "@babel/node": ^7.10.4
+    "@babel/register": ^7.10.4
     "@hackoregon/civic-babel-presets": ^3.0.0
     "@hackoregon/component-library": ^4.0.0
     "@hackoregon/dev-server": "workspace:packages/dev-server"
@@ -3202,32 +3185,32 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@hackoregon/civic-homelessness@workspace:packages/homelessness"
   dependencies:
-    "@babel/cli": ^7.0.0
-    "@babel/core": ^7.0.0
-    "@babel/node": ^7.0.0
-    "@babel/plugin-proposal-class-properties": ^7.0.0
-    "@babel/plugin-proposal-decorators": ^7.0.0
-    "@babel/plugin-proposal-do-expressions": ^7.0.0
-    "@babel/plugin-proposal-export-default-from": ^7.0.0
-    "@babel/plugin-proposal-export-namespace-from": ^7.0.0
-    "@babel/plugin-proposal-function-bind": ^7.0.0
-    "@babel/plugin-proposal-function-sent": ^7.0.0
-    "@babel/plugin-proposal-json-strings": ^7.0.0
-    "@babel/plugin-proposal-logical-assignment-operators": ^7.0.0
-    "@babel/plugin-proposal-nullish-coalescing-operator": ^7.0.0
-    "@babel/plugin-proposal-numeric-separator": ^7.0.0
-    "@babel/plugin-proposal-optional-chaining": ^7.0.0
-    "@babel/plugin-proposal-pipeline-operator": ^7.0.0
-    "@babel/plugin-proposal-throw-expressions": ^7.0.0
-    "@babel/plugin-syntax-dynamic-import": ^7.0.0
-    "@babel/plugin-syntax-import-meta": ^7.0.0
-    "@babel/plugin-transform-modules-commonjs": ^7.0.0
-    "@babel/plugin-transform-react-constant-elements": ^7.0.0
-    "@babel/plugin-transform-react-inline-elements": ^7.0.0
-    "@babel/plugin-transform-runtime": ^7.0.0
-    "@babel/preset-env": ^7.0.0
-    "@babel/preset-react": ^7.0.0
-    "@babel/register": 7.0.0
+    "@babel/cli": ^7.10.4
+    "@babel/core": ^7.10.4
+    "@babel/node": ^7.10.4
+    "@babel/plugin-proposal-class-properties": ^7.10.4
+    "@babel/plugin-proposal-decorators": ^7.10.4
+    "@babel/plugin-proposal-do-expressions": ^7.10.4
+    "@babel/plugin-proposal-export-default-from": ^7.10.4
+    "@babel/plugin-proposal-export-namespace-from": ^7.10.4
+    "@babel/plugin-proposal-function-bind": ^7.10.4
+    "@babel/plugin-proposal-function-sent": ^7.10.4
+    "@babel/plugin-proposal-json-strings": ^7.10.4
+    "@babel/plugin-proposal-logical-assignment-operators": ^7.10.4
+    "@babel/plugin-proposal-nullish-coalescing-operator": ^7.10.4
+    "@babel/plugin-proposal-numeric-separator": ^7.10.4
+    "@babel/plugin-proposal-optional-chaining": ^7.10.4
+    "@babel/plugin-proposal-pipeline-operator": ^7.10.4
+    "@babel/plugin-proposal-throw-expressions": ^7.10.4
+    "@babel/plugin-syntax-dynamic-import": ^7.8.3
+    "@babel/plugin-syntax-import-meta": ^7.10.4
+    "@babel/plugin-transform-modules-commonjs": ^7.10.4
+    "@babel/plugin-transform-react-constant-elements": ^7.10.4
+    "@babel/plugin-transform-react-inline-elements": ^7.10.4
+    "@babel/plugin-transform-runtime": ^7.10.4
+    "@babel/preset-env": ^7.10.4
+    "@babel/preset-react": ^7.10.4
+    "@babel/register": 7.10.4
     "@hackoregon/civic-babel-presets": ^3.0.0
     "@hackoregon/component-library": ^4.0.0
     "@hackoregon/dev-server": "workspace:packages/dev-server"
@@ -3310,10 +3293,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@hackoregon/civic-housing@workspace:packages/housing"
   dependencies:
-    "@babel/cli": ^7.0.0
-    "@babel/core": ^7.0.0
-    "@babel/node": ^7.0.0
-    "@babel/register": ^7.0.0
+    "@babel/cli": ^7.10.4
+    "@babel/core": ^7.10.4
+    "@babel/node": ^7.10.4
+    "@babel/register": ^7.10.4
     "@hackoregon/civic-babel-presets": ^3.0.0
     "@hackoregon/component-library": ^4.0.0
     "@hackoregon/dev-server": "workspace:packages/dev-server"
@@ -3380,10 +3363,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@hackoregon/civic-sandbox@workspace:packages/civic-sandbox"
   dependencies:
-    "@babel/cli": ^7.0.0
-    "@babel/core": ^7.0.0
-    "@babel/node": ^7.0.0
-    "@babel/register": ^7.0.0
+    "@babel/cli": ^7.10.4
+    "@babel/core": ^7.10.4
+    "@babel/node": ^7.10.4
+    "@babel/register": ^7.10.4
     "@emotion/core": ^10.0.10
     "@hackoregon/civic-babel-presets": ^3.0.0
     "@hackoregon/component-library": ^4.0.0
@@ -3465,8 +3448,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@hackoregon/civic@workspace:."
   dependencies:
-    "@babel/cli": ^7.0.0
-    "@babel/core": ^7.0.0
+    "@babel/cli": ^7.10.4
+    "@babel/core": ^7.10.4
     "@storybook/addon-a11y": ^5.0.6
     "@storybook/addon-actions": ^5.0.6
     "@storybook/addon-info": ^5.0.6
@@ -3551,24 +3534,24 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@hackoregon/component-library@workspace:packages/component-library"
   dependencies:
-    "@babel/cli": ^7.0.0
-    "@babel/core": ^7.0.0
-    "@babel/plugin-proposal-class-properties": ^7.0.0
-    "@babel/plugin-proposal-decorators": ^7.0.0
-    "@babel/plugin-proposal-do-expressions": ^7.0.0
-    "@babel/plugin-proposal-export-default-from": ^7.0.0
-    "@babel/plugin-proposal-export-namespace-from": ^7.0.0
-    "@babel/plugin-proposal-function-sent": ^7.0.0
-    "@babel/plugin-proposal-json-strings": ^7.0.0
-    "@babel/plugin-proposal-logical-assignment-operators": ^7.0.0
-    "@babel/plugin-proposal-nullish-coalescing-operator": ^7.0.0
-    "@babel/plugin-proposal-numeric-separator": ^7.0.0
-    "@babel/plugin-proposal-optional-chaining": ^7.0.0
-    "@babel/plugin-proposal-pipeline-operator": ^7.0.0
-    "@babel/plugin-proposal-throw-expressions": ^7.0.0
-    "@babel/plugin-syntax-dynamic-import": ^7.0.0
-    "@babel/plugin-syntax-import-meta": ^7.0.0
-    "@babel/register": ^7.0.0
+    "@babel/cli": ^7.10.4
+    "@babel/core": ^7.10.4
+    "@babel/plugin-proposal-class-properties": ^7.10.4
+    "@babel/plugin-proposal-decorators": ^7.10.4
+    "@babel/plugin-proposal-do-expressions": ^7.10.4
+    "@babel/plugin-proposal-export-default-from": ^7.10.4
+    "@babel/plugin-proposal-export-namespace-from": ^7.10.4
+    "@babel/plugin-proposal-function-sent": ^7.10.4
+    "@babel/plugin-proposal-json-strings": ^7.10.4
+    "@babel/plugin-proposal-logical-assignment-operators": ^7.10.4
+    "@babel/plugin-proposal-nullish-coalescing-operator": ^7.10.4
+    "@babel/plugin-proposal-numeric-separator": ^7.10.4
+    "@babel/plugin-proposal-optional-chaining": ^7.10.4
+    "@babel/plugin-proposal-pipeline-operator": ^7.10.4
+    "@babel/plugin-proposal-throw-expressions": ^7.10.4
+    "@babel/plugin-syntax-dynamic-import": ^7.8.3
+    "@babel/plugin-syntax-import-meta": ^7.10.4
+    "@babel/register": ^7.10.4
     "@emotion/core": ^10.0.15
     "@material-ui/core": ^4.4.0
     "@material-ui/icons": ^4.4.1
@@ -3680,10 +3663,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@hackoregon/transportation@workspace:packages/transportation"
   dependencies:
-    "@babel/cli": ^7.0.0
-    "@babel/core": ^7.0.0
-    "@babel/node": ^7.0.0
-    "@babel/register": 7.0.0
+    "@babel/cli": ^7.10.4
+    "@babel/core": ^7.10.4
+    "@babel/node": ^7.10.4
+    "@babel/register": 7.10.4
     "@hackoregon/civic-babel-presets": ^3.0.0
     "@hackoregon/component-library": ^4.0.0
     "@hackoregon/dev-server": "workspace:packages/dev-server"
@@ -3764,9 +3747,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@hackoregon/ui-brand@workspace:packages/ui-brand"
   dependencies:
-    "@babel/cli": ^7.0.0
-    "@babel/core": ^7.0.0
-    "@babel/register": ^7.0.0
+    "@babel/cli": ^7.10.4
+    "@babel/core": ^7.10.4
+    "@babel/register": ^7.10.4
     "@emotion/core": ^10.0.15
     "@hackoregon/ui-docs": ^0.0.4
     "@hackoregon/ui-themes": ^0.0.4
@@ -3798,9 +3781,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@hackoregon/ui-cards@workspace:packages/ui-cards"
   dependencies:
-    "@babel/cli": ^7.0.0
-    "@babel/core": ^7.0.0
-    "@babel/register": ^7.0.0
+    "@babel/cli": ^7.10.4
+    "@babel/core": ^7.10.4
+    "@babel/register": ^7.10.4
     "@emotion/core": ^10.0.15
     "@hackoregon/ui-brand": ^0.0.4
     "@hackoregon/ui-charts": ^0.0.4
@@ -3843,9 +3826,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@hackoregon/ui-charts@workspace:packages/ui-charts"
   dependencies:
-    "@babel/cli": ^7.0.0
-    "@babel/core": ^7.0.0
-    "@babel/register": ^7.0.0
+    "@babel/cli": ^7.10.4
+    "@babel/core": ^7.10.4
+    "@babel/register": ^7.10.4
     "@emotion/core": ^10.0.15
     "@hackoregon/ui-brand": ^0.0.4
     "@hackoregon/ui-themes": ^0.0.4
@@ -3882,24 +3865,24 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@hackoregon/ui-core@workspace:packages/ui-core"
   dependencies:
-    "@babel/cli": ^7.0.0
-    "@babel/core": ^7.0.0
-    "@babel/plugin-proposal-class-properties": ^7.0.0
-    "@babel/plugin-proposal-decorators": ^7.0.0
-    "@babel/plugin-proposal-do-expressions": ^7.0.0
-    "@babel/plugin-proposal-export-default-from": ^7.0.0
-    "@babel/plugin-proposal-export-namespace-from": ^7.0.0
-    "@babel/plugin-proposal-function-sent": ^7.0.0
-    "@babel/plugin-proposal-json-strings": ^7.0.0
-    "@babel/plugin-proposal-logical-assignment-operators": ^7.0.0
-    "@babel/plugin-proposal-nullish-coalescing-operator": ^7.0.0
-    "@babel/plugin-proposal-numeric-separator": ^7.0.0
-    "@babel/plugin-proposal-optional-chaining": ^7.0.0
-    "@babel/plugin-proposal-pipeline-operator": ^7.0.0
-    "@babel/plugin-proposal-throw-expressions": ^7.0.0
-    "@babel/plugin-syntax-dynamic-import": ^7.0.0
-    "@babel/plugin-syntax-import-meta": ^7.0.0
-    "@babel/register": ^7.0.0
+    "@babel/cli": ^7.10.4
+    "@babel/core": ^7.10.4
+    "@babel/plugin-proposal-class-properties": ^7.10.4
+    "@babel/plugin-proposal-decorators": ^7.10.4
+    "@babel/plugin-proposal-do-expressions": ^7.10.4
+    "@babel/plugin-proposal-export-default-from": ^7.10.4
+    "@babel/plugin-proposal-export-namespace-from": ^7.10.4
+    "@babel/plugin-proposal-function-sent": ^7.10.4
+    "@babel/plugin-proposal-json-strings": ^7.10.4
+    "@babel/plugin-proposal-logical-assignment-operators": ^7.10.4
+    "@babel/plugin-proposal-nullish-coalescing-operator": ^7.10.4
+    "@babel/plugin-proposal-numeric-separator": ^7.10.4
+    "@babel/plugin-proposal-optional-chaining": ^7.10.4
+    "@babel/plugin-proposal-pipeline-operator": ^7.10.4
+    "@babel/plugin-proposal-throw-expressions": ^7.10.4
+    "@babel/plugin-syntax-dynamic-import": ^7.8.3
+    "@babel/plugin-syntax-import-meta": ^7.10.4
+    "@babel/register": ^7.10.4
     "@emotion/core": ^10.0.15
     "@hackoregon/ui-themes": ^0.0.4
     "@hackoregon/utils": ^0.0.4
@@ -3941,8 +3924,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@hackoregon/ui-docs@workspace:packages/ui-docs"
   dependencies:
-    "@babel/cli": ^7.0.0
-    "@babel/core": ^7.0.0
+    "@babel/cli": ^7.10.4
+    "@babel/core": ^7.10.4
     "@hackoregon/ui-brand": ^0.0.4
     "@hackoregon/ui-themes": ^0.0.4
     "@storybook/addon-a11y": ^5.3.18
@@ -3961,9 +3944,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@hackoregon/ui-maps@workspace:packages/ui-maps"
   dependencies:
-    "@babel/cli": ^7.0.0
-    "@babel/core": ^7.0.0
-    "@babel/register": ^7.0.0
+    "@babel/cli": ^7.10.4
+    "@babel/core": ^7.10.4
+    "@babel/register": ^7.10.4
     "@emotion/core": ^10.0.15
     "@hackoregon/ui-brand": ^0.0.4
     "@hackoregon/ui-charts": ^0.0.4
@@ -4028,8 +4011,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@hackoregon/ui-themes@workspace:packages/ui-themes"
   dependencies:
-    "@babel/cli": ^7.0.0
-    "@babel/core": ^7.0.0
+    "@babel/cli": ^7.10.4
+    "@babel/core": ^7.10.4
     "@material-ui/core": ^4.4.0
     eslint: ^5.15.1
     lodash: ^4.17.19
@@ -4044,9 +4027,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@hackoregon/utils@workspace:packages/utils"
   dependencies:
-    "@babel/cli": ^7.0.0
-    "@babel/core": ^7.0.0
-    "@babel/register": ^7.0.0
+    "@babel/cli": ^7.10.4
+    "@babel/core": ^7.10.4
+    "@babel/register": ^7.10.4
     "@emotion/core": ^10.0.15
     "@storybook/addon-a11y": ^5.3.18
     "@storybook/react": ^5.3.18
@@ -10268,7 +10251,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js@npm:2, core-js@npm:^2.4.0, core-js@npm:^2.5.7, core-js@npm:^2.6.5":
+"core-js@npm:2, core-js@npm:^2.4.0, core-js@npm:^2.6.5":
   version: 2.6.11
   resolution: "core-js@npm:2.6.11"
   checksum: 39ad00b46deaecf344470ef940949b58c4b15e71608a98e8ac7429cd16e485b829f9720d44a44b5f4dee966ff04a18baf5283feb8aaba2cb59ce2c25fa72b88c
@@ -14892,13 +14875,6 @@ fsevents@~2.1.2:
   dependencies:
     react-is: ^16.7.0
   checksum: d3e3791d6e3a2741ce0ba38e878081dec49247ef22982a990c80941ee1f564ef16cd5a511bcc8c5e54f1ce8205535e0414ca5feea722c0690c80040be7ebf9df
-  languageName: node
-  linkType: hard
-
-"home-or-tmp@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "home-or-tmp@npm:3.0.0"
-  checksum: ebe4c58ed0678eb6e43821eceef08a7e168b8ee8f32d3a146b2f3a3f7669b3fd3236e56b7a0626aeefe5cd703097f80976f0e4eb0564e230e450e437b09e0038
   languageName: node
   linkType: hard
 

@@ -20,8 +20,8 @@
   "author": "jaron@civicsoftwarefoundation.org",
   "license": "MIT",
   "devDependencies": {
-    "@babel/cli": "^7.0.0",
-    "@babel/core": "^7.0.0",
+    "@babel/cli": "^7.10.4",
+    "@babel/core": "^7.10.4",
     "@hackoregon/ui-brand": "^0.0.4",
     "@storybook/addon-a11y": "^5.3.18",
     "@storybook/react": "^5.3.18",

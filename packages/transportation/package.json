@@ -60,10 +60,10 @@
     "styled-components": "^1.4.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0",
-    "@babel/core": "^7.0.0",
-    "@babel/node": "^7.0.0",
-    "@babel/register": "7.0.0",
+    "@babel/cli": "^7.10.4",
+    "@babel/core": "^7.10.4",
+    "@babel/node": "^7.10.4",
+    "@babel/register": "7.10.4",
     "@hackoregon/civic-babel-presets": "^3.0.0",
     "@hackoregon/dev-server": "workspace:packages/dev-server",
     "@hackoregon/mock-wrapper": "^3.0.0",
