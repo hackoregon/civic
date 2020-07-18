@@ -46,11 +46,11 @@ const taskPhases = {
   [SOLVING_SAVE_OTHERS]: { time: 21 },
   [MODAL_SAVE_OTHERS_INTRO]: { time: 6 },
   [CHOOSE_TASK]: { time: 21 },
-  [MODAL_CHOSEN_TASK]: { time: 6 },
+  [MODAL_CHOSEN_TASK]: { time: 3 },
   [MODAL_SOLVED_TASK]: { time: 6 },
   [MODAL_UNSOLVED_TASK]: { time: 6 },
   [MODAL_NO_ITEM]: { time: 6 },
-  [MODAL_BADGE_EARNED]: { time: 7 }
+  [MODAL_BADGE_EARNED]: { time: 3 }
 };
 
 const actionTypes = {
