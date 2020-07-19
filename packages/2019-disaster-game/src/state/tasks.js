@@ -289,6 +289,11 @@ export const tasksReducer = createReducer(initialState, {
     const canBeFinalPhase =
       taskPhasesChapterCanEndAfter.indexOf(state.activeTaskPhase) > -1;
     if (canBeFinalPhase && state.endingChapter) {
+      // test
+      if (state.activeTaskPhase === MODAL_BADGE_EARNED) {
+        const newBadgeEarned = getNewBadgeEarned(state);
+        newBadgeEarned.shown = true;
+      }
       state.badges.earthquakeHeroBadge.activeTaskIndexWhenEarned =
         state.activeTaskIndex;
       state.badges.earthquakeHeroBadge.shown = true;
