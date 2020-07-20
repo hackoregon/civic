@@ -1,3 +1,10 @@
-<svg width="40" height="48" viewBox="0 0 40 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M0 6.79575L0.00910795 24.3116C0.00910795 30.8824 2.12188 35.7897 5.69882 39.5513C9.20999 43.243 14.1833 45.9086 20.0076 48C25.8329 45.9086 30.8032 43.243 34.3083 39.5513C37.8822 35.7897 39.9879 30.8843 39.9909 24.3116L40 6.79575L19.9995 0L0 6.79575Z" fill="#4F4F4F"/>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 40 48" style="enable-background:new 0 0 40 48;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill-rule:evenodd;clip-rule:evenodd;fill:#4F4F4F;}
+</style>
+<path class="st0" d="M0,6.8l0,17.5c0,6.6,2.1,11.5,5.7,15.2c3.5,3.7,8.5,6.4,14.3,8.4c5.8-2.1,10.8-4.8,14.3-8.4
+	c3.6-3.8,5.7-8.7,5.7-15.2l0-17.5L20,0L0,6.8z"/>
 </svg>

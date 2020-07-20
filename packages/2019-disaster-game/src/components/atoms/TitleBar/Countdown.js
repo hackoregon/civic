@@ -29,21 +29,20 @@ const Countdown = ({ iconStyle, duration }) => {
   let usedTime = 0;
   const startTime = new Date();
   const [timer, setTimer] = useState(null);
-  const [displayedTime, setDisplayedTime] = useState("00:00");
+  const [displayedTime, setDisplayedTime] = useState("0:00");
 
   const count = () => {
     usedTime = Math.floor((new Date() - startTime) / 10);
 
     const tt = totalTime - usedTime;
     if (tt <= 0) {
-      setDisplayedTime("00:00");
+      setDisplayedTime("0:00");
       clearInterval(timer);
     } else {
       const mi = Math.floor(tt / (60 * 100));
       const ss = Math.floor((tt - mi * 60 * 100) / 100);
-      const ms = tt - Math.floor(tt / 100) * 100;
 
-      setDisplayedTime(`${fillZero(ss)}:${fillZero(ms)}`);
+      setDisplayedTime(`${fillZero(mi)}:${fillZero(ss)}`);
     }
   };
 
