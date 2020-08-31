@@ -155,7 +155,7 @@ const HomePage = () => {
               css={css`
                 text-decoration: none;
               `}
-              href="https://ven386248.typeform.com/to/WVYtVF"
+              href="https://civicsoftwarefoundation.org/project-form/"
             >
               <Button bkgndColor={BrandColors.subdued.rgba}>
                 WORK WITH US
@@ -204,7 +204,7 @@ const HomePage = () => {
               css={css`
                 text-decoration: none;
               `}
-              href="https://ven386248.typeform.com/to/rEhanV"
+              href="https://civicsoftwarefoundation.org/contributor-apply/"
             >
               <Button display="inline" bkgndColor={BrandColors.subdued.rgba}>
                 APPLY NOW
