@@ -35,6 +35,7 @@ global.navigator = {
   userAgent: "node.js"
 };
 global.window = document.defaultView;
+global.HTMLElement = window.HTMLElement;
 
 // we're going to emulate the dom with this part here
 const exposedProperties = ["window", "navigator", "document"];
