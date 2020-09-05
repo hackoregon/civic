@@ -14,7 +14,8 @@
     "test:watch": "yarn test -w",
     "lint": "eslint src stories",
     "storybook": "node scripts/storybook.js",
-    "start": "node scripts/start.js"
+    "start": "node scripts/start.js",
+    "watch": "BABEL_ENV=cjs babel src --out-dir dist --copy-files --no-comments --watch --skip-initial-build"
   },
   "repository": "git+https://github.com/hackoregon/civic.git",
   "author": "jaron@civicsoftwarefoundation.org",
@@ -32,6 +33,7 @@
   },
   "dependencies": {
     "@hackoregon/ui-themes": "^0.0.4",
+    "@hackoregon/ui-brand": "^0.0.4",
     "react": "^16.8.4",
     "react-dom": "^16.8.4"
   },

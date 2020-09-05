@@ -51,7 +51,7 @@
     "storybook-new": "BABEL_ENV=esm STORYBOOK_ENV=new start-storybook -p 6006",
     "test": "lerna exec yarn test --no-bail",
     "travis": "make travis",
-    "watch": "node scripts/watch"
+    "watch": "lerna run --parallel watch"
   },
   "husky": {
     "hooks": {
