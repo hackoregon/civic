@@ -58,7 +58,9 @@ module.exports = {
         [
           cssLoader({ sourceMap: true }),
           postcss({
-            plugins: [autoprefixer({ browsers: ["last 2 versions"] })]
+            plugins: [
+              autoprefixer({ overrideBrowserslist: ["last 2 versions"] })
+            ]
           })
         ]
       ),
