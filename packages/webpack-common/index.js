@@ -1,7 +1,6 @@
 const webpack = require("webpack");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 
 const {
   createConfig,
@@ -53,17 +52,7 @@ module.exports = {
         publicPath: "/",
         filename: "[name].bundle.js"
       }),
-      match(
-        ["*.js", "!*node_modules*"],
-        [
-          babel({
-            rootMode: "upward",
-            plugins: [!isProd && require.resolve("react-refresh/babel")].filter(
-              Boolean
-            )
-          })
-        ]
-      ),
+      babel({ rootMode: "upward" }),
       match(
         ["*.css"],
         [
@@ -92,12 +81,7 @@ module.exports = {
         addPlugins([
           new webpack.HotModuleReplacementPlugin(),
           new webpack.NamedModulesPlugin(),
-          new BundleAnalyzerPlugin({ openAnalyzer: false }),
-          new ReactRefreshWebpackPlugin({
-            overlay: {
-              sockIntegration: "whm"
-            }
-          })
+          new BundleAnalyzerPlugin({ openAnalyzer: false })
         ])
       ]),
       env("production", [])
