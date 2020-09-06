@@ -14,11 +14,9 @@ const withGlobal = cb => (
 
 export const parameters = {
   options: {
-    showPanel: true,
-    theme: themeCIVIC
+    showPanel: true
   },
   viewport: {
-    defaultViewport: "responsive",
     viewports: INITIAL_VIEWPORTS
   }
 };
