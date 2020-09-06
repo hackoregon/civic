@@ -1,5 +1,5 @@
 ---
-to: packages/component-library/src/<%=component%>/<%=component%>.test.js
+to: packages/<%=package%>/src/<%=component%>/<%=component%>.test.js
 ---
 import React from "react";
 import { mount } from "enzyme";

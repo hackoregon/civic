@@ -1,5 +1,5 @@
 ---
-to: packages/component-library/stories/<%=camelComponent%>.notes.md
+to: packages/<%=package%>/stories/<%=camelComponent%>.notes.md
 ---
 # <%=component%> Component
 
