@@ -4,7 +4,6 @@ import { storiesOf } from "@storybook/react";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { action } from "@storybook/addon-actions";
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { checkA11y } from "@storybook/addon-a11y";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { withKnobs, text, boolean, object } from "@storybook/addon-knobs";
 import { StatefulWrapper } from "@hackoregon/utils";
@@ -23,7 +22,6 @@ const GROUP_IDS = {
 export default () =>
   storiesOf("Component Lib/Basic Inputs/Select", module)
     .addDecorator(withKnobs)
-    .addDecorator(checkA11y)
     .addDecorator(story => (
       <div style={storybookStyles.storyGrid}>
         <div style={storybookStyles.storyGridItem}>{story()}</div>

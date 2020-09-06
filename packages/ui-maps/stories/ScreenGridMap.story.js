@@ -9,7 +9,6 @@ import {
   boolean
 } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
-import { checkA11y } from "@storybook/addon-a11y";
 import { BaseMap, ScreenGridMap, DemoJSONLoader } from "../src";
 import notes from "./ScreenGridMap.notes.md";
 
@@ -52,7 +51,6 @@ const opacityOptions = {
 export default () =>
   storiesOf("Component Lib/Maps/Screen Grid Map", module)
     .addDecorator(withKnobs)
-    .addDecorator(checkA11y)
     .add(
       "Standard",
       () => {

@@ -8,7 +8,6 @@ import {
   text,
   number
 } from "@storybook/addon-knobs";
-import { checkA11y } from "@storybook/addon-a11y";
 import { min, max } from "d3";
 import { at } from "lodash";
 import { BaseMap, DemoJSONLoader } from "../src";
@@ -134,7 +133,6 @@ const heatMapOpacityOptions = {
 export default () =>
   storiesOf("Component Lib/Maps/Heat Map", module)
     .addDecorator(withKnobs)
-    .addDecorator(checkA11y)
     .add(
       "Standard",
       () => {

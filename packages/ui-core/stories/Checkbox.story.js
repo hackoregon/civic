@@ -4,7 +4,6 @@ import { storiesOf } from "@storybook/react";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { action } from "@storybook/addon-actions";
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { checkA11y } from "@storybook/addon-a11y";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { withKnobs, text, boolean, select } from "@storybook/addon-knobs";
 import FormControl from "@material-ui/core/FormControl";
@@ -27,7 +26,6 @@ const GROUP_IDS = {
 export default () =>
   storiesOf("Component Lib/Basic Inputs/Checkbox", module)
     .addDecorator(withKnobs)
-    .addDecorator(checkA11y)
     .addDecorator(story => (
       <div style={storybookStyles.storyGrid}>
         <div style={storybookStyles.storyGridItem}>{story()}</div>

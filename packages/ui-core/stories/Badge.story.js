@@ -2,14 +2,12 @@ import React from "react";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
 import { number, withKnobs, color } from "@storybook/addon-knobs";
-import { checkA11y } from "@storybook/addon-a11y";
 import { Badge } from "../src";
 import { storybookStyles } from "./storyStyles";
 import notes from "./badge.notes.md";
 
 export default () =>
   storiesOf("Component Lib/Common UI/Badge", module)
-    .addDecorator(checkA11y)
     .addDecorator(withKnobs)
     .addDecorator(story => (
       <div style={storybookStyles.storyGrid}>

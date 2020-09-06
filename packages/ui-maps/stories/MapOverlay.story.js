@@ -12,7 +12,6 @@ import {
   text
 } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
-import { checkA11y } from "@storybook/addon-a11y";
 import { scaleQuantize, extent } from "d3";
 import { at } from "lodash";
 import {
@@ -108,7 +107,6 @@ const CIVIC_API_URL =
 
 export default () =>
   storiesOf("Component Lib/Maps/Map Overlay", module)
-    .addDecorator(checkA11y)
     .addDecorator(withKnobs)
     .add(
       "Standard",

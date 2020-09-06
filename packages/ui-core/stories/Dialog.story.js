@@ -1,6 +1,5 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { checkA11y } from "@storybook/addon-a11y";
 import { withKnobs, text, action } from "@storybook/addon-knobs";
 import { StatefulWrapper } from "@hackoregon/utils";
 import { Dialog } from "../src";
@@ -10,7 +9,6 @@ import notes from "./dialog.notes.md";
 export default () =>
   storiesOf("Component Lib/Common UI/Dialog", module)
     .addDecorator(withKnobs)
-    .addDecorator(checkA11y)
     .addDecorator(story => (
       <div style={storybookStyles.storyGrid}>
         <div style={storybookStyles.storyGridItem}>{story()}</div>

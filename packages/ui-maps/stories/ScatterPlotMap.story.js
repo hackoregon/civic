@@ -9,7 +9,6 @@ import {
   color
 } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
-import { checkA11y } from "@storybook/addon-a11y";
 import { BaseMap, ScatterPlotMap, MapTooltip, DemoJSONLoader } from "../src";
 import notes from "./ScatterPlotMap.notes.md";
 
@@ -69,7 +68,6 @@ const colorOption1 = colorPicker => {
 export default () =>
   storiesOf("Component Lib/Maps/Scatterplot Map", module)
     .addDecorator(withKnobs)
-    .addDecorator(checkA11y)
     .add(
       "Standard",
       () => {

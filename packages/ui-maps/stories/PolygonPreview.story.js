@@ -1,6 +1,5 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { checkA11y } from "@storybook/addon-a11y";
 import { withKnobs, number, color } from "@storybook/addon-knobs";
 import { PolygonPreview } from "../src";
 import { storybookStyles } from "./storyStyles";
@@ -57,7 +56,6 @@ const samplePoint = {
 export default () =>
   storiesOf("Component Lib/Maps/PolygonPreview", module)
     .addDecorator(withKnobs)
-    .addDecorator(checkA11y)
     .addDecorator(story => (
       <div style={storybookStyles.storyGrid}>
         <div style={storybookStyles.storyGridItem}>{story()}</div>

@@ -2,14 +2,12 @@ import React from "react";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
 import { number, withKnobs } from "@storybook/addon-knobs";
-import { checkA11y } from "@storybook/addon-a11y";
 import { Placeholder } from "../src";
 
 const sampleIssue = 56;
 
 export default () =>
   storiesOf("Component Lib/Common UI/Placeholder Story", module)
-    .addDecorator(checkA11y)
     .addDecorator(withKnobs)
     .add("Default", () => <Placeholder />)
     .add("With an issue", () => {

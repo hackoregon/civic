@@ -10,7 +10,6 @@ import {
   optionsKnob as options
 } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
-import { checkA11y } from "@storybook/addon-a11y";
 import { at } from "lodash";
 import { BaseMap, MultiLayerMap, DemoJSONLoader } from "../src";
 
@@ -54,7 +53,6 @@ const iconSizeOptions = {
 export default () =>
   storiesOf("Component Lib/Maps/MultiLayer Map", module)
     .addDecorator(withKnobs)
-    .addDecorator(checkA11y)
     .add(
       "Path Map",
       () => {

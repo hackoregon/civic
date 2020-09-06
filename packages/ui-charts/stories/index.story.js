@@ -1,5 +1,4 @@
 import { storiesOf } from "@storybook/react";
-import { checkA11y } from "@storybook/addon-a11y";
 
 // DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator import injection
 import barChartStory from "./BarChart.story";
@@ -14,9 +13,9 @@ import stackedAreaChart from "./StackedAreaChart.story";
 // DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator story injection
 
 // charts
-storiesOf("Component Lib/Charts", module)
-  .addParameters({ options: { showPanel: false } })
-  .addDecorator(checkA11y);
+storiesOf("Component Lib/Charts", module).addParameters({
+  options: { showPanel: false }
+});
 // .add("Charts Style Guide", () => <ChartsStyle />);
 barChartStory();
 dataTable();

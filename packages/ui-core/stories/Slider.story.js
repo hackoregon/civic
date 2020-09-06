@@ -1,7 +1,6 @@
 import React from "react";
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from "@storybook/react";
-import { checkA11y } from "@storybook/addon-a11y";
 import { action } from "@storybook/addon-actions";
 import { withKnobs, boolean, number } from "@storybook/addon-knobs";
 import { StatefulWrapper } from "@hackoregon/utils";
@@ -82,7 +81,6 @@ const rangeSlider = () => {
 export default () =>
   storiesOf("Component Lib/Basic Inputs/Slider", module)
     .addDecorator(withKnobs)
-    .addDecorator(checkA11y)
     .addDecorator(story => (
       <div style={storybookStyles.storyGrid}>
         <div style={storybookStyles.storyGridItem}>{story()}</div>

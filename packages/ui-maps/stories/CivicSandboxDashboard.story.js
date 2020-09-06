@@ -3,7 +3,6 @@
 import { Component } from "react";
 import { storiesOf } from "@storybook/react";
 import { withKnobs, boolean } from "@storybook/addon-knobs";
-import { checkA11y } from "@storybook/addon-a11y";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import {
@@ -185,9 +184,8 @@ class DashboardStory extends Component {
     const dashboardInformation = (
       <div css={dashboardDescription}>
         <h2>
-          {
-            "How has ridership changed throughout Tri-Met's service area over time?"
-          }
+          How has ridership changed throughout Tri-Met&apos;s service area over
+          time?
         </h2>
         <p>{wallOfText}</p>
         <p>{wallOfText}</p>
@@ -234,7 +232,6 @@ class DashboardStory extends Component {
 export default () =>
   storiesOf("Component Lib/CIVIC Platform/CIVIC Sandbox Dashboard", module)
     .addDecorator(withKnobs)
-    .addDecorator(checkA11y)
     .add("Simple usage", () => (
       <DemoJSONLoader urls={dataURLs}>
         {data => <DashboardStory data={data} />}

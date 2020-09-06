@@ -1,5 +1,4 @@
 import { storiesOf } from "@storybook/react";
-import { checkA11y } from "@storybook/addon-a11y";
 
 // DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator import injection
 import dialogStory from "./Dialog.story"; // TODO: Move this to the appropriate location
@@ -18,9 +17,9 @@ import selectStory from "./Select.story";
 import sliderStory from "./Slider.story";
 import chipcomponentstory from "./ChipComponent.story";
 
-storiesOf("Component Lib/Basic Inputs", module)
-  .addParameters({ options: { showPanel: false } })
-  .addDecorator(checkA11y);
+storiesOf("Component Lib/Basic Inputs", module).addParameters({
+  options: { showPanel: false }
+});
 buttonStory();
 buttonNewStory();
 checkboxStory();
@@ -31,9 +30,9 @@ selectFieldStory();
 sliderStory();
 // DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator story injection
 
-storiesOf("Component Lib/Common UI", module)
-  .addParameters({ options: { showPanel: false } })
-  .addDecorator(checkA11y);
+storiesOf("Component Lib/Common UI", module).addParameters({
+  options: { showPanel: false }
+});
 notebookPreviewStory();
 dialogStory();
 badgeStory();
