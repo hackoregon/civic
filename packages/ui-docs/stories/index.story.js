@@ -1,7 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { checkA11y } from "@storybook/addon-a11y";
 
 // DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator import injection
 import AccessibilityGuidelinesStyle from "./styleGuideStories/AccessibilityGuidelinesStyle.story";
@@ -17,17 +16,15 @@ import TerminologyStyle from "./styleGuideStories/TerminologyStyle.story";
 import TheBrandStyle from "./styleGuideStories/TheBrandStyle.story";
 import ThePlatformStyle from "./styleGuideStories/ThePlatformStyle.story";
 
-storiesOf("Welcome|About Us", module)
+storiesOf("Welcome/About Us", module)
   .addParameters({ options: { showPanel: false } })
-  .addDecorator(checkA11y)
   .add("Introduction", () => <Introduction />)
   .add("The CIVIC Brand", () => <TheBrandStyle />)
   .add("The CIVIC Platform", () => <ThePlatformStyle />);
 
 // UX Style Guide
-storiesOf("Design|UX Style Guide", module)
+storiesOf("Design/UX Style Guide", module)
   .addParameters({ options: { showPanel: false } })
-  .addDecorator(checkA11y)
   .add("Accessibility", () => <AccessibilityGuidelinesStyle />)
   .add("Story Cards", () => <CardsStyle />)
   .add("Data Visualization", () => <DataVisualizationStyle />)

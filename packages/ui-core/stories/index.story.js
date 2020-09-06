@@ -18,7 +18,7 @@ import selectStory from "./Select.story";
 import sliderStory from "./Slider.story";
 import chipcomponentstory from "./ChipComponent.story";
 
-storiesOf("Component Lib|Basic Inputs", module)
+storiesOf("Component Lib/Basic Inputs", module)
   .addParameters({ options: { showPanel: false } })
   .addDecorator(checkA11y);
 buttonStory();
@@ -31,7 +31,7 @@ selectFieldStory();
 sliderStory();
 // DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator story injection
 
-storiesOf("Component Lib|Common UI", module)
+storiesOf("Component Lib/Common UI", module)
   .addParameters({ options: { showPanel: false } })
   .addDecorator(checkA11y);
 notebookPreviewStory();

@@ -25,15 +25,15 @@
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.0",
     "@hackoregon/ui-brand": "^0.0.4",
-    "@storybook/addon-a11y": "^5.3.18",
-    "@storybook/react": "^5.3.18",
+    "@storybook/addon-a11y": "^6.0.21",
+    "@storybook/react": "^6.0.21",
     "eslint": "^5.15.1",
     "mocha": "^6.0.2",
     "rimraf": "^2.6.2"
   },
   "dependencies": {
-    "@hackoregon/ui-themes": "^0.0.4",
     "@hackoregon/ui-brand": "^0.0.4",
+    "@hackoregon/ui-themes": "^0.0.4",
     "react": "^16.8.4",
     "react-dom": "^16.8.4"
   },

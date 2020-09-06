@@ -19,7 +19,7 @@ import screenGridMapStory from "./ScreenGridMap.story";
 import vectorTilesMapStory from "./VectorTilesMap.story";
 
 // maps
-storiesOf("Component Lib|Maps", module)
+storiesOf("Component Lib/Maps", module)
   .addParameters({ options: { showPanel: false } })
   .addDecorator(checkA11y);
 // .add("Maps Style Guide", () => <MapsStyle />);

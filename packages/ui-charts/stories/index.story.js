@@ -14,7 +14,7 @@ import stackedAreaChart from "./StackedAreaChart.story";
 // DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator story injection
 
 // charts
-storiesOf("Component Lib|Charts", module)
+storiesOf("Component Lib/Charts", module)
   .addParameters({ options: { showPanel: false } })
   .addDecorator(checkA11y);
 // .add("Charts Style Guide", () => <ChartsStyle />);

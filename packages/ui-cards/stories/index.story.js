@@ -5,7 +5,7 @@ import { checkA11y } from "@storybook/addon-a11y";
 import civicCardStory from "./CivicCard.story";
 
 // Civic story cards
-storiesOf("Component Lib|Story Cards", module)
+storiesOf("Component Lib/Story Cards", module)
   .addParameters({ options: { showPanel: false } })
   .addDecorator(checkA11y);
 civicCardStory();
