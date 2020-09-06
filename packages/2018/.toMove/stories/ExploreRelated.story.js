@@ -55,7 +55,7 @@ const CardRegistryMock = {
 };
 
 export default () =>
-  storiesOf("Projects|civicplatform•org/Explore Related", module)
+  storiesOf("Projects/civicplatform•org/Explore Related", module)
     .addDecorator(checkA11y)
     .addDecorator(story => <div>{story()}</div>)
     .add("Default", () => (

@@ -27,7 +27,7 @@ const GROUP_IDS = {
 };
 
 export default () =>
-  storiesOf("Component Lib|Basic Inputs/Radio Button Group", module)
+  storiesOf("Component Lib/Basic Inputs/Radio Button Group", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .addDecorator(story => (

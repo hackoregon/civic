@@ -132,7 +132,7 @@ const heatMapOpacityOptions = {
 };
 
 export default () =>
-  storiesOf("Component Lib|Maps/Heat Map", module)
+  storiesOf("Component Lib/Maps/Heat Map", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .add(

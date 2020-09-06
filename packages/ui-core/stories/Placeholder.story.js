@@ -8,7 +8,7 @@ import { Placeholder } from "../src";
 const sampleIssue = 56;
 
 export default () =>
-  storiesOf("Component Lib|Common UI/Placeholder Story", module)
+  storiesOf("Component Lib/Common UI/Placeholder Story", module)
     .addDecorator(checkA11y)
     .addDecorator(withKnobs)
     .add("Default", () => <Placeholder />)

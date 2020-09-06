@@ -509,7 +509,7 @@ const PackageSelectorCollection = () => (
 );
 
 export default () =>
-  storiesOf("Component Lib|CIVIC Platform/Package Selector Box", module)
+  storiesOf("Component Lib/CIVIC Platform/Package Selector Box", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .addDecorator(story => (

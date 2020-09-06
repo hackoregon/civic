@@ -55,7 +55,7 @@ const samplePoint = {
 };
 
 export default () =>
-  storiesOf("Component Lib|Basic Inputs/PolygonPreview", module)
+  storiesOf("Component Lib/Basic Inputs/PolygonPreview", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .addDecorator(story => (

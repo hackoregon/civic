@@ -13,7 +13,7 @@ import pageLayoutStory from "./PageLayout.story";
 import PDFStory from "./PDF.story";
 
 // Civic platform components and page layout
-storiesOf("Component Lib|CIVIC Platform", module)
+storiesOf("Component Lib/CIVIC Platform", module)
   .addParameters({ options: { showPanel: false } })
   .addDecorator(checkA11y);
 cardListStory();

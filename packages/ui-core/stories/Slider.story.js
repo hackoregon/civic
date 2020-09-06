@@ -80,7 +80,7 @@ const rangeSlider = () => {
 };
 
 export default () =>
-  storiesOf("Component Lib|Basic Inputs/Slider", module)
+  storiesOf("Component Lib/Basic Inputs/Slider", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .addDecorator(story => (

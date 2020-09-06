@@ -24,7 +24,7 @@ const altTitle = "Without attribution";
 const urlTitle = "With custom URL";
 
 export default () =>
-  storiesOf("Component Lib|Common UI/Pull Quote", module)
+  storiesOf("Component Lib/Common UI/Pull Quote", module)
     .add(title, demoCode)
     .add(altTitle, altDemo)
     .add(urlTitle, urlDemo);

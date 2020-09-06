@@ -24,7 +24,7 @@ const GROUP_IDS = {
 };
 
 export default () =>
-  storiesOf("Component Lib|Charts/Pie Chart", module)
+  storiesOf("Component Lib/Charts/Pie Chart", module)
     .addDecorator(withKnobs)
     .add(
       "Standard",

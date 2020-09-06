@@ -88,6 +88,6 @@ const demoCode = () => (
 );
 
 export default () =>
-  storiesOf("Component Lib|Charts/Data Table", module).add(title, demoCode, {
+  storiesOf("Component Lib/Charts/Data Table", module).add(title, demoCode, {
     notes
   });

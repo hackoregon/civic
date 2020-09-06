@@ -58,7 +58,7 @@ const API_URL =
   "https://gist.githubusercontent.com/mendozaline/ab3da9bb53c17bf95690f9bf9fdd3e5a/raw/9b39324ea3df7e6e2cebc7aab7b1868289947ff3/test.json";
 
 export default () =>
-  storiesOf("Component Lib|Maps/Comparison Map", module)
+  storiesOf("Component Lib/Maps/Comparison Map", module)
     .addDecorator(withKnobs)
     .add(
       "Standard",

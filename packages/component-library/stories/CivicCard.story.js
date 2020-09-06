@@ -197,7 +197,7 @@ const sampleCardMetaSideBySide = data => {
 };
 
 export default () =>
-  storiesOf("Component Lib|Story Cards/CIVIC Card", module)
+  storiesOf("Component Lib/Story Cards/CIVIC Card", module)
     .add("Layout: Full With Descriptions", () => (
       <CivicCard
         cardMeta={sampleCardMeta}

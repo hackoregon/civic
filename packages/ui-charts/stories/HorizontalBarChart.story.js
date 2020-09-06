@@ -22,7 +22,7 @@ const GROUP_IDS = {
 };
 
 export default () =>
-  storiesOf("Component Lib|Charts/Horizontal Bar Chart", module)
+  storiesOf("Component Lib/Charts/Horizontal Bar Chart", module)
     .addDecorator(checkA11y)
     .addDecorator(withKnobs)
     .add(

@@ -59,7 +59,7 @@ const containerWrapper = css`
 `;
 
 export default () =>
-  storiesOf("Component Lib|Maps/Base Map", module)
+  storiesOf("Component Lib/Maps/Base Map", module)
     .addDecorator(withKnobs)
     .add(
       "Standard",

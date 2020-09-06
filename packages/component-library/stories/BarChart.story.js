@@ -23,7 +23,7 @@ const GROUP_IDS = {
 };
 
 export default () =>
-  storiesOf("Component Lib|Charts/Bar Chart", module)
+  storiesOf("Component Lib/Charts/Bar Chart", module)
     .addDecorator(withKnobs)
     .add(
       "Standard",

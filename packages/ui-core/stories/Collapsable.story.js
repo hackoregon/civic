@@ -5,7 +5,7 @@ import notes from "./collapsable.notes.md";
 import { Collapsable } from "../src";
 
 export default () =>
-  storiesOf("Component Lib|Common UI/Collapsable", module)
+  storiesOf("Component Lib/Common UI/Collapsable", module)
     .add(
       "Standard",
       () => {

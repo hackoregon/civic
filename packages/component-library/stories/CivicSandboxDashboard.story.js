@@ -232,7 +232,7 @@ class DashboardStory extends Component {
 }
 
 export default () =>
-  storiesOf("Component Lib|CIVIC Platform/CIVIC Sandbox Dashboard", module)
+  storiesOf("Component Lib/CIVIC Platform/CIVIC Sandbox Dashboard", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .add("Simple usage", () => (

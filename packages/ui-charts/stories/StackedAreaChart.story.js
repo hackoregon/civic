@@ -69,7 +69,7 @@ const customLegend = (legendData, theme) => {
 };
 
 export default () =>
-  storiesOf("Component Lib|Charts/Stacked Area Chart", module)
+  storiesOf("Component Lib/Charts/Stacked Area Chart", module)
     .addDecorator(withKnobs)
     .add(
       "Standard",

@@ -8,7 +8,7 @@ import StatefulWrapper from "../src/utils/StatefulWrapper";
 import notes from "./dialog.notes.md";
 
 export default () =>
-  storiesOf("Component Lib|Basic Inputs/Dialog", module)
+  storiesOf("Component Lib/Basic Inputs/Dialog", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .addDecorator(story => (

@@ -129,7 +129,7 @@ const campaignFinanceExample = () => (
 );
 
 export default () =>
-  storiesOf("Projects|civicplatform•org/Page Layout", module)
+  storiesOf("Projects/civicplatform•org/Page Layout", module)
     .add("A potential example of Housing Project", housingExample)
     .add(
       "A potential example of Campaign Finance Project",

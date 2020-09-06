@@ -7,7 +7,7 @@ import { Dropdown } from "../src";
 import { storybookStyles } from "./storyStyles";
 
 export default () =>
-  storiesOf("Component Lib|Basic Inputs/Dropdown List", module)
+  storiesOf("Component Lib/Basic Inputs/Dropdown List", module)
     .addDecorator(checkA11y)
     .addDecorator(story => (
       <div style={storybookStyles.storyGrid}>

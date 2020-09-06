@@ -50,7 +50,7 @@ const opacityOptions = {
 };
 
 export default () =>
-  storiesOf("Component Lib|Maps/Screen Grid Map", module)
+  storiesOf("Component Lib/Maps/Screen Grid Map", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .add(

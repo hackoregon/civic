@@ -250,7 +250,7 @@ class TouchScreenDemo extends React.Component {
 }
 
 export default () =>
-  storiesOf("Component Lib|Maps/Icon Map", module)
+  storiesOf("Component Lib/Maps/Icon Map", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .add("Simple usage", demoMap)

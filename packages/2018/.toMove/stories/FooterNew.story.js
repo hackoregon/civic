@@ -6,7 +6,7 @@ import { FooterNew as Footer } from "../src/components";
 import notes from "./footerNew.notes.md";
 
 export default () =>
-  storiesOf("Projects|civicplatform•org/Footer New", module)
+  storiesOf("Projects/civicplatform•org/Footer New", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .addDecorator(story => story())

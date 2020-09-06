@@ -55,7 +55,7 @@ const samplePoint = {
 };
 
 export default () =>
-  storiesOf("Component Lib|Maps/PolygonPreview", module)
+  storiesOf("Component Lib/Maps/PolygonPreview", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .addDecorator(story => (

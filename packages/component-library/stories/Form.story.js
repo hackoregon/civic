@@ -7,7 +7,7 @@ import { storybookStyles } from "./storyStyles";
 import notes from "./form.notes.md";
 
 export default () =>
-  storiesOf("Component Lib|Basic Inputs/Form", module)
+  storiesOf("Component Lib/Basic Inputs/Form", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .addDecorator(story => (

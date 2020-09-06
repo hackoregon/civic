@@ -8,7 +8,7 @@ import { storybookStyles } from "./storyStyles";
 import notes from "./dialog.notes.md";
 
 export default () =>
-  storiesOf("Component Lib|Common UI/Dialog", module)
+  storiesOf("Component Lib/Common UI/Dialog", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .addDecorator(story => (

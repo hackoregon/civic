@@ -37,7 +37,7 @@ const overlayDemo = () => (
 // const propDocs = { inline: true, propTables: [Header] };
 
 export default () =>
-  storiesOf("Component Lib|CIVIC Platform/Header", module)
+  storiesOf("Component Lib/CIVIC Platform/Header", module)
     .addDecorator(checkA11y)
     .add(title, demoCode)
     .add(altTitle, altDemo)

@@ -7,7 +7,7 @@ import { storybookStyles } from "./storyStyles";
 import notes from "./notebookPreview.notes.md";
 
 export default () =>
-  storiesOf("Component Lib|Common UI/NotebookPreview", module)
+  storiesOf("Component Lib/Common UI/NotebookPreview", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .addDecorator(story => (
