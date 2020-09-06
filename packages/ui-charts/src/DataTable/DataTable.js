@@ -2,7 +2,7 @@ import { Component } from "react";
 import PropTypes from "prop-types";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
-import shortid from "shortid";
+import { nanoid } from "nanoid";
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 
 // Classes
@@ -49,7 +49,7 @@ const DefaultColumn = ({
   <tr css={columnClass || defaultColumnClass}>
     {columns.map(item => (
       <th
-        key={shortid.generate()}
+        key={nanoid()}
         css={columnCellClass || defaultColumnCellClass(item)}
         colSpan={item.colSpan}
         onClick={() => sortTable(item.key)}
@@ -75,7 +75,7 @@ const DefaultHeader = ({ styles, columns }) => (
   <tr css={styles || defaultHeaderClass}>
     {columns.map(item => (
       <th
-        key={shortid.generate()}
+        key={nanoid()}
         css={defaultHeaderCellClass(item)}
         colSpan={item.colSpan || "1"}
       >
@@ -97,10 +97,7 @@ DefaultHeader.propTypes = {
 const DefaultRow = ({ data, columns, rowClass, rowCellClass }) => (
   <tr css={rowClass || defaultRowClass}>
     {columns.map(item => (
-      <td
-        key={shortid.generate()}
-        css={rowCellClass || defaultRowCellClass(item)}
-      >
+      <td key={nanoid()} css={rowCellClass || defaultRowCellClass(item)}>
         {data[item.key]}
       </td>
     ))}
@@ -227,7 +224,7 @@ export default class DataTable extends Component {
         <tbody>
           {Object.keys(sorted).map(id => (
             <Row
-              key={shortid.generate()}
+              key={nanoid()}
               id={id}
               columns={flattenedColumns}
               data={sorted[id]}

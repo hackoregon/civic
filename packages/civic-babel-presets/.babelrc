@@ -40,6 +40,18 @@
         "@babel/plugin-transform-modules-commonjs",
         "dynamic-import-node"
       ]
+    },
+    "rollup": {
+      "plugins": [
+        "@babel/plugin-transform-runtime",
+        "transform-react-remove-prop-types",
+        [
+          "emotion",
+          {
+            "hoist": true
+          }
+        ]
+      ]      
     }
   },
   "plugins": [

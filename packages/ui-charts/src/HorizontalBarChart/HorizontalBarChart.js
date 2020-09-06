@@ -11,7 +11,7 @@ import {
   VictoryGroup,
   VictoryLine
 } from "victory";
-import shortid from "shortid";
+import { nanoid } from "nanoid";
 import {
   groupByKey,
   DataChecker,
@@ -258,7 +258,7 @@ const HorizontalBarChart = ({
                     x="dataKey"
                     y="dataValue"
                     events={chartEvents(theme)}
-                    key={shortid.generate()}
+                    key={nanoid()}
                     labels={arr.map(
                       d => `${d[dataSeriesKey]}: ${d[dataValue]}`
                     )}
@@ -288,7 +288,7 @@ const HorizontalBarChart = ({
                     ticks: { stroke: "none" },
                     grid: { stroke: "none" }
                   }}
-                  key={shortid.generate()}
+                  key={nanoid()}
                 />
               );
             })}
@@ -311,7 +311,7 @@ const HorizontalBarChart = ({
                     x="dataKey"
                     y="dataValue"
                     events={chartEvents(theme)}
-                    key={shortid.generate()}
+                    key={nanoid()}
                     labels={arr.map(
                       d => `${d[dataSeriesKey]}: ${d[dataValue]}`
                     )}
@@ -341,7 +341,7 @@ const HorizontalBarChart = ({
                     ticks: { stroke: "none" },
                     grid: { stroke: "none" }
                   }}
-                  key={shortid.generate()}
+                  key={nanoid()}
                 />
               );
             })}

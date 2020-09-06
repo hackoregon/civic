@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
-import shortid from "shortid";
+import { nanoid } from "nanoid";
 import { VictoryTheme } from "@hackoregon/ui-themes";
 
 const SimpleLegend = ({ colorScale, legendData, theme }) => {
@@ -24,7 +24,7 @@ const SimpleLegend = ({ colorScale, legendData, theme }) => {
       <div css={legendStyle}>
         {legendData.map((group, idx) => (
           <span
-            key={shortid.generate()}
+            key={nanoid()}
             css={css`
               margin-left: 10px;
             `}

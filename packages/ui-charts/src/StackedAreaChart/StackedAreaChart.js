@@ -14,7 +14,7 @@ import {
 import { VictoryTheme } from "@hackoregon/ui-themes";
 import { DataChecker, civicFormat } from "@hackoregon/utils";
 
-import shortid from "shortid";
+import { nanoid } from "nanoid";
 import ChartContainer from "../ChartContainer";
 import SimpleLegend from "../SimpleLegend";
 import chartHelpers from "../chartHelpers";
@@ -71,7 +71,7 @@ const StackedAreaChart = ({
   const areas = lineData
     ? Object.keys(lineData).map((category, index) => (
         <VictoryArea
-          key={shortid.generate()}
+          key={nanoid()}
           data={lineData[category].map(d => ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],
@@ -89,7 +89,7 @@ const StackedAreaChart = ({
   const dots = lineData
     ? Object.keys(lineData).map(category => (
         <VictoryScatter
-          key={shortid.generate()}
+          key={nanoid()}
           data={lineData[category].map(d => ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],

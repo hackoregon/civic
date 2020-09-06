@@ -4,7 +4,7 @@
   "env": {
     "mocha": true
   },
-  "plugins": ["react", "prettier", "emotion","react-hooks"],
+  "plugins": ["react", "prettier", "emotion", "react-hooks", "tree-shaking"],
   "rules": {
     "emotion/jsx-import": "error",
     "emotion/no-vanilla": "warn",
@@ -21,11 +21,12 @@
     "import/no-extraneous-dependencies": [
       "error",
       {
-        "devDependencies": ["**/*.story.js", "**/*.test.js"]
+        "devDependencies": ["**/*.story.js", "**/*.test.js", "**/rollup.config.js"]
       }
     ],
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn"
+    "react-hooks/exhaustive-deps": "warn",
+    "tree-shaking/no-side-effects-in-initialization": 2
   },
   "globals": {
     "__DEV__": true,

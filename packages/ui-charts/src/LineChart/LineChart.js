@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
-import shortid from "shortid";
+import { nanoid } from "nanoid";
 import { groupBy } from "lodash";
 import {
   VictoryAxis,
@@ -94,7 +94,7 @@ const LineChart = ({
     ? dataSeriesList.map((item, index) => (
         <VictoryLine
           title="Line Chart"
-          key={shortid.generate()}
+          key={nanoid()}
           data={lineData[item.category].map(d => ({
             dataKey: d[dataKey],
             dataValue: d[dataValue],
