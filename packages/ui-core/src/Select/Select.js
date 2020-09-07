@@ -69,7 +69,7 @@ Select.propTypes = {
   /** The current value of the select dropdown */
   value: PropTypes.string,
   /** The variant to use */
-  variant: PropTypes.oneOf("filled", "outlined", "standard"),
+  variant: PropTypes.oneOf(["filled", "outlined", "standard"]),
   /** A label for the select dropdown */
   formLabel: PropTypes.string,
   /** Helper text for the select dropdown */
