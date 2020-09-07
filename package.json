@@ -22,8 +22,9 @@
     "packages/*"
   ],
   "scripts": {
-    "bootstrap": "yarn install --frozen-lockfile && yarn --cwd ./packages/component-library/ build && yarn --cwd ./packages/mock-wrapper/ build",
+    "bootstrap": "yarn install --frozen-lockfile && yarn build-packages",
     "build": "lerna run build",
+    "build-packages": "lerna run --scope component-library --scope mock-wrapper --scope utils --scope ui-* build",
     "build-netlify": "yarn workspace @hackoregon/component-library build && yarn workspace @hackoregon/mock-wrapper build && yarn workspace @hackoregon/2018 build && yarn copy-redirects",
     "card": "yarn new-card",
     "card:local-data": "yarn new-card:local-data",
