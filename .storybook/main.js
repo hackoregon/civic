@@ -20,7 +20,7 @@ const prettierConfig = {
 
 module.exports = {
   stories: [
-    isNew && "../**/index.story.js",
+    isNew && "../**/*.stories.js",
     !isNew && "../packages/component-library/stories/**/*.story.js"
   ].filter(Boolean),
   addons: [
@@ -29,27 +29,7 @@ module.exports = {
     "@storybook/addon-links",
     "@storybook/addon-a11y",
     "@storybook/addon-viewport",
-    "@storybook/addon-storysource"
-  ],
-  webpackFinal: config => {
-    config.module.rules.push({
-      test: /\.story\.jsx?$/,
-      loaders: [
-        {
-          loader: require.resolve("@storybook/source-loader"),
-          options: {
-            prettierConfig: {
-              prettierConfig
-            }
-          }
-        }
-      ],
-      enforce: "pre"
-    });
-
-    return {
-      ...config,
-      module: { ...config.module, rules: custom.module.rules }
-    };
-  }
+    "@storybook/addon-docs",
+    "@storybook/addon-controls"
+  ]
 };

@@ -71,6 +71,7 @@
     ]
   },
   "dependencies": {
+    "@emotion/babel-preset-css-prop": "^10.0.27",
     "@storybook/core": "^6.0.21",
     "@storybook/node-logger": "^6.0.21",
     "@storybook/source-loader": "^6.0.21",
@@ -81,6 +82,8 @@
     "@babel/core": "^7.0.0",
     "@storybook/addon-a11y": "^6.0.21",
     "@storybook/addon-actions": "^6.0.21",
+    "@storybook/addon-controls": "^6.0.21",
+    "@storybook/addon-docs": "^6.0.21",
     "@storybook/addon-info": "^5.0.6",
     "@storybook/addon-knobs": "^6.0.21",
     "@storybook/addon-links": "^6.0.21",
@@ -92,7 +95,7 @@
     "autoprefixer": "^9.4.10",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.5.0",
-    "babel-loader": "^8.0.0",
+    "babel-loader": "^8.1.0",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "chai-enzyme": "^1.0.0-beta.1",
@@ -135,6 +138,7 @@
     "npm-run-all": "^4.0.2",
     "postcss-loader": "^3.0.0",
     "prettier": "1.16.4",
+    "react-is": "^16.13.1",
     "redux-immutable-state-invariant": "^1.2.4",
     "redux-mock-store": "^1.2.1",
     "regenerator-runtime": "^0.13.1",

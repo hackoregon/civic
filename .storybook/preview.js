@@ -13,9 +13,11 @@ const withGlobal = cb => (
 );
 
 export const parameters = {
+  actions: { argTypesRegex: "^on[A-Z].*" },
   options: {
     showPanel: true
   },
+  controls: { expanded: true },
   viewport: {
     viewports: INITIAL_VIEWPORTS
   }
