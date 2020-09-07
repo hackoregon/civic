@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import React from "react";
 import { bool, func, node, number } from "prop-types";
 import RcSlider from "rc-slider";
@@ -7,7 +8,9 @@ import "./slider.css";
 
 const SliderWithTooltip = RcSlider.createSliderWithTooltip(RcSlider);
 const Range = RcSlider.createSliderWithTooltip(RcSlider.Range);
-const Slider = ({
+
+/** A numeric slider using RcSlider under the hood, with options for a single value or a range of values */
+export const Slider = ({
   min,
   max,
   onChange,
@@ -58,4 +61,6 @@ Slider.defaultProps = {
   SliderComponent: RcSlider
 };
 
-export default Slider;
+Slider.displayName = "Slider";
+Slider.SliderWithTooltip.displayName = "Slider.SliderWithTooltip";
+Slider.SliderWithRange.displayName = "Slider.SliderWithRange";

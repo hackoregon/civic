@@ -1,5 +1,5 @@
+/* eslint-disable import/prefer-default-export */
 /** @jsx jsx */
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { jsx } from "@emotion/core";
 import PropTypes from "prop-types";
 import MaterialCheckbox from "@material-ui/core/Checkbox";
@@ -8,8 +8,11 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { ThemeProvider } from "@material-ui/styles";
 import { MaterialTheme } from "@hackoregon/ui-themes";
 
-const Checkbox = ({
-  variant,
+/**
+ * A checkbox built with MaterialUI under the hood
+ */
+
+export const Checkbox = ({
   onChange,
   disabled,
   value,
@@ -22,7 +25,6 @@ const Checkbox = ({
       control={
         <MaterialCheckbox
           checked={value}
-          variant={variant}
           onChange={onChange}
           disabled={disabled}
           inputProps={{ "aria-label": { label } }}
@@ -39,8 +41,7 @@ Checkbox.displayName = "Checkbox";
 Checkbox.propTypes = {
   value: PropTypes.bool,
   label: PropTypes.string,
-  labelPlacement: PropTypes.string,
-  variant: PropTypes.string,
+  labelPlacement: PropTypes.oneOf(["bottom", "end", "start", "top"]),
   disabled: PropTypes.bool,
   onChange: PropTypes.func
 };
@@ -49,8 +50,5 @@ Checkbox.defaultProps = {
   value: false,
   label: "Label",
   labelPlacement: "end",
-  variant: "contained",
   disabled: false
 };
-
-export default Checkbox;

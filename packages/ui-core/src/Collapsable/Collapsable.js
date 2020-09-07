@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 /** @jsx jsx */
 import { useState, Children, useRef, Fragment } from "react";
 import PropTypes from "prop-types";
@@ -42,7 +43,11 @@ const visuallyHidden = css`
   white-space: nowrap; /* added line */
 `;
 
-function Collapsable({ children, description }) {
+/**
+ * An accessible container for collapsable content.
+ * A short description is required to clarify to screen readers what the more button will unhide.
+ */
+export function Collapsable({ children, description }) {
   const hiddenRef = useRef(null);
   const buttonRef = useRef(null);
   const [expanded, setExpanded] = useState(false);
@@ -97,9 +102,8 @@ Collapsable.Section = Section;
 
 Collapsable.propTypes = {
   children: PropTypes.node,
+  /** A description for screen readers.
+   *  Will announce as "more (description)" or "less (description)"
+   */
   description: PropTypes.string.isRequired
-  // description for screen readers
-  // will announce as "more (description)" or "less (description)"
 };
-
-export default Collapsable;

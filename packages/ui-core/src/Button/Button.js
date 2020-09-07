@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import PropTypes from "prop-types";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
@@ -37,7 +38,11 @@ const buttonClass = props => css`
   }
 `;
 
-const Button = ({ children, onClick, ...props }) => (
+/**
+ * A simple Button with some styling parameters.
+ */
+
+export const Button = ({ children, onClick, ...props }) => (
   <button type="button" css={buttonClass(props)} onClick={onClick}>
     {children}
   </button>
@@ -46,7 +51,7 @@ const Button = ({ children, onClick, ...props }) => (
 Button.displayName = "Button";
 
 Button.propTypes = {
-  children: PropTypes.string,
+  children: PropTypes.node,
   onClick: PropTypes.func,
   display: PropTypes.string,
   margin: PropTypes.string,
@@ -62,5 +67,3 @@ Button.defaultProps = {
   bkgndColor: "#FFFFFF",
   transition: "all .2s ease-in-out"
 };
-
-export default Button;

@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import PropTypes from "prop-types";
@@ -11,7 +12,11 @@ const variant = {
   secondary: "text"
 };
 
-const ButtonNew = ({ label, onClick, type, href, disabled }) => (
+/**
+ * A Button with some different states, based on MaterialUI
+ */
+
+export const ButtonNew = ({ children, onClick, type, href, disabled }) => (
   <ThemeProvider theme={MaterialTheme}>
     <MaterialButton
       onClick={onClick}
@@ -20,24 +25,22 @@ const ButtonNew = ({ label, onClick, type, href, disabled }) => (
       href={href || undefined}
       disabled={disabled}
     >
-      {label}
+      {children}
     </MaterialButton>
   </ThemeProvider>
 );
 
 ButtonNew.propTypes = {
-  label: PropTypes.string,
+  children: PropTypes.node,
   onClick: PropTypes.func,
-  type: PropTypes.string,
+  type: PropTypes.oneOf(["primary", "secondary"]),
   href: PropTypes.string,
   disabled: PropTypes.bool
 };
 
 ButtonNew.defaultProps = {
-  label: "Label",
+  children: "Label",
   type: "primary"
 };
 
 ButtonNew.displayName = "ButtonNew";
-
-export default ButtonNew;

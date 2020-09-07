@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import PropTypes from "prop-types";
 import Card from "@material-ui/core/Card";
 import { makeStyles } from "@material-ui/core/styles";
@@ -5,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 
-import Icon from "../Icon/Icon";
+import { Icon } from "../Icon/Icon";
 
 const header = css`
   padding-left: 1rem;
@@ -20,7 +21,7 @@ const useProjectStyles = makeStyles({
   }
 });
 
-const NotebookPreview = ({ message, link }) => {
+export const NotebookPreview = ({ message, link }) => {
   const classes = useProjectStyles();
 
   return (
@@ -36,6 +37,7 @@ const NotebookPreview = ({ message, link }) => {
 };
 NotebookPreview.propTypes = {
   message: PropTypes.string,
+  /** a url */
   link: PropTypes.string
 };
 
@@ -45,5 +47,3 @@ NotebookPreview.defaultProps = {
 };
 
 NotebookPreview.displayName = "NotebookPreview";
-
-export default NotebookPreview;

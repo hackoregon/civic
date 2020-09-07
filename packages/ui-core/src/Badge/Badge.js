@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import PropTypes from "prop-types";
@@ -10,7 +11,11 @@ const badgeClass = color => css`
   }
 `;
 
-function Badge({ children, value, color }) {
+/**
+ * A Badge, using Material UI under the hood.
+ * The badge is displayed over the children, which could be anything.
+ */
+export function Badge({ children, value, color }) {
   return (
     <MaterialBadge css={badgeClass(color)} badgeContent={value} color="primary">
       {children}
@@ -28,5 +33,3 @@ Badge.propTypes = {
   value: PropTypes.number,
   color: PropTypes.string
 };
-
-export default Badge;

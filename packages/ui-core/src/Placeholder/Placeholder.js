@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import PropTypes from "prop-types";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
@@ -24,29 +25,43 @@ const DefaultText = () => (
   </div>
 );
 
-const IssueText = ({ issue }) => (
+const IssueText = ({ issue, entity, repo }) => (
   <div>
-    <h1>Card In Progress</h1>
-    <a href={`https://github.com/hackoregon/civic/issues/${issue}`}>
+    <h1>In Progress</h1>
+    <a href={`https://github.com/${entity}/${repo}/issues/${issue}`}>
       View progress on GitHub
     </a>
   </div>
 );
 
-const Placeholder = ({ issue, children }) => (
+IssueText.propTypes = {
+  issue: PropTypes.number,
+  entity: PropTypes.string,
+  repo: PropTypes.string
+};
+
+export const Placeholder = ({ issue, entity, repo, children }) => (
   <div css={placeholderClass}>
-    {issue ? <IssueText issue={issue} /> : children || <DefaultText />}
+    {issue ? (
+      <IssueText issue={issue} entity={entity} repo={repo} />
+    ) : (
+      children || <DefaultText />
+    )}
   </div>
 );
 
 Placeholder.displayName = "Placeholder";
 Placeholder.propTypes = {
   children: PropTypes.node,
-  issue: PropTypes.string
+  /** GitHub issue or pr number */
+  issue: PropTypes.number,
+  /** GitHub organization or user */
+  entity: PropTypes.string,
+  /** GitHub repo name */
+  repo: PropTypes.string
 };
 
-IssueText.propTypes = {
-  issue: PropTypes.string
+Placeholder.defaultProps = {
+  entity: "hackoregon",
+  repo: "civic"
 };
-
-export default Placeholder;

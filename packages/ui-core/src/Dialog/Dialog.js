@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import PropTypes from "prop-types";
@@ -9,22 +10,31 @@ import { MaterialTheme } from "@hackoregon/ui-themes";
 
 const titleId = generate();
 
-const Dialog = ({ title, open, onClose, children }) => (
+/**
+ * A Dialog component that uses MaterialUI under the hood
+ */
+export const Dialog = ({ title, showTitle, open, onClose, children }) => (
   <ThemeProvider theme={MaterialTheme}>
     <MaterialDialog onClose={onClose} aria-labelledby={titleId} open={open}>
-      {title && <MaterialDialogTitle id={titleId}>{title}</MaterialDialogTitle>}
+      {title && showTitle && (
+        <MaterialDialogTitle id={titleId}>{title}</MaterialDialogTitle>
+      )}
       {children}
     </MaterialDialog>
   </ThemeProvider>
 );
 
 Dialog.propTypes = {
-  title: PropTypes.string,
+  /** A title is used by screen readers */
+  title: PropTypes.string.isRequired,
+  showTitle: PropTypes.bool,
   open: PropTypes.bool,
   onClose: PropTypes.func,
   children: PropTypes.node
 };
 
-Dialog.displayName = "Dialog";
+Dialog.defaultProps = {
+  showTitle: true
+};
 
-export default Dialog;
+Dialog.displayName = "Dialog";
