@@ -28,8 +28,8 @@ const HomeOwnershipRatesVisualization = ({ data }) => {
           x: [1990, 2017],
           y: [0, 0.83]
         }}
-        subtitle="subtitle"
-        title="Home Ownership By Race In Multnomah County 1990 to 2017"
+        subtitle="Multnomah County, 1990 to 2017, using census racial categories"
+        title="Home Ownership By Race over Time"
         xLabel="Census Year"
         yLabel="Home Ownership Rate"
         xNumberFormatter={x => civicFormat.year(x)}
