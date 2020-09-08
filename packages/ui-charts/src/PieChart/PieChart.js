@@ -2,8 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import { VictoryPie, VictoryContainer } from "victory";
 import { VictoryTheme } from "@hackoregon/ui-themes";
-import { chartHelpers, DataChecker } from "@hackoregon/utils";
+import { DataChecker } from "@hackoregon/utils";
 
+import chartHelpers from "../chartHelpers";
 import ChartContainer from "../ChartContainer";
 import SimpleLegend from "../SimpleLegend";
 import PieChartLabels from "./PieChartLabels";
@@ -109,7 +110,7 @@ PieChart.propTypes = {
   useLegend: PropTypes.bool,
   tooltip: PropTypes.bool,
   width: PropTypes.number,
-  theme: PropTypes.shape({})
+  theme: PropTypes.shape({ group: { colorScale: PropTypes.shape({}) } })
 };
 
 PieChart.defaultProps = {
