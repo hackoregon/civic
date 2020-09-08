@@ -1,6 +1,7 @@
 const webpack = require("webpack");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 
 const {
   createConfig,
@@ -29,6 +30,7 @@ const cssLoader = css;
 const path = filePath => resolve(__dirname, filePath);
 
 const isProd = process.env.NODE_ENV === "production";
+const isFast = process.env.REFRESH_MODE === "fast";
 const entryPoints = [];
 
 if (!isProd) {
@@ -52,13 +54,25 @@ module.exports = {
         publicPath: "/",
         filename: "[name].bundle.js"
       }),
-      babel({ rootMode: "upward" }),
+      match(
+        ["*.js", "!*node_modules*"],
+        [
+          babel({
+            rootMode: "upward",
+            plugins: [
+              !isProd && isFast && require.resolve("react-refresh/babel")
+            ].filter(Boolean)
+          })
+        ]
+      ),
       match(
         ["*.css"],
         [
           cssLoader({ sourceMap: true }),
           postcss({
-            plugins: [autoprefixer({ browsers: ["last 2 versions"] })]
+            plugins: [
+              autoprefixer({ overrideBrowserslist: ["last 2 versions"] })
+            ]
           })
         ]
       ),
@@ -78,11 +92,20 @@ module.exports = {
       ]),
       env("development", [
         sourceMaps(),
-        addPlugins([
-          new webpack.HotModuleReplacementPlugin(),
-          new webpack.NamedModulesPlugin(),
-          new BundleAnalyzerPlugin({ openAnalyzer: false })
-        ])
+        addPlugins(
+          [
+            new webpack.HotModuleReplacementPlugin(),
+            new webpack.NamedModulesPlugin(),
+            new BundleAnalyzerPlugin({ openAnalyzer: false }),
+            !isProd &&
+              isFast &&
+              new ReactRefreshWebpackPlugin({
+                overlay: {
+                  sockIntegration: "whm"
+                }
+              })
+          ].filter(Boolean)
+        )
       ]),
       env("production", [])
     ]);

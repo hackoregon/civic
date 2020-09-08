@@ -13,7 +13,8 @@
     "test:watch": "yarn test -w",
     "lint": "eslint src stories",
     "storybook": "node scripts/storybook.js",
-    "start": "node scripts/start.js"
+    "start": "node scripts/start.js",
+    "watch": "BABEL_ENV=cjs babel src --out-dir dist --copy-files --no-comments --watch --skip-initial-build"
   },
   "author": "David Daniel <davidedaniel@gmail.com> (http://davidedaniel.github.io)",
   "license": "MIT",

@@ -1,11 +1,10 @@
 language: node_js
 cache: yarn
 node_js:
-- 10.15.3
+- 12.16.1
 services:
 - docker
 install:
-- npm i -g npx
 - npm i -g rimraf
 - npm i -g cross-env
 - yarn bootstrap

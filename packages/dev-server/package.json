@@ -10,7 +10,7 @@
   "scripts": {
     "lint": "eslint index.js",
     "test": "echo 'No tests!'",
-    "test:watch": "echo 'No tests!'"    
+    "test:watch": "echo 'No tests!'"
   },
   "private": false,
   "keywords": [
@@ -24,9 +24,9 @@
     "chalk": "^2.4.2",
     "compression": "^1.7.4",
     "express": "^4.17.1",
+    "open": "^6.3.0",
     "webpack": "^4.33.0",
     "webpack-dev-middleware": "^3.6.1",
-    "webpack-hot-middleware": "^2.22.0",
-    "open": "^6.3.0"
+    "webpack-hot-middleware": "^2.22.0"
   }
 }

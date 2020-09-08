@@ -20,9 +20,11 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.4.2",
     "autoprefixer": "^9.4.10",
     "html-webpack-plugin": "^3.2.0",
     "lodash-webpack-plugin": "^0.11.5",
+    "react-refresh": "^0.8.3",
     "webpack": "^4.29.6",
     "webpack-blocks": "^2.0.0-rc",
     "webpack-bundle-analyzer": "^3.1.0",
