@@ -1,5 +1,5 @@
 ---
-to: packages/component-library/src/<%=component%>/<%=component%>.js
+to: packages/<%=package%>/src/<%=component%>/<%=component%>.js
 ---
 import { Fragment } from "react";
 import PropTypes from "prop-types";

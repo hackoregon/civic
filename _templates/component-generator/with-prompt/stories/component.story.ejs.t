@@ -1,5 +1,5 @@
 ---
-to: packages/component-library/stories/<%=component%>.story.js
+to: packages/<%=package%>/stories/<%=component%>.story.js
 ---
 import React from "react";
 import { storiesOf } from "@storybook/react";
