@@ -33,3 +33,5 @@ Badge.propTypes = {
   value: PropTypes.number,
   color: PropTypes.string
 };
+
+Badge.displayName = "Badge";

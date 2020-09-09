@@ -52,3 +52,5 @@ Chip.defaultProps = {
   size: "small",
   clickable: false
 };
+
+Chip.displayName = Chip;

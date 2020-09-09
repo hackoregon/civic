@@ -107,3 +107,5 @@ Collapsable.propTypes = {
    */
   description: PropTypes.string.isRequired
 };
+
+Collapsable.displayName = Collapsable;

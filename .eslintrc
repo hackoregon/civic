@@ -4,7 +4,7 @@
   "env": {
     "mocha": true
   },
-  "plugins": ["react", "prettier", "emotion","react-hooks"],
+  "plugins": ["react", "prettier", "emotion", "react-hooks"],
   "rules": {
     "emotion/jsx-import": "error",
     "emotion/no-vanilla": "warn",
@@ -42,9 +42,7 @@
   },
   "overrides": [
     {
-      "files": [
-        "*.test.js",
-      ],
+      "files": ["*.test.js"],
       "rules": {
         "no-unused-expressions": "off"
       }
