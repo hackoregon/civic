@@ -30,7 +30,7 @@ const StatefulTemplate = args => {
       }}
       open={open}
     >
-      <img src="https://cataas.com/cat" alt="Random cat" />
+      <img src="https://i.imgur.com/xLxbkhQ.jpeg" alt="Random cat" />
     </Dialog>
   );
 };
