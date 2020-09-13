@@ -1,0 +1,101 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Design/UX Style Guide/Accessibility" />
+
+# Accessibility
+
+The CIVIC Platform aims to be radically inclusive. Towards that aim, we start by incorporating best practices in web accessibility, and build tools that allow us to participate and contribute in ways that truly appreciate our different abilities and perspectives.
+The CIVIC Platform will meet all criteria specified in [Web Content Accessibility Guidelines (WCAG) 2.1](https://www.w3.org/TR/WCAG21/) Level A and Level AA.
+
+## What types of disabilities do we need to account for?
+
+### Visual
+
+Blindness, low vision, and color-blindness.
+
+### Hearing
+
+Deafness and hard-of-hearing.
+
+### Motor
+
+Inability to use a mouse, slow response time, and limited fine motor control.
+
+### Cognitive
+
+Learning disabilities, distractibility, and inability to remember or focus on large amounts of information.
+
+## What are the principles of the guidelines?
+
+See [How to Meet WCAG](https://www.w3.org/WAI/WCAG21/quickref/) for a quick reference on meeting the four principles of WCAG.
+
+### Perceivable
+
+Information and user interface components must be presentable to users in ways they can perceive.
+It must be available to the senses, vision and hearing primarily, either through the browser or through assistive technologies, e.g., screen readers, screen enlargers, etc.
+
+### Operable
+
+User interface components and navigation must be operable.
+Users can interact with all controls and interactive elements using either the mouse, keyboard, or an assistive device.
+
+### Understandable
+
+Content is clear and limits confusion and ambiguity.
+Information and the operation of user interface must be understandable.
+
+### Robust
+
+Content must be robust enough that it can be interpreted reliably by a wide variety of user agents, including assistive technologies.
+
+## Implementation Checklist
+
+Implementation of the accessibility guidelines can be done using this order of priority. Considerations when proposing this order are the most common disabilities and the most common features in our user interfaces.
+
+### Color Theme
+
+Meet contrast ratios between text and its background color and between colors used to represent distinct information in data visualization. WebAIM describes the guidelines and has many examples [: WebAIM Contrast and Color Accessibility](https://webaim.org/articles/contrast/) .
+
+### Forms
+
+See [Web Accessibility Tutorials on Forms](https://www.w3.org/WAI/tutorials/forms/) . The following sections in the tutorials are especially relevant to the CIVIC Platform.
+
+- Labels
+- Groups
+- Instructions
+- Validating input
+- User notifications
+- Custom controls
+  The Forms story has an example of a form that follows our styles and meets accessibility requirements.
+
+### Resize Text
+
+Allow text to be increased in size and readable.
+
+#### Images
+Use alternative text with images.
+
+### Data Visualization
+
+#### Low vision
+For people who are blind, include text descriptions of any meaningful images that can be read by assistive technology (screen readers). A person with low vision is still able to perceive visual insights with the help of accessibility features and considerations. Provide the opportunity to increase the size of elements and focus on particular areas by zooming and magnifying. Follow the WCAG 2.0 Level AA guidelines for contrast — high contrast is crucial to improve legibility. Body text should have a contrast ratio of at least 4.5:1 (and large text should be at least 3:1) against its background color. Include textual content to provide alternatives to visual information (especially color). Use captions and always provide a table version of the visualization. Allow keyboard alternatives for navigating graphical user interfaces.
+
+#### Color blind
+The two most common forms of color blindness are deuteranomaly and deuteranopia — which together account for about 6% of men, and protanomaly and protanopia, which account for another 2%. Tritanopia is very rare, and affects less than 0.001% of men. For those affected the two most difficult colors to distinguish are green and red. Stressing the contrast between dark and light values is a good way to make the colors recognizable. While hue and saturation have minimal effect on legibility, brightness differences are far more perceptible.
+Easily distinguishable formats (like bar charts or treemaps) or markers (as used in scatter plots or maps) can supplement color to express information. Those work perfectly, even in black and white, and reduce problems for people with color blindness. Remember, the best way to support accessibility for all visual disabilities is to provide alternatives to visual information (especially color), using text and tabular versions of the visualization. IBM data visualization guidelines.
+Two good references for meeting accessibility requirements in data visualizations: [Data Visualizations](https://accessibility.digital.gov/visual-design/data-visualizations/) , [IBM Data Visualization Guidelines](https://www.ibm.com/design/language/) .
+
+### Reading and Navigation Order
+
+Logical and intuitive.
+
+### Keyboard Accessible
+
+Navigation to all page elements is available using the keyboard.
+Keyboard commands reference: (placeholder).
+
+## What are the guidelines and who made them?
+
+The [W3C (World Wide Web Consortium)](https://www.w3.org/Consortium/) develops web standards; they are led by the Web inventor Tim Berners-Lee. One of their initiatives is the [WAI (Web Accessibility Initiative)](http://www.w3.org/WAI/) , to improve accessibility of the Web for people with disabilities.
+The WAI is made up of several working groups and Special Interest groups. The most important working group is the [WCAG WG (Web Content Accessibility Guidelines Working Group)](http://www.w3.org/WAI/GL/) . This group published [WCAG 2.1](https://www.w3.org/TR/WCAG21/) ; their web site has many useful resources and materials.
+Another organization that does a good job of explaining accessibility and the guidelines is [WebAIM](http://webaim.org/) .
