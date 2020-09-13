@@ -1,6 +1,6 @@
 {
   "parser": "babel-eslint",
-  "extends": ["airbnb", "prettier", "prettier/react"],
+  "extends": ["airbnb", "prettier", "prettier/react", "plugin:mdx/recommended"],
   "env": {
     "mocha": true
   },
