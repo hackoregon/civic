@@ -48,6 +48,28 @@ export default {
 const Template = args => <Scatterplot {...args} />;
 
 export const Standard = Template.bind({});
+export const NegativeValues = Template.bind({});
+NegativeValues.args = {
+  data: [
+    { frequency: -0.03, ridership: 0.05, series: "Weekday" },
+    { frequency: 0.18, ridership: 0.6, series: "Weekday" },
+    { frequency: 0.1, ridership: 0.48, series: "Weekday" },
+    { frequency: 0.31, ridership: 0.2, series: "Weekday" },
+    { frequency: -0.25, ridership: -0.12, series: "Weekday" },
+    { frequency: -0.23, ridership: -0.12, series: "Weekend" },
+    { frequency: 0.3, ridership: 0.6, series: "Weekend" },
+    { frequency: -0.15, ridership: -0.18, series: "Weekend" },
+    { frequency: -0.23, ridership: -0.2, series: "Weekend" },
+    { frequency: -0.05, ridership: -0.15, series: "Weekend" }
+  ],
+  dataKey: "frequency",
+  xLabel: "Frequency",
+  xNumberFormatter: civicFormat.percentage,
+  yNumberFormatter: civicFormat.percentage,
+  title: "Public Transit Ridership & Frequency",
+  subtitle:
+    "Percentage change in ridership and service frequency between 2000 and 2015"
+};
 export const CustomTheme = Template.bind({});
 CustomTheme.args = {
   theme: VictoryCrazyTheme
