@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import React from "react";
 import PropTypes from "prop-types";
 
@@ -65,7 +66,7 @@ const colorScales = {
   ]
 };
 
-const GradientScale = ({
+export const GradientScale = ({
   width,
   height,
   domain,
@@ -118,12 +119,25 @@ const GradientScale = ({
 };
 
 GradientScale.propTypes = {
+  /** SVG width */
   width: PropTypes.number,
+  /** SVG height */
   height: PropTypes.number,
+  /** The limits of the scale. The array supplied for each axis shour be of the format [min, max]  */
   domain: PropTypes.arrayOf(PropTypes.number).isRequired,
+  /** The primary value displayed */
   primary: PropTypes.number.isRequired,
+  /** The secondary values displayed */
   secondary: PropTypes.arrayOf(PropTypes.number),
-  colorScale: PropTypes.string
+  /** The color scale used */
+  colorScale: PropTypes.oneOf([
+    "default",
+    "thermal",
+    "space",
+    "ocean",
+    "planet",
+    "earth"
+  ])
 };
 
 GradientScale.defaultProps = {
@@ -133,4 +147,4 @@ GradientScale.defaultProps = {
   colorScale: "default"
 };
 
-export default GradientScale;
+GradientScale.displayName = "GradientScale";

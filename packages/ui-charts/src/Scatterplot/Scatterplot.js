@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import PropTypes from "prop-types";
 import React from "react";
 import {
@@ -11,8 +12,8 @@ import {
 import { VictoryTheme } from "@hackoregon/ui-themes";
 import { civicFormat, protectData, DataChecker } from "@hackoregon/utils";
 
-import ChartContainer from "../ChartContainer";
-import SimpleLegend from "../SimpleLegend";
+import { SimpleLegend } from "../SimpleLegend/SimpleLegend";
+import { ChartContainer } from "../ChartContainer/ChartContainer";
 import chartHelpers from "../chartHelpers";
 
 const {
@@ -39,7 +40,7 @@ const {
  * @param  {String}    yLabel       Y-axis label
  */
 
-const Scatterplot = ({
+export const Scatterplot = ({
   data,
   dataKey,
   dataKeyLabel,
@@ -125,6 +126,7 @@ const Scatterplot = ({
           />
           <VictoryPortal>
             <VictoryLabel
+              // eslint-disable-next-line react/prop-types
               style={{ ...theme.axisLabel.style }}
               text={yLabel}
               textAnchor="middle"
@@ -136,6 +138,7 @@ const Scatterplot = ({
           </VictoryPortal>
           <VictoryPortal>
             <VictoryLabel
+              // eslint-disable-next-line react/prop-types
               style={{ ...theme.axisLabel.style }}
               text={xLabel}
               textAnchor="end"
@@ -186,38 +189,66 @@ const Scatterplot = ({
 };
 
 Scatterplot.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({ x: PropTypes.number, y: PropTypes.number })
-  ),
+  /** An array of objects with keys [dataKey], [dataValue], [dataSeries] (optional) */
+  data: PropTypes.arrayOf(PropTypes.shape({}).isRequired),
+  /** The property name of the data elements corresponding to the value used for X-positioning */
   dataKey: PropTypes.string,
+  /** The property name of the data elements corresponding to the label used for X-positioning  */
   dataKeyLabel: PropTypes.string,
+  /** The property name of the data elements corresponding to the value used for Y-positioning */
   dataValue: PropTypes.string,
+  /** The property name of the data elements corresponding to the label used for Y-positioning  */
   dataValueLabel: PropTypes.string,
+  /** The property name of the data elements corresponding to the value which represents a category. */
   dataSeries: PropTypes.string,
+  /** An array of mappings for dataSeries matching a category value with a custom label */
   dataSeriesLabel: PropTypes.arrayOf(
     PropTypes.shape({ category: PropTypes.string, label: PropTypes.string })
   ),
+  /** Constrains the area displayed on the chart for each axis. The array supplied for each axis shour be of the format [min, max]  */
   domain: PropTypes.shape({
     x: PropTypes.arrayOf(PropTypes.number),
     y: PropTypes.arrayOf(PropTypes.number)
   }),
+  /** Data `key` or exact `value` to use for data point size */
   size: PropTypes.shape({
     key: PropTypes.string,
     minSize: PropTypes.number,
     maxSize: PropTypes.number
   }),
+  /** Optional overrides for point rendering applied to the `style` property on VictoryScatter */
   style: PropTypes.arrayOf(PropTypes.shape({})),
+  /** The chart title */
   title: PropTypes.string,
+  /** The chart subtitle */
   subtitle: PropTypes.string,
+  /** The label for the x-axis (keys) */
   xLabel: PropTypes.string,
+  /** The label for the y-axis (values) */
   yLabel: PropTypes.string,
+  /** A function used to format the labels for the x-axis values (keys)
+   * @constructor
+   * @param {number} value - the value to be formatted
+   * @returns {string} - the formatted string
+   */
   xNumberFormatter: PropTypes.func,
+  /** A function used to format the labels for the y-axis values (keys)
+   * @constructor
+   * @param {number} value - the value to be formatted
+   * @returns {string} - the formatted string
+   */
   yNumberFormatter: PropTypes.func,
+  /** invert the x-axis to arrange numbers largest to smallest */
   invertX: PropTypes.bool,
+  /** invert the y-axis to arrange numbers largest to smallest */
   invertY: PropTypes.bool,
+  /** A custom VictoryLegend component used to override the default legend */
   legendComponent: PropTypes.func,
+  /** A VictoryTheme object used for styling */
   theme: PropTypes.shape({}),
+  /** Show loading state instead of chart */
   loading: PropTypes.bool,
+  /** Prevent data values that include color names from having styling impacts. Has performance implications, so only use if color names in the data is a possibilty */
   protect: PropTypes.bool
 };
 
@@ -246,4 +277,4 @@ Scatterplot.defaultProps = {
   protect: false
 };
 
-export default Scatterplot;
+Scatterplot.displayName = "Scatterplot";

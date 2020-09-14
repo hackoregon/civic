@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import React from "react";
 import PropTypes from "prop-types";
 import {
@@ -20,8 +21,8 @@ import {
 } from "@hackoregon/utils";
 import { VictoryTheme } from "@hackoregon/ui-themes";
 
-import SimpleLegend from "../SimpleLegend";
-import ChartContainer from "../ChartContainer";
+import { SimpleLegend } from "../SimpleLegend/SimpleLegend";
+import { ChartContainer } from "../ChartContainer/ChartContainer";
 import chartHelpers from "../chartHelpers";
 
 const {
@@ -30,7 +31,7 @@ const {
   transformDatato100
 } = chartHelpers;
 
-const HorizontalBarChart = ({
+export const HorizontalBarChart = ({
   data,
   sortOrder,
   dataValue,
@@ -88,7 +89,9 @@ const HorizontalBarChart = ({
   const padding = minimalist
     ? { left: 115, right: 50, bottom: 25, top: 40 }
     : { left: 115, right: 50, bottom: 50, top: 70 };
+  // eslint-disable-next-line react/prop-types
   const barHeight = theme.bar.style.data.width;
+  // eslint-disable-next-line react/prop-types
   const spaceHeight = theme.bar.style.data.padding * 2;
   const groupPadding = grouped ? barHeight * 1.2 : 0;
   const additionalHeight = padding.bottom + padding.top + groupPadding * 2;
@@ -169,6 +172,7 @@ const HorizontalBarChart = ({
           {!minimalist && (
             <VictoryPortal>
               <VictoryLabel
+                // eslint-disable-next-line react/prop-types
                 style={{ ...theme.axisLabel.style }}
                 text={yLabel}
                 textAnchor="middle"
@@ -181,6 +185,7 @@ const HorizontalBarChart = ({
           )}
           <VictoryPortal>
             <VictoryLabel
+              // eslint-disable-next-line react/prop-types
               style={{ ...theme.axisLabel.style }}
               text={xLabel}
               textAnchor={minimalist ? "middle" : "end"}
@@ -244,6 +249,7 @@ const HorizontalBarChart = ({
             />
           )}
           {stacked && (
+            // eslint-disable-next-line react/prop-types
             <VictoryStack colorScale={theme.stack.colorScale}>
               {groupedData.map(arr => {
                 return (
@@ -294,6 +300,7 @@ const HorizontalBarChart = ({
             })}
           {grouped && (
             <VictoryGroup
+              // eslint-disable-next-line react/prop-types
               colorScale={theme.group.colorScale}
               offset={barHeight * 1.2}
             >
@@ -387,13 +394,8 @@ HorizontalBarChart.propTypes = {
 };
 
 HorizontalBarChart.defaultProps = {
-  data: null,
-  sortOrder: null,
   dataValue: "x",
   dataLabel: "y",
-  domain: null,
-  title: null,
-  subtitle: null,
   xLabel: "X",
   yLabel: "Y",
   dataValueFormatter: civicFormat.numeric,
@@ -402,11 +404,8 @@ HorizontalBarChart.defaultProps = {
   stacked: false,
   grouped: false,
   hundredPercentData: false,
-  dataSeriesKey: null,
-  dataSeriesLabel: {},
-  legendComponent: null,
   theme: VictoryTheme,
   protect: false
 };
 
-export default HorizontalBarChart;
+HorizontalBarChart.displayName = "HorizontalBarChart";

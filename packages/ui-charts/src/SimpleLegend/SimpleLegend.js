@@ -1,10 +1,11 @@
+/* eslint-disable import/prefer-default-export */
 import PropTypes from "prop-types";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import shortid from "shortid";
 import { VictoryTheme } from "@hackoregon/ui-themes";
 
-const SimpleLegend = ({ colorScale, legendData, theme }) => {
+export const SimpleLegend = ({ colorScale, legendData, theme }) => {
   const legendStyle = css`
     font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, sans-serif;
     font-size: 14px;
@@ -17,6 +18,7 @@ const SimpleLegend = ({ colorScale, legendData, theme }) => {
     }
   `;
 
+  // eslint-disable-next-line react/prop-types
   const colorMap = colorScale || theme.group.colorScale;
 
   if (legendData.length) {
@@ -59,4 +61,4 @@ SimpleLegend.defaultProps = {
   theme: VictoryTheme
 };
 
-export default SimpleLegend;
+SimpleLegend.displayName = "SimpleLegend";
