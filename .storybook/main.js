@@ -25,13 +25,5 @@ module.exports = {
     isNew && "../**/src/**/*.stories.mdx",
     !isNew && "../packages/component-library/stories/**/*.story.js"
   ].filter(Boolean),
-  addons: [
-    "@storybook/addon-knobs",
-    "@storybook/addon-actions",
-    "@storybook/addon-links",
-    "@storybook/addon-a11y",
-    "@storybook/addon-viewport",
-    "@storybook/addon-docs",
-    "@storybook/addon-controls"
-  ]
+  addons: ["@storybook/addon-essentials", "@storybook/addon-links"]
 };

@@ -1,5 +1,7 @@
 import addons from "@storybook/addons";
 
 addons.setConfig({
-  showRoots: true
+  showNav: true,
+  showRoots: true,
+  showPanel: true
 });
