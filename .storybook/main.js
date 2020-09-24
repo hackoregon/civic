@@ -23,6 +23,8 @@ module.exports = {
     isNew && "../packages/ui-docs/src/AboutUs/*.stories.mdx",
     isNew && "../**/src/**/*.stories.js",
     isNew && "../**/src/**/*.stories.mdx",
+    isNew && "../**/docs/**/*.stories.js",
+    isNew && "../**/docs/**/*.stories.mdx",
     !isNew && "../packages/component-library/stories/**/*.story.js"
   ].filter(Boolean),
   addons: ["@storybook/addon-essentials", "@storybook/addon-links"]
