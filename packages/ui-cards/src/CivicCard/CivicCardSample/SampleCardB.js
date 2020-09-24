@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { CivicCard } from "../../src";
+import { CivicCard } from "../..";
 import sampleCardMeta from "./sampleCardMeta";
 import sampleCardData from "./sampleCardData";
 

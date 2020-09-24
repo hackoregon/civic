@@ -1,25 +1,25 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { CivicCard } from "../../src";
+import { CivicCard } from "../..";
 import sampleCardMeta from "./sampleCardMeta";
 import sampleCardData from "./sampleCardData";
 
-const sampleCardMetaE = data => {
+const sampleCardMetaD = data => {
   return {
     ...sampleCardMeta(data),
-    tags: ["Housing"]
+    tags: ["Housing", "Oregon"]
   };
 };
 
 const SampleCard = ({ isLoading, Layout }) => (
   <CivicCard
-    cardMeta={sampleCardMetaE}
+    cardMeta={sampleCardMetaD}
     data={sampleCardData}
     isLoading={isLoading}
     Layout={Layout}
   />
 );
 
-SampleCard.tags = sampleCardMetaE().tags;
+SampleCard.tags = sampleCardMetaD().tags;
 
 export default SampleCard;

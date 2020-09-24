@@ -1,10 +1,11 @@
+/* eslint-disable import/prefer-default-export */
 import React from "react";
 import PropTypes from "prop-types";
 import { ErrorBoundary, DataChecker } from "@hackoregon/utils";
-import CivicCardLayoutFull from "./CivicCardLayoutFull";
+import { CivicCardLayoutFull } from "./CivicCardLayoutFull";
 import { cardMetaKeys, optionalCardMetaKeys } from "./cardMetaTypes";
 
-const CivicCard = ({ cardMeta, data, isLoading, Layout }) => (
+export const CivicCard = ({ cardMeta, data, isLoading, Layout }) => (
   <ErrorBoundary
     customMessage={`CivicCard: "${cardMeta(data).title}" failed to load`}
   >
@@ -21,14 +22,18 @@ const CivicCard = ({ cardMeta, data, isLoading, Layout }) => (
 );
 
 CivicCard.propTypes = {
+  /** A function that takes data as an argument and returns an object consisting of the card data and metadata  */
   cardMeta: PropTypes.func.isRequired,
+  /** Data to be used by the visualization component specified in cardMeta */
   data: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.array]),
+  /** Whether the layout should display a loading state */
   isLoading: PropTypes.bool,
-  Layout: PropTypes.func
+  /** A layout component that takes cardMeta, data, isLoading as props (e.g. CivicCardLayoutVisualizationOnly, CivicCardLayoutClassic, etc...) */
+  Layout: PropTypes.elementType
 };
 
 CivicCard.defaultProps = {
   Layout: CivicCardLayoutFull
 };
 
-export default CivicCard;
+CivicCard.displayName = "CivicCard";

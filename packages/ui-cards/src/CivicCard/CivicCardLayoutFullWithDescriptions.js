@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 /** @jsx jsx */
 import { Fragment, useState, useRef } from "react";
 import { jsx, css } from "@emotion/core";
@@ -103,7 +104,11 @@ Desc.propTypes = {
   id: PropTypes.string
 };
 
-function CivicCardLayoutFullWithDescriptions({ isLoading, data, cardMeta }) {
+export function CivicCardLayoutFullWithDescriptions({
+  isLoading,
+  data,
+  cardMeta
+}) {
   const [shareButtonText, setShareButtonText] = useState("Share");
   const [shareButtonOpen, setShareButtonOpen] = useState(false);
   const shareButtonAnchorRef = useRef(null);
@@ -355,4 +360,5 @@ CivicCardLayoutFullWithDescriptions.propTypes = {
   cardMeta: cardMetaTypes
 };
 
-export default CivicCardLayoutFullWithDescriptions;
+CivicCardLayoutFullWithDescriptions.displayName =
+  "CivicCardLayoutFullWithDescriptions";

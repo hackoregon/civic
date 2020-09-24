@@ -1,9 +1,11 @@
+/* eslint-disable import/prefer-default-export */
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import PropTypes from "prop-types";
+import cardMetaTypes from "./cardMetaTypes";
 import CivicCardLink from "./CivicCardLink";
 
-function CivicCardLayoutSideBySide({ isLoading, data, cardMeta }) {
+export function CivicCardLayoutSideBySide({ isLoading, data, cardMeta }) {
   return (
     <div
       css={css`
@@ -31,9 +33,7 @@ function CivicCardLayoutSideBySide({ isLoading, data, cardMeta }) {
 CivicCardLayoutSideBySide.propTypes = {
   isLoading: PropTypes.bool,
   data: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.array]),
-  cardMeta: PropTypes.shape({
-    /* TODO: Add shape */
-  })
+  cardMeta: cardMetaTypes
 };
 
-export default CivicCardLayoutSideBySide;
+CivicCardLayoutSideBySide.displayName = "CivicCardLayoutSideBySide";

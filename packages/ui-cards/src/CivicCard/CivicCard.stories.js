@@ -2,12 +2,12 @@
 import React, { useState } from "react";
 import { useMediaQuery } from "@material-ui/core";
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { storiesOf } from "@storybook/react";
 import { LineChart } from "@hackoregon/ui-charts";
 import { RadioButtonGroup } from "@hackoregon/ui-core";
 import { civicFormat } from "@hackoregon/utils";
 import {
   CivicCard,
+  CivicCardLayoutFull,
   CivicCardLayoutClassic,
   CivicCardLayoutVisualizationOnly,
   CivicCardLayoutVisualizationOnlyNoLink,
@@ -15,7 +15,7 @@ import {
   CivicCardLayoutFullWithDescriptions,
   CivicCardLayoutPreview,
   CivicCardLayoutPreviewTitleOnly
-} from "../src";
+} from "..";
 import {
   sampleCardMeta,
   sampleCardData,
@@ -196,75 +196,49 @@ const sampleCardMetaSideBySide = data => {
   };
 };
 
-export default () =>
-  storiesOf("Component Lib/Story Cards/CIVIC Card", module)
-    .add("Layout: Full With Descriptions", () => (
-      <CivicCard
-        cardMeta={sampleCardMeta}
-        data={sampleCardData}
-        isLoading={false}
-        Layout={CivicCardLayoutFullWithDescriptions}
-      />
-    ))
-    .add("Layout: Default (full)", () => (
-      <CivicCard
-        cardMeta={sampleCardMeta}
-        data={sampleCardData}
-        isLoading={false}
-      />
-    ))
-    .add("Layout: Default (full, missing data) check console", () => (
-      <CivicCard
-        cardMeta={sampleCardMetaMissingData}
-        data={sampleCardData}
-        isLoading={false}
-      />
-    ))
-    .add("Layout: Classic", () => (
-      <CivicCard
-        cardMeta={sampleCardMeta}
-        data={sampleCardData}
-        isLoading={false}
-        Layout={CivicCardLayoutClassic}
-      />
-    ))
-    .add("Layout: Visualization Only", () => (
-      <CivicCard
-        cardMeta={sampleCardMeta}
-        data={sampleCardData}
-        isLoading={false}
-        Layout={CivicCardLayoutVisualizationOnly}
-      />
-    ))
-    .add("Layout: Visualization Only No Link", () => (
-      <CivicCard
-        cardMeta={sampleCardMeta}
-        data={sampleCardData}
-        isLoading={false}
-        Layout={CivicCardLayoutVisualizationOnlyNoLink}
-      />
-    ))
-    .add("Layout: Preview", () => (
-      <CivicCard
-        cardMeta={sampleCardMeta}
-        data={sampleCardData}
-        isLoading={false}
-        Layout={CivicCardLayoutPreview}
-      />
-    ))
-    .add("Layout: Preview (Title Only)", () => (
-      <CivicCard
-        cardMeta={sampleCardMeta}
-        data={sampleCardData}
-        isLoading={false}
-        Layout={CivicCardLayoutPreviewTitleOnly}
-      />
-    ))
-    .add("Layout: SideBySide", () => (
-      <CivicCard
-        cardMeta={sampleCardMetaSideBySide}
-        data={sideBySideSampleData}
-        isLoading={false}
-        Layout={CivicCardLayoutSideBySide}
-      />
-    ));
+export default {
+  title: "Component Lib/Story Cards/CIVIC Card",
+  component: CivicCard,
+  argTypes: { Layout: { control: { disabled: true } } }
+};
+
+const Template = args => (
+  <CivicCard
+    cardMeta={sampleCardMeta}
+    data={sampleCardData}
+    isLoading={false}
+    {...args}
+  />
+);
+
+export const LayoutDefaultWithDescriptions = Template.bind({});
+LayoutDefaultWithDescriptions.args = {
+  Layout: CivicCardLayoutFullWithDescriptions
+};
+export const LayoutDefault = Template.bind({});
+LayoutDefault.args = {
+  Layout: CivicCardLayoutFull
+};
+LayoutDefault.storyName = "Layout Default (full)";
+export const LayoutDefaultMissingData = Template.bind({});
+LayoutDefaultMissingData.storyName =
+  "Layout Default (full, missing data) check console";
+LayoutDefaultMissingData.args = { cardMeta: sampleCardMetaMissingData };
+export const LayoutClassic = Template.bind({});
+LayoutClassic.args = { Layout: CivicCardLayoutClassic };
+export const LayoutVisualizationOnly = Template.bind({});
+LayoutVisualizationOnly.args = { Layout: CivicCardLayoutVisualizationOnly };
+export const LayoutVisualizationOnlyNoLink = Template.bind({});
+LayoutVisualizationOnlyNoLink.args = {
+  Layout: CivicCardLayoutVisualizationOnlyNoLink
+};
+export const LayoutPreview = Template.bind({});
+LayoutPreview.args = { Layout: CivicCardLayoutPreview };
+export const LayoutPreviewTitleOnly = Template.bind({});
+LayoutPreviewTitleOnly.args = { Layout: CivicCardLayoutPreviewTitleOnly };
+export const LayoutSideBySide = Template.bind({});
+LayoutSideBySide.args = {
+  cardMeta: sampleCardMetaSideBySide,
+  data: sideBySideSampleData,
+  Layout: CivicCardLayoutSideBySide
+};

@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import { Fragment, useState, useRef } from "react";
@@ -85,7 +86,7 @@ const hiddenVisually = css`
   width: 1px;
 `;
 
-function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
+export function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
   const [shareButtonText, setShareButtonText] = useState("Share");
   const [shareButtonOpen, setShareButtonOpen] = useState(false);
   const shareButtonAnchorRef = useRef(null);
@@ -373,4 +374,4 @@ CivicCardLayoutFull.propTypes = {
   cardMeta: cardMetaTypes
 };
 
-export default CivicCardLayoutFull;
+CivicCardLayoutFull.displayName = "CivicCardLayoutFull";
