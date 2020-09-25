@@ -1,5 +1,5 @@
 import { create } from "@storybook/theming";
-import logo from "../packages/component-library/assets/civic-logo-storybook.svg";
+import logo from "./civic-logo-storybook.svg";
 
 export default create({
   base: "light",

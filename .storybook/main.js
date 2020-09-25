@@ -20,7 +20,7 @@ const prettierConfig = {
 
 module.exports = {
   stories: [
-    isNew && "../packages/ui-docs/src/AboutUs/*.stories.mdx",
+    isNew && "../packages/ui-docs/docs/AboutUs/*.stories.mdx",
     isNew && "../**/src/**/*.stories.js",
     isNew && "../**/src/**/*.stories.mdx",
     isNew && "../**/docs/**/*.stories.js",
