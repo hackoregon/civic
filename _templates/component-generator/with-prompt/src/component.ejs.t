@@ -1,6 +1,7 @@
 ---
 to: packages/<%=package%>/src/<%=component%>/<%=component%>.js
 ---
+/* eslint-disable import/prefer-default-export */
 import { Fragment } from "react";
 import PropTypes from "prop-types";
 
@@ -11,7 +12,7 @@ const exampleStyle = css`
   color: blue;
 `;
 
-const <%=component%> = ({message}) => (
+export const <%=component%> = ({message}) => (
   <Fragment>
     <h1 css={exampleStyle}>{message}</h1>
     <h1 css={exampleStyle}>This message is baked in!</h1>
@@ -19,6 +20,7 @@ const <%=component%> = ({message}) => (
 );
 
 <%=component%>.propTypes = {
+  /** This message is displayed by the component in an H1 */
   message: PropTypes.string
 };
 
@@ -27,5 +29,3 @@ const <%=component%> = ({message}) => (
 };
 
 <%=component%>.displayName = "<%=component%>";
-
-export default <%=component%>;
