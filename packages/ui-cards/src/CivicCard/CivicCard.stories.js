@@ -20,7 +20,7 @@ import {
   sampleCardMeta,
   sampleCardData,
   SampleCardVisualization
-} from "./CivicCardSample";
+} from "./CivicCardSamples";
 
 const sideBySideSampleData = {
   14: [
