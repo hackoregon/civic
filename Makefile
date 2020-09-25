@@ -125,9 +125,7 @@ deploy-2019-disaster-game: setup-aws access-ecr
 	docker push $$REMOTE_IMAGE_URL/civic-2019-disaster-game:latest
 	./bin/ecs-deploy.sh --cluster $$ECS_CLUSTER --service-name $$ECS_SERVICE_2019_DISASTER_GAME --image $$REMOTE_IMAGE_URL/civic-2019-disaster-game:latest --timeout 10
 
-deploy-component-library:
-	@echo "Deploying the component library storybook"
-	yarn run deploy-storybook --ci
+publish-canary-packages:
 	@echo "Setting npm credentials"
 	npm config set //registry.npmjs.org/:_authToken=${NPM_TOKEN}
 	@echo "Publishing canary versions of packages to npm"
