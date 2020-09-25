@@ -20,12 +20,11 @@ const prettierConfig = {
 
 module.exports = {
   stories: [
-    isNew && "../packages/ui-docs/docs/AboutUs/*.stories.mdx",
-    isNew && "../**/src/**/*.stories.js",
-    isNew && "../**/src/**/*.stories.mdx",
-    isNew && "../**/docs/**/*.stories.js",
-    isNew && "../**/docs/**/*.stories.mdx",
-    !isNew && "../packages/component-library/stories/**/*.story.js"
-  ].filter(Boolean),
+    "../packages/ui-docs/docs/AboutUs/*.stories.mdx",
+    "../**/src/**/*.stories.js",
+    "../**/src/**/*.stories.mdx",
+    "../**/docs/**/*.stories.js",
+    "../**/docs/**/*.stories.mdx"
+  ],
   addons: ["@storybook/addon-essentials", "@storybook/addon-links"]
 };
