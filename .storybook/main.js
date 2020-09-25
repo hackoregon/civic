@@ -26,5 +26,9 @@ module.exports = {
     "../**/docs/**/*.stories.js",
     "../**/docs/**/*.stories.mdx"
   ],
-  addons: ["@storybook/addon-essentials", "@storybook/addon-links"]
+  addons: [
+    "@storybook/addon-a11y",
+    "@storybook/addon-essentials",
+    "@storybook/addon-links"
+  ]
 };
