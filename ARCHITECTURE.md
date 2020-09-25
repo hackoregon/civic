@@ -10,21 +10,35 @@ starting with what it is this repo aims to make.
 
 There are currently three deploy targets:
 
-1. Component Library (Storybook)
+1. Storybook (Chromatic)
 2. Civic 2017
 3. Civic 2018
 
-**Component Library:** This is a collection of resuable and composable components that can be used in
-any project to quickly create a rich and consistent experience. They are packaged up in a Storybook,
-and deployed to Github Pages using the `storybook-to-ghpages` project.
+**Storybook (Chromatic):** Storybook includes collection of resuable and composable components that can be used in
+any project to quickly create a rich and consistent experience. Component stories from across packages
+are bundled into one Storybook and deployed to [Chromatic](https://chromatic.com).
 
 **Civic 2017:** This is an express-based node service that hosts the 2017 projects. Express is only used to
 serve assets and redirect all traffic to `/` so that React Router can then handle routing client-side.
 
 **Civic 2018:** This is identical in architecture to the 2017 package. The only difference is the node service
-hosts the 2018 projects.
+hosts the 2018 projects. A [Netlify](https://netlify.com) deploy preview is generated for each pull request.
 
 Both Civic deploy targets are deployed to [AWS ECS](https://aws.amazon.com/ecs/) to be hosted on the Internet.
+
+## Reuseable Component Packages
+
+Reusable components are split into focused packages
+
+1. **ui-brand:** Brand assets, colors, and typography
+2. **ui-cards:** Components for cards, Civic's modular data communication framework
+3. **ui-charts:** Charts and other non-map data visualization components
+4. **ui-core:** Common UI components
+5. **ui-docs:** Design system documentation
+6. **ui-maps** Maps and other geospatial data visualization components
+7. **ui-themes** Themes and other common styling
+8. **utils** Common utilities
+9. **component-library** [DEPRECATED] A package that included all common components
 
 ## Year Packages
 

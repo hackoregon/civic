@@ -47,7 +47,7 @@ In addition, we use [ESLint](https://eslint.org/) to avoid problems with our cod
 
 ## Adding components
 
-At the heart of Civic is a [library of components](https://hackoregon.github.io/civic/). We showcase them all in a Storybook
+At the heart of Civic is a [library of components](https://master--5f55eec3d7d83100229d47fe.chromatic.com). We showcase them all in a Storybook
 to help designers plan Story Cards and project narratives. This showcase also aids developers when implementing Story Cards as
 well as components. Creating a Storybook story for every component helps ensure a component can stand on its own and work
 as imagined under a variety of inputs.
@@ -57,30 +57,34 @@ as imagined under a variety of inputs.
 We strive for [stateless](https://code.tutsplus.com/tutorials/stateful-vs-stateless-functional-components-in-react--cms-29541),
 reusable components that have been tested under a variety of conditions. These components are best for using as building blocks.
 
+### New Components
+
+Run `yarn component` from the project root to generate a component in the package of your choosing.
+
+A component directory will be generated in `packages/<package>/<component>/` with the following files:
+
+1. `<component>.js`: The implementation of the component
+2. `<component>.test.js`: Unit tests for the component
+3. `<component>.stories.js`: Storybook stories that describe all of the interesting states of the component
+   Additionally, the component will be re-exported from `packages/<package>/src/index.js` to make the component accessible to anyone using the package via npm.
+
 ### Implementation
-
-First, create a new folder in the `src` directory of the `component-library` package for the new component. Follow the conventions
-that the other components follow:
-
-1. Capitalize the component name
-2. Create a JS file with the same name as the component
 
 When writing the JS implementation of a component, there aren't any hard and fast rules, but there are some strong suggestions:
 
 1. Prefer a stateless, function component over a stateful, class component
 2. Specify the [`PropTypes`](https://reactjs.org/docs/typechecking-with-proptypes.html) for the component
-3. When styles are necessary, prefer Emotion over CSS
-4. Choose composition over inheritance
-5. Don't be afraid to break a large component down into smaller components that compose
-6. Expect a variety of prop inputs
-7. Expect a variety of layout usages
-8. Don't forget about mobile styles as well as mobile interactions
+3. Use [JSDoc](https://jsdoc.app/about-getting-started.html) comments to add a description for each `PropType`
+4. When styles are necessary, prefer Emotion over CSS
+5. Choose composition over inheritance
+6. Don't be afraid to break a large component down into smaller components that compose
+7. Expect a variety of prop inputs
+8. Expect a variety of layout usages
+9. Don't forget about mobile styles as well as mobile interactions
 
 With these suggestions along with code review, you're sure to make something that will be useful for years to come!
 
 ### Testing
-
-In the same component directory, make a test file named `<component>.test.js`.
 
 Good unit tests will help you be confident your component works the way you think it does. Arguably even more important:
 it will help future developers be confident that their broad changes or upgrades don't break your hard work.
@@ -95,25 +99,19 @@ the inputs may be, the output should not surprise.
 
 ### Storybook
 
-In the `stories` directory in the `component-library` package, make a story file named `<component>.story.js`.
-Then, in the `index.js` file in the same `stories` directory, import your new story file and call the exported function.
-
 Testing helps us make sure how code works. Stories make sure our designs works. They are useful for testing the user
 experience of interactions as well as the end result of a variety of inputs. Varying input is especially important in
 data visualization design. Even if any given chart type doesn't lend itself favorably for every data configuration,
 keep the Robustness Principle in mind.
 
-Storybook has [a variety of addons](https://storybook.js.org/addons/addon-gallery/) for adding interactivity to your story that
-may help a designer or developer review and experiment with the behavior of the component the story is for.
+A single story file can include many different scenarios. Use this to your advantage to showcase a component under a
+variety of conditions.
 
-A single story file can include multiple scenarios. Use this to your advantage to showcase a component under a variety of conditions.
+### Rebuilding the Component Packages
 
-### Rebuilding the Component Library
+Build with `yarn build` while in the `packages/<package>` directory (or run `yarn build-packages` from the project root). This will generate changes in the `es` and `dist` directories. These build directories are not committed to source control.
 
-When making a new component, that component needs to be re-exported in [`packages/component-library/src/index.js`](packages/component-library/src/index.js).
-This makes the component accessible to anyone importing the component via npm.
-
-Build with `yarn build` while in the `packages/component-library` directory (or run `yarn bootstrap` from the project root). This will generate changes in the `es` and `dist` directories. These build directories are not committed to source control.
+You can also use the `yarn watch` command at the project root to automatically rebuild any changed packages.
 
 ## Creating Story Cards
 
@@ -139,7 +137,7 @@ Stories have a fair amount of detail to them. They are responsible for page layo
 
 ## Making Changes to the Platform
 
-The Platform refers to the packages in this repo that _are not_ project packages, year packages, or the component library. These are the packages that
+The Platform refers to the packages in this repo that _are not_ project packages, year packages, or component packages. These are the packages that
 enforce consistency, eliminate duplication, and allow the majority of development to be focused on components and stories. However, the platform
 should never be considered done!
 
