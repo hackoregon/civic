@@ -153,5 +153,9 @@
     "webpack-hot-middleware": "^2.24.3",
     "webpack-md5-hash": "^0.0.6",
     "webpack-node-externals": "^1.5.4"
+  },
+  "resolutions": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   }
 }
