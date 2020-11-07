@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { has } from "lodash";
@@ -14,9 +15,9 @@ import {
 import { ThemeProvider } from "@material-ui/styles";
 import { MaterialTheme } from "@hackoregon/ui-themes";
 
-const Select = ({
+/** A Select dropdown built with MaterialUI under the hood */
+export const Select = ({
   autoWidth,
-  fullWidth,
   displayEmpty,
   onChange,
   value,
@@ -36,7 +37,6 @@ const Select = ({
     <ThemeProvider theme={MaterialTheme}>
       <FormControl
         autoWidth={autoWidth}
-        fullWidth={fullWidth}
         displayEmpty={displayEmpty}
         variant={variant}
         disabled={disabled}
@@ -60,32 +60,38 @@ const Select = ({
 Select.displayName = "Select";
 
 Select.propTypes = {
+  /** If true, the component will take up the full width of its container.   */
   autoWidth: PropTypes.bool,
-  fullWidth: PropTypes.bool,
+  /** Not currently functional */
   displayEmpty: PropTypes.bool,
+  /** onChange handler */
   onChange: PropTypes.func,
+  /** The current value of the select dropdown */
   value: PropTypes.string,
-  variant: PropTypes.string,
+  /** The variant to use */
+  variant: PropTypes.oneOf(["filled", "outlined", "standard"]),
+  /** A label for the select dropdown */
   formLabel: PropTypes.string,
+  /** Helper text for the select dropdown */
   formHelperText: PropTypes.string,
+  /** Show in a disabled state */
   disabled: PropTypes.bool,
-  options: PropTypes.oneOf([
+  /** Options for the select dropdown */
+  options: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.string),
     PropTypes.arrayOf(
       PropTypes.shape({ value: PropTypes.any, label: PropTypes.string })
     )
-  ]).isRequired
+  ])
 };
 
 Select.defaultProps = {
   autoWidth: true,
-  fullWidth: false,
   displayEmpty: true,
-  value: "List item",
+  value: "List item 1",
+  options: ["List item 1", "List item 2", "List item 3"],
   variant: "outlined",
   formLabel: "Label",
   formHelperText: "",
   disabled: false
 };
-
-export default Select;

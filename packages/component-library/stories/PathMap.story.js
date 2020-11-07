@@ -64,7 +64,7 @@ const getPath = f => f.geometry.coordinates;
 const standardColor = [25, 183, 170, 255];
 
 export default () => {
-  storiesOf("Component Lib|Maps/Path Map", module)
+  storiesOf("Component Lib/Maps/Path Map", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .add(

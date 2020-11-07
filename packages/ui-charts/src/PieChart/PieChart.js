@@ -1,17 +1,18 @@
+/* eslint-disable import/prefer-default-export */
 import React from "react";
 import PropTypes from "prop-types";
 import { VictoryPie, VictoryContainer } from "victory";
 import { VictoryTheme } from "@hackoregon/ui-themes";
 import { DataChecker } from "@hackoregon/utils";
 
+import { SimpleLegend } from "../SimpleLegend/SimpleLegend";
+import { ChartContainer } from "../ChartContainer/ChartContainer";
 import chartHelpers from "../chartHelpers";
-import ChartContainer from "../ChartContainer";
-import SimpleLegend from "../SimpleLegend";
 import PieChartLabels from "./PieChartLabels";
 
 const { chartEvents } = chartHelpers;
 
-const PieChart = props => {
+export const PieChart = props => {
   const {
     title,
     subtitle,
@@ -119,7 +120,9 @@ PieChart.defaultProps = {
   theme: VictoryTheme,
   colors: [],
   tooltip: true,
-  useLegend: false
+  useLegend: false,
+  height: 350,
+  width: 650
 };
 
-export default PieChart;
+PieChart.displayName = "PieChart";

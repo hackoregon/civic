@@ -4,7 +4,6 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { withKnobs, number, boolean } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
-import { checkA11y } from "@storybook/addon-a11y";
 import { BaseMap, IconMap, MapTooltip, DemoJSONLoader } from "../src";
 
 const opacityOptions = {
@@ -250,9 +249,8 @@ class TouchScreenDemo extends React.Component {
 }
 
 export default () =>
-  storiesOf("Component Lib|Maps/Icon Map", module)
+  storiesOf("Component Lib/Maps/Icon Map", module)
     .addDecorator(withKnobs)
-    .addDecorator(checkA11y)
     .add("Simple usage", demoMap)
     .add("With tooltip", tooltipMap)
     .add("TouchScreen Demo", () => <TouchScreenDemo />);

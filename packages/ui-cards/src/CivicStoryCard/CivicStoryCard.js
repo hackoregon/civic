@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import PropTypes from "prop-types";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
@@ -86,7 +87,7 @@ const linkHeader = css`
   }
 `;
 
-const CivicStoryCard = ({
+export const CivicStoryCard = ({
   slug,
   title,
   children,
@@ -157,4 +158,4 @@ CivicStoryCard.propTypes = {
   watermark: PropTypes.node
 };
 
-export default CivicStoryCard;
+CivicStoryCard.displayName = "CivicStoryCard";

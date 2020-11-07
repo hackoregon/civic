@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import PropTypes from "prop-types";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
@@ -30,7 +31,8 @@ const wrapperClass = css`
   margin: 60px auto;
 `;
 
-const PullQuote = ({ quoteText, quoteAttribution, url }) => (
+/** A styled pull quote with Twitter sharing of the current page or a custom URL */
+export const PullQuote = ({ quoteText, quoteAttribution, url }) => (
   <div css={wrapperClass}>
     <TwitterShareButton
       url={url || get(window, "location.href", "")}
@@ -55,9 +57,10 @@ const PullQuote = ({ quoteText, quoteAttribution, url }) => (
 PullQuote.displayName = "PullQuote";
 
 PullQuote.propTypes = {
+  /** the quote */
   quoteText: PropTypes.string,
+  /** who or what the source of the quote is */
   quoteAttribution: PropTypes.string,
+  /** link to share with this quote, if different from the current page */
   url: PropTypes.string
 };
-
-export default PullQuote;

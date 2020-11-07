@@ -107,7 +107,7 @@ const CIVIC_API_URL =
   "https://service.civicpdx.org/disaster-resilience/api/DisasterNeighborhoodView/?format=json&limit=102";
 
 export default () =>
-  storiesOf("Component Lib|Maps/Map Overlay", module)
+  storiesOf("Component Lib/Maps/Map Overlay", module)
     .addDecorator(checkA11y)
     .addDecorator(withKnobs)
     .add(

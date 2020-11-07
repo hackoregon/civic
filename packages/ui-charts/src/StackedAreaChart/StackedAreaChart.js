@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import PropTypes from "prop-types";
 import React from "react";
 import { groupBy } from "lodash";
@@ -15,8 +16,8 @@ import { VictoryTheme } from "@hackoregon/ui-themes";
 import { DataChecker, civicFormat } from "@hackoregon/utils";
 
 import shortid from "shortid";
-import ChartContainer from "../ChartContainer";
-import SimpleLegend from "../SimpleLegend";
+import { SimpleLegend } from "../SimpleLegend/SimpleLegend";
+import { ChartContainer } from "../ChartContainer/ChartContainer";
 import chartHelpers from "../chartHelpers";
 
 const {
@@ -26,7 +27,7 @@ const {
   getDefaultAreaStyle
 } = chartHelpers;
 
-const StackedAreaChart = ({
+export const StackedAreaChart = ({
   data,
   dataKey,
   dataKeyLabel,
@@ -56,6 +57,7 @@ const StackedAreaChart = ({
     : null;
 
   const scatterPlotStyle = style || {
+    // eslint-disable-next-line react/prop-types
     ...theme.areaScatter.style
   };
 
@@ -154,6 +156,7 @@ const StackedAreaChart = ({
           />
           <VictoryPortal>
             <VictoryLabel
+              // eslint-disable-next-line react/prop-types
               style={{ ...theme.axisLabel.style }}
               text={yLabel}
               textAnchor="middle"
@@ -165,6 +168,7 @@ const StackedAreaChart = ({
           </VictoryPortal>
           <VictoryPortal>
             <VictoryLabel
+              // eslint-disable-next-line react/prop-types
               style={{ ...theme.axisLabel.style }}
               text={xLabel}
               textAnchor="end"
@@ -233,4 +237,4 @@ StackedAreaChart.defaultProps = {
   loading: null
 };
 
-export default StackedAreaChart;
+StackedAreaChart.displayName = "StackedAreaChart";

@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import React from "react";
 import PropTypes from "prop-types";
 import CivicLogo from "./CivicLogo";
@@ -11,7 +12,7 @@ import CivicSandboxLogoInverted from "./CivicSandboxLogoInverted";
 import MasterBuilders from "./MasterBuilders";
 import HackOregonLogo from "./HackOregonLogo";
 
-function Logo({ type, alt, ...other }) {
+export function Logo({ type, alt, ...other }) {
   switch (type) {
     case "standardLogo":
       return <CivicLogo alt={alt} />;
@@ -40,12 +41,21 @@ function Logo({ type, alt, ...other }) {
 
 Logo.displayName = "Logo";
 Logo.propTypes = {
-  type: PropTypes.string,
+  type: PropTypes.oneOf([
+    "standardLogo",
+    "standardLogoInverted",
+    "standardLogoAnimated",
+    "standardLogoAnimatedInverted",
+    "squareLogo",
+    "squareLogoAnimated",
+    "squareLogoInverted",
+    "sandboxLogoInverted",
+    "hackOregon",
+    "masterBuilders"
+  ]),
   alt: PropTypes.string
 };
 Logo.defaultProps = {
   type: "standardLogoAnimated",
   alt: "CIVIC Logo"
 };
-
-export default Logo;

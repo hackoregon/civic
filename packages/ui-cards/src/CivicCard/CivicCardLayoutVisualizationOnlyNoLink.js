@@ -1,8 +1,14 @@
+/* eslint-disable import/prefer-default-export */
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import PropTypes from "prop-types";
+import cardMetaTypes from "./cardMetaTypes";
 
-function CivicCardLayoutVisualizationOnlyNoLink({ isLoading, data, cardMeta }) {
+export function CivicCardLayoutVisualizationOnlyNoLink({
+  isLoading,
+  data,
+  cardMeta
+}) {
   return (
     <div
       css={css`
@@ -18,9 +24,8 @@ function CivicCardLayoutVisualizationOnlyNoLink({ isLoading, data, cardMeta }) {
 CivicCardLayoutVisualizationOnlyNoLink.propTypes = {
   isLoading: PropTypes.bool,
   data: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.array]),
-  cardMeta: PropTypes.shape({
-    /* TODO: Add shape */
-  })
+  cardMeta: cardMetaTypes
 };
 
-export default CivicCardLayoutVisualizationOnlyNoLink;
+CivicCardLayoutVisualizationOnlyNoLink.displayName =
+  "CivicCardLayoutVisualizationOnlyNoLink";

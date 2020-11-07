@@ -7,7 +7,7 @@ import { storybookStyles } from "./storyStyles";
 import notes from "./selectField.notes.md";
 
 export default () =>
-  storiesOf("Component Lib|Basic Inputs/SelectField", module)
+  storiesOf("Component Lib/Basic Inputs/SelectField", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .addDecorator(story => (

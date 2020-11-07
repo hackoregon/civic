@@ -6,7 +6,6 @@ import {
   select,
   number
 } from "@storybook/addon-knobs";
-import { checkA11y } from "@storybook/addon-a11y";
 import { get } from "lodash";
 import { jsx, css } from "@emotion/core";
 import {
@@ -38,9 +37,8 @@ const MAP_STYLE_OPTIONS = {
 };
 
 export default () =>
-  storiesOf("Component Lib|Maps/Vector Tiles Map", module)
+  storiesOf("Component Lib/Maps/Vector Tiles Map", module)
     .addDecorator(withKnobs)
-    .addDecorator(checkA11y)
     .add(
       "Standard",
       () => {

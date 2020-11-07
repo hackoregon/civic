@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable import/prefer-default-export */
 import React from "react"; // eslint-disable-line no-unused-vars
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
@@ -45,7 +47,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const SelectField = ({ id, label, options, formik, isRequired }) => {
+export const SelectField = ({ id, label, options, formik, isRequired }) => {
   const classes = useStyles();
   let optionValues = options.values;
 
@@ -126,4 +128,4 @@ SelectField.propTypes = {
   formik: PropTypes.shape({})
 };
 
-export default SelectField;
+SelectField.displayName = "SelectField";

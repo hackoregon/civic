@@ -66,7 +66,7 @@ const customLegend = (legendData, theme) => {
 };
 
 export default () =>
-  storiesOf("Component Lib|Charts/Scatterplot", module)
+  storiesOf("Component Lib/Charts/Scatterplot", module)
     .addDecorator(withKnobs)
     .add(
       "Standard",

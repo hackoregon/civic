@@ -76,7 +76,7 @@ const demoMap = () => (
 );
 
 export default () =>
-  storiesOf("Component Lib|Maps/Boundary Map", module)
+  storiesOf("Component Lib/Maps/Boundary Map", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .add("Simple usage", demoMap);

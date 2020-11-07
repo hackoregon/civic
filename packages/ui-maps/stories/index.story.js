@@ -2,7 +2,6 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { checkA11y } from "@storybook/addon-a11y";
 
 // DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator import injection
 import polygonPreviewStory from "./PolygonPreview.story"; // TODO: Move this to the appropriate location
@@ -19,9 +18,9 @@ import screenGridMapStory from "./ScreenGridMap.story";
 import vectorTilesMapStory from "./VectorTilesMap.story";
 
 // maps
-storiesOf("Component Lib|Maps", module)
-  .addParameters({ options: { showPanel: false } })
-  .addDecorator(checkA11y);
+storiesOf("Component Lib/Maps", module).addParameters({
+  options: { showPanel: false }
+});
 // .add("Maps Style Guide", () => <MapsStyle />);
 baseMapStory();
 boundaryMapStory();

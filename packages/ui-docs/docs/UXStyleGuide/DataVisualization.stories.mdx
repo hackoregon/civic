@@ -1,0 +1,378 @@
+import { Meta, Story } from '@storybook/addon-docs/blocks';
+
+<Meta title="Design/UX Style Guide/Data Visualization" />
+
+# Data Visualization Guidelines
+
+Our data visualizations demonstrate the power of the Civic platform.
+
+## Purpose
+
+Civic is a data platform. Our data visualizations demonstrate the power of the Civic platform. Our platform shows the viability of an open-systems, open-source approach to public data. These guidelines outline our approach to data visualization.
+
+## Principles
+
+### Our data visualizations should:
+
+- show the value of data in the hands of the community
+- be legible, clean, and professional
+- be aware of bias
+- be accessible
+
+### Embrace imperfection
+
+“Data-driven doesn’t mean unmistakably true because data and the tools that collect it are human-made. Data is not pure fact, but evidence that filters reality in a very subjective way. It has the unique power to abstract our world and help us understand it, according to relevant factors that are different or constantly changing.” [IBM data visualization guidelines](https://www.ibm.com/design/v1/language/experience/data-visualization/)
+
+### Be aware of bias
+
+A data visualization provides a lens and is a perspective on reality. Bias cannot be eliminated. There is no such thing as an unbiased data visualization. However, by being aware of bias, you can present the most accurate and useful perspectives on reality through your visualization. Generally, what is perceived as biased is based on the perspective of the observer. What data is collected, how data is collected, how data is calculated, how data is categorized, how data is contextualized, what data is presented, how data is visualized, etc... all inform bias.
+
+### Show meaningful relationships
+
+Data visualizations that show relationships imply meaning in those relationships. Don’t make spurious relationship between disparate data. You may have heard the phrase “correlation does not imply causation”. Data visualizations that show correlation without context imply causation.
+
+### Data density - impress but don’t overwhelm
+
+Our data density should aim to impress but not overwhelm. Data visualizations should be dense with information and detail - humans are capable of absorbing a lot of visual information very quickly. However, it is easy to overwhelm by showing too many different types of relationships at one time.
+
+## Chart types
+
+The Civic platform uses a reusable component library. Basic component should be used where possible, and new reusable components should be built instead of creating one-off visualizations. The currently library of components is documented in the [Civic Storybook](https://hackoregon.github.io/civic/?selectedKind=Welcome&selectedStory=Introduction&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Fnotes%2Fpanel).
+
+### Bar chart
+
+#### Vertical Bar Charts
+
+Vertical Bar Charts, also referred to as Column Charts, are used to compare quantities of different categories or to show values over time. When showing variables over time, you should choose a Bar Chart over a Line Chart when the rate of change is more relevant than the relative magnitudes. If comparing quantities of more than 5 categories, use a Horizontal Bar Chart instead.
+
+##### Example of Vertical Bar Chart - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-charts-bar-chart--standard)
+
+<Story id="component-lib-charts-bar-chart--standard" />
+
+#### Horizontal Bar Charts
+
+Horizontal Bar Charts are used to compare quantities of different categories (especially 6 or more). Horizontal Bar Charts are also preferred when category names are long text and space is limited. This is preferred to angling text labels or presenting them vertically.
+
+##### Example of Horizontal Bar Chart - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-charts-horizontal-bar-chart--standard)
+
+<Story id="component-lib-charts-horizontal-bar-chart--standard" />
+
+##### Example of Minimalist Horizontal Bar Chart - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-charts-horizontal-bar-chart--example-minimalist)
+
+<Story id="component-lib-charts-horizontal-bar-chart--minimalist" />
+
+Example of Horizontal Bar Chart with negative values - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-charts-horizontal-bar-chart--example-with-negative-values)
+
+<Story id="component-lib-charts-horizontal-bar-chart--negative-values" />
+
+### Data table
+
+There are a couple of key benefits to the data table visualization:
+
+- The user will want to look up individual values within a data set
+- One-to-one comparisons between different values within the data set are mertited
+- Precision in data values is required
+- Multiple data values expressed in different units of measure (e.g., number of units, cost of units, comparison to forecast/percentage) need to be presented
+- Both detail (e.g., revenue per month) and summary data (e.g., revenue per year) is included.
+
+#### Example of a Data Table - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-charts-data-table--simple-usage)
+
+<Story id="component-lib-charts-data-table--standard" />
+
+### Gradient scale
+
+More info to follow
+
+#### Example of a Gradient Scale - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-charts-gradient-scale--simple-usage)
+
+<Story id="component-lib-charts-gradient-scale--standard" />
+
+#### Example of a Gradient Scale with a secondary attribute - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-charts-gradient-scale--with-secondary)
+
+<Story id="component-lib-charts-gradient-scale--with-secondary-values" />
+
+### Line chart
+
+Line Charts track changes or trends over time and show the relationship between one or more variables. When showing variables over time, you should choose a Line Chart over a Bar Chart when the rate of change is more relevant than the relative magnitudes.
+
+#### Example of a Standard Line Chart -[ live example](https://hackoregon.github.io/civic/?path=/story/component-lib-charts-line-chart--standard)
+
+<Story id="component-lib-charts-line-chart--standard" />
+
+### Pie/doughnut
+
+Pie charts show the relative contribution of parts to a whole. From a perceptual point of view, radial layouts are better for showing an approximation of comparing values as compared to a more accurately perceived rectangular (bar chart) layout. Radial charts are best when comparing relative values where some loss of accuracy is acceptable.
+
+Pie charts communicate a single attribute through relative area and angle of each area. The sum of the wedge angles must add up to the 360◦ of a full circle. Radial layouts work well to communication cyclic data or the periodicity of patterns. However, be cautious when encoding non-cyclical data because it may be misleading. The perceived accuracy of radial layouts is limited because angle judgements are less accurate than length judgements.
+
+A donut chart is functionally identical to a pie chart, with the exception of a blank center and the ability to support multiple statistics at once. Donut charts provide a better data intensity ratio to standard pie charts since the blank center can be used to display additional, related data.
+
+While this is a common visualization, it can be difficult to differentiate the values of slices that are very close in size. Alternatives to pie charts include bar graphs and data tables.
+
+#### Example of a Pie Chart - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-charts-pie-chart--standard)
+
+<Story id="component-lib-charts-pie-chart--standard" />
+
+#### Example of a Donut Chart - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-charts-pie-chart--custom)
+
+<Story id="component-lib-charts-pie-chart--half-doughnut" />
+
+#### Example of a Pie Chart With Legend - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-charts-pie-chart--custom)
+
+<Story id="component-lib-charts-pie-chart--use-legend" />
+
+### Scatterplot
+
+A scatterplot, is designed to display the correlation between two paired sets of quantitative data. This visualization is best suited to help visualize relationships between the paired sets of data - encouraging the user to look for what happens to values along the X-axis, compared to what happens to values along the Y-axis; i.e., as X goes up, what happens to Y? The stronger the correlation, the closer the points fall along a perfect diagonal line; positive correlation is an upward slope, and negative is downward.
+
+The data is displayed as a collection of points, each having the value of one variable determining the position on the horizontal axis and the value of the other variable determining the position on the vertical axis. The scalability of a scatterplot is limited by the need to distinguish points from each other, so it is well suited for dozens or hundreds of items.
+
+Additional information about the data can be encoded using color intensity or by varying the size of the points (often called a bubble chart).
+
+#### Example of a Standard Scatterplot - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-charts-scatterplot--standard)
+
+<Story id="component-lib-charts-scatterplot--standard" />
+
+#### Example of a Scatterplot with Negative Values - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-charts-scatterplot--example-with-negative-values)
+
+<Story id="component-lib-charts-scatterplot--negative-values" />
+
+### Stacked area chart
+
+#### Example of Standard Stacked Area Chart - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-charts-stacked-area-chart--standard)
+
+<Story id="component-lib-charts-stacked-area-chart--standard" />
+
+## Maps
+
+Maps are the preferred visualization for presenting geospatial, or geographical, values in relation to one another. While it is often possible to visualize geospatial data via a bar chart or other visualization, there are several key benefits to using the map feature:
+
+- A map enables encoding of larger quantities of data in a smaller space that can be scaled. Design sacrifices would have to be made in a bar chart (values would have to scroll, or labels would have to be omitted) limiting usability.
+- Spatial relationships between categories, such as adjacency of neighborhoods, is difficult to impossible to provide in alternative visualizations.
+- Most users have some familiarity with maps, making the data more relatable and providing context at a glance.
+
+Much of the data that CIVIC works with is geospatial in nature, and within the Civic reusable component library, the following map types/components are available.
+
+Example of a Base Map - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-maps-base-map--simple-usage)
+
+<Story id="component-lib-civic-platform-placeholder--standard" />
+
+Example of a Base Map with Geocoder Usage - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-maps-base-map--with-geocoder-usage)
+
+<Story id="component-lib-civic-platform-placeholder--standard" />
+
+Example of a Base Map with no interactivity - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-maps-base-map--no-interactivity)
+
+<Story id="component-lib-civic-platform-placeholder--standard" />
+
+Example of a Base Map with use container height - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-maps-base-map--simple-usage)
+
+<Story id="component-lib-civic-platform-placeholder--standard" />
+
+### Boundary map
+
+The Boundary component within a map is used to delineate the boundary, or limit, of the data set. For example...
+
+More info to follow
+
+Example of a Boundary Map - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-maps-boundary-map--simple-usage)
+
+<Story id="component-lib-civic-platform-placeholder--standard" />
+
+### CIVIC Sandbox map
+
+More info to follow
+
+Example of a Simple usage map - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-maps-civic-sandbox-map--simple-usage)
+
+<Story id="component-lib-civic-platform-placeholder--standard" />
+
+### Heat map/Cloropleth map
+
+One of the key methods for encoding data within a map visualization is via a gradient within predetermined polygon shapes. Examples of polygon shapes commonly used within CIVIC include census blocks, neighborhoods, and counties. Common examples on a larger scale include states and countries.
+
+The heat map visualization is best suited to comparing aggregate values between different geospatial areas, for example, which neighborhoods are likely to experience the highest shaking intensity in a 9.0 Cascadia Subduction Zone earthquake. In a heat map, values within the shape boundary are aggregated and shading within a gradient scale is assigned to the shape. Often, the darker the shading, the higher the value.
+
+Example of a Standard Heat Map - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-maps-heat-map--standard)
+
+<Story id="component-lib-civic-platform-placeholder--standard" />
+
+### Icon map
+
+Similar to the scatterplot map, the Icon map layer visualizes individual data points, but within certain predefined categories of data. Using recognizable icons to encode locations of certain resources (e.g., police stations, hospitals, schools, etc.) within a map enables users to understand relationships and distances between these.
+
+This map layer (or subset of it) may be a valuable addition to another map type, such as a heat map, in adding context and increasing interpretation of the visualization.
+
+Example of an Icon Map - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-maps-icon-map--simple-usage)
+
+<Story id="component-lib-civic-platform-placeholder--standard" />
+
+Example of an Icon Map with Tooltip - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-maps-icon-map--with-tooltip)
+
+<Story id="component-lib-civic-platform-placeholder--standard" />
+
+Example of an Icon Map with Touchscreen demo - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-maps-icon-map--touchscreen-demo)
+
+###
+
+<Story id="component-lib-civic-platform-placeholder--standard" />
+
+### Map overlay
+
+More info to follow
+
+### Path map
+
+Path maps are used to visualize data around routes from place to place. Unlike other map types, data is not visualized in points or polygons, but rather as lines between points. In addition to visualizing the route itself, information can also be encoded within the line of the route by color intensity and by the width of the line. Within CIVIC, this has been especially useful within Transportation in encoding data related to bus routes, such as transit speeds or wait times at certain stops.
+
+Example of a Path Map - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-maps-path-map--standard)
+
+<Story id="component-lib-civic-platform-placeholder--standard" />
+
+Example of a Custom Path Map - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-maps-path-map--custom)
+
+<Story id="component-lib-civic-platform-placeholder--standard" />
+
+Example of a Path Map with tooltip - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-maps-path-map--example-with-tooltip)
+
+<Story id="component-lib-civic-platform-placeholder--standard" />
+
+### Scatterplot map
+
+The scatterplot map is a type of point map, in which individual data points are plotted (as opposed to the heat map, where values are aggregated within a polygon). This offers several advantages:
+
+- Precise locations of individual data points (e.g., location of 911 calls, or individual homeless camps) may be critical to the analysis and understanding of the data
+- Allows for encoding by size, shape and/or color intensity. Note that when choosing between encoding methods, size is the preferred delineator. When the points must be small and densely populated, it is easier for users to distinguish between points of different sizes than other methods.
+
+Example of a Scatterplot Map - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-maps-scatterplot-map--standard)
+
+<Story id="component-lib-civic-platform-placeholder--standard" />
+
+Example of a Custom Scatterplot Map - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-maps-scatterplot-map--custom)
+
+<Story id="component-lib-civic-platform-placeholder--standard" />
+
+Example of a Custom Scatterplot Map with Tooltip - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-maps-scatterplot-map--examples-with-tooltip)
+
+<Story id="component-lib-civic-platform-placeholder--standard" />
+
+Example of a Scatterplot Map with data driven styling - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-maps-scatterplot-map--examples-data-driven-styling)
+
+<Story id="component-lib-civic-platform-placeholder--standard" />
+
+### Screen grid map
+
+The screen grid map is a variation on the heat map. One of the disadvantages to using real-world polygon shapes which vary in size, is that certain comparisons can be misleading. [Example???] In order to mitigate this risk, data can be encoded instead in shapes that are uniform in nature, overlayed on the geographic map. This visualization still enables the key benefits of using a map visualization outlined at the beginning of this section.
+
+Example of a Screen Grid Map - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-maps-screen-grid-map--standard)
+
+<Story id="component-lib-civic-platform-placeholder--standard" />
+
+Example of a Custom Screen Grid Map - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-maps-screen-grid-map--custom)
+
+<Story id="component-lib-civic-platform-placeholder--standard" />
+
+### Multi-layer Map
+
+Example of a Path Map - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-maps-multilayer-map--path-map)
+
+###
+
+<Story id="component-lib-civic-platform-placeholder--standard" />
+
+Example of a Scatterplot Map - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-maps-multilayer-map--scatterplot-map)
+
+<Story id="component-lib-civic-platform-placeholder--standard" />
+
+Example of a Custom Screen Grid Map - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-maps-multilayer-map--screen-grid-map)
+
+<Story id="component-lib-civic-platform-placeholder--standard" />
+
+Example of an Icon Map - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-maps-multilayer-map--icon-map)
+
+<Story id="component-lib-civic-platform-placeholder--standard" />
+
+Example of a Small Polygon Map - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-maps-multilayer-map--small-polygon-map)
+
+##
+
+<Story id="component-lib-civic-platform-placeholder--standard" />
+
+Example of a Choropleth Map - [live example](https://hackoregon.github.io/civic/?path=/story/component-lib-maps-multilayer-map--choropleth-map)
+
+<Story id="component-lib-civic-platform-placeholder--standard" />
+
+## Details
+
+### Titles
+
+All data visualizations should have a short, but descriptive title. It may make sense to have a title as part of a card or as part of the actual visualization.
+
+### Labels
+
+- Labels should be concise and descriptive
+- If possible, label elements directly instead of a legend
+- Use bold text only for emphasis
+- Avoid type rotation
+
+### Annotation
+
+- Annotation should be used to explain outliers and provide additional context
+
+### Tooltips
+
+- Our basic charts use tooltips to enable close examination of individual data points
+
+### Colors
+
+More info to follow
+
+### Showing quantities
+
+Civic uses a number formatter to ensure consistent formatting across the platform.
+
+- Commas
+- Always use commas for thousands separator
+- Numbers and decimal places
+  - Use units that will result in showing a maximum of 6 digits
+    - Fewer digits is better
+  - Lean towards showing 0-1 decimal places.
+    - Should reflect the precision of the data
+    - Show whole dollars or dollars and cents (e.g. $123 or $1.23)
+  - Examples
+    - $7.3 million, not $7,300,000
+    - 24%, not 23.79%
+    - \$535,000
+- Show units (e.g. dollar sign, percent)
+
+### Responsiveness
+
+Our data visualizations should look good on a phone and on a desktop computer. Generally, our approach to responsiveness is to scale everything - text and chart elements together. This approach may evolve.
+
+### Legends
+
+If possible, elements should be directly labeled rather than using a legend.
+
+### Proper scaling
+
+Domain and scaling for axes should be set for each data visualization to ensure readability.
+
+### Accessibility
+
+We support accessibility for all visual disabilities by providing alternatives to visual information, using text and tabular versions of the visualization.
+
+**Low vision** For people who are blind, include text descriptions of any meaningful images that can be read by assistive technology (screen readers). A person with low vision is still able to perceive visual insights with the help of accessibility features and considerations. Provide the opportunity to increase the size of elements and focus on particular areas by zooming and magnifying. Follow the WCAG 2.0 Level AA guidelines for contrast — high contrast is crucial to improve legibility. Body text should have a contrast ratio of at least 4.5:1 (and large text should be at least 3:1) against its background color. Include textual content to provide alternatives to visual information (especially color). Use captions and always provide a table version of the visualization. Allow keyboard alternatives for navigating graphical user interfaces.
+
+**Color blind** The two most common forms of color blindness are deuteranomaly and deuteranopia — which together account for about 6% of men, and protanomaly and protanopia, which account for another 2%. Tritanopia is very rare, and affects less than 0.001% of men.
+
+For those affected the two most difficult colors to distinguish are green and red. Stressing the contrast between dark and light values is a good way to make the colors recognizable. While hue and saturation have minimal effect on legibility, brightness differences are far more perceptible.
+
+Easily distinguishable formats (like bar charts or treemaps) or markers (as used in scatter plots or maps) can supplement color to express information. Those work perfectly, even in black and white, and reduce problems for people with color blindness. Remember, the best way to support accessibility for all visual disabilities is to provide alternatives to visual information (especially color), using text and tabular versions of the visualization. [IBM data visualization guidelines](https://www.ibm.com/design/language/experience/data-visualization)
+
+### Interaction
+
+Interaction should have a clear purpose.
+
+### Small multiples
+
+The pattern of filtering small multiples is one of our preferred design patterns.

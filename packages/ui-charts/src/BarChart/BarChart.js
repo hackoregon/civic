@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import React from "react";
 import PropTypes from "prop-types";
 
@@ -16,8 +17,8 @@ import { ThemeProvider } from "emotion-theming";
 import { VictoryTheme } from "@hackoregon/ui-themes";
 import { DataChecker, civicFormat, protectData } from "@hackoregon/utils";
 
-import ChartContainer from "../ChartContainer";
-import SimpleLegend from "../SimpleLegend";
+import { SimpleLegend } from "../SimpleLegend/SimpleLegend";
+import { ChartContainer } from "../ChartContainer/ChartContainer";
 import chartHelpers from "../chartHelpers";
 
 const {
@@ -26,7 +27,7 @@ const {
   getDefaultDataSeriesLabels
 } = chartHelpers;
 
-const BarChart = ({
+export const BarChart = ({
   data,
   dataKey,
   dataValue,
@@ -107,6 +108,7 @@ const BarChart = ({
             />
             <VictoryPortal>
               <VictoryLabel
+                // eslint-disable-next-line react/prop-types
                 style={{ ...theme.axisLabel.style }}
                 text={yLabel}
                 textAnchor="middle"
@@ -118,6 +120,7 @@ const BarChart = ({
             </VictoryPortal>
             <VictoryPortal>
               <VictoryLabel
+                // eslint-disable-next-line react/prop-types
                 style={{ ...theme.axisLabel.style }}
                 text={xLabel}
                 textAnchor="end"
@@ -168,7 +171,9 @@ const BarChart = ({
             )}
             {dataSeries && (
               <VictoryGroup
+                // eslint-disable-next-line react/prop-types
                 offset={(barWidth || theme.bar.style.data.width) * 1.2}
+                // eslint-disable-next-line react/prop-types
                 colorScale={theme.group.colorScale}
               >
                 {categories.map(category => (
@@ -198,6 +203,7 @@ const BarChart = ({
                     y="dataValue"
                     title="Bar Chart"
                     style={{
+                      // eslint-disable-next-line react/prop-types
                       data: { width: barWidth || theme.bar.style.data.width }
                     }}
                     animate
@@ -213,36 +219,63 @@ const BarChart = ({
 };
 
 BarChart.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({})),
+  /** An array of objects with keys [dataKey], [dataValue], [dataSeries] (optional) */
+  data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  /** Show loading state instead of chart */
   loading: PropTypes.bool,
+  /** Error message to show instead of chart */
   error: PropTypes.string,
+  /** The property name of the data elements corresponding to the value which will be displayed on the X-axis */
   dataKey: PropTypes.string,
+  /** The property name of the data elements corresponding to the value which will be displayed on the Y-axis */
   dataValue: PropTypes.string,
+  /** The property name of the data elements corresponding to the value which represents a category. Will display as a grouped bar chart if supplied. */
   dataSeries: PropTypes.string,
+  /** An array of mappings for dataSeries matching a category value with a custom label */
   dataSeriesLabel: PropTypes.arrayOf(
     PropTypes.shape({ category: PropTypes.string, label: PropTypes.string })
   ),
+  /** Constrains the area displayed on the chart for each axis. The array supplied for each axis shour be of the format [min, max]  */
   domain: PropTypes.shape({
     x: PropTypes.arrayOf(PropTypes.number),
     y: PropTypes.arrayOf(PropTypes.number)
   }),
+  /** The chart title */
   title: PropTypes.string,
+  /** The chart subtitle */
   subtitle: PropTypes.string,
+  /** The label for the x-axis (keys) */
   xLabel: PropTypes.string,
+  /** The label for the y-axis (values) */
   yLabel: PropTypes.string,
+  /** A function used to format the labels for the x-axis values (keys)
+   * @constructor
+   * @param {number} value - the value to be formatted
+   * @returns {string} - the formatted string
+   */
   xNumberFormatter: PropTypes.func,
+  /** A function used to format the labels for the y-axis values (values)
+   * @constructor
+   * @param {number} value - the value to be formatted
+   * @returns {string} - the formatted string
+   */
+
   yNumberFormatter: PropTypes.func,
+  /** The width of each bar, in responsive units. Default depends on theme, but 20 is a default  */
   barWidth: PropTypes.number,
+  /** A VictoryTheme object used for styling */
   theme: PropTypes.shape({}),
+  /** A custom VictoryLegend component used to override the default legend */
   legendComponent: PropTypes.node,
+  /** Prevent data values that include color names from having styling impacts. Has performance implications, so only use if color names in the data is a possibilty */
   protect: PropTypes.bool,
+  /** ⚠️ Not functional! See issue #1223 */
   annotations: PropTypes.arrayOf(
     PropTypes.shape({ value: PropTypes.number, label: PropTypes.string })
   )
 };
 
 BarChart.defaultProps = {
-  data: null,
   dataKey: "x",
   dataValue: "y",
   dataSeries: null,
@@ -260,4 +293,4 @@ BarChart.defaultProps = {
   annotations: null
 };
 
-export default BarChart;
+BarChart.displayName = "BarChart";

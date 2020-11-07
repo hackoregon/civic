@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import PropTypes from "prop-types";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
@@ -27,7 +28,7 @@ const subtitleStyle = css`
   }
 `;
 
-const ChartTitle = ({ title, subtitle }) =>
+export const ChartTitle = ({ title, subtitle }) =>
   title || subtitle ? (
     <figcaption>
       {title ? <h2 css={titleStyle}>{title}</h2> : null}
@@ -42,4 +43,4 @@ ChartTitle.propTypes = {
 
 ChartTitle.defaultProps = {};
 
-export default ChartTitle;
+ChartTitle.displayName = "ChartTitle";

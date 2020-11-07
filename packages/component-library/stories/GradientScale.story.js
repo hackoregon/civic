@@ -7,7 +7,7 @@ import { GradientScale } from "../src";
 const colorScales = ["default", "thermal", "space", "ocean", "planet", "earth"];
 
 export default () =>
-  storiesOf("Component Lib|Charts/Gradient Scale", module)
+  storiesOf("Component Lib/Charts/Gradient Scale", module)
     .addDecorator(withKnobs)
     .add("Simple usage", () => {
       const domain = array("domain", [50, 90]);

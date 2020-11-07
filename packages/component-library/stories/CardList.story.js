@@ -63,7 +63,7 @@ const projectsMock = [
 ];
 
 export default () =>
-  storiesOf("Component Lib|CIVIC Platform/Card List", module)
+  storiesOf("Component Lib/CIVIC Platform/Card List", module)
     .addDecorator(checkA11y)
     .addDecorator(story => (
       <div style={storybookStyles.storyGrid}>

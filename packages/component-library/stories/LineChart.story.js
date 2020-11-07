@@ -73,7 +73,7 @@ const customLegend = (legendData, theme) => {
 };
 
 export default () =>
-  storiesOf("Component Lib|Charts/Line Chart", module)
+  storiesOf("Component Lib/Charts/Line Chart", module)
     .addDecorator(withKnobs)
     .add(
       "Standard",

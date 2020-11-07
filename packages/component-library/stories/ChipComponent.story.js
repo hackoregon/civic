@@ -8,7 +8,7 @@ import { Chip } from "../src";
 import { storybookStyles } from "./storyStyles";
 
 export default () => {
-  storiesOf("Component Lib|Civic Platform/Chip", module)
+  storiesOf("Component Lib/Civic Platform/Chip", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .addDecorator(story => (

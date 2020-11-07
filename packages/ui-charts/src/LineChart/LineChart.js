@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import PropTypes from "prop-types";
 import React from "react";
 import shortid from "shortid";
@@ -16,8 +17,8 @@ import { ThemeProvider } from "emotion-theming";
 import { VictoryTheme } from "@hackoregon/ui-themes";
 import { civicFormat, protectData, DataChecker } from "@hackoregon/utils";
 
-import ChartContainer from "../ChartContainer";
-import SimpleLegend from "../SimpleLegend";
+import { SimpleLegend } from "../SimpleLegend/SimpleLegend";
+import { ChartContainer } from "../ChartContainer/ChartContainer";
 import chartHelpers from "../chartHelpers";
 
 const {
@@ -28,7 +29,7 @@ const {
   getDefaultLineStyle
 } = chartHelpers;
 
-const LineChart = ({
+export const LineChart = ({
   customBackgroundPlot,
   data,
   dataKey,
@@ -147,6 +148,7 @@ const LineChart = ({
             />
             <VictoryPortal>
               <VictoryLabel
+                // eslint-disable-next-line react/prop-types
                 style={{ ...theme.axisLabel.style }}
                 text={yLabel}
                 textAnchor="middle"
@@ -158,6 +160,7 @@ const LineChart = ({
             </VictoryPortal>
             <VictoryPortal>
               <VictoryLabel
+                // eslint-disable-next-line react/prop-types
                 style={{ ...theme.axisLabel.style }}
                 text={xLabel}
                 textAnchor="end"
@@ -265,4 +268,4 @@ LineChart.defaultProps = {
   yTickCount: null
 };
 
-export default LineChart;
+LineChart.displayName = "Line Chart";

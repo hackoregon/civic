@@ -1,20 +1,18 @@
 // COMPONENTS
 // DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator src injection
-export { default as Badge } from "./Badge/Badge";
-export { default as Button } from "./Button/Button";
-export { default as ButtonNew } from "./ButtonNew/ButtonNew";
-export { default as Checkbox } from "./Checkbox/Checkbox";
-export { default as Chip } from "./Chip/Chip";
-export { default as Collapsable } from "./Collapsable/Collapsable";
-export { default as Dropdown } from "./Dropdown/Dropdown";
-export { default as Dialog } from "./Dialog/Dialog";
-export { default as Icon } from "./Icon/Icon";
-export { default as NotebookPreview } from "./NotebookPreview/NotebookPreview";
-export { default as Placeholder } from "./Placeholder/Placeholder";
-export { default as PullQuote } from "./PullQuote/PullQuote";
-export {
-  default as RadioButtonGroup
-} from "./RadioButtonGroup/RadioButtonGroup";
-export { default as Select } from "./Select/Select";
-export { default as SelectField } from "./SelectField/SelectField";
-export { default as Slider } from "./Slider";
+export { Badge } from "./Badge/Badge";
+export { Button } from "./Button/Button";
+export { ButtonNew } from "./ButtonNew/ButtonNew";
+export { Checkbox } from "./Checkbox/Checkbox";
+export { Chip } from "./Chip/Chip";
+export { Collapsable } from "./Collapsable/Collapsable";
+export { Dropdown } from "./Dropdown/Dropdown";
+export { Dialog } from "./Dialog/Dialog";
+export { Icon } from "./Icon/Icon";
+export { NotebookPreview } from "./NotebookPreview/NotebookPreview";
+export { Placeholder } from "./Placeholder/Placeholder";
+export { PullQuote } from "./PullQuote/PullQuote";
+export { RadioButtonGroup } from "./RadioButtonGroup/RadioButtonGroup";
+export { Select } from "./Select/Select";
+export { SelectField } from "./SelectField/SelectField";
+export { Slider } from "./Slider/Slider";

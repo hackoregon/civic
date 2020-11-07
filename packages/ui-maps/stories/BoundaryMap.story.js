@@ -3,7 +3,6 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { withKnobs, number, boolean, color } from "@storybook/addon-knobs";
 
-import { checkA11y } from "@storybook/addon-a11y";
 import { BaseMap, BoundaryMap, PathMap, DemoJSONLoader } from "../src";
 
 const mapData = [
@@ -76,7 +75,6 @@ const demoMap = () => (
 );
 
 export default () =>
-  storiesOf("Component Lib|Maps/Boundary Map", module)
+  storiesOf("Component Lib/Maps/Boundary Map", module)
     .addDecorator(withKnobs)
-    .addDecorator(checkA11y)
     .add("Simple usage", demoMap);

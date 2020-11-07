@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 // eslint-disable-next-line import/no-extraneous-dependencies
 import React from "react";
 import PropTypes from "prop-types";
@@ -23,15 +24,17 @@ const useStyles = makeStyles({
   }
 });
 
-function Chip({ tag, color, clickable }) {
+export function Chip({ tag, color, clickable, onClick, onDelete, size }) {
   const classes = useStyles({ color });
   return (
     <MaterialChip
       label={`#${tag}`}
       icon={<Label className={classes.tag} />}
-      size="small"
+      size={size}
       clickable={clickable}
       className={classes.chip}
+      onClick={onClick}
+      onDelete={onDelete}
     />
   );
 }
@@ -39,7 +42,15 @@ function Chip({ tag, color, clickable }) {
 Chip.propTypes = {
   tag: PropTypes.string,
   color: PropTypes.string,
-  clickable: PropTypes.bool
+  clickable: PropTypes.bool,
+  onClick: PropTypes.func,
+  onDelete: PropTypes.func,
+  size: PropTypes.oneOf(["small", "medium"])
 };
 
-export default Chip;
+Chip.defaultProps = {
+  size: "small",
+  clickable: false
+};
+
+Chip.displayName = Chip;

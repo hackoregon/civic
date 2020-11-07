@@ -52,7 +52,7 @@ const iconSizeOptions = {
 };
 
 export default () =>
-  storiesOf("Component Lib|Maps/MultiLayer Map", module)
+  storiesOf("Component Lib/Maps/MultiLayer Map", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .add(

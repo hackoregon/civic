@@ -66,7 +66,7 @@ $ cd civic
 $ nvm use
 
 # Installs all package dependencies and links cross-dependencies.
-# Also builds the component library and mock-wrapper
+# Also builds the component packages and mock-wrapper
 $ yarn bootstrap
 
 # This can take a minute, so take a stretch break (mental or physical)!
@@ -80,7 +80,7 @@ In order to be the most productive, you’ll want to install some extensions or 
 - Prettier — for code formatting in your editor as you’re coding
 - EditorConfig — for consistency in settings like indentation line-endings
 
-## Working on a single package other than the component library
+## Working on a single package other than a component package
 
 Most developers working in this project will be contributing to one package at a time.
 
@@ -97,9 +97,9 @@ $ yarn start
 $ yarn test:watch
 ```
 
-## Working on the component library using Storybook
+## Working on component packages using Storybook
 
-We are committed to a shared component library. This is achieved using the `component-library` package and React Storybook.
+We are committed to using shared component packages. This is achieved using the `ui-*` packages and React Storybook.
 Run Storybook with the following command or [view it here](https://hackoregon.github.io/civic/):
 
 ```bash
@@ -107,35 +107,33 @@ Run Storybook with the following command or [view it here](https://hackoregon.gi
 $ yarn storybook
 ```
 
-## Working on the component library and a project package simultaneuously
+> Note that component packages were formerly bundled in a single component library package
 
-In separate terminals, run the commands in the **Working on a single package other than the component library** and **Working on the component library using Storybook** sections above. Project packages rely on the built version of the component library, so if you have updated the component library, and want to see your changes in the project package you are working on, you'll need to rebuild the component library. Once the component library build has finished, your project package will reload with the update components.
+## Working on a component package and a project package simultaneuously
+
+In separate terminals, run the commands in the **Working on a single package other than a component package** and **Working on a component package using Storybook** sections above. Project packages rely on the built version of the component packages, so if you have updated a component package, and want to see your changes in the project package you are working on, you'll need to rebuild the component package. Once the component package build has finished, your project package will reload with the update components.
 
 ```bash
-$ cd packages/component-library
-
-# rebuild the component library
-$ yarn build
+# watch for changes across component packages and rebuild as necessary
+$ yarn watch
 ```
 
 ## Creating a new component
 
-It's as easy as running `yarn component` from the root of the repo. You'll be prompted to name your component. When that's done, it will add new files as seen here:
+It's as easy as running `yarn component` from the root of the repo. You'll be prompted to name your component, and select the package where it will be created. When that's done, it will add new files as seen here:
 
 ```
 civic
 └───packages
-    └───component-library
+    └───<package-name>
         └───src
-        │   └───YourNewComponent
-        │           YourNewComponent.js
-        │           YourNewComponent.test.js
-        └───stories
-                YourNewComponent.story.js
-                yourNewComponent.notes.md
+            └───YourNewComponent
+                    YourNewComponent.js
+                    YourNewComponent.stories.js
+                    YourNewComponent.test.js
 ```
 
-It will export `YourNewComponent.js` from `component-library/src/index.js`. It was also set up the `YourNewComponent.story.js` for you in storybook `component-library/stories/index.js`. You can now run `yarn storybook` from the root and see YourNewComponent under BasicInputs/YourNewComponent. You can also run `yarn test` within `component-library/` and see that the YourNewComponent tests all pass. As you develop, make sure to update `YourNewComponent.story.js`, `yourNewComponent.notes.md`, and `YourNewComponent.test.js` so that future developers can easily understand how to use your work and rest easy that it is well tested!
+You can now run `yarn storybook` from the root and see YourNewComponent under Unsorted/Components/YourNewComponent. You can also run `yarn test` within `package-name/` and see that the YourNewComponent tests all pass. As you develop, make sure to update `YourNewComponent.stories.js` and `YourNewComponent.test.js` so that future developers can easily understand how to use your work and rest easy that it is well tested!
 
 ## Creating a new card
 
@@ -214,13 +212,14 @@ You can now add a card if you want. Try it out using the [Creating a new card](#
 
 ## Project Layout
 
-There are three types of packages right now:
+There are four types of packages right now:
 
 1. **Project packages**: A React/Redux codebase that holds a collection of stories and API interactions for a single
    project in a Hack Oregon project cycle.
 2. **Year package bundles**: A React/Redux codebase that bundles together all project packages for a given year. This
    is a unit that gets deployed to production.
-3. **Utilities**: Common code that other projects depend on.
+3. **Component Packages**: Reuseable React components and Storybook documentation
+4. **Utilities**: Common code that other projects depend on.
 
 ### Packages
 
@@ -241,6 +240,13 @@ Every package has its own README with further details on what the package is for
   - [homelessness](packages/homelessness/README.md)
   - [housing](packages/housing/README.md)
   - [transportation](packages/transportation/README.md)
+- Component Packages
+  - [ui-brand](packages/ui-brand/README.md)
+  - [ui-charts](packages/ui-charts/README.md)
+  - [ui-core](packages/ui-core/README.md)
+  - [ui-docs](packages/ui-docs/README.md)
+  - [ui-maps](packages/ui-maps/README.md)
+  - [ui-themes](packages/ui-themes/README.md)
 - Utilities
   - [civic-sandbox](packages/civic-sandbox/README.md)
   - [civic-babel-presets](packages/civic-babel-presets/README.md)
@@ -248,6 +254,7 @@ Every package has its own README with further details on what the package is for
   - [dev-server](packages/dev-server/README.md)
   - [mock-wrapper](packages/mock-wrapper/README.md)
   - [webpack-common](packages/webpack-common/README.md)
+  - [utils](packages/utils/README.md)
 
 ## Testing across all packages
 
@@ -259,11 +266,11 @@ yarn test
 
 Tests for individual packages can be run from within the individual package's directory. Running all tests is useful for continuous integration environments as well as verifying changes to common dependencies does not break packages.
 
-For example, run the above command at the root of the project after making changes to a component in the component library to ensure that others packages are compatible with the changes made.
+For example, run the above command at the root of the project after making changes to a component in the component package to ensure that others packages are compatible with the changes made.
 
 ## Continuous Integration
 
-Travis CI is configured to have a build pipeline for the component library and one for each project year. Although most
+Travis CI is configured to have a build pipeline for the component packages and one for each project year. Although most
 commands are run using yarn scripts attached to a `package.json` file, due to the many steps required to run tests for
 a specific set of packages, a Makefile is used instead.
 

@@ -38,7 +38,7 @@ const MAP_STYLE_OPTIONS = {
 };
 
 export default () =>
-  storiesOf("Component Lib|Maps/Vector Tiles Map", module)
+  storiesOf("Component Lib/Maps/Vector Tiles Map", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .add(

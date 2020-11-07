@@ -9,7 +9,6 @@ import {
   object
 } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
-import { checkA11y } from "@storybook/addon-a11y";
 import { scaleThreshold } from "d3";
 import { BaseMap, PathMap, MapTooltip, DemoJSONLoader } from "../src";
 import notes from "./PathMap.notes.md";
@@ -64,9 +63,8 @@ const getPath = f => f.geometry.coordinates;
 const standardColor = [25, 183, 170, 255];
 
 export default () => {
-  storiesOf("Component Lib|Maps/Path Map", module)
+  storiesOf("Component Lib/Maps/Path Map", module)
     .addDecorator(withKnobs)
-    .addDecorator(checkA11y)
     .add(
       "Standard",
       () => {

@@ -8,7 +8,7 @@ import { storybookStyles } from "./storyStyles";
 import notes from "./badge.notes.md";
 
 export default () =>
-  storiesOf("Component Lib|CIVIC Platform/Badge", module)
+  storiesOf("Component Lib/CIVIC Platform/Badge", module)
     .addDecorator(checkA11y)
     .addDecorator(withKnobs)
     .addDecorator(story => (

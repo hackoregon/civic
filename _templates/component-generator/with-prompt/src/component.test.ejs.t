@@ -3,7 +3,7 @@ to: packages/<%=package%>/src/<%=component%>/<%=component%>.test.js
 ---
 import React from "react";
 import { mount } from "enzyme";
-import <%=component%> from "./<%=component%>";
+import { <%=component%> } from "./<%=component%>";
 
 describe("<%=component%>", () => {
   it("should render <%=component%>", () => {

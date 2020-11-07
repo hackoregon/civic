@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import Card from "@material-ui/core/Card";
@@ -109,7 +110,7 @@ const Watermark = () => (
   </div>
 );
 
-function CivicCardLayoutPreviewNoTitle({ cardMeta }) {
+export function CivicCardLayoutPreviewTitleOnly({ cardMeta }) {
   const classes = useStyles();
 
   return (
@@ -147,10 +148,8 @@ function CivicCardLayoutPreviewNoTitle({ cardMeta }) {
   );
 }
 
-CivicCardLayoutPreviewNoTitle.propTypes = {
+CivicCardLayoutPreviewTitleOnly.propTypes = {
   cardMeta: cardMetaTypes
 };
 
-CivicCardLayoutPreviewNoTitle.displayName = "CivicCardLayoutPreviewNoTitle";
-
-export default CivicCardLayoutPreviewNoTitle;
+CivicCardLayoutPreviewTitleOnly.displayName = "CivicCardLayoutPreviewTitleOnly";

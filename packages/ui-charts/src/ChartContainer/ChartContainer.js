@@ -1,9 +1,10 @@
+/* eslint-disable import/prefer-default-export */
 import PropTypes from "prop-types";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import { BrandColors } from "@hackoregon/ui-themes";
 import { Logo } from "@hackoregon/ui-brand";
-import ChartTitle from "../ChartTitle";
+import { ChartTitle } from "../ChartTitle/ChartTitle";
 
 const chartError = css`
   text-align: center;
@@ -20,7 +21,7 @@ const defaultVictoryAspectRatio = 650 / 350;
   Eventually you'll be able to pass it legends and tooltips to render as well.
 */
 
-const ChartContainer = ({
+export const ChartContainer = ({
   title,
   error,
   loading,
@@ -90,4 +91,4 @@ ChartContainer.defaultProps = {
   aspectRatio: defaultVictoryAspectRatio
 };
 
-export default ChartContainer;
+ChartContainer.displayName = "ChartContainer";

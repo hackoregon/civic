@@ -1,6 +1,6 @@
 {
   "name": "@hackoregon/ui-themes",
-  "version": "0.0.5",
+  "version": "0.0.4",
   "sideEffects": false,
   "description": "Common library for CIVIC theme components",
   "main": "dist/index.js",
@@ -33,7 +33,7 @@
     "lodash": "^4.17.11",
     "react": "^16.8.4",
     "react-dom": "^16.8.4"
-  },  
+  },
   "publishConfig": {
     "access": "public"
   }

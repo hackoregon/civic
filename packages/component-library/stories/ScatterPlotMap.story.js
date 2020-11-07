@@ -67,7 +67,7 @@ const colorOption1 = colorPicker => {
 };
 
 export default () =>
-  storiesOf("Component Lib|Maps/Scatterplot Map", module)
+  storiesOf("Component Lib/Maps/Scatterplot Map", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .add(

@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import { Component } from "react";
 import PropTypes from "prop-types";
 /** @jsx jsx */
@@ -118,7 +119,7 @@ DefaultRow.propTypes = {
   rowCellClass: PropTypes.string
 };
 
-export default class DataTable extends Component {
+export class DataTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -240,6 +241,7 @@ export default class DataTable extends Component {
 }
 
 DataTable.propTypes = {
+  /** Data and column headers and mappings  */
   data: PropTypes.shape({
     columns: PropTypes.arrayOf(
       PropTypes.shape({
@@ -249,8 +251,14 @@ DataTable.propTypes = {
     ).isRequired,
     data: PropTypes.arrayOf(PropTypes.shape({})).isRequired
   }).isRequired,
+  /** Custom header component */
   HeaderComponent: PropTypes.element,
+  /** Custom column component */
   ColumnComponent: PropTypes.element,
+  /** Custom row component */
   RowComponent: PropTypes.element,
+  /** Emotion css prop applied to the table */
   tableClass: PropTypes.string
 };
+
+DataTable.displayName = "DataTable";

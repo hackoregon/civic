@@ -5,7 +5,7 @@ import notes from "./collapsable.notes.md";
 import { Collapsable } from "../src";
 
 export default () =>
-  storiesOf("Component Lib|Civic Platform/Collapsable", module)
+  storiesOf("Component Lib/Civic Platform/Collapsable", module)
     .add(
       "Standard",
       () => {

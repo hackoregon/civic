@@ -407,7 +407,7 @@ class SandboxStory extends Component {
 }
 
 export default () =>
-  storiesOf("Component Lib|CIVIC Platform/Sandbox", module).add(
+  storiesOf("Component Lib/CIVIC Platform/Sandbox", module).add(
     "Sandbox",
     () => <SandboxStory />
   );

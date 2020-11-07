@@ -6,7 +6,7 @@ import { HeaderNew as Header } from "../src/components";
 import notes from "./headerNew.notes.md";
 
 export default () =>
-  storiesOf("Projects|civicplatform•org/HeaderNew", module)
+  storiesOf("Projects/civicplatform•org/HeaderNew", module)
     .addDecorator(withKnobs)
     .addDecorator(checkA11y)
     .addDecorator(story => story())

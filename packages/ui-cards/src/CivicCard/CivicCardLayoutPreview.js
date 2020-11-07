@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import Card from "@material-ui/core/Card";
@@ -113,7 +114,7 @@ const Watermark = () => (
   </div>
 );
 
-function CivicCardLayoutPreview({ cardMeta }) {
+export function CivicCardLayoutPreview({ cardMeta }) {
   const classes = useStyles();
 
   return (
@@ -159,5 +160,3 @@ CivicCardLayoutPreview.propTypes = {
 };
 
 CivicCardLayoutPreview.displayName = "CivicCardLayoutPreview";
-
-export default CivicCardLayoutPreview;
