@@ -76,7 +76,7 @@ When writing the JS implementation of a component, there aren't any hard and fas
 2. Use [React Hooks](https://reactjs.org/docs/hooks-intro.html) when possible
 3. Specify the [`PropTypes`](https://reactjs.org/docs/typechecking-with-proptypes.html) for the component
 4. Use [JSDoc](https://jsdoc.app/about-getting-started.html) comments to add a description for each `PropType`
-5. When styles are necessary, prefer Emotion over CSS
+5. When styles are necessary, use [Emotion](https://emotion.sh)
 6. Choose composition over inheritance
 7. Don't be afraid to break a large component down into smaller components that compose
 8. Expect a variety of prop inputs
