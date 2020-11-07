@@ -73,14 +73,15 @@ A component directory will be generated in `packages/<package>/<component>/` wit
 When writing the JS implementation of a component, there aren't any hard and fast rules, but there are some strong suggestions:
 
 1. Prefer a stateless, function component over a stateful, class component
-2. Specify the [`PropTypes`](https://reactjs.org/docs/typechecking-with-proptypes.html) for the component
-3. Use [JSDoc](https://jsdoc.app/about-getting-started.html) comments to add a description for each `PropType`
-4. When styles are necessary, prefer Emotion over CSS
-5. Choose composition over inheritance
-6. Don't be afraid to break a large component down into smaller components that compose
-7. Expect a variety of prop inputs
-8. Expect a variety of layout usages
-9. Don't forget about mobile styles as well as mobile interactions
+2. Use [React Hooks](https://reactjs.org/docs/hooks-intro.html) when possible
+3. Specify the [`PropTypes`](https://reactjs.org/docs/typechecking-with-proptypes.html) for the component
+4. Use [JSDoc](https://jsdoc.app/about-getting-started.html) comments to add a description for each `PropType`
+5. When styles are necessary, prefer Emotion over CSS
+6. Choose composition over inheritance
+7. Don't be afraid to break a large component down into smaller components that compose
+8. Expect a variety of prop inputs
+9. Expect a variety of layout usages
+10. Don't forget about mobile styles as well as mobile interactions
 
 With these suggestions along with code review, you're sure to make something that will be useful for years to come!
 

@@ -32,33 +32,6 @@ module.exports = createConfig([
   })
 ]);
 
-// function storySourceLoader() {
-//   return (context, { merge }) =>
-//     merge({
-//       module: {
-//         rules: [
-//           Object.assign(
-//             {
-//               test: /\.stories\.jsx?$/,
-//               exclude: /\.node_modules\./,
-//               loaders: [
-//                 {
-//                   loader: require.resolve("@storybook/source-loader"),
-//                   options: {
-//                     prettierConfig,
-//                     uglyCommentsRegex: [/^eslint-.*/, /^global.*/]
-//                   }
-//                 }
-//               ],
-//               enforce: "pre"
-//             },
-//             context.match // carries `test`, `exclude` & `include` as set by `match()`
-//           )
-//         ]
-//       }
-//     });
-// }
-
 function rawLoader() {
   return (context, { merge }) =>
     merge({
