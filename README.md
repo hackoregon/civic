@@ -20,7 +20,7 @@ Fantastic! Share it with us by [opening a pull request](https://github.com/hacko
 
 🦚 **I want to explore more things:**
 
-[CIVIC Platform](https://civicplatform.org/) 👏 [Components and Style Guide (Storybook / Chromatic)](https://master--5f55eec3d7d83100229d47fe.chromatic.com) 👏 [Platform Architecture Guide](https://github.com/hackoregon/civic/blob/master/ARCHITECTURE.md) 👏 [Redux Guide](https://github.com/hackoregon/civic/blob/master/WORKING_WITH_REDUX.md) 👏 [Contributing Guide](https://github.com/hackoregon/civic/blob/master/CONTRIBUTING.md)
+[CIVIC Platform](https://civicplatform.org/) 👏 [Components and Style Guide (Storybook)](https://master--5f55eec3d7d83100229d47fe.chromatic.com) 👏 [Platform Architecture Guide](https://github.com/hackoregon/civic/blob/master/ARCHITECTURE.md) 👏 [Redux Guide](https://github.com/hackoregon/civic/blob/master/WORKING_WITH_REDUX.md) 👏 [Contributing Guide](https://github.com/hackoregon/civic/blob/master/CONTRIBUTING.md)
 
 # Setup
 
@@ -278,7 +278,7 @@ a specific set of packages, a Makefile is used instead.
 
 ## Continuous Delivery
 
-Travis CI will deploy docker containers to ECS for each project year whenever the `master` branch builds successfully.
+Travis CI will deploy docker containers to ECS for each project year whenever the `master` branch builds successfully. [Storybook](https://master--5f55eec3d7d83100229d47fe.chromatic.com) also deploys via [Chromatic](https://www.chromatic.com/) when `master` builds successfully.
 
 # Notes
 **✨Demo Day⁇✨** _You may notice references to Demo Day! Our most recent Demo Day was September 11, 2019 in Portland, OR. [See highlights!](https://www.youtube.com/watch?v=99RFAwCJg-o)_
