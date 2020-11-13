@@ -78,6 +78,8 @@ In order to be the most productive, you’ll want to install some extensions or 
 - Prettier — for code formatting in your editor as you’re coding
 - EditorConfig — for consistency in settings like indentation line-endings
 
+# Development
+
 ## Working on a single package other than a component package
 
 Most developers working in this project will be contributing to one package at a time.
@@ -115,6 +117,18 @@ In separate terminals, run the commands in the **Working on a single package oth
 # watch for changes across component packages and rebuild as necessary
 $ yarn watch
 ```
+
+## Testing across all packages
+
+To run all tests for all packages, use the following command from the project root:
+
+```bash
+yarn test
+```
+
+Tests for individual packages can be run from within the individual package's directory. Running all tests is useful for continuous integration environments as well as verifying changes to common dependencies does not break packages.
+
+For example, run the above command at the root of the project after making changes to a component in the component package to ensure that others packages are compatible with the changes made.
 
 ## Creating a new component
 
@@ -208,6 +222,8 @@ Type the name of the new package that you want to create and press enter.
 ✨ DONE ✨
 You can now add a card if you want. Try it out using the [Creating a new card](#creating-a-new-card)
 
+# Packages & Deployment
+
 ## Project Layout
 
 There are four types of packages right now:
@@ -254,18 +270,6 @@ Every package has its own README with further details on what the package is for
   - [webpack-common](packages/webpack-common/README.md)
   - [utils](packages/utils/README.md)
 
-## Testing across all packages
-
-To run all tests for all packages, use the following command:
-
-```bash
-yarn test
-```
-
-Tests for individual packages can be run from within the individual package's directory. Running all tests is useful for continuous integration environments as well as verifying changes to common dependencies does not break packages.
-
-For example, run the above command at the root of the project after making changes to a component in the component package to ensure that others packages are compatible with the changes made.
-
 ## Continuous Integration
 
 Travis CI is configured to have a build pipeline for the component packages and one for each project year. Although most
@@ -276,5 +280,5 @@ a specific set of packages, a Makefile is used instead.
 
 Travis CI will deploy docker containers to ECS for each project year whenever the `master` branch builds successfully.
 
-## Notes
+# Notes
 **✨Demo Day⁇✨** _You may notice references to Demo Day! Our most recent Demo Day was September 11, 2019 in Portland, OR. [See highlights!](https://www.youtube.com/watch?v=99RFAwCJg-o)_
