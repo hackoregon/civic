@@ -72,6 +72,7 @@
     ]
   },
   "dependencies": {
+    "@changesets/cli": "^2.11.2",
     "@emotion/babel-preset-css-prop": "^10.0.27",
     "@storybook/addon-essentials": "^6.0.21",
     "@storybook/addon-links": "^6.0.21",
