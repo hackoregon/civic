@@ -1,0 +1,30 @@
+name: Lint
+
+on: [push]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+        with:
+          fetch-depth: 0
+
+      - name: Read .nvmrc
+        run: echo ::set-output name=NVMRC::$(cat .nvmrc)
+        id: nvm
+
+      - name: Use Node
+        uses: actions/setup-node@v1
+        with:
+          always-auth: true
+          registry-url: https://registry.npmjs.org
+          node-version: '${{ steps.nvm.outputs.NVMRC }}'
+
+      - name: Install deps and build (with cache)
+        uses: bahmutov/npm-install@v1     
+
+      - name: Lint changed packages
+        run: yarn lint:changed

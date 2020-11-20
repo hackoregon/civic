@@ -38,6 +38,7 @@
     "eslint-check": "eslint --print-config . | eslint-config-prettier-check",
     "in": "lerna run --scope",
     "lint": "lerna run lint --no-bail",
+    "lint:changed": "lerna run lint --since origin/master --include-dependents --stream --concurrency 1",
     "lint:fix": "lerna run lint --no-bail -- --fix",
     "new-card": "yarn hygen api-story-card with-prompt && yarn",
     "new-card:local-data": "yarn hygen local-data-story-card with-prompt && yarn",
@@ -52,6 +53,7 @@
     "start": "node scripts/start",
     "storybook": "BABEL_ENV=esm start-storybook -p 6006",
     "test": "lerna exec yarn test --no-bail",
+    "test:changed": "lerna run test --since origin/master --include-dependents --stream --concurrency 1",
     "travis": "make travis",
     "watch": "lerna run --parallel watch"
   },
