@@ -1,8 +1,9 @@
 name: "Chromatic"
 on: push
-    paths:
-    - '**.js'
-    - '**.css'
+    paths-ignore:
+    - '**.yml'
+    - '**.md'
+    - 'Makefile'
 
 jobs:
   test:
