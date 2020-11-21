@@ -7,5 +7,6 @@ module.exports = {
   variants: {
     extend: {}
   },
-  plugins: []
+  // eslint-disable-next-line
+  plugins: [require("@tailwindcss/ui")]
 };
