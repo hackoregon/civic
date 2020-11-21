@@ -11,9 +11,9 @@ install:
 matrix:
   include:
 #  - env: SUITE=2017
-  - env: SUITE=2018
-  - env: SUITE=COMPONENT_LIBRARY
-  - env: SUITE=2019_DISASTER_GAME
+  # - env: SUITE=2018
+  # - env: SUITE=COMPONENT_LIBRARY
+  # - env: SUITE=2019_DISASTER_GAME
 script:
 - NODE_OPTIONS=--max_old_space_size=4096 yarn run travis
 after_success:
