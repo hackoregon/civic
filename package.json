@@ -51,7 +51,7 @@
     "publish-major": "lerna publish bump major --yes",
     "publish-minor": "lerna publish bump minor --yes",
     "publish-patch": "lerna publish bump patch --yes",
-    "release": "'changeset publish",    
+    "release": "changeset publish",    
     "start": "node scripts/start",
     "storybook": "BABEL_ENV=esm start-storybook -p 6006",
     "test": "lerna exec yarn test --no-bail",
