@@ -2,6 +2,12 @@
 
 This is the home of the front-end code for the [CIVIC Platform](https://civicplatform.org/). It's organized in a monorepo using Yarn Workspaces, but it's ok if you don't know what that means yet.
 
+# ⚡ Rapid iteration in progress!
+
+Currently, we're rapidly iterating to prepare improve the experience for future development! This might not be the best time to hop in as a first time contributor.
+
+If you're interested in what we're doing and want to hear more when we're ready for more collaborative contributions, visit [Civic Software Foundation](https://civicsoftwarefoundation.org) and join our mailing list or apply to volunteer.
+
 # Let's make this better, together!
 
 Civic magic happens when we work together. We welcome your collaborative contributions. We also have a [more technical contribution guide](https://github.com/hackoregon/civic/blob/master/CONTRIBUTING.md).
@@ -281,4 +287,5 @@ a specific set of packages, a Makefile is used instead.
 Travis CI will deploy docker containers to ECS for each project year whenever the `master` branch builds successfully. [Storybook](https://master--5f55eec3d7d83100229d47fe.chromatic.com) also deploys via [Chromatic](https://www.chromatic.com/) when `master` builds successfully.
 
 # Notes
+
 **✨Demo Day⁇✨** _You may notice references to Demo Day! Our most recent Demo Day was September 11, 2019 in Portland, OR. [See highlights!](https://www.youtube.com/watch?v=99RFAwCJg-o)_
