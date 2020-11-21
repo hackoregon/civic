@@ -18,7 +18,8 @@
     "build:cjs": "babel src --out-dir dist --copy-files --no-comments",
     "build": "BABEL_ENV=esm yarn run build:esm && BABEL_ENV=cjs yarn run build:cjs",
     "configure": "yarn run build",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "prepublish": "yarn build"
   },
   "license": "MIT",
   "dependencies": {

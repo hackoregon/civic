@@ -13,6 +13,7 @@
     "test": "BABEL_ENV=test mocha --opts ./mocha.options ./src/**/*.test.js",
     "test:watch": "yarn test -w",
     "lint": "eslint src stories",
+    "prepublish": "yarn build",
     "storybook": "node scripts/storybook.js",
     "start": "node scripts/start.js",
     "watch": "BABEL_ENV=cjs babel src --out-dir dist --copy-files --no-comments --watch --skip-initial-build"
