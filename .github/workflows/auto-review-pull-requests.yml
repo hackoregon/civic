@@ -1,13 +1,13 @@
-name: Automatic pull request review
+name: Automatically review pull request
 on: [pull_request]
 jobs:
-  automate-pullrequest-review:
+  auto-review-pull-request:
     runs-on: ubuntu-latest
     steps:
-      - name: Approve pull request
+      - name: Approve pull requests from approved actors
         if: github.actor == 'jaronheard'
         uses: andrewmusgrave/automatic-pull-request-review@0.0.2
         with:
           repo-token: '${{ secrets.GITHUB_TOKEN }}'
           event: APPROVE
-          body: 'To go fast, go alone. To go far, go together. Right now we're moving fast ⚡️'
+          body: 'To go fast, go alone.'
