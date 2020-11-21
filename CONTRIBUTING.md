@@ -149,5 +149,7 @@ When making changes to platform packages, make sure to test changes against proj
 Once a change has been implemented and tested, [open a Pull Request](https://help.github.com/articles/about-pull-requests/) on Github. Explain what
 the change is and why it was made. Include screenshots when relevant, and never merge without first getting a design review and a code review!
 
+To keep your PR up to date automatically, apply the `automerge` label. [Kodiak](https://kodiakhq.com/) will automatically keep your branches up to date and merge at the appropriate time.
+
 Finishing a task and getting it merged is incredibly rewarding, and every contribution, no matter how small, assists in Hack Oregon's mission to
 build civic data projects!
