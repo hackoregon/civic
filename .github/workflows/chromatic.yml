@@ -1,5 +1,9 @@
 name: "Chromatic"
 on: push
+    paths-ignore:
+    - '**.yml'
+    - '**.md'
+    - 'Makefile'
 
 jobs:
   test:
