@@ -40,6 +40,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-           
 
+      - name: Install dependencies and build packages
+        run: yarn bootstrap
+        
       - name: Create Release Pull Request or Publish to npm
         id: changesets
         uses: changesets/action@master
