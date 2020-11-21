@@ -1,5 +1,8 @@
 name: "Chromatic"
 on: push
+    paths:
+    - '**.js'
+    - '**.css'
 
 jobs:
   test:
