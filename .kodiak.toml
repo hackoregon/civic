@@ -1,0 +1,5 @@
+version = 1
+
+[merge.message]
+title = "pull_request_title" # default: "github_default"
+body = "pull_request_body" # default: "github_default"
