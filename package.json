@@ -54,7 +54,8 @@
     "publish-patch": "lerna publish bump patch --yes",
     "release": "changeset publish",
     "start": "node scripts/start",
-    "storybook": "BABEL_ENV=esm start-storybook -p 6006",
+    "storybook": "start-storybook -p 6006 --quiet",
+    "storybook-debug-webpack": "BABEL_ENV=esm start-storybook -p 6006 --debug-webpack",
     "test": "lerna exec yarn test --no-bail",
     "travis": "make travis",
     "watch": "lerna run --parallel watch"
