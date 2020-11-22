@@ -83,15 +83,15 @@
     "@storybook/node-logger": "^6.0.21",
     "@storybook/react": "^6.0.21",
     "@storybook/source-loader": "^6.0.21",
-    "raw-loader": "^4.0.1"
+    "raw-loader": "^4.0.1",
+    "twin.macro": "^1.12.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.0",
     "@storybook/addon-a11y": "^6.0.21",
     "@storybook/storybook-deployer": "^2.3.0",
-    "@tailwindcssinjs/macro": "^0.17.0",
-    "autoprefixer": "^9",
+    "autoprefixer": "^9.8.6",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.5.0",
     "babel-loader": "^8.1.0",
