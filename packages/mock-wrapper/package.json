@@ -1,6 +1,6 @@
 {
   "name": "@hackoregon/mock-wrapper",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "A simple way to wrap a project as if it is in a year package",
   "main": "dist/index.js",
   "modules": "es/index.js",
