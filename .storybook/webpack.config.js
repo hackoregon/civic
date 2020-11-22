@@ -1,9 +1,7 @@
 const webpack = require("webpack");
-const autoprefixer = require("autoprefixer");
 const {
   createConfig,
   match,
-  css,
   postcss,
   file,
   customConfig,
@@ -15,9 +13,9 @@ module.exports = createConfig([
   match(
     ["*.css"],
     [
-      css(),
       postcss({
-        plugins: [autoprefixer({ overrideBrowserslist: ["last 2 versions"] })]
+        sourceMap: true,
+        config: "../"
       })
     ]
   ),
