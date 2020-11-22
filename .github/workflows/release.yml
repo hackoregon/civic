@@ -56,8 +56,7 @@ jobs:
         if: steps.changesets.outputs.published != 'true'
         run: |
           git checkout master
-          yarn version:canary
-          yarn release:canary
+          yarn publish-canary
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
