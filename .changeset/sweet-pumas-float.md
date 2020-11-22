@@ -1,5 +1,4 @@
 ---
-"@hackoregon/component-library": patch
 "@hackoregon/mock-wrapper": patch
 "@hackoregon/ui-brand": patch
 "@hackoregon/ui-cards": patch
