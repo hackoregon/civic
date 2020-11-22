@@ -6,6 +6,7 @@ dist
 es
 lib-cov
 package.json
+styles
 
 *.log*
 .lock-wscript

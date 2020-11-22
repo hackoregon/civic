@@ -27,6 +27,7 @@
     "build-packages": "lerna run prepublish",
     "build-storybook": "BABEL_ENV=esm STORYBOOK_ENV=new build-storybook",
     "build-netlify": "yarn workspace @hackoregon/component-library build && yarn workspace @hackoregon/mock-wrapper build && yarn workspace @hackoregon/2018 build && yarn copy-redirects",
+    "build-tailwind": "postcss styles/base.css -o styles/tailwind.css",
     "card": "yarn new-card",
     "card:local-data": "yarn new-card:local-data",
     "card:minimal": "yarn new-card:minimal",

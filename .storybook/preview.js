@@ -1,6 +1,7 @@
 import React from "react";
 import { Global } from "@emotion/core";
 import { BrandTheme, BrandColors } from "@hackoregon/ui-themes";
+import "../styles/tailwind.css";
 
 // Override background color on HTML element so that Storybook backgrounds aren't overriden
 const StorybookBrandTheme = BrandTheme;
