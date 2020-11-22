@@ -1,6 +1,6 @@
 {
   "name": "@hackoregon/utils",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "sideEffects": false,
   "description": "Common utils for CIVIC",
   "main": "dist/index.js",

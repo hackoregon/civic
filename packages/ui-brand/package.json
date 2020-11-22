@@ -1,7 +1,7 @@
 {
   "name": "@hackoregon/ui-brand",
   "sideEffects": false,
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Brand assets for CIVIC",
   "main": "dist/index.js",
   "modules": "es/index.js",
@@ -25,7 +25,7 @@
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.0",
     "@babel/register": "^7.0.0",
-    "@hackoregon/ui-docs": "^0.0.4",
+    "@hackoregon/ui-docs": "^0.0.5",
     "@storybook/addon-a11y": "^6.0.21",
     "@storybook/react": "^6.0.21",
     "chai": "^4.2.0",
@@ -43,8 +43,8 @@
   },
   "dependencies": {
     "@emotion/core": "^10.0.15",
-    "@hackoregon/ui-themes": "^0.0.4",
-    "@hackoregon/utils": "^0.0.4",
+    "@hackoregon/ui-themes": "^0.0.5",
+    "@hackoregon/utils": "^0.0.5",
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4"

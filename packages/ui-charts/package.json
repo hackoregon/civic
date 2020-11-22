@@ -1,6 +1,6 @@
 {
   "name": "@hackoregon/ui-charts",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "sideEffects": false,
   "description": "Common library for CIVIC chart components",
   "main": "dist/index.js",
@@ -44,9 +44,9 @@
   },
   "dependencies": {
     "@emotion/core": "^10.0.15",
-    "@hackoregon/ui-brand": "^0.0.4",
-    "@hackoregon/ui-themes": "^0.0.4",
-    "@hackoregon/utils": "^0.0.4",
+    "@hackoregon/ui-brand": "^0.0.5",
+    "@hackoregon/ui-themes": "^0.0.5",
+    "@hackoregon/utils": "^0.0.5",
     "emotion-theming": "^10.0.14",
     "lodash": "^4.17.11",
     "prop-types": "^15.7.2",
