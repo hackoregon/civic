@@ -1,5 +1,6 @@
 name: "Chromatic"
-on: push
+on:
+ push:
     paths-ignore:
     - '**.yml'
     - '**.md'
