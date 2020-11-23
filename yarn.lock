@@ -17572,10 +17572,20 @@ prettier-linter-helpers@^1.0.0:
   dependencies:
     fast-diff "^1.1.2"
 
-prettier@1.16.4:
-  version "1.16.4"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.16.4.tgz#73e37e73e018ad2db9c76742e2647e21790c9717"
-  integrity sha512-ZzWuos7TI5CKUeQAtFd6Zhm2s6EpAD/ZLApIhsF9pRvRtM1RFo61dM/4MSRUA0SuLugA/zgrZD8m0BaY46Og7g==
+prettier-plugin-tailwind@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/prettier-plugin-tailwind/-/prettier-plugin-tailwind-2.2.0.tgz#d419cf9951b97e9787b6903848ed8ee7dbecb602"
+  integrity sha512-u87DzWjbjgg37uAYeJPf1cIOdo0xEmeGrHX6m9csb16zQx0Oo1hu06pZlSQFiN/9a+hWya6VRSiwNq0goRitYw==
+  dependencies:
+    prettier "^2.1.2"
+    svelte-prettier-plugin "npm:prettier-plugin-svelte"
+    tailwind-classes-sorter "^0.2.2"
+    tailwindcss "^1.8.13"
+
+prettier@2.2.0, prettier@^2.1.2:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.2.0.tgz#8a03c7777883b29b37fb2c4348c66a78e980418b"
+  integrity sha512-yYerpkvseM4iKD/BXLYUkQV5aKt4tQPqaGW6EsZjzyu0r7sVZZNPJW4Y8MyKmicp6t42XUPcBVA+H6sB3gqndw==
 
 prettier@^1.18.2, prettier@^1.19.1:
   version "1.19.1"
@@ -20868,6 +20878,11 @@ supports-color@^7.0.0, supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
+"svelte-prettier-plugin@npm:prettier-plugin-svelte":
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/prettier-plugin-svelte/-/prettier-plugin-svelte-1.4.1.tgz#2f0f7a149190f476dc9b4ba9da8d482bd196f1e2"
+  integrity sha512-6y0m37Xw01GRf/WIHau+Kp3uXj2JB1agtEmNVKb9opMy34A6OMOYhfneVpNIlrghQSw/jIV+t3e5Ngt4up2CMA==
+
 svg-parser@^2.0.2:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/svg-parser/-/svg-parser-2.0.4.tgz#fdc2e29e13951736140b76cb122c8ee6630eb6b5"
@@ -20933,7 +20948,14 @@ table@^5.2.3:
     slice-ansi "^2.1.0"
     string-width "^3.0.0"
 
-tailwindcss@^1.9.6:
+tailwind-classes-sorter@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/tailwind-classes-sorter/-/tailwind-classes-sorter-0.2.2.tgz#c7ca8ba64e1090ec2d216b19aaa659dbf86f0834"
+  integrity sha512-8NAZiQO+c6EG6fPUyIl1V+hOOHyPHhhRNb5I0RulIoSVkegjbhhb4edDJ7DHqIP5oYzl7bhj8c3gwGmqu7hRDQ==
+  dependencies:
+    find-up "^5.0.0"
+
+tailwindcss@^1.8.13, tailwindcss@^1.9.6:
   version "1.9.6"
   resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-1.9.6.tgz#0c5089911d24e1e98e592a31bfdb3d8f34ecf1a0"
   integrity sha512-nY8WYM/RLPqGsPEGEV2z63riyQPcHYZUJpAwdyBzVpxQHOHqHE+F/fvbCeXhdF1+TA5l72vSkZrtYCB9hRcwkQ==
