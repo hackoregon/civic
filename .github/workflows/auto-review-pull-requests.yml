@@ -2,6 +2,7 @@ name: Automatically review pull request
 on: [pull_request]
 jobs:
   auto-review-pull-request:
+    if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     steps:
       - name: Approve pull requests from approved actors
