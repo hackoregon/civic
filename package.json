@@ -154,6 +154,7 @@
     "sinon-chai": "^3.3.0",
     "style-loader": "^0.23.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+    "@tailwindcss/typography": "^0.3",
     "url-loader": "^1.1.2",
     "version-bump-prompt": "^3.1.0",
     "watch": "^1.0.2",

@@ -13,8 +13,3 @@ export default {
 const Template = args => <KitchenSink {...args} />;
 
 export const Standard = Template.bind({});
-
-export const Magritte = Template.bind({});
-Magritte.args = {
-  message: "This is not a pipe |"
-};

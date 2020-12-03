@@ -6,28 +6,13 @@ module.exports = {
       transparent: "transparent",
       black: "#201024",
       white: "#ffffff",
-      red: {
-        50: "#fef2f2",
-        100: "#fee2e2",
-        200: "#fecaca",
-        300: "#fca5a5",
-        400: "#f87171",
-        500: "#ef4444",
-        600: "#dc2626",
-        700: "#b91c1c",
-        800: "#991b1b",
-        900: "#7f1d1d"
+      gray: {
+        light: "#F3F2F3",
+        DEFAULT: "#AAA4AB",
+        dark: "#726371"
       },
-      primary: "#201024",
-      secondary: "#DC4556",
-      tertiarty: "#201024",
-      medium: "#AAA4AB",
-      subdued: "#F3F2F3",
-      action: {
-        DEFAULT: "#1E62BD",
-        plum: "#726371"
-      },
-      pink: "#DC4556",
+      accent: "#DC4556",
+      red: "#DC4556",
       blue: "#1E62BD",
       green: "#19B7AA",
       purple: "#721D7C",
@@ -37,12 +22,28 @@ module.exports = {
       sans: ["Roboto Condensed", "sans-serif"],
       serif: ["Merriweather", "serif"]
     },
-    extend: {}
+    boxShadow: {
+      DEFAULT:
+        "0px 3px 1px -2px rgba(0,0,0,0.2),0px 2px 2px 0px rgba(0,0,0,0.14),0px 1px 5px 0px rgba(0,0,0,0.12)",
+      hover:
+        "0px 2px 4px -1px rgba(0,0,0,0.2),0px 4px 5px 0px rgba(0,0,0,0.14),0px 1px 10px 0px rgba(0,0,0,0.12)",
+      active:
+        "0px 5px 5px -3px rgba(0,0,0,0.2),0px 8px 10px 1px rgba(0,0,0,0.14),0px 3px 14px 2px rgba(0,0,0,0.12)"
+    },
+    extend: {
+      typography: theme => ({
+        DEFAULT: {
+          css: {
+            color: theme("colors.red")
+          }
+        }
+      })
+    }
   },
   variants: {
     extend: {
       backgroundColor: ["active"]
     }
   },
-  plugins: []
+  plugins: [require("@tailwindcss/typography")]
 };
