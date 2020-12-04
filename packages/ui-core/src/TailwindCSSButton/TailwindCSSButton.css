@@ -1,6 +1,0 @@
-.wrapper {
-  @apply grid items-center justify-center h-screen;
-}
-.btn {
-  @apply relative flex justify-center px-4 py-2 w-64 min-w-full text-white text-sm font-bold leading-4 border border-transparent focus:border-transparent rounded-md focus:outline-none transition duration-150 ease-in-out focus:ring-purple focus:ring-2;
-}
