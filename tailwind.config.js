@@ -12,15 +12,36 @@ module.exports = {
         dark: "#726371"
       },
       accent: "#DC4556",
-      red: "#DC4556",
-      blue: "#1E62BD",
-      green: "#19B7AA",
-      purple: "#721D7C",
-      yellow: "#FFB226"
+      red: {
+        light: "#F59AA5",
+        DEFAULT: "#DC4556",
+        dark: "#A33340"
+      },
+      blue: {
+        light: "#87AFE6",
+        DEFAULT: "#1E62BD",
+        dark: "#16498C"
+      },
+      green: {
+        light: "#84E3DB",
+        DEFAULT: "#19B7AA",
+        dark: "#13877E"
+      },
+      purple: {
+        light: "#BC89C2",
+        DEFAULT: "#721D7C",
+        dark: "#3C0B41"
+      },
+      yellow: {
+        light: "#FFDC88",
+        DEFAULT: "#FFB226",
+        dark: "#BD841C"
+      }
     },
     fontFamily: {
-      sans: ["Roboto Condensed", "sans-serif"],
-      serif: ["Merriweather", "serif"]
+      sans: ['"Roboto Condensed", sans-serif'],
+      serif: ['"Merriweather", serif'],
+      rubik: ['"Rubik", sans-serif']
     },
     boxShadow: {
       DEFAULT:
@@ -34,7 +55,39 @@ module.exports = {
       typography: theme => ({
         DEFAULT: {
           css: {
-            color: theme("colors.red")
+            color: theme("colors.black"),
+            a: {
+              color: theme("colors.black"),
+              fontFamily: theme("fontFamily.rubik"),
+              fontWeight: 500,
+              "&:hover": {
+                color: theme("colors.accent")
+              }
+            },
+            h1: {
+              fontFamily: theme("fontFamily.rubik"),
+              fontWeight: 300
+            },
+            h2: {
+              fontFamily: theme("fontFamily.rubik"),
+              fontWeight: 700
+            },
+            h3: {
+              fontFamily: theme("fontFamily.rubik"),
+              fontWeight: 900
+            },
+            h4: {
+              fontFamily: theme("fontFamily.rubik"),
+              fontWeight: 900
+            },
+            h5: {
+              fontFamily: theme("fontFamily.rubik"),
+              fontWeight: 700
+            },
+            h6: {
+              fontFamily: theme("fontFamily.rubik"),
+              fontWeight: 700
+            }
           }
         }
       })

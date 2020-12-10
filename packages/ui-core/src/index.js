@@ -1,6 +1,6 @@
 // COMPONENTS
 // DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator src injection
-export { KitchenSink } from "./KitchenSink/KitchenSink"; // TODO: Move to correct location
+export { CivicProse } from "./CivicProse/CivicProse"; // TODO: Move to correct location
 export { TailwindClassnameButton } from "./TailwindClassnameButton/TailwindClassnameButton"; // TODO: Move to correct location
 export { Badge } from "./Badge/Badge";
 export { Button } from "./Button/Button";
