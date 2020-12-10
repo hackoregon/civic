@@ -1,15 +1,15 @@
 import React from "react";
 
-import { KitchenSink } from "./KitchenSink";
+import { CivicProse } from "./CivicProse";
 
 // These stories serve as documentation and visual test cases
 // Component Story Format: https://storybook.js.org/docs/react/api/csf
 
 export default {
-  title: "Unsorted/Components/KitchenSink",
-  parameters: { component: KitchenSink }
+  title: "Design/Brand/CivicProse",
+  parameters: { component: CivicProse }
 };
 
-const Template = args => <KitchenSink {...args} />;
+const Template = args => <CivicProse {...args} />;
 
 export const Standard = Template.bind({});
