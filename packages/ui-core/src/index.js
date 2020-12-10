@@ -1,8 +1,7 @@
 // COMPONENTS
 // DO NOT REMOVE OR MODIFY THIS COMMENT - hygen component generator src injection
+export { CivicProse } from "./CivicProse/CivicProse"; // TODO: Move to correct location
 export { TailwindClassnameButton } from "./TailwindClassnameButton/TailwindClassnameButton"; // TODO: Move to correct location
-export { TailwindCSSButton } from "./TailwindCSSButton/TailwindCSSButton"; // TODO: Move to correct location
-export { TailwindEmotionButton } from "./TailwindEmotionButton/TailwindEmotionButton"; // TODO: Move to correct location
 export { Badge } from "./Badge/Badge";
 export { Button } from "./Button/Button";
 export { ButtonNew } from "./ButtonNew/ButtonNew";

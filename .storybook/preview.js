@@ -7,6 +7,7 @@ import "../styles/tailwind.css";
 const StorybookBrandTheme = BrandTheme;
 StorybookBrandTheme.html.backgroundColor = "inherit";
 
+// Not using with Tailwind
 const withGlobal = cb => (
   <>
     <Global styles={StorybookBrandTheme} />
@@ -25,4 +26,4 @@ export const parameters = {
   }
 };
 
-export const decorators = [withGlobal];
+export const decorators = [];
