@@ -41,6 +41,7 @@ module.exports = {
     fontFamily: {
       sans: ['"Roboto Condensed", sans-serif'],
       serif: ['"Merriweather", serif'],
+      mono: ['"Roboto Mono", mono'],
       rubik: ['"Rubik", sans-serif']
     },
     boxShadow: {
@@ -53,9 +54,11 @@ module.exports = {
     },
     extend: {
       typography: theme => ({
+        sm: { css: { fontFamily: theme("fontFamily.sans") } },
         DEFAULT: {
           css: {
             color: theme("colors.black"),
+            fontFamily: theme("fontFamily.serif"),
             a: {
               color: theme("colors.black"),
               fontFamily: theme("fontFamily.rubik"),
@@ -87,6 +90,9 @@ module.exports = {
             h6: {
               fontFamily: theme("fontFamily.rubik"),
               fontWeight: 700
+            },
+            table: {
+              fontFamily: theme("fontFamily.sans")
             }
           }
         }
@@ -98,5 +104,6 @@ module.exports = {
       backgroundColor: ["active"]
     }
   },
+  // eslint-disable-next-line
   plugins: [require("@tailwindcss/typography")]
 };
