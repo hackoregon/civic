@@ -2,13 +2,10 @@
 
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
+import PropTypes from "prop-types";
 
-const styles = {
-  container: "prose"
-};
-
-export const CivicProse = () => (
-  <article className={styles.container}>
+export const CivicProse = ({ variant }) => (
+  <article className={variant}>
     <h1>h1 Est Ullam Dolor</h1>
     <p>
       Ut <sup>est</sup> illum minus.{" "}
@@ -136,5 +133,19 @@ export const CivicProse = () => (
     </figure>
   </article>
 );
+
+CivicProse.propTypes = {
+  variant: PropTypes.oneOf(
+    "prose-sm",
+    "prose",
+    "prose-lg",
+    "prose-xl",
+    "prose-2xl"
+  )
+};
+
+CivicProse.defaultProps = {
+  variant: "prose"
+};
 
 CivicProse.displayName = "Prose";
