@@ -5,13 +5,25 @@ module.exports = {
     colors: {
       transparent: "transparent",
       black: "#201024",
-      white: "#ffffff",
+      white: "#FFFEFE",
       gray: {
-        light: "#F3F2F3",
-        DEFAULT: "#AAA4AB",
-        dark: "#726371"
+        100: "#f3f2f3",
+        200: "#dddadd",
+        300: "#c9c5c9",
+        400: "#b3adb3",
+        500: "#9d959d",
+        600: "#877d87",
+        700: "#726972",
+        800: "#5a535a",
+        900: "#423d42"
       },
-      accent: "#DC4556",
+      brand: "#DC4556",
+      accent: "#3B1054",
+      action: "#3523B8",
+      success: "#18A807",
+      error: "#F30007",
+      warning: "#D37C12",
+      informational: "#0D57A3",
       red: {
         light: "#F59AA5",
         DEFAULT: "#DC4556",
@@ -60,7 +72,7 @@ module.exports = {
             color: theme("colors.black"),
             fontFamily: theme("fontFamily.serif"),
             a: {
-              color: theme("colors.black"),
+              color: theme("colors.action"),
               fontFamily: theme("fontFamily.rubik"),
               fontWeight: 500,
               "&:hover": {

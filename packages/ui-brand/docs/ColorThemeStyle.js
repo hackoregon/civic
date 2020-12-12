@@ -1,14 +1,8 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import PropTypes from "prop-types";
-import {
-  BrandColors,
-  VisualizationColors,
-  BrandTheme
-} from "@hackoregon/ui-themes";
-import { theme } from "../../../tailwind.config.js";
-
-console.log(theme);
+import { BrandTheme } from "@hackoregon/ui-themes";
+import { theme } from "../../../tailwind.config";
 
 const solidColorSample = css`
   display: flex;
@@ -38,6 +32,29 @@ const BrandColorSample = ({ color, name, description }) => (
     <div css={colorDescription}>
       <h4>{name}</h4>
       <p>Hex: {color}</p>
+      {description ? <p>{description}</p> : null}
+    </div>
+  </div>
+);
+
+const BrandColorTailwindSample = ({ color, name, description, weights }) => (
+  <div css={solidColorSample}>
+    <div>
+      {weights.map(weight => (
+        <div
+          css={css`
+            ${colorBlock} background-color: ${color[weight]};
+          `}
+        />
+      ))}
+    </div>
+    <div css={colorDescription}>
+      <h4>{name}</h4>
+      {weights.map(weight => (
+        <p>
+          {weight}: {color[weight]}
+        </p>
+      ))}
       {description ? <p>{description}</p> : null}
     </div>
   </div>
@@ -84,16 +101,21 @@ BrandColorShadedSample.propTypes = {
   description: PropTypes.string
 };
 
+BrandColorTailwindSample.propTypes = {
+  color: PropTypes.object.isRequired,
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string,
+  weights: PropTypes.arrayOf(PropTypes.number).isRequired
+};
+
 BrandColorSample.displayName = "BrandColorSample";
-
-const categoricalColors = VisualizationColors.categorical;
-
 const ColorThemeStyle = () => (
-  <div>
+  <div className="prose prose-lg">
     <h1>Color Theme</h1>
     <h2>Brand</h2>
     <BrandColorSample color={theme.colors.black} name="Black" description="" />
     <BrandColorSample color={theme.colors.white} name="White" description="" />
+    <BrandColorSample color={theme.colors.brand} name="Brand" description="" />
     <BrandColorSample
       color={theme.colors.accent}
       name="Accent"
@@ -101,12 +123,16 @@ const ColorThemeStyle = () => (
     />
 
     <hr />
-
-    <BrandColorShadedSample
+    <h2>Grays</h2>
+    <BrandColorTailwindSample
       color={theme.colors.gray}
       name="Gray"
       description=""
+      weights={[100, 200, 300, 400, 500, 600, 700, 800, 900]}
     />
+
+    <hr />
+    <h2>Categorical Colors</h2>
     <BrandColorShadedSample
       color={theme.colors.red}
       name="Red"
@@ -130,6 +156,24 @@ const ColorThemeStyle = () => (
     <BrandColorShadedSample
       color={theme.colors.yellow}
       name="Yellow"
+      description=""
+    />
+    <hr />
+    <h2>Success & Error</h2>
+    <BrandColorSample color={theme.colors.error} name="Error" description="" />
+    <BrandColorSample
+      color={theme.colors.warning}
+      name="Warning"
+      description=""
+    />
+    <BrandColorSample
+      color={theme.colors.success}
+      name="Success"
+      description=""
+    />
+    <BrandColorSample
+      color={theme.colors.informational}
+      name="Informational"
       description=""
     />
   </div>
