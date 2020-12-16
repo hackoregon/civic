@@ -66,42 +66,71 @@ module.exports = {
     },
     extend: {
       typography: theme => ({
-        sm: { css: { fontFamily: theme("fontFamily.sans") } },
+        sm: {
+          css: {
+            fontFamily: theme("fontFamily.sans"),
+            h1: {
+              fontFamily: theme("fontFamily.sans"),
+              fontWeight: 700
+            },
+            h2: {
+              fontFamily: theme("fontFamily.sans"),
+              fontWeight: 700
+            },
+            h3: {
+              fontFamily: theme("fontFamily.sans"),
+              fontWeight: 700
+            },
+            h4: {
+              fontFamily: theme("fontFamily.sans"),
+              fontWeight: 700
+            },
+            h5: {
+              fontFamily: theme("fontFamily.sans"),
+              fontWeight: 700
+            },
+            h6: {
+              fontFamily: theme("fontFamily.sans"),
+              fontWeight: 700
+            }
+          }
+        },
         DEFAULT: {
           css: {
             color: theme("colors.black"),
             fontFamily: theme("fontFamily.serif"),
             a: {
               color: theme("colors.action"),
-              fontFamily: theme("fontFamily.rubik"),
-              fontWeight: 500,
+              fontWeight: "bold",
+              textDecoration: "none",
               "&:hover": {
-                color: theme("colors.accent")
+                color: theme("colors.accent"),
+                textDecoration: "underline"
               }
             },
             h1: {
               fontFamily: theme("fontFamily.rubik"),
-              fontWeight: 300
+              fontWeight: 500
             },
             h2: {
               fontFamily: theme("fontFamily.rubik"),
-              fontWeight: 700
+              fontWeight: 400
             },
             h3: {
               fontFamily: theme("fontFamily.rubik"),
-              fontWeight: 900
+              fontWeight: 500
             },
             h4: {
               fontFamily: theme("fontFamily.rubik"),
-              fontWeight: 900
+              fontWeight: 400
             },
             h5: {
               fontFamily: theme("fontFamily.rubik"),
-              fontWeight: 700
+              fontWeight: 400
             },
             h6: {
               fontFamily: theme("fontFamily.rubik"),
-              fontWeight: 700
+              fontWeight: 300
             },
             table: {
               fontFamily: theme("fontFamily.sans")

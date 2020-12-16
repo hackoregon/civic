@@ -13,12 +13,14 @@ export default {
 const Template = args => <CivicProse {...args} />;
 
 export const Small = Template.bind({});
-Small.args = { variant: "prose prose-sm" };
+Small.args = { variant: "prose-sm" };
 export const Standard = Template.bind({});
-Standard.args = { variant: "prose" };
+Standard.args = {};
 export const Large = Template.bind({});
-Large.args = { variant: "prose prose-lg" };
+Large.args = { variant: "prose-lg" };
 export const ExtraLarge = Template.bind({});
-ExtraLarge.args = { variant: "prose prose-xl" };
+ExtraLarge.args = { variant: "prose-xl" };
 export const DoubleExtraLarge = Template.bind({});
-DoubleExtraLarge.args = { variant: "prose prose-2xl" };
+DoubleExtraLarge.args = { variant: "prose-2xl" };
+export const ExampleLargeSans = Template.bind({});
+ExampleLargeSans.args = { variant: "prose-lg font-sans" };

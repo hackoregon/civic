@@ -611,13 +611,13 @@ video {
 
 .prose a{
   color: #3523B8;
-  text-decoration: underline;
-  font-weight: 500;
-  font-family: "Rubik", sans-serif;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 .prose a:hover{
   color: #3B1054;
+  text-decoration: underline;
 }
 
 .prose strong{
@@ -690,7 +690,7 @@ video {
 
 .prose h1{
   color: #423d42;
-  font-weight: 300;
+  font-weight: 500;
   font-size: 2.25em;
   margin-top: 0;
   margin-bottom: 0.8888889em;
@@ -700,7 +700,7 @@ video {
 
 .prose h2{
   color: #423d42;
-  font-weight: 700;
+  font-weight: 400;
   font-size: 1.5em;
   margin-top: 2em;
   margin-bottom: 1em;
@@ -710,7 +710,7 @@ video {
 
 .prose h3{
   color: #423d42;
-  font-weight: 900;
+  font-weight: 500;
   font-size: 1.25em;
   margin-top: 1.6em;
   margin-bottom: 0.6em;
@@ -720,7 +720,7 @@ video {
 
 .prose h4{
   color: #423d42;
-  font-weight: 900;
+  font-weight: 400;
   margin-top: 1.5em;
   margin-bottom: 0.5em;
   line-height: 1.5;
@@ -949,12 +949,12 @@ video {
 
 .prose h5{
   font-family: "Rubik", sans-serif;
-  font-weight: 700;
+  font-weight: 400;
 }
 
 .prose h6{
   font-family: "Rubik", sans-serif;
-  font-weight: 700;
+  font-weight: 300;
 }
 
 .prose-sm{
@@ -985,6 +985,8 @@ video {
   margin-top: 0;
   margin-bottom: 0.8em;
   line-height: 1.2;
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 700;
 }
 
 .prose-sm h2{
@@ -992,6 +994,8 @@ video {
   margin-top: 1.6em;
   margin-bottom: 0.8em;
   line-height: 1.4;
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 700;
 }
 
 .prose-sm h3{
@@ -999,12 +1003,16 @@ video {
   margin-top: 1.5555556em;
   margin-bottom: 0.4444444em;
   line-height: 1.5555556;
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 700;
 }
 
 .prose-sm h4{
   margin-top: 1.4285714em;
   margin-bottom: 0.5714286em;
   line-height: 1.4285714;
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 700;
 }
 
 .prose-sm img{
@@ -1182,6 +1190,16 @@ video {
 
 .prose-sm{
   font-family: "Roboto Condensed", sans-serif;
+}
+
+.prose-sm h5{
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 700;
+}
+
+.prose-sm h6{
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 700;
 }
 
 .prose-lg{
@@ -23764,13 +23782,13 @@ video {
 
   .sm\:prose a{
     color: #3523B8;
-    text-decoration: underline;
-    font-weight: 500;
-    font-family: "Rubik", sans-serif;
+    text-decoration: none;
+    font-weight: bold;
   }
 
   .sm\:prose a:hover{
     color: #3B1054;
+    text-decoration: underline;
   }
 
   .sm\:prose strong{
@@ -23843,7 +23861,7 @@ video {
 
   .sm\:prose h1{
     color: #423d42;
-    font-weight: 300;
+    font-weight: 500;
     font-size: 2.25em;
     margin-top: 0;
     margin-bottom: 0.8888889em;
@@ -23853,7 +23871,7 @@ video {
 
   .sm\:prose h2{
     color: #423d42;
-    font-weight: 700;
+    font-weight: 400;
     font-size: 1.5em;
     margin-top: 2em;
     margin-bottom: 1em;
@@ -23863,7 +23881,7 @@ video {
 
   .sm\:prose h3{
     color: #423d42;
-    font-weight: 900;
+    font-weight: 500;
     font-size: 1.25em;
     margin-top: 1.6em;
     margin-bottom: 0.6em;
@@ -23873,7 +23891,7 @@ video {
 
   .sm\:prose h4{
     color: #423d42;
-    font-weight: 900;
+    font-weight: 400;
     margin-top: 1.5em;
     margin-bottom: 0.5em;
     line-height: 1.5;
@@ -24102,12 +24120,12 @@ video {
 
   .sm\:prose h5{
     font-family: "Rubik", sans-serif;
-    font-weight: 700;
+    font-weight: 400;
   }
 
   .sm\:prose h6{
     font-family: "Rubik", sans-serif;
-    font-weight: 700;
+    font-weight: 300;
   }
 
   .sm\:prose-sm{
@@ -24138,6 +24156,8 @@ video {
     margin-top: 0;
     margin-bottom: 0.8em;
     line-height: 1.2;
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
   }
 
   .sm\:prose-sm h2{
@@ -24145,6 +24165,8 @@ video {
     margin-top: 1.6em;
     margin-bottom: 0.8em;
     line-height: 1.4;
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
   }
 
   .sm\:prose-sm h3{
@@ -24152,12 +24174,16 @@ video {
     margin-top: 1.5555556em;
     margin-bottom: 0.4444444em;
     line-height: 1.5555556;
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
   }
 
   .sm\:prose-sm h4{
     margin-top: 1.4285714em;
     margin-bottom: 0.5714286em;
     line-height: 1.4285714;
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
   }
 
   .sm\:prose-sm img{
@@ -24335,6 +24361,16 @@ video {
 
   .sm\:prose-sm{
     font-family: "Roboto Condensed", sans-serif;
+  }
+
+  .sm\:prose-sm h5{
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
+  }
+
+  .sm\:prose-sm h6{
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
   }
 
   .sm\:prose-lg{
@@ -46839,13 +46875,13 @@ video {
 
   .md\:prose a{
     color: #3523B8;
-    text-decoration: underline;
-    font-weight: 500;
-    font-family: "Rubik", sans-serif;
+    text-decoration: none;
+    font-weight: bold;
   }
 
   .md\:prose a:hover{
     color: #3B1054;
+    text-decoration: underline;
   }
 
   .md\:prose strong{
@@ -46918,7 +46954,7 @@ video {
 
   .md\:prose h1{
     color: #423d42;
-    font-weight: 300;
+    font-weight: 500;
     font-size: 2.25em;
     margin-top: 0;
     margin-bottom: 0.8888889em;
@@ -46928,7 +46964,7 @@ video {
 
   .md\:prose h2{
     color: #423d42;
-    font-weight: 700;
+    font-weight: 400;
     font-size: 1.5em;
     margin-top: 2em;
     margin-bottom: 1em;
@@ -46938,7 +46974,7 @@ video {
 
   .md\:prose h3{
     color: #423d42;
-    font-weight: 900;
+    font-weight: 500;
     font-size: 1.25em;
     margin-top: 1.6em;
     margin-bottom: 0.6em;
@@ -46948,7 +46984,7 @@ video {
 
   .md\:prose h4{
     color: #423d42;
-    font-weight: 900;
+    font-weight: 400;
     margin-top: 1.5em;
     margin-bottom: 0.5em;
     line-height: 1.5;
@@ -47177,12 +47213,12 @@ video {
 
   .md\:prose h5{
     font-family: "Rubik", sans-serif;
-    font-weight: 700;
+    font-weight: 400;
   }
 
   .md\:prose h6{
     font-family: "Rubik", sans-serif;
-    font-weight: 700;
+    font-weight: 300;
   }
 
   .md\:prose-sm{
@@ -47213,6 +47249,8 @@ video {
     margin-top: 0;
     margin-bottom: 0.8em;
     line-height: 1.2;
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
   }
 
   .md\:prose-sm h2{
@@ -47220,6 +47258,8 @@ video {
     margin-top: 1.6em;
     margin-bottom: 0.8em;
     line-height: 1.4;
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
   }
 
   .md\:prose-sm h3{
@@ -47227,12 +47267,16 @@ video {
     margin-top: 1.5555556em;
     margin-bottom: 0.4444444em;
     line-height: 1.5555556;
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
   }
 
   .md\:prose-sm h4{
     margin-top: 1.4285714em;
     margin-bottom: 0.5714286em;
     line-height: 1.4285714;
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
   }
 
   .md\:prose-sm img{
@@ -47410,6 +47454,16 @@ video {
 
   .md\:prose-sm{
     font-family: "Roboto Condensed", sans-serif;
+  }
+
+  .md\:prose-sm h5{
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
+  }
+
+  .md\:prose-sm h6{
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
   }
 
   .md\:prose-lg{
@@ -69914,13 +69968,13 @@ video {
 
   .lg\:prose a{
     color: #3523B8;
-    text-decoration: underline;
-    font-weight: 500;
-    font-family: "Rubik", sans-serif;
+    text-decoration: none;
+    font-weight: bold;
   }
 
   .lg\:prose a:hover{
     color: #3B1054;
+    text-decoration: underline;
   }
 
   .lg\:prose strong{
@@ -69993,7 +70047,7 @@ video {
 
   .lg\:prose h1{
     color: #423d42;
-    font-weight: 300;
+    font-weight: 500;
     font-size: 2.25em;
     margin-top: 0;
     margin-bottom: 0.8888889em;
@@ -70003,7 +70057,7 @@ video {
 
   .lg\:prose h2{
     color: #423d42;
-    font-weight: 700;
+    font-weight: 400;
     font-size: 1.5em;
     margin-top: 2em;
     margin-bottom: 1em;
@@ -70013,7 +70067,7 @@ video {
 
   .lg\:prose h3{
     color: #423d42;
-    font-weight: 900;
+    font-weight: 500;
     font-size: 1.25em;
     margin-top: 1.6em;
     margin-bottom: 0.6em;
@@ -70023,7 +70077,7 @@ video {
 
   .lg\:prose h4{
     color: #423d42;
-    font-weight: 900;
+    font-weight: 400;
     margin-top: 1.5em;
     margin-bottom: 0.5em;
     line-height: 1.5;
@@ -70252,12 +70306,12 @@ video {
 
   .lg\:prose h5{
     font-family: "Rubik", sans-serif;
-    font-weight: 700;
+    font-weight: 400;
   }
 
   .lg\:prose h6{
     font-family: "Rubik", sans-serif;
-    font-weight: 700;
+    font-weight: 300;
   }
 
   .lg\:prose-sm{
@@ -70288,6 +70342,8 @@ video {
     margin-top: 0;
     margin-bottom: 0.8em;
     line-height: 1.2;
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
   }
 
   .lg\:prose-sm h2{
@@ -70295,6 +70351,8 @@ video {
     margin-top: 1.6em;
     margin-bottom: 0.8em;
     line-height: 1.4;
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
   }
 
   .lg\:prose-sm h3{
@@ -70302,12 +70360,16 @@ video {
     margin-top: 1.5555556em;
     margin-bottom: 0.4444444em;
     line-height: 1.5555556;
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
   }
 
   .lg\:prose-sm h4{
     margin-top: 1.4285714em;
     margin-bottom: 0.5714286em;
     line-height: 1.4285714;
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
   }
 
   .lg\:prose-sm img{
@@ -70485,6 +70547,16 @@ video {
 
   .lg\:prose-sm{
     font-family: "Roboto Condensed", sans-serif;
+  }
+
+  .lg\:prose-sm h5{
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
+  }
+
+  .lg\:prose-sm h6{
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
   }
 
   .lg\:prose-lg{
@@ -92989,13 +93061,13 @@ video {
 
   .xl\:prose a{
     color: #3523B8;
-    text-decoration: underline;
-    font-weight: 500;
-    font-family: "Rubik", sans-serif;
+    text-decoration: none;
+    font-weight: bold;
   }
 
   .xl\:prose a:hover{
     color: #3B1054;
+    text-decoration: underline;
   }
 
   .xl\:prose strong{
@@ -93068,7 +93140,7 @@ video {
 
   .xl\:prose h1{
     color: #423d42;
-    font-weight: 300;
+    font-weight: 500;
     font-size: 2.25em;
     margin-top: 0;
     margin-bottom: 0.8888889em;
@@ -93078,7 +93150,7 @@ video {
 
   .xl\:prose h2{
     color: #423d42;
-    font-weight: 700;
+    font-weight: 400;
     font-size: 1.5em;
     margin-top: 2em;
     margin-bottom: 1em;
@@ -93088,7 +93160,7 @@ video {
 
   .xl\:prose h3{
     color: #423d42;
-    font-weight: 900;
+    font-weight: 500;
     font-size: 1.25em;
     margin-top: 1.6em;
     margin-bottom: 0.6em;
@@ -93098,7 +93170,7 @@ video {
 
   .xl\:prose h4{
     color: #423d42;
-    font-weight: 900;
+    font-weight: 400;
     margin-top: 1.5em;
     margin-bottom: 0.5em;
     line-height: 1.5;
@@ -93327,12 +93399,12 @@ video {
 
   .xl\:prose h5{
     font-family: "Rubik", sans-serif;
-    font-weight: 700;
+    font-weight: 400;
   }
 
   .xl\:prose h6{
     font-family: "Rubik", sans-serif;
-    font-weight: 700;
+    font-weight: 300;
   }
 
   .xl\:prose-sm{
@@ -93363,6 +93435,8 @@ video {
     margin-top: 0;
     margin-bottom: 0.8em;
     line-height: 1.2;
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
   }
 
   .xl\:prose-sm h2{
@@ -93370,6 +93444,8 @@ video {
     margin-top: 1.6em;
     margin-bottom: 0.8em;
     line-height: 1.4;
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
   }
 
   .xl\:prose-sm h3{
@@ -93377,12 +93453,16 @@ video {
     margin-top: 1.5555556em;
     margin-bottom: 0.4444444em;
     line-height: 1.5555556;
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
   }
 
   .xl\:prose-sm h4{
     margin-top: 1.4285714em;
     margin-bottom: 0.5714286em;
     line-height: 1.4285714;
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
   }
 
   .xl\:prose-sm img{
@@ -93560,6 +93640,16 @@ video {
 
   .xl\:prose-sm{
     font-family: "Roboto Condensed", sans-serif;
+  }
+
+  .xl\:prose-sm h5{
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
+  }
+
+  .xl\:prose-sm h6{
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
   }
 
   .xl\:prose-lg{
@@ -116064,13 +116154,13 @@ video {
 
   .\32xl\:prose a{
     color: #3523B8;
-    text-decoration: underline;
-    font-weight: 500;
-    font-family: "Rubik", sans-serif;
+    text-decoration: none;
+    font-weight: bold;
   }
 
   .\32xl\:prose a:hover{
     color: #3B1054;
+    text-decoration: underline;
   }
 
   .\32xl\:prose strong{
@@ -116143,7 +116233,7 @@ video {
 
   .\32xl\:prose h1{
     color: #423d42;
-    font-weight: 300;
+    font-weight: 500;
     font-size: 2.25em;
     margin-top: 0;
     margin-bottom: 0.8888889em;
@@ -116153,7 +116243,7 @@ video {
 
   .\32xl\:prose h2{
     color: #423d42;
-    font-weight: 700;
+    font-weight: 400;
     font-size: 1.5em;
     margin-top: 2em;
     margin-bottom: 1em;
@@ -116163,7 +116253,7 @@ video {
 
   .\32xl\:prose h3{
     color: #423d42;
-    font-weight: 900;
+    font-weight: 500;
     font-size: 1.25em;
     margin-top: 1.6em;
     margin-bottom: 0.6em;
@@ -116173,7 +116263,7 @@ video {
 
   .\32xl\:prose h4{
     color: #423d42;
-    font-weight: 900;
+    font-weight: 400;
     margin-top: 1.5em;
     margin-bottom: 0.5em;
     line-height: 1.5;
@@ -116402,12 +116492,12 @@ video {
 
   .\32xl\:prose h5{
     font-family: "Rubik", sans-serif;
-    font-weight: 700;
+    font-weight: 400;
   }
 
   .\32xl\:prose h6{
     font-family: "Rubik", sans-serif;
-    font-weight: 700;
+    font-weight: 300;
   }
 
   .\32xl\:prose-sm{
@@ -116438,6 +116528,8 @@ video {
     margin-top: 0;
     margin-bottom: 0.8em;
     line-height: 1.2;
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
   }
 
   .\32xl\:prose-sm h2{
@@ -116445,6 +116537,8 @@ video {
     margin-top: 1.6em;
     margin-bottom: 0.8em;
     line-height: 1.4;
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
   }
 
   .\32xl\:prose-sm h3{
@@ -116452,12 +116546,16 @@ video {
     margin-top: 1.5555556em;
     margin-bottom: 0.4444444em;
     line-height: 1.5555556;
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
   }
 
   .\32xl\:prose-sm h4{
     margin-top: 1.4285714em;
     margin-bottom: 0.5714286em;
     line-height: 1.4285714;
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
   }
 
   .\32xl\:prose-sm img{
@@ -116635,6 +116733,16 @@ video {
 
   .\32xl\:prose-sm{
     font-family: "Roboto Condensed", sans-serif;
+  }
+
+  .\32xl\:prose-sm h5{
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
+  }
+
+  .\32xl\:prose-sm h6{
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
   }
 
   .\32xl\:prose-lg{

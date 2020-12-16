@@ -4,8 +4,30 @@
 import { jsx } from "@emotion/core";
 import PropTypes from "prop-types";
 
+/*
+  Don't wrap custom elements in the prose class!
+  
+  Instead do something like this:
+  <div class="prose">
+    PROSE
+  </div>
+
+  <div class="">
+    CUSTOM STUFF
+  </div>
+
+  <div class="prose">
+    PROSE
+  </div>
+*/
+
 export const CivicProse = ({ variant }) => (
-  <article className={variant}>
+  // Do not dynamically generating classNames using string concatengation in prod
+  // PurgeCSS will not identify classNames that are not explicit
+  // See https://tailwindcss.com/docs/optimizing-for-production
+
+  <article className={`prose ${variant}`}>
+    <pre>className=&quot;prose{variant ? ` ${variant}` : ""}&quot;</pre>
     <h1>h1 Est Ullam Dolor</h1>
     <p>
       Ut <sup>est</sup> illum minus.{" "}
@@ -135,17 +157,7 @@ export const CivicProse = ({ variant }) => (
 );
 
 CivicProse.propTypes = {
-  variant: PropTypes.oneOf(
-    "prose-sm",
-    "prose",
-    "prose-lg",
-    "prose-xl",
-    "prose-2xl"
-  )
-};
-
-CivicProse.defaultProps = {
-  variant: "prose"
+  variant: PropTypes.oneOf("prose-sm", "prose-lg", "prose-xl", "prose-2xl")
 };
 
 CivicProse.displayName = "Prose";
