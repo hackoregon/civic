@@ -33,6 +33,9 @@ app.get(
     <style>html, body { padding: 0; margin: 0; }</style>
     <!-- FontAwesome -->
     <script src="https://use.fontawesome.com/031ebbe0c7.js"></script>
+    <!-- Fathom - beautiful, simple website analytics -->
+    <script src="https://pig.civicplatform.org/script.js" data-spa="auto" data-site="XCPMILWK" defer></script>
+    <!-- / Fathom -->
   </head>
   <body style="margin:0">
     <div id="content"></div>
