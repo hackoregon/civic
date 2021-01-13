@@ -1,4 +1,4 @@
-const custom = require("./webpack.config.js");
+// const custom = require("./webpack.config.js");
 
 const STORYBOOK_ENV = process.env.STORYBOOK_ENV || "default";
 const isNew = STORYBOOK_ENV === "new";
@@ -21,14 +21,17 @@ const prettierConfig = {
 module.exports = {
   stories: [
     "../packages/ui-docs/docs/AboutUs/*.stories.mdx",
-    "../**/src/**/*.stories.js",
-    "../**/src/**/*.stories.mdx",
-    "../**/docs/**/*.stories.js",
-    "../**/docs/**/*.stories.mdx"
+    "../packages/*/src/**/*.stories.js",
+    "../packages/*/src/**/*.stories.mdx",
+    "../packages/*/docs/**/*.stories.js",
+    "../packages/*/docs/**/*.stories.mdx"
   ],
   addons: [
     "@storybook/addon-a11y",
     "@storybook/addon-essentials",
     "@storybook/addon-links"
-  ]
+  ],
+  reactOptions: {
+    fastRefresh: true
+  }
 };

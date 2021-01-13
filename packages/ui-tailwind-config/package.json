@@ -1,0 +1,29 @@
+{
+  "name": "ui-tailwind-config",
+  "version": "0.0.5",
+  "sideEffects": false,
+  "description": "A shareable Tailwind config for CIVIC projects",
+  "main": "index.js",
+  "repository": "git+https://github.com/hackoregon/civic.git",
+  "author": "jaron@civicsoftwarefoundation.org",
+  "scripts": {
+    "lint": "eslint index.js",
+    "test": "echo 'No tests!'",
+    "test:watch": "echo 'No tests!'"
+  },
+  "keywords": [
+    "civic",
+    "hackoregon"
+  ],  
+  "license": "MIT",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@tailwindcss/typography": "^0.3"
+  },
+  "peerDependencies": {
+    "tailwindcss": ">=2.0.1-compat"
+  }
+}
