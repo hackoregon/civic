@@ -328,32 +328,34 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
             </section>
           </Fragment>
         )}
-        <Fragment>
-          <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
-          <section
-            css={[sectionMarginSmall, sectionMaxWidthSmall]}
-            id="authors"
-          >
-            <h2>Who made this?</h2>
-            {/* temporary implementation, length > 4 to exclude authors: "demo" */}
-            {cardMeta.authors && cardMeta.authors.length > 4 && (
-              <Fragment>
-                <h3>Primary Authors</h3>
-                <ul>
-                  {cardMeta.authors.map(author => (
-                    <li>{author}</li>
-                  ))}
-                </ul>
-              </Fragment>
-            )}
-            <h3>2019 Hack Oregon Team</h3>
-            <img
-              css={authorPhoto}
-              src={authorsSrc}
-              alt="Pictures of people who worked on this"
-            />
-          </section>
-        </Fragment>
+        {!cardMeta.hideAuthors && (
+          <Fragment>
+            <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
+            <section
+              css={[sectionMarginSmall, sectionMaxWidthSmall]}
+              id="authors"
+            >
+              <h2>Who made this?</h2>
+              {/* temporary implementation, length > 4 to exclude authors: "demo" */}
+              {cardMeta.authors && cardMeta.authors.length > 4 && (
+                <Fragment>
+                  <h3>Primary Authors</h3>
+                  <ul>
+                    {cardMeta.authors.map(author => (
+                      <li>{author}</li>
+                    ))}
+                  </ul>
+                </Fragment>
+              )}
+              <h3>2019 Hack Oregon Team</h3>
+              <img
+                css={authorPhoto}
+                src={authorsSrc}
+                alt="Pictures of people who worked on this"
+              />
+            </section>
+          </Fragment>
+        )}
         <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
         <section css={[sectionMarginSmall, sectionMaxWidthSmall]} id="improve">
           <h2>Help make this better</h2>
