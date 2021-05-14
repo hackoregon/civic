@@ -41,7 +41,8 @@ const HousingDisplacementMeta = (/* data */) => ({
   metadataQA: null,
   resources: null,
   // authors likely an array of keys in the future
-  authors: []
+  authors: [],
+  hideAuthors: true
 });
 
 export default HousingDisplacementMeta;

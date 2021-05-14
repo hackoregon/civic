@@ -1,12 +1,14 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import { NotebookPreview } from "@hackoregon/component-library";
+import { Fragment } from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import MathJax from "react-mathjax";
 import AccordianContentContainer from "./AccordianContentContainer";
+import DataTabs from "./DataTabs";
 
-const Methodology = () => (
-  <AccordianContentContainer>
+const ContentCard = () => (
+  <Fragment>
     <p>
       This analysis aggregates tract-level population data by race from NCDB
       across the 4-county Portland region (Multnomah, Washington, Clackamas and
@@ -39,6 +41,12 @@ const Methodology = () => (
         <MathJax.Node inline formula="N_{DO}" /> = A number of some kind
       </MathJax.Provider>
     </p>
+  </Fragment>
+);
+
+const Methodology = () => (
+  <AccordianContentContainer>
+    <DataTabs Storycard={ContentCard} />
   </AccordianContentContainer>
 );
 

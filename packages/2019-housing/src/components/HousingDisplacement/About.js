@@ -5,8 +5,12 @@ import StorageIcon from "@material-ui/icons/Storage";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import { makeStyles } from "@material-ui/core/styles";
-import { BrandColors, Collapsable, Logo } from "@hackoregon/component-library";
-import { string } from "prop-types";
+import {
+  BrandColors,
+  VisualizationColors,
+  Collapsable
+} from "@hackoregon/component-library";
+import { oneOf, string } from "prop-types";
 import AccordianContentContainer from "./AccordianContentContainer";
 
 const useProjectStyles = makeStyles({
@@ -19,11 +23,19 @@ const useProjectStyles = makeStyles({
 });
 
 const datasets = [
-  { title: "Dataset A", link: "https://www.civicdatalibrary.org/" },
-  { title: "Dataset B", link: "https://www.civicdatalibrary.org/" }
+  {
+    title: "Dataset A",
+    link: "https://www.civicdatalibrary.org/",
+    color: "green"
+  },
+  {
+    title: "Dataset B",
+    link: "https://www.civicdatalibrary.org/",
+    color: "yellow"
+  }
 ];
 
-const Dataset = ({ title, link }) => {
+const Dataset = ({ title, link, color }) => {
   const classes = useProjectStyles();
 
   return (
@@ -54,10 +66,10 @@ const Dataset = ({ title, link }) => {
                   `}
                 >
                   <StorageIcon
-                    color="secondary"
                     fontSize="small"
                     css={css`
-                      margin: 1.25rem 1rem 0 1rem;
+                      margin: 1.25rem 0.5rem 0 1rem;
+                      color: ${VisualizationColors.categorical[color].hex}};
                     `}
                   />
                   <h4
@@ -68,25 +80,6 @@ const Dataset = ({ title, link }) => {
                     {title}
                   </h4>
                 </div>
-                <h4
-                  css={css`
-                    color: ${BrandColors.background.hex};
-                    margin-right: 1rem;
-                  `}
-                >
-                  <div
-                    css={css`
-                      display: inline;
-                      img {
-                        height: 1.25rem !important;
-                        margin-right: 0.5px;
-                      }
-                    `}
-                  >
-                    <Logo type="standardLogoInverted" />
-                  </div>{" "}
-                  Context
-                </h4>
               </div>
             </Collapsable.Section>
 
@@ -106,7 +99,8 @@ const Dataset = ({ title, link }) => {
 
 Dataset.propTypes = {
   title: string,
-  link: string
+  link: string,
+  color: oneOf(["pink", "green", "blue", "yellow", "purple"]).isRequired
 };
 
 const About = () => (
@@ -118,7 +112,11 @@ const About = () => (
       `}
     >
       {datasets.map(dataset => (
-        <Dataset title={dataset.title} />
+        <Dataset
+          title={dataset.title}
+          link={dataset.link}
+          color={dataset.color}
+        />
       ))}
     </div>
   </AccordianContentContainer>

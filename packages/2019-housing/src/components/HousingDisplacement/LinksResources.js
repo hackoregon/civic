@@ -6,6 +6,7 @@ import { PropTypes } from "prop-types";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { generate } from "shortid";
 import AccordianContentContainer from "./AccordianContentContainer";
+import DataTabs from "./DataTabs";
 
 const resources = [
   {
@@ -69,15 +70,39 @@ Resource.propTypes = {
   })
 };
 
+const ContentCard = () => (
+  <CollapsableSection
+    description="resources"
+    items={resources.map(item => (
+      <Resource section={item} key={generate()} />
+    ))}
+    collapseAfter={7}
+  />
+);
+
+const ContentA = () => (
+  <CollapsableSection
+    description="resources"
+    items={resources.map(item => (
+      <Resource section={item} key={generate()} />
+    ))}
+    collapseAfter={7}
+  />
+);
+
+const ContentB = () => (
+  <CollapsableSection
+    description="resources"
+    items={resources.map(item => (
+      <Resource section={item} key={generate()} />
+    ))}
+    collapseAfter={7}
+  />
+);
+
 const LinksResources = () => (
   <AccordianContentContainer>
-    <CollapsableSection
-      description="resources"
-      items={resources.map(item => (
-        <Resource section={item} key={generate()} />
-      ))}
-      collapseAfter={7}
-    />
+    <DataTabs Storycard={ContentCard} DatasetA={ContentA} DatasetB={ContentB} />
   </AccordianContentContainer>
 );
 
