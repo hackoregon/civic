@@ -266,9 +266,9 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
             css={[sectionMarginSmall, sectionMaxWidthSmall]}
             id="metadata"
           >
-            <h2>About this data</h2>
             {relatedMetadataQA ? (
               <Fragment>
+                <h2>About this data</h2>
                 {cardMeta.metadata}
                 <CollapsableSection
                   description="metadata questions"
@@ -284,19 +284,23 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
               </Fragment>
             ) : (
               cardMeta.context || (
-                <p>
-                  <em>This dataset is missing context documentation</em>
-                  <br />
-                  <br />
-                  Documenting how and why a dataset was created, what
-                  information it contains, its limitations, and possible ethical
-                  or legal concerns is paramount for data that informs decision
-                  making. If you’re an expert on this dataset, you can{" "}
-                  <a href="https://forms.gle/rggpgLGRtfaQDm5f7">
-                    add documentation
-                  </a>
-                  .
-                </p>
+                <Fragment>
+                  <h2>About this data</h2>
+                  <p>
+                    <em>This dataset is missing context documentation</em>
+                    <br />
+                    <br />
+                    Documenting how and why a dataset was created, what
+                    information it contains, its limitations, and possible
+                    ethical or legal concerns is paramount for data that informs
+                    decision making. If you’re an expert on this dataset, you
+                    can{" "}
+                    <a href="https://forms.gle/rggpgLGRtfaQDm5f7">
+                      add documentation
+                    </a>
+                    .
+                  </p>
+                </Fragment>
               )
             )}
           </section>
