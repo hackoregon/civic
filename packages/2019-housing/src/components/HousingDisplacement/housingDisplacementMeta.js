@@ -46,8 +46,9 @@ const HousingDisplacementMeta = (/* data */) => ({
       </Collapsable.Section>
     </Collapsable>
   ),
+  context: <div>Context here</div>,
   metadata: null,
-  metadataQA: "median_household_income_by_race_1990_to_2017",
+  metadataQA: null,
   resources: [
     {
       heading: "Organizations",

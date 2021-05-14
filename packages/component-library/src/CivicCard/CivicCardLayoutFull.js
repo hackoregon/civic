@@ -283,19 +283,21 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
                 />
               </Fragment>
             ) : (
-              <p>
-                <em>This dataset is missing context documentation</em>
-                <br />
-                <br />
-                Documenting how and why a dataset was created, what information
-                it contains, its limitations, and possible ethical or legal
-                concerns is paramount for data that informs decision making. If
-                you’re an expert on this dataset, you can{" "}
-                <a href="https://forms.gle/rggpgLGRtfaQDm5f7">
-                  add documentation
-                </a>
-                .
-              </p>
+              cardMeta.context || (
+                <p>
+                  <em>This dataset is missing context documentation</em>
+                  <br />
+                  <br />
+                  Documenting how and why a dataset was created, what
+                  information it contains, its limitations, and possible ethical
+                  or legal concerns is paramount for data that informs decision
+                  making. If you’re an expert on this dataset, you can{" "}
+                  <a href="https://forms.gle/rggpgLGRtfaQDm5f7">
+                    add documentation
+                  </a>
+                  .
+                </p>
+              )
             )}
           </section>
         </Fragment>
