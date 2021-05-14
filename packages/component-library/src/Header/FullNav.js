@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
 import { useState, useRef } from "react";
@@ -155,163 +156,13 @@ const FullNav = props => {
       <nav css={navStyle} aria-label="Site">
         <ul css={linkContainer}>
           <li css={listStyle}>
-            <Link to="/cards" css={linkStyle}>
-              EXPLORE CIVIC
-            </Link>
-          </li>
-          <li css={listStyle}>
-            <button
-              css={menuButton}
-              type="button"
-              ref={joinAnchorRef}
-              aria-controls="menu-list-grow"
-              aria-haspopup="true"
-              onClick={handleJoinToggle}
-            >
-              <p css={buttonText}>
-                JOIN THE MOVEMENT
-                <span>
-                  <img css={caratStyle} src={navCaret} alt="" />
-                </span>
-              </p>
-            </button>
-            <Popper
-              open={joinOpen}
-              anchorEl={joinAnchorRef.current}
-              transition
-              disablePortal
-            >
-              {({ TransitionProps, placement }) => (
-                <Grow
-                  {...TransitionProps}
-                  style={{
-                    transformOrigin:
-                      placement === "bottom" ? "center top" : "center bottom",
-                    ...dropdownStyles
-                  }}
-                >
-                  <Paper id="menu-list-grow" square>
-                    <div css={arrowUp} />
-                    <ClickAwayListener onClickAway={handleJoinClose}>
-                      <MenuList>
-                        <MenuItem
-                          onClick={handleJoinClose}
-                          style={optionText}
-                          dense
-                        >
-                          <Link
-                            to={{
-                              pathname: "/",
-                              hash: "#work-with-us"
-                            }}
-                            css={menuLink}
-                          >
-                            Work With Us
-                          </Link>
-                        </MenuItem>
-                        <MenuItem
-                          onClick={handleJoinClose}
-                          style={optionText}
-                          dense
-                        >
-                          <Link
-                            to={{
-                              pathname: "/",
-                              hash: "#become-a-contributor"
-                            }}
-                            css={menuLink}
-                          >
-                            Become a Contributor
-                          </Link>
-                        </MenuItem>
-                      </MenuList>
-                    </ClickAwayListener>
-                  </Paper>
-                </Grow>
-              )}
-            </Popper>
-          </li>
-          <li css={listStyle}>
-            <button
-              css={menuButton}
-              type="button"
-              ref={aboutAnchorRef}
-              aria-controls="menu-list-grow"
-              aria-haspopup="true"
-              onClick={handleAboutToggle}
-            >
-              <p css={buttonText}>
-                ABOUT
-                <span>
-                  <img css={caratStyle} src={navCaret} alt="" />
-                </span>
-              </p>
-            </button>
-            <Popper
-              open={aboutOpen}
-              anchorEl={aboutAnchorRef.current}
-              transition
-              disablePortal
-            >
-              {({ TransitionProps, placement }) => (
-                <Grow
-                  {...TransitionProps}
-                  style={{
-                    transformOrigin:
-                      placement === "bottom" ? "center top" : "center bottom",
-                    ...dropdownStyles
-                  }}
-                >
-                  <Paper id="menu-list-grow" square>
-                    <div css={arrowUp} />
-                    <ClickAwayListener onClickAway={handleAboutClose}>
-                      <MenuList>
-                        <MenuItem
-                          onClick={handleAboutClose}
-                          style={optionText}
-                          dense
-                        >
-                          <Link
-                            to={{
-                              pathname: "/",
-                              hash: "#civic-platform"
-                            }}
-                            css={menuLink}
-                          >
-                            Civic Platform
-                          </Link>
-                        </MenuItem>
-                        <MenuItem
-                          onClick={handleAboutClose}
-                          style={optionText}
-                          dense
-                        >
-                          <Link
-                            to={{
-                              pathname: "/",
-                              hash: "#civic-software-foundation"
-                            }}
-                            css={menuLink}
-                          >
-                            Civic Software Foundation
-                          </Link>
-                        </MenuItem>
-                      </MenuList>
-                    </ClickAwayListener>
-                  </Paper>
-                </Grow>
-              )}
-            </Popper>
-          </li>
-          <li css={listStyle}>
             <Link
               to={{
-                pathname: "/",
-                hash: "#contact-us"
+                hash: "#"
               }}
               css={linkStyle}
             >
-              CONTACT
+              DEMO ONLY
             </Link>
           </li>
         </ul>

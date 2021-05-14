@@ -37,6 +37,7 @@
     "@hackoregon/dev-server": "^3.0.0",
     "@hackoregon/mock-wrapper": "^3.0.0",
     "@hackoregon/webpack-common": "^3.0.0",
+    "@material-ui/data-grid": "^4.0.0-alpha.28",
     "axios": "^0.18.0",
     "compression": "^1.6.2",
     "cross-env": "^5.2.0",

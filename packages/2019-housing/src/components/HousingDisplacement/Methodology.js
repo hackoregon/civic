@@ -9,6 +9,7 @@ import DataTabs from "./DataTabs";
 
 const ContentCard = () => (
   <Fragment>
+    <h3>Summary</h3>
     <p>
       This analysis aggregates tract-level population data by race from NCDB
       across the 4-county Portland region (Multnomah, Washington, Clackamas and
@@ -16,6 +17,8 @@ const ContentCard = () => (
       have 1990 black populations shares above an adjustable threshold - ranging
       from 10% to 60%.
     </p>
+    <h3>Documentation</h3>
+    <p>Resources that support reproducability of these results</p>
     <NotebookPreview link="https://github.com/hackoregon/2019-disaster-resilience-data-science/blob/master/notebooks/AEBM_Casualties_Analysis.ipynb" />
     <h3>Key calculations</h3>
     <p

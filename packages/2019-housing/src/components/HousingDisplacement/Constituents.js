@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable import/no-extraneous-dependencies */
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
@@ -8,7 +9,11 @@ import DataTabs from "./DataTabs";
 
 const ContentStorycard = () => (
   <Fragment>
-    <p>Data constituent engagement definition</p>
+    <p>
+      This analysis would not have been possible, much less equitable, without
+      the contribution of data constituents’ lived experiences, insights, and
+      skills. <a href="">Read more about our engagement process.</a>
+    </p>
     <Placeholder>
       <h2>Multimedia format here</h2>
     </Placeholder>
@@ -16,7 +21,11 @@ const ContentStorycard = () => (
 );
 const ContentA = () => (
   <Fragment>
-    <p>Data constituent engagement definition</p>
+    <p>
+      This analysis would not have been possible, much less equitable, without
+      the contribution of data constituents’ lived experiences, insights, and
+      skills. <a href="">Read more about our engagement process.</a>
+    </p>{" "}
     <Placeholder>
       <h2>Multimedia format here</h2>
     </Placeholder>
@@ -24,7 +33,11 @@ const ContentA = () => (
 );
 const ContentB = () => (
   <Fragment>
-    <p>Data constituent engagement definition</p>
+    <p>
+      This analysis would not have been possible, much less equitable, without
+      the contribution of data constituents’ lived experiences, insights, and
+      skills. <a href="">Read more about our engagement process.</a>
+    </p>{" "}
     <Placeholder>
       <h2>Multimedia format here</h2>
     </Placeholder>

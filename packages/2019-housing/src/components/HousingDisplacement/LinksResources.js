@@ -10,7 +10,7 @@ import DataTabs from "./DataTabs";
 
 const resources = [
   {
-    heading: "Organizations",
+    heading: "Resources",
     items: [
       {
         link:
@@ -32,13 +32,25 @@ const resources = [
       {
         link: "https://www.census.gov/topics/population/race/about.html",
         description: "Official Census race category definitions"
+      }
+    ]
+  },
+  {
+    heading: "Organizations",
+    items: [
+      { link: "https://www.census.gov/", description: "U.S. Census Bureau" },
+      {
+        link: "https://www.jchs.harvard.edu/",
+        description: "The Harvard Joint Center for Housing Studies"
       },
-      { link: "https://www.hackoregon.org", description: "Hack Oregon" },
+      {
+        link: "https://www.imagineblack.org/",
+        description: "Imagine Black"
+      },
       {
         link: "https://www.civicsoftwarefoundation.org",
         description: "Civic Software Foundation"
-      },
-      { link: "https://www.civicplatform.org", description: "Civic Platform" }
+      }
     ]
   }
 ];

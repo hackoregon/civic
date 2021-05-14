@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable import/no-extraneous-dependencies */
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
@@ -8,9 +9,35 @@ import DataTabs from "./DataTabs";
 const ContentStorycard = () => (
   <Fragment>
     <h3>Data Point of Contact</h3>
+    <ul>
+      <li>
+        <a href="">Contact Name</a>, Organization Name
+      </li>
+    </ul>
     <h3>Project Team</h3>
+    <ul>
+      <li>Project Team Member</li>
+      <li>Project Team Member</li>
+      <li>Project Team Member</li>
+      <li>Project Team Member</li>
+    </ul>
     <h3>Context Team</h3>
+    <ul>
+      <li>Context Team Member</li>
+      <li>Context Team Member</li>
+      <li>Context Team Member</li>
+      <li>Context Team Member</li>
+      <li>Context Team Member</li>
+      <li>Context Team Member</li>
+      <li>Context Team Member</li>
+      <li>Context Team Member</li>
+    </ul>
     <h3>Contributing Specialists</h3>
+    <ul>
+      <li>Specialist Contributor</li>
+      <li>Specialist Contributor</li>
+      <li>Specialist Contributor</li>
+    </ul>
   </Fragment>
 );
 const ContentA = () => (
