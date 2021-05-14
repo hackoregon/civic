@@ -82,6 +82,11 @@ const MaterialTheme = createMuiTheme({
         minHeight: "unset",
         lineHeight: "unset"
       }
+    },
+    MuiAccordionDetails: {
+      root: {
+        display: "unset"
+      }
     }
   }
 });
