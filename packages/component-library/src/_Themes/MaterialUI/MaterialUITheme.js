@@ -89,8 +89,10 @@ const MaterialTheme = createMuiTheme({
       }
     },
     MuiDataGrid: {
-      colCellWrapper: {
-        fontWeight: 700
+      root: {
+        "& .MuiDataGrid-colCellTitle": {
+          fontWeight: 700
+        }
       }
     }
   }
