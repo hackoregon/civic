@@ -101,7 +101,7 @@ const SmallNav = () => {
             <img src={hamburgerMenu} alt="Close menu" />
           </button>
         </div>
-        <Link to="/" css={logoWrapper}>
+        <Link to="/cards/housing-displacement" css={logoWrapper}>
           <Logo type="squareLogo" css={logoStyle} />
         </Link>
         <div />
@@ -110,11 +110,12 @@ const SmallNav = () => {
         <ListItem>
           <Link
             to={{
+              pathname: "/cards/housing-displacement",
               hash: "#contact-us"
             }}
             css={subLinkStyle}
           >
-            <ListItemText primary="DEMO ONLY" />
+            <ListItemText primary="THIS IS A DEMO" />
           </Link>
         </ListItem>
       </List>

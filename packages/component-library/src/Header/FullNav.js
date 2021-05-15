@@ -149,7 +149,7 @@ const FullNav = props => {
 
   return (
     <div css={contentWrapper(props)}>
-      <Link to="/">
+      <Link to="/cards/housing-displacement">
         <Logo alt="CIVIC home page" css={logoStyle} type="squareLogo" />
       </Link>
       <div />
@@ -158,11 +158,12 @@ const FullNav = props => {
           <li css={listStyle}>
             <Link
               to={{
+                pathname: "/cards/housing-displacement",
                 hash: "#"
               }}
               css={linkStyle}
             >
-              DEMO ONLY
+              THIS IS A DEMO
             </Link>
           </li>
         </ul>
