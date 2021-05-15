@@ -82,6 +82,18 @@ const MaterialTheme = createMuiTheme({
         minHeight: "unset",
         lineHeight: "unset"
       }
+    },
+    MuiAccordionDetails: {
+      root: {
+        display: "unset"
+      }
+    },
+    MuiDataGrid: {
+      root: {
+        "& .MuiDataGrid-colCellTitle": {
+          fontWeight: 700
+        }
+      }
     }
   }
 });

@@ -1,5 +1,7 @@
-import React from "react";
-import { Collapsable } from "@hackoregon/component-library";
+/* eslint-disable import/no-extraneous-dependencies */
+/** @jsx jsx */
+import { jsx } from "@emotion/core";
+import Context from "./Context";
 
 import HousingDisplacementVisualization from "./HousingDisplacementVisualization";
 
@@ -33,57 +35,14 @@ const HousingDisplacementMeta = (/* data */) => ({
     "Historically Black Portland Neighborhoods Lost 12,000 Black Residents Since 1990",
   tags: ["Housing", "Race", "Portland", "Oregon", "Chart"],
   selector: null,
-  analysis: (
-    <Collapsable>
-      <Collapsable.Section>
-        <p>
-          This analysis aggregates tract-level population data by race from NCDB
-          across the 4-county Portland region (Multnomah, Washington, Clackamas
-          and Clark, WA); and across a subset of tracts in this case defined by
-          those have 1990 black populations shares above an adjustable threshold
-          - ranging from 10% to 60%.
-        </p>
-      </Collapsable.Section>
-    </Collapsable>
-  ),
+  analysis: null,
+  context: <Context />,
   metadata: null,
-  metadataQA: "median_household_income_by_race_1990_to_2017",
-  resources: [
-    {
-      heading: "Organizations",
-      items: [
-        {
-          link:
-            "http://kingneighborhood.org/wp-content/uploads/2015/03/BLEEDING-ALBINA_-A-HISTORY-OF-COMMUNITY-DISINVESTMENT-1940%E2%80%932000.pdf",
-          description:
-            "Gibson, Karen. (2007). Bleeding Albina: A History of Community Disinvestment, 1940-2000."
-        },
-        {
-          link: "http://racebox.org/",
-          description:
-            "RaceBox - see how race and ethnicity has been asked on the Decennial census since 1790"
-        },
-        {
-          link:
-            "https://www.pewsocialtrends.org/interactives/multiracial-timeline/",
-          description:
-            "Pew Research Center - see a historical timeline of race categories defined by the census since 1790"
-        },
-        {
-          link: "https://www.census.gov/topics/population/race/about.html",
-          description: "Official Census race category definitions"
-        },
-        { link: "https://www.hackoregon.org", description: "Hack Oregon" },
-        {
-          link: "https://www.civicsoftwarefoundation.org",
-          description: "Civic Software Foundation"
-        },
-        { link: "https://www.civicplatform.org", description: "Civic Platform" }
-      ]
-    }
-  ],
+  metadataQA: null,
+  resources: null,
   // authors likely an array of keys in the future
-  authors: []
+  authors: [],
+  hideAuthors: true
 });
 
 export default HousingDisplacementMeta;

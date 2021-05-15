@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
 import { useState } from "react";
@@ -100,86 +101,21 @@ const SmallNav = () => {
             <img src={hamburgerMenu} alt="Close menu" />
           </button>
         </div>
-        <Link to="/" css={logoWrapper}>
+        <Link to="/cards/housing-displacement" css={logoWrapper}>
           <Logo type="squareLogo" css={logoStyle} />
         </Link>
         <div />
       </div>
       <List component="nav" style={{ paddingTop: 0 }}>
-        <Divider />
-        <ListItem>
-          <Link to="/cards" css={linkStyle}>
-            <ListItemText primary="EXPLORE CIVIC" />
-          </Link>
-        </ListItem>
-
-        <Divider />
-
-        <ListSubheader component="div" id="nested-list-subheader">
-          <p css={subHeaderStyle}>JOIN THE MOVEMENT</p>
-        </ListSubheader>
         <ListItem>
           <Link
             to={{
-              pathname: "/",
-              hash: "#work-with-us"
-            }}
-            css={subLinkStyle}
-          >
-            <ListItemText primary="Work With Us" />
-          </Link>
-        </ListItem>
-        <ListItem>
-          <Link
-            to={{
-              pathname: "/",
-              hash: "#become-a-contributor"
-            }}
-            css={subLinkStyle}
-          >
-            <ListItemText primary="Become a Contributor" />
-          </Link>
-        </ListItem>
-
-        <Divider />
-
-        <ListSubheader component="div" id="nested-list-subheader">
-          <p css={subHeaderStyle}>ABOUT</p>
-        </ListSubheader>
-        <ListItem>
-          <Link
-            to={{
-              pathname: "/",
-              hash: "#civic-platform"
-            }}
-            css={subLinkStyle}
-          >
-            <ListItemText primary="Civic Platform" />
-          </Link>
-        </ListItem>
-        <ListItem>
-          <Link
-            to={{
-              pathname: "/",
-              hash: "#civic-software-foundation"
-            }}
-            css={subLinkStyle}
-          >
-            <ListItemText primary="Civic Software Foundation" />
-          </Link>
-        </ListItem>
-
-        <Divider />
-
-        <ListItem>
-          <Link
-            to={{
-              pathname: "/",
+              pathname: "/cards/housing-displacement",
               hash: "#contact-us"
             }}
             css={subLinkStyle}
           >
-            <ListItemText primary="CONTACT" />
+            <ListItemText primary="THIS IS A DEMO" />
           </Link>
         </ListItem>
       </List>

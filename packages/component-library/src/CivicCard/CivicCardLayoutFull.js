@@ -266,9 +266,9 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
             css={[sectionMarginSmall, sectionMaxWidthSmall]}
             id="metadata"
           >
-            <h2>About this data</h2>
             {relatedMetadataQA ? (
               <Fragment>
+                <h2>About this data</h2>
                 {cardMeta.metadata}
                 <CollapsableSection
                   description="metadata questions"
@@ -283,19 +283,25 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
                 />
               </Fragment>
             ) : (
-              <p>
-                <em>This dataset is missing context documentation</em>
-                <br />
-                <br />
-                Documenting how and why a dataset was created, what information
-                it contains, its limitations, and possible ethical or legal
-                concerns is paramount for data that informs decision making. If
-                you’re an expert on this dataset, you can{" "}
-                <a href="https://forms.gle/rggpgLGRtfaQDm5f7">
-                  add documentation
-                </a>
-                .
-              </p>
+              cardMeta.context || (
+                <Fragment>
+                  <h2>About this data</h2>
+                  <p>
+                    <em>This dataset is missing context documentation</em>
+                    <br />
+                    <br />
+                    Documenting how and why a dataset was created, what
+                    information it contains, its limitations, and possible
+                    ethical or legal concerns is paramount for data that informs
+                    decision making. If you’re an expert on this dataset, you
+                    can{" "}
+                    <a href="https://forms.gle/rggpgLGRtfaQDm5f7">
+                      add documentation
+                    </a>
+                    .
+                  </p>
+                </Fragment>
+              )
             )}
           </section>
         </Fragment>
@@ -322,32 +328,34 @@ function CivicCardLayoutFull({ isLoading, data, cardMeta }) {
             </section>
           </Fragment>
         )}
-        <Fragment>
-          <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
-          <section
-            css={[sectionMarginSmall, sectionMaxWidthSmall]}
-            id="authors"
-          >
-            <h2>Who made this?</h2>
-            {/* temporary implementation, length > 4 to exclude authors: "demo" */}
-            {cardMeta.authors && cardMeta.authors.length > 4 && (
-              <Fragment>
-                <h3>Primary Authors</h3>
-                <ul>
-                  {cardMeta.authors.map(author => (
-                    <li>{author}</li>
-                  ))}
-                </ul>
-              </Fragment>
-            )}
-            <h3>2019 Hack Oregon Team</h3>
-            <img
-              css={authorPhoto}
-              src={authorsSrc}
-              alt="Pictures of people who worked on this"
-            />
-          </section>
-        </Fragment>
+        {!cardMeta.hideAuthors && (
+          <Fragment>
+            <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
+            <section
+              css={[sectionMarginSmall, sectionMaxWidthSmall]}
+              id="authors"
+            >
+              <h2>Who made this?</h2>
+              {/* temporary implementation, length > 4 to exclude authors: "demo" */}
+              {cardMeta.authors && cardMeta.authors.length > 4 && (
+                <Fragment>
+                  <h3>Primary Authors</h3>
+                  <ul>
+                    {cardMeta.authors.map(author => (
+                      <li>{author}</li>
+                    ))}
+                  </ul>
+                </Fragment>
+              )}
+              <h3>2019 Hack Oregon Team</h3>
+              <img
+                css={authorPhoto}
+                src={authorsSrc}
+                alt="Pictures of people who worked on this"
+              />
+            </section>
+          </Fragment>
+        )}
         <hr css={[sectionMarginSmall, sectionMaxWidthSmall]} />
         <section css={[sectionMarginSmall, sectionMaxWidthSmall]} id="improve">
           <h2>Help make this better</h2>
