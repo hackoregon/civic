@@ -71,6 +71,7 @@ export default function DataTabs({ Storycard, DatasetA, DatasetB }) {
           value={value}
           onChange={handleChange}
           aria-label="simple tabs example"
+          centered
         >
           {card && (
             <Tab
