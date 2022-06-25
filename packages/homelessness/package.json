@@ -110,7 +110,7 @@
     "enzyme": "3.9.0",
     "enzyme-adapter-react-16": "1.11.2",
     "jest": "^24.5.0",
-    "jsdom": "^14.0.0",
+    "jsdom": "^16.5.0",
     "jsdom-global": "^3.0.2",
     "json-loader": "^0.5.4",
     "lerna": "^3.13.1",
